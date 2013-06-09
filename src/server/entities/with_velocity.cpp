@@ -61,6 +61,16 @@ sanguis::server::entities::with_velocity::speed() const
 }
 
 void
+sanguis::server::entities::with_velocity::speed(
+	sanguis::server::speed const _speed
+)
+{
+	this->on_speed_change(
+		_speed
+	);
+}
+
+void
 sanguis::server::entities::with_velocity::direction(
 	sanguis::server::direction const _direction
 )

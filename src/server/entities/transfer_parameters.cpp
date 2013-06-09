@@ -1,14 +1,14 @@
+#include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/collision/global_groups_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sge/projectile/world_fwd.hpp>
-#include <sge/projectile/body/const_optional_object_ref.hpp>
 
 
 sanguis::server::entities::transfer_parameters::transfer_parameters(
 	sge::projectile::world &_world,
-	sge::projectile::body::const_optional_object_ref const &_static_body,
+	sanguis::creator::grid const &_grid,
 	sanguis::server::center const &_center,
 	sanguis::server::collision::global_groups const &_global_groups,
 	sanguis::server::angle const _angle
@@ -17,8 +17,8 @@ sanguis::server::entities::transfer_parameters::transfer_parameters(
 	world_(
 		_world
 	),
-	static_body_(
-		_static_body
+	grid_(
+		_grid
 	),
 	center_(
 		_center
@@ -38,10 +38,10 @@ sanguis::server::entities::transfer_parameters::world() const
 	return world_;
 }
 
-sge::projectile::body::const_optional_object_ref const &
-sanguis::server::entities::transfer_parameters::static_body() const
+sanguis::creator::grid const &
+sanguis::server::entities::transfer_parameters::grid() const
 {
-	return static_body_;
+	return grid_;
 }
 
 sanguis::server::center const

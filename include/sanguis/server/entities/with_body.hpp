@@ -3,7 +3,9 @@
 
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center_fwd.hpp>
+#include <sanguis/server/radius.hpp>
 #include <sanguis/server/speed_fwd.hpp>
+#include <sanguis/server/collision/result_fwd.hpp>
 #include <sanguis/server/entities/body_parameters_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
@@ -49,6 +51,11 @@ public:
 	sanguis::server::center const
 	center() const;
 
+	void
+	world_collision(
+		sanguis::server::collision::result const &
+	);
+
 	// ifaces::with_angle overridden functions
 	sanguis::server::angle const
 	angle() const;
@@ -63,6 +70,9 @@ public:
 	angle(
 		sanguis::server::angle
 	);
+
+	sanguis::server::radius const
+	radius() const;
 protected:
 	// entities::base::on_transfer
 	bool
@@ -109,6 +119,8 @@ private:
 
 	sanguis::server::speed const
 	body_speed() const;
+
+	sanguis::server::radius const radius_;
 
 	typedef fcppt::scoped_ptr<
 		sanguis::server::collision::body

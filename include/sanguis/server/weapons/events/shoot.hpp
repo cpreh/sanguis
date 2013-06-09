@@ -1,14 +1,14 @@
 #ifndef SANGUIS_SERVER_WEAPONS_EVENTS_SHOOT_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_EVENTS_SHOOT_HPP_INCLUDED
 
-#include <sanguis/server/weapons/events/shoot_fwd.hpp>
-#include <sanguis/server/entities/with_weapon_fwd.hpp>
 #include <sanguis/server/vector.hpp>
-#include <fcppt/math/vector/object_decl.hpp>
+#include <sanguis/server/entities/with_weapon_fwd.hpp>
+#include <sanguis/server/weapons/events/shoot_fwd.hpp>
 #include <fcppt/nonassignable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/event.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -22,7 +22,7 @@ namespace events
 class shoot
 :
 	public boost::statechart::event<
-		shoot
+		sanguis::server::weapons::events::shoot
 	>
 {
 	FCPPT_NONASSIGNABLE(
@@ -30,19 +30,19 @@ class shoot
 	);
 public:
 	shoot(
-		entities::with_weapon &from,
-		server::vector const &to
+		sanguis::server::entities::with_weapon &from,
+		sanguis::server::vector const &to
 	);
 
-	entities::with_weapon &
+	sanguis::server::entities::with_weapon &
 	from() const;
 
-	server::vector const &
+	sanguis::server::vector const &
 	to() const;
 private:
-	entities::with_weapon &from_;
+	sanguis::server::entities::with_weapon &from_;
 
-	server::vector const to_;
+	sanguis::server::vector const to_;
 };
 
 }

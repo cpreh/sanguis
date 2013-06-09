@@ -1,5 +1,6 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
+#include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/timer.hpp>
@@ -37,7 +38,8 @@
 #include <sanguis/server/string.hpp>
 #include <sanguis/server/collision/body_collision.hpp>
 #include <sanguis/server/collision/global_groups.hpp>
-#include <sanguis/server/collision/group.hpp>
+#include <sanguis/server/collision/optional_result.hpp>
+#include <sanguis/server/collision/with_world.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
 #include <sanguis/server/entities/optional_base_ref.hpp>
@@ -52,7 +54,6 @@
 #include <sanguis/server/message_convert/move.hpp>
 #include <sanguis/server/message_convert/health.hpp>
 #include <sanguis/server/world/context.hpp>
-#include <sanguis/server/world/create_static_body.hpp>
 #include <sanguis/server/world/environment.hpp>
 #include <sanguis/server/world/entity_map.hpp>
 #include <sanguis/server/world/object.hpp>
@@ -61,10 +62,6 @@
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <sge/projectile/time_increment.hpp>
 #include <sge/projectile/world.hpp>
-#include <sge/projectile/body/const_optional_object_ref.hpp>
-#include <sge/projectile/body/object.hpp>
-#include <sge/projectile/body/scoped.hpp>
-#include <sge/projectile/group/sequence.hpp>
 #include <sge/timer/elapsed_and_reset.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/make_ref.hpp>
@@ -163,34 +160,6 @@ sanguis::server::world::object::object(
 		_diff_clock,
 		_random_generator,
 		_console
-	),
-	static_body_(
-		sanguis::server::world::create_static_body(
-			_generated_world.grid()
-		)
-	),
-	scoped_static_body_(
-		static_body_
-		?
-			fcppt::make_unique_ptr<
-				sge::projectile::body::scoped
-			>(
-				*collision_world_,
-				*static_body_,
-				fcppt::assign::make_container<
-					sge::projectile::group::sequence
-				>(
-					fcppt::make_ref(
-						collision_groups_.group(
-							sanguis::server::collision::group::obstacle
-						)
-					)
-				)
-			)
-		:
-			std::unique_ptr<
-				sge::projectile::body::scoped
-			>()
 	)
 {
 }
@@ -213,12 +182,30 @@ sanguis::server::world::object::update()
 		)
 	);
 
+	sanguis::duration const duration(
+		sge::timer::elapsed_and_reset<
+			sanguis::duration
+		>(
+			projectile_timer_
+		)
+	);
+
+	for(
+		auto const entity
+		:
+		entities_
+	)
+		this->entity_collision(
+			duration,
+			*entity.second
+		);
+
 	collision_world_->update_continuous(
 		sge::projectile::time_increment(
-			sge::timer::elapsed_and_reset<
+			boost::chrono::duration_cast<
 				sge::projectile::duration
 			>(
-				projectile_timer_
+				duration
 			)
 		)
 	);
@@ -279,13 +266,7 @@ sanguis::server::world::object::insert(
 		!result.transfer(
 			this->environment(),
 			_insert_parameters,
-			static_body_
-			?
-				sge::projectile::body::const_optional_object_ref(
-					*static_body_
-				)
-			:
-				sge::projectile::body::const_optional_object_ref()
+			grid_
 		)
 	)
 	{
@@ -772,5 +753,27 @@ sanguis::server::world::object::update_entity(
 			*sanguis::server::message_convert::health(
 				*with_health
 			)
+		);
+}
+
+void
+sanguis::server::world::object::entity_collision(
+	sanguis::duration const &_duration,
+	sanguis::server::entities::base &_entity
+)
+{
+	sanguis::server::collision::optional_result const result(
+		sanguis::server::collision::with_world(
+			_entity,
+			grid_,
+			_duration
+		)
+	);
+
+	if(
+		result
+	)
+		_entity.world_collision(
+			*result
 		);
 }

@@ -37,6 +37,7 @@ sanguis::server::entities::with_weapon::with_weapon(
 	random_generator_(
 		_random_generator
 	),
+	weapons_(),
 	weapon_(
 		sanguis::weapon_type::none
 	),

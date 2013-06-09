@@ -7,11 +7,14 @@
 
 namespace sanguis
 {
+namespace collision
+{
 
 sanguis::unsigned_scale
-collision_scale()
+scale()
 FCPPT_PP_PURE;
 
+}
 }
 
 #endif

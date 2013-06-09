@@ -1,10 +1,15 @@
+#include <sanguis/duration_second.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
+#include <sanguis/server/radius.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/body_base.hpp>
 #include <sanguis/server/collision/body.hpp>
 #include <sanguis/server/collision/make_groups.hpp>
+#include <sanguis/server/collision/optional_result.hpp>
+#include <sanguis/server/collision/result.hpp>
 #include <sanguis/server/collision/user_data.hpp>
+#include <sanguis/server/collision/with_world.hpp>
 #include <sanguis/server/entities/body_parameters.hpp>
 #include <sanguis/server/entities/collision_groups.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
@@ -31,6 +36,9 @@ sanguis::server::entities::with_body::with_body(
 	sanguis::server::entities::ifaces::with_body(),
 	sanguis::server::entities::ifaces::with_angle(),
 	sanguis::server::collision::body_base(),
+	radius_(
+		_params.radius()
+	),
 	collision_body_(
 		fcppt::make_unique_ptr<
 			sanguis::server::collision::body
@@ -44,7 +52,7 @@ sanguis::server::entities::with_body::with_body(
 			sanguis::server::angle(
 				0.f
 			),
-			_params.shape(),
+			_params.radius(),
 			_params.solidity(),
 			sanguis::server::collision::user_data(
 				*this
@@ -67,18 +75,29 @@ sanguis::server::entities::with_body::~with_body()
 	);
 }
 
-sanguis::server::angle const
-sanguis::server::entities::with_body::angle() const
-{
-	return
-		collision_body_->angle();
-}
-
 sanguis::server::center const
 sanguis::server::entities::with_body::center() const
 {
 	return
 		collision_body_->center();
+}
+
+void
+sanguis::server::entities::with_body::world_collision(
+	sanguis::server::collision::result const &_result
+)
+{
+	// TODO: Use the position as well?
+	this->reset_speed(
+		_result.speed()
+	);
+}
+
+sanguis::server::angle const
+sanguis::server::entities::with_body::angle() const
+{
+	return
+		collision_body_->angle();
 }
 
 void
@@ -101,6 +120,13 @@ sanguis::server::entities::with_body::angle(
 	);
 }
 
+sanguis::server::radius const
+sanguis::server::entities::with_body::radius() const
+{
+	return
+		radius_;
+}
+
 bool
 sanguis::server::entities::with_body::on_transfer(
 	sanguis::server::entities::transfer_parameters const &_params
@@ -114,19 +140,21 @@ sanguis::server::entities::with_body::on_transfer(
 		_params.center()
 	);
 
-	collision_body_->speed(
-		this->initial_speed()
-	);
-
+	// Do this before we get a speed != 0
 	if(
-		_params.static_body()
-		&&
-		_params.world().collides(
-			collision_body_->get(),
-			*_params.static_body()
+		sanguis::server::collision::with_world(
+			*this,
+			_params.grid(),
+			sanguis::duration_second(
+				0
+			)
 		)
 	)
 		return false;
+
+	collision_body_->speed(
+		this->initial_speed()
+	);
 
 	scoped_body_.take(
 		fcppt::make_unique_ptr<

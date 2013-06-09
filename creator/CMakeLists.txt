@@ -9,6 +9,7 @@ include_directories(
 set(
 	SANGUIS_CREATOR_INCLUDE_FILES
 	include/sanguis/creator/deserialize.hpp
+	include/sanguis/creator/difference_type.hpp
 	include/sanguis/creator/exception.hpp
 	include/sanguis/creator/generate.hpp
 	include/sanguis/creator/grid.hpp
@@ -28,6 +29,8 @@ set(
 	include/sanguis/creator/result_fwd.hpp
 	include/sanguis/creator/seed.hpp
 	include/sanguis/creator/serialize.hpp
+	include/sanguis/creator/signed_pos.hpp
+	include/sanguis/creator/signed_pos_fwd.hpp
 	include/sanguis/creator/size.hpp
 	include/sanguis/creator/size_fwd.hpp
 	include/sanguis/creator/size_type.hpp

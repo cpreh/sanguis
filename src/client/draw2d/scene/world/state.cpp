@@ -1,4 +1,4 @@
-#include <sanguis/collision_scale.hpp>
+#include <sanguis/duration_second.hpp>
 #include <sanguis/client/world_parameters.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/scene/background_dim.hpp>
@@ -6,15 +6,20 @@
 #include <sanguis/client/draw2d/scene/world/batch_grid.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_size.hpp>
 #include <sanguis/client/draw2d/scene/world/generate_batches.hpp>
-#include <sanguis/client/draw2d/scene/world/signed_pos.hpp>
 #include <sanguis/client/draw2d/scene/world/state.hpp>
 #include <sanguis/client/draw2d/scene/world/tile_size.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/unit.hpp>
+#include <sanguis/collision/center.hpp>
+#include <sanguis/collision/optional_result.hpp>
+#include <sanguis/collision/radius.hpp>
+#include <sanguis/collision/speed.hpp>
+#include <sanguis/collision/test.hpp>
+#include <sanguis/creator/difference_type.hpp>
 #include <sanguis/creator/generate.hpp>
+#include <sanguis/creator/signed_pos.hpp>
 #include <sanguis/creator/result.hpp>
-#include <sanguis/creator/tile_is_solid.hpp>
 #include <sanguis/load/tiles/context_fwd.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
@@ -26,12 +31,11 @@
 #include <sge/sprite/state/default_options.hpp>
 #include <sge/sprite/state/object_impl.hpp>
 #include <sge/sprite/state/parameters.hpp>
+#include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/container/grid/clamp_signed_pos.hpp>
 #include <fcppt/container/grid/make_pos_crange_start_end.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
-#include <fcppt/math/dim/comparison.hpp>
-#include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/ceil_div_signed.hpp>
 #include <fcppt/math/vector/dim.hpp>
@@ -85,9 +89,9 @@ sanguis::client::draw2d::scene::world::state::draw(
 	)
 		return;
 
-	sanguis::client::draw2d::scene::world::signed_pos::value_type const batch_size_trans(
+	sanguis::creator::difference_type const batch_size_trans(
 		static_cast<
-			sanguis::client::draw2d::scene::world::signed_pos::value_type
+			sanguis::creator::difference_type
 		>(
 			sanguis::client::draw2d::scene::world::batch_size::value
 			*
@@ -95,10 +99,10 @@ sanguis::client::draw2d::scene::world::state::draw(
 		)
 	);
 
-	sanguis::client::draw2d::scene::world::signed_pos const
+	sanguis::creator::signed_pos const
 		int_translation(
 			fcppt::math::vector::structure_cast<
-				sanguis::client::draw2d::scene::world::signed_pos
+				sanguis::creator::signed_pos
 			>(
 				-_translation
 			)
@@ -119,7 +123,7 @@ sanguis::client::draw2d::scene::world::state::draw(
 					int_translation
 					+
 					fcppt::math::dim::structure_cast<
-						sanguis::client::draw2d::scene::world::signed_pos
+						sanguis::creator::signed_pos
 					>(
 						sanguis::client::draw2d::scene::background_dim(
 							renderer_
@@ -162,64 +166,27 @@ sanguis::client::draw2d::scene::world::state::test_collision(
 	sanguis::client::draw2d::sprite::dim const &_dim
 ) const
 {
-	sanguis::client::draw2d::sprite::dim const scaled_dim(
-		_dim
-		/
-		static_cast<
-			sanguis::client::draw2d::sprite::unit
-		>(
-			sanguis::collision_scale()
-		)
-	);
-
-	sanguis::client::draw2d::scene::world::batch_grid::pos const lower(
-		fcppt::container::grid::clamp_signed_pos(
-			fcppt::math::vector::structure_cast<
-				sanguis::client::draw2d::scene::world::signed_pos
-			>(
-				(
-					_center.get() - scaled_dim / 2
-				)
-				/
-				sanguis::client::draw2d::scene::world::tile_size::value
-			),
-			grid_.size()
-		)
-	);
-
-	sanguis::client::draw2d::scene::world::batch_grid::pos const upper(
-		fcppt::container::grid::clamp_signed_pos(
-			fcppt::math::vector::ceil_div_signed(
+	return
+		// TODO: Use a function without speed here
+		sanguis::collision::test(
+			sanguis::collision::center(
 				fcppt::math::vector::structure_cast<
-					sanguis::client::draw2d::scene::world::signed_pos
+					sanguis::collision::vector2
 				>(
-					_center.get() + scaled_dim / 2
-				),
-				sanguis::client::draw2d::scene::world::tile_size::value
+					_center.get()
+				)
 			),
-			grid_.size()
-		)
-	);
-
-	FCPPT_ASSERT_ERROR(
-		lower <= upper
-	);
-
-	for(
-		auto const &entry
-		:
-		fcppt::container::grid::make_pos_crange_start_end(
-			grid_,
-			lower,
-			upper
-		)
-	)
-		if(
-			sanguis::creator::tile_is_solid(
-				entry.value()
-			)
-		)
-			return true;
-
-	return false;
+			fcppt::strong_typedef_construct_cast<
+				sanguis::collision::radius
+			>(
+				_dim.w() / 2 // TODO!
+			),
+			sanguis::collision::speed(
+				sanguis::collision::speed::value_type::null()
+			),
+			sanguis::duration_second(
+				0
+			),
+			grid_
+		).has_value();
 }

@@ -1,11 +1,12 @@
 #include <sanguis/entity_id.hpp>
+#include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/get_unique_id.hpp>
+#include <sanguis/server/collision/result_fwd.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/environment/object.hpp>
-#include <sge/projectile/body/const_optional_object_ref_fwd.hpp>
 #include <fcppt/assert/pre.hpp>
 
 
@@ -25,7 +26,7 @@ bool
 sanguis::server::entities::base::transfer(
 	sanguis::server::environment::object &_environment,
 	sanguis::server::entities::insert_parameters const &_insert_param,
-	sge::projectile::body::const_optional_object_ref const &_static_body
+	sanguis::creator::grid const &_grid
 )
 {
 	bool const create(
@@ -38,7 +39,7 @@ sanguis::server::entities::base::transfer(
 		!this->on_transfer(
 			sanguis::server::entities::transfer_parameters(
 				_environment.collision_world(),
-				_static_body,
+				_grid,
 				_insert_param.center(),
 				_environment.global_collision_groups(),
 				_insert_param.angle()
@@ -53,6 +54,13 @@ sanguis::server::entities::base::transfer(
 		this->on_create();
 
 	return true;
+}
+
+void
+sanguis::server::entities::base::world_collision(
+	sanguis::server::collision::result const &
+)
+{
 }
 
 void

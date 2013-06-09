@@ -155,9 +155,6 @@ SET(
 	include/sanguis/client/draw2d/scene/world/generate_batches.hpp
 	include/sanguis/client/draw2d/scene/world/object.hpp
 	include/sanguis/client/draw2d/scene/world/object_fwd.hpp
-	include/sanguis/client/draw2d/scene/world/signed_pos.hpp
-	include/sanguis/client/draw2d/scene/world/signed_pos_fwd.hpp
-	include/sanguis/client/draw2d/scene/world/signed_unit.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/buffers.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/buffers_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/choices.hpp
@@ -342,7 +339,33 @@ SET(
 	include/sanguis/client/world_parameters.hpp
 	include/sanguis/client/world_parameters_fwd.hpp
 	include/sanguis/clock.hpp
-	include/sanguis/collision_scale.hpp
+	include/sanguis/collision/adjust_speed.hpp
+	include/sanguis/collision/adjust_speed_one.hpp
+	include/sanguis/collision/center.hpp
+	include/sanguis/collision/center_fwd.hpp
+	include/sanguis/collision/dim2.hpp
+	include/sanguis/collision/dim2_fwd.hpp
+	include/sanguis/collision/intersection.hpp
+	include/sanguis/collision/line_segment.hpp
+	include/sanguis/collision/line_segment_fwd.hpp
+	include/sanguis/collision/optional_result.hpp
+	include/sanguis/collision/optional_result_fwd.hpp
+	include/sanguis/collision/optional_vector2.hpp
+	include/sanguis/collision/optional_vector2_fwd.hpp
+	include/sanguis/collision/radius.hpp
+	include/sanguis/collision/radius_fwd.hpp
+	include/sanguis/collision/ray_line_intersect.hpp
+	include/sanguis/collision/rect.hpp
+	include/sanguis/collision/rect_fwd.hpp
+	include/sanguis/collision/result.hpp
+	include/sanguis/collision/result_fwd.hpp
+	include/sanguis/collision/scale.hpp
+	include/sanguis/collision/speed.hpp
+	include/sanguis/collision/speed_fwd.hpp
+	include/sanguis/collision/test.hpp
+	include/sanguis/collision/unit.hpp
+	include/sanguis/collision/vector2.hpp
+	include/sanguis/collision/vector2_fwd.hpp
 	include/sanguis/config_app_name.hpp
 	include/sanguis/connect_state.hpp
 	include/sanguis/connect_state_fwd.hpp
@@ -657,7 +680,11 @@ SET(
 	include/sanguis/server/collision/group_map.hpp
 	include/sanguis/server/collision/group_vector.hpp
 	include/sanguis/server/collision/make_groups.hpp
+	include/sanguis/server/collision/optional_result.hpp
+	include/sanguis/server/collision/optional_result_fwd.hpp
 	include/sanguis/server/collision/position_callback.hpp
+	include/sanguis/server/collision/result.hpp
+	include/sanguis/server/collision/result_fwd.hpp
 	include/sanguis/server/collision/solidity.hpp
 	include/sanguis/server/collision/solidity_fwd.hpp
 	include/sanguis/server/collision/to_sge_dim.hpp
@@ -665,6 +692,7 @@ SET(
 	include/sanguis/server/collision/to_sge_vector.hpp
 	include/sanguis/server/collision/user_data.hpp
 	include/sanguis/server/collision/user_data_fwd.hpp
+	include/sanguis/server/collision/with_world.hpp
 	include/sanguis/server/console.hpp
 	include/sanguis/server/console_command_pair.hpp
 	include/sanguis/server/console_command_vector.hpp
@@ -780,6 +808,7 @@ SET(
 	include/sanguis/server/entities/spawns/limited.hpp
 	include/sanguis/server/entities/spawns/size_type.hpp
 	include/sanguis/server/entities/spawns/spawn.hpp
+	include/sanguis/server/entities/speed.hpp
 	include/sanguis/server/entities/speed_to_abs.hpp
 	include/sanguis/server/entities/transfer_parameters.hpp
 	include/sanguis/server/entities/transfer_parameters_fwd.hpp
@@ -955,11 +984,9 @@ SET(
 	include/sanguis/server/world/context_fwd.hpp
 	include/sanguis/server/world/convert_pos.hpp
 	include/sanguis/server/world/convert_unit.hpp
-	include/sanguis/server/world/create_static_body.hpp
 	include/sanguis/server/world/entity_map.hpp
 	include/sanguis/server/world/environment.hpp
 	include/sanguis/server/world/environment_fwd.hpp
-	include/sanguis/server/world/make_triangles.hpp
 	include/sanguis/server/world/map.hpp
 	include/sanguis/server/world/object.hpp
 	include/sanguis/server/world/object_fwd.hpp
@@ -1114,7 +1141,14 @@ SET(
 	src/client/states/running.cpp
 	src/client/states/waiting_for_player.cpp
 	src/client/world_parameters.cpp
-	src/collision_scale.cpp
+	src/collision/adjust_speed.cpp
+	src/collision/adjust_speed_one.cpp
+	src/collision/intersection.cpp
+	src/collision/line_segment.cpp
+	src/collision/ray_line_intersect.cpp
+	src/collision/result.cpp
+	src/collision/scale.cpp
+	src/collision/test.cpp
 	src/config_app_name.cpp
 	src/duration_second.cpp
 	src/exception.cpp
@@ -1256,11 +1290,13 @@ SET(
 	src/server/collision/ghost_base.cpp
 	src/server/collision/global_groups.cpp
 	src/server/collision/make_groups.cpp
+	src/server/collision/result.cpp
 	src/server/collision/solidity.cpp
 	src/server/collision/to_sge_dim.cpp
 	src/server/collision/to_sge_user_data.cpp
 	src/server/collision/to_sge_vector.cpp
 	src/server/collision/user_data.cpp
+	src/server/collision/with_world.cpp
 	src/server/console.cpp
 	src/server/create.cpp
 	src/server/create_original.cpp
@@ -1321,6 +1357,7 @@ SET(
 	src/server/entities/spawns/hidden.cpp
 	src/server/entities/spawns/limited.cpp
 	src/server/entities/spawns/spawn.cpp
+	src/server/entities/speed.cpp
 	src/server/entities/speed_to_abs.cpp
 	src/server/entities/transfer_parameters.cpp
 	src/server/entities/with_ai.cpp
@@ -1406,10 +1443,8 @@ SET(
 	src/server/weapons/unlimited_magazine_size.cpp
 	src/server/weapons/weapon.cpp
 	src/server/world/context.cpp
-	src/server/world/create_static_body.cpp
 	src/server/world/entity_map.cpp
 	src/server/world/environment.cpp
-	src/server/world/make_triangles.cpp
 	src/server/world/object.cpp
 	src/server/world/random.cpp
 	src/server/world/sight_range.cpp

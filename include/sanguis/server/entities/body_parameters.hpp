@@ -1,9 +1,9 @@
 #ifndef SANGUIS_SERVER_ENTITIES_BODY_PARAMETERS_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_BODY_PARAMETERS_HPP_INCLUDED
 
+#include <sanguis/server/radius.hpp>
 #include <sanguis/server/collision/solidity.hpp>
 #include <sanguis/server/entities/body_parameters_fwd.hpp>
-#include <sge/projectile/shape/shared_base_ptr.hpp>
 #include <fcppt/nonassignable.hpp>
 
 
@@ -21,17 +21,17 @@ class body_parameters
 	);
 public:
 	body_parameters(
-		sge::projectile::shape::shared_base_ptr,
+		sanguis::server::radius,
 		sanguis::server::collision::solidity const &
 	);
 
-	sge::projectile::shape::shared_base_ptr const
-	shape() const;
+	sanguis::server::radius const
+	radius() const;
 
 	sanguis::server::collision::solidity const &
 	solidity() const;
 private:
-	sge::projectile::shape::shared_base_ptr const shape_;
+	sanguis::server::radius const radius_;
 
 	sanguis::server::collision::solidity const solidity_;
 };

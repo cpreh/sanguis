@@ -47,6 +47,11 @@ public:
 	speed() const;
 
 	void
+	speed(
+		sanguis::server::speed
+	);
+
+	void
 	direction(
 		sanguis::server::direction
 	);

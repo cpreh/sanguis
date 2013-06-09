@@ -61,8 +61,8 @@ sanguis::creator::maze(
 			0u
 		),
 		uniform_int::param_type::max(
-				ret.size().w() *
-				ret.size().h()
+			ret.size().w() *
+			ret.size().h()
 		)
 	);
 

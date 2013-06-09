@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_SPEED_TO_ABS_HPP_INCLUDED
 
 #include <sanguis/server/direction.hpp>
-#include <sanguis/server/speed.hpp>
+#include <sanguis/server/speed_fwd.hpp>
 #include <sanguis/server/entities/property/value.hpp>
 
 

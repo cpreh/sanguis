@@ -1,15 +1,15 @@
+#include <sanguis/server/radius.hpp>
 #include <sanguis/server/collision/solidity.hpp>
 #include <sanguis/server/entities/body_parameters.hpp>
-#include <sge/projectile/shape/shared_base_ptr.hpp>
 
 
 sanguis::server::entities::body_parameters::body_parameters(
-	sge::projectile::shape::shared_base_ptr const _shape,
+	sanguis::server::radius const _radius,
 	sanguis::server::collision::solidity const &_solidity
 )
 :
-	shape_(
-		_shape
+	radius_(
+		_radius
 	),
 	solidity_(
 		_solidity
@@ -17,10 +17,10 @@ sanguis::server::entities::body_parameters::body_parameters(
 {
 }
 
-sge::projectile::shape::shared_base_ptr const
-sanguis::server::entities::body_parameters::shape() const
+sanguis::server::radius const
+sanguis::server::entities::body_parameters::radius() const
 {
-	return shape_;
+	return radius_;
 }
 
 sanguis::server::collision::solidity const &

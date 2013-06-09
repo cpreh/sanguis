@@ -1,13 +1,19 @@
+#include <sanguis/server/vector.hpp>
+#include <sanguis/server/entities/with_weapon_fwd.hpp>
 #include <sanguis/server/weapons/events/shoot.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
+
 
 sanguis::server::weapons::events::shoot::shoot(
-	entities::with_weapon &_from,
-	server::vector const &_to
+	sanguis::server::entities::with_weapon &_from,
+	sanguis::server::vector const &_to
 )
 :
-	from_(_from),
-	to_(_to)
+	from_(
+		_from
+	),
+	to_(
+		_to
+	)
 {
 }
 

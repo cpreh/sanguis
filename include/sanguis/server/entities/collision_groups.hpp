@@ -13,7 +13,7 @@ namespace server
 namespace entities
 {
 
-sanguis::server::collision::group_vector const
+sanguis::server::collision::group_vector
 collision_groups(
 	sanguis::entity_type,
 	sanguis::server::team

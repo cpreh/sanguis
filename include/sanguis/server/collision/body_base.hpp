@@ -24,7 +24,7 @@ protected:
 	body_base();
 public:
 	virtual
-	~body_base();
+	~body_base() = 0;
 
 	virtual
 	boost::logic::tribool const

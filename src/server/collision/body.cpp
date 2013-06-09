@@ -1,7 +1,9 @@
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
+#include <sanguis/server/radius.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/body.hpp>
+#include <sanguis/server/collision/create_circle.hpp>
 #include <sanguis/server/collision/from_sge_vector.hpp>
 #include <sanguis/server/collision/position_callback.hpp>
 #include <sanguis/server/collision/solidity.hpp>
@@ -14,7 +16,6 @@
 #include <sge/projectile/body/parameters.hpp>
 #include <sge/projectile/body/position.hpp>
 #include <sge/projectile/body/rotation.hpp>
-#include <sge/projectile/shape/shared_base_ptr.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -22,10 +23,10 @@
 
 
 sanguis::server::collision::body::body(
-	sanguis::server::center const &_center,
-	sanguis::server::speed const &_speed,
+	sanguis::server::center const _center,
+	sanguis::server::speed const _speed,
 	sanguis::server::angle const _angle,
-	sge::projectile::shape::shared_base_ptr const _shape,
+	sanguis::server::radius const _radius,
 	sanguis::server::collision::solidity const &_solidity,
 	sanguis::server::collision::user_data const &_user_data,
 	sanguis::server::collision::position_callback const &_position_callback
@@ -37,19 +38,21 @@ sanguis::server::collision::body::body(
 		>(
 			sge::projectile::body::parameters(
 				sge::projectile::body::position(
-					collision::to_sge_vector(
+					sanguis::server::collision::to_sge_vector(
 						_center.get()
 					)
 				),
 				sge::projectile::body::linear_velocity(
-					collision::to_sge_vector(
+					sanguis::server::collision::to_sge_vector(
 						_speed.get()
 					)
 				),
 				sge::projectile::body::angular_velocity(
 					0.f
 				),
-				_shape,
+				sanguis::server::collision::create_circle(
+					_radius
+				),
 				sge::projectile::body::rotation(
 					_angle.get() // TODO: convert?
 				),

@@ -3,17 +3,18 @@
 
 #include <sanguis/entity_id.hpp>
 #include <sanguis/entity_type_fwd.hpp>
+#include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team_fwd.hpp>
+#include <sanguis/server/collision/result_fwd.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
 #include <sanguis/server/entities/link_container.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
-#include <sge/projectile/body/const_optional_object_ref_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -38,7 +39,13 @@ public:
 	transfer(
 		sanguis::server::environment::object &,
 		sanguis::server::entities::insert_parameters const &,
-		sge::projectile::body::const_optional_object_ref const &
+		sanguis::creator::grid const &
+	);
+
+	virtual
+	void
+	world_collision(
+		sanguis::server::collision::result const &
 	);
 
 	void

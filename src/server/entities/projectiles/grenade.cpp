@@ -15,6 +15,7 @@
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/damage/wrapper.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
+#include <sanguis/server/entities/optional_base_ref.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_health_fwd.hpp>

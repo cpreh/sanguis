@@ -6,6 +6,7 @@
 #include <boost/statechart/event.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -18,9 +19,10 @@ namespace events
 class stop
 :
 	public boost::statechart::event<
-		stop
+		sanguis::server::weapons::events::stop
 	>
-{};
+{
+};
 
 }
 }

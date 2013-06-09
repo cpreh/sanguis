@@ -5,7 +5,7 @@
 #include <sanguis/server/entities/collision_groups.hpp>
 
 
-sanguis::server::collision::group_vector const
+sanguis::server::collision::group_vector
 sanguis::server::entities::collision_groups(
 	sanguis::entity_type const _type,
 	sanguis::server::team const _team

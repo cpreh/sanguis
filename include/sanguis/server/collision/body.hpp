@@ -3,6 +3,7 @@
 
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center_fwd.hpp>
+#include <sanguis/server/radius.hpp>
 #include <sanguis/server/speed_fwd.hpp>
 #include <sanguis/server/collision/body_fwd.hpp>
 #include <sanguis/server/collision/position_callback.hpp>
@@ -10,7 +11,6 @@
 #include <sanguis/server/collision/user_data_fwd.hpp>
 #include <sge/projectile/body/object_fwd.hpp>
 #include <sge/projectile/body/position.hpp>
-#include <sge/projectile/shape/shared_base_ptr.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
@@ -30,10 +30,10 @@ class body
 	);
 public:
 	body(
-		sanguis::server::center const &,
-		sanguis::server::speed const &,
+		sanguis::server::center,
+		sanguis::server::speed,
 		sanguis::server::angle,
-		sge::projectile::shape::shared_base_ptr,
+		sanguis::server::radius,
 		sanguis::server::collision::solidity const &,
 		sanguis::server::collision::user_data const &,
 		sanguis::server::collision::position_callback const &

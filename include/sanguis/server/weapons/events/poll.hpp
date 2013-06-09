@@ -8,6 +8,7 @@
 #include <boost/statechart/event.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -20,21 +21,22 @@ namespace events
 class poll
 :
 	public boost::statechart::event<
-		poll
+		sanguis::server::weapons::events::poll
 	>
 {
 	FCPPT_NONASSIGNABLE(
 		poll
 	);
 public:
-	explicit poll(
-		entities::with_weapon &owner
+	explicit
+	poll(
+		sanguis::server::entities::with_weapon &owner
 	);
 
-	entities::with_weapon &
+	sanguis::server::entities::with_weapon &
 	owner() const;
 private:
-	entities::with_weapon &owner_;
+	sanguis::server::entities::with_weapon &owner_;
 };
 
 }

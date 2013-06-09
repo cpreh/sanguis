@@ -3,6 +3,7 @@
 
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
+#include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/timer.hpp>
@@ -36,8 +37,6 @@
 #include <sanguis/server/world/object_fwd.hpp>
 #include <sanguis/server/world/sight_range_map.hpp>
 #include <sge/projectile/world_fwd.hpp>
-#include <sge/projectile/body/object_fwd.hpp>
-#include <sge/projectile/body/scoped_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/container/map_decl.hpp>
@@ -187,6 +186,12 @@ private:
 		bool update_pos
 	);
 
+	void
+	entity_collision(
+		sanguis::duration const &,
+		sanguis::server::entities::base &
+	);
+
 	sanguis::world_id const id_;
 
 	sanguis::creator::seed const seed_;
@@ -226,18 +231,6 @@ private:
 	sanguis::server::pickup_spawner pickup_spawner_;
 
 	sanguis::server::waves::generator wave_gen_; // TODO: this doesn't belong here, only for testing!
-
-	typedef fcppt::scoped_ptr<
-		sge::projectile::body::object
-	> collision_body_scoped_ptr;
-
-	collision_body_scoped_ptr const static_body_;
-
-	typedef fcppt::scoped_ptr<
-		sge::projectile::body::scoped
-	> scoped_static_body_ptr;
-
-	scoped_static_body_ptr const scoped_static_body_;
 };
 
 }

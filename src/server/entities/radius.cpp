@@ -1,5 +1,5 @@
-#include <sanguis/collision_scale.hpp>
 #include <sanguis/pixels_per_meter.hpp>
+#include <sanguis/collision/scale.hpp>
 #include <sanguis/creator/tile_size.hpp>
 #include <sanguis/server/dim.hpp>
 #include <sanguis/server/log.hpp>
@@ -56,7 +56,7 @@ sanguis::server::entities::radius(
 		static_cast<
 			sanguis::server::space_unit
 		>(
-			sanguis::collision_scale()
+			sanguis::collision::scale()
 		)
 	);
 
