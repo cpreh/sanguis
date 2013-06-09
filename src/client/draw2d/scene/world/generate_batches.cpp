@@ -23,6 +23,7 @@
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/dim.hpp>
+#include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <vector>
@@ -70,7 +71,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 
 	sprite_vector sprites;
 
-	sanguis::creator::pos const batch_dim(
+	sanguis::creator::size const batch_dim(
 		fcppt::math::dim::fill<
 			sanguis::creator::pos::dim_wrapper::value
 		>(
@@ -80,6 +81,14 @@ sanguis::client::draw2d::scene::world::generate_batches(
 
 	sprites.reserve(
 		batch_dim.content()
+	);
+
+	sanguis::creator::pos const batch_dim_pos(
+		fcppt::math::dim::structure_cast<
+			sanguis::creator::pos
+		>(
+			batch_dim
+		)
 	);
 
 	for(
@@ -103,7 +112,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				sanguis::client::draw2d::scene::world::clamp_size(
 					result_element.pos()
 					*
-					batch_dim,
+					batch_dim_pos,
 					_grid.size()
 				)
 			),
@@ -111,7 +120,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				sanguis::client::draw2d::scene::world::clamp_size(
 					lower_bound
 					+
-					batch_dim,
+					batch_dim_pos,
 					_grid.size()
 				)
 			);
@@ -137,7 +146,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				sanguis::client::draw2d::scene::world::sprite::object(
 					sanguis::client::draw2d::scene::world::sprite::parameters()
 					.pos(
-						fcppt::math::dim::structure_cast<
+						fcppt::math::vector::structure_cast<
 							sanguis::client::draw2d::scene::world::sprite::object::vector
 						>(
 							source_element.pos()

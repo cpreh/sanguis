@@ -2,7 +2,7 @@
 #define SANGUIS_CREATOR_SIZE_FWD_HPP_INCLUDED
 
 #include <sanguis/creator/size_type.hpp>
-#include <fcppt/math/dim/static.hpp>
+#include <fcppt/container/grid/dim_fwd.hpp>
 
 
 namespace sanguis
@@ -10,7 +10,7 @@ namespace sanguis
 namespace creator
 {
 
-typedef fcppt::math::dim::static_<
+typedef fcppt::container::grid::dim<
 	sanguis::creator::size_type,
 	2
 >::type size;

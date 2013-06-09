@@ -184,8 +184,6 @@ SET(
 	include/sanguis/client/draw2d/scene/world/tile_orientation.hpp
 	include/sanguis/client/draw2d/scene/world/tile_size.hpp
 	include/sanguis/client/draw2d/scene/world/to_tile_texture.hpp
-	include/sanguis/client/draw2d/scene/world/unsigned_pos.hpp
-	include/sanguis/client/draw2d/scene/world/unsigned_pos_fwd.hpp
 	include/sanguis/client/draw2d/speed.hpp
 	include/sanguis/client/draw2d/speed_fwd.hpp
 	include/sanguis/client/draw2d/speed_is_null.hpp

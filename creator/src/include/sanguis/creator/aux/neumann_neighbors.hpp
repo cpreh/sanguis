@@ -1,8 +1,10 @@
 #ifndef SANGUIS_CREATOR_AUX_NEUMANN_NEIGHBORS_HPP_INCLUDED
 #define SANGUIS_CREATOR_AUX_NEUMANN_NEIGHBORS_HPP_INCLUDED
 
-#include <vector>
 #include <sanguis/creator/grid.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <vector>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -13,10 +15,10 @@ namespace aux
 {
 
 std::vector<
-	sanguis::creator::grid::dim
+	sanguis::creator::grid::pos
 >
 neumann_neighbors(
-	sanguis::creator::grid::dim const &
+	sanguis::creator::grid::pos const &
 );
 
 }

@@ -12,9 +12,9 @@ sanguis::client::draw2d::scene::world::tile_is_same(
 )
 {
 	return
-		_pos.w() < _grid.size().w()
+		_pos.x() < _grid.size().w()
 		&&
-		_pos.h() < _grid.size().h()
+		_pos.y() < _grid.size().h()
 		&&
 		_grid[
 			_pos

@@ -30,8 +30,8 @@ sanguis::client::draw2d::scene::world::tile_orientation(
 			tile,
 			_grid,
 			sanguis::creator::pos(
-				_pos.w(),
-				_pos.h() - 1
+				_pos.x(),
+				_pos.y() - 1
 			)
 		);
 
@@ -42,8 +42,8 @@ sanguis::client::draw2d::scene::world::tile_orientation(
 			tile,
 			_grid,
 			sanguis::creator::pos(
-				_pos.w() - 1,
-				_pos.h()
+				_pos.x() - 1,
+				_pos.y()
 			)
 		);
 
@@ -54,8 +54,8 @@ sanguis::client::draw2d::scene::world::tile_orientation(
 			tile,
 			_grid,
 			sanguis::creator::pos(
-				_pos.w() + 1,
-				_pos.h()
+				_pos.x() + 1,
+				_pos.y()
 			)
 		);
 
@@ -66,8 +66,8 @@ sanguis::client::draw2d::scene::world::tile_orientation(
 			tile,
 			_grid,
 			sanguis::creator::pos(
-				_pos.w(),
-				_pos.h() + 1
+				_pos.x(),
+				_pos.y() + 1
 			)
 		);
 

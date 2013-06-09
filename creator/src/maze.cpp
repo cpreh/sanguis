@@ -87,7 +87,7 @@ sanguis::creator::maze(
 	// random starting position for maze generation,
 	// has to be on tiles that satisfy
 	// x % 2 == 1 && y % 2 == 1
-	sanguis::creator::grid::dim starting_pos(
+	sanguis::creator::grid::pos starting_pos(
 		(w_dist(_parameters.randgen()) / 2) * 2 + 1,
 		(h_dist(_parameters.randgen()) / 2) * 2 + 1
 	);
@@ -97,14 +97,14 @@ sanguis::creator::maze(
 	// hard-coded for now.
 	// TODO: add parameters for these
 	ret[
-		sanguis::creator::grid::dim(
+		sanguis::creator::grid::pos(
 			1,
 			0
 		)] =
 		sanguis::creator::tile::nothing;
 
 	ret[
-		sanguis::creator::grid::dim(
+		sanguis::creator::grid::pos(
 			ret.size().w() - 1,
 			ret.size().h() - 2
 		)] =
@@ -119,9 +119,9 @@ sanguis::creator::maze(
 	)
 	{
 		if (
-			cell.pos().w() % 2 == 1
+			cell.pos().x() % 2 == 1
 			&&
-			cell.pos().h() % 2 == 1
+			cell.pos().y() % 2 == 1
 		)
 			cell.value() =
 				sanguis::creator::tile::nothing;
@@ -129,13 +129,13 @@ sanguis::creator::maze(
 
 	// wall tiles that are to be processed next
 	std::vector<
-		sanguis::creator::grid::dim
+		sanguis::creator::grid::pos
 	> walls;
 
 	// cells that were initially empty (and remain so) and
 	// are marked as being part of the maze.
 	std::vector<
-		sanguis::creator::grid::dim
+		sanguis::creator::grid::pos
 	> maze;
 
 	// initially populate the set of walls with the neighbors
@@ -164,7 +164,7 @@ sanguis::creator::maze(
 	// this follows the algorithm described at
 	while (!walls.empty())
 	{
-		sanguis::creator::grid::dim const
+		sanguis::creator::grid::pos const
 		random_wall =
 			walls[
 				int_distribution(
@@ -174,7 +174,7 @@ sanguis::creator::maze(
 			];
 
 		fcppt::optional<
-			sanguis::creator::grid::dim
+			sanguis::creator::grid::pos
 		>
 		opposing_cell =
 			sanguis::creator::aux::find_opposing_cell(

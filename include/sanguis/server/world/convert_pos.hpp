@@ -22,10 +22,10 @@ convert_pos(
 	return
 		sge::projectile::vector2(
 			sanguis::server::world::convert_unit(
-				_pos.w()
+				_pos.x()
 			),
 			sanguis::server::world::convert_unit(
-				_pos.h()
+				_pos.y()
 			)
 		);
 }

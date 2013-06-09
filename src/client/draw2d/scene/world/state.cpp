@@ -104,7 +104,7 @@ sanguis::client::draw2d::scene::world::state::draw(
 			)
 		);
 
-	sanguis::client::draw2d::scene::world::batch_grid::dim const
+	sanguis::client::draw2d::scene::world::batch_grid::pos const
 		lower(
 			sanguis::client::draw2d::scene::world::clamp_pos(
 				int_translation
@@ -172,7 +172,7 @@ sanguis::client::draw2d::scene::world::state::test_collision(
 		)
 	);
 
-	sanguis::client::draw2d::scene::world::batch_grid::dim const lower(
+	sanguis::client::draw2d::scene::world::batch_grid::pos const lower(
 		sanguis::client::draw2d::scene::world::clamp_pos(
 			fcppt::math::vector::structure_cast<
 				sanguis::client::draw2d::scene::world::signed_pos
@@ -187,7 +187,7 @@ sanguis::client::draw2d::scene::world::state::test_collision(
 		)
 	);
 
-	sanguis::client::draw2d::scene::world::batch_grid::dim const upper(
+	sanguis::client::draw2d::scene::world::batch_grid::pos const upper(
 		sanguis::client::draw2d::scene::world::clamp_pos(
 			sanguis::client::draw2d::scene::world::ceil_div_signed_pos(
 				fcppt::math::vector::structure_cast<

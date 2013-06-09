@@ -9,28 +9,28 @@
 // of the given cell,
 // no range checks are being performed!
 std::vector<
-	sanguis::creator::grid::dim
+	sanguis::creator::grid::pos
 >
 sanguis::creator::aux::neumann_neighbors(
-	sanguis::creator::grid::dim const &cell
+	sanguis::creator::grid::pos const &cell
 )
 {
-	std::vector<sanguis::creator::grid::dim> ret{
-			sanguis::creator::grid::dim{
-				cell.w() - 1,
-				cell.h()
+	std::vector<sanguis::creator::grid::pos> ret{
+			sanguis::creator::grid::pos{
+				cell.x() - 1,
+				cell.y()
 			},
-			sanguis::creator::grid::dim{
-				cell.w() + 1,
-				cell.h()
+			sanguis::creator::grid::pos{
+				cell.x() + 1,
+				cell.y()
 			},
-			sanguis::creator::grid::dim{
-				cell.w(),
-				cell.h() - 1,
+			sanguis::creator::grid::pos{
+				cell.x(),
+				cell.y() - 1,
 			},
-			sanguis::creator::grid::dim{
-				cell.w(),
-				cell.h() + 1
+			sanguis::creator::grid::pos{
+				cell.x(),
+				cell.y() + 1
 			}
 		};
 

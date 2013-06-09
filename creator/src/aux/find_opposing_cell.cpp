@@ -3,54 +3,56 @@
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/aux/neumann_neighbors.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/math/dim/comparison.hpp>
+#include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/algorithm/contains.hpp>
-#include <fcppt/optional.hpp>
+#include <fcppt/optional_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <iterator>
 #include <vector>
+#include <fcppt/config/external_end.hpp>
 
 
 // Finds an empty neighboring cell in the grid that isn't
 // already part of the maze. There should at most be one
 // such cell.
 fcppt::optional<
-	sanguis::creator::grid::dim
+	sanguis::creator::grid::pos
 >
 sanguis::creator::aux::find_opposing_cell
 (
 	sanguis::creator::grid &grid,
 	std::vector<
-		sanguis::creator::grid::dim
+		sanguis::creator::grid::pos
 	> &maze,
-	sanguis::creator::grid::dim const &cell
+	sanguis::creator::grid::pos const &cell
 )
 {
 
 	// discard border tiles
 	if (
-		cell.w() == grid.size().w() - 1
+		cell.x() == grid.size().w() - 1
 		||
-		cell.w() == 0
+		cell.x() == 0
 		||
-		cell.h() == grid.size().h() - 1
+		cell.y() == grid.size().h() - 1
 		||
-		cell.h() == 0
+		cell.y() == 0
 		)
 		return fcppt::optional<
-			sanguis::creator::grid::dim
+			sanguis::creator::grid::pos
 		>();
 
 	std::vector<
-		sanguis::creator::grid::dim
+		sanguis::creator::grid::pos
 	>
 	neighbors =
 		sanguis::creator::aux::neumann_neighbors(
-				cell
+			cell
 		);
 
 	std::vector<
-		sanguis::creator::grid::dim
+		sanguis::creator::grid::pos
 	>
 	candidates;
 
@@ -61,7 +63,7 @@ sanguis::creator::aux::find_opposing_cell
 		neighbors.end(),
 		std::back_inserter(candidates),
 		[&grid](
-			sanguis::creator::grid::dim &elem
+			sanguis::creator::grid::pos &elem
 		)
 		{
 			return
@@ -79,15 +81,15 @@ sanguis::creator::aux::find_opposing_cell
 
 	if(!fcppt::algorithm::contains(maze, candidates[0]))
 		return fcppt::optional<
-			sanguis::creator::grid::dim
+			sanguis::creator::grid::pos
 		>(candidates[0]);
 
 	if(!fcppt::algorithm::contains(maze, candidates[1]))
 		return fcppt::optional<
-			sanguis::creator::grid::dim
+			sanguis::creator::grid::pos
 		>(candidates[1]);
 
 	return fcppt::optional<
-		sanguis::creator::grid::dim
+		sanguis::creator::grid::pos
 	>();
 }

@@ -40,8 +40,8 @@ sanguis::server::world::make_triangles(
 		sge::projectile::vector2 const top_right(
 			sanguis::server::world::convert_pos(
 				sanguis::creator::pos(
-					element.pos().w() + 1,
-					element.pos().h()
+					element.pos().x() + 1,
+					element.pos().y()
 				)
 			)
 		);
@@ -49,8 +49,8 @@ sanguis::server::world::make_triangles(
 		sge::projectile::vector2 const bottom_left(
 			sanguis::server::world::convert_pos(
 				sanguis::creator::pos(
-					element.pos().w(),
-					element.pos().h() + 1
+					element.pos().x(),
+					element.pos().y() + 1
 				)
 			)
 		);
@@ -58,8 +58,8 @@ sanguis::server::world::make_triangles(
 		sge::projectile::vector2 const bottom_right(
 			sanguis::server::world::convert_pos(
 				sanguis::creator::pos(
-					element.pos().w() + 1,
-					element.pos().h() + 1
+					element.pos().x() + 1,
+					element.pos().y() + 1
 				)
 			)
 		);
