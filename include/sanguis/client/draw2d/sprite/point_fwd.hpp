@@ -16,7 +16,7 @@ namespace sprite
 
 typedef sge::sprite::types::vector<
 	sanguis::client::draw2d::sprite::type_choices
->::type point;
+> point;
 
 }
 }

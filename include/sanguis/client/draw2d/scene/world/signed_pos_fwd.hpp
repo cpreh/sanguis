@@ -19,7 +19,7 @@ namespace world
 typedef fcppt::container::grid::pos<
 	sanguis::client::draw2d::scene::world::signed_unit,
 	2
->::type signed_pos;
+> signed_pos;
 
 }
 }

@@ -21,7 +21,7 @@ sanguis::server::entities::speed_to_abs(
 				fcppt::math::vector::static_<
 					sanguis::server::space_unit,
 					1
-				>::type(
+				>(
 					_direction.get()
 				)
 			)

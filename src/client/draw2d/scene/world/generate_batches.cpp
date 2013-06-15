@@ -1,7 +1,6 @@
 #include <sanguis/client/draw2d/scene/world/batch.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_grid.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_size.hpp>
-#include <sanguis/client/draw2d/scene/world/clamp_size.hpp>
 #include <sanguis/client/draw2d/scene/world/generate_batches.hpp>
 #include <sanguis/client/draw2d/scene/world/tile_size.hpp>
 #include <sanguis/client/draw2d/scene/world/to_tile_texture.hpp>
@@ -16,6 +15,7 @@
 #include <sge/sprite/compare/default.hpp>
 #include <sge/sprite/geometry/make_random_access_range.hpp>
 #include <sge/sprite/geometry/sort_and_update.hpp>
+#include <fcppt/container/grid/clamp_pos.hpp>
 #include <fcppt/container/grid/make_pos_range.hpp>
 #include <fcppt/container/grid/make_pos_crange_start_end.hpp>
 #include <fcppt/math/ceil_div.hpp>
@@ -109,7 +109,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 
 		sanguis::creator::pos const
 			lower_bound(
-				sanguis::client::draw2d::scene::world::clamp_size(
+				fcppt::container::grid::clamp_pos(
 					result_element.pos()
 					*
 					batch_dim_pos,
@@ -117,7 +117,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				)
 			),
 			upper_bound(
-				sanguis::client::draw2d::scene::world::clamp_size(
+				fcppt::container::grid::clamp_pos(
 					lower_bound
 					+
 					batch_dim_pos,

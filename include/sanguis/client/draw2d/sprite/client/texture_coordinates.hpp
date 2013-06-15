@@ -4,6 +4,7 @@
 #include <sanguis/client/draw2d/sprite/type_choices.hpp>
 #include <sge/sprite/types/texture_coordinates.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -16,8 +17,8 @@ namespace client
 {
 
 typedef sge::sprite::types::texture_coordinates<
-	sprite::type_choices
->::type texture_coordinates;
+	sanguis::client::draw2d::sprite::type_choices
+> texture_coordinates;
 
 }
 }

@@ -4,6 +4,7 @@
 #include <sanguis/client/draw2d/sprite/type_choices.hpp>
 #include <sge/sprite/types/rotation.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -14,8 +15,8 @@ namespace sprite
 {
 
 typedef sge::sprite::types::rotation<
-	sprite::type_choices
->::type rotation;
+	sanguis::client::draw2d::sprite::type_choices
+> rotation;
 
 }
 }

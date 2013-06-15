@@ -16,7 +16,7 @@ namespace sprite
 
 typedef sge::sprite::types::dim<
 	sanguis::client::draw2d::sprite::type_choices
->::type dim;
+> dim;
 
 }
 }

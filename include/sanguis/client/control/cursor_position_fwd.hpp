@@ -15,7 +15,7 @@ namespace control
 typedef fcppt::math::vector::static_<
 	sanguis::client::control::cursor_unit,
 	2
->::type cursor_position;
+> cursor_position;
 
 }
 }

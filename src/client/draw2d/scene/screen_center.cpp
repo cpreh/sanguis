@@ -1,4 +1,7 @@
+#include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/scene/screen_center.hpp>
+#include <sanguis/client/draw2d/sprite/center.hpp>
+#include <sge/renderer/screen_size.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -6,20 +9,21 @@
 #include <fcppt/math/dim/static.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 
+
 sanguis::client::draw2d::vector2 const
 sanguis::client::draw2d::scene::screen_center(
-	sprite::center const &_player_center,
-	sge::renderer::screen_size const &_screen_size
+	sanguis::client::draw2d::sprite::center const _player_center,
+	sge::renderer::screen_size const _screen_size
 )
 {
-	sprite::point const translation_center(
+	sanguis::client::draw2d::sprite::point const translation_center(
 		-_player_center.get()
 		+
 		fcppt::math::dim::structure_cast<
 			fcppt::math::dim::static_<
-				sprite::unit,
+				sanguis::client::draw2d::sprite::unit,
 				2
-			>::type
+			>
 		>(
 			_screen_size / 2u
 		)
@@ -27,7 +31,7 @@ sanguis::client::draw2d::scene::screen_center(
 
 	return
 		fcppt::math::vector::structure_cast<
-			vector2
+			sanguis::client::draw2d::vector2
 		>(
 			translation_center
 		);

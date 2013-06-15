@@ -152,9 +152,6 @@ SET(
 	include/sanguis/client/draw2d/scene/world/batch_grid.hpp
 	include/sanguis/client/draw2d/scene/world/batch_grid_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/batch_size.hpp
-	include/sanguis/client/draw2d/scene/world/ceil_div_signed_pos.hpp
-	include/sanguis/client/draw2d/scene/world/clamp_pos.hpp
-	include/sanguis/client/draw2d/scene/world/clamp_size.hpp
 	include/sanguis/client/draw2d/scene/world/generate_batches.hpp
 	include/sanguis/client/draw2d/scene/world/object.hpp
 	include/sanguis/client/draw2d/scene/world/object_fwd.hpp
@@ -555,6 +552,7 @@ SET(
 	include/sanguis/messages/types/alda_type.hpp
 	include/sanguis/messages/types/char.hpp
 	include/sanguis/messages/types/dim2.hpp
+	include/sanguis/messages/types/dim2_fwd.hpp
 	include/sanguis/messages/types/enum.hpp
 	include/sanguis/messages/types/exp.hpp
 	include/sanguis/messages/types/level.hpp
@@ -1057,9 +1055,6 @@ SET(
 	src/client/draw2d/scene/object.cpp
 	src/client/draw2d/scene/screen_center.cpp
 	src/client/draw2d/scene/world/batch.cpp
-	src/client/draw2d/scene/world/ceil_div_signed.cpp
-	src/client/draw2d/scene/world/clamp_pos.cpp
-	src/client/draw2d/scene/world/clamp_size.cpp
 	src/client/draw2d/scene/world/generate_batches.cpp
 	src/client/draw2d/scene/world/object.cpp
 	src/client/draw2d/scene/world/state.cpp

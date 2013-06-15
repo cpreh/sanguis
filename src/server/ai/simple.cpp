@@ -162,9 +162,9 @@ sanguis::server::ai::simple::update()
 		+
 		fcppt::math::vector::hypersphere_to_cartesian(
 			fcppt::math::vector::static_<
-				server::space_unit,
+				sanguis::server::space_unit,
 				1
-			>::type(
+			>(
 				fuzzy_target_rng_()
 			)
 		)
@@ -187,7 +187,7 @@ sanguis::server::ai::simple::update()
 		:
 			optional_angle(
 				fcppt::math::vector::signed_angle_between_cast<
-					space_unit
+					sanguis::server::space_unit
 				>(
 					me_.center().get(),
 					fuzzy_target

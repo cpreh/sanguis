@@ -15,7 +15,7 @@ namespace control
 typedef fcppt::math::vector::static_<
 	sanguis::client::control::scalar,
 	2
->::type attack_dest;
+> attack_dest;
 
 }
 }

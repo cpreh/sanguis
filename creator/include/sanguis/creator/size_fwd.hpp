@@ -10,10 +10,11 @@ namespace sanguis
 namespace creator
 {
 
-typedef fcppt::container::grid::dim<
+typedef
+fcppt::container::grid::dim<
 	sanguis::creator::size_type,
 	2
->::type size;
+> size;
 
 }
 }

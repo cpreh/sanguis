@@ -15,7 +15,7 @@ namespace draw2d
 typedef fcppt::math::dim::static_<
 	sanguis::client::draw2d::funit,
 	2
->::type dim2;
+> dim2;
 
 }
 }

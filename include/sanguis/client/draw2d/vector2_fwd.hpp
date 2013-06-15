@@ -15,7 +15,7 @@ namespace draw2d
 typedef fcppt::math::vector::static_<
 	sanguis::client::draw2d::funit,
 	2
->::type vector2;
+> vector2;
 
 }
 }

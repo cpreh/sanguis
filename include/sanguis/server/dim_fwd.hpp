@@ -13,7 +13,7 @@ namespace server
 typedef fcppt::math::dim::static_<
 	sanguis::server::space_unit,
 	2
->::type dim;
+> dim;
 
 }
 }

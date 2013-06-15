@@ -5,8 +5,6 @@
 #include <sanguis/client/draw2d/scene/world/batch.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_grid.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_size.hpp>
-#include <sanguis/client/draw2d/scene/world/ceil_div_signed_pos.hpp>
-#include <sanguis/client/draw2d/scene/world/clamp_pos.hpp>
 #include <sanguis/client/draw2d/scene/world/generate_batches.hpp>
 #include <sanguis/client/draw2d/scene/world/signed_pos.hpp>
 #include <sanguis/client/draw2d/scene/world/state.hpp>
@@ -29,11 +27,13 @@
 #include <sge/sprite/state/object_impl.hpp>
 #include <sge/sprite/state/parameters.hpp>
 #include <fcppt/assert/error.hpp>
+#include <fcppt/container/grid/clamp_signed_pos.hpp>
 #include <fcppt/container/grid/make_pos_crange_start_end.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/comparison.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/math/vector/ceil_div_signed.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 
@@ -106,7 +106,7 @@ sanguis::client::draw2d::scene::world::state::draw(
 
 	sanguis::client::draw2d::scene::world::batch_grid::pos const
 		lower(
-			sanguis::client::draw2d::scene::world::clamp_pos(
+			fcppt::container::grid::clamp_signed_pos(
 				int_translation
 				/
 				batch_size_trans,
@@ -114,8 +114,8 @@ sanguis::client::draw2d::scene::world::state::draw(
 			)
 		),
 		upper(
-			sanguis::client::draw2d::scene::world::clamp_pos(
-				sanguis::client::draw2d::scene::world::ceil_div_signed_pos(
+			fcppt::container::grid::clamp_signed_pos(
+				fcppt::math::vector::ceil_div_signed(
 					int_translation
 					+
 					fcppt::math::dim::structure_cast<
@@ -173,7 +173,7 @@ sanguis::client::draw2d::scene::world::state::test_collision(
 	);
 
 	sanguis::client::draw2d::scene::world::batch_grid::pos const lower(
-		sanguis::client::draw2d::scene::world::clamp_pos(
+		fcppt::container::grid::clamp_signed_pos(
 			fcppt::math::vector::structure_cast<
 				sanguis::client::draw2d::scene::world::signed_pos
 			>(
@@ -188,8 +188,8 @@ sanguis::client::draw2d::scene::world::state::test_collision(
 	);
 
 	sanguis::client::draw2d::scene::world::batch_grid::pos const upper(
-		sanguis::client::draw2d::scene::world::clamp_pos(
-			sanguis::client::draw2d::scene::world::ceil_div_signed_pos(
+		fcppt::container::grid::clamp_signed_pos(
+			fcppt::math::vector::ceil_div_signed(
 				fcppt::math::vector::structure_cast<
 					sanguis::client::draw2d::scene::world::signed_pos
 				>(
