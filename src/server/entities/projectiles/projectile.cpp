@@ -10,6 +10,7 @@
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
+#include <sanguis/server/collision/result_fwd.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
 #include <sanguis/server/damage/list.hpp>
 #include <sanguis/server/entities/base.hpp>
@@ -109,6 +110,18 @@ bool
 sanguis::server::entities::projectiles::projectile::dead() const
 {
 	return life_timer_.expired();
+}
+
+void
+sanguis::server::entities::projectiles::projectile::world_collision(
+	sanguis::server::collision::result const &_result
+)
+{
+	this->expire();
+
+	sanguis::server::entities::with_body::world_collision(
+		_result
+	);
 }
 
 sanguis::entity_type

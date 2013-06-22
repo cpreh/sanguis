@@ -51,6 +51,7 @@ public:
 	sanguis::server::center const
 	center() const;
 
+	virtual
 	void
 	world_collision(
 		sanguis::server::collision::result const &

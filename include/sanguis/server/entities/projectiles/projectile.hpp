@@ -10,6 +10,7 @@
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
+#include <sanguis/server/collision/result_fwd.hpp>
 #include <sanguis/server/entities/body_velocity_combiner.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/with_body.hpp>
@@ -69,6 +70,11 @@ private:
 
 	bool
 	dead() const;
+
+	void
+	world_collision(
+		sanguis::server::collision::result const &
+	);
 
 	virtual
 	sanguis::entity_type
