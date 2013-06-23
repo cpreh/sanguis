@@ -7,6 +7,9 @@
 #include <sanguis/collision/unit.hpp>
 #include <sanguis/collision/vector2.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/optional_impl.hpp>
+#include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/length_square.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <array>
 #include <fcppt/config/external_end.hpp>
@@ -69,21 +72,58 @@ sanguis::collision::intersection(
 		)
 	}};
 
+	typedef fcppt::optional<
+		sanguis::collision::unit
+	> optional_unit;
+
+	optional_unit nearest_distance;
+
+	sanguis::collision::optional_vector2 result;
+
+
 	for(
 		auto const &line : lines
 	)
-		if(
+	{
+		sanguis::collision::optional_vector2 const intersection(
 			sanguis::collision::ray_line_intersect(
 				_pos,
 				_speed,
 				line
 			)
+		);
+
+		if(
+			!intersection
 		)
-			return
+			continue;
+
+		sanguis::collision::unit const distance(
+			fcppt::math::vector::length_square(
+				_pos
+				-
+				*intersection
+			)
+		);
+
+		if(
+			!nearest_distance
+			||
+			distance
+			<
+			*nearest_distance
+		)
+		{
+			nearest_distance
+				= distance;
+
+			result =
 				sanguis::collision::optional_vector2(
 					line.dir()
 				);
+		}
+	}
 
 	return
-		sanguis::collision::optional_vector2();
+		result;
 }

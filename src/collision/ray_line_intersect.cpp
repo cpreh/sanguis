@@ -1,4 +1,5 @@
 #include <sanguis/collision/line_segment.hpp>
+#include <sanguis/collision/optional_vector2.hpp>
 #include <sanguis/collision/ray_line_intersect.hpp>
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/unit.hpp>
@@ -9,7 +10,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-bool
+sanguis::collision::optional_vector2 const
 sanguis::collision::ray_line_intersect(
 	sanguis::collision::vector2 const _pos,
 	sanguis::collision::speed const _dir,
@@ -28,7 +29,8 @@ sanguis::collision::ray_line_intersect(
 		)
 		< 0.001f
 	)
-		return false;
+		return
+			sanguis::collision::optional_vector2();
 
 	sanguis::collision::vector2 const c(
 		_line.pos()
@@ -49,7 +51,8 @@ sanguis::collision::ray_line_intersect(
 	if(
 		t < 0.f || t > 1.f
 	)
-		return false;
+		return
+			sanguis::collision::optional_vector2();
 
 	sanguis::collision::unit const u(
 		(
@@ -62,5 +65,16 @@ sanguis::collision::ray_line_intersect(
 	);
 
 	return
-		u > 0.f;
+		u < 0.f
+		?
+			sanguis::collision::optional_vector2()
+		:
+			sanguis::collision::optional_vector2(
+				_pos
+				+
+				u
+				*
+				_dir.get()
+			)
+		;
 }

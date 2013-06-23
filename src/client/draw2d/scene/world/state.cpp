@@ -14,6 +14,7 @@
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/optional_result.hpp>
 #include <sanguis/collision/radius.hpp>
+#include <sanguis/collision/scale.hpp>
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/test.hpp>
 #include <sanguis/creator/difference_type.hpp>
@@ -179,7 +180,16 @@ sanguis::client::draw2d::scene::world::state::test_collision(
 			fcppt::strong_typedef_construct_cast<
 				sanguis::collision::radius
 			>(
-				_dim.w() / 2 // TODO!
+				// TODO
+				_dim.w()
+				/
+				2
+				/
+				static_cast<
+					sanguis::client::draw2d::sprite::unit
+				>(
+					sanguis::collision::scale()
+				)
 			),
 			sanguis::collision::speed(
 				sanguis::collision::speed::value_type::null()
