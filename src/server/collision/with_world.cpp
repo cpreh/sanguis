@@ -4,7 +4,7 @@
 #include <sanguis/collision/optional_result.hpp>
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/speed.hpp>
-#include <sanguis/collision/test.hpp>
+#include <sanguis/collision/test_move.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/space_unit.hpp>
@@ -54,7 +54,7 @@ sanguis::server::collision::with_world(
 	);
 
 	sanguis::collision::optional_result const result(
-		sanguis::collision::test(
+		sanguis::collision::test_move(
 			sanguis::collision::center(
 				with_body->center().get()
 				*

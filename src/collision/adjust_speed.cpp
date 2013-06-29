@@ -1,86 +1,53 @@
 #include <sanguis/collision/adjust_speed.hpp>
-#include <sanguis/collision/adjust_speed_one.hpp>
-#include <sanguis/collision/center_fwd.hpp>
-#include <sanguis/collision/radius_fwd.hpp>
-#include <sanguis/collision/rect.hpp>
+#include <sanguis/collision/intersection.hpp>
 #include <sanguis/collision/speed.hpp>
-#include <sanguis/collision/vector2.hpp>
 #include <sanguis/collision/unit.hpp>
-#include <sanguis/creator/pos.hpp>
-#include <sanguis/creator/tile_size.hpp>
-#include <fcppt/math/dim/fill.hpp>
-#include <fcppt/math/vector/structure_cast.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <cmath>
-#include <fcppt/config/external_end.hpp>
+#include <sanguis/collision/vector2.hpp>
+#include <fcppt/literal.hpp>
+#include <fcppt/assert/error.hpp>
 
 
 sanguis::collision::speed const
 sanguis::collision::adjust_speed(
-	sanguis::creator::pos const _pos,
-	sanguis::collision::speed const _speed,
-	sanguis::collision::center const _center,
-	sanguis::collision::radius const _radius
+	sanguis::collision::intersection const _intersection,
+	sanguis::collision::speed const _speed
 )
 {
-	sanguis::collision::speed new_speed(
-		_speed
+	bool const line_vertical(
+		_intersection.dir().get().x() < 0.1f
 	);
 
-	sanguis::collision::rect const rect(
-		fcppt::math::vector::structure_cast<
-			sanguis::collision::rect::vector
-		>(
-			_pos
-		),
-		fcppt::math::dim::fill<
-			2
-		>(
-			static_cast<
-				sanguis::collision::unit
-			>(
-				sanguis::creator::tile_size::value
-			)
-		)
+	bool const line_horizontal(
+		_intersection.dir().get().y() < 0.1f
 	);
 
-	new_speed =
-		sanguis::collision::adjust_speed_one(
-			_center,
-			new_speed,
-			_radius,
-			rect,
-			sanguis::collision::vector2(
-				_speed.get().y(),
-				-_speed.get().x()
-			)
-		);
-
-	if(
-		std::abs(
-			new_speed.get().x()
-		)
-		+
-		std::abs(
-			new_speed.get().y()
-		)
-		<
-		0.001f
-	)
-		return new_speed;
-
-	new_speed =
-		sanguis::collision::adjust_speed_one(
-			_center,
-			new_speed,
-			_radius,
-			rect,
-			sanguis::collision::vector2(
-				-_speed.get().y(),
-				_speed.get().x()
-			)
-		);
+	FCPPT_ASSERT_ERROR(
+		line_vertical != line_horizontal
+	);
 
 	return
-		new_speed;
+		line_vertical
+		?
+			sanguis::collision::speed(
+				sanguis::collision::vector2(
+					fcppt::literal<
+						sanguis::collision::unit
+					>(
+						0
+					),
+					_speed.get().y()
+				)
+			)
+		:
+			sanguis::collision::speed(
+				sanguis::collision::vector2(
+					_speed.get().x(),
+					fcppt::literal<
+						sanguis::collision::unit
+					>(
+						0
+					)
+				)
+			)
+		;
 }

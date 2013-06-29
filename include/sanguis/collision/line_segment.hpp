@@ -1,8 +1,9 @@
 #ifndef SANGUIS_COLLISION_LINE_SEGMENT_HPP_INCLUDED
 #define SANGUIS_COLLISION_LINE_SEGMENT_HPP_INCLUDED
 
+#include <sanguis/collision/dir.hpp>
 #include <sanguis/collision/line_segment_fwd.hpp>
-#include <sanguis/collision/vector2.hpp>
+#include <sanguis/collision/pos.hpp>
 
 
 namespace sanguis
@@ -14,19 +15,19 @@ class line_segment
 {
 public:
 	line_segment(
-		sanguis::collision::vector2 const &pos,
-		sanguis::collision::vector2 const &dir
+		sanguis::collision::pos const &,
+		sanguis::collision::dir const &
 	);
 
-	sanguis::collision::vector2 const &
+	sanguis::collision::pos const &
 	pos() const;
 
-	sanguis::collision::vector2 const &
+	sanguis::collision::dir const &
 	dir() const;
 private:
-	sanguis::collision::vector2 pos_;
+	sanguis::collision::pos pos_;
 
-	sanguis::collision::vector2 dir_;
+	sanguis::collision::dir dir_;
 };
 
 }

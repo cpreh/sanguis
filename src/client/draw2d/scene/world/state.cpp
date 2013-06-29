@@ -1,4 +1,3 @@
-#include <sanguis/duration_second.hpp>
 #include <sanguis/client/world_parameters.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/scene/background_dim.hpp>
@@ -12,10 +11,8 @@
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/unit.hpp>
 #include <sanguis/collision/center.hpp>
-#include <sanguis/collision/optional_result.hpp>
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/scale.hpp>
-#include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/test.hpp>
 #include <sanguis/creator/difference_type.hpp>
 #include <sanguis/creator/generate.hpp>
@@ -168,7 +165,6 @@ sanguis::client::draw2d::scene::world::state::test_collision(
 ) const
 {
 	return
-		// TODO: Use a function without speed here
 		sanguis::collision::test(
 			sanguis::collision::center(
 				fcppt::math::vector::structure_cast<
@@ -191,12 +187,6 @@ sanguis::client::draw2d::scene::world::state::test_collision(
 					sanguis::collision::scale()
 				)
 			),
-			sanguis::collision::speed(
-				sanguis::collision::speed::value_type::null()
-			),
-			sanguis::duration_second(
-				0
-			),
 			grid_
-		).has_value();
+		);
 }

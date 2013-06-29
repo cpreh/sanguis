@@ -13,6 +13,8 @@ set(
 	include/sanguis/creator/exception.hpp
 	include/sanguis/creator/generate.hpp
 	include/sanguis/creator/grid.hpp
+	include/sanguis/creator/grid_crange.hpp
+	include/sanguis/creator/grid_crange_fwd.hpp
 	include/sanguis/creator/grid_fwd.hpp
 	include/sanguis/creator/maze.hpp
 	include/sanguis/creator/name.hpp

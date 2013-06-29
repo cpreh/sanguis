@@ -1,10 +1,11 @@
+#include <sanguis/collision/dir.hpp>
 #include <sanguis/collision/line_segment.hpp>
-#include <sanguis/collision/vector2.hpp>
+#include <sanguis/collision/pos.hpp>
 
 
 sanguis::collision::line_segment::line_segment(
-	sanguis::collision::vector2 const &_pos,
-	sanguis::collision::vector2 const &_dir
+	sanguis::collision::pos const &_pos,
+	sanguis::collision::dir const &_dir
 )
 :
 	pos_(
@@ -16,14 +17,14 @@ sanguis::collision::line_segment::line_segment(
 {
 }
 
-sanguis::collision::vector2 const &
+sanguis::collision::pos const &
 sanguis::collision::line_segment::pos() const
 {
 	return
 		pos_;
 }
 
-sanguis::collision::vector2 const &
+sanguis::collision::dir const &
 sanguis::collision::line_segment::dir() const
 {
 	return

@@ -1,10 +1,9 @@
 #ifndef SANGUIS_COLLISION_INTERSECTION_HPP_INCLUDED
 #define SANGUIS_COLLISION_INTERSECTION_HPP_INCLUDED
 
-#include <sanguis/collision/optional_vector2_fwd.hpp>
-#include <sanguis/collision/rect_fwd.hpp>
-#include <sanguis/collision/speed_fwd.hpp>
-#include <sanguis/collision/vector2_fwd.hpp>
+#include <sanguis/collision/dir.hpp>
+#include <sanguis/collision/intersection_fwd.hpp>
+#include <sanguis/collision/unit.hpp>
 
 
 namespace sanguis
@@ -12,12 +11,24 @@ namespace sanguis
 namespace collision
 {
 
-sanguis::collision::optional_vector2 const
-intersection(
-	sanguis::collision::rect,
-	sanguis::collision::vector2,
-	sanguis::collision::speed
-);
+class intersection
+{
+public:
+	intersection(
+		sanguis::collision::dir const &,
+		sanguis::collision::unit
+	);
+
+	sanguis::collision::dir const &
+	dir() const;
+
+	sanguis::collision::unit
+	pos() const;
+private:
+	sanguis::collision::dir dir_;
+
+	sanguis::collision::unit pos_;
+};
 
 }
 }
