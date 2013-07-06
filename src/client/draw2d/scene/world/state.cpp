@@ -1,4 +1,7 @@
 #include <sanguis/client/world_parameters.hpp>
+#include <sanguis/client/draw2d/collide_parameters.hpp>
+#include <sanguis/client/draw2d/optional_speed.hpp>
+#include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/scene/background_dim.hpp>
 #include <sanguis/client/draw2d/scene/world/batch.hpp>
@@ -7,13 +10,14 @@
 #include <sanguis/client/draw2d/scene/world/generate_batches.hpp>
 #include <sanguis/client/draw2d/scene/world/state.hpp>
 #include <sanguis/client/draw2d/scene/world/tile_size.hpp>
-#include <sanguis/client/draw2d/sprite/center.hpp>
-#include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/unit.hpp>
 #include <sanguis/collision/center.hpp>
-#include <sanguis/collision/radius.hpp>
+#include <sanguis/collision/dim2.hpp>
+#include <sanguis/collision/optional_result.hpp>
 #include <sanguis/collision/scale.hpp>
-#include <sanguis/collision/test.hpp>
+#include <sanguis/collision/speed.hpp>
+#include <sanguis/collision/test_move.hpp>
+#include <sanguis/collision/unit.hpp>
 #include <sanguis/creator/difference_type.hpp>
 #include <sanguis/creator/generate.hpp>
 #include <sanguis/creator/signed_pos.hpp>
@@ -158,35 +162,44 @@ sanguis::client::draw2d::scene::world::state::draw(
 		);
 }
 
-bool
+sanguis::client::draw2d::optional_speed const
 sanguis::client::draw2d::scene::world::state::test_collision(
-	sanguis::client::draw2d::sprite::center const &_center,
-	sanguis::client::draw2d::sprite::dim const &_dim
+	sanguis::client::draw2d::collide_parameters const &_parameters
 ) const
 {
-	return
-		sanguis::collision::test(
+	sanguis::collision::optional_result const result(
+		sanguis::collision::test_move(
 			sanguis::collision::center(
-				fcppt::math::vector::structure_cast<
-					sanguis::collision::vector2
-				>(
-					_center.get()
-				)
+				_parameters.center().get()
 			),
-			fcppt::strong_typedef_construct_cast<
-				sanguis::collision::radius
+			fcppt::math::dim::structure_cast<
+				sanguis::collision::dim2
 			>(
-				// TODO
-				_dim.w()
-				/
-				2
-				/
-				static_cast<
-					sanguis::client::draw2d::sprite::unit
-				>(
-					sanguis::collision::scale()
-				)
+				_parameters.size()
+			)
+			/
+			static_cast<
+				sanguis::collision::unit
+			>(
+				sanguis::collision::scale()
 			),
+			sanguis::collision::speed(
+				_parameters.speed().get()
+			),
+			_parameters.duration(),
 			grid_
-		);
+		)
+	);
+
+	return
+		result
+		?
+			sanguis::client::draw2d::optional_speed(
+				sanguis::client::draw2d::speed(
+					result->speed().get()
+				)
+			)
+		:
+			sanguis::client::draw2d::optional_speed()
+		;
 }

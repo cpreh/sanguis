@@ -6,10 +6,8 @@
 #include <sanguis/collision/is_null.hpp>
 #include <sanguis/collision/line_segment.hpp>
 #include <sanguis/collision/make_range.hpp>
-#include <sanguis/collision/make_size.hpp>
 #include <sanguis/collision/optional_result.hpp>
 #include <sanguis/collision/pos.hpp>
-#include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/rect.hpp>
 #include <sanguis/collision/result.hpp>
 #include <sanguis/collision/speed.hpp>
@@ -31,7 +29,7 @@
 sanguis::collision::optional_result const
 sanguis::collision::test_move(
 	sanguis::collision::center const _center,
-	sanguis::collision::radius const _radius,
+	sanguis::collision::dim2 const _size,
 	sanguis::collision::speed const _speed,
 	sanguis::duration const _time,
 	sanguis::creator::grid const &_grid
@@ -57,16 +55,10 @@ sanguis::collision::test_move(
 		_time.count()
 	);
 
-	sanguis::collision::dim2 const size(
-		sanguis::collision::make_size(
-			_radius
-		)
-	);
-
 	sanguis::collision::rect const rect(
 		new_center.get()
 		-
-		size
+		_size
 		/
 		fcppt::literal<
 			sanguis::collision::unit
@@ -74,7 +66,7 @@ sanguis::collision::test_move(
 			2
 		)
 		,
-		size
+		_size
 	);
 
 	sanguis::collision::speed new_speed(
@@ -91,7 +83,7 @@ sanguis::collision::test_move(
 		sanguis::collision::make_range(
 			_grid,
 			new_center,
-			size
+			_size
 		)
 	)
 	{

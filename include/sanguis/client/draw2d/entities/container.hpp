@@ -3,9 +3,9 @@
 
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
+#include <sanguis/duration.hpp>
 #include <sanguis/client/draw2d/center.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
-#include <sanguis/client/draw2d/vector2_fwd.hpp>
 #include <sanguis/client/draw2d/entities/base.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/with_center.hpp>
@@ -61,9 +61,6 @@ public:
 
 	sanguis::client::draw2d::sprite::center const
 	center() const;
-
-	sanguis::client::draw2d::sprite::center const
-	extrapolated_center() const;
 protected:
 	typedef sprite_vector::iterator iterator;
 
@@ -100,6 +97,9 @@ protected:
 	sanguis::client::draw2d::speed const
 	speed() const;
 
+	sanguis::duration const
+	movement_duration() const;
+
 	// own functions
 	object &
 	at(
@@ -129,9 +129,6 @@ protected:
 	const_iterator
 	end() const;
 private:
-	sanguis::client::draw2d::vector2 const
-	center_diff() const;
-
 	void
 	update_center(
 		sanguis::client::draw2d::sprite::center const &

@@ -76,6 +76,8 @@ SET(
 	include/sanguis/client/draw2d/center.hpp
 	include/sanguis/client/draw2d/center_fwd.hpp
 	include/sanguis/client/draw2d/collide_callback.hpp
+	include/sanguis/client/draw2d/collide_parameters.hpp
+	include/sanguis/client/draw2d/collide_parameters_fwd.hpp
 	include/sanguis/client/draw2d/dim2.hpp
 	include/sanguis/client/draw2d/dim2_fwd.hpp
 	include/sanguis/client/draw2d/entities/aoe_bullet.hpp
@@ -133,6 +135,8 @@ SET(
 	include/sanguis/client/draw2d/message/dispatcher_fwd.hpp
 	include/sanguis/client/draw2d/message/environment.hpp
 	include/sanguis/client/draw2d/message/environment_fwd.hpp
+	include/sanguis/client/draw2d/optional_speed.hpp
+	include/sanguis/client/draw2d/optional_speed_fwd.hpp
 	include/sanguis/client/draw2d/scene/background.hpp
 	include/sanguis/client/draw2d/scene/background_dim.hpp
 	include/sanguis/client/draw2d/scene/background_fwd.hpp
@@ -353,15 +357,12 @@ SET(
 	include/sanguis/collision/line_segment.hpp
 	include/sanguis/collision/line_segment_fwd.hpp
 	include/sanguis/collision/make_range.hpp
-	include/sanguis/collision/make_size.hpp
 	include/sanguis/collision/optional_intersection.hpp
 	include/sanguis/collision/optional_intersection_fwd.hpp
 	include/sanguis/collision/optional_result.hpp
 	include/sanguis/collision/optional_result_fwd.hpp
 	include/sanguis/collision/pos.hpp
 	include/sanguis/collision/pos_fwd.hpp
-	include/sanguis/collision/radius.hpp
-	include/sanguis/collision/radius_fwd.hpp
 	include/sanguis/collision/rect.hpp
 	include/sanguis/collision/rect_fwd.hpp
 	include/sanguis/collision/rect_line_intersection.hpp
@@ -1047,6 +1048,7 @@ SET(
 	src/client/cursor/object.cpp
 	src/client/cursor/scoped.cpp
 	src/client/daytime_settings.cpp
+	src/client/draw2d/collide_parameters.cpp
 	src/client/draw2d/entities/aoe_bullet.cpp
 	src/client/draw2d/entities/base.cpp
 	src/client/draw2d/entities/bullet.cpp
@@ -1156,7 +1158,6 @@ SET(
 	src/collision/line_line_intersect.cpp
 	src/collision/line_segment.cpp
 	src/collision/make_range.cpp
-	src/collision/make_size.cpp
 	src/collision/rect_line_intersection.cpp
 	src/collision/result.cpp
 	src/collision/scale.cpp

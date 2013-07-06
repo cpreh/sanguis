@@ -1,9 +1,9 @@
 #include <sanguis/client/world_parameters_fwd.hpp>
+#include <sanguis/client/draw2d/collide_parameters_fwd.hpp>
+#include <sanguis/client/draw2d/optional_speed.hpp>
 #include <sanguis/client/draw2d/vector2_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/object.hpp>
 #include <sanguis/client/draw2d/scene/world/state.hpp>
-#include <sanguis/client/draw2d/sprite/center_fwd.hpp>
-#include <sanguis/client/draw2d/sprite/dim_fwd.hpp>
 #include <sanguis/load/resource/textures_fwd.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
@@ -29,8 +29,7 @@ sanguis::client::draw2d::scene::world::object::object(
 		std::bind(
 			&sanguis::client::draw2d::scene::world::object::test_collision,
 			this,
-			std::placeholders::_1,
-			std::placeholders::_2
+			std::placeholders::_1
 		)
 	),
 	state_()
@@ -78,10 +77,9 @@ sanguis::client::draw2d::scene::world::object::collide_callback() const
 	return collide_callback_;
 }
 
-bool
+sanguis::client::draw2d::optional_speed const
 sanguis::client::draw2d::scene::world::object::test_collision(
-	sanguis::client::draw2d::sprite::center const &_center,
-	sanguis::client::draw2d::sprite::dim const &_dim
+	sanguis::client::draw2d::collide_parameters const &_parameters
 ) const
 {
 	FCPPT_ASSERT_PRE(
@@ -90,7 +88,6 @@ sanguis::client::draw2d::scene::world::object::test_collision(
 
 	return
 		state_->test_collision(
-			_center,
-			_dim
+			_parameters
 		);
 }

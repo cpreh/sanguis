@@ -3,11 +3,11 @@
 
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/collide_callback.hpp>
+#include <sanguis/client/draw2d/collide_parameters_fwd.hpp>
+#include <sanguis/client/draw2d/optional_speed_fwd.hpp>
 #include <sanguis/client/draw2d/vector2_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/object_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/state_fwd.hpp>
-#include <sanguis/client/draw2d/sprite/center_fwd.hpp>
-#include <sanguis/client/draw2d/sprite/dim_fwd.hpp>
 #include <sanguis/load/resource/textures_fwd.hpp>
 #include <sanguis/load/tiles/context.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
@@ -54,10 +54,9 @@ public:
 	sanguis::client::draw2d::collide_callback const &
 	collide_callback() const;
 private:
-	bool
+	sanguis::client::draw2d::optional_speed const
 	test_collision(
-		sanguis::client::draw2d::sprite::center const &,
-		sanguis::client::draw2d::sprite::dim const &
+		sanguis::client::draw2d::collide_parameters const &
 	) const;
 
 	sge::renderer::device::core &renderer_;

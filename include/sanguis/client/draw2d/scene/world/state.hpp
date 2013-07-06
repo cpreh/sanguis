@@ -2,13 +2,13 @@
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_STATE_HPP_INCLUDED
 
 #include <sanguis/client/world_parameters_fwd.hpp>
+#include <sanguis/client/draw2d/collide_parameters_fwd.hpp>
+#include <sanguis/client/draw2d/optional_speed_fwd.hpp>
 #include <sanguis/client/draw2d/vector2_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_grid.hpp>
 #include <sanguis/client/draw2d/scene/world/state_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/buffers.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/state.hpp>
-#include <sanguis/client/draw2d/sprite/center_fwd.hpp>
-#include <sanguis/client/draw2d/sprite/dim_fwd.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/load/tiles/context_fwd.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
@@ -49,10 +49,9 @@ public:
 		sanguis::client::draw2d::vector2 const &translation
 	);
 
-	bool
+	sanguis::client::draw2d::optional_speed const
 	test_collision(
-		sanguis::client::draw2d::sprite::center const &,
-		sanguis::client::draw2d::sprite::dim const &
+		sanguis::client::draw2d::collide_parameters const &
 	) const;
 private:
 	sge::renderer::device::core &renderer_;

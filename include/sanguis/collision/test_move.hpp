@@ -3,8 +3,8 @@
 
 #include <sanguis/duration.hpp>
 #include <sanguis/collision/center_fwd.hpp>
+#include <sanguis/collision/dim2_fwd.hpp>
 #include <sanguis/collision/optional_result_fwd.hpp>
-#include <sanguis/collision/radius_fwd.hpp>
 #include <sanguis/collision/speed_fwd.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 
@@ -17,7 +17,7 @@ namespace collision
 sanguis::collision::optional_result const
 test_move(
 	sanguis::collision::center,
-	sanguis::collision::radius,
+	sanguis::collision::dim2,
 	sanguis::collision::speed,
 	sanguis::duration,
 	sanguis::creator::grid const &
