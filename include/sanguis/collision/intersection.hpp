@@ -3,7 +3,6 @@
 
 #include <sanguis/collision/dir.hpp>
 #include <sanguis/collision/intersection_fwd.hpp>
-#include <sanguis/collision/unit.hpp>
 
 
 namespace sanguis
@@ -14,20 +13,15 @@ namespace collision
 class intersection
 {
 public:
+	explicit
 	intersection(
-		sanguis::collision::dir const &,
-		sanguis::collision::unit
+		sanguis::collision::dir const &
 	);
 
 	sanguis::collision::dir const &
 	dir() const;
-
-	sanguis::collision::unit
-	pos() const;
 private:
 	sanguis::collision::dir dir_;
-
-	sanguis::collision::unit pos_;
 };
 
 }

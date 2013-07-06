@@ -340,7 +340,6 @@ SET(
 	include/sanguis/client/world_parameters_fwd.hpp
 	include/sanguis/clock.hpp
 	include/sanguis/collision/adjust_speed.hpp
-	include/sanguis/collision/both_intersections.hpp
 	include/sanguis/collision/center.hpp
 	include/sanguis/collision/center_fwd.hpp
 	include/sanguis/collision/dim2.hpp
@@ -349,28 +348,23 @@ SET(
 	include/sanguis/collision/dir_fwd.hpp
 	include/sanguis/collision/intersection.hpp
 	include/sanguis/collision/intersection_fwd.hpp
-	include/sanguis/collision/intersection_pair.hpp
-	include/sanguis/collision/intersection_pair_fwd.hpp
 	include/sanguis/collision/is_null.hpp
+	include/sanguis/collision/line_line_intersect.hpp
 	include/sanguis/collision/line_segment.hpp
 	include/sanguis/collision/line_segment_fwd.hpp
 	include/sanguis/collision/make_range.hpp
-	include/sanguis/collision/make_tangent_pos.hpp
-	include/sanguis/collision/merge_intersection.hpp
+	include/sanguis/collision/make_size.hpp
 	include/sanguis/collision/optional_intersection.hpp
 	include/sanguis/collision/optional_intersection_fwd.hpp
 	include/sanguis/collision/optional_result.hpp
 	include/sanguis/collision/optional_result_fwd.hpp
-	include/sanguis/collision/optional_unit.hpp
-	include/sanguis/collision/optional_unit_fwd.hpp
 	include/sanguis/collision/pos.hpp
 	include/sanguis/collision/pos_fwd.hpp
 	include/sanguis/collision/radius.hpp
 	include/sanguis/collision/radius_fwd.hpp
-	include/sanguis/collision/ray_line_intersection.hpp
 	include/sanguis/collision/rect.hpp
 	include/sanguis/collision/rect_fwd.hpp
-	include/sanguis/collision/rect_ray_intersection.hpp
+	include/sanguis/collision/rect_line_intersection.hpp
 	include/sanguis/collision/result.hpp
 	include/sanguis/collision/result_fwd.hpp
 	include/sanguis/collision/scale.hpp
@@ -1157,16 +1151,13 @@ SET(
 	src/client/states/waiting_for_player.cpp
 	src/client/world_parameters.cpp
 	src/collision/adjust_speed.cpp
-	src/collision/both_intersections.cpp
 	src/collision/intersection.cpp
-	src/collision/intersection_pair.cpp
 	src/collision/is_null.cpp
+	src/collision/line_line_intersect.cpp
 	src/collision/line_segment.cpp
 	src/collision/make_range.cpp
-	src/collision/make_tangent_pos.cpp
-	src/collision/merge_intersection.cpp
-	src/collision/ray_line_intersection.cpp
-	src/collision/rect_ray_intersection.cpp
+	src/collision/make_size.cpp
+	src/collision/rect_line_intersection.cpp
 	src/collision/result.cpp
 	src/collision/scale.cpp
 	src/collision/test.cpp

@@ -1,23 +1,31 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/collision/adjust_speed.hpp>
-#include <sanguis/collision/both_intersections.hpp>
 #include <sanguis/collision/center.hpp>
+#include <sanguis/collision/dim2.hpp>
 #include <sanguis/collision/dir.hpp>
-#include <sanguis/collision/intersection_pair.hpp>
 #include <sanguis/collision/is_null.hpp>
+#include <sanguis/collision/line_segment.hpp>
 #include <sanguis/collision/make_range.hpp>
-#include <sanguis/collision/make_tangent_pos.hpp>
+#include <sanguis/collision/make_size.hpp>
 #include <sanguis/collision/optional_result.hpp>
 #include <sanguis/collision/pos.hpp>
 #include <sanguis/collision/radius.hpp>
+#include <sanguis/collision/rect.hpp>
 #include <sanguis/collision/result.hpp>
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/test_move.hpp>
+#include <sanguis/collision/unit.hpp>
 #include <sanguis/collision/vector2.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/creator/grid_crange.hpp>
 #include <sanguis/creator/tile_is_solid.hpp>
+#include <sanguis/creator/tile_size.hpp>
+#include <fcppt/literal.hpp>
+#include <fcppt/math/box/intersects.hpp>
+#include <fcppt/math/dim/arithmetic.hpp>
+#include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/structure_cast.hpp>
 
 
 sanguis::collision::optional_result const
@@ -49,29 +57,33 @@ sanguis::collision::test_move(
 		_time.count()
 	);
 
-	sanguis::collision::pos const tangent1_pos(
-		sanguis::collision::make_tangent_pos(
-			_center,
-			_radius,
-			sanguis::collision::vector2(
-				_speed.get().y(),
-				-_speed.get().x()
-			)
+	sanguis::collision::dim2 const size(
+		sanguis::collision::make_size(
+			_radius
 		)
 	);
 
-	sanguis::collision::pos const tangent2_pos(
-		sanguis::collision::make_tangent_pos(
-			_center,
-			_radius,
-			sanguis::collision::vector2(
-				-_speed.get().y(),
-				_speed.get().x()
-			)
+	sanguis::collision::rect const rect(
+		new_center.get()
+		-
+		size
+		/
+		fcppt::literal<
+			sanguis::collision::unit
+		>(
+			2
 		)
+		,
+		size
 	);
 
-	sanguis::collision::intersection_pair intersection;
+	sanguis::collision::speed new_speed(
+		_speed
+	);
+
+	bool changed(
+		false
+	);
 
 	for(
 		auto const &entry
@@ -79,7 +91,7 @@ sanguis::collision::test_move(
 		sanguis::collision::make_range(
 			_grid,
 			new_center,
-			_radius
+			size
 		)
 	)
 	{
@@ -90,44 +102,55 @@ sanguis::collision::test_move(
 		)
 			continue;
 
-		intersection.merge(
-			sanguis::collision::both_intersections(
-				entry.pos(),
-				sanguis::collision::dir(
-					_speed.get()
-				),
-				tangent1_pos,
-				tangent2_pos
+		sanguis::collision::rect const entry_rect(
+			fcppt::math::vector::structure_cast<
+				sanguis::collision::rect::vector
+			>(
+				entry.pos()
+				*
+				sanguis::creator::tile_size::value
+			),
+			fcppt::math::dim::fill<
+				sanguis::collision::rect::dim::dim_wrapper::value
+			>(
+				static_cast<
+					sanguis::collision::unit
+				>(
+					sanguis::creator::tile_size::value
+				)
 			)
 		);
+
+		if(
+			!fcppt::math::box::intersects(
+				rect,
+				entry_rect
+			)
+		)
+			continue;
+
+		new_speed =
+			sanguis::collision::adjust_speed(
+				sanguis::collision::line_segment(
+					sanguis::collision::pos(
+						_center.get()
+					),
+					sanguis::collision::dir(
+						new_center.get()
+						-
+						_center.get()
+					)
+				),
+				rect.size(),
+				entry_rect,
+				new_speed
+			);
+
+		changed = true;
 	}
 
-	sanguis::collision::speed new_speed(
-		_speed
-	);
-
-	if(
-		intersection.first()
-	)
-		new_speed =
-			sanguis::collision::adjust_speed(
-				*intersection.first(),
-				new_speed
-			);
-
-	if(
-		intersection.second()
-	)
-		new_speed =
-			sanguis::collision::adjust_speed(
-				*intersection.second(),
-				new_speed
-			);
-
 	return
-		intersection.first()
-		||
-		intersection.second()
+		changed
 		?
 			sanguis::collision::optional_result(
 				sanguis::collision::result(

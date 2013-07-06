@@ -1,28 +1,23 @@
 #include <sanguis/collision/dir.hpp>
 #include <sanguis/collision/intersection.hpp>
+#include <sanguis/collision/line_line_intersect.hpp>
 #include <sanguis/collision/line_segment.hpp>
 #include <sanguis/collision/optional_intersection.hpp>
-#include <sanguis/collision/optional_unit.hpp>
 #include <sanguis/collision/pos.hpp>
-#include <sanguis/collision/ray_line_intersection.hpp>
-#include <sanguis/collision/rect_ray_intersection.hpp>
+#include <sanguis/collision/rect_line_intersection.hpp>
 #include <sanguis/collision/rect.hpp>
 #include <sanguis/collision/unit.hpp>
 #include <sanguis/collision/vector2.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/optional_impl.hpp>
-#include <fcppt/math/vector/arithmetic.hpp>
-#include <fcppt/math/vector/length_square.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <array>
 #include <fcppt/config/external_end.hpp>
 
 
 sanguis::collision::optional_intersection const
-sanguis::collision::rect_ray_intersection(
+sanguis::collision::rect_line_intersection(
 	sanguis::collision::rect const _rect,
-	sanguis::collision::pos const _pos,
-	sanguis::collision::dir const _dir
+	sanguis::collision::line_segment const _line
 )
 {
 	sanguis::collision::unit const null(
@@ -91,60 +86,24 @@ sanguis::collision::rect_ray_intersection(
 		)
 	}};
 
-	sanguis::collision::optional_unit nearest_distance;
-
-	typedef
-	fcppt::optional<
-		sanguis::collision::dir
-	> optional_dir;
-
-	optional_dir result_dir;
-
 	for(
-		auto const &line : lines
+		auto const &cur_line : lines
 	)
 	{
-		sanguis::collision::optional_unit const contact_distance(
-			sanguis::collision::ray_line_intersection(
-				_pos,
-				_dir,
-				line
+		if(
+			sanguis::collision::line_line_intersect(
+				_line,
+				cur_line
 			)
-		);
-
-		if(
-			!contact_distance
 		)
-			continue;
-
-		if(
-			!nearest_distance
-			||
-			*contact_distance
-			<
-			*nearest_distance
-		)
-		{
-			nearest_distance
-				= *contact_distance;
-
-			result_dir =
-				optional_dir(
-					line.dir()
+			return
+				sanguis::collision::optional_intersection(
+					sanguis::collision::intersection(
+						cur_line.dir()
+					)
 				);
-		}
 	}
 
 	return
-		result_dir
-		?
-			sanguis::collision::optional_intersection(
-				sanguis::collision::intersection(
-					*result_dir,
-					*nearest_distance
-				)
-			)
-		:
-			sanguis::collision::optional_intersection()
-		;
+		sanguis::collision::optional_intersection();
 }

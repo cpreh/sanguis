@@ -1,5 +1,7 @@
 #include <sanguis/collision/center.hpp>
+#include <sanguis/collision/dim2.hpp>
 #include <sanguis/collision/make_range.hpp>
+#include <sanguis/collision/make_size.hpp>
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/test.hpp>
 #include <sanguis/creator/grid_crange.hpp>
@@ -20,7 +22,9 @@ sanguis::collision::test(
 		sanguis::collision::make_range(
 			_grid,
 			_center,
-			_radius
+			sanguis::collision::make_size(
+				_radius
+			)
 		)
 	)
 		if(
