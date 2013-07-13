@@ -1,15 +1,15 @@
 #ifndef SANGUIS_MESSAGES_CHANGE_WORLD_HPP_INCLUDED
 #define SANGUIS_MESSAGES_CHANGE_WORLD_HPP_INCLUDED
 
-#include <sanguis/messages/roles/generator_name.hpp>
-#include <sanguis/messages/roles/world_size.hpp>
-#include <sanguis/messages/types/message.hpp>
-#include <sanguis/messages/dim2.hpp>
 #include <sanguis/messages/make_class.hpp>
 #include <sanguis/messages/make_message_id.hpp>
 #include <sanguis/messages/seed.hpp>
+#include <sanguis/messages/size.hpp>
 #include <sanguis/messages/string.hpp>
 #include <sanguis/messages/world_id.hpp>
+#include <sanguis/messages/roles/generator_name.hpp>
+#include <sanguis/messages/roles/opening_count.hpp>
+#include <sanguis/messages/types/message.hpp>
 #include <majutsu/composite.hpp>
 #include <majutsu/role.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -39,8 +39,8 @@ typedef sanguis::messages::make_class<
 				sanguis::messages::roles::generator_name
 			>,
 			majutsu::role<
-				sanguis::messages::dim2,
-				sanguis::messages::roles::world_size
+				sanguis::messages::size,
+				sanguis::messages::roles::opening_count
 			>
 		>
 	>

@@ -11,7 +11,7 @@
 #include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/name.hpp>
-#include <sanguis/creator/result_fwd.hpp>
+#include <sanguis/creator/top_result_fwd.hpp>
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
@@ -64,7 +64,7 @@ public:
 		sanguis::server::world::context &,
 		sanguis::server::environment::load_context &,
 		sanguis::server::console &,
-		sanguis::creator::result const &
+		sanguis::creator::top_result const &
 	);
 
 	~object();

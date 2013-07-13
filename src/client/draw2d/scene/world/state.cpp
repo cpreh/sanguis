@@ -21,7 +21,7 @@
 #include <sanguis/creator/difference_type.hpp>
 #include <sanguis/creator/generate.hpp>
 #include <sanguis/creator/signed_pos.hpp>
-#include <sanguis/creator/result.hpp>
+#include <sanguis/creator/top_result.hpp>
 #include <sanguis/load/tiles/context_fwd.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>

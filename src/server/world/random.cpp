@@ -7,11 +7,10 @@
 #include <sanguis/creator/deserialize.hpp>
 #include <sanguis/creator/generate.hpp>
 #include <sanguis/creator/name.hpp>
-#include <sanguis/creator/result.hpp>
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/serialize.hpp>
 #include <sanguis/creator/top_parameters.hpp>
-#include <sanguis/creator/size.hpp>
+#include <sanguis/creator/top_result.hpp>
 #include <sge/config/cache_path.hpp>
 #include <fcppt/filesystem/create_directories_recursive_exn.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
@@ -77,10 +76,6 @@ sanguis::server::world::random(
 					),
 					sanguis::creator::seed(
 						0u
-					),
-					sanguis::creator::size(
-						31u,
-						31u
 					)
 				)
 			)

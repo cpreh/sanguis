@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CREATOR_DESERIALIZE_HPP_INCLUDED
 #define SANGUIS_CREATOR_DESERIALIZE_HPP_INCLUDED
 
-#include <sanguis/creator/result_fwd.hpp>
+#include <sanguis/creator/top_result_fwd.hpp>
 #include <sanguis/creator/symbol.hpp>
 #include <fcppt/io/istream.hpp>
 
@@ -12,7 +12,7 @@ namespace creator
 {
 
 SANGUIS_CREATOR_SYMBOL
-sanguis::creator::result const
+sanguis::creator::top_result
 deserialize(
 	fcppt::io::istream &
 );

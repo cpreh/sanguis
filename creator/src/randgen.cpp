@@ -1,5 +1,5 @@
-#include <sanguis/creator/randgen.hpp>
 #include <sanguis/creator/seed.hpp>
+#include <sanguis/creator/aux/randgen.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -14,7 +14,7 @@
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
-sanguis::creator::randgen::randgen(
+sanguis::creator::aux::randgen::randgen(
 	sanguis::creator::seed const &_seed
 )
 :
@@ -24,10 +24,10 @@ sanguis::creator::randgen::randgen(
 		)
 	),
 	distribution_(
-		sanguis::creator::randgen::int_distribution::param_type::min(
+		sanguis::creator::aux::randgen::int_distribution::param_type::min(
 			this->min()
 		),
-		sanguis::creator::randgen::int_distribution::param_type::max(
+		sanguis::creator::aux::randgen::int_distribution::param_type::max(
 			this->max()
 		)
 	)
@@ -36,39 +36,39 @@ sanguis::creator::randgen::randgen(
 
 FCPPT_PP_POP_WARNING
 
-sanguis::creator::randgen::~randgen()
+sanguis::creator::aux::randgen::~randgen()
 {
 }
 
-sanguis::creator::randgen::result_type
-sanguis::creator::randgen::operator()()
+sanguis::creator::aux::randgen::result_type
+sanguis::creator::aux::randgen::operator()()
 {
 	return
-		sanguis::creator::randgen::result_type(
+		sanguis::creator::aux::randgen::result_type(
 			distribution_(
 				generator_
 			)
 		);
 }
 
-sanguis::creator::randgen::result_type
-sanguis::creator::randgen::min() const
+sanguis::creator::aux::randgen::result_type
+sanguis::creator::aux::randgen::min() const
 {
 	return
-		sanguis::creator::randgen::result_type(
+		sanguis::creator::aux::randgen::result_type(
 			std::numeric_limits<
-				sanguis::creator::randgen::result_type
+				sanguis::creator::aux::randgen::result_type
 			>::min()
 		);
 }
 
-sanguis::creator::randgen::result_type
-sanguis::creator::randgen::max() const
+sanguis::creator::aux::randgen::result_type
+sanguis::creator::aux::randgen::max() const
 {
 	return
-		sanguis::creator::randgen::result_type(
+		sanguis::creator::aux::randgen::result_type(
 			std::numeric_limits<
-				sanguis::creator::randgen::result_type
+				sanguis::creator::aux::randgen::result_type
 			>::max()
 		);
 }

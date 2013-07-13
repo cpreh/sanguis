@@ -6,7 +6,7 @@
 #include <sanguis/timer.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/weapon_type.hpp>
-#include <sanguis/creator/result.hpp>
+#include <sanguis/creator/top_result.hpp>
 #include <sanguis/load/model/context.hpp>
 #include <sanguis/load/model/collection.hpp>
 #include <sanguis/load/model/object.hpp>
@@ -24,9 +24,9 @@
 #include <sanguis/messages/stop_attacking.hpp>
 #include <sanguis/messages/stop_reloading.hpp>
 #include <sanguis/messages/max_health.hpp>
-#include <sanguis/messages/types/dim2.hpp>
 #include <sanguis/messages/types/enum.hpp>
 #include <sanguis/messages/types/exp.hpp>
+#include <sanguis/messages/types/size.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/console_fwd.hpp>
 #include <sanguis/server/exp.hpp>
@@ -89,7 +89,7 @@ sanguis::server::world::object::object(
 	sanguis::server::world::context &_global_context,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::console &_console,
-	sanguis::creator::result const &_generated_world
+	sanguis::creator::top_result const &_generated_world
 )
 :
 	id_(
@@ -298,10 +298,10 @@ sanguis::server::world::object::insert(
 					sge::charconv::fcppt_string_to_utf8(
 						generator_name_.get()
 					),
-					fcppt::math::dim::structure_cast<
-						sanguis::messages::types::dim2
+					static_cast<
+						sanguis::messages::types::size
 					>(
-						grid_.size()
+						0u // FIXME
 					)
 				)
 			)

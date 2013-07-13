@@ -1,22 +1,24 @@
-#include <sanguis/creator/maze.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/name.hpp>
-#include <sanguis/creator/parameters.hpp>
-#include <sanguis/creator/result.hpp>
+#include <sanguis/creator/opening.hpp>
+#include <sanguis/creator/opening_container.hpp>
 #include <sanguis/creator/seed.hpp>
+#include <sanguis/creator/size_type.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/aux/find_opposing_cell.hpp>
 #include <sanguis/creator/aux/neighbor_array.hpp>
 #include <sanguis/creator/aux/neumann_neighbors.hpp>
+#include <sanguis/creator/aux/parameters.hpp>
+#include <sanguis/creator/aux/randgen.hpp>
+#include <sanguis/creator/aux/result.hpp>
+#include <sanguis/creator/aux/generators/maze.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/append.hpp>
 #include <fcppt/algorithm/remove.hpp>
-#include <sanguis/creator/randgen.hpp>
 #include <fcppt/container/grid/make_pos_range.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/random/distribution/basic.hpp>
-#include <fcppt/random/distribution/parameters/uniform_real.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <vector>
@@ -25,36 +27,21 @@
 
 // this is a maze generator that follows the algorithm described at
 // http://en.wikipedia.org/w/index.php?title=Maze_generation_algorithm&oldid=550777074#Randomized_Prim.27s_algorithm
-sanguis::creator::result
-sanguis::creator::maze(
-	sanguis::creator::parameters const &_parameters
+sanguis::creator::aux::result
+sanguis::creator::aux::generators::maze(
+	sanguis::creator::aux::parameters const &_parameters
 )
 {
 	typedef fcppt::random::distribution::basic<
-		fcppt::random::distribution::parameters::uniform_real<
-			double
-		>
-	> uniform_real;
-
-	typedef fcppt::random::distribution::basic<
 		fcppt::random::distribution::parameters::uniform_int<
-			std::size_t
+			sanguis::creator::size_type
 		>
 	> uniform_int;
 
-	uniform_real distribution(
-		uniform_real::param_type::min(
-			0.0
-		),
-		uniform_real::param_type::sup(
-			1.0
-		)
-	);
-
 	sanguis::creator::grid ret(
 		sanguis::creator::grid::dim(
-			_parameters.size().w(),
-			_parameters.size().h()
+			31u,
+			31u
 		),
 		sanguis::creator::tile::concrete_wall
 	);
@@ -99,18 +86,30 @@ sanguis::creator::maze(
 	// which obviously have to lie on the perimeter,
 	// hard-coded for now.
 	// TODO: add parameters for these
-	ret[
-		sanguis::creator::grid::pos(
-			1,
-			0
-		)] =
-		sanguis::creator::tile::nothing;
+	sanguis::creator::opening_container const openings{
+		sanguis::creator::opening(
+			sanguis::creator::grid::pos(
+				1,
+				0
+			)
+		),
+		sanguis::creator::opening(
+			sanguis::creator::grid::pos(
+				ret.size().w() - 1,
+				ret.size().h() - 2
+			)
+		)
+	};
 
-	ret[
-		sanguis::creator::grid::pos(
-			ret.size().w() - 1,
-			ret.size().h() - 2
-		)] =
+	for(
+		auto const opening
+		:
+		openings
+	)
+		ret[
+			opening.get()
+		]
+		=
 		sanguis::creator::tile::nothing;
 
 	// initialize grid with empty cells every other row and column,
@@ -217,13 +216,8 @@ sanguis::creator::maze(
 	}
 
 	return
-		sanguis::creator::result(
+		sanguis::creator::aux::result(
 			ret,
-			sanguis::creator::seed(
-				0u
-			),
-			sanguis::creator::name(
-				FCPPT_TEXT("maze")
-			)
+			openings
 		);
 }

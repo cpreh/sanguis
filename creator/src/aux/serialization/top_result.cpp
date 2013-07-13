@@ -1,6 +1,7 @@
-#include <sanguis/creator/result.hpp>
+#include <sanguis/creator/top_result.hpp>
 #include <sanguis/creator/aux/serialization/grid.hpp>
-#include <sanguis/creator/aux/serialization/result.hpp>
+#include <sanguis/creator/aux/serialization/opening_container.hpp>
+#include <sanguis/creator/aux/serialization/top_result.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/int_type.hpp>
 #include <sge/parse/json/member.hpp>
@@ -13,22 +14,15 @@
 
 
 sge::parse::json::object
-sanguis::creator::aux::serialization::result(
-	sanguis::creator::result const &_result
+sanguis::creator::aux::serialization::top_result(
+	sanguis::creator::top_result const &_result
 )
 {
 	return
 		sge::parse::json::object(
 			fcppt::assign::make_container<
 				sge::parse::json::member_map
-			>(
-				sge::parse::json::member(
-					FCPPT_TEXT("grid"),
-					sanguis::creator::aux::serialization::grid(
-						_result.grid()
-					)
-				)
-			)
+			>
 			(
 				sge::parse::json::member(
 					FCPPT_TEXT("seed"),
@@ -42,6 +36,22 @@ sanguis::creator::aux::serialization::result(
 					FCPPT_TEXT("name"),
 					sge::parse::json::string(
 						_result.name().get()
+					)
+				)
+			)
+			(
+				sge::parse::json::member(
+					FCPPT_TEXT("grid"),
+					sanguis::creator::aux::serialization::grid(
+						_result.grid()
+					)
+				)
+			)
+			(
+				sge::parse::json::member(
+					FCPPT_TEXT("openings"),
+					sanguis::creator::aux::serialization::opening_container(
+						_result.openings()
 					)
 				)
 			)

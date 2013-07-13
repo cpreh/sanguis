@@ -501,7 +501,6 @@ SET(
 	include/sanguis/messages/console_print.hpp
 	include/sanguis/messages/create.hpp
 	include/sanguis/messages/die.hpp
-	include/sanguis/messages/dim2.hpp
 	include/sanguis/messages/entity_id.hpp
 	include/sanguis/messages/entity_message.hpp
 	include/sanguis/messages/enum.hpp
@@ -555,6 +554,7 @@ SET(
 	include/sanguis/messages/roles/health.hpp
 	include/sanguis/messages/roles/max_health.hpp
 	include/sanguis/messages/roles/max_perk_level.hpp
+	include/sanguis/messages/roles/opening_count.hpp
 	include/sanguis/messages/roles/perk.hpp
 	include/sanguis/messages/roles/perk_label.hpp
 	include/sanguis/messages/roles/perk_parent.hpp
@@ -564,7 +564,6 @@ SET(
 	include/sanguis/messages/roles/required_perk_player_level.hpp
 	include/sanguis/messages/roles/speed.hpp
 	include/sanguis/messages/roles/weapon.hpp
-	include/sanguis/messages/roles/world_size.hpp
 	include/sanguis/messages/rotate.hpp
 	include/sanguis/messages/seed.hpp
 	include/sanguis/messages/serialization/context_fwd.hpp
@@ -584,8 +583,6 @@ SET(
 	include/sanguis/messages/string_vector.hpp
 	include/sanguis/messages/types/alda_type.hpp
 	include/sanguis/messages/types/char.hpp
-	include/sanguis/messages/types/dim2.hpp
-	include/sanguis/messages/types/dim2_fwd.hpp
 	include/sanguis/messages/types/enum.hpp
 	include/sanguis/messages/types/exp.hpp
 	include/sanguis/messages/types/level.hpp

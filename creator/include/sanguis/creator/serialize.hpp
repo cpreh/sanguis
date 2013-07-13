@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CREATOR_SERIALIZE_HPP_INCLUDED
 #define SANGUIS_CREATOR_SERIALIZE_HPP_INCLUDED
 
-#include <sanguis/creator/result_fwd.hpp>
+#include <sanguis/creator/top_result_fwd.hpp>
 #include <sanguis/creator/symbol.hpp>
 #include <fcppt/io/ostream.hpp>
 
@@ -15,7 +15,7 @@ SANGUIS_CREATOR_SYMBOL
 void
 serialize(
 	fcppt::io::ostream &,
-	sanguis::creator::result const &
+	sanguis::creator::top_result const &
 );
 
 }

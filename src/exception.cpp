@@ -1,5 +1,9 @@
 #include <sanguis/exception.hpp>
+#include <sge/exception.hpp>
+#include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/assert/information_fwd.hpp>
+
 
 sanguis::exception::exception(
 	fcppt::string const &_what

@@ -6,7 +6,6 @@
 #include <sanguis/projectile_type.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/creator/name.hpp>
-#include <sanguis/creator/size.hpp>
 #include <sanguis/creator/top_parameters.hpp>
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/health.hpp>
@@ -64,6 +63,7 @@
 #include <sanguis/messages/stop_attacking.hpp>
 #include <sanguis/messages/start_reloading.hpp>
 #include <sanguis/messages/stop_reloading.hpp>
+#include <sanguis/messages/seed.hpp>
 #include <sanguis/messages/speed.hpp>
 #include <sanguis/messages/world_id.hpp>
 #include <sanguis/messages/roles/angle.hpp>
@@ -79,7 +79,6 @@
 #include <sanguis/messages/roles/projectile.hpp>
 #include <sanguis/messages/roles/speed.hpp>
 #include <sanguis/messages/roles/weapon.hpp>
-#include <sanguis/messages/roles/world_size.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <fcppt/cast_to_enum.hpp>
 #include <fcppt/dynamic_cast.hpp>
@@ -87,7 +86,6 @@
 #include <fcppt/text.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
-#include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/mpl/for_each.hpp>
 #include <majutsu/is_role.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -311,15 +309,8 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 					)
 				),
 				_message.get<
-					messages::seed
-				>(),
-				fcppt::math::dim::structure_cast<
-					sanguis::creator::size
-				>(
-					_message.get<
-						sanguis::messages::roles::world_size
-					>()
-				)
+					sanguis::messages::seed
+				>()
 			)
 		)
 	);

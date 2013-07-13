@@ -1,5 +1,4 @@
 #include <sanguis/creator/grid.hpp>
-#include <sanguis/creator/size.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/aux/deserialization/grid.hpp>
 #include <sge/parse/json/array.hpp>
@@ -26,7 +25,7 @@ sanguis::creator::aux::deserialization::grid(
 	return
 		sanguis::creator::grid(
 			sge::parse::json::convert::to_static_container<
-				sanguis::creator::size
+				sanguis::creator::grid::dim
 			>(
 				sge::parse::json::find_member_exn<
 					sge::parse::json::array

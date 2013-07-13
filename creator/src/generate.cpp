@@ -1,12 +1,14 @@
-#include <sanguis/creator/maze.hpp>
 #include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/generate.hpp>
-#include <sanguis/creator/opening_container.hpp>
-#include <sanguis/creator/parameters.hpp>
-#include <sanguis/creator/randgen.hpp>
-#include <sanguis/creator/result.hpp>
+#include <sanguis/creator/opening_count.hpp>
 #include <sanguis/creator/top_parameters.hpp>
+#include <sanguis/creator/top_result.hpp>
+#include <sanguis/creator/aux/parameters.hpp>
+#include <sanguis/creator/aux/randgen.hpp>
+#include <sanguis/creator/aux/result.hpp>
+#include <sanguis/creator/aux/generators/maze.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/assert/error.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <map>
@@ -18,9 +20,9 @@ namespace
 {
 
 typedef
-sanguis::creator::result
+sanguis::creator::aux::result
 (*generator_function)(
-	sanguis::creator::parameters const &
+	sanguis::creator::aux::parameters const &
 );
 
 typedef std::map<
@@ -36,14 +38,14 @@ generator_map const generators(
 			sanguis::creator::name(
 				FCPPT_TEXT("maze")
 			),
-			&sanguis::creator::maze
+			&sanguis::creator::aux::generators::maze
 		)
 	)
 );
 
 }
 
-sanguis::creator::result const
+sanguis::creator::top_result
 sanguis::creator::generate(
 	sanguis::creator::top_parameters const &_parameters
 )
@@ -63,16 +65,35 @@ sanguis::creator::generate(
 			+ FCPPT_TEXT(" not found!")
 		);
 
-	sanguis::creator::randgen gen(
+	sanguis::creator::aux::randgen gen(
 		_parameters.seed()
 	);
 
-	return
+	// TODO: This must be specified in top_parameters as well!
+	sanguis::creator::opening_count const openings(
+		2u
+	);
+
+	sanguis::creator::aux::result const result(
 		it->second(
-			sanguis::creator::parameters(
+			sanguis::creator::aux::parameters(
 				gen,
-				_parameters.size(),
-				sanguis::creator::opening_container()
+				openings
 			)
+		)
+	);
+
+	FCPPT_ASSERT_ERROR(
+		result.openings().size()
+		==
+		openings.get()
+	);
+
+	return
+		sanguis::creator::top_result(
+			_parameters.seed(),
+			_parameters.name(),
+			result.grid(),
+			result.openings()
 		);
 }

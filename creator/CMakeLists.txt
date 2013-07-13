@@ -16,25 +16,16 @@ set(
 	include/sanguis/creator/grid_crange.hpp
 	include/sanguis/creator/grid_crange_fwd.hpp
 	include/sanguis/creator/grid_fwd.hpp
-	include/sanguis/creator/maze.hpp
 	include/sanguis/creator/name.hpp
 	include/sanguis/creator/opening.hpp
 	include/sanguis/creator/opening_container.hpp
-	include/sanguis/creator/parameters.hpp
-	include/sanguis/creator/parameters_fwd.hpp
+	include/sanguis/creator/opening_count.hpp
 	include/sanguis/creator/pos.hpp
 	include/sanguis/creator/pos_fwd.hpp
-	include/sanguis/creator/rand_value.hpp
-	include/sanguis/creator/randgen.hpp
-	include/sanguis/creator/randgen_fwd.hpp
-	include/sanguis/creator/result.hpp
-	include/sanguis/creator/result_fwd.hpp
 	include/sanguis/creator/seed.hpp
 	include/sanguis/creator/serialize.hpp
 	include/sanguis/creator/signed_pos.hpp
 	include/sanguis/creator/signed_pos_fwd.hpp
-	include/sanguis/creator/size.hpp
-	include/sanguis/creator/size_fwd.hpp
 	include/sanguis/creator/size_type.hpp
 	include/sanguis/creator/symbol.hpp
 	include/sanguis/creator/tile.hpp
@@ -43,34 +34,49 @@ set(
 	include/sanguis/creator/tile_size.hpp
 	include/sanguis/creator/top_parameters.hpp
 	include/sanguis/creator/top_parameters_fwd.hpp
+	include/sanguis/creator/top_result.hpp
+	include/sanguis/creator/top_result_fwd.hpp
 )
 
 SET(
 	SANGUIS_CREATOR_SRC_FILES
 	src/aux/deserialization/grid.cpp
-	src/aux/deserialization/result.cpp
+	src/aux/deserialization/opening_container.cpp
+	src/aux/deserialization/top_result.cpp
 	src/aux/find_opposing_cell.cpp
+	src/aux/generators/maze.cpp
 	src/aux/neumann_neighbors.cpp
+	src/aux/parameters.cpp
+	src/aux/result.cpp
 	src/aux/serialization/grid.cpp
-	src/aux/serialization/result.cpp
+	src/aux/serialization/opening_container.cpp
+	src/aux/serialization/top_result.cpp
 	src/deserialize.cpp
 	src/exception.cpp
 	src/generate.cpp
 	src/include/sanguis/creator/aux/deserialization/grid.hpp
-	src/include/sanguis/creator/aux/deserialization/result.hpp
+	src/include/sanguis/creator/aux/deserialization/opening_container.hpp
+	src/include/sanguis/creator/aux/deserialization/top_result.hpp
 	src/include/sanguis/creator/aux/find_opposing_cell.hpp
+	src/include/sanguis/creator/aux/generators/maze.hpp
 	src/include/sanguis/creator/aux/neighbor_array.hpp
 	src/include/sanguis/creator/aux/neighbor_array_fwd.hpp
 	src/include/sanguis/creator/aux/neumann_neighbors.hpp
+	src/include/sanguis/creator/aux/parameters.hpp
+	src/include/sanguis/creator/aux/parameters_fwd.hpp
+	src/include/sanguis/creator/aux/rand_value.hpp
+	src/include/sanguis/creator/aux/randgen.hpp
+	src/include/sanguis/creator/aux/randgen_fwd.hpp
+	src/include/sanguis/creator/aux/result.hpp
+	src/include/sanguis/creator/aux/result_fwd.hpp
 	src/include/sanguis/creator/aux/serialization/grid.hpp
-	src/include/sanguis/creator/aux/serialization/result.hpp
-	src/maze.cpp
-	src/parameters.cpp
+	src/include/sanguis/creator/aux/serialization/opening_container.hpp
+	src/include/sanguis/creator/aux/serialization/top_result.hpp
 	src/randgen.cpp
-	src/result.cpp
 	src/serialize.cpp
 	src/tile_is_solid.cpp
 	src/top_parameters.cpp
+	src/top_result.cpp
 )
 
 set(

@@ -9,7 +9,6 @@
 #include <sanguis/client/draw2d/scene/world/sprite/parameters.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/pos.hpp>
-#include <sanguis/creator/size.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/load/tiles/context_fwd.hpp>
 #include <sge/sprite/compare/default.hpp>
@@ -42,18 +41,18 @@ sanguis::client::draw2d::scene::world::generate_batches(
 			sanguis::client::draw2d::scene::world::batch_grid::dim
 		>(
 			fcppt::math::map<
-				sanguis::creator::size
+				sanguis::creator::grid::dim
 			>(
 				_grid.size(),
 				[](
-					sanguis::creator::size::value_type const _value
+					sanguis::creator::grid::dim::value_type const _value
 				)
 				{
 					return
 						fcppt::math::ceil_div(
 							_value,
 							static_cast<
-								sanguis::creator::size::value_type
+								sanguis::creator::grid::dim::value_type
 							>(
 								sanguis::client::draw2d::scene::world::batch_size::value
 							)
@@ -71,7 +70,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 
 	sprite_vector sprites;
 
-	sanguis::creator::size const batch_dim(
+	sanguis::creator::grid::dim const batch_dim(
 		fcppt::math::dim::fill<
 			sanguis::creator::pos::dim_wrapper::value
 		>(
