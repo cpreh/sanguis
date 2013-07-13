@@ -42,9 +42,12 @@
 #include <sanguis/server/collision/with_world.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
+#include <sanguis/server/entities/is_type.hpp>
 #include <sanguis/server/entities/optional_base_ref.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/entities/with_id.hpp>
+#include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/entities/with_health.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
@@ -72,6 +75,7 @@
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/container/map_impl.hpp>
+#include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/warning.hpp>
@@ -154,6 +158,7 @@ sanguis::server::world::object::object(
 		)
 	),
 	entities_(),
+	server_entities_(),
 	pickup_spawner_(
 		_diff_clock,
 		_random_generator,
@@ -231,6 +236,33 @@ sanguis::server::world::object::update()
 			update_pos
 		);
 	}
+
+	for(
+		sanguis::server::world::object::entity_vector::iterator it(
+			server_entities_.begin()
+		);
+		it != server_entities_.end();
+	)
+	{
+		it->update();
+
+		if(
+			it->dead()
+		)
+		{
+			// TODO: Simplify this!
+			it->remove();
+
+			it->destroy();
+
+			it =
+				server_entities_.erase(
+					it
+				);
+		}
+		else
+			++it;
+	}
 }
 
 sanguis::server::entities::optional_base_ref const
@@ -239,8 +271,51 @@ sanguis::server::world::object::insert(
 	sanguis::server::entities::insert_parameters const &_insert_parameters
 )
 {
+	return
+		sanguis::server::entities::is_type<
+			sanguis::server::entities::with_id
+		>(
+			*_entity
+		)
+		?
+			this->insert_with_id(
+				std::move(
+					_entity
+				),
+				_insert_parameters
+			)
+		:
+			this->insert_base(
+				std::move(
+					_entity
+				),
+				_insert_parameters
+			)
+		;
+}
+sanguis::server::environment::object &
+sanguis::server::world::object::environment() const
+{
+	return *environment_;
+}
+
+
+sanguis::server::entities::optional_base_ref const
+sanguis::server::world::object::insert_with_id(
+	sanguis::server::entities::unique_ptr &&_entity,
+	sanguis::server::entities::insert_parameters const &_insert_parameters
+)
+{
+	sanguis::server::entities::with_id_unique_ptr entity(
+		&dynamic_cast<
+			sanguis::server::entities::with_id &
+		>(
+			*_entity.release()
+		)
+	);
+
 	sanguis::entity_id const id(
-		_entity->id()
+		entity->id()
 	);
 
 	typedef std::pair<
@@ -252,7 +327,7 @@ sanguis::server::world::object::insert(
 		entities_.insert(
 			id,
 			std::move(
-				_entity
+				entity
 			)
 		)
 	);
@@ -316,10 +391,34 @@ sanguis::server::world::object::insert(
 		);
 }
 
-sanguis::server::environment::object &
-sanguis::server::world::object::environment() const
+sanguis::server::entities::optional_base_ref const
+sanguis::server::world::object::insert_base(
+	sanguis::server::entities::unique_ptr &&_entity,
+	sanguis::server::entities::insert_parameters const &_insert_parameters
+)
 {
-	return *environment_;
+	// These are only very simple entities that don't need special treatment
+	fcppt::container::ptr::push_back_unique_ptr(
+		server_entities_,
+		std::move(
+			_entity
+		)
+	);
+
+	sanguis::server::entities::base &ref(
+		server_entities_.back()
+	);
+
+	ref.transfer(
+		this->environment(),
+		_insert_parameters,
+		grid_
+	);
+
+	return
+		sanguis::server::entities::optional_base_ref(
+			ref
+		);
 }
 
 void
@@ -537,15 +636,6 @@ sanguis::server::world::object::add_sight_range(
 		it != entities_.end()
 	);
 
-	sanguis::server::entities::base &entity(
-		*it->second
-	);
-
-	if(
-		entity.server_only()
-	)
-		return;
-
 	this->send_player_specific(
 		_player_id,
 		*it->second->add_message(
@@ -597,11 +687,6 @@ sanguis::server::world::object::remove_sight_range(
 	FCPPT_ASSERT_ERROR(
 		it != entities_.end()
 	);
-
-	if(
-		it->second->server_only()
-	)
-		return;
 
 	this->send_player_specific(
 		_player_id,
@@ -707,8 +792,6 @@ sanguis::server::world::object::update_entity(
 	}
 
 	if(
-		entity.server_only()
-		||
 		!_update_pos
 	)
 		return;

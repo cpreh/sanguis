@@ -19,7 +19,6 @@ sanguis::client::draw2d::factory::projectile(
 	)
 	{
 	case sanguis::projectile_type::aoe:
-	case sanguis::projectile_type::melee:
 		break;
 	case sanguis::projectile_type::simple_bullet:
 		return

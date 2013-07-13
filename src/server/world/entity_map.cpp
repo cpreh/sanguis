@@ -1,6 +1,6 @@
 #include <sanguis/entity_id.hpp>
-#include <sanguis/server/entities/base.hpp>
-#include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/entities/with_id.hpp>
+#include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/world/entity_map.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -16,6 +16,7 @@ sanguis::server::world::entity_map::entity_map()
 
 sanguis::server::world::entity_map::~entity_map()
 {
+	// TODO: Get rid of this once bullet is gone!
 	for(
 		auto element : impl_
 	)
@@ -25,7 +26,7 @@ sanguis::server::world::entity_map::~entity_map()
 sanguis::server::world::entity_map::insert_return_type const
 sanguis::server::world::entity_map::insert(
 	sanguis::entity_id const _id,
-	sanguis::server::entities::unique_ptr &&_entity
+	sanguis::server::entities::with_id_unique_ptr &&_entity
 )
 {
 	return
@@ -86,13 +87,13 @@ sanguis::server::world::entity_map::erase(
 	);
 }
 
-sanguis::server::entities::unique_ptr
+sanguis::server::entities::with_id_unique_ptr
 sanguis::server::world::entity_map::release(
 	iterator const _it
 )
 {
 	return
-		sanguis::server::entities::unique_ptr(
+		sanguis::server::entities::with_id_unique_ptr(
 			impl_.release(
 				_it
 			).release()

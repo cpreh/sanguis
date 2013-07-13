@@ -3,13 +3,14 @@
 
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
-#include <sanguis/entity_type_fwd.hpp>
 #include <sanguis/pickup_type.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
+#include <sanguis/server/collision/group_vector.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/with_body.hpp>
+#include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/pickups/optional_dim_fwd.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -29,7 +30,8 @@ namespace pickups
 
 class pickup
 :
-	public sanguis::server::entities::with_body
+	public sanguis::server::entities::with_body,
+	public sanguis::server::entities::with_id
 {
 	FCPPT_NONCOPYABLE(
 		pickup
@@ -50,23 +52,28 @@ protected:
 	);
 private:
 	bool
-	dead() const;
-
-	sanguis::entity_type
-	type() const;
+	dead() const
+	override;
 
 	sanguis::server::team
-	team() const;
+	team() const
+	override;
 
 	boost::logic::tribool const
 	can_collide_with_body(
 		sanguis::server::entities::with_body const &
-	) const;
+	) const
+	override;
 
 	void
 	collision_with_body(
 		sanguis::server::entities::with_body &
-	);
+	)
+	override;
+
+	sanguis::server::collision::group_vector
+	collision_groups() const
+	override;
 
 	virtual
 	void
@@ -77,7 +84,8 @@ private:
 	sanguis::messages::unique_ptr
 	add_message(
 		sanguis::server::player_id
-	) const;
+	) const
+	override;
 
 	sanguis::server::team const team_;
 

@@ -5,6 +5,7 @@
 #include <sanguis/server/speed_fwd.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_velocity_fwd.hpp>
+#include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/entities/ifaces/with_velocity.hpp>
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <sanguis/server/entities/property/initial_fwd.hpp>
@@ -23,6 +24,7 @@ namespace entities
 class with_velocity
 :
 	public virtual sanguis::server::entities::base,
+	public virtual sanguis::server::entities::ifaces::with_id,
 	protected virtual sanguis::server::entities::ifaces::with_velocity
 {
 	FCPPT_NONCOPYABLE(

@@ -8,6 +8,8 @@
 #include <sanguis/server/collision/group.hpp>
 #include <sanguis/server/collision/group_vector.hpp>
 #include <sanguis/server/entities/with_body.hpp>
+#include <sanguis/server/entities/with_id.hpp>
+#include <fcppt/try_dynamic_cast.hpp>
 #include <fcppt/assign/make_container.hpp>
 
 
@@ -51,12 +53,17 @@ sanguis::server::auras::update_sight::enter(
 	sanguis::server::entities::with_body &_entity
 )
 {
-	(
-		enter_.get()
+	FCPPT_TRY_DYNAMIC_CAST(
+		sanguis::server::entities::with_id const *,
+		with_id,
+		&_entity
 	)
-	(
-		_entity.id()
-	);
+		(
+			enter_.get()
+		)
+		(
+			with_id->id()
+		);
 }
 
 void
@@ -64,10 +71,16 @@ sanguis::server::auras::update_sight::leave(
 	sanguis::server::entities::with_body &_entity
 )
 {
-	(
-		leave_.get()
+	FCPPT_TRY_DYNAMIC_CAST(
+		sanguis::server::entities::with_id const *,
+		with_id,
+		&_entity
 	)
-	(
-		_entity.id()
-	);
+
+		(
+			leave_.get()
+		)
+		(
+			with_id->id()
+		);
 }

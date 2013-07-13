@@ -34,7 +34,7 @@ sanguis::server::buffs::provider::add(
 	ret_type const ret(
 		fcppt::container::ptr::insert_unique_ptr_map(
 			buffs_,
-			_entity.id(),
+			&_entity,
 			std::move(
 				_buff
 			)
@@ -57,7 +57,7 @@ sanguis::server::buffs::provider::remove(
 {
 	sanguis::server::buffs::map::iterator const it(
 		buffs_.find(
-			_entity.id()
+			&_entity
 		)
 	);
 

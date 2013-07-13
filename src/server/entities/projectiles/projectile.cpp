@@ -1,15 +1,16 @@
 #include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/entity_type.hpp>
 #include <sanguis/projectile_type.hpp>
 #include <sanguis/messages/add_projectile.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/messages/types/enum.hpp>
 #include <sanguis/server/center.hpp>
-#include <sanguis/server/dim_fwd.hpp>
+#include <sanguis/server/dim.hpp>
 #include <sanguis/server/direction.hpp>
+#include <sanguis/server/model_name.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
+#include <sanguis/server/collision/group_vector.hpp>
 #include <sanguis/server/collision/result_fwd.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
 #include <sanguis/server/damage/list.hpp>
@@ -21,10 +22,11 @@
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_health.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
-#include <sanguis/server/entities/projectiles/indeterminate.hpp>
+#include <sanguis/server/entities/projectiles/collision_groups.hpp>
 #include <sanguis/server/entities/projectiles/life_time.hpp>
 #include <sanguis/server/entities/projectiles/projectile.hpp>
 #include <sanguis/server/entities/property/initial_max.hpp>
+#include <sanguis/server/environment/load_context.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
@@ -42,19 +44,24 @@ sanguis::server::entities::projectiles::projectile::projectile(
 	sanguis::projectile_type const _ptype,
 	sanguis::server::team const _team,
 	sanguis::server::entities::movement_speed const _movement_speed,
-	sanguis::server::dim const &_dim,
+	sanguis::server::model_name const &_model_name,
+	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::entities::projectiles::life_time const _life_time,
-	sanguis::server::direction const _direction,
-	sanguis::server::entities::projectiles::indeterminate const _indeterminate
+	sanguis::server::direction const _direction
 )
 :
 	sanguis::server::entities::base(),
 	sanguis::server::entities::body_velocity_combiner(),
 	sanguis::server::entities::with_body(
 		sanguis::server::entities::circle_from_dim(
-			_dim,
+			_load_context.entity_dim(
+				_model_name
+			),
 			sanguis::server::entities::nonsolid()
 		)
+	),
+	sanguis::server::entities::with_id(
+		_load_context.next_id()
 	),
 	sanguis::server::entities::with_velocity(
 		sanguis::server::entities::property::initial_max(
@@ -64,11 +71,6 @@ sanguis::server::entities::projectiles::projectile::projectile(
 	),
 	team_(
 		_team
-	),
-	server_only_(
-		_indeterminate
-		==
-		sanguis::server::entities::projectiles::indeterminate::yes
 	),
 	ptype_(
 		_ptype
@@ -101,12 +103,6 @@ sanguis::server::entities::projectiles::projectile::team() const
 }
 
 bool
-sanguis::server::entities::projectiles::projectile::server_only() const
-{
-	return server_only_;
-}
-
-bool
 sanguis::server::entities::projectiles::projectile::dead() const
 {
 	return life_timer_.expired();
@@ -122,12 +118,6 @@ sanguis::server::entities::projectiles::projectile::world_collision(
 	sanguis::server::entities::with_body::world_collision(
 		_result
 	);
-}
-
-sanguis::entity_type
-sanguis::server::entities::projectiles::projectile::type() const
-{
-	return sanguis::entity_type::projectile;
 }
 
 boost::logic::tribool const
@@ -166,15 +156,20 @@ sanguis::server::entities::projectiles::projectile::collision_with_body(
 		);
 }
 
+sanguis::server::collision::group_vector
+sanguis::server::entities::projectiles::projectile::collision_groups() const
+{
+	return
+		sanguis::server::entities::projectiles::collision_groups(
+			this->team()
+		);
+}
+
 sanguis::messages::unique_ptr
 sanguis::server::entities::projectiles::projectile::add_message(
 	sanguis::server::player_id const
 ) const
 {
-	FCPPT_ASSERT_PRE(
-		!this->server_only()
-	);
-
 	return
 		sanguis::messages::create(
 			sanguis::messages::add_projectile(

@@ -29,6 +29,7 @@
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
 #include <sanguis/server/entities/optional_base_ref_fwd.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/waves/generator.hpp>
@@ -42,6 +43,9 @@
 #include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/container/map_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/ptr_container/ptr_vector.hpp>
+#include <fcppt/config/external_end.hpp>
 
 
 
@@ -82,6 +86,18 @@ public:
 	sanguis::server::environment::object &
 	environment() const;
 private:
+	sanguis::server::entities::optional_base_ref const
+	insert_with_id(
+		sanguis::server::entities::unique_ptr &&,
+		sanguis::server::entities::insert_parameters const &
+	);
+
+	sanguis::server::entities::optional_base_ref const
+	insert_base(
+		sanguis::server::entities::unique_ptr &&,
+		sanguis::server::entities::insert_parameters const &
+	);
+
 	friend class environment;
 
 	void
@@ -229,7 +245,13 @@ private:
 
 	environment_scoped_ptr const environment_;
 
-	entity_map entities_;
+	sanguis::server::world::entity_map entities_;
+
+	typedef boost::ptr_vector<
+		sanguis::server::entities::base
+	> entity_vector;
+
+	entity_vector server_entities_;
 
 	sanguis::server::pickup_spawner pickup_spawner_;
 

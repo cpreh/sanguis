@@ -26,10 +26,6 @@ sanguis::server::entities::with_auras::add_aura(
 		auras_.back()
 	);
 
-	ref.owner(
-		this->id()
-	);
-
 	sanguis::server::entities::with_ghosts::add_ghost(
 		ref.recreate()
 	);

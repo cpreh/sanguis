@@ -2,6 +2,7 @@
 #include <sanguis/duration_second.hpp>
 #include <sanguis/projectile_type.hpp>
 #include <sanguis/server/dim.hpp>
+#include <sanguis/server/model_name.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/damage/full.hpp>
@@ -12,11 +13,10 @@
 #include <sanguis/server/damage/wrapper.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/with_health.hpp>
-#include <sanguis/server/entities/projectiles/indeterminate.hpp>
 #include <sanguis/server/entities/projectiles/life_time.hpp>
 #include <sanguis/server/entities/projectiles/projectile.hpp>
 #include <sanguis/server/entities/projectiles/simple_bullet.hpp>
-#include <sanguis/server/environment/load_context.hpp>
+#include <sanguis/server/environment/load_context_fwd.hpp>
 #include <fcppt/text.hpp>
 
 
@@ -35,16 +35,16 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 		sanguis::server::entities::movement_speed(
 			10.f
 		),
-		_load_context.entity_dim(
+		sanguis::server::model_name(
 			FCPPT_TEXT("bullet")
 		),
+		_load_context,
 		sanguis::server::entities::projectiles::life_time(
 			sanguis::duration_second(
 				10.f
 			)
 		),
-		_direction,
-		sanguis::server::entities::projectiles::indeterminate::no
+		_direction
 	),
 	damage_(
 		_damage

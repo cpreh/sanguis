@@ -261,7 +261,6 @@ sanguis::server::ai::simple::target_enters(
 		return;
 
 	potential_targets_.insert(
-		_new_target.id(),
 		with_health
 	);
 
@@ -294,6 +293,10 @@ sanguis::server::ai::simple::target_leaves(
 )
 {
 	potential_targets_.erase(
-		_old_target.id()
+		dynamic_cast<
+			sanguis::server::entities::with_health *
+		>(
+			&_old_target
+		)
 	);
 }

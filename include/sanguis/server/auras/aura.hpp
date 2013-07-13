@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_AURAS_AURA_HPP_INCLUDED
 #define SANGUIS_SERVER_AURAS_AURA_HPP_INCLUDED
 
-#include <sanguis/entity_id.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/influence.hpp>
@@ -11,7 +10,6 @@
 #include <sanguis/server/collision/group_vector.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/optional_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool_fwd.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -35,11 +33,6 @@ public:
 	virtual
 	~aura();
 
-	void
-	owner(
-		sanguis::entity_id
-	);
-
 	sanguis::server::collision::ghost_unique_ptr
 	recreate();
 protected:
@@ -48,9 +41,6 @@ protected:
 		sanguis::server::team,
 		sanguis::server::auras::influence
 	);
-
-	sanguis::entity_id const
-	owner() const;
 private:
 	virtual
 	sanguis::server::collision::group_vector const
@@ -88,12 +78,6 @@ private:
 	sanguis::server::team const team_;
 
 	sanguis::server::auras::influence const influence_;
-
-	typedef fcppt::optional<
-		sanguis::entity_id
-	> optional_entity_id;
-
-	optional_entity_id owner_;
 };
 
 }

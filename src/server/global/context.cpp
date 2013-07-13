@@ -1,6 +1,7 @@
 #include <sanguis/cheat_type.hpp>
 #include <sanguis/connect_state.hpp>
 #include <sanguis/duration.hpp>
+#include <sanguis/entity_id.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/perk_type.hpp>
 #include <sanguis/random_seed.hpp>
@@ -38,6 +39,7 @@
 #include <sanguis/server/entities/pickups/weapon.hpp>
 #include <sanguis/server/global/context.hpp>
 #include <sanguis/server/global/load_context.hpp>
+#include <sanguis/server/global/next_id_callback.hpp>
 #include <sanguis/server/global/world_context.hpp>
 #include <sanguis/server/message_convert/rotate.hpp>
 #include <sanguis/server/message_convert/speed.hpp>
@@ -107,14 +109,23 @@ sanguis::server::global::context::context(
 		fcppt::make_unique_ptr<
 			sanguis::server::global::load_context
 		>(
-			_model_context
+			_model_context,
+			sanguis::server::global::next_id_callback(
+				std::bind(
+					&sanguis::server::global::context::next_id,
+					this
+				)
+			)
 		)
 	),
 	console_(
 		_console
 	),
 	players_(),
-	worlds_()
+	worlds_(),
+	next_id_(
+		0u
+	)
 {
 }
 
@@ -470,6 +481,13 @@ sanguis::server::global::context::has_player(
 		players_.contains(
 			_player_id
 		);
+}
+
+sanguis::entity_id const
+sanguis::server::global::context::next_id()
+{
+	return
+		next_id_++;
 }
 
 void

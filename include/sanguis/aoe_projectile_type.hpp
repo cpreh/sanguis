@@ -9,7 +9,6 @@ namespace sanguis
 
 enum class aoe_projectile_type
 {
-	aoe_damage,
 	rocket,
 	grenade,
 	fcppt_maximum = grenade

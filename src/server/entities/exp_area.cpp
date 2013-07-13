@@ -1,23 +1,21 @@
-#include <sanguis/entity_type.hpp>
-#include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/server/center.hpp>
-#include <sanguis/server/player_id.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/collision/body_base_fwd.hpp>
 #include <sanguis/server/collision/circle_ghost.hpp>
+#include <sanguis/server/collision/group.hpp>
+#include <sanguis/server/collision/group_vector.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
-#include <sanguis/server/entities/collision_groups.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/exp_area.hpp>
+#include <sanguis/server/entities/is_type.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
-#include <sanguis/messages/base.hpp>
 #include <fcppt/dynamic_cast.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/container/map_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -35,10 +33,9 @@ sanguis::server::entities::exp_area::exp_area(
 		fcppt::make_unique_ptr<
 			sanguis::server::collision::circle_ghost
 		>(
-			sanguis::server::entities::collision_groups(
-				this->type(),
-				this->team()
-			),
+			sanguis::server::collision::group_vector{
+				sanguis::server::collision::group::projectile_enemy
+			},
 			sanguis::server::radius(
 				2000.f // TODO
 			),
@@ -112,30 +109,10 @@ sanguis::server::entities::exp_area::dead() const
 	return true;
 }
 
-sanguis::messages::unique_ptr
-sanguis::server::entities::exp_area::add_message(
-	sanguis::server::player_id const
-) const
-{
-	return sanguis::messages::unique_ptr(); // TODO: get rid of this
-}
-
-sanguis::entity_type
-sanguis::server::entities::exp_area::type() const
-{
-	return sanguis::entity_type::projectile; // FIXME
-}
-
 sanguis::server::team
 sanguis::server::entities::exp_area::team() const
 {
 	return sanguis::server::team::monsters; // FIXME
-}
-
-bool
-sanguis::server::entities::exp_area::server_only() const
-{
-	return true;
 }
 
 boost::logic::tribool const
@@ -144,12 +121,11 @@ sanguis::server::entities::exp_area::can_collide_with(
 ) const
 {
 	return
-		dynamic_cast<
-			sanguis::server::entities::player const *
+		sanguis::server::entities::is_type<
+			sanguis::server::entities::player
 		>(
-			&_base
-		)
-		!= 0;
+			_base
+		);
 }
 
 void
@@ -166,8 +142,10 @@ sanguis::server::entities::exp_area::body_enter(
 	);
 
 	player_links_.insert(
-		entity.id(),
-		entity.link()
+		std::make_pair(
+			&entity,
+			entity.link()
+		)
 	);
 }
 
@@ -178,9 +156,9 @@ sanguis::server::entities::exp_area::body_exit(
 {
 	player_links_.erase(
 		dynamic_cast<
-			sanguis::server::entities::base const &
+			sanguis::server::entities::base *
 		>(
-			_body
-		).id()
+			&_body
+		)
 	);
 }

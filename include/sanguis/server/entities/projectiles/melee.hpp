@@ -4,8 +4,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/damage/unit.hpp>
-#include <sanguis/server/entities/with_health_fwd.hpp>
-#include <sanguis/server/entities/projectiles/projectile.hpp>
+#include <sanguis/server/entities/projectiles/aoe_damage.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -20,7 +19,7 @@ namespace projectiles
 
 class melee
 :
-	public sanguis::server::entities::projectiles::projectile
+	public sanguis::server::entities::projectiles::aoe_damage
 {
 	FCPPT_NONCOPYABLE(
 		melee
@@ -33,13 +32,6 @@ public:
 	);
 
 	~melee();
-private:
-	void
-	do_damage(
-		sanguis::server::entities::with_health &
-	);
-
-	sanguis::server::damage::unit const damage_;
 };
 
 }

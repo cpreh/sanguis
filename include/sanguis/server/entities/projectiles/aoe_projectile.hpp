@@ -4,15 +4,14 @@
 #include <sanguis/aoe_projectile_type.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
-#include <sanguis/server/dim_fwd.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/projectiles/life_time.hpp>
-#include <sanguis/server/entities/projectiles/indeterminate.hpp>
 #include <sanguis/server/entities/projectiles/projectile.hpp>
+#include <sanguis/server/environment/load_context_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -38,9 +37,8 @@ protected:
 		sanguis::aoe_projectile_type,
 		sanguis::server::team,
 		sanguis::server::entities::movement_speed,
-		sanguis::server::dim const &,
+		sanguis::server::environment::load_context &,
 		sanguis::server::entities::projectiles::life_time,
-		sanguis::server::entities::projectiles::indeterminate,
 		sanguis::server::radius,
 		sanguis::server::direction
 	);

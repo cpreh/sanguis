@@ -3,21 +3,22 @@
 
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
-#include <sanguis/entity_type_fwd.hpp>
 #include <sanguis/projectile_type.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
-#include <sanguis/server/dim_fwd.hpp>
 #include <sanguis/server/direction.hpp>
+#include <sanguis/server/model_name.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
+#include <sanguis/server/collision/group_vector.hpp>
 #include <sanguis/server/collision/result_fwd.hpp>
 #include <sanguis/server/entities/body_velocity_combiner.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/with_body.hpp>
+#include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_health_fwd.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
-#include <sanguis/server/entities/projectiles/indeterminate_fwd.hpp>
 #include <sanguis/server/entities/projectiles/life_time.hpp>
+#include <sanguis/server/environment/load_context_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool_fwd.hpp>
@@ -37,6 +38,7 @@ class projectile
 :
 	private sanguis::server::entities::body_velocity_combiner,
 	public sanguis::server::entities::with_body,
+	public sanguis::server::entities::with_id,
 	public sanguis::server::entities::with_velocity
 {
 	FCPPT_NONCOPYABLE(
@@ -51,10 +53,10 @@ protected:
 		sanguis::projectile_type,
 		sanguis::server::team,
 		sanguis::server::entities::movement_speed,
-		sanguis::server::dim const &,
+		sanguis::server::model_name const &,
+		sanguis::server::environment::load_context &,
 		sanguis::server::entities::projectiles::life_time,
-		sanguis::server::direction,
-		sanguis::server::entities::projectiles::indeterminate
+		sanguis::server::direction
 	);
 
 	~projectile();
@@ -63,33 +65,35 @@ protected:
 	expire();
 
 	sanguis::server::team
-	team() const;
+	team() const
+	override;
 private:
 	bool
-	server_only() const;
-
-	bool
-	dead() const;
+	dead() const
+	override;
 
 	void
 	world_collision(
 		sanguis::server::collision::result const &
-	);
-
-	virtual
-	sanguis::entity_type
-	type() const;
+	)
+	override;
 
 	virtual
 	boost::logic::tribool const
 	can_collide_with_body(
 		sanguis::server::entities::with_body const &
-	) const;
+	) const
+	override;
 
 	void
 	collision_with_body(
 		sanguis::server::entities::with_body &
-	);
+	)
+	override;
+
+	sanguis::server::collision::group_vector
+	collision_groups() const
+	override;
 
 	virtual
 	void
@@ -100,11 +104,10 @@ private:
 	sanguis::messages::unique_ptr
 	add_message(
 		sanguis::server::player_id
-	) const;
+	) const
+	override;
 
 	sanguis::server::team const team_;
-
-	bool const server_only_;
 
 	sanguis::projectile_type const ptype_;
 

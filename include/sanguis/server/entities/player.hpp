@@ -2,8 +2,6 @@
 #define SANGUIS_SERVER_ENTITIES_PLAYER_HPP_INCLUDED
 
 #include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/entity_id.hpp>
-#include <sanguis/entity_type_fwd.hpp>
 #include <sanguis/perk_type_fwd.hpp>
 #include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
@@ -15,12 +13,14 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/string.hpp>
 #include <sanguis/server/team_fwd.hpp>
+#include <sanguis/server/collision/group_vector.hpp>
 #include <sanguis/server/damage/armor.hpp>
 #include <sanguis/server/entities/body_velocity_combiner.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
+#include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_health.hpp>
 #include <sanguis/server/entities/with_perks.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
@@ -45,6 +45,7 @@ class player
 	public sanguis::server::entities::with_auras,
 	public sanguis::server::entities::with_body,
 	public sanguis::server::entities::with_buffs,
+	public sanguis::server::entities::with_id,
 	public sanguis::server::entities::with_health,
 	public sanguis::server::entities::with_perks,
 	public sanguis::server::entities::with_velocity,
@@ -98,7 +99,8 @@ public:
 	player_id() const;
 private:
 	void
-	on_remove();
+	on_remove()
+	override;
 
 	void
 	add_sight_range(
@@ -111,23 +113,28 @@ private:
 	);
 
 	void
-	on_update();
+	on_update()
+	override;
 
 	sanguis::messages::unique_ptr
 	add_message(
 		sanguis::server::player_id
-	) const;
-
-	sanguis::entity_type
-	type() const;
+	) const
+	override;
 
 	sanguis::server::team
-	team() const;
+	team() const
+	override;
 
 	void
 	on_new_weapon(
 		sanguis::weapon_type
-	);
+	)
+	override;
+
+	sanguis::server::collision::group_vector
+	collision_groups() const
+	override;
 
 	template<
 		typename Message

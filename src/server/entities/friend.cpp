@@ -1,5 +1,4 @@
 #include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/entity_type.hpp>
 #include <sanguis/friend_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/load/friend_name.hpp>
@@ -9,6 +8,7 @@
 #include <sanguis/messages/types/enum.hpp>
 #include <sanguis/server/dim.hpp>
 #include <sanguis/server/health.hpp>
+#include <sanguis/server/model_name.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/ai/base.hpp>
@@ -22,6 +22,7 @@
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
+#include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_health.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/pickups/pickup.hpp>
@@ -59,14 +60,19 @@ sanguis::server::entities::friend_::friend_(
 	sanguis::server::entities::with_body(
 		sanguis::server::entities::circle_from_dim(
 			_load_context.entity_dim(
-				sanguis::load::friend_name(
-					_ftype
+				sanguis::server::model_name(
+					sanguis::load::friend_name(
+						_ftype
+					)
 				)
 			),
 			sanguis::server::entities::default_solid()
 		)
 	),
 	sanguis::server::entities::with_buffs(),
+	sanguis::server::entities::with_id(
+		_load_context.next_id()
+	),
 	sanguis::server::entities::with_health(
 		_diff_clock,
 		_health,
@@ -101,12 +107,6 @@ sanguis::server::entities::friend_::on_update()
 	sanguis::server::entities::with_health::on_update();
 }
 
-sanguis::entity_type
-sanguis::server::entities::friend_::type() const
-{
-	return sanguis::entity_type::friend_;
-}
-
 sanguis::server::team
 sanguis::server::entities::friend_::team() const
 {
@@ -134,4 +134,14 @@ sanguis::server::entities::friend_::add_message(
 				)
 			)
 		);
+}
+
+
+sanguis::server::collision::group_vector
+sanguis::server::entities::friend_::collision_groups() const
+{
+	return
+		sanguis::server::collision::group_vector{
+			sanguis::server::collision::group::player
+		};
 }

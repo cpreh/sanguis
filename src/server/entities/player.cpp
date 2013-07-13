@@ -1,6 +1,5 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/entity_id.hpp>
-#include <sanguis/entity_type.hpp>
 #include <sanguis/perk_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
@@ -16,11 +15,14 @@
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/leave_sight_function.hpp>
 #include <sanguis/server/level_calculate.hpp>
+#include <sanguis/server/model_name.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/string.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/update_sight.hpp>
+#include <sanguis/server/collision/group.hpp>
+#include <sanguis/server/collision/group_vector.hpp>
 #include <sanguis/server/damage/armor.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/body_velocity_combiner.hpp>
@@ -31,6 +33,7 @@
 #include <sanguis/server/entities/with_auras.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
+#include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_health.hpp>
 #include <sanguis/server/entities/with_perks.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
@@ -73,12 +76,17 @@ sanguis::server::entities::player::player(
 	sanguis::server::entities::with_body(
 		sanguis::server::entities::circle_from_dim(
 			_load_context.entity_dim(
-				FCPPT_TEXT("player")
+				sanguis::server::model_name(
+					FCPPT_TEXT("player")
+				)
 			),
 			sanguis::server::entities::default_solid()
 		)
 	),
 	sanguis::server::entities::with_buffs(),
+	sanguis::server::entities::with_id(
+		_load_context.next_id()
+	),
 	sanguis::server::entities::with_health(
 		_diff_clock,
 		_health,
@@ -330,12 +338,6 @@ sanguis::server::entities::player::add_message(
 			>();
 }
 
-sanguis::entity_type
-sanguis::server::entities::player::type() const
-{
-	return sanguis::entity_type::player;
-}
-
 sanguis::server::team
 sanguis::server::entities::player::team() const
 {
@@ -352,6 +354,15 @@ sanguis::server::entities::player::on_new_weapon(
 		this->id(),
 		_type
 	);
+}
+
+sanguis::server::collision::group_vector
+sanguis::server::entities::player::collision_groups() const
+{
+	return
+		sanguis::server::collision::group_vector{
+			sanguis::server::collision::group::player
+		};
 }
 
 template<

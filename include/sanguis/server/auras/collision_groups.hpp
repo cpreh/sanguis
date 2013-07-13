@@ -13,7 +13,7 @@ namespace server
 namespace auras
 {
 
-sanguis::server::collision::group_vector const
+sanguis::server::collision::group_vector
 collision_groups(
 	sanguis::server::team,
 	sanguis::server::auras::influence

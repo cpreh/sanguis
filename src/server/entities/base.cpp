@@ -1,6 +1,4 @@
-#include <sanguis/entity_id.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
-#include <sanguis/server/get_unique_id.hpp>
 #include <sanguis/server/collision/result_fwd.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/base.hpp>
@@ -14,9 +12,6 @@ sanguis::server::entities::base::base()
 :
 	environment_(
 		nullptr
-	),
-	id_(
-		sanguis::server::get_unique_id()
 	),
 	links_()
 {
@@ -105,18 +100,6 @@ sanguis::server::entities::base::has_environment() const
 {
 	return
 		environment_ != nullptr;
-}
-
-sanguis::entity_id const
-sanguis::server::entities::base::id() const
-{
-	return id_;
-}
-
-bool
-sanguis::server::entities::base::server_only() const
-{
-	return false;
 }
 
 sanguis::server::entities::base::~base()

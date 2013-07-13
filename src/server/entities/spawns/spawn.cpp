@@ -1,6 +1,5 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/enemy_type.hpp>
-#include <sanguis/entity_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/team.hpp>
@@ -42,15 +41,10 @@ sanguis::server::entities::spawns::spawn::spawn(
 {
 }
 
-sanguis::entity_type
-sanguis::server::entities::spawns::spawn::type() const
-{
-	return sanguis::entity_type::spawn;
-}
-
 sanguis::server::team
 sanguis::server::entities::spawns::spawn::team() const
 {
+	// TODO: This is not needed!
 	return sanguis::server::team::monsters;
 }
 

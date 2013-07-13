@@ -3,7 +3,6 @@
 
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/enemy_type.hpp>
-#include <sanguis/entity_type_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/team_fwd.hpp>
@@ -43,17 +42,17 @@ protected:
 		sanguis::enemy_type
 	);
 private:
-	sanguis::entity_type
-	type() const;
-
 	sanguis::server::team
-	team() const;
+	team() const
+	override;
 
 	sanguis::server::center const
-	center() const;
+	center() const
+	override;
 
 	void
-	on_update();
+	on_update()
+	override;
 
 	virtual
 	sanguis::server::entities::spawns::size_type

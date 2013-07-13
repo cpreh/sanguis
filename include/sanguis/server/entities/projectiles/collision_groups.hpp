@@ -1,7 +1,6 @@
-#ifndef SANGUIS_SERVER_ENTITIES_COLLISION_GROUPS_HPP_INCLUDED
-#define SANGUIS_SERVER_ENTITIES_COLLISION_GROUPS_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_ENTITIES_PROJECTILES_COLLISION_GROUPS_HPP_INCLUDED
+#define SANGUIS_SERVER_ENTITIES_PROJECTILES_COLLISION_GROUPS_HPP_INCLUDED
 
-#include <sanguis/entity_type_fwd.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/collision/group_vector.hpp>
 
@@ -12,13 +11,15 @@ namespace server
 {
 namespace entities
 {
+namespace projectiles
+{
 
 sanguis::server::collision::group_vector
 collision_groups(
-	sanguis::entity_type,
 	sanguis::server::team
 );
 
+}
 }
 }
 }

@@ -22,7 +22,6 @@ sanguis::client::draw2d::factory::aoe_projectile(
 		_ptype
 	)
 	{
-	case sanguis::aoe_projectile_type::aoe_damage:
 	case sanguis::aoe_projectile_type::rocket:
 	case sanguis::aoe_projectile_type::grenade:
 		return

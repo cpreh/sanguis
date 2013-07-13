@@ -5,6 +5,7 @@
 #include <sanguis/connect_state_fwd.hpp>
 #include <sanguis/diff_clock.hpp>
 #include <sanguis/duration.hpp>
+#include <sanguis/entity_id.hpp>
 #include <sanguis/perk_type_fwd.hpp>
 #include <sanguis/random_generator.hpp>
 #include <sanguis/weapon_type_fwd.hpp>
@@ -122,6 +123,9 @@ public:
 private:
 	friend class sanguis::server::global::world_context;
 
+	sanguis::entity_id const
+	next_id();
+
 	// callbacks for world
 
 	void
@@ -170,6 +174,8 @@ private:
 	sanguis::server::entities::player_map players_;
 
 	sanguis::server::world::map worlds_;
+
+	sanguis::entity_id next_id_;
 };
 
 }

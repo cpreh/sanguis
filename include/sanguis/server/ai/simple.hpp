@@ -6,7 +6,7 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/ai/base.hpp>
-#include <sanguis/server/ai/entity_map.hpp>
+#include <sanguis/server/ai/entity_set.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
@@ -62,7 +62,7 @@ private:
 		target_,
 		owner_;
 
-	sanguis::server::ai::entity_map potential_targets_;
+	sanguis::server::ai::entity_set potential_targets_;
 
 	typedef fcppt::random::distribution::basic<
 		fcppt::random::distribution::parameters::uniform_real<

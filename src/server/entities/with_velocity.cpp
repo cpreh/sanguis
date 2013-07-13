@@ -3,6 +3,7 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/speed_to_abs.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
+#include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/entities/ifaces/with_velocity.hpp>
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <sanguis/server/entities/property/initial_fwd.hpp>
@@ -18,6 +19,7 @@ sanguis::server::entities::with_velocity::with_velocity(
 )
 :
 	sanguis::server::entities::base(),
+	sanguis::server::entities::ifaces::with_id(),
 	sanguis::server::entities::ifaces::with_velocity(),
 	movement_speed_(
 		_movement_speed

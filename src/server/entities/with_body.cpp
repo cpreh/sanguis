@@ -11,12 +11,12 @@
 #include <sanguis/server/collision/user_data.hpp>
 #include <sanguis/server/collision/with_world.hpp>
 #include <sanguis/server/entities/body_parameters.hpp>
-#include <sanguis/server/entities/collision_groups.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/ifaces/with_body.hpp>
+#include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sge/projectile/world.hpp>
 #include <sge/projectile/body/scoped.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -35,6 +35,7 @@ sanguis::server::entities::with_body::with_body(
 	sanguis::server::entities::with_ghosts(),
 	sanguis::server::entities::ifaces::with_body(),
 	sanguis::server::entities::ifaces::with_angle(),
+	sanguis::server::entities::ifaces::with_id(),
 	sanguis::server::collision::body_base(),
 	radius_(
 		_params.radius()
@@ -163,10 +164,7 @@ sanguis::server::entities::with_body::on_transfer(
 			_params.world(),
 			collision_body_->get(),
 			sanguis::server::collision::make_groups(
-				sanguis::server::entities::collision_groups(
-					this->type(),
-					this->team()
-				),
+				this->collision_groups(),
 				_params.global_groups()
 			)
 		)

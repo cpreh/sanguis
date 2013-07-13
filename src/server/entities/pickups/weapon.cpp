@@ -7,6 +7,7 @@
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/messages/types/enum.hpp>
+#include <sanguis/server/model_name.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/entities/base.hpp>
@@ -34,8 +35,10 @@ sanguis::server::entities::pickups::weapon::weapon(
 		_team,
 		sanguis::server::entities::pickups::optional_dim(
 			_load_context.entity_dim(
-				sanguis::load::weapon_pickup_name(
-					_weapon_type
+				sanguis::server::model_name(
+					sanguis::load::weapon_pickup_name(
+						_weapon_type
+					)
 				)
 			)
 		)

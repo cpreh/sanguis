@@ -7,13 +7,13 @@
 #include <fcppt/assign/make_container.hpp>
 
 
-sanguis::server::collision::group_vector const
+sanguis::server::collision::group_vector
 sanguis::server::auras::collision_groups(
 	sanguis::server::team const _team,
 	sanguis::server::auras::influence const _influence
 )
 {
-	if (
+	if(
 		(
 			_team == sanguis::server::team::players
 			&& _influence == sanguis::server::auras::influence::buff
@@ -32,7 +32,7 @@ sanguis::server::auras::collision_groups(
 				sanguis::server::collision::group::projectile_enemy
 			);
 
-	if (
+	if(
 		(
 			_team == sanguis::server::team::players
 			&& _influence == sanguis::server::auras::influence::debuff

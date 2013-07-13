@@ -387,8 +387,6 @@ SET(
 	include/sanguis/enemy_type.hpp
 	include/sanguis/enemy_type_fwd.hpp
 	include/sanguis/entity_id.hpp
-	include/sanguis/entity_type.hpp
-	include/sanguis/entity_type_fwd.hpp
 	include/sanguis/exception.hpp
 	include/sanguis/friend_type.hpp
 	include/sanguis/friend_type_fwd.hpp
@@ -635,7 +633,7 @@ SET(
 	include/sanguis/server/ai/create_simple.hpp
 	include/sanguis/server/ai/create_simple_without_owner.hpp
 	include/sanguis/server/ai/debug.hpp
-	include/sanguis/server/ai/entity_map.hpp
+	include/sanguis/server/ai/entity_set.hpp
 	include/sanguis/server/ai/scoped_ptr.hpp
 	include/sanguis/server/ai/search_new_target.hpp
 	include/sanguis/server/ai/simple.hpp
@@ -739,7 +737,6 @@ SET(
 	include/sanguis/server/entities/body_parameters_fwd.hpp
 	include/sanguis/server/entities/body_velocity_combiner.hpp
 	include/sanguis/server/entities/circle_from_dim.hpp
-	include/sanguis/server/entities/collision_groups.hpp
 	include/sanguis/server/entities/default_solid.hpp
 	include/sanguis/server/entities/enemies/create.hpp
 	include/sanguis/server/entities/enemies/enemy.hpp
@@ -750,11 +747,13 @@ SET(
 	include/sanguis/server/entities/friend.hpp
 	include/sanguis/server/entities/ifaces/with_angle.hpp
 	include/sanguis/server/entities/ifaces/with_body.hpp
+	include/sanguis/server/entities/ifaces/with_id.hpp
 	include/sanguis/server/entities/ifaces/with_velocity.hpp
 	include/sanguis/server/entities/insert_parameters.hpp
 	include/sanguis/server/entities/insert_parameters_center.hpp
 	include/sanguis/server/entities/insert_parameters_fwd.hpp
 	include/sanguis/server/entities/insert_with_result.hpp
+	include/sanguis/server/entities/is_type.hpp
 	include/sanguis/server/entities/link_container.hpp
 	include/sanguis/server/entities/movement_speed.hpp
 	include/sanguis/server/entities/nonsolid.hpp
@@ -772,10 +771,9 @@ SET(
 	include/sanguis/server/entities/player_unique_ptr.hpp
 	include/sanguis/server/entities/projectiles/aoe_damage.hpp
 	include/sanguis/server/entities/projectiles/aoe_projectile.hpp
+	include/sanguis/server/entities/projectiles/collision_groups.hpp
 	include/sanguis/server/entities/projectiles/damage_per_pulse.hpp
 	include/sanguis/server/entities/projectiles/grenade.hpp
-	include/sanguis/server/entities/projectiles/indeterminate.hpp
-	include/sanguis/server/entities/projectiles/indeterminate_fwd.hpp
 	include/sanguis/server/entities/projectiles/life_time.hpp
 	include/sanguis/server/entities/projectiles/melee.hpp
 	include/sanguis/server/entities/projectiles/projectile.hpp
@@ -830,6 +828,9 @@ SET(
 	include/sanguis/server/entities/with_ghosts.hpp
 	include/sanguis/server/entities/with_health.hpp
 	include/sanguis/server/entities/with_health_fwd.hpp
+	include/sanguis/server/entities/with_id.hpp
+	include/sanguis/server/entities/with_id_fwd.hpp
+	include/sanguis/server/entities/with_id_unique_ptr.hpp
 	include/sanguis/server/entities/with_perks.hpp
 	include/sanguis/server/entities/with_velocity.hpp
 	include/sanguis/server/entities/with_velocity_fwd.hpp
@@ -847,10 +848,10 @@ SET(
 	include/sanguis/server/events/tick.hpp
 	include/sanguis/server/events/tick_fwd.hpp
 	include/sanguis/server/exp.hpp
-	include/sanguis/server/get_unique_id.hpp
 	include/sanguis/server/global/context.hpp
 	include/sanguis/server/global/context_fwd.hpp
 	include/sanguis/server/global/load_context.hpp
+	include/sanguis/server/global/next_id_callback.hpp
 	include/sanguis/server/global/world_context.hpp
 	include/sanguis/server/global/world_context_fwd.hpp
 	include/sanguis/server/health.hpp
@@ -868,6 +869,7 @@ SET(
 	include/sanguis/server/message_convert/rotate.hpp
 	include/sanguis/server/message_convert/speed.hpp
 	include/sanguis/server/message_functor.hpp
+	include/sanguis/server/model_name.hpp
 	include/sanguis/server/object.hpp
 	include/sanguis/server/object_fwd.hpp
 	include/sanguis/server/original_object.hpp
@@ -1328,7 +1330,6 @@ SET(
 	src/server/entities/body_parameters.cpp
 	src/server/entities/body_velocity_combiner.cpp
 	src/server/entities/circle_from_dim.cpp
-	src/server/entities/collision_groups.cpp
 	src/server/entities/default_solid.cpp
 	src/server/entities/enemies/create.cpp
 	src/server/entities/enemies/enemy.cpp
@@ -1336,6 +1337,7 @@ SET(
 	src/server/entities/friend.cpp
 	src/server/entities/ifaces/with_angle.cpp
 	src/server/entities/ifaces/with_body.cpp
+	src/server/entities/ifaces/with_id.cpp
 	src/server/entities/ifaces/with_velocity.cpp
 	src/server/entities/insert_parameters.cpp
 	src/server/entities/insert_parameters_center.cpp
@@ -1347,6 +1349,7 @@ SET(
 	src/server/entities/player.cpp
 	src/server/entities/projectiles/aoe_damage.cpp
 	src/server/entities/projectiles/aoe_projectile.cpp
+	src/server/entities/projectiles/collision_groups.cpp
 	src/server/entities/projectiles/grenade.cpp
 	src/server/entities/projectiles/melee.cpp
 	src/server/entities/projectiles/projectile.cpp
@@ -1377,6 +1380,7 @@ SET(
 	src/server/entities/with_buffs.cpp
 	src/server/entities/with_ghosts.cpp
 	src/server/entities/with_health.cpp
+	src/server/entities/with_id.cpp
 	src/server/entities/with_perks.cpp
 	src/server/entities/with_velocity.cpp
 	src/server/entities/with_weapon.cpp
@@ -1386,7 +1390,6 @@ SET(
 	src/server/events/disconnect.cpp
 	src/server/events/message.cpp
 	src/server/events/tick.cpp
-	src/server/get_unique_id.cpp
 	src/server/global/context.cpp
 	src/server/global/load_context.cpp
 	src/server/global/world_context.cpp

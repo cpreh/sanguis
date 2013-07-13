@@ -1,44 +1,39 @@
+#include <sanguis/server/space_unit.hpp>
+#include <sanguis/server/ai/entity_set.hpp>
 #include <sanguis/server/ai/search_new_target.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_health.hpp>
 #include <sanguis/server/collision/distance.hpp>
-#include <fcppt/container/map_impl.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <limits>
 #include <fcppt/config/external_end.hpp>
 
+
 sanguis::server::entities::auto_weak_link const
 sanguis::server::ai::search_new_target(
-	entities::base const &_me,
-	ai::entity_map const &_entities
+	sanguis::server::entities::base const &_me,
+	sanguis::server::ai::entity_set const &_entities
 )
 {
-	space_unit distance(
+	sanguis::server::space_unit distance(
 		std::numeric_limits<
-			space_unit
+			sanguis::server::space_unit
 		>::max()
 	);
 
-	entities::auto_weak_link ret;
+	sanguis::server::entities::auto_weak_link ret;
 
 	for(
-		entity_map::const_iterator it(
-			_entities.begin()
-		);
-		it != _entities.end();
-		++it
+		auto const entity
+		:
+		_entities
 	)
 	{
-		entities::with_health &target(
-			*it->second
-		);
-
-		space_unit const new_distance(
-			collision::distance(
+		sanguis::server::space_unit const new_distance(
+			sanguis::server::collision::distance(
 				_me,
-				target
+				*entity
 			)
 		);
 
@@ -48,7 +43,7 @@ sanguis::server::ai::search_new_target(
 		{
 			distance = new_distance;
 
-			ret = target.link();
+			ret = entity->link();
 		}
 	}
 

@@ -1,6 +1,5 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
-#include <sanguis/entity_type.hpp>
 #include <sanguis/pickup_type.hpp>
 #include <sanguis/load/pickup_name.hpp>
 #include <sanguis/messages/add_pickup.hpp>
@@ -8,12 +7,18 @@
 #include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/messages/types/enum.hpp>
 #include <sanguis/server/center.hpp>
+#include <sanguis/server/model_name.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
+#include <sanguis/server/collision/group.hpp>
+#include <sanguis/server/collision/group_vector.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/circle_from_dim.hpp>
+#include <sanguis/server/entities/is_type.hpp>
 #include <sanguis/server/entities/nonsolid.hpp>
+#include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/with_body.hpp>
+#include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/pickups/optional_dim.hpp>
 #include <sanguis/server/entities/pickups/pickup.hpp>
 #include <sanguis/server/environment/load_context.hpp>
@@ -49,12 +54,17 @@ sanguis::server::entities::pickups::pickup::pickup(
 				*_dim
 			:
 				_load_context.entity_dim(
-					sanguis::load::pickup_name(
-						_ptype
+					sanguis::server::model_name(
+						sanguis::load::pickup_name(
+							_ptype
+						)
 					)
 				),
 			sanguis::server::entities::nonsolid()
 		)
+	),
+	sanguis::server::entities::with_id(
+		_load_context.next_id()
 	),
 	team_(
 		_team
@@ -79,12 +89,6 @@ sanguis::server::entities::pickups::pickup::dead() const
 	return life_timer_.expired();
 }
 
-sanguis::entity_type
-sanguis::server::entities::pickups::pickup::type() const
-{
-	return entity_type::pickup;
-}
-
 sanguis::server::team
 sanguis::server::entities::pickups::pickup::team() const
 {
@@ -98,7 +102,12 @@ sanguis::server::entities::pickups::pickup::can_collide_with_body(
 {
 	return
 		_body.team() == this->team()
-		&& _body.type() == sanguis::entity_type::player;
+		&&
+		sanguis::server::entities::is_type<
+			sanguis::server::entities::player
+		>(
+			_body
+		);
 }
 
 void
@@ -120,6 +129,15 @@ sanguis::server::entities::pickups::pickup::collision_with_body(
 	this->do_pickup(
 		_body
 	);
+}
+
+sanguis::server::collision::group_vector
+sanguis::server::entities::pickups::pickup::collision_groups() const
+{
+	return
+		sanguis::server::collision::group_vector{
+			sanguis::server::collision::group::pickup
+		};
 }
 
 sanguis::messages::unique_ptr

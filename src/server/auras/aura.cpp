@@ -1,4 +1,3 @@
-#include <sanguis/entity_id.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/aura.hpp>
@@ -10,7 +9,6 @@
 #include <sanguis/server/collision/group_vector.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -18,14 +16,6 @@
 
 sanguis::server::auras::aura::~aura()
 {
-}
-
-void
-sanguis::server::auras::aura::owner(
-	sanguis::entity_id const _owner
-)
-{
-	owner_ = _owner;
 }
 
 sanguis::server::collision::ghost_unique_ptr
@@ -59,15 +49,8 @@ sanguis::server::auras::aura::aura(
 	),
 	influence_(
 		_influence
-	),
-	owner_()
+	)
 {
-}
-
-sanguis::entity_id const
-sanguis::server::auras::aura::owner() const
-{
-	return *owner_;
 }
 
 sanguis::server::collision::group_vector const

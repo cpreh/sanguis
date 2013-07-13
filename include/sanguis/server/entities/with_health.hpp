@@ -9,6 +9,7 @@
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_health_fwd.hpp>
+#include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/entities/property/always_max.hpp>
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <sanguis/server/entities/property/value.hpp>
@@ -25,7 +26,8 @@ namespace entities
 
 class with_health
 :
-	public virtual sanguis::server::entities::base
+	public virtual sanguis::server::entities::base,
+	public virtual sanguis::server::entities::ifaces::with_id
 {
 	FCPPT_NONCOPYABLE(
 		with_health

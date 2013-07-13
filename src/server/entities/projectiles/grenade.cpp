@@ -23,12 +23,11 @@
 #include <sanguis/server/entities/projectiles/aoe_projectile.hpp>
 #include <sanguis/server/entities/projectiles/damage_per_pulse.hpp>
 #include <sanguis/server/entities/projectiles/grenade.hpp>
-#include <sanguis/server/entities/projectiles/indeterminate.hpp>
 #include <sanguis/server/entities/projectiles/life_time.hpp>
 #include <sanguis/server/entities/projectiles/pulse_time.hpp>
 #include <sanguis/server/entities/projectiles/pulses.hpp>
 #include <sanguis/server/entities/property/from_float.hpp>
-#include <sanguis/server/environment/load_context.hpp>
+#include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -55,15 +54,12 @@ sanguis::server::entities::projectiles::grenade::grenade(
 		sanguis::server::entities::movement_speed(
 			10.f
 		),
-		_load_context.entity_dim(
-			FCPPT_TEXT("grenade")
-		),
+		_load_context,
 		sanguis::server::entities::projectiles::life_time(
 			sanguis::duration_second(
 				2.f
 			)
 		),
-		sanguis::server::entities::projectiles::indeterminate::no,
 		_aoe,
 		_direction
 	),
