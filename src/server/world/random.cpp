@@ -7,6 +7,7 @@
 #include <sanguis/creator/deserialize.hpp>
 #include <sanguis/creator/generate.hpp>
 #include <sanguis/creator/name.hpp>
+#include <sanguis/creator/opening_count.hpp>
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/serialize.hpp>
 #include <sanguis/creator/top_parameters.hpp>
@@ -76,6 +77,9 @@ sanguis::server::world::random(
 					),
 					sanguis::creator::seed(
 						0u
+					),
+					sanguis::creator::opening_count(
+						2u
 					)
 				)
 			)

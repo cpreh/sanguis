@@ -104,6 +104,9 @@ sanguis::server::world::object::object(
 	grid_(
 		_generated_world.grid()
 	),
+	openings_(
+		_generated_world.openings()
+	),
 	global_context_(
 		_global_context
 	),
@@ -301,7 +304,7 @@ sanguis::server::world::object::insert(
 					static_cast<
 						sanguis::messages::types::size
 					>(
-						0u // FIXME
+						openings_.size()
 					)
 				)
 			)

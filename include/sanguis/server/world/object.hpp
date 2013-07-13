@@ -11,6 +11,7 @@
 #include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/name.hpp>
+#include <sanguis/creator/opening_container.hpp>
 #include <sanguis/creator/top_result_fwd.hpp>
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/messages/base_fwd.hpp>
@@ -199,6 +200,8 @@ private:
 	sanguis::creator::name const generator_name_;
 
 	sanguis::creator::grid const grid_;
+
+	sanguis::creator::opening_container const openings_;
 
 	sanguis::server::world::context &global_context_;
 

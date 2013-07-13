@@ -6,6 +6,7 @@
 #include <sanguis/projectile_type.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/creator/name.hpp>
+#include <sanguis/creator/opening_count.hpp>
 #include <sanguis/creator/top_parameters.hpp>
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/health.hpp>
@@ -76,6 +77,7 @@
 #include <sanguis/messages/roles/friend.hpp>
 #include <sanguis/messages/roles/health.hpp>
 #include <sanguis/messages/roles/max_health.hpp>
+#include <sanguis/messages/roles/opening_count.hpp>
 #include <sanguis/messages/roles/projectile.hpp>
 #include <sanguis/messages/roles/speed.hpp>
 #include <sanguis/messages/roles/weapon.hpp>
@@ -310,7 +312,12 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 				),
 				_message.get<
 					sanguis::messages::seed
-				>()
+				>(),
+				sanguis::creator::opening_count(
+					_message.get<
+						sanguis::messages::roles::opening_count
+					>()
+				)
 			)
 		)
 	);

@@ -1,6 +1,5 @@
 #include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/generate.hpp>
-#include <sanguis/creator/opening_count.hpp>
 #include <sanguis/creator/top_parameters.hpp>
 #include <sanguis/creator/top_result.hpp>
 #include <sanguis/creator/aux/parameters.hpp>
@@ -69,16 +68,11 @@ sanguis::creator::generate(
 		_parameters.seed()
 	);
 
-	// TODO: This must be specified in top_parameters as well!
-	sanguis::creator::opening_count const openings(
-		2u
-	);
-
 	sanguis::creator::aux::result const result(
 		it->second(
 			sanguis::creator::aux::parameters(
 				gen,
-				openings
+				_parameters.opening_count()
 			)
 		)
 	);
@@ -86,7 +80,7 @@ sanguis::creator::generate(
 	FCPPT_ASSERT_ERROR(
 		result.openings().size()
 		==
-		openings.get()
+		_parameters.opening_count().get()
 	);
 
 	return
