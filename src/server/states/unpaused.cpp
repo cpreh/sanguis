@@ -291,7 +291,7 @@ sanguis::server::states::unpaused::react(
 			sanguis::messages::player_position
 		>,
 		functor_type
-	>::type dispatcher;
+	> dispatcher;
 
 	return
 		dispatcher(

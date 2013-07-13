@@ -118,7 +118,7 @@ sanguis::server::states::running::react(
 	sanguis::server::events::message const &_message
 )
 {
-	typedef message_functor<
+	typedef sanguis::server::message_functor<
 		sanguis::server::states::running,
 		boost::statechart::result
 	> functor_type;
@@ -128,7 +128,7 @@ sanguis::server::states::running::react(
 		_message.id()
 	);
 
-	static messages::call::object<
+	static sanguis::messages::call::object<
 		boost::mpl::vector4<
 			sanguis::messages::client_info,
 			sanguis::messages::console_command,
@@ -136,7 +136,7 @@ sanguis::server::states::running::react(
 			sanguis::messages::player_choose_perk
 		>,
 		functor_type
-	>::type dispatcher;
+	> dispatcher;
 
 	return
 		dispatcher(
@@ -171,7 +171,8 @@ sanguis::server::states::running::react(
 		)
 	);
 
-	return discard_event();
+	return
+		this->discard_event();
 }
 
 boost::statechart::result
@@ -185,7 +186,8 @@ sanguis::server::states::running::operator()(
 			_id
 		)
 	)
-		return this->discard_event();
+		return
+			this->discard_event();
 
 	FCPPT_LOG_DEBUG(
 		::logger,
@@ -313,7 +315,8 @@ sanguis::server::states::running::operator()(
 			_id
 		)
 	)
-		return this->discard_event();
+		return
+			this->discard_event();
 
 	global_context_->player_choose_perk(
 		_id,
@@ -333,7 +336,8 @@ sanguis::server::states::running::operator()(
 sanguis::server::global::context &
 sanguis::server::states::running::global_context()
 {
-	return *global_context_;
+	return
+		*global_context_;
 }
 
 boost::statechart::result

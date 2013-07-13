@@ -5,19 +5,22 @@
 #include <sanguis/creator/result.hpp>
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/tile.hpp>
-#include <sanguis/creator/aux/neumann_neighbors.hpp>
 #include <sanguis/creator/aux/find_opposing_cell.hpp>
+#include <sanguis/creator/aux/neighbor_array.hpp>
+#include <sanguis/creator/aux/neumann_neighbors.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/algorithm/remove.hpp>
 #include <fcppt/algorithm/append.hpp>
-#include <fcppt/optional.hpp>
-#include <fcppt/math/dim/output.hpp>
+#include <fcppt/algorithm/remove.hpp>
 #include <sanguis/creator/randgen.hpp>
 #include <fcppt/container/grid/make_pos_range.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <vector>
+#include <fcppt/config/external_end.hpp>
 
 
 // this is a maze generator that follows the algorithm described at

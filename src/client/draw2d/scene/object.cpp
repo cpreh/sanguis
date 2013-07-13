@@ -240,7 +240,7 @@ sanguis::client::draw2d::scene::object::process_message(
 			sanguis::messages::speed
 		>,
 		sanguis::client::draw2d::message::dispatcher
-	>::type dispatcher;
+	> dispatcher;
 
 	dispatcher(
 		_message,

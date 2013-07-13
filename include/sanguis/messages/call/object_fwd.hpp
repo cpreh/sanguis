@@ -16,14 +16,13 @@ template<
 	typename Messages,
 	typename Callee
 >
-struct object
-{
-	typedef alda::call::object<
-		sanguis::messages::types::alda_type,
-		Messages,
-		Callee
-	> type;
-};
+using object
+=
+alda::call::object<
+	sanguis::messages::types::alda_type,
+	Messages,
+	Callee
+>;
 
 }
 }

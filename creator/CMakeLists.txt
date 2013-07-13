@@ -59,6 +59,8 @@ SET(
 	src/include/sanguis/creator/aux/deserialization/grid.hpp
 	src/include/sanguis/creator/aux/deserialization/result.hpp
 	src/include/sanguis/creator/aux/find_opposing_cell.hpp
+	src/include/sanguis/creator/aux/neighbor_array.hpp
+	src/include/sanguis/creator/aux/neighbor_array_fwd.hpp
 	src/include/sanguis/creator/aux/neumann_neighbors.hpp
 	src/include/sanguis/creator/aux/serialization/grid.hpp
 	src/include/sanguis/creator/aux/serialization/result.hpp

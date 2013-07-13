@@ -1,6 +1,8 @@
-#include <sanguis/creator/aux/find_opposing_cell.hpp>
 #include <sanguis/creator/grid.hpp>
+#include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile.hpp>
+#include <sanguis/creator/aux/find_opposing_cell.hpp>
+#include <sanguis/creator/aux/neighbor_array.hpp>
 #include <sanguis/creator/aux/neumann_neighbors.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/math/vector/comparison.hpp>
@@ -17,15 +19,15 @@
 // already part of the maze. There should at most be one
 // such cell.
 fcppt::optional<
-	sanguis::creator::grid::pos
+	sanguis::creator::pos
 >
 sanguis::creator::aux::find_opposing_cell
 (
 	sanguis::creator::grid &grid,
 	std::vector<
-		sanguis::creator::grid::pos
+		sanguis::creator::pos
 	> &maze,
-	sanguis::creator::grid::pos const &cell
+	sanguis::creator::pos const &cell
 )
 {
 
@@ -40,19 +42,17 @@ sanguis::creator::aux::find_opposing_cell
 		cell.y() == 0
 		)
 		return fcppt::optional<
-			sanguis::creator::grid::pos
+			sanguis::creator::pos
 		>();
 
-	std::vector<
-		sanguis::creator::grid::pos
-	>
-	neighbors =
+	sanguis::creator::aux::neighbor_array const neighbors(
 		sanguis::creator::aux::neumann_neighbors(
 			cell
-		);
+		)
+	);
 
 	std::vector<
-		sanguis::creator::grid::pos
+		sanguis::creator::pos
 	>
 	candidates;
 
@@ -63,7 +63,7 @@ sanguis::creator::aux::find_opposing_cell
 		neighbors.end(),
 		std::back_inserter(candidates),
 		[&grid](
-			sanguis::creator::grid::pos &elem
+			sanguis::creator::pos const &elem
 		)
 		{
 			return
@@ -81,15 +81,15 @@ sanguis::creator::aux::find_opposing_cell
 
 	if(!fcppt::algorithm::contains(maze, candidates[0]))
 		return fcppt::optional<
-			sanguis::creator::grid::pos
+			sanguis::creator::pos
 		>(candidates[0]);
 
 	if(!fcppt::algorithm::contains(maze, candidates[1]))
 		return fcppt::optional<
-			sanguis::creator::grid::pos
+			sanguis::creator::pos
 		>(candidates[1]);
 
 	return fcppt::optional<
-		sanguis::creator::grid::pos
+		sanguis::creator::pos
 	>();
 }

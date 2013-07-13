@@ -94,14 +94,14 @@ sanguis::client::states::has_player::react(
 			sanguis::messages::give_weapon
 		>,
 		has_player
-	>::type dispatcher;
+	> dispatcher;
 
 	return
 		dispatcher(
 			*_event.value(),
 			*this,
 			std::bind(
-				&has_player::handle_default_msg,
+				&sanguis::client::states::has_player::handle_default_msg,
 				this,
 				std::placeholders::_1
 			)
@@ -117,7 +117,8 @@ sanguis::client::states::has_player::react(
 		_event.value()
 	);
 
-	return discard_event();
+	return
+		this->discard_event();
 }
 
 boost::statechart::result
@@ -127,11 +128,14 @@ sanguis::client::states::has_player::operator()(
 {
 	perk_state_->perks(
 		sanguis::client::perk::make_tree(
-			_message.get<sanguis::messages::perk_tree>()
+			_message.get<
+				sanguis::messages::perk_tree
+			>()
 		)
 	);
 
-	return discard_event();
+	return
+		this->discard_event();
 }
 
 boost::statechart::result
@@ -143,11 +147,14 @@ sanguis::client::states::has_player::operator()(
 		fcppt::cast_to_enum<
 			sanguis::weapon_type
 		>(
-			_message.get<sanguis::messages::roles::weapon>()
+			_message.get<
+				sanguis::messages::roles::weapon
+			>()
 		)
 	);
 
-	return discard_event();
+	return
+		this->discard_event();
 }
 
 boost::statechart::result
@@ -158,12 +165,15 @@ sanguis::client::states::has_player::operator()(
 	perk_state_->player_level(
 		sanguis::client::player_level(
 			sanguis::client::level(
-				_message.get<sanguis::messages::level>()
+				_message.get<
+					sanguis::messages::level
+				>()
 			)
 		)
 	);
 
-	return forward_event();
+	return
+		this->forward_event();
 }
 
 boost::statechart::result
@@ -171,13 +181,15 @@ sanguis::client::states::has_player::operator()(
 	sanguis::messages::remove_id const &
 )
 {
-	return this->discard_event(); //transit<gameover>();
+	return
+		this->discard_event(); //transit<gameover>();
 }
 
 sanguis::client::perk::state &
 sanguis::client::states::has_player::perk_state()
 {
-	return *perk_state_;
+	return
+		*perk_state_;
 }
 
 boost::statechart::result
@@ -185,7 +197,8 @@ sanguis::client::states::has_player::handle_default_msg(
 	sanguis::messages::base const &
 )
 {
-	return this->forward_event();
+	return
+		this->forward_event();
 }
 
 void

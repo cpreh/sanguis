@@ -161,7 +161,7 @@ sanguis::client::states::running::react(
 			sanguis::messages::unpause
 		>,
 		running
-	>::type dispatcher;
+	> dispatcher;
 
 	return
 		dispatcher(

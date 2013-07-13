@@ -81,7 +81,7 @@ sanguis::server::states::paused::react(
 			sanguis::messages::player_unpause
 		>,
 		functor_type
-	>::type dispatcher;
+	> dispatcher;
 
 	return
 		dispatcher(

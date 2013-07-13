@@ -1,38 +1,33 @@
+#include <sanguis/creator/pos.hpp>
+#include <sanguis/creator/aux/neighbor_array.hpp>
 #include <sanguis/creator/aux/neumann_neighbors.hpp>
-#include <sanguis/creator/grid.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <vector>
-#include <fcppt/config/external_end.hpp>
 
 
 // returns the points in the von-Neumann-neighborhood
 // of the given cell,
 // no range checks are being performed!
-std::vector<
-	sanguis::creator::grid::pos
->
+sanguis::creator::aux::neighbor_array const
 sanguis::creator::aux::neumann_neighbors(
-	sanguis::creator::grid::pos const &cell
+	sanguis::creator::pos const _cell
 )
 {
-	std::vector<sanguis::creator::grid::pos> ret{
-			sanguis::creator::grid::pos{
-				cell.x() - 1,
-				cell.y()
+	return
+		sanguis::creator::aux::neighbor_array{{
+			sanguis::creator::pos{
+				_cell.x() - 1,
+				_cell.y()
 			},
-			sanguis::creator::grid::pos{
-				cell.x() + 1,
-				cell.y()
+			sanguis::creator::pos{
+				_cell.x() + 1,
+				_cell.y()
 			},
-			sanguis::creator::grid::pos{
-				cell.x(),
-				cell.y() - 1,
+			sanguis::creator::pos{
+				_cell.x(),
+				_cell.y() - 1,
 			},
-			sanguis::creator::grid::pos{
-				cell.x(),
-				cell.y() + 1
+			sanguis::creator::pos{
+				_cell.x(),
+				_cell.y() + 1
 			}
-		};
-
-	return ret;
+		}};
 }

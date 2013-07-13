@@ -131,7 +131,7 @@ sanguis::client::states::menu::react(
 			sanguis::messages::connect_state
 		>,
 		menu
-	>::type dispatcher;
+	> dispatcher;
 
 	return
 		dispatcher(
