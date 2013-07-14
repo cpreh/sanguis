@@ -753,6 +753,7 @@ SET(
 	include/sanguis/server/entities/ifaces/with_body.hpp
 	include/sanguis/server/entities/ifaces/with_id.hpp
 	include/sanguis/server/entities/ifaces/with_links.hpp
+	include/sanguis/server/entities/ifaces/with_team.hpp
 	include/sanguis/server/entities/ifaces/with_velocity.hpp
 	include/sanguis/server/entities/insert_parameters.hpp
 	include/sanguis/server/entities/insert_parameters_center.hpp
@@ -1350,6 +1351,7 @@ SET(
 	src/server/entities/ifaces/with_body.cpp
 	src/server/entities/ifaces/with_id.cpp
 	src/server/entities/ifaces/with_links.cpp
+	src/server/entities/ifaces/with_team.cpp
 	src/server/entities/ifaces/with_velocity.cpp
 	src/server/entities/insert_parameters.cpp
 	src/server/entities/insert_parameters_center.cpp

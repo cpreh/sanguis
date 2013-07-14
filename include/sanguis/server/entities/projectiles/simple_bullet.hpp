@@ -41,7 +41,8 @@ private:
 	void
 	do_damage(
 		sanguis::server::entities::with_health &
-	);
+	)
+	override;
 
 	sanguis::server::damage::unit const damage_;
 };

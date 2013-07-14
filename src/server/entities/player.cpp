@@ -24,7 +24,6 @@
 #include <sanguis/server/collision/group.hpp>
 #include <sanguis/server/collision/group_vector.hpp>
 #include <sanguis/server/damage/armor.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/body_velocity_combiner.hpp>
 #include <sanguis/server/entities/circle_from_dim.hpp>
 #include <sanguis/server/entities/default_solid.hpp>
@@ -39,6 +38,7 @@
 #include <sanguis/server/entities/with_perks.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
+#include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/property/initial.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/environment/object.hpp>
@@ -71,7 +71,7 @@ sanguis::server::entities::player::player(
 	sanguis::server::player_id const _player_id
 )
 :
-	sanguis::server::entities::base(),
+	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::body_velocity_combiner(),
 	sanguis::server::entities::with_auras(),
 	sanguis::server::entities::with_body(
@@ -281,6 +281,12 @@ sanguis::server::entities::player::player_id() const
 	return player_id_;
 }
 
+sanguis::server::team
+sanguis::server::entities::player::team() const
+{
+	return sanguis::server::team::players;
+}
+
 void
 sanguis::server::entities::player::on_remove()
 {
@@ -338,12 +344,6 @@ sanguis::server::entities::player::add_message(
 			this->make_add_message<
 				sanguis::messages::add_player
 			>();
-}
-
-sanguis::server::team
-sanguis::server::entities::player::team() const
-{
-	return sanguis::server::team::players;
 }
 
 void

@@ -30,13 +30,19 @@ private:
 	void
 	on_speed_change(
 		sanguis::server::speed const &
-	);
+	)
+	override
+	final;
 
 	sanguis::server::speed const
-	initial_speed() const;
+	initial_speed() const
+	override
+	final;
 
 	sanguis::server::speed const
-	actual_speed() const;
+	actual_speed() const
+	override
+	final;
 };
 
 }

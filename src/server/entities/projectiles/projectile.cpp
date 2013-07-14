@@ -14,7 +14,6 @@
 #include <sanguis/server/collision/result_fwd.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
 #include <sanguis/server/damage/list.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/body_velocity_combiner.hpp>
 #include <sanguis/server/entities/circle_from_dim.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
@@ -23,12 +22,12 @@
 #include <sanguis/server/entities/with_health.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
+#include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/projectiles/collision_groups.hpp>
 #include <sanguis/server/entities/projectiles/life_time.hpp>
 #include <sanguis/server/entities/projectiles/projectile.hpp>
 #include <sanguis/server/entities/property/initial_max.hpp>
 #include <sanguis/server/environment/load_context.hpp>
-#include <fcppt/assert/pre.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -51,7 +50,7 @@ sanguis::server::entities::projectiles::projectile::projectile(
 	sanguis::server::direction const _direction
 )
 :
-	sanguis::server::entities::base(),
+	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::body_velocity_combiner(),
 	sanguis::server::entities::with_body(
 		sanguis::server::entities::circle_from_dim(
@@ -127,10 +126,6 @@ sanguis::server::entities::projectiles::projectile::can_collide_with_body(
 	sanguis::server::entities::with_body const &_other
 ) const
 {
-	FCPPT_ASSERT_PRE(
-		_other.team() != this->team()
-	); // shouldn't happen for now!
-
 	return
 		!_other.dead()
 		&&

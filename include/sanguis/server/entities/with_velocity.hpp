@@ -64,7 +64,8 @@ private:
 	);
 
 	sanguis::server::speed const
-	initial_abs_speed() const;
+	initial_abs_speed() const
+	override;
 
 	sanguis::server::entities::property::changeable movement_speed_;
 

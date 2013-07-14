@@ -12,17 +12,17 @@
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/collision/group.hpp>
 #include <sanguis/server/collision/group_vector.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/circle_from_dim.hpp>
-#include <sanguis/server/entities/is_type.hpp>
 #include <sanguis/server/entities/nonsolid.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_links.hpp>
+#include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/pickups/optional_dim.hpp>
 #include <sanguis/server/entities/pickups/pickup.hpp>
 #include <sanguis/server/environment/load_context.hpp>
+#include <fcppt/try_dynamic_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
 #include <boost/logic/tribool.hpp>
@@ -47,7 +47,7 @@ sanguis::server::entities::pickups::pickup::pickup(
 	sanguis::server::entities::pickups::optional_dim const &_dim
 )
 :
-	sanguis::server::entities::base(),
+	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::with_body(
 		sanguis::server::entities::circle_from_dim(
 			_dim
@@ -102,14 +102,18 @@ sanguis::server::entities::pickups::pickup::can_collide_with_body(
 	sanguis::server::entities::with_body const &_body
 ) const
 {
+	FCPPT_TRY_DYNAMIC_CAST(
+		sanguis::server::entities::player const *,
+		player,
+		&_body
+	)
+	{
+		return
+			player->team() == this->team();
+	}
+
 	return
-		_body.team() == this->team()
-		&&
-		sanguis::server::entities::is_type<
-			sanguis::server::entities::player
-		>(
-			_body
-		);
+		false;
 }
 
 void

@@ -2,7 +2,6 @@
 #define SANGUIS_SERVER_ENTITIES_EXP_AREA_HPP_INCLUDED
 
 #include <sanguis/server/exp.hpp>
-#include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/collision/body_base_fwd.hpp>
 #include <sanguis/server/collision/ghost_base.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
@@ -48,10 +47,6 @@ private:
 	dead() const
 	override;
 
-	sanguis::server::team
-	team() const
-	override;
-
 	boost::logic::tribool const
 	can_collide_with(
 		sanguis::server::collision::body_base const &
@@ -61,12 +56,14 @@ private:
 	void
 	body_enter(
 		sanguis::server::collision::body_base &
-	);
+	)
+	override;
 
 	void
 	body_exit(
 		sanguis::server::collision::body_base &
-	);
+	)
+	override;
 
 	sanguis::server::exp const exp_;
 

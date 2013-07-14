@@ -41,7 +41,8 @@ private:
 	void
 	do_pickup(
 		sanguis::server::entities::base &receiver
-	);
+	)
+	override;
 
 	sanguis::diff_clock const &diff_clock_;
 

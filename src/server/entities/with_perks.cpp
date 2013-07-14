@@ -1,6 +1,7 @@
 #include <sanguis/perk_type.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_perks.hpp>
+#include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/perks/perk.hpp>
 #include <sanguis/server/perks/unique_ptr.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
@@ -48,6 +49,7 @@ sanguis::server::entities::with_perks::add_perk(
 sanguis::server::entities::with_perks::with_perks()
 :
 	sanguis::server::entities::base(),
+	sanguis::server::entities::ifaces::with_team(),
 	perks_()
 {
 }

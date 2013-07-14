@@ -12,6 +12,7 @@
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_links.hpp>
+#include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/pickups/optional_dim_fwd.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -31,6 +32,7 @@ namespace pickups
 
 class pickup
 :
+	public virtual sanguis::server::entities::ifaces::with_team,
 	public sanguis::server::entities::with_body,
 	public sanguis::server::entities::with_id,
 	public sanguis::server::entities::with_links

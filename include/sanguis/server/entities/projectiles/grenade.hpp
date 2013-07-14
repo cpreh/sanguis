@@ -47,18 +47,22 @@ private:
 	bool
 	on_transfer(
 		sanguis::server::entities::transfer_parameters const &
-	);
+	)
+	override;
 
 	void
 	do_damage(
 		sanguis::server::entities::with_health &
-	);
+	)
+	override;
 
 	void
-	on_update();
+	on_update()
+	override;
 
 	void
-	on_remove();
+	on_remove()
+	override;
 
 	sanguis::diff_clock const &diff_clock_;
 

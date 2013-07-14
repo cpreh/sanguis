@@ -65,10 +65,12 @@ protected:
 	~with_health();
 
 	void
-	on_update();
+	on_update()
+	override;
 private:
 	bool
-	dead() const;
+	dead() const
+	override;
 
 	void
 	max_health_change(

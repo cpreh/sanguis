@@ -26,6 +26,7 @@
 #include <sanguis/server/entities/with_perks.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
+#include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/perks/unique_ptr.hpp>
 #include <sanguis/server/perks/tree/object_fwd.hpp>
@@ -42,6 +43,7 @@ namespace entities
 
 class player
 :
+	public virtual sanguis::server::entities::ifaces::with_team,
 	private sanguis::server::entities::body_velocity_combiner,
 	public sanguis::server::entities::with_auras,
 	public sanguis::server::entities::with_body,
@@ -99,6 +101,10 @@ public:
 
 	sanguis::server::player_id const
 	player_id() const;
+
+	sanguis::server::team
+	team() const
+	override;
 private:
 	void
 	on_remove()
@@ -122,10 +128,6 @@ private:
 	add_message(
 		sanguis::server::player_id
 	) const
-	override;
-
-	sanguis::server::team
-	team() const
 	override;
 
 	void

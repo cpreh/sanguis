@@ -1,5 +1,4 @@
 #include <sanguis/server/radius.hpp>
-#include <sanguis/server/team.hpp>
 #include <sanguis/server/collision/body_base_fwd.hpp>
 #include <sanguis/server/collision/circle_ghost.hpp>
 #include <sanguis/server/collision/group.hpp>
@@ -99,12 +98,6 @@ bool
 sanguis::server::entities::exp_area::dead() const
 {
 	return true;
-}
-
-sanguis::server::team
-sanguis::server::entities::exp_area::team() const
-{
-	return sanguis::server::team::monsters; // FIXME
 }
 
 boost::logic::tribool const

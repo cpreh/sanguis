@@ -4,7 +4,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/server/radius.hpp>
-#include <sanguis/server/team.hpp>
+#include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/damage/array.hpp>
 #include <sanguis/server/entities/center_ghost.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
@@ -47,12 +47,6 @@ private:
 	bool
 	dead() const
 	override;
-
-	sanguis::server::team
-	team() const
-	override;
-
-	sanguis::server::team const team_;
 
 	sanguis::diff_timer life_timer_;
 };

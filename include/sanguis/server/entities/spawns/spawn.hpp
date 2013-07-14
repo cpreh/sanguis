@@ -5,7 +5,6 @@
 #include <sanguis/enemy_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
-#include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/spawns/size_type.hpp>
@@ -44,10 +43,7 @@ protected:
 		sanguis::enemy_type
 	);
 private:
-	sanguis::server::team
-	team() const
-	override;
-
+	// TODO: Get rid of this?
 	sanguis::server::center const
 	center() const
 	override;

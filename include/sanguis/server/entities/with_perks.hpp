@@ -3,6 +3,8 @@
 
 #include <sanguis/perk_type.hpp>
 #include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/with_perks_fwd.hpp>
+#include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/perks/perk_fwd.hpp>
 #include <sanguis/server/perks/unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -20,7 +22,8 @@ namespace entities
 
 class with_perks
 :
-	public virtual sanguis::server::entities::base
+	public virtual sanguis::server::entities::base,
+	public virtual sanguis::server::entities::ifaces::with_team
 {
 	FCPPT_NONCOPYABLE(
 		with_perks
@@ -36,7 +39,8 @@ protected:
 	~with_perks();
 
 	void
-	on_update();
+	on_update()
+	override;
 private:
 	typedef boost::ptr_map<
 		sanguis::perk_type,

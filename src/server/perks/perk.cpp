@@ -1,6 +1,6 @@
 #include <sanguis/perk_type.hpp>
 #include <sanguis/server/level.hpp>
-#include <sanguis/server/entities/base_fwd.hpp>
+#include <sanguis/server/entities/with_perks.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/perks/level_diff.hpp>
 #include <sanguis/server/perks/perk.hpp>
@@ -8,7 +8,7 @@
 
 void
 sanguis::server::perks::perk::update(
-	sanguis::server::entities::base &,
+	sanguis::server::entities::with_perks &,
 	sanguis::server::environment::object &
 )
 {
@@ -16,7 +16,7 @@ sanguis::server::perks::perk::update(
 
 void
 sanguis::server::perks::perk::raise_level(
-	sanguis::server::entities::base &_owner
+	sanguis::server::entities::with_perks &_owner
 )
 {
 	this->change(

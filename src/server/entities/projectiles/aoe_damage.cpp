@@ -27,9 +27,6 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 :
 	sanguis::server::entities::with_auras(),
 	sanguis::server::entities::center_ghost(),
-	team_(
-		_team
-	),
 	life_timer_(
 		sanguis::diff_timer::parameters(
 			_diff_clock,
@@ -70,12 +67,4 @@ sanguis::server::entities::projectiles::aoe_damage::dead() const
 {
 	return
 		life_timer_.expired();
-}
-
-sanguis::server::team
-sanguis::server::entities::projectiles::aoe_damage::team() const
-{
-	// TODO:
-	return
-		team_;
 }

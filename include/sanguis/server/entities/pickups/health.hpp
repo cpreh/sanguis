@@ -39,7 +39,8 @@ private:
 	void
 	do_pickup(
 		sanguis::server::entities::base &receiver
-	);
+	)
+	override;
 
 	sanguis::server::health const amount_;
 };

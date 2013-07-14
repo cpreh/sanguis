@@ -1,5 +1,5 @@
 #include <sanguis/perk_type.hpp>
-#include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/with_perks.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/property/linear_change.hpp>
 #include <sanguis/server/perks/change_simple.hpp>
@@ -21,7 +21,7 @@ sanguis::server::perks::ias::~ias()
 
 void
 sanguis::server::perks::ias::change(
-	sanguis::server::entities::base &_entity,
+	sanguis::server::entities::with_perks &_entity,
 	sanguis::server::perks::level_diff const _diff
 )
 {

@@ -8,6 +8,7 @@
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
+#include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/property/always_max.hpp>
 #include <sanguis/server/entities/property/to_float.hpp>
 #include <sanguis/server/entities/property/value.hpp>
@@ -34,6 +35,7 @@ sanguis::server::entities::with_weapon::with_weapon(
 	sanguis::server::entities::base(),
 	sanguis::server::entities::ifaces::with_angle(),
 	sanguis::server::entities::ifaces::with_id(),
+	sanguis::server::entities::ifaces::with_team(),
 	diff_clock_(
 		_diff_clock
 	),

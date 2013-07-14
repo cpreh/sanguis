@@ -8,6 +8,7 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
+#include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/property/always_max.hpp>
 #include <sanguis/server/entities/property/value.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
@@ -30,7 +31,8 @@ class with_weapon
 :
 	public virtual sanguis::server::entities::base,
 	public virtual sanguis::server::entities::ifaces::with_angle,
-	public virtual sanguis::server::entities::ifaces::with_id
+	public virtual sanguis::server::entities::ifaces::with_id,
+	public virtual sanguis::server::entities::ifaces::with_team
 {
 	FCPPT_NONCOPYABLE(
 		with_weapon
@@ -46,7 +48,8 @@ protected:
 
 	virtual
 	void
-	on_update();
+	on_update()
+	override;
 public:
 	void
 	change_weapon(

@@ -3,7 +3,7 @@
 
 #include <sanguis/perk_type.hpp>
 #include <sanguis/server/level.hpp>
-#include <sanguis/server/entities/base_fwd.hpp>
+#include <sanguis/server/entities/with_perks_fwd.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/perks/level_diff.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -25,13 +25,13 @@ public:
 	virtual
 	void
 	update(
-		sanguis::server::entities::base &,
+		sanguis::server::entities::with_perks &,
 		sanguis::server::environment::object &
 	);
 
 	void
 	raise_level(
-		sanguis::server::entities::base &
+		sanguis::server::entities::with_perks &
 	);
 
 	sanguis::perk_type
@@ -51,7 +51,7 @@ private:
 	virtual
 	void
 	change(
-		sanguis::server::entities::base &,
+		sanguis::server::entities::with_perks &,
 		sanguis::server::perks::level_diff
 	) = 0;
 

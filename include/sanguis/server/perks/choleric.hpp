@@ -6,7 +6,7 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
-#include <sanguis/server/entities/base_fwd.hpp>
+#include <sanguis/server/entities/with_perks_fwd.hpp>
 #include <sanguis/server/perks/perk.hpp>
 #include <sanguis/server/perks/level_diff.hpp>
 #include <fcppt/random/variate_decl.hpp>
@@ -39,13 +39,13 @@ public:
 private:
 	void
 	update(
-		sanguis::server::entities::base &,
+		sanguis::server::entities::with_perks &,
 		sanguis::server::environment::object &
 	);
 
 	void
 	change(
-		sanguis::server::entities::base &,
+		sanguis::server::entities::with_perks &,
 		sanguis::server::perks::level_diff
 	);
 

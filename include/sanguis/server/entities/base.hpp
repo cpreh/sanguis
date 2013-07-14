@@ -3,7 +3,6 @@
 
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
-#include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
@@ -63,12 +62,6 @@ public:
 	virtual
 	bool
 	dead() const = 0;
-
-	// type query
-
-	virtual
-	sanguis::server::team
-	team() const = 0;
 
 	virtual
 	~base();

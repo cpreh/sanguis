@@ -2,7 +2,6 @@
 #include <sanguis/enemy_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/center.hpp>
-#include <sanguis/server/team.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_links.hpp>
@@ -41,13 +40,6 @@ sanguis::server::entities::spawns::spawn::spawn(
 		_enemy_type
 	)
 {
-}
-
-sanguis::server::team
-sanguis::server::entities::spawns::spawn::team() const
-{
-	// TODO: This is not needed!
-	return sanguis::server::team::monsters;
 }
 
 sanguis::server::center const

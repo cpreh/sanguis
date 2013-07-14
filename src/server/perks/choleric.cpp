@@ -4,9 +4,9 @@
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/damage/unit.hpp>
-#include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/entities/with_perks.hpp>
 #include <sanguis/server/entities/projectiles/simple_bullet.hpp>
 #include <sanguis/server/entities/projectiles/rocket.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
@@ -67,7 +67,7 @@ sanguis::server::perks::choleric::~choleric()
 
 void
 sanguis::server::perks::choleric::update(
-	sanguis::server::entities::base &_entity,
+	sanguis::server::entities::with_perks &_entity,
 	sanguis::server::environment::object &_env
 )
 {
@@ -151,7 +151,7 @@ sanguis::server::perks::choleric::update(
 
 void
 sanguis::server::perks::choleric::change(
-	sanguis::server::entities::base &,
+	sanguis::server::entities::with_perks &,
 	sanguis::server::perks::level_diff
 )
 {

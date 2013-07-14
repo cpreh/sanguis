@@ -27,6 +27,7 @@
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/pickups/pickup.hpp>
+#include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/property/initial.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
@@ -49,6 +50,7 @@ sanguis::server::entities::friend_::friend_(
 	sanguis::server::weapons::unique_ptr &&_weapon
 )
 :
+	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::body_velocity_combiner(),
 	sanguis::server::entities::with_ai(
 		_diff_clock,

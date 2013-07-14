@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_PERKS_CHANGE_SIMPLE_HPP_INCLUDED
 
 #include <sanguis/server/perks/level_diff.hpp>
-#include <sanguis/server/entities/base_fwd.hpp>
+#include <sanguis/server/entities/with_perks_fwd.hpp>
 #include <sanguis/server/entities/property/value.hpp>
 
 
@@ -21,7 +21,7 @@ template<
 void
 change_simple(
 	ChangeFunction const &_change_function,
-	sanguis::server::entities::base &_entity,
+	sanguis::server::entities::with_perks &_entity,
 	ElemFunction const &_elem_function,
 	sanguis::server::entities::property::value const _factor,
 	sanguis::server::perks::level_diff const _diff

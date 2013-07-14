@@ -2,10 +2,10 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/ai/base.hpp>
 #include <sanguis/server/ai/create_function.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
+#include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/assert/pre.hpp>
@@ -21,7 +21,7 @@ sanguis::server::entities::with_ai::with_ai(
 	sanguis::server::weapons::unique_ptr &&_start_weapon
 )
 :
-	sanguis::server::entities::base(),
+	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::with_auras(),
 	sanguis::server::entities::with_weapon(
 		_diff_clock,

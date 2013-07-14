@@ -51,7 +51,8 @@ private:
 	sanguis::messages::unique_ptr
 	add_message(
 		sanguis::server::player_id
-	) const;
+	) const
+	override;
 
 	sanguis::aoe_projectile_type const type_;
 

@@ -20,6 +20,7 @@
 #include <sanguis/server/entities/with_health.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
+#include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -34,6 +35,7 @@ namespace entities
 
 class friend_
 :
+	public virtual sanguis::server::entities::ifaces::with_team,
 	private sanguis::server::entities::body_velocity_combiner,
 	public sanguis::server::entities::with_ai,
 	public sanguis::server::entities::with_body,
