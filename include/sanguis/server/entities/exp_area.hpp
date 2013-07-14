@@ -1,13 +1,13 @@
 #ifndef SANGUIS_SERVER_ENTITIES_EXP_AREA_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_EXP_AREA_HPP_INCLUDED
 
-#include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/collision/body_base_fwd.hpp>
 #include <sanguis/server/collision/ghost_base.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
+#include <sanguis/server/entities/center_ghost.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -25,8 +25,9 @@ namespace entities
 
 class exp_area
 :
-	public sanguis::server::entities::with_ghosts,
-	private sanguis::server::collision::ghost_base
+	public virtual sanguis::server::entities::with_ghosts,
+	private sanguis::server::collision::ghost_base,
+	private sanguis::server::entities::center_ghost
 {
 	FCPPT_NONCOPYABLE(
 		exp_area
@@ -49,10 +50,6 @@ private:
 
 	sanguis::server::team
 	team() const
-	override;
-
-	sanguis::server::center const
-	center() const
 	override;
 
 	boost::logic::tribool const

@@ -43,11 +43,13 @@ protected:
 	bool
 	on_transfer(
 		sanguis::server::entities::transfer_parameters const &
-	);
+	)
+	override;
 
 	virtual
 	void
-	on_destroy();
+	on_destroy()
+	override;
 
 	void
 	update_center(

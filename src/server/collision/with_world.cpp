@@ -12,40 +12,19 @@
 #include <sanguis/server/collision/optional_result.hpp>
 #include <sanguis/server/collision/result.hpp>
 #include <sanguis/server/collision/with_world.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/speed.hpp>
 #include <sanguis/server/entities/with_body.hpp>
-#include <fcppt/optional_dynamic_cast.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 
 
 sanguis::server::collision::optional_result const
 sanguis::server::collision::with_world(
-	sanguis::server::entities::base const &_base,
+	sanguis::server::entities::with_body const &_with_body,
 	sanguis::creator::grid const &_grid,
 	sanguis::duration const &_duration
 )
 {
-	typedef fcppt::optional<
-		sanguis::server::entities::with_body const &
-	> optional_with_body;
-
-	optional_with_body const with_body(
-		fcppt::optional_dynamic_cast<
-			sanguis::server::entities::with_body const &
-		>(
-			_base
-		)
-	);
-
-	if(
-		!with_body
-	)
-		return
-			sanguis::server::collision::optional_result();
-
 	sanguis::server::space_unit const pixels_per_meter(
 		static_cast<
 			sanguis::server::space_unit
@@ -57,20 +36,20 @@ sanguis::server::collision::with_world(
 	sanguis::collision::optional_result const result(
 		sanguis::collision::test_move(
 			sanguis::collision::center(
-				with_body->center().get()
+				_with_body.center().get()
 				*
 				pixels_per_meter
 			),
 			fcppt::math::dim::fill<
 				sanguis::collision::dim2::dim_wrapper::value
 			>(
-				with_body->radius().get()
+				_with_body.radius().get()
 				*
 				pixels_per_meter
 			),
 			sanguis::collision::speed(
 				sanguis::server::entities::speed(
-					*with_body
+					_with_body
 				).get()
 				*
 				pixels_per_meter

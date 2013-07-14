@@ -1,11 +1,11 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration.hpp>
-#include <sanguis/server/center.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/burn.hpp>
 #include <sanguis/server/damage/array.hpp>
+#include <sanguis/server/entities/center_ghost.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
 #include <sanguis/server/entities/projectiles/aoe_damage.hpp>
 #include <sanguis/server/entities/projectiles/damage_per_pulse.hpp>
@@ -26,6 +26,7 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 )
 :
 	sanguis::server::entities::with_auras(),
+	sanguis::server::entities::center_ghost(),
 	team_(
 		_team
 	),
@@ -62,16 +63,6 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 
 sanguis::server::entities::projectiles::aoe_damage::~aoe_damage()
 {
-}
-
-sanguis::server::center const
-sanguis::server::entities::projectiles::aoe_damage::center() const
-{
-	// TODO
-	return
-		sanguis::server::center(
-			sanguis::server::center::value_type::null()
-		);
 }
 
 bool

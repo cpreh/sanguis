@@ -4,7 +4,7 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/collision/optional_result_fwd.hpp>
-#include <sanguis/server/entities/base_fwd.hpp>
+#include <sanguis/server/entities/with_body_fwd.hpp>
 
 
 namespace sanguis
@@ -16,7 +16,7 @@ namespace collision
 
 sanguis::server::collision::optional_result const
 with_world(
-	sanguis::server::entities::base const &,
+	sanguis::server::entities::with_body const &,
 	sanguis::creator::grid const &,
 	sanguis::duration const &
 );

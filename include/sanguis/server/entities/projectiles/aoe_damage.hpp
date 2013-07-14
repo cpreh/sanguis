@@ -3,14 +3,14 @@
 
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
-#include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/damage/array.hpp>
+#include <sanguis/server/entities/center_ghost.hpp>
+#include <sanguis/server/entities/with_auras.hpp>
 #include <sanguis/server/entities/projectiles/damage_per_pulse.hpp>
 #include <sanguis/server/entities/projectiles/pulse_time.hpp>
 #include <sanguis/server/entities/projectiles/pulses.hpp>
-#include <sanguis/server/entities/with_auras.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -25,7 +25,8 @@ namespace projectiles
 
 class aoe_damage
 :
-	public sanguis::server::entities::with_auras
+	public sanguis::server::entities::with_auras,
+	private sanguis::server::entities::center_ghost
 {
 	FCPPT_NONCOPYABLE(
 		aoe_damage
@@ -43,10 +44,6 @@ public:
 
 	~aoe_damage();
 private:
-	sanguis::server::center const
-	center() const
-	override;
-
 	bool
 	dead() const
 	override;

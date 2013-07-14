@@ -1,5 +1,4 @@
 #include <sanguis/creator/grid_fwd.hpp>
-#include <sanguis/server/collision/result_fwd.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
@@ -49,13 +48,6 @@ sanguis::server::entities::base::transfer(
 		this->on_create();
 
 	return true;
-}
-
-void
-sanguis::server::entities::base::world_collision(
-	sanguis::server::collision::result const &
-)
-{
 }
 
 void

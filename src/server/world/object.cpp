@@ -46,6 +46,7 @@
 #include <sanguis/server/entities/optional_base_ref.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/entities/with_health.hpp>
@@ -848,18 +849,25 @@ sanguis::server::world::object::entity_collision(
 	sanguis::server::entities::base &_entity
 )
 {
-	sanguis::server::collision::optional_result const result(
-		sanguis::server::collision::with_world(
-			_entity,
-			grid_,
-			_duration
-		)
-	);
-
-	if(
-		result
+	FCPPT_TRY_DYNAMIC_CAST(
+		sanguis::server::entities::with_body *,
+		with_body,
+		&_entity
 	)
-		_entity.world_collision(
-			*result
+	{
+		sanguis::server::collision::optional_result const result(
+			sanguis::server::collision::with_world(
+				*with_body,
+				grid_,
+				_duration
+			)
 		);
+
+		if(
+			result
+		)
+			with_body->world_collision(
+				*result
+			);
+	}
 }

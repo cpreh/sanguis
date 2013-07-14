@@ -671,7 +671,9 @@ SET(
 	include/sanguis/server/collision/body_fwd.hpp
 	include/sanguis/server/collision/circle_ghost.hpp
 	include/sanguis/server/collision/create_circle.hpp
-	include/sanguis/server/collision/distance.hpp
+	include/sanguis/server/collision/distance_entity_entity.hpp
+	include/sanguis/server/collision/distance_entity_pos.hpp
+	include/sanguis/server/collision/distance_pos_pos.hpp
 	include/sanguis/server/collision/from_sge_user_data.hpp
 	include/sanguis/server/collision/from_sge_vector.hpp
 	include/sanguis/server/collision/ghost.hpp
@@ -736,6 +738,8 @@ SET(
 	include/sanguis/server/entities/body_parameters.hpp
 	include/sanguis/server/entities/body_parameters_fwd.hpp
 	include/sanguis/server/entities/body_velocity_combiner.hpp
+	include/sanguis/server/entities/center_ghost.hpp
+	include/sanguis/server/entities/center_simple.hpp
 	include/sanguis/server/entities/circle_from_dim.hpp
 	include/sanguis/server/entities/default_solid.hpp
 	include/sanguis/server/entities/enemies/create.hpp
@@ -1296,7 +1300,9 @@ SET(
 	src/server/collision/body_collision.cpp
 	src/server/collision/circle_ghost.cpp
 	src/server/collision/create_circle.cpp
-	src/server/collision/distance.cpp
+	src/server/collision/distance_entity_entity.cpp
+	src/server/collision/distance_entity_pos.cpp
+	src/server/collision/distance_pos_pos.cpp
 	src/server/collision/from_sge_user_data.cpp
 	src/server/collision/from_sge_vector.cpp
 	src/server/collision/ghost.cpp
@@ -1329,6 +1335,8 @@ SET(
 	src/server/entities/base.cpp
 	src/server/entities/body_parameters.cpp
 	src/server/entities/body_velocity_combiner.cpp
+	src/server/entities/center_ghost.cpp
+	src/server/entities/center_simple.cpp
 	src/server/entities/circle_from_dim.cpp
 	src/server/entities/default_solid.cpp
 	src/server/entities/enemies/create.cpp

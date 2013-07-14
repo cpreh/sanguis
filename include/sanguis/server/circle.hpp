@@ -4,13 +4,14 @@
 #include <sanguis/server/space_unit.hpp>
 #include <fcppt/math/sphere/circle.hpp>
 
+
 namespace sanguis
 {
 namespace server
 {
 
 typedef fcppt::math::sphere::circle<
-	space_unit
+	sanguis::server::space_unit
 >::type circle;
 
 }

@@ -4,7 +4,6 @@
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/team_fwd.hpp>
-#include <sanguis/server/collision/result_fwd.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
@@ -38,12 +37,6 @@ public:
 		sanguis::creator::grid const &
 	);
 
-	virtual
-	void
-	world_collision(
-		sanguis::server::collision::result const &
-	);
-
 	void
 	update();
 
@@ -67,9 +60,7 @@ public:
 	bool
 	has_environment() const;
 
-
-	// position and size functions
-
+	// position
 	virtual
 	sanguis::server::center const
 	center() const = 0;

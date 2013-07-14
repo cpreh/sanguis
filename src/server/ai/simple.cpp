@@ -8,7 +8,7 @@
 #include <sanguis/server/ai/simple.hpp>
 #include <sanguis/server/ai/search_new_target.hpp>
 #include <sanguis/server/auras/aggro.hpp>
-#include <sanguis/server/collision/distance.hpp>
+#include <sanguis/server/collision/distance_entity_entity.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_body.hpp>
@@ -151,7 +151,7 @@ sanguis::server::ai::simple::update()
 	);
 
 	sanguis::server::space_unit const distance(
-		sanguis::server::collision::distance(
+		sanguis::server::collision::distance_entity_entity(
 			*target_,
 			me_
 		)
@@ -273,11 +273,13 @@ sanguis::server::ai::simple::target_enters(
 	// nothing
 	if(
 		target_
-		&& sanguis::server::collision::distance(
+		&&
+		sanguis::server::collision::distance_entity_entity(
 			*target_,
 			me_
 		)
-		> sanguis::server::collision::distance(
+		>
+		sanguis::server::collision::distance_entity_entity(
 			_new_target,
 			me_
 		)

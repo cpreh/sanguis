@@ -27,7 +27,7 @@ public:
 	angle() const = 0;
 
 	virtual
-	~with_angle();
+	~with_angle() = 0;
 };
 
 }

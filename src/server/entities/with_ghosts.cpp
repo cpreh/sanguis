@@ -44,18 +44,20 @@ sanguis::server::entities::with_ghosts::add_ghost(
 		)
 	);
 
-	ghosts_.back().center(
-		this->center()
-	);
-
 	if(
 		this->has_environment()
 	)
+	{
+		ghosts_.back().center(
+			this->center()
+		);
+
 		this->insert_ghost(
 			ghosts_.back(),
 			this->environment().collision_world(),
 			this->environment().global_collision_groups()
 		);
+	}
 }
 
 bool

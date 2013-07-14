@@ -7,7 +7,7 @@
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/vector.hpp>
-#include <sanguis/server/collision/distance.hpp>
+#include <sanguis/server/collision/distance_pos_pos.hpp>
 #include <sanguis/server/damage/fire.hpp>
 #include <sanguis/server/damage/list.hpp>
 #include <sanguis/server/damage/meta.hpp>
@@ -96,7 +96,7 @@ sanguis::server::entities::projectiles::grenade::on_transfer(
 		std::min(
 			this->movement_speed().max(),
 			sanguis::server::entities::property::from_float(
-				sanguis::server::collision::distance(
+				sanguis::server::collision::distance_pos_pos(
 					_param.center().get(),
 					dest_
 				)

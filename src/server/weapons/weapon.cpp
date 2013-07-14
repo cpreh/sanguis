@@ -2,7 +2,7 @@
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/vector_fwd.hpp>
-#include <sanguis/server/collision/distance.hpp>
+#include <sanguis/server/collision/distance_entity_pos.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
@@ -192,7 +192,7 @@ sanguis::server::weapons::weapon::in_range(
 ) const
 {
 	return
-		sanguis::server::collision::distance(
+		sanguis::server::collision::distance_entity_pos(
 			_from,
 			_to
 		)

@@ -4,7 +4,7 @@
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_health.hpp>
-#include <sanguis/server/collision/distance.hpp>
+#include <sanguis/server/collision/distance_entity_entity.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <limits>
 #include <fcppt/config/external_end.hpp>
@@ -31,7 +31,7 @@ sanguis::server::ai::search_new_target(
 	)
 	{
 		sanguis::server::space_unit const new_distance(
-			sanguis::server::collision::distance(
+			sanguis::server::collision::distance_entity_entity(
 				_me,
 				*entity
 			)

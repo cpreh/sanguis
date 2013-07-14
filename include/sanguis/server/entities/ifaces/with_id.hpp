@@ -21,13 +21,13 @@ class with_id
 	);
 protected:
 	with_id();
-
-	virtual
-	~with_id() = 0;
 public:
 	virtual
 	sanguis::entity_id const
 	id() const = 0;
+
+	virtual
+	~with_id() = 0;
 };
 
 }
