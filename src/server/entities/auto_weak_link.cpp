@@ -1,5 +1,5 @@
 #include <sanguis/server/entities/auto_weak_link.hpp>
-#include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/with_links.hpp>
 #include <fcppt/assert/pre.hpp>
 
 
@@ -12,7 +12,7 @@ sanguis::server::entities::auto_weak_link::auto_weak_link()
 }
 
 sanguis::server::entities::auto_weak_link::auto_weak_link(
-	sanguis::server::entities::base &_ref
+	sanguis::server::entities::with_links &_ref
 )
 :
 	ref_(
@@ -72,19 +72,19 @@ sanguis::server::entities::auto_weak_link::unlink()
 	ref_ = 0;
 }
 
-sanguis::server::entities::base &
+sanguis::server::entities::with_links &
 sanguis::server::entities::auto_weak_link::operator*() const
 {
 	return this->checked_ref();
 }
 
-sanguis::server::entities::base *
+sanguis::server::entities::with_links *
 sanguis::server::entities::auto_weak_link::operator->() const
 {
 	return this->get();
 }
 
-sanguis::server::entities::base *
+sanguis::server::entities::with_links *
 sanguis::server::entities::auto_weak_link::get() const
 {
 	return &this->checked_ref();
@@ -95,7 +95,7 @@ sanguis::server::entities::auto_weak_link::operator bool() const
 	return this->is_linked();
 }
 
-sanguis::server::entities::base &
+sanguis::server::entities::with_links &
 sanguis::server::entities::auto_weak_link::checked_ref() const
 {
 	FCPPT_ASSERT_PRE(

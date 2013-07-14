@@ -35,6 +35,7 @@
 #include <sanguis/server/entities/with_buffs.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_health.hpp>
+#include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/with_perks.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
@@ -92,6 +93,7 @@ sanguis::server::entities::player::player(
 		_health,
 		_armor
 	),
+	sanguis::server::entities::with_links(),
 	sanguis::server::entities::with_perks(),
 	sanguis::server::entities::with_velocity(
 		sanguis::server::entities::property::initial(

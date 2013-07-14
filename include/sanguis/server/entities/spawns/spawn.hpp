@@ -7,6 +7,7 @@
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/spawns/size_type.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -22,7 +23,8 @@ namespace spawns
 
 class spawn
 :
-	public virtual sanguis::server::entities::base
+	public virtual sanguis::server::entities::base,
+	public sanguis::server::entities::with_links
 {
 	FCPPT_NONCOPYABLE(
 		spawn

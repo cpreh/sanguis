@@ -8,6 +8,7 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_health.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
+#include <sanguis/server/entities/ifaces/with_links.hpp>
 #include <sanguis/server/entities/property/add.hpp>
 #include <sanguis/server/entities/property/always_max.hpp>
 #include <sanguis/server/entities/property/changeable.hpp>
@@ -98,6 +99,7 @@ sanguis::server::entities::with_health::with_health(
 :
 	sanguis::server::entities::base(),
 	sanguis::server::entities::ifaces::with_id(),
+	sanguis::server::entities::ifaces::with_links(),
 	armor_(
 		_armor
 	),

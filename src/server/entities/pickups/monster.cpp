@@ -13,6 +13,7 @@
 #include <sanguis/server/entities/friend.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
+#include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/pickups/monster.hpp>
 #include <sanguis/server/entities/pickups/optional_dim.hpp>
 #include <sanguis/server/entities/pickups/pickup.hpp>
@@ -79,7 +80,11 @@ sanguis::server::entities::pickups::monster::do_pickup(
 			sanguis::server::ai::create_simple(
 				diff_clock_,
 				random_generator_,
-				_receiver.link()
+				dynamic_cast<
+					sanguis::server::entities::with_links &
+				>(
+					_receiver
+				).link()
 			),
 			fcppt::make_unique_ptr<
 				sanguis::server::weapons::melee

@@ -4,10 +4,8 @@
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/team_fwd.hpp>
-#include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
-#include <sanguis/server/entities/link_container.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -45,12 +43,6 @@ public:
 
 	void
 	destroy();
-
-	// linking with other objects
-
-	sanguis::server::entities::auto_weak_link const
-	link();
-
 
 	// environment query function // TODO: should this be public?
 
@@ -103,16 +95,7 @@ private:
 		sanguis::server::entities::transfer_parameters const &
 	);
 
-	friend class sanguis::server::entities::auto_weak_link;
-
-	void
-	insert_link(
-		sanguis::server::entities::auto_weak_link &
-	);
-
 	sanguis::server::environment::object *environment_;
-
-	sanguis::server::entities::link_container links_;
 };
 
 }

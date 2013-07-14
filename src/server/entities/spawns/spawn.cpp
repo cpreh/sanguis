@@ -5,6 +5,7 @@
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/enemies/spawn_owner.hpp>
 #include <sanguis/server/entities/spawns/size_type.hpp>
 #include <sanguis/server/entities/spawns/spawn.hpp>
@@ -29,6 +30,7 @@ sanguis::server::entities::spawns::spawn::spawn(
 )
 :
 	sanguis::server::entities::base(),
+	sanguis::server::entities::with_links(),
 	diff_clock_(
 		_diff_clock
 	),

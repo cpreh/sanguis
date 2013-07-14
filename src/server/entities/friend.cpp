@@ -24,6 +24,7 @@
 #include <sanguis/server/entities/with_buffs.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_health.hpp>
+#include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/pickups/pickup.hpp>
 #include <sanguis/server/entities/property/initial.hpp>
@@ -78,6 +79,7 @@ sanguis::server::entities::friend_::friend_(
 		_health,
 		_armor
 	),
+	sanguis::server::entities::with_links(),
 	sanguis::server::entities::with_velocity(
 		sanguis::server::entities::property::initial(
 			sanguis::server::entities::property::initial::base(

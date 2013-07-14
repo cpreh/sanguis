@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_AUTO_WEAK_LINK_HPP_INCLUDED
 
 #include <sanguis/server/entities/auto_weak_hook.hpp>
-#include <sanguis/server/entities/base_fwd.hpp>
+#include <sanguis/server/entities/with_links_fwd.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -27,7 +27,7 @@ public:
 
 	explicit
 	auto_weak_link(
-		sanguis::server::entities::base &ref
+		sanguis::server::entities::with_links &ref
 	);
 
 	auto_weak_link(
@@ -44,25 +44,25 @@ public:
 	void
 	unlink();
 
-	sanguis::server::entities::base &
+	sanguis::server::entities::with_links &
 	operator*() const;
 
-	sanguis::server::entities::base *
+	sanguis::server::entities::with_links *
 	operator->() const;
 
-	sanguis::server::entities::base *
+	sanguis::server::entities::with_links *
 	get() const;
 
 	explicit
 	operator bool() const;
 private:
-	sanguis::server::entities::base &
+	sanguis::server::entities::with_links &
 	checked_ref() const;
 
 	void
 	add_me();
 
-	sanguis::server::entities::base *ref_;
+	sanguis::server::entities::with_links *ref_;
 };
 
 FCPPT_PP_POP_WARNING

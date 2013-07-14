@@ -14,6 +14,7 @@
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/ifaces/with_body.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
+#include <sanguis/server/entities/ifaces/with_links.hpp>
 #include <sanguis/server/collision/body_base.hpp>
 #include <sanguis/server/collision/body_fwd.hpp>
 #include <sge/projectile/body/scoped_fwd.hpp>
@@ -37,6 +38,7 @@ class with_body
 	protected virtual sanguis::server::entities::ifaces::with_body,
 	public virtual sanguis::server::entities::ifaces::with_angle,
 	public virtual sanguis::server::entities::ifaces::with_id,
+	public virtual sanguis::server::entities::ifaces::with_links,
 	public sanguis::server::collision::body_base
 {
 	FCPPT_NONCOPYABLE(

@@ -21,6 +21,7 @@
 #include <sanguis/server/entities/nonsolid.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_health.hpp>
+#include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/projectiles/collision_groups.hpp>
 #include <sanguis/server/entities/projectiles/life_time.hpp>
@@ -63,6 +64,7 @@ sanguis::server::entities::projectiles::projectile::projectile(
 	sanguis::server::entities::with_id(
 		_load_context.next_id()
 	),
+	sanguis::server::entities::with_links(),
 	sanguis::server::entities::with_velocity(
 		sanguis::server::entities::property::initial_max(
 			_movement_speed.get()

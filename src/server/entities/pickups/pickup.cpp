@@ -19,6 +19,7 @@
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_id.hpp>
+#include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/pickups/optional_dim.hpp>
 #include <sanguis/server/entities/pickups/pickup.hpp>
 #include <sanguis/server/environment/load_context.hpp>
@@ -66,6 +67,7 @@ sanguis::server::entities::pickups::pickup::pickup(
 	sanguis::server::entities::with_id(
 		_load_context.next_id()
 	),
+	sanguis::server::entities::with_links(),
 	team_(
 		_team
 	),

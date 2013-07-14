@@ -18,6 +18,7 @@
 #include <sanguis/server/entities/with_buffs.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_health.hpp>
+#include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/enemies/spawn_owner.hpp>
@@ -43,6 +44,7 @@ class enemy
 	public sanguis::server::entities::with_buffs,
 	public sanguis::server::entities::with_id,
 	public sanguis::server::entities::with_health,
+	public sanguis::server::entities::with_links,
 	public sanguis::server::entities::with_velocity
 {
 	FCPPT_NONCOPYABLE(

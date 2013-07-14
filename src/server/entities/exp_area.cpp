@@ -125,9 +125,9 @@ sanguis::server::entities::exp_area::body_enter(
 	sanguis::server::collision::body_base &_body
 )
 {
-	sanguis::server::entities::base &entity(
+	sanguis::server::entities::player &entity(
 		dynamic_cast<
-			sanguis::server::entities::base &
+			sanguis::server::entities::player &
 		>(
 			_body
 		)
@@ -148,7 +148,7 @@ sanguis::server::entities::exp_area::body_exit(
 {
 	player_links_.erase(
 		dynamic_cast<
-			sanguis::server::entities::base *
+			sanguis::server::entities::player *
 		>(
 			&_body
 		)

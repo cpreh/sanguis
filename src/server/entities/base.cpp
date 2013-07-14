@@ -1,5 +1,4 @@
 #include <sanguis/creator/grid_fwd.hpp>
-#include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
@@ -11,8 +10,7 @@ sanguis::server::entities::base::base()
 :
 	environment_(
 		nullptr
-	),
-	links_()
+	)
 {
 }
 
@@ -68,15 +66,6 @@ sanguis::server::entities::base::destroy()
 	this->on_destroy();
 }
 
-sanguis::server::entities::auto_weak_link const
-sanguis::server::entities::base::link()
-{
-	return
-		sanguis::server::entities::auto_weak_link(
-			*this
-		);
-}
-
 sanguis::server::environment::object &
 sanguis::server::entities::base::environment() const
 {
@@ -124,14 +113,4 @@ sanguis::server::entities::base::on_transfer(
 )
 {
 	return true;
-}
-
-void
-sanguis::server::entities::base::insert_link(
-	sanguis::server::entities::auto_weak_link &_link
-)
-{
-	links_.push_back(
-		_link
-	);
 }

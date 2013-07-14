@@ -16,6 +16,7 @@
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_health_fwd.hpp>
+#include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/projectiles/life_time.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
@@ -39,6 +40,7 @@ class projectile
 	private sanguis::server::entities::body_velocity_combiner,
 	public sanguis::server::entities::with_body,
 	public sanguis::server::entities::with_id,
+	public sanguis::server::entities::with_links,
 	public sanguis::server::entities::with_velocity
 {
 	FCPPT_NONCOPYABLE(

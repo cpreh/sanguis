@@ -13,6 +13,7 @@
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_health.hpp>
+#include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/property/changeable_fwd.hpp>
 #include <sanguis/server/entities/property/current_to_max.hpp>

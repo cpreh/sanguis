@@ -6,8 +6,8 @@
 #include <sanguis/server/collision/body_base_fwd.hpp>
 #include <sanguis/server/collision/ghost_base.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
-#include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/center_ghost.hpp>
+#include <sanguis/server/entities/player_fwd.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -72,7 +72,7 @@ private:
 
 	typedef
 	std::unordered_map<
-		sanguis::server::entities::base *,
+		sanguis::server::entities::player *,
 		sanguis::server::entities::auto_weak_link
 	> weak_link_map;
 

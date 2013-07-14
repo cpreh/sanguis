@@ -17,6 +17,7 @@
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/ifaces/with_body.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
+#include <sanguis/server/entities/ifaces/with_links.hpp>
 #include <sge/projectile/world.hpp>
 #include <sge/projectile/body/scoped.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -36,6 +37,7 @@ sanguis::server::entities::with_body::with_body(
 	sanguis::server::entities::ifaces::with_body(),
 	sanguis::server::entities::ifaces::with_angle(),
 	sanguis::server::entities::ifaces::with_id(),
+	sanguis::server::entities::ifaces::with_links(),
 	sanguis::server::collision::body_base(),
 	radius_(
 		_params.radius()

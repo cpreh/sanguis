@@ -752,6 +752,7 @@ SET(
 	include/sanguis/server/entities/ifaces/with_angle.hpp
 	include/sanguis/server/entities/ifaces/with_body.hpp
 	include/sanguis/server/entities/ifaces/with_id.hpp
+	include/sanguis/server/entities/ifaces/with_links.hpp
 	include/sanguis/server/entities/ifaces/with_velocity.hpp
 	include/sanguis/server/entities/insert_parameters.hpp
 	include/sanguis/server/entities/insert_parameters_center.hpp
@@ -835,6 +836,8 @@ SET(
 	include/sanguis/server/entities/with_id.hpp
 	include/sanguis/server/entities/with_id_fwd.hpp
 	include/sanguis/server/entities/with_id_unique_ptr.hpp
+	include/sanguis/server/entities/with_links.hpp
+	include/sanguis/server/entities/with_links_fwd.hpp
 	include/sanguis/server/entities/with_perks.hpp
 	include/sanguis/server/entities/with_velocity.hpp
 	include/sanguis/server/entities/with_velocity_fwd.hpp
@@ -1346,6 +1349,7 @@ SET(
 	src/server/entities/ifaces/with_angle.cpp
 	src/server/entities/ifaces/with_body.cpp
 	src/server/entities/ifaces/with_id.cpp
+	src/server/entities/ifaces/with_links.cpp
 	src/server/entities/ifaces/with_velocity.cpp
 	src/server/entities/insert_parameters.cpp
 	src/server/entities/insert_parameters_center.cpp
@@ -1389,6 +1393,7 @@ SET(
 	src/server/entities/with_ghosts.cpp
 	src/server/entities/with_health.cpp
 	src/server/entities/with_id.cpp
+	src/server/entities/with_links.cpp
 	src/server/entities/with_perks.cpp
 	src/server/entities/with_velocity.cpp
 	src/server/entities/with_weapon.cpp
