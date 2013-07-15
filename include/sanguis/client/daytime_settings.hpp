@@ -4,12 +4,13 @@
 #include <sanguis/client/daytime_settings_fwd.hpp>
 #include <sge/console/object_fwd.hpp>
 #include <sge/console/arg_list.hpp>
-#include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/system_clocks.hpp>
 #include <ctime>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -74,7 +75,8 @@ private:
 		sge::console::object &
 	);
 
-	static time_point const
+	static
+	time_point const
 	now();
 
 	time_point time_begin_;
