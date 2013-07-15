@@ -23,6 +23,7 @@
 #include <functional>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace
 {
 
@@ -70,7 +71,7 @@ BOOST_FUSION_ADAPT_STRUCT(
 	(int, tm_mday)
 	(int, tm_mon)
 	(int, tm_year)
-	(int, tm_mday)
+	(int, tm_wday)
 	(int, tm_yday)
 	(int, tm_isdst)
 )
@@ -82,7 +83,9 @@ sanguis::client::daytime_settings::daytime_settings(
 	time_begin_(
 		daytime_settings::now()
 	),
-	speedup_(1),
+	speedup_(
+		1
+	),
 	day_con_(
 		_console.insert(
 			sge::console::callback::parameters(
@@ -172,7 +175,8 @@ sanguis::client::daytime_settings::daytime_settings(
 				SGE_FONT_LIT("Resets to the current time.")
 			)
 		)
-	)
+	),
+	current_time_()
 {
 	boost::fusion::for_each(
 		current_time_,
