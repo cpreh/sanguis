@@ -104,7 +104,6 @@ sanguis::load::tiles::set::set(
 			<<
 			FCPPT_TEXT(" has no default orientation.")
 		);
-
 }
 
 sanguis::load::tiles::set::~set()

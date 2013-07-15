@@ -13,7 +13,7 @@ sge::texture::const_part_shared_ptr
 sanguis::client::draw2d::scene::world::to_tile_texture(
 	sanguis::load::tiles::context &_tiles,
 	sanguis::creator::grid const &_grid,
-	sanguis::creator::pos const &_pos
+	sanguis::creator::pos const _pos
 )
 {
 	sanguis::creator::tile const tile(

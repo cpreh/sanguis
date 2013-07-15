@@ -22,7 +22,7 @@ sge::texture::const_part_shared_ptr
 to_tile_texture(
 	sanguis::load::tiles::context &,
 	sanguis::creator::grid const &,
-	sanguis::creator::pos const &
+	sanguis::creator::pos
 );
 
 }
