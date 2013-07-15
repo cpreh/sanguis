@@ -12,6 +12,7 @@
 #include <sanguis/creator/aux/randgen.hpp>
 #include <sanguis/creator/aux/result.hpp>
 #include <sanguis/creator/aux/generators/maze.hpp>
+#include <fcppt/assert/error.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/append.hpp>
@@ -22,8 +23,27 @@
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <vector>
+#include <iostream>
+#include <ostream>
 #include <fcppt/config/external_end.hpp>
 
+namespace
+{
+
+/**
+ * Coordinates of a point on the perimeter of a rectangle ((0,0),(w,h)),
+ * excluding the corners.
+ * The order of traversal is as follows. Example: (w = 4, h = 3)
+ * x 0 1 x
+ * 5     2
+ * x 4 3 x
+ */
+sanguis::creator::grid::pos
+perimeter_to_coords(
+	sanguis::creator::grid::dim const &,
+	unsigned const &);
+
+}
 
 // this is a maze generator that follows the algorithm described at
 // http://en.wikipedia.org/w/index.php?title=Maze_generation_algorithm&oldid=550777074#Randomized_Prim.27s_algorithm
@@ -74,6 +94,34 @@ sanguis::creator::aux::generators::maze(
 		)
 	);
 
+	// add entry and exit points to the maze,
+	// which obviously have to lie on the perimeter.
+	sanguis::creator::opening_container openings;
+
+	unsigned const perimeter_length =
+		static_cast<unsigned>(
+			2 * (ret.size().w() - 2) +
+			2 * (ret.size().h() - 2));
+
+	unsigned const opening_count =
+		_parameters.opening_count().get();
+
+	for (
+		unsigned o = 0u;
+		o < opening_count;
+		o++
+	)
+	{
+		unsigned const t =
+			o * (perimeter_length / opening_count);
+		auto coords = perimeter_to_coords(ret.size(), t);
+		std::cerr << coords.x() << " " << coords.y() << std::endl;
+		openings.push_back(
+			sanguis::creator::opening(
+				coords
+				));
+	}
+
 	// random starting position for maze generation,
 	// has to be on tiles that satisfy
 	// x % 2 == 1 && y % 2 == 1
@@ -81,36 +129,6 @@ sanguis::creator::aux::generators::maze(
 		(w_dist(_parameters.randgen()) / 2) * 2 + 1,
 		(h_dist(_parameters.randgen()) / 2) * 2 + 1
 	);
-
-	// add entry and exit points to the maze,
-	// which obviously have to lie on the perimeter,
-	// hard-coded for now.
-	// TODO: add parameters for these
-	sanguis::creator::opening_container const openings{
-		sanguis::creator::opening(
-			sanguis::creator::grid::pos(
-				1,
-				0
-			)
-		),
-		sanguis::creator::opening(
-			sanguis::creator::grid::pos(
-				ret.size().w() - 1,
-				ret.size().h() - 2
-			)
-		)
-	};
-
-	for(
-		auto const opening
-		:
-		openings
-	)
-		ret[
-			opening.get()
-		]
-		=
-		sanguis::creator::tile::nothing;
 
 	// initialize grid with empty cells every other row and column,
 	// surrounded on all sides by walls
@@ -215,9 +233,60 @@ sanguis::creator::aux::generators::maze(
 		);
 	}
 
+	for(
+		auto const opening
+		:
+		openings
+	)
+		ret[
+			opening.get()
+		]
+		=
+		sanguis::creator::tile::nothing;
+
 	return
 		sanguis::creator::aux::result(
 			ret,
 			openings
 		);
+}
+
+namespace
+{
+sanguis::creator::grid::pos
+perimeter_to_coords(
+	sanguis::creator::grid::dim const &_dim,
+	unsigned const &_t)
+{
+	unsigned w2 = static_cast<unsigned>(_dim.w() - 2);
+	unsigned h2 = static_cast<unsigned>(_dim.h() - 2);
+
+	FCPPT_ASSERT_ERROR(
+		w2 > 0);
+
+	FCPPT_ASSERT_ERROR(
+		h2 > 0);
+
+	FCPPT_ASSERT_ERROR(
+		_t < 2 * w2 + 2 * h2);
+
+	if (_t < w2)
+		return sanguis::creator::grid::pos(
+			_t + 1,
+			0);
+
+	if (_t < w2 + h2)
+		return sanguis::creator::grid::pos(
+			w2 + 1,
+			_t - w2 + 1);
+
+	if (_t < 2 * w2 + h2)
+		return sanguis::creator::grid::pos(
+			w2 - (_t - w2 - h2),
+			h2 + 1);
+
+	return sanguis::creator::grid::pos(
+		0,
+		h2 - (_t - 2 * w2 - h2));
+}
 }
