@@ -9,7 +9,6 @@
 #include <sanguis/creator/aux/generators/lines.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/assign/make_container.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <map>
 #include <utility>
@@ -30,26 +29,20 @@ typedef std::map<
 	generator_function
 > generator_map;
 
-generator_map const generators(
-	fcppt::assign::make_container<
-		generator_map
-	>(
-		std::make_pair(
-			sanguis::creator::name(
-				FCPPT_TEXT("maze")
-			),
-			&sanguis::creator::aux::generators::maze
-		)
+generator_map const generators{
+	std::make_pair(
+		sanguis::creator::name(
+			FCPPT_TEXT("maze")
+		),
+		&sanguis::creator::aux::generators::maze
+	),
+	std::make_pair(
+		sanguis::creator::name(
+			FCPPT_TEXT("lines")
+		),
+		&sanguis::creator::aux::generators::lines
 	)
-	(
-		std::make_pair(
-			sanguis::creator::name(
-				FCPPT_TEXT("lines")
-			),
-			&sanguis::creator::aux::generators::lines
-		)
-	)
-);
+};
 
 }
 

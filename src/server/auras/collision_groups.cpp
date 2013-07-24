@@ -4,7 +4,6 @@
 #include <sanguis/server/collision/group.hpp>
 #include <sanguis/server/collision/group_vector.hpp>
 #include <fcppt/assert/unreachable.hpp>
-#include <fcppt/assign/make_container.hpp>
 
 
 sanguis::server::collision::group_vector
@@ -26,11 +25,9 @@ sanguis::server::auras::collision_groups(
 
 	)
 		return
-			fcppt::assign::make_container<
-				sanguis::server::collision::group_vector
-			>(
+			sanguis::server::collision::group_vector{
 				sanguis::server::collision::group::projectile_enemy
-			);
+			};
 
 	if(
 		(
@@ -45,11 +42,9 @@ sanguis::server::auras::collision_groups(
 
 	)
 		return
-			fcppt::assign::make_container<
-				sanguis::server::collision::group_vector
-			>(
+			sanguis::server::collision::group_vector{
 				sanguis::server::collision::group::projectile_player
-			);
+			};
 
 	FCPPT_ASSERT_UNREACHABLE;
 }

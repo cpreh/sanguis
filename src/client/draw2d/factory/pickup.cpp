@@ -12,7 +12,6 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assign/make_container.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
 
@@ -41,11 +40,9 @@ sanguis::client::draw2d::factory::pickup(
 				get_texture(
 					_ptype
 				),
-				fcppt::assign::make_container<
-					sanguis::client::draw2d::entities::order_vector
-				>(
+				sanguis::client::draw2d::entities::order_vector{
 					sanguis::client::draw2d::z_ordering::pickup
-				),
+				},
 				sanguis::client::draw2d::entities::model::needs_healthbar::no,
 				sanguis::client::draw2d::entities::model::decay_option::immediate
 			)

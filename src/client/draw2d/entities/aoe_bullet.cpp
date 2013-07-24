@@ -10,7 +10,6 @@
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/string.hpp>
-#include <fcppt/assign/make_container.hpp>
 #include <fcppt/math/vector/object_impl.hpp>
 
 
@@ -24,11 +23,9 @@ sanguis::client::draw2d::entities::aoe_bullet::aoe_bullet(
 	sanguis::client::draw2d::entities::model::object(
 		_param,
 		_name,
-		fcppt::assign::make_container<
-			sanguis::client::draw2d::entities::order_vector
-		>(
+		sanguis::client::draw2d::entities::order_vector{
 			sanguis::client::draw2d::z_ordering::bullet
-		),
+		},
 		sanguis::client::draw2d::entities::model::needs_healthbar::no,
 		sanguis::client::draw2d::entities::model::decay_option::immediate
 	),

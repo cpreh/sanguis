@@ -9,7 +9,6 @@
 #include <sanguis/client/draw2d/factory/enemy.hpp>
 #include <sanguis/load/enemy_name.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/assign/make_container.hpp>
 
 
 sanguis::client::draw2d::entities::unique_ptr
@@ -27,11 +26,9 @@ sanguis::client::draw2d::factory::enemy(
 				sanguis::load::enemy_name(
 					_etype
 				),
-				fcppt::assign::make_container<
-					sanguis::client::draw2d::entities::order_vector
-				>(
+				sanguis::client::draw2d::entities::order_vector{
 					sanguis::client::draw2d::z_ordering::model_generic
-				),
+				},
 				sanguis::client::draw2d::entities::model::needs_healthbar::no,
 				sanguis::client::draw2d::entities::model::decay_option::delayed
 			)

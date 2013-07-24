@@ -22,7 +22,6 @@
 #include <sge/window/title.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assign/make_container.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/variables_map.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -83,13 +82,11 @@ sanguis::client::create_systems(
 						sge::image::capabilities::threadsafe
 					),
 					sge::media::optional_extension_set(
-						fcppt::assign::make_container<
-							sge::media::extension_set
-						>(
+						sge::media::extension_set{
 							sge::media::extension(
 								FCPPT_TEXT("png")
 							)
-						)
+						}
 					)
 				)
 			)

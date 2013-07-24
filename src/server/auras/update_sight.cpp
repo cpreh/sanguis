@@ -10,7 +10,6 @@
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
-#include <fcppt/assign/make_container.hpp>
 
 
 sanguis::server::auras::update_sight::update_sight(
@@ -41,11 +40,9 @@ sanguis::server::collision::group_vector const
 sanguis::server::auras::update_sight::collision_groups() const
 {
 	return
-		fcppt::assign::make_container<
-			sanguis::server::collision::group_vector
-		>(
+		sanguis::server::collision::group_vector{
 			sanguis::server::collision::group::sight_range
-		);
+		};
 }
 
 void

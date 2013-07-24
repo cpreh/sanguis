@@ -9,7 +9,6 @@
 #include <sge/parse/json/convert/from_enum.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map.hpp>
-#include <fcppt/assign/make_container.hpp>
 
 
 sge::parse::json::object
@@ -19,16 +18,13 @@ sanguis::creator::aux::serialization::grid(
 {
 	return
 		sge::parse::json::object(
-			fcppt::assign::make_container<
-				sge::parse::json::member_map
-			>(
+			sge::parse::json::member_map{
 				sge::parse::json::member(
 					FCPPT_TEXT("size"),
 					sge::parse::json::convert::from_container(
 						_grid.size()
 					)
-				)
-			)(
+				),
 				sge::parse::json::member(
 					FCPPT_TEXT("elements"),
 					sge::parse::json::array(
@@ -42,6 +38,6 @@ sanguis::creator::aux::serialization::grid(
 						)
 					)
 				)
-			)
+			}
 		);
 }

@@ -8,7 +8,6 @@
 #include <sanguis/client/draw2d/sprite/index.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/load/friend_name.hpp>
-#include <fcppt/assign/make_container.hpp>
 
 
 namespace
@@ -29,13 +28,10 @@ sanguis::client::draw2d::entities::sentry::sentry(
 		sanguis::load::friend_name(
 			sanguis::friend_type::sentry
 		),
-		fcppt::assign::make_container<
-			sanguis::client::draw2d::entities::order_vector
-		>(
-			sanguis::client::draw2d::z_ordering::player_lower
-		)(
+		sanguis::client::draw2d::entities::order_vector{
+			sanguis::client::draw2d::z_ordering::player_lower,
 			sanguis::client::draw2d::z_ordering::player_upper
-		),
+		},
 		sanguis::client::draw2d::entities::model::needs_healthbar::yes,
 		sanguis::client::draw2d::entities::model::decay_option::delayed
 	)

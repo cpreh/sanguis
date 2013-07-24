@@ -11,7 +11,6 @@
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/center.hpp>
-#include <fcppt/assign/make_container.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/normalize.hpp>
 #include <fcppt/math/vector/length.hpp>
@@ -35,13 +34,10 @@ sanguis::client::draw2d::entities::bullet::bullet(
 	sanguis::client::draw2d::entities::model::object(
 		_param,
 		_name,
-		fcppt::assign::make_container<
-			sanguis::client::draw2d::entities::order_vector
-		>(
+		sanguis::client::draw2d::entities::order_vector{
+			sanguis::client::draw2d::z_ordering::bullet,
 			sanguis::client::draw2d::z_ordering::bullet
-		)(
-			sanguis::client::draw2d::z_ordering::bullet
-		),
+		},
 		sanguis::client::draw2d::entities::model::needs_healthbar::no,
 		sanguis::client::draw2d::entities::model::decay_option::immediate
 	),

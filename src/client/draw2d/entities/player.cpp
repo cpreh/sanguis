@@ -14,7 +14,6 @@
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sge/sprite/object_impl.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assign/make_container.hpp>
 #include <fcppt/math/point_rotate.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/vector/signed_angle_between_cast.hpp>
@@ -40,13 +39,10 @@ sanguis::client::draw2d::entities::player::player(
 	sanguis::client::draw2d::entities::model::object(
 		_param,
 		FCPPT_TEXT("player"),
-		fcppt::assign::make_container<
-			sanguis::client::draw2d::entities::order_vector
-		>(
-			sanguis::client::draw2d::z_ordering::player_lower
-		)(
+		sanguis::client::draw2d::entities::order_vector{
+			sanguis::client::draw2d::z_ordering::player_lower,
 			sanguis::client::draw2d::z_ordering::player_upper
-		),
+		},
 		sanguis::client::draw2d::entities::model::needs_healthbar::yes,
 		sanguis::client::draw2d::entities::model::decay_option::delayed
 	)

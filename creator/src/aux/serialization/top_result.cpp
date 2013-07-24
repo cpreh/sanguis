@@ -10,7 +10,6 @@
 #include <sge/parse/json/string.hpp>
 #include <sge/parse/json/convert/from_int.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assign/make_container.hpp>
 
 
 sge::parse::json::object
@@ -20,41 +19,31 @@ sanguis::creator::aux::serialization::top_result(
 {
 	return
 		sge::parse::json::object(
-			fcppt::assign::make_container<
-				sge::parse::json::member_map
-			>
-			(
+			sge::parse::json::member_map{
 				sge::parse::json::member(
 					FCPPT_TEXT("seed"),
 					sge::parse::json::convert::from_int(
 						_result.seed().get()
 					)
-				)
-			)
-			(
+				),
 				sge::parse::json::member(
 					FCPPT_TEXT("name"),
 					sge::parse::json::string(
 						_result.name().get()
 					)
-				)
-			)
-			(
+				),
 				sge::parse::json::member(
 					FCPPT_TEXT("grid"),
 					sanguis::creator::aux::serialization::grid(
 						_result.grid()
 					)
-				)
-			)
-			(
+				),
 				sge::parse::json::member(
 					FCPPT_TEXT("openings"),
 					sanguis::creator::aux::serialization::opening_container(
 						_result.openings()
 					)
 				)
-			)
-			.container()
+			}
 		);
 }
