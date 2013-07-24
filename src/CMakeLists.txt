@@ -1496,7 +1496,7 @@ add_definitions(
 )
 
 include_directories(
-	${CMAKE_SOURCE_DIR}/include
+	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/include
 )
 
 awl_utils_add_portable_executable(

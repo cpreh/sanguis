@@ -2,13 +2,25 @@ cmake_minimum_required(
 	VERSION 2.6
 )
 
-project (sanguis)
+project(
+	sanguis
+)
 
-include(FcpptCMakeUtils)
+include(
+	FcpptCMakeUtils
+)
 
-set (STATECHART_INCLUDE_DIR "" CACHE PATH "Include path for statechart")
+set(
+	STATECHART_INCLUDE_DIR
+	""
+	CACHE
+	PATH
+	"Include path for statechart"
+)
 
-if(NOT STATECHART_INCLUDE_DIR)
+if(
+	NOT STATECHART_INCLUDE_DIR
+)
 	message(
 		FATAL_ERROR
 		"Please specify the include dir of the modified statechart library, for example:
@@ -141,7 +153,7 @@ include_directories(
 )
 
 include_directories(
-	${CMAKE_SOURCE_DIR}/creator/include
+	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/creator/include
 )
 
 # Find ALDA
@@ -170,7 +182,7 @@ set(
 sge_config_add_custom_path(
 	sanguis
 	media
-	${CMAKE_SOURCE_DIR}/media
+	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/media
 	${INSTALL_MEDIA_DIR}
 )
 

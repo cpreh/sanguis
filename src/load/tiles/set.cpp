@@ -9,6 +9,7 @@
 #include <fcppt/extract_from_string.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/container/bitfield/underlying_value.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/filesystem/stem.hpp>
 #include <fcppt/log/error.hpp>
@@ -104,7 +105,6 @@ sanguis::load::tiles::set::set(
 			<<
 			FCPPT_TEXT(" has no default orientation.")
 		);
-
 }
 
 sanguis::load::tiles::set::~set()
@@ -118,8 +118,9 @@ sanguis::load::tiles::set::orientation(
 {
 	element_map::const_iterator const it(
 		elements_.find(
-			// Take the first element
-			*_orientation.data()
+			fcppt::container::bitfield::underlying_value(
+				_orientation
+			)
 		)
 	);
 

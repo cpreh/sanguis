@@ -2,6 +2,7 @@
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile.hpp>
+#include <fcppt/container/grid/in_range.hpp>
 
 
 bool
@@ -12,9 +13,10 @@ sanguis::client::draw2d::scene::world::tile_is_same(
 )
 {
 	return
-		_pos.x() < _grid.size().w()
-		&&
-		_pos.y() < _grid.size().h()
+		fcppt::container::grid::in_range(
+			_grid,
+			_pos
+		)
 		&&
 		_grid[
 			_pos
