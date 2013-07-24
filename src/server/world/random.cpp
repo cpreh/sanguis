@@ -73,7 +73,7 @@ sanguis::server::world::random(
 			sanguis::creator::generate(
 				sanguis::creator::top_parameters(
 					sanguis::creator::name(
-						FCPPT_TEXT("maze")
+						FCPPT_TEXT("lines")
 					),
 					sanguis::creator::seed(
 						0u

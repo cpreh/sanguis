@@ -44,6 +44,7 @@ SET(
 	src/aux/deserialization/opening_container.cpp
 	src/aux/deserialization/top_result.cpp
 	src/aux/find_opposing_cell.cpp
+	src/aux/generators/lines.cpp
 	src/aux/generators/maze.cpp
 	src/aux/neumann_neighbors.cpp
 	src/aux/parameters.cpp
@@ -54,10 +55,12 @@ SET(
 	src/deserialize.cpp
 	src/exception.cpp
 	src/generate.cpp
+	src/include/sanguis/creator/aux/bresenham.hpp
 	src/include/sanguis/creator/aux/deserialization/grid.hpp
 	src/include/sanguis/creator/aux/deserialization/opening_container.hpp
 	src/include/sanguis/creator/aux/deserialization/top_result.hpp
 	src/include/sanguis/creator/aux/find_opposing_cell.hpp
+	src/include/sanguis/creator/aux/generators/lines.hpp
 	src/include/sanguis/creator/aux/generators/maze.hpp
 	src/include/sanguis/creator/aux/neighbor_array.hpp
 	src/include/sanguis/creator/aux/neighbor_array_fwd.hpp

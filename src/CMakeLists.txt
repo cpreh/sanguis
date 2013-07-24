@@ -840,6 +840,7 @@ SET(
 	include/sanguis/server/entities/with_links.hpp
 	include/sanguis/server/entities/with_links_fwd.hpp
 	include/sanguis/server/entities/with_perks.hpp
+	include/sanguis/server/entities/with_perks_fwd.hpp
 	include/sanguis/server/entities/with_velocity.hpp
 	include/sanguis/server/entities/with_velocity_fwd.hpp
 	include/sanguis/server/entities/with_weapon.hpp

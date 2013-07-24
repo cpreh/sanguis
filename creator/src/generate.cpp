@@ -6,6 +6,7 @@
 #include <sanguis/creator/aux/randgen.hpp>
 #include <sanguis/creator/aux/result.hpp>
 #include <sanguis/creator/aux/generators/maze.hpp>
+#include <sanguis/creator/aux/generators/lines.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assign/make_container.hpp>
@@ -38,6 +39,14 @@ generator_map const generators(
 				FCPPT_TEXT("maze")
 			),
 			&sanguis::creator::aux::generators::maze
+		)
+	)
+	(
+		std::make_pair(
+			sanguis::creator::name(
+				FCPPT_TEXT("lines")
+			),
+			&sanguis::creator::aux::generators::lines
 		)
 	)
 );
