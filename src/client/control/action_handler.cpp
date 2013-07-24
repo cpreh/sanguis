@@ -17,6 +17,7 @@
 #include <sanguis/client/control/actions/scale.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/player_attack_dest.hpp>
+#include <sanguis/messages/player_change_world.hpp>
 #include <sanguis/messages/player_direction.hpp>
 #include <sanguis/messages/player_start_shooting.hpp>
 #include <sanguis/messages/player_stop_shooting.hpp>
@@ -239,6 +240,13 @@ sanguis::client::control::action_handler::handle_nullary_action(
 			false
 		);
 
+		return;
+	case sanguis::client::control::actions::nullary_type::change_world:
+		send_(
+			*sanguis::messages::create(
+				sanguis::messages::player_change_world()
+			)
+		);
 		return;
 	// There are some actions we don't handle
 	case sanguis::client::control::actions::nullary_type::perk_menu:

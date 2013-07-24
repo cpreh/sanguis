@@ -1,6 +1,5 @@
 #include <sanguis/entity_id.hpp>
 #include <sanguis/weapon_type.hpp>
-#include <sanguis/world_id.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
@@ -150,20 +149,6 @@ sanguis::server::world::environment::pickup_chance(
 	world_.pickup_chance(
 		_spawn_chance,
 		_center
-	);
-}
-
-void
-sanguis::server::world::environment::request_transfer(
-	sanguis::world_id const _world_id,
-	sanguis::entity_id const _entity_id,
-	sanguis::server::entities::insert_parameters const &_insert_parameters
-)
-{
-	world_.request_transfer(
-		_world_id,
-		_entity_id,
-		_insert_parameters
 	);
 }
 

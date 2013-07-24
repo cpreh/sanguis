@@ -1,8 +1,6 @@
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/timer.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/weapon_type.hpp>
@@ -28,13 +26,14 @@
 #include <sanguis/messages/types/exp.hpp>
 #include <sanguis/messages/types/size.hpp>
 #include <sanguis/server/center_fwd.hpp>
-#include <sanguis/server/console_fwd.hpp>
+#include <sanguis/server/dest_world_id.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/level.hpp>
 #include <sanguis/server/log.hpp>
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/player_id.hpp>
+#include <sanguis/server/source_world_id.hpp>
 #include <sanguis/server/string.hpp>
 #include <sanguis/server/collision/body_collision.hpp>
 #include <sanguis/server/collision/global_groups.hpp>
@@ -61,6 +60,7 @@
 #include <sanguis/server/world/environment.hpp>
 #include <sanguis/server/world/entity_map.hpp>
 #include <sanguis/server/world/object.hpp>
+#include <sanguis/server/world/parameters.hpp>
 #include <sanguis/server/world/sight_range.hpp>
 #include <sanguis/server/world/sight_range_map.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
@@ -68,7 +68,6 @@
 #include <sge/projectile/world.hpp>
 #include <sge/timer/elapsed_and_reset.hpp>
 #include <sge/timer/reset_when_expired.hpp>
-#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
@@ -88,12 +87,8 @@
 
 
 sanguis::server::world::object::object(
-	sanguis::diff_clock const &_diff_clock,
-	sanguis::random_generator &_random_generator,
+	sanguis::server::world::parameters const &_parameters,
 	sanguis::world_id const _id,
-	sanguis::server::world::context &_global_context,
-	sanguis::server::environment::load_context &_load_context,
-	sanguis::server::console &_console,
 	sanguis::creator::top_result const &_generated_world
 )
 :
@@ -113,10 +108,10 @@ sanguis::server::world::object::object(
 		_generated_world.openings()
 	),
 	global_context_(
-		_global_context
+		_parameters.context()
 	),
 	load_context_(
-		_load_context
+		_parameters.load_context()
 	),
 	collision_world_(
 		fcppt::make_unique_ptr<
@@ -138,7 +133,7 @@ sanguis::server::world::object::object(
 	sight_ranges_(),
 	projectile_timer_(
 		sanguis::diff_timer::parameters(
-			_diff_clock,
+			_parameters.diff_clock(),
 			boost::chrono::seconds(
 				1
 			)
@@ -161,14 +156,14 @@ sanguis::server::world::object::object(
 	entities_(),
 	server_entities_(),
 	pickup_spawner_(
-		_diff_clock,
-		_random_generator,
+		_parameters.diff_clock(),
+		_parameters.random_generator(),
 		*environment_
 	),
 	wave_gen_(
-		_diff_clock,
-		_random_generator,
-		_console
+		_parameters.diff_clock(),
+		_parameters.random_generator(),
+		_parameters.console()
 	)
 {
 }
@@ -585,9 +580,8 @@ sanguis::server::world::object::pickup_chance(
 
 void
 sanguis::server::world::object::request_transfer(
-	sanguis::world_id const _world_id,
-	sanguis::entity_id const _entity_id,
-	sanguis::server::entities::insert_parameters const &_insert_parameters
+	sanguis::server::dest_world_id const _world_id,
+	sanguis::entity_id const _entity_id
 )
 {
 	sanguis::server::world::entity_map::iterator const it(
@@ -607,11 +601,13 @@ sanguis::server::world::object::request_transfer(
 	);
 
 	global_context_.transfer_entity(
+		sanguis::server::source_world_id(
+			id_
+		),
 		_world_id,
 		std::move(
 			entity
-		),
-		_insert_parameters
+		)
 	);
 }
 

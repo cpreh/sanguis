@@ -3,7 +3,6 @@
 
 #include <sanguis/entity_id.hpp>
 #include <sanguis/weapon_type_fwd.hpp>
-#include <sanguis/world_id.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
@@ -99,14 +98,6 @@ public:
 	pickup_chance(
 		sanguis::server::pickup_probability,
 		sanguis::server::center const &
-	) = 0;
-
-	virtual
-	void
-	request_transfer(
-		sanguis::world_id,
-		sanguis::entity_id,
-		sanguis::server::entities::insert_parameters const &
 	) = 0;
 
 	virtual

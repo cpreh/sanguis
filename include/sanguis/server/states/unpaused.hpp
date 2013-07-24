@@ -7,12 +7,13 @@
 #include <sanguis/server/states/running.hpp>
 #include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/messages/player_attack_dest.hpp>
-#include <sanguis/messages/player_direction.hpp>
-#include <sanguis/messages/player_start_shooting.hpp>
-#include <sanguis/messages/player_stop_shooting.hpp>
 #include <sanguis/messages/player_change_weapon.hpp>
+#include <sanguis/messages/player_change_world.hpp>
+#include <sanguis/messages/player_direction.hpp>
 #include <sanguis/messages/player_pause.hpp>
 #include <sanguis/messages/player_position.hpp>
+#include <sanguis/messages/player_start_shooting.hpp>
+#include <sanguis/messages/player_stop_shooting.hpp>
 #include <sanguis/messages/player_unpause.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
@@ -73,6 +74,18 @@ public:
 	boost::statechart::result
 	operator()(
 		sanguis::server::player_id,
+		sanguis::messages::player_change_weapon const &
+	);
+
+	boost::statechart::result
+	operator()(
+		sanguis::server::player_id,
+		sanguis::messages::player_change_world const &
+	);
+
+	boost::statechart::result
+	operator()(
+		sanguis::server::player_id,
 		sanguis::messages::player_direction const &
 	);
 
@@ -92,12 +105,6 @@ public:
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::player_stop_shooting const &
-	);
-
-	boost::statechart::result
-	operator()(
-		sanguis::server::player_id,
-		sanguis::messages::player_change_weapon const &
 	);
 
 	boost::statechart::result

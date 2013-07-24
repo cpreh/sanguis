@@ -1,9 +1,6 @@
-#include <sanguis/server/world/random.hpp>
-#include <sanguis/server/world/object.hpp>
-#include <fcppt/make_unique_ptr.hpp>
-
 #include <sanguis/config_app_name.hpp>
 #include <sanguis/exception.hpp>
+#include <sanguis/world_id.hpp>
 #include <sanguis/creator/deserialize.hpp>
 #include <sanguis/creator/generate.hpp>
 #include <sanguis/creator/name.hpp>
@@ -12,10 +9,14 @@
 #include <sanguis/creator/serialize.hpp>
 #include <sanguis/creator/top_parameters.hpp>
 #include <sanguis/creator/top_result.hpp>
+#include <sanguis/server/world/object.hpp>
+#include <sanguis/server/world/parameters_fwd.hpp>
+#include <sanguis/server/world/random.hpp>
 #include <sge/config/cache_path.hpp>
+#include <fcppt/insert_to_fcppt_string.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/filesystem/create_directories_recursive_exn.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
-#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/io/ifstream.hpp>
 #include <fcppt/io/ofstream.hpp>
 #include <fcppt/text.hpp>
@@ -27,14 +28,11 @@
 
 sanguis::server::world::object_unique_ptr
 sanguis::server::world::random(
-	sanguis::diff_clock const &_diff_clock,
-	sanguis::random_generator &_random_generator,
-	sanguis::server::world::context &_ctx,
-	sanguis::server::environment::load_context &_load_context,
-	sanguis::server::console &_console
+	sanguis::server::world::parameters const &_parameters,
+	sanguis::creator::opening_count const _opening_count,
+	sanguis::world_id const _world_id
 )
 {
-	// TODO: move this out of here!
 	boost::filesystem::path const cache_path(
 		sge::config::cache_path(
 			sanguis::config_app_name()
@@ -52,7 +50,10 @@ sanguis::server::world::random(
 
 	boost::filesystem::path const world_path(
 		cache_path
-		/ FCPPT_TEXT("world01")
+		/
+		fcppt::insert_to_fcppt_string(
+			_world_id
+		)
 	);
 
 	// overwrite the world file just for testing
@@ -72,15 +73,14 @@ sanguis::server::world::random(
 			stream,
 			sanguis::creator::generate(
 				sanguis::creator::top_parameters(
+					// TODO!
 					sanguis::creator::name(
 						FCPPT_TEXT("lines")
 					),
 					sanguis::creator::seed(
 						0u
 					),
-					sanguis::creator::opening_count(
-						2u
-					)
+					_opening_count
 				)
 			)
 		);
@@ -101,19 +101,12 @@ sanguis::server::world::random(
 			)
 		);
 
-	// TODO:
 	return
 		fcppt::make_unique_ptr<
 			sanguis::server::world::object
 		>(
-			_diff_clock,
-			_random_generator,
-			sanguis::world_id(
-				0u
-			), // FIXME!
-			_ctx,
-			_load_context,
-			_console,
+			_parameters,
+			_world_id,
 			sanguis::creator::deserialize(
 				stream
 			)

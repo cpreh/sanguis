@@ -39,6 +39,7 @@ enum class message
 	pause,
 	player_attack_dest,
 	player_change_weapon,
+	player_change_world,
 	player_cheat,
 	player_choose_perk,
 	player_direction,

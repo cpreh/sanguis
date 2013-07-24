@@ -13,22 +13,23 @@
 #include <sanguis/load/server_context_fwd.hpp>
 #include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
+#include <sanguis/server/dest_world_id.hpp>
 #include <sanguis/server/console_fwd.hpp>
 #include <sanguis/server/player_id.hpp>
+#include <sanguis/server/source_world_id.hpp>
 #include <sanguis/server/speed_fwd.hpp>
 #include <sanguis/server/string.hpp>
 #include <sanguis/server/unicast_callback.hpp>
 #include <sanguis/server/vector_fwd.hpp>
-#include <sanguis/server/entities/insert_parameters_fwd.hpp>
 #include <sanguis/server/entities/player_map.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/global/context_fwd.hpp>
 #include <sanguis/server/global/world_context_fwd.hpp>
-#include <sanguis/server/world/map.hpp>
+#include <sanguis/server/global/world_map.hpp>
 #include <sanguis/server/world/context_fwd.hpp>
-#include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/scoped_ptr_decl.hpp>
 #include <fcppt/container/map_decl.hpp>
 
 
@@ -141,9 +142,9 @@ private:
 
 	void
 	transfer_entity(
-		sanguis::world_id destination,
-		sanguis::server::entities::unique_ptr &&,
-		sanguis::server::entities::insert_parameters const &
+		sanguis::server::source_world_id,
+		sanguis::server::dest_world_id,
+		sanguis::server::entities::unique_ptr &&
 	);
 
 	sanguis::server::world::object &
@@ -173,7 +174,7 @@ private:
 
 	sanguis::server::entities::player_map players_;
 
-	sanguis::server::world::map worlds_;
+	sanguis::server::global::world_map const worlds_;
 
 	sanguis::entity_id next_id_;
 };

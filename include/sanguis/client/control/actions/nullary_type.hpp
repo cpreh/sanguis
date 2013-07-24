@@ -15,6 +15,7 @@ namespace actions
 
 enum class nullary_type
 {
+	change_world,
 	console,
 	escape,
 	perk_menu,

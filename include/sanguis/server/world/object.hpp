@@ -1,11 +1,9 @@
 #ifndef SANGUIS_SERVER_WORLD_OBJECT_HPP_INCLUDED
 #define SANGUIS_SERVER_WORLD_OBJECT_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/timer.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/weapon_type_fwd.hpp>
@@ -16,7 +14,7 @@
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
-#include <sanguis/server/console_fwd.hpp>
+#include <sanguis/server/dest_world_id.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/level.hpp>
@@ -37,6 +35,7 @@
 #include <sanguis/server/world/environment_fwd.hpp>
 #include <sanguis/server/world/entity_map.hpp>
 #include <sanguis/server/world/object_fwd.hpp>
+#include <sanguis/server/world/parameters_fwd.hpp>
 #include <sanguis/server/world/sight_range_map.hpp>
 #include <sge/projectile/world_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -63,12 +62,8 @@ class object
 	);
 public:
 	object(
-		sanguis::diff_clock const &,
-		sanguis::random_generator &,
+		sanguis::server::world::parameters const &,
 		sanguis::world_id,
-		sanguis::server::world::context &,
-		sanguis::server::environment::load_context &,
-		sanguis::server::console &,
 		sanguis::creator::top_result const &
 	);
 
@@ -153,9 +148,8 @@ private:
 
 	void
 	request_transfer(
-		sanguis::world_id,
-		sanguis::entity_id,
-		sanguis::server::entities::insert_parameters const &
+		sanguis::server::dest_world_id,
+		sanguis::entity_id
 	);
 
 	void

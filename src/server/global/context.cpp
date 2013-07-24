@@ -38,6 +38,7 @@
 #include <sanguis/server/entities/property/current_to_max.hpp>
 #include <sanguis/server/entities/pickups/weapon.hpp>
 #include <sanguis/server/global/context.hpp>
+#include <sanguis/server/global/generate_worlds.hpp>
 #include <sanguis/server/global/load_context.hpp>
 #include <sanguis/server/global/next_id_callback.hpp>
 #include <sanguis/server/global/world_context.hpp>
@@ -48,24 +49,25 @@
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/world/map.hpp>
 #include <sanguis/server/world/object.hpp>
-#include <sanguis/server/world/random.hpp>
+#include <sanguis/server/world/parameters.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
+#include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/container/map_impl.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/log/parameters/object.hpp>
-#include <fcppt/container/map_impl.hpp>
-#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/atan2.hpp>
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/math/vector/length_square.hpp>
 #include <fcppt/math/vector/signed_angle_between.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <functional>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -122,7 +124,17 @@ sanguis::server::global::context::context(
 		_console
 	),
 	players_(),
-	worlds_(),
+	worlds_(
+		sanguis::server::global::generate_worlds(
+			sanguis::server::world::parameters(
+				diff_clock_,
+				random_generator_,
+				*world_context_,
+				*load_context_,
+				console_
+			)
+		)
+	),
 	next_id_(
 		0u
 	)
@@ -461,7 +473,7 @@ sanguis::server::global::context::update(
 	);
 
 	for(
-		auto cur_world : worlds_
+		auto const &cur_world : worlds_.worlds()
 	)
 		cur_world.second->update();
 }
@@ -522,19 +534,25 @@ sanguis::server::global::context::remove_player(
 
 void
 sanguis::server::global::context::transfer_entity(
-	sanguis::world_id const _destination,
-	sanguis::server::entities::unique_ptr &&_entity,
-	sanguis::server::entities::insert_parameters const &_insert_parameters
+	sanguis::server::source_world_id const _source,
+	sanguis::server::dest_world_id const _dest,
+	sanguis::server::entities::unique_ptr &&_entity
 )
 {
+	/*
 	this->world(
-		_destination
+		_destination.get()
 	).insert(
 		std::move(
 			_entity
 		),
-		_insert_parameters
-	);
+		sanguis::server::entities::insert_parameters(
+			this->world_connection(
+				_source,
+				_dest
+			).center()
+		)
+	);*/
 }
 
 sanguis::server::world::object &
@@ -542,27 +560,20 @@ sanguis::server::global::context::world(
 	sanguis::world_id const _world_id
 )
 {
-	sanguis::server::world::map::iterator const it(
-		worlds_.find(
+	sanguis::server::world::map const &worlds(
+		worlds_.worlds()
+	);
+
+	sanguis::server::world::map::const_iterator const it(
+		worlds.find(
 			_world_id
 		)
 	);
 
-	if(
-		it != worlds_.end()
-	)
-		return *it->second;
+	FCPPT_ASSERT_PRE(
+		it != worlds.end()
+	);
 
 	return
-		*fcppt::container::ptr::insert_unique_ptr_map(
-			worlds_,
-			_world_id,
-			sanguis::server::world::random(
-				diff_clock_,
-				random_generator_,
-				*world_context_,
-				*load_context_,
-				console_
-			)
-		).first->second;
+		*it->second;
 }

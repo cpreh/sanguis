@@ -522,6 +522,7 @@ SET(
 	include/sanguis/messages/perk_tree_node_list.hpp
 	include/sanguis/messages/player_attack_dest.hpp
 	include/sanguis/messages/player_change_weapon.hpp
+	include/sanguis/messages/player_change_world.hpp
 	include/sanguis/messages/player_cheat.hpp
 	include/sanguis/messages/player_choose_perk.hpp
 	include/sanguis/messages/player_direction.hpp
@@ -726,6 +727,7 @@ SET(
 	include/sanguis/server/damage/unit.hpp
 	include/sanguis/server/damage/wrapper.hpp
 	include/sanguis/server/damage/wrapper_fwd.hpp
+	include/sanguis/server/dest_world_id.hpp
 	include/sanguis/server/dim.hpp
 	include/sanguis/server/dim_fwd.hpp
 	include/sanguis/server/direction.hpp
@@ -859,10 +861,15 @@ SET(
 	include/sanguis/server/exp.hpp
 	include/sanguis/server/global/context.hpp
 	include/sanguis/server/global/context_fwd.hpp
+	include/sanguis/server/global/generate_worlds.hpp
 	include/sanguis/server/global/load_context.hpp
 	include/sanguis/server/global/next_id_callback.hpp
+	include/sanguis/server/global/world_connection_map.hpp
 	include/sanguis/server/global/world_context.hpp
 	include/sanguis/server/global/world_context_fwd.hpp
+	include/sanguis/server/global/world_id_pair.hpp
+	include/sanguis/server/global/world_map.hpp
+	include/sanguis/server/global/world_map_fwd.hpp
 	include/sanguis/server/health.hpp
 	include/sanguis/server/leave_sight_function.hpp
 	include/sanguis/server/level.hpp
@@ -916,6 +923,7 @@ SET(
 	include/sanguis/server/radius.hpp
 	include/sanguis/server/send_available_perks.hpp
 	include/sanguis/server/send_callback.hpp
+	include/sanguis/server/source_world_id.hpp
 	include/sanguis/server/space_unit.hpp
 	include/sanguis/server/speed.hpp
 	include/sanguis/server/speed_fwd.hpp
@@ -1009,6 +1017,8 @@ SET(
 	include/sanguis/server/world/object.hpp
 	include/sanguis/server/world/object_fwd.hpp
 	include/sanguis/server/world/object_unique_ptr.hpp
+	include/sanguis/server/world/parameters.hpp
+	include/sanguis/server/world/parameters_fwd.hpp
 	include/sanguis/server/world/random.hpp
 	include/sanguis/server/world/sight_range.hpp
 	include/sanguis/server/world/sight_range_entry_set.hpp
@@ -1247,6 +1257,7 @@ SET(
 	src/messages/pause.cpp
 	src/messages/player_attack_dest.cpp
 	src/messages/player_change_weapon.cpp
+	src/messages/player_change_world.cpp
 	src/messages/player_cheat.cpp
 	src/messages/player_choose_perk.cpp
 	src/messages/player_direction.cpp
@@ -1407,8 +1418,10 @@ SET(
 	src/server/events/message.cpp
 	src/server/events/tick.cpp
 	src/server/global/context.cpp
+	src/server/global/generate_worlds.cpp
 	src/server/global/load_context.cpp
 	src/server/global/world_context.cpp
+	src/server/global/world_map.cpp
 	src/server/level_calculate.cpp
 	src/server/log.cpp
 	src/server/log_location.cpp
@@ -1476,6 +1489,7 @@ SET(
 	src/server/world/entity_map.cpp
 	src/server/world/environment.cpp
 	src/server/world/object.cpp
+	src/server/world/parameters.cpp
 	src/server/world/random.cpp
 	src/server/world/sight_range.cpp
 	src/to_console_arg_list.cpp

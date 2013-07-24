@@ -1,12 +1,10 @@
 #ifndef SANGUIS_SERVER_WORLD_RANDOM_HPP_INCLUDED
 #define SANGUIS_SERVER_WORLD_RANDOM_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/random_generator_fwd.hpp>
-#include <sanguis/server/console_fwd.hpp>
-#include <sanguis/server/environment/load_context_fwd.hpp>
-#include <sanguis/server/world/context_fwd.hpp>
+#include <sanguis/world_id.hpp>
+#include <sanguis/creator/opening_count.hpp>
 #include <sanguis/server/world/object_unique_ptr.hpp>
+#include <sanguis/server/world/parameters_fwd.hpp>
 
 
 namespace sanguis
@@ -18,12 +16,9 @@ namespace world
 
 sanguis::server::world::object_unique_ptr
 random(
-	sanguis::diff_clock const &,
-	sanguis::random_generator &,
-	sanguis::server::world::context &,
-	sanguis::server::environment::load_context &,
-	sanguis::server::console &
-	// TODO: params
+	sanguis::server::world::parameters const &,
+	sanguis::creator::opening_count,
+	sanguis::world_id
 );
 
 }

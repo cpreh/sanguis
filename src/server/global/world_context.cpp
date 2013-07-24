@@ -1,8 +1,9 @@
 #include <sanguis/world_id.hpp>
 #include <sanguis/messages/base_fwd.hpp>
+#include <sanguis/server/dest_world_id.hpp>
 #include <sanguis/server/player_id.hpp>
+#include <sanguis/server/source_world_id.hpp>
 #include <sanguis/server/entities/base.hpp>
-#include <sanguis/server/entities/insert_parameters_fwd.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/global/context.hpp>
 #include <sanguis/server/global/world_context.hpp>
@@ -27,17 +28,17 @@ sanguis::server::global::world_context::~world_context()
 
 void
 sanguis::server::global::world_context::transfer_entity(
-	sanguis::world_id const _destination,
-	sanguis::server::entities::unique_ptr &&_entity,
-	sanguis::server::entities::insert_parameters const &_insert_parameters
+	sanguis::server::source_world_id const _source_id,
+	sanguis::server::dest_world_id const _dest_id,
+	sanguis::server::entities::unique_ptr &&_entity
 )
 {
 	global_context_.transfer_entity(
-		_destination,
+		_source_id,
+		_dest_id,
 		std::move(
 			_entity
-		),
-		_insert_parameters
+		)
 	);
 }
 
