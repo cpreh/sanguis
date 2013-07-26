@@ -40,7 +40,6 @@ find_package(
 	iostreams
 	program_options
 	system
-	thread
 )
 
 add_definitions(
