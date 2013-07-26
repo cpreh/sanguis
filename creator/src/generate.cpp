@@ -2,56 +2,25 @@
 #include <sanguis/creator/generate.hpp>
 #include <sanguis/creator/top_parameters.hpp>
 #include <sanguis/creator/top_result.hpp>
+#include <sanguis/creator/aux/generator_map.hpp>
+#include <sanguis/creator/aux/generator_map_type.hpp>
 #include <sanguis/creator/aux/parameters.hpp>
 #include <sanguis/creator/aux/randgen.hpp>
 #include <sanguis/creator/aux/result.hpp>
-#include <sanguis/creator/aux/generators/maze.hpp>
-#include <sanguis/creator/aux/generators/lines.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <map>
-#include <utility>
-#include <fcppt/config/external_end.hpp>
 
-
-namespace
-{
-
-typedef
-sanguis::creator::aux::result
-(*generator_function)(
-	sanguis::creator::aux::parameters const &
-);
-
-typedef std::map<
-	sanguis::creator::name,
-	generator_function
-> generator_map;
-
-generator_map const generators{
-	std::make_pair(
-		sanguis::creator::name(
-			FCPPT_TEXT("maze")
-		),
-		&sanguis::creator::aux::generators::maze
-	),
-	std::make_pair(
-		sanguis::creator::name(
-			FCPPT_TEXT("lines")
-		),
-		&sanguis::creator::aux::generators::lines
-	)
-};
-
-}
 
 sanguis::creator::top_result
 sanguis::creator::generate(
 	sanguis::creator::top_parameters const &_parameters
 )
 {
-	generator_map::const_iterator const it(
+	sanguis::creator::aux::generator_map_type const &generators(
+		sanguis::creator::aux::generator_map()
+	);
+
+	sanguis::creator::aux::generator_map_type::const_iterator const it(
 		generators.find(
 			_parameters.name()
 		)

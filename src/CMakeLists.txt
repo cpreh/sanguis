@@ -1023,6 +1023,8 @@ SET(
 	include/sanguis/server/world/parameters.hpp
 	include/sanguis/server/world/parameters_fwd.hpp
 	include/sanguis/server/world/random.hpp
+	include/sanguis/server/world/random_generator_name.hpp
+	include/sanguis/server/world/random_seed.hpp
 	include/sanguis/server/world/sight_range.hpp
 	include/sanguis/server/world/sight_range_entry_set.hpp
 	include/sanguis/server/world/sight_range_fwd.hpp
@@ -1496,6 +1498,8 @@ SET(
 	src/server/world/object.cpp
 	src/server/world/parameters.cpp
 	src/server/world/random.cpp
+	src/server/world/random_generator_name.cpp
+	src/server/world/random_seed.cpp
 	src/server/world/sight_range.cpp
 	src/to_console_arg_list.cpp
 	src/update_diff_clock.cpp

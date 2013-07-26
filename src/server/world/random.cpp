@@ -3,15 +3,15 @@
 #include <sanguis/world_id.hpp>
 #include <sanguis/creator/deserialize.hpp>
 #include <sanguis/creator/generate.hpp>
-#include <sanguis/creator/name.hpp>
 #include <sanguis/creator/opening_count.hpp>
-#include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/serialize.hpp>
 #include <sanguis/creator/top_parameters.hpp>
 #include <sanguis/creator/top_result.hpp>
 #include <sanguis/server/world/object.hpp>
-#include <sanguis/server/world/parameters_fwd.hpp>
+#include <sanguis/server/world/parameters.hpp>
 #include <sanguis/server/world/random.hpp>
+#include <sanguis/server/world/random_generator_name.hpp>
+#include <sanguis/server/world/random_seed.hpp>
 #include <sge/config/cache_path.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -73,12 +73,11 @@ sanguis::server::world::random(
 			stream,
 			sanguis::creator::generate(
 				sanguis::creator::top_parameters(
-					// TODO!
-					sanguis::creator::name(
-						FCPPT_TEXT("lines")
+					sanguis::server::world::random_generator_name(
+						_parameters.random_generator()
 					),
-					sanguis::creator::seed(
-						0u
+					sanguis::server::world::random_seed(
+						_parameters.random_generator()
 					),
 					_opening_count
 				)

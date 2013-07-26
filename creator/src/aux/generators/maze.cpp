@@ -23,9 +23,8 @@
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <vector>
-#include <iostream>
-#include <ostream>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace
 {
@@ -115,7 +114,6 @@ sanguis::creator::aux::generators::maze(
 		unsigned const t =
 			o * (perimeter_length / opening_count);
 		auto coords = perimeter_to_coords(ret.size(), t);
-		std::cerr << coords.x() << " " << coords.y() << std::endl;
 		openings.push_back(
 			sanguis::creator::opening(
 				coords

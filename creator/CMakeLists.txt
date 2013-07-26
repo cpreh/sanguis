@@ -12,6 +12,9 @@ set(
 	include/sanguis/creator/difference_type.hpp
 	include/sanguis/creator/exception.hpp
 	include/sanguis/creator/generate.hpp
+	include/sanguis/creator/generator_count.hpp
+	include/sanguis/creator/generator_count_type.hpp
+	include/sanguis/creator/generator_index.hpp
 	include/sanguis/creator/grid.hpp
 	include/sanguis/creator/grid_crange.hpp
 	include/sanguis/creator/grid_crange_fwd.hpp
@@ -44,6 +47,7 @@ SET(
 	src/aux/deserialization/opening_container.cpp
 	src/aux/deserialization/top_result.cpp
 	src/aux/find_opposing_cell.cpp
+	src/aux/generator_map.cpp
 	src/aux/generators/lines.cpp
 	src/aux/generators/maze.cpp
 	src/aux/neumann_neighbors.cpp
@@ -55,11 +59,16 @@ SET(
 	src/deserialize.cpp
 	src/exception.cpp
 	src/generate.cpp
+	src/generator_count.cpp
+	src/generator_index.cpp
 	src/include/sanguis/creator/aux/bresenham.hpp
 	src/include/sanguis/creator/aux/deserialization/grid.hpp
 	src/include/sanguis/creator/aux/deserialization/opening_container.hpp
 	src/include/sanguis/creator/aux/deserialization/top_result.hpp
 	src/include/sanguis/creator/aux/find_opposing_cell.hpp
+	src/include/sanguis/creator/aux/generator_function.hpp
+	src/include/sanguis/creator/aux/generator_map.hpp
+	src/include/sanguis/creator/aux/generator_map_type.hpp
 	src/include/sanguis/creator/aux/generators/lines.hpp
 	src/include/sanguis/creator/aux/generators/maze.hpp
 	src/include/sanguis/creator/aux/neighbor_array.hpp
