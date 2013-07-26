@@ -80,6 +80,9 @@ public:
 
 	sanguis::server::environment::object &
 	environment() const;
+
+	sanguis::creator::opening_container const &
+	openings() const;
 private:
 	sanguis::server::entities::optional_base_ref const
 	insert_with_id(

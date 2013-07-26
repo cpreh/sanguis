@@ -47,6 +47,7 @@
 #include <sanguis/server/perks/create.hpp>
 #include <sanguis/server/perks/perk.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/world/grid_pos_to_center.hpp>
 #include <sanguis/server/world/map.hpp>
 #include <sanguis/server/world/object.hpp>
 #include <sanguis/server/world/parameters.hpp>
@@ -191,9 +192,25 @@ sanguis::server::global::context::insert_player(
 		player.get()
 	);
 
-	// FIXME: where to insert the player?
+	if(
+		cur_world.openings().empty()
+	)
+	{
+		FCPPT_LOG_ERROR(
+			logger,
+			fcppt::log::_
+				<< FCPPT_TEXT("A world has no openings, so can't insert the player!")
+		);
+
+		return;
+	}
+
 	sanguis::server::center const spawn_pos(
-		sanguis::server::vector(-2,-2)
+		sanguis::server::world::grid_pos_to_center(
+			cur_world.openings()[
+				0u
+			].get()
+		)
 	);
 
 	typedef fcppt::optional<

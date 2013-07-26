@@ -4,6 +4,7 @@
 #include <sanguis/timer.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/weapon_type.hpp>
+#include <sanguis/creator/opening_container.hpp>
 #include <sanguis/creator/top_result.hpp>
 #include <sanguis/load/model/context.hpp>
 #include <sanguis/load/model/collection.hpp>
@@ -295,6 +296,11 @@ sanguis::server::world::object::environment() const
 	return *environment_;
 }
 
+sanguis::creator::opening_container const &
+sanguis::server::world::object::openings() const
+{
+	return openings_;
+}
 
 sanguis::server::entities::optional_base_ref const
 sanguis::server::world::object::insert_with_id(

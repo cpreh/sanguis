@@ -1013,6 +1013,7 @@ SET(
 	include/sanguis/server/world/entity_map.hpp
 	include/sanguis/server/world/environment.hpp
 	include/sanguis/server/world/environment_fwd.hpp
+	include/sanguis/server/world/grid_pos_to_center.hpp
 	include/sanguis/server/world/map.hpp
 	include/sanguis/server/world/object.hpp
 	include/sanguis/server/world/object_fwd.hpp
@@ -1488,6 +1489,7 @@ SET(
 	src/server/world/context.cpp
 	src/server/world/entity_map.cpp
 	src/server/world/environment.cpp
+	src/server/world/grid_pos_to_center.cpp
 	src/server/world/object.cpp
 	src/server/world/parameters.cpp
 	src/server/world/random.cpp

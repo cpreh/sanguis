@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_GLOBAL_WORLD_CONNECTION_MAP_HPP_INCLUDED
 #define SANGUIS_SERVER_GLOBAL_WORLD_CONNECTION_MAP_HPP_INCLUDED
 
-#include <sanguis/creator/pos.hpp>
+#include <sanguis/creator/opening.hpp>
 #include <sanguis/server/global/world_id_pair.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <map>
@@ -18,7 +18,7 @@ namespace global
 typedef
 std::map<
 	sanguis::server::global::world_id_pair,
-	sanguis::creator::pos
+	sanguis::creator::opening
 >
 world_connection_map;
 

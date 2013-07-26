@@ -1,7 +1,10 @@
 #include <sanguis/world_id.hpp>
 #include <sanguis/creator/opening_count.hpp>
+#include <sanguis/server/dest_world_id.hpp>
+#include <sanguis/server/source_world_id.hpp>
 #include <sanguis/server/global/generate_worlds.hpp>
 #include <sanguis/server/global/world_connection_map.hpp>
+#include <sanguis/server/global/world_id_pair.hpp>
 #include <sanguis/server/global/world_map.hpp>
 #include <sanguis/server/world/map.hpp>
 #include <sanguis/server/world/object.hpp>
@@ -19,38 +22,88 @@ sanguis::server::global::generate_worlds(
 {
 	sanguis::server::world::map worlds;
 
-	worlds.insert(
-		std::make_pair(
-			// TODO!
-			sanguis::world_id(
-				0u
-			),
-			sanguis::server::world::random(
-				_parameters,
-				sanguis::creator::opening_count(
-					2u
+	sanguis::server::global::world_connection_map connections;
+
+	for(
+		sanguis::world_id::value_type current_id(
+			0u
+		);
+		current_id
+		<
+		sanguis::world_id::value_type(
+			2u
+		);
+		++current_id
+	)
+	{
+		sanguis::world_id const world_id(
+			current_id
+		);
+
+		worlds.insert(
+			std::make_pair(
+				world_id,
+				sanguis::server::world::random(
+					_parameters,
+					sanguis::creator::opening_count(
+						2u
+					),
+					world_id
+				)
+			)
+		);
+
+		if(
+			current_id == 0u
+		)
+			continue;
+
+		sanguis::world_id const previous_id(
+			current_id - 1u
+		);
+
+		connections.insert(
+			std::make_pair(
+				sanguis::server::global::world_id_pair(
+					sanguis::server::source_world_id(
+						previous_id
+					),
+					sanguis::server::dest_world_id(
+						world_id
+					)
 				),
-				sanguis::world_id(
+				worlds[
+					world_id
+				]->openings().at(
 					0u
 				)
 			)
-		)
-	);
+		);
+
+		connections.insert(
+			std::make_pair(
+				sanguis::server::global::world_id_pair(
+					sanguis::server::source_world_id(
+						world_id
+					),
+					sanguis::server::dest_world_id(
+						previous_id
+					)
+				),
+				worlds[
+					previous_id
+				]->openings().at(
+					1u
+				)
+			)
+		);
+	}
 
 	return
 		sanguis::server::global::world_map(
 			std::move(
 				worlds
 			),
-			sanguis::server::global::world_connection_map()
+			connections
 		);
-/*
-	for(
-		sanguis::world_id id(
-			1u
-		);
-		id < sanguis::world_id(10u);
-		++id
-	)*/
-
 }
