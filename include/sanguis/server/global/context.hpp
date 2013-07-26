@@ -13,10 +13,8 @@
 #include <sanguis/load/server_context_fwd.hpp>
 #include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
-#include <sanguis/server/dest_world_id.hpp>
 #include <sanguis/server/console_fwd.hpp>
 #include <sanguis/server/player_id.hpp>
-#include <sanguis/server/source_world_id.hpp>
 #include <sanguis/server/speed_fwd.hpp>
 #include <sanguis/server/string.hpp>
 #include <sanguis/server/unicast_callback.hpp>
@@ -25,6 +23,7 @@
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/global/context_fwd.hpp>
+#include <sanguis/server/global/source_world_pair.hpp>
 #include <sanguis/server/global/world_context_fwd.hpp>
 #include <sanguis/server/global/world_map.hpp>
 #include <sanguis/server/world/context_fwd.hpp>
@@ -71,6 +70,11 @@ public:
 	player_target(
 		sanguis::server::player_id,
 		sanguis::server::vector const &
+	);
+
+	void
+	player_change_world(
+		sanguis::server::player_id
 	);
 
 	void
@@ -140,10 +144,14 @@ private:
 		sanguis::server::player_id
 	);
 
+	bool
+	request_transfer(
+		sanguis::server::global::source_world_pair
+	) const;
+
 	void
 	transfer_entity(
-		sanguis::server::source_world_id,
-		sanguis::server::dest_world_id,
+		sanguis::server::global::source_world_pair,
 		sanguis::server::entities::unique_ptr &&
 	);
 

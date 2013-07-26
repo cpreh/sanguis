@@ -117,6 +117,11 @@ public:
 		sanguis::server::player_id
 	);
 
+	void
+	request_transfer(
+		sanguis::entity_id
+	);
+
 	sge::projectile::world &
 	collision_world() const;
 

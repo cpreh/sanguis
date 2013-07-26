@@ -4,6 +4,7 @@
 #include <sanguis/timer.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/weapon_type.hpp>
+#include <sanguis/creator/opening.hpp>
 #include <sanguis/creator/opening_container.hpp>
 #include <sanguis/creator/top_result.hpp>
 #include <sanguis/load/model/context.hpp>
@@ -27,7 +28,6 @@
 #include <sanguis/messages/types/exp.hpp>
 #include <sanguis/messages/types/size.hpp>
 #include <sanguis/server/center_fwd.hpp>
-#include <sanguis/server/dest_world_id.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/level.hpp>
@@ -53,10 +53,12 @@
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
+#include <sanguis/server/global/source_world_pair.hpp>
 #include <sanguis/server/message_convert/speed.hpp>
 #include <sanguis/server/message_convert/rotate.hpp>
 #include <sanguis/server/message_convert/move.hpp>
 #include <sanguis/server/message_convert/health.hpp>
+#include <sanguis/server/world/center_in_grid_pos.hpp>
 #include <sanguis/server/world/context.hpp>
 #include <sanguis/server/world/environment.hpp>
 #include <sanguis/server/world/entity_map.hpp>
@@ -586,7 +588,6 @@ sanguis::server::world::object::pickup_chance(
 
 void
 sanguis::server::world::object::request_transfer(
-	sanguis::server::dest_world_id const _world_id,
 	sanguis::entity_id const _entity_id
 )
 {
@@ -600,21 +601,53 @@ sanguis::server::world::object::request_transfer(
 		it != entities_.end()
 	);
 
-	sanguis::server::entities::unique_ptr entity(
-		entities_.release(
-			it
-		)
+	sanguis::server::entities::base &entity(
+		*it->second
 	);
 
-	global_context_.transfer_entity(
-		sanguis::server::source_world_id(
-			id_
-		),
-		_world_id,
-		std::move(
-			entity
+	for(
+		sanguis::creator::opening opening
+		:
+		openings_
+	)
+	{
+		sanguis::server::global::source_world_pair const source_pair(
+			sanguis::server::source_world_id(
+				id_
+			),
+			opening
+		);
+
+		if(
+			sanguis::server::world::center_in_grid_pos(
+				entity.center(),
+				opening.get()
+			)
+			&&
+			global_context_.request_transfer(
+				source_pair
+			)
+
 		)
-	);
+		{
+			entity.destroy();
+
+			sanguis::server::entities::unique_ptr entity_ptr(
+				entities_.release(
+					it
+				)
+			);
+
+			global_context_.transfer_entity(
+				source_pair,
+				std::move(
+					entity_ptr
+				)
+			);
+
+			return;
+		}
+	}
 }
 
 void

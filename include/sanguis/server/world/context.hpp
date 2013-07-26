@@ -3,10 +3,9 @@
 
 #include <sanguis/world_id.hpp>
 #include <sanguis/messages/base_fwd.hpp>
-#include <sanguis/server/dest_world_id.hpp>
 #include <sanguis/server/player_id.hpp>
-#include <sanguis/server/source_world_id.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/global/source_world_pair.hpp>
 #include <sanguis/server/world/context_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -27,10 +26,15 @@ protected:
 	context();
 public:
 	virtual
+	bool
+	request_transfer(
+		sanguis::server::global::source_world_pair const &
+	) const = 0;
+
+	virtual
 	void
 	transfer_entity(
-		sanguis::server::source_world_id,
-		sanguis::server::dest_world_id,
+		sanguis::server::global::source_world_pair const &,
 		sanguis::server::entities::unique_ptr &&
 	) = 0;
 

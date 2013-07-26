@@ -1,11 +1,10 @@
 #include <sanguis/world_id.hpp>
 #include <sanguis/messages/base_fwd.hpp>
-#include <sanguis/server/dest_world_id.hpp>
 #include <sanguis/server/player_id.hpp>
-#include <sanguis/server/source_world_id.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/global/context.hpp>
+#include <sanguis/server/global/source_world_pair.hpp>
 #include <sanguis/server/global/world_context.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -26,16 +25,25 @@ sanguis::server::global::world_context::~world_context()
 {
 }
 
+bool
+sanguis::server::global::world_context::request_transfer(
+	sanguis::server::global::source_world_pair const &_source
+) const
+{
+	return
+		global_context_.request_transfer(
+			_source
+		);
+}
+
 void
 sanguis::server::global::world_context::transfer_entity(
-	sanguis::server::source_world_id const _source_id,
-	sanguis::server::dest_world_id const _dest_id,
+	sanguis::server::global::source_world_pair const &_source,
 	sanguis::server::entities::unique_ptr &&_entity
 )
 {
 	global_context_.transfer_entity(
-		_source_id,
-		_dest_id,
+		_source,
 		std::move(
 			_entity
 		)

@@ -41,6 +41,8 @@
 #include <sanguis/server/global/generate_worlds.hpp>
 #include <sanguis/server/global/load_context.hpp>
 #include <sanguis/server/global/next_id_callback.hpp>
+#include <sanguis/server/global/source_world_pair.hpp>
+#include <sanguis/server/global/world_connection_map.hpp>
 #include <sanguis/server/global/world_context.hpp>
 #include <sanguis/server/message_convert/rotate.hpp>
 #include <sanguis/server/message_convert/speed.hpp>
@@ -55,6 +57,7 @@
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/assert/error.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/location.hpp>
@@ -327,6 +330,16 @@ sanguis::server::global::context::player_target(
 }
 
 void
+sanguis::server::global::context::player_change_world(
+	sanguis::server::player_id const _player_id
+)
+{
+	players_[
+		_player_id
+	]->transfer_from_world();
+}
+
+void
 sanguis::server::global::context::player_change_weapon(
 	sanguis::server::player_id const _player_id,
 	sanguis::weapon_type const _weapon
@@ -549,27 +562,54 @@ sanguis::server::global::context::remove_player(
 	);
 }
 
+bool
+sanguis::server::global::context::request_transfer(
+	sanguis::server::global::source_world_pair const _source
+) const
+{
+	return
+		worlds_.connections().count(
+			_source
+		)
+		!=
+		0u;
+}
+
 void
 sanguis::server::global::context::transfer_entity(
-	sanguis::server::source_world_id const _source,
-	sanguis::server::dest_world_id const _dest,
+	sanguis::server::global::source_world_pair const _source,
 	sanguis::server::entities::unique_ptr &&_entity
 )
 {
-	/*
+	sanguis::server::global::world_connection_map const &connections(
+		worlds_.connections()
+	);
+
+	sanguis::server::global::world_connection_map::const_iterator const it(
+		connections.find(
+			_source
+		)
+	);
+
+	FCPPT_ASSERT_ERROR(
+		it != connections.end()
+	);
+
 	this->world(
-		_destination.get()
+		it->second.first.get()
 	).insert(
 		std::move(
 			_entity
 		),
 		sanguis::server::entities::insert_parameters(
-			this->world_connection(
-				_source,
-				_dest
-			).center()
+			sanguis::server::world::grid_pos_to_center(
+				it->second.second.get()
+			),
+			sanguis::server::angle(
+				0.f // TODO!
+			)
 		)
-	);*/
+	);
 }
 
 sanguis::server::world::object &

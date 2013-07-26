@@ -2,9 +2,10 @@
 #include <sanguis/creator/opening_count.hpp>
 #include <sanguis/server/dest_world_id.hpp>
 #include <sanguis/server/source_world_id.hpp>
+#include <sanguis/server/global/dest_world_pair.hpp>
 #include <sanguis/server/global/generate_worlds.hpp>
+#include <sanguis/server/global/source_world_pair.hpp>
 #include <sanguis/server/global/world_connection_map.hpp>
-#include <sanguis/server/global/world_id_pair.hpp>
 #include <sanguis/server/global/world_map.hpp>
 #include <sanguis/server/world/map.hpp>
 #include <sanguis/server/world/object.hpp>
@@ -62,38 +63,52 @@ sanguis::server::global::generate_worlds(
 			current_id - 1u
 		);
 
+		sanguis::creator::opening const current_opening(
+			worlds[
+				world_id
+			]->openings().at(
+				0u
+			)
+		);
+
+		sanguis::creator::opening const previous_opening(
+			worlds[
+				previous_id
+			]->openings().at(
+				1u
+			)
+		);
+
 		connections.insert(
 			std::make_pair(
-				sanguis::server::global::world_id_pair(
+				sanguis::server::global::source_world_pair(
 					sanguis::server::source_world_id(
 						previous_id
 					),
+					previous_opening
+				),
+				sanguis::server::global::dest_world_pair(
 					sanguis::server::dest_world_id(
 						world_id
-					)
-				),
-				worlds[
-					world_id
-				]->openings().at(
-					0u
+					),
+					current_opening
 				)
 			)
 		);
 
 		connections.insert(
 			std::make_pair(
-				sanguis::server::global::world_id_pair(
+				sanguis::server::global::source_world_pair(
 					sanguis::server::source_world_id(
 						world_id
 					),
+					current_opening
+				),
+				sanguis::server::global::dest_world_pair(
 					sanguis::server::dest_world_id(
 						previous_id
-					)
-				),
-				worlds[
-					previous_id
-				]->openings().at(
-					1u
+					),
+					previous_opening
 				)
 			)
 		);

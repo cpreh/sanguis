@@ -14,7 +14,6 @@
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
-#include <sanguis/server/dest_world_id.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/level.hpp>
@@ -151,7 +150,6 @@ private:
 
 	void
 	request_transfer(
-		sanguis::server::dest_world_id,
 		sanguis::entity_id
 	);
 

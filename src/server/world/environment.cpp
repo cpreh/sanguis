@@ -186,6 +186,16 @@ sanguis::server::world::environment::remove_player(
 	);
 }
 
+void
+sanguis::server::world::environment::request_transfer(
+	sanguis::entity_id const _id
+)
+{
+	world_.request_transfer(
+		_id
+	);
+}
+
 sge::projectile::world &
 sanguis::server::world::environment::collision_world() const
 {

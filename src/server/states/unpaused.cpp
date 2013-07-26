@@ -122,9 +122,15 @@ sanguis::server::states::unpaused::operator()(
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
 	sanguis::server::player_id const _id,
-	sanguis::messages::player_change_world const &_message
+	sanguis::messages::player_change_world const &
 )
 {
+	this->context<
+		sanguis::server::states::running
+	>().global_context().player_change_world(
+		_id
+	);
+
 	return
 		this->discard_event();
 }

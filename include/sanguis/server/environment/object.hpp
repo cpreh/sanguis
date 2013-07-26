@@ -121,6 +121,12 @@ public:
 	) = 0;
 
 	virtual
+	void
+	request_transfer(
+		sanguis::entity_id
+	) = 0;
+
+	virtual
 	sge::projectile::world &
 	collision_world() const = 0;
 

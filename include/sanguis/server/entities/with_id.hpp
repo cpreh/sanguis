@@ -38,6 +38,9 @@ public:
 	id() const
 	override;
 
+	void
+	transfer_from_world();
+
 	virtual
 	sanguis::messages::unique_ptr
 	add_message(
