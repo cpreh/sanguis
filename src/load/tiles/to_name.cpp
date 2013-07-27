@@ -16,6 +16,8 @@ sanguis::load::tiles::to_name(
 	{
 	case sanguis::creator::tile::concrete_wall:
 		return FCPPT_TEXT("concrete_wall");
+	case sanguis::creator::tile::door:
+		return FCPPT_TEXT("door");
 	case sanguis::creator::tile::nothing:
 		break;
 	}

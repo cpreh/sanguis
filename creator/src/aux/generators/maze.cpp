@@ -19,16 +19,23 @@
 #include <sanguis/creator/aux/result.hpp>
 #include <sanguis/creator/aux/generators/maze.hpp>
 #include <fcppt/assert/error.hpp>
+#include <fcppt/algorithm/contains.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/append.hpp>
 #include <fcppt/algorithm/remove.hpp>
+#include <fcppt/io/cerr.hpp>
 #include <fcppt/container/grid/make_pos_range.hpp>
+#include <fcppt/math/diff.hpp>
+#include <fcppt/math/vector/output.hpp>
+#include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/length.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <vector>
+#include <ostream>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -65,8 +72,8 @@ sanguis::creator::aux::generators::maze(
 
 	sanguis::creator::grid ret(
 		sanguis::creator::grid::dim(
-			31u,
-			31u
+			61u,
+			61u
 		),
 		sanguis::creator::tile::concrete_wall
 	);
@@ -99,32 +106,10 @@ sanguis::creator::aux::generators::maze(
 		)
 	);
 
-	// add entry and exit points to the maze,
-	// which obviously have to lie on the perimeter.
 	sanguis::creator::opening_container openings;
-
-	unsigned const perimeter_length =
-		static_cast<unsigned>(
-			2 * (ret.size().w() - 2) +
-			2 * (ret.size().h() - 2));
 
 	unsigned const opening_count =
 		_parameters.opening_count().get();
-
-	for (
-		unsigned o = 0u;
-		o < opening_count;
-		o++
-	)
-	{
-		unsigned const t =
-			o * (perimeter_length / opening_count);
-		auto coords = perimeter_to_coords(ret.size(), t);
-		openings.push_back(
-			sanguis::creator::opening(
-				coords
-				));
-	}
 
 	// random starting position for maze generation,
 	// has to be on tiles that satisfy
@@ -133,6 +118,94 @@ sanguis::creator::aux::generators::maze(
 		(w_dist(_parameters.randgen()) / 2) * 2 + 1,
 		(h_dist(_parameters.randgen()) / 2) * 2 + 1
 	);
+
+	openings.push_back(
+		sanguis::creator::opening(
+			starting_pos));
+
+	// should always be true, since there should be 2 or more openings
+	if(
+		openings.size() <
+		opening_count
+	)
+	{
+		sanguis::creator::grid::pos exit_opening(
+			sanguis::creator::grid::pos::null());
+
+		unsigned distance;
+
+		unsigned const min_distance =
+			std::min(
+				ret.size().h(),
+				ret.size().w()
+			) /
+			2;
+
+		do
+		{
+			exit_opening =
+				sanguis::creator::grid::pos(
+					(w_dist(_parameters.randgen()) / 2) * 2 + 1,
+					(h_dist(_parameters.randgen()) / 2) * 2 + 1
+				);
+			distance =
+				[](
+					sanguis::creator::grid::pos a,
+					sanguis::creator::grid::pos b)
+				{
+					return
+						fcppt::math::diff(a.x(), b.x())
+						+
+						fcppt::math::diff(a.y(), b.y());
+				}
+				(
+						exit_opening,
+						starting_pos
+				);
+
+			if (distance < min_distance)
+				fcppt::io::cerr()
+					<< FCPPT_TEXT("openings too close (")
+					<< distance
+					<< FCPPT_TEXT("), retrying...")
+					<< std::endl;
+		}
+		while(
+				distance
+			<
+				min_distance
+		);
+
+		openings.push_back(
+			sanguis::creator::opening(
+				exit_opening));
+	}
+
+	unsigned current_openings =
+		openings.size();
+
+	while (
+		current_openings <
+		opening_count
+	)
+	{
+		sanguis::creator::opening next_opening(
+			sanguis::creator::grid::pos(
+				(w_dist(_parameters.randgen()) / 2) * 2 + 1,
+				(h_dist(_parameters.randgen()) / 2) * 2 + 1
+		));
+
+		if (
+			!fcppt::algorithm::contains(
+				openings,
+				next_opening)
+		)
+		{
+			openings.push_back(
+				next_opening);
+			current_openings++;
+		}
+	}
 
 	// initialize grid with empty cells every other row and column,
 	// surrounded on all sides by walls
@@ -185,7 +258,6 @@ sanguis::creator::aux::generators::maze(
 		}
 	}
 
-	// this follows the algorithm described at
 	while (!walls.empty())
 	{
 		sanguis::creator::grid::pos const
@@ -246,7 +318,7 @@ sanguis::creator::aux::generators::maze(
 			opening.get()
 		]
 		=
-		sanguis::creator::tile::nothing;
+		sanguis::creator::tile::door;
 
 	return
 		sanguis::creator::aux::result(

@@ -12,6 +12,7 @@ namespace creator
 enum class tile
 {
 	nothing,
+	door,
 	concrete_wall,
 	fcppt_maximum = concrete_wall
 };

@@ -59,14 +59,21 @@ sanguis::creator::aux::generators::lines(
 		)
 	);
 
-	for (unsigned i = 0; i < 5; ++i)
+
+	auto draw_line = [&ret](
+		int x0,
+		int y0,
+		int x1,
+		int y1
+	)
+	{
 		sanguis::creator::aux::bresenham(
 			sanguis::creator::signed_pos(
-				w_dist(_parameters.randgen()),
-				h_dist(_parameters.randgen())),
+				x0,
+				y0),
 			sanguis::creator::signed_pos(
-				w_dist(_parameters.randgen()),
-				h_dist(_parameters.randgen())),
+				x1,
+				y1),
 			[&ret](
 				sanguis::creator::signed_pos pos
 			)
@@ -78,9 +85,15 @@ sanguis::creator::aux::generators::lines(
 						pos);
 
 				if (fcppt::container::grid::in_range(ret, p))
-				ret[p] = sanguis::creator::tile::concrete_wall;
+					ret[p] = sanguis::creator::tile::concrete_wall;
 			}
 		);
+	};
+
+	draw_line(5,5,5,10);
+	draw_line(5,5,10,5);
+	draw_line(5,5,5,0);
+	draw_line(5,5,0,5);
 
 	// FIXME
 	sanguis::creator::opening_container openings
@@ -106,3 +119,4 @@ sanguis::creator::aux::generators::lines(
 			sanguis::creator::spawn_container()
 		);
 }
+

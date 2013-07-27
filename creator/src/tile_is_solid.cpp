@@ -13,6 +13,7 @@ sanguis::creator::tile_is_solid(
 	)
 	{
 	case sanguis::creator::tile::nothing:
+	case sanguis::creator::tile::door:
 		return false;
 	case sanguis::creator::tile::concrete_wall:
 		return true;
