@@ -1,7 +1,7 @@
 #ifndef SANGUIS_LOAD_MODEL_PART_HPP_INCLUDED
 #define SANGUIS_LOAD_MODEL_PART_HPP_INCLUDED
 
-#include <sanguis/weapon_type.hpp>
+#include <sanguis/optional_weapon_type_fwd.hpp>
 #include <sanguis/load/model/global_parameters_fwd.hpp>
 #include <sanguis/load/model/part_fwd.hpp>
 #include <sanguis/load/model/weapon_category_fwd.hpp>
@@ -28,7 +28,7 @@ class part
 public:
 	sanguis::load::model::weapon_category const &
 	operator[](
-		sanguis::weapon_type
+		sanguis::optional_weapon_type
 	) const;
 
 	~part();
@@ -39,7 +39,7 @@ public:
 	);
 private:
 	typedef boost::ptr_map<
-		sanguis::weapon_type,
+		sanguis::optional_weapon_type,
 		sanguis::load::model::weapon_category
 	> category_map;
 

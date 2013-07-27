@@ -250,8 +250,6 @@ sanguis::server::weapons::create(
 						);
 				}
 			);
-	case sanguis::weapon_type::none:
-		break;
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;

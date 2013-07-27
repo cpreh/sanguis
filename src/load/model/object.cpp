@@ -93,7 +93,11 @@ sanguis::load::model::object::random_part() const
 	return
 		*std::next(
 			parts_.begin(),
-			(*random_part_)()
+			static_cast<
+				part_map::difference_type
+			>(
+				(*random_part_)()
+			)
 		)->second;
 }
 

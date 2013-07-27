@@ -24,7 +24,6 @@ sanguis::load::weapon_pickup_name(
 		return FCPPT_TEXT("pickups/grenade");
 	case sanguis::weapon_type::sentry:
 		return FCPPT_TEXT("pickups/sentry");
-	case sanguis::weapon_type::none:
 	case sanguis::weapon_type::melee:
 	case sanguis::weapon_type::dual_pistol:
 		break;

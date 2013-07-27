@@ -119,28 +119,33 @@ private:
 	void
 	health(
 		sanguis::client::health
-	);
+	)
+	override;
 
 	void
 	max_health(
 		sanguis::client::health
-	);
+	)
+	override;
 
 	// with_weapon overrides
 	void
 	weapon(
 		sanguis::weapon_type
-	);
+	)
+	override;
 
 	void
 	attacking(
 		bool
-	);
+	)
+	override;
 
 	void
 	reloading(
 		bool
-	);
+	)
+	override;
 
 	// own functions
 	void

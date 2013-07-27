@@ -1,4 +1,5 @@
 #include <sanguis/exception.hpp>
+#include <sanguis/optional_weapon_type.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/load/log.hpp>
 #include <sanguis/load/model/find_texture.hpp>
@@ -13,7 +14,7 @@
 #include <sge/parse/json/member.hpp>
 #include <sge/parse/json/member_map.hpp>
 #include <fcppt/enum_size.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional_comparison.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/string.hpp>
@@ -44,7 +45,6 @@ typedef std::array<
 
 weapon_type_array const weapon_types = {
 {
-	FCPPT_TEXT("none"),
 	FCPPT_TEXT("melee"),
 	FCPPT_TEXT("pistol"),
 	FCPPT_TEXT("dual_pistols"),
@@ -53,31 +53,40 @@ weapon_type_array const weapon_types = {
 	FCPPT_TEXT("grenade")
 } };
 
-sanguis::weapon_type
+sanguis::optional_weapon_type
 find_weapon_type(
 	fcppt::string const &_str
 )
 {
 	return
-		static_cast<
-			sanguis::weapon_type
-		>(
-			std::distance(
-				weapon_types.begin(),
-				fcppt::algorithm::find_exn(
-					weapon_types.begin(),
-					weapon_types.end(),
-					_str
+		_str
+		==
+		FCPPT_TEXT("none")
+		?
+			sanguis::optional_weapon_type()
+		:
+			sanguis::optional_weapon_type(
+				static_cast<
+					sanguis::weapon_type
+				>(
+					std::distance(
+						weapon_types.begin(),
+						fcppt::algorithm::find_exn(
+							weapon_types.begin(),
+							weapon_types.end(),
+							_str
+						)
+					)
 				)
 			)
-		);
+		;
 }
 
 }
 
 sanguis::load::model::weapon_category const &
 sanguis::load::model::part::operator[](
-	sanguis::weapon_type const _type
+	sanguis::optional_weapon_type const _type
 ) const
 {
 	category_map::const_iterator const it(
@@ -92,13 +101,16 @@ sanguis::load::model::part::operator[](
 		return *it->second;
 
 	if(
-		_type == weapon_type::none
+		!_type
 	)
 		throw sanguis::exception(
 			FCPPT_TEXT("Unarmed weapon model missing in TODO")
 		);
 
-	return (*this)[weapon_type::none];
+	return
+		(*this)[
+			sanguis::optional_weapon_type()
+		];
 }
 
 sanguis::load::model::part::~part()

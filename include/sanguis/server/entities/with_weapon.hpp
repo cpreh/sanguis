@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_WEAPON_HPP_INCLUDED
 
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/optional_weapon_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/vector.hpp>
@@ -133,12 +134,12 @@ private:
 
 	typedef boost::ptr_map<
 		sanguis::weapon_type,
-		weapons::weapon
+		sanguis::server::weapons::weapon
 	> weapon_container;
 
 	weapon_container weapons_;
 
-	sanguis::weapon_type weapon_;
+	sanguis::optional_weapon_type weapon_;
 
 	typedef fcppt::optional<
 		sanguis::server::vector

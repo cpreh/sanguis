@@ -1,4 +1,4 @@
-#include <sanguis/exception.hpp>
+#include <sanguis/optional_weapon_type.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/messages/change_weapon.hpp>
 #include <sanguis/messages/create.hpp>
@@ -16,8 +16,8 @@
 #include <sanguis/server/weapons/create.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
-#include <fcppt/optional_impl.hpp>
-#include <fcppt/text.hpp>
+#include <fcppt/assert/error.hpp>
+#include <fcppt/assert/pre.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -43,9 +43,7 @@ sanguis::server::entities::with_weapon::with_weapon(
 		_random_generator
 	),
 	weapons_(),
-	weapon_(
-		sanguis::weapon_type::none
-	),
+	weapon_(),
 	target_(),
 	attacking_(
 		false
@@ -105,8 +103,9 @@ sanguis::server::entities::with_weapon::on_update()
 {
 	// change to the first weapon if we have any
 	if(
-		weapon_ == sanguis::weapon_type::none
-		&& !weapons_.empty()
+		!weapon_
+		&&
+		!weapons_.empty()
 	)
 		this->change_weapon(
 			weapons_.begin()->second->type()
@@ -128,7 +127,7 @@ sanguis::server::entities::with_weapon::on_update()
 	);
 
 	if(
-		weapon_ == weapon_type::none
+		!weapon_
 		|| !in_range_
 		|| !aggressive_
 	)
@@ -154,15 +153,12 @@ sanguis::server::entities::with_weapon::change_weapon(
 	sanguis::weapon_type const _weapon
 )
 {
-	if(
-		_weapon != sanguis::weapon_type::none
-		&& !weapons_.count(
+	FCPPT_ASSERT_PRE(
+		weapons_.count(
 			_weapon
 		)
-	)
-		throw sanguis::exception(
-			FCPPT_TEXT("tried to change to non-owned weapon")
-		);
+		> 0u
+	);
 
 	if(
 		this->has_weapon()
@@ -190,7 +186,7 @@ sanguis::server::entities::with_weapon::change_weapon(
 
 	this->environment().weapon_changed(
 		this->id(),
-		weapon_
+		_weapon
 	);
 }
 
@@ -208,8 +204,11 @@ sanguis::server::entities::with_weapon::add_weapon(
 	);
 
 	if(
-		wt == sanguis::weapon_type::pistol
-		&& weapons_.count(
+		wt
+		==
+		sanguis::weapon_type::pistol
+		&&
+		weapons_.count(
 			sanguis::weapon_type::pistol
 		)
 	)
@@ -242,18 +241,15 @@ sanguis::server::entities::with_weapon::add_weapon(
 		}
 	}
 
-	if(
-		!fcppt::container::ptr::insert_unique_ptr_map(
+	FCPPT_ASSERT_ERROR(
+		fcppt::container::ptr::insert_unique_ptr_map(
 			weapons_,
 			wt,
 			std::move(
 				_ptr
 			)
 		).second
-	)
-		throw sanguis::exception(
-			FCPPT_TEXT("couldn't insert weapon")
-		);
+	);
 
 	this->on_new_weapon(
 		wt
@@ -265,14 +261,12 @@ sanguis::server::entities::with_weapon::remove_weapon(
 	sanguis::weapon_type const _weapon
 )
 {
-	if(
-		!weapons_.erase(
+	FCPPT_ASSERT_ERROR(
+		weapons_.erase(
 			_weapon
 		)
-	)
-		throw sanguis::exception(
-			FCPPT_TEXT("tried to remove non-owned weapon")
-		);
+		> 0u
+	);
 }
 
 void
@@ -300,24 +294,26 @@ sanguis::server::entities::with_weapon::in_range(
 bool
 sanguis::server::entities::with_weapon::has_weapon() const
 {
-	return weapon_ != sanguis::weapon_type::none;
+	return
+		weapon_.has_value();
 }
 
 sanguis::server::weapons::weapon &
 sanguis::server::entities::with_weapon::active_weapon()
 {
+	FCPPT_ASSERT_PRE(
+		this->has_weapon()
+	);
+
 	weapon_container::iterator const it(
 		weapons_.find(
-			weapon_
+			*weapon_
 		)
 	);
 
-	if(
-		it == weapons_.end()
-	)
-		throw sanguis::exception(
-			FCPPT_TEXT("No weapon active in with_weapon!")
-		);
+	FCPPT_ASSERT_ERROR(
+		it != weapons_.end()
+	);
 
 	return *it->second;
 }

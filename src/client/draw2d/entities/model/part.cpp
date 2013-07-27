@@ -1,6 +1,7 @@
 #include <sanguis/animation_type.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
+#include <sanguis/optional_weapon_type.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/entities/model/part.hpp>
@@ -20,7 +21,6 @@
 #include <sge/sprite/object_impl.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/dim.hpp>
@@ -57,9 +57,7 @@ sanguis::client::draw2d::entities::model::part::part(
 	animation_type_(
 		sanguis::animation_type::size
 	),
-	weapon_(
-		sanguis::weapon_type::none
-	),
+	weapon_(),
 	animation_(),
 	animation_ended_(
 		false
@@ -109,7 +107,10 @@ sanguis::client::draw2d::entities::model::part::weapon(
 {
 	// we lose the animation here
 	// which model has to reset
-	weapon_ = _weapon;
+	weapon_ =
+		sanguis::optional_weapon_type(
+			_weapon
+		);
 
 	animation_type_ = sanguis::animation_type::size;
 }

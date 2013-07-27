@@ -9,8 +9,6 @@ namespace sanguis
 
 enum class weapon_type
 {
-	// TODO: remove none
-	none,
 	melee,
 	pistol,
 	dual_pistol,

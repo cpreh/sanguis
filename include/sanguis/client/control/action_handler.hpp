@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_CONTROL_ACTION_HANDLER_HPP_INCLUDED
 
 #include <sanguis/cheat_type_fwd.hpp>
+#include <sanguis/optional_weapon_type.hpp>
 #include <sanguis/timer.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/client/send_callback.hpp>
@@ -112,7 +113,7 @@ private:
 
 	sanguis::client::control::environment &environment_;
 
-	sanguis::weapon_type current_weapon_;
+	sanguis::optional_weapon_type current_weapon_;
 
 	sanguis::timer rotation_timer_;
 

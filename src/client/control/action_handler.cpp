@@ -1,4 +1,5 @@
 #include <sanguis/cheat_type.hpp>
+#include <sanguis/optional_weapon_type.hpp>
 #include <sanguis/timer.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/client/send_callback.hpp>
@@ -56,9 +57,7 @@ sanguis::client::control::action_handler::action_handler(
 	environment_(
 		_environment
 	),
-	current_weapon_(
-		sanguis::weapon_type::none
-	),
+	current_weapon_(),
 	rotation_timer_(
 		sanguis::timer::parameters(
 			boost::chrono::milliseconds(
@@ -167,7 +166,7 @@ sanguis::client::control::action_handler::give_player_weapon(
 
 	// we don't own any weapon so take this one
 	if(
-		current_weapon_ == sanguis::weapon_type::none
+		!current_weapon_
 	)
 		this->change_weapon(
 			_weapon_type
@@ -342,7 +341,7 @@ sanguis::client::control::action_handler::handle_switch_weapon(
 {
 	// we don't own any weapon
 	if(
-		current_weapon_ == sanguis::weapon_type::none
+		!current_weapon_
 	)
 		return;
 
@@ -350,7 +349,7 @@ sanguis::client::control::action_handler::handle_switch_weapon(
 		static_cast<
 			owned_weapons_array::size_type
 		>(
-			current_weapon_
+			*current_weapon_
 		)
 	);
 
@@ -364,10 +363,11 @@ sanguis::client::control::action_handler::handle_switch_weapon(
 
 	iterator it(
 		owned_weapons_.begin()
-		+ static_cast<
+		+
+		static_cast<
 			owned_weapons_array::size_type
 		>(
-			current_weapon_
+			*current_weapon_
 		),
 		owned_weapons_.begin(),
 		owned_weapons_.end()
@@ -401,7 +401,10 @@ sanguis::client::control::action_handler::change_weapon(
 	sanguis::weapon_type const _weapon_type
 )
 {
-	current_weapon_ = _weapon_type;
+	current_weapon_ =
+		sanguis::optional_weapon_type(
+			_weapon_type
+		);
 
 	send_(
 		*sanguis::messages::create(
@@ -409,7 +412,7 @@ sanguis::client::control::action_handler::change_weapon(
 				static_cast<
 					sanguis::messages::types::enum_
 				>(
-					current_weapon_
+					_weapon_type
 				)
 			)
 		)

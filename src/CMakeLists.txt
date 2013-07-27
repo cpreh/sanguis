@@ -421,6 +421,7 @@ SET(
 	include/sanguis/load/model/object_fwd.hpp
 	include/sanguis/load/model/optional_delay.hpp
 	include/sanguis/load/model/optional_texture_identifier.hpp
+	include/sanguis/load/model/optional_texture_identifier_fwd.hpp
 	include/sanguis/load/model/parse_json.hpp
 	include/sanguis/load/model/part.hpp
 	include/sanguis/load/model/part_fwd.hpp
@@ -617,6 +618,8 @@ SET(
 	include/sanguis/net/serialize_to_circular_buffer.hpp
 	include/sanguis/net/serialize_to_data_buffer.hpp
 	include/sanguis/net/stream_exceptions.hpp
+	include/sanguis/optional_weapon_type.hpp
+	include/sanguis/optional_weapon_type_fwd.hpp
 	include/sanguis/perk_type.hpp
 	include/sanguis/perk_type_fwd.hpp
 	include/sanguis/pickup_type.hpp
