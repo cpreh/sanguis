@@ -4,9 +4,10 @@
 #include <boost/filesystem/path.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 boost::filesystem::path const
 sanguis::media_path()
 {
-	// TODO: cache this somewhere?
-	return sanguis::build_media_path();
+	return
+		sanguis::build_media_path();
 }

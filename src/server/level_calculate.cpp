@@ -1,32 +1,34 @@
+#include <sanguis/server/exp.hpp>
+#include <sanguis/server/level.hpp>
 #include <sanguis/server/level_calculate.hpp>
 #include <sanguis/server/space_unit.hpp>
+#include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cmath>
 #include <fcppt/config/external_end.hpp>
 
+
 sanguis::server::level const
 sanguis::server::level_calculate(
-	server::exp const _exp,
-	server::level
+	sanguis::server::exp const _exp,
+	sanguis::server::level
 )
 {
 	return
-		server::level(
+		fcppt::strong_typedef_construct_cast<
+			sanguis::server::level
+		>(
 			static_cast<
-				server::level::value_type
+				sanguis::server::space_unit
 			>(
+				0.3
+			)
+			*
+			std::sqrt(
 				static_cast<
-					server::space_unit
+					sanguis::server::space_unit
 				>(
-					0.3
-				)
-				*
-				std::sqrt(
-					static_cast<
-						server::space_unit
-					>(
-						_exp.get()
-					)
+					_exp.get()
 				)
 			)
 		);

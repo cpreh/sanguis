@@ -70,15 +70,17 @@ sanguis::server::entities::with_ghosts::on_transfer(
 	for(
 		auto &ghost : ghosts_
 	)
+	{
+		ghost.center(
+			_params.center()
+		);
+
 		this->insert_ghost(
 			ghost,
 			_params.world(),
 			_params.global_groups()
 		);
-
-	this->update_center(
-		_params.center()
-	);
+	}
 
 	return true;
 }

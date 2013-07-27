@@ -127,7 +127,7 @@ load_delay(
 		return *_opt_delay;
 
 	throw sanguis::exception(
-		FCPPT_TEXT("delay not in header but not in specified in leaf TODO either!")
+		FCPPT_TEXT("delay not in header but not in specified leaf TODO either!")
 	);
 }
 

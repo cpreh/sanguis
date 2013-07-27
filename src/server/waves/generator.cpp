@@ -109,7 +109,7 @@ try
 		&& _args[1] == SGE_FONT_LIT("all")
 	)
 	{
-		spawn_all();
+		this->spawn_all();
 
 		return;
 	}
