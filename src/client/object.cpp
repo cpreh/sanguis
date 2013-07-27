@@ -32,6 +32,7 @@
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
 #include <boost/program_options/variables_map.hpp>
+#include <exception>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
 
@@ -132,7 +133,40 @@ sanguis::client::object::run()
 {
 	this->register_handler();
 
-	io_service_.run();
+	try
+	{
+		io_service_.run();
+	}
+	catch(
+		fcppt::exception const &_exception
+	)
+	{
+		FCPPT_LOG_FATAL(
+			sanguis::client::log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("Client error: ")
+				<< _exception.string()
+		);
+
+		sys_->window_system().quit(
+			awl::main::exit_failure()
+		);
+	}
+	catch(
+		std::exception const &_exception
+	)
+	{
+		FCPPT_LOG_FATAL(
+			sanguis::client::log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("Client error: ")
+				<< _exception.what()
+		);
+
+		sys_->window_system().quit(
+			awl::main::exit_failure()
+		);
+	}
 
 	awl::main::exit_code const server_ret(
 		this->quit_server()
@@ -170,42 +204,22 @@ sanguis::client::object::loop_handler()
 			awl::main::exit_failure()
 		);
 
-	try
-	{
-		if(
-			!machine_.process(
-				sge::timer::elapsed_and_reset<
-					sanguis::duration
-				>(
-					frame_timer_
-				)
+	if(
+		!machine_.process(
+			sge::timer::elapsed_and_reset<
+				sanguis::duration
+			>(
+				frame_timer_
 			)
 		)
-		{
-			io_service_.stop();
-
-			return;
-		}
-
-		machine_.draw();
-	}
-	catch(
-		fcppt::exception const &_exception
 	)
 	{
-		FCPPT_LOG_FATAL(
-			sanguis::client::log(),
-			fcppt::log::_
-				<< FCPPT_TEXT("Client error: ")
-				<< _exception.string()
-		);
+		io_service_.stop();
 
-		sys_->window_system().quit(
-			awl::main::exit_failure()
-		);
-
-		this->quit_server();
+		return;
 	}
+
+	machine_.draw();
 
 	this->register_handler();
 }
