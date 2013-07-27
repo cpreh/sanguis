@@ -1,8 +1,9 @@
 #ifndef SANGUIS_LOAD_TILES_SET_HPP_INCLUDED
 #define SANGUIS_LOAD_TILES_SET_HPP_INCLUDED
 
-#include <sanguis/creator/tile_fwd.hpp>
 #include <sanguis/load/resource/textures_fwd.hpp>
+#include <sanguis/load/tiles/category.hpp>
+#include <sanguis/load/tiles/name.hpp>
 #include <sanguis/load/tiles/orientation.hpp>
 #include <sanguis/load/tiles/set_fwd.hpp>
 #include <sge/texture/const_part_shared_ptr.hpp>
@@ -27,7 +28,8 @@ class set
 public:
 	set(
 		sanguis::load::resource::textures const &,
-		sanguis::creator::tile
+		sanguis::load::tiles::category const &,
+		sanguis::load::tiles::name const &
 	);
 
 	~set();

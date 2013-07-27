@@ -101,6 +101,9 @@ sanguis::server::global::context::context(
 	random_generator_(
 		sanguis::random_seed()
 	),
+	next_id_(
+		0u
+	),
 	send_unicast_(
 		_send_unicast
 	),
@@ -138,9 +141,6 @@ sanguis::server::global::context::context(
 				console_
 			)
 		)
-	),
-	next_id_(
-		0u
 	)
 {
 }

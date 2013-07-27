@@ -451,10 +451,13 @@ SET(
 	include/sanguis/load/server_context.hpp
 	include/sanguis/load/server_context_fwd.hpp
 	include/sanguis/load/skip_directories.hpp
+	include/sanguis/load/tiles/background_to_name.hpp
+	include/sanguis/load/tiles/category.hpp
 	include/sanguis/load/tiles/context.hpp
 	include/sanguis/load/tiles/context_fwd.hpp
 	include/sanguis/load/tiles/direction.hpp
 	include/sanguis/load/tiles/direction_fwd.hpp
+	include/sanguis/load/tiles/name.hpp
 	include/sanguis/load/tiles/orientation.hpp
 	include/sanguis/load/tiles/orientation_fwd.hpp
 	include/sanguis/load/tiles/set.hpp
@@ -1228,6 +1231,7 @@ SET(
 	src/load/resource/textures.cpp
 	src/load/server_context.cpp
 	src/load/skip_directories.cpp
+	src/load/tiles/background_to_name.cpp
 	src/load/tiles/context.cpp
 	src/load/tiles/set.cpp
 	src/load/tiles/to_name.cpp

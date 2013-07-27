@@ -164,6 +164,8 @@ private:
 
 	sanguis::random_generator random_generator_;
 
+	sanguis::entity_id next_id_;
+
 	sanguis::server::unicast_callback const send_unicast_;
 
 	typedef fcppt::scoped_ptr<
@@ -183,8 +185,6 @@ private:
 	sanguis::server::entities::player_map players_;
 
 	sanguis::server::global::world_map const worlds_;
-
-	sanguis::entity_id next_id_;
 };
 
 }

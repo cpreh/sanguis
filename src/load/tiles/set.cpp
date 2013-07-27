@@ -1,10 +1,10 @@
 #include <sanguis/media_path.hpp>
-#include <sanguis/creator/tile.hpp>
 #include <sanguis/load/log.hpp>
 #include <sanguis/load/resource/textures.hpp>
+#include <sanguis/load/tiles/category.hpp>
+#include <sanguis/load/tiles/name.hpp>
 #include <sanguis/load/tiles/orientation.hpp>
 #include <sanguis/load/tiles/set.hpp>
-#include <sanguis/load/tiles/to_name.hpp>
 #include <sge/texture/const_part_shared_ptr.hpp>
 #include <fcppt/extract_from_string.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -23,7 +23,8 @@
 
 sanguis::load::tiles::set::set(
 	sanguis::load::resource::textures const &_textures,
-	sanguis::creator::tile const _tile
+	sanguis::load::tiles::category const &_category,
+	sanguis::load::tiles::name const &_name
 )
 :
 	elements_()
@@ -34,9 +35,9 @@ sanguis::load::tiles::set::set(
 			/
 			FCPPT_TEXT("tiles")
 			/
-			sanguis::load::tiles::to_name(
-				_tile
-			)
+			_category.get()
+			/
+			_name.get()
 		);
 		it != boost::filesystem::directory_iterator();
 		++it
@@ -99,9 +100,11 @@ sanguis::load::tiles::set::set(
 			<<
 			FCPPT_TEXT("Tileset ")
 			<<
-			sanguis::load::tiles::to_name(
-				_tile
-			)
+			_category
+			<<
+			FCPPT_TEXT('/')
+			<<
+			_name
 			<<
 			FCPPT_TEXT(" has no default orientation.")
 		);

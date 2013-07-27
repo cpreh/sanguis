@@ -1,8 +1,10 @@
 #ifndef SANGUIS_LOAD_TILES_CONTEXT_HPP_INCLUDED
 #define SANGUIS_LOAD_TILES_CONTEXT_HPP_INCLUDED
 
+#include <sanguis/creator/background_tile_fwd.hpp>
 #include <sanguis/creator/tile_fwd.hpp>
 #include <sanguis/load/resource/textures_fwd.hpp>
+#include <sanguis/load/tiles/category.hpp>
 #include <sanguis/load/tiles/context_fwd.hpp>
 #include <sanguis/load/tiles/set_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -35,7 +37,24 @@ public:
 	set(
 		sanguis::creator::tile
 	);
+
+	sanguis::load::tiles::set const &
+	background_set(
+		sanguis::creator::background_tile
+	);
 private:
+	template<
+		typename Map,
+		typename ToName
+	>
+	sanguis::load::tiles::set const &
+	any_set(
+		Map &,
+		typename Map::key_type,
+		ToName,
+		sanguis::load::tiles::category const &
+	);
+
 	typedef
 	boost::ptr_map<
 		sanguis::creator::tile,
@@ -43,9 +62,18 @@ private:
 	>
 	set_map;
 
+	typedef
+	boost::ptr_map<
+		sanguis::creator::background_tile,
+		sanguis::load::tiles::set
+	>
+	background_set_map;
+
 	sanguis::load::resource::textures const &textures_;
 
 	set_map sets_;
+
+	background_set_map background_sets_;
 };
 
 }
