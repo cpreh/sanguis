@@ -13,6 +13,8 @@ sanguis::load::tiles::background_to_name(
 		_tile
 	)
 	{
+	case sanguis::creator::background_tile::grass:
+		return FCPPT_TEXT("grass");
 	case sanguis::creator::background_tile::nothing:
 		break;
 	}

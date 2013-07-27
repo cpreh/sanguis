@@ -26,10 +26,7 @@
 #include <fcppt/algorithm/remove.hpp>
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/container/grid/make_pos_range.hpp>
-#include <fcppt/math/diff.hpp>
-#include <fcppt/math/vector/output.hpp>
-#include <fcppt/math/vector/arithmetic.hpp>
-#include <fcppt/math/vector/length.hpp>
+#include <fcppt/math/clamp.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
@@ -72,8 +69,8 @@ sanguis::creator::aux::generators::maze(
 
 	sanguis::creator::grid ret(
 		sanguis::creator::grid::dim(
-			61u,
-			61u
+			19u,
+			11u
 		),
 		sanguis::creator::tile::concrete_wall
 	);
@@ -132,56 +129,48 @@ sanguis::creator::aux::generators::maze(
 		sanguis::creator::grid::pos exit_opening(
 			sanguis::creator::grid::pos::null());
 
-		unsigned distance;
+		auto clamp_to_grid =
+			[]
+			(
+				unsigned x,
+				unsigned max
+			)
+			{
+				return
+					(
+						fcppt::math::clamp(
+							x % max,
+							1u,
+							static_cast<unsigned>(max - 2)
+						) / 2
+					) * 2
+					+ 1;
+			};
 
-		unsigned const min_distance =
-			std::min(
-				ret.size().h(),
-				ret.size().w()
-			) /
-			2;
+		unsigned const x =
+			clamp_to_grid(
+				static_cast<unsigned>(starting_pos.x() + ret.size().w() / 2),
+				static_cast<unsigned>(ret.size().w())
+			);
 
-		do
-		{
-			exit_opening =
-				sanguis::creator::grid::pos(
-					(w_dist(_parameters.randgen()) / 2) * 2 + 1,
-					(h_dist(_parameters.randgen()) / 2) * 2 + 1
-				);
-			distance =
-				[](
-					sanguis::creator::grid::pos a,
-					sanguis::creator::grid::pos b)
-				{
-					return
-						fcppt::math::diff(a.x(), b.x())
-						+
-						fcppt::math::diff(a.y(), b.y());
-				}
-				(
-						exit_opening,
-						starting_pos
-				);
+		unsigned const y =
+			clamp_to_grid(
+				static_cast<unsigned>(starting_pos.y() + ret.size().h() / 2),
+				static_cast<unsigned>(ret.size().h())
+			);
 
-			if (distance < min_distance)
-				fcppt::io::cerr()
-					<< FCPPT_TEXT("openings too close (")
-					<< distance
-					<< FCPPT_TEXT("), retrying...")
-					<< std::endl;
-		}
-		while(
-				distance
-			<
-				min_distance
-		);
+		exit_opening =
+			sanguis::creator::grid::pos(
+				x,
+				y
+			);
 
 		openings.push_back(
 			sanguis::creator::opening(
 				exit_opening));
 	}
 
-	unsigned current_openings =
+	auto current_openings =
 		openings.size();
 
 	while (
@@ -325,7 +314,7 @@ sanguis::creator::aux::generators::maze(
 			ret,
 			sanguis::creator::background_grid(
 				ret.size(),
-				sanguis::creator::background_tile::nothing
+				sanguis::creator::background_tile::grass
 			),
 			openings,
 			sanguis::creator::spawn_container{

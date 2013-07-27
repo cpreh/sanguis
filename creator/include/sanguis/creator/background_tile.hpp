@@ -12,7 +12,8 @@ namespace creator
 enum class background_tile
 {
 	nothing,
-	fcppt_maximum = nothing
+	grass,
+	fcppt_maximum = grass
 };
 
 }
