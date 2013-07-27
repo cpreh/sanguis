@@ -82,12 +82,6 @@ sanguis::server::weapons::states::castpoint::react(
 		)
 	);
 
-	this->context<
-		sanguis::server::weapons::weapon
-	>().on_castpoint(
-		_event.owner()
-	);
-
 	this->post_event(
 		_event
 	);

@@ -10,7 +10,9 @@ sanguis::server::entities::property::base::base(
 :
 	base_(
 		_base
-	)
+	),
+	constant_(),
+	linear_()
 {
 }
 

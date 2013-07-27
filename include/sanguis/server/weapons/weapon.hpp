@@ -147,18 +147,6 @@ private:
 		sanguis::server::entities::with_weapon &owner
 	);
 
-	virtual
-	void
-	on_init_attack(
-		sanguis::server::entities::with_weapon &owner
-	);
-
-	virtual
-	void
-	on_castpoint(
-		sanguis::server::entities::with_weapon &owner
-	);
-
 	sanguis::diff_clock const &diff_clock_;
 
 	sanguis::weapon_type const type_;

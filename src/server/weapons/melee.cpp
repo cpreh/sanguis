@@ -4,8 +4,6 @@
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
-#include <sanguis/server/entities/with_velocity.hpp>
-#include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/projectiles/melee.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
@@ -76,48 +74,4 @@ sanguis::server::weapons::melee::do_attack(
 			)
 		)
 	);
-}
-
-void
-sanguis::server::weapons::melee::on_init_attack(
-	sanguis::server::entities::with_weapon &_owner
-)
-{
-	sanguis::server::entities::with_velocity *const movable(
-		dynamic_cast<
-			sanguis::server::entities::with_velocity *
-		>(
-			&_owner
-		)
-	);
-
-#if 0
-	if(
-		movable_
-	)
-		movable_->movement_speed().restrict(
-			0
-		);
-#endif
-}
-
-void
-sanguis::server::weapons::melee::on_castpoint(
-	sanguis::server::entities::with_weapon &_owner
-)
-{
-	sanguis::server::entities::with_velocity *const movable(
-		dynamic_cast<
-			sanguis::server::entities::with_velocity *
-		>(
-			&_owner
-		)
-	);
-
-#if 0
-	if(
-		movable_
-	)
-		movable_->movement_speed().unrestrict();
-#endif
 }

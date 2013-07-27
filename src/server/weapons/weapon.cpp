@@ -297,22 +297,4 @@ sanguis::server::weapons::weapon::init_attack(
 )
 {
 	_entity.start_attacking();
-
-	this->on_init_attack(
-		_entity
-	);
-}
-
-void
-sanguis::server::weapons::weapon::on_init_attack(
-	sanguis::server::entities::with_weapon &
-)
-{
-}
-
-void
-sanguis::server::weapons::weapon::on_castpoint(
-	sanguis::server::entities::with_weapon &
-)
-{
 }

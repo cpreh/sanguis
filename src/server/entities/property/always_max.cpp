@@ -15,7 +15,8 @@ sanguis::server::entities::property::always_max::always_max(
 	),
 	current_(
 		_base
-	)
+	),
+	change_signal_()
 {
 }
 
