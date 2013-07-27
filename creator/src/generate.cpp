@@ -9,6 +9,7 @@
 #include <sanguis/creator/aux/result.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
+#include <fcppt/math/dim/comparison.hpp>
 
 
 sanguis::creator::top_result
@@ -54,11 +55,18 @@ sanguis::creator::generate(
 		_parameters.opening_count().get()
 	);
 
+	FCPPT_ASSERT_ERROR(
+		result.grid().size()
+		==
+		result.background_grid().size()
+	);
+
 	return
 		sanguis::creator::top_result(
 			_parameters.seed(),
 			_parameters.name(),
 			result.grid(),
+			result.background_grid(),
 			result.openings(),
 			result.spawns()
 		);

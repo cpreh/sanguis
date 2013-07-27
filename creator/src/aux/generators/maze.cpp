@@ -1,3 +1,5 @@
+#include <sanguis/creator/background_grid.hpp>
+#include <sanguis/creator/background_tile.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/name.hpp>
 #include <sanguis/creator/opening.hpp>
@@ -249,6 +251,10 @@ sanguis::creator::aux::generators::maze(
 	return
 		sanguis::creator::aux::result(
 			ret,
+			sanguis::creator::background_grid(
+				ret.size(),
+				sanguis::creator::background_tile::nothing
+			),
 			openings,
 			sanguis::creator::spawn_container{
 				sanguis::creator::spawn(

@@ -1,6 +1,7 @@
 #include <sanguis/creator/name.hpp>
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/top_result.hpp>
+#include <sanguis/creator/aux/deserialization/background_grid.hpp>
 #include <sanguis/creator/aux/deserialization/grid.hpp>
 #include <sanguis/creator/aux/deserialization/opening_container.hpp>
 #include <sanguis/creator/aux/deserialization/spawn_container.hpp>
@@ -45,6 +46,14 @@ sanguis::creator::aux::deserialization::top_result(
 				>(
 					_object.members,
 					FCPPT_TEXT("grid")
+				)
+			),
+			sanguis::creator::aux::deserialization::background_grid(
+				sge::parse::json::find_member_exn<
+					sge::parse::json::object
+				>(
+					_object.members,
+					FCPPT_TEXT("background_grid")
 				)
 			),
 			sanguis::creator::aux::deserialization::opening_container(

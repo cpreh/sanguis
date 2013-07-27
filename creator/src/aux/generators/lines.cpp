@@ -2,6 +2,8 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
+#include <sanguis/creator/background_grid.hpp>
+#include <sanguis/creator/background_tile.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/pos_fwd.hpp>
 #include <sanguis/creator/signed_pos_fwd.hpp>
@@ -96,6 +98,10 @@ sanguis::creator::aux::generators::lines(
 	return
 		sanguis::creator::aux::result(
 			ret,
+			sanguis::creator::background_grid(
+				ret.size(),
+				sanguis::creator::background_tile::nothing
+			),
 			openings,
 			sanguis::creator::spawn_container()
 		);

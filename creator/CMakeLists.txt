@@ -8,6 +8,10 @@ include_directories(
 
 set(
 	SANGUIS_CREATOR_INCLUDE_FILES
+	include/sanguis/creator/background_grid.hpp
+	include/sanguis/creator/background_grid_fwd.hpp
+	include/sanguis/creator/background_tile.hpp
+	include/sanguis/creator/background_tile_fwd.hpp
 	include/sanguis/creator/deserialize.hpp
 	include/sanguis/creator/difference_type.hpp
 	include/sanguis/creator/exception.hpp
@@ -49,6 +53,7 @@ set(
 
 SET(
 	SANGUIS_CREATOR_SRC_FILES
+	src/aux/deserialization/background_grid.cpp
 	src/aux/deserialization/grid.cpp
 	src/aux/deserialization/opening_container.cpp
 	src/aux/deserialization/spawn.cpp
@@ -61,6 +66,7 @@ SET(
 	src/aux/neumann_neighbors.cpp
 	src/aux/parameters.cpp
 	src/aux/result.cpp
+	src/aux/serialization/background_grid.cpp
 	src/aux/serialization/grid.cpp
 	src/aux/serialization/opening_container.cpp
 	src/aux/serialization/spawn.cpp
@@ -72,10 +78,12 @@ SET(
 	src/generator_count.cpp
 	src/generator_index.cpp
 	src/include/sanguis/creator/aux/bresenham.hpp
+	src/include/sanguis/creator/aux/deserialization/background_grid.hpp
 	src/include/sanguis/creator/aux/deserialization/grid.hpp
 	src/include/sanguis/creator/aux/deserialization/opening_container.hpp
 	src/include/sanguis/creator/aux/deserialization/spawn.hpp
 	src/include/sanguis/creator/aux/deserialization/spawn_container.hpp
+	src/include/sanguis/creator/aux/deserialization/tile_grid.hpp
 	src/include/sanguis/creator/aux/deserialization/top_result.hpp
 	src/include/sanguis/creator/aux/find_opposing_cell.hpp
 	src/include/sanguis/creator/aux/generator_function.hpp
@@ -93,10 +101,12 @@ SET(
 	src/include/sanguis/creator/aux/randgen_fwd.hpp
 	src/include/sanguis/creator/aux/result.hpp
 	src/include/sanguis/creator/aux/result_fwd.hpp
+	src/include/sanguis/creator/aux/serialization/background_grid.hpp
 	src/include/sanguis/creator/aux/serialization/grid.hpp
 	src/include/sanguis/creator/aux/serialization/opening_container.hpp
 	src/include/sanguis/creator/aux/serialization/spawn.hpp
 	src/include/sanguis/creator/aux/serialization/spawn_container.hpp
+	src/include/sanguis/creator/aux/serialization/tile_grid.hpp
 	src/include/sanguis/creator/aux/serialization/top_result.hpp
 	src/randgen.cpp
 	src/serialize.cpp

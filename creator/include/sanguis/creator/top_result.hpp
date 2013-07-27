@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CREATOR_TOP_RESULT_HPP_INCLUDED
 #define SANGUIS_CREATOR_TOP_RESULT_HPP_INCLUDED
 
+#include <sanguis/creator/background_grid.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/name.hpp>
 #include <sanguis/creator/opening_container.hpp>
@@ -22,6 +23,7 @@ public:
 		sanguis::creator::seed,
 		sanguis::creator::name,
 		sanguis::creator::grid const &,
+		sanguis::creator::background_grid const &,
 		sanguis::creator::opening_container const &,
 		sanguis::creator::spawn_container const &
 	);
@@ -39,6 +41,10 @@ public:
 	grid() const;
 
 	SANGUIS_CREATOR_SYMBOL
+	sanguis::creator::background_grid const &
+	background_grid() const;
+
+	SANGUIS_CREATOR_SYMBOL
 	sanguis::creator::opening_container const &
 	openings() const;
 
@@ -51,6 +57,8 @@ private:
 	sanguis::creator::name name_;
 
 	sanguis::creator::grid grid_;
+
+	sanguis::creator::background_grid background_grid_;
 
 	sanguis::creator::opening_container openings_;
 

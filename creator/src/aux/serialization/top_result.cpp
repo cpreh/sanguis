@@ -1,4 +1,5 @@
 #include <sanguis/creator/top_result.hpp>
+#include <sanguis/creator/aux/serialization/background_grid.hpp>
 #include <sanguis/creator/aux/serialization/grid.hpp>
 #include <sanguis/creator/aux/serialization/opening_container.hpp>
 #include <sanguis/creator/aux/serialization/spawn_container.hpp>
@@ -43,6 +44,13 @@ sanguis::creator::aux::serialization::top_result(
 					FCPPT_TEXT("grid"),
 					sanguis::creator::aux::serialization::grid(
 						_result.grid()
+					)
+				)
+			)(
+				sge::parse::json::member(
+					FCPPT_TEXT("background_grid"),
+					sanguis::creator::aux::serialization::background_grid(
+						_result.background_grid()
 					)
 				)
 			)(
