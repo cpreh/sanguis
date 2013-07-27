@@ -6,6 +6,7 @@
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/creator/opening.hpp>
 #include <sanguis/creator/opening_container.hpp>
+#include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/top_result.hpp>
 #include <sanguis/load/model/context.hpp>
 #include <sanguis/load/model/collection.hpp>
@@ -41,7 +42,7 @@
 #include <sanguis/server/collision/optional_result.hpp>
 #include <sanguis/server/collision/with_world.hpp>
 #include <sanguis/server/entities/base.hpp>
-#include <sanguis/server/entities/insert_parameters_fwd.hpp>
+#include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/is_type.hpp>
 #include <sanguis/server/entities/optional_base_ref.hpp>
 #include <sanguis/server/entities/player.hpp>
@@ -66,6 +67,8 @@
 #include <sanguis/server/world/parameters.hpp>
 #include <sanguis/server/world/sight_range.hpp>
 #include <sanguis/server/world/sight_range_map.hpp>
+#include <sanguis/server/world/spawn_entity.hpp>
+#include <sanguis/server/world/spawn_parameters.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <sge/projectile/time_increment.hpp>
 #include <sge/projectile/world.hpp>
@@ -169,6 +172,11 @@ sanguis::server::world::object::object(
 		_parameters.console()
 	)
 {
+	this->insert_spawns(
+		_generated_world.spawns(),
+		_parameters.diff_clock(),
+		_parameters.random_generator()
+	);
 }
 
 sanguis::server::world::object::~object()
@@ -905,4 +913,27 @@ sanguis::server::world::object::entity_collision(
 				*result
 			);
 	}
+}
+
+void
+sanguis::server::world::object::insert_spawns(
+	sanguis::creator::spawn_container const &_spawns,
+	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator
+)
+{
+	for(
+		auto const &spawn : _spawns
+	)
+		this->insert(
+			sanguis::server::world::spawn_entity(
+				spawn,
+				_diff_clock,
+				_random_generator,
+				this->load_context()
+			),
+			sanguis::server::world::spawn_parameters(
+				spawn
+			)
+		);
 }

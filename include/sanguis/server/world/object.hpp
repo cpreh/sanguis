@@ -1,9 +1,11 @@
 #ifndef SANGUIS_SERVER_WORLD_OBJECT_HPP_INCLUDED
 #define SANGUIS_SERVER_WORLD_OBJECT_HPP_INCLUDED
 
+#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/timer.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/weapon_type_fwd.hpp>
@@ -12,6 +14,7 @@
 #include <sanguis/creator/opening_container.hpp>
 #include <sanguis/creator/top_result_fwd.hpp>
 #include <sanguis/creator/seed.hpp>
+#include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/exp.hpp>
@@ -202,6 +205,13 @@ private:
 	entity_collision(
 		sanguis::duration const &,
 		sanguis::server::entities::base &
+	);
+
+	void
+	insert_spawns(
+		sanguis::creator::spawn_container const &,
+		sanguis::diff_clock const &,
+		sanguis::random_generator &
 	);
 
 	sanguis::world_id const id_;

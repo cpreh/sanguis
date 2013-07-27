@@ -9,6 +9,7 @@
 #include <sanguis/creator/opening_container.hpp>
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/size_type.hpp>
+#include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/aux/bresenham.hpp>
 #include <sanguis/creator/aux/parameters.hpp>
@@ -89,12 +90,13 @@ sanguis::creator::aux::generators::lines(
 		sanguis::creator::opening(
 			sanguis::creator::pos(
 				0,
-				1)),
+				1))
 	};
 
 	return
 		sanguis::creator::aux::result(
 			ret,
-			openings
+			openings,
+			sanguis::creator::spawn_container()
 		);
 }

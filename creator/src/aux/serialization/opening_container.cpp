@@ -5,7 +5,6 @@
 #include <sge/parse/json/element_vector.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/convert/from_container.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/algorithm/map.hpp>
 
 

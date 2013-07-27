@@ -2,8 +2,12 @@
 #include <sanguis/creator/name.hpp>
 #include <sanguis/creator/opening.hpp>
 #include <sanguis/creator/opening_container.hpp>
+#include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/size_type.hpp>
+#include <sanguis/creator/spawn_container.hpp>
+#include <sanguis/creator/spawn_pos.hpp>
+#include <sanguis/creator/spawn_type.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/aux/find_opposing_cell.hpp>
 #include <sanguis/creator/aux/neighbor_array.hpp>
@@ -245,7 +249,18 @@ sanguis::creator::aux::generators::maze(
 	return
 		sanguis::creator::aux::result(
 			ret,
-			openings
+			openings,
+			sanguis::creator::spawn_container{
+				sanguis::creator::spawn(
+					sanguis::creator::spawn_pos(
+						sanguis::creator::pos(
+							5,
+							5
+						)
+					),
+					sanguis::creator::spawn_type::test
+				)
+			}
 		);
 }
 

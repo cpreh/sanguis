@@ -59,6 +59,7 @@ sanguis::creator::generate(
 			_parameters.seed(),
 			_parameters.name(),
 			result.grid(),
-			result.openings()
+			result.openings(),
+			result.spawns()
 		);
 }

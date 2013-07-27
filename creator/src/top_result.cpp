@@ -2,6 +2,7 @@
 #include <sanguis/creator/name.hpp>
 #include <sanguis/creator/opening_container.hpp>
 #include <sanguis/creator/seed.hpp>
+#include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/top_result.hpp>
 
 
@@ -9,7 +10,8 @@ sanguis::creator::top_result::top_result(
 	sanguis::creator::seed const _seed,
 	sanguis::creator::name const _name,
 	sanguis::creator::grid const &_grid,
-	sanguis::creator::opening_container const &_openings
+	sanguis::creator::opening_container const &_openings,
+	sanguis::creator::spawn_container const &_spawns
 )
 :
 	seed_(
@@ -23,6 +25,9 @@ sanguis::creator::top_result::top_result(
 	),
 	openings_(
 		_openings
+	),
+	spawns_(
+		_spawns
 	)
 {
 }
@@ -49,4 +54,10 @@ sanguis::creator::opening_container const &
 sanguis::creator::top_result::openings() const
 {
 	return openings_;
+}
+
+sanguis::creator::spawn_container const &
+sanguis::creator::top_result::spawns() const
+{
+	return spawns_;
 }

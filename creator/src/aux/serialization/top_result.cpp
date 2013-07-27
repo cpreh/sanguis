@@ -1,6 +1,7 @@
 #include <sanguis/creator/top_result.hpp>
 #include <sanguis/creator/aux/serialization/grid.hpp>
 #include <sanguis/creator/aux/serialization/opening_container.hpp>
+#include <sanguis/creator/aux/serialization/spawn_container.hpp>
 #include <sanguis/creator/aux/serialization/top_result.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/int_type.hpp>
@@ -49,6 +50,13 @@ sanguis::creator::aux::serialization::top_result(
 					FCPPT_TEXT("openings"),
 					sanguis::creator::aux::serialization::opening_container(
 						_result.openings()
+					)
+				)
+			)(
+				sge::parse::json::member(
+					FCPPT_TEXT("spawns"),
+					sanguis::creator::aux::serialization::spawn_container(
+						_result.spawns()
 					)
 				)
 			)

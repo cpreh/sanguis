@@ -5,6 +5,7 @@
 #include <sanguis/creator/name.hpp>
 #include <sanguis/creator/opening_container.hpp>
 #include <sanguis/creator/seed.hpp>
+#include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/symbol.hpp>
 #include <sanguis/creator/top_result_fwd.hpp>
 
@@ -21,7 +22,8 @@ public:
 		sanguis::creator::seed,
 		sanguis::creator::name,
 		sanguis::creator::grid const &,
-		sanguis::creator::opening_container const &
+		sanguis::creator::opening_container const &,
+		sanguis::creator::spawn_container const &
 	);
 
 	SANGUIS_CREATOR_SYMBOL
@@ -39,6 +41,10 @@ public:
 	SANGUIS_CREATOR_SYMBOL
 	sanguis::creator::opening_container const &
 	openings() const;
+
+	SANGUIS_CREATOR_SYMBOL
+	sanguis::creator::spawn_container const &
+	spawns() const;
 private:
 	sanguis::creator::seed seed_;
 
@@ -47,6 +53,8 @@ private:
 	sanguis::creator::grid grid_;
 
 	sanguis::creator::opening_container openings_;
+
+	sanguis::creator::spawn_container spawns_;
 };
 
 }

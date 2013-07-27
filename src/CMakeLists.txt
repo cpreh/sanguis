@@ -1032,6 +1032,8 @@ SET(
 	include/sanguis/server/world/sight_range_entry_set.hpp
 	include/sanguis/server/world/sight_range_fwd.hpp
 	include/sanguis/server/world/sight_range_map.hpp
+	include/sanguis/server/world/spawn_entity.hpp
+	include/sanguis/server/world/spawn_parameters.hpp
 	include/sanguis/string_vector.hpp
 	include/sanguis/time_unit.hpp
 	include/sanguis/timer.hpp
@@ -1504,6 +1506,8 @@ SET(
 	src/server/world/random_generator_name.cpp
 	src/server/world/random_seed.cpp
 	src/server/world/sight_range.cpp
+	src/server/world/spawn_entity.cpp
+	src/server/world/spawn_parameters.cpp
 	src/to_console_arg_list.cpp
 	src/update_diff_clock.cpp
 )

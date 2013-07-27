@@ -3,6 +3,7 @@
 #include <sanguis/creator/top_result.hpp>
 #include <sanguis/creator/aux/deserialization/grid.hpp>
 #include <sanguis/creator/aux/deserialization/opening_container.hpp>
+#include <sanguis/creator/aux/deserialization/spawn_container.hpp>
 #include <sanguis/creator/aux/deserialization/top_result.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
@@ -52,6 +53,14 @@ sanguis::creator::aux::deserialization::top_result(
 				>(
 					_object.members,
 					FCPPT_TEXT("openings")
+				)
+			),
+			sanguis::creator::aux::deserialization::spawn_container(
+				sge::parse::json::find_member_exn<
+					sge::parse::json::array
+				>(
+					_object.members,
+					FCPPT_TEXT("spawns")
 				)
 			)
 		);

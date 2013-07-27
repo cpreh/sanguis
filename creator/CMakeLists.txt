@@ -30,6 +30,12 @@ set(
 	include/sanguis/creator/signed_pos.hpp
 	include/sanguis/creator/signed_pos_fwd.hpp
 	include/sanguis/creator/size_type.hpp
+	include/sanguis/creator/spawn.hpp
+	include/sanguis/creator/spawn_container.hpp
+	include/sanguis/creator/spawn_fwd.hpp
+	include/sanguis/creator/spawn_pos.hpp
+	include/sanguis/creator/spawn_type.hpp
+	include/sanguis/creator/spawn_type_fwd.hpp
 	include/sanguis/creator/symbol.hpp
 	include/sanguis/creator/tile.hpp
 	include/sanguis/creator/tile_fwd.hpp
@@ -45,6 +51,8 @@ SET(
 	SANGUIS_CREATOR_SRC_FILES
 	src/aux/deserialization/grid.cpp
 	src/aux/deserialization/opening_container.cpp
+	src/aux/deserialization/spawn.cpp
+	src/aux/deserialization/spawn_container.cpp
 	src/aux/deserialization/top_result.cpp
 	src/aux/find_opposing_cell.cpp
 	src/aux/generator_map.cpp
@@ -55,6 +63,8 @@ SET(
 	src/aux/result.cpp
 	src/aux/serialization/grid.cpp
 	src/aux/serialization/opening_container.cpp
+	src/aux/serialization/spawn.cpp
+	src/aux/serialization/spawn_container.cpp
 	src/aux/serialization/top_result.cpp
 	src/deserialize.cpp
 	src/exception.cpp
@@ -64,6 +74,8 @@ SET(
 	src/include/sanguis/creator/aux/bresenham.hpp
 	src/include/sanguis/creator/aux/deserialization/grid.hpp
 	src/include/sanguis/creator/aux/deserialization/opening_container.hpp
+	src/include/sanguis/creator/aux/deserialization/spawn.hpp
+	src/include/sanguis/creator/aux/deserialization/spawn_container.hpp
 	src/include/sanguis/creator/aux/deserialization/top_result.hpp
 	src/include/sanguis/creator/aux/find_opposing_cell.hpp
 	src/include/sanguis/creator/aux/generator_function.hpp
@@ -83,9 +95,12 @@ SET(
 	src/include/sanguis/creator/aux/result_fwd.hpp
 	src/include/sanguis/creator/aux/serialization/grid.hpp
 	src/include/sanguis/creator/aux/serialization/opening_container.hpp
+	src/include/sanguis/creator/aux/serialization/spawn.hpp
+	src/include/sanguis/creator/aux/serialization/spawn_container.hpp
 	src/include/sanguis/creator/aux/serialization/top_result.hpp
 	src/randgen.cpp
 	src/serialize.cpp
+	src/spawn.cpp
 	src/tile_is_solid.cpp
 	src/top_parameters.cpp
 	src/top_result.cpp
