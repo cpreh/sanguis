@@ -610,7 +610,6 @@ sanguis::client::draw2d::scene::object::change_world(
 {
 	own_entities_.clear();
 
-/*
 	// TODO: We should have a generic algorithm for iterations like these
 	for(
 		entity_map::iterator it(
@@ -626,13 +625,13 @@ sanguis::client::draw2d::scene::object::change_world(
 		++next;
 
 		if(
-			it->second->is_decayed()
+			it->second->dead()
 		)
 			entities_.erase(
 				it
 			);
 	}
-*/
+
 	world_->change(
 		_parameters
 	);

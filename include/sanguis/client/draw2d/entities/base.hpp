@@ -27,7 +27,11 @@ public:
 	update() = 0;
 
 	void
-	decay();
+	die();
+
+	virtual
+	bool
+	dead() const = 0;
 
 	bool
 	may_be_removed() const;
@@ -37,13 +41,11 @@ public:
 private:
 	virtual
 	bool
-	is_decayed() const;
+	is_decayed() const = 0;
 
 	virtual
 	void
-	on_decay();
-
-	bool removed_;
+	on_die() = 0;
 };
 
 }

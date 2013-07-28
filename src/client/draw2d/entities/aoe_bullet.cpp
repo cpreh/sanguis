@@ -52,7 +52,7 @@ sanguis::client::draw2d::entities::aoe_bullet::~aoe_bullet()
 }
 
 void
-sanguis::client::draw2d::entities::aoe_bullet::on_decay()
+sanguis::client::draw2d::entities::aoe_bullet::on_die()
 {
 	insert_(
 		fcppt::make_unique_ptr<
@@ -66,5 +66,5 @@ sanguis::client::draw2d::entities::aoe_bullet::on_decay()
 		)
 	);
 
-	sanguis::client::draw2d::entities::model::object::on_decay();
+	sanguis::client::draw2d::entities::model::object::on_die();
 }

@@ -229,6 +229,13 @@ sanguis::client::draw2d::entities::model::object::orientation(
 }
 
 bool
+sanguis::client::draw2d::entities::model::object::dead() const
+{
+	return
+		decay_time_.get() != nullptr;
+}
+
+bool
 sanguis::client::draw2d::entities::model::object::is_decayed() const
 {
 	return
@@ -238,7 +245,7 @@ sanguis::client::draw2d::entities::model::object::is_decayed() const
 }
 
 void
-sanguis::client::draw2d::entities::model::object::on_decay()
+sanguis::client::draw2d::entities::model::object::on_die()
 {
 	decay_time_.take(
 		fcppt::make_unique_ptr<
@@ -300,13 +307,6 @@ sanguis::client::draw2d::entities::model::object::part(
 		parts_.at(
 			_idx.get()
 		);
-}
-
-bool
-sanguis::client::draw2d::entities::model::object::dead() const
-{
-	return
-		decay_time_.get() != nullptr;
 }
 
 bool

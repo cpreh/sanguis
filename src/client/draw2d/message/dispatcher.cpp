@@ -333,7 +333,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		_message.get<
 			sanguis::messages::roles::entity_id
 		>()
-	).decay();
+	).die();
 }
 
 sanguis::client::draw2d::message::dispatcher::result_type

@@ -90,12 +90,16 @@ protected:
 
 	// base overrides
 	bool
+	dead() const
+	override;
+
+	bool
 	is_decayed() const
 	override;
 
 	virtual
 	void
-	on_decay()
+	on_die()
 	override;
 
 	// with_speed overrides
@@ -112,9 +116,6 @@ protected:
 	part(
 		sanguis::client::draw2d::sprite::index const &
 	);
-
-	bool
-	dead() const;
 
 	bool
 	walking() const;

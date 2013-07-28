@@ -38,7 +38,8 @@ public:
 	~aoe_bullet();
 private:
 	void
-	on_decay();
+	on_die()
+	override;
 
 	sanguis::diff_clock const &diff_clock_;
 
