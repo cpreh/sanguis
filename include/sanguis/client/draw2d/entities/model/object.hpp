@@ -74,7 +74,8 @@ protected:
 	void
 	orientation(
 		sanguis::client::draw2d::sprite::rotation
-	);
+	)
+	override;
 
 	using container::orientation;
 
@@ -86,18 +87,21 @@ protected:
 
 	// base overrides
 	bool
-	is_decayed() const;
+	is_decayed() const
+	override;
 
 	virtual
 	void
-	on_decay();
+	on_decay()
+	override;
 
 	// with_speed overrides
 	virtual
 	void
 	speed(
 		sanguis::client::draw2d::speed const &
-	);
+	)
+	override;
 
 	using container::speed;
 

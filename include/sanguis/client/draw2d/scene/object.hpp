@@ -5,6 +5,7 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
 #include <sanguis/random_generator.hpp>
+#include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/client/control/environment_fwd.hpp>
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
 #include <sanguis/client/draw2d/transform_callback.hpp>
@@ -136,6 +137,11 @@ private:
 	void
 	transform(
 		sanguis::client::draw2d::sprite::center const &
+	);
+
+	void
+	change_world(
+		sanguis::client::world_parameters const &
 	);
 
 	sanguis::diff_clock const &

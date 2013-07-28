@@ -4,6 +4,7 @@
 #include <sanguis/client/draw2d/entities/base_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -21,7 +22,8 @@ class base
 protected:
 	base();
 public:
-	virtual void
+	virtual
+	void
 	update() = 0;
 
 	void
@@ -30,13 +32,16 @@ public:
 	bool
 	may_be_removed() const;
 
-	virtual ~base() = 0;
+	virtual
+	~base() = 0;
 private:
-	virtual void
-	on_decay();
-
-	virtual bool
+	virtual
+	bool
 	is_decayed() const;
+
+	virtual
+	void
+	on_decay();
 
 	bool removed_;
 };

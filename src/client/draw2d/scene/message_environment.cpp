@@ -102,7 +102,7 @@ sanguis::client::draw2d::scene::message_environment::change_world(
 	sanguis::client::world_parameters const &_param
 )
 {
-	world_.change(
+	object_.change_world(
 		_param
 	);
 }

@@ -1,3 +1,4 @@
+#include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/scene/object.hpp>
@@ -600,6 +601,41 @@ sanguis::client::draw2d::scene::object::transform(
 )
 {
 	player_center_ = _player_center;
+}
+
+void
+sanguis::client::draw2d::scene::object::change_world(
+	sanguis::client::world_parameters const &_parameters
+)
+{
+	own_entities_.clear();
+
+/*
+	// TODO: We should have a generic algorithm for iterations like these
+	for(
+		entity_map::iterator it(
+			entities_.begin()
+		),
+		next(
+			it
+		);
+		it != entities_.end();
+		it = next
+	)
+	{
+		++next;
+
+		if(
+			it->second->is_decayed()
+		)
+			entities_.erase(
+				it
+			);
+	}
+*/
+	world_->change(
+		_parameters
+	);
 }
 
 sanguis::diff_clock const &
