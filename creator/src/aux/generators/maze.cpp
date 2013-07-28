@@ -17,6 +17,10 @@
 #include <sanguis/creator/aux/parameters.hpp>
 #include <sanguis/creator/aux/randgen.hpp>
 #include <sanguis/creator/aux/result.hpp>
+#include <sanguis/creator/aux/filled_rect.hpp>
+#include <sanguis/creator/aux/rect.hpp>
+#include <fcppt/container/grid/in_range.hpp>
+#include <fcppt/math/vector/structure_cast.hpp>
 #include <sanguis/creator/aux/generators/maze.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/algorithm/contains.hpp>
@@ -27,6 +31,8 @@
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/container/grid/make_pos_range.hpp>
 #include <fcppt/math/clamp.hpp>
+#include <fcppt/math/dim/arithmetic.hpp>
+#include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
@@ -48,10 +54,10 @@ sanguis::creator::aux::generators::maze(
 		>
 	> uniform_int;
 
-	sanguis::creator::grid ret(
+	sanguis::creator::grid grid(
 		sanguis::creator::grid::dim(
-			19u,
-			11u
+			11,
+			11
 		),
 		sanguis::creator::tile::concrete_wall
 	);
@@ -61,8 +67,8 @@ sanguis::creator::aux::generators::maze(
 			0u
 		),
 		uniform_int::param_type::max(
-			ret.size().w() *
-			ret.size().h()
+			grid.size().w() *
+			grid.size().h()
 		)
 	);
 
@@ -71,7 +77,7 @@ sanguis::creator::aux::generators::maze(
 			0u
 		),
 		uniform_int::param_type::max(
-			ret.size().w() - 2
+			grid.size().w() - 2
 		)
 	);
 
@@ -80,7 +86,7 @@ sanguis::creator::aux::generators::maze(
 			0u
 		),
 		uniform_int::param_type::max(
-			ret.size().h() - 2
+			grid.size().h() - 2
 		)
 	);
 
@@ -130,14 +136,14 @@ sanguis::creator::aux::generators::maze(
 
 		unsigned const x =
 			clamp_to_grid(
-				static_cast<unsigned>(starting_pos.x() + ret.size().w() / 2),
-				static_cast<unsigned>(ret.size().w())
+				static_cast<unsigned>(starting_pos.x() + grid.size().w() / 2),
+				static_cast<unsigned>(grid.size().w())
 			);
 
 		unsigned const y =
 			clamp_to_grid(
-				static_cast<unsigned>(starting_pos.y() + ret.size().h() / 2),
-				static_cast<unsigned>(ret.size().h())
+				static_cast<unsigned>(starting_pos.y() + grid.size().h() / 2),
+				static_cast<unsigned>(grid.size().h())
 			);
 
 		exit_opening =
@@ -182,7 +188,7 @@ sanguis::creator::aux::generators::maze(
 	for (
 		auto cell :
 		fcppt::container::grid::make_pos_range(
-			ret)
+			grid)
 	)
 	{
 		if (
@@ -214,7 +220,7 @@ sanguis::creator::aux::generators::maze(
 	)
 	{
 		if (
-			ret
+			grid
 			[
 				pos
 			]
@@ -244,7 +250,7 @@ sanguis::creator::aux::generators::maze(
 		>
 		opposing_cell =
 			sanguis::creator::aux::find_opposing_cell(
-				ret,
+				grid,
 				maze,
 				random_wall);
 
@@ -252,12 +258,12 @@ sanguis::creator::aux::generators::maze(
 			opposing_cell
 		)
 		{
-			ret[
+			grid[
 				random_wall
 			] =
 				sanguis::creator::tile::nothing;
 
-			ret[
+			grid[
 				*opposing_cell
 			] =
 				sanguis::creator::tile::nothing;
@@ -279,24 +285,146 @@ sanguis::creator::aux::generators::maze(
 		);
 	}
 
-	for(
-		auto const opening
-		:
-		openings
+	unsigned scaling_factor = 2;
+
+	uniform_int fill_tile_random(
+		uniform_int::param_type::min(
+			0u
+		),
+		uniform_int::param_type::max(
+			5u
+		)
+	);
+
+	sanguis::creator::grid ret(
+		grid.size() *
+		scaling_factor,
+		sanguis::creator::tile::nothing
+	);
+
+	sanguis::creator::background_grid ret_bg(
+		ret.size(),
+		sanguis::creator::background_tile::grass
+	);
+
+	for (
+		auto cell :
+		fcppt::container::grid::make_pos_range(
+			grid)
 	)
-		ret[
-			opening.get()
-		]
-		=
-		sanguis::creator::tile::door;
+	{
+		auto value = cell.value();
+
+		for (unsigned dy = 0; dy < scaling_factor; ++dy)
+			for (unsigned dx = 0; dx < scaling_factor; ++dx)
+				if (
+					fill_tile_random(
+						_parameters.randgen()) !=
+					0
+				)
+					ret[
+						cell.pos() *
+						scaling_factor +
+						sanguis::creator::grid::pos(
+							dx,
+							dy)
+					] = value;
+	}
+
+	// randomly create an empty area in the map
+	sanguis::creator::aux::filled_rect(
+			sanguis::creator::signed_pos(
+				(w_dist(_parameters.randgen()) / 2) * 2 + 1,
+				(h_dist(_parameters.randgen()) / 2) * 2 + 1
+			) *
+				scaling_factor,
+				
+			sanguis::creator::signed_pos(
+				(w_dist(_parameters.randgen()) / 2) * 2 + 1,
+				(h_dist(_parameters.randgen()) / 2) * 2 + 1
+			) *
+				scaling_factor,
+			[
+				&ret,
+				&ret_bg
+			](
+				sanguis::creator::signed_pos pos
+			)
+			{
+				auto p =
+					fcppt::math::vector::structure_cast<
+						sanguis::creator::pos
+					>(
+						pos);
+
+				if (fcppt::container::grid::in_range(ret, p))
+				{
+					ret[p] = sanguis::creator::tile::nothing;
+					ret_bg[p] = sanguis::creator::background_tile::asphalt;
+				}
+			}
+	);
+
+	// fill the outer perimeter with walls
+	sanguis::creator::aux::rect(
+			sanguis::creator::signed_pos(
+				0,
+				0),
+			sanguis::creator::signed_pos(
+				ret.size().w() - 1,
+				ret.size().h() - 1),
+			[&ret](
+				sanguis::creator::signed_pos pos
+			)
+			{
+				auto p =
+					fcppt::math::vector::structure_cast<
+						sanguis::creator::pos
+					>(
+						pos);
+
+				if (fcppt::container::grid::in_range(ret, p))
+					ret[p] = sanguis::creator::tile::concrete_wall;
+			}
+	);
+
+	// scale the openings and set the appropriate tile
+	{
+		uniform_int random_coord_offset(
+			uniform_int::param_type::min(
+				0u
+			),
+			uniform_int::param_type::max(
+				scaling_factor
+			)
+		);
+
+		for(
+			auto &opening
+			:
+			openings
+		)
+		{
+			opening = sanguis::creator::opening(
+				opening.get() *
+				scaling_factor +
+				sanguis::creator::grid::pos(
+					random_coord_offset(
+						_parameters.randgen()),
+					random_coord_offset(
+						_parameters.randgen()))
+			);
+			ret[
+				opening.get()
+			] =
+			sanguis::creator::tile::door;
+		}
+	}
 
 	return
 		sanguis::creator::aux::result(
 			ret,
-			sanguis::creator::background_grid(
-				ret.size(),
-				sanguis::creator::background_tile::grass
-			),
+			ret_bg,
 			openings,
 			sanguis::creator::spawn_container{
 				sanguis::creator::spawn(
