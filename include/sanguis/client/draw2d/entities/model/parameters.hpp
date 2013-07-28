@@ -9,6 +9,7 @@
 #include <sanguis/load/model/collection_fwd.hpp>
 #include <fcppt/nonassignable.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -29,9 +30,9 @@ public:
 	parameters(
 		sanguis::diff_clock const &,
 		sanguis::random_generator &,
-		sprite::colored::system &,
-		sprite::normal::system &,
-		load::model::collection const &
+		sanguis::client::draw2d::sprite::colored::system &,
+		sanguis::client::draw2d::sprite::normal::system &,
+		sanguis::load::model::collection const &
 	);
 
 	sanguis::diff_clock const &
@@ -40,24 +41,24 @@ public:
 	sanguis::random_generator &
 	random_generator() const;
 
-	sprite::colored::system &
+	sanguis::client::draw2d::sprite::colored::system &
 	colored_system() const;
 
-	sprite::normal::system &
+	sanguis::client::draw2d::sprite::normal::system &
 	normal_system() const;
 
-	load::model::collection const &
+	sanguis::load::model::collection const &
 	collection() const;
 private:
 	sanguis::diff_clock const &diff_clock_;
 
 	sanguis::random_generator &random_generator_;
 
-	sprite::colored::system &colored_system_;
+	sanguis::client::draw2d::sprite::colored::system &colored_system_;
 
-	sprite::normal::system &normal_system_;
+	sanguis::client::draw2d::sprite::normal::system &normal_system_;
 
-	load::model::collection const &collection_;
+	sanguis::load::model::collection const &collection_;
 };
 
 }

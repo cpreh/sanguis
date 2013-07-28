@@ -1,11 +1,12 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_DECAY_TIME_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_DECAY_TIME_HPP_INCLUDED
 
-#include <sanguis/client/draw2d/entities/model/decay_time_fwd.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration.hpp>
+#include <sanguis/client/draw2d/entities/model/decay_time_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {

@@ -6,6 +6,7 @@
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <fcppt/noncopyable.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -17,24 +18,25 @@ namespace entities
 
 class sentry
 :
-	public model::object
+	public sanguis::client::draw2d::entities::model::object
 {
 	FCPPT_NONCOPYABLE(
 		sentry
 	);
 public:
-	explicit sentry(
-		model::parameters const &
+	explicit
+	sentry(
+		sanguis::client::draw2d::entities::model::parameters const &
 	);
 
 	~sentry();
 
 	void
 	orientation(
-		sprite::rotation
+		sanguis::client::draw2d::sprite::rotation
 	);
 private:
-	using container::orientation;
+	using sanguis::client::draw2d::entities::container::orientation;
 };
 
 }

@@ -11,6 +11,7 @@
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/health.hpp>
 #include <sanguis/client/level.hpp>
+#include <sanguis/client/max_health.hpp>
 #include <sanguis/client/world_parameters.hpp>
 #include <sanguis/client/draw2d/aoe.hpp>
 #include <sanguis/client/draw2d/log.hpp>
@@ -399,7 +400,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 			>()
 		)
 	).max_health(
-		sanguis::client::health(
+		sanguis::client::max_health(
 			_message.get<
 				sanguis::messages::roles::max_health
 			>()

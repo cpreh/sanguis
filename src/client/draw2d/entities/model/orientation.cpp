@@ -1,10 +1,14 @@
+#include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/entities/model/orientation.hpp>
+#include <sanguis/client/draw2d/sprite/rotation.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <cmath>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace
 {
@@ -24,9 +28,9 @@ assert_range(
 
 sanguis::client::draw2d::sprite::rotation
 sanguis::client::draw2d::entities::model::orientation(
-	draw2d::funit const _delta,
-	sprite::rotation const _orientation,
-	sprite::rotation const _desired_orientation
+	sanguis::client::draw2d::funit const _delta,
+	sanguis::client::draw2d::sprite::rotation const _orientation,
+	sanguis::client::draw2d::sprite::rotation const _desired_orientation
 )
 {
 	::assert_range(
@@ -71,10 +75,33 @@ sanguis::client::draw2d::entities::model::orientation(
 			)
 		);
 
+	sanguis::client::draw2d::funit const
+		null(
+			fcppt::literal<
+				sanguis::client::draw2d::funit
+			>(
+				0
+			)
+		),
+		one(
+			fcppt::literal<
+				sanguis::client::draw2d::funit
+			>(
+				1
+			)
+		),
+		minus_one(
+			fcppt::literal<
+				sanguis::client::draw2d::funit
+			>(
+				-1
+			)
+		);
+
 	FCPPT_ASSERT_ERROR(
-		abs_dist >= static_cast<funit>(0) &&
-		swap_dist >= static_cast<funit>(0) &&
-		min_dist >= static_cast<funit>(0)
+		abs_dist >= null &&
+		swap_dist >= null &&
+		min_dist >= null
 	);
 
 	// We go left or right, depending on:
@@ -87,17 +114,17 @@ sanguis::client::draw2d::entities::model::orientation(
 			(
 				(swap_dist > abs_dist)
 				?
-					static_cast<funit>(-1)
+					minus_one
 				:
-					static_cast<funit>(1)
+					one
 			)
 		:
 			(
 				(swap_dist > abs_dist)
 				?
-					static_cast<funit>(1)
+					one
 				:
-					static_cast<funit>(-1)
+					minus_one
 			)
 	);
 
@@ -121,7 +148,7 @@ sanguis::client::draw2d::entities::model::orientation(
 	// the orientation is corrected "downwards" to 5 or 10 again, then upwards and
 	// so on, causing epilepsy.
 	if(
-		dir > static_cast<funit>(0)
+		dir > null
 	)
 	{
 		if(
@@ -156,7 +183,7 @@ assert_range(
 {
 	FCPPT_ASSERT_ERROR(
 		_value >=
-		static_cast<
+		fcppt::literal<
 			sanguis::client::draw2d::funit
 		>(
 			0

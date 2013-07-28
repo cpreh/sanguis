@@ -3,6 +3,7 @@
 
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -14,9 +15,9 @@ namespace entities
 namespace model
 {
 
-sprite::rotation
+sanguis::client::draw2d::sprite::rotation
 clamp_orientation(
-	sprite::rotation
+	sanguis::client::draw2d::sprite::rotation
 );
 
 }

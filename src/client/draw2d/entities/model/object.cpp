@@ -4,6 +4,7 @@
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/client/health.hpp>
+#include <sanguis/client/max_health.hpp>
 #include <sanguis/client/draw2d/log_location.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/speed_is_null.hpp>
@@ -170,7 +171,7 @@ sanguis::client::draw2d::entities::model::object::~object()
 {
 }
 
-sanguis::client::health const
+sanguis::client::max_health const
 sanguis::client::draw2d::entities::model::object::max_health() const
 {
 	return max_health_;
@@ -336,7 +337,7 @@ sanguis::client::draw2d::entities::model::object::health(
 
 void
 sanguis::client::draw2d::entities::model::object::max_health(
-	sanguis::client::health const _max_health
+	sanguis::client::max_health const _max_health
 )
 {
 	max_health_ = _max_health;

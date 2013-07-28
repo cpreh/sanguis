@@ -305,6 +305,7 @@ SET(
 	include/sanguis/client/machine.hpp
 	include/sanguis/client/machine_fwd.hpp
 	include/sanguis/client/make_send_callback.hpp
+	include/sanguis/client/max_health.hpp
 	include/sanguis/client/object.hpp
 	include/sanguis/client/perk/change_callback.hpp
 	include/sanguis/client/perk/change_function.hpp

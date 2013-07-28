@@ -5,6 +5,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/client/health.hpp>
+#include <sanguis/client/max_health.hpp>
 #include <sanguis/client/draw2d/speed_fwd.hpp>
 #include <sanguis/client/draw2d/entities/container.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
@@ -59,11 +60,13 @@ public:
 	~object();
 
 	// with_health overrides
-	sanguis::client::health const
-	max_health() const;
+	sanguis::client::max_health const
+	max_health() const
+	override;
 
 	sanguis::client::health const
-	health() const;
+	health() const
+	override;
 protected:
 	virtual
 	void
@@ -128,7 +131,7 @@ private:
 
 	void
 	max_health(
-		sanguis::client::health
+		sanguis::client::max_health
 	)
 	override;
 
@@ -180,9 +183,9 @@ private:
 		attacking_,
 		reloading_;
 
-	sanguis::client::health
-		health_,
-		max_health_;
+	sanguis::client::health health_;
+
+	sanguis::client::max_health max_health_;
 
 	fcppt::scoped_ptr<
 		sanguis::client::draw2d::entities::model::healthbar

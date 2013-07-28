@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_HEALTH_HPP_INCLUDED
 
 #include <sanguis/client/health.hpp>
+#include <sanguis/client/max_health.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -34,7 +35,7 @@ public:
 	virtual
 	void
 	max_health(
-		sanguis::client::health
+		sanguis::client::max_health
 	) = 0;
 
 	virtual
@@ -42,7 +43,7 @@ public:
 	health() const = 0;
 
 	virtual
-	sanguis::client::health const
+	sanguis::client::max_health const
 	max_health() const = 0;
 };
 

@@ -1,12 +1,16 @@
-#include <sanguis/client/draw2d/entities/model/healthbar.hpp>
+#include <sanguis/exception.hpp>
+#include <sanguis/client/health.hpp>
+#include <sanguis/client/max_health.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
-#include <sanguis/client/draw2d/sprite/colored/parameters.hpp>
-#include <sanguis/client/draw2d/sprite/colored/color.hpp>
-#include <sanguis/client/draw2d/sprite/colored/color_format.hpp>
+#include <sanguis/client/draw2d/entities/model/healthbar.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
+#include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/client/draw2d/sprite/system_decl.hpp>
 #include <sanguis/client/draw2d/sprite/unit.hpp>
-#include <sanguis/exception.hpp>
+#include <sanguis/client/draw2d/sprite/colored/color.hpp>
+#include <sanguis/client/draw2d/sprite/colored/color_format.hpp>
+#include <sanguis/client/draw2d/sprite/colored/parameters.hpp>
+#include <sanguis/client/draw2d/sprite/colored/system.hpp>
 #include <sge/image/color/any/convert.hpp>
 #include <sge/image/color/any/object.hpp>
 #include <sge/image/color/rgba8.hpp>
@@ -17,12 +21,11 @@
 #include <sge/sprite/intrusive/connection.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
-#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace
 {
@@ -34,29 +37,29 @@ sanguis::client::draw2d::sprite::unit const
 }
 
 sanguis::client::draw2d::entities::model::healthbar::healthbar(
-	sprite::colored::system &_sys
+	sanguis::client::draw2d::sprite::colored::system &_sys
 )
 :
 	background_(
-		sprite::colored::parameters()
+		sanguis::client::draw2d::sprite::colored::parameters()
 		.connection(
 			_sys.connection(
-				z_ordering::healthbar_lower
+				sanguis::client::draw2d::z_ordering::healthbar_lower
 			)
 		)
 		.color(
 			sge::image::color::any::convert<
-				sprite::colored::color_format
+				sanguis::client::draw2d::sprite::colored::color_format
 			>(
 				sge::image::color::predef::black()
 			)
 		)
 	),
 	foreground_(
-		sprite::colored::parameters()
+		sanguis::client::draw2d::sprite::colored::parameters()
 		.connection(
 			_sys.connection(
-				z_ordering::healthbar_upper
+				sanguis::client::draw2d::z_ordering::healthbar_upper
 			)
 		)
 	),
@@ -76,8 +79,8 @@ sanguis::client::draw2d::entities::model::healthbar::~healthbar()
 
 void
 sanguis::client::draw2d::entities::model::healthbar::update_health(
-	client::health const _health,
-	client::health const _max_health
+	sanguis::client::health const _health,
+	sanguis::client::max_health const _max_health
 )
 {
 	health_ = _health;
@@ -93,7 +96,7 @@ sanguis::client::draw2d::entities::model::healthbar::health() const
 	return health_;
 }
 
-sanguis::client::health const
+sanguis::client::max_health const
 sanguis::client::draw2d::entities::model::healthbar::max_health() const
 {
 	return max_health_;
@@ -101,19 +104,19 @@ sanguis::client::draw2d::entities::model::healthbar::max_health() const
 
 void
 sanguis::client::draw2d::entities::model::healthbar::attach_to(
-	sprite::point const &_pos,
-	sprite::dim const &_dim
+	sanguis::client::draw2d::sprite::point const &_pos,
+	sanguis::client::draw2d::sprite::dim const &_dim
 )
 {
 	this->pos(
-		sprite::point(
+		sanguis::client::draw2d::sprite::point(
 			_pos.x(),
 			_pos.y() - bar_height
 		)
 	);
 
 	this->dim(
-		sprite::dim(
+		sanguis::client::draw2d::sprite::dim(
 			std::max(
 				_dim.w(),
 				2 * border_size
@@ -125,7 +128,7 @@ sanguis::client::draw2d::entities::model::healthbar::attach_to(
 
 void
 sanguis::client::draw2d::entities::model::healthbar::pos(
-	sprite::point const &_pos
+	sanguis::client::draw2d::sprite::point const &_pos
 )
 {
 	background_.pos(
@@ -139,7 +142,7 @@ sanguis::client::draw2d::entities::model::healthbar::pos(
 
 void
 sanguis::client::draw2d::entities::model::healthbar::dim(
-	sprite::dim const &dim_
+	sanguis::client::draw2d::sprite::dim const &dim_
 )
 {
 	background_.size(
@@ -158,7 +161,8 @@ sanguis::client::draw2d::entities::model::healthbar::inner_pos() const
 {
 	return
 		background_.pos()
-		+ sprite::point(
+		+
+		sanguis::client::draw2d::sprite::point(
 			border_size,
 			border_size
 		);
@@ -178,14 +182,19 @@ sanguis::client::draw2d::entities::model::healthbar::inner_dim() const
 sanguis::client::health const
 sanguis::client::draw2d::entities::model::healthbar::remaining_health() const
 {
-	return health_ / max_health_;
+	return
+		sanguis::client::health(
+			health_.get()
+			/
+			max_health_.get()
+		);
 }
 
 void
 sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 {
 	if(
-		health_ > max_health_
+		health_.get() > max_health_.get()
 	)
 		return;
 
@@ -200,11 +209,11 @@ sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 	)
 	{
 		foreground_.size(
-			sprite::dim::null()
+			sanguis::client::draw2d::sprite::dim::null()
 		);
 
 		background_.size(
-			sprite::dim::null()
+			sanguis::client::draw2d::sprite::dim::null()
 		);
 
 		return;
@@ -212,10 +221,10 @@ sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 
 	foreground_.w(
 		static_cast<
-			sprite::unit
+			sanguis::client::draw2d::sprite::unit
 		>(
 			static_cast<
-				client::health::value_type
+				sanguis::client::health::value_type
 			>(
 				this->inner_dim().w()
 			)
@@ -228,7 +237,7 @@ sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 			(sge::image::color::init::red() %=
 				std::min(
 					static_cast<
-						client::health::value_type
+						sanguis::client::health::value_type
 					>(
 						2.0f -
 						2.0f
@@ -236,7 +245,7 @@ sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 						this->remaining_health().get()
 					),
 					static_cast<
-						client::health::value_type
+						sanguis::client::health::value_type
 					>(
 						1
 					)
@@ -245,14 +254,14 @@ sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 			(sge::image::color::init::green() %=
 				std::min(
 					static_cast<
-						client::health::value_type
+						sanguis::client::health::value_type
 					>(
 						1.4f
 						*
 						this->remaining_health().get()
 					),
 					static_cast<
-						client::health::value_type
+						sanguis::client::health::value_type
 					>(
 						0.7f
 					)

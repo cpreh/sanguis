@@ -40,10 +40,12 @@ private:
 	// base overrides
 
 	void
-	update();
+	update()
+	override;
 
 	bool
-	may_be_removed() const;
+	may_be_removed() const
+	override;
 
 	sanguis::diff_clock const &diff_clock_;
 
