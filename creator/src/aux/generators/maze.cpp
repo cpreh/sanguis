@@ -35,25 +35,6 @@
 #include <ostream>
 #include <fcppt/config/external_end.hpp>
 
-
-namespace
-{
-
-/**
- * Coordinates of a point on the perimeter of a rectangle ((0,0),(w,h)),
- * excluding the corners.
- * The order of traversal is as follows. Example: (w = 4, h = 3)
- * x 0 1 x
- * 5     2
- * x 4 3 x
- */
-sanguis::creator::grid::pos
-perimeter_to_coords(
-	sanguis::creator::grid::dim const &,
-	unsigned const &);
-
-}
-
 // this is a maze generator that follows the algorithm described at
 // http://en.wikipedia.org/w/index.php?title=Maze_generation_algorithm&oldid=550777074#Randomized_Prim.27s_algorithm
 sanguis::creator::aux::result
@@ -329,44 +310,4 @@ sanguis::creator::aux::generators::maze(
 				)
 			}
 		);
-}
-
-namespace
-{
-sanguis::creator::grid::pos
-perimeter_to_coords(
-	sanguis::creator::grid::dim const &_dim,
-	unsigned const &_t)
-{
-	unsigned w2 = static_cast<unsigned>(_dim.w() - 2);
-	unsigned h2 = static_cast<unsigned>(_dim.h() - 2);
-
-	FCPPT_ASSERT_ERROR(
-		w2 > 0);
-
-	FCPPT_ASSERT_ERROR(
-		h2 > 0);
-
-	FCPPT_ASSERT_ERROR(
-		_t < 2 * w2 + 2 * h2);
-
-	if (_t < w2)
-		return sanguis::creator::grid::pos(
-			_t + 1,
-			0);
-
-	if (_t < w2 + h2)
-		return sanguis::creator::grid::pos(
-			w2 + 1,
-			_t - w2 + 1);
-
-	if (_t < 2 * w2 + h2)
-		return sanguis::creator::grid::pos(
-			w2 - (_t - w2 - h2),
-			h2 + 1);
-
-	return sanguis::creator::grid::pos(
-		0,
-		h2 - (_t - 2 * w2 - h2));
-}
 }

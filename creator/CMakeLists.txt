@@ -67,6 +67,7 @@ SET(
 	src/aux/generators/maze.cpp
 	src/aux/neumann_neighbors.cpp
 	src/aux/parameters.cpp
+	src/aux/perimeter_to_coords.cpp
 	src/aux/result.cpp
 	src/aux/serialization/background_grid.cpp
 	src/aux/serialization/grid.cpp
@@ -99,6 +100,7 @@ SET(
 	src/include/sanguis/creator/aux/neumann_neighbors.hpp
 	src/include/sanguis/creator/aux/parameters.hpp
 	src/include/sanguis/creator/aux/parameters_fwd.hpp
+	src/include/sanguis/creator/aux/perimeter_to_coords.hpp
 	src/include/sanguis/creator/aux/rand_value.hpp
 	src/include/sanguis/creator/aux/randgen.hpp
 	src/include/sanguis/creator/aux/randgen_fwd.hpp
