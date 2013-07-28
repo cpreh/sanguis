@@ -3,7 +3,7 @@
 
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/creator/tile.hpp>
-#include <fcppt/container/grid/object_impl.hpp>
+#include <sanguis/creator/tile_grid.hpp>
 
 
 #endif

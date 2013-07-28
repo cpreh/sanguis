@@ -43,6 +43,8 @@ set(
 	include/sanguis/creator/symbol.hpp
 	include/sanguis/creator/tile.hpp
 	include/sanguis/creator/tile_fwd.hpp
+	include/sanguis/creator/tile_grid.hpp
+	include/sanguis/creator/tile_grid_fwd.hpp
 	include/sanguis/creator/tile_is_solid.hpp
 	include/sanguis/creator/tile_size.hpp
 	include/sanguis/creator/top_parameters.hpp
@@ -85,6 +87,7 @@ SET(
 	src/include/sanguis/creator/aux/deserialization/spawn_container.hpp
 	src/include/sanguis/creator/aux/deserialization/tile_grid.hpp
 	src/include/sanguis/creator/aux/deserialization/top_result.hpp
+	src/include/sanguis/creator/aux/filled_rect.hpp
 	src/include/sanguis/creator/aux/find_opposing_cell.hpp
 	src/include/sanguis/creator/aux/generator_function.hpp
 	src/include/sanguis/creator/aux/generator_map.hpp
@@ -99,6 +102,7 @@ SET(
 	src/include/sanguis/creator/aux/rand_value.hpp
 	src/include/sanguis/creator/aux/randgen.hpp
 	src/include/sanguis/creator/aux/randgen_fwd.hpp
+	src/include/sanguis/creator/aux/rect.hpp
 	src/include/sanguis/creator/aux/result.hpp
 	src/include/sanguis/creator/aux/result_fwd.hpp
 	src/include/sanguis/creator/aux/serialization/background_grid.hpp

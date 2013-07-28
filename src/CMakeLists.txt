@@ -156,13 +156,22 @@ SET(
 	include/sanguis/client/draw2d/scene/world/batch_grid.hpp
 	include/sanguis/client/draw2d/scene/world/batch_grid_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/batch_size.hpp
+	include/sanguis/client/draw2d/scene/world/fill_batches.hpp
 	include/sanguis/client/draw2d/scene/world/generate_batches.hpp
+	include/sanguis/client/draw2d/scene/world/is_background.hpp
+	include/sanguis/client/draw2d/scene/world/lower_bound.hpp
 	include/sanguis/client/draw2d/scene/world/object.hpp
 	include/sanguis/client/draw2d/scene/world/object_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/buffers.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/buffers_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/choices.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/choices_fwd.hpp
+	include/sanguis/client/draw2d/scene/world/sprite/compare.hpp
+	include/sanguis/client/draw2d/scene/world/sprite/dim.hpp
+	include/sanguis/client/draw2d/scene/world/sprite/dim_fwd.hpp
+	include/sanguis/client/draw2d/scene/world/sprite/is_background.hpp
+	include/sanguis/client/draw2d/scene/world/sprite/is_background_fwd.hpp
+	include/sanguis/client/draw2d/scene/world/sprite/is_background_role.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/object.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/object_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/parameters.hpp
@@ -176,12 +185,14 @@ SET(
 	include/sanguis/client/draw2d/scene/world/sprite/type_choices.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/type_choices_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/unit.hpp
+	include/sanguis/client/draw2d/scene/world/sprite/vector.hpp
 	include/sanguis/client/draw2d/scene/world/state.hpp
 	include/sanguis/client/draw2d/scene/world/state_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/tile_is_same.hpp
 	include/sanguis/client/draw2d/scene/world/tile_orientation.hpp
 	include/sanguis/client/draw2d/scene/world/tile_size.hpp
 	include/sanguis/client/draw2d/scene/world/to_tile_texture.hpp
+	include/sanguis/client/draw2d/scene/world/upper_bound.hpp
 	include/sanguis/client/draw2d/speed.hpp
 	include/sanguis/client/draw2d/speed_fwd.hpp
 	include/sanguis/client/draw2d/speed_is_null.hpp
@@ -1127,9 +1138,6 @@ SET(
 	src/client/draw2d/scene/world/generate_batches.cpp
 	src/client/draw2d/scene/world/object.cpp
 	src/client/draw2d/scene/world/state.cpp
-	src/client/draw2d/scene/world/tile_is_same.cpp
-	src/client/draw2d/scene/world/tile_orientation.cpp
-	src/client/draw2d/scene/world/to_tile_texture.cpp
 	src/client/draw2d/speed_is_null.cpp
 	src/client/draw2d/sprite/client/system.cpp
 	src/client/draw2d/sprite/colored/system.cpp

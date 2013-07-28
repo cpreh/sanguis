@@ -44,7 +44,7 @@ sanguis::load::tiles::context::set(
 }
 
 sanguis::load::tiles::set const &
-sanguis::load::tiles::context::background_set(
+sanguis::load::tiles::context::set(
 	sanguis::creator::background_tile const _tile
 )
 {

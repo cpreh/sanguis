@@ -50,27 +50,11 @@ sanguis::client::draw2d::scene::world::state::state(
 	sanguis::client::world_parameters const &_parameters
 )
 :
-	renderer_(
-		_renderer
-	),
-	sprite_buffers_(
+	sanguis::client::draw2d::scene::world::state::state(
 		_renderer,
-		sge::sprite::buffers::option::static_
-	),
-	sprite_state_(
-		renderer_,
-		sanguis::client::draw2d::scene::world::sprite::state::parameters_type()
-	),
-	grid_(
+		_tiles,
 		sanguis::creator::generate(
 			_parameters.top_parameters()
-		).grid()
-	),
-	batches_(
-		sanguis::client::draw2d::scene::world::generate_batches(
-			grid_,
-			_tiles,
-			sprite_buffers_
 		)
 	)
 {
@@ -202,4 +186,35 @@ sanguis::client::draw2d::scene::world::state::test_collision(
 		:
 			sanguis::client::draw2d::optional_speed()
 		;
+}
+
+sanguis::client::draw2d::scene::world::state::state(
+	sge::renderer::device::core &_renderer,
+	sanguis::load::tiles::context &_tiles,
+	sanguis::creator::top_result const &_result
+)
+:
+	renderer_(
+		_renderer
+	),
+	sprite_buffers_(
+		_renderer,
+		sge::sprite::buffers::option::static_
+	),
+	sprite_state_(
+		renderer_,
+		sanguis::client::draw2d::scene::world::sprite::state::parameters_type()
+	),
+	grid_(
+		_result.grid()
+	),
+	batches_(
+		sanguis::client::draw2d::scene::world::generate_batches(
+			grid_,
+			_result.background_grid(),
+			_tiles,
+			sprite_buffers_
+		)
+	)
+{
 }

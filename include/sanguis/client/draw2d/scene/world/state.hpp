@@ -10,6 +10,7 @@
 #include <sanguis/client/draw2d/scene/world/sprite/buffers.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/state.hpp>
 #include <sanguis/creator/grid.hpp>
+#include <sanguis/creator/top_result_fwd.hpp>
 #include <sanguis/load/tiles/context_fwd.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
@@ -33,8 +34,6 @@ class state
 		state
 	);
 public:
-	state();
-
 	state(
 		sge::renderer::device::core &,
 		sanguis::load::tiles::context &,
@@ -54,6 +53,13 @@ public:
 		sanguis::client::draw2d::collide_parameters const &
 	) const;
 private:
+	state(
+		sge::renderer::device::core &,
+		sanguis::load::tiles::context &,
+		sanguis::creator::top_result const &
+
+	);
+
 	sge::renderer::device::core &renderer_;
 
 	sanguis::client::draw2d::scene::world::sprite::buffers sprite_buffers_;

@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CREATOR_AUX_SERIALIZATION_TILE_GRID_HPP_INCLUDED
 #define SANGUIS_CREATOR_AUX_SERIALIZATION_TILE_GRID_HPP_INCLUDED
 
+#include <sanguis/creator/tile_grid.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/element_vector.hpp>
 #include <sge/parse/json/member.hpp>
@@ -11,8 +12,6 @@
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/assign/make_container.hpp>
-#include <fcppt/container/grid/object_impl.hpp>
-#include <fcppt/container/grid/size_type.hpp>
 
 
 namespace sanguis
@@ -25,14 +24,12 @@ namespace serialization
 {
 
 template<
-	typename Tile,
-	fcppt::container::grid::size_type Size
+	typename Tile
 >
 sge::parse::json::object
 tile_grid(
-	fcppt::container::grid::object<
-		Tile,
-		Size
+	sanguis::creator::tile_grid<
+		Tile
 	> const &_grid
 )
 {

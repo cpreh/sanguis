@@ -39,7 +39,7 @@ public:
 	);
 
 	sanguis::load::tiles::set const &
-	background_set(
+	set(
 		sanguis::creator::background_tile
 	);
 private:
