@@ -965,21 +965,6 @@ SET(
 	include/sanguis/server/update_target_function.hpp
 	include/sanguis/server/vector.hpp
 	include/sanguis/server/vector_fwd.hpp
-	include/sanguis/server/waves/convert_enemy_name.hpp
-	include/sanguis/server/waves/count.hpp
-	include/sanguis/server/waves/debug.hpp
-	include/sanguis/server/waves/delay.hpp
-	include/sanguis/server/waves/generator.hpp
-	include/sanguis/server/waves/infinite.hpp
-	include/sanguis/server/waves/make.hpp
-	include/sanguis/server/waves/simple.hpp
-	include/sanguis/server/waves/single.hpp
-	include/sanguis/server/waves/spawn.hpp
-	include/sanguis/server/waves/spawn_interval.hpp
-	include/sanguis/server/waves/spawns_per_wave.hpp
-	include/sanguis/server/waves/unique_ptr.hpp
-	include/sanguis/server/waves/wave.hpp
-	include/sanguis/server/waves/wave_fwd.hpp
 	include/sanguis/server/weapons/aoe.hpp
 	include/sanguis/server/weapons/backswing_time.hpp
 	include/sanguis/server/weapons/base_cooldown.hpp
@@ -1478,15 +1463,6 @@ SET(
 	src/server/states/unpaused.cpp
 	src/server/timer.cpp
 	src/server/timer_impl.cpp
-	src/server/waves/convert_enemy_name.cpp
-	src/server/waves/debug.cpp
-	src/server/waves/generator.cpp
-	src/server/waves/infinite.cpp
-	src/server/waves/make.cpp
-	src/server/waves/simple.cpp
-	src/server/waves/single.cpp
-	src/server/waves/spawn.cpp
-	src/server/waves/wave.cpp
 	src/server/weapons/create.cpp
 	src/server/weapons/delayed_attack.cpp
 	src/server/weapons/events/poll.cpp

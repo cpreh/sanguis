@@ -137,8 +137,7 @@ sanguis::server::global::context::context(
 				diff_clock_,
 				random_generator_,
 				*world_context_,
-				*load_context_,
-				console_
+				*load_context_
 			)
 		)
 	)

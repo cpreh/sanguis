@@ -165,11 +165,6 @@ sanguis::server::world::object::object(
 		_parameters.diff_clock(),
 		_parameters.random_generator(),
 		*environment_
-	),
-	wave_gen_(
-		_parameters.diff_clock(),
-		_parameters.random_generator(),
-		_parameters.console()
 	)
 {
 	this->insert_spawns(
@@ -186,11 +181,6 @@ sanguis::server::world::object::~object()
 void
 sanguis::server::world::object::update()
 {
-	wave_gen_.process(
-		this->environment(),
-		load_context_
-	);
-
 	bool const update_pos(
 		sge::timer::reset_when_expired(
 			send_timer_

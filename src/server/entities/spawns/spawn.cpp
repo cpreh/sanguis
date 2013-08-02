@@ -1,14 +1,20 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/creator/enemy_type.hpp>
+#include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/insert_parameters.hpp>
+#include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/entities/with_links.hpp>
+#include <sanguis/server/entities/enemies/create.hpp>
 #include <sanguis/server/entities/enemies/spawn_owner.hpp>
+#include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/spawns/size_type.hpp>
 #include <sanguis/server/entities/spawns/spawn.hpp>
-#include <sanguis/server/waves/spawn.hpp>
+#include <fcppt/optional_impl.hpp>
+#include <fcppt/assert/pre.hpp>
 
 
 void
@@ -29,6 +35,7 @@ sanguis::server::entities::spawns::spawn::spawn(
 )
 :
 	sanguis::server::entities::base(),
+	sanguis::server::entities::ifaces::with_angle(),
 	sanguis::server::entities::with_links(),
 	diff_clock_(
 		_diff_clock
@@ -38,17 +45,46 @@ sanguis::server::entities::spawns::spawn::spawn(
 	),
 	enemy_type_(
 		_enemy_type
-	)
+	),
+	center_(),
+	angle_()
 {
 }
 
 sanguis::server::center const
 sanguis::server::entities::spawns::spawn::center() const
 {
+	FCPPT_ASSERT_PRE(
+		center_
+	);
+
 	return
-		sanguis::server::center(
-			sanguis::server::center::value_type::null() // FIXME!
-		);
+		*center_;
+}
+
+sanguis::server::angle const
+sanguis::server::entities::spawns::spawn::angle() const
+{
+	FCPPT_ASSERT_PRE(
+		angle_
+	);
+
+	return
+		*angle_;
+}
+
+bool
+sanguis::server::entities::spawns::spawn::on_transfer(
+	sanguis::server::entities::transfer_parameters const &_parameters
+)
+{
+	center_ =
+		_parameters.center();
+
+	angle_ =
+		_parameters.angle();
+
+	return true;
 }
 
 void
@@ -64,14 +100,19 @@ sanguis::server::entities::spawns::spawn::on_update()
 			i < count_;
 			++i
 		)
-			sanguis::server::waves::spawn(
-				diff_clock_,
-				random_generator_,
-				this->environment(),
-				this->environment().load_context(),
-				enemy_type_,
-				sanguis::server::entities::enemies::spawn_owner(
-					this->link()
+			this->environment().insert(
+				sanguis::server::entities::enemies::create(
+					diff_clock_,
+					random_generator_,
+					enemy_type_,
+					this->environment().load_context(),
+					sanguis::server::entities::enemies::spawn_owner(
+						this->link()
+					)
+				),
+				sanguis::server::entities::insert_parameters(
+					this->center(),
+					this->angle()
 				)
 			);
 

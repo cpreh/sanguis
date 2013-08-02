@@ -1,6 +1,5 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
-#include <sanguis/server/console_fwd.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/world/context_fwd.hpp>
 #include <sanguis/server/world/object_unique_ptr.hpp>
@@ -11,8 +10,7 @@ sanguis::server::world::parameters::parameters(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
 	sanguis::server::world::context &_context,
-	sanguis::server::environment::load_context &_load_context,
-	sanguis::server::console &_console
+	sanguis::server::environment::load_context &_load_context
 )
 :
 	diff_clock_(
@@ -26,9 +24,6 @@ sanguis::server::world::parameters::parameters(
 	),
 	load_context_(
 		_load_context
-	),
-	console_(
-		_console
 	)
 {
 }
@@ -55,10 +50,4 @@ sanguis::server::environment::load_context &
 sanguis::server::world::parameters::load_context() const
 {
 	return load_context_;
-}
-
-sanguis::server::console &
-sanguis::server::world::parameters::console() const
-{
-	return console_;
 }

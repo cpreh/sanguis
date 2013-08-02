@@ -32,7 +32,6 @@
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
-#include <sanguis/server/waves/generator.hpp>
 #include <sanguis/server/world/context_fwd.hpp>
 #include <sanguis/server/world/environment_fwd.hpp>
 #include <sanguis/server/world/entity_map.hpp>
@@ -259,8 +258,6 @@ private:
 	entity_vector server_entities_;
 
 	sanguis::server::pickup_spawner pickup_spawner_;
-
-	sanguis::server::waves::generator wave_gen_; // TODO: this doesn't belong here, only for testing!
 };
 
 }
