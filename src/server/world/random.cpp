@@ -75,16 +75,9 @@ sanguis::server::world::random(
 			stream,
 			sanguis::creator::generate(
 				sanguis::creator::top_parameters(
-					sanguis::creator::name(
-						FCPPT_TEXT(
-							"maze"
-						)
-					),
-					/*
 					sanguis::server::world::random_generator_name(
 						_parameters.random_generator()
 					),
-					*/
 					sanguis::server::world::random_seed(
 						_parameters.random_generator()
 					),
