@@ -1,3 +1,4 @@
+#include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/creator/spawn.hpp>
 #include <sanguis/creator/spawn_pos.hpp>
 #include <sanguis/creator/spawn_type.hpp>
@@ -5,14 +6,18 @@
 
 sanguis::creator::spawn::spawn(
 	sanguis::creator::spawn_pos const _pos,
-	sanguis::creator::spawn_type const _type
+	sanguis::creator::enemy_type const _enemy_type,
+	sanguis::creator::spawn_type const _spawn_type
 )
 :
 	pos_(
 		_pos
 	),
-	type_(
-		_type
+	enemy_type_(
+		_enemy_type
+	),
+	spawn_type_(
+		_spawn_type
 	)
 {
 }
@@ -23,8 +28,14 @@ sanguis::creator::spawn::pos() const
 	return pos_;
 }
 
-sanguis::creator::spawn_type
-sanguis::creator::spawn::type() const
+sanguis::creator::enemy_type
+sanguis::creator::spawn::enemy_type() const
 {
-	return type_;
+	return enemy_type_;
+}
+
+sanguis::creator::spawn_type
+sanguis::creator::spawn::spawn_type() const
+{
+	return spawn_type_;
 }

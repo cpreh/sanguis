@@ -28,9 +28,16 @@ sanguis::creator::aux::serialization::spawn(
 				)
 			)(
 				sge::parse::json::member(
-					FCPPT_TEXT("type"),
+					FCPPT_TEXT("enemy_type"),
 					sge::parse::json::convert::from_enum(
-						_spawn.type()
+						_spawn.enemy_type()
+					)
+				)
+			)(
+				sge::parse::json::member(
+					FCPPT_TEXT("spawn_type"),
+					sge::parse::json::convert::from_enum(
+						_spawn.spawn_type()
 					)
 				)
 			)

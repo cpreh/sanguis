@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CREATOR_SPAWN_HPP_INCLUDED
 #define SANGUIS_CREATOR_SPAWN_HPP_INCLUDED
 
+#include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/creator/spawn_fwd.hpp>
 #include <sanguis/creator/spawn_pos.hpp>
 #include <sanguis/creator/spawn_type.hpp>
@@ -17,6 +18,7 @@ class spawn
 public:
 	spawn(
 		sanguis::creator::spawn_pos,
+		sanguis::creator::enemy_type,
 		sanguis::creator::spawn_type
 	);
 
@@ -25,12 +27,18 @@ public:
 	pos() const;
 
 	SANGUIS_CREATOR_SYMBOL
+	sanguis::creator::enemy_type
+	enemy_type() const;
+
+	SANGUIS_CREATOR_SYMBOL
 	sanguis::creator::spawn_type
-	type() const;
+	spawn_type() const;
 private:
 	sanguis::creator::spawn_pos pos_;
 
-	sanguis::creator::spawn_type type_;
+	sanguis::creator::enemy_type enemy_type_;
+
+	sanguis::creator::spawn_type spawn_type_;
 };
 
 }

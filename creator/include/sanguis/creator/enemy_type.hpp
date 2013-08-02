@@ -1,10 +1,12 @@
-#ifndef SANGUIS_ENEMY_TYPE_HPP_INCLUDED
-#define SANGUIS_ENEMY_TYPE_HPP_INCLUDED
+#ifndef SANGUIS_CREATOR_ENEMY_TYPE_HPP_INCLUDED
+#define SANGUIS_CREATOR_ENEMY_TYPE_HPP_INCLUDED
 
-#include <sanguis/enemy_type_fwd.hpp>
+#include <sanguis/creator/enemy_type_fwd.hpp>
 
 
 namespace sanguis
+{
+namespace creator
 {
 
 enum class enemy_type
@@ -20,6 +22,7 @@ enum class enemy_type
 	fcppt_maximum = maggot
 };
 
+}
 }
 
 #endif

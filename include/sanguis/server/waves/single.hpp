@@ -2,8 +2,8 @@
 #define SANGUIS_SERVER_WAVES_SINGLE_HPP_INCLUDED
 
 #include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/enemy_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/waves/wave.hpp>
@@ -28,7 +28,7 @@ public:
 	single(
 		sanguis::diff_clock const &,
 		sanguis::random_generator &,
-		sanguis::enemy_type
+		sanguis::creator::enemy_type
 	);
 
 	~single();
@@ -46,7 +46,7 @@ private:
 
 	sanguis::random_generator &random_generator_;
 
-	sanguis::enemy_type const etype_;
+	sanguis::creator::enemy_type const etype_;
 
 	bool spawned_;
 };

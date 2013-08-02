@@ -1,8 +1,8 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/duration_second.hpp>
-#include <sanguis/enemy_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
+#include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/pickup_probability.hpp>
@@ -31,7 +31,7 @@ sanguis::server::entities::unique_ptr
 sanguis::server::entities::enemies::create(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
-	sanguis::enemy_type const _etype,
+	sanguis::creator::enemy_type const _etype,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::entities::enemies::spawn_owner const &_spawn
 )
@@ -40,7 +40,7 @@ sanguis::server::entities::enemies::create(
 		_etype
 	)
 	{
-	case sanguis::enemy_type::zombie00:
+	case sanguis::creator::enemy_type::zombie00:
 		return
 			fcppt::make_unique_ptr<
 				sanguis::server::entities::enemies::enemy
@@ -84,7 +84,7 @@ sanguis::server::entities::enemies::create(
 				sanguis::server::exp(10.f),
 				_spawn
 			);
-	case sanguis::enemy_type::zombie01:
+	case sanguis::creator::enemy_type::zombie01:
 		return
 			fcppt::make_unique_ptr<
 				sanguis::server::entities::enemies::enemy
@@ -116,9 +116,9 @@ sanguis::server::entities::enemies::create(
 				sanguis::server::exp(5.f),
 				_spawn
 			);
-	case sanguis::enemy_type::wolf_black:
-	case sanguis::enemy_type::wolf_brown:
-	case sanguis::enemy_type::wolf_white:
+	case sanguis::creator::enemy_type::wolf_black:
+	case sanguis::creator::enemy_type::wolf_brown:
+	case sanguis::creator::enemy_type::wolf_white:
 		return
 			fcppt::make_unique_ptr<
 				sanguis::server::entities::enemies::enemy
@@ -150,7 +150,7 @@ sanguis::server::entities::enemies::create(
 				sanguis::server::exp(10.f),
 				_spawn
 			);
-	case sanguis::enemy_type::skeleton:
+	case sanguis::creator::enemy_type::skeleton:
 		return
 			fcppt::make_unique_ptr<
 				sanguis::server::entities::enemies::enemy
@@ -182,7 +182,7 @@ sanguis::server::entities::enemies::create(
 				sanguis::server::exp(300.f),
 				_spawn
 			);
-	case sanguis::enemy_type::maggot:
+	case sanguis::creator::enemy_type::maggot:
 		return
 			fcppt::make_unique_ptr<
 				sanguis::server::entities::enemies::enemy
@@ -214,7 +214,7 @@ sanguis::server::entities::enemies::create(
 				sanguis::server::exp(1.f),
 				_spawn
 			);
-	case sanguis::enemy_type::spider:
+	case sanguis::creator::enemy_type::spider:
 		return
 			fcppt::make_unique_ptr<
 				sanguis::server::entities::enemies::enemy

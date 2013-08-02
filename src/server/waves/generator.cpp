@@ -1,7 +1,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/duration_second.hpp>
-#include <sanguis/enemy_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/console.hpp>
 #include <sanguis/server/log.hpp>
 #include <sanguis/server/player_id_from_args.hpp>
@@ -236,7 +236,7 @@ sanguis::server::waves::generator::spawn_all()
 		sanguis::server::waves::spawns_per_wave(
 			5u
 		),
-		sanguis::enemy_type::spider
+		sanguis::creator::enemy_type::spider
 	)(
 		boost::cref(
 			diff_clock_
@@ -257,7 +257,7 @@ sanguis::server::waves::generator::spawn_all()
 		sanguis::server::waves::spawns_per_wave(
 			15u
 		),
-		sanguis::enemy_type::maggot
+		sanguis::creator::enemy_type::maggot
 	)(
 		boost::cref(
 			diff_clock_
@@ -278,7 +278,7 @@ sanguis::server::waves::generator::spawn_all()
 		sanguis::server::waves::spawns_per_wave(
 			10u
 		),
-		sanguis::enemy_type::maggot
+		sanguis::creator::enemy_type::maggot
 	)(
 		boost::cref(
 			diff_clock_
@@ -299,7 +299,7 @@ sanguis::server::waves::generator::spawn_all()
 		sanguis::server::waves::spawns_per_wave(
 			8u
 		),
-		sanguis::enemy_type::zombie01
+		sanguis::creator::enemy_type::zombie01
 	)(
 		boost::cref(
 			diff_clock_
@@ -320,7 +320,7 @@ sanguis::server::waves::generator::spawn_all()
 		sanguis::server::waves::spawns_per_wave(
 			8u
 		),
-		sanguis::enemy_type::zombie01
+		sanguis::creator::enemy_type::zombie01
 	)(
 		boost::cref(
 			diff_clock_
@@ -341,7 +341,7 @@ sanguis::server::waves::generator::spawn_all()
 		sanguis::server::waves::spawns_per_wave(
 			7u
 		),
-		sanguis::enemy_type::zombie00
+		sanguis::creator::enemy_type::zombie00
 	)(
 		boost::cref(
 			diff_clock_
@@ -362,7 +362,7 @@ sanguis::server::waves::generator::spawn_all()
 		sanguis::server::waves::spawns_per_wave(
 			3u
 		),
-		sanguis::enemy_type::wolf_brown
+		sanguis::creator::enemy_type::wolf_brown
 	)(
 		boost::cref(
 			diff_clock_
@@ -383,7 +383,7 @@ sanguis::server::waves::generator::spawn_all()
 		sanguis::server::waves::spawns_per_wave(
 			3u
 		),
-		sanguis::enemy_type::wolf_white
+		sanguis::creator::enemy_type::wolf_white
 	)(
 		boost::cref(
 			diff_clock_
@@ -404,7 +404,7 @@ sanguis::server::waves::generator::spawn_all()
 		sanguis::server::waves::spawns_per_wave(
 			3u
 		),
-		sanguis::enemy_type::wolf_black
+		sanguis::creator::enemy_type::wolf_black
 	)(
 		boost::cref(
 			diff_clock_
@@ -425,7 +425,7 @@ sanguis::server::waves::generator::spawn_all()
 		sanguis::server::waves::spawns_per_wave(
 			6u
 		),
-		sanguis::enemy_type::spider
+		sanguis::creator::enemy_type::spider
 	)(
 		boost::cref(
 			diff_clock_
@@ -446,6 +446,6 @@ sanguis::server::waves::generator::spawn_all()
 		sanguis::server::waves::spawns_per_wave(
 			3u
 		),
-		sanguis::enemy_type::skeleton
+		sanguis::creator::enemy_type::skeleton
 	);
 }

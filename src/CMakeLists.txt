@@ -396,8 +396,6 @@ SET(
 	include/sanguis/diff_timer.hpp
 	include/sanguis/duration.hpp
 	include/sanguis/duration_second.hpp
-	include/sanguis/enemy_type.hpp
-	include/sanguis/enemy_type_fwd.hpp
 	include/sanguis/entity_id.hpp
 	include/sanguis/exception.hpp
 	include/sanguis/friend_type.hpp

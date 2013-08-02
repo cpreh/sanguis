@@ -1,5 +1,6 @@
 #include <sanguis/creator/background_grid.hpp>
 #include <sanguis/creator/background_tile.hpp>
+#include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/name.hpp>
 #include <sanguis/creator/opening.hpp>
@@ -434,7 +435,8 @@ sanguis::creator::aux::generators::maze(
 							5
 						)
 					),
-					sanguis::creator::spawn_type::test
+					sanguis::creator::enemy_type::maggot,
+					sanguis::creator::spawn_type::single
 				)
 			}
 		);

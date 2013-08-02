@@ -1,4 +1,3 @@
-#include <sanguis/enemy_type.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
@@ -7,6 +6,7 @@
 #include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
 #include <sanguis/client/draw2d/factory/enemy.hpp>
+#include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/load/enemy_name.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
@@ -14,7 +14,7 @@
 sanguis::client::draw2d::entities::unique_ptr
 sanguis::client::draw2d::factory::enemy(
 	sanguis::client::draw2d::entities::model::parameters const &_param,
-	sanguis::enemy_type const _etype
+	sanguis::creator::enemy_type const _etype
 )
 {
 	return

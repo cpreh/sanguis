@@ -2,8 +2,8 @@
 #define SANGUIS_SERVER_ENTITIES_ENEMIES_ENEMY_HPP_INCLUDED
 
 #include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/enemy_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
@@ -54,7 +54,7 @@ public:
 	enemy(
 		sanguis::diff_clock const &,
 		sanguis::random_generator &,
-		sanguis::enemy_type,
+		sanguis::creator::enemy_type,
 		sanguis::server::environment::load_context &,
 		sanguis::server::damage::armor const &,
 		sanguis::server::health,
@@ -68,7 +68,7 @@ public:
 
 	~enemy();
 
-	sanguis::enemy_type
+	sanguis::creator::enemy_type
 	etype() const;
 private:
 	void
@@ -93,7 +93,7 @@ private:
 	on_remove()
 	override;
 
-	sanguis::enemy_type const etype_;
+	sanguis::creator::enemy_type const etype_;
 
 	sanguis::server::pickup_probability const spawn_chance_;
 

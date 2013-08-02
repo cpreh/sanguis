@@ -1,7 +1,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
-#include <sanguis/enemy_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/spawns/count_per_wave.hpp>
 #include <sanguis/server/entities/spawns/hidden.hpp>
@@ -20,7 +20,7 @@
 sanguis::server::entities::spawns::limited::limited(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
-	sanguis::enemy_type const _enemy_type,
+	sanguis::creator::enemy_type const _enemy_type,
 	sanguis::server::entities::spawns::count_per_wave const _count_per_wave,
 	sanguis::server::entities::spawns::interval const _interval,
 	sanguis::server::entities::spawns::limit const _limit

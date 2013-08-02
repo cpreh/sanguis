@@ -1,5 +1,4 @@
 #include <sanguis/aoe_projectile_type.hpp>
-#include <sanguis/enemy_type.hpp>
 #include <sanguis/entity_id.hpp>
 #include <sanguis/friend_type.hpp>
 #include <sanguis/pickup_type.hpp>
@@ -40,6 +39,7 @@
 #include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/client/draw2d/translate/scalar_to_client.hpp>
 #include <sanguis/client/draw2d/translate/vector_to_client.hpp>
+#include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/messages/add_aoe_projectile.hpp>
 #include <sanguis/messages/add_enemy.hpp>
 #include <sanguis/messages/add_friend.hpp>
@@ -150,7 +150,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		sanguis::client::draw2d::factory::enemy(
 			env_.model_parameters(),
 			fcppt::cast_to_enum<
-				sanguis::enemy_type
+				sanguis::creator::enemy_type
 			>(
 				_message.get<
 					sanguis::messages::roles::enemy

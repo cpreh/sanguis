@@ -1,6 +1,6 @@
 #include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/enemy_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/entities/base.hpp>
@@ -25,7 +25,7 @@ sanguis::server::entities::spawns::spawn::~spawn()
 sanguis::server::entities::spawns::spawn::spawn(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
-	sanguis::enemy_type const _enemy_type
+	sanguis::creator::enemy_type const _enemy_type
 )
 :
 	sanguis::server::entities::base(),

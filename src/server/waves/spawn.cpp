@@ -1,6 +1,6 @@
 #include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/enemy_type.hpp>
 #include <sanguis/random_generator.hpp>
+#include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/space_unit.hpp>
@@ -29,7 +29,7 @@ sanguis::server::waves::spawn(
 	sanguis::random_generator &_random_generator,
 	sanguis::server::environment::object &_env,
 	sanguis::server::environment::load_context &_load_context,
-	sanguis::enemy_type const _etype,
+	sanguis::creator::enemy_type const _etype,
 	sanguis::server::entities::enemies::spawn_owner const &_spawn
 )
 {

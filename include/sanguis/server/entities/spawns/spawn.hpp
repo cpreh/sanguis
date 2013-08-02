@@ -2,8 +2,8 @@
 #define SANGUIS_SERVER_ENTITIES_SPAWNS_SPAWN_HPP_INCLUDED
 
 #include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/enemy_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_links.hpp>
@@ -40,7 +40,7 @@ protected:
 	spawn(
 		sanguis::diff_clock const &,
 		sanguis::random_generator &,
-		sanguis::enemy_type
+		sanguis::creator::enemy_type
 	);
 private:
 	// TODO: Get rid of this?
@@ -66,7 +66,7 @@ private:
 
 	sanguis::random_generator &random_generator_;
 
-	sanguis::enemy_type const enemy_type_;
+	sanguis::creator::enemy_type const enemy_type_;
 };
 
 }

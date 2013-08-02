@@ -14,6 +14,8 @@ set(
 	include/sanguis/creator/background_tile_fwd.hpp
 	include/sanguis/creator/deserialize.hpp
 	include/sanguis/creator/difference_type.hpp
+	include/sanguis/creator/enemy_type.hpp
+	include/sanguis/creator/enemy_type_fwd.hpp
 	include/sanguis/creator/exception.hpp
 	include/sanguis/creator/generate.hpp
 	include/sanguis/creator/generator_count.hpp

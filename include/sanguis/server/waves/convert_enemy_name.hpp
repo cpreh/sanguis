@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_WAVES_CONVERT_ENEMY_NAME_HPP_INCLUDED
 #define SANGUIS_SERVER_WAVES_CONVERT_ENEMY_NAME_HPP_INCLUDED
 
-#include <sanguis/enemy_type_fwd.hpp>
+#include <sanguis/creator/enemy_type_fwd.hpp>
 #include <fcppt/string.hpp>
 
 
@@ -12,7 +12,7 @@ namespace server
 namespace waves
 {
 
-sanguis::enemy_type
+sanguis::creator::enemy_type
 convert_enemy_name(
 	fcppt::string const &
 );

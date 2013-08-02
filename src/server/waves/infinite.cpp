@@ -1,7 +1,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
-#include <sanguis/enemy_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/spawns/count_per_wave.hpp>
@@ -26,7 +26,7 @@ sanguis::server::waves::infinite::infinite(
 	sanguis::server::waves::delay const _delay,
 	sanguis::server::waves::spawn_interval const _spawn_interval,
 	sanguis::server::waves::spawns_per_wave const _spawns_per_wave,
-	sanguis::enemy_type const _etype
+	sanguis::creator::enemy_type const _etype
 )
 :
 	sanguis::server::waves::wave(),

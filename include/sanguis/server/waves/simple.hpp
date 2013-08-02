@@ -3,8 +3,8 @@
 
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
-#include <sanguis/enemy_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/waves/delay.hpp>
 #include <sanguis/server/waves/spawn_interval.hpp>
 #include <sanguis/server/waves/wave.hpp>
@@ -35,7 +35,7 @@ public:
 		sanguis::server::waves::spawn_interval const &,
 		unsigned waves,
 		unsigned spawns_per_wave,
-		sanguis::enemy_type
+		sanguis::creator::enemy_type
 	);
 
 	~simple();
@@ -61,7 +61,7 @@ private:
 		waves_,
 		spawns_per_wave_;
 
-	sanguis::enemy_type const etype_;
+	sanguis::creator::enemy_type const etype_;
 
 	unsigned waves_spawned_;
 };

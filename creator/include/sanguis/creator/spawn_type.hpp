@@ -11,8 +11,9 @@ namespace creator
 
 enum class spawn_type
 {
-	test,
-	fcppt_maximum = test
+	single,
+	spawner,
+	fcppt_maximum = spawner
 };
 
 }
