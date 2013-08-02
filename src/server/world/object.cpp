@@ -29,6 +29,7 @@
 #include <sanguis/messages/types/exp.hpp>
 #include <sanguis/messages/types/size.hpp>
 #include <sanguis/server/center_fwd.hpp>
+#include <sanguis/server/difficulty.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/level.hpp>
@@ -95,7 +96,8 @@
 sanguis::server::world::object::object(
 	sanguis::server::world::parameters const &_parameters,
 	sanguis::world_id const _id,
-	sanguis::creator::top_result const &_generated_world
+	sanguis::creator::top_result const &_generated_world,
+	sanguis::server::difficulty const _difficulty
 )
 :
 	id_(
@@ -170,7 +172,8 @@ sanguis::server::world::object::object(
 	this->insert_spawns(
 		_generated_world.spawns(),
 		_parameters.diff_clock(),
-		_parameters.random_generator()
+		_parameters.random_generator(),
+		_difficulty
 	);
 }
 
@@ -909,7 +912,8 @@ void
 sanguis::server::world::object::insert_spawns(
 	sanguis::creator::spawn_container const &_spawns,
 	sanguis::diff_clock const &_diff_clock,
-	sanguis::random_generator &_random_generator
+	sanguis::random_generator &_random_generator,
+	sanguis::server::difficulty const _difficulty
 )
 {
 	for(
@@ -920,7 +924,8 @@ sanguis::server::world::object::insert_spawns(
 				spawn,
 				_diff_clock,
 				_random_generator,
-				this->load_context()
+				this->load_context(),
+				_difficulty
 			),
 			sanguis::server::world::spawn_parameters(
 				spawn

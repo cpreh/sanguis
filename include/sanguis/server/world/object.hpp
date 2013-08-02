@@ -17,6 +17,7 @@
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
+#include <sanguis/server/difficulty.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/level.hpp>
@@ -65,7 +66,8 @@ public:
 	object(
 		sanguis::server::world::parameters const &,
 		sanguis::world_id,
-		sanguis::creator::top_result const &
+		sanguis::creator::top_result const &,
+		sanguis::server::difficulty
 	);
 
 	~object();
@@ -210,7 +212,8 @@ private:
 	insert_spawns(
 		sanguis::creator::spawn_container const &,
 		sanguis::diff_clock const &,
-		sanguis::random_generator &
+		sanguis::random_generator &,
+		sanguis::server::difficulty
 	);
 
 	sanguis::world_id const id_;

@@ -7,6 +7,7 @@
 #include <sanguis/creator/serialize.hpp>
 #include <sanguis/creator/top_parameters.hpp>
 #include <sanguis/creator/top_result.hpp>
+#include <sanguis/server/difficulty.hpp>
 #include <sanguis/server/world/object.hpp>
 #include <sanguis/server/world/parameters.hpp>
 #include <sanguis/server/world/random.hpp>
@@ -30,7 +31,8 @@ sanguis::server::world::object_unique_ptr
 sanguis::server::world::random(
 	sanguis::server::world::parameters const &_parameters,
 	sanguis::creator::opening_count const _opening_count,
-	sanguis::world_id const _world_id
+	sanguis::world_id const _world_id,
+	sanguis::server::difficulty const _difficulty
 )
 {
 	boost::filesystem::path const cache_path(
@@ -75,7 +77,9 @@ sanguis::server::world::random(
 				sanguis::creator::top_parameters(
 					sanguis::creator::name(
 						FCPPT_TEXT(
-							"maze")),
+							"maze"
+						)
+					),
 					/*
 					sanguis::server::world::random_generator_name(
 						_parameters.random_generator()
@@ -113,6 +117,7 @@ sanguis::server::world::random(
 			_world_id,
 			sanguis::creator::deserialize(
 				stream
-			)
+			),
+			_difficulty
 		);
 }

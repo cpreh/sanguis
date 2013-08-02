@@ -3,6 +3,7 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/creator/enemy_type.hpp>
+#include <sanguis/server/difficulty.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/pickup_probability.hpp>
@@ -32,6 +33,7 @@ sanguis::server::entities::enemies::create(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
 	sanguis::creator::enemy_type const _etype,
+	sanguis::server::difficulty const _difficulty,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::entities::enemies::spawn_owner const &_spawn
 )

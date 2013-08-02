@@ -3,6 +3,7 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/creator/spawn.hpp>
 #include <sanguis/creator/spawn_type.hpp>
+#include <sanguis/server/difficulty.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
@@ -23,7 +24,8 @@ sanguis::server::world::spawn_entity(
 	sanguis::creator::spawn const &_spawn,
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
-	sanguis::server::environment::load_context &_load_context
+	sanguis::server::environment::load_context &_load_context,
+	sanguis::server::difficulty const _difficulty
 )
 {
 	switch(
@@ -36,6 +38,7 @@ sanguis::server::world::spawn_entity(
 				_diff_clock,
 				_random_generator,
 				_spawn.enemy_type(),
+				_difficulty,
 				_load_context,
 				sanguis::server::entities::enemies::spawn_owner(
 					sanguis::server::entities::auto_weak_link()
@@ -49,6 +52,7 @@ sanguis::server::world::spawn_entity(
 				_diff_clock,
 				_random_generator,
 				_spawn.enemy_type(),
+				_difficulty,
 				// TODO!
 				sanguis::server::entities::spawns::count_per_wave(
 					1u

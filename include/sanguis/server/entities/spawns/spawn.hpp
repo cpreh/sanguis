@@ -6,6 +6,7 @@
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
+#include <sanguis/server/difficulty.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_links.hpp>
@@ -45,7 +46,8 @@ protected:
 	spawn(
 		sanguis::diff_clock const &,
 		sanguis::random_generator &,
-		sanguis::creator::enemy_type
+		sanguis::creator::enemy_type,
+		sanguis::server::difficulty
 	);
 private:
 	sanguis::server::center const
@@ -89,6 +91,8 @@ private:
 	sanguis::random_generator &random_generator_;
 
 	sanguis::creator::enemy_type const enemy_type_;
+
+	sanguis::server::difficulty const difficulty_;
 
 	optional_center center_;
 

@@ -436,7 +436,7 @@ sanguis::creator::aux::generators::maze(
 						)
 					),
 					sanguis::creator::enemy_type::maggot,
-					sanguis::creator::spawn_type::single
+					sanguis::creator::spawn_type::spawner
 				)
 			}
 		);

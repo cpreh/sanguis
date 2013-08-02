@@ -1,6 +1,7 @@
 #include <sanguis/world_id.hpp>
 #include <sanguis/creator/opening_count.hpp>
 #include <sanguis/server/dest_world_id.hpp>
+#include <sanguis/server/difficulty.hpp>
 #include <sanguis/server/source_world_id.hpp>
 #include <sanguis/server/global/dest_world_pair.hpp>
 #include <sanguis/server/global/generate_worlds.hpp>
@@ -24,6 +25,10 @@ sanguis::server::global::generate_worlds(
 	sanguis::server::world::map worlds;
 
 	sanguis::server::global::world_connection_map connections;
+
+	sanguis::server::difficulty difficulty(
+		0u
+	);
 
 	for(
 		sanguis::world_id::value_type current_id(
@@ -49,7 +54,8 @@ sanguis::server::global::generate_worlds(
 					sanguis::creator::opening_count(
 						2u
 					),
-					world_id
+					world_id,
+					difficulty++ // TODO: How to scale this?
 				)
 			)
 		);

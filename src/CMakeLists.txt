@@ -744,6 +744,7 @@ SET(
 	include/sanguis/server/damage/wrapper.hpp
 	include/sanguis/server/damage/wrapper_fwd.hpp
 	include/sanguis/server/dest_world_id.hpp
+	include/sanguis/server/difficulty.hpp
 	include/sanguis/server/dim.hpp
 	include/sanguis/server/dim_fwd.hpp
 	include/sanguis/server/direction.hpp
