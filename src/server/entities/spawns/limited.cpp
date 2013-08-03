@@ -5,10 +5,10 @@
 #include <sanguis/server/difficulty.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/spawns/count_per_wave.hpp>
-#include <sanguis/server/entities/spawns/hidden.hpp>
 #include <sanguis/server/entities/spawns/interval.hpp>
 #include <sanguis/server/entities/spawns/limit.hpp>
 #include <sanguis/server/entities/spawns/limited.hpp>
+#include <sanguis/server/entities/spawns/total_count.hpp>
 #include <sanguis/server/entities/spawns/size_type.hpp>
 #include <sanguis/server/entities/spawns/spawn.hpp>
 #include <sge/timer/reset_when_expired.hpp>
@@ -25,7 +25,8 @@ sanguis::server::entities::spawns::limited::limited(
 	sanguis::server::difficulty const _difficulty,
 	sanguis::server::entities::spawns::count_per_wave const _count_per_wave,
 	sanguis::server::entities::spawns::interval const _interval,
-	sanguis::server::entities::spawns::limit const _limit
+	sanguis::server::entities::spawns::limit const _limit,
+	sanguis::server::entities::spawns::total_count const _total_count
 )
 :
 	sanguis::server::entities::spawns::spawn(
@@ -34,7 +35,6 @@ sanguis::server::entities::spawns::limited::limited(
 		_enemy_type,
 		_difficulty
 	),
-	sanguis::server::entities::spawns::hidden(),
 	count_per_wave_(
 		_count_per_wave
 	),
@@ -44,17 +44,39 @@ sanguis::server::entities::spawns::limited::limited(
 			_interval.get()
 		)
 	),
+	alive_(
+		0u
+	),
 	spawned_(
 		0u
 	),
 	limit_(
 		_limit
+	),
+	total_count_(
+		_total_count
 	)
 {
+	FCPPT_ASSERT_PRE(
+		_limit.get() > 0u
+	);
+
+	FCPPT_ASSERT_PRE(
+		_count_per_wave.get() > 0u
+	);
 }
 
 sanguis::server::entities::spawns::limited::~limited()
 {
+}
+
+bool
+sanguis::server::entities::spawns::limited::dead() const
+{
+	return
+		spawned_
+		==
+		total_count_.get();
 }
 
 void
@@ -63,10 +85,10 @@ sanguis::server::entities::spawns::limited::unregister(
 )
 {
 	FCPPT_ASSERT_PRE(
-		spawned_ > 0u
+		alive_ > 0u
 	);
 
-	--spawned_;
+	--alive_;
 }
 
 sanguis::server::entities::spawns::size_type
@@ -81,7 +103,7 @@ sanguis::server::entities::spawns::limited::may_spawn()
 				static_cast<
 					sanguis::server::entities::spawns::size_type
 				>(
-					limit_.get() - spawned_
+					limit_.get() - alive_
 				),
 				static_cast<
 					sanguis::server::entities::spawns::size_type
@@ -99,5 +121,7 @@ sanguis::server::entities::spawns::limited::add_count(
 	sanguis::server::entities::spawns::size_type const _add
 )
 {
+	alive_ += _add;
+
 	spawned_ += _add;
 }

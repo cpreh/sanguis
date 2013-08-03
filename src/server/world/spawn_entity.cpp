@@ -13,6 +13,7 @@
 #include <sanguis/server/entities/spawns/interval.hpp>
 #include <sanguis/server/entities/spawns/limit.hpp>
 #include <sanguis/server/entities/spawns/limited.hpp>
+#include <sanguis/server/entities/spawns/total_count.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/world/spawn_entity.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -64,6 +65,9 @@ sanguis::server::world::spawn_entity(
 				),
 				sanguis::server::entities::spawns::limit(
 					1u
+				),
+				sanguis::server::entities::spawns::total_count(
+					5u
 				)
 			);
 	}

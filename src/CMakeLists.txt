@@ -832,12 +832,12 @@ SET(
 	include/sanguis/server/entities/property/value.hpp
 	include/sanguis/server/entities/radius.hpp
 	include/sanguis/server/entities/spawns/count_per_wave.hpp
-	include/sanguis/server/entities/spawns/hidden.hpp
 	include/sanguis/server/entities/spawns/interval.hpp
 	include/sanguis/server/entities/spawns/limit.hpp
 	include/sanguis/server/entities/spawns/limited.hpp
 	include/sanguis/server/entities/spawns/size_type.hpp
 	include/sanguis/server/entities/spawns/spawn.hpp
+	include/sanguis/server/entities/spawns/total_count.hpp
 	include/sanguis/server/entities/speed.hpp
 	include/sanguis/server/entities/speed_to_abs.hpp
 	include/sanguis/server/entities/transfer_parameters.hpp
@@ -1401,7 +1401,6 @@ SET(
 	src/server/entities/property/linear_change.cpp
 	src/server/entities/property/subtract.cpp
 	src/server/entities/radius.cpp
-	src/server/entities/spawns/hidden.cpp
 	src/server/entities/spawns/limited.cpp
 	src/server/entities/spawns/spawn.cpp
 	src/server/entities/speed.cpp
