@@ -10,9 +10,11 @@ namespace sanguis
 namespace messages
 {
 
-typedef alda::bindings::fundamental_strong<
+typedef
+alda::bindings::fundamental_strong<
 	sanguis::creator::seed
-> seed;
+>
+seed;
 
 }
 }

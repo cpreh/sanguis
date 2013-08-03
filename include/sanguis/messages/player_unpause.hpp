@@ -11,11 +11,13 @@ namespace sanguis
 namespace messages
 {
 
-typedef sanguis::messages::make_class<
+typedef
+sanguis::messages::make_class<
 	sanguis::messages::bind_player_message<
 		sanguis::messages::types::message::player_unpause
-	>::type
->::type player_unpause;
+	>
+>
+player_unpause;
 
 }
 }

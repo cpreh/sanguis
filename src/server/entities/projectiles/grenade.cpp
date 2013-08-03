@@ -154,10 +154,14 @@ sanguis::server::entities::projectiles::grenade::on_remove()
 			),
 			sanguis::server::damage::list(
 				sanguis::server::damage::piercing =
-					sanguis::server::damage::unit(0.5f)
+					sanguis::server::damage::unit(
+						0.5f
+					)
 			)(
 				sanguis::server::damage::fire =
-					sanguis::server::damage::unit(0.5f)
+					sanguis::server::damage::unit(
+						0.5f
+					)
 			)
 		),
 		sanguis::server::entities::insert_parameters_center(

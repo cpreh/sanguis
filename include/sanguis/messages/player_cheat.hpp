@@ -18,19 +18,21 @@ namespace sanguis
 namespace messages
 {
 
-typedef sanguis::messages::make_class<
+typedef
+sanguis::messages::make_class<
 	majutsu::composite<
 		boost::mpl::vector2<
 			sanguis::messages::bind_player_message<
 				sanguis::messages::types::message::player_cheat
-			>::type,
+			>,
 			majutsu::role<
 				sanguis::messages::enum_,
 				sanguis::messages::roles::cheat
 			>
 		>
 	>
->::type player_cheat;
+>
+player_cheat;
 
 }
 }

@@ -10,9 +10,11 @@ namespace sanguis
 namespace messages
 {
 
-typedef alda::message::base<
+typedef
+alda::message::base<
 	sanguis::messages::types::alda_type
-> base;
+>
+base;
 
 }
 }

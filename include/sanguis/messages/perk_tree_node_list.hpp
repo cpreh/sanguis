@@ -12,9 +12,11 @@ namespace sanguis
 namespace messages
 {
 
-typedef std::vector<
+typedef
+std::vector<
 	sanguis::messages::perk_tree_node
-> perk_tree_node_list;
+>
+perk_tree_node_list;
 
 }
 }

@@ -4,4 +4,4 @@
 
 SANGUIS_MESSAGES_INSTANTIATE_MESSAGE(
 	sanguis::messages::player_direction
-)
+);

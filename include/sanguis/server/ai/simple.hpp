@@ -42,7 +42,8 @@ public:
 	~simple();
 private:
 	void
-	update();
+	update()
+	override;
 
 	void
 	target_enters(

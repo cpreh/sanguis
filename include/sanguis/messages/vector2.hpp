@@ -11,10 +11,12 @@ namespace sanguis
 namespace messages
 {
 
-typedef alda::bindings::static_<
+typedef
+alda::bindings::static_<
 	sanguis::messages::types::vector2,
 	sanguis::messages::space_unit
-> vector2;
+>
+vector2;
 
 }
 }

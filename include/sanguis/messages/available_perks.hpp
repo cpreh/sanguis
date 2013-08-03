@@ -17,18 +17,20 @@ namespace sanguis
 namespace messages
 {
 
-typedef sanguis::messages::make_class<
+typedef
+sanguis::messages::make_class<
 	majutsu::composite<
 		boost::mpl::vector2<
 			sanguis::messages::bind_entity_message<
 				sanguis::messages::types::message::available_perks
-			>::type,
+			>,
 			majutsu::role<
 				sanguis::messages::perk_tree
 			>
 		>
 	>
->::type available_perks;
+>
+available_perks;
 
 }
 }

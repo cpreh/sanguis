@@ -4,6 +4,7 @@
 #include <sanguis/server/ai/base_fwd.hpp>
 #include <fcppt/scoped_ptr.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -12,7 +13,7 @@ namespace ai
 {
 
 typedef fcppt::scoped_ptr<
-	base
+	sanguis::server::ai::base
 > scoped_ptr;
 
 }

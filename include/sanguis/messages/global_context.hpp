@@ -3,6 +3,7 @@
 
 #include <sanguis/messages/serialization/context_fwd.hpp>
 
+
 namespace sanguis
 {
 namespace messages

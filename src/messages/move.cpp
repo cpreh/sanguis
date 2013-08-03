@@ -1,7 +1,7 @@
-#include <sanguis/messages/move.hpp>
 #include <sanguis/messages/instantiate_message.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
+#include <sanguis/messages/move.hpp>
+
 
 SANGUIS_MESSAGES_INSTANTIATE_MESSAGE(
 	sanguis::messages::move
-)
+);

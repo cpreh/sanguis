@@ -4,14 +4,17 @@
 #include <sanguis/messages/types/size.hpp>
 #include <alda/bindings/fundamental.hpp>
 
+
 namespace sanguis
 {
 namespace messages
 {
 
-typedef alda::bindings::fundamental<
+typedef
+alda::bindings::fundamental<
 	sanguis::messages::types::size
-> size;
+>
+size;
 
 }
 }

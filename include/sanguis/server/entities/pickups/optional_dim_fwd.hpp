@@ -23,5 +23,4 @@ typedef fcppt::optional<
 }
 }
 
-
 #endif

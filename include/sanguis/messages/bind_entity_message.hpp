@@ -19,18 +19,17 @@ namespace messages
 template<
 	sanguis::messages::types::message Msg
 >
-struct bind_entity_message
-{
-	typedef majutsu::bind<
-		sanguis::messages::entity_message,
-		boost::mpl::vector2<
-			typename sanguis::messages::make_message_id<
-				Msg
-			>::type,
-			majutsu::placeholder
-		>
-	> type;
-};
+using bind_entity_message
+=
+majutsu::bind<
+	sanguis::messages::entity_message,
+	boost::mpl::vector2<
+		sanguis::messages::make_message_id<
+			Msg
+		>,
+		majutsu::placeholder
+	>
+>;
 
 }
 }

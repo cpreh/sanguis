@@ -21,7 +21,8 @@ namespace sanguis
 namespace messages
 {
 
-typedef sanguis::messages::make_class<
+typedef
+sanguis::messages::make_class<
 	majutsu::composite<
 		boost::mpl::vector5<
 			majutsu::role<
@@ -46,7 +47,8 @@ typedef sanguis::messages::make_class<
 			>
 		>
 	>
->::type perk_tree_node;
+>
+perk_tree_node;
 
 }
 }

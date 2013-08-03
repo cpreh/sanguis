@@ -5,6 +5,7 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/ai/create_function.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -12,7 +13,7 @@ namespace server
 namespace ai
 {
 
-ai::create_function const
+sanguis::server::ai::create_function const
 create_simple_without_owner(
 	sanguis::diff_clock const &,
 	sanguis::random_generator &

@@ -2,8 +2,8 @@
 #define SANGUIS_MESSAGES_CONSOLE_COMMAND_HPP_INCLUDED
 
 #include <sanguis/messages/make_class.hpp>
-#include <sanguis/messages/string_vector.hpp>
 #include <sanguis/messages/make_message_id.hpp>
+#include <sanguis/messages/string_vector.hpp>
 #include <sanguis/messages/types/message.hpp>
 #include <majutsu/composite.hpp>
 #include <majutsu/role.hpp>
@@ -11,23 +11,26 @@
 #include <boost/mpl/vector/vector10.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
 namespace messages
 {
 
-typedef messages::make_class<
+typedef
+sanguis::messages::make_class<
 	majutsu::composite<
 		boost::mpl::vector2<
-			messages::make_message_id<
-				types::message::console_command
-			>::type,
+			sanguis::messages::make_message_id<
+				sanguis::messages::types::message::console_command
+			>,
 			majutsu::role<
-				messages::string_vector
+				sanguis::messages::string_vector
 			>
 		>
 	>
->::type console_command;
+>
+console_command;
 
 }
 }

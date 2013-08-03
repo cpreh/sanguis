@@ -5,16 +5,19 @@
 #include <sanguis/messages/make_class.hpp>
 #include <sanguis/messages/types/message.hpp>
 
+
 namespace sanguis
 {
 namespace messages
 {
 
-typedef messages::make_class<
-	messages::bind_entity_message<
-		types::message::stop_attacking
-	>::type
->::type stop_attacking;
+typedef
+sanguis::messages::make_class<
+	sanguis::messages::bind_entity_message<
+		sanguis::messages::types::message::stop_attacking
+	>
+>
+stop_attacking;
 
 }
 }

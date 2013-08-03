@@ -10,9 +10,11 @@ namespace sanguis
 namespace messages
 {
 
-typedef alda::message::base_unique_ptr<
+typedef
+alda::message::base_unique_ptr<
 	sanguis::messages::types::alda_type
->::type unique_ptr;
+>
+unique_ptr;
 
 }
 }

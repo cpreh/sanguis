@@ -22,12 +22,13 @@ namespace sanguis
 namespace messages
 {
 
-typedef sanguis::messages::make_class<
+typedef
+sanguis::messages::make_class<
 	majutsu::composite<
 		boost::mpl::vector5<
 			sanguis::messages::make_message_id<
 				sanguis::messages::types::message::change_world
-			>::type,
+			>,
 			majutsu::role<
 				sanguis::messages::world_id
 			>,
@@ -44,7 +45,8 @@ typedef sanguis::messages::make_class<
 			>
 		>
 	>
->::type change_world;
+>
+change_world;
 
 }
 }

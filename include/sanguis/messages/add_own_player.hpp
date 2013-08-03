@@ -11,11 +11,13 @@ namespace sanguis
 namespace messages
 {
 
-typedef sanguis::messages::make_class<
+typedef
+sanguis::messages::make_class<
 	sanguis::messages::make_player_message<
 		sanguis::messages::types::message::add_own_player
-	>::type
->::type add_own_player;
+	>
+>
+add_own_player;
 
 }
 }

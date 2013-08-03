@@ -649,7 +649,6 @@ SET(
 	include/sanguis/server/ai/create_function.hpp
 	include/sanguis/server/ai/create_simple.hpp
 	include/sanguis/server/ai/create_simple_without_owner.hpp
-	include/sanguis/server/ai/debug.hpp
 	include/sanguis/server/ai/entity_set.hpp
 	include/sanguis/server/ai/scoped_ptr.hpp
 	include/sanguis/server/ai/search_new_target.hpp
@@ -772,6 +771,7 @@ SET(
 	include/sanguis/server/entities/enemies/factory/zombie00.hpp
 	include/sanguis/server/entities/enemies/factory/zombie01.hpp
 	include/sanguis/server/entities/enemies/fwd.hpp
+	include/sanguis/server/entities/enemies/scale_difficulty.hpp
 	include/sanguis/server/entities/enemies/spawn_owner.hpp
 	include/sanguis/server/entities/enemies/spawn_owner_fwd.hpp
 	include/sanguis/server/entities/exp_area.hpp
@@ -1314,7 +1314,6 @@ SET(
 	src/server/ai/base.cpp
 	src/server/ai/create_simple.cpp
 	src/server/ai/create_simple_without_owner.cpp
-	src/server/ai/debug.cpp
 	src/server/ai/search_new_target.cpp
 	src/server/ai/simple.cpp
 	src/server/auras/aggro.cpp

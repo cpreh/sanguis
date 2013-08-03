@@ -17,12 +17,13 @@ ALDA_SERIALIZATION_INSTANTIATE_MESSAGE(\
 );\
 namespace \
 {\
+\
 ALDA_SERIALIZATION_REGISTER_MESSAGE(\
 	sanguis::messages::global_context(),\
 	sanguis::messages::types::alda_type,\
 	msg\
 );\
+\
 }
-
 
 #endif

@@ -16,7 +16,8 @@ namespace sanguis
 namespace messages
 {
 
-typedef majutsu::composite<
+typedef
+majutsu::composite<
 	boost::mpl::vector2<
 		alda::message::id_binding,
 		majutsu::role<
@@ -24,7 +25,8 @@ typedef majutsu::composite<
 			sanguis::messages::roles::entity_id
 		>
 	>
-> entity_message;
+>
+entity_message;
 
 }
 }

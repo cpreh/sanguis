@@ -14,11 +14,11 @@ namespace server
 namespace ai
 {
 
-ai::create_function const
+sanguis::server::ai::create_function const
 create_simple(
 	sanguis::diff_clock const &,
 	sanguis::random_generator &,
-	entities::auto_weak_link const &
+	sanguis::server::entities::auto_weak_link const &
 );
 
 }

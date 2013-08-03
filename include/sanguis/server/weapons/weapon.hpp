@@ -141,7 +141,6 @@ private:
 	sanguis::server::weapons::reload_time const
 	reload_time() const;
 
-	virtual
 	void
 	init_attack(
 		sanguis::server::entities::with_weapon &owner

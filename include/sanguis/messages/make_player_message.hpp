@@ -18,17 +18,16 @@ namespace messages
 template<
 	sanguis::messages::types::message Type
 >
-struct make_player_message
-{
-	typedef majutsu::composite<
-		boost::mpl::vector2<
-			typename sanguis::messages::bind_entity_message<
-				Type
-			>::type,
-			sanguis::messages::add_with_health
-		>
-	> type;
-};
+using make_player_message
+=
+majutsu::composite<
+	boost::mpl::vector2<
+		sanguis::messages::bind_entity_message<
+			Type
+		>,
+		sanguis::messages::add_with_health
+	>
+>;
 
 }
 }

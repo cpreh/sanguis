@@ -10,9 +10,11 @@ namespace sanguis
 namespace messages
 {
 
-typedef alda::bindings::fundamental<
+typedef
+alda::bindings::fundamental<
 	sanguis::messages::types::char_
-> char_type;
+>
+char_type;
 
 }
 }

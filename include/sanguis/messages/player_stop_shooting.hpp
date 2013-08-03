@@ -11,11 +11,13 @@ namespace sanguis
 namespace messages
 {
 
-typedef sanguis::messages::make_class<
+typedef
+sanguis::messages::make_class<
 	sanguis::messages::bind_player_message<
 		sanguis::messages::types::message::player_stop_shooting
-	>::type
->::type player_stop_shooting;
+	>
+>
+player_stop_shooting;
 
 }
 }

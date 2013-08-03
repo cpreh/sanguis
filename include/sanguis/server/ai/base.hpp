@@ -25,7 +25,7 @@ public:
 	update() = 0;
 
 	virtual
-	~base();
+	~base() = 0;
 };
 
 }
