@@ -763,6 +763,14 @@ SET(
 	include/sanguis/server/entities/default_solid.hpp
 	include/sanguis/server/entities/enemies/create.hpp
 	include/sanguis/server/entities/enemies/enemy.hpp
+	include/sanguis/server/entities/enemies/factory/maggot.hpp
+	include/sanguis/server/entities/enemies/factory/parameters.hpp
+	include/sanguis/server/entities/enemies/factory/parameters_fwd.hpp
+	include/sanguis/server/entities/enemies/factory/skeleton.hpp
+	include/sanguis/server/entities/enemies/factory/spider.hpp
+	include/sanguis/server/entities/enemies/factory/wolf.hpp
+	include/sanguis/server/entities/enemies/factory/zombie00.hpp
+	include/sanguis/server/entities/enemies/factory/zombie01.hpp
 	include/sanguis/server/entities/enemies/fwd.hpp
 	include/sanguis/server/entities/enemies/spawn_owner.hpp
 	include/sanguis/server/entities/enemies/spawn_owner_fwd.hpp
@@ -1364,6 +1372,13 @@ SET(
 	src/server/entities/default_solid.cpp
 	src/server/entities/enemies/create.cpp
 	src/server/entities/enemies/enemy.cpp
+	src/server/entities/enemies/factory/maggot.cpp
+	src/server/entities/enemies/factory/parameters.cpp
+	src/server/entities/enemies/factory/skeleton.cpp
+	src/server/entities/enemies/factory/spider.cpp
+	src/server/entities/enemies/factory/wolf.cpp
+	src/server/entities/enemies/factory/zombie00.cpp
+	src/server/entities/enemies/factory/zombie01.cpp
 	src/server/entities/exp_area.cpp
 	src/server/entities/friend.cpp
 	src/server/entities/ifaces/with_angle.cpp
