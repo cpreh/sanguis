@@ -2,7 +2,6 @@
 #include <sanguis/entity_id.hpp>
 #include <sanguis/perk_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
-#include <sanguis/weapon_type.hpp>
 #include <sanguis/messages/add_player.hpp>
 #include <sanguis/messages/add_own_player.hpp>
 #include <sanguis/messages/create.hpp>
@@ -62,7 +61,6 @@
 
 sanguis::server::entities::player::player(
 	sanguis::diff_clock const &_diff_clock,
-	sanguis::random_generator &_random_generator,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::health const _health,
 	sanguis::server::damage::armor const &_armor,
@@ -109,8 +107,6 @@ sanguis::server::entities::player::player(
 		)
 	),
 	sanguis::server::entities::with_weapon(
-		_diff_clock,
-		_random_generator,
 		// TODO: Shouldn't we give the player an initial weapon
 		// instead of spawning a pickup underneath him?
 		sanguis::server::weapons::unique_ptr()
@@ -348,14 +344,16 @@ sanguis::server::entities::player::add_message(
 
 void
 sanguis::server::entities::player::on_new_weapon(
-	sanguis::weapon_type const _type
+	sanguis::server::weapons::weapon const &_weapon
 )
 {
+	// TODO: Generate a helpful text about what the weapon's attributes are
+/*
 	this->environment().got_weapon(
 		this->player_id(),
 		this->id(),
 		_type
-	);
+	);*/
 }
 
 sanguis::server::collision::group_vector

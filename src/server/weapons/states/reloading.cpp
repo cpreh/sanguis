@@ -1,10 +1,10 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/events/poll.hpp>
-#include <sanguis/server/weapons/events/reset.hpp>
 #include <sanguis/server/weapons/events/shoot.hpp>
 #include <sanguis/server/weapons/events/stop.hpp>
 #include <sanguis/server/weapons/states/reloading.hpp>
+#include <sanguis/server/weapons/states/reloading_parameters.hpp>
 #include <sanguis/server/weapons/states/ready.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
@@ -19,7 +19,8 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::weapons::states::reloading::reloading(
-	my_context _ctx
+	my_context _ctx,
+	sanguis::server::weapons::states::reloading_parameters const &_parameters
 )
 :
 	my_base(
@@ -33,7 +34,12 @@ sanguis::server::weapons::states::reloading::reloading(
 			this->context<
 				sanguis::server::weapons::weapon
 			>().reload_time().get()
+			/
+			_parameters.irs().get()
 		)
+	),
+	cancelled_(
+		false
 	)
 {
 }
@@ -59,7 +65,16 @@ sanguis::server::weapons::states::reloading::react(
 		sanguis::server::weapons::weapon
 	>().reset_magazine();
 
-	_event.owner().stop_reloading();
+//	_event.owner().stop_reloading();
+
+	if(
+		!cancelled_
+	)
+		this->post_event(
+			sanguis::server::weapons::events::shoot(
+				_event.owner()
+			)
+		);
 
 	return
 		this->transit<
@@ -72,20 +87,7 @@ sanguis::server::weapons::states::reloading::react(
 	sanguis::server::weapons::events::stop const &
 )
 {
-	reload_time_.reset();
-
-	return
-		this->discard_event();
-}
-
-boost::statechart::result
-sanguis::server::weapons::states::reloading::react(
-	sanguis::server::weapons::events::reset const &
-)
-{
-	reload_time_.expired(
-		true
-	);
+	cancelled_ = true;
 
 	return
 		this->discard_event();

@@ -12,10 +12,8 @@
 #include <sanguis/server/entities/property/add.hpp>
 #include <sanguis/server/entities/property/always_max.hpp>
 #include <sanguis/server/entities/property/changeable.hpp>
-#include <sanguis/server/entities/property/from_float.hpp>
 #include <sanguis/server/entities/property/initial_max.hpp>
 #include <sanguis/server/entities/property/subtract.hpp>
-#include <sanguis/server/entities/property/to_float.hpp>
 #include <sanguis/server/entities/property/value.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
@@ -38,10 +36,8 @@ sanguis::server::entities::with_health::damage(
 	)
 		sanguis::server::entities::property::subtract(
 			health_,
-			sanguis::server::entities::property::from_float(
-				_damage.get()
-				* _amounts[i].get() * (1 - armor_.get()[i].get())
-			)
+			_damage.get()
+			* _amounts[i].get() * (1 - armor_.get()[i].get())
 		);
 }
 
@@ -70,11 +66,7 @@ sanguis::server::entities::with_health::current_health() const
 {
 	return
 		sanguis::server::health(
-			sanguis::server::entities::property::to_float<
-				sanguis::server::health::value_type
-			>(
-				health_.current()
-			)
+			health_.current()
 		);
 }
 
@@ -83,11 +75,7 @@ sanguis::server::entities::with_health::max_health() const
 {
 	return
 		sanguis::server::health(
-			sanguis::server::entities::property::to_float<
-				sanguis::server::health::value_type
-			>(
-				health_.max()
-			)
+			health_.max()
 		);
 }
 
@@ -140,12 +128,10 @@ sanguis::server::entities::with_health::on_update()
 {
 	sanguis::server::entities::property::add(
 		health_,
-		sanguis::server::entities::property::from_float(
-			sge::timer::elapsed_fractional_and_reset<
-				sanguis::server::space_unit
-			>(
-				regeneration_timer_
-			)
+		sge::timer::elapsed_fractional_and_reset<
+			sanguis::server::space_unit
+		>(
+			regeneration_timer_
 		)
 		* this->regeneration().current()
 	);
@@ -165,11 +151,7 @@ sanguis::server::entities::with_health::max_health_change(
 	this->environment().max_health_changed(
 		this->id(),
 		sanguis::server::health(
-			sanguis::server::entities::property::to_float<
-				sanguis::server::health::value_type
-			>(
-				_value
-			)
+			_value
 		)
 	);
 }

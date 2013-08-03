@@ -70,7 +70,7 @@ sanguis::server::weapons::grenade::do_attack(
 			sanguis::server::radius(
 				aoe_.get()
 			),
-			_attack.dest(),
+			_attack.target().get(),
 			sanguis::server::direction(
 				_attack.angle().get()
 			)

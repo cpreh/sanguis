@@ -10,7 +10,6 @@ namespace sanguis
 enum class cheat_type
 {
 	exp,
-	impulse101,
 	kill,
 	fcppt_maximum = kill
 };

@@ -4,9 +4,9 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/events/poll_fwd.hpp>
-#include <sanguis/server/weapons/events/reset_fwd.hpp>
 #include <sanguis/server/weapons/events/stop_fwd.hpp>
 #include <sanguis/server/weapons/states/reloading_fwd.hpp>
+#include <sanguis/server/weapons/states/reloading_parameters_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
@@ -36,21 +36,18 @@ class reloading
 		reloading
 	);
 public:
-	typedef boost::mpl::list3<
+	typedef boost::mpl::list2<
 		boost::statechart::custom_reaction<
 			sanguis::server::weapons::events::poll
 		>,
 		boost::statechart::custom_reaction<
 			sanguis::server::weapons::events::stop
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::server::weapons::events::reset
 		>
 	> reactions;
 
-	explicit
 	reloading(
-		my_context
+		my_context,
+		sanguis::server::weapons::states::reloading_parameters const &
 	);
 
 	virtual
@@ -65,13 +62,10 @@ public:
 	react(
 		sanguis::server::weapons::events::stop const &
 	);
-
-	boost::statechart::result
-	react(
-		sanguis::server::weapons::events::reset const &
-	);
 private:
 	sanguis::diff_timer reload_time_;
+
+	bool cancelled_;
 };
 
 }

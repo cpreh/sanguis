@@ -1,6 +1,5 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/friend_type.hpp>
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/load/friend_name.hpp>
 #include <sanguis/messages/add_friend.hpp>
 #include <sanguis/messages/create.hpp>
@@ -40,7 +39,6 @@
 
 sanguis::server::entities::friend_::friend_(
 	sanguis::diff_clock const &_diff_clock,
-	sanguis::random_generator &_random_generator,
 	sanguis::friend_type const _ftype,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::damage::armor const &_armor,
@@ -53,8 +51,6 @@ sanguis::server::entities::friend_::friend_(
 	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::body_velocity_combiner(),
 	sanguis::server::entities::with_ai(
-		_diff_clock,
-		_random_generator,
 		_ai,
 		std::move(
 			_weapon

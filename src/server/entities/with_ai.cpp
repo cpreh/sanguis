@@ -1,5 +1,3 @@
-#include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/ai/base.hpp>
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
@@ -15,8 +13,6 @@
 
 
 sanguis::server::entities::with_ai::with_ai(
-	sanguis::diff_clock const &_diff_clock,
-	sanguis::random_generator &_random_generator,
 	sanguis::server::ai::create_function const &_create_ai,
 	sanguis::server::weapons::unique_ptr &&_start_weapon
 )
@@ -24,8 +20,6 @@ sanguis::server::entities::with_ai::with_ai(
 	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::with_auras(),
 	sanguis::server::entities::with_weapon(
-		_diff_clock,
-		_random_generator,
 		std::move(
 			_start_weapon
 		)

@@ -17,6 +17,7 @@
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/property/changeable_fwd.hpp>
 #include <sanguis/server/entities/property/current_to_max.hpp>
+#include <sanguis/server/weapons/target.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -120,7 +121,7 @@ sanguis::server::ai::simple::update()
 		!target_
 	)
 	{
-		me_.aggressive(
+		me_.use_primary(
 			false
 		);
 
@@ -137,7 +138,9 @@ sanguis::server::ai::simple::update()
 	}
 
 	me_.target(
-		target_->center().get()
+		sanguis::server::weapons::target(
+			target_->center().get()
+		)
 	);
 
 	if(
@@ -147,7 +150,7 @@ sanguis::server::ai::simple::update()
 	)
 		return;
 
-	me_.aggressive(
+	me_.use_primary(
 		true
 	);
 

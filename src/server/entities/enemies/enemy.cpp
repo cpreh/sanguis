@@ -1,5 +1,4 @@
 #include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/load/enemy_name.hpp>
 #include <sanguis/messages/add_enemy.hpp>
@@ -49,7 +48,6 @@
 
 sanguis::server::entities::enemies::enemy::enemy(
 	sanguis::diff_clock const &_diff_clock,
-	sanguis::random_generator &_random_generator,
 	sanguis::creator::enemy_type const _etype,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::damage::armor const &_armor,
@@ -63,8 +61,6 @@ sanguis::server::entities::enemies::enemy::enemy(
 )
 :
 	sanguis::server::entities::with_ai(
-		_diff_clock,
-		_random_generator,
 		_ai,
 		std::move(
 			_weapon

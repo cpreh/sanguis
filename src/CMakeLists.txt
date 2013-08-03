@@ -828,7 +828,6 @@ SET(
 	include/sanguis/server/entities/property/constant_change.hpp
 	include/sanguis/server/entities/property/constant_fwd.hpp
 	include/sanguis/server/entities/property/current_to_max.hpp
-	include/sanguis/server/entities/property/from_float.hpp
 	include/sanguis/server/entities/property/initial.hpp
 	include/sanguis/server/entities/property/initial_fwd.hpp
 	include/sanguis/server/entities/property/initial_max.hpp
@@ -836,7 +835,6 @@ SET(
 	include/sanguis/server/entities/property/linear_change.hpp
 	include/sanguis/server/entities/property/linear_fwd.hpp
 	include/sanguis/server/entities/property/subtract.hpp
-	include/sanguis/server/entities/property/to_float.hpp
 	include/sanguis/server/entities/property/value.hpp
 	include/sanguis/server/entities/radius.hpp
 	include/sanguis/server/entities/spawns/count_per_wave.hpp
@@ -985,13 +983,13 @@ SET(
 	include/sanguis/server/weapons/delayed_attack_fwd.hpp
 	include/sanguis/server/weapons/events/poll.hpp
 	include/sanguis/server/weapons/events/poll_fwd.hpp
-	include/sanguis/server/weapons/events/reset.hpp
-	include/sanguis/server/weapons/events/reset_fwd.hpp
 	include/sanguis/server/weapons/events/shoot.hpp
 	include/sanguis/server/weapons/events/shoot_fwd.hpp
 	include/sanguis/server/weapons/events/stop.hpp
 	include/sanguis/server/weapons/events/stop_fwd.hpp
 	include/sanguis/server/weapons/grenade.hpp
+	include/sanguis/server/weapons/ias.hpp
+	include/sanguis/server/weapons/irs.hpp
 	include/sanguis/server/weapons/log.hpp
 	include/sanguis/server/weapons/log_location.hpp
 	include/sanguis/server/weapons/magazine_count.hpp
@@ -1006,12 +1004,20 @@ SET(
 	include/sanguis/server/weapons/shotgun.hpp
 	include/sanguis/server/weapons/states/backswing.hpp
 	include/sanguis/server/weapons/states/backswing_fwd.hpp
+	include/sanguis/server/weapons/states/backswing_parameters.hpp
+	include/sanguis/server/weapons/states/backswing_parameters_fwd.hpp
 	include/sanguis/server/weapons/states/castpoint.hpp
 	include/sanguis/server/weapons/states/castpoint_fwd.hpp
+	include/sanguis/server/weapons/states/castpoint_parameters.hpp
+	include/sanguis/server/weapons/states/castpoint_parameters_fwd.hpp
 	include/sanguis/server/weapons/states/ready.hpp
 	include/sanguis/server/weapons/states/ready_fwd.hpp
 	include/sanguis/server/weapons/states/reloading.hpp
 	include/sanguis/server/weapons/states/reloading_fwd.hpp
+	include/sanguis/server/weapons/states/reloading_parameters.hpp
+	include/sanguis/server/weapons/states/reloading_parameters_fwd.hpp
+	include/sanguis/server/weapons/target.hpp
+	include/sanguis/server/weapons/target_fwd.hpp
 	include/sanguis/server/weapons/unique_ptr.hpp
 	include/sanguis/server/weapons/unlimited_magazine_count.hpp
 	include/sanguis/server/weapons/unlimited_magazine_size.hpp
@@ -1490,9 +1496,12 @@ SET(
 	src/server/weapons/sentry.cpp
 	src/server/weapons/shotgun.cpp
 	src/server/weapons/states/backswing.cpp
+	src/server/weapons/states/backswing_parameters.cpp
 	src/server/weapons/states/castpoint.cpp
+	src/server/weapons/states/castpoint_parameters.cpp
 	src/server/weapons/states/ready.cpp
 	src/server/weapons/states/reloading.cpp
+	src/server/weapons/states/reloading_parameters.cpp
 	src/server/weapons/unlimited_magazine_count.cpp
 	src/server/weapons/unlimited_magazine_size.cpp
 	src/server/weapons/weapon.cpp

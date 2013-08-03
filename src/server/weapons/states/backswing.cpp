@@ -4,9 +4,10 @@
 #include <sanguis/server/weapons/events/poll.hpp>
 #include <sanguis/server/weapons/events/shoot.hpp>
 #include <sanguis/server/weapons/events/stop.hpp>
-#include <sanguis/server/weapons/events/reset.hpp>
 #include <sanguis/server/weapons/states/backswing.hpp>
+#include <sanguis/server/weapons/states/backswing_parameters.hpp>
 #include <sanguis/server/weapons/states/reloading.hpp>
+#include <sanguis/server/weapons/states/reloading_parameters.hpp>
 #include <sanguis/server/weapons/states/ready.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -20,11 +21,15 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::weapons::states::backswing::backswing(
-	my_context _ctx
+	my_context _ctx,
+	sanguis::server::weapons::states::backswing_parameters const &_parameters
 )
 :
 	my_base(
 		_ctx
+	),
+	cancelled_(
+		false
 	),
 	cooldown_(
 		sanguis::diff_timer::parameters(
@@ -34,6 +39,8 @@ sanguis::server::weapons::states::backswing::backswing(
 			this->context<
 				sanguis::server::weapons::weapon
 			>().backswing_time().get()
+			/
+			_parameters.ias().get()
 		)
 	)
 {
@@ -56,15 +63,10 @@ sanguis::server::weapons::states::backswing::react(
 		return
 			this->discard_event();
 
+	// TODO: This should be in castpoint!
 	this->context<
 		sanguis::server::weapons::weapon
 	>().use_magazine_item();
-
-	_event.owner().attack_ready();
-
-	this->post_event(
-		_event
-	);
 
 	if(
 		this->context<
@@ -72,20 +74,51 @@ sanguis::server::weapons::states::backswing::react(
 		>().magazine_empty()
 	)
 	{
-		_event.owner().start_reloading();
+		//_event.owner().start_reloading();
 
 		this->context<
 			sanguis::server::weapons::weapon
 		>().magazine_exhausted();
 
+		if(
+			cancelled_
+		)
+			this->post_event(
+				sanguis::server::weapons::events::stop()
+			);
+
 		return
 			this->transit<
 				sanguis::server::weapons::states::reloading
-			>();
+			>(
+				sanguis::server::weapons::states::reloading_parameters(
+					_event.owner().irs()
+				)
+			);
 	}
+
+	if(
+		!cancelled_
+	)
+		this->post_event(
+			sanguis::server::weapons::events::shoot(
+				_event.owner()
+			)
+		);
 
 	return
 		this->transit<
 			sanguis::server::weapons::states::ready
 		>();
+}
+
+boost::statechart::result
+sanguis::server::weapons::states::backswing::react(
+	sanguis::server::weapons::events::stop const &
+)
+{
+	cancelled_ = true;
+
+	return
+		this->discard_event();
 }

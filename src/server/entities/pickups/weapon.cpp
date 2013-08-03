@@ -90,12 +90,13 @@ sanguis::server::entities::pickups::weapon::do_pickup(
 	sanguis::server::entities::base &_receiver
 )
 {
+	// TODO: Drop the old weapon here
 	dynamic_cast<
 		sanguis::server::entities::with_weapon &
 	>(
 		_receiver
 	)
-	.add_weapon(
+	.replace_weapon(
 		sanguis::server::weapons::create(
 			diff_clock_,
 			random_generator_,

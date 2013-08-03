@@ -2,13 +2,9 @@
 #define SANGUIS_SERVER_WEAPONS_WEAPON_HPP_INCLUDED
 
 #include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/time_unit.hpp>
 #include <sanguis/weapon_type.hpp>
-#include <sanguis/messages/base_fwd.hpp>
-#include <sanguis/server/vector_fwd.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/with_weapon_fwd.hpp>
-#include <sanguis/server/weapons/weapon_fwd.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
@@ -18,11 +14,14 @@
 #include <sanguis/server/weapons/magazine_type.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
-#include <sanguis/server/weapons/states/ready_fwd.hpp>
-#include <sanguis/server/weapons/states/reloading_fwd.hpp>
+#include <sanguis/server/weapons/target_fwd.hpp>
+#include <sanguis/server/weapons/weapon_fwd.hpp>
 #include <sanguis/server/weapons/states/backswing_fwd.hpp>
 #include <sanguis/server/weapons/states/castpoint_fwd.hpp>
+#include <sanguis/server/weapons/states/reloading_fwd.hpp>
+#include <sanguis/server/weapons/states/ready_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/scoped_state_machine_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/state_machine.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -61,47 +60,30 @@ public:
 	virtual
 	~weapon() = 0;
 
-	sanguis::server::weapons::range const
-	range() const;
-
 	void
 	attack(
-		sanguis::server::entities::with_weapon &from,
-		sanguis::server::vector const &to
-	);
-
-	sanguis::weapon_type
-	type() const;
-
-	void
-	update(
-		sanguis::server::entities::with_weapon &owner
+		sanguis::server::entities::with_weapon &
 	);
 
 	void
 	stop();
 
 	void
-	repickup();
+	update(
+		sanguis::server::entities::with_weapon &
+	);
+
+	sanguis::weapon_type
+	type() const;
 
 	sanguis::server::weapons::magazine_size const
 	magazine_size() const;
 
 	bool
 	in_range(
-		sanguis::server::entities::base const &from,
-		sanguis::server::vector const &to
+		sanguis::server::entities::base const &,
+		sanguis::server::weapons::target
 	) const;
-
-	void
-	attack_speed(
-		sanguis::time_unit
-	);
-
-	void
-	reload_speed(
-		sanguis::time_unit
-	);
 protected:
 	virtual
 	void
@@ -141,11 +123,6 @@ private:
 	sanguis::server::weapons::reload_time const
 	reload_time() const;
 
-	void
-	init_attack(
-		sanguis::server::entities::with_weapon &owner
-	);
-
 	sanguis::diff_clock const &diff_clock_;
 
 	sanguis::weapon_type const type_;
@@ -164,9 +141,9 @@ private:
 
 	sanguis::server::weapons::reload_time const reload_time_;
 
-	sanguis::time_unit
-		ias_,
-		irs_;
+	fcppt::scoped_state_machine<
+		sanguis::server::weapons::weapon
+	> const scoped_machine_;
 };
 
 }

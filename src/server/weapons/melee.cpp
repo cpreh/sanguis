@@ -70,7 +70,7 @@ sanguis::server::weapons::melee::do_attack(
 		),
 		sanguis::server::entities::insert_parameters_center(
 			sanguis::server::center(
-				_attack.dest()
+				_attack.target().get()
 			)
 		)
 	);

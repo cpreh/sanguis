@@ -27,7 +27,6 @@ sanguis::server::entities::enemies::factory::maggot(
 			sanguis::server::entities::enemies::enemy
 		>(
 			_parameters.diff_clock(),
-			_parameters.random_generator(),
 			_parameters.enemy_type(),
 			_parameters.load_context(),
 			sanguis::server::damage::no_armor(),

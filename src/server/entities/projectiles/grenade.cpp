@@ -26,7 +26,6 @@
 #include <sanguis/server/entities/projectiles/life_time.hpp>
 #include <sanguis/server/entities/projectiles/pulse_time.hpp>
 #include <sanguis/server/entities/projectiles/pulses.hpp>
-#include <sanguis/server/entities/property/from_float.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sge/timer/reset_when_expired.hpp>
@@ -95,11 +94,9 @@ sanguis::server::entities::projectiles::grenade::on_transfer(
 	this->movement_speed().current(
 		std::min(
 			this->movement_speed().max(),
-			sanguis::server::entities::property::from_float(
-				sanguis::server::collision::distance_pos_pos(
-					_param.center().get(),
-					dest_
-				)
+			sanguis::server::collision::distance_pos_pos(
+				_param.center().get(),
+				dest_
 			)
 		)
 	);

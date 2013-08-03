@@ -2,7 +2,6 @@
 #define SANGUIS_SERVER_ENTITIES_ENEMIES_ENEMY_HPP_INCLUDED
 
 #include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/server/exp.hpp>
@@ -53,7 +52,6 @@ class enemy
 public:
 	enemy(
 		sanguis::diff_clock const &,
-		sanguis::random_generator &,
 		sanguis::creator::enemy_type,
 		sanguis::server::environment::load_context &,
 		sanguis::server::damage::armor const &,

@@ -1,17 +1,17 @@
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/team.hpp>
-#include <sanguis/server/vector.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/weapons/delayed_attack.hpp>
+#include <sanguis/server/weapons/target.hpp>
 
 
 sanguis::server::weapons::delayed_attack::delayed_attack(
-	sanguis::server::center const &_spawn_point,
+	sanguis::server::center const _spawn_point,
 	sanguis::server::angle const _angle,
 	sanguis::server::team const _team,
 	sanguis::server::environment::object &_environment,
-	sanguis::server::vector const &_dest
+	sanguis::server::weapons::target const _target
 )
 :
 	spawn_point_(
@@ -26,8 +26,8 @@ sanguis::server::weapons::delayed_attack::delayed_attack(
 	environment_(
 		_environment
 	),
-	dest_(
-		_dest
+	target_(
+		_target
 	)
 {
 }
@@ -56,8 +56,8 @@ sanguis::server::weapons::delayed_attack::environment() const
 	return environment_;
 }
 
-sanguis::server::vector const &
-sanguis::server::weapons::delayed_attack::dest() const
+sanguis::server::weapons::target const &
+sanguis::server::weapons::delayed_attack::target() const
 {
-	return dest_;
+	return target_;
 }

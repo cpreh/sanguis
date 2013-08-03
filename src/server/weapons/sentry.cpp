@@ -75,7 +75,6 @@ sanguis::server::weapons::sentry::do_attack(
 			sanguis::server::entities::friend_
 		>(
 			this->diff_clock(),
-			random_generator_,
 			sanguis::friend_type::sentry,
 			_attack.environment().load_context(),
 			sanguis::server::damage::no_armor(),
@@ -93,7 +92,7 @@ sanguis::server::weapons::sentry::do_attack(
 		),
 		sanguis::server::entities::insert_parameters(
 			sanguis::server::center(
-				_attack.dest()
+				_attack.target().get()
 			),
 			_attack.angle()
 		)

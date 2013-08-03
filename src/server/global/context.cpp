@@ -48,6 +48,7 @@
 #include <sanguis/server/message_convert/speed.hpp>
 #include <sanguis/server/perks/create.hpp>
 #include <sanguis/server/perks/perk.hpp>
+#include <sanguis/server/weapons/target.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/world/grid_pos_to_center.hpp>
 #include <sanguis/server/world/map.hpp>
@@ -173,7 +174,6 @@ sanguis::server::global::context::insert_player(
 	sanguis::server::entities::player_unique_ptr player(
 		sanguis::server::create_player(
 			diff_clock_,
-			random_generator_,
 			*load_context_,
 			_name,
 			send_unicast_,
@@ -294,7 +294,9 @@ sanguis::server::global::context::player_target(
 	);
 
 	player.target(
-		_target
+		sanguis::server::weapons::target(
+			_target
+		)
 	);
 
 	sanguis::server::vector const player_center(
@@ -344,11 +346,12 @@ sanguis::server::global::context::player_change_weapon(
 	sanguis::weapon_type const _weapon
 )
 {
+	/*
 	players_[
 		_player_id
 	]->change_weapon(
 		_weapon
-	);
+	);*/
 }
 
 void
@@ -359,7 +362,7 @@ sanguis::server::global::context::player_change_shooting(
 {
 	players_[
 		_player_id
-	]->aggressive(
+	]->use_primary(
 		_shooting
 	);
 }
@@ -438,8 +441,6 @@ sanguis::server::global::context::player_cheat(
 )
 {
 	sanguis::server::cheat(
-		diff_clock_,
-		random_generator_,
 		*players_[
 			_player_id
 		],

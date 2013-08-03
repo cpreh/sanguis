@@ -88,25 +88,6 @@ sanguis::client::control::action_handler::action_handler(
 			)
 		)
 	),
-	cheat_impulse_conn_(
-		_console.insert(
-			sge::console::callback::parameters(
-				std::bind(
-					&sanguis::client::control::action_handler::send_cheat,
-					this,
-					sanguis::cheat_type::impulse101,
-					std::placeholders::_1,
-					std::placeholders::_2
-				),
-				sge::console::callback::name(
-					SGE_FONT_LIT("impulse")
-				)
-			)
-			.short_description(
-				SGE_FONT_LIT("Get all weapons")
-			)
-		)
-	),
 	cheat_exp_conn_(
 		_console.insert(
 			sge::console::callback::parameters(
