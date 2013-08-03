@@ -7,6 +7,7 @@
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
+#include <sanguis/server/entities/enemies/scale_difficulty.hpp>
 #include <sanguis/server/entities/enemies/factory/maggot.hpp>
 #include <sanguis/server/entities/enemies/factory/parameters.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
@@ -31,7 +32,10 @@ sanguis::server::entities::enemies::factory::maggot(
 			_parameters.load_context(),
 			sanguis::server::damage::no_armor(),
 			sanguis::server::health(
-				1.f
+				sanguis::server::entities::enemies::scale_difficulty(
+					2.f,
+					_parameters.difficulty()
+				)
 			),
 			sanguis::server::entities::movement_speed(
 				0.8f

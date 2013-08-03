@@ -27,7 +27,7 @@ sanguis::server::global::generate_worlds(
 	sanguis::server::global::world_connection_map connections;
 
 	sanguis::server::difficulty difficulty(
-		0u
+		1u
 	);
 
 	for(
