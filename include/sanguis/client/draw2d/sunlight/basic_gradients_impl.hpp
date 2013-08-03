@@ -26,7 +26,33 @@ sanguis::client::draw2d::sunlight::basic_gradients<
 	Locator,
 	Real
 >::basic_gradients()
+:
+	values_()
 {
+}
+
+template<
+	typename Value,
+	typename Locator,
+	typename Real
+>
+sanguis::client::draw2d::sunlight::basic_gradients<
+	Value,
+	Locator,
+	Real
+>::basic_gradients(
+	pair_list const &_pairs
+)
+:
+	values_()
+{
+	for(
+		auto const entry : _pairs
+	)
+		this->add(
+			entry.first,
+			entry.second
+		);
 }
 
 template<

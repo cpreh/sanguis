@@ -6,8 +6,10 @@
 #include <fcppt/container/map_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <initializer_list>
 #include <map>
 #include <type_traits>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -47,6 +49,20 @@ public:
 	typedef Real real;
 
 	basic_gradients();
+
+	typedef std::pair<
+		locator,
+		value
+	> pair;
+
+	typedef std::initializer_list<
+		pair
+	> pair_list;
+
+	explicit
+	basic_gradients(
+		pair_list const &
+	);
 
 	~basic_gradients();
 
