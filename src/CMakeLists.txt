@@ -397,6 +397,7 @@ SET(
 	include/sanguis/duration.hpp
 	include/sanguis/duration_second.hpp
 	include/sanguis/entity_id.hpp
+	include/sanguis/entity_id_fwd.hpp
 	include/sanguis/exception.hpp
 	include/sanguis/friend_type.hpp
 	include/sanguis/friend_type_fwd.hpp
@@ -501,6 +502,7 @@ SET(
 	include/sanguis/messages/base.hpp
 	include/sanguis/messages/base_fwd.hpp
 	include/sanguis/messages/bind_entity_message.hpp
+	include/sanguis/messages/bind_entity_message_fwd.hpp
 	include/sanguis/messages/bind_player_message.hpp
 	include/sanguis/messages/bindings/self.hpp
 	include/sanguis/messages/call/object.hpp
@@ -508,14 +510,18 @@ SET(
 	include/sanguis/messages/change_weapon.hpp
 	include/sanguis/messages/change_world.hpp
 	include/sanguis/messages/char_type.hpp
+	include/sanguis/messages/char_type_fwd.hpp
 	include/sanguis/messages/client_info.hpp
 	include/sanguis/messages/connect_state.hpp
 	include/sanguis/messages/console_command.hpp
+	include/sanguis/messages/console_command_fwd.hpp
 	include/sanguis/messages/console_print.hpp
 	include/sanguis/messages/create.hpp
 	include/sanguis/messages/die.hpp
 	include/sanguis/messages/entity_id.hpp
+	include/sanguis/messages/entity_id_fwd.hpp
 	include/sanguis/messages/entity_message.hpp
+	include/sanguis/messages/entity_message_fwd.hpp
 	include/sanguis/messages/enum.hpp
 	include/sanguis/messages/exp.hpp
 	include/sanguis/messages/experience.hpp
@@ -526,7 +532,9 @@ SET(
 	include/sanguis/messages/level.hpp
 	include/sanguis/messages/level_up.hpp
 	include/sanguis/messages/make_class.hpp
+	include/sanguis/messages/make_class_fwd.hpp
 	include/sanguis/messages/make_message_id.hpp
+	include/sanguis/messages/make_message_id_fwd.hpp
 	include/sanguis/messages/make_player_message.hpp
 	include/sanguis/messages/max_health.hpp
 	include/sanguis/messages/move.hpp
@@ -545,6 +553,7 @@ SET(
 	include/sanguis/messages/player_stop_shooting.hpp
 	include/sanguis/messages/player_unpause.hpp
 	include/sanguis/messages/remove.hpp
+	include/sanguis/messages/remove_fwd.hpp
 	include/sanguis/messages/remove_id.hpp
 	include/sanguis/messages/role_name.hpp
 	include/sanguis/messages/roles/angle.hpp
@@ -592,8 +601,11 @@ SET(
 	include/sanguis/messages/stop_attacking.hpp
 	include/sanguis/messages/stop_reloading.hpp
 	include/sanguis/messages/string.hpp
+	include/sanguis/messages/string_fwd.hpp
 	include/sanguis/messages/string_vector.hpp
+	include/sanguis/messages/string_vector_fwd.hpp
 	include/sanguis/messages/types/alda_type.hpp
+	include/sanguis/messages/types/alda_type_fwd.hpp
 	include/sanguis/messages/types/char.hpp
 	include/sanguis/messages/types/enum.hpp
 	include/sanguis/messages/types/exp.hpp

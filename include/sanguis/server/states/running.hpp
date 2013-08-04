@@ -10,7 +10,7 @@
 #include <sanguis/server/states/unpaused_fwd.hpp>
 #include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/messages/client_info.hpp>
-#include <sanguis/messages/console_command.hpp>
+#include <sanguis/messages/console_command_fwd.hpp>
 #include <sanguis/messages/player_cheat.hpp>
 #include <sanguis/messages/player_choose_perk.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -44,67 +44,69 @@ class running
 public:
 	typedef boost::mpl::list2<
 		boost::statechart::custom_reaction<
-			events::message
+			sanguis::server::events::message
 		>,
 		boost::statechart::custom_reaction<
-			events::disconnect
+			sanguis::server::events::disconnect
 		>
 	> reactions;
 
-	explicit running(
+	explicit
+	running(
 		my_context
 	);
 
-	virtual ~running();
+	virtual
+	~running();
 
 	boost::statechart::result
 	react(
-		events::message const &
+		sanguis::server::events::message const &
 	);
 
 	boost::statechart::result
 	react(
-		events::disconnect const &
+		sanguis::server::events::disconnect const &
 	);
 
 	boost::statechart::result
 	operator()(
-		server::player_id,
-		messages::client_info const &
+		sanguis::server::player_id,
+		sanguis::messages::client_info const &
 	);
 
 	boost::statechart::result
 	operator()(
-		server::player_id,
-		messages::console_command const &
+		sanguis::server::player_id,
+		sanguis::messages::console_command const &
 	);
 
 	boost::statechart::result
 	operator()(
-		server::player_id,
-		messages::player_cheat const &
+		sanguis::server::player_id,
+		sanguis::messages::player_cheat const &
 	);
 
 	boost::statechart::result
 	operator()(
-		server::player_id,
-		messages::player_choose_perk const &
+		sanguis::server::player_id,
+		sanguis::messages::player_choose_perk const &
 	);
 
-	global::context &
+	sanguis::server::global::context &
 	global_context();
 private:
 	boost::statechart::result
 	handle_default_msg(
-		server::player_id,
-		messages::base const &
+		sanguis::server::player_id,
+		sanguis::messages::base const &
 	);
 
 	sanguis::server::console console_;
 
 	fcppt::scoped_ptr<
-		global::context
-	> global_context_;
+		sanguis::server::global::context
+	> const global_context_;
 };
 
 }

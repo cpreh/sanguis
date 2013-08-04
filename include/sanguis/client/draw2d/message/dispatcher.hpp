@@ -23,7 +23,7 @@
 #include <sanguis/messages/level_up.hpp>
 #include <sanguis/messages/max_health.hpp>
 #include <sanguis/messages/move.hpp>
-#include <sanguis/messages/remove.hpp>
+#include <sanguis/messages/remove_fwd.hpp>
 #include <sanguis/messages/rotate.hpp>
 #include <sanguis/messages/start_attacking.hpp>
 #include <sanguis/messages/stop_attacking.hpp>
