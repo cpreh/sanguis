@@ -19,8 +19,6 @@
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/player_choose_perk.hpp>
 #include <sanguis/messages/call/object.hpp>
-#include <sanguis/messages/types/enum.hpp>
-#include <fcppt/cast_to_enum.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
@@ -144,13 +142,9 @@ sanguis::client::states::has_player::operator()(
 )
 {
 	action_handler_->give_player_weapon(
-		fcppt::cast_to_enum<
-			sanguis::weapon_type
-		>(
-			_message.get<
-				sanguis::messages::roles::weapon
-			>()
-		)
+		_message.get<
+			sanguis::messages::roles::weapon
+		>()
 	);
 
 	return
@@ -211,11 +205,7 @@ sanguis::client::states::has_player::send_perk_choose(
 	>().send(
 		*sanguis::messages::create(
 			sanguis::messages::player_choose_perk(
-				static_cast<
-					sanguis::messages::types::enum_
-				>(
-					_type
-				)
+				_type
 			)
 		)
 	);

@@ -406,6 +406,7 @@ SET(
 	include/sanguis/io_service_fwd.hpp
 	include/sanguis/io_service_impl.hpp
 	include/sanguis/io_service_impl_fwd.hpp
+	include/sanguis/is_primary_weapon.hpp
 	include/sanguis/load/aoe_projectile_name.hpp
 	include/sanguis/load/context.hpp
 	include/sanguis/load/context_fwd.hpp
@@ -522,7 +523,6 @@ SET(
 	include/sanguis/messages/global_context.hpp
 	include/sanguis/messages/health.hpp
 	include/sanguis/messages/instantiate_message.hpp
-	include/sanguis/messages/invalid_perk.hpp
 	include/sanguis/messages/level.hpp
 	include/sanguis/messages/level_up.hpp
 	include/sanguis/messages/make_class.hpp
@@ -535,7 +535,6 @@ SET(
 	include/sanguis/messages/perk_tree_node.hpp
 	include/sanguis/messages/perk_tree_node_list.hpp
 	include/sanguis/messages/player_attack_dest.hpp
-	include/sanguis/messages/player_change_weapon.hpp
 	include/sanguis/messages/player_change_world.hpp
 	include/sanguis/messages/player_cheat.hpp
 	include/sanguis/messages/player_choose_perk.hpp
@@ -631,6 +630,8 @@ SET(
 	include/sanguis/net/serialize_to_circular_buffer.hpp
 	include/sanguis/net/serialize_to_data_buffer.hpp
 	include/sanguis/net/stream_exceptions.hpp
+	include/sanguis/optional_perk_type.hpp
+	include/sanguis/optional_perk_type_fwd.hpp
 	include/sanguis/optional_weapon_type.hpp
 	include/sanguis/optional_weapon_type_fwd.hpp
 	include/sanguis/perk_type.hpp
@@ -1207,6 +1208,7 @@ SET(
 	src/from_console_arg_list.cpp
 	src/io_service.cpp
 	src/io_service_impl.cpp
+	src/is_primary_weapon.cpp
 	src/load/aoe_projectile_name.cpp
 	src/load/context.cpp
 	src/load/enemy_name.cpp
@@ -1277,7 +1279,6 @@ SET(
 	src/messages/move.cpp
 	src/messages/pause.cpp
 	src/messages/player_attack_dest.cpp
-	src/messages/player_change_weapon.cpp
 	src/messages/player_change_world.cpp
 	src/messages/player_cheat.cpp
 	src/messages/player_choose_perk.cpp

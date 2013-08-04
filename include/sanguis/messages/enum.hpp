@@ -2,7 +2,7 @@
 #define SANGUIS_MESSAGES_ENUM_HPP_INCLUDED
 
 #include <sanguis/messages/types/enum.hpp>
-#include <alda/bindings/fundamental.hpp>
+#include <alda/bindings/enum.hpp>
 
 
 namespace sanguis
@@ -10,11 +10,15 @@ namespace sanguis
 namespace messages
 {
 
-typedef
-alda::bindings::fundamental<
-	sanguis::messages::types::enum_
+template<
+	typename Enum
 >
-enum_;
+using enum_
+=
+alda::bindings::enum_<
+	Enum,
+	sanguis::messages::types::enum_
+>;
 
 }
 }

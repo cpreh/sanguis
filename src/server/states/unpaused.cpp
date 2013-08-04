@@ -4,7 +4,6 @@
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/pause.hpp>
 #include <sanguis/messages/player_attack_dest.hpp>
-#include <sanguis/messages/player_change_weapon.hpp>
 #include <sanguis/messages/player_change_world.hpp>
 #include <sanguis/messages/player_direction.hpp>
 #include <sanguis/messages/player_pause.hpp>
@@ -90,29 +89,6 @@ sanguis::server::states::unpaused::operator()(
 		_message.get<
 			sanguis::messages::roles::attack_dest
 		>()
-	);
-
-	return
-		this->discard_event();
-}
-
-boost::statechart::result
-sanguis::server::states::unpaused::operator()(
-	sanguis::server::player_id const _id,
-	sanguis::messages::player_change_weapon const &_message
-)
-{
-	this->context<
-		sanguis::server::states::running
-	>().global_context().player_change_weapon(
-		_id,
-		fcppt::cast_to_enum<
-			sanguis::weapon_type
-		>(
-			_message.get<
-				sanguis::messages::roles::weapon
-			>()
-		)
 	);
 
 	return
@@ -297,11 +273,10 @@ sanguis::server::states::unpaused::react(
 	);
 
 	static sanguis::messages::call::object<
-		boost::mpl::vector9<
+		boost::mpl::vector8<
 			sanguis::messages::player_attack_dest,
 			sanguis::messages::player_start_shooting,
 			sanguis::messages::player_stop_shooting,
-			sanguis::messages::player_change_weapon,
 			sanguis::messages::player_change_world,
 			sanguis::messages::player_unpause,
 			sanguis::messages::player_pause,

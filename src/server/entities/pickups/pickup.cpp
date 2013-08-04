@@ -5,7 +5,6 @@
 #include <sanguis/messages/add_pickup.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
-#include <sanguis/messages/types/enum.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/model_name.hpp>
 #include <sanguis/server/player_id.hpp>
@@ -157,11 +156,7 @@ sanguis::server::entities::pickups::pickup::add_message(
 				this->id(),
 				this->center().get(),
 				this->angle().get(),
-				static_cast<
-					sanguis::messages::types::enum_
-				>(
-					this->ptype()
-				)
+				this->ptype()
 			)
 		);
 }

@@ -6,7 +6,6 @@
 #include <sanguis/messages/add_weapon_pickup.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
-#include <sanguis/messages/types/enum.hpp>
 #include <sanguis/server/model_name.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
@@ -76,11 +75,7 @@ sanguis::server::entities::pickups::weapon::add_message(
 				this->id(),
 				this->center().get(),
 				this->angle().get(),
-				static_cast<
-					sanguis::messages::types::enum_
-				>(
-					this->wtype()
-				)
+				this->wtype()
 			)
 		);
 }

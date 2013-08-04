@@ -3,7 +3,6 @@
 #include <sanguis/messages/add_projectile.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
-#include <sanguis/messages/types/enum.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/dim.hpp>
 #include <sanguis/server/direction.hpp>
@@ -174,11 +173,7 @@ sanguis::server::entities::projectiles::projectile::add_message(
 				this->center().get(),
 				this->angle().get(),
 				this->speed().get(),
-				static_cast<
-					sanguis::messages::types::enum_
-				>(
-					this->ptype()
-				)
+				this->ptype()
 			)
 		);
 }

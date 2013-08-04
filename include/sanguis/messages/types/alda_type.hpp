@@ -2,7 +2,7 @@
 #define SANGUIS_MESSAGES_TYPES_ALDA_TYPE_HPP_INCLUDED
 
 #include <sanguis/messages/types/message.hpp>
-#include <alda/type_enum.hpp>
+#include <alda/type_enum_fcppt.hpp>
 
 
 namespace sanguis
@@ -12,9 +12,8 @@ namespace messages
 namespace types
 {
 
-typedef alda::type_enum<
-	sanguis::messages::types::message,
-	sanguis::messages::types::message::size
+typedef alda::type_enum_fcppt<
+	sanguis::messages::types::message
 > alda_type;
 
 }

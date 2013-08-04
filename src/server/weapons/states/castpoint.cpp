@@ -73,6 +73,10 @@ sanguis::server::weapons::states::castpoint::react(
 		)
 	);
 
+	this->context<
+		sanguis::server::weapons::weapon
+	>().use_magazine_item();
+
 	return
 		this->transit<
 			sanguis::server::weapons::states::backswing

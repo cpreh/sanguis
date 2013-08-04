@@ -63,11 +63,6 @@ sanguis::server::weapons::states::backswing::react(
 		return
 			this->discard_event();
 
-	// TODO: This should be in castpoint!
-	this->context<
-		sanguis::server::weapons::weapon
-	>().use_magazine_item();
-
 	if(
 		this->context<
 			sanguis::server::weapons::weapon

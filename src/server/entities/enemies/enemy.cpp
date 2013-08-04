@@ -4,7 +4,6 @@
 #include <sanguis/messages/add_enemy.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
-#include <sanguis/messages/types/enum.hpp>
 #include <sanguis/server/dim.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/exp.hpp>
@@ -150,11 +149,7 @@ sanguis::server::entities::enemies::enemy::add_message(
 				this->speed().get(),
 				this->current_health().get(),
 				this->max_health().get(),
-				static_cast<
-					sanguis::messages::types::enum_
-				>(
-					this->etype()
-				)
+				this->etype()
 			)
 		);
 }

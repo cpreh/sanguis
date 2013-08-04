@@ -4,7 +4,6 @@
 #include <sanguis/messages/add_aoe_projectile.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
-#include <sanguis/messages/types/enum.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/model_name.hpp>
@@ -75,11 +74,7 @@ sanguis::server::entities::projectiles::aoe_projectile::add_message(
 				this->angle().get(),
 				this->speed().get(),
 				aoe_.get(),
-				static_cast<
-					sanguis::messages::types::enum_
-				>(
-					type_
-				)
+				type_
 			)
 		);
 }

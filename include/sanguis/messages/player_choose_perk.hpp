@@ -1,6 +1,7 @@
 #ifndef SANGUIS_MESSAGES_PLAYER_CHOOSE_PERK_HPP_INCLUDED
 #define SANGUIS_MESSAGES_PLAYER_CHOOSE_PERK_HPP_INCLUDED
 
+#include <sanguis/perk_type.hpp>
 #include <sanguis/messages/bind_player_message.hpp>
 #include <sanguis/messages/enum.hpp>
 #include <sanguis/messages/make_class.hpp>
@@ -26,7 +27,9 @@ sanguis::messages::make_class<
 				sanguis::messages::types::message::player_choose_perk
 			>,
 			majutsu::role<
-				sanguis::messages::enum_,
+				sanguis::messages::enum_<
+					sanguis::perk_type
+				>,
 				sanguis::messages::roles::perk
 			>
 		>

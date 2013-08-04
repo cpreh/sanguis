@@ -1,10 +1,9 @@
+#include <sanguis/optional_perk_type.hpp>
 #include <sanguis/messages/available_perks.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/enum.hpp>
-#include <sanguis/messages/invalid_perk.hpp>
 #include <sanguis/messages/perk_tree_node.hpp>
 #include <sanguis/messages/perk_tree_node_list.hpp>
-#include <sanguis/messages/types/enum.hpp>
 #include <sanguis/server/send_available_perks.hpp>
 #include <sanguis/server/unicast_callback.hpp>
 #include <sanguis/server/entities/player.hpp>
@@ -49,23 +48,17 @@ sanguis::server::send_available_perks(
 
 		nodes.push_back(
 			sanguis::messages::perk_tree_node(
-				static_cast<
-					sanguis::messages::types::enum_
-				>(
-					info->type()
-				),
+				info->type(),
 				info->required_player_level().get(),
 				info->required_parent_level().get(),
 				info->max_level().get(),
 				element.parent()->value().has_value()
 				?
-					static_cast<
-						sanguis::messages::types::enum_
-					>(
+					sanguis::optional_perk_type(
 						element.parent()->value()->type()
 					)
 				:
-					sanguis::messages::invalid_perk::value
+					sanguis::optional_perk_type()
 			)
 		);
 	}

@@ -7,7 +7,6 @@
 #include <sanguis/server/states/running.hpp>
 #include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/messages/player_attack_dest.hpp>
-#include <sanguis/messages/player_change_weapon.hpp>
 #include <sanguis/messages/player_change_world.hpp>
 #include <sanguis/messages/player_direction.hpp>
 #include <sanguis/messages/player_pause.hpp>
@@ -69,12 +68,6 @@ public:
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::player_attack_dest const &
-	);
-
-	boost::statechart::result
-	operator()(
-		sanguis::server::player_id,
-		sanguis::messages::player_change_weapon const &
 	);
 
 	boost::statechart::result

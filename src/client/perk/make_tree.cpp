@@ -1,4 +1,4 @@
-#include <sanguis/perk_type.hpp>
+#include <sanguis/optional_perk_type.hpp>
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/player_level.hpp>
 #include <sanguis/client/perk/compare.hpp>
@@ -9,7 +9,6 @@
 #include <sanguis/client/perk/required_parent_level.hpp>
 #include <sanguis/client/perk/required_player_level.hpp>
 #include <sanguis/client/perk/tree.hpp>
-#include <sanguis/messages/invalid_perk.hpp>
 #include <sanguis/messages/perk_tree_node.hpp>
 #include <sanguis/messages/perk_tree_node_list.hpp>
 #include <sanguis/messages/roles/max_perk_level.hpp>
@@ -18,7 +17,6 @@
 #include <sanguis/messages/roles/required_perk_parent_level.hpp>
 #include <sanguis/messages/roles/required_perk_player_level.hpp>
 #include <sanguis/messages/types/enum.hpp>
-#include <fcppt/cast_to_enum.hpp>
 #include <fcppt/algorithm/find_if_exn.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/container/tree/pre_order.hpp>
@@ -34,7 +32,7 @@ namespace
 sanguis::client::perk::tree &
 tree_position(
 	sanguis::client::perk::tree &,
-	sanguis::messages::types::enum_
+	sanguis::optional_perk_type
 );
 
 }
@@ -67,13 +65,9 @@ sanguis::client::perk::make_tree(
 		).push_back(
 			sanguis::client::perk::optional_info(
 				sanguis::client::perk::info(
-					fcppt::cast_to_enum<
-						sanguis::perk_type
-					>(
-						item.get<
-							sanguis::messages::roles::perk_label
-						>()
-					),
+					item.get<
+						sanguis::messages::roles::perk_label
+					>(),
 					sanguis::client::perk::required_parent_level(
 						sanguis::client::perk::level(
 							sanguis::client::level(
@@ -117,13 +111,11 @@ namespace
 sanguis::client::perk::tree &
 tree_position(
 	sanguis::client::perk::tree &_tree,
-	sanguis::messages::types::enum_ const _parent_enum
+	sanguis::optional_perk_type const _parent_enum
 )
 {
 	if(
-		_parent_enum
-		==
-		sanguis::messages::invalid_perk::value
+		!_parent_enum
 	)
 		return
 			_tree;
@@ -141,11 +133,7 @@ tree_position(
 			trav.begin(),
 			trav.end(),
 			sanguis::client::perk::compare(
-				fcppt::cast_to_enum<
-					sanguis::perk_type
-				>(
-					_parent_enum
-				)
+				*_parent_enum
 			)
 		);
 }

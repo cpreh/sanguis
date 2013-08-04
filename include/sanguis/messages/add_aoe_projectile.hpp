@@ -1,6 +1,7 @@
 #ifndef SANGUIS_MESSAGES_ADD_AOE_PROJECTILE_HPP_INCLUDED
 #define SANGUIS_MESSAGES_ADD_AOE_PROJECTILE_HPP_INCLUDED
 
+#include <sanguis/aoe_projectile_type.hpp>
 #include <sanguis/messages/add_with_speed.hpp>
 #include <sanguis/messages/bind_entity_message.hpp>
 #include <sanguis/messages/enum.hpp>
@@ -34,7 +35,9 @@ sanguis::messages::make_class<
 				sanguis::messages::roles::aoe
 			>,
 			majutsu::role<
-				sanguis::messages::enum_,
+				sanguis::messages::enum_<
+					sanguis::aoe_projectile_type
+				>,
 				sanguis::messages::roles::aoe_projectile
 			>
 		>

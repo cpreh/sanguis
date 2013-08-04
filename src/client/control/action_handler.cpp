@@ -22,9 +22,7 @@
 #include <sanguis/messages/player_direction.hpp>
 #include <sanguis/messages/player_start_shooting.hpp>
 #include <sanguis/messages/player_stop_shooting.hpp>
-#include <sanguis/messages/player_change_weapon.hpp>
 #include <sanguis/messages/player_cheat.hpp>
-#include <sanguis/messages/types/enum.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/object.hpp>
 #include <sge/console/callback/name.hpp>
@@ -387,6 +385,7 @@ sanguis::client::control::action_handler::change_weapon(
 			_weapon_type
 		);
 
+/*
 	send_(
 		*sanguis::messages::create(
 			sanguis::messages::player_change_weapon(
@@ -397,7 +396,7 @@ sanguis::client::control::action_handler::change_weapon(
 				)
 			)
 		)
-	);
+	);*/
 }
 
 void
@@ -410,11 +409,7 @@ sanguis::client::control::action_handler::send_cheat(
 	send_(
 		*sanguis::messages::create(
 			sanguis::messages::player_cheat(
-				static_cast<
-					sanguis::messages::types::enum_
-				>(
-					_cheat
-				)
+				_cheat
 			)
 		)
 	);

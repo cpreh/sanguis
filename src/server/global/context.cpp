@@ -13,7 +13,6 @@
 #include <sanguis/messages/connect_state.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/remove_id.hpp>
-#include <sanguis/messages/types/enum.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/console.hpp>
@@ -162,11 +161,7 @@ sanguis::server::global::context::insert_player(
 		_player_id,
 		*sanguis::messages::create(
 			sanguis::messages::connect_state(
-				static_cast<
-					sanguis::messages::types::enum_
-				>(
-					_connect_state
-				)
+				_connect_state
 			)
 		)
 	);

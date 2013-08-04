@@ -1,9 +1,5 @@
-#include <sanguis/aoe_projectile_type.hpp>
 #include <sanguis/entity_id.hpp>
 #include <sanguis/friend_type.hpp>
-#include <sanguis/pickup_type.hpp>
-#include <sanguis/projectile_type.hpp>
-#include <sanguis/weapon_type.hpp>
 #include <sanguis/creator/name.hpp>
 #include <sanguis/creator/opening_count.hpp>
 #include <sanguis/creator/top_parameters.hpp>
@@ -39,7 +35,6 @@
 #include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/client/draw2d/translate/scalar_to_client.hpp>
 #include <sanguis/client/draw2d/translate/vector_to_client.hpp>
-#include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/messages/add_aoe_projectile.hpp>
 #include <sanguis/messages/add_enemy.hpp>
 #include <sanguis/messages/add_friend.hpp>
@@ -83,7 +78,6 @@
 #include <sanguis/messages/roles/speed.hpp>
 #include <sanguis/messages/roles/weapon.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
-#include <fcppt/cast_to_enum.hpp>
 #include <fcppt/dynamic_cast.hpp>
 #include <fcppt/type_name.hpp>
 #include <fcppt/text.hpp>
@@ -122,13 +116,9 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		sanguis::client::draw2d::factory::aoe_projectile(
 			env_.model_parameters(),
 			env_.insert_own_callback(),
-			fcppt::cast_to_enum<
-				sanguis::aoe_projectile_type
-			>(
-				_message.get<
-					sanguis::messages::roles::aoe_projectile
-				>()
-			),
+			_message.get<
+				sanguis::messages::roles::aoe_projectile
+			>(),
 			sanguis::client::draw2d::aoe(
 				sanguis::client::draw2d::translate::scalar_to_client(
 					_message.get<
@@ -149,13 +139,9 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	this->configure_new_object(
 		sanguis::client::draw2d::factory::enemy(
 			env_.model_parameters(),
-			fcppt::cast_to_enum<
-				sanguis::creator::enemy_type
-			>(
-				_message.get<
-					sanguis::messages::roles::enemy
-				>()
-			)
+			_message.get<
+				sanguis::messages::roles::enemy
+			>()
 		),
 		_message
 	);
@@ -169,13 +155,9 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	this->configure_new_object(
 		sanguis::client::draw2d::factory::friend_(
 			env_.model_parameters(),
-			fcppt::cast_to_enum<
-				sanguis::friend_type
-			>(
-				_message.get<
-					sanguis::messages::roles::friend_
-				>()
-			)
+			_message.get<
+				sanguis::messages::roles::friend_
+			>()
 		),
 		_message
 	);
@@ -204,13 +186,9 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	this->configure_new_object(
 		sanguis::client::draw2d::factory::pickup(
 			env_.model_parameters(),
-			fcppt::cast_to_enum<
-				sanguis::pickup_type
-			>(
-				_message.get<
-					sanguis::messages::roles::pickup
-				>()
-			)
+			_message.get<
+				sanguis::messages::roles::pickup
+			>()
 		),
 		_message
 	);
@@ -237,13 +215,9 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	this->configure_new_object(
 		sanguis::client::draw2d::factory::projectile(
 			env_.model_parameters(),
-			fcppt::cast_to_enum<
-				sanguis::projectile_type
-			>(
-				_message.get<
-					sanguis::messages::roles::projectile
-				>()
-			)
+			_message.get<
+				sanguis::messages::roles::projectile
+			>()
 		),
 		_message
 	);
@@ -257,13 +231,9 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	this->configure_new_object(
 		sanguis::client::draw2d::factory::weapon_pickup(
 			env_.model_parameters(),
-			fcppt::cast_to_enum<
-				sanguis::weapon_type
-			>(
-				_message.get<
-					sanguis::messages::roles::weapon
-				>()
-			)
+			_message.get<
+				sanguis::messages::roles::weapon
+			>()
 		),
 		_message
 	);
@@ -283,13 +253,9 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 			>()
 		)
 	).weapon(
-		fcppt::cast_to_enum<
-			sanguis::weapon_type
-		>(
-			_message.get<
-				sanguis::messages::roles::weapon
-			>()
-		)
+		_message.get<
+			sanguis::messages::roles::weapon
+		>()
 	);
 }
 

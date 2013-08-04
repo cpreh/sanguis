@@ -25,7 +25,6 @@
 #include <sanguis/messages/stop_attacking.hpp>
 #include <sanguis/messages/stop_reloading.hpp>
 #include <sanguis/messages/max_health.hpp>
-#include <sanguis/messages/types/enum.hpp>
 #include <sanguis/messages/types/exp.hpp>
 #include <sanguis/messages/types/size.hpp>
 #include <sanguis/server/center_fwd.hpp>
@@ -437,11 +436,7 @@ sanguis::server::world::object::weapon_changed(
 		*sanguis::messages::create(
 			sanguis::messages::change_weapon(
 				_id,
-				static_cast<
-					sanguis::messages::types::enum_
-				>(
-					_wt
-				)
+				_wt
 			)
 		)
 	);
@@ -459,11 +454,7 @@ sanguis::server::world::object::got_weapon(
 		*sanguis::messages::create(
 			sanguis::messages::give_weapon(
 				_entity_id,
-				static_cast<
-					sanguis::messages::types::enum_
-				>(
-					_wt
-				)
+				_wt
 			)
 		)
 	);

@@ -1,6 +1,7 @@
 #ifndef SANGUIS_MESSAGES_CONNECT_STATE_HPP_INCLUDED
 #define SANGUIS_MESSAGES_CONNECT_STATE_HPP_INCLUDED
 
+#include <sanguis/connect_state.hpp>
 #include <sanguis/messages/enum.hpp>
 #include <sanguis/messages/make_message_id.hpp>
 #include <sanguis/messages/make_class.hpp>
@@ -26,7 +27,9 @@ sanguis::messages::make_class<
 				sanguis::messages::types::message::connect_state
 			>,
 			majutsu::role<
-				sanguis::messages::enum_,
+				sanguis::messages::enum_<
+					sanguis::connect_state
+				>,
 				sanguis::messages::roles::connect_state
 			>
 		>

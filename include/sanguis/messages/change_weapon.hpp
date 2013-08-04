@@ -1,6 +1,7 @@
 #ifndef SANGUIS_MESSAGES_CHANGE_WEAPON_HPP_INCLUDED
 #define SANGUIS_MESSAGES_CHANGE_WEAPON_HPP_INCLUDED
 
+#include <sanguis/weapon_type.hpp>
 #include <sanguis/messages/bind_entity_message.hpp>
 #include <sanguis/messages/enum.hpp>
 #include <sanguis/messages/make_class.hpp>
@@ -26,7 +27,9 @@ sanguis::messages::make_class<
 				sanguis::messages::types::message::change_weapon
 			>,
 			majutsu::role<
-				sanguis::messages::enum_,
+				sanguis::messages::enum_<
+					sanguis::weapon_type
+				>,
 				sanguis::messages::roles::weapon
 			>
 		>

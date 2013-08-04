@@ -1,6 +1,7 @@
 #ifndef SANGUIS_MESSAGES_PERK_TREE_NODE_HPP_INCLUDED
 #define SANGUIS_MESSAGES_PERK_TREE_NODE_HPP_INCLUDED
 
+#include <sanguis/perk_type.hpp>
 #include <sanguis/messages/enum.hpp>
 #include <sanguis/messages/level.hpp>
 #include <sanguis/messages/make_class.hpp>
@@ -9,6 +10,7 @@
 #include <sanguis/messages/roles/perk_label.hpp>
 #include <sanguis/messages/roles/required_perk_parent_level.hpp>
 #include <sanguis/messages/roles/required_perk_player_level.hpp>
+#include <alda/bindings/optional.hpp>
 #include <majutsu/composite.hpp>
 #include <majutsu/role.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -26,7 +28,9 @@ sanguis::messages::make_class<
 	majutsu::composite<
 		boost::mpl::vector5<
 			majutsu::role<
-				sanguis::messages::enum_,
+				sanguis::messages::enum_<
+					sanguis::perk_type
+				>,
 				sanguis::messages::roles::perk_label
 			>,
 			majutsu::role<
@@ -42,7 +46,12 @@ sanguis::messages::make_class<
 				sanguis::messages::roles::max_perk_level
 			>,
 			majutsu::role<
-				sanguis::messages::enum_,
+				alda::bindings::optional<
+					sanguis::perk_type,
+					sanguis::messages::enum_<
+						sanguis::perk_type
+					>
+				>,
 				sanguis::messages::roles::perk_parent
 			>
 		>

@@ -4,7 +4,6 @@
 #include <sanguis/messages/add_friend.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
-#include <sanguis/messages/types/enum.hpp>
 #include <sanguis/server/dim.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/model_name.hpp>
@@ -127,11 +126,7 @@ sanguis::server::entities::friend_::add_message(
 				this->speed().get(),
 				this->current_health().get(),
 				this->max_health().get(),
-				static_cast<
-					sanguis::messages::types::enum_
-				>(
-					ftype_
-				)
+				ftype_
 			)
 		);
 }

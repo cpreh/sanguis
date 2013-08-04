@@ -38,7 +38,6 @@ enum class message
 	move,
 	pause,
 	player_attack_dest,
-	player_change_weapon,
 	player_change_world,
 	player_cheat,
 	player_choose_perk,
@@ -57,7 +56,7 @@ enum class message
 	start_reloading,
 	stop_reloading,
 	unpause,
-	size
+	fcppt_maximum = unpause
 };
 
 }
