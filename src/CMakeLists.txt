@@ -504,6 +504,7 @@ SET(
 	include/sanguis/messages/bind_entity_message.hpp
 	include/sanguis/messages/bind_entity_message_fwd.hpp
 	include/sanguis/messages/bind_player_message.hpp
+	include/sanguis/messages/bind_player_message_fwd.hpp
 	include/sanguis/messages/bindings/self.hpp
 	include/sanguis/messages/call/object.hpp
 	include/sanguis/messages/call/object_fwd.hpp
@@ -548,10 +549,12 @@ SET(
 	include/sanguis/messages/player_choose_perk.hpp
 	include/sanguis/messages/player_direction.hpp
 	include/sanguis/messages/player_pause.hpp
+	include/sanguis/messages/player_pause_fwd.hpp
 	include/sanguis/messages/player_position.hpp
 	include/sanguis/messages/player_start_shooting.hpp
 	include/sanguis/messages/player_stop_shooting.hpp
 	include/sanguis/messages/player_unpause.hpp
+	include/sanguis/messages/player_unpause_fwd.hpp
 	include/sanguis/messages/remove.hpp
 	include/sanguis/messages/remove_fwd.hpp
 	include/sanguis/messages/remove_id.hpp

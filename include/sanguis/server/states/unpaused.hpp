@@ -9,11 +9,11 @@
 #include <sanguis/messages/player_attack_dest.hpp>
 #include <sanguis/messages/player_change_world.hpp>
 #include <sanguis/messages/player_direction.hpp>
-#include <sanguis/messages/player_pause.hpp>
+#include <sanguis/messages/player_pause_fwd.hpp>
 #include <sanguis/messages/player_position.hpp>
 #include <sanguis/messages/player_start_shooting.hpp>
 #include <sanguis/messages/player_stop_shooting.hpp>
-#include <sanguis/messages/player_unpause.hpp>
+#include <sanguis/messages/player_unpause_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
 #include <boost/statechart/custom_reaction.hpp>

@@ -5,8 +5,8 @@
 #include <sanguis/server/events/message_fwd.hpp>
 #include <sanguis/server/states/running.hpp>
 #include <sanguis/messages/base_fwd.hpp>
-#include <sanguis/messages/player_pause.hpp>
-#include <sanguis/messages/player_unpause.hpp>
+#include <sanguis/messages/player_pause_fwd.hpp>
+#include <sanguis/messages/player_unpause_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
