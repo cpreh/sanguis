@@ -1,5 +1,6 @@
 #include <sanguis/messages/add_own_player.hpp>
 #include <sanguis/messages/instantiate_message.hpp>
+#include <alda/serialization/load/static_size.hpp>
 
 
 SANGUIS_MESSAGES_INSTANTIATE_MESSAGE(

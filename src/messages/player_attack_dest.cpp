@@ -1,5 +1,6 @@
 #include <sanguis/messages/instantiate_message.hpp>
 #include <sanguis/messages/player_attack_dest.hpp>
+#include <alda/serialization/load/static_size.hpp>
 
 
 SANGUIS_MESSAGES_INSTANTIATE_MESSAGE(

@@ -23,6 +23,8 @@
 #include <sanguis/messages/player_choose_perk.hpp>
 #include <sanguis/messages/remove_id.hpp>
 #include <sanguis/messages/call/object.hpp>
+#include <alda/serialization/load/optional.hpp>
+#include <alda/serialization/load/static_size.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
