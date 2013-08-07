@@ -3,23 +3,7 @@
 
 #include <sanguis/messages/bind_entity_message.hpp>
 #include <sanguis/messages/make_class.hpp>
-#include <sanguis/messages/types/message.hpp>
+#include <sanguis/messages/stop_reloading_fwd.hpp>
 
-
-namespace sanguis
-{
-namespace messages
-{
-
-typedef
-sanguis::messages::make_class<
-	sanguis::messages::bind_entity_message<
-		sanguis::messages::types::message::stop_reloading
-	>
->
-stop_reloading;
-
-}
-}
 
 #endif

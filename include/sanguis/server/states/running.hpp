@@ -9,10 +9,10 @@
 #include <sanguis/server/global/context_fwd.hpp>
 #include <sanguis/server/states/unpaused_fwd.hpp>
 #include <sanguis/messages/base_fwd.hpp>
-#include <sanguis/messages/client_info.hpp>
+#include <sanguis/messages/client_info_fwd.hpp>
 #include <sanguis/messages/console_command_fwd.hpp>
-#include <sanguis/messages/player_cheat.hpp>
-#include <sanguis/messages/player_choose_perk.hpp>
+#include <sanguis/messages/player_cheat_fwd.hpp>
+#include <sanguis/messages/player_choose_perk_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>

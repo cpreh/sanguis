@@ -16,8 +16,12 @@
 #include <sanguis/client/perk/state.hpp>
 #include <sanguis/client/states/running.hpp>
 #include <sanguis/client/states/has_player.hpp>
+#include <sanguis/messages/available_perks.hpp>
 #include <sanguis/messages/create.hpp>
+#include <sanguis/messages/give_weapon.hpp>
+#include <sanguis/messages/level_up.hpp>
 #include <sanguis/messages/player_choose_perk.hpp>
+#include <sanguis/messages/remove_id.hpp>
 #include <sanguis/messages/call/object.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>

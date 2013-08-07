@@ -1,6 +1,7 @@
 #ifndef SANGUIS_MESSAGES_BINDINGS_SELF_HPP_INCLUDED
 #define SANGUIS_MESSAGES_BINDINGS_SELF_HPP_INCLUDED
 
+#include <sanguis/messages/bindings/self_decl.hpp>
 #include <alda/bindings/dynamic_len.hpp>
 // TODO:
 #include <alda/bindings/detail/extract_length.hpp>
@@ -9,9 +10,6 @@
 // TODO:
 #include <alda/serialization/detail/read/make_object.hpp>
 #include <fcppt/algorithm/copy_n.hpp>
-#include <fcppt/preprocessor/disable_gcc_warning.hpp>
-#include <fcppt/preprocessor/pop_warning.hpp>
-#include <fcppt/preprocessor/push_warning.hpp>
 #include <majutsu/const_raw_pointer.hpp>
 #include <majutsu/size_type.hpp>
 #include <majutsu/raw_pointer.hpp>
@@ -20,6 +18,7 @@
 #include <boost/iostreams/stream_buffer.hpp>
 #include <fcppt/config/external_end.hpp>
 
+// TODO: Fix majutsu so this isn't necessary anymore!
 
 namespace sanguis
 {
@@ -27,23 +26,6 @@ namespace messages
 {
 namespace bindings
 {
-
-FCPPT_PP_PUSH_WARNING
-FCPPT_PP_DISABLE_GCC_WARNING(-Weffc++)
-
-template<
-	typename Type
->
-struct self
-:
-alda::bindings::dynamic_len<
-	Type,
-	Type
->
-{
-};
-
-FCPPT_PP_POP_WARNING
 
 template<
 	typename Type

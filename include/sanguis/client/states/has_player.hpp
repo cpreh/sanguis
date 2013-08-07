@@ -8,11 +8,11 @@
 #include <sanguis/client/perk/state_fwd.hpp>
 #include <sanguis/client/states/running.hpp>
 #include <sanguis/client/states/ingame_fwd.hpp>
-#include <sanguis/messages/available_perks.hpp>
+#include <sanguis/messages/available_perks_fwd.hpp>
 #include <sanguis/messages/base_fwd.hpp>
-#include <sanguis/messages/give_weapon.hpp>
-#include <sanguis/messages/level_up.hpp>
-#include <sanguis/messages/remove_id.hpp>
+#include <sanguis/messages/give_weapon_fwd.hpp>
+#include <sanguis/messages/level_up_fwd.hpp>
+#include <sanguis/messages/remove_id_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>

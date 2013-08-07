@@ -9,7 +9,7 @@
 #include <sanguis/client/events/tick_fwd.hpp>
 #include <sanguis/client/gui/menu/object.hpp>
 #include <sanguis/client/states/menu_fwd.hpp>
-#include <sanguis/messages/connect_state.hpp>
+#include <sanguis/messages/connect_state_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>

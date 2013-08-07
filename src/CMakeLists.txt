@@ -487,18 +487,31 @@ SET(
 	include/sanguis/main_object_unique_ptr.hpp
 	include/sanguis/media_path.hpp
 	include/sanguis/messages/add_aoe_projectile.hpp
+	include/sanguis/messages/add_aoe_projectile_fwd.hpp
 	include/sanguis/messages/add_console_command.hpp
+	include/sanguis/messages/add_console_command_fwd.hpp
 	include/sanguis/messages/add_elements_base.hpp
+	include/sanguis/messages/add_elements_base_fwd.hpp
 	include/sanguis/messages/add_enemy.hpp
+	include/sanguis/messages/add_enemy_fwd.hpp
 	include/sanguis/messages/add_friend.hpp
+	include/sanguis/messages/add_friend_fwd.hpp
 	include/sanguis/messages/add_own_player.hpp
+	include/sanguis/messages/add_own_player_fwd.hpp
 	include/sanguis/messages/add_pickup.hpp
+	include/sanguis/messages/add_pickup_fwd.hpp
 	include/sanguis/messages/add_player.hpp
+	include/sanguis/messages/add_player_fwd.hpp
 	include/sanguis/messages/add_projectile.hpp
+	include/sanguis/messages/add_projectile_fwd.hpp
 	include/sanguis/messages/add_weapon_pickup.hpp
+	include/sanguis/messages/add_weapon_pickup_fwd.hpp
 	include/sanguis/messages/add_with_health.hpp
+	include/sanguis/messages/add_with_health_fwd.hpp
 	include/sanguis/messages/add_with_speed.hpp
+	include/sanguis/messages/add_with_speed_fwd.hpp
 	include/sanguis/messages/available_perks.hpp
+	include/sanguis/messages/available_perks_fwd.hpp
 	include/sanguis/messages/base.hpp
 	include/sanguis/messages/base_fwd.hpp
 	include/sanguis/messages/bind_entity_message.hpp
@@ -506,58 +519,88 @@ SET(
 	include/sanguis/messages/bind_player_message.hpp
 	include/sanguis/messages/bind_player_message_fwd.hpp
 	include/sanguis/messages/bindings/self.hpp
+	include/sanguis/messages/bindings/self_decl.hpp
+	include/sanguis/messages/bindings/self_fwd.hpp
 	include/sanguis/messages/call/object.hpp
 	include/sanguis/messages/call/object_fwd.hpp
 	include/sanguis/messages/change_weapon.hpp
+	include/sanguis/messages/change_weapon_fwd.hpp
 	include/sanguis/messages/change_world.hpp
+	include/sanguis/messages/change_world_fwd.hpp
 	include/sanguis/messages/char_type.hpp
 	include/sanguis/messages/char_type_fwd.hpp
 	include/sanguis/messages/client_info.hpp
+	include/sanguis/messages/client_info_fwd.hpp
 	include/sanguis/messages/connect_state.hpp
+	include/sanguis/messages/connect_state_fwd.hpp
 	include/sanguis/messages/console_command.hpp
 	include/sanguis/messages/console_command_fwd.hpp
 	include/sanguis/messages/console_print.hpp
+	include/sanguis/messages/console_print_fwd.hpp
 	include/sanguis/messages/create.hpp
 	include/sanguis/messages/die.hpp
+	include/sanguis/messages/die_fwd.hpp
 	include/sanguis/messages/entity_id.hpp
 	include/sanguis/messages/entity_id_fwd.hpp
 	include/sanguis/messages/entity_message.hpp
 	include/sanguis/messages/entity_message_fwd.hpp
 	include/sanguis/messages/enum.hpp
+	include/sanguis/messages/enum_fwd.hpp
 	include/sanguis/messages/exp.hpp
+	include/sanguis/messages/exp_fwd.hpp
 	include/sanguis/messages/experience.hpp
+	include/sanguis/messages/experience_fwd.hpp
 	include/sanguis/messages/give_weapon.hpp
+	include/sanguis/messages/give_weapon_fwd.hpp
 	include/sanguis/messages/global_context.hpp
 	include/sanguis/messages/health.hpp
+	include/sanguis/messages/health_fwd.hpp
 	include/sanguis/messages/instantiate_message.hpp
 	include/sanguis/messages/level.hpp
+	include/sanguis/messages/level_fwd.hpp
 	include/sanguis/messages/level_up.hpp
+	include/sanguis/messages/level_up_fwd.hpp
 	include/sanguis/messages/make_class.hpp
 	include/sanguis/messages/make_class_fwd.hpp
 	include/sanguis/messages/make_message_id.hpp
 	include/sanguis/messages/make_message_id_fwd.hpp
 	include/sanguis/messages/make_player_message.hpp
+	include/sanguis/messages/make_player_message_fwd.hpp
 	include/sanguis/messages/max_health.hpp
+	include/sanguis/messages/max_health_fwd.hpp
 	include/sanguis/messages/move.hpp
+	include/sanguis/messages/move_fwd.hpp
 	include/sanguis/messages/pause.hpp
+	include/sanguis/messages/pause_fwd.hpp
 	include/sanguis/messages/perk_tree.hpp
+	include/sanguis/messages/perk_tree_fwd.hpp
 	include/sanguis/messages/perk_tree_node.hpp
+	include/sanguis/messages/perk_tree_node_fwd.hpp
 	include/sanguis/messages/perk_tree_node_list.hpp
 	include/sanguis/messages/player_attack_dest.hpp
+	include/sanguis/messages/player_attack_dest_fwd.hpp
 	include/sanguis/messages/player_change_world.hpp
+	include/sanguis/messages/player_change_world_fwd.hpp
 	include/sanguis/messages/player_cheat.hpp
+	include/sanguis/messages/player_cheat_fwd.hpp
 	include/sanguis/messages/player_choose_perk.hpp
+	include/sanguis/messages/player_choose_perk_fwd.hpp
 	include/sanguis/messages/player_direction.hpp
+	include/sanguis/messages/player_direction_fwd.hpp
 	include/sanguis/messages/player_pause.hpp
 	include/sanguis/messages/player_pause_fwd.hpp
 	include/sanguis/messages/player_position.hpp
+	include/sanguis/messages/player_position_fwd.hpp
 	include/sanguis/messages/player_start_shooting.hpp
+	include/sanguis/messages/player_start_shooting_fwd.hpp
 	include/sanguis/messages/player_stop_shooting.hpp
+	include/sanguis/messages/player_stop_shooting_fwd.hpp
 	include/sanguis/messages/player_unpause.hpp
 	include/sanguis/messages/player_unpause_fwd.hpp
 	include/sanguis/messages/remove.hpp
 	include/sanguis/messages/remove_fwd.hpp
 	include/sanguis/messages/remove_id.hpp
+	include/sanguis/messages/remove_id_fwd.hpp
 	include/sanguis/messages/role_name.hpp
 	include/sanguis/messages/roles/angle.hpp
 	include/sanguis/messages/roles/aoe.hpp
@@ -589,7 +632,9 @@ SET(
 	include/sanguis/messages/roles/speed.hpp
 	include/sanguis/messages/roles/weapon.hpp
 	include/sanguis/messages/rotate.hpp
+	include/sanguis/messages/rotate_fwd.hpp
 	include/sanguis/messages/seed.hpp
+	include/sanguis/messages/seed_fwd.hpp
 	include/sanguis/messages/serialization/context_fwd.hpp
 	include/sanguis/messages/serialization/convert_string_vector.hpp
 	include/sanguis/messages/serialization/deserialize.hpp
@@ -597,12 +642,19 @@ SET(
 	include/sanguis/messages/serialization/serialize.hpp
 	include/sanguis/messages/shared_ptr.hpp
 	include/sanguis/messages/size.hpp
+	include/sanguis/messages/size_fwd.hpp
 	include/sanguis/messages/space_unit.hpp
+	include/sanguis/messages/space_unit_fwd.hpp
 	include/sanguis/messages/speed.hpp
+	include/sanguis/messages/speed_fwd.hpp
 	include/sanguis/messages/start_attacking.hpp
+	include/sanguis/messages/start_attacking_fwd.hpp
 	include/sanguis/messages/start_reloading.hpp
+	include/sanguis/messages/start_reloading_fwd.hpp
 	include/sanguis/messages/stop_attacking.hpp
+	include/sanguis/messages/stop_attacking_fwd.hpp
 	include/sanguis/messages/stop_reloading.hpp
+	include/sanguis/messages/stop_reloading_fwd.hpp
 	include/sanguis/messages/string.hpp
 	include/sanguis/messages/string_fwd.hpp
 	include/sanguis/messages/string_vector.hpp
@@ -624,8 +676,11 @@ SET(
 	include/sanguis/messages/types/vector2_fwd.hpp
 	include/sanguis/messages/unique_ptr.hpp
 	include/sanguis/messages/unpause.hpp
+	include/sanguis/messages/unpause_fwd.hpp
 	include/sanguis/messages/vector2.hpp
+	include/sanguis/messages/vector2_fwd.hpp
 	include/sanguis/messages/world_id.hpp
+	include/sanguis/messages/world_id_fwd.hpp
 	include/sanguis/net/append_to_circular_buffer.hpp
 	include/sanguis/net/circular_buffer_sink.hpp
 	include/sanguis/net/data_buffer.hpp
@@ -1072,6 +1127,7 @@ SET(
 	include/sanguis/weapon_type.hpp
 	include/sanguis/weapon_type_fwd.hpp
 	include/sanguis/world_id.hpp
+	include/sanguis/world_id_fwd.hpp
 	src/app_name.cpp
 	src/apply_log_level.cpp
 	src/args/display_mode.cpp

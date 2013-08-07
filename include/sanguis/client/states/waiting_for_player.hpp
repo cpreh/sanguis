@@ -4,7 +4,7 @@
 #include <sanguis/client/events/action_fwd.hpp>
 #include <sanguis/client/events/message_fwd.hpp>
 #include <sanguis/client/states/running.hpp>
-#include <sanguis/messages/add_own_player.hpp>
+#include <sanguis/messages/add_own_player_fwd.hpp>
 #include <sanguis/messages/base_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>

@@ -3,23 +3,7 @@
 
 #include <sanguis/messages/make_class.hpp>
 #include <sanguis/messages/make_message_id.hpp>
-#include <sanguis/messages/types/message.hpp>
+#include <sanguis/messages/remove_id_fwd.hpp>
 
-
-namespace sanguis
-{
-namespace messages
-{
-
-typedef
-sanguis::messages::make_class<
-	sanguis::messages::make_message_id<
-		sanguis::messages::types::message::remove_id
-	>
->
-remove_id;
-
-}
-}
 
 #endif

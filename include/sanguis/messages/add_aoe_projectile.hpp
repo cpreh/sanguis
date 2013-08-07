@@ -2,50 +2,14 @@
 #define SANGUIS_MESSAGES_ADD_AOE_PROJECTILE_HPP_INCLUDED
 
 #include <sanguis/aoe_projectile_type.hpp>
+#include <sanguis/messages/add_aoe_projectile_fwd.hpp>
 #include <sanguis/messages/add_with_speed.hpp>
 #include <sanguis/messages/bind_entity_message.hpp>
 #include <sanguis/messages/enum.hpp>
 #include <sanguis/messages/make_class.hpp>
 #include <sanguis/messages/space_unit.hpp>
-#include <sanguis/messages/roles/aoe_projectile.hpp>
-#include <sanguis/messages/roles/aoe.hpp>
-#include <sanguis/messages/types/message.hpp>
 #include <majutsu/role.hpp>
 #include <majutsu/composite.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/vector/vector10.hpp>
-#include <fcppt/config/external_end.hpp>
 
-
-namespace sanguis
-{
-namespace messages
-{
-
-typedef
-sanguis::messages::make_class<
-	majutsu::composite<
-		boost::mpl::vector4<
-			sanguis::messages::bind_entity_message<
-				sanguis::messages::types::message::add_aoe_projectile
-			>,
-			sanguis::messages::add_with_speed,
-			majutsu::role<
-				sanguis::messages::space_unit,
-				sanguis::messages::roles::aoe
-			>,
-			majutsu::role<
-				sanguis::messages::enum_<
-					sanguis::aoe_projectile_type
-				>,
-				sanguis::messages::roles::aoe_projectile
-			>
-		>
-	>
->
-add_aoe_projectile;
-
-}
-}
 
 #endif

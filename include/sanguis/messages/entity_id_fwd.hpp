@@ -2,7 +2,7 @@
 #define SANGUIS_MESSAGES_ENTITY_ID_FWD_HPP_INCLUDED
 
 #include <sanguis/entity_id_fwd.hpp>
-#include <alda/bindings/fundamental_strong_fwd.hpp>
+#include <alda/bindings/fundamental_strong_decl.hpp>
 
 
 namespace sanguis

@@ -2,7 +2,7 @@
 #define SANGUIS_MESSAGES_CHAR_TYPE_FWD_HPP_INCLUDED
 
 #include <sanguis/messages/types/char.hpp>
-#include <alda/bindings/fundamental_fwd.hpp>
+#include <alda/bindings/fundamental_decl.hpp>
 
 
 namespace sanguis

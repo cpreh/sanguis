@@ -3,23 +3,7 @@
 
 #include <sanguis/messages/bind_player_message.hpp>
 #include <sanguis/messages/make_class.hpp>
-#include <sanguis/messages/types/message.hpp>
+#include <sanguis/messages/player_start_shooting_fwd.hpp>
 
-
-namespace sanguis
-{
-namespace messages
-{
-
-typedef
-sanguis::messages::make_class<
-	sanguis::messages::bind_player_message<
-		sanguis::messages::types::message::player_start_shooting
-	>
->
-player_start_shooting;
-
-}
-}
 
 #endif

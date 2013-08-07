@@ -32,6 +32,7 @@ set(
 	include/sanguis/creator/pos.hpp
 	include/sanguis/creator/pos_fwd.hpp
 	include/sanguis/creator/seed.hpp
+	include/sanguis/creator/seed_fwd.hpp
 	include/sanguis/creator/serialize.hpp
 	include/sanguis/creator/signed_pos.hpp
 	include/sanguis/creator/signed_pos_fwd.hpp

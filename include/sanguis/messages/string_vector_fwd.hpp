@@ -3,7 +3,7 @@
 
 #include <sanguis/messages/string_fwd.hpp>
 #include <sanguis/messages/types/string_vector.hpp>
-#include <alda/bindings/dynamic_len_fwd.hpp>
+#include <alda/bindings/dynamic_len_decl.hpp>
 
 
 namespace sanguis
