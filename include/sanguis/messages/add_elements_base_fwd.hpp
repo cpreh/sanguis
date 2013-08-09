@@ -1,8 +1,8 @@
 #ifndef SANGUIS_MESSAGES_ADD_ELEMENTS_BASE_FWD_HPP_INCLUDED
 #define SANGUIS_MESSAGES_ADD_ELEMENTS_BASE_FWD_HPP_INCLUDED
 
-#include <sanguis/messages/space_unit_fwd.hpp>
-#include <sanguis/messages/vector2_fwd.hpp>
+#include <sanguis/messages/adapted_types/space_unit_fwd.hpp>
+#include <sanguis/messages/adapted_types/vector2_fwd.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/center.hpp>
 #include <majutsu/composite_fwd.hpp>
@@ -21,11 +21,11 @@ typedef
 majutsu::composite<
 	boost::mpl::vector2<
 		majutsu::role<
-			sanguis::messages::vector2,
+			sanguis::messages::adapted_types::vector2,
 			sanguis::messages::roles::center
 		>,
 		majutsu::role<
-			sanguis::messages::space_unit,
+			sanguis::messages::adapted_types::space_unit,
 			sanguis::messages::roles::angle
 		>
 	>

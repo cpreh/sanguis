@@ -4,7 +4,7 @@
 #include <sanguis/messages/console_print_fwd.hpp>
 #include <sanguis/messages/make_class.hpp>
 #include <sanguis/messages/make_message_id.hpp>
-#include <sanguis/messages/string.hpp>
+#include <sanguis/messages/adapted_types/string.hpp>
 #include <majutsu/composite.hpp>
 #include <majutsu/role.hpp>
 

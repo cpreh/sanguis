@@ -2,7 +2,7 @@
 #define SANGUIS_MESSAGES_ADD_WITH_SPEED_FWD_HPP_INCLUDED
 
 #include <sanguis/messages/add_elements_base_fwd.hpp>
-#include <sanguis/messages/vector2_fwd.hpp>
+#include <sanguis/messages/adapted_types/vector2_fwd.hpp>
 #include <sanguis/messages/roles/speed.hpp>
 #include <majutsu/composite_fwd.hpp>
 #include <majutsu/role_fwd.hpp>
@@ -21,7 +21,7 @@ majutsu::composite<
 	boost::mpl::vector2<
 		sanguis::messages::add_elements_base,
 		majutsu::role<
-			sanguis::messages::vector2,
+			sanguis::messages::adapted_types::vector2,
 			sanguis::messages::roles::speed
 		>
 	>

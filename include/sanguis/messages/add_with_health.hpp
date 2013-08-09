@@ -3,7 +3,7 @@
 
 #include <sanguis/messages/add_with_health_fwd.hpp>
 #include <sanguis/messages/add_with_speed.hpp>
-#include <sanguis/messages/space_unit.hpp>
+#include <sanguis/messages/adapted_types/space_unit.hpp>
 #include <majutsu/composite.hpp>
 #include <majutsu/role.hpp>
 

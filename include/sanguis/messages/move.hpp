@@ -4,7 +4,7 @@
 #include <sanguis/messages/bind_entity_message.hpp>
 #include <sanguis/messages/make_class.hpp>
 #include <sanguis/messages/move_fwd.hpp>
-#include <sanguis/messages/vector2.hpp>
+#include <sanguis/messages/adapted_types/vector2.hpp>
 #include <majutsu/composite.hpp>
 #include <majutsu/role.hpp>
 

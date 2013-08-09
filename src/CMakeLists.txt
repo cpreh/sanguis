@@ -407,7 +407,6 @@ SET(
 	include/sanguis/io_service_fwd.hpp
 	include/sanguis/io_service_impl.hpp
 	include/sanguis/io_service_impl_fwd.hpp
-	include/sanguis/is_primary_weapon.hpp
 	include/sanguis/load/aoe_projectile_name.hpp
 	include/sanguis/load/context.hpp
 	include/sanguis/load/context_fwd.hpp
@@ -444,6 +443,7 @@ SET(
 	include/sanguis/load/model/weapon_category_fwd.hpp
 	include/sanguis/load/next_file.hpp
 	include/sanguis/load/pickup_name.hpp
+	include/sanguis/load/primary_weapon_name.hpp
 	include/sanguis/load/probability_type.hpp
 	include/sanguis/load/resource/animation/entity.hpp
 	include/sanguis/load/resource/animation/entity_fwd.hpp
@@ -476,6 +476,7 @@ SET(
 	include/sanguis/load/tiles/set_fwd.hpp
 	include/sanguis/load/tiles/to_name.hpp
 	include/sanguis/load/weapon_pickup_name.hpp
+	include/sanguis/load/weapon_pickup_name_visitor.hpp
 	include/sanguis/log.hpp
 	include/sanguis/log_context.hpp
 	include/sanguis/log_location.hpp
@@ -486,6 +487,34 @@ SET(
 	include/sanguis/main_object_scoped_ptr.hpp
 	include/sanguis/main_object_unique_ptr.hpp
 	include/sanguis/media_path.hpp
+	include/sanguis/messages/adapted_types/char_type.hpp
+	include/sanguis/messages/adapted_types/char_type_fwd.hpp
+	include/sanguis/messages/adapted_types/entity_id.hpp
+	include/sanguis/messages/adapted_types/entity_id_fwd.hpp
+	include/sanguis/messages/adapted_types/enum.hpp
+	include/sanguis/messages/adapted_types/enum_fwd.hpp
+	include/sanguis/messages/adapted_types/level.hpp
+	include/sanguis/messages/adapted_types/level_fwd.hpp
+	include/sanguis/messages/adapted_types/primary_weapon_type.hpp
+	include/sanguis/messages/adapted_types/primary_weapon_type_fwd.hpp
+	include/sanguis/messages/adapted_types/secondary_weapon_type.hpp
+	include/sanguis/messages/adapted_types/secondary_weapon_type_fwd.hpp
+	include/sanguis/messages/adapted_types/seed.hpp
+	include/sanguis/messages/adapted_types/seed_fwd.hpp
+	include/sanguis/messages/adapted_types/size.hpp
+	include/sanguis/messages/adapted_types/size_fwd.hpp
+	include/sanguis/messages/adapted_types/space_unit.hpp
+	include/sanguis/messages/adapted_types/space_unit_fwd.hpp
+	include/sanguis/messages/adapted_types/string.hpp
+	include/sanguis/messages/adapted_types/string_fwd.hpp
+	include/sanguis/messages/adapted_types/string_vector.hpp
+	include/sanguis/messages/adapted_types/string_vector_fwd.hpp
+	include/sanguis/messages/adapted_types/vector2.hpp
+	include/sanguis/messages/adapted_types/vector2_fwd.hpp
+	include/sanguis/messages/adapted_types/weapon_type.hpp
+	include/sanguis/messages/adapted_types/weapon_type_fwd.hpp
+	include/sanguis/messages/adapted_types/world_id.hpp
+	include/sanguis/messages/adapted_types/world_id_fwd.hpp
 	include/sanguis/messages/add_aoe_projectile.hpp
 	include/sanguis/messages/add_aoe_projectile_fwd.hpp
 	include/sanguis/messages/add_console_command.hpp
@@ -527,8 +556,6 @@ SET(
 	include/sanguis/messages/change_weapon_fwd.hpp
 	include/sanguis/messages/change_world.hpp
 	include/sanguis/messages/change_world_fwd.hpp
-	include/sanguis/messages/char_type.hpp
-	include/sanguis/messages/char_type_fwd.hpp
 	include/sanguis/messages/client_info.hpp
 	include/sanguis/messages/client_info_fwd.hpp
 	include/sanguis/messages/connect_state.hpp
@@ -540,12 +567,8 @@ SET(
 	include/sanguis/messages/create.hpp
 	include/sanguis/messages/die.hpp
 	include/sanguis/messages/die_fwd.hpp
-	include/sanguis/messages/entity_id.hpp
-	include/sanguis/messages/entity_id_fwd.hpp
 	include/sanguis/messages/entity_message.hpp
 	include/sanguis/messages/entity_message_fwd.hpp
-	include/sanguis/messages/enum.hpp
-	include/sanguis/messages/enum_fwd.hpp
 	include/sanguis/messages/exp.hpp
 	include/sanguis/messages/exp_fwd.hpp
 	include/sanguis/messages/experience.hpp
@@ -556,8 +579,6 @@ SET(
 	include/sanguis/messages/health.hpp
 	include/sanguis/messages/health_fwd.hpp
 	include/sanguis/messages/instantiate_message.hpp
-	include/sanguis/messages/level.hpp
-	include/sanguis/messages/level_fwd.hpp
 	include/sanguis/messages/level_up.hpp
 	include/sanguis/messages/level_up_fwd.hpp
 	include/sanguis/messages/make_class.hpp
@@ -633,18 +654,12 @@ SET(
 	include/sanguis/messages/roles/weapon.hpp
 	include/sanguis/messages/rotate.hpp
 	include/sanguis/messages/rotate_fwd.hpp
-	include/sanguis/messages/seed.hpp
-	include/sanguis/messages/seed_fwd.hpp
 	include/sanguis/messages/serialization/context_fwd.hpp
 	include/sanguis/messages/serialization/convert_string_vector.hpp
 	include/sanguis/messages/serialization/deserialize.hpp
 	include/sanguis/messages/serialization/instantiate_message.hpp
 	include/sanguis/messages/serialization/serialize.hpp
 	include/sanguis/messages/shared_ptr.hpp
-	include/sanguis/messages/size.hpp
-	include/sanguis/messages/size_fwd.hpp
-	include/sanguis/messages/space_unit.hpp
-	include/sanguis/messages/space_unit_fwd.hpp
 	include/sanguis/messages/speed.hpp
 	include/sanguis/messages/speed_fwd.hpp
 	include/sanguis/messages/start_attacking.hpp
@@ -655,10 +670,6 @@ SET(
 	include/sanguis/messages/stop_attacking_fwd.hpp
 	include/sanguis/messages/stop_reloading.hpp
 	include/sanguis/messages/stop_reloading_fwd.hpp
-	include/sanguis/messages/string.hpp
-	include/sanguis/messages/string_fwd.hpp
-	include/sanguis/messages/string_vector.hpp
-	include/sanguis/messages/string_vector_fwd.hpp
 	include/sanguis/messages/types/alda_type.hpp
 	include/sanguis/messages/types/alda_type_fwd.hpp
 	include/sanguis/messages/types/char.hpp
@@ -677,10 +688,6 @@ SET(
 	include/sanguis/messages/unique_ptr.hpp
 	include/sanguis/messages/unpause.hpp
 	include/sanguis/messages/unpause_fwd.hpp
-	include/sanguis/messages/vector2.hpp
-	include/sanguis/messages/vector2_fwd.hpp
-	include/sanguis/messages/world_id.hpp
-	include/sanguis/messages/world_id_fwd.hpp
 	include/sanguis/net/append_to_circular_buffer.hpp
 	include/sanguis/net/circular_buffer_sink.hpp
 	include/sanguis/net/data_buffer.hpp
@@ -702,19 +709,23 @@ SET(
 	include/sanguis/net/stream_exceptions.hpp
 	include/sanguis/optional_perk_type.hpp
 	include/sanguis/optional_perk_type_fwd.hpp
-	include/sanguis/optional_weapon_type.hpp
-	include/sanguis/optional_weapon_type_fwd.hpp
+	include/sanguis/optional_primary_weapon_type.hpp
+	include/sanguis/optional_primary_weapon_type_fwd.hpp
 	include/sanguis/perk_type.hpp
 	include/sanguis/perk_type_fwd.hpp
 	include/sanguis/pickup_type.hpp
 	include/sanguis/pickup_type_fwd.hpp
 	include/sanguis/pixels_per_meter.hpp
+	include/sanguis/primary_weapon_type.hpp
+	include/sanguis/primary_weapon_type_fwd.hpp
 	include/sanguis/projectile_type.hpp
 	include/sanguis/projectile_type_fwd.hpp
 	include/sanguis/random_generator.hpp
 	include/sanguis/random_generator_fwd.hpp
 	include/sanguis/random_seed.hpp
 	include/sanguis/resolution.hpp
+	include/sanguis/secondary_weapon_type.hpp
+	include/sanguis/secondary_weapon_type_fwd.hpp
 	include/sanguis/server/ai/base.hpp
 	include/sanguis/server/ai/base_fwd.hpp
 	include/sanguis/server/ai/create_function.hpp
@@ -1126,6 +1137,8 @@ SET(
 	include/sanguis/update_diff_clock.hpp
 	include/sanguis/weapon_type.hpp
 	include/sanguis/weapon_type_fwd.hpp
+	include/sanguis/weapon_types.hpp
+	include/sanguis/weapon_types_fwd.hpp
 	include/sanguis/world_id.hpp
 	include/sanguis/world_id_fwd.hpp
 	src/app_name.cpp
@@ -1279,7 +1292,6 @@ SET(
 	src/from_console_arg_list.cpp
 	src/io_service.cpp
 	src/io_service_impl.cpp
-	src/is_primary_weapon.cpp
 	src/load/aoe_projectile_name.cpp
 	src/load/context.cpp
 	src/load/enemy_name.cpp
@@ -1303,6 +1315,7 @@ SET(
 	src/load/model/weapon_category.cpp
 	src/load/next_file.cpp
 	src/load/pickup_name.cpp
+	src/load/primary_weapon_name.cpp
 	src/load/resource/animation/entity.cpp
 	src/load/resource/animation/series.cpp
 	src/load/resource/animations.cpp
@@ -1316,6 +1329,7 @@ SET(
 	src/load/tiles/set.cpp
 	src/load/tiles/to_name.cpp
 	src/load/weapon_pickup_name.cpp
+	src/load/weapon_pickup_name_visitor.cpp
 	src/log.cpp
 	src/log_context.cpp
 	src/log_location.cpp

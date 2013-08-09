@@ -4,8 +4,8 @@
 #include <sanguis/projectile_type_fwd.hpp>
 #include <sanguis/messages/add_with_speed_fwd.hpp>
 #include <sanguis/messages/bind_entity_message_fwd.hpp>
-#include <sanguis/messages/enum_fwd.hpp>
 #include <sanguis/messages/make_class_fwd.hpp>
+#include <sanguis/messages/adapted_types/enum_fwd.hpp>
 #include <sanguis/messages/roles/projectile.hpp>
 #include <sanguis/messages/types/message.hpp>
 #include <majutsu/role_fwd.hpp>
@@ -29,7 +29,7 @@ sanguis::messages::make_class<
 			>,
 			sanguis::messages::add_with_speed,
 			majutsu::role<
-				sanguis::messages::enum_<
+				sanguis::messages::adapted_types::enum_<
 					sanguis::projectile_type
 				>,
 				sanguis::messages::roles::projectile

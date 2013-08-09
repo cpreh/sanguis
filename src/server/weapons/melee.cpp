@@ -1,5 +1,6 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/duration_second.hpp>
+#include <sanguis/primary_weapon_type.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/entities/base.hpp>
@@ -28,7 +29,9 @@ sanguis::server::weapons::melee::melee(
 :
 	sanguis::server::weapons::weapon(
 		_diff_clock,
-		sanguis::weapon_type::melee,
+		sanguis::weapon_type(
+			sanguis::primary_weapon_type::melee
+		),
 		_range,
 		sanguis::server::weapons::unlimited_magazine_size,
 		sanguis::server::weapons::unlimited_magazine_count,

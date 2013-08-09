@@ -1,11 +1,10 @@
 #ifndef SANGUIS_MESSAGES_ADD_WEAPON_PICKUP_FWD_HPP_INCLUDED
 #define SANGUIS_MESSAGES_ADD_WEAPON_PICKUP_FWD_HPP_INCLUDED
 
-#include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/messages/add_elements_base_fwd.hpp>
 #include <sanguis/messages/bind_entity_message_fwd.hpp>
-#include <sanguis/messages/enum_fwd.hpp>
 #include <sanguis/messages/make_class_fwd.hpp>
+#include <sanguis/messages/adapted_types/weapon_type_fwd.hpp>
 #include <sanguis/messages/roles/weapon.hpp>
 #include <sanguis/messages/types/message.hpp>
 #include <majutsu/role_fwd.hpp>
@@ -29,9 +28,7 @@ sanguis::messages::make_class<
 			>,
 			sanguis::messages::add_elements_base,
 			majutsu::role<
-				sanguis::messages::enum_<
-					sanguis::weapon_type
-				>,
+				sanguis::messages::adapted_types::weapon_type,
 				sanguis::messages::roles::weapon
 			>
 		>

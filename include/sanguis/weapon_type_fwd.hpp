@@ -1,11 +1,18 @@
 #ifndef SANGUIS_WEAPON_TYPE_FWD_HPP_INCLUDED
 #define SANGUIS_WEAPON_TYPE_FWD_HPP_INCLUDED
 
+#include <sanguis/weapon_types_fwd.hpp>
+#include <fcppt/variant/object_fwd.hpp>
+
 
 namespace sanguis
 {
 
-enum class weapon_type;
+typedef
+fcppt::variant::object<
+	sanguis::weapon_types
+>
+weapon_type;
 
 }
 

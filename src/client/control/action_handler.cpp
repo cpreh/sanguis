@@ -1,7 +1,5 @@
 #include <sanguis/cheat_type.hpp>
-#include <sanguis/optional_weapon_type.hpp>
 #include <sanguis/timer.hpp>
-#include <sanguis/weapon_type.hpp>
 #include <sanguis/client/send_callback.hpp>
 #include <sanguis/client/control/action_handler.hpp>
 #include <sanguis/client/control/action_visitor.hpp>
@@ -19,27 +17,23 @@
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/player_attack_dest.hpp>
 #include <sanguis/messages/player_change_world.hpp>
+#include <sanguis/messages/player_cheat.hpp>
 #include <sanguis/messages/player_direction.hpp>
 #include <sanguis/messages/player_start_shooting.hpp>
 #include <sanguis/messages/player_stop_shooting.hpp>
-#include <sanguis/messages/player_cheat.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/object.hpp>
 #include <sge/console/callback/name.hpp>
 #include <sge/console/callback/parameters.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/timer/reset_when_expired.hpp>
-#include <fcppt/cyclic_iterator.hpp>
-#include <fcppt/assert/error.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/math/clamp.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/variant/apply_unary.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/chrono/duration.hpp>
-#include <algorithm>
 #include <functional>
-#include <iterator>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -55,7 +49,6 @@ sanguis::client::control::action_handler::action_handler(
 	environment_(
 		_environment
 	),
-	current_weapon_(),
 	rotation_timer_(
 		sanguis::timer::parameters(
 			boost::chrono::milliseconds(
@@ -63,7 +56,6 @@ sanguis::client::control::action_handler::action_handler(
 			)
 		)
 	),
-	owned_weapons_(),
 	direction_(
 		sanguis::client::control::direction_vector::null()
 	),
@@ -106,11 +98,6 @@ sanguis::client::control::action_handler::action_handler(
 		)
 	)
 {
-	std::fill(
-		owned_weapons_.begin(),
-		owned_weapons_.end(),
-		false
-	);
 }
 
 sanguis::client::control::action_handler::~action_handler()
@@ -131,28 +118,6 @@ sanguis::client::control::action_handler::handle_action(
 }
 
 void
-sanguis::client::control::action_handler::give_player_weapon(
-	sanguis::weapon_type const _weapon_type
-)
-{
-	owned_weapons_.at(
-		static_cast<
-			owned_weapons_array::size_type
-		>(
-			_weapon_type
-		)
-	) = true;
-
-	// we don't own any weapon so take this one
-	if(
-		!current_weapon_
-	)
-		this->change_weapon(
-			_weapon_type
-		);
-}
-
-void
 sanguis::client::control::action_handler::handle_binary_action(
 	sanguis::client::control::actions::binary const &_action
 )
@@ -161,7 +126,7 @@ sanguis::client::control::action_handler::handle_binary_action(
 		_action.type()
 	)
 	{
-	case sanguis::client::control::actions::binary_type::shoot:
+	case sanguis::client::control::actions::binary_type::shoot_primary:
 		this->handle_shooting(
 			_action.value()
 		);
@@ -207,18 +172,6 @@ sanguis::client::control::action_handler::handle_nullary_action(
 		_action.type()
 	)
 	{
-	case sanguis::client::control::actions::nullary_type::switch_weapon_forwards:
-		this->handle_switch_weapon(
-			true
-		);
-
-		return;
-	case sanguis::client::control::actions::nullary_type::switch_weapon_backwards:
-		this->handle_switch_weapon(
-			false
-		);
-
-		return;
 	case sanguis::client::control::actions::nullary_type::change_world:
 		send_(
 			*sanguis::messages::create(
@@ -311,92 +264,6 @@ sanguis::client::control::action_handler::handle_shooting(
 				sanguis::messages::player_stop_shooting()
 			)
 		);
-}
-
-void
-sanguis::client::control::action_handler::handle_switch_weapon(
-	bool const _forward
-)
-{
-	// we don't own any weapon
-	if(
-		!current_weapon_
-	)
-		return;
-
-	owned_weapons_array::size_type const weapon_index(
-		static_cast<
-			owned_weapons_array::size_type
-		>(
-			*current_weapon_
-		)
-	);
-
-	FCPPT_ASSERT_ERROR(
-		weapon_index < owned_weapons_.size()
-	);
-
-	typedef fcppt::cyclic_iterator<
-		owned_weapons_array::const_iterator
-	> iterator;
-
-	iterator it(
-		owned_weapons_.begin()
-		+
-		static_cast<
-			owned_weapons_array::size_type
-		>(
-			*current_weapon_
-		),
-		owned_weapons_.begin(),
-		owned_weapons_.end()
-	);
-
-	if(
-		_forward
-	)
-		while(!*++it) ;
-	else
-		while(!*--it) ;
-
-	this->change_weapon(
-		static_cast<
-			sanguis::weapon_type
-		>(
-			std::distance(
-				static_cast<
-					owned_weapons_array const &
-				>(
-					owned_weapons_
-				).begin(),
-				it.get()
-			)
-		)
-	);
-}
-
-void
-sanguis::client::control::action_handler::change_weapon(
-	sanguis::weapon_type const _weapon_type
-)
-{
-	current_weapon_ =
-		sanguis::optional_weapon_type(
-			_weapon_type
-		);
-
-/*
-	send_(
-		*sanguis::messages::create(
-			sanguis::messages::player_change_weapon(
-				static_cast<
-					sanguis::messages::types::enum_
-				>(
-					_weapon_type
-				)
-			)
-		)
-	);*/
 }
 
 void

@@ -3,7 +3,7 @@
 
 #include <sanguis/messages/make_class_fwd.hpp>
 #include <sanguis/messages/make_message_id_fwd.hpp>
-#include <sanguis/messages/string_vector_fwd.hpp>
+#include <sanguis/messages/adapted_types/string_vector_fwd.hpp>
 #include <sanguis/messages/types/message.hpp>
 #include <majutsu/composite_fwd.hpp>
 #include <majutsu/role_fwd.hpp>
@@ -25,7 +25,7 @@ sanguis::messages::make_class<
 				sanguis::messages::types::message::console_command
 			>,
 			majutsu::role<
-				sanguis::messages::string_vector
+				sanguis::messages::adapted_types::string_vector
 			>
 		>
 	>

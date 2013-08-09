@@ -7,6 +7,7 @@
 namespace sanguis
 {
 
+// TODO: Remove the size part
 enum class animation_type
 {
 	none,

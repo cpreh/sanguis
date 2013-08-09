@@ -3,9 +3,9 @@
 
 #include <sanguis/messages/bind_player_message_fwd.hpp>
 #include <sanguis/messages/make_class_fwd.hpp>
-#include <sanguis/messages/vector2_fwd.hpp>
-#include <sanguis/messages/types/message.hpp>
+#include <sanguis/messages/adapted_types/vector2_fwd.hpp>
 #include <sanguis/messages/roles/direction.hpp>
+#include <sanguis/messages/types/message.hpp>
 #include <majutsu/composite_fwd.hpp>
 #include <majutsu/role_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -26,7 +26,7 @@ sanguis::messages::make_class<
 				sanguis::messages::types::message::player_direction
 			>,
 			majutsu::role<
-				sanguis::messages::vector2,
+				sanguis::messages::adapted_types::vector2,
 				sanguis::messages::roles::direction
 			>
 		>

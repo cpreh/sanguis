@@ -22,6 +22,7 @@
 #include <sanguis/messages/level_up.hpp>
 #include <sanguis/messages/player_choose_perk.hpp>
 #include <sanguis/messages/remove_id.hpp>
+#include <sanguis/messages/adapted_types/level.hpp>
 #include <sanguis/messages/call/object.hpp>
 #include <alda/serialization/load/optional.hpp>
 #include <alda/serialization/load/static_size.hpp>
@@ -147,11 +148,13 @@ sanguis::client::states::has_player::operator()(
 	sanguis::messages::give_weapon const &_message
 )
 {
+/*
 	action_handler_->give_player_weapon(
 		_message.get<
 			sanguis::messages::roles::weapon
 		>()
 	);
+*/
 
 	return
 		this->discard_event();
@@ -166,7 +169,7 @@ sanguis::client::states::has_player::operator()(
 		sanguis::client::player_level(
 			sanguis::client::level(
 				_message.get<
-					sanguis::messages::level
+					sanguis::messages::adapted_types::level
 				>()
 			)
 		)

@@ -3,10 +3,10 @@
 
 #include <sanguis/messages/make_class_fwd.hpp>
 #include <sanguis/messages/make_message_id_fwd.hpp>
-#include <sanguis/messages/seed_fwd.hpp>
-#include <sanguis/messages/size_fwd.hpp>
-#include <sanguis/messages/string_fwd.hpp>
-#include <sanguis/messages/world_id_fwd.hpp>
+#include <sanguis/messages/adapted_types/seed_fwd.hpp>
+#include <sanguis/messages/adapted_types/size_fwd.hpp>
+#include <sanguis/messages/adapted_types/string_fwd.hpp>
+#include <sanguis/messages/adapted_types/world_id_fwd.hpp>
 #include <sanguis/messages/roles/generator_name.hpp>
 #include <sanguis/messages/roles/opening_count.hpp>
 #include <sanguis/messages/types/message.hpp>
@@ -30,17 +30,17 @@ sanguis::messages::make_class<
 				sanguis::messages::types::message::change_world
 			>,
 			majutsu::role<
-				sanguis::messages::world_id
+				sanguis::messages::adapted_types::world_id
 			>,
 			majutsu::role<
-				sanguis::messages::seed
+				sanguis::messages::adapted_types::seed
 			>,
 			majutsu::role<
-				sanguis::messages::string,
+				sanguis::messages::adapted_types::string,
 				sanguis::messages::roles::generator_name
 			>,
 			majutsu::role<
-				sanguis::messages::size,
+				sanguis::messages::adapted_types::size,
 				sanguis::messages::roles::opening_count
 			>
 		>

@@ -5,8 +5,8 @@
 #include <sanguis/messages/add_friend_fwd.hpp>
 #include <sanguis/messages/add_with_health.hpp>
 #include <sanguis/messages/bind_entity_message.hpp>
-#include <sanguis/messages/enum.hpp>
 #include <sanguis/messages/make_class.hpp>
+#include <sanguis/messages/adapted_types/enum.hpp>
 #include <majutsu/composite.hpp>
 #include <majutsu/role.hpp>
 

@@ -3,7 +3,7 @@
 
 #include <sanguis/messages/make_class_fwd.hpp>
 #include <sanguis/messages/make_message_id_fwd.hpp>
-#include <sanguis/messages/string_fwd.hpp>
+#include <sanguis/messages/adapted_types/string_fwd.hpp>
 #include <sanguis/messages/roles/command_description.hpp>
 #include <sanguis/messages/roles/command_name.hpp>
 #include <sanguis/messages/types/message.hpp>
@@ -27,11 +27,11 @@ sanguis::messages::make_class<
 				sanguis::messages::types::message::add_console_command
 			>,
 			majutsu::role<
-				sanguis::messages::string,
+				sanguis::messages::adapted_types::string,
 				sanguis::messages::roles::command_name
 			>,
 			majutsu::role<
-				sanguis::messages::string,
+				sanguis::messages::adapted_types::string,
 				sanguis::messages::roles::command_description
 			>
 		>

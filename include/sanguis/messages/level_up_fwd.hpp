@@ -2,8 +2,8 @@
 #define SANGUIS_MESSAGES_LEVEL_UP_FWD_HPP_INCLUDED
 
 #include <sanguis/messages/bind_entity_message_fwd.hpp>
-#include <sanguis/messages/level_fwd.hpp>
 #include <sanguis/messages/make_class_fwd.hpp>
+#include <sanguis/messages/adapted_types/level_fwd.hpp>
 #include <sanguis/messages/types/message.hpp>
 #include <majutsu/composite_fwd.hpp>
 #include <majutsu/role_fwd.hpp>
@@ -25,7 +25,7 @@ sanguis::messages::make_class<
 				sanguis::messages::types::message::level_up
 			>,
 			majutsu::role<
-				sanguis::messages::level
+				sanguis::messages::adapted_types::level
 			>
 		>
 	>

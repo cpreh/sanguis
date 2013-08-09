@@ -2,7 +2,7 @@
 #define SANGUIS_MESSAGES_ADD_WITH_HEALTH_FWD_HPP_INCLUDED
 
 #include <sanguis/messages/add_with_speed_fwd.hpp>
-#include <sanguis/messages/space_unit_fwd.hpp>
+#include <sanguis/messages/adapted_types/space_unit_fwd.hpp>
 #include <sanguis/messages/roles/health.hpp>
 #include <sanguis/messages/roles/max_health.hpp>
 #include <majutsu/composite_fwd.hpp>
@@ -22,11 +22,11 @@ majutsu::composite<
 	boost::mpl::vector3<
 		sanguis::messages::add_with_speed,
 		majutsu::role<
-			sanguis::messages::space_unit,
+			sanguis::messages::adapted_types::space_unit,
 			sanguis::messages::roles::health
 		>,
 		majutsu::role<
-			sanguis::messages::space_unit,
+			sanguis::messages::adapted_types::space_unit,
 			sanguis::messages::roles::max_health
 		>
 	>

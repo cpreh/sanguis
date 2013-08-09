@@ -1,6 +1,8 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/friend_type.hpp>
+#include <sanguis/primary_weapon_type.hpp>
 #include <sanguis/random_generator.hpp>
+#include <sanguis/secondary_weapon_type.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/pickup_probability.hpp>
@@ -75,7 +77,9 @@ sanguis::server::pickup_spawner::pickup_spawner(
 					&sanguis::server::pickup_spawner::spawn_weapon,
 					this,
 					std::placeholders::_1,
-					sanguis::weapon_type::pistol
+					sanguis::weapon_type(
+						sanguis::primary_weapon_type::pistol
+					)
 				)
 			)
 		),
@@ -88,7 +92,9 @@ sanguis::server::pickup_spawner::pickup_spawner(
 					&sanguis::server::pickup_spawner::spawn_weapon,
 					this,
 					std::placeholders::_1,
-					sanguis::weapon_type::shotgun
+					sanguis::weapon_type(
+						sanguis::primary_weapon_type::shotgun
+					)
 				)
 			)
 		),
@@ -101,7 +107,9 @@ sanguis::server::pickup_spawner::pickup_spawner(
 					&sanguis::server::pickup_spawner::spawn_weapon,
 					this,
 					std::placeholders::_1,
-					sanguis::weapon_type::rocket_launcher
+					sanguis::weapon_type(
+						sanguis::primary_weapon_type::rocket_launcher
+					)
 				)
 			)
 		),
@@ -114,7 +122,9 @@ sanguis::server::pickup_spawner::pickup_spawner(
 					&sanguis::server::pickup_spawner::spawn_weapon,
 					this,
 					std::placeholders::_1,
-					sanguis::weapon_type::grenade
+					sanguis::weapon_type(
+						sanguis::secondary_weapon_type::grenade
+					)
 				)
 			)
 		),
@@ -127,7 +137,9 @@ sanguis::server::pickup_spawner::pickup_spawner(
 					&sanguis::server::pickup_spawner::spawn_weapon,
 					this,
 					std::placeholders::_1,
-					sanguis::weapon_type::sentry
+					sanguis::weapon_type(
+						sanguis::secondary_weapon_type::sentry
+					)
 				)
 			)
 		)

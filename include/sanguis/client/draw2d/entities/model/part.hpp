@@ -4,8 +4,8 @@
 #include <sanguis/animation_type.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
-#include <sanguis/optional_weapon_type.hpp>
-#include <sanguis/weapon_type_fwd.hpp>
+#include <sanguis/optional_primary_weapon_type.hpp>
+#include <sanguis/primary_weapon_type_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sanguis/client/draw2d/sprite/normal/texture_animation.hpp>
@@ -47,7 +47,7 @@ public:
 
 	void
 	weapon(
-		sanguis::weapon_type
+		sanguis::primary_weapon_type
 	);
 
 	void
@@ -96,7 +96,7 @@ private:
 
 	sanguis::animation_type animation_type_;
 
-	sanguis::optional_weapon_type weapon_;
+	sanguis::optional_primary_weapon_type weapon_;
 
 	typedef fcppt::scoped_ptr<
 		sanguis::client::draw2d::sprite::normal::texture_animation

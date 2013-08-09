@@ -1,8 +1,8 @@
 #include <sanguis/animation_type.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
-#include <sanguis/optional_weapon_type.hpp>
-#include <sanguis/weapon_type.hpp>
+#include <sanguis/optional_primary_weapon_type.hpp>
+#include <sanguis/primary_weapon_type.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/entities/model/part.hpp>
 #include <sanguis/client/draw2d/entities/model/clamp_orientation.hpp>
@@ -102,13 +102,13 @@ sanguis::client::draw2d::entities::model::part::try_animation(
 
 void
 sanguis::client::draw2d::entities::model::part::weapon(
-	sanguis::weapon_type const _weapon
+	sanguis::primary_weapon_type const _weapon
 )
 {
 	// we lose the animation here
 	// which model has to reset
 	weapon_ =
-		sanguis::optional_weapon_type(
+		sanguis::optional_primary_weapon_type(
 			_weapon
 		);
 

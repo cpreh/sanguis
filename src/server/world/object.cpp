@@ -1,6 +1,7 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
+#include <sanguis/primary_weapon_type.hpp>
 #include <sanguis/timer.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/weapon_type.hpp>
@@ -428,7 +429,7 @@ sanguis::server::world::object::insert_base(
 void
 sanguis::server::world::object::weapon_changed(
 	sanguis::entity_id const _id,
-	sanguis::weapon_type const _wt
+	sanguis::primary_weapon_type const _wt
 )
 {
 	this->send_entity_specific(

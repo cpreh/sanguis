@@ -3,8 +3,8 @@
 
 #include <sanguis/perk_type_fwd.hpp>
 #include <sanguis/messages/bind_player_message_fwd.hpp>
-#include <sanguis/messages/enum_fwd.hpp>
 #include <sanguis/messages/make_class_fwd.hpp>
+#include <sanguis/messages/adapted_types/enum_fwd.hpp>
 #include <sanguis/messages/roles/perk.hpp>
 #include <sanguis/messages/types/message.hpp>
 #include <majutsu/composite_fwd.hpp>
@@ -27,7 +27,7 @@ sanguis::messages::make_class<
 				sanguis::messages::types::message::player_choose_perk
 			>,
 			majutsu::role<
-				sanguis::messages::enum_<
+				sanguis::messages::adapted_types::enum_<
 					sanguis::perk_type
 				>,
 				sanguis::messages::roles::perk

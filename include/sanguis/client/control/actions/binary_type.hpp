@@ -15,7 +15,8 @@ namespace actions
 
 enum class binary_type
 {
-	shoot
+	shoot_primary,
+	shoot_secondary
 };
 
 }

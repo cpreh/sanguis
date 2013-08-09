@@ -9,7 +9,8 @@
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/player_cheat.hpp>
 #include <sanguis/messages/player_choose_perk.hpp>
-#include <sanguis/messages/string.hpp>
+#include <sanguis/messages/adapted_types/string.hpp>
+#include <sanguis/messages/adapted_types/string_vector.hpp>
 #include <sanguis/messages/call/object.hpp>
 #include <sanguis/messages/roles/cheat.hpp>
 #include <sanguis/messages/roles/perk.hpp>
@@ -199,7 +200,7 @@ sanguis::server::states::running::operator()(
 		_id,
 		sge::charconv::utf8_string_to_fcppt(
 			_message.get<
-				sanguis::messages::string
+				sanguis::messages::adapted_types::string
 			>()
 		),
 		this->state_cast<
@@ -231,7 +232,7 @@ sanguis::server::states::running::operator()(
 	sanguis::string_vector const command(
 		sanguis::messages::serialization::convert_string_vector(
 			_message.get<
-				sanguis::messages::string_vector
+				sanguis::messages::adapted_types::string_vector
 			>()
 		)
 	);

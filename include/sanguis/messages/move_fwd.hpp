@@ -3,7 +3,7 @@
 
 #include <sanguis/messages/bind_entity_message_fwd.hpp>
 #include <sanguis/messages/make_class_fwd.hpp>
-#include <sanguis/messages/vector2_fwd.hpp>
+#include <sanguis/messages/adapted_types/vector2_fwd.hpp>
 #include <sanguis/messages/roles/center.hpp>
 #include <sanguis/messages/types/message.hpp>
 #include <majutsu/composite_fwd.hpp>
@@ -26,7 +26,7 @@ sanguis::messages::make_class<
 				sanguis::messages::types::message::move
 			>,
 			majutsu::role<
-				sanguis::messages::vector2,
+				sanguis::messages::adapted_types::vector2,
 				sanguis::messages::roles::center
 			>
 		>

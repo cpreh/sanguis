@@ -3,7 +3,7 @@
 
 #include <sanguis/messages/bind_entity_message_fwd.hpp>
 #include <sanguis/messages/make_class_fwd.hpp>
-#include <sanguis/messages/space_unit_fwd.hpp>
+#include <sanguis/messages/adapted_types/space_unit_fwd.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/types/message.hpp>
 #include <majutsu/composite_fwd.hpp>
@@ -26,7 +26,7 @@ sanguis::messages::make_class<
 				sanguis::messages::types::message::rotate
 			>,
 			majutsu::role<
-				sanguis::messages::space_unit,
+				sanguis::messages::adapted_types::space_unit,
 				sanguis::messages::roles::angle
 			>
 		>

@@ -4,6 +4,7 @@
 #include <sanguis/entity_id.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/perk_type.hpp>
+#include <sanguis/primary_weapon_type.hpp>
 #include <sanguis/random_seed.hpp>
 #include <sanguis/update_diff_clock.hpp>
 #include <sanguis/weapon_type.hpp>
@@ -251,7 +252,9 @@ sanguis::server::global::context::insert_player(
 			random_generator_,
 			*load_context_,
 			sanguis::server::team::players,
-			sanguis::weapon_type::pistol
+			sanguis::weapon_type(
+				sanguis::primary_weapon_type::pistol
+			)
 		),
 		sanguis::server::entities::insert_parameters_center(
 			spawn_pos

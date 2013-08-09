@@ -5,6 +5,7 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
+#include <sanguis/primary_weapon_type_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/timer.hpp>
 #include <sanguis/world_id.hpp>
@@ -104,7 +105,7 @@ private:
 	void
 	weapon_changed(
 		sanguis::entity_id,
-		sanguis::weapon_type
+		sanguis::primary_weapon_type
 	);
 
 	void

@@ -10,9 +10,9 @@ namespace sanguis
 namespace load
 {
 
-fcppt::string const
+fcppt::string
 weapon_pickup_name(
-	sanguis::weapon_type
+	sanguis::weapon_type const &
 );
 
 }

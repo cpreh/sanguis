@@ -31,6 +31,40 @@ sanguis::server::weapons::create(
 	sanguis::weapon_type const _type
 )
 {
+	// TODO!
+		return
+			fcppt::make_unique_ptr<
+				sanguis::server::weapons::pistol
+			>(
+				_diff_clock,
+				_type,
+				sanguis::server::weapons::base_cooldown(
+					sanguis::duration_second(
+						0.5f
+					)
+				),
+				sanguis::server::weapons::damage(
+					5.f
+				),
+				sanguis::server::weapons::cast_point(
+					sanguis::duration_second(
+						0.2f
+					)
+				),
+				sanguis::server::weapons::magazine_size(
+					18u
+				),
+				sanguis::server::weapons::reload_time(
+					sanguis::duration_second(
+						2.f
+					)
+				),
+				sanguis::server::weapons::range(
+					20.f
+				)
+			);
+
+/*
 	switch(
 		_type
 	)
@@ -252,5 +286,5 @@ sanguis::server::weapons::create(
 			);
 	}
 
-	FCPPT_ASSERT_UNREACHABLE;
+	FCPPT_ASSERT_UNREACHABLE;*/
 }

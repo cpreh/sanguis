@@ -1,4 +1,5 @@
 #include <sanguis/entity_id.hpp>
+#include <sanguis/primary_weapon_type.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/exp.hpp>
@@ -53,7 +54,7 @@ sanguis::server::world::environment::insert(
 void
 sanguis::server::world::environment::weapon_changed(
 	sanguis::entity_id const _id,
-	sanguis::weapon_type const _weapon
+	sanguis::primary_weapon_type const _weapon
 )
 {
 	world_.weapon_changed(

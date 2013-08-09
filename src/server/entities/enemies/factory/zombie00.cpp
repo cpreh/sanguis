@@ -1,4 +1,5 @@
 #include <sanguis/duration_second.hpp>
+#include <sanguis/primary_weapon_type.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
@@ -47,7 +48,9 @@ sanguis::server::entities::enemies::factory::zombie00(
 				sanguis::server::weapons::pistol
 			>(
 				_parameters.diff_clock(),
-				sanguis::weapon_type::pistol,
+				sanguis::weapon_type(
+					sanguis::primary_weapon_type::pistol
+				),
 				sanguis::server::weapons::base_cooldown(
 					sanguis::duration_second(
 						1.f

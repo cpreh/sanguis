@@ -5,9 +5,9 @@
 #include <sanguis/messages/add_aoe_projectile_fwd.hpp>
 #include <sanguis/messages/add_with_speed.hpp>
 #include <sanguis/messages/bind_entity_message.hpp>
-#include <sanguis/messages/enum.hpp>
 #include <sanguis/messages/make_class.hpp>
-#include <sanguis/messages/space_unit.hpp>
+#include <sanguis/messages/adapted_types/enum.hpp>
+#include <sanguis/messages/adapted_types/space_unit.hpp>
 #include <majutsu/role.hpp>
 #include <majutsu/composite.hpp>
 

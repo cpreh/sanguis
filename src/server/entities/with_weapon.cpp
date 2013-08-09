@@ -1,4 +1,5 @@
 #include <sanguis/time_unit.hpp>
+#include <sanguis/primary_weapon_type.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/server/entities/base.hpp>
@@ -15,6 +16,7 @@
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/assert/pre.hpp>
+#include <fcppt/variant/get.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -89,7 +91,11 @@ sanguis::server::entities::with_weapon::replace_weapon(
 	)
 		this->environment().weapon_changed(
 			this->id(),
-			primary_weapon_->type()
+			fcppt::variant::get<
+				sanguis::primary_weapon_type
+			>(
+				primary_weapon_->type()
+			)
 		);
 
 	if(

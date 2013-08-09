@@ -105,18 +105,6 @@ sanguis::client::control::input_translator::key_callback(
 			sanguis::client::control::actions::nullary_type::console
 		);
 		break;
-	case sge::input::keyboard::key_code::c:
-		this->nullary_event(
-			_event.pressed(),
-			sanguis::client::control::actions::nullary_type::switch_weapon_forwards
-		);
-		break;
-	case sge::input::keyboard::key_code::x:
-		this->nullary_event(
-			_event.pressed(),
-			sanguis::client::control::actions::nullary_type::switch_weapon_backwards
-		);
-		break;
 	case sge::input::keyboard::key_code::e:
 		this->nullary_event(
 			_event.pressed(),
@@ -170,7 +158,7 @@ sanguis::client::control::input_translator::button_callback(
 		callback_(
 			sanguis::client::control::actions::any(
 				sanguis::client::control::actions::binary(
-					sanguis::client::control::actions::binary_type::shoot,
+					sanguis::client::control::actions::binary_type::shoot_primary,
 					_event.pressed()
 				)
 			)

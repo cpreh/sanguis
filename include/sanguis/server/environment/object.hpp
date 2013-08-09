@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENVIRONMENT_OBJECT_HPP_INCLUDED
 
 #include <sanguis/entity_id.hpp>
+#include <sanguis/primary_weapon_type_fwd.hpp>
 #include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/exp.hpp>
@@ -45,7 +46,7 @@ public:
 	void
 	weapon_changed(
 		sanguis::entity_id,
-		sanguis::weapon_type
+		sanguis::primary_weapon_type
 	) = 0;
 
 	virtual

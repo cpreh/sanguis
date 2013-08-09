@@ -1,7 +1,6 @@
 #include <sanguis/optional_perk_type.hpp>
 #include <sanguis/messages/available_perks.hpp>
 #include <sanguis/messages/create.hpp>
-#include <sanguis/messages/enum.hpp>
 #include <sanguis/messages/perk_tree_node.hpp>
 #include <sanguis/messages/perk_tree_node_list.hpp>
 #include <sanguis/server/send_available_perks.hpp>

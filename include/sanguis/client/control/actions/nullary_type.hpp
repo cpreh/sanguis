@@ -17,10 +17,9 @@ enum class nullary_type
 {
 	change_world,
 	console,
+	drop_weapon,
 	escape,
-	perk_menu,
-	switch_weapon_forwards,
-	switch_weapon_backwards
+	perk_menu
 };
 
 }

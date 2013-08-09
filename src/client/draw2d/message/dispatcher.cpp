@@ -49,7 +49,6 @@
 #include <sanguis/messages/die.hpp>
 #include <sanguis/messages/experience.hpp>
 #include <sanguis/messages/health.hpp>
-#include <sanguis/messages/level.hpp>
 #include <sanguis/messages/level_up.hpp>
 #include <sanguis/messages/max_health.hpp>
 #include <sanguis/messages/move.hpp>
@@ -60,9 +59,10 @@
 #include <sanguis/messages/stop_attacking.hpp>
 #include <sanguis/messages/start_reloading.hpp>
 #include <sanguis/messages/stop_reloading.hpp>
-#include <sanguis/messages/seed.hpp>
 #include <sanguis/messages/speed.hpp>
-#include <sanguis/messages/world_id.hpp>
+#include <sanguis/messages/adapted_types/level.hpp>
+#include <sanguis/messages/adapted_types/seed.hpp>
+#include <sanguis/messages/adapted_types/world_id.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/aoe.hpp>
 #include <sanguis/messages/roles/aoe_projectile.hpp>
@@ -267,7 +267,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	env_.change_world(
 		sanguis::client::world_parameters(
 			_message.get<
-				sanguis::messages::world_id
+				sanguis::messages::adapted_types::world_id
 			>(),
 			sanguis::creator::top_parameters(
 				sanguis::creator::name(
@@ -278,7 +278,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 					)
 				),
 				_message.get<
-					sanguis::messages::seed
+					sanguis::messages::adapted_types::seed
 				>(),
 				sanguis::creator::opening_count(
 					_message.get<
@@ -346,7 +346,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	env_.level(
 		sanguis::client::level(
 			_message.get<
-				sanguis::messages::level
+				sanguis::messages::adapted_types::level
 			>()
 		)
 	);

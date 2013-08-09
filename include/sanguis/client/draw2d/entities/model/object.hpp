@@ -3,7 +3,7 @@
 
 #include <sanguis/animation_type_fwd.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/weapon_type_fwd.hpp>
+#include <sanguis/primary_weapon_type_fwd.hpp>
 #include <sanguis/client/health.hpp>
 #include <sanguis/client/max_health.hpp>
 #include <sanguis/client/draw2d/speed_fwd.hpp>
@@ -139,7 +139,7 @@ private:
 	// with_weapon overrides
 	void
 	weapon(
-		sanguis::weapon_type
+		sanguis::primary_weapon_type
 	)
 	override;
 

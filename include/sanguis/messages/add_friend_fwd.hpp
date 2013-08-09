@@ -4,8 +4,8 @@
 #include <sanguis/friend_type_fwd.hpp>
 #include <sanguis/messages/add_with_health_fwd.hpp>
 #include <sanguis/messages/bind_entity_message_fwd.hpp>
-#include <sanguis/messages/enum_fwd.hpp>
 #include <sanguis/messages/make_class_fwd.hpp>
+#include <sanguis/messages/adapted_types/enum_fwd.hpp>
 #include <sanguis/messages/roles/friend.hpp>
 #include <sanguis/messages/types/message.hpp>
 #include <majutsu/composite_fwd.hpp>
@@ -29,7 +29,7 @@ sanguis::messages::make_class<
 			>,
 			sanguis::messages::add_with_health,
 			majutsu::role<
-				sanguis::messages::enum_<
+				sanguis::messages::adapted_types::enum_<
 					sanguis::friend_type
 				>,
 				sanguis::messages::roles::friend_

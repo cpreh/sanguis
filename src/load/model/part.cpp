@@ -1,7 +1,8 @@
 #include <sanguis/exception.hpp>
-#include <sanguis/optional_weapon_type.hpp>
-#include <sanguis/weapon_type.hpp>
+#include <sanguis/optional_primary_weapon_type.hpp>
+#include <sanguis/primary_weapon_type.hpp>
 #include <sanguis/load/log.hpp>
+#include <sanguis/load/primary_weapon_name.hpp>
 #include <sanguis/load/model/find_texture.hpp>
 #include <sanguis/load/model/global_parameters.hpp>
 #include <sanguis/load/model/optional_texture_identifier.hpp>
@@ -18,6 +19,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/algorithm/array_fold.hpp>
 #include <fcppt/algorithm/find_exn.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/log/headers.hpp>
@@ -38,22 +40,32 @@ typedef std::array<
 		std::size_t
 	>(
 		fcppt::enum_size<
-			sanguis::weapon_type
+			sanguis::primary_weapon_type
 		>::value
 	)
 > weapon_type_array;
 
-weapon_type_array const weapon_types = {
-{
-	FCPPT_TEXT("melee"),
-	FCPPT_TEXT("pistol"),
-	FCPPT_TEXT("dual_pistols"),
-	FCPPT_TEXT("shotgun"),
-	FCPPT_TEXT("rocket_launcher"),
-	FCPPT_TEXT("grenade")
-} };
+weapon_type_array const weapon_types(
+	fcppt::algorithm::array_fold<
+		weapon_type_array
+	>(
+		[](
+			std::size_t const _index
+		)
+		{
+			return
+				sanguis::load::primary_weapon_name(
+					static_cast<
+						sanguis::primary_weapon_type
+					>(
+						_index
+					)
+				);
+		}
+	)
+);
 
-sanguis::optional_weapon_type
+sanguis::optional_primary_weapon_type
 find_weapon_type(
 	fcppt::string const &_str
 )
@@ -63,11 +75,11 @@ find_weapon_type(
 		==
 		FCPPT_TEXT("none")
 		?
-			sanguis::optional_weapon_type()
+			sanguis::optional_primary_weapon_type()
 		:
-			sanguis::optional_weapon_type(
+			sanguis::optional_primary_weapon_type(
 				static_cast<
-					sanguis::weapon_type
+					sanguis::primary_weapon_type
 				>(
 					std::distance(
 						weapon_types.begin(),
@@ -86,7 +98,7 @@ find_weapon_type(
 
 sanguis::load::model::weapon_category const &
 sanguis::load::model::part::operator[](
-	sanguis::optional_weapon_type const _type
+	sanguis::optional_primary_weapon_type const _type
 ) const
 {
 	category_map::const_iterator const it(
@@ -109,7 +121,7 @@ sanguis::load::model::part::operator[](
 
 	return
 		(*this)[
-			sanguis::optional_weapon_type()
+			sanguis::optional_primary_weapon_type()
 		];
 }
 

@@ -24,6 +24,7 @@
 #include <sanguis/messages/level_up.hpp>
 #include <sanguis/messages/pause.hpp>
 #include <sanguis/messages/unpause.hpp>
+#include <sanguis/messages/adapted_types/string.hpp>
 #include <sanguis/messages/call/object.hpp>
 #include <sanguis/load/context.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
@@ -209,7 +210,7 @@ sanguis::client::states::running::operator()(
 		sge::font::from_fcppt_string(
 			sge::charconv::utf8_string_to_fcppt(
 				_message.get<
-					sanguis::messages::string
+					sanguis::messages::adapted_types::string
 				>()
 			)
 		)
