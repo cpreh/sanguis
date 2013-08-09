@@ -1,4 +1,5 @@
 #include <sanguis/cheat_type.hpp>
+#include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/timer.hpp>
 #include <sanguis/client/send_callback.hpp>
 #include <sanguis/client/control/action_handler.hpp>
@@ -128,7 +129,18 @@ sanguis::client::control::action_handler::handle_binary_action(
 	{
 	case sanguis::client::control::actions::binary_type::shoot_primary:
 		this->handle_shooting(
-			_action.value()
+			_action.value(),
+			sanguis::is_primary_weapon(
+				true
+			)
+		);
+		return;
+	case sanguis::client::control::actions::binary_type::shoot_secondary:
+		this->handle_shooting(
+			_action.value(),
+			sanguis::is_primary_weapon(
+				false
+			)
 		);
 		return;
 	}
@@ -247,7 +259,8 @@ sanguis::client::control::action_handler::update_direction(
 
 void
 sanguis::client::control::action_handler::handle_shooting(
-	bool const _value
+	bool const _value,
+	sanguis::is_primary_weapon const _is_primary
 )
 {
 	if(
@@ -255,13 +268,17 @@ sanguis::client::control::action_handler::handle_shooting(
 	)
 		send_(
 			*sanguis::messages::create(
-				sanguis::messages::player_start_shooting()
+				sanguis::messages::player_start_shooting(
+					_is_primary
+				)
 			)
 		);
 	else
 		send_(
 			*sanguis::messages::create(
-				sanguis::messages::player_stop_shooting()
+				sanguis::messages::player_stop_shooting(
+					_is_primary
+				)
 			)
 		);
 }

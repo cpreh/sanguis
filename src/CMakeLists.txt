@@ -398,6 +398,7 @@ SET(
 	include/sanguis/duration_second.hpp
 	include/sanguis/entity_id.hpp
 	include/sanguis/entity_id_fwd.hpp
+	include/sanguis/entity_id_type.hpp
 	include/sanguis/exception.hpp
 	include/sanguis/friend_type.hpp
 	include/sanguis/friend_type_fwd.hpp
@@ -407,6 +408,8 @@ SET(
 	include/sanguis/io_service_fwd.hpp
 	include/sanguis/io_service_impl.hpp
 	include/sanguis/io_service_impl_fwd.hpp
+	include/sanguis/is_primary_weapon.hpp
+	include/sanguis/is_primary_weapon_fwd.hpp
 	include/sanguis/load/aoe_projectile_name.hpp
 	include/sanguis/load/context.hpp
 	include/sanguis/load/context_fwd.hpp
@@ -487,12 +490,16 @@ SET(
 	include/sanguis/main_object_scoped_ptr.hpp
 	include/sanguis/main_object_unique_ptr.hpp
 	include/sanguis/media_path.hpp
+	include/sanguis/messages/adapted_types/bool.hpp
+	include/sanguis/messages/adapted_types/bool_fwd.hpp
 	include/sanguis/messages/adapted_types/char_type.hpp
 	include/sanguis/messages/adapted_types/char_type_fwd.hpp
 	include/sanguis/messages/adapted_types/entity_id.hpp
 	include/sanguis/messages/adapted_types/entity_id_fwd.hpp
 	include/sanguis/messages/adapted_types/enum.hpp
 	include/sanguis/messages/adapted_types/enum_fwd.hpp
+	include/sanguis/messages/adapted_types/is_primary_weapon.hpp
+	include/sanguis/messages/adapted_types/is_primary_weapon_fwd.hpp
 	include/sanguis/messages/adapted_types/level.hpp
 	include/sanguis/messages/adapted_types/level_fwd.hpp
 	include/sanguis/messages/adapted_types/primary_weapon_type.hpp

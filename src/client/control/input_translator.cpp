@@ -4,6 +4,7 @@
 #include <sanguis/client/control/key_scale.hpp>
 #include <sanguis/client/control/actions/any.hpp>
 #include <sanguis/client/control/actions/binary.hpp>
+#include <sanguis/client/control/actions/binary_type.hpp>
 #include <sanguis/client/control/actions/callback.hpp>
 #include <sanguis/client/control/actions/cursor.hpp>
 #include <sanguis/client/control/actions/nullary.hpp>
@@ -99,6 +100,12 @@ sanguis::client::control::input_translator::key_callback(
 			_event
 		);
 		break;
+	case sge::input::keyboard::key_code::c:
+		this->nullary_event(
+			_event.pressed(),
+			sanguis::client::control::actions::nullary_type::drop_weapon
+		);
+		break;
 	case sge::input::keyboard::key_code::f1:
 		this->nullary_event(
 			_event.pressed(),
@@ -152,17 +159,25 @@ sanguis::client::control::input_translator::button_callback(
 	sge::input::cursor::button_event const &_event
 )
 {
-	if(
-		_event.button_code() == sge::input::cursor::button_code::left
+	switch(
+		_event.button_code()
 	)
-		callback_(
-			sanguis::client::control::actions::any(
-				sanguis::client::control::actions::binary(
-					sanguis::client::control::actions::binary_type::shoot_primary,
-					_event.pressed()
-				)
-			)
+	{
+	case sge::input::cursor::button_code::left:
+		this->binary_event(
+			_event.pressed(),
+			sanguis::client::control::actions::binary_type::shoot_primary
 		);
+		break;
+	case sge::input::cursor::button_code::right:
+		this->binary_event(
+			_event.pressed(),
+			sanguis::client::control::actions::binary_type::shoot_secondary
+		);
+		break;
+	default:
+		break;
+	}
 }
 
 void
@@ -200,6 +215,22 @@ sanguis::client::control::input_translator::nullary_event(
 		sanguis::client::control::actions::any(
 			sanguis::client::control::actions::nullary(
 				_action
+			)
+		)
+	);
+}
+
+void
+sanguis::client::control::input_translator::binary_event(
+	bool const _pressed,
+	sanguis::client::control::actions::binary_type const _action
+)
+{
+	callback_(
+		sanguis::client::control::actions::any(
+			sanguis::client::control::actions::binary(
+				_action,
+				_pressed
 			)
 		)
 	);

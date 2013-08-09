@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_CONTROL_ACTION_HANDLER_HPP_INCLUDED
 
 #include <sanguis/cheat_type_fwd.hpp>
+#include <sanguis/is_primary_weapon_fwd.hpp>
 #include <sanguis/timer.hpp>
 #include <sanguis/client/send_callback.hpp>
 #include <sanguis/client/control/action_handler_fwd.hpp>
@@ -77,12 +78,8 @@ private:
 
 	void
 	handle_shooting(
-		bool
-	);
-
-	void
-	handle_switch_weapon(
-		bool forward
+		bool,
+		sanguis::is_primary_weapon
 	);
 
 	void

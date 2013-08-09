@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_CONTROL_INPUT_TRANSLATOR_HPP_INCLUDED
 
 #include <sanguis/client/control/input_translator_fwd.hpp>
+#include <sanguis/client/control/actions/binary_type_fwd.hpp>
 #include <sanguis/client/control/actions/callback.hpp>
 #include <sanguis/client/control/actions/nullary_type_fwd.hpp>
 #include <sanguis/client/cursor/object_fwd.hpp>
@@ -59,6 +60,12 @@ private:
 	nullary_event(
 		bool pressed,
 		sanguis::client::control::actions::nullary_type
+	);
+
+	void
+	binary_event(
+		bool pressed,
+		sanguis::client::control::actions::binary_type
 	);
 
 	sanguis::client::control::actions::callback const callback_;

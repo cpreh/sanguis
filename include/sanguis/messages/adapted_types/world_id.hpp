@@ -3,7 +3,8 @@
 
 #include <sanguis/world_id.hpp>
 #include <sanguis/messages/adapted_types/world_id_fwd.hpp>
-#include <alda/bindings/fundamental_strong.hpp>
+#include <alda/bindings/strong_typedef.hpp>
+#include <alda/bindings/unsigned.hpp>
 
 
 #endif
