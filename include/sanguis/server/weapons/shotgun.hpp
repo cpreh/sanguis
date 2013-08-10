@@ -6,9 +6,11 @@
 #include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
+#include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/delayed_attack_fwd.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
+#include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -45,11 +47,13 @@ public:
 		sanguis::random_generator &,
 		sanguis::weapon_type,
 		sanguis::server::weapons::base_cooldown,
+		sanguis::server::weapons::cast_point,
 		sanguis::server::weapons::shotgun::spread_radius,
 		sanguis::server::weapons::shotgun::shells,
 		sanguis::server::weapons::damage,
 		sanguis::server::weapons::magazine_size,
-		sanguis::server::weapons::reload_time
+		sanguis::server::weapons::reload_time,
+		sanguis::server::weapons::range
 	);
 
 	~shotgun();

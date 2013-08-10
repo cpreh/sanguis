@@ -5,6 +5,7 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/weapons/factory/parameters_fwd.hpp>
+#include <fcppt/nonassignable.hpp>
 
 
 namespace sanguis

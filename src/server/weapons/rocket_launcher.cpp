@@ -1,5 +1,4 @@
 #include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/duration_second.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/radius.hpp>
@@ -25,26 +24,22 @@ sanguis::server::weapons::rocket_launcher::rocket_launcher(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::weapon_type const _type,
 	sanguis::server::weapons::base_cooldown const _base_cooldown,
+	sanguis::server::weapons::cast_point const _cast_point,
 	sanguis::server::weapons::damage const _damage,
 	sanguis::server::weapons::aoe const _aoe,
 	sanguis::server::weapons::magazine_size const _magazine_size,
-	sanguis::server::weapons::reload_time const _reload_time
+	sanguis::server::weapons::reload_time const _reload_time,
+	sanguis::server::weapons::range const _range
 )
 :
 	sanguis::server::weapons::weapon(
 		_diff_clock,
 		_type,
-		sanguis::server::weapons::range(
-			20.f
-		), // FIXME
+		_range,
 		_magazine_size,
 		sanguis::server::weapons::unlimited_magazine_count,
 		_base_cooldown,
-		sanguis::server::weapons::cast_point(
-			sanguis::duration_second(
-				0.5f
-			)
-		), // FIXME
+		_cast_point,
 		_reload_time
 	),
 	damage_(

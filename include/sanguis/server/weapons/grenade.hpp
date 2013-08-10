@@ -2,12 +2,12 @@
 #define SANGUIS_SERVER_WEAPONS_GRENADE_HPP_INCLUDED
 
 #include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/server/weapons/aoe.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/delayed_attack_fwd.hpp>
+#include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -30,12 +30,12 @@ class grenade
 public:
 	grenade(
 		sanguis::diff_clock const &,
-		sanguis::weapon_type,
 		sanguis::server::weapons::base_cooldown,
 		sanguis::server::weapons::damage,
 		sanguis::server::weapons::aoe,
 		sanguis::server::weapons::cast_point,
-		sanguis::server::weapons::reload_time
+		sanguis::server::weapons::reload_time,
+		sanguis::server::weapons::range
 	);
 
 	~grenade();

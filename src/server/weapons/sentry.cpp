@@ -1,5 +1,6 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/friend_type.hpp>
+#include <sanguis/secondary_weapon_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/center.hpp>
@@ -28,19 +29,19 @@
 sanguis::server::weapons::sentry::sentry(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
-	sanguis::weapon_type const _type,
 	sanguis::server::weapons::base_cooldown const _base_cooldown,
 	sanguis::server::weapons::cast_point const _cast_point,
 	sanguis::server::weapons::reload_time const _reload_time,
+	sanguis::server::weapons::range const _range,
 	sanguis::server::weapons::create_function const &_sentry_weapon
 )
 :
 	sanguis::server::weapons::weapon(
 		_diff_clock,
-		_type,
-		sanguis::server::weapons::range(
-			20.f
-		), // FIXME
+		sanguis::weapon_type(
+			sanguis::secondary_weapon_type::sentry
+		),
+		_range,
 		sanguis::server::weapons::magazine_size(
 			1U
 		),

@@ -1086,8 +1086,17 @@ SET(
 	include/sanguis/server/weapons/events/shoot_fwd.hpp
 	include/sanguis/server/weapons/events/stop.hpp
 	include/sanguis/server/weapons/events/stop_fwd.hpp
+	include/sanguis/server/weapons/factory/dual_pistols.hpp
+	include/sanguis/server/weapons/factory/grenade.hpp
 	include/sanguis/server/weapons/factory/parameters.hpp
 	include/sanguis/server/weapons/factory/parameters_fwd.hpp
+	include/sanguis/server/weapons/factory/pistol.hpp
+	include/sanguis/server/weapons/factory/primary.hpp
+	include/sanguis/server/weapons/factory/rocket_launcher.hpp
+	include/sanguis/server/weapons/factory/secondary.hpp
+	include/sanguis/server/weapons/factory/sentry.hpp
+	include/sanguis/server/weapons/factory/shotgun.hpp
+	include/sanguis/server/weapons/factory/visitor.hpp
 	include/sanguis/server/weapons/grenade.hpp
 	include/sanguis/server/weapons/ias.hpp
 	include/sanguis/server/weapons/irs.hpp
@@ -1598,7 +1607,16 @@ SET(
 	src/server/weapons/events/poll.cpp
 	src/server/weapons/events/shoot.cpp
 	src/server/weapons/events/stop.cpp
+	src/server/weapons/factory/dual_pistols.cpp
+	src/server/weapons/factory/grenade.cpp
 	src/server/weapons/factory/parameters.cpp
+	src/server/weapons/factory/pistol.cpp
+	src/server/weapons/factory/primary.cpp
+	src/server/weapons/factory/rocket_launcher.cpp
+	src/server/weapons/factory/secondary.cpp
+	src/server/weapons/factory/sentry.cpp
+	src/server/weapons/factory/shotgun.cpp
+	src/server/weapons/factory/visitor.cpp
 	src/server/weapons/grenade.cpp
 	src/server/weapons/log.cpp
 	src/server/weapons/log_location.cpp

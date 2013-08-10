@@ -49,7 +49,6 @@ sanguis::server::pickup_spawner::pickup_spawner(
 		std::make_pair(
 			sanguis::server::pickup_probability(
 				4.f
-				//400.f
 			),
 			sanguis::server::pickup_spawner::spawn_function(
 				std::bind(
