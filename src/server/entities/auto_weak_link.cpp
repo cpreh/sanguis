@@ -5,9 +5,7 @@
 
 sanguis::server::entities::auto_weak_link::auto_weak_link()
 :
-	ref_(
-		nullptr
-	)
+	ref_()
 {
 }
 
@@ -16,7 +14,7 @@ sanguis::server::entities::auto_weak_link::auto_weak_link(
 )
 :
 	ref_(
-		&_ref
+		_ref
 	)
 {
 	this->add_me();
@@ -61,7 +59,8 @@ sanguis::server::entities::auto_weak_link::operator=(
 	)
 		this->add_me();
 
-	return *this;
+	return
+		*this;
 }
 
 void
@@ -69,30 +68,37 @@ sanguis::server::entities::auto_weak_link::unlink()
 {
 	auto_weak_hook::unlink();
 
-	ref_ = 0;
+	ref_ =
+		sanguis::server::entities::auto_weak_link::optional_with_links_ref();
 }
 
 sanguis::server::entities::with_links &
 sanguis::server::entities::auto_weak_link::operator*() const
 {
-	return this->checked_ref();
+	return
+		this->checked_ref();
 }
 
-sanguis::server::entities::with_links *
+sanguis::server::entities::auto_weak_link::optional_with_links_ref const
 sanguis::server::entities::auto_weak_link::operator->() const
 {
-	return this->get();
+	return
+		this->get();
 }
 
-sanguis::server::entities::with_links *
+sanguis::server::entities::auto_weak_link::optional_with_links_ref const
 sanguis::server::entities::auto_weak_link::get() const
 {
-	return &this->checked_ref();
+	return
+		sanguis::server::entities::auto_weak_link::optional_with_links_ref(
+			this->checked_ref()
+		);
 }
 
 sanguis::server::entities::auto_weak_link::operator bool() const
 {
-	return this->is_linked();
+	return
+		this->is_linked();
 }
 
 sanguis::server::entities::with_links &

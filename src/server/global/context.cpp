@@ -337,7 +337,7 @@ sanguis::server::global::context::player_drop_or_pickup_weapon(
 {
 	players_[
 		_player_id
-	]->drop_weapon(
+	]->drop_or_pickup_weapon(
 		_is_primary
 	);
 }

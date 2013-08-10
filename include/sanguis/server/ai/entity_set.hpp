@@ -14,6 +14,7 @@ namespace server
 namespace ai
 {
 
+// TODO: Use optionals here!
 typedef
 std::unordered_set<
 	sanguis::server::entities::with_health *

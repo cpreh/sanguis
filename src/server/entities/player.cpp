@@ -7,6 +7,7 @@
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/server/center.hpp>
+#include <sanguis/server/closest_entity.hpp>
 #include <sanguis/server/dim.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/enter_sight_function.hpp>
@@ -19,6 +20,9 @@
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/string.hpp>
 #include <sanguis/server/team.hpp>
+#include <sanguis/server/auras/weapon_pickup_add_candidate_callback.hpp>
+#include <sanguis/server/auras/weapon_pickup_candidates.hpp>
+#include <sanguis/server/auras/weapon_pickup_remove_candidate_callback.hpp>
 #include <sanguis/server/auras/update_sight.hpp>
 #include <sanguis/server/collision/group.hpp>
 #include <sanguis/server/collision/group_vector.hpp>
@@ -26,6 +30,7 @@
 #include <sanguis/server/entities/body_velocity_combiner.hpp>
 #include <sanguis/server/entities/circle_from_dim.hpp>
 #include <sanguis/server/entities/default_solid.hpp>
+#include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
@@ -38,6 +43,7 @@
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
+#include <sanguis/server/entities/pickups/weapon.hpp>
 #include <sanguis/server/entities/property/initial.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/environment/object.hpp>
@@ -51,6 +57,7 @@
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/assert/error.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/length_square.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -128,7 +135,8 @@ sanguis::server::entities::player::player(
 	),
 	perk_tree_(
 		sanguis::server::perks::tree::create()
-	)
+	),
+	weapon_pickups_()
 {
 	this->add_aura(
 		fcppt::make_unique_ptr<
@@ -147,6 +155,28 @@ sanguis::server::entities::player::player(
 			sanguis::server::leave_sight_function(
 				std::bind(
 					&sanguis::server::entities::player::remove_sight_range,
+					this,
+					std::placeholders::_1
+				)
+			)
+		)
+	);
+
+	this->add_aura(
+		fcppt::make_unique_ptr<
+			sanguis::server::auras::weapon_pickup_candidates
+		>(
+			this->radius(),
+			sanguis::server::auras::weapon_pickup_add_candidate_callback(
+				std::bind(
+					&sanguis::server::entities::player::weapon_pickup_add_candidate,
+					this,
+					std::placeholders::_1
+				)
+			),
+			sanguis::server::auras::weapon_pickup_remove_candidate_callback(
+				std::bind(
+					&sanguis::server::entities::player::weapon_pickup_remove_candidate,
 					this,
 					std::placeholders::_1
 				)
@@ -244,6 +274,50 @@ sanguis::server::entities::player::add_perk(
 }
 
 void
+sanguis::server::entities::player::drop_or_pickup_weapon(
+	sanguis::is_primary_weapon const _is_primary
+)
+{
+	sanguis::server::weapons::unique_ptr dropped(
+		this->drop_weapon(
+			_is_primary
+		)
+	);
+
+	sanguis::server::entities::pickups::weapon *const closest_pickup(
+		sanguis::server::closest_entity(
+			*this,
+			weapon_pickups_
+		)
+	);
+
+	if(
+		closest_pickup
+	)
+		this->pickup_weapon(
+			closest_pickup->obtain()
+		);
+
+	if(
+		dropped
+	)
+		this->environment().insert(
+			fcppt::make_unique_ptr<
+				sanguis::server::entities::pickups::weapon
+			>(
+				this->environment().load_context(),
+				this->team(),
+				std::move(
+					dropped
+				)
+			),
+			sanguis::server::entities::insert_parameters_center(
+				this->center()
+			)
+		);
+}
+
+void
 sanguis::server::entities::player::center_from_client(
 	sanguis::server::center const &_center
 )
@@ -310,6 +384,33 @@ sanguis::server::entities::player::remove_sight_range(
 	this->environment().remove_sight_range(
 		this->player_id(),
 		_entity_id
+	);
+}
+
+void
+sanguis::server::entities::player::weapon_pickup_add_candidate(
+	sanguis::server::entities::pickups::weapon &_entity
+)
+{
+	FCPPT_ASSERT_ERROR(
+		weapon_pickups_.insert(
+			&_entity
+		)
+		.second
+	);
+}
+
+void
+sanguis::server::entities::player::weapon_pickup_remove_candidate(
+	sanguis::server::entities::pickups::weapon &_entity
+)
+{
+	FCPPT_ASSERT_ERROR(
+		weapon_pickups_.erase(
+			&_entity
+		)
+		==
+		1u
 	);
 }
 

@@ -1,4 +1,3 @@
-#include <sanguis/exception.hpp>
 #include <sanguis/pickup_type.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
@@ -11,7 +10,6 @@
 #include <sanguis/load/pickup_name.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/string.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
 
@@ -67,10 +65,6 @@ get_texture(
 			sanguis::load::pickup_name(
 				_ptype
 			);
-	case sanguis::pickup_type::weapon:
-		throw sanguis::exception(
-			FCPPT_TEXT("draw::factory::pickup: weapon pickup cannot be created using pickup!")
-		);
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;

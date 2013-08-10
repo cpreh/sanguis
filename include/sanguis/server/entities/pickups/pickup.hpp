@@ -13,7 +13,6 @@
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
-#include <sanguis/server/entities/pickups/optional_dim_fwd.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -51,8 +50,7 @@ protected:
 		sanguis::diff_clock const &,
 		sanguis::pickup_type,
 		sanguis::server::environment::load_context &,
-		sanguis::server::team,
-		sanguis::server::entities::pickups::optional_dim const &
+		sanguis::server::team
 	);
 private:
 	bool

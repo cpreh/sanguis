@@ -15,7 +15,6 @@
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/pickups/monster.hpp>
-#include <sanguis/server/entities/pickups/optional_dim.hpp>
 #include <sanguis/server/entities/pickups/pickup.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/environment/object.hpp>
@@ -36,10 +35,9 @@ sanguis::server::entities::pickups::monster::monster(
 :
 	sanguis::server::entities::pickups::pickup(
 		_diff_clock,
-		pickup_type::monster,
+		sanguis::pickup_type::monster,
 		_load_context,
-		_team,
-		sanguis::server::entities::pickups::optional_dim()
+		_team
 	),
 	diff_clock_(
 		_diff_clock

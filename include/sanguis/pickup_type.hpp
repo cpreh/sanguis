@@ -11,8 +11,7 @@ enum class pickup_type
 {
 	health,
 	monster,
-	weapon,
-	fcppt_maximum = weapon
+	fcppt_maximum = monster
 };
 
 }

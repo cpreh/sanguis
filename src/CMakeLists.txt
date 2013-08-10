@@ -759,6 +759,10 @@ SET(
 	include/sanguis/server/auras/influence_fwd.hpp
 	include/sanguis/server/auras/unique_ptr.hpp
 	include/sanguis/server/auras/update_sight.hpp
+	include/sanguis/server/auras/weapon_pickup_add_candidate_callback.hpp
+	include/sanguis/server/auras/weapon_pickup_candidate_callback.hpp
+	include/sanguis/server/auras/weapon_pickup_candidates.hpp
+	include/sanguis/server/auras/weapon_pickup_remove_candidate_callback.hpp
 	include/sanguis/server/buffs/base_hook.hpp
 	include/sanguis/server/buffs/buff.hpp
 	include/sanguis/server/buffs/buff_fwd.hpp
@@ -772,6 +776,7 @@ SET(
 	include/sanguis/server/center_fwd.hpp
 	include/sanguis/server/cheat.hpp
 	include/sanguis/server/circle.hpp
+	include/sanguis/server/closest_entity.hpp
 	include/sanguis/server/collision/body.hpp
 	include/sanguis/server/collision/body_base.hpp
 	include/sanguis/server/collision/body_base_fwd.hpp
@@ -889,10 +894,9 @@ SET(
 	include/sanguis/server/entities/optional_base_ref_fwd.hpp
 	include/sanguis/server/entities/pickups/health.hpp
 	include/sanguis/server/entities/pickups/monster.hpp
-	include/sanguis/server/entities/pickups/optional_dim.hpp
-	include/sanguis/server/entities/pickups/optional_dim_fwd.hpp
 	include/sanguis/server/entities/pickups/pickup.hpp
 	include/sanguis/server/entities/pickups/weapon.hpp
+	include/sanguis/server/entities/pickups/weapon_fwd.hpp
 	include/sanguis/server/entities/player.hpp
 	include/sanguis/server/entities/player_fwd.hpp
 	include/sanguis/server/entities/player_map.hpp
@@ -1430,6 +1434,7 @@ SET(
 	src/server/auras/burn.cpp
 	src/server/auras/collision_groups.cpp
 	src/server/auras/update_sight.cpp
+	src/server/auras/weapon_pickup_candidates.cpp
 	src/server/buffs/buff.cpp
 	src/server/buffs/burn.cpp
 	src/server/buffs/provider.cpp

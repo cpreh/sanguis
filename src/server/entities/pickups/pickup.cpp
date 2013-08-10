@@ -6,6 +6,7 @@
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/server/center.hpp>
+#include <sanguis/server/dim.hpp>
 #include <sanguis/server/model_name.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
@@ -18,7 +19,6 @@
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
-#include <sanguis/server/entities/pickups/optional_dim.hpp>
 #include <sanguis/server/entities/pickups/pickup.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
@@ -42,24 +42,19 @@ sanguis::server::entities::pickups::pickup::pickup(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::pickup_type const _ptype,
 	sanguis::server::environment::load_context &_load_context,
-	sanguis::server::team const _team,
-	sanguis::server::entities::pickups::optional_dim const &_dim
+	sanguis::server::team const _team
 )
 :
 	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::with_body(
 		sanguis::server::entities::circle_from_dim(
-			_dim
-			?
-				*_dim
-			:
-				_load_context.entity_dim(
-					sanguis::server::model_name(
-						sanguis::load::pickup_name(
-							_ptype
-						)
+			_load_context.entity_dim(
+				sanguis::server::model_name(
+					sanguis::load::pickup_name(
+						_ptype
 					)
-				),
+				)
+			),
 			sanguis::server::entities::nonsolid()
 		)
 	),
@@ -141,7 +136,7 @@ sanguis::server::entities::pickups::pickup::collision_groups() const
 {
 	return
 		sanguis::server::collision::group_vector{
-			sanguis::server::collision::group::pickup
+			sanguis::server::collision::group::weapon_pickup
 		};
 }
 

@@ -14,13 +14,14 @@ namespace collision
 enum class group
 {
 	enemy,
-	obstacle,
 	pickup,
 	projectile_enemy,
 	projectile_player,
 	player,
 	sight_range,
-	fcppt_maximum = sight_range
+	weapon_pickup,
+	weapon_pickup_sight,
+	fcppt_maximum = weapon_pickup_sight
 };
 
 }

@@ -5,7 +5,6 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_health.hpp>
 #include <sanguis/server/entities/pickups/health.hpp>
-#include <sanguis/server/entities/pickups/optional_dim.hpp>
 #include <sanguis/server/entities/pickups/pickup.hpp>
 #include <sanguis/server/entities/property/add.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
@@ -22,8 +21,7 @@ sanguis::server::entities::pickups::health::health(
 		_diff_clock,
 		sanguis::pickup_type::health,
 		_load_context,
-		_team,
-		sanguis::server::entities::pickups::optional_dim()
+		_team
 	),
 	amount_(
 		_amount

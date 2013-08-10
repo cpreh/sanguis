@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_PLAYER_HPP_INCLUDED
 
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/is_primary_weapon_fwd.hpp>
 #include <sanguis/perk_type_fwd.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/server/center_fwd.hpp>
@@ -25,12 +26,16 @@
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
+#include <sanguis/server/entities/pickups/weapon_fwd.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/perks/unique_ptr.hpp>
 #include <sanguis/server/perks/tree/object_fwd.hpp>
 #include <sanguis/server/weapons/weapon_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <set>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -90,6 +95,11 @@ public:
 	);
 
 	void
+	drop_or_pickup_weapon(
+		sanguis::is_primary_weapon
+	);
+
+	void
 	center_from_client(
 		sanguis::server::center const &
 	);
@@ -116,6 +126,16 @@ private:
 	void
 	remove_sight_range(
 		sanguis::entity_id
+	);
+
+	void
+	weapon_pickup_add_candidate(
+		sanguis::server::entities::pickups::weapon &
+	);
+
+	void
+	weapon_pickup_remove_candidate(
+		sanguis::server::entities::pickups::weapon &
 	);
 
 	void
@@ -159,6 +179,15 @@ private:
 	> perk_tree_scoped_ptr;
 
 	perk_tree_scoped_ptr perk_tree_;
+
+	// TODO: Use optionals!
+	typedef
+	std::set<
+		sanguis::server::entities::pickups::weapon *
+	>
+	weapon_pickup_set;
+
+	weapon_pickup_set weapon_pickups_;
 };
 
 }

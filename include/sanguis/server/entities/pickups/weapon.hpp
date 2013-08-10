@@ -1,12 +1,15 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PICKUPS_WEAPON_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PICKUPS_WEAPON_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/server/player_id.hpp>
-#include <sanguis/server/team_fwd.hpp>
-#include <sanguis/server/entities/base_fwd.hpp>
-#include <sanguis/server/entities/pickups/pickup.hpp>
+#include <sanguis/server/team.hpp>
+#include <sanguis/server/collision/group_vector.hpp>
+#include <sanguis/server/entities/with_body.hpp>
+#include <sanguis/server/entities/with_id.hpp>
+#include <sanguis/server/entities/with_links.hpp>
+#include <sanguis/server/entities/ifaces/with_team.hpp>
+#include <sanguis/server/entities/pickups/weapon_fwd.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -21,34 +24,49 @@ namespace entities
 namespace pickups
 {
 
+// TODO: This is a new class of pickups that aren't picked up automatically.
+// Maybe we should create a new base class for this!
 class weapon
 :
-	public sanguis::server::entities::pickups::pickup
+	public virtual sanguis::server::entities::ifaces::with_team,
+	public sanguis::server::entities::with_body,
+	public sanguis::server::entities::with_id,
+	public sanguis::server::entities::with_links
 {
 	FCPPT_NONCOPYABLE(
 		weapon
 	);
 public:
 	weapon(
-		sanguis::diff_clock const &,
 		sanguis::server::environment::load_context &,
 		sanguis::server::team,
 		sanguis::server::weapons::unique_ptr &&
 	);
 
 	~weapon();
+
+	sanguis::server::weapons::unique_ptr
+	obtain();
 private:
+	bool
+	dead() const
+	override;
+
+	sanguis::server::team
+	team() const
+	override;
+
+	sanguis::server::collision::group_vector
+	collision_groups() const
+	override;
+
 	sanguis::messages::unique_ptr
 	add_message(
 		sanguis::server::player_id
 	) const
 	override;
 
-	void
-	do_pickup(
-		sanguis::server::entities::base &receiver
-	)
-	override;
+	sanguis::server::team const team_;
 
 	sanguis::server::weapons::unique_ptr weapon_;
 };

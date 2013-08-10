@@ -73,20 +73,12 @@ sanguis::server::collision::global_groups::global_groups(
 			sanguis::server::collision::group::projectile_player
 		),
 		std::make_pair(
-			sanguis::server::collision::group::obstacle,
-			sanguis::server::collision::group::projectile_player
+			sanguis::server::collision::group::sight_range,
+			sanguis::server::collision::group::weapon_pickup
 		),
 		std::make_pair(
-			sanguis::server::collision::group::obstacle,
-			sanguis::server::collision::group::player
-		),
-		std::make_pair(
-			sanguis::server::collision::group::obstacle,
-			sanguis::server::collision::group::projectile_enemy
-		),
-		std::make_pair(
-			sanguis::server::collision::group::obstacle,
-			sanguis::server::collision::group::enemy
+			sanguis::server::collision::group::weapon_pickup,
+			sanguis::server::collision::group::weapon_pickup_sight
 		)
 	};
 

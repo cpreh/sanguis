@@ -279,7 +279,6 @@ sanguis::server::pickup_spawner::spawn_weapon(
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::pickups::weapon
 		>(
-			diff_clock_,
 			env_.load_context(),
 			sanguis::server::team::players,
 			sanguis::server::weapons::create(

@@ -22,8 +22,6 @@ sanguis::load::pickup_name(
 		return fcppt::string(
 			FCPPT_TEXT("pickups/monster")
 		);
-	case sanguis::pickup_type::weapon:
-		break;
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;
