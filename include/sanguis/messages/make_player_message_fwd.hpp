@@ -1,7 +1,7 @@
 #ifndef SANGUIS_MESSAGES_MAKE_PLAYER_MESSAGE_FWD_HPP_INCLUDED
 #define SANGUIS_MESSAGES_MAKE_PLAYER_MESSAGE_FWD_HPP_INCLUDED
 
-#include <sanguis/messages/add_with_health_fwd.hpp>
+#include <sanguis/messages/add_with_weapon_fwd.hpp>
 #include <sanguis/messages/bind_entity_message_fwd.hpp>
 #include <sanguis/messages/types/message_fwd.hpp>
 #include <majutsu/composite_fwd.hpp>
@@ -25,7 +25,7 @@ majutsu::composite<
 		sanguis::messages::bind_entity_message<
 			Type
 		>,
-		sanguis::messages::add_with_health
+		sanguis::messages::add_with_weapon
 	>
 >;
 

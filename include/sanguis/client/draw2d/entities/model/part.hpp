@@ -5,7 +5,6 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
-#include <sanguis/primary_weapon_type_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sanguis/client/draw2d/sprite/normal/texture_animation.hpp>
@@ -47,7 +46,7 @@ public:
 
 	void
 	weapon(
-		sanguis::primary_weapon_type
+		sanguis::optional_primary_weapon_type
 	);
 
 	void

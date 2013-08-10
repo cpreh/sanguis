@@ -1,5 +1,6 @@
 #include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/time_unit.hpp>
+#include <sanguis/optional_primary_weapon_type.hpp>
 #include <sanguis/primary_weapon_type.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/weapon_type_to_is_primary.hpp>
@@ -69,6 +70,24 @@ sanguis::server::entities::with_weapon::on_update()
 	);
 }
 
+sanguis::optional_primary_weapon_type const
+sanguis::server::entities::with_weapon::primary_weapon_type() const
+{
+	return
+		primary_weapon_
+		?
+			sanguis::optional_primary_weapon_type(
+				fcppt::variant::get<
+					sanguis::primary_weapon_type
+				>(
+					primary_weapon_->type()
+				)
+			)
+		:
+			sanguis::optional_primary_weapon_type()
+		;
+}
+
 void
 sanguis::server::entities::with_weapon::pickup_weapon(
 	sanguis::server::weapons::unique_ptr &&_ptr
@@ -99,19 +118,9 @@ sanguis::server::entities::with_weapon::pickup_weapon(
 		*dest
 	);
 
-	if(
-		this->has_environment()
-		&&
-		is_primary.get()
-	)
-		this->environment().weapon_changed(
-			this->id(),
-			fcppt::variant::get<
-				sanguis::primary_weapon_type
-			>(
-				dest->type()
-			)
-		);
+	this->weapon_changed(
+		is_primary
+	);
 
 	if(
 		_ptr
@@ -124,11 +133,21 @@ sanguis::server::entities::with_weapon::drop_weapon(
 	sanguis::is_primary_weapon const _is_primary
 )
 {
-	return
+	sanguis::server::weapons::unique_ptr result(
 		std::move(
 			this->is_primary_to_weapon_unique_ptr(
 				_is_primary
 			)
+		)
+	);
+
+	this->weapon_changed(
+		_is_primary
+	);
+
+	return
+		std::move(
+			result
 		);
 }
 
@@ -304,6 +323,22 @@ sanguis::server::entities::with_weapon::update_weapon(
 	)
 		_weapon->update(
 			*this
+		);
+}
+
+void
+sanguis::server::entities::with_weapon::weapon_changed(
+	sanguis::is_primary_weapon const _is_primary
+)
+{
+	if(
+		this->has_environment()
+		&&
+		_is_primary.get()
+	)
+		this->environment().weapon_changed(
+			this->id(),
+			this->primary_weapon_type()
 		);
 }
 

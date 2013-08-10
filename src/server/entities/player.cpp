@@ -379,7 +379,8 @@ sanguis::server::entities::player::make_add_message() const
 				this->angle().get(),
 				this->speed().get(),
 				this->current_health().get(),
-				this->max_health().get()
+				this->max_health().get(),
+				this->primary_weapon_type()
 			)
 		);
 }

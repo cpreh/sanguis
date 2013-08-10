@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_WEAPON_HPP_INCLUDED
 
 #include <sanguis/is_primary_weapon_fwd.hpp>
+#include <sanguis/optional_primary_weapon_type_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
@@ -45,6 +46,9 @@ protected:
 	void
 	on_update()
 	override;
+
+	sanguis::optional_primary_weapon_type const
+	primary_weapon_type() const;
 public:
 	bool
 	can_pickup(
@@ -112,6 +116,11 @@ private:
 	void
 	update_weapon(
 		sanguis::server::entities::with_weapon::optional_weapon_ref const &
+	);
+
+	void
+	weapon_changed(
+		sanguis::is_primary_weapon
 	);
 
 	virtual

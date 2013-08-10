@@ -149,6 +149,7 @@ sanguis::server::entities::enemies::enemy::add_message(
 				this->speed().get(),
 				this->current_health().get(),
 				this->max_health().get(),
+				this->primary_weapon_type(),
 				this->etype()
 			)
 		);

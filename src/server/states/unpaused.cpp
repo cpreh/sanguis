@@ -17,7 +17,6 @@
 #include <sanguis/messages/roles/attack_dest.hpp>
 #include <sanguis/messages/roles/center.hpp>
 #include <sanguis/messages/roles/direction.hpp>
-#include <sanguis/messages/roles/weapon.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/machine.hpp>
 #include <sanguis/server/message_functor.hpp>

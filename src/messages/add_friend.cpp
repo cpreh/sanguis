@@ -1,5 +1,6 @@
 #include <sanguis/messages/add_friend.hpp>
 #include <sanguis/messages/instantiate_message.hpp>
+#include <alda/serialization/load/optional.hpp>
 #include <alda/serialization/load/static_size.hpp>
 
 

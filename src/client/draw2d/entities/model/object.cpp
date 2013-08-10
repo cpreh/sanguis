@@ -2,7 +2,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/log_parameters.hpp>
-#include <sanguis/primary_weapon_type.hpp>
+#include <sanguis/optional_primary_weapon_type.hpp>
 #include <sanguis/client/health.hpp>
 #include <sanguis/client/max_health.hpp>
 #include <sanguis/client/draw2d/log_location.hpp>
@@ -347,7 +347,7 @@ sanguis::client::draw2d::entities::model::object::max_health(
 
 void
 sanguis::client::draw2d::entities::model::object::weapon(
-	sanguis::primary_weapon_type const _weapon
+	sanguis::optional_primary_weapon_type const _weapon
 )
 {
 	for(

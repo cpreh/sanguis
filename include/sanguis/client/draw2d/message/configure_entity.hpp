@@ -3,6 +3,7 @@
 
 #include <sanguis/entity_id.hpp>
 #include <sanguis/client/draw2d/message/dispatcher.hpp>
+#include <sanguis/messages/change_weapon.hpp>
 #include <sanguis/messages/health.hpp>
 #include <sanguis/messages/max_health.hpp>
 #include <sanguis/messages/move.hpp>
@@ -12,6 +13,7 @@
 #include <sanguis/messages/roles/center.hpp>
 #include <sanguis/messages/roles/max_health.hpp>
 #include <sanguis/messages/roles/health.hpp>
+#include <sanguis/messages/roles/primary_weapon.hpp>
 #include <sanguis/messages/roles/speed.hpp>
 #include <fcppt/nonassignable.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -61,6 +63,10 @@ class configure_entity
 		boost::mpl::pair<
 			sanguis::messages::roles::speed,
 			sanguis::messages::speed
+		>,
+		boost::mpl::pair<
+			sanguis::messages::roles::primary_weapon,
+			sanguis::messages::change_weapon
 		>
 	> mapping;
 public:

@@ -62,6 +62,7 @@
 #include <sanguis/messages/speed.hpp>
 #include <sanguis/messages/adapted_types/level.hpp>
 #include <sanguis/messages/adapted_types/seed.hpp>
+#include <sanguis/messages/adapted_types/weapon_type.hpp>
 #include <sanguis/messages/adapted_types/world_id.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/aoe.hpp>
@@ -74,9 +75,9 @@
 #include <sanguis/messages/roles/health.hpp>
 #include <sanguis/messages/roles/max_health.hpp>
 #include <sanguis/messages/roles/opening_count.hpp>
+#include <sanguis/messages/roles/primary_weapon.hpp>
 #include <sanguis/messages/roles/projectile.hpp>
 #include <sanguis/messages/roles/speed.hpp>
-#include <sanguis/messages/roles/weapon.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <fcppt/dynamic_cast.hpp>
 #include <fcppt/type_name.hpp>
@@ -232,7 +233,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		sanguis::client::draw2d::factory::weapon_pickup(
 			env_.model_parameters(),
 			_message.get<
-				sanguis::messages::roles::weapon
+				sanguis::messages::adapted_types::weapon_type
 			>()
 		),
 		_message
@@ -254,7 +255,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		)
 	).weapon(
 		_message.get<
-			sanguis::messages::roles::weapon
+			sanguis::messages::roles::primary_weapon
 		>()
 	);
 }

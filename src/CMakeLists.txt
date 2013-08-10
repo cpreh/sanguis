@@ -502,6 +502,8 @@ SET(
 	include/sanguis/messages/adapted_types/is_primary_weapon_fwd.hpp
 	include/sanguis/messages/adapted_types/level.hpp
 	include/sanguis/messages/adapted_types/level_fwd.hpp
+	include/sanguis/messages/adapted_types/optional_primary_weapon_type.hpp
+	include/sanguis/messages/adapted_types/optional_primary_weapon_type_fwd.hpp
 	include/sanguis/messages/adapted_types/primary_weapon_type.hpp
 	include/sanguis/messages/adapted_types/primary_weapon_type_fwd.hpp
 	include/sanguis/messages/adapted_types/secondary_weapon_type.hpp
@@ -546,6 +548,8 @@ SET(
 	include/sanguis/messages/add_with_health_fwd.hpp
 	include/sanguis/messages/add_with_speed.hpp
 	include/sanguis/messages/add_with_speed_fwd.hpp
+	include/sanguis/messages/add_with_weapon.hpp
+	include/sanguis/messages/add_with_weapon_fwd.hpp
 	include/sanguis/messages/available_perks.hpp
 	include/sanguis/messages/available_perks_fwd.hpp
 	include/sanguis/messages/base.hpp
@@ -656,11 +660,11 @@ SET(
 	include/sanguis/messages/roles/perk_label.hpp
 	include/sanguis/messages/roles/perk_parent.hpp
 	include/sanguis/messages/roles/pickup.hpp
+	include/sanguis/messages/roles/primary_weapon.hpp
 	include/sanguis/messages/roles/projectile.hpp
 	include/sanguis/messages/roles/required_perk_parent_level.hpp
 	include/sanguis/messages/roles/required_perk_player_level.hpp
 	include/sanguis/messages/roles/speed.hpp
-	include/sanguis/messages/roles/weapon.hpp
 	include/sanguis/messages/rotate.hpp
 	include/sanguis/messages/rotate_fwd.hpp
 	include/sanguis/messages/serialization/context_fwd.hpp

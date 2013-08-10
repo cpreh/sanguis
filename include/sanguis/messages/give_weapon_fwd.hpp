@@ -4,7 +4,6 @@
 #include <sanguis/messages/bind_entity_message_fwd.hpp>
 #include <sanguis/messages/make_class_fwd.hpp>
 #include <sanguis/messages/adapted_types/weapon_type_fwd.hpp>
-#include <sanguis/messages/roles/weapon.hpp>
 #include <sanguis/messages/types/message.hpp>
 #include <majutsu/composite_fwd.hpp>
 #include <majutsu/role_fwd.hpp>
@@ -26,8 +25,7 @@ sanguis::messages::make_class<
 				sanguis::messages::types::message::give_weapon
 			>,
 			majutsu::role<
-				sanguis::messages::adapted_types::weapon_type,
-				sanguis::messages::roles::weapon
+				sanguis::messages::adapted_types::weapon_type
 			>
 		>
 	>

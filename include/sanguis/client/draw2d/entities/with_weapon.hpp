@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_WEAPON_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_WEAPON_HPP_INCLUDED
 
-#include <sanguis/primary_weapon_type_fwd.hpp>
+#include <sanguis/optional_primary_weapon_type_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -28,7 +28,7 @@ public:
 	virtual
 	void
 	weapon(
-		sanguis::primary_weapon_type
+		sanguis::optional_primary_weapon_type
 	) = 0;
 
 	virtual

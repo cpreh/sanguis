@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_WORLD_ENVIRONMENT_HPP_INCLUDED
 
 #include <sanguis/entity_id.hpp>
-#include <sanguis/primary_weapon_type_fwd.hpp>
+#include <sanguis/optional_primary_weapon_type_fwd.hpp>
 #include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/exp.hpp>
@@ -53,7 +53,7 @@ public:
 	void
 	weapon_changed(
 		sanguis::entity_id,
-		sanguis::primary_weapon_type
+		sanguis::optional_primary_weapon_type
 	);
 
 	void
