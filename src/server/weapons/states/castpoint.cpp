@@ -89,9 +89,16 @@ sanguis::server::weapons::states::castpoint::react(
 
 boost::statechart::result
 sanguis::server::weapons::states::castpoint::react(
-	sanguis::server::weapons::events::stop const &
+	sanguis::server::weapons::events::stop const &_event
 )
 {
+	_event.owner().attacking(
+		false,
+		this->context<
+			sanguis::server::weapons::weapon
+		>().type()
+	);
+
 	return
 		this->transit<
 			sanguis::server::weapons::states::ready

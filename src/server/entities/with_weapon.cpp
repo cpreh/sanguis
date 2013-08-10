@@ -125,7 +125,9 @@ sanguis::server::entities::with_weapon::pickup_weapon(
 	if(
 		_ptr
 	)
-		_ptr->stop();
+		_ptr->stop(
+			*this
+		);
 }
 
 sanguis::server::weapons::unique_ptr
@@ -190,7 +192,9 @@ sanguis::server::entities::with_weapon::use_weapon(
 	if(
 		!_use
 	)
-		weapon->stop();
+		weapon->stop(
+			*this
+		);
 	else if(
 		target_
 	)
@@ -198,34 +202,6 @@ sanguis::server::entities::with_weapon::use_weapon(
 			*this
 		);
 }
-
-/*
-void
-sanguis::server::entities::with_weapon::start_attacking()
-{
-	this->environment().attacking_changed(
-		this->id(),
-		true
-	);
-}
-
-void
-sanguis::server::entities::with_weapon::start_reloading()
-{
-	this->environment().reloading_changed(
-		this->id(),
-		true
-	);
-}
-
-void
-sanguis::server::entities::with_weapon::stop_reloading()
-{
-	this->environment().reloading_changed(
-		this->id(),
-		false
-	);
-}*/
 
 sanguis::server::entities::property::always_max &
 sanguis::server::entities::with_weapon::attack_speed()
@@ -257,15 +233,39 @@ sanguis::server::entities::with_weapon::irs() const
 		);
 }
 
-/*
 void
-sanguis::server::entities::with_weapon::stop_attacking()
+sanguis::server::entities::with_weapon::attacking(
+	bool const _value,
+	sanguis::weapon_type const _type
+)
 {
-	this->environment().attacking_changed(
-		this->id(),
-		false
-	);
-}*/
+	if(
+		sanguis::weapon_type_to_is_primary(
+			_type
+		).get()
+	)
+		this->environment().attacking_changed(
+			this->id(),
+			_value
+		);
+}
+
+void
+sanguis::server::entities::with_weapon::reloading(
+	bool const _value,
+	sanguis::weapon_type const _type
+)
+{
+	if(
+		sanguis::weapon_type_to_is_primary(
+			_type
+		).get()
+	)
+		this->environment().reloading_changed(
+			this->id(),
+			_value
+		);
+}
 
 sanguis::server::entities::with_weapon::optional_weapon_ref const
 sanguis::server::entities::with_weapon::primary_weapon_ref() const

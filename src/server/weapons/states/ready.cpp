@@ -24,26 +24,34 @@ sanguis::server::weapons::states::ready::react(
 	sanguis::server::weapons::events::shoot const &_event
 )
 {
-	sanguis::server::entities::with_weapon const &from(
+	sanguis::server::entities::with_weapon &from(
 		_event.from()
 	);
 
-	return
-		this->context<
+	if(
+		!this->context<
 			sanguis::server::weapons::weapon
 		>().in_range(
 			from,
 			from.target()
 		)
-		?
-			this->transit<
-				sanguis::server::weapons::states::castpoint
-			>(
-				sanguis::server::weapons::states::castpoint_parameters(
-					from.ias()
-				)
+	)
+		return
+			this->discard_event();
+
+	from.attacking(
+		true,
+		this->context<
+			sanguis::server::weapons::weapon
+		>().type()
+	);
+
+	return
+		this->transit<
+			sanguis::server::weapons::states::castpoint
+		>(
+			sanguis::server::weapons::states::castpoint_parameters(
+				from.ias()
 			)
-		:
-			this->discard_event()
-		;
+		);
 }

@@ -63,14 +63,19 @@ sanguis::server::weapons::states::backswing::react(
 		return
 			this->discard_event();
 
+	_event.owner().attacking(
+		false,
+		this->context<
+			sanguis::server::weapons::weapon
+		>().type()
+	);
+
 	if(
 		this->context<
 			sanguis::server::weapons::weapon
 		>().magazine_empty()
 	)
 	{
-		//_event.owner().start_reloading();
-
 		this->context<
 			sanguis::server::weapons::weapon
 		>().magazine_exhausted();
@@ -79,8 +84,17 @@ sanguis::server::weapons::states::backswing::react(
 			cancelled_
 		)
 			this->post_event(
-				sanguis::server::weapons::events::stop()
+				sanguis::server::weapons::events::stop(
+					_event.owner()
+				)
 			);
+
+		_event.owner().reloading(
+			true,
+			this->context<
+				sanguis::server::weapons::weapon
+			>().type()
+		);
 
 		return
 			this->transit<

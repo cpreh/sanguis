@@ -90,6 +90,18 @@ public:
 
 	sanguis::server::weapons::irs const
 	irs() const;
+
+	void
+	attacking(
+		bool,
+		sanguis::weapon_type
+	);
+
+	void
+	reloading(
+		bool,
+		sanguis::weapon_type
+	);
 private:
 	typedef
 	fcppt::optional<

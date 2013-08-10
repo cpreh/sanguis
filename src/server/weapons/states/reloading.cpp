@@ -65,7 +65,12 @@ sanguis::server::weapons::states::reloading::react(
 		sanguis::server::weapons::weapon
 	>().reset_magazine();
 
-//	_event.owner().stop_reloading();
+	_event.owner().reloading(
+		false,
+		this->context<
+			sanguis::server::weapons::weapon
+		>().type()
+	);
 
 	if(
 		!cancelled_
