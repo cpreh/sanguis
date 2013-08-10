@@ -86,15 +86,15 @@ public:
 		sanguis::server::entities::base const &,
 		sanguis::server::weapons::target
 	) const;
+
+	bool
+	usable() const;
 protected:
 	virtual
 	void
 	do_attack(
 		sanguis::server::weapons::delayed_attack const &
 	) = 0;
-
-	bool
-	usable() const;
 
 	sanguis::diff_clock const &
 	diff_clock() const;

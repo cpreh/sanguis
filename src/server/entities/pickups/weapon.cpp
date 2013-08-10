@@ -81,7 +81,9 @@ bool
 sanguis::server::entities::pickups::weapon::dead() const
 {
 	return
-		!weapon_;
+		!weapon_
+		||
+		!weapon_->usable();
 }
 
 sanguis::server::team
