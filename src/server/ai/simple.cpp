@@ -1,5 +1,6 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
+#include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/random_generator.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/direction.hpp>
@@ -117,12 +118,17 @@ sanguis::server::ai::simple::update()
 				potential_targets_
 			);
 
+	sanguis::is_primary_weapon const weapon_to_use(
+		true
+	);
+
 	if(
 		!target_
 	)
 	{
-		me_.use_primary(
-			false
+		me_.use_weapon(
+			false,
+			weapon_to_use
 		);
 
 		FCPPT_TRY_DYNAMIC_CAST(
@@ -150,8 +156,9 @@ sanguis::server::ai::simple::update()
 	)
 		return;
 
-	me_.use_primary(
-		true
+	me_.use_weapon(
+		true,
+		weapon_to_use
 	);
 
 	sanguis::server::space_unit const distance(

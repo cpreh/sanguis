@@ -615,6 +615,8 @@ SET(
 	include/sanguis/messages/player_choose_perk_fwd.hpp
 	include/sanguis/messages/player_direction.hpp
 	include/sanguis/messages/player_direction_fwd.hpp
+	include/sanguis/messages/player_drop_or_pickup_weapon.hpp
+	include/sanguis/messages/player_drop_or_pickup_weapon_fwd.hpp
 	include/sanguis/messages/player_pause.hpp
 	include/sanguis/messages/player_pause_fwd.hpp
 	include/sanguis/messages/player_position.hpp
@@ -1086,6 +1088,7 @@ SET(
 	include/sanguis/server/weapons/magazine_type.hpp
 	include/sanguis/server/weapons/melee.hpp
 	include/sanguis/server/weapons/pistol.hpp
+	include/sanguis/server/weapons/player_start_weapon.hpp
 	include/sanguis/server/weapons/range.hpp
 	include/sanguis/server/weapons/reload_time.hpp
 	include/sanguis/server/weapons/rocket_launcher.hpp
@@ -1144,10 +1147,12 @@ SET(
 	include/sanguis/update_diff_clock.hpp
 	include/sanguis/weapon_type.hpp
 	include/sanguis/weapon_type_fwd.hpp
+	include/sanguis/weapon_type_to_is_primary.hpp
 	include/sanguis/weapon_types.hpp
 	include/sanguis/weapon_types_fwd.hpp
 	include/sanguis/world_id.hpp
 	include/sanguis/world_id_fwd.hpp
+	include/sanguis/world_id_type.hpp
 	src/app_name.cpp
 	src/apply_log_level.cpp
 	src/args/display_mode.cpp
@@ -1375,6 +1380,7 @@ SET(
 	src/messages/player_cheat.cpp
 	src/messages/player_choose_perk.cpp
 	src/messages/player_direction.cpp
+	src/messages/player_drop_or_pickup_weapon.cpp
 	src/messages/player_pause.cpp
 	src/messages/player_position.cpp
 	src/messages/player_start_shooting.cpp
@@ -1585,6 +1591,7 @@ SET(
 	src/server/weapons/log_location.cpp
 	src/server/weapons/melee.cpp
 	src/server/weapons/pistol.cpp
+	src/server/weapons/player_start_weapon.cpp
 	src/server/weapons/rocket_launcher.cpp
 	src/server/weapons/sentry.cpp
 	src/server/weapons/shotgun.cpp
@@ -1613,6 +1620,7 @@ SET(
 	src/server/world/spawn_parameters.cpp
 	src/to_console_arg_list.cpp
 	src/update_diff_clock.cpp
+	src/weapon_type_to_is_primary.cpp
 )
 
 FCPPT_UTILS_APPEND_SOURCE_DIR_AND_MAKE_GROUPS(

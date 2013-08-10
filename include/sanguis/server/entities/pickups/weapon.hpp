@@ -2,14 +2,13 @@
 #define SANGUIS_SERVER_ENTITIES_PICKUPS_WEAPON_HPP_INCLUDED
 
 #include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/random_generator_fwd.hpp>
-#include <sanguis/weapon_type.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/pickups/pickup.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
+#include <sanguis/server/weapons/unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -32,16 +31,12 @@ class weapon
 public:
 	weapon(
 		sanguis::diff_clock const &,
-		sanguis::random_generator &,
 		sanguis::server::environment::load_context &,
 		sanguis::server::team,
-		sanguis::weapon_type
+		sanguis::server::weapons::unique_ptr &&
 	);
 
 	~weapon();
-
-	sanguis::weapon_type
-	wtype() const;
 private:
 	sanguis::messages::unique_ptr
 	add_message(
@@ -55,11 +50,7 @@ private:
 	)
 	override;
 
-	sanguis::diff_clock const &diff_clock_;
-
-	sanguis::random_generator &random_generator_;
-
-	sanguis::weapon_type const weapon_type_;
+	sanguis::server::weapons::unique_ptr weapon_;
 };
 
 }

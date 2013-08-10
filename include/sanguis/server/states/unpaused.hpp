@@ -9,6 +9,7 @@
 #include <sanguis/messages/player_attack_dest_fwd.hpp>
 #include <sanguis/messages/player_change_world_fwd.hpp>
 #include <sanguis/messages/player_direction_fwd.hpp>
+#include <sanguis/messages/player_drop_or_pickup_weapon_fwd.hpp>
 #include <sanguis/messages/player_pause_fwd.hpp>
 #include <sanguis/messages/player_position_fwd.hpp>
 #include <sanguis/messages/player_start_shooting_fwd.hpp>
@@ -80,6 +81,12 @@ public:
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::player_direction const &
+	);
+
+	boost::statechart::result
+	operator()(
+		sanguis::server::player_id,
+		sanguis::messages::player_drop_or_pickup_weapon const &
 	);
 
 	boost::statechart::result

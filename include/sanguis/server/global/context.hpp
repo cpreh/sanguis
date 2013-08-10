@@ -6,9 +6,9 @@
 #include <sanguis/diff_clock.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
+#include <sanguis/is_primary_weapon_fwd.hpp>
 #include <sanguis/perk_type_fwd.hpp>
 #include <sanguis/random_generator.hpp>
-#include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/load/server_context_fwd.hpp>
 #include <sanguis/messages/base_fwd.hpp>
@@ -78,15 +78,16 @@ public:
 	);
 
 	void
-	player_change_weapon(
+	player_change_shooting(
 		sanguis::server::player_id,
-		sanguis::weapon_type
+		bool shooting,
+		sanguis::is_primary_weapon
 	);
 
 	void
-	player_change_shooting(
+	player_drop_or_pickup_weapon(
 		sanguis::server::player_id,
-		bool shooting
+		sanguis::is_primary_weapon
 	);
 
 	void

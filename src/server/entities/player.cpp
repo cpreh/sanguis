@@ -47,7 +47,7 @@
 #include <sanguis/server/perks/tree/choose.hpp>
 #include <sanguis/server/perks/tree/object.hpp>
 #include <sanguis/server/perks/tree/status.hpp>
-#include <sanguis/server/weapons/unique_ptr.hpp>
+#include <sanguis/server/weapons/player_start_weapon.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
@@ -107,9 +107,9 @@ sanguis::server::entities::player::player(
 		)
 	),
 	sanguis::server::entities::with_weapon(
-		// TODO: Shouldn't we give the player an initial weapon
-		// instead of spawning a pickup underneath him?
-		sanguis::server::weapons::unique_ptr()
+		sanguis::server::weapons::player_start_weapon(
+			_diff_clock
+		)
 	),
 	name_(
 		_name
@@ -135,7 +135,7 @@ sanguis::server::entities::player::player(
 			sanguis::server::auras::update_sight
 		>(
 			sanguis::server::radius(
-				1000.f // FIXME
+				1000.f
 			),
 			sanguis::server::enter_sight_function(
 				std::bind(

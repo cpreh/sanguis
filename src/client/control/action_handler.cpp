@@ -20,6 +20,7 @@
 #include <sanguis/messages/player_change_world.hpp>
 #include <sanguis/messages/player_cheat.hpp>
 #include <sanguis/messages/player_direction.hpp>
+#include <sanguis/messages/player_drop_or_pickup_weapon.hpp>
 #include <sanguis/messages/player_start_shooting.hpp>
 #include <sanguis/messages/player_stop_shooting.hpp>
 #include <sge/console/arg_list.hpp>
@@ -191,6 +192,20 @@ sanguis::client::control::action_handler::handle_nullary_action(
 			)
 		);
 		return;
+	case sanguis::client::control::actions::nullary_type::drop_primary_weapon:
+		this->handle_drop(
+			sanguis::is_primary_weapon(
+				true
+			)
+		);
+		return;
+	case sanguis::client::control::actions::nullary_type::drop_secondary_weapon:
+		this->handle_drop(
+			sanguis::is_primary_weapon(
+				false
+			)
+		);
+		return;
 	// There are some actions we don't handle
 	case sanguis::client::control::actions::nullary_type::perk_menu:
 	case sanguis::client::control::actions::nullary_type::escape:
@@ -281,6 +296,20 @@ sanguis::client::control::action_handler::handle_shooting(
 				)
 			)
 		);
+}
+
+void
+sanguis::client::control::action_handler::handle_drop(
+	sanguis::is_primary_weapon const _is_primary
+)
+{
+	send_(
+		*sanguis::messages::create(
+			sanguis::messages::player_drop_or_pickup_weapon(
+				_is_primary
+			)
+		)
+	);
 }
 
 void

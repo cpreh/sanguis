@@ -16,6 +16,8 @@
 #include <sanguis/server/entities/pickups/weapon.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/weapons/create.hpp>
+#include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/strong_typedef_assignment.hpp>
 #include <fcppt/random/variate_impl.hpp>
@@ -278,10 +280,13 @@ sanguis::server::pickup_spawner::spawn_weapon(
 			sanguis::server::entities::pickups::weapon
 		>(
 			diff_clock_,
-			random_generator_,
 			env_.load_context(),
 			sanguis::server::team::players,
-			_wtype
+			sanguis::server::weapons::create(
+				diff_clock_,
+				random_generator_,
+				_wtype
+			)
 		),
 		_center
 	);

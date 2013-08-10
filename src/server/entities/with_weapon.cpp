@@ -1,6 +1,8 @@
+#include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/time_unit.hpp>
 #include <sanguis/primary_weapon_type.hpp>
 #include <sanguis/weapon_type.hpp>
+#include <sanguis/weapon_type_to_is_primary.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
@@ -15,6 +17,7 @@
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/optional_impl.hpp>
+#include <fcppt/unique_ptr_to_optional.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/variant/get.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -43,7 +46,7 @@ sanguis::server::entities::with_weapon::with_weapon(
 	if(
 		_start_weapon
 	)
-		this->replace_weapon(
+		this->pickup_weapon(
 			std::move(
 				_start_weapon
 			)
@@ -57,44 +60,56 @@ sanguis::server::entities::with_weapon::~with_weapon()
 void
 sanguis::server::entities::with_weapon::on_update()
 {
-	// TODO: Helper function!
-	if(
-		primary_weapon_
-	)
-		primary_weapon_->update(
-			*this
-		);
+	this->update_weapon(
+		this->primary_weapon_ref()
+	);
 
-	if(
-		secondary_weapon_
-	)
-		secondary_weapon_->update(
-			*this
-		);
+	this->update_weapon(
+		this->secondary_weapon_ref()
+	);
 }
 
-sanguis::server::weapons::unique_ptr
-sanguis::server::entities::with_weapon::replace_weapon(
+void
+sanguis::server::entities::with_weapon::pickup_weapon(
 	sanguis::server::weapons::unique_ptr &&_ptr
 )
 {
-	primary_weapon_.swap(
+	if(
+		!_ptr
+	)
+		return;
+
+	sanguis::is_primary_weapon const is_primary(
+		sanguis::weapon_type_to_is_primary(
+			_ptr->type()
+		)
+	);
+
+	sanguis::server::weapons::unique_ptr &dest(
+		this->is_primary_to_weapon_unique_ptr(
+			is_primary
+		)
+	);
+
+	dest.swap(
 		_ptr
 	);
 
 	this->on_new_weapon(
-		*primary_weapon_
+		*dest
 	);
 
 	if(
 		this->has_environment()
+		&&
+		is_primary.get()
 	)
 		this->environment().weapon_changed(
 			this->id(),
 			fcppt::variant::get<
 				sanguis::primary_weapon_type
 			>(
-				primary_weapon_->type()
+				dest->type()
 			)
 		);
 
@@ -102,10 +117,18 @@ sanguis::server::entities::with_weapon::replace_weapon(
 		_ptr
 	)
 		_ptr->stop();
+}
 
+sanguis::server::weapons::unique_ptr
+sanguis::server::entities::with_weapon::drop_weapon(
+	sanguis::is_primary_weapon const _is_primary
+)
+{
 	return
 		std::move(
-			_ptr
+			this->is_primary_to_weapon_unique_ptr(
+				_is_primary
+			)
 		);
 }
 
@@ -129,25 +152,32 @@ sanguis::server::entities::with_weapon::target() const
 }
 
 void
-sanguis::server::entities::with_weapon::use_primary(
-	bool const _use
+sanguis::server::entities::with_weapon::use_weapon(
+	bool const _use,
+	sanguis::is_primary_weapon const _is_primary
 )
 {
-	this->use_weapon(
-		primary_weapon_.get(),
-		_use
+	sanguis::server::entities::with_weapon::optional_weapon_ref const weapon(
+		this->is_primary_to_optional_weapon(
+			_is_primary
+		)
 	);
-}
 
-void
-sanguis::server::entities::with_weapon::use_secondary(
-	bool const _use
-)
-{
-	this->use_weapon(
-		secondary_weapon_.get(),
-		_use
-	);
+	if(
+		!weapon
+	)
+		return;
+
+	if(
+		!_use
+	)
+		weapon->stop();
+	else if(
+		target_
+	)
+		weapon->attack(
+			*this
+		);
 }
 
 /*
@@ -218,25 +248,61 @@ sanguis::server::entities::with_weapon::stop_attacking()
 	);
 }*/
 
+sanguis::server::entities::with_weapon::optional_weapon_ref const
+sanguis::server::entities::with_weapon::primary_weapon_ref() const
+{
+	return
+		fcppt::unique_ptr_to_optional(
+			primary_weapon_
+		);
+}
+
+sanguis::server::entities::with_weapon::optional_weapon_ref const
+sanguis::server::entities::with_weapon::secondary_weapon_ref() const
+{
+	return
+		fcppt::unique_ptr_to_optional(
+			secondary_weapon_
+		);
+}
+
+sanguis::server::entities::with_weapon::optional_weapon_ref const
+sanguis::server::entities::with_weapon::is_primary_to_optional_weapon(
+	sanguis::is_primary_weapon const _is_primary
+) const
+{
+	return
+		_is_primary.get()
+		?
+			this->primary_weapon_ref()
+		:
+			this->secondary_weapon_ref()
+		;
+}
+
+sanguis::server::weapons::unique_ptr &
+sanguis::server::entities::with_weapon::is_primary_to_weapon_unique_ptr(
+	sanguis::is_primary_weapon const _is_primary
+)
+{
+	return
+		_is_primary.get()
+		?
+			primary_weapon_
+		:
+			secondary_weapon_
+		;
+}
+
 void
-sanguis::server::entities::with_weapon::use_weapon(
-	sanguis::server::weapons::weapon *const _weapon,
-	bool const _use
+sanguis::server::entities::with_weapon::update_weapon(
+	sanguis::server::entities::with_weapon::optional_weapon_ref const &_weapon
 )
 {
 	if(
-		!_weapon
+		_weapon
 	)
-		return;
-
-	if(
-		!_use
-	)
-		_weapon->stop();
-	else if(
-		target_
-	)
-		_weapon->attack(
+		_weapon->update(
 			*this
 		);
 }

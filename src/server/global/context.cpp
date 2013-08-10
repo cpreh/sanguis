@@ -2,12 +2,11 @@
 #include <sanguis/connect_state.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
+#include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/perk_type.hpp>
-#include <sanguis/primary_weapon_type.hpp>
 #include <sanguis/random_seed.hpp>
 #include <sanguis/update_diff_clock.hpp>
-#include <sanguis/weapon_type.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/load/server_context_fwd.hpp>
 #include <sanguis/messages/base.hpp>
@@ -30,13 +29,11 @@
 #include <sanguis/server/unicast_callback.hpp>
 #include <sanguis/server/vector.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
-#include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/insert_with_result.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/player_map.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/property/current_to_max.hpp>
-#include <sanguis/server/entities/pickups/weapon.hpp>
 #include <sanguis/server/global/context.hpp>
 #include <sanguis/server/global/generate_worlds.hpp>
 #include <sanguis/server/global/load_context.hpp>
@@ -203,14 +200,6 @@ sanguis::server::global::context::insert_player(
 		return;
 	}
 
-	sanguis::server::center const spawn_pos(
-		sanguis::server::world::grid_pos_to_center(
-			cur_world.openings()[
-				0u
-			].get()
-		)
-	);
-
 	typedef fcppt::optional<
 		sanguis::server::entities::player const &
 	> const_optional_player_ref;
@@ -222,7 +211,11 @@ sanguis::server::global::context::insert_player(
 				player
 			),
 			sanguis::server::entities::insert_parameters(
-				spawn_pos,
+				sanguis::server::world::grid_pos_to_center(
+					cur_world.openings()[
+						0u
+					].get()
+				),
 				sanguis::server::angle(
 					0.f
 				)
@@ -243,23 +236,6 @@ sanguis::server::global::context::insert_player(
 		// TODO: What do we do here?
 		return;
 	}
-
-	cur_world.insert(
-		fcppt::make_unique_ptr<
-			sanguis::server::entities::pickups::weapon
-		>(
-			diff_clock_,
-			random_generator_,
-			*load_context_,
-			sanguis::server::team::players,
-			sanguis::weapon_type(
-				sanguis::primary_weapon_type::pistol
-			)
-		),
-		sanguis::server::entities::insert_parameters_center(
-			spawn_pos
-		)
-	);
 
 	// send this after the player has been created
 	sanguis::server::send_available_perks(
@@ -339,29 +315,30 @@ sanguis::server::global::context::player_change_world(
 }
 
 void
-sanguis::server::global::context::player_change_weapon(
+sanguis::server::global::context::player_change_shooting(
 	sanguis::server::player_id const _player_id,
-	sanguis::weapon_type const _weapon
+	bool const _shooting,
+	sanguis::is_primary_weapon const _is_primary
 )
 {
-	/*
 	players_[
 		_player_id
-	]->change_weapon(
-		_weapon
-	);*/
+	]->use_weapon(
+		_shooting,
+		_is_primary
+	);
 }
 
 void
-sanguis::server::global::context::player_change_shooting(
+sanguis::server::global::context::player_drop_or_pickup_weapon(
 	sanguis::server::player_id const _player_id,
-	bool const _shooting
+	sanguis::is_primary_weapon const _is_primary
 )
 {
 	players_[
 		_player_id
-	]->use_primary(
-		_shooting
+	]->drop_weapon(
+		_is_primary
 	);
 }
 

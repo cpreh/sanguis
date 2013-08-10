@@ -42,6 +42,7 @@ enum class message
 	player_cheat,
 	player_choose_perk,
 	player_direction,
+	player_drop_or_pickup_weapon,
 	player_pause,
 	player_position,
 	player_start_shooting,

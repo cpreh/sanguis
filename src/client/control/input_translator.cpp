@@ -100,10 +100,16 @@ sanguis::client::control::input_translator::key_callback(
 			_event
 		);
 		break;
+	case sge::input::keyboard::key_code::x:
+		this->nullary_event(
+			_event.pressed(),
+			sanguis::client::control::actions::nullary_type::drop_primary_weapon
+		);
+		break;
 	case sge::input::keyboard::key_code::c:
 		this->nullary_event(
 			_event.pressed(),
-			sanguis::client::control::actions::nullary_type::drop_weapon
+			sanguis::client::control::actions::nullary_type::drop_secondary_weapon
 		);
 		break;
 	case sge::input::keyboard::key_code::f1:

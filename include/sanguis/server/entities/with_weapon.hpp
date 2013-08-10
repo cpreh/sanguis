@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_WITH_WEAPON_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_WITH_WEAPON_HPP_INCLUDED
 
+#include <sanguis/is_primary_weapon_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
@@ -45,9 +46,19 @@ protected:
 	on_update()
 	override;
 public:
-	sanguis::server::weapons::unique_ptr
-	replace_weapon(
+	bool
+	can_pickup(
+		sanguis::server::weapons::weapon const &
+	) const;
+
+	void
+	pickup_weapon(
 		sanguis::server::weapons::unique_ptr &&
+	);
+
+	sanguis::server::weapons::unique_ptr
+	drop_weapon(
+		sanguis::is_primary_weapon
 	);
 
 	void
@@ -59,13 +70,9 @@ public:
 	target() const;
 
 	void
-	use_primary(
-		bool
-	);
-
-	void
-	use_secondary(
-		bool
+	use_weapon(
+		bool,
+		sanguis::is_primary_weapon
 	);
 
 	sanguis::server::entities::property::always_max &
@@ -80,11 +87,31 @@ public:
 	sanguis::server::weapons::irs const
 	irs() const;
 private:
-	// TODO: Replace pointers!
+	typedef
+	fcppt::optional<
+		sanguis::server::weapons::weapon &
+	>
+	optional_weapon_ref;
+
+	sanguis::server::entities::with_weapon::optional_weapon_ref const
+	primary_weapon_ref() const;
+
+	sanguis::server::entities::with_weapon::optional_weapon_ref const
+	secondary_weapon_ref() const;
+
+	sanguis::server::entities::with_weapon::optional_weapon_ref const
+	is_primary_to_optional_weapon(
+		sanguis::is_primary_weapon
+	) const;
+
+	sanguis::server::weapons::unique_ptr &
+	is_primary_to_weapon_unique_ptr(
+		sanguis::is_primary_weapon
+	);
+
 	void
-	use_weapon(
-		sanguis::server::weapons::weapon *,
-		bool
+	update_weapon(
+		sanguis::server::entities::with_weapon::optional_weapon_ref const &
 	);
 
 	virtual
