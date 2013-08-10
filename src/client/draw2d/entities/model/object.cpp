@@ -27,6 +27,7 @@
 #include <sge/sprite/object_impl.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/assert/unreachable.hpp>
+#include <fcppt/assert/unreachable_message.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/headers.hpp>
@@ -441,7 +442,10 @@ sanguis::client::draw2d::entities::model::object::fallback_anim(
 	)
 	{
 	case sanguis::animation_type::none:
-		return sanguis::animation_type::size;
+		FCPPT_ASSERT_UNREACHABLE_MESSAGE(
+			FCPPT_TEXT("None animation not available!")
+		);
+		break;
 	case sanguis::animation_type::attacking:
 	case sanguis::animation_type::reloading:
 		return
@@ -449,13 +453,13 @@ sanguis::client::draw2d::entities::model::object::fallback_anim(
 			?
 				sanguis::animation_type::walking
 			:
-				sanguis::animation_type::none;
+				sanguis::animation_type::none
+			;
 	case sanguis::animation_type::deploying:
 	case sanguis::animation_type::walking:
 	case sanguis::animation_type::dying:
-		return sanguis::animation_type::none;
-	case sanguis::animation_type::size:
-		break;
+		return
+			sanguis::animation_type::none;
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;
@@ -481,7 +485,8 @@ sanguis::client::draw2d::entities::model::object::animation() const
 					?
 						sanguis::animation_type::walking
 					:
-						sanguis::animation_type::none;
+						sanguis::animation_type::none
+					;
 }
 
 void

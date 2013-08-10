@@ -7,7 +7,6 @@
 namespace sanguis
 {
 
-// TODO: Remove the size part
 enum class animation_type
 {
 	none,
@@ -16,7 +15,7 @@ enum class animation_type
 	dying,
 	deploying,
 	reloading,
-	size
+	fcppt_maximum = reloading
 };
 
 }

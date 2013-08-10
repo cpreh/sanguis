@@ -4,6 +4,7 @@
 #include <sanguis/animation_type.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
+#include <sanguis/optional_animation_type.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
@@ -93,7 +94,7 @@ private:
 
 	sanguis::client::draw2d::sprite::normal::object &ref_;
 
-	sanguis::animation_type animation_type_;
+	sanguis::optional_animation_type animation_type_;
 
 	sanguis::optional_primary_weapon_type weapon_;
 

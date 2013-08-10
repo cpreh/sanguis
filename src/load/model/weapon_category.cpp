@@ -13,16 +13,15 @@
 #include <sge/parse/json/member.hpp>
 #include <sge/parse/json/member_map.hpp>
 #include <sge/parse/json/object.hpp>
-#include <fcppt/algorithm/find_exn.hpp>
-#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
-#include <fcppt/log/headers.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/enum_size.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/algorithm/find_exn.hpp>
+#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
+#include <fcppt/log/headers.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <array>
-#include <cstddef>
 #include <iterator>
 #include <fcppt/config/external_end.hpp>
 
@@ -32,11 +31,9 @@ namespace
 
 typedef std::array<
 	fcppt::string,
-	static_cast<
-		std::size_t
-	>(
-		sanguis::animation_type::size
-	)
+	fcppt::enum_size<
+		sanguis::animation_type
+	>::value
 > animation_type_array;
 
 animation_type_array const animation_types{{
@@ -104,15 +101,12 @@ sanguis::load::model::weapon_category::has_animation(
 	sanguis::animation_type const _anim
 ) const
 {
-	animation_map::const_iterator const
-		it(
-			animations_.find(
-				_anim
-			)
-		);
-
 	return
-		it != animations_.end();
+		animations_.find(
+			_anim
+		)
+		!=
+		animations_.end();
 }
 
 sanguis::load::model::weapon_category::~weapon_category()

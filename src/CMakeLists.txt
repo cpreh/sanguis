@@ -720,6 +720,8 @@ SET(
 	include/sanguis/net/serialize_to_circular_buffer.hpp
 	include/sanguis/net/serialize_to_data_buffer.hpp
 	include/sanguis/net/stream_exceptions.hpp
+	include/sanguis/optional_animation_type.hpp
+	include/sanguis/optional_animation_type_fwd.hpp
 	include/sanguis/optional_perk_type.hpp
 	include/sanguis/optional_perk_type_fwd.hpp
 	include/sanguis/optional_primary_weapon_type.hpp

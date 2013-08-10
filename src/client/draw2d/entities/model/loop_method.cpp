@@ -21,8 +21,6 @@ sanguis::client::draw2d::entities::model::loop_method(
 	case sanguis::animation_type::dying:
 	case sanguis::animation_type::deploying:
 		return sanguis::client::draw2d::sprite::animation::loop_method::stop_at_end;
-	case sanguis::animation_type::size:
-		break;
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;
