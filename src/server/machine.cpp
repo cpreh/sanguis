@@ -23,6 +23,7 @@
 #include <alda/net/buffer/circular_receive/object_fwd.hpp>
 #include <alda/net/buffer/circular_send/optional_ref.hpp>
 #include <alda/net/server/connection_id_container.hpp>
+#include <fcppt/exception.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/error.hpp>
@@ -142,17 +143,9 @@ sanguis::server::machine::send_to_all(
 	);
 
 	for(
-		alda::net::server::connection_id_container::const_iterator it(
-			connections.begin()
-		);
-		it != connections.end();
-		++it
+		auto const &id : connections
 	)
 	{
-		alda::net::id const id(
-			*it
-		);
-
 		if(
 			!sanguis::net::append_to_circular_buffer(
 				*net_.send_buffer(
@@ -291,8 +284,11 @@ sanguis::server::machine::data_callback(
 	alda::net::id const _id,
 	alda::net::buffer::circular_receive::object &_data
 )
+try
 {
-	for(;;)
+	for(
+		;;
+	)
 	{
 		sanguis::messages::unique_ptr message(
 			sanguis::net::deserialize(
@@ -312,6 +308,24 @@ sanguis::server::machine::data_callback(
 			)
 		);
 	}
+}
+catch(
+	fcppt::exception const &_error
+)
+{
+	this->disconnect_callback(
+		_id,
+		_error.string()
+	);
+}
+catch(
+	...
+)
+{
+	this->disconnect_callback(
+		_id,
+		FCPPT_TEXT("Unknown error")
+	);
 }
 
 void

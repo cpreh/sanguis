@@ -1,10 +1,9 @@
-#include <sanguis/exception.hpp>
 #include <sanguis/server/entities/property/base.hpp>
 #include <sanguis/server/entities/property/change_callback.hpp>
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <sanguis/server/entities/property/initial.hpp>
 #include <sanguis/server/entities/property/value.hpp>
-#include <fcppt/text.hpp>
+#include <fcppt/assert/error.hpp>
 #include <fcppt/math/diff.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/object_impl.hpp>
@@ -122,10 +121,7 @@ sanguis::server::entities::property::changeable::on_recalc_max(
 void
 sanguis::server::entities::property::changeable::check_current()
 {
-	if(
-		current_ > max_
-	)
-		throw sanguis::exception(
-			FCPPT_TEXT("current > max")
-		);
+	FCPPT_ASSERT_ERROR(
+		current_ <= max_
+	);
 }

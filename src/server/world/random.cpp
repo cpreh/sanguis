@@ -1,5 +1,4 @@
 #include <sanguis/config_app_name.hpp>
-#include <sanguis/exception.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/creator/deserialize.hpp>
 #include <sanguis/creator/generate.hpp>
@@ -16,11 +15,10 @@
 #include <sge/config/cache_path.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/assert/error.hpp>
 #include <fcppt/filesystem/create_directories_recursive_exn.hpp>
-#include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/io/ifstream.hpp>
 #include <fcppt/io/ofstream.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
@@ -91,16 +89,9 @@ sanguis::server::world::random(
 		world_path
 	);
 
-	if(
-		!stream.is_open()
-	)
-		throw sanguis::exception(
-			FCPPT_TEXT("Failed to open ")
-			+
-			fcppt::filesystem::path_to_string(
-				world_path
-			)
-		);
+	FCPPT_ASSERT_ERROR(
+		stream.is_open()
+	);
 
 	return
 		fcppt::make_unique_ptr<
