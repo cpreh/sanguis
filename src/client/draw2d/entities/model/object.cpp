@@ -501,6 +501,13 @@ sanguis::client::draw2d::entities::model::object::update_healthbar()
 bool
 sanguis::client::draw2d::entities::model::object::animations_ended() const
 {
+	if(
+		this->animation()
+		!=
+		sanguis::animation_type::dying
+	)
+		return true;
+
 	for(
 		auto const &cur_part : parts_
 	)
