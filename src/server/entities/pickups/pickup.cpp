@@ -136,7 +136,7 @@ sanguis::server::entities::pickups::pickup::collision_groups() const
 {
 	return
 		sanguis::server::collision::group_vector{
-			sanguis::server::collision::group::weapon_pickup
+			sanguis::server::collision::group::pickup
 		};
 }
 

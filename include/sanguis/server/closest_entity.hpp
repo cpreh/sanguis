@@ -16,12 +16,14 @@ namespace server
 
 // TODO: Use optionals!
 template<
-	typename Container
+	typename Container,
+	typename Predicate
 >
 typename Container::value_type
 closest_entity(
 	sanguis::server::entities::base const &_ref,
-	Container const &_entities
+	Container const &_entities,
+	Predicate const _predicate
 )
 {
 	typedef
@@ -51,6 +53,10 @@ closest_entity(
 		);
 
 		if(
+			_predicate(
+				*entity
+			)
+			&&
 			new_distance < distance
 		)
 		{

@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PICKUPS_WEAPON_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PICKUPS_WEAPON_HPP_INCLUDED
 
+#include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
@@ -47,6 +48,9 @@ public:
 
 	sanguis::server::weapons::unique_ptr
 	obtain();
+
+	sanguis::weapon_type const
+	weapon_type() const;
 private:
 	bool
 	dead() const

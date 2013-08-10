@@ -1,3 +1,4 @@
+#include <sanguis/weapon_type.hpp>
 #include <sanguis/load/weapon_pickup_name.hpp>
 #include <sanguis/messages/add_weapon_pickup.hpp>
 #include <sanguis/messages/create.hpp>
@@ -67,6 +68,13 @@ sanguis::server::entities::pickups::weapon::obtain()
 		std::move(
 			weapon_
 		);
+}
+
+sanguis::weapon_type const
+sanguis::server::entities::pickups::weapon::weapon_type() const
+{
+	return
+		weapon_->type();
 }
 
 bool

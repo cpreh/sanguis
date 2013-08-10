@@ -164,6 +164,13 @@ private:
 	sanguis::messages::unique_ptr
 	make_add_message() const;
 
+	// TODO: Use optionals!
+	typedef
+	std::set<
+		sanguis::server::entities::pickups::weapon *
+	>
+	weapon_pickup_set;
+
 	sanguis::server::string const name_;
 
 	sanguis::server::player_id const player_id_;
@@ -179,13 +186,6 @@ private:
 	> perk_tree_scoped_ptr;
 
 	perk_tree_scoped_ptr perk_tree_;
-
-	// TODO: Use optionals!
-	typedef
-	std::set<
-		sanguis::server::entities::pickups::weapon *
-	>
-	weapon_pickup_set;
 
 	weapon_pickup_set weapon_pickups_;
 };

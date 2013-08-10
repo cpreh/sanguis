@@ -2,6 +2,7 @@
 #include <sanguis/entity_id.hpp>
 #include <sanguis/perk_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/weapon_type_to_is_primary.hpp>
 #include <sanguis/messages/add_player.hpp>
 #include <sanguis/messages/add_own_player.hpp>
 #include <sanguis/messages/create.hpp>
@@ -287,7 +288,21 @@ sanguis::server::entities::player::drop_or_pickup_weapon(
 	sanguis::server::entities::pickups::weapon *const closest_pickup(
 		sanguis::server::closest_entity(
 			*this,
-			weapon_pickups_
+			weapon_pickups_,
+			[
+				_is_primary
+			](
+				sanguis::server::entities::pickups::weapon const &_pickup
+			)
+			{
+				return
+					sanguis::weapon_type_to_is_primary(
+						_pickup.weapon_type()
+					)
+					==
+					_is_primary
+					;
+			}
 		)
 	);
 

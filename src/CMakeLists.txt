@@ -1086,6 +1086,8 @@ SET(
 	include/sanguis/server/weapons/events/shoot_fwd.hpp
 	include/sanguis/server/weapons/events/stop.hpp
 	include/sanguis/server/weapons/events/stop_fwd.hpp
+	include/sanguis/server/weapons/factory/parameters.hpp
+	include/sanguis/server/weapons/factory/parameters_fwd.hpp
 	include/sanguis/server/weapons/grenade.hpp
 	include/sanguis/server/weapons/ias.hpp
 	include/sanguis/server/weapons/irs.hpp
@@ -1596,6 +1598,7 @@ SET(
 	src/server/weapons/events/poll.cpp
 	src/server/weapons/events/shoot.cpp
 	src/server/weapons/events/stop.cpp
+	src/server/weapons/factory/parameters.cpp
 	src/server/weapons/grenade.cpp
 	src/server/weapons/log.cpp
 	src/server/weapons/log_location.cpp

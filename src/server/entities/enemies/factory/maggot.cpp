@@ -60,7 +60,7 @@ sanguis::server::entities::enemies::factory::maggot(
 				)
 			),
 			sanguis::server::pickup_probability(
-				0.1f
+				1.f//0.1f
 			),
 			sanguis::server::exp(
 				1.f

@@ -15,7 +15,14 @@ sanguis::server::ai::search_new_target(
 	sanguis::server::entities::with_health *const result(
 		sanguis::server::closest_entity(
 			_me,
-			_entities
+			_entities,
+			[](
+				sanguis::server::entities::with_health const &
+			)
+			{
+				// All potential targets for now
+				return true;
+			}
 		)
 	);
 

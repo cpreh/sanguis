@@ -50,11 +50,6 @@ protected:
 	sanguis::optional_primary_weapon_type const
 	primary_weapon_type() const;
 public:
-	bool
-	can_pickup(
-		sanguis::server::weapons::weapon const &
-	) const;
-
 	void
 	pickup_weapon(
 		sanguis::server::weapons::unique_ptr &&
