@@ -18,7 +18,6 @@
 #include <sanguis/client/states/has_player.hpp>
 #include <sanguis/messages/available_perks.hpp>
 #include <sanguis/messages/create.hpp>
-#include <sanguis/messages/give_weapon.hpp>
 #include <sanguis/messages/level_up.hpp>
 #include <sanguis/messages/player_choose_perk.hpp>
 #include <sanguis/messages/remove_id.hpp>
@@ -92,11 +91,10 @@ sanguis::client::states::has_player::react(
 )
 {
 	static sanguis::messages::call::object<
-		boost::mpl::vector4<
+		boost::mpl::vector3<
 			sanguis::messages::available_perks,
 			sanguis::messages::level_up,
-			sanguis::messages::remove_id,
-			sanguis::messages::give_weapon
+			sanguis::messages::remove_id
 		>,
 		has_player
 	> dispatcher;
@@ -138,23 +136,6 @@ sanguis::client::states::has_player::operator()(
 			>()
 		)
 	);
-
-	return
-		this->discard_event();
-}
-
-boost::statechart::result
-sanguis::client::states::has_player::operator()(
-	sanguis::messages::give_weapon const &_message
-)
-{
-/*
-	action_handler_->give_player_weapon(
-		_message.get<
-			sanguis::messages::roles::weapon
-		>()
-	);
-*/
 
 	return
 		this->discard_event();

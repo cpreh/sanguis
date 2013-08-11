@@ -1,7 +1,9 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_MESSAGE_ENVIRONMENT_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_MESSAGE_ENVIRONMENT_HPP_INCLUDED
 
-#include <sanguis/entity_id.hpp>
+#include <sanguis/entity_id_fwd.hpp>
+#include <sanguis/is_primary_weapon_fwd.hpp>
+#include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
@@ -47,44 +49,66 @@ private:
 	insert(
 		sanguis::client::draw2d::entities::unique_ptr &&,
 		sanguis::entity_id
-	);
+	)
+	override;
 
 	void
 	remove(
 		sanguis::entity_id
-	);
+	)
+	override;
 
 	sanguis::client::draw2d::entities::base &
 	entity(
 		sanguis::entity_id
-	);
+	)
+	override;
 
 	void
 	experience(
 		sanguis::client::exp
-	);
+	)
+	override;
 
 	void
 	level(
 		sanguis::client::level
-	);
+	)
+	override;
 
 	void
 	change_world(
 		sanguis::client::world_parameters const &
-	);
+	)
+	override;
+
+	void
+	give_weapon(
+		sanguis::weapon_description const &
+	)
+	override;
+
+	void
+	remove_weapon(
+		sanguis::is_primary_weapon
+	)
+	override;
 
 	sanguis::client::draw2d::entities::model::parameters const
-	model_parameters() const;
+	model_parameters() const
+	override;
 
 	sanguis::client::draw2d::insert_own_callback const &
-	insert_own_callback() const;
+	insert_own_callback() const
+	override;
 
 	sanguis::client::draw2d::transform_callback const &
-	transform_callback() const;
+	transform_callback() const
+	override;
 
 	sanguis::client::draw2d::collide_callback const &
-	collide_callback() const;
+	collide_callback() const
+	override;
 
 	sanguis::client::draw2d::scene::object &object_;
 

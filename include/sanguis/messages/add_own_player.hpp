@@ -4,6 +4,9 @@
 #include <sanguis/messages/add_own_player_fwd.hpp>
 #include <sanguis/messages/make_class.hpp>
 #include <sanguis/messages/make_player_message.hpp>
+#include <sanguis/messages/adapted_types/string_vector.hpp>
+#include <majutsu/composite.hpp>
+#include <majutsu/role.hpp>
 
 
 #endif

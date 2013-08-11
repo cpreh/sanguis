@@ -1,4 +1,5 @@
 #include <sanguis/entity_id.hpp>
+#include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
@@ -104,6 +105,26 @@ sanguis::client::draw2d::scene::message_environment::change_world(
 {
 	object_.change_world(
 		_param
+	);
+}
+
+void
+sanguis::client::draw2d::scene::message_environment::give_weapon(
+	sanguis::weapon_description const &_description
+)
+{
+	hud_.weapon_description(
+		_description
+	);
+}
+
+void
+sanguis::client::draw2d::scene::message_environment::remove_weapon(
+	sanguis::is_primary_weapon const _is_primary_weapon
+)
+{
+	hud_.remove_weapon(
+		_is_primary_weapon
 	);
 }
 

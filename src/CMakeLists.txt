@@ -635,6 +635,8 @@ SET(
 	include/sanguis/messages/remove_fwd.hpp
 	include/sanguis/messages/remove_id.hpp
 	include/sanguis/messages/remove_id_fwd.hpp
+	include/sanguis/messages/remove_weapon.hpp
+	include/sanguis/messages/remove_weapon_fwd.hpp
 	include/sanguis/messages/role_name.hpp
 	include/sanguis/messages/roles/angle.hpp
 	include/sanguis/messages/roles/aoe.hpp
@@ -665,6 +667,7 @@ SET(
 	include/sanguis/messages/roles/required_perk_parent_level.hpp
 	include/sanguis/messages/roles/required_perk_player_level.hpp
 	include/sanguis/messages/roles/speed.hpp
+	include/sanguis/messages/roles/weapon_description.hpp
 	include/sanguis/messages/rotate.hpp
 	include/sanguis/messages/rotate_fwd.hpp
 	include/sanguis/messages/serialization/context_fwd.hpp
@@ -1412,6 +1415,7 @@ SET(
 	src/messages/player_unpause.cpp
 	src/messages/remove.cpp
 	src/messages/remove_id.cpp
+	src/messages/remove_weapon.cpp
 	src/messages/rotate.cpp
 	src/messages/serialization/context.cpp
 	src/messages/serialization/convert_string_vector.cpp

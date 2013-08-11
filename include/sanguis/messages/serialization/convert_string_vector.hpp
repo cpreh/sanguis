@@ -12,12 +12,12 @@ namespace messages
 namespace serialization
 {
 
-messages::types::string_vector const
+messages::types::string_vector
 convert_string_vector(
 	sanguis::string_vector const &
 );
 
-sanguis::string_vector const
+sanguis::string_vector
 convert_string_vector(
 	messages::types::string_vector const &
 );

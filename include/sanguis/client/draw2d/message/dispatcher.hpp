@@ -19,11 +19,13 @@
 #include <sanguis/messages/change_world_fwd.hpp>
 #include <sanguis/messages/die_fwd.hpp>
 #include <sanguis/messages/experience_fwd.hpp>
+#include <sanguis/messages/give_weapon_fwd.hpp>
 #include <sanguis/messages/health_fwd.hpp>
 #include <sanguis/messages/level_up_fwd.hpp>
 #include <sanguis/messages/max_health_fwd.hpp>
 #include <sanguis/messages/move_fwd.hpp>
 #include <sanguis/messages/remove_fwd.hpp>
+#include <sanguis/messages/remove_weapon_fwd.hpp>
 #include <sanguis/messages/rotate_fwd.hpp>
 #include <sanguis/messages/speed_fwd.hpp>
 #include <sanguis/messages/start_attacking_fwd.hpp>
@@ -119,6 +121,11 @@ public:
 
 	result_type
 	operator()(
+		sanguis::messages::give_weapon const &
+	);
+
+	result_type
+	operator()(
 		sanguis::messages::health const &
 	);
 
@@ -140,6 +147,11 @@ public:
 	result_type
 	operator()(
 		sanguis::messages::remove const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::remove_weapon const &
 	);
 
 	result_type

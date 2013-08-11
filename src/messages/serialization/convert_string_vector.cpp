@@ -2,6 +2,7 @@
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 
+
 namespace
 {
 
@@ -19,15 +20,11 @@ convert(
 	Dest dest;
 
 	for(
-		typename Src::const_iterator elem_it(
-			_src.begin()
-		);
-		elem_it != _src.end();
-		++elem_it
+		auto const element : _src
 	)
 		dest.push_back(
 			_convert_string(
-				*elem_it
+				element
 			)
 		);
 
@@ -36,7 +33,7 @@ convert(
 
 }
 
-sanguis::messages::types::string_vector const
+sanguis::messages::types::string_vector
 sanguis::messages::serialization::convert_string_vector(
 	sanguis::string_vector const &_src
 )
@@ -50,7 +47,7 @@ sanguis::messages::serialization::convert_string_vector(
 		);
 }
 
-sanguis::string_vector const
+sanguis::string_vector
 sanguis::messages::serialization::convert_string_vector(
 	messages::types::string_vector const &_src
 )

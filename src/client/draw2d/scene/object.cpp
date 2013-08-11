@@ -37,11 +37,13 @@
 #include <sanguis/messages/change_world.hpp>
 #include <sanguis/messages/die.hpp>
 #include <sanguis/messages/experience.hpp>
+#include <sanguis/messages/give_weapon.hpp>
 #include <sanguis/messages/health.hpp>
 #include <sanguis/messages/level_up.hpp>
 #include <sanguis/messages/max_health.hpp>
 #include <sanguis/messages/move.hpp>
 #include <sanguis/messages/remove.hpp>
+#include <sanguis/messages/remove_weapon.hpp>
 #include <sanguis/messages/rotate.hpp>
 #include <sanguis/messages/start_attacking.hpp>
 #include <sanguis/messages/stop_attacking.hpp>
@@ -239,7 +241,7 @@ sanguis::client::draw2d::scene::object::process_message(
 )
 {
 	static sanguis::messages::call::object<
-		boost::mpl::vector23<
+		boost::mpl::vector25<
 			sanguis::messages::add_aoe_projectile,
 			sanguis::messages::add_enemy,
 			sanguis::messages::add_friend,
@@ -252,11 +254,13 @@ sanguis::client::draw2d::scene::object::process_message(
 			sanguis::messages::change_world,
 			sanguis::messages::die,
 			sanguis::messages::experience,
+			sanguis::messages::give_weapon,
 			sanguis::messages::health,
 			sanguis::messages::level_up,
 			sanguis::messages::max_health,
 			sanguis::messages::move,
 			sanguis::messages::remove,
+			sanguis::messages::remove_weapon,
 			sanguis::messages::rotate,
 			sanguis::messages::start_attacking,
 			sanguis::messages::stop_attacking,

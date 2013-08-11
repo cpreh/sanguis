@@ -3,6 +3,7 @@
 
 #include <sanguis/string_vector.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
+#include <sanguis/weapon_type.hpp>
 
 
 namespace sanguis
@@ -11,15 +12,20 @@ namespace sanguis
 class weapon_description
 {
 public:
-	explicit
 	weapon_description(
-		sanguis::string_vector const &
+		sanguis::string_vector const &,
+		sanguis::weapon_type const &
 	);
 
 	sanguis::string_vector const &
 	text() const;
+
+	sanguis::weapon_type const &
+	weapon_type() const;
 private:
 	sanguis::string_vector text_;
+
+	sanguis::weapon_type weapon_type_;
 };
 
 }

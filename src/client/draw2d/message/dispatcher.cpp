@@ -1,5 +1,7 @@
 #include <sanguis/entity_id.hpp>
-#include <sanguis/friend_type.hpp>
+#include <sanguis/optional_primary_weapon_type.hpp>
+#include <sanguis/weapon_description.hpp>
+#include <sanguis/weapon_type.hpp>
 #include <sanguis/creator/name.hpp>
 #include <sanguis/creator/opening_count.hpp>
 #include <sanguis/creator/top_parameters.hpp>
@@ -48,11 +50,13 @@
 #include <sanguis/messages/change_world.hpp>
 #include <sanguis/messages/die.hpp>
 #include <sanguis/messages/experience.hpp>
+#include <sanguis/messages/give_weapon.hpp>
 #include <sanguis/messages/health.hpp>
 #include <sanguis/messages/level_up.hpp>
 #include <sanguis/messages/max_health.hpp>
 #include <sanguis/messages/move.hpp>
 #include <sanguis/messages/remove.hpp>
+#include <sanguis/messages/remove_weapon.hpp>
 #include <sanguis/messages/role_name.hpp>
 #include <sanguis/messages/rotate.hpp>
 #include <sanguis/messages/start_attacking.hpp>
@@ -60,6 +64,7 @@
 #include <sanguis/messages/start_reloading.hpp>
 #include <sanguis/messages/stop_reloading.hpp>
 #include <sanguis/messages/speed.hpp>
+#include <sanguis/messages/adapted_types/is_primary_weapon.hpp>
 #include <sanguis/messages/adapted_types/level.hpp>
 #include <sanguis/messages/adapted_types/seed.hpp>
 #include <sanguis/messages/adapted_types/weapon_type.hpp>
@@ -78,6 +83,8 @@
 #include <sanguis/messages/roles/primary_weapon.hpp>
 #include <sanguis/messages/roles/projectile.hpp>
 #include <sanguis/messages/roles/speed.hpp>
+#include <sanguis/messages/roles/weapon_description.hpp>
+#include <sanguis/messages/serialization/convert_string_vector.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <fcppt/dynamic_cast.hpp>
 #include <fcppt/type_name.hpp>
@@ -177,6 +184,29 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		),
 		_message
 	);
+
+	sanguis::optional_primary_weapon_type const primary(
+		_message.get<
+			sanguis::messages::roles::primary_weapon
+		>()
+	);
+
+	if(
+		primary
+	)
+		(*this)(
+			sanguis::messages::give_weapon(
+				_message.get<
+					sanguis::messages::roles::entity_id
+				>(),
+				sanguis::weapon_type(
+					*primary
+				),
+				_message.get<
+					sanguis::messages::roles::weapon_description
+				>()
+			)
+		);
 }
 
 sanguis::client::draw2d::message::dispatcher::result_type
@@ -319,6 +349,25 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
+	sanguis::messages::give_weapon const &_message
+)
+{
+	env_.give_weapon(
+		sanguis::weapon_description(
+			sanguis::messages::serialization::convert_string_vector(
+				_message.get<
+					sanguis::messages::roles::weapon_description
+				>()
+			),
+			_message.get<
+				sanguis::messages::adapted_types::weapon_type
+			>()
+		)
+	);
+}
+
+sanguis::client::draw2d::message::dispatcher::result_type
+sanguis::client::draw2d::message::dispatcher::operator()(
 	sanguis::messages::health const &_message
 )
 {
@@ -411,6 +460,18 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	env_.remove(
 		_message.get<
 			sanguis::messages::roles::entity_id
+		>()
+	);
+}
+
+sanguis::client::draw2d::message::dispatcher::result_type
+sanguis::client::draw2d::message::dispatcher::operator()(
+	sanguis::messages::remove_weapon const &_message
+)
+{
+	env_.remove_weapon(
+		_message.get<
+			sanguis::messages::adapted_types::is_primary_weapon
 		>()
 	);
 }

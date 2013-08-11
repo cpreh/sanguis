@@ -238,7 +238,8 @@ sanguis::server::weapons::weapon::description() const
 					)
 				},
 				this->attributes()
-			)
+			),
+			this->type()
 		);
 }
 

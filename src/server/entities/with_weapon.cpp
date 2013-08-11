@@ -1,7 +1,9 @@
 #include <sanguis/is_primary_weapon.hpp>
+#include <sanguis/string_vector.hpp>
 #include <sanguis/time_unit.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
 #include <sanguis/primary_weapon_type.hpp>
+#include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/weapon_type_to_is_primary.hpp>
 #include <sanguis/messages/create.hpp>
@@ -88,6 +90,18 @@ sanguis::server::entities::with_weapon::primary_weapon_type() const
 		;
 }
 
+sanguis::string_vector const
+sanguis::server::entities::with_weapon::primary_weapon_text() const
+{
+	return
+		primary_weapon_
+		?
+			primary_weapon_->description().text()
+		:
+			sanguis::string_vector()
+		;
+}
+
 void
 sanguis::server::entities::with_weapon::pickup_weapon(
 	sanguis::server::weapons::unique_ptr &&_ptr
@@ -141,6 +155,10 @@ sanguis::server::entities::with_weapon::drop_weapon(
 				_is_primary
 			)
 		)
+	);
+
+	this->on_drop_weapon(
+		_is_primary
 	);
 
 	this->weapon_changed(
@@ -345,6 +363,13 @@ sanguis::server::entities::with_weapon::weapon_changed(
 void
 sanguis::server::entities::with_weapon::on_new_weapon(
 	sanguis::server::weapons::weapon const &
+)
+{
+}
+
+void
+sanguis::server::entities::with_weapon::on_drop_weapon(
+	sanguis::is_primary_weapon
 )
 {
 }

@@ -1,7 +1,9 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_MESSAGE_ENVIRONMENT_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_MESSAGE_ENVIRONMENT_HPP_INCLUDED
 
-#include <sanguis/entity_id.hpp>
+#include <sanguis/entity_id_fwd.hpp>
+#include <sanguis/is_primary_weapon_fwd.hpp>
+#include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
@@ -67,6 +69,18 @@ public:
 	void
 	change_world(
 		sanguis::client::world_parameters const &
+	) = 0;
+
+	virtual
+	void
+	give_weapon(
+		sanguis::weapon_description const &
+	) = 0;
+
+	virtual
+	void
+	remove_weapon(
+		sanguis::is_primary_weapon
 	) = 0;
 
 	virtual

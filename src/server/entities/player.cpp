@@ -2,11 +2,13 @@
 #include <sanguis/entity_id.hpp>
 #include <sanguis/perk_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_type_to_is_primary.hpp>
 #include <sanguis/messages/add_player.hpp>
 #include <sanguis/messages/add_own_player.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
+#include <sanguis/messages/serialization/convert_string_vector.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/closest_entity.hpp>
 #include <sanguis/server/dim.hpp>
@@ -447,15 +449,37 @@ sanguis::server::entities::player::add_message(
 ) const
 {
 	return
-		_receiver == this->player_id()
+		_receiver
+		==
+		this->player_id()
 		?
-			this->make_add_message<
-				sanguis::messages::add_own_player
-			>()
+			sanguis::messages::create(
+				sanguis::messages::add_own_player(
+					this->id(),
+					this->center().get(),
+					this->angle().get(),
+					this->speed().get(),
+					this->current_health().get(),
+					this->max_health().get(),
+					this->primary_weapon_type(),
+					sanguis::messages::serialization::convert_string_vector(
+						this->primary_weapon_text()
+					)
+				)
+			)
 		:
-			this->make_add_message<
-				sanguis::messages::add_player
-			>();
+			sanguis::messages::create(
+				sanguis::messages::add_player(
+					this->id(),
+					this->center().get(),
+					this->angle().get(),
+					this->speed().get(),
+					this->current_health().get(),
+					this->max_health().get(),
+					this->primary_weapon_type()
+				)
+			)
+		;
 }
 
 void
@@ -463,13 +487,23 @@ sanguis::server::entities::player::on_new_weapon(
 	sanguis::server::weapons::weapon const &_weapon
 )
 {
-	// TODO: Generate a helpful text about what the weapon's attributes are
-/*
 	this->environment().got_weapon(
 		this->player_id(),
 		this->id(),
-		_type
-	);*/
+		_weapon.description()
+	);
+}
+
+void
+sanguis::server::entities::player::on_drop_weapon(
+	sanguis::is_primary_weapon const _is_primary
+)
+{
+	this->environment().remove_weapon(
+		this->player_id(),
+		this->id(),
+		_is_primary
+	);
 }
 
 sanguis::server::collision::group_vector
@@ -479,24 +513,4 @@ sanguis::server::entities::player::collision_groups() const
 		sanguis::server::collision::group_vector{
 			sanguis::server::collision::group::player
 		};
-}
-
-template<
-	typename Message
->
-sanguis::messages::unique_ptr
-sanguis::server::entities::player::make_add_message() const
-{
-	return
-		sanguis::messages::create(
-			Message(
-				this->id(),
-				this->center().get(),
-				this->angle().get(),
-				this->speed().get(),
-				this->current_health().get(),
-				this->max_health().get(),
-				this->primary_weapon_type()
-			)
-		);
 }

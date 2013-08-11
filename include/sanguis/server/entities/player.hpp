@@ -154,15 +154,15 @@ private:
 	)
 	override;
 
+	void
+	on_drop_weapon(
+		sanguis::is_primary_weapon
+	)
+	override;
+
 	sanguis::server::collision::group_vector
 	collision_groups() const
 	override;
-
-	template<
-		typename Message
-	>
-	sanguis::messages::unique_ptr
-	make_add_message() const;
 
 	// TODO: Use optionals!
 	typedef

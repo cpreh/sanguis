@@ -5,11 +5,12 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
+#include <sanguis/is_primary_weapon_fwd.hpp>
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/timer.hpp>
 #include <sanguis/world_id.hpp>
-#include <sanguis/weapon_type_fwd.hpp>
+#include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/name.hpp>
 #include <sanguis/creator/opening_container.hpp>
@@ -112,7 +113,14 @@ private:
 	got_weapon(
 		sanguis::server::player_id,
 		sanguis::entity_id,
-		sanguis::weapon_type
+		sanguis::weapon_description const &
+	);
+
+	void
+	remove_weapon(
+		sanguis::server::player_id,
+		sanguis::entity_id,
+		sanguis::is_primary_weapon
 	);
 
 	void

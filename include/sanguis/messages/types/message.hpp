@@ -50,6 +50,7 @@ enum class message
 	player_unpause,
 	remove,
 	remove_id,
+	remove_weapon,
 	rotate,
 	speed,
 	start_attacking,

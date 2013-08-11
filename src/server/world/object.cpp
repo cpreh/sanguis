@@ -1,10 +1,11 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
+#include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
 #include <sanguis/timer.hpp>
 #include <sanguis/world_id.hpp>
-#include <sanguis/weapon_type.hpp>
+#include <sanguis/weapon_description.hpp>
 #include <sanguis/creator/opening.hpp>
 #include <sanguis/creator/opening_container.hpp>
 #include <sanguis/creator/spawn_container.hpp>
@@ -21,11 +22,13 @@
 #include <sanguis/messages/give_weapon.hpp>
 #include <sanguis/messages/level_up.hpp>
 #include <sanguis/messages/remove.hpp>
+#include <sanguis/messages/remove_weapon.hpp>
 #include <sanguis/messages/start_attacking.hpp>
 #include <sanguis/messages/start_reloading.hpp>
 #include <sanguis/messages/stop_attacking.hpp>
 #include <sanguis/messages/stop_reloading.hpp>
 #include <sanguis/messages/max_health.hpp>
+#include <sanguis/messages/serialization/convert_string_vector.hpp>
 #include <sanguis/messages/types/exp.hpp>
 #include <sanguis/messages/types/size.hpp>
 #include <sanguis/server/center_fwd.hpp>
@@ -447,7 +450,7 @@ void
 sanguis::server::world::object::got_weapon(
 	sanguis::server::player_id const _player_id,
 	sanguis::entity_id const _entity_id,
-	sanguis::weapon_type const _wt
+	sanguis::weapon_description const &_description
 )
 {
 	this->send_player_specific(
@@ -455,7 +458,28 @@ sanguis::server::world::object::got_weapon(
 		*sanguis::messages::create(
 			sanguis::messages::give_weapon(
 				_entity_id,
-				_wt
+				_description.weapon_type(),
+				sanguis::messages::serialization::convert_string_vector(
+					_description.text()
+				)
+			)
+		)
+	);
+}
+
+void
+sanguis::server::world::object::remove_weapon(
+	sanguis::server::player_id const _player_id,
+	sanguis::entity_id const _entity_id,
+	sanguis::is_primary_weapon const _is_primary
+)
+{
+	this->send_player_specific(
+		_player_id,
+		*sanguis::messages::create(
+			sanguis::messages::remove_weapon(
+				_entity_id,
+				_is_primary
 			)
 		)
 	);

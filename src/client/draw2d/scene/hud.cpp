@@ -1,20 +1,32 @@
+#include <sanguis/is_primary_weapon.hpp>
+#include <sanguis/string_vector.hpp>
+#include <sanguis/weapon_description.hpp>
+#include <sanguis/weapon_type_to_is_primary.hpp>
+#include <sanguis/client/exp.hpp>
+#include <sanguis/client/level.hpp>
 #include <sanguis/client/draw2d/scene/hud.hpp>
 #include <sge/font/align_h.hpp>
 #include <sge/font/from_fcppt_string.hpp>
+#include <sge/font/lit.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/text_parameters.hpp>
+#include <sge/font/unit.hpp>
 #include <sge/font/vector.hpp>
 #include <sge/font/draw/simple.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/image/color/any/object.hpp>
-#include <sge/renderer/context/ffp_fwd.hpp>
+#include <sge/renderer/context/ffp.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/renderer/target/viewport_size.hpp>
 #include <sge/renderer/texture/emulate_srgb.hpp>
-#include <fcppt/container/bitfield/object_impl.hpp>
-#include <fcppt/io/ostringstream.hpp>
-#include <fcppt/time/output_tm.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/io/ostringstream.hpp>
+#include <fcppt/time/output_tm.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <ctime>
+#include <fcppt/config/external_end.hpp>
+
 
 sanguis::client::draw2d::scene::hud::hud(
 	sge::font::object &_font_object,
@@ -37,13 +49,21 @@ sanguis::client::draw2d::scene::hud::hud(
 	time_(
 		_time
 	),
-	frames_counter_()
+	frames_counter_(),
+	primary_weapon_(),
+	secondary_weapon_(),
+	weapon_text_()
+{
+	this->make_weapon_text();
+}
+
+sanguis::client::draw2d::scene::hud::~hud()
 {
 }
 
 void
 sanguis::client::draw2d::scene::hud::experience(
-	client::exp const _experience
+	sanguis::client::exp const _experience
 )
 {
 	experience_ = _experience;
@@ -51,7 +71,7 @@ sanguis::client::draw2d::scene::hud::experience(
 
 void
 sanguis::client::draw2d::scene::hud::level(
-	client::level const _level
+	sanguis::client::level const _level
 )
 {
 	level_ = _level;
@@ -66,6 +86,33 @@ sanguis::client::draw2d::scene::hud::time(
 }
 
 void
+sanguis::client::draw2d::scene::hud::weapon_description(
+	sanguis::weapon_description const &_description
+)
+{
+	this->weapon_text(
+		sanguis::weapon_type_to_is_primary(
+			_description.weapon_type()
+		)
+	) =
+		_description.text();
+
+	this->make_weapon_text();
+}
+
+void
+sanguis::client::draw2d::scene::hud::remove_weapon(
+	sanguis::is_primary_weapon const _is_primary
+)
+{
+	this->weapon_text(
+		_is_primary
+	).clear();
+
+	this->make_weapon_text();
+}
+
+void
 sanguis::client::draw2d::scene::hud::draw(
 	sge::renderer::context::ffp &_render_context
 )
@@ -77,6 +124,16 @@ sanguis::client::draw2d::scene::hud::draw(
 	fcppt::time::output_tm(
 		time_stream,
 		time_
+	);
+
+	sge::font::unit const width(
+		static_cast<
+			sge::font::unit
+		>(
+			sge::renderer::target::viewport_size(
+				_render_context.target()
+			).w()
+		)
 	);
 
 	sge::font::draw::simple(
@@ -100,10 +157,79 @@ sanguis::client::draw2d::scene::hud::draw(
 			sge::font::align_h::left
 		)
 		.max_width(
-			300 // FIXME
+			width
 		),
 		sge::font::vector::null(),
 		sge::image::color::predef::white(),
 		sge::renderer::texture::emulate_srgb::no
 	);
+
+	sge::font::draw::simple(
+		renderer_,
+		_render_context,
+		font_object_,
+		weapon_text_,
+		sge::font::text_parameters(
+			sge::font::align_h::right
+		)
+		.max_width(
+			width
+		),
+		sge::font::vector::null(),
+		sge::image::color::predef::white(),
+		sge::renderer::texture::emulate_srgb::no
+	);
+}
+
+void
+sanguis::client::draw2d::scene::hud::make_weapon_text()
+{
+	weapon_text_.clear();
+
+	weapon_text_ +=
+		SGE_FONT_LIT("primary:\n");
+
+	this->append_weapon_text(
+		primary_weapon_
+	);
+
+	weapon_text_ +=
+		SGE_FONT_LIT("\nsecondary:\n");
+
+	this->append_weapon_text(
+		secondary_weapon_
+	);
+}
+
+void
+sanguis::client::draw2d::scene::hud::append_weapon_text(
+	sanguis::string_vector const &_text
+)
+{
+	for(
+		auto const &line
+		:
+		_text
+	)
+		weapon_text_
+			+=
+			sge::font::from_fcppt_string(
+				line
+			)
+			+
+			SGE_FONT_LIT('\n');
+}
+
+sanguis::string_vector &
+sanguis::client::draw2d::scene::hud::weapon_text(
+	sanguis::is_primary_weapon const _is_primary
+)
+{
+	return
+		_is_primary.get()
+		?
+			primary_weapon_
+		:
+			secondary_weapon_
+		;
 }

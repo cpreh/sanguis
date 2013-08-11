@@ -10,7 +10,6 @@
 #include <sanguis/client/states/ingame_fwd.hpp>
 #include <sanguis/messages/available_perks_fwd.hpp>
 #include <sanguis/messages/base_fwd.hpp>
-#include <sanguis/messages/give_weapon_fwd.hpp>
 #include <sanguis/messages/level_up_fwd.hpp>
 #include <sanguis/messages/remove_id_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -74,11 +73,6 @@ public:
 	result_type
 	operator()(
 		sanguis::messages::available_perks const &
-	);
-
-	result_type
-	operator()(
-		sanguis::messages::give_weapon const &
 	);
 
 	result_type

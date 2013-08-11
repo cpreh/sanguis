@@ -198,7 +198,8 @@ sanguis::client::states::running::operator()(
 		)
 	);
 
-	return discard_event();
+	return
+		this->discard_event();
 }
 
 boost::statechart::result
@@ -216,7 +217,8 @@ sanguis::client::states::running::operator()(
 		)
 	);
 
-	return discard_event();
+	return
+		this->discard_event();
 }
 
 boost::statechart::result
@@ -268,7 +270,8 @@ sanguis::client::states::running::operator()(
 		true
 	);
 
-	return discard_event();
+	return
+		this->discard_event();
 }
 
 boost::statechart::result

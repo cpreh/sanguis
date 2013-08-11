@@ -1,6 +1,6 @@
 #include <sanguis/entity_id.hpp>
+#include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
-#include <sanguis/weapon_type.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
@@ -67,13 +67,27 @@ void
 sanguis::server::world::environment::got_weapon(
 	sanguis::server::player_id const _player_id,
 	sanguis::entity_id const _id,
-	sanguis::weapon_type const _weapon
+	sanguis::weapon_description const &_description
 )
 {
 	world_.got_weapon(
 		_player_id,
 		_id,
-		_weapon
+		_description
+	);
+}
+
+void
+sanguis::server::world::environment::remove_weapon(
+	sanguis::server::player_id const _player_id,
+	sanguis::entity_id const _id,
+	sanguis::is_primary_weapon const _is_primary
+)
+{
+	world_.remove_weapon(
+		_player_id,
+		_id,
+		_is_primary
 	);
 }
 

@@ -1,9 +1,10 @@
 #ifndef SANGUIS_SERVER_ENVIRONMENT_OBJECT_HPP_INCLUDED
 #define SANGUIS_SERVER_ENVIRONMENT_OBJECT_HPP_INCLUDED
 
-#include <sanguis/entity_id.hpp>
+#include <sanguis/entity_id_fwd.hpp>
+#include <sanguis/is_primary_weapon_fwd.hpp>
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
-#include <sanguis/weapon_type_fwd.hpp>
+#include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
@@ -54,7 +55,15 @@ public:
 	got_weapon(
 		sanguis::server::player_id,
 		sanguis::entity_id,
-		sanguis::weapon_type
+		sanguis::weapon_description const &
+	) = 0;
+
+	virtual
+	void
+	remove_weapon(
+		sanguis::server::player_id,
+		sanguis::entity_id,
+		sanguis::is_primary_weapon
 	) = 0;
 
 	virtual
