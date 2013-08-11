@@ -1,4 +1,5 @@
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/string_vector.hpp>
 #include <sanguis/random_generator.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/angle.hpp>
@@ -13,12 +14,15 @@
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/delayed_attack.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
+#include <sanguis/server/weapons/make_attribute.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/shotgun.hpp>
 #include <sanguis/server/weapons/unlimited_magazine_count.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/random/variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/distribution/parameters/normal.hpp>
@@ -124,4 +128,30 @@ sanguis::server::weapons::shotgun::do_attack(
 			)
 		);
 	}
+}
+
+sanguis::string_vector
+sanguis::server::weapons::shotgun::attributes() const
+{
+	return
+		sanguis::string_vector{
+			sanguis::server::weapons::make_attribute(
+				FCPPT_TEXT("damage"),
+				fcppt::insert_to_fcppt_string(
+					damage_
+				)
+			),
+			sanguis::server::weapons::make_attribute(
+				FCPPT_TEXT("spread radius"),
+				fcppt::insert_to_fcppt_string(
+					spread_radius_
+				)
+			),
+			sanguis::server::weapons::make_attribute(
+				FCPPT_TEXT("shells"),
+				fcppt::insert_to_fcppt_string(
+					shells_
+				)
+			)
+		};
 }

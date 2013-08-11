@@ -2,6 +2,8 @@
 #define SANGUIS_SERVER_WEAPONS_WEAPON_HPP_INCLUDED
 
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/string_vector.hpp>
+#include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/with_weapon_fwd.hpp>
@@ -89,6 +91,9 @@ public:
 
 	bool
 	usable() const;
+
+	sanguis::weapon_description
+	description() const;
 protected:
 	virtual
 	void
@@ -99,6 +104,10 @@ protected:
 	sanguis::diff_clock const &
 	diff_clock() const;
 private:
+	virtual
+	sanguis::string_vector
+	attributes() const = 0;
+
 	friend class sanguis::server::weapons::states::ready;
 	friend class sanguis::server::weapons::states::reloading;
 	friend class sanguis::server::weapons::states::backswing;

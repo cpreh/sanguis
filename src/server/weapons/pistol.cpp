@@ -1,10 +1,12 @@
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/string_vector.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/delayed_attack.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
+#include <sanguis/server/weapons/make_attribute.hpp>
 #include <sanguis/server/weapons/pistol.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
@@ -15,7 +17,9 @@
 #include <sanguis/server/entities/projectiles/simple_bullet.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/text.hpp>
 
 
 sanguis::server::weapons::pistol::pistol(
@@ -72,4 +76,18 @@ sanguis::server::weapons::pistol::do_attack(
 			_attack.angle()
 		)
 	);
+}
+
+sanguis::string_vector
+sanguis::server::weapons::pistol::attributes() const
+{
+	return
+		sanguis::string_vector{
+			sanguis::server::weapons::make_attribute(
+				FCPPT_TEXT("damage"),
+				fcppt::insert_to_fcppt_string(
+					damage_
+				)
+			)
+		};
 }

@@ -1,6 +1,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/friend_type.hpp>
 #include <sanguis/secondary_weapon_type.hpp>
+#include <sanguis/string_vector.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/center.hpp>
@@ -98,4 +99,12 @@ sanguis::server::weapons::sentry::do_attack(
 			_attack.angle()
 		)
 	);
+}
+
+sanguis::string_vector
+sanguis::server::weapons::sentry::attributes() const
+{
+	// TODO:
+	return
+		sanguis::string_vector{};
 }

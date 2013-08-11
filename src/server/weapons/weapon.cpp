@@ -1,5 +1,6 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/log_parameters.hpp>
+#include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/collision/distance_entity_pos.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
@@ -10,6 +11,7 @@
 #include <sanguis/server/weapons/log_location.hpp>
 #include <sanguis/server/weapons/magazine_count.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
+#include <sanguis/server/weapons/make_attribute.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/target.hpp>
@@ -19,7 +21,10 @@
 #include <sanguis/server/weapons/events/shoot.hpp>
 #include <sanguis/server/weapons/events/stop.hpp>
 #include <sanguis/server/weapons/states/ready.hpp>
+#include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/scoped_state_machine_impl.hpp>
+#include <fcppt/text.hpp>
+#include <fcppt/algorithm/join.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/log/location.hpp>
@@ -30,7 +35,9 @@
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
-#include <fcppt/text.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/chrono/chrono_io.hpp>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace
@@ -190,6 +197,49 @@ bool
 sanguis::server::weapons::weapon::usable() const
 {
 	return magazine_count_ > 0;
+}
+
+sanguis::weapon_description
+sanguis::server::weapons::weapon::description() const
+{
+	return
+		sanguis::weapon_description(
+			fcppt::algorithm::join(
+				sanguis::string_vector{
+					sanguis::server::weapons::make_attribute(
+						FCPPT_TEXT("range"),
+						fcppt::insert_to_fcppt_string(
+							range_
+						)
+					),
+					sanguis::server::weapons::make_attribute(
+						FCPPT_TEXT("magazine size"),
+						fcppt::insert_to_fcppt_string(
+							magazine_size_
+						)
+					),
+					sanguis::server::weapons::make_attribute(
+						FCPPT_TEXT("cast point"),
+						fcppt::insert_to_fcppt_string(
+							cast_point_
+						)
+					),
+					sanguis::server::weapons::make_attribute(
+						FCPPT_TEXT("backswing time"),
+						fcppt::insert_to_fcppt_string(
+							backswing_time_
+						)
+					),
+					sanguis::server::weapons::make_attribute(
+						FCPPT_TEXT("reload time"),
+						fcppt::insert_to_fcppt_string(
+							reload_time_
+						)
+					)
+				},
+				this->attributes()
+			)
+		);
 }
 
 sanguis::diff_clock const &

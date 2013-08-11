@@ -1,6 +1,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/primary_weapon_type.hpp>
+#include <sanguis/string_vector.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/entities/base.hpp>
@@ -11,13 +12,16 @@
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/delayed_attack.hpp>
+#include <sanguis/server/weapons/make_attribute.hpp>
 #include <sanguis/server/weapons/melee.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/unlimited_magazine_size.hpp>
 #include <sanguis/server/weapons/unlimited_magazine_count.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/text.hpp>
 
 
 sanguis::server::weapons::melee::melee(
@@ -77,4 +81,18 @@ sanguis::server::weapons::melee::do_attack(
 			)
 		)
 	);
+}
+
+sanguis::string_vector
+sanguis::server::weapons::melee::attributes() const
+{
+	return
+		sanguis::string_vector{
+			sanguis::server::weapons::make_attribute(
+				FCPPT_TEXT("damage"),
+				fcppt::insert_to_fcppt_string(
+					damage_
+				)
+			)
+		};
 }

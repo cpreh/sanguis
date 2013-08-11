@@ -1107,6 +1107,7 @@ SET(
 	include/sanguis/server/weapons/magazine_count.hpp
 	include/sanguis/server/weapons/magazine_size.hpp
 	include/sanguis/server/weapons/magazine_type.hpp
+	include/sanguis/server/weapons/make_attribute.hpp
 	include/sanguis/server/weapons/melee.hpp
 	include/sanguis/server/weapons/pistol.hpp
 	include/sanguis/server/weapons/player_start_weapon.hpp
@@ -1166,6 +1167,8 @@ SET(
 	include/sanguis/to_console_arg_list.hpp
 	include/sanguis/unsigned_scale.hpp
 	include/sanguis/update_diff_clock.hpp
+	include/sanguis/weapon_description.hpp
+	include/sanguis/weapon_description_fwd.hpp
 	include/sanguis/weapon_type.hpp
 	include/sanguis/weapon_type_fwd.hpp
 	include/sanguis/weapon_type_to_is_primary.hpp
@@ -1622,6 +1625,7 @@ SET(
 	src/server/weapons/grenade.cpp
 	src/server/weapons/log.cpp
 	src/server/weapons/log_location.cpp
+	src/server/weapons/make_attribute.cpp
 	src/server/weapons/melee.cpp
 	src/server/weapons/pistol.cpp
 	src/server/weapons/player_start_weapon.cpp
@@ -1653,6 +1657,7 @@ SET(
 	src/server/world/spawn_parameters.cpp
 	src/to_console_arg_list.cpp
 	src/update_diff_clock.cpp
+	src/weapon_description.cpp
 	src/weapon_type_to_is_primary.cpp
 )
 

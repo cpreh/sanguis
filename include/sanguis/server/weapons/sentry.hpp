@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_WEAPONS_SENTRY_HPP_INCLUDED
 
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/string_vector.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
@@ -44,6 +45,10 @@ private:
 	do_attack(
 		sanguis::server::weapons::delayed_attack const &
 	);
+
+	sanguis::string_vector
+	attributes() const
+	override;
 
 	sanguis::random_generator &random_generator_;
 

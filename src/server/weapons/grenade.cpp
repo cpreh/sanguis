@@ -1,5 +1,6 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/secondary_weapon_type.hpp>
+#include <sanguis/string_vector.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/radius.hpp>
@@ -14,9 +15,12 @@
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/delayed_attack.hpp>
 #include <sanguis/server/weapons/grenade.hpp>
+#include <sanguis/server/weapons/make_attribute.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/text.hpp>
 
 
 sanguis::server::weapons::grenade::grenade(
@@ -87,4 +91,24 @@ sanguis::server::weapons::grenade::do_attack(
 			_attack.angle()
 		)
 	);
+}
+
+sanguis::string_vector
+sanguis::server::weapons::grenade::attributes() const
+{
+	return
+		sanguis::string_vector{
+			sanguis::server::weapons::make_attribute(
+				FCPPT_TEXT("damage"),
+				fcppt::insert_to_fcppt_string(
+					damage_
+				)
+			),
+			sanguis::server::weapons::make_attribute(
+				FCPPT_TEXT("aoe"),
+				fcppt::insert_to_fcppt_string(
+					aoe_
+				)
+			)
+		};
 }
