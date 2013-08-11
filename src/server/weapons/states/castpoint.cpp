@@ -83,19 +83,9 @@ sanguis::server::weapons::states::castpoint::react(
 	if(
 		cancelled_
 	)
-	{
-		_event.owner().attacking(
-			false,
-			this->context<
-				sanguis::server::weapons::weapon
-			>().type()
+		this->post_event(
+			sanguis::server::weapons::events::stop()
 		);
-
-		return
-			this->transit<
-				sanguis::server::weapons::states::ready
-			>();
-	}
 
 	return
 		this->transit<
