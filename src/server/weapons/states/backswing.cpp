@@ -84,9 +84,7 @@ sanguis::server::weapons::states::backswing::react(
 			cancelled_
 		)
 			this->post_event(
-				sanguis::server::weapons::events::stop(
-					_event.owner()
-				)
+				sanguis::server::weapons::events::stop()
 			);
 
 		_event.owner().reloading(

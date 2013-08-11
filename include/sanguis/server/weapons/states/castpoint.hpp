@@ -64,6 +64,8 @@ public:
 	);
 private:
 	sanguis::diff_timer attack_time_;
+
+	bool cancelled_;
 };
 
 }

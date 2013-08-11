@@ -1615,7 +1615,6 @@ SET(
 	src/server/weapons/delayed_attack.cpp
 	src/server/weapons/events/poll.cpp
 	src/server/weapons/events/shoot.cpp
-	src/server/weapons/events/stop.cpp
 	src/server/weapons/factory/dual_pistols.cpp
 	src/server/weapons/factory/grenade.cpp
 	src/server/weapons/factory/parameters.cpp

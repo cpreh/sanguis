@@ -139,9 +139,7 @@ sanguis::server::entities::with_weapon::pickup_weapon(
 	if(
 		_ptr
 	)
-		_ptr->stop(
-			*this
-		);
+		_ptr->stop();
 }
 
 sanguis::server::weapons::unique_ptr
@@ -210,9 +208,7 @@ sanguis::server::entities::with_weapon::use_weapon(
 	if(
 		!_use
 	)
-		weapon->stop(
-			*this
-		);
+		weapon->stop();
 	else if(
 		target_
 	)

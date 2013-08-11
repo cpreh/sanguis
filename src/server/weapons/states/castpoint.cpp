@@ -40,6 +40,9 @@ sanguis::server::weapons::states::castpoint::castpoint(
 			/
 			_parameters.ias().get()
 		)
+	),
+	cancelled_(
+		false
 	)
 {
 }
@@ -77,6 +80,23 @@ sanguis::server::weapons::states::castpoint::react(
 		sanguis::server::weapons::weapon
 	>().use_magazine_item();
 
+	if(
+		cancelled_
+	)
+	{
+		_event.owner().attacking(
+			false,
+			this->context<
+				sanguis::server::weapons::weapon
+			>().type()
+		);
+
+		return
+			this->transit<
+				sanguis::server::weapons::states::ready
+			>();
+	}
+
 	return
 		this->transit<
 			sanguis::server::weapons::states::backswing
@@ -89,18 +109,11 @@ sanguis::server::weapons::states::castpoint::react(
 
 boost::statechart::result
 sanguis::server::weapons::states::castpoint::react(
-	sanguis::server::weapons::events::stop const &_event
+	sanguis::server::weapons::events::stop const &
 )
 {
-	_event.owner().attacking(
-		false,
-		this->context<
-			sanguis::server::weapons::weapon
-		>().type()
-	);
+	cancelled_ = true;
 
 	return
-		this->transit<
-			sanguis::server::weapons::states::ready
-		>();
+		this->discard_event();
 }

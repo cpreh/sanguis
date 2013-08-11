@@ -68,9 +68,7 @@ public:
 	);
 
 	void
-	stop(
-		sanguis::server::entities::with_weapon &
-	);
+	stop();
 
 	void
 	update(

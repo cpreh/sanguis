@@ -138,14 +138,10 @@ sanguis::server::weapons::weapon::attack(
 }
 
 void
-sanguis::server::weapons::weapon::stop(
-	sanguis::server::entities::with_weapon &_owner
-)
+sanguis::server::weapons::weapon::stop()
 {
 	this->process_event(
-		sanguis::server::weapons::events::stop(
-			_owner
-		)
+		sanguis::server::weapons::events::stop()
 	);
 }
 
