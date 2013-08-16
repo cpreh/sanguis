@@ -1,7 +1,6 @@
 #ifndef SANGUIS_LOAD_MODEL_COLLECTION_HPP_INCLUDED
 #define SANGUIS_LOAD_MODEL_COLLECTION_HPP_INCLUDED
 
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/load/model/collection_fwd.hpp>
 #include <sanguis/load/model/object_fwd.hpp>
 #include <sanguis/load/resource/context_fwd.hpp>
@@ -30,16 +29,14 @@ public:
 		fcppt::string const &
 	) const;
 
+	explicit
 	collection(
-		sanguis::load::resource::context const &,
-		sanguis::random_generator &
+		sanguis::load::resource::context const &
 	);
 
 	~collection();
 private:
 	sanguis::load::resource::context const &ctx_;
-
-	sanguis::random_generator &random_generator_;
 
 	typedef boost::ptr_map<
 		fcppt::string,

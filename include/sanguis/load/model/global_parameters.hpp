@@ -1,7 +1,6 @@
 #ifndef SANGUIS_LOAD_MODEL_GLOBAL_PARAMETERS_HPP_INCLUDED
 #define SANGUIS_LOAD_MODEL_GLOBAL_PARAMETERS_HPP_INCLUDED
 
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/load/model/global_parameters_fwd.hpp>
 #include <sanguis/load/model/optional_delay.hpp>
 #include <sanguis/load/model/optional_texture_identifier.hpp>
@@ -28,16 +27,12 @@ class global_parameters
 	);
 public:
 	global_parameters(
-		sanguis::random_generator &,
 		boost::filesystem::path const &,
 		sanguis::load::resource::textures const &,
 		sge::renderer::dim2 const &cell_size,
 		sanguis::load::model::optional_delay const &,
 		sanguis::load::model::optional_texture_identifier const &
 	);
-
-	sanguis::random_generator &
-	random_generator() const;
 
 	boost::filesystem::path const &
 	path() const;
@@ -59,8 +54,6 @@ public:
 		sanguis::load::model::optional_texture_identifier const &
 	) const;
 private:
-	sanguis::random_generator &random_generator_;
-
 	boost::filesystem::path const path_;
 
 	sanguis::load::resource::textures const &textures_;

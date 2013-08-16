@@ -12,7 +12,7 @@
 #include <sanguis/client/draw2d/sprite/index.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
-#include <sge/sprite/object_impl.hpp>
+#include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/math/point_rotate.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>

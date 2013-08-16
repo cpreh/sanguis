@@ -38,6 +38,9 @@ sanguis::client::draw2d::entities::aoe_bullet::aoe_bullet(
 	model_collection_(
 		_param.collection()
 	),
+	normal_system_(
+		_param.normal_system()
+	),
 	insert_(
 		_insert
 	),
@@ -60,6 +63,7 @@ sanguis::client::draw2d::entities::aoe_bullet::on_die()
 		>(
 			diff_clock_,
 			random_generator_,
+			normal_system_,
 			model_collection_,
 			this->center(),
 			aoe_

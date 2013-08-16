@@ -32,7 +32,7 @@ class system
 
 	typedef sge::sprite::intrusive::ordered::collection<
 		Choices,
-		sprite::order
+		sanguis::client::draw2d::sprite::order
 	> collection;
 
 	typedef typename collection::connection_type connection_type;
@@ -47,7 +47,7 @@ public:
 
 	connection_type &
 	connection(
-		sprite::order
+		sanguis::client::draw2d::sprite::order
 	);
 
 	void

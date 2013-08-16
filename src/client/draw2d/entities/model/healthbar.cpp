@@ -1,5 +1,6 @@
 #include <sanguis/exception.hpp>
 #include <sanguis/client/health.hpp>
+#include <sanguis/client/health_type.hpp>
 #include <sanguis/client/max_health.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/model/healthbar.hpp>
@@ -10,14 +11,13 @@
 #include <sanguis/client/draw2d/sprite/colored/color.hpp>
 #include <sanguis/client/draw2d/sprite/colored/color_format.hpp>
 #include <sanguis/client/draw2d/sprite/colored/parameters.hpp>
-#include <sanguis/client/draw2d/sprite/colored/system.hpp>
-#include <sge/image/color/any/convert.hpp>
-#include <sge/image/color/any/object.hpp>
+#include <sanguis/client/draw2d/sprite/colored/object.hpp>
+#include <sanguis/client/draw2d/sprite/colored/system_decl.hpp>
 #include <sge/image/color/rgba8.hpp>
 #include <sge/image/color/init.hpp>
 #include <sge/image/color/predef.hpp>
-#include <sge/sprite/parameters_impl.hpp>
-#include <sge/sprite/object_impl.hpp>
+#include <sge/image/color/any/convert.hpp>
+#include <sge/image/color/any/object.hpp>
 #include <sge/sprite/intrusive/connection.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -202,7 +202,7 @@ sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 		max_health_.get()
 		<
 		static_cast<
-			sprite::unit
+			sanguis::client::health_type
 		>(
 			0.01f
 		)

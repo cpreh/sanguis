@@ -204,27 +204,45 @@ SET(
 	include/sanguis/client/draw2d/sprite/center.hpp
 	include/sanguis/client/draw2d/sprite/center_fwd.hpp
 	include/sanguis/client/draw2d/sprite/client/choices.hpp
+	include/sanguis/client/draw2d/sprite/client/choices_fwd.hpp
 	include/sanguis/client/draw2d/sprite/client/object.hpp
+	include/sanguis/client/draw2d/sprite/client/object_decl.hpp
+	include/sanguis/client/draw2d/sprite/client/object_fwd.hpp
 	include/sanguis/client/draw2d/sprite/client/parameters.hpp
-	include/sanguis/client/draw2d/sprite/client/system.hpp
+	include/sanguis/client/draw2d/sprite/client/parameters_fwd.hpp
+	include/sanguis/client/draw2d/sprite/client/system_decl.hpp
+	include/sanguis/client/draw2d/sprite/client/system_fwd.hpp
 	include/sanguis/client/draw2d/sprite/client/texture_coordinates.hpp
+	include/sanguis/client/draw2d/sprite/client/texture_coordinates_fwd.hpp
 	include/sanguis/client/draw2d/sprite/colored/choices.hpp
+	include/sanguis/client/draw2d/sprite/colored/choices_fwd.hpp
 	include/sanguis/client/draw2d/sprite/colored/color.hpp
 	include/sanguis/client/draw2d/sprite/colored/color_format.hpp
+	include/sanguis/client/draw2d/sprite/colored/color_fwd.hpp
 	include/sanguis/client/draw2d/sprite/colored/object.hpp
+	include/sanguis/client/draw2d/sprite/colored/object_decl.hpp
+	include/sanguis/client/draw2d/sprite/colored/object_fwd.hpp
 	include/sanguis/client/draw2d/sprite/colored/parameters.hpp
-	include/sanguis/client/draw2d/sprite/colored/system.hpp
+	include/sanguis/client/draw2d/sprite/colored/parameters_fwd.hpp
+	include/sanguis/client/draw2d/sprite/colored/system_decl.hpp
+	include/sanguis/client/draw2d/sprite/colored/system_fwd.hpp
 	include/sanguis/client/draw2d/sprite/dim.hpp
 	include/sanguis/client/draw2d/sprite/dim_fwd.hpp
 	include/sanguis/client/draw2d/sprite/float_unit.hpp
 	include/sanguis/client/draw2d/sprite/index.hpp
 	include/sanguis/client/draw2d/sprite/index_fwd.hpp
-	include/sanguis/client/draw2d/sprite/matrix.hpp
 	include/sanguis/client/draw2d/sprite/normal/choices.hpp
+	include/sanguis/client/draw2d/sprite/normal/choices_fwd.hpp
 	include/sanguis/client/draw2d/sprite/normal/object.hpp
+	include/sanguis/client/draw2d/sprite/normal/object_decl.hpp
+	include/sanguis/client/draw2d/sprite/normal/object_fwd.hpp
 	include/sanguis/client/draw2d/sprite/normal/parameters.hpp
-	include/sanguis/client/draw2d/sprite/normal/system.hpp
+	include/sanguis/client/draw2d/sprite/normal/parameters_fwd.hpp
+	include/sanguis/client/draw2d/sprite/normal/system_decl.hpp
+	include/sanguis/client/draw2d/sprite/normal/system_fwd.hpp
 	include/sanguis/client/draw2d/sprite/normal/texture_animation.hpp
+	include/sanguis/client/draw2d/sprite/normal/texture_animation_decl.hpp
+	include/sanguis/client/draw2d/sprite/normal/texture_animation_fwd.hpp
 	include/sanguis/client/draw2d/sprite/order.hpp
 	include/sanguis/client/draw2d/sprite/order_fwd.hpp
 	include/sanguis/client/draw2d/sprite/point.hpp
@@ -232,6 +250,9 @@ SET(
 	include/sanguis/client/draw2d/sprite/rotation.hpp
 	include/sanguis/client/draw2d/sprite/state.hpp
 	include/sanguis/client/draw2d/sprite/state_choices.hpp
+	include/sanguis/client/draw2d/sprite/state_choices_fwd.hpp
+	include/sanguis/client/draw2d/sprite/state_decl.hpp
+	include/sanguis/client/draw2d/sprite/state_fwd.hpp
 	include/sanguis/client/draw2d/sprite/system_decl.hpp
 	include/sanguis/client/draw2d/sprite/system_fwd.hpp
 	include/sanguis/client/draw2d/sprite/system_impl.hpp

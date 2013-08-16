@@ -14,12 +14,9 @@
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/index.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
-#include <sanguis/client/draw2d/sprite/system_decl.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sanguis/client/draw2d/sprite/normal/parameters.hpp>
-#include <sanguis/client/draw2d/sprite/normal/system.hpp>
-#include <sge/sprite/parameters_impl.hpp>
-#include <sge/sprite/object_impl.hpp>
+#include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
 #include <sge/sprite/center.hpp>
 #include <sge/sprite/intrusive/connection.hpp>
 #include <sge/timer/elapsed.hpp>

@@ -69,7 +69,9 @@ sanguis::load::model::object::operator[](
 }
 
 sanguis::load::model::part const &
-sanguis::load::model::object::random_part() const
+sanguis::load::model::object::random_part(
+	sanguis::random_generator &_random_generator
+) const
 {
 	if(
 		!random_part_
@@ -78,7 +80,7 @@ sanguis::load::model::object::random_part() const
 			fcppt::make_unique_ptr<
 				part_rand
 			>(
-				random_generator_,
+				_random_generator,
 				part_map_distribution(
 					part_map_distribution::param_type::min(
 						0u
@@ -127,15 +129,11 @@ sanguis::load::model::object::dim() const
 
 sanguis::load::model::object::object(
 	boost::filesystem::path const &_path,
-	sanguis::load::resource::context const &_ctx,
-	sanguis::random_generator &_random_generator
+	sanguis::load::resource::context const &_ctx
 )
 :
 	path_(
 		_path
-	),
-	random_generator_(
-		_random_generator
 	),
 	cell_size_(
 		fcppt::no_init()
@@ -261,7 +259,6 @@ sanguis::load::model::object::construct(
 						member.second
 					),
 					sanguis::load::model::global_parameters(
-						random_generator_,
 						path_,
 						_ctx.textures(),
 						cell_size_,

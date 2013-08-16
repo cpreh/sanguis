@@ -1,4 +1,3 @@
-#include <sanguis/random_seed.hpp>
 #include <sanguis/load/context.hpp>
 #include <sanguis/load/model/collection.hpp>
 #include <sanguis/load/model/context.hpp>
@@ -12,16 +11,12 @@ sanguis::load::context::context(
 	sge::renderer::device::core &_rend
 )
 :
-	random_generator_(
-		sanguis::random_seed()
-	),
 	resource_ctx_(
 		_rend,
 		_il
 	),
 	model_ctx_(
-		resource_ctx_,
-		random_generator_
+		resource_ctx_
 	)
 {
 }

@@ -3,10 +3,11 @@
 
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
-#include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
-#include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/draw2d/aoe.hpp>
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
+#include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/object.hpp>
+#include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
 #include <sanguis/load/model/collection_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -46,6 +47,8 @@ private:
 	sanguis::random_generator &random_generator_;
 
 	sanguis::load::model::collection const &model_collection_;
+
+	sanguis::client::draw2d::sprite::normal::system &normal_system_;
 
 	sanguis::client::draw2d::insert_own_callback const insert_;
 

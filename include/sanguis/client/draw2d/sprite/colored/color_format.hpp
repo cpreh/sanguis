@@ -3,6 +3,7 @@
 
 #include <sge/image/color/rgba8_format.hpp>
 
+
 namespace sanguis
 {
 namespace client

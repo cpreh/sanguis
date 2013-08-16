@@ -3,9 +3,12 @@
 
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
-#include <sanguis/client/draw2d/entities/own.hpp>
-#include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/aoe.hpp>
+#include <sanguis/client/draw2d/entities/own.hpp>
+#include <sanguis/client/draw2d/sprite/center_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/normal/object_decl.hpp>
+#include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/normal/texture_animation_decl.hpp>
 #include <sanguis/load/model/collection_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -30,6 +33,7 @@ public:
 	explosion(
 		sanguis::diff_clock const &,
 		sanguis::random_generator &,
+		sanguis::client::draw2d::sprite::normal::system &,
 		sanguis::load::model::collection const &,
 		sanguis::client::draw2d::sprite::center const &,
 		sanguis::client::draw2d::aoe
@@ -47,15 +51,13 @@ private:
 	may_be_removed() const
 	override;
 
-	sanguis::diff_clock const &diff_clock_;
-
-	sanguis::random_generator &random_generator_;
-
-	sanguis::load::model::collection const &model_collection_;
-
-	sanguis::client::draw2d::aoe const aoe_;
-
 	bool ended_;
+
+	typedef sanguis::client::draw2d::sprite::normal::object sprite;
+
+	sprite sprite_;
+
+	sanguis::client::draw2d::sprite::normal::texture_animation animation_;
 };
 
 }

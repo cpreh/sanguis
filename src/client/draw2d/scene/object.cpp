@@ -19,7 +19,11 @@
 #include <sanguis/client/draw2d/entities/own_unique_ptr.hpp>
 #include <sanguis/client/draw2d/message/dispatcher.hpp>
 #include <sanguis/client/draw2d/sprite/float_unit.hpp>
+#include <sanguis/client/draw2d/sprite/state.hpp>
 #include <sanguis/client/draw2d/sprite/state_choices.hpp>
+#include <sanguis/client/draw2d/sprite/client/system_decl.hpp>
+#include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
+#include <sanguis/client/draw2d/sprite/colored/system_decl.hpp>
 #include <sanguis/client/draw2d/sunlight/make_color.hpp>
 #include <sanguis/client/draw2d/sunlight/sun_angle.hpp>
 #include <sanguis/load/context.hpp>
@@ -75,20 +79,19 @@
 #include <sge/renderer/target/onscreen.hpp>
 #include <sge/renderer/target/viewport.hpp>
 #include <sge/sprite/matrix.hpp>
-#include <sge/sprite/object_impl.hpp>
 #include <sge/sprite/optional_matrix.hpp>
 #include <sge/sprite/projection_matrix.hpp>
 #include <sge/sprite/state/default_options.hpp>
-#include <sge/sprite/state/object_impl.hpp>
 #include <sge/sprite/state/scoped.hpp>
+#include <fcppt/format.hpp>
+#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/literal.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/math/matrix/arithmetic.hpp>
 #include <fcppt/math/matrix/translation.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
-#include <fcppt/format.hpp>
-#include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector30.hpp>
 #include <ctime>
@@ -295,6 +298,7 @@ sanguis::client::draw2d::scene::object::update(
 			_delta
 		);
 
+	// TODO: Simplify this loop!
 	for(
 		entity_map::iterator it(
 			entities_.begin()
@@ -322,6 +326,7 @@ sanguis::client::draw2d::scene::object::update(
 			);
 	}
 
+	// TODO: Simplify this loop!
 	for(
 		own_entity_list::iterator it(
 			own_entities_.begin()
@@ -437,7 +442,7 @@ sanguis::client::draw2d::scene::object::render_systems(
 				fcppt::math::matrix::translation(
 					translation.x(),
 					translation.y(),
-					static_cast<
+					fcppt::literal<
 						sanguis::client::draw2d::sprite::float_unit
 					>(
 						0
@@ -494,7 +499,7 @@ sanguis::client::draw2d::scene::object::render_systems(
 		SANGUIS_CLIENT_DRAW2D_SCENE_FOREACH_Z_ORDERING(
 			index,
 			sanguis::client::draw2d::z_ordering::corpses,
-			sanguis::client::draw2d::z_ordering::player_upper
+			sanguis::client::draw2d::z_ordering::flare
 		)
 			normal_system_.render(
 				_render_context,

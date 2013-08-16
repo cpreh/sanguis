@@ -1,6 +1,5 @@
 #include <sanguis/animation_type.hpp>
 #include <sanguis/exception.hpp>
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/load/log.hpp>
 #include <sanguis/load/model/animation.hpp>
 #include <sanguis/load/model/base_animation_not_found.hpp>

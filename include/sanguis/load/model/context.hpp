@@ -1,12 +1,12 @@
 #ifndef SANGUIS_LOAD_MODEL_CONTEXT_HPP_INCLUDED
 #define SANGUIS_LOAD_MODEL_CONTEXT_HPP_INCLUDED
 
-#include <sanguis/random_generator_fwd.hpp>
-#include <sanguis/load/model/collection_fwd.hpp>
 #include <sanguis/load/context_fwd.hpp>
+#include <sanguis/load/model/collection_fwd.hpp>
 #include <sanguis/load/resource/context_fwd.hpp>
-#include <fcppt/scoped_ptr.hpp>
+#include <fcppt/scoped_ptr_decl.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -21,20 +21,20 @@ class context
 		context
 	);
 public:
-	collection const &
+	sanguis::load::model::collection const &
 	operator()() const;
 private:
-	friend class load::context;
+	friend class sanguis::load::context;
 
+	explicit
 	context(
-		resource::context const &,
-		sanguis::random_generator &
+		sanguis::load::resource::context const &
 	);
 
 	~context();
 
 	mutable fcppt::scoped_ptr<
-		collection
+		sanguis::load::model::collection
 	> collection_;
 };
 

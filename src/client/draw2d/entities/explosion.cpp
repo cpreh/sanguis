@@ -1,35 +1,93 @@
+#include <sanguis/animation_type.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/optional_primary_weapon_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/client/draw2d/aoe.hpp>
+#include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/explosion.hpp>
 #include <sanguis/client/draw2d/entities/own.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
-#include <sanguis/load/model/collection_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/dim.hpp>
+#include <sanguis/client/draw2d/sprite/float_unit.hpp>
+#include <sanguis/client/draw2d/sprite/unit.hpp>
+#include <sanguis/client/draw2d/sprite/animation/loop_method.hpp>
+#include <sanguis/client/draw2d/sprite/normal/object.hpp>
+#include <sanguis/client/draw2d/sprite/normal/parameters.hpp>
+#include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
+#include <sanguis/client/draw2d/sprite/normal/texture_animation.hpp>
+#include <sanguis/load/model/animation.hpp>
+#include <sanguis/load/model/collection.hpp>
+#include <sanguis/load/model/object.hpp>
+#include <sanguis/load/model/part.hpp>
+#include <sanguis/load/model/weapon_category.hpp>
+#include <sge/sprite/intrusive/connection.hpp>
+#include <sge/texture/const_part_shared_ptr.hpp>
+#include <fcppt/literal.hpp>
+#include <fcppt/text.hpp>
+#include <fcppt/math/dim/fill.hpp>
 
 
 sanguis::client::draw2d::entities::explosion::explosion(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
+	sanguis::client::draw2d::sprite::normal::system &_normal_system,
 	sanguis::load::model::collection const &_model_collection,
 	sanguis::client::draw2d::sprite::center const &_center,
 	sanguis::client::draw2d::aoe const _aoe
 )
 :
 	sanguis::client::draw2d::entities::own(),
-	diff_clock_(
-		_diff_clock
-	),
-	random_generator_(
-		_random_generator
-	),
-	model_collection_(
-		_model_collection
-	),
-	aoe_(
-		_aoe
-	),
 	ended_(
 		false
+	),
+	sprite_(
+		sanguis::client::draw2d::sprite::normal::parameters()
+		.connection(
+			_normal_system.connection(
+				sanguis::client::draw2d::z_ordering::flare
+			)
+		)
+		.center(
+			_center.get()
+		)
+		.rotation(
+			fcppt::literal<
+				sanguis::client::draw2d::sprite::float_unit
+			>(
+				0
+			)
+		)
+		.size(
+			fcppt::math::dim::fill<
+				sanguis::client::draw2d::sprite::dim::dim_wrapper::value
+			>(
+				static_cast<
+					sanguis::client::draw2d::sprite::unit
+				>(
+					_aoe.get() * 2.f
+				)
+			)
+		)
+		.texture(
+			sge::texture::const_part_shared_ptr()
+		)
+	),
+	animation_(
+		_model_collection[
+			FCPPT_TEXT("particles/flare")
+		]
+		.random_part(
+			_random_generator
+		)
+		[
+			sanguis::optional_primary_weapon_type()
+		][
+			sanguis::animation_type::none
+		]
+		.series(),
+		sanguis::client::draw2d::sprite::animation::loop_method::stop_at_end,
+		sprite_,
+		_diff_clock
 	)
 {
 }
@@ -41,8 +99,8 @@ sanguis::client::draw2d::entities::explosion::~explosion()
 void
 sanguis::client::draw2d::entities::explosion::update()
 {
-	// TODO: Do something here!
-	ended_ = true;
+	ended_ =
+		animation_.process();
 }
 
 bool

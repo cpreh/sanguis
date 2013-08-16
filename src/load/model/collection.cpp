@@ -1,4 +1,3 @@
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/load/model/collection.hpp>
 #include <sanguis/load/model/make_path.hpp>
 #include <sanguis/load/model/object.hpp>
@@ -32,8 +31,7 @@ sanguis::load::model::collection::operator[](
 					sanguis::load::model::make_path(
 						_name
 					),
-					ctx_,
-					random_generator_
+					ctx_
 				)
 			).first;
 
@@ -41,15 +39,11 @@ sanguis::load::model::collection::operator[](
 }
 
 sanguis::load::model::collection::collection(
-	sanguis::load::resource::context const &_ctx,
-	sanguis::random_generator &_random_generator
+	sanguis::load::resource::context const &_ctx
 )
 :
 	ctx_(
 		_ctx
-	),
-	random_generator_(
-		_random_generator
 	),
 	models_()
 {

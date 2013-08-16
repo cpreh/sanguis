@@ -4,11 +4,10 @@
 #include <sanguis/client/health.hpp>
 #include <sanguis/client/max_health.hpp>
 #include <sanguis/client/draw2d/entities/model/healthbar_fwd.hpp>
-#include <sanguis/client/draw2d/sprite/dim.hpp>
-#include <sanguis/client/draw2d/sprite/point.hpp>
-#include <sanguis/client/draw2d/sprite/colored/object.hpp>
-#include <sanguis/client/draw2d/sprite/colored/system.hpp>
-#include <sge/sprite/object_decl.hpp>
+#include <sanguis/client/draw2d/sprite/dim_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/point_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/colored/object_decl.hpp>
+#include <sanguis/client/draw2d/sprite/colored/system_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 

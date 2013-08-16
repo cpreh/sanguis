@@ -1,4 +1,3 @@
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/load/model/global_parameters.hpp>
 #include <sanguis/load/model/optional_delay.hpp>
 #include <sanguis/load/model/optional_texture_identifier.hpp>
@@ -10,7 +9,6 @@
 
 
 sanguis::load::model::global_parameters::global_parameters(
-	sanguis::random_generator &_random_generator,
 	boost::filesystem::path const &_path,
 	sanguis::load::resource::textures const &_textures,
 	sge::renderer::dim2 const &_cell_size,
@@ -18,9 +16,6 @@ sanguis::load::model::global_parameters::global_parameters(
 	sanguis::load::model::optional_texture_identifier const &_texture
 )
 :
-	random_generator_(
-		_random_generator
-	),
 	path_(
 		_path
 	),
@@ -37,12 +32,6 @@ sanguis::load::model::global_parameters::global_parameters(
 		_texture
 	)
 {
-}
-
-sanguis::random_generator &
-sanguis::load::model::global_parameters::random_generator() const
-{
-	return random_generator_;
 }
 
 boost::filesystem::path const &
@@ -84,7 +73,6 @@ sanguis::load::model::global_parameters::new_texture(
 		_tex
 		?
 			sanguis::load::model::global_parameters(
-				this->random_generator(),
 				this->path(),
 				this->textures(),
 				this->cell_size(),

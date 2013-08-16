@@ -4,8 +4,8 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
-#include <sanguis/client/draw2d/sprite/normal/system.hpp>
-#include <sanguis/client/draw2d/sprite/colored/system.hpp>
+#include <sanguis/client/draw2d/sprite/colored/system_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
 #include <sanguis/load/model/collection_fwd.hpp>
 #include <fcppt/nonassignable.hpp>
 

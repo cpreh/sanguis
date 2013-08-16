@@ -10,7 +10,6 @@
 #include <sanguis/client/draw2d/entities/model/orientation.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
-#include <sanguis/client/draw2d/sprite/animation/texture_impl.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sanguis/client/draw2d/sprite/normal/texture_animation.hpp>
 #include <sanguis/load/model/animation.hpp>
@@ -18,10 +17,11 @@
 #include <sanguis/load/model/part.hpp>
 #include <sanguis/load/model/weapon_category.hpp>
 #include <sanguis/load/resource/animation/series.hpp>
-#include <sge/sprite/object_impl.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_comparison.hpp>
+#include <fcppt/optional_impl.hpp>
+#include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/dim.hpp>

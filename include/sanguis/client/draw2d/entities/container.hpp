@@ -14,10 +14,9 @@
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
-#include <sanguis/client/draw2d/sprite/normal/object.hpp>
-#include <sanguis/client/draw2d/sprite/normal/system.hpp>
+#include <sanguis/client/draw2d/sprite/normal/object_decl.hpp>
+#include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/index_fwd.hpp>
-#include <sge/sprite/object_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <vector>

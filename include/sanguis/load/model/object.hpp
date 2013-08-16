@@ -2,6 +2,7 @@
 #define SANGUIS_LOAD_MODEL_OBJECT_HPP_INCLUDED
 
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/load/model/collection_fwd.hpp>
 #include <sanguis/load/model/object_fwd.hpp>
 #include <sanguis/load/model/part_fwd.hpp>
 #include <sanguis/load/resource/context_fwd.hpp>
@@ -52,7 +53,9 @@ public:
 	) const;
 
 	sanguis::load::model::part const &
-	random_part() const;
+	random_part(
+		sanguis::random_generator &
+	) const;
 
 	size_type
 	size() const;
@@ -68,8 +71,7 @@ public:
 
 	object(
 		boost::filesystem::path const &,
-		sanguis::load::resource::context const &,
-		sanguis::random_generator &
+		sanguis::load::resource::context const &
 	);
 private:
 	void
@@ -77,11 +79,9 @@ private:
 		sanguis::load::resource::context const &
 	);
 
-	friend class collection;
+	friend class sanguis::load::model::collection;
 
 	boost::filesystem::path const path_;
-
-	sanguis::random_generator &random_generator_;
 
 	sge::renderer::dim2 cell_size_;
 

@@ -1,21 +1,24 @@
-#include <sanguis/client/draw2d/entities/bullet.hpp>
-#include <sanguis/client/draw2d/entities/model/decay_option.hpp>
-#include <sanguis/client/draw2d/entities/model/needs_healthbar.hpp>
-#include <sanguis/client/draw2d/sprite/index.hpp>
-#include <sanguis/client/draw2d/sprite/point.hpp>
-#include <sanguis/client/draw2d/sprite/unit.hpp>
 #include <sanguis/client/draw2d/center.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/speed_is_null.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
-#include <sge/sprite/object_impl.hpp>
+#include <sanguis/client/draw2d/entities/bullet.hpp>
+#include <sanguis/client/draw2d/entities/model/decay_option.hpp>
+#include <sanguis/client/draw2d/entities/model/needs_healthbar.hpp>
+#include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/index.hpp>
+#include <sanguis/client/draw2d/sprite/point.hpp>
+#include <sanguis/client/draw2d/sprite/unit.hpp>
+#include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sge/sprite/center.hpp>
+#include <fcppt/literal.hpp>
+#include <fcppt/optional_impl.hpp>
+#include <fcppt/string.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/normalize.hpp>
 #include <fcppt/math/vector/length.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
-#include <fcppt/optional_impl.hpp>
 
 
 namespace
@@ -27,7 +30,7 @@ sanguis::client::draw2d::sprite::index const
 }
 
 sanguis::client::draw2d::entities::bullet::bullet(
-	model::parameters const &_param,
+	sanguis::client::draw2d::entities::model::parameters const &_param,
 	fcppt::string const &_name
 )
 :
@@ -46,7 +49,7 @@ sanguis::client::draw2d::entities::bullet::bullet(
 	this->at(
 		tail
 	).w(
-		static_cast<
+		fcppt::literal<
 			sanguis::client::draw2d::sprite::unit
 		>(
 			3
@@ -66,9 +69,9 @@ sanguis::client::draw2d::entities::bullet::update()
 	)
 		origin_ = this->center();
 
-	model::object::update();
+	sanguis::client::draw2d::entities::model::object::update();
 
-	draw2d::funit const
+	sanguis::client::draw2d::funit const
 		max_tail_length(
 			static_cast<
 				draw2d::funit
@@ -79,7 +82,7 @@ sanguis::client::draw2d::entities::bullet::update()
 		tail_length(
 			std::min(
 				fcppt::math::vector::length<
-					draw2d::funit
+					sanguis::client::draw2d::funit
 				>(
 					(
 						*origin_ - this->center()
@@ -89,22 +92,22 @@ sanguis::client::draw2d::entities::bullet::update()
 			)
 		);
 
-	draw2d::center const cur_center(
+	sanguis::client::draw2d::center const cur_center(
 		fcppt::math::vector::structure_cast<
-			draw2d::center::value_type
+			sanguis::client::draw2d::center::value_type
 		>(
 			this->center().get()
 		)
 	);
 
-	draw2d::center const new_center(
-		client::draw2d::speed_is_null(
+	sanguis::client::draw2d::center const new_center(
+		sanguis::client::draw2d::speed_is_null(
 			this->speed()
 		)
 		?
 			cur_center
 		:
-			draw2d::center(
+			sanguis::client::draw2d::center(
 				cur_center.get()
 				-
 				fcppt::math::vector::normalize(
@@ -118,10 +121,10 @@ sanguis::client::draw2d::entities::bullet::update()
 				)
 				*
 				fcppt::math::vector::length(
-					draw2d::vector2(
+					sanguis::client::draw2d::vector2(
 						tail_length,
 						static_cast<
-							draw2d::funit
+							sanguis::client::draw2d::funit
 						>(
 							this->at(
 								tail
@@ -137,7 +140,7 @@ sanguis::client::draw2d::entities::bullet::update()
 			tail
 		),
 		fcppt::math::vector::structure_cast<
-			sprite::point
+			sanguis::client::draw2d::sprite::point
 		>(
 			new_center.get()
 		)
@@ -147,7 +150,7 @@ sanguis::client::draw2d::entities::bullet::update()
 		tail
 	).w(
 		static_cast<
-			sprite::unit
+			sanguis::client::draw2d::sprite::unit
 		>(
 			tail_length
 		)
