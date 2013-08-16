@@ -3,7 +3,7 @@
 
 #include <sanguis/world_id.hpp>
 #include <sanguis/creator/opening_count.hpp>
-#include <sanguis/server/difficulty.hpp>
+#include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/object_unique_ptr.hpp>
 #include <sanguis/server/world/parameters_fwd.hpp>
 
@@ -20,7 +20,7 @@ random(
 	sanguis::server::world::parameters const &,
 	sanguis::creator::opening_count,
 	sanguis::world_id,
-	sanguis::server::difficulty
+	sanguis::server::world::difficulty
 );
 
 }

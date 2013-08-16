@@ -19,12 +19,10 @@
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
-#include <sanguis/server/difficulty.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/level.hpp>
 #include <sanguis/server/pickup_probability.hpp>
-#include <sanguis/server/pickup_spawner.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/string.hpp>
 #include <sanguis/server/collision/global_groups.hpp>
@@ -33,12 +31,14 @@
 #include <sanguis/server/entities/optional_base_ref_fwd.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
-#include <sanguis/server/environment/object_fwd.hpp>
+#include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
+#include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/world/context_fwd.hpp>
-#include <sanguis/server/world/environment_fwd.hpp>
+#include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/entity_map.hpp>
 #include <sanguis/server/world/object_fwd.hpp>
+#include <sanguis/server/world/pickup_spawner.hpp>
 #include <sanguis/server/world/parameters_fwd.hpp>
 #include <sanguis/server/world/sight_range_map.hpp>
 #include <sge/projectile/world_fwd.hpp>
@@ -60,6 +60,9 @@ namespace world
 {
 
 class object
+:
+	private
+	sanguis::server::environment::object
 {
 	FCPPT_NONCOPYABLE(
 		object
@@ -69,7 +72,7 @@ public:
 		sanguis::server::world::parameters const &,
 		sanguis::world_id,
 		sanguis::creator::top_result const &,
-		sanguis::server::difficulty
+		sanguis::server::world::difficulty
 	);
 
 	~object();
@@ -81,10 +84,11 @@ public:
 	insert(
 		sanguis::server::entities::unique_ptr &&,
 		sanguis::server::entities::insert_parameters const &
-	);
+	)
+	override;
 
 	sanguis::server::environment::object &
-	environment() const;
+	environment();
 
 	sanguis::creator::opening_container const &
 	openings() const;
@@ -101,96 +105,111 @@ private:
 		sanguis::server::entities::insert_parameters const &
 	);
 
-	friend class environment;
-
 	void
 	weapon_changed(
 		sanguis::entity_id,
 		sanguis::optional_primary_weapon_type
-	);
+	)
+	override;
 
 	void
 	got_weapon(
 		sanguis::server::player_id,
 		sanguis::entity_id,
 		sanguis::weapon_description const &
-	);
+	)
+	override;
 
 	void
 	remove_weapon(
 		sanguis::server::player_id,
 		sanguis::entity_id,
 		sanguis::is_primary_weapon
-	);
+	)
+	override;
 
 	void
 	attacking_changed(
 		sanguis::entity_id,
 		bool is_attacking
-	);
+	)
+	override;
 
 	void
 	reloading_changed(
 		sanguis::entity_id,
 		bool is_reloading
-	);
+	)
+	override;
 
 	void
 	max_health_changed(
 		sanguis::entity_id,
 		sanguis::server::health
-	);
+	)
+	override;
 
 	void
 	exp_changed(
 		sanguis::server::player_id,
 		sanguis::entity_id,
 		sanguis::server::exp
-	);
+	)
+	override;
 
 	void
 	level_changed(
 		sanguis::server::player_id,
 		sanguis::entity_id,
 		sanguis::server::level
-	);
+	)
+	override;
 
 	void
 	pickup_chance(
 		sanguis::server::pickup_probability,
-		sanguis::server::center const &
-	);
+		sanguis::server::entities::enemies::difficulty,
+		sanguis::server::center const&
+	)
+	override;
 
 	void
 	request_transfer(
 		sanguis::entity_id
-	);
+	)
+	override;
 
 	void
 	add_sight_range(
 		sanguis::server::player_id,
 		sanguis::entity_id target_id
-	);
+	)
+	override;
 
 	void
 	remove_sight_range(
 		sanguis::server::player_id,
 		sanguis::entity_id target_id
-	);
+	)
+	override;
 
 	void
 	remove_player(
 		sanguis::server::player_id
-	);
+	)
+	override;
 
 	sge::projectile::world &
-	collision_world() const;
+	collision_world() const
+	override;
 
 	sanguis::server::collision::global_groups const &
-	global_collision_groups() const;
+	global_collision_groups() const
+	override;
 
 	sanguis::server::environment::load_context &
-	load_context() const;
+	load_context() const
+	override;
 
 	// own functions
 	void
@@ -222,7 +241,7 @@ private:
 		sanguis::creator::spawn_container const &,
 		sanguis::diff_clock const &,
 		sanguis::random_generator &,
-		sanguis::server::difficulty
+		sanguis::server::world::difficulty
 	);
 
 	sanguis::world_id const id_;
@@ -259,8 +278,6 @@ private:
 		sanguis::server::environment::object
 	> environment_scoped_ptr;
 
-	environment_scoped_ptr const environment_;
-
 	sanguis::server::world::entity_map entities_;
 
 	typedef boost::ptr_vector<
@@ -269,7 +286,7 @@ private:
 
 	entity_vector server_entities_;
 
-	sanguis::server::pickup_spawner pickup_spawner_;
+	sanguis::server::world::pickup_spawner pickup_spawner_;
 };
 
 }

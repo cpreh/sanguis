@@ -6,11 +6,11 @@
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/pickup_probability.hpp>
-#include <sanguis/server/pickup_spawner.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/entities/pickups/health.hpp>
 #include <sanguis/server/entities/pickups/monster.hpp>
 #include <sanguis/server/entities/pickups/weapon.hpp>
@@ -18,6 +18,7 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/create.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/world/pickup_spawner.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/strong_typedef_assignment.hpp>
 #include <fcppt/random/variate_impl.hpp>
@@ -30,7 +31,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::server::pickup_spawner::pickup_spawner(
+sanguis::server::world::pickup_spawner::pickup_spawner(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
 	sanguis::server::environment::object &_env
@@ -50,11 +51,12 @@ sanguis::server::pickup_spawner::pickup_spawner(
 			sanguis::server::pickup_probability(
 				4.f
 			),
-			sanguis::server::pickup_spawner::spawn_function(
+			sanguis::server::world::pickup_spawner::spawn_function(
 				std::bind(
-					&sanguis::server::pickup_spawner::spawn_health,
+					&sanguis::server::world::pickup_spawner::spawn_health,
 					this,
-					std::placeholders::_1
+					std::placeholders::_1,
+					std::placeholders::_2
 				)
 			)
 		),
@@ -62,11 +64,12 @@ sanguis::server::pickup_spawner::pickup_spawner(
 			sanguis::server::pickup_probability(
 				0.3f
 			),
-			sanguis::server::pickup_spawner::spawn_function(
+			sanguis::server::world::pickup_spawner::spawn_function(
 				std::bind(
-					&sanguis::server::pickup_spawner::spawn_monster,
+					&sanguis::server::world::pickup_spawner::spawn_monster,
 					this,
-					std::placeholders::_1
+					std::placeholders::_1,
+					std::placeholders::_2
 				)
 			)
 		),
@@ -74,11 +77,12 @@ sanguis::server::pickup_spawner::pickup_spawner(
 			sanguis::server::pickup_probability(
 				2.f
 			),
-			sanguis::server::pickup_spawner::spawn_function(
+			sanguis::server::world::pickup_spawner::spawn_function(
 				std::bind(
-					&sanguis::server::pickup_spawner::spawn_weapon,
+					&sanguis::server::world::pickup_spawner::spawn_weapon,
 					this,
 					std::placeholders::_1,
+					std::placeholders::_2,
 					sanguis::weapon_type(
 						sanguis::primary_weapon_type::pistol
 					)
@@ -89,11 +93,12 @@ sanguis::server::pickup_spawner::pickup_spawner(
 			sanguis::server::pickup_probability(
 				0.8f
 			),
-			sanguis::server::pickup_spawner::spawn_function(
+			sanguis::server::world::pickup_spawner::spawn_function(
 				std::bind(
-					&sanguis::server::pickup_spawner::spawn_weapon,
+					&sanguis::server::world::pickup_spawner::spawn_weapon,
 					this,
 					std::placeholders::_1,
+					std::placeholders::_2,
 					sanguis::weapon_type(
 						sanguis::primary_weapon_type::shotgun
 					)
@@ -104,11 +109,12 @@ sanguis::server::pickup_spawner::pickup_spawner(
 			sanguis::server::pickup_probability(
 				1.f
 			),
-			sanguis::server::pickup_spawner::spawn_function(
+			sanguis::server::world::pickup_spawner::spawn_function(
 				std::bind(
-					&sanguis::server::pickup_spawner::spawn_weapon,
+					&sanguis::server::world::pickup_spawner::spawn_weapon,
 					this,
 					std::placeholders::_1,
+					std::placeholders::_2,
 					sanguis::weapon_type(
 						sanguis::primary_weapon_type::rocket_launcher
 					)
@@ -119,11 +125,12 @@ sanguis::server::pickup_spawner::pickup_spawner(
 			sanguis::server::pickup_probability(
 				4.f
 			),
-			sanguis::server::pickup_spawner::spawn_function(
+			sanguis::server::world::pickup_spawner::spawn_function(
 				std::bind(
-					&sanguis::server::pickup_spawner::spawn_weapon,
+					&sanguis::server::world::pickup_spawner::spawn_weapon,
 					this,
 					std::placeholders::_1,
+					std::placeholders::_2,
 					sanguis::weapon_type(
 						sanguis::secondary_weapon_type::grenade
 					)
@@ -134,11 +141,12 @@ sanguis::server::pickup_spawner::pickup_spawner(
 			sanguis::server::pickup_probability(
 				0.3f
 			),
-			sanguis::server::pickup_spawner::spawn_function(
+			sanguis::server::world::pickup_spawner::spawn_function(
 				std::bind(
-					&sanguis::server::pickup_spawner::spawn_weapon,
+					&sanguis::server::world::pickup_spawner::spawn_weapon,
 					this,
 					std::placeholders::_1,
+					std::placeholders::_2,
 					sanguis::weapon_type(
 						sanguis::secondary_weapon_type::sentry
 					)
@@ -172,7 +180,7 @@ sanguis::server::pickup_spawner::pickup_spawner(
 					),
 					[](
 						sanguis::server::pickup_probability const _cur,
-						sanguis::server::pickup_spawner::spawn_pair const &item
+						sanguis::server::world::pickup_spawner::spawn_pair const &item
 					)
 					{
 						return
@@ -187,14 +195,15 @@ sanguis::server::pickup_spawner::pickup_spawner(
 {
 }
 
-sanguis::server::pickup_spawner::~pickup_spawner()
+sanguis::server::world::pickup_spawner::~pickup_spawner()
 {
 }
 
 void
-sanguis::server::pickup_spawner::spawn(
+sanguis::server::world::pickup_spawner::spawn(
 	sanguis::server::pickup_probability const _prob,
-	sanguis::server::center const &_center
+	sanguis::server::center const _center,
+	sanguis::server::entities::enemies::difficulty const _difficulty
 )
 {
 	if(
@@ -222,7 +231,8 @@ sanguis::server::pickup_spawner::spawn(
 		)
 		{
 			cur_spawn.second(
-				_center
+				_center,
+				_difficulty
 			);
 
 			return;
@@ -231,8 +241,9 @@ sanguis::server::pickup_spawner::spawn(
 }
 
 void
-sanguis::server::pickup_spawner::spawn_health(
-	sanguis::server::center const &_center
+sanguis::server::world::pickup_spawner::spawn_health(
+	sanguis::server::center const _center,
+	sanguis::server::entities::enemies::difficulty const _difficulty
 )
 {
 	this->spawn_entity(
@@ -251,8 +262,9 @@ sanguis::server::pickup_spawner::spawn_health(
 }
 
 void
-sanguis::server::pickup_spawner::spawn_monster(
-	sanguis::server::center const &_center
+sanguis::server::world::pickup_spawner::spawn_monster(
+	sanguis::server::center const _center,
+	sanguis::server::entities::enemies::difficulty const _difficulty
 )
 {
 	this->spawn_entity(
@@ -270,8 +282,9 @@ sanguis::server::pickup_spawner::spawn_monster(
 }
 
 void
-sanguis::server::pickup_spawner::spawn_weapon(
-	sanguis::server::center const &_center,
+sanguis::server::world::pickup_spawner::spawn_weapon(
+	sanguis::server::center const _center,
+	sanguis::server::entities::enemies::difficulty const _difficulty,
 	sanguis::weapon_type const _wtype
 )
 {
@@ -284,7 +297,8 @@ sanguis::server::pickup_spawner::spawn_weapon(
 			sanguis::server::weapons::create(
 				diff_clock_,
 				random_generator_,
-				_wtype
+				_wtype,
+				_difficulty
 			)
 		),
 		_center
@@ -292,9 +306,9 @@ sanguis::server::pickup_spawner::spawn_weapon(
 }
 
 void
-sanguis::server::pickup_spawner::spawn_entity(
+sanguis::server::world::pickup_spawner::spawn_entity(
 	sanguis::server::entities::unique_ptr &&_entity,
-	sanguis::server::center const &_center
+	sanguis::server::center const _center
 )
 {
 	sanguis::server::environment::insert_no_result(

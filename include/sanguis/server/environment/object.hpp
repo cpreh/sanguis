@@ -17,6 +17,7 @@
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
 #include <sanguis/server/entities/optional_base_ref_fwd.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sge/projectile/world_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -107,6 +108,7 @@ public:
 	void
 	pickup_chance(
 		sanguis::server::pickup_probability,
+		sanguis::server::entities::enemies::difficulty,
 		sanguis::server::center const &
 	) = 0;
 

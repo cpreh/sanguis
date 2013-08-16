@@ -320,6 +320,7 @@ SET(
 	include/sanguis/client/gui/perk/node.hpp
 	include/sanguis/client/gui/perk/node_variant.hpp
 	include/sanguis/client/health.hpp
+	include/sanguis/client/health_value.hpp
 	include/sanguis/client/level.hpp
 	include/sanguis/client/log.hpp
 	include/sanguis/client/log_location.hpp
@@ -869,7 +870,6 @@ SET(
 	include/sanguis/server/damage/wrapper.hpp
 	include/sanguis/server/damage/wrapper_fwd.hpp
 	include/sanguis/server/dest_world_id.hpp
-	include/sanguis/server/difficulty.hpp
 	include/sanguis/server/dim.hpp
 	include/sanguis/server/dim_fwd.hpp
 	include/sanguis/server/direction.hpp
@@ -886,7 +886,10 @@ SET(
 	include/sanguis/server/entities/center_simple.hpp
 	include/sanguis/server/entities/circle_from_dim.hpp
 	include/sanguis/server/entities/default_solid.hpp
+	include/sanguis/server/entities/enemies/base_difficulty.hpp
 	include/sanguis/server/entities/enemies/create.hpp
+	include/sanguis/server/entities/enemies/difficulty.hpp
+	include/sanguis/server/entities/enemies/difficulty_value.hpp
 	include/sanguis/server/entities/enemies/enemy.hpp
 	include/sanguis/server/entities/enemies/factory/maggot.hpp
 	include/sanguis/server/entities/enemies/factory/parameters.hpp
@@ -897,7 +900,6 @@ SET(
 	include/sanguis/server/entities/enemies/factory/zombie00.hpp
 	include/sanguis/server/entities/enemies/factory/zombie01.hpp
 	include/sanguis/server/entities/enemies/fwd.hpp
-	include/sanguis/server/entities/enemies/scale_difficulty.hpp
 	include/sanguis/server/entities/enemies/spawn_owner.hpp
 	include/sanguis/server/entities/enemies/spawn_owner_fwd.hpp
 	include/sanguis/server/entities/exp_area.hpp
@@ -1065,7 +1067,6 @@ SET(
 	include/sanguis/server/perks/tree/status_fwd.hpp
 	include/sanguis/server/perks/unique_ptr.hpp
 	include/sanguis/server/pickup_probability.hpp
-	include/sanguis/server/pickup_spawner.hpp
 	include/sanguis/server/player_id.hpp
 	include/sanguis/server/player_id_from_args.hpp
 	include/sanguis/server/player_id_from_net.hpp
@@ -1166,9 +1167,8 @@ SET(
 	include/sanguis/server/world/context_fwd.hpp
 	include/sanguis/server/world/convert_pos.hpp
 	include/sanguis/server/world/convert_unit.hpp
+	include/sanguis/server/world/difficulty.hpp
 	include/sanguis/server/world/entity_map.hpp
-	include/sanguis/server/world/environment.hpp
-	include/sanguis/server/world/environment_fwd.hpp
 	include/sanguis/server/world/grid_pos_to_center.hpp
 	include/sanguis/server/world/map.hpp
 	include/sanguis/server/world/object.hpp
@@ -1176,6 +1176,7 @@ SET(
 	include/sanguis/server/world/object_unique_ptr.hpp
 	include/sanguis/server/world/parameters.hpp
 	include/sanguis/server/world/parameters_fwd.hpp
+	include/sanguis/server/world/pickup_spawner.hpp
 	include/sanguis/server/world/random.hpp
 	include/sanguis/server/world/random_generator_name.hpp
 	include/sanguis/server/world/random_seed.hpp
@@ -1524,6 +1525,7 @@ SET(
 	src/server/entities/center_simple.cpp
 	src/server/entities/circle_from_dim.cpp
 	src/server/entities/default_solid.cpp
+	src/server/entities/enemies/base_difficulty.cpp
 	src/server/entities/enemies/create.cpp
 	src/server/entities/enemies/enemy.cpp
 	src/server/entities/enemies/factory/maggot.cpp
@@ -1622,7 +1624,6 @@ SET(
 	src/server/perks/tree/create.cpp
 	src/server/perks/tree/equal.cpp
 	src/server/perks/tree/status.cpp
-	src/server/pickup_spawner.cpp
 	src/server/player_id_from_args.cpp
 	src/server/player_id_from_net.cpp
 	src/server/send_available_perks.cpp
@@ -1669,10 +1670,10 @@ SET(
 	src/server/world/center_in_grid_pos.cpp
 	src/server/world/context.cpp
 	src/server/world/entity_map.cpp
-	src/server/world/environment.cpp
 	src/server/world/grid_pos_to_center.cpp
 	src/server/world/object.cpp
 	src/server/world/parameters.cpp
+	src/server/world/pickup_spawner.cpp
 	src/server/world/random.cpp
 	src/server/world/random_generator_name.cpp
 	src/server/world/random_seed.cpp

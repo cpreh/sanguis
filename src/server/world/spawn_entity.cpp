@@ -3,7 +3,6 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/creator/spawn.hpp>
 #include <sanguis/creator/spawn_type.hpp>
-#include <sanguis/server/difficulty.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
@@ -15,6 +14,7 @@
 #include <sanguis/server/entities/spawns/limited.hpp>
 #include <sanguis/server/entities/spawns/total_count.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
+#include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/spawn_entity.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/assert/unreachable.hpp>
@@ -26,7 +26,7 @@ sanguis::server::world::spawn_entity(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
 	sanguis::server::environment::load_context &_load_context,
-	sanguis::server::difficulty const _difficulty
+	sanguis::server::world::difficulty const _difficulty
 )
 {
 	switch(

@@ -3,7 +3,6 @@
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
-#include <sanguis/server/difficulty.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
@@ -14,6 +13,7 @@
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/spawns/size_type.hpp>
 #include <sanguis/server/entities/spawns/spawn.hpp>
+#include <sanguis/server/world/difficulty.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/assert/pre.hpp>
 
@@ -33,7 +33,7 @@ sanguis::server::entities::spawns::spawn::spawn(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
 	sanguis::creator::enemy_type const _enemy_type,
-	sanguis::server::difficulty const _difficulty
+	sanguis::server::world::difficulty const _difficulty
 )
 :
 	sanguis::server::entities::base(),

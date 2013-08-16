@@ -6,12 +6,12 @@
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
-#include <sanguis/server/difficulty.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/spawns/size_type.hpp>
+#include <sanguis/server/world/difficulty.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_decl.hpp>
 
@@ -47,7 +47,7 @@ protected:
 		sanguis::diff_clock const &,
 		sanguis::random_generator &,
 		sanguis::creator::enemy_type,
-		sanguis::server::difficulty
+		sanguis::server::world::difficulty
 	);
 private:
 	sanguis::server::center const
@@ -92,7 +92,7 @@ private:
 
 	sanguis::creator::enemy_type const enemy_type_;
 
-	sanguis::server::difficulty const difficulty_;
+	sanguis::server::world::difficulty const difficulty_;
 
 	optional_center center_;
 

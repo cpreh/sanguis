@@ -4,6 +4,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_type_fwd.hpp>
+#include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 
 
@@ -18,7 +19,8 @@ sanguis::server::weapons::unique_ptr
 create(
 	sanguis::diff_clock const &,
 	sanguis::random_generator &,
-	sanguis::weapon_type
+	sanguis::weapon_type,
+	sanguis::server::entities::enemies::difficulty
 );
 
 }

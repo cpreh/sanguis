@@ -61,6 +61,7 @@ sanguis::server::entities::enemies::factory::spider(
 			sanguis::server::exp(
 				12.f
 			),
+			_parameters.difficulty(),
 			_parameters.spawn_owner()
 		);
 }

@@ -61,6 +61,7 @@ sanguis::server::entities::enemies::factory::skeleton(
 			sanguis::server::exp(
 				300.f
 			),
+			_parameters.difficulty(),
 			_parameters.spawn_owner()
 		);
 }

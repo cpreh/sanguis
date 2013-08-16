@@ -6,7 +6,7 @@
 #include <sanguis/creator/serialize.hpp>
 #include <sanguis/creator/top_parameters.hpp>
 #include <sanguis/creator/top_result.hpp>
-#include <sanguis/server/difficulty.hpp>
+#include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/object.hpp>
 #include <sanguis/server/world/parameters.hpp>
 #include <sanguis/server/world/random.hpp>
@@ -30,7 +30,7 @@ sanguis::server::world::random(
 	sanguis::server::world::parameters const &_parameters,
 	sanguis::creator::opening_count const _opening_count,
 	sanguis::world_id const _world_id,
-	sanguis::server::difficulty const _difficulty
+	sanguis::server::world::difficulty const _difficulty
 )
 {
 	boost::filesystem::path const cache_path(

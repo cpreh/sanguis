@@ -61,6 +61,7 @@ sanguis::server::entities::enemies::factory::zombie01(
 			sanguis::server::exp(
 				5.f
 			),
+			_parameters.difficulty(),
 			_parameters.spawn_owner()
 		);
 }

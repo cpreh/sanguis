@@ -61,6 +61,7 @@ sanguis::server::entities::enemies::factory::wolf(
 			sanguis::server::exp(
 				10.f
 			),
+			_parameters.difficulty(),
 			_parameters.spawn_owner()
 		);
 }

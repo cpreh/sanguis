@@ -30,6 +30,7 @@
 #include <sanguis/server/entities/with_health.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
+#include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
 #include <sanguis/server/entities/enemies/spawn_owner.hpp>
 #include <sanguis/server/entities/property/initial.hpp>
@@ -56,6 +57,7 @@ sanguis::server::entities::enemies::enemy::enemy(
 	sanguis::server::weapons::unique_ptr &&_weapon,
 	sanguis::server::pickup_probability const _spawn_chance,
 	sanguis::server::exp const _exp,
+	sanguis::server::entities::enemies::difficulty const _difficulty,
 	sanguis::server::entities::enemies::spawn_owner const &_spawn_owner
 )
 :
@@ -108,6 +110,9 @@ sanguis::server::entities::enemies::enemy::enemy(
 	),
 	exp_(
 		_exp
+	),
+	difficulty_(
+		_difficulty
 	),
 	spawn_owner_(
 		_spawn_owner
@@ -199,6 +204,7 @@ sanguis::server::entities::enemies::enemy::on_remove()
 
 	this->environment().pickup_chance(
 		spawn_chance_,
+		difficulty_,
 		this->center()
 	);
 }

@@ -1,13 +1,13 @@
 #include <sanguis/world_id.hpp>
 #include <sanguis/creator/opening_count.hpp>
 #include <sanguis/server/dest_world_id.hpp>
-#include <sanguis/server/difficulty.hpp>
 #include <sanguis/server/source_world_id.hpp>
 #include <sanguis/server/global/dest_world_pair.hpp>
 #include <sanguis/server/global/generate_worlds.hpp>
 #include <sanguis/server/global/source_world_pair.hpp>
 #include <sanguis/server/global/world_connection_map.hpp>
 #include <sanguis/server/global/world_map.hpp>
+#include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/map.hpp>
 #include <sanguis/server/world/object.hpp>
 #include <sanguis/server/world/parameters.hpp>
@@ -26,7 +26,7 @@ sanguis::server::global::generate_worlds(
 
 	sanguis::server::global::world_connection_map connections;
 
-	sanguis::server::difficulty difficulty(
+	sanguis::server::world::difficulty difficulty(
 		1u
 	);
 

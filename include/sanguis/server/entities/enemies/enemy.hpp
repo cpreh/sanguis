@@ -20,6 +20,7 @@
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
+#include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/entities/enemies/spawn_owner.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
@@ -61,6 +62,7 @@ public:
 		sanguis::server::weapons::unique_ptr &&,
 		sanguis::server::pickup_probability,
 		sanguis::server::exp,
+		sanguis::server::entities::enemies::difficulty,
 		sanguis::server::entities::enemies::spawn_owner const &
 	);
 
@@ -96,6 +98,8 @@ private:
 	sanguis::server::pickup_probability const spawn_chance_;
 
 	sanguis::server::exp const exp_;
+
+	sanguis::server::entities::enemies::difficulty const difficulty_;
 
 	sanguis::server::entities::enemies::spawn_owner const spawn_owner_;
 };

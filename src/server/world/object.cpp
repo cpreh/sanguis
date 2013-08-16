@@ -32,7 +32,6 @@
 #include <sanguis/messages/types/exp.hpp>
 #include <sanguis/messages/types/size.hpp>
 #include <sanguis/server/center_fwd.hpp>
-#include <sanguis/server/difficulty.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/level.hpp>
@@ -56,8 +55,9 @@
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/entities/with_health.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
-#include <sanguis/server/environment/object_fwd.hpp>
+#include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
+#include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/global/source_world_pair.hpp>
 #include <sanguis/server/message_convert/speed.hpp>
 #include <sanguis/server/message_convert/rotate.hpp>
@@ -65,7 +65,7 @@
 #include <sanguis/server/message_convert/health.hpp>
 #include <sanguis/server/world/center_in_grid_pos.hpp>
 #include <sanguis/server/world/context.hpp>
-#include <sanguis/server/world/environment.hpp>
+#include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/entity_map.hpp>
 #include <sanguis/server/world/object.hpp>
 #include <sanguis/server/world/parameters.hpp>
@@ -100,9 +100,10 @@ sanguis::server::world::object::object(
 	sanguis::server::world::parameters const &_parameters,
 	sanguis::world_id const _id,
 	sanguis::creator::top_result const &_generated_world,
-	sanguis::server::difficulty const _difficulty
+	sanguis::server::world::difficulty const _difficulty
 )
 :
+	sanguis::server::environment::object(),
 	id_(
 		_id
 	),
@@ -157,19 +158,12 @@ sanguis::server::world::object::object(
 			)
 		)
 	),
-	environment_(
-		fcppt::make_unique_ptr<
-			sanguis::server::world::environment
-		>(
-			*this
-		)
-	),
 	entities_(),
 	server_entities_(),
 	pickup_spawner_(
 		_parameters.diff_clock(),
 		_parameters.random_generator(),
-		*environment_
+		this->environment()
 	)
 {
 	this->insert_spawns(
@@ -297,9 +291,9 @@ sanguis::server::world::object::insert(
 		;
 }
 sanguis::server::environment::object &
-sanguis::server::world::object::environment() const
+sanguis::server::world::object::environment()
 {
-	return *environment_;
+	return *this;
 }
 
 sanguis::creator::opening_container const &
@@ -594,12 +588,14 @@ sanguis::server::world::object::level_changed(
 void
 sanguis::server::world::object::pickup_chance(
 	sanguis::server::pickup_probability const _spawn_chance,
+	sanguis::server::entities::enemies::difficulty const _difficulty,
 	sanguis::server::center const &_center
 )
 {
 	pickup_spawner_.spawn(
 		_spawn_chance,
-		_center
+		_center,
+		_difficulty
 	);
 }
 
@@ -929,7 +925,7 @@ sanguis::server::world::object::insert_spawns(
 	sanguis::creator::spawn_container const &_spawns,
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
-	sanguis::server::difficulty const _difficulty
+	sanguis::server::world::difficulty const _difficulty
 )
 {
 	for(

@@ -1,6 +1,6 @@
 #include <sanguis/exception.hpp>
 #include <sanguis/client/health.hpp>
-#include <sanguis/client/health_type.hpp>
+#include <sanguis/client/health_value.hpp>
 #include <sanguis/client/max_health.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/model/healthbar.hpp>
@@ -202,7 +202,7 @@ sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 		max_health_.get()
 		<
 		static_cast<
-			sanguis::client::health_type
+			sanguis::client::health_value
 		>(
 			0.01f
 		)
