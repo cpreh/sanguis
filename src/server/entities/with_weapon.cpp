@@ -67,6 +67,19 @@ sanguis::server::entities::with_weapon::on_update()
 		this->primary_weapon_ref()
 	);
 
+	if(
+		secondary_weapon_
+		&&
+		!secondary_weapon_->usable()
+	)
+	{
+		this->drop_weapon(
+			sanguis::is_primary_weapon(
+				false
+			)
+		);
+	}
+
 	this->update_weapon(
 		this->secondary_weapon_ref()
 	);
