@@ -1,11 +1,11 @@
-#include <sanguis/animation_type.hpp>
 #include <sanguis/exception.hpp>
+#include <sanguis/load/animation_type.hpp>
 #include <sanguis/load/model/base_animation_not_found.hpp>
 #include <fcppt/text.hpp>
 
 
 sanguis::load::model::base_animation_not_found::base_animation_not_found(
-	sanguis::animation_type const _anim_type
+	sanguis::load::animation_type const _anim_type
 )
 :
 	sanguis::exception(
@@ -17,7 +17,7 @@ sanguis::load::model::base_animation_not_found::base_animation_not_found(
 {
 }
 
-sanguis::animation_type
+sanguis::load::animation_type
 sanguis::load::model::base_animation_not_found::anim_type() const
 {
 	return anim_type_;

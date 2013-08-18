@@ -6,6 +6,7 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
 namespace load
@@ -27,12 +28,14 @@ map_get_or_create(
 	Fun const &_creator
 )
 {
-	typedef typename std::map<
+	typedef typename
+	std::map<
 		Key,
 		Mapped,
 		Comp,
 		Alloc
-	>::iterator iterator;
+	>::iterator
+	iterator;
 
 	iterator const it(
 		_map.find(
@@ -52,7 +55,8 @@ map_get_or_create(
 						_key
 					)
 				)
-			).first->second;
+			).first->second
+		;
 }
 
 }

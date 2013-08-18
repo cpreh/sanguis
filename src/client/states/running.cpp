@@ -2,6 +2,7 @@
 #include <sanguis/client/log.hpp>
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/make_send_callback.hpp>
+#include <sanguis/client/sound_manager.hpp>
 #include <sanguis/client/console/object.hpp>
 #include <sanguis/client/control/environment_fwd.hpp>
 #include <sanguis/client/control/input_translator.hpp>
@@ -69,6 +70,11 @@ sanguis::client::states::running::running(
 			console_->sge_console()
 		)
 	),
+	sound_manager_(
+		fcppt::make_unique_ptr<
+			sanguis::client::sound_manager
+		>()
+	),
 	drawer_(
 		fcppt::make_unique_ptr<
 			sanguis::client::draw2d::scene::object
@@ -76,9 +82,13 @@ sanguis::client::states::running::running(
 			this->context<
 				sanguis::client::machine
 			>().resources(),
+			*sound_manager_,
 			this->context<
 				sanguis::client::machine
 			>().renderer(),
+			this->context<
+				sanguis::client::machine
+			>().audio_listener(),
 			this->context<
 				sanguis::client::machine
 			>().font_object(),
@@ -124,6 +134,8 @@ sanguis::client::states::running::react(
 	drawer_->update(
 		_event.delta()
 	);
+
+	sound_manager_->update();
 
 	return
 		this->discard_event();

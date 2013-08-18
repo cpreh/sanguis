@@ -1,13 +1,13 @@
 #ifndef SANGUIS_LOAD_MODEL_GLOBAL_PARAMETERS_HPP_INCLUDED
 #define SANGUIS_LOAD_MODEL_GLOBAL_PARAMETERS_HPP_INCLUDED
 
+#include <sanguis/load/model/cell_size.hpp>
 #include <sanguis/load/model/global_parameters_fwd.hpp>
 #include <sanguis/load/model/optional_delay.hpp>
 #include <sanguis/load/model/optional_texture_identifier.hpp>
+#include <sanguis/load/resource/sounds_fwd.hpp>
 #include <sanguis/load/resource/textures_fwd.hpp>
-#include <sge/renderer/dim2.hpp>
 #include <fcppt/nonassignable.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -29,7 +29,8 @@ public:
 	global_parameters(
 		boost::filesystem::path const &,
 		sanguis::load::resource::textures const &,
-		sge::renderer::dim2 const &cell_size,
+		sanguis::load::resource::sounds const &,
+		sanguis::load::model::cell_size const &,
 		sanguis::load::model::optional_delay const &,
 		sanguis::load::model::optional_texture_identifier const &
 	);
@@ -40,7 +41,10 @@ public:
 	sanguis::load::resource::textures const &
 	textures() const;
 
-	sge::renderer::dim2 const &
+	sanguis::load::resource::sounds const &
+	sounds() const;
+
+	sanguis::load::model::cell_size const &
 	cell_size() const;
 
 	sanguis::load::model::optional_delay const &
@@ -58,7 +62,9 @@ private:
 
 	sanguis::load::resource::textures const &textures_;
 
-	sge::renderer::dim2 const cell_size_;
+	sanguis::load::resource::sounds const &sounds_;
+
+	sanguis::load::model::cell_size const cell_size_;
 
 	sanguis::load::model::optional_delay const delay_;
 

@@ -21,6 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef SANGUIS_LOAD_RESOURCE_ANIMATION_SERIES_FWD_HPP_INCLUDED
 #define SANGUIS_LOAD_RESOURCE_ANIMATION_SERIES_FWD_HPP_INCLUDED
 
+
 namespace sanguis
 {
 namespace load

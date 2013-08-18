@@ -4,10 +4,13 @@
 #include <sanguis/client/create_systems.hpp>
 #include <sanguis/client/systems.hpp>
 #include <sanguis/client/systems_unique_ptr.hpp>
+#include <sge/audio/loader_capabilities_field.hpp>
 #include <sge/media/extension.hpp>
 #include <sge/media/extension_set.hpp>
 #include <sge/media/optional_extension_set.hpp>
 #include <sge/renderer/parameters/object.hpp>
+#include <sge/systems/audio_loader.hpp>
+#include <sge/systems/audio_player_default.hpp>
 #include <sge/systems/cursor_option_field.hpp>
 #include <sge/systems/font.hpp>
 #include <sge/systems/image2d.hpp>
@@ -89,6 +92,21 @@ sanguis::client::create_systems(
 						}
 					)
 				)
+			)
+			(
+				sge::systems::audio_loader(
+					sge::audio::loader_capabilities_field::null(),
+					sge::media::optional_extension_set(
+						sge::media::extension_set{
+							sge::media::extension(
+								FCPPT_TEXT("ogg")
+							)
+						}
+					)
+				)
+			)
+			(
+				sge::systems::audio_player_default()
 			)
 			// TODO: make sure that we can load truetype fonts, use a multi loader here as well!
 		);

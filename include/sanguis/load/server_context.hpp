@@ -2,7 +2,8 @@
 #define SANGUIS_LOAD_SERVER_CONTEXT_HPP_INCLUDED
 
 #include <sanguis/load/server_context_fwd.hpp>
-#include <sge/renderer/dim2.hpp>
+#include <sanguis/load/model/cell_size.hpp>
+#include <sge/renderer/dim2_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -32,7 +33,7 @@ public:
 private:
 	typedef std::map<
 		fcppt::string,
-		sge::renderer::dim2
+		sanguis::load::model::cell_size
 	> dim_map;
 
 	mutable dim_map dims_;

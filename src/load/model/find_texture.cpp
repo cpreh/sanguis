@@ -1,14 +1,16 @@
 #include <sanguis/load/model/find_texture.hpp>
+#include <sanguis/load/model/optional_texture_identifier.hpp>
 #include <sge/parse/json/array.hpp>
-#include <sge/parse/json/object.hpp>
 #include <sge/parse/json/find_member.hpp>
+#include <sge/parse/json/object.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 
+
 sanguis::load::model::optional_texture_identifier const
 sanguis::load::model::find_texture(
-	sge::parse::json::member_map const &members
+	sge::parse::json::object const &_object
 )
 {
 	typedef fcppt::optional<
@@ -19,7 +21,7 @@ sanguis::load::model::find_texture(
 		sge::parse::json::find_member<
 			fcppt::string
 		>(
-			members,
+			_object.members,
 			FCPPT_TEXT("texture")
 		)
 	);
@@ -27,9 +29,10 @@ sanguis::load::model::find_texture(
 	return
 		ret
 		?
-			optional_texture_identifier(
+			sanguis::load::model::optional_texture_identifier(
 				*ret
 			)
 		:
-			optional_texture_identifier();
+			sanguis::load::model::optional_texture_identifier()
+		;
 }

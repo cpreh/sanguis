@@ -1,7 +1,6 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_OBJECT_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_OBJECT_HPP_INCLUDED
 
-#include <sanguis/animation_type_fwd.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
 #include <sanguis/client/health.hpp>
@@ -20,6 +19,7 @@
 #include <sanguis/client/draw2d/entities/model/part_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/index_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
+#include <sanguis/load/animation_type_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
@@ -161,15 +161,15 @@ private:
 
 	void
 	change_animation(
-		sanguis::animation_type
+		sanguis::load::animation_type
 	);
 
-	sanguis::animation_type
+	sanguis::load::animation_type
 	animation() const;
 
-	sanguis::animation_type
+	sanguis::load::animation_type
 	fallback_anim(
-		sanguis::animation_type
+		sanguis::load::animation_type
 	) const;
 
 	void

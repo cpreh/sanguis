@@ -136,13 +136,9 @@ sanguis::load::model::part::part(
 :
 	categories_()
 {
-	sge::parse::json::member_map const &members(
-		_object.members
-	);
-
 	sanguis::load::model::optional_texture_identifier const texture(
 		sanguis::load::model::find_texture(
-			members
+			_object
 		)
 	);
 
@@ -150,7 +146,7 @@ sanguis::load::model::part::part(
 		sge::parse::json::find_member_exn<
 			sge::parse::json::array
 		>(
-			members,
+			_object.members,
 			FCPPT_TEXT("weapon_categories")
 		)
 	);

@@ -2,6 +2,7 @@
 #define SANGUIS_LOAD_MODEL_ANIMATION_HPP_INCLUDED
 
 #include <sanguis/load/model/animation_fwd.hpp>
+#include <sanguis/load/model/optional_sound.hpp>
 #include <sanguis/load/model/global_parameters_fwd.hpp>
 #include <sanguis/load/resource/animation/series.hpp>
 #include <sge/parse/json/object_fwd.hpp>
@@ -31,10 +32,15 @@ public:
 
 	sanguis::load::resource::animation::series const &
 	series() const;
+
+	sanguis::load::model::optional_sound const &
+	sound() const;
 private:
 	sge::texture::const_part_shared_ptr const texture_;
 
 	sanguis::load::resource::animation::series const series_;
+
+	sanguis::load::model::optional_sound const sound_;
 };
 
 }

@@ -111,6 +111,7 @@ include_directories(
 find_package(
 	sge REQUIRED
 	COMPONENTS
+	audio
 	cegui
 	charconv
 	config

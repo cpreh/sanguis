@@ -2,11 +2,12 @@
 #define SANGUIS_LOAD_MODEL_OBJECT_HPP_INCLUDED
 
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/load/model/cell_size.hpp>
 #include <sanguis/load/model/collection_fwd.hpp>
 #include <sanguis/load/model/object_fwd.hpp>
 #include <sanguis/load/model/part_fwd.hpp>
 #include <sanguis/load/resource/context_fwd.hpp>
-#include <sge/renderer/dim2.hpp>
+#include <sge/renderer/dim2_fwd.hpp>
 #include <fcppt/random/variate_fwd.hpp>
 #include <fcppt/random/distribution/basic_fwd.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int_fwd.hpp>
@@ -83,7 +84,7 @@ private:
 
 	boost::filesystem::path const path_;
 
-	sge::renderer::dim2 cell_size_;
+	sanguis::load::model::cell_size cell_size_;
 
 	part_map parts_;
 

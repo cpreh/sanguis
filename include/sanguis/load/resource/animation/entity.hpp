@@ -39,6 +39,7 @@ namespace animation
 class entity
 {
 public:
+	// TODO: Why shared_ptr?
 	entity(
 		sanguis::duration const &delay,
 		sge::texture::const_part_shared_ptr
@@ -50,6 +51,7 @@ public:
 	sge::texture::const_part_shared_ptr const
 	tex() const;
 
+	// TODO: What does this do?
 	void
 	tex(
 		sge::texture::const_part_shared_ptr

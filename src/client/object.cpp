@@ -13,6 +13,7 @@
 #include <sanguis/client/events/tick.hpp>
 #include <sanguis/client/states/menu.hpp>
 #include <sanguis/server/object.hpp>
+#include <sge/audio/player.hpp>
 #include <sge/config/media_path.hpp>
 #include <sge/console/output_line_limit.hpp>
 #include <sge/font/object.hpp>
@@ -79,7 +80,9 @@ sanguis::client::object::object(
 	),
 	resources_(
 		sys_->image_system(),
-		sys_->renderer_core()
+		sys_->renderer_core(),
+		sys_->audio_loader(),
+		sys_->audio_player()
 	),
 	cursor_(
 		sys_->cursor_demuxer()
@@ -106,6 +109,7 @@ sanguis::client::object::object(
 		sys_->keyboard_collector(),
 		cursor_,
 		sys_->renderer_ffp(),
+		sys_->audio_player().listener(),
 		sys_->image_system(),
 		io_service_,
 		sys_->viewport_manager()

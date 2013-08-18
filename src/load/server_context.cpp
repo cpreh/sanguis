@@ -39,7 +39,7 @@ sanguis::load::server_context::model_dim(
 		if(
 			it != dims_.end()
 		)
-			return it->second;
+			return it->second.get();
 	}
 
 	sge::parse::json::start const start_return(
@@ -61,8 +61,8 @@ sanguis::load::server_context::model_dim(
 				_model_name,
 				sanguis::load::model::load_dim(
 					sanguis::load::model::json_header(
-						start_return.object().members
-					).members
+						start_return.object()
+					)
 				)
 			)
 		)
@@ -73,5 +73,5 @@ sanguis::load::server_context::model_dim(
 	);
 
 	return
-		ret.first->second;
+		ret.first->second.get();
 }

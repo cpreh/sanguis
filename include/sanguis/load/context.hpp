@@ -3,6 +3,8 @@
 
 #include <sanguis/load/model/context.hpp>
 #include <sanguis/load/resource/context.hpp>
+#include <sge/audio/loader_fwd.hpp>
+#include <sge/audio/player_fwd.hpp>
 #include <sge/image2d/system_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -21,7 +23,9 @@ class context
 public:
 	context(
 		sge::image2d::system &,
-		sge::renderer::device::core &
+		sge::renderer::device::core &,
+		sge::audio::loader &,
+		sge::audio::player &
 	);
 
 	~context();

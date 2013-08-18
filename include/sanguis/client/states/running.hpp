@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_STATES_RUNNING_HPP_INCLUDED
 
 #include <sanguis/client/machine.hpp>
+#include <sanguis/client/sound_manager_fwd.hpp>
 #include <sanguis/client/daytime_settings_fwd.hpp>
 #include <sanguis/client/control/environment_fwd.hpp>
 #include <sanguis/client/control/input_translator_fwd.hpp>
@@ -141,6 +142,10 @@ private:
 	fcppt::scoped_ptr<
 		sanguis::client::daytime_settings
 	> const daytime_settings_;
+
+	fcppt::scoped_ptr<
+		sanguis::client::sound_manager
+	> const sound_manager_;
 
 	fcppt::scoped_ptr<
 		sanguis::client::draw2d::scene::object

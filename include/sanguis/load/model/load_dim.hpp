@@ -1,8 +1,9 @@
 #ifndef SANGUIS_LOAD_MODEL_LOAD_DIM_HPP_INCLUDED
 #define SANGUIS_LOAD_MODEL_LOAD_DIM_HPP_INCLUDED
 
-#include <sge/parse/json/member_map.hpp>
-#include <sge/renderer/dim2.hpp>
+#include <sanguis/load/model/cell_size_fwd.hpp>
+#include <sge/parse/json/object_fwd.hpp>
+
 
 namespace sanguis
 {
@@ -11,9 +12,9 @@ namespace load
 namespace model
 {
 
-sge::renderer::dim2 const
+sanguis::load::model::cell_size const
 load_dim(
-	sge::parse::json::member_map const &
+	sge::parse::json::object const &
 );
 
 }

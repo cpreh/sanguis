@@ -11,6 +11,7 @@
 #include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/io_service_fwd.hpp>
+#include <sge/audio/listener_fwd.hpp>
 #include <sge/console/gfx_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
@@ -58,6 +59,7 @@ public:
 		sge::input::keyboard::device &,
 		sanguis::client::cursor::object &,
 		sge::renderer::device::ffp &,
+		sge::audio::listener &,
 		sge::image2d::system &,
 		sanguis::io_service &,
 		sge::viewport::manager &
@@ -100,6 +102,9 @@ public:
 
 	sge::renderer::device::ffp &
 	renderer() const;
+
+	sge::audio::listener &
+	audio_listener() const;
 
 	sge::image2d::system &
 	image_loader() const;
@@ -151,6 +156,8 @@ private:
 	sge::input::keyboard::device &keyboard_;
 
 	sge::renderer::device::ffp &renderer_;
+
+	sge::audio::listener &audio_listener_;
 
 	sge::image2d::system &image_loader_;
 

@@ -1,4 +1,3 @@
-#include <sanguis/animation_type.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/log_parameters.hpp>
@@ -23,6 +22,7 @@
 #include <sanguis/client/draw2d/sprite/index.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
+#include <sanguis/load/animation_type.hpp>
 #include <sanguis/load/model/collection.hpp>
 #include <sanguis/load/model/object.hpp>
 #include <fcppt/assert/pre.hpp>
@@ -154,6 +154,7 @@ sanguis::client::draw2d::entities::model::object::object(
 				sanguis::client::draw2d::entities::model::part
 			>(
 				diff_clock_,
+				_param.sound_manager(),
 				*cur_part.second,
 				this->at(
 					sanguis::client::draw2d::sprite::index(
@@ -164,7 +165,7 @@ sanguis::client::draw2d::entities::model::object::object(
 		);
 
 	this->change_animation(
-		sanguis::animation_type::deploying
+		sanguis::load::animation_type::deploying
 	);
 }
 
@@ -409,14 +410,14 @@ sanguis::client::draw2d::entities::model::object::change_animation()
 
 void
 sanguis::client::draw2d::entities::model::object::change_animation(
-	sanguis::animation_type const _anim
+	sanguis::load::animation_type const _anim
 )
 {
 	for(
 		auto &cur_part : parts_
 	)
 	{
-		sanguis::animation_type part_anim(
+		sanguis::load::animation_type part_anim(
 			_anim
 		);
 
@@ -432,60 +433,60 @@ sanguis::client::draw2d::entities::model::object::change_animation(
 	}
 }
 
-sanguis::animation_type
+sanguis::load::animation_type
 sanguis::client::draw2d::entities::model::object::fallback_anim(
-	sanguis::animation_type const _anim
+	sanguis::load::animation_type const _anim
 ) const
 {
 	switch(
 		_anim
 	)
 	{
-	case sanguis::animation_type::none:
+	case sanguis::load::animation_type::none:
 		FCPPT_ASSERT_UNREACHABLE_MESSAGE(
 			FCPPT_TEXT("None animation not available!")
 		);
 		break;
-	case sanguis::animation_type::attacking:
-	case sanguis::animation_type::reloading:
+	case sanguis::load::animation_type::attacking:
+	case sanguis::load::animation_type::reloading:
 		return
 			this->walking()
 			?
-				sanguis::animation_type::walking
+				sanguis::load::animation_type::walking
 			:
-				sanguis::animation_type::none
+				sanguis::load::animation_type::none
 			;
-	case sanguis::animation_type::deploying:
-	case sanguis::animation_type::walking:
-	case sanguis::animation_type::dying:
+	case sanguis::load::animation_type::deploying:
+	case sanguis::load::animation_type::walking:
+	case sanguis::load::animation_type::dying:
 		return
-			sanguis::animation_type::none;
+			sanguis::load::animation_type::none;
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;
 }
 
-sanguis::animation_type
+sanguis::load::animation_type
 sanguis::client::draw2d::entities::model::object::animation() const
 {
 	return
 		this->dead()
 		?
-			sanguis::animation_type::dying
+			sanguis::load::animation_type::dying
 		:
 			reloading_
 			?
-				sanguis::animation_type::reloading
+				sanguis::load::animation_type::reloading
 			:
 				attacking_
 				?
-					sanguis::animation_type::attacking
+					sanguis::load::animation_type::attacking
 				:
 					this->walking()
 					?
-						sanguis::animation_type::walking
+						sanguis::load::animation_type::walking
 					:
-						sanguis::animation_type::none
+						sanguis::load::animation_type::none
 					;
 }
 
@@ -509,7 +510,7 @@ sanguis::client::draw2d::entities::model::object::animations_ended() const
 	if(
 		this->animation()
 		!=
-		sanguis::animation_type::dying
+		sanguis::load::animation_type::dying
 	)
 		return true;
 

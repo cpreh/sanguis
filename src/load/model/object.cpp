@@ -1,6 +1,7 @@
 #include <sanguis/exception.hpp>
 #include <sanguis/random_generator.hpp>
 #include <sanguis/load/log.hpp>
+#include <sanguis/load/model/cell_size.hpp>
 #include <sanguis/load/model/find_texture.hpp>
 #include <sanguis/load/model/global_parameters.hpp>
 #include <sanguis/load/model/json_header.hpp>
@@ -23,7 +24,6 @@
 #include <sge/parse/json/start.hpp>
 #include <sge/renderer/dim2.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/no_init.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
@@ -124,7 +124,7 @@ sanguis::load::model::object::end() const
 sge::renderer::dim2 const
 sanguis::load::model::object::dim() const
 {
-	return cell_size_;
+	return cell_size_.get();
 }
 
 sanguis::load::model::object::object(
@@ -136,7 +136,7 @@ sanguis::load::model::object::object(
 		_path
 	),
 	cell_size_(
-		fcppt::no_init()
+		sanguis::load::model::cell_size::value_type::null()
 	),
 	parts_(),
 	random_part_()
@@ -187,29 +187,29 @@ sanguis::load::model::object::construct(
 		)
 	);
 
-	sge::parse::json::member_map const &global_entries(
-		start_return.object().members
+	sge::parse::json::object const &global_entries(
+		start_return.object()
 	);
 
 	sge::parse::json::object const &header(
-		json_header(
+		sanguis::load::model::json_header(
 			global_entries
 		)
 	);
 
 	cell_size_ =
 		sanguis::load::model::load_dim(
-			header.members
+			header
 		);
 
 	sanguis::load::model::optional_delay const opt_delay(
-		load_delay(
+		sanguis::load::model::load_delay(
 			header.members
 		)
 	);
 
 	sanguis::load::model::optional_texture_identifier const texture(
-		find_texture(
+		sanguis::load::model::find_texture(
 			global_entries
 		)
 	);
@@ -218,7 +218,7 @@ sanguis::load::model::object::construct(
 		sge::parse::json::find_member_exn<
 			sge::parse::json::array
 		>(
-			global_entries,
+			global_entries.members,
 			FCPPT_TEXT("parts")
 		)
 	);
@@ -261,6 +261,7 @@ sanguis::load::model::object::construct(
 					sanguis::load::model::global_parameters(
 						path_,
 						_ctx.textures(),
+						_ctx.sounds(),
 						cell_size_,
 						opt_delay,
 						texture

@@ -4,16 +4,17 @@
 #include <sge/parse/json/object.hpp>
 #include <fcppt/text.hpp>
 
+
 sge::parse::json::object const &
 sanguis::load::model::json_header(
-	sge::parse::json::member_map const &_global_entries
+	sge::parse::json::object const &_object
 )
 {
 	return
 		sge::parse::json::find_member_exn<
 			sge::parse::json::object
 		>(
-			_global_entries,
+			_object.members,
 			FCPPT_TEXT("header")
 		);
 }

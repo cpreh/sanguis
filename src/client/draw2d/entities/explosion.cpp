@@ -1,4 +1,3 @@
-#include <sanguis/animation_type.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
@@ -15,6 +14,7 @@
 #include <sanguis/client/draw2d/sprite/normal/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
 #include <sanguis/client/draw2d/sprite/normal/texture_animation.hpp>
+#include <sanguis/load/animation_type.hpp>
 #include <sanguis/load/model/animation.hpp>
 #include <sanguis/load/model/collection.hpp>
 #include <sanguis/load/model/object.hpp>
@@ -82,7 +82,7 @@ sanguis::client::draw2d::entities::explosion::explosion(
 		[
 			sanguis::optional_primary_weapon_type()
 		][
-			sanguis::animation_type::none
+			sanguis::load::animation_type::none
 		]
 		.series(),
 		sanguis::client::draw2d::sprite::animation::loop_method::stop_at_end,
