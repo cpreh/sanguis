@@ -35,7 +35,7 @@
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/diff.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/chrono/duration.hpp>
+#include <chrono>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -55,7 +55,7 @@ sanguis::client::draw2d::entities::model::part::part(
 	rotation_timer_(
 		sanguis::diff_timer::parameters(
 			_diff_clock,
-			boost::chrono::seconds(
+			std::chrono::seconds(
 				1
 			)
 		)

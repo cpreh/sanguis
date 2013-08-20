@@ -3,16 +3,18 @@
 
 #include <sanguis/time_unit.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/chrono/duration.hpp>
+#include <chrono>
 #include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
 {
 
-typedef boost::chrono::duration<
+typedef
+std::chrono::duration<
 	sanguis::time_unit
-> duration;
+>
+duration;
 
 }
 

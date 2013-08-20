@@ -35,9 +35,6 @@
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <boost/chrono/chrono_io.hpp>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace
@@ -217,19 +214,19 @@ sanguis::server::weapons::weapon::description() const
 					sanguis::server::weapons::make_attribute(
 						FCPPT_TEXT("cast point"),
 						fcppt::insert_to_fcppt_string(
-							cast_point_
+							cast_point_.get().count()
 						)
 					),
 					sanguis::server::weapons::make_attribute(
 						FCPPT_TEXT("backswing time"),
 						fcppt::insert_to_fcppt_string(
-							backswing_time_
+							backswing_time_.get().count()
 						)
 					),
 					sanguis::server::weapons::make_attribute(
 						FCPPT_TEXT("reload time"),
 						fcppt::insert_to_fcppt_string(
-							reload_time_
+							reload_time_.get().count()
 						)
 					)
 				},

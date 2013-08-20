@@ -2,7 +2,7 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/update_diff_clock.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/chrono/duration.hpp>
+#include <chrono>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -13,7 +13,7 @@ sanguis::update_diff_clock(
 )
 {
 	_clock.update(
-		boost::chrono::duration_cast<
+		std::chrono::duration_cast<
 			sanguis::diff_clock::duration
 		>(
 			_duration

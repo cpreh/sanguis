@@ -1,14 +1,20 @@
+#include <sanguis/duration.hpp>
 #include <sanguis/client/gui/object.hpp>
 #include <sanguis/client/cursor/object.hpp>
 #include <sge/cegui/cursor_visibility.hpp>
 #include <sge/cegui/duration.hpp>
 #include <sge/cegui/load_context.hpp>
+#include <sge/cegui/system_fwd.hpp>
 #include <sge/config/media_path.hpp>
+#include <sge/image2d/system_fwd.hpp>
+#include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
+#include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/renderer/texture/emulate_srgb.hpp>
+#include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/chrono/duration.hpp>
+#include <chrono>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -17,7 +23,7 @@ sanguis::client::gui::object::object(
 	sge::image2d::system &_image_loader,
 	sge::viewport::manager &_viewport_manager,
 	sge::input::keyboard::device &_keyboard,
-	client::cursor::object &_cursor
+	sanguis::client::cursor::object &_cursor
 )
 :
 	system_(
@@ -79,7 +85,7 @@ sanguis::client::gui::object::update(
 )
 {
 	system_.update(
-		boost::chrono::duration_cast<
+		std::chrono::duration_cast<
 			sge::cegui::duration
 		>(
 			_time

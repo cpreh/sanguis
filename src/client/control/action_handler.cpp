@@ -34,7 +34,7 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/variant/apply_unary.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/chrono/duration.hpp>
+#include <chrono>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
 
@@ -53,7 +53,7 @@ sanguis::client::control::action_handler::action_handler(
 	),
 	rotation_timer_(
 		sanguis::timer::parameters(
-			boost::chrono::milliseconds(
+			std::chrono::milliseconds(
 				100
 			)
 		)

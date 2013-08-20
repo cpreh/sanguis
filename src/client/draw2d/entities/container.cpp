@@ -24,7 +24,7 @@
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/chrono/duration.hpp>
+#include <chrono>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -48,7 +48,7 @@ sanguis::client::draw2d::entities::container::container(
 	move_timer_(
 		sanguis::diff_timer::parameters(
 			_diff_clock,
-			boost::chrono::seconds(
+			std::chrono::seconds(
 				1
 			)
 		)

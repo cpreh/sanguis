@@ -1481,7 +1481,6 @@ SET(
 	src/messages/stop_reloading.cpp
 	src/messages/unpause.cpp
 	src/net/append_to_circular_buffer.cpp
-	src/net/asio.cpp
 	src/net/circular_buffer_sink.cpp
 	src/net/deserialize.cpp
 	src/net/exception.cpp
@@ -1746,7 +1745,6 @@ add_definitions(
 target_link_libraries(
 	sanguis
 	sanguiscreator
-	${Boost_CHRONO_LIBRARY}
 	${fcppt_core_TARGET}
 	${fcppt_filesystem_TARGET}
 	${awl_TARGET}

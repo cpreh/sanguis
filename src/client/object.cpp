@@ -31,8 +31,8 @@
 #include <fcppt/log/fatal.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/chrono/duration.hpp>
 #include <boost/program_options/variables_map.hpp>
+#include <chrono>
 #include <exception>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
@@ -116,7 +116,7 @@ sanguis::client::object::object(
 	),
 	frame_timer_(
 		sanguis::timer::parameters(
-			boost::chrono::seconds(
+			std::chrono::seconds(
 				1
 			)
 		)

@@ -31,8 +31,8 @@
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/chrono/duration.hpp>
 #include <algorithm>
+#include <chrono>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -68,7 +68,7 @@ sanguis::server::entities::projectiles::grenade::grenade(
 	slowdown_timer_(
 		sanguis::diff_timer::parameters(
 			_diff_clock,
-			boost::chrono::milliseconds(
+			std::chrono::milliseconds(
 				100
 			)
 		)

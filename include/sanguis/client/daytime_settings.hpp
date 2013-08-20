@@ -7,7 +7,7 @@
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/chrono/system_clocks.hpp>
+#include <chrono>
 #include <ctime>
 #include <fcppt/config/external_end.hpp>
 
@@ -33,7 +33,7 @@ public:
 	std::tm const
 	current_time();
 private:
-	typedef boost::chrono::system_clock clock;
+	typedef std::chrono::system_clock clock;
 
 	typedef clock::time_point time_point;
 

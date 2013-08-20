@@ -23,8 +23,8 @@
 #include <sanguis/server/environment/load_context.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/chrono/duration.hpp>
 #include <boost/logic/tribool.hpp>
+#include <chrono>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -71,7 +71,7 @@ sanguis::server::entities::pickups::pickup::pickup(
 	life_timer_(
 		sanguis::diff_timer::parameters(
 			_diff_clock,
-			boost::chrono::seconds(
+			std::chrono::seconds(
 				30
 			)
 		)

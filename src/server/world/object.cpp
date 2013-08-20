@@ -90,7 +90,7 @@
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/chrono/duration.hpp>
+#include <chrono>
 #include <functional>
 #include <memory>
 #include <fcppt/config/external_end.hpp>
@@ -146,14 +146,14 @@ sanguis::server::world::object::object(
 	projectile_timer_(
 		sanguis::diff_timer::parameters(
 			_parameters.diff_clock(),
-			boost::chrono::seconds(
+			std::chrono::seconds(
 				1
 			)
 		)
 	),
 	send_timer_(
 		sanguis::timer::parameters(
-			boost::chrono::milliseconds(
+			std::chrono::milliseconds(
 				500
 			)
 		)
@@ -207,7 +207,7 @@ sanguis::server::world::object::update()
 
 	collision_world_->update_continuous(
 		sge::projectile::time_increment(
-			boost::chrono::duration_cast<
+			std::chrono::duration_cast<
 				sge::projectile::duration
 			>(
 				duration

@@ -35,7 +35,7 @@
 #include <fcppt/random/distribution/basic_impl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/chrono/duration.hpp>
+#include <chrono>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
 
@@ -50,7 +50,7 @@ sanguis::server::ai::simple::simple(
 	pos_timer_(
 		sanguis::diff_timer::parameters(
 			_diff_clock,
-			boost::chrono::milliseconds(
+			std::chrono::milliseconds(
 				500
 			)
 		)

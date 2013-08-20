@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_TIMER_DURATION_HPP_INCLUDED
 
 #include <fcppt/config/external_begin.hpp>
-#include <boost/chrono/duration.hpp>
+#include <chrono>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -11,7 +11,9 @@ namespace sanguis
 namespace server
 {
 
-typedef boost::chrono::milliseconds timer_duration;
+typedef
+std::chrono::milliseconds
+timer_duration;
 
 }
 }

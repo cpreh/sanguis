@@ -6,7 +6,7 @@
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/chrono/duration.hpp>
+#include <chrono>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -32,11 +32,11 @@ sanguis::load::model::load_delay(
 		ret
 		?
 			model::optional_delay(
-				boost::chrono::duration_cast<
+				std::chrono::duration_cast<
 					sanguis::duration
 				>(
 					// FIXME: we shouldn't tell multiple times that these are milliseconds!
-					boost::chrono::milliseconds(
+					std::chrono::milliseconds(
 						*ret
 					)
 				)

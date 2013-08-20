@@ -36,15 +36,14 @@ include_directories(
 
 find_package(
 	Boost 1.47.0 REQUIRED COMPONENTS
-	chrono
 	iostreams
 	program_options
 	system
 )
 
-add_definitions(
-	-D BOOST_ASIO_SEPARATE_COMPILATION
-)
+#add_definitions(
+#	-D BOOST_ASIO_SEPARATE_COMPILATION
+#)
 
 include_directories(
 	${Boost_INCLUDE_DIRS}

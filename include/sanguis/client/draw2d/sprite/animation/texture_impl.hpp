@@ -31,7 +31,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <fcppt/text.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/chrono/duration.hpp>
+#include <chrono>
 #include <iterator>
 #include <fcppt/config/external_end.hpp>
 
@@ -57,7 +57,7 @@ sanguis::client::draw2d::sprite::animation::texture<
 	cur_timer_(
 		sanguis::diff_timer::parameters(
 			_diff_clock,
-			boost::chrono::seconds(
+			std::chrono::seconds(
 				0
 			)
 		)

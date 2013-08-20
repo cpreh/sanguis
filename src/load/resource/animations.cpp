@@ -22,9 +22,9 @@
 #include <fcppt/config/external_begin.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include <boost/chrono/duration.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
+#include <chrono>
 #include <cstddef>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
@@ -152,10 +152,10 @@ sanguis::load::resource::animations::do_load(
 		)
 	)
 		const_delay =
-			boost::chrono::duration_cast<
+			std::chrono::duration_cast<
 				sanguis::duration
 			>(
-				boost::chrono::milliseconds(
+				std::chrono::milliseconds(
 					fcppt::extract_from_string_exn<
 						std::int_least64_t
 					>(
@@ -246,10 +246,10 @@ sanguis::load::resource::animations::do_load(
 					)
 				);
 			delay =
-				boost::chrono::duration_cast<
+				std::chrono::duration_cast<
 					sanguis::duration
 				>(
-					boost::chrono::milliseconds(
+					std::chrono::milliseconds(
 						temp_delay
 					)
 				);

@@ -31,7 +31,7 @@
 #include <fcppt/log/verbose.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/chrono/duration.hpp>
+#include <chrono>
 #include <functional>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -58,7 +58,7 @@ sanguis::server::machine::machine(
 	),
 	frame_timer_(
 		sanguis::timer::parameters(
-			boost::chrono::seconds(
+			std::chrono::seconds(
 				1
 			)
 		)
@@ -101,7 +101,7 @@ sanguis::server::machine::machine(
 				this
 			)
 		),
-		boost::chrono::milliseconds(
+		std::chrono::milliseconds(
 			16
 		)
 	)
