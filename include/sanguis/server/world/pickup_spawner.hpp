@@ -9,6 +9,7 @@
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <fcppt/random/variate_decl.hpp>
 #include <fcppt/random/distribution/basic_decl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real_decl.hpp>

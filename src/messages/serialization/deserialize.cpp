@@ -3,7 +3,7 @@
 #include <sanguis/messages/serialization/context_fwd.hpp>
 #include <sanguis/messages/serialization/deserialize.hpp>
 #include <alda/serialization/deserialize.hpp>
-#include <alda/serialization/istream.hpp>
+#include <alda/serialization/istream_fwd.hpp>
 
 
 sanguis::messages::unique_ptr

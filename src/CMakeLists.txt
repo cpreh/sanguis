@@ -821,7 +821,6 @@ SET(
 	include/sanguis/server/center.hpp
 	include/sanguis/server/center_fwd.hpp
 	include/sanguis/server/cheat.hpp
-	include/sanguis/server/circle.hpp
 	include/sanguis/server/closest_entity.hpp
 	include/sanguis/server/collision/body.hpp
 	include/sanguis/server/collision/body_base.hpp
