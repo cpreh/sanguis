@@ -1,7 +1,10 @@
 #include <sanguis/args/parse.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/program_options/options_description.hpp>
 #include <boost/program_options/parsers.hpp>
+#include <boost/program_options/variables_map.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 boost::program_options::variables_map const
 sanguis::args::parse(
@@ -10,12 +13,10 @@ sanguis::args::parse(
 	boost::program_options::options_description const &_desc
 )
 {
-	namespace po = boost::program_options;
+	boost::program_options::variables_map vm;
 
-	po::variables_map vm;
-
-	po::store(
-		po::parse_command_line(
+	boost::program_options::store(
+		boost::program_options::parse_command_line(
 			_argc,
 			_argv,
 			_desc
@@ -23,7 +24,7 @@ sanguis::args::parse(
 		vm
 	);
 
-	po::notify(
+	boost::program_options::notify(
 		vm
 	);
 

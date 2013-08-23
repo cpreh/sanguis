@@ -1,7 +1,11 @@
 #include <sanguis/args/resolution.hpp>
+#include <sanguis/args/optional_resolution.hpp>
+#include <sge/renderer/screen_size.hpp>
 #include <sge/renderer/screen_unit.hpp>
-#include <fcppt/math/dim/object_impl.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/program_options/variables_map.hpp>
+#include <fcppt/config/external_end.hpp>
+
 
 sanguis::args::optional_resolution const
 sanguis::args::resolution(
@@ -17,7 +21,7 @@ sanguis::args::resolution(
 			"height"
 		)
 		?
-			args::optional_resolution(
+			sanguis::args::optional_resolution(
 				sge::renderer::screen_size(
 					_vm["width"].as<
 						sge::renderer::screen_unit
@@ -28,5 +32,6 @@ sanguis::args::resolution(
 				)
 			)
 		:
-			args::optional_resolution();
+			sanguis::args::optional_resolution()
+		;
 }

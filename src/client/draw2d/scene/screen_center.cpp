@@ -2,6 +2,8 @@
 #include <sanguis/client/draw2d/scene/screen_center.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sge/renderer/screen_size.hpp>
+#include <sge/renderer/screen_unit.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -25,7 +27,13 @@ sanguis::client::draw2d::scene::screen_center(
 				2
 			>
 		>(
-			_screen_size / 2u
+			_screen_size
+			/
+			fcppt::literal<
+				sge::renderer::screen_unit
+			>(
+				2u
+			)
 		)
 	);
 

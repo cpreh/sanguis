@@ -5,6 +5,7 @@
 #include <mizuiro/color/homogenous_static.hpp>
 #include <mizuiro/color/layout/rgb.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -15,7 +16,7 @@ namespace sunlight
 {
 
 typedef mizuiro::color::homogenous_static<
-	real,
+	sanguis::client::draw2d::sunlight::real,
 	mizuiro::color::layout::rgb
 > rgb32f_format;
 

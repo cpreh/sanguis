@@ -2,7 +2,6 @@
 #define SANGUIS_CLIENT_GUI_PERK_NODE_HPP_INCLUDED
 
 #include <sanguis/client/gui/perk/node_variant.hpp>
-#include <fcppt/variant/object_impl.hpp>
 #include <fcppt/nonassignable.hpp>
 
 
@@ -26,8 +25,9 @@ class node
 		node
 	);
 public:
-	explicit node(
-		gui::perk::node_variant const &
+	explicit
+	node(
+		sanguis::client::gui::perk::node_variant const &
 	);
 
 	void
@@ -40,7 +40,7 @@ public:
 		CEGUI::TreeItem &
 	) const;
 private:
-	gui::perk::node_variant const impl_;
+	sanguis::client::gui::perk::node_variant const impl_;
 };
 
 }

@@ -5,19 +5,30 @@
 #include <fcppt/assert/unreachable.hpp>
 
 
-fcppt::string const
+fcppt::string
 sanguis::load::aoe_projectile_name(
 	sanguis::aoe_projectile_type const _type
 )
 {
+#define SANGUIS_LOAD_AOE_PROJECTILE_NAME_CASE(\
+	name\
+)\
+case sanguis::aoe_projectile_type::name:\
+	return \
+		FCPPT_TEXT(\
+			#name\
+		)
+
 	switch(
 		_type
 	)
 	{
-	case sanguis::aoe_projectile_type::grenade:
-		return FCPPT_TEXT("grenade");
-	case sanguis::aoe_projectile_type::rocket:
-		return FCPPT_TEXT("rocket");
+		SANGUIS_LOAD_AOE_PROJECTILE_NAME_CASE(
+			grenade
+		);
+		SANGUIS_LOAD_AOE_PROJECTILE_NAME_CASE(
+			rocket
+		);
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;

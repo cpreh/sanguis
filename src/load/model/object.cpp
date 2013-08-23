@@ -2,33 +2,18 @@
 #include <sanguis/random_generator.hpp>
 #include <sanguis/load/log.hpp>
 #include <sanguis/load/model/cell_size.hpp>
-#include <sanguis/load/model/find_texture.hpp>
-#include <sanguis/load/model/global_parameters.hpp>
-#include <sanguis/load/model/json_header.hpp>
-#include <sanguis/load/model/load_delay.hpp>
-#include <sanguis/load/model/load_dim.hpp>
+#include <sanguis/load/model/make_parts.hpp>
 #include <sanguis/load/model/object.hpp>
-#include <sanguis/load/model/optional_delay.hpp>
-#include <sanguis/load/model/optional_texture_identifier.hpp>
-#include <sanguis/load/model/parse_json.hpp>
 #include <sanguis/load/model/part.hpp>
-#include <sanguis/load/model/split_first_slash.hpp>
-#include <sanguis/load/resource/context.hpp>
-#include <sanguis/load/resource/textures.hpp>
-#include <sge/parse/json/array.hpp>
-#include <sge/parse/json/get.hpp>
-#include <sge/parse/json/find_member_exn.hpp>
-#include <sge/parse/json/member.hpp>
-#include <sge/parse/json/member_map.hpp>
-#include <sge/parse/json/object.hpp>
-#include <sge/parse/json/start.hpp>
-#include <sge/renderer/dim2.hpp>
+#include <sanguis/load/resource/context_fwd.hpp>
+#include <sge/exception.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
-#include <fcppt/log/headers.hpp>
+#include <fcppt/log/debug.hpp>
+#include <fcppt/log/error.hpp>
+#include <fcppt/log/output.hpp>
 #include <fcppt/random/variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
@@ -37,6 +22,51 @@
 #include <iterator>
 #include <fcppt/config/external_end.hpp>
 
+
+sanguis::load::model::object::object(
+	boost::filesystem::path const &_path,
+	sanguis::load::resource::context const &_context
+)
+try
+:
+	path_(
+		_path
+	),
+	part_result_(
+		sanguis::load::model::make_parts(
+			_path,
+			_context
+		)
+	),
+	random_part_()
+{
+	FCPPT_LOG_DEBUG(
+		sanguis::load::log(),
+		fcppt::log::_
+			<< FCPPT_TEXT("Entering ")
+			<< fcppt::filesystem::path_to_string(
+				_path
+			)
+	);
+}
+catch(
+	sge::exception const &_error
+)
+{
+	FCPPT_LOG_ERROR(
+		sanguis::load::log(),
+		fcppt::log::_
+			<< FCPPT_TEXT("model \"")
+			<< fcppt::filesystem::path_to_string(
+				_path
+			)
+			<< FCPPT_TEXT("\": \"")
+			<< _error.string()
+			<< FCPPT_TEXT('"')
+	);
+
+	throw;
+}
 
 sanguis::load::model::object::~object()
 {
@@ -47,25 +77,31 @@ sanguis::load::model::object::operator[](
 	fcppt::string const &_name
 ) const
 {
-	part_map::const_iterator const it(
-		parts_.find(
+	sanguis::load::model::part_map::const_iterator const it(
+		this->parts().find(
 			_name
 		)
 	);
 
 	if(
-		it == parts_.end()
+		it
+		==
+		this->parts().end()
 	)
 		throw sanguis::exception(
 			FCPPT_TEXT("Category \"")
-			+ _name
-			+ FCPPT_TEXT("\" not found in ")
-			+ fcppt::filesystem::path_to_string(
+			+
+			_name
+			+
+			FCPPT_TEXT("\" not found in ")
+			+
+			fcppt::filesystem::path_to_string(
 				path_
 			)
 		);
 
-	return *it->second;
+	return
+		*it->second;
 }
 
 sanguis::load::model::part const &
@@ -86,7 +122,7 @@ sanguis::load::model::object::random_part(
 						0u
 					),
 					part_map_distribution::param_type::max(
-						parts_.size() - 1u
+						this->parts().size() - 1u
 					)
 				)
 			)
@@ -94,11 +130,13 @@ sanguis::load::model::object::random_part(
 
 	return
 		*std::next(
-			parts_.begin(),
+			this->parts().begin(),
 			static_cast<
-				part_map::difference_type
+				sanguis::load::model::part_map::difference_type
 			>(
-				(*random_part_)()
+				(
+					*random_part_
+				)()
 			)
 		)->second;
 }
@@ -106,174 +144,34 @@ sanguis::load::model::object::random_part(
 sanguis::load::model::object::size_type
 sanguis::load::model::object::size() const
 {
-	return parts_.size();
+	return
+		this->parts().size();
 }
 
 sanguis::load::model::object::const_iterator
 sanguis::load::model::object::begin() const
 {
-	return parts_.begin();
+	return
+		this->parts().begin();
 }
 
 sanguis::load::model::object::const_iterator
 sanguis::load::model::object::end() const
 {
-	return parts_.end();
+	return
+		this->parts().end();
 }
 
-sge::renderer::dim2 const
-sanguis::load::model::object::dim() const
+sanguis::load::model::cell_size const
+sanguis::load::model::object::cell_size() const
 {
-	return cell_size_.get();
+	return
+		part_result_.cell_size();
 }
 
-sanguis::load::model::object::object(
-	boost::filesystem::path const &_path,
-	sanguis::load::resource::context const &_ctx
-)
-:
-	path_(
-		_path
-	),
-	cell_size_(
-		sanguis::load::model::cell_size::value_type::null()
-	),
-	parts_(),
-	random_part_()
+sanguis::load::model::part_map const &
+sanguis::load::model::object::parts() const
 {
-	FCPPT_LOG_DEBUG(
-		sanguis::load::log(),
-		fcppt::log::_
-			<< FCPPT_TEXT("Entering ")
-			<< fcppt::filesystem::path_to_string(
-				path_
-			)
-	);
-
-	try
-	{
-		this->construct(
-			_ctx
-		);
-	}
-	catch(
-		sge::exception const &_error
-	)
-	{
-		FCPPT_LOG_ERROR(
-			sanguis::load::log(),
-			fcppt::log::_
-				<< FCPPT_TEXT("model \"")
-				<< fcppt::filesystem::path_to_string(
-					path_
-				)
-				<< FCPPT_TEXT("\": \"")
-				<< _error.string()
-				<< FCPPT_TEXT('"')
-		);
-
-		throw;
-	}
-}
-
-void
-sanguis::load::model::object::construct(
-	sanguis::load::resource::context const &_ctx
-)
-{
-	sge::parse::json::start const start_return(
-		sanguis::load::model::parse_json(
-			path_
-		)
-	);
-
-	sge::parse::json::object const &global_entries(
-		start_return.object()
-	);
-
-	sge::parse::json::object const &header(
-		sanguis::load::model::json_header(
-			global_entries
-		)
-	);
-
-	cell_size_ =
-		sanguis::load::model::load_dim(
-			header
-		);
-
-	sanguis::load::model::optional_delay const opt_delay(
-		sanguis::load::model::load_delay(
-			header.members
-		)
-	);
-
-	sanguis::load::model::optional_texture_identifier const texture(
-		sanguis::load::model::find_texture(
-			global_entries
-		)
-	);
-
-	sge::parse::json::array const &parts_array(
-		sge::parse::json::find_member_exn<
-			sge::parse::json::array
-		>(
-			global_entries.members,
-			FCPPT_TEXT("parts")
-		)
-	);
-
-	for(
-		auto const &part : parts_array.elements
-	)
-	{
-		sge::parse::json::member_map const &inner_members(
-			sge::parse::json::get<
-				sge::parse::json::object
-			>(
-				part
-			).members
-		);
-
-		if(
-			inner_members.size() != 1
-		)
-			throw sanguis::exception(
-				FCPPT_TEXT("inner members of the part array have to contain exactly one element!")
-			);
-
-		sge::parse::json::member const &member(
-			*inner_members.begin()
-		);
-
-		if(
-			fcppt::container::ptr::insert_unique_ptr_map(
-				parts_,
-				member.first,
-				fcppt::make_unique_ptr<
-					sanguis::load::model::part
-				>(
-					sge::parse::json::get<
-						sge::parse::json::object
-					>(
-						member.second
-					),
-					sanguis::load::model::global_parameters(
-						path_,
-						_ctx.textures(),
-						_ctx.sounds(),
-						cell_size_,
-						opt_delay,
-						texture
-					)
-				)
-			)
-			.second == false
-		)
-			FCPPT_LOG_WARNING(
-				sanguis::load::log(),
-				fcppt::log::_
-					<< FCPPT_TEXT("Double insert in model!")
-			);
-	}
+	return
+		part_result_.parts();
 }

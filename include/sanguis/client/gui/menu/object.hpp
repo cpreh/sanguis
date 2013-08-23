@@ -39,9 +39,9 @@ class object
 	);
 public:
 	object(
-		config::settings::object &,
-		client::gui::object &,
-		callbacks::object const &
+		sanguis::client::config::settings::object &,
+		sanguis::client::gui::object &,
+		sanguis::client::gui::menu::callbacks::object const &
 	);
 
 	~object();
@@ -61,11 +61,11 @@ public:
 		fcppt::string const &message
 	);
 private:
-	config::settings::object &settings_;
+	sanguis::client::config::settings::object &settings_;
 
-	client::gui::object &gui_;
+	sanguis::client::gui::object &gui_;
 
-	callbacks::object const callbacks_;
+	sanguis::client::gui::menu::callbacks::object const callbacks_;
 
 	sge::cegui::toolbox::scoped_layout const scoped_layout_;
 
@@ -84,7 +84,7 @@ private:
 		port_change_connection_;
 
 	typedef fcppt::scoped_ptr<
-		menu::connection_box
+		sanguis::client::gui::menu::connection_box
 	> scoped_connection_box_ptr;
 
 	scoped_connection_box_ptr connection_box_;

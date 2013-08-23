@@ -19,7 +19,7 @@ namespace events
 class overlay
 :
 	public boost::statechart::event<
-		overlay
+		sanguis::client::events::overlay
 	>
 {
 	FCPPT_NONASSIGNABLE(

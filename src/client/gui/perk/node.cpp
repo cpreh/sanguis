@@ -1,10 +1,12 @@
 #include <sanguis/client/gui/perk/node.hpp>
-#include <fcppt/variant/apply_unary.hpp>
+#include <sanguis/client/gui/perk/node_variant.hpp>
 #include <fcppt/nonassignable.hpp>
+#include <fcppt/variant/apply_unary.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <CEGUI/widgets/Tree.h>
 #include <CEGUI/widgets/TreeItem.h>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace
 {
@@ -15,7 +17,8 @@ class add_visitor
 		add_visitor
 	);
 public:
-	explicit add_visitor(
+	explicit
+	add_visitor(
 		CEGUI::TreeItem &
 	);
 
@@ -38,7 +41,8 @@ struct remove_visitor
 		remove_visitor
 	);
 public:
-	explicit remove_visitor(
+	explicit
+	remove_visitor(
 		CEGUI::TreeItem &
 	);
 
@@ -58,10 +62,12 @@ private:
 }
 
 sanguis::client::gui::perk::node::node(
-	gui::perk::node_variant const &_impl
+	sanguis::client::gui::perk::node_variant const &_impl
 )
 :
-	impl_(_impl)
+	impl_(
+		_impl
+	)
 {
 }
 
@@ -98,7 +104,9 @@ add_visitor::add_visitor(
 	CEGUI::TreeItem &_item
 )
 :
-	item_(_item)
+	item_(
+		_item
+	)
 {
 }
 
@@ -119,7 +127,9 @@ remove_visitor::remove_visitor(
 	CEGUI::TreeItem &_item
 )
 :
-	item_(_item)
+	item_(
+		_item
+	)
 {
 }
 

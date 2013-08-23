@@ -3,11 +3,14 @@
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/pre.hpp>
 
+
 sanguis::client::cursor::scoped::scoped(
-	cursor::object &_cursor
+	sanguis::client::cursor::object &_cursor
 )
 :
-	cursor_(_cursor)
+	cursor_(
+		_cursor
+	)
 {
 	FCPPT_ASSERT_PRE(
 		!cursor_.active()

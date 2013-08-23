@@ -10,9 +10,6 @@
 #include <sanguis/creator/opening_container.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/top_result.hpp>
-#include <sanguis/load/model/context.hpp>
-#include <sanguis/load/model/collection.hpp>
-#include <sanguis/load/model/object.hpp>
 #include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/messages/change_weapon.hpp>
 #include <sanguis/messages/change_world.hpp>

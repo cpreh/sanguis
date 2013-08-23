@@ -1,7 +1,10 @@
-#include <sanguis/client/gui/menu/connection_box.hpp>
-#include <sanguis/client/gui/object.hpp>
 #include <sanguis/media_path.hpp>
+#include <sanguis/client/gui/object.hpp>
+#include <sanguis/client/gui/menu/connection_box.hpp>
+#include <sanguis/client/gui/menu/callbacks/cancel_connect.hpp>
+#include <sanguis/client/gui/menu/callbacks/retry_connect.hpp>
 #include <sge/cegui/to_cegui_string.hpp>
+#include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <CEGUI/Window.h>
@@ -11,19 +14,25 @@
 
 
 sanguis::client::gui::menu::connection_box::connection_box(
-	client::gui::object &_gui,
+	sanguis::client::gui::object &_gui,
 	CEGUI::Window &_parent_window,
-	callbacks::cancel_connect const &_cancel_connect,
-	callbacks::retry_connect const &_retry_connect
+	sanguis::client::gui::menu::callbacks::cancel_connect const &_cancel_connect,
+	sanguis::client::gui::menu::callbacks::retry_connect const &_retry_connect
 )
 :
-	cancel_connect_(_cancel_connect),
-	retry_connect_(_retry_connect),
+	cancel_connect_(
+		_cancel_connect
+	),
+	retry_connect_(
+		_retry_connect
+	),
 	scoped_layout_(
 		_gui.system(),
 		sanguis::media_path()
-		/ FCPPT_TEXT("gui")
-		/ FCPPT_TEXT("connection_box.layout")
+		/
+		FCPPT_TEXT("gui")
+		/
+		FCPPT_TEXT("connection_box.layout")
 	),
 	root_window_(
 		scoped_layout_.window()
@@ -48,7 +57,7 @@ sanguis::client::gui::menu::connection_box::connection_box(
 			CEGUI::PushButton::EventClicked,
 			CEGUI::Event::Subscriber(
 				std::bind(
-					&connection_box::handle_cancel_connect,
+					&sanguis::client::gui::menu::connection_box::handle_cancel_connect,
 					this,
 					std::placeholders::_1
 				)
@@ -60,7 +69,7 @@ sanguis::client::gui::menu::connection_box::connection_box(
 			CEGUI::PushButton::EventClicked,
 			CEGUI::Event::Subscriber(
 				std::bind(
-					&connection_box::handle_retry_connect,
+					&sanguis::client::gui::menu::connection_box::handle_retry_connect,
 					this,
 					std::placeholders::_1
 				)

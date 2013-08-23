@@ -12,6 +12,7 @@
 #include <CEGUI/Event.h>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace CEGUI
 {
 class EventArgs;
@@ -34,10 +35,10 @@ class connection_box
 	);
 public:
 	connection_box(
-		client::gui::object &,
+		sanguis::client::gui::object &,
 		CEGUI::Window &parent_window,
-		callbacks::cancel_connect const &,
-		callbacks::retry_connect const &
+		sanguis::client::gui::menu::callbacks::cancel_connect const &,
+		sanguis::client::gui::menu::callbacks::retry_connect const &
 	);
 
 	~connection_box();
@@ -63,9 +64,9 @@ private:
 		CEGUI::EventArgs const &
 	);
 
-	callbacks::cancel_connect const cancel_connect_;
+	sanguis::client::gui::menu::callbacks::cancel_connect const cancel_connect_;
 
-	callbacks::retry_connect const retry_connect_;
+	sanguis::client::gui::menu::callbacks::retry_connect const retry_connect_;
 
 	sge::cegui::toolbox::scoped_layout const scoped_layout_;
 

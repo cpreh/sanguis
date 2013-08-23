@@ -3,11 +3,11 @@
 
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/load/model/cell_size.hpp>
-#include <sanguis/load/model/collection_fwd.hpp>
 #include <sanguis/load/model/object_fwd.hpp>
 #include <sanguis/load/model/part_fwd.hpp>
+#include <sanguis/load/model/part_map.hpp>
+#include <sanguis/load/model/part_result.hpp>
 #include <sanguis/load/resource/context_fwd.hpp>
-#include <sge/renderer/dim2_fwd.hpp>
 #include <fcppt/random/variate_fwd.hpp>
 #include <fcppt/random/distribution/basic_fwd.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int_fwd.hpp>
@@ -16,7 +16,6 @@
 #include <fcppt/string.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
-#include <boost/ptr_container/ptr_map.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -29,22 +28,18 @@ namespace model
 
 class object
 {
-	typedef boost::ptr_map<
-		fcppt::string,
-		sanguis::load::model::part
-	> part_map;
-
 	FCPPT_NONCOPYABLE(
 		object
 	);
 public:
-	typedef part_map::value_type value_type;
+	typedef sanguis::load::model::part_map::const_iterator const_iterator;
 
-	typedef part_map::const_reference const_reference;
+	typedef sanguis::load::model::part_map::size_type size_type;
 
-	typedef part_map::const_iterator const_iterator;
-
-	typedef part_map::size_type size_type;
+	object(
+		boost::filesystem::path const &,
+		sanguis::load::resource::context const &
+	);
 
 	~object();
 
@@ -67,30 +62,19 @@ public:
 	const_iterator
 	end() const;
 
-	sge::renderer::dim2 const
-	dim() const;
-
-	object(
-		boost::filesystem::path const &,
-		sanguis::load::resource::context const &
-	);
+	sanguis::load::model::cell_size const
+	cell_size() const;
 private:
-	void
-	construct(
-		sanguis::load::resource::context const &
-	);
-
-	friend class sanguis::load::model::collection;
+	sanguis::load::model::part_map const &
+	parts() const;
 
 	boost::filesystem::path const path_;
 
-	sanguis::load::model::cell_size cell_size_;
-
-	part_map parts_;
+	sanguis::load::model::part_result const part_result_;
 
 	typedef fcppt::random::distribution::basic<
 		fcppt::random::distribution::parameters::uniform_int<
-			part_map::size_type
+			sanguis::load::model::part_map::size_type
 		>
 	> part_map_distribution;
 

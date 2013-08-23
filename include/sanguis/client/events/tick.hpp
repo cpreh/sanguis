@@ -1,12 +1,13 @@
 #ifndef SANGUIS_CLIENT_EVENTS_TICK_HPP_INCLUDED
 #define SANGUIS_CLIENT_EVENTS_TICK_HPP_INCLUDED
 
-#include <sanguis/client/events/tick_fwd.hpp>
 #include <sanguis/duration.hpp>
+#include <sanguis/client/events/tick_fwd.hpp>
 #include <fcppt/nonassignable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/event.hpp>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -18,14 +19,15 @@ namespace events
 class tick
 :
 	public boost::statechart::event<
-		tick
+		sanguis::client::events::tick
 	>
 {
 	FCPPT_NONASSIGNABLE(
 		tick
 	);
 public:
-	explicit tick(
+	explicit
+	tick(
 		sanguis::duration const &
 	);
 

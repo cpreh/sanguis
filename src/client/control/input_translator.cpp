@@ -1,5 +1,6 @@
 #include <sanguis/client/control/axis_direction_max.hpp>
 #include <sanguis/client/control/axis_direction_min.hpp>
+#include <sanguis/client/control/cursor_position.hpp>
 #include <sanguis/client/control/input_translator.hpp>
 #include <sanguis/client/control/key_scale.hpp>
 #include <sanguis/client/control/actions/any.hpp>
@@ -19,6 +20,7 @@
 #include <sge/input/cursor/move_event.hpp>
 #include <sge/input/mouse/device.hpp>
 #include <fcppt/assert/unreachable.hpp>
+#include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
@@ -154,7 +156,11 @@ sanguis::client::control::input_translator::move_callback(
 	callback_(
 		sanguis::client::control::actions::any(
 			sanguis::client::control::actions::cursor(
-				*_event.position()
+				fcppt::math::vector::structure_cast<
+					sanguis::client::control::cursor_position
+				>(
+					*_event.position()
+				)
 			)
 		)
 	);

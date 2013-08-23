@@ -10,7 +10,7 @@ namespace sanguis
 namespace load
 {
 
-fcppt::string const
+fcppt::string
 aoe_projectile_name(
 	sanguis::aoe_projectile_type
 );

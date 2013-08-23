@@ -1,10 +1,11 @@
+#include <sanguis/duration.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/media_path.hpp>
 #include <sanguis/client/log_location.hpp>
 #include <sanguis/client/config/settings/object.hpp>
-#include <sanguis/client/gui/menu/object.hpp>
-#include <sanguis/client/gui/menu/connection_box.hpp>
 #include <sanguis/client/gui/object.hpp>
+#include <sanguis/client/gui/menu/connection_box.hpp>
+#include <sanguis/client/gui/menu/object.hpp>
 #include <sge/cegui/from_cegui_string.hpp>
 #include <sge/cegui/to_cegui_string.hpp>
 #include <sge/image/color/predef.hpp>
@@ -18,10 +19,6 @@
 #include <sge/renderer/context/ffp.hpp>
 #include <alda/net/host.hpp>
 #include <alda/net/port.hpp>
-#include <fcppt/log/parameters/object.hpp>
-#include <fcppt/log/headers.hpp>
-#include <fcppt/log/location.hpp>
-#include <fcppt/log/object.hpp>
 #include <fcppt/extract_from_string.hpp>
 #include <fcppt/extract_from_string_exn.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -29,11 +26,16 @@
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/to_std_string.hpp>
+#include <fcppt/log/parameters/object.hpp>
+#include <fcppt/log/headers.hpp>
+#include <fcppt/log/location.hpp>
+#include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <CEGUI/Window.h>
 #include <CEGUI/widgets/PushButton.h>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace
 {
@@ -66,9 +68,9 @@ sge::parse::ini::entry_name const
 }
 
 sanguis::client::gui::menu::object::object(
-	config::settings::object &_settings,
-	client::gui::object &_gui,
-	callbacks::object const &_callbacks
+	sanguis::client::config::settings::object &_settings,
+	sanguis::client::gui::object &_gui,
+	sanguis::client::gui::menu::callbacks::object const &_callbacks
 )
 :
 	settings_(
@@ -83,8 +85,10 @@ sanguis::client::gui::menu::object::object(
 	scoped_layout_(
 		gui_.system(),
 		sanguis::media_path()
-		/ FCPPT_TEXT("gui")
-		/ FCPPT_TEXT("main_menu.layout")
+		/
+		FCPPT_TEXT("gui")
+		/
+		FCPPT_TEXT("main_menu.layout")
 	),
 	scoped_gui_sheet_(
 		gui_.system(),
@@ -113,7 +117,7 @@ sanguis::client::gui::menu::object::object(
 			CEGUI::PushButton::EventClicked,
 			CEGUI::Event::Subscriber(
 				std::bind(
-					&object::handle_quickstart,
+					&sanguis::client::gui::menu::object::handle_quickstart,
 					this,
 					std::placeholders::_1
 				)
@@ -128,7 +132,7 @@ sanguis::client::gui::menu::object::object(
 			CEGUI::PushButton::EventClicked,
 			CEGUI::Event::Subscriber(
 				std::bind(
-					&object::handle_quit,
+					&sanguis::client::gui::menu::object::handle_quit,
 					this,
 					std::placeholders::_1
 				)
@@ -140,7 +144,7 @@ sanguis::client::gui::menu::object::object(
 			CEGUI::PushButton::EventClicked,
 			CEGUI::Event::Subscriber(
 				std::bind(
-					&object::handle_connect,
+					&sanguis::client::gui::menu::object::handle_connect,
 					this,
 					std::placeholders::_1
 				)
@@ -152,7 +156,7 @@ sanguis::client::gui::menu::object::object(
 			CEGUI::Window::EventTextChanged,
 			CEGUI::Event::Subscriber(
 				std::bind(
-					&object::handle_text_changed,
+					&sanguis::client::gui::menu::object::handle_text_changed,
 					this,
 					std::placeholders::_1
 				)
@@ -164,7 +168,7 @@ sanguis::client::gui::menu::object::object(
 			CEGUI::Window::EventTextChanged,
 			CEGUI::Event::Subscriber(
 				std::bind(
-					&object::handle_text_changed,
+					&sanguis::client::gui::menu::object::handle_text_changed,
 					this,
 					std::placeholders::_1
 				)
@@ -178,11 +182,11 @@ sanguis::client::gui::menu::object::object(
 			gui_,
 			scoped_layout_.window(),
 			std::bind(
-				&menu::object::handle_cancel_connect,
+				&sanguis::client::gui::menu::object::handle_cancel_connect,
 				this
 			),
 			std::bind(
-				&menu::object::handle_retry_connect,
+				&sanguis::client::gui::menu::object::handle_retry_connect,
 				this
 			)
 		)

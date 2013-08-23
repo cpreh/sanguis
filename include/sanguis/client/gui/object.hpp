@@ -1,9 +1,9 @@
 #ifndef SANGUIS_CLIENT_GUI_OBJECT_HPP_INCLUDED
 #define SANGUIS_CLIENT_GUI_OBJECT_HPP_INCLUDED
 
+#include <sanguis/duration.hpp>
 #include <sanguis/client/gui/object_fwd.hpp>
 #include <sanguis/client/cursor/object_fwd.hpp>
-#include <sanguis/duration.hpp>
 #include <sge/cegui/default_cursor.hpp>
 #include <sge/cegui/default_keyboard.hpp>
 #include <sge/cegui/syringe.hpp>
@@ -34,7 +34,7 @@ public:
 		sge::image2d::system &,
 		sge::viewport::manager &,
 		sge::input::keyboard::device &,
-		client::cursor::object &
+		sanguis::client::cursor::object &
 	);
 
 	~object();

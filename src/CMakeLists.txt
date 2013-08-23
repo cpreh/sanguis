@@ -8,6 +8,7 @@ SET(
 	include/sanguis/args/log_level.hpp
 	include/sanguis/args/multi_sampling.hpp
 	include/sanguis/args/optional_resolution.hpp
+	include/sanguis/args/optional_resolution_fwd.hpp
 	include/sanguis/args/options.hpp
 	include/sanguis/args/parse.hpp
 	include/sanguis/args/resolution.hpp
@@ -318,6 +319,7 @@ SET(
 	include/sanguis/client/gui/perk/item_user_data.hpp
 	include/sanguis/client/gui/perk/node.hpp
 	include/sanguis/client/gui/perk/node_variant.hpp
+	include/sanguis/client/gui/perk/node_variant_fwd.hpp
 	include/sanguis/client/health.hpp
 	include/sanguis/client/health_value.hpp
 	include/sanguis/client/level.hpp
@@ -461,12 +463,16 @@ SET(
 	include/sanguis/load/model/json_header.hpp
 	include/sanguis/load/model/load_delay.hpp
 	include/sanguis/load/model/load_dim.hpp
+	include/sanguis/load/model/lookup_animation_name.hpp
+	include/sanguis/load/model/lookup_weapon_name.hpp
 	include/sanguis/load/model/make_animations.hpp
 	include/sanguis/load/model/make_delay.hpp
+	include/sanguis/load/model/make_parts.hpp
 	include/sanguis/load/model/make_path.hpp
 	include/sanguis/load/model/make_series.hpp
 	include/sanguis/load/model/make_sound.hpp
 	include/sanguis/load/model/make_texture.hpp
+	include/sanguis/load/model/make_weapon_categories.hpp
 	include/sanguis/load/model/object.hpp
 	include/sanguis/load/model/object_fwd.hpp
 	include/sanguis/load/model/optional_delay.hpp
@@ -478,13 +484,18 @@ SET(
 	include/sanguis/load/model/parse_json.hpp
 	include/sanguis/load/model/part.hpp
 	include/sanguis/load/model/part_fwd.hpp
+	include/sanguis/load/model/part_map.hpp
+	include/sanguis/load/model/part_result.hpp
+	include/sanguis/load/model/part_result_fwd.hpp
+	include/sanguis/load/model/part_unique_ptr.hpp
 	include/sanguis/load/model/remove_slash.hpp
 	include/sanguis/load/model/sound.hpp
 	include/sanguis/load/model/sound_fwd.hpp
-	include/sanguis/load/model/split_first_slash.hpp
 	include/sanguis/load/model/split_pair.hpp
 	include/sanguis/load/model/weapon_category.hpp
 	include/sanguis/load/model/weapon_category_fwd.hpp
+	include/sanguis/load/model/weapon_category_map.hpp
+	include/sanguis/load/model/weapon_category_unique_ptr.hpp
 	include/sanguis/load/next_file.hpp
 	include/sanguis/load/optional_animation_type.hpp
 	include/sanguis/load/optional_animation_type_fwd.hpp
@@ -752,7 +763,6 @@ SET(
 	include/sanguis/net/data_buffer.hpp
 	include/sanguis/net/data_buffer_fwd.hpp
 	include/sanguis/net/deserialize.hpp
-	include/sanguis/net/exception.hpp
 	include/sanguis/net/is_disconnect.hpp
 	include/sanguis/net/log.hpp
 	include/sanguis/net/log_location.hpp
@@ -1388,17 +1398,21 @@ SET(
 	src/load/model/json_header.cpp
 	src/load/model/load_delay.cpp
 	src/load/model/load_dim.cpp
+	src/load/model/lookup_animation_name.cpp
+	src/load/model/lookup_weapon_name.cpp
 	src/load/model/make_animations.cpp
 	src/load/model/make_delay.cpp
+	src/load/model/make_parts.cpp
 	src/load/model/make_path.cpp
 	src/load/model/make_series.cpp
 	src/load/model/make_sound.cpp
 	src/load/model/make_texture.cpp
+	src/load/model/make_weapon_categories.cpp
 	src/load/model/object.cpp
 	src/load/model/parse_json.cpp
 	src/load/model/part.cpp
+	src/load/model/part_result.cpp
 	src/load/model/sound.cpp
-	src/load/model/split_first_slash.cpp
 	src/load/model/weapon_category.cpp
 	src/load/next_file.cpp
 	src/load/pickup_name.cpp
@@ -1479,7 +1493,6 @@ SET(
 	src/messages/unpause.cpp
 	src/net/append_to_circular_buffer.cpp
 	src/net/deserialize.cpp
-	src/net/exception.cpp
 	src/net/is_disconnect.cpp
 	src/net/log.cpp
 	src/net/log_location.cpp

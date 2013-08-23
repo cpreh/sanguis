@@ -35,7 +35,8 @@ sanguis::load::model::collection::operator[](
 				)
 			).first;
 
-	return *it->second;
+	return
+		*it->second;
 }
 
 sanguis::load::model::collection::collection(

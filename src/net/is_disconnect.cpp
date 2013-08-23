@@ -1,5 +1,9 @@
 #include <sanguis/net/is_disconnect.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/asio/error.hpp>
+#include <boost/system/error_code.hpp>
+#include <fcppt/config/external_end.hpp>
+
 
 bool
 sanguis::net::is_disconnect(

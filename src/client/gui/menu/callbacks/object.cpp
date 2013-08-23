@@ -1,16 +1,29 @@
+#include <sanguis/client/gui/menu/callbacks/cancel_connect.hpp>
+#include <sanguis/client/gui/menu/callbacks/connect.hpp>
 #include <sanguis/client/gui/menu/callbacks/object.hpp>
+#include <sanguis/client/gui/menu/callbacks/quickstart.hpp>
+#include <sanguis/client/gui/menu/callbacks/quit.hpp>
+
 
 sanguis::client::gui::menu::callbacks::object::object(
-	callbacks::connect const &_connect,
-	callbacks::cancel_connect const &_cancel_connect,
-	callbacks::quickstart const &_quickstart,
-	callbacks::quit const &_quit
+	sanguis::client::gui::menu::callbacks::connect const &_connect,
+	sanguis::client::gui::menu::callbacks::cancel_connect const &_cancel_connect,
+	sanguis::client::gui::menu::callbacks::quickstart const &_quickstart,
+	sanguis::client::gui::menu::callbacks::quit const &_quit
 )
 :
-	connect_(_connect),
-	cancel_connect_(_cancel_connect),
-	quickstart_(_quickstart),
-	quit_(_quit)
+	connect_(
+		_connect
+	),
+	cancel_connect_(
+		_cancel_connect
+	),
+	quickstart_(
+		_quickstart
+	),
+	quit_(
+		_quit
+	)
 {
 }
 

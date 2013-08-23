@@ -10,7 +10,7 @@ namespace sanguis
 namespace load
 {
 
-fcppt::string const
+fcppt::string
 friend_name(
 	sanguis::friend_type
 );

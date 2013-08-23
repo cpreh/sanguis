@@ -10,7 +10,7 @@ namespace sanguis
 namespace load
 {
 
-fcppt::string const
+fcppt::string
 primary_weapon_name(
 	sanguis::primary_weapon_type
 );

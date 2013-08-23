@@ -3,6 +3,7 @@
 
 #include <fcppt/log/location_fwd.hpp>
 
+
 namespace sanguis
 {
 namespace net

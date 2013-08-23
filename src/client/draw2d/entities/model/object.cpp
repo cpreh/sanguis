@@ -100,7 +100,7 @@ sanguis::client::draw2d::entities::model::object::object(
 		>(
 			_param.collection()[
 				_name
-			].dim()
+			].cell_size().get()
 		)
 	),
 	sanguis::client::draw2d::entities::with_health(),

@@ -6,6 +6,7 @@
 #include <ctime>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -15,7 +16,7 @@ namespace draw2d
 namespace sunlight
 {
 
-sunlight::real
+sanguis::client::draw2d::sunlight::real
 sun_angle(
 	std::tm const &
 );

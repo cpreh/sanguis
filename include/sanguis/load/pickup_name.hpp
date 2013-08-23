@@ -10,7 +10,7 @@ namespace sanguis
 namespace load
 {
 
-fcppt::string const
+fcppt::string
 pickup_name(
 	sanguis::pickup_type
 );

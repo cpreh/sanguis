@@ -3,6 +3,7 @@
 
 #include <sanguis/client/draw2d/sunlight/gradients_fwd.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -12,7 +13,7 @@ namespace draw2d
 namespace sunlight
 {
 
-gradients const &
+sanguis::client::draw2d::sunlight::gradients const &
 day_gradient();
 
 }

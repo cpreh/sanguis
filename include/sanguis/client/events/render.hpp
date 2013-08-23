@@ -19,7 +19,7 @@ namespace events
 class render
 :
 	public boost::statechart::event<
-		render
+		sanguis::client::events::render
 	>
 {
 	FCPPT_NONASSIGNABLE(

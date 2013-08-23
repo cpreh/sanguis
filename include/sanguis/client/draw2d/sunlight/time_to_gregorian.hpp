@@ -6,6 +6,7 @@
 #include <ctime>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
 namespace client

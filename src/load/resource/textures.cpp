@@ -94,8 +94,10 @@ sanguis::load::resource::textures::do_load(
 	)
 		throw sanguis::exception(
 			FCPPT_TEXT("no texture for id \"")
-			+ _id
-			+ FCPPT_TEXT("\" found")
+			+
+			_id.get()
+			+
+			FCPPT_TEXT("\" found")
 		);
 
 	return

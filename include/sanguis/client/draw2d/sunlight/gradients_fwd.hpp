@@ -5,6 +5,7 @@
 #include <sanguis/client/draw2d/sunlight/real.hpp>
 #include <sanguis/client/draw2d/sunlight/rgb32f_format.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -14,10 +15,10 @@ namespace draw2d
 namespace sunlight
 {
 
-typedef sunlight::basic_gradients<
-	rgb32f_format,
-	real,
-	real
+typedef sanguis::client::draw2d::sunlight::basic_gradients<
+	sanguis::client::draw2d::sunlight::rgb32f_format,
+	sanguis::client::draw2d::sunlight::real,
+	sanguis::client::draw2d::sunlight::real
 > gradients;
 
 }

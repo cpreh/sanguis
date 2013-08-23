@@ -4,6 +4,7 @@
 #include <sanguis/client/cursor/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -17,13 +18,14 @@ class scoped
 		scoped
 	);
 public:
-	explicit scoped(
-		cursor::object &
+	explicit
+	scoped(
+		sanguis::client::cursor::object &
 	);
 
 	~scoped();
 private:
-	cursor::object &cursor_;
+	sanguis::client::cursor::object &cursor_;
 };
 
 }

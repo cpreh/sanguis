@@ -5,6 +5,7 @@
 #include <boost/program_options/variables_map.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
 namespace args

@@ -1,4 +1,8 @@
 #include <sanguis/client/cursor/object.hpp>
+#include <sge/input/cursor/button_callback.hpp>
+#include <sge/input/cursor/button_event_fwd.hpp>
+#include <sge/input/cursor/move_callback.hpp>
+#include <sge/input/cursor/move_event_fwd.hpp>
 #include <sge/input/cursor/object.hpp>
 #include <sge/input/cursor/optional_position.hpp>
 #include <fcppt/math/vector/object_impl.hpp>
@@ -21,7 +25,7 @@ sanguis::client::cursor::object::object(
 	button_connection_(
 		cursor_.button_callback(
 			std::bind(
-				&object::on_button,
+				&sanguis::client::cursor::object::on_button,
 				this,
 				std::placeholders::_1
 			)
@@ -30,7 +34,7 @@ sanguis::client::cursor::object::object(
 	move_connection_(
 		cursor_.move_callback(
 			std::bind(
-				&object::on_move,
+				&sanguis::client::cursor::object::on_move,
 				this,
 				std::placeholders::_1
 			)

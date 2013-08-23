@@ -47,7 +47,7 @@ sanguis::client::console::object::register_server_command(
 		gfx_.object().insert(
 			sge::console::callback::parameters(
 				std::bind(
-					&object::server_callback,
+					&sanguis::client::console::object::server_callback,
 					this,
 					std::placeholders::_1
 				),

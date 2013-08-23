@@ -10,7 +10,7 @@ namespace sanguis
 namespace load
 {
 
-fcppt::string const
+fcppt::string
 enemy_name(
 	sanguis::creator::enemy_type
 );

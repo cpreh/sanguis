@@ -9,6 +9,7 @@
 #include <boost/system/error_code.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -19,7 +20,7 @@ namespace events
 class net_error
 :
 	public boost::statechart::event<
-		net_error
+		sanguis::client::events::net_error
 	>
 {
 	FCPPT_NONASSIGNABLE(

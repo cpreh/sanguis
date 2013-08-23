@@ -1,7 +1,8 @@
-#include <sanguis/net/log_location.hpp>
 #include <sanguis/log_location.hpp>
-#include <fcppt/log/location.hpp>
+#include <sanguis/net/log_location.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/log/location.hpp>
+
 
 fcppt::log::location const
 sanguis::net::log_location()

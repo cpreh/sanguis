@@ -26,31 +26,31 @@ struct object
 	);
 public:
 	object(
-		callbacks::connect const &,
-		callbacks::cancel_connect const &,
-		callbacks::quickstart const &,
-		callbacks::quit const &
+		sanguis::client::gui::menu::callbacks::connect const &,
+		sanguis::client::gui::menu::callbacks::cancel_connect const &,
+		sanguis::client::gui::menu::callbacks::quickstart const &,
+		sanguis::client::gui::menu::callbacks::quit const &
 	);
 
-	callbacks::connect const &
+	sanguis::client::gui::menu::callbacks::connect const &
 	connect() const;
 
-	callbacks::cancel_connect const &
+	sanguis::client::gui::menu::callbacks::cancel_connect const &
 	cancel_connect() const;
 
-	callbacks::quickstart const &
+	sanguis::client::gui::menu::callbacks::quickstart const &
 	quickstart() const;
 
-	callbacks::quit const &
+	sanguis::client::gui::menu::callbacks::quit const &
 	quit() const;
 private:
-	callbacks::connect const connect_;
+	sanguis::client::gui::menu::callbacks::connect const connect_;
 
-	callbacks::cancel_connect const cancel_connect_;
+	sanguis::client::gui::menu::callbacks::cancel_connect const cancel_connect_;
 
-	callbacks::quickstart const quickstart_;
+	sanguis::client::gui::menu::callbacks::quickstart const quickstart_;
 
-	callbacks::quit const quit_;
+	sanguis::client::gui::menu::callbacks::quit const quit_;
 };
 
 }

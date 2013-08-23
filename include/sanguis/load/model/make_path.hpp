@@ -6,6 +6,7 @@
 #include <boost/filesystem/path.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
 namespace load
@@ -13,7 +14,7 @@ namespace load
 namespace model
 {
 
-boost::filesystem::path const
+boost::filesystem::path
 make_path(
 	fcppt::string const &name
 );

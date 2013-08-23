@@ -1,11 +1,10 @@
+#include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/scene/background_texture_coordinates.hpp>
 #include <sanguis/client/draw2d/scene/background_dim.hpp>
 #include <sanguis/client/draw2d/sprite/client/texture_coordinates.hpp>
 #include <sge/texture/part.hpp>
-#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 
 
@@ -16,7 +15,7 @@ sanguis::client::draw2d::scene::background_texture_coordinates(
 	sge::texture::part const &_texture
 )
 {
-	typedef sprite::client::texture_coordinates coordinates;
+	typedef sanguis::client::draw2d::sprite::client::texture_coordinates coordinates;
 
 	typedef coordinates::value_type pos_type;
 
@@ -25,7 +24,7 @@ sanguis::client::draw2d::scene::background_texture_coordinates(
 		fcppt::math::dim::structure_cast<
 			pos_type
 		>(
-			scene::background_dim(
+			sanguis::client::draw2d::scene::background_dim(
 				_device
 			)
 		)
@@ -47,7 +46,7 @@ sanguis::client::draw2d::scene::background_texture_coordinates(
 		fcppt::math::dim::structure_cast<
 			pos_type
 		>(
-			scene::background_dim(
+			sanguis::client::draw2d::scene::background_dim(
 				_device
 			)
 		)

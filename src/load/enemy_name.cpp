@@ -5,7 +5,7 @@
 #include <fcppt/assert/unreachable.hpp>
 
 
-fcppt::string const
+fcppt::string
 sanguis::load::enemy_name(
 	sanguis::creator::enemy_type const _type
 )

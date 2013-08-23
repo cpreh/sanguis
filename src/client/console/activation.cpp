@@ -3,11 +3,14 @@
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/pre.hpp>
 
+
 sanguis::client::console::activation::activation(
-	console::object &_console
+	sanguis::client::console::object &_console
 )
 :
-	console_(_console)
+	console_(
+		_console
+	)
 {
 	FCPPT_ASSERT_PRE(
 		!console_.active()

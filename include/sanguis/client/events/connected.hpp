@@ -6,6 +6,7 @@
 #include <boost/statechart/event.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -16,7 +17,7 @@ namespace events
 class connected
 :
 	public boost::statechart::event<
-		connected
+		sanguis::client::events::connected
 	>
 {
 };

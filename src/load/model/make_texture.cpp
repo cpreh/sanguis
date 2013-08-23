@@ -39,6 +39,6 @@ sanguis::load::model::make_texture(
 		_param.textures().load(
 			_param.path()
 			/
-			*texture_id
+			texture_id->get()
 		);
 }

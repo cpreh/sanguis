@@ -1,6 +1,7 @@
 #include <sanguis/exception.hpp>
 #include <sanguis/media_path.hpp>
 #include <sanguis/load/resource/search_texture_names.hpp>
+#include <sanguis/load/resource/texture_identifier.hpp>
 #include <sanguis/load/resource/texture_name_map.hpp>
 #include <sanguis/load/log.hpp>
 #include <fcppt/string.hpp>
@@ -15,6 +16,7 @@
 #include <boost/filesystem/path.hpp>
 #include <iosfwd>
 #include <string>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -108,9 +110,11 @@ sanguis::load::resource::search_texture_names()
 			}
 
 			names[
-				line.substr(
-					0,
-					equal
+				sanguis::load::resource::texture_identifier(
+					line.substr(
+						0,
+						equal
+					)
 				)
 			] =
 				line.substr(
@@ -120,5 +124,7 @@ sanguis::load::resource::search_texture_names()
 	}
 
 	return
-		names;
+		std::move(
+			names
+		);
 }

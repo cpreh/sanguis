@@ -1,90 +1,30 @@
 #include <sanguis/exception.hpp>
 #include <sanguis/load/log.hpp>
-#include <sanguis/load/animation_name.hpp>
-#include <sanguis/load/animation_type.hpp>
 #include <sanguis/load/model/animation.hpp>
 #include <sanguis/load/model/animation_map.hpp>
 #include <sanguis/load/model/find_texture.hpp>
 #include <sanguis/load/model/global_parameters.hpp>
 #include <sanguis/load/model/make_animations.hpp>
+#include <sanguis/load/model/lookup_animation_name.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
 #include <sge/parse/json/get.hpp>
 #include <sge/parse/json/member.hpp>
 #include <sge/parse/json/member_map.hpp>
 #include <sge/parse/json/object.hpp>
-#include <fcppt/enum_size.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/algorithm/find_exn.hpp>
-#include <fcppt/algorithm/array_fold.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <array>
-#include <cstddef>
-#include <iterator>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
-namespace
-{
-
-typedef std::array<
-	fcppt::string,
-	fcppt::enum_size<
-		sanguis::load::animation_type
-	>::value
-> animation_type_array;
-
-animation_type_array const animation_types(
-	fcppt::algorithm::array_fold<
-		animation_type_array
-	>(
-		[](
-			std::size_t const _index
-		)
-		{
-			return
-				sanguis::load::animation_name(
-					static_cast<
-						sanguis::load::animation_type
-					>(
-						_index
-					)
-				);
-		}
-	)
-);
-
-sanguis::load::animation_type
-find_animation_type(
-	fcppt::string const &_str
-)
-{
-	return
-		static_cast<
-			sanguis::load::animation_type
-		>(
-			std::distance(
-				animation_types.begin(),
-				fcppt::algorithm::find_exn(
-					animation_types.begin(),
-					animation_types.end(),
-					_str
-				)
-			)
-		);
-}
-
-}
-
 sanguis::load::model::animation_map
 sanguis::load::model::make_animations(
 	sge::parse::json::object const &_object,
-	sanguis::load::model::global_parameters const &_param
+	sanguis::load::model::global_parameters const &_parameters
 )
 {
 	sanguis::load::model::animation_map result;
@@ -130,7 +70,7 @@ sanguis::load::model::make_animations(
 		if(
 			result.insert(
 				std::make_pair(
-					find_animation_type(
+					sanguis::load::model::lookup_animation_name(
 						member.first
 					),
 					fcppt::make_unique_ptr<
@@ -141,7 +81,7 @@ sanguis::load::model::make_animations(
 						>(
 							member.second
 						),
-						_param.new_texture(
+						_parameters.new_texture(
 							texture
 						)
 					)

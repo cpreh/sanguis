@@ -4,6 +4,7 @@
 #include <sanguis/client/draw2d/sunlight/real.hpp>
 #include <sge/image/color/any/object.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -15,7 +16,7 @@ namespace sunlight
 
 sge::image::color::any::object const
 make_color(
-	real sun_angle
+	sanguis::client::draw2d::sunlight::real sun_angle
 );
 
 }

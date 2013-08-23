@@ -4,6 +4,7 @@
 #include <sanguis/client/draw2d/funit.hpp>
 #include <fcppt/strong_typedef.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -12,7 +13,7 @@ namespace draw2d
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
-	draw2d::funit,
+	sanguis::client::draw2d::funit,
 	aoe
 );
 

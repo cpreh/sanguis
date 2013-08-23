@@ -3,6 +3,7 @@
 
 #include <sanguis/client/draw2d/speed.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -12,7 +13,7 @@ namespace draw2d
 
 bool
 speed_is_null(
-	draw2d::speed const &
+	sanguis::client::draw2d::speed const &
 );
 
 }

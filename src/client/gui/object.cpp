@@ -1,6 +1,6 @@
 #include <sanguis/duration.hpp>
-#include <sanguis/client/gui/object.hpp>
 #include <sanguis/client/cursor/object.hpp>
+#include <sanguis/client/gui/object.hpp>
 #include <sge/cegui/cursor_visibility.hpp>
 #include <sge/cegui/duration.hpp>
 #include <sge/cegui/load_context.hpp>

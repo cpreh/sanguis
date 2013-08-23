@@ -5,7 +5,7 @@
 #include <fcppt/assert/unreachable.hpp>
 
 
-fcppt::string const
+fcppt::string
 sanguis::load::friend_name(
 	sanguis::friend_type const _type
 )

@@ -5,12 +5,9 @@
 #include <sanguis/load/model/global_parameters_fwd.hpp>
 #include <sanguis/load/model/part_fwd.hpp>
 #include <sanguis/load/model/weapon_category_fwd.hpp>
-#include <sanguis/load/resource/context_fwd.hpp>
+#include <sanguis/load/model/weapon_category_map.hpp>
 #include <sge/parse/json/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <boost/ptr_container/ptr_map.hpp>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -26,24 +23,19 @@ class part
 		part
 	);
 public:
-	sanguis::load::model::weapon_category const &
-	operator[](
-		sanguis::optional_primary_weapon_type
-	) const;
-
-	~part();
-
 	part(
 		sge::parse::json::object const &,
 		sanguis::load::model::global_parameters const &
 	);
-private:
-	typedef boost::ptr_map<
-		sanguis::optional_primary_weapon_type,
-		sanguis::load::model::weapon_category
-	> category_map;
 
-	category_map categories_;
+	~part();
+
+	sanguis::load::model::weapon_category const &
+	operator[](
+		sanguis::optional_primary_weapon_type
+	) const;
+private:
+	sanguis::load::model::weapon_category_map const categories_;
 };
 
 }

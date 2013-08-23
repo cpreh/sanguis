@@ -1,5 +1,6 @@
 #include <sanguis/main_object.hpp>
 
+
 sanguis::main_object::main_object()
 {
 }

@@ -4,6 +4,7 @@
 #include <sanguis/client/console/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -17,13 +18,14 @@ class activation
 		activation
 	);
 public:
-	explicit activation(
-		console::object &
+	explicit
+	activation(
+		sanguis::client::console::object &
 	);
 
 	~activation();
 private:
-	console::object &console_;
+	sanguis::client::console::object &console_;
 };
 
 }

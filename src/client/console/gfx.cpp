@@ -18,6 +18,7 @@
 #include <sge/sprite/parameters_impl.hpp>
 #include <sge/texture/part_raw_ref.hpp>
 #include <sge/viewport/manager.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -144,7 +145,11 @@ make_sprite_dim(
 			>(
 				viewport_dim.h()
 				/
-				2
+				fcppt::literal<
+					sge::renderer::screen_unit
+				>(
+					2
+				)
 			)
 		);
 }

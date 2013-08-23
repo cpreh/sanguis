@@ -1,5 +1,6 @@
 #include <sanguis/load/model/find_texture.hpp>
 #include <sanguis/load/model/optional_texture_identifier.hpp>
+#include <sanguis/load/resource/texture_identifier.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/find_member.hpp>
 #include <sge/parse/json/object.hpp>
@@ -30,7 +31,9 @@ sanguis::load::model::find_texture(
 		ret
 		?
 			sanguis::load::model::optional_texture_identifier(
-				*ret
+				sanguis::load::resource::texture_identifier(
+					*ret
+				)
 			)
 		:
 			sanguis::load::model::optional_texture_identifier()

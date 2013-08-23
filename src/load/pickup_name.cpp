@@ -5,7 +5,7 @@
 #include <fcppt/assert/unreachable.hpp>
 
 
-fcppt::string const
+fcppt::string
 sanguis::load::pickup_name(
 	sanguis::pickup_type const _type
 )

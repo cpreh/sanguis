@@ -8,6 +8,7 @@
 #include <mizuiro/color/operators/add.hpp>
 #include <mizuiro/color/operators/scalar_multiply.hpp>
 #include <mizuiro/color/operators/subtract.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -108,32 +109,55 @@ sanguis::client::draw2d::sunlight::basic_gradients<
 ) const
 {
 	FCPPT_ASSERT_ERROR(
-		values_.size() > static_cast<typename value_map::size_type>(1)
+		values_.size()
+		>
+		fcppt::literal<
+			typename value_map::size_type
+		>(
+			1u
+		)
 	);
 
-	typename value_map::const_iterator upper =
+	typename value_map::const_iterator upper(
 		values_.lower_bound(
 			_locator
-		);
+		)
+	);
 
-	if (upper == values_.end())
+	if(
+		upper
+		==
+		values_.end()
+	)
 		--upper;
 
-	typename value_map::const_iterator lower =
+	typename value_map::const_iterator lower(
 		std::prev(
 			upper
-		);
+		)
+	);
 
 	locator const
-		range =
-			upper->first - lower->first,
-		distance =
-			_locator - lower->first;
+		range(
+			upper->first - lower->first
+		),
+		distance(
+			_locator - lower->first
+		);
 
-	real const normalized =
-		static_cast<real>(distance)
+	real const normalized(
+		static_cast<
+			real
+		>(
+			distance
+		)
 		/
-		static_cast<real>(range);
+		static_cast<
+			real
+		>(
+			range
+		)
+	);
 
 	return
 		sanguis::client::draw2d::sunlight::lerp(
