@@ -1,9 +1,9 @@
 #include <sanguis/messages/base.hpp>
-#include <sanguis/net/circular_buffer_sink.hpp>
 #include <sanguis/net/message_size.hpp>
 #include <sanguis/net/serialize_impl.hpp>
 #include <sanguis/net/serialize_to_circular_buffer.hpp>
 #include <alda/net/buffer/circular_send/object.hpp>
+#include <alda/net/buffer/circular_send/sink.hpp>
 #include <fcppt/assert/pre_message.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/text.hpp>
@@ -33,7 +33,7 @@ sanguis::net::serialize_to_circular_buffer(
 	);
 
 	typedef boost::iostreams::stream_buffer<
-		sanguis::net::circular_buffer_sink
+		alda::net::buffer::circular_send::sink
 	> stream_buf;
 
 	stream_buf stream(

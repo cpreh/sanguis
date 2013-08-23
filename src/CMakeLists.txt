@@ -749,7 +749,6 @@ SET(
 	include/sanguis/messages/unpause.hpp
 	include/sanguis/messages/unpause_fwd.hpp
 	include/sanguis/net/append_to_circular_buffer.hpp
-	include/sanguis/net/circular_buffer_sink.hpp
 	include/sanguis/net/data_buffer.hpp
 	include/sanguis/net/data_buffer_fwd.hpp
 	include/sanguis/net/deserialize.hpp
@@ -761,7 +760,6 @@ SET(
 	include/sanguis/net/message_header_size.hpp
 	include/sanguis/net/message_size.hpp
 	include/sanguis/net/receive_buffer_size.hpp
-	include/sanguis/net/receive_buffer_source.hpp
 	include/sanguis/net/send_buffer_size.hpp
 	include/sanguis/net/serialize_impl.hpp
 	include/sanguis/net/serialize_to_circular_buffer.hpp
@@ -1480,7 +1478,6 @@ SET(
 	src/messages/stop_reloading.cpp
 	src/messages/unpause.cpp
 	src/net/append_to_circular_buffer.cpp
-	src/net/circular_buffer_sink.cpp
 	src/net/deserialize.cpp
 	src/net/exception.cpp
 	src/net/is_disconnect.cpp
@@ -1488,7 +1485,6 @@ SET(
 	src/net/log_location.cpp
 	src/net/message_size.cpp
 	src/net/receive_buffer_size.cpp
-	src/net/receive_buffer_source.cpp
 	src/net/send_buffer_size.cpp
 	src/net/serialize_to_circular_buffer.cpp
 	src/net/serialize_to_data_buffer.cpp

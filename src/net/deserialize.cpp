@@ -1,5 +1,4 @@
 #include <sanguis/net/deserialize.hpp>
-#include <sanguis/net/receive_buffer_source.hpp>
 #include <sanguis/net/stream_exceptions.hpp>
 #include <sanguis/net/message_header.hpp>
 #include <sanguis/net/message_header_size.hpp>
@@ -13,6 +12,7 @@
 #include <alda/net/size_type.hpp>
 #include <alda/net/value_type.hpp>
 #include <alda/net/buffer/circular_receive/object.hpp>
+#include <alda/net/buffer/circular_receive/source.hpp>
 #include <fcppt/assert/throw.hpp>
 #include <fcppt/assert/throw_message.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
@@ -41,14 +41,14 @@ sanguis::net::deserialize(
 		return sanguis::messages::unique_ptr();
 
 	typedef boost::iostreams::stream_buffer<
-		sanguis::net::receive_buffer_source
+		alda::net::buffer::circular_receive::source
 	> stream_buf;
 
 	typedef std::basic_istream<
 		alda::net::value_type
 	> stream_type;
 
-	sanguis::net::receive_buffer_source source(
+	alda::net::buffer::circular_receive::source source(
 		_data
 	);
 
