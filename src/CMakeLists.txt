@@ -383,6 +383,7 @@ SET(
 	include/sanguis/collision/adjust_speed.hpp
 	include/sanguis/collision/center.hpp
 	include/sanguis/collision/center_fwd.hpp
+	include/sanguis/collision/cross2.hpp
 	include/sanguis/collision/dim2.hpp
 	include/sanguis/collision/dim2_fwd.hpp
 	include/sanguis/collision/dir.hpp

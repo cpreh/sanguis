@@ -1,3 +1,4 @@
+#include <sanguis/collision/cross2.hpp>
 #include <sanguis/collision/is_null.hpp>
 #include <sanguis/collision/line_segment.hpp>
 #include <sanguis/collision/line_line_intersect.hpp>
@@ -14,9 +15,10 @@ sanguis::collision::line_line_intersect(
 )
 {
 	sanguis::collision::unit const dot_perp(
-		_line1.dir().get().x() * _line2.dir().get().y()
-		-
-		_line1.dir().get().y() * _line2.dir().get().x()
+		sanguis::collision::cross2(
+			_line1.dir().get(),
+			_line2.dir().get()
+		)
 	);
 
 	if(
@@ -34,10 +36,9 @@ sanguis::collision::line_line_intersect(
 	);
 
 	sanguis::collision::unit const t(
-		(
-			c.x() * _line2.dir().get().y()
-			-
-			c.y() * _line2.dir().get().x()
+		sanguis::collision::cross2(
+			c,
+			_line2.dir().get()
 		)
 		/
 		dot_perp
@@ -66,10 +67,9 @@ sanguis::collision::line_line_intersect(
 			false;
 
 	sanguis::collision::unit const u(
-		(
-			c.x() * _line1.dir().get().y()
-			-
-			c.y() * _line1.dir().get().x()
+		sanguis::collision::cross2(
+			c,
+			_line1.dir().get()
 		)
 		/
 		dot_perp
