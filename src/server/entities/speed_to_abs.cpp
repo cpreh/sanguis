@@ -3,6 +3,7 @@
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/entities/speed_to_abs.hpp>
 #include <sanguis/server/entities/property/value.hpp>
+#include <fcppt/cast/size.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/hypersphere_to_cartesian.hpp>
 #include <fcppt/math/vector/static.hpp>
@@ -25,7 +26,7 @@ sanguis::server::entities::speed_to_abs(
 				)
 			)
 			*
-			static_cast<
+			fcppt::cast::size<
 				sanguis::server::space_unit
 			>(
 				_speed

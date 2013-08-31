@@ -13,6 +13,7 @@
 #include <sanguis/server/entities/projectiles/pulse_time.hpp>
 #include <sanguis/server/entities/projectiles/pulses.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/cast/int_to_float.hpp>
 
 
 sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
@@ -32,7 +33,7 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 			_diff_clock,
 			_pulse_time.get()
 			*
-			static_cast<
+			fcppt::cast::int_to_float<
 				sanguis::duration::rep
 			>(
 				_pulses.get()

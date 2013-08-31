@@ -60,6 +60,9 @@ public:
 	sanguis::server::entities::auto_weak_link::optional_with_links_ref const
 	get() const;
 
+	sanguis::server::entities::with_links *
+	get_pointer() const;
+
 	explicit
 	operator bool() const;
 private:

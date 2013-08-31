@@ -6,7 +6,9 @@
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/entities/radius.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/dim/object_impl.hpp>
@@ -28,7 +30,7 @@ quad_half(
 		*
 		_val
 		/
-		static_cast<
+		fcppt::literal<
 			sanguis::server::space_unit
 		>(
 			4
@@ -53,7 +55,7 @@ sanguis::server::entities::radius(
 			)
 		)
 		/
-		static_cast<
+		fcppt::cast::int_to_float<
 			sanguis::server::space_unit
 		>(
 			sanguis::collision::scale()
@@ -61,19 +63,23 @@ sanguis::server::entities::radius(
 	);
 
 	sanguis::server::space_unit const max_radius(
-		static_cast<
+		fcppt::cast::int_to_float<
 			sanguis::server::space_unit
 		>(
 			sanguis::creator::tile_size::value
 		)
 		/
-		static_cast<
+		fcppt::cast::int_to_float<
 			sanguis::server::space_unit
 		>(
 			sanguis::pixels_per_meter()
 		)
 		/
-		2.5f
+		fcppt::literal<
+			sanguis::server::space_unit
+		>(
+			2.5
+		)
 	);
 
 	if(

@@ -2,6 +2,7 @@
 #include <sanguis/server/damage/list.hpp>
 #include <sanguis/server/damage/meta.hpp>
 #include <sanguis/server/damage/unit.hpp>
+#include <fcppt/cast/enum_to_int.hpp>
 
 
 namespace
@@ -50,12 +51,13 @@ sanguis::server::damage::list::list(
 	)
 {
 	array_[
-		static_cast<
+		fcppt::cast::enum_to_int<
 			sanguis::server::damage::array::size_type
 		>(
 			_meta.type()
 		)
-	] = _meta.value();
+	] =
+		_meta.value();
 }
 
 sanguis::server::damage::list &
@@ -64,12 +66,13 @@ sanguis::server::damage::list::operator()(
 )
 {
 	array_[
-		static_cast<
+		fcppt::cast::enum_to_int<
 			sanguis::server::damage::array::size_type
 		>(
 			_meta.type()
 		)
-	] = _meta.value();
+	] =
+		_meta.value();
 
 	return *this;
 }

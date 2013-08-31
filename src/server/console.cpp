@@ -1,4 +1,5 @@
 #include <sanguis/server/console.hpp>
+#include <sanguis/server/console_command_pair.hpp>
 #include <sanguis/server/console_command_vector.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/send_callback.hpp>
@@ -14,7 +15,6 @@
 #include <sge/font/lit.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/font/string.hpp>
-#include <fcppt/homogenous_pair_impl.hpp>
 #include <fcppt/insert_to_string.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>

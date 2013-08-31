@@ -4,6 +4,7 @@
 #include <sanguis/messages/types/level.hpp>
 #include <fcppt/strong_typedef.hpp>
 
+
 namespace sanguis
 {
 namespace server

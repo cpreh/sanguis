@@ -794,17 +794,23 @@ SET(
 	include/sanguis/random_seed.hpp
 	include/sanguis/secondary_weapon_type.hpp
 	include/sanguis/secondary_weapon_type_fwd.hpp
+	include/sanguis/server/ai/angle_to_target.hpp
 	include/sanguis/server/ai/base.hpp
 	include/sanguis/server/ai/base_fwd.hpp
 	include/sanguis/server/ai/create_function.hpp
 	include/sanguis/server/ai/create_simple.hpp
-	include/sanguis/server/ai/create_simple_without_owner.hpp
 	include/sanguis/server/ai/entity_set.hpp
+	include/sanguis/server/ai/manager.hpp
+	include/sanguis/server/ai/manager_fwd.hpp
+	include/sanguis/server/ai/move_to_target.hpp
+	include/sanguis/server/ai/rotate_to_target.hpp
 	include/sanguis/server/ai/scoped_ptr.hpp
 	include/sanguis/server/ai/search_new_target.hpp
 	include/sanguis/server/ai/simple.hpp
+	include/sanguis/server/ai/stop.hpp
 	include/sanguis/server/ai/unique_ptr.hpp
 	include/sanguis/server/angle.hpp
+	include/sanguis/server/angle_fwd.hpp
 	include/sanguis/server/auras/aggro.hpp
 	include/sanguis/server/auras/aura.hpp
 	include/sanguis/server/auras/aura_fwd.hpp
@@ -1008,6 +1014,7 @@ SET(
 	include/sanguis/server/entities/with_auras.hpp
 	include/sanguis/server/entities/with_body.hpp
 	include/sanguis/server/entities/with_body_fwd.hpp
+	include/sanguis/server/entities/with_body_ref.hpp
 	include/sanguis/server/entities/with_buffs.hpp
 	include/sanguis/server/entities/with_buffs_fwd.hpp
 	include/sanguis/server/entities/with_ghosts.hpp
@@ -1066,6 +1073,8 @@ SET(
 	include/sanguis/server/model_name.hpp
 	include/sanguis/server/object.hpp
 	include/sanguis/server/object_fwd.hpp
+	include/sanguis/server/optional_angle.hpp
+	include/sanguis/server/optional_angle_fwd.hpp
 	include/sanguis/server/original_object.hpp
 	include/sanguis/server/perks/change_simple.hpp
 	include/sanguis/server/perks/choleric.hpp
@@ -1504,11 +1513,15 @@ SET(
 	src/net/serialize_to_data_buffer.cpp
 	src/pixels_per_meter.cpp
 	src/random_seed.cpp
+	src/server/ai/angle_to_target.cpp
 	src/server/ai/base.cpp
 	src/server/ai/create_simple.cpp
-	src/server/ai/create_simple_without_owner.cpp
+	src/server/ai/manager.cpp
+	src/server/ai/move_to_target.cpp
+	src/server/ai/rotate_to_target.cpp
 	src/server/ai/search_new_target.cpp
 	src/server/ai/simple.cpp
+	src/server/ai/stop.cpp
 	src/server/auras/aggro.cpp
 	src/server/auras/aura.cpp
 	src/server/auras/burn.cpp

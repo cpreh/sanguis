@@ -13,7 +13,6 @@
 #include <sanguis/messages/add_console_command.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
-#include <fcppt/homogenous_pair_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/output.hpp>

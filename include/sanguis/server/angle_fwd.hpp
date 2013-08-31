@@ -1,8 +1,8 @@
-#ifndef SANGUIS_SERVER_HEALTH_HPP_INCLUDED
-#define SANGUIS_SERVER_HEALTH_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_ANGLE_FWD_HPP_INCLUDED
+#define SANGUIS_SERVER_ANGLE_FWD_HPP_INCLUDED
 
 #include <sanguis/server/space_unit.hpp>
-#include <fcppt/strong_typedef.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 
 
 namespace sanguis
@@ -12,7 +12,7 @@ namespace server
 
 FCPPT_MAKE_STRONG_TYPEDEF(
 	sanguis::server::space_unit,
-	health
+	angle
 );
 
 }

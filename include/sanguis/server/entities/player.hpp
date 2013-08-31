@@ -26,12 +26,14 @@
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
-#include <sanguis/server/entities/pickups/weapon_fwd.hpp>
+#include <sanguis/server/entities/pickups/weapon_ref.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/perks/unique_ptr.hpp>
 #include <sanguis/server/perks/tree/object_fwd.hpp>
 #include <sanguis/server/weapons/weapon_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/reference_wrapper_comparison.hpp>
+#include <fcppt/reference_wrapper_std_hash.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <set>
@@ -164,10 +166,9 @@ private:
 	collision_groups() const
 	override;
 
-	// TODO: Use optionals!
 	typedef
 	std::set<
-		sanguis::server::entities::pickups::weapon *
+		sanguis::server::entities::pickups::weapon_ref
 	>
 	weapon_pickup_set;
 

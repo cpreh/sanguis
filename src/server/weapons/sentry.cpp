@@ -6,7 +6,7 @@
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/health.hpp>
-#include <sanguis/server/ai/create_simple_without_owner.hpp>
+#include <sanguis/server/ai/create_simple.hpp>
 #include <sanguis/server/damage/list.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
 #include <sanguis/server/entities/friend.hpp>
@@ -86,7 +86,7 @@ sanguis::server::weapons::sentry::do_attack(
 			sanguis::server::entities::movement_speed(
 				0.f
 			),
-			sanguis::server::ai::create_simple_without_owner(
+			sanguis::server::ai::create_simple(
 				this->diff_clock(),
 				random_generator_
 			),

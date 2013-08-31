@@ -14,6 +14,7 @@
 #include <sanguis/server/collision/with_world.hpp>
 #include <sanguis/server/entities/speed.hpp>
 #include <sanguis/server/entities/with_body.hpp>
+#include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 
@@ -26,7 +27,7 @@ sanguis::server::collision::with_world(
 )
 {
 	sanguis::server::space_unit const pixels_per_meter(
-		static_cast<
+		fcppt::cast::int_to_float<
 			sanguis::server::space_unit
 		>(
 			sanguis::pixels_per_meter()

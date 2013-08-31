@@ -81,6 +81,9 @@
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/assign/make_container.hpp>
+#include <fcppt/cast/float_to_int.hpp>
+#include <fcppt/cast/size.hpp>
+#include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/container/map_impl.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
@@ -90,6 +93,7 @@
 #include <chrono>
 #include <functional>
 #include <memory>
+#include <type_traits>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -375,7 +379,7 @@ sanguis::server::world::object::insert_with_id(
 					sge::charconv::fcppt_string_to_utf8(
 						generator_name_.get()
 					),
-					static_cast<
+					fcppt::cast::size<
 						sanguis::messages::types::size
 					>(
 						openings_.size()
@@ -553,11 +557,14 @@ sanguis::server::world::object::exp_changed(
 		*sanguis::messages::create(
 			sanguis::messages::experience(
 				_entity_id,
-				// round EXP
-				static_cast<
-					sanguis::messages::types::exp
-				>(
-					_exp.get()
+				fcppt::cast::to_unsigned(
+					fcppt::cast::float_to_int<
+						std::make_signed<
+							sanguis::messages::types::exp
+						>::type
+					>(
+						_exp.get()
+					)
 				)
 			)
 		)

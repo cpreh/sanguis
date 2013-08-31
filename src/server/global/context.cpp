@@ -51,6 +51,7 @@
 #include <sanguis/server/world/map.hpp>
 #include <sanguis/server/world/object.hpp>
 #include <sanguis/server/world/parameters.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
@@ -359,14 +360,14 @@ sanguis::server::global::context::player_speed(
 			_speed.get()
 		)
 		<
-		static_cast<
+		fcppt::literal<
 			sanguis::server::space_unit
 		>(
 			0.001f
 		)
 	)
 		player.movement_speed().current(
-			static_cast<
+			fcppt::literal<
 				sanguis::server::space_unit
 			>(
 				0

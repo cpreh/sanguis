@@ -4,15 +4,16 @@
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/level.hpp>
 
+
 namespace sanguis
 {
 namespace server
 {
 
-server::level const
+sanguis::server::level const
 level_calculate(
-	server::exp,
-	server::level
+	sanguis::server::exp,
+	sanguis::server::level
 );
 
 }

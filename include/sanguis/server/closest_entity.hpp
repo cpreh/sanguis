@@ -4,6 +4,7 @@
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/collision/distance_entity_entity.hpp>
 #include <sanguis/server/entities/base.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <limits>
 #include <fcppt/config/external_end.hpp>
@@ -19,7 +20,10 @@ template<
 	typename Container,
 	typename Predicate
 >
-typename Container::value_type
+fcppt::optional<
+	typename
+	Container::value_type::type &
+> const
 closest_entity(
 	sanguis::server::entities::base const &_ref,
 	Container const &_entities,
@@ -27,11 +31,13 @@ closest_entity(
 )
 {
 	typedef
-	typename
-	Container::value_type
-	value_type;
+	fcppt::optional<
+		typename
+		Container::value_type::type &
+	>
+	result_type;
 
-	value_type ret = nullptr;
+	result_type ret;
 
 	sanguis::server::space_unit distance(
 		std::numeric_limits<
@@ -48,13 +54,13 @@ closest_entity(
 		sanguis::server::space_unit const new_distance(
 			sanguis::server::collision::distance_entity_entity(
 				_ref,
-				*entity
+				entity.get()
 			)
 		);
 
 		if(
 			_predicate(
-				*entity
+				entity.get()
 			)
 			&&
 			new_distance < distance
@@ -62,7 +68,10 @@ closest_entity(
 		{
 			distance = new_distance;
 
-			ret = entity;
+			ret =
+				result_type(
+					entity.get()
+				);
 		}
 	}
 

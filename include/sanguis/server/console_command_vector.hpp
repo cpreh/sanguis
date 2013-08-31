@@ -6,13 +6,14 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
 namespace server
 {
 
 typedef std::vector<
-	console_command_pair
+	sanguis::server::console_command_pair
 > console_command_vector;
 
 }

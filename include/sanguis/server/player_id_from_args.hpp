@@ -4,12 +4,13 @@
 #include <sanguis/server/player_id.hpp>
 #include <sge/console/arg_list.hpp>
 
+
 namespace sanguis
 {
 namespace server
 {
 
-server::player_id const
+sanguis::server::player_id const
 player_id_from_args(
 	sge::console::arg_list const &
 );

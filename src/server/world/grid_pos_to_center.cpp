@@ -6,6 +6,8 @@
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/vector.hpp>
 #include <sanguis/server/world/grid_pos_to_center.hpp>
+#include <fcppt/literal.hpp>
+#include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/fill.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -28,17 +30,17 @@ sanguis::server::world::grid_pos_to_center(
 				fcppt::math::vector::fill<
 					sanguis::creator::pos::dim_wrapper::value
 				>(
-					static_cast<
+					sanguis::creator::tile_size::value
+					/
+					fcppt::literal<
 						sanguis::creator::size_type
 					>(
-						sanguis::creator::tile_size::value
-						/
 						2u
 					)
 				)
 			)
 			/
-			static_cast<
+			fcppt::cast::int_to_float<
 				sanguis::server::space_unit
 			>(
 				sanguis::pixels_per_meter()

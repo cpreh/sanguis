@@ -13,6 +13,7 @@
 #include <sanguis/server/entities/with_ghosts.hpp>
 #include <fcppt/dynamic_cast.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
 #include <utility>
@@ -85,7 +86,7 @@ sanguis::server::entities::exp_area::on_remove()
 			sanguis::server::exp(
 				exp_.get()
 				/
-				static_cast<
+				fcppt::cast::int_to_float<
 					sanguis::server::exp::value_type
 				>(
 					player_links_.size()

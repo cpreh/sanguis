@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_AI_BASE_HPP_INCLUDED
 
 #include <sanguis/server/ai/base_fwd.hpp>
+#include <sanguis/server/entities/with_body_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -21,11 +22,29 @@ protected:
 	base();
 public:
 	virtual
-	void
-	update() = 0;
+	~base() = 0;
 
 	virtual
-	~base() = 0;
+	void
+	in_range(
+		sanguis::server::entities::with_body &
+	);
+
+	virtual
+	void
+	distance_changes(
+		sanguis::server::entities::with_body &
+	);
+
+	virtual
+	void
+	out_of_range(
+		sanguis::server::entities::with_body &
+	);
+
+	virtual
+	void
+	update() = 0;
 };
 
 }

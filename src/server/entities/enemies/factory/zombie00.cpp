@@ -4,7 +4,7 @@
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/pickup_probability.hpp>
-#include <sanguis/server/ai/create_simple_without_owner.hpp>
+#include <sanguis/server/ai/create_simple.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
@@ -40,7 +40,7 @@ sanguis::server::entities::enemies::factory::zombie00(
 			sanguis::server::entities::movement_speed(
 				0.5f
 			),
-			sanguis::server::ai::create_simple_without_owner(
+			sanguis::server::ai::create_simple(
 				_parameters.diff_clock(),
 				_parameters.random_generator()
 			),

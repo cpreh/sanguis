@@ -58,7 +58,9 @@
 #include <sanguis/server/perks/tree/status.hpp>
 #include <sanguis/server/weapons/player_start_weapon.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -287,7 +289,13 @@ sanguis::server::entities::player::drop_or_pickup_weapon(
 		)
 	);
 
-	sanguis::server::entities::pickups::weapon *const closest_pickup(
+	typedef
+	fcppt::optional<
+		sanguis::server::entities::pickups::weapon &
+	>
+	result_type;
+
+	result_type const closest_pickup(
 		sanguis::server::closest_entity(
 			*this,
 			weapon_pickups_,
@@ -411,7 +419,9 @@ sanguis::server::entities::player::weapon_pickup_add_candidate(
 {
 	FCPPT_ASSERT_ERROR(
 		weapon_pickups_.insert(
-			&_entity
+			fcppt::make_ref(
+				_entity
+			)
 		)
 		.second
 	);
@@ -424,7 +434,9 @@ sanguis::server::entities::player::weapon_pickup_remove_candidate(
 {
 	FCPPT_ASSERT_ERROR(
 		weapon_pickups_.erase(
-			&_entity
+			fcppt::make_ref(
+				_entity
+			)
 		)
 		==
 		1u

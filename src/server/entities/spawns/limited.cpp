@@ -100,16 +100,8 @@ sanguis::server::entities::spawns::limited::may_spawn()
 		)
 		?
 			std::min(
-				static_cast<
-					sanguis::server::entities::spawns::size_type
-				>(
-					limit_.get() - alive_
-				),
-				static_cast<
-					sanguis::server::entities::spawns::size_type
-				>(
-					count_per_wave_.get()
-				)
+				limit_.get() - alive_,
+				count_per_wave_.get()
 			)
 		:
 			0u

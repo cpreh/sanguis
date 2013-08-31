@@ -17,6 +17,7 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <fcppt/assert/unreachable.hpp>
+#include <fcppt/cast/int_to_float.hpp>
 
 
 sanguis::server::entities::unique_ptr
@@ -38,7 +39,7 @@ sanguis::server::entities::enemies::create(
 				_enemy_type
 			)
 			*
-			static_cast<
+			fcppt::cast::int_to_float<
 				sanguis::server::entities::enemies::difficulty_value
 			>(
 				_difficulty.get()

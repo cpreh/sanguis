@@ -7,6 +7,7 @@
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/global/load_context.hpp>
 #include <sanguis/server/global/next_id_callback.hpp>
+#include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 
@@ -44,7 +45,7 @@ sanguis::server::global::load_context::entity_dim(
 			)
 		)
 		/
-		static_cast<
+		fcppt::cast::int_to_float<
 			sanguis::server::space_unit
 		>(
 			sanguis::pixels_per_meter()

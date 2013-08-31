@@ -3,6 +3,7 @@
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <sanguis/server/entities/property/initial.hpp>
 #include <sanguis/server/entities/property/value.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/math/diff.hpp>
 #include <fcppt/signal/auto_connection.hpp>
@@ -52,10 +53,10 @@ sanguis::server::entities::property::changeable::current(
 			this->current()
 		)
 		>
-		static_cast<
+		fcppt::literal<
 			sanguis::server::entities::property::value
 		>(
-			0.001f
+			0.001
 		)
 	)
 		change_signal_(
@@ -68,13 +69,15 @@ sanguis::server::entities::property::changeable::current(
 sanguis::server::entities::property::value
 sanguis::server::entities::property::changeable::current() const
 {
-	return current_;
+	return
+		current_;
 }
 
 sanguis::server::entities::property::value
 sanguis::server::entities::property::changeable::max() const
 {
-	return max_;
+	return
+		max_;
 }
 
 fcppt::signal::auto_connection
@@ -107,7 +110,7 @@ sanguis::server::entities::property::changeable::on_recalc_max(
 	max_ = _max;
 
 	max_change_signal_(
-		max()
+		this->max()
 	);
 
 	this->current(

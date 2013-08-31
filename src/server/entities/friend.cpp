@@ -50,6 +50,7 @@ sanguis::server::entities::friend_::friend_(
 	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::body_velocity_combiner(),
 	sanguis::server::entities::with_ai(
+		_diff_clock,
 		_ai,
 		std::move(
 			_weapon
