@@ -5,6 +5,7 @@
 #include <sanguis/creator/size_type.hpp>
 #include <sanguis/creator/tile_size.hpp>
 #include <sge/projectile/scalar.hpp>
+#include <fcppt/cast/int_to_float.hpp>
 
 
 namespace sanguis
@@ -21,7 +22,7 @@ convert_unit(
 )
 {
 	return
-		static_cast<
+		fcppt::cast::int_to_float<
 			sge::projectile::scalar
 		>(
 			_value
@@ -29,7 +30,7 @@ convert_unit(
 			sanguis::creator::tile_size::value
 		)
 		/
-		static_cast<
+		fcppt::cast::int_to_float<
 			sge::projectile::scalar
 		>(
 			sanguis::pixels_per_meter()

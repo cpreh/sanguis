@@ -35,6 +35,8 @@
 #include <sge/sprite/state/parameters.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/assert/error.hpp>
+#include <fcppt/cast/int_to_float.hpp>
+#include <fcppt/cast/to_signed.hpp>
 #include <fcppt/container/grid/clamp_signed_pos.hpp>
 #include <fcppt/container/grid/make_pos_crange_start_end.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
@@ -76,9 +78,7 @@ sanguis::client::draw2d::scene::world::state::draw(
 		return;
 
 	sanguis::creator::difference_type const batch_size_trans(
-		static_cast<
-			sanguis::creator::difference_type
-		>(
+		fcppt::cast::to_signed(
 			sanguis::client::draw2d::scene::world::batch_size::value
 			*
 			sanguis::client::draw2d::scene::world::tile_size::value
@@ -162,7 +162,7 @@ sanguis::client::draw2d::scene::world::state::test_collision(
 				_parameters.size()
 			)
 			/
-			static_cast<
+			fcppt::cast::int_to_float<
 				sanguis::collision::unit
 			>(
 				sanguis::collision::scale()

@@ -4,6 +4,7 @@
 #include <sanguis/server/damage/type.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <fcppt/enum_size.hpp>
+#include <fcppt/cast/size.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <array>
 #include <cstddef>
@@ -19,7 +20,7 @@ namespace damage
 
 typedef std::array<
 	sanguis::server::damage::unit,
-	static_cast<
+	fcppt::cast::size<
 		std::size_t
 	>(
 		fcppt::enum_size<

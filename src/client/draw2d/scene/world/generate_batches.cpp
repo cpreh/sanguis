@@ -19,6 +19,7 @@
 #include <sanguis/load/tiles/context_fwd.hpp>
 #include <sge/sprite/geometry/make_random_access_range.hpp>
 #include <sge/sprite/geometry/sort_and_update.hpp>
+#include <fcppt/cast/size.hpp>
 #include <fcppt/container/grid/clamp_pos.hpp>
 #include <fcppt/container/grid/make_pos_range.hpp>
 #include <fcppt/math/ceil_div.hpp>
@@ -54,7 +55,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 					return
 						fcppt::math::ceil_div(
 							_value,
-							static_cast<
+							fcppt::cast::size<
 								sanguis::creator::grid::dim::value_type
 							>(
 								sanguis::client::draw2d::scene::world::batch_size::value

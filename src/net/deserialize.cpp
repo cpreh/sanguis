@@ -13,14 +13,16 @@
 #include <alda/net/value_type.hpp>
 #include <alda/net/buffer/circular_receive/object.hpp>
 #include <alda/net/buffer/circular_receive/source.hpp>
-#include <fcppt/assert/throw.hpp>
-#include <fcppt/assert/throw_message.hpp>
-#include <fcppt/container/raw_vector_impl.hpp>
-#include <fcppt/io/read.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/assert/throw.hpp>
+#include <fcppt/assert/throw_message.hpp>
+#include <fcppt/cast/size.hpp>
+#include <fcppt/cast/to_unsigned.hpp>
+#include <fcppt/io/read.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/iostreams/stream_buffer.hpp>
+#include <ios>
 #include <istream>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -74,10 +76,12 @@ sanguis::net::deserialize(
 	);
 
 	FCPPT_ASSERT_THROW(
-		static_cast<
+		fcppt::cast::size<
 			alda::net::size_type
 		>(
-			stream.gcount()
+			fcppt::cast::to_unsigned(
+				stream.gcount()
+			)
 		)
 		== sanguis::net::message_header_size::value,
 		sanguis::exception
@@ -124,10 +128,16 @@ sanguis::net::deserialize(
 	);
 
 	alda::net::size_type const bytes_read(
-		static_cast<
+		fcppt::cast::size<
 			alda::net::size_type
 		>(
-			stream.tellg()
+			fcppt::cast::to_unsigned(
+				static_cast<
+					std::streamoff
+				>(
+					stream.tellg()
+				)
+			)
 		)
 	);
 

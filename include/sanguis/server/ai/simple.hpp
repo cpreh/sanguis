@@ -43,12 +43,6 @@ private:
 	override;
 
 	void
-	out_of_range(
-		sanguis::server::entities::with_body &
-	)
-	override;
-
-	void
 	update()
 	override;
 

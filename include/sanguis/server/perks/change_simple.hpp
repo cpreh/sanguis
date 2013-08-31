@@ -4,6 +4,7 @@
 #include <sanguis/server/perks/level_diff.hpp>
 #include <sanguis/server/entities/with_perks_fwd.hpp>
 #include <sanguis/server/entities/property/value.hpp>
+#include <fcppt/cast/int_to_float.hpp>
 
 
 namespace sanguis
@@ -38,7 +39,7 @@ change_simple(
 		)(),
 		_factor
 		*
-		static_cast<
+		fcppt::cast::int_to_float<
 			sanguis::server::entities::property::value
 		>(
 			_diff.get()

@@ -15,6 +15,8 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/cast/float_to_int.hpp>
+#include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/normalize.hpp>
 #include <fcppt/math/vector/length.hpp>
@@ -73,8 +75,8 @@ sanguis::client::draw2d::entities::bullet::update()
 
 	sanguis::client::draw2d::funit const
 		max_tail_length(
-			static_cast<
-				draw2d::funit
+			fcppt::literal<
+				sanguis::client::draw2d::funit
 			>(
 				160
 			)
@@ -114,8 +116,8 @@ sanguis::client::draw2d::entities::bullet::update()
 					this->speed().get()
 				)
 				*
-				static_cast<
-					draw2d::funit
+				fcppt::literal<
+					sanguis::client::draw2d::funit
 				>(
 					0.5
 				)
@@ -123,7 +125,7 @@ sanguis::client::draw2d::entities::bullet::update()
 				fcppt::math::vector::length(
 					sanguis::client::draw2d::vector2(
 						tail_length,
-						static_cast<
+						fcppt::cast::int_to_float<
 							sanguis::client::draw2d::funit
 						>(
 							this->at(
@@ -149,7 +151,7 @@ sanguis::client::draw2d::entities::bullet::update()
 	this->at(
 		tail
 	).w(
-		static_cast<
+		fcppt::cast::float_to_int<
 			sanguis::client::draw2d::sprite::unit
 		>(
 			tail_length

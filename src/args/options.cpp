@@ -3,6 +3,7 @@
 #include <sge/renderer/pixel_format/multi_samples_value.hpp>
 #include <sge/renderer/screen_unit.hpp>
 #include <alda/net/port.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/options_description.hpp>
 #include <string>
@@ -26,7 +27,7 @@ sanguis::args::options()
 			po::value<
 				sge::console::output_line_limit::value_type
 			>()->default_value(
-				static_cast<
+				fcppt::literal<
 					sge::console::output_line_limit::value_type
 				>(
 					1000

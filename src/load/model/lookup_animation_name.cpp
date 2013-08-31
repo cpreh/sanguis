@@ -5,6 +5,7 @@
 #include <fcppt/string.hpp>
 #include <fcppt/algorithm/array_fold.hpp>
 #include <fcppt/algorithm/find_exn.hpp>
+#include <fcppt/cast/int_to_enum.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <array>
 #include <cstddef>
@@ -32,7 +33,7 @@ animation_type_array const animation_types(
 		{
 			return
 				sanguis::load::animation_name(
-					static_cast<
+					fcppt::cast::int_to_enum<
 						sanguis::load::animation_type
 					>(
 						_index
@@ -50,7 +51,7 @@ sanguis::load::model::lookup_animation_name(
 )
 {
 	return
-		static_cast<
+		fcppt::cast::int_to_enum<
 			sanguis::load::animation_type
 		>(
 			std::distance(

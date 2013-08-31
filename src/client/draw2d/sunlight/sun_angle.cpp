@@ -4,6 +4,7 @@
 #include <sanguis/client/draw2d/sunlight/time_to_gregorian.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/math/deg_to_rad.hpp>
 #include <fcppt/math/rad_to_deg.hpp>
 #include <fcppt/math/pi.hpp>
@@ -40,13 +41,13 @@ sanguis::client::draw2d::sunlight::sun_angle(
 
 	sanguis::client::draw2d::sunlight::real const
 		hours =
-			static_cast<
+			fcppt::cast::int_to_float<
 				sanguis::client::draw2d::sunlight::real
 			>(
 				_current_tm.tm_hour
 			),
 		minutes =
-			static_cast<
+			fcppt::cast::int_to_float<
 				sanguis::client::draw2d::sunlight::real
 			>(
 				_current_tm.tm_min
@@ -114,7 +115,7 @@ sanguis::client::draw2d::sunlight::sun_angle(
 				)
 			),
 		n =
-			static_cast<
+			fcppt::cast::int_to_float<
 				sanguis::client::draw2d::sunlight::real
 			>(
 				d.length().days()

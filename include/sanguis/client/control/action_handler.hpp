@@ -17,7 +17,10 @@
 #include <sanguis/client/control/actions/scale_fwd.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/object_fwd.hpp>
-#include <fcppt/signal/scoped_connection.hpp>
+#include <sge/console/callback/name.hpp>
+#include <sge/console/callback/short_description.hpp>
+#include <fcppt/signal/auto_connection_fwd.hpp>
+#include <fcppt/signal/connection_manager.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -94,6 +97,14 @@ private:
 		sge::console::object &
 	);
 
+	fcppt::signal::auto_connection
+	cheat_connection(
+		sge::console::object &,
+		sanguis::cheat_type,
+		sge::console::callback::name const &,
+		sge::console::callback::short_description const &
+	);
+
 	sanguis::client::send_callback const send_;
 
 	sanguis::client::control::environment &environment_;
@@ -102,9 +113,7 @@ private:
 
 	sanguis::client::control::direction_vector direction_;
 
-	fcppt::signal::scoped_connection const
-		cheat_kill_conn_,
-		cheat_exp_conn_;
+	fcppt::signal::connection_manager const cheat_connections_;
 };
 
 }

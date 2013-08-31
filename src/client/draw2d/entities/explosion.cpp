@@ -24,6 +24,7 @@
 #include <sge/texture/const_part_shared_ptr.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/math/dim/fill.hpp>
 
 
@@ -61,10 +62,16 @@ sanguis::client::draw2d::entities::explosion::explosion(
 			fcppt::math::dim::fill<
 				sanguis::client::draw2d::sprite::dim::dim_wrapper::value
 			>(
-				static_cast<
+				fcppt::cast::float_to_int<
 					sanguis::client::draw2d::sprite::unit
 				>(
-					_aoe.get() * 2.f
+					_aoe.get()
+					*
+					fcppt::literal<
+						sanguis::client::draw2d::funit
+					>(
+						2
+					)
 				)
 			)
 		)

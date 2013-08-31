@@ -21,6 +21,8 @@
 #include <sge/renderer/texture/emulate_srgb.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/cast/size.hpp>
+#include <fcppt/cast/to_signed.hpp>
 #include <fcppt/io/ostringstream.hpp>
 #include <fcppt/time/output_tm.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -127,12 +129,14 @@ sanguis::client::draw2d::scene::hud::draw(
 	);
 
 	sge::font::unit const width(
-		static_cast<
+		fcppt::cast::size<
 			sge::font::unit
 		>(
-			sge::renderer::target::viewport_size(
-				_render_context.target()
-			).w()
+			fcppt::cast::to_signed(
+				sge::renderer::target::viewport_size(
+					_render_context.target()
+				).w()
+			)
 		)
 	);
 

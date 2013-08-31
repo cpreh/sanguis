@@ -9,6 +9,7 @@
 #include <sanguis/creator/signed_pos.hpp>
 #include <sanguis/creator/tile_size.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/cast/to_signed.hpp>
 #include <fcppt/container/grid/clamp_signed_pos.hpp>
 #include <fcppt/container/grid/make_pos_crange_start_end.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
@@ -27,9 +28,7 @@ sanguis::collision::make_range(
 )
 {
 	sanguis::creator::difference_type const tile_size(
-		static_cast<
-			sanguis::creator::difference_type
-		>(
+		fcppt::cast::to_signed(
 			sanguis::creator::tile_size::value
 		)
 	);

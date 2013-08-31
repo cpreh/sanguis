@@ -10,6 +10,7 @@
 // TODO:
 #include <alda/serialization/detail/read/make_object.hpp>
 #include <fcppt/algorithm/copy_n.hpp>
+#include <fcppt/cast/to_char_ptr.hpp>
 #include <majutsu/const_raw_pointer.hpp>
 #include <majutsu/size_type.hpp>
 #include <majutsu/raw_pointer.hpp>
@@ -100,7 +101,7 @@ make(
 	> streambuf;
 
 	streambuf buffer(
-		reinterpret_cast<
+		fcppt::cast::to_char_ptr<
 			char const *
 		>(
 			_mem + sizeof(length_type)

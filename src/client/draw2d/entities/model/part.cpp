@@ -26,6 +26,7 @@
 #include <sge/audio/sound/positional_parameters.hpp>
 #include <sge/sprite/center.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_comparison.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -150,7 +151,7 @@ sanguis::client::draw2d::entities::model::part::update()
 			*desired_orientation_
 		)
 		<
-		static_cast<
+		fcppt::literal<
 			sanguis::client::draw2d::sprite::rotation
 		>(
 			0.001

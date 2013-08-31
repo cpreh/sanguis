@@ -2,6 +2,8 @@
 #include <sanguis/creator/generator_index.hpp>
 #include <sanguis/creator/name.hpp>
 #include <sanguis/creator/aux/generator_map.hpp>
+#include <fcppt/cast/size.hpp>
+#include <fcppt/cast/to_signed.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <iterator>
 #include <fcppt/config/external_end.hpp>
@@ -16,12 +18,14 @@ sanguis::creator::generator_index(
 	return
 		std::next(
 			sanguis::creator::aux::generator_map().begin(),
-			static_cast<
+			fcppt::cast::size<
 				std::iterator_traits<
 					sanguis::creator::aux::generator_map_type::const_iterator
 				>::difference_type
 			>(
-				_index
+				fcppt::cast::to_signed(
+					_index
+				)
 			)
 		)->first;
 }

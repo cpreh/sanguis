@@ -12,9 +12,13 @@
 #include <sanguis/client/draw2d/sprite/index.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
+#include <sanguis/client/draw2d/sprite/unit.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/math/point_rotate.hpp>
+#include <fcppt/math/dim/arithmetic.hpp>
+#include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/vector/signed_angle_between_cast.hpp>
 
@@ -117,22 +121,17 @@ sanguis::client::draw2d::entities::player::update()
 	sanguis::client::draw2d::vector2 const new_rotation(
 		fcppt::math::point_rotate(
 			leg_center,
-			sanguis::client::draw2d::vector2(
-				static_cast<
-					sanguis::client::draw2d::funit
+			fcppt::math::dim::structure_cast<
+				sanguis::client::draw2d::vector2
+			>(
+				this->at(
+					bottom
+				).size()
+				/
+				fcppt::literal<
+					sanguis::client::draw2d::sprite::unit
 				>(
-					this->at(
-						bottom
-					).w()
-					/ 2
-				),
-				static_cast<
-					sanguis::client::draw2d::funit
-				>(
-					this->at(
-						bottom
-					).h()
-					/ 2
+					2
 				)
 			),
 			sprite_rotation

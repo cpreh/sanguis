@@ -7,6 +7,8 @@
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/array_fold.hpp>
 #include <fcppt/algorithm/find_exn.hpp>
+#include <fcppt/cast/int_to_enum.hpp>
+#include <fcppt/cast/size.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <array>
 #include <cstddef>
@@ -19,7 +21,7 @@ namespace
 
 typedef std::array<
 	fcppt::string,
-	static_cast<
+	fcppt::cast::size<
 		std::size_t
 	>(
 		fcppt::enum_size<
@@ -38,7 +40,7 @@ weapon_type_array const weapon_types(
 		{
 			return
 				sanguis::load::primary_weapon_name(
-					static_cast<
+					fcppt::cast::int_to_enum<
 						sanguis::primary_weapon_type
 					>(
 						_index
@@ -63,7 +65,7 @@ sanguis::load::model::lookup_weapon_name(
 			sanguis::optional_primary_weapon_type()
 		:
 			sanguis::optional_primary_weapon_type(
-				static_cast<
+				fcppt::cast::int_to_enum<
 					sanguis::primary_weapon_type
 				>(
 					std::distance(

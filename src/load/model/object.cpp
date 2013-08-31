@@ -10,6 +10,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/cast/to_signed.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
@@ -131,9 +132,7 @@ sanguis::load::model::object::random_part(
 	return
 		*std::next(
 			this->parts().begin(),
-			static_cast<
-				sanguis::load::model::part_map::difference_type
-			>(
+			fcppt::cast::to_signed(
 				(
 					*random_part_
 				)()

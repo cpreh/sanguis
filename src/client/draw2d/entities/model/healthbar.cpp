@@ -20,6 +20,9 @@
 #include <sge/image/color/any/object.hpp>
 #include <sge/sprite/intrusive/connection.hpp>
 #include <fcppt/format.hpp>
+#include <fcppt/literal.hpp>
+#include <fcppt/cast/float_to_int.hpp>
+#include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -201,7 +204,7 @@ sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 	if(
 		max_health_.get()
 		<
-		static_cast<
+		fcppt::literal<
 			sanguis::client::health_value
 		>(
 			0.01f
@@ -220,15 +223,16 @@ sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 	}
 
 	foreground_.w(
-		static_cast<
+		fcppt::cast::float_to_int<
 			sanguis::client::draw2d::sprite::unit
 		>(
-			static_cast<
+			fcppt::cast::int_to_float<
 				sanguis::client::health::value_type
 			>(
 				this->inner_dim().w()
 			)
-			* this->remaining_health().get()
+			*
+			this->remaining_health().get()
 		)
 	);
 
@@ -236,15 +240,20 @@ sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 		sprite::colored::color(
 			(sge::image::color::init::red() %=
 				std::min(
-					static_cast<
+					fcppt::literal<
 						sanguis::client::health::value_type
 					>(
-						2.0f -
-						2.0f
-						*
-						this->remaining_health().get()
-					),
-					static_cast<
+						2
+					)
+					-
+					fcppt::literal<
+						sanguis::client::health::value_type
+					>(
+						2
+					)
+					*
+					this->remaining_health().get(),
+					fcppt::literal<
 						sanguis::client::health::value_type
 					>(
 						1
@@ -253,17 +262,17 @@ sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 			)
 			(sge::image::color::init::green() %=
 				std::min(
-					static_cast<
+					fcppt::literal<
 						sanguis::client::health::value_type
 					>(
-						1.4f
-						*
-						this->remaining_health().get()
-					),
-					static_cast<
+						1.4
+					)
+					*
+					this->remaining_health().get(),
+					fcppt::literal<
 						sanguis::client::health::value_type
 					>(
-						0.7f
+						0.7
 					)
 				)
 			)

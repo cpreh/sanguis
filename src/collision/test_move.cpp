@@ -19,6 +19,7 @@
 #include <sanguis/creator/tile_is_solid.hpp>
 #include <sanguis/creator/tile_size.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/math/box/intersects.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/fill.hpp>
@@ -105,7 +106,7 @@ sanguis::collision::test_move(
 			fcppt::math::dim::fill<
 				sanguis::collision::rect::dim::dim_wrapper::value
 			>(
-				static_cast<
+				fcppt::cast::int_to_float<
 					sanguis::collision::unit
 				>(
 					sanguis::creator::tile_size::value

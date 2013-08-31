@@ -11,7 +11,8 @@ enum class cheat_type
 {
 	exp,
 	kill,
-	fcppt_maximum = kill
+	monster_pickup,
+	fcppt_maximum = monster_pickup
 };
 
 }

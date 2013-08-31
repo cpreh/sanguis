@@ -43,24 +43,13 @@ sanguis::server::ai::simple::distance_changes(
 	sanguis::server::entities::with_body &_entity
 )
 {
-	// TODO: When do we pick up a new targets?
-}
-
-void
-sanguis::server::ai::simple::out_of_range(
-	sanguis::server::entities::with_body &_entity
-)
-{
 	if(
-		&_entity
-		==
-		dynamic_cast<
-			sanguis::server::entities::with_body *
-		>(
-			target_.get_pointer()
-		)
+		!target_
 	)
-		target_.unlink();
+		target_ =
+			_entity.link();
+
+	// TODO: When do we pick up a new targets?
 }
 
 void

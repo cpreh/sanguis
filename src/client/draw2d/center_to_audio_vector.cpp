@@ -3,6 +3,7 @@
 #include <sanguis/client/draw2d/center_to_audio_vector.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/cast/int_to_float.hpp>
 
 
 sge::audio::vector const
@@ -12,7 +13,7 @@ sanguis::client::draw2d::center_to_audio_vector(
 {
 	return
 		sge::audio::vector(
-			static_cast<
+			fcppt::cast::int_to_float<
 				sge::audio::scalar
 			>(
 				_center.get().x()
@@ -22,7 +23,7 @@ sanguis::client::draw2d::center_to_audio_vector(
 			>(
 				0
 			),
-			static_cast<
+			fcppt::cast::int_to_float<
 				sge::audio::scalar
 			>(
 				_center.get().y()

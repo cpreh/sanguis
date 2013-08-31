@@ -20,6 +20,8 @@
 #include <sge/viewport/manager.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_shared_ptr.hpp>
+#include <fcppt/cast/size.hpp>
+#include <fcppt/cast/to_signed.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -135,20 +137,24 @@ make_sprite_dim(
 
 	return
 		sge::console::sprite_object::dim(
-			static_cast<
+			fcppt::cast::size<
 				sge::console::sprite_object::dim::value_type
 			>(
-				viewport_dim.w()
+				fcppt::cast::to_signed(
+					viewport_dim.w()
+				)
 			),
-			static_cast<
+			fcppt::cast::size<
 				sge::console::sprite_object::dim::value_type
 			>(
-				viewport_dim.h()
-				/
-				fcppt::literal<
-					sge::renderer::screen_unit
-				>(
-					2
+				fcppt::cast::to_signed(
+					viewport_dim.h()
+					/
+					fcppt::literal<
+						sge::renderer::screen_unit
+					>(
+						2
+					)
 				)
 			)
 		);

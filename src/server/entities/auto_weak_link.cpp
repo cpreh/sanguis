@@ -95,13 +95,6 @@ sanguis::server::entities::auto_weak_link::get() const
 		);
 }
 
-sanguis::server::entities::with_links *
-sanguis::server::entities::auto_weak_link::get_pointer() const
-{
-	return
-		&this->checked_ref();
-}
-
 sanguis::server::entities::auto_weak_link::operator bool() const
 {
 	return

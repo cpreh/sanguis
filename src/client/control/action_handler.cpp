@@ -27,11 +27,15 @@
 #include <sge/console/object.hpp>
 #include <sge/console/callback/name.hpp>
 #include <sge/console/callback/parameters.hpp>
+#include <sge/console/callback/short_description.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/assign/make_container.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/math/clamp.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/signal/auto_connection.hpp>
+#include <fcppt/signal/connection_manager.hpp>
 #include <fcppt/variant/apply_unary.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
@@ -61,43 +65,44 @@ sanguis::client::control::action_handler::action_handler(
 	direction_(
 		sanguis::client::control::direction_vector::null()
 	),
-	cheat_kill_conn_(
-		_console.insert(
-			sge::console::callback::parameters(
-				std::bind(
-					&sanguis::client::control::action_handler::send_cheat,
-					this,
-					sanguis::cheat_type::kill,
-					std::placeholders::_1,
-					std::placeholders::_2
-				),
-				sge::console::callback::name(
-					SGE_FONT_LIT("kill")
-				)
-			)
-			.short_description(
-				SGE_FONT_LIT("Commit suicide")
-			)
-		)
-	),
-	cheat_exp_conn_(
-		_console.insert(
-			sge::console::callback::parameters(
-				std::bind(
-					&sanguis::client::control::action_handler::send_cheat,
-					this,
-					sanguis::cheat_type::exp,
-					std::placeholders::_1,
-					std::placeholders::_2
-				),
+	cheat_connections_(
+		fcppt::assign::make_container<
+			fcppt::signal::connection_manager::container
+		>(
+			this->cheat_connection(
+				_console,
+				sanguis::cheat_type::exp,
 				sge::console::callback::name(
 					SGE_FONT_LIT("exp")
+				),
+				sge::console::callback::short_description(
+					SGE_FONT_LIT("Get a lot of exp")
 				)
 			)
-			.short_description(
-				SGE_FONT_LIT("Get a lot of exp")
+		)(
+			this->cheat_connection(
+				_console,
+				sanguis::cheat_type::kill,
+				sge::console::callback::name(
+					SGE_FONT_LIT("kill")
+				),
+				sge::console::callback::short_description(
+					SGE_FONT_LIT("Commit suicide")
+				)
+			)
+		)(
+			this->cheat_connection(
+				_console,
+				sanguis::cheat_type::monster_pickup,
+				sge::console::callback::name(
+					SGE_FONT_LIT("monsterpickup")
+				),
+				sge::console::callback::short_description(
+					SGE_FONT_LIT("Spawn a monster pickup")
+				)
 			)
 		)
+		.move_container()
 	)
 {
 }
@@ -326,4 +331,30 @@ sanguis::client::control::action_handler::send_cheat(
 			)
 		)
 	);
+}
+
+fcppt::signal::auto_connection
+sanguis::client::control::action_handler::cheat_connection(
+	sge::console::object &_console,
+	sanguis::cheat_type const _cheat,
+	sge::console::callback::name const &_name,
+	sge::console::callback::short_description const &_description
+)
+{
+	return
+		_console.insert(
+			sge::console::callback::parameters(
+				std::bind(
+					&sanguis::client::control::action_handler::send_cheat,
+					this,
+					_cheat,
+					std::placeholders::_1,
+					std::placeholders::_2
+				),
+				_name
+			)
+			.short_description(
+				_description.get()
+			)
+		);
 }
