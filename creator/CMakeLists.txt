@@ -1,11 +1,3 @@
-include_directories(
-	"${CMAKE_CURRENT_SOURCE_DIR}/include"
-)
-
-include_directories(
-	"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
-)
-
 set(
 	SANGUIS_CREATOR_INCLUDE_FILES
 	include/sanguis/creator/background_grid.hpp
@@ -44,7 +36,6 @@ set(
 	include/sanguis/creator/spawn_pos.hpp
 	include/sanguis/creator/spawn_type.hpp
 	include/sanguis/creator/spawn_type_fwd.hpp
-	include/sanguis/creator/symbol.hpp
 	include/sanguis/creator/tile.hpp
 	include/sanguis/creator/tile_fwd.hpp
 	include/sanguis/creator/tile_grid.hpp
@@ -57,7 +48,7 @@ set(
 	include/sanguis/creator/top_result_fwd.hpp
 )
 
-SET(
+set(
 	SANGUIS_CREATOR_SRC_FILES
 	src/aux/deserialization/background_grid.cpp
 	src/aux/deserialization/grid.cpp
@@ -133,6 +124,15 @@ set(
 
 fcppt_utils_add_source_groups(
 	"${SANGUIS_CREATOR_FILES}"
+)
+
+sanguis_generate_symbol_header(
+	creator
+)
+
+include_directories(
+	"${CMAKE_CURRENT_SOURCE_DIR}/include"
+	"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
 )
 
 add_library(

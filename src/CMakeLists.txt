@@ -1,4 +1,4 @@
-SET(
+set(
 	SANGUIS_FILES
 	include/sanguis/aoe_projectile_type.hpp
 	include/sanguis/aoe_projectile_type_fwd.hpp
@@ -380,40 +380,6 @@ SET(
 	include/sanguis/client/world_parameters.hpp
 	include/sanguis/client/world_parameters_fwd.hpp
 	include/sanguis/clock.hpp
-	include/sanguis/collision/adjust_speed.hpp
-	include/sanguis/collision/center.hpp
-	include/sanguis/collision/center_fwd.hpp
-	include/sanguis/collision/cross2.hpp
-	include/sanguis/collision/dim2.hpp
-	include/sanguis/collision/dim2_fwd.hpp
-	include/sanguis/collision/dir.hpp
-	include/sanguis/collision/dir_fwd.hpp
-	include/sanguis/collision/intersection.hpp
-	include/sanguis/collision/intersection_fwd.hpp
-	include/sanguis/collision/is_null.hpp
-	include/sanguis/collision/line_line_intersect.hpp
-	include/sanguis/collision/line_segment.hpp
-	include/sanguis/collision/line_segment_fwd.hpp
-	include/sanguis/collision/make_range.hpp
-	include/sanguis/collision/optional_intersection.hpp
-	include/sanguis/collision/optional_intersection_fwd.hpp
-	include/sanguis/collision/optional_result.hpp
-	include/sanguis/collision/optional_result_fwd.hpp
-	include/sanguis/collision/pos.hpp
-	include/sanguis/collision/pos_fwd.hpp
-	include/sanguis/collision/rect.hpp
-	include/sanguis/collision/rect_fwd.hpp
-	include/sanguis/collision/rect_line_intersection.hpp
-	include/sanguis/collision/result.hpp
-	include/sanguis/collision/result_fwd.hpp
-	include/sanguis/collision/scale.hpp
-	include/sanguis/collision/speed.hpp
-	include/sanguis/collision/speed_fwd.hpp
-	include/sanguis/collision/test.hpp
-	include/sanguis/collision/test_move.hpp
-	include/sanguis/collision/unit.hpp
-	include/sanguis/collision/vector2.hpp
-	include/sanguis/collision/vector2_fwd.hpp
 	include/sanguis/config_app_name.hpp
 	include/sanguis/connect_state.hpp
 	include/sanguis/connect_state_fwd.hpp
@@ -878,6 +844,7 @@ SET(
 	include/sanguis/server/collision/with_world.hpp
 	include/sanguis/server/console.hpp
 	include/sanguis/server/console_command_pair.hpp
+	include/sanguis/server/console_command_pair_fwd.hpp
 	include/sanguis/server/console_command_vector.hpp
 	include/sanguis/server/console_fwd.hpp
 	include/sanguis/server/create.hpp
@@ -958,6 +925,7 @@ SET(
 	include/sanguis/server/entities/pickups/pickup.hpp
 	include/sanguis/server/entities/pickups/weapon.hpp
 	include/sanguis/server/entities/pickups/weapon_fwd.hpp
+	include/sanguis/server/entities/pickups/weapon_ref.hpp
 	include/sanguis/server/entities/player.hpp
 	include/sanguis/server/entities/player_fwd.hpp
 	include/sanguis/server/entities/player_map.hpp
@@ -1374,17 +1342,6 @@ SET(
 	src/client/states/running.cpp
 	src/client/states/waiting_for_player.cpp
 	src/client/world_parameters.cpp
-	src/collision/adjust_speed.cpp
-	src/collision/intersection.cpp
-	src/collision/is_null.cpp
-	src/collision/line_line_intersect.cpp
-	src/collision/line_segment.cpp
-	src/collision/make_range.cpp
-	src/collision/rect_line_intersection.cpp
-	src/collision/result.cpp
-	src/collision/scale.cpp
-	src/collision/test.cpp
-	src/collision/test_move.cpp
 	src/config_app_name.cpp
 	src/duration_second.cpp
 	src/exception.cpp
@@ -1737,7 +1694,7 @@ SET(
 	src/weapon_type_to_is_primary.cpp
 )
 
-FCPPT_UTILS_APPEND_SOURCE_DIR_AND_MAKE_GROUPS(
+fcppt_utils_append_source_dir_and_make_groups(
 	"${SANGUIS_FILES}"
 	SANGUIS_FILES_ABS
 )
@@ -1752,6 +1709,8 @@ add_definitions(
 
 include_directories(
 	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/include
+	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/collision/include
+	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/creator/include
 )
 
 awl_utils_add_portable_executable(
@@ -1767,6 +1726,7 @@ add_definitions(
 target_link_libraries(
 	sanguis
 	sanguiscreator
+	sanguiscollision
 	${fcppt_core_TARGET}
 	${fcppt_filesystem_TARGET}
 	${awl_TARGET}

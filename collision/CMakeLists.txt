@@ -1,0 +1,89 @@
+set(
+	SANGUIS_COLLISION_INCLUDE_FILES
+	include/sanguis/collision/center.hpp
+	include/sanguis/collision/center_fwd.hpp
+	include/sanguis/collision/dim2.hpp
+	include/sanguis/collision/dim2_fwd.hpp
+	include/sanguis/collision/duration.hpp
+	include/sanguis/collision/optional_result.hpp
+	include/sanguis/collision/optional_result_fwd.hpp
+	include/sanguis/collision/result.hpp
+	include/sanguis/collision/result_fwd.hpp
+	include/sanguis/collision/scale.hpp
+	include/sanguis/collision/speed.hpp
+	include/sanguis/collision/speed_fwd.hpp
+	include/sanguis/collision/test.hpp
+	include/sanguis/collision/test_move.hpp
+	include/sanguis/collision/unit.hpp
+	include/sanguis/collision/vector2.hpp
+	include/sanguis/collision/vector2_fwd.hpp
+)
+
+set(
+	SANGUIS_COLLISION_SRC_FILES
+	src/aux/adjust_speed.cpp
+	src/aux/intersection.cpp
+	src/aux/line_line_intersect.cpp
+	src/aux/line_segment.cpp
+	src/aux/make_range.cpp
+	src/aux/rect_line_intersection.cpp
+	src/include/sanguis/collision/aux/adjust_speed.hpp
+	src/include/sanguis/collision/aux/cross2.hpp
+	src/include/sanguis/collision/aux/dir.hpp
+	src/include/sanguis/collision/aux/dir_fwd.hpp
+	src/include/sanguis/collision/aux/intersection.hpp
+	src/include/sanguis/collision/aux/intersection_fwd.hpp
+	src/include/sanguis/collision/aux/is_null.hpp
+	src/include/sanguis/collision/aux/line_line_intersect.hpp
+	src/include/sanguis/collision/aux/line_segment.hpp
+	src/include/sanguis/collision/aux/line_segment_fwd.hpp
+	src/include/sanguis/collision/aux/make_range.hpp
+	src/include/sanguis/collision/aux/optional_intersection.hpp
+	src/include/sanguis/collision/aux/optional_intersection_fwd.hpp
+	src/include/sanguis/collision/aux/pos.hpp
+	src/include/sanguis/collision/aux/pos_fwd.hpp
+	src/include/sanguis/collision/aux/rect.hpp
+	src/include/sanguis/collision/aux/rect_fwd.hpp
+	src/include/sanguis/collision/aux/rect_line_intersection.hpp
+	src/result.cpp
+	src/test.cpp
+	src/test_move.cpp
+)
+
+set(
+	SANGUIS_COLLISION_FILES
+	"${SANGUIS_COLLISION_INCLUDE_FILES};${SANGUIS_COLLISION_SRC_FILES}"
+)
+
+fcppt_utils_add_source_groups(
+	"${SANGUIS_COLLISION_FILES}"
+)
+
+sanguis_generate_symbol_header(
+	collision
+)
+
+include_directories(
+	"${CMAKE_CURRENT_SOURCE_DIR}/include"
+	"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
+	"${FCPPT_UTILS_PROJECT_SOURCE_DIR}/creator/include"
+)
+
+add_library(
+	sanguiscollision
+	SHARED
+	${SANGUIS_COLLISION_FILES}
+)
+
+target_link_libraries(
+	sanguiscollision
+	sanguiscreator
+	${fcppt_core_TARGET}
+)
+
+install(
+	TARGETS
+	sanguiscollision
+	DESTINATION
+	${INSTALL_LIBRARY_DIR}
+)

@@ -151,10 +151,6 @@ include_directories(
 	${CEGUI_INCLUDE_DIRS}
 )
 
-include_directories(
-	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/creator/include
-)
-
 # Find ALDA
 
 find_package(
@@ -185,8 +181,38 @@ sge_config_add_custom_path(
 	${INSTALL_MEDIA_DIR}
 )
 
+include(
+	FcpptSymbol
+)
+
+function(
+	sanguis_generate_symbol_header
+	LIB_NAME
+)
+	string(
+		TOUPPER
+		"${LIB_NAME}"
+		UPPER_NAME
+	)
+
+	fcppt_generate_symbol_header(
+		"SANGUIS_STATIC_LINK"
+		"sanguis${LIB_NAME}"
+		"SANGUIS_${UPPER_NAME}"
+		"sanguis/${LIB_NAME}"
+	)
+endfunction()
+
+include_directories(
+	${FCPPT_UTILS_PROJECT_BINARY_DIR}/include
+)
+
 add_subdirectory(
 	src
+)
+
+add_subdirectory(
+	collision
 )
 
 add_subdirectory(

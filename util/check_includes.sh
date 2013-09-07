@@ -9,3 +9,7 @@ check_includes src SANGUIS_
 check_includes creator/include
 
 check_includes creator/src/include
+
+check_includes collision/include
+
+check_includes collision/src/include
