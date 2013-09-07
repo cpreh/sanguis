@@ -804,43 +804,20 @@ set(
 	include/sanguis/server/cheat.hpp
 	include/sanguis/server/closest_entity.hpp
 	include/sanguis/server/collision/body.hpp
-	include/sanguis/server/collision/body_base.hpp
-	include/sanguis/server/collision/body_base_fwd.hpp
-	include/sanguis/server/collision/body_callback.hpp
 	include/sanguis/server/collision/body_collision.hpp
-	include/sanguis/server/collision/body_enter_callback.hpp
-	include/sanguis/server/collision/body_exit_callback.hpp
 	include/sanguis/server/collision/body_fwd.hpp
-	include/sanguis/server/collision/circle_ghost.hpp
-	include/sanguis/server/collision/create_circle.hpp
 	include/sanguis/server/collision/distance_entity_entity.hpp
 	include/sanguis/server/collision/distance_entity_pos.hpp
 	include/sanguis/server/collision/distance_pos_pos.hpp
-	include/sanguis/server/collision/from_sge_user_data.hpp
-	include/sanguis/server/collision/from_sge_vector.hpp
 	include/sanguis/server/collision/ghost.hpp
 	include/sanguis/server/collision/ghost_base.hpp
 	include/sanguis/server/collision/ghost_fwd.hpp
 	include/sanguis/server/collision/ghost_unique_ptr.hpp
-	include/sanguis/server/collision/global_groups.hpp
-	include/sanguis/server/collision/global_groups_fwd.hpp
-	include/sanguis/server/collision/group.hpp
-	include/sanguis/server/collision/group_fwd.hpp
-	include/sanguis/server/collision/group_map.hpp
-	include/sanguis/server/collision/group_vector.hpp
-	include/sanguis/server/collision/make_groups.hpp
 	include/sanguis/server/collision/optional_result.hpp
 	include/sanguis/server/collision/optional_result_fwd.hpp
 	include/sanguis/server/collision/position_callback.hpp
 	include/sanguis/server/collision/result.hpp
 	include/sanguis/server/collision/result_fwd.hpp
-	include/sanguis/server/collision/solidity.hpp
-	include/sanguis/server/collision/solidity_fwd.hpp
-	include/sanguis/server/collision/to_sge_dim.hpp
-	include/sanguis/server/collision/to_sge_user_data.hpp
-	include/sanguis/server/collision/to_sge_vector.hpp
-	include/sanguis/server/collision/user_data.hpp
-	include/sanguis/server/collision/user_data_fwd.hpp
 	include/sanguis/server/collision/with_world.hpp
 	include/sanguis/server/console.hpp
 	include/sanguis/server/console_command_pair.hpp
@@ -885,7 +862,6 @@ set(
 	include/sanguis/server/entities/center_ghost.hpp
 	include/sanguis/server/entities/center_simple.hpp
 	include/sanguis/server/entities/circle_from_dim.hpp
-	include/sanguis/server/entities/default_solid.hpp
 	include/sanguis/server/entities/enemies/base_difficulty.hpp
 	include/sanguis/server/entities/enemies/create.hpp
 	include/sanguis/server/entities/enemies/difficulty.hpp
@@ -917,7 +893,6 @@ set(
 	include/sanguis/server/entities/is_type.hpp
 	include/sanguis/server/entities/link_container.hpp
 	include/sanguis/server/entities/movement_speed.hpp
-	include/sanguis/server/entities/nonsolid.hpp
 	include/sanguis/server/entities/optional_base_ref.hpp
 	include/sanguis/server/entities/optional_base_ref_fwd.hpp
 	include/sanguis/server/entities/pickups/health.hpp
@@ -1490,25 +1465,13 @@ set(
 	src/server/buffs/provider.cpp
 	src/server/cheat.cpp
 	src/server/collision/body.cpp
-	src/server/collision/body_base.cpp
 	src/server/collision/body_collision.cpp
-	src/server/collision/circle_ghost.cpp
-	src/server/collision/create_circle.cpp
 	src/server/collision/distance_entity_entity.cpp
 	src/server/collision/distance_entity_pos.cpp
 	src/server/collision/distance_pos_pos.cpp
-	src/server/collision/from_sge_user_data.cpp
-	src/server/collision/from_sge_vector.cpp
 	src/server/collision/ghost.cpp
 	src/server/collision/ghost_base.cpp
-	src/server/collision/global_groups.cpp
-	src/server/collision/make_groups.cpp
 	src/server/collision/result.cpp
-	src/server/collision/solidity.cpp
-	src/server/collision/to_sge_dim.cpp
-	src/server/collision/to_sge_user_data.cpp
-	src/server/collision/to_sge_vector.cpp
-	src/server/collision/user_data.cpp
 	src/server/collision/with_world.cpp
 	src/server/console.cpp
 	src/server/create.cpp
@@ -1532,7 +1495,6 @@ set(
 	src/server/entities/center_ghost.cpp
 	src/server/entities/center_simple.cpp
 	src/server/entities/circle_from_dim.cpp
-	src/server/entities/default_solid.cpp
 	src/server/entities/enemies/base_difficulty.cpp
 	src/server/entities/enemies/create.cpp
 	src/server/entities/enemies/enemy.cpp
@@ -1553,7 +1515,6 @@ set(
 	src/server/entities/ifaces/with_velocity.cpp
 	src/server/entities/insert_parameters.cpp
 	src/server/entities/insert_parameters_center.cpp
-	src/server/entities/nonsolid.cpp
 	src/server/entities/pickups/health.cpp
 	src/server/entities/pickups/monster.cpp
 	src/server/entities/pickups/pickup.cpp

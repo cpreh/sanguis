@@ -17,7 +17,7 @@ namespace world
 typedef
 std::function<
 	void (
-		sanguis::collision::world::body_base const &
+		sanguis::collision::world::body_base &
 	)
 >
 body_callback;

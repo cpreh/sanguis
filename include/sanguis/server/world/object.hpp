@@ -11,6 +11,7 @@
 #include <sanguis/timer.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
+#include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/name.hpp>
 #include <sanguis/creator/opening_container.hpp>
@@ -25,7 +26,6 @@
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/string.hpp>
-#include <sanguis/server/collision/global_groups.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
 #include <sanguis/server/entities/optional_base_ref_fwd.hpp>
@@ -41,11 +41,9 @@
 #include <sanguis/server/world/pickup_spawner.hpp>
 #include <sanguis/server/world/parameters_fwd.hpp>
 #include <sanguis/server/world/sight_range_map.hpp>
-#include <sge/projectile/world_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/container/map_decl.hpp>
-#include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -179,6 +177,10 @@ private:
 	)
 	override;
 
+	sanguis::collision::world::object &
+	collision_world() const
+	override;
+
 	void
 	add_sight_range(
 		sanguis::server::player_id,
@@ -197,14 +199,6 @@ private:
 	remove_player(
 		sanguis::server::player_id
 	)
-	override;
-
-	sge::projectile::world &
-	collision_world() const
-	override;
-
-	sanguis::server::collision::global_groups const &
-	global_collision_groups() const
 	override;
 
 	sanguis::server::environment::load_context &
@@ -259,18 +253,14 @@ private:
 	sanguis::server::environment::load_context &load_context_;
 
 	typedef fcppt::scoped_ptr<
-		sge::projectile::world
+		sanguis::collision::world::object
 	> collision_world_scoped_ptr;
 
 	collision_world_scoped_ptr const collision_world_;
 
-	sanguis::server::collision::global_groups const collision_groups_;
-
-	fcppt::signal::scoped_connection const collision_connection_;
-
 	sight_range_map sight_ranges_;
 
-	sanguis::diff_timer projectile_timer_;
+	sanguis::diff_timer collision_timer_;
 
 	sanguis::timer send_timer_;
 

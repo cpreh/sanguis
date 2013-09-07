@@ -1,17 +1,15 @@
 #ifndef SANGUIS_SERVER_COLLISION_BODY_HPP_INCLUDED
 #define SANGUIS_SERVER_COLLISION_BODY_HPP_INCLUDED
 
-#include <sanguis/server/angle.hpp>
-#include <sanguis/server/center_fwd.hpp>
+#include <sanguis/collision/world/body_base_fwd.hpp>
+#include <sanguis/collision/world/body_fwd.hpp>
+#include <sanguis/collision/world/group_vector.hpp>
+#include <sanguis/collision/world/object_fwd.hpp>
+#include <sanguis/server/center.hpp>
 #include <sanguis/server/radius.hpp>
-#include <sanguis/server/speed_fwd.hpp>
+#include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/body_fwd.hpp>
 #include <sanguis/server/collision/position_callback.hpp>
-#include <sanguis/server/collision/solidity_fwd.hpp>
-#include <sanguis/server/collision/user_data_fwd.hpp>
-#include <sge/projectile/body/object_fwd.hpp>
-#include <sge/projectile/body/position.hpp>
-#include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
 
@@ -30,12 +28,8 @@ class body
 	);
 public:
 	body(
-		sanguis::server::center,
-		sanguis::server::speed,
-		sanguis::server::angle,
 		sanguis::server::radius,
-		sanguis::server::collision::solidity const &,
-		sanguis::server::collision::user_data const &,
+		sanguis::collision::world::body_base &,
 		sanguis::server::collision::position_callback const &
 	);
 
@@ -43,7 +37,7 @@ public:
 
 	void
 	center(
-		sanguis::server::center const &
+		sanguis::server::center
 	);
 
 	sanguis::server::center const
@@ -51,40 +45,42 @@ public:
 
 	void
 	speed(
-		sanguis::server::speed const &
+		sanguis::server::speed
 	);
 
 	sanguis::server::speed const
 	speed() const;
 
+	sanguis::server::radius const
+	radius() const;
+
 	void
-	angle(
-		sanguis::server::angle const &
+	transfer(
+		sanguis::collision::world::object &,
+		sanguis::server::center,
+		sanguis::server::speed,
+		sanguis::collision::world::group_vector const & // TODO: Put this into the constructor
 	);
 
-	sanguis::server::angle const
-	angle() const;
-
-	sge::projectile::body::object &
-	get();
-
-	sge::projectile::body::object const &
-	get() const;
+	void
+	destroy();
 private:
-	void
-	on_position_change(
-		sge::projectile::body::position const &
-	);
+	sanguis::server::radius const radius_;
 
-	typedef fcppt::scoped_ptr<
-		sge::projectile::body::object
-	> body_scoped_ptr;
-
-	body_scoped_ptr const body_;
+	sanguis::collision::world::body_base &body_base_;
 
 	sanguis::server::collision::position_callback const position_callback_;
 
-	fcppt::signal::scoped_connection const position_connection_;
+	typedef fcppt::scoped_ptr<
+		sanguis::collision::world::body
+	> body_scoped_ptr;
+
+	// FIXME: Remove this hack!
+	sanguis::server::center temporary_center_;
+
+	sanguis::server::speed temporary_speed_;
+
+	body_scoped_ptr body_;
 };
 
 }

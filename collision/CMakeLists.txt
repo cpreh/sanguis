@@ -20,6 +20,7 @@ set(
 	include/sanguis/collision/vector2.hpp
 	include/sanguis/collision/vector2_fwd.hpp
 	include/sanguis/collision/world/body.hpp
+	include/sanguis/collision/world/body_base.hpp
 	include/sanguis/collision/world/body_base_fwd.hpp
 	include/sanguis/collision/world/body_callback.hpp
 	include/sanguis/collision/world/body_collision_callback.hpp
@@ -104,6 +105,7 @@ set(
 	src/test.cpp
 	src/test_move.cpp
 	src/world/body.cpp
+	src/world/body_base.cpp
 	src/world/body_parameters.cpp
 	src/world/create.cpp
 	src/world/ghost.cpp

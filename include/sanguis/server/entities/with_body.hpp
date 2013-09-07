@@ -1,11 +1,13 @@
 #ifndef SANGUIS_SERVER_ENTITIES_WITH_BODY_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_WITH_BODY_HPP_INCLUDED
 
+#include <sanguis/collision/world/body_base.hpp>
+#include <sanguis/collision/world/group_vector.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/speed_fwd.hpp>
-#include <sanguis/server/collision/group_vector.hpp>
+#include <sanguis/server/collision/body.hpp>
 #include <sanguis/server/collision/result_fwd.hpp>
 #include <sanguis/server/entities/body_parameters_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
@@ -15,11 +17,9 @@
 #include <sanguis/server/entities/ifaces/with_body.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/entities/ifaces/with_links.hpp>
-#include <sanguis/server/collision/body_base.hpp>
 #include <sanguis/server/collision/body_fwd.hpp>
 #include <sge/projectile/body/scoped_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool_fwd.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -39,7 +39,7 @@ class with_body
 	public virtual sanguis::server::entities::ifaces::with_angle,
 	public virtual sanguis::server::entities::ifaces::with_id,
 	public virtual sanguis::server::entities::ifaces::with_links,
-	public sanguis::server::collision::body_base
+	public sanguis::collision::world::body_base
 {
 	FCPPT_NONCOPYABLE(
 		with_body
@@ -93,22 +93,18 @@ protected:
 	on_destroy()
 	override;
 private:
-	void
-	on_position_change(
-		sanguis::server::center const &
-	);
-
 	// collision::body_base
 	boost::logic::tribool const
 	can_collide_with(
-		sanguis::server::collision::body_base const &
+		sanguis::collision::world::body_base const &
 	) const
 	override;
 
 	void
 	collision(
-		sanguis::server::collision::body_base &
-	);
+		sanguis::collision::world::body_base &
+	)
+	override;
 
 	virtual
 	boost::logic::tribool const
@@ -123,7 +119,7 @@ private:
 	);
 
 	virtual
-	sanguis::server::collision::group_vector
+	sanguis::collision::world::group_vector
 	collision_groups() const = 0;
 
 	// ifaces::with_body
@@ -137,19 +133,14 @@ private:
 	body_speed() const
 	override;
 
-	sanguis::server::radius const radius_;
+	void
+	on_position_change(
+		sanguis::server::center
+	);
 
-	typedef fcppt::scoped_ptr<
-		sanguis::server::collision::body
-	> body_scoped_ptr;
+	sanguis::server::angle angle_;
 
-	body_scoped_ptr collision_body_;
-
-	typedef fcppt::scoped_ptr<
-		sge::projectile::body::scoped
-	> scoped_body_scope_ptr;
-
-	scoped_body_scope_ptr scoped_body_;
+	sanguis::server::collision::body collision_body_;
 };
 
 }

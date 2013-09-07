@@ -1,3 +1,5 @@
+#include <sanguis/collision/world/group.hpp>
+#include <sanguis/collision/world/group_vector.hpp>
 #include <sanguis/server/enter_sight_function.hpp>
 #include <sanguis/server/leave_sight_function.hpp>
 #include <sanguis/server/team.hpp>
@@ -5,8 +7,6 @@
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/influence.hpp>
 #include <sanguis/server/auras/update_sight.hpp>
-#include <sanguis/server/collision/group.hpp>
-#include <sanguis/server/collision/group_vector.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
@@ -36,12 +36,12 @@ sanguis::server::auras::update_sight::~update_sight()
 {
 }
 
-sanguis::server::collision::group_vector const
+sanguis::collision::world::group_vector
 sanguis::server::auras::update_sight::collision_groups() const
 {
 	return
-		sanguis::server::collision::group_vector{
-			sanguis::server::collision::group::sight_range
+		sanguis::collision::world::group_vector{
+			sanguis::collision::world::group::sight_range
 		};
 }
 

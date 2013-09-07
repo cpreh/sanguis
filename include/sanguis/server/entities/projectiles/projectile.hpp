@@ -4,12 +4,12 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/projectile_type.hpp>
+#include <sanguis/collision/world/group_vector.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/model_name.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
-#include <sanguis/server/collision/group_vector.hpp>
 #include <sanguis/server/collision/result_fwd.hpp>
 #include <sanguis/server/entities/body_velocity_combiner.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
@@ -95,7 +95,7 @@ private:
 	)
 	override;
 
-	sanguis::server::collision::group_vector
+	sanguis::collision::world::group_vector
 	collision_groups() const
 	override;
 

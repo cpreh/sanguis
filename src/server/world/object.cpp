@@ -6,6 +6,10 @@
 #include <sanguis/timer.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/weapon_description.hpp>
+#include <sanguis/collision/world/body_collision_callback.hpp>
+#include <sanguis/collision/world/create.hpp>
+#include <sanguis/collision/world/parameters.hpp>
+#include <sanguis/collision/world/object.hpp>
 #include <sanguis/creator/opening.hpp>
 #include <sanguis/creator/opening_container.hpp>
 #include <sanguis/creator/spawn_container.hpp>
@@ -38,7 +42,6 @@
 #include <sanguis/server/source_world_id.hpp>
 #include <sanguis/server/string.hpp>
 #include <sanguis/server/collision/body_collision.hpp>
-#include <sanguis/server/collision/global_groups.hpp>
 #include <sanguis/server/collision/optional_result.hpp>
 #include <sanguis/server/collision/with_world.hpp>
 #include <sanguis/server/entities/base.hpp>
@@ -71,8 +74,6 @@
 #include <sanguis/server/world/spawn_entity.hpp>
 #include <sanguis/server/world/spawn_parameters.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
-#include <sge/projectile/time_increment.hpp>
-#include <sge/projectile/world.hpp>
 #include <sge/timer/elapsed_and_reset.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -127,24 +128,20 @@ sanguis::server::world::object::object(
 		_parameters.load_context()
 	),
 	collision_world_(
-		fcppt::make_unique_ptr<
-			sge::projectile::world
-		>()
-	),
-	collision_groups_(
-		*collision_world_
-	),
-	collision_connection_(
-		collision_world_->body_collision(
-			std::bind(
-				&sanguis::server::collision::body_collision,
-				std::placeholders::_1,
-				std::placeholders::_2
+		sanguis::collision::world::create(
+			sanguis::collision::world::parameters(
+				sanguis::collision::world::body_collision_callback(
+					std::bind(
+						&sanguis::server::collision::body_collision,
+						std::placeholders::_1,
+						std::placeholders::_2
+					)
+				)
 			)
 		)
 	),
 	sight_ranges_(),
-	projectile_timer_(
+	collision_timer_(
 		sanguis::diff_timer::parameters(
 			_parameters.diff_clock(),
 			std::chrono::seconds(
@@ -192,7 +189,7 @@ sanguis::server::world::object::update()
 		sge::timer::elapsed_and_reset<
 			sanguis::duration
 		>(
-			projectile_timer_
+			collision_timer_
 		)
 	);
 
@@ -206,14 +203,8 @@ sanguis::server::world::object::update()
 			*entity.second
 		);
 
-	collision_world_->update_continuous(
-		sge::projectile::time_increment(
-			std::chrono::duration_cast<
-				sge::projectile::duration
-			>(
-				duration
-			)
-		)
+	collision_world_->update(
+		duration
 	);
 
 	for(
@@ -769,16 +760,10 @@ sanguis::server::world::object::remove_player(
 	);
 }
 
-sge::projectile::world &
+sanguis::collision::world::object &
 sanguis::server::world::object::collision_world() const
 {
 	return *collision_world_;
-}
-
-sanguis::server::collision::global_groups const &
-sanguis::server::world::object::global_collision_groups() const
-{
-	return collision_groups_;
 }
 
 sanguis::server::environment::load_context &

@@ -5,20 +5,19 @@
 #include <sanguis/is_primary_weapon_fwd.hpp>
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
+#include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/level.hpp>
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/player_id.hpp>
-#include <sanguis/server/collision/global_groups_fwd.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
 #include <sanguis/server/entities/optional_base_ref_fwd.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
-#include <sge/projectile/world_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -139,12 +138,8 @@ public:
 	) = 0;
 
 	virtual
-	sge::projectile::world &
+	sanguis::collision::world::object &
 	collision_world() const = 0;
-
-	virtual
-	sanguis::server::collision::global_groups const &
-	global_collision_groups() const = 0;
 
 	virtual
 	sanguis::server::environment::load_context &

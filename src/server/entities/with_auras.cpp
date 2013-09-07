@@ -22,12 +22,8 @@ sanguis::server::entities::with_auras::add_aura(
 		)
 	);
 
-	sanguis::server::auras::aura &ref(
-		auras_.back()
-	);
-
-	sanguis::server::entities::with_ghosts::add_ghost(
-		ref.recreate()
+	this->sanguis::server::entities::with_ghosts::add_ghost(
+		auras_.back().create_ghost()
 	);
 }
 

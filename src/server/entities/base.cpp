@@ -33,7 +33,6 @@ sanguis::server::entities::base::transfer(
 				_environment.collision_world(),
 				_grid,
 				_insert_param.center(),
-				_environment.global_collision_groups(),
 				_insert_param.angle()
 			)
 		)

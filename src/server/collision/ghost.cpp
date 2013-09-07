@@ -1,63 +1,36 @@
-#include <sanguis/server/center.hpp>
-#include <sanguis/server/dim_fwd.hpp>
+#include <sanguis/collision/center.hpp>
+#include <sanguis/collision/radius.hpp>
+#include <sanguis/collision/world/body_enter_callback.hpp>
+#include <sanguis/collision/world/body_exit_callback.hpp>
+#include <sanguis/collision/world/ghost.hpp>
+#include <sanguis/collision/world/ghost_parameters.hpp>
+#include <sanguis/collision/world/group_vector.hpp>
+#include <sanguis/collision/world/object.hpp>
+#include <fcppt/assert/pre.hpp>
+#include <sanguis/server/radius.hpp>
 #include <sanguis/server/collision/ghost.hpp>
-#include <sanguis/server/collision/from_sge_user_data.hpp>
-#include <sanguis/server/collision/make_groups.hpp>
-#include <sanguis/server/collision/group_vector.hpp>
-#include <sanguis/server/collision/user_data.hpp>
-#include <sanguis/server/collision/to_sge_dim.hpp>
-#include <sanguis/server/collision/to_sge_vector.hpp>
-#include <sge/projectile/body/object.hpp>
-#include <sge/projectile/ghost/object.hpp>
-#include <sge/projectile/ghost/parameters.hpp>
-#include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::collision::ghost::ghost(
-	sanguis::server::collision::group_vector const &_groups,
-	sanguis::server::dim const &_size
+	sanguis::collision::world::group_vector const &_collision_groups,
+	sanguis::collision::world::body_enter_callback const &_body_enter_callback,
+	sanguis::collision::world::body_exit_callback const &_body_exit_callback,
+	sanguis::server::radius const _radius
 )
 :
-	groups_(
-		_groups
+	collision_groups_(
+		_collision_groups
 	),
-	ghost_(
-		fcppt::make_unique_ptr<
-			sge::projectile::ghost::object
-		>(
-			sge::projectile::ghost::parameters(
-				sge::projectile::ghost::position(
-					sge::projectile::vector2::null()
-				),
-				sge::projectile::ghost::size(
-					sanguis::server::collision::to_sge_dim(
-						_size
-					)
-				)
-			)
-		)
+	body_enter_callback_(
+		_body_enter_callback
 	),
-	collision_begin_connection_(
-		ghost_->body_enter(
-			std::bind(
-				&sanguis::server::collision::ghost::body_enter,
-				this,
-				std::placeholders::_1
-			)
-		)
+	body_exit_callback_(
+		_body_exit_callback
 	),
-	collision_end_connection_(
-		ghost_->body_exit(
-			std::bind(
-				&sanguis::server::collision::ghost::body_exit,
-				this,
-				std::placeholders::_1
-			)
-		)
-	)
+	radius_(
+		_radius
+	),
+	impl_()
 {
 }
 
@@ -66,68 +39,48 @@ sanguis::server::collision::ghost::~ghost()
 }
 
 void
-sanguis::server::collision::ghost::center(
-	sanguis::server::center const &_center
+sanguis::server::collision::ghost::transfer(
+	sanguis::collision::world::object &_world,
+	sanguis::server::center const _center
 )
 {
-	ghost_->position(
-		sanguis::server::collision::to_sge_vector(
-			_center.get()
+	this->destroy();
+
+	impl_.take(
+		_world.create_ghost(
+			sanguis::collision::world::ghost_parameters(
+				sanguis::collision::center(
+					_center.get()
+				),
+				sanguis::collision::radius(
+					radius_.get()
+				),
+				body_enter_callback_,
+				body_exit_callback_,
+				collision_groups_
+			)
 		)
 	);
 }
 
-sanguis::server::collision::group_vector const &
-sanguis::server::collision::ghost::groups() const
+void
+sanguis::server::collision::ghost::destroy()
 {
-	return groups_;
-}
-
-sge::projectile::ghost::object &
-sanguis::server::collision::ghost::get()
-{
-	return *ghost_;
+	impl_.reset();
 }
 
 void
-sanguis::server::collision::ghost::body_enter(
-	sge::projectile::body::object const &_body
+sanguis::server::collision::ghost::center(
+	sanguis::server::center const _center
 )
 {
-	this->dispatch(
-		&sanguis::server::collision::ghost::on_body_enter,
-		_body
+	FCPPT_ASSERT_PRE(
+		impl_
 	);
-}
 
-void
-sanguis::server::collision::ghost::body_exit(
-	sge::projectile::body::object const &_body
-)
-{
-	this->dispatch(
-		&sanguis::server::collision::ghost::on_body_exit,
-		_body
+	impl_->center(
+		sanguis::collision::center(
+			_center.get()
+		)
 	);
-}
-
-template<
-	typename Function
->
-void
-sanguis::server::collision::ghost::dispatch(
-	Function const &_function,
-	sge::projectile::body::object const &_body
-)
-{
-	if(
-		!_body.user_data().empty()
-	)
-		(
-			this->*_function
-		)(
-			sanguis::server::collision::from_sge_user_data(
-				_body.user_data()
-			).get()
-		);
 }

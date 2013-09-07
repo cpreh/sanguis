@@ -1,8 +1,8 @@
 #ifndef SANGUIS_SERVER_ENTITIES_EXP_AREA_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_EXP_AREA_HPP_INCLUDED
 
+#include <sanguis/collision/world/body_base_fwd.hpp>
 #include <sanguis/server/exp.hpp>
-#include <sanguis/server/collision/body_base_fwd.hpp>
 #include <sanguis/server/collision/ghost_base.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/center_ghost.hpp>
@@ -49,19 +49,19 @@ private:
 
 	boost::logic::tribool const
 	can_collide_with(
-		sanguis::server::collision::body_base const &
+		sanguis::collision::world::body_base const &
 	) const
 	override;
 
 	void
 	body_enter(
-		sanguis::server::collision::body_base &
+		sanguis::collision::world::body_base &
 	)
 	override;
 
 	void
 	body_exit(
-		sanguis::server::collision::body_base &
+		sanguis::collision::world::body_base &
 	)
 	override;
 

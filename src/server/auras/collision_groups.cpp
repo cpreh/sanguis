@@ -1,12 +1,12 @@
+#include <sanguis/collision/world/group.hpp>
+#include <sanguis/collision/world/group_vector.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/collision_groups.hpp>
 #include <sanguis/server/auras/influence.hpp>
-#include <sanguis/server/collision/group.hpp>
-#include <sanguis/server/collision/group_vector.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
 
-sanguis::server::collision::group_vector
+sanguis::collision::world::group_vector
 sanguis::server::auras::collision_groups(
 	sanguis::server::team const _team,
 	sanguis::server::auras::influence const _influence
@@ -25,8 +25,8 @@ sanguis::server::auras::collision_groups(
 
 	)
 		return
-			sanguis::server::collision::group_vector{
-				sanguis::server::collision::group::projectile_enemy
+			sanguis::collision::world::group_vector{
+				sanguis::collision::world::group::projectile_enemy
 			};
 
 	if(
@@ -42,8 +42,8 @@ sanguis::server::auras::collision_groups(
 
 	)
 		return
-			sanguis::server::collision::group_vector{
-				sanguis::server::collision::group::projectile_player
+			sanguis::collision::world::group_vector{
+				sanguis::collision::world::group::projectile_player
 			};
 
 	FCPPT_ASSERT_UNREACHABLE;

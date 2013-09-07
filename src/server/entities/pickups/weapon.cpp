@@ -1,4 +1,6 @@
 #include <sanguis/weapon_type.hpp>
+#include <sanguis/collision/world/group.hpp>
+#include <sanguis/collision/world/group_vector.hpp>
 #include <sanguis/load/weapon_pickup_name.hpp>
 #include <sanguis/messages/add_weapon_pickup.hpp>
 #include <sanguis/messages/create.hpp>
@@ -7,10 +9,7 @@
 #include <sanguis/server/model_name.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
-#include <sanguis/server/collision/group.hpp>
-#include <sanguis/server/collision/group_vector.hpp>
 #include <sanguis/server/entities/circle_from_dim.hpp>
-#include <sanguis/server/entities/nonsolid.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_links.hpp>
@@ -38,8 +37,7 @@ sanguis::server::entities::pickups::weapon::weapon(
 						_weapon->type()
 					)
 				)
-			),
-			sanguis::server::entities::nonsolid()
+			)
 		)
 	),
 	sanguis::server::entities::with_id(
@@ -93,12 +91,12 @@ sanguis::server::entities::pickups::weapon::team() const
 		team_;
 }
 
-sanguis::server::collision::group_vector
+sanguis::collision::world::group_vector
 sanguis::server::entities::pickups::weapon::collision_groups() const
 {
 	return
-		sanguis::server::collision::group_vector{
-			sanguis::server::collision::group::weapon_pickup
+		sanguis::collision::world::group_vector{
+			sanguis::collision::world::group::weapon_pickup
 		};
 }
 

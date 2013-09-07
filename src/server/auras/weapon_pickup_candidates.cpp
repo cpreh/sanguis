@@ -1,3 +1,5 @@
+#include <sanguis/collision/world/group.hpp>
+#include <sanguis/collision/world/group_vector.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/aura.hpp>
@@ -5,8 +7,6 @@
 #include <sanguis/server/auras/weapon_pickup_add_candidate_callback.hpp>
 #include <sanguis/server/auras/weapon_pickup_candidates.hpp>
 #include <sanguis/server/auras/weapon_pickup_remove_candidate_callback.hpp>
-#include <sanguis/server/collision/group.hpp>
-#include <sanguis/server/collision/group_vector.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/pickups/weapon.hpp>
 
@@ -35,12 +35,12 @@ sanguis::server::auras::weapon_pickup_candidates::~weapon_pickup_candidates()
 {
 }
 
-sanguis::server::collision::group_vector const
+sanguis::collision::world::group_vector
 sanguis::server::auras::weapon_pickup_candidates::collision_groups() const
 {
 	return
-		sanguis::server::collision::group_vector{
-			sanguis::server::collision::group::weapon_pickup_sight
+		sanguis::collision::world::group_vector{
+			sanguis::collision::world::group::weapon_pickup_sight
 		};
 }
 

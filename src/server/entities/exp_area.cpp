@@ -1,8 +1,8 @@
+#include <sanguis/collision/world/body_base_fwd.hpp>
+#include <sanguis/collision/world/group.hpp>
+#include <sanguis/collision/world/group_vector.hpp>
 #include <sanguis/server/radius.hpp>
-#include <sanguis/server/collision/body_base_fwd.hpp>
-#include <sanguis/server/collision/circle_ghost.hpp>
-#include <sanguis/server/collision/group.hpp>
-#include <sanguis/server/collision/group_vector.hpp>
+#include <sanguis/server/collision/ghost.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/center_ghost.hpp>
@@ -33,16 +33,16 @@ sanguis::server::entities::exp_area::exp_area(
 {
 	this->add_ghost(
 		fcppt::make_unique_ptr<
-			sanguis::server::collision::circle_ghost
+			sanguis::server::collision::ghost
 		>(
-			sanguis::server::collision::group_vector{
-				sanguis::server::collision::group::projectile_enemy
+			sanguis::collision::world::group_vector{
+				sanguis::collision::world::group::projectile_enemy
 			},
+			this->body_enter_callback(),
+			this->body_exit_callback(),
 			sanguis::server::radius(
 				2000.f // TODO
-			),
-			this->body_enter_callback(),
-			this->body_exit_callback()
+			)
 		)
 	);
 }
@@ -103,7 +103,7 @@ sanguis::server::entities::exp_area::dead() const
 
 boost::logic::tribool const
 sanguis::server::entities::exp_area::can_collide_with(
-	sanguis::server::collision::body_base const &_base
+	sanguis::collision::world::body_base const &_base
 ) const
 {
 	return
@@ -116,14 +116,14 @@ sanguis::server::entities::exp_area::can_collide_with(
 
 void
 sanguis::server::entities::exp_area::body_enter(
-	sanguis::server::collision::body_base &_body
+	sanguis::collision::world::body_base &_base
 )
 {
 	sanguis::server::entities::player &entity(
 		dynamic_cast<
 			sanguis::server::entities::player &
 		>(
-			_body
+			_base
 		)
 	);
 
@@ -137,14 +137,14 @@ sanguis::server::entities::exp_area::body_enter(
 
 void
 sanguis::server::entities::exp_area::body_exit(
-	sanguis::server::collision::body_base &_body
+	sanguis::collision::world::body_base &_base
 )
 {
 	player_links_.erase(
 		dynamic_cast<
 			sanguis::server::entities::player *
 		>(
-			&_body
+			&_base
 		)
 	);
 }

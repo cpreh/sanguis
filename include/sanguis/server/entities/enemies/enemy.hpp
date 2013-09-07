@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_ENEMIES_ENEMY_HPP_INCLUDED
 
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/collision/world/group_vector.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/server/exp.hpp>
@@ -10,7 +11,6 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/ai/create_function.hpp>
-#include <sanguis/server/collision/group_vector.hpp>
 #include <sanguis/server/entities/body_velocity_combiner.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_body.hpp>
@@ -81,7 +81,7 @@ private:
 	) const
 	override;
 
-	sanguis::server::collision::group_vector
+	sanguis::collision::world::group_vector
 	collision_groups() const
 	override;
 

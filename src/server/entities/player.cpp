@@ -4,6 +4,8 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_type_to_is_primary.hpp>
+#include <sanguis/collision/world/group.hpp>
+#include <sanguis/collision/world/group_vector.hpp>
 #include <sanguis/messages/add_player.hpp>
 #include <sanguis/messages/add_own_player.hpp>
 #include <sanguis/messages/create.hpp>
@@ -27,12 +29,9 @@
 #include <sanguis/server/auras/weapon_pickup_candidates.hpp>
 #include <sanguis/server/auras/weapon_pickup_remove_candidate_callback.hpp>
 #include <sanguis/server/auras/update_sight.hpp>
-#include <sanguis/server/collision/group.hpp>
-#include <sanguis/server/collision/group_vector.hpp>
 #include <sanguis/server/damage/armor.hpp>
 #include <sanguis/server/entities/body_velocity_combiner.hpp>
 #include <sanguis/server/entities/circle_from_dim.hpp>
-#include <sanguis/server/entities/default_solid.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/player.hpp>
@@ -90,8 +89,7 @@ sanguis::server::entities::player::player(
 				sanguis::server::model_name(
 					FCPPT_TEXT("player")
 				)
-			),
-			sanguis::server::entities::default_solid()
+			)
 		)
 	),
 	sanguis::server::entities::with_buffs(),
@@ -518,11 +516,11 @@ sanguis::server::entities::player::on_drop_weapon(
 	);
 }
 
-sanguis::server::collision::group_vector
+sanguis::collision::world::group_vector
 sanguis::server::entities::player::collision_groups() const
 {
 	return
-		sanguis::server::collision::group_vector{
-			sanguis::server::collision::group::player
+		sanguis::collision::world::group_vector{
+			sanguis::collision::world::group::player
 		};
 }

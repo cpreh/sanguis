@@ -1,16 +1,14 @@
+#include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
-#include <sanguis/server/collision/global_groups_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
-#include <sge/projectile/world_fwd.hpp>
 
 
 sanguis::server::entities::transfer_parameters::transfer_parameters(
-	sge::projectile::world &_world,
+	sanguis::collision::world::object &_world,
 	sanguis::creator::grid const &_grid,
 	sanguis::server::center const &_center,
-	sanguis::server::collision::global_groups const &_global_groups,
 	sanguis::server::angle const _angle
 )
 :
@@ -23,41 +21,36 @@ sanguis::server::entities::transfer_parameters::transfer_parameters(
 	center_(
 		_center
 	),
-	global_groups_(
-		_global_groups
-	),
 	angle_(
 		_angle
 	)
 {
 }
 
-sge::projectile::world &
+sanguis::collision::world::object &
 sanguis::server::entities::transfer_parameters::world() const
 {
-	return world_;
+	return
+		world_;
 }
 
 sanguis::creator::grid const &
 sanguis::server::entities::transfer_parameters::grid() const
 {
-	return grid_;
+	return
+		grid_;
 }
 
 sanguis::server::center const
 sanguis::server::entities::transfer_parameters::center() const
 {
-	return center_;
-}
-
-sanguis::server::collision::global_groups const &
-sanguis::server::entities::transfer_parameters::global_groups() const
-{
-	return global_groups_;
+	return
+		center_;
 }
 
 sanguis::server::angle const
 sanguis::server::entities::transfer_parameters::angle() const
 {
-	return angle_;
+	return
+		angle_;
 }

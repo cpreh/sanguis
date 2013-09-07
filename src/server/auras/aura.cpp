@@ -1,12 +1,13 @@
+#include <sanguis/collision/world/body_base.hpp>
+#include <sanguis/collision/world/group_vector.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/collision_groups.hpp>
 #include <sanguis/server/auras/influence.hpp>
-#include <sanguis/server/collision/circle_ghost.hpp>
+#include <sanguis/server/collision/ghost.hpp>
 #include <sanguis/server/collision/ghost_base.hpp>
 #include <sanguis/server/collision/ghost_unique_ptr.hpp>
-#include <sanguis/server/collision/group_vector.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -19,17 +20,17 @@ sanguis::server::auras::aura::~aura()
 }
 
 sanguis::server::collision::ghost_unique_ptr
-sanguis::server::auras::aura::recreate()
+sanguis::server::auras::aura::create_ghost()
 {
 	return
 		sanguis::server::collision::ghost_unique_ptr(
 			fcppt::make_unique_ptr<
-				sanguis::server::collision::circle_ghost
+				sanguis::server::collision::ghost
 			>(
 				this->collision_groups(),
-				radius_,
 				this->body_enter_callback(),
-				this->body_exit_callback()
+				this->body_exit_callback(),
+				radius_
 			)
 		);
 }
@@ -53,7 +54,7 @@ sanguis::server::auras::aura::aura(
 {
 }
 
-sanguis::server::collision::group_vector const
+sanguis::collision::world::group_vector
 sanguis::server::auras::aura::collision_groups() const
 {
 	return
@@ -65,7 +66,7 @@ sanguis::server::auras::aura::collision_groups() const
 
 boost::logic::tribool const
 sanguis::server::auras::aura::can_collide_with(
-	sanguis::server::collision::body_base const &
+	sanguis::collision::world::body_base const &
 ) const
 {
 	return true;
@@ -73,7 +74,7 @@ sanguis::server::auras::aura::can_collide_with(
 
 void
 sanguis::server::auras::aura::body_enter(
-	sanguis::server::collision::body_base &_base
+	sanguis::collision::world::body_base &_base
 )
 {
 	this->enter(
@@ -87,7 +88,7 @@ sanguis::server::auras::aura::body_enter(
 
 void
 sanguis::server::auras::aura::body_exit(
-	sanguis::server::collision::body_base &_base
+	sanguis::collision::world::body_base &_base
 )
 {
 	this->leave(

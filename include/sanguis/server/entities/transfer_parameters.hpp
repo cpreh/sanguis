@@ -1,12 +1,11 @@
 #ifndef SANGUIS_SERVER_ENTITIES_TRANSFER_PARAMETERS_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_TRANSFER_PARAMETERS_HPP_INCLUDED
 
+#include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
-#include <sanguis/server/collision/global_groups_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
-#include <sge/projectile/world_fwd.hpp>
 #include <fcppt/nonassignable.hpp>
 
 
@@ -24,14 +23,13 @@ class transfer_parameters
 	);
 public:
 	transfer_parameters(
-		sge::projectile::world &,
+		sanguis::collision::world::object &,
 		sanguis::creator::grid const &,
 		sanguis::server::center const &,
-		sanguis::server::collision::global_groups const &,
 		sanguis::server::angle
 	);
 
-	sge::projectile::world &
+	sanguis::collision::world::object &
 	world() const;
 
 	sanguis::creator::grid const &
@@ -40,19 +38,14 @@ public:
 	sanguis::server::center const
 	center() const;
 
-	sanguis::server::collision::global_groups const &
-	global_groups() const;
-
 	sanguis::server::angle const
 	angle() const;
 private:
-	sge::projectile::world &world_;
+	sanguis::collision::world::object &world_;
 
 	sanguis::creator::grid const &grid_;
 
 	sanguis::server::center const center_;
-
-	sanguis::server::collision::global_groups const &global_groups_;
 
 	sanguis::server::angle const angle_;
 };

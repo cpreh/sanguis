@@ -1,14 +1,12 @@
 #ifndef SANGUIS_SERVER_ENTITIES_WITH_GHOSTS_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_WITH_GHOSTS_HPP_INCLUDED
 
+#include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/collision/ghost_fwd.hpp>
 #include <sanguis/server/collision/ghost_unique_ptr.hpp>
-#include <sanguis/server/collision/global_groups_fwd.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
-#include <sge/projectile/world_fwd.hpp>
-#include <sge/projectile/ghost/scoped_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
@@ -59,8 +57,7 @@ private:
 	void
 	insert_ghost(
 		sanguis::server::collision::ghost &,
-		sge::projectile::world &,
-		sanguis::server::collision::global_groups const &
+		sanguis::collision::world::object &
 	);
 
 	typedef boost::ptr_list<
@@ -68,12 +65,6 @@ private:
 	> ghost_list;
 
 	ghost_list ghosts_;
-
-	typedef boost::ptr_list<
-		sge::projectile::ghost::scoped
-	> scoped_ghost_list;
-
-	scoped_ghost_list scoped_ghosts_;
 };
 
 }

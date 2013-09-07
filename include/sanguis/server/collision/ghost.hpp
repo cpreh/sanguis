@@ -1,14 +1,14 @@
 #ifndef SANGUIS_SERVER_COLLISION_GHOST_HPP_INCLUDED
 #define SANGUIS_SERVER_COLLISION_GHOST_HPP_INCLUDED
 
+#include <sanguis/collision/world/body_enter_callback.hpp>
+#include <sanguis/collision/world/body_exit_callback.hpp>
+#include <sanguis/collision/world/ghost_fwd.hpp>
+#include <sanguis/collision/world/group_vector.hpp>
+#include <sanguis/collision/world/object_fwd.hpp>
+#include <sanguis/server/radius.hpp>
 #include <sanguis/server/center_fwd.hpp>
-#include <sanguis/server/dim_fwd.hpp>
-#include <sanguis/server/collision/body_base_fwd.hpp>
 #include <sanguis/server/collision/ghost_fwd.hpp>
-#include <sanguis/server/collision/group_vector.hpp>
-#include <sge/projectile/body/object_fwd.hpp>
-#include <sge/projectile/ghost/object_fwd.hpp>
-#include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
 
@@ -25,68 +25,45 @@ class ghost
 	FCPPT_NONCOPYABLE(
 		ghost
 	);
-protected:
-	ghost(
-		sanguis::server::collision::group_vector const &,
-		sanguis::server::dim const &
-	);
 public:
-	virtual
+	ghost(
+		sanguis::collision::world::group_vector const &,
+		sanguis::collision::world::body_enter_callback const &,
+		sanguis::collision::world::body_exit_callback const &,
+		sanguis::server::radius
+	);
+
 	~ghost();
 
 	void
+	transfer(
+		sanguis::collision::world::object &,
+		sanguis::server::center
+	);
+
+	void
+	destroy();
+
+	void
 	center(
-		sanguis::server::center const &
+		sanguis::server::center
 	);
-
-	sanguis::server::collision::group_vector const &
-	groups() const;
-
-	sge::projectile::ghost::object &
-	get();
 private:
-	void
-	body_enter(
-		sge::projectile::body::object const &
-	);
+	sanguis::collision::world::group_vector const collision_groups_;
 
-	void
-	body_exit(
-		sge::projectile::body::object const &
-	);
+	sanguis::collision::world::body_enter_callback const body_enter_callback_;
 
-	template<
-		typename Function
+	sanguis::collision::world::body_exit_callback const body_exit_callback_;
+
+	sanguis::server::radius const radius_;
+
+	typedef
+	fcppt::scoped_ptr<
+		sanguis::collision::world::ghost
 	>
-	void
-	dispatch(
-		Function const &,
-		sge::projectile::body::object const &
-	);
+	ghost_scoped_ptr;
 
-	virtual
-	void
-	on_body_enter(
-		sanguis::server::collision::body_base &
-	) = 0;
-
-	virtual
-	void
-	on_body_exit(
-		sanguis::server::collision::body_base &
-	) = 0;
-
-	typedef fcppt::scoped_ptr<
-		sge::projectile::ghost::object
-	> ghost_scoped_ptr;
-
-	sanguis::server::collision::group_vector const groups_;
-
-	ghost_scoped_ptr ghost_;
-
-	fcppt::signal::scoped_connection const
-		collision_begin_connection_,
-		collision_end_connection_;
+	ghost_scoped_ptr impl_;
 };
 
 }

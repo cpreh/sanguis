@@ -1,4 +1,6 @@
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/collision/world/group.hpp>
+#include <sanguis/collision/world/group_vector.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/load/enemy_name.hpp>
 #include <sanguis/messages/add_enemy.hpp>
@@ -14,12 +16,9 @@
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/ai/base.hpp>
 #include <sanguis/server/ai/create_function.hpp>
-#include <sanguis/server/collision/group.hpp>
-#include <sanguis/server/collision/group_vector.hpp>
 #include <sanguis/server/damage/armor.hpp>
 #include <sanguis/server/entities/body_velocity_combiner.hpp>
 #include <sanguis/server/entities/circle_from_dim.hpp>
-#include <sanguis/server/entities/default_solid.hpp>
 #include <sanguis/server/entities/exp_area.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
@@ -76,8 +75,7 @@ sanguis::server::entities::enemies::enemy::enemy(
 						_etype
 					)
 				)
-			),
-			sanguis::server::entities::default_solid()
+			)
 		)
 	),
 	sanguis::server::entities::with_buffs(),
@@ -161,12 +159,12 @@ sanguis::server::entities::enemies::enemy::add_message(
 		);
 }
 
-sanguis::server::collision::group_vector
+sanguis::collision::world::group_vector
 sanguis::server::entities::enemies::enemy::collision_groups() const
 {
 	return
-		sanguis::server::collision::group_vector{
-			sanguis::server::collision::group::enemy
+		sanguis::collision::world::group_vector{
+			sanguis::collision::world::group::enemy
 		};
 }
 

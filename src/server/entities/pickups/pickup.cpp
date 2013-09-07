@@ -1,6 +1,8 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/pickup_type.hpp>
+#include <sanguis/collision/world/group.hpp>
+#include <sanguis/collision/world/group_vector.hpp>
 #include <sanguis/load/pickup_name.hpp>
 #include <sanguis/messages/add_pickup.hpp>
 #include <sanguis/messages/create.hpp>
@@ -10,10 +12,7 @@
 #include <sanguis/server/model_name.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
-#include <sanguis/server/collision/group.hpp>
-#include <sanguis/server/collision/group_vector.hpp>
 #include <sanguis/server/entities/circle_from_dim.hpp>
-#include <sanguis/server/entities/nonsolid.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_id.hpp>
@@ -54,8 +53,7 @@ sanguis::server::entities::pickups::pickup::pickup(
 						_ptype
 					)
 				)
-			),
-			sanguis::server::entities::nonsolid()
+			)
 		)
 	),
 	sanguis::server::entities::with_id(
@@ -131,12 +129,12 @@ sanguis::server::entities::pickups::pickup::collision_with_body(
 	);
 }
 
-sanguis::server::collision::group_vector
+sanguis::collision::world::group_vector
 sanguis::server::entities::pickups::pickup::collision_groups() const
 {
 	return
-		sanguis::server::collision::group_vector{
-			sanguis::server::collision::group::pickup
+		sanguis::collision::world::group_vector{
+			sanguis::collision::world::group::pickup
 		};
 }
 

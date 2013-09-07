@@ -1,14 +1,14 @@
 #include <sanguis/duration_second.hpp>
+#include <sanguis/collision/world/body_base.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/radius.hpp>
+#include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/speed.hpp>
-#include <sanguis/server/collision/body_base.hpp>
 #include <sanguis/server/collision/body.hpp>
-#include <sanguis/server/collision/make_groups.hpp>
 #include <sanguis/server/collision/optional_result.hpp>
+#include <sanguis/server/collision/position_callback.hpp>
 #include <sanguis/server/collision/result.hpp>
-#include <sanguis/server/collision/user_data.hpp>
 #include <sanguis/server/collision/with_world.hpp>
 #include <sanguis/server/entities/body_parameters.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
@@ -18,11 +18,8 @@
 #include <sanguis/server/entities/ifaces/with_body.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/entities/ifaces/with_links.hpp>
-#include <sge/projectile/world.hpp>
-#include <sge/projectile/body/scoped.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
-#include <fcppt/assert/pre.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
 #include <functional>
@@ -38,51 +35,38 @@ sanguis::server::entities::with_body::with_body(
 	sanguis::server::entities::ifaces::with_angle(),
 	sanguis::server::entities::ifaces::with_id(),
 	sanguis::server::entities::ifaces::with_links(),
-	sanguis::server::collision::body_base(),
-	radius_(
-		_params.radius()
+	sanguis::collision::world::body_base(),
+	angle_(
+		fcppt::literal<
+			sanguis::server::space_unit
+		>(
+			0
+		)
 	),
 	collision_body_(
-		fcppt::make_unique_ptr<
-			sanguis::server::collision::body
-		>(
-			sanguis::server::center(
-				sanguis::server::center::value_type::null()
-			),
-			sanguis::server::speed(
-				sanguis::server::speed::value_type::null()
-			),
-			sanguis::server::angle(
-				0.f
-			),
-			_params.radius(),
-			_params.solidity(),
-			sanguis::server::collision::user_data(
-				*this
-			),
+		_params.radius(),
+		*this,
+		sanguis::server::collision::position_callback(
 			std::bind(
 				&sanguis::server::entities::with_body::on_position_change,
 				this,
 				std::placeholders::_1
 			)
 		)
-	),
-	scoped_body_()
+		// TODO: Put the collision groups here!
+	)
 {
 }
 
 sanguis::server::entities::with_body::~with_body()
 {
-	FCPPT_ASSERT_PRE(
-		!scoped_body_
-	);
 }
 
 sanguis::server::center const
 sanguis::server::entities::with_body::center() const
 {
 	return
-		collision_body_->center();
+		collision_body_.center();
 }
 
 void
@@ -100,7 +84,7 @@ sanguis::server::angle const
 sanguis::server::entities::with_body::angle() const
 {
 	return
-		collision_body_->angle();
+		angle_;
 }
 
 void
@@ -108,7 +92,7 @@ sanguis::server::entities::with_body::center(
 	sanguis::server::center const &_center
 )
 {
-	collision_body_->center(
+	collision_body_.center(
 		_center
 	);
 }
@@ -118,16 +102,15 @@ sanguis::server::entities::with_body::angle(
 	sanguis::server::angle const _angle
 )
 {
-	collision_body_->angle(
-		_angle
-	);
+	angle_ =
+		_angle;
 }
 
 sanguis::server::radius const
 sanguis::server::entities::with_body::radius() const
 {
 	return
-		radius_;
+		collision_body_.radius();
 }
 
 bool
@@ -135,12 +118,14 @@ sanguis::server::entities::with_body::on_transfer(
 	sanguis::server::entities::transfer_parameters const &_params
 )
 {
-	collision_body_->angle(
-		_params.angle()
-	);
+	angle_ =
+		_params.angle();
 
-	collision_body_->center(
-		_params.center()
+	collision_body_.transfer(
+		_params.world(),
+		_params.center(),
+		this->initial_speed(),
+		this->collision_groups()
 	);
 
 	// Do this before we get a speed != 0
@@ -155,23 +140,6 @@ sanguis::server::entities::with_body::on_transfer(
 	)
 		return false;
 
-	collision_body_->speed(
-		this->initial_speed()
-	);
-
-	scoped_body_.take(
-		fcppt::make_unique_ptr<
-			sge::projectile::body::scoped
-		>(
-			_params.world(),
-			collision_body_->get(),
-			sanguis::server::collision::make_groups(
-				this->collision_groups(),
-				_params.global_groups()
-			)
-		)
-	);
-
 	return
 		sanguis::server::entities::with_ghosts::on_transfer(
 			_params
@@ -181,24 +149,15 @@ sanguis::server::entities::with_body::on_transfer(
 void
 sanguis::server::entities::with_body::on_destroy()
 {
-	scoped_body_.reset();
+	// TODO: Is this still needed?
+	collision_body_.destroy();
 
 	sanguis::server::entities::with_ghosts::on_destroy();
 }
 
-void
-sanguis::server::entities::with_body::on_position_change(
-	sanguis::server::center const &_center
-)
-{
-	sanguis::server::entities::with_ghosts::update_center(
-		_center
-	);
-}
-
 boost::logic::tribool const
 sanguis::server::entities::with_body::can_collide_with(
-	sanguis::server::collision::body_base const &_body_base
+	sanguis::collision::world::body_base const &_body_base
 ) const
 {
 	FCPPT_TRY_DYNAMIC_CAST(
@@ -211,12 +170,13 @@ sanguis::server::entities::with_body::can_collide_with(
 				*entity
 			);
 
-	return boost::logic::indeterminate;
+	return
+		boost::logic::indeterminate;
 }
 
 void
 sanguis::server::entities::with_body::collision(
-	sanguis::server::collision::body_base &_body_base
+	sanguis::collision::world::body_base &_body_base
 )
 {
 	FCPPT_TRY_DYNAMIC_CAST(
@@ -234,7 +194,8 @@ sanguis::server::entities::with_body::can_collide_with_body(
 	sanguis::server::entities::with_body const &
 ) const
 {
-	return boost::logic::indeterminate;
+	return
+		boost::logic::indeterminate;
 }
 
 void
@@ -249,7 +210,7 @@ sanguis::server::entities::with_body::reset_speed(
 	sanguis::server::speed const &_speed
 )
 {
-	collision_body_->speed(
+	collision_body_.speed(
 		_speed
 	);
 }
@@ -258,5 +219,15 @@ sanguis::server::speed const
 sanguis::server::entities::with_body::body_speed() const
 {
 	return
-		collision_body_->speed();
+		collision_body_.speed();
+}
+
+void
+sanguis::server::entities::with_body::on_position_change(
+	sanguis::server::center const _center
+)
+{
+	this->sanguis::server::entities::with_ghosts::update_center(
+		_center
+	);
 }

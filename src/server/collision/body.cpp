@@ -1,80 +1,40 @@
-#include <sanguis/server/angle.hpp>
+#include <sanguis/collision/center.hpp>
+#include <sanguis/collision/speed.hpp>
+#include <sanguis/collision/world/body.hpp>
+#include <sanguis/collision/world/body_parameters.hpp>
+#include <sanguis/collision/world/group_vector.hpp>
+#include <sanguis/collision/world/object.hpp>
+#include <sanguis/collision/world/position_change_callback.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/body.hpp>
-#include <sanguis/server/collision/create_circle.hpp>
-#include <sanguis/server/collision/from_sge_vector.hpp>
 #include <sanguis/server/collision/position_callback.hpp>
-#include <sanguis/server/collision/solidity.hpp>
-#include <sanguis/server/collision/to_sge_vector.hpp>
-#include <sanguis/server/collision/to_sge_user_data.hpp>
-#include <sanguis/server/collision/user_data_fwd.hpp>
-#include <sge/projectile/body/angular_velocity.hpp>
-#include <sge/projectile/body/linear_velocity.hpp>
-#include <sge/projectile/body/object.hpp>
-#include <sge/projectile/body/parameters.hpp>
-#include <sge/projectile/body/position.hpp>
-#include <sge/projectile/body/rotation.hpp>
-#include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/assert/pre.hpp>
 
 
 sanguis::server::collision::body::body(
-	sanguis::server::center const _center,
-	sanguis::server::speed const _speed,
-	sanguis::server::angle const _angle,
 	sanguis::server::radius const _radius,
-	sanguis::server::collision::solidity const &_solidity,
-	sanguis::server::collision::user_data const &_user_data,
+	sanguis::collision::world::body_base &_body_base,
 	sanguis::server::collision::position_callback const &_position_callback
 )
 :
-	body_(
-		fcppt::make_unique_ptr<
-			sge::projectile::body::object
-		>(
-			sge::projectile::body::parameters(
-				sge::projectile::body::position(
-					sanguis::server::collision::to_sge_vector(
-						_center.get()
-					)
-				),
-				sge::projectile::body::linear_velocity(
-					sanguis::server::collision::to_sge_vector(
-						_speed.get()
-					)
-				),
-				sge::projectile::body::angular_velocity(
-					0.f
-				),
-				sanguis::server::collision::create_circle(
-					_radius
-				),
-				sge::projectile::body::rotation(
-					_angle.get() // TODO: convert?
-				),
-				_solidity.get(),
-				sanguis::server::collision::to_sge_user_data(
-					_user_data
-				)
-			)
-		)
+	radius_(
+		_radius
+	),
+	body_base_(
+		_body_base
 	),
 	position_callback_(
 		_position_callback
 	),
-	position_connection_(
-		body_->position_change(
-			std::bind(
-				&sanguis::server::collision::body::on_position_change,
-				this,
-				std::placeholders::_1
-			)
-		)
-	)
+	temporary_center_(
+		sanguis::server::center::value_type::null()
+	),
+	temporary_speed_(
+		sanguis::server::speed::value_type::null()
+	),
+	body_()
 {
 }
 
@@ -84,11 +44,15 @@ sanguis::server::collision::body::~body()
 
 void
 sanguis::server::collision::body::center(
-	sanguis::server::center const &_center
+	sanguis::server::center const _center
 )
 {
-	body_->position(
-		sanguis::server::collision::to_sge_vector(
+	FCPPT_ASSERT_PRE(
+		body_
+	);
+
+	body_->center(
+		sanguis::collision::center(
 			_center.get()
 		)
 	);
@@ -98,20 +62,27 @@ sanguis::server::center const
 sanguis::server::collision::body::center() const
 {
 	return
-		sanguis::server::center(
-			sanguis::server::collision::from_sge_vector(
-				body_->position()
+		body_
+		?
+			sanguis::server::center(
+				body_->center().get()
 			)
-		);
+		:
+			temporary_center_
+		;
 }
 
 void
 sanguis::server::collision::body::speed(
-	sanguis::server::speed const &_speed
+	sanguis::server::speed const _speed
 )
 {
-	body_->linear_velocity(
-		sanguis::server::collision::to_sge_vector(
+	FCPPT_ASSERT_PRE(
+		body_
+	);
+
+	body_->speed(
+		sanguis::collision::speed(
 			_speed.get()
 		)
 	);
@@ -121,54 +92,74 @@ sanguis::server::speed const
 sanguis::server::collision::body::speed() const
 {
 	return
-		sanguis::server::speed(
-			sanguis::server::collision::from_sge_vector(
-				body_->linear_velocity()
+		body_
+		?
+			sanguis::server::speed(
+				body_->speed().get()
 			)
-		);
+		:
+			temporary_speed_
+		;
 }
 
-void
-sanguis::server::collision::body::angle(
-	sanguis::server::angle const &_angle
-)
-{
-	body_->rotation(
-		_angle.get()
-	);
-}
-
-sanguis::server::angle const
-sanguis::server::collision::body::angle() const
+sanguis::server::radius const
+sanguis::server::collision::body::radius() const
 {
 	return
-		sanguis::server::angle(
-			body_->rotation()
-		);
-}
-
-sge::projectile::body::object &
-sanguis::server::collision::body::get()
-{
-	return *body_;
-}
-
-sge::projectile::body::object const &
-sanguis::server::collision::body::get() const
-{
-	return *body_;
+		radius_;
 }
 
 void
-sanguis::server::collision::body::on_position_change(
-	sge::projectile::body::position const &_position
+sanguis::server::collision::body::transfer(
+	sanguis::collision::world::object &_world,
+	sanguis::server::center const _center,
+	sanguis::server::speed const _speed,
+	sanguis::collision::world::group_vector const &_collision_groups
 )
 {
-	position_callback_(
-		sanguis::server::center(
-			sanguis::server::collision::from_sge_vector(
-				_position.get()
+	this->destroy();
+
+	temporary_center_ =
+		_center;
+
+	temporary_speed_ =
+		_speed;
+
+	body_.take(
+		_world.create_body(
+			sanguis::collision::world::body_parameters(
+				sanguis::collision::center(
+					_center.get()
+				),
+				sanguis::collision::speed(
+					_speed.get()
+				),
+				sanguis::collision::radius(
+					radius_.get()
+				),
+				sanguis::collision::world::position_change_callback(
+					[
+						this
+					](
+						sanguis::collision::center const _new_center
+					)
+					{
+						position_callback_(
+							sanguis::server::center(
+								_new_center.get()
+							)
+						);
+					}
+				),
+				_collision_groups,
+				body_base_
 			)
 		)
 	);
+}
+
+void
+sanguis::server::collision::body::destroy()
+{
+	body_.reset();
 }
