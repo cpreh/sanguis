@@ -7,6 +7,8 @@ set(
 	include/sanguis/collision/duration.hpp
 	include/sanguis/collision/optional_result.hpp
 	include/sanguis/collision/optional_result_fwd.hpp
+	include/sanguis/collision/radius.hpp
+	include/sanguis/collision/radius_fwd.hpp
 	include/sanguis/collision/result.hpp
 	include/sanguis/collision/result_fwd.hpp
 	include/sanguis/collision/scale.hpp
@@ -17,6 +19,31 @@ set(
 	include/sanguis/collision/unit.hpp
 	include/sanguis/collision/vector2.hpp
 	include/sanguis/collision/vector2_fwd.hpp
+	include/sanguis/collision/world/body.hpp
+	include/sanguis/collision/world/body_base_fwd.hpp
+	include/sanguis/collision/world/body_callback.hpp
+	include/sanguis/collision/world/body_collision_callback.hpp
+	include/sanguis/collision/world/body_enter_callback.hpp
+	include/sanguis/collision/world/body_exit_callback.hpp
+	include/sanguis/collision/world/body_fwd.hpp
+	include/sanguis/collision/world/body_parameters.hpp
+	include/sanguis/collision/world/body_parameters_fwd.hpp
+	include/sanguis/collision/world/body_unique_ptr.hpp
+	include/sanguis/collision/world/create.hpp
+	include/sanguis/collision/world/ghost.hpp
+	include/sanguis/collision/world/ghost_fwd.hpp
+	include/sanguis/collision/world/ghost_parameters.hpp
+	include/sanguis/collision/world/ghost_parameters_fwd.hpp
+	include/sanguis/collision/world/ghost_unique_ptr.hpp
+	include/sanguis/collision/world/group.hpp
+	include/sanguis/collision/world/group_fwd.hpp
+	include/sanguis/collision/world/group_vector.hpp
+	include/sanguis/collision/world/object.hpp
+	include/sanguis/collision/world/object_fwd.hpp
+	include/sanguis/collision/world/object_unique_ptr.hpp
+	include/sanguis/collision/world/parameters.hpp
+	include/sanguis/collision/world/parameters_fwd.hpp
+	include/sanguis/collision/world/position_change_callback.hpp
 )
 
 set(
@@ -27,6 +54,18 @@ set(
 	src/aux/line_segment.cpp
 	src/aux/make_range.cpp
 	src/aux/rect_line_intersection.cpp
+	src/aux/world/group_relation.cpp
+	src/aux/world/projectile/body.cpp
+	src/aux/world/projectile/create_circle.cpp
+	src/aux/world/projectile/from_sge_user_data.cpp
+	src/aux/world/projectile/from_sge_vector.cpp
+	src/aux/world/projectile/ghost.cpp
+	src/aux/world/projectile/global_groups.cpp
+	src/aux/world/projectile/make_groups.cpp
+	src/aux/world/projectile/object.cpp
+	src/aux/world/projectile/to_sge_dim.cpp
+	src/aux/world/projectile/to_sge_user_data.cpp
+	src/aux/world/projectile/to_sge_vector.cpp
 	src/include/sanguis/collision/aux/adjust_speed.hpp
 	src/include/sanguis/collision/aux/cross2.hpp
 	src/include/sanguis/collision/aux/dir.hpp
@@ -45,9 +84,32 @@ set(
 	src/include/sanguis/collision/aux/rect.hpp
 	src/include/sanguis/collision/aux/rect_fwd.hpp
 	src/include/sanguis/collision/aux/rect_line_intersection.hpp
+	src/include/sanguis/collision/aux/world/group_pair.hpp
+	src/include/sanguis/collision/aux/world/group_pair_fwd.hpp
+	src/include/sanguis/collision/aux/world/group_pair_vector.hpp
+	src/include/sanguis/collision/aux/world/group_relation.hpp
+	src/include/sanguis/collision/aux/world/projectile/body.hpp
+	src/include/sanguis/collision/aux/world/projectile/create_circle.hpp
+	src/include/sanguis/collision/aux/world/projectile/from_sge_user_data.hpp
+	src/include/sanguis/collision/aux/world/projectile/from_sge_vector.hpp
+	src/include/sanguis/collision/aux/world/projectile/ghost.hpp
+	src/include/sanguis/collision/aux/world/projectile/global_groups.hpp
+	src/include/sanguis/collision/aux/world/projectile/global_groups_fwd.hpp
+	src/include/sanguis/collision/aux/world/projectile/make_groups.hpp
+	src/include/sanguis/collision/aux/world/projectile/object.hpp
+	src/include/sanguis/collision/aux/world/projectile/to_sge_dim.hpp
+	src/include/sanguis/collision/aux/world/projectile/to_sge_user_data.hpp
+	src/include/sanguis/collision/aux/world/projectile/to_sge_vector.hpp
 	src/result.cpp
 	src/test.cpp
 	src/test_move.cpp
+	src/world/body.cpp
+	src/world/body_parameters.cpp
+	src/world/create.cpp
+	src/world/ghost.cpp
+	src/world/ghost_parameters.cpp
+	src/world/object.cpp
+	src/world/parameters.cpp
 )
 
 set(
@@ -79,6 +141,7 @@ target_link_libraries(
 	sanguiscollision
 	sanguiscreator
 	${fcppt_core_TARGET}
+	${sgeprojectile_TARGET}
 )
 
 install(
