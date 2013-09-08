@@ -68,6 +68,10 @@ set(
 	src/aux/world/projectile/to_sge_dim.cpp
 	src/aux/world/projectile/to_sge_user_data.cpp
 	src/aux/world/projectile/to_sge_vector.cpp
+	src/aux/world/simple/body.cpp
+	src/aux/world/simple/ghost.cpp
+	src/aux/world/simple/groups_collide.cpp
+	src/aux/world/simple/object.cpp
 	src/include/sanguis/collision/aux/adjust_speed.hpp
 	src/include/sanguis/collision/aux/cross2.hpp
 	src/include/sanguis/collision/aux/dir.hpp
@@ -102,6 +106,17 @@ set(
 	src/include/sanguis/collision/aux/world/projectile/to_sge_dim.hpp
 	src/include/sanguis/collision/aux/world/projectile/to_sge_user_data.hpp
 	src/include/sanguis/collision/aux/world/projectile/to_sge_vector.hpp
+	src/include/sanguis/collision/aux/world/simple/body.hpp
+	src/include/sanguis/collision/aux/world/simple/body_fwd.hpp
+	src/include/sanguis/collision/aux/world/simple/body_remove_callback.hpp
+	src/include/sanguis/collision/aux/world/simple/body_unique_ptr.hpp
+	src/include/sanguis/collision/aux/world/simple/collides.hpp
+	src/include/sanguis/collision/aux/world/simple/ghost.hpp
+	src/include/sanguis/collision/aux/world/simple/ghost_fwd.hpp
+	src/include/sanguis/collision/aux/world/simple/ghost_remove_callback.hpp
+	src/include/sanguis/collision/aux/world/simple/ghost_unique_ptr.hpp
+	src/include/sanguis/collision/aux/world/simple/groups_collide.hpp
+	src/include/sanguis/collision/aux/world/simple/object.hpp
 	src/result.cpp
 	src/test.cpp
 	src/test_move.cpp

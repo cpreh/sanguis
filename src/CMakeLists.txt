@@ -1691,7 +1691,24 @@ target_link_libraries(
 	${fcppt_core_TARGET}
 	${fcppt_filesystem_TARGET}
 	${awl_TARGET}
-	${sge_TARGETS}
+	${sgeaudio_TARGET}
+	${sgecegui_TARGET}
+	${sgecharconv_TARGET}
+	${sgeconfig_TARGET}
+	${sgeconsole_TARGET}
+	${sgecore_TARGET}
+	${sgefont_TARGET}
+	${sgefontdraw_TARGET}
+	${sgeimagecolor_TARGET}
+	${sgeinput_TARGET}
+	${sgelog_TARGET}
+	${sgesprite_TARGET}
+	${sgerenderer_TARGET}
+	${sgesystems_TARGET}
+	${sgetexture_TARGET}
+	${sgetimer_TARGET}
+	${sgeviewport_TARGET}
+	${sgewindow_TARGET}
 	${CEGUI_LIBRARIES}
 	${alda_TARGET}
 	${FcpptThreads_LIBRARIES}
