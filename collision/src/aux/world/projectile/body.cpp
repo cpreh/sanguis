@@ -17,13 +17,13 @@
 #include <sge/projectile/body/parameters.hpp>
 #include <sge/projectile/body/position.hpp>
 #include <sge/projectile/body/rotation.hpp>
+#include <sge/projectile/body/scoped.hpp>
 #include <sge/projectile/body/solidity/solid.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 
 
 sanguis::collision::aux::world::projectile::body::body(
-	sge::projectile::world &_world,
-	sanguis::collision::aux::world::projectile::global_groups const &_global_groups,
 	sanguis::collision::world::body_parameters const &_parameters
 )
 :
@@ -71,6 +71,9 @@ sanguis::collision::aux::world::projectile::body::body(
 			)
 		)
 	),
+	collision_groups_(
+		_parameters.collision_groups()
+	),
 	position_connection_(
 		impl_.position_change(
 			[
@@ -89,19 +92,34 @@ sanguis::collision::aux::world::projectile::body::body(
 			}
 		)
 	),
-	scoped_(
-		_world,
-		impl_,
-		sanguis::collision::aux::world::projectile::make_groups(
-			_parameters.collision_groups(),
-			_global_groups
-		)
-	)
+	scoped_()
 {
 }
 
 sanguis::collision::aux::world::projectile::body::~body()
 {
+}
+
+void
+sanguis::collision::aux::world::projectile::body::activate(
+	sge::projectile::world &_world,
+	sanguis::collision::aux::world::projectile::global_groups const &_global_groups
+)
+{
+	scoped_.reset();
+
+	scoped_.take(
+		fcppt::make_unique_ptr<
+			sge::projectile::body::scoped
+		>(
+			_world,
+			impl_,
+			sanguis::collision::aux::world::projectile::make_groups(
+				collision_groups_,
+				_global_groups
+			)
+		)
+	);
 }
 
 void

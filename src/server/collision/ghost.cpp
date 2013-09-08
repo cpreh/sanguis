@@ -4,7 +4,7 @@
 #include <sanguis/collision/world/body_exit_callback.hpp>
 #include <sanguis/collision/world/ghost.hpp>
 #include <sanguis/collision/world/ghost_parameters.hpp>
-#include <sanguis/collision/world/group_vector.hpp>
+#include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/collision/world/object.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <sanguis/server/radius.hpp>
@@ -12,7 +12,7 @@
 
 
 sanguis::server::collision::ghost::ghost(
-	sanguis::collision::world::group_vector const &_collision_groups,
+	sanguis::collision::world::group_field const &_collision_groups,
 	sanguis::collision::world::body_enter_callback const &_body_enter_callback,
 	sanguis::collision::world::body_exit_callback const &_body_exit_callback,
 	sanguis::server::radius const _radius

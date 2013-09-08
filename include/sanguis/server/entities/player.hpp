@@ -4,7 +4,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/is_primary_weapon_fwd.hpp>
 #include <sanguis/perk_type_fwd.hpp>
-#include <sanguis/collision/world/group_vector.hpp>
+#include <sanguis/collision/world/group_field_fwd.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/exp.hpp>
@@ -162,7 +162,7 @@ private:
 	)
 	override;
 
-	sanguis::collision::world::group_vector
+	sanguis::collision::world::group_field const
 	collision_groups() const
 	override;
 

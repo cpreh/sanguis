@@ -2,6 +2,7 @@
 #define SANGUIS_COLLISION_WORLD_OBJECT_HPP_INCLUDED
 
 #include <sanguis/collision/duration.hpp>
+#include <sanguis/collision/world/body_fwd.hpp>
 #include <sanguis/collision/world/body_parameters_fwd.hpp>
 #include <sanguis/collision/world/body_unique_ptr.hpp>
 #include <sanguis/collision/world/ghost_parameters_fwd.hpp>
@@ -32,6 +33,12 @@ public:
 	sanguis::collision::world::body_unique_ptr
 	create_body(
 		sanguis::collision::world::body_parameters const &
+	) = 0;
+
+	virtual
+	void
+	activate_body(
+		sanguis::collision::world::body &
 	) = 0;
 
 	virtual

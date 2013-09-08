@@ -1,5 +1,5 @@
 #include <sanguis/collision/world/group.hpp>
-#include <sanguis/collision/world/group_vector.hpp>
+#include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/server/enter_sight_function.hpp>
 #include <sanguis/server/leave_sight_function.hpp>
 #include <sanguis/server/team.hpp>
@@ -36,11 +36,11 @@ sanguis::server::auras::update_sight::~update_sight()
 {
 }
 
-sanguis::collision::world::group_vector
+sanguis::collision::world::group_field const
 sanguis::server::auras::update_sight::collision_groups() const
 {
 	return
-		sanguis::collision::world::group_vector{
+		sanguis::collision::world::group_field{
 			sanguis::collision::world::group::sight_range
 		};
 }

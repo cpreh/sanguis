@@ -7,7 +7,7 @@
 #include <sanguis/collision/world/body_enter_callback.hpp>
 #include <sanguis/collision/world/body_exit_callback.hpp>
 #include <sanguis/collision/world/ghost_parameters_fwd.hpp>
-#include <sanguis/collision/world/group_vector.hpp>
+#include <sanguis/collision/world/group_field.hpp>
 
 
 namespace sanguis
@@ -26,7 +26,7 @@ public:
 		sanguis::collision::radius,
 		sanguis::collision::world::body_enter_callback const &,
 		sanguis::collision::world::body_exit_callback const &,
-		sanguis::collision::world::group_vector const &
+		sanguis::collision::world::group_field const &
 	);
 
 	sanguis::collision::center const
@@ -41,7 +41,7 @@ public:
 	sanguis::collision::world::body_exit_callback const &
 	body_exit_callback() const;
 
-	sanguis::collision::world::group_vector const &
+	sanguis::collision::world::group_field const &
 	collision_groups() const;
 private:
 	sanguis::collision::center center_;
@@ -52,7 +52,7 @@ private:
 
 	sanguis::collision::world::body_exit_callback body_exit_callback_;
 
-	sanguis::collision::world::group_vector collision_groups_;
+	sanguis::collision::world::group_field collision_groups_;
 };
 
 }

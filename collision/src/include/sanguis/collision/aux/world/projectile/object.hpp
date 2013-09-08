@@ -3,6 +3,7 @@
 
 #include <sanguis/collision/duration.hpp>
 #include <sanguis/collision/aux/world/projectile/global_groups.hpp>
+#include <sanguis/collision/world/body_fwd.hpp>
 #include <sanguis/collision/world/body_parameters_fwd.hpp>
 #include <sanguis/collision/world/body_unique_ptr.hpp>
 #include <sanguis/collision/world/ghost_parameters_fwd.hpp>
@@ -44,6 +45,12 @@ private:
 	sanguis::collision::world::body_unique_ptr
 	create_body(
 		sanguis::collision::world::body_parameters const &
+	)
+	override;
+
+	void
+	activate_body(
+		sanguis::collision::world::body &
 	)
 	override;
 

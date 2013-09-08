@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_AURAS_WEAPON_PICKUP_CANDIDATES_HPP_INCLUDED
 #define SANGUIS_SERVER_AURAS_WEAPON_PICKUP_CANDIDATES_HPP_INCLUDED
 
-#include <sanguis/collision/world/group_vector.hpp>
+#include <sanguis/collision/world/group_field_fwd.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/weapon_pickup_add_candidate_callback.hpp>
@@ -33,7 +33,7 @@ public:
 
 	~weapon_pickup_candidates();
 private:
-	sanguis::collision::world::group_vector
+	sanguis::collision::world::group_field const
 	collision_groups() const;
 
 	void

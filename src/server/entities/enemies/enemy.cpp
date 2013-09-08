@@ -1,6 +1,6 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/collision/world/group.hpp>
-#include <sanguis/collision/world/group_vector.hpp>
+#include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/load/enemy_name.hpp>
 #include <sanguis/messages/add_enemy.hpp>
@@ -159,11 +159,11 @@ sanguis::server::entities::enemies::enemy::add_message(
 		);
 }
 
-sanguis::collision::world::group_vector
+sanguis::collision::world::group_field const
 sanguis::server::entities::enemies::enemy::collision_groups() const
 {
 	return
-		sanguis::collision::world::group_vector{
+		sanguis::collision::world::group_field{
 			sanguis::collision::world::group::enemy
 		};
 }

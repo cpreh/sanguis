@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_PICKUPS_WEAPON_HPP_INCLUDED
 
 #include <sanguis/weapon_type_fwd.hpp>
-#include <sanguis/collision/world/group_vector.hpp>
+#include <sanguis/collision/world/group_field_fwd.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
@@ -60,7 +60,7 @@ private:
 	team() const
 	override;
 
-	sanguis::collision::world::group_vector
+	sanguis::collision::world::group_field const
 	collision_groups() const
 	override;
 

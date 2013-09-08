@@ -2,7 +2,7 @@
 #define SANGUIS_COLLISION_AUX_WORLD_PROJECTILE_MAKE_GROUPS_HPP_INCLUDED
 
 #include <sanguis/collision/aux/world/projectile/global_groups_fwd.hpp>
-#include <sanguis/collision/world/group_vector.hpp>
+#include <sanguis/collision/world/group_field.hpp>
 #include <sge/projectile/group/sequence.hpp>
 
 
@@ -19,7 +19,7 @@ namespace projectile
 
 sge::projectile::group::sequence const
 make_groups(
-	sanguis::collision::world::group_vector const &,
+	sanguis::collision::world::group_field const &,
 	sanguis::collision::aux::world::projectile::global_groups const &
 );
 

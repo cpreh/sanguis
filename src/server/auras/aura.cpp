@@ -1,5 +1,5 @@
 #include <sanguis/collision/world/body_base.hpp>
-#include <sanguis/collision/world/group_vector.hpp>
+#include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/aura.hpp>
@@ -54,7 +54,7 @@ sanguis::server::auras::aura::aura(
 {
 }
 
-sanguis::collision::world::group_vector
+sanguis::collision::world::group_field const
 sanguis::server::auras::aura::collision_groups() const
 {
 	return

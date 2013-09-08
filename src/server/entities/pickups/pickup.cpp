@@ -2,7 +2,7 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/pickup_type.hpp>
 #include <sanguis/collision/world/group.hpp>
-#include <sanguis/collision/world/group_vector.hpp>
+#include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/load/pickup_name.hpp>
 #include <sanguis/messages/add_pickup.hpp>
 #include <sanguis/messages/create.hpp>
@@ -129,11 +129,11 @@ sanguis::server::entities::pickups::pickup::collision_with_body(
 	);
 }
 
-sanguis::collision::world::group_vector
+sanguis::collision::world::group_field const
 sanguis::server::entities::pickups::pickup::collision_groups() const
 {
 	return
-		sanguis::collision::world::group_vector{
+		sanguis::collision::world::group_field{
 			sanguis::collision::world::group::pickup
 		};
 }

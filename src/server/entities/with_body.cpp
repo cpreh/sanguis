@@ -1,5 +1,6 @@
 #include <sanguis/duration_second.hpp>
 #include <sanguis/collision/world/body_base.hpp>
+#include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/radius.hpp>

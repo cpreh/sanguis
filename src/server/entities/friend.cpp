@@ -1,7 +1,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/friend_type.hpp>
 #include <sanguis/collision/world/group.hpp>
-#include <sanguis/collision/world/group_vector.hpp>
+#include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/load/friend_name.hpp>
 #include <sanguis/messages/add_friend.hpp>
 #include <sanguis/messages/create.hpp>
@@ -134,11 +134,11 @@ sanguis::server::entities::friend_::add_message(
 }
 
 
-sanguis::collision::world::group_vector
+sanguis::collision::world::group_field const
 sanguis::server::entities::friend_::collision_groups() const
 {
 	return
-		sanguis::collision::world::group_vector{
+		sanguis::collision::world::group_field{
 			sanguis::collision::world::group::player
 		};
 }

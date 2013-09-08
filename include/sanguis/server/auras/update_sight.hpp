@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_AURAS_UPDATE_SIGHT_HPP_INCLUDED
 #define SANGUIS_SERVER_AURAS_UPDATE_SIGHT_HPP_INCLUDED
 
-#include <sanguis/collision/world/group_vector.hpp>
+#include <sanguis/collision/world/group_field_fwd.hpp>
 #include <sanguis/server/enter_sight_function.hpp>
 #include <sanguis/server/leave_sight_function.hpp>
 #include <sanguis/server/radius.hpp>
@@ -33,7 +33,7 @@ public:
 
 	~update_sight();
 private:
-	sanguis::collision::world::group_vector
+	sanguis::collision::world::group_field const
 	collision_groups() const;
 
 	void

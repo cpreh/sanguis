@@ -58,11 +58,11 @@ private:
 
 	sge::projectile::ghost::object impl_;
 
-	sge::projectile::ghost::scoped scoped_;
-
 	fcppt::signal::scoped_connection const
 		collision_begin_connection_,
 		collision_end_connection_;
+
+	sge::projectile::ghost::scoped scoped_;
 };
 
 }

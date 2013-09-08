@@ -1,5 +1,5 @@
 #include <sanguis/collision/world/group.hpp>
-#include <sanguis/collision/world/group_vector.hpp>
+#include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/aura.hpp>
@@ -35,11 +35,11 @@ sanguis::server::auras::weapon_pickup_candidates::~weapon_pickup_candidates()
 {
 }
 
-sanguis::collision::world::group_vector
+sanguis::collision::world::group_field const
 sanguis::server::auras::weapon_pickup_candidates::collision_groups() const
 {
 	return
-		sanguis::collision::world::group_vector{
+		sanguis::collision::world::group_field{
 			sanguis::collision::world::group::weapon_pickup_sight
 		};
 }

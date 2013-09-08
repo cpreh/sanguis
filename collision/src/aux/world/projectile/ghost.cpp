@@ -53,14 +53,6 @@ sanguis::collision::aux::world::projectile::ghost::ghost(
 			)
 		)
 	),
-	scoped_(
-		_world,
-		impl_,
-		sanguis::collision::aux::world::projectile::make_groups(
-			_parameters.collision_groups(),
-			_global_groups
-		)
-	),
 	collision_begin_connection_(
 		this->make_connection(
 			&sge::projectile::ghost::object::body_enter,
@@ -71,6 +63,14 @@ sanguis::collision::aux::world::projectile::ghost::ghost(
 		this->make_connection(
 			&sge::projectile::ghost::object::body_exit,
 			_parameters.body_exit_callback().get()
+		)
+	),
+	scoped_(
+		_world,
+		impl_,
+		sanguis::collision::aux::world::projectile::make_groups(
+			_parameters.collision_groups(),
+			_global_groups
 		)
 	)
 {

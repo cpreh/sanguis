@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_AURAS_AURA_HPP_INCLUDED
 
 #include <sanguis/collision/world/body_base_fwd.hpp>
-#include <sanguis/collision/world/group_vector.hpp>
+#include <sanguis/collision/world/group_field_fwd.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/influence.hpp>
@@ -43,7 +43,7 @@ protected:
 	);
 private:
 	virtual
-	sanguis::collision::world::group_vector
+	sanguis::collision::world::group_field const
 	collision_groups() const;
 
 	boost::logic::tribool const

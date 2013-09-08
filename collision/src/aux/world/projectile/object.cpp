@@ -3,6 +3,7 @@
 #include <sanguis/collision/aux/world/projectile/from_sge_user_data.hpp>
 #include <sanguis/collision/aux/world/projectile/ghost.hpp>
 #include <sanguis/collision/aux/world/projectile/object.hpp>
+#include <sanguis/collision/world/body.hpp>
 #include <sanguis/collision/world/body_parameters_fwd.hpp>
 #include <sanguis/collision/world/body_unique_ptr.hpp>
 #include <sanguis/collision/world/ghost_parameters_fwd.hpp>
@@ -13,6 +14,7 @@
 #include <sge/projectile/time_increment.hpp>
 #include <sge/projectile/body/object.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
 #include <fcppt/config/external_end.hpp>
@@ -63,10 +65,23 @@ sanguis::collision::aux::world::projectile::object::create_body(
 		fcppt::make_unique_ptr<
 			sanguis::collision::aux::world::projectile::body
 		>(
-			impl_,
-			global_groups_,
 			_parameters
 		);
+}
+
+void
+sanguis::collision::aux::world::projectile::object::activate_body(
+	sanguis::collision::world::body &_body
+)
+{
+	fcppt::cast::static_downcast<
+		sanguis::collision::aux::world::projectile::body &
+	>(
+		_body
+	).activate(
+		impl_,
+		global_groups_
+	);
 }
 
 sanguis::collision::world::ghost_unique_ptr

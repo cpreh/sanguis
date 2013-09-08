@@ -1,6 +1,6 @@
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/collision/world/group.hpp>
-#include <sanguis/collision/world/group_vector.hpp>
+#include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/load/weapon_pickup_name.hpp>
 #include <sanguis/messages/add_weapon_pickup.hpp>
 #include <sanguis/messages/create.hpp>
@@ -91,11 +91,11 @@ sanguis::server::entities::pickups::weapon::team() const
 		team_;
 }
 
-sanguis::collision::world::group_vector
+sanguis::collision::world::group_field const
 sanguis::server::entities::pickups::weapon::collision_groups() const
 {
 	return
-		sanguis::collision::world::group_vector{
+		sanguis::collision::world::group_field{
 			sanguis::collision::world::group::weapon_pickup
 		};
 }

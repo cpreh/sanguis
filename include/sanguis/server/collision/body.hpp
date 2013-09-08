@@ -3,7 +3,7 @@
 
 #include <sanguis/collision/world/body_base_fwd.hpp>
 #include <sanguis/collision/world/body_fwd.hpp>
-#include <sanguis/collision/world/group_vector.hpp>
+#include <sanguis/collision/world/group_field_fwd.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/radius.hpp>
@@ -59,7 +59,7 @@ public:
 		sanguis::collision::world::object &,
 		sanguis::server::center,
 		sanguis::server::speed,
-		sanguis::collision::world::group_vector const & // TODO: Put this into the constructor
+		sanguis::collision::world::group_field const & // TODO: Put this into the constructor
 	);
 
 	void
@@ -74,11 +74,6 @@ private:
 	typedef fcppt::scoped_ptr<
 		sanguis::collision::world::body
 	> body_scoped_ptr;
-
-	// FIXME: Remove this hack!
-	sanguis::server::center temporary_center_;
-
-	sanguis::server::speed temporary_speed_;
 
 	body_scoped_ptr body_;
 };

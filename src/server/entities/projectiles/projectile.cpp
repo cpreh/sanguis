@@ -1,6 +1,6 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/projectile_type.hpp>
-#include <sanguis/collision/world/group_vector.hpp>
+#include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/messages/add_projectile.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
@@ -150,7 +150,7 @@ sanguis::server::entities::projectiles::projectile::collision_with_body(
 		);
 }
 
-sanguis::collision::world::group_vector
+sanguis::collision::world::group_field const
 sanguis::server::entities::projectiles::projectile::collision_groups() const
 {
 	return

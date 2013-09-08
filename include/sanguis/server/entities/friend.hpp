@@ -3,7 +3,7 @@
 
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/friend_type.hpp>
-#include <sanguis/collision/world/group_vector.hpp>
+#include <sanguis/collision/world/group_field_fwd.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/player_id.hpp>
@@ -73,7 +73,7 @@ private:
 	) const
 	override;
 
-	sanguis::collision::world::group_vector
+	sanguis::collision::world::group_field const
 	collision_groups() const
 	override;
 

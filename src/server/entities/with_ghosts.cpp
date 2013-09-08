@@ -52,14 +52,10 @@ sanguis::server::entities::with_ghosts::on_transfer(
 	for(
 		auto &ghost : ghosts_
 	)
-	{
-		ghost.destroy();
-
 		this->insert_ghost(
 			ghost,
 			_params.world()
 		);
-	}
 
 	return true;
 }

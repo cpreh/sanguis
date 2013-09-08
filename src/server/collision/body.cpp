@@ -2,7 +2,7 @@
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/world/body.hpp>
 #include <sanguis/collision/world/body_parameters.hpp>
-#include <sanguis/collision/world/group_vector.hpp>
+#include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/collision/world/object.hpp>
 #include <sanguis/collision/world/position_change_callback.hpp>
 #include <sanguis/server/center.hpp>
@@ -27,12 +27,6 @@ sanguis::server::collision::body::body(
 	),
 	position_callback_(
 		_position_callback
-	),
-	temporary_center_(
-		sanguis::server::center::value_type::null()
-	),
-	temporary_speed_(
-		sanguis::server::speed::value_type::null()
 	),
 	body_()
 {
@@ -61,15 +55,14 @@ sanguis::server::collision::body::center(
 sanguis::server::center const
 sanguis::server::collision::body::center() const
 {
-	return
+	FCPPT_ASSERT_PRE(
 		body_
-		?
-			sanguis::server::center(
-				body_->center().get()
-			)
-		:
-			temporary_center_
-		;
+	);
+
+	return
+		sanguis::server::center(
+			body_->center().get()
+		);
 }
 
 void
@@ -91,15 +84,14 @@ sanguis::server::collision::body::speed(
 sanguis::server::speed const
 sanguis::server::collision::body::speed() const
 {
-	return
+	FCPPT_ASSERT_PRE(
 		body_
-		?
-			sanguis::server::speed(
-				body_->speed().get()
-			)
-		:
-			temporary_speed_
-		;
+	);
+
+	return
+		sanguis::server::speed(
+			body_->speed().get()
+		);
 }
 
 sanguis::server::radius const
@@ -114,16 +106,10 @@ sanguis::server::collision::body::transfer(
 	sanguis::collision::world::object &_world,
 	sanguis::server::center const _center,
 	sanguis::server::speed const _speed,
-	sanguis::collision::world::group_vector const &_collision_groups
+	sanguis::collision::world::group_field const &_collision_groups
 )
 {
 	this->destroy();
-
-	temporary_center_ =
-		_center;
-
-	temporary_speed_ =
-		_speed;
 
 	body_.take(
 		_world.create_body(
@@ -155,6 +141,10 @@ sanguis::server::collision::body::transfer(
 				body_base_
 			)
 		)
+	);
+
+	_world.activate_body(
+		*body_
 	);
 }
 

@@ -5,7 +5,7 @@
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_type_to_is_primary.hpp>
 #include <sanguis/collision/world/group.hpp>
-#include <sanguis/collision/world/group_vector.hpp>
+#include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/messages/add_player.hpp>
 #include <sanguis/messages/add_own_player.hpp>
 #include <sanguis/messages/create.hpp>
@@ -516,11 +516,11 @@ sanguis::server::entities::player::on_drop_weapon(
 	);
 }
 
-sanguis::collision::world::group_vector
+sanguis::collision::world::group_field const
 sanguis::server::entities::player::collision_groups() const
 {
 	return
-		sanguis::collision::world::group_vector{
+		sanguis::collision::world::group_field{
 			sanguis::collision::world::group::player
 		};
 }

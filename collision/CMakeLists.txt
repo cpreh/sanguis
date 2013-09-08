@@ -37,8 +37,9 @@ set(
 	include/sanguis/collision/world/ghost_parameters_fwd.hpp
 	include/sanguis/collision/world/ghost_unique_ptr.hpp
 	include/sanguis/collision/world/group.hpp
+	include/sanguis/collision/world/group_field.hpp
+	include/sanguis/collision/world/group_field_fwd.hpp
 	include/sanguis/collision/world/group_fwd.hpp
-	include/sanguis/collision/world/group_vector.hpp
 	include/sanguis/collision/world/object.hpp
 	include/sanguis/collision/world/object_fwd.hpp
 	include/sanguis/collision/world/object_unique_ptr.hpp
