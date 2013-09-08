@@ -15,7 +15,7 @@ namespace tiles
 typedef
 fcppt::container::bitfield::object_from_enum<
 	sanguis::load::tiles::direction
->::type
+>
 orientation;
 
 }
