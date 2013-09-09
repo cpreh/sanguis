@@ -91,6 +91,13 @@ sanguis::server::entities::projectiles::grenade::on_transfer(
 	sanguis::server::entities::transfer_parameters const &_param
 )
 {
+	if(
+		!sanguis::server::entities::with_body::on_transfer(
+			_param
+		)
+	)
+		return false;
+
 	this->movement_speed().current(
 		std::min(
 			this->movement_speed().max(),
@@ -101,10 +108,7 @@ sanguis::server::entities::projectiles::grenade::on_transfer(
 		)
 	);
 
-	return
-		sanguis::server::entities::with_body::on_transfer(
-			_param
-		);
+	return true;
 }
 
 void

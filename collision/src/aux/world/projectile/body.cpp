@@ -13,12 +13,11 @@
 #include <sge/projectile/world_fwd.hpp>
 #include <sge/projectile/body/angular_velocity.hpp>
 #include <sge/projectile/body/linear_velocity.hpp>
-#include <sge/projectile/body/mass.hpp>
 #include <sge/projectile/body/parameters.hpp>
 #include <sge/projectile/body/position.hpp>
 #include <sge/projectile/body/rotation.hpp>
 #include <sge/projectile/body/scoped.hpp>
-#include <sge/projectile/body/solidity/solid.hpp>
+#include <sge/projectile/body/solidity/nonsolid.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
@@ -57,15 +56,7 @@ sanguis::collision::aux::world::projectile::body::body(
 					0
 				)
 			),
-			sge::projectile::body::solidity::solid(
-				sge::projectile::body::mass(
-					fcppt::literal<
-						sge::projectile::scalar
-					>(
-						1
-					)
-				)
-			),
+			sge::projectile::body::solidity::nonsolid(),
 			sanguis::collision::aux::world::projectile::to_sge_user_data(
 				_parameters.body_base()
 			)
