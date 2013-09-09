@@ -15,6 +15,7 @@
 #include <sanguis/server/collision/with_world.hpp>
 #include <sanguis/server/entities/speed.hpp>
 #include <sanguis/server/entities/with_body.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -47,7 +48,7 @@ sanguis::server::collision::with_world(
 			>(
 				_with_body.radius().get()
 				*
-				fcppt::ltieral<
+				fcppt::literal<
 					sanguis::collision::unit
 				>(
 					2
