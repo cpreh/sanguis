@@ -194,7 +194,7 @@ sanguis::collision::aux::world::simple::object::remove_body(
 	for(
 		auto const ghost : ghosts_
 	)
-		ghost->update_body(
+		ghost->remove_body(
 			_body
 		);
 }

@@ -63,6 +63,11 @@ public:
 	update_body(
 		sanguis::collision::aux::world::simple::body &
 	);
+
+	void
+	remove_body(
+		sanguis::collision::aux::world::simple::body &
+	);
 private:
 	sanguis::collision::aux::world::simple::ghost_remove_callback const ghost_remove_callback_;
 

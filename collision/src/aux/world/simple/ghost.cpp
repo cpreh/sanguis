@@ -120,3 +120,28 @@ sanguis::collision::aux::world::simple::ghost::update_body(
 		);
 	}
 }
+
+void
+sanguis::collision::aux::world::simple::ghost::remove_body(
+	sanguis::collision::aux::world::simple::body &_body
+)
+{
+	body_set::iterator const it(
+		bodies_.find(
+			&_body
+		)
+	);
+
+	if(
+		it != bodies_.end()
+	)
+	{
+		bodies_.erase(
+			it
+		);
+
+		body_exit_callback_.get()(
+			_body.body_base()
+		);
+	}
+}
