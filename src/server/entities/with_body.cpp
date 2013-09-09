@@ -75,7 +75,10 @@ sanguis::server::entities::with_body::world_collision(
 	sanguis::server::collision::result const &_result
 )
 {
-	// TODO: Use the position as well?
+	this->center(
+		_result.center()
+	);
+
 	this->reset_speed(
 		_result.speed()
 	);

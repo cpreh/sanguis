@@ -76,6 +76,9 @@ protected:
 		sanguis::client::draw2d::sprite::center const &
 	);
 
+	sanguis::client::draw2d::center const
+	float_center() const;
+
 	// with_orientation overrides
 	virtual
 	void

@@ -135,6 +135,13 @@ sanguis::client::draw2d::entities::container::center(
 	);
 }
 
+sanguis::client::draw2d::center const
+sanguis::client::draw2d::entities::container::float_center() const
+{
+	return
+		center_;
+}
+
 void
 sanguis::client::draw2d::entities::container::orientation(
 	sanguis::client::draw2d::sprite::rotation const _orientation

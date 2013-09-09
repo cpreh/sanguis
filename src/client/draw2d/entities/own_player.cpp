@@ -1,16 +1,13 @@
-#include <sanguis/client/draw2d/center.hpp>
 #include <sanguis/client/draw2d/collide_callback.hpp>
 #include <sanguis/client/draw2d/collide_parameters.hpp>
 #include <sanguis/client/draw2d/dim2.hpp>
 #include <sanguis/client/draw2d/optional_speed.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/transform_callback.hpp>
-#include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/entities/own_player.hpp>
 #include <sanguis/client/draw2d/entities/player.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
-#include <fcppt/math/vector/structure_cast.hpp>
 
 
 sanguis::client::draw2d::entities::own_player::own_player(
@@ -42,13 +39,7 @@ sanguis::client::draw2d::entities::own_player::update()
 		collide_(
 			sanguis::client::draw2d::collide_parameters(
 				this->movement_duration(),
-				sanguis::client::draw2d::center(
-					fcppt::math::vector::structure_cast<
-						sanguis::client::draw2d::vector2
-					>(
-						this->center().get()
-					)
-				),
+				this->float_center(),
 				this->speed(),
 				fcppt::math::dim::structure_cast<
 					sanguis::client::draw2d::dim2

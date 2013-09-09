@@ -5,6 +5,7 @@
 #include <sanguis/collision/optional_result.hpp>
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/test_move.hpp>
+#include <sanguis/collision/unit.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/space_unit.hpp>
@@ -45,6 +46,12 @@ sanguis::server::collision::with_world(
 				sanguis::collision::dim2::dim_wrapper::value
 			>(
 				_with_body.radius().get()
+				*
+				fcppt::ltieral<
+					sanguis::collision::unit
+				>(
+					2
+				)
 				*
 				pixels_per_meter
 			),
