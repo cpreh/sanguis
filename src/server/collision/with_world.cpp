@@ -5,7 +5,6 @@
 #include <sanguis/collision/optional_result.hpp>
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/test_move.hpp>
-#include <sanguis/collision/unit.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/space_unit.hpp>
@@ -15,9 +14,8 @@
 #include <sanguis/server/collision/with_world.hpp>
 #include <sanguis/server/entities/speed.hpp>
 #include <sanguis/server/entities/with_body.hpp>
-#include <fcppt/literal.hpp>
 #include <fcppt/cast/int_to_float.hpp>
-#include <fcppt/math/dim/fill.hpp>
+#include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 
 
@@ -43,16 +41,8 @@ sanguis::server::collision::with_world(
 				*
 				pixels_per_meter
 			),
-			fcppt::math::dim::fill<
-				sanguis::collision::dim2::dim_wrapper::value
-			>(
-				_with_body.radius().get()
-				*
-				fcppt::literal<
-					sanguis::collision::unit
-				>(
-					2
-				)
+			sanguis::collision::dim2(
+				_with_body.dim()
 				*
 				pixels_per_meter
 			),

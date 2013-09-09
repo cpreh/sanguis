@@ -5,11 +5,11 @@
 #include <sanguis/collision/world/group_field_fwd.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center_fwd.hpp>
+#include <sanguis/server/dim.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/speed_fwd.hpp>
 #include <sanguis/server/collision/body.hpp>
 #include <sanguis/server/collision/result_fwd.hpp>
-#include <sanguis/server/entities/body_parameters_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
@@ -47,7 +47,7 @@ class with_body
 public:
 	explicit
 	with_body(
-		sanguis::server::entities::body_parameters const &
+		sanguis::server::dim
 	);
 
 	~with_body();
@@ -81,6 +81,9 @@ public:
 
 	sanguis::server::radius const
 	radius() const;
+
+	sanguis::server::dim const
+	dim() const;
 protected:
 	// entities::base::on_transfer
 	bool
@@ -137,6 +140,8 @@ private:
 	on_position_change(
 		sanguis::server::center
 	);
+
+	sanguis::server::dim const dim_;
 
 	sanguis::server::angle angle_;
 

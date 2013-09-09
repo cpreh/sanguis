@@ -12,7 +12,6 @@
 #include <sanguis/server/model_name.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
-#include <sanguis/server/entities/circle_from_dim.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_id.hpp>
@@ -46,12 +45,10 @@ sanguis::server::entities::pickups::pickup::pickup(
 :
 	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::with_body(
-		sanguis::server::entities::circle_from_dim(
-			_load_context.entity_dim(
-				sanguis::server::model_name(
-					sanguis::load::pickup_name(
-						_ptype
-					)
+		_load_context.entity_dim(
+			sanguis::server::model_name(
+				sanguis::load::pickup_name(
+					_ptype
 				)
 			)
 		)

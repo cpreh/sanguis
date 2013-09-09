@@ -31,7 +31,6 @@
 #include <sanguis/server/auras/update_sight.hpp>
 #include <sanguis/server/damage/armor.hpp>
 #include <sanguis/server/entities/body_velocity_combiner.hpp>
-#include <sanguis/server/entities/circle_from_dim.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/player.hpp>
@@ -84,11 +83,9 @@ sanguis::server::entities::player::player(
 	sanguis::server::entities::body_velocity_combiner(),
 	sanguis::server::entities::with_auras(),
 	sanguis::server::entities::with_body(
-		sanguis::server::entities::circle_from_dim(
-			_load_context.entity_dim(
-				sanguis::server::model_name(
-					FCPPT_TEXT("player")
-				)
+		_load_context.entity_dim(
+			sanguis::server::model_name(
+				FCPPT_TEXT("player")
 			)
 		)
 	),

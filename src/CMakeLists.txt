@@ -856,12 +856,9 @@ set(
 	include/sanguis/server/entities/auto_weak_link_fwd.hpp
 	include/sanguis/server/entities/base.hpp
 	include/sanguis/server/entities/base_fwd.hpp
-	include/sanguis/server/entities/body_parameters.hpp
-	include/sanguis/server/entities/body_parameters_fwd.hpp
 	include/sanguis/server/entities/body_velocity_combiner.hpp
 	include/sanguis/server/entities/center_ghost.hpp
 	include/sanguis/server/entities/center_simple.hpp
-	include/sanguis/server/entities/circle_from_dim.hpp
 	include/sanguis/server/entities/enemies/base_difficulty.hpp
 	include/sanguis/server/entities/enemies/create.hpp
 	include/sanguis/server/entities/enemies/difficulty.hpp
@@ -1490,11 +1487,9 @@ set(
 	src/server/damage/wrapper.cpp
 	src/server/entities/auto_weak_link.cpp
 	src/server/entities/base.cpp
-	src/server/entities/body_parameters.cpp
 	src/server/entities/body_velocity_combiner.cpp
 	src/server/entities/center_ghost.cpp
 	src/server/entities/center_simple.cpp
-	src/server/entities/circle_from_dim.cpp
 	src/server/entities/enemies/base_difficulty.cpp
 	src/server/entities/enemies/create.cpp
 	src/server/entities/enemies/enemy.cpp

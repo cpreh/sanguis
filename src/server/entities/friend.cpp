@@ -16,7 +16,6 @@
 #include <sanguis/server/damage/armor.hpp>
 #include <sanguis/server/entities/body_velocity_combiner.hpp>
 #include <sanguis/server/entities/friend.hpp>
-#include <sanguis/server/entities/circle_from_dim.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_body.hpp>
@@ -58,12 +57,10 @@ sanguis::server::entities::friend_::friend_(
 		)
 	),
 	sanguis::server::entities::with_body(
-		sanguis::server::entities::circle_from_dim(
-			_load_context.entity_dim(
-				sanguis::server::model_name(
-					sanguis::load::friend_name(
-						_ftype
-					)
+		_load_context.entity_dim(
+			sanguis::server::model_name(
+				sanguis::load::friend_name(
+					_ftype
 				)
 			)
 		)

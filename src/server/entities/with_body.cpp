@@ -3,6 +3,7 @@
 #include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
+#include <sanguis/server/dim.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/speed.hpp>
@@ -11,7 +12,7 @@
 #include <sanguis/server/collision/position_callback.hpp>
 #include <sanguis/server/collision/result.hpp>
 #include <sanguis/server/collision/with_world.hpp>
-#include <sanguis/server/entities/body_parameters.hpp>
+#include <sanguis/server/entities/radius.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
@@ -28,7 +29,7 @@
 
 
 sanguis::server::entities::with_body::with_body(
-	sanguis::server::entities::body_parameters const &_params
+	sanguis::server::dim const _dim
 )
 :
 	sanguis::server::entities::with_ghosts(),
@@ -37,6 +38,9 @@ sanguis::server::entities::with_body::with_body(
 	sanguis::server::entities::ifaces::with_id(),
 	sanguis::server::entities::ifaces::with_links(),
 	sanguis::collision::world::body_base(),
+	dim_(
+		_dim
+	),
 	angle_(
 		fcppt::literal<
 			sanguis::server::space_unit
@@ -45,7 +49,9 @@ sanguis::server::entities::with_body::with_body(
 		)
 	),
 	collision_body_(
-		_params.radius(),
+		sanguis::server::entities::radius(
+			_dim
+		),
 		*this,
 		sanguis::server::collision::position_callback(
 			std::bind(
@@ -115,6 +121,13 @@ sanguis::server::entities::with_body::radius() const
 {
 	return
 		collision_body_.radius();
+}
+
+sanguis::server::dim const
+sanguis::server::entities::with_body::dim() const
+{
+	return
+		dim_;
 }
 
 bool

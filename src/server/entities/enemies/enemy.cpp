@@ -18,7 +18,6 @@
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/damage/armor.hpp>
 #include <sanguis/server/entities/body_velocity_combiner.hpp>
-#include <sanguis/server/entities/circle_from_dim.hpp>
 #include <sanguis/server/entities/exp_area.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
@@ -68,12 +67,10 @@ sanguis::server::entities::enemies::enemy::enemy(
 		)
 	),
 	sanguis::server::entities::with_body(
-		sanguis::server::entities::circle_from_dim(
-			_load_context.entity_dim(
-				sanguis::server::model_name(
-					sanguis::load::enemy_name(
-						_etype
-					)
+		_load_context.entity_dim(
+			sanguis::server::model_name(
+				sanguis::load::enemy_name(
+					_etype
 				)
 			)
 		)

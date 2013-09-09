@@ -14,7 +14,6 @@
 #include <sanguis/server/damage/no_armor.hpp>
 #include <sanguis/server/damage/list.hpp>
 #include <sanguis/server/entities/body_velocity_combiner.hpp>
-#include <sanguis/server/entities/circle_from_dim.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_health.hpp>
@@ -51,10 +50,8 @@ sanguis::server::entities::projectiles::projectile::projectile(
 	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::body_velocity_combiner(),
 	sanguis::server::entities::with_body(
-		sanguis::server::entities::circle_from_dim(
-			_load_context.entity_dim(
-				_model_name
-			)
+		_load_context.entity_dim(
+			_model_name
 		)
 	),
 	sanguis::server::entities::with_id(
