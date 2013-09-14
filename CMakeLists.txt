@@ -41,10 +41,6 @@ find_package(
 	system
 )
 
-#add_definitions(
-#	-D BOOST_ASIO_SEPARATE_COMPILATION
-#)
-
 include_directories(
 	${Boost_INCLUDE_DIRS}
 )
@@ -105,11 +101,15 @@ include_directories(
 	${awl_INCLUDE_DIRS}
 )
 
-# Find SGE
+option(
+	ENABLE_PROJECTILE
+	"Build the projectile collision backend"
+	OFF
+)
 
-find_package(
-	sge REQUIRED
-	COMPONENTS
+# Find SGE
+set(
+	NEEDED_SGE_COMPONENTS
 	audio
 	cegui
 	charconv
@@ -123,7 +123,6 @@ find_package(
 	input
 	log
 	parse
-	projectile
 	renderer
 	sprite
 	systems
@@ -131,6 +130,22 @@ find_package(
 	timer
 	viewport
 	window
+)
+
+if(
+	ENABLE_PROJECTILE
+)
+	list(
+		APPEND
+		NEEDED_SGE_COMPONENTS
+		projectile
+	)
+endif()
+
+find_package(
+	sge REQUIRED
+	COMPONENTS
+	"${NEEDED_SGE_COMPONENTS}"
 )
 
 add_definitions(

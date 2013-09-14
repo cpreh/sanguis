@@ -1,5 +1,5 @@
 set(
-	SANGUIS_CREATOR_INCLUDE_FILES
+	SANGUIS_CREATOR_FILES
 	include/sanguis/creator/background_grid.hpp
 	include/sanguis/creator/background_grid_fwd.hpp
 	include/sanguis/creator/background_tile.hpp
@@ -46,10 +46,6 @@ set(
 	include/sanguis/creator/top_parameters_fwd.hpp
 	include/sanguis/creator/top_result.hpp
 	include/sanguis/creator/top_result_fwd.hpp
-)
-
-set(
-	SANGUIS_CREATOR_SRC_FILES
 	src/aux/deserialization/background_grid.cpp
 	src/aux/deserialization/grid.cpp
 	src/aux/deserialization/opening_container.cpp
@@ -115,11 +111,6 @@ set(
 	src/tile_is_solid.cpp
 	src/top_parameters.cpp
 	src/top_result.cpp
-)
-
-set(
-	SANGUIS_CREATOR_FILES
-	"${SANGUIS_CREATOR_INCLUDE_FILES};${SANGUIS_CREATOR_SRC_FILES}"
 )
 
 fcppt_utils_add_source_groups(
