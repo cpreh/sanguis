@@ -1,6 +1,5 @@
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/dim2.hpp>
-#include <sanguis/collision/unit.hpp>
 #include <sanguis/collision/aux/make_range.hpp>
 #include <sanguis/creator/difference_type.hpp>
 #include <sanguis/creator/grid.hpp>
@@ -8,7 +7,6 @@
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/signed_pos.hpp>
 #include <sanguis/creator/tile_size.hpp>
-#include <fcppt/literal.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/container/grid/clamp_signed_pos.hpp>
 #include <fcppt/container/grid/make_pos_crange_start_end.hpp>
@@ -33,16 +31,6 @@ sanguis::collision::aux::make_range(
 		)
 	);
 
-	sanguis::collision::dim2 const half_size(
-		_size
-		/
-		fcppt::literal<
-			sanguis::collision::unit
-		>(
-			2
-		)
-	);
-
 	sanguis::creator::pos const lower(
 		fcppt::container::grid::clamp_signed_pos(
 			fcppt::math::vector::structure_cast<
@@ -50,7 +38,7 @@ sanguis::collision::aux::make_range(
 			>(
 				_center.get()
 				-
-				half_size
+				_size
 			)
 			/
 			tile_size,
@@ -66,7 +54,7 @@ sanguis::collision::aux::make_range(
 				>(
 					_center.get()
 					+
-					half_size
+					_size
 				),
 				tile_size
 			),
