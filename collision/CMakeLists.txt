@@ -11,7 +11,6 @@ set(
 	include/sanguis/collision/radius_fwd.hpp
 	include/sanguis/collision/result.hpp
 	include/sanguis/collision/result_fwd.hpp
-	include/sanguis/collision/scale.hpp
 	include/sanguis/collision/speed.hpp
 	include/sanguis/collision/speed_fwd.hpp
 	include/sanguis/collision/test.hpp

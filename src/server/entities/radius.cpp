@@ -1,17 +1,7 @@
-#include <sanguis/pixels_per_meter.hpp>
-#include <sanguis/collision/scale.hpp>
-#include <sanguis/creator/tile_size.hpp>
 #include <sanguis/server/dim.hpp>
-#include <sanguis/server/log.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/entities/radius.hpp>
-#include <fcppt/literal.hpp>
-#include <fcppt/text.hpp>
-#include <fcppt/cast/int_to_float.hpp>
-#include <fcppt/log/output.hpp>
-#include <fcppt/log/warning.hpp>
-#include <fcppt/math/dim/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cmath>
 #include <fcppt/config/external_end.hpp>
@@ -44,62 +34,16 @@ sanguis::server::entities::radius(
 	sanguis::server::dim const &_dim
 )
 {
-	sanguis::server::radius const result(
-		std::sqrt(
-			quad_half(
-				_dim.w()
-			)
-			+
-			quad_half(
-				_dim.h()
-			)
-		)
-		/
-		fcppt::cast::int_to_float<
-			sanguis::server::space_unit
-		>(
-			sanguis::collision::scale()
-		)
-	);
-
-	sanguis::server::space_unit const max_radius(
-		fcppt::cast::int_to_float<
-			sanguis::server::space_unit
-		>(
-			sanguis::creator::tile_size::value
-		)
-		/
-		fcppt::cast::int_to_float<
-			sanguis::server::space_unit
-		>(
-			sanguis::pixels_per_meter()
-		)
-		/
-		fcppt::literal<
-			sanguis::server::space_unit
-		>(
-			2.5
-		)
-	);
-
-	if(
-		result.get() > max_radius
-	)
-	{
-		FCPPT_LOG_WARNING(
-			sanguis::server::log(),
-			fcppt::log::_
-				<< FCPPT_TEXT("Radius ")
-				<< result
-				<< FCPPT_TEXT(" for an entity is too large, reducing it.")
-		);
-
-		return
-			sanguis::server::radius(
-				max_radius
-			);
-	}
-
 	return
-		result;
+		sanguis::server::radius(
+			std::sqrt(
+				quad_half(
+					_dim.w()
+				)
+				+
+				quad_half(
+					_dim.h()
+				)
+			)
+		);
 }

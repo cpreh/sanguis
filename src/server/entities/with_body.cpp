@@ -12,6 +12,7 @@
 #include <sanguis/server/collision/position_callback.hpp>
 #include <sanguis/server/collision/result.hpp>
 #include <sanguis/server/collision/with_world.hpp>
+#include <sanguis/server/entities/check_dim.hpp>
 #include <sanguis/server/entities/radius.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/entities/with_body.hpp>
@@ -39,7 +40,9 @@ sanguis::server::entities::with_body::with_body(
 	sanguis::server::entities::ifaces::with_links(),
 	sanguis::collision::world::body_base(),
 	dim_(
-		_dim
+		sanguis::server::entities::check_dim(
+			_dim
+		)
 	),
 	angle_(
 		fcppt::literal<
@@ -50,7 +53,7 @@ sanguis::server::entities::with_body::with_body(
 	),
 	collision_body_(
 		sanguis::server::entities::radius(
-			_dim
+			dim_
 		),
 		*this,
 		sanguis::server::collision::position_callback(
