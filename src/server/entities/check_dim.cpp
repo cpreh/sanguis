@@ -1,4 +1,5 @@
 #include <sanguis/pixels_per_meter.hpp>
+#include <sanguis/collision/scale.hpp>
 #include <sanguis/creator/tile_size.hpp>
 #include <sanguis/server/dim.hpp>
 #include <sanguis/server/log.hpp>
@@ -78,15 +79,21 @@ sanguis::server::entities::check_dim(
 	sanguis::server::dim const _dim
 )
 {
-	return
+	sanguis::server::dim const scaled(
 		_dim
+		/
+		sanguis::collision::scale()
+	);
+
+	return
+		scaled
 		/
 		std::max(
 			reduction_factor(
-				_dim.w()
+				scaled.w()
 			),
 			reduction_factor(
-				_dim.h()
+				scaled.h()
 			)
 		);
 }
