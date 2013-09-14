@@ -210,4 +210,11 @@ sanguis::collision::aux::world::simple::object::remove_ghost(
 		)
 		== 1u
 	);
+
+	for(
+		auto body : bodies_
+	)
+		_ghost.remove_body(
+			*body
+		);
 }

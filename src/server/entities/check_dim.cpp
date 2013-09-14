@@ -11,9 +11,6 @@
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <algorithm>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace
@@ -39,36 +36,20 @@ sanguis::server::space_unit const max_side_length(
 	)
 );
 
-sanguis::server::space_unit
-reduction_factor(
+void
+check_size(
 	sanguis::server::space_unit const _value
 )
 {
 	if(
 		_value > max_side_length
 	)
-	{
 		FCPPT_LOG_WARNING(
 			sanguis::server::log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("Side length ")
 				<< _value
 				<< FCPPT_TEXT(" for an entity is too large!")
-				//<< FCPPT_TEXT(" for an entity is too large, reducing it.")
-		);
-
-		/*
-		return
-			_value
-			/
-			max_side_length;*/
-	}
-
-	return
-		fcppt::literal<
-			sanguis::server::space_unit
-		>(
-			1
 		);
 }
 
@@ -85,15 +66,14 @@ sanguis::server::entities::check_dim(
 		sanguis::collision::scale()
 	);
 
+	check_size(
+		scaled.w()
+	);
+
+	check_size(
+		scaled.h()
+	);
+
 	return
-		scaled
-		/
-		std::max(
-			reduction_factor(
-				scaled.w()
-			),
-			reduction_factor(
-				scaled.h()
-			)
-		);
+		scaled;
 }
