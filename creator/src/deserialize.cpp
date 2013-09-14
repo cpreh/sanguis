@@ -1,7 +1,7 @@
 #include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/deserialize.hpp>
 #include <sanguis/creator/top_result.hpp>
-#include <sanguis/creator/aux/deserialization/top_result.hpp>
+#include <sanguis/creator/aux_/deserialization/top_result.hpp>
 #include <sge/parse/result_code.hpp>
 #include <sge/parse/result.hpp>
 #include <sge/parse/json/array.hpp>
@@ -37,7 +37,7 @@ sanguis::creator::deserialize(
 		);
 
 	return
-		sanguis::creator::aux::deserialization::top_result(
+		sanguis::creator::aux_::deserialization::top_result(
 			result.object()
 		);
 }

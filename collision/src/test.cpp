@@ -1,7 +1,7 @@
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/dim2.hpp>
 #include <sanguis/collision/test.hpp>
-#include <sanguis/collision/aux/make_range.hpp>
+#include <sanguis/collision/aux_/make_range.hpp>
 #include <sanguis/creator/grid_crange.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/creator/tile_is_solid.hpp>
@@ -17,7 +17,7 @@ sanguis::collision::test(
 	for(
 		auto const &entry
 		:
-		sanguis::collision::aux::make_range(
+		sanguis::collision::aux_::make_range(
 			_grid,
 			_center,
 			_size

@@ -46,65 +46,65 @@ set(
 	include/sanguis/creator/top_parameters_fwd.hpp
 	include/sanguis/creator/top_result.hpp
 	include/sanguis/creator/top_result_fwd.hpp
-	src/aux/deserialization/background_grid.cpp
-	src/aux/deserialization/grid.cpp
-	src/aux/deserialization/opening_container.cpp
-	src/aux/deserialization/spawn.cpp
-	src/aux/deserialization/spawn_container.cpp
-	src/aux/deserialization/top_result.cpp
-	src/aux/find_opposing_cell.cpp
-	src/aux/generator_map.cpp
-	src/aux/generators/lines.cpp
-	src/aux/generators/maze.cpp
-	src/aux/neumann_neighbors.cpp
-	src/aux/parameters.cpp
-	src/aux/perimeter_to_coords.cpp
-	src/aux/result.cpp
-	src/aux/serialization/background_grid.cpp
-	src/aux/serialization/grid.cpp
-	src/aux/serialization/opening_container.cpp
-	src/aux/serialization/spawn.cpp
-	src/aux/serialization/spawn_container.cpp
-	src/aux/serialization/top_result.cpp
+	src/aux_/deserialization/background_grid.cpp
+	src/aux_/deserialization/grid.cpp
+	src/aux_/deserialization/opening_container.cpp
+	src/aux_/deserialization/spawn.cpp
+	src/aux_/deserialization/spawn_container.cpp
+	src/aux_/deserialization/top_result.cpp
+	src/aux_/find_opposing_cell.cpp
+	src/aux_/generator_map.cpp
+	src/aux_/generators/lines.cpp
+	src/aux_/generators/maze.cpp
+	src/aux_/neumann_neighbors.cpp
+	src/aux_/parameters.cpp
+	src/aux_/perimeter_to_coords.cpp
+	src/aux_/result.cpp
+	src/aux_/serialization/background_grid.cpp
+	src/aux_/serialization/grid.cpp
+	src/aux_/serialization/opening_container.cpp
+	src/aux_/serialization/spawn.cpp
+	src/aux_/serialization/spawn_container.cpp
+	src/aux_/serialization/top_result.cpp
 	src/deserialize.cpp
 	src/exception.cpp
 	src/generate.cpp
 	src/generator_count.cpp
 	src/generator_index.cpp
-	src/include/sanguis/creator/aux/bresenham.hpp
-	src/include/sanguis/creator/aux/deserialization/background_grid.hpp
-	src/include/sanguis/creator/aux/deserialization/grid.hpp
-	src/include/sanguis/creator/aux/deserialization/opening_container.hpp
-	src/include/sanguis/creator/aux/deserialization/spawn.hpp
-	src/include/sanguis/creator/aux/deserialization/spawn_container.hpp
-	src/include/sanguis/creator/aux/deserialization/tile_grid.hpp
-	src/include/sanguis/creator/aux/deserialization/top_result.hpp
-	src/include/sanguis/creator/aux/filled_rect.hpp
-	src/include/sanguis/creator/aux/find_opposing_cell.hpp
-	src/include/sanguis/creator/aux/generator_function.hpp
-	src/include/sanguis/creator/aux/generator_map.hpp
-	src/include/sanguis/creator/aux/generator_map_type.hpp
-	src/include/sanguis/creator/aux/generators/lines.hpp
-	src/include/sanguis/creator/aux/generators/maze.hpp
-	src/include/sanguis/creator/aux/neighbor_array.hpp
-	src/include/sanguis/creator/aux/neighbor_array_fwd.hpp
-	src/include/sanguis/creator/aux/neumann_neighbors.hpp
-	src/include/sanguis/creator/aux/parameters.hpp
-	src/include/sanguis/creator/aux/parameters_fwd.hpp
-	src/include/sanguis/creator/aux/perimeter_to_coords.hpp
-	src/include/sanguis/creator/aux/rand_value.hpp
-	src/include/sanguis/creator/aux/randgen.hpp
-	src/include/sanguis/creator/aux/randgen_fwd.hpp
-	src/include/sanguis/creator/aux/rect.hpp
-	src/include/sanguis/creator/aux/result.hpp
-	src/include/sanguis/creator/aux/result_fwd.hpp
-	src/include/sanguis/creator/aux/serialization/background_grid.hpp
-	src/include/sanguis/creator/aux/serialization/grid.hpp
-	src/include/sanguis/creator/aux/serialization/opening_container.hpp
-	src/include/sanguis/creator/aux/serialization/spawn.hpp
-	src/include/sanguis/creator/aux/serialization/spawn_container.hpp
-	src/include/sanguis/creator/aux/serialization/tile_grid.hpp
-	src/include/sanguis/creator/aux/serialization/top_result.hpp
+	src/include/sanguis/creator/aux_/bresenham.hpp
+	src/include/sanguis/creator/aux_/deserialization/background_grid.hpp
+	src/include/sanguis/creator/aux_/deserialization/grid.hpp
+	src/include/sanguis/creator/aux_/deserialization/opening_container.hpp
+	src/include/sanguis/creator/aux_/deserialization/spawn.hpp
+	src/include/sanguis/creator/aux_/deserialization/spawn_container.hpp
+	src/include/sanguis/creator/aux_/deserialization/tile_grid.hpp
+	src/include/sanguis/creator/aux_/deserialization/top_result.hpp
+	src/include/sanguis/creator/aux_/filled_rect.hpp
+	src/include/sanguis/creator/aux_/find_opposing_cell.hpp
+	src/include/sanguis/creator/aux_/generator_function.hpp
+	src/include/sanguis/creator/aux_/generator_map.hpp
+	src/include/sanguis/creator/aux_/generator_map_type.hpp
+	src/include/sanguis/creator/aux_/generators/lines.hpp
+	src/include/sanguis/creator/aux_/generators/maze.hpp
+	src/include/sanguis/creator/aux_/neighbor_array.hpp
+	src/include/sanguis/creator/aux_/neighbor_array_fwd.hpp
+	src/include/sanguis/creator/aux_/neumann_neighbors.hpp
+	src/include/sanguis/creator/aux_/parameters.hpp
+	src/include/sanguis/creator/aux_/parameters_fwd.hpp
+	src/include/sanguis/creator/aux_/perimeter_to_coords.hpp
+	src/include/sanguis/creator/aux_/rand_value.hpp
+	src/include/sanguis/creator/aux_/randgen.hpp
+	src/include/sanguis/creator/aux_/randgen_fwd.hpp
+	src/include/sanguis/creator/aux_/rect.hpp
+	src/include/sanguis/creator/aux_/result.hpp
+	src/include/sanguis/creator/aux_/result_fwd.hpp
+	src/include/sanguis/creator/aux_/serialization/background_grid.hpp
+	src/include/sanguis/creator/aux_/serialization/grid.hpp
+	src/include/sanguis/creator/aux_/serialization/opening_container.hpp
+	src/include/sanguis/creator/aux_/serialization/spawn.hpp
+	src/include/sanguis/creator/aux_/serialization/spawn_container.hpp
+	src/include/sanguis/creator/aux_/serialization/tile_grid.hpp
+	src/include/sanguis/creator/aux_/serialization/top_result.hpp
 	src/randgen.cpp
 	src/serialize.cpp
 	src/spawn.cpp

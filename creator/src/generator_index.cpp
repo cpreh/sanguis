@@ -1,7 +1,7 @@
 #include <sanguis/creator/generator_count_type.hpp>
 #include <sanguis/creator/generator_index.hpp>
 #include <sanguis/creator/name.hpp>
-#include <sanguis/creator/aux/generator_map.hpp>
+#include <sanguis/creator/aux_/generator_map.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -17,10 +17,10 @@ sanguis::creator::generator_index(
 	// TODO: Maybe we should keep the generators in an array instead
 	return
 		std::next(
-			sanguis::creator::aux::generator_map().begin(),
+			sanguis::creator::aux_::generator_map().begin(),
 			fcppt::cast::size<
 				std::iterator_traits<
-					sanguis::creator::aux::generator_map_type::const_iterator
+					sanguis::creator::aux_::generator_map_type::const_iterator
 				>::difference_type
 			>(
 				fcppt::cast::to_signed(

@@ -26,20 +26,20 @@ update_cmake \
 	include \
 	-n \
 	src \
-	src/include/sanguis/collision/aux \
-	src/aux \
-	src/include/sanguis/collision/aux/world \
-	src/aux/world \
+	src/include/sanguis/collision/aux_ \
+	src/aux_ \
+	src/include/sanguis/collision/aux_/world \
+	src/aux_/world \
 	-r \
 	src/world \
-	src/include/sanguis/collision/aux/world/simple \
-	src/aux/world/simple
+	src/include/sanguis/collision/aux_/world/simple \
+	src/aux_/world/simple
 
 
 update_cmake \
 	CMakeLists.txt \
 	SANGUIS_COLLISION_PROJECTILE_FILES \
-	src/include/sanguis/collision/aux/world/projectile \
-	src/aux/world/projectile
+	src/include/sanguis/collision/aux_/world/projectile \
+	src/aux_/world/projectile
 
 popd > /dev/null

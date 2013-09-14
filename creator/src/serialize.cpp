@@ -1,7 +1,7 @@
 #include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/top_result_fwd.hpp>
 #include <sanguis/creator/serialize.hpp>
-#include <sanguis/creator/aux/serialization/top_result.hpp>
+#include <sanguis/creator/aux_/serialization/top_result.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/start.hpp>
@@ -20,7 +20,7 @@ sanguis::creator::serialize(
 		!sge::parse::json::output::to_stream(
 			_stream,
 			sge::parse::json::start(
-				sanguis::creator::aux::serialization::top_result(
+				sanguis::creator::aux_::serialization::top_result(
 					_top_result
 				)
 			)
