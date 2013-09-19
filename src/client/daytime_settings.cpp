@@ -10,6 +10,9 @@
 #include <fcppt/time/parse_time.hpp>
 #include <fcppt/extract_from_string.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/fusion/adapted/struct/adapt_struct.hpp>
@@ -63,6 +66,9 @@ struct overwrite_members
 
 }
 
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_GCC_WARNING(-Weffc++)
+
 BOOST_FUSION_ADAPT_STRUCT(
 	struct std::tm,
 	(int, tm_sec)
@@ -75,6 +81,8 @@ BOOST_FUSION_ADAPT_STRUCT(
 	(int, tm_yday)
 	(int, tm_isdst)
 )
+
+FCPPT_PP_POP_WARNING
 
 sanguis::client::daytime_settings::daytime_settings(
 	sge::console::object &_console

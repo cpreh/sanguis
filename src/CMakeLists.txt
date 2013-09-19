@@ -1699,6 +1699,7 @@ target_link_libraries(
 	${sgeimagecolor_TARGET}
 	${sgeinput_TARGET}
 	${sgelog_TARGET}
+	${sgeparse_TARGET}
 	${sgesprite_TARGET}
 	${sgerenderer_TARGET}
 	${sgesystems_TARGET}
