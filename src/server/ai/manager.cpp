@@ -43,7 +43,7 @@ sanguis::server::ai::manager::manager(
 			sanguis::server::auras::aggro
 		>(
 			sanguis::server::radius(
-				20.f // TODO
+				1000.f // TODO
 			),
 			_me.team(),
 			std::bind(

@@ -33,7 +33,7 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 		sanguis::projectile_type::simple_bullet,
 		_team,
 		sanguis::server::entities::movement_speed(
-			10.f
+			500.f
 		),
 		sanguis::server::model_name(
 			FCPPT_TEXT("bullet")

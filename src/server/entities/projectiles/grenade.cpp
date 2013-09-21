@@ -51,7 +51,7 @@ sanguis::server::entities::projectiles::grenade::grenade(
 		sanguis::aoe_projectile_type::grenade,
 		_team,
 		sanguis::server::entities::movement_speed(
-			10.f
+			500.f
 		),
 		_load_context,
 		sanguis::server::entities::projectiles::life_time(

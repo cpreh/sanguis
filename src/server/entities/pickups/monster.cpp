@@ -71,7 +71,7 @@ sanguis::server::entities::pickups::monster::do_pickup(
 				100.f
 			),
 			sanguis::server::entities::movement_speed(
-				2.f
+				100.f
 			),
 			sanguis::server::ai::create_simple(
 				diff_clock_,

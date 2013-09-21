@@ -33,7 +33,7 @@ sanguis::server::entities::enemies::factory::wolf(
 				3.f
 			),
 			sanguis::server::entities::movement_speed(
-				1.7f
+				85.f
 			),
 			sanguis::server::ai::create_simple(
 				_parameters.diff_clock(),

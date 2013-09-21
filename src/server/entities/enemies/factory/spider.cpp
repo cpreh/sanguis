@@ -33,7 +33,7 @@ sanguis::server::entities::enemies::factory::spider(
 				12.f
 			),
 			sanguis::server::entities::movement_speed(
-				1.5f
+				75.f
 			),
 			sanguis::server::ai::create_simple(
 				_parameters.diff_clock(),

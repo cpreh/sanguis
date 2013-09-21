@@ -35,7 +35,7 @@ sanguis::server::entities::enemies::factory::maggot(
 				_parameters.difficulty().get()
 			),
 			sanguis::server::entities::movement_speed(
-				0.8f
+				40.f
 			),
 			sanguis::server::ai::create_simple(
 				_parameters.diff_clock(),

@@ -272,7 +272,6 @@ set(
 	include/sanguis/client/draw2d/sunlight/sun_angle.hpp
 	include/sanguis/client/draw2d/sunlight/time_to_gregorian.hpp
 	include/sanguis/client/draw2d/transform_callback.hpp
-	include/sanguis/client/draw2d/translate/pixels_per_meter.hpp
 	include/sanguis/client/draw2d/translate/scalar_from_client.hpp
 	include/sanguis/client/draw2d/translate/scalar_to_client.hpp
 	include/sanguis/client/draw2d/translate/vector_from_client.hpp
@@ -750,7 +749,6 @@ set(
 	include/sanguis/perk_type_fwd.hpp
 	include/sanguis/pickup_type.hpp
 	include/sanguis/pickup_type_fwd.hpp
-	include/sanguis/pixels_per_meter.hpp
 	include/sanguis/primary_weapon_type.hpp
 	include/sanguis/primary_weapon_type_fwd.hpp
 	include/sanguis/projectile_type.hpp
@@ -1142,8 +1140,6 @@ set(
 	include/sanguis/server/world/center_in_grid_pos.hpp
 	include/sanguis/server/world/context.hpp
 	include/sanguis/server/world/context_fwd.hpp
-	include/sanguis/server/world/convert_pos.hpp
-	include/sanguis/server/world/convert_unit.hpp
 	include/sanguis/server/world/difficulty.hpp
 	include/sanguis/server/world/entity_map.hpp
 	include/sanguis/server/world/grid_pos_to_center.hpp
@@ -1167,7 +1163,6 @@ set(
 	include/sanguis/time_unit.hpp
 	include/sanguis/timer.hpp
 	include/sanguis/to_console_arg_list.hpp
-	include/sanguis/unsigned_scale.hpp
 	include/sanguis/update_diff_clock.hpp
 	include/sanguis/weapon_description.hpp
 	include/sanguis/weapon_description_fwd.hpp
@@ -1271,7 +1266,6 @@ set(
 	src/client/draw2d/sunlight/make_color.cpp
 	src/client/draw2d/sunlight/sun_angle.cpp
 	src/client/draw2d/sunlight/time_to_gregorian.cpp
-	src/client/draw2d/translate/pixels_per_meter.cpp
 	src/client/draw2d/translate/scalar_from_client.cpp
 	src/client/draw2d/translate/scalar_to_client.cpp
 	src/client/draw2d/translate/vector_from_client.cpp
@@ -1441,7 +1435,6 @@ set(
 	src/net/send_buffer_size.cpp
 	src/net/serialize_to_circular_buffer.cpp
 	src/net/serialize_to_data_buffer.cpp
-	src/pixels_per_meter.cpp
 	src/random_seed.cpp
 	src/server/ai/angle_to_target.cpp
 	src/server/ai/base.cpp

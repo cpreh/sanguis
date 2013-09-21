@@ -45,7 +45,7 @@ sanguis::server::weapons::factory::dual_pistols(
 				)
 			),
 			sanguis::server::weapons::range(
-				20.f
+				1000.f
 			)
 		);
 }

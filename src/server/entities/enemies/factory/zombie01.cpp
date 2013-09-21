@@ -33,7 +33,7 @@ sanguis::server::entities::enemies::factory::zombie01(
 				3.f
 			),
 			sanguis::server::entities::movement_speed(
-				0.4f
+				20.f
 			),
 			sanguis::server::ai::create_simple(
 				_parameters.diff_clock(),

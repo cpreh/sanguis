@@ -52,7 +52,7 @@ sanguis::server::weapons::factory::shotgun(
 				)
 			),
 			sanguis::server::weapons::range(
-				20.f
+				1000.f
 			)
 		);
 }

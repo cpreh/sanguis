@@ -47,7 +47,7 @@ sanguis::server::weapons::factory::sentry(
 				)
 			),
 			sanguis::server::weapons::range(
-				20.f
+				1000.f
 			),
 			[
 				&diff_clock
@@ -84,7 +84,7 @@ sanguis::server::weapons::factory::sentry(
 							)
 						),
 						sanguis::server::weapons::range(
-							20.f
+							1000.f
 						)
 					);
 			}

@@ -31,7 +31,7 @@ sanguis::server::weapons::factory::grenade(
 				20.f
 			),
 			sanguis::server::weapons::aoe(
-				3.6f
+				180.f
 			),
 			sanguis::server::weapons::cast_point(
 				sanguis::duration_second(
@@ -44,7 +44,7 @@ sanguis::server::weapons::factory::grenade(
 				)
 			),
 			sanguis::server::weapons::range(
-				20.f
+				1000.f
 			)
 		);
 }

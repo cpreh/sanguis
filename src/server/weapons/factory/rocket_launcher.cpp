@@ -38,7 +38,7 @@ sanguis::server::weapons::factory::rocket_launcher(
 				9.f
 			),
 			sanguis::server::weapons::aoe(
-				2.4f
+				120.f
 			),
 			sanguis::server::weapons::magazine_size(
 				1u
@@ -49,7 +49,7 @@ sanguis::server::weapons::factory::rocket_launcher(
 				)
 			),
 			sanguis::server::weapons::range(
-				20.f
+				1000.f
 			)
 		);
 }

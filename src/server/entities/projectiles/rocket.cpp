@@ -38,7 +38,7 @@ sanguis::server::entities::projectiles::rocket::rocket(
 		sanguis::aoe_projectile_type::rocket,
 		_team,
 		sanguis::server::entities::movement_speed(
-			6.f
+			300.f
 		),
 		_load_context,
 		sanguis::server::entities::projectiles::life_time(

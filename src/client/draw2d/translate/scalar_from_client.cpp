@@ -1,6 +1,5 @@
 #include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/translate/scalar_from_client.hpp>
-#include <sanguis/client/draw2d/translate/pixels_per_meter.hpp>
 #include <sanguis/messages/types/space_unit.hpp>
 #include <fcppt/cast/size.hpp>
 
@@ -15,7 +14,5 @@ sanguis::client::draw2d::translate::scalar_from_client(
 			sanguis::client::draw2d::funit
 		>(
 			_scalar
-		)
-		/
-		sanguis::client::draw2d::translate::pixels_per_meter();
+		);
 }

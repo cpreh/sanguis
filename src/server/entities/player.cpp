@@ -143,7 +143,7 @@ sanguis::server::entities::player::player(
 			sanguis::server::auras::update_sight
 		>(
 			sanguis::server::radius(
-				1000.f
+				2000.f
 			),
 			sanguis::server::enter_sight_function(
 				std::bind(

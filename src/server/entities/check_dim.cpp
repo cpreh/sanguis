@@ -1,4 +1,3 @@
-#include <sanguis/pixels_per_meter.hpp>
 #include <sanguis/collision/scale.hpp>
 #include <sanguis/creator/tile_size.hpp>
 #include <sanguis/server/dim.hpp>
@@ -21,12 +20,6 @@ sanguis::server::space_unit const max_side_length(
 		sanguis::server::space_unit
 	>(
 		sanguis::creator::tile_size::value
-	)
-	/
-	fcppt::cast::int_to_float<
-		sanguis::server::space_unit
-	>(
-		sanguis::pixels_per_meter()
 	)
 	/
 	fcppt::literal<

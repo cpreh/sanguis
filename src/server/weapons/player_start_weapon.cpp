@@ -49,7 +49,7 @@ sanguis::server::weapons::player_start_weapon(
 				)
 			),
 			sanguis::server::weapons::range(
-				20.f
+				1000.f
 			)
 		);
 }

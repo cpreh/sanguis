@@ -1,13 +1,10 @@
-#include <sanguis/pixels_per_meter.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/size_type.hpp>
 #include <sanguis/creator/tile_size.hpp>
 #include <sanguis/server/center.hpp>
-#include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/vector.hpp>
 #include <sanguis/server/world/grid_pos_to_center.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/fill.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -38,12 +35,6 @@ sanguis::server::world::grid_pos_to_center(
 						2u
 					)
 				)
-			)
-			/
-			fcppt::cast::int_to_float<
-				sanguis::server::space_unit
-			>(
-				sanguis::pixels_per_meter()
 			)
 		);
 }
