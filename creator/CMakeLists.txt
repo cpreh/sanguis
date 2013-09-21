@@ -113,10 +113,6 @@ set(
 	src/top_result.cpp
 )
 
-fcppt_utils_add_source_groups(
-	"${SANGUIS_CREATOR_FILES}"
-)
-
 sanguis_generate_symbol_header(
 	creator
 )
@@ -126,22 +122,8 @@ include_directories(
 	"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
 )
 
-add_library(
+sanguis_add_library(
 	sanguiscreator
-	SHARED
-	${SANGUIS_CREATOR_FILES}
-)
-
-target_link_libraries(
-	sanguiscreator
-	${fcppt_core_TARGET}
-	${sgecore_TARGET}
-	${sgeparse_TARGET}
-)
-
-install(
-	TARGETS
-	sanguiscreator
-	DESTINATION
-	${INSTALL_LIBRARY_DIR}
+	"${SANGUIS_CREATOR_FILES}"
+	"${fcppt_core_TARGET};${sgecore_TARGET};${sgeparse_TARGET}"
 )

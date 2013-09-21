@@ -140,10 +140,6 @@ if(
 	)
 endif()
 
-fcppt_utils_add_source_groups(
-	"${SANGUIS_COLLISION_FILES}"
-)
-
 sanguis_generate_symbol_header(
 	collision
 )
@@ -154,15 +150,10 @@ include_directories(
 	"${FCPPT_UTILS_PROJECT_SOURCE_DIR}/creator/include"
 )
 
-add_library(
-	sanguiscollision
-	SHARED
-	${SANGUIS_COLLISION_FILES}
-)
-
 set(
 	COLLISION_LINK_TARGETS
 	${fcppt_core_TARGET}
+	${sanguiscreator_TARGET}
 )
 
 if(
@@ -175,15 +166,8 @@ if(
 	)
 endif()
 
-target_link_libraries(
+sanguis_add_library(
 	sanguiscollision
-	sanguiscreator
+	"${SANGUIS_COLLISION_FILES}"
 	"${COLLISION_LINK_TARGETS}"
-)
-
-install(
-	TARGETS
-	sanguiscollision
-	DESTINATION
-	${INSTALL_LIBRARY_DIR}
 )

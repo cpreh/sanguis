@@ -1661,10 +1661,6 @@ include(
 	AwlMainGenerator
 )
 
-add_definitions(
-	"-DBOOST_THREAD_VERSION=3"
-)
-
 include_directories(
 	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/include
 	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/collision/include
@@ -1678,13 +1674,13 @@ awl_utils_add_portable_executable(
 )
 
 add_definitions(
-	${Awl_DEFINITIONS}
+	${awl_DEFINITIONS}
 )
 
 target_link_libraries(
 	sanguis
-	sanguiscreator
-	sanguiscollision
+	${sanguiscreator_TARGET}
+	${sanguiscollision_TARGET}
 	${fcppt_core_TARGET}
 	${fcppt_filesystem_TARGET}
 	${awl_TARGET}

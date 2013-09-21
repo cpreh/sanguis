@@ -222,8 +222,114 @@ include_directories(
 	${FCPPT_UTILS_PROJECT_BINARY_DIR}/include
 )
 
+option(
+	ENABLE_SHARED
+	"Build shared libraries"
+	TRUE
+)
+
+option(
+	ENABLE_STATIC
+	"Build static libraries"
+	FALSE
+)
+
+if(
+	NOT ENABLE_SHARED AND NOT ENABLE_STATIC
+)
+	message(
+		FATAL_ERROR
+		"You disabled both STATIC and SHARED"
+	)
+endif()
+
+if(
+	NOT ENABLE_SHARED AND ENABLE_STATIC
+)
+	add_definitions(
+		"-D SANGUIS_STATIC_LINK"
+	)
+endif()
+
+macro(
+	sanguis_add_library_base
+	LIBNAME
+	FILES
+	DEPS
+	VARIANT
+)
+	add_library(
+		"${LIBNAME}"
+		"${VARIANT}"
+		${FILES}
+	)
+
+	target_link_libraries(
+		"${LIBNAME}"
+		${DEPS}
+	)
+
+	install(
+		TARGETS
+		"${LIBNAME}"
+		DESTINATION
+		"${INSTALL_LIBRARY_DIR}"
+	)
+endmacro()
+
+macro(
+	sanguis_add_library
+	LIBNAME
+	FILES
+	DEPS
+)
+	fcppt_utils_add_source_groups(
+		"${FILES}"
+	)
+
+	if(
+		ENABLE_STATIC
+	)
+		sanguis_add_library_base(
+			"${LIBNAME}_static"
+			"${FILES}"
+			"${DEPS}"
+			"STATIC"
+		)
+
+		set(
+			"${LIBNAME}_TARGET_TEMP"
+			"${LIBNAME}_static"
+		)
+	endif()
+
+	if(
+		ENABLE_SHARED
+	)
+		sanguis_add_library_base(
+			"${LIBNAME}"
+			"${FILES}"
+			"${DEPS}"
+			"SHARED"
+		)
+
+		set(
+			"${LIBNAME}_TARGET_TEMP"
+			"${LIBNAME}"
+		)
+	endif()
+
+	set(
+		"${LIBNAME}_TARGET"
+		"${${LIBNAME}_TARGET_TEMP}"
+		CACHE
+		INTERNAL
+		""
+	)
+endmacro()
+
 add_subdirectory(
-	src
+	creator
 )
 
 add_subdirectory(
@@ -231,7 +337,7 @@ add_subdirectory(
 )
 
 add_subdirectory(
-	creator
+	src
 )
 
 install(
