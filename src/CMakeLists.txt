@@ -1699,12 +1699,30 @@ target_link_libraries(
 	${CEGUI_LIBRARIES}
 	${alda_TARGET}
 	${FcpptThreads_LIBRARIES}
-)
-
-target_link_libraries(
-	sanguis
 	${Boost_LIBRARIES}
 )
+
+if(
+	WIN32
+	AND
+	Boost_USE_STATIC_LIBS
+)
+	find_library(
+		WS2_32_LIBRARY
+		NAMES WS2_32
+	)
+
+	find_library(
+		MSWSOCK_LIBRARY
+		NAMES Mswsock
+	)
+
+	target_link_libraries(
+		sanguis
+		"${WS2_32_LIBRARY}"
+		"${MSWSOCK_LIBRARY}"
+	)
+endif()
 
 install(
 	TARGETS
