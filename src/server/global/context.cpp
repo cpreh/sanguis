@@ -22,7 +22,6 @@
 #include <sanguis/server/log_location.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/send_available_perks.hpp>
-#include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/string.hpp>
 #include <sanguis/server/team.hpp>
@@ -31,9 +30,7 @@
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/insert_with_result.hpp>
 #include <sanguis/server/entities/player.hpp>
-#include <sanguis/server/entities/player_map.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
-#include <sanguis/server/entities/property/current_to_max.hpp>
 #include <sanguis/server/global/context.hpp>
 #include <sanguis/server/global/generate_worlds.hpp>
 #include <sanguis/server/global/load_context.hpp>
@@ -51,13 +48,11 @@
 #include <sanguis/server/world/map.hpp>
 #include <sanguis/server/world/object.hpp>
 #include <sanguis/server/world/parameters.hpp>
-#include <fcppt/literal.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/container/map_impl.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>
@@ -65,7 +60,6 @@
 #include <fcppt/log/warning.hpp>
 #include <fcppt/log/parameters/object.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
-#include <fcppt/math/vector/atan2.hpp>
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/math/vector/length_square.hpp>
 #include <fcppt/math/vector/signed_angle_between.hpp>
@@ -165,7 +159,7 @@ sanguis::server::global::context::insert_player(
 		)
 	);
 
-	sanguis::server::entities::player_unique_ptr player(
+	sanguis::server::entities::player_unique_ptr player_ptr(
 		sanguis::server::create_player(
 			diff_clock_,
 			*load_context_,
@@ -184,8 +178,10 @@ sanguis::server::global::context::insert_player(
 	);
 
 	players_.insert(
-		_player_id,
-		player.get()
+		std::make_pair(
+			_player_id,
+			player_ptr.get()
+		)
 	);
 
 	if(
@@ -209,7 +205,7 @@ sanguis::server::global::context::insert_player(
 		sanguis::server::entities::insert_with_result(
 			cur_world,
 			std::move(
-				player
+				player_ptr
 			),
 			sanguis::server::entities::insert_parameters(
 				sanguis::server::world::grid_pos_to_center(
@@ -250,9 +246,9 @@ sanguis::server::global::context::player_disconnect(
 	sanguis::server::player_id const _player_id
 )
 {
-	players_[
+	this->player(
 		_player_id
-	]->kill();
+	).kill();
 }
 
 void
@@ -262,20 +258,20 @@ sanguis::server::global::context::player_target(
 )
 {
 	// handles rotation as well
-	sanguis::server::entities::player &player(
-		*players_[
+	sanguis::server::entities::player &player_ref(
+		this->player(
 			_player_id
-		]
+		)
 	);
 
-	player.target(
+	player_ref.target(
 		sanguis::server::weapons::target(
 			_target
 		)
 	);
 
 	sanguis::server::vector const player_center(
-		player.center().get()
+		player_ref.center().get()
 	);
 
 	if(
@@ -288,7 +284,7 @@ sanguis::server::global::context::player_target(
 	)
 		return;
 
-	player.angle(
+	player_ref.angle(
 		sanguis::server::angle(
 			fcppt::math::vector::signed_angle_between(
 				player_center,
@@ -300,7 +296,7 @@ sanguis::server::global::context::player_target(
 	this->send_to_player(
 		_player_id,
 		*sanguis::server::message_convert::rotate(
-			player
+			player_ref
 		)
 	);
 }
@@ -310,9 +306,9 @@ sanguis::server::global::context::player_change_world(
 	sanguis::server::player_id const _player_id
 )
 {
-	players_[
+	this->player(
 		_player_id
-	]->transfer_from_world();
+	).transfer_from_world();
 }
 
 void
@@ -322,9 +318,9 @@ sanguis::server::global::context::player_change_shooting(
 	sanguis::is_primary_weapon const _is_primary
 )
 {
-	players_[
+	this->player(
 		_player_id
-	]->use_weapon(
+	).use_weapon(
 		_shooting,
 		_is_primary
 	);
@@ -336,9 +332,9 @@ sanguis::server::global::context::player_drop_or_pickup_weapon(
 	sanguis::is_primary_weapon const _is_primary
 )
 {
-	players_[
+	this->player(
 		_player_id
-	]->drop_or_pickup_weapon(
+	).drop_or_pickup_weapon(
 		_is_primary
 	);
 }
@@ -349,50 +345,20 @@ sanguis::server::global::context::player_speed(
 	sanguis::server::speed const &_speed
 )
 {
-	sanguis::server::entities::player &player(
-		*players_[
+	sanguis::server::entities::player &player_ref(
+		this->player(
 			_player_id
-		]
+		)
 	);
 
-	if(
-		fcppt::math::vector::length_square(
-			_speed.get()
-		)
-		<
-		fcppt::literal<
-			sanguis::server::space_unit
-		>(
-			0.001f
-		)
-	)
-		player.movement_speed().current(
-			fcppt::literal<
-				sanguis::server::space_unit
-			>(
-				0
-			)
-		);
-	else
-	{
-		player.direction(
-			sanguis::server::direction(
-				fcppt::math::vector::atan2(
-					_speed.get()
-				)
-			)
-		);
-
-		// FIXME: don't set the speed to max!
-		sanguis::server::entities::property::current_to_max(
-			player.movement_speed()
-		);
-	}
+	player_ref.change_speed(
+		_speed
+	);
 
 	this->send_to_player(
 		_player_id,
 		*sanguis::server::message_convert::speed(
-			player
+			player_ref
 		)
 	);
 }
@@ -403,9 +369,9 @@ sanguis::server::global::context::player_position(
 	sanguis::server::center const &_center
 )
 {
-	players_[
+	this->player(
 		_player_id
-	]->center_from_client(
+	).center_from_client(
 		_center
 	);
 }
@@ -419,9 +385,9 @@ sanguis::server::global::context::player_cheat(
 	sanguis::server::cheat(
 		diff_clock_,
 		random_generator_,
-		*players_[
+		this->player(
 			_player_id
-		],
+		),
 		_cheat
 	);
 }
@@ -432,14 +398,14 @@ sanguis::server::global::context::player_choose_perk(
 	sanguis::perk_type const _perk_type
 )
 {
-	sanguis::server::entities::player &player(
-		*players_[
+	sanguis::server::entities::player &player_ref(
+		this->player(
 			_player_id
-		]
+		)
 	);
 
 	if(
-		!player.perk_choosable(
+		!player_ref.perk_choosable(
 			_perk_type
 		)
 	)
@@ -456,7 +422,7 @@ sanguis::server::global::context::player_choose_perk(
 		return;
 	}
 
-	player.add_perk(
+	player_ref.add_perk(
 		sanguis::server::perks::create(
 			diff_clock_,
 			random_generator_,
@@ -465,7 +431,7 @@ sanguis::server::global::context::player_choose_perk(
 	);
 
 	sanguis::server::send_available_perks(
-		player,
+		player_ref,
 		send_unicast_
 	);
 }
@@ -481,15 +447,20 @@ sanguis::server::global::context::update(
 	);
 
 	for(
-		auto const &cur_world : worlds_.worlds()
+		auto const &cur_world
+		:
+		worlds_.worlds()
 	)
 		cur_world.second->update();
 }
 
-sanguis::server::entities::player_map::size_type
-sanguis::server::global::context::player_count() const
+bool
+sanguis::server::global::context::multiple_players() const
 {
-	return players_.size();
+	return
+		players_.size()
+		>
+		1u;
 }
 
 bool
@@ -498,9 +469,10 @@ sanguis::server::global::context::has_player(
 ) const
 {
 	return
-		players_.contains(
+		players_.count(
 			_player_id
-		);
+		)
+		== 1u;
 }
 
 sanguis::entity_id const
@@ -563,7 +535,7 @@ sanguis::server::global::context::transfer_entity(
 		worlds_.connections()
 	);
 
-	sanguis::server::global::world_connection_map::const_iterator const it(
+	auto const it(
 		connections.find(
 			_source
 		)
@@ -599,7 +571,7 @@ sanguis::server::global::context::world(
 		worlds_.worlds()
 	);
 
-	sanguis::server::world::map::const_iterator const it(
+	auto const it(
 		worlds.find(
 			_world_id
 		)
@@ -607,6 +579,25 @@ sanguis::server::global::context::world(
 
 	FCPPT_ASSERT_PRE(
 		it != worlds.end()
+	);
+
+	return
+		*it->second;
+}
+
+sanguis::server::entities::player &
+sanguis::server::global::context::player(
+	sanguis::server::player_id const _player_id
+)
+{
+	auto const it(
+		players_.find(
+			_player_id
+		)
+	);
+
+	FCPPT_ASSERT_PRE(
+		it != players_.end()
 	);
 
 	return

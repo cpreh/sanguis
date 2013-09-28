@@ -19,7 +19,7 @@
 #include <sanguis/server/string.hpp>
 #include <sanguis/server/unicast_callback.hpp>
 #include <sanguis/server/vector_fwd.hpp>
-#include <sanguis/server/entities/player_map.hpp>
+#include <sanguis/server/entities/player_fwd.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/global/context_fwd.hpp>
@@ -29,7 +29,9 @@
 #include <sanguis/server/world/context_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_decl.hpp>
-#include <fcppt/container/map_decl.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <unordered_map>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -119,8 +121,8 @@ public:
 		sanguis::duration const &
 	);
 
-	sanguis::server::entities::player_map::size_type
-	player_count() const;
+	bool
+	multiple_players() const;
 
 	bool
 	has_player(
@@ -161,6 +163,11 @@ private:
 		sanguis::world_id
 	);
 
+	sanguis::server::entities::player &
+	player(
+		sanguis::server::player_id
+	);
+
 	sanguis::diff_clock diff_clock_;
 
 	sanguis::random_generator random_generator_;
@@ -183,7 +190,13 @@ private:
 
 	sanguis::server::console &console_;
 
-	sanguis::server::entities::player_map players_;
+	typedef
+	std::unordered_map<
+		sanguis::server::player_id,
+		sanguis::server::entities::player *
+	> player_map;
+
+	player_map players_;
 
 	sanguis::server::global::world_map const worlds_;
 };

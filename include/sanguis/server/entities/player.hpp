@@ -11,6 +11,7 @@
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/level.hpp>
 #include <sanguis/server/player_id.hpp>
+#include <sanguis/server/speed_fwd.hpp>
 #include <sanguis/server/string.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/damage/armor.hpp>
@@ -94,6 +95,11 @@ public:
 	void
 	add_perk(
 		sanguis::server::perks::unique_ptr &&
+	);
+
+	void
+	change_speed(
+		sanguis::server::speed
 	);
 
 	void

@@ -23,6 +23,8 @@
 #include <sanguis/server/model_name.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/radius.hpp>
+#include <sanguis/server/space_unit.hpp>
+#include <sanguis/server/speed.hpp>
 #include <sanguis/server/string.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/weapon_pickup_add_candidate_callback.hpp>
@@ -45,6 +47,7 @@
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/pickups/weapon.hpp>
+#include <sanguis/server/entities/property/current_to_max.hpp>
 #include <sanguis/server/entities/property/initial.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/environment/object.hpp>
@@ -56,12 +59,14 @@
 #include <sanguis/server/perks/tree/status.hpp>
 #include <sanguis/server/weapons/player_start_weapon.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/atan2.hpp>
 #include <fcppt/math/vector/length_square.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -271,6 +276,48 @@ sanguis::server::entities::player::add_perk(
 	);
 
 	--skill_points_;
+}
+
+void
+sanguis::server::entities::player::change_speed(
+	sanguis::server::speed const _speed
+)
+{
+	if(
+		fcppt::math::vector::length_square(
+			_speed.get()
+		)
+		<
+		fcppt::literal<
+			sanguis::server::space_unit
+		>(
+			0.001f
+		)
+	)
+	{
+		this->movement_speed().current(
+			fcppt::literal<
+				sanguis::server::space_unit
+			>(
+				0
+			)
+		);
+
+		return;
+	}
+
+	this->direction(
+		sanguis::server::direction(
+			fcppt::math::vector::atan2(
+				_speed.get()
+			)
+		)
+	);
+
+	// FIXME: don't set the speed to max!
+	sanguis::server::entities::property::current_to_max(
+		this->movement_speed()
+	);
 }
 
 void

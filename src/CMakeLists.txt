@@ -899,7 +899,6 @@ set(
 	include/sanguis/server/entities/pickups/weapon_ref.hpp
 	include/sanguis/server/entities/player.hpp
 	include/sanguis/server/entities/player_fwd.hpp
-	include/sanguis/server/entities/player_map.hpp
 	include/sanguis/server/entities/player_unique_ptr.hpp
 	include/sanguis/server/entities/projectiles/aoe_damage.hpp
 	include/sanguis/server/entities/projectiles/aoe_projectile.hpp

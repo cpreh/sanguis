@@ -161,8 +161,7 @@ sanguis::server::states::unpaused::operator()(
 	if(
 		this->context<
 			sanguis::server::states::running
-		>().global_context().player_count()
-		> 1u
+		>().global_context().multiple_players()
 	)
 		return
 			this->discard_event();
