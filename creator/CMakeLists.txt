@@ -56,7 +56,6 @@ set(
 	src/aux_/generator_map.cpp
 	src/aux_/generators/lines.cpp
 	src/aux_/generators/maze.cpp
-	src/aux_/neumann_neighbors.cpp
 	src/aux_/parameters.cpp
 	src/aux_/perimeter_to_coords.cpp
 	src/aux_/result.cpp
@@ -86,9 +85,6 @@ set(
 	src/include/sanguis/creator/aux_/generator_map_type.hpp
 	src/include/sanguis/creator/aux_/generators/lines.hpp
 	src/include/sanguis/creator/aux_/generators/maze.hpp
-	src/include/sanguis/creator/aux_/neighbor_array.hpp
-	src/include/sanguis/creator/aux_/neighbor_array_fwd.hpp
-	src/include/sanguis/creator/aux_/neumann_neighbors.hpp
 	src/include/sanguis/creator/aux_/parameters.hpp
 	src/include/sanguis/creator/aux_/parameters_fwd.hpp
 	src/include/sanguis/creator/aux_/perimeter_to_coords.hpp

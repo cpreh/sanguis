@@ -13,8 +13,6 @@
 #include <sanguis/creator/spawn_type.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/aux_/find_opposing_cell.hpp>
-#include <sanguis/creator/aux_/neighbor_array.hpp>
-#include <sanguis/creator/aux_/neumann_neighbors.hpp>
 #include <sanguis/creator/aux_/parameters.hpp>
 #include <sanguis/creator/aux_/randgen.hpp>
 #include <sanguis/creator/aux_/result.hpp>
@@ -31,6 +29,7 @@
 #include <fcppt/algorithm/remove.hpp>
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/container/grid/make_pos_range.hpp>
+#include <fcppt/container/grid/neumann_neighbors.hpp>
 #include <fcppt/math/clamp.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -205,7 +204,7 @@ sanguis::creator::aux_::generators::maze(
 	// of the starting point
 	for (
 		auto &pos :
-		sanguis::creator::aux_::neumann_neighbors(
+		fcppt::container::grid::neumann_neighbors(
 			starting_pos)
 	)
 	{
@@ -264,7 +263,7 @@ sanguis::creator::aux_::generators::maze(
 
 			fcppt::algorithm::append(
 				walls,
-				sanguis::creator::aux_::neumann_neighbors(
+				fcppt::container::grid::neumann_neighbors(
 					*opposing_cell
 				)
 			);

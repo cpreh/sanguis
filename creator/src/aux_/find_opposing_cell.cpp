@@ -2,9 +2,9 @@
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/aux_/find_opposing_cell.hpp>
-#include <sanguis/creator/aux_/neighbor_array.hpp>
-#include <sanguis/creator/aux_/neumann_neighbors.hpp>
 #include <fcppt/assert/error.hpp>
+#include <fcppt/container/grid/neumann_neighbor_array.hpp>
+#include <fcppt/container/grid/neumann_neighbors.hpp>
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/algorithm/contains.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -45,8 +45,10 @@ sanguis::creator::aux_::find_opposing_cell
 			sanguis::creator::pos
 		>();
 
-	sanguis::creator::aux_::neighbor_array const neighbors(
-		sanguis::creator::aux_::neumann_neighbors(
+	fcppt::container::grid::neumann_neighbor_array<
+		sanguis::creator::pos
+	> const neighbors(
+		fcppt::container::grid::neumann_neighbors(
 			cell
 		)
 	);

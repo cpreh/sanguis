@@ -767,6 +767,12 @@ set(
 	include/sanguis/server/ai/manager.hpp
 	include/sanguis/server/ai/manager_fwd.hpp
 	include/sanguis/server/ai/move_to_target.hpp
+	include/sanguis/server/ai/pathing/find_target.hpp
+	include/sanguis/server/ai/pathing/start.hpp
+	include/sanguis/server/ai/pathing/start_fwd.hpp
+	include/sanguis/server/ai/pathing/target.hpp
+	include/sanguis/server/ai/pathing/target_fwd.hpp
+	include/sanguis/server/ai/pathing/trail.hpp
 	include/sanguis/server/ai/rotate_to_target.hpp
 	include/sanguis/server/ai/scoped_ptr.hpp
 	include/sanguis/server/ai/search_new_target.hpp
@@ -1440,6 +1446,7 @@ set(
 	src/server/ai/create_simple.cpp
 	src/server/ai/manager.cpp
 	src/server/ai/move_to_target.cpp
+	src/server/ai/pathing/find_target.cpp
 	src/server/ai/rotate_to_target.cpp
 	src/server/ai/search_new_target.cpp
 	src/server/ai/simple.cpp
