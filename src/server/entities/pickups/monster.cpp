@@ -82,7 +82,7 @@ sanguis::server::entities::pickups::monster::do_pickup(
 			>(
 				diff_clock_,
 				sanguis::server::weapons::range(
-					2.f
+					100.f
 				),
 				sanguis::server::weapons::base_cooldown(
 					sanguis::duration_second(

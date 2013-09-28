@@ -46,7 +46,7 @@ sanguis::server::entities::enemies::factory::maggot(
 			>(
 				_parameters.diff_clock(),
 				sanguis::server::weapons::range(
-					1.5f
+					75.f
 				),
 				sanguis::server::weapons::base_cooldown(
 					sanguis::duration_second(

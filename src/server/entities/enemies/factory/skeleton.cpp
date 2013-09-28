@@ -44,7 +44,7 @@ sanguis::server::entities::enemies::factory::skeleton(
 			>(
 				_parameters.diff_clock(),
 				sanguis::server::weapons::range(
-					2.f
+					100.f
 				),
 				sanguis::server::weapons::base_cooldown(
 					sanguis::duration_second(

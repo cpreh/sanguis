@@ -73,7 +73,7 @@ sanguis::server::entities::enemies::factory::zombie00(
 					)
 				),
 				sanguis::server::weapons::range(
-					20.f
+					1000.f
 				)
 			),
 			sanguis::server::pickup_probability(
