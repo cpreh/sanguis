@@ -768,11 +768,13 @@ set(
 	include/sanguis/server/ai/manager_fwd.hpp
 	include/sanguis/server/ai/move_to_target.hpp
 	include/sanguis/server/ai/pathing/find_target.hpp
+	include/sanguis/server/ai/pathing/positions_are_close.hpp
 	include/sanguis/server/ai/pathing/start.hpp
 	include/sanguis/server/ai/pathing/start_fwd.hpp
 	include/sanguis/server/ai/pathing/target.hpp
 	include/sanguis/server/ai/pathing/target_fwd.hpp
 	include/sanguis/server/ai/pathing/trail.hpp
+	include/sanguis/server/ai/rotate_and_move_to_target.hpp
 	include/sanguis/server/ai/rotate_to_target.hpp
 	include/sanguis/server/ai/scoped_ptr.hpp
 	include/sanguis/server/ai/search_new_target.hpp
@@ -1143,6 +1145,7 @@ set(
 	include/sanguis/server/weapons/weapon.hpp
 	include/sanguis/server/weapons/weapon_fwd.hpp
 	include/sanguis/server/world/center_in_grid_pos.hpp
+	include/sanguis/server/world/center_to_grid_pos.hpp
 	include/sanguis/server/world/context.hpp
 	include/sanguis/server/world/context_fwd.hpp
 	include/sanguis/server/world/difficulty.hpp
@@ -1447,6 +1450,8 @@ set(
 	src/server/ai/manager.cpp
 	src/server/ai/move_to_target.cpp
 	src/server/ai/pathing/find_target.cpp
+	src/server/ai/pathing/positions_are_close.cpp
+	src/server/ai/rotate_and_move_to_target.cpp
 	src/server/ai/rotate_to_target.cpp
 	src/server/ai/search_new_target.cpp
 	src/server/ai/simple.cpp
@@ -1633,6 +1638,7 @@ set(
 	src/server/weapons/unlimited_magazine_size.cpp
 	src/server/weapons/weapon.cpp
 	src/server/world/center_in_grid_pos.cpp
+	src/server/world/center_to_grid_pos.cpp
 	src/server/world/context.cpp
 	src/server/world/entity_map.cpp
 	src/server/world/grid_pos_to_center.cpp

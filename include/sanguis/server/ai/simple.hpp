@@ -1,7 +1,9 @@
 #ifndef SANGUIS_SERVER_AI_SIMPLE_HPP_INCLUDED
 #define SANGUIS_SERVER_AI_SIMPLE_HPP_INCLUDED
 
+#include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/ai/base.hpp>
+#include <sanguis/server/ai/pathing/trail.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
@@ -43,12 +45,16 @@ private:
 	override;
 
 	void
-	update()
+	update(
+		sanguis::creator::grid const &
+	)
 	override;
 
 	sanguis::server::entities::with_ai &me_;
 
 	sanguis::server::entities::auto_weak_link target_;
+
+	sanguis::server::ai::pathing::trail trail_;
 };
 
 }

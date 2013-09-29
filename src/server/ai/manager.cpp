@@ -6,6 +6,7 @@
 #include <sanguis/server/auras/aggro.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
+#include <sanguis/server/environment/object.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -24,6 +25,9 @@ sanguis::server::ai::manager::manager(
 :
 	ai_(
 		_ai
+	),
+	me_(
+		_me
 	),
 	potential_targets_(),
 	update_timer_(
@@ -82,7 +86,9 @@ sanguis::server::ai::manager::update()
 			ref.get()
 		);
 
-	ai_.update();
+	ai_.update(
+		me_.environment().grid()
+	);
 }
 
 void

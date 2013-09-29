@@ -766,6 +766,12 @@ sanguis::server::world::object::collision_world() const
 	return *collision_world_;
 }
 
+sanguis::creator::grid const &
+sanguis::server::world::object::grid() const
+{
+	return grid_;
+}
+
 sanguis::server::environment::load_context &
 sanguis::server::world::object::load_context() const
 {

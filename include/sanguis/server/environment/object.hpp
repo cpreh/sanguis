@@ -6,6 +6,7 @@
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
+#include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
@@ -140,6 +141,10 @@ public:
 	virtual
 	sanguis::collision::world::object &
 	collision_world() const = 0;
+
+	virtual
+	sanguis::creator::grid const &
+	grid() const = 0;
 
 	virtual
 	sanguis::server::environment::load_context &

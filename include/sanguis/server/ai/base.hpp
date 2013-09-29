@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_AI_BASE_HPP_INCLUDED
 #define SANGUIS_SERVER_AI_BASE_HPP_INCLUDED
 
+#include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/ai/base_fwd.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -44,7 +45,9 @@ public:
 
 	virtual
 	void
-	update() = 0;
+	update(
+		sanguis::creator::grid const &
+	) = 0;
 };
 
 }

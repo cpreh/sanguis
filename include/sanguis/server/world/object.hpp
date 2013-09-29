@@ -181,6 +181,10 @@ private:
 	collision_world() const
 	override;
 
+	sanguis::creator::grid const &
+	grid() const
+	override;
+
 	void
 	add_sight_range(
 		sanguis::server::player_id,

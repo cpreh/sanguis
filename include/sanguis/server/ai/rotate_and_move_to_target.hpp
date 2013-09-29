@@ -1,8 +1,7 @@
-#ifndef SANGUIS_SERVER_AI_ANGLE_TO_TARGET_HPP_INCLUDED
-#define SANGUIS_SERVER_AI_ANGLE_TO_TARGET_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_AI_ROTATE_AND_MOVE_TO_TARGET_HPP_INCLUDED
+#define SANGUIS_SERVER_AI_ROTATE_AND_MOVE_TO_TARGET_HPP_INCLUDED
 
 #include <sanguis/server/center_fwd.hpp>
-#include <sanguis/server/optional_angle_fwd.hpp>
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 
 
@@ -13,8 +12,8 @@ namespace server
 namespace ai
 {
 
-sanguis::server::optional_angle const
-angle_to_target(
+void
+rotate_and_move_to_target(
 	sanguis::server::entities::with_ai &,
 	sanguis::server::center
 );

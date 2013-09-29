@@ -5,9 +5,9 @@
 #include <sanguis/server/ai/pathing/start.hpp>
 #include <sanguis/server/ai/pathing/target.hpp>
 #include <sanguis/server/ai/pathing/trail.hpp>
+#include <fcppt/algorithm/contains_set.hpp>
 #include <fcppt/container/grid/in_range.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
-#include <fcppt/container/grid/object_impl.hpp>
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/math/vector/std_hash.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -31,13 +31,6 @@ sanguis::server::ai::pathing::find_target(
 	pos_queue;
 
 	typedef
-	fcppt::container::grid::object<
-		bool,
-		2
-	>
-	marker_grid;
-
-	typedef
 	std::unordered_map<
 		sanguis::creator::pos,
 		sanguis::creator::pos
@@ -46,9 +39,11 @@ sanguis::server::ai::pathing::find_target(
 
 	predecessor_map predecessors;
 
-	marker_grid markers(
-		_grid.size(),
-		false
+	predecessors.insert(
+		std::make_pair(
+			_start.get(),
+			_start.get()
+		)
 	);
 
 	pos_queue positions;
@@ -90,15 +85,15 @@ sanguis::server::ai::pathing::find_target(
 					]
 				);
 
+			// Pop the start node.
+			// TODO: Find a better way to express this in the loop above
+			result.pop_back();
+
 			return
 				result;
 		}
 
 		positions.pop();
-
-		markers[
-			cur
-		] = true;
 
 		for(
 			auto const &pos
@@ -113,9 +108,10 @@ sanguis::server::ai::pathing::find_target(
 					pos
 				)
 				&&
-				!markers[
+				!fcppt::algorithm::contains_set(
+					predecessors,
 					pos
-				]
+				)
 				&&
 				!sanguis::creator::tile_is_solid(
 					_grid[

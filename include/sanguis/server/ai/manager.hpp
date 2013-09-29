@@ -46,6 +46,8 @@ private:
 
 	sanguis::server::ai::base &ai_;
 
+	sanguis::server::entities::with_ai &me_;
+
 	sanguis::server::ai::entity_set potential_targets_;
 
 	sanguis::diff_timer update_timer_;
