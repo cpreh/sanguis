@@ -70,7 +70,6 @@ set(
 	src/generate.cpp
 	src/generator_count.cpp
 	src/generator_index.cpp
-	src/include/sanguis/creator/aux_/bresenham.hpp
 	src/include/sanguis/creator/aux_/deserialization/background_grid.hpp
 	src/include/sanguis/creator/aux_/deserialization/grid.hpp
 	src/include/sanguis/creator/aux_/deserialization/opening_container.hpp

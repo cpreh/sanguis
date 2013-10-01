@@ -1,26 +1,24 @@
 #include <fcppt/container/grid/in_range.hpp>
+#include <fcppt/math/bresenham.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
 #include <sanguis/creator/background_grid.hpp>
 #include <sanguis/creator/background_tile.hpp>
 #include <sanguis/creator/grid.hpp>
-#include <sanguis/creator/pos_fwd.hpp>
-#include <sanguis/creator/signed_pos_fwd.hpp>
+#include <sanguis/creator/pos.hpp>
+#include <sanguis/creator/signed_pos.hpp>
 #include <sanguis/creator/opening.hpp>
 #include <sanguis/creator/opening_container.hpp>
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/size_type.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/tile.hpp>
-#include <sanguis/creator/aux_/bresenham.hpp>
 #include <sanguis/creator/aux_/parameters.hpp>
 #include <sanguis/creator/aux_/randgen.hpp>
 #include <sanguis/creator/aux_/result.hpp>
 #include <sanguis/creator/aux_/generators/lines.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
+
 
 sanguis::creator::aux_::result
 sanguis::creator::aux_::generators::lines(
@@ -67,7 +65,7 @@ sanguis::creator::aux_::generators::lines(
 		int y1
 	)
 	{
-		sanguis::creator::aux_::bresenham(
+		fcppt::math::bresenham(
 			sanguis::creator::signed_pos(
 				x0,
 				y0),
