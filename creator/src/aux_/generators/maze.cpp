@@ -37,6 +37,7 @@
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
+#include <fcppt/random/distribution/parameters/uniform_real.hpp>
 #include <fcppt/random/variate.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <vector>
@@ -55,12 +56,25 @@ typedef fcppt::random::variate<
 	>
 > variate;
 
+auto clamp_to_grid =
+	[]
+	(
+		long unsigned x,
+		long unsigned max
+	)
+	{
+		// max - 2 is the width or height of the effective grid (i.e. no borders)
+		// the / 2 * 2 + 1 part forces an uneven result, which is an empty cell
+		return (x % (max - 2)) / 2 * 2 + 1;
+	};
+
 sanguis::creator::opening_container
 openings(
 	sanguis::creator::grid const &,
-	sanguis::creator::grid::pos const &,
-	::variate const &,
-	::variate const &
+	sanguis::creator::grid::pos const,
+	sanguis::creator::opening_count const,
+	::variate &,
+	::variate &
 );
 
 }
@@ -72,6 +86,14 @@ sanguis::creator::aux_::generators::maze(
 	sanguis::creator::aux_::parameters const &_parameters
 )
 {
+	sanguis::creator::grid grid(
+		sanguis::creator::grid::dim(
+			21,
+			21
+		),
+		sanguis::creator::tile::concrete_wall
+	);
+
 	typedef fcppt::random::distribution::basic<
 		fcppt::random::distribution::parameters::uniform_int<
 			sanguis::creator::size_type
@@ -117,14 +139,6 @@ sanguis::creator::aux_::generators::maze(
 				grid.size().h() - 2
 		)));
 
-	sanguis::creator::grid grid(
-		sanguis::creator::grid::dim(
-			21,
-			21
-		),
-		sanguis::creator::tile::concrete_wall
-	);
-
 	// random starting position for maze generation,
 	// has to be on tiles that satisfy
 	// x % 2 == 1 && y % 2 == 1
@@ -137,6 +151,7 @@ sanguis::creator::aux_::generators::maze(
 		::openings(
 			grid,
 			starting_pos,
+			_parameters.opening_count(),
 			random_x,
 			random_y
 		);
@@ -253,15 +268,18 @@ sanguis::creator::aux_::generators::maze(
 	uniform_real;
 
 	fcppt::random::variate<
-		decltype(_parameters.randgen()),
+		sanguis::creator::aux_::randgen,
 		uniform_real
 	>
 	fill_tile_random(
-		uniform_real::param_type::min(
-			0.f
-		),
-		uniform_real::param_type::sup(
-			1.0f
+		_parameters.randgen(),
+		uniform_real(
+			uniform_real::param_type::min(
+				0.f
+			),
+			uniform_real::param_type::sup(
+				1.0f
+			)
 		)
 	);
 
@@ -395,29 +413,14 @@ namespace
 sanguis::creator::opening_container
 openings(
 	sanguis::creator::grid const &_grid,
-	sanguis::creator::grid::pos const &_starting_pos,
-	::variate const &_random_x,
-	::variate const &_random_y
+	sanguis::creator::grid::pos const _starting_pos,
+	sanguis::creator::opening_count const _opening_count,
+	::variate &_random_x,
+	::variate &_random_y
 )
 {
-	auto clamp_to_grid =
-		[]
-		(
-			long unsigned x,
-			long unsigned max
-		)
-		{
-			// max - 2 is the width or height of the effective grid (i.e. no borders)
-			// the / 2 * 2 + 1 part forces an uneven result, which is an empty cell
-			return (x % (max - 2)) / 2 * 2 + 1;
-		};
-
 	sanguis::creator::opening_container
 	openings;
-
-	auto const
-	opening_count =
-		_parameters.opening_count().get();
 
 	// entrance
 	openings.push_back(
@@ -445,17 +448,17 @@ openings(
 	// i.e. when the requested number of openings don't fit
 	while(
 		current_openings <
-		opening_count
+		_opening_count.get()
 	)
 	{
 		sanguis::creator::opening next_opening(
 			sanguis::creator::opening(
 				sanguis::creator::grid::pos(
 					clamp_to_grid(
-						_w_dist(),
+						_random_x(),
 						_grid.size().w()),
 					clamp_to_grid(
-						_h_dist(),
+						_random_y(),
 						_grid.size().h())
 		)));
 
