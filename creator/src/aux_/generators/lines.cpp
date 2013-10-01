@@ -84,6 +84,8 @@ sanguis::creator::aux_::generators::lines(
 
 				if (fcppt::container::grid::in_range(ret, p))
 					ret[p] = sanguis::creator::tile::concrete_wall;
+
+				return true;
 			}
 		);
 	};
