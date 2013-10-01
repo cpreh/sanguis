@@ -45,9 +45,8 @@ sanguis::creator::aux_::find_opposing_cell
 			sanguis::creator::pos
 		>();
 
-	fcppt::container::grid::neumann_neighbor_array<
-		sanguis::creator::pos
-	> const neighbors(
+	auto
+	const neighbors(
 		fcppt::container::grid::neumann_neighbors(
 			cell
 		)

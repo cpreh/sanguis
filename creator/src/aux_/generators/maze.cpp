@@ -37,10 +37,33 @@
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
+#include <fcppt/random/variate.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <vector>
 #include <ostream>
 #include <fcppt/config/external_end.hpp>
+
+namespace
+{
+
+typedef fcppt::random::variate<
+	sanguis::creator::aux_::randgen,
+	fcppt::random::distribution::basic<
+		fcppt::random::distribution::parameters::uniform_int<
+			sanguis::creator::size_type
+		>
+	>
+> variate;
+
+sanguis::creator::opening_container
+openings(
+	sanguis::creator::grid const &,
+	sanguis::creator::grid::pos const &,
+	::variate const &,
+	::variate const &
+);
+
+}
 
 // this is a maze generator that follows the algorithm described at
 // http://en.wikipedia.org/w/index.php?title=Maze_generation_algorithm&oldid=550777074#Randomized_Prim.27s_algorithm
@@ -55,6 +78,45 @@ sanguis::creator::aux_::generators::maze(
 		>
 	> uniform_int;
 
+	typedef fcppt::random::variate<
+		sanguis::creator::aux_::randgen,
+		uniform_int
+	> variate;
+
+	variate
+	random_cell_index(
+		_parameters.randgen(),
+		uniform_int(
+			uniform_int::param_type::min(
+				0u
+			),
+			uniform_int::param_type::max(
+				grid.size().w() *
+				grid.size().h()
+			)));
+
+	variate
+	random_x(
+		_parameters.randgen(),
+		uniform_int(
+			uniform_int::param_type::min(
+				0u
+			),
+			uniform_int::param_type::max(
+				grid.size().w() - 2
+		)));
+
+	variate
+	random_y(
+		_parameters.randgen(),
+		uniform_int(
+			uniform_int::param_type::min(
+				0u
+			),
+			uniform_int::param_type::max(
+				grid.size().h() - 2
+		)));
+
 	sanguis::creator::grid grid(
 		sanguis::creator::grid::dim(
 			21,
@@ -63,114 +125,21 @@ sanguis::creator::aux_::generators::maze(
 		sanguis::creator::tile::concrete_wall
 	);
 
-	uniform_int int_distribution(
-		uniform_int::param_type::min(
-			0u
-		),
-		uniform_int::param_type::max(
-			grid.size().w() *
-			grid.size().h()
-		)
-	);
-
-	uniform_int w_dist(
-		uniform_int::param_type::min(
-			0u
-		),
-		uniform_int::param_type::max(
-			grid.size().w() - 2
-		)
-	);
-
-	uniform_int h_dist(
-		uniform_int::param_type::min(
-			0u
-		),
-		uniform_int::param_type::max(
-			grid.size().h() - 2
-		)
-	);
-
-	//openings begin
-
-	auto clamp_to_grid =
-		[]
-		(
-			long unsigned x,
-			long unsigned max
-		)
-		{
-			// max - 2 is the width or height of the effective grid (i.e. no borders)
-			// the / 2 * 2 + 1 part forces an uneven result, which is an empty cell
-			return (x % (max - 2)) / 2 * 2 + 1;
-		};
-
-	sanguis::creator::opening_container openings;
-
-	std::size_t const opening_count =
-		_parameters.opening_count().get();
-
 	// random starting position for maze generation,
 	// has to be on tiles that satisfy
 	// x % 2 == 1 && y % 2 == 1
 	sanguis::creator::grid::pos starting_pos(
-		(w_dist(_parameters.randgen()) / 2) * 2 + 1,
-		(h_dist(_parameters.randgen()) / 2) * 2 + 1
+		(random_x() / 2) * 2 + 1,
+		(random_y() / 2) * 2 + 1
 	);
 
-	// entrance
-	openings.push_back(
-		sanguis::creator::opening(
-			starting_pos));
-
-	// exit
-	openings.push_back(
-		sanguis::creator::opening(
-			sanguis::creator::grid::pos(
-				clamp_to_grid(
-					starting_pos.x() + grid.size().w() / 2,
-					grid.size().w()),
-				clamp_to_grid(
-					starting_pos.y() + grid.size().h() / 2,
-					grid.size().h())
-	)));
-
-	// all remaining openings
-	auto current_openings =
-		openings.size();
-
-	while(
-		current_openings <
-		opening_count
-	)
-	{
-		sanguis::creator::opening next_opening(
-			sanguis::creator::grid::pos::null());
-
-		next_opening =
-			sanguis::creator::opening(
-				sanguis::creator::grid::pos(
-					clamp_to_grid(
-						w_dist(_parameters.randgen()),
-						grid.size().w()),
-					clamp_to_grid(
-						h_dist(_parameters.randgen()),
-						grid.size().h())
-			));
-
-		if (
-			!fcppt::algorithm::contains(
-				openings,
-				next_opening)
-		)
-		{
-			openings.push_back(
-				next_opening);
-			current_openings++;
-		}
-	}
-
-	// openings end
+	sanguis::creator::opening_container openings =
+		::openings(
+			grid,
+			starting_pos,
+			random_x,
+			random_y
+		);
 
 	// initialize grid with empty cells every other row and column,
 	// surrounded on all sides by walls
@@ -228,9 +197,7 @@ sanguis::creator::aux_::generators::maze(
 		sanguis::creator::grid::pos const
 		random_wall =
 			walls[
-				int_distribution(
-					_parameters.randgen()
-				) %
+				random_cell_index() %
 				walls.size()
 			];
 
@@ -277,13 +244,24 @@ sanguis::creator::aux_::generators::maze(
 	sanguis::creator::grid::pos::value_type const
 	scaling_factor = 2;
 
-	// 1 in 6 chance...
-	uniform_int fill_tile_random(
-		uniform_int::param_type::min(
-			0u
+	typedef
+	fcppt::random::distribution::basic<
+		fcppt::random::distribution::parameters::uniform_real<
+			float
+		>
+	>
+	uniform_real;
+
+	fcppt::random::variate<
+		decltype(_parameters.randgen()),
+		uniform_real
+	>
+	fill_tile_random(
+		uniform_real::param_type::min(
+			0.f
 		),
-		uniform_int::param_type::max(
-			5u
+		uniform_real::param_type::sup(
+			1.0f
 		)
 	);
 
@@ -309,9 +287,8 @@ sanguis::creator::aux_::generators::maze(
 		for (auto dy = 0u; dy < scaling_factor; ++dy)
 			for (auto dx = 0u; dx < scaling_factor; ++dx)
 				if (
-					fill_tile_random(
-						_parameters.randgen()) !=
-					0
+					fill_tile_random() <
+					.85f
 				)
 					ret[
 						cell.pos() *
@@ -325,14 +302,14 @@ sanguis::creator::aux_::generators::maze(
 	// randomly create an asphalty area in the map
 	sanguis::creator::aux_::filled_rect(
 			sanguis::creator::pos(
-				(w_dist(_parameters.randgen()) / 2u) * 2u + 1u,
-				(h_dist(_parameters.randgen()) / 2u) * 2u + 1u
+				(random_x() / 2u) * 2u + 1u,
+				(random_y() / 2u) * 2u + 1u
 			) *
 				scaling_factor,
 				
 			sanguis::creator::pos(
-				(w_dist(_parameters.randgen()) / 2u) * 2u + 1u,
-				(h_dist(_parameters.randgen()) / 2u) * 2u + 1u
+				(random_x() / 2u) * 2u + 1u,
+				(random_y() / 2u) * 2u + 1u
 			) *
 				scaling_factor,
 			[
@@ -399,10 +376,10 @@ sanguis::creator::aux_::generators::maze(
 						scaling_factor *
 						sanguis::creator::pos(
 							clamp_to_grid(
-								w_dist(_parameters.randgen()),
+								random_x(),
 								grid.size().w()),
 							clamp_to_grid(
-								h_dist(_parameters.randgen()),
+								random_y(),
 								grid.size().h())
 						)),
 					sanguis::creator::enemy_type::maggot,
@@ -410,4 +387,91 @@ sanguis::creator::aux_::generators::maze(
 				)
 			}
 		);
+}
+
+namespace
+{
+
+sanguis::creator::opening_container
+openings(
+	sanguis::creator::grid const &_grid,
+	sanguis::creator::grid::pos const &_starting_pos,
+	::variate const &_random_x,
+	::variate const &_random_y
+)
+{
+	auto clamp_to_grid =
+		[]
+		(
+			long unsigned x,
+			long unsigned max
+		)
+		{
+			// max - 2 is the width or height of the effective grid (i.e. no borders)
+			// the / 2 * 2 + 1 part forces an uneven result, which is an empty cell
+			return (x % (max - 2)) / 2 * 2 + 1;
+		};
+
+	sanguis::creator::opening_container
+	openings;
+
+	auto const
+	opening_count =
+		_parameters.opening_count().get();
+
+	// entrance
+	openings.push_back(
+		sanguis::creator::opening(
+			_starting_pos));
+
+	// exit
+	openings.push_back(
+		sanguis::creator::opening(
+			sanguis::creator::grid::pos(
+				clamp_to_grid(
+					_starting_pos.x() + _grid.size().w() / 2,
+					_grid.size().w()),
+				clamp_to_grid(
+					_starting_pos.y() + _grid.size().h() / 2,
+					_grid.size().h())
+	)));
+
+	// all remaining openings
+	auto
+	current_openings =
+		openings.size();
+
+	// this potentially never terminates
+	// i.e. when the requested number of openings don't fit
+	while(
+		current_openings <
+		opening_count
+	)
+	{
+		sanguis::creator::opening next_opening(
+			sanguis::creator::opening(
+				sanguis::creator::grid::pos(
+					clamp_to_grid(
+						_w_dist(),
+						_grid.size().w()),
+					clamp_to_grid(
+						_h_dist(),
+						_grid.size().h())
+		)));
+
+		if (
+			!fcppt::algorithm::contains(
+				openings,
+				next_opening)
+		)
+		{
+			openings.push_back(
+				next_opening);
+			current_openings++;
+		}
+	}
+
+	return openings;
+}
+
 }
