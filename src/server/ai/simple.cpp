@@ -46,8 +46,9 @@ sanguis::server::ai::simple::in_range(
 	if(
 		!target_
 	)
-		target_ =
-			_entity.link();
+		this->new_target(
+			_entity
+		);
 }
 
 void
@@ -55,13 +56,13 @@ sanguis::server::ai::simple::distance_changes(
 	sanguis::server::entities::with_body &_entity
 )
 {
+	// TODO: When do we pick up a new target?
 	if(
 		!target_
 	)
-		target_ =
-			_entity.link();
-
-	// TODO: When do we pick up a new target?
+		this->new_target(
+			_entity
+		);
 }
 
 void
@@ -175,4 +176,14 @@ sanguis::server::ai::simple::sight_range() const
 {
 	return
 		sight_range_;
+}
+
+void
+sanguis::server::ai::simple::new_target(
+	sanguis::server::entities::with_body &_with_body
+)
+{
+	target_ = _with_body.link();
+
+	trail_.clear();
 }

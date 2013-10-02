@@ -55,6 +55,11 @@ private:
 	sight_range() const
 	override;
 
+	void
+	new_target(
+		sanguis::server::entities::with_body &
+	);
+
 	sanguis::server::entities::with_ai &me_;
 
 	sanguis::server::ai::sight_range const sight_range_;
