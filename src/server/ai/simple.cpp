@@ -4,6 +4,7 @@
 #include <sanguis/server/ai/rotate_and_move_to_target.hpp>
 #include <sanguis/server/ai/simple.hpp>
 #include <sanguis/server/ai/idle.hpp>
+#include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/ai/pathing/find_target.hpp>
 #include <sanguis/server/ai/pathing/positions_are_close.hpp>
 #include <sanguis/server/ai/pathing/start.hpp>
@@ -18,11 +19,15 @@
 
 
 sanguis::server::ai::simple::simple(
-	sanguis::server::entities::with_ai &_me
+	sanguis::server::entities::with_ai &_me,
+	sanguis::server::ai::sight_range const _sight_range
 )
 :
 	me_(
 		_me
+	),
+	sight_range_(
+		_sight_range
 	),
 	target_(),
 	trail_()
@@ -163,4 +168,11 @@ sanguis::server::ai::simple::update(
 		)
 	)
 		trail_.pop_back();
+}
+
+sanguis::server::ai::sight_range const
+sanguis::server::ai::simple::sight_range() const
+{
+	return
+		sight_range_;
 }

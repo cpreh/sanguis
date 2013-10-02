@@ -2,8 +2,7 @@
 #define SANGUIS_SERVER_AI_CREATE_SIMPLE_HPP_INCLUDED
 
 #include <sanguis/server/ai/create_function.hpp>
-#include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/server/ai/sight_range_fwd.hpp>
 
 
 namespace sanguis
@@ -15,8 +14,7 @@ namespace ai
 
 sanguis::server::ai::create_function const
 create_simple(
-	sanguis::diff_clock const &,
-	sanguis::random_generator &
+	sanguis::server::ai::sight_range
 );
 
 }

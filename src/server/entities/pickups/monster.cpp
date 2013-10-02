@@ -1,12 +1,12 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/friend_type.hpp>
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/load/context.hpp>
 #include <sanguis/load/friend_name.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/ai/create_simple.hpp>
+#include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/damage/list.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
 #include <sanguis/server/entities/base.hpp>
@@ -26,7 +26,6 @@
 
 sanguis::server::entities::pickups::monster::monster(
 	sanguis::diff_clock const &_diff_clock,
-	sanguis::random_generator &_random_generator,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::team const _team,
 	sanguis::friend_type const _ftype
@@ -40,9 +39,6 @@ sanguis::server::entities::pickups::monster::monster(
 	),
 	diff_clock_(
 		_diff_clock
-	),
-	random_generator_(
-		_random_generator
 	),
 	ftype_(
 		_ftype
@@ -74,8 +70,9 @@ sanguis::server::entities::pickups::monster::do_pickup(
 				100.f
 			),
 			sanguis::server::ai::create_simple(
-				diff_clock_,
-				random_generator_
+				sanguis::server::ai::sight_range(
+					1000.f
+				)
 			),
 			fcppt::make_unique_ptr<
 				sanguis::server::weapons::melee

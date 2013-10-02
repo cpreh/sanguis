@@ -3,6 +3,7 @@
 
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/ai/base_fwd.hpp>
+#include <sanguis/server/ai/sight_range_fwd.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -48,6 +49,11 @@ public:
 	update(
 		sanguis::creator::grid const &
 	) = 0;
+
+	// This could dynamically change in the future!
+	virtual
+	sanguis::server::ai::sight_range const
+	sight_range() const = 0;
 };
 
 }

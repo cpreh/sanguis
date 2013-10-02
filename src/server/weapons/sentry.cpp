@@ -2,11 +2,11 @@
 #include <sanguis/friend_type.hpp>
 #include <sanguis/secondary_weapon_type.hpp>
 #include <sanguis/string_vector.hpp>
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/ai/create_simple.hpp>
+#include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/damage/list.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
 #include <sanguis/server/entities/friend.hpp>
@@ -29,7 +29,6 @@
 
 sanguis::server::weapons::sentry::sentry(
 	sanguis::diff_clock const &_diff_clock,
-	sanguis::random_generator &_random_generator,
 	sanguis::server::weapons::base_cooldown const _base_cooldown,
 	sanguis::server::weapons::cast_point const _cast_point,
 	sanguis::server::weapons::reload_time const _reload_time,
@@ -52,9 +51,6 @@ sanguis::server::weapons::sentry::sentry(
 		_base_cooldown,
 		_cast_point,
 		_reload_time
-	),
-	random_generator_(
-		_random_generator
 	),
 	sentry_weapon_(
 		_sentry_weapon
@@ -87,8 +83,9 @@ sanguis::server::weapons::sentry::do_attack(
 				0.f
 			),
 			sanguis::server::ai::create_simple(
-				this->diff_clock(),
-				random_generator_
+				sanguis::server::ai::sight_range(
+					1000.f
+				)
 			),
 			sentry_weapon_()
 		),

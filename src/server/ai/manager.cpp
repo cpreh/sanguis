@@ -46,8 +46,9 @@ sanguis::server::ai::manager::manager(
 		fcppt::make_unique_ptr<
 			sanguis::server::auras::aggro
 		>(
+			// TODO: sight_range could dynamically change in the future
 			sanguis::server::radius(
-				1000.f // TODO
+				ai_.sight_range().get()
 			),
 			_me.team(),
 			std::bind(

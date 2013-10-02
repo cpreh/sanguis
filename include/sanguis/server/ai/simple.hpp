@@ -3,6 +3,7 @@
 
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/ai/base.hpp>
+#include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/ai/pathing/trail.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/with_ai_fwd.hpp>
@@ -25,9 +26,9 @@ class simple
 		simple
 	);
 public:
-	explicit
 	simple(
-		sanguis::server::entities::with_ai &
+		sanguis::server::entities::with_ai &,
+		sanguis::server::ai::sight_range
 	);
 
 	~simple();
@@ -50,7 +51,13 @@ private:
 	)
 	override;
 
+	sanguis::server::ai::sight_range const
+	sight_range() const
+	override;
+
 	sanguis::server::entities::with_ai &me_;
+
+	sanguis::server::ai::sight_range const sight_range_;
 
 	sanguis::server::entities::auto_weak_link target_;
 

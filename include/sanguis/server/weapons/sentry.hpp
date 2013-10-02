@@ -3,7 +3,6 @@
 
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/string_vector.hpp>
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/create_function.hpp>
@@ -31,7 +30,6 @@ class sentry
 public:
 	sentry(
 		sanguis::diff_clock const &,
-		sanguis::random_generator &,
 		sanguis::server::weapons::base_cooldown,
 		sanguis::server::weapons::cast_point,
 		sanguis::server::weapons::reload_time,
@@ -49,8 +47,6 @@ private:
 	sanguis::string_vector
 	attributes() const
 	override;
-
-	sanguis::random_generator &random_generator_;
 
 	sanguis::server::weapons::create_function const sentry_weapon_;
 };

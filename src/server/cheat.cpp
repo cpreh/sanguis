@@ -1,7 +1,6 @@
 #include <sanguis/cheat_type.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/friend_type.hpp>
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/cheat.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/team.hpp>
@@ -16,7 +15,6 @@
 void
 sanguis::server::cheat(
 	sanguis::diff_clock const &_diff_clock,
-	sanguis::random_generator &_random_generator,
 	sanguis::server::entities::player &_player,
 	sanguis::cheat_type const _type
 )
@@ -46,7 +44,6 @@ sanguis::server::cheat(
 				sanguis::server::entities::pickups::monster
 			>(
 				_diff_clock,
-				_random_generator,
 				_player.environment().load_context(),
 				sanguis::server::team::players,
 				sanguis::friend_type::spider

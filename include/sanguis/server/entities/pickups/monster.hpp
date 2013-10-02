@@ -3,7 +3,6 @@
 
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/friend_type.hpp>
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/pickups/pickup.hpp>
@@ -30,7 +29,6 @@ class monster
 public:
 	monster(
 		sanguis::diff_clock const &,
-		sanguis::random_generator &,
 		sanguis::server::environment::load_context &,
 		sanguis::server::team,
 		sanguis::friend_type
@@ -45,8 +43,6 @@ private:
 	override;
 
 	sanguis::diff_clock const &diff_clock_;
-
-	sanguis::random_generator &random_generator_;
 
 	sanguis::friend_type const ftype_;
 };

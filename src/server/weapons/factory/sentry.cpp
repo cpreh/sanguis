@@ -30,7 +30,6 @@ sanguis::server::weapons::factory::sentry(
 			sanguis::server::weapons::sentry
 		>(
 			diff_clock,
-			_parameters.random_generator(),
 			sanguis::server::weapons::base_cooldown(
 				sanguis::duration_second(
 					5.f

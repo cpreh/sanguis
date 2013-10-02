@@ -780,6 +780,8 @@ set(
 	include/sanguis/server/ai/rotate_to_target.hpp
 	include/sanguis/server/ai/scoped_ptr.hpp
 	include/sanguis/server/ai/search_new_target.hpp
+	include/sanguis/server/ai/sight_range.hpp
+	include/sanguis/server/ai/sight_range_fwd.hpp
 	include/sanguis/server/ai/simple.hpp
 	include/sanguis/server/ai/stop.hpp
 	include/sanguis/server/ai/unique_ptr.hpp

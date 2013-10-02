@@ -5,6 +5,7 @@
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/ai/create_simple.hpp>
+#include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
@@ -41,8 +42,9 @@ sanguis::server::entities::enemies::factory::zombie00(
 				25.f
 			),
 			sanguis::server::ai::create_simple(
-				_parameters.diff_clock(),
-				_parameters.random_generator()
+				sanguis::server::ai::sight_range(
+					1000.f
+				)
 			),
 			fcppt::make_unique_ptr<
 				sanguis::server::weapons::pistol
