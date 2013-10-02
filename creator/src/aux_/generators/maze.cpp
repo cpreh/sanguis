@@ -12,9 +12,12 @@
 #include <sanguis/creator/spawn_pos.hpp>
 #include <sanguis/creator/spawn_type.hpp>
 #include <sanguis/creator/tile.hpp>
+#include <sanguis/creator/tile_is_solid.hpp>
 #include <sanguis/creator/aux_/find_opposing_cell.hpp>
 #include <sanguis/creator/aux_/parameters.hpp>
 #include <sanguis/creator/aux_/randgen.hpp>
+#include <sanguis/creator/aux_/reachable.hpp>
+#include <sanguis/creator/aux_/reachable_grid.hpp>
 #include <sanguis/creator/aux_/result.hpp>
 #include <sanguis/creator/aux_/filled_rect.hpp>
 #include <sanguis/creator/aux_/rect.hpp>
@@ -28,6 +31,7 @@
 #include <fcppt/algorithm/append.hpp>
 #include <fcppt/algorithm/remove.hpp>
 #include <fcppt/io/cerr.hpp>
+#include <fcppt/io/cout.hpp>
 #include <fcppt/container/grid/make_pos_range.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
 #include <fcppt/math/clamp.hpp>
@@ -47,13 +51,17 @@
 namespace
 {
 
+typedef
+fcppt::random::distribution::basic<
+	fcppt::random::distribution::parameters::uniform_int<
+		sanguis::creator::size_type
+	>
+>
+uniform_int;
+
 typedef fcppt::random::variate<
 	sanguis::creator::aux_::randgen,
-	fcppt::random::distribution::basic<
-		fcppt::random::distribution::parameters::uniform_int<
-			sanguis::creator::size_type
-		>
-	>
+	uniform_int
 > variate;
 
 auto clamp_to_grid =
@@ -86,6 +94,7 @@ sanguis::creator::aux_::generators::maze(
 	sanguis::creator::aux_::parameters const &_parameters
 )
 {
+	// initialize grid with walls
 	sanguis::creator::grid grid(
 		sanguis::creator::grid::dim(
 			21,
@@ -94,18 +103,7 @@ sanguis::creator::aux_::generators::maze(
 		sanguis::creator::tile::concrete_wall
 	);
 
-	typedef fcppt::random::distribution::basic<
-		fcppt::random::distribution::parameters::uniform_int<
-			sanguis::creator::size_type
-		>
-	> uniform_int;
-
-	typedef fcppt::random::variate<
-		sanguis::creator::aux_::randgen,
-		uniform_int
-	> variate;
-
-	variate
+	::variate
 	random_cell_index(
 		_parameters.randgen(),
 		uniform_int(
@@ -117,7 +115,7 @@ sanguis::creator::aux_::generators::maze(
 				grid.size().h()
 			)));
 
-	variate
+	::variate
 	random_x(
 		_parameters.randgen(),
 		uniform_int(
@@ -128,7 +126,7 @@ sanguis::creator::aux_::generators::maze(
 				grid.size().w() - 2
 		)));
 
-	variate
+	::variate
 	random_y(
 		_parameters.randgen(),
 		uniform_int(
@@ -198,7 +196,7 @@ sanguis::creator::aux_::generators::maze(
 				pos
 			]
 			==
-				sanguis::creator::tile::concrete_wall
+			sanguis::creator::tile::concrete_wall
 		)
 		{
 			walls.push_back(
