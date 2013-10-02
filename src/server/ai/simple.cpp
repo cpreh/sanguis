@@ -3,7 +3,7 @@
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/server/ai/rotate_and_move_to_target.hpp>
 #include <sanguis/server/ai/simple.hpp>
-#include <sanguis/server/ai/stop.hpp>
+#include <sanguis/server/ai/idle.hpp>
 #include <sanguis/server/ai/pathing/find_target.hpp>
 #include <sanguis/server/ai/pathing/positions_are_close.hpp>
 #include <sanguis/server/ai/pathing/start.hpp>
@@ -64,20 +64,11 @@ sanguis::server::ai::simple::update(
 	sanguis::creator::grid const &_grid
 )
 {
-	sanguis::is_primary_weapon const weapon_to_use(
-		true
-	);
-
 	if(
 		!target_
 	)
 	{
-		me_.use_weapon(
-			false,
-			weapon_to_use
-		);
-
-		sanguis::server::ai::stop(
+		sanguis::server::ai::idle(
 			me_
 		);
 
@@ -92,7 +83,9 @@ sanguis::server::ai::simple::update(
 
 	me_.use_weapon(
 		true,
-		weapon_to_use
+		sanguis::is_primary_weapon(
+			true
+		)
 	);
 
 	sanguis::creator::pos const target_grid_pos(
@@ -107,23 +100,27 @@ sanguis::server::ai::simple::update(
 		)
 	);
 
-	bool const is_close(
+	if(
 		sanguis::server::ai::pathing::positions_are_close(
 			target_grid_pos,
 			my_grid_pos
 		)
-	);
+	)
+	{
+		sanguis::server::ai::rotate_and_move_to_target(
+			me_,
+			target_->center()
+		);
+
+		return;
+	}
 
 	if(
-		!is_close
-		&&
-		(
-			trail_.empty()
-			||
-			!sanguis::server::ai::pathing::positions_are_close(
-				trail_.front(),
-				target_grid_pos
-			)
+		trail_.empty()
+		||
+		!sanguis::server::ai::pathing::positions_are_close(
+			trail_.front(),
+			target_grid_pos
 		)
 	)
 		trail_ =
@@ -138,37 +135,32 @@ sanguis::server::ai::simple::update(
 			);
 
 	if(
-		is_close
-	)
-		sanguis::server::ai::rotate_and_move_to_target(
-			me_,
-			target_->center()
-		);
-	else if(
-		!trail_.empty()
+		trail_.empty()
 	)
 	{
-		sanguis::creator::pos const next_position(
-			trail_.back()
-		);
-
-		sanguis::server::ai::rotate_and_move_to_target(
-			me_,
-			sanguis::server::world::grid_pos_to_center(
-				next_position
-			)
-		);
-
-		if(
-			sanguis::server::ai::pathing::positions_are_close(
-				my_grid_pos,
-				next_position
-			)
-		)
-			trail_.pop_back();
-	}
-	else
-		sanguis::server::ai::stop(
+		sanguis::server::ai::idle(
 			me_
 		);
+
+		return;
+	}
+
+	sanguis::creator::pos const next_position(
+		trail_.back()
+	);
+
+	sanguis::server::ai::rotate_and_move_to_target(
+		me_,
+		sanguis::server::world::grid_pos_to_center(
+			next_position
+		)
+	);
+
+	if(
+		sanguis::server::ai::pathing::positions_are_close(
+			my_grid_pos,
+			next_position
+		)
+	)
+		trail_.pop_back();
 }

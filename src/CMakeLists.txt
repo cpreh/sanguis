@@ -764,6 +764,7 @@ set(
 	include/sanguis/server/ai/create_function.hpp
 	include/sanguis/server/ai/create_simple.hpp
 	include/sanguis/server/ai/entity_set.hpp
+	include/sanguis/server/ai/idle.hpp
 	include/sanguis/server/ai/manager.hpp
 	include/sanguis/server/ai/manager_fwd.hpp
 	include/sanguis/server/ai/move_to_target.hpp
@@ -1447,6 +1448,7 @@ set(
 	src/server/ai/angle_to_target.cpp
 	src/server/ai/base.cpp
 	src/server/ai/create_simple.cpp
+	src/server/ai/idle.cpp
 	src/server/ai/manager.cpp
 	src/server/ai/move_to_target.cpp
 	src/server/ai/pathing/find_target.cpp
