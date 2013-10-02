@@ -769,6 +769,7 @@ set(
 	include/sanguis/server/ai/manager_fwd.hpp
 	include/sanguis/server/ai/move_to_target.hpp
 	include/sanguis/server/ai/pathing/find_target.hpp
+	include/sanguis/server/ai/pathing/is_visible.hpp
 	include/sanguis/server/ai/pathing/positions_are_close.hpp
 	include/sanguis/server/ai/pathing/start.hpp
 	include/sanguis/server/ai/pathing/start_fwd.hpp
@@ -1452,6 +1453,7 @@ set(
 	src/server/ai/manager.cpp
 	src/server/ai/move_to_target.cpp
 	src/server/ai/pathing/find_target.cpp
+	src/server/ai/pathing/is_visible.cpp
 	src/server/ai/pathing/positions_are_close.cpp
 	src/server/ai/rotate_and_move_to_target.cpp
 	src/server/ai/rotate_to_target.cpp
