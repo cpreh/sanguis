@@ -1,22 +1,29 @@
-#include <sanguis/server/angle.hpp>
+#include <sanguis/server/center.hpp>
+#include <sanguis/server/optional_angle.hpp>
+#include <sanguis/server/ai/angle_to_target.hpp>
+#include <sanguis/server/ai/rotate_to.hpp>
 #include <sanguis/server/ai/rotate_to_target.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
-#include <sanguis/server/entities/with_body.hpp>
-#include <fcppt/try_dynamic_cast.hpp>
 
 
 void
 sanguis::server::ai::rotate_to_target(
 	sanguis::server::entities::with_ai &_me,
-	sanguis::server::angle const _angle
+	sanguis::server::center const _target
 )
 {
-	FCPPT_TRY_DYNAMIC_CAST(
-		sanguis::server::entities::with_body *,
-		with_body,
-		&_me
+	sanguis::server::optional_angle const angle_to(
+		sanguis::server::ai::angle_to_target(
+			_me,
+			_target
+		)
+	);
+
+	if(
+		angle_to
 	)
-		with_body->angle(
-			_angle
+		sanguis::server::ai::rotate_to(
+			_me,
+			*angle_to
 		);
 }

@@ -48,7 +48,7 @@ sanguis::server::ai::pathing::is_visible(
 						pos
 					)
 					&&
-					sanguis::creator::tile_is_solid(
+					!sanguis::creator::tile_is_solid(
 						_grid[
 							pos
 						]

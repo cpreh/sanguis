@@ -14,6 +14,7 @@
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/property/always_max.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/weapons/const_optional_ref.hpp>
 #include <sanguis/server/weapons/ias.hpp>
 #include <sanguis/server/weapons/irs.hpp>
 #include <sanguis/server/weapons/target.hpp>
@@ -201,6 +202,26 @@ sanguis::server::entities::with_weapon::target() const
 		*target_;
 }
 
+bool
+sanguis::server::entities::with_weapon::in_range(
+	sanguis::is_primary_weapon const _is_primary
+) const
+{
+	sanguis::server::entities::with_weapon::optional_weapon_ref const weapon(
+		this->is_primary_to_optional_weapon(
+			_is_primary
+		)
+	);
+
+	return
+		target_
+		&&
+		weapon->in_range(
+			*this,
+			*target_
+		);
+}
+
 void
 sanguis::server::entities::with_weapon::use_weapon(
 	bool const _use,
@@ -257,6 +278,28 @@ sanguis::server::entities::with_weapon::irs() const
 	return
 		sanguis::server::weapons::irs(
 			reload_speed_.current()
+		);
+}
+
+sanguis::server::weapons::const_optional_ref const
+sanguis::server::entities::with_weapon::primary_weapon() const
+{
+	return
+		sanguis::server::weapons::const_optional_ref(
+			fcppt::unique_ptr_to_optional(
+				primary_weapon_
+			)
+		);
+}
+
+sanguis::server::weapons::const_optional_ref const
+sanguis::server::entities::with_weapon::secondary_weapon() const
+{
+	return
+		sanguis::server::weapons::const_optional_ref(
+			fcppt::unique_ptr_to_optional(
+				secondary_weapon_
+			)
 		);
 }
 

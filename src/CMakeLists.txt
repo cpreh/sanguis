@@ -777,6 +777,7 @@ set(
 	include/sanguis/server/ai/pathing/target_fwd.hpp
 	include/sanguis/server/ai/pathing/trail.hpp
 	include/sanguis/server/ai/rotate_and_move_to_target.hpp
+	include/sanguis/server/ai/rotate_to.hpp
 	include/sanguis/server/ai/rotate_to_target.hpp
 	include/sanguis/server/ai/scoped_ptr.hpp
 	include/sanguis/server/ai/search_new_target.hpp
@@ -1090,6 +1091,8 @@ set(
 	include/sanguis/server/weapons/backswing_time.hpp
 	include/sanguis/server/weapons/base_cooldown.hpp
 	include/sanguis/server/weapons/cast_point.hpp
+	include/sanguis/server/weapons/const_optional_ref.hpp
+	include/sanguis/server/weapons/const_optional_ref_fwd.hpp
 	include/sanguis/server/weapons/create.hpp
 	include/sanguis/server/weapons/create_function.hpp
 	include/sanguis/server/weapons/damage.hpp
@@ -1460,6 +1463,7 @@ set(
 	src/server/ai/pathing/is_visible.cpp
 	src/server/ai/pathing/positions_are_close.cpp
 	src/server/ai/rotate_and_move_to_target.cpp
+	src/server/ai/rotate_to.cpp
 	src/server/ai/rotate_to_target.cpp
 	src/server/ai/search_new_target.cpp
 	src/server/ai/simple.cpp

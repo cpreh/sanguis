@@ -3,7 +3,7 @@
 #include <sanguis/server/ai/angle_to_target.hpp>
 #include <sanguis/server/ai/move_to_target.hpp>
 #include <sanguis/server/ai/rotate_and_move_to_target.hpp>
-#include <sanguis/server/ai/rotate_to_target.hpp>
+#include <sanguis/server/ai/rotate_to.hpp>
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 
 
@@ -23,7 +23,7 @@ sanguis::server::ai::rotate_and_move_to_target(
 	if(
 		angle_to_target
 	)
-		sanguis::server::ai::rotate_to_target(
+		sanguis::server::ai::rotate_to(
 			_me,
 			*angle_to_target
 		);

@@ -8,6 +8,8 @@
 #include <sanguis/server/ai/idle.hpp>
 #include <sanguis/server/ai/manager.hpp>
 #include <sanguis/server/ai/rotate_and_move_to_target.hpp>
+#include <sanguis/server/ai/rotate_to_target.hpp>
+#include <sanguis/server/ai/stop.hpp>
 #include <sanguis/server/ai/update_result.hpp>
 #include <sanguis/server/ai/pathing/find_target.hpp>
 #include <sanguis/server/ai/pathing/is_visible.hpp>
@@ -143,28 +145,47 @@ sanguis::server::ai::manager::update()
 		me_.environment().grid()
 	);
 
-	me_.use_weapon(
+	bool const is_visible(
 		sanguis::server::ai::pathing::is_visible(
 			grid,
 			target_grid_pos,
 			my_grid_pos
-		),
-		sanguis::is_primary_weapon(
-			true
 		)
 	);
 
+	sanguis::is_primary_weapon const weapon_to_use(
+		true
+	);
+
+	me_.use_weapon(
+		is_visible,
+		weapon_to_use
+	);
+
 	if(
-		sanguis::server::ai::pathing::positions_are_close(
-			target_grid_pos,
-			my_grid_pos
-		)
+		is_visible
 	)
 	{
-		sanguis::server::ai::rotate_and_move_to_target(
-			me_,
-			target->center()
-		);
+		if(
+			me_.in_range(
+				weapon_to_use
+			)
+		)
+		{
+			sanguis::server::ai::stop(
+				me_
+			);
+
+			sanguis::server::ai::rotate_to_target(
+				me_,
+				target->center()
+			);
+		}
+		else
+			sanguis::server::ai::rotate_and_move_to_target(
+				me_,
+				target->center()
+			);
 
 		return;
 	}

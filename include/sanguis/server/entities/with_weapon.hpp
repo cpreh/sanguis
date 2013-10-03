@@ -10,6 +10,7 @@
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/property/always_max.hpp>
+#include <sanguis/server/weapons/const_optional_ref_fwd.hpp>
 #include <sanguis/server/weapons/ias.hpp>
 #include <sanguis/server/weapons/irs.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
@@ -72,6 +73,11 @@ public:
 	sanguis::server::weapons::target const
 	target() const;
 
+	bool
+	in_range(
+		sanguis::is_primary_weapon
+	) const;
+
 	void
 	use_weapon(
 		bool,
@@ -89,6 +95,12 @@ public:
 
 	sanguis::server::weapons::irs const
 	irs() const;
+
+	sanguis::server::weapons::const_optional_ref const
+	primary_weapon() const;
+
+	sanguis::server::weapons::const_optional_ref const
+	secondary_weapon() const;
 
 	void
 	attacking(
