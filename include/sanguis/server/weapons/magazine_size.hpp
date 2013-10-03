@@ -4,6 +4,7 @@
 #include <sanguis/server/weapons/magazine_type.hpp>
 #include <fcppt/strong_typedef.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -12,7 +13,7 @@ namespace weapons
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
-	magazine_type,
+	sanguis::server::weapons::magazine_type,
 	magazine_size
 );
 

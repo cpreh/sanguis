@@ -64,21 +64,22 @@ sanguis::server::weapons::states::castpoint::react(
 		return
 			this->discard_event();
 
-	this->context<
-		sanguis::server::weapons::weapon
-	>().do_attack(
-		sanguis::server::weapons::delayed_attack(
-			_event.owner().center(),
-			_event.owner().angle(),
-			_event.owner().team(),
-			_event.owner().environment(),
-			_event.owner().target()
+	if(
+		this->context<
+			sanguis::server::weapons::weapon
+		>().do_attack(
+			sanguis::server::weapons::delayed_attack(
+				_event.owner().center(),
+				_event.owner().angle(),
+				_event.owner().team(),
+				_event.owner().environment(),
+				_event.owner().target()
+			)
 		)
-	);
-
-	this->context<
-		sanguis::server::weapons::weapon
-	>().use_magazine_item();
+	)
+		this->context<
+			sanguis::server::weapons::weapon
+		>().use_magazine_item();
 
 	if(
 		cancelled_

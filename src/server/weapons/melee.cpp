@@ -61,7 +61,7 @@ sanguis::server::weapons::melee::~melee()
 {
 }
 
-void
+bool
 sanguis::server::weapons::melee::do_attack(
 	sanguis::server::weapons::delayed_attack const &_attack
 )
@@ -81,6 +81,9 @@ sanguis::server::weapons::melee::do_attack(
 			)
 		)
 	);
+
+	return
+		true;
 }
 
 sanguis::string_vector

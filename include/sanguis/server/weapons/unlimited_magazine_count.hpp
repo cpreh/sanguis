@@ -3,6 +3,7 @@
 
 #include <sanguis/server/weapons/magazine_count.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -10,7 +11,10 @@ namespace server
 namespace weapons
 {
 
-extern magazine_count const unlimited_magazine_count;
+// TODO: Use optionals
+extern
+sanguis::server::weapons::magazine_count const
+unlimited_magazine_count;
 
 }
 }

@@ -12,7 +12,7 @@
 #include <sanguis/server/entities/friend.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
-#include <sanguis/server/environment/insert_no_result.hpp>
+#include <sanguis/server/entities/optional_base_ref.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
@@ -62,40 +62,40 @@ sanguis::server::weapons::sentry::~sentry()
 {
 }
 
-void
+bool
 sanguis::server::weapons::sentry::do_attack(
 	sanguis::server::weapons::delayed_attack const &_attack
 )
 {
-	sanguis::server::environment::insert_no_result(
-		_attack.environment(),
-		fcppt::make_unique_ptr<
-			sanguis::server::entities::friend_
-		>(
-			this->diff_clock(),
-			sanguis::friend_type::sentry,
-			_attack.environment().load_context(),
-			sanguis::server::damage::no_armor(),
-			sanguis::server::health(
-				100.f
+	return
+		_attack.environment().insert(
+			fcppt::make_unique_ptr<
+				sanguis::server::entities::friend_
+			>(
+				this->diff_clock(),
+				sanguis::friend_type::sentry,
+				_attack.environment().load_context(),
+				sanguis::server::damage::no_armor(),
+				sanguis::server::health(
+					100.f
+				),
+				sanguis::server::entities::movement_speed(
+					0.f
+				),
+				sanguis::server::ai::create_simple(
+					sanguis::server::ai::sight_range(
+						1000.f
+					)
+				),
+				sentry_weapon_()
 			),
-			sanguis::server::entities::movement_speed(
-				0.f
-			),
-			sanguis::server::ai::create_simple(
-				sanguis::server::ai::sight_range(
-					1000.f
-				)
-			),
-			sentry_weapon_()
-		),
-		sanguis::server::entities::insert_parameters(
-			sanguis::server::center(
-				_attack.target().get()
-			),
-			_attack.angle()
-		)
-	);
+			sanguis::server::entities::insert_parameters(
+				sanguis::server::center(
+					_attack.target().get()
+				),
+				_attack.angle()
+			)
+		).has_value();
 }
 
 sanguis::string_vector

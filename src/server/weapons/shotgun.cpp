@@ -71,7 +71,7 @@ sanguis::server::weapons::shotgun::~shotgun()
 {
 }
 
-void
+bool
 sanguis::server::weapons::shotgun::do_attack(
 	sanguis::server::weapons::delayed_attack const &_attack
 )
@@ -128,6 +128,9 @@ sanguis::server::weapons::shotgun::do_attack(
 			)
 		);
 	}
+
+	return
+		true;
 }
 
 sanguis::string_vector

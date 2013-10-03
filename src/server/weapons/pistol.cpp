@@ -53,7 +53,7 @@ sanguis::server::weapons::pistol::~pistol()
 {
 }
 
-void
+bool
 sanguis::server::weapons::pistol::do_attack(
 	sanguis::server::weapons::delayed_attack const &_attack
 )
@@ -76,6 +76,9 @@ sanguis::server::weapons::pistol::do_attack(
 			_attack.angle()
 		)
 	);
+
+	return
+		true;
 }
 
 sanguis::string_vector

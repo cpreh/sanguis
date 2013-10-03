@@ -4,6 +4,7 @@
 #include <sanguis/duration.hpp>
 #include <fcppt/strong_typedef.hpp>
 
+
 namespace sanguis
 {
 namespace server

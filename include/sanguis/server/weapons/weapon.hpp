@@ -94,7 +94,7 @@ public:
 	description() const;
 protected:
 	virtual
-	void
+	bool
 	do_attack(
 		sanguis::server::weapons::delayed_attack const &
 	) = 0;

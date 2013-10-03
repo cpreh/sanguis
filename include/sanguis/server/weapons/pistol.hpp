@@ -43,10 +43,11 @@ public:
 
 	~pistol();
 private:
-	void
+	bool
 	do_attack(
 		sanguis::server::weapons::delayed_attack const &
-	);
+	)
+	override;
 
 	sanguis::string_vector
 	attributes() const

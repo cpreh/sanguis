@@ -59,7 +59,7 @@ sanguis::server::weapons::rocket_launcher::~rocket_launcher()
 {
 }
 
-void
+bool
 sanguis::server::weapons::rocket_launcher::do_attack(
 	sanguis::server::weapons::delayed_attack const &_attack
 )
@@ -85,6 +85,9 @@ sanguis::server::weapons::rocket_launcher::do_attack(
 			_attack.angle()
 		)
 	);
+
+	return
+		true;
 }
 
 sanguis::string_vector
