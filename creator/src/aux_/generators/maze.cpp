@@ -44,6 +44,8 @@
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real.hpp>
+#include <fcppt/random/distribution/parameters/make_uniform_enum.hpp>
+#include <fcppt/random/distribution/transform/enum.hpp>
 #include <fcppt/random/variate.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <vector>
@@ -546,6 +548,28 @@ spawners(
 				_grid.size().h() - 2
 		)));
 
+	typedef
+	fcppt::random::distribution::basic<
+		fcppt::random::distribution::parameters::uniform_int<
+			sanguis::creator::enemy_type
+		>
+	> uniform_enum;
+
+	typedef
+	fcppt::random::variate<
+		sanguis::creator::aux_::randgen,
+		uniform_enum
+	> random_monster_type;
+
+	random_monster_type
+	random_monster(
+		_randgen,
+		uniform_enum(
+			fcppt::random::distribution::parameters::make_uniform_enum<
+				sanguis::creator::enemy_type
+			>()
+		));
+
 	sanguis::creator::spawn_container
 	spawners;
 
@@ -608,7 +632,7 @@ spawners(
 			sanguis::creator::spawn(
 				sanguis::creator::spawn_pos(
 					*candidate),
-				sanguis::creator::enemy_type::maggot,
+				random_monster(),
 				sanguis::creator::spawn_type::spawner));
 
 		current_spawners++;
