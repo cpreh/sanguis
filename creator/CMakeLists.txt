@@ -79,6 +79,7 @@ set(
 	src/include/sanguis/creator/aux_/deserialization/tile_grid.hpp
 	src/include/sanguis/creator/aux_/deserialization/top_result.hpp
 	src/include/sanguis/creator/aux_/filled_rect.hpp
+	src/include/sanguis/creator/aux_/find_closest.hpp
 	src/include/sanguis/creator/aux_/find_opposing_cell.hpp
 	src/include/sanguis/creator/aux_/generator_function.hpp
 	src/include/sanguis/creator/aux_/generator_map.hpp

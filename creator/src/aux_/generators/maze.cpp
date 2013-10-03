@@ -1,3 +1,4 @@
+#include <sge/exception.hpp>
 #include <sanguis/creator/background_grid.hpp>
 #include <sanguis/creator/background_tile.hpp>
 #include <sanguis/creator/enemy_type.hpp>
@@ -20,11 +21,12 @@
 #include <sanguis/creator/aux_/reachable_grid.hpp>
 #include <sanguis/creator/aux_/result.hpp>
 #include <sanguis/creator/aux_/filled_rect.hpp>
+#include <sanguis/creator/aux_/find_closest.hpp>
 #include <sanguis/creator/aux_/rect.hpp>
 #include <fcppt/container/grid/in_range.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <sanguis/creator/aux_/generators/maze.hpp>
-#include <fcppt/assert/error.hpp>
+#include <fcppt/assert/error_message.hpp>
 #include <fcppt/algorithm/contains.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
@@ -76,6 +78,10 @@ auto clamp_to_grid =
 		return (x % (max - 2)) / 2 * 2 + 1;
 	};
 
+auto
+tile_is_nonsolid =
+	[](sanguis::creator::tile _tile){return !sanguis::creator::tile_is_solid(_tile);};
+
 sanguis::creator::opening_container
 openings(
 	sanguis::creator::grid const &,
@@ -83,6 +89,13 @@ openings(
 	sanguis::creator::opening_count const,
 	::variate &,
 	::variate &
+);
+
+sanguis::creator::spawn_container
+spawners(
+	sanguis::creator::grid &,
+	unsigned const,
+	sanguis::creator::aux_::randgen &
 );
 
 }
@@ -144,15 +157,6 @@ sanguis::creator::aux_::generators::maze(
 		(random_x() / 2) * 2 + 1,
 		(random_y() / 2) * 2 + 1
 	);
-
-	sanguis::creator::opening_container openings =
-		::openings(
-			grid,
-			starting_pos,
-			_parameters.opening_count(),
-			random_x,
-			random_y
-		);
 
 	// initialize grid with empty cells every other row and column,
 	// surrounded on all sides by walls
@@ -253,6 +257,16 @@ sanguis::creator::aux_::generators::maze(
 			random_wall
 		);
 	}
+
+	sanguis::creator::opening_container
+	openings =
+		::openings(
+			grid,
+			starting_pos,
+			_parameters.opening_count(),
+			random_x,
+			random_y
+		);
 
 	sanguis::creator::grid::pos::value_type const
 	scaling_factor = 2;
@@ -381,27 +395,22 @@ sanguis::creator::aux_::generators::maze(
 			sanguis::creator::tile::door;
 	}
 
+
+	sanguis::creator::spawn_container
+	spawners =
+		::spawners(
+			ret,
+			// FIXME: depending on the difficulty?
+			5u,
+			_parameters.randgen()
+		);
+
 	return
 		sanguis::creator::aux_::result(
 			ret,
 			ret_bg,
 			openings,
-			sanguis::creator::spawn_container{
-				sanguis::creator::spawn(
-					sanguis::creator::spawn_pos(
-						scaling_factor *
-						sanguis::creator::pos(
-							clamp_to_grid(
-								random_x(),
-								grid.size().w()),
-							clamp_to_grid(
-								random_y(),
-								grid.size().h())
-						)),
-					sanguis::creator::enemy_type::maggot,
-					sanguis::creator::spawn_type::spawner
-				)
-			}
+			spawners
 		);
 }
 
@@ -426,39 +435,74 @@ openings(
 			_starting_pos));
 
 	// exit
+	auto
+	closest_nonsolid =
+		[
+			&_grid
+		]
+		(
+			sanguis::creator::grid::pos const &_pos
+		)
+		{
+			return
+			sanguis::creator::aux_::find_closest(
+				_grid,
+				_pos,
+				::tile_is_nonsolid,
+				10u);
+		};
+
+	auto
+	possible_opening =
+		closest_nonsolid(
+			sanguis::creator::grid::pos(
+				(_starting_pos.x() + _grid.size().w() / 2) % _grid.size().w(),
+				(_starting_pos.y() + _grid.size().h() / 2) % _grid.size().h()));
+
+	FCPPT_ASSERT_ERROR_MESSAGE(
+		possible_opening,
+		FCPPT_TEXT(
+			"Could not find a nonsolid tile close enough to the intended exit!"));
+
 	openings.push_back(
 		sanguis::creator::opening(
-			sanguis::creator::grid::pos(
-				clamp_to_grid(
-					_starting_pos.x() + _grid.size().w() / 2,
-					_grid.size().w()),
-				clamp_to_grid(
-					_starting_pos.y() + _grid.size().h() / 2,
-					_grid.size().h())
-	)));
+			*possible_opening));
 
 	// all remaining openings
 	auto
 	current_openings =
 		openings.size();
 
-	// this potentially never terminates
-	// i.e. when the requested number of openings don't fit
+	unsigned iterations = 0;
+
 	while(
 		current_openings <
 		_opening_count.get()
 	)
 	{
-		sanguis::creator::opening next_opening(
-			sanguis::creator::opening(
+		if(
+			++iterations
+			>
+			_opening_count.get() * 5
+		)
+			throw sge::exception(
+				FCPPT_TEXT(
+					"Could not place openings, giving up."));
+
+		auto
+		candidate =
+			closest_nonsolid(
 				sanguis::creator::grid::pos(
-					clamp_to_grid(
 						_random_x(),
-						_grid.size().w()),
-					clamp_to_grid(
-						_random_y(),
-						_grid.size().h())
-		)));
+						_random_y()));
+
+		if (!candidate)
+			continue;
+
+		sanguis::creator::opening
+		next_opening =
+			sanguis::creator::opening(
+				*candidate);
 
 		if (
 			!fcppt::algorithm::contains(
@@ -473,6 +517,104 @@ openings(
 	}
 
 	return openings;
+}
+
+sanguis::creator::spawn_container
+spawners(
+	sanguis::creator::grid &_grid,
+	unsigned const _spawner_count,
+	sanguis::creator::aux_::randgen &_randgen
+)
+{
+	::variate random_x(
+		_randgen,
+		uniform_int(
+			uniform_int::param_type::min(
+				1u
+			),
+			uniform_int::param_type::max(
+				_grid.size().w() - 2
+		)));
+
+	::variate random_y(
+		_randgen,
+		uniform_int(
+			uniform_int::param_type::min(
+				1u
+			),
+			uniform_int::param_type::max(
+				_grid.size().h() - 2
+		)));
+
+	sanguis::creator::spawn_container
+	spawners;
+
+	auto
+	current_spawners =
+		fcppt::literal<
+			sanguis::creator::spawn_container::size_type
+		>(
+			0);
+
+	auto
+	closest_nonsolid =
+		[
+			&_grid
+		]
+		(
+			sanguis::creator::grid::pos const &pos
+		)
+		{
+			return
+			sanguis::creator::aux_::find_closest(
+				_grid,
+				pos,
+				::tile_is_nonsolid,
+				5u);
+		};
+
+	unsigned iterations = 0;
+
+	while(
+		current_spawners <
+		_spawner_count
+	)
+	{
+		if(
+			++iterations
+			>
+			_spawner_count * 5
+		)
+			throw sge::exception(
+				FCPPT_TEXT(
+					"Could not place spawners, giving up."));
+
+		auto candidate =
+			closest_nonsolid(
+					sanguis::creator::grid::pos(
+						random_x(),
+						random_y()));
+
+		if (!candidate)
+			continue;
+
+		_grid
+		[
+			*candidate
+		] =
+		sanguis::creator::tile::spawner;
+
+		spawners.push_back(
+			sanguis::creator::spawn(
+				sanguis::creator::spawn_pos(
+					*candidate),
+				sanguis::creator::enemy_type::maggot,
+				sanguis::creator::spawn_type::spawner));
+
+		current_spawners++;
+	}
+
+	return spawners;
 }
 
 }
