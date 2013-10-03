@@ -785,6 +785,8 @@ set(
 	include/sanguis/server/ai/simple.hpp
 	include/sanguis/server/ai/stop.hpp
 	include/sanguis/server/ai/unique_ptr.hpp
+	include/sanguis/server/ai/update_result.hpp
+	include/sanguis/server/ai/update_result_fwd.hpp
 	include/sanguis/server/angle.hpp
 	include/sanguis/server/angle_fwd.hpp
 	include/sanguis/server/auras/aggro.hpp

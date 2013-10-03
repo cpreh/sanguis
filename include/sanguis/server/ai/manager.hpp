@@ -5,6 +5,8 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/server/ai/entity_set.hpp>
 #include <sanguis/server/ai/manager_fwd.hpp>
+#include <sanguis/server/ai/update_result_fwd.hpp>
+#include <sanguis/server/ai/pathing/trail.hpp>
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -44,6 +46,11 @@ private:
 		sanguis::server::entities::with_body &
 	);
 
+	void
+	update_target(
+		sanguis::server::ai::update_result
+	);
+
 	sanguis::server::ai::base &ai_;
 
 	sanguis::server::entities::with_ai &me_;
@@ -51,6 +58,8 @@ private:
 	sanguis::server::ai::entity_set potential_targets_;
 
 	sanguis::diff_timer update_timer_;
+
+	sanguis::server::ai::pathing::trail trail_;
 };
 
 }

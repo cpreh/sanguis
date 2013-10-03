@@ -1,10 +1,9 @@
 #ifndef SANGUIS_SERVER_AI_SIMPLE_HPP_INCLUDED
 #define SANGUIS_SERVER_AI_SIMPLE_HPP_INCLUDED
 
-#include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/ai/base.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
-#include <sanguis/server/ai/pathing/trail.hpp>
+#include <sanguis/server/ai/update_result_fwd.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
@@ -33,30 +32,34 @@ public:
 
 	~simple();
 private:
-	void
-	in_range(
-		sanguis::server::entities::with_body &
-	)
-	override;
-
-	void
-	distance_changes(
-		sanguis::server::entities::with_body &
-	)
-	override;
-
-	void
-	update(
-		sanguis::creator::grid const &
-	)
+	sanguis::server::entities::auto_weak_link
+	target() const
 	override;
 
 	sanguis::server::ai::sight_range const
 	sight_range() const
 	override;
 
-	void
-	new_target(
+	sanguis::server::ai::update_result
+	in_range(
+		sanguis::server::entities::with_body &
+	)
+	override;
+
+	sanguis::server::ai::update_result
+	out_of_range(
+		sanguis::server::entities::with_body &
+	)
+	override;
+
+	sanguis::server::ai::update_result
+	distance_changes(
+		sanguis::server::entities::with_body &
+	)
+	override;
+
+	sanguis::server::ai::update_result
+	update_target(
 		sanguis::server::entities::with_body &
 	);
 
@@ -65,8 +68,6 @@ private:
 	sanguis::server::ai::sight_range const sight_range_;
 
 	sanguis::server::entities::auto_weak_link target_;
-
-	sanguis::server::ai::pathing::trail trail_;
 };
 
 }
