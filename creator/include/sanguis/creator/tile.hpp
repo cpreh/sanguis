@@ -13,6 +13,7 @@ enum class tile
 {
 	nothing,
 	door,
+	spawner,
 	concrete_wall,
 	fcppt_maximum = concrete_wall
 };
