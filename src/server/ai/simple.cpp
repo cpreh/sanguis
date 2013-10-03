@@ -6,6 +6,7 @@
 #include <sanguis/server/ai/idle.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/ai/pathing/find_target.hpp>
+#include <sanguis/server/ai/pathing/is_visible.hpp>
 #include <sanguis/server/ai/pathing/positions_are_close.hpp>
 #include <sanguis/server/ai/pathing/start.hpp>
 #include <sanguis/server/ai/pathing/target.hpp>
@@ -81,19 +82,6 @@ sanguis::server::ai::simple::update(
 		return;
 	}
 
-	me_.target(
-		sanguis::server::weapons::target(
-			target_->center().get()
-		)
-	);
-
-	me_.use_weapon(
-		true,
-		sanguis::is_primary_weapon(
-			true
-		)
-	);
-
 	sanguis::creator::pos const target_grid_pos(
 		sanguis::server::world::center_to_grid_pos(
 			target_->center()
@@ -105,6 +93,28 @@ sanguis::server::ai::simple::update(
 			me_.center()
 		)
 	);
+
+	if(
+		sanguis::server::ai::pathing::is_visible(
+			_grid,
+			target_grid_pos,
+			my_grid_pos
+		)
+	)
+	{
+		me_.target(
+			sanguis::server::weapons::target(
+				target_->center().get()
+			)
+		);
+
+		me_.use_weapon(
+			true,
+			sanguis::is_primary_weapon(
+				true
+			)
+		);
+	}
 
 	if(
 		sanguis::server::ai::pathing::positions_are_close(
