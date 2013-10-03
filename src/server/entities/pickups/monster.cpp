@@ -13,6 +13,7 @@
 #include <sanguis/server/entities/friend.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
+#include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/entities/pickups/monster.hpp>
 #include <sanguis/server/entities/pickups/pickup.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
@@ -28,7 +29,8 @@ sanguis::server::entities::pickups::monster::monster(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::team const _team,
-	sanguis::friend_type const _ftype
+	sanguis::friend_type const _ftype,
+	sanguis::server::entities::enemies::difficulty const _difficulty
 )
 :
 	sanguis::server::entities::pickups::pickup(

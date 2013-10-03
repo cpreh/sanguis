@@ -5,6 +5,7 @@
 #include <sanguis/friend_type.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
+#include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/entities/pickups/pickup.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -31,7 +32,8 @@ public:
 		sanguis::diff_clock const &,
 		sanguis::server::environment::load_context &,
 		sanguis::server::team,
-		sanguis::friend_type
+		sanguis::friend_type,
+		sanguis::server::entities::enemies::difficulty
 	);
 
 	~monster();

@@ -384,6 +384,7 @@ sanguis::server::global::context::player_cheat(
 {
 	sanguis::server::cheat(
 		diff_clock_,
+		random_generator_,
 		this->player(
 			_player_id
 		),

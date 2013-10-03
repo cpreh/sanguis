@@ -274,7 +274,8 @@ sanguis::server::world::pickup_spawner::spawn_monster(
 			diff_clock_,
 			env_.load_context(),
 			sanguis::server::team::players,
-			sanguis::friend_type::spider
+			sanguis::friend_type::spider,
+			_difficulty
 		),
 		_center
 	);

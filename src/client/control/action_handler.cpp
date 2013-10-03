@@ -95,10 +95,21 @@ sanguis::client::control::action_handler::action_handler(
 				_console,
 				sanguis::cheat_type::monster_pickup,
 				sge::console::callback::name(
-					SGE_FONT_LIT("monsterpickup")
+					SGE_FONT_LIT("monster_pickup")
 				),
 				sge::console::callback::short_description(
 					SGE_FONT_LIT("Spawn a monster pickup")
+				)
+			)
+		)(
+			this->cheat_connection(
+				_console,
+				sanguis::cheat_type::sentry_pickup,
+				sge::console::callback::name(
+					SGE_FONT_LIT("sentry_pickup")
+				),
+				sge::console::callback::short_description(
+					SGE_FONT_LIT("Spawn a sentry pickup")
 				)
 			)
 		)

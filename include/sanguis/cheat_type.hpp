@@ -12,7 +12,8 @@ enum class cheat_type
 	exp,
 	kill,
 	monster_pickup,
-	fcppt_maximum = monster_pickup
+	sentry_pickup,
+	fcppt_maximum = sentry_pickup
 };
 
 }

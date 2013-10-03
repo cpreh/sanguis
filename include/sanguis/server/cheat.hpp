@@ -3,6 +3,7 @@
 
 #include <sanguis/cheat_type_fwd.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/entities/player_fwd.hpp>
 
 
@@ -14,6 +15,7 @@ namespace server
 void
 cheat(
 	sanguis::diff_clock const &,
+	sanguis::random_generator &,
 	sanguis::server::entities::player &,
 	sanguis::cheat_type
 );
