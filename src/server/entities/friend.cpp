@@ -13,10 +13,12 @@
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/ai/base.hpp>
 #include <sanguis/server/ai/create_function.hpp>
+#include <sanguis/server/collision/with_world.hpp>
 #include <sanguis/server/damage/armor.hpp>
 #include <sanguis/server/entities/body_velocity_combiner.hpp>
 #include <sanguis/server/entities/friend.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
+#include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
@@ -92,6 +94,30 @@ sanguis::server::entities::friend_::friend_(
 		_ftype
 	)
 {
+}
+
+bool
+sanguis::server::entities::friend_::on_transfer(
+	sanguis::server::entities::transfer_parameters const &_parameters
+)
+{
+	if(
+		ftype_
+		==
+		sanguis::friend_type::sentry
+		&&
+		sanguis::server::collision::with_world(
+			_parameters.center(),
+			this->dim(),
+			_parameters.grid()
+		)
+	)
+		return false;
+
+	return
+		sanguis::server::entities::with_body::on_transfer(
+			_parameters
+		);
 }
 
 void

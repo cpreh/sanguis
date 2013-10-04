@@ -832,6 +832,7 @@ set(
 	include/sanguis/server/collision/result.hpp
 	include/sanguis/server/collision/result_fwd.hpp
 	include/sanguis/server/collision/with_world.hpp
+	include/sanguis/server/collision/with_world_move.hpp
 	include/sanguis/server/console.hpp
 	include/sanguis/server/console_command_pair.hpp
 	include/sanguis/server/console_command_pair_fwd.hpp
@@ -1488,6 +1489,7 @@ set(
 	src/server/collision/ghost_base.cpp
 	src/server/collision/result.cpp
 	src/server/collision/with_world.cpp
+	src/server/collision/with_world_move.cpp
 	src/server/console.cpp
 	src/server/create.cpp
 	src/server/create_original.cpp

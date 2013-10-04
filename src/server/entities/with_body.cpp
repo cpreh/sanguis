@@ -1,4 +1,3 @@
-#include <sanguis/duration_second.hpp>
 #include <sanguis/collision/world/body_base.hpp>
 #include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/server/angle.hpp>
@@ -11,7 +10,6 @@
 #include <sanguis/server/collision/optional_result.hpp>
 #include <sanguis/server/collision/position_callback.hpp>
 #include <sanguis/server/collision/result.hpp>
-#include <sanguis/server/collision/with_world.hpp>
 #include <sanguis/server/entities/check_dim.hpp>
 #include <sanguis/server/entities/radius.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
@@ -135,34 +133,22 @@ sanguis::server::entities::with_body::dim() const
 
 bool
 sanguis::server::entities::with_body::on_transfer(
-	sanguis::server::entities::transfer_parameters const &_params
+	sanguis::server::entities::transfer_parameters const &_parameters
 )
 {
 	angle_ =
-		_params.angle();
+		_parameters.angle();
 
 	collision_body_.transfer(
-		_params.world(),
-		_params.center(),
+		_parameters.world(),
+		_parameters.center(),
 		this->initial_speed(),
 		this->collision_groups()
 	);
 
-	// Do this before we get a speed != 0
-	if(
-		sanguis::server::collision::with_world(
-			*this,
-			_params.grid(),
-			sanguis::duration_second(
-				0
-			)
-		)
-	)
-		return false;
-
 	return
 		sanguis::server::entities::with_ghosts::on_transfer(
-			_params
+			_parameters
 		);
 }
 

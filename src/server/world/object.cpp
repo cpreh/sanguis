@@ -43,7 +43,7 @@
 #include <sanguis/server/string.hpp>
 #include <sanguis/server/collision/body_collision.hpp>
 #include <sanguis/server/collision/optional_result.hpp>
-#include <sanguis/server/collision/with_world.hpp>
+#include <sanguis/server/collision/with_world_move.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/is_type.hpp>
@@ -899,7 +899,7 @@ sanguis::server::world::object::entity_collision(
 	)
 	{
 		sanguis::server::collision::optional_result const result(
-			sanguis::server::collision::with_world(
+			sanguis::server::collision::with_world_move(
 				*with_body,
 				grid_,
 				_duration

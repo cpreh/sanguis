@@ -12,6 +12,7 @@
 #include <sanguis/server/damage/armor.hpp>
 #include <sanguis/server/entities/body_velocity_combiner.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
+#include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
@@ -59,6 +60,12 @@ public:
 		sanguis::server::weapons::unique_ptr &&
 	);
 private:
+	bool
+	on_transfer(
+		sanguis::server::entities::transfer_parameters const &
+	)
+	override;
+
 	void
 	on_update()
 	override;
