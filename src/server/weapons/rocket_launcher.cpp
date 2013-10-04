@@ -14,10 +14,11 @@
 #include <sanguis/server/weapons/delayed_attack.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/make_attribute.hpp>
+#include <sanguis/server/weapons/optional_magazine_size.hpp>
+#include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/rocket_launcher.hpp>
-#include <sanguis/server/weapons/unlimited_magazine_count.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -40,11 +41,14 @@ sanguis::server::weapons::rocket_launcher::rocket_launcher(
 		_diff_clock,
 		_type,
 		_range,
-		_magazine_size,
-		sanguis::server::weapons::unlimited_magazine_count,
+		sanguis::server::weapons::optional_magazine_size(
+			_magazine_size
+		),
 		_base_cooldown,
 		_cast_point,
-		_reload_time
+		sanguis::server::weapons::optional_reload_time(
+			_reload_time
+		)
 	),
 	damage_(
 		_damage

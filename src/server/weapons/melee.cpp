@@ -14,10 +14,9 @@
 #include <sanguis/server/weapons/delayed_attack.hpp>
 #include <sanguis/server/weapons/make_attribute.hpp>
 #include <sanguis/server/weapons/melee.hpp>
+#include <sanguis/server/weapons/optional_magazine_size.hpp>
+#include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/range.hpp>
-#include <sanguis/server/weapons/reload_time.hpp>
-#include <sanguis/server/weapons/unlimited_magazine_size.hpp>
-#include <sanguis/server/weapons/unlimited_magazine_count.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -37,19 +36,14 @@ sanguis::server::weapons::melee::melee(
 			sanguis::primary_weapon_type::melee
 		),
 		_range,
-		sanguis::server::weapons::unlimited_magazine_size,
-		sanguis::server::weapons::unlimited_magazine_count,
+		sanguis::server::weapons::optional_magazine_size(),
 		_base_cooldown,
 		sanguis::server::weapons::cast_point(
 			sanguis::duration_second(
 				0.f
 			)
 		),
-		sanguis::server::weapons::reload_time(
-			sanguis::duration_second(
-				0.f
-			)
-		)
+		sanguis::server::weapons::optional_reload_time()
 	),
 	damage_(
 		_damage

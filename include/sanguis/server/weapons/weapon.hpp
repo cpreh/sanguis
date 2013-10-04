@@ -11,11 +11,10 @@
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/delayed_attack_fwd.hpp>
-#include <sanguis/server/weapons/magazine_count.hpp>
-#include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/magazine_type.hpp>
+#include <sanguis/server/weapons/optional_magazine_size.hpp>
+#include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/range.hpp>
-#include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/target_fwd.hpp>
 #include <sanguis/server/weapons/weapon_fwd.hpp>
 #include <sanguis/server/weapons/states/backswing_fwd.hpp>
@@ -52,11 +51,10 @@ protected:
 		sanguis::diff_clock const &,
 		sanguis::weapon_type,
 		sanguis::server::weapons::range,
-		sanguis::server::weapons::magazine_size,
-		sanguis::server::weapons::magazine_count,
+		sanguis::server::weapons::optional_magazine_size,
 		sanguis::server::weapons::base_cooldown,
 		sanguis::server::weapons::cast_point,
-		sanguis::server::weapons::reload_time
+		sanguis::server::weapons::optional_reload_time
 	);
 public:
 	virtual
@@ -78,7 +76,7 @@ public:
 	sanguis::weapon_type
 	type() const;
 
-	sanguis::server::weapons::magazine_size const
+	sanguis::server::weapons::optional_magazine_size const
 	magazine_size() const;
 
 	bool
@@ -120,16 +118,13 @@ private:
 	bool
 	magazine_empty() const;
 
-	void
-	magazine_exhausted();
-
 	sanguis::server::weapons::cast_point const
 	cast_point() const;
 
 	sanguis::server::weapons::backswing_time const
 	backswing_time() const;
 
-	sanguis::server::weapons::reload_time const
+	sanguis::server::weapons::optional_reload_time const
 	reload_time() const;
 
 	sanguis::diff_clock const &diff_clock_;
@@ -140,15 +135,13 @@ private:
 
 	sanguis::server::weapons::magazine_type magazine_used_;
 
-	sanguis::server::weapons::magazine_count::value_type magazine_count_;
-
-	sanguis::server::weapons::magazine_size const magazine_size_;
+	sanguis::server::weapons::optional_magazine_size const magazine_size_;
 
 	sanguis::server::weapons::cast_point const cast_point_;
 
 	sanguis::server::weapons::backswing_time const backswing_time_;
 
-	sanguis::server::weapons::reload_time const reload_time_;
+	sanguis::server::weapons::optional_reload_time const reload_time_;
 
 	fcppt::scoped_state_machine<
 		sanguis::server::weapons::weapon

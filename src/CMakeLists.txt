@@ -1121,11 +1121,14 @@ set(
 	include/sanguis/server/weapons/irs.hpp
 	include/sanguis/server/weapons/log.hpp
 	include/sanguis/server/weapons/log_location.hpp
-	include/sanguis/server/weapons/magazine_count.hpp
 	include/sanguis/server/weapons/magazine_size.hpp
 	include/sanguis/server/weapons/magazine_type.hpp
 	include/sanguis/server/weapons/make_attribute.hpp
 	include/sanguis/server/weapons/melee.hpp
+	include/sanguis/server/weapons/optional_magazine_size.hpp
+	include/sanguis/server/weapons/optional_magazine_size_fwd.hpp
+	include/sanguis/server/weapons/optional_reload_time.hpp
+	include/sanguis/server/weapons/optional_reload_time_fwd.hpp
 	include/sanguis/server/weapons/pistol.hpp
 	include/sanguis/server/weapons/player_start_weapon.hpp
 	include/sanguis/server/weapons/range.hpp
@@ -1141,6 +1144,8 @@ set(
 	include/sanguis/server/weapons/states/castpoint_fwd.hpp
 	include/sanguis/server/weapons/states/castpoint_parameters.hpp
 	include/sanguis/server/weapons/states/castpoint_parameters_fwd.hpp
+	include/sanguis/server/weapons/states/exhausted.hpp
+	include/sanguis/server/weapons/states/exhausted_fwd.hpp
 	include/sanguis/server/weapons/states/ready.hpp
 	include/sanguis/server/weapons/states/ready_fwd.hpp
 	include/sanguis/server/weapons/states/reloading.hpp
@@ -1150,8 +1155,6 @@ set(
 	include/sanguis/server/weapons/target.hpp
 	include/sanguis/server/weapons/target_fwd.hpp
 	include/sanguis/server/weapons/unique_ptr.hpp
-	include/sanguis/server/weapons/unlimited_magazine_count.hpp
-	include/sanguis/server/weapons/unlimited_magazine_size.hpp
 	include/sanguis/server/weapons/weapon.hpp
 	include/sanguis/server/weapons/weapon_fwd.hpp
 	include/sanguis/server/world/center_in_grid_pos.hpp
@@ -1646,11 +1649,10 @@ set(
 	src/server/weapons/states/backswing_parameters.cpp
 	src/server/weapons/states/castpoint.cpp
 	src/server/weapons/states/castpoint_parameters.cpp
+	src/server/weapons/states/exhausted.cpp
 	src/server/weapons/states/ready.cpp
 	src/server/weapons/states/reloading.cpp
 	src/server/weapons/states/reloading_parameters.cpp
-	src/server/weapons/unlimited_magazine_count.cpp
-	src/server/weapons/unlimited_magazine_size.cpp
 	src/server/weapons/weapon.cpp
 	src/server/world/center_in_grid_pos.cpp
 	src/server/world/center_to_grid_pos.cpp

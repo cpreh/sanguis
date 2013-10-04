@@ -9,13 +9,11 @@
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/log_location.hpp>
-#include <sanguis/server/weapons/magazine_count.hpp>
-#include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/make_attribute.hpp>
+#include <sanguis/server/weapons/optional_magazine_size.hpp>
+#include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/range.hpp>
-#include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/target.hpp>
-#include <sanguis/server/weapons/unlimited_magazine_count.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/events/poll.hpp>
 #include <sanguis/server/weapons/events/shoot.hpp>
@@ -57,11 +55,10 @@ sanguis::server::weapons::weapon::weapon(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::weapon_type const _type,
 	sanguis::server::weapons::range const _range,
-	sanguis::server::weapons::magazine_size const _magazine_size,
-	sanguis::server::weapons::magazine_count const _magazine_count,
+	sanguis::server::weapons::optional_magazine_size const _magazine_size,
 	sanguis::server::weapons::base_cooldown const _base_cooldown,
 	sanguis::server::weapons::cast_point const _cast_point,
-	sanguis::server::weapons::reload_time const _reload_time
+	sanguis::server::weapons::optional_reload_time const _reload_time
 )
 :
 	diff_clock_(
@@ -76,9 +73,6 @@ sanguis::server::weapons::weapon::weapon(
 	magazine_used_(
 		0u
 	),
-	magazine_count_(
-		_magazine_count.get()
-	),
 	magazine_size_(
 		_magazine_size
 	),
@@ -91,7 +85,7 @@ sanguis::server::weapons::weapon::weapon(
 		_cast_point.get()
 	),
 	reload_time_(
-		_reload_time.get()
+		_reload_time
 	),
 	scoped_machine_(
 		*this
@@ -107,7 +101,9 @@ sanguis::server::weapons::weapon::weapon(
 	);
 
 	FCPPT_ASSERT_PRE(
-		this->magazine_size().get() != 0
+		!this->magazine_size()
+		||
+		this->magazine_size()->get() != 0u
 	);
 }
 
@@ -165,7 +161,7 @@ sanguis::server::weapons::weapon::type() const
 	return type_;
 }
 
-sanguis::server::weapons::magazine_size const
+sanguis::server::weapons::optional_magazine_size const
 sanguis::server::weapons::weapon::magazine_size() const
 {
 	return magazine_size_;
@@ -189,7 +185,10 @@ sanguis::server::weapons::weapon::in_range(
 bool
 sanguis::server::weapons::weapon::usable() const
 {
-	return magazine_count_ > 0;
+	return
+		!this->magazine_empty()
+		||
+		reload_time_.has_value();
 }
 
 sanguis::weapon_description
@@ -207,9 +206,13 @@ sanguis::server::weapons::weapon::description() const
 					),
 					sanguis::server::weapons::make_attribute(
 						FCPPT_TEXT("magazine size"),
-						fcppt::insert_to_fcppt_string(
-							magazine_size_
-						)
+						magazine_size_
+						?
+							fcppt::insert_to_fcppt_string(
+								*magazine_size_
+							)
+						:
+							FCPPT_TEXT("none")
 					),
 					sanguis::server::weapons::make_attribute(
 						FCPPT_TEXT("cast point"),
@@ -225,9 +228,13 @@ sanguis::server::weapons::weapon::description() const
 					),
 					sanguis::server::weapons::make_attribute(
 						FCPPT_TEXT("reload time"),
-						fcppt::insert_to_fcppt_string(
-							reload_time_.get().count()
-						)
+						reload_time_
+						?
+							fcppt::insert_to_fcppt_string(
+								reload_time_->get().count()
+							)
+						:
+							FCPPT_TEXT("none")
 					)
 				},
 				this->attributes()
@@ -251,10 +258,15 @@ sanguis::server::weapons::weapon::reset_magazine()
 void
 sanguis::server::weapons::weapon::use_magazine_item()
 {
+	if(
+		!magazine_size_
+	)
+		return;
+
 	++magazine_used_;
 
 	FCPPT_ASSERT_ERROR(
-		magazine_used_ <= magazine_size_.get()
+		magazine_used_ <= magazine_size_->get()
 	);
 }
 
@@ -262,16 +274,11 @@ bool
 sanguis::server::weapons::weapon::magazine_empty() const
 {
 	return
-		magazine_used_ == magazine_size_.get();
-}
-
-void
-sanguis::server::weapons::weapon::magazine_exhausted()
-{
-	if(
-		magazine_count_ != unlimited_magazine_count.get()
-	)
-		--magazine_count_;
+		magazine_size_
+		&&
+		magazine_used_
+		==
+		magazine_size_->get();
 }
 
 sanguis::server::weapons::cast_point const
@@ -288,7 +295,7 @@ sanguis::server::weapons::weapon::backswing_time() const
 		backswing_time_;
 }
 
-sanguis::server::weapons::reload_time const
+sanguis::server::weapons::optional_reload_time const
 sanguis::server::weapons::weapon::reload_time() const
 {
 	return

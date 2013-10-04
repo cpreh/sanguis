@@ -4,8 +4,8 @@
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/grenade.hpp>
+#include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/range.hpp>
-#include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/factory/grenade.hpp>
 #include <sanguis/server/weapons/factory/parameters.hpp>
@@ -38,13 +38,11 @@ sanguis::server::weapons::factory::grenade(
 					0.1f
 				)
 			),
-			sanguis::server::weapons::reload_time(
-				sanguis::duration_second(
-					1.f
-				)
-			),
 			sanguis::server::weapons::range(
 				1000.f
+			),
+			sanguis::server::weapons::magazine_size(
+				1u
 			)
 		);
 }

@@ -16,7 +16,9 @@
 #include <sanguis/server/weapons/delayed_attack.hpp>
 #include <sanguis/server/weapons/grenade.hpp>
 #include <sanguis/server/weapons/make_attribute.hpp>
-#include <sanguis/server/weapons/reload_time.hpp>
+#include <sanguis/server/weapons/magazine_size.hpp>
+#include <sanguis/server/weapons/optional_magazine_size.hpp>
+#include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -29,8 +31,8 @@ sanguis::server::weapons::grenade::grenade(
 	sanguis::server::weapons::damage const _damage,
 	sanguis::server::weapons::aoe const _aoe,
 	sanguis::server::weapons::cast_point const _cast_point,
-	sanguis::server::weapons::reload_time const _reload_time,
-	sanguis::server::weapons::range const _range
+	sanguis::server::weapons::range const _range,
+	sanguis::server::weapons::magazine_size const _magazine_size
 )
 :
 	sanguis::server::weapons::weapon(
@@ -39,15 +41,12 @@ sanguis::server::weapons::grenade::grenade(
 			sanguis::secondary_weapon_type::grenade
 		),
 		_range,
-		sanguis::server::weapons::magazine_size(
-			1u
-		),
-		sanguis::server::weapons::magazine_count(
-			1u
+		sanguis::server::weapons::optional_magazine_size(
+			_magazine_size
 		),
 		_base_cooldown,
 		_cast_point,
-		_reload_time
+		sanguis::server::weapons::optional_reload_time()
 	),
 	damage_(
 		_damage

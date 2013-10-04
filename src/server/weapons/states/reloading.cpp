@@ -33,7 +33,7 @@ sanguis::server::weapons::states::reloading::reloading(
 			>().diff_clock(),
 			this->context<
 				sanguis::server::weapons::weapon
-			>().reload_time().get()
+			>().reload_time()->get()
 			/
 			_parameters.irs().get()
 		)

@@ -18,11 +18,11 @@
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/create_function.hpp>
 #include <sanguis/server/weapons/delayed_attack.hpp>
-#include <sanguis/server/weapons/magazine_count.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
+#include <sanguis/server/weapons/optional_magazine_size.hpp>
+#include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/sentry.hpp>
-#include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
@@ -31,8 +31,8 @@ sanguis::server::weapons::sentry::sentry(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::server::weapons::base_cooldown const _base_cooldown,
 	sanguis::server::weapons::cast_point const _cast_point,
-	sanguis::server::weapons::reload_time const _reload_time,
 	sanguis::server::weapons::range const _range,
+	sanguis::server::weapons::magazine_size const _magazine_size,
 	sanguis::server::weapons::create_function const &_sentry_weapon
 )
 :
@@ -42,15 +42,12 @@ sanguis::server::weapons::sentry::sentry(
 			sanguis::secondary_weapon_type::sentry
 		),
 		_range,
-		sanguis::server::weapons::magazine_size(
-			1U
-		),
-		sanguis::server::weapons::magazine_count(
-			1u
+		sanguis::server::weapons::optional_magazine_size(
+			_magazine_size
 		),
 		_base_cooldown,
 		_cast_point,
-		_reload_time
+		sanguis::server::weapons::optional_reload_time()
 	),
 	sentry_weapon_(
 		_sentry_weapon

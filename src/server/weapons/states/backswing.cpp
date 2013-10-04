@@ -6,6 +6,7 @@
 #include <sanguis/server/weapons/events/stop.hpp>
 #include <sanguis/server/weapons/states/backswing.hpp>
 #include <sanguis/server/weapons/states/backswing_parameters.hpp>
+#include <sanguis/server/weapons/states/exhausted.hpp>
 #include <sanguis/server/weapons/states/reloading.hpp>
 #include <sanguis/server/weapons/states/reloading_parameters.hpp>
 #include <sanguis/server/weapons/states/ready.hpp>
@@ -76,9 +77,15 @@ sanguis::server::weapons::states::backswing::react(
 		>().magazine_empty()
 	)
 	{
-		this->context<
-			sanguis::server::weapons::weapon
-		>().magazine_exhausted();
+		if(
+			!this->context<
+				sanguis::server::weapons::weapon
+			>().reload_time().has_value()
+		)
+			return
+				this->transit<
+					sanguis::server::weapons::states::exhausted
+				>();
 
 		if(
 			cancelled_

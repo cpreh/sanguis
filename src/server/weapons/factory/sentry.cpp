@@ -8,7 +8,6 @@
 #include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/pistol.hpp>
 #include <sanguis/server/weapons/range.hpp>
-#include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/sentry.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/factory/parameters.hpp>
@@ -40,13 +39,11 @@ sanguis::server::weapons::factory::sentry(
 					2.f
 				)
 			),
-			sanguis::server::weapons::reload_time(
-				sanguis::duration_second(
-					0.f
-				)
-			),
 			sanguis::server::weapons::range(
 				1000.f
+			),
+			sanguis::server::weapons::magazine_size(
+				1u
 			),
 			[
 				&diff_clock

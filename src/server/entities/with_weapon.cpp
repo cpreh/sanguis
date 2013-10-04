@@ -68,6 +68,10 @@ sanguis::server::entities::with_weapon::on_update()
 		this->primary_weapon_ref()
 	);
 
+	this->update_weapon(
+		this->secondary_weapon_ref()
+	);
+
 	if(
 		secondary_weapon_
 		&&
@@ -80,10 +84,6 @@ sanguis::server::entities::with_weapon::on_update()
 			)
 		);
 	}
-
-	this->update_weapon(
-		this->secondary_weapon_ref()
-	);
 }
 
 sanguis::optional_primary_weapon_type const
