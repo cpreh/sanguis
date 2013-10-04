@@ -1,7 +1,7 @@
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/signed_pos.hpp>
-#include <fcppt/math/bresenham.hpp>
+#include <fcppt/math/bresenham_thick.hpp>
 #include <sanguis/creator/tile_is_solid.hpp>
 #include <sanguis/server/ai/pathing/is_visible.hpp>
 #include <fcppt/container/grid/in_range.hpp>
@@ -17,7 +17,7 @@ sanguis::server::ai::pathing::is_visible(
 )
 {
 	return
-		fcppt::math::bresenham(
+		fcppt::math::bresenham_thick(
 			fcppt::math::vector::structure_cast<
 				sanguis::creator::signed_pos
 			>(
