@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PICKUPS_WEAPON_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PICKUPS_WEAPON_HPP_INCLUDED
 
+#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/collision/world/group_field_fwd.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
@@ -39,6 +40,7 @@ class weapon
 	);
 public:
 	weapon(
+		sanguis::diff_clock const &,
 		sanguis::server::environment::load_context &,
 		sanguis::server::team,
 		sanguis::server::weapons::unique_ptr &&

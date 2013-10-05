@@ -13,6 +13,8 @@
 #include <sanguis/messages/connect_state.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/remove_id.hpp>
+#include <sanguis/messages/rotate.hpp>
+#include <sanguis/messages/speed.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/console.hpp>
@@ -38,8 +40,6 @@
 #include <sanguis/server/global/source_world_pair.hpp>
 #include <sanguis/server/global/world_connection_map.hpp>
 #include <sanguis/server/global/world_context.hpp>
-#include <sanguis/server/message_convert/rotate.hpp>
-#include <sanguis/server/message_convert/speed.hpp>
 #include <sanguis/server/perks/create.hpp>
 #include <sanguis/server/perks/perk.hpp>
 #include <sanguis/server/weapons/target.hpp>
@@ -295,8 +295,11 @@ sanguis::server::global::context::player_target(
 
 	this->send_to_player(
 		_player_id,
-		*sanguis::server::message_convert::rotate(
-			player_ref
+		*sanguis::messages::create(
+			sanguis::messages::rotate(
+				player_ref.id(),
+				player_ref.angle().get()
+			)
 		)
 	);
 }
@@ -357,8 +360,11 @@ sanguis::server::global::context::player_speed(
 
 	this->send_to_player(
 		_player_id,
-		*sanguis::server::message_convert::speed(
-			player_ref
+		*sanguis::messages::create(
+			sanguis::messages::speed(
+				player_ref.id(),
+				player_ref.speed().get()
+			)
 		)
 	);
 }

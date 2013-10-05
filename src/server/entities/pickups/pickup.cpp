@@ -45,6 +45,7 @@ sanguis::server::entities::pickups::pickup::pickup(
 :
 	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::with_body(
+		_diff_clock,
 		_load_context.entity_dim(
 			sanguis::server::model_name(
 				sanguis::load::pickup_name(

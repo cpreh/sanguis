@@ -14,7 +14,6 @@
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <sanguis/server/entities/property/initial_max.hpp>
 #include <sanguis/server/entities/property/subtract.hpp>
-#include <sanguis/server/entities/property/value.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -52,13 +51,15 @@ sanguis::server::entities::with_health::kill()
 sanguis::server::entities::property::changeable &
 sanguis::server::entities::with_health::health()
 {
-	return health_;
+	return
+		health_;
 }
 
 sanguis::server::entities::property::always_max &
 sanguis::server::entities::with_health::regeneration()
 {
-	return regeneration_;
+	return
+		regeneration_;
 }
 
 sanguis::server::health const
@@ -107,12 +108,22 @@ sanguis::server::entities::with_health::with_health(
 			)
 		)
 	),
+	net_health_(
+		_diff_clock
+	),
+	health_change_(
+		health_.register_change_callback(
+			std::bind(
+				&sanguis::server::entities::with_health::health_change,
+				this
+			)
+		)
+	),
 	max_health_change_(
 		health_.register_max_change_callback(
 			std::bind(
 				&sanguis::server::entities::with_health::max_health_change,
-				this,
-				std::placeholders::_1
+				this
 			)
 		)
 	)
@@ -135,23 +146,36 @@ sanguis::server::entities::with_health::on_update()
 		)
 		* this->regeneration().current()
 	);
+
+	if(
+		net_health_.update()
+	)
+		this->environment().health_changed(
+			this->id(),
+			this->current_health()
+		);
 }
 
 bool
 sanguis::server::entities::with_health::dead() const
 {
-	return health_.current() <= 0;
+	return
+		health_.current() <= 0;
 }
 
 void
-sanguis::server::entities::with_health::max_health_change(
-	sanguis::server::entities::property::value const _value
-)
+sanguis::server::entities::with_health::health_change()
+{
+	net_health_.set(
+		this->current_health()
+	);
+}
+
+void
+sanguis::server::entities::with_health::max_health_change()
 {
 	this->environment().max_health_changed(
 		this->id(),
-		sanguis::server::health(
-			_value
-		)
+		this->max_health()
 	);
 }

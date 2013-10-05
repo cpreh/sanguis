@@ -1,20 +1,17 @@
 #include <sanguis/main_object.hpp>
-#include <sanguis/server/create.hpp>
 #include <sanguis/server/original_object.hpp>
+#include <alda/net/port.hpp>
 #include <awl/main/exit_code.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <boost/program_options/variables_map.hpp>
-#include <fcppt/config/external_end.hpp>
+#include <awl/main/exit_success.hpp>
 
 
 sanguis::server::original_object::original_object(
-	boost::program_options::variables_map const &_vm
+	alda::net::port const _port
 )
 :
-	object_(
-		sanguis::server::create(
-			_vm
-		)
+	sanguis::main_object(),
+	impl_(
+		_port
 	)
 {
 }
@@ -26,6 +23,8 @@ sanguis::server::original_object::~original_object()
 awl::main::exit_code const
 sanguis::server::original_object::run()
 {
+	impl_.run();
+
 	return
-		object_->run();
+		awl::main::exit_success();
 }

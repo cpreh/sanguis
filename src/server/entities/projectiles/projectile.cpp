@@ -13,7 +13,6 @@
 #include <sanguis/server/collision/result_fwd.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
 #include <sanguis/server/damage/list.hpp>
-#include <sanguis/server/entities/body_velocity_combiner.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_health.hpp>
@@ -48,17 +47,15 @@ sanguis::server::entities::projectiles::projectile::projectile(
 )
 :
 	sanguis::server::entities::ifaces::with_team(),
-	sanguis::server::entities::body_velocity_combiner(),
-	sanguis::server::entities::with_body(
-		_load_context.entity_dim(
-			_model_name
-		)
-	),
 	sanguis::server::entities::with_id(
 		_load_context.next_id()
 	),
 	sanguis::server::entities::with_links(),
 	sanguis::server::entities::with_velocity(
+		_diff_clock,
+		_load_context.entity_dim(
+			_model_name
+		),
 		sanguis::server::entities::property::initial_max(
 			_movement_speed.get()
 		),

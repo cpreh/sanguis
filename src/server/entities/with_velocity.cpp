@@ -2,41 +2,90 @@
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/speed_to_abs.hpp>
+#include <sanguis/server/entities/transfer_parameters_fwd.hpp>
+#include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/entities/ifaces/with_velocity.hpp>
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <sanguis/server/entities/property/initial_fwd.hpp>
-#include <sanguis/server/entities/property/value.hpp>
+#include <sanguis/server/environment/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::entities::with_velocity::with_velocity(
+	sanguis::diff_clock const &_diff_clock,
+	sanguis::server::dim const _dim,
 	sanguis::server::entities::property::initial const &_movement_speed,
 	sanguis::server::direction const _direction
 )
 :
-	sanguis::server::entities::base(),
 	sanguis::server::entities::ifaces::with_id(),
 	sanguis::server::entities::ifaces::with_velocity(),
+	sanguis::server::entities::with_body(
+		_diff_clock,
+		_dim
+	),
 	movement_speed_(
 		_movement_speed
 	),
 	direction_(
 		_direction
 	),
+	net_center_(
+		_diff_clock
+	),
+	net_speed_(
+		_diff_clock
+	),
 	speed_change_(
 		movement_speed_.register_change_callback(
 			std::bind(
-				&sanguis::server::entities::with_velocity::speed_change,
-				this,
-				std::placeholders::_1
+				&sanguis::server::entities::with_velocity::desired_speed_change,
+				this
 			)
 		)
 	)
 {
+}
+
+void
+sanguis::server::entities::with_velocity::on_update()
+{
+	sanguis::server::entities::with_body::on_update();
+
+	if(
+		net_center_.update()
+	)
+		this->environment().center_changed(
+			this->id(),
+			this->center()
+		);
+
+	if(
+		net_speed_.update()
+	)
+		this->environment().speed_changed(
+			this->id(),
+			this->speed()
+		);
+}
+
+bool
+sanguis::server::entities::with_velocity::on_transfer(
+	sanguis::server::entities::transfer_parameters const &_parameters
+)
+{
+	net_center_.reset();
+
+	net_speed_.reset();
+
+	return
+		sanguis::server::entities::with_body::on_transfer(
+			_parameters
+		);
 }
 
 sanguis::server::entities::with_velocity::~with_velocity()
@@ -46,30 +95,15 @@ sanguis::server::entities::with_velocity::~with_velocity()
 sanguis::server::entities::property::changeable &
 sanguis::server::entities::with_velocity::movement_speed()
 {
-	return movement_speed_;
+	return
+		movement_speed_;
 }
 
 sanguis::server::direction const
 sanguis::server::entities::with_velocity::direction() const
 {
-	return direction_;
-}
-
-sanguis::server::speed const
-sanguis::server::entities::with_velocity::speed() const
-{
 	return
-		this->actual_speed();
-}
-
-void
-sanguis::server::entities::with_velocity::speed(
-	sanguis::server::speed const _speed
-)
-{
-	this->on_speed_change(
-		_speed
-	);
+		direction_;
 }
 
 void
@@ -79,30 +113,57 @@ sanguis::server::entities::with_velocity::direction(
 {
 	direction_ = _direction;
 
-	this->speed_change(
-		movement_speed_.current()
+	this->desired_speed_change();
+}
+
+sanguis::server::speed const
+sanguis::server::entities::with_velocity::speed() const
+{
+	return
+		this->body_speed();
+}
+
+void
+sanguis::server::entities::with_velocity::desired_speed_change()
+{
+	this->body_speed(
+		this->desired_speed()
 	);
 }
 
 void
-sanguis::server::entities::with_velocity::speed_change(
-	sanguis::server::entities::property::value const _speed
+sanguis::server::entities::with_velocity::on_position_change(
+	sanguis::server::center const _center
 )
 {
-	this->on_speed_change(
-		sanguis::server::entities::speed_to_abs(
-			this->direction(),
-			_speed
-		)
+	net_center_.set(
+		_center
+	);
+}
+
+void
+sanguis::server::entities::with_velocity::on_speed_change(
+	sanguis::server::speed const _speed
+)
+{
+	net_speed_.set(
+		_speed
 	);
 }
 
 sanguis::server::speed const
-sanguis::server::entities::with_velocity::initial_abs_speed() const
+sanguis::server::entities::with_velocity::desired_speed() const
 {
 	return
 		sanguis::server::entities::speed_to_abs(
-			direction_,
+			this->direction(),
 			movement_speed_.current()
 		);
+}
+
+sanguis::server::speed const
+sanguis::server::entities::with_velocity::initial_speed() const
+{
+	return
+		this->desired_speed();
 }

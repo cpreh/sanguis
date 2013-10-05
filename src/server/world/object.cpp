@@ -21,18 +21,23 @@
 #include <sanguis/messages/die.hpp>
 #include <sanguis/messages/experience.hpp>
 #include <sanguis/messages/give_weapon.hpp>
+#include <sanguis/messages/health.hpp>
 #include <sanguis/messages/level_up.hpp>
+#include <sanguis/messages/max_health.hpp>
+#include <sanguis/messages/move.hpp>
 #include <sanguis/messages/remove.hpp>
 #include <sanguis/messages/remove_weapon.hpp>
+#include <sanguis/messages/rotate.hpp>
+#include <sanguis/messages/speed.hpp>
 #include <sanguis/messages/start_attacking.hpp>
 #include <sanguis/messages/start_reloading.hpp>
 #include <sanguis/messages/stop_attacking.hpp>
 #include <sanguis/messages/stop_reloading.hpp>
-#include <sanguis/messages/max_health.hpp>
 #include <sanguis/messages/serialization/convert_string_vector.hpp>
 #include <sanguis/messages/types/exp.hpp>
 #include <sanguis/messages/types/size.hpp>
-#include <sanguis/server/center_fwd.hpp>
+#include <sanguis/server/angle.hpp>
+#include <sanguis/server/center.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/level.hpp>
@@ -40,6 +45,7 @@
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/source_world_id.hpp>
+#include <sanguis/server/speed.hpp>
 #include <sanguis/server/string.hpp>
 #include <sanguis/server/collision/body_collision.hpp>
 #include <sanguis/server/collision/optional_result.hpp>
@@ -53,16 +59,10 @@
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
-#include <sanguis/server/entities/with_health.hpp>
-#include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/global/source_world_pair.hpp>
-#include <sanguis/server/message_convert/speed.hpp>
-#include <sanguis/server/message_convert/rotate.hpp>
-#include <sanguis/server/message_convert/move.hpp>
-#include <sanguis/server/message_convert/health.hpp>
 #include <sanguis/server/world/center_in_grid_pos.hpp>
 #include <sanguis/server/world/context.hpp>
 #include <sanguis/server/world/difficulty.hpp>
@@ -75,7 +75,6 @@
 #include <sanguis/server/world/spawn_parameters.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <sge/timer/elapsed_and_reset.hpp>
-#include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
@@ -149,13 +148,6 @@ sanguis::server::world::object::object(
 			)
 		)
 	),
-	send_timer_(
-		sanguis::timer::parameters(
-			std::chrono::milliseconds(
-				500
-			)
-		)
-	),
 	entities_(),
 	server_entities_(),
 	pickup_spawner_(
@@ -179,12 +171,6 @@ sanguis::server::world::object::~object()
 void
 sanguis::server::world::object::update()
 {
-	bool const update_pos(
-		sge::timer::reset_when_expired(
-			send_timer_
-		)
-	);
-
 	sanguis::duration const duration(
 		sge::timer::elapsed_and_reset<
 			sanguis::duration
@@ -220,10 +206,22 @@ sanguis::server::world::object::update()
 	{
 		++next;
 
-		this->update_entity(
-			it,
-			update_pos
+		sanguis::server::entities::base &entity(
+			*it->second
 		);
+
+		entity.update();
+
+		if(
+			entity.dead()
+		)
+		{
+			entity.remove();
+
+			entities_.erase(
+				it
+			);
+		}
 	}
 
 	for(
@@ -285,13 +283,15 @@ sanguis::server::world::object::insert(
 sanguis::server::environment::object &
 sanguis::server::world::object::environment()
 {
-	return *this;
+	return
+		*this;
 }
 
 sanguis::creator::opening_container const &
 sanguis::server::world::object::openings() const
 {
-	return openings_;
+	return
+		openings_;
 }
 
 sanguis::server::entities::optional_base_ref const
@@ -472,6 +472,57 @@ sanguis::server::world::object::remove_weapon(
 }
 
 void
+sanguis::server::world::object::angle_changed(
+	sanguis::entity_id const _entity_id,
+	sanguis::server::angle const _angle
+)
+{
+	this->send_entity_specific(
+		_entity_id,
+		*sanguis::messages::create(
+			sanguis::messages::rotate(
+				_entity_id,
+				_angle.get()
+			)
+		)
+	);
+}
+
+void
+sanguis::server::world::object::center_changed(
+	sanguis::entity_id const _entity_id,
+	sanguis::server::center const _center
+)
+{
+	this->send_entity_specific(
+		_entity_id,
+		*sanguis::messages::create(
+			sanguis::messages::move(
+				_entity_id,
+				_center.get()
+			)
+		)
+	);
+}
+
+void
+sanguis::server::world::object::speed_changed(
+	sanguis::entity_id const _entity_id,
+	sanguis::server::speed const _speed
+)
+{
+	this->send_entity_specific(
+		_entity_id,
+		*sanguis::messages::create(
+			sanguis::messages::speed(
+				_entity_id,
+				_speed.get()
+			)
+		)
+	);
+}
+
+void
 sanguis::server::world::object::attacking_changed(
 	sanguis::entity_id const _id,
 	bool const _is_attacking
@@ -516,6 +567,23 @@ sanguis::server::world::object::reloading_changed(
 					_id
 				)
 			)
+	);
+}
+
+void
+sanguis::server::world::object::health_changed(
+	sanguis::entity_id const _id,
+	sanguis::server::health const _health
+)
+{
+	this->send_entity_specific(
+		_id,
+		*sanguis::messages::create(
+			sanguis::messages::health(
+				_id,
+				_health.get()
+			)
+		)
 	);
 }
 
@@ -808,82 +876,6 @@ sanguis::server::world::object::send_player_specific(
 		_player_id,
 		_msg
 	);
-}
-
-void
-sanguis::server::world::object::update_entity(
-	sanguis::server::world::entity_map::iterator const _it,
-	bool const _update_pos
-)
-{
-	sanguis::server::entities::base &entity(
-		*_it->second
-	);
-
-	entity.update();
-
-	if(
-		entity.dead()
-	)
-	{
-		_it->second->remove();
-
-		entities_.erase(
-			_it
-		);
-
-		return;
-	}
-
-	if(
-		!_update_pos
-	)
-		return;
-
-	FCPPT_TRY_DYNAMIC_CAST(
-		sanguis::server::entities::with_body const *,
-		with_body,
-		&entity
-	)
-		this->send_entity_specific(
-			with_body->id(),
-			*sanguis::server::message_convert::rotate(
-				*with_body
-			)
-		);
-
-	FCPPT_TRY_DYNAMIC_CAST(
-		sanguis::server::entities::with_velocity const *,
-		movable,
-		&entity
-	)
-	{
-		this->send_entity_specific(
-			movable->id(),
-			*sanguis::server::message_convert::speed(
-				*movable
-			)
-		);
-
-		this->send_entity_specific(
-			movable->id(),
-			*sanguis::server::message_convert::move(
-				*movable
-			)
-		);
-	}
-
-	FCPPT_TRY_DYNAMIC_CAST(
-		sanguis::server::entities::with_health const *,
-		with_health,
-		&entity
-	)
-		this->send_entity_specific(
-			with_health->id(),
-			*sanguis::server::message_convert::health(
-				*with_health
-			)
-		);
 }
 
 void

@@ -17,12 +17,10 @@
 #include <sanguis/server/ai/base.hpp>
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/damage/armor.hpp>
-#include <sanguis/server/entities/body_velocity_combiner.hpp>
 #include <sanguis/server/entities/exp_area.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
-#include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_health.hpp>
@@ -66,15 +64,6 @@ sanguis::server::entities::enemies::enemy::enemy(
 			_weapon
 		)
 	),
-	sanguis::server::entities::with_body(
-		_load_context.entity_dim(
-			sanguis::server::model_name(
-				sanguis::load::enemy_name(
-					_etype
-				)
-			)
-		)
-	),
 	sanguis::server::entities::with_buffs(),
 	sanguis::server::entities::with_id(
 		_load_context.next_id()
@@ -86,6 +75,14 @@ sanguis::server::entities::enemies::enemy::enemy(
 	),
 	sanguis::server::entities::with_links(),
 	sanguis::server::entities::with_velocity(
+		_diff_clock,
+		_load_context.entity_dim(
+			sanguis::server::model_name(
+				sanguis::load::enemy_name(
+					_etype
+				)
+			)
+		),
 		sanguis::server::entities::property::initial(
 			sanguis::server::entities::property::initial::base(
 				_movement_speed.get()
@@ -134,6 +131,8 @@ sanguis::server::entities::enemies::enemy::on_update()
 	sanguis::server::entities::with_buffs::on_update();
 
 	sanguis::server::entities::with_health::on_update();
+
+	sanguis::server::entities::with_velocity::on_update();
 }
 
 sanguis::messages::unique_ptr
@@ -168,7 +167,8 @@ sanguis::server::entities::enemies::enemy::collision_groups() const
 sanguis::server::team
 sanguis::server::entities::enemies::enemy::team() const
 {
-	return sanguis::server::team::monsters;
+	return
+		sanguis::server::team::monsters;
 }
 
 void

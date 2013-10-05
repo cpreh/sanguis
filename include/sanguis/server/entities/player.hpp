@@ -15,10 +15,8 @@
 #include <sanguis/server/string.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/damage/armor.hpp>
-#include <sanguis/server/entities/body_velocity_combiner.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
-#include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_health.hpp>
@@ -51,9 +49,7 @@ namespace entities
 class player
 :
 	public virtual sanguis::server::entities::ifaces::with_team,
-	private sanguis::server::entities::body_velocity_combiner,
 	public sanguis::server::entities::with_auras,
-	public sanguis::server::entities::with_body,
 	public sanguis::server::entities::with_buffs,
 	public sanguis::server::entities::with_id,
 	public sanguis::server::entities::with_health,
@@ -177,6 +173,8 @@ private:
 		sanguis::server::entities::pickups::weapon_ref
 	>
 	weapon_pickup_set;
+
+	sanguis::diff_clock const &diff_clock_;
 
 	sanguis::server::string const name_;
 

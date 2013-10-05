@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_WITH_BODY_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_WITH_BODY_HPP_INCLUDED
 
+#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/collision/world/body_base.hpp>
 #include <sanguis/collision/world/group_field_fwd.hpp>
 #include <sanguis/server/angle.hpp>
@@ -14,10 +15,10 @@
 #include <sanguis/server/entities/with_body_fwd.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
-#include <sanguis/server/entities/ifaces/with_body.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/entities/ifaces/with_links.hpp>
 #include <sanguis/server/collision/body_fwd.hpp>
+#include <sanguis/server/net/angle.hpp>
 #include <sge/projectile/body/scoped_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -35,7 +36,6 @@ namespace entities
 class with_body
 :
 	public virtual sanguis::server::entities::with_ghosts,
-	protected virtual sanguis::server::entities::ifaces::with_body,
 	public virtual sanguis::server::entities::ifaces::with_angle,
 	public virtual sanguis::server::entities::ifaces::with_id,
 	public virtual sanguis::server::entities::ifaces::with_links,
@@ -45,8 +45,8 @@ class with_body
 		with_body
 	);
 public:
-	explicit
 	with_body(
+		sanguis::diff_clock const &,
 		sanguis::server::dim
 	);
 
@@ -93,8 +93,20 @@ protected:
 	override;
 
 	void
+	on_update()
+	override;
+
+	void
 	on_destroy()
 	override;
+
+	void
+	body_speed(
+		sanguis::server::speed
+	);
+
+	sanguis::server::speed const
+	body_speed() const;
 private:
 	// collision::body_base
 	boost::logic::tribool const
@@ -125,20 +137,25 @@ private:
 	sanguis::collision::world::group_field const
 	collision_groups() const = 0;
 
-	// ifaces::with_body
-	void
-	reset_speed(
-		sanguis::server::speed const &
-	)
-	override;
-
+	virtual
 	sanguis::server::speed const
-	body_speed() const
-	override;
+	initial_speed() const;
 
+	void
+	position_change(
+		sanguis::server::center
+	);
+
+	virtual
 	void
 	on_position_change(
 		sanguis::server::center
+	);
+
+	virtual
+	void
+	on_speed_change(
+		sanguis::server::speed
 	);
 
 	sanguis::server::dim const dim_;
@@ -146,6 +163,8 @@ private:
 	sanguis::server::angle angle_;
 
 	sanguis::server::collision::body collision_body_;
+
+	sanguis::server::net::angle net_angle_;
 };
 
 }

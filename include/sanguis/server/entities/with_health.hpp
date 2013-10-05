@@ -13,7 +13,7 @@
 #include <sanguis/server/entities/ifaces/with_links.hpp>
 #include <sanguis/server/entities/property/always_max.hpp>
 #include <sanguis/server/entities/property/changeable.hpp>
-#include <sanguis/server/entities/property/value.hpp>
+#include <sanguis/server/net/health.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -73,9 +73,10 @@ private:
 	override;
 
 	void
-	max_health_change(
-		sanguis::server::entities::property::value
-	);
+	health_change();
+
+	void
+	max_health_change();
 
 	sanguis::server::damage::armor armor_;
 
@@ -84,6 +85,10 @@ private:
 	sanguis::server::entities::property::always_max regeneration_;
 
 	sanguis::diff_timer regeneration_timer_;
+
+	sanguis::server::net::health net_health_;
+
+	fcppt::signal::scoped_connection const health_change_;
 
 	fcppt::signal::scoped_connection const max_health_change_;
 };

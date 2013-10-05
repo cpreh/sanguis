@@ -2,12 +2,10 @@
 #define SANGUIS_SERVER_ORIGINAL_OBJECT_HPP_INCLUDED
 
 #include <sanguis/main_object.hpp>
-#include <sanguis/main_object_scoped_ptr.hpp>
+#include <sanguis/server/common_object.hpp>
+#include <alda/net/port.hpp>
 #include <awl/main/exit_code.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <boost/program_options/variables_map.hpp>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -25,7 +23,7 @@ class original_object
 public:
 	explicit
 	original_object(
-		boost::program_options::variables_map const &
+		alda::net::port
 	);
 
 	~original_object();
@@ -33,7 +31,7 @@ public:
 	awl::main::exit_code const
 	run();
 private:
-	sanguis::main_object_scoped_ptr const object_;
+	sanguis::server::common_object impl_;
 };
 
 }

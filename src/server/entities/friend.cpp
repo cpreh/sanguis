@@ -15,12 +15,10 @@
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/collision/with_world.hpp>
 #include <sanguis/server/damage/armor.hpp>
-#include <sanguis/server/entities/body_velocity_combiner.hpp>
 #include <sanguis/server/entities/friend.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
-#include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_health.hpp>
@@ -50,21 +48,11 @@ sanguis::server::entities::friend_::friend_(
 )
 :
 	sanguis::server::entities::ifaces::with_team(),
-	sanguis::server::entities::body_velocity_combiner(),
 	sanguis::server::entities::with_ai(
 		_diff_clock,
 		_ai,
 		std::move(
 			_weapon
-		)
-	),
-	sanguis::server::entities::with_body(
-		_load_context.entity_dim(
-			sanguis::server::model_name(
-				sanguis::load::friend_name(
-					_ftype
-				)
-			)
 		)
 	),
 	sanguis::server::entities::with_buffs(),
@@ -78,6 +66,14 @@ sanguis::server::entities::friend_::friend_(
 	),
 	sanguis::server::entities::with_links(),
 	sanguis::server::entities::with_velocity(
+		_diff_clock,
+		_load_context.entity_dim(
+			sanguis::server::model_name(
+				sanguis::load::friend_name(
+					_ftype
+				)
+			)
+		),
 		sanguis::server::entities::property::initial(
 			sanguis::server::entities::property::initial::base(
 				_movement_speed.get()
@@ -115,7 +111,7 @@ sanguis::server::entities::friend_::on_transfer(
 		return false;
 
 	return
-		sanguis::server::entities::with_body::on_transfer(
+		sanguis::server::entities::with_velocity::on_transfer(
 			_parameters
 		);
 }
@@ -128,6 +124,8 @@ sanguis::server::entities::friend_::on_update()
 	sanguis::server::entities::with_buffs::on_update();
 
 	sanguis::server::entities::with_health::on_update();
+
+	sanguis::server::entities::with_velocity::on_update();
 }
 
 sanguis::server::team

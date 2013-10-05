@@ -65,6 +65,7 @@ sanguis::server::cheat(
 		);
 		return;
 	case sanguis::cheat_type::sentry_pickup:
+	case sanguis::cheat_type::grenade_pickup:
 		if(
 			!_player.has_environment()
 		)
@@ -74,13 +75,21 @@ sanguis::server::cheat(
 			fcppt::make_unique_ptr<
 				sanguis::server::entities::pickups::weapon
 			>(
+				_diff_clock,
 				_player.environment().load_context(),
 				sanguis::server::team::players,
 				sanguis::server::weapons::create(
 					_diff_clock,
 					_random_generator,
 					sanguis::weapon_type(
-						sanguis::secondary_weapon_type::sentry
+						// TODO: Refactor this!
+						_type
+						==
+						sanguis::cheat_type::sentry_pickup
+						?
+							sanguis::secondary_weapon_type::sentry
+						:
+							sanguis::secondary_weapon_type::grenade
 					),
 					sanguis::server::entities::enemies::difficulty(
 						100.f

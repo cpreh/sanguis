@@ -1,7 +1,7 @@
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/speed.hpp>
-#include <sanguis/server/entities/with_velocity.hpp>
+#include <sanguis/server/entities/ifaces/with_velocity.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
 
 
@@ -11,7 +11,7 @@ sanguis::server::entities::speed(
 )
 {
 	FCPPT_TRY_DYNAMIC_CAST(
-		sanguis::server::entities::with_velocity const *,
+		sanguis::server::entities::ifaces::with_velocity const *,
 		with_velocity,
 		&_entity
 	)

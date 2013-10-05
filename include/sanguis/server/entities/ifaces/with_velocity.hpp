@@ -21,21 +21,11 @@ class with_velocity
 	);
 protected:
 	with_velocity();
-
-	virtual
-	void
-	on_speed_change(
-		sanguis::server::speed const &
-	);
-
-	virtual
-	sanguis::server::speed const
-	initial_abs_speed() const = 0;
-
-	virtual
-	sanguis::server::speed const
-	actual_speed() const = 0;
 public:
+	virtual
+	sanguis::server::speed const
+	speed() const = 0;
+
 	virtual
 	~with_velocity() = 0;
 };

@@ -1,4 +1,5 @@
 #include <sanguis/main_object_unique_ptr.hpp>
+#include <sanguis/args/server_port.hpp>
 #include <sanguis/server/create_original.hpp>
 #include <sanguis/server/original_object.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -17,7 +18,9 @@ sanguis::server::create_original(
 			fcppt::make_unique_ptr<
 				sanguis::server::original_object
 			>(
-				_vm
+				sanguis::args::server_port(
+					_vm
+				)
 			)
 		);
 }

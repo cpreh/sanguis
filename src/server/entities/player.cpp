@@ -32,12 +32,10 @@
 #include <sanguis/server/auras/weapon_pickup_remove_candidate_callback.hpp>
 #include <sanguis/server/auras/update_sight.hpp>
 #include <sanguis/server/damage/armor.hpp>
-#include <sanguis/server/entities/body_velocity_combiner.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
-#include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_health.hpp>
@@ -85,15 +83,7 @@ sanguis::server::entities::player::player(
 )
 :
 	sanguis::server::entities::ifaces::with_team(),
-	sanguis::server::entities::body_velocity_combiner(),
 	sanguis::server::entities::with_auras(),
-	sanguis::server::entities::with_body(
-		_load_context.entity_dim(
-			sanguis::server::model_name(
-				FCPPT_TEXT("player")
-			)
-		)
-	),
 	sanguis::server::entities::with_buffs(),
 	sanguis::server::entities::with_id(
 		_load_context.next_id()
@@ -106,6 +96,12 @@ sanguis::server::entities::player::player(
 	sanguis::server::entities::with_links(),
 	sanguis::server::entities::with_perks(),
 	sanguis::server::entities::with_velocity(
+		_diff_clock,
+		_load_context.entity_dim(
+			sanguis::server::model_name(
+				FCPPT_TEXT("player")
+			)
+		),
 		sanguis::server::entities::property::initial(
 			sanguis::server::entities::property::initial::base(
 				_speed.get()
@@ -122,6 +118,9 @@ sanguis::server::entities::player::player(
 		sanguis::server::weapons::player_start_weapon(
 			_diff_clock
 		)
+	),
+	diff_clock_(
+		_diff_clock
 	),
 	name_(
 		_name
@@ -374,6 +373,7 @@ sanguis::server::entities::player::drop_or_pickup_weapon(
 			fcppt::make_unique_ptr<
 				sanguis::server::entities::pickups::weapon
 			>(
+				diff_clock_,
 				this->environment().load_context(),
 				this->team(),
 				std::move(
@@ -495,6 +495,8 @@ sanguis::server::entities::player::on_update()
 	sanguis::server::entities::with_health::on_update();
 
 	sanguis::server::entities::with_perks::on_update();
+
+	sanguis::server::entities::with_velocity::on_update();
 
 	sanguis::server::entities::with_weapon::on_update();
 }

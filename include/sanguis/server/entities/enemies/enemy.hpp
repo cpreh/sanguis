@@ -11,9 +11,7 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/ai/create_function.hpp>
-#include <sanguis/server/entities/body_velocity_combiner.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
-#include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_health.hpp>
@@ -38,9 +36,7 @@ namespace enemies
 
 class enemy
 :
-	private sanguis::server::entities::body_velocity_combiner,
 	public sanguis::server::entities::with_ai,
-	public sanguis::server::entities::with_body,
 	public sanguis::server::entities::with_buffs,
 	public sanguis::server::entities::with_id,
 	public sanguis::server::entities::with_health,

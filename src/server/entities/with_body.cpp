@@ -1,3 +1,4 @@
+#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/collision/world/body_base.hpp>
 #include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/server/angle.hpp>
@@ -16,9 +17,9 @@
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
-#include <sanguis/server/entities/ifaces/with_body.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/entities/ifaces/with_links.hpp>
+#include <sanguis/server/environment/object.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -28,11 +29,11 @@
 
 
 sanguis::server::entities::with_body::with_body(
+	sanguis::diff_clock const &_diff_clock,
 	sanguis::server::dim const _dim
 )
 :
 	sanguis::server::entities::with_ghosts(),
-	sanguis::server::entities::ifaces::with_body(),
 	sanguis::server::entities::ifaces::with_angle(),
 	sanguis::server::entities::ifaces::with_id(),
 	sanguis::server::entities::ifaces::with_links(),
@@ -56,12 +57,15 @@ sanguis::server::entities::with_body::with_body(
 		*this,
 		sanguis::server::collision::position_callback(
 			std::bind(
-				&sanguis::server::entities::with_body::on_position_change,
+				&sanguis::server::entities::with_body::position_change,
 				this,
 				std::placeholders::_1
 			)
 		)
 		// TODO: Put the collision groups here!
+	),
+	net_angle_(
+		_diff_clock
 	)
 {
 }
@@ -86,7 +90,7 @@ sanguis::server::entities::with_body::world_collision(
 		_result.center()
 	);
 
-	this->reset_speed(
+	this->body_speed(
 		_result.speed()
 	);
 }
@@ -115,6 +119,10 @@ sanguis::server::entities::with_body::angle(
 {
 	angle_ =
 		_angle;
+
+	net_angle_.set(
+		angle_
+	);
 }
 
 sanguis::server::radius const
@@ -139,6 +147,8 @@ sanguis::server::entities::with_body::on_transfer(
 	angle_ =
 		_parameters.angle();
 
+	net_angle_.reset();
+
 	collision_body_.transfer(
 		_parameters.world(),
 		_parameters.center(),
@@ -153,12 +163,45 @@ sanguis::server::entities::with_body::on_transfer(
 }
 
 void
+sanguis::server::entities::with_body::on_update()
+{
+	if(
+		net_angle_.update()
+	)
+		this->environment().angle_changed(
+			this->id(),
+			this->angle()
+		);
+}
+
+void
 sanguis::server::entities::with_body::on_destroy()
 {
 	// TODO: Is this still needed?
 	collision_body_.destroy();
 
 	sanguis::server::entities::with_ghosts::on_destroy();
+}
+
+void
+sanguis::server::entities::with_body::body_speed(
+	sanguis::server::speed const _speed
+)
+{
+	collision_body_.speed(
+		_speed
+	);
+
+	this->on_speed_change(
+		_speed
+	);
+}
+
+sanguis::server::speed const
+sanguis::server::entities::with_body::body_speed() const
+{
+	return
+		collision_body_.speed();
 }
 
 boost::logic::tribool const
@@ -211,29 +254,39 @@ sanguis::server::entities::with_body::collision_with_body(
 {
 }
 
-void
-sanguis::server::entities::with_body::reset_speed(
-	sanguis::server::speed const &_speed
-)
-{
-	collision_body_.speed(
-		_speed
-	);
-}
-
 sanguis::server::speed const
-sanguis::server::entities::with_body::body_speed() const
+sanguis::server::entities::with_body::initial_speed() const
 {
 	return
-		collision_body_.speed();
+		sanguis::server::speed(
+			sanguis::server::speed::value_type::null()
+		);
 }
 
 void
-sanguis::server::entities::with_body::on_position_change(
+sanguis::server::entities::with_body::position_change(
 	sanguis::server::center const _center
 )
 {
 	this->sanguis::server::entities::with_ghosts::update_center(
 		_center
 	);
+
+	this->on_position_change(
+		_center
+	);
+}
+
+void
+sanguis::server::entities::with_body::on_position_change(
+	sanguis::server::center
+)
+{
+}
+
+void
+sanguis::server::entities::with_body::on_speed_change(
+	sanguis::server::speed
+)
+{
 }

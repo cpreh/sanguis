@@ -47,6 +47,8 @@ sanguis::server::entities::property::changeable::current(
 
 	current_ = _current;
 
+	this->check_current();
+
 	if(
 		fcppt::math::diff(
 			old,
@@ -59,11 +61,7 @@ sanguis::server::entities::property::changeable::current(
 			0.001
 		)
 	)
-		change_signal_(
-			this->current()
-		);
-
-	this->check_current();
+		change_signal_();
 }
 
 sanguis::server::entities::property::value
@@ -109,9 +107,7 @@ sanguis::server::entities::property::changeable::on_recalc_max(
 {
 	max_ = _max;
 
-	max_change_signal_(
-		this->max()
-	);
+	max_change_signal_();
 
 	this->current(
 		std::min(

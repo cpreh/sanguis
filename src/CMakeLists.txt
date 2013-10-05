@@ -833,6 +833,7 @@ set(
 	include/sanguis/server/collision/result_fwd.hpp
 	include/sanguis/server/collision/with_world.hpp
 	include/sanguis/server/collision/with_world_move.hpp
+	include/sanguis/server/common_object.hpp
 	include/sanguis/server/console.hpp
 	include/sanguis/server/console_command_pair.hpp
 	include/sanguis/server/console_command_pair_fwd.hpp
@@ -870,7 +871,6 @@ set(
 	include/sanguis/server/entities/auto_weak_link_fwd.hpp
 	include/sanguis/server/entities/base.hpp
 	include/sanguis/server/entities/base_fwd.hpp
-	include/sanguis/server/entities/body_velocity_combiner.hpp
 	include/sanguis/server/entities/center_ghost.hpp
 	include/sanguis/server/entities/center_simple.hpp
 	include/sanguis/server/entities/check_dim.hpp
@@ -893,7 +893,6 @@ set(
 	include/sanguis/server/entities/exp_area.hpp
 	include/sanguis/server/entities/friend.hpp
 	include/sanguis/server/entities/ifaces/with_angle.hpp
-	include/sanguis/server/entities/ifaces/with_body.hpp
 	include/sanguis/server/entities/ifaces/with_id.hpp
 	include/sanguis/server/entities/ifaces/with_links.hpp
 	include/sanguis/server/entities/ifaces/with_team.hpp
@@ -1010,6 +1009,7 @@ set(
 	include/sanguis/server/global/world_map.hpp
 	include/sanguis/server/global/world_map_fwd.hpp
 	include/sanguis/server/health.hpp
+	include/sanguis/server/health_fwd.hpp
 	include/sanguis/server/leave_sight_function.hpp
 	include/sanguis/server/level.hpp
 	include/sanguis/server/level_calculate.hpp
@@ -1019,12 +1019,27 @@ set(
 	include/sanguis/server/machine_fwd.hpp
 	include/sanguis/server/make_send_callback.hpp
 	include/sanguis/server/make_unicast_callback.hpp
-	include/sanguis/server/message_convert/health.hpp
-	include/sanguis/server/message_convert/move.hpp
-	include/sanguis/server/message_convert/rotate.hpp
-	include/sanguis/server/message_convert/speed.hpp
 	include/sanguis/server/message_functor.hpp
 	include/sanguis/server/model_name.hpp
+	include/sanguis/server/net/angle.hpp
+	include/sanguis/server/net/angle_fwd.hpp
+	include/sanguis/server/net/angle_policy.hpp
+	include/sanguis/server/net/angle_policy_fwd.hpp
+	include/sanguis/server/net/center.hpp
+	include/sanguis/server/net/center_fwd.hpp
+	include/sanguis/server/net/center_policy.hpp
+	include/sanguis/server/net/center_policy_fwd.hpp
+	include/sanguis/server/net/health.hpp
+	include/sanguis/server/net/health_fwd.hpp
+	include/sanguis/server/net/health_policy.hpp
+	include/sanguis/server/net/health_policy_fwd.hpp
+	include/sanguis/server/net/speed.hpp
+	include/sanguis/server/net/speed_fwd.hpp
+	include/sanguis/server/net/speed_policy.hpp
+	include/sanguis/server/net/speed_policy_fwd.hpp
+	include/sanguis/server/net/value_decl.hpp
+	include/sanguis/server/net/value_fwd.hpp
+	include/sanguis/server/net/value_impl.hpp
 	include/sanguis/server/object.hpp
 	include/sanguis/server/object_fwd.hpp
 	include/sanguis/server/optional_angle.hpp
@@ -1493,6 +1508,7 @@ set(
 	src/server/collision/result.cpp
 	src/server/collision/with_world.cpp
 	src/server/collision/with_world_move.cpp
+	src/server/common_object.cpp
 	src/server/console.cpp
 	src/server/create.cpp
 	src/server/create_original.cpp
@@ -1510,7 +1526,6 @@ set(
 	src/server/damage/wrapper.cpp
 	src/server/entities/auto_weak_link.cpp
 	src/server/entities/base.cpp
-	src/server/entities/body_velocity_combiner.cpp
 	src/server/entities/center_ghost.cpp
 	src/server/entities/center_simple.cpp
 	src/server/entities/check_dim.cpp
@@ -1527,7 +1542,6 @@ set(
 	src/server/entities/exp_area.cpp
 	src/server/entities/friend.cpp
 	src/server/entities/ifaces/with_angle.cpp
-	src/server/entities/ifaces/with_body.cpp
 	src/server/entities/ifaces/with_id.cpp
 	src/server/entities/ifaces/with_links.cpp
 	src/server/entities/ifaces/with_team.cpp
@@ -1593,10 +1607,14 @@ set(
 	src/server/machine.cpp
 	src/server/make_send_callback.cpp
 	src/server/make_unicast_callback.cpp
-	src/server/message_convert/health.cpp
-	src/server/message_convert/move.cpp
-	src/server/message_convert/rotate.cpp
-	src/server/message_convert/speed.cpp
+	src/server/net/angle.cpp
+	src/server/net/angle_policy.cpp
+	src/server/net/center.cpp
+	src/server/net/center_policy.cpp
+	src/server/net/health.cpp
+	src/server/net/health_policy.cpp
+	src/server/net/speed.cpp
+	src/server/net/speed_policy.cpp
 	src/server/object.cpp
 	src/server/original_object.cpp
 	src/server/perks/choleric.cpp

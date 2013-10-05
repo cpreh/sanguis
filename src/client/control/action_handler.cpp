@@ -112,6 +112,17 @@ sanguis::client::control::action_handler::action_handler(
 					SGE_FONT_LIT("Spawn a sentry pickup")
 				)
 			)
+		)(
+			this->cheat_connection(
+				_console,
+				sanguis::cheat_type::grenade_pickup,
+				sge::console::callback::name(
+					SGE_FONT_LIT("grenade_pickup")
+				),
+				sge::console::callback::short_description(
+					SGE_FONT_LIT("Spawn a grenade pickup")
+				)
+			)
 		)
 		.move_container()
 	)

@@ -8,7 +8,6 @@
 #include <sanguis/is_primary_weapon_fwd.hpp>
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
-#include <sanguis/timer.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
@@ -19,12 +18,14 @@
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/messages/base_fwd.hpp>
+#include <sanguis/server/angle_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/level.hpp>
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/player_id.hpp>
+#include <sanguis/server/speed_fwd.hpp>
 #include <sanguis/server/string.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
@@ -127,6 +128,27 @@ private:
 	override;
 
 	void
+	angle_changed(
+		sanguis::entity_id,
+		sanguis::server::angle
+	)
+	override;
+
+	void
+	center_changed(
+		sanguis::entity_id,
+		sanguis::server::center
+	)
+	override;
+
+	void
+	speed_changed(
+		sanguis::entity_id,
+		sanguis::server::speed
+	)
+	override;
+
+	void
 	attacking_changed(
 		sanguis::entity_id,
 		bool is_attacking
@@ -137,6 +159,13 @@ private:
 	reloading_changed(
 		sanguis::entity_id,
 		bool is_reloading
+	)
+	override;
+
+	void
+	health_changed(
+		sanguis::entity_id,
+		sanguis::server::health
 	)
 	override;
 
@@ -223,12 +252,6 @@ private:
 	);
 
 	void
-	update_entity(
-		sanguis::server::world::entity_map::iterator,
-		bool update_pos
-	);
-
-	void
 	entity_collision(
 		sanguis::duration const &,
 		sanguis::server::entities::base &
@@ -265,8 +288,6 @@ private:
 	sight_range_map sight_ranges_;
 
 	sanguis::diff_timer collision_timer_;
-
-	sanguis::timer send_timer_;
 
 	typedef fcppt::scoped_ptr<
 		sanguis::server::environment::object

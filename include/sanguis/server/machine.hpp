@@ -50,9 +50,6 @@ public:
 	listen();
 
 	void
-	stop();
-
-	void
 	send_to_all(
 		sanguis::messages::base const &
 	);

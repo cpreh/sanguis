@@ -1,12 +1,10 @@
 #ifndef SANGUIS_SERVER_OBJECT_HPP_INCLUDED
 #define SANGUIS_SERVER_OBJECT_HPP_INCLUDED
 
-#include <sanguis/server/machine.hpp>
-#include <sanguis/server/object_fwd.hpp>
 #include <sanguis/main_object.hpp>
-#include <sanguis/io_service.hpp>
+#include <sanguis/server/common_object.hpp>
+#include <sanguis/server/object_fwd.hpp>
 #include <alda/net/port.hpp>
-#include <fcppt/scoped_state_machine.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <awl/main/exit_code.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -48,22 +46,11 @@ private:
 	mainloop();
 
 	void
-	timer_callback();
-
-	void
 	reset_running();
 
 	bool running_;
 
-	sanguis::io_service io_service_;
-
-	sanguis::server::machine machine_;
-
-	typedef fcppt::scoped_state_machine<
-		sanguis::server::machine
-	> scoped_machine;
-
-	scoped_machine scoped_machine_;
+	sanguis::server::common_object impl_;
 
 	mutable std::mutex mutex_;
 

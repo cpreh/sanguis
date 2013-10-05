@@ -1,3 +1,4 @@
+#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/collision/world/group.hpp>
 #include <sanguis/collision/world/group_field.hpp>
@@ -22,6 +23,7 @@
 
 
 sanguis::server::entities::pickups::weapon::weapon(
+	sanguis::diff_clock const &_diff_clock,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::team const _team,
 	sanguis::server::weapons::unique_ptr &&_weapon
@@ -29,6 +31,7 @@ sanguis::server::entities::pickups::weapon::weapon(
 :
 	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::with_body(
+		_diff_clock,
 		_load_context.entity_dim(
 			sanguis::server::model_name(
 				sanguis::load::weapon_pickup_name(

@@ -1,10 +1,6 @@
-#include <sanguis/server/object.hpp>
+#include <sanguis/main_object.hpp>
 #include <sanguis/server/log.hpp>
-#include <sanguis/server/events/disconnect.hpp>
-#include <sanguis/server/events/message.hpp>
-#include <sanguis/server/events/tick.hpp>
-#include <sanguis/server/states/running.hpp>
-#include <sanguis/server/states/unpaused.hpp>
+#include <sanguis/server/object.hpp>
 #include <alda/net/port.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/exit_success.hpp>
@@ -24,16 +20,12 @@ sanguis::server::object::object(
 	alda::net::port const _port
 )
 :
+	sanguis::main_object(),
 	running_(
 		true
 	),
-	io_service_(),
-	machine_(
-		_port,
-		io_service_
-	),
-	scoped_machine_(
-		machine_
+	impl_(
+		_port
 	),
 	mutex_(),
 	server_thread_(
@@ -50,7 +42,7 @@ sanguis::server::object::quit()
 {
 	this->reset_running();
 
-	machine_.stop();
+	impl_.stop();
 }
 
 bool
@@ -62,7 +54,8 @@ sanguis::server::object::running() const
 		mutex_
 	);
 
-	return running_;
+	return
+		running_;
 }
 
 sanguis::server::object::~object()
@@ -74,7 +67,8 @@ sanguis::server::object::run()
 {
 	server_thread_.join();
 
-	return awl::main::exit_success();
+	return
+		awl::main::exit_success();
 }
 
 void
@@ -82,7 +76,7 @@ sanguis::server::object::mainloop()
 {
 	try
 	{
-		io_service_.run();
+		impl_.run();
 	}
 	catch(
 		fcppt::exception const &_exception

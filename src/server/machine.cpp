@@ -121,12 +121,6 @@ sanguis::server::machine::listen()
 }
 
 void
-sanguis::server::machine::stop()
-{
-	io_service_.stop();
-}
-
-void
 sanguis::server::machine::send_to_all(
 	sanguis::messages::base const &_message
 )

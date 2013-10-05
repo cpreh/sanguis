@@ -17,8 +17,8 @@
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/optional_base_ref.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
-#include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_health_fwd.hpp>
+#include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/projectiles/aoe_damage.hpp>
 #include <sanguis/server/entities/projectiles/aoe_projectile.hpp>
 #include <sanguis/server/entities/projectiles/damage_per_pulse.hpp>
@@ -92,7 +92,7 @@ sanguis::server::entities::projectiles::grenade::on_transfer(
 )
 {
 	if(
-		!sanguis::server::entities::with_body::on_transfer(
+		!sanguis::server::entities::with_velocity::on_transfer(
 			_param
 		)
 	)
@@ -130,6 +130,8 @@ sanguis::server::entities::projectiles::grenade::on_update()
 			this->movement_speed().current()
 			* 0.9f
 		);
+
+	sanguis::server::entities::with_velocity::on_update();
 }
 
 void

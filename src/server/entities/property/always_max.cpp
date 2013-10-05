@@ -27,7 +27,8 @@ sanguis::server::entities::property::always_max::~always_max()
 sanguis::server::entities::property::value
 sanguis::server::entities::property::always_max::current() const
 {
-	return current_;
+	return
+		current_;
 }
 
 fcppt::signal::auto_connection
@@ -48,7 +49,5 @@ sanguis::server::entities::property::always_max::on_recalc_max(
 {
 	current_ = _max;
 
-	change_signal_(
-		this->current()
-	);
+	change_signal_();
 }

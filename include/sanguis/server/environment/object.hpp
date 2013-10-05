@@ -7,12 +7,14 @@
 #include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
+#include <sanguis/server/angle_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/level.hpp>
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/player_id.hpp>
+#include <sanguis/server/speed_fwd.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
@@ -69,6 +71,27 @@ public:
 
 	virtual
 	void
+	angle_changed(
+		sanguis::entity_id,
+		sanguis::server::angle
+	) = 0;
+
+	virtual
+	void
+	center_changed(
+		sanguis::entity_id,
+		sanguis::server::center
+	) = 0;
+
+	virtual
+	void
+	speed_changed(
+		sanguis::entity_id,
+		sanguis::server::speed
+	) = 0;
+
+	virtual
+	void
 	attacking_changed(
 		sanguis::entity_id,
 		bool is_attacking
@@ -79,6 +102,13 @@ public:
 	reloading_changed(
 		sanguis::entity_id,
 		bool is_reloading
+	) = 0;
+
+	virtual
+	void
+	health_changed(
+		sanguis::entity_id,
+		sanguis::server::health
 	) = 0;
 
 	virtual
