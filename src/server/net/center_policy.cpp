@@ -1,7 +1,9 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/server/center.hpp>
+#include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/net/center_policy.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/math/vector/distance.hpp>
 
 
@@ -21,11 +23,16 @@ sanguis::server::net::center_policy::difference(
 )
 {
 	return
-		// TODO!
 		sanguis::duration_second(
 			fcppt::math::vector::distance(
 				_center1.get(),
 				_center2.get()
+			)
+			/
+			fcppt::literal<
+				sanguis::server::space_unit
+			>(
+				20
 			)
 		);
 }

@@ -3,13 +3,9 @@
 
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/duration.hpp>
-#include <sanguis/duration_second.hpp>
 #include <sanguis/timer.hpp>
 #include <sanguis/server/net/value_decl.hpp>
 #include <fcppt/optional_impl.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <algorithm>
-#include <fcppt/config/external_end.hpp>
 
 
 template<
@@ -26,13 +22,10 @@ sanguis::server::net::value<
 	timer_(
 		sanguis::diff_timer::parameters(
 			_diff_clock,
-			sanguis::duration_second(
-				0.5f
-			)
-			//Policy::start_duration()
-		)/*.active(
+			Policy::start_duration()
+		).active(
 			false
-		)*/
+		)
 	),
 	old_()
 {
@@ -59,16 +52,14 @@ sanguis::server::net::value<
 	Policy
 >::update()
 {
-
 	if(
 		!timer_.expired()
 	)
 		return false;
 
-/*
 	timer_.interval(
 		Policy::start_duration()
-	);*/
+	);
 
 	timer_.reset();
 
@@ -87,8 +78,6 @@ sanguis::server::net::value<
 	Type const _value
 )
 {
-	old_ = _value;
-/*
 	if(
 		!old_
 	)
@@ -100,26 +89,24 @@ sanguis::server::net::value<
 			true
 		);
 
+		timer_.reset();
+
 		return;
 	}
+
 	timer_.interval(
-		std::max(
-			sanguis::duration_second(
-				0
-			),
-			timer_.interval<
-				sanguis::duration
-			>()
-			-
-			Policy::difference(
-				*old_,
-				_value
-			)
+		timer_.interval<
+			sanguis::duration
+		>()
+		-
+		Policy::difference(
+			*old_,
+			_value
 		)
 	);
 
 	old_ =
-		_value;*/
+		_value;
 }
 
 template<
@@ -133,10 +120,10 @@ sanguis::server::net::value<
 >::reset()
 {
 	old_.reset();
-/*
+
 	timer_.active(
 		false
-	);*/
+	);
 }
 
 #endif

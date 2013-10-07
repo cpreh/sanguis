@@ -144,10 +144,11 @@ sanguis::server::entities::with_body::on_transfer(
 	sanguis::server::entities::transfer_parameters const &_parameters
 )
 {
-	angle_ =
-		_parameters.angle();
-
 	net_angle_.reset();
+
+	this->angle(
+		_parameters.angle()
+	);
 
 	collision_body_.transfer(
 		_parameters.world(),

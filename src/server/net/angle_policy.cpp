@@ -1,7 +1,9 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/server/angle.hpp>
+#include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/net/angle_policy.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/math/diff.hpp>
 
 
@@ -21,11 +23,16 @@ sanguis::server::net::angle_policy::difference(
 )
 {
 	return
-		// TODO!
 		sanguis::duration_second(
 			fcppt::math::diff(
 				_angle1.get(),
 				_angle2.get()
+			)
+			*
+			fcppt::literal<
+				sanguis::server::space_unit
+			>(
+				5
 			)
 		);
 }
