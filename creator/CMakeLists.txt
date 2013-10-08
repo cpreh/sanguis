@@ -53,12 +53,12 @@ set(
 	src/aux_/deserialization/spawn_container.cpp
 	src/aux_/deserialization/top_result.cpp
 	src/aux_/find_opposing_cell.cpp
+	src/aux_/find_reachable.cpp
 	src/aux_/generator_map.cpp
 	src/aux_/generators/lines.cpp
 	src/aux_/generators/maze.cpp
 	src/aux_/parameters.cpp
 	src/aux_/perimeter_to_coords.cpp
-	src/aux_/reachable_grid.cpp
 	src/aux_/result.cpp
 	src/aux_/serialization/background_grid.cpp
 	src/aux_/serialization/grid.cpp
@@ -81,6 +81,7 @@ set(
 	src/include/sanguis/creator/aux_/filled_rect.hpp
 	src/include/sanguis/creator/aux_/find_closest.hpp
 	src/include/sanguis/creator/aux_/find_opposing_cell.hpp
+	src/include/sanguis/creator/aux_/find_reachable.hpp
 	src/include/sanguis/creator/aux_/generator_function.hpp
 	src/include/sanguis/creator/aux_/generator_map.hpp
 	src/include/sanguis/creator/aux_/generator_map_type.hpp

@@ -2,9 +2,10 @@
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/aux_/find_opposing_cell.hpp>
-#include <fcppt/assert/error.hpp>
+#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/container/grid/neumann_neighbor_array.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
+#include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/algorithm/contains.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -23,14 +24,10 @@ fcppt::optional<
 >
 sanguis::creator::aux_::find_opposing_cell
 (
-	sanguis::creator::grid &grid,
-	std::vector<
-		sanguis::creator::pos
-	> &maze,
+	sanguis::creator::aux_::reachable_grid &grid,
 	sanguis::creator::pos const &cell
 )
 {
-
 	// discard border tiles
 	if (
 		cell.x() == grid.size().w() - 1
@@ -40,57 +37,58 @@ sanguis::creator::aux_::find_opposing_cell
 		cell.y() == grid.size().h() - 1
 		||
 		cell.y() == 0
-		)
+	)
 		return fcppt::optional<
 			sanguis::creator::pos
 		>();
 
-	auto
-	const neighbors(
+	for(
+		auto const &n
+		:
 		fcppt::container::grid::neumann_neighbors(
+			cell)
+		
+	)
+	{
+		sanguis::creator::pos const
+		opposite(
 			cell
-		)
-	);
+			-
+			(
+				n
+				-
+				cell
+			)
+		);
 
-	std::vector<
-		sanguis::creator::pos
-	>
-	candidates;
-
-	// all empty neighboring cells are candidates for the
-	// kind of cell we're looking for
-	std::copy_if(
-		neighbors.begin(),
-		neighbors.end(),
-		std::back_inserter(candidates),
-		[&grid](
-			sanguis::creator::pos const &elem
+		if(
+			grid
+			[
+				n
+			]
+			==
+			sanguis::creator::aux_::reachable(true)
 		)
 		{
 			return
-				grid[elem]
-					==
-				sanguis::creator::tile::nothing;
+				grid
+				[
+					opposite
+				]
+				==
+				sanguis::creator::aux_::reachable(true)
+				?
+					fcppt::optional<
+						sanguis::creator::pos
+					>()
+				:
+					fcppt::optional<
+						sanguis::creator::pos
+					>(
+						opposite
+					);
 		}
-	);
+	}
 
-	// this should never happen, if the algorithm is correct
-	// only border tiles could have fewer neighbors but they
-	// were discarded already
-	FCPPT_ASSERT_ERROR(
-		candidates.size() == 2);
-
-	if(!fcppt::algorithm::contains(maze, candidates[0]))
-		return fcppt::optional<
-			sanguis::creator::pos
-		>(candidates[0]);
-
-	if(!fcppt::algorithm::contains(maze, candidates[1]))
-		return fcppt::optional<
-			sanguis::creator::pos
-		>(candidates[1]);
-
-	return fcppt::optional<
-		sanguis::creator::pos
-	>();
+	FCPPT_ASSERT_UNREACHABLE;
 }
