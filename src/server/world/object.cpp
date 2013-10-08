@@ -48,15 +48,12 @@
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/string.hpp>
 #include <sanguis/server/collision/body_collision.hpp>
-#include <sanguis/server/collision/optional_result.hpp>
-#include <sanguis/server/collision/with_world_move.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/is_type.hpp>
 #include <sanguis/server/entities/optional_base_ref.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
-#include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
@@ -184,9 +181,9 @@ sanguis::server::world::object::update()
 		:
 		entities_
 	)
-		this->entity_collision(
-			duration,
-			*entity.second
+		entity.second->world_collision(
+			grid_,
+			duration
 		);
 
 	collision_world_->update(
@@ -876,35 +873,6 @@ sanguis::server::world::object::send_player_specific(
 		_player_id,
 		_msg
 	);
-}
-
-void
-sanguis::server::world::object::entity_collision(
-	sanguis::duration const &_duration,
-	sanguis::server::entities::base &_entity
-)
-{
-	FCPPT_TRY_DYNAMIC_CAST(
-		sanguis::server::entities::with_body *,
-		with_body,
-		&_entity
-	)
-	{
-		sanguis::server::collision::optional_result const result(
-			sanguis::server::collision::with_world_move(
-				*with_body,
-				grid_,
-				_duration
-			)
-		);
-
-		if(
-			result
-		)
-			with_body->world_collision(
-				*result
-			);
-	}
 }
 
 void

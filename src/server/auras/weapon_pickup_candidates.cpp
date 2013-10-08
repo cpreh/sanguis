@@ -9,6 +9,7 @@
 #include <sanguis/server/auras/weapon_pickup_remove_candidate_callback.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/pickups/weapon.hpp>
+#include <fcppt/cast/static_downcast.hpp>
 
 
 sanguis::server::auras::weapon_pickup_candidates::weapon_pickup_candidates(
@@ -50,7 +51,7 @@ sanguis::server::auras::weapon_pickup_candidates::enter(
 )
 {
 	add_.get()(
-		dynamic_cast<
+		fcppt::cast::static_downcast<
 			sanguis::server::entities::pickups::weapon &
 		>(
 			_body
@@ -64,7 +65,7 @@ sanguis::server::auras::weapon_pickup_candidates::leave(
 )
 {
 	remove_.get()(
-		dynamic_cast<
+		fcppt::cast::static_downcast<
 			sanguis::server::entities::pickups::weapon &
 		>(
 			_body

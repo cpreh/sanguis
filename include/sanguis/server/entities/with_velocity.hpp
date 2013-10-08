@@ -2,6 +2,8 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_VELOCITY_HPP_INCLUDED
 
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/duration.hpp>
+#include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/dim_fwd.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/speed_fwd.hpp>
@@ -56,6 +58,13 @@ protected:
 public:
 	virtual
 	~with_velocity();
+
+	void
+	world_collision(
+		sanguis::creator::grid const &,
+		sanguis::duration
+	)
+	override;
 
 	sanguis::server::entities::property::changeable &
 	movement_speed();

@@ -3,7 +3,6 @@
 
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
-#include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
 #include <sanguis/is_primary_weapon_fwd.hpp>
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
@@ -249,12 +248,6 @@ private:
 	send_player_specific(
 		sanguis::server::player_id,
 		sanguis::messages::base const &
-	);
-
-	void
-	entity_collision(
-		sanguis::duration const &,
-		sanguis::server::entities::base &
 	);
 
 	void

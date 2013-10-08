@@ -57,12 +57,6 @@ public:
 	center() const
 	override;
 
-	virtual
-	void
-	world_collision(
-		sanguis::server::collision::result const &
-	);
-
 	// ifaces::with_angle overridden functions
 	sanguis::server::angle const
 	angle() const
@@ -91,6 +85,12 @@ protected:
 		sanguis::server::entities::transfer_parameters const &
 	)
 	override;
+
+	virtual
+	void
+	on_world_collision(
+		sanguis::server::collision::result const &
+	);
 
 	void
 	on_update()

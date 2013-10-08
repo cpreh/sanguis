@@ -10,6 +10,7 @@
 #include <sanguis/server/collision/ghost_unique_ptr.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -78,7 +79,7 @@ sanguis::server::auras::aura::body_enter(
 )
 {
 	this->enter(
-		dynamic_cast<
+		fcppt::cast::static_downcast<
 			sanguis::server::entities::with_body &
 		>(
 			_base
@@ -92,7 +93,7 @@ sanguis::server::auras::aura::body_exit(
 )
 {
 	this->leave(
-		dynamic_cast<
+		fcppt::cast::static_downcast<
 			sanguis::server::entities::with_body &
 		>(
 			_base

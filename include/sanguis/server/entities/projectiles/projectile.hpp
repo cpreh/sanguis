@@ -73,7 +73,7 @@ private:
 	override;
 
 	void
-	world_collision(
+	on_world_collision(
 		sanguis::server::collision::result const &
 	)
 	override;

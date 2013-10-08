@@ -101,13 +101,13 @@ sanguis::server::entities::projectiles::projectile::dead() const
 }
 
 void
-sanguis::server::entities::projectiles::projectile::world_collision(
+sanguis::server::entities::projectiles::projectile::on_world_collision(
 	sanguis::server::collision::result const &_result
 )
 {
 	this->expire();
 
-	sanguis::server::entities::with_body::world_collision(
+	sanguis::server::entities::with_body::on_world_collision(
 		_result
 	);
 }

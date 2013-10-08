@@ -1,5 +1,7 @@
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/speed.hpp>
+#include <sanguis/server/collision/optional_result.hpp>
+#include <sanguis/server/collision/with_world_move.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/speed_to_abs.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
@@ -90,6 +92,28 @@ sanguis::server::entities::with_velocity::on_transfer(
 
 sanguis::server::entities::with_velocity::~with_velocity()
 {
+}
+
+void
+sanguis::server::entities::with_velocity::world_collision(
+	sanguis::creator::grid const &_grid,
+	sanguis::duration const _duration
+)
+{
+	sanguis::server::collision::optional_result const result(
+		sanguis::server::collision::with_world_move(
+			*this,
+			_grid,
+			_duration
+		)
+	);
+
+	if(
+		result
+	)
+		this->on_world_collision(
+			*result
+		);
 }
 
 sanguis::server::entities::property::changeable &

@@ -37,6 +37,7 @@
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -177,7 +178,7 @@ sanguis::server::entities::enemies::enemy::on_remove()
 	if(
 		spawn_owner_.get()
 	)
-		dynamic_cast<
+		fcppt::cast::static_downcast<
 			sanguis::server::entities::spawns::spawn &
 		>(
 			*spawn_owner_.get()

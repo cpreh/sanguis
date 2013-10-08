@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_BASE_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_BASE_HPP_INCLUDED
 
+#include <sanguis/duration.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
@@ -32,6 +33,13 @@ public:
 		sanguis::server::environment::object &,
 		sanguis::server::entities::insert_parameters const &,
 		sanguis::creator::grid const &
+	);
+
+	virtual
+	void
+	world_collision(
+		sanguis::creator::grid const &,
+		sanguis::duration
 	);
 
 	void

@@ -957,7 +957,6 @@ set(
 	include/sanguis/server/entities/spawns/size_type.hpp
 	include/sanguis/server/entities/spawns/spawn.hpp
 	include/sanguis/server/entities/spawns/total_count.hpp
-	include/sanguis/server/entities/speed.hpp
 	include/sanguis/server/entities/speed_to_abs.hpp
 	include/sanguis/server/entities/transfer_parameters.hpp
 	include/sanguis/server/entities/transfer_parameters_fwd.hpp
@@ -1576,7 +1575,6 @@ set(
 	src/server/entities/radius.cpp
 	src/server/entities/spawns/limited.cpp
 	src/server/entities/spawns/spawn.cpp
-	src/server/entities/speed.cpp
 	src/server/entities/speed_to_abs.cpp
 	src/server/entities/transfer_parameters.cpp
 	src/server/entities/with_ai.cpp

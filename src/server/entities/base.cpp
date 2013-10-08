@@ -1,3 +1,4 @@
+#include <sanguis/duration.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
@@ -48,6 +49,15 @@ sanguis::server::entities::base::transfer(
 }
 
 void
+sanguis::server::entities::base::world_collision(
+	sanguis::creator::grid const &,
+	sanguis::duration
+)
+{
+}
+
+// TODO: These functions are useless!
+void
 sanguis::server::entities::base::update()
 {
 	this->on_update();
@@ -65,6 +75,7 @@ sanguis::server::entities::base::destroy()
 	this->on_destroy();
 }
 
+// TODO: optional reference!
 sanguis::server::environment::object &
 sanguis::server::entities::base::environment() const
 {
@@ -75,6 +86,7 @@ sanguis::server::entities::base::environment() const
 	return *environment_;
 }
 
+// TODO: Remove this!
 bool
 sanguis::server::entities::base::has_environment() const
 {

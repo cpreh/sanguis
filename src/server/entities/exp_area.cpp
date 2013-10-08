@@ -11,9 +11,10 @@
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
-#include <fcppt/dynamic_cast.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/cast/int_to_float.hpp>
+#include <fcppt/cast/static_downcast.hpp>
+#include <fcppt/cast/static_downcast_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
 #include <utility>
@@ -78,7 +79,7 @@ sanguis::server::entities::exp_area::on_remove()
 	for(
 		auto &player_link : player_links_
 	)
-		fcppt::dynamic_cast_<
+		fcppt::cast::static_downcast<
 			sanguis::server::entities::player &
 		>(
 			*player_link.second
@@ -120,7 +121,7 @@ sanguis::server::entities::exp_area::body_enter(
 )
 {
 	sanguis::server::entities::player &entity(
-		dynamic_cast<
+		fcppt::cast::static_downcast<
 			sanguis::server::entities::player &
 		>(
 			_base
@@ -141,7 +142,7 @@ sanguis::server::entities::exp_area::body_exit(
 )
 {
 	player_links_.erase(
-		dynamic_cast<
+		fcppt::cast::static_downcast_ptr<
 			sanguis::server::entities::player *
 		>(
 			&_base

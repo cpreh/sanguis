@@ -10,13 +10,12 @@
 #include <sanguis/server/collision/optional_result.hpp>
 #include <sanguis/server/collision/result.hpp>
 #include <sanguis/server/collision/with_world_move.hpp>
-#include <sanguis/server/entities/speed.hpp>
-#include <sanguis/server/entities/with_body.hpp>
+#include <sanguis/server/entities/with_velocity.hpp>
 
 
 sanguis::server::collision::optional_result const
 sanguis::server::collision::with_world_move(
-	sanguis::server::entities::with_body const &_with_body,
+	sanguis::server::entities::with_velocity const &_with_velocity,
 	sanguis::creator::grid const &_grid,
 	sanguis::duration const &_duration
 )
@@ -24,15 +23,13 @@ sanguis::server::collision::with_world_move(
 	sanguis::collision::optional_result const result(
 		sanguis::collision::test_move(
 			sanguis::collision::center(
-				_with_body.center().get()
+				_with_velocity.center().get()
 			),
 			sanguis::collision::dim2(
-				_with_body.dim()
+				_with_velocity.dim()
 			),
 			sanguis::collision::speed(
-				sanguis::server::entities::speed(
-					_with_body
-				).get()
+				_with_velocity.speed().get()
 			),
 			_duration,
 			_grid

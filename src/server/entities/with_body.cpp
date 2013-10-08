@@ -8,7 +8,6 @@
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/body.hpp>
-#include <sanguis/server/collision/optional_result.hpp>
 #include <sanguis/server/collision/position_callback.hpp>
 #include <sanguis/server/collision/result.hpp>
 #include <sanguis/server/entities/check_dim.hpp>
@@ -79,20 +78,6 @@ sanguis::server::entities::with_body::center() const
 {
 	return
 		collision_body_.center();
-}
-
-void
-sanguis::server::entities::with_body::world_collision(
-	sanguis::server::collision::result const &_result
-)
-{
-	this->center(
-		_result.center()
-	);
-
-	this->body_speed(
-		_result.speed()
-	);
 }
 
 sanguis::server::angle const
@@ -173,6 +158,20 @@ sanguis::server::entities::with_body::on_update()
 			this->id(),
 			this->angle()
 		);
+}
+
+void
+sanguis::server::entities::with_body::on_world_collision(
+	sanguis::server::collision::result const &_result
+)
+{
+	this->center(
+		_result.center()
+	);
+
+	this->body_speed(
+		_result.speed()
+	);
 }
 
 void
