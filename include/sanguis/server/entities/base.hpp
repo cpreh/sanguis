@@ -27,7 +27,6 @@ protected:
 	base();
 public:
 	// general world functions
-
 	bool
 	transfer(
 		sanguis::server::environment::object &,
@@ -42,17 +41,19 @@ public:
 		sanguis::duration
 	);
 
+	virtual
 	void
 	update();
 
+	virtual
 	void
 	remove();
 
+	virtual
 	void
 	destroy();
 
 	// environment query function // TODO: should this be public?
-
 	sanguis::server::environment::object &
 	environment() const;
 
@@ -66,7 +67,6 @@ public:
 
 
 	// life functions
-
 	virtual
 	bool
 	dead() const = 0;
@@ -76,19 +76,7 @@ public:
 private:
 	virtual
 	void
-	on_update();
-
-	virtual
-	void
 	on_create();
-
-	virtual
-	void
-	on_remove();
-
-	virtual
-	void
-	on_destroy();
 
 	virtual
 	bool

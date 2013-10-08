@@ -61,7 +61,7 @@ sanguis::server::entities::with_ghosts::on_transfer(
 }
 
 void
-sanguis::server::entities::with_ghosts::on_destroy()
+sanguis::server::entities::with_ghosts::destroy()
 {
 	for(
 		auto &ghost : ghosts_

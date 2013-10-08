@@ -117,15 +117,15 @@ sanguis::server::entities::friend_::on_transfer(
 }
 
 void
-sanguis::server::entities::friend_::on_update()
+sanguis::server::entities::friend_::update()
 {
-	sanguis::server::entities::with_ai::on_update();
+	sanguis::server::entities::with_ai::update();
 
-	sanguis::server::entities::with_buffs::on_update();
+	sanguis::server::entities::with_buffs::update();
 
-	sanguis::server::entities::with_health::on_update();
+	sanguis::server::entities::with_health::update();
 
-	sanguis::server::entities::with_velocity::on_update();
+	sanguis::server::entities::with_velocity::update();
 }
 
 sanguis::server::team

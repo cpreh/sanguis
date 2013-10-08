@@ -47,7 +47,7 @@ protected:
 
 	virtual
 	void
-	on_update()
+	update()
 	override;
 
 	bool

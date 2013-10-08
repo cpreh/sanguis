@@ -119,7 +119,7 @@ public:
 	override;
 private:
 	void
-	on_remove()
+	remove()
 	override;
 
 	void
@@ -143,7 +143,7 @@ private:
 	);
 
 	void
-	on_update()
+	update()
 	override;
 
 	sanguis::messages::unique_ptr

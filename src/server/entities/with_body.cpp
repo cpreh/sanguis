@@ -149,7 +149,7 @@ sanguis::server::entities::with_body::on_transfer(
 }
 
 void
-sanguis::server::entities::with_body::on_update()
+sanguis::server::entities::with_body::update()
 {
 	if(
 		net_angle_.update()
@@ -175,12 +175,12 @@ sanguis::server::entities::with_body::on_world_collision(
 }
 
 void
-sanguis::server::entities::with_body::on_destroy()
+sanguis::server::entities::with_body::destroy()
 {
 	// TODO: Is this still needed?
 	collision_body_.destroy();
 
-	sanguis::server::entities::with_ghosts::on_destroy();
+	sanguis::server::entities::with_ghosts::destroy();
 }
 
 void

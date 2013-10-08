@@ -68,7 +68,7 @@ public:
 	etype() const;
 private:
 	void
-	on_update()
+	update()
 	override;
 
 	sanguis::messages::unique_ptr
@@ -86,7 +86,7 @@ private:
 	override;
 
 	void
-	on_remove()
+	remove()
 	override;
 
 	sanguis::creator::enemy_type const etype_;

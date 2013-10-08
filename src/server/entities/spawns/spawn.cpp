@@ -93,7 +93,7 @@ sanguis::server::entities::spawns::spawn::on_transfer(
 }
 
 void
-sanguis::server::entities::spawns::spawn::on_update()
+sanguis::server::entities::spawns::spawn::update()
 {
 	if(
 		sanguis::server::entities::spawns::size_type const count_ =

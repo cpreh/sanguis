@@ -59,7 +59,7 @@ sanguis::server::entities::with_perks::~with_perks()
 }
 
 void
-sanguis::server::entities::with_perks::on_update()
+sanguis::server::entities::with_perks::update()
 {
 	for(
 		auto perk : perks_

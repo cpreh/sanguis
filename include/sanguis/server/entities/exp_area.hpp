@@ -40,7 +40,7 @@ public:
 	~exp_area();
 private:
 	void
-	on_remove()
+	remove()
 	override;
 
 	bool

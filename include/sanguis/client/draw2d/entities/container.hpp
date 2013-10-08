@@ -59,45 +59,53 @@ public:
 	~container();
 
 	sanguis::client::draw2d::sprite::center const
-	center() const;
+	center() const
+	override;
 protected:
-	typedef sprite_vector::iterator iterator;
+	typedef
+	sprite_vector::iterator
+	iterator;
 
-	typedef sprite_vector::const_iterator const_iterator;
+	typedef
+	sprite_vector::const_iterator
+	const_iterator;
 
-	// entity overrides
 	virtual
 	void
-	update();
+	update()
+	override;
 
 	virtual
 	void
 	center(
 		sanguis::client::draw2d::sprite::center const &
-	);
+	)
+	override;
 
 	sanguis::client::draw2d::center const
 	float_center() const;
 
-	// with_orientation overrides
 	virtual
 	void
 	orientation(
 		sanguis::client::draw2d::sprite::rotation
-	);
+	)
+	override;
 
 	sanguis::client::draw2d::sprite::rotation
-	orientation() const;
+	orientation() const
+	override;
 
-	// with_speed overrides
 	virtual
 	void
 	speed(
 		sanguis::client::draw2d::speed const &
-	);
+	)
+	override;
 
 	sanguis::client::draw2d::speed const
-	speed() const;
+	speed() const
+	override;
 
 	sanguis::duration const
 	movement_duration() const;

@@ -71,7 +71,7 @@ sanguis::server::entities::projectiles::rocket::do_damage(
 }
 
 void
-sanguis::server::entities::projectiles::rocket::on_remove()
+sanguis::server::entities::projectiles::rocket::remove()
 {
 	sanguis::server::environment::insert_no_result(
 		this->environment(),

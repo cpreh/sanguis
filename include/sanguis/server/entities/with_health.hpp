@@ -65,7 +65,7 @@ protected:
 	~with_health();
 
 	void
-	on_update()
+	update()
 	override;
 private:
 	bool

@@ -93,11 +93,11 @@ protected:
 	);
 
 	void
-	on_update()
+	update()
 	override;
 
 	void
-	on_destroy()
+	destroy()
 	override;
 
 	void

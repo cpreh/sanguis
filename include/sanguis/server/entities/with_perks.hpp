@@ -39,7 +39,7 @@ protected:
 	~with_perks();
 
 	void
-	on_update()
+	update()
 	override;
 private:
 	typedef boost::ptr_map<

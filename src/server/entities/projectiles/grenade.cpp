@@ -119,7 +119,7 @@ sanguis::server::entities::projectiles::grenade::do_damage(
 }
 
 void
-sanguis::server::entities::projectiles::grenade::on_update()
+sanguis::server::entities::projectiles::grenade::update()
 {
 	if(
 		sge::timer::reset_when_expired(
@@ -131,11 +131,11 @@ sanguis::server::entities::projectiles::grenade::on_update()
 			* 0.9f
 		);
 
-	sanguis::server::entities::with_velocity::on_update();
+	sanguis::server::entities::with_velocity::update();
 }
 
 void
-sanguis::server::entities::projectiles::grenade::on_remove()
+sanguis::server::entities::projectiles::grenade::remove()
 {
 	this->environment().insert(
 		fcppt::make_unique_ptr<

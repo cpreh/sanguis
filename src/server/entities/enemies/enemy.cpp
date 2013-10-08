@@ -125,15 +125,15 @@ sanguis::server::entities::enemies::enemy::etype() const
 }
 
 void
-sanguis::server::entities::enemies::enemy::on_update()
+sanguis::server::entities::enemies::enemy::update()
 {
-	sanguis::server::entities::with_ai::on_update();
+	sanguis::server::entities::with_ai::update();
 
-	sanguis::server::entities::with_buffs::on_update();
+	sanguis::server::entities::with_buffs::update();
 
-	sanguis::server::entities::with_health::on_update();
+	sanguis::server::entities::with_health::update();
 
-	sanguis::server::entities::with_velocity::on_update();
+	sanguis::server::entities::with_velocity::update();
 }
 
 sanguis::messages::unique_ptr
@@ -173,7 +173,7 @@ sanguis::server::entities::enemies::enemy::team() const
 }
 
 void
-sanguis::server::entities::enemies::enemy::on_remove()
+sanguis::server::entities::enemies::enemy::remove()
 {
 	if(
 		spawn_owner_.get()

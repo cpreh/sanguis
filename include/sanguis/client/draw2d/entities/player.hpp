@@ -36,15 +36,18 @@ public:
 	void
 	orientation(
 		sanguis::client::draw2d::sprite::rotation
-	);
+	)
+	override;
 
 	void
 	speed(
 		sanguis::client::draw2d::speed const &
-	);
+	)
+	override;
 protected:
 	void
-	update();
+	update()
+	override;
 
 	sanguis::client::draw2d::sprite::dim const
 	bounding_dim() const;

@@ -135,7 +135,7 @@ sanguis::server::entities::with_health::~with_health()
 }
 
 void
-sanguis::server::entities::with_health::on_update()
+sanguis::server::entities::with_health::update()
 {
 	sanguis::server::entities::property::add(
 		health_,

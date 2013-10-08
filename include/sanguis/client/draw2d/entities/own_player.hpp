@@ -34,7 +34,8 @@ public:
 	~own_player();
 private:
 	void
-	update();
+	update()
+	override;
 
 	sanguis::client::draw2d::transform_callback const transform_;
 

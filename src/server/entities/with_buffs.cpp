@@ -45,7 +45,7 @@ sanguis::server::entities::with_buffs::~with_buffs()
 }
 
 void
-sanguis::server::entities::with_buffs::on_update()
+sanguis::server::entities::with_buffs::update()
 {
 	for(
 		auto &buff : buffs_

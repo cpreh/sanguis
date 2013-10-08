@@ -427,7 +427,7 @@ sanguis::server::entities::player::team() const
 }
 
 void
-sanguis::server::entities::player::on_remove()
+sanguis::server::entities::player::remove()
 {
 	this->environment().remove_player(
 		this->player_id()
@@ -488,17 +488,17 @@ sanguis::server::entities::player::weapon_pickup_remove_candidate(
 }
 
 void
-sanguis::server::entities::player::on_update()
+sanguis::server::entities::player::update()
 {
-	sanguis::server::entities::with_buffs::on_update();
+	sanguis::server::entities::with_buffs::update();
 
-	sanguis::server::entities::with_health::on_update();
+	sanguis::server::entities::with_health::update();
 
-	sanguis::server::entities::with_perks::on_update();
+	sanguis::server::entities::with_perks::update();
 
-	sanguis::server::entities::with_velocity::on_update();
+	sanguis::server::entities::with_velocity::update();
 
-	sanguis::server::entities::with_weapon::on_update();
+	sanguis::server::entities::with_weapon::update();
 }
 
 sanguis::messages::unique_ptr

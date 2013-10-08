@@ -34,7 +34,8 @@ public:
 	void
 	orientation(
 		sanguis::client::draw2d::sprite::rotation
-	);
+	)
+	override;
 private:
 	using sanguis::client::draw2d::entities::container::orientation;
 };

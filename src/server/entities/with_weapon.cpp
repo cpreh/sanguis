@@ -62,7 +62,7 @@ sanguis::server::entities::with_weapon::~with_weapon()
 }
 
 void
-sanguis::server::entities::with_weapon::on_update()
+sanguis::server::entities::with_weapon::update()
 {
 	this->update_weapon(
 		this->primary_weapon_ref()
@@ -77,13 +77,11 @@ sanguis::server::entities::with_weapon::on_update()
 		&&
 		!secondary_weapon_->usable()
 	)
-	{
 		this->drop_weapon(
 			sanguis::is_primary_weapon(
 				false
 			)
 		);
-	}
 }
 
 sanguis::optional_primary_weapon_type const

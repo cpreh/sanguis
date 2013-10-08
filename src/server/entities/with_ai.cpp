@@ -43,9 +43,9 @@ sanguis::server::entities::with_ai::~with_ai()
 }
 
 void
-sanguis::server::entities::with_ai::on_update()
+sanguis::server::entities::with_ai::update()
 {
-	sanguis::server::entities::with_weapon::on_update();
+	sanguis::server::entities::with_weapon::update();
 
 	FCPPT_ASSERT_PRE(
 		manager_

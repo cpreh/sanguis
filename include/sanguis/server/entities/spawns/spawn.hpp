@@ -65,7 +65,7 @@ private:
 	override;
 
 	void
-	on_update()
+	update()
 	override;
 
 	virtual

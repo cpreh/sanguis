@@ -57,11 +57,11 @@ private:
 	override;
 
 	void
-	on_update()
+	update()
 	override;
 
 	void
-	on_remove()
+	remove()
 	override;
 
 	sanguis::diff_clock const &diff_clock_;

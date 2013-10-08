@@ -63,7 +63,7 @@ private:
 	override;
 
 	void
-	on_update()
+	update()
 	override;
 
 	sanguis::server::team

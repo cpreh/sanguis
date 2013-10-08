@@ -54,9 +54,9 @@ sanguis::server::entities::with_velocity::with_velocity(
 }
 
 void
-sanguis::server::entities::with_velocity::on_update()
+sanguis::server::entities::with_velocity::update()
 {
-	sanguis::server::entities::with_body::on_update();
+	sanguis::server::entities::with_body::update();
 
 	if(
 		net_center_.update()

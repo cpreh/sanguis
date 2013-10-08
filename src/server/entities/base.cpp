@@ -56,23 +56,19 @@ sanguis::server::entities::base::world_collision(
 {
 }
 
-// TODO: These functions are useless!
 void
 sanguis::server::entities::base::update()
 {
-	this->on_update();
 }
 
 void
 sanguis::server::entities::base::remove()
 {
-	this->on_remove();
 }
 
 void
 sanguis::server::entities::base::destroy()
 {
-	this->on_destroy();
 }
 
 // TODO: optional reference!
@@ -99,22 +95,7 @@ sanguis::server::entities::base::~base()
 }
 
 void
-sanguis::server::entities::base::on_update()
-{
-}
-
-void
 sanguis::server::entities::base::on_create()
-{
-}
-
-void
-sanguis::server::entities::base::on_remove()
-{
-}
-
-void
-sanguis::server::entities::base::on_destroy()
 {
 }
 

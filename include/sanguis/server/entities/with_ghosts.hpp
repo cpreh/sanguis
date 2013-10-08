@@ -46,7 +46,7 @@ protected:
 
 	virtual
 	void
-	on_destroy()
+	destroy()
 	override;
 
 	void

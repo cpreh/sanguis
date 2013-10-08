@@ -46,7 +46,7 @@ protected:
 
 	virtual
 	void
-	on_update()
+	update()
 	override;
 
 	sanguis::optional_primary_weapon_type const

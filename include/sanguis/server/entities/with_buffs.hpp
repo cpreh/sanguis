@@ -42,7 +42,7 @@ protected:
 	~with_buffs();
 
 	void
-	on_update()
+	update()
 	override;
 private:
 	sanguis::server::buffs::list buffs_;
