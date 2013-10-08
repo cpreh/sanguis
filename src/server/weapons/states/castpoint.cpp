@@ -72,7 +72,7 @@ sanguis::server::weapons::states::castpoint::react(
 				_event.owner().center(),
 				_event.owner().angle(),
 				_event.owner().team(),
-				_event.owner().environment(),
+				*_event.owner().environment(),
 				_event.owner().target()
 			)
 		)

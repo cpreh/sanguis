@@ -142,7 +142,7 @@ sanguis::server::ai::manager::update()
 	);
 
 	sanguis::creator::grid const &grid(
-		me_.environment().grid()
+		me_.environment()->grid()
 	);
 
 	bool const is_visible(

@@ -13,6 +13,7 @@
 #include <sanguis/server/entities/pickups/monster.hpp>
 #include <sanguis/server/entities/pickups/weapon.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/environment/optional_object_ref.hpp>
 #include <sanguis/server/weapons/create.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -27,6 +28,15 @@ sanguis::server::cheat(
 	sanguis::cheat_type const _type
 )
 {
+	sanguis::server::environment::optional_object_ref const environment(
+		_player.environment()
+	);
+
+	if(
+		!environment
+	)
+		return;
+
 	switch(
 		_type
 	)
@@ -42,17 +52,12 @@ sanguis::server::cheat(
 		_player.kill();
 		return;
 	case sanguis::cheat_type::monster_pickup:
-		if(
-			!_player.has_environment()
-		)
-			return;
-
-		_player.environment().insert(
+		environment->insert(
 			fcppt::make_unique_ptr<
 				sanguis::server::entities::pickups::monster
 			>(
 				_diff_clock,
-				_player.environment().load_context(),
+				environment->load_context(),
 				sanguis::server::team::players,
 				sanguis::friend_type::spider,
 				sanguis::server::entities::enemies::difficulty(
@@ -66,17 +71,12 @@ sanguis::server::cheat(
 		return;
 	case sanguis::cheat_type::sentry_pickup:
 	case sanguis::cheat_type::grenade_pickup:
-		if(
-			!_player.has_environment()
-		)
-			return;
-
-		_player.environment().insert(
+		environment->insert(
 			fcppt::make_unique_ptr<
 				sanguis::server::entities::pickups::weapon
 			>(
 				_diff_clock,
-				_player.environment().load_context(),
+				environment->load_context(),
 				sanguis::server::team::players,
 				sanguis::server::weapons::create(
 					_diff_clock,

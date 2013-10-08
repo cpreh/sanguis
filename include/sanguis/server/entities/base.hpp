@@ -8,6 +8,7 @@
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
+#include <sanguis/server/environment/optional_object_ref.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -53,12 +54,9 @@ public:
 	void
 	destroy();
 
-	// environment query function // TODO: should this be public?
-	sanguis::server::environment::object &
+	// environment query function
+	sanguis::server::environment::optional_object_ref const
 	environment() const;
-
-	bool
-	has_environment() const;
 
 	// position
 	virtual
@@ -84,7 +82,7 @@ private:
 		sanguis::server::entities::transfer_parameters const &
 	);
 
-	sanguis::server::environment::object *environment_;
+	sanguis::server::environment::optional_object_ref environment_;
 };
 
 }

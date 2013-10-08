@@ -154,7 +154,7 @@ sanguis::server::entities::with_body::update()
 	if(
 		net_angle_.update()
 	)
-		this->environment().angle_changed(
+		this->environment()->angle_changed(
 			this->id(),
 			this->angle()
 		);

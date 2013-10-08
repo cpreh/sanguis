@@ -57,13 +57,13 @@ sanguis::server::entities::pickups::monster::do_pickup(
 	sanguis::server::entities::base &
 )
 {
-	this->environment().insert(
+	this->environment()->insert(
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::friend_
 		>(
 			diff_clock_,
 			ftype_,
-			this->environment().load_context(),
+			this->environment()->load_context(),
 			sanguis::server::damage::no_armor(),
 			sanguis::server::health(
 				100.f

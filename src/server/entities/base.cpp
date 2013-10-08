@@ -4,14 +4,12 @@
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/environment/object.hpp>
-#include <fcppt/assert/pre.hpp>
+#include <sanguis/server/environment/optional_object_ref.hpp>
 
 
 sanguis::server::entities::base::base()
 :
-	environment_(
-		nullptr
-	)
+	environment_()
 {
 }
 
@@ -23,10 +21,13 @@ sanguis::server::entities::base::transfer(
 )
 {
 	bool const create(
-		environment_ == nullptr
+		!environment_
 	);
 
-	environment_ = &_environment;
+	environment_ =
+		sanguis::server::environment::optional_object_ref(
+			_environment
+		);
 
 	if(
 		!this->on_transfer(
@@ -71,23 +72,11 @@ sanguis::server::entities::base::destroy()
 {
 }
 
-// TODO: optional reference!
-sanguis::server::environment::object &
+sanguis::server::environment::optional_object_ref const
 sanguis::server::entities::base::environment() const
 {
-	FCPPT_ASSERT_PRE(
-		this->has_environment()
-	);
-
-	return *environment_;
-}
-
-// TODO: Remove this!
-bool
-sanguis::server::entities::base::has_environment() const
-{
 	return
-		environment_ != nullptr;
+		environment_;
 }
 
 sanguis::server::entities::base::~base()

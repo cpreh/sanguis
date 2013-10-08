@@ -204,7 +204,7 @@ sanguis::server::entities::player::add_exp(
 			+ _exp.get()
 		);
 
-	this->environment().exp_changed(
+	this->environment()->exp_changed(
 		this->player_id(),
 		this->id(),
 		exp_
@@ -230,7 +230,7 @@ sanguis::server::entities::player::add_exp(
 
 	level_ = new_level;
 
-	this->environment().level_changed(
+	this->environment()->level_changed(
 		this->player_id(),
 		this->id(),
 		level_
@@ -369,12 +369,12 @@ sanguis::server::entities::player::drop_or_pickup_weapon(
 		&&
 		dropped->usable()
 	)
-		this->environment().insert(
+		this->environment()->insert(
 			fcppt::make_unique_ptr<
 				sanguis::server::entities::pickups::weapon
 			>(
 				diff_clock_,
-				this->environment().load_context(),
+				this->environment()->load_context(),
 				this->team(),
 				std::move(
 					dropped
@@ -429,7 +429,7 @@ sanguis::server::entities::player::team() const
 void
 sanguis::server::entities::player::remove()
 {
-	this->environment().remove_player(
+	this->environment()->remove_player(
 		this->player_id()
 	);
 }
@@ -439,7 +439,7 @@ sanguis::server::entities::player::add_sight_range(
 	sanguis::entity_id const _entity_id
 )
 {
-	this->environment().add_sight_range(
+	this->environment()->add_sight_range(
 		this->player_id(),
 		_entity_id
 	);
@@ -450,7 +450,7 @@ sanguis::server::entities::player::remove_sight_range(
 	sanguis::entity_id const _entity_id
 )
 {
-	this->environment().remove_sight_range(
+	this->environment()->remove_sight_range(
 		this->player_id(),
 		_entity_id
 	);
@@ -545,7 +545,7 @@ sanguis::server::entities::player::on_new_weapon(
 	sanguis::server::weapons::weapon const &_weapon
 )
 {
-	this->environment().got_weapon(
+	this->environment()->got_weapon(
 		this->player_id(),
 		this->id(),
 		_weapon.description()
@@ -557,7 +557,7 @@ sanguis::server::entities::player::on_drop_weapon(
 	sanguis::is_primary_weapon const _is_primary
 )
 {
-	this->environment().remove_weapon(
+	this->environment()->remove_weapon(
 		this->player_id(),
 		this->id(),
 		_is_primary

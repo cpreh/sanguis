@@ -150,7 +150,7 @@ sanguis::server::entities::with_health::update()
 	if(
 		net_health_.update()
 	)
-		this->environment().health_changed(
+		this->environment()->health_changed(
 			this->id(),
 			this->current_health()
 		);
@@ -174,7 +174,7 @@ sanguis::server::entities::with_health::health_change()
 void
 sanguis::server::entities::with_health::max_health_change()
 {
-	this->environment().max_health_changed(
+	this->environment()->max_health_changed(
 		this->id(),
 		this->max_health()
 	);

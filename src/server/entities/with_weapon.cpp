@@ -14,6 +14,7 @@
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/property/always_max.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/environment/optional_object_ref.hpp>
 #include <sanguis/server/weapons/const_optional_ref.hpp>
 #include <sanguis/server/weapons/ias.hpp>
 #include <sanguis/server/weapons/irs.hpp>
@@ -312,7 +313,7 @@ sanguis::server::entities::with_weapon::attacking(
 			_type
 		).get()
 	)
-		this->environment().attacking_changed(
+		this->environment()->attacking_changed(
 			this->id(),
 			_value
 		);
@@ -329,7 +330,7 @@ sanguis::server::entities::with_weapon::reloading(
 			_type
 		).get()
 	)
-		this->environment().reloading_changed(
+		this->environment()->reloading_changed(
 			this->id(),
 			_value
 		);
@@ -399,12 +400,16 @@ sanguis::server::entities::with_weapon::weapon_changed(
 	sanguis::is_primary_weapon const _is_primary
 )
 {
+	sanguis::server::environment::optional_object_ref const env(
+		this->environment()
+	);
+
 	if(
-		this->has_environment()
+		env
 		&&
 		_is_primary.get()
 	)
-		this->environment().weapon_changed(
+		env->weapon_changed(
 			this->id(),
 			this->primary_weapon_type()
 		);

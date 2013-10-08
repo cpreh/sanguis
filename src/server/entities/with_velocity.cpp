@@ -61,7 +61,7 @@ sanguis::server::entities::with_velocity::update()
 	if(
 		net_center_.update()
 	)
-		this->environment().center_changed(
+		this->environment()->center_changed(
 			this->id(),
 			this->center()
 		);
@@ -69,7 +69,7 @@ sanguis::server::entities::with_velocity::update()
 	if(
 		net_speed_.update()
 	)
-		this->environment().speed_changed(
+		this->environment()->speed_changed(
 			this->id(),
 			this->speed()
 		);

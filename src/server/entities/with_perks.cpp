@@ -66,6 +66,6 @@ sanguis::server::entities::with_perks::update()
 	)
 		perk->second->update(
 			*this,
-			this->environment()
+			*this->environment()
 		);
 }

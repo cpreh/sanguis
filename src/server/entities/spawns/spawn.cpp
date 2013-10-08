@@ -105,13 +105,13 @@ sanguis::server::entities::spawns::spawn::update()
 			i < count_;
 			++i
 		)
-			this->environment().insert(
+			this->environment()->insert(
 				sanguis::server::entities::enemies::create(
 					diff_clock_,
 					random_generator_,
 					enemy_type_,
 					difficulty_,
-					this->environment().load_context(),
+					this->environment()->load_context(),
 					sanguis::server::entities::enemies::spawn_owner(
 						this->link()
 					)

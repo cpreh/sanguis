@@ -6,6 +6,7 @@
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/environment/optional_object_ref.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -35,12 +36,16 @@ sanguis::server::entities::with_ghosts::add_ghost(
 		)
 	);
 
+	sanguis::server::environment::optional_object_ref const env(
+		this->environment()
+	);
+
 	if(
-		this->has_environment()
+		env
 	)
 		this->insert_ghost(
 			ghosts_.back(),
-			this->environment().collision_world()
+			env->collision_world()
 		);
 }
 

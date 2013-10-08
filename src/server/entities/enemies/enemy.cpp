@@ -188,7 +188,7 @@ sanguis::server::entities::enemies::enemy::remove()
 		);
 
 	sanguis::server::environment::insert_no_result(
-		this->environment(),
+		*this->environment(),
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::exp_area
 		>(
@@ -199,7 +199,7 @@ sanguis::server::entities::enemies::enemy::remove()
 		)
 	);
 
-	this->environment().pickup_chance(
+	this->environment()->pickup_chance(
 		spawn_chance_,
 		difficulty_,
 		this->center()

@@ -74,7 +74,7 @@ void
 sanguis::server::entities::projectiles::rocket::remove()
 {
 	sanguis::server::environment::insert_no_result(
-		this->environment(),
+		*this->environment(),
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::projectiles::aoe_damage
 		>(

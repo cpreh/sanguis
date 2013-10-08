@@ -988,6 +988,8 @@ set(
 	include/sanguis/server/environment/load_context_fwd.hpp
 	include/sanguis/server/environment/object.hpp
 	include/sanguis/server/environment/object_fwd.hpp
+	include/sanguis/server/environment/optional_object_ref.hpp
+	include/sanguis/server/environment/optional_object_ref_fwd.hpp
 	include/sanguis/server/events/disconnect.hpp
 	include/sanguis/server/events/disconnect_fwd.hpp
 	include/sanguis/server/events/message.hpp
