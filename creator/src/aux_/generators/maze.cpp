@@ -71,18 +71,6 @@ typedef fcppt::random::variate<
 	uniform_int
 > variate;
 
-auto clamp_to_grid =
-	[]
-	(
-		long unsigned x,
-		long unsigned max
-	)
-	{
-		// max - 2 is the width or height of the effective grid (i.e. no borders)
-		// the / 2 * 2 + 1 part forces an uneven result, which is an empty cell
-		return (x % (max - 2)) / 2 * 2 + 1;
-	};
-
 auto
 tile_is_nonsolid =
 	[]
@@ -622,11 +610,30 @@ generate_maze(
 	dim_type;
 
 	dim_type const real_size(
-		(raw_maze.size() - dim_type(1u,1u)) / 2);
+		(
+			raw_maze.size()
+			-
+			dim_type(
+				1u,
+				1u)
+		)
+		/
+		2u
+	);
 
 	dim_type const result_size(
-		real_size * spacing +
-		(real_size + dim_type(1,1)) * wall_thickness);
+		real_size
+		*
+		spacing +
+		(
+			real_size
+			+
+			dim_type(
+				1u,
+				1u)
+		)
+		* wall_thickness
+	);
 
 	auto const coordinate_transform =
 		[
