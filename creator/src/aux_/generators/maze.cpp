@@ -42,6 +42,7 @@
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/output.hpp>
+#include <fcppt/math/dim/output.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
@@ -132,8 +133,8 @@ sanguis::creator::aux_::generators::maze(
 	auto const
 	maze_dim =
 		sanguis::creator::grid::dim(
-			21,
-			21);
+			15,
+			15);
 
 	::variate
 	random_cell_index(
@@ -173,17 +174,24 @@ sanguis::creator::aux_::generators::maze(
 	grid =
 		generate_maze(
 			maze_dim,
-			1u,
-			1u,
+			2u,
+			5u,
 			sanguis::creator::tile::nothing,
 			sanguis::creator::tile::concrete_wall,
 			_parameters.randgen()
 		);
 
-	sanguis::creator::pos starting_pos(
-		(random_x() / 2) * 2 + 1,
-		(random_y() / 2) * 2 + 1
-	);
+	sanguis::creator::pos starting_pos =
+		*sanguis::creator::aux_::find_closest(
+			grid,
+			sanguis::creator::pos(
+				random_x(),
+				random_y()
+			),
+			[](sanguis::creator::tile tile){
+				return tile == sanguis::creator::tile::nothing;
+			},
+			10u);
 
 	sanguis::creator::opening_container
 	openings =
@@ -195,8 +203,15 @@ sanguis::creator::aux_::generators::maze(
 			random_y
 		);
 
-	sanguis::creator::grid::pos::value_type const
-	scaling_factor = 2;
+	for(
+		auto &opening :
+		openings
+	)
+		grid
+		[
+			opening.get()
+		] =
+			sanguis::creator::tile::door;
 
 	typedef
 	fcppt::random::distribution::basic<
@@ -222,119 +237,23 @@ sanguis::creator::aux_::generators::maze(
 		)
 	);
 
-	sanguis::creator::grid ret(
-		maze_dim *
-		scaling_factor,
-		sanguis::creator::tile::nothing
-	);
-
-	sanguis::creator::background_grid ret_bg(
-		ret.size(),
+	sanguis::creator::background_grid grid_bg(
+		grid.size(),
 		sanguis::creator::background_tile::grass
 	);
-
-	for (
-		auto cell :
-		fcppt::container::grid::make_pos_range(
-			grid)
-	)
-	{
-		auto value = cell.value();
-
-		for (auto dy = 0u; dy < scaling_factor; ++dy)
-			for (auto dx = 0u; dx < scaling_factor; ++dx)
-				if (
-					fill_tile_random() <
-					.85f
-				)
-					ret[
-						cell.pos() *
-						scaling_factor +
-						sanguis::creator::grid::pos(
-							dx,
-							dy)
-					] = value;
-	}
-
-	// randomly create an asphalty area in the map
-	sanguis::creator::aux_::filled_rect(
-			sanguis::creator::pos(
-				(random_x() / 2u) * 2u + 1u,
-				(random_y() / 2u) * 2u + 1u
-			) *
-				scaling_factor,
-				
-			sanguis::creator::pos(
-				(random_x() / 2u) * 2u + 1u,
-				(random_y() / 2u) * 2u + 1u
-			) *
-				scaling_factor,
-			[
-				&ret,
-				&ret_bg
-			](
-				sanguis::creator::pos pos
-			)
-			{
-				auto p =
-					fcppt::math::vector::structure_cast<
-						sanguis::creator::pos
-					>(
-						pos);
-
-				if (fcppt::container::grid::in_range(ret, p))
-					ret_bg[p] = sanguis::creator::background_tile::asphalt;
-			}
-	);
-
-	// fill the outer perimeter with walls
-	sanguis::creator::aux_::rect(
-			sanguis::creator::pos(
-				0,
-				0),
-			sanguis::creator::pos(
-				ret.size().w() - 1,
-				ret.size().h() - 1),
-			[&ret](
-				sanguis::creator::pos pos
-			)
-			{
-				if (fcppt::container::grid::in_range(ret, pos))
-					ret[pos] = sanguis::creator::tile::concrete_wall;
-			}
-	);
-
-	// scale the openings and set the appropriate tile
-	for(
-		auto &opening
-		:
-		openings
-	)
-	{
-		opening = sanguis::creator::opening(
-			opening.get() *
-			scaling_factor
-		);
-
-		ret[
-			opening.get()
-		] =
-			sanguis::creator::tile::door;
-	}
-
 
 	sanguis::creator::spawn_container
 	spawners =
 		::place_spawners(
-			ret,
+			grid,
 			5u,
 			_parameters.randgen()
 		);
 
 	return
 		sanguis::creator::aux_::result(
-			ret,
-			ret_bg,
+			grid,
+			grid_bg,
 			openings,
 			spawners
 		);
@@ -362,7 +281,7 @@ place_openings(
 
 	// exit
 	auto
-	closest_nonsolid =
+	closest_free =
 		[
 			&grid
 		]
@@ -374,13 +293,15 @@ place_openings(
 			sanguis::creator::aux_::find_closest(
 				grid,
 				pos,
-				::tile_is_nonsolid,
+				[](sanguis::creator::tile tile){
+					return tile == sanguis::creator::tile::nothing;
+				},
 				10u);
 		};
 
 	auto
 	possible_opening =
-		closest_nonsolid(
+		closest_free(
 			sanguis::creator::grid::pos(
 				(starting_pos.x() + grid.size().w() / 2) % grid.size().w(),
 				(starting_pos.y() + grid.size().h() / 2) % grid.size().h()));
@@ -388,7 +309,7 @@ place_openings(
 	FCPPT_ASSERT_ERROR_MESSAGE(
 		possible_opening,
 		FCPPT_TEXT(
-			"Could not find a nonsolid tile close enough to the intended exit!"));
+			"Could not find a free tile close enough to the exit!"));
 
 	result.push_back(
 		sanguis::creator::opening(
@@ -396,13 +317,13 @@ place_openings(
 
 	// all remaining result
 	auto
-	current_result =
+	current_results =
 		result.size();
 
 	unsigned iterations = 0;
 
 	while(
-		current_result <
+		current_results <
 		opening_count.get()
 	)
 	{
@@ -413,11 +334,11 @@ place_openings(
 		)
 			throw sge::exception(
 				FCPPT_TEXT(
-					"Could not place result, giving up."));
+					"Could not place opening, giving up."));
 
 		auto
 		candidate =
-			closest_nonsolid(
+			closest_free(
 				sanguis::creator::grid::pos(
 						random_x(),
 						random_y()));
@@ -438,7 +359,8 @@ place_openings(
 		{
 			result.push_back(
 				next_opening);
-			current_result++;
+
+			++current_results;
 		}
 	}
 
@@ -518,7 +440,7 @@ place_spawners(
 				grid,
 				pos,
 				::tile_is_nonsolid,
-				5u);
+				10u);
 		};
 
 	unsigned iterations = 0;
@@ -713,9 +635,9 @@ generate_maze(
 		](dim_type::value_type a)
 		{
 			return
-				(a / 2) * wall_thickness
+				(a / 2) * spacing
 				+
-				((a + 1) / 2) * spacing;
+				((a + 1) / 2) * wall_thickness;
 		};
 
 	auto const wall_or_space =
@@ -732,9 +654,9 @@ generate_maze(
 			spacing;
 		};
 
-	sanguis::creator::grid result(
+	sanguis::creator::grid result{
 		sanguis::creator::grid::dim(
-			result_size));
+			result_size)};
 
 	for(
 		auto cell :
