@@ -2,7 +2,8 @@
 #define SANGUIS_COLLISION_AUX__WORLD_SIMPLE_OBJECT_HPP_INCLUDED
 
 #include <sanguis/collision/duration.hpp>
-#include <sanguis/collision/aux_/world/simple/body_fwd.hpp>
+#include <sanguis/collision/aux_/world/simple/body.hpp>
+#include <sanguis/collision/aux_/world/simple/body_list_grid.hpp>
 #include <sanguis/collision/aux_/world/simple/ghost_fwd.hpp>
 #include <sanguis/collision/world/body_collision_callback.hpp>
 #include <sanguis/collision/world/body_fwd.hpp>
@@ -79,6 +80,11 @@ private:
 		sanguis::collision::aux_::world::simple::ghost &
 	);
 
+	void
+	move_body(
+		sanguis::collision::aux_::world::simple::body &
+	);
+
 	sanguis::collision::world::body_collision_callback const body_collision_callback_;
 
 	typedef
@@ -96,6 +102,8 @@ private:
 	ghost_set;
 
 	ghost_set ghosts_;
+
+	sanguis::collision::aux_::world::simple::body_list_grid body_list_grid_;
 };
 
 }

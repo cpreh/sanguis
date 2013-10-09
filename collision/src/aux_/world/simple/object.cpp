@@ -1,6 +1,7 @@
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/duration.hpp>
 #include <sanguis/collision/aux_/world/simple/body.hpp>
+#include <sanguis/collision/aux_/world/simple/body_grid_position.hpp>
 #include <sanguis/collision/aux_/world/simple/body_remove_callback.hpp>
 #include <sanguis/collision/aux_/world/simple/body_unique_ptr.hpp>
 #include <sanguis/collision/aux_/world/simple/collides.hpp>
@@ -15,9 +16,13 @@
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
 #include <sanguis/collision/world/object.hpp>
 #include <sanguis/collision/world/parameters.hpp>
+#include <sanguis/creator/pos.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/algorithm/array_push_back.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/static_downcast.hpp>
+#include <fcppt/container/grid/in_range.hpp>
+#include <fcppt/container/grid/moore_neighbors.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -34,7 +39,10 @@ sanguis::collision::aux_::world::simple::object::object(
 		_parameters.body_collision_callback()
 	),
 	bodies_(),
-	ghosts_()
+	ghosts_(),
+	body_list_grid_(
+		_parameters.grid_size()
+	)
 {
 }
 
@@ -85,6 +93,10 @@ sanguis::collision::aux_::world::simple::object::activate_body(
 		>(
 			_body
 		)
+	);
+
+	this->move_body(
+		body
 	);
 
 	for(
@@ -142,6 +154,7 @@ sanguis::collision::aux_::world::simple::object::update(
 	for(
 		auto body : bodies_
 	)
+	{
 		body->center(
 			sanguis::collision::center(
 				body->center().get()
@@ -152,23 +165,56 @@ sanguis::collision::aux_::world::simple::object::update(
 			)
 		);
 
+		this->move_body(
+			*body
+		);
+	}
+
 	for(
-		auto const body1 : bodies_
+		auto const body1
+		:
+		bodies_
 	)
 	{
+		sanguis::creator::pos const body1_pos(
+			sanguis::collision::aux_::world::simple::body_grid_position(
+				*body1
+			)
+		);
+
 		for(
-			auto const body2 : bodies_
+			auto const grid_pos2
+			:
+			fcppt::algorithm::array_push_back(
+				fcppt::container::grid::moore_neighbors(
+					body1_pos
+				),
+				body1_pos
+			)
 		)
 			if(
-				sanguis::collision::aux_::world::simple::collides(
-					*body1,
-					*body2
+				fcppt::container::grid::in_range(
+					body_list_grid_,
+					grid_pos2
 				)
 			)
-				body_collision_callback_(
-					body1->body_base(),
-					body2->body_base()
-				);
+				for(
+					auto const &body2
+					:
+					body_list_grid_[
+						grid_pos2
+					]
+				)
+					if(
+						sanguis::collision::aux_::world::simple::collides(
+							*body1,
+							body2
+						)
+					)
+						body_collision_callback_(
+							body1->body_base(),
+							body2.body_base()
+						);
 
 		for(
 			auto const ghost : ghosts_
@@ -216,5 +262,31 @@ sanguis::collision::aux_::world::simple::object::remove_ghost(
 	)
 		_ghost.remove_body(
 			*body
+		);
+}
+
+void
+sanguis::collision::aux_::world::simple::object::move_body(
+	sanguis::collision::aux_::world::simple::body &_body
+)
+{
+	_body.unlink();
+
+	sanguis::creator::pos const insert_pos(
+		sanguis::collision::aux_::world::simple::body_grid_position(
+			_body
+		)
+	);
+
+	if(
+		fcppt::container::grid::in_range(
+			body_list_grid_,
+			insert_pos
+		)
+	)
+		body_list_grid_[
+			insert_pos
+		].push_back(
+			_body
 		);
 }

@@ -4,6 +4,7 @@
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/speed.hpp>
+#include <sanguis/collision/aux_/world/simple/body_base_hook.hpp>
 #include <sanguis/collision/aux_/world/simple/body_fwd.hpp>
 #include <sanguis/collision/aux_/world/simple/body_remove_callback.hpp>
 #include <sanguis/collision/world/body.hpp>
@@ -12,6 +13,9 @@
 #include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/collision/world/position_change_callback.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 
 
 namespace sanguis
@@ -25,9 +29,13 @@ namespace world
 namespace simple
 {
 
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_GCC_WARNING(-Weffc++)
+
 class body
 :
-	public sanguis::collision::world::body
+	public sanguis::collision::world::body,
+	public sanguis::collision::aux_::world::simple::body_base_hook
 {
 	FCPPT_NONCOPYABLE(
 		body
@@ -84,6 +92,8 @@ private:
 
 	sanguis::collision::speed speed_;
 };
+
+FCPPT_PP_POP_WARNING
 
 }
 }

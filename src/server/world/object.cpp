@@ -132,7 +132,8 @@ sanguis::server::world::object::object(
 						std::placeholders::_1,
 						std::placeholders::_2
 					)
-				)
+				),
+				grid_.size()
 			)
 		)
 	),
