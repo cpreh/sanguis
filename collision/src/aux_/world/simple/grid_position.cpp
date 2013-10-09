@@ -1,5 +1,5 @@
-#include <sanguis/collision/aux_/world/simple/body.hpp>
-#include <sanguis/collision/aux_/world/simple/body_grid_position.hpp>
+#include <sanguis/collision/center.hpp>
+#include <sanguis/collision/aux_/world/simple/grid_position.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/signed_pos.hpp>
 #include <sanguis/creator/tile_size.hpp>
@@ -9,8 +9,8 @@
 
 
 sanguis::creator::pos const
-sanguis::collision::aux_::world::simple::body_grid_position(
-	sanguis::collision::aux_::world::simple::body const &_body
+sanguis::collision::aux_::world::simple::grid_position(
+	sanguis::collision::center const _center
 )
 {
 	return
@@ -20,7 +20,7 @@ sanguis::collision::aux_::world::simple::body_grid_position(
 			fcppt::math::vector::structure_cast<
 				sanguis::creator::signed_pos
 			>(
-				_body.center().get()
+				_center.get()
 			)
 			/
 			fcppt::cast::to_signed(

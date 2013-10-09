@@ -54,8 +54,8 @@ set(
 	src/aux_/rect_line_intersection.cpp
 	src/aux_/world/group_relation.cpp
 	src/aux_/world/simple/body.cpp
-	src/aux_/world/simple/body_grid_position.cpp
 	src/aux_/world/simple/ghost.cpp
+	src/aux_/world/simple/grid_position.cpp
 	src/aux_/world/simple/groups_collide.cpp
 	src/aux_/world/simple/object.cpp
 	src/include/sanguis/collision/aux_/adjust_speed.hpp
@@ -83,7 +83,6 @@ set(
 	src/include/sanguis/collision/aux_/world/simple/body.hpp
 	src/include/sanguis/collision/aux_/world/simple/body_base_hook.hpp
 	src/include/sanguis/collision/aux_/world/simple/body_fwd.hpp
-	src/include/sanguis/collision/aux_/world/simple/body_grid_position.hpp
 	src/include/sanguis/collision/aux_/world/simple/body_list.hpp
 	src/include/sanguis/collision/aux_/world/simple/body_list_grid.hpp
 	src/include/sanguis/collision/aux_/world/simple/body_list_grid_fwd.hpp
@@ -94,6 +93,7 @@ set(
 	src/include/sanguis/collision/aux_/world/simple/ghost_fwd.hpp
 	src/include/sanguis/collision/aux_/world/simple/ghost_remove_callback.hpp
 	src/include/sanguis/collision/aux_/world/simple/ghost_unique_ptr.hpp
+	src/include/sanguis/collision/aux_/world/simple/grid_position.hpp
 	src/include/sanguis/collision/aux_/world/simple/groups_collide.hpp
 	src/include/sanguis/collision/aux_/world/simple/object.hpp
 	src/result.cpp

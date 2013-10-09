@@ -1,13 +1,13 @@
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/duration.hpp>
 #include <sanguis/collision/aux_/world/simple/body.hpp>
-#include <sanguis/collision/aux_/world/simple/body_grid_position.hpp>
 #include <sanguis/collision/aux_/world/simple/body_remove_callback.hpp>
 #include <sanguis/collision/aux_/world/simple/body_unique_ptr.hpp>
 #include <sanguis/collision/aux_/world/simple/collides.hpp>
 #include <sanguis/collision/aux_/world/simple/ghost.hpp>
 #include <sanguis/collision/aux_/world/simple/ghost_remove_callback.hpp>
 #include <sanguis/collision/aux_/world/simple/ghost_unique_ptr.hpp>
+#include <sanguis/collision/aux_/world/simple/grid_position.hpp>
 #include <sanguis/collision/aux_/world/simple/object.hpp>
 #include <sanguis/collision/world/body_fwd.hpp>
 #include <sanguis/collision/world/body_parameters_fwd.hpp>
@@ -177,8 +177,8 @@ sanguis::collision::aux_::world::simple::object::update(
 	)
 	{
 		sanguis::creator::pos const body1_pos(
-			sanguis::collision::aux_::world::simple::body_grid_position(
-				*body1
+			sanguis::collision::aux_::world::simple::grid_position(
+				body1->center()
 			)
 		);
 
@@ -238,7 +238,9 @@ sanguis::collision::aux_::world::simple::object::remove_body(
 	);
 
 	for(
-		auto const ghost : ghosts_
+		auto const ghost
+		:
+		ghosts_
 	)
 		ghost->remove_body(
 			_body
@@ -258,7 +260,9 @@ sanguis::collision::aux_::world::simple::object::remove_ghost(
 	);
 
 	for(
-		auto body : bodies_
+		auto body
+		:
+		bodies_
 	)
 		_ghost.remove_body(
 			*body
@@ -273,8 +277,8 @@ sanguis::collision::aux_::world::simple::object::move_body(
 	_body.unlink();
 
 	sanguis::creator::pos const insert_pos(
-		sanguis::collision::aux_::world::simple::body_grid_position(
-			_body
+		sanguis::collision::aux_::world::simple::grid_position(
+			_body.center()
 		)
 	);
 
