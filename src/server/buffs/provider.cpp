@@ -76,6 +76,8 @@ sanguis::server::buffs::provider::remove(
 		)
 	);
 
+	reclaimed->owner_lost();
+
 	if(
 		reclaimed->expired()
 	)

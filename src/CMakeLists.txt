@@ -810,6 +810,7 @@ set(
 	include/sanguis/server/buffs/map.hpp
 	include/sanguis/server/buffs/provider.hpp
 	include/sanguis/server/buffs/provider_fwd.hpp
+	include/sanguis/server/buffs/slow.hpp
 	include/sanguis/server/buffs/unique_ptr.hpp
 	include/sanguis/server/center.hpp
 	include/sanguis/server/center_fwd.hpp
@@ -1497,6 +1498,7 @@ set(
 	src/server/buffs/buff.cpp
 	src/server/buffs/burn.cpp
 	src/server/buffs/provider.cpp
+	src/server/buffs/slow.cpp
 	src/server/cheat.cpp
 	src/server/collision/body.cpp
 	src/server/collision/body_collision.cpp

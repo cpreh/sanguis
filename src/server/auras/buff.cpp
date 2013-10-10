@@ -59,5 +59,4 @@ sanguis::server::auras::buff::leave(
 			_entity
 		)
 	);
-
 }

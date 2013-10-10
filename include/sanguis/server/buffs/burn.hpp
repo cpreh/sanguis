@@ -4,7 +4,6 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration.hpp>
-#include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/buffs/buff.hpp>
 #include <sanguis/server/damage/array.hpp>
 #include <sanguis/server/damage/unit.hpp>

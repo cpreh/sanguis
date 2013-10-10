@@ -71,6 +71,10 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
+// TODO: Remove this!
+#include <sanguis/server/auras/buff.hpp>
+#include <sanguis/server/buffs/slow.hpp>
+
 
 sanguis::server::entities::player::player(
 	sanguis::diff_clock const &_diff_clock,
@@ -185,6 +189,29 @@ sanguis::server::entities::player::player(
 					std::placeholders::_1
 				)
 			)
+		)
+	);
+
+	this->add_aura(
+		fcppt::make_unique_ptr<
+			sanguis::server::auras::buff
+		>(
+			sanguis::server::radius(
+				200.f
+			),
+			this->team(),
+			sanguis::server::auras::influence::debuff,
+			[]()
+			{
+				return
+					fcppt::make_unique_ptr<
+						sanguis::server::buffs::slow
+					>(
+						sanguis::server::buffs::slow::factor(
+							0.5f
+						)
+					);
+			}
 		)
 	);
 }

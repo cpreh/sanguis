@@ -10,6 +10,11 @@ sanguis::server::buffs::buff::add(
 }
 
 void
+sanguis::server::buffs::buff::owner_lost()
+{
+}
+
+void
 sanguis::server::buffs::buff::remove(
 	sanguis::server::entities::base &
 )

@@ -26,6 +26,10 @@ public:
 
 	virtual
 	void
+	owner_lost();
+
+	virtual
+	void
 	remove(
 		sanguis::server::entities::base &
 	);

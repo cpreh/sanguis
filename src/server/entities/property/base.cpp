@@ -55,6 +55,7 @@ sanguis::server::entities::property::base::~base()
 void
 sanguis::server::entities::property::base::recalc_max()
 {
+	// TODO: Some linear values shouldn't become negative!
 	this->on_recalc_max(
 		(base_ + constant_.value())
 		* linear_.value()
