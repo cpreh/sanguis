@@ -56,7 +56,8 @@ private:
 	void
 	update(
 		sanguis::server::entities::base &
-	);
+	)
+	override;
 
 	sanguis::server::buffs::burn::damage_per_pulse const damage_per_pulse_;
 

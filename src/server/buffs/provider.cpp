@@ -18,6 +18,9 @@ sanguis::server::buffs::provider::provider()
 
 sanguis::server::buffs::provider::~provider()
 {
+	FCPPT_ASSERT_ERROR(
+		buffs_.empty()
+	);
 }
 
 void
@@ -26,10 +29,12 @@ sanguis::server::buffs::provider::add(
 	sanguis::server::buffs::unique_ptr &&_buff
 )
 {
-	typedef std::pair<
-		map::iterator,
+	typedef
+	std::pair<
+		sanguis::server::buffs::map::iterator,
 		bool
-	> ret_type;
+	>
+	ret_type;
 
 	ret_type const ret(
 		fcppt::container::ptr::insert_unique_ptr_map(
@@ -72,8 +77,12 @@ sanguis::server::buffs::provider::remove(
 	);
 
 	if(
-		!reclaimed->expired()
+		reclaimed->expired()
 	)
+		_entity.remove_buff(
+			*reclaimed
+		);
+	else
 		_entity.claim_buff(
 			sanguis::server::buffs::unique_ptr(
 				reclaimed.release()

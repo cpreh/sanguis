@@ -797,17 +797,16 @@ set(
 	include/sanguis/server/auras/collision_groups.hpp
 	include/sanguis/server/auras/influence.hpp
 	include/sanguis/server/auras/influence_fwd.hpp
+	include/sanguis/server/auras/slow.hpp
 	include/sanguis/server/auras/unique_ptr.hpp
 	include/sanguis/server/auras/update_sight.hpp
 	include/sanguis/server/auras/weapon_pickup_add_candidate_callback.hpp
 	include/sanguis/server/auras/weapon_pickup_candidate_callback.hpp
 	include/sanguis/server/auras/weapon_pickup_candidates.hpp
 	include/sanguis/server/auras/weapon_pickup_remove_candidate_callback.hpp
-	include/sanguis/server/buffs/base_hook.hpp
 	include/sanguis/server/buffs/buff.hpp
 	include/sanguis/server/buffs/buff_fwd.hpp
 	include/sanguis/server/buffs/burn.hpp
-	include/sanguis/server/buffs/list.hpp
 	include/sanguis/server/buffs/map.hpp
 	include/sanguis/server/buffs/provider.hpp
 	include/sanguis/server/buffs/provider_fwd.hpp
@@ -1493,6 +1492,7 @@ set(
 	src/server/auras/aura.cpp
 	src/server/auras/burn.cpp
 	src/server/auras/collision_groups.cpp
+	src/server/auras/slow.cpp
 	src/server/auras/update_sight.cpp
 	src/server/auras/weapon_pickup_candidates.cpp
 	src/server/buffs/buff.cpp

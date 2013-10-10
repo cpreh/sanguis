@@ -1,12 +1,8 @@
 #ifndef SANGUIS_SERVER_BUFFS_BUFF_HPP_INCLUDED
 #define SANGUIS_SERVER_BUFFS_BUFF_HPP_INCLUDED
 
-#include <sanguis/server/buffs/base_hook.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/preprocessor/disable_gcc_warning.hpp>
-#include <fcppt/preprocessor/pop_warning.hpp>
-#include <fcppt/preprocessor/push_warning.hpp>
 
 
 namespace sanguis
@@ -16,12 +12,7 @@ namespace server
 namespace buffs
 {
 
-FCPPT_PP_PUSH_WARNING
-FCPPT_PP_DISABLE_GCC_WARNING(-Weffc++)
-
 class buff
-:
-	public sanguis::server::buffs::base_hook
 {
 	FCPPT_NONCOPYABLE(
 		buff
@@ -29,9 +20,21 @@ class buff
 public:
 	virtual
 	void
+	add(
+		sanguis::server::entities::base &
+	);
+
+	virtual
+	void
+	remove(
+		sanguis::server::entities::base &
+	);
+
+	virtual
+	void
 	update(
 		sanguis::server::entities::base &
-	) = 0;
+	);
 
 	bool
 	expired() const;
@@ -46,8 +49,6 @@ protected:
 private:
 	bool expired_;
 };
-
-FCPPT_PP_POP_WARNING
 
 }
 }

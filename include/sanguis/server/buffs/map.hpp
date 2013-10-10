@@ -15,10 +15,13 @@ namespace server
 namespace buffs
 {
 
-typedef boost::ptr_map<
+typedef
+boost::ptr_map<
+	// TODO: reference_wrapper!
 	sanguis::server::entities::with_buffs *,
 	sanguis::server::buffs::buff
-> map;
+>
+map;
 
 }
 }
