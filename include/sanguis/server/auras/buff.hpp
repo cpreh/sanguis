@@ -1,14 +1,14 @@
-#ifndef SANGUIS_SERVER_AURAS_SLOW_HPP_INCLUDED
-#define SANGUIS_SERVER_AURAS_SLOW_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_AURAS_BUFF_HPP_INCLUDED
+#define SANGUIS_SERVER_AURAS_BUFF_HPP_INCLUDED
 
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/auras/aura.hpp>
+#include <sanguis/server/auras/buff_create_callback.hpp>
+#include <sanguis/server/auras/influence_fwd.hpp>
 #include <sanguis/server/buffs/provider.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
-#include <sanguis/server/entities/property/value.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/strong_typedef.hpp>
 
 
 namespace sanguis
@@ -18,26 +18,22 @@ namespace server
 namespace auras
 {
 
-class slow
+class buff
 :
 	public sanguis::server::auras::aura
 {
 	FCPPT_NONCOPYABLE(
-		slow
+		buff
 	);
 public:
-	FCPPT_MAKE_STRONG_TYPEDEF(
-		sanguis::server::entities::property::value,
-		factor
-	);
-
-	slow(
+	buff(
 		sanguis::server::radius,
 		sanguis::server::team,
-		sanguis::server::auras::slow::factor
+		sanguis::server::auras::influence,
+		sanguis::server::auras::buff_create_callback const &
 	);
 
-	~slow();
+	~buff();
 private:
 	void
 	enter(
@@ -49,7 +45,7 @@ private:
 		sanguis::server::entities::with_body &
 	);
 
-	sanguis::server::auras::slow::factor const factor_;
+	sanguis::server::auras::buff_create_callback const buff_create_callback_;
 
 	sanguis::server::buffs::provider provider_;
 };

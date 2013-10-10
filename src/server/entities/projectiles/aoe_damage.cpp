@@ -3,7 +3,9 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
-#include <sanguis/server/auras/burn.hpp>
+#include <sanguis/server/auras/buff.hpp>
+#include <sanguis/server/auras/influence.hpp>
+#include <sanguis/server/buffs/burn.hpp>
 #include <sanguis/server/damage/array.hpp>
 #include <sanguis/server/entities/center_ghost.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
@@ -43,18 +45,35 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 {
 	this->add_aura(
 		fcppt::make_unique_ptr<
-			sanguis::server::auras::burn
+			sanguis::server::auras::buff
 		>(
-			_diff_clock,
 			_radius,
 			_team,
-			sanguis::server::auras::burn::damage_per_pulse(
-				_damage_per_pulse.get()
-			),
-			sanguis::server::auras::burn::pulse_time(
-				_pulse_time.get()
-			),
-			_damage_values
+			sanguis::server::auras::influence::debuff,
+			[
+				&_diff_clock,
+				_damage_per_pulse,
+				_pulse_time,
+				_damage_values
+			]()
+			{
+				return
+					fcppt::make_unique_ptr<
+						sanguis::server::buffs::burn
+					>(
+						_diff_clock,
+						sanguis::server::buffs::burn::damage_per_pulse(
+							_damage_per_pulse.get()
+						),
+						sanguis::server::buffs::burn::pulse_time(
+							_pulse_time.get()
+						),
+						sanguis::server::buffs::burn::max_pulses(
+							1u
+						),
+						_damage_values
+					);
+			}
 		)
 	);
 }
