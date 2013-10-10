@@ -16,13 +16,15 @@
 #include <sanguis/collision/result.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/creator/grid_crange.hpp>
+#include <sanguis/creator/rect.hpp>
 #include <sanguis/creator/tile_is_solid.hpp>
+#include <sanguis/creator/tile_rect.hpp>
 #include <sanguis/creator/tile_size.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/math/box/intersects.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
-#include <fcppt/math/dim/fill.hpp>
+#include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 
@@ -95,7 +97,19 @@ sanguis::collision::test_move(
 		)
 			continue;
 
+		sanguis::creator::rect const tile_rect(
+			sanguis::creator::tile_rect(
+				entry.value()
+			)
+		);
+
 		sanguis::collision::aux_::rect const entry_rect(
+			fcppt::math::vector::structure_cast<
+				sanguis::collision::aux_::rect::vector
+			>(
+				tile_rect.pos()
+			)
+			+
 			fcppt::math::vector::structure_cast<
 				sanguis::collision::aux_::rect::vector
 			>(
@@ -103,14 +117,10 @@ sanguis::collision::test_move(
 				*
 				sanguis::creator::tile_size::value
 			),
-			fcppt::math::dim::fill<
-				sanguis::collision::aux_::rect::dim::dim_wrapper::value
+			fcppt::math::dim::structure_cast<
+				sanguis::collision::aux_::rect::dim
 			>(
-				fcppt::cast::int_to_float<
-					sanguis::collision::unit
-				>(
-					sanguis::creator::tile_size::value
-				)
+				tile_rect.size()
 			)
 		);
 

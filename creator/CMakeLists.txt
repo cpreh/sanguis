@@ -25,6 +25,8 @@ set(
 	include/sanguis/creator/opening_count.hpp
 	include/sanguis/creator/pos.hpp
 	include/sanguis/creator/pos_fwd.hpp
+	include/sanguis/creator/rect.hpp
+	include/sanguis/creator/rect_fwd.hpp
 	include/sanguis/creator/seed.hpp
 	include/sanguis/creator/seed_fwd.hpp
 	include/sanguis/creator/seed_type.hpp
@@ -43,6 +45,7 @@ set(
 	include/sanguis/creator/tile_grid.hpp
 	include/sanguis/creator/tile_grid_fwd.hpp
 	include/sanguis/creator/tile_is_solid.hpp
+	include/sanguis/creator/tile_rect.hpp
 	include/sanguis/creator/tile_size.hpp
 	include/sanguis/creator/top_parameters.hpp
 	include/sanguis/creator/top_parameters_fwd.hpp
@@ -111,6 +114,7 @@ set(
 	src/serialize.cpp
 	src/spawn.cpp
 	src/tile_is_solid.cpp
+	src/tile_rect.cpp
 	src/top_parameters.cpp
 	src/top_result.cpp
 )
