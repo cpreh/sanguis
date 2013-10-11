@@ -50,8 +50,6 @@ private:
 	remove()
 	override;
 
-	sanguis::diff_clock const &diff_clock_;
-
 	sanguis::server::damage::unit const damage_;
 };
 

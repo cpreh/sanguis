@@ -21,11 +21,8 @@
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/projectiles/aoe_damage.hpp>
 #include <sanguis/server/entities/projectiles/aoe_projectile.hpp>
-#include <sanguis/server/entities/projectiles/damage_per_pulse.hpp>
 #include <sanguis/server/entities/projectiles/grenade.hpp>
 #include <sanguis/server/entities/projectiles/life_time.hpp>
-#include <sanguis/server/entities/projectiles/pulse_time.hpp>
-#include <sanguis/server/entities/projectiles/pulses.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sge/timer/reset_when_expired.hpp>
@@ -61,9 +58,6 @@ sanguis::server::entities::projectiles::grenade::grenade(
 		),
 		_aoe,
 		_direction
-	),
-	diff_clock_(
-		_diff_clock
 	),
 	slowdown_timer_(
 		sanguis::diff_timer::parameters(
@@ -141,20 +135,9 @@ sanguis::server::entities::projectiles::grenade::remove()
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::projectiles::aoe_damage
 		>(
-			diff_clock_,
 			this->team(),
 			this->aoe(),
-			sanguis::server::entities::projectiles::damage_per_pulse(
-				damage_
-			),
-			sanguis::server::entities::projectiles::pulses(
-				1u
-			),
-			sanguis::server::entities::projectiles::pulse_time(
-				sanguis::duration_second(
-					0.1f
-				)
-			),
+			damage_,
 			sanguis::server::damage::list(
 				sanguis::server::damage::piercing =
 					sanguis::server::damage::unit(

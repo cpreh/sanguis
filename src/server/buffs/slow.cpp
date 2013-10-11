@@ -38,12 +38,6 @@ sanguis::server::buffs::slow::add(
 }
 
 void
-sanguis::server::buffs::slow::owner_lost()
-{
-	this->expire();
-}
-
-void
 sanguis::server::buffs::slow::remove(
 	sanguis::server::entities::base &_entity
 )

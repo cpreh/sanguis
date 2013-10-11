@@ -65,7 +65,6 @@ sanguis::server::weapons::melee::do_attack(
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::projectiles::melee
 		>(
-			this->diff_clock(),
 			_attack.team(),
 			damage_
 		),

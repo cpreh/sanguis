@@ -791,6 +791,7 @@ set(
 	include/sanguis/server/angle.hpp
 	include/sanguis/server/angle_fwd.hpp
 	include/sanguis/server/auras/aggro.hpp
+	include/sanguis/server/auras/aoe_damage.hpp
 	include/sanguis/server/auras/aura.hpp
 	include/sanguis/server/auras/aura_fwd.hpp
 	include/sanguis/server/auras/buff.hpp
@@ -806,8 +807,6 @@ set(
 	include/sanguis/server/auras/weapon_pickup_remove_candidate_callback.hpp
 	include/sanguis/server/buffs/buff.hpp
 	include/sanguis/server/buffs/buff_fwd.hpp
-	include/sanguis/server/buffs/burn.hpp
-	include/sanguis/server/buffs/map.hpp
 	include/sanguis/server/buffs/provider.hpp
 	include/sanguis/server/buffs/provider_fwd.hpp
 	include/sanguis/server/buffs/slow.hpp
@@ -918,13 +917,10 @@ set(
 	include/sanguis/server/entities/projectiles/aoe_damage.hpp
 	include/sanguis/server/entities/projectiles/aoe_projectile.hpp
 	include/sanguis/server/entities/projectiles/collision_groups.hpp
-	include/sanguis/server/entities/projectiles/damage_per_pulse.hpp
 	include/sanguis/server/entities/projectiles/grenade.hpp
 	include/sanguis/server/entities/projectiles/life_time.hpp
 	include/sanguis/server/entities/projectiles/melee.hpp
 	include/sanguis/server/entities/projectiles/projectile.hpp
-	include/sanguis/server/entities/projectiles/pulse_time.hpp
-	include/sanguis/server/entities/projectiles/pulses.hpp
 	include/sanguis/server/entities/projectiles/rocket.hpp
 	include/sanguis/server/entities/projectiles/simple_bullet.hpp
 	include/sanguis/server/entities/property/add.hpp
@@ -1490,13 +1486,13 @@ set(
 	src/server/ai/simple.cpp
 	src/server/ai/stop.cpp
 	src/server/auras/aggro.cpp
+	src/server/auras/aoe_damage.cpp
 	src/server/auras/aura.cpp
 	src/server/auras/buff.cpp
 	src/server/auras/collision_groups.cpp
 	src/server/auras/update_sight.cpp
 	src/server/auras/weapon_pickup_candidates.cpp
 	src/server/buffs/buff.cpp
-	src/server/buffs/burn.cpp
 	src/server/buffs/provider.cpp
 	src/server/buffs/slow.cpp
 	src/server/cheat.cpp

@@ -6,11 +6,8 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_buffs_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/reference_wrapper_decl.hpp>
-#include <fcppt/reference_wrapper_std_hash.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
-#include <unordered_set>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -31,17 +28,12 @@ class with_buffs
 public:
 	void
 	add_buff(
-		sanguis::server::buffs::buff &
+		sanguis::server::buffs::unique_ptr &&
 	);
 
 	void
 	remove_buff(
 		sanguis::server::buffs::buff &
-	);
-
-	void
-	claim_buff(
-		sanguis::server::buffs::unique_ptr &&
 	);
 protected:
 	with_buffs();
@@ -53,26 +45,12 @@ protected:
 	override;
 private:
 	typedef
-	fcppt::reference_wrapper<
+	boost::ptr_list<
 		sanguis::server::buffs::buff
-	>
-	buff_reference;
-
-	typedef
-	std::unordered_set<
-		buff_reference
 	>
 	buff_set;
 
 	buff_set buffs_;
-
-	typedef
-	boost::ptr_list<
-		sanguis::server::buffs::buff
-	>
-	buff_container;
-
-	buff_container owned_buffs_;
 };
 
 }

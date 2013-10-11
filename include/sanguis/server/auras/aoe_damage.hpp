@@ -1,12 +1,12 @@
-#ifndef SANGUIS_SERVER_ENTITIES_PROJECTILES_AOE_DAMAGE_HPP_INCLUDED
-#define SANGUIS_SERVER_ENTITIES_PROJECTILES_AOE_DAMAGE_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_AURAS_AOE_DAMAGE_HPP_INCLUDED
+#define SANGUIS_SERVER_AURAS_AOE_DAMAGE_HPP_INCLUDED
 
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team_fwd.hpp>
+#include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/damage/array.hpp>
 #include <sanguis/server/damage/unit.hpp>
-#include <sanguis/server/entities/center_ghost.hpp>
-#include <sanguis/server/entities/with_auras.hpp>
+#include <sanguis/server/entities/with_body_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -14,15 +14,12 @@ namespace sanguis
 {
 namespace server
 {
-namespace entities
-{
-namespace projectiles
+namespace auras
 {
 
 class aoe_damage
 :
-	public sanguis::server::entities::with_auras,
-	private sanguis::server::entities::center_ghost
+	public sanguis::server::auras::aura
 {
 	FCPPT_NONCOPYABLE(
 		aoe_damage
@@ -37,12 +34,21 @@ public:
 
 	~aoe_damage();
 private:
-	bool
-	dead() const
-	override;
+	void
+	enter(
+		sanguis::server::entities::with_body &
+	);
+
+	void
+	leave(
+		sanguis::server::entities::with_body &
+	);
+
+	sanguis::server::damage::unit const damage_;
+
+	sanguis::server::damage::array const damage_values_;
 };
 
-}
 }
 }
 }

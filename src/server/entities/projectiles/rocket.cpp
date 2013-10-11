@@ -14,10 +14,7 @@
 #include <sanguis/server/entities/with_health_fwd.hpp>
 #include <sanguis/server/entities/projectiles/aoe_damage.hpp>
 #include <sanguis/server/entities/projectiles/aoe_projectile.hpp>
-#include <sanguis/server/entities/projectiles/damage_per_pulse.hpp>
 #include <sanguis/server/entities/projectiles/life_time.hpp>
-#include <sanguis/server/entities/projectiles/pulse_time.hpp>
-#include <sanguis/server/entities/projectiles/pulses.hpp>
 #include <sanguis/server/entities/projectiles/rocket.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/load_context.hpp>
@@ -49,9 +46,6 @@ sanguis::server::entities::projectiles::rocket::rocket(
 		_aoe,
 		_direction
 	),
-	diff_clock_(
-		_diff_clock
-	),
 	damage_(
 		_damage
 	)
@@ -78,20 +72,9 @@ sanguis::server::entities::projectiles::rocket::remove()
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::projectiles::aoe_damage
 		>(
-			diff_clock_,
 			this->team(),
 			this->aoe(),
-			sanguis::server::entities::projectiles::damage_per_pulse(
-				damage_
-			),
-			sanguis::server::entities::projectiles::pulses(
-				1u
-			),
-			sanguis::server::entities::projectiles::pulse_time(
-				sanguis::duration_second(
-					0.1f
-				)
-			),
+			damage_,
 			sanguis::server::damage::list(
 				sanguis::server::damage::fire =
 					sanguis::server::damage::full

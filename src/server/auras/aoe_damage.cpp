@@ -1,0 +1,57 @@
+#include <sanguis/server/radius.hpp>
+#include <sanguis/server/team.hpp>
+#include <sanguis/server/auras/aoe_damage.hpp>
+#include <sanguis/server/auras/aura.hpp>
+#include <sanguis/server/auras/influence.hpp>
+#include <sanguis/server/damage/array.hpp>
+#include <sanguis/server/damage/unit.hpp>
+#include <sanguis/server/entities/with_body.hpp>
+#include <sanguis/server/entities/with_health.hpp>
+
+
+sanguis::server::auras::aoe_damage::aoe_damage(
+	sanguis::server::team const _team,
+	sanguis::server::radius const _radius,
+	sanguis::server::damage::unit const _damage,
+	sanguis::server::damage::array const &_damage_values
+)
+:
+	sanguis::server::auras::aura(
+		_radius,
+		_team,
+		sanguis::server::auras::influence::debuff
+	),
+	damage_(
+		_damage
+	),
+	damage_values_(
+		_damage_values
+	)
+{
+}
+
+sanguis::server::auras::aoe_damage::~aoe_damage()
+{
+}
+
+void
+sanguis::server::auras::aoe_damage::enter(
+	sanguis::server::entities::with_body &_with_body
+)
+{
+	dynamic_cast<
+		sanguis::server::entities::with_health &
+	>(
+		_with_body
+	).damage(
+		damage_,
+		damage_values_
+	);
+}
+
+void
+sanguis::server::auras::aoe_damage::leave(
+	sanguis::server::entities::with_body &
+)
+{
+}

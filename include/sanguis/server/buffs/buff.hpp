@@ -26,10 +26,6 @@ public:
 
 	virtual
 	void
-	owner_lost();
-
-	virtual
-	void
 	remove(
 		sanguis::server::entities::base &
 	);
@@ -40,18 +36,10 @@ public:
 		sanguis::server::entities::base &
 	);
 
-	bool
-	expired() const;
-
 	virtual
 	~buff() = 0;
 protected:
 	buff();
-
-	void
-	expire();
-private:
-	bool expired_;
 };
 
 }

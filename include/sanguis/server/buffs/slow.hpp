@@ -42,10 +42,6 @@ private:
 	override;
 
 	void
-	owner_lost()
-	override;
-
-	void
 	remove(
 		sanguis::server::entities::base &
 	)

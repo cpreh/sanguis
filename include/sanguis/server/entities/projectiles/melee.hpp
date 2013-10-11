@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PROJECTILES_MELEE_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PROJECTILES_MELEE_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/projectiles/aoe_damage.hpp>
@@ -26,7 +25,6 @@ class melee
 	);
 public:
 	melee(
-		sanguis::diff_clock const &,
 		sanguis::server::team,
 		sanguis::server::damage::unit
 	);

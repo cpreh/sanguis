@@ -1,79 +1,32 @@
-#include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/diff_timer.hpp>
-#include <sanguis/duration.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
-#include <sanguis/server/auras/buff.hpp>
-#include <sanguis/server/auras/influence.hpp>
-#include <sanguis/server/buffs/burn.hpp>
+#include <sanguis/server/auras/aoe_damage.hpp>
 #include <sanguis/server/damage/array.hpp>
+#include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/center_ghost.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
 #include <sanguis/server/entities/projectiles/aoe_damage.hpp>
-#include <sanguis/server/entities/projectiles/damage_per_pulse.hpp>
-#include <sanguis/server/entities/projectiles/life_time.hpp>
-#include <sanguis/server/entities/projectiles/pulse_time.hpp>
-#include <sanguis/server/entities/projectiles/pulses.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/cast/int_to_float.hpp>
 
 
 sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::server::team const _team,
 	sanguis::server::radius const _radius,
-	sanguis::server::entities::projectiles::damage_per_pulse const _damage_per_pulse,
-	sanguis::server::entities::projectiles::pulses const _pulses,
-	sanguis::server::entities::projectiles::pulse_time const &_pulse_time,
+	sanguis::server::damage::unit const _damage,
 	sanguis::server::damage::array const &_damage_values
 )
 :
 	sanguis::server::entities::with_auras(),
-	sanguis::server::entities::center_ghost(),
-	life_timer_(
-		sanguis::diff_timer::parameters(
-			_diff_clock,
-			_pulse_time.get()
-			*
-			fcppt::cast::int_to_float<
-				sanguis::duration::rep
-			>(
-				_pulses.get()
-			)
-		)
-	)
+	sanguis::server::entities::center_ghost()
 {
 	this->add_aura(
 		fcppt::make_unique_ptr<
-			sanguis::server::auras::buff
+			sanguis::server::auras::aoe_damage
 		>(
-			_radius,
 			_team,
-			sanguis::server::auras::influence::debuff,
-			[
-				&_diff_clock,
-				_damage_per_pulse,
-				_pulse_time,
-				_damage_values
-			]()
-			{
-				return
-					fcppt::make_unique_ptr<
-						sanguis::server::buffs::burn
-					>(
-						_diff_clock,
-						sanguis::server::buffs::burn::damage_per_pulse(
-							_damage_per_pulse.get()
-						),
-						sanguis::server::buffs::burn::pulse_time(
-							_pulse_time.get()
-						),
-						sanguis::server::buffs::burn::max_pulses(
-							1u
-						),
-						_damage_values
-					);
-			}
+			_radius,
+			_damage,
+			_damage_values
 		)
 	);
 }
@@ -86,5 +39,5 @@ bool
 sanguis::server::entities::projectiles::aoe_damage::dead() const
 {
 	return
-		life_timer_.expired();
+		true;
 }
