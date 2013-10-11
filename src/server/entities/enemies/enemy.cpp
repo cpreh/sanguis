@@ -121,7 +121,15 @@ sanguis::server::entities::enemies::enemy::~enemy()
 sanguis::creator::enemy_type
 sanguis::server::entities::enemies::enemy::etype() const
 {
-	return etype_;
+	return
+		etype_;
+}
+
+sanguis::server::team
+sanguis::server::entities::enemies::enemy::team() const
+{
+	return
+		sanguis::server::team::monsters;
 }
 
 void
@@ -163,13 +171,6 @@ sanguis::server::entities::enemies::enemy::collision_groups() const
 		sanguis::collision::world::group_field{
 			sanguis::collision::world::group::enemy
 		};
-}
-
-sanguis::server::team
-sanguis::server::entities::enemies::enemy::team() const
-{
-	return
-		sanguis::server::team::monsters;
 }
 
 void

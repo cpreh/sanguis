@@ -53,6 +53,7 @@ protected:
 	bounding_dim() const;
 
 	using sanguis::client::draw2d::entities::container::orientation;
+
 	using sanguis::client::draw2d::entities::container::speed;
 };
 

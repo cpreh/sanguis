@@ -878,6 +878,7 @@ set(
 	include/sanguis/server/entities/enemies/difficulty.hpp
 	include/sanguis/server/entities/enemies/difficulty_value.hpp
 	include/sanguis/server/entities/enemies/enemy.hpp
+	include/sanguis/server/entities/enemies/enemy_fwd.hpp
 	include/sanguis/server/entities/enemies/factory/maggot.hpp
 	include/sanguis/server/entities/enemies/factory/parameters.hpp
 	include/sanguis/server/entities/enemies/factory/parameters_fwd.hpp
@@ -889,6 +890,7 @@ set(
 	include/sanguis/server/entities/enemies/fwd.hpp
 	include/sanguis/server/entities/enemies/spawn_owner.hpp
 	include/sanguis/server/entities/enemies/spawn_owner_fwd.hpp
+	include/sanguis/server/entities/enemies/unique_ptr.hpp
 	include/sanguis/server/entities/exp_area.hpp
 	include/sanguis/server/entities/friend.hpp
 	include/sanguis/server/entities/ifaces/with_angle.hpp

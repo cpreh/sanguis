@@ -11,7 +11,7 @@
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/level.hpp>
 #include <sanguis/server/player_id.hpp>
-#include <sanguis/server/speed_fwd.hpp>
+#include <sanguis/server/speed.hpp>
 #include <sanguis/server/string.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/damage/armor.hpp>
@@ -123,6 +123,9 @@ private:
 	override;
 
 	void
+	update_speed();
+
+	void
 	add_sight_range(
 		sanguis::entity_id
 	);
@@ -191,6 +194,8 @@ private:
 	> perk_tree_scoped_ptr;
 
 	perk_tree_scoped_ptr perk_tree_;
+
+	sanguis::server::speed desired_speed_;
 
 	weapon_pickup_set weapon_pickups_;
 };

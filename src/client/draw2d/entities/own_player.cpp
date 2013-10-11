@@ -24,6 +24,9 @@ sanguis::client::draw2d::entities::own_player::own_player(
 	),
 	collide_(
 		_collide
+	),
+	desired_speed_(
+		sanguis::client::draw2d::speed::value_type::null()
 	)
 {
 }
@@ -53,7 +56,7 @@ sanguis::client::draw2d::entities::own_player::update()
 	if(
 		new_speed
 	)
-		this->speed(
+		sanguis::client::draw2d::entities::player::speed(
 			*new_speed
 		);
 
@@ -61,5 +64,21 @@ sanguis::client::draw2d::entities::own_player::update()
 
 	transform_(
 		this->center()
+	);
+
+	sanguis::client::draw2d::entities::player::speed(
+		desired_speed_
+	);
+}
+
+void
+sanguis::client::draw2d::entities::own_player::speed(
+	sanguis::client::draw2d::speed const &_speed
+)
+{
+	desired_speed_ = _speed;
+
+	sanguis::client::draw2d::entities::player::speed(
+		_speed
 	);
 }

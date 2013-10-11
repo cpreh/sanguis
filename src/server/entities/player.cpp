@@ -71,10 +71,6 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-// TODO: Remove this!
-#include <sanguis/server/auras/buff.hpp>
-#include <sanguis/server/buffs/slow.hpp>
-
 
 sanguis::server::entities::player::player(
 	sanguis::diff_clock const &_diff_clock,
@@ -144,6 +140,9 @@ sanguis::server::entities::player::player(
 	perk_tree_(
 		sanguis::server::perks::tree::create()
 	),
+	desired_speed_(
+		sanguis::server::speed::value_type::null()
+	),
 	weapon_pickups_()
 {
 	this->add_aura(
@@ -189,29 +188,6 @@ sanguis::server::entities::player::player(
 					std::placeholders::_1
 				)
 			)
-		)
-	);
-
-	this->add_aura(
-		fcppt::make_unique_ptr<
-			sanguis::server::auras::buff
-		>(
-			sanguis::server::radius(
-				200.f
-			),
-			this->team(),
-			sanguis::server::auras::influence::debuff,
-			[]()
-			{
-				return
-					fcppt::make_unique_ptr<
-						sanguis::server::buffs::slow
-					>(
-						sanguis::server::buffs::slow::factor(
-							0.5f
-						)
-					);
-			}
 		)
 	);
 }
@@ -309,41 +285,9 @@ sanguis::server::entities::player::change_speed(
 	sanguis::server::speed const _speed
 )
 {
-	if(
-		fcppt::math::vector::length_square(
-			_speed.get()
-		)
-		<
-		fcppt::literal<
-			sanguis::server::space_unit
-		>(
-			0.001f
-		)
-	)
-	{
-		this->movement_speed().current(
-			fcppt::literal<
-				sanguis::server::space_unit
-			>(
-				0
-			)
-		);
+	desired_speed_ = _speed;
 
-		return;
-	}
-
-	this->direction(
-		sanguis::server::direction(
-			fcppt::math::vector::atan2(
-				_speed.get()
-			)
-		)
-	);
-
-	// FIXME: don't set the speed to max!
-	sanguis::server::entities::property::current_to_max(
-		this->movement_speed()
-	);
+	this->update_speed();
 }
 
 void
@@ -438,19 +382,22 @@ sanguis::server::entities::player::center_from_client(
 sanguis::server::perks::tree::object const &
 sanguis::server::entities::player::perk_tree() const
 {
-	return *perk_tree_;
+	return
+		*perk_tree_;
 }
 
 sanguis::server::player_id const
 sanguis::server::entities::player::player_id() const
 {
-	return player_id_;
+	return
+		player_id_;
 }
 
 sanguis::server::team
 sanguis::server::entities::player::team() const
 {
-	return sanguis::server::team::players;
+	return
+		sanguis::server::team::players;
 }
 
 void
@@ -458,6 +405,46 @@ sanguis::server::entities::player::remove()
 {
 	this->environment()->remove_player(
 		this->player_id()
+	);
+}
+
+void
+sanguis::server::entities::player::update_speed()
+{
+	if(
+		fcppt::math::vector::length_square(
+			desired_speed_.get()
+		)
+		<
+		fcppt::literal<
+			sanguis::server::space_unit
+		>(
+			0.001f
+		)
+	)
+	{
+		this->movement_speed().current(
+			fcppt::literal<
+				sanguis::server::space_unit
+			>(
+				0
+			)
+		);
+
+		return;
+	}
+
+	this->direction(
+		sanguis::server::direction(
+			fcppt::math::vector::atan2(
+				desired_speed_.get()
+			)
+		)
+	);
+
+	// FIXME: don't set the speed to max!
+	sanguis::server::entities::property::current_to_max(
+		this->movement_speed()
 	);
 }
 
@@ -526,6 +513,8 @@ sanguis::server::entities::player::update()
 	sanguis::server::entities::with_velocity::update();
 
 	sanguis::server::entities::with_weapon::update();
+
+	this->update_speed();
 }
 
 sanguis::messages::unique_ptr

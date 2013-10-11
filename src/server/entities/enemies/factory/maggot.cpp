@@ -17,12 +17,22 @@
 #include <fcppt/make_unique_ptr.hpp>
 
 
+#include <sanguis/server/radius.hpp>
+#include <sanguis/server/auras/buff.hpp>
+#include <sanguis/server/auras/influence.hpp>
+#include <sanguis/server/buffs/slow.hpp>
+#include <sanguis/server/entities/enemies/unique_ptr.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
+
+
 sanguis::server::entities::unique_ptr
 sanguis::server::entities::enemies::factory::maggot(
 	sanguis::server::entities::enemies::factory::parameters const &_parameters
 )
 {
-	return
+	sanguis::server::entities::enemies::unique_ptr ret(
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::enemies::enemy
 		>(
@@ -60,12 +70,41 @@ sanguis::server::entities::enemies::factory::maggot(
 				)
 			),
 			sanguis::server::pickup_probability(
-				1.f//0.1f
+				0.1f
 			),
 			sanguis::server::exp(
 				1.f
 			),
 			_parameters.difficulty(),
 			_parameters.spawn_owner()
+		)
+	);
+
+	ret->add_aura(
+		fcppt::make_unique_ptr<
+			sanguis::server::auras::buff
+		>(
+			sanguis::server::radius(
+				50.f
+			),
+			ret->team(),
+			sanguis::server::auras::influence::debuff,
+			[]()
+			{
+				return
+					fcppt::make_unique_ptr<
+						sanguis::server::buffs::slow
+					>(
+						sanguis::server::buffs::slow::factor(
+							0.5f
+						)
+					);
+			}
+		)
+	);
+
+	return
+		std::move(
+			ret
 		);
 }

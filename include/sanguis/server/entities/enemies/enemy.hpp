@@ -19,6 +19,7 @@
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
+#include <sanguis/server/entities/enemies/enemy_fwd.hpp>
 #include <sanguis/server/entities/enemies/spawn_owner.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
@@ -66,6 +67,10 @@ public:
 
 	sanguis::creator::enemy_type
 	etype() const;
+
+	sanguis::server::team
+	team() const
+	override;
 private:
 	void
 	update()
@@ -79,10 +84,6 @@ private:
 
 	sanguis::collision::world::group_field const
 	collision_groups() const
-	override;
-
-	sanguis::server::team
-	team() const
 	override;
 
 	void
