@@ -18,6 +18,7 @@ enum class enemy_type
 	zombie01,
 	spider,
 	skeleton,
+	ghost,
 	maggot,
 	fcppt_maximum = maggot
 };

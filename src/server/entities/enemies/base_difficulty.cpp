@@ -51,6 +51,13 @@ sanguis::server::entities::enemies::base_difficulty(
 			>(
 				10
 			);
+	case sanguis::creator::enemy_type::ghost:
+		return
+			fcppt::literal<
+				sanguis::server::entities::enemies::difficulty_value
+			>(
+				5
+			);
 	case sanguis::creator::enemy_type::maggot:
 		return
 			fcppt::literal<

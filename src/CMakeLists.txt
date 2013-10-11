@@ -879,6 +879,7 @@ set(
 	include/sanguis/server/entities/enemies/difficulty_value.hpp
 	include/sanguis/server/entities/enemies/enemy.hpp
 	include/sanguis/server/entities/enemies/enemy_fwd.hpp
+	include/sanguis/server/entities/enemies/factory/ghost.hpp
 	include/sanguis/server/entities/enemies/factory/maggot.hpp
 	include/sanguis/server/entities/enemies/factory/parameters.hpp
 	include/sanguis/server/entities/enemies/factory/parameters_fwd.hpp
@@ -1532,6 +1533,7 @@ set(
 	src/server/entities/enemies/base_difficulty.cpp
 	src/server/entities/enemies/create.cpp
 	src/server/entities/enemies/enemy.cpp
+	src/server/entities/enemies/factory/ghost.cpp
 	src/server/entities/enemies/factory/maggot.cpp
 	src/server/entities/enemies/factory/parameters.cpp
 	src/server/entities/enemies/factory/skeleton.cpp

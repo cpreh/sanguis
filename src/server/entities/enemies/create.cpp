@@ -7,6 +7,7 @@
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/entities/enemies/difficulty_value.hpp>
 #include <sanguis/server/entities/enemies/spawn_owner_fwd.hpp>
+#include <sanguis/server/entities/enemies/factory/ghost.hpp>
 #include <sanguis/server/entities/enemies/factory/maggot.hpp>
 #include <sanguis/server/entities/enemies/factory/skeleton.hpp>
 #include <sanguis/server/entities/enemies/factory/spider.hpp>
@@ -78,6 +79,11 @@ sanguis::server::entities::enemies::create(
 	case sanguis::creator::enemy_type::maggot:
 		return
 			sanguis::server::entities::enemies::factory::maggot(
+				parameters
+			);
+	case sanguis::creator::enemy_type::ghost:
+		return
+			sanguis::server::entities::enemies::factory::ghost(
 				parameters
 			);
 	case sanguis::creator::enemy_type::spider:

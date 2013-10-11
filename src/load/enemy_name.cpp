@@ -44,6 +44,9 @@ case sanguis::creator::enemy_type::name:\
 			skeleton
 		);
 		SANGUIS_LOAD_ENEMY_NAME_CASE(
+			ghost
+		);
+		SANGUIS_LOAD_ENEMY_NAME_CASE(
 			maggot
 		);
 	}
