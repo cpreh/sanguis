@@ -36,14 +36,9 @@ public:
 	~slow();
 private:
 	void
-	add(
-		sanguis::server::entities::base &
-	)
-	override;
-
-	void
-	remove(
-		sanguis::server::entities::base &
+	apply(
+		sanguis::server::entities::base &,
+		sanguis::server::buffs::buff::added
 	)
 	override;
 

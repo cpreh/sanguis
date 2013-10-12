@@ -2,7 +2,7 @@
 #include <sanguis/server/buffs/slow.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
-#include <sanguis/server/entities/property/linear_change.hpp>
+#include <sanguis/server/entities/property/linear_decrease_op.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 
@@ -23,8 +23,9 @@ sanguis::server::buffs::slow::~slow()
 }
 
 void
-sanguis::server::buffs::slow::add(
-	sanguis::server::entities::base &_entity
+sanguis::server::buffs::slow::apply(
+	sanguis::server::entities::base &_entity,
+	sanguis::server::buffs::buff::added const _added
 )
 {
 	FCPPT_TRY_DYNAMIC_CAST(
@@ -32,25 +33,12 @@ sanguis::server::buffs::slow::add(
 		with_velocity,
 		&_entity
 	)
-		sanguis::server::entities::property::linear_change(
+		sanguis::server::entities::property::linear_decrease_op(
 			with_velocity->movement_speed(),
-			-factor_.get()
-		);
-}
-
-void
-sanguis::server::buffs::slow::remove(
-	sanguis::server::entities::base &_entity
-)
-{
-	FCPPT_TRY_DYNAMIC_CAST(
-		sanguis::server::entities::with_velocity *,
-		with_velocity,
-		&_entity
-	)
-		sanguis::server::entities::property::linear_change(
-			with_velocity->movement_speed(),
-			factor_.get()
+			factor_.get(),
+			sanguis::server::entities::property::apply(
+				_added.get()
+			)
 		);
 }
 

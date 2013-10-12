@@ -100,7 +100,7 @@ sanguis::server::entities::enemies::factory::ghost(
 						ghost_slow
 					>(
 						sanguis::server::buffs::slow::factor(
-							0.9f
+							0.1f
 						)
 					);
 			}

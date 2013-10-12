@@ -808,6 +808,7 @@ set(
 	include/sanguis/server/buffs/buff.hpp
 	include/sanguis/server/buffs/buff_fwd.hpp
 	include/sanguis/server/buffs/comparator.hpp
+	include/sanguis/server/buffs/define_special.hpp
 	include/sanguis/server/buffs/provider.hpp
 	include/sanguis/server/buffs/provider_fwd.hpp
 	include/sanguis/server/buffs/slow.hpp
@@ -930,6 +931,7 @@ set(
 	include/sanguis/server/entities/property/add.hpp
 	include/sanguis/server/entities/property/always_max.hpp
 	include/sanguis/server/entities/property/always_max_fwd.hpp
+	include/sanguis/server/entities/property/apply.hpp
 	include/sanguis/server/entities/property/base.hpp
 	include/sanguis/server/entities/property/base_fwd.hpp
 	include/sanguis/server/entities/property/change_callback.hpp
@@ -946,6 +948,9 @@ set(
 	include/sanguis/server/entities/property/initial_max.hpp
 	include/sanguis/server/entities/property/linear.hpp
 	include/sanguis/server/entities/property/linear_change.hpp
+	include/sanguis/server/entities/property/linear_decrease.hpp
+	include/sanguis/server/entities/property/linear_decrease_fwd.hpp
+	include/sanguis/server/entities/property/linear_decrease_op.hpp
 	include/sanguis/server/entities/property/linear_fwd.hpp
 	include/sanguis/server/entities/property/subtract.hpp
 	include/sanguis/server/entities/property/value.hpp
@@ -1576,6 +1581,8 @@ set(
 	src/server/entities/property/initial_max.cpp
 	src/server/entities/property/linear.cpp
 	src/server/entities/property/linear_change.cpp
+	src/server/entities/property/linear_decrease.cpp
+	src/server/entities/property/linear_decrease_op.cpp
 	src/server/entities/property/subtract.cpp
 	src/server/entities/radius.cpp
 	src/server/entities/spawns/limited.cpp

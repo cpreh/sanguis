@@ -3,6 +3,7 @@
 
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/strong_typedef.hpp>
 
 
 namespace sanguis
@@ -47,6 +48,18 @@ public:
 	) const = 0;
 protected:
 	buff();
+
+	FCPPT_MAKE_STRONG_TYPEDEF(
+		bool,
+		added
+	);
+private:
+	virtual
+	void
+	apply(
+		sanguis::server::entities::base &,
+		sanguis::server::buffs::buff::added
+	);
 };
 
 }

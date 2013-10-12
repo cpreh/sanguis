@@ -4,6 +4,7 @@
 #include <sanguis/server/entities/property/base_fwd.hpp>
 #include <sanguis/server/entities/property/constant.hpp>
 #include <sanguis/server/entities/property/linear.hpp>
+#include <sanguis/server/entities/property/linear_decrease.hpp>
 #include <sanguis/server/entities/property/value.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -29,10 +30,13 @@ public:
 	);
 
 	sanguis::server::entities::property::constant const
-	constant();
+	constant() const;
 
 	sanguis::server::entities::property::linear const
-	linear();
+	linear() const;
+
+	sanguis::server::entities::property::linear_decrease const
+	linear_decrease() const;
 
 	void
 	constant(
@@ -42,6 +46,11 @@ public:
 	void
 	linear(
 		sanguis::server::entities::property::linear const &
+	);
+
+	void
+	linear_decrease(
+		sanguis::server::entities::property::linear_decrease const &
 	);
 protected:
 	virtual
@@ -61,6 +70,8 @@ private:
 	sanguis::server::entities::property::constant constant_;
 
 	sanguis::server::entities::property::linear linear_;
+
+	sanguis::server::entities::property::linear_decrease linear_decrease_;
 };
 
 }

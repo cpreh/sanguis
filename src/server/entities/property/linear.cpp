@@ -21,5 +21,6 @@ sanguis::server::entities::property::linear::change(
 sanguis::server::entities::property::value
 sanguis::server::entities::property::linear::value() const
 {
-	return value_;
+	return
+		value_;
 }
