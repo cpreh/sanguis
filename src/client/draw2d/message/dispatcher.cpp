@@ -87,7 +87,7 @@
 #include <sanguis/messages/serialization/convert_string_vector.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <fcppt/dynamic_cast.hpp>
-#include <fcppt/type_name.hpp>
+#include <fcppt/type_name_from_info.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/headers.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -601,7 +601,7 @@ sanguis::client::draw2d::message::dispatcher::process_default_msg(
 		sanguis::client::draw2d::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("Invalid message event in dispatcher: ")
-			<< fcppt::type_name(
+			<< fcppt::type_name_from_info(
 				typeid(
 					_message
 				)

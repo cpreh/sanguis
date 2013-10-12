@@ -10,9 +10,9 @@
 #include <mizuiro/color/operators/subtract.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/container/map_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <iterator>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -48,7 +48,9 @@ sanguis::client::draw2d::sunlight::basic_gradients<
 	values_()
 {
 	for(
-		auto const entry : _pairs
+		auto const &entry
+		:
+		_pairs
 	)
 		this->add(
 			entry.first,
@@ -84,9 +86,14 @@ sanguis::client::draw2d::sunlight::basic_gradients<
 	value const &_value
 )
 {
-	values_.insert(
-		_locator,
-		_value
+	FCPPT_ASSERT_ERROR(
+		values_.insert(
+			std::make_pair(
+				_locator,
+				_value
+			)
+		)
+		.second
 	);
 }
 

@@ -81,7 +81,6 @@
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
-#include <fcppt/container/map_impl.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/log/output.hpp>

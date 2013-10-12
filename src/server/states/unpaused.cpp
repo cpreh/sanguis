@@ -32,7 +32,6 @@
 #include <sanguis/server/states/unpaused.hpp>
 #include <fcppt/cast_to_enum.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/container/map_impl.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/output.hpp>

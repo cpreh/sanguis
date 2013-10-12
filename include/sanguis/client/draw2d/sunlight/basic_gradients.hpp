@@ -3,7 +3,6 @@
 
 #include <sanguis/client/draw2d/sunlight/basic_gradients_fwd.hpp>
 #include <mizuiro/color/object_decl.hpp>
-#include <fcppt/container/map_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <initializer_list>
@@ -78,13 +77,10 @@ public:
 	) const;
 private:
 	typedef
-	fcppt::container::map
+	std::map
 	<
-		std::map
-		<
-			locator,
-			value
-		>
+		locator,
+		value
 	>
 	value_map;
 
