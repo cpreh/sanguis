@@ -38,6 +38,13 @@ public:
 
 	virtual
 	~buff() = 0;
+
+	// Only compares other buffs with the same typeid
+	virtual
+	bool
+	less(
+		sanguis::server::buffs::buff const &
+	) const = 0;
 protected:
 	buff();
 };

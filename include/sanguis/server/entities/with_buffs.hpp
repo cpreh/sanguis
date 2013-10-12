@@ -2,12 +2,15 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_BUFFS_HPP_INCLUDED
 
 #include <sanguis/server/buffs/buff_fwd.hpp>
+#include <sanguis/server/buffs/comparator.hpp>
 #include <sanguis/server/buffs/unique_ptr.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_buffs_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/ptr_container/ptr_list.hpp>
+#include <unordered_map>
+#include <set>
+#include <typeindex>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -45,12 +48,20 @@ protected:
 	override;
 private:
 	typedef
-	boost::ptr_list<
-		sanguis::server::buffs::buff
+	std::multiset<
+		sanguis::server::buffs::unique_ptr,
+		sanguis::server::buffs::comparator
 	>
 	buff_set;
 
-	buff_set buffs_;
+	typedef
+	std::unordered_map<
+		std::type_index,
+		buff_set
+	>
+	buff_map;
+
+	buff_map buffs_;
 };
 
 }

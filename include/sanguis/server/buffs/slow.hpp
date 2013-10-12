@@ -47,6 +47,12 @@ private:
 	)
 	override;
 
+	bool
+	less(
+		sanguis::server::buffs::buff const &
+	) const
+	override;
+
 	sanguis::server::buffs::slow::factor const factor_;
 };
 

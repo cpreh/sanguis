@@ -16,55 +16,56 @@
 #include <sanguis/server/weapons/range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
+
 sanguis::server::entities::unique_ptr
 sanguis::server::entities::enemies::factory::maggot(
 	sanguis::server::entities::enemies::factory::parameters const &_parameters
 )
 {
 	return
-	fcppt::make_unique_ptr<
-		sanguis::server::entities::enemies::enemy
-	>(
-		_parameters.diff_clock(),
-		_parameters.enemy_type(),
-		_parameters.load_context(),
-		sanguis::server::damage::no_armor(),
-		sanguis::server::health(
-			2.f
-			*
-			_parameters.difficulty().get()
-		),
-		sanguis::server::entities::movement_speed(
-			40.f
-		),
-		sanguis::server::ai::create_simple(
-			sanguis::server::ai::sight_range(
-				1000.f
-			)
-		),
 		fcppt::make_unique_ptr<
-			sanguis::server::weapons::melee
+			sanguis::server::entities::enemies::enemy
 		>(
 			_parameters.diff_clock(),
-			sanguis::server::weapons::range(
-				75.f
+			_parameters.enemy_type(),
+			_parameters.load_context(),
+			sanguis::server::damage::no_armor(),
+			sanguis::server::health(
+				2.f
+				*
+				_parameters.difficulty().get()
 			),
-			sanguis::server::weapons::base_cooldown(
-				sanguis::duration_second(
-					1.f
+			sanguis::server::entities::movement_speed(
+				40.f
+			),
+			sanguis::server::ai::create_simple(
+				sanguis::server::ai::sight_range(
+					1000.f
 				)
 			),
-			sanguis::server::weapons::damage(
-				0.5f
-			)
-		),
-		sanguis::server::pickup_probability(
-			0.1f
-		),
-		sanguis::server::exp(
-			1.f
-		),
-		_parameters.difficulty(),
-		_parameters.spawn_owner()
-	);
+			fcppt::make_unique_ptr<
+				sanguis::server::weapons::melee
+			>(
+				_parameters.diff_clock(),
+				sanguis::server::weapons::range(
+					75.f
+				),
+				sanguis::server::weapons::base_cooldown(
+					sanguis::duration_second(
+						1.f
+					)
+				),
+				sanguis::server::weapons::damage(
+					0.5f
+				)
+			),
+			sanguis::server::pickup_probability(
+				0.1f
+			),
+			sanguis::server::exp(
+				1.f
+			),
+			_parameters.difficulty(),
+			_parameters.spawn_owner()
+		);
 }

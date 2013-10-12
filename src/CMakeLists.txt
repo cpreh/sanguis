@@ -807,6 +807,7 @@ set(
 	include/sanguis/server/auras/weapon_pickup_remove_candidate_callback.hpp
 	include/sanguis/server/buffs/buff.hpp
 	include/sanguis/server/buffs/buff_fwd.hpp
+	include/sanguis/server/buffs/comparator.hpp
 	include/sanguis/server/buffs/provider.hpp
 	include/sanguis/server/buffs/provider_fwd.hpp
 	include/sanguis/server/buffs/slow.hpp
@@ -1496,6 +1497,7 @@ set(
 	src/server/auras/update_sight.cpp
 	src/server/auras/weapon_pickup_candidates.cpp
 	src/server/buffs/buff.cpp
+	src/server/buffs/comparator.cpp
 	src/server/buffs/provider.cpp
 	src/server/buffs/slow.cpp
 	src/server/cheat.cpp

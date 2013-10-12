@@ -4,6 +4,7 @@
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/property/linear_change.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
+#include <fcppt/cast/static_downcast.hpp>
 
 
 sanguis::server::buffs::slow::slow(
@@ -51,4 +52,19 @@ sanguis::server::buffs::slow::remove(
 			with_velocity->movement_speed(),
 			factor_.get()
 		);
+}
+
+bool
+sanguis::server::buffs::slow::less(
+	sanguis::server::buffs::buff const &_other
+) const
+{
+	return
+		factor_
+		<
+		fcppt::cast::static_downcast<
+			sanguis::server::buffs::slow const &
+		>(
+			_other
+		).factor_;
 }

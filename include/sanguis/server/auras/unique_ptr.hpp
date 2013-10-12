@@ -14,9 +14,11 @@ namespace server
 namespace auras
 {
 
-typedef std::unique_ptr<
+typedef
+std::unique_ptr<
 	sanguis::server::auras::aura
-> unique_ptr;
+>
+unique_ptr;
 
 }
 }

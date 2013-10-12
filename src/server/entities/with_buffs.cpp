@@ -2,10 +2,10 @@
 #include <sanguis/server/buffs/unique_ptr.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
-#include <fcppt/algorithm/ptr_container_erase.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <algorithm>
+#include <typeindex>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -15,15 +15,71 @@ sanguis::server::entities::with_buffs::add_buff(
 	sanguis::server::buffs::unique_ptr &&_buff
 )
 {
-	_buff->add(
+	std::type_index const index(
+		typeid(
+			*_buff
+		)
+	);
+
+	buff_map::iterator const it(
+		buffs_.find(
+			index
+		)
+	);
+
+	if(
+		it == buffs_.end()
+	)
+	{
+		typedef
+		std::pair<
+			buff_map::iterator,
+			bool
+		>
+		insert_result;
+
+		insert_result const result(
+			buffs_.insert(
+				std::make_pair(
+					index,
+					buff_set()
+				)
+			)
+		);
+
+		_buff->add(
+			*this
+		);
+
+		result.first->second.insert(
+			std::move(
+				_buff
+			)
+		);
+
+		return;
+	}
+
+	buff_set &set(
+		it->second
+	);
+
+	FCPPT_ASSERT_ERROR(
+		!set.empty()
+	);
+
+	(*set.begin())->remove(
 		*this
 	);
 
-	fcppt::container::ptr::push_back_unique_ptr(
-		buffs_,
+	set.insert(
 		std::move(
 			_buff
 		)
+	);
+
+	(*set.begin())->add(
+		*this
 	);
 }
 
@@ -32,16 +88,71 @@ sanguis::server::entities::with_buffs::remove_buff(
 	sanguis::server::buffs::buff &_buff
 )
 {
-	_buff.remove(
-		*this
+	std::type_index const index(
+		typeid(
+			_buff
+		)
+	);
+
+	buff_map::iterator const it(
+		buffs_.find(
+			index
+		)
 	);
 
 	FCPPT_ASSERT_ERROR(
-		fcppt::algorithm::ptr_container_erase(
-			buffs_,
-			&_buff
-		)
+		it != buffs_.end()
 	);
+
+	buff_set &set(
+		it->second
+	);
+
+	(*set.begin())->remove(
+		*this
+	);
+
+	{
+		buff_set::iterator const set_it(
+			std::find_if(
+				set.begin(),
+				set.end(),
+				[
+					&_buff
+				](
+					sanguis::server::buffs::unique_ptr const &_element
+				)
+				{
+					return
+						_element.get()
+						==
+						&_buff;
+				}
+			)
+		);
+
+		FCPPT_ASSERT_ERROR(
+			set_it
+			!=
+			set.end()
+		);
+
+		set.erase(
+			set_it
+		);
+	}
+
+	if(
+		set.empty()
+	)
+
+		buffs_.erase(
+			it
+		);
+	else
+		(*set.begin())->add(
+			*this
+		);
 }
 
 sanguis::server::entities::with_buffs::with_buffs()
@@ -63,7 +174,7 @@ sanguis::server::entities::with_buffs::update()
 		:
 		buffs_
 	)
-		elem.update(
+		(*elem.second.begin())->update(
 			*this
 		);
 }
