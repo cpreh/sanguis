@@ -4,10 +4,20 @@
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/ai/create_simple.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
+#include <sanguis/server/auras/buff.hpp>
+#include <sanguis/server/auras/influence.hpp>
+#include <sanguis/server/buffs/burn.hpp>
+#include <sanguis/server/buffs/burn_create.hpp>
+#include <sanguis/server/buffs/burn_interval.hpp>
+#include <sanguis/server/buffs/define_special.hpp>
+#include <sanguis/server/damage/fire.hpp>
+#include <sanguis/server/damage/list.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
+#include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
+#include <sanguis/server/entities/enemies/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/factory/parameters.hpp>
 #include <sanguis/server/entities/enemies/factory/skeleton.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
@@ -15,6 +25,9 @@
 #include <sanguis/server/weapons/melee.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::entities::unique_ptr
@@ -22,7 +35,7 @@ sanguis::server::entities::enemies::factory::skeleton(
 	sanguis::server::entities::enemies::factory::parameters const &_parameters
 )
 {
-	return
+	sanguis::server::entities::enemies::unique_ptr ret(
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::enemies::enemy
 		>(
@@ -65,5 +78,47 @@ sanguis::server::entities::enemies::factory::skeleton(
 			),
 			_parameters.difficulty(),
 			_parameters.spawn_owner()
+		)
+	);
+
+	SANGUIS_SERVER_BUFFS_DEFINE_SPECIAL(
+		skeleton_burn,
+		burn
+	);
+
+	ret->add_aura(
+		fcppt::make_unique_ptr<
+			sanguis::server::auras::buff
+		>(
+			sanguis::server::radius(
+				200.f
+			),
+			ret->team(),
+			sanguis::server::auras::influence::debuff,
+			sanguis::server::buffs::burn_create<
+				skeleton_burn
+			>(
+				_parameters.diff_clock(),
+				sanguis::server::buffs::burn_interval(
+					sanguis::duration_second(
+						1.f
+					)
+				),
+				sanguis::server::damage::unit(
+					1.f
+				),
+				sanguis::server::damage::list(
+					sanguis::server::damage::fire =
+						sanguis::server::damage::unit(
+							1.f
+						)
+				)
+			)
+		)
+	);
+
+	return
+		std::move(
+			ret
 		);
 }

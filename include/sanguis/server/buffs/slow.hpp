@@ -36,7 +36,7 @@ private:
 	override;
 
 	bool
-	less(
+	greater(
 		sanguis::server::buffs::buff const &
 	) const
 	override;

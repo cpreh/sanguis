@@ -10,7 +10,7 @@ sanguis::server::buffs::comparator::operator()(
 ) const
 {
 	return
-		_left->less(
+		_left->greater(
 			*_right
 		);
 }

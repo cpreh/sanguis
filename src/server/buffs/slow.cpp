@@ -40,10 +40,11 @@ sanguis::server::buffs::slow::apply(
 }
 
 bool
-sanguis::server::buffs::slow::less(
+sanguis::server::buffs::slow::greater(
 	sanguis::server::buffs::buff const &_other
 ) const
 {
+	// Smaller factors mean greater slowdown
 	return
 		factor_
 		<

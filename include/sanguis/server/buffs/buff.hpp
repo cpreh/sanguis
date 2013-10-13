@@ -36,7 +36,7 @@ public:
 	// Only compares other buffs with the same typeid
 	virtual
 	bool
-	less(
+	greater(
 		sanguis::server::buffs::buff const &
 	) const = 0;
 protected:

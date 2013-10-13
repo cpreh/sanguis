@@ -5,6 +5,7 @@
 #include <sanguis/server/auras/influence.hpp>
 #include <sanguis/server/buffs/buff.hpp>
 #include <sanguis/server/buffs/create_callback.hpp>
+#include <sanguis/server/buffs/unique_ptr.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
 

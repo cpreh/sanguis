@@ -466,8 +466,7 @@ place_spawners(
 			sanguis::creator::spawn(
 				sanguis::creator::spawn_pos(
 					*candidate),
-				//random_monster(),
-				sanguis::creator::enemy_type::ghost,
+				random_monster(),
 				sanguis::creator::spawn_type::spawner));
 
 		current_spawners++;

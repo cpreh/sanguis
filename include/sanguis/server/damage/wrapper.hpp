@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_DAMAGE_WRAPPER_HPP_INCLUDED
 #define SANGUIS_SERVER_DAMAGE_WRAPPER_HPP_INCLUDED
 
-#include <sanguis/server/damage/meta_fwd.hpp>
+#include <sanguis/server/damage/meta.hpp>
 #include <sanguis/server/damage/type.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/damage/wrapper_fwd.hpp>
