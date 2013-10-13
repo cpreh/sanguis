@@ -11,6 +11,7 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/ai/create_function.hpp>
+#include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
 #include <sanguis/server/entities/with_id.hpp>
@@ -60,7 +61,8 @@ public:
 		sanguis::server::pickup_probability,
 		sanguis::server::exp,
 		sanguis::server::entities::enemies::difficulty,
-		sanguis::server::entities::enemies::spawn_owner const &
+		sanguis::server::entities::enemies::spawn_owner const &,
+		sanguis::server::auras::container &&
 	);
 
 	~enemy();

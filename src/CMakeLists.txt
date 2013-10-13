@@ -796,6 +796,7 @@ set(
 	include/sanguis/server/auras/aura_fwd.hpp
 	include/sanguis/server/auras/buff.hpp
 	include/sanguis/server/auras/collision_groups.hpp
+	include/sanguis/server/auras/container.hpp
 	include/sanguis/server/auras/influence.hpp
 	include/sanguis/server/auras/influence_fwd.hpp
 	include/sanguis/server/auras/unique_ptr.hpp

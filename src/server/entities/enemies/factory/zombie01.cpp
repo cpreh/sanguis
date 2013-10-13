@@ -4,6 +4,8 @@
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/ai/create_simple.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
+#include <sanguis/server/auras/aura.hpp>
+#include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
@@ -64,6 +66,7 @@ sanguis::server::entities::enemies::factory::zombie01(
 				5.f
 			),
 			_parameters.difficulty(),
-			_parameters.spawn_owner()
+			_parameters.spawn_owner(),
+			sanguis::server::auras::container()
 		);
 }

@@ -16,6 +16,7 @@
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/ai/base.hpp>
 #include <sanguis/server/ai/create_function.hpp>
+#include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/damage/armor.hpp>
 #include <sanguis/server/entities/exp_area.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
@@ -55,7 +56,8 @@ sanguis::server::entities::enemies::enemy::enemy(
 	sanguis::server::pickup_probability const _spawn_chance,
 	sanguis::server::exp const _exp,
 	sanguis::server::entities::enemies::difficulty const _difficulty,
-	sanguis::server::entities::enemies::spawn_owner const &_spawn_owner
+	sanguis::server::entities::enemies::spawn_owner const &_spawn_owner,
+	sanguis::server::auras::container &&_auras
 )
 :
 	sanguis::server::entities::with_ai(
@@ -112,6 +114,16 @@ sanguis::server::entities::enemies::enemy::enemy(
 		_spawn_owner
 	)
 {
+	for(
+		auto &aura
+		:
+		_auras
+	)
+		this->add_aura(
+			std::move(
+				aura
+			)
+		);
 }
 
 sanguis::server::entities::enemies::enemy::~enemy()

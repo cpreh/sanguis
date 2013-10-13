@@ -2,10 +2,12 @@
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/pickup_probability.hpp>
+#include <sanguis/server/team.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/ai/create_simple.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/auras/buff.hpp>
+#include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/auras/influence.hpp>
 #include <sanguis/server/buffs/define_special.hpp>
 #include <sanguis/server/buffs/slow.hpp>
@@ -15,7 +17,6 @@
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
-#include <sanguis/server/entities/enemies/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/factory/ghost.hpp>
 #include <sanguis/server/entities/enemies/factory/parameters.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
@@ -23,9 +24,7 @@
 #include <sanguis/server/weapons/melee.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <utility>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/assign/make_container.hpp>
 
 
 sanguis::server::entities::unique_ptr
@@ -33,7 +32,12 @@ sanguis::server::entities::enemies::factory::ghost(
 	sanguis::server::entities::enemies::factory::parameters const &_parameters
 )
 {
-	sanguis::server::entities::enemies::unique_ptr ret(
+	SANGUIS_SERVER_BUFFS_DEFINE_SPECIAL(
+		ghost_slow,
+		slow
+	);
+
+	return
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::enemies::enemy
 		>(
@@ -77,36 +81,26 @@ sanguis::server::entities::enemies::factory::ghost(
 				10.f
 			),
 			_parameters.difficulty(),
-			_parameters.spawn_owner()
-		)
-	);
-
-	SANGUIS_SERVER_BUFFS_DEFINE_SPECIAL(
-		ghost_slow,
-		slow
-	);
-
-	ret->add_aura(
-		fcppt::make_unique_ptr<
-			sanguis::server::auras::buff
-		>(
-			sanguis::server::radius(
-				200.f
-			),
-			ret->team(),
-			sanguis::server::auras::influence::debuff,
-			sanguis::server::buffs::slow_create<
-				ghost_slow
+			_parameters.spawn_owner(),
+			fcppt::assign::make_container<
+				sanguis::server::auras::container
 			>(
-				sanguis::server::buffs::slow_factor(
-					0.1f
+				fcppt::make_unique_ptr<
+					sanguis::server::auras::buff
+				>(
+					sanguis::server::radius(
+						200.f
+					),
+					sanguis::server::team::monsters,
+					sanguis::server::auras::influence::debuff,
+					sanguis::server::buffs::slow_create<
+						ghost_slow
+					>(
+						sanguis::server::buffs::slow_factor(
+							0.1f
+						)
+					)
 				)
-			)
-		)
-	);
-
-	return
-		std::move(
-			ret
+			).move_container()
 		);
 }
