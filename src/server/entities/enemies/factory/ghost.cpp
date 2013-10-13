@@ -9,6 +9,8 @@
 #include <sanguis/server/auras/influence.hpp>
 #include <sanguis/server/buffs/define_special.hpp>
 #include <sanguis/server/buffs/slow.hpp>
+#include <sanguis/server/buffs/slow_create.hpp>
+#include <sanguis/server/buffs/slow_factor.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
@@ -69,7 +71,7 @@ sanguis::server::entities::enemies::factory::ghost(
 				)
 			),
 			sanguis::server::pickup_probability(
-				1.f//0.1f
+				0.1f
 			),
 			sanguis::server::exp(
 				10.f
@@ -93,17 +95,13 @@ sanguis::server::entities::enemies::factory::ghost(
 			),
 			ret->team(),
 			sanguis::server::auras::influence::debuff,
-			[]()
-			{
-				return
-					fcppt::make_unique_ptr<
-						ghost_slow
-					>(
-						sanguis::server::buffs::slow::factor(
-							0.1f
-						)
-					);
-			}
+			sanguis::server::buffs::slow_create<
+				ghost_slow
+			>(
+				sanguis::server::buffs::slow_factor(
+					0.1f
+				)
+			)
 		)
 	);
 

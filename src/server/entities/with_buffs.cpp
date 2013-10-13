@@ -47,9 +47,7 @@ sanguis::server::entities::with_buffs::add_buff(
 			)
 		);
 
-		_buff->add(
-			*this
-		);
+		_buff->add();
 
 		result.first->second.insert(
 			std::move(
@@ -68,9 +66,7 @@ sanguis::server::entities::with_buffs::add_buff(
 		!set.empty()
 	);
 
-	(*set.begin())->remove(
-		*this
-	);
+	(*set.begin())->remove();
 
 	set.insert(
 		std::move(
@@ -78,9 +74,7 @@ sanguis::server::entities::with_buffs::add_buff(
 		)
 	);
 
-	(*set.begin())->add(
-		*this
-	);
+	(*set.begin())->add();
 }
 
 void
@@ -108,9 +102,7 @@ sanguis::server::entities::with_buffs::remove_buff(
 		it->second
 	);
 
-	(*set.begin())->remove(
-		*this
-	);
+	(*set.begin())->remove();
 
 	{
 		buff_set::iterator const set_it(
@@ -150,9 +142,7 @@ sanguis::server::entities::with_buffs::remove_buff(
 			it
 		);
 	else
-		(*set.begin())->add(
-			*this
-		);
+		(*set.begin())->add();
 }
 
 sanguis::server::entities::with_buffs::with_buffs()
@@ -174,7 +164,5 @@ sanguis::server::entities::with_buffs::update()
 		:
 		buffs_
 	)
-		(*elem.second.begin())->update(
-			*this
-		);
+		(*elem.second.begin())->update();
 }

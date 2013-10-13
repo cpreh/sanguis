@@ -795,7 +795,6 @@ set(
 	include/sanguis/server/auras/aura.hpp
 	include/sanguis/server/auras/aura_fwd.hpp
 	include/sanguis/server/auras/buff.hpp
-	include/sanguis/server/auras/buff_create_callback.hpp
 	include/sanguis/server/auras/collision_groups.hpp
 	include/sanguis/server/auras/influence.hpp
 	include/sanguis/server/auras/influence_fwd.hpp
@@ -808,10 +807,13 @@ set(
 	include/sanguis/server/buffs/buff.hpp
 	include/sanguis/server/buffs/buff_fwd.hpp
 	include/sanguis/server/buffs/comparator.hpp
+	include/sanguis/server/buffs/create_callback.hpp
 	include/sanguis/server/buffs/define_special.hpp
 	include/sanguis/server/buffs/provider.hpp
 	include/sanguis/server/buffs/provider_fwd.hpp
 	include/sanguis/server/buffs/slow.hpp
+	include/sanguis/server/buffs/slow_create.hpp
+	include/sanguis/server/buffs/slow_factor.hpp
 	include/sanguis/server/buffs/unique_ptr.hpp
 	include/sanguis/server/center.hpp
 	include/sanguis/server/center_fwd.hpp

@@ -4,8 +4,8 @@
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/auras/aura.hpp>
-#include <sanguis/server/auras/buff_create_callback.hpp>
 #include <sanguis/server/auras/influence_fwd.hpp>
+#include <sanguis/server/buffs/create_callback.hpp>
 #include <sanguis/server/buffs/provider.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -30,7 +30,7 @@ public:
 		sanguis::server::radius,
 		sanguis::server::team,
 		sanguis::server::auras::influence,
-		sanguis::server::auras::buff_create_callback const &
+		sanguis::server::buffs::create_callback const &
 	);
 
 	~buff();
@@ -45,7 +45,7 @@ private:
 		sanguis::server::entities::with_body &
 	);
 
-	sanguis::server::auras::buff_create_callback const buff_create_callback_;
+	sanguis::server::buffs::create_callback const create_callback_;
 
 	sanguis::server::buffs::provider provider_;
 };

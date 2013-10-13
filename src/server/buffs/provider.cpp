@@ -75,9 +75,10 @@ sanguis::server::buffs::provider::remove(
 		)
 	);
 
-	FCPPT_ASSERT_ERROR(
-		it != buffs_.end()
-	);
+	if(
+		it == buffs_.end()
+	)
+		return;
 
 	_entity.remove_buff(
 		it->second.get()

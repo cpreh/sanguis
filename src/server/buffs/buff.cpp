@@ -1,14 +1,10 @@
 #include <sanguis/server/buffs/buff.hpp>
-#include <sanguis/server/entities/base_fwd.hpp>
 
 
 void
-sanguis::server::buffs::buff::add(
-	sanguis::server::entities::base &_base
-)
+sanguis::server::buffs::buff::add()
 {
 	this->apply(
-		_base,
 		sanguis::server::buffs::buff::added(
 			true
 		)
@@ -16,12 +12,9 @@ sanguis::server::buffs::buff::add(
 }
 
 void
-sanguis::server::buffs::buff::remove(
-	sanguis::server::entities::base &_base
-)
+sanguis::server::buffs::buff::remove()
 {
 	this->apply(
-		_base,
 		sanguis::server::buffs::buff::added(
 			false
 		)
@@ -29,9 +22,7 @@ sanguis::server::buffs::buff::remove(
 }
 
 void
-sanguis::server::buffs::buff::update(
-	sanguis::server::entities::base &
-)
+sanguis::server::buffs::buff::update()
 {
 }
 
@@ -45,7 +36,6 @@ sanguis::server::buffs::buff::buff()
 
 void
 sanguis::server::buffs::buff::apply(
-	sanguis::server::entities::base &,
 	sanguis::server::buffs::buff::added
 )
 {

@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_BUFFS_BUFF_HPP_INCLUDED
 #define SANGUIS_SERVER_BUFFS_BUFF_HPP_INCLUDED
 
-#include <sanguis/server/entities/base_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/strong_typedef.hpp>
 
@@ -21,21 +20,15 @@ class buff
 public:
 	virtual
 	void
-	add(
-		sanguis::server::entities::base &
-	);
+	add();
 
 	virtual
 	void
-	remove(
-		sanguis::server::entities::base &
-	);
+	remove();
 
 	virtual
 	void
-	update(
-		sanguis::server::entities::base &
-	);
+	update();
 
 	virtual
 	~buff() = 0;
@@ -57,7 +50,6 @@ private:
 	virtual
 	void
 	apply(
-		sanguis::server::entities::base &,
 		sanguis::server::buffs::buff::added
 	);
 };

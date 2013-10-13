@@ -2,9 +2,9 @@
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/buff.hpp>
-#include <sanguis/server/auras/buff_create_callback.hpp>
 #include <sanguis/server/auras/influence.hpp>
 #include <sanguis/server/buffs/buff.hpp>
+#include <sanguis/server/buffs/create_callback.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
 
@@ -13,7 +13,7 @@ sanguis::server::auras::buff::buff(
 	sanguis::server::radius const _radius,
 	sanguis::server::team const _team,
 	sanguis::server::auras::influence const _influence,
-	sanguis::server::auras::buff_create_callback const &_buff_create_callback
+	sanguis::server::buffs::create_callback const &_create_callback
 )
 :
 	sanguis::server::auras::aura(
@@ -21,8 +21,8 @@ sanguis::server::auras::buff::buff(
 		_team,
 		_influence
 	),
-	buff_create_callback_(
-		_buff_create_callback
+	create_callback_(
+		_create_callback
 	),
 	provider_()
 {
@@ -37,14 +37,25 @@ sanguis::server::auras::buff::enter(
 	sanguis::server::entities::with_body &_entity
 )
 {
-	provider_.add(
-		dynamic_cast<
-			sanguis::server::entities::with_buffs &
-		>(
+	sanguis::server::buffs::unique_ptr new_buff(
+		create_callback_(
 			_entity
-		),
-		buff_create_callback_()
+		)
 	);
+
+	if(
+		new_buff
+	)
+		provider_.add(
+			dynamic_cast<
+				sanguis::server::entities::with_buffs &
+			>(
+				_entity
+			),
+			std::move(
+				new_buff
+			)
+		);
 }
 
 void
