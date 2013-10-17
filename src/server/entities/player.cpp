@@ -35,7 +35,7 @@
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/player.hpp>
-#include <sanguis/server/entities/with_auras.hpp>
+#include <sanguis/server/entities/with_auras_id.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_health.hpp>
@@ -83,7 +83,7 @@ sanguis::server::entities::player::player(
 )
 :
 	sanguis::server::entities::ifaces::with_team(),
-	sanguis::server::entities::with_auras(),
+	sanguis::server::entities::with_auras_id(),
 	sanguis::server::entities::with_buffs(),
 	sanguis::server::entities::with_id(
 		_load_context.next_id()
@@ -536,6 +536,7 @@ sanguis::server::entities::player::add_message(
 					this->current_health().get(),
 					this->max_health().get(),
 					this->primary_weapon_type(),
+					this->aura_types(),
 					sanguis::messages::serialization::convert_string_vector(
 						this->primary_weapon_text()
 					)
@@ -550,7 +551,8 @@ sanguis::server::entities::player::add_message(
 					this->speed().get(),
 					this->current_health().get(),
 					this->max_health().get(),
-					this->primary_weapon_type()
+					this->primary_weapon_type(),
+					this->aura_types()
 				)
 			)
 		;

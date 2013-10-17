@@ -1,3 +1,5 @@
+#include <sanguis/aura_type.hpp>
+#include <sanguis/optional_aura_type.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/aura.hpp>
@@ -13,6 +15,7 @@
 sanguis::server::auras::buff::buff(
 	sanguis::server::radius const _radius,
 	sanguis::server::team const _team,
+	sanguis::aura_type const _aura_type,
 	sanguis::server::auras::influence const _influence,
 	sanguis::server::buffs::create_callback const &_create_callback
 )
@@ -21,6 +24,9 @@ sanguis::server::auras::buff::buff(
 		_radius,
 		_team,
 		_influence
+	),
+	aura_type_(
+		_aura_type
 	),
 	create_callback_(
 		_create_callback
@@ -31,6 +37,15 @@ sanguis::server::auras::buff::buff(
 
 sanguis::server::auras::buff::~buff()
 {
+}
+
+sanguis::optional_aura_type const
+sanguis::server::auras::buff::type() const
+{
+	return
+		sanguis::optional_aura_type(
+			aura_type_
+		);
 }
 
 void

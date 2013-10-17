@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_WORLD_OBJECT_HPP_INCLUDED
 #define SANGUIS_SERVER_WORLD_OBJECT_HPP_INCLUDED
 
+#include <sanguis/aura_type_fwd.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/entity_id.hpp>
@@ -101,6 +102,13 @@ private:
 		sanguis::server::entities::unique_ptr &&,
 		sanguis::server::entities::insert_parameters const &
 	);
+
+	void
+	add_aura(
+		sanguis::entity_id,
+		sanguis::aura_type
+	)
+	override;
 
 	void
 	weapon_changed(

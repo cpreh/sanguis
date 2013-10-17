@@ -14,9 +14,11 @@ namespace messages
 namespace types
 {
 
-typedef std::vector<
+typedef
+std::vector<
 	sanguis::messages::types::string
-> string_vector;
+>
+string_vector;
 
 }
 }

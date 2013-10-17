@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_ENVIRONMENT_OBJECT_HPP_INCLUDED
 #define SANGUIS_SERVER_ENVIRONMENT_OBJECT_HPP_INCLUDED
 
+#include <sanguis/aura_type_fwd.hpp>
 #include <sanguis/entity_id_fwd.hpp>
 #include <sanguis/is_primary_weapon_fwd.hpp>
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
@@ -44,6 +45,13 @@ public:
 	insert(
 		sanguis::server::entities::unique_ptr &&,
 		sanguis::server::entities::insert_parameters const &
+	) = 0;
+
+	virtual
+	void
+	add_aura(
+		sanguis::entity_id,
+		sanguis::aura_type
 	) = 0;
 
 	virtual

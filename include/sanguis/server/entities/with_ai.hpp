@@ -6,7 +6,7 @@
 #include <sanguis/server/ai/manager_fwd.hpp>
 #include <sanguis/server/ai/scoped_ptr.hpp>
 #include <sanguis/server/entities/with_ai_fwd.hpp>
-#include <sanguis/server/entities/with_auras.hpp>
+#include <sanguis/server/entities/with_auras_id.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
@@ -24,7 +24,7 @@ namespace entities
 class with_ai
 :
 	public virtual sanguis::server::entities::ifaces::with_team,
-	public sanguis::server::entities::with_auras,
+	public sanguis::server::entities::with_auras_id,
 	public sanguis::server::entities::with_weapon
 {
 	FCPPT_NONCOPYABLE(

@@ -1,3 +1,4 @@
+#include <sanguis/optional_aura_type.hpp>
 #include <sanguis/collision/world/group.hpp>
 #include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/server/radius.hpp>
@@ -34,6 +35,13 @@ sanguis::server::auras::weapon_pickup_candidates::weapon_pickup_candidates(
 
 sanguis::server::auras::weapon_pickup_candidates::~weapon_pickup_candidates()
 {
+}
+
+sanguis::optional_aura_type const
+sanguis::server::auras::weapon_pickup_candidates::type() const
+{
+	return
+		sanguis::optional_aura_type();
 }
 
 sanguis::collision::world::group_field const

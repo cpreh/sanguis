@@ -1,12 +1,9 @@
-#ifndef SANGUIS_MESSAGES_ADD_FRIEND_FWD_HPP_INCLUDED
-#define SANGUIS_MESSAGES_ADD_FRIEND_FWD_HPP_INCLUDED
+#ifndef SANGUIS_MESSAGES_ADD_AURA_FWD_HPP_INCLUDED
+#define SANGUIS_MESSAGES_ADD_AURA_FWD_HPP_INCLUDED
 
-#include <sanguis/friend_type_fwd.hpp>
-#include <sanguis/messages/add_with_auras_fwd.hpp>
 #include <sanguis/messages/bind_entity_message_fwd.hpp>
 #include <sanguis/messages/make_class_fwd.hpp>
-#include <sanguis/messages/adapted_types/enum_fwd.hpp>
-#include <sanguis/messages/roles/friend.hpp>
+#include <sanguis/messages/adapted_types/aura_type_fwd.hpp>
 #include <sanguis/messages/types/message.hpp>
 #include <majutsu/composite_fwd.hpp>
 #include <majutsu/role_fwd.hpp>
@@ -23,21 +20,17 @@ namespace messages
 typedef
 sanguis::messages::make_class<
 	majutsu::composite<
-		boost::mpl::vector3<
+		boost::mpl::vector2<
 			sanguis::messages::bind_entity_message<
-				sanguis::messages::types::message::add_friend
+				sanguis::messages::types::message::add_aura
 			>,
-			sanguis::messages::add_with_auras,
 			majutsu::role<
-				sanguis::messages::adapted_types::enum_<
-					sanguis::friend_type
-				>,
-				sanguis::messages::roles::friend_
+				sanguis::messages::adapted_types::aura_type
 			>
 		>
 	>
 >
-add_friend;
+add_aura;
 
 }
 }

@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_AURAS_AOE_DAMAGE_HPP_INCLUDED
 #define SANGUIS_SERVER_AURAS_AOE_DAMAGE_HPP_INCLUDED
 
+#include <sanguis/optional_aura_type_fwd.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/auras/aura.hpp>
@@ -34,6 +35,10 @@ public:
 
 	~aoe_damage();
 private:
+	sanguis::optional_aura_type const
+	type() const
+	override;
+
 	void
 	enter(
 		sanguis::server::entities::with_body &

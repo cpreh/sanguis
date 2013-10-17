@@ -3,7 +3,7 @@
 
 #include <sanguis/friend_type.hpp>
 #include <sanguis/messages/add_friend_fwd.hpp>
-#include <sanguis/messages/add_with_weapon.hpp>
+#include <sanguis/messages/add_with_auras.hpp>
 #include <sanguis/messages/bind_entity_message.hpp>
 #include <sanguis/messages/make_class.hpp>
 #include <sanguis/messages/adapted_types/enum.hpp>

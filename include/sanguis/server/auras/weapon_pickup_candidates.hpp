@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_AURAS_WEAPON_PICKUP_CANDIDATES_HPP_INCLUDED
 #define SANGUIS_SERVER_AURAS_WEAPON_PICKUP_CANDIDATES_HPP_INCLUDED
 
+#include <sanguis/optional_aura_type_fwd.hpp>
 #include <sanguis/collision/world/group_field_fwd.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/auras/aura.hpp>
@@ -33,6 +34,10 @@ public:
 
 	~weapon_pickup_candidates();
 private:
+	sanguis::optional_aura_type const
+	type() const
+	override;
+
 	sanguis::collision::world::group_field const
 	collision_groups() const;
 

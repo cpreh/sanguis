@@ -2,7 +2,7 @@
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/ai/manager.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
-#include <sanguis/server/entities/with_auras.hpp>
+#include <sanguis/server/entities/with_auras_id.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
@@ -21,7 +21,7 @@ sanguis::server::entities::with_ai::with_ai(
 )
 :
 	sanguis::server::entities::ifaces::with_team(),
-	sanguis::server::entities::with_auras(),
+	sanguis::server::entities::with_auras_id(),
 	sanguis::server::entities::with_weapon(
 		std::move(
 			_start_weapon

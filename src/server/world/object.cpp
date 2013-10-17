@@ -1,3 +1,4 @@
+#include <sanguis/aura_type.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
@@ -14,6 +15,7 @@
 #include <sanguis/creator/opening_container.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/top_result.hpp>
+#include <sanguis/messages/add_aura.hpp>
 #include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/messages/change_weapon.hpp>
 #include <sanguis/messages/change_world.hpp>
@@ -410,6 +412,23 @@ sanguis::server::world::object::insert_base(
 		sanguis::server::entities::optional_base_ref(
 			ref
 		);
+}
+
+void
+sanguis::server::world::object::add_aura(
+	sanguis::entity_id const _id,
+	sanguis::aura_type const _aura_type
+)
+{
+	this->send_entity_specific(
+		_id,
+		*sanguis::messages::create(
+			sanguis::messages::add_aura(
+				_id,
+				_aura_type
+			)
+		)
+	);
 }
 
 void

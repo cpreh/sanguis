@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_AURAS_AGGRO_HPP_INCLUDED
 #define SANGUIS_SERVER_AURAS_AGGRO_HPP_INCLUDED
 
+#include <sanguis/optional_aura_type_fwd.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/update_target_function.hpp>
@@ -33,6 +34,10 @@ public:
 
 	~aggro();
 private:
+	sanguis::optional_aura_type const
+	type() const
+	override;
+
 	void
 	enter(
 		sanguis::server::entities::with_body &

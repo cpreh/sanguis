@@ -14,6 +14,8 @@ set(
 	include/sanguis/args/resolution.hpp
 	include/sanguis/args/server_only.hpp
 	include/sanguis/args/server_port.hpp
+	include/sanguis/aura_type.hpp
+	include/sanguis/aura_type_fwd.hpp
 	include/sanguis/cheat_type.hpp
 	include/sanguis/cheat_type_fwd.hpp
 	include/sanguis/client/config/homedir.hpp
@@ -511,6 +513,10 @@ set(
 	include/sanguis/main_object_scoped_ptr.hpp
 	include/sanguis/main_object_unique_ptr.hpp
 	include/sanguis/media_path.hpp
+	include/sanguis/messages/adapted_types/aura_type.hpp
+	include/sanguis/messages/adapted_types/aura_type_fwd.hpp
+	include/sanguis/messages/adapted_types/aura_type_vector.hpp
+	include/sanguis/messages/adapted_types/aura_type_vector_fwd.hpp
 	include/sanguis/messages/adapted_types/bool.hpp
 	include/sanguis/messages/adapted_types/bool_fwd.hpp
 	include/sanguis/messages/adapted_types/char_type.hpp
@@ -547,6 +553,8 @@ set(
 	include/sanguis/messages/adapted_types/world_id_fwd.hpp
 	include/sanguis/messages/add_aoe_projectile.hpp
 	include/sanguis/messages/add_aoe_projectile_fwd.hpp
+	include/sanguis/messages/add_aura.hpp
+	include/sanguis/messages/add_aura_fwd.hpp
 	include/sanguis/messages/add_console_command.hpp
 	include/sanguis/messages/add_console_command_fwd.hpp
 	include/sanguis/messages/add_elements_base.hpp
@@ -565,6 +573,8 @@ set(
 	include/sanguis/messages/add_projectile_fwd.hpp
 	include/sanguis/messages/add_weapon_pickup.hpp
 	include/sanguis/messages/add_weapon_pickup_fwd.hpp
+	include/sanguis/messages/add_with_auras.hpp
+	include/sanguis/messages/add_with_auras_fwd.hpp
 	include/sanguis/messages/add_with_health.hpp
 	include/sanguis/messages/add_with_health_fwd.hpp
 	include/sanguis/messages/add_with_speed.hpp
@@ -709,6 +719,7 @@ set(
 	include/sanguis/messages/stop_reloading_fwd.hpp
 	include/sanguis/messages/types/alda_type.hpp
 	include/sanguis/messages/types/alda_type_fwd.hpp
+	include/sanguis/messages/types/aura_type_vector.hpp
 	include/sanguis/messages/types/char.hpp
 	include/sanguis/messages/types/enum.hpp
 	include/sanguis/messages/types/exp.hpp
@@ -741,6 +752,8 @@ set(
 	include/sanguis/net/serialize_to_circular_buffer.hpp
 	include/sanguis/net/serialize_to_data_buffer.hpp
 	include/sanguis/net/stream_exceptions.hpp
+	include/sanguis/optional_aura_type.hpp
+	include/sanguis/optional_aura_type_fwd.hpp
 	include/sanguis/optional_perk_type.hpp
 	include/sanguis/optional_perk_type_fwd.hpp
 	include/sanguis/optional_primary_weapon_type.hpp
@@ -975,6 +988,7 @@ set(
 	include/sanguis/server/entities/with_ai.hpp
 	include/sanguis/server/entities/with_ai_fwd.hpp
 	include/sanguis/server/entities/with_auras.hpp
+	include/sanguis/server/entities/with_auras_id.hpp
 	include/sanguis/server/entities/with_body.hpp
 	include/sanguis/server/entities/with_body_fwd.hpp
 	include/sanguis/server/entities/with_body_ref.hpp
@@ -1423,6 +1437,7 @@ set(
 	src/main_object.cpp
 	src/media_path.cpp
 	src/messages/add_aoe_projectile.cpp
+	src/messages/add_aura.cpp
 	src/messages/add_console_command.cpp
 	src/messages/add_enemy.cpp
 	src/messages/add_friend.cpp
@@ -1598,6 +1613,7 @@ set(
 	src/server/entities/transfer_parameters.cpp
 	src/server/entities/with_ai.cpp
 	src/server/entities/with_auras.cpp
+	src/server/entities/with_auras_id.cpp
 	src/server/entities/with_body.cpp
 	src/server/entities/with_buffs.cpp
 	src/server/entities/with_ghosts.cpp

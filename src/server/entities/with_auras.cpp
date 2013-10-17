@@ -3,7 +3,6 @@
 #include <sanguis/server/collision/ghost.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
-#include <sanguis/server/environment/object.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -36,4 +35,11 @@ sanguis::server::entities::with_auras::with_auras()
 
 sanguis::server::entities::with_auras::~with_auras()
 {
+}
+
+sanguis::server::entities::with_auras::aura_container const &
+sanguis::server::entities::with_auras::auras() const
+{
+	return
+		auras_;
 }

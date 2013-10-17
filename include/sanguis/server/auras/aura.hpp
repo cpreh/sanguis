@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_AURAS_AURA_HPP_INCLUDED
 #define SANGUIS_SERVER_AURAS_AURA_HPP_INCLUDED
 
+#include <sanguis/optional_aura_type_fwd.hpp>
 #include <sanguis/collision/world/body_base_fwd.hpp>
 #include <sanguis/collision/world/group_field_fwd.hpp>
 #include <sanguis/server/radius.hpp>
@@ -35,6 +36,10 @@ public:
 
 	sanguis::server::collision::ghost_unique_ptr
 	create_ghost();
+
+	virtual
+	sanguis::optional_aura_type const
+	type() const = 0;
 protected:
 	aura(
 		sanguis::server::radius,

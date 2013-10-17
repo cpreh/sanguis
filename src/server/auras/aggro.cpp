@@ -1,3 +1,4 @@
+#include <sanguis/optional_aura_type.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/update_target_function.hpp>
@@ -30,6 +31,13 @@ sanguis::server::auras::aggro::aggro(
 
 sanguis::server::auras::aggro::~aggro()
 {
+}
+
+sanguis::optional_aura_type const
+sanguis::server::auras::aggro::type() const
+{
+	return
+		sanguis::optional_aura_type();
 }
 
 void

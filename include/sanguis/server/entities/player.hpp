@@ -16,7 +16,7 @@
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/damage/armor.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
-#include <sanguis/server/entities/with_auras.hpp>
+#include <sanguis/server/entities/with_auras_id.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_health.hpp>
@@ -49,7 +49,7 @@ namespace entities
 class player
 :
 	public virtual sanguis::server::entities::ifaces::with_team,
-	public sanguis::server::entities::with_auras,
+	public sanguis::server::entities::with_auras_id,
 	public sanguis::server::entities::with_buffs,
 	public sanguis::server::entities::with_id,
 	public sanguis::server::entities::with_health,

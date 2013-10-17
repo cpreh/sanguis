@@ -25,6 +25,7 @@ class with_auras
 		with_auras
 	);
 public:
+	virtual
 	void
 	add_aura(
 		sanguis::server::auras::unique_ptr &&
@@ -33,11 +34,16 @@ protected:
 	with_auras();
 
 	~with_auras();
-private:
-	typedef boost::ptr_list<
-		sanguis::server::auras::aura
-	> aura_container;
 
+	typedef
+	boost::ptr_list<
+		sanguis::server::auras::aura
+	>
+	aura_container;
+
+	aura_container const &
+	auras() const;
+private:
 	aura_container auras_;
 };
 

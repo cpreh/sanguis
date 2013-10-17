@@ -1,3 +1,4 @@
+#include <sanguis/optional_aura_type.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/aoe_damage.hpp>
@@ -32,6 +33,13 @@ sanguis::server::auras::aoe_damage::aoe_damage(
 
 sanguis::server::auras::aoe_damage::~aoe_damage()
 {
+}
+
+sanguis::optional_aura_type const
+sanguis::server::auras::aoe_damage::type() const
+{
+	return
+		sanguis::optional_aura_type();
 }
 
 void

@@ -1,3 +1,4 @@
+#include <sanguis/aura_type.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
@@ -92,6 +93,7 @@ sanguis::server::entities::enemies::factory::skeleton(
 						200.f
 					),
 					sanguis::server::team::monsters,
+					sanguis::aura_type::burn,
 					sanguis::server::auras::influence::debuff,
 					sanguis::server::buffs::burn_create<
 						skeleton_burn

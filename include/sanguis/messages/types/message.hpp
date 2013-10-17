@@ -14,6 +14,7 @@ namespace types
 enum class message
 {
 	add_aoe_projectile,
+	add_aura,
 	add_console_command,
 	add_enemy,
 	add_friend,

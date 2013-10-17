@@ -19,6 +19,7 @@
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
+#include <sanguis/server/entities/with_auras.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_health.hpp>
@@ -110,6 +111,10 @@ sanguis::server::entities::friend_::on_transfer(
 	)
 		return false;
 
+	sanguis::server::entities::with_auras::on_transfer(
+		_parameters
+	);
+
 	return
 		sanguis::server::entities::with_velocity::on_transfer(
 			_parameters
@@ -149,6 +154,7 @@ sanguis::server::entities::friend_::add_message(
 				this->current_health().get(),
 				this->max_health().get(),
 				this->primary_weapon_type(),
+				this->aura_types(),
 				ftype_
 			)
 		);

@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_AURAS_UPDATE_SIGHT_HPP_INCLUDED
 #define SANGUIS_SERVER_AURAS_UPDATE_SIGHT_HPP_INCLUDED
 
+#include <sanguis/optional_aura_type_fwd.hpp>
 #include <sanguis/collision/world/group_field_fwd.hpp>
 #include <sanguis/server/enter_sight_function.hpp>
 #include <sanguis/server/leave_sight_function.hpp>
@@ -33,6 +34,10 @@ public:
 
 	~update_sight();
 private:
+	sanguis::optional_aura_type const
+	type() const
+	override;
+
 	sanguis::collision::world::group_field const
 	collision_groups() const;
 

@@ -1,3 +1,4 @@
+#include <sanguis/optional_aura_type.hpp>
 #include <sanguis/collision/world/group.hpp>
 #include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/server/enter_sight_function.hpp>
@@ -34,6 +35,13 @@ sanguis::server::auras::update_sight::update_sight(
 
 sanguis::server::auras::update_sight::~update_sight()
 {
+}
+
+sanguis::optional_aura_type const
+sanguis::server::auras::update_sight::type() const
+{
+	return
+		sanguis::optional_aura_type();
 }
 
 sanguis::collision::world::group_field const
