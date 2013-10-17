@@ -15,6 +15,8 @@ sanguis::load::tiles::background_to_name(
 	{
 	case sanguis::creator::background_tile::grass:
 		return FCPPT_TEXT("grass");
+	case sanguis::creator::background_tile::graveyard:
+		return FCPPT_TEXT("graveyard");
 	case sanguis::creator::background_tile::asphalt:
 		return FCPPT_TEXT("asphalt");
 	case sanguis::creator::background_tile::nothing:

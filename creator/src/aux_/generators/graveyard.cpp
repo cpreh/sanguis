@@ -23,7 +23,7 @@
 #include <sanguis/creator/aux_/rect.hpp>
 #include <fcppt/container/grid/in_range.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
-#include <sanguis/creator/aux_/generators/maze.hpp>
+#include <sanguis/creator/aux_/generators/graveyard.hpp>
 #include <fcppt/assert/error_message.hpp>
 #include <fcppt/algorithm/contains.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -36,7 +36,6 @@
 #include <fcppt/container/grid/make_pos_range.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
 #include <fcppt/math/clamp.hpp>
-#include <fcppt/assign/make_container.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real.hpp>
@@ -97,15 +96,15 @@ place_spawners(
 // this is a maze generator that follows the algorithm described at
 // http://en.wikipedia.org/w/index.php?title=Maze_generation_algorithm&oldid=550777074#Randomized_Prim.27s_algorithm
 sanguis::creator::aux_::result
-sanguis::creator::aux_::generators::maze(
+sanguis::creator::aux_::generators::graveyard(
 	sanguis::creator::aux_::parameters const &_parameters
 )
 {
 	auto const
 	maze_dim =
 		sanguis::creator::grid::dim(
-			15,
-			15);
+			9,
+			9);
 
 	::variate
 	random_cell_index(
@@ -146,9 +145,9 @@ sanguis::creator::aux_::generators::maze(
 		sanguis::creator::aux_::generate_maze(
 			maze_dim,
 			1u,
-			2u,
+			5u,
 			sanguis::creator::tile::nothing,
-			sanguis::creator::tile::concrete_wall,
+			sanguis::creator::tile::hedge,
 			_parameters.randgen()
 		);
 
@@ -208,9 +207,52 @@ sanguis::creator::aux_::generators::maze(
 		)
 	);
 
+	typedef
+	fcppt::random::distribution::basic<
+		fcppt::random::distribution::parameters::uniform_int<
+			sanguis::creator::tile
+		>
+	> uniform_tile_enum;
+
+	typedef
+	fcppt::random::variate<
+		sanguis::creator::aux_::randgen,
+		uniform_tile_enum
+	> random_tile_type;
+
+	random_tile_type
+	random_grave(
+		_parameters.randgen(),
+		uniform_tile_enum(
+			uniform_tile_enum::param_type::min(
+				sanguis::creator::tile::grave1
+			),
+			uniform_tile_enum::param_type::max(
+				sanguis::creator::tile::grave5
+			)
+	));
+
+	for(
+		auto cell :
+		fcppt::container::grid::make_pos_range(
+			grid)
+	)
+	{
+		if(
+			cell.value()
+			==
+			sanguis::creator::tile::nothing
+			&&
+			fill_tile_random()
+			< 0.1f
+		)
+			cell.value() =
+				random_grave();
+	}
+
 	sanguis::creator::background_grid grid_bg(
 		grid.size(),
-		sanguis::creator::background_tile::asphalt
+		sanguis::creator::background_tile::nothing
 	);
 
 	sanguis::creator::spawn_container
@@ -370,18 +412,18 @@ place_spawners(
 		fcppt::random::distribution::parameters::uniform_int<
 			sanguis::creator::enemy_type
 		>
-	> uniform_enum;
+	> uniform_enemy_enum;
 
 	typedef
 	fcppt::random::variate<
 		sanguis::creator::aux_::randgen,
-		uniform_enum
+		uniform_enemy_enum
 	> random_monster_type;
 
 	random_monster_type
 	random_monster(
 		randgen,
-		uniform_enum(
+		uniform_enemy_enum(
 			fcppt::random::distribution::parameters::make_uniform_enum<
 				sanguis::creator::enemy_type
 			>()

@@ -59,7 +59,9 @@ set(
 	src/aux_/deserialization/top_result.cpp
 	src/aux_/find_opposing_cell.cpp
 	src/aux_/find_reachable.cpp
+	src/aux_/generate_maze.cpp
 	src/aux_/generator_map.cpp
+	src/aux_/generators/graveyard.cpp
 	src/aux_/generators/lines.cpp
 	src/aux_/generators/maze.cpp
 	src/aux_/parameters.cpp
@@ -87,9 +89,11 @@ set(
 	src/include/sanguis/creator/aux_/find_closest.hpp
 	src/include/sanguis/creator/aux_/find_opposing_cell.hpp
 	src/include/sanguis/creator/aux_/find_reachable.hpp
+	src/include/sanguis/creator/aux_/generate_maze.hpp
 	src/include/sanguis/creator/aux_/generator_function.hpp
 	src/include/sanguis/creator/aux_/generator_map.hpp
 	src/include/sanguis/creator/aux_/generator_map_type.hpp
+	src/include/sanguis/creator/aux_/generators/graveyard.hpp
 	src/include/sanguis/creator/aux_/generators/lines.hpp
 	src/include/sanguis/creator/aux_/generators/maze.hpp
 	src/include/sanguis/creator/aux_/parameters.hpp

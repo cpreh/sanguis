@@ -15,7 +15,13 @@ sanguis::creator::tile_is_solid(
 	case sanguis::creator::tile::nothing:
 	case sanguis::creator::tile::door:
 	case sanguis::creator::tile::spawner:
+	case sanguis::creator::tile::grave1:
+	case sanguis::creator::tile::grave2:
+	case sanguis::creator::tile::grave3:
+	case sanguis::creator::tile::grave4:
+	case sanguis::creator::tile::grave5:
 		return false;
+	case sanguis::creator::tile::hedge:
 	case sanguis::creator::tile::concrete_wall:
 		return true;
 	}

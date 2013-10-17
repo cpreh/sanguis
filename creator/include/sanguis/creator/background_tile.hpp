@@ -13,6 +13,7 @@ enum class background_tile
 {
 	nothing,
 	asphalt,
+	graveyard,
 	grass,
 	fcppt_maximum = grass
 };

@@ -24,10 +24,8 @@ sanguis::creator::tile_rect(
 	)
 	{
 	case sanguis::creator::tile::nothing:
-	case sanguis::creator::tile::spawner:
 		break;
-	case sanguis::creator::tile::door:
-	case sanguis::creator::tile::concrete_wall:
+	default:
 		return
 			sanguis::creator::rect(
 				sanguis::creator::rect::vector::null(),
