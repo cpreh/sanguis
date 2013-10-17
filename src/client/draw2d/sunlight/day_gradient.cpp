@@ -30,17 +30,81 @@ public:
 			std::make_pair(
 				-3.14159f,
 				color_point(
-					(mizuiro::color::init::red() %= 1.0)
-					(mizuiro::color::init::green() %= 1.0)
-					(mizuiro::color::init::blue() %= 1.0)
+					(mizuiro::color::init::red() %= 0.125736)
+					(mizuiro::color::init::green() %= 0.125736)
+					(mizuiro::color::init::blue() %= 0.219608)
+				)
+			),
+			std::make_pair(
+				-1.56924f,
+				color_point(
+					(mizuiro::color::init::red() %= 0.125736)
+					(mizuiro::color::init::green() %= 0.125736)
+					(mizuiro::color::init::blue() %= 0.219608)
+				)
+			),
+			std::make_pair(
+				0,
+				color_point(
+					(mizuiro::color::init::red() %= 0.125736)
+					(mizuiro::color::init::green() %= 0.125736)
+					(mizuiro::color::init::blue() %= 0.219608)
+				)
+			),
+			std::make_pair(
+				0.0916717f,
+				color_point(
+					(mizuiro::color::init::red() %= 1.)
+					(mizuiro::color::init::green() %= 0.156863)
+					(mizuiro::color::init::blue() %= 0.156863)
+				)
+			),
+			std::make_pair(
+				0.153819f,
+				color_point(
+					(mizuiro::color::init::red() %= 1.)
+					(mizuiro::color::init::green() %= 0.588235)
+					(mizuiro::color::init::blue() %= 0.)
+				)
+			),
+			std::make_pair(
+				0.785177f,
+				color_point(
+					(mizuiro::color::init::red() %= 1.)
+					(mizuiro::color::init::green() %= 0.987313)
+					(mizuiro::color::init::blue() %= 0.90196)
+				)
+			),
+			std::make_pair(
+				2.37095f,
+				color_point(
+					(mizuiro::color::init::red() %= 1.)
+					(mizuiro::color::init::green() %= 0.987313)
+					(mizuiro::color::init::blue() %= 0.90196)
+				)
+			),
+			std::make_pair(
+				2.95894f,
+				color_point(
+					(mizuiro::color::init::red() %= 1.)
+					(mizuiro::color::init::green() %= 0.635294)
+					(mizuiro::color::init::blue() %= 0.)
+				)
+			),
+			std::make_pair(
+				3.0608f,
+				color_point(
+					(mizuiro::color::init::red() %= 1.)
+					(mizuiro::color::init::green() %= 0.156863)
+					(mizuiro::color::init::blue() %= 0.156863)
 				)
 			),
 			std::make_pair(
 				3.14159f,
 				color_point(
-					(mizuiro::color::init::red() %= 1.0)
-					(mizuiro::color::init::green() %= 1.0)
-					(mizuiro::color::init::blue() %= 1.0)
+					(mizuiro::color::init::red() %= 0.125736)
+					(mizuiro::color::init::green() %= 0.125736)
+					(mizuiro::color::init::blue() %= 0.219608)
 				)
 			)
 		}
