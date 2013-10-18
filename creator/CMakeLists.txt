@@ -19,6 +19,8 @@ set(
 	include/sanguis/creator/grid_crange.hpp
 	include/sanguis/creator/grid_crange_fwd.hpp
 	include/sanguis/creator/grid_fwd.hpp
+	include/sanguis/creator/grid_spiral_range.hpp
+	include/sanguis/creator/grid_spiral_range_fwd.hpp
 	include/sanguis/creator/name.hpp
 	include/sanguis/creator/opening.hpp
 	include/sanguis/creator/opening_container.hpp

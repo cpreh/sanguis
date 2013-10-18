@@ -51,6 +51,7 @@ set(
 	src/aux_/line_line_intersect.cpp
 	src/aux_/line_segment.cpp
 	src/aux_/make_range.cpp
+	src/aux_/make_spiral_range.cpp
 	src/aux_/rect_line_intersection.cpp
 	src/aux_/world/group_relation.cpp
 	src/aux_/world/simple/body.cpp
@@ -69,6 +70,7 @@ set(
 	src/include/sanguis/collision/aux_/line_segment.hpp
 	src/include/sanguis/collision/aux_/line_segment_fwd.hpp
 	src/include/sanguis/collision/aux_/make_range.hpp
+	src/include/sanguis/collision/aux_/make_spiral_range.hpp
 	src/include/sanguis/collision/aux_/optional_intersection.hpp
 	src/include/sanguis/collision/aux_/optional_intersection_fwd.hpp
 	src/include/sanguis/collision/aux_/pos.hpp

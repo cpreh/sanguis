@@ -36,7 +36,9 @@ sanguis::server::create_player(
 	);
 
 	for(
-		auto const &command : _known_commands
+		auto const &command
+		:
+		_known_commands
 	)
 		_send_to_player(
 			_player_id,

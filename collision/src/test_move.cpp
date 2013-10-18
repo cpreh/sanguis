@@ -10,18 +10,19 @@
 #include <sanguis/collision/aux_/dir.hpp>
 #include <sanguis/collision/aux_/is_null.hpp>
 #include <sanguis/collision/aux_/line_segment.hpp>
-#include <sanguis/collision/aux_/make_range.hpp>
+#include <sanguis/collision/aux_/make_spiral_range.hpp>
 #include <sanguis/collision/aux_/pos.hpp>
 #include <sanguis/collision/aux_/rect.hpp>
 #include <sanguis/collision/result.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
-#include <sanguis/creator/grid_crange.hpp>
+#include <sanguis/creator/grid_spiral_range.hpp>
+#include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/rect.hpp>
 #include <sanguis/creator/tile_is_solid.hpp>
 #include <sanguis/creator/tile_rect.hpp>
 #include <sanguis/creator/tile_size.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/cast/int_to_float.hpp>
+#include <fcppt/container/grid/in_range.hpp>
 #include <fcppt/math/box/intersects.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
@@ -50,28 +51,6 @@ sanguis::collision::test_move(
 		return
 			sanguis::collision::optional_result();
 
-	sanguis::collision::center const new_center(
-		_center.get()
-		+
-		_speed.get()
-		*
-		_time.count()
-	);
-
-	sanguis::collision::aux_::rect const rect(
-		new_center.get()
-		-
-		_size
-		/
-		fcppt::literal<
-			sanguis::collision::unit
-		>(
-			2
-		)
-		,
-		_size
-	);
-
 	sanguis::collision::speed new_speed(
 		_speed
 	);
@@ -83,23 +62,72 @@ sanguis::collision::test_move(
 	for(
 		auto const &entry
 		:
-		sanguis::collision::aux_::make_range(
-			_grid,
-			new_center,
+		sanguis::collision::aux_::make_spiral_range(
+			sanguis::collision::center(
+				_center.get()
+				+
+				_speed.get()
+				*
+				_time.count()
+			),
 			_size
 		)
 	)
 	{
+		sanguis::creator::pos const cur_pos(
+			fcppt::math::vector::structure_cast<
+				sanguis::creator::pos
+			>(
+				entry
+			)
+		);
+
 		if(
-			!sanguis::creator::tile_is_solid(
-				entry.value()
+			!fcppt::container::grid::in_range(
+				_grid,
+				cur_pos
 			)
 		)
 			continue;
 
+		sanguis::creator::tile const cur_tile(
+			_grid[
+				cur_pos
+			]
+		);
+
+		if(
+			!sanguis::creator::tile_is_solid(
+				cur_tile
+			)
+		)
+			continue;
+
+		sanguis::collision::center const new_center(
+			_center.get()
+			+
+			new_speed.get()
+			*
+			_time.count()
+		);
+
+		sanguis::collision::aux_::rect const rect(
+			new_center.get()
+			-
+			_size
+			/
+			fcppt::literal<
+				sanguis::collision::unit
+			>(
+				2
+			)
+			,
+			_size
+		);
+
 		sanguis::creator::rect const tile_rect(
 			sanguis::creator::tile_rect(
-				entry.value()
+				cur_tile
 			)
 		);
 
@@ -113,7 +141,7 @@ sanguis::collision::test_move(
 			fcppt::math::vector::structure_cast<
 				sanguis::collision::aux_::rect::vector
 			>(
-				entry.pos()
+				cur_pos
 				*
 				sanguis::creator::tile_size::value
 			),
