@@ -19,13 +19,13 @@ sanguis::creator::aux_::generator_map_type const generators{
 			FCPPT_TEXT("graveyard")
 		),
 		&sanguis::creator::aux_::generators::graveyard
-	)/*,
+	),
 	std::make_pair(
 		sanguis::creator::name(
-			FCPPT_TEXT("lines")
+			FCPPT_TEXT("maze")
 		),
-		&sanguis::creator::aux_::generators::lines
-	)*/
+		&sanguis::creator::aux_::generators::maze
+	)
 };
 
 }

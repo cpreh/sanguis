@@ -252,7 +252,7 @@ sanguis::creator::aux_::generators::graveyard(
 
 	sanguis::creator::background_grid grid_bg(
 		grid.size(),
-		sanguis::creator::background_tile::nothing
+		sanguis::creator::background_tile::grass
 	);
 
 	sanguis::creator::spawn_container
