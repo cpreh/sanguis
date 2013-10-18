@@ -52,7 +52,7 @@ sanguis::client::draw2d::entities::with_auras<
 		sanguis::diff_timer::parameters(
 			_diff_clock,
 			sanguis::duration_second(
-				2
+				16
 			)
 		)
 	),
