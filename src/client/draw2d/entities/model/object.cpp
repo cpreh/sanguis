@@ -9,11 +9,12 @@
 #include <sanguis/client/draw2d/speed_is_null.hpp>
 #include <sanguis/client/draw2d/entities/container.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
-#include <sanguis/client/draw2d/entities/with_health.hpp>
-#include <sanguis/client/draw2d/entities/with_weapon.hpp>
+#include <sanguis/client/draw2d/entities/ifaces/with_health.hpp>
+#include <sanguis/client/draw2d/entities/ifaces/with_weapon.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_time.hpp>
 #include <sanguis/client/draw2d/entities/model/healthbar.hpp>
+#include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
 #include <sanguis/client/draw2d/entities/model/needs_healthbar.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
@@ -30,8 +31,9 @@
 #include <fcppt/assert/unreachable_message.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/log/location.hpp>
-#include <fcppt/log/headers.hpp>
 #include <fcppt/log/object.hpp>
+#include <fcppt/log/output.hpp>
+#include <fcppt/log/warning.hpp>
 #include <fcppt/log/parameters/object.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
@@ -79,34 +81,30 @@ expand_orders(
 }
 
 sanguis::client::draw2d::entities::model::object::object(
-	sanguis::client::draw2d::entities::model::parameters const &_param,
-	fcppt::string const &_name,
-	sanguis::client::draw2d::entities::order_vector const &_orders,
-	sanguis::client::draw2d::entities::model::needs_healthbar const _needs_healthbar,
-	sanguis::client::draw2d::entities::model::decay_option const _decay_option
+	sanguis::client::draw2d::entities::model::parameters const &_parameters
 )
 :
 	sanguis::client::draw2d::entities::container(
-		_param.diff_clock(),
-		_param.normal_system(),
+		_parameters.load_parameters().diff_clock(),
+		_parameters.load_parameters().normal_system(),
 		expand_orders(
-			_orders,
-			_param.collection()[
-				_name
+			_parameters.orders(),
+			_parameters.load_parameters().collection()[
+				_parameters.name().get()
 			].size()
 		),
 		fcppt::math::dim::structure_cast<
 			sanguis::client::draw2d::sprite::dim
 		>(
-			_param.collection()[
-				_name
+			_parameters.load_parameters().collection()[
+				_parameters.name().get()
 			].cell_size().get()
 		)
 	),
-	sanguis::client::draw2d::entities::with_health(),
-	sanguis::client::draw2d::entities::with_weapon(),
+	sanguis::client::draw2d::entities::ifaces::with_health(),
+	sanguis::client::draw2d::entities::ifaces::with_weapon(),
 	diff_clock_(
-		_param.diff_clock()
+		_parameters.load_parameters().diff_clock()
 	),
 	attacking_(
 		false
@@ -121,12 +119,14 @@ sanguis::client::draw2d::entities::model::object::object(
 		0.f
 	),
 	healthbar_(
-		_needs_healthbar == sanguis::client::draw2d::entities::model::needs_healthbar::yes
+		_parameters.needs_healthbar()
+		==
+		sanguis::client::draw2d::entities::model::needs_healthbar::yes
 		?
 			fcppt::make_unique_ptr<
 				sanguis::client::draw2d::entities::model::healthbar
 			>(
-				_param.colored_system()
+				_parameters.load_parameters().colored_system()
 			)
 		:
 			std::unique_ptr<
@@ -135,18 +135,22 @@ sanguis::client::draw2d::entities::model::object::object(
 	),
 	decay_time_(),
 	decay_option_(
-		_decay_option
+		_parameters.decay_option()
 	),
 	parts_()
 {
 	part_vector::size_type index(0);
 
 	sanguis::load::model::object const &model(
-		_param.collection()[_name]
+		_parameters.load_parameters().collection()[
+			_parameters.name().get()
+		]
 	);
 
 	for(
-		auto const &cur_part : model
+		auto const &cur_part
+		:
+		model
 	)
 		fcppt::container::ptr::push_back_unique_ptr(
 			parts_,
@@ -154,7 +158,7 @@ sanguis::client::draw2d::entities::model::object::object(
 				sanguis::client::draw2d::entities::model::part
 			>(
 				diff_clock_,
-				_param.sound_manager(),
+				_parameters.load_parameters().sound_manager(),
 				*cur_part.second,
 				this->at(
 					sanguis::client::draw2d::sprite::index(
@@ -176,13 +180,15 @@ sanguis::client::draw2d::entities::model::object::~object()
 sanguis::client::max_health const
 sanguis::client::draw2d::entities::model::object::max_health() const
 {
-	return max_health_;
+	return
+		max_health_;
 }
 
 sanguis::client::health const
 sanguis::client::draw2d::entities::model::object::health() const
 {
-	return health_;
+	return
+		health_;
 }
 
 void
@@ -199,7 +205,9 @@ sanguis::client::draw2d::entities::model::object::update()
 		);
 
 	for(
-		auto &cur_part : parts_
+		auto &cur_part
+		:
+		parts_
 	)
 		cur_part.update();
 }
@@ -210,7 +218,9 @@ sanguis::client::draw2d::entities::model::object::orientation(
 )
 {
 	for(
-		auto &cur_part : parts_
+		auto &cur_part
+		:
+		parts_
 	)
 		cur_part.orientation(
 			_rot
@@ -258,9 +268,13 @@ sanguis::client::draw2d::entities::model::object::on_die()
 			==
 			sanguis::client::draw2d::entities::model::decay_option::delayed
 			?
-				sanguis::duration_second(10)
+				sanguis::duration_second(
+					10
+				)
 			:
-				sanguis::duration_second(0)
+				sanguis::duration_second(
+					0
+				)
 		)
 	);
 
@@ -324,7 +338,9 @@ bool
 sanguis::client::draw2d::entities::model::object::has_health() const
 {
 	return
-		this->max_health().get() > 0;
+		this->max_health().get()
+		>
+		0;
 }
 
 void
@@ -353,7 +369,9 @@ sanguis::client::draw2d::entities::model::object::weapon(
 )
 {
 	for(
-		auto &cur_part : parts_
+		auto &cur_part
+		:
+		parts_
 	)
 		cur_part.weapon(
 			_weapon
@@ -414,7 +432,9 @@ sanguis::client::draw2d::entities::model::object::change_animation(
 )
 {
 	for(
-		auto &cur_part : parts_
+		auto &cur_part
+		:
+		parts_
 	)
 	{
 		sanguis::load::animation_type part_anim(
@@ -515,7 +535,9 @@ sanguis::client::draw2d::entities::model::object::animations_ended() const
 		return true;
 
 	for(
-		auto const &cur_part : parts_
+		auto const &cur_part
+		:
+		parts_
 	)
 		if(
 			!cur_part.ended()

@@ -15,6 +15,7 @@ enum class z_ordering
 {
 	background,
 	corpses,
+	aura,
 	model_generic,
 	player_lower,
 	bullet,

@@ -5,7 +5,8 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/client/draw2d/aoe.hpp>
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
-#include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/name.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
 #include <sanguis/load/model/collection_fwd.hpp>
@@ -30,9 +31,9 @@ class aoe_bullet
 	);
 public:
 	aoe_bullet(
-		sanguis::client::draw2d::entities::model::parameters const &,
+		sanguis::client::draw2d::entities::model::load_parameters const &,
 		sanguis::client::draw2d::insert_own_callback const &,
-		fcppt::string const &name,
+		sanguis::client::draw2d::entities::model::name const &,
 		sanguis::client::draw2d::aoe
 	);
 

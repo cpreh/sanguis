@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_PLAYER_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/speed_fwd.hpp>
-#include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/draw2d/sprite/dim_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
@@ -28,7 +28,7 @@ class player
 public:
 	explicit
 	player(
-		sanguis::client::draw2d::entities::model::parameters const &
+		sanguis::client::draw2d::entities::model::load_parameters const &
 	);
 
 	~player();

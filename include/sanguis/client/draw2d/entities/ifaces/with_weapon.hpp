@@ -1,5 +1,5 @@
-#ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_WEAPON_HPP_INCLUDED
-#define SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_WEAPON_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_IFACES_WITH_WEAPON_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_ENTITIES_IFACES_WITH_WEAPON_HPP_INCLUDED
 
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -12,6 +12,8 @@ namespace client
 namespace draw2d
 {
 namespace entities
+{
+namespace ifaces
 {
 
 class with_weapon
@@ -44,6 +46,7 @@ public:
 	) = 0;
 };
 
+}
 }
 }
 }

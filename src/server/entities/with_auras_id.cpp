@@ -1,5 +1,5 @@
+#include <sanguis/aura_type_vector.hpp>
 #include <sanguis/optional_aura_type.hpp>
-#include <sanguis/messages/types/aura_type_vector.hpp>
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/unique_ptr.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
@@ -53,10 +53,10 @@ sanguis::server::entities::with_auras_id::~with_auras_id()
 {
 }
 
-sanguis::messages::types::aura_type_vector
+sanguis::aura_type_vector
 sanguis::server::entities::with_auras_id::aura_types() const
 {
-	sanguis::messages::types::aura_type_vector ret;
+	sanguis::aura_type_vector ret;
 
 	for(
 		auto const &aura

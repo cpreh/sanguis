@@ -16,6 +16,7 @@ set(
 	include/sanguis/args/server_port.hpp
 	include/sanguis/aura_type.hpp
 	include/sanguis/aura_type_fwd.hpp
+	include/sanguis/aura_type_vector.hpp
 	include/sanguis/cheat_type.hpp
 	include/sanguis/cheat_type_fwd.hpp
 	include/sanguis/client/config/homedir.hpp
@@ -87,7 +88,15 @@ set(
 	include/sanguis/client/draw2d/entities/base_fwd.hpp
 	include/sanguis/client/draw2d/entities/bullet.hpp
 	include/sanguis/client/draw2d/entities/container.hpp
+	include/sanguis/client/draw2d/entities/enemy.hpp
 	include/sanguis/client/draw2d/entities/explosion.hpp
+	include/sanguis/client/draw2d/entities/ifaces/with_auras.hpp
+	include/sanguis/client/draw2d/entities/ifaces/with_center.hpp
+	include/sanguis/client/draw2d/entities/ifaces/with_health.hpp
+	include/sanguis/client/draw2d/entities/ifaces/with_orientation.hpp
+	include/sanguis/client/draw2d/entities/ifaces/with_speed.hpp
+	include/sanguis/client/draw2d/entities/ifaces/with_visibility.hpp
+	include/sanguis/client/draw2d/entities/ifaces/with_weapon.hpp
 	include/sanguis/client/draw2d/entities/model/clamp_orientation.hpp
 	include/sanguis/client/draw2d/entities/model/decay_option.hpp
 	include/sanguis/client/draw2d/entities/model/decay_option_fwd.hpp
@@ -95,7 +104,10 @@ set(
 	include/sanguis/client/draw2d/entities/model/decay_time_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/healthbar.hpp
 	include/sanguis/client/draw2d/entities/model/healthbar_fwd.hpp
+	include/sanguis/client/draw2d/entities/model/load_parameters.hpp
+	include/sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/loop_method.hpp
+	include/sanguis/client/draw2d/entities/model/name.hpp
 	include/sanguis/client/draw2d/entities/model/needs_healthbar.hpp
 	include/sanguis/client/draw2d/entities/model/needs_healthbar_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/object.hpp
@@ -114,12 +126,11 @@ set(
 	include/sanguis/client/draw2d/entities/player_fwd.hpp
 	include/sanguis/client/draw2d/entities/sentry.hpp
 	include/sanguis/client/draw2d/entities/unique_ptr.hpp
-	include/sanguis/client/draw2d/entities/with_center.hpp
-	include/sanguis/client/draw2d/entities/with_health.hpp
-	include/sanguis/client/draw2d/entities/with_orientation.hpp
-	include/sanguis/client/draw2d/entities/with_speed.hpp
-	include/sanguis/client/draw2d/entities/with_visibility.hpp
-	include/sanguis/client/draw2d/entities/with_weapon.hpp
+	include/sanguis/client/draw2d/entities/with_auras_decl.hpp
+	include/sanguis/client/draw2d/entities/with_auras_fwd.hpp
+	include/sanguis/client/draw2d/entities/with_auras_impl.hpp
+	include/sanguis/client/draw2d/entities/with_auras_model.hpp
+	include/sanguis/client/draw2d/entities/with_auras_model_fwd.hpp
 	include/sanguis/client/draw2d/factory/aoe_projectile.hpp
 	include/sanguis/client/draw2d/factory/enemy.hpp
 	include/sanguis/client/draw2d/factory/friend.hpp
@@ -407,6 +418,10 @@ set(
 	include/sanguis/load/animation_type.hpp
 	include/sanguis/load/animation_type_fwd.hpp
 	include/sanguis/load/aoe_projectile_name.hpp
+	include/sanguis/load/aura_name.hpp
+	include/sanguis/load/auras/context.hpp
+	include/sanguis/load/auras/context_fwd.hpp
+	include/sanguis/load/auras/lookup_name.hpp
 	include/sanguis/load/context.hpp
 	include/sanguis/load/context_fwd.hpp
 	include/sanguis/load/enemy_name.hpp
@@ -719,7 +734,6 @@ set(
 	include/sanguis/messages/stop_reloading_fwd.hpp
 	include/sanguis/messages/types/alda_type.hpp
 	include/sanguis/messages/types/alda_type_fwd.hpp
-	include/sanguis/messages/types/aura_type_vector.hpp
 	include/sanguis/messages/types/char.hpp
 	include/sanguis/messages/types/enum.hpp
 	include/sanguis/messages/types/exp.hpp
@@ -1276,10 +1290,19 @@ set(
 	src/client/draw2d/entities/base.cpp
 	src/client/draw2d/entities/bullet.cpp
 	src/client/draw2d/entities/container.cpp
+	src/client/draw2d/entities/enemy.cpp
 	src/client/draw2d/entities/explosion.cpp
+	src/client/draw2d/entities/ifaces/with_auras.cpp
+	src/client/draw2d/entities/ifaces/with_center.cpp
+	src/client/draw2d/entities/ifaces/with_health.cpp
+	src/client/draw2d/entities/ifaces/with_orientation.cpp
+	src/client/draw2d/entities/ifaces/with_speed.cpp
+	src/client/draw2d/entities/ifaces/with_visibility.cpp
+	src/client/draw2d/entities/ifaces/with_weapon.cpp
 	src/client/draw2d/entities/model/clamp_orientation.cpp
 	src/client/draw2d/entities/model/decay_time.cpp
 	src/client/draw2d/entities/model/healthbar.cpp
+	src/client/draw2d/entities/model/load_parameters.cpp
 	src/client/draw2d/entities/model/loop_method.cpp
 	src/client/draw2d/entities/model/object.cpp
 	src/client/draw2d/entities/model/orientation.cpp
@@ -1289,12 +1312,7 @@ set(
 	src/client/draw2d/entities/own_player.cpp
 	src/client/draw2d/entities/player.cpp
 	src/client/draw2d/entities/sentry.cpp
-	src/client/draw2d/entities/with_center.cpp
-	src/client/draw2d/entities/with_health.cpp
-	src/client/draw2d/entities/with_orientation.cpp
-	src/client/draw2d/entities/with_speed.cpp
-	src/client/draw2d/entities/with_visibility.cpp
-	src/client/draw2d/entities/with_weapon.cpp
+	src/client/draw2d/entities/with_auras_model.cpp
 	src/client/draw2d/factory/aoe_projectile.cpp
 	src/client/draw2d/factory/enemy.cpp
 	src/client/draw2d/factory/friend.cpp
@@ -1380,6 +1398,9 @@ set(
 	src/io_service_impl.cpp
 	src/load/animation_name.cpp
 	src/load/aoe_projectile_name.cpp
+	src/load/aura_name.cpp
+	src/load/auras/context.cpp
+	src/load/auras/lookup_name.cpp
 	src/load/context.cpp
 	src/load/enemy_name.cpp
 	src/load/first_file.cpp

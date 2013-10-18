@@ -3,30 +3,20 @@
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
+#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/name.hpp>
 #include <sanguis/client/draw2d/entities/model/needs_healthbar.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
-#include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <sanguis/client/draw2d/factory/pickup.hpp>
 #include <sanguis/load/pickup_name.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/string.hpp>
-#include <fcppt/assert/unreachable.hpp>
 
-
-namespace
-{
-
-fcppt::string const
-get_texture(
-	sanguis::pickup_type
-);
-
-}
 
 sanguis::client::draw2d::entities::unique_ptr
 sanguis::client::draw2d::factory::pickup(
-	sanguis::client::draw2d::entities::model::parameters const &_param,
-	sanguis::pickup_type const _ptype
+	sanguis::client::draw2d::entities::model::load_parameters const &_parameters,
+	sanguis::pickup_type const _pickup_type
 )
 {
 	return
@@ -34,40 +24,19 @@ sanguis::client::draw2d::factory::pickup(
 			fcppt::make_unique_ptr<
 				sanguis::client::draw2d::entities::model::object
 			>(
-				_param,
-				get_texture(
-					_ptype
-				),
-				sanguis::client::draw2d::entities::order_vector{
-					sanguis::client::draw2d::z_ordering::pickup
-				},
-				sanguis::client::draw2d::entities::model::needs_healthbar::no,
-				sanguis::client::draw2d::entities::model::decay_option::immediate
+				sanguis::client::draw2d::entities::model::parameters(
+					_parameters,
+					sanguis::client::draw2d::entities::model::name(
+						sanguis::load::pickup_name(
+							_pickup_type
+						)
+					),
+					sanguis::client::draw2d::entities::order_vector{
+						sanguis::client::draw2d::z_ordering::pickup
+					},
+					sanguis::client::draw2d::entities::model::needs_healthbar::no,
+					sanguis::client::draw2d::entities::model::decay_option::immediate
+				)
 			)
 		);
-}
-
-namespace
-{
-
-fcppt::string const
-get_texture(
-	sanguis::pickup_type const _ptype
-)
-{
-	switch(
-		_ptype
-	)
-	{
-	case sanguis::pickup_type::monster:
-	case sanguis::pickup_type::health:
-		return
-			sanguis::load::pickup_name(
-				_ptype
-			);
-	}
-
-	FCPPT_ASSERT_UNREACHABLE;
-}
-
 }

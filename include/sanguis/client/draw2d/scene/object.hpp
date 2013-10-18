@@ -28,6 +28,7 @@
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/state_decl.hpp>
 #include <sanguis/load/context_fwd.hpp>
+#include <sanguis/load/auras/context.hpp>
 #include <sanguis/load/model/collection_fwd.hpp>
 #include <sanguis/messages/base.hpp>
 #include <sge/audio/listener_fwd.hpp>
@@ -172,6 +173,9 @@ private:
 	sanguis::load::model::collection const &
 	load_collection() const;
 
+	sanguis::load::auras::context &
+	aura_resources();
+
 	sge::renderer::screen_size const
 	screen_size() const;
 
@@ -185,6 +189,8 @@ private:
 	sanguis::client::sound_manager &sound_manager_;
 
 	sanguis::load::context const &resources_;
+
+	sanguis::load::auras::context aura_resources_;
 
 	sge::renderer::device::ffp &renderer_;
 

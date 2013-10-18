@@ -3,7 +3,7 @@
 
 #include <sanguis/projectile_type_fwd.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
-#include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 
 
 namespace sanguis
@@ -17,7 +17,7 @@ namespace factory
 
 sanguis::client::draw2d::entities::unique_ptr
 projectile(
-	sanguis::client::draw2d::entities::model::parameters const &,
+	sanguis::client::draw2d::entities::model::load_parameters const &,
 	sanguis::projectile_type
 );
 

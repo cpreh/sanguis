@@ -1,12 +1,12 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_BULLET_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_BULLET_HPP_INCLUDED
 
+#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/name.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
-#include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_decl.hpp>
-#include <fcppt/string.hpp>
 
 
 namespace sanguis
@@ -27,8 +27,8 @@ class bullet
 	);
 public:
 	bullet(
-		sanguis::client::draw2d::entities::model::parameters const &,
-		fcppt::string const &name
+		sanguis::client::draw2d::entities::model::load_parameters const &,
+		sanguis::client::draw2d::entities::model::name const &
 	);
 
 	~bullet();

@@ -8,12 +8,13 @@
 #include <sanguis/client/draw2d/transform_callback.hpp>
 #include <sanguis/client/draw2d/entities/base.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
-#include <sanguis/client/draw2d/entities/model/parameters.hpp>
+#include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
 #include <sanguis/client/draw2d/message/environment.hpp>
 #include <sanguis/client/draw2d/scene/hud.hpp>
 #include <sanguis/client/draw2d/scene/message_environment.hpp>
 #include <sanguis/client/draw2d/scene/object.hpp>
 #include <sanguis/client/draw2d/scene/world/object.hpp>
+#include <sanguis/load/auras/context_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -128,11 +129,11 @@ sanguis::client::draw2d::scene::message_environment::remove_weapon(
 	);
 }
 
-sanguis::client::draw2d::entities::model::parameters const
+sanguis::client::draw2d::entities::model::load_parameters const
 sanguis::client::draw2d::scene::message_environment::model_parameters() const
 {
 	return
-		sanguis::client::draw2d::entities::model::parameters(
+		sanguis::client::draw2d::entities::model::load_parameters(
 			object_.diff_clock(),
 			object_.random_generator(),
 			object_.sound_manager(),
@@ -140,6 +141,13 @@ sanguis::client::draw2d::scene::message_environment::model_parameters() const
 			object_.normal_system(),
 			object_.load_collection()
 		);
+}
+
+sanguis::load::auras::context &
+sanguis::client::draw2d::scene::message_environment::aura_resources() const
+{
+	return
+		object_.aura_resources();
 }
 
 sanguis::client::draw2d::insert_own_callback const &

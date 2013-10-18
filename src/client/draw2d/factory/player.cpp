@@ -1,13 +1,13 @@
 #include <sanguis/client/draw2d/entities/player.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
-#include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/factory/player.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
 
 sanguis::client::draw2d::entities::unique_ptr
 sanguis::client::draw2d::factory::player(
-	sanguis::client::draw2d::entities::model::parameters const &_param
+	sanguis::client::draw2d::entities::model::load_parameters const &_parameters
 )
 {
 	return
@@ -15,7 +15,7 @@ sanguis::client::draw2d::factory::player(
 			fcppt::make_unique_ptr<
 				sanguis::client::draw2d::entities::player
 			>(
-				_param
+				_parameters
 			)
 		);
 }

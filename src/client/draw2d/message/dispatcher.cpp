@@ -16,12 +16,13 @@
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/entities/base.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
-#include <sanguis/client/draw2d/entities/with_center.hpp>
-#include <sanguis/client/draw2d/entities/with_health.hpp>
-#include <sanguis/client/draw2d/entities/with_orientation.hpp>
-#include <sanguis/client/draw2d/entities/with_speed.hpp>
-#include <sanguis/client/draw2d/entities/with_weapon.hpp>
-#include <sanguis/client/draw2d/entities/model/parameters.hpp>
+#include <sanguis/client/draw2d/entities/ifaces/with_auras.hpp>
+#include <sanguis/client/draw2d/entities/ifaces/with_center.hpp>
+#include <sanguis/client/draw2d/entities/ifaces/with_health.hpp>
+#include <sanguis/client/draw2d/entities/ifaces/with_orientation.hpp>
+#include <sanguis/client/draw2d/entities/ifaces/with_speed.hpp>
+#include <sanguis/client/draw2d/entities/ifaces/with_weapon.hpp>
+#include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
 #include <sanguis/client/draw2d/factory/aoe_projectile.hpp>
 #include <sanguis/client/draw2d/factory/enemy.hpp>
 #include <sanguis/client/draw2d/factory/friend.hpp>
@@ -38,6 +39,7 @@
 #include <sanguis/client/draw2d/translate/scalar_to_client.hpp>
 #include <sanguis/client/draw2d/translate/vector_to_client.hpp>
 #include <sanguis/messages/add_aoe_projectile.hpp>
+#include <sanguis/messages/add_aura.hpp>
 #include <sanguis/messages/add_enemy.hpp>
 #include <sanguis/messages/add_friend.hpp>
 #include <sanguis/messages/add_own_player.hpp>
@@ -64,6 +66,8 @@
 #include <sanguis/messages/start_reloading.hpp>
 #include <sanguis/messages/stop_reloading.hpp>
 #include <sanguis/messages/speed.hpp>
+#include <sanguis/messages/adapted_types/aura_type.hpp>
+#include <sanguis/messages/adapted_types/aura_type_vector.hpp>
 #include <sanguis/messages/adapted_types/is_primary_weapon.hpp>
 #include <sanguis/messages/adapted_types/level.hpp>
 #include <sanguis/messages/adapted_types/seed.hpp>
@@ -141,14 +145,38 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
+	sanguis::messages::add_aura const &_message
+)
+{
+	fcppt::dynamic_cast_<
+		sanguis::client::draw2d::entities::ifaces::with_auras &
+	>(
+		this->entity(
+			_message.get<
+				sanguis::messages::roles::entity_id
+			>()
+		)
+	).add_aura(
+		_message.get<
+			sanguis::messages::adapted_types::aura_type
+		>()
+	);
+}
+
+sanguis::client::draw2d::message::dispatcher::result_type
+sanguis::client::draw2d::message::dispatcher::operator()(
 	sanguis::messages::add_enemy const &_message
 )
 {
 	this->configure_new_object(
 		sanguis::client::draw2d::factory::enemy(
 			env_.model_parameters(),
+			env_.aura_resources(),
 			_message.get<
 				sanguis::messages::roles::enemy
+			>(),
+			_message.get<
+				sanguis::messages::adapted_types::aura_type_vector
 			>()
 		),
 		_message
@@ -276,7 +304,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 )
 {
 	fcppt::dynamic_cast_<
-		sanguis::client::draw2d::entities::with_weapon &
+		sanguis::client::draw2d::entities::ifaces::with_weapon &
 	>(
 		this->entity(
 			_message.get<
@@ -372,7 +400,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 )
 {
 	fcppt::dynamic_cast_<
-		sanguis::client::draw2d::entities::with_health &
+		sanguis::client::draw2d::entities::ifaces::with_health &
 	>(
 		this->entity(
 			_message.get<
@@ -408,7 +436,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 )
 {
 	fcppt::dynamic_cast_<
-		sanguis::client::draw2d::entities::with_health &
+		sanguis::client::draw2d::entities::ifaces::with_health &
 	>(
 		this->entity(
 			_message.get<
@@ -430,7 +458,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 )
 {
 	fcppt::dynamic_cast_<
-		sanguis::client::draw2d::entities::with_center &
+		sanguis::client::draw2d::entities::ifaces::with_center &
 	>(
 		this->entity(
 			_message.get<
@@ -482,7 +510,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 )
 {
 	fcppt::dynamic_cast_<
-		sanguis::client::draw2d::entities::with_orientation &
+		sanguis::client::draw2d::entities::ifaces::with_orientation &
 	>(
 		this->entity(
 			_message.get<
@@ -502,7 +530,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 )
 {
 	fcppt::dynamic_cast_<
-		sanguis::client::draw2d::entities::with_speed &
+		sanguis::client::draw2d::entities::ifaces::with_speed &
 	>(
 		this->entity(
 			_message.get<
@@ -526,7 +554,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 )
 {
 	fcppt::dynamic_cast_<
-		sanguis::client::draw2d::entities::with_weapon &
+		sanguis::client::draw2d::entities::ifaces::with_weapon &
 	>(
 		this->entity(
 			_message.get<
@@ -544,7 +572,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 )
 {
 	fcppt::dynamic_cast_<
-		sanguis::client::draw2d::entities::with_weapon &
+		sanguis::client::draw2d::entities::ifaces::with_weapon &
 	>(
 		this->entity(
 			_message.get<
@@ -562,7 +590,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 )
 {
 	fcppt::dynamic_cast_<
-		sanguis::client::draw2d::entities::with_weapon &
+		sanguis::client::draw2d::entities::ifaces::with_weapon &
 	>(
 		this->entity(
 			_message.get<
@@ -580,7 +608,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 )
 {
 	fcppt::dynamic_cast_<
-		entities::with_weapon &
+		sanguis::client::draw2d::entities::ifaces::with_weapon &
 	>(
 		this->entity(
 			_message.get<

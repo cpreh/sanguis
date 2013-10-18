@@ -5,41 +5,43 @@
 #include <sanguis/client/draw2d/entities/explosion.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
+#include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
+#include <sanguis/client/draw2d/entities/model/name.hpp>
 #include <sanguis/client/draw2d/entities/model/needs_healthbar.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/string.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
 
 
 sanguis::client::draw2d::entities::aoe_bullet::aoe_bullet(
-	sanguis::client::draw2d::entities::model::parameters const &_param,
+	sanguis::client::draw2d::entities::model::load_parameters const &_parameters,
 	sanguis::client::draw2d::insert_own_callback const &_insert,
-	fcppt::string const &_name,
+	sanguis::client::draw2d::entities::model::name const &_name,
 	sanguis::client::draw2d::aoe const _aoe
 )
 :
 	sanguis::client::draw2d::entities::model::object(
-		_param,
-		_name,
-		sanguis::client::draw2d::entities::order_vector{
-			sanguis::client::draw2d::z_ordering::bullet
-		},
-		sanguis::client::draw2d::entities::model::needs_healthbar::no,
-		sanguis::client::draw2d::entities::model::decay_option::immediate
+		sanguis::client::draw2d::entities::model::parameters(
+			_parameters,
+			_name,
+			sanguis::client::draw2d::entities::order_vector{
+				sanguis::client::draw2d::z_ordering::bullet
+			},
+			sanguis::client::draw2d::entities::model::needs_healthbar::no,
+			sanguis::client::draw2d::entities::model::decay_option::immediate
+		)
 	),
 	diff_clock_(
-		_param.diff_clock()
+		_parameters.diff_clock()
 	),
 	random_generator_(
-		_param.random_generator()
+		_parameters.random_generator()
 	),
 	model_collection_(
-		_param.collection()
+		_parameters.collection()
 	),
 	normal_system_(
-		_param.normal_system()
+		_parameters.normal_system()
 	),
 	insert_(
 		_insert

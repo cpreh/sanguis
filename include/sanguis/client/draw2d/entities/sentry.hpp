@@ -1,8 +1,8 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_SENTRY_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_SENTRY_HPP_INCLUDED
 
+#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
-#include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -26,7 +26,7 @@ class sentry
 public:
 	explicit
 	sentry(
-		sanguis::client::draw2d::entities::model::parameters const &
+		sanguis::client::draw2d::entities::model::load_parameters const &
 	);
 
 	~sentry();

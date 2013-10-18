@@ -12,12 +12,13 @@
 #include <sanguis/client/draw2d/transform_callback.hpp>
 #include <sanguis/client/draw2d/entities/base_fwd.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
-#include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/message/environment.hpp>
 #include <sanguis/client/draw2d/scene/hud_fwd.hpp>
 #include <sanguis/client/draw2d/scene/message_environment_fwd.hpp>
 #include <sanguis/client/draw2d/scene/object_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/object_fwd.hpp>
+#include <sanguis/load/auras/context_fwd.hpp>
 
 
 namespace sanguis
@@ -94,8 +95,12 @@ private:
 	)
 	override;
 
-	sanguis::client::draw2d::entities::model::parameters const
+	sanguis::client::draw2d::entities::model::load_parameters const
 	model_parameters() const
+	override;
+
+	sanguis::load::auras::context &
+	aura_resources() const
 	override;
 
 	sanguis::client::draw2d::insert_own_callback const &

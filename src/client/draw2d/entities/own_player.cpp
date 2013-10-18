@@ -6,18 +6,18 @@
 #include <sanguis/client/draw2d/transform_callback.hpp>
 #include <sanguis/client/draw2d/entities/own_player.hpp>
 #include <sanguis/client/draw2d/entities/player.hpp>
-#include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 
 
 sanguis::client::draw2d::entities::own_player::own_player(
-	sanguis::client::draw2d::entities::model::parameters const &_param,
+	sanguis::client::draw2d::entities::model::load_parameters const &_parameters,
 	sanguis::client::draw2d::transform_callback const &_transform,
 	sanguis::client::draw2d::collide_callback const &_collide
 )
 :
 	sanguis::client::draw2d::entities::player(
-		_param
+		_parameters
 	),
 	transform_(
 		_transform

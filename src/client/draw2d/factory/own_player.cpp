@@ -2,14 +2,14 @@
 #include <sanguis/client/draw2d/transform_callback.hpp>
 #include <sanguis/client/draw2d/entities/own_player.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
-#include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/factory/own_player.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
 
 sanguis::client::draw2d::entities::unique_ptr
 sanguis::client::draw2d::factory::own_player(
-	sanguis::client::draw2d::entities::model::parameters const &_param,
+	sanguis::client::draw2d::entities::model::load_parameters const &_parameters,
 	sanguis::client::draw2d::transform_callback const &_transform,
 	sanguis::client::draw2d::collide_callback const &_collide
 )
@@ -19,7 +19,7 @@ sanguis::client::draw2d::factory::own_player(
 			fcppt::make_unique_ptr<
 				sanguis::client::draw2d::entities::own_player
 			>(
-				_param,
+				_parameters,
 				_transform,
 				_collide
 			)

@@ -7,13 +7,11 @@
 #include <sanguis/client/max_health.hpp>
 #include <sanguis/client/draw2d/speed_fwd.hpp>
 #include <sanguis/client/draw2d/entities/container.hpp>
-#include <sanguis/client/draw2d/entities/order_vector.hpp>
-#include <sanguis/client/draw2d/entities/with_health.hpp>
-#include <sanguis/client/draw2d/entities/with_weapon.hpp>
+#include <sanguis/client/draw2d/entities/ifaces/with_health.hpp>
+#include <sanguis/client/draw2d/entities/ifaces/with_weapon.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
-#include <sanguis/client/draw2d/entities/model/healthbar_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_time_fwd.hpp>
-#include <sanguis/client/draw2d/entities/model/needs_healthbar_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/healthbar_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/object_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/part_fwd.hpp>
@@ -21,7 +19,6 @@
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/load/animation_type_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/string.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
@@ -42,19 +39,20 @@ namespace model
 class object
 :
 	public sanguis::client::draw2d::entities::container,
-	public sanguis::client::draw2d::entities::with_health,
-	public sanguis::client::draw2d::entities::with_weapon
+	public sanguis::client::draw2d::entities::ifaces::with_health,
+	public sanguis::client::draw2d::entities::ifaces::with_weapon
 {
 	FCPPT_NONCOPYABLE(
 		object
 	);
 public:
+	typedef
+	sanguis::client::draw2d::entities::model::parameters
+	parameters_type;
+
+	explicit
 	object(
-		sanguis::client::draw2d::entities::model::parameters const &,
-		fcppt::string const &name,
-		sanguis::client::draw2d::entities::order_vector const &,
-		sanguis::client::draw2d::entities::model::needs_healthbar,
-		sanguis::client::draw2d::entities::model::decay_option
+		sanguis::client::draw2d::entities::model::parameters const &
 	);
 
 	~object();
@@ -80,7 +78,7 @@ protected:
 	)
 	override;
 
-	using container::orientation;
+	using sanguis::client::draw2d::entities::container::orientation;
 
 	void
 	orientation(
@@ -110,7 +108,7 @@ protected:
 	)
 	override;
 
-	using container::speed;
+	using sanguis::client::draw2d::entities::container::speed;
 
 	sanguis::client::draw2d::entities::model::part &
 	part(

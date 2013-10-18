@@ -7,9 +7,9 @@
 #include <sanguis/client/draw2d/entities/base.hpp>
 #include <sanguis/client/draw2d/entities/container.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
-#include <sanguis/client/draw2d/entities/with_center.hpp>
-#include <sanguis/client/draw2d/entities/with_orientation.hpp>
-#include <sanguis/client/draw2d/entities/with_speed.hpp>
+#include <sanguis/client/draw2d/entities/ifaces/with_center.hpp>
+#include <sanguis/client/draw2d/entities/ifaces/with_orientation.hpp>
+#include <sanguis/client/draw2d/entities/ifaces/with_speed.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/index.hpp>
@@ -36,8 +36,9 @@ sanguis::client::draw2d::entities::container::container(
 )
 :
 	sanguis::client::draw2d::entities::base(),
-	sanguis::client::draw2d::entities::with_orientation(),
-	sanguis::client::draw2d::entities::with_speed(),
+	sanguis::client::draw2d::entities::ifaces::with_center(),
+	sanguis::client::draw2d::entities::ifaces::with_orientation(),
+	sanguis::client::draw2d::entities::ifaces::with_speed(),
 	speed_(
 		sanguis::client::draw2d::speed::value_type::null()
 	),
@@ -59,7 +60,9 @@ sanguis::client::draw2d::entities::container::container(
 	);
 
 	for(
-		auto const &order : _orders
+		auto const &order
+		:
+		_orders
 	)
 		sprites_.push_back(
 			object(
@@ -148,7 +151,9 @@ sanguis::client::draw2d::entities::container::orientation(
 )
 {
 	for(
-		auto &sprite : sprites_
+		auto &sprite
+		:
+		sprites_
 	)
 		sprite.rotation(
 			_orientation
@@ -167,13 +172,15 @@ sanguis::client::draw2d::entities::container::speed(
 	sanguis::client::draw2d::speed const &_speed
 )
 {
-	speed_ = _speed;
+	speed_ =
+		_speed;
 }
 
 sanguis::client::draw2d::speed const
 sanguis::client::draw2d::entities::container::speed() const
 {
-	return speed_;
+	return
+		speed_;
 }
 
 sanguis::duration const
@@ -234,25 +241,29 @@ sanguis::client::draw2d::entities::container::master() const
 sanguis::client::draw2d::entities::container::iterator
 sanguis::client::draw2d::entities::container::begin()
 {
-	return sprites_.begin();
+	return
+		sprites_.begin();
 }
 
 sanguis::client::draw2d::entities::container::iterator
 sanguis::client::draw2d::entities::container::end()
 {
-	return sprites_.end();
+	return
+		sprites_.end();
 }
 
 sanguis::client::draw2d::entities::container::const_iterator
 sanguis::client::draw2d::entities::container::begin() const
 {
-	return sprites_.begin();
+	return
+		sprites_.begin();
 }
 
 sanguis::client::draw2d::entities::container::const_iterator
 sanguis::client::draw2d::entities::container::end() const
 {
-	return sprites_.end();
+	return
+		sprites_.end();
 }
 
 void
@@ -261,7 +272,9 @@ sanguis::client::draw2d::entities::container::update_center(
 )
 {
 	for(
-		auto &sprite : sprites_
+		auto &sprite
+		:
+		sprites_
 	)
 		sge::sprite::center(
 			sprite,

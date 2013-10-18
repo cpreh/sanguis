@@ -7,6 +7,7 @@
 #include <sanguis/client/draw2d/entities/base_fwd.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/messages/add_aoe_projectile_fwd.hpp>
+#include <sanguis/messages/add_aura_fwd.hpp>
 #include <sanguis/messages/add_enemy_fwd.hpp>
 #include <sanguis/messages/add_friend_fwd.hpp>
 #include <sanguis/messages/add_own_player_fwd.hpp>
@@ -62,6 +63,11 @@ public:
 	result_type
 	operator()(
 		sanguis::messages::add_aoe_projectile const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::add_aura const &
 	);
 
 	result_type

@@ -5,7 +5,7 @@
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/transform_callback.hpp>
 #include <sanguis/client/draw2d/entities/player.hpp>
-#include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -27,7 +27,7 @@ class own_player
 	);
 public:
 	own_player(
-		sanguis::client::draw2d::entities::model::parameters const &,
+		sanguis::client::draw2d::entities::model::load_parameters const &,
 		sanguis::client::draw2d::transform_callback const &,
 		sanguis::client::draw2d::collide_callback const &
 	);

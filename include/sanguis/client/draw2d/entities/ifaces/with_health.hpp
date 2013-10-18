@@ -1,5 +1,5 @@
-#ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_HEALTH_HPP_INCLUDED
-#define SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_HEALTH_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_IFACES_WITH_HEALTH_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_ENTITIES_IFACES_WITH_HEALTH_HPP_INCLUDED
 
 #include <sanguis/client/health.hpp>
 #include <sanguis/client/max_health.hpp>
@@ -13,6 +13,8 @@ namespace client
 namespace draw2d
 {
 namespace entities
+{
+namespace ifaces
 {
 
 class with_health
@@ -47,6 +49,7 @@ public:
 	max_health() const = 0;
 };
 
+}
 }
 }
 }

@@ -1,14 +1,12 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_PARAMETERS_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_PARAMETERS_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/random_generator_fwd.hpp>
-#include <sanguis/client/sound_manager_fwd.hpp>
+#include <sanguis/client/draw2d/entities/order_vector.hpp>
+#include <sanguis/client/draw2d/entities/model/decay_option.hpp>
+#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/name.hpp>
+#include <sanguis/client/draw2d/entities/model/needs_healthbar.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
-#include <sanguis/client/draw2d/sprite/colored/system_fwd.hpp>
-#include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
-#include <sanguis/load/model/collection_fwd.hpp>
-#include <fcppt/nonassignable.hpp>
 
 
 namespace sanguis
@@ -29,43 +27,37 @@ class parameters
 	);
 public:
 	parameters(
-		sanguis::diff_clock const &,
-		sanguis::random_generator &,
-		sanguis::client::sound_manager &,
-		sanguis::client::draw2d::sprite::colored::system &,
-		sanguis::client::draw2d::sprite::normal::system &,
-		sanguis::load::model::collection const &
+		sanguis::client::draw2d::entities::model::load_parameters const &,
+		sanguis::client::draw2d::entities::model::name const &,
+		sanguis::client::draw2d::entities::order_vector const &,
+		sanguis::client::draw2d::entities::model::needs_healthbar,
+		sanguis::client::draw2d::entities::model::decay_option
 	);
 
-	sanguis::diff_clock const &
-	diff_clock() const;
+	sanguis::client::draw2d::entities::model::load_parameters const &
+	load_parameters() const;
 
-	sanguis::client::sound_manager &
-	sound_manager() const;
+	sanguis::client::draw2d::entities::model::name const &
+	name() const;
 
-	sanguis::random_generator &
-	random_generator() const;
+	sanguis::client::draw2d::entities::order_vector const &
+	orders() const;
 
-	sanguis::client::draw2d::sprite::colored::system &
-	colored_system() const;
+	sanguis::client::draw2d::entities::model::needs_healthbar
+	needs_healthbar() const;
 
-	sanguis::client::draw2d::sprite::normal::system &
-	normal_system() const;
-
-	sanguis::load::model::collection const &
-	collection() const;
+	sanguis::client::draw2d::entities::model::decay_option
+	decay_option() const;
 private:
-	sanguis::diff_clock const &diff_clock_;
+	sanguis::client::draw2d::entities::model::load_parameters const &load_parameters_;
 
-	sanguis::random_generator &random_generator_;
+	sanguis::client::draw2d::entities::model::name const &name_;
 
-	sanguis::client::sound_manager &sound_manager_;
+	sanguis::client::draw2d::entities::order_vector const &orders_;
 
-	sanguis::client::draw2d::sprite::colored::system &colored_system_;
+	sanguis::client::draw2d::entities::model::needs_healthbar const needs_healthbar_;
 
-	sanguis::client::draw2d::sprite::normal::system &normal_system_;
-
-	sanguis::load::model::collection const &collection_;
+	sanguis::client::draw2d::entities::model::decay_option const decay_option_;
 };
 
 }

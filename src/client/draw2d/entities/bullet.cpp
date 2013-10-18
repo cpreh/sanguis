@@ -5,8 +5,10 @@
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/bullet.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
+#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/name.hpp>
 #include <sanguis/client/draw2d/entities/model/needs_healthbar.hpp>
-#include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/index.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/client/draw2d/sprite/unit.hpp>
@@ -14,7 +16,6 @@
 #include <sge/sprite/center.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/optional_impl.hpp>
-#include <fcppt/string.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -32,19 +33,21 @@ sanguis::client::draw2d::sprite::index const
 }
 
 sanguis::client::draw2d::entities::bullet::bullet(
-	sanguis::client::draw2d::entities::model::parameters const &_param,
-	fcppt::string const &_name
+	sanguis::client::draw2d::entities::model::load_parameters const &_parameters,
+	sanguis::client::draw2d::entities::model::name const &_name
 )
 :
 	sanguis::client::draw2d::entities::model::object(
-		_param,
-		_name,
-		sanguis::client::draw2d::entities::order_vector{
-			sanguis::client::draw2d::z_ordering::bullet,
-			sanguis::client::draw2d::z_ordering::bullet
-		},
-		sanguis::client::draw2d::entities::model::needs_healthbar::no,
-		sanguis::client::draw2d::entities::model::decay_option::immediate
+		sanguis::client::draw2d::entities::model::parameters(
+			_parameters,
+			_name,
+			sanguis::client::draw2d::entities::order_vector{
+				sanguis::client::draw2d::z_ordering::bullet,
+				sanguis::client::draw2d::z_ordering::bullet
+			},
+			sanguis::client::draw2d::entities::model::needs_healthbar::no,
+			sanguis::client::draw2d::entities::model::decay_option::immediate
+		)
 	),
 	origin_()
 {

@@ -1,5 +1,5 @@
-#ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_CENTER_HPP_INCLUDED
-#define SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_CENTER_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_IFACES_WITH_CENTER_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_ENTITIES_IFACES_WITH_CENTER_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -12,6 +12,8 @@ namespace client
 namespace draw2d
 {
 namespace entities
+{
+namespace ifaces
 {
 
 class with_center
@@ -36,6 +38,7 @@ public:
 	center() const = 0;
 };
 
+}
 }
 }
 }

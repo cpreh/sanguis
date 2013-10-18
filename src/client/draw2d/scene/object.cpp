@@ -31,6 +31,7 @@
 #include <sanguis/load/context.hpp>
 #include <sanguis/load/resource/context.hpp>
 #include <sanguis/messages/add_aoe_projectile.hpp>
+#include <sanguis/messages/add_aura.hpp>
 #include <sanguis/messages/add_enemy.hpp>
 #include <sanguis/messages/add_friend.hpp>
 #include <sanguis/messages/add_own_player.hpp>
@@ -122,6 +123,9 @@ sanguis::client::draw2d::scene::object::object(
 	),
 	resources_(
 		_resources
+	),
+	aura_resources_(
+		resources_.resources().textures()
 	),
 	renderer_(
 		_renderer
@@ -255,8 +259,9 @@ sanguis::client::draw2d::scene::object::process_message(
 )
 {
 	static sanguis::messages::call::object<
-		boost::mpl::vector25<
+		boost::mpl::vector26<
 			sanguis::messages::add_aoe_projectile,
+			sanguis::messages::add_aura,
 			sanguis::messages::add_enemy,
 			sanguis::messages::add_friend,
 			sanguis::messages::add_own_player,
@@ -739,6 +744,12 @@ sanguis::load::model::collection const &
 sanguis::client::draw2d::scene::object::load_collection() const
 {
 	return resources_.models()();
+}
+
+sanguis::load::auras::context &
+sanguis::client::draw2d::scene::object::aura_resources()
+{
+	return aura_resources_;
 }
 
 sge::renderer::screen_size const

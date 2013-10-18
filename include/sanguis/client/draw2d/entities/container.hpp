@@ -8,9 +8,9 @@
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/entities/base.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
-#include <sanguis/client/draw2d/entities/with_center.hpp>
-#include <sanguis/client/draw2d/entities/with_orientation.hpp>
-#include <sanguis/client/draw2d/entities/with_speed.hpp>
+#include <sanguis/client/draw2d/entities/ifaces/with_center.hpp>
+#include <sanguis/client/draw2d/entities/ifaces/with_orientation.hpp>
+#include <sanguis/client/draw2d/entities/ifaces/with_speed.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
@@ -35,9 +35,9 @@ namespace entities
 class container
 :
 	public sanguis::client::draw2d::entities::base,
-	public sanguis::client::draw2d::entities::with_center,
-	public sanguis::client::draw2d::entities::with_orientation,
-	public sanguis::client::draw2d::entities::with_speed
+	public sanguis::client::draw2d::entities::ifaces::with_center,
+	public sanguis::client::draw2d::entities::ifaces::with_orientation,
+	public sanguis::client::draw2d::entities::ifaces::with_speed
 {
 	FCPPT_NONCOPYABLE(
 		container

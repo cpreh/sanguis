@@ -1,5 +1,5 @@
-#ifndef SANGUIS_MESSAGES_TYPES_AURA_TYPE_VECTOR_HPP_INCLUDED
-#define SANGUIS_MESSAGES_TYPES_AURA_TYPE_VECTOR_HPP_INCLUDED
+#ifndef SANGUIS_AURA_TYPE_VECTOR_HPP_INCLUDED
+#define SANGUIS_AURA_TYPE_VECTOR_HPP_INCLUDED
 
 #include <sanguis/aura_type.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -9,10 +9,6 @@
 
 namespace sanguis
 {
-namespace messages
-{
-namespace types
-{
 
 typedef
 std::vector<
@@ -20,8 +16,6 @@ std::vector<
 >
 aura_type_vector;
 
-}
-}
 }
 
 #endif

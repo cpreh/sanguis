@@ -1,7 +1,8 @@
 #include <sanguis/projectile_type.hpp>
 #include <sanguis/client/draw2d/entities/bullet.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
-#include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/name.hpp>
 #include <sanguis/client/draw2d/factory/projectile.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
@@ -10,12 +11,12 @@
 
 sanguis::client::draw2d::entities::unique_ptr
 sanguis::client::draw2d::factory::projectile(
-	sanguis::client::draw2d::entities::model::parameters const &_param,
-	sanguis::projectile_type const _ptype
+	sanguis::client::draw2d::entities::model::load_parameters const &_parameters,
+	sanguis::projectile_type const _projectile_type
 )
 {
 	switch(
-		_ptype
+		_projectile_type
 	)
 	{
 	case sanguis::projectile_type::aoe:
@@ -26,8 +27,10 @@ sanguis::client::draw2d::factory::projectile(
 				fcppt::make_unique_ptr<
 					sanguis::client::draw2d::entities::bullet
 				>(
-					_param,
-					FCPPT_TEXT("bullet")
+					_parameters,
+					sanguis::client::draw2d::entities::model::name(
+						FCPPT_TEXT("bullet")
+					)
 				)
 			);
 	}
