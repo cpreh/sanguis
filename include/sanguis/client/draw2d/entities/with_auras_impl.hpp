@@ -119,6 +119,20 @@ sanguis::client::draw2d::entities::with_auras<
 template<
 	typename Base
 >
+
+void
+sanguis::client::draw2d::entities::with_auras<
+	Base
+>::on_die()
+{
+	Base::on_die();
+
+	sprites_.clear();
+}
+
+template<
+	typename Base
+>
 void
 sanguis::client::draw2d::entities::with_auras<
 	Base

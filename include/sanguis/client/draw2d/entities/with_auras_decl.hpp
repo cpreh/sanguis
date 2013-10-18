@@ -58,6 +58,10 @@ private:
 	override;
 
 	void
+	on_die()
+	override;
+
+	void
 	add_aura(
 		sanguis::aura_type
 	)
