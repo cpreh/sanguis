@@ -4,6 +4,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
+#include <sge/audio/sound/base_scoped_ptr.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object_fwd.hpp>
@@ -109,6 +110,8 @@ private:
 	scoped_texture_animation animation_;
 
 	bool animation_ended_;
+
+	sge::audio::sound::base_scoped_ptr sound_;
 };
 
 }

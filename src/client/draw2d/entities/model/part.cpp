@@ -9,6 +9,7 @@
 #include <sanguis/client/draw2d/entities/model/orientation.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
+#include <sanguis/client/draw2d/sprite/animation/loop_method.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sanguis/client/draw2d/sprite/normal/texture_animation.hpp>
 #include <sanguis/load/animation_type.hpp>
@@ -22,6 +23,7 @@
 #include <sge/audio/buffer.hpp>
 #include <sge/audio/sound/base.hpp>
 #include <sge/audio/sound/nonpositional_parameters.hpp>
+#include <sge/audio/sound/repeat.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -70,7 +72,8 @@ sanguis::client::draw2d::entities::model::part::part(
 	animation_(),
 	animation_ended_(
 		false
-	)
+	),
+	sound_()
 {
 	ref_.size(
 		sprite::dim::null()
@@ -135,7 +138,15 @@ sanguis::client::draw2d::entities::model::part::update()
 	if(
 		animation_
 	)
-		animation_ended_ = animation_->process() || animation_ended_;
+		animation_ended_ =
+			animation_->process()
+			||
+			animation_ended_;
+
+	if(
+		sound_
+	)
+		sound_->update();
 
 	if(
 		!desired_orientation_
@@ -231,14 +242,18 @@ sanguis::client::draw2d::entities::model::part::load_animation(
 		!series.empty()
 	);
 
+	sanguis::client::draw2d::sprite::animation::loop_method const loop_method(
+		sanguis::client::draw2d::entities::model::loop_method(
+			_atype
+		)
+	);
+
 	animation_.take(
 		fcppt::make_unique_ptr<
 			sanguis::client::draw2d::sprite::normal::texture_animation
 		>(
 			series,
-			sanguis::client::draw2d::entities::model::loop_method(
-				_atype
-			),
+			loop_method,
 			ref_,
 			diff_clock_
 		)
@@ -252,16 +267,38 @@ sanguis::client::draw2d::entities::model::part::load_animation(
 		)
 	);
 
+	sound_.reset();
+
 	if(
-		animation.sound()
+		!animation.sound()
 	)
-		// TODO: Add sounds that are playing during the animation as well.
-		// These will be owned by model::part directly.
+		return;
+
+	switch(
+		loop_method
+	)
+	{
+	case sanguis::client::draw2d::sprite::animation::loop_method::stop_at_end:
 		sound_manager_.add(
 			animation.sound()->buffer()->create_nonpositional(
 				sge::audio::sound::nonpositional_parameters()
 			)
 		);
+
+		break;
+	case sanguis::client::draw2d::sprite::animation::loop_method::repeat:
+		sound_.take(
+			animation.sound()->buffer()->create_nonpositional(
+				sge::audio::sound::nonpositional_parameters()
+			)
+		);
+
+		sound_->play(
+			sge::audio::sound::repeat::loop
+		);
+
+		break;
+	}
 }
 
 void
