@@ -259,7 +259,7 @@ sanguis::creator::aux_::generators::graveyard(
 	spawners =
 		::place_spawners(
 			grid,
-			5u,
+			10u,
 			_parameters.randgen()
 		);
 
