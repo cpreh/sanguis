@@ -59,18 +59,18 @@ sanguis::server::ai::simple::out_of_range(
 	sanguis::server::entities::with_body &_entity
 )
 {
-	return
+	sanguis::server::ai::update_result const result(
 		target_
 		&&
 		// TODO: Create a helper function for this!
 		static_cast<
-			sanguis::server::entities::base *
+			sanguis::server::entities::base const *
 		>(
 			&*target_
 		)
 		==
 		static_cast<
-			sanguis::server::entities::base *
+			sanguis::server::entities::base const *
 		>(
 			&_entity
 		)
@@ -78,7 +78,17 @@ sanguis::server::ai::simple::out_of_range(
 			sanguis::server::ai::update_result::lost_target
 		:
 			sanguis::server::ai::update_result::keep_target
-		;
+	);
+
+	if(
+		result
+		==
+		sanguis::server::ai::update_result::lost_target
+	)
+		target_.unlink();
+
+	return
+		result;
 }
 
 sanguis::server::ai::update_result
