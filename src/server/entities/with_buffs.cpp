@@ -1,3 +1,4 @@
+#include <sanguis/buff_type.hpp>
 #include <sanguis/buff_type_vector.hpp>
 #include <sanguis/server/buffs/buff.hpp>
 #include <sanguis/server/buffs/unique_ptr.hpp>
@@ -90,6 +91,10 @@ sanguis::server::entities::with_buffs::remove_buff(
 	sanguis::server::buffs::buff &_buff
 )
 {
+	sanguis::buff_type const buff_type(
+		_buff.type()
+	);
+
 	std::type_index const index(
 		typeid(
 			_buff
@@ -148,13 +153,12 @@ sanguis::server::entities::with_buffs::remove_buff(
 	{
 		this->environment()->remove_buff(
 			this->id(),
-			_buff.type()
+			buff_type
 		);
 
 		buffs_.erase(
 			it
 		);
-
 	}
 	else
 		(*set.begin())->add();
