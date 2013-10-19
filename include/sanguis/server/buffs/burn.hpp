@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_BUFFS_BURN_HPP_INCLUDED
 #define SANGUIS_SERVER_BUFFS_BURN_HPP_INCLUDED
 
+#include <sanguis/buff_type_fwd.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/server/buffs/buff.hpp>
@@ -36,6 +37,10 @@ public:
 
 	~burn();
 private:
+	sanguis::buff_type
+	type() const
+	override;
+
 	void
 	update()
 	override;

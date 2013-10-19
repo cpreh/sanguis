@@ -1,4 +1,5 @@
 #include <sanguis/aura_type.hpp>
+#include <sanguis/buff_type.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
@@ -16,6 +17,7 @@
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/top_result.hpp>
 #include <sanguis/messages/add_aura.hpp>
+#include <sanguis/messages/add_buff.hpp>
 #include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/messages/change_weapon.hpp>
 #include <sanguis/messages/change_world.hpp>
@@ -28,6 +30,7 @@
 #include <sanguis/messages/max_health.hpp>
 #include <sanguis/messages/move.hpp>
 #include <sanguis/messages/remove.hpp>
+#include <sanguis/messages/remove_buff.hpp>
 #include <sanguis/messages/remove_weapon.hpp>
 #include <sanguis/messages/rotate.hpp>
 #include <sanguis/messages/speed.hpp>
@@ -426,6 +429,40 @@ sanguis::server::world::object::add_aura(
 			sanguis::messages::add_aura(
 				_id,
 				_aura_type
+			)
+		)
+	);
+}
+
+void
+sanguis::server::world::object::add_buff(
+	sanguis::entity_id const _id,
+	sanguis::buff_type const _buff_type
+)
+{
+	this->send_entity_specific(
+		_id,
+		*sanguis::messages::create(
+			sanguis::messages::add_buff(
+				_id,
+				_buff_type
+			)
+		)
+	);
+}
+
+void
+sanguis::server::world::object::remove_buff(
+	sanguis::entity_id const _id,
+	sanguis::buff_type const _buff_type
+)
+{
+	this->send_entity_specific(
+		_id,
+		*sanguis::messages::create(
+			sanguis::messages::remove_buff(
+				_id,
+				_buff_type
 			)
 		)
 	);

@@ -1,11 +1,13 @@
 #ifndef SANGUIS_SERVER_ENTITIES_WITH_BUFFS_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_WITH_BUFFS_HPP_INCLUDED
 
+#include <sanguis/buff_type_vector.hpp>
 #include <sanguis/server/buffs/buff_fwd.hpp>
 #include <sanguis/server/buffs/comparator.hpp>
 #include <sanguis/server/buffs/unique_ptr.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_buffs_fwd.hpp>
+#include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_map>
@@ -23,7 +25,8 @@ namespace entities
 
 class with_buffs
 :
-	public virtual sanguis::server::entities::base
+	public virtual sanguis::server::entities::base,
+	public virtual sanguis::server::entities::ifaces::with_id
 {
 	FCPPT_NONCOPYABLE(
 		with_buffs
@@ -46,6 +49,9 @@ protected:
 	void
 	update()
 	override;
+
+	sanguis::buff_type_vector
+	buff_types() const;
 private:
 	typedef
 	std::multiset<

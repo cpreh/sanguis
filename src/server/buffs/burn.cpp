@@ -1,3 +1,4 @@
+#include <sanguis/buff_type.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/server/buffs/buff.hpp>
@@ -37,6 +38,13 @@ sanguis::server::buffs::burn::burn(
 
 sanguis::server::buffs::burn::~burn()
 {
+}
+
+sanguis::buff_type
+sanguis::server::buffs::burn::type() const
+{
+	return
+		sanguis::buff_type::burn;
 }
 
 void

@@ -172,6 +172,7 @@ sanguis::server::entities::enemies::enemy::add_message(
 				this->max_health().get(),
 				this->primary_weapon_type(),
 				this->aura_types(),
+				this->buff_types(),
 				this->etype()
 			)
 		);

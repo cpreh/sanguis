@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_BUFFS_SLOW_HPP_INCLUDED
 #define SANGUIS_SERVER_BUFFS_SLOW_HPP_INCLUDED
 
+#include <sanguis/buff_type_fwd.hpp>
 #include <sanguis/server/buffs/buff.hpp>
 #include <sanguis/server/buffs/slow_factor.hpp>
 #include <sanguis/server/entities/with_velocity_fwd.hpp>
@@ -29,6 +30,10 @@ public:
 
 	~slow();
 private:
+	sanguis::buff_type
+	type() const
+	override;
+
 	void
 	apply(
 		sanguis::server::buffs::buff::added

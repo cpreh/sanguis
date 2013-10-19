@@ -1,7 +1,10 @@
+#include <sanguis/buff_type_vector.hpp>
 #include <sanguis/server/buffs/buff.hpp>
 #include <sanguis/server/buffs/unique_ptr.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
+#include <sanguis/server/entities/ifaces/with_id.hpp>
+#include <sanguis/server/environment/object.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
@@ -48,6 +51,11 @@ sanguis::server::entities::with_buffs::add_buff(
 		);
 
 		_buff->add();
+
+		this->environment()->add_buff(
+			this->id(),
+			_buff->type()
+		);
 
 		result.first->second.insert(
 			std::move(
@@ -137,10 +145,17 @@ sanguis::server::entities::with_buffs::remove_buff(
 	if(
 		set.empty()
 	)
+	{
+		this->environment()->remove_buff(
+			this->id(),
+			_buff.type()
+		);
 
 		buffs_.erase(
 			it
 		);
+
+	}
 	else
 		(*set.begin())->add();
 }
@@ -148,12 +163,35 @@ sanguis::server::entities::with_buffs::remove_buff(
 sanguis::server::entities::with_buffs::with_buffs()
 :
 	sanguis::server::entities::base(),
+	sanguis::server::entities::ifaces::with_id(),
 	buffs_()
 {
 }
 
 sanguis::server::entities::with_buffs::~with_buffs()
 {
+}
+
+sanguis::buff_type_vector
+sanguis::server::entities::with_buffs::buff_types() const
+{
+	sanguis::buff_type_vector ret;
+
+	ret.reserve(
+		buffs_.size()
+	);
+
+	for(
+		auto const &buff
+		:
+		buffs_
+	)
+		ret.push_back(
+			(*buff.second.begin())->type()
+		);
+
+	return
+		ret;
 }
 
 void

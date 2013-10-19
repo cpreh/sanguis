@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_WORLD_OBJECT_HPP_INCLUDED
 
 #include <sanguis/aura_type_fwd.hpp>
+#include <sanguis/buff_type_fwd.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/entity_id.hpp>
@@ -107,6 +108,20 @@ private:
 	add_aura(
 		sanguis::entity_id,
 		sanguis::aura_type
+	)
+	override;
+
+	void
+	add_buff(
+		sanguis::entity_id,
+		sanguis::buff_type
+	)
+	override;
+
+	void
+	remove_buff(
+		sanguis::entity_id,
+		sanguis::buff_type
 	)
 	override;
 

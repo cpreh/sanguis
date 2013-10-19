@@ -1,3 +1,4 @@
+#include <sanguis/buff_type.hpp>
 #include <sanguis/server/buffs/buff.hpp>
 #include <sanguis/server/buffs/slow.hpp>
 #include <sanguis/server/buffs/slow_factor.hpp>
@@ -23,6 +24,13 @@ sanguis::server::buffs::slow::slow(
 
 sanguis::server::buffs::slow::~slow()
 {
+}
+
+sanguis::buff_type
+sanguis::server::buffs::slow::type() const
+{
+	return
+		sanguis::buff_type::slow;
 }
 
 void
