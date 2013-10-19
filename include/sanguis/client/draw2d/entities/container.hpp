@@ -14,6 +14,7 @@
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
+#include <sanguis/client/draw2d/sprite/normal/color_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object_decl.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/index_fwd.hpp>
@@ -61,6 +62,11 @@ public:
 	sanguis::client::draw2d::sprite::center const
 	center() const
 	override;
+
+	void
+	color(
+		sanguis::client::draw2d::sprite::normal::color const &
+	);
 protected:
 	typedef
 	sprite_vector::iterator

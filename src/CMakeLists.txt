@@ -88,6 +88,12 @@ set(
 	include/sanguis/client/draw2d/entities/aoe_bullet.hpp
 	include/sanguis/client/draw2d/entities/base.hpp
 	include/sanguis/client/draw2d/entities/base_fwd.hpp
+	include/sanguis/client/draw2d/entities/buffs/base.hpp
+	include/sanguis/client/draw2d/entities/buffs/base_fwd.hpp
+	include/sanguis/client/draw2d/entities/buffs/burn.hpp
+	include/sanguis/client/draw2d/entities/buffs/create.hpp
+	include/sanguis/client/draw2d/entities/buffs/slow.hpp
+	include/sanguis/client/draw2d/entities/buffs/unique_ptr.hpp
 	include/sanguis/client/draw2d/entities/bullet.hpp
 	include/sanguis/client/draw2d/entities/container.hpp
 	include/sanguis/client/draw2d/entities/enemy.hpp
@@ -265,6 +271,9 @@ set(
 	include/sanguis/client/draw2d/sprite/index_fwd.hpp
 	include/sanguis/client/draw2d/sprite/normal/choices.hpp
 	include/sanguis/client/draw2d/sprite/normal/choices_fwd.hpp
+	include/sanguis/client/draw2d/sprite/normal/color.hpp
+	include/sanguis/client/draw2d/sprite/normal/color_format.hpp
+	include/sanguis/client/draw2d/sprite/normal/color_fwd.hpp
 	include/sanguis/client/draw2d/sprite/normal/object.hpp
 	include/sanguis/client/draw2d/sprite/normal/object_decl.hpp
 	include/sanguis/client/draw2d/sprite/normal/object_fwd.hpp
@@ -1316,6 +1325,10 @@ set(
 	src/client/draw2d/collide_parameters.cpp
 	src/client/draw2d/entities/aoe_bullet.cpp
 	src/client/draw2d/entities/base.cpp
+	src/client/draw2d/entities/buffs/base.cpp
+	src/client/draw2d/entities/buffs/burn.cpp
+	src/client/draw2d/entities/buffs/create.cpp
+	src/client/draw2d/entities/buffs/slow.cpp
 	src/client/draw2d/entities/bullet.cpp
 	src/client/draw2d/entities/container.cpp
 	src/client/draw2d/entities/enemy.cpp

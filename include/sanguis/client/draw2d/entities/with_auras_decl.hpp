@@ -53,12 +53,12 @@ public:
 	);
 
 	~with_auras();
-private:
+protected:
 	virtual
 	void
 	update()
 	override;
-
+private:
 	void
 	on_die()
 	override;

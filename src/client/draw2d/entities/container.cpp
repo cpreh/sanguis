@@ -14,6 +14,7 @@
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/index.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
+#include <sanguis/client/draw2d/sprite/normal/color_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sanguis/client/draw2d/sprite/normal/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
@@ -96,6 +97,21 @@ sanguis::client::draw2d::entities::container::center() const
 			sge::sprite::center(
 				this->master()
 			)
+		);
+}
+
+void
+sanguis::client::draw2d::entities::container::color(
+	sanguis::client::draw2d::sprite::normal::color const &_color
+)
+{
+	for(
+		auto &sprite
+		:
+		sprites_
+	)
+		sprite.color(
+			_color
 		);
 }
 

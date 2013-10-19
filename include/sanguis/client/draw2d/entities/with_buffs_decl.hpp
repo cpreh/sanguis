@@ -3,8 +3,12 @@
 
 #include <sanguis/buff_type_fwd.hpp>
 #include <sanguis/client/draw2d/entities/with_buffs_parameters_fwd.hpp>
+#include <sanguis/client/draw2d/entities/buffs/base_fwd.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_buffs.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/ptr_container/ptr_map.hpp>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -46,6 +50,11 @@ public:
 
 	~with_buffs();
 private:
+	virtual
+	void
+	update()
+	override;
+
 	void
 	add_buff(
 		sanguis::buff_type
@@ -58,6 +67,14 @@ private:
 	)
 	override;
 
+	typedef
+	boost::ptr_map<
+		sanguis::buff_type,
+		sanguis::client::draw2d::entities::buffs::base
+	>
+	buff_map;
+
+	buff_map buffs_;
 };
 
 }
