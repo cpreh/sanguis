@@ -42,7 +42,7 @@ sanguis::server::weapons::factory::grenade(
 				1000.f
 			),
 			sanguis::server::weapons::magazine_size(
-				1u
+				3u
 			)
 		);
 }

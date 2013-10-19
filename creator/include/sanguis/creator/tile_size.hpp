@@ -14,7 +14,7 @@ namespace creator
 
 typedef std::integral_constant<
 	sanguis::creator::size_type,
-	64
+	96
 > tile_size;
 
 }
