@@ -75,6 +75,19 @@
 #include <sge/renderer/state/ffp/lighting/material/parameters.hpp>
 #include <sge/renderer/state/ffp/lighting/material/scoped.hpp>
 #include <sge/renderer/state/ffp/lighting/material/shininess.hpp>
+#include <sge/renderer/state/ffp/sampler/alpha_op.hpp>
+#include <sge/renderer/state/ffp/sampler/arg.hpp>
+#include <sge/renderer/state/ffp/sampler/arg1.hpp>
+#include <sge/renderer/state/ffp/sampler/arg2.hpp>
+#include <sge/renderer/state/ffp/sampler/binary_op.hpp>
+#include <sge/renderer/state/ffp/sampler/binary_op_type.hpp>
+#include <sge/renderer/state/ffp/sampler/color_op.hpp>
+#include <sge/renderer/state/ffp/sampler/const_object_ref_vector.hpp>
+#include <sge/renderer/state/ffp/sampler/default_op.hpp>
+#include <sge/renderer/state/ffp/sampler/object.hpp>
+#include <sge/renderer/state/ffp/sampler/op.hpp>
+#include <sge/renderer/state/ffp/sampler/parameters.hpp>
+#include <sge/renderer/state/ffp/sampler/scoped.hpp>
 #include <sge/renderer/state/ffp/transform/mode.hpp>
 #include <sge/renderer/state/ffp/transform/object.hpp>
 #include <sge/renderer/state/ffp/transform/object_scoped_ptr.hpp>
@@ -88,6 +101,7 @@
 #include <sge/sprite/state/default_options.hpp>
 #include <sge/sprite/state/scoped.hpp>
 #include <fcppt/format.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
@@ -238,6 +252,28 @@ sanguis::client::draw2d::scene::object::object(
 				),
 				sge::renderer::state::ffp::lighting::material::shininess(
 					0.f
+				)
+			)
+		)
+	),
+	color_modulate_state_(
+		renderer_.create_ffp_sampler_state(
+			sge::renderer::state::ffp::sampler::parameters(
+				sge::renderer::state::ffp::sampler::color_op(
+					sge::renderer::state::ffp::sampler::op(
+						sge::renderer::state::ffp::sampler::binary_op(
+							sge::renderer::state::ffp::sampler::binary_op_type::modulate,
+							sge::renderer::state::ffp::sampler::arg1(
+								sge::renderer::state::ffp::sampler::arg::texture
+							),
+							sge::renderer::state::ffp::sampler::arg2(
+								sge::renderer::state::ffp::sampler::arg::vertex_color
+							)
+						)
+					)
+				),
+				sge::renderer::state::ffp::sampler::alpha_op(
+					sge::renderer::state::ffp::sampler::default_op()
 				)
 			)
 		)
@@ -470,6 +506,15 @@ sanguis::client::draw2d::scene::object::render_systems(
 		sge::renderer::state::ffp::lighting::material::scoped const scoped_material(
 			_render_context,
 			*material_state_
+		);
+
+		sge::renderer::state::ffp::sampler::scoped const scoped_sampler(
+			_render_context,
+			sge::renderer::state::ffp::sampler::const_object_ref_vector{
+				fcppt::make_cref(
+					*color_modulate_state_
+				)
+			}
 		);
 
 		sge::renderer::state::ffp::lighting::object_scoped_ptr const lighting_state(
