@@ -31,6 +31,7 @@
 #include <sanguis/load/resource/context.hpp>
 #include <sanguis/messages/add_aoe_projectile.hpp>
 #include <sanguis/messages/add_aura.hpp>
+#include <sanguis/messages/add_buff.hpp>
 #include <sanguis/messages/add_enemy.hpp>
 #include <sanguis/messages/add_friend.hpp>
 #include <sanguis/messages/add_own_player.hpp>
@@ -49,6 +50,7 @@
 #include <sanguis/messages/max_health.hpp>
 #include <sanguis/messages/move.hpp>
 #include <sanguis/messages/remove.hpp>
+#include <sanguis/messages/remove_buff.hpp>
 #include <sanguis/messages/remove_weapon.hpp>
 #include <sanguis/messages/rotate.hpp>
 #include <sanguis/messages/start_attacking.hpp>
@@ -253,9 +255,10 @@ sanguis::client::draw2d::scene::object::process_message(
 )
 {
 	static sanguis::messages::call::object<
-		boost::mpl::vector26<
+		boost::mpl::vector28<
 			sanguis::messages::add_aoe_projectile,
 			sanguis::messages::add_aura,
+			sanguis::messages::add_buff,
 			sanguis::messages::add_enemy,
 			sanguis::messages::add_friend,
 			sanguis::messages::add_own_player,
@@ -273,6 +276,7 @@ sanguis::client::draw2d::scene::object::process_message(
 			sanguis::messages::max_health,
 			sanguis::messages::move,
 			sanguis::messages::remove,
+			sanguis::messages::remove_buff,
 			sanguis::messages::remove_weapon,
 			sanguis::messages::rotate,
 			sanguis::messages::start_attacking,

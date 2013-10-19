@@ -2,7 +2,7 @@
 #define SANGUIS_MESSAGES_ADD_FRIEND_FWD_HPP_INCLUDED
 
 #include <sanguis/friend_type_fwd.hpp>
-#include <sanguis/messages/add_with_auras_fwd.hpp>
+#include <sanguis/messages/add_with_buffs_fwd.hpp>
 #include <sanguis/messages/bind_entity_message_fwd.hpp>
 #include <sanguis/messages/make_class_fwd.hpp>
 #include <sanguis/messages/adapted_types/enum_fwd.hpp>
@@ -27,7 +27,7 @@ sanguis::messages::make_class<
 			sanguis::messages::bind_entity_message<
 				sanguis::messages::types::message::add_friend
 			>,
-			sanguis::messages::add_with_auras,
+			sanguis::messages::add_with_buffs,
 			majutsu::role<
 				sanguis::messages::adapted_types::enum_<
 					sanguis::friend_type

@@ -1,3 +1,5 @@
+#include <sanguis/aura_type_vector.hpp>
+#include <sanguis/buff_type_vector.hpp>
 #include <sanguis/client/draw2d/collide_callback.hpp>
 #include <sanguis/client/draw2d/collide_parameters.hpp>
 #include <sanguis/client/draw2d/dim2.hpp>
@@ -7,17 +9,24 @@
 #include <sanguis/client/draw2d/entities/own_player.hpp>
 #include <sanguis/client/draw2d/entities/player.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
+#include <sanguis/load/auras/context_fwd.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 
 
 sanguis::client::draw2d::entities::own_player::own_player(
+	sanguis::load::auras::context &_auras_load_context,
 	sanguis::client::draw2d::entities::model::load_parameters const &_parameters,
 	sanguis::client::draw2d::transform_callback const &_transform,
-	sanguis::client::draw2d::collide_callback const &_collide
+	sanguis::client::draw2d::collide_callback const &_collide,
+	sanguis::aura_type_vector const &_auras,
+	sanguis::buff_type_vector const &_buffs
 )
 :
 	sanguis::client::draw2d::entities::player(
-		_parameters
+		_auras_load_context,
+		_parameters,
+		_auras,
+		_buffs
 	),
 	transform_(
 		_transform

@@ -8,6 +8,7 @@
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/messages/add_aoe_projectile_fwd.hpp>
 #include <sanguis/messages/add_aura_fwd.hpp>
+#include <sanguis/messages/add_buff_fwd.hpp>
 #include <sanguis/messages/add_enemy_fwd.hpp>
 #include <sanguis/messages/add_friend_fwd.hpp>
 #include <sanguis/messages/add_own_player_fwd.hpp>
@@ -25,6 +26,7 @@
 #include <sanguis/messages/level_up_fwd.hpp>
 #include <sanguis/messages/max_health_fwd.hpp>
 #include <sanguis/messages/move_fwd.hpp>
+#include <sanguis/messages/remove_buff_fwd.hpp>
 #include <sanguis/messages/remove_fwd.hpp>
 #include <sanguis/messages/remove_weapon_fwd.hpp>
 #include <sanguis/messages/rotate_fwd.hpp>
@@ -68,6 +70,11 @@ public:
 	result_type
 	operator()(
 		sanguis::messages::add_aura const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::add_buff const &
 	);
 
 	result_type
@@ -153,6 +160,11 @@ public:
 	result_type
 	operator()(
 		sanguis::messages::remove const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::remove_buff const &
 	);
 
 	result_type

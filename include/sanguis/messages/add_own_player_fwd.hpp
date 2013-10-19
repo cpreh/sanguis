@@ -1,8 +1,8 @@
 #ifndef SANGUIS_MESSAGES_ADD_OWN_PLAYER_FWD_HPP_INCLUDED
 #define SANGUIS_MESSAGES_ADD_OWN_PLAYER_FWD_HPP_INCLUDED
 
+#include <sanguis/messages/add_player_basic_fwd.hpp>
 #include <sanguis/messages/make_class_fwd.hpp>
-#include <sanguis/messages/make_player_message_fwd.hpp>
 #include <sanguis/messages/adapted_types/string_vector_fwd.hpp>
 #include <sanguis/messages/roles/weapon_description.hpp>
 #include <sanguis/messages/types/message.hpp>
@@ -22,7 +22,7 @@ typedef
 sanguis::messages::make_class<
 	majutsu::composite<
 		boost::mpl::vector2<
-			sanguis::messages::make_player_message<
+			sanguis::messages::add_player_basic<
 				sanguis::messages::types::message::add_own_player
 			>,
 			majutsu::role<

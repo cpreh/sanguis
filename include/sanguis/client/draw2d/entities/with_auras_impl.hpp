@@ -2,12 +2,11 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_AURAS_IMPL_HPP_INCLUDED
 
 #include <sanguis/aura_type.hpp>
-#include <sanguis/aura_type_vector.hpp>
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/with_auras_decl.hpp>
+#include <sanguis/client/draw2d/entities/with_auras_parameters_decl.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_auras.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
@@ -31,26 +30,22 @@ template<
 sanguis::client::draw2d::entities::with_auras<
 	Base
 >::with_auras(
-	sanguis::diff_clock const &_diff_clock,
-	sanguis::load::auras::context &_aura_load_context,
-	sanguis::client::draw2d::sprite::normal::system &_normal_system,
-	sanguis::aura_type_vector const &_auras,
-	parameters const &_parameters
+	parameters_type const &_parameters
 )
 :
 	sanguis::client::draw2d::entities::ifaces::with_auras(),
 	Base(
-		_parameters
+		_parameters.base()
 	),
 	aura_load_context_(
-		_aura_load_context
+		_parameters.aura_load_context()
 	),
 	normal_system_(
-		_normal_system
+		_parameters.normal_system()
 	),
 	rotate_timer_(
 		sanguis::diff_timer::parameters(
-			_diff_clock,
+			_parameters.diff_clock(),
 			sanguis::duration_second(
 				16
 			)
@@ -61,7 +56,7 @@ sanguis::client::draw2d::entities::with_auras<
 	for(
 		auto const &aura
 		:
-		_auras
+		_parameters.auras()
 	)
 		this->add_aura(
 			aura

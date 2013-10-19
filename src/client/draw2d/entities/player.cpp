@@ -1,14 +1,18 @@
+#include <sanguis/aura_type_vector.hpp>
+#include <sanguis/buff_type_vector.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/player.hpp>
+#include <sanguis/client/draw2d/entities/with_auras_model_parameters.hpp>
+#include <sanguis/client/draw2d/entities/with_buffs_auras_model.hpp>
+#include <sanguis/client/draw2d/entities/with_buffs_auras_model_parameters.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
 #include <sanguis/client/draw2d/entities/model/name.hpp>
 #include <sanguis/client/draw2d/entities/model/needs_healthbar.hpp>
-#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
-#include <sanguis/client/draw2d/entities/model/object.hpp>
+#include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/index.hpp>
@@ -16,6 +20,7 @@
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/draw2d/sprite/unit.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
+#include <sanguis/load/auras/context_fwd.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/math/point_rotate.hpp>
@@ -39,21 +44,33 @@ sanguis::client::draw2d::sprite::index const
 }
 
 sanguis::client::draw2d::entities::player::player(
-	sanguis::client::draw2d::entities::model::load_parameters const &_parameters
+	sanguis::load::auras::context &_auras_load_context,
+	sanguis::client::draw2d::entities::model::load_parameters const &_parameters,
+	sanguis::aura_type_vector const &_auras,
+	sanguis::buff_type_vector const &_buffs
 )
 :
-	sanguis::client::draw2d::entities::model::object(
-		sanguis::client::draw2d::entities::model::parameters(
-			_parameters,
-			sanguis::client::draw2d::entities::model::name(
-				FCPPT_TEXT("player")
-			),
-			sanguis::client::draw2d::entities::order_vector{
-				sanguis::client::draw2d::z_ordering::player_lower,
-				sanguis::client::draw2d::z_ordering::player_upper
-			},
-			sanguis::client::draw2d::entities::model::needs_healthbar::yes,
-			sanguis::client::draw2d::entities::model::decay_option::delayed
+	sanguis::client::draw2d::entities::with_buffs_auras_model(
+		sanguis::client::draw2d::entities::with_buffs_auras_model_parameters(
+			_buffs,
+			sanguis::client::draw2d::entities::with_auras_model_parameters(
+				_parameters.diff_clock(),
+				_auras_load_context,
+				_parameters.normal_system(),
+				_auras,
+				sanguis::client::draw2d::entities::model::parameters(
+					_parameters,
+					sanguis::client::draw2d::entities::model::name(
+						FCPPT_TEXT("player")
+					),
+					sanguis::client::draw2d::entities::order_vector{
+						sanguis::client::draw2d::z_ordering::player_lower,
+						sanguis::client::draw2d::z_ordering::player_upper
+					},
+					sanguis::client::draw2d::entities::model::needs_healthbar::yes,
+					sanguis::client::draw2d::entities::model::decay_option::delayed
+				)
+			)
 		)
 	)
 {

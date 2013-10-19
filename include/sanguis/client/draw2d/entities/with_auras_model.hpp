@@ -3,6 +3,7 @@
 
 #include <sanguis/client/draw2d/entities/with_auras_decl.hpp>
 #include <sanguis/client/draw2d/entities/with_auras_model_fwd.hpp>
+#include <sanguis/client/draw2d/entities/with_auras_model_parameters.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
 
 

@@ -2,10 +2,9 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_AURAS_DECL_HPP_INCLUDED
 
 #include <sanguis/aura_type.hpp>
-#include <sanguis/aura_type_vector.hpp>
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/client/draw2d/entities/with_auras_fwd.hpp>
+#include <sanguis/client/draw2d/entities/with_auras_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_auras.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
@@ -40,14 +39,17 @@ public:
 	typedef
 	typename
 	Base::parameters_type
-	parameters;
+	base_parameters;
 
+	typedef
+	sanguis::client::draw2d::entities::with_auras_parameters<
+		base_parameters
+	>
+	parameters_type;
+
+	explicit
 	with_auras(
-		sanguis::diff_clock const &,
-		sanguis::load::auras::context &,
-		sanguis::client::draw2d::sprite::normal::system &,
-		sanguis::aura_type_vector const &,
-		parameters const &
+		parameters_type const &
 	);
 
 	~with_auras();

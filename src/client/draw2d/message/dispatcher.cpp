@@ -17,6 +17,7 @@
 #include <sanguis/client/draw2d/entities/base.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_auras.hpp>
+#include <sanguis/client/draw2d/entities/ifaces/with_buffs.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_center.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_health.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_orientation.hpp>
@@ -40,6 +41,7 @@
 #include <sanguis/client/draw2d/translate/vector_to_client.hpp>
 #include <sanguis/messages/add_aoe_projectile.hpp>
 #include <sanguis/messages/add_aura.hpp>
+#include <sanguis/messages/add_buff.hpp>
 #include <sanguis/messages/add_enemy.hpp>
 #include <sanguis/messages/add_friend.hpp>
 #include <sanguis/messages/add_own_player.hpp>
@@ -58,6 +60,7 @@
 #include <sanguis/messages/max_health.hpp>
 #include <sanguis/messages/move.hpp>
 #include <sanguis/messages/remove.hpp>
+#include <sanguis/messages/remove_buff.hpp>
 #include <sanguis/messages/remove_weapon.hpp>
 #include <sanguis/messages/role_name.hpp>
 #include <sanguis/messages/rotate.hpp>
@@ -68,6 +71,8 @@
 #include <sanguis/messages/speed.hpp>
 #include <sanguis/messages/adapted_types/aura_type.hpp>
 #include <sanguis/messages/adapted_types/aura_type_vector.hpp>
+#include <sanguis/messages/adapted_types/buff_type.hpp>
+#include <sanguis/messages/adapted_types/buff_type_vector.hpp>
 #include <sanguis/messages/adapted_types/is_primary_weapon.hpp>
 #include <sanguis/messages/adapted_types/level.hpp>
 #include <sanguis/messages/adapted_types/seed.hpp>
@@ -165,6 +170,26 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
+	sanguis::messages::add_buff const &_message
+)
+{
+	fcppt::dynamic_cast_<
+		sanguis::client::draw2d::entities::ifaces::with_buffs &
+	>(
+		this->entity(
+			_message.get<
+				sanguis::messages::roles::entity_id
+			>()
+		)
+	).add_buff(
+		_message.get<
+			sanguis::messages::adapted_types::buff_type
+		>()
+	);
+}
+
+sanguis::client::draw2d::message::dispatcher::result_type
+sanguis::client::draw2d::message::dispatcher::operator()(
 	sanguis::messages::add_enemy const &_message
 )
 {
@@ -177,6 +202,9 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 			>(),
 			_message.get<
 				sanguis::messages::adapted_types::aura_type_vector
+			>(),
+			_message.get<
+				sanguis::messages::adapted_types::buff_type_vector
 			>()
 		),
 		_message
@@ -206,9 +234,16 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 {
 	this->configure_new_object(
 		sanguis::client::draw2d::factory::own_player(
+			env_.aura_resources(),
 			env_.model_parameters(),
 			env_.transform_callback(),
-			env_.collide_callback()
+			env_.collide_callback(),
+			_message.get<
+				sanguis::messages::adapted_types::aura_type_vector
+			>(),
+			_message.get<
+				sanguis::messages::adapted_types::buff_type_vector
+			>()
 		),
 		_message
 	);
@@ -260,7 +295,14 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 {
 	this->configure_new_object(
 		sanguis::client::draw2d::factory::player(
-			env_.model_parameters()
+			env_.aura_resources(),
+			env_.model_parameters(),
+			_message.get<
+				sanguis::messages::adapted_types::aura_type_vector
+			>(),
+			_message.get<
+				sanguis::messages::adapted_types::buff_type_vector
+			>()
 		),
 		_message
 	);
@@ -488,6 +530,26 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	env_.remove(
 		_message.get<
 			sanguis::messages::roles::entity_id
+		>()
+	);
+}
+
+sanguis::client::draw2d::message::dispatcher::result_type
+sanguis::client::draw2d::message::dispatcher::operator()(
+	sanguis::messages::remove_buff const &_message
+)
+{
+	fcppt::dynamic_cast_<
+		sanguis::client::draw2d::entities::ifaces::with_buffs &
+	>(
+		this->entity(
+			_message.get<
+				sanguis::messages::roles::entity_id
+			>()
+		)
+	).remove_buff(
+		_message.get<
+			sanguis::messages::adapted_types::buff_type
 		>()
 	);
 }

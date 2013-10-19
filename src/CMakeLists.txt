@@ -19,6 +19,7 @@ set(
 	include/sanguis/aura_type_vector.hpp
 	include/sanguis/buff_type.hpp
 	include/sanguis/buff_type_fwd.hpp
+	include/sanguis/buff_type_vector.hpp
 	include/sanguis/cheat_type.hpp
 	include/sanguis/cheat_type_fwd.hpp
 	include/sanguis/client/config/homedir.hpp
@@ -92,6 +93,7 @@ set(
 	include/sanguis/client/draw2d/entities/enemy.hpp
 	include/sanguis/client/draw2d/entities/explosion.hpp
 	include/sanguis/client/draw2d/entities/ifaces/with_auras.hpp
+	include/sanguis/client/draw2d/entities/ifaces/with_buffs.hpp
 	include/sanguis/client/draw2d/entities/ifaces/with_center.hpp
 	include/sanguis/client/draw2d/entities/ifaces/with_health.hpp
 	include/sanguis/client/draw2d/entities/ifaces/with_orientation.hpp
@@ -132,6 +134,21 @@ set(
 	include/sanguis/client/draw2d/entities/with_auras_impl.hpp
 	include/sanguis/client/draw2d/entities/with_auras_model.hpp
 	include/sanguis/client/draw2d/entities/with_auras_model_fwd.hpp
+	include/sanguis/client/draw2d/entities/with_auras_model_parameters.hpp
+	include/sanguis/client/draw2d/entities/with_auras_model_parameters_fwd.hpp
+	include/sanguis/client/draw2d/entities/with_auras_parameters_decl.hpp
+	include/sanguis/client/draw2d/entities/with_auras_parameters_fwd.hpp
+	include/sanguis/client/draw2d/entities/with_auras_parameters_impl.hpp
+	include/sanguis/client/draw2d/entities/with_buffs_auras_model.hpp
+	include/sanguis/client/draw2d/entities/with_buffs_auras_model_fwd.hpp
+	include/sanguis/client/draw2d/entities/with_buffs_auras_model_parameters.hpp
+	include/sanguis/client/draw2d/entities/with_buffs_auras_model_parameters_fwd.hpp
+	include/sanguis/client/draw2d/entities/with_buffs_decl.hpp
+	include/sanguis/client/draw2d/entities/with_buffs_fwd.hpp
+	include/sanguis/client/draw2d/entities/with_buffs_impl.hpp
+	include/sanguis/client/draw2d/entities/with_buffs_parameters_decl.hpp
+	include/sanguis/client/draw2d/entities/with_buffs_parameters_fwd.hpp
+	include/sanguis/client/draw2d/entities/with_buffs_parameters_impl.hpp
 	include/sanguis/client/draw2d/factory/aoe_projectile.hpp
 	include/sanguis/client/draw2d/factory/enemy.hpp
 	include/sanguis/client/draw2d/factory/friend.hpp
@@ -537,6 +554,8 @@ set(
 	include/sanguis/messages/adapted_types/bool_fwd.hpp
 	include/sanguis/messages/adapted_types/buff_type.hpp
 	include/sanguis/messages/adapted_types/buff_type_fwd.hpp
+	include/sanguis/messages/adapted_types/buff_type_vector.hpp
+	include/sanguis/messages/adapted_types/buff_type_vector_fwd.hpp
 	include/sanguis/messages/adapted_types/char_type.hpp
 	include/sanguis/messages/adapted_types/char_type_fwd.hpp
 	include/sanguis/messages/adapted_types/entity_id.hpp
@@ -588,6 +607,8 @@ set(
 	include/sanguis/messages/add_pickup.hpp
 	include/sanguis/messages/add_pickup_fwd.hpp
 	include/sanguis/messages/add_player.hpp
+	include/sanguis/messages/add_player_basic.hpp
+	include/sanguis/messages/add_player_basic_fwd.hpp
 	include/sanguis/messages/add_player_fwd.hpp
 	include/sanguis/messages/add_projectile.hpp
 	include/sanguis/messages/add_projectile_fwd.hpp
@@ -595,6 +616,8 @@ set(
 	include/sanguis/messages/add_weapon_pickup_fwd.hpp
 	include/sanguis/messages/add_with_auras.hpp
 	include/sanguis/messages/add_with_auras_fwd.hpp
+	include/sanguis/messages/add_with_buffs.hpp
+	include/sanguis/messages/add_with_buffs_fwd.hpp
 	include/sanguis/messages/add_with_health.hpp
 	include/sanguis/messages/add_with_health_fwd.hpp
 	include/sanguis/messages/add_with_speed.hpp
@@ -647,8 +670,6 @@ set(
 	include/sanguis/messages/make_class_fwd.hpp
 	include/sanguis/messages/make_message_id.hpp
 	include/sanguis/messages/make_message_id_fwd.hpp
-	include/sanguis/messages/make_player_message.hpp
-	include/sanguis/messages/make_player_message_fwd.hpp
 	include/sanguis/messages/max_health.hpp
 	include/sanguis/messages/max_health_fwd.hpp
 	include/sanguis/messages/move.hpp
@@ -1299,6 +1320,7 @@ set(
 	src/client/draw2d/entities/enemy.cpp
 	src/client/draw2d/entities/explosion.cpp
 	src/client/draw2d/entities/ifaces/with_auras.cpp
+	src/client/draw2d/entities/ifaces/with_buffs.cpp
 	src/client/draw2d/entities/ifaces/with_center.cpp
 	src/client/draw2d/entities/ifaces/with_health.cpp
 	src/client/draw2d/entities/ifaces/with_orientation.cpp
@@ -1319,6 +1341,9 @@ set(
 	src/client/draw2d/entities/player.cpp
 	src/client/draw2d/entities/sentry.cpp
 	src/client/draw2d/entities/with_auras_model.cpp
+	src/client/draw2d/entities/with_auras_model_parameters.cpp
+	src/client/draw2d/entities/with_buffs_auras_model.cpp
+	src/client/draw2d/entities/with_buffs_auras_model_parameters.cpp
 	src/client/draw2d/factory/aoe_projectile.cpp
 	src/client/draw2d/factory/enemy.cpp
 	src/client/draw2d/factory/friend.cpp
