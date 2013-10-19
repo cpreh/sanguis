@@ -17,6 +17,8 @@ set(
 	include/sanguis/aura_type.hpp
 	include/sanguis/aura_type_fwd.hpp
 	include/sanguis/aura_type_vector.hpp
+	include/sanguis/buff_type.hpp
+	include/sanguis/buff_type_fwd.hpp
 	include/sanguis/cheat_type.hpp
 	include/sanguis/cheat_type_fwd.hpp
 	include/sanguis/client/config/homedir.hpp
@@ -534,6 +536,8 @@ set(
 	include/sanguis/messages/adapted_types/aura_type_vector_fwd.hpp
 	include/sanguis/messages/adapted_types/bool.hpp
 	include/sanguis/messages/adapted_types/bool_fwd.hpp
+	include/sanguis/messages/adapted_types/buff_type.hpp
+	include/sanguis/messages/adapted_types/buff_type_fwd.hpp
 	include/sanguis/messages/adapted_types/char_type.hpp
 	include/sanguis/messages/adapted_types/char_type_fwd.hpp
 	include/sanguis/messages/adapted_types/entity_id.hpp
@@ -570,6 +574,8 @@ set(
 	include/sanguis/messages/add_aoe_projectile_fwd.hpp
 	include/sanguis/messages/add_aura.hpp
 	include/sanguis/messages/add_aura_fwd.hpp
+	include/sanguis/messages/add_buff.hpp
+	include/sanguis/messages/add_buff_fwd.hpp
 	include/sanguis/messages/add_console_command.hpp
 	include/sanguis/messages/add_console_command_fwd.hpp
 	include/sanguis/messages/add_elements_base.hpp
@@ -678,6 +684,8 @@ set(
 	include/sanguis/messages/player_unpause.hpp
 	include/sanguis/messages/player_unpause_fwd.hpp
 	include/sanguis/messages/remove.hpp
+	include/sanguis/messages/remove_buff.hpp
+	include/sanguis/messages/remove_buff_fwd.hpp
 	include/sanguis/messages/remove_fwd.hpp
 	include/sanguis/messages/remove_id.hpp
 	include/sanguis/messages/remove_id_fwd.hpp
@@ -1459,6 +1467,7 @@ set(
 	src/media_path.cpp
 	src/messages/add_aoe_projectile.cpp
 	src/messages/add_aura.cpp
+	src/messages/add_buff.cpp
 	src/messages/add_console_command.cpp
 	src/messages/add_enemy.cpp
 	src/messages/add_friend.cpp
@@ -1496,6 +1505,7 @@ set(
 	src/messages/player_stop_shooting.cpp
 	src/messages/player_unpause.cpp
 	src/messages/remove.cpp
+	src/messages/remove_buff.cpp
 	src/messages/remove_id.cpp
 	src/messages/remove_weapon.cpp
 	src/messages/rotate.cpp

@@ -15,6 +15,7 @@ enum class message
 {
 	add_aoe_projectile,
 	add_aura,
+	add_buff,
 	add_console_command,
 	add_enemy,
 	add_friend,
@@ -50,6 +51,7 @@ enum class message
 	player_stop_shooting,
 	player_unpause,
 	remove,
+	remove_buff,
 	remove_id,
 	remove_weapon,
 	rotate,
