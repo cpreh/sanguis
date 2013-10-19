@@ -57,11 +57,9 @@ sanguis::server::net::value<
 	)
 		return false;
 
-	timer_.interval(
-		Policy::start_duration()
+	timer_.active(
+		false
 	);
-
-	timer_.reset();
 
 	return true;
 }
@@ -85,14 +83,15 @@ sanguis::server::net::value<
 		old_ =
 			_value;
 
-		timer_.active(
-			true
-		);
-
-		timer_.reset();
+		this->restart_timer();
 
 		return;
 	}
+
+	if(
+		!timer_.active()
+	)
+		this->restart_timer();
 
 	timer_.interval(
 		timer_.interval<
@@ -124,6 +123,27 @@ sanguis::server::net::value<
 	timer_.active(
 		false
 	);
+}
+
+template<
+	typename Type,
+	typename Policy
+>
+void
+sanguis::server::net::value<
+	Type,
+	Policy
+>::restart_timer()
+{
+	timer_.active(
+		true
+	);
+
+	timer_.interval(
+		Policy::start_duration()
+	);
+
+	timer_.reset();
 }
 
 #endif

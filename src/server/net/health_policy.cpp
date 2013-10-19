@@ -12,7 +12,7 @@ sanguis::server::net::health_policy::start_duration()
 {
 	return
 		sanguis::duration_second(
-			2.f
+			0.5f
 		);
 }
 

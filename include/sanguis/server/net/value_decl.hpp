@@ -43,6 +43,9 @@ public:
 	void
 	reset();
 private:
+	void
+	restart_timer();
+
 	sanguis::diff_timer timer_;
 
 	typedef
