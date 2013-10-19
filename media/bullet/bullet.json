@@ -3,8 +3,9 @@
 "texture":"bullet.png",
 "parts":[
 {"default":{"weapon_categories":[{"none":{"animations":[
-{"walking":{"range":[0,1],"sound":"shoot/shoot2.ogg"}},
-{"none":{"range":[0,1]}}
+{"walking":{"range":[0,1]}},
+{"none":{"range":[0,1]}},
+{"deploying":{"range":[0,1],"sound":"shoot/shoot2.ogg"}}
 ]}}]}},
 {"tail":{"weapon_categories":[{"none":{"animations":[
 {"none":{"range":[1,2]}}]}}]}}]}
