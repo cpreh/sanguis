@@ -49,7 +49,9 @@ sanguis::server::entities::enemies::factory::skeleton(
 			_parameters.load_context(),
 			sanguis::server::damage::no_armor(),
 			sanguis::server::health(
-				500.f
+				10.f
+				*
+				_parameters.difficulty().get()
 			),
 			sanguis::server::entities::movement_speed(
 				50.f
@@ -79,7 +81,7 @@ sanguis::server::entities::enemies::factory::skeleton(
 				0.75f
 			),
 			sanguis::server::exp(
-				300.f
+				100.f
 			),
 			_parameters.difficulty(),
 			_parameters.spawn_owner(),
@@ -90,7 +92,7 @@ sanguis::server::entities::enemies::factory::skeleton(
 					sanguis::server::auras::buff
 				>(
 					sanguis::server::radius(
-						200.f
+						400.f
 					),
 					sanguis::server::team::monsters,
 					sanguis::aura_type::burn,
