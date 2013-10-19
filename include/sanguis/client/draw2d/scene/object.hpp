@@ -36,7 +36,6 @@
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/renderer/state/ffp/lighting/material/object_scoped_ptr.hpp>
-#include <sge/renderer/state/ffp/sampler/object_scoped_ptr.hpp>
 #include <sge/renderer/target/viewport_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -249,8 +248,6 @@ private:
 	> const background_;
 
 	sge::renderer::state::ffp::lighting::material::object_scoped_ptr const material_state_;
-
-	sge::renderer::state::ffp::sampler::object_scoped_ptr const color_modulate_state_;
 };
 
 }

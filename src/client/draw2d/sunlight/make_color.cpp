@@ -15,6 +15,14 @@ sanguis::client::draw2d::sunlight::make_color(
 {
 	return
 		sge::image::color::predef::white();
-		// convert into something that sge::image::color::any supports
-
+		/*
+		sge::image::color::any::object(
+			sge::image::color::convert<
+				sge::image::color::rgba32f_format
+			>(
+				sanguis::client::draw2d::sunlight::day_gradient().interpolate(
+					_sun_angle
+				)
+			)
+		);*/
 }

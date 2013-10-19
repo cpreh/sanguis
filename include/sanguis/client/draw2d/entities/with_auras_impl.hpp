@@ -9,10 +9,14 @@
 #include <sanguis/client/draw2d/entities/with_auras_parameters_decl.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_auras.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
+#include <sanguis/client/draw2d/sprite/normal/color_format.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sanguis/client/draw2d/sprite/normal/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
 #include <sanguis/load/auras/context.hpp>
+#include <sge/image/color/predef.hpp>
+#include <sge/image/color/any/convert.hpp>
+#include <sge/image/color/any/object.hpp>
 #include <sge/sprite/center.hpp>
 #include <sge/sprite/intrusive/connection.hpp>
 #include <sge/timer/elapsed_fractional.hpp>
@@ -154,6 +158,13 @@ sanguis::client::draw2d::entities::with_auras<
 						sanguis::client::draw2d::sprite::rotation
 					>(
 						0
+					)
+				)
+				.color(
+					sge::image::color::any::convert<
+						sanguis::client::draw2d::sprite::normal::color_format
+					>(
+						sge::image::color::predef::white()
 					)
 				)
 				.texture(

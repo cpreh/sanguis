@@ -27,7 +27,7 @@ sanguis::client::draw2d::entities::buffs::slow::apply(
 		sge::image::color::any::convert<
 			sanguis::client::draw2d::sprite::normal::color_format
 		>(
-			sge::image::color::predef::blue()
+			sge::image::color::predef::lightblue()
 		)
 	);
 }
