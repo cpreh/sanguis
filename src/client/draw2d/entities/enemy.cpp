@@ -42,7 +42,7 @@ sanguis::client::draw2d::entities::enemy::enemy(
 					sanguis::client::draw2d::entities::order_vector{
 						sanguis::client::draw2d::z_ordering::model_generic
 					},
-					sanguis::client::draw2d::entities::model::needs_healthbar::no,
+					sanguis::client::draw2d::entities::model::needs_healthbar::yes,
 					sanguis::client::draw2d::entities::model::decay_option::delayed
 				)
 			)
