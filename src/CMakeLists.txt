@@ -92,6 +92,7 @@ set(
 	include/sanguis/client/draw2d/entities/container.hpp
 	include/sanguis/client/draw2d/entities/enemy.hpp
 	include/sanguis/client/draw2d/entities/explosion.hpp
+	include/sanguis/client/draw2d/entities/friend.hpp
 	include/sanguis/client/draw2d/entities/ifaces/with_auras.hpp
 	include/sanguis/client/draw2d/entities/ifaces/with_buffs.hpp
 	include/sanguis/client/draw2d/entities/ifaces/with_center.hpp
@@ -1319,6 +1320,7 @@ set(
 	src/client/draw2d/entities/container.cpp
 	src/client/draw2d/entities/enemy.cpp
 	src/client/draw2d/entities/explosion.cpp
+	src/client/draw2d/entities/friend.cpp
 	src/client/draw2d/entities/ifaces/with_auras.cpp
 	src/client/draw2d/entities/ifaces/with_buffs.cpp
 	src/client/draw2d/entities/ifaces/with_center.cpp

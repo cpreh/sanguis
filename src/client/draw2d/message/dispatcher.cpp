@@ -219,8 +219,15 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	this->configure_new_object(
 		sanguis::client::draw2d::factory::friend_(
 			env_.model_parameters(),
+			env_.aura_resources(),
 			_message.get<
 				sanguis::messages::roles::friend_
+			>(),
+			_message.get<
+				sanguis::messages::adapted_types::aura_type_vector
+			>(),
+			_message.get<
+				sanguis::messages::adapted_types::buff_type_vector
 			>()
 		),
 		_message
