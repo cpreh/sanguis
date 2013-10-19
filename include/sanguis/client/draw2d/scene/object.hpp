@@ -31,7 +31,6 @@
 #include <sanguis/load/auras/context.hpp>
 #include <sanguis/load/model/collection_fwd.hpp>
 #include <sanguis/messages/base.hpp>
-#include <sge/audio/listener_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/renderer/screen_size_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
@@ -67,7 +66,6 @@ public:
 		sanguis::load::context const &,
 		sanguis::client::sound_manager &,
 		sge::renderer::device::ffp &,
-		sge::audio::listener &,
 		sge::font::object &,
 		std::tm const &initial_time,
 		sge::viewport::manager &
@@ -193,8 +191,6 @@ private:
 	sanguis::load::auras::context aura_resources_;
 
 	sge::renderer::device::ffp &renderer_;
-
-	sge::audio::listener &audio_listener_;
 
 	sanguis::client::draw2d::sprite::state sprite_states_;
 

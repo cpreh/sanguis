@@ -88,9 +88,6 @@ sanguis::client::states::running::running(
 			>().renderer(),
 			this->context<
 				sanguis::client::machine
-			>().audio_listener(),
-			this->context<
-				sanguis::client::machine
 			>().font_object(),
 			daytime_settings_->current_time(),
 			this->context<

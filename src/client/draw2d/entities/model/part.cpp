@@ -2,13 +2,11 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
 #include <sanguis/client/sound_manager.hpp>
-#include <sanguis/client/draw2d/center_to_audio_vector.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/entities/model/part.hpp>
 #include <sanguis/client/draw2d/entities/model/clamp_orientation.hpp>
 #include <sanguis/client/draw2d/entities/model/loop_method.hpp>
 #include <sanguis/client/draw2d/entities/model/orientation.hpp>
-#include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
@@ -22,9 +20,8 @@
 #include <sanguis/load/model/weapon_category.hpp>
 #include <sanguis/load/resource/animation/series.hpp>
 #include <sge/audio/buffer.hpp>
-#include <sge/audio/sound/positional.hpp>
-#include <sge/audio/sound/positional_parameters.hpp>
-#include <sge/sprite/center.hpp>
+#include <sge/audio/sound/base.hpp>
+#include <sge/audio/sound/nonpositional_parameters.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -261,17 +258,8 @@ sanguis::client::draw2d::entities::model::part::load_animation(
 		// TODO: Add sounds that are playing during the animation as well.
 		// These will be owned by model::part directly.
 		sound_manager_.add(
-			animation.sound()->buffer()->create_positional(
-				sge::audio::sound::positional_parameters()
-				.position(
-					sanguis::client::draw2d::center_to_audio_vector(
-						sanguis::client::draw2d::sprite::center(
-							sge::sprite::center(
-								ref_
-							)
-						)
-					)
-				)
+			animation.sound()->buffer()->create_nonpositional(
+				sge::audio::sound::nonpositional_parameters()
 			)
 		);
 }

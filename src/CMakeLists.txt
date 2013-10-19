@@ -79,7 +79,6 @@ set(
 	include/sanguis/client/draw2d/aoe.hpp
 	include/sanguis/client/draw2d/center.hpp
 	include/sanguis/client/draw2d/center_fwd.hpp
-	include/sanguis/client/draw2d/center_to_audio_vector.hpp
 	include/sanguis/client/draw2d/collide_callback.hpp
 	include/sanguis/client/draw2d/collide_parameters.hpp
 	include/sanguis/client/draw2d/collide_parameters_fwd.hpp
@@ -1292,7 +1291,6 @@ set(
 	src/client/cursor/object.cpp
 	src/client/cursor/scoped.cpp
 	src/client/daytime_settings.cpp
-	src/client/draw2d/center_to_audio_vector.cpp
 	src/client/draw2d/collide_parameters.cpp
 	src/client/draw2d/entities/aoe_bullet.cpp
 	src/client/draw2d/entities/base.cpp

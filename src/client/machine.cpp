@@ -16,7 +16,6 @@
 #include <sanguis/net/send_buffer_size.hpp>
 #include <sanguis/net/serialize_to_circular_buffer.hpp>
 #include <sanguis/net/receive_buffer_size.hpp>
-#include <sge/audio/listener_fwd.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/image2d/system_fwd.hpp>
@@ -57,7 +56,6 @@ sanguis::client::machine::machine(
 	sge::input::keyboard::device &_keyboard,
 	sanguis::client::cursor::object &_cursor,
 	sge::renderer::device::ffp &_renderer,
-	sge::audio::listener &_audio_listener,
 	sge::image2d::system &_image_loader,
 	sanguis::io_service &_io_service,
 	sge::viewport::manager &_viewport_manager
@@ -77,9 +75,6 @@ sanguis::client::machine::machine(
 	),
 	renderer_(
 		_renderer
-	),
-	audio_listener_(
-		_audio_listener
 	),
 	image_loader_(
 		_image_loader
@@ -260,12 +255,6 @@ sge::renderer::device::ffp &
 sanguis::client::machine::renderer() const
 {
 	return renderer_;
-}
-
-sge::audio::listener &
-sanguis::client::machine::audio_listener() const
-{
-	return audio_listener_;
 }
 
 sge::image2d::system &

@@ -4,7 +4,6 @@
 #include <sanguis/update_diff_clock.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
-#include <sanguis/client/draw2d/center_to_audio_vector.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/scene/object.hpp>
@@ -58,7 +57,6 @@
 #include <sanguis/messages/stop_reloading.hpp>
 #include <sanguis/messages/speed.hpp>
 #include <sanguis/messages/call/object.hpp>
-#include <sge/audio/listener.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/renderer/context/ffp.hpp>
@@ -108,7 +106,6 @@ sanguis::client::draw2d::scene::object::object(
 	sanguis::load::context const &_resources,
 	sanguis::client::sound_manager &_sound_manager,
 	sge::renderer::device::ffp &_renderer,
-	sge::audio::listener &_audio_listener,
 	sge::font::object &_font_object,
 	std::tm const &_current_time,
 	sge::viewport::manager &_viewport_manager
@@ -129,9 +126,6 @@ sanguis::client::draw2d::scene::object::object(
 	),
 	renderer_(
 		_renderer
-	),
-	audio_listener_(
-		_audio_listener
 	),
 	sprite_states_(
 		renderer_,
@@ -650,12 +644,6 @@ sanguis::client::draw2d::scene::object::transform(
 )
 {
 	player_center_ = _player_center;
-
-	audio_listener_.position(
-		sanguis::client::draw2d::center_to_audio_vector(
-			_player_center
-		)
-	);
 }
 
 void

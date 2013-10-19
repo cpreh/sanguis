@@ -109,7 +109,6 @@ sanguis::client::object::object(
 		sys_->keyboard_collector(),
 		cursor_,
 		sys_->renderer_ffp(),
-		sys_->audio_player().listener(),
 		sys_->image_system(),
 		io_service_,
 		sys_->viewport_manager()
