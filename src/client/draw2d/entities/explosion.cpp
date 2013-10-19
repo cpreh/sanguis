@@ -20,6 +20,8 @@
 #include <sanguis/load/model/object.hpp>
 #include <sanguis/load/model/part.hpp>
 #include <sanguis/load/model/weapon_category.hpp>
+#include <sge/image/color/predef.hpp>
+#include <sge/image/color/any/object.hpp>
 #include <sge/sprite/intrusive/connection.hpp>
 #include <sge/texture/const_part_shared_ptr.hpp>
 #include <fcppt/literal.hpp>
@@ -77,6 +79,9 @@ sanguis::client::draw2d::entities::explosion::explosion(
 		)
 		.texture(
 			sge::texture::const_part_shared_ptr()
+		)
+		.any_color(
+			sge::image::color::predef::white()
 		)
 	),
 	animation_(

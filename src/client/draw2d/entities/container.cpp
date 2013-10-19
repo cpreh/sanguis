@@ -17,6 +17,8 @@
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sanguis/client/draw2d/sprite/normal/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
+#include <sge/image/color/predef.hpp>
+#include <sge/image/color/any/object.hpp>
 #include <sge/sprite/center.hpp>
 #include <sge/sprite/intrusive/connection.hpp>
 #include <sge/timer/elapsed.hpp>
@@ -74,6 +76,9 @@ sanguis::client::draw2d::entities::container::container(
 				)
 				.size(
 					_dim
+				)
+				.any_color(
+					sge::image::color::predef::white()
 				)
 			)
 		);
