@@ -43,7 +43,7 @@ sanguis::client::draw2d::entities::buffs::burn::burn(
 			)
 		)
 		.center(
-			sanguis::client::draw2d::sprite::point::null()
+			_model.center().get()
 		)
 		.rotation(
 			fcppt::literal<
@@ -58,7 +58,7 @@ sanguis::client::draw2d::entities::buffs::burn::burn(
 			fcppt::literal<
 				sanguis::client::draw2d::sprite::unit
 			>(
-				4
+				2
 			)
 		)
 		.texture(

@@ -120,7 +120,7 @@ sanguis::client::draw2d::entities::player::orientation(
 void
 sanguis::client::draw2d::entities::player::update()
 {
-	sanguis::client::draw2d::entities::model::object::update();
+	sanguis::client::draw2d::entities::with_buffs_auras_model::update();
 
 	sanguis::client::draw2d::vector2 const
 		leg_center(

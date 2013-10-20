@@ -52,12 +52,12 @@ public:
 	);
 
 	~with_buffs();
-private:
+protected:
 	virtual
 	void
 	update()
 	override;
-
+private:
 	void
 	add_buff(
 		sanguis::buff_type
