@@ -24,6 +24,9 @@ sanguis::client::draw2d::entities::friend_::friend_(
 :
 	sanguis::client::draw2d::entities::with_buffs_auras_model(
 		sanguis::client::draw2d::entities::with_buffs_auras_model_parameters(
+			_load_parameters.diff_clock(),
+			_load_parameters.normal_system(),
+			_load_parameters.collection(),
 			_buffs,
 			sanguis::client::draw2d::entities::with_auras_model_parameters(
 				_load_parameters.diff_clock(),

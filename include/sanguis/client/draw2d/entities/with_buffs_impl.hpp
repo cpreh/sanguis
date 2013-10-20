@@ -25,6 +25,15 @@ sanguis::client::draw2d::entities::with_buffs<
 	Base(
 		_parameters.base()
 	),
+	diff_clock_(
+		_parameters.diff_clock()
+	),
+	normal_system_(
+		_parameters.normal_system()
+	),
+	model_collection_(
+		_parameters.model_collection()
+	),
 	buffs_()
 {
 	for(
@@ -88,6 +97,10 @@ sanguis::client::draw2d::entities::with_buffs<
 			buffs_,
 			_type,
 			sanguis::client::draw2d::entities::buffs::create(
+				diff_clock_,
+				normal_system_,
+				model_collection_,
+				*this,
 				_type
 			)
 		)

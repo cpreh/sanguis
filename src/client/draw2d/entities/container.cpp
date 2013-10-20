@@ -116,31 +116,6 @@ sanguis::client::draw2d::entities::container::color(
 }
 
 void
-sanguis::client::draw2d::entities::container::update()
-{
-	center_ +=
-		sanguis::client::draw2d::center(
-			sge::timer::elapsed_fractional_and_reset<
-				sanguis::client::draw2d::funit
-			>(
-				move_timer_
-			)
-			*
-			this->speed().get()
-		);
-
-	this->update_center(
-		sanguis::client::draw2d::sprite::center(
-			fcppt::math::vector::structure_cast<
-				sanguis::client::draw2d::sprite::center::value_type
-			>(
-				center_.get()
-			)
-		)
-	);
-}
-
-void
 sanguis::client::draw2d::entities::container::center(
 	sanguis::client::draw2d::sprite::center const &_center
 )
@@ -285,6 +260,31 @@ sanguis::client::draw2d::entities::container::end() const
 {
 	return
 		sprites_.end();
+}
+
+void
+sanguis::client::draw2d::entities::container::update()
+{
+	center_ +=
+		sanguis::client::draw2d::center(
+			sge::timer::elapsed_fractional_and_reset<
+				sanguis::client::draw2d::funit
+			>(
+				move_timer_
+			)
+			*
+			this->speed().get()
+		);
+
+	this->update_center(
+		sanguis::client::draw2d::sprite::center(
+			fcppt::math::vector::structure_cast<
+				sanguis::client::draw2d::sprite::center::value_type
+			>(
+				center_.get()
+			)
+		)
+	);
 }
 
 void

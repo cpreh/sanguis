@@ -67,7 +67,7 @@ public:
 	color(
 		sanguis::client::draw2d::sprite::normal::color const &
 	);
-protected:
+
 	typedef
 	sprite_vector::iterator
 	iterator;
@@ -75,11 +75,6 @@ protected:
 	typedef
 	sprite_vector::const_iterator
 	const_iterator;
-
-	virtual
-	void
-	update()
-	override;
 
 	virtual
 	void
@@ -144,6 +139,11 @@ protected:
 
 	const_iterator
 	end() const;
+protected:
+	virtual
+	void
+	update()
+	override;
 private:
 	void
 	update_center(

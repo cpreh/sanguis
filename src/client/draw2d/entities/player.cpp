@@ -45,21 +45,24 @@ sanguis::client::draw2d::sprite::index const
 
 sanguis::client::draw2d::entities::player::player(
 	sanguis::load::auras::context &_auras_load_context,
-	sanguis::client::draw2d::entities::model::load_parameters const &_parameters,
+	sanguis::client::draw2d::entities::model::load_parameters const &_load_parameters,
 	sanguis::aura_type_vector const &_auras,
 	sanguis::buff_type_vector const &_buffs
 )
 :
 	sanguis::client::draw2d::entities::with_buffs_auras_model(
 		sanguis::client::draw2d::entities::with_buffs_auras_model_parameters(
+			_load_parameters.diff_clock(),
+			_load_parameters.normal_system(),
+			_load_parameters.collection(),
 			_buffs,
 			sanguis::client::draw2d::entities::with_auras_model_parameters(
-				_parameters.diff_clock(),
+				_load_parameters.diff_clock(),
 				_auras_load_context,
-				_parameters.normal_system(),
+				_load_parameters.normal_system(),
 				_auras,
 				sanguis::client::draw2d::entities::model::parameters(
-					_parameters,
+					_load_parameters,
 					sanguis::client::draw2d::entities::model::name(
 						FCPPT_TEXT("player")
 					),
