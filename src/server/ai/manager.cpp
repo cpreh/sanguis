@@ -100,7 +100,9 @@ sanguis::server::ai::manager::update()
 
 	// TODO: How should we track this?
 	for(
-		auto ref : potential_targets_
+		auto &ref
+		:
+		potential_targets_
 	)
 		this->update_target(
 			ai_.distance_changes(

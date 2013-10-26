@@ -122,7 +122,7 @@ sanguis::server::perks::tree::create()
 					0u
 				),
 				sanguis::server::perks::tree::required_parent_level(
-					2u
+					10u
 				),
 				sanguis::server::perks::tree::max_level(
 					3u

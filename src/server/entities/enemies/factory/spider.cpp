@@ -17,6 +17,9 @@
 #include <sanguis/server/weapons/melee.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <cmath>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::entities::unique_ptr
@@ -33,7 +36,11 @@ sanguis::server::entities::enemies::factory::spider(
 			_parameters.load_context(),
 			sanguis::server::damage::no_armor(),
 			sanguis::server::health(
-				12.f
+				8.f
+				*
+				std::sqrt(
+					_parameters.difficulty().get()
+				)
 			),
 			sanguis::server::entities::movement_speed(
 				75.f
@@ -57,6 +64,10 @@ sanguis::server::entities::enemies::factory::spider(
 				),
 				sanguis::server::weapons::damage(
 					5.f
+					*
+					std::sqrt(
+						_parameters.difficulty().get()
+					)
 				)
 			),
 			sanguis::server::pickup_probability(

@@ -17,6 +17,9 @@
 #include <sanguis/server/weapons/melee.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <cmath>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::entities::unique_ptr
@@ -36,7 +39,11 @@ sanguis::server::entities::enemies::factory::wolf(
 				3.f
 			),
 			sanguis::server::entities::movement_speed(
-				85.f
+				40.f
+				*
+				std::sqrt(
+					_parameters.difficulty().get()
+				)
 			),
 			sanguis::server::ai::create_simple(
 				sanguis::server::ai::sight_range(
@@ -57,6 +64,10 @@ sanguis::server::entities::enemies::factory::wolf(
 				),
 				sanguis::server::weapons::damage(
 					4.f
+					*
+					std::sqrt(
+						_parameters.difficulty().get()
+					)
 				)
 			),
 			sanguis::server::pickup_probability(

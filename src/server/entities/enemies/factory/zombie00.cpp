@@ -22,6 +22,9 @@
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <cmath>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::entities::unique_ptr
@@ -39,6 +42,10 @@ sanguis::server::entities::enemies::factory::zombie00(
 			sanguis::server::damage::no_armor(),
 			sanguis::server::health(
 				9.f
+				*
+				std::sqrt(
+					_parameters.difficulty().get()
+				)
 			),
 			sanguis::server::entities::movement_speed(
 				25.f
@@ -61,7 +68,7 @@ sanguis::server::entities::enemies::factory::zombie00(
 					)
 				),
 				sanguis::server::weapons::damage(
-					1.f
+					10.f
 				),
 				sanguis::server::weapons::cast_point(
 					sanguis::duration_second(

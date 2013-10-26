@@ -26,6 +26,9 @@
 #include <sanguis/server/weapons/range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/assign/make_container.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <cmath>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::entities::unique_ptr
@@ -47,9 +50,11 @@ sanguis::server::entities::enemies::factory::ghost(
 			_parameters.load_context(),
 			sanguis::server::damage::no_armor(),
 			sanguis::server::health(
-				2.f
+				4.f
 				*
-				_parameters.difficulty().get()
+				std::sqrt(
+					_parameters.difficulty().get()
+				)
 			),
 			sanguis::server::entities::movement_speed(
 				60.f

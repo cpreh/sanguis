@@ -31,7 +31,7 @@ sanguis::server::perks::regeneration::change(
 		&sanguis::server::entities::property::constant_change,
 		_entity,
 		&sanguis::server::entities::with_health::regeneration,
-		0.75f,
+		0.5f,
 		_diff
 	);
 }

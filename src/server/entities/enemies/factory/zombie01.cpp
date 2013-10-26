@@ -17,6 +17,9 @@
 #include <sanguis/server/weapons/melee.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <cmath>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::entities::unique_ptr
@@ -34,6 +37,10 @@ sanguis::server::entities::enemies::factory::zombie01(
 			sanguis::server::damage::no_armor(),
 			sanguis::server::health(
 				3.f
+				*
+				std::sqrt(
+					_parameters.difficulty().get()
+				)
 			),
 			sanguis::server::entities::movement_speed(
 				20.f
@@ -56,7 +63,11 @@ sanguis::server::entities::enemies::factory::zombie01(
 					)
 				),
 				sanguis::server::weapons::damage(
-					2.f
+					5.f
+					*
+					std::sqrt(
+						_parameters.difficulty().get()
+					)
 				)
 			),
 			sanguis::server::pickup_probability(
