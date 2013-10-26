@@ -3,6 +3,7 @@
 
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
+#include <sanguis/server/ai/base_fwd.hpp>
 #include <sanguis/server/ai/entity_set.hpp>
 #include <sanguis/server/ai/manager_fwd.hpp>
 #include <sanguis/server/ai/update_result_fwd.hpp>
