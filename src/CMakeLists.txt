@@ -69,6 +69,8 @@ set(
 	include/sanguis/client/control/input_translator.hpp
 	include/sanguis/client/control/input_translator_fwd.hpp
 	include/sanguis/client/control/key_scale.hpp
+	include/sanguis/client/control/optional_cursor_position.hpp
+	include/sanguis/client/control/optional_cursor_position_fwd.hpp
 	include/sanguis/client/control/scalar.hpp
 	include/sanguis/client/create.hpp
 	include/sanguis/client/create_systems.hpp

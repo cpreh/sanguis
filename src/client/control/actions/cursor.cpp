@@ -1,9 +1,9 @@
-#include <sanguis/client/control/cursor_position.hpp>
+#include <sanguis/client/control/optional_cursor_position.hpp>
 #include <sanguis/client/control/actions/cursor.hpp>
 
 
 sanguis::client::control::actions::cursor::cursor(
-	sanguis::client::control::cursor_position const &_position
+	sanguis::client::control::optional_cursor_position const &_position
 )
 :
 	position_(
@@ -12,7 +12,7 @@ sanguis::client::control::actions::cursor::cursor(
 {
 }
 
-sanguis::client::control::cursor_position const
+sanguis::client::control::optional_cursor_position const
 sanguis::client::control::actions::cursor::position() const
 {
 	return position_;

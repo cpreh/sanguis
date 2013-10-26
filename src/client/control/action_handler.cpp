@@ -188,6 +188,15 @@ sanguis::client::control::action_handler::handle_cursor_action(
 	)
 		return;
 
+	environment_.update_position(
+		_action.position()
+	);
+
+	if(
+		!_action.position()
+	)
+		return;
+
 	send_(
 		*sanguis::messages::create(
 			sanguis::messages::player_attack_dest(
@@ -195,7 +204,7 @@ sanguis::client::control::action_handler::handle_cursor_action(
 					sanguis::messages::types::vector2
 				>(
 					environment_.translate_attack_dest(
-						_action.position()
+						*_action.position()
 					)
 				)
 			)

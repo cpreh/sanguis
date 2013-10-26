@@ -54,7 +54,8 @@ sanguis::client::draw2d::scene::hud::hud(
 	frames_counter_(),
 	primary_weapon_(),
 	secondary_weapon_(),
-	weapon_text_()
+	weapon_text_(),
+	name_text_()
 {
 	this->make_weapon_text();
 }
@@ -155,8 +156,13 @@ sanguis::client::draw2d::scene::hud::draw(
 			).str()
 			+
 			FCPPT_TEXT("\ntime: ")
-			+ time_stream.str()
-		),
+			+
+			time_stream.str()
+		)
+		+
+		SGE_FONT_LIT("\n\n")
+		+
+		name_text_,
 		sge::font::text_parameters(
 			sge::font::align_h::left
 		)
@@ -183,6 +189,24 @@ sanguis::client::draw2d::scene::hud::draw(
 		sge::image::color::predef::white(),
 		sge::renderer::texture::emulate_srgb::no
 	);
+}
+
+void
+sanguis::client::draw2d::scene::hud::show_name(
+	sanguis::client::draw2d::entities::name const &_name
+)
+{
+	name_text_ =
+		sge::font::from_fcppt_string(
+			_name.get()
+		);
+}
+
+
+void
+sanguis::client::draw2d::scene::hud::clear_name()
+{
+	name_text_.clear();
 }
 
 void

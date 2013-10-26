@@ -12,10 +12,12 @@ namespace client
 namespace control
 {
 
-typedef fcppt::math::vector::static_<
+typedef
+fcppt::math::vector::static_<
 	sanguis::client::control::cursor_unit,
 	2
-> cursor_position;
+>
+cursor_position;
 
 }
 }

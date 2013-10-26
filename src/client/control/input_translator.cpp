@@ -3,6 +3,7 @@
 #include <sanguis/client/control/cursor_position.hpp>
 #include <sanguis/client/control/input_translator.hpp>
 #include <sanguis/client/control/key_scale.hpp>
+#include <sanguis/client/control/optional_cursor_position.hpp>
 #include <sanguis/client/control/actions/any.hpp>
 #include <sanguis/client/control/actions/binary.hpp>
 #include <sanguis/client/control/actions/binary_type.hpp>
@@ -148,19 +149,20 @@ sanguis::client::control::input_translator::move_callback(
 	sge::input::cursor::move_event const &_event
 )
 {
-	if(
-		!_event.position()
-	)
-		return;
-
 	callback_(
 		sanguis::client::control::actions::any(
 			sanguis::client::control::actions::cursor(
-				fcppt::math::vector::structure_cast<
-					sanguis::client::control::cursor_position
-				>(
-					*_event.position()
-				)
+				_event.position()
+				?
+					sanguis::client::control::optional_cursor_position(
+						fcppt::math::vector::structure_cast<
+							sanguis::client::control::cursor_position
+						>(
+							*_event.position()
+						)
+					)
+				:
+					sanguis::client::control::optional_cursor_position()
 			)
 		)
 	);

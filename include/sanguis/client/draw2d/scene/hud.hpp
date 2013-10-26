@@ -73,9 +73,12 @@ public:
 	);
 
 	void
-	enemy_name(
-		sanguis::client::draw2d::entities::name
+	show_name(
+		sanguis::client::draw2d::entities::name const &
 	);
+
+	void
+	clear_name();
 private:
 	void
 	make_weapon_text();
@@ -107,6 +110,8 @@ private:
 	sanguis::string_vector secondary_weapon_;
 
 	sge::font::string weapon_text_;
+
+	sge::font::string name_text_;
 };
 
 }

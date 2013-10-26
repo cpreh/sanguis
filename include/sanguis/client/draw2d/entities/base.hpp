@@ -1,8 +1,10 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_BASE_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_BASE_HPP_INCLUDED
 
+#include <sanguis/client/draw2d/radius_fwd.hpp>
 #include <sanguis/client/draw2d/entities/base_fwd.hpp>
 #include <sanguis/client/draw2d/entities/name_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/center_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -40,6 +42,14 @@ public:
 	virtual
 	sanguis::client::draw2d::entities::name
 	name() const;
+
+	virtual
+	sanguis::client::draw2d::sprite::center const
+	center() const = 0;
+
+	virtual
+	sanguis::client::draw2d::radius const
+	radius() const = 0;
 
 	virtual
 	~base() = 0;

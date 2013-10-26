@@ -4,6 +4,7 @@
 #include <sanguis/client/control/attack_dest_fwd.hpp>
 #include <sanguis/client/control/cursor_position_fwd.hpp>
 #include <sanguis/client/control/environment.hpp>
+#include <sanguis/client/control/optional_cursor_position.hpp>
 #include <sanguis/client/draw2d/scene/control_environment_fwd.hpp>
 #include <sanguis/client/draw2d/scene/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -32,13 +33,25 @@ public:
 	);
 
 	~control_environment();
-
+private:
 	sanguis::client::control::attack_dest const
 	translate_attack_dest(
 		sanguis::client::control::cursor_position const &
-	) const;
-private:
+	) const
+	override;
+
+	sanguis::client::control::optional_cursor_position const
+	position() const;
+
+	void
+	update_position(
+		sanguis::client::control::optional_cursor_position const &
+	)
+	override;
+
 	sanguis::client::draw2d::scene::object &object_;
+
+	sanguis::client::control::optional_cursor_position position_;
 };
 
 }

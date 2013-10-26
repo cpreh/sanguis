@@ -122,6 +122,11 @@ private:
 	);
 
 	void
+	name_display(
+		sanguis::client::draw2d::entities::base const &
+	);
+
+	void
 	remove(
 		sanguis::entity_id
 	);

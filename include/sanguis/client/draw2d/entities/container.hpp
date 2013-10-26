@@ -5,6 +5,7 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/client/draw2d/center.hpp>
+#include <sanguis/client/draw2d/radius_fwd.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/entities/base.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
@@ -61,6 +62,10 @@ public:
 
 	sanguis::client::draw2d::sprite::center const
 	center() const
+	override;
+
+	sanguis::client::draw2d::radius const
+	radius() const
 	override;
 
 	void

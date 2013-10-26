@@ -118,6 +118,12 @@ sanguis::server::entities::enemies::enemy::enemy(
 		_spawn_owner
 	),
 	name_(
+		// TODO!
+		sge::charconv::fcppt_string_to_utf8(
+			sanguis::load::enemy_name(
+				etype_
+			)
+		)
 	)
 {
 }

@@ -4,6 +4,8 @@
 #include <sanguis/update_diff_clock.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
+#include <sanguis/client/control/attack_dest.hpp>
+#include <sanguis/client/control/optional_cursor_position.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/scene/object.hpp>
@@ -98,6 +100,8 @@
 #include <fcppt/math/matrix/arithmetic.hpp>
 #include <fcppt/math/matrix/translation.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/distance.hpp>
+#include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector30.hpp>
 #include <ctime>
@@ -306,6 +310,8 @@ sanguis::client::draw2d::scene::object::update(
 	sanguis::duration const &_delta
 )
 {
+	hud_->clear_name();
+
 	if(
 		!paused_
 	)
@@ -339,6 +345,10 @@ sanguis::client::draw2d::scene::object::update(
 		)
 			entities_.erase(
 				it
+			);
+		else
+			this->name_display(
+				cur_entity
 			);
 	}
 
@@ -592,6 +602,42 @@ sanguis::client::draw2d::scene::object::insert_own(
 
 	return
 		own_entities_.back();
+}
+
+void
+sanguis::client::draw2d::scene::object::name_display(
+	sanguis::client::draw2d::entities::base const &_entity
+)
+{
+	sanguis::client::control::optional_cursor_position const pos(
+		control_environment_->position()
+	);
+
+	if(
+		!pos
+	)
+		return;
+
+	if(
+		fcppt::math::vector::distance<
+			float
+		>(
+			// TODO: Rename attack_dest!
+			fcppt::math::vector::structure_cast<
+				sanguis::client::control::attack_dest
+			>(
+				_entity.center().get()
+			),
+			control_environment_->translate_attack_dest(
+				*pos
+			)
+		)
+		<
+		_entity.radius().get()
+	)
+		hud_->show_name(
+			_entity.name()
+		);
 }
 
 void

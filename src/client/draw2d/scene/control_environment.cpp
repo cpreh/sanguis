@@ -1,5 +1,7 @@
 #include <sanguis/client/control/attack_dest.hpp>
 #include <sanguis/client/control/cursor_position.hpp>
+#include <sanguis/client/control/environment.hpp>
+#include <sanguis/client/control/optional_cursor_position.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/scene/control_environment.hpp>
 #include <sanguis/client/draw2d/scene/object.hpp>
@@ -17,9 +19,11 @@ sanguis::client::draw2d::scene::control_environment::control_environment(
 	sanguis::client::draw2d::scene::object &_object
 )
 :
+	sanguis::client::control::environment(),
 	object_(
 		_object
-	)
+	),
+	position_()
 {
 }
 
@@ -53,4 +57,20 @@ sanguis::client::draw2d::scene::control_environment::translate_attack_dest(
 				+ _cursor_position
 			)
 		);
+}
+
+sanguis::client::control::optional_cursor_position const
+sanguis::client::draw2d::scene::control_environment::position() const
+{
+	return
+		position_;
+}
+
+void
+sanguis::client::draw2d::scene::control_environment::update_position(
+	sanguis::client::control::optional_cursor_position const &_position
+)
+{
+	position_ =
+		_position;
 }

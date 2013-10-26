@@ -2,6 +2,7 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/client/draw2d/center.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
+#include <sanguis/client/draw2d/radius.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/entities/base.hpp>
@@ -24,9 +25,11 @@
 #include <sge/sprite/intrusive/connection.hpp>
 #include <sge/timer/elapsed.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
+#include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <algorithm>
 #include <chrono>
 #include <fcppt/config/external_end.hpp>
 
@@ -96,6 +99,22 @@ sanguis::client::draw2d::entities::container::center() const
 		sanguis::client::draw2d::sprite::center(
 			sge::sprite::center(
 				this->master()
+			)
+		);
+}
+
+sanguis::client::draw2d::radius const
+sanguis::client::draw2d::entities::container::radius() const
+{
+	return
+		sanguis::client::draw2d::radius(
+			fcppt::cast::int_to_float<
+				sanguis::client::draw2d::funit
+			>(
+				std::max(
+					this->master().size().w(),
+					this->master().size().h()
+				)
 			)
 		);
 }
