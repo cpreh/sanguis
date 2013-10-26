@@ -179,6 +179,8 @@ set(
 	include/sanguis/client/draw2d/message/environment_fwd.hpp
 	include/sanguis/client/draw2d/optional_speed.hpp
 	include/sanguis/client/draw2d/optional_speed_fwd.hpp
+	include/sanguis/client/draw2d/radius.hpp
+	include/sanguis/client/draw2d/radius_fwd.hpp
 	include/sanguis/client/draw2d/scene/background.hpp
 	include/sanguis/client/draw2d/scene/background_dim.hpp
 	include/sanguis/client/draw2d/scene/background_fwd.hpp
@@ -559,6 +561,7 @@ set(
 	include/sanguis/main_object_fwd.hpp
 	include/sanguis/main_object_scoped_ptr.hpp
 	include/sanguis/main_object_unique_ptr.hpp
+	include/sanguis/map_iteration.hpp
 	include/sanguis/media_path.hpp
 	include/sanguis/messages/adapted_types/aura_type.hpp
 	include/sanguis/messages/adapted_types/aura_type_fwd.hpp
@@ -828,6 +831,7 @@ set(
 	include/sanguis/random_seed.hpp
 	include/sanguis/secondary_weapon_type.hpp
 	include/sanguis/secondary_weapon_type_fwd.hpp
+	include/sanguis/sequence_iteration.hpp
 	include/sanguis/server/ai/angle_to_target.hpp
 	include/sanguis/server/ai/base.hpp
 	include/sanguis/server/ai/base_fwd.hpp
@@ -1261,6 +1265,7 @@ set(
 	include/sanguis/server/world/context_fwd.hpp
 	include/sanguis/server/world/difficulty.hpp
 	include/sanguis/server/world/entity_map.hpp
+	include/sanguis/server/world/entity_vector.hpp
 	include/sanguis/server/world/grid_pos_to_center.hpp
 	include/sanguis/server/world/make_spawner.hpp
 	include/sanguis/server/world/map.hpp
@@ -1783,6 +1788,7 @@ set(
 	src/server/world/center_to_grid_pos.cpp
 	src/server/world/context.cpp
 	src/server/world/entity_map.cpp
+	src/server/world/entity_vector.cpp
 	src/server/world/grid_pos_to_center.cpp
 	src/server/world/make_spawner.cpp
 	src/server/world/object.cpp

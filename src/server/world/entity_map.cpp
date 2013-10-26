@@ -16,9 +16,10 @@ sanguis::server::world::entity_map::entity_map()
 
 sanguis::server::world::entity_map::~entity_map()
 {
-	// TODO: Get rid of this once bullet is gone!
 	for(
-		auto element : impl_
+		auto element
+		:
+		impl_
 	)
 		element.second->destroy();
 }

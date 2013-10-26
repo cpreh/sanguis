@@ -39,15 +39,13 @@
 #include <sanguis/server/world/context_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/entity_map.hpp>
+#include <sanguis/server/world/entity_vector.hpp>
 #include <sanguis/server/world/object_fwd.hpp>
 #include <sanguis/server/world/pickup_spawner.hpp>
 #include <sanguis/server/world/parameters_fwd.hpp>
 #include <sanguis/server/world/sight_range_map.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <boost/ptr_container/ptr_vector.hpp>
-#include <fcppt/config/external_end.hpp>
 
 
 
@@ -310,11 +308,7 @@ private:
 
 	sanguis::server::world::entity_map entities_;
 
-	typedef boost::ptr_vector<
-		sanguis::server::entities::base
-	> entity_vector;
-
-	entity_vector server_entities_;
+	sanguis::server::world::entity_vector server_entities_;
 
 	sanguis::server::world::pickup_spawner pickup_spawner_;
 };

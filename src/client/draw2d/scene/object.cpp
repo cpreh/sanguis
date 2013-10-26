@@ -1,6 +1,8 @@
 #include <sanguis/exception.hpp>
+#include <sanguis/map_iteration.hpp>
 #include <sanguis/random_generator.hpp>
 #include <sanguis/random_seed.hpp>
+#include <sanguis/sequence_iteration.hpp>
 #include <sanguis/update_diff_clock.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
@@ -320,58 +322,55 @@ sanguis::client::draw2d::scene::object::update(
 			_delta
 		);
 
-	// TODO: Simplify this loop!
-	for(
-		entity_map::iterator it(
-			entities_.begin()
-		),
-		next(
-			it
-		);
-		it != entities_.end();
-		it = next
-	)
-	{
-		++next;
-
-		sanguis::client::draw2d::entities::base &cur_entity(
-			*it->second
-		);
-
-		cur_entity.update();
-
-		if(
-			cur_entity.may_be_removed()
+	sanguis::map_iteration(
+		entities_,
+		[
+			this
+		](
+			sanguis::client::draw2d::entities::base &_entity
 		)
-			entities_.erase(
-				it
-			);
-		else
+		{
+			_entity.update();
+
 			this->name_display(
-				cur_entity
+				_entity
 			);
-	}
-
-	// TODO: Simplify this loop!
-	for(
-		own_entity_list::iterator it(
-			own_entities_.begin()
-		);
-		it != own_entities_.end();
-	)
-	{
-		it->update();
-
-		if(
-			it->may_be_removed()
+		},
+		[](
+			sanguis::client::draw2d::entities::base const &_entity
 		)
-			it =
-				own_entities_.erase(
-					it
-				);
-		else
-			++it;
-	}
+		{
+			return
+				_entity.may_be_removed();
+		},
+		[](
+			sanguis::client::draw2d::entities::base &
+		)
+		{
+		}
+	);
+
+	sanguis::sequence_iteration(
+		own_entities_,
+		[](
+			sanguis::client::draw2d::entities::own &_entity
+		)
+		{
+			_entity.update();
+		},
+		[](
+			sanguis::client::draw2d::entities::own const &_entity
+		)
+		{
+			return
+				_entity.may_be_removed();
+		},
+		[](
+			sanguis::client::draw2d::entities::own &
+		)
+		{
+		}
+	);
 }
 
 void
@@ -707,27 +706,26 @@ sanguis::client::draw2d::scene::object::change_world(
 {
 	own_entities_.clear();
 
-	// TODO: We should have a generic algorithm for iterations like these
-	for(
-		entity_map::iterator it(
-			entities_.begin()
-		),
-		next(
-			it
-		);
-		it != entities_.end();
-		it = next
-	)
-	{
-		++next;
-
-		if(
-			it->second->dead()
+	sanguis::map_iteration(
+		entities_,
+		[](
+			sanguis::client::draw2d::entities::base &
 		)
-			entities_.erase(
-				it
-			);
-	}
+		{
+		},
+		[](
+			sanguis::client::draw2d::entities::base const &_entity
+		)
+		{
+			return
+				_entity.dead();
+		},
+		[](
+			sanguis::client::draw2d::entities::base &
+		)
+		{
+		}
+	);
 
 	world_->change(
 		_parameters

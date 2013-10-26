@@ -4,7 +4,9 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
 #include <sanguis/is_primary_weapon.hpp>
+#include <sanguis/map_iteration.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
+#include <sanguis/sequence_iteration.hpp>
 #include <sanguis/timer.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/weapon_description.hpp>
@@ -86,7 +88,6 @@
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
-#include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/warning.hpp>
@@ -195,63 +196,47 @@ sanguis::server::world::object::update()
 		duration
 	);
 
-	for(
-		sanguis::server::world::entity_map::iterator it(
-			entities_.begin()
-		),
-		next(
-			it
-		);
-		it != entities_.end();
-		it = next
-	)
-	{
-		++next;
-
-		sanguis::server::entities::base &entity(
-			*it->second
-		);
-
-		entity.update();
-
-		if(
-			entity.dead()
+	auto const update_entity(
+		[](
+			sanguis::server::entities::base &_entity
 		)
 		{
-			entity.remove();
-
-			entities_.erase(
-				it
-			);
+			_entity.update();
 		}
-	}
+	);
 
-	for(
-		sanguis::server::world::object::entity_vector::iterator it(
-			server_entities_.begin()
-		);
-		it != server_entities_.end();
-	)
-	{
-		it->update();
-
-		if(
-			it->dead()
+	auto const entity_dead(
+		[](
+			sanguis::server::entities::base const &_entity
 		)
 		{
-			// TODO: Simplify this!
-			it->remove();
-
-			it->destroy();
-
-			it =
-				server_entities_.erase(
-					it
-				);
+			return
+				_entity.dead();
 		}
-		else
-			++it;
-	}
+	);
+
+	auto const remove_entity(
+		[](
+			sanguis::server::entities::base &_entity
+		)
+		{
+			_entity.remove();
+		}
+	);
+
+	sanguis::map_iteration(
+		entities_,
+		update_entity,
+		entity_dead,
+		remove_entity
+	);
+
+	sanguis::sequence_iteration(
+		server_entities_,
+		update_entity,
+		entity_dead,
+		remove_entity
+	);
 }
 
 sanguis::server::entities::optional_base_ref const
@@ -394,8 +379,7 @@ sanguis::server::world::object::insert_base(
 )
 {
 	// These are only very simple entities that don't need special treatment
-	fcppt::container::ptr::push_back_unique_ptr(
-		server_entities_,
+	server_entities_.push_back(
 		std::move(
 			_entity
 		)
