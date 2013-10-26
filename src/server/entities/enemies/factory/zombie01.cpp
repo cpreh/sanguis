@@ -36,14 +36,14 @@ sanguis::server::entities::enemies::factory::zombie01(
 			_parameters.load_context(),
 			sanguis::server::damage::no_armor(),
 			sanguis::server::health(
-				3.f
+				10.f
 				*
 				std::sqrt(
 					_parameters.difficulty().get()
 				)
 			),
 			sanguis::server::entities::movement_speed(
-				20.f
+				200.f
 			),
 			sanguis::server::ai::create_simple(
 				sanguis::server::ai::sight_range(
