@@ -5,6 +5,7 @@
 #include <sanguis/collision/world/group_field_fwd.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
+#include <sanguis/messages/types/string.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/pickup_probability.hpp>
@@ -101,6 +102,8 @@ private:
 	sanguis::server::entities::enemies::difficulty const difficulty_;
 
 	sanguis::server::entities::enemies::spawn_owner const spawn_owner_;
+
+	sanguis::messages::types::string const name_;
 };
 
 }

@@ -7,6 +7,7 @@
 #include <sanguis/messages/bind_entity_message.hpp>
 #include <sanguis/messages/make_class.hpp>
 #include <sanguis/messages/adapted_types/enum.hpp>
+#include <sanguis/messages/adapted_types/string.hpp>
 #include <majutsu/composite.hpp>
 #include <majutsu/role.hpp>
 

@@ -27,6 +27,7 @@
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/string.hpp>
 #include <sanguis/server/team.hpp>
+#include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/auras/weapon_pickup_add_candidate_callback.hpp>
 #include <sanguis/server/auras/weapon_pickup_candidates.hpp>
 #include <sanguis/server/auras/weapon_pickup_remove_candidate_callback.hpp>
@@ -62,6 +63,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/assign/make_container.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/atan2.hpp>
@@ -83,18 +85,6 @@ sanguis::server::entities::player::player(
 )
 :
 	sanguis::server::entities::ifaces::with_team(),
-	sanguis::server::entities::with_auras_id(),
-	sanguis::server::entities::with_buffs(),
-	sanguis::server::entities::with_id(
-		_load_context.next_id()
-	),
-	sanguis::server::entities::with_health(
-		_diff_clock,
-		_health,
-		_armor
-	),
-	sanguis::server::entities::with_links(),
-	sanguis::server::entities::with_perks(),
 	sanguis::server::entities::with_velocity(
 		_diff_clock,
 		_load_context.entity_dim(
@@ -114,6 +104,65 @@ sanguis::server::entities::player::player(
 			0.f
 		)
 	),
+	sanguis::server::entities::with_auras_id(
+		fcppt::assign::make_container<
+			sanguis::server::auras::container
+		>(
+			fcppt::make_unique_ptr<
+				sanguis::server::auras::update_sight
+			>(
+				sanguis::server::radius(
+					2000.f
+				),
+				sanguis::server::enter_sight_function(
+					std::bind(
+						&sanguis::server::entities::player::add_sight_range,
+						this,
+						std::placeholders::_1
+					)
+				),
+				sanguis::server::leave_sight_function(
+					std::bind(
+						&sanguis::server::entities::player::remove_sight_range,
+						this,
+						std::placeholders::_1
+					)
+				)
+			)
+		)(
+			fcppt::make_unique_ptr<
+				sanguis::server::auras::weapon_pickup_candidates
+			>(
+				// with_velocity needs to be initialized first!
+				this->radius(),
+				sanguis::server::auras::weapon_pickup_add_candidate_callback(
+					std::bind(
+						&sanguis::server::entities::player::weapon_pickup_add_candidate,
+						this,
+						std::placeholders::_1
+					)
+				),
+				sanguis::server::auras::weapon_pickup_remove_candidate_callback(
+					std::bind(
+						&sanguis::server::entities::player::weapon_pickup_remove_candidate,
+						this,
+						std::placeholders::_1
+					)
+				)
+			)
+		).move_container()
+	),
+	sanguis::server::entities::with_buffs(),
+	sanguis::server::entities::with_id(
+		_load_context.next_id()
+	),
+	sanguis::server::entities::with_health(
+		_diff_clock,
+		_health,
+		_armor
+	),
+	sanguis::server::entities::with_links(),
+	sanguis::server::entities::with_perks(),
 	sanguis::server::entities::with_weapon(
 		sanguis::server::weapons::player_start_weapon(
 			_diff_clock
@@ -145,51 +194,6 @@ sanguis::server::entities::player::player(
 	),
 	weapon_pickups_()
 {
-	this->add_aura(
-		fcppt::make_unique_ptr<
-			sanguis::server::auras::update_sight
-		>(
-			sanguis::server::radius(
-				2000.f
-			),
-			sanguis::server::enter_sight_function(
-				std::bind(
-					&sanguis::server::entities::player::add_sight_range,
-					this,
-					std::placeholders::_1
-				)
-			),
-			sanguis::server::leave_sight_function(
-				std::bind(
-					&sanguis::server::entities::player::remove_sight_range,
-					this,
-					std::placeholders::_1
-				)
-			)
-		)
-	);
-
-	this->add_aura(
-		fcppt::make_unique_ptr<
-			sanguis::server::auras::weapon_pickup_candidates
-		>(
-			this->radius(),
-			sanguis::server::auras::weapon_pickup_add_candidate_callback(
-				std::bind(
-					&sanguis::server::entities::player::weapon_pickup_add_candidate,
-					this,
-					std::placeholders::_1
-				)
-			),
-			sanguis::server::auras::weapon_pickup_remove_candidate_callback(
-				std::bind(
-					&sanguis::server::entities::player::weapon_pickup_remove_candidate,
-					this,
-					std::placeholders::_1
-				)
-			)
-		)
-	);
 }
 
 sanguis::server::entities::player::~player()

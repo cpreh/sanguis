@@ -127,6 +127,8 @@ set(
 	include/sanguis/client/draw2d/entities/model/parameters_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/part.hpp
 	include/sanguis/client/draw2d/entities/model/part_fwd.hpp
+	include/sanguis/client/draw2d/entities/name.hpp
+	include/sanguis/client/draw2d/entities/name_fwd.hpp
 	include/sanguis/client/draw2d/entities/order_vector.hpp
 	include/sanguis/client/draw2d/entities/own.hpp
 	include/sanguis/client/draw2d/entities/own_fwd.hpp
@@ -741,6 +743,7 @@ set(
 	include/sanguis/messages/roles/health.hpp
 	include/sanguis/messages/roles/max_health.hpp
 	include/sanguis/messages/roles/max_perk_level.hpp
+	include/sanguis/messages/roles/name.hpp
 	include/sanguis/messages/roles/opening_count.hpp
 	include/sanguis/messages/roles/perk.hpp
 	include/sanguis/messages/roles/perk_label.hpp

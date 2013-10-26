@@ -4,6 +4,7 @@
 #include <sanguis/is_primary_weapon_fwd.hpp>
 #include <sanguis/string_vector.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
+#include <sanguis/client/draw2d/entities/name_fwd.hpp>
 #include <sanguis/client/draw2d/scene/hud_fwd.hpp>
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/level.hpp>
@@ -69,6 +70,11 @@ public:
 	void
 	draw(
 		sge::renderer::context::ffp &
+	);
+
+	void
+	enemy_name(
+		sanguis::client::draw2d::entities::name
 	);
 private:
 	void

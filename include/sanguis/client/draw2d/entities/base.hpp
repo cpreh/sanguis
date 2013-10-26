@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_BASE_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/entities/base_fwd.hpp>
+#include <sanguis/client/draw2d/entities/name_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -35,6 +36,10 @@ public:
 
 	bool
 	may_be_removed() const;
+
+	virtual
+	sanguis::client::draw2d::entities::name
+	name() const;
 
 	virtual
 	~base() = 0;

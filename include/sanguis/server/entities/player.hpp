@@ -49,13 +49,13 @@ namespace entities
 class player
 :
 	public virtual sanguis::server::entities::ifaces::with_team,
+	public sanguis::server::entities::with_velocity,
 	public sanguis::server::entities::with_auras_id,
 	public sanguis::server::entities::with_buffs,
 	public sanguis::server::entities::with_id,
 	public sanguis::server::entities::with_health,
 	public sanguis::server::entities::with_links,
 	public sanguis::server::entities::with_perks,
-	public sanguis::server::entities::with_velocity,
 	public sanguis::server::entities::with_weapon
 {
 	FCPPT_NONCOPYABLE(

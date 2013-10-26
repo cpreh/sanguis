@@ -37,6 +37,7 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -65,6 +66,9 @@ sanguis::server::entities::enemies::enemy::enemy(
 		_ai,
 		std::move(
 			_weapon
+		),
+		std::move(
+			_auras
 		)
 	),
 	sanguis::server::entities::with_buffs(),
@@ -112,18 +116,10 @@ sanguis::server::entities::enemies::enemy::enemy(
 	),
 	spawn_owner_(
 		_spawn_owner
+	),
+	name_(
 	)
 {
-	for(
-		auto &aura
-		:
-		_auras
-	)
-		this->add_aura(
-			std::move(
-				aura
-			)
-		);
 }
 
 sanguis::server::entities::enemies::enemy::~enemy()
@@ -173,7 +169,8 @@ sanguis::server::entities::enemies::enemy::add_message(
 				this->primary_weapon_type(),
 				this->aura_types(),
 				this->buff_types(),
-				this->etype()
+				this->etype(),
+				name_
 			)
 		);
 }

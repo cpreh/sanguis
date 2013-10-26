@@ -3,6 +3,7 @@
 
 #include <sanguis/aura_type_vector.hpp>
 #include <sanguis/buff_type_vector.hpp>
+#include <sanguis/client/draw2d/entities/name.hpp>
 #include <sanguis/client/draw2d/entities/with_buffs_auras_model.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/creator/enemy_type_fwd.hpp>
@@ -32,10 +33,17 @@ public:
 		sanguis::load::auras::context &,
 		sanguis::creator::enemy_type,
 		sanguis::aura_type_vector const &,
-		sanguis::buff_type_vector const &
+		sanguis::buff_type_vector const &,
+		sanguis::client::draw2d::entities::name const &
 	);
 
 	~enemy();
+private:
+	sanguis::client::draw2d::entities::name
+	name() const
+	override;
+
+	sanguis::client::draw2d::entities::name const name_;
 };
 
 }

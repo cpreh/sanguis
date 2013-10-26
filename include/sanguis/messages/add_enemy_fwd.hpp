@@ -6,7 +6,9 @@
 #include <sanguis/messages/bind_entity_message_fwd.hpp>
 #include <sanguis/messages/make_class_fwd.hpp>
 #include <sanguis/messages/adapted_types/enum_fwd.hpp>
+#include <sanguis/messages/adapted_types/string_fwd.hpp>
 #include <sanguis/messages/roles/enemy.hpp>
+#include <sanguis/messages/roles/name.hpp>
 #include <sanguis/messages/types/message.hpp>
 #include <majutsu/composite_fwd.hpp>
 #include <majutsu/role_fwd.hpp>
@@ -23,7 +25,7 @@ namespace messages
 typedef
 sanguis::messages::make_class<
 	majutsu::composite<
-		boost::mpl::vector3<
+		boost::mpl::vector4<
 			sanguis::messages::bind_entity_message<
 				sanguis::messages::types::message::add_enemy
 			>,
@@ -33,6 +35,10 @@ sanguis::messages::make_class<
 					sanguis::creator::enemy_type
 				>,
 				sanguis::messages::roles::enemy
+			>,
+			majutsu::role<
+				sanguis::messages::adapted_types::string,
+				sanguis::messages::roles::name
 			>
 		>
 	>

@@ -15,6 +15,7 @@
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/entities/base.hpp>
+#include <sanguis/client/draw2d/entities/name.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_auras.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_buffs.hpp>
@@ -88,6 +89,7 @@
 #include <sanguis/messages/roles/friend.hpp>
 #include <sanguis/messages/roles/health.hpp>
 #include <sanguis/messages/roles/max_health.hpp>
+#include <sanguis/messages/roles/name.hpp>
 #include <sanguis/messages/roles/opening_count.hpp>
 #include <sanguis/messages/roles/primary_weapon.hpp>
 #include <sanguis/messages/roles/projectile.hpp>
@@ -205,7 +207,14 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 			>(),
 			_message.get<
 				sanguis::messages::adapted_types::buff_type_vector
-			>()
+			>(),
+			sanguis::client::draw2d::entities::name(
+				sge::charconv::utf8_string_to_fcppt(
+					_message.get<
+						sanguis::messages::roles::name
+					>()
+				)
+			)
 		),
 		_message
 	);

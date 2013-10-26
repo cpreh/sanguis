@@ -5,6 +5,7 @@
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/ai/manager_fwd.hpp>
 #include <sanguis/server/ai/scoped_ptr.hpp>
+#include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 #include <sanguis/server/entities/with_auras_id.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
@@ -34,7 +35,8 @@ protected:
 	with_ai(
 		sanguis::diff_clock const &,
 		sanguis::server::ai::create_function const &,
-		sanguis::server::weapons::unique_ptr &&start_weapon
+		sanguis::server::weapons::unique_ptr &&,
+		sanguis::server::auras::container &&
 	);
 
 	~with_ai();

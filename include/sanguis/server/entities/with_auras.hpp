@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_AURAS_HPP_INCLUDED
 
 #include <sanguis/server/auras/aura_fwd.hpp>
+#include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/auras/unique_ptr.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -31,7 +32,10 @@ public:
 		sanguis::server::auras::unique_ptr &&
 	);
 protected:
-	with_auras();
+	explicit
+	with_auras(
+		sanguis::server::auras::container &&
+	);
 
 	~with_auras();
 

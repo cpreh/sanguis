@@ -3,6 +3,7 @@
 
 #include <sge/charconv/utf8_string.hpp>
 
+
 namespace sanguis
 {
 namespace messages

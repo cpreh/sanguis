@@ -1,4 +1,5 @@
 #include <sanguis/server/auras/aura.hpp>
+#include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/auras/unique_ptr.hpp>
 #include <sanguis/server/collision/ghost.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
@@ -26,11 +27,23 @@ sanguis::server::entities::with_auras::add_aura(
 	);
 }
 
-sanguis::server::entities::with_auras::with_auras()
+sanguis::server::entities::with_auras::with_auras(
+	sanguis::server::auras::container &&_auras
+)
 :
 	sanguis::server::entities::with_ghosts(),
 	auras_()
 {
+	for(
+		auto &aura
+		:
+		_auras
+	)
+		this->add_aura(
+			std::move(
+				aura
+			)
+		);
 }
 
 sanguis::server::entities::with_auras::~with_auras()

@@ -2,6 +2,7 @@
 #include <sanguis/buff_type_vector.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/enemy.hpp>
+#include <sanguis/client/draw2d/entities/name.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/with_auras_model_parameters.hpp>
 #include <sanguis/client/draw2d/entities/with_buffs_auras_model.hpp>
@@ -21,7 +22,8 @@ sanguis::client::draw2d::entities::enemy::enemy(
 	sanguis::load::auras::context &_aura_resources,
 	sanguis::creator::enemy_type const _enemy_type,
 	sanguis::aura_type_vector const &_auras,
-	sanguis::buff_type_vector const &_buffs
+	sanguis::buff_type_vector const &_buffs,
+	sanguis::client::draw2d::entities::name const &_name
 )
 :
 	sanguis::client::draw2d::entities::with_buffs_auras_model(
@@ -50,10 +52,20 @@ sanguis::client::draw2d::entities::enemy::enemy(
 				)
 			)
 		)
+	),
+	name_(
+		_name
 	)
 {
 }
 
 sanguis::client::draw2d::entities::enemy::~enemy()
 {
+}
+
+sanguis::client::draw2d::entities::name
+sanguis::client::draw2d::entities::enemy::name() const
+{
+	return
+		name_;
 }

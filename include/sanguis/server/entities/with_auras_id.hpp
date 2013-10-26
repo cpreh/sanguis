@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_AURAS_ID_HPP_INCLUDED
 
 #include <sanguis/aura_type_vector.hpp>
+#include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/auras/unique_ptr.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
@@ -30,7 +31,10 @@ public:
 	)
 	override;
 protected:
-	with_auras_id();
+	explicit
+	with_auras_id(
+		sanguis::server::auras::container &&
+	);
 
 	~with_auras_id();
 

@@ -13,6 +13,8 @@
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/ai/base.hpp>
 #include <sanguis/server/ai/create_function.hpp>
+#include <sanguis/server/auras/aura.hpp>
+#include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/collision/with_world.hpp>
 #include <sanguis/server/damage/armor.hpp>
 #include <sanguis/server/entities/friend.hpp>
@@ -54,7 +56,8 @@ sanguis::server::entities::friend_::friend_(
 		_ai,
 		std::move(
 			_weapon
-		)
+		),
+		sanguis::server::auras::container()
 	),
 	sanguis::server::entities::with_buffs(),
 	sanguis::server::entities::with_id(
