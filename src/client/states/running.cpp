@@ -279,6 +279,10 @@ sanguis::client::states::running::operator()(
 		true
 	);
 
+	sound_manager_->pause(
+		true
+	);
+
 	return
 		this->discard_event();
 }
@@ -289,6 +293,10 @@ sanguis::client::states::running::operator()(
 )
 {
 	drawer_->pause(
+		false
+	);
+
+	sound_manager_->pause(
 		false
 	);
 

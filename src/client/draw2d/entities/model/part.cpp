@@ -22,7 +22,9 @@
 #include <sanguis/load/resource/animation/series.hpp>
 #include <sge/audio/buffer.hpp>
 #include <sge/audio/sound/base.hpp>
+#include <sge/audio/sound/do_pause.hpp>
 #include <sge/audio/sound/nonpositional_parameters.hpp>
+#include <sge/audio/sound/pause_or_resume.hpp>
 #include <sge/audio/sound/repeat.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
 #include <fcppt/literal.hpp>
@@ -82,6 +84,22 @@ sanguis::client::draw2d::entities::model::part::part(
 
 sanguis::client::draw2d::entities::model::part::~part()
 {
+}
+
+void
+sanguis::client::draw2d::entities::model::part::pause(
+	bool const _value
+)
+{
+	if(
+		sound_
+	)
+		sge::audio::sound::pause_or_resume(
+			*sound_,
+			sge::audio::sound::do_pause(
+				_value
+			)
+		);
 }
 
 bool

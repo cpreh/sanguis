@@ -91,6 +91,12 @@ protected:
 	dead() const
 	override;
 
+	void
+	pause(
+		bool
+	)
+	override;
+
 	bool
 	is_decayed() const
 	override;

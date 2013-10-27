@@ -32,6 +32,12 @@ public:
 
 	virtual
 	~own() = 0;
+
+	virtual
+	void
+	pause(
+		bool
+	);
 };
 
 }

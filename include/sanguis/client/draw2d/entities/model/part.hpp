@@ -43,6 +43,11 @@ public:
 
 	~part();
 
+	void
+	pause(
+		bool
+	);
+
 	bool
 	try_animation(
 		sanguis::load::animation_type

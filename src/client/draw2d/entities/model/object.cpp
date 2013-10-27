@@ -247,6 +247,21 @@ sanguis::client::draw2d::entities::model::object::dead() const
 		decay_time_.get() != nullptr;
 }
 
+void
+sanguis::client::draw2d::entities::model::object::pause(
+	bool const _value
+)
+{
+	for(
+		auto &cur_part
+		:
+		parts_
+	)
+		cur_part.pause(
+			_value
+		);
+}
+
 bool
 sanguis::client::draw2d::entities::model::object::is_decayed() const
 {

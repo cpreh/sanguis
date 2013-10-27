@@ -36,6 +36,12 @@ public:
 	bool
 	dead() const = 0;
 
+	virtual
+	void
+	pause(
+		bool
+	) = 0;
+
 	bool
 	may_be_removed() const;
 

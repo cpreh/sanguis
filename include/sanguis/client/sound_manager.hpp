@@ -30,6 +30,11 @@ public:
 	);
 
 	void
+	pause(
+		bool
+	);
+
+	void
 	update();
 private:
 	typedef

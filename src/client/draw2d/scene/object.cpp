@@ -393,6 +393,24 @@ sanguis::client::draw2d::scene::object::pause(
 )
 {
 	paused_ = _paused;
+
+	for(
+		auto cur
+		:
+		entities_
+	)
+		cur.second->pause(
+			_paused
+		);
+
+	for(
+		auto &cur
+		:
+		own_entities_
+	)
+		cur.pause(
+			_paused
+		);
 }
 
 void
