@@ -226,7 +226,8 @@ sanguis::server::states::running::operator()(
 			_id
 		)
 	)
-		return this->discard_event();
+		return
+			this->discard_event();
 
 	sanguis::string_vector const command(
 		sanguis::messages::serialization::convert_string_vector(
@@ -279,13 +280,6 @@ sanguis::server::states::running::operator()(
 	sanguis::messages::player_cheat const &_message
 )
 {
-	if(
-		!this->global_context().has_player(
-			_id
-		)
-	)
-		return this->discard_event();
-
 	global_context_->player_cheat(
 		_id,
 		_message.get<
@@ -303,14 +297,6 @@ sanguis::server::states::running::operator()(
 	sanguis::messages::player_choose_perk const &_message
 )
 {
-	if(
-		!this->global_context().has_player(
-			_id
-		)
-	)
-		return
-			this->discard_event();
-
 	global_context_->player_choose_perk(
 		_id,
 		_message.get<

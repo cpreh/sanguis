@@ -2,6 +2,7 @@
 #include <sanguis/connect_state.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
+#include <sanguis/exception.hpp>
 #include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/perk_type.hpp>
@@ -602,8 +603,9 @@ sanguis::server::global::context::player(
 		)
 	);
 
-	FCPPT_ASSERT_PRE(
-		it != players_.end()
+	FCPPT_ASSERT_THROW(
+		it != players_.end(),
+		sanguis::exception
 	);
 
 	return
