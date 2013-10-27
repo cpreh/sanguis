@@ -36,12 +36,14 @@
 #include <fcppt/container/grid/make_pos_range.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
 #include <fcppt/math/clamp.hpp>
+#include <fcppt/random/make_variate.hpp>
+#include <fcppt/random/variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
+#include <fcppt/random/distribution/make_basic.hpp>
+#include <fcppt/random/distribution/parameters/make_uniform_indices.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real.hpp>
-#include <fcppt/random/distribution/parameters/make_uniform_enum.hpp>
 #include <fcppt/random/distribution/transform/enum.hpp>
-#include <fcppt/random/variate.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <vector>
 #include <ostream>
@@ -191,18 +193,16 @@ sanguis::creator::aux_::generators::graveyard(
 	>
 	uniform_real;
 
-	fcppt::random::variate<
-		sanguis::creator::aux_::randgen,
-		uniform_real
-	>
-	fill_tile_random(
-		_parameters.randgen(),
-		uniform_real(
-			uniform_real::param_type::min(
-				0.f
-			),
-			uniform_real::param_type::sup(
-				1.0f
+	auto fill_tile_random(
+		fcppt::random::make_variate(
+			_parameters.randgen(),
+			uniform_real(
+				uniform_real::param_type::min(
+					0.f
+				),
+				uniform_real::param_type::sup(
+					1.0f
+				)
 			)
 		)
 	);
@@ -214,23 +214,19 @@ sanguis::creator::aux_::generators::graveyard(
 		>
 	> uniform_tile_enum;
 
-	typedef
-	fcppt::random::variate<
-		sanguis::creator::aux_::randgen,
-		uniform_tile_enum
-	> random_tile_type;
-
-	random_tile_type
-	random_grave(
-		_parameters.randgen(),
-		uniform_tile_enum(
-			uniform_tile_enum::param_type::min(
-				sanguis::creator::tile::grave1
-			),
-			uniform_tile_enum::param_type::max(
-				sanguis::creator::tile::grave5
+	auto random_grave(
+		fcppt::random::make_variate(
+			_parameters.randgen(),
+			uniform_tile_enum(
+				uniform_tile_enum::param_type::min(
+					sanguis::creator::tile::grave1
+				),
+				uniform_tile_enum::param_type::max(
+					sanguis::creator::tile::grave5
+				)
 			)
-	));
+		)
+	);
 
 	for(
 		auto cell :
@@ -407,27 +403,20 @@ place_spawners(
 				grid.size().h() - 2
 		)));
 
-	typedef
-	fcppt::random::distribution::basic<
-		fcppt::random::distribution::parameters::uniform_int<
-			sanguis::creator::enemy_type
-		>
-	> uniform_enemy_enum;
+	auto const monsters = {
+		sanguis::creator::enemy_type::zombie00,
+		sanguis::creator::enemy_type::zombie01,
+		sanguis::creator::enemy_type::skeleton,
+		sanguis::creator::enemy_type::ghost
+	};
 
-	typedef
-	fcppt::random::variate<
-		sanguis::creator::aux_::randgen,
-		uniform_enemy_enum
-	> random_monster_type;
-
-	random_monster_type
-	random_monster(
-		randgen,
-		uniform_enemy_enum(
-			fcppt::random::distribution::parameters::make_uniform_enum<
-				sanguis::creator::enemy_type
-			>()
-		));
+	auto random_monster(
+		fcppt::random::distribution::make_basic(
+			fcppt::random::distribution::parameters::make_uniform_indices(
+				monsters
+			)
+		)
+	);
 
 	sanguis::creator::spawn_container
 	spawners;
@@ -490,9 +479,19 @@ place_spawners(
 		spawners.push_back(
 			sanguis::creator::spawn(
 				sanguis::creator::spawn_pos(
-					*candidate),
-				sanguis::creator::enemy_type::zombie01,
-				sanguis::creator::spawn_type::spawner));
+					*candidate
+				),
+				// TODO: Simplify operator[] for initializer lists
+				*(
+					monsters.begin()
+					+
+					random_monster(
+						randgen
+					)
+				),
+				sanguis::creator::spawn_type::spawner
+			)
+		);
 
 		current_spawners++;
 	}
