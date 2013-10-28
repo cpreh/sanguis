@@ -10,6 +10,7 @@
 #include <sanguis/timer.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/weapon_description.hpp>
+#include <sanguis/weapon_status.hpp>
 #include <sanguis/collision/world/body_collision_callback.hpp>
 #include <sanguis/collision/world/create.hpp>
 #include <sanguis/collision/world/parameters.hpp>
@@ -36,10 +37,7 @@
 #include <sanguis/messages/remove_weapon.hpp>
 #include <sanguis/messages/rotate.hpp>
 #include <sanguis/messages/speed.hpp>
-#include <sanguis/messages/start_attacking.hpp>
-#include <sanguis/messages/start_reloading.hpp>
-#include <sanguis/messages/stop_attacking.hpp>
-#include <sanguis/messages/stop_reloading.hpp>
+#include <sanguis/messages/weapon_status.hpp>
 #include <sanguis/messages/serialization/convert_string_vector.hpp>
 #include <sanguis/messages/types/exp.hpp>
 #include <sanguis/messages/types/size.hpp>
@@ -566,50 +564,19 @@ sanguis::server::world::object::speed_changed(
 }
 
 void
-sanguis::server::world::object::attacking_changed(
+sanguis::server::world::object::weapon_status_changed(
 	sanguis::entity_id const _id,
-	bool const _is_attacking
+	sanguis::weapon_status const _weapon_status
 )
 {
 	this->send_entity_specific(
 		_id,
-		_is_attacking
-		?
-			*sanguis::messages::create(
-				sanguis::messages::start_attacking(
-					_id
-				)
+		*sanguis::messages::create(
+			sanguis::messages::weapon_status(
+				_id,
+				_weapon_status
 			)
-		:
-			*sanguis::messages::create(
-				sanguis::messages::stop_attacking(
-					_id
-				)
-			)
-	);
-}
-
-void
-sanguis::server::world::object::reloading_changed(
-	sanguis::entity_id const _id,
-	bool const _is_reloading
-)
-{
-	this->send_entity_specific(
-		_id,
-		_is_reloading
-		?
-			*sanguis::messages::create(
-				sanguis::messages::start_reloading(
-					_id
-				)
-			)
-		:
-			*sanguis::messages::create(
-				sanguis::messages::stop_reloading(
-					_id
-				)
-			)
+		)
 	);
 }
 

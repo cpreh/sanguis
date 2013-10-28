@@ -65,11 +65,8 @@
 #include <sanguis/messages/remove_weapon.hpp>
 #include <sanguis/messages/role_name.hpp>
 #include <sanguis/messages/rotate.hpp>
-#include <sanguis/messages/start_attacking.hpp>
-#include <sanguis/messages/stop_attacking.hpp>
-#include <sanguis/messages/start_reloading.hpp>
-#include <sanguis/messages/stop_reloading.hpp>
 #include <sanguis/messages/speed.hpp>
+#include <sanguis/messages/weapon_status.hpp>
 #include <sanguis/messages/adapted_types/aura_type.hpp>
 #include <sanguis/messages/adapted_types/aura_type_vector.hpp>
 #include <sanguis/messages/adapted_types/buff_type.hpp>
@@ -95,6 +92,7 @@
 #include <sanguis/messages/roles/projectile.hpp>
 #include <sanguis/messages/roles/speed.hpp>
 #include <sanguis/messages/roles/weapon_description.hpp>
+#include <sanguis/messages/roles/weapon_status.hpp>
 #include <sanguis/messages/serialization/convert_string_vector.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <fcppt/dynamic_cast.hpp>
@@ -628,7 +626,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::start_attacking const &_message
+	sanguis::messages::weapon_status const &_message
 )
 {
 	fcppt::dynamic_cast_<
@@ -639,62 +637,10 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 				sanguis::messages::roles::entity_id
 			>()
 		)
-	).attacking(
-		true
-	);
-}
-
-sanguis::client::draw2d::message::dispatcher::result_type
-sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::stop_attacking const &_message
-)
-{
-	fcppt::dynamic_cast_<
-		sanguis::client::draw2d::entities::ifaces::with_weapon &
-	>(
-		this->entity(
-			_message.get<
-				sanguis::messages::roles::entity_id
-			>()
-		)
-	).attacking(
-		false
-	);
-}
-
-sanguis::client::draw2d::message::dispatcher::result_type
-sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::start_reloading const &_message
-)
-{
-	fcppt::dynamic_cast_<
-		sanguis::client::draw2d::entities::ifaces::with_weapon &
-	>(
-		this->entity(
-			_message.get<
-				sanguis::messages::roles::entity_id
-			>()
-		)
-	).reloading(
-		true
-	);
-}
-
-sanguis::client::draw2d::message::dispatcher::result_type
-sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::stop_reloading const &_message
-)
-{
-	fcppt::dynamic_cast_<
-		sanguis::client::draw2d::entities::ifaces::with_weapon &
-	>(
-		this->entity(
-			_message.get<
-				sanguis::messages::roles::entity_id
-			>()
-		)
-	).reloading(
-		false
+	).weapon_status(
+		_message.get<
+			sanguis::messages::roles::weapon_status
+		>()
 	);
 }
 

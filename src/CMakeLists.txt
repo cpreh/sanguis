@@ -601,6 +601,8 @@ set(
 	include/sanguis/messages/adapted_types/string_vector_fwd.hpp
 	include/sanguis/messages/adapted_types/vector2.hpp
 	include/sanguis/messages/adapted_types/vector2_fwd.hpp
+	include/sanguis/messages/adapted_types/weapon_status.hpp
+	include/sanguis/messages/adapted_types/weapon_status_fwd.hpp
 	include/sanguis/messages/adapted_types/weapon_type.hpp
 	include/sanguis/messages/adapted_types/weapon_type_fwd.hpp
 	include/sanguis/messages/adapted_types/world_id.hpp
@@ -760,6 +762,7 @@ set(
 	include/sanguis/messages/roles/required_perk_player_level.hpp
 	include/sanguis/messages/roles/speed.hpp
 	include/sanguis/messages/roles/weapon_description.hpp
+	include/sanguis/messages/roles/weapon_status.hpp
 	include/sanguis/messages/rotate.hpp
 	include/sanguis/messages/rotate_fwd.hpp
 	include/sanguis/messages/serialization/context_fwd.hpp
@@ -770,14 +773,6 @@ set(
 	include/sanguis/messages/shared_ptr.hpp
 	include/sanguis/messages/speed.hpp
 	include/sanguis/messages/speed_fwd.hpp
-	include/sanguis/messages/start_attacking.hpp
-	include/sanguis/messages/start_attacking_fwd.hpp
-	include/sanguis/messages/start_reloading.hpp
-	include/sanguis/messages/start_reloading_fwd.hpp
-	include/sanguis/messages/stop_attacking.hpp
-	include/sanguis/messages/stop_attacking_fwd.hpp
-	include/sanguis/messages/stop_reloading.hpp
-	include/sanguis/messages/stop_reloading_fwd.hpp
 	include/sanguis/messages/types/alda_type.hpp
 	include/sanguis/messages/types/alda_type_fwd.hpp
 	include/sanguis/messages/types/char.hpp
@@ -796,6 +791,8 @@ set(
 	include/sanguis/messages/unique_ptr.hpp
 	include/sanguis/messages/unpause.hpp
 	include/sanguis/messages/unpause_fwd.hpp
+	include/sanguis/messages/weapon_status.hpp
+	include/sanguis/messages/weapon_status_fwd.hpp
 	include/sanguis/net/append_to_circular_buffer.hpp
 	include/sanguis/net/data_buffer.hpp
 	include/sanguis/net/data_buffer_fwd.hpp
@@ -1291,6 +1288,8 @@ set(
 	include/sanguis/update_diff_clock.hpp
 	include/sanguis/weapon_description.hpp
 	include/sanguis/weapon_description_fwd.hpp
+	include/sanguis/weapon_status.hpp
+	include/sanguis/weapon_status_fwd.hpp
 	include/sanguis/weapon_type.hpp
 	include/sanguis/weapon_type_fwd.hpp
 	include/sanguis/weapon_type_to_is_primary.hpp
@@ -1563,11 +1562,8 @@ set(
 	src/messages/serialization/details.cpp
 	src/messages/serialization/serialize.cpp
 	src/messages/speed.cpp
-	src/messages/start_attacking.cpp
-	src/messages/start_reloading.cpp
-	src/messages/stop_attacking.cpp
-	src/messages/stop_reloading.cpp
 	src/messages/unpause.cpp
+	src/messages/weapon_status.cpp
 	src/net/append_to_circular_buffer.cpp
 	src/net/deserialize.cpp
 	src/net/is_disconnect.cpp

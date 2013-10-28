@@ -3,6 +3,7 @@
 
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
+#include <sanguis/weapon_status.hpp>
 #include <sanguis/client/health.hpp>
 #include <sanguis/client/max_health.hpp>
 #include <sanguis/client/draw2d/speed_fwd.hpp>
@@ -148,14 +149,8 @@ private:
 	override;
 
 	void
-	attacking(
-		bool
-	)
-	override;
-
-	void
-	reloading(
-		bool
+	weapon_status(
+		sanguis::weapon_status
 	)
 	override;
 
@@ -184,9 +179,7 @@ private:
 
 	sanguis::diff_clock const &diff_clock_;
 
-	bool
-		attacking_,
-		reloading_;
+	sanguis::weapon_status weapon_status_;
 
 	sanguis::client::health health_;
 

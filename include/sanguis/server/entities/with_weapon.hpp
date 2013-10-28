@@ -4,7 +4,7 @@
 #include <sanguis/is_primary_weapon_fwd.hpp>
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
 #include <sanguis/string_vector.hpp>
-#include <sanguis/weapon_type.hpp>
+#include <sanguis/weapon_status.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
@@ -15,6 +15,7 @@
 #include <sanguis/server/weapons/irs.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/target.hpp>
+#include <sanguis/server/weapons/weapon_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_decl.hpp>
 
@@ -103,16 +104,13 @@ public:
 	secondary_weapon() const;
 
 	void
-	attacking(
-		bool,
-		sanguis::weapon_type
+	weapon_status(
+		sanguis::weapon_status,
+		sanguis::server::weapons::weapon const &
 	);
 
-	void
-	reloading(
-		bool,
-		sanguis::weapon_type
-	);
+	sanguis::weapon_status
+	weapon_status() const;
 private:
 	typedef
 	fcppt::optional<
@@ -167,6 +165,8 @@ private:
 	> optional_target;
 
 	optional_target target_;
+
+	sanguis::weapon_status weapon_status_;
 
 	sanguis::server::entities::property::always_max
 		attack_speed_,

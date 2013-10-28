@@ -1,4 +1,5 @@
 #include <sanguis/diff_timer.hpp>
+#include <sanguis/weapon_status.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/events/poll.hpp>
@@ -64,13 +65,6 @@ sanguis::server::weapons::states::backswing::react(
 		return
 			this->discard_event();
 
-	_event.owner().attacking(
-		false,
-		this->context<
-			sanguis::server::weapons::weapon
-		>().type()
-	);
-
 	if(
 		this->context<
 			sanguis::server::weapons::weapon
@@ -94,11 +88,11 @@ sanguis::server::weapons::states::backswing::react(
 				sanguis::server::weapons::events::stop()
 			);
 
-		_event.owner().reloading(
-			true,
+		_event.owner().weapon_status(
+			sanguis::weapon_status::reloading,
 			this->context<
 				sanguis::server::weapons::weapon
-			>().type()
+			>()
 		);
 
 		return
@@ -118,6 +112,13 @@ sanguis::server::weapons::states::backswing::react(
 			sanguis::server::weapons::events::shoot(
 				_event.owner()
 			)
+		);
+	else
+		_event.owner().weapon_status(
+			sanguis::weapon_status::nothing,
+			this->context<
+				sanguis::server::weapons::weapon
+			>()
 		);
 
 	return

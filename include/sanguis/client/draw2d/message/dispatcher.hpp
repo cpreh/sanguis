@@ -31,10 +31,7 @@
 #include <sanguis/messages/remove_weapon_fwd.hpp>
 #include <sanguis/messages/rotate_fwd.hpp>
 #include <sanguis/messages/speed_fwd.hpp>
-#include <sanguis/messages/start_attacking_fwd.hpp>
-#include <sanguis/messages/stop_attacking_fwd.hpp>
-#include <sanguis/messages/start_reloading_fwd.hpp>
-#include <sanguis/messages/stop_reloading_fwd.hpp>
+#include <sanguis/messages/weapon_status_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -179,27 +176,12 @@ public:
 
 	result_type
 	operator()(
-		sanguis::messages::start_attacking const &
-	);
-
-	result_type
-	operator()(
-		sanguis::messages::stop_attacking const &
-	);
-
-	result_type
-	operator()(
-		sanguis::messages::start_reloading const &
-	);
-
-	result_type
-	operator()(
-		sanguis::messages::stop_reloading const &
-	);
-
-	result_type
-	operator()(
 		sanguis::messages::speed const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::weapon_status const &
 	);
 
 	result_type

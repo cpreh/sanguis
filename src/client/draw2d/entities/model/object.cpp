@@ -1,10 +1,9 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/duration_second.hpp>
-#include <sanguis/log_parameters.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
+#include <sanguis/weapon_status.hpp>
 #include <sanguis/client/health.hpp>
 #include <sanguis/client/max_health.hpp>
-#include <sanguis/client/draw2d/log_location.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/speed_is_null.hpp>
 #include <sanguis/client/draw2d/entities/container.hpp>
@@ -30,11 +29,6 @@
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/assert/unreachable_message.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
-#include <fcppt/log/location.hpp>
-#include <fcppt/log/object.hpp>
-#include <fcppt/log/output.hpp>
-#include <fcppt/log/warning.hpp>
-#include <fcppt/log/parameters/object.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/text.hpp>
@@ -45,14 +39,6 @@
 
 namespace
 {
-
-fcppt::log::object logger(
-	sanguis::log_parameters(
-		sanguis::client::draw2d::log_location()
-		/
-		FCPPT_TEXT("model")
-	)
-);
 
 sanguis::client::draw2d::entities::order_vector const
 expand_orders(
@@ -106,11 +92,8 @@ sanguis::client::draw2d::entities::model::object::object(
 	diff_clock_(
 		_parameters.load_parameters().diff_clock()
 	),
-	attacking_(
-		false
-	),
-	reloading_(
-		false
+	weapon_status_(
+		sanguis::weapon_status::nothing
 	),
 	health_(
 		0.f
@@ -396,39 +379,12 @@ sanguis::client::draw2d::entities::model::object::weapon(
 }
 
 void
-sanguis::client::draw2d::entities::model::object::attacking(
-	bool const _attacking
+sanguis::client::draw2d::entities::model::object::weapon_status(
+	sanguis::weapon_status const _weapon_status
 )
 {
-	if(
-		_attacking == attacking_
-	)
-		FCPPT_LOG_WARNING(
-			::logger,
-			fcppt::log::_
-				<< FCPPT_TEXT("attacking(): value already set!")
-		);
-
-	attacking_ = _attacking;
-
-	this->change_animation();
-}
-
-void
-sanguis::client::draw2d::entities::model::object::reloading(
-	bool const _reloading
-)
-{
-	if(
-		_reloading == reloading_
-	)
-		FCPPT_LOG_WARNING(
-			::logger,
-			fcppt::log::_
-				<< FCPPT_TEXT("reloading(): value already set!")
-		);
-
-	reloading_ = _reloading;
+	weapon_status_ =
+		_weapon_status;
 
 	this->change_animation();
 }
@@ -509,11 +465,15 @@ sanguis::client::draw2d::entities::model::object::animation() const
 		?
 			sanguis::load::animation_type::dying
 		:
-			reloading_
+			weapon_status_
+			==
+			sanguis::weapon_status::reloading
 			?
 				sanguis::load::animation_type::reloading
 			:
-				attacking_
+				weapon_status_
+				==
+				sanguis::weapon_status::attacking
 				?
 					sanguis::load::animation_type::attacking
 				:

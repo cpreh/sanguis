@@ -56,12 +56,9 @@ enum class message
 	remove_weapon,
 	rotate,
 	speed,
-	start_attacking,
-	stop_attacking,
-	start_reloading,
-	stop_reloading,
 	unpause,
-	fcppt_maximum = unpause
+	weapon_status,
+	fcppt_maximum = weapon_status
 };
 
 }

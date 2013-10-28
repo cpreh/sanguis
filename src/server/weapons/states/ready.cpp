@@ -1,3 +1,4 @@
+#include <sanguis/weapon_status.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/events/poll.hpp>
@@ -39,11 +40,11 @@ sanguis::server::weapons::states::ready::react(
 		return
 			this->discard_event();
 
-	from.attacking(
-		true,
+	from.weapon_status(
+		sanguis::weapon_status::attacking,
 		this->context<
 			sanguis::server::weapons::weapon
-		>().type()
+		>()
 	);
 
 	return

@@ -9,6 +9,7 @@
 #include <sanguis/is_primary_weapon_fwd.hpp>
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/weapon_status_fwd.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
@@ -168,16 +169,9 @@ private:
 	override;
 
 	void
-	attacking_changed(
+	weapon_status_changed(
 		sanguis::entity_id,
-		bool is_attacking
-	)
-	override;
-
-	void
-	reloading_changed(
-		sanguis::entity_id,
-		bool is_reloading
+		sanguis::weapon_status
 	)
 	override;
 

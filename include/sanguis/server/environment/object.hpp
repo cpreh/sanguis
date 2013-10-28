@@ -7,6 +7,7 @@
 #include <sanguis/is_primary_weapon_fwd.hpp>
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
+#include <sanguis/weapon_status_fwd.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/angle_fwd.hpp>
@@ -115,16 +116,9 @@ public:
 
 	virtual
 	void
-	attacking_changed(
+	weapon_status_changed(
 		sanguis::entity_id,
-		bool is_attacking
-	) = 0;
-
-	virtual
-	void
-	reloading_changed(
-		sanguis::entity_id,
-		bool is_reloading
+		sanguis::weapon_status
 	) = 0;
 
 	virtual

@@ -4,6 +4,7 @@
 #include <sanguis/optional_primary_weapon_type.hpp>
 #include <sanguis/primary_weapon_type.hpp>
 #include <sanguis/weapon_description.hpp>
+#include <sanguis/weapon_status.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/weapon_type_to_is_primary.hpp>
 #include <sanguis/messages/create.hpp>
@@ -41,6 +42,9 @@ sanguis::server::entities::with_weapon::with_weapon(
 	primary_weapon_(),
 	secondary_weapon_(),
 	target_(),
+	weapon_status_(
+		sanguis::weapon_status::nothing
+	),
 	attack_speed_(
 		1
 	),
@@ -303,37 +307,32 @@ sanguis::server::entities::with_weapon::secondary_weapon() const
 }
 
 void
-sanguis::server::entities::with_weapon::attacking(
-	bool const _value,
-	sanguis::weapon_type const _type
+sanguis::server::entities::with_weapon::weapon_status(
+	sanguis::weapon_status const _weapon_status,
+	sanguis::server::weapons::weapon const &_weapon
 )
 {
 	if(
-		sanguis::weapon_type_to_is_primary(
-			_type
+		!sanguis::weapon_type_to_is_primary(
+			_weapon.type()
 		).get()
 	)
-		this->environment()->attacking_changed(
-			this->id(),
-			_value
-		);
+		return;
+
+	weapon_status_ =
+		_weapon_status;
+
+	this->environment()->weapon_status_changed(
+		this->id(),
+		_weapon_status
+	);
 }
 
-void
-sanguis::server::entities::with_weapon::reloading(
-	bool const _value,
-	sanguis::weapon_type const _type
-)
+sanguis::weapon_status
+sanguis::server::entities::with_weapon::weapon_status() const
 {
-	if(
-		sanguis::weapon_type_to_is_primary(
-			_type
-		).get()
-	)
-		this->environment()->reloading_changed(
-			this->id(),
-			_value
-		);
+	return
+		weapon_status_;
 }
 
 sanguis::server::entities::with_weapon::optional_weapon_ref const

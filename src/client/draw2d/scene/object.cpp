@@ -57,11 +57,8 @@
 #include <sanguis/messages/remove_buff.hpp>
 #include <sanguis/messages/remove_weapon.hpp>
 #include <sanguis/messages/rotate.hpp>
-#include <sanguis/messages/start_attacking.hpp>
-#include <sanguis/messages/stop_attacking.hpp>
-#include <sanguis/messages/start_reloading.hpp>
-#include <sanguis/messages/stop_reloading.hpp>
 #include <sanguis/messages/speed.hpp>
+#include <sanguis/messages/weapon_status.hpp>
 #include <sanguis/messages/call/object.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/image/color/predef.hpp>
@@ -263,7 +260,7 @@ sanguis::client::draw2d::scene::object::process_message(
 )
 {
 	static sanguis::messages::call::object<
-		boost::mpl::vector28<
+		boost::mpl::vector25<
 			sanguis::messages::add_aoe_projectile,
 			sanguis::messages::add_aura,
 			sanguis::messages::add_buff,
@@ -287,11 +284,8 @@ sanguis::client::draw2d::scene::object::process_message(
 			sanguis::messages::remove_buff,
 			sanguis::messages::remove_weapon,
 			sanguis::messages::rotate,
-			sanguis::messages::start_attacking,
-			sanguis::messages::stop_attacking,
-			sanguis::messages::start_reloading,
-			sanguis::messages::stop_reloading,
-			sanguis::messages::speed
+			sanguis::messages::speed,
+			sanguis::messages::weapon_status
 		>,
 		sanguis::client::draw2d::message::dispatcher
 	> dispatcher;

@@ -1,4 +1,5 @@
 #include <sanguis/diff_timer.hpp>
+#include <sanguis/weapon_status.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/events/poll.hpp>
 #include <sanguis/server/weapons/events/shoot.hpp>
@@ -65,11 +66,11 @@ sanguis::server::weapons::states::reloading::react(
 		sanguis::server::weapons::weapon
 	>().reset_magazine();
 
-	_event.owner().reloading(
-		false,
+	_event.owner().weapon_status(
+		sanguis::weapon_status::nothing,
 		this->context<
 			sanguis::server::weapons::weapon
-		>().type()
+		>()
 	);
 
 	if(

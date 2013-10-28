@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_IFACES_WITH_WEAPON_HPP_INCLUDED
 
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
+#include <sanguis/weapon_status_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -35,14 +36,8 @@ public:
 
 	virtual
 	void
-	attacking(
-		bool
-	) = 0;
-
-	virtual
-	void
-	reloading(
-		bool
+	weapon_status(
+		sanguis::weapon_status
 	) = 0;
 };
 
