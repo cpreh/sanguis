@@ -174,12 +174,6 @@ sanguis::server::world::object::~object()
 void
 sanguis::server::world::object::update()
 {
-	// Don't process worlds that have no players in them
-	if(
-		sight_ranges_.empty()
-	)
-		return;
-
 	sanguis::duration const duration(
 		sge::timer::elapsed_and_reset<
 			sanguis::duration
@@ -187,6 +181,12 @@ sanguis::server::world::object::update()
 			collision_timer_
 		)
 	);
+
+	// Don't process worlds that have no players in them
+	if(
+		sight_ranges_.empty()
+	)
+		return;
 
 	for(
 		auto const entity
