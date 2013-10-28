@@ -9,12 +9,14 @@
 #include <sanguis/messages/move.hpp>
 #include <sanguis/messages/rotate.hpp>
 #include <sanguis/messages/speed.hpp>
+#include <sanguis/messages/weapon_status.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/center.hpp>
 #include <sanguis/messages/roles/max_health.hpp>
 #include <sanguis/messages/roles/health.hpp>
 #include <sanguis/messages/roles/primary_weapon.hpp>
 #include <sanguis/messages/roles/speed.hpp>
+#include <sanguis/messages/roles/weapon_status.hpp>
 #include <fcppt/nonassignable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/at.hpp>
@@ -67,6 +69,10 @@ class configure_entity
 		boost::mpl::pair<
 			sanguis::messages::roles::primary_weapon,
 			sanguis::messages::change_weapon
+		>,
+		boost::mpl::pair<
+			sanguis::messages::roles::weapon_status,
+			sanguis::messages::weapon_status
 		>
 	> mapping;
 public:

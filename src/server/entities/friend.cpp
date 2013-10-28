@@ -157,6 +157,7 @@ sanguis::server::entities::friend_::add_message(
 				this->current_health().get(),
 				this->max_health().get(),
 				this->primary_weapon_type(),
+				this->weapon_status(),
 				this->aura_types(),
 				this->buff_types(),
 				ftype_

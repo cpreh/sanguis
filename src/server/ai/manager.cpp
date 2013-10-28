@@ -159,8 +159,16 @@ sanguis::server::ai::manager::update()
 		true
 	);
 
+	bool const in_range(
+		me_.in_range(
+			weapon_to_use
+		)
+	);
+
 	me_.use_weapon(
-		is_visible,
+		is_visible
+		&&
+		in_range,
 		weapon_to_use
 	);
 
@@ -169,9 +177,7 @@ sanguis::server::ai::manager::update()
 	)
 	{
 		if(
-			me_.in_range(
-				weapon_to_use
-			)
+			in_range
 		)
 		{
 			sanguis::server::ai::stop(
