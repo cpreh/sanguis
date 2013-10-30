@@ -122,12 +122,14 @@ sanguis::client::draw2d::entities::model::object::object(
 	),
 	parts_()
 {
-	part_vector::size_type index(0);
-
 	sanguis::load::model::object const &model(
 		_parameters.load_parameters().collection()[
 			_parameters.name().get()
 		]
+	);
+
+	part_vector::size_type index(
+		0u
 	);
 
 	for(

@@ -4,6 +4,7 @@
 #include <sanguis/server/ai/base.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/ai/update_result_fwd.hpp>
+#include <sanguis/server/ai/visible_fwd.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
@@ -54,12 +55,18 @@ private:
 
 	sanguis::server::ai::update_result
 	distance_changes(
-		sanguis::server::entities::with_body &
+		sanguis::server::entities::with_body &,
+		sanguis::server::ai::visible
 	)
 	override;
 
 	sanguis::server::ai::update_result
 	update_target(
+		sanguis::server::entities::with_body &
+	);
+
+	sanguis::server::ai::update_result
+	lose_target(
 		sanguis::server::entities::with_body &
 	);
 

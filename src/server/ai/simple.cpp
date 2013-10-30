@@ -2,8 +2,10 @@
 #include <sanguis/server/ai/update_result.hpp>
 #include <sanguis/server/ai/simple.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
+#include <sanguis/server/ai/visible.hpp>
 #include <sanguis/server/collision/distance_entity_entity.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
+#include <sanguis/server/entities/same_object.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_links.hpp>
@@ -49,9 +51,7 @@ sanguis::server::ai::simple::in_range(
 )
 {
 	return
-		this->update_target(
-			_entity
-		);
+		sanguis::server::ai::update_result::keep_target;
 }
 
 sanguis::server::ai::update_result
@@ -59,47 +59,26 @@ sanguis::server::ai::simple::out_of_range(
 	sanguis::server::entities::with_body &_entity
 )
 {
-	sanguis::server::ai::update_result const result(
-		target_
-		&&
-		// TODO: Create a helper function for this!
-		static_cast<
-			sanguis::server::entities::base const *
-		>(
-			&*target_
-		)
-		==
-		static_cast<
-			sanguis::server::entities::base const *
-		>(
-			&_entity
-		)
-		?
-			sanguis::server::ai::update_result::lost_target
-		:
-			sanguis::server::ai::update_result::keep_target
-	);
-
-	if(
-		result
-		==
-		sanguis::server::ai::update_result::lost_target
-	)
-		target_.unlink();
-
 	return
-		result;
+		this->lose_target(
+			_entity
+		);
 }
 
 sanguis::server::ai::update_result
 sanguis::server::ai::simple::distance_changes(
-	sanguis::server::entities::with_body &_entity
+	sanguis::server::entities::with_body &_entity,
+	sanguis::server::ai::visible const _visible
 )
 {
 	return
-		this->update_target(
-			_entity
-		);
+		_visible.get()
+		?
+			this->update_target(
+				_entity
+			)
+		:
+			sanguis::server::ai::update_result::keep_target;
 }
 
 sanguis::server::ai::update_result
@@ -133,4 +112,33 @@ sanguis::server::ai::simple::update_target(
 
 	return
 		sanguis::server::ai::update_result::keep_target;
+}
+
+sanguis::server::ai::update_result
+sanguis::server::ai::simple::lose_target(
+	sanguis::server::entities::with_body &_entity
+)
+{
+	sanguis::server::ai::update_result const result(
+		target_
+		&&
+		sanguis::server::entities::same_object(
+			*target_,
+			_entity
+		)
+		?
+			sanguis::server::ai::update_result::lost_target
+		:
+			sanguis::server::ai::update_result::keep_target
+	);
+
+	if(
+		result
+		==
+		sanguis::server::ai::update_result::lost_target
+	)
+		target_.unlink();
+
+	return
+		result;
 }
