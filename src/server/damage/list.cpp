@@ -2,36 +2,18 @@
 #include <sanguis/server/damage/list.hpp>
 #include <sanguis/server/damage/meta.hpp>
 #include <sanguis/server/damage/unit.hpp>
+#include <fcppt/algorithm/array_init.hpp>
 #include <fcppt/cast/enum_to_int.hpp>
 
-
-namespace
-{
-
-sanguis::server::damage::array const
-init_array(
-	sanguis::server::damage::unit const _value
-)
-{
-	sanguis::server::damage::array const ret{{
-		_value,
-		_value,
-		_value,
-		_value,
-		_value
-	}};
-
-	return ret;
-}
-
-}
 
 sanguis::server::damage::list::list(
 	sanguis::server::damage::unit const _value
 )
 :
 	array_(
-		init_array(
+		fcppt::algorithm::array_init<
+			sanguis::server::damage::array
+		>(
 			_value
 		)
 	)
@@ -43,7 +25,9 @@ sanguis::server::damage::list::list(
 )
 :
 	array_(
-		init_array(
+		fcppt::algorithm::array_init<
+			sanguis::server::damage::array
+		>(
 			sanguis::server::damage::unit(
 				0.f
 			)

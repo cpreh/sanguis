@@ -11,6 +11,7 @@
 #include <sanguis/server/ai/rotate_to_target.hpp>
 #include <sanguis/server/ai/stop.hpp>
 #include <sanguis/server/ai/update_result.hpp>
+#include <sanguis/server/ai/visible.hpp>
 #include <sanguis/server/ai/pathing/find_target.hpp>
 #include <sanguis/server/ai/pathing/is_visible.hpp>
 #include <sanguis/server/ai/pathing/positions_are_close.hpp>
@@ -19,7 +20,7 @@
 #include <sanguis/server/ai/pathing/trail.hpp>
 #include <sanguis/server/auras/aggro.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
-#include <sanguis/server/entities/with_body_fwd.hpp>
+#include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/target.hpp>
@@ -98,6 +99,16 @@ sanguis::server::ai::manager::update()
 	)
 		return;
 
+	sanguis::creator::grid const &grid(
+		me_.environment()->grid()
+	);
+
+	sanguis::creator::pos const my_grid_pos(
+		sanguis::server::world::center_to_grid_pos(
+			me_.center()
+		)
+	);
+
 	// TODO: How should we track this?
 	for(
 		auto &ref
@@ -106,7 +117,16 @@ sanguis::server::ai::manager::update()
 	)
 		this->update_target(
 			ai_.distance_changes(
-				ref.get()
+				ref.get(),
+				sanguis::server::ai::visible(
+					sanguis::server::ai::pathing::is_visible(
+						grid,
+						sanguis::server::world::center_to_grid_pos(
+							ref.get().center()
+						),
+						my_grid_pos
+					)
+				)
 			)
 		);
 
@@ -131,20 +151,10 @@ sanguis::server::ai::manager::update()
 		)
 	);
 
-	sanguis::creator::pos const my_grid_pos(
-		sanguis::server::world::center_to_grid_pos(
-			me_.center()
-		)
-	);
-
 	me_.target(
 		sanguis::server::weapons::target(
 			target->center().get()
 		)
-	);
-
-	sanguis::creator::grid const &grid(
-		me_.environment()->grid()
 	);
 
 	bool const is_visible(

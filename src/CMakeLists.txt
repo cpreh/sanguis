@@ -859,6 +859,8 @@ set(
 	include/sanguis/server/ai/unique_ptr.hpp
 	include/sanguis/server/ai/update_result.hpp
 	include/sanguis/server/ai/update_result_fwd.hpp
+	include/sanguis/server/ai/visible.hpp
+	include/sanguis/server/ai/visible_fwd.hpp
 	include/sanguis/server/angle.hpp
 	include/sanguis/server/angle_fwd.hpp
 	include/sanguis/server/auras/aggro.hpp
@@ -1032,6 +1034,7 @@ set(
 	include/sanguis/server/entities/property/subtract.hpp
 	include/sanguis/server/entities/property/value.hpp
 	include/sanguis/server/entities/radius.hpp
+	include/sanguis/server/entities/same_object.hpp
 	include/sanguis/server/entities/spawns/count_per_wave.hpp
 	include/sanguis/server/entities/spawns/interval.hpp
 	include/sanguis/server/entities/spawns/limit.hpp

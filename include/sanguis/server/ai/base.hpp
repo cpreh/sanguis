@@ -4,6 +4,7 @@
 #include <sanguis/server/ai/base_fwd.hpp>
 #include <sanguis/server/ai/sight_range_fwd.hpp>
 #include <sanguis/server/ai/update_result_fwd.hpp>
+#include <sanguis/server/ai/visible_fwd.hpp>
 #include <sanguis/server/entities/auto_weak_link_fwd.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -45,7 +46,8 @@ public:
 	virtual
 	sanguis::server::ai::update_result
 	distance_changes(
-		sanguis::server::entities::with_body &
+		sanguis::server::entities::with_body &,
+		sanguis::server::ai::visible
 	);
 
 	virtual
