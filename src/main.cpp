@@ -12,15 +12,16 @@
 #include <sanguis/main_object_scoped_ptr.hpp>
 #include <sge/log/global_context.hpp>
 #include <sge/log/location.hpp>
+#include <awl/show_error.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/exit_failure.hpp>
 #include <awl/main/exit_success.hpp>
 #include <awl/main/function_context.hpp>
-#include <fcppt/io/cerr.hpp>
+#include <fcppt/exception.hpp>
+#include <fcppt/from_std_string.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/log/level.hpp>
 #include <fcppt/log/location.hpp>
-#include <fcppt/exception.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/options_description.hpp>
 #include <boost/program_options/variables_map.hpp>
@@ -52,6 +53,7 @@ try
 		vm.count("help")
 	)
 	{
+		// TODO: Fix this!
 		std::cout << desc << '\n';
 
 		return awl::main::exit_success();
@@ -96,21 +98,27 @@ catch(
 	fcppt::exception const &_error
 )
 {
-	fcppt::io::cerr()
-		<< FCPPT_TEXT("caught fcppt exception: ")
-		<< _error.string()
-		<< FCPPT_TEXT('\n');
+	awl::show_error(
+		FCPPT_TEXT("Caught fcppt exception: ")
+		+
+		_error.string()
+	);
 
-	return awl::main::exit_failure();
+	return
+		awl::main::exit_failure();
 }
 catch(
 	std::exception const &_error
 )
 {
-	std::cerr
-		<< "caught standard exception: "
-		<< _error.what()
-		<< '\n';
+	awl::show_error(
+		FCPPT_TEXT("Caught standard exception: ")
+		+
+		fcppt::from_std_string(
+			_error.what()
+		)
+	);
 
-	return awl::main::exit_failure();
+	return
+		awl::main::exit_failure();
 }
