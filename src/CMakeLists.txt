@@ -1861,23 +1861,11 @@ target_link_libraries(
 
 if(
 	WIN32
-	AND
-	Boost_USE_STATIC_LIBS
 )
-	find_library(
-		WS2_32_LIBRARY
-		NAMES WS2_32
-	)
-
-	find_library(
-		MSWSOCK_LIBRARY
-		NAMES Mswsock
-	)
-
 	target_link_libraries(
 		sanguis
-		"${WS2_32_LIBRARY}"
-		"${MSWSOCK_LIBRARY}"
+		WS2_32
+		Mswsock
 	)
 endif()
 
