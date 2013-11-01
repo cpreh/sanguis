@@ -25,6 +25,11 @@ sanguis::client::sound_manager::add(
 	sge::audio::sound::base_unique_ptr &&_sound
 )
 {
+	if(
+		!_sound
+	)
+		return;
+
 	_sound->play(
 		sge::audio::sound::repeat::once
 	);

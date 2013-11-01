@@ -217,7 +217,7 @@ sanguis::creator::aux_::generators::maze(
 	spawners =
 		::place_spawners(
 			grid,
-			10u,
+			20u,
 			_parameters.randgen()
 		);
 

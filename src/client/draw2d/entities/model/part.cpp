@@ -311,9 +311,12 @@ sanguis::client::draw2d::entities::model::part::load_animation(
 			)
 		);
 
-		sound_->play(
-			sge::audio::sound::repeat::loop
-		);
+		if(
+			sound_
+		)
+			sound_->play(
+				sge::audio::sound::repeat::loop
+			);
 
 		break;
 	}

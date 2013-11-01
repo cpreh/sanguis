@@ -1,3 +1,4 @@
+#include <sanguis/load/log.hpp>
 #include <sanguis/load/model/make_sound.hpp>
 #include <sanguis/load/model/optional_sound.hpp>
 #include <sanguis/load/resource/sounds_fwd.hpp>
@@ -6,6 +7,8 @@
 #include <sge/parse/json/object.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/log/error.hpp>
+#include <fcppt/log/output.hpp>
 
 
 sanguis::load::model::optional_sound
@@ -27,16 +30,34 @@ sanguis::load::model::make_sound(
 		)
 	);
 
+	if(
+		!sound
+	)
+		return
+			sanguis::load::model::optional_sound();
+
+	sanguis::load::model::sound const result(
+		*sound,
+		_sounds
+	);
+
+	if(
+		!result.buffer()
+	)
+	{
+		FCPPT_LOG_ERROR(
+			sanguis::load::log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("Unable to load sound ")
+				<< *sound
+		);
+
+		return
+			sanguis::load::model::optional_sound();
+	}
+
 	return
-		sound
-		?
-			sanguis::load::model::optional_sound(
-				sanguis::load::model::sound(
-					*sound,
-					_sounds
-				)
-			)
-		:
-			sanguis::load::model::optional_sound()
-		;
+		sanguis::load::model::optional_sound(
+			result
+		);
 }

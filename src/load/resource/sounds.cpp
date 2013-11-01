@@ -4,6 +4,7 @@
 #include <sge/audio/buffer.hpp>
 #include <sge/audio/buffer_shared_ptr.hpp>
 #include <sge/audio/file.hpp>
+#include <sge/audio/file_scoped_ptr.hpp>
 #include <sge/audio/loader.hpp>
 #include <sge/audio/player.hpp>
 #include <fcppt/text.hpp>
@@ -61,14 +62,23 @@ sanguis::load::resource::sounds::load_path(
 				boost::filesystem::path const &path
 			)
 			{
+				sge::audio::file_scoped_ptr const file(
+					multi_loader_.load(
+						path
+					)
+				);
+
 				return
-					sge::audio::buffer_shared_ptr(
-						player_.create_buffer(
-							*multi_loader_.load(
-								path
+					file
+					?
+						sge::audio::buffer_shared_ptr(
+							player_.create_buffer(
+								*file
 							)
 						)
-					);
+					:
+						sge::audio::buffer_shared_ptr()
+					;
 			}
 		);
 }
