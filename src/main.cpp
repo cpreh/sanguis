@@ -10,16 +10,21 @@
 #include <sanguis/main.hpp>
 #include <sanguis/main_object.hpp>
 #include <sanguis/main_object_scoped_ptr.hpp>
+#include <sge/config/app_name.hpp>
+#include <sge/config/company_name.hpp>
+#include <sge/config/log_path.hpp>
 #include <sge/log/global_context.hpp>
 #include <sge/log/location.hpp>
 #include <awl/show_error.hpp>
+#include <awl/show_error_narrow.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/exit_failure.hpp>
 #include <awl/main/exit_success.hpp>
 #include <awl/main/function_context.hpp>
+#include <awl/main/scoped_output.hpp>
 #include <fcppt/exception.hpp>
-#include <fcppt/from_std_string.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/io/clog.hpp>
 #include <fcppt/log/level.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -28,6 +33,7 @@
 #include <exception>
 #include <iostream>
 #include <ostream>
+#include <string>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -58,6 +64,18 @@ try
 
 		return awl::main::exit_success();
 	}
+
+	awl::main::scoped_output const output(
+		fcppt::io::clog(),
+		sge::config::log_path(
+			sge::config::company_name(
+				FCPPT_TEXT("sanguis")
+			),
+			sge::config::app_name(
+				FCPPT_TEXT("main")
+			)
+		)
+	);
 
 	fcppt::log::level const log_level(
 		sanguis::args::log_level(
@@ -92,7 +110,8 @@ try
 		log_level
 	);
 
-	return obj->run();
+	return
+		obj->run();
 }
 catch(
 	fcppt::exception const &_error
@@ -111,12 +130,12 @@ catch(
 	std::exception const &_error
 )
 {
-	awl::show_error(
-		FCPPT_TEXT("Caught standard exception: ")
-		+
-		fcppt::from_std_string(
-			_error.what()
+	awl::show_error_narrow(
+		std::string(
+			"Caught standard exception: "
 		)
+		+
+		_error.what()
 	);
 
 	return
