@@ -1,4 +1,5 @@
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/console_command_vector.hpp>
 #include <sanguis/server/create_player.hpp>
 #include <sanguis/server/log.hpp>
@@ -21,6 +22,7 @@
 sanguis::server::entities::player_unique_ptr
 sanguis::server::create_player(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::string const &_name,
 	sanguis::server::unicast_callback const &_send_to_player,
@@ -59,6 +61,7 @@ sanguis::server::create_player(
 			sanguis::server::entities::player
 		>(
 			_diff_clock,
+			_random_generator,
 			_load_context,
 			sanguis::server::health(
 				100.f

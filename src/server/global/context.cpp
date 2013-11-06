@@ -41,8 +41,6 @@
 #include <sanguis/server/global/source_world_pair.hpp>
 #include <sanguis/server/global/world_connection_map.hpp>
 #include <sanguis/server/global/world_context.hpp>
-#include <sanguis/server/perks/create.hpp>
-#include <sanguis/server/perks/perk.hpp>
 #include <sanguis/server/weapons/target.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/world/grid_pos_to_center.hpp>
@@ -163,6 +161,7 @@ sanguis::server::global::context::insert_player(
 	sanguis::server::entities::player_unique_ptr player_ptr(
 		sanguis::server::create_player(
 			diff_clock_,
+			random_generator_,
 			*load_context_,
 			_name,
 			send_unicast_,
@@ -430,11 +429,7 @@ sanguis::server::global::context::player_choose_perk(
 	}
 
 	player_ref.add_perk(
-		sanguis::server::perks::create(
-			diff_clock_,
-			random_generator_,
-			_perk_type
-		)
+		_perk_type
 	);
 
 	sanguis::server::send_available_perks(

@@ -76,6 +76,7 @@
 
 sanguis::server::entities::player::player(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::health const _health,
 	sanguis::server::damage::armor const &_armor,
@@ -162,7 +163,10 @@ sanguis::server::entities::player::player(
 		_armor
 	),
 	sanguis::server::entities::with_links(),
-	sanguis::server::entities::with_perks(),
+	sanguis::server::entities::with_perks(
+		_diff_clock,
+		_random_generator
+	),
 	sanguis::server::entities::with_weapon(
 		sanguis::server::weapons::player_start_weapon(
 			_diff_clock
@@ -267,18 +271,16 @@ sanguis::server::entities::player::perk_choosable(
 
 void
 sanguis::server::entities::player::add_perk(
-	sanguis::server::perks::unique_ptr &&_ptr
+	sanguis::perk_type const _type
 )
 {
 	sanguis::server::perks::tree::choose(
 		*perk_tree_,
-		_ptr->type()
+		_type
 	);
 
 	sanguis::server::entities::with_perks::add_perk(
-		std::move(
-			_ptr
-		)
+		_type
 	);
 
 	--skill_points_;

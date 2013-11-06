@@ -1,7 +1,10 @@
+#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/perk_type.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_perks.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
+#include <sanguis/server/perks/create.hpp>
 #include <sanguis/server/perks/perk.hpp>
 #include <sanguis/server/perks/unique_ptr.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
@@ -12,16 +15,12 @@
 
 void
 sanguis::server::entities::with_perks::add_perk(
-	sanguis::server::perks::unique_ptr &&_ptr
+	sanguis::perk_type const _type
 )
 {
-	sanguis::perk_type const ptype(
-		_ptr->type()
-	);
-
 	perk_container::iterator it(
 		perks_.find(
-			ptype
+			_type
 		)
 	);
 
@@ -31,25 +30,32 @@ sanguis::server::entities::with_perks::add_perk(
 		it =
 			fcppt::container::ptr::insert_unique_ptr_map(
 				perks_,
-				ptype,
-				std::move(
-					_ptr
+				_type,
+				sanguis::server::perks::create(
+					diff_clock_,
+					random_generator_,
+					_type
 				)
 			).first;
 
-	sanguis::server::perks::perk &ref(
-		*it->second
-	);
-
-	ref.raise_level(
+	it->second->raise_level(
 		*this
 	);
 }
 
-sanguis::server::entities::with_perks::with_perks()
+sanguis::server::entities::with_perks::with_perks(
+	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator
+)
 :
 	sanguis::server::entities::base(),
 	sanguis::server::entities::ifaces::with_team(),
+	diff_clock_(
+		_diff_clock
+	),
+	random_generator_(
+		_random_generator
+	),
 	perks_()
 {
 }
@@ -62,7 +68,9 @@ void
 sanguis::server::entities::with_perks::update()
 {
 	for(
-		auto perk : perks_
+		auto perk
+		:
+		perks_
 	)
 		perk->second->update(
 			*this,

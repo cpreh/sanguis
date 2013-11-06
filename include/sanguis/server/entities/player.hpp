@@ -4,6 +4,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/is_primary_weapon_fwd.hpp>
 #include <sanguis/perk_type_fwd.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/collision/world/group_field_fwd.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/server/center_fwd.hpp>
@@ -27,7 +28,6 @@
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/pickups/weapon_ref.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
-#include <sanguis/server/perks/unique_ptr.hpp>
 #include <sanguis/server/perks/tree/object_fwd.hpp>
 #include <sanguis/server/weapons/weapon_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -64,6 +64,7 @@ class player
 public:
 	player(
 		sanguis::diff_clock const &,
+		sanguis::random_generator &,
 		sanguis::server::environment::load_context &,
 		sanguis::server::health,
 		sanguis::server::damage::armor const &,
@@ -90,7 +91,7 @@ public:
 
 	void
 	add_perk(
-		sanguis::server::perks::unique_ptr &&
+		sanguis::perk_type
 	);
 
 	void
