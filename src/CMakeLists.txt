@@ -995,7 +995,6 @@ set(
 	include/sanguis/server/entities/enemies/modifiers/container.hpp
 	include/sanguis/server/entities/enemies/modifiers/fast.hpp
 	include/sanguis/server/entities/enemies/modifiers/health.hpp
-	include/sanguis/server/entities/enemies/modifiers/modifier.hpp
 	include/sanguis/server/entities/enemies/parameters.hpp
 	include/sanguis/server/entities/enemies/parameters_fwd.hpp
 	include/sanguis/server/entities/enemies/skills/container.hpp
