@@ -29,6 +29,7 @@
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
+#include <sanguis/server/entities/enemies/parameters.hpp>
 #include <sanguis/server/entities/enemies/spawn_owner.hpp>
 #include <sanguis/server/entities/property/initial.hpp>
 #include <sanguis/server/entities/spawns/spawn.hpp>
@@ -46,53 +47,41 @@
 
 
 sanguis::server::entities::enemies::enemy::enemy(
-	sanguis::diff_clock const &_diff_clock,
-	sanguis::creator::enemy_type const _etype,
-	sanguis::server::environment::load_context &_load_context,
-	sanguis::server::damage::armor const &_armor,
-	sanguis::server::health const _health,
-	sanguis::server::entities::movement_speed const _movement_speed,
-	sanguis::server::ai::create_function const &_ai,
-	sanguis::server::weapons::unique_ptr &&_weapon,
-	sanguis::server::pickup_probability const _spawn_chance,
-	sanguis::server::exp const _exp,
-	sanguis::server::entities::enemies::difficulty const _difficulty,
-	sanguis::server::entities::enemies::spawn_owner const &_spawn_owner,
-	sanguis::server::auras::container &&_auras
+	sanguis::server::entities::enemies::parameters &&_parameters
 )
 :
 	sanguis::server::entities::with_ai(
-		_diff_clock,
-		_ai,
+		_parameters.diff_clock(),
+		_parameters.ai_create_function(),
 		std::move(
-			_weapon
+			_parameters.weapon()
 		),
 		std::move(
-			_auras
+			_parameters.auras()
 		)
 	),
 	sanguis::server::entities::with_buffs(),
 	sanguis::server::entities::with_id(
-		_load_context.next_id()
+		_parameters.load_context().next_id()
 	),
 	sanguis::server::entities::with_health(
-		_diff_clock,
-		_health,
-		_armor
+		_parameters.diff_clock(),
+		_parameters.health(),
+		_parameters.armor()
 	),
 	sanguis::server::entities::with_links(),
 	sanguis::server::entities::with_velocity(
-		_diff_clock,
-		_load_context.entity_dim(
+		_parameters.diff_clock(),
+		_parameters.load_context().entity_dim(
 			sanguis::server::model_name(
 				sanguis::load::enemy_name(
-					_etype
+					_parameters.enemy_type()
 				)
 			)
 		),
 		sanguis::server::entities::property::initial(
 			sanguis::server::entities::property::initial::base(
-				_movement_speed.get()
+				_parameters.movement_speed().get()
 			),
 			sanguis::server::entities::property::initial::current(
 				0.f
@@ -102,26 +91,26 @@ sanguis::server::entities::enemies::enemy::enemy(
 			0.f
 		)
 	),
-	etype_(
-		_etype
+	enemy_type_(
+		_parameters.enemy_type()
 	),
-	spawn_chance_(
-		_spawn_chance
+	pickup_probability_(
+		_parameters.pickup_probability()
 	),
 	exp_(
-		_exp
+		_parameters.exp()
 	),
 	difficulty_(
-		_difficulty
+		_parameters.difficulty()
 	),
 	spawn_owner_(
-		_spawn_owner
+		_parameters.spawn_owner()
 	),
 	name_(
 		// TODO!
 		sge::charconv::fcppt_string_to_utf8(
 			sanguis::load::enemy_name(
-				etype_
+				enemy_type_
 			)
 		)
 	)
@@ -136,7 +125,7 @@ sanguis::creator::enemy_type
 sanguis::server::entities::enemies::enemy::etype() const
 {
 	return
-		etype_;
+		enemy_type_;
 }
 
 sanguis::server::team
@@ -219,7 +208,7 @@ sanguis::server::entities::enemies::enemy::remove()
 	);
 
 	this->environment()->pickup_chance(
-		spawn_chance_,
+		pickup_probability_,
 		difficulty_,
 		this->center()
 	);

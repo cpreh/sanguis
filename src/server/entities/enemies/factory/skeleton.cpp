@@ -17,9 +17,10 @@
 #include <sanguis/server/damage/list.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
 #include <sanguis/server/damage/unit.hpp>
+#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
-#include <sanguis/server/entities/enemies/enemy.hpp>
+#include <sanguis/server/entities/enemies/factory/make.hpp>
 #include <sanguis/server/entities/enemies/factory/parameters.hpp>
 #include <sanguis/server/entities/enemies/factory/skeleton.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
@@ -44,12 +45,8 @@ sanguis::server::entities::enemies::factory::skeleton(
 	);
 
 	return
-		fcppt::make_unique_ptr<
-			sanguis::server::entities::enemies::enemy
-		>(
-			_parameters.diff_clock(),
-			_parameters.enemy_type(),
-			_parameters.load_context(),
+		sanguis::server::entities::enemies::factory::make(
+			_parameters,
 			sanguis::server::damage::no_armor(),
 			sanguis::server::health(
 				15.f
@@ -88,8 +85,6 @@ sanguis::server::entities::enemies::factory::skeleton(
 			sanguis::server::exp(
 				100.f
 			),
-			_parameters.difficulty(),
-			_parameters.spawn_owner(),
 			fcppt::assign::make_container<
 				sanguis::server::auras::container
 			>(

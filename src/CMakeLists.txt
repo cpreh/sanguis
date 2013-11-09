@@ -972,6 +972,7 @@ set(
 	include/sanguis/server/entities/enemies/enemy_fwd.hpp
 	include/sanguis/server/entities/enemies/factory/ghost.hpp
 	include/sanguis/server/entities/enemies/factory/maggot.hpp
+	include/sanguis/server/entities/enemies/factory/make.hpp
 	include/sanguis/server/entities/enemies/factory/parameters.hpp
 	include/sanguis/server/entities/enemies/factory/parameters_fwd.hpp
 	include/sanguis/server/entities/enemies/factory/skeleton.hpp
@@ -980,6 +981,8 @@ set(
 	include/sanguis/server/entities/enemies/factory/zombie00.hpp
 	include/sanguis/server/entities/enemies/factory/zombie01.hpp
 	include/sanguis/server/entities/enemies/fwd.hpp
+	include/sanguis/server/entities/enemies/parameters.hpp
+	include/sanguis/server/entities/enemies/parameters_fwd.hpp
 	include/sanguis/server/entities/enemies/spawn_owner.hpp
 	include/sanguis/server/entities/enemies/spawn_owner_fwd.hpp
 	include/sanguis/server/entities/enemies/unique_ptr.hpp
@@ -1075,6 +1078,8 @@ set(
 	include/sanguis/server/entities/with_links_fwd.hpp
 	include/sanguis/server/entities/with_perks.hpp
 	include/sanguis/server/entities/with_perks_fwd.hpp
+	include/sanguis/server/entities/with_skills.hpp
+	include/sanguis/server/entities/with_skills_fwd.hpp
 	include/sanguis/server/entities/with_velocity.hpp
 	include/sanguis/server/entities/with_velocity_fwd.hpp
 	include/sanguis/server/entities/with_weapon.hpp
@@ -1652,12 +1657,14 @@ set(
 	src/server/entities/enemies/enemy.cpp
 	src/server/entities/enemies/factory/ghost.cpp
 	src/server/entities/enemies/factory/maggot.cpp
+	src/server/entities/enemies/factory/make.cpp
 	src/server/entities/enemies/factory/parameters.cpp
 	src/server/entities/enemies/factory/skeleton.cpp
 	src/server/entities/enemies/factory/spider.cpp
 	src/server/entities/enemies/factory/wolf.cpp
 	src/server/entities/enemies/factory/zombie00.cpp
 	src/server/entities/enemies/factory/zombie01.cpp
+	src/server/entities/enemies/parameters.cpp
 	src/server/entities/exp_area.cpp
 	src/server/entities/friend.cpp
 	src/server/entities/ifaces/with_angle.cpp
