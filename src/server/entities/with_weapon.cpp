@@ -31,24 +31,6 @@
 
 
 sanguis::server::entities::with_weapon::with_weapon(
-	sanguis::server::weapons::unique_ptr &&_start_weapon
-)
-:
-	sanguis::server::entities::with_weapon::with_weapon(
-		std::move(
-			_start_weapon
-		),
-		sanguis::server::weapons::ias(
-			1.f
-		),
-		sanguis::server::weapons::irs(
-			1.f
-		)
-	)
-{
-}
-
-sanguis::server::entities::with_weapon::with_weapon(
 	sanguis::server::weapons::unique_ptr &&_start_weapon,
 	sanguis::server::weapons::ias const _ias,
 	sanguis::server::weapons::irs const _irs
@@ -80,7 +62,6 @@ sanguis::server::entities::with_weapon::with_weapon(
 			)
 		);
 }
-
 
 sanguis::server::entities::with_weapon::~with_weapon()
 {

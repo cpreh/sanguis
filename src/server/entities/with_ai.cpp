@@ -6,6 +6,8 @@
 #include <sanguis/server/entities/with_auras_id.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
+#include <sanguis/server/weapons/ias.hpp>
+#include <sanguis/server/weapons/irs.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -19,7 +21,9 @@ sanguis::server::entities::with_ai::with_ai(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::server::ai::create_function const &_create_ai,
 	sanguis::server::weapons::unique_ptr &&_start_weapon,
-	sanguis::server::auras::container &&_auras
+	sanguis::server::auras::container &&_auras,
+	sanguis::server::weapons::ias const _ias,
+	sanguis::server::weapons::irs const _irs
 )
 :
 	sanguis::server::entities::ifaces::with_team(),
@@ -31,7 +35,9 @@ sanguis::server::entities::with_ai::with_ai(
 	sanguis::server::entities::with_weapon(
 		std::move(
 			_start_weapon
-		)
+		),
+		_ias,
+		_irs
 	),
 	diff_clock_(
 		_diff_clock

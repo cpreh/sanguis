@@ -10,6 +10,8 @@
 #include <sanguis/server/entities/with_auras_id.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
+#include <sanguis/server/weapons/ias.hpp>
+#include <sanguis/server/weapons/irs.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
@@ -36,7 +38,9 @@ protected:
 		sanguis::diff_clock const &,
 		sanguis::server::ai::create_function const &,
 		sanguis::server::weapons::unique_ptr &&,
-		sanguis::server::auras::container &&
+		sanguis::server::auras::container &&,
+		sanguis::server::weapons::ias,
+		sanguis::server::weapons::irs
 	);
 
 	~with_ai();

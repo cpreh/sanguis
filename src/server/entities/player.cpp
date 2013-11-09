@@ -56,6 +56,8 @@
 #include <sanguis/server/perks/tree/choose.hpp>
 #include <sanguis/server/perks/tree/object.hpp>
 #include <sanguis/server/perks/tree/status.hpp>
+#include <sanguis/server/weapons/default_ias.hpp>
+#include <sanguis/server/weapons/default_irs.hpp>
 #include <sanguis/server/weapons/player_start_weapon.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/literal.hpp>
@@ -170,7 +172,9 @@ sanguis::server::entities::player::player(
 	sanguis::server::entities::with_weapon(
 		sanguis::server::weapons::player_start_weapon(
 			_diff_clock
-		)
+		),
+		sanguis::server::weapons::default_ias(),
+		sanguis::server::weapons::default_irs()
 	),
 	diff_clock_(
 		_diff_clock

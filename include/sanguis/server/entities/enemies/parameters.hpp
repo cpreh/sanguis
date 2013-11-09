@@ -14,6 +14,8 @@
 #include <sanguis/server/entities/enemies/parameters_fwd.hpp>
 #include <sanguis/server/entities/enemies/spawn_owner.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
+#include <sanguis/server/weapons/ias.hpp>
+#include <sanguis/server/weapons/irs.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -99,9 +101,45 @@ public:
 	sanguis::server::auras::container &
 	auras();
 
-	void
+	sanguis::server::weapons::ias const
+	ias() const;
+
+	sanguis::server::weapons::irs const
+	irs() const;
+
+	sanguis::server::entities::enemies::parameters &
 	health(
 		sanguis::server::health
+	);
+
+	sanguis::server::entities::enemies::parameters &
+	movement_speed(
+		sanguis::server::entities::movement_speed
+	);
+
+	sanguis::server::entities::enemies::parameters &
+	pickup_probability(
+		sanguis::server::pickup_probability
+	);
+
+	sanguis::server::entities::enemies::parameters &
+	exp(
+		sanguis::server::exp
+	);
+
+	sanguis::server::entities::enemies::parameters &
+	difficulty(
+		sanguis::server::entities::enemies::difficulty
+	);
+
+	sanguis::server::entities::enemies::parameters &
+	ias(
+		sanguis::server::weapons::ias
+	);
+
+	sanguis::server::entities::enemies::parameters &
+	irs(
+		sanguis::server::weapons::irs
 	);
 private:
 	sanguis::diff_clock const &diff_clock_;
@@ -114,21 +152,25 @@ private:
 
 	sanguis::server::health health_;
 
-	sanguis::server::entities::movement_speed const movement_speed_;
+	sanguis::server::entities::movement_speed movement_speed_;
 
 	sanguis::server::ai::create_function ai_create_function_;
 
 	sanguis::server::weapons::unique_ptr weapon_;
 
-	sanguis::server::pickup_probability const pickup_probability_;
+	sanguis::server::pickup_probability pickup_probability_;
 
-	sanguis::server::exp const exp_;
+	sanguis::server::exp exp_;
 
-	sanguis::server::entities::enemies::difficulty const difficulty_;
+	sanguis::server::entities::enemies::difficulty difficulty_;
 
 	sanguis::server::entities::enemies::spawn_owner const spawn_owner_;
 
 	sanguis::server::auras::container auras_;
+
+	sanguis::server::weapons::ias ias_;
+
+	sanguis::server::weapons::irs irs_;
 };
 
 }

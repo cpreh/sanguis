@@ -1,7 +1,8 @@
 #include <sanguis/server/entities/enemies/attribute_container.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
+#include <sanguis/server/entities/enemies/finalize_special_parameters.hpp>
 #include <sanguis/server/entities/enemies/make_name.hpp>
-#include <sanguis/server/entities/enemies/parameters_fwd.hpp>
+#include <sanguis/server/entities/enemies/parameters.hpp>
 #include <sanguis/server/entities/enemies/special.hpp>
 #include <sanguis/server/entities/enemies/skills/container.hpp>
 #include <sanguis/server/entities/enemies/skills/skill.hpp>
@@ -20,7 +21,11 @@ sanguis::server::entities::enemies::special::special(
 :
 	sanguis::server::entities::enemies::enemy(
 		std::move(
-			_parameters
+			sanguis::server::entities::enemies::finalize_special_parameters(
+				_parameters,
+				_attributes,
+				_skills
+			)
 		)
 	),
 	skills_(),

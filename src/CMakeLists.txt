@@ -986,11 +986,14 @@ set(
 	include/sanguis/server/entities/enemies/factory/wolf.hpp
 	include/sanguis/server/entities/enemies/factory/zombie00.hpp
 	include/sanguis/server/entities/enemies/factory/zombie01.hpp
+	include/sanguis/server/entities/enemies/finalize_special_parameters.hpp
 	include/sanguis/server/entities/enemies/fwd.hpp
 	include/sanguis/server/entities/enemies/make_name.hpp
+	include/sanguis/server/entities/enemies/modifiers/agile.hpp
 	include/sanguis/server/entities/enemies/modifiers/apply.hpp
 	include/sanguis/server/entities/enemies/modifiers/callback.hpp
 	include/sanguis/server/entities/enemies/modifiers/container.hpp
+	include/sanguis/server/entities/enemies/modifiers/fast.hpp
 	include/sanguis/server/entities/enemies/modifiers/health.hpp
 	include/sanguis/server/entities/enemies/modifiers/modifier.hpp
 	include/sanguis/server/entities/enemies/parameters.hpp
@@ -1231,6 +1234,8 @@ set(
 	include/sanguis/server/weapons/create.hpp
 	include/sanguis/server/weapons/create_function.hpp
 	include/sanguis/server/weapons/damage.hpp
+	include/sanguis/server/weapons/default_ias.hpp
+	include/sanguis/server/weapons/default_irs.hpp
 	include/sanguis/server/weapons/delayed_attack.hpp
 	include/sanguis/server/weapons/delayed_attack_fwd.hpp
 	include/sanguis/server/weapons/events/poll.hpp
@@ -1687,8 +1692,11 @@ set(
 	src/server/entities/enemies/factory/wolf.cpp
 	src/server/entities/enemies/factory/zombie00.cpp
 	src/server/entities/enemies/factory/zombie01.cpp
+	src/server/entities/enemies/finalize_special_parameters.cpp
 	src/server/entities/enemies/make_name.cpp
+	src/server/entities/enemies/modifiers/agile.cpp
 	src/server/entities/enemies/modifiers/apply.cpp
+	src/server/entities/enemies/modifiers/fast.cpp
 	src/server/entities/enemies/modifiers/health.cpp
 	src/server/entities/enemies/parameters.cpp
 	src/server/entities/enemies/skills/skill.cpp
@@ -1797,6 +1805,8 @@ set(
 	src/server/timer.cpp
 	src/server/timer_impl.cpp
 	src/server/weapons/create.cpp
+	src/server/weapons/default_ias.cpp
+	src/server/weapons/default_irs.cpp
 	src/server/weapons/delayed_attack.cpp
 	src/server/weapons/events/poll.cpp
 	src/server/weapons/events/shoot.cpp

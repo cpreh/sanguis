@@ -37,11 +37,6 @@ class with_weapon
 		with_weapon
 	);
 protected:
-	explicit
-	with_weapon(
-		sanguis::server::weapons::unique_ptr &&
-	);
-
 	with_weapon(
 		sanguis::server::weapons::unique_ptr &&,
 		sanguis::server::weapons::ias,

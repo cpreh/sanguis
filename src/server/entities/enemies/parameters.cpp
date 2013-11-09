@@ -12,6 +12,10 @@
 #include <sanguis/server/entities/enemies/parameters.hpp>
 #include <sanguis/server/entities/enemies/spawn_owner.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
+#include <sanguis/server/weapons/default_ias.hpp>
+#include <sanguis/server/weapons/default_irs.hpp>
+#include <sanguis/server/weapons/ias.hpp>
+#include <sanguis/server/weapons/irs.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -77,6 +81,12 @@ sanguis::server::entities::enemies::parameters::parameters(
 		std::move(
 			_auras
 		)
+	),
+	ias_(
+		sanguis::server::weapons::default_ias()
+	),
+	irs_(
+		sanguis::server::weapons::default_irs()
 	)
 {
 }
@@ -180,11 +190,100 @@ sanguis::server::entities::enemies::parameters::auras()
 		auras_;
 }
 
-void
+sanguis::server::weapons::ias const
+sanguis::server::entities::enemies::parameters::ias() const
+{
+	return
+		ias_;
+}
+
+sanguis::server::weapons::irs const
+sanguis::server::entities::enemies::parameters::irs() const
+{
+	return
+		irs_;
+}
+
+sanguis::server::entities::enemies::parameters &
 sanguis::server::entities::enemies::parameters::health(
 	sanguis::server::health const _health
 )
 {
 	health_ =
 		_health;
+
+	return
+		*this;
+}
+
+sanguis::server::entities::enemies::parameters &
+sanguis::server::entities::enemies::parameters::movement_speed(
+	sanguis::server::entities::movement_speed const _movement_speed
+)
+{
+	movement_speed_ =
+		_movement_speed;
+
+	return
+		*this;
+}
+
+sanguis::server::entities::enemies::parameters &
+sanguis::server::entities::enemies::parameters::pickup_probability(
+	sanguis::server::pickup_probability const _pickup_probability
+)
+{
+	pickup_probability_ =
+		_pickup_probability;
+
+	return
+		*this;
+}
+
+sanguis::server::entities::enemies::parameters &
+sanguis::server::entities::enemies::parameters::exp(
+	sanguis::server::exp const _exp
+)
+{
+	exp_ =
+		_exp;
+
+	return
+		*this;
+}
+
+sanguis::server::entities::enemies::parameters &
+sanguis::server::entities::enemies::parameters::difficulty(
+	sanguis::server::entities::enemies::difficulty const _difficulty
+)
+{
+	difficulty_ =
+		_difficulty;
+
+	return
+		*this;
+}
+
+sanguis::server::entities::enemies::parameters &
+sanguis::server::entities::enemies::parameters::ias(
+	sanguis::server::weapons::ias const _ias
+)
+{
+	ias_
+		= _ias;
+
+	return
+		*this;
+}
+
+sanguis::server::entities::enemies::parameters &
+sanguis::server::entities::enemies::parameters::irs(
+	sanguis::server::weapons::irs const _irs
+)
+{
+	irs_
+		= _irs;
+
+	return
+		*this;
 }

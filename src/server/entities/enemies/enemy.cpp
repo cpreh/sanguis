@@ -58,7 +58,9 @@ sanguis::server::entities::enemies::enemy::enemy(
 		),
 		std::move(
 			_parameters.auras()
-		)
+		),
+		_parameters.ias(),
+		_parameters.irs()
 	),
 	sanguis::server::entities::with_buffs(),
 	sanguis::server::entities::with_id(

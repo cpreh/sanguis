@@ -6,7 +6,7 @@
 #include <sanguis/load/resource/textures_fwd.hpp>
 #include <sanguis/load/tiles/category.hpp>
 #include <sanguis/load/tiles/context_fwd.hpp>
-#include <sanguis/load/tiles/set.hpp>
+#include <sanguis/load/tiles/set_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
@@ -42,10 +42,6 @@ public:
 	set(
 		sanguis::creator::background_tile
 	);
-
-/*
-	sanguis::load::tiles::set const &
-	fog_of_war();*/
 private:
 	template<
 		typename Map,
@@ -78,8 +74,6 @@ private:
 	set_map sets_;
 
 	background_set_map background_sets_;
-
-//	sanguis::load::tiles::set fog_of_war_;
 };
 
 }

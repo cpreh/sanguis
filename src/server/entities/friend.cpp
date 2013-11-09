@@ -31,6 +31,8 @@
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/property/initial.hpp>
 #include <sanguis/server/environment/load_context.hpp>
+#include <sanguis/server/weapons/default_ias.hpp>
+#include <sanguis/server/weapons/default_irs.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -57,7 +59,9 @@ sanguis::server::entities::friend_::friend_(
 		std::move(
 			_weapon
 		),
-		sanguis::server::auras::container()
+		sanguis::server::auras::container(),
+		sanguis::server::weapons::default_ias(),
+		sanguis::server::weapons::default_irs()
 	),
 	sanguis::server::entities::with_buffs(),
 	sanguis::server::entities::with_id(
