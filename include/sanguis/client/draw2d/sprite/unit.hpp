@@ -13,7 +13,7 @@ namespace draw2d
 namespace sprite
 {
 
-typedef draw2d::unit unit;
+typedef sanguis::client::draw2d::unit unit;
 
 }
 }

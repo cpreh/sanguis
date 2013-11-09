@@ -7,7 +7,15 @@
 #include <sanguis/client/sound_manager_fwd.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/client/control/attack_dest.hpp>
+#include <sanguis/client/control/optional_attack_dest.hpp>
 #include <sanguis/client/control/optional_cursor_position.hpp>
+#include <sanguis/client/draw2d/funit.hpp>
+#include <sanguis/client/draw2d/insert_own_callback.hpp>
+#include <sanguis/client/draw2d/optional_player_center.hpp>
+#include <sanguis/client/draw2d/optional_translation.hpp>
+#include <sanguis/client/draw2d/player_center.hpp>
+#include <sanguis/client/draw2d/player_center_callback.hpp>
+#include <sanguis/client/draw2d/translation.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/scene/object.hpp>
@@ -17,7 +25,7 @@
 #include <sanguis/client/draw2d/scene/foreach_z_ordering.hpp>
 #include <sanguis/client/draw2d/scene/hud.hpp>
 #include <sanguis/client/draw2d/scene/message_environment.hpp>
-#include <sanguis/client/draw2d/scene/screen_center.hpp>
+#include <sanguis/client/draw2d/scene/translation.hpp>
 #include <sanguis/client/draw2d/scene/world/object.hpp>
 #include <sanguis/client/draw2d/entities/base.hpp>
 #include <sanguis/client/draw2d/entities/own.hpp>
@@ -62,6 +70,7 @@
 #include <sanguis/messages/call/object.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/image/color/predef.hpp>
+#include <sge/renderer/clear/parameters.hpp>
 #include <sge/renderer/context/ffp.hpp>
 #include <sge/renderer/device/ffp.hpp>
 #include <sge/renderer/state/ffp/lighting/ambient_color.hpp>
@@ -89,6 +98,7 @@
 #include <sge/sprite/projection_matrix.hpp>
 #include <sge/sprite/state/default_options.hpp>
 #include <sge/sprite/state/scoped.hpp>
+#include <sge/viewport/manager.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -99,8 +109,10 @@
 #include <fcppt/math/matrix/arithmetic.hpp>
 #include <fcppt/math/matrix/translation.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/construct.hpp>
 #include <fcppt/math/vector/distance.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/signal/connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector30.hpp>
 #include <ctime>
@@ -172,12 +184,11 @@ sanguis::client::draw2d::scene::object::object(
 	paused_(
 		false
 	),
-	player_center_(
-		sanguis::client::draw2d::sprite::center::value_type::null()
-	),
-	transform_callback_(
+	player_center_(),
+	translation_(),
+	player_center_callback_(
 		std::bind(
-			&sanguis::client::draw2d::scene::object::transform,
+			&sanguis::client::draw2d::scene::object::player_center,
 			this,
 			std::placeholders::_1
 		)
@@ -244,6 +255,14 @@ sanguis::client::draw2d::scene::object::object(
 				sge::renderer::state::ffp::lighting::material::shininess(
 					0.f
 				)
+			)
+		)
+	),
+	viewport_connection_(
+		_viewport_manager.manage_callback(
+			std::bind(
+				&sanguis::client::draw2d::scene::object::update_translation,
+				this
 			)
 		)
 	)
@@ -438,8 +457,19 @@ sanguis::client::draw2d::scene::object::render_systems(
 
 	if(
 		!projection_matrix
+		||
+		!translation_
 	)
+	{
+		_render_context.clear(
+			sge::renderer::clear::parameters()
+			.back_buffer(
+				sge::image::color::predef::black()
+			)
+		);
+
 		return;
+	}
 
 	sge::renderer::state::ffp::transform::object_scoped_ptr const projection_state(
 		renderer_.create_transform_state(
@@ -466,23 +496,21 @@ sanguis::client::draw2d::scene::object::render_systems(
 		sprite_states_
 	);
 
-	sanguis::client::draw2d::vector2 const translation(
-		sanguis::client::draw2d::scene::screen_center(
-			player_center_,
-			this->screen_size()
-		)
-	);
-
 	sge::renderer::state::ffp::transform::object_scoped_ptr const transform_state(
 		renderer_.create_transform_state(
 			sge::renderer::state::ffp::transform::parameters(
 				fcppt::math::matrix::translation(
-					translation.x(),
-					translation.y(),
-					fcppt::literal<
-						sanguis::client::draw2d::sprite::float_unit
-					>(
-						0
+					fcppt::math::vector::construct(
+						fcppt::math::vector::structure_cast<
+							sanguis::client::draw2d::vector2
+						>(
+							translation_->get()
+						),
+						fcppt::literal<
+							sanguis::client::draw2d::funit
+						>(
+							0
+						)
 					)
 				)
 			)
@@ -521,7 +549,7 @@ sanguis::client::draw2d::scene::object::render_systems(
 
 		background_->render(
 			_render_context,
-			translation
+			*translation_
 		);
 
 		sge::renderer::state::ffp::transform::scoped const scoped_transform(
@@ -531,8 +559,7 @@ sanguis::client::draw2d::scene::object::render_systems(
 		);
 
 		world_->draw(
-			_render_context,
-			translation
+			_render_context
 		);
 
 		SANGUIS_CLIENT_DRAW2D_SCENE_FOREACH_Z_ORDERING(
@@ -629,19 +656,27 @@ sanguis::client::draw2d::scene::object::name_display(
 	)
 		return;
 
+	sanguis::client::control::optional_attack_dest const attack_dest(
+		control_environment_->translate_attack_dest(
+			*pos
+		)
+	);
+
+	if(
+		!attack_dest
+	)
+		return;
+
 	if(
 		fcppt::math::vector::distance<
 			float
 		>(
-			// TODO: Rename attack_dest!
 			fcppt::math::vector::structure_cast<
 				sanguis::client::control::attack_dest
 			>(
 				_entity.center().get()
 			),
-			control_environment_->translate_attack_dest(
-				*pos
-			)
+			*attack_dest
 		)
 		<
 		_entity.radius().get()
@@ -694,21 +729,47 @@ sanguis::client::draw2d::scene::object::entity(
 			).str()
 		);
 
-	return *it->second;
+	return
+		*it->second;
 }
 
-sanguis::client::draw2d::sprite::center const
-sanguis::client::draw2d::scene::object::player_center() const
+sanguis::client::draw2d::optional_translation const
+sanguis::client::draw2d::scene::object::translation() const
 {
-	return player_center_;
+	return
+		translation_;
 }
 
 void
-sanguis::client::draw2d::scene::object::transform(
-	sanguis::client::draw2d::sprite::center const &_player_center
+sanguis::client::draw2d::scene::object::player_center(
+	sanguis::client::draw2d::optional_player_center const _player_center
 )
 {
-	player_center_ = _player_center;
+	player_center_
+		= _player_center;
+
+	this->update_translation();
+}
+
+void
+sanguis::client::draw2d::scene::object::update_translation()
+{
+	if(
+		!player_center_
+	)
+		translation_.reset();
+	else
+		translation_ =
+			sanguis::client::draw2d::optional_translation(
+				sanguis::client::draw2d::scene::translation(
+					*player_center_,
+					this->screen_size()
+				)
+			);
+
+	world_->translation(
+		translation_
+	);
 }
 
 void
@@ -740,68 +801,79 @@ sanguis::client::draw2d::scene::object::change_world(
 	);
 
 	world_->change(
-		_parameters
+		_parameters,
+		translation_
 	);
 }
 
 sanguis::diff_clock const &
 sanguis::client::draw2d::scene::object::diff_clock() const
 {
-	return diff_clock_;
+	return
+		diff_clock_;
 }
 
 sanguis::random_generator &
 sanguis::client::draw2d::scene::object::random_generator()
 {
-	return random_generator_;
+	return
+		random_generator_;
 }
 
 sanguis::client::sound_manager &
 sanguis::client::draw2d::scene::object::sound_manager() const
 {
-	return sound_manager_;
+	return
+		sound_manager_;
 }
 
-sanguis::client::draw2d::transform_callback const &
-sanguis::client::draw2d::scene::object::transform_callback() const
+sanguis::client::draw2d::player_center_callback const &
+sanguis::client::draw2d::scene::object::player_center_callback() const
 {
-	return transform_callback_;
+	return
+		player_center_callback_;
 }
 
 sanguis::client::draw2d::insert_own_callback const &
 sanguis::client::draw2d::scene::object::insert_own_callback() const
 {
-	return insert_own_callback_;
+	return
+		insert_own_callback_;
 }
 
 sanguis::client::draw2d::sprite::normal::system &
 sanguis::client::draw2d::scene::object::normal_system()
 {
-	return normal_system_;
+	return
+		normal_system_;
 }
 
 sanguis::client::draw2d::sprite::colored::system &
 sanguis::client::draw2d::scene::object::colored_system()
 {
-	return colored_system_;
+	return
+		colored_system_;
 }
 
 sanguis::client::draw2d::sprite::client::system &
 sanguis::client::draw2d::scene::object::client_system()
 {
-	return client_system_;
+	return
+		client_system_;
 }
 
 sanguis::load::model::collection const &
 sanguis::client::draw2d::scene::object::load_collection() const
 {
-	return resources_.models()();
+	return
+		resources_.models()();
 }
 
 sanguis::load::auras::context &
 sanguis::client::draw2d::scene::object::aura_resources()
 {
-	return aura_resources_;
+	return
+		aura_resources_;
 }
 
 sge::renderer::screen_size const
@@ -816,5 +888,6 @@ sanguis::client::draw2d::scene::object::screen_size() const
 sge::renderer::target::viewport const
 sanguis::client::draw2d::scene::object::viewport() const
 {
-	return renderer_.onscreen_target().viewport();
+	return
+		renderer_.onscreen_target().viewport();
 }

@@ -3,6 +3,7 @@
 
 #include <sanguis/client/draw2d/funit.hpp>
 
+
 namespace sanguis
 {
 namespace client
@@ -12,7 +13,7 @@ namespace draw2d
 namespace sprite
 {
 
-typedef draw2d::funit float_unit;
+typedef sanguis::client::draw2d::funit float_unit;
 
 }
 }

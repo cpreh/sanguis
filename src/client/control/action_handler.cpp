@@ -9,6 +9,7 @@
 #include <sanguis/client/control/direction_vector.hpp>
 #include <sanguis/client/control/environment.hpp>
 #include <sanguis/client/control/key_scale.hpp>
+#include <sanguis/client/control/optional_attack_dest.hpp>
 #include <sanguis/client/control/scalar.hpp>
 #include <sanguis/client/control/actions/any.hpp>
 #include <sanguis/client/control/actions/binary.hpp>
@@ -197,15 +198,24 @@ sanguis::client::control::action_handler::handle_cursor_action(
 	)
 		return;
 
+	sanguis::client::control::optional_attack_dest const dest(
+		environment_.translate_attack_dest(
+			*_action.position()
+		)
+	);
+
+	if(
+		!dest
+	)
+		return;
+
 	send_(
 		*sanguis::messages::create(
 			sanguis::messages::player_attack_dest(
 				fcppt::math::vector::structure_cast<
 					sanguis::messages::types::vector2
 				>(
-					environment_.translate_attack_dest(
-						*_action.position()
-					)
+					*dest
 				)
 			)
 		)

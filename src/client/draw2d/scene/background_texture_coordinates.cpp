@@ -1,4 +1,4 @@
-#include <sanguis/client/draw2d/vector2.hpp>
+#include <sanguis/client/draw2d/translation.hpp>
 #include <sanguis/client/draw2d/scene/background_texture_coordinates.hpp>
 #include <sanguis/client/draw2d/scene/background_dim.hpp>
 #include <sanguis/client/draw2d/sprite/client/texture_coordinates.hpp>
@@ -10,7 +10,7 @@
 
 sanguis::client::draw2d::sprite::client::texture_coordinates const
 sanguis::client::draw2d::scene::background_texture_coordinates(
-	sanguis::client::draw2d::vector2 const &_translation,
+	sanguis::client::draw2d::translation const _translation,
 	sge::renderer::device::core &_device,
 	sge::texture::part const &_texture
 )
@@ -40,7 +40,7 @@ sanguis::client::draw2d::scene::background_texture_coordinates(
 		fcppt::math::vector::structure_cast<
 			pos_type
 		>(
-			-_translation
+			-_translation.get()
 		)
 		/
 		fcppt::math::dim::structure_cast<

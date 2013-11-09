@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_BACKGROUND_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_BACKGROUND_HPP_INCLUDED
 
-#include <sanguis/client/draw2d/vector2_fwd.hpp>
+#include <sanguis/client/draw2d/translation_fwd.hpp>
 #include <sanguis/client/draw2d/scene/background_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/client/object_decl.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_fwd.hpp>
@@ -39,7 +39,7 @@ public:
 	void
 	render(
 		sge::renderer::context::core &,
-		sanguis::client::draw2d::vector2 const &translation
+		sanguis::client::draw2d::translation
 	);
 private:
 	void

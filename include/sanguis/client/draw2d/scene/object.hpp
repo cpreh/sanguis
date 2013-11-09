@@ -9,7 +9,9 @@
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/client/control/environment_fwd.hpp>
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
-#include <sanguis/client/draw2d/transform_callback.hpp>
+#include <sanguis/client/draw2d/optional_player_center.hpp>
+#include <sanguis/client/draw2d/optional_translation.hpp>
+#include <sanguis/client/draw2d/player_center_callback.hpp>
 #include <sanguis/client/draw2d/entities/base_fwd.hpp>
 #include <sanguis/client/draw2d/entities/own_fwd.hpp>
 #include <sanguis/client/draw2d/entities/own_unique_ptr.hpp>
@@ -25,7 +27,6 @@
 #include <sanguis/client/draw2d/sprite/client/system_decl.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
 #include <sanguis/client/draw2d/sprite/colored/system_decl.hpp>
-#include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/state_decl.hpp>
 #include <sanguis/load/context_fwd.hpp>
 #include <sanguis/load/auras/context.hpp>
@@ -40,6 +41,7 @@
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
+#include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
@@ -136,13 +138,16 @@ private:
 		sanguis::entity_id
 	);
 
-	sanguis::client::draw2d::sprite::center const
-	player_center() const;
+	sanguis::client::draw2d::optional_translation const
+	translation() const;
 
 	void
-	transform(
-		sanguis::client::draw2d::sprite::center const &
+	player_center(
+		sanguis::client::draw2d::optional_player_center
 	);
+
+	void
+	update_translation();
 
 	void
 	change_world(
@@ -158,8 +163,8 @@ private:
 	sanguis::client::sound_manager &
 	sound_manager() const;
 
-	sanguis::client::draw2d::transform_callback const &
-	transform_callback() const;
+	sanguis::client::draw2d::player_center_callback const &
+	player_center_callback() const;
 
 	sanguis::client::draw2d::insert_own_callback const &
 	insert_own_callback() const;
@@ -215,9 +220,11 @@ private:
 
 	bool paused_;
 
-	sanguis::client::draw2d::sprite::center player_center_;
+	sanguis::client::draw2d::optional_player_center player_center_;
 
-	sanguis::client::draw2d::transform_callback const transform_callback_;
+	sanguis::client::draw2d::optional_translation translation_;
+
+	sanguis::client::draw2d::player_center_callback const player_center_callback_;
 
 	sanguis::client::draw2d::insert_own_callback const insert_own_callback_;
 
@@ -253,6 +260,8 @@ private:
 	> const background_;
 
 	sge::renderer::state::ffp::lighting::material::object_scoped_ptr const material_state_;
+
+	fcppt::signal::scoped_connection const viewport_connection_;
 };
 
 }

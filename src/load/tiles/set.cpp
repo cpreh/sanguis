@@ -7,6 +7,7 @@
 #include <sanguis/load/tiles/set.hpp>
 #include <sge/texture/const_part_shared_ptr.hpp>
 #include <fcppt/extract_from_string.hpp>
+#include <fcppt/from_std_string.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/bitfield/underlying_value.hpp>
@@ -29,85 +30,101 @@ sanguis::load::tiles::set::set(
 :
 	elements_()
 {
-	for(
-		boost::filesystem::directory_iterator it(
-			sanguis::media_path()
-			/
-			FCPPT_TEXT("tiles")
-			/
-			_category.get()
-			/
-			_name.get()
-		);
-		it != boost::filesystem::directory_iterator();
-		++it
-	)
+	try
 	{
-		boost::filesystem::path const path(
-			it->path()
-		);
-
-		fcppt::optional<
-			sanguis::load::tiles::set::orientation_internal_type
-		> const number(
-			fcppt::extract_from_string<
-				sanguis::load::tiles::set::orientation_internal_type
-			>(
-				fcppt::filesystem::stem(
-					path
-				)
-			)
-		);
-
-		if(
-			!number
+		for(
+			boost::filesystem::directory_iterator it(
+				sanguis::media_path()
+				/
+				FCPPT_TEXT("tiles")
+				/
+				_category.get()
+				/
+				_name.get()
+			);
+			it != boost::filesystem::directory_iterator();
+			++it
 		)
 		{
+			boost::filesystem::path const path(
+				it->path()
+			);
+
+			fcppt::optional<
+				sanguis::load::tiles::set::orientation_internal_type
+			> const number(
+				fcppt::extract_from_string<
+					sanguis::load::tiles::set::orientation_internal_type
+				>(
+					fcppt::filesystem::stem(
+						path
+					)
+				)
+			);
+
+			if(
+				!number
+			)
+			{
+				FCPPT_LOG_ERROR(
+					sanguis::load::log(),
+					fcppt::log::_
+					<<
+					FCPPT_TEXT("Tileset file ")
+					<<
+					fcppt::filesystem::path_to_string(
+						path
+					)
+					<<
+					FCPPT_TEXT(" has an invalid filename.")
+				);
+
+				continue;
+			}
+
+			elements_.insert(
+				std::make_pair(
+					*number,
+					_textures.load(
+						path
+					)
+				)
+			);
+		}
+
+		if(
+			!this->orientation(
+				sanguis::load::tiles::orientation::null()
+			)
+		)
 			FCPPT_LOG_ERROR(
 				sanguis::load::log(),
 				fcppt::log::_
 				<<
-				FCPPT_TEXT("Tileset file ")
+				FCPPT_TEXT("Tileset ")
 				<<
-				fcppt::filesystem::path_to_string(
-					path
-				)
+				_category
 				<<
-				FCPPT_TEXT(" has an invalid filename.")
+				FCPPT_TEXT('/')
+				<<
+				_name
+				<<
+				FCPPT_TEXT(" has no default orientation.")
 			);
-
-			continue;
-		}
-
-		elements_.insert(
-			std::make_pair(
-				*number,
-				_textures.load(
-					path
-				)
-			)
-		);
 	}
-
-	if(
-		!this->orientation(
-			sanguis::load::tiles::orientation::null()
-		)
+	catch(
+		boost::filesystem::filesystem_error const &error
 	)
+	{
 		FCPPT_LOG_ERROR(
 			sanguis::load::log(),
 			fcppt::log::_
 			<<
-			FCPPT_TEXT("Tileset ")
-			<<
-			_category
-			<<
-			FCPPT_TEXT('/')
-			<<
-			_name
-			<<
-			FCPPT_TEXT(" has no default orientation.")
+			fcppt::from_std_string(
+				error.what()
+			)
 		);
+	}
 }
 
 sanguis::load::tiles::set::~set()

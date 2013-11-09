@@ -49,7 +49,8 @@
 sanguis::client::draw2d::scene::world::state::state(
 	sge::renderer::device::core &_renderer,
 	sanguis::load::tiles::context &_tiles,
-	sanguis::client::world_parameters const &_parameters
+	sanguis::client::world_parameters const &_parameters,
+	sanguis::client::draw2d::optional_translation const _translation
 )
 :
 	sanguis::client::draw2d::scene::world::state::state(
@@ -57,7 +58,8 @@ sanguis::client::draw2d::scene::world::state::state(
 		_tiles,
 		sanguis::creator::generate(
 			_parameters.top_parameters()
-		)
+		),
+		_translation
 	)
 {
 }
@@ -68,12 +70,13 @@ sanguis::client::draw2d::scene::world::state::~state()
 
 void
 sanguis::client::draw2d::scene::world::state::draw(
-	sge::renderer::context::core &_render_context,
-	sanguis::client::draw2d::vector2 const &_translation
+	sge::renderer::context::core &_render_context
 )
 {
 	if(
 		batches_.empty()
+		||
+		!translation_
 	)
 		return;
 
@@ -90,7 +93,7 @@ sanguis::client::draw2d::scene::world::state::draw(
 			fcppt::math::vector::structure_cast<
 				sanguis::creator::signed_pos
 			>(
-				-_translation
+				-translation_->get()
 			)
 		);
 
@@ -146,6 +149,17 @@ sanguis::client::draw2d::scene::world::state::draw(
 		);
 }
 
+void
+sanguis::client::draw2d::scene::world::state::translation(
+	sanguis::client::draw2d::optional_translation const _translation
+)
+{
+	translation_
+		= _translation;
+
+	// TODO: Update fog of war!
+}
+
 sanguis::client::draw2d::optional_speed const
 sanguis::client::draw2d::scene::world::state::test_collision(
 	sanguis::client::draw2d::collide_parameters const &_parameters
@@ -187,7 +201,8 @@ sanguis::client::draw2d::scene::world::state::test_collision(
 sanguis::client::draw2d::scene::world::state::state(
 	sge::renderer::device::core &_renderer,
 	sanguis::load::tiles::context &_tiles,
-	sanguis::creator::top_result const &_result
+	sanguis::creator::top_result const &_result,
+	sanguis::client::draw2d::optional_translation const _translation
 )
 :
 	renderer_(
@@ -211,6 +226,9 @@ sanguis::client::draw2d::scene::world::state::state(
 			_tiles,
 			sprite_buffers_
 		)
+	),
+	translation_(
+		_translation
 	)
 {
 }

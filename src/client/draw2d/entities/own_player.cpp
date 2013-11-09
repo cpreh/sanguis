@@ -3,9 +3,11 @@
 #include <sanguis/client/draw2d/collide_callback.hpp>
 #include <sanguis/client/draw2d/collide_parameters.hpp>
 #include <sanguis/client/draw2d/dim2.hpp>
+#include <sanguis/client/draw2d/optional_player_center.hpp>
 #include <sanguis/client/draw2d/optional_speed.hpp>
+#include <sanguis/client/draw2d/player_center.hpp>
+#include <sanguis/client/draw2d/player_center_callback.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
-#include <sanguis/client/draw2d/transform_callback.hpp>
 #include <sanguis/client/draw2d/entities/own_player.hpp>
 #include <sanguis/client/draw2d/entities/player.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
@@ -16,7 +18,7 @@
 sanguis::client::draw2d::entities::own_player::own_player(
 	sanguis::load::auras::context &_auras_load_context,
 	sanguis::client::draw2d::entities::model::load_parameters const &_parameters,
-	sanguis::client::draw2d::transform_callback const &_transform,
+	sanguis::client::draw2d::player_center_callback const &_player_center_callback,
 	sanguis::client::draw2d::collide_callback const &_collide,
 	sanguis::aura_type_vector const &_auras,
 	sanguis::buff_type_vector const &_buffs
@@ -28,8 +30,8 @@ sanguis::client::draw2d::entities::own_player::own_player(
 		_auras,
 		_buffs
 	),
-	transform_(
-		_transform
+	player_center_callback_(
+		_player_center_callback
 	),
 	collide_(
 		_collide
@@ -42,6 +44,9 @@ sanguis::client::draw2d::entities::own_player::own_player(
 
 sanguis::client::draw2d::entities::own_player::~own_player()
 {
+	player_center_callback_(
+		sanguis::client::draw2d::optional_player_center()
+	);
 }
 
 void
@@ -71,8 +76,12 @@ sanguis::client::draw2d::entities::own_player::update()
 
 	sanguis::client::draw2d::entities::player::update();
 
-	transform_(
-		this->center()
+	player_center_callback_(
+		sanguis::client::draw2d::optional_player_center(
+			sanguis::client::draw2d::player_center(
+				this->center()
+			)
+		)
 	);
 
 	sanguis::client::draw2d::entities::player::speed(

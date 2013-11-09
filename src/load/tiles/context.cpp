@@ -19,7 +19,16 @@ sanguis::load::tiles::context::context(
 		_textures
 	),
 	sets_(),
-	background_sets_()
+	background_sets_(),
+	fog_of_war_(
+		_textures,
+		sanguis::load::tiles::category(
+			FCPPT_TEXT("misc")
+		),
+		sanguis::load::tiles::name(
+			FCPPT_TEXT("fog_of_war")
+		)
+	)
 {
 }
 
@@ -57,6 +66,13 @@ sanguis::load::tiles::context::set(
 				FCPPT_TEXT("background")
 			)
 		);
+}
+
+sanguis::load::tiles::set const &
+sanguis::load::tiles::context::fog_of_war()
+{
+	return
+		fog_of_war_;
 }
 
 template<

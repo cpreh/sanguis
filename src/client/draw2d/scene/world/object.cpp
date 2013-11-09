@@ -1,7 +1,7 @@
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/collide_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/optional_speed.hpp>
-#include <sanguis/client/draw2d/vector2_fwd.hpp>
+#include <sanguis/client/draw2d/optional_translation.hpp>
 #include <sanguis/client/draw2d/scene/world/object.hpp>
 #include <sanguis/client/draw2d/scene/world/state.hpp>
 #include <sanguis/load/resource/textures_fwd.hpp>
@@ -42,22 +42,34 @@ sanguis::client::draw2d::scene::world::object::~object()
 
 void
 sanguis::client::draw2d::scene::world::object::draw(
-	sge::renderer::context::core &_render_context,
-	sanguis::client::draw2d::vector2 const &_translation
+	sge::renderer::context::core &_render_context
 )
 {
 	if(
 		state_
 	)
 		state_->draw(
-			_render_context,
+			_render_context
+		);
+}
+
+void
+sanguis::client::draw2d::scene::world::object::translation(
+	sanguis::client::draw2d::optional_translation const _translation
+)
+{
+	if(
+		state_
+	)
+		state_->translation(
 			_translation
 		);
 }
 
 void
 sanguis::client::draw2d::scene::world::object::change(
-	sanguis::client::world_parameters const &_param
+	sanguis::client::world_parameters const &_parameters,
+	sanguis::client::draw2d::optional_translation const _translation
 )
 {
 	state_.take(
@@ -66,7 +78,8 @@ sanguis::client::draw2d::scene::world::object::change(
 		>(
 			renderer_,
 			tiles_context_,
-			_param
+			_parameters,
+			_translation
 		)
 	);
 }
@@ -74,7 +87,8 @@ sanguis::client::draw2d::scene::world::object::change(
 sanguis::client::draw2d::collide_callback const &
 sanguis::client::draw2d::scene::world::object::collide_callback() const
 {
-	return collide_callback_;
+	return
+		collide_callback_;
 }
 
 sanguis::client::draw2d::optional_speed const

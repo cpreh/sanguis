@@ -1,9 +1,9 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_CONTROL_ENVIRONMENT_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_CONTROL_ENVIRONMENT_HPP_INCLUDED
 
-#include <sanguis/client/control/attack_dest_fwd.hpp>
 #include <sanguis/client/control/cursor_position_fwd.hpp>
 #include <sanguis/client/control/environment.hpp>
+#include <sanguis/client/control/optional_attack_dest_fwd.hpp>
 #include <sanguis/client/control/optional_cursor_position.hpp>
 #include <sanguis/client/draw2d/scene/control_environment_fwd.hpp>
 #include <sanguis/client/draw2d/scene/object_fwd.hpp>
@@ -34,7 +34,7 @@ public:
 
 	~control_environment();
 private:
-	sanguis::client::control::attack_dest const
+	sanguis::client::control::optional_attack_dest const
 	translate_attack_dest(
 		sanguis::client::control::cursor_position const &
 	) const

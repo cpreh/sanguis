@@ -9,7 +9,7 @@
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/collide_callback.hpp>
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
-#include <sanguis/client/draw2d/transform_callback.hpp>
+#include <sanguis/client/draw2d/player_center_callback.hpp>
 #include <sanguis/client/draw2d/entities/base_fwd.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
@@ -97,8 +97,8 @@ public:
 	insert_own_callback() const = 0;
 
 	virtual
-	sanguis::client::draw2d::transform_callback const &
-	transform_callback() const = 0;
+	sanguis::client::draw2d::player_center_callback const &
+	player_center_callback() const = 0;
 
 	virtual
 	sanguis::client::draw2d::collide_callback const &

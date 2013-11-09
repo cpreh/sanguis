@@ -4,7 +4,7 @@
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/collide_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/optional_speed_fwd.hpp>
-#include <sanguis/client/draw2d/vector2_fwd.hpp>
+#include <sanguis/client/draw2d/optional_translation.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_grid.hpp>
 #include <sanguis/client/draw2d/scene/world/state_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/buffers.hpp>
@@ -37,15 +37,20 @@ public:
 	state(
 		sge::renderer::device::core &,
 		sanguis::load::tiles::context &,
-		sanguis::client::world_parameters const &
+		sanguis::client::world_parameters const &,
+		sanguis::client::draw2d::optional_translation
 	);
 
 	~state();
 
 	void
 	draw(
-		sge::renderer::context::core &,
-		sanguis::client::draw2d::vector2 const &translation
+		sge::renderer::context::core &
+	);
+
+	void
+	translation(
+		sanguis::client::draw2d::optional_translation
 	);
 
 	sanguis::client::draw2d::optional_speed const
@@ -56,8 +61,8 @@ private:
 	state(
 		sge::renderer::device::core &,
 		sanguis::load::tiles::context &,
-		sanguis::creator::top_result const &
-
+		sanguis::creator::top_result const &,
+		sanguis::client::draw2d::optional_translation
 	);
 
 	sge::renderer::device::core &renderer_;
@@ -69,6 +74,8 @@ private:
 	sanguis::creator::grid const grid_;
 
 	sanguis::client::draw2d::scene::world::batch_grid const batches_;
+
+	sanguis::client::draw2d::optional_translation translation_;
 };
 
 }

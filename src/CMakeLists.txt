@@ -69,6 +69,8 @@ set(
 	include/sanguis/client/control/input_translator.hpp
 	include/sanguis/client/control/input_translator_fwd.hpp
 	include/sanguis/client/control/key_scale.hpp
+	include/sanguis/client/control/optional_attack_dest.hpp
+	include/sanguis/client/control/optional_attack_dest_fwd.hpp
 	include/sanguis/client/control/optional_cursor_position.hpp
 	include/sanguis/client/control/optional_cursor_position_fwd.hpp
 	include/sanguis/client/control/scalar.hpp
@@ -177,8 +179,15 @@ set(
 	include/sanguis/client/draw2d/message/dispatcher_fwd.hpp
 	include/sanguis/client/draw2d/message/environment.hpp
 	include/sanguis/client/draw2d/message/environment_fwd.hpp
+	include/sanguis/client/draw2d/optional_player_center.hpp
+	include/sanguis/client/draw2d/optional_player_center_fwd.hpp
 	include/sanguis/client/draw2d/optional_speed.hpp
 	include/sanguis/client/draw2d/optional_speed_fwd.hpp
+	include/sanguis/client/draw2d/optional_translation.hpp
+	include/sanguis/client/draw2d/optional_translation_fwd.hpp
+	include/sanguis/client/draw2d/player_center.hpp
+	include/sanguis/client/draw2d/player_center_callback.hpp
+	include/sanguis/client/draw2d/player_center_fwd.hpp
 	include/sanguis/client/draw2d/radius.hpp
 	include/sanguis/client/draw2d/radius_fwd.hpp
 	include/sanguis/client/draw2d/scene/background.hpp
@@ -194,7 +203,7 @@ set(
 	include/sanguis/client/draw2d/scene/message_environment_fwd.hpp
 	include/sanguis/client/draw2d/scene/object.hpp
 	include/sanguis/client/draw2d/scene/object_fwd.hpp
-	include/sanguis/client/draw2d/scene/screen_center.hpp
+	include/sanguis/client/draw2d/scene/translation.hpp
 	include/sanguis/client/draw2d/scene/world/batch.hpp
 	include/sanguis/client/draw2d/scene/world/batch_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/batch_grid.hpp
@@ -318,11 +327,12 @@ set(
 	include/sanguis/client/draw2d/sunlight/rgb32f_format.hpp
 	include/sanguis/client/draw2d/sunlight/sun_angle.hpp
 	include/sanguis/client/draw2d/sunlight/time_to_gregorian.hpp
-	include/sanguis/client/draw2d/transform_callback.hpp
 	include/sanguis/client/draw2d/translate/scalar_from_client.hpp
 	include/sanguis/client/draw2d/translate/scalar_to_client.hpp
 	include/sanguis/client/draw2d/translate/vector_from_client.hpp
 	include/sanguis/client/draw2d/translate/vector_to_client.hpp
+	include/sanguis/client/draw2d/translation.hpp
+	include/sanguis/client/draw2d/translation_fwd.hpp
 	include/sanguis/client/draw2d/unit.hpp
 	include/sanguis/client/draw2d/vector2.hpp
 	include/sanguis/client/draw2d/vector2_fwd.hpp
@@ -1390,7 +1400,7 @@ set(
 	src/client/draw2d/scene/hud.cpp
 	src/client/draw2d/scene/message_environment.cpp
 	src/client/draw2d/scene/object.cpp
-	src/client/draw2d/scene/screen_center.cpp
+	src/client/draw2d/scene/translation.cpp
 	src/client/draw2d/scene/world/batch.cpp
 	src/client/draw2d/scene/world/generate_batches.cpp
 	src/client/draw2d/scene/world/object.cpp

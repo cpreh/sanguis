@@ -4,8 +4,8 @@
 #include <sanguis/aura_type_vector.hpp>
 #include <sanguis/buff_type_vector.hpp>
 #include <sanguis/client/draw2d/collide_callback.hpp>
+#include <sanguis/client/draw2d/player_center_callback.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
-#include <sanguis/client/draw2d/transform_callback.hpp>
 #include <sanguis/client/draw2d/entities/player.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/load/auras/context_fwd.hpp>
@@ -32,7 +32,7 @@ public:
 	own_player(
 		sanguis::load::auras::context &,
 		sanguis::client::draw2d::entities::model::load_parameters const &,
-		sanguis::client::draw2d::transform_callback const &,
+		sanguis::client::draw2d::player_center_callback const &,
 		sanguis::client::draw2d::collide_callback const &,
 		sanguis::aura_type_vector const &,
 		sanguis::buff_type_vector const &
@@ -52,7 +52,7 @@ private:
 	update()
 	override;
 
-	sanguis::client::draw2d::transform_callback const transform_;
+	sanguis::client::draw2d::player_center_callback const player_center_callback_;
 
 	sanguis::client::draw2d::collide_callback const collide_;
 
