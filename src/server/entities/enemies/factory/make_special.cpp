@@ -1,4 +1,5 @@
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/server/health.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/attribute_container.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
@@ -36,6 +37,14 @@ sanguis::server::entities::enemies::factory::make_special(
 				_random_generator,
 				difficulty
 			)
+		)
+	);
+
+	_parameters.health(
+		_parameters.health()
+		*
+		sanguis::server::health(
+			5.f
 		)
 	);
 

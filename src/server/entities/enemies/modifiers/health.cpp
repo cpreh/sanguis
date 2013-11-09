@@ -20,8 +20,6 @@ sanguis::server::entities::enemies::modifiers::health(
 			std::sqrt(
 				_parameters.difficulty().get()
 			)
-			*
-			3.f
 		)
 	);
 
