@@ -1,3 +1,4 @@
+#include <sanguis/duration_second.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/pickup_probability.hpp>
@@ -9,11 +10,15 @@
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
 #include <sanguis/server/entities/enemies/parameters.hpp>
+#include <sanguis/server/entities/enemies/special.hpp>
 #include <sanguis/server/entities/enemies/factory/make.hpp>
 #include <sanguis/server/entities/enemies/factory/parameters.hpp>
+#include <sanguis/server/entities/enemies/skills/cooldown.hpp>
+#include <sanguis/server/entities/enemies/skills/teleport.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/assign/make_container.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -51,6 +56,7 @@ sanguis::server::entities::enemies::factory::make(
 			_auras
 		)
 	);
+	/*
 
 	// TODO: Create special enemies here as well!
 	return
@@ -60,5 +66,29 @@ sanguis::server::entities::enemies::factory::make(
 			std::move(
 				parameters
 			)
+		);*/
+
+	// TODO: Put this into another function
+	return
+		fcppt::make_unique_ptr<
+			sanguis::server::entities::enemies::special
+		>(
+			std::move(
+				parameters
+			),
+			fcppt::assign::make_container<
+				sanguis::server::entities::enemies::skills::container
+			>(
+				fcppt::make_unique_ptr<
+					sanguis::server::entities::enemies::skills::teleport
+				>(
+					_parameters.diff_clock(),
+					sanguis::server::entities::enemies::skills::cooldown(
+						sanguis::duration_second(
+							5.f
+						)
+					)
+				)
+			).move_container()
 		);
 }

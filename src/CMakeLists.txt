@@ -983,12 +983,15 @@ set(
 	include/sanguis/server/entities/enemies/fwd.hpp
 	include/sanguis/server/entities/enemies/parameters.hpp
 	include/sanguis/server/entities/enemies/parameters_fwd.hpp
+	include/sanguis/server/entities/enemies/skills/container.hpp
 	include/sanguis/server/entities/enemies/skills/cooldown.hpp
 	include/sanguis/server/entities/enemies/skills/skill.hpp
 	include/sanguis/server/entities/enemies/skills/skill_fwd.hpp
 	include/sanguis/server/entities/enemies/skills/teleport.hpp
+	include/sanguis/server/entities/enemies/skills/unique_ptr.hpp
 	include/sanguis/server/entities/enemies/spawn_owner.hpp
 	include/sanguis/server/entities/enemies/spawn_owner_fwd.hpp
+	include/sanguis/server/entities/enemies/special.hpp
 	include/sanguis/server/entities/enemies/unique_ptr.hpp
 	include/sanguis/server/entities/exp_area.hpp
 	include/sanguis/server/entities/friend.hpp
@@ -1671,6 +1674,7 @@ set(
 	src/server/entities/enemies/parameters.cpp
 	src/server/entities/enemies/skills/skill.cpp
 	src/server/entities/enemies/skills/teleport.cpp
+	src/server/entities/enemies/special.cpp
 	src/server/entities/exp_area.cpp
 	src/server/entities/friend.cpp
 	src/server/entities/ifaces/with_angle.cpp

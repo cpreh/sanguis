@@ -57,11 +57,11 @@ public:
 	sanguis::server::team
 	team() const
 	override;
-private:
+protected:
 	void
 	update()
 	override;
-
+private:
 	sanguis::messages::unique_ptr
 	add_message(
 		sanguis::server::player_id
