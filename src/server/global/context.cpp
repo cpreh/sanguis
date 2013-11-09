@@ -41,6 +41,7 @@
 #include <sanguis/server/global/source_world_pair.hpp>
 #include <sanguis/server/global/world_connection_map.hpp>
 #include <sanguis/server/global/world_context.hpp>
+#include <sanguis/server/weapons/optional_target.hpp>
 #include <sanguis/server/weapons/target.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/world/grid_pos_to_center.hpp>
@@ -265,8 +266,10 @@ sanguis::server::global::context::player_target(
 	);
 
 	player_ref.target(
-		sanguis::server::weapons::target(
-			_target
+		sanguis::server::weapons::optional_target(
+			sanguis::server::weapons::target(
+				_target
+			)
 		)
 	);
 

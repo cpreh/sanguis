@@ -13,11 +13,10 @@
 #include <sanguis/server/weapons/const_optional_ref_fwd.hpp>
 #include <sanguis/server/weapons/ias.hpp>
 #include <sanguis/server/weapons/irs.hpp>
+#include <sanguis/server/weapons/optional_target.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
-#include <sanguis/server/weapons/target.hpp>
 #include <sanguis/server/weapons/weapon_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/optional_decl.hpp>
 
 
 namespace sanguis
@@ -68,10 +67,10 @@ public:
 
 	void
 	target(
-		sanguis::server::weapons::target
+		sanguis::server::weapons::optional_target
 	);
 
-	sanguis::server::weapons::target const
+	sanguis::server::weapons::optional_target const
 	target() const;
 
 	bool
@@ -160,11 +159,7 @@ private:
 
 	sanguis::server::weapons::unique_ptr secondary_weapon_;
 
-	typedef fcppt::optional<
-		sanguis::server::weapons::target
-	> optional_target;
-
-	optional_target target_;
+	sanguis::server::weapons::optional_target target_;
 
 	sanguis::weapon_status weapon_status_;
 

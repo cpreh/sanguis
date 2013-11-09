@@ -983,6 +983,10 @@ set(
 	include/sanguis/server/entities/enemies/fwd.hpp
 	include/sanguis/server/entities/enemies/parameters.hpp
 	include/sanguis/server/entities/enemies/parameters_fwd.hpp
+	include/sanguis/server/entities/enemies/skills/cooldown.hpp
+	include/sanguis/server/entities/enemies/skills/skill.hpp
+	include/sanguis/server/entities/enemies/skills/skill_fwd.hpp
+	include/sanguis/server/entities/enemies/skills/teleport.hpp
 	include/sanguis/server/entities/enemies/spawn_owner.hpp
 	include/sanguis/server/entities/enemies/spawn_owner_fwd.hpp
 	include/sanguis/server/entities/enemies/unique_ptr.hpp
@@ -1078,8 +1082,6 @@ set(
 	include/sanguis/server/entities/with_links_fwd.hpp
 	include/sanguis/server/entities/with_perks.hpp
 	include/sanguis/server/entities/with_perks_fwd.hpp
-	include/sanguis/server/entities/with_skills.hpp
-	include/sanguis/server/entities/with_skills_fwd.hpp
 	include/sanguis/server/entities/with_velocity.hpp
 	include/sanguis/server/entities/with_velocity_fwd.hpp
 	include/sanguis/server/entities/with_weapon.hpp
@@ -1246,6 +1248,8 @@ set(
 	include/sanguis/server/weapons/optional_magazine_size_fwd.hpp
 	include/sanguis/server/weapons/optional_reload_time.hpp
 	include/sanguis/server/weapons/optional_reload_time_fwd.hpp
+	include/sanguis/server/weapons/optional_target.hpp
+	include/sanguis/server/weapons/optional_target_fwd.hpp
 	include/sanguis/server/weapons/pistol.hpp
 	include/sanguis/server/weapons/player_start_weapon.hpp
 	include/sanguis/server/weapons/range.hpp
@@ -1665,6 +1669,8 @@ set(
 	src/server/entities/enemies/factory/zombie00.cpp
 	src/server/entities/enemies/factory/zombie01.cpp
 	src/server/entities/enemies/parameters.cpp
+	src/server/entities/enemies/skills/skill.cpp
+	src/server/entities/enemies/skills/teleport.cpp
 	src/server/entities/exp_area.cpp
 	src/server/entities/friend.cpp
 	src/server/entities/ifaces/with_angle.cpp

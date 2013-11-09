@@ -1,5 +1,6 @@
 #include <sanguis/weapon_status.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
+#include <sanguis/server/weapons/optional_target.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/events/poll.hpp>
 #include <sanguis/server/weapons/events/shoot.hpp>
@@ -29,12 +30,18 @@ sanguis::server::weapons::states::ready::react(
 		_event.from()
 	);
 
+	sanguis::server::weapons::optional_target const target(
+		from.target()
+	);
+
 	if(
+		!target
+		||
 		!this->context<
 			sanguis::server::weapons::weapon
 		>().in_range(
 			from,
-			from.target()
+			*target
 		)
 	)
 		return

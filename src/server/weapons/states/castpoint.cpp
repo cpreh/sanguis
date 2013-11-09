@@ -1,5 +1,7 @@
 #include <sanguis/diff_timer.hpp>
+#include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/weapons/delayed_attack.hpp>
+#include <sanguis/server/weapons/optional_target.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/events/poll.hpp>
 #include <sanguis/server/weapons/events/shoot.hpp>
@@ -9,7 +11,6 @@
 #include <sanguis/server/weapons/states/castpoint.hpp>
 #include <sanguis/server/weapons/states/castpoint_parameters.hpp>
 #include <sanguis/server/weapons/states/ready.hpp>
-#include <sanguis/server/entities/with_weapon.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -58,7 +59,13 @@ sanguis::server::weapons::states::castpoint::react(
 	sanguis::server::weapons::events::poll const &_event
 )
 {
+	sanguis::server::weapons::optional_target const target(
+		_event.owner().target()
+	);
+
 	if(
+		!target
+		||
 		!attack_time_.expired()
 	)
 		return
@@ -73,7 +80,7 @@ sanguis::server::weapons::states::castpoint::react(
 				_event.owner().angle(),
 				_event.owner().team(),
 				*_event.owner().environment(),
-				_event.owner().target()
+				*target
 			)
 		)
 	)

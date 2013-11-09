@@ -19,10 +19,9 @@
 #include <sanguis/server/weapons/const_optional_ref.hpp>
 #include <sanguis/server/weapons/ias.hpp>
 #include <sanguis/server/weapons/irs.hpp>
-#include <sanguis/server/weapons/target.hpp>
+#include <sanguis/server/weapons/optional_target.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/unique_ptr_to_optional.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/variant/get.hpp>
@@ -188,21 +187,17 @@ sanguis::server::entities::with_weapon::drop_weapon(
 
 void
 sanguis::server::entities::with_weapon::target(
-	sanguis::server::weapons::target const _target
+	sanguis::server::weapons::optional_target const _target
 )
 {
 	target_ = _target;
 }
 
-sanguis::server::weapons::target const
+sanguis::server::weapons::optional_target const
 sanguis::server::entities::with_weapon::target() const
 {
-	FCPPT_ASSERT_PRE(
-		target_
-	);
-
 	return
-		*target_;
+		target_;
 }
 
 bool
@@ -257,13 +252,15 @@ sanguis::server::entities::with_weapon::use_weapon(
 sanguis::server::entities::property::always_max &
 sanguis::server::entities::with_weapon::attack_speed()
 {
-	return attack_speed_;
+	return
+		attack_speed_;
 }
 
 sanguis::server::entities::property::always_max &
 sanguis::server::entities::with_weapon::reload_speed()
 {
-	return reload_speed_;
+	return
+		reload_speed_;
 }
 
 sanguis::server::weapons::ias const

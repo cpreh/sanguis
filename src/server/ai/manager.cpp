@@ -23,6 +23,7 @@
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/weapons/optional_target.hpp>
 #include <sanguis/server/weapons/target.hpp>
 #include <sanguis/server/world/center_to_grid_pos.hpp>
 #include <sanguis/server/world/grid_pos_to_center.hpp>
@@ -152,8 +153,10 @@ sanguis::server::ai::manager::update()
 	);
 
 	me_.target(
-		sanguis::server::weapons::target(
-			target->center().get()
+		sanguis::server::weapons::optional_target(
+			sanguis::server::weapons::target(
+				target->center().get()
+			)
 		)
 	);
 
