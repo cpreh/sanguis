@@ -19,7 +19,7 @@ sanguis::load::tiles::context::context(
 		_textures
 	),
 	sets_(),
-	background_sets_(),
+	background_sets_()/*,
 	fog_of_war_(
 		_textures,
 		sanguis::load::tiles::category(
@@ -28,7 +28,7 @@ sanguis::load::tiles::context::context(
 		sanguis::load::tiles::name(
 			FCPPT_TEXT("fog_of_war")
 		)
-	)
+	)*/
 {
 }
 
@@ -68,12 +68,13 @@ sanguis::load::tiles::context::set(
 		);
 }
 
+/*
 sanguis::load::tiles::set const &
 sanguis::load::tiles::context::fog_of_war()
 {
 	return
 		fog_of_war_;
-}
+}*/
 
 template<
 	typename Map,

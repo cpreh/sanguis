@@ -1,8 +1,11 @@
+#include <sanguis/server/entities/enemies/attribute_container.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
+#include <sanguis/server/entities/enemies/make_name.hpp>
 #include <sanguis/server/entities/enemies/parameters_fwd.hpp>
 #include <sanguis/server/entities/enemies/special.hpp>
 #include <sanguis/server/entities/enemies/skills/container.hpp>
 #include <sanguis/server/entities/enemies/skills/skill.hpp>
+#include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -11,6 +14,7 @@
 
 sanguis::server::entities::enemies::special::special(
 	sanguis::server::entities::enemies::parameters &&_parameters,
+	sanguis::server::entities::enemies::attribute_container const &_attributes,
 	sanguis::server::entities::enemies::skills::container &&_skills
 )
 :
@@ -19,7 +23,16 @@ sanguis::server::entities::enemies::special::special(
 			_parameters
 		)
 	),
-	skills_()
+	skills_(),
+	name_(
+		sge::charconv::fcppt_string_to_utf8(
+			sanguis::server::entities::enemies::make_name(
+				_attributes,
+				_skills,
+				this->enemy_type()
+			)
+		)
+	)
 {
 	for(
 		auto &skill
@@ -51,4 +64,11 @@ sanguis::server::entities::enemies::special::update()
 		skill.update(
 			*this
 		);
+}
+
+sanguis::messages::types::string const &
+sanguis::server::entities::enemies::special::name() const
+{
+	return
+		name_;
 }

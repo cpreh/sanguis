@@ -1,12 +1,14 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/server/center.hpp>
+#include <sanguis/server/entities/enemies/attribute.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
 #include <sanguis/server/entities/enemies/skills/cooldown.hpp>
 #include <sanguis/server/entities/enemies/skills/skill.hpp>
 #include <sanguis/server/entities/enemies/skills/teleport.hpp>
 #include <sanguis/server/weapons/optional_target.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/text.hpp>
 
 
 sanguis::server::entities::enemies::skills::teleport::teleport(
@@ -51,5 +53,14 @@ sanguis::server::entities::enemies::skills::teleport::update(
 			sanguis::server::center(
 				target->get()
 			)
+		);
+}
+
+sanguis::server::entities::enemies::attribute
+sanguis::server::entities::enemies::skills::teleport::attribute() const
+{
+	return
+		sanguis::server::entities::enemies::attribute(
+			FCPPT_TEXT("teleporting")
 		);
 }

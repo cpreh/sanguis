@@ -179,3 +179,12 @@ sanguis::server::entities::enemies::parameters::auras()
 	return
 		auras_;
 }
+
+void
+sanguis::server::entities::enemies::parameters::health(
+	sanguis::server::health const _health
+)
+{
+	health_ =
+		_health;
+}

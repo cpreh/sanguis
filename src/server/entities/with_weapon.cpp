@@ -34,6 +34,26 @@ sanguis::server::entities::with_weapon::with_weapon(
 	sanguis::server::weapons::unique_ptr &&_start_weapon
 )
 :
+	sanguis::server::entities::with_weapon::with_weapon(
+		std::move(
+			_start_weapon
+		),
+		sanguis::server::weapons::ias(
+			1.f
+		),
+		sanguis::server::weapons::irs(
+			1.f
+		)
+	)
+{
+}
+
+sanguis::server::entities::with_weapon::with_weapon(
+	sanguis::server::weapons::unique_ptr &&_start_weapon,
+	sanguis::server::weapons::ias const _ias,
+	sanguis::server::weapons::irs const _irs
+)
+:
 	sanguis::server::entities::base(),
 	sanguis::server::entities::ifaces::with_angle(),
 	sanguis::server::entities::ifaces::with_id(),
@@ -45,10 +65,10 @@ sanguis::server::entities::with_weapon::with_weapon(
 		sanguis::weapon_status::nothing
 	),
 	attack_speed_(
-		1
+		_ias.get()
 	),
 	reload_speed_(
-		1
+		_irs.get()
 	)
 {
 	if(
@@ -60,6 +80,7 @@ sanguis::server::entities::with_weapon::with_weapon(
 			)
 		);
 }
+
 
 sanguis::server::entities::with_weapon::~with_weapon()
 {

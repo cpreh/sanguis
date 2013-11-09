@@ -52,7 +52,7 @@ public:
 	~enemy();
 
 	sanguis::creator::enemy_type
-	etype() const;
+	enemy_type() const;
 
 	sanguis::server::team
 	team() const
@@ -76,6 +76,10 @@ private:
 	remove()
 	override;
 
+	virtual
+	sanguis::messages::types::string const &
+	name() const;
+
 	sanguis::creator::enemy_type const enemy_type_;
 
 	sanguis::server::pickup_probability const pickup_probability_;
@@ -86,6 +90,7 @@ private:
 
 	sanguis::server::entities::enemies::spawn_owner const spawn_owner_;
 
+	// TODO: Remove this member and implement it elsewhere!
 	sanguis::messages::types::string const name_;
 };
 

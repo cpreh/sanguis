@@ -107,7 +107,6 @@ sanguis::server::entities::enemies::enemy::enemy(
 		_parameters.spawn_owner()
 	),
 	name_(
-		// TODO!
 		sge::charconv::fcppt_string_to_utf8(
 			sanguis::load::enemy_name(
 				enemy_type_
@@ -122,7 +121,7 @@ sanguis::server::entities::enemies::enemy::~enemy()
 }
 
 sanguis::creator::enemy_type
-sanguis::server::entities::enemies::enemy::etype() const
+sanguis::server::entities::enemies::enemy::enemy_type() const
 {
 	return
 		enemy_type_;
@@ -165,8 +164,8 @@ sanguis::server::entities::enemies::enemy::add_message(
 				this->weapon_status(),
 				this->aura_types(),
 				this->buff_types(),
-				this->etype(),
-				name_
+				this->enemy_type(),
+				this->name()
 			)
 		);
 }
@@ -212,4 +211,11 @@ sanguis::server::entities::enemies::enemy::remove()
 		difficulty_,
 		this->center()
 	);
+}
+
+sanguis::messages::types::string const &
+sanguis::server::entities::enemies::enemy::name() const
+{
+	return
+		name_;
 }

@@ -964,6 +964,9 @@ set(
 	include/sanguis/server/entities/center_ghost.hpp
 	include/sanguis/server/entities/center_simple.hpp
 	include/sanguis/server/entities/check_dim.hpp
+	include/sanguis/server/entities/enemies/attribute.hpp
+	include/sanguis/server/entities/enemies/attribute_container.hpp
+	include/sanguis/server/entities/enemies/attribute_fwd.hpp
 	include/sanguis/server/entities/enemies/base_difficulty.hpp
 	include/sanguis/server/entities/enemies/create.hpp
 	include/sanguis/server/entities/enemies/difficulty.hpp
@@ -973,6 +976,9 @@ set(
 	include/sanguis/server/entities/enemies/factory/ghost.hpp
 	include/sanguis/server/entities/enemies/factory/maggot.hpp
 	include/sanguis/server/entities/enemies/factory/make.hpp
+	include/sanguis/server/entities/enemies/factory/make_modifiers.hpp
+	include/sanguis/server/entities/enemies/factory/make_skills.hpp
+	include/sanguis/server/entities/enemies/factory/make_special.hpp
 	include/sanguis/server/entities/enemies/factory/parameters.hpp
 	include/sanguis/server/entities/enemies/factory/parameters_fwd.hpp
 	include/sanguis/server/entities/enemies/factory/skeleton.hpp
@@ -981,6 +987,12 @@ set(
 	include/sanguis/server/entities/enemies/factory/zombie00.hpp
 	include/sanguis/server/entities/enemies/factory/zombie01.hpp
 	include/sanguis/server/entities/enemies/fwd.hpp
+	include/sanguis/server/entities/enemies/make_name.hpp
+	include/sanguis/server/entities/enemies/modifiers/apply.hpp
+	include/sanguis/server/entities/enemies/modifiers/callback.hpp
+	include/sanguis/server/entities/enemies/modifiers/container.hpp
+	include/sanguis/server/entities/enemies/modifiers/health.hpp
+	include/sanguis/server/entities/enemies/modifiers/modifier.hpp
 	include/sanguis/server/entities/enemies/parameters.hpp
 	include/sanguis/server/entities/enemies/parameters_fwd.hpp
 	include/sanguis/server/entities/enemies/skills/container.hpp
@@ -1659,18 +1671,25 @@ set(
 	src/server/entities/center_ghost.cpp
 	src/server/entities/center_simple.cpp
 	src/server/entities/check_dim.cpp
+	src/server/entities/enemies/attribute.cpp
 	src/server/entities/enemies/base_difficulty.cpp
 	src/server/entities/enemies/create.cpp
 	src/server/entities/enemies/enemy.cpp
 	src/server/entities/enemies/factory/ghost.cpp
 	src/server/entities/enemies/factory/maggot.cpp
 	src/server/entities/enemies/factory/make.cpp
+	src/server/entities/enemies/factory/make_modifiers.cpp
+	src/server/entities/enemies/factory/make_skills.cpp
+	src/server/entities/enemies/factory/make_special.cpp
 	src/server/entities/enemies/factory/parameters.cpp
 	src/server/entities/enemies/factory/skeleton.cpp
 	src/server/entities/enemies/factory/spider.cpp
 	src/server/entities/enemies/factory/wolf.cpp
 	src/server/entities/enemies/factory/zombie00.cpp
 	src/server/entities/enemies/factory/zombie01.cpp
+	src/server/entities/enemies/make_name.cpp
+	src/server/entities/enemies/modifiers/apply.cpp
+	src/server/entities/enemies/modifiers/health.cpp
 	src/server/entities/enemies/parameters.cpp
 	src/server/entities/enemies/skills/skill.cpp
 	src/server/entities/enemies/skills/teleport.cpp

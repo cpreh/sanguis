@@ -2,6 +2,8 @@
 #define SANGUIS_SERVER_ENTITIES_ENEMIES_SKILLS_TELEPORT_HPP_INCLUDED
 
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/diff_timer.hpp>
+#include <sanguis/server/entities/enemies/attribute_fwd.hpp>
 #include <sanguis/server/entities/enemies/enemy_fwd.hpp>
 #include <sanguis/server/entities/enemies/skills/cooldown.hpp>
 #include <sanguis/server/entities/enemies/skills/skill.hpp>
@@ -34,13 +36,17 @@ public:
 
 	~teleport()
 	override;
-
+private:
 	void
 	update(
 		sanguis::server::entities::enemies::enemy &
 	)
 	override;
-private:
+
+	sanguis::server::entities::enemies::attribute
+	attribute() const
+	override;
+
 	sanguis::diff_timer cooldown_timer_;
 };
 

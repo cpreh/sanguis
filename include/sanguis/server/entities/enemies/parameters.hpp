@@ -98,6 +98,11 @@ public:
 
 	sanguis::server::auras::container &
 	auras();
+
+	void
+	health(
+		sanguis::server::health
+	);
 private:
 	sanguis::diff_clock const &diff_clock_;
 
@@ -107,7 +112,7 @@ private:
 
 	sanguis::server::damage::armor const armor_;
 
-	sanguis::server::health const health_;
+	sanguis::server::health health_;
 
 	sanguis::server::entities::movement_speed const movement_speed_;
 
