@@ -213,7 +213,8 @@ sanguis::client::machine::process(
 		)
 	);
 
-	return window_system_.poll();
+	return
+		window_system_.poll();
 }
 
 void

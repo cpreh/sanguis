@@ -19,13 +19,19 @@
 #include <sge/font/object.hpp>
 #include <sge/font/parameters.hpp>
 #include <sge/font/system.hpp>
+#include <sge/renderer/device/core.hpp>
+#include <sge/renderer/display_mode/object.hpp>
+#include <sge/renderer/display_mode/optional_refresh_rate.hpp>
+#include <sge/renderer/display_mode/refresh_rate_value.hpp>
 #include <sge/timer/elapsed_and_reset.hpp>
+#include <sge/timer/scoped_frame_limiter.hpp>
 #include <sge/window/system.hpp>
 #include <alda/net/port.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/exit_failure.hpp>
 #include <awl/main/exit_success.hpp>
 #include <fcppt/exception.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/fatal.hpp>
@@ -54,6 +60,9 @@ sanguis::client::object::object(
 		sanguis::client::create_systems(
 			_variables_map
 		)
+	),
+	renderer_(
+		sys_->renderer_core()
 	),
 	font_object_(
 		sys_->font_system().create_font(
@@ -199,6 +208,23 @@ sanguis::client::object::register_handler()
 void
 sanguis::client::object::loop_handler()
 {
+	sge::renderer::display_mode::optional_refresh_rate const refresh_rate(
+		renderer_.display_mode().refresh_rate()
+	);
+
+	sge::timer::scoped_frame_limiter const limiter(
+		refresh_rate
+		?
+			refresh_rate->get()
+		:
+			fcppt::literal<
+				sge::renderer::display_mode::refresh_rate_value
+			>(
+				100u
+			)
+	);
+
+
 	if(
 		server_
 		&& !server_->running()

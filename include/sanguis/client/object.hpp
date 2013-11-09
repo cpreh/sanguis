@@ -14,6 +14,7 @@
 #include <sanguis/main_object.hpp>
 #include <sanguis/timer.hpp>
 #include <sge/console/object.hpp>
+#include <sge/renderer/device/core_fwd.hpp>
 #include <sge/font/object_scoped_ptr.hpp>
 #include <alda/net/port.hpp>
 #include <awl/main/exit_code.hpp>
@@ -74,6 +75,8 @@ private:
 	> systems_scoped_ptr;
 
 	systems_scoped_ptr const sys_;
+
+	sge::renderer::device::core &renderer_;
 
 	sge::font::object_scoped_ptr const font_object_;
 
