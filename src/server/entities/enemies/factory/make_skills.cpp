@@ -1,6 +1,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/random_generator.hpp>
+#include <sanguis/server/draw_random.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/entities/enemies/factory/make_skills.hpp>
 #include <sanguis/server/entities/enemies/skills/cooldown.hpp>
@@ -9,12 +10,10 @@
 #include <sanguis/server/entities/enemies/skills/teleport.hpp>
 #include <sanguis/server/entities/enemies/skills/unique_ptr.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/assign/make_container.hpp>
-#include <fcppt/random/distribution/make_basic.hpp>
-#include <fcppt/random/distribution/parameters/make_uniform_indices.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cmath>
 #include <functional>
+#include <typeinfo>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
@@ -74,28 +73,53 @@ sanguis::server::entities::enemies::factory::make_skills(
 	sanguis::server::entities::enemies::difficulty const _difficulty
 )
 {
-	auto distribution(
-		fcppt::random::distribution::make_basic(
-			fcppt::random::distribution::parameters::make_uniform_indices(
-				callbacks
-			)
-		)
-	);
-
-	// TODO: Choose multiple!
 	return
-		sanguis::server::entities::enemies::skills::container(
-			fcppt::assign::make_container<
-				sanguis::server::entities::enemies::skills::container
-			>(
-				callbacks[
-					distribution(
-						_random_generator
+		sanguis::server::draw_random<
+			sanguis::server::entities::enemies::skills::container
+		>(
+			_random_generator,
+			callbacks,
+			2u, // TODO: How many?
+			[
+				&_diff_clock,
+				_difficulty
+			](
+				callback const &_callback
+			)
+			{
+				return
+					_callback(
+						_diff_clock,
+						_difficulty
+					);
+			},
+			[](
+				sanguis::server::entities::enemies::skills::unique_ptr const &_skill1,
+				sanguis::server::entities::enemies::skills::unique_ptr const &_skill2
+			)
+			{
+				return
+					typeid(
+						*_skill1
+					).before(
+						typeid(
+							*_skill2
+						)
+					);
+			},
+			[](
+				sanguis::server::entities::enemies::skills::unique_ptr const &_skill1,
+				sanguis::server::entities::enemies::skills::unique_ptr const &_skill2
+			)
+			{
+				return
+					typeid(
+						*_skill1
 					)
-				](
-					_diff_clock,
-					_difficulty
-				)
-			).move_container()
+					==
+					typeid(
+						*_skill2
+					);
+			}
 		);
 }

@@ -955,6 +955,7 @@ set(
 	include/sanguis/server/dim.hpp
 	include/sanguis/server/dim_fwd.hpp
 	include/sanguis/server/direction.hpp
+	include/sanguis/server/draw_random.hpp
 	include/sanguis/server/enter_sight_function.hpp
 	include/sanguis/server/entities/auto_weak_hook.hpp
 	include/sanguis/server/entities/auto_weak_link.hpp

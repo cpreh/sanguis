@@ -3,9 +3,6 @@
 
 #include <sanguis/server/entities/enemies/attribute_fwd.hpp>
 #include <sanguis/server/entities/enemies/parameters_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -19,13 +16,12 @@ namespace enemies
 namespace modifiers
 {
 
+// TODO: These might need to be classes in order to compare and bind
 typedef
-std::function<
-	sanguis::server::entities::enemies::attribute (
-		sanguis::server::entities::enemies::parameters &
-	)
->
-callback;
+sanguis::server::entities::enemies::attribute
+(*callback)(
+	sanguis::server::entities::enemies::parameters &
+);
 
 }
 }
