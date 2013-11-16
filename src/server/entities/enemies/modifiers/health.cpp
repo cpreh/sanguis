@@ -14,12 +14,10 @@ sanguis::server::entities::enemies::modifiers::health(
 )
 {
 	_parameters.health(
+		_parameters.health()
+		*
 		sanguis::server::health(
-			_parameters.health().get()
-			*
-			std::sqrt(
-				_parameters.difficulty().get()
-			)
+			3.f
 		)
 	);
 

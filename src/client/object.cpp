@@ -20,9 +20,8 @@
 #include <sge/font/parameters.hpp>
 #include <sge/font/system.hpp>
 #include <sge/renderer/device/core.hpp>
-#include <sge/renderer/display_mode/object.hpp>
-#include <sge/renderer/display_mode/optional_refresh_rate.hpp>
-#include <sge/renderer/display_mode/refresh_rate_value.hpp>
+#include <sge/renderer/display_mode/desired_fps.hpp>
+#include <sge/renderer/display_mode/optional_object.hpp>
 #include <sge/timer/elapsed_and_reset.hpp>
 #include <sge/timer/scoped_frame_limiter.hpp>
 #include <sge/window/system.hpp>
@@ -208,22 +207,11 @@ sanguis::client::object::register_handler()
 void
 sanguis::client::object::loop_handler()
 {
-	sge::renderer::display_mode::optional_refresh_rate const refresh_rate(
-		renderer_.display_mode().refresh_rate()
-	);
-
 	sge::timer::scoped_frame_limiter const limiter(
-		refresh_rate
-		?
-			refresh_rate->get()
-		:
-			fcppt::literal<
-				sge::renderer::display_mode::refresh_rate_value
-			>(
-				100u
-			)
+		sge::renderer::display_mode::desired_fps(
+			renderer_.display_mode()
+		)
 	);
-
 
 	if(
 		server_
