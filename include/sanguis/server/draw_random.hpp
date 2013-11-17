@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_DRAW_RANDOM_HPP_INCLUDED
 #define SANGUIS_SERVER_DRAW_RANDOM_HPP_INCLUDED
 
+#include <sanguis/random_generator.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>
 #include <fcppt/random/distribution/parameters/make_uniform_indices.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
