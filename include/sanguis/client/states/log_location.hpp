@@ -11,7 +11,7 @@ namespace client
 namespace states
 {
 
-fcppt::log::location const
+fcppt::log::location
 log_location();
 
 }

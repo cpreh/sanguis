@@ -11,7 +11,7 @@ namespace server
 namespace weapons
 {
 
-fcppt::log::location const
+fcppt::log::location
 log_location();
 
 }

@@ -7,7 +7,7 @@
 namespace sanguis
 {
 
-sge::config::app_name const
+sge::config::app_name
 config_app_name();
 
 }

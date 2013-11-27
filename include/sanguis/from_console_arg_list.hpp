@@ -4,10 +4,11 @@
 #include <sanguis/string_vector.hpp>
 #include <sge/console/arg_list.hpp>
 
+
 namespace sanguis
 {
 
-sanguis::string_vector const
+sanguis::string_vector
 from_console_arg_list(
 	sge::console::arg_list const &
 );

@@ -11,7 +11,7 @@ namespace client
 namespace draw2d
 {
 
-fcppt::log::location const
+fcppt::log::location
 log_location();
 
 }

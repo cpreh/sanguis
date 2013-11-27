@@ -3,8 +3,9 @@
 #include <fcppt/text.hpp>
 
 
-fcppt::string const
+fcppt::string
 sanguis::app_name()
 {
-	return FCPPT_TEXT("sanguis");
+	return
+		FCPPT_TEXT("sanguis");
 }

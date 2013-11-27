@@ -3,12 +3,13 @@
 
 #include <fcppt/log/location_fwd.hpp>
 
+
 namespace sanguis
 {
 namespace client
 {
 
-fcppt::log::location const
+fcppt::log::location
 log_location();
 
 }

@@ -7,7 +7,7 @@
 namespace sanguis
 {
 
-fcppt::string const
+fcppt::string
 app_name();
 
 }

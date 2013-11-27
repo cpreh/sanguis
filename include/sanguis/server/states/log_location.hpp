@@ -3,6 +3,7 @@
 
 #include <fcppt/log/location_fwd.hpp>
 
+
 namespace sanguis
 {
 namespace server
@@ -10,7 +11,7 @@ namespace server
 namespace states
 {
 
-fcppt::log::location const
+fcppt::log::location
 log_location();
 
 }

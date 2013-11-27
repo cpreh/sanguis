@@ -4,7 +4,7 @@
 #include <fcppt/log/location.hpp>
 
 
-fcppt::log::location const
+fcppt::log::location
 sanguis::server::weapons::log_location()
 {
 	return

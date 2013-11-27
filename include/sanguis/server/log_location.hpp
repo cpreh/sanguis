@@ -9,7 +9,7 @@ namespace sanguis
 namespace server
 {
 
-fcppt::log::location const
+fcppt::log::location
 log_location();
 
 }

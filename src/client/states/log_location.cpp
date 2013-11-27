@@ -4,7 +4,7 @@
 #include <fcppt/log/location.hpp>
 
 
-fcppt::log::location const
+fcppt::log::location
 sanguis::client::states::log_location()
 {
 	return

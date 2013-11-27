@@ -5,7 +5,7 @@
 #include <fcppt/algorithm/map.hpp>
 
 
-sanguis::string_vector const
+sanguis::string_vector
 sanguis::from_console_arg_list(
 	sge::console::arg_list const &_list
 )

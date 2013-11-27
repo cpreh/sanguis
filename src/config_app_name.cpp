@@ -3,7 +3,7 @@
 #include <sanguis/config_app_name.hpp>
 
 
-sge::config::app_name const
+sge::config::app_name
 sanguis::config_app_name()
 {
 	return
