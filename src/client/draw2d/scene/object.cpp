@@ -647,6 +647,11 @@ sanguis::client::draw2d::scene::object::name_display(
 	sanguis::client::draw2d::entities::base const &_entity
 )
 {
+	if(
+		_entity.dead()
+	)
+		return;
+
 	sanguis::client::control::optional_cursor_position const pos(
 		control_environment_->position()
 	);

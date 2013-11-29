@@ -25,6 +25,7 @@
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
+#include <fcppt/math/dim/fill.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <fcppt/config/external_end.hpp>
@@ -176,8 +177,10 @@ sanguis::client::draw2d::entities::model::healthbar::inner_dim() const
 {
 	return
 		background_.size()
-		- sprite::dim(
-			2 * border_size,
+		-
+		fcppt::math::dim::fill<
+			sanguis::client::draw2d::sprite::dim::dim_wrapper::value
+		>(
 			2 * border_size
 		);
 }
@@ -237,7 +240,7 @@ sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 	);
 
 	foreground_.color(
-		sprite::colored::color(
+		sanguis::client::draw2d::sprite::colored::color(
 			(sge::image::color::init::red() %=
 				std::min(
 					fcppt::literal<

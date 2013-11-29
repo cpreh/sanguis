@@ -202,7 +202,6 @@ sanguis::client::draw2d::scene::hud::show_name(
 		);
 }
 
-
 void
 sanguis::client::draw2d::scene::hud::clear_name()
 {
