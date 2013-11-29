@@ -6,9 +6,11 @@
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/entities/enemies/factory/make_modifiers.hpp>
 #include <sanguis/server/entities/enemies/modifiers/agile.hpp>
+#include <sanguis/server/entities/enemies/modifiers/burning.hpp>
 #include <sanguis/server/entities/enemies/modifiers/callback.hpp>
 #include <sanguis/server/entities/enemies/modifiers/container.hpp>
 #include <sanguis/server/entities/enemies/modifiers/fast.hpp>
+#include <sanguis/server/entities/enemies/modifiers/freezing.hpp>
 #include <sanguis/server/entities/enemies/modifiers/health.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -19,9 +21,11 @@ namespace
 {
 
 sanguis::server::entities::enemies::modifiers::container const callbacks{
-	&sanguis::server::entities::enemies::modifiers::health,
+	&sanguis::server::entities::enemies::modifiers::agile,
+	&sanguis::server::entities::enemies::modifiers::burning,
 	&sanguis::server::entities::enemies::modifiers::fast,
-	&sanguis::server::entities::enemies::modifiers::agile
+	&sanguis::server::entities::enemies::modifiers::freezing,
+	&sanguis::server::entities::enemies::modifiers::health
 };
 
 }
@@ -40,7 +44,7 @@ sanguis::server::entities::enemies::factory::make_modifiers(
 			_random_generator,
 			callbacks,
 			sanguis::server::random::min(
-				0u
+				1u
 			),
 			sanguis::server::random::max(
 				2u

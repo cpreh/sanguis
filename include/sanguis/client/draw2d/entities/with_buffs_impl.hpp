@@ -85,6 +85,25 @@ sanguis::client::draw2d::entities::with_buffs<
 	sanguis::buff_type const _type
 )
 {
+	{
+		buff_map::iterator const it(
+			buffs_.find(
+				_type
+			)
+		);
+
+		if(
+			it
+			!=
+			buffs_.end()
+		)
+		{
+			it->second->increment();
+
+			return;
+		}
+	}
+
 	typedef
 	std::pair<
 		buff_map::iterator,
@@ -136,6 +155,11 @@ sanguis::client::draw2d::entities::with_buffs<
 		!=
 		buffs_.end()
 	);
+
+	if(
+		!it->second->decrement()
+	)
+		return;
 
 	it->second->remove(
 		*this

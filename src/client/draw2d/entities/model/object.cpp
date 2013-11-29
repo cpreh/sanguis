@@ -28,6 +28,7 @@
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/assert/unreachable_message.hpp>
+#include <fcppt/cast/size.hpp>
 #include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
@@ -147,7 +148,11 @@ sanguis::client::draw2d::entities::model::object::object(
 				*cur_part.second,
 				this->at(
 					sanguis::client::draw2d::sprite::index(
-						index++
+						fcppt::cast::size<
+							sanguis::client::draw2d::sprite::index::value_type
+						>(
+							index++
+						)
 					)
 				)
 			)

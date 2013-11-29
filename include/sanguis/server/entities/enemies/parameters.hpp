@@ -8,6 +8,7 @@
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/auras/container.hpp>
+#include <sanguis/server/auras/unique_ptr.hpp>
 #include <sanguis/server/damage/armor.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>
@@ -140,6 +141,11 @@ public:
 	sanguis::server::entities::enemies::parameters &
 	irs(
 		sanguis::server::weapons::irs
+	);
+
+	void
+	add_aura(
+		sanguis::server::auras::unique_ptr &&
 	);
 private:
 	sanguis::diff_clock const &diff_clock_;

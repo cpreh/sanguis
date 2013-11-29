@@ -1,4 +1,3 @@
-#include <sanguis/aura_type.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
@@ -7,12 +6,10 @@
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/ai/create_simple.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
-#include <sanguis/server/auras/buff.hpp>
 #include <sanguis/server/auras/container.hpp>
-#include <sanguis/server/auras/influence.hpp>
+#include <sanguis/server/auras/slow_create.hpp>
 #include <sanguis/server/buffs/define_special.hpp>
 #include <sanguis/server/buffs/slow.hpp>
-#include <sanguis/server/buffs/slow_create.hpp>
 #include <sanguis/server/buffs/slow_factor.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
 #include <sanguis/server/entities/base.hpp>
@@ -86,21 +83,15 @@ sanguis::server::entities::enemies::factory::ghost(
 			fcppt::assign::make_container<
 				sanguis::server::auras::container
 			>(
-				fcppt::make_unique_ptr<
-					sanguis::server::auras::buff
+				sanguis::server::auras::slow_create<
+					ghost_slow
 				>(
 					sanguis::server::radius(
 						200.f
 					),
 					sanguis::server::team::monsters,
-					sanguis::aura_type::slow,
-					sanguis::server::auras::influence::debuff,
-					sanguis::server::buffs::slow_create<
-						ghost_slow
-					>(
-						sanguis::server::buffs::slow_factor(
-							0.1f
-						)
+					sanguis::server::buffs::slow_factor(
+						0.1f
 					)
 				)
 			).move_container()

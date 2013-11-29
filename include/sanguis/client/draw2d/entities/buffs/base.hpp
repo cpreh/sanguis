@@ -45,6 +45,18 @@ public:
 	update(
 		sanguis::client::draw2d::entities::model::object const &
 	);
+
+	void
+	increment();
+
+	bool
+	decrement();
+private:
+	typedef
+	unsigned
+	counter;
+
+	counter counter_;
 };
 
 }

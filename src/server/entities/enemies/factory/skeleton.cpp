@@ -1,4 +1,3 @@
-#include <sanguis/aura_type.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
@@ -6,15 +5,11 @@
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/ai/create_simple.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
-#include <sanguis/server/auras/buff.hpp>
+#include <sanguis/server/auras/burn_create.hpp>
 #include <sanguis/server/auras/container.hpp>
-#include <sanguis/server/auras/influence.hpp>
 #include <sanguis/server/buffs/burn.hpp>
-#include <sanguis/server/buffs/burn_create.hpp>
 #include <sanguis/server/buffs/burn_interval.hpp>
 #include <sanguis/server/buffs/define_special.hpp>
-#include <sanguis/server/damage/fire.hpp>
-#include <sanguis/server/damage/list.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/base.hpp>
@@ -88,36 +83,24 @@ sanguis::server::entities::enemies::factory::skeleton(
 			fcppt::assign::make_container<
 				sanguis::server::auras::container
 			>(
-				fcppt::make_unique_ptr<
-					sanguis::server::auras::buff
+				sanguis::server::auras::burn_create<
+					skeleton_burn
 				>(
+					_parameters.diff_clock(),
 					sanguis::server::radius(
 						400.f
 					),
 					sanguis::server::team::monsters,
-					sanguis::aura_type::burn,
-					sanguis::server::auras::influence::debuff,
-					sanguis::server::buffs::burn_create<
-						skeleton_burn
-					>(
-						_parameters.diff_clock(),
-						sanguis::server::buffs::burn_interval(
-							sanguis::duration_second(
-								1.f
-							)
-						),
-						sanguis::server::damage::unit(
+					sanguis::server::buffs::burn_interval(
+						sanguis::duration_second(
 							1.f
-							*
-							std::sqrt(
-								_parameters.difficulty().get()
-							)
-						),
-						sanguis::server::damage::list(
-							sanguis::server::damage::fire =
-								sanguis::server::damage::unit(
-									1.f
-								)
+						)
+					),
+					sanguis::server::damage::unit(
+						1.f
+						*
+						std::sqrt(
+							_parameters.difficulty().get()
 						)
 					)
 				)

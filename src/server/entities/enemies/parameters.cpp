@@ -6,6 +6,7 @@
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/container.hpp>
+#include <sanguis/server/auras/unique_ptr.hpp>
 #include <sanguis/server/damage/armor.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>
@@ -286,4 +287,16 @@ sanguis::server::entities::enemies::parameters::irs(
 
 	return
 		*this;
+}
+
+void
+sanguis::server::entities::enemies::parameters::add_aura(
+	sanguis::server::auras::unique_ptr &&_aura
+)
+{
+	auras_.push_back(
+		std::move(
+			_aura
+		)
+	);
 }

@@ -880,10 +880,12 @@ set(
 	include/sanguis/server/auras/aura.hpp
 	include/sanguis/server/auras/aura_fwd.hpp
 	include/sanguis/server/auras/buff.hpp
+	include/sanguis/server/auras/burn_create.hpp
 	include/sanguis/server/auras/collision_groups.hpp
 	include/sanguis/server/auras/container.hpp
 	include/sanguis/server/auras/influence.hpp
 	include/sanguis/server/auras/influence_fwd.hpp
+	include/sanguis/server/auras/slow_create.hpp
 	include/sanguis/server/auras/unique_ptr.hpp
 	include/sanguis/server/auras/update_sight.hpp
 	include/sanguis/server/auras/weapon_pickup_add_candidate_callback.hpp
@@ -993,9 +995,11 @@ set(
 	include/sanguis/server/entities/enemies/make_name.hpp
 	include/sanguis/server/entities/enemies/modifiers/agile.hpp
 	include/sanguis/server/entities/enemies/modifiers/apply.hpp
+	include/sanguis/server/entities/enemies/modifiers/burning.hpp
 	include/sanguis/server/entities/enemies/modifiers/callback.hpp
 	include/sanguis/server/entities/enemies/modifiers/container.hpp
 	include/sanguis/server/entities/enemies/modifiers/fast.hpp
+	include/sanguis/server/entities/enemies/modifiers/freezing.hpp
 	include/sanguis/server/entities/enemies/modifiers/health.hpp
 	include/sanguis/server/entities/enemies/parameters.hpp
 	include/sanguis/server/entities/enemies/parameters_fwd.hpp
@@ -1710,7 +1714,9 @@ set(
 	src/server/entities/enemies/make_name.cpp
 	src/server/entities/enemies/modifiers/agile.cpp
 	src/server/entities/enemies/modifiers/apply.cpp
+	src/server/entities/enemies/modifiers/burning.cpp
 	src/server/entities/enemies/modifiers/fast.cpp
+	src/server/entities/enemies/modifiers/freezing.cpp
 	src/server/entities/enemies/modifiers/health.cpp
 	src/server/entities/enemies/parameters.cpp
 	src/server/entities/enemies/skills/factory/parameters.cpp
