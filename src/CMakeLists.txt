@@ -957,7 +957,6 @@ set(
 	include/sanguis/server/dim.hpp
 	include/sanguis/server/dim_fwd.hpp
 	include/sanguis/server/direction.hpp
-	include/sanguis/server/draw_random.hpp
 	include/sanguis/server/enter_sight_function.hpp
 	include/sanguis/server/entities/auto_weak_hook.hpp
 	include/sanguis/server/entities/auto_weak_link.hpp
@@ -1002,6 +1001,9 @@ set(
 	include/sanguis/server/entities/enemies/parameters_fwd.hpp
 	include/sanguis/server/entities/enemies/skills/container.hpp
 	include/sanguis/server/entities/enemies/skills/cooldown.hpp
+	include/sanguis/server/entities/enemies/skills/factory/parameters.hpp
+	include/sanguis/server/entities/enemies/skills/factory/parameters_fwd.hpp
+	include/sanguis/server/entities/enemies/skills/factory/teleport.hpp
 	include/sanguis/server/entities/enemies/skills/skill.hpp
 	include/sanguis/server/entities/enemies/skills/skill_fwd.hpp
 	include/sanguis/server/entities/enemies/skills/teleport.hpp
@@ -1204,6 +1206,10 @@ set(
 	include/sanguis/server/player_id_from_args.hpp
 	include/sanguis/server/player_id_from_net.hpp
 	include/sanguis/server/radius.hpp
+	include/sanguis/server/random/amount.hpp
+	include/sanguis/server/random/draw.hpp
+	include/sanguis/server/random/max.hpp
+	include/sanguis/server/random/min.hpp
 	include/sanguis/server/send_available_perks.hpp
 	include/sanguis/server/send_callback.hpp
 	include/sanguis/server/source_world_id.hpp
@@ -1707,6 +1713,8 @@ set(
 	src/server/entities/enemies/modifiers/fast.cpp
 	src/server/entities/enemies/modifiers/health.cpp
 	src/server/entities/enemies/parameters.cpp
+	src/server/entities/enemies/skills/factory/parameters.cpp
+	src/server/entities/enemies/skills/factory/teleport.cpp
 	src/server/entities/enemies/skills/skill.cpp
 	src/server/entities/enemies/skills/teleport.cpp
 	src/server/entities/enemies/special.cpp

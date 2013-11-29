@@ -1,5 +1,7 @@
 #include <sanguis/random_generator.hpp>
-#include <sanguis/server/draw_random.hpp>
+#include <sanguis/server/random/draw.hpp>
+#include <sanguis/server/random/max.hpp>
+#include <sanguis/server/random/min.hpp>
 #include <sanguis/server/entities/enemies/attribute.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/entities/enemies/factory/make_modifiers.hpp>
@@ -32,12 +34,17 @@ sanguis::server::entities::enemies::factory::make_modifiers(
 )
 {
 	return
-		sanguis::server::draw_random<
+		sanguis::server::random::draw<
 			sanguis::server::entities::enemies::modifiers::container
 		>(
 			_random_generator,
 			callbacks,
-			2u, // TODO: Maybe calculate the limit depending on the difficulty?
+			sanguis::server::random::min(
+				0u
+			),
+			sanguis::server::random::max(
+				2u
+			), // TODO: How many?
 			[](
 				sanguis::server::entities::enemies::modifiers::callback const &_callback
 			)

@@ -1,7 +1,9 @@
-#ifndef SANGUIS_SERVER_DRAW_RANDOM_HPP_INCLUDED
-#define SANGUIS_SERVER_DRAW_RANDOM_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_RANDOM_DRAW_HPP_INCLUDED
+#define SANGUIS_SERVER_RANDOM_DRAW_HPP_INCLUDED
 
 #include <sanguis/random_generator.hpp>
+#include <sanguis/server/random/max.hpp>
+#include <sanguis/server/random/min.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>
 #include <fcppt/random/distribution/parameters/make_uniform_indices.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
@@ -15,6 +17,8 @@ namespace sanguis
 {
 namespace server
 {
+namespace random
+{
 
 template<
 	typename Result,
@@ -24,10 +28,11 @@ template<
 	typename EqualFunction
 >
 Result
-draw_random(
+draw(
 	sanguis::random_generator &_random_generator,
 	Source const &_source,
-	typename Source::size_type const _limit,
+	sanguis::server::random::min const _min,
+	sanguis::server::random::max const _max,
 	CreateFunction const &_create_function,
 	LessFunction const &_less_function,
 	EqualFunction const &_equal_function
@@ -57,11 +62,11 @@ draw_random(
 			size_parameter(
 				typename
 				size_parameter::min(
-					1u
+					_min.get()
 				),
 				typename
 				size_parameter::max(
-					_limit
+					_max.get()
 				)
 			)
 		)(
@@ -113,6 +118,7 @@ draw_random(
 		);
 }
 
+}
 }
 }
 
