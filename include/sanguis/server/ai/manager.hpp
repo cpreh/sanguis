@@ -11,6 +11,7 @@
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/signal/scoped_connection.hpp>
 
 
 namespace sanguis
@@ -61,6 +62,8 @@ private:
 	sanguis::diff_timer update_timer_;
 
 	sanguis::server::ai::pathing::trail trail_;
+
+	fcppt::signal::scoped_connection const health_change_callback_;
 };
 
 }

@@ -1013,6 +1013,7 @@ set(
 	include/sanguis/server/entities/ifaces/with_angle.hpp
 	include/sanguis/server/entities/ifaces/with_id.hpp
 	include/sanguis/server/entities/ifaces/with_links.hpp
+	include/sanguis/server/entities/ifaces/with_links_fwd.hpp
 	include/sanguis/server/entities/ifaces/with_team.hpp
 	include/sanguis/server/entities/ifaces/with_velocity.hpp
 	include/sanguis/server/entities/insert_parameters.hpp
@@ -1049,6 +1050,8 @@ set(
 	include/sanguis/server/entities/property/base.hpp
 	include/sanguis/server/entities/property/base_fwd.hpp
 	include/sanguis/server/entities/property/change_callback.hpp
+	include/sanguis/server/entities/property/change_event.hpp
+	include/sanguis/server/entities/property/change_event_fwd.hpp
 	include/sanguis/server/entities/property/change_function.hpp
 	include/sanguis/server/entities/property/change_signal.hpp
 	include/sanguis/server/entities/property/changeable.hpp
@@ -1057,6 +1060,7 @@ set(
 	include/sanguis/server/entities/property/constant_change.hpp
 	include/sanguis/server/entities/property/constant_fwd.hpp
 	include/sanguis/server/entities/property/current_to_max.hpp
+	include/sanguis/server/entities/property/diff.hpp
 	include/sanguis/server/entities/property/initial.hpp
 	include/sanguis/server/entities/property/initial_fwd.hpp
 	include/sanguis/server/entities/property/initial_max.hpp
@@ -1727,6 +1731,7 @@ set(
 	src/server/entities/property/add.cpp
 	src/server/entities/property/always_max.cpp
 	src/server/entities/property/base.cpp
+	src/server/entities/property/change_event.cpp
 	src/server/entities/property/changeable.cpp
 	src/server/entities/property/constant.cpp
 	src/server/entities/property/constant_change.cpp

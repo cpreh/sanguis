@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_IFACES_WITH_LINKS_HPP_INCLUDED
 
 #include <sanguis/server/entities/auto_weak_link_fwd.hpp>
+#include <sanguis/server/entities/ifaces/with_links_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 

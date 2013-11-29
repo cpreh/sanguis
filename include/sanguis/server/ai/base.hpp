@@ -2,11 +2,13 @@
 #define SANGUIS_SERVER_AI_BASE_HPP_INCLUDED
 
 #include <sanguis/server/ai/base_fwd.hpp>
+#include <sanguis/server/ai/entity_set.hpp>
 #include <sanguis/server/ai/sight_range_fwd.hpp>
 #include <sanguis/server/ai/update_result_fwd.hpp>
 #include <sanguis/server/ai/visible_fwd.hpp>
 #include <sanguis/server/entities/auto_weak_link_fwd.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
+#include <sanguis/server/entities/property/change_event_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -54,6 +56,13 @@ public:
 	sanguis::server::ai::update_result
 	out_of_range(
 		sanguis::server::entities::with_body &
+	);
+
+	virtual
+	sanguis::server::ai::update_result
+	on_health_change(
+		sanguis::server::ai::entity_set const &,
+		sanguis::server::entities::property::change_event const &
 	);
 };
 

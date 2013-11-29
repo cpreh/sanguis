@@ -21,6 +21,7 @@
 #include <sanguis/server/auras/aggro.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_body.hpp>
+#include <sanguis/server/entities/with_health.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/optional_target.hpp>
@@ -61,7 +62,23 @@ sanguis::server::ai::manager::manager(
 			true
 		)
 	),
-	trail_()
+	trail_(),
+	health_change_callback_(
+		dynamic_cast<
+			sanguis::server::entities::with_health &
+		>(
+			_me
+		).health().register_change_callback(
+			std::bind(
+				&sanguis::server::ai::base::on_health_change,
+				&ai_,
+				std::ref(
+					potential_targets_
+				),
+				std::placeholders::_1
+			)
+		)
+	)
 {
 	_me.add_aura(
 		fcppt::make_unique_ptr<

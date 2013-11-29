@@ -1,15 +1,17 @@
 #include <sanguis/server/entities/property/base.hpp>
 #include <sanguis/server/entities/property/change_callback.hpp>
+#include <sanguis/server/entities/property/change_event.hpp>
 #include <sanguis/server/entities/property/changeable.hpp>
+#include <sanguis/server/entities/property/diff.hpp>
 #include <sanguis/server/entities/property/initial.hpp>
 #include <sanguis/server/entities/property/value.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/math/diff.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
+#include <cmath>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -41,7 +43,9 @@ sanguis::server::entities::property::changeable::current(
 	sanguis::server::entities::property::value const _current
 )
 {
-	sanguis::server::entities::property::value const old(
+	sanguis::server::entities::property::diff const diff(
+		_current
+		-
 		this->current()
 	);
 
@@ -50,9 +54,8 @@ sanguis::server::entities::property::changeable::current(
 	this->check_current();
 
 	if(
-		fcppt::math::diff(
-			old,
-			this->current()
+		std::abs(
+			diff.get()
 		)
 		>
 		fcppt::literal<
@@ -61,7 +64,11 @@ sanguis::server::entities::property::changeable::current(
 			0.001
 		)
 	)
-		change_signal_();
+		change_signal_(
+			sanguis::server::entities::property::change_event(
+				diff
+			)
+		);
 }
 
 sanguis::server::entities::property::value
@@ -105,9 +112,19 @@ sanguis::server::entities::property::changeable::on_recalc_max(
 	sanguis::server::entities::property::value const _max
 )
 {
+	sanguis::server::entities::property::diff const diff(
+		_max
+		-
+		max_
+	);
+
 	max_ = _max;
 
-	max_change_signal_();
+	max_change_signal_(
+		sanguis::server::entities::property::change_event(
+			diff
+		)
+	);
 
 	this->current(
 		std::min(
