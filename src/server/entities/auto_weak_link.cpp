@@ -1,5 +1,6 @@
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/with_links.hpp>
+#include <fcppt/optional_ref_compare.hpp>
 #include <fcppt/assert/pre.hpp>
 
 
@@ -101,6 +102,18 @@ sanguis::server::entities::auto_weak_link::operator bool() const
 		this->is_linked();
 }
 
+bool
+sanguis::server::entities::auto_weak_link::operator==(
+	sanguis::server::entities::auto_weak_link const &_link
+) const
+{
+	return
+		fcppt::optional_ref_compare(
+			_link.ref_,
+			ref_
+		);
+}
+
 sanguis::server::entities::with_links &
 sanguis::server::entities::auto_weak_link::checked_ref() const
 {
@@ -122,4 +135,18 @@ sanguis::server::entities::auto_weak_link::add_me()
 	ref_->insert_link(
 		*this
 	);
+}
+
+bool
+sanguis::server::entities::operator!=(
+	sanguis::server::entities::auto_weak_link const &_left,
+	sanguis::server::entities::auto_weak_link const &_right
+)
+{
+	return
+		!(
+			_left
+			==
+			_right
+		);
 }

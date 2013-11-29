@@ -5,15 +5,18 @@
 #include <sanguis/load/friend_name.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/team.hpp>
-#include <sanguis/server/ai/create_simple.hpp>
+#include <sanguis/server/ai/create_friend.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/damage/list.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
+#include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/friend.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
+#include <sanguis/server/entities/spawn_owner.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
+#include <sanguis/server/entities/ifaces/with_links.hpp>
 #include <sanguis/server/entities/pickups/monster.hpp>
 #include <sanguis/server/entities/pickups/pickup.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
@@ -54,7 +57,7 @@ sanguis::server::entities::pickups::monster::~monster()
 
 void
 sanguis::server::entities::pickups::monster::do_pickup(
-	sanguis::server::entities::base &
+	sanguis::server::entities::base &_entity
 )
 {
 	this->environment()->insert(
@@ -71,9 +74,16 @@ sanguis::server::entities::pickups::monster::do_pickup(
 			sanguis::server::entities::movement_speed(
 				100.f
 			),
-			sanguis::server::ai::create_simple(
+			sanguis::server::ai::create_friend(
 				sanguis::server::ai::sight_range(
 					1000.f
+				),
+				sanguis::server::entities::spawn_owner(
+					dynamic_cast<
+						sanguis::server::entities::ifaces::with_links &
+					>(
+						_entity
+					).link()
 				)
 			),
 			fcppt::make_unique_ptr<

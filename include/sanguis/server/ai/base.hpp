@@ -64,6 +64,10 @@ public:
 		sanguis::server::ai::entity_set const &,
 		sanguis::server::entities::property::change_event const &
 	);
+
+	virtual
+	bool
+	aggressive() const;
 };
 
 }

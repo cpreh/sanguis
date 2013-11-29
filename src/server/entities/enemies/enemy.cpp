@@ -30,7 +30,6 @@
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
 #include <sanguis/server/entities/enemies/parameters.hpp>
-#include <sanguis/server/entities/enemies/spawn_owner.hpp>
 #include <sanguis/server/entities/property/initial.hpp>
 #include <sanguis/server/entities/spawns/spawn.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>

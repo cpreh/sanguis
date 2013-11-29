@@ -12,7 +12,7 @@ namespace server
 namespace ai
 {
 
-sanguis::server::ai::create_function const
+sanguis::server::ai::create_function
 create_simple(
 	sanguis::server::ai::sight_range
 );

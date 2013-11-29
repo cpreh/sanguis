@@ -6,7 +6,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 
 
-sanguis::server::ai::create_function const
+sanguis::server::ai::create_function
 sanguis::server::ai::create_simple(
 	sanguis::server::ai::sight_range const _sight_range
 )

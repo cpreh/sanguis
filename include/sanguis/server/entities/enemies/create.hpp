@@ -5,7 +5,7 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/creator/enemy_type_fwd.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
-#include <sanguis/server/entities/enemies/spawn_owner_fwd.hpp>
+#include <sanguis/server/entities/spawn_owner_fwd.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 
@@ -26,7 +26,7 @@ create(
 	sanguis::creator::enemy_type,
 	sanguis::server::world::difficulty,
 	sanguis::server::environment::load_context &,
-	sanguis::server::entities::enemies::spawn_owner const &
+	sanguis::server::entities::spawn_owner const &
 );
 
 }

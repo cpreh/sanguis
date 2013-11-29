@@ -30,7 +30,7 @@ public:
 	virtual
 	~with_links() = 0;
 
-	sanguis::server::entities::auto_weak_link const
+	sanguis::server::entities::auto_weak_link
 	link()
 	override
 	final;

@@ -34,19 +34,18 @@ public:
 	);
 
 	~simple();
-private:
+protected:
+	sanguis::server::ai::update_result
+	target(
+		sanguis::server::entities::auto_weak_link const &
+	);
+
 	sanguis::server::entities::auto_weak_link
 	target() const
 	override;
 
 	sanguis::server::ai::sight_range const
 	sight_range() const
-	override;
-
-	sanguis::server::ai::update_result
-	in_range(
-		sanguis::server::entities::with_body &
-	)
 	override;
 
 	sanguis::server::ai::update_result
@@ -69,11 +68,12 @@ private:
 	)
 	override;
 
+	virtual
 	sanguis::server::ai::update_result
 	update_target(
 		sanguis::server::entities::with_body &
 	);
-
+private:
 	sanguis::server::ai::update_result
 	lose_target(
 		sanguis::server::entities::with_body &

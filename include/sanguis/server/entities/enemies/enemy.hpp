@@ -9,6 +9,7 @@
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team_fwd.hpp>
+#include <sanguis/server/entities/spawn_owner.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
 #include <sanguis/server/entities/with_id.hpp>
@@ -18,7 +19,6 @@
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/entities/enemies/enemy_fwd.hpp>
 #include <sanguis/server/entities/enemies/parameters_fwd.hpp>
-#include <sanguis/server/entities/enemies/spawn_owner.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -88,7 +88,7 @@ private:
 
 	sanguis::server::entities::enemies::difficulty const difficulty_;
 
-	sanguis::server::entities::enemies::spawn_owner const spawn_owner_;
+	sanguis::server::entities::spawn_owner const spawn_owner_;
 
 	// TODO: Remove this member and implement it elsewhere!
 	sanguis::messages::types::string const name_;

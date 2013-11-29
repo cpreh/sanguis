@@ -36,6 +36,18 @@ sanguis::server::ai::simple::~simple()
 {
 }
 
+sanguis::server::ai::update_result
+sanguis::server::ai::simple::target(
+	sanguis::server::entities::auto_weak_link const &_target
+)
+{
+	target_	 =
+		_target;
+
+	return
+		sanguis::server::ai::update_result::new_target;
+}
+
 sanguis::server::entities::auto_weak_link
 sanguis::server::ai::simple::target() const
 {
@@ -48,15 +60,6 @@ sanguis::server::ai::simple::sight_range() const
 {
 	return
 		sight_range_;
-}
-
-sanguis::server::ai::update_result
-sanguis::server::ai::simple::in_range(
-	sanguis::server::entities::with_body &_entity
-)
-{
-	return
-		sanguis::server::ai::update_result::keep_target;
 }
 
 sanguis::server::ai::update_result

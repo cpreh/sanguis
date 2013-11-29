@@ -842,9 +842,11 @@ set(
 	include/sanguis/server/ai/angle_to_target.hpp
 	include/sanguis/server/ai/base.hpp
 	include/sanguis/server/ai/base_fwd.hpp
+	include/sanguis/server/ai/create_friend.hpp
 	include/sanguis/server/ai/create_function.hpp
 	include/sanguis/server/ai/create_simple.hpp
 	include/sanguis/server/ai/entity_set.hpp
+	include/sanguis/server/ai/friend.hpp
 	include/sanguis/server/ai/idle.hpp
 	include/sanguis/server/ai/manager.hpp
 	include/sanguis/server/ai/manager_fwd.hpp
@@ -1004,8 +1006,6 @@ set(
 	include/sanguis/server/entities/enemies/skills/skill_fwd.hpp
 	include/sanguis/server/entities/enemies/skills/teleport.hpp
 	include/sanguis/server/entities/enemies/skills/unique_ptr.hpp
-	include/sanguis/server/entities/enemies/spawn_owner.hpp
-	include/sanguis/server/entities/enemies/spawn_owner_fwd.hpp
 	include/sanguis/server/entities/enemies/special.hpp
 	include/sanguis/server/entities/enemies/unique_ptr.hpp
 	include/sanguis/server/entities/exp_area.hpp
@@ -1074,6 +1074,8 @@ set(
 	include/sanguis/server/entities/property/value.hpp
 	include/sanguis/server/entities/radius.hpp
 	include/sanguis/server/entities/same_object.hpp
+	include/sanguis/server/entities/spawn_owner.hpp
+	include/sanguis/server/entities/spawn_owner_fwd.hpp
 	include/sanguis/server/entities/spawns/count_per_wave.hpp
 	include/sanguis/server/entities/spawns/interval.hpp
 	include/sanguis/server/entities/spawns/limit.hpp
@@ -1623,7 +1625,9 @@ set(
 	src/random_seed.cpp
 	src/server/ai/angle_to_target.cpp
 	src/server/ai/base.cpp
+	src/server/ai/create_friend.cpp
 	src/server/ai/create_simple.cpp
+	src/server/ai/friend.cpp
 	src/server/ai/idle.cpp
 	src/server/ai/manager.cpp
 	src/server/ai/move_to_target.cpp

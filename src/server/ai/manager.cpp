@@ -198,7 +198,9 @@ sanguis::server::ai::manager::update()
 	me_.use_weapon(
 		is_visible
 		&&
-		in_range,
+		in_range
+		&&
+		ai_.aggressive(),
 		weapon_to_use
 	);
 

@@ -4,9 +4,9 @@
 #include <sanguis/creator/spawn_type.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/spawn_owner.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/create.hpp>
-#include <sanguis/server/entities/enemies/spawn_owner.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/make_spawner.hpp>
@@ -35,7 +35,7 @@ sanguis::server::world::spawn_entity(
 				_spawn.enemy_type(),
 				_difficulty,
 				_load_context,
-				sanguis::server::entities::enemies::spawn_owner(
+				sanguis::server::entities::spawn_owner(
 					sanguis::server::entities::auto_weak_link()
 				)
 			);

@@ -51,3 +51,10 @@ sanguis::server::ai::base::on_health_change(
 	return
 		sanguis::server::ai::update_result::keep_target;
 }
+
+bool
+sanguis::server::ai::base::aggressive() const
+{
+	return
+		true;
+}

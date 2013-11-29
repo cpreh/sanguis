@@ -10,9 +10,9 @@
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/damage/armor.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
+#include <sanguis/server/entities/spawn_owner.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/entities/enemies/parameters_fwd.hpp>
-#include <sanguis/server/entities/enemies/spawn_owner.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/weapons/ias.hpp>
 #include <sanguis/server/weapons/irs.hpp>
@@ -47,7 +47,7 @@ public:
 		sanguis::server::pickup_probability,
 		sanguis::server::exp,
 		sanguis::server::entities::enemies::difficulty,
-		sanguis::server::entities::enemies::spawn_owner const &,
+		sanguis::server::entities::spawn_owner const &,
 		sanguis::server::auras::container &&
 	);
 
@@ -95,7 +95,7 @@ public:
 	sanguis::server::entities::enemies::difficulty const
 	difficulty() const;
 
-	sanguis::server::entities::enemies::spawn_owner const &
+	sanguis::server::entities::spawn_owner const &
 	spawn_owner() const;
 
 	sanguis::server::auras::container &
@@ -164,7 +164,7 @@ private:
 
 	sanguis::server::entities::enemies::difficulty difficulty_;
 
-	sanguis::server::entities::enemies::spawn_owner const spawn_owner_;
+	sanguis::server::entities::spawn_owner const spawn_owner_;
 
 	sanguis::server::auras::container auras_;
 

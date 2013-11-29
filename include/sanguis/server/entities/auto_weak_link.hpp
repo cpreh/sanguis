@@ -62,6 +62,11 @@ public:
 
 	explicit
 	operator bool() const;
+
+	bool
+	operator==(
+		sanguis::server::entities::auto_weak_link const &
+	) const;
 private:
 	sanguis::server::entities::with_links &
 	checked_ref() const;
@@ -73,6 +78,12 @@ private:
 };
 
 FCPPT_PP_POP_WARNING
+
+bool
+operator!=(
+	sanguis::server::entities::auto_weak_link const &,
+	sanguis::server::entities::auto_weak_link const &
+);
 
 }
 }
