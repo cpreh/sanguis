@@ -10,6 +10,7 @@
 #include <sanguis/client/perk/info.hpp>
 #include <sanguis/client/perk/level.hpp>
 #include <sanguis/client/perk/level_callback.hpp>
+#include <sanguis/client/perk/remaining_levels.hpp>
 #include <sanguis/client/perk/send_callback.hpp>
 #include <sanguis/client/perk/state.hpp>
 #include <sanguis/client/perk/tree.hpp>
@@ -38,8 +39,10 @@ sanguis::client::perk::state::state(
 			0u
 		)
 	),
-	consumed_levels_(
-		0u
+	remaining_levels_(
+		sanguis::client::level(
+			0u
+		)
 	),
 	level_signal_(),
 	change_signal_()
@@ -52,7 +55,8 @@ sanguis::client::perk::state::~state()
 
 void
 sanguis::client::perk::state::perks(
-	sanguis::client::perk::tree_unique_ptr &&_perks
+	sanguis::client::perk::tree_unique_ptr &&_perks,
+	sanguis::client::perk::remaining_levels const _remaining_levels
 )
 {
 	perks_.take(
@@ -60,6 +64,9 @@ sanguis::client::perk::state::perks(
 			_perks
 		)
 	);
+
+	remaining_levels_ =
+		_remaining_levels;
 
 	change_signal_(
 		*perks_
@@ -71,6 +78,20 @@ sanguis::client::perk::state::player_level(
 	sanguis::client::player_level const _level
 )
 {
+	FCPPT_ASSERT_PRE(
+		_level
+		>=
+		current_level_
+	);
+
+	remaining_levels_
+		+=
+		sanguis::client::perk::remaining_levels(
+			_level.get()
+			-
+			current_level_.get()
+		);
+
 	current_level_ = _level;
 
 	level_signal_(
@@ -92,7 +113,15 @@ sanguis::client::perk::state::choose_perk(
 	)
 		return false;
 
-	++consumed_levels_;
+	FCPPT_ASSERT_PRE(
+		remaining_levels_.get()
+		>
+		sanguis::client::level(
+			0u
+		)
+	);
+
+	--remaining_levels_;
 
 	sanguis::client::perk::find_info(
 		_type,
@@ -124,13 +153,11 @@ sanguis::client::perk::state::player_level() const
 		current_level_;
 }
 
-sanguis::client::level const
-sanguis::client::perk::state::levels_left() const
+sanguis::client::perk::remaining_levels const
+sanguis::client::perk::state::remaining_levels() const
 {
 	return
-		current_level_.get()
-		-
-		consumed_levels_;
+		remaining_levels_;
 }
 
 sanguis::client::perk::level const
@@ -155,7 +182,7 @@ sanguis::client::perk::state::choosable(
 			_perk_type,
 			this->perks(),
 			current_level_,
-			consumed_levels_
+			remaining_levels_
 		);
 }
 

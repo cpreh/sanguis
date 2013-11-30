@@ -404,6 +404,7 @@ set(
 	include/sanguis/client/perk/max_level.hpp
 	include/sanguis/client/perk/optional_info.hpp
 	include/sanguis/client/perk/optional_info_fwd.hpp
+	include/sanguis/client/perk/remaining_levels.hpp
 	include/sanguis/client/perk/required_parent_level.hpp
 	include/sanguis/client/perk/required_player_level.hpp
 	include/sanguis/client/perk/send_callback.hpp
@@ -770,6 +771,7 @@ set(
 	include/sanguis/messages/roles/pickup.hpp
 	include/sanguis/messages/roles/primary_weapon.hpp
 	include/sanguis/messages/roles/projectile.hpp
+	include/sanguis/messages/roles/remaining_perk_levels.hpp
 	include/sanguis/messages/roles/required_perk_parent_level.hpp
 	include/sanguis/messages/roles/required_perk_player_level.hpp
 	include/sanguis/messages/roles/speed.hpp
@@ -1223,6 +1225,7 @@ set(
 	include/sanguis/server/regeneration_fwd.hpp
 	include/sanguis/server/send_available_perks.hpp
 	include/sanguis/server/send_callback.hpp
+	include/sanguis/server/skill_points.hpp
 	include/sanguis/server/source_world_id.hpp
 	include/sanguis/server/space_unit.hpp
 	include/sanguis/server/speed.hpp

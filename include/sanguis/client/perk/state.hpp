@@ -12,6 +12,7 @@
 #include <sanguis/client/perk/level_callback.hpp>
 #include <sanguis/client/perk/level_function.hpp>
 #include <sanguis/client/perk/level.hpp>
+#include <sanguis/client/perk/remaining_levels.hpp>
 #include <sanguis/client/perk/send_callback.hpp>
 #include <sanguis/client/perk/tree_fwd.hpp>
 #include <sanguis/client/perk/tree_unique_ptr.hpp>
@@ -43,7 +44,8 @@ public:
 
 	void
 	perks(
-		sanguis::client::perk::tree_unique_ptr &&
+		sanguis::client::perk::tree_unique_ptr &&,
+		sanguis::client::perk::remaining_levels
 	);
 
 	void
@@ -62,8 +64,8 @@ public:
 	sanguis::client::player_level const
 	player_level() const;
 
-	sanguis::client::level const
-	levels_left() const;
+	sanguis::client::perk::remaining_levels const
+	remaining_levels() const;
 
 	sanguis::client::perk::level const
 	perk_level(
@@ -95,7 +97,7 @@ private:
 
 	sanguis::client::player_level current_level_;
 
-	sanguis::client::level consumed_levels_;
+	sanguis::client::perk::remaining_levels remaining_levels_;
 
 	fcppt::signal::object<
 		sanguis::client::perk::level_function

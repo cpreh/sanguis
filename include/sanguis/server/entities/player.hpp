@@ -12,6 +12,7 @@
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/level.hpp>
 #include <sanguis/server/player_id.hpp>
+#include <sanguis/server/skill_points.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/string.hpp>
 #include <sanguis/server/team_fwd.hpp>
@@ -112,6 +113,9 @@ public:
 	sanguis::server::perks::tree::object const &
 	perk_tree() const;
 
+	sanguis::server::skill_points const
+	skill_points() const;
+
 	sanguis::server::player_id const
 	player_id() const;
 
@@ -188,7 +192,7 @@ private:
 
 	sanguis::server::level level_;
 
-	unsigned skill_points_;
+	sanguis::server::skill_points skill_points_;
 
 	typedef fcppt::scoped_ptr<
 		sanguis::server::perks::tree::object

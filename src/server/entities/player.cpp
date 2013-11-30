@@ -24,6 +24,7 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/regeneration.hpp>
+#include <sanguis/server/skill_points.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/string.hpp>
@@ -246,7 +247,12 @@ sanguis::server::entities::player::add_exp(
 	)
 		return;
 
-	skill_points_ += new_level.get() - old_level.get();
+	skill_points_ +=
+		sanguis::server::skill_points(
+			new_level.get()
+			-
+			old_level.get()
+		);
 
 	level_ = new_level;
 
@@ -269,7 +275,7 @@ sanguis::server::entities::player::perk_choosable(
 ) const
 {
 	return
-		skill_points_ > 0u
+		skill_points_.get() > 0u
 		&&
 		sanguis::server::perks::tree::choosable(
 			*perk_tree_,
@@ -399,6 +405,13 @@ sanguis::server::entities::player::perk_tree() const
 {
 	return
 		*perk_tree_;
+}
+
+sanguis::server::skill_points const
+sanguis::server::entities::player::skill_points() const
+{
+	return
+		skill_points_;
 }
 
 sanguis::server::player_id const

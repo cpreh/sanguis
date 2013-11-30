@@ -2,7 +2,6 @@
 #define SANGUIS_CLIENT_GUI_PERK_ITEM_HPP_INCLUDED
 
 #include <sanguis/perk_type.hpp>
-#include <sanguis/client/gui/object_fwd.hpp>
 #include <sanguis/client/gui/perk/item_fwd.hpp>
 #include <sanguis/client/gui/perk/node.hpp>
 #include <sanguis/client/perk/info_fwd.hpp>
@@ -29,7 +28,6 @@ class item
 public:
 	item(
 		sanguis::client::gui::perk::node const &,
-		sanguis::client::gui::object &,
 		sanguis::client::perk::info const &
 	);
 

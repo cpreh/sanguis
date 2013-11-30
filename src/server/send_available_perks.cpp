@@ -68,7 +68,8 @@ sanguis::server::send_available_perks(
 		*sanguis::messages::create(
 			sanguis::messages::available_perks(
 				_player.id(),
-				nodes
+				nodes,
+				_player.skill_points().get()
 			)
 		)
 	);

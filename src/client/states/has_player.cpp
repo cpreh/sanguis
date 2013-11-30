@@ -13,6 +13,7 @@
 #include <sanguis/client/events/render.hpp>
 #include <sanguis/client/events/tick.hpp>
 #include <sanguis/client/perk/make_tree.hpp>
+#include <sanguis/client/perk/remaining_levels.hpp>
 #include <sanguis/client/perk/state.hpp>
 #include <sanguis/client/states/running.hpp>
 #include <sanguis/client/states/has_player.hpp>
@@ -23,6 +24,7 @@
 #include <sanguis/messages/remove_id.hpp>
 #include <sanguis/messages/adapted_types/level.hpp>
 #include <sanguis/messages/call/object.hpp>
+#include <sanguis/messages/roles/remaining_perk_levels.hpp>
 #include <alda/serialization/load/optional.hpp>
 #include <alda/serialization/load/static_size.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -134,6 +136,13 @@ sanguis::client::states::has_player::operator()(
 			_message.get<
 				sanguis::messages::perk_tree
 			>()
+		),
+		sanguis::client::perk::remaining_levels(
+			sanguis::client::level(
+				_message.get<
+					sanguis::messages::roles::remaining_perk_levels
+				>()
+			)
 		)
 	);
 

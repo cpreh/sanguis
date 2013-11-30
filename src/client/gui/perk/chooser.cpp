@@ -226,7 +226,6 @@ sanguis::client::gui::perk::chooser::perks(
 					sanguis::client::gui::perk::node(
 						&item_it->value()->widget()
 					),
-					gui_,
 					*element.value()
 				)
 			);
@@ -239,7 +238,6 @@ sanguis::client::gui::perk::chooser::perks(
 					sanguis::client::gui::perk::node(
 						&tree_widget_
 					),
-					gui_,
 					*element.value()
 				)
 			);
@@ -270,7 +268,7 @@ sanguis::client::gui::perk::chooser::update_top_text()
 			FCPPT_TEXT(", Perks to choose: ")
 			+
 			fcppt::insert_to_fcppt_string(
-				state_.levels_left()
+				state_.remaining_levels()
 			)
 		)
 	);
@@ -377,7 +375,7 @@ sanguis::client::gui::perk::chooser::handle_selection_changed(
 	)
 	{
 		sanguis::perk_type const perk_type(
-			gui::perk::item_user_data(
+			sanguis::client::gui::perk::item_user_data(
 				*selected
 			)
 		);
@@ -414,7 +412,7 @@ sanguis::client::gui::perk::chooser::handle_perk_choose(
 )
 {
 	if(
-		state_.levels_left().get() == 0
+		state_.remaining_levels().get().get() == 0u
 	)
 		return true;
 

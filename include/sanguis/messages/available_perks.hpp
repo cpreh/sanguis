@@ -5,6 +5,7 @@
 #include <sanguis/messages/bind_entity_message.hpp>
 #include <sanguis/messages/make_class.hpp>
 #include <sanguis/messages/perk_tree.hpp>
+#include <sanguis/messages/adapted_types/level.hpp>
 #include <majutsu/composite.hpp>
 #include <majutsu/role.hpp>
 

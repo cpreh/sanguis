@@ -4,6 +4,8 @@
 #include <sanguis/messages/bind_entity_message_fwd.hpp>
 #include <sanguis/messages/make_class_fwd.hpp>
 #include <sanguis/messages/perk_tree_fwd.hpp>
+#include <sanguis/messages/adapted_types/level_fwd.hpp>
+#include <sanguis/messages/roles/remaining_perk_levels.hpp>
 #include <sanguis/messages/types/message.hpp>
 #include <majutsu/composite_fwd.hpp>
 #include <majutsu/role_fwd.hpp>
@@ -20,12 +22,16 @@ namespace messages
 typedef
 sanguis::messages::make_class<
 	majutsu::composite<
-		boost::mpl::vector2<
+		boost::mpl::vector3<
 			sanguis::messages::bind_entity_message<
 				sanguis::messages::types::message::available_perks
 			>,
 			majutsu::role<
 				sanguis::messages::perk_tree
+			>,
+			majutsu::role<
+				sanguis::messages::adapted_types::level,
+				sanguis::messages::roles::remaining_perk_levels
 			>
 		>
 	>

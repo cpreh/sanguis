@@ -1,5 +1,4 @@
 #include <sanguis/perk_type.hpp>
-#include <sanguis/client/gui/object.hpp>
 #include <sanguis/client/gui/perk/item.hpp>
 #include <sanguis/client/gui/perk/node.hpp>
 #include <sanguis/client/perk/info.hpp>
@@ -12,7 +11,6 @@
 
 sanguis::client::gui::perk::item::item(
 	sanguis::client::gui::perk::node const &_parent,
-	sanguis::client::gui::object &_gui,
 	sanguis::client::perk::info const &_info
 )
 :

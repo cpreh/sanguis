@@ -1,11 +1,10 @@
 #include <sanguis/perk_type.hpp>
-#include <sanguis/client/level.hpp>
 #include <sanguis/client/player_level.hpp>
 #include <sanguis/client/perk/choosable.hpp>
 #include <sanguis/client/perk/choosable_state.hpp>
 #include <sanguis/client/perk/find_info_const.hpp>
 #include <sanguis/client/perk/info.hpp>
-#include <sanguis/client/perk/level.hpp>
+#include <sanguis/client/perk/remaining_levels.hpp>
 #include <sanguis/client/perk/tree.hpp>
 #include <fcppt/assert/pre.hpp>
 
@@ -15,7 +14,7 @@ sanguis::client::perk::choosable(
 	sanguis::perk_type const _type,
 	sanguis::client::perk::tree const &_tree,
 	sanguis::client::player_level const _player_level,
-	sanguis::client::level const _perks_chosen
+	sanguis::client::perk::remaining_levels const _remaining_levels
 )
 {
 	sanguis::client::perk::tree const &node(
@@ -64,9 +63,9 @@ sanguis::client::perk::choosable(
 			sanguis::client::perk::choosable_state::player_level;
 
 	if(
-		_player_level.get()
+		_remaining_levels.get().get()
 		==
-		_perks_chosen
+		0u
 	)
 		return
 			sanguis::client::perk::choosable_state::level_up;
