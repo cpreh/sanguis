@@ -19,7 +19,6 @@
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/console.hpp>
-#include <sanguis/server/cheat.hpp>
 #include <sanguis/server/create_player.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/log_location.hpp>
@@ -30,6 +29,7 @@
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/unicast_callback.hpp>
 #include <sanguis/server/vector.hpp>
+#include <sanguis/server/cheat/process.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/insert_with_result.hpp>
 #include <sanguis/server/entities/player.hpp>
@@ -391,7 +391,7 @@ sanguis::server::global::context::player_cheat(
 	sanguis::cheat_type const _cheat
 )
 {
-	sanguis::server::cheat(
+	sanguis::server::cheat::process(
 		diff_clock_,
 		random_generator_,
 		this->player(

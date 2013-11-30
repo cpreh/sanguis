@@ -116,6 +116,17 @@ sanguis::client::control::action_handler::action_handler(
 		)(
 			this->cheat_connection(
 				_console,
+				sanguis::cheat_type::monster_spawner,
+				sge::console::callback::name(
+					SGE_FONT_LIT("monster_spawner")
+				),
+				sge::console::callback::short_description(
+					SGE_FONT_LIT("Spawn a monster creating weapon")
+				)
+			)
+		)(
+			this->cheat_connection(
+				_console,
 				sanguis::cheat_type::sentry_pickup,
 				sge::console::callback::name(
 					SGE_FONT_LIT("sentry_pickup")

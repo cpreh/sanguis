@@ -219,12 +219,20 @@ private:
 	)
 	override;
 
+	sanguis::server::world::difficulty const
+	difficulty() const
+	override;
+
 	sanguis::collision::world::object &
 	collision_world() const
 	override;
 
 	sanguis::creator::grid const &
 	grid() const
+	override;
+
+	sanguis::server::environment::load_context &
+	load_context() const
 	override;
 
 	void
@@ -247,10 +255,6 @@ private:
 	)
 	override;
 
-	sanguis::server::environment::load_context &
-	load_context() const
-	override;
-
 	// own functions
 	void
 	send_entity_specific(
@@ -268,13 +272,14 @@ private:
 	insert_spawns(
 		sanguis::creator::spawn_container const &,
 		sanguis::diff_clock const &,
-		sanguis::random_generator &,
-		sanguis::server::world::difficulty
+		sanguis::random_generator &
 	);
 
 	sanguis::world_id const id_;
 
 	sanguis::creator::seed const seed_;
+
+	sanguis::server::world::difficulty const difficulty_;
 
 	sanguis::creator::name const generator_name_;
 

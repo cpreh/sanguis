@@ -13,6 +13,7 @@ enum class cheat_type
 	heal,
 	kill,
 	monster_pickup,
+	monster_spawner,
 	sentry_pickup,
 	grenade_pickup,
 	fcppt_maximum = grenade_pickup

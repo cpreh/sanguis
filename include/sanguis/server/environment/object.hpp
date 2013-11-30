@@ -24,6 +24,7 @@
 #include <sanguis/server/entities/optional_base_ref_fwd.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
+#include <sanguis/server/world/difficulty.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -184,6 +185,10 @@ public:
 	request_transfer(
 		sanguis::entity_id
 	) = 0;
+
+	virtual
+	sanguis::server::world::difficulty const
+	difficulty() const = 0;
 
 	virtual
 	sanguis::collision::world::object &

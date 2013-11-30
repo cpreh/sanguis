@@ -1,5 +1,5 @@
-#ifndef SANGUIS_SERVER_CHEAT_HPP_INCLUDED
-#define SANGUIS_SERVER_CHEAT_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_CHEAT_PROCESS_HPP_INCLUDED
+#define SANGUIS_SERVER_CHEAT_PROCESS_HPP_INCLUDED
 
 #include <sanguis/cheat_type_fwd.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
@@ -11,15 +11,18 @@ namespace sanguis
 {
 namespace server
 {
+namespace cheat
+{
 
 void
-cheat(
+process(
 	sanguis::diff_clock const &,
 	sanguis::random_generator &,
 	sanguis::server::entities::player &,
 	sanguis::cheat_type
 );
 
+}
 }
 }
 

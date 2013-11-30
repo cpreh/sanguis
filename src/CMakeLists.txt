@@ -908,7 +908,8 @@ set(
 	include/sanguis/server/buffs/unique_ptr.hpp
 	include/sanguis/server/center.hpp
 	include/sanguis/server/center_fwd.hpp
-	include/sanguis/server/cheat.hpp
+	include/sanguis/server/cheat/process.hpp
+	include/sanguis/server/cheat/weapon_type.hpp
 	include/sanguis/server/closest_entity.hpp
 	include/sanguis/server/collision/body.hpp
 	include/sanguis/server/collision/body_collision.hpp
@@ -1285,6 +1286,7 @@ set(
 	include/sanguis/server/weapons/magazine_type.hpp
 	include/sanguis/server/weapons/make_attribute.hpp
 	include/sanguis/server/weapons/melee.hpp
+	include/sanguis/server/weapons/monster_spawner.hpp
 	include/sanguis/server/weapons/optional_magazine_size.hpp
 	include/sanguis/server/weapons/optional_magazine_size_fwd.hpp
 	include/sanguis/server/weapons/optional_reload_time.hpp
@@ -1667,7 +1669,8 @@ set(
 	src/server/buffs/comparator.cpp
 	src/server/buffs/provider.cpp
 	src/server/buffs/slow.cpp
-	src/server/cheat.cpp
+	src/server/cheat/process.cpp
+	src/server/cheat/weapon_type.cpp
 	src/server/collision/body.cpp
 	src/server/collision/body_collision.cpp
 	src/server/collision/distance_entity_entity.cpp
@@ -1854,6 +1857,7 @@ set(
 	src/server/weapons/log_location.cpp
 	src/server/weapons/make_attribute.cpp
 	src/server/weapons/melee.cpp
+	src/server/weapons/monster_spawner.cpp
 	src/server/weapons/pistol.cpp
 	src/server/weapons/player_start_weapon.cpp
 	src/server/weapons/rocket_launcher.cpp

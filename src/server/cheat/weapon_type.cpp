@@ -1,0 +1,37 @@
+#include <sanguis/cheat_type.hpp>
+#include <sanguis/primary_weapon_type.hpp>
+#include <sanguis/secondary_weapon_type.hpp>
+#include <sanguis/weapon_type.hpp>
+#include <sanguis/server/cheat/weapon_type.hpp>
+#include <fcppt/assert/unreachable.hpp>
+
+
+sanguis::weapon_type const
+sanguis::server::cheat::weapon_type(
+	sanguis::cheat_type const _cheat_type
+)
+{
+	switch(
+		_cheat_type
+	)
+	{
+	case sanguis::cheat_type::exp:
+	case sanguis::cheat_type::heal:
+	case sanguis::cheat_type::kill:
+	case sanguis::cheat_type::monster_pickup:
+	case sanguis::cheat_type::monster_spawner:
+		break;
+	case sanguis::cheat_type::sentry_pickup:
+		return
+			sanguis::weapon_type(
+				sanguis::secondary_weapon_type::sentry
+			);
+	case sanguis::cheat_type::grenade_pickup:
+		return
+			sanguis::weapon_type(
+				sanguis::secondary_weapon_type::grenade
+			);
+	}
+
+	FCPPT_ASSERT_UNREACHABLE;
+}

@@ -111,6 +111,9 @@ sanguis::server::world::object::object(
 	seed_(
 		_generated_world.seed()
 	),
+	difficulty_(
+		_difficulty
+	),
 	generator_name_(
 		_generated_world.name()
 	),
@@ -160,8 +163,7 @@ sanguis::server::world::object::object(
 	this->insert_spawns(
 		_generated_world.spawns(),
 		_parameters.diff_clock(),
-		_parameters.random_generator(),
-		_difficulty
+		_parameters.random_generator()
 	);
 }
 
@@ -736,6 +738,34 @@ sanguis::server::world::object::request_transfer(
 	}
 }
 
+sanguis::server::world::difficulty const
+sanguis::server::world::object::difficulty() const
+{
+	return
+		difficulty_;
+}
+
+sanguis::collision::world::object &
+sanguis::server::world::object::collision_world() const
+{
+	return
+		*collision_world_;
+}
+
+sanguis::creator::grid const &
+sanguis::server::world::object::grid() const
+{
+	return
+		grid_;
+}
+
+sanguis::server::environment::load_context &
+sanguis::server::world::object::load_context() const
+{
+	return
+		load_context_;
+}
+
 void
 sanguis::server::world::object::add_sight_range(
 	sanguis::server::player_id const _player_id,
@@ -838,24 +868,6 @@ sanguis::server::world::object::remove_player(
 	);
 }
 
-sanguis::collision::world::object &
-sanguis::server::world::object::collision_world() const
-{
-	return *collision_world_;
-}
-
-sanguis::creator::grid const &
-sanguis::server::world::object::grid() const
-{
-	return grid_;
-}
-
-sanguis::server::environment::load_context &
-sanguis::server::world::object::load_context() const
-{
-	return load_context_;
-}
-
 void
 sanguis::server::world::object::send_entity_specific(
 	sanguis::entity_id const _id,
@@ -894,8 +906,7 @@ void
 sanguis::server::world::object::insert_spawns(
 	sanguis::creator::spawn_container const &_spawns,
 	sanguis::diff_clock const &_diff_clock,
-	sanguis::random_generator &_random_generator,
-	sanguis::server::world::difficulty const _difficulty
+	sanguis::random_generator &_random_generator
 )
 {
 	for(
@@ -907,7 +918,7 @@ sanguis::server::world::object::insert_spawns(
 				_diff_clock,
 				_random_generator,
 				this->load_context(),
-				_difficulty
+				difficulty_
 			),
 			sanguis::server::world::spawn_parameters(
 				spawn
