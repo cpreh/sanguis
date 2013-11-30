@@ -133,7 +133,7 @@ sanguis::server::perks::choleric::update(
 							5.f
 						),
 						sanguis::server::radius(
-							1.6f
+							90.f
 						),
 						direction
 					)

@@ -5,7 +5,6 @@
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/player_level.hpp>
 #include <sanguis/client/perk/choosable_state_fwd.hpp>
-#include <sanguis/client/perk/level_map.hpp>
 #include <sanguis/client/perk/tree_fwd.hpp>
 
 
@@ -20,7 +19,6 @@ sanguis::client::perk::choosable_state
 choosable(
 	sanguis::perk_type,
 	sanguis::client::perk::tree const &,
-	sanguis::client::perk::level_map const &,
 	sanguis::client::player_level,
 	sanguis::client::level perks_chosen
 );

@@ -12,10 +12,10 @@ namespace client
 namespace perk
 {
 
-sanguis::client::perk::tree const &
+sanguis::client::perk::tree &
 find_info(
 	sanguis::perk_type,
-	sanguis::client::perk::tree const &
+	sanguis::client::perk::tree &
 );
 
 }

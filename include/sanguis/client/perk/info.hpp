@@ -3,6 +3,7 @@
 
 #include <sanguis/perk_type.hpp>
 #include <sanguis/client/perk/info_fwd.hpp>
+#include <sanguis/client/perk/level.hpp>
 #include <sanguis/client/perk/max_level.hpp>
 #include <sanguis/client/perk/required_parent_level.hpp>
 #include <sanguis/client/perk/required_player_level.hpp>
@@ -25,13 +26,20 @@ public:
 
 	info(
 		sanguis::perk_type,
+		sanguis::client::perk::level,
 		sanguis::client::perk::required_parent_level,
 		sanguis::client::perk::required_player_level,
 		sanguis::client::perk::max_level
 	);
 
+	void
+	increment_level();
+
 	sanguis::perk_type
 	type() const;
+
+	sanguis::client::perk::level const
+	level() const;
 
 	sanguis::client::perk::required_parent_level const
 	required_parent_level() const;
@@ -43,6 +51,8 @@ public:
 	max_level() const;
 private:
 	sanguis::perk_type type_;
+
+	sanguis::client::perk::level level_;
 
 	sanguis::client::perk::required_parent_level required_parent_level_;
 

@@ -13,6 +13,7 @@
 #include <sanguis/messages/perk_tree_node_list.hpp>
 #include <sanguis/messages/roles/max_perk_level.hpp>
 #include <sanguis/messages/roles/perk_label.hpp>
+#include <sanguis/messages/roles/perk_level.hpp>
 #include <sanguis/messages/roles/perk_parent.hpp>
 #include <sanguis/messages/roles/required_perk_parent_level.hpp>
 #include <sanguis/messages/roles/required_perk_player_level.hpp>
@@ -55,7 +56,9 @@ sanguis::client::perk::make_tree(
 	);
 
 	for(
-		auto const &item : _list
+		auto const &item
+		:
+		_list
 	)
 		::tree_position(
 			*ret,
@@ -68,6 +71,13 @@ sanguis::client::perk::make_tree(
 					item.get<
 						sanguis::messages::roles::perk_label
 					>(),
+					sanguis::client::perk::level(
+						sanguis::client::level(
+							item.get<
+								sanguis::messages::roles::perk_level
+							>()
+						)
+					),
 					sanguis::client::perk::required_parent_level(
 						sanguis::client::perk::level(
 							sanguis::client::level(

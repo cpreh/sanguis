@@ -8,6 +8,7 @@
 #include <sanguis/messages/roles/max_perk_level.hpp>
 #include <sanguis/messages/roles/perk_parent.hpp>
 #include <sanguis/messages/roles/perk_label.hpp>
+#include <sanguis/messages/roles/perk_level.hpp>
 #include <sanguis/messages/roles/required_perk_parent_level.hpp>
 #include <sanguis/messages/roles/required_perk_player_level.hpp>
 #include <alda/bindings/optional_fwd.hpp>
@@ -26,12 +27,16 @@ namespace messages
 typedef
 sanguis::messages::make_class<
 	majutsu::composite<
-		boost::mpl::vector5<
+		boost::mpl::vector6<
 			majutsu::role<
 				sanguis::messages::adapted_types::enum_<
 					sanguis::perk_type
 				>,
 				sanguis::messages::roles::perk_label
+			>,
+			majutsu::role<
+				sanguis::messages::adapted_types::level,
+				sanguis::messages::roles::perk_level
 			>,
 			majutsu::role<
 				sanguis::messages::adapted_types::level,

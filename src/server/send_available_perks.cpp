@@ -48,6 +48,7 @@ sanguis::server::send_available_perks(
 		nodes.push_back(
 			sanguis::messages::perk_tree_node(
 				info->type(),
+				info->level().get(),
 				info->required_player_level().get(),
 				info->required_parent_level().get(),
 				info->max_level().get(),

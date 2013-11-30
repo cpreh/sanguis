@@ -11,7 +11,6 @@
 #include <sanguis/client/perk/info.hpp>
 #include <sanguis/client/perk/level_callback.hpp>
 #include <sanguis/client/perk/level_function.hpp>
-#include <sanguis/client/perk/level_map.hpp>
 #include <sanguis/client/perk/level.hpp>
 #include <sanguis/client/perk/send_callback.hpp>
 #include <sanguis/client/perk/tree_fwd.hpp>
@@ -71,9 +70,6 @@ public:
 		sanguis::perk_type
 	) const;
 
-	sanguis::client::perk::level_map const &
-	perk_levels() const;
-
 	sanguis::client::perk::choosable_state
 	choosable(
 		sanguis::perk_type
@@ -100,8 +96,6 @@ private:
 	sanguis::client::player_level current_level_;
 
 	sanguis::client::level consumed_levels_;
-
-	mutable sanguis::client::perk::level_map perk_levels_;
 
 	fcppt::signal::object<
 		sanguis::client::perk::level_function

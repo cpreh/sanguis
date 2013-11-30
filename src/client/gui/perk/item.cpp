@@ -18,7 +18,7 @@ sanguis::client::gui::perk::item::item(
 :
 	parent_(
 		_parent
-		),
+	),
 	perk_type_(
 		_info.type()
 	),

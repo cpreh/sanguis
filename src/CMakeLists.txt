@@ -393,12 +393,13 @@ set(
 	include/sanguis/client/perk/choosable_state_fwd.hpp
 	include/sanguis/client/perk/compare.hpp
 	include/sanguis/client/perk/find_info.hpp
+	include/sanguis/client/perk/find_info_any.hpp
+	include/sanguis/client/perk/find_info_const.hpp
 	include/sanguis/client/perk/info.hpp
 	include/sanguis/client/perk/info_fwd.hpp
 	include/sanguis/client/perk/level.hpp
 	include/sanguis/client/perk/level_callback.hpp
 	include/sanguis/client/perk/level_function.hpp
-	include/sanguis/client/perk/level_map.hpp
 	include/sanguis/client/perk/make_tree.hpp
 	include/sanguis/client/perk/max_level.hpp
 	include/sanguis/client/perk/optional_info.hpp
@@ -764,6 +765,7 @@ set(
 	include/sanguis/messages/roles/opening_count.hpp
 	include/sanguis/messages/roles/perk.hpp
 	include/sanguis/messages/roles/perk_label.hpp
+	include/sanguis/messages/roles/perk_level.hpp
 	include/sanguis/messages/roles/perk_parent.hpp
 	include/sanguis/messages/roles/pickup.hpp
 	include/sanguis/messages/roles/primary_weapon.hpp
@@ -1494,6 +1496,7 @@ set(
 	src/client/perk/choosable.cpp
 	src/client/perk/compare.cpp
 	src/client/perk/find_info.cpp
+	src/client/perk/find_info_const.cpp
 	src/client/perk/info.cpp
 	src/client/perk/make_tree.cpp
 	src/client/perk/state.cpp

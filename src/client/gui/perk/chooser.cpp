@@ -10,7 +10,7 @@
 #include <sanguis/client/gui/perk/item_user_data.hpp>
 #include <sanguis/client/gui/perk/node.hpp>
 #include <sanguis/client/perk/choosable_state.hpp>
-#include <sanguis/client/perk/find_info.hpp>
+#include <sanguis/client/perk/find_info_const.hpp>
 #include <sanguis/client/perk/info.hpp>
 #include <sanguis/client/perk/state.hpp>
 #include <sanguis/client/perk/to_string.hpp>
@@ -168,7 +168,7 @@ sanguis::client::gui::perk::chooser::perks(
 	items_.clear();
 
 	typedef fcppt::container::tree::pre_order<
-		client::perk::tree const
+		sanguis::client::perk::tree const
 	> perk_traversal;
 
 	for(
@@ -282,7 +282,7 @@ sanguis::client::gui::perk::chooser::update_bottom_text(
 )
 {
 	sanguis::client::perk::info const &info(
-		*sanguis::client::perk::find_info(
+		*sanguis::client::perk::find_info_const(
 			_perk_type,
 			state_.perks()
 		).value()

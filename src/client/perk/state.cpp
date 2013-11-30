@@ -5,17 +5,17 @@
 #include <sanguis/client/perk/change_callback.hpp>
 #include <sanguis/client/perk/choosable.hpp>
 #include <sanguis/client/perk/choosable_state.hpp>
+#include <sanguis/client/perk/find_info.hpp>
+#include <sanguis/client/perk/find_info_const.hpp>
 #include <sanguis/client/perk/info.hpp>
 #include <sanguis/client/perk/level.hpp>
 #include <sanguis/client/perk/level_callback.hpp>
-#include <sanguis/client/perk/level_map.hpp>
 #include <sanguis/client/perk/send_callback.hpp>
 #include <sanguis/client/perk/state.hpp>
 #include <sanguis/client/perk/tree.hpp>
 #include <sanguis/client/perk/tree_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/pre.hpp>
-#include <fcppt/container/tree/object_impl.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/signal/auto_connection.hpp>
@@ -41,7 +41,6 @@ sanguis::client::perk::state::state(
 	consumed_levels_(
 		0u
 	),
-	perk_levels_(),
 	level_signal_(),
 	change_signal_()
 {
@@ -95,16 +94,10 @@ sanguis::client::perk::state::choose_perk(
 
 	++consumed_levels_;
 
-	++perk_levels_.insert(
-		std::make_pair(
-			_type,
-			sanguis::client::perk::level(
-				sanguis::client::level(
-					0u
-				)
-			)
-		)
-	).first->second;
+	sanguis::client::perk::find_info(
+		_type,
+		*perks_
+	).value()->increment_level();
 
 	send_callback_(
 		_type
@@ -120,13 +113,15 @@ sanguis::client::perk::state::perks() const
 		perks_
 	);
 
-	return *perks_;
+	return
+		*perks_;
 }
 
 sanguis::client::player_level const
 sanguis::client::perk::state::player_level() const
 {
-	return current_level_;
+	return
+		current_level_;
 }
 
 sanguis::client::level const
@@ -134,7 +129,8 @@ sanguis::client::perk::state::levels_left() const
 {
 	return
 		current_level_.get()
-		- consumed_levels_;
+		-
+		consumed_levels_;
 }
 
 sanguis::client::perk::level const
@@ -143,34 +139,21 @@ sanguis::client::perk::state::perk_level(
 ) const
 {
 	return
-		perk_levels_.insert(
-			std::make_pair(
-				_perk_type,
-				sanguis::client::perk::level(
-					sanguis::client::level(
-						0u
-					)
-				)
-			)
-		).first->second;
-}
-
-sanguis::client::perk::level_map const &
-sanguis::client::perk::state::perk_levels() const
-{
-	return perk_levels_;
+		sanguis::client::perk::find_info_const(
+			_perk_type,
+			*perks_
+		).value()->level();
 }
 
 sanguis::client::perk::choosable_state
 sanguis::client::perk::state::choosable(
-	sanguis::perk_type const _type
+	sanguis::perk_type const _perk_type
 ) const
 {
 	return
 		sanguis::client::perk::choosable(
-			_type,
+			_perk_type,
 			this->perks(),
-			perk_levels_,
 			current_level_,
 			consumed_levels_
 		);
