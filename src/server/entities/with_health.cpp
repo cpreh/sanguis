@@ -1,6 +1,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/server/health.hpp>
+#include <sanguis/server/regeneration.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/damage/armor.hpp>
 #include <sanguis/server/damage/array.hpp>
@@ -29,14 +30,16 @@ sanguis::server::entities::with_health::damage(
 )
 {
         for(
-		sanguis::server::damage::array::size_type i = 0;
-		i < _amounts.size();
-		++i
+		sanguis::server::damage::array::size_type index{
+			0u
+		};
+		index < _amounts.size();
+		++index
 	)
 		sanguis::server::entities::property::subtract(
 			health_,
 			_damage.get()
-			* _amounts[i].get() * (1 - armor_.get()[i].get())
+			* _amounts[index].get() * (1 - armor_.get()[index].get())
 		);
 }
 
@@ -83,6 +86,7 @@ sanguis::server::entities::with_health::max_health() const
 sanguis::server::entities::with_health::with_health(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::server::health const _max_health,
+	sanguis::server::regeneration const _regeneration,
 	sanguis::server::damage::armor const &_armor
 )
 :
@@ -98,7 +102,7 @@ sanguis::server::entities::with_health::with_health(
 		)
 	),
 	regeneration_(
-		0
+		_regeneration.get()
 	),
 	regeneration_timer_(
 		sanguis::diff_timer::parameters(

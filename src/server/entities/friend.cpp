@@ -10,6 +10,7 @@
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/model_name.hpp>
 #include <sanguis/server/player_id.hpp>
+#include <sanguis/server/regeneration.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/ai/base.hpp>
 #include <sanguis/server/ai/create_function.hpp>
@@ -70,6 +71,9 @@ sanguis::server::entities::friend_::friend_(
 	sanguis::server::entities::with_health(
 		_diff_clock,
 		_health,
+		sanguis::server::regeneration(
+			0.f
+		),
 		_armor
 	),
 	sanguis::server::entities::with_links(),

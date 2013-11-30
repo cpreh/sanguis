@@ -6,6 +6,7 @@
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/pickup_probability.hpp>
+#include <sanguis/server/regeneration.hpp>
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/auras/unique_ptr.hpp>
@@ -78,6 +79,9 @@ public:
 	sanguis::server::health const
 	health() const;
 
+	sanguis::server::regeneration const
+	regeneration() const;
+
 	sanguis::server::entities::movement_speed const
 	movement_speed() const;
 
@@ -111,6 +115,11 @@ public:
 	sanguis::server::entities::enemies::parameters &
 	health(
 		sanguis::server::health
+	);
+
+	sanguis::server::entities::enemies::parameters &
+	regeneration(
+		sanguis::server::regeneration
 	);
 
 	sanguis::server::entities::enemies::parameters &
@@ -157,6 +166,8 @@ private:
 	sanguis::server::damage::armor const armor_;
 
 	sanguis::server::health health_;
+
+	sanguis::server::regeneration regeneration_;
 
 	sanguis::server::entities::movement_speed movement_speed_;
 

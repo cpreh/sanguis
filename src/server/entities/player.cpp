@@ -23,6 +23,7 @@
 #include <sanguis/server/model_name.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/radius.hpp>
+#include <sanguis/server/regeneration.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/string.hpp>
@@ -162,6 +163,9 @@ sanguis::server::entities::player::player(
 	sanguis::server::entities::with_health(
 		_diff_clock,
 		_health,
+		sanguis::server::regeneration(
+			0.f
+		),
 		_armor
 	),
 	sanguis::server::entities::with_links(),

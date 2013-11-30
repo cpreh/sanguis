@@ -3,7 +3,8 @@
 
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
-#include <sanguis/server/health.hpp>
+#include <sanguis/server/health_fwd.hpp>
+#include <sanguis/server/regeneration_fwd.hpp>
 #include <sanguis/server/damage/armor.hpp>
 #include <sanguis/server/damage/array.hpp>
 #include <sanguis/server/damage/unit.hpp>
@@ -58,7 +59,8 @@ public:
 protected:
 	with_health(
 		sanguis::diff_clock const &,
-		sanguis::server::health max,
+		sanguis::server::health,
+		sanguis::server::regeneration,
 		sanguis::server::damage::armor const &
 	);
 

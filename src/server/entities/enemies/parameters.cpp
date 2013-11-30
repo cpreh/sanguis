@@ -3,6 +3,7 @@
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/pickup_probability.hpp>
+#include <sanguis/server/regeneration.hpp>
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/container.hpp>
@@ -19,6 +20,7 @@
 #include <sanguis/server/weapons/irs.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -54,6 +56,13 @@ sanguis::server::entities::enemies::parameters::parameters(
 	),
 	health_(
 		_health
+	),
+	regeneration_(
+		fcppt::literal<
+			sanguis::server::regeneration::value_type
+		>(
+			0
+		)
 	),
 	movement_speed_(
 		_movement_speed
@@ -135,6 +144,13 @@ sanguis::server::entities::enemies::parameters::health() const
 		health_;
 }
 
+sanguis::server::regeneration const
+sanguis::server::entities::enemies::parameters::regeneration() const
+{
+	return
+		regeneration_;
+}
+
 sanguis::server::entities::movement_speed const
 sanguis::server::entities::enemies::parameters::movement_speed() const
 {
@@ -212,6 +228,18 @@ sanguis::server::entities::enemies::parameters::health(
 {
 	health_ =
 		_health;
+
+	return
+		*this;
+}
+
+sanguis::server::entities::enemies::parameters &
+sanguis::server::entities::enemies::parameters::regeneration(
+	sanguis::server::regeneration const _regeneration
+)
+{
+	regeneration_ =
+		_regeneration;
 
 	return
 		*this;

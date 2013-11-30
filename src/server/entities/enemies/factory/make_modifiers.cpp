@@ -12,6 +12,7 @@
 #include <sanguis/server/entities/enemies/modifiers/fast.hpp>
 #include <sanguis/server/entities/enemies/modifiers/freezing.hpp>
 #include <sanguis/server/entities/enemies/modifiers/health.hpp>
+#include <sanguis/server/entities/enemies/modifiers/regenerating.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
@@ -25,7 +26,8 @@ sanguis::server::entities::enemies::modifiers::container const callbacks{
 	&sanguis::server::entities::enemies::modifiers::burning,
 	&sanguis::server::entities::enemies::modifiers::fast,
 	&sanguis::server::entities::enemies::modifiers::freezing,
-	&sanguis::server::entities::enemies::modifiers::health
+	&sanguis::server::entities::enemies::modifiers::health,
+	&sanguis::server::entities::enemies::modifiers::regenerating
 };
 
 }

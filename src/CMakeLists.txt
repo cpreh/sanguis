@@ -1001,6 +1001,7 @@ set(
 	include/sanguis/server/entities/enemies/modifiers/fast.hpp
 	include/sanguis/server/entities/enemies/modifiers/freezing.hpp
 	include/sanguis/server/entities/enemies/modifiers/health.hpp
+	include/sanguis/server/entities/enemies/modifiers/regenerating.hpp
 	include/sanguis/server/entities/enemies/parameters.hpp
 	include/sanguis/server/entities/enemies/parameters_fwd.hpp
 	include/sanguis/server/entities/enemies/skills/container.hpp
@@ -1214,6 +1215,8 @@ set(
 	include/sanguis/server/random/draw.hpp
 	include/sanguis/server/random/max.hpp
 	include/sanguis/server/random/min.hpp
+	include/sanguis/server/regeneration.hpp
+	include/sanguis/server/regeneration_fwd.hpp
 	include/sanguis/server/send_available_perks.hpp
 	include/sanguis/server/send_callback.hpp
 	include/sanguis/server/source_world_id.hpp
@@ -1719,6 +1722,7 @@ set(
 	src/server/entities/enemies/modifiers/fast.cpp
 	src/server/entities/enemies/modifiers/freezing.cpp
 	src/server/entities/enemies/modifiers/health.cpp
+	src/server/entities/enemies/modifiers/regenerating.cpp
 	src/server/entities/enemies/parameters.cpp
 	src/server/entities/enemies/skills/factory/parameters.cpp
 	src/server/entities/enemies/skills/factory/teleport.cpp

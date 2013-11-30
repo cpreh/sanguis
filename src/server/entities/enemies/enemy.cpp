@@ -68,6 +68,7 @@ sanguis::server::entities::enemies::enemy::enemy(
 	sanguis::server::entities::with_health(
 		_parameters.diff_clock(),
 		_parameters.health(),
+		_parameters.regeneration(),
 		_parameters.armor()
 	),
 	sanguis::server::entities::with_links(),
