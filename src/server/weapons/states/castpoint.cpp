@@ -1,5 +1,6 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/random_generator.hpp>
+#include <sanguis/server/angle.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/weapons/delayed_attack.hpp>
@@ -19,7 +20,7 @@
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>
-#include <fcppt/random/distribution/parameters/uniform_real.hpp>
+#include <fcppt/random/distribution/parameters/normal.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/result.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -77,12 +78,6 @@ sanguis::server::weapons::states::castpoint::react(
 		return
 			this->discard_event();
 
-	typedef
-	fcppt::random::distribution::parameters::uniform_real<
-		sanguis::server::space_unit
-	>
-	uniform_real;
-
 	sanguis::server::space_unit const spread(
 		(
 			fcppt::literal<
@@ -103,18 +98,24 @@ sanguis::server::weapons::states::castpoint::react(
 		fcppt::literal<
 			sanguis::server::space_unit
 		>(
-			2
+			4
 		)
 	);
 
+	typedef
+	fcppt::random::distribution::parameters::normal<
+		sanguis::server::space_unit
+	>
+	normal_distribution;
+
 	auto angle_distribution(
 		fcppt::random::distribution::make_basic(
-			uniform_real(
-				uniform_real::min(
-					+spread
+			normal_distribution(
+				normal_distribution::mean(
+					_event.owner().angle().get()
 				),
-				uniform_real::sup(
-					-spread
+				normal_distribution::stddev(
+					spread
 				)
 			)
 		)
@@ -126,8 +127,6 @@ sanguis::server::weapons::states::castpoint::react(
 		>().do_attack(
 			sanguis::server::weapons::delayed_attack(
 				_event.owner().center(),
-				_event.owner().angle()
-				+
 				sanguis::server::angle(
 					angle_distribution(
 						this->context<
