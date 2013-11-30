@@ -397,7 +397,8 @@ sanguis::server::global::context::player_cheat(
 		this->player(
 			_player_id
 		),
-		_cheat
+		_cheat,
+		send_unicast_
 	);
 }
 

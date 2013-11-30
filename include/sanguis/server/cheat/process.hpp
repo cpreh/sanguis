@@ -4,6 +4,7 @@
 #include <sanguis/cheat_type_fwd.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/server/unicast_callback.hpp>
 #include <sanguis/server/entities/player_fwd.hpp>
 
 
@@ -19,7 +20,8 @@ process(
 	sanguis::diff_clock const &,
 	sanguis::random_generator &,
 	sanguis::server::entities::player &,
-	sanguis::cheat_type
+	sanguis::cheat_type,
+	sanguis::server::unicast_callback const &
 );
 
 }

@@ -14,6 +14,7 @@ enum class cheat_type
 	kill,
 	monster_pickup,
 	monster_spawner,
+	perks,
 	sentry_pickup,
 	grenade_pickup,
 	fcppt_maximum = grenade_pickup

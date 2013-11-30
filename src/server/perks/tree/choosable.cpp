@@ -55,12 +55,22 @@ sanguis::server::perks::tree::choosable(
 		return false;
 	}
 
-	if(
-		it->value()->required_player_level().get()
-		>
-		_player_level.get()
-	)
-		return false;
+	{
+		sanguis::server::perks::tree::status const &current(
+			*it->value()
+		);
+
+		if(
+			current.required_player_level().get()
+			>
+			_player_level.get()
+			||
+			current.level().get()
+			==
+			current.max_level().get()
+		)
+			return false;
+	}
 
 	for(
 		sanguis::server::perks::tree::object::const_optional_ref pos(

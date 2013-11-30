@@ -127,6 +127,17 @@ sanguis::client::control::action_handler::action_handler(
 		)(
 			this->cheat_connection(
 				_console,
+				sanguis::cheat_type::perks,
+				sge::console::callback::name(
+					SGE_FONT_LIT("perks")
+				),
+				sge::console::callback::short_description(
+					SGE_FONT_LIT("Get all perks")
+				)
+			)
+		)(
+			this->cheat_connection(
+				_console,
 				sanguis::cheat_type::sentry_pickup,
 				sge::console::callback::name(
 					SGE_FONT_LIT("sentry_pickup")

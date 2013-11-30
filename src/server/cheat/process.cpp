@@ -1,10 +1,13 @@
 #include <sanguis/cheat_type.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/friend_type.hpp>
+#include <sanguis/perk_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/exp.hpp>
+#include <sanguis/server/send_available_perks.hpp>
 #include <sanguis/server/team.hpp>
+#include <sanguis/server/unicast_callback.hpp>
 #include <sanguis/server/cheat/process.hpp>
 #include <sanguis/server/cheat/weapon_type.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
@@ -17,6 +20,7 @@
 #include <sanguis/server/weapons/create.hpp>
 #include <sanguis/server/weapons/monster_spawner.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <fcppt/foreach_enumerator.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
@@ -26,7 +30,8 @@ sanguis::server::cheat::process(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
 	sanguis::server::entities::player &_player,
-	sanguis::cheat_type const _cheat_type
+	sanguis::cheat_type const _cheat_type,
+	sanguis::server::unicast_callback const &_unicast_callback
 )
 {
 	sanguis::server::environment::optional_object_ref const environment(
@@ -121,6 +126,26 @@ sanguis::server::cheat::process(
 			sanguis::server::entities::insert_parameters_center(
 				_player.center()
 			)
+		);
+
+		return;
+	case sanguis::cheat_type::perks:
+		FCPPT_FOREACH_ENUMERATOR(
+			perk,
+			sanguis::perk_type
+		)
+			while(
+				_player.perk_choosable(
+					perk
+				)
+			)
+				_player.add_perk(
+					perk
+				);
+
+		sanguis::server::send_available_perks(
+			_player,
+			_unicast_callback
 		);
 
 		return;

@@ -20,6 +20,7 @@ sanguis::server::cheat::weapon_type(
 	case sanguis::cheat_type::kill:
 	case sanguis::cheat_type::monster_pickup:
 	case sanguis::cheat_type::monster_spawner:
+	case sanguis::cheat_type::perks:
 		break;
 	case sanguis::cheat_type::sentry_pickup:
 		return
