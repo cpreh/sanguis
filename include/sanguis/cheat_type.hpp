@@ -10,6 +10,7 @@ namespace sanguis
 enum class cheat_type
 {
 	exp,
+	heal,
 	kill,
 	monster_pickup,
 	sentry_pickup,

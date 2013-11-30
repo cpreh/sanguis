@@ -83,6 +83,17 @@ sanguis::client::control::action_handler::action_handler(
 		)(
 			this->cheat_connection(
 				_console,
+				sanguis::cheat_type::heal,
+				sge::console::callback::name(
+					SGE_FONT_LIT("heal")
+				),
+				sge::console::callback::short_description(
+					SGE_FONT_LIT("Completely heal the player")
+				)
+			)
+		)(
+			this->cheat_connection(
+				_console,
 				sanguis::cheat_type::kill,
 				sge::console::callback::name(
 					SGE_FONT_LIT("kill")

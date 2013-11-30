@@ -48,6 +48,11 @@ sanguis::server::cheat(
 			)
 		);
 		return;
+	case sanguis::cheat_type::heal:
+		_player.health().current(
+			_player.max_health().get()
+		);
+		return;
 	case sanguis::cheat_type::kill:
 		_player.kill();
 		return;
