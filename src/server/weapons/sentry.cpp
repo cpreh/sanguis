@@ -1,5 +1,6 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/friend_type.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/secondary_weapon_type.hpp>
 #include <sanguis/string_vector.hpp>
 #include <sanguis/weapon_type.hpp>
@@ -14,6 +15,7 @@
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/optional_base_ref.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/weapons/accuracy.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/create_function.hpp>
@@ -29,6 +31,7 @@
 
 sanguis::server::weapons::sentry::sentry(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	sanguis::server::weapons::base_cooldown const _base_cooldown,
 	sanguis::server::weapons::cast_point const _cast_point,
 	sanguis::server::weapons::range const _range,
@@ -38,8 +41,12 @@ sanguis::server::weapons::sentry::sentry(
 :
 	sanguis::server::weapons::weapon(
 		_diff_clock,
+		_random_generator,
 		sanguis::weapon_type(
 			sanguis::secondary_weapon_type::sentry
+		),
+		sanguis::server::weapons::accuracy(
+			1.f
 		),
 		_range,
 		sanguis::server::weapons::optional_magazine_size(

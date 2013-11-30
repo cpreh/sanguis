@@ -1,4 +1,5 @@
 #include <sanguis/duration_second.hpp>
+#include <sanguis/server/weapons/accuracy.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/damage.hpp>
@@ -22,7 +23,11 @@ sanguis::server::weapons::factory::dual_pistols(
 			sanguis::server::weapons::pistol
 		>(
 			_parameters.diff_clock(),
+			_parameters.random_generator(),
 			_parameters.weapon_type(),
+			sanguis::server::weapons::accuracy(
+				0.75f
+			),
 			sanguis::server::weapons::base_cooldown(
 				sanguis::duration_second(
 					0.33f

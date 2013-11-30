@@ -2,11 +2,13 @@
 #define SANGUIS_SERVER_WEAPONS_WEAPON_HPP_INCLUDED
 
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/string_vector.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/with_weapon_fwd.hpp>
+#include <sanguis/server/weapons/accuracy.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
@@ -49,7 +51,9 @@ class weapon
 protected:
 	weapon(
 		sanguis::diff_clock const &,
+		sanguis::random_generator &,
 		sanguis::weapon_type,
+		sanguis::server::weapons::accuracy,
 		sanguis::server::weapons::range,
 		sanguis::server::weapons::optional_magazine_size,
 		sanguis::server::weapons::base_cooldown,
@@ -99,6 +103,9 @@ protected:
 
 	sanguis::diff_clock const &
 	diff_clock() const;
+
+	sanguis::random_generator &
+	random_generator() const;
 private:
 	virtual
 	sanguis::string_vector
@@ -118,6 +125,9 @@ private:
 	bool
 	magazine_empty() const;
 
+	sanguis::server::weapons::accuracy const
+	accuracy() const;
+
 	sanguis::server::weapons::cast_point const
 	cast_point() const;
 
@@ -129,7 +139,11 @@ private:
 
 	sanguis::diff_clock const &diff_clock_;
 
+	sanguis::random_generator &random_generator_;
+
 	sanguis::weapon_type const type_;
+
+	sanguis::server::weapons::accuracy const accuracy_;
 
 	sanguis::server::weapons::range const range_;
 

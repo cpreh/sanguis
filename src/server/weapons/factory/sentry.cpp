@@ -1,7 +1,9 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/primary_weapon_type.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
+#include <sanguis/server/weapons/accuracy.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/damage.hpp>
@@ -24,11 +26,16 @@ sanguis::server::weapons::factory::sentry(
 		_parameters.diff_clock()
 	);
 
+	sanguis::random_generator &random_generator(
+		_parameters.random_generator()
+	);
+
 	return
 		fcppt::make_unique_ptr<
 			sanguis::server::weapons::sentry
 		>(
 			diff_clock,
+			random_generator,
 			sanguis::server::weapons::base_cooldown(
 				sanguis::duration_second(
 					5.f
@@ -46,7 +53,8 @@ sanguis::server::weapons::factory::sentry(
 				1u
 			),
 			[
-				&diff_clock
+				&diff_clock,
+				&random_generator
 			]
 			()
 			{
@@ -55,8 +63,12 @@ sanguis::server::weapons::factory::sentry(
 						sanguis::server::weapons::pistol
 					>(
 						diff_clock,
+						random_generator,
 						sanguis::weapon_type(
 							sanguis::primary_weapon_type::pistol
+						),
+						sanguis::server::weapons::accuracy(
+							0.9f
 						),
 						sanguis::server::weapons::base_cooldown(
 							sanguis::duration_second(

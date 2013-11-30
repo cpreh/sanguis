@@ -1,10 +1,12 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/log_parameters.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/collision/distance_entity_pos.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/with_weapon_fwd.hpp>
+#include <sanguis/server/weapons/accuracy.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
@@ -53,7 +55,9 @@ FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::weapons::weapon::weapon(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	sanguis::weapon_type const _type,
+	sanguis::server::weapons::accuracy const _accuracy,
 	sanguis::server::weapons::range const _range,
 	sanguis::server::weapons::optional_magazine_size const _magazine_size,
 	sanguis::server::weapons::base_cooldown const _base_cooldown,
@@ -64,8 +68,14 @@ sanguis::server::weapons::weapon::weapon(
 	diff_clock_(
 		_diff_clock
 	),
+	random_generator_(
+		_random_generator
+	),
 	type_(
 		_type
+	),
+	accuracy_(
+		_accuracy
 	),
 	range_(
 		_range
@@ -158,13 +168,15 @@ sanguis::server::weapons::weapon::update(
 sanguis::weapon_type
 sanguis::server::weapons::weapon::type() const
 {
-	return type_;
+	return
+		type_;
 }
 
 sanguis::server::weapons::optional_magazine_size const
 sanguis::server::weapons::weapon::magazine_size() const
 {
-	return magazine_size_;
+	return
+		magazine_size_;
 }
 
 bool
@@ -202,6 +214,12 @@ sanguis::server::weapons::weapon::description() const
 						FCPPT_TEXT("range"),
 						fcppt::insert_to_fcppt_string(
 							range_
+						)
+					),
+					sanguis::server::weapons::make_attribute(
+						FCPPT_TEXT("accuracy"),
+						fcppt::insert_to_fcppt_string(
+							accuracy_
 						)
 					),
 					sanguis::server::weapons::make_attribute(
@@ -246,7 +264,15 @@ sanguis::server::weapons::weapon::description() const
 sanguis::diff_clock const &
 sanguis::server::weapons::weapon::diff_clock() const
 {
-	return diff_clock_;
+	return
+		diff_clock_;
+}
+
+sanguis::random_generator &
+sanguis::server::weapons::weapon::random_generator() const
+{
+	return
+		random_generator_;
 }
 
 void
@@ -279,6 +305,13 @@ sanguis::server::weapons::weapon::magazine_empty() const
 		magazine_used_
 		==
 		magazine_size_->get();
+}
+
+sanguis::server::weapons::accuracy const
+sanguis::server::weapons::weapon::accuracy() const
+{
+	return
+		accuracy_;
 }
 
 sanguis::server::weapons::cast_point const

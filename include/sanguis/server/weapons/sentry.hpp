@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_WEAPONS_SENTRY_HPP_INCLUDED
 
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/string_vector.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
@@ -30,6 +31,7 @@ class sentry
 public:
 	sentry(
 		sanguis::diff_clock const &,
+		sanguis::random_generator &,
 		sanguis::server::weapons::base_cooldown,
 		sanguis::server::weapons::cast_point,
 		sanguis::server::weapons::range,

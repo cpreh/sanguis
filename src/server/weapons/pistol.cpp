@@ -1,4 +1,5 @@
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/string_vector.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/entities/base.hpp>
@@ -6,6 +7,7 @@
 #include <sanguis/server/entities/projectiles/simple_bullet.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/weapons/accuracy.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/damage.hpp>
@@ -25,7 +27,9 @@
 
 sanguis::server::weapons::pistol::pistol(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	sanguis::weapon_type const _type,
+	sanguis::server::weapons::accuracy const _accuracy,
 	sanguis::server::weapons::base_cooldown const _base_cooldown,
 	sanguis::server::weapons::damage const _damage,
 	sanguis::server::weapons::cast_point const _cast_point,
@@ -36,7 +40,9 @@ sanguis::server::weapons::pistol::pistol(
 :
 	sanguis::server::weapons::weapon(
 		_diff_clock,
+		_random_generator,
 		_type,
+		_accuracy,
 		_range,
 		sanguis::server::weapons::optional_magazine_size(
 			_magazine_size

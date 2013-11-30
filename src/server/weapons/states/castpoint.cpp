@@ -1,4 +1,6 @@
 #include <sanguis/diff_timer.hpp>
+#include <sanguis/random_generator.hpp>
+#include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/weapons/delayed_attack.hpp>
 #include <sanguis/server/weapons/optional_target.hpp>
@@ -11,9 +13,13 @@
 #include <sanguis/server/weapons/states/castpoint.hpp>
 #include <sanguis/server/weapons/states/castpoint_parameters.hpp>
 #include <sanguis/server/weapons/states/ready.hpp>
+#include <fcppt/literal.hpp>
+#include <fcppt/math/pi.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
+#include <fcppt/random/distribution/make_basic.hpp>
+#include <fcppt/random/distribution/parameters/uniform_real.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/result.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -71,13 +77,64 @@ sanguis::server::weapons::states::castpoint::react(
 		return
 			this->discard_event();
 
+	typedef
+	fcppt::random::distribution::parameters::uniform_real<
+		sanguis::server::space_unit
+	>
+	uniform_real;
+
+	sanguis::server::space_unit const spread(
+		(
+			fcppt::literal<
+				sanguis::server::space_unit
+			>(
+				1
+			)
+			-
+			this->context<
+				sanguis::server::weapons::weapon
+			>().accuracy().get()
+		)
+		*
+		fcppt::math::pi<
+			sanguis::server::space_unit
+		>()
+		/
+		fcppt::literal<
+			sanguis::server::space_unit
+		>(
+			2
+		)
+	);
+
+	auto angle_distribution(
+		fcppt::random::distribution::make_basic(
+			uniform_real(
+				uniform_real::min(
+					+spread
+				),
+				uniform_real::sup(
+					-spread
+				)
+			)
+		)
+	);
+
 	if(
 		this->context<
 			sanguis::server::weapons::weapon
 		>().do_attack(
 			sanguis::server::weapons::delayed_attack(
 				_event.owner().center(),
-				_event.owner().angle(),
+				_event.owner().angle()
+				+
+				sanguis::server::angle(
+					angle_distribution(
+						this->context<
+							sanguis::server::weapons::weapon
+						>().random_generator()
+					)
+				),
 				_event.owner().team(),
 				*_event.owner().environment(),
 				*target

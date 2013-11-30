@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_WEAPONS_MELEE_HPP_INCLUDED
 
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/string_vector.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/damage.hpp>
@@ -28,6 +29,7 @@ class melee
 public:
 	melee(
 		sanguis::diff_clock const &,
+		sanguis::random_generator &,
 		sanguis::server::weapons::range,
 		sanguis::server::weapons::base_cooldown,
 		sanguis::server::weapons::damage

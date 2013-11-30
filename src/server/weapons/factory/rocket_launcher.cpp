@@ -1,4 +1,5 @@
 #include <sanguis/duration_second.hpp>
+#include <sanguis/server/weapons/accuracy.hpp>
 #include <sanguis/server/weapons/aoe.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
@@ -23,7 +24,11 @@ sanguis::server::weapons::factory::rocket_launcher(
 			sanguis::server::weapons::rocket_launcher
 		>(
 			_parameters.diff_clock(),
+			_parameters.random_generator(),
 			_parameters.weapon_type(),
+			sanguis::server::weapons::accuracy(
+				0.9f
+			),
 			sanguis::server::weapons::base_cooldown(
 				sanguis::duration_second(
 					0.8f

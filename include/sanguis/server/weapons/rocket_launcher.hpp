@@ -2,8 +2,10 @@
 #define SANGUIS_SERVER_WEAPONS_ROCKET_LAUNCHER_HPP_INCLUDED
 
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/string_vector.hpp>
 #include <sanguis/weapon_type_fwd.hpp>
+#include <sanguis/server/weapons/accuracy.hpp>
 #include <sanguis/server/weapons/aoe.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
@@ -33,7 +35,9 @@ class rocket_launcher
 public:
 	rocket_launcher(
 		sanguis::diff_clock const &,
+		sanguis::random_generator &,
 		sanguis::weapon_type,
+		sanguis::server::weapons::accuracy,
 		sanguis::server::weapons::base_cooldown,
 		sanguis::server::weapons::cast_point,
 		sanguis::server::weapons::damage,

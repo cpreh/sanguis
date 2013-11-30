@@ -171,7 +171,8 @@ sanguis::server::entities::player::player(
 	),
 	sanguis::server::entities::with_weapon(
 		sanguis::server::weapons::player_start_weapon(
-			_diff_clock
+			_diff_clock,
+			_random_generator
 		),
 		sanguis::server::weapons::default_ias(),
 		sanguis::server::weapons::default_irs()

@@ -1,6 +1,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/primary_weapon_type.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/string_vector.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/center.hpp>
@@ -8,6 +9,7 @@
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/projectiles/melee.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
+#include <sanguis/server/weapons/accuracy.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/damage.hpp>
@@ -25,6 +27,7 @@
 
 sanguis::server::weapons::melee::melee(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	sanguis::server::weapons::range const _range,
 	sanguis::server::weapons::base_cooldown const _base_cooldown,
 	sanguis::server::weapons::damage const _damage
@@ -32,8 +35,12 @@ sanguis::server::weapons::melee::melee(
 :
 	sanguis::server::weapons::weapon(
 		_diff_clock,
+		_random_generator,
 		sanguis::weapon_type(
 			sanguis::primary_weapon_type::melee
+		),
+		sanguis::server::weapons::accuracy(
+			1.f
 		),
 		_range,
 		sanguis::server::weapons::optional_magazine_size(),

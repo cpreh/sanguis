@@ -22,6 +22,7 @@ sanguis::server::weapons::factory::grenade(
 			sanguis::server::weapons::grenade
 		>(
 			_parameters.diff_clock(),
+			_parameters.random_generator(),
 			sanguis::server::weapons::base_cooldown(
 				sanguis::duration_second(
 					0.7f

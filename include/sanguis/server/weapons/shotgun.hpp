@@ -6,6 +6,7 @@
 #include <sanguis/string_vector.hpp>
 #include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/server/space_unit.hpp>
+#include <sanguis/server/weapons/accuracy.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/damage.hpp>
@@ -47,6 +48,7 @@ public:
 		sanguis::diff_clock const &,
 		sanguis::random_generator &,
 		sanguis::weapon_type,
+		sanguis::server::weapons::accuracy,
 		sanguis::server::weapons::base_cooldown,
 		sanguis::server::weapons::cast_point,
 		sanguis::server::weapons::shotgun::spread_radius,

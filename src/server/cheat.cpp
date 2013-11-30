@@ -57,6 +57,7 @@ sanguis::server::cheat(
 				sanguis::server::entities::pickups::monster
 			>(
 				_diff_clock,
+				_random_generator,
 				environment->load_context(),
 				sanguis::server::team::players,
 				sanguis::friend_type::spider,

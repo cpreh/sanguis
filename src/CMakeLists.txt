@@ -1241,6 +1241,7 @@ set(
 	include/sanguis/server/update_target_function.hpp
 	include/sanguis/server/vector.hpp
 	include/sanguis/server/vector_fwd.hpp
+	include/sanguis/server/weapons/accuracy.hpp
 	include/sanguis/server/weapons/aoe.hpp
 	include/sanguis/server/weapons/backswing_time.hpp
 	include/sanguis/server/weapons/base_cooldown.hpp

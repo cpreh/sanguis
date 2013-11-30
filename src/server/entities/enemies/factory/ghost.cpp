@@ -62,6 +62,7 @@ sanguis::server::entities::enemies::factory::ghost(
 				sanguis::server::weapons::melee
 			>(
 				_parameters.diff_clock(),
+				_parameters.random_generator(),
 				sanguis::server::weapons::range(
 					75.f
 				),
