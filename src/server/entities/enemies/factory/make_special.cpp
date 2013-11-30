@@ -32,6 +32,7 @@ sanguis::server::entities::enemies::factory::make_special(
 
 	sanguis::server::entities::enemies::attribute_container const modifier_result(
 		sanguis::server::entities::enemies::modifiers::apply(
+			_random_generator,
 			_parameters,
 			sanguis::server::entities::enemies::factory::make_modifiers(
 				_random_generator,

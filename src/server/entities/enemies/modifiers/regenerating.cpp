@@ -1,6 +1,7 @@
 #include <sanguis/server/regeneration.hpp>
 #include <sanguis/server/entities/enemies/attribute.hpp>
 #include <sanguis/server/entities/enemies/parameters.hpp>
+#include <sanguis/server/entities/enemies/modifiers/parameters_fwd.hpp>
 #include <sanguis/server/entities/enemies/modifiers/regenerating.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -10,7 +11,8 @@
 
 sanguis::server::entities::enemies::attribute
 sanguis::server::entities::enemies::modifiers::regenerating(
-	sanguis::server::entities::enemies::parameters &_parameters
+	sanguis::server::entities::enemies::parameters &_parameters,
+	sanguis::server::entities::enemies::modifiers::parameters const &
 )
 {
 	_parameters.regeneration(

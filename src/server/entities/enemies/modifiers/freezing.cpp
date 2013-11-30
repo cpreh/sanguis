@@ -6,12 +6,14 @@
 #include <sanguis/server/entities/enemies/attribute.hpp>
 #include <sanguis/server/entities/enemies/parameters.hpp>
 #include <sanguis/server/entities/enemies/modifiers/freezing.hpp>
+#include <sanguis/server/entities/enemies/modifiers/parameters_fwd.hpp>
 #include <fcppt/text.hpp>
 
 
 sanguis::server::entities::enemies::attribute
 sanguis::server::entities::enemies::modifiers::freezing(
-	sanguis::server::entities::enemies::parameters &_parameters
+	sanguis::server::entities::enemies::parameters &_parameters,
+	sanguis::server::entities::enemies::modifiers::parameters const &
 )
 {
 	_parameters.add_aura(

@@ -1,5 +1,5 @@
-#ifndef SANGUIS_SERVER_ENTITIES_ENEMIES_MODIFIERS_CALLBACK_HPP_INCLUDED
-#define SANGUIS_SERVER_ENTITIES_ENEMIES_MODIFIERS_CALLBACK_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_ENTITIES_ENEMIES_MODIFIERS_ARMORED_HPP_INCLUDED
+#define SANGUIS_SERVER_ENTITIES_ENEMIES_MODIFIERS_ARMORED_HPP_INCLUDED
 
 #include <sanguis/server/entities/enemies/attribute_fwd.hpp>
 #include <sanguis/server/entities/enemies/parameters_fwd.hpp>
@@ -17,11 +17,8 @@ namespace enemies
 namespace modifiers
 {
 
-using
-callback
-=
 sanguis::server::entities::enemies::attribute
-(*)(
+armored(
 	sanguis::server::entities::enemies::parameters &,
 	sanguis::server::entities::enemies::modifiers::parameters const &
 );

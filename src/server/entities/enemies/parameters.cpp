@@ -9,6 +9,9 @@
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/auras/unique_ptr.hpp>
 #include <sanguis/server/damage/armor.hpp>
+#include <sanguis/server/damage/array.hpp>
+#include <sanguis/server/damage/type.hpp>
+#include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
@@ -21,6 +24,7 @@
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/cast/enum_to_int.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -317,7 +321,7 @@ sanguis::server::entities::enemies::parameters::irs(
 		*this;
 }
 
-void
+sanguis::server::entities::enemies::parameters &
 sanguis::server::entities::enemies::parameters::add_aura(
 	sanguis::server::auras::unique_ptr &&_aura
 )
@@ -327,4 +331,37 @@ sanguis::server::entities::enemies::parameters::add_aura(
 			_aura
 		)
 	);
+
+	return
+		*this;
+}
+
+sanguis::server::entities::enemies::parameters &
+sanguis::server::entities::enemies::parameters::armor_element(
+	sanguis::server::damage::type const _type,
+	sanguis::server::damage::unit const _unit
+)
+{
+	// TODO: Make a proper armor class!
+
+	sanguis::server::damage::array new_array(
+		armor_.get()
+	);
+
+	new_array[
+		fcppt::cast::enum_to_int<
+			sanguis::server::damage::armor::value_type::size_type
+		>(
+			_type
+		)
+	] =
+		_unit;
+
+	armor_ =
+		sanguis::server::damage::armor(
+			new_array
+		);
+
+	return
+		*this;
 }

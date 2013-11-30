@@ -3,6 +3,7 @@
 
 #include <sanguis/server/entities/enemies/attribute_fwd.hpp>
 #include <sanguis/server/entities/enemies/parameters_fwd.hpp>
+#include <sanguis/server/entities/enemies/modifiers/parameters_fwd.hpp>
 
 
 namespace sanguis
@@ -18,7 +19,8 @@ namespace modifiers
 
 sanguis::server::entities::enemies::attribute
 burning(
-	sanguis::server::entities::enemies::parameters &
+	sanguis::server::entities::enemies::parameters &,
+	sanguis::server::entities::enemies::modifiers::parameters const &
 );
 
 }

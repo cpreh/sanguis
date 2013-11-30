@@ -17,6 +17,7 @@
 #include <sanguis/server/entities/property/subtract.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
 #include <functional>
@@ -39,7 +40,22 @@ sanguis::server::entities::with_health::damage(
 		sanguis::server::entities::property::subtract(
 			health_,
 			_damage.get()
-			* _amounts[index].get() * (1 - armor_.get()[index].get())
+			*
+			_amounts[
+				index
+			].get()
+			*
+			(
+				fcppt::literal<
+					sanguis::server::damage::unit::value_type
+				>(
+					1
+				)
+				-
+				armor_.get()[
+					index
+				].get()
+			)
 		);
 }
 

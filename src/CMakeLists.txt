@@ -957,6 +957,7 @@ set(
 	include/sanguis/server/damage/pure.hpp
 	include/sanguis/server/damage/type.hpp
 	include/sanguis/server/damage/type_fwd.hpp
+	include/sanguis/server/damage/type_to_string.hpp
 	include/sanguis/server/damage/unit.hpp
 	include/sanguis/server/damage/wrapper.hpp
 	include/sanguis/server/damage/wrapper_fwd.hpp
@@ -1000,12 +1001,15 @@ set(
 	include/sanguis/server/entities/enemies/make_name.hpp
 	include/sanguis/server/entities/enemies/modifiers/agile.hpp
 	include/sanguis/server/entities/enemies/modifiers/apply.hpp
+	include/sanguis/server/entities/enemies/modifiers/armored.hpp
 	include/sanguis/server/entities/enemies/modifiers/burning.hpp
 	include/sanguis/server/entities/enemies/modifiers/callback.hpp
 	include/sanguis/server/entities/enemies/modifiers/container.hpp
 	include/sanguis/server/entities/enemies/modifiers/fast.hpp
 	include/sanguis/server/entities/enemies/modifiers/freezing.hpp
 	include/sanguis/server/entities/enemies/modifiers/health.hpp
+	include/sanguis/server/entities/enemies/modifiers/parameters.hpp
+	include/sanguis/server/entities/enemies/modifiers/parameters_fwd.hpp
 	include/sanguis/server/entities/enemies/modifiers/regenerating.hpp
 	include/sanguis/server/entities/enemies/parameters.hpp
 	include/sanguis/server/entities/enemies/parameters_fwd.hpp
@@ -1702,6 +1706,7 @@ set(
 	src/server/damage/normal.cpp
 	src/server/damage/piercing.cpp
 	src/server/damage/pure.cpp
+	src/server/damage/type_to_string.cpp
 	src/server/damage/wrapper.cpp
 	src/server/entities/auto_weak_link.cpp
 	src/server/entities/base.cpp
@@ -1728,10 +1733,12 @@ set(
 	src/server/entities/enemies/make_name.cpp
 	src/server/entities/enemies/modifiers/agile.cpp
 	src/server/entities/enemies/modifiers/apply.cpp
+	src/server/entities/enemies/modifiers/armored.cpp
 	src/server/entities/enemies/modifiers/burning.cpp
 	src/server/entities/enemies/modifiers/fast.cpp
 	src/server/entities/enemies/modifiers/freezing.cpp
 	src/server/entities/enemies/modifiers/health.cpp
+	src/server/entities/enemies/modifiers/parameters.cpp
 	src/server/entities/enemies/modifiers/regenerating.cpp
 	src/server/entities/enemies/parameters.cpp
 	src/server/entities/enemies/skills/factory/parameters.cpp

@@ -6,6 +6,7 @@
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/entities/enemies/factory/make_modifiers.hpp>
 #include <sanguis/server/entities/enemies/modifiers/agile.hpp>
+#include <sanguis/server/entities/enemies/modifiers/armored.hpp>
 #include <sanguis/server/entities/enemies/modifiers/burning.hpp>
 #include <sanguis/server/entities/enemies/modifiers/callback.hpp>
 #include <sanguis/server/entities/enemies/modifiers/container.hpp>
@@ -23,6 +24,7 @@ namespace
 
 sanguis::server::entities::enemies::modifiers::container const callbacks{
 	&sanguis::server::entities::enemies::modifiers::agile,
+	&sanguis::server::entities::enemies::modifiers::armored,
 	&sanguis::server::entities::enemies::modifiers::burning,
 	&sanguis::server::entities::enemies::modifiers::fast,
 	&sanguis::server::entities::enemies::modifiers::freezing,
@@ -49,7 +51,7 @@ sanguis::server::entities::enemies::factory::make_modifiers(
 				1u
 			),
 			sanguis::server::random::max(
-				2u
+				3u
 			), // TODO: How many?
 			[](
 				sanguis::server::entities::enemies::modifiers::callback const &_callback

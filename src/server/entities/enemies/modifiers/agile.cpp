@@ -1,6 +1,7 @@
 #include <sanguis/server/entities/enemies/attribute.hpp>
 #include <sanguis/server/entities/enemies/parameters.hpp>
 #include <sanguis/server/entities/enemies/modifiers/agile.hpp>
+#include <sanguis/server/entities/enemies/modifiers/parameters_fwd.hpp>
 #include <sanguis/server/weapons/ias.hpp>
 #include <sanguis/server/weapons/irs.hpp>
 #include <fcppt/text.hpp>
@@ -11,7 +12,8 @@
 
 sanguis::server::entities::enemies::attribute
 sanguis::server::entities::enemies::modifiers::agile(
-	sanguis::server::entities::enemies::parameters &_parameters
+	sanguis::server::entities::enemies::parameters &_parameters,
+	sanguis::server::entities::enemies::modifiers::parameters const &
 )
 {
 	_parameters.ias(

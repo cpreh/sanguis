@@ -11,6 +11,8 @@
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/auras/unique_ptr.hpp>
 #include <sanguis/server/damage/armor.hpp>
+#include <sanguis/server/damage/type_fwd.hpp>
+#include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
@@ -152,9 +154,15 @@ public:
 		sanguis::server::weapons::irs
 	);
 
-	void
+	sanguis::server::entities::enemies::parameters &
 	add_aura(
 		sanguis::server::auras::unique_ptr &&
+	);
+
+	sanguis::server::entities::enemies::parameters &
+	armor_element(
+		sanguis::server::damage::type,
+		sanguis::server::damage::unit
 	);
 private:
 	sanguis::diff_clock const &diff_clock_;
@@ -163,7 +171,7 @@ private:
 
 	sanguis::server::environment::load_context &load_context_;
 
-	sanguis::server::damage::armor const armor_;
+	sanguis::server::damage::armor armor_;
 
 	sanguis::server::health health_;
 

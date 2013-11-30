@@ -6,9 +6,8 @@
 #include <sanguis/server/damage/fire.hpp>
 #include <sanguis/server/damage/full.hpp>
 #include <sanguis/server/damage/list.hpp>
-#include <sanguis/server/damage/meta.hpp>
+#include <sanguis/server/damage/piercing.hpp>
 #include <sanguis/server/damage/unit.hpp>
-#include <sanguis/server/damage/wrapper.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/with_health_fwd.hpp>
@@ -77,6 +76,9 @@ sanguis::server::entities::projectiles::rocket::remove()
 			damage_,
 			sanguis::server::damage::list(
 				sanguis::server::damage::fire =
+					sanguis::server::damage::full
+			)(
+				sanguis::server::damage::piercing =
 					sanguis::server::damage::full
 			)
 		),
