@@ -80,7 +80,7 @@ sanguis::server::entities::enemies::factory::make(
 			_parameters.random_generator()
 		)
 		<
-		0.05f
+		_parameters.special_chance().get()
 		?
 			sanguis::server::entities::enemies::factory::make_special(
 				_parameters.random_generator(),

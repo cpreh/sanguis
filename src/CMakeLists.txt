@@ -1014,6 +1014,7 @@ set(
 	include/sanguis/server/entities/enemies/skills/teleport.hpp
 	include/sanguis/server/entities/enemies/skills/unique_ptr.hpp
 	include/sanguis/server/entities/enemies/special.hpp
+	include/sanguis/server/entities/enemies/special_chance.hpp
 	include/sanguis/server/entities/enemies/unique_ptr.hpp
 	include/sanguis/server/entities/exp_area.hpp
 	include/sanguis/server/entities/friend.hpp

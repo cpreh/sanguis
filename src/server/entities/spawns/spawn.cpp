@@ -10,6 +10,7 @@
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/enemies/create.hpp>
+#include <sanguis/server/entities/enemies/special_chance.hpp>
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/spawns/size_type.hpp>
 #include <sanguis/server/entities/spawns/spawn.hpp>
@@ -114,6 +115,9 @@ sanguis::server::entities::spawns::spawn::update()
 					this->environment()->load_context(),
 					sanguis::server::entities::spawn_owner(
 						this->link()
+					),
+					sanguis::server::entities::enemies::special_chance(
+						0.05f
 					)
 				),
 				sanguis::server::entities::insert_parameters(

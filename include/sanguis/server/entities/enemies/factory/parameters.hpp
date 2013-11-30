@@ -6,6 +6,7 @@
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
+#include <sanguis/server/entities/enemies/special_chance.hpp>
 #include <sanguis/server/entities/enemies/factory/parameters_fwd.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <fcppt/nonassignable.hpp>
@@ -34,7 +35,8 @@ public:
 		sanguis::creator::enemy_type,
 		sanguis::server::entities::enemies::difficulty,
 		sanguis::server::environment::load_context &,
-		sanguis::server::entities::spawn_owner const &
+		sanguis::server::entities::spawn_owner const &,
+		sanguis::server::entities::enemies::special_chance
 	);
 
 	sanguis::diff_clock const &
@@ -54,6 +56,9 @@ public:
 
 	sanguis::server::entities::spawn_owner const &
 	spawn_owner() const;
+
+	sanguis::server::entities::enemies::special_chance const
+	special_chance() const;
 private:
 	sanguis::diff_clock const &diff_clock_;
 
@@ -66,6 +71,8 @@ private:
 	sanguis::server::environment::load_context &load_context_;
 
 	sanguis::server::entities::spawn_owner const spawn_owner_;
+
+	sanguis::server::entities::enemies::special_chance const special_chance_;
 };
 
 }

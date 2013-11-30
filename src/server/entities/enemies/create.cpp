@@ -7,6 +7,7 @@
 #include <sanguis/server/entities/enemies/create.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/entities/enemies/difficulty_value.hpp>
+#include <sanguis/server/entities/enemies/special_chance.hpp>
 #include <sanguis/server/entities/enemies/factory/ghost.hpp>
 #include <sanguis/server/entities/enemies/factory/maggot.hpp>
 #include <sanguis/server/entities/enemies/factory/skeleton.hpp>
@@ -28,7 +29,8 @@ sanguis::server::entities::enemies::create(
 	sanguis::creator::enemy_type const _enemy_type,
 	sanguis::server::world::difficulty const _difficulty,
 	sanguis::server::environment::load_context &_load_context,
-	sanguis::server::entities::spawn_owner const &_spawn
+	sanguis::server::entities::spawn_owner const &_spawn,
+	sanguis::server::entities::enemies::special_chance const _special_chance
 )
 {
 	sanguis::server::entities::enemies::factory::parameters const parameters(
@@ -47,7 +49,8 @@ sanguis::server::entities::enemies::create(
 			)
 		),
 		_load_context,
-		_spawn
+		_spawn,
+		_special_chance
 	);
 
 	switch(

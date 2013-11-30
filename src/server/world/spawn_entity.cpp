@@ -7,6 +7,7 @@
 #include <sanguis/server/entities/spawn_owner.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/create.hpp>
+#include <sanguis/server/entities/enemies/special_chance.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/make_spawner.hpp>
@@ -37,6 +38,9 @@ sanguis::server::world::spawn_entity(
 				_load_context,
 				sanguis::server::entities::spawn_owner(
 					sanguis::server::entities::auto_weak_link()
+				),
+				sanguis::server::entities::enemies::special_chance(
+					0.05f
 				)
 			);
 	case sanguis::creator::spawn_type::spawner:
