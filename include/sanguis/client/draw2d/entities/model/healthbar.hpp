@@ -4,6 +4,7 @@
 #include <sanguis/client/health.hpp>
 #include <sanguis/client/max_health.hpp>
 #include <sanguis/client/draw2d/entities/model/healthbar_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/health_pair_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/dim_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/point_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/colored/object_decl.hpp>
@@ -28,24 +29,22 @@ class healthbar
 		healthbar
 	);
 public:
-	explicit
 	healthbar(
-		sanguis::client::draw2d::sprite::colored::system &
+		sanguis::client::draw2d::sprite::colored::system &,
+		sanguis::client::draw2d::entities::model::health_pair
 	);
 
 	~healthbar();
 
 	void
-	update_health(
-		sanguis::client::health,
-		sanguis::client::max_health
+	health(
+		sanguis::client::health
 	);
 
-	sanguis::client::max_health const
-	max_health() const;
-
-	sanguis::client::health const
-	health() const;
+	void
+	max_health(
+		sanguis::client::max_health
+	);
 
 	void
 	attach_to(

@@ -4,6 +4,7 @@
 #include <sanguis/client/draw2d/player_center_callback.hpp>
 #include <sanguis/client/draw2d/entities/own_player.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
+#include <sanguis/client/draw2d/entities/model/health_pair.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/factory/own_player.hpp>
 #include <sanguis/load/auras/context_fwd.hpp>
@@ -17,7 +18,8 @@ sanguis::client::draw2d::factory::own_player(
 	sanguis::client::draw2d::player_center_callback const &_player_center_callback,
 	sanguis::client::draw2d::collide_callback const &_collide_callback,
 	sanguis::aura_type_vector const &_auras,
-	sanguis::buff_type_vector const &_buffs
+	sanguis::buff_type_vector const &_buffs,
+	sanguis::client::draw2d::entities::model::health_pair const _health_pair
 )
 {
 	return
@@ -30,7 +32,8 @@ sanguis::client::draw2d::factory::own_player(
 				_player_center_callback,
 				_collide_callback,
 				_auras,
-				_buffs
+				_buffs,
+				_health_pair
 			)
 		);
 }

@@ -12,9 +12,9 @@
 #include <sanguis/client/draw2d/entities/ifaces/with_weapon.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_time.hpp>
+#include <sanguis/client/draw2d/entities/model/expand_orders.hpp>
 #include <sanguis/client/draw2d/entities/model/healthbar.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
-#include <sanguis/client/draw2d/entities/model/needs_healthbar.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <sanguis/client/draw2d/entities/model/part.hpp>
@@ -25,7 +25,6 @@
 #include <sanguis/load/animation_type.hpp>
 #include <sanguis/load/model/collection.hpp>
 #include <sanguis/load/model/object.hpp>
-#include <fcppt/assert/pre.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/assert/unreachable_message.hpp>
 #include <fcppt/cast/size.hpp>
@@ -38,35 +37,6 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace
-{
-
-sanguis::client::draw2d::entities::order_vector const
-expand_orders(
-	sanguis::client::draw2d::entities::order_vector _orders,
-	sanguis::load::model::object::size_type const _size
-)
-{
-	FCPPT_ASSERT_PRE(
-		!_orders.empty()
-	);
-
-	FCPPT_ASSERT_PRE(
-		_orders.size()
-		<=
-		_size
-	);
-
-	_orders.resize(
-		_size,
-		_orders.back()
-	);
-
-	return _orders;
-}
-
-}
-
 sanguis::client::draw2d::entities::model::object::object(
 	sanguis::client::draw2d::entities::model::parameters const &_parameters
 )
@@ -74,7 +44,7 @@ sanguis::client::draw2d::entities::model::object::object(
 	sanguis::client::draw2d::entities::container(
 		_parameters.load_parameters().diff_clock(),
 		_parameters.load_parameters().normal_system(),
-		expand_orders(
+		sanguis::client::draw2d::entities::model::expand_orders(
 			_parameters.orders(),
 			_parameters.load_parameters().collection()[
 				_parameters.name().get()
@@ -96,21 +66,14 @@ sanguis::client::draw2d::entities::model::object::object(
 	weapon_status_(
 		sanguis::weapon_status::nothing
 	),
-	health_(
-		0.f
-	),
-	max_health_(
-		0.f
-	),
 	healthbar_(
-		_parameters.needs_healthbar()
-		==
-		sanguis::client::draw2d::entities::model::needs_healthbar::yes
+		_parameters.health_pair()
 		?
 			fcppt::make_unique_ptr<
 				sanguis::client::draw2d::entities::model::healthbar
 			>(
-				_parameters.load_parameters().colored_system()
+				_parameters.load_parameters().colored_system(),
+				*_parameters.health_pair()
 			)
 		:
 			std::unique_ptr<
@@ -165,20 +128,6 @@ sanguis::client::draw2d::entities::model::object::object(
 
 sanguis::client::draw2d::entities::model::object::~object()
 {
-}
-
-sanguis::client::max_health const
-sanguis::client::draw2d::entities::model::object::max_health() const
-{
-	return
-		max_health_;
-}
-
-sanguis::client::health const
-sanguis::client::draw2d::entities::model::object::health() const
-{
-	return
-		health_;
 }
 
 void
@@ -257,8 +206,10 @@ sanguis::client::draw2d::entities::model::object::is_decayed() const
 {
 	return
 		this->animations_ended()
-		&& decay_time_
-		&& decay_time_->ended();
+		&&
+		decay_time_
+		&&
+		decay_time_->ended();
 }
 
 void
@@ -339,23 +290,17 @@ sanguis::client::draw2d::entities::model::object::walking() const
 		);
 }
 
-bool
-sanguis::client::draw2d::entities::model::object::has_health() const
-{
-	return
-		this->max_health().get()
-		>
-		0;
-}
-
 void
 sanguis::client::draw2d::entities::model::object::health(
 	sanguis::client::health const _health
 )
 {
-	health_ = _health;
-
-	this->update_healthbar();
+	if(
+		healthbar_
+	)
+		healthbar_->health(
+			_health
+		);
 }
 
 void
@@ -363,9 +308,12 @@ sanguis::client::draw2d::entities::model::object::max_health(
 	sanguis::client::max_health const _max_health
 )
 {
-	max_health_ = _max_health;
-
-	this->update_healthbar();
+	if(
+		healthbar_
+	)
+		healthbar_->max_health(
+			_max_health
+		);
 }
 
 void
@@ -490,20 +438,6 @@ sanguis::client::draw2d::entities::model::object::animation() const
 					:
 						sanguis::load::animation_type::none
 					;
-}
-
-void
-sanguis::client::draw2d::entities::model::object::update_healthbar()
-{
-	if(
-		!healthbar_
-	)
-		return;
-
-	healthbar_->update_health(
-		this->health(),
-		this->max_health()
-	);
 }
 
 bool

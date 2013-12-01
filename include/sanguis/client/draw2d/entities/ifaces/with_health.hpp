@@ -39,14 +39,6 @@ public:
 	max_health(
 		sanguis::client::max_health
 	) = 0;
-
-	virtual
-	sanguis::client::health const
-	health() const = 0;
-
-	virtual
-	sanguis::client::max_health const
-	max_health() const = 0;
 };
 
 }

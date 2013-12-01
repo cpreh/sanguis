@@ -116,16 +116,19 @@ set(
 	include/sanguis/client/draw2d/entities/model/decay_option_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/decay_time.hpp
 	include/sanguis/client/draw2d/entities/model/decay_time_fwd.hpp
+	include/sanguis/client/draw2d/entities/model/expand_orders.hpp
+	include/sanguis/client/draw2d/entities/model/health_pair.hpp
+	include/sanguis/client/draw2d/entities/model/health_pair_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/healthbar.hpp
 	include/sanguis/client/draw2d/entities/model/healthbar_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/load_parameters.hpp
 	include/sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/loop_method.hpp
 	include/sanguis/client/draw2d/entities/model/name.hpp
-	include/sanguis/client/draw2d/entities/model/needs_healthbar.hpp
-	include/sanguis/client/draw2d/entities/model/needs_healthbar_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/object.hpp
 	include/sanguis/client/draw2d/entities/model/object_fwd.hpp
+	include/sanguis/client/draw2d/entities/model/optional_health_pair.hpp
+	include/sanguis/client/draw2d/entities/model/optional_health_pair_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/orientation.hpp
 	include/sanguis/client/draw2d/entities/model/parameters.hpp
 	include/sanguis/client/draw2d/entities/model/parameters_fwd.hpp
@@ -179,6 +182,7 @@ set(
 	include/sanguis/client/draw2d/message/dispatcher_fwd.hpp
 	include/sanguis/client/draw2d/message/environment.hpp
 	include/sanguis/client/draw2d/message/environment_fwd.hpp
+	include/sanguis/client/draw2d/message/health_pair.hpp
 	include/sanguis/client/draw2d/optional_player_center.hpp
 	include/sanguis/client/draw2d/optional_player_center_fwd.hpp
 	include/sanguis/client/draw2d/optional_speed.hpp
@@ -1427,6 +1431,8 @@ set(
 	src/client/draw2d/entities/ifaces/with_weapon.cpp
 	src/client/draw2d/entities/model/clamp_orientation.cpp
 	src/client/draw2d/entities/model/decay_time.cpp
+	src/client/draw2d/entities/model/expand_orders.cpp
+	src/client/draw2d/entities/model/health_pair.cpp
 	src/client/draw2d/entities/model/healthbar.cpp
 	src/client/draw2d/entities/model/load_parameters.cpp
 	src/client/draw2d/entities/model/loop_method.cpp

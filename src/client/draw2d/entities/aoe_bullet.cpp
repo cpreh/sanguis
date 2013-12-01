@@ -7,8 +7,8 @@
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
 #include <sanguis/client/draw2d/entities/model/name.hpp>
-#include <sanguis/client/draw2d/entities/model/needs_healthbar.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
+#include <sanguis/client/draw2d/entities/model/optional_health_pair.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
@@ -27,7 +27,7 @@ sanguis::client::draw2d::entities::aoe_bullet::aoe_bullet(
 			sanguis::client::draw2d::entities::order_vector{
 				sanguis::client::draw2d::z_ordering::bullet
 			},
-			sanguis::client::draw2d::entities::model::needs_healthbar::no,
+			sanguis::client::draw2d::entities::model::optional_health_pair(),
 			sanguis::client::draw2d::entities::model::decay_option::immediate
 		)
 	),

@@ -5,6 +5,7 @@
 #include <sanguis/buff_type_vector.hpp>
 #include <sanguis/friend_type_fwd.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
+#include <sanguis/client/draw2d/entities/model/health_pair_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/load/auras/context_fwd.hpp>
 
@@ -24,7 +25,8 @@ friend_(
 	sanguis::load::auras::context &,
 	sanguis::friend_type,
 	sanguis::aura_type_vector const &,
-	sanguis::buff_type_vector const &
+	sanguis::buff_type_vector const &,
+	sanguis::client::draw2d::entities::model::health_pair
 );
 
 }

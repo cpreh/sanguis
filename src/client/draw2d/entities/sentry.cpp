@@ -5,6 +5,7 @@
 #include <sanguis/client/draw2d/entities/friend.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/sentry.hpp>
+#include <sanguis/client/draw2d/entities/model/health_pair.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/draw2d/sprite/index.hpp>
@@ -25,7 +26,8 @@ sanguis::client::draw2d::entities::sentry::sentry(
 	sanguis::client::draw2d::entities::model::load_parameters const &_load_parameters,
 	sanguis::load::auras::context &_aura_resources,
 	sanguis::aura_type_vector const &_auras,
-	sanguis::buff_type_vector const &_buffs
+	sanguis::buff_type_vector const &_buffs,
+	sanguis::client::draw2d::entities::model::health_pair const _health_pair
 )
 :
 	sanguis::client::draw2d::entities::friend_(
@@ -37,7 +39,8 @@ sanguis::client::draw2d::entities::sentry::sentry(
 		sanguis::client::draw2d::entities::order_vector{
 			sanguis::client::draw2d::z_ordering::player_lower,
 			sanguis::client::draw2d::z_ordering::player_upper
-		}
+		},
+		_health_pair
 	)
 {
 }

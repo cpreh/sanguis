@@ -57,15 +57,6 @@ public:
 	);
 
 	~object();
-
-	// with_health overrides
-	sanguis::client::max_health const
-	max_health() const
-	override;
-
-	sanguis::client::health const
-	health() const
-	override;
 protected:
 	virtual
 	void
@@ -124,9 +115,6 @@ protected:
 
 	bool
 	walking() const;
-
-	bool
-	has_health() const;
 private:
 	// with_health overrides
 	void
@@ -171,19 +159,12 @@ private:
 		sanguis::load::animation_type
 	) const;
 
-	void
-	update_healthbar();
-
 	bool
 	animations_ended() const;
 
 	sanguis::diff_clock const &diff_clock_;
 
 	sanguis::weapon_status weapon_status_;
-
-	sanguis::client::health health_;
-
-	sanguis::client::max_health max_health_;
 
 	fcppt::scoped_ptr<
 		sanguis::client::draw2d::entities::model::healthbar

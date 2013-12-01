@@ -4,16 +4,12 @@
 #include <sanguis/entity_id.hpp>
 #include <sanguis/client/draw2d/message/dispatcher.hpp>
 #include <sanguis/messages/change_weapon.hpp>
-#include <sanguis/messages/health.hpp>
-#include <sanguis/messages/max_health.hpp>
 #include <sanguis/messages/move.hpp>
 #include <sanguis/messages/rotate.hpp>
 #include <sanguis/messages/speed.hpp>
 #include <sanguis/messages/weapon_status.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/center.hpp>
-#include <sanguis/messages/roles/max_health.hpp>
-#include <sanguis/messages/roles/health.hpp>
 #include <sanguis/messages/roles/primary_weapon.hpp>
 #include <sanguis/messages/roles/speed.hpp>
 #include <sanguis/messages/roles/weapon_status.hpp>
@@ -53,14 +49,6 @@ class configure_entity
 		boost::mpl::pair<
 			sanguis::messages::roles::angle,
 			sanguis::messages::rotate
-		>,
-		boost::mpl::pair<
-			sanguis::messages::roles::max_health,
-			sanguis::messages::max_health
-		>,
-		boost::mpl::pair<
-			sanguis::messages::roles::health,
-			sanguis::messages::health
 		>,
 		boost::mpl::pair<
 			sanguis::messages::roles::speed,

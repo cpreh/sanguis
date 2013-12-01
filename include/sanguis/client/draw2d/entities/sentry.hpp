@@ -4,6 +4,7 @@
 #include <sanguis/aura_type_vector.hpp>
 #include <sanguis/buff_type_vector.hpp>
 #include <sanguis/client/draw2d/entities/friend.hpp>
+#include <sanguis/client/draw2d/entities/model/health_pair_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/load/auras/context_fwd.hpp>
@@ -31,7 +32,8 @@ public:
 		sanguis::client::draw2d::entities::model::load_parameters const &,
 		sanguis::load::auras::context &,
 		sanguis::aura_type_vector const &,
-		sanguis::buff_type_vector const &
+		sanguis::buff_type_vector const &,
+		sanguis::client::draw2d::entities::model::health_pair
 	);
 
 	~sentry();

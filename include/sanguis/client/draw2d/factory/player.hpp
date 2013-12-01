@@ -4,6 +4,7 @@
 #include <sanguis/aura_type_vector.hpp>
 #include <sanguis/buff_type_vector.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
+#include <sanguis/client/draw2d/entities/model/health_pair_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/load/auras/context_fwd.hpp>
 
@@ -22,7 +23,8 @@ player(
 	sanguis::load::auras::context &,
 	sanguis::client::draw2d::entities::model::load_parameters const &,
 	sanguis::aura_type_vector const &,
-	sanguis::buff_type_vector const &
+	sanguis::buff_type_vector const &,
+	sanguis::client::draw2d::entities::model::health_pair
 );
 
 }

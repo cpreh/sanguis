@@ -10,9 +10,10 @@
 #include <sanguis/client/draw2d/entities/with_buffs_auras_model.hpp>
 #include <sanguis/client/draw2d/entities/with_buffs_auras_model_parameters.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
+#include <sanguis/client/draw2d/entities/model/health_pair.hpp>
 #include <sanguis/client/draw2d/entities/model/name.hpp>
-#include <sanguis/client/draw2d/entities/model/needs_healthbar.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
+#include <sanguis/client/draw2d/entities/model/optional_health_pair.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/index.hpp>
@@ -47,7 +48,8 @@ sanguis::client::draw2d::entities::player::player(
 	sanguis::load::auras::context &_auras_load_context,
 	sanguis::client::draw2d::entities::model::load_parameters const &_load_parameters,
 	sanguis::aura_type_vector const &_auras,
-	sanguis::buff_type_vector const &_buffs
+	sanguis::buff_type_vector const &_buffs,
+	sanguis::client::draw2d::entities::model::health_pair const _health_pair
 )
 :
 	sanguis::client::draw2d::entities::with_buffs_auras_model(
@@ -70,7 +72,9 @@ sanguis::client::draw2d::entities::player::player(
 						sanguis::client::draw2d::z_ordering::player_lower,
 						sanguis::client::draw2d::z_ordering::player_upper
 					},
-					sanguis::client::draw2d::entities::model::needs_healthbar::yes,
+					sanguis::client::draw2d::entities::model::optional_health_pair(
+						_health_pair
+					),
 					sanguis::client::draw2d::entities::model::decay_option::delayed
 				)
 			)

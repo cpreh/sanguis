@@ -4,6 +4,7 @@
 #include <sanguis/client/max_health.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/model/healthbar.hpp>
+#include <sanguis/client/draw2d/entities/model/health_pair.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/client/draw2d/sprite/system_decl.hpp>
@@ -21,6 +22,7 @@
 #include <sge/sprite/intrusive/connection.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/assert/pre.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -41,7 +43,8 @@ sanguis::client::draw2d::sprite::unit const
 }
 
 sanguis::client::draw2d::entities::model::healthbar::healthbar(
-	sanguis::client::draw2d::sprite::colored::system &_sys
+	sanguis::client::draw2d::sprite::colored::system &_sys,
+	sanguis::client::draw2d::entities::model::health_pair const _health_pair
 )
 :
 	background_(
@@ -68,10 +71,10 @@ sanguis::client::draw2d::entities::model::healthbar::healthbar(
 		)
 	),
 	health_(
-		0.f
+		_health_pair.health()
 	),
 	max_health_(
-		0.f
+		_health_pair.max_health()
 	)
 {
 	this->recalc_health();
@@ -82,28 +85,23 @@ sanguis::client::draw2d::entities::model::healthbar::~healthbar()
 }
 
 void
-sanguis::client::draw2d::entities::model::healthbar::update_health(
-	sanguis::client::health const _health,
-	sanguis::client::max_health const _max_health
+sanguis::client::draw2d::entities::model::healthbar::health(
+	sanguis::client::health const _health
 )
 {
 	health_ = _health;
 
-	max_health_ = _max_health;
-
 	this->recalc_health();
 }
 
-sanguis::client::health const
-sanguis::client::draw2d::entities::model::healthbar::health() const
+void
+sanguis::client::draw2d::entities::model::healthbar::max_health(
+	sanguis::client::max_health const _max_health
+)
 {
-	return health_;
-}
+	max_health_ = _max_health;
 
-sanguis::client::max_health const
-sanguis::client::draw2d::entities::model::healthbar::max_health() const
-{
-	return max_health_;
+	this->recalc_health();
 }
 
 void
@@ -199,31 +197,15 @@ sanguis::client::draw2d::entities::model::healthbar::remaining_health() const
 void
 sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 {
-	if(
-		health_.get() > max_health_.get()
-	)
-		return;
-
-	if(
+	FCPPT_ASSERT_PRE(
 		max_health_.get()
-		<
+		>
 		fcppt::literal<
 			sanguis::client::health_value
 		>(
-			0.01f
+			0
 		)
-	)
-	{
-		foreground_.size(
-			sanguis::client::draw2d::sprite::dim::null()
-		);
-
-		background_.size(
-			sanguis::client::draw2d::sprite::dim::null()
-		);
-
-		return;
-	}
+	);
 
 	foreground_.w(
 		fcppt::cast::float_to_int<

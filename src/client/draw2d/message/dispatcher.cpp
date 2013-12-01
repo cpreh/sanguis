@@ -36,6 +36,7 @@
 #include <sanguis/client/draw2d/message/configure_entity.hpp>
 #include <sanguis/client/draw2d/message/dispatcher.hpp>
 #include <sanguis/client/draw2d/message/environment.hpp>
+#include <sanguis/client/draw2d/message/health_pair.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/client/draw2d/translate/scalar_to_client.hpp>
@@ -212,6 +213,9 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 						sanguis::messages::roles::name
 					>()
 				)
+			),
+			sanguis::client::draw2d::message::health_pair(
+				_message
 			)
 		),
 		_message
@@ -235,7 +239,10 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 			>(),
 			_message.get<
 				sanguis::messages::adapted_types::buff_type_vector
-			>()
+			>(),
+			sanguis::client::draw2d::message::health_pair(
+				_message
+			)
 		),
 		_message
 	);
@@ -257,7 +264,10 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 			>(),
 			_message.get<
 				sanguis::messages::adapted_types::buff_type_vector
-			>()
+			>(),
+			sanguis::client::draw2d::message::health_pair(
+				_message
+			)
 		),
 		_message
 	);
@@ -316,7 +326,10 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 			>(),
 			_message.get<
 				sanguis::messages::adapted_types::buff_type_vector
-			>()
+			>(),
+			sanguis::client::draw2d::message::health_pair(
+				_message
+			)
 		),
 		_message
 	);
