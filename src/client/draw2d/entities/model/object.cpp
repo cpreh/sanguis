@@ -3,6 +3,7 @@
 #include <sanguis/optional_primary_weapon_type.hpp>
 #include <sanguis/weapon_status.hpp>
 #include <sanguis/client/health.hpp>
+#include <sanguis/client/health_valid.hpp>
 #include <sanguis/client/max_health.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/speed_is_null.hpp>
@@ -68,6 +69,10 @@ sanguis::client::draw2d::entities::model::object::object(
 	),
 	healthbar_(
 		_parameters.health_pair()
+		&&
+		sanguis::client::health_valid(
+			_parameters.health_pair()->health()
+		)
 		?
 			fcppt::make_unique_ptr<
 				sanguis::client::draw2d::entities::model::healthbar
@@ -295,6 +300,13 @@ sanguis::client::draw2d::entities::model::object::health(
 	sanguis::client::health const _health
 )
 {
+	if(
+		!sanguis::client::health_valid(
+			_health
+		)
+	)
+		healthbar_.reset();
+
 	if(
 		healthbar_
 	)

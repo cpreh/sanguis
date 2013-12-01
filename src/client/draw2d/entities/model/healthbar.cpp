@@ -1,5 +1,6 @@
 #include <sanguis/exception.hpp>
 #include <sanguis/client/health.hpp>
+#include <sanguis/client/health_valid.hpp>
 #include <sanguis/client/health_value.hpp>
 #include <sanguis/client/max_health.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
@@ -204,6 +205,12 @@ sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 			sanguis::client::health_value
 		>(
 			0
+		)
+	);
+
+	FCPPT_ASSERT_PRE(
+		sanguis::client::health_valid(
+			health_
 		)
 	);
 

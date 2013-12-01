@@ -381,6 +381,7 @@ set(
 	include/sanguis/client/gui/perk/node_variant.hpp
 	include/sanguis/client/gui/perk/node_variant_fwd.hpp
 	include/sanguis/client/health.hpp
+	include/sanguis/client/health_valid.hpp
 	include/sanguis/client/health_value.hpp
 	include/sanguis/client/level.hpp
 	include/sanguis/client/log.hpp
@@ -1501,6 +1502,7 @@ set(
 	src/client/gui/perk/item_color.cpp
 	src/client/gui/perk/item_user_data.cpp
 	src/client/gui/perk/node.cpp
+	src/client/health_valid.cpp
 	src/client/log.cpp
 	src/client/log_location.cpp
 	src/client/machine.cpp
