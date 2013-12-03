@@ -9,7 +9,6 @@
 #include <fcppt/text.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>
 #include <fcppt/random/distribution/parameters/make_uniform_enum.hpp>
-#include <fcppt/random/distribution/transform/enum.hpp>
 
 
 sanguis::server::entities::enemies::attribute

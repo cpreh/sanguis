@@ -1,7 +1,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/primary_weapon_type.hpp>
-#include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/random_generator.hpp>
 #include <sanguis/string_vector.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/creator/enemy_type.hpp>
@@ -24,6 +24,8 @@
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <fcppt/random/distribution/make_basic.hpp>
+#include <fcppt/random/distribution/parameters/make_uniform_enum.hpp>
 
 
 sanguis::server::weapons::monster_spawner::monster_spawner(
@@ -83,7 +85,13 @@ sanguis::server::weapons::monster_spawner::do_attack(
 			sanguis::server::entities::enemies::create(
 				this->diff_clock(),
 				this->random_generator(),
-				sanguis::creator::enemy_type::ghost,
+				fcppt::random::distribution::make_basic(
+					fcppt::random::distribution::parameters::make_uniform_enum<
+						sanguis::creator::enemy_type
+					>()
+				)(
+					this->random_generator()
+				),
 				_attack.environment().difficulty(),
 				_attack.environment().load_context(),
 				sanguis::server::entities::spawn_owner(
