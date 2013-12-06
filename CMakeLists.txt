@@ -124,6 +124,7 @@ set(
 	log
 	parse
 	renderer
+	rucksack
 	sprite
 	systems
 	texture
