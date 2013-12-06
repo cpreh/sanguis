@@ -2,7 +2,7 @@
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/aoe_damage.hpp>
 #include <sanguis/server/auras/container.hpp>
-#include <sanguis/server/damage/array.hpp>
+#include <sanguis/server/damage/array_fwd.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/center_ghost.hpp>
 #include <sanguis/server/entities/with_auras.hpp>

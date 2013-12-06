@@ -6,7 +6,7 @@
 #include <sanguis/server/health_fwd.hpp>
 #include <sanguis/server/regeneration_fwd.hpp>
 #include <sanguis/server/damage/armor.hpp>
-#include <sanguis/server/damage/array.hpp>
+#include <sanguis/server/damage/array_fwd.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_health_fwd.hpp>

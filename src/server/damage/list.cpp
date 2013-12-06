@@ -3,20 +3,19 @@
 #include <sanguis/server/damage/meta.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <fcppt/algorithm/array_init.hpp>
-#include <fcppt/cast/enum_to_int.hpp>
 
 
 sanguis::server::damage::list::list(
 	sanguis::server::damage::unit const _value
 )
 :
-	array_(
+	array_{
 		fcppt::algorithm::array_init<
-			sanguis::server::damage::array
+			sanguis::server::damage::array::internal
 		>(
 			_value
 		)
-	)
+	}
 {
 }
 
@@ -24,22 +23,18 @@ sanguis::server::damage::list::list(
 	sanguis::server::damage::meta const &_meta
 )
 :
-	array_(
+	array_{
 		fcppt::algorithm::array_init<
-			sanguis::server::damage::array
+			sanguis::server::damage::array::internal
 		>(
 			sanguis::server::damage::unit(
 				0.f
 			)
 		)
-	)
+	}
 {
 	array_[
-		fcppt::cast::enum_to_int<
-			sanguis::server::damage::array::size_type
-		>(
-			_meta.type()
-		)
+		_meta.type()
 	] =
 		_meta.value();
 }
@@ -50,11 +45,7 @@ sanguis::server::damage::list::operator()(
 )
 {
 	array_[
-		fcppt::cast::enum_to_int<
-			sanguis::server::damage::array::size_type
-		>(
-			_meta.type()
-		)
+		_meta.type()
 	] =
 		_meta.value();
 
