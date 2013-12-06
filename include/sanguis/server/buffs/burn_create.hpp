@@ -5,7 +5,7 @@
 #include <sanguis/server/buffs/burn.hpp>
 #include <sanguis/server/buffs/burn_interval.hpp>
 #include <sanguis/server/buffs/unique_ptr.hpp>
-#include <sanguis/server/damage/array.hpp>
+#include <sanguis/server/damage/array_fwd.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_health.hpp>

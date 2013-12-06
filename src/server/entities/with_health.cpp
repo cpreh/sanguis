@@ -6,6 +6,7 @@
 #include <sanguis/server/damage/armor.hpp>
 #include <sanguis/server/damage/array.hpp>
 #include <sanguis/server/damage/unit.hpp>
+#include <sanguis/server/damage/type.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_health.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
@@ -17,6 +18,7 @@
 #include <sanguis/server/entities/property/subtract.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
+#include <fcppt/foreach_enumerator.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
@@ -30,12 +32,9 @@ sanguis::server::entities::with_health::damage(
 	sanguis::server::damage::array const &_amounts
 )
 {
-        for(
-		sanguis::server::damage::array::size_type index{
-			0u
-		};
-		index < _amounts.size();
-		++index
+	FCPPT_FOREACH_ENUMERATOR(
+		index,
+		sanguis::server::damage::type
 	)
 		sanguis::server::entities::property::subtract(
 			health_,

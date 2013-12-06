@@ -24,7 +24,6 @@
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/cast/enum_to_int.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -349,11 +348,7 @@ sanguis::server::entities::enemies::parameters::armor_element(
 	);
 
 	new_array[
-		fcppt::cast::enum_to_int<
-			sanguis::server::damage::armor::value_type::size_type
-		>(
-			_type
-		)
+		_type
 	] =
 		_unit;
 
