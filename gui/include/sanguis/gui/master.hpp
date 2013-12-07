@@ -4,6 +4,7 @@
 #include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/master_fwd.hpp>
+#include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/widget/base_fwd.hpp>
 #include <sge/input/cursor/button_event_fwd.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
@@ -13,6 +14,8 @@
 #include <sge/input/keyboard/key_event_fwd.hpp>
 #include <sge/input/keyboard/key_repeat_event_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
+#include <fcppt/noncopyable.hpp>
+#include <fcppt/signal/scoped_connection.hpp>
 
 
 namespace sanguis
