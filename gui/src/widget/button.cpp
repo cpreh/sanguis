@@ -23,7 +23,6 @@
 #include <sge/rucksack/scalar.hpp>
 #include <sge/rucksack/vector.hpp>
 #include <sge/rucksack/widget/base_fwd.hpp>
-#include <sge/rucksack/widget/optional_parent.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/signal/auto_connection.hpp>
@@ -31,7 +30,6 @@
 
 
 sanguis::gui::widget::button::button(
-	sanguis::gui::widget::base &_parent,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sge::font::string const &_text
@@ -97,11 +95,6 @@ sanguis::gui::widget::button::button(
 	),
 	click_()
 {
-	layout_.parent(
-		sge::rucksack::widget::optional_parent(
-			_parent.layout()
-		)
-	);
 }
 
 sanguis::gui::widget::button::~button()
@@ -117,6 +110,13 @@ sanguis::gui::widget::button::click(
 		click_.connect(
 			_callback
 		);
+}
+
+sge::rucksack::widget::base &
+sanguis::gui::widget::button::layout()
+{
+	return
+		layout_;
 }
 
 void
@@ -148,11 +148,4 @@ sanguis::gui::widget::button::on_click(
 		sanguis::gui::get_focus(
 			true
 		);
-}
-
-sge::rucksack::widget::base &
-sanguis::gui::widget::button::layout()
-{
-	return
-		layout_;
 }

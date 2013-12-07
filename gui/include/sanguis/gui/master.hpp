@@ -1,6 +1,7 @@
 #ifndef SANGUIS_GUI_MASTER_HPP_INCLUDED
 #define SANGUIS_GUI_MASTER_HPP_INCLUDED
 
+#include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/master_fwd.hpp>
 #include <sanguis/gui/widget/base_fwd.hpp>
@@ -25,6 +26,7 @@ class master
 		master
 	);
 public:
+	SANGUIS_GUI_SYMBOL
 	master(
 		sge::input::keyboard::device &,
 		sge::input::cursor::object &,
@@ -32,13 +34,16 @@ public:
 		sanguis::gui::widget::base &
 	);
 
+	SANGUIS_GUI_SYMBOL
 	~master();
 
+	SANGUIS_GUI_SYMBOL
 	void
 	draw(
 		sge::renderer::context::ffp &
 	);
 
+	SANGUIS_GUI_SYMBOL
 	void
 	update();
 private:

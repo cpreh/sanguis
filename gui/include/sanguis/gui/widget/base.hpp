@@ -1,6 +1,7 @@
 #ifndef SANGUIS_GUI_WIDGET_BASE_HPP_INCLUDED
 #define SANGUIS_GUI_WIDGET_BASE_HPP_INCLUDED
 
+#include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/get_focus_fwd.hpp>
 #include <sanguis/gui/widget/base_fwd.hpp>
 #include <sge/font/char_type.hpp>
@@ -26,6 +27,7 @@ class base
 protected:
 	base();
 public:
+	SANGUIS_GUI_SYMBOL
 	virtual
 	~base() = 0;
 

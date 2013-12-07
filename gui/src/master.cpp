@@ -79,6 +79,22 @@ sanguis::gui::master::~master()
 }
 
 void
+sanguis::gui::master::draw(
+	sge::renderer::context::ffp &_context
+)
+{
+	widget_.on_draw(
+		_context
+	);
+}
+
+void
+sanguis::gui::master::update()
+{
+	widget_.on_update();
+}
+
+void
 sanguis::gui::master::key_event(
 	sge::input::keyboard::key_event const &_event
 )

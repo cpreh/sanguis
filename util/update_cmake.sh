@@ -18,6 +18,16 @@ update_cmake \
 
 popd > /dev/null
 
+pushd gui > /dev/null
+
+update_cmake \
+	CMakeLists.txt \
+	SANGUIS_GUI_FILES \
+	include \
+	src
+
+popd > /dev/null
+
 pushd collision > /dev/null
 
 update_cmake \

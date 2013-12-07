@@ -7,6 +7,7 @@
 #include <sge/rucksack/rect.hpp>
 #include <sge/rucksack/vector.hpp>
 #include <sge/rucksack/widget/base.hpp>
+#include <sge/rucksack/widget/optional_parent.hpp>
 #include <fcppt/math/box/contains_point.hpp>
 
 
@@ -27,6 +28,20 @@ sanguis::gui::widget::container::container(
 		_layout
 	)
 {
+	this->foreach_widget(
+		[
+			this
+		](
+			sanguis::gui::widget::base &_widget
+		)
+		{
+			_widget.layout().parent(
+				sge::rucksack::widget::optional_parent(
+					this->layout_
+				)
+			);
+		}
+	);
 }
 
 sanguis::gui::widget::container::~container()
@@ -43,6 +58,13 @@ sanguis::gui::widget::container::~container()
 			);
 		}
 	);
+}
+
+sge::rucksack::widget::base &
+sanguis::gui::widget::container::layout()
+{
+	return
+		layout_;
 }
 
 void
@@ -116,13 +138,6 @@ sanguis::gui::widget::container::on_click(
 		sanguis::gui::get_focus(
 			false
 		);
-}
-
-sge::rucksack::widget::base &
-sanguis::gui::widget::container::layout()
-{
-	return
-		layout_;
 }
 
 template<

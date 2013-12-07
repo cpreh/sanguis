@@ -3,6 +3,7 @@
 
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/get_focus_fwd.hpp>
+#include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/container_fwd.hpp>
 #include <sanguis/gui/widget/reference_vector.hpp>
@@ -27,13 +28,20 @@ class container
 		container
 	);
 public:
+	SANGUIS_GUI_SYMBOL
 	container(
 		sanguis::gui::context &,
 		sanguis::gui::widget::reference_vector const &,
 		sge::rucksack::widget::base &
 	);
 
+	SANGUIS_GUI_SYMBOL
 	~container();
+
+	SANGUIS_GUI_SYMBOL
+	sge::rucksack::widget::base &
+	layout()
+	override;
 private:
 	void
 	on_update()
@@ -49,10 +57,6 @@ private:
 	on_click(
 		sge::rucksack::vector
 	)
-	override;
-
-	sge::rucksack::widget::base &
-	layout()
 	override;
 
 	template<

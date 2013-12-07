@@ -1,6 +1,7 @@
 #ifndef SANGUIS_GUI_WIDGET_EDIT_HPP_INCLUDED
 #define SANGUIS_GUI_WIDGET_EDIT_HPP_INCLUDED
 
+#include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/text_callback.hpp>
 #include <sanguis/gui/text_function.hpp>
 #include <sanguis/gui/widget/base.hpp>
@@ -33,22 +34,30 @@ class edit
 		edit
 	);
 public:
+	SANGUIS_GUI_SYMBOL
 	edit(
-		sanguis::gui::widget::base &,
 		sge::renderer::device::ffp &,
 		sge::font::object &,
 		sge::font::string const &
 	);
 
+	SANGUIS_GUI_SYMBOL
 	~edit();
 
+	SANGUIS_GUI_SYMBOL
 	sge::font::string const &
 	text() const;
 
+	SANGUIS_GUI_SYMBOL
 	fcppt::signal::auto_connection
 	text_change(
 		sanguis::gui::text_callback const &
 	);
+
+	SANGUIS_GUI_SYMBOL
+	sge::rucksack::widget::base &
+	layout()
+	override;
 private:
 	void
 	on_update()
@@ -70,10 +79,6 @@ private:
 	on_char(
 		sge::font::char_type
 	);
-
-	sge::rucksack::widget::base &
-	layout()
-	override;
 
 	void
 	text_change();

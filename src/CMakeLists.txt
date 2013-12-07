@@ -458,30 +458,6 @@ set(
 	include/sanguis/friend_type.hpp
 	include/sanguis/friend_type_fwd.hpp
 	include/sanguis/from_console_arg_list.hpp
-	include/sanguis/gui/click_callback.hpp
-	include/sanguis/gui/click_function.hpp
-	include/sanguis/gui/context.hpp
-	include/sanguis/gui/context_fwd.hpp
-	include/sanguis/gui/get_focus.hpp
-	include/sanguis/gui/get_focus_fwd.hpp
-	include/sanguis/gui/master.hpp
-	include/sanguis/gui/master_fwd.hpp
-	include/sanguis/gui/text_callback.hpp
-	include/sanguis/gui/text_function.hpp
-	include/sanguis/gui/widget/base.hpp
-	include/sanguis/gui/widget/base_fwd.hpp
-	include/sanguis/gui/widget/base_unique_ptr.hpp
-	include/sanguis/gui/widget/button.hpp
-	include/sanguis/gui/widget/button_fwd.hpp
-	include/sanguis/gui/widget/container.hpp
-	include/sanguis/gui/widget/container_fwd.hpp
-	include/sanguis/gui/widget/edit.hpp
-	include/sanguis/gui/widget/edit_fwd.hpp
-	include/sanguis/gui/widget/optional_ref.hpp
-	include/sanguis/gui/widget/optional_ref_fwd.hpp
-	include/sanguis/gui/widget/reference.hpp
-	include/sanguis/gui/widget/reference_fwd.hpp
-	include/sanguis/gui/widget/reference_vector.hpp
 	include/sanguis/io_service.hpp
 	include/sanguis/io_service_callback.hpp
 	include/sanguis/io_service_fwd.hpp
@@ -973,6 +949,7 @@ set(
 	include/sanguis/server/damage/all.hpp
 	include/sanguis/server/damage/armor.hpp
 	include/sanguis/server/damage/array.hpp
+	include/sanguis/server/damage/array_fwd.hpp
 	include/sanguis/server/damage/fire.hpp
 	include/sanguis/server/damage/full.hpp
 	include/sanguis/server/damage/ice.hpp
@@ -1556,12 +1533,6 @@ set(
 	src/duration_second.cpp
 	src/exception.cpp
 	src/from_console_arg_list.cpp
-	src/gui/context.cpp
-	src/gui/master.cpp
-	src/gui/widget/base.cpp
-	src/gui/widget/button.cpp
-	src/gui/widget/container.cpp
-	src/gui/widget/edit.cpp
 	src/io_service.cpp
 	src/io_service_impl.cpp
 	src/load/animation_name.cpp
@@ -1991,7 +1962,6 @@ target_link_libraries(
 	${sgeparse_TARGET}
 	${sgesprite_TARGET}
 	${sgerenderer_TARGET}
-	${sgerucksack_TARGET}
 	${sgesystems_TARGET}
 	${sgetexture_TARGET}
 	${sgetimer_TARGET}

@@ -4,6 +4,7 @@
 #include <sanguis/gui/click_callback.hpp>
 #include <sanguis/gui/click_function.hpp>
 #include <sanguis/gui/get_focus_fwd.hpp>
+#include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/button_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
@@ -34,19 +35,26 @@ class button
 		button
 	);
 public:
+	SANGUIS_GUI_SYMBOL
 	button(
-		sanguis::gui::widget::base &,
 		sge::renderer::device::ffp &,
 		sge::font::object &,
 		sge::font::string const &
 	);
 
+	SANGUIS_GUI_SYMBOL
 	~button();
 
+	SANGUIS_GUI_SYMBOL
 	fcppt::signal::auto_connection
 	click(
 		sanguis::gui::click_callback const &
 	);
+
+	SANGUIS_GUI_SYMBOL
+	sge::rucksack::widget::base &
+	layout()
+	override;
 private:
 	void
 	on_draw(
@@ -58,10 +66,6 @@ private:
 	on_click(
 		sge::rucksack::vector
 	)
-	override;
-
-	sge::rucksack::widget::base &
-	layout()
 	override;
 
 	sge::font::draw::static_text static_text_;

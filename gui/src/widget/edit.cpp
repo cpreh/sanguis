@@ -24,7 +24,6 @@
 #include <sge/rucksack/scalar.hpp>
 #include <sge/rucksack/widget/base_fwd.hpp>
 #include <sge/rucksack/widget/dummy.hpp>
-#include <sge/rucksack/widget/optional_parent.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/signal/auto_connection.hpp>
@@ -32,7 +31,6 @@
 
 
 sanguis::gui::widget::edit::edit(
-	sanguis::gui::widget::base &_parent,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sge::font::string const &_text
@@ -95,11 +93,6 @@ sanguis::gui::widget::edit::edit(
 	),
 	text_change_()
 {
-	layout_.parent(
-		sge::rucksack::widget::optional_parent(
-			_parent.layout()
-		)
-	);
 }
 
 sanguis::gui::widget::edit::~edit()
@@ -122,6 +115,14 @@ sanguis::gui::widget::edit::text_change(
 		text_change_.connect(
 			_callback
 		);
+}
+
+void
+sanguis::gui::widget::edit::text_change()
+{
+	text_change_(
+		this->text()
+	);
 }
 
 void
@@ -232,12 +233,4 @@ sanguis::gui::widget::edit::layout()
 {
 	return
 		layout_;
-}
-
-void
-sanguis::gui::widget::edit::text_change()
-{
-	text_change_(
-		this->text()
-	);
 }
