@@ -1,6 +1,7 @@
 #ifndef SANGUIS_GUI_WIDGET_EDIT_HPP_INCLUDED
 #define SANGUIS_GUI_WIDGET_EDIT_HPP_INCLUDED
 
+#include <sanguis/gui/get_focus_fwd.hpp>
 #include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/text_callback.hpp>
 #include <sanguis/gui/text_function.hpp>
@@ -69,6 +70,12 @@ private:
 	)
 	override;
 
+	sanguis::gui::get_focus const
+	on_click(
+		sge::rucksack::vector
+	)
+	override;
+
 	void
 	on_key(
 		sge::input::keyboard::key_code
@@ -78,7 +85,8 @@ private:
 	void
 	on_char(
 		sge::font::char_type
-	);
+	)
+	override;
 
 	void
 	text_change();

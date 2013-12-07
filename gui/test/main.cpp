@@ -157,7 +157,7 @@ try
 	sanguis::gui::widget::edit edit(
 		sys.renderer_ffp(),
 		*font,
-		SGE_FONT_LIT("")
+		SGE_FONT_LIT("Test")
 	);
 
 	sanguis::gui::context context;

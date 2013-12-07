@@ -1,3 +1,4 @@
+#include <sanguis/gui/get_focus.hpp>
 #include <sanguis/gui/text_callback.hpp>
 #include <sanguis/gui/text_function.hpp>
 #include <sanguis/gui/widget/base.hpp>
@@ -28,6 +29,9 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/object_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <locale>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::gui::widget::edit::edit(
@@ -155,6 +159,17 @@ sanguis::gui::widget::edit::on_draw(
 	);
 }
 
+sanguis::gui::get_focus const
+sanguis::gui::widget::edit::on_click(
+	sge::rucksack::vector
+)
+{
+	return
+		sanguis::gui::get_focus(
+			true
+		);
+}
+
 void
 sanguis::gui::widget::edit::on_key(
 	sge::input::keyboard::key_code const _code
@@ -170,8 +185,6 @@ sanguis::gui::widget::edit::on_key(
 		)
 			--position_;
 
-		this->text_change();
-
 		break;
 	case sge::input::keyboard::key_code::right:
 		if(
@@ -179,32 +192,37 @@ sanguis::gui::widget::edit::on_key(
 		)
 			++position_;
 
-		this->text_change();
-
 		break;
 	case sge::input::keyboard::key_code::delete_:
 		if(
 			position_ != text_.size()
 		)
+		{
 			text_.erase(
 				position_,
 				1u
 			);
 
-		this->text_change();
+			this->text_change();
+		}
 
 		break;
 	case sge::input::keyboard::key_code::backspace:
 		if(
 			position_ - 1u
-			< text_.size()
+			<
+			text_.size()
 		)
+		{
 			text_.erase(
 				position_ - 1u,
 				1u
 			);
 
-		this->text_change();
+			--position_;
+
+			this->text_change();
+		}
 
 		break;
 	default:
@@ -217,6 +235,14 @@ sanguis::gui::widget::edit::on_char(
 	sge::font::char_type const _char
 )
 {
+	if(
+		!std::isprint(
+			_char,
+			std::locale()
+		)
+	)
+		return;
+
 	text_.insert(
 		position_,
 		1u,

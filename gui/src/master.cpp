@@ -12,6 +12,7 @@
 #include <sge/input/keyboard/key_repeat_event.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/rucksack/vector.hpp>
+#include <sge/rucksack/widget/base.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -72,6 +73,7 @@ sanguis::gui::master::master(
 		)
 	)
 {
+	widget_.layout().relayout();
 }
 
 sanguis::gui::master::~master()
