@@ -23,7 +23,7 @@ macro(
 
 	target_link_libraries(
 		gui_test_${TEST_NAME}
-		sanguisgui
+		${sanguisgui_TARGET}
 		"${DEPS}"
 	)
 endmacro()
