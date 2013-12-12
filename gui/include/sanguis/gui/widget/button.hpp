@@ -7,6 +7,7 @@
 #include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/button_fwd.hpp>
+#include <sge/font/dim.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
 #include <sge/font/draw/static_text.hpp>
@@ -68,7 +69,11 @@ private:
 	)
 	override;
 
+	sge::renderer::device::ffp &renderer_;
+
 	sge::font::draw::static_text static_text_;
+
+	sge::font::dim const font_size_;
 
 	sge::rucksack::widget::dummy layout_;
 

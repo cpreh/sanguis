@@ -1,3 +1,4 @@
+#include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/get_focus.hpp>
 #include <sanguis/gui/text_callback.hpp>
 #include <sanguis/gui/text_function.hpp>
@@ -5,7 +6,8 @@
 #include <sanguis/gui/widget/edit.hpp>
 #include <sge/font/align_h.hpp>
 #include <sge/font/char_type.hpp>
-#include <sge/font/object_fwd.hpp>
+#include <sge/font/metrics.hpp>
+#include <sge/font/object.hpp>
 #include <sge/font/string.hpp>
 #include <sge/font/text_parameters.hpp>
 #include <sge/font/vector.hpp>
@@ -15,7 +17,6 @@
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/renderer/texture/emulate_srgb.hpp>
-#include <sge/rucksack/aspect.hpp>
 #include <sge/rucksack/axis_policy.hpp>
 #include <sge/rucksack/axis_policy2.hpp>
 #include <sge/rucksack/is_expanding.hpp>
@@ -72,7 +73,7 @@ sanguis::gui::widget::edit::edit(
 			),
 			sge::rucksack::axis_policy(
 				sge::rucksack::minimum_size(
-					42 // TODO: Font height here!
+					font_.metrics().height().get()
 				),
 				sge::rucksack::preferred_size(
 					sge::rucksack::optional_scalar()
@@ -81,18 +82,7 @@ sanguis::gui::widget::edit::edit(
 					false
 				)
 			),
-			sge::rucksack::aspect(
-				fcppt::literal<
-					sge::rucksack::scalar
-				>(
-					1
-				),
-				fcppt::literal<
-					sge::rucksack::scalar
-				>(
-					1
-				)
-			)
+			sanguis::gui::default_aspect()
 		)
 	),
 	text_change_()

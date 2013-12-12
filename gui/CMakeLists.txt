@@ -4,6 +4,7 @@ set(
 	include/sanguis/gui/click_function.hpp
 	include/sanguis/gui/context.hpp
 	include/sanguis/gui/context_fwd.hpp
+	include/sanguis/gui/default_aspect.hpp
 	include/sanguis/gui/get_focus.hpp
 	include/sanguis/gui/get_focus_fwd.hpp
 	include/sanguis/gui/master.hpp
@@ -24,7 +25,10 @@ set(
 	include/sanguis/gui/widget/reference.hpp
 	include/sanguis/gui/widget/reference_fwd.hpp
 	include/sanguis/gui/widget/reference_vector.hpp
+	src/aux_/fill_rect.cpp
 	src/context.cpp
+	src/default_aspect.cpp
+	src/include/sanguis/gui/aux_/fill_rect.hpp
 	src/master.cpp
 	src/widget/base.cpp
 	src/widget/button.cpp
@@ -44,7 +48,7 @@ include_directories(
 sanguis_add_library(
 	sanguisgui
 	"${SANGUIS_GUI_FILES}"
-	"${fcppt_core_TARGET};${sgefont_TARGET};${sgefontdraw_TARGET};${sgeimagecolor_TARGET};${sgeinput_TARGET};${sgerucksack_TARGET}"
+	"${fcppt_core_TARGET};${sgefont_TARGET};${sgefontdraw_TARGET};${sgeimagecolor_TARGET};${sgeinput_TARGET};${sgerenderer_TARGET};${sgerucksack_TARGET};${sgesprite_TARGET}"
 )
 
 add_subdirectory(
