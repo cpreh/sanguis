@@ -44,7 +44,7 @@ sanguis::server::entities::enemies::factory::ghost(
 			_parameters,
 			sanguis::server::damage::no_armor(),
 			sanguis::server::health(
-				4.f
+				6.f
 				*
 				std::sqrt(
 					_parameters.difficulty().get()

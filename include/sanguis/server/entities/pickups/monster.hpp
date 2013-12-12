@@ -51,6 +51,8 @@ private:
 	sanguis::random_generator &random_generator_;
 
 	sanguis::friend_type const friend_type_;
+
+	sanguis::server::entities::enemies::difficulty const difficulty_;
 };
 
 }

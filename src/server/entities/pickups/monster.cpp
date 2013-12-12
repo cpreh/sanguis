@@ -27,6 +27,9 @@
 #include <sanguis/server/weapons/melee.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <cmath>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::entities::pickups::monster::monster(
@@ -52,6 +55,9 @@ sanguis::server::entities::pickups::monster::monster(
 	),
 	friend_type_(
 		_friend_type
+	),
+	difficulty_(
+		_difficulty
 	)
 {
 }
@@ -74,7 +80,11 @@ sanguis::server::entities::pickups::monster::do_pickup(
 			this->environment()->load_context(),
 			sanguis::server::damage::no_armor(),
 			sanguis::server::health(
-				100.f
+				10.f
+				*
+				std::sqrt(
+					difficulty_.get()
+				)
 			),
 			sanguis::server::entities::movement_speed(
 				100.f
@@ -105,7 +115,11 @@ sanguis::server::entities::pickups::monster::do_pickup(
 					)
 				),
 				sanguis::server::weapons::damage(
-					5.f
+					1.f
+					*
+					std::sqrt(
+						difficulty_.get()
+					)
 				)
 			)
 		),

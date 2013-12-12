@@ -33,7 +33,7 @@ sanguis::server::entities::enemies::factory::wolf(
 			_parameters,
 			sanguis::server::damage::no_armor(),
 			sanguis::server::health(
-				3.f
+				6.f
 			),
 			sanguis::server::entities::movement_speed(
 				40.f

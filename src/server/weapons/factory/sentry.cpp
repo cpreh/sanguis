@@ -3,6 +3,7 @@
 #include <sanguis/primary_weapon_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
+#include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/weapons/accuracy.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
@@ -30,6 +31,10 @@ sanguis::server::weapons::factory::sentry(
 		_parameters.random_generator()
 	);
 
+	sanguis::server::entities::enemies::difficulty const difficulty(
+		_parameters.difficulty()
+	);
+
 	return
 		fcppt::make_unique_ptr<
 			sanguis::server::weapons::sentry
@@ -54,7 +59,8 @@ sanguis::server::weapons::factory::sentry(
 			),
 			[
 				&diff_clock,
-				&random_generator
+				&random_generator,
+				difficulty
 			]
 			()
 			{
@@ -68,7 +74,7 @@ sanguis::server::weapons::factory::sentry(
 							sanguis::primary_weapon_type::pistol
 						),
 						sanguis::server::weapons::accuracy(
-							0.9f
+							0.95f
 						),
 						sanguis::server::weapons::base_cooldown(
 							sanguis::duration_second(
@@ -76,7 +82,11 @@ sanguis::server::weapons::factory::sentry(
 							)
 						),
 						sanguis::server::weapons::damage(
-							1.f
+							0.1f
+							*
+							std::sqrt(
+								difficulty.get()
+							)
 						),
 						sanguis::server::weapons::cast_point(
 							sanguis::duration_second(

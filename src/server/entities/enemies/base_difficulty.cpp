@@ -49,7 +49,7 @@ sanguis::server::entities::enemies::base_difficulty(
 			fcppt::literal<
 				sanguis::server::entities::enemies::difficulty_value
 			>(
-				10
+				8
 			);
 	case sanguis::creator::enemy_type::ghost:
 		return

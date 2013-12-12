@@ -78,11 +78,11 @@ sanguis::server::entities::enemies::factory::zombie00(
 					)
 				),
 				sanguis::server::weapons::magazine_size(
-					3u
+					5u
 				),
 				sanguis::server::weapons::reload_time(
 					sanguis::duration_second(
-						15.f
+						5.f
 					)
 				),
 				sanguis::server::weapons::range(

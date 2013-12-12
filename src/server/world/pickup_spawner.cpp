@@ -25,6 +25,7 @@
 #include <fcppt/random/distribution/basic_impl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <cmath>
 #include <functional>
 #include <numeric>
 #include <utility>
@@ -208,7 +209,8 @@ sanguis::server::world::pickup_spawner::spawn(
 {
 	if(
 		spawn_prob_()
-		> _prob.get()
+		>
+		_prob.get()
 	)
 		return;
 
@@ -221,7 +223,9 @@ sanguis::server::world::pickup_spawner::spawn(
 	);
 
 	for(
-		auto const &cur_spawn : spawns_
+		auto const &cur_spawn
+		:
+		spawns_
 	)
 	{
 		cur += cur_spawn.first;
@@ -254,7 +258,11 @@ sanguis::server::world::pickup_spawner::spawn_health(
 			env_.load_context(),
 			sanguis::server::team::players,
 			sanguis::server::health(
-				10.f
+				2.f
+				*
+				std::sqrt(
+					_difficulty.get()
+				)
 			)
 		),
 		_center
@@ -286,7 +294,7 @@ void
 sanguis::server::world::pickup_spawner::spawn_weapon(
 	sanguis::server::center const _center,
 	sanguis::server::entities::enemies::difficulty const _difficulty,
-	sanguis::weapon_type const _wtype
+	sanguis::weapon_type const _weapon_type
 )
 {
 	this->spawn_entity(
@@ -299,7 +307,7 @@ sanguis::server::world::pickup_spawner::spawn_weapon(
 			sanguis::server::weapons::create(
 				diff_clock_,
 				random_generator_,
-				_wtype,
+				_weapon_type,
 				_difficulty
 			)
 		),
