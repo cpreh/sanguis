@@ -1,13 +1,15 @@
 #ifndef SANGUIS_RANDOM_GENERATOR_FWD_HPP_INCLUDED
 #define SANGUIS_RANDOM_GENERATOR_FWD_HPP_INCLUDED
 
-#include <fcppt/random/generator/minstd_rand_fwd.hpp>
+#include <fcppt/random/generator/mt19937_fwd.hpp>
 
 
 namespace sanguis
 {
 
-typedef fcppt::random::generator::minstd_rand random_generator;
+typedef
+fcppt::random::generator::mt19937
+random_generator;
 
 }
 
