@@ -124,6 +124,7 @@ set(
 	log
 	parse
 	renderer
+	rucksack
 	sprite
 	systems
 	texture
@@ -334,6 +335,10 @@ add_subdirectory(
 
 add_subdirectory(
 	collision
+)
+
+add_subdirectory(
+	gui
 )
 
 add_subdirectory(

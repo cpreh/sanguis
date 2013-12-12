@@ -949,6 +949,7 @@ set(
 	include/sanguis/server/damage/all.hpp
 	include/sanguis/server/damage/armor.hpp
 	include/sanguis/server/damage/array.hpp
+	include/sanguis/server/damage/array_fwd.hpp
 	include/sanguis/server/damage/fire.hpp
 	include/sanguis/server/damage/full.hpp
 	include/sanguis/server/damage/ice.hpp
