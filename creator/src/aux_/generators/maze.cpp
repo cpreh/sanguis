@@ -152,6 +152,14 @@ sanguis::creator::aux_::generators::maze(
 			_parameters.randgen()
 		);
 
+	sanguis::creator::spawn_container
+	spawners =
+		::place_spawners(
+			grid,
+			20u,
+			_parameters.randgen()
+		);
+
 	sanguis::creator::pos starting_pos =
 		*sanguis::creator::aux_::find_closest(
 			grid,
@@ -212,14 +220,6 @@ sanguis::creator::aux_::generators::maze(
 		grid.size(),
 		sanguis::creator::background_tile::asphalt
 	);
-
-	sanguis::creator::spawn_container
-	spawners =
-		::place_spawners(
-			grid,
-			20u,
-			_parameters.randgen()
-		);
 
 	return
 		sanguis::creator::aux_::result(
@@ -398,7 +398,7 @@ place_spawners(
 			0);
 
 	auto
-	closest_nonsolid =
+	closest_empty =
 		[
 			&grid
 		]
@@ -410,7 +410,9 @@ place_spawners(
 			sanguis::creator::aux_::find_closest(
 				grid,
 				pos,
-				::tile_is_nonsolid,
+				[](sanguis::creator::tile _tile){
+					return _tile == sanguis::creator::tile::nothing;
+				},
 				10u);
 		};
 
@@ -431,7 +433,7 @@ place_spawners(
 					"Could not place spawners, giving up."));
 
 		auto candidate =
-			closest_nonsolid(
+			closest_empty(
 					sanguis::creator::grid::pos(
 						random_x(),
 						random_y()));

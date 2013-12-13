@@ -429,7 +429,7 @@ place_spawners(
 			0);
 
 	auto
-	closest_nonsolid =
+	closest_empty =
 		[
 			&grid
 		]
@@ -441,7 +441,9 @@ place_spawners(
 			sanguis::creator::aux_::find_closest(
 				grid,
 				pos,
-				::tile_is_nonsolid,
+				[](sanguis::creator::tile _tile){
+					return _tile == sanguis::creator::tile::nothing;
+				},
 				10u);
 		};
 
@@ -462,7 +464,7 @@ place_spawners(
 					"Could not place spawners, giving up."));
 
 		auto candidate =
-			closest_nonsolid(
+			closest_empty(
 					sanguis::creator::grid::pos(
 						random_x(),
 						random_y()));
