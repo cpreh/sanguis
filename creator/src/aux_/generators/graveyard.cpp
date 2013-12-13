@@ -13,7 +13,6 @@
 #include <sanguis/creator/spawn_pos.hpp>
 #include <sanguis/creator/spawn_type.hpp>
 #include <sanguis/creator/tile.hpp>
-#include <sanguis/creator/tile_is_solid.hpp>
 #include <sanguis/creator/aux_/generate_maze.hpp>
 #include <sanguis/creator/aux_/parameters.hpp>
 #include <sanguis/creator/aux_/randgen.hpp>
@@ -64,18 +63,6 @@ typedef fcppt::random::variate<
 	sanguis::creator::aux_::randgen,
 	uniform_int
 > variate;
-
-auto
-tile_is_nonsolid =
-	[]
-	(
-		sanguis::creator::tile tile
-	)
-	{
-		return
-			!sanguis::creator::tile_is_solid(
-				tile);
-	};
 
 sanguis::creator::opening_container
 place_openings(
