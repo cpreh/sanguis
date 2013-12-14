@@ -3,11 +3,12 @@
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/master.hpp>
 #include <sanguis/gui/widget/button.hpp>
-#include <sanguis/gui/widget/container.hpp>
+#include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/edit.hpp>
 #include <sanguis/gui/widget/image.hpp>
 #include <sanguis/gui/widget/reference.hpp>
-#include <sanguis/gui/widget/reference_vector.hpp>
+#include <sanguis/gui/widget/reference_alignment_pair.hpp>
+#include <sanguis/gui/widget/reference_alignment_vector.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/object.hpp>
 #include <sge/font/object_scoped_ptr.hpp>
@@ -39,7 +40,6 @@
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <sge/rucksack/widget/viewport_adaptor.hpp>
-#include <sge/rucksack/widget/box/base.hpp>
 #include <sge/systems/cursor_demuxer.hpp>
 #include <sge/systems/cursor_option_field.hpp>
 #include <sge/systems/keyboard_collector.hpp>
@@ -194,40 +194,30 @@ try
 
 	sanguis::gui::context context;
 
-	sge::rucksack::widget::box::base box_layout(
-		sge::rucksack::axis::x,
-		sanguis::gui::default_aspect()
-	);
-
-	box_layout.push_front_child(
-		button.layout(),
-		sge::rucksack::alignment::center
-	);
-
-	box_layout.push_back_child(
-		edit.layout(),
-		sge::rucksack::alignment::center
-	);
-
-	box_layout.push_back_child(
-		image.layout(),
-		sge::rucksack::alignment::center
-	);
-
-	sanguis::gui::widget::container main_widget(
+	sanguis::gui::widget::box_container main_widget(
 		context,
-		sanguis::gui::widget::reference_vector{
-			sanguis::gui::widget::reference(
-				button
+		sanguis::gui::widget::reference_alignment_vector{
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					button
+				),
+				sge::rucksack::alignment::center
 			),
-			sanguis::gui::widget::reference(
-				edit
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					edit
+				),
+				sge::rucksack::alignment::center
 			),
-			sanguis::gui::widget::reference(
-				image
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					image
+				),
+				sge::rucksack::alignment::center
 			)
 		},
-		box_layout
+		sge::rucksack::axis::x,
+		sanguis::gui::default_aspect()
 	);
 
 	sanguis::gui::master master(

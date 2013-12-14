@@ -14,6 +14,8 @@ set(
 	include/sanguis/gui/widget/base.hpp
 	include/sanguis/gui/widget/base_fwd.hpp
 	include/sanguis/gui/widget/base_unique_ptr.hpp
+	include/sanguis/gui/widget/box_container.hpp
+	include/sanguis/gui/widget/box_container_fwd.hpp
 	include/sanguis/gui/widget/button.hpp
 	include/sanguis/gui/widget/button_fwd.hpp
 	include/sanguis/gui/widget/container.hpp
@@ -25,6 +27,9 @@ set(
 	include/sanguis/gui/widget/optional_ref.hpp
 	include/sanguis/gui/widget/optional_ref_fwd.hpp
 	include/sanguis/gui/widget/reference.hpp
+	include/sanguis/gui/widget/reference_alignment_pair.hpp
+	include/sanguis/gui/widget/reference_alignment_pair_fwd.hpp
+	include/sanguis/gui/widget/reference_alignment_vector.hpp
 	include/sanguis/gui/widget/reference_fwd.hpp
 	include/sanguis/gui/widget/reference_vector.hpp
 	src/aux_/draw_image.cpp
@@ -46,10 +51,12 @@ set(
 	src/include/sanguis/gui/aux_/style/text_color.hpp
 	src/master.cpp
 	src/widget/base.cpp
+	src/widget/box_container.cpp
 	src/widget/button.cpp
 	src/widget/container.cpp
 	src/widget/edit.cpp
 	src/widget/image.cpp
+	src/widget/reference_alignment_pair.cpp
 )
 
 sanguis_generate_symbol_header(
