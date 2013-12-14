@@ -1,8 +1,11 @@
+#include <sanguis/build/media_path.hpp>
 #include <sanguis/gui/context.hpp>
+#include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/master.hpp>
 #include <sanguis/gui/widget/button.hpp>
 #include <sanguis/gui/widget/container.hpp>
 #include <sanguis/gui/widget/edit.hpp>
+#include <sanguis/gui/widget/image.hpp>
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_vector.hpp>
 #include <sge/font/lit.hpp>
@@ -10,7 +13,14 @@
 #include <sge/font/object_scoped_ptr.hpp>
 #include <sge/font/parameters.hpp>
 #include <sge/font/system.hpp>
+#include <sge/image/capabilities_field.hpp>
 #include <sge/image/color/predef.hpp>
+#include <sge/image2d/file.hpp>
+#include <sge/image2d/system.hpp>
+#include <sge/image2d/view/const_object.hpp>
+#include <sge/media/extension.hpp>
+#include <sge/media/extension_set.hpp>
+#include <sge/media/optional_extension_set.hpp>
 #include <sge/renderer/clear/parameters.hpp>
 #include <sge/renderer/context/ffp.hpp>
 #include <sge/renderer/context/scoped_ffp.hpp>
@@ -27,14 +37,13 @@
 #include <sge/renderer/pixel_format/srgb.hpp>
 #include <sge/renderer/target/onscreen.hpp>
 #include <sge/rucksack/alignment.hpp>
-#include <sge/rucksack/aspect.hpp>
 #include <sge/rucksack/axis.hpp>
-#include <sge/rucksack/scalar.hpp>
 #include <sge/rucksack/widget/viewport_adaptor.hpp>
 #include <sge/rucksack/widget/box/base.hpp>
 #include <sge/systems/cursor_demuxer.hpp>
 #include <sge/systems/cursor_option_field.hpp>
 #include <sge/systems/keyboard_collector.hpp>
+#include <sge/systems/image2d.hpp>
 #include <sge/systems/input.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/systems/make_list.hpp>
@@ -42,6 +51,7 @@
 #include <sge/systems/renderer_caps.hpp>
 #include <sge/systems/window.hpp>
 #include <sge/systems/with_font.hpp>
+#include <sge/systems/with_image2d.hpp>
 #include <sge/systems/with_input.hpp>
 #include <sge/systems/with_renderer.hpp>
 #include <sge/systems/with_window.hpp>
@@ -58,7 +68,7 @@
 #include <awl/main/exit_success.hpp>
 #include <awl/main/function_context_fwd.hpp>
 #include <fcppt/exception.hpp>
-#include <fcppt/literal.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <main.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -74,7 +84,7 @@ sanguis_gui_test::main(
 try
 {
 	sge::systems::instance<
-		boost::mpl::vector4<
+		boost::mpl::vector5<
 			sge::systems::with_font,
 			sge::systems::with_renderer<
 				sge::systems::renderer_caps::ffp
@@ -85,7 +95,8 @@ try
 					sge::systems::keyboard_collector,
 					sge::systems::cursor_demuxer
 				>
-			>
+			>,
+			sge::systems::with_image2d
 		>
 	> const sys(
 		sge::systems::make_list
@@ -120,6 +131,18 @@ try
 		(
 			sge::systems::input(
 				sge::systems::cursor_option_field::null()
+			)
+		)
+		(
+			sge::systems::image2d(
+				sge::image::capabilities_field::null(),
+				sge::media::optional_extension_set(
+					sge::media::extension_set{
+						sge::media::extension(
+							FCPPT_TEXT("png")
+						)
+					}
+				)
 			)
 		)
 	);
@@ -160,22 +183,20 @@ try
 		SGE_FONT_LIT("Test")
 	);
 
+	sanguis::gui::widget::image image(
+		sys.renderer_ffp(),
+		sys.image_system().load(
+			sanguis::build_media_path()
+			/
+			FCPPT_TEXT("car.png")
+		)->view()
+	);
+
 	sanguis::gui::context context;
 
 	sge::rucksack::widget::box::base box_layout(
 		sge::rucksack::axis::x,
-		sge::rucksack::aspect(
-			fcppt::literal<
-				sge::rucksack::scalar
-			>(
-				1
-			),
-			fcppt::literal<
-				sge::rucksack::scalar
-			>(
-				1
-			)
-		)
+		sanguis::gui::default_aspect()
 	);
 
 	box_layout.push_front_child(
@@ -188,6 +209,11 @@ try
 		sge::rucksack::alignment::center
 	);
 
+	box_layout.push_back_child(
+		image.layout(),
+		sge::rucksack::alignment::center
+	);
+
 	sanguis::gui::widget::container main_widget(
 		context,
 		sanguis::gui::widget::reference_vector{
@@ -196,6 +222,9 @@ try
 			),
 			sanguis::gui::widget::reference(
 				edit
+			),
+			sanguis::gui::widget::reference(
+				image
 			)
 		},
 		box_layout

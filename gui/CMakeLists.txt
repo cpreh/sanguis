@@ -20,18 +20,24 @@ set(
 	include/sanguis/gui/widget/container_fwd.hpp
 	include/sanguis/gui/widget/edit.hpp
 	include/sanguis/gui/widget/edit_fwd.hpp
+	include/sanguis/gui/widget/image.hpp
+	include/sanguis/gui/widget/image_fwd.hpp
 	include/sanguis/gui/widget/optional_ref.hpp
 	include/sanguis/gui/widget/optional_ref_fwd.hpp
 	include/sanguis/gui/widget/reference.hpp
 	include/sanguis/gui/widget/reference_fwd.hpp
 	include/sanguis/gui/widget/reference_vector.hpp
+	src/aux_/draw_image.cpp
 	src/aux_/fill_rect.cpp
 	src/aux_/style/background_color.cpp
 	src/aux_/style/border_color.cpp
 	src/aux_/style/text_color.cpp
 	src/context.cpp
 	src/default_aspect.cpp
+	src/include/sanguis/gui/aux_/draw_image.hpp
+	src/include/sanguis/gui/aux_/draw_sprite.hpp
 	src/include/sanguis/gui/aux_/fill_rect.hpp
+	src/include/sanguis/gui/aux_/sprite_type_choices.hpp
 	src/include/sanguis/gui/aux_/style/background_color.hpp
 	src/include/sanguis/gui/aux_/style/border_color.hpp
 	src/include/sanguis/gui/aux_/style/inner_border.hpp
@@ -43,6 +49,7 @@ set(
 	src/widget/button.cpp
 	src/widget/container.cpp
 	src/widget/edit.cpp
+	src/widget/image.cpp
 )
 
 sanguis_generate_symbol_header(
@@ -57,7 +64,7 @@ include_directories(
 sanguis_add_library(
 	sanguisgui
 	"${SANGUIS_GUI_FILES}"
-	"${fcppt_core_TARGET};${sgefont_TARGET};${sgefontdraw_TARGET};${sgeimagecolor_TARGET};${sgeinput_TARGET};${sgerenderer_TARGET};${sgerucksack_TARGET};${sgesprite_TARGET}"
+	"${fcppt_core_TARGET};${sgefont_TARGET};${sgefontdraw_TARGET};${sgeimagecolor_TARGET};${sgeinput_TARGET};${sgerenderer_TARGET};${sgerucksack_TARGET};${sgesprite_TARGET};${sgetexture_TARGET}"
 )
 
 add_subdirectory(

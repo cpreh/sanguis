@@ -5,10 +5,11 @@
 #include <boost/filesystem/path.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace sanguis
 {
 
-boost::filesystem::path const
+boost::filesystem::path
 media_path();
 
 }

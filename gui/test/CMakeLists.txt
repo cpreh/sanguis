@@ -30,5 +30,5 @@ endmacro()
 
 add_gui_test(
 	main
-	"${fcppt_core_TARGET};${awl_TARGET};${sgefont_TARGET};${sgeimagecolor_TARGET};${sgerenderer_TARGET};${sgerucksack_TARGET};${sgesystems_TARGET};${sgetimer_TARGET};${sgeviewport_TARGET};${sgewindow_TARGET}"
+	"${Boost_FILESYSTEM_LIBRARY};${fcppt_core_TARGET};${awl_TARGET};${sgefont_TARGET};${sgeimagecolor_TARGET};${sgeimage2d_TARGET};${sgerenderer_TARGET};${sgerucksack_TARGET};${sgesystems_TARGET};${sgetimer_TARGET};${sgeviewport_TARGET};${sgewindow_TARGET}"
 )
