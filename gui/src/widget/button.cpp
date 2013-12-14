@@ -2,6 +2,12 @@
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/get_focus.hpp>
 #include <sanguis/gui/aux_/fill_rect.hpp>
+#include <sanguis/gui/aux_/style/background_color.hpp>
+#include <sanguis/gui/aux_/style/border_color.hpp>
+#include <sanguis/gui/aux_/style/inner_border.hpp>
+#include <sanguis/gui/aux_/style/outer_border.hpp>
+#include <sanguis/gui/aux_/style/spacing.hpp>
+#include <sanguis/gui/aux_/style/text_color.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/button.hpp>
 #include <sge/font/align_h.hpp>
@@ -11,8 +17,8 @@
 #include <sge/font/string.hpp>
 #include <sge/font/unit.hpp>
 #include <sge/font/text_parameters.hpp>
+#include <sge/font/v_center.hpp>
 #include <sge/font/vector.hpp>
-#include <sge/image/color/predef.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/renderer/texture/emulate_srgb.hpp>
@@ -34,44 +40,6 @@
 #include <fcppt/signal/object_impl.hpp>
 
 
-namespace
-{
-
-sge::rucksack::scalar const
-inner_border(
-	fcppt::literal<
-		sge::rucksack::scalar
-	>(
-		4
-	)
-);
-
-sge::rucksack::scalar const
-outer_border(
-	fcppt::literal<
-		sge::rucksack::scalar
-	>(
-		2
-	)
-);
-
-sge::rucksack::scalar const
-spacing(
-	(
-		inner_border
-		+
-		outer_border
-	)
-	*
-	fcppt::literal<
-		sge::rucksack::scalar
-	>(
-		2
-	)
-);
-
-}
-
 sanguis::gui::widget::button::button(
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
@@ -82,6 +50,9 @@ sanguis::gui::widget::button::button(
 	renderer_(
 		_renderer
 	),
+	font_(
+		_font
+	),
 	static_text_(
 		_renderer,
 		_font,
@@ -90,7 +61,7 @@ sanguis::gui::widget::button::button(
 			sge::font::align_h::center
 		),
 		sge::font::vector::null(),
-		sge::image::color::predef::white(),
+		sanguis::gui::aux_::style::text_color(),
 		sge::renderer::texture::emulate_srgb::no
 	),
 	font_size_(
@@ -103,7 +74,7 @@ sanguis::gui::widget::button::button(
 				sge::rucksack::minimum_size(
 					font_size_.w()
 					+
-					spacing
+					sanguis::gui::aux_::style::spacing::value
 				),
 				sge::rucksack::preferred_size(
 					sge::rucksack::optional_scalar()
@@ -116,7 +87,7 @@ sanguis::gui::widget::button::button(
 				sge::rucksack::minimum_size(
 					font_size_.h()
 					+
-					spacing
+					sanguis::gui::aux_::style::spacing::value
 				),
 				sge::rucksack::preferred_size(
 					sge::rucksack::optional_scalar()
@@ -166,9 +137,9 @@ sanguis::gui::widget::button::on_draw(
 			layout_.position(),
 			font_size_
 			+
-			spacing
+			sanguis::gui::aux_::style::spacing::value
 		),
-		sge::image::color::predef::black()
+		sanguis::gui::aux_::style::border_color()
 	);
 
 	sanguis::gui::aux_::fill_rect(
@@ -177,12 +148,12 @@ sanguis::gui::widget::button::on_draw(
 		sge::rucksack::rect(
 			layout_.position()
 			+
-			inner_border,
+			sanguis::gui::aux_::style::outer_border::value,
 			font_size_
 			+
-			inner_border
+			sanguis::gui::aux_::style::outer_border::value
 		),
-		sge::image::color::predef::red()
+		sanguis::gui::aux_::style::background_color()
 	);
 
 	static_text_.pos(
@@ -191,9 +162,19 @@ sanguis::gui::widget::button::on_draw(
 		>(
 			layout_.position()
 			+
-			outer_border
+			sanguis::gui::aux_::style::outer_border::value
 			+
-			inner_border
+			sanguis::gui::aux_::style::inner_border::value
+			+
+			sge::font::vector(
+				0,
+				sge::font::v_center(
+					font_.metrics().height(),
+					layout_.size().h()
+					-
+					sanguis::gui::aux_::style::spacing::value
+				)
+			)
 		)
 	);
 

@@ -71,6 +71,8 @@ private:
 
 	sge::renderer::device::ffp &renderer_;
 
+	sge::font::object &font_;
+
 	sge::font::draw::static_text static_text_;
 
 	sge::font::dim const font_size_;

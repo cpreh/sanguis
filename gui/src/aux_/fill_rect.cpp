@@ -34,6 +34,13 @@ sanguis::gui::aux_::fill_rect(
 	sge::image::color::any::object const &_color
 )
 {
+	if(
+		_rect.w() < 0
+		||
+		_rect.h() < 0
+	)
+		return;
+
 	typedef
 	sge::sprite::config::type_choices<
 		sge::sprite::config::unit_type<

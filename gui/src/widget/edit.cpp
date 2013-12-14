@@ -2,6 +2,12 @@
 #include <sanguis/gui/get_focus.hpp>
 #include <sanguis/gui/text_callback.hpp>
 #include <sanguis/gui/text_function.hpp>
+#include <sanguis/gui/aux_/fill_rect.hpp>
+#include <sanguis/gui/aux_/style/background_color.hpp>
+#include <sanguis/gui/aux_/style/border_color.hpp>
+#include <sanguis/gui/aux_/style/outer_border.hpp>
+#include <sanguis/gui/aux_/style/spacing.hpp>
+#include <sanguis/gui/aux_/style/text_color.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/edit.hpp>
 #include <sge/font/align_h.hpp>
@@ -10,9 +16,9 @@
 #include <sge/font/object.hpp>
 #include <sge/font/string.hpp>
 #include <sge/font/text_parameters.hpp>
+#include <sge/font/v_center.hpp>
 #include <sge/font/vector.hpp>
 #include <sge/font/draw/simple.hpp>
-#include <sge/image/color/predef.hpp>
 #include <sge/input/keyboard/key_code.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
@@ -23,10 +29,13 @@
 #include <sge/rucksack/minimum_size.hpp>
 #include <sge/rucksack/optional_scalar.hpp>
 #include <sge/rucksack/preferred_size.hpp>
+#include <sge/rucksack/rect.hpp>
 #include <sge/rucksack/scalar.hpp>
 #include <sge/rucksack/widget/base_fwd.hpp>
 #include <sge/rucksack/widget/dummy.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/math/dim/arithmetic.hpp>
+#include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/object_impl.hpp>
@@ -74,6 +83,8 @@ sanguis::gui::widget::edit::edit(
 			sge::rucksack::axis_policy(
 				sge::rucksack::minimum_size(
 					font_.metrics().height().get()
+					+
+					sanguis::gui::aux_::style::spacing::value
 				),
 				sge::rucksack::preferred_size(
 					sge::rucksack::optional_scalar()
@@ -130,7 +141,32 @@ sanguis::gui::widget::edit::on_draw(
 	sge::renderer::context::ffp &_context
 )
 {
-	// TODO: Paint background
+	sanguis::gui::aux_::fill_rect(
+		renderer_,
+		_context,
+		sge::rucksack::rect(
+			layout_.position(),
+			layout_.size()
+		),
+		sanguis::gui::aux_::style::border_color()
+	);
+
+	sanguis::gui::aux_::fill_rect(
+		renderer_,
+		_context,
+		sge::rucksack::rect(
+			layout_.position()
+			+
+			sanguis::gui::aux_::style::outer_border::value,
+			layout_.size()
+			-
+			2
+			*
+			sanguis::gui::aux_::style::outer_border::value
+		),
+		sanguis::gui::aux_::style::background_color()
+	);
+
 	sge::font::draw::simple(
 		renderer_,
 		_context,
@@ -138,13 +174,34 @@ sanguis::gui::widget::edit::on_draw(
 		text_,
 		sge::font::text_parameters(
 			sge::font::align_h::left
+		)
+		.max_width(
+			layout_.size().w()
+			-
+			2
+			*
+			sanguis::gui::aux_::style::spacing::value
 		),
 		fcppt::math::vector::structure_cast<
 			sge::font::vector
 		>(
 			layout_.position()
+			+
+			sanguis::gui::aux_::style::inner_border::value
+			+
+			sanguis::gui::aux_::style::outer_border::value
+			+
+			sge::font::vector(
+				0,
+				sge::font::v_center(
+					font_.metrics().height(),
+					layout_.size().h()
+					-
+					sanguis::gui::aux_::style::spacing::value
+				)
+			)
 		),
-		sge::image::color::predef::white(),
+		sanguis::gui::aux_::style::text_color(),
 		sge::renderer::texture::emulate_srgb::no
 	);
 }

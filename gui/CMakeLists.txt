@@ -26,9 +26,18 @@ set(
 	include/sanguis/gui/widget/reference_fwd.hpp
 	include/sanguis/gui/widget/reference_vector.hpp
 	src/aux_/fill_rect.cpp
+	src/aux_/style/background_color.cpp
+	src/aux_/style/border_color.cpp
+	src/aux_/style/text_color.cpp
 	src/context.cpp
 	src/default_aspect.cpp
 	src/include/sanguis/gui/aux_/fill_rect.hpp
+	src/include/sanguis/gui/aux_/style/background_color.hpp
+	src/include/sanguis/gui/aux_/style/border_color.hpp
+	src/include/sanguis/gui/aux_/style/inner_border.hpp
+	src/include/sanguis/gui/aux_/style/outer_border.hpp
+	src/include/sanguis/gui/aux_/style/spacing.hpp
+	src/include/sanguis/gui/aux_/style/text_color.hpp
 	src/master.cpp
 	src/widget/base.cpp
 	src/widget/button.cpp
