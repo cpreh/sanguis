@@ -2,12 +2,14 @@
 #include <sanguis/gui/get_focus.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/container.hpp>
+#include <sanguis/gui/widget/optional_ref.hpp>
+#include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_vector.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/rucksack/rect.hpp>
 #include <sge/rucksack/vector.hpp>
 #include <sge/rucksack/widget/base.hpp>
-#include <sge/rucksack/widget/optional_parent.hpp>
+#include <fcppt/algorithm/remove_if.hpp>
 #include <fcppt/math/box/contains_point.hpp>
 
 
@@ -35,9 +37,9 @@ sanguis::gui::widget::container::container(
 			sanguis::gui::widget::base &_widget
 		)
 		{
-			_widget.layout().parent(
-				sge::rucksack::widget::optional_parent(
-					this->layout_
+			_widget.parent(
+				sanguis::gui::widget::optional_ref(
+					*this
 				)
 			);
 		}
@@ -53,6 +55,10 @@ sanguis::gui::widget::container::~container()
 			sanguis::gui::widget::base &_widget
 		)
 		{
+			_widget.parent(
+				sanguis::gui::widget::optional_ref()
+			);
+
 			this->context_.destroy(
 				_widget
 			);
@@ -65,6 +71,34 @@ sanguis::gui::widget::container::layout()
 {
 	return
 		layout_;
+}
+
+void
+sanguis::gui::widget::container::push_back_widget(
+	sanguis::gui::widget::base &_widget
+)
+{
+	widgets_.push_back(
+		sanguis::gui::widget::reference(
+			_widget
+		)
+	);
+
+	_widget.parent(
+		sanguis::gui::widget::optional_ref(
+			*this
+		)
+	);
+}
+
+void
+sanguis::gui::widget::container::pop_back_widget()
+{
+	widgets_.back().get().parent(
+		sanguis::gui::widget::optional_ref()
+	);
+
+	widgets_.pop_back();
 }
 
 void
@@ -138,6 +172,27 @@ sanguis::gui::widget::container::on_click(
 		sanguis::gui::get_focus(
 			false
 		);
+}
+
+void
+sanguis::gui::widget::container::unregister(
+	sanguis::gui::widget::base const &_widget
+)
+{
+	fcppt::algorithm::remove_if(
+		widgets_,
+		[
+			&_widget
+		](
+			sanguis::gui::widget::reference const _ref
+		)
+		{
+			return
+				&_ref.get()
+				==
+				&_widget;
+		}
+	);
 }
 
 template<

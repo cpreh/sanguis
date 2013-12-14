@@ -13,3 +13,7 @@ check_includes creator/src/include
 check_includes collision/include
 
 check_includes collision/src/include
+
+check_includes gui/include
+
+check_includes gui/src/include

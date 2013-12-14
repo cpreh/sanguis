@@ -42,6 +42,14 @@ public:
 	sge::rucksack::widget::base &
 	layout()
 	override;
+protected:
+	void
+	push_back_widget(
+		sanguis::gui::widget::base &
+	);
+
+	void
+	pop_back_widget();
 private:
 	void
 	on_update()
@@ -59,6 +67,12 @@ private:
 	)
 	override;
 
+	void
+	unregister(
+		sanguis::gui::widget::base const &
+	)
+	override;
+
 	template<
 		typename Function
 	>
@@ -69,7 +83,7 @@ private:
 
 	sanguis::gui::context &context_;
 
-	sanguis::gui::widget::reference_vector const widgets_;
+	sanguis::gui::widget::reference_vector widgets_;
 
 	sge::rucksack::widget::base &layout_;
 };

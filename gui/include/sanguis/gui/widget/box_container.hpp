@@ -5,6 +5,7 @@
 #include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/widget/box_container_fwd.hpp>
 #include <sanguis/gui/widget/container.hpp>
+#include <sanguis/gui/widget/reference_alignment_pair_fwd.hpp>
 #include <sanguis/gui/widget/reference_alignment_vector.hpp>
 #include <sge/rucksack/aspect_fwd.hpp>
 #include <sge/rucksack/axis_fwd.hpp>
@@ -37,6 +38,16 @@ public:
 
 	SANGUIS_GUI_SYMBOL
 	~box_container();
+
+	SANGUIS_GUI_SYMBOL
+	void
+	push_back(
+		sanguis::gui::widget::reference_alignment_pair const &
+	);
+
+	SANGUIS_GUI_SYMBOL
+	void
+	pop_back();
 private:
 	sge::rucksack::widget::box::base layout_;
 };

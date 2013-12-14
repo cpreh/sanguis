@@ -1,16 +1,27 @@
 #include <sanguis/gui/get_focus.hpp>
 #include <sanguis/gui/widget/base.hpp>
+#include <sanguis/gui/widget/optional_ref.hpp>
 #include <sge/font/char_type.hpp>
 #include <sge/input/keyboard/key_code.hpp>
 #include <sge/rucksack/vector.hpp>
+#include <sge/rucksack/widget/base.hpp>
+#include <sge/rucksack/widget/optional_parent.hpp>
 
 
 sanguis::gui::widget::base::base()
+:
+	parent_()
 {
 }
 
 sanguis::gui::widget::base::~base()
 {
+	if(
+		parent_
+	)
+		parent_->unregister(
+			*this
+		);
 }
 
 void
@@ -39,6 +50,31 @@ sanguis::gui::widget::base::on_key(
 void
 sanguis::gui::widget::base::on_char(
 	sge::font::char_type
+)
+{
+}
+
+void
+sanguis::gui::widget::base::parent(
+	sanguis::gui::widget::optional_ref const _parent
+)
+{
+	parent_ =
+		_parent;
+
+	if(
+		_parent
+	)
+		this->layout().parent(
+			sge::rucksack::widget::optional_parent(
+				_parent->layout()
+			)
+		);
+}
+
+void
+sanguis::gui::widget::base::unregister(
+	sanguis::gui::widget::base const &
 )
 {
 }

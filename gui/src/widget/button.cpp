@@ -165,15 +165,15 @@ sanguis::gui::widget::button::on_draw(
 			sanguis::gui::aux_::style::outer_border::value
 			+
 			sanguis::gui::aux_::style::inner_border::value
-			+
-			sge::font::vector(
-				0,
-				sge::font::v_center(
-					font_.metrics().height(),
-					layout_.size().h()
-					-
-					sanguis::gui::aux_::style::spacing::value
-				)
+		)
+		+
+		sge::font::vector(
+			0,
+			sge::font::v_center(
+				font_.metrics().height(),
+				layout_.size().h()
+				-
+				sanguis::gui::aux_::style::spacing::value
 			)
 		)
 	);

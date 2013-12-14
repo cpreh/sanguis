@@ -31,7 +31,16 @@ set(
 	include/sanguis/gui/widget/reference_alignment_pair_fwd.hpp
 	include/sanguis/gui/widget/reference_alignment_vector.hpp
 	include/sanguis/gui/widget/reference_fwd.hpp
+	include/sanguis/gui/widget/reference_name_pair.hpp
+	include/sanguis/gui/widget/reference_name_pair_fwd.hpp
+	include/sanguis/gui/widget/reference_name_vector.hpp
 	include/sanguis/gui/widget/reference_vector.hpp
+	include/sanguis/gui/widget/tab.hpp
+	include/sanguis/gui/widget/tab_fwd.hpp
+	include/sanguis/gui/widget/text.hpp
+	include/sanguis/gui/widget/text_fwd.hpp
+	include/sanguis/gui/widget/unique_ptr.hpp
+	include/sanguis/gui/widget/unique_ptr_vector.hpp
 	src/aux_/draw_image.cpp
 	src/aux_/fill_rect.cpp
 	src/aux_/style/background_color.cpp
@@ -57,6 +66,9 @@ set(
 	src/widget/edit.cpp
 	src/widget/image.cpp
 	src/widget/reference_alignment_pair.cpp
+	src/widget/reference_name_pair.cpp
+	src/widget/tab.cpp
+	src/widget/text.cpp
 )
 
 sanguis_generate_symbol_header(

@@ -5,10 +5,15 @@
 #include <sge/input/cursor/button_callback.hpp>
 #include <sge/input/cursor/button_event_fwd.hpp>
 #include <sge/input/cursor/button_signal.hpp>
+#include <sge/input/cursor/mode_fwd.hpp>
 #include <sge/input/cursor/move_callback.hpp>
 #include <sge/input/cursor/move_event_fwd.hpp>
 #include <sge/input/cursor/move_signal.hpp>
-#include <sge/input/cursor/object_fwd.hpp>
+#include <sge/input/cursor/object.hpp>
+#include <sge/input/cursor/optional_position_fwd.hpp>
+#include <sge/input/cursor/scroll_callback.hpp>
+#include <sge/input/cursor/scroll_event_fwd.hpp>
+#include <sge/input/cursor/scroll_signal.hpp>
 #include <fcppt/signal/auto_connection_fwd.hpp>
 #include <fcppt/signal/object_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
@@ -23,6 +28,8 @@ namespace cursor
 {
 
 class object
+:
+	public sge::input::cursor::object
 {
 	FCPPT_NONCOPYABLE(
 		object
@@ -38,12 +45,30 @@ public:
 	fcppt::signal::auto_connection
 	button_callback(
 		sge::input::cursor::button_callback const &
-	);
+	)
+	override;
 
 	fcppt::signal::auto_connection
 	move_callback(
 		sge::input::cursor::move_callback const &
-	);
+	)
+	override;
+
+	fcppt::signal::auto_connection
+	scroll_callback(
+		sge::input::cursor::scroll_callback const &
+	)
+	override;
+
+	sge::input::cursor::optional_position const
+	position() const
+	override;
+
+	void
+	mode(
+		sge::input::cursor::mode
+	)
+	override;
 
 	void
 	active(
@@ -52,9 +77,6 @@ public:
 
 	bool
 	active() const;
-
-	sge::input::cursor::object &
-	get() const;
 private:
 	void
 	on_button(
@@ -66,15 +88,23 @@ private:
 		sge::input::cursor::move_event const &
 	);
 
+	void
+	on_scroll(
+		sge::input::cursor::scroll_event const &
+	);
+
 	sge::input::cursor::object &cursor_;
 
 	sge::input::cursor::button_signal button_signal_;
 
 	sge::input::cursor::move_signal move_signal_;
 
+	sge::input::cursor::scroll_signal scroll_signal_;
+
 	fcppt::signal::scoped_connection const
 		button_connection_,
-		move_connection_;
+		move_connection_,
+		scroll_connection_;
 
 	bool active_;
 };
@@ -83,4 +113,4 @@ private:
 }
 }
 
-#endif // SANGUIS_CLIENT_CURSOR_HPP_INCLUDED
+#endif

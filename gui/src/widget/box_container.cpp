@@ -54,3 +54,26 @@ sanguis::gui::widget::box_container::box_container(
 sanguis::gui::widget::box_container::~box_container()
 {
 }
+
+void
+sanguis::gui::widget::box_container::push_back(
+	sanguis::gui::widget::reference_alignment_pair const &_pair
+)
+{
+	this->push_back_widget(
+		_pair.reference().get()
+	);
+
+	layout_.push_back_child(
+		_pair.reference().get().layout(),
+		_pair.alignment()
+	);
+}
+
+void
+sanguis::gui::widget::box_container::pop_back()
+{
+	this->pop_back_widget();
+
+	// TODO: Do we have to pop back the layout as well?
+}

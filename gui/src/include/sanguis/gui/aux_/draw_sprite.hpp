@@ -1,5 +1,5 @@
-#ifndef SANGUIS_GUI_AUX__SHOW_SPRITE_HPP_INCLUDED
-#define SANGUIS_GUI_AUX__SHOW_SPRITE_HPP_INCLUDED
+#ifndef SANGUIS_GUI_AUX__DRAW_SPRITE_HPP_INCLUDED
+#define SANGUIS_GUI_AUX__DRAW_SPRITE_HPP_INCLUDED
 
 #include <sge/renderer/context/ffp.hpp>
 #include <sge/renderer/device/ffp.hpp>

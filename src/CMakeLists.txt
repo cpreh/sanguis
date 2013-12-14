@@ -372,14 +372,9 @@ set(
 	include/sanguis/client/gui/object_fwd.hpp
 	include/sanguis/client/gui/perk/chooser.hpp
 	include/sanguis/client/gui/perk/chooser_fwd.hpp
-	include/sanguis/client/gui/perk/item.hpp
 	include/sanguis/client/gui/perk/item_color.hpp
-	include/sanguis/client/gui/perk/item_fwd.hpp
-	include/sanguis/client/gui/perk/item_tree.hpp
-	include/sanguis/client/gui/perk/item_user_data.hpp
-	include/sanguis/client/gui/perk/node.hpp
-	include/sanguis/client/gui/perk/node_variant.hpp
-	include/sanguis/client/gui/perk/node_variant_fwd.hpp
+	include/sanguis/client/gui/perk/state.hpp
+	include/sanguis/client/gui/perk/state_fwd.hpp
 	include/sanguis/client/health.hpp
 	include/sanguis/client/health_valid.hpp
 	include/sanguis/client/health_value.hpp
@@ -391,6 +386,9 @@ set(
 	include/sanguis/client/make_send_callback.hpp
 	include/sanguis/client/max_health.hpp
 	include/sanguis/client/object.hpp
+	include/sanguis/client/perk/category.hpp
+	include/sanguis/client/perk/category_fwd.hpp
+	include/sanguis/client/perk/category_to_string.hpp
 	include/sanguis/client/perk/change_callback.hpp
 	include/sanguis/client/perk/change_function.hpp
 	include/sanguis/client/perk/choosable.hpp
@@ -415,6 +413,7 @@ set(
 	include/sanguis/client/perk/send_callback.hpp
 	include/sanguis/client/perk/state.hpp
 	include/sanguis/client/perk/state_fwd.hpp
+	include/sanguis/client/perk/to_category.hpp
 	include/sanguis/client/perk/to_string.hpp
 	include/sanguis/client/perk/tree.hpp
 	include/sanguis/client/perk/tree_fwd.hpp
@@ -1499,10 +1498,8 @@ set(
 	src/client/gui/menu/object.cpp
 	src/client/gui/object.cpp
 	src/client/gui/perk/chooser.cpp
-	src/client/gui/perk/item.cpp
 	src/client/gui/perk/item_color.cpp
-	src/client/gui/perk/item_user_data.cpp
-	src/client/gui/perk/node.cpp
+	src/client/gui/perk/state.cpp
 	src/client/health_valid.cpp
 	src/client/log.cpp
 	src/client/log_location.cpp
@@ -1929,6 +1926,7 @@ include_directories(
 	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/include
 	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/collision/include
 	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/creator/include
+	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/gui/include
 )
 
 awl_utils_add_portable_executable(
@@ -1945,6 +1943,7 @@ target_link_libraries(
 	sanguis
 	${sanguiscreator_TARGET}
 	${sanguiscollision_TARGET}
+	${sanguisgui_TARGET}
 	${fcppt_core_TARGET}
 	${fcppt_filesystem_TARGET}
 	${awl_TARGET}

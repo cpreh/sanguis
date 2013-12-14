@@ -54,7 +54,7 @@ sanguis::client::gui::object::object(
 	),
 	cursor_(
 		syringe_,
-		_cursor.get()
+		_cursor
 	)
 {
 }
