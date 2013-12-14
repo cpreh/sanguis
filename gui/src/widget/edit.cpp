@@ -34,6 +34,7 @@
 #include <sge/rucksack/widget/base_fwd.hpp>
 #include <sge/rucksack/widget/dummy.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/string_conv_locale.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -285,7 +286,7 @@ sanguis::gui::widget::edit::on_char(
 	if(
 		!std::isprint(
 			_char,
-			std::locale()
+			fcppt::string_conv_locale()
 		)
 	)
 		return;
