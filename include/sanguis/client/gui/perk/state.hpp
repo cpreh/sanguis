@@ -2,8 +2,8 @@
 #define SANGUIS_CLIENT_GUI_PERK_STATE_HPP_INCLUDED
 
 #include <sanguis/client/gui/perk/state_fwd.hpp>
-#include <sanguis/gui/widget/box_container.hpp>
-#include <sanguis/gui/widget/unique_ptr_vector.hpp>
+#include <sanguis/gui/context_fwd.hpp>
+#include <sanguis/gui/widget/tab.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -22,15 +22,16 @@ class state
 		state
 	);
 public:
-	state();
+	state(
+		sanguis::gui::context &,
+		sanguis::client::gui::perk::state const &
+	);
 
 	~state();
 private:
-	sanguis::gui::widget::unique_ptr_vector top_buttons_;
+	sanguis::gui::widget::unique_ptr_vector tabs_;
 
-	sanguis::gui::widget::box_container top_buttons_widget_;
-
-	sanguis::gui::widget::box_container main_box_;
+	sanguis::gui::widget::tab main_tab_;
 };
 
 }

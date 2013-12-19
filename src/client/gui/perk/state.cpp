@@ -1,51 +1,113 @@
 #include <sanguis/client/gui/perk/state.hpp>
 #include <sanguis/gui/widget/unique_ptr_vector.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace
 {
 
-sanguis::gui::widget::unique_ptr_vector
-make_top_buttons(
-	sanguis::client::perk::state const &_perk_state
+sanguis::client::gui::perk::line_unique_ptr_tree
+make_tab(
+	sanguis::client::perk::const_tree_range const _range
 )
 {
-	typedef
-	std::map<
-		sanguis::client::perk::category,
-		sanguis::gui::widget::unique_ptr
-	>
-	widget_map;
-
-	widget_map widgets;
+	sanguis::client::gui::perk::line_unique_ptr_tree result;
 
 	for(
-		auto const &node
+		auto const &top_element
 		:
-		_perk_state.tree()
+		_range
 	)
 	{
-		sanguis::client::perk::to_category const category(
-			node.value().type()
-		);
-
-		widgets.insert(
-			std::make_pair(
-				category,
-				fcppt::make_unique_ptr<
-					sanguis::gui::widget::button
-				>(
-					sanguis::client::perk::category_to_string(
-						category
-					)
-				)
+		for(
+			auto const &element
+			:
+			fcppt::container::tree::pre_order<
+				sanguis::client::perk::tree const
+			>(
+				top_element
 			)
-		);
+		)
+		{
+			if(
+				element.parent()->value().has_value()
+			)
+				fcppt::algorithm::find_if_exn(
+					fcppt::container::tree::pre_order<
+						sanguis::gui::widget::unique_ptr_tree
+					>(
+						result
+					),
+					[](
+						sanguis::client::gui::perk::line const &_line
+					)
+					{
+						return
+							_line.perk_type()
+							==
+							element.value()->type();
+					}
+				)->push_back(
+					fcppt::make_unique_ptr<
+						sanguis::client::gui::perk::line
+					>(
+						*element.value()
+					)
+				);
+			else
+				result.push_back(
+					fcppt::make_unique_ptr<
+						perk_line
+					>(
+						element.value()
+					)
+				);
+		}
 	}
 
 	return
 		std::move(
-			widgets
+			result
+		);
+}
+
+typedef
+std::pair<
+	sanguis::client::perk::tree::iterator,
+	sanguis::client::perk::tree::iterator
+>
+equal_range_pair;
+
+sanguis::gui::widget::unique_ptr_tree
+make_tabs(
+	sanguis::client::perk::state const &_perk_state
+)
+{
+	for(
+		iterator_pair const range(
+			sanguis::client::perk::category_equal_range(
+				tree.begin(),
+				tree.end()
+			)
+		);
+		range.first != range.second;
+		range =
+			sanguis::client::perk::category_equal_range(
+				range.second,
+				tree.end()
+			)
+	)
+		result.push_back(
+			make_tab(
+				range
+			)
+		);
+
+	return
+		std::move(
+			result
 		);
 }
 
@@ -53,14 +115,10 @@ make_top_buttons(
 
 sanguis::client::gui::perk::state::state()
 :
-	top_buttons_(
-		make_top_buttons(
+	tabs_(
+		make_tabs_(
 			_state
 		)
-	),
-	top_buttons_widget_(
-	),
-	main_box_(
 	)
 {
 }
@@ -68,85 +126,3 @@ sanguis::client::gui::perk::state::state()
 sanguis::client::gui::perk::state::~state()
 {
 }
-
-/*
-	items_.clear();
-
-	typedef fcppt::container::tree::pre_order<
-		sanguis::client::perk::tree const
-	> perk_traversal;
-
-	for(
-		auto const &element
-		:
-		perk_traversal(
-			_perks
-		)
-	)
-	{
-		// root node, skip it
-		if(
-			!element.has_parent()
-		)
-			continue;
-
-		if(
-			element.parent()->value().has_value()
-		)
-		{
-			sanguis::perk_type const cur_type(
-				element.parent()->value()->type()
-			);
-
-			typedef fcppt::container::tree::pre_order<
-				sanguis::client::gui::perk::item_tree
-			> item_traversal;
-
-			item_traversal item_trav(
-				items_
-			);
-
-			item_traversal::iterator const item_it(
-				fcppt::algorithm::find_if_exn(
-					item_trav.begin(),
-					item_trav.end(),
-					[
-						cur_type
-					](
-						sanguis::client::gui::perk::item_tree const &_tree
-					)
-					{
-						return
-							_tree.value()
-							&&
-							_tree.value()->perk_type() == cur_type;
-					}
-				)
-			);
-
-			item_it->push_back(
-				fcppt::make_unique_ptr<
-					sanguis::client::gui::perk::item
-				>(
-					sanguis::client::gui::perk::node(
-						&item_it->value()->widget()
-					),
-					*element.value()
-				)
-			);
-		}
-		else
-			items_.push_back(
-				fcppt::make_unique_ptr<
-					sanguis::client::gui::perk::item
-				>(
-					sanguis::client::gui::perk::node(
-						&tree_widget_
-					),
-					*element.value()
-				)
-			);
-	}
-
-	this->update_tree_data();
-*/

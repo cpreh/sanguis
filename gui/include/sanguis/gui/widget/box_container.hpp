@@ -48,6 +48,10 @@ public:
 	SANGUIS_GUI_SYMBOL
 	void
 	pop_back();
+
+	SANGUIS_GUI_SYMBOL
+	sge::rucksack::widget::box::base &
+	box_layout();
 private:
 	sge::rucksack::widget::box::base layout_;
 };

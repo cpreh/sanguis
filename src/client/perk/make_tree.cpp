@@ -8,6 +8,7 @@
 #include <sanguis/client/perk/optional_info.hpp>
 #include <sanguis/client/perk/required_parent_level.hpp>
 #include <sanguis/client/perk/required_player_level.hpp>
+#include <sanguis/client/perk/to_category.hpp>
 #include <sanguis/client/perk/tree.hpp>
 #include <sanguis/messages/perk_tree_node.hpp>
 #include <sanguis/messages/perk_tree_node_list.hpp>
@@ -23,6 +24,7 @@
 #include <fcppt/container/tree/pre_order.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <algorithm>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -108,6 +110,26 @@ sanguis::client::perk::make_tree(
 				)
 			)
 		);
+
+	std::sort(
+		ret->begin(),
+		ret->end(),
+		[](
+			sanguis::client::perk::tree_unique_ptr const &_left,
+			sanguis::client::perk::tree_unique_ptr const &_right
+		)
+		{
+			return
+				sanguis::client::perk::to_category(
+					_left->value()->type()
+				)
+				<
+				sanguis::client::perk::to_category(
+					_right->value()->type()
+				);
+		}
+	);
+
 
 	return
 		std::move(

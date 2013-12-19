@@ -77,3 +77,10 @@ sanguis::gui::widget::box_container::pop_back()
 
 	// TODO: Do we have to pop back the layout as well?
 }
+
+sge::rucksack::widget::box::base &
+sanguis::gui::widget::box_container::box_layout()
+{
+	return
+		layout_;
+}

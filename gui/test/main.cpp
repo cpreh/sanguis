@@ -9,6 +9,12 @@
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
 #include <sanguis/gui/widget/reference_alignment_vector.hpp>
+#include <sanguis/gui/widget/reference_tree.hpp>
+#include <sanguis/gui/widget/reference_tree_vector.hpp>
+#include <sanguis/gui/widget/text.hpp>
+#include <sanguis/gui/widget/tree.hpp>
+#include <sanguis/gui/widget/unique_ptr.hpp>
+#include <sanguis/gui/widget/unique_ptr_tree.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/object.hpp>
 #include <sge/font/object_scoped_ptr.hpp>
@@ -68,7 +74,9 @@
 #include <awl/main/exit_success.hpp>
 #include <awl/main/function_context_fwd.hpp>
 #include <fcppt/exception.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/container/tree/map.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <main.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -194,7 +202,47 @@ try
 
 	sanguis::gui::context context;
 
-	sanguis::gui::widget::box_container main_widget(
+	sanguis::gui::widget::unique_ptr_tree widget_tree(
+		fcppt::make_unique_ptr<
+			sanguis::gui::widget::text
+		>(
+			sys.renderer_ffp(),
+			*font,
+			SGE_FONT_LIT("Toplevel")
+		)
+	);
+
+	widget_tree.push_back(
+		fcppt::make_unique_ptr<
+			sanguis::gui::widget::text
+		>(
+			sys.renderer_ffp(),
+			*font,
+			SGE_FONT_LIT("Child 1")
+		)
+	);
+
+	sanguis::gui::widget::tree tree(
+		context,
+		sanguis::gui::widget::reference_tree_vector{
+			fcppt::container::tree::map<
+				sanguis::gui::widget::reference_tree
+			>(
+				widget_tree,
+				[](
+					sanguis::gui::widget::unique_ptr const &_widget
+				)
+				{
+					return
+						sanguis::gui::widget::reference(
+							*_widget
+						);
+				}
+			)
+		}
+	);
+
+	sanguis::gui::widget::box_container line_widget(
 		context,
 		sanguis::gui::widget::reference_alignment_vector{
 			sanguis::gui::widget::reference_alignment_pair(
@@ -217,6 +265,26 @@ try
 			)
 		},
 		sge::rucksack::axis::x,
+		sanguis::gui::default_aspect()
+	);
+
+	sanguis::gui::widget::box_container main_widget(
+		context,
+		sanguis::gui::widget::reference_alignment_vector{
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					tree
+				),
+				sge::rucksack::alignment::center
+			),
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					line_widget
+				),
+				sge::rucksack::alignment::center
+			)
+		},
+		sge::rucksack::axis::y,
 		sanguis::gui::default_aspect()
 	);
 

@@ -373,6 +373,11 @@ set(
 	include/sanguis/client/gui/perk/chooser.hpp
 	include/sanguis/client/gui/perk/chooser_fwd.hpp
 	include/sanguis/client/gui/perk/item_color.hpp
+	include/sanguis/client/gui/perk/line.hpp
+	include/sanguis/client/gui/perk/line_fwd.hpp
+	include/sanguis/client/gui/perk/line_unique_ptr.hpp
+	include/sanguis/client/gui/perk/line_unique_ptr_tree.hpp
+	include/sanguis/client/gui/perk/line_unique_ptr_tree_fwd.hpp
 	include/sanguis/client/gui/perk/state.hpp
 	include/sanguis/client/gui/perk/state_fwd.hpp
 	include/sanguis/client/health.hpp
@@ -387,6 +392,7 @@ set(
 	include/sanguis/client/max_health.hpp
 	include/sanguis/client/object.hpp
 	include/sanguis/client/perk/category.hpp
+	include/sanguis/client/perk/category_equal_range.hpp
 	include/sanguis/client/perk/category_fwd.hpp
 	include/sanguis/client/perk/category_to_string.hpp
 	include/sanguis/client/perk/change_callback.hpp
@@ -395,6 +401,7 @@ set(
 	include/sanguis/client/perk/choosable_state.hpp
 	include/sanguis/client/perk/choosable_state_fwd.hpp
 	include/sanguis/client/perk/compare.hpp
+	include/sanguis/client/perk/const_tree_range.hpp
 	include/sanguis/client/perk/find_info.hpp
 	include/sanguis/client/perk/find_info_any.hpp
 	include/sanguis/client/perk/find_info_const.hpp
@@ -1506,6 +1513,7 @@ set(
 	src/client/machine.cpp
 	src/client/make_send_callback.cpp
 	src/client/object.cpp
+	src/client/perk/category_equal_range.cpp
 	src/client/perk/choosable.cpp
 	src/client/perk/compare.cpp
 	src/client/perk/find_info.cpp
