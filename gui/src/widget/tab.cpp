@@ -72,7 +72,7 @@ sanguis::gui::widget::tab::tab(
 						click_connection_(
 							this->click(
 								[
-									&_widget,
+									_widget,
 									&_self
 								]
 								()
@@ -85,6 +85,8 @@ sanguis::gui::widget::tab::tab(
 											sge::rucksack::alignment::right_or_bottom
 										)
 									);
+
+									_self.layout().relayout();
 								}
 							)
 						)

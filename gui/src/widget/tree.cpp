@@ -93,7 +93,7 @@ sanguis::gui::widget::tree::tree(
 													sanguis::gui::widget::reference(
 														_new_widget
 													),
-													sge::rucksack::alignment::right_or_bottom
+													sge::rucksack::alignment::center
 												)
 											},
 											sge::rucksack::axis::x,
@@ -135,7 +135,7 @@ sanguis::gui::widget::tree::tree(
 									{
 										this->box_layout().push_front_child(
 											padding_,
-											sge::rucksack::alignment::left_or_top
+											sge::rucksack::alignment::center
 										);
 									}
 

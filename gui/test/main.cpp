@@ -9,8 +9,11 @@
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
 #include <sanguis/gui/widget/reference_alignment_vector.hpp>
+#include <sanguis/gui/widget/reference_name_pair.hpp>
+#include <sanguis/gui/widget/reference_name_vector.hpp>
 #include <sanguis/gui/widget/reference_tree.hpp>
 #include <sanguis/gui/widget/reference_tree_vector.hpp>
+#include <sanguis/gui/widget/tab.hpp>
 #include <sanguis/gui/widget/text.hpp>
 #include <sanguis/gui/widget/tree.hpp>
 #include <sanguis/gui/widget/unique_ptr.hpp>
@@ -222,6 +225,38 @@ try
 		)
 	);
 
+	sanguis::gui::widget::text text1(
+		sys.renderer_ffp(),
+		*font,
+		SGE_FONT_LIT("Tab 1 content")
+	);
+
+	sanguis::gui::widget::text text2(
+		sys.renderer_ffp(),
+		*font,
+		SGE_FONT_LIT("Tab 2 content")
+	);
+
+	sanguis::gui::widget::tab tab(
+		sys.renderer_ffp(),
+		*font,
+		context,
+		sanguis::gui::widget::reference_name_vector{
+			sanguis::gui::widget::reference_name_pair(
+				sanguis::gui::widget::reference(
+					text1
+				),
+				SGE_FONT_LIT("Tab 1")
+			),
+			sanguis::gui::widget::reference_name_pair(
+				sanguis::gui::widget::reference(
+					text2
+				),
+				SGE_FONT_LIT("Tab 2")
+			)
+		}
+	);
+
 	sanguis::gui::widget::tree tree(
 		context,
 		sanguis::gui::widget::reference_tree_vector{
@@ -271,6 +306,12 @@ try
 	sanguis::gui::widget::box_container main_widget(
 		context,
 		sanguis::gui::widget::reference_alignment_vector{
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					tab
+				),
+				sge::rucksack::alignment::center
+			),
 			sanguis::gui::widget::reference_alignment_pair(
 				sanguis::gui::widget::reference(
 					tree

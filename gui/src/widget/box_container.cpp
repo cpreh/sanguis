@@ -73,9 +73,9 @@ sanguis::gui::widget::box_container::push_back(
 void
 sanguis::gui::widget::box_container::pop_back()
 {
-	this->pop_back_widget();
+	layout_.pop_back_child();
 
-	// TODO: Do we have to pop back the layout as well?
+	this->pop_back_widget();
 }
 
 sge::rucksack::widget::box::base &

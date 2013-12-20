@@ -59,6 +59,13 @@ sanguis::gui::widget::base::parent(
 	sanguis::gui::widget::optional_ref const _parent
 )
 {
+	if(
+		parent_
+	)
+		this->layout().parent(
+			sge::rucksack::widget::optional_parent()
+		);
+
 	parent_ =
 		_parent;
 
