@@ -47,7 +47,18 @@ sanguis::client::gui::perk::chooser::chooser(
 	top_text_(
 		_renderer,
 		_font,
+		// TODO: Initialize!
 		SGE_FONT_LIT("")
+	),
+	gui_state_(
+		fcppt::make_unique_ptr<
+			sanguis::client::gui::perk::state
+		>(
+			_renderer,
+			_font,
+			gui_context_,
+			_state
+		)
 	),
 	main_container_(
 		gui_context_,
@@ -56,7 +67,13 @@ sanguis::client::gui::perk::chooser::chooser(
 				sanguis::gui::widget::reference(
 					top_text_
 				),
-				sge::rucksack::alignment::center
+				sge::rucksack::alignment::left_or_top
+			),
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					gui_state_->widget()
+				),
+				sge::rucksack::alignment::left_or_top
 			)
 		},
 		sge::rucksack::axis::y,
@@ -70,7 +87,6 @@ sanguis::client::gui::perk::chooser::chooser(
 		gui_context_,
 		main_container_
 	),
-	gui_state_(),
 	perk_connection_(
 		_state.register_perks_change(
 			std::bind(
@@ -88,8 +104,6 @@ sanguis::client::gui::perk::chooser::chooser(
 		)
 	)
 {
-	this->perks();
-
 	this->level();
 }
 
@@ -118,6 +132,8 @@ sanguis::client::gui::perk::chooser::draw(
 void
 sanguis::client::gui::perk::chooser::perks()
 {
+	main_container_.pop_back();
+
 	gui_state_.take(
 		fcppt::make_unique_ptr<
 			sanguis::client::gui::perk::state
@@ -126,6 +142,16 @@ sanguis::client::gui::perk::chooser::perks()
 			font_,
 			gui_context_,
 			state_
+		)
+	);
+
+	main_container_.push_back(
+		sanguis::gui::widget::reference_alignment_pair(
+			sanguis::gui::widget::reference(
+				gui_state_->widget()
+			),
+			// TODO: Constant!
+			sge::rucksack::alignment::left_or_top
 		)
 	);
 }

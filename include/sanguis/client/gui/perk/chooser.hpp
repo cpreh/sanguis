@@ -75,10 +75,6 @@ private:
 
 	sanguis::gui::widget::text top_text_;
 
-	sanguis::gui::widget::box_container main_container_;
-
-	sanguis::gui::master gui_master_;
-
 	typedef
 	fcppt::scoped_ptr<
 		sanguis::client::gui::perk::state
@@ -86,6 +82,10 @@ private:
 	state_scoped_ptr;
 
 	state_scoped_ptr gui_state_;
+
+	sanguis::gui::widget::box_container main_container_;
+
+	sanguis::gui::master gui_master_;
 
 	fcppt::signal::scoped_connection const
 		perk_connection_,

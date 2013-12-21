@@ -54,3 +54,10 @@ sanguis::client::gui::perk::state::state(
 sanguis::client::gui::perk::state::~state()
 {
 }
+
+sanguis::gui::widget::tab &
+sanguis::client::gui::perk::state::widget()
+{
+	return
+		main_tab_;
+}

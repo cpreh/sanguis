@@ -34,6 +34,9 @@ public:
 	);
 
 	~state();
+
+	sanguis::gui::widget::tab &
+	widget();
 private:
 	sanguis::client::gui::perk::tab_unique_ptr_vector tabs_;
 
