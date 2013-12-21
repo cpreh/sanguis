@@ -15,7 +15,8 @@ namespace perk
 typedef
 fcppt::optional<
 	sanguis::client::perk::info
-> optional_info;
+>
+optional_info;
 
 }
 }

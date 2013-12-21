@@ -24,7 +24,6 @@
 #include <fcppt/container/tree/pre_order.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <algorithm>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -111,9 +110,7 @@ sanguis::client::perk::make_tree(
 			)
 		);
 
-	std::sort(
-		ret->begin(),
-		ret->end(),
+	ret->children().sort(
 		[](
 			sanguis::client::perk::tree_unique_ptr const &_left,
 			sanguis::client::perk::tree_unique_ptr const &_right
@@ -121,15 +118,14 @@ sanguis::client::perk::make_tree(
 		{
 			return
 				sanguis::client::perk::to_category(
-					_left->value()->type()
+					_left->value()->perk_type()
 				)
 				<
 				sanguis::client::perk::to_category(
-					_right->value()->type()
+					_right->value()->perk_type()
 				);
 		}
 	);
-
 
 	return
 		std::move(

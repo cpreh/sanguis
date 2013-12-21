@@ -3,7 +3,7 @@
 
 #include <sanguis/client/perk/tree.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <utility>
+#include <boost/range/iterator_range_core.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -15,8 +15,7 @@ namespace perk
 {
 
 typedef
-std::pair<
-	sanguis::client::perk::tree::const_iterator,
+boost::iterator_range<
 	sanguis::client::perk::tree::const_iterator
 >
 const_tree_range;

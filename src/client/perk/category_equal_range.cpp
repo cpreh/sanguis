@@ -27,17 +27,19 @@ sanguis::client::perk::category_equal_range(
 			std::equal_range(
 				_begin,
 				_end,
-				[
-					_begin
-				](
-					sanguis::gui::perk::info const &_info
+				*_begin,
+				[](
+					sanguis::client::perk::tree const &_left,
+					sanguis::client::perk::tree const &_right
 				)
 				{
 					return
-						_begin->perk_type()
+						sanguis::client::perk::to_category(
+							_left.value()->perk_type()
+						)
 						<
-						sanguis::gui::perk::to_category(
-							_info.perk_type()
+						sanguis::client::perk::to_category(
+							_right.value()->perk_type()
 						);
 				}
 			)

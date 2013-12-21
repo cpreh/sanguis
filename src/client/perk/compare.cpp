@@ -23,5 +23,5 @@ sanguis::client::perk::compare::operator()(
 	return
 		_tree.value().has_value()
 		&&
-		_tree.value()->type() == type_;
+		_tree.value()->perk_type() == type_;
 }

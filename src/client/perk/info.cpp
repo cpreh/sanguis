@@ -77,7 +77,7 @@ sanguis::client::perk::info::increment_level()
 }
 
 sanguis::perk_type
-sanguis::client::perk::info::type() const
+sanguis::client::perk::info::perk_type() const
 {
 	return
 		type_;

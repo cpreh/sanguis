@@ -68,9 +68,7 @@ sanguis::client::perk::state::perks(
 	remaining_levels_ =
 		_remaining_levels;
 
-	change_signal_(
-		*perks_
-	);
+	change_signal_();
 }
 
 void
@@ -92,11 +90,10 @@ sanguis::client::perk::state::player_level(
 			current_level_.get()
 		);
 
-	current_level_ = _level;
+	current_level_ =
+		_level;
 
-	level_signal_(
-		_level
-	);
+	level_signal_();
 }
 
 bool

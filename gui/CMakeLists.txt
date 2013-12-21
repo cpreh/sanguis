@@ -47,6 +47,7 @@ set(
 	include/sanguis/gui/widget/unique_ptr.hpp
 	include/sanguis/gui/widget/unique_ptr_tree.hpp
 	include/sanguis/gui/widget/unique_ptr_tree_fwd.hpp
+	include/sanguis/gui/widget/unique_ptr_tree_vector.hpp
 	include/sanguis/gui/widget/unique_ptr_vector.hpp
 	src/aux_/draw_image.cpp
 	src/aux_/fill_rect.cpp

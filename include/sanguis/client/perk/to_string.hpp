@@ -12,7 +12,7 @@ namespace client
 namespace perk
 {
 
-fcppt::string const
+fcppt::string
 to_string(
 	sanguis::perk_type
 );

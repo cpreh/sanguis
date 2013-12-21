@@ -36,7 +36,7 @@ public:
 	increment_level();
 
 	sanguis::perk_type
-	type() const;
+	perk_type() const;
 
 	sanguis::client::perk::level const
 	level() const;

@@ -5,7 +5,7 @@
 #include <fcppt/assert/unreachable.hpp>
 
 
-fcppt::string const
+fcppt::string
 sanguis::client::perk::to_string(
 	sanguis::perk_type const _type
 )

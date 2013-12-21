@@ -71,8 +71,7 @@ sanguis::client::gui::perk::chooser::chooser(
 		_state.register_perks_change(
 			std::bind(
 				&sanguis::client::gui::perk::chooser::perks,
-				this,
-				std::placeholders::_1
+				this
 			)
 		)
 	),
@@ -80,8 +79,7 @@ sanguis::client::gui::perk::chooser::chooser(
 		_state.register_level_change(
 			std::bind(
 				&sanguis::client::gui::perk::chooser::level,
-				this,
-				std::placeholders::_1
+				this
 			)
 		)
 	)
@@ -120,9 +118,10 @@ sanguis::client::gui::perk::chooser::perks()
 		fcppt::make_unique_ptr<
 			sanguis::client::gui::perk::state
 		>(
-			state_,
 			renderer_,
-			font_
+			font_,
+			gui_context_,
+			state_
 		)
 	);
 }
