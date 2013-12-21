@@ -12,10 +12,13 @@
 #include <sanguis/gui/widget/edit.hpp>
 #include <sge/font/align_h.hpp>
 #include <sge/font/char_type.hpp>
+//#include <sge/font/flags.hpp>
+//#include <sge/font/flags_field.hpp>
 #include <sge/font/metrics.hpp>
 #include <sge/font/object.hpp>
 #include <sge/font/string.hpp>
 #include <sge/font/text_parameters.hpp>
+#include <sge/font/unit.hpp>
 #include <sge/font/v_center.hpp>
 #include <sge/font/vector.hpp>
 #include <sge/font/draw/simple.hpp>
@@ -41,6 +44,7 @@
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <algorithm>
 #include <locale>
 #include <fcppt/config/external_end.hpp>
 
@@ -177,12 +181,25 @@ sanguis::gui::widget::edit::on_draw(
 			sge::font::align_h::left
 		)
 		.max_width(
-			layout_.size().w()
-			-
-			2
-			*
-			sanguis::gui::aux_::style::spacing::value
-		),
+			std::max(
+				layout_.size().w()
+				-
+				2
+				*
+				sanguis::gui::aux_::style::spacing::value,
+				fcppt::literal<
+					sge::font::unit
+				>(
+					0
+				)
+			)
+		)
+		/*
+		.flags(
+			sge::font::flags_field(
+				sge::font::flags::no_multi_line
+			)
+		)*/,
 		fcppt::math::vector::structure_cast<
 			sge::font::vector
 		>(

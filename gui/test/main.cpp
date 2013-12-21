@@ -224,6 +224,16 @@ try
 		)
 	);
 
+	widget_tree.push_back(
+		fcppt::make_unique_ptr<
+			sanguis::gui::widget::text
+		>(
+			sys.renderer_ffp(),
+			*font,
+			SGE_FONT_LIT("Child 2")
+		)
+	);
+
 	sanguis::gui::widget::text text1(
 		sys.renderer_ffp(),
 		*font,
@@ -315,7 +325,7 @@ try
 				sanguis::gui::widget::reference(
 					tree
 				),
-				sge::rucksack::alignment::center
+				sge::rucksack::alignment::left_or_top
 			),
 			sanguis::gui::widget::reference_alignment_pair(
 				sanguis::gui::widget::reference(
