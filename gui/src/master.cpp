@@ -1,6 +1,8 @@
 #include <sanguis/gui/context.hpp>
 #include <sanguis/gui/master.hpp>
+#include <sanguis/gui/aux_/fill_rect.hpp>
 #include <sanguis/gui/widget/base.hpp>
+#include <sge/image/color/predef.hpp>
 #include <sge/input/cursor/button_code.hpp>
 #include <sge/input/cursor/button_event.hpp>
 #include <sge/input/cursor/object.hpp>
@@ -11,8 +13,11 @@
 #include <sge/input/keyboard/key_event.hpp>
 #include <sge/input/keyboard/key_repeat_event.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
+#include <sge/renderer/device/ffp.hpp>
+#include <sge/rucksack/rect.hpp>
 #include <sge/rucksack/vector.hpp>
 #include <sge/rucksack/widget/base.hpp>
+#include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -21,12 +26,17 @@
 
 
 sanguis::gui::master::master(
+	sge::renderer::device::ffp &_renderer,
+	sge::viewport::manager &_viewport_manager,
 	sge::input::keyboard::device &_keyboard,
 	sge::input::cursor::object &_cursor,
 	sanguis::gui::context &_context,
 	sanguis::gui::widget::base &_widget
 )
 :
+	renderer_(
+		_renderer
+	),
 	cursor_(
 		_cursor
 	),
@@ -35,6 +45,10 @@ sanguis::gui::master::master(
 	),
 	widget_(
 		_widget
+	),
+	viewport_adaptor_(
+		_viewport_manager,
+		_renderer
 	),
 	key_connection_(
 		_keyboard.key_callback(
@@ -73,6 +87,10 @@ sanguis::gui::master::master(
 		)
 	)
 {
+	viewport_adaptor_.child(
+		widget_.layout()
+	);
+
 	widget_.layout().relayout();
 }
 
@@ -85,6 +103,13 @@ sanguis::gui::master::draw(
 	sge::renderer::context::ffp &_context
 )
 {
+	sanguis::gui::aux_::fill_rect(
+		renderer_,
+		_context,
+		widget_.layout().area(),
+		sge::image::color::predef::lightblue()
+	);
+
 	widget_.on_draw(
 		_context
 	);

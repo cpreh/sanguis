@@ -48,7 +48,6 @@
 #include <sge/renderer/target/onscreen.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
-#include <sge/rucksack/widget/viewport_adaptor.hpp>
 #include <sge/systems/cursor_demuxer.hpp>
 #include <sge/systems/cursor_option_field.hpp>
 #include <sge/systems/keyboard_collector.hpp>
@@ -330,19 +329,12 @@ try
 	);
 
 	sanguis::gui::master master(
+		sys.renderer_ffp(),
+		sys.viewport_manager(),
 		sys.keyboard_collector(),
 		sys.cursor_demuxer(),
 		context,
 		main_widget
-	);
-
-	sge::rucksack::widget::viewport_adaptor viewport_adaptor(
-		sys.viewport_manager(),
-		sys.renderer_ffp()
-	);
-
-	viewport_adaptor.child(
-		main_widget.layout()
 	);
 
 	while(

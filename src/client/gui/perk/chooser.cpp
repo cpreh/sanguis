@@ -16,6 +16,7 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
+#include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
@@ -28,6 +29,7 @@ sanguis::client::gui::perk::chooser::chooser(
 	sanguis::client::cursor::object &_cursor,
 	sanguis::client::perk::state &_state,
 	sge::renderer::device::ffp &_renderer,
+	sge::viewport::manager &_viewport_manager,
 	sge::font::object &_font,
 	sge::input::keyboard::device &_keyboard
 )
@@ -61,6 +63,8 @@ sanguis::client::gui::perk::chooser::chooser(
 		sanguis::gui::default_aspect()
 	),
 	gui_master_(
+		_renderer,
+		_viewport_manager,
 		_keyboard,
 		_cursor,
 		gui_context_,

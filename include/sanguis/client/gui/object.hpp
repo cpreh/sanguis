@@ -3,12 +3,12 @@
 
 #include <sanguis/duration.hpp>
 #include <sanguis/client/gui/object_fwd.hpp>
-#include <sanguis/client/cursor/object_fwd.hpp>
 #include <sge/cegui/default_cursor.hpp>
 #include <sge/cegui/default_keyboard.hpp>
 #include <sge/cegui/syringe.hpp>
 #include <sge/cegui/system.hpp>
 #include <sge/image2d/system_fwd.hpp>
+#include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
@@ -34,7 +34,7 @@ public:
 		sge::image2d::system &,
 		sge::viewport::manager &,
 		sge::input::keyboard::device &,
-		sanguis::client::cursor::object &
+		sge::input::cursor::object &
 	);
 
 	~object();

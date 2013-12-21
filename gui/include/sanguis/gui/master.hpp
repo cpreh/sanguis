@@ -14,6 +14,9 @@
 #include <sge/input/keyboard/key_event_fwd.hpp>
 #include <sge/input/keyboard/key_repeat_event_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
+#include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/rucksack/widget/viewport_adaptor.hpp>
+#include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 
@@ -31,6 +34,8 @@ class master
 public:
 	SANGUIS_GUI_SYMBOL
 	master(
+		sge::renderer::device::ffp &,
+		sge::viewport::manager &,
 		sge::input::keyboard::device &,
 		sge::input::cursor::object &,
 		sanguis::gui::context &,
@@ -75,11 +80,15 @@ private:
 		sge::input::keyboard::key_code
 	);
 
+	sge::renderer::device::ffp &renderer_;
+
 	sge::input::cursor::object &cursor_;
 
 	sanguis::gui::context &context_;
 
 	sanguis::gui::widget::base &widget_;
+
+	sge::rucksack::widget::viewport_adaptor viewport_adaptor_;
 
 	fcppt::signal::scoped_connection const
 		key_connection_,

@@ -27,6 +27,7 @@ namespace client
 namespace cursor
 {
 
+// TODO: Move this to SGE!
 class object
 :
 	public sge::input::cursor::object

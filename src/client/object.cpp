@@ -100,7 +100,7 @@ sanguis::client::object::object(
 		sys_->image_system(),
 		sys_->viewport_manager(),
 		sys_->keyboard_collector(),
-		cursor_
+		sys_->cursor_demuxer()
 	),
 	machine_(
 		settings_,

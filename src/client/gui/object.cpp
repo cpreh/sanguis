@@ -1,5 +1,4 @@
 #include <sanguis/duration.hpp>
-#include <sanguis/client/cursor/object.hpp>
 #include <sanguis/client/gui/object.hpp>
 #include <sge/cegui/cursor_visibility.hpp>
 #include <sge/cegui/duration.hpp>
@@ -7,6 +6,7 @@
 #include <sge/cegui/system_fwd.hpp>
 #include <sge/config/media_path.hpp>
 #include <sge/image2d/system_fwd.hpp>
+#include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
@@ -23,7 +23,7 @@ sanguis::client::gui::object::object(
 	sge::image2d::system &_image_loader,
 	sge::viewport::manager &_viewport_manager,
 	sge::input::keyboard::device &_keyboard,
-	sanguis::client::cursor::object &_cursor
+	sge::input::cursor::object &_cursor
 )
 :
 	system_(
