@@ -1,7 +1,10 @@
 #include <sanguis/client/gui/perk/line.hpp>
+#include <sanguis/client/gui/perk/make_description.hpp>
+#include <sanguis/client/perk/find_info_const.hpp>
 #include <sanguis/client/perk/info.hpp>
 #include <sanguis/client/perk/state.hpp>
 #include <sanguis/client/perk/to_string.hpp>
+#include <sanguis/client/perk/tree.hpp>
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
@@ -47,7 +50,9 @@ sanguis::client::gui::perk::line::line(
 	text_(
 		_renderer,
 		_font,
-		sge::font::string() // TODO
+		sanguis::client::gui::perk::make_description(
+			_info
+		)
 	),
 	box_(
 		_context,
@@ -56,13 +61,13 @@ sanguis::client::gui::perk::line::line(
 				sanguis::gui::widget::reference(
 					button_
 				),
-				sge::rucksack::alignment::left_or_top
+				sge::rucksack::alignment::center
 			),
 			sanguis::gui::widget::reference_alignment_pair(
 				sanguis::gui::widget::reference(
 					text_
 				),
-				sge::rucksack::alignment::left_or_top
+				sge::rucksack::alignment::center
 			)
 		},
 		sge::rucksack::axis::x,
@@ -98,7 +103,12 @@ sanguis::client::gui::perk::line::on_click()
 			perk_type_
 		)
 	)
-	{
-		// TODO: Update!
-	}
+		text_.value(
+			sanguis::client::gui::perk::make_description(
+				*sanguis::client::perk::find_info_const(
+					perk_type_,
+					state_.perks()
+				).value()
+			)
+		);
 }

@@ -129,6 +129,8 @@ sanguis::client::perk::state::choose_perk(
 		_type
 	);
 
+	level_signal_();
+
 	return true;
 }
 
