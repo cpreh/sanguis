@@ -19,6 +19,7 @@
 #include <sge/console/gfx.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/image2d/system_fwd.hpp>
+#include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/context/scoped_ffp.hpp>
 #include <sge/renderer/device/ffp.hpp>
@@ -54,7 +55,7 @@ sanguis::client::machine::machine(
 	sge::font::object &_font_object,
 	sge::console::gfx &_console_gfx,
 	sge::input::keyboard::device &_keyboard,
-	sanguis::client::cursor::object &_cursor,
+	sge::input::cursor::object &_cursor,
 	sge::renderer::device::ffp &_renderer,
 	sge::image2d::system &_image_loader,
 	sanguis::io_service &_io_service,
@@ -288,13 +289,13 @@ sanguis::client::machine::resources() const
 	return resources_;
 }
 
-sanguis::client::cursor::object &
+sge::input::cursor::object &
 sanguis::client::machine::cursor()
 {
 	return cursor_;
 }
 
-sanguis::client::cursor::object const &
+sge::input::cursor::object const &
 sanguis::client::machine::cursor() const
 {
 	return cursor_;

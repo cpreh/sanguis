@@ -1,10 +1,10 @@
 #ifndef SANGUIS_CLIENT_STATES_INGAME_HPP_INCLUDED
 #define SANGUIS_CLIENT_STATES_INGAME_HPP_INCLUDED
 
-#include <sanguis/client/cursor/scoped.hpp>
 #include <sanguis/client/events/action_fwd.hpp>
 #include <sanguis/client/states/ingame_fwd.hpp>
 #include <sanguis/client/states/has_player.hpp>
+#include <sge/input/cursor/scoped_activation.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
@@ -53,7 +53,7 @@ public:
 		sanguis::client::events::action const &
 	);
 private:
-	sanguis::client::cursor::scoped const scoped_cursor_;
+	sge::input::cursor::scoped_activation const scoped_cursor_;
 };
 
 }

@@ -2,7 +2,6 @@
 #define SANGUIS_CLIENT_GUI_PERK_CHOOSER_HPP_INCLUDED
 
 #include <sanguis/duration.hpp>
-#include <sanguis/client/cursor/object_fwd.hpp>
 #include <sanguis/client/gui/perk/chooser_fwd.hpp>
 #include <sanguis/client/gui/perk/state_fwd.hpp>
 #include <sanguis/client/perk/state_fwd.hpp>
@@ -11,6 +10,7 @@
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/text.hpp>
 #include <sge/font/object_fwd.hpp>
+#include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
@@ -36,11 +36,11 @@ class chooser
 	);
 public:
 	chooser(
-		sanguis::client::cursor::object &,
 		sanguis::client::perk::state &,
 		sge::renderer::device::ffp &,
 		sge::viewport::manager &,
 		sge::font::object &,
+		sge::input::cursor::object &,
 		sge::input::keyboard::device &
 	);
 

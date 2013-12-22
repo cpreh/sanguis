@@ -92,9 +92,6 @@ sanguis::client::object::object(
 		sys_->audio_loader(),
 		sys_->audio_player()
 	),
-	cursor_(
-		sys_->cursor_demuxer()
-	),
 	gui_(
 		sys_->renderer_ffp(),
 		sys_->image_system(),
@@ -115,7 +112,7 @@ sanguis::client::object::object(
 		*font_object_,
 		console_gfx_.get(),
 		sys_->keyboard_collector(),
-		cursor_,
+		sys_->cursor_demuxer(),
 		sys_->renderer_ffp(),
 		sys_->image_system(),
 		io_service_,

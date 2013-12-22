@@ -5,11 +5,12 @@
 #include <sanguis/client/control/actions/binary_type_fwd.hpp>
 #include <sanguis/client/control/actions/callback.hpp>
 #include <sanguis/client/control/actions/nullary_type_fwd.hpp>
-#include <sanguis/client/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/input/keyboard/key_event_fwd.hpp>
+#include <sge/input/cursor/activatable.hpp>
 #include <sge/input/cursor/move_event_fwd.hpp>
 #include <sge/input/cursor/button_event_fwd.hpp>
+#include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/cursor/position_unit.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
@@ -30,11 +31,14 @@ class input_translator
 public:
 	input_translator(
 		sge::input::keyboard::device &,
-		sanguis::client::cursor::object &,
+		sge::input::cursor::object &,
 		sanguis::client::control::actions::callback const &
 	);
 
 	~input_translator();
+
+	sge::input::cursor::activatable &
+	cursor();
 private:
 	void
 	key_callback(
@@ -67,6 +71,8 @@ private:
 		bool pressed,
 		sanguis::client::control::actions::binary_type
 	);
+
+	sge::input::cursor::activatable cursor_;
 
 	sanguis::client::control::actions::callback const callback_;
 

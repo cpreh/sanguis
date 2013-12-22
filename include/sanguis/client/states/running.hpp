@@ -20,6 +20,7 @@
 #include <sanguis/messages/level_up_fwd.hpp>
 #include <sanguis/messages/pause_fwd.hpp>
 #include <sanguis/messages/unpause_fwd.hpp>
+#include <sge/input/cursor/activatable_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -124,6 +125,9 @@ public:
 
 	sanguis::client::console::object &
 	console();
+
+	sge::input::cursor::activatable &
+	cursor();
 private:
 	void
 	handle_player_action(

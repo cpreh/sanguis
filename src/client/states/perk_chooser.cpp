@@ -35,9 +35,6 @@ sanguis::client::states::perk_chooser::perk_chooser(
 	),
 	perk_chooser_gui_(
 		this->context<
-			sanguis::client::machine
-		>().cursor(),
-		this->context<
 			sanguis::client::states::has_player
 		>().perk_state(),
 		this->context<
@@ -49,6 +46,9 @@ sanguis::client::states::perk_chooser::perk_chooser(
 		this->context<
 			sanguis::client::machine
 		>().font_object(),
+		this->context<
+			sanguis::client::machine
+		>().cursor(),
 		this->context<
 			sanguis::client::machine
 		>().keyboard()

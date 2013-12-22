@@ -1,3 +1,4 @@
+#include <sanguis/client/machine.hpp>
 #include <sanguis/client/control/actions/nullary.hpp>
 #include <sanguis/client/control/actions/nullary_type.hpp>
 #include <sanguis/client/control/actions/variant.hpp>
@@ -11,6 +12,7 @@
 #include <sanguis/client/states/ingame.hpp>
 #include <sanguis/client/states/ingame_menu.hpp>
 #include <sanguis/client/states/perk_chooser.hpp>
+#include <sanguis/client/states/running.hpp>
 #include <fcppt/variant/holds_type.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/result.hpp>
@@ -26,7 +28,7 @@ sanguis::client::states::ingame::ingame(
 	),
 	scoped_cursor_(
 		this->context<
-			sanguis::client::machine
+			sanguis::client::states::running
 		>().cursor()
 	)
 {

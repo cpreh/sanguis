@@ -13,12 +13,13 @@
 #include <sanguis/client/control/actions/nullary_type.hpp>
 #include <sanguis/client/control/actions/scale.hpp>
 #include <sanguis/client/control/actions/scale_type.hpp>
-#include <sanguis/client/cursor/object.hpp>
+#include <sge/input/cursor/activatable.hpp>
+#include <sge/input/cursor/button_event.hpp>
+#include <sge/input/cursor/move_event.hpp>
+#include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device.hpp>
 #include <sge/input/keyboard/key_code.hpp>
 #include <sge/input/keyboard/key_event.hpp>
-#include <sge/input/cursor/button_event.hpp>
-#include <sge/input/cursor/move_event.hpp>
 #include <sge/input/mouse/device.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -45,10 +46,13 @@ key_scale_value(
 
 sanguis::client::control::input_translator::input_translator(
 	sge::input::keyboard::device &_keyboard,
-	sanguis::client::cursor::object &_cursor,
+	sge::input::cursor::object &_cursor,
 	sanguis::client::control::actions::callback const &_callback
 )
 :
+	cursor_(
+		_cursor
+	),
 	callback_(
 		_callback
 	),
@@ -62,7 +66,7 @@ sanguis::client::control::input_translator::input_translator(
 		)
 	),
 	axis_connection_(
-		_cursor.move_callback(
+		cursor_.move_callback(
 			std::bind(
 				&sanguis::client::control::input_translator::move_callback,
 				this,
@@ -71,7 +75,7 @@ sanguis::client::control::input_translator::input_translator(
 		)
 	),
 	button_connection_(
-		_cursor.button_callback(
+		cursor_.button_callback(
 			std::bind(
 				&sanguis::client::control::input_translator::button_callback,
 				this,
@@ -84,6 +88,13 @@ sanguis::client::control::input_translator::input_translator(
 
 sanguis::client::control::input_translator::~input_translator()
 {
+}
+
+sge::input::cursor::activatable &
+sanguis::client::control::input_translator::cursor()
+{
+	return
+		cursor_;
 }
 
 void

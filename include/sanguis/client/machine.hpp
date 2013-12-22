@@ -2,7 +2,6 @@
 #define SANGUIS_CLIENT_MACHINE_HPP_INCLUDED
 
 #include <sanguis/client/machine_fwd.hpp>
-#include <sanguis/client/cursor/object_fwd.hpp>
 #include <sanguis/client/config/settings/object_fwd.hpp>
 #include <sanguis/client/gui/object_fwd.hpp>
 #include <sanguis/client/states/menu_fwd.hpp>
@@ -13,6 +12,7 @@
 #include <sanguis/io_service_fwd.hpp>
 #include <sge/console/gfx_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
+#include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/image2d/system_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
@@ -56,7 +56,7 @@ public:
 		sge::font::object &,
 		sge::console::gfx &,
 		sge::input::keyboard::device &,
-		sanguis::client::cursor::object &,
+		sge::input::cursor::object &,
 		sge::renderer::device::ffp &,
 		sge::image2d::system &,
 		sanguis::io_service &,
@@ -116,10 +116,10 @@ public:
 	sanguis::load::context const &
 	resources() const;
 
-	sanguis::client::cursor::object &
+	sge::input::cursor::object &
 	cursor();
 
-	sanguis::client::cursor::object const &
+	sge::input::cursor::object const &
 	cursor() const;
 
 	sanguis::client::gui::object &
@@ -171,7 +171,7 @@ private:
 
 	sanguis::client::server_callback const server_callback_;
 
-	sanguis::client::cursor::object &cursor_;
+	sge::input::cursor::object &cursor_;
 };
 
 }

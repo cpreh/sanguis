@@ -76,9 +76,6 @@ set(
 	include/sanguis/client/control/scalar.hpp
 	include/sanguis/client/create.hpp
 	include/sanguis/client/create_systems.hpp
-	include/sanguis/client/cursor/object.hpp
-	include/sanguis/client/cursor/object_fwd.hpp
-	include/sanguis/client/cursor/scoped.hpp
 	include/sanguis/client/daytime_settings.hpp
 	include/sanguis/client/daytime_settings_fwd.hpp
 	include/sanguis/client/draw2d/aoe.hpp
@@ -1420,8 +1417,6 @@ set(
 	src/client/control/input_translator.cpp
 	src/client/create.cpp
 	src/client/create_systems.cpp
-	src/client/cursor/object.cpp
-	src/client/cursor/scoped.cpp
 	src/client/daytime_settings.cpp
 	src/client/draw2d/collide_parameters.cpp
 	src/client/draw2d/entities/aoe_bullet.cpp

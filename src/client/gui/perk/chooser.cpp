@@ -1,5 +1,4 @@
 #include <sanguis/duration.hpp>
-#include <sanguis/client/cursor/object.hpp>
 #include <sanguis/client/gui/object.hpp>
 #include <sanguis/client/gui/perk/chooser.hpp>
 #include <sanguis/client/gui/perk/state.hpp>
@@ -11,6 +10,7 @@
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/object_fwd.hpp>
+#include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
@@ -26,11 +26,11 @@
 
 
 sanguis::client::gui::perk::chooser::chooser(
-	sanguis::client::cursor::object &_cursor,
 	sanguis::client::perk::state &_state,
 	sge::renderer::device::ffp &_renderer,
 	sge::viewport::manager &_viewport_manager,
 	sge::font::object &_font,
+	sge::input::cursor::object &_cursor,
 	sge::input::keyboard::device &_keyboard
 )
 :

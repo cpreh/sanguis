@@ -31,6 +31,7 @@
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <sge/console/object.hpp>
 #include <sge/font/from_fcppt_string.hpp>
+#include <sge/input/cursor/activatable_fwd.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/log/output.hpp>
 #include <fcppt/log/debug.hpp>
@@ -316,6 +317,13 @@ sanguis::client::states::running::console()
 {
 	return
 		*console_;
+}
+
+sge::input::cursor::activatable &
+sanguis::client::states::running::cursor()
+{
+	return
+		input_translator_->cursor();
 }
 
 void
