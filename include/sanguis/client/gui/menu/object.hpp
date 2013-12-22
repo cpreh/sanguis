@@ -1,27 +1,22 @@
 #ifndef SANGUIS_CLIENT_GUI_MENU_OBJECT_HPP_INCLUDED
 #define SANGUIS_CLIENT_GUI_MENU_OBJECT_HPP_INCLUDED
 
-#include <sanguis/client/gui/menu/callbacks/object.hpp>
-#include <sanguis/client/gui/menu/connection_box_fwd.hpp>
-#include <sanguis/client/gui/object_fwd.hpp>
-#include <sanguis/client/config/settings/object_fwd.hpp>
 #include <sanguis/duration.hpp>
-#include <sge/cegui/toolbox/scoped_gui_sheet.hpp>
-#include <sge/cegui/toolbox/scoped_layout.hpp>
+#include <sanguis/client/gui/menu/callbacks/object.hpp>
+#include <sanguis/client/config/settings/object_fwd.hpp>
+#include <sanguis/gui/context.hpp>
+#include <sanguis/gui/master.hpp>
+#include <sanguis/gui/widget/box_container.hpp>
+#include <sanguis/gui/widget/button.hpp>
+#include <sge/font/object_fwd.hpp>
+#include <sge/input/cursor/object_fwd.hpp>
+#include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <fcppt/scoped_ptr.hpp>
+#include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/string.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <CEGUI/Event.h>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/signal/scoped_connection.hpp>
 
-
-namespace CEGUI
-{
-class EventArgs;
-class Window;
-}
 
 namespace sanguis
 {
@@ -39,8 +34,12 @@ class object
 	);
 public:
 	object(
+		sge::renderer::device::ffp &,
+		sge::viewport::manager &,
+		sge::font::object &,
+		sge::input::cursor::object &,
+		sge::input::keyboard::device &,
 		sanguis::client::config::settings::object &,
-		sanguis::client::gui::object &,
 		sanguis::client::gui::menu::callbacks::object const &
 	);
 
@@ -56,33 +55,34 @@ public:
 		sge::renderer::context::ffp &
 	);
 
+	/*
 	void
 	connection_error(
 		fcppt::string const &message
-	);
+	);*/
 private:
+	void
+	handle_quickstart();
+
 	sanguis::client::config::settings::object &settings_;
 
-	sanguis::client::gui::object &gui_;
+	sanguis::gui::context gui_context_;
 
 	sanguis::client::gui::menu::callbacks::object const callbacks_;
 
-	sge::cegui::toolbox::scoped_layout const scoped_layout_;
+	sanguis::gui::widget::button quickstart_button_;
 
-	sge::cegui::toolbox::scoped_gui_sheet const scoped_gui_sheet_;
+	sanguis::gui::widget::button quit_button_;
 
-	CEGUI::Window
-		&connect_button_,
-		&hostname_edit_,
-		&port_edit_;
+	sanguis::gui::widget::box_container main_container_;
 
-	CEGUI::Event::ScopedConnection const
+	sanguis::gui::master gui_master_;
+
+	fcppt::signal::scoped_connection const
 		quickstart_connection_,
-		quit_connection_,
-		connect_connection_,
-		hostname_change_connection_,
-		port_change_connection_;
+		quit_connection_;
 
+/*
 	typedef fcppt::scoped_ptr<
 		sanguis::client::gui::menu::connection_box
 	> scoped_connection_box_ptr;
@@ -117,6 +117,7 @@ private:
 
 	void
 	do_connect();
+	*/
 };
 
 }

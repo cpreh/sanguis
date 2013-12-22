@@ -54,10 +54,22 @@ sanguis::client::states::menu::menu(
 	menu_(
 		this->context<
 			sanguis::client::machine
-		>().settings(),
+		>().renderer(),
 		this->context<
 			sanguis::client::machine
-		>().gui(),
+		>().viewport_manager(),
+		this->context<
+			sanguis::client::machine
+		>().font_object(),
+		this->context<
+			sanguis::client::machine
+		>().cursor(),
+		this->context<
+			sanguis::client::machine
+		>().keyboard(),
+		this->context<
+			sanguis::client::machine
+		>().settings(),
 		sanguis::client::gui::menu::callbacks::object(
 			std::bind(
 				&sanguis::client::machine::connect,
@@ -177,11 +189,13 @@ sanguis::client::states::menu::react(
 	sanguis::client::events::net_error const &_error
 )
 {
+	// FIXME!
+/*
 	menu_.connection_error(
 		fcppt::from_std_string(
 			_error.code().message()
 		)
-	);
+	);*/
 
 	return
 		this->discard_event();
