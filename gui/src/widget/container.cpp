@@ -148,10 +148,7 @@ sanguis::gui::widget::container::on_click(
 		{
 			if(
 				!fcppt::math::box::contains_point(
-					sge::rucksack::rect(
-						_widget.layout().position(),
-						_widget.layout().size()
-					),
+					_widget.layout().area(),
 					_pos
 				)
 			)

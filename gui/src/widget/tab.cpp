@@ -128,7 +128,7 @@ sanguis::gui::widget::tab::tab(
 						sanguis::gui::widget::reference(
 							*_widget
 						),
-						sge::rucksack::alignment::center
+						sge::rucksack::alignment::left_or_top
 					);
 			}
 		),

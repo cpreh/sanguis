@@ -22,6 +22,7 @@
 #include <sge/rucksack/widget/box/base.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <fcppt/algorithm/append_result.hpp>
 #include <fcppt/algorithm/fold.hpp>
 #include <fcppt/algorithm/map.hpp>
@@ -79,6 +80,9 @@ sanguis::gui::widget::tree::tree(
 								:
 									public sanguis::gui::widget::box_container
 								{
+									FCPPT_NONCOPYABLE(
+										indented_widget
+									);
 								public:
 									indented_widget(
 										sge::rucksack::scalar const _indent,
@@ -185,7 +189,7 @@ sanguis::gui::widget::tree::tree(
 				sanguis::gui::widget::reference(
 					*box
 				),
-				sge::rucksack::alignment::center
+				sge::rucksack::alignment::left_or_top
 			)
 		);
 }

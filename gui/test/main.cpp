@@ -208,13 +208,55 @@ try
 
 	auto const make_tree(
 		[
-			&context,
 			&sys,
 			&font
 		](
 			sge::font::string const &_label
 		)
-		-> sanguis::gui::widget::tree_unique_ptr
+		{
+			return
+				sanguis::gui::widget::unique_ptr_tree(
+					fcppt::make_unique_ptr<
+						sanguis::gui::widget::text
+					>(
+						sys.renderer_ffp(),
+						*font,
+						_label
+					),
+					fcppt::assign::make_container<
+						sanguis::gui::widget::unique_ptr_tree::child_list
+					>(
+						sanguis::gui::widget::unique_ptr_tree(
+							fcppt::make_unique_ptr<
+								sanguis::gui::widget::button
+							>(
+								sys.renderer_ffp(),
+								*font,
+								SGE_FONT_LIT("Child 1")
+							)
+						)
+					)(
+						sanguis::gui::widget::unique_ptr_tree(
+							fcppt::make_unique_ptr<
+								sanguis::gui::widget::button
+							>(
+								sys.renderer_ffp(),
+								*font,
+								SGE_FONT_LIT("Child 2 asdljasdljasdklasdjklasdjlkasdjaskldjjasdkljasdklasdjlk")
+							)
+						)
+					)
+					.move_container()
+				);
+		}
+	);
+
+	auto const make_widget_tree(
+		[
+			&context
+		](
+			sanguis::gui::widget::unique_ptr_tree const &_tree
+		)
 		{
 			return
 				fcppt::make_unique_ptr<
@@ -225,39 +267,7 @@ try
 						fcppt::container::tree::map<
 							sanguis::gui::widget::reference_tree
 						>(
-							sanguis::gui::widget::unique_ptr_tree(
-								fcppt::make_unique_ptr<
-									sanguis::gui::widget::text
-								>(
-									sys.renderer_ffp(),
-									*font,
-									_label
-								),
-								fcppt::assign::make_container<
-									sanguis::gui::widget::unique_ptr_tree::child_list
-								>(
-									sanguis::gui::widget::unique_ptr_tree(
-										fcppt::make_unique_ptr<
-											sanguis::gui::widget::text
-										>(
-											sys.renderer_ffp(),
-											*font,
-											SGE_FONT_LIT("Child 1")
-										)
-									)
-								)(
-									sanguis::gui::widget::unique_ptr_tree(
-										fcppt::make_unique_ptr<
-											sanguis::gui::widget::text
-										>(
-											sys.renderer_ffp(),
-											*font,
-											SGE_FONT_LIT("Child 2")
-										)
-									)
-								)
-								.move_container()
-							),
+							_tree,
 							[](
 								sanguis::gui::widget::unique_ptr const &_widget
 							)
@@ -273,15 +283,27 @@ try
 		}
 	);
 
-	sanguis::gui::widget::tree_unique_ptr tree1(
+	sanguis::gui::widget::unique_ptr_tree tree1_widgets(
 		make_tree(
 			SGE_FONT_LIT("Toplevel 1")
 		)
 	);
 
-	sanguis::gui::widget::tree_unique_ptr tree2(
+	sanguis::gui::widget::tree_unique_ptr tree1(
+		make_widget_tree(
+			tree1_widgets
+		)
+	);
+
+	sanguis::gui::widget::unique_ptr_tree tree2_widgets(
 		make_tree(
 			SGE_FONT_LIT("Toplevel 2")
+		)
+	);
+
+	sanguis::gui::widget::tree_unique_ptr tree2(
+		make_widget_tree(
+			tree2_widgets
 		)
 	);
 
@@ -294,7 +316,7 @@ try
 				sanguis::gui::widget::reference(
 					*tree1
 				),
-				SGE_FONT_LIT("Tab 1")
+				SGE_FONT_LIT("Tab 1 asdkljasdlasdlkasdjklasdjklasdjklasjjklasdfoasdioasdjhiosjjaojasdfojasdfojasdfoasdfjaklasdgjkl")
 			),
 			sanguis::gui::widget::reference_name_pair(
 				sanguis::gui::widget::reference(
@@ -338,7 +360,7 @@ try
 				sanguis::gui::widget::reference(
 					tab
 				),
-				sge::rucksack::alignment::center
+				sge::rucksack::alignment::left_or_top
 			),
 			sanguis::gui::widget::reference_alignment_pair(
 				sanguis::gui::widget::reference(
