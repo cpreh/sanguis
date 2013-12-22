@@ -3,12 +3,14 @@
 #include <sanguis/client/gui/perk/state.hpp>
 #include <sanguis/client/perk/state.hpp>
 #include <sanguis/gui/default_aspect.hpp>
+#include <sanguis/gui/duration.hpp>
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
 #include <sanguis/gui/widget/reference_alignment_vector.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/object_fwd.hpp>
+#include <sge/font/string.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
@@ -20,9 +22,19 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <chrono>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
 
+
+namespace
+{
+
+sge::rucksack::alignment const state_alignment(
+	sge::rucksack::alignment::left_or_top
+);
+
+}
 
 sanguis::client::gui::perk::chooser::chooser(
 	sanguis::client::perk::state &_state,
@@ -46,8 +58,7 @@ sanguis::client::gui::perk::chooser::chooser(
 	top_text_(
 		_renderer,
 		_font,
-		// TODO: Initialize!
-		SGE_FONT_LIT("")
+		this->make_top_text()
 	),
 	gui_state_(
 		fcppt::make_unique_ptr<
@@ -72,7 +83,7 @@ sanguis::client::gui::perk::chooser::chooser(
 				sanguis::gui::widget::reference(
 					gui_state_->widget()
 				),
-				sge::rucksack::alignment::left_or_top
+				state_alignment
 			)
 		},
 		sge::rucksack::axis::y,
@@ -103,7 +114,6 @@ sanguis::client::gui::perk::chooser::chooser(
 		)
 	)
 {
-	this->level();
 }
 
 sanguis::client::gui::perk::chooser::~chooser()
@@ -115,7 +125,13 @@ sanguis::client::gui::perk::chooser::process(
 	sanguis::duration const &_delta
 )
 {
-	gui_master_.update();
+	gui_master_.update(
+		std::chrono::duration_cast<
+			sanguis::gui::duration
+		>(
+			_delta
+		)
+	);
 }
 
 void
@@ -149,8 +165,7 @@ sanguis::client::gui::perk::chooser::perks()
 			sanguis::gui::widget::reference(
 				gui_state_->widget()
 			),
-			// TODO: Constant!
-			sge::rucksack::alignment::left_or_top
+			state_alignment
 		)
 	);
 
@@ -160,13 +175,15 @@ sanguis::client::gui::perk::chooser::perks()
 void
 sanguis::client::gui::perk::chooser::level()
 {
-	this->update_top_text();
+	top_text_.value(
+		this->make_top_text()
+	);
 }
 
-void
-sanguis::client::gui::perk::chooser::update_top_text()
+sge::font::string
+sanguis::client::gui::perk::chooser::make_top_text() const
 {
-	top_text_.value(
+	return
 		sge::font::from_fcppt_string(
 			FCPPT_TEXT("Level: ")
 			+
@@ -179,6 +196,5 @@ sanguis::client::gui::perk::chooser::update_top_text()
 			fcppt::insert_to_fcppt_string(
 				state_.remaining_levels()
 			)
-		)
-	);
+		);
 }

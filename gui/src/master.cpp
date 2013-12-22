@@ -1,4 +1,5 @@
 #include <sanguis/gui/context.hpp>
+#include <sanguis/gui/duration.hpp>
 #include <sanguis/gui/master.hpp>
 #include <sanguis/gui/aux_/fill_rect.hpp>
 #include <sanguis/gui/widget/base.hpp>
@@ -116,9 +117,13 @@ sanguis::gui::master::draw(
 }
 
 void
-sanguis::gui::master::update()
+sanguis::gui::master::update(
+	sanguis::gui::duration const _duration
+)
 {
-	widget_.on_update();
+	widget_.on_update(
+		_duration
+	);
 }
 
 void

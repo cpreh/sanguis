@@ -1,6 +1,7 @@
 #ifndef SANGUIS_GUI_WIDGET_EDIT_HPP_INCLUDED
 #define SANGUIS_GUI_WIDGET_EDIT_HPP_INCLUDED
 
+#include <sanguis/gui/duration.hpp>
 #include <sanguis/gui/get_focus_fwd.hpp>
 #include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/text_callback.hpp>
@@ -61,7 +62,9 @@ public:
 	override;
 private:
 	void
-	on_update()
+	on_update(
+		sanguis::gui::duration
+	)
 	override;
 
 	void

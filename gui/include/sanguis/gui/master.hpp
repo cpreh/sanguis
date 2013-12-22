@@ -1,6 +1,7 @@
 #ifndef SANGUIS_GUI_MASTER_HPP_INCLUDED
 #define SANGUIS_GUI_MASTER_HPP_INCLUDED
 
+#include <sanguis/gui/duration.hpp>
 #include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/master_fwd.hpp>
@@ -53,7 +54,9 @@ public:
 
 	SANGUIS_GUI_SYMBOL
 	void
-	update();
+	update(
+		sanguis::gui::duration
+	);
 private:
 	void
 	key_event(

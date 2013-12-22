@@ -1,8 +1,9 @@
 #ifndef SANGUIS_GUI_WIDGET_BASE_HPP_INCLUDED
 #define SANGUIS_GUI_WIDGET_BASE_HPP_INCLUDED
 
-#include <sanguis/gui/symbol.hpp>
+#include <sanguis/gui/duration.hpp>
 #include <sanguis/gui/get_focus_fwd.hpp>
+#include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/widget/base_fwd.hpp>
 #include <sanguis/gui/widget/optional_ref.hpp>
 #include <sge/font/char_type.hpp>
@@ -34,7 +35,9 @@ public:
 
 	virtual
 	void
-	on_update();
+	on_update(
+		sanguis::gui::duration
+	);
 
 	virtual
 	void

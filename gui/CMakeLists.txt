@@ -5,6 +5,7 @@ set(
 	include/sanguis/gui/context.hpp
 	include/sanguis/gui/context_fwd.hpp
 	include/sanguis/gui/default_aspect.hpp
+	include/sanguis/gui/duration.hpp
 	include/sanguis/gui/get_focus.hpp
 	include/sanguis/gui/get_focus_fwd.hpp
 	include/sanguis/gui/master.hpp

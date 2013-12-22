@@ -1,4 +1,5 @@
 #include <sanguis/gui/default_aspect.hpp>
+#include <sanguis/gui/duration.hpp>
 #include <sanguis/gui/get_focus.hpp>
 #include <sanguis/gui/text_callback.hpp>
 #include <sanguis/gui/text_function.hpp>
@@ -136,7 +137,9 @@ sanguis::gui::widget::edit::text_change()
 }
 
 void
-sanguis::gui::widget::edit::on_update()
+sanguis::gui::widget::edit::on_update(
+	sanguis::gui::duration const _duration
+)
 {
 	// TODO: Show cursor
 }

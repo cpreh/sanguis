@@ -2,6 +2,7 @@
 #define SANGUIS_GUI_WIDGET_CONTAINER_HPP_INCLUDED
 
 #include <sanguis/gui/context_fwd.hpp>
+#include <sanguis/gui/duration.hpp>
 #include <sanguis/gui/get_focus_fwd.hpp>
 #include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/widget/base.hpp>
@@ -52,7 +53,9 @@ protected:
 	pop_back_widget();
 private:
 	void
-	on_update()
+	on_update(
+		sanguis::gui::duration
+	)
 	override;
 
 	void

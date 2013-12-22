@@ -1,6 +1,7 @@
 #include <sanguis/build/media_path.hpp>
 #include <sanguis/gui/context.hpp>
 #include <sanguis/gui/default_aspect.hpp>
+#include <sanguis/gui/duration.hpp>
 #include <sanguis/gui/master.hpp>
 #include <sanguis/gui/widget/button.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
@@ -392,7 +393,12 @@ try
 			)
 		);
 
-		master.update();
+		master.update(
+			// FIXME
+			sanguis::gui::duration(
+				0
+			)
+		);
 
 		sge::renderer::context::scoped_ffp const scoped_block(
 			sys.renderer_ffp(),

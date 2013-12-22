@@ -1,4 +1,5 @@
 #include <sanguis/gui/context.hpp>
+#include <sanguis/gui/duration.hpp>
 #include <sanguis/gui/get_focus.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/container.hpp>
@@ -102,14 +103,20 @@ sanguis::gui::widget::container::pop_back_widget()
 }
 
 void
-sanguis::gui::widget::container::on_update()
+sanguis::gui::widget::container::on_update(
+	sanguis::gui::duration const _duration
+)
 {
 	this->foreach_widget(
-		[](
+		[
+			_duration
+		](
 			sanguis::gui::widget::base &_widget
 		)
 		{
-			_widget.on_update();
+			_widget.on_update(
+				_duration
+			);
 		}
 	);
 }

@@ -1,3 +1,4 @@
+#include <sanguis/gui/duration.hpp>
 #include <sanguis/gui/get_focus.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/optional_ref.hpp>
@@ -25,7 +26,9 @@ sanguis::gui::widget::base::~base()
 }
 
 void
-sanguis::gui::widget::base::on_update()
+sanguis::gui::widget::base::on_update(
+	sanguis::gui::duration
+)
 {
 }
 

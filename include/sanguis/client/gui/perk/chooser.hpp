@@ -10,6 +10,7 @@
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/text.hpp>
 #include <sge/font/object_fwd.hpp>
+#include <sge/font/string.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
@@ -62,8 +63,8 @@ private:
 	void
 	level();
 
-	void
-	update_top_text();
+	sge::font::string
+	make_top_text() const;
 
 	sanguis::client::perk::state &state_;
 
