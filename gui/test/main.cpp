@@ -16,6 +16,7 @@
 #include <sanguis/gui/widget/tab.hpp>
 #include <sanguis/gui/widget/text.hpp>
 #include <sanguis/gui/widget/tree.hpp>
+#include <sanguis/gui/widget/tree_unique_ptr.hpp>
 #include <sanguis/gui/widget/unique_ptr.hpp>
 #include <sanguis/gui/widget/unique_ptr_tree.hpp>
 #include <sge/font/lit.hpp>
@@ -78,6 +79,7 @@
 #include <fcppt/exception.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/assign/make_container.hpp>
 #include <fcppt/container/tree/map.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <main.hpp>
@@ -204,46 +206,83 @@ try
 
 	sanguis::gui::context context;
 
-	sanguis::gui::widget::unique_ptr_tree widget_tree(
-		fcppt::make_unique_ptr<
-			sanguis::gui::widget::text
-		>(
-			sys.renderer_ffp(),
-			*font,
-			SGE_FONT_LIT("Toplevel")
+	auto const make_tree(
+		[
+			&context,
+			&sys,
+			&font
+		](
+			sge::font::string const &_label
+		)
+		-> sanguis::gui::widget::tree_unique_ptr
+		{
+			return
+				fcppt::make_unique_ptr<
+					sanguis::gui::widget::tree
+				>(
+					context,
+					sanguis::gui::widget::reference_tree_vector{
+						fcppt::container::tree::map<
+							sanguis::gui::widget::reference_tree
+						>(
+							sanguis::gui::widget::unique_ptr_tree(
+								fcppt::make_unique_ptr<
+									sanguis::gui::widget::text
+								>(
+									sys.renderer_ffp(),
+									*font,
+									_label
+								),
+								fcppt::assign::make_container<
+									sanguis::gui::widget::unique_ptr_tree::child_list
+								>(
+									sanguis::gui::widget::unique_ptr_tree(
+										fcppt::make_unique_ptr<
+											sanguis::gui::widget::text
+										>(
+											sys.renderer_ffp(),
+											*font,
+											SGE_FONT_LIT("Child 1")
+										)
+									)
+								)(
+									sanguis::gui::widget::unique_ptr_tree(
+										fcppt::make_unique_ptr<
+											sanguis::gui::widget::text
+										>(
+											sys.renderer_ffp(),
+											*font,
+											SGE_FONT_LIT("Child 2")
+										)
+									)
+								)
+								.move_container()
+							),
+							[](
+								sanguis::gui::widget::unique_ptr const &_widget
+							)
+							{
+								return
+									sanguis::gui::widget::reference(
+										*_widget
+									);
+							}
+						)
+					}
+				);
+		}
+	);
+
+	sanguis::gui::widget::tree_unique_ptr tree1(
+		make_tree(
+			SGE_FONT_LIT("Toplevel 1")
 		)
 	);
 
-	widget_tree.push_back(
-		fcppt::make_unique_ptr<
-			sanguis::gui::widget::text
-		>(
-			sys.renderer_ffp(),
-			*font,
-			SGE_FONT_LIT("Child 1")
+	sanguis::gui::widget::tree_unique_ptr tree2(
+		make_tree(
+			SGE_FONT_LIT("Toplevel 2")
 		)
-	);
-
-	widget_tree.push_back(
-		fcppt::make_unique_ptr<
-			sanguis::gui::widget::text
-		>(
-			sys.renderer_ffp(),
-			*font,
-			SGE_FONT_LIT("Child 2")
-		)
-	);
-
-	sanguis::gui::widget::text text1(
-		sys.renderer_ffp(),
-		*font,
-		SGE_FONT_LIT("Tab 1 content")
-	);
-
-	sanguis::gui::widget::text text2(
-		sys.renderer_ffp(),
-		*font,
-		SGE_FONT_LIT("Tab 2 content")
 	);
 
 	sanguis::gui::widget::tab tab(
@@ -253,35 +292,15 @@ try
 		sanguis::gui::widget::reference_name_vector{
 			sanguis::gui::widget::reference_name_pair(
 				sanguis::gui::widget::reference(
-					text1
+					*tree1
 				),
 				SGE_FONT_LIT("Tab 1")
 			),
 			sanguis::gui::widget::reference_name_pair(
 				sanguis::gui::widget::reference(
-					text2
+					*tree2
 				),
 				SGE_FONT_LIT("Tab 2")
-			)
-		}
-	);
-
-	sanguis::gui::widget::tree tree(
-		context,
-		sanguis::gui::widget::reference_tree_vector{
-			fcppt::container::tree::map<
-				sanguis::gui::widget::reference_tree
-			>(
-				widget_tree,
-				[](
-					sanguis::gui::widget::unique_ptr const &_widget
-				)
-				{
-					return
-						sanguis::gui::widget::reference(
-							*_widget
-						);
-				}
 			)
 		}
 	);
@@ -320,12 +339,6 @@ try
 					tab
 				),
 				sge::rucksack::alignment::center
-			),
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
-					tree
-				),
-				sge::rucksack::alignment::left_or_top
 			),
 			sanguis::gui::widget::reference_alignment_pair(
 				sanguis::gui::widget::reference(

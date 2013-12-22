@@ -110,19 +110,19 @@ sanguis::client::perk::make_tree(
 			)
 		);
 
-	ret->children().sort(
+	ret->sort(
 		[](
-			sanguis::client::perk::tree_unique_ptr const &_left,
-			sanguis::client::perk::tree_unique_ptr const &_right
+			sanguis::client::perk::optional_info const &_left,
+			sanguis::client::perk::optional_info const &_right
 		)
 		{
 			return
 				sanguis::client::perk::to_category(
-					_left->value()->perk_type()
+					_left->perk_type()
 				)
 				<
 				sanguis::client::perk::to_category(
-					_right->value()->perk_type()
+					_right->perk_type()
 				);
 		}
 	);
