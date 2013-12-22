@@ -362,11 +362,7 @@ set(
 	include/sanguis/client/gui/menu/callbacks/quickstart.hpp
 	include/sanguis/client/gui/menu/callbacks/quit.hpp
 	include/sanguis/client/gui/menu/callbacks/retry_connect.hpp
-	include/sanguis/client/gui/menu/connection_box.hpp
-	include/sanguis/client/gui/menu/connection_box_fwd.hpp
 	include/sanguis/client/gui/menu/object.hpp
-	include/sanguis/client/gui/object.hpp
-	include/sanguis/client/gui/object_fwd.hpp
 	include/sanguis/client/gui/perk/chooser.hpp
 	include/sanguis/client/gui/perk/chooser_fwd.hpp
 	include/sanguis/client/gui/perk/item_color.hpp
@@ -1502,9 +1498,7 @@ set(
 	src/client/events/render.cpp
 	src/client/events/tick.cpp
 	src/client/gui/menu/callbacks/object.cpp
-	src/client/gui/menu/connection_box.cpp
 	src/client/gui/menu/object.cpp
-	src/client/gui/object.cpp
 	src/client/gui/perk/chooser.cpp
 	src/client/gui/perk/item_color.cpp
 	src/client/gui/perk/line.cpp
@@ -1962,7 +1956,6 @@ target_link_libraries(
 	${fcppt_filesystem_TARGET}
 	${awl_TARGET}
 	${sgeaudio_TARGET}
-	${sgecegui_TARGET}
 	${sgecharconv_TARGET}
 	${sgeconfig_TARGET}
 	${sgeconsole_TARGET}
@@ -1980,7 +1973,6 @@ target_link_libraries(
 	${sgetimer_TARGET}
 	${sgeviewport_TARGET}
 	${sgewindow_TARGET}
-	${CEGUI_LIBRARIES}
 	${alda_TARGET}
 	${FcpptThreads_LIBRARIES}
 	${Boost_LIBRARIES}

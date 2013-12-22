@@ -1,5 +1,4 @@
 #include <sanguis/duration.hpp>
-#include <sanguis/client/gui/object.hpp>
 #include <sanguis/client/gui/perk/chooser.hpp>
 #include <sanguis/client/gui/perk/state.hpp>
 #include <sanguis/client/perk/state.hpp>

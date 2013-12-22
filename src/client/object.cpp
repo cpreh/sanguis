@@ -92,16 +92,8 @@ sanguis::client::object::object(
 		sys_->audio_loader(),
 		sys_->audio_player()
 	),
-	gui_(
-		sys_->renderer_ffp(),
-		sys_->image_system(),
-		sys_->viewport_manager(),
-		sys_->keyboard_collector(),
-		sys_->cursor_demuxer()
-	),
 	machine_(
 		settings_,
-		gui_,
 		std::bind(
 			&sanguis::client::object::create_server,
 			this,

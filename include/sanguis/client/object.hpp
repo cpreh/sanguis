@@ -6,7 +6,6 @@
 #include <sanguis/client/config/settings/object.hpp>
 #include <sanguis/client/config/settings/saver.hpp>
 #include <sanguis/client/console/gfx.hpp>
-#include <sanguis/client/gui/object.hpp>
 #include <sanguis/load/context.hpp>
 #include <sanguis/server/object_fwd.hpp>
 #include <sanguis/io_service.hpp>
@@ -84,8 +83,6 @@ private:
 	sanguis::client::console::gfx console_gfx_;
 
 	sanguis::load::context resources_;
-
-	sanguis::client::gui::object gui_;
 
 	sanguis::client::machine machine_;
 

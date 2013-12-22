@@ -1,5 +1,6 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/io_service.hpp>
+#include <sanguis/client/log.hpp>
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/config/settings/object_fwd.hpp>
 #include <sanguis/client/events/connected.hpp>
@@ -7,8 +8,6 @@
 #include <sanguis/client/events/net_error.hpp>
 #include <sanguis/client/events/render.hpp>
 #include <sanguis/client/events/tick.hpp>
-#include <sanguis/client/gui/object_fwd.hpp>
-#include <sanguis/client/log.hpp>
 #include <sanguis/messages/base.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/load/context_fwd.hpp>
@@ -48,7 +47,6 @@
 
 sanguis::client::machine::machine(
 	sanguis::client::config::settings::object &_settings,
-	sanguis::client::gui::object &_gui,
 	sanguis::client::server_callback const &_server_callback,
 	sanguis::load::context const &_resources,
 	sge::window::system &_window_system,
@@ -64,9 +62,6 @@ sanguis::client::machine::machine(
 :
 	settings_(
 		_settings
-	),
-	gui_(
-		_gui
 	),
 	resources_(
 		_resources
@@ -299,12 +294,6 @@ sge::input::cursor::object const &
 sanguis::client::machine::cursor() const
 {
 	return cursor_;
-}
-
-sanguis::client::gui::object &
-sanguis::client::machine::gui() const
-{
-	return gui_;
 }
 
 sge::viewport::manager &

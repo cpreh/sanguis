@@ -112,7 +112,6 @@ option(
 set(
 	NEEDED_SGE_COMPONENTS
 	audio
-	cegui
 	charconv
 	config
 	console
@@ -156,16 +155,6 @@ add_definitions(
 
 include_directories(
 	${sge_INCLUDE_DIRS}
-)
-
-# Find CEGUI
-
-find_package(
-	CEGUI REQUIRED
-)
-
-include_directories(
-	${CEGUI_INCLUDE_DIRS}
 )
 
 # Find ALDA

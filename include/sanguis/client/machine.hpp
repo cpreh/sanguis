@@ -3,7 +3,6 @@
 
 #include <sanguis/client/machine_fwd.hpp>
 #include <sanguis/client/config/settings/object_fwd.hpp>
-#include <sanguis/client/gui/object_fwd.hpp>
 #include <sanguis/client/states/menu_fwd.hpp>
 #include <sanguis/client/server_callback.hpp>
 #include <sanguis/load/context_fwd.hpp>
@@ -49,7 +48,6 @@ class machine
 public:
 	machine(
 		sanguis::client::config::settings::object &,
-		sanguis::client::gui::object &,
 		sanguis::client::server_callback const &,
 		sanguis::load::context const &,
 		sge::window::system &,
@@ -122,9 +120,6 @@ public:
 	sge::input::cursor::object const &
 	cursor() const;
 
-	sanguis::client::gui::object &
-	gui() const;
-
 	sge::viewport::manager &
 	viewport_manager() const;
 private:
@@ -143,8 +138,6 @@ private:
 	);
 
 	sanguis::client::config::settings::object &settings_;
-
-	sanguis::client::gui::object &gui_;
 
 	sanguis::load::context const &resources_;
 
