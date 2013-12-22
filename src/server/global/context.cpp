@@ -435,11 +435,6 @@ sanguis::server::global::context::player_choose_perk(
 	player_ref.add_perk(
 		_perk_type
 	);
-
-	sanguis::server::send_available_perks(
-		player_ref,
-		send_unicast_
-	);
 }
 
 void

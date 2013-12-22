@@ -154,6 +154,8 @@ sanguis::client::gui::perk::chooser::perks()
 			sge::rucksack::alignment::left_or_top
 		)
 	);
+
+	main_container_.layout().relayout();
 }
 
 void
