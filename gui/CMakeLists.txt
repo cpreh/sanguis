@@ -44,6 +44,7 @@ set(
 	include/sanguis/gui/widget/text_fwd.hpp
 	include/sanguis/gui/widget/tree.hpp
 	include/sanguis/gui/widget/tree_fwd.hpp
+	include/sanguis/gui/widget/tree_unique_ptr.hpp
 	include/sanguis/gui/widget/unique_ptr.hpp
 	include/sanguis/gui/widget/unique_ptr_tree.hpp
 	include/sanguis/gui/widget/unique_ptr_tree_fwd.hpp

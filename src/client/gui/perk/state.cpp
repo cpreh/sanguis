@@ -15,7 +15,7 @@ sanguis::client::gui::perk::state::state(
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sanguis::gui::context &_context,
-	sanguis::client::perk::state const &_state
+	sanguis::client::perk::state &_state
 )
 :
 	tabs_(

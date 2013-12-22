@@ -22,7 +22,7 @@ make_tabs(
 	sge::renderer::device::ffp &,
 	sge::font::object &,
 	sanguis::gui::context &,
-	sanguis::client::perk::state const &
+	sanguis::client::perk::state &
 );
 
 }

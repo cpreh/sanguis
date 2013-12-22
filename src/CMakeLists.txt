@@ -378,6 +378,7 @@ set(
 	include/sanguis/client/gui/perk/line_unique_ptr.hpp
 	include/sanguis/client/gui/perk/line_unique_ptr_tree.hpp
 	include/sanguis/client/gui/perk/line_unique_ptr_tree_fwd.hpp
+	include/sanguis/client/gui/perk/line_unique_ptr_tree_vector.hpp
 	include/sanguis/client/gui/perk/make_tabs.hpp
 	include/sanguis/client/gui/perk/state.hpp
 	include/sanguis/client/gui/perk/state_fwd.hpp
@@ -1511,6 +1512,7 @@ set(
 	src/client/gui/object.cpp
 	src/client/gui/perk/chooser.cpp
 	src/client/gui/perk/item_color.cpp
+	src/client/gui/perk/line.cpp
 	src/client/gui/perk/make_tabs.cpp
 	src/client/gui/perk/state.cpp
 	src/client/gui/perk/tab.cpp

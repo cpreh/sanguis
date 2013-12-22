@@ -1,17 +1,17 @@
+#include <sanguis/client/gui/perk/line.hpp>
+#include <sanguis/client/gui/perk/line_unique_ptr.hpp>
+#include <sanguis/client/gui/perk/line_unique_ptr_tree.hpp>
+#include <sanguis/client/gui/perk/line_unique_ptr_tree_vector.hpp>
 #include <sanguis/client/gui/perk/tab.hpp>
 #include <sanguis/client/perk/category_to_string.hpp>
 #include <sanguis/client/perk/const_tree_range.hpp>
 #include <sanguis/client/perk/optional_info.hpp>
+#include <sanguis/client/perk/state_fwd.hpp>
 #include <sanguis/client/perk/to_category.hpp>
-#include <sanguis/client/perk/to_string.hpp>
 #include <sanguis/client/perk/tree.hpp>
 #include <sanguis/gui/context_fwd.hpp>
-#include <sanguis/gui/widget/button.hpp>
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_tree_vector.hpp>
-#include <sanguis/gui/widget/unique_ptr.hpp>
-#include <sanguis/gui/widget/unique_ptr_tree.hpp>
-#include <sanguis/gui/widget/unique_ptr_tree_vector.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
@@ -25,44 +25,47 @@ sanguis::client::gui::perk::tab::tab(
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sanguis::gui::context &_context,
+	sanguis::client::perk::state &_state,
 	sanguis::client::perk::const_tree_range const &_range
 )
 :
 	tree_widgets_(
 		fcppt::algorithm::map<
-			sanguis::gui::widget::unique_ptr_tree_vector
+			sanguis::client::gui::perk::line_unique_ptr_tree_vector
 		>(
 			_range,
 			[
 				&_renderer,
-				&_font
+				&_font,
+				&_context,
+				&_state
 			](
 				sanguis::client::perk::tree const &_element
 			)
 			{
 				return
 					fcppt::container::tree::map<
-						sanguis::gui::widget::unique_ptr_tree
+						sanguis::client::gui::perk::line_unique_ptr_tree
 					>(
 						_element,
 						[
 							&_renderer,
-							&_font
+							&_font,
+							&_context,
+							&_state
 						](
 							sanguis::client::perk::optional_info const &_info
 						)
 						{
 							return
 								fcppt::make_unique_ptr<
-									sanguis::gui::widget::button
+									sanguis::client::gui::perk::line
 								>(
 									_renderer,
 									_font,
-									sge::font::from_fcppt_string(
-										sanguis::client::perk::to_string(
-											_info->perk_type()
-										)
-									)
+									_context,
+									_state,
+									*_info
 								);
 						}
 					);
@@ -76,7 +79,7 @@ sanguis::client::gui::perk::tab::tab(
 		>(
 			tree_widgets_,
 			[](
-				sanguis::gui::widget::unique_ptr_tree const &_tree
+				sanguis::client::gui::perk::line_unique_ptr_tree const &_tree
 			)
 			{
 				return
@@ -85,12 +88,12 @@ sanguis::client::gui::perk::tab::tab(
 					>(
 						_tree,
 						[](
-							sanguis::gui::widget::unique_ptr const &_widget
+							sanguis::client::gui::perk::line_unique_ptr const &_line
 						)
 						{
 							return
 								sanguis::gui::widget::reference(
-									*_widget
+									_line->widget()
 								);
 						}
 					);

@@ -18,7 +18,7 @@ sanguis::client::gui::perk::make_tabs(
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sanguis::gui::context &_context,
-	sanguis::client::perk::state const &_state
+	sanguis::client::perk::state &_state
 )
 {
 	sanguis::client::perk::tree const &tree(
@@ -48,6 +48,7 @@ sanguis::client::gui::perk::make_tabs(
 				_renderer,
 				_font,
 				_context,
+				_state,
 				range
 			)
 		);
