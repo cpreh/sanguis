@@ -8,7 +8,10 @@
 #include <sanguis/gui/master.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/button.hpp>
+#include <sanguis/gui/widget/edit.hpp>
+#include <sanguis/gui/widget/text.hpp>
 #include <sge/font/object_fwd.hpp>
+#include <sge/font/string.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
@@ -55,14 +58,21 @@ public:
 		sge::renderer::context::ffp &
 	);
 
-	/*
 	void
 	connection_error(
 		fcppt::string const &message
-	);*/
+	);
 private:
 	void
 	handle_quickstart();
+
+	void
+	handle_text_changed(
+		sge::font::string const &
+	);
+
+	void
+	handle_connect();
 
 	sanguis::client::config::settings::object &settings_;
 
@@ -72,6 +82,24 @@ private:
 
 	sanguis::gui::widget::button quickstart_button_;
 
+			sanguis::gui::widget::text hostname_label_;
+
+			sanguis::gui::widget::edit hostname_edit_;
+
+		sanguis::gui::widget::box_container hostname_line_;
+
+			sanguis::gui::widget::text port_label_;
+
+			sanguis::gui::widget::edit port_edit_;
+
+		sanguis::gui::widget::box_container port_line_;
+
+		sanguis::gui::widget::text connect_text_;
+
+		sanguis::gui::widget::button connect_button_;
+
+	sanguis::gui::widget::box_container connect_box_;
+
 	sanguis::gui::widget::button quit_button_;
 
 	sanguis::gui::widget::box_container main_container_;
@@ -80,44 +108,10 @@ private:
 
 	fcppt::signal::scoped_connection const
 		quickstart_connection_,
-		quit_connection_;
-
-/*
-	typedef fcppt::scoped_ptr<
-		sanguis::client::gui::menu::connection_box
-	> scoped_connection_box_ptr;
-
-	scoped_connection_box_ptr connection_box_;
-
-	bool
-	handle_quickstart(
-		CEGUI::EventArgs const &
-	);
-
-	bool
-	handle_quit(
-		CEGUI::EventArgs const &
-	);
-
-	bool
-	handle_connect(
-		CEGUI::EventArgs const &
-	);
-
-	bool
-	handle_text_changed(
-		CEGUI::EventArgs const &
-	);
-
-	void
-	handle_cancel_connect();
-
-	void
-	handle_retry_connect();
-
-	void
-	do_connect();
-	*/
+		connect_connection_,
+		quit_connection_,
+		hostname_change_connection_,
+		port_change_connection_;
 };
 
 }

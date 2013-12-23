@@ -1,14 +1,16 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/client/config/settings/object.hpp>
-//#include <sanguis/client/gui/menu/connection_box.hpp>
 #include <sanguis/client/gui/menu/object.hpp>
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/duration.hpp>
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
 #include <sanguis/gui/widget/reference_alignment_vector.hpp>
+#include <sge/font/from_fcppt_string.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/object_fwd.hpp>
+#include <sge/font/string.hpp>
+#include <sge/font/to_fcppt_string.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
@@ -24,10 +26,13 @@
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <sge/viewport/manager_fwd.hpp>
-//#include <alda/net/host.hpp>
+#include <alda/net/host.hpp>
 #include <alda/net/port.hpp>
+#include <fcppt/extract_from_string.hpp>
 #include <fcppt/extract_from_string_exn.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/to_std_string.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
@@ -53,6 +58,12 @@ sge::parse::ini::entry_name const
 	config_quickstart_port_key(
 		FCPPT_TEXT("quickstartport")
 	);
+
+sge::font::string const
+connect_text(
+	SGE_FONT_LIT("Connect")
+);
+
 }
 
 sanguis::client::gui::menu::object::object(
@@ -77,6 +88,123 @@ sanguis::client::gui::menu::object::object(
 		_font,
 		SGE_FONT_LIT("Quickstart")
 	),
+	hostname_label_(
+		_renderer,
+		_font,
+		SGE_FONT_LIT("Hostname: ")
+	),
+	hostname_edit_(
+		_renderer,
+		_font,
+		sge::font::from_fcppt_string(
+			sge::parse::ini::get_or_create(
+				_settings.sections(),
+				config_section,
+				config_hostname_key,
+				sge::parse::ini::value(
+					sge::parse::ini::string()
+				)
+			).get()
+		)
+	),
+	hostname_line_(
+		gui_context_,
+		sanguis::gui::widget::reference_alignment_vector{
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					hostname_label_
+				),
+				sge::rucksack::alignment::center
+			),
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					hostname_edit_
+				),
+				sge::rucksack::alignment::center
+			)
+		},
+		sge::rucksack::axis::x,
+		sanguis::gui::default_aspect()
+	),
+	port_label_(
+		_renderer,
+		_font,
+		SGE_FONT_LIT("Port: ")
+	),
+	port_edit_(
+		_renderer,
+		_font,
+		sge::font::from_fcppt_string(
+			sge::parse::ini::get_or_create(
+				_settings.sections(),
+				config_section,
+				config_port_key,
+				sge::parse::ini::value(
+					sge::parse::ini::string()
+				)
+			).get()
+		)
+	),
+	port_line_(
+		gui_context_,
+		sanguis::gui::widget::reference_alignment_vector{
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					port_label_
+				),
+				sge::rucksack::alignment::center
+			),
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					port_edit_
+				),
+				sge::rucksack::alignment::center
+			)
+		},
+		sge::rucksack::axis::x,
+		sanguis::gui::default_aspect()
+	),
+	connect_text_(
+		_renderer,
+		_font,
+		SGE_FONT_LIT("")
+	),
+	connect_button_(
+		_renderer,
+		_font,
+		connect_text
+	),
+	connect_box_(
+		gui_context_,
+		sanguis::gui::widget::reference_alignment_vector{
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					hostname_line_
+				),
+				sge::rucksack::alignment::center
+			),
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					port_line_
+				),
+				sge::rucksack::alignment::center
+			),
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					connect_text_
+				),
+				sge::rucksack::alignment::center
+			),
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					connect_button_
+				),
+				sge::rucksack::alignment::center
+			)
+		},
+		sge::rucksack::axis::y,
+		sanguis::gui::default_aspect()
+	),
 	quit_button_(
 		_renderer,
 		_font,
@@ -88,6 +216,12 @@ sanguis::client::gui::menu::object::object(
 			sanguis::gui::widget::reference_alignment_pair(
 				sanguis::gui::widget::reference(
 					quickstart_button_
+				),
+				sge::rucksack::alignment::center
+			),
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					connect_box_
 				),
 				sge::rucksack::alignment::center
 			),
@@ -117,95 +251,49 @@ sanguis::client::gui::menu::object::object(
 			)
 		)
 	),
+	connect_connection_(
+		connect_button_.click(
+			std::bind(
+				&sanguis::client::gui::menu::object::handle_connect,
+				this
+			)
+		)
+	),
 	quit_connection_(
 		quit_button_.click(
 			callbacks_.quit()
 		)
-	)
-	/*,
+	),
 	hostname_change_connection_(
-		hostname_edit_.subscribeEvent(
-			CEGUI::Window::EventTextChanged,
-			CEGUI::Event::Subscriber(
-				std::bind(
-					&sanguis::client::gui::menu::object::handle_text_changed,
-					this,
-					std::placeholders::_1
-				)
+		hostname_edit_.text_change(
+			std::bind(
+				&sanguis::client::gui::menu::object::handle_text_changed,
+				this,
+				std::placeholders::_1
 			)
 		)
 	),
 	port_change_connection_(
-		port_edit_.subscribeEvent(
-			CEGUI::Window::EventTextChanged,
-			CEGUI::Event::Subscriber(
-				std::bind(
-					&sanguis::client::gui::menu::object::handle_text_changed,
-					this,
-					std::placeholders::_1
-				)
+		port_edit_.text_change(
+			std::bind(
+				&sanguis::client::gui::menu::object::handle_text_changed,
+				this,
+				std::placeholders::_1
 			)
 		)
-	),
-	connection_box_(
-		fcppt::make_unique_ptr<
-			sanguis::client::gui::menu::connection_box
-		>(
-			gui_,
-			scoped_layout_.window(),
-			std::bind(
-				&sanguis::client::gui::menu::object::handle_cancel_connect,
-				this
-			),
-			std::bind(
-				&sanguis::client::gui::menu::object::handle_retry_connect,
-				this
-			)
-		)
-	)*/
+	)
 {
-/*
-	connect_button_.setEnabled(
-		false
-	);
-
-	hostname_edit_.setText(
-		sge::cegui::to_cegui_string(
-			sge::parse::ini::get_or_create(
-				_settings.sections(),
-				config_section,
-				config_hostname_key,
-				sge::parse::ini::value(
-					sge::parse::ini::string()
-				)
-			).get()
-		)
-	);
-
-	port_edit_.setText(
-		sge::cegui::to_cegui_string(
-			sge::parse::ini::get_or_create(
-				_settings.sections(),
-				config_section,
-				config_port_key,
-				sge::parse::ini::value(
-					sge::parse::ini::string()
-				)
-			).get()
-		)
-	);*/
 }
 
 sanguis::client::gui::menu::object::~object()
 {
-/*
 	sge::parse::ini::set_or_create(
 		settings_.sections(),
 		config_section,
 		config_port_key,
 		sge::parse::ini::value(
-			sge::cegui::from_cegui_string(
-				port_edit_.getText()
+			sge::font::to_fcppt_string(
+				port_edit_.text()
 			)
 		)
 	);
@@ -215,11 +303,11 @@ sanguis::client::gui::menu::object::~object()
 		config_section,
 		config_hostname_key,
 		sge::parse::ini::value(
-			sge::cegui::from_cegui_string(
-				hostname_edit_.getText()
+			sge::font::to_fcppt_string(
+				hostname_edit_.text()
 			)
 		)
-	);*/
+	);
 }
 
 void
@@ -253,24 +341,22 @@ sanguis::client::gui::menu::object::draw(
 	);
 }
 
-/*
 void
 sanguis::client::gui::menu::object::connection_error(
 	fcppt::string const &_message
 )
 {
-	FCPPT_LOG_DEBUG(
-		::logger,
-		fcppt::log::_
-			<< FCPPT_TEXT("got conection error: (")
-			<< _message
-			<< FCPPT_TEXT(')')
+	connect_text_.value(
+		sge::font::from_fcppt_string(
+			_message
+		)
 	);
 
-	connection_box_->show_error(
-		_message
-	);
-}*/
+/*
+	connect_button_.text(
+		connect_text
+	);*/
+}
 
 void
 sanguis::client::gui::menu::object::handle_quickstart()
@@ -293,40 +379,29 @@ sanguis::client::gui::menu::object::handle_quickstart()
 	);
 }
 
-/*
-bool
-sanguis::client::gui::menu::object::handle_connect(
-	CEGUI::EventArgs const &
-)
-{
-	connection_box_->activate();
-
-	this->do_connect();
-
-	return true;
-}
-
-bool
+void
 sanguis::client::gui::menu::object::handle_text_changed(
-	CEGUI::EventArgs const &
+	sge::font::string const &
 )
 {
 	typedef unsigned long port_type;
 
-	typedef fcppt::optional<
+	typedef
+	fcppt::optional<
 		port_type
-	> optional_port;
+	>
+	optional_port;
 
 	optional_port const opt_port(
 		fcppt::extract_from_string<
 			port_type
 		>(
-			sge::cegui::from_cegui_string(
-				port_edit_.getText()
-			)
+			port_edit_.text()
 		)
 	);
 
+	// TODO!
+	/*
 	connect_button_.setEnabled(
 		opt_port
 		&&
@@ -334,45 +409,49 @@ sanguis::client::gui::menu::object::handle_text_changed(
 		&&
 		(*opt_port > 0)
 		&& (*opt_port < 65535)
-	);
-
-	return true;
+	);*/
 }
 
 void
-sanguis::client::gui::menu::object::handle_cancel_connect()
+sanguis::client::gui::menu::object::handle_connect()
 {
-	connection_box_->deactivate();
-
-	callbacks_.cancel_connect()();
-}
-
-void
-sanguis::client::gui::menu::object::handle_retry_connect()
-{
-	this->do_connect();
-}
-
-void
-sanguis::client::gui::menu::object::do_connect()
-{
-	callbacks_.connect()(
-		alda::net::host(
-			fcppt::to_std_string(
-				sge::cegui::from_cegui_string(
-					hostname_edit_.getText()
+	if(
+		connect_button_.text()
+		==
+		connect_text
+	)
+	{
+		callbacks_.connect()(
+			alda::net::host(
+				fcppt::to_std_string(
+					sge::font::to_fcppt_string(
+						hostname_edit_.text()
+					)
+				)
+			),
+			alda::net::port(
+				fcppt::extract_from_string_exn<
+					alda::net::port::value_type
+				>(
+					port_edit_.text()
 				)
 			)
-		),
-		alda::net::port(
-			fcppt::extract_from_string_exn<
-				alda::net::port::value_type
-			>(
-				sge::cegui::from_cegui_string(
-					port_edit_.getText()
-				)
-			)
-		)
-	);
+		);
+
+		connect_text_.value(
+			SGE_FONT_LIT("Connecting...")
+		);
+	}
+	else
+	{
+		callbacks_.cancel_connect()();
+
+/*		connect_button_.text(
+			connect_text
+		);*/
+
+		connect_text_.value(
+			SGE_FONT_LIT("")
+		);
+	}
 }
-*/

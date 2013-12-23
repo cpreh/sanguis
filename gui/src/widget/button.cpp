@@ -53,6 +53,9 @@ sanguis::gui::widget::button::button(
 	font_(
 		_font
 	),
+	text_(
+		_text
+	),
 	static_text_(
 		_renderer,
 		_font,
@@ -116,6 +119,13 @@ sanguis::gui::widget::button::click(
 		click_.connect(
 			_callback
 		);
+}
+
+sge::font::string const &
+sanguis::gui::widget::button::text() const
+{
+	return
+		text_;
 }
 
 sge::rucksack::widget::base &

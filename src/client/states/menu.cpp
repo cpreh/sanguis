@@ -189,13 +189,11 @@ sanguis::client::states::menu::react(
 	sanguis::client::events::net_error const &_error
 )
 {
-	// FIXME!
-/*
 	menu_.connection_error(
 		fcppt::from_std_string(
 			_error.code().message()
 		)
-	);*/
+	);
 
 	return
 		this->discard_event();

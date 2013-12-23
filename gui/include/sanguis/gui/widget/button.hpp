@@ -53,6 +53,10 @@ public:
 	);
 
 	SANGUIS_GUI_SYMBOL
+	sge::font::string const &
+	text() const;
+
+	SANGUIS_GUI_SYMBOL
 	sge::rucksack::widget::base &
 	layout()
 	override;
@@ -72,6 +76,8 @@ private:
 	sge::renderer::device::ffp &renderer_;
 
 	sge::font::object &font_;
+
+	sge::font::string text_;
 
 	sge::font::draw::static_text static_text_;
 
