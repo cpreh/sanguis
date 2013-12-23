@@ -71,6 +71,16 @@ public:
 	parent(
 		sanguis::gui::widget::optional_ref
 	);
+
+	SANGUIS_GUI_SYMBOL
+	void
+	enable(
+		bool
+	);
+
+	SANGUIS_GUI_SYMBOL
+	bool
+	enabled() const;
 private:
 	virtual
 	void
@@ -79,6 +89,8 @@ private:
 	);
 
 	sanguis::gui::widget::optional_ref parent_;
+
+	bool enabled_;
 };
 
 }

@@ -145,6 +145,14 @@ sanguis::gui::widget::container::on_click(
 	sge::rucksack::vector const _pos
 )
 {
+	if(
+		!this->enabled()
+	)
+		return
+			sanguis::gui::get_focus(
+				false
+			);
+
 	this->foreach_widget(
 		[
 			this,

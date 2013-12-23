@@ -268,8 +268,7 @@ sanguis::client::gui::menu::object::object(
 		hostname_edit_.text_change(
 			std::bind(
 				&sanguis::client::gui::menu::object::handle_text_changed,
-				this,
-				std::placeholders::_1
+				this
 			)
 		)
 	),
@@ -277,12 +276,12 @@ sanguis::client::gui::menu::object::object(
 		port_edit_.text_change(
 			std::bind(
 				&sanguis::client::gui::menu::object::handle_text_changed,
-				this,
-				std::placeholders::_1
+				this
 			)
 		)
 	)
 {
+	this->handle_text_changed();
 }
 
 sanguis::client::gui::menu::object::~object()
@@ -380,9 +379,7 @@ sanguis::client::gui::menu::object::handle_quickstart()
 }
 
 void
-sanguis::client::gui::menu::object::handle_text_changed(
-	sge::font::string const &
-)
+sanguis::client::gui::menu::object::handle_text_changed()
 {
 	typedef unsigned long port_type;
 
@@ -400,16 +397,14 @@ sanguis::client::gui::menu::object::handle_text_changed(
 		)
 	);
 
-	// TODO!
-	/*
-	connect_button_.setEnabled(
+	connect_button_.enable(
 		opt_port
 		&&
-		!hostname_edit_.getText().empty()
+		!hostname_edit_.text().empty()
 		&&
 		(*opt_port > 0)
 		&& (*opt_port < 65535)
-	);*/
+	);
 }
 
 void

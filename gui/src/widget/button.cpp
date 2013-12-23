@@ -198,6 +198,14 @@ sanguis::gui::widget::button::on_click(
 	sge::rucksack::vector
 )
 {
+	if(
+		!this->enabled()
+	)
+		return
+			sanguis::gui::get_focus(
+				false
+			);
+
 	click_();
 
 	return

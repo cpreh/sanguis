@@ -67,9 +67,7 @@ private:
 	handle_quickstart();
 
 	void
-	handle_text_changed(
-		sge::font::string const &
-	);
+	handle_text_changed();
 
 	void
 	handle_connect();

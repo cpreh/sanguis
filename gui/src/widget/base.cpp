@@ -11,7 +11,10 @@
 
 sanguis::gui::widget::base::base()
 :
-	parent_()
+	parent_(),
+	enabled_(
+		true
+	)
 {
 }
 
@@ -80,6 +83,22 @@ sanguis::gui::widget::base::parent(
 				_parent->layout()
 			)
 		);
+}
+
+void
+sanguis::gui::widget::base::enable(
+	bool const _enabled
+)
+{
+	enabled_ =
+		_enabled;
+}
+
+bool
+sanguis::gui::widget::base::enabled() const
+{
+	return
+		enabled_;
 }
 
 void
