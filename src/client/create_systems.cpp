@@ -81,9 +81,9 @@ sanguis::client::create_systems(
 			)
 			(
 				sge::systems::image2d(
-					sge::image::capabilities_field(
+					sge::image::capabilities_field{
 						sge::image::capabilities::threadsafe
-					),
+					},
 					sge::media::optional_extension_set(
 						sge::media::extension_set{
 							sge::media::extension(
