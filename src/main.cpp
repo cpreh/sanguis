@@ -16,6 +16,7 @@
 #include <sge/config/log_path.hpp>
 #include <awl/show_error.hpp>
 #include <awl/show_error_narrow.hpp>
+#include <awl/show_message_narrow.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/exit_failure.hpp>
 #include <awl/main/exit_success.hpp>
@@ -29,8 +30,7 @@
 #include <boost/program_options/options_description.hpp>
 #include <boost/program_options/variables_map.hpp>
 #include <exception>
-#include <iostream>
-#include <ostream>
+#include <sstream>
 #include <string>
 #include <fcppt/config/external_end.hpp>
 
@@ -54,11 +54,19 @@ try
 	);
 
 	if(
-		vm.count("help")
+		vm.count(
+			"help"
+		)
 	)
 	{
-		// TODO: Fix this!
-		std::cout << desc << '\n';
+		std::ostringstream out;
+
+		out <<
+			desc;
+
+		awl::show_message_narrow(
+			out.str()
+		);
 
 		return
 			awl::main::exit_success();
