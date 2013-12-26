@@ -1,7 +1,7 @@
 #ifndef SANGUIS_LOG_LOCATION_HPP_INCLUDED
 #define SANGUIS_LOG_LOCATION_HPP_INCLUDED
 
-#include <fcppt/log/location_fwd.hpp>
+#include <fcppt/log/location.hpp>
 
 
 namespace sanguis

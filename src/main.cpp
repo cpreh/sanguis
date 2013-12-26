@@ -1,3 +1,5 @@
+#include <sanguis/app_name.hpp>
+#include <sanguis/company_name.hpp>
 #include <sanguis/args/log_level.hpp>
 #include <sanguis/args/options.hpp>
 #include <sanguis/args/parse.hpp>
@@ -11,10 +13,7 @@
 #include <sanguis/main_object.hpp>
 #include <sanguis/main_object_scoped_ptr.hpp>
 #include <sge/config/app_name.hpp>
-#include <sge/config/company_name.hpp>
 #include <sge/config/log_path.hpp>
-#include <sge/log/global_context.hpp>
-#include <sge/log/location.hpp>
 #include <awl/show_error.hpp>
 #include <awl/show_error_narrow.hpp>
 #include <awl/main/exit_code.hpp>
@@ -26,7 +25,6 @@
 #include <fcppt/text.hpp>
 #include <fcppt/io/clog.hpp>
 #include <fcppt/log/level.hpp>
-#include <fcppt/log/location.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/options_description.hpp>
 #include <boost/program_options/variables_map.hpp>
@@ -62,17 +60,16 @@ try
 		// TODO: Fix this!
 		std::cout << desc << '\n';
 
-		return awl::main::exit_success();
+		return
+			awl::main::exit_success();
 	}
 
 	awl::main::scoped_output const output(
 		fcppt::io::clog(),
 		sge::config::log_path(
-			sge::config::company_name(
-				FCPPT_TEXT("sanguis")
-			),
+			sanguis::company_name(),
 			sge::config::app_name(
-				FCPPT_TEXT("main")
+				sanguis::app_name()
 			)
 		)
 	);
@@ -102,13 +99,6 @@ try
 				vm
 			)
 		);
-
-	// TODO: this should be done right after sge::systems is constructed
-	sanguis::apply_log_level(
-		sge::log::location(),
-		sge::log::global_context(),
-		log_level
-	);
 
 	return
 		obj->run();

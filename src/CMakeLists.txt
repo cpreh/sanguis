@@ -449,6 +449,7 @@ set(
 	include/sanguis/client/world_parameters.hpp
 	include/sanguis/client/world_parameters_fwd.hpp
 	include/sanguis/clock.hpp
+	include/sanguis/company_name.hpp
 	include/sanguis/config_app_name.hpp
 	include/sanguis/connect_state.hpp
 	include/sanguis/connect_state_fwd.hpp
@@ -1536,6 +1537,7 @@ set(
 	src/client/states/running.cpp
 	src/client/states/waiting_for_player.cpp
 	src/client/world_parameters.cpp
+	src/company_name.cpp
 	src/config_app_name.cpp
 	src/duration_second.cpp
 	src/exception.cpp
