@@ -6,7 +6,6 @@
 #include <sanguis/args/server_only.hpp>
 #include <sanguis/client/create.hpp>
 #include <sanguis/server/create_original.hpp>
-#include <sanguis/apply_log_level.hpp>
 #include <sanguis/log_context.hpp>
 #include <sanguis/log_location.hpp>
 #include <sanguis/main.hpp>
@@ -25,6 +24,7 @@
 #include <fcppt/exception.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/io/clog.hpp>
+#include <fcppt/log/activate_levels_recursive.hpp>
 #include <fcppt/log/level.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/options_description.hpp>
@@ -88,9 +88,9 @@ try
 		)
 	);
 
-	sanguis::apply_log_level(
-		sanguis::log_location(),
+	fcppt::log::activate_levels_recursive(
 		sanguis::log_context(),
+		sanguis::log_location(),
 		log_level
 	);
 

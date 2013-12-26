@@ -3,7 +3,6 @@ set(
 	include/sanguis/aoe_projectile_type.hpp
 	include/sanguis/aoe_projectile_type_fwd.hpp
 	include/sanguis/app_name.hpp
-	include/sanguis/apply_log_level.hpp
 	include/sanguis/args/display_mode.hpp
 	include/sanguis/args/log_level.hpp
 	include/sanguis/args/multi_sampling.hpp
@@ -1386,7 +1385,6 @@ set(
 	include/sanguis/world_id_fwd.hpp
 	include/sanguis/world_id_type.hpp
 	src/app_name.cpp
-	src/apply_log_level.cpp
 	src/args/display_mode.cpp
 	src/args/log_level.cpp
 	src/args/multi_sampling.cpp
