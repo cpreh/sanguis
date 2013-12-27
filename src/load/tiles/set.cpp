@@ -13,8 +13,8 @@
 #include <fcppt/container/bitfield/underlying_value.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/filesystem/stem.hpp>
+#include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>
-#include <fcppt/log/output.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>

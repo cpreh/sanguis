@@ -99,7 +99,8 @@
 #include <fcppt/dynamic_cast.hpp>
 #include <fcppt/type_name_from_info.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/log/headers.hpp>
+#include <fcppt/log/_.hpp>
+#include <fcppt/log/warning.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/mpl/for_each.hpp>
 #include <majutsu/is_role.hpp>

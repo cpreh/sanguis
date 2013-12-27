@@ -15,8 +15,8 @@
 #include <sanguis/messages/create.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
-#include <fcppt/log/output.hpp>
 
 
 sanguis::server::entities::player_unique_ptr

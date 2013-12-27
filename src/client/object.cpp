@@ -33,8 +33,8 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/log/_.hpp>
 #include <fcppt/log/fatal.hpp>
-#include <fcppt/log/output.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/variables_map.hpp>
 #include <chrono>

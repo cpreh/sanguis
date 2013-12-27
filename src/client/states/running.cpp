@@ -33,7 +33,7 @@
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/input/cursor/activatable_fwd.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
-#include <fcppt/log/output.hpp>
+#include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>

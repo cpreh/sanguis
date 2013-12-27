@@ -16,9 +16,9 @@
 #include <sanguis/messages/player_unpause.hpp>
 #include <sanguis/messages/unpause.hpp>
 #include <sanguis/messages/call/object.hpp>
+#include <fcppt/log/_.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>
-#include <fcppt/log/output.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/log/parameters/object.hpp>
 #include <fcppt/text.hpp>

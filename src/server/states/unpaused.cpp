@@ -32,9 +32,9 @@
 #include <sanguis/server/states/unpaused.hpp>
 #include <fcppt/cast_to_enum.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/log/_.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>
-#include <fcppt/log/output.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/log/parameters/object.hpp>
 #include <fcppt/config/external_begin.hpp>

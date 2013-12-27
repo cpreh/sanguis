@@ -14,7 +14,8 @@
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/io/ifstream.hpp>
 #include <fcppt/io/istringstream.hpp>
-#include <fcppt/log/headers.hpp>
+#include <fcppt/log/_.hpp>
+#include <fcppt/log/warning.hpp>
 #include <fcppt/extract_from_string_exn.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/optional_impl.hpp>

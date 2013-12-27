@@ -6,8 +6,8 @@
 #include <awl/main/exit_success.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>
-#include <fcppt/log/output.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <exception>
 #include <functional>

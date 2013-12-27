@@ -16,8 +16,8 @@
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/call/object.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
-#include <fcppt/log/output.hpp>
 #include <fcppt/variant/holds_type.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>

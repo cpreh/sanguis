@@ -7,7 +7,7 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/int_to_float.hpp>
-#include <fcppt/log/output.hpp>
+#include <fcppt/log/_.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 

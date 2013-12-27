@@ -8,10 +8,10 @@
 #include <sge/parse/ini/output/to_file.hpp>
 #include <sge/parse/ini/parse_file.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
+#include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/info.hpp>
-#include <fcppt/log/output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>

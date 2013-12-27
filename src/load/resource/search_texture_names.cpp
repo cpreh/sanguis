@@ -9,7 +9,8 @@
 #include <fcppt/filesystem/extension.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/io/ifstream.hpp>
-#include <fcppt/log/headers.hpp>
+#include <fcppt/log/_.hpp>
+#include <fcppt/log/warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/filesystem/operations.hpp>

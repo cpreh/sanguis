@@ -8,8 +8,8 @@
 #include <fcppt/math/deg_to_rad.hpp>
 #include <fcppt/math/rad_to_deg.hpp>
 #include <fcppt/math/pi.hpp>
+#include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>
-#include <fcppt/log/output.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/date_time/gregorian/gregorian_types.hpp>
 #include <cmath>

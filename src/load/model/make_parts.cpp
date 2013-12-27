@@ -22,7 +22,7 @@
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/start.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/log/output.hpp>
+#include <fcppt/log/_.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>

@@ -87,7 +87,7 @@
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
-#include <fcppt/log/output.hpp>
+#include <fcppt/log/_.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>

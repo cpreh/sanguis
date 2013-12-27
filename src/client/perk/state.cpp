@@ -17,8 +17,8 @@
 #include <sanguis/client/perk/tree_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/pre.hpp>
+#include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>
-#include <fcppt/log/output.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>

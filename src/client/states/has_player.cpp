@@ -31,8 +31,8 @@
 #include <fcppt/text.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/container/tree/object_impl.hpp>
+#include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
-#include <fcppt/log/output.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <boost/statechart/result.hpp>

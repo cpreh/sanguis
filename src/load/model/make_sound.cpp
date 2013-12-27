@@ -7,8 +7,8 @@
 #include <sge/parse/json/object.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>
-#include <fcppt/log/output.hpp>
 
 
 sanguis::load::model::optional_sound
