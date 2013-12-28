@@ -61,7 +61,7 @@ sanguis::gui::widget::button::button(
 		_font,
 		_text,
 		sge::font::text_parameters(
-			sge::font::align_h::center
+			sge::font::align_h::left
 		),
 		sge::font::vector::null(),
 		sanguis::gui::aux_::style::text_color(),
