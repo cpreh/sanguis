@@ -2,13 +2,14 @@
 #include <sanguis/gui/aux_/style/text_color.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/text.hpp>
-#include <sge/font/align_h.hpp>
 #include <sge/font/metrics.hpp>
 #include <sge/font/object.hpp>
 #include <sge/font/string.hpp>
 #include <sge/font/text_parameters.hpp>
 #include <sge/font/v_center.hpp>
 #include <sge/font/vector.hpp>
+#include <sge/font/align_h/left.hpp>
+#include <sge/font/align_h/max_width.hpp>
 #include <sge/font/draw/simple.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
@@ -102,10 +103,11 @@ sanguis::gui::widget::text::on_draw(
 		font_,
 		value_,
 		sge::font::text_parameters(
-			sge::font::align_h::left
-		)
-		.max_width(
-			layout_.size().w()
+			sge::font::align_h::left(
+				sge::font::align_h::max_width(
+					layout_.size().w()
+				)
+			)
 		),
 		fcppt::math::vector::structure_cast<
 			sge::font::vector

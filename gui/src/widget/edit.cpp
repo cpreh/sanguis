@@ -11,7 +11,6 @@
 #include <sanguis/gui/aux_/style/text_color.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/edit.hpp>
-#include <sge/font/align_h.hpp>
 #include <sge/font/char_type.hpp>
 //#include <sge/font/flags.hpp>
 //#include <sge/font/flags_field.hpp>
@@ -22,6 +21,8 @@
 #include <sge/font/unit.hpp>
 #include <sge/font/v_center.hpp>
 #include <sge/font/vector.hpp>
+#include <sge/font/align_h/left.hpp>
+#include <sge/font/align_h/max_width.hpp>
 #include <sge/font/draw/simple.hpp>
 #include <sge/input/keyboard/key_code.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
@@ -181,19 +182,20 @@ sanguis::gui::widget::edit::on_draw(
 		font_,
 		text_,
 		sge::font::text_parameters(
-			sge::font::align_h::left
-		)
-		.max_width(
-			std::max(
-				layout_.size().w()
-				-
-				2
-				*
-				sanguis::gui::aux_::style::spacing::value,
-				fcppt::literal<
-					sge::font::unit
-				>(
-					0
+			sge::font::align_h::left(
+				sge::font::align_h::max_width(
+					std::max(
+						layout_.size().w()
+						-
+						2
+						*
+						sanguis::gui::aux_::style::spacing::value,
+						fcppt::literal<
+							sge::font::unit
+						>(
+							0
+						)
+					)
 				)
 			)
 		)

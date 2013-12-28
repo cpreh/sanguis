@@ -5,13 +5,15 @@
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/draw2d/scene/hud.hpp>
-#include <sge/font/align_h.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/text_parameters.hpp>
 #include <sge/font/unit.hpp>
 #include <sge/font/vector.hpp>
+#include <sge/font/align_h/left.hpp>
+#include <sge/font/align_h/max_width.hpp>
+#include <sge/font/align_h/right.hpp>
 #include <sge/font/draw/simple.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/image/color/any/object.hpp>
@@ -129,7 +131,7 @@ sanguis::client::draw2d::scene::hud::draw(
 		time_
 	);
 
-	sge::font::unit const width(
+	sge::font::align_h::max_width const width(
 		fcppt::cast::size<
 			sge::font::unit
 		>(
@@ -164,10 +166,9 @@ sanguis::client::draw2d::scene::hud::draw(
 		+
 		name_text_,
 		sge::font::text_parameters(
-			sge::font::align_h::left
-		)
-		.max_width(
-			width
+			sge::font::align_h::left(
+				width
+			)
 		),
 		sge::font::vector::null(),
 		sge::image::color::predef::white(),
@@ -180,10 +181,9 @@ sanguis::client::draw2d::scene::hud::draw(
 		font_object_,
 		weapon_text_,
 		sge::font::text_parameters(
-			sge::font::align_h::right
-		)
-		.max_width(
-			width
+			sge::font::align_h::right(
+				width
+			)
 		),
 		sge::font::vector::null(),
 		sge::image::color::predef::white(),

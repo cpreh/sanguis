@@ -10,7 +10,6 @@
 #include <sanguis/gui/aux_/style/text_color.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/button.hpp>
-#include <sge/font/align_h.hpp>
 #include <sge/font/metrics.hpp>
 #include <sge/font/object.hpp>
 #include <sge/font/rect.hpp>
@@ -19,6 +18,7 @@
 #include <sge/font/text_parameters.hpp>
 #include <sge/font/v_center.hpp>
 #include <sge/font/vector.hpp>
+#include <sge/font/align_h/left.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/renderer/texture/emulate_srgb.hpp>
@@ -61,7 +61,7 @@ sanguis::gui::widget::button::button(
 		_font,
 		_text,
 		sge::font::text_parameters(
-			sge::font::align_h::left
+			sge::font::align_h::left()
 		),
 		sge::font::vector::null(),
 		sanguis::gui::aux_::style::text_color(),
