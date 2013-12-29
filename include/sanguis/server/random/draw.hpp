@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_RANDOM_DRAW_HPP_INCLUDED
 
 #include <sanguis/random_generator.hpp>
+#include <sanguis/server/random/amount.hpp>
 #include <fcppt/algorithm/repeat.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>
 #include <fcppt/random/distribution/parameters/make_uniform_indices.hpp>
