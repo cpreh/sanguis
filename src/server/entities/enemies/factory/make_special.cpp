@@ -8,8 +8,15 @@
 #include <sanguis/server/entities/enemies/factory/make_modifiers.hpp>
 #include <sanguis/server/entities/enemies/factory/make_skills.hpp>
 #include <sanguis/server/entities/enemies/factory/make_special.hpp>
+#include <sanguis/server/entities/enemies/modifiers/amount.hpp>
 #include <sanguis/server/entities/enemies/modifiers/apply.hpp>
+#include <sanguis/server/entities/enemies/skills/amount.hpp>
 #include <sanguis/server/entities/enemies/skills/skill.hpp>
+#include <sanguis/server/random/amount.hpp>
+#include <sanguis/server/random/max.hpp>
+#include <sanguis/server/random/min.hpp>
+#include <sanguis/server/random/split.hpp>
+#include <sanguis/server/random/split_array.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -30,12 +37,42 @@ sanguis::server::entities::enemies::factory::make_special(
 		_parameters.difficulty()
 	);
 
+	typedef
+	sanguis::server::random::split_array<
+		2
+	>
+	split_array;
+
+	split_array const amounts(
+		sanguis::server::random::split(
+			_random_generator,
+			// TODO: How many?
+			sanguis::server::random::min(
+				sanguis::server::random::amount(
+					2u
+				)
+			),
+			sanguis::server::random::max(
+				sanguis::server::random::amount(
+					5u
+				)
+			),
+			split_array{{
+				sanguis::server::entities::enemies::modifiers::amount(),
+				sanguis::server::entities::enemies::skills::amount()
+			}}
+		)
+	);
+
 	sanguis::server::entities::enemies::attribute_container const modifier_result(
 		sanguis::server::entities::enemies::modifiers::apply(
 			_random_generator,
 			_parameters,
 			sanguis::server::entities::enemies::factory::make_modifiers(
 				_random_generator,
+				amounts[
+					0
+				],
 				difficulty
 			)
 		)
@@ -60,6 +97,9 @@ sanguis::server::entities::enemies::factory::make_special(
 			sanguis::server::entities::enemies::factory::make_skills(
 				diff_clock,
 				_random_generator,
+				amounts[
+					1
+				],
 				difficulty
 			)
 		);

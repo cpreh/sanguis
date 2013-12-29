@@ -2,8 +2,7 @@
 #define SANGUIS_SERVER_RANDOM_DRAW_HPP_INCLUDED
 
 #include <sanguis/random_generator.hpp>
-#include <sanguis/server/random/max.hpp>
-#include <sanguis/server/random/min.hpp>
+#include <fcppt/algorithm/repeat.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>
 #include <fcppt/random/distribution/parameters/make_uniform_indices.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
@@ -31,8 +30,7 @@ Result
 draw(
 	sanguis::random_generator &_random_generator,
 	Source const &_source,
-	sanguis::server::random::min const _min,
-	sanguis::server::random::max const _max,
+	sanguis::server::random::amount const _draws,
 	CreateFunction const &_create_function,
 	LessFunction const &_less_function,
 	EqualFunction const &_equal_function
@@ -46,56 +44,33 @@ draw(
 		)
 	);
 
-	typedef
-	typename
-	Source::size_type
-	size_type;
-
-	typedef
-	fcppt::random::distribution::parameters::uniform_int<
-		size_type
-	>
-	size_parameter;
-
-	size_type const draws(
-		fcppt::random::distribution::make_basic(
-			size_parameter(
-				typename
-				size_parameter::min(
-					_min.get()
-				),
-				typename
-				size_parameter::max(
-					_max.get()
-				)
-			)
-		)(
-			_random_generator
-		)
-	);
-
 	Result result;
 
 	result.reserve(
-		draws
+		_draws.get()
 	);
 
-	for(
-		size_type index(
-			0u
-		);
-		index < draws;
-		++index
-	)
-		result.push_back(
-			_create_function(
-				_source[
-					container_distribution(
-						_random_generator
-					)
-				]
-			)
-		);
+	fcppt::algorithm::repeat(
+		_draws.get(),
+		[
+			&_create_function,
+			&_source,
+			&_random_generator,
+			&container_distribution,
+			&result
+		]()
+		{
+			result.push_back(
+				_create_function(
+					_source[
+						container_distribution(
+							_random_generator
+						)
+					]
+				)
+			);
+		}
+	);
 
 	std::sort(
 		result.begin(),

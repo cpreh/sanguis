@@ -1012,11 +1012,13 @@ set(
 	include/sanguis/server/entities/enemies/fwd.hpp
 	include/sanguis/server/entities/enemies/make_name.hpp
 	include/sanguis/server/entities/enemies/modifiers/agile.hpp
+	include/sanguis/server/entities/enemies/modifiers/amount.hpp
 	include/sanguis/server/entities/enemies/modifiers/apply.hpp
 	include/sanguis/server/entities/enemies/modifiers/armored.hpp
 	include/sanguis/server/entities/enemies/modifiers/burning.hpp
 	include/sanguis/server/entities/enemies/modifiers/callback.hpp
 	include/sanguis/server/entities/enemies/modifiers/container.hpp
+	include/sanguis/server/entities/enemies/modifiers/create_callbacks.hpp
 	include/sanguis/server/entities/enemies/modifiers/fast.hpp
 	include/sanguis/server/entities/enemies/modifiers/freezing.hpp
 	include/sanguis/server/entities/enemies/modifiers/health.hpp
@@ -1025,8 +1027,12 @@ set(
 	include/sanguis/server/entities/enemies/modifiers/regenerating.hpp
 	include/sanguis/server/entities/enemies/parameters.hpp
 	include/sanguis/server/entities/enemies/parameters_fwd.hpp
+	include/sanguis/server/entities/enemies/skills/amount.hpp
 	include/sanguis/server/entities/enemies/skills/container.hpp
 	include/sanguis/server/entities/enemies/skills/cooldown.hpp
+	include/sanguis/server/entities/enemies/skills/factory/callback.hpp
+	include/sanguis/server/entities/enemies/skills/factory/callback_vector.hpp
+	include/sanguis/server/entities/enemies/skills/factory/create_callbacks.hpp
 	include/sanguis/server/entities/enemies/skills/factory/parameters.hpp
 	include/sanguis/server/entities/enemies/skills/factory/parameters_fwd.hpp
 	include/sanguis/server/entities/enemies/skills/factory/teleport.hpp
@@ -1234,9 +1240,16 @@ set(
 	include/sanguis/server/player_id_from_net.hpp
 	include/sanguis/server/radius.hpp
 	include/sanguis/server/random/amount.hpp
+	include/sanguis/server/random/distributor_decl.hpp
+	include/sanguis/server/random/distributor_fwd.hpp
+	include/sanguis/server/random/distributor_impl.hpp
 	include/sanguis/server/random/draw.hpp
+	include/sanguis/server/random/make_upper_bound.hpp
+	include/sanguis/server/random/map_with_index.hpp
 	include/sanguis/server/random/max.hpp
 	include/sanguis/server/random/min.hpp
+	include/sanguis/server/random/split.hpp
+	include/sanguis/server/random/split_array.hpp
 	include/sanguis/server/regeneration.hpp
 	include/sanguis/server/regeneration_fwd.hpp
 	include/sanguis/server/send_available_perks.hpp
@@ -1748,15 +1761,19 @@ set(
 	src/server/entities/enemies/finalize_special_parameters.cpp
 	src/server/entities/enemies/make_name.cpp
 	src/server/entities/enemies/modifiers/agile.cpp
+	src/server/entities/enemies/modifiers/amount.cpp
 	src/server/entities/enemies/modifiers/apply.cpp
 	src/server/entities/enemies/modifiers/armored.cpp
 	src/server/entities/enemies/modifiers/burning.cpp
+	src/server/entities/enemies/modifiers/create_callbacks.cpp
 	src/server/entities/enemies/modifiers/fast.cpp
 	src/server/entities/enemies/modifiers/freezing.cpp
 	src/server/entities/enemies/modifiers/health.cpp
 	src/server/entities/enemies/modifiers/parameters.cpp
 	src/server/entities/enemies/modifiers/regenerating.cpp
 	src/server/entities/enemies/parameters.cpp
+	src/server/entities/enemies/skills/amount.cpp
+	src/server/entities/enemies/skills/factory/create_callbacks.cpp
 	src/server/entities/enemies/skills/factory/parameters.cpp
 	src/server/entities/enemies/skills/factory/teleport.cpp
 	src/server/entities/enemies/skills/skill.cpp

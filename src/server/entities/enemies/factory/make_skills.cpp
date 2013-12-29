@@ -1,48 +1,25 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator.hpp>
+#include <sanguis/server/random/amount.hpp>
 #include <sanguis/server/random/draw.hpp>
-#include <sanguis/server/random/max.hpp>
-#include <sanguis/server/random/min.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/entities/enemies/factory/make_skills.hpp>
 #include <sanguis/server/entities/enemies/skills/container.hpp>
 #include <sanguis/server/entities/enemies/skills/skill.hpp>
 #include <sanguis/server/entities/enemies/skills/unique_ptr.hpp>
+#include <sanguis/server/entities/enemies/skills/factory/callback.hpp>
+#include <sanguis/server/entities/enemies/skills/factory/create_callbacks.hpp>
 #include <sanguis/server/entities/enemies/skills/factory/parameters.hpp>
-#include <sanguis/server/entities/enemies/skills/factory/teleport.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <typeinfo>
-#include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
-namespace
-{
-
-using
-callback
-=
-sanguis::server::entities::enemies::skills::unique_ptr
-(*)(
-	sanguis::server::entities::enemies::skills::factory::parameters const &
-);
-
-typedef
-std::vector<
-	callback
->
-callback_vector;
-
-callback_vector const callbacks{
-	&sanguis::server::entities::enemies::skills::factory::teleport
-};
-
-}
 
 sanguis::server::entities::enemies::skills::container
 sanguis::server::entities::enemies::factory::make_skills(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
+	sanguis::server::random::amount const _amount,
 	sanguis::server::entities::enemies::difficulty const _difficulty
 )
 {
@@ -51,18 +28,13 @@ sanguis::server::entities::enemies::factory::make_skills(
 			sanguis::server::entities::enemies::skills::container
 		>(
 			_random_generator,
-			callbacks,
-			sanguis::server::random::min(
-				0u
-			),
-			sanguis::server::random::max(
-				2u
-			), // TODO: How many?
+			sanguis::server::entities::enemies::skills::factory::create_callbacks(),
+			_amount,
 			[
 				&_diff_clock,
 				_difficulty
 			](
-				callback const &_callback
+				sanguis::server::entities::enemies::skills::factory::callback const &_callback
 			)
 			{
 				return

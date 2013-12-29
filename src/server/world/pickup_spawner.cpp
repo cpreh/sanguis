@@ -16,18 +16,17 @@
 #include <sanguis/server/entities/pickups/weapon.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/random/distributor_impl.hpp>
 #include <sanguis/server/weapons/create.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/world/pickup_spawner.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/strong_typedef_assignment.hpp>
-#include <fcppt/random/variate_impl.hpp>
 #include <fcppt/random/distribution/basic_impl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cmath>
 #include <functional>
-#include <numeric>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -47,149 +46,93 @@ sanguis::server::world::pickup_spawner::pickup_spawner(
 	env_(
 		_env
 	),
-	spawns_{
-		std::make_pair(
-			sanguis::server::pickup_probability(
-				4.f
-			),
-			sanguis::server::world::pickup_spawner::spawn_function(
-				std::bind(
-					&sanguis::server::world::pickup_spawner::spawn_health,
-					this,
-					std::placeholders::_1,
-					std::placeholders::_2
+	distributor_(
+		sanguis::server::world::pickup_spawner::distributor::vector{
+			std::make_pair(
+				sanguis::server::pickup_probability(
+					4.f
+				),
+				sanguis::server::world::pickup_spawner::spawn_function(
+					std::bind(
+						&sanguis::server::world::pickup_spawner::spawn_health,
+						this,
+						std::placeholders::_1,
+						std::placeholders::_2
+					)
 				)
-			)
-		),
-		std::make_pair(
-			sanguis::server::pickup_probability(
-				0.3f
 			),
-			sanguis::server::world::pickup_spawner::spawn_function(
-				std::bind(
-					&sanguis::server::world::pickup_spawner::spawn_monster,
-					this,
-					std::placeholders::_1,
-					std::placeholders::_2
+			std::make_pair(
+				sanguis::server::pickup_probability(
+					0.3f
+				),
+				sanguis::server::world::pickup_spawner::spawn_function(
+					std::bind(
+						&sanguis::server::world::pickup_spawner::spawn_monster,
+						this,
+						std::placeholders::_1,
+						std::placeholders::_2
+					)
 				)
-			)
-		),
-		std::make_pair(
-			sanguis::server::pickup_probability(
-				2.f
 			),
-			sanguis::server::world::pickup_spawner::spawn_function(
-				std::bind(
-					&sanguis::server::world::pickup_spawner::spawn_weapon,
-					this,
-					std::placeholders::_1,
-					std::placeholders::_2,
+			std::make_pair(
+				sanguis::server::pickup_probability(
+					2.f
+				),
+				this->make_spawn_weapon(
 					sanguis::weapon_type(
 						sanguis::primary_weapon_type::pistol
 					)
 				)
-			)
-		),
-		std::make_pair(
-			sanguis::server::pickup_probability(
-				0.8f
 			),
-			sanguis::server::world::pickup_spawner::spawn_function(
-				std::bind(
-					&sanguis::server::world::pickup_spawner::spawn_weapon,
-					this,
-					std::placeholders::_1,
-					std::placeholders::_2,
+			std::make_pair(
+				sanguis::server::pickup_probability(
+					0.8f
+				),
+				this->make_spawn_weapon(
 					sanguis::weapon_type(
 						sanguis::primary_weapon_type::shotgun
 					)
 				)
-			)
-		),
-		std::make_pair(
-			sanguis::server::pickup_probability(
-				1.f
 			),
-			sanguis::server::world::pickup_spawner::spawn_function(
-				std::bind(
-					&sanguis::server::world::pickup_spawner::spawn_weapon,
-					this,
-					std::placeholders::_1,
-					std::placeholders::_2,
+			std::make_pair(
+				sanguis::server::pickup_probability(
+					1.f
+				),
+				this->make_spawn_weapon(
 					sanguis::weapon_type(
 						sanguis::primary_weapon_type::rocket_launcher
 					)
 				)
-			)
-		),
-		std::make_pair(
-			sanguis::server::pickup_probability(
-				4.f
 			),
-			sanguis::server::world::pickup_spawner::spawn_function(
-				std::bind(
-					&sanguis::server::world::pickup_spawner::spawn_weapon,
-					this,
-					std::placeholders::_1,
-					std::placeholders::_2,
+			std::make_pair(
+				sanguis::server::pickup_probability(
+					4.f
+				),
+				this->make_spawn_weapon(
 					sanguis::weapon_type(
 						sanguis::secondary_weapon_type::grenade
 					)
 				)
-			)
-		),
-		std::make_pair(
-			sanguis::server::pickup_probability(
-				0.3f
 			),
-			sanguis::server::world::pickup_spawner::spawn_function(
-				std::bind(
-					&sanguis::server::world::pickup_spawner::spawn_weapon,
-					this,
-					std::placeholders::_1,
-					std::placeholders::_2,
+			std::make_pair(
+				sanguis::server::pickup_probability(
+					0.3f
+				),
+				this->make_spawn_weapon(
 					sanguis::weapon_type(
 						sanguis::secondary_weapon_type::sentry
 					)
 				)
 			)
-		)
-	},
+		}
+	),
 	spawn_prob_(
-		_random_generator,
 		real_distribution(
 			real_distribution::param_type::min(
 				0.f
 			),
 			real_distribution::param_type::sup(
 				1.f
-			)
-		)
-	),
-	spawn_value_(
-		_random_generator,
-		real_distribution(
-			real_distribution::param_type::min(
-				0.f
-			),
-			real_distribution::param_type::sup(
-				std::accumulate(
-					spawns_.begin(),
-					spawns_.end(),
-					sanguis::server::pickup_probability(
-						0.f
-					),
-					[](
-						sanguis::server::pickup_probability const _cur,
-						sanguis::server::world::pickup_spawner::spawn_pair const &item
-					)
-					{
-						return
-							item.first
-							+
-							_cur;
-					}
-				).get()
 			)
 		)
 	)
@@ -208,40 +151,20 @@ sanguis::server::world::pickup_spawner::spawn(
 )
 {
 	if(
-		spawn_prob_()
+		spawn_prob_(
+			random_generator_
+		)
 		>
 		_prob.get()
 	)
 		return;
 
-	sanguis::server::pickup_probability const value(
-		spawn_value_()
+	distributor_.execute(
+		random_generator_
+	)(
+		_center,
+		_difficulty
 	);
-
-	sanguis::server::pickup_probability cur(
-		0.f
-	);
-
-	for(
-		auto const &cur_spawn
-		:
-		spawns_
-	)
-	{
-		cur += cur_spawn.first;
-
-		if(
-			value < cur
-		)
-		{
-			cur_spawn.second(
-				_center,
-				_difficulty
-			);
-
-			return;
-		}
-	}
 }
 
 void
@@ -330,4 +253,21 @@ sanguis::server::world::pickup_spawner::spawn_entity(
 			_center
 		)
 	);
+}
+
+sanguis::server::world::pickup_spawner::spawn_function
+sanguis::server::world::pickup_spawner::make_spawn_weapon(
+	sanguis::weapon_type const &_weapon_type
+)
+{
+	return
+		sanguis::server::world::pickup_spawner::spawn_function(
+			std::bind(
+				&sanguis::server::world::pickup_spawner::spawn_weapon,
+				this,
+				std::placeholders::_1,
+				std::placeholders::_2,
+				_weapon_type
+			)
+		);
 }

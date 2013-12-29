@@ -9,14 +9,12 @@
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
+#include <sanguis/server/random/distributor_decl.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/random/variate_decl.hpp>
 #include <fcppt/random/distribution/basic_decl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
-#include <vector>
-#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -73,44 +71,44 @@ private:
 		sanguis::server::center
 	);
 
+	typedef
+	std::function<
+		void (
+			sanguis::server::center,
+			sanguis::server::entities::enemies::difficulty
+		)
+	>
+	spawn_function;
+
+	sanguis::server::world::pickup_spawner::spawn_function
+	make_spawn_weapon(
+		sanguis::weapon_type const &
+	);
+
 	sanguis::diff_clock const &diff_clock_;
 
 	sanguis::random_generator &random_generator_;
 
 	sanguis::server::environment::object &env_;
 
-	typedef fcppt::random::distribution::basic<
+	typedef
+	fcppt::random::distribution::basic<
 		fcppt::random::distribution::parameters::uniform_real<
 			sanguis::server::pickup_probability::value_type
 		>
-	> real_distribution;
+	>
+	real_distribution;
 
-	typedef fcppt::random::variate<
-		sanguis::random_generator,
-		real_distribution
-	> real_variate;
-
-	typedef std::function<
-		void (
-			sanguis::server::center,
-			sanguis::server::entities::enemies::difficulty
-		)
-	> spawn_function;
-
-	typedef std::pair<
+	typedef
+	sanguis::server::random::distributor<
 		sanguis::server::pickup_probability,
 		spawn_function
-	> spawn_pair;
+	>
+	distributor;
 
-	typedef std::vector<
-		spawn_pair
-	> spawn_vector;
+	distributor distributor_;
 
-	spawn_vector const spawns_;
-
-	real_variate
-		spawn_prob_,
-		spawn_value_;
+	real_distribution spawn_prob_;
 };
 
 }
