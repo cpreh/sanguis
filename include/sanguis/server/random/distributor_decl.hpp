@@ -7,7 +7,6 @@
 #include <fcppt/random/distribution/basic_decl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int_decl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real_decl.hpp>
-#include <fcppt/random/distribution/transform/strong_typedef.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/if.hpp>
 #include <type_traits>

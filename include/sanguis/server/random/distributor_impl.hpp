@@ -4,7 +4,7 @@
 #include <sanguis/random_generator.hpp>
 #include <sanguis/server/random/distributor_decl.hpp>
 #include <sanguis/server/random/make_upper_bound.hpp>
-#include <fcppt/strong_typedef_construct_cast.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/algorithm/fold.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/random/distribution/basic_impl.hpp>
@@ -30,7 +30,7 @@ sanguis::server::random::distributor<
 		distribution_parameters(
 			typename
 			distribution_parameters::min(
-				fcppt::strong_typedef_construct_cast<
+				fcppt::literal<
 					Value
 				>(
 					0
@@ -41,7 +41,7 @@ sanguis::server::random::distributor<
 			>::execute(
 				fcppt::algorithm::fold(
 					_values,
-					fcppt::strong_typedef_construct_cast<
+					fcppt::literal<
 						Value
 					>(
 						0
@@ -96,7 +96,7 @@ sanguis::server::random::distributor<
 	);
 
 	Value cur(
-		fcppt::strong_typedef_construct_cast<
+		fcppt::literal<
 			Value
 		>(
 			0u

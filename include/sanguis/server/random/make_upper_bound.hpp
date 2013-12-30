@@ -1,10 +1,10 @@
 #ifndef SANGUIS_SERVER_RANDOM_MAKE_UPPER_BOUND_HPP_INCLUDED
 #define SANGUIS_SERVER_RANDOM_MAKE_UPPER_BOUND_HPP_INCLUDED
 
+#include <fcppt/literal.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real.hpp>
-#include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/utility/enable_if.hpp>
 #include <type_traits>
@@ -86,7 +86,7 @@ struct make_upper_bound<
 		FCPPT_ASSERT_PRE(
 			_value
 			>
-			fcppt::strong_typedef_construct_cast<
+			fcppt::literal<
 				T
 			>(
 				0
@@ -97,7 +97,7 @@ struct make_upper_bound<
 			result_type(
 				_value
 				-
-				fcppt::strong_typedef_construct_cast<
+				fcppt::literal<
 					T
 				>(
 					1

@@ -8,6 +8,7 @@
 #include <sanguis/server/random/max.hpp>
 #include <sanguis/server/random/min.hpp>
 #include <sanguis/server/random/split_array.hpp>
+#include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/algorithm/array_init.hpp>
 #include <fcppt/algorithm/repeat.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>

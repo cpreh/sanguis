@@ -20,6 +20,7 @@
 #include <sanguis/server/weapons/create.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/world/pickup_spawner.hpp>
+#include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/strong_typedef_assignment.hpp>
 #include <fcppt/random/distribution/basic_impl.hpp>
