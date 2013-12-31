@@ -884,6 +884,7 @@ set(
 	include/sanguis/server/ai/simple.hpp
 	include/sanguis/server/ai/stop.hpp
 	include/sanguis/server/ai/unique_ptr.hpp
+	include/sanguis/server/ai/update_interval.hpp
 	include/sanguis/server/ai/update_result.hpp
 	include/sanguis/server/ai/update_result_fwd.hpp
 	include/sanguis/server/ai/visible.hpp
@@ -1696,6 +1697,7 @@ set(
 	src/server/ai/search_new_target.cpp
 	src/server/ai/simple.cpp
 	src/server/ai/stop.cpp
+	src/server/ai/update_interval.cpp
 	src/server/auras/aggro.cpp
 	src/server/auras/aoe_damage.cpp
 	src/server/auras/aura.cpp

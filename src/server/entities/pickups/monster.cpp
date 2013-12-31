@@ -80,7 +80,7 @@ sanguis::server::entities::pickups::monster::do_pickup(
 			this->environment()->load_context(),
 			sanguis::server::damage::no_armor(),
 			sanguis::server::health(
-				10.f
+				50.f
 				*
 				std::sqrt(
 					difficulty_.get()
@@ -115,7 +115,7 @@ sanguis::server::entities::pickups::monster::do_pickup(
 					)
 				),
 				sanguis::server::weapons::damage(
-					1.f
+					5.f
 					*
 					std::sqrt(
 						difficulty_.get()

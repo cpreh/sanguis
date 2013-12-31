@@ -15,8 +15,9 @@
 #include <sanguis/server/perks/level_diff.hpp>
 #include <sanguis/server/perks/perk.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/literal.hpp>
+#include <fcppt/algorithm/repeat.hpp>
 #include <fcppt/math/twopi.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/random/variate_impl.hpp>
 #include <fcppt/random/distribution/basic_impl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real_impl.hpp>
@@ -86,67 +87,81 @@ sanguis::server::perks::choleric::update(
 		this->level() < rocket_level
 	);
 
-	unsigned const count(
+	fcppt::algorithm::repeat(
 		spawn_bullets
 		?
-			3 + this->level().get() * 2
+			fcppt::literal<
+				sanguis::server::level::value_type
+			>(
+				3
+			)
+			+
+			this->level().get()
+			*
+			fcppt::literal<
+				sanguis::server::level::value_type
+			>(
+				2
+			)
 		:
 			this->level().get()
-	);
-
-	for(
-		unsigned index = 0;
-		index < count;
-		++index
-	)
-	{
-		sanguis::server::direction const direction(
-			rand_()
-		);
-
-		sanguis::server::environment::insert_no_result(
-			_env,
+		,
+		[
+			this,
+			&_env,
+			&_entity,
 			spawn_bullets
-			?
-				sanguis::server::entities::unique_ptr(
-					fcppt::make_unique_ptr<
-						sanguis::server::entities::projectiles::simple_bullet
-					>(
-						diff_clock_,
-						_env.load_context(),
-						_entity.team(),
-						sanguis::server::damage::unit(
-							2.f
-						),
-						direction
+		]
+		()
+		{
+			sanguis::server::direction const direction(
+				rand_()
+			);
+
+			sanguis::server::environment::insert_no_result(
+				_env,
+				spawn_bullets
+				?
+					sanguis::server::entities::unique_ptr(
+						fcppt::make_unique_ptr<
+							sanguis::server::entities::projectiles::simple_bullet
+						>(
+							diff_clock_,
+							_env.load_context(),
+							_entity.team(),
+							sanguis::server::damage::unit(
+								5.f
+							),
+							direction
+						)
+					)
+				:
+					sanguis::server::entities::unique_ptr(
+						fcppt::make_unique_ptr<
+							sanguis::server::entities::projectiles::rocket
+						>(
+							diff_clock_,
+							_env.load_context(),
+							_entity.team(),
+							sanguis::server::damage::unit(
+								6.f
+							),
+							sanguis::server::radius(
+								90.f
+							),
+							direction
+						)
+					)
+				,
+				sanguis::server::entities::insert_parameters(
+					_entity.center(),
+					sanguis::server::angle(
+						direction.get()
 					)
 				)
-			:
-				sanguis::server::entities::unique_ptr(
-					fcppt::make_unique_ptr<
-						sanguis::server::entities::projectiles::rocket
-					>(
-						diff_clock_,
-						_env.load_context(),
-						_entity.team(),
-						sanguis::server::damage::unit(
-							5.f
-						),
-						sanguis::server::radius(
-							90.f
-						),
-						direction
-					)
-				)
-			,
-			sanguis::server::entities::insert_parameters(
-				_entity.center(),
-				sanguis::server::angle(
-					direction.get()
-				)
-			)
-		);
-	}
+			);
+		}
+	);
 }
 
 void

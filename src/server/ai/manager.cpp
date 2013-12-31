@@ -10,6 +10,7 @@
 #include <sanguis/server/ai/rotate_and_move_to_target.hpp>
 #include <sanguis/server/ai/rotate_to_target.hpp>
 #include <sanguis/server/ai/stop.hpp>
+#include <sanguis/server/ai/update_interval.hpp>
 #include <sanguis/server/ai/update_result.hpp>
 #include <sanguis/server/ai/visible.hpp>
 #include <sanguis/server/ai/pathing/find_target.hpp>
@@ -33,7 +34,6 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <chrono>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
 
@@ -54,9 +54,7 @@ sanguis::server::ai::manager::manager(
 	update_timer_(
 		sanguis::diff_timer::parameters(
 			_diff_clock,
-			std::chrono::milliseconds(
-				500
-			)
+			sanguis::server::ai::update_interval()
 		)
 		.expired(
 			true

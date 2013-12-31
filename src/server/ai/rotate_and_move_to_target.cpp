@@ -30,6 +30,7 @@ sanguis::server::ai::rotate_and_move_to_target(
 
 	sanguis::server::ai::move_to_target(
 		_me,
-		angle_to_target
+		angle_to_target,
+		_target
 	);
 }
