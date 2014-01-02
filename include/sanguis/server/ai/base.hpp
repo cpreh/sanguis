@@ -3,10 +3,10 @@
 
 #include <sanguis/server/ai/base_fwd.hpp>
 #include <sanguis/server/ai/entity_set.hpp>
+#include <sanguis/server/ai/optional_target_fwd.hpp>
 #include <sanguis/server/ai/sight_range_fwd.hpp>
 #include <sanguis/server/ai/update_result_fwd.hpp>
 #include <sanguis/server/ai/visible_fwd.hpp>
-#include <sanguis/server/entities/auto_weak_link_fwd.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
 #include <sanguis/server/entities/property/change_event_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -31,7 +31,7 @@ public:
 	~base() = 0;
 
 	virtual
-	sanguis::server::entities::auto_weak_link
+	sanguis::server::ai::optional_target const
 	target() const = 0;
 
 	// This could dynamically change in the future!

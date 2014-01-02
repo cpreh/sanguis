@@ -866,6 +866,8 @@ set(
 	include/sanguis/server/ai/manager.hpp
 	include/sanguis/server/ai/manager_fwd.hpp
 	include/sanguis/server/ai/move_to_target.hpp
+	include/sanguis/server/ai/optional_target.hpp
+	include/sanguis/server/ai/optional_target_fwd.hpp
 	include/sanguis/server/ai/pathing/find_target.hpp
 	include/sanguis/server/ai/pathing/is_visible.hpp
 	include/sanguis/server/ai/pathing/positions_are_close.hpp
@@ -883,6 +885,8 @@ set(
 	include/sanguis/server/ai/sight_range_fwd.hpp
 	include/sanguis/server/ai/simple.hpp
 	include/sanguis/server/ai/stop.hpp
+	include/sanguis/server/ai/target.hpp
+	include/sanguis/server/ai/target_fwd.hpp
 	include/sanguis/server/ai/unique_ptr.hpp
 	include/sanguis/server/ai/update_interval.hpp
 	include/sanguis/server/ai/update_result.hpp

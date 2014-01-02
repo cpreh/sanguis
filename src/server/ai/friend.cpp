@@ -21,7 +21,7 @@ sanguis::server::ai::friend_::friend_(
 		_spawn_owner
 	)
 {
-	this->target(
+	this->entity_target(
 		spawn_owner_.get()
 	);
 }
@@ -48,7 +48,7 @@ sanguis::server::ai::friend_::out_of_range(
 		&&
 		spawn_owner_.get()
 		?
-			this->target(
+			this->entity_target(
 				spawn_owner_.get()
 			)
 		:
@@ -72,11 +72,11 @@ sanguis::server::ai::friend_::update_target(
 		==
 		sanguis::server::ai::update_result::keep_target
 		&&
-		this->target()
+		this->entity_target()
 		==
 		spawn_owner_.get()
 		?
-			this->target(
+			this->entity_target(
 				_target.link()
 			)
 		:
@@ -88,7 +88,7 @@ bool
 sanguis::server::ai::friend_::aggressive() const
 {
 	return
-		this->target()
+		this->entity_target()
 		!=
 		spawn_owner_.get();
 }

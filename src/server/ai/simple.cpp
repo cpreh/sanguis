@@ -1,9 +1,11 @@
 #include <sanguis/server/ai/base.hpp>
 #include <sanguis/server/ai/entity_set.hpp>
+#include <sanguis/server/ai/optional_target.hpp>
 #include <sanguis/server/ai/update_result.hpp>
 #include <sanguis/server/ai/search_new_target.hpp>
 #include <sanguis/server/ai/simple.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
+#include <sanguis/server/ai/target.hpp>
 #include <sanguis/server/ai/visible.hpp>
 #include <sanguis/server/collision/distance_entity_entity.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
@@ -37,7 +39,7 @@ sanguis::server::ai::simple::~simple()
 }
 
 sanguis::server::ai::update_result
-sanguis::server::ai::simple::target(
+sanguis::server::ai::simple::entity_target(
 	sanguis::server::entities::auto_weak_link const &_target
 )
 {
@@ -48,8 +50,24 @@ sanguis::server::ai::simple::target(
 		sanguis::server::ai::update_result::new_target;
 }
 
-sanguis::server::entities::auto_weak_link
+sanguis::server::ai::optional_target const
 sanguis::server::ai::simple::target() const
+{
+	return
+		target_
+		?
+			sanguis::server::ai::optional_target(
+				sanguis::server::ai::target(
+					target_->center()
+				)
+			)
+		:
+			sanguis::server::ai::optional_target()
+		;
+}
+
+sanguis::server::entities::auto_weak_link
+sanguis::server::ai::simple::entity_target() const
 {
 	return
 		target_;

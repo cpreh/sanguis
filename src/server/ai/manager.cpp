@@ -7,6 +7,7 @@
 #include <sanguis/server/ai/base.hpp>
 #include <sanguis/server/ai/idle.hpp>
 #include <sanguis/server/ai/manager.hpp>
+#include <sanguis/server/ai/optional_target.hpp>
 #include <sanguis/server/ai/rotate_and_move_to_target.hpp>
 #include <sanguis/server/ai/rotate_to_target.hpp>
 #include <sanguis/server/ai/stop.hpp>
@@ -146,7 +147,7 @@ sanguis::server::ai::manager::update()
 			)
 		);
 
-	sanguis::server::entities::auto_weak_link const target(
+	sanguis::server::ai::optional_target const target(
 		ai_.target()
 	);
 
@@ -163,14 +164,14 @@ sanguis::server::ai::manager::update()
 
 	sanguis::creator::pos const target_grid_pos(
 		sanguis::server::world::center_to_grid_pos(
-			target->center()
+			target->get()
 		)
 	);
 
 	me_.target(
 		sanguis::server::weapons::optional_target(
 			sanguis::server::weapons::target(
-				target->center().get()
+				target->get().get()
 			)
 		)
 	);
@@ -216,13 +217,13 @@ sanguis::server::ai::manager::update()
 
 			sanguis::server::ai::rotate_to_target(
 				me_,
-				target->center()
+				target->get()
 			);
 		}
 		else
 			sanguis::server::ai::rotate_and_move_to_target(
 				me_,
-				target->center()
+				target->get()
 			);
 
 		return;

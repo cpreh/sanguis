@@ -15,7 +15,7 @@
 #include <sanguis/server/entities/spawns/size_type.hpp>
 #include <sanguis/server/entities/spawns/spawn.hpp>
 #include <sanguis/server/world/difficulty.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/algorithm/repeat.hpp>
 #include <fcppt/assert/pre.hpp>
 
 
@@ -97,37 +97,40 @@ void
 sanguis::server::entities::spawns::spawn::update()
 {
 	if(
-		sanguis::server::entities::spawns::size_type const count_ =
+		sanguis::server::entities::spawns::size_type const cur_count =
 			this->may_spawn()
 	)
 	{
-		for(
-			size_type i = 0;
-			i < count_;
-			++i
-		)
-			this->environment()->insert(
-				sanguis::server::entities::enemies::create(
-					diff_clock_,
-					random_generator_,
-					enemy_type_,
-					difficulty_,
-					this->environment()->load_context(),
-					sanguis::server::entities::spawn_owner(
-						this->link()
+		fcppt::algorithm::repeat(
+			cur_count,
+			[
+				this
+			]()
+			{
+				this->environment()->insert(
+					sanguis::server::entities::enemies::create(
+						diff_clock_,
+						random_generator_,
+						enemy_type_,
+						difficulty_,
+						this->environment()->load_context(),
+						sanguis::server::entities::spawn_owner(
+							this->link()
+						),
+						sanguis::server::entities::enemies::special_chance(
+							0.05f
+						)
 					),
-					sanguis::server::entities::enemies::special_chance(
-						0.05f
+					sanguis::server::entities::insert_parameters(
+						this->center(),
+						this->angle()
 					)
-				),
-				sanguis::server::entities::insert_parameters(
-					this->center(),
-					this->angle()
-				)
-			);
+				);
+			}
+		);
 
 		this->add_count(
-			count_
+			cur_count
 		);
 	}
 }

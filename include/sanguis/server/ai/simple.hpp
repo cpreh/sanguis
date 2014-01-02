@@ -3,6 +3,7 @@
 
 #include <sanguis/server/ai/base.hpp>
 #include <sanguis/server/ai/entity_set.hpp>
+#include <sanguis/server/ai/optional_target_fwd.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/ai/update_result_fwd.hpp>
 #include <sanguis/server/ai/visible_fwd.hpp>
@@ -36,13 +37,16 @@ public:
 	~simple();
 protected:
 	sanguis::server::ai::update_result
-	target(
+	entity_target(
 		sanguis::server::entities::auto_weak_link const &
 	);
 
-	sanguis::server::entities::auto_weak_link
+	sanguis::server::ai::optional_target const
 	target() const
 	override;
+
+	sanguis::server::entities::auto_weak_link
+	entity_target() const;
 
 	sanguis::server::ai::sight_range const
 	sight_range() const
