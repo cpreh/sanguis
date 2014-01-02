@@ -3,6 +3,8 @@
 #include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/creator/pos.hpp>
+#include <sanguis/server/add_target_callback.hpp>
+#include <sanguis/server/remove_target_callback.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/ai/base.hpp>
 #include <sanguis/server/ai/idle.hpp>
@@ -20,7 +22,8 @@
 #include <sanguis/server/ai/pathing/start.hpp>
 #include <sanguis/server/ai/pathing/target.hpp>
 #include <sanguis/server/ai/pathing/trail.hpp>
-#include <sanguis/server/auras/aggro.hpp>
+#include <sanguis/server/auras/target.hpp>
+#include <sanguis/server/auras/target_kind.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_health.hpp>
@@ -79,27 +82,60 @@ sanguis::server::ai::manager::manager(
 		)
 	)
 {
+	sanguis::server::radius const sight_radius(
+		ai_.sight_range().get()
+	);
+
 	_me.add_aura(
 		fcppt::make_unique_ptr<
-			sanguis::server::auras::aggro
+			sanguis::server::auras::target
 		>(
-			// TODO: sight_range could dynamically change in the future
-			sanguis::server::radius(
-				ai_.sight_range().get()
-			),
+			sight_radius,
 			_me.team(),
-			std::bind(
-				&sanguis::server::ai::manager::target_enters,
-				this,
-				std::placeholders::_1
+			sanguis::server::auras::target_kind::enemy,
+			sanguis::server::add_target_callback(
+				std::bind(
+					&sanguis::server::ai::manager::target_enters,
+					this,
+					std::placeholders::_1
+				)
 			),
-			std::bind(
-				&sanguis::server::ai::manager::target_leaves,
-				this,
-				std::placeholders::_1
+			sanguis::server::remove_target_callback(
+				std::bind(
+					&sanguis::server::ai::manager::target_leaves,
+					this,
+					std::placeholders::_1
+				)
 			)
 		)
 	);
+
+	if(
+		ai_.target_friends()
+	)
+		_me.add_aura(
+			fcppt::make_unique_ptr<
+				sanguis::server::auras::target
+			>(
+				sight_radius,
+				_me.team(),
+				sanguis::server::auras::target_kind::friend_,
+				sanguis::server::add_target_callback(
+					std::bind(
+						&sanguis::server::ai::manager::friend_enters,
+						this,
+						std::placeholders::_1
+					)
+				),
+				sanguis::server::remove_target_callback(
+					std::bind(
+						&sanguis::server::ai::manager::friend_leaves,
+						this,
+						std::placeholders::_1
+					)
+				)
+			)
+		);
 }
 
 sanguis::server::ai::manager::~manager()
@@ -320,6 +356,20 @@ sanguis::server::ai::manager::target_leaves(
 			_with_body
 		)
 	);
+}
+
+void
+sanguis::server::ai::manager::friend_enters(
+	sanguis::server::entities::with_body &_with_body
+)
+{
+}
+
+void
+sanguis::server::ai::manager::friend_leaves(
+	sanguis::server::entities::with_body &_with_body
+)
+{
 }
 
 void

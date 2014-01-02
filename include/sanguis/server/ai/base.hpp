@@ -68,6 +68,10 @@ public:
 	virtual
 	bool
 	aggressive() const;
+
+	virtual
+	bool
+	target_friends() const;
 };
 
 }

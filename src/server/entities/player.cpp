@@ -11,29 +11,29 @@
 #include <sanguis/messages/create.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/messages/serialization/convert_string_vector.hpp>
+#include <sanguis/server/add_sight_callback.hpp>
+#include <sanguis/server/add_weapon_pickup_callback.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/closest_entity.hpp>
 #include <sanguis/server/dim.hpp>
 #include <sanguis/server/direction.hpp>
-#include <sanguis/server/enter_sight_function.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
-#include <sanguis/server/leave_sight_function.hpp>
 #include <sanguis/server/level_calculate.hpp>
 #include <sanguis/server/model_name.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/regeneration.hpp>
+#include <sanguis/server/remove_sight_callback.hpp>
+#include <sanguis/server/remove_weapon_pickup_callback.hpp>
 #include <sanguis/server/skill_points.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/string.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/container.hpp>
-#include <sanguis/server/auras/weapon_pickup_add_candidate_callback.hpp>
-#include <sanguis/server/auras/weapon_pickup_candidates.hpp>
-#include <sanguis/server/auras/weapon_pickup_remove_candidate_callback.hpp>
 #include <sanguis/server/auras/update_sight.hpp>
+#include <sanguis/server/auras/weapon_pickup_candidates.hpp>
 #include <sanguis/server/damage/armor.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
@@ -119,14 +119,14 @@ sanguis::server::entities::player::player(
 				sanguis::server::radius(
 					2000.f
 				),
-				sanguis::server::enter_sight_function(
+				sanguis::server::add_sight_callback(
 					std::bind(
 						&sanguis::server::entities::player::add_sight_range,
 						this,
 						std::placeholders::_1
 					)
 				),
-				sanguis::server::leave_sight_function(
+				sanguis::server::remove_sight_callback(
 					std::bind(
 						&sanguis::server::entities::player::remove_sight_range,
 						this,
@@ -140,14 +140,14 @@ sanguis::server::entities::player::player(
 			>(
 				// with_velocity needs to be initialized first!
 				this->radius(),
-				sanguis::server::auras::weapon_pickup_add_candidate_callback(
+				sanguis::server::add_weapon_pickup_callback(
 					std::bind(
 						&sanguis::server::entities::player::weapon_pickup_add_candidate,
 						this,
 						std::placeholders::_1
 					)
 				),
-				sanguis::server::auras::weapon_pickup_remove_candidate_callback(
+				sanguis::server::remove_weapon_pickup_callback(
 					std::bind(
 						&sanguis::server::entities::player::weapon_pickup_remove_candidate,
 						this,

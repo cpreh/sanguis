@@ -1,11 +1,13 @@
-#ifndef SANGUIS_SERVER_AURAS_AGGRO_HPP_INCLUDED
-#define SANGUIS_SERVER_AURAS_AGGRO_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_AURAS_TARGET_HPP_INCLUDED
+#define SANGUIS_SERVER_AURAS_TARGET_HPP_INCLUDED
 
 #include <sanguis/optional_aura_type_fwd.hpp>
+#include <sanguis/server/add_target_callback.hpp>
 #include <sanguis/server/radius.hpp>
+#include <sanguis/server/remove_target_callback.hpp>
 #include <sanguis/server/team_fwd.hpp>
-#include <sanguis/server/update_target_function.hpp>
 #include <sanguis/server/auras/aura.hpp>
+#include <sanguis/server/auras/target_kind_fwd.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -17,22 +19,23 @@ namespace server
 namespace auras
 {
 
-class aggro
+class target
 :
 	public sanguis::server::auras::aura
 {
 	FCPPT_NONCOPYABLE(
-		aggro
+		target
 	);
 public:
-	aggro(
+	target(
 		sanguis::server::radius,
 		sanguis::server::team,
-		sanguis::server::update_target_function const &add_target,
-		sanguis::server::update_target_function const &remove_target
+		sanguis::server::auras::target_kind,
+		sanguis::server::add_target_callback const &,
+		sanguis::server::remove_target_callback const &
 	);
 
-	~aggro();
+	~target();
 private:
 	sanguis::optional_aura_type const
 	type() const
@@ -48,9 +51,9 @@ private:
 		sanguis::server::entities::with_body &
 	);
 
-	sanguis::server::update_target_function const
-		add_target_,
-		remove_target_;
+	sanguis::server::add_target_callback const add_target_;
+
+	sanguis::server::remove_target_callback const remove_target_;
 };
 
 }

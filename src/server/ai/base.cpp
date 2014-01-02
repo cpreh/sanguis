@@ -58,3 +58,10 @@ sanguis::server::ai::base::aggressive() const
 	return
 		true;
 }
+
+bool
+sanguis::server::ai::base::target_friends() const
+{
+	return
+		false;
+}

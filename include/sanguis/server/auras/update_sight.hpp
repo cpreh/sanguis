@@ -3,9 +3,9 @@
 
 #include <sanguis/optional_aura_type_fwd.hpp>
 #include <sanguis/collision/world/group_field_fwd.hpp>
-#include <sanguis/server/enter_sight_function.hpp>
-#include <sanguis/server/leave_sight_function.hpp>
+#include <sanguis/server/add_sight_callback.hpp>
 #include <sanguis/server/radius.hpp>
+#include <sanguis/server/remove_sight_callback.hpp>
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -28,8 +28,8 @@ class update_sight
 public:
 	update_sight(
 		sanguis::server::radius,
-		sanguis::server::enter_sight_function const &,
-		sanguis::server::leave_sight_function const &
+		sanguis::server::add_sight_callback const &,
+		sanguis::server::remove_sight_callback const &
 	);
 
 	~update_sight();
@@ -51,9 +51,9 @@ private:
 		sanguis::server::entities::with_body &
 	);
 
-	sanguis::server::enter_sight_function const enter_;
+	sanguis::server::add_sight_callback const add_;
 
-	sanguis::server::leave_sight_function const leave_;
+	sanguis::server::remove_sight_callback const remove_;
 };
 
 }

@@ -1,13 +1,13 @@
 #include <sanguis/optional_aura_type.hpp>
 #include <sanguis/collision/world/group.hpp>
 #include <sanguis/collision/world/group_field.hpp>
+#include <sanguis/server/add_weapon_pickup_callback.hpp>
 #include <sanguis/server/radius.hpp>
+#include <sanguis/server/remove_weapon_pickup_callback.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/influence.hpp>
-#include <sanguis/server/auras/weapon_pickup_add_candidate_callback.hpp>
 #include <sanguis/server/auras/weapon_pickup_candidates.hpp>
-#include <sanguis/server/auras/weapon_pickup_remove_candidate_callback.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/pickups/weapon.hpp>
 #include <fcppt/cast/static_downcast.hpp>
@@ -15,8 +15,8 @@
 
 sanguis::server::auras::weapon_pickup_candidates::weapon_pickup_candidates(
 	sanguis::server::radius const _radius,
-	sanguis::server::auras::weapon_pickup_add_candidate_callback const &_add,
-	sanguis::server::auras::weapon_pickup_remove_candidate_callback const &_remove
+	sanguis::server::add_weapon_pickup_callback const &_add,
+	sanguis::server::remove_weapon_pickup_callback const &_remove
 )
 :
 	sanguis::server::auras::aura(

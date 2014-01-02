@@ -854,6 +854,9 @@ set(
 	include/sanguis/secondary_weapon_type.hpp
 	include/sanguis/secondary_weapon_type_fwd.hpp
 	include/sanguis/sequence_iteration.hpp
+	include/sanguis/server/add_sight_callback.hpp
+	include/sanguis/server/add_target_callback.hpp
+	include/sanguis/server/add_weapon_pickup_callback.hpp
 	include/sanguis/server/ai/angle_to_target.hpp
 	include/sanguis/server/ai/base.hpp
 	include/sanguis/server/ai/base_fwd.hpp
@@ -885,6 +888,7 @@ set(
 	include/sanguis/server/ai/sight_range_fwd.hpp
 	include/sanguis/server/ai/simple.hpp
 	include/sanguis/server/ai/stop.hpp
+	include/sanguis/server/ai/swarm.hpp
 	include/sanguis/server/ai/target.hpp
 	include/sanguis/server/ai/target_fwd.hpp
 	include/sanguis/server/ai/unique_ptr.hpp
@@ -895,7 +899,6 @@ set(
 	include/sanguis/server/ai/visible_fwd.hpp
 	include/sanguis/server/angle.hpp
 	include/sanguis/server/angle_fwd.hpp
-	include/sanguis/server/auras/aggro.hpp
 	include/sanguis/server/auras/aoe_damage.hpp
 	include/sanguis/server/auras/aura.hpp
 	include/sanguis/server/auras/aura_fwd.hpp
@@ -906,12 +909,13 @@ set(
 	include/sanguis/server/auras/influence.hpp
 	include/sanguis/server/auras/influence_fwd.hpp
 	include/sanguis/server/auras/slow_create.hpp
+	include/sanguis/server/auras/target.hpp
+	include/sanguis/server/auras/target_kind.hpp
+	include/sanguis/server/auras/target_kind_fwd.hpp
+	include/sanguis/server/auras/target_kind_to_influence.hpp
 	include/sanguis/server/auras/unique_ptr.hpp
 	include/sanguis/server/auras/update_sight.hpp
-	include/sanguis/server/auras/weapon_pickup_add_candidate_callback.hpp
-	include/sanguis/server/auras/weapon_pickup_candidate_callback.hpp
 	include/sanguis/server/auras/weapon_pickup_candidates.hpp
-	include/sanguis/server/auras/weapon_pickup_remove_candidate_callback.hpp
 	include/sanguis/server/buffs/buff.hpp
 	include/sanguis/server/buffs/buff_fwd.hpp
 	include/sanguis/server/buffs/burn.hpp
@@ -982,7 +986,6 @@ set(
 	include/sanguis/server/dim.hpp
 	include/sanguis/server/dim_fwd.hpp
 	include/sanguis/server/direction.hpp
-	include/sanguis/server/enter_sight_function.hpp
 	include/sanguis/server/entities/auto_weak_hook.hpp
 	include/sanguis/server/entities/auto_weak_link.hpp
 	include/sanguis/server/entities/auto_weak_link_fwd.hpp
@@ -1178,7 +1181,6 @@ set(
 	include/sanguis/server/global/world_map_fwd.hpp
 	include/sanguis/server/health.hpp
 	include/sanguis/server/health_fwd.hpp
-	include/sanguis/server/leave_sight_function.hpp
 	include/sanguis/server/level.hpp
 	include/sanguis/server/level_calculate.hpp
 	include/sanguis/server/log.hpp
@@ -1257,6 +1259,9 @@ set(
 	include/sanguis/server/random/split_array.hpp
 	include/sanguis/server/regeneration.hpp
 	include/sanguis/server/regeneration_fwd.hpp
+	include/sanguis/server/remove_sight_callback.hpp
+	include/sanguis/server/remove_target_callback.hpp
+	include/sanguis/server/remove_weapon_pickup_callback.hpp
 	include/sanguis/server/send_available_perks.hpp
 	include/sanguis/server/send_callback.hpp
 	include/sanguis/server/skill_points.hpp
@@ -1281,8 +1286,9 @@ set(
 	include/sanguis/server/timer_impl.hpp
 	include/sanguis/server/timer_impl_fwd.hpp
 	include/sanguis/server/unicast_callback.hpp
-	include/sanguis/server/update_sight_function.hpp
-	include/sanguis/server/update_target_function.hpp
+	include/sanguis/server/update_sight_callback.hpp
+	include/sanguis/server/update_target_callback.hpp
+	include/sanguis/server/update_weapon_pickup_callback.hpp
 	include/sanguis/server/vector.hpp
 	include/sanguis/server/vector_fwd.hpp
 	include/sanguis/server/weapons/accuracy.hpp
@@ -1702,11 +1708,12 @@ set(
 	src/server/ai/simple.cpp
 	src/server/ai/stop.cpp
 	src/server/ai/update_interval.cpp
-	src/server/auras/aggro.cpp
 	src/server/auras/aoe_damage.cpp
 	src/server/auras/aura.cpp
 	src/server/auras/buff.cpp
 	src/server/auras/collision_groups.cpp
+	src/server/auras/target.cpp
+	src/server/auras/target_kind_to_influence.cpp
 	src/server/auras/update_sight.cpp
 	src/server/auras/weapon_pickup_candidates.cpp
 	src/server/buffs/buff.cpp

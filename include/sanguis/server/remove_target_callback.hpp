@@ -1,0 +1,21 @@
+#ifndef SANGUIS_SERVER_REMOVE_TARGET_CALLBACK_HPP_INCLUDED
+#define SANGUIS_SERVER_REMOVE_TARGET_CALLBACK_HPP_INCLUDED
+
+#include <sanguis/server/update_target_callback.hpp>
+#include <fcppt/strong_typedef.hpp>
+
+
+namespace sanguis
+{
+namespace server
+{
+
+FCPPT_MAKE_STRONG_TYPEDEF(
+	sanguis::server::update_target_callback,
+	remove_target_callback
+);
+
+}
+}
+
+#endif

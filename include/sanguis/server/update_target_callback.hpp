@@ -1,5 +1,5 @@
-#ifndef SANGUIS_SERVER_UPDATE_TARGET_FUNCTION_HPP_INCLUDED
-#define SANGUIS_SERVER_UPDATE_TARGET_FUNCTION_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_UPDATE_TARGET_CALLBACK_HPP_INCLUDED
+#define SANGUIS_SERVER_UPDATE_TARGET_CALLBACK_HPP_INCLUDED
 
 #include <sanguis/server/entities/with_body_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -16,7 +16,7 @@ typedef std::function<
 	void (
 		sanguis::server::entities::with_body &
 	)
-> update_target_function;
+> update_target_callback;
 
 }
 }

@@ -49,6 +49,16 @@ private:
 	);
 
 	void
+	friend_enters(
+		sanguis::server::entities::with_body &
+	);
+
+	void
+	friend_leaves(
+		sanguis::server::entities::with_body &
+	);
+
+	void
 	update_target(
 		sanguis::server::ai::update_result
 	);

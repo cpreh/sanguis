@@ -3,10 +3,10 @@
 
 #include <sanguis/optional_aura_type_fwd.hpp>
 #include <sanguis/collision/world/group_field_fwd.hpp>
+#include <sanguis/server/add_weapon_pickup_callback.hpp>
 #include <sanguis/server/radius.hpp>
+#include <sanguis/server/remove_weapon_pickup_callback.hpp>
 #include <sanguis/server/auras/aura.hpp>
-#include <sanguis/server/auras/weapon_pickup_add_candidate_callback.hpp>
-#include <sanguis/server/auras/weapon_pickup_remove_candidate_callback.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -28,8 +28,8 @@ class weapon_pickup_candidates
 public:
 	weapon_pickup_candidates(
 		sanguis::server::radius,
-		sanguis::server::auras::weapon_pickup_add_candidate_callback const &,
-		sanguis::server::auras::weapon_pickup_remove_candidate_callback const &
+		sanguis::server::add_weapon_pickup_callback const &,
+		sanguis::server::remove_weapon_pickup_callback const &
 	);
 
 	~weapon_pickup_candidates();
@@ -51,9 +51,9 @@ private:
 		sanguis::server::entities::with_body &
 	);
 
-	sanguis::server::auras::weapon_pickup_add_candidate_callback const add_;
+	sanguis::server::add_weapon_pickup_callback const add_;
 
-	sanguis::server::auras::weapon_pickup_remove_candidate_callback const remove_;
+	sanguis::server::remove_weapon_pickup_callback const remove_;
 };
 
 }

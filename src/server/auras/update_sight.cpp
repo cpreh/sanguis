@@ -1,10 +1,10 @@
 #include <sanguis/optional_aura_type.hpp>
 #include <sanguis/collision/world/group.hpp>
 #include <sanguis/collision/world/group_field.hpp>
-#include <sanguis/server/enter_sight_function.hpp>
-#include <sanguis/server/leave_sight_function.hpp>
-#include <sanguis/server/team.hpp>
+#include <sanguis/server/add_sight_callback.hpp>
 #include <sanguis/server/radius.hpp>
+#include <sanguis/server/remove_sight_callback.hpp>
+#include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/influence.hpp>
 #include <sanguis/server/auras/update_sight.hpp>
@@ -15,8 +15,8 @@
 
 sanguis::server::auras::update_sight::update_sight(
 	sanguis::server::radius const _radius,
-	sanguis::server::enter_sight_function const &_enter,
-	sanguis::server::leave_sight_function const &_leave
+	sanguis::server::add_sight_callback const &_add,
+	sanguis::server::remove_sight_callback const &_remove
 )
 :
 	sanguis::server::auras::aura(
@@ -24,11 +24,11 @@ sanguis::server::auras::update_sight::update_sight(
 		sanguis::server::team::neutral,
 		sanguis::server::auras::influence::debuff
 	),
-	enter_(
-		_enter
+	add_(
+		_add
 	),
-	leave_(
-		_leave
+	remove_(
+		_remove
 	)
 {
 }
@@ -64,7 +64,7 @@ sanguis::server::auras::update_sight::enter(
 		&_entity
 	)
 		(
-			enter_.get()
+			add_.get()
 		)
 		(
 			with_id->id()
@@ -81,9 +81,8 @@ sanguis::server::auras::update_sight::leave(
 		with_id,
 		&_entity
 	)
-
 		(
-			leave_.get()
+			remove_.get()
 		)
 		(
 			with_id->id()
