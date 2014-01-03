@@ -129,6 +129,8 @@ sanguis::server::entities::with_body::on_transfer(
 	sanguis::server::entities::transfer_parameters const &_parameters
 )
 {
+	this->reset_body();
+
 	net_angle_.reset();
 
 	this->angle(
@@ -180,11 +182,7 @@ sanguis::server::entities::with_body::destroy()
 	// Make sure all links are gone before the body is destroyed
 	this->reset_links();
 
-	// Ghosts might invoke callbacks to their own body, so destroy them
-	// first
-	sanguis::server::entities::with_ghosts::destroy();
-
-	collision_body_.destroy();
+	this->reset_body();
 }
 
 void
@@ -293,4 +291,14 @@ sanguis::server::entities::with_body::on_speed_change(
 	sanguis::server::speed
 )
 {
+}
+
+void
+sanguis::server::entities::with_body::reset_body()
+{
+	// Ghosts might invoke callbacks to their own body, so destroy them
+	// first
+	sanguis::server::entities::with_ghosts::destroy();
+
+	collision_body_.destroy();
 }

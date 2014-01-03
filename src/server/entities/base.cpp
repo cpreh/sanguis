@@ -72,6 +72,11 @@ sanguis::server::entities::base::destroy()
 {
 }
 
+void
+sanguis::server::entities::base::reset_body()
+{
+}
+
 sanguis::server::environment::optional_object_ref const
 sanguis::server::entities::base::environment() const
 {

@@ -37,7 +37,7 @@ sanguis::server::global::generate_worlds(
 		current_id
 		<
 		sanguis::world_id::value_type(
-			5u
+			8u
 		);
 		++current_id
 	)

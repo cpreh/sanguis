@@ -158,6 +158,10 @@ private:
 		sanguis::server::speed
 	);
 
+	void
+	reset_body()
+	override;
+
 	sanguis::server::dim const dim_;
 
 	sanguis::server::angle angle_;

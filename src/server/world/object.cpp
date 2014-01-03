@@ -718,7 +718,8 @@ sanguis::server::world::object::request_transfer(
 
 		)
 		{
-			entity.destroy();
+			// TODO: Can we do this in a different way?
+			entity.reset_body();
 
 			sanguis::server::entities::unique_ptr entity_ptr(
 				entities_.release(

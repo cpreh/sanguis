@@ -55,7 +55,9 @@ sanguis::server::entities::with_ghosts::on_transfer(
 )
 {
 	for(
-		auto &ghost : ghosts_
+		auto &ghost
+		:
+		ghosts_
 	)
 		this->insert_ghost(
 			ghost,
@@ -69,7 +71,9 @@ void
 sanguis::server::entities::with_ghosts::destroy()
 {
 	for(
-		auto &ghost : ghosts_
+		auto &ghost
+		:
+		ghosts_
 	)
 		ghost.destroy();
 }
@@ -80,7 +84,9 @@ sanguis::server::entities::with_ghosts::update_center(
 )
 {
 	for(
-		auto &ghost : ghosts_
+		auto &ghost
+		:
+		ghosts_
 	)
 		ghost.center(
 			_center

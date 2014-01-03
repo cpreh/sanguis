@@ -35,24 +35,16 @@ sanguis::server::ai::friend_::lose_target(
 	sanguis::server::entities::with_body &_with_body
 )
 {
-	sanguis::server::ai::update_result const result(
-		sanguis::server::ai::simple::lose_target(
-			_with_body
-		)
-	);
-
 	return
-		result
-		==
-		sanguis::server::ai::update_result::change_target
-		&&
 		spawn_owner_.get()
 		?
 			this->new_target(
 				spawn_owner_.get()
 			)
 		:
-			result
+			sanguis::server::ai::simple::lose_target(
+				_with_body
+			)
 		;
 }
 
@@ -61,17 +53,7 @@ sanguis::server::ai::friend_::update_target(
 	sanguis::server::entities::with_body &_target
 )
 {
-	sanguis::server::ai::update_result const result(
-		sanguis::server::ai::simple::update_target(
-			_target
-		)
-	);
-
 	return
-		result
-		==
-		sanguis::server::ai::update_result::keep_target
-		&&
 		this->entity_target()
 		==
 		spawn_owner_.get()
@@ -80,7 +62,9 @@ sanguis::server::ai::friend_::update_target(
 				_target.link()
 			)
 		:
-			result
+			sanguis::server::ai::simple::update_target(
+				_target
+			)
 		;
 }
 
@@ -91,4 +75,11 @@ sanguis::server::ai::friend_::aggressive() const
 		this->entity_target()
 		!=
 		spawn_owner_.get();
+}
+
+bool
+sanguis::server::ai::friend_::does_patrolling() const
+{
+	return
+		false;
 }

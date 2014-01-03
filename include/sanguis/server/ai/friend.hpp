@@ -49,6 +49,10 @@ private:
 	aggressive() const
 	override;
 
+	bool
+	does_patrolling() const
+	override;
+
 	sanguis::server::entities::spawn_owner const spawn_owner_;
 };
 

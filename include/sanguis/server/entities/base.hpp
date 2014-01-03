@@ -46,13 +46,33 @@ public:
 	void
 	update();
 
+	/**
+	\brief Called when the entity is removed from the game
+	*/
 	virtual
 	void
 	remove();
 
+	/**
+	\brief Called before the entity is deleted
+
+	Some cleanup operations still need the entity in tact (and able to
+	process virtual functions).
+	*/
 	virtual
 	void
 	destroy();
+
+	/**
+	\brief Called before an entity is transferred to another world
+
+	This is different from remove or destroy because the entity is still
+	alive but might need to invoke some callbacks by resetting its
+	collision body.
+	*/
+	virtual
+	void
+	reset_body();
 
 	// environment query function
 	sanguis::server::environment::optional_object_ref const
