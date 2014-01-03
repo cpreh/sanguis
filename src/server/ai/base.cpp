@@ -52,6 +52,24 @@ sanguis::server::ai::base::on_health_change(
 		sanguis::server::ai::update_result::keep_target;
 }
 
+sanguis::server::ai::update_result
+sanguis::server::ai::base::friend_in_range(
+	sanguis::server::entities::with_body &
+)
+{
+	return
+		sanguis::server::ai::update_result::keep_target;
+}
+
+sanguis::server::ai::update_result
+sanguis::server::ai::base::friend_out_of_range(
+	sanguis::server::entities::with_body &
+)
+{
+	return
+		sanguis::server::ai::update_result::keep_target;
+}
+
 bool
 sanguis::server::ai::base::aggressive() const
 {

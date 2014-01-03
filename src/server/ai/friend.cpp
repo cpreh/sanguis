@@ -21,7 +21,7 @@ sanguis::server::ai::friend_::friend_(
 		_spawn_owner
 	)
 {
-	this->entity_target(
+	this->new_target(
 		spawn_owner_.get()
 	);
 }
@@ -31,12 +31,12 @@ sanguis::server::ai::friend_::~friend_()
 }
 
 sanguis::server::ai::update_result
-sanguis::server::ai::friend_::out_of_range(
+sanguis::server::ai::friend_::lose_target(
 	sanguis::server::entities::with_body &_with_body
 )
 {
 	sanguis::server::ai::update_result const result(
-		sanguis::server::ai::simple::out_of_range(
+		sanguis::server::ai::simple::lose_target(
 			_with_body
 		)
 	);
@@ -44,11 +44,11 @@ sanguis::server::ai::friend_::out_of_range(
 	return
 		result
 		==
-		sanguis::server::ai::update_result::lost_target
+		sanguis::server::ai::update_result::change_target
 		&&
 		spawn_owner_.get()
 		?
-			this->entity_target(
+			this->new_target(
 				spawn_owner_.get()
 			)
 		:
@@ -76,7 +76,7 @@ sanguis::server::ai::friend_::update_target(
 		==
 		spawn_owner_.get()
 		?
-			this->entity_target(
+			this->new_target(
 				_target.link()
 			)
 		:

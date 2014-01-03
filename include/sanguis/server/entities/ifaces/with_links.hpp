@@ -29,6 +29,10 @@ public:
 	virtual
 	sanguis::server::entities::auto_weak_link
 	link() = 0;
+protected:
+	virtual
+	void
+	reset_links() = 0;
 };
 
 }

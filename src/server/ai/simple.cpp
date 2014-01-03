@@ -39,15 +39,23 @@ sanguis::server::ai::simple::~simple()
 }
 
 sanguis::server::ai::update_result
-sanguis::server::ai::simple::entity_target(
+sanguis::server::ai::simple::new_target(
 	sanguis::server::entities::auto_weak_link const &_target
 )
 {
+	if(
+		target_
+		==
+		_target
+	)
+		return
+			sanguis::server::ai::update_result::keep_target;
+
 	target_	 =
 		_target;
 
 	return
-		sanguis::server::ai::update_result::new_target;
+		sanguis::server::ai::update_result::change_target;
 }
 
 sanguis::server::ai::optional_target const
@@ -155,7 +163,7 @@ sanguis::server::ai::simple::update_target(
 	sanguis::server::entities::with_body &_entity
 )
 {
-	if(
+	return
 		!target_
 		||
 		(
@@ -171,16 +179,13 @@ sanguis::server::ai::simple::update_target(
 				*target_
 			)
 		)
-	)
-	{
-		target_ = _entity.link();
-
-		return
-			sanguis::server::ai::update_result::new_target;
-	}
-
-	return
-		sanguis::server::ai::update_result::keep_target;
+		?
+			this->new_target(
+				_entity.link()
+			)
+		:
+			sanguis::server::ai::update_result::keep_target
+		;
 }
 
 sanguis::server::ai::update_result
@@ -188,26 +193,28 @@ sanguis::server::ai::simple::lose_target(
 	sanguis::server::entities::with_body &_entity
 )
 {
-	sanguis::server::ai::update_result const result(
+	if(
 		target_
 		&&
 		sanguis::server::entities::same_object(
 			*target_,
 			_entity
 		)
-		?
-			sanguis::server::ai::update_result::lost_target
-		:
-			sanguis::server::ai::update_result::keep_target
-	);
-
-	if(
-		result
-		==
-		sanguis::server::ai::update_result::lost_target
 	)
+	{
 		target_.unlink();
 
+		return
+			sanguis::server::ai::update_result::change_target;
+	}
+
 	return
-		result;
+		sanguis::server::ai::update_result::keep_target;
+}
+
+sanguis::server::entities::with_ai const &
+sanguis::server::ai::simple::me() const
+{
+	return
+		me_;
 }

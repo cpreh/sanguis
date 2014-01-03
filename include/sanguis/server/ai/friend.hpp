@@ -34,7 +34,7 @@ public:
 	~friend_();
 private:
 	sanguis::server::ai::update_result
-	out_of_range(
+	lose_target(
 		sanguis::server::entities::with_body &
 	)
 	override;

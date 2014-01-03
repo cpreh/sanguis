@@ -24,6 +24,7 @@
 #include <sanguis/server/ai/pathing/trail.hpp>
 #include <sanguis/server/auras/target.hpp>
 #include <sanguis/server/auras/target_kind.hpp>
+#include <sanguis/server/entities/same_object.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_health.hpp>
@@ -363,6 +364,20 @@ sanguis::server::ai::manager::friend_enters(
 	sanguis::server::entities::with_body &_with_body
 )
 {
+	this->dispatch_friend(
+		_with_body,
+		[
+			this
+		](
+			sanguis::server::entities::with_body &_with_body_arg
+		)
+		{
+			return
+				ai_.friend_in_range(
+					_with_body_arg
+				);
+		}
+	);
 }
 
 void
@@ -370,6 +385,42 @@ sanguis::server::ai::manager::friend_leaves(
 	sanguis::server::entities::with_body &_with_body
 )
 {
+	this->dispatch_friend(
+		_with_body,
+		[
+			this
+		](
+			sanguis::server::entities::with_body &_with_body_arg
+		)
+		{
+			return
+				ai_.friend_out_of_range(
+					_with_body_arg
+				);
+		}
+	);
+}
+
+template<
+	typename Function
+>
+void
+sanguis::server::ai::manager::dispatch_friend(
+	sanguis::server::entities::with_body &_with_body,
+	Function const &_function
+)
+{
+	if(
+		!sanguis::server::entities::same_object(
+			_with_body,
+			me_
+		)
+	)
+		this->update_target(
+			_function(
+				_with_body
+			)
+		);
 }
 
 void
@@ -380,19 +431,7 @@ sanguis::server::ai::manager::update_target(
 	if(
 		_result
 		==
-		sanguis::server::ai::update_result::new_target
-		||
-		_result
-		==
-		sanguis::server::ai::update_result::lost_target
+		sanguis::server::ai::update_result::change_target
 	)
 		trail_.clear();
-
-	// TODO: Search for a new target here!
-	/*
-	if(
-		_result
-		==
-		sanguis::server::ai::update_result::lost_target
-	)*/
 }

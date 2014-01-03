@@ -177,10 +177,14 @@ sanguis::server::entities::with_body::on_world_collision(
 void
 sanguis::server::entities::with_body::destroy()
 {
-	// TODO: Is this still needed?
-	collision_body_.destroy();
+	// Make sure all links are gone before the body is destroyed
+	this->reset_links();
 
+	// Ghosts might invoke callbacks to their own body, so destroy them
+	// first
 	sanguis::server::entities::with_ghosts::destroy();
+
+	collision_body_.destroy();
 }
 
 void

@@ -5,6 +5,7 @@
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_auras_id.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
+#include <sanguis/server/entities/ifaces/with_links.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/weapons/ias.hpp>
 #include <sanguis/server/weapons/irs.hpp>
@@ -26,6 +27,7 @@ sanguis::server::entities::with_ai::with_ai(
 	sanguis::server::weapons::irs const _irs
 )
 :
+	sanguis::server::entities::ifaces::with_links(),
 	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::with_auras_id(
 		std::move(
@@ -42,10 +44,11 @@ sanguis::server::entities::with_ai::with_ai(
 	diff_clock_(
 		_diff_clock
 	),
-	create_ai_(
-		_create_ai
+	ai_(
+		_create_ai(
+			*this
+		)
 	),
-	ai_(),
 	manager_()
 {
 }
@@ -66,15 +69,16 @@ sanguis::server::entities::with_ai::update()
 	manager_->update();
 }
 
+sanguis::server::ai::base const &
+sanguis::server::entities::with_ai::ai() const
+{
+	return
+		*ai_;
+}
+
 void
 sanguis::server::entities::with_ai::on_create()
 {
-	ai_.take(
-		create_ai_(
-			*this
-		)
-	);
-
 	manager_.take(
 		fcppt::make_unique_ptr<
 			sanguis::server::ai::manager

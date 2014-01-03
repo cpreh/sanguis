@@ -3,6 +3,7 @@
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
+#include <sanguis/server/team.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
@@ -77,6 +78,13 @@ sanguis::server::entities::spawns::spawn::angle() const
 
 	return
 		*angle_;
+}
+
+sanguis::server::team
+sanguis::server::entities::spawns::spawn::team() const
+{
+	return
+		sanguis::server::team::monsters;
 }
 
 bool

@@ -66,6 +66,18 @@ public:
 	);
 
 	virtual
+	sanguis::server::ai::update_result
+	friend_in_range(
+		sanguis::server::entities::with_body &
+	);
+
+	virtual
+	sanguis::server::ai::update_result
+	friend_out_of_range(
+		sanguis::server::entities::with_body &
+	);
+
+	virtual
 	bool
 	aggressive() const;
 

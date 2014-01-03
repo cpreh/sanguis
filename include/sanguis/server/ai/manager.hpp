@@ -58,6 +58,15 @@ private:
 		sanguis::server::entities::with_body &
 	);
 
+	template<
+		typename Function
+	>
+	void
+	dispatch_friend(
+		sanguis::server::entities::with_body &,
+		Function const &
+	);
+
 	void
 	update_target(
 		sanguis::server::ai::update_result

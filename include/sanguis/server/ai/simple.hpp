@@ -37,7 +37,7 @@ public:
 	~simple();
 protected:
 	sanguis::server::ai::update_result
-	entity_target(
+	new_target(
 		sanguis::server::entities::auto_weak_link const &
 	);
 
@@ -77,12 +77,16 @@ protected:
 	update_target(
 		sanguis::server::entities::with_body &
 	);
-private:
+
+	virtual
 	sanguis::server::ai::update_result
 	lose_target(
 		sanguis::server::entities::with_body &
 	);
 
+	sanguis::server::entities::with_ai const &
+	me() const;
+private:
 	sanguis::server::entities::with_ai &me_;
 
 	sanguis::server::ai::sight_range const sight_range_;

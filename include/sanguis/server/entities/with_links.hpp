@@ -6,6 +6,7 @@
 #include <sanguis/server/entities/link_container.hpp>
 #include <sanguis/server/entities/with_links_fwd.hpp>
 #include <sanguis/server/entities/ifaces/with_links.hpp>
+#include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -19,7 +20,8 @@ namespace entities
 class with_links
 :
 	public virtual sanguis::server::entities::base,
-	public virtual sanguis::server::entities::ifaces::with_links
+	public virtual sanguis::server::entities::ifaces::with_links,
+	public virtual sanguis::server::entities::ifaces::with_team
 {
 	FCPPT_NONCOPYABLE(
 		with_links
@@ -34,6 +36,9 @@ public:
 	link()
 	override
 	final;
+protected:
+	void
+	reset_links();
 private:
 	friend class sanguis::server::entities::auto_weak_link;
 

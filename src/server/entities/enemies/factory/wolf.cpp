@@ -2,7 +2,7 @@
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/pickup_probability.hpp>
-#include <sanguis/server/ai/create_simple.hpp>
+#include <sanguis/server/ai/create_swarm.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/container.hpp>
@@ -42,7 +42,7 @@ sanguis::server::entities::enemies::factory::wolf(
 					_parameters.difficulty().get()
 				)
 			),
-			sanguis::server::ai::create_simple(
+			sanguis::server::ai::create_swarm(
 				sanguis::server::ai::sight_range(
 					1000.f
 				)

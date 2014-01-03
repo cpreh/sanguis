@@ -13,9 +13,8 @@ namespace ai
 
 enum class update_result
 {
-	new_target,
-	keep_target,
-	lost_target
+	change_target,
+	keep_target
 };
 
 }

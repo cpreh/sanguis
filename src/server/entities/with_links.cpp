@@ -8,6 +8,7 @@ sanguis::server::entities::with_links::with_links()
 :
 	sanguis::server::entities::base(),
 	sanguis::server::entities::ifaces::with_links(),
+	sanguis::server::entities::ifaces::with_team(),
 	links_()
 {
 }
@@ -23,6 +24,12 @@ sanguis::server::entities::with_links::link()
 		sanguis::server::entities::auto_weak_link(
 			*this
 		);
+}
+
+void
+sanguis::server::entities::with_links::reset_links()
+{
+	links_.clear();
 }
 
 void

@@ -863,6 +863,7 @@ set(
 	include/sanguis/server/ai/create_friend.hpp
 	include/sanguis/server/ai/create_function.hpp
 	include/sanguis/server/ai/create_simple.hpp
+	include/sanguis/server/ai/create_swarm.hpp
 	include/sanguis/server/ai/entity_set.hpp
 	include/sanguis/server/ai/friend.hpp
 	include/sanguis/server/ai/idle.hpp
@@ -1068,6 +1069,8 @@ set(
 	include/sanguis/server/entities/movement_speed.hpp
 	include/sanguis/server/entities/optional_base_ref.hpp
 	include/sanguis/server/entities/optional_base_ref_fwd.hpp
+	include/sanguis/server/entities/optional_with_ai_ref.hpp
+	include/sanguis/server/entities/optional_with_ai_ref_fwd.hpp
 	include/sanguis/server/entities/pickups/health.hpp
 	include/sanguis/server/entities/pickups/monster.hpp
 	include/sanguis/server/entities/pickups/pickup.hpp
@@ -1132,6 +1135,7 @@ set(
 	include/sanguis/server/entities/unique_ptr.hpp
 	include/sanguis/server/entities/with_ai.hpp
 	include/sanguis/server/entities/with_ai_fwd.hpp
+	include/sanguis/server/entities/with_ai_ref.hpp
 	include/sanguis/server/entities/with_auras.hpp
 	include/sanguis/server/entities/with_auras_id.hpp
 	include/sanguis/server/entities/with_body.hpp
@@ -1694,6 +1698,7 @@ set(
 	src/server/ai/base.cpp
 	src/server/ai/create_friend.cpp
 	src/server/ai/create_simple.cpp
+	src/server/ai/create_swarm.cpp
 	src/server/ai/friend.cpp
 	src/server/ai/idle.cpp
 	src/server/ai/manager.cpp
@@ -1707,6 +1712,7 @@ set(
 	src/server/ai/search_new_target.cpp
 	src/server/ai/simple.cpp
 	src/server/ai/stop.cpp
+	src/server/ai/swarm.cpp
 	src/server/ai/update_interval.cpp
 	src/server/auras/aoe_damage.cpp
 	src/server/auras/aura.cpp
