@@ -867,6 +867,7 @@ set(
 	include/sanguis/server/ai/entity_set.hpp
 	include/sanguis/server/ai/friend.hpp
 	include/sanguis/server/ai/idle.hpp
+	include/sanguis/server/ai/is_patrolling.hpp
 	include/sanguis/server/ai/manager.hpp
 	include/sanguis/server/ai/manager_fwd.hpp
 	include/sanguis/server/ai/move_to_target.hpp

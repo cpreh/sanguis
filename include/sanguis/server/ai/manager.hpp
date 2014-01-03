@@ -3,9 +3,11 @@
 
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/ai/base_fwd.hpp>
 #include <sanguis/server/ai/entity_set.hpp>
 #include <sanguis/server/ai/manager_fwd.hpp>
+#include <sanguis/server/ai/optional_target_fwd.hpp>
 #include <sanguis/server/ai/update_result_fwd.hpp>
 #include <sanguis/server/ai/pathing/trail.hpp>
 #include <sanguis/server/entities/with_ai_fwd.hpp>
@@ -29,6 +31,7 @@ class manager
 public:
 	manager(
 		sanguis::diff_clock const &,
+		sanguis::random_generator &,
 		sanguis::server::ai::base &,
 		sanguis::server::entities::with_ai &
 	);
@@ -71,6 +74,11 @@ private:
 	update_target(
 		sanguis::server::ai::update_result
 	);
+
+	sanguis::server::ai::optional_target const
+	try_random_target() const;
+
+	sanguis::random_generator &random_generator_;
 
 	sanguis::server::ai::base &ai_;
 

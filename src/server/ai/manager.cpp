@@ -1,18 +1,22 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/is_primary_weapon.hpp>
-#include <sanguis/creator/grid_fwd.hpp>
+#include <sanguis/random_generator.hpp>
+#include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/pos.hpp>
+#include <sanguis/creator/tile_is_solid.hpp>
 #include <sanguis/server/add_target_callback.hpp>
 #include <sanguis/server/remove_target_callback.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/ai/base.hpp>
 #include <sanguis/server/ai/idle.hpp>
+#include <sanguis/server/ai/is_patrolling.hpp>
 #include <sanguis/server/ai/manager.hpp>
 #include <sanguis/server/ai/optional_target.hpp>
 #include <sanguis/server/ai/rotate_and_move_to_target.hpp>
 #include <sanguis/server/ai/rotate_to_target.hpp>
 #include <sanguis/server/ai/stop.hpp>
+#include <sanguis/server/ai/target.hpp>
 #include <sanguis/server/ai/update_interval.hpp>
 #include <sanguis/server/ai/update_result.hpp>
 #include <sanguis/server/ai/visible.hpp>
@@ -38,6 +42,8 @@
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/assert/error.hpp>
+#include <fcppt/random/distribution/make_basic.hpp>
+#include <fcppt/random/distribution/parameters/uniform_int.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
@@ -45,10 +51,14 @@
 
 sanguis::server::ai::manager::manager(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	sanguis::server::ai::base &_ai,
 	sanguis::server::entities::with_ai &_me
 )
 :
+	random_generator_(
+		_random_generator
+	),
 	ai_(
 		_ai
 	),
@@ -186,6 +196,10 @@ sanguis::server::ai::manager::update()
 
 	sanguis::server::ai::optional_target const target(
 		ai_.target()
+		?
+			ai_.target()
+		:
+			this->try_random_target()
 	);
 
 	if(
@@ -205,14 +219,6 @@ sanguis::server::ai::manager::update()
 		)
 	);
 
-	me_.target(
-		sanguis::server::weapons::optional_target(
-			sanguis::server::weapons::target(
-				target->get().get()
-			)
-		)
-	);
-
 	bool const is_visible(
 		sanguis::server::ai::pathing::is_visible(
 			grid,
@@ -225,10 +231,26 @@ sanguis::server::ai::manager::update()
 		true
 	);
 
+	me_.target(
+		is_visible
+		?
+			sanguis::server::weapons::optional_target(
+				sanguis::server::weapons::target(
+					target->get().get()
+				)
+			)
+		:
+			sanguis::server::weapons::optional_target()
+	);
+
 	bool const in_range(
 		me_.in_range(
 			weapon_to_use
 		)
+	);
+
+	sanguis::server::ai::is_patrolling const is_patrolling(
+		!ai_.target()
 	);
 
 	me_.use_weapon(
@@ -236,7 +258,10 @@ sanguis::server::ai::manager::update()
 		&&
 		in_range
 		&&
-		ai_.aggressive(),
+		ai_.aggressive()
+		&&
+		!is_patrolling.get()
+		,
 		weapon_to_use
 	);
 
@@ -256,22 +281,29 @@ sanguis::server::ai::manager::update()
 				me_,
 				target->get()
 			);
+
+			trail_.clear();
 		}
 		else
 			sanguis::server::ai::rotate_and_move_to_target(
 				me_,
-				target->get()
+				target->get(),
+				is_patrolling
 			);
 
 		return;
 	}
 
 	if(
-		trail_.empty()
-		||
-		!sanguis::server::ai::pathing::positions_are_close(
-			trail_.front(),
-			target_grid_pos
+		!in_range
+		&&
+		(
+			trail_.empty()
+			||
+			!sanguis::server::ai::pathing::positions_are_close(
+				trail_.front(),
+				target_grid_pos
+			)
 		)
 	)
 		trail_ =
@@ -304,7 +336,8 @@ sanguis::server::ai::manager::update()
 		me_,
 		sanguis::server::world::grid_pos_to_center(
 			next_position
-		)
+		),
+		is_patrolling
 	);
 
 	if(
@@ -434,4 +467,90 @@ sanguis::server::ai::manager::update_target(
 		sanguis::server::ai::update_result::change_target
 	)
 		trail_.clear();
+}
+
+sanguis::server::ai::optional_target const
+sanguis::server::ai::manager::try_random_target() const
+{
+	if(
+		!ai_.does_patrolling()
+	)
+		return
+			sanguis::server::ai::optional_target();
+
+	if(
+		!trail_.empty()
+	)
+		return
+			sanguis::server::ai::optional_target(
+				sanguis::server::ai::target(
+					sanguis::server::world::grid_pos_to_center(
+						trail_.front()
+					)
+				)
+			);
+
+	sanguis::creator::grid const &grid(
+		me_.environment()->grid()
+	);
+
+	typedef
+	fcppt::random::distribution::parameters::uniform_int<
+		sanguis::creator::grid::size_type
+	>
+	random_parameters;
+
+	// TODO: Generalize this somewhere!
+	auto random_x(
+		fcppt::random::distribution::make_basic(
+			random_parameters(
+				random_parameters::min(
+					0u
+				),
+				random_parameters::max(
+					grid.size().w() - 1u
+				)
+			)
+		)
+	);
+
+	auto random_y(
+		fcppt::random::distribution::make_basic(
+			random_parameters(
+				random_parameters::min(
+					0u
+				),
+				random_parameters::max(
+					grid.size().h() - 1u
+				)
+			)
+		)
+	);
+
+	sanguis::creator::pos const random_pos(
+		random_x(
+			random_generator_
+		),
+		random_y(
+			random_generator_
+		)
+	);
+
+	return
+		sanguis::creator::tile_is_solid(
+			grid[
+				random_pos
+			]
+		)
+		?
+			sanguis::server::ai::optional_target()
+		:
+			sanguis::server::ai::optional_target(
+				sanguis::server::ai::target(
+					sanguis::server::world::grid_pos_to_center(
+						random_pos
+					)
+				)
+			)
+		;
 }

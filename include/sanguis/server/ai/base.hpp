@@ -84,6 +84,10 @@ public:
 	virtual
 	bool
 	target_friends() const;
+
+	virtual
+	bool
+	does_patrolling() const;
 };
 
 }

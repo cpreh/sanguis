@@ -1,4 +1,5 @@
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
@@ -31,6 +32,7 @@
 
 sanguis::server::entities::enemies::parameters::parameters(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator &_random_generator,
 	sanguis::creator::enemy_type const _enemy_type,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::damage::armor const &_armor,
@@ -47,6 +49,9 @@ sanguis::server::entities::enemies::parameters::parameters(
 :
 	diff_clock_(
 		_diff_clock
+	),
+	random_generator_(
+		_random_generator
 	),
 	enemy_type_(
 		_enemy_type
@@ -117,6 +122,13 @@ sanguis::server::entities::enemies::parameters::diff_clock() const
 {
 	return
 		diff_clock_;
+}
+
+sanguis::random_generator &
+sanguis::server::entities::enemies::parameters::random_generator() const
+{
+	return
+		random_generator_;
 }
 
 sanguis::creator::enemy_type

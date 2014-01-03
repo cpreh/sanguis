@@ -3,6 +3,7 @@
 
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/friend_type.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/collision/world/group_field_fwd.hpp>
 #include <sanguis/messages/unique_ptr.hpp>
 #include <sanguis/server/health.hpp>
@@ -47,6 +48,7 @@ class friend_
 public:
 	friend_(
 		sanguis::diff_clock const &,
+		sanguis::random_generator &,
 		sanguis::friend_type,
 		sanguis::server::environment::load_context &,
 		sanguis::server::damage::armor const &,

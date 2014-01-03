@@ -2,6 +2,7 @@
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/optional_angle.hpp>
 #include <sanguis/server/space_unit.hpp>
+#include <sanguis/server/ai/is_patrolling.hpp>
 #include <sanguis/server/ai/move_to_target.hpp>
 #include <sanguis/server/ai/update_interval.hpp>
 #include <sanguis/server/collision/distance_entity_pos.hpp>
@@ -19,7 +20,8 @@ void
 sanguis::server::ai::move_to_target(
 	sanguis::server::entities::with_ai &_me,
 	sanguis::server::optional_angle const _angle,
-	sanguis::server::center const _target
+	sanguis::server::center const _target,
+	sanguis::server::ai::is_patrolling const _is_patrolling
 )
 {
 	// TODO: Even sentries have a velocity, we could get rid of this dynamic cast
@@ -63,7 +65,17 @@ sanguis::server::ai::move_to_target(
 					/
 					sanguis::server::ai::update_interval().count()
 					,
-					speed.max()
+					_is_patrolling.get()
+					?
+						speed.max()
+						/
+						fcppt::literal<
+							sanguis::server::space_unit
+						>(
+							3
+						)
+					:
+						speed.max()
 				)
 			);
 		}

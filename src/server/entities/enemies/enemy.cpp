@@ -51,6 +51,7 @@ sanguis::server::entities::enemies::enemy::enemy(
 :
 	sanguis::server::entities::with_ai(
 		_parameters.diff_clock(),
+		_parameters.random_generator(),
 		_parameters.ai_create_function(),
 		std::move(
 			_parameters.weapon()

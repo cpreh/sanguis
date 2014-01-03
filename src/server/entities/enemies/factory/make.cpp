@@ -38,6 +38,7 @@ sanguis::server::entities::enemies::factory::make(
 {
 	sanguis::server::entities::enemies::parameters parameters(
 		_parameters.diff_clock(),
+		_parameters.random_generator(),
 		_parameters.enemy_type(),
 		_parameters.load_context(),
 		_armor,

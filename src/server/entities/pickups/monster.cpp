@@ -76,6 +76,7 @@ sanguis::server::entities::pickups::monster::do_pickup(
 			sanguis::server::entities::friend_
 		>(
 			diff_clock_,
+			random_generator_,
 			friend_type_,
 			this->environment()->load_context(),
 			sanguis::server::damage::no_armor(),

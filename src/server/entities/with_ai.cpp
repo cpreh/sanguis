@@ -1,3 +1,4 @@
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/ai/base.hpp>
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/ai/manager.hpp>
@@ -20,6 +21,7 @@
 
 sanguis::server::entities::with_ai::with_ai(
 	sanguis::diff_clock const &_diff_clock,
+	sanguis::random_generator  &_random_generator,
 	sanguis::server::ai::create_function const &_create_ai,
 	sanguis::server::weapons::unique_ptr &&_start_weapon,
 	sanguis::server::auras::container &&_auras,
@@ -43,6 +45,9 @@ sanguis::server::entities::with_ai::with_ai(
 	),
 	diff_clock_(
 		_diff_clock
+	),
+	random_generator_(
+		_random_generator
 	),
 	ai_(
 		_create_ai(
@@ -84,6 +89,7 @@ sanguis::server::entities::with_ai::on_create()
 			sanguis::server::ai::manager
 		>(
 			diff_clock_,
+			random_generator_,
 			*ai_,
 			*this
 		)

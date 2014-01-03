@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_AI_HPP_INCLUDED
 
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/ai/manager_fwd.hpp>
 #include <sanguis/server/ai/scoped_ptr.hpp>
@@ -38,6 +39,7 @@ class with_ai
 protected:
 	with_ai(
 		sanguis::diff_clock const &,
+		sanguis::random_generator &,
 		sanguis::server::ai::create_function const &,
 		sanguis::server::weapons::unique_ptr &&,
 		sanguis::server::auras::container &&,
@@ -60,6 +62,8 @@ private:
 	override;
 
 	sanguis::diff_clock const &diff_clock_;
+
+	sanguis::random_generator &random_generator_;
 
 	sanguis::server::ai::scoped_ptr ai_;
 

@@ -83,3 +83,10 @@ sanguis::server::ai::base::target_friends() const
 	return
 		false;
 }
+
+bool
+sanguis::server::ai::base::does_patrolling() const
+{
+	return
+		true;
+}

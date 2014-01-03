@@ -3,6 +3,7 @@
 
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/optional_angle_fwd.hpp>
+#include <sanguis/server/ai/is_patrolling.hpp>
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 
 
@@ -17,7 +18,8 @@ void
 move_to_target(
 	sanguis::server::entities::with_ai &,
 	sanguis::server::optional_angle,
-	sanguis::server::center
+	sanguis::server::center,
+	sanguis::server::ai::is_patrolling
 );
 
 }
