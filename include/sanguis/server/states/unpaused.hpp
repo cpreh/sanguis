@@ -12,6 +12,7 @@
 #include <sanguis/messages/player_drop_or_pickup_weapon_fwd.hpp>
 #include <sanguis/messages/player_pause_fwd.hpp>
 #include <sanguis/messages/player_position_fwd.hpp>
+#include <sanguis/messages/player_reload_fwd.hpp>
 #include <sanguis/messages/player_start_shooting_fwd.hpp>
 #include <sanguis/messages/player_stop_shooting_fwd.hpp>
 #include <sanguis/messages/player_unpause_fwd.hpp>
@@ -93,6 +94,12 @@ public:
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::player_position const &
+	);
+
+	boost::statechart::result
+	operator()(
+		sanguis::server::player_id,
+		sanguis::messages::player_reload const &
 	);
 
 	boost::statechart::result

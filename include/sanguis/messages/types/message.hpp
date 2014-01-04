@@ -47,6 +47,7 @@ enum class message
 	player_drop_or_pickup_weapon,
 	player_pause,
 	player_position,
+	player_reload,
 	player_start_shooting,
 	player_stop_shooting,
 	player_unpause,

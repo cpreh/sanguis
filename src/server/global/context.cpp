@@ -333,6 +333,19 @@ sanguis::server::global::context::player_change_shooting(
 }
 
 void
+sanguis::server::global::context::player_reload(
+	sanguis::server::player_id const _player_id,
+	sanguis::is_primary_weapon const _is_primary
+)
+{
+	this->player(
+		_player_id
+	).reload(
+		_is_primary
+	);
+}
+
+void
 sanguis::server::global::context::player_drop_or_pickup_weapon(
 	sanguis::server::player_id const _player_id,
 	sanguis::is_primary_weapon const _is_primary

@@ -3,6 +3,7 @@
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/events/poll.hpp>
+#include <sanguis/server/weapons/events/reload.hpp>
 #include <sanguis/server/weapons/events/shoot.hpp>
 #include <sanguis/server/weapons/events/stop.hpp>
 #include <sanguis/server/weapons/states/backswing.hpp>
@@ -82,10 +83,12 @@ sanguis::server::weapons::states::backswing::react(
 				>();
 
 		if(
-			cancelled_
+			!cancelled_
 		)
 			this->post_event(
-				sanguis::server::weapons::events::stop()
+				sanguis::server::weapons::events::shoot(
+					_event.owner()
+				)
 			);
 
 		_event.owner().weapon_status(
@@ -125,6 +128,32 @@ sanguis::server::weapons::states::backswing::react(
 		this->transit<
 			sanguis::server::weapons::states::ready
 		>();
+}
+
+boost::statechart::result
+sanguis::server::weapons::states::backswing::react(
+	sanguis::server::weapons::events::reload const &_event
+)
+{
+	sanguis::server::entities::with_weapon &from(
+		_event.from()
+	);
+
+	from.weapon_status(
+		sanguis::weapon_status::attacking,
+		this->context<
+			sanguis::server::weapons::weapon
+		>()
+	);
+
+	return
+		this->transit<
+			sanguis::server::weapons::states::reloading
+		>(
+			sanguis::server::weapons::states::reloading_parameters(
+				from.irs()
+			)
+		);
 }
 
 boost::statechart::result

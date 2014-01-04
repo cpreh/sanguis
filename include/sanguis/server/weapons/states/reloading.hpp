@@ -4,6 +4,7 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/events/poll_fwd.hpp>
+#include <sanguis/server/weapons/events/shoot_fwd.hpp>
 #include <sanguis/server/weapons/events/stop_fwd.hpp>
 #include <sanguis/server/weapons/states/reloading_fwd.hpp>
 #include <sanguis/server/weapons/states/reloading_parameters_fwd.hpp>
@@ -36,9 +37,12 @@ class reloading
 		reloading
 	);
 public:
-	typedef boost::mpl::list2<
+	typedef boost::mpl::list3<
 		boost::statechart::custom_reaction<
 			sanguis::server::weapons::events::poll
+		>,
+		boost::statechart::custom_reaction<
+			sanguis::server::weapons::events::shoot
 		>,
 		boost::statechart::custom_reaction<
 			sanguis::server::weapons::events::stop
@@ -56,6 +60,11 @@ public:
 	boost::statechart::result
 	react(
 		sanguis::server::weapons::events::poll const &
+	);
+
+	boost::statechart::result
+	react(
+		sanguis::server::weapons::events::shoot const &
 	);
 
 	boost::statechart::result

@@ -20,7 +20,9 @@ enum class nullary_type
 	drop_primary_weapon,
 	drop_secondary_weapon,
 	escape,
-	perk_menu
+	perk_menu,
+	reload_primary_weapon,
+	reload_secondary_weapon
 };
 
 }

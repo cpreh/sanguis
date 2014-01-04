@@ -739,6 +739,8 @@ set(
 	include/sanguis/messages/player_pause_fwd.hpp
 	include/sanguis/messages/player_position.hpp
 	include/sanguis/messages/player_position_fwd.hpp
+	include/sanguis/messages/player_reload.hpp
+	include/sanguis/messages/player_reload_fwd.hpp
 	include/sanguis/messages/player_start_shooting.hpp
 	include/sanguis/messages/player_start_shooting_fwd.hpp
 	include/sanguis/messages/player_stop_shooting.hpp
@@ -1312,6 +1314,8 @@ set(
 	include/sanguis/server/weapons/delayed_attack_fwd.hpp
 	include/sanguis/server/weapons/events/poll.hpp
 	include/sanguis/server/weapons/events/poll_fwd.hpp
+	include/sanguis/server/weapons/events/reload.hpp
+	include/sanguis/server/weapons/events/reload_fwd.hpp
 	include/sanguis/server/weapons/events/shoot.hpp
 	include/sanguis/server/weapons/events/shoot_fwd.hpp
 	include/sanguis/server/weapons/events/stop.hpp
@@ -1668,6 +1672,7 @@ set(
 	src/messages/player_drop_or_pickup_weapon.cpp
 	src/messages/player_pause.cpp
 	src/messages/player_position.cpp
+	src/messages/player_reload.cpp
 	src/messages/player_start_shooting.cpp
 	src/messages/player_stop_shooting.cpp
 	src/messages/player_unpause.cpp
@@ -1907,6 +1912,7 @@ set(
 	src/server/weapons/default_irs.cpp
 	src/server/weapons/delayed_attack.cpp
 	src/server/weapons/events/poll.cpp
+	src/server/weapons/events/reload.cpp
 	src/server/weapons/events/shoot.cpp
 	src/server/weapons/factory/dual_pistols.cpp
 	src/server/weapons/factory/grenade.cpp

@@ -70,6 +70,11 @@ public:
 	);
 
 	void
+	reload(
+		sanguis::server::entities::with_weapon &
+	);
+
+	void
 	stop();
 
 	void

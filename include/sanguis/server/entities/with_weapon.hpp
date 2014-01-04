@@ -85,6 +85,11 @@ public:
 		sanguis::is_primary_weapon
 	);
 
+	void
+	reload(
+		sanguis::is_primary_weapon
+	);
+
 	sanguis::server::entities::property::always_max &
 	attack_speed();
 

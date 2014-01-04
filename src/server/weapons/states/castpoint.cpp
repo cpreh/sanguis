@@ -7,6 +7,7 @@
 #include <sanguis/server/weapons/optional_target.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/events/poll.hpp>
+#include <sanguis/server/weapons/events/reload.hpp>
 #include <sanguis/server/weapons/events/shoot.hpp>
 #include <sanguis/server/weapons/events/stop.hpp>
 #include <sanguis/server/weapons/states/backswing.hpp>
@@ -14,6 +15,8 @@
 #include <sanguis/server/weapons/states/castpoint.hpp>
 #include <sanguis/server/weapons/states/castpoint_parameters.hpp>
 #include <sanguis/server/weapons/states/ready.hpp>
+#include <sanguis/server/weapons/states/reloading.hpp>
+#include <sanguis/server/weapons/states/reloading_parameters.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/math/pi.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
@@ -157,6 +160,32 @@ sanguis::server::weapons::states::castpoint::react(
 		>(
 			sanguis::server::weapons::states::backswing_parameters(
 				_event.owner().ias()
+			)
+		);
+}
+
+boost::statechart::result
+sanguis::server::weapons::states::castpoint::react(
+	sanguis::server::weapons::events::reload const &_event
+)
+{
+	sanguis::server::entities::with_weapon &from(
+		_event.from()
+	);
+
+	from.weapon_status(
+		sanguis::weapon_status::attacking,
+		this->context<
+			sanguis::server::weapons::weapon
+		>()
+	);
+
+	return
+		this->transit<
+			sanguis::server::weapons::states::reloading
+		>(
+			sanguis::server::weapons::states::reloading_parameters(
+				from.irs()
 			)
 		);
 }

@@ -5,6 +5,7 @@
 #include <sanguis/server/weapons/irs.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/events/poll_fwd.hpp>
+#include <sanguis/server/weapons/events/reload_fwd.hpp>
 #include <sanguis/server/weapons/events/stop_fwd.hpp>
 #include <sanguis/server/weapons/states/backswing_fwd.hpp>
 #include <sanguis/server/weapons/states/backswing_parameters_fwd.hpp>
@@ -37,9 +38,12 @@ class backswing
 		backswing
 	);
 public:
-	typedef boost::mpl::list2<
+	typedef boost::mpl::list3<
 		boost::statechart::custom_reaction<
 			sanguis::server::weapons::events::poll
+		>,
+		boost::statechart::custom_reaction<
+			sanguis::server::weapons::events::reload
 		>,
 		boost::statechart::custom_reaction<
 			sanguis::server::weapons::events::stop
@@ -57,6 +61,11 @@ public:
 	boost::statechart::result
 	react(
 		sanguis::server::weapons::events::poll const &
+	);
+
+	boost::statechart::result
+	react(
+		sanguis::server::weapons::events::reload const &
 	);
 
 	boost::statechart::result

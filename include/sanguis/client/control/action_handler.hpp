@@ -91,6 +91,11 @@ private:
 	);
 
 	void
+	handle_reload(
+		sanguis::is_primary_weapon
+	);
+
+	void
 	send_cheat(
 		sanguis::cheat_type,
 		sge::console::arg_list const &,

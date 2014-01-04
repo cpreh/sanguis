@@ -1,8 +1,8 @@
-#ifndef SANGUIS_SERVER_WEAPONS_EVENTS_SHOOT_HPP_INCLUDED
-#define SANGUIS_SERVER_WEAPONS_EVENTS_SHOOT_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_WEAPONS_EVENTS_RELOAD_HPP_INCLUDED
+#define SANGUIS_SERVER_WEAPONS_EVENTS_RELOAD_HPP_INCLUDED
 
 #include <sanguis/server/entities/with_weapon_fwd.hpp>
-#include <sanguis/server/weapons/events/shoot_fwd.hpp>
+#include <sanguis/server/weapons/events/reload_fwd.hpp>
 #include <fcppt/nonassignable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/event.hpp>
@@ -18,18 +18,18 @@ namespace weapons
 namespace events
 {
 
-class shoot
+class reload
 :
 	public boost::statechart::event<
-		sanguis::server::weapons::events::shoot
+		sanguis::server::weapons::events::reload
 	>
 {
 	FCPPT_NONASSIGNABLE(
-		shoot
+		reload
 	);
 public:
 	explicit
-	shoot(
+	reload(
 		sanguis::server::entities::with_weapon &
 	);
 

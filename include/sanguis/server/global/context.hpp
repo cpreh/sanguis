@@ -87,6 +87,12 @@ public:
 	);
 
 	void
+	player_reload(
+		sanguis::server::player_id,
+		sanguis::is_primary_weapon
+	);
+
+	void
 	player_drop_or_pickup_weapon(
 		sanguis::server::player_id,
 		sanguis::is_primary_weapon

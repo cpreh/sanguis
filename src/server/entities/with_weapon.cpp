@@ -251,6 +251,25 @@ sanguis::server::entities::with_weapon::use_weapon(
 		);
 }
 
+void
+sanguis::server::entities::with_weapon::reload(
+	sanguis::is_primary_weapon const _is_primary
+)
+{
+	sanguis::server::entities::with_weapon::optional_weapon_ref const weapon(
+		this->is_primary_to_optional_weapon(
+			_is_primary
+		)
+	);
+
+	if(
+		weapon
+	)
+		weapon->reload(
+			*this
+		);
+}
+
 sanguis::server::entities::property::always_max &
 sanguis::server::entities::with_weapon::attack_speed()
 {

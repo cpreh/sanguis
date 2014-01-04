@@ -144,6 +144,12 @@ sanguis::client::control::input_translator::key_callback(
 			sanguis::client::control::actions::nullary_type::escape
 		);
 		break;
+	case sge::input::keyboard::key_code::r:
+		this->nullary_event(
+			_event.pressed(),
+			sanguis::client::control::actions::nullary_type::reload_primary_weapon
+		);
+		break;
 	case sge::input::keyboard::key_code::space:
 		this->nullary_event(
 			_event.pressed(),

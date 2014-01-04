@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_WEAPONS_STATES_READY_HPP_INCLUDED
 
 #include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/weapons/events/reload_fwd.hpp>
 #include <sanguis/server/weapons/events/shoot_fwd.hpp>
 #include <sanguis/server/weapons/states/ready_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -33,9 +34,12 @@ class ready
 		ready
 	);
 public:
-	typedef boost::mpl::list1<
+	typedef boost::mpl::list2<
 		boost::statechart::custom_reaction<
 			sanguis::server::weapons::events::shoot
+		>,
+		boost::statechart::custom_reaction<
+			sanguis::server::weapons::events::reload
 		>
 	> reactions;
 
@@ -47,6 +51,11 @@ public:
 	boost::statechart::result
 	react(
 		sanguis::server::weapons::events::shoot const &
+	);
+
+	boost::statechart::result
+	react(
+		sanguis::server::weapons::events::reload const &
 	);
 };
 

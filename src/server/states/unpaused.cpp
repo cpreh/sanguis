@@ -9,6 +9,7 @@
 #include <sanguis/messages/player_drop_or_pickup_weapon.hpp>
 #include <sanguis/messages/player_pause.hpp>
 #include <sanguis/messages/player_position.hpp>
+#include <sanguis/messages/player_reload.hpp>
 #include <sanguis/messages/player_start_shooting.hpp>
 #include <sanguis/messages/player_stop_shooting.hpp>
 #include <sanguis/messages/player_unpause.hpp>
@@ -203,6 +204,25 @@ sanguis::server::states::unpaused::operator()(
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
 	sanguis::server::player_id const _id,
+	sanguis::messages::player_reload const &_message
+)
+{
+	this->context<
+		sanguis::server::states::running
+	>().global_context().player_reload(
+		_id,
+		_message.get<
+			sanguis::messages::adapted_types::is_primary_weapon
+		>()
+	);
+
+	return
+		this->discard_event();
+}
+
+boost::statechart::result
+sanguis::server::states::unpaused::operator()(
+	sanguis::server::player_id const _id,
 	sanguis::messages::player_start_shooting const &_message
 )
 {
@@ -297,13 +317,14 @@ sanguis::server::states::unpaused::react(
 	);
 
 	static sanguis::messages::call::object<
-		boost::mpl::vector9<
+		boost::mpl::vector10<
 			sanguis::messages::player_attack_dest,
 			sanguis::messages::player_change_world,
 			sanguis::messages::player_direction,
 			sanguis::messages::player_drop_or_pickup_weapon,
 			sanguis::messages::player_pause,
 			sanguis::messages::player_position,
+			sanguis::messages::player_reload,
 			sanguis::messages::player_start_shooting,
 			sanguis::messages::player_stop_shooting,
 			sanguis::messages::player_unpause

@@ -18,6 +18,7 @@
 #include <sanguis/server/weapons/target.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/events/poll.hpp>
+#include <sanguis/server/weapons/events/reload.hpp>
 #include <sanguis/server/weapons/events/shoot.hpp>
 #include <sanguis/server/weapons/events/stop.hpp>
 #include <sanguis/server/weapons/states/ready.hpp>
@@ -135,6 +136,23 @@ sanguis::server::weapons::weapon::attack(
 
 	this->process_event(
 		sanguis::server::weapons::events::shoot(
+			_from
+		)
+	);
+}
+
+void
+sanguis::server::weapons::weapon::reload(
+	sanguis::server::entities::with_weapon &_from
+)
+{
+	if(
+		!this->usable()
+	)
+		return;
+
+	this->process_event(
+		sanguis::server::weapons::events::reload(
 			_from
 		)
 	);

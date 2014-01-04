@@ -40,7 +40,7 @@ sanguis::server::weapons::states::reloading::reloading(
 		)
 	),
 	cancelled_(
-		false
+		true
 	)
 {
 }
@@ -86,6 +86,17 @@ sanguis::server::weapons::states::reloading::react(
 		this->transit<
 			sanguis::server::weapons::states::ready
 		>();
+}
+
+boost::statechart::result
+sanguis::server::weapons::states::reloading::react(
+	sanguis::server::weapons::events::shoot const &
+)
+{
+	cancelled_ = false;
+
+	return
+		this->discard_event();
 }
 
 boost::statechart::result
