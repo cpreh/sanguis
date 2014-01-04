@@ -2,6 +2,7 @@
 #include <sanguis/weapon_status.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/events/poll.hpp>
+#include <sanguis/server/weapons/events/reload.hpp>
 #include <sanguis/server/weapons/events/shoot.hpp>
 #include <sanguis/server/weapons/events/stop.hpp>
 #include <sanguis/server/weapons/states/reloading.hpp>
