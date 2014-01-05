@@ -2,10 +2,11 @@
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_description.hpp>
+#include <sanguis/weapon_status.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/collision/distance_entity_pos.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
-#include <sanguis/server/entities/with_weapon_fwd.hpp>
+#include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/weapons/accuracy.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
@@ -21,9 +22,8 @@
 #include <sanguis/server/weapons/events/reload.hpp>
 #include <sanguis/server/weapons/events/shoot.hpp>
 #include <sanguis/server/weapons/events/stop.hpp>
-#include <sanguis/server/weapons/states/ready.hpp>
+#include <sanguis/server/weapons/states/idle.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
-#include <fcppt/scoped_state_machine_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/join.hpp>
 #include <fcppt/assert/error.hpp>
@@ -98,12 +98,12 @@ sanguis::server::weapons::weapon::weapon(
 	reload_time_(
 		_reload_time
 	),
-	scoped_machine_(
-		*this
-	)
+	owner_()
 {
 	if(
-		_cast_point.get() > _base_cooldown.get()
+		_cast_point.get()
+		>
+		_base_cooldown.get()
 	)
 		FCPPT_LOG_WARNING(
 			::logger,
@@ -125,9 +125,30 @@ sanguis::server::weapons::weapon::~weapon()
 }
 
 void
-sanguis::server::weapons::weapon::attack(
-	sanguis::server::entities::with_weapon &_from
+sanguis::server::weapons::weapon::owner(
+	sanguis::server::entities::optional_with_weapon_ref const &_owner
 )
+{
+	if(
+		_owner
+	)
+	{
+		owner_ =
+			_owner;
+
+		this->initiate();
+	}
+	else
+	{
+		this->terminate();
+
+		owner_ =
+			sanguis::server::entities::optional_with_weapon_ref();
+	}
+}
+
+void
+sanguis::server::weapons::weapon::attack()
 {
 	if(
 		!this->usable()
@@ -135,16 +156,12 @@ sanguis::server::weapons::weapon::attack(
 		return;
 
 	this->process_event(
-		sanguis::server::weapons::events::shoot(
-			_from
-		)
+		sanguis::server::weapons::events::shoot()
 	);
 }
 
 void
-sanguis::server::weapons::weapon::reload(
-	sanguis::server::entities::with_weapon &_from
-)
+sanguis::server::weapons::weapon::reload()
 {
 	if(
 		!this->usable()
@@ -152,9 +169,7 @@ sanguis::server::weapons::weapon::reload(
 		return;
 
 	this->process_event(
-		sanguis::server::weapons::events::reload(
-			_from
-		)
+		sanguis::server::weapons::events::reload()
 	);
 }
 
@@ -167,9 +182,7 @@ sanguis::server::weapons::weapon::stop()
 }
 
 void
-sanguis::server::weapons::weapon::update(
-	sanguis::server::entities::with_weapon &_owner
-)
+sanguis::server::weapons::weapon::update()
 {
 	if(
 		!this->usable()
@@ -177,9 +190,7 @@ sanguis::server::weapons::weapon::update(
 		return;
 
 	this->process_event(
-		sanguis::server::weapons::events::poll(
-			_owner
-		)
+		sanguis::server::weapons::events::poll()
 	);
 }
 
@@ -199,17 +210,27 @@ sanguis::server::weapons::weapon::magazine_size() const
 
 bool
 sanguis::server::weapons::weapon::in_range(
-	sanguis::server::entities::base const &_from,
 	sanguis::server::weapons::target const _to
 ) const
 {
 	return
 		sanguis::server::collision::distance_entity_pos(
-			_from,
+			this->owner(),
 			_to.get()
 		)
 		<
 		range_.get();
+}
+
+bool
+sanguis::server::weapons::weapon::owner_target_in_range() const
+{
+	return
+		this->owner().target()
+		&&
+		this->in_range(
+			*this->owner().target()
+		);
 }
 
 bool
@@ -291,6 +312,28 @@ sanguis::server::weapons::weapon::random_generator() const
 {
 	return
 		random_generator_;
+}
+
+sanguis::server::entities::with_weapon &
+sanguis::server::weapons::weapon::owner() const
+{
+	FCPPT_ASSERT_PRE(
+		owner_
+	);
+
+	return
+		*owner_;
+}
+
+void
+sanguis::server::weapons::weapon::weapon_status(
+	sanguis::weapon_status const _status
+)
+{
+	this->owner().weapon_status(
+		_status,
+		*this
+	);
 }
 
 void

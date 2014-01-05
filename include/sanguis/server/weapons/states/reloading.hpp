@@ -7,7 +7,6 @@
 #include <sanguis/server/weapons/events/shoot_fwd.hpp>
 #include <sanguis/server/weapons/events/stop_fwd.hpp>
 #include <sanguis/server/weapons/states/reloading_fwd.hpp>
-#include <sanguis/server/weapons/states/reloading_parameters_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
@@ -49,13 +48,14 @@ public:
 		>
 	> reactions;
 
+	explicit
 	reloading(
-		my_context,
-		sanguis::server::weapons::states::reloading_parameters const &
+		my_context
 	);
 
 	virtual
-	~reloading();
+	~reloading()
+	override;
 
 	boost::statechart::result
 	react(

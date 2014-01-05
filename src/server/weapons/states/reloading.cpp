@@ -5,9 +5,9 @@
 #include <sanguis/server/weapons/events/reload.hpp>
 #include <sanguis/server/weapons/events/shoot.hpp>
 #include <sanguis/server/weapons/events/stop.hpp>
+#include <sanguis/server/weapons/states/castpoint.hpp>
+#include <sanguis/server/weapons/states/idle.hpp>
 #include <sanguis/server/weapons/states/reloading.hpp>
-#include <sanguis/server/weapons/states/reloading_parameters.hpp>
-#include <sanguis/server/weapons/states/ready.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -21,8 +21,7 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::weapons::states::reloading::reloading(
-	my_context _ctx,
-	sanguis::server::weapons::states::reloading_parameters const &_parameters
+	my_context _ctx
 )
 :
 	my_base(
@@ -37,13 +36,20 @@ sanguis::server::weapons::states::reloading::reloading(
 				sanguis::server::weapons::weapon
 			>().reload_time()->get()
 			/
-			_parameters.irs().get()
+			this->context<
+				sanguis::server::weapons::weapon
+			>().owner().irs().get()
 		)
 	),
 	cancelled_(
 		true
 	)
 {
+	this->context<
+		sanguis::server::weapons::weapon
+	>().weapon_status(
+		sanguis::weapon_status::reloading
+	);
 }
 
 FCPPT_PP_POP_WARNING
@@ -54,7 +60,7 @@ sanguis::server::weapons::states::reloading::~reloading()
 
 boost::statechart::result
 sanguis::server::weapons::states::reloading::react(
-	sanguis::server::weapons::events::poll const &_event
+	sanguis::server::weapons::events::poll const &
 )
 {
 	if(
@@ -67,26 +73,21 @@ sanguis::server::weapons::states::reloading::react(
 		sanguis::server::weapons::weapon
 	>().reset_magazine();
 
-	_event.owner().weapon_status(
-		sanguis::weapon_status::nothing,
-		this->context<
-			sanguis::server::weapons::weapon
-		>()
-	);
-
-	if(
-		!cancelled_
-	)
-		this->post_event(
-			sanguis::server::weapons::events::shoot(
-				_event.owner()
-			)
-		);
-
 	return
-		this->transit<
-			sanguis::server::weapons::states::ready
-		>();
+		cancelled_
+		||
+		!this->context<
+			sanguis::server::weapons::weapon
+		>().usable()
+		?
+			this->transit<
+				sanguis::server::weapons::states::idle
+			>()
+		:
+			this->transit<
+				sanguis::server::weapons::states::castpoint
+			>()
+		;
 }
 
 boost::statechart::result

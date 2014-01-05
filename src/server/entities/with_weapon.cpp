@@ -9,6 +9,7 @@
 #include <sanguis/weapon_type_to_is_primary.hpp>
 #include <sanguis/messages/create.hpp>
 #include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/optional_with_weapon_ref.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
@@ -146,6 +147,12 @@ sanguis::server::entities::with_weapon::pickup_weapon(
 		_ptr
 	);
 
+	dest->owner(
+		sanguis::server::entities::optional_with_weapon_ref(
+			*this
+		)
+	);
+
 	this->on_new_weapon(
 		*dest
 	);
@@ -157,7 +164,9 @@ sanguis::server::entities::with_weapon::pickup_weapon(
 	if(
 		_ptr
 	)
-		_ptr->stop();
+		_ptr->owner(
+			sanguis::server::entities::optional_with_weapon_ref()
+		);
 }
 
 sanguis::server::weapons::unique_ptr
@@ -173,12 +182,24 @@ sanguis::server::entities::with_weapon::drop_weapon(
 		)
 	);
 
+	if(
+		!result
+	)
+		return
+			std::move(
+				result
+			);
+
 	this->on_drop_weapon(
 		_is_primary
 	);
 
 	this->weapon_changed(
 		_is_primary
+	);
+
+	result->owner(
+		sanguis::server::entities::optional_with_weapon_ref()
 	);
 
 	return
@@ -214,12 +235,9 @@ sanguis::server::entities::with_weapon::in_range(
 	);
 
 	return
-		target_
+		weapon
 		&&
-		weapon->in_range(
-			*this,
-			*target_
-		);
+		weapon->owner_target_in_range();
 }
 
 void
@@ -246,9 +264,7 @@ sanguis::server::entities::with_weapon::use_weapon(
 	else if(
 		target_
 	)
-		weapon->attack(
-			*this
-		);
+		weapon->attack();
 }
 
 void
@@ -265,9 +281,7 @@ sanguis::server::entities::with_weapon::reload(
 	if(
 		weapon
 	)
-		weapon->reload(
-			*this
-		);
+		weapon->reload();
 }
 
 sanguis::server::entities::property::always_max &
@@ -334,6 +348,13 @@ sanguis::server::entities::with_weapon::weapon_status(
 		!sanguis::weapon_type_to_is_primary(
 			_weapon.type()
 		).get()
+	)
+		return;
+
+	if(
+		weapon_status_
+		==
+		_weapon_status
 	)
 		return;
 
@@ -407,9 +428,7 @@ sanguis::server::entities::with_weapon::update_weapon(
 	if(
 		_weapon
 	)
-		_weapon->update(
-			*this
-		);
+		_weapon->update();
 }
 
 void

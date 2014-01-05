@@ -1074,6 +1074,8 @@ set(
 	include/sanguis/server/entities/optional_base_ref_fwd.hpp
 	include/sanguis/server/entities/optional_with_ai_ref.hpp
 	include/sanguis/server/entities/optional_with_ai_ref_fwd.hpp
+	include/sanguis/server/entities/optional_with_weapon_ref.hpp
+	include/sanguis/server/entities/optional_with_weapon_ref_fwd.hpp
 	include/sanguis/server/entities/pickups/health.hpp
 	include/sanguis/server/entities/pickups/monster.hpp
 	include/sanguis/server/entities/pickups/pickup.hpp
@@ -1349,6 +1351,7 @@ set(
 	include/sanguis/server/weapons/optional_target_fwd.hpp
 	include/sanguis/server/weapons/pistol.hpp
 	include/sanguis/server/weapons/player_start_weapon.hpp
+	include/sanguis/server/weapons/random_angle.hpp
 	include/sanguis/server/weapons/range.hpp
 	include/sanguis/server/weapons/reload_time.hpp
 	include/sanguis/server/weapons/rocket_launcher.hpp
@@ -1356,20 +1359,12 @@ set(
 	include/sanguis/server/weapons/shotgun.hpp
 	include/sanguis/server/weapons/states/backswing.hpp
 	include/sanguis/server/weapons/states/backswing_fwd.hpp
-	include/sanguis/server/weapons/states/backswing_parameters.hpp
-	include/sanguis/server/weapons/states/backswing_parameters_fwd.hpp
 	include/sanguis/server/weapons/states/castpoint.hpp
 	include/sanguis/server/weapons/states/castpoint_fwd.hpp
-	include/sanguis/server/weapons/states/castpoint_parameters.hpp
-	include/sanguis/server/weapons/states/castpoint_parameters_fwd.hpp
-	include/sanguis/server/weapons/states/exhausted.hpp
-	include/sanguis/server/weapons/states/exhausted_fwd.hpp
-	include/sanguis/server/weapons/states/ready.hpp
-	include/sanguis/server/weapons/states/ready_fwd.hpp
+	include/sanguis/server/weapons/states/idle.hpp
+	include/sanguis/server/weapons/states/idle_fwd.hpp
 	include/sanguis/server/weapons/states/reloading.hpp
 	include/sanguis/server/weapons/states/reloading_fwd.hpp
-	include/sanguis/server/weapons/states/reloading_parameters.hpp
-	include/sanguis/server/weapons/states/reloading_parameters_fwd.hpp
 	include/sanguis/server/weapons/target.hpp
 	include/sanguis/server/weapons/target_fwd.hpp
 	include/sanguis/server/weapons/unique_ptr.hpp
@@ -1911,9 +1906,6 @@ set(
 	src/server/weapons/default_ias.cpp
 	src/server/weapons/default_irs.cpp
 	src/server/weapons/delayed_attack.cpp
-	src/server/weapons/events/poll.cpp
-	src/server/weapons/events/reload.cpp
-	src/server/weapons/events/shoot.cpp
 	src/server/weapons/factory/dual_pistols.cpp
 	src/server/weapons/factory/grenade.cpp
 	src/server/weapons/factory/parameters.cpp
@@ -1932,17 +1924,14 @@ set(
 	src/server/weapons/monster_spawner.cpp
 	src/server/weapons/pistol.cpp
 	src/server/weapons/player_start_weapon.cpp
+	src/server/weapons/random_angle.cpp
 	src/server/weapons/rocket_launcher.cpp
 	src/server/weapons/sentry.cpp
 	src/server/weapons/shotgun.cpp
 	src/server/weapons/states/backswing.cpp
-	src/server/weapons/states/backswing_parameters.cpp
 	src/server/weapons/states/castpoint.cpp
-	src/server/weapons/states/castpoint_parameters.cpp
-	src/server/weapons/states/exhausted.cpp
-	src/server/weapons/states/ready.cpp
+	src/server/weapons/states/idle.cpp
 	src/server/weapons/states/reloading.cpp
-	src/server/weapons/states/reloading_parameters.cpp
 	src/server/weapons/weapon.cpp
 	src/server/world/center_in_grid_pos.cpp
 	src/server/world/center_to_grid_pos.cpp

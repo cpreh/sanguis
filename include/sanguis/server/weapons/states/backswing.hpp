@@ -8,7 +8,6 @@
 #include <sanguis/server/weapons/events/reload_fwd.hpp>
 #include <sanguis/server/weapons/events/stop_fwd.hpp>
 #include <sanguis/server/weapons/states/backswing_fwd.hpp>
-#include <sanguis/server/weapons/states/backswing_parameters_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
@@ -50,13 +49,14 @@ public:
 		>
 	> reactions;
 
+	explicit
 	backswing(
-		my_context,
-		sanguis::server::weapons::states::backswing_parameters const &
+		my_context
 	);
 
 	virtual
-	~backswing();
+	~backswing()
+	override;
 
 	boost::statechart::result
 	react(

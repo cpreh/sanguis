@@ -32,6 +32,11 @@ sanguis::server::cheat::weapon_type(
 			sanguis::weapon_type(
 				sanguis::secondary_weapon_type::grenade
 			);
+	case sanguis::cheat_type::rocket_launcher:
+		return
+			sanguis::weapon_type(
+				sanguis::primary_weapon_type::rocket_launcher
+			);
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;

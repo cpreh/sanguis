@@ -10,28 +10,6 @@ include(
 	FcpptCMakeUtils
 )
 
-set(
-	STATECHART_INCLUDE_DIR
-	""
-	CACHE
-	PATH
-	"Include path for statechart"
-)
-
-if(
-	NOT STATECHART_INCLUDE_DIR
-)
-	message(
-		FATAL_ERROR
-		"Please specify the include dir of the modified statechart library, for example:
-		cmake -D STATECHART_INCLUDE_DIR=foobar/statechart/include"
-	)
-endif()
-
-include_directories(
-	${STATECHART_INCLUDE_DIR}
-)
-
 # Find Boost
 
 find_package(

@@ -5,8 +5,10 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/string_vector.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
+#include <sanguis/weapon_status_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
+#include <sanguis/server/entities/optional_with_weapon_ref.hpp>
 #include <sanguis/server/entities/with_weapon_fwd.hpp>
 #include <sanguis/server/weapons/accuracy.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
@@ -21,10 +23,9 @@
 #include <sanguis/server/weapons/weapon_fwd.hpp>
 #include <sanguis/server/weapons/states/backswing_fwd.hpp>
 #include <sanguis/server/weapons/states/castpoint_fwd.hpp>
+#include <sanguis/server/weapons/states/idle_fwd.hpp>
 #include <sanguis/server/weapons/states/reloading_fwd.hpp>
-#include <sanguis/server/weapons/states/ready_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/scoped_state_machine_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/state_machine.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -42,7 +43,7 @@ class weapon
 	public
 		boost::statechart::state_machine<
 			sanguis::server::weapons::weapon,
-			sanguis::server::weapons::states::ready
+			sanguis::server::weapons::states::idle
 		>
 {
 	FCPPT_NONCOPYABLE(
@@ -65,22 +66,21 @@ public:
 	~weapon() = 0;
 
 	void
-	attack(
-		sanguis::server::entities::with_weapon &
+	owner(
+		sanguis::server::entities::optional_with_weapon_ref const &
 	);
 
 	void
-	reload(
-		sanguis::server::entities::with_weapon &
-	);
+	attack();
+
+	void
+	reload();
 
 	void
 	stop();
 
 	void
-	update(
-		sanguis::server::entities::with_weapon &
-	);
+	update();
 
 	sanguis::weapon_type
 	type() const;
@@ -90,9 +90,11 @@ public:
 
 	bool
 	in_range(
-		sanguis::server::entities::base const &,
 		sanguis::server::weapons::target
 	) const;
+
+	bool
+	owner_target_in_range() const;
 
 	bool
 	usable() const;
@@ -112,11 +114,19 @@ protected:
 	sanguis::random_generator &
 	random_generator() const;
 private:
+	sanguis::server::entities::with_weapon &
+	owner() const;
+
+	void
+	weapon_status(
+		sanguis::weapon_status
+	);
+
 	virtual
 	sanguis::string_vector
 	attributes() const = 0;
 
-	friend class sanguis::server::weapons::states::ready;
+	friend class sanguis::server::weapons::states::idle;
 	friend class sanguis::server::weapons::states::reloading;
 	friend class sanguis::server::weapons::states::backswing;
 	friend class sanguis::server::weapons::states::castpoint;
@@ -162,9 +172,7 @@ private:
 
 	sanguis::server::weapons::optional_reload_time const reload_time_;
 
-	fcppt::scoped_state_machine<
-		sanguis::server::weapons::weapon
-	> const scoped_machine_;
+	sanguis::server::entities::optional_with_weapon_ref owner_;
 };
 
 }

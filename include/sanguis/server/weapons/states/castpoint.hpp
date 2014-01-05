@@ -4,10 +4,8 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/events/poll_fwd.hpp>
-#include <sanguis/server/weapons/events/reload_fwd.hpp>
 #include <sanguis/server/weapons/events/stop_fwd.hpp>
 #include <sanguis/server/weapons/states/castpoint_fwd.hpp>
-#include <sanguis/server/weapons/states/castpoint_parameters_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
@@ -37,34 +35,27 @@ class castpoint
 		castpoint
 	);
 public:
-	typedef boost::mpl::list3<
+	typedef boost::mpl::list2<
 		boost::statechart::custom_reaction<
 			sanguis::server::weapons::events::poll
-		>,
-		boost::statechart::custom_reaction<
-			sanguis::server::weapons::events::reload
 		>,
 		boost::statechart::custom_reaction<
 			sanguis::server::weapons::events::stop
 		>
 	> reactions;
 
+	explicit
 	castpoint(
-		my_context,
-		sanguis::server::weapons::states::castpoint_parameters const &
+		my_context
 	);
 
 	virtual
-	~castpoint();
+	~castpoint()
+	override;
 
 	boost::statechart::result
 	react(
 		sanguis::server::weapons::events::poll const &
-	);
-
-	boost::statechart::result
-	react(
-		sanguis::server::weapons::events::reload const &
 	);
 
 	boost::statechart::result

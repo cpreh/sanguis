@@ -158,6 +158,17 @@ sanguis::client::control::action_handler::action_handler(
 					SGE_FONT_LIT("Spawn a grenade pickup")
 				)
 			)
+		)(
+			this->cheat_connection(
+				_console,
+				sanguis::cheat_type::rocket_launcher,
+				sge::console::callback::name(
+					SGE_FONT_LIT("rocket_launcher")
+				),
+				sge::console::callback::short_description(
+					SGE_FONT_LIT("Spawn a rocket launcher")
+				)
+			)
 		)
 		.move_container()
 	)

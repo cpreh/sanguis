@@ -7,11 +7,9 @@
 #include <sanguis/server/weapons/events/shoot.hpp>
 #include <sanguis/server/weapons/events/stop.hpp>
 #include <sanguis/server/weapons/states/backswing.hpp>
-#include <sanguis/server/weapons/states/backswing_parameters.hpp>
-#include <sanguis/server/weapons/states/exhausted.hpp>
+#include <sanguis/server/weapons/states/castpoint.hpp>
+#include <sanguis/server/weapons/states/idle.hpp>
 #include <sanguis/server/weapons/states/reloading.hpp>
-#include <sanguis/server/weapons/states/reloading_parameters.hpp>
-#include <sanguis/server/weapons/states/ready.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -24,8 +22,7 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::weapons::states::backswing::backswing(
-	my_context _ctx,
-	sanguis::server::weapons::states::backswing_parameters const &_parameters
+	my_context _ctx
 )
 :
 	my_base(
@@ -43,7 +40,9 @@ sanguis::server::weapons::states::backswing::backswing(
 				sanguis::server::weapons::weapon
 			>().backswing_time().get()
 			/
-			_parameters.ias().get()
+			this->context<
+				sanguis::server::weapons::weapon
+			>().owner().ias().get()
 		)
 	)
 {
@@ -57,7 +56,7 @@ sanguis::server::weapons::states::backswing::~backswing()
 
 boost::statechart::result
 sanguis::server::weapons::states::backswing::react(
-	sanguis::server::weapons::events::poll const &_event
+	sanguis::server::weapons::events::poll const &
 )
 {
 	if(
@@ -71,89 +70,50 @@ sanguis::server::weapons::states::backswing::react(
 			sanguis::server::weapons::weapon
 		>().magazine_empty()
 	)
-	{
-		if(
-			!this->context<
-				sanguis::server::weapons::weapon
-			>().reload_time().has_value()
-		)
-			return
-				this->transit<
-					sanguis::server::weapons::states::exhausted
-				>();
-
-		if(
-			!cancelled_
-		)
-			this->post_event(
-				sanguis::server::weapons::events::shoot(
-					_event.owner()
-				)
+		return
+			this->react(
+				sanguis::server::weapons::events::reload()
 			);
 
-		_event.owner().weapon_status(
-			sanguis::weapon_status::reloading,
-			this->context<
-				sanguis::server::weapons::weapon
+	return
+		cancelled_
+		?
+			this->transit<
+				sanguis::server::weapons::states::idle
 			>()
-		);
+		:
+			this->transit<
+				sanguis::server::weapons::states::castpoint
+			>()
+		;
+}
 
+boost::statechart::result
+sanguis::server::weapons::states::backswing::react(
+	sanguis::server::weapons::events::reload const &
+)
+{
+	if(
+		!this->context<
+			sanguis::server::weapons::weapon
+		>().usable()
+	)
 		return
 			this->transit<
-				sanguis::server::weapons::states::reloading
-			>(
-				sanguis::server::weapons::states::reloading_parameters(
-					_event.owner().irs()
-				)
-			);
-	}
+				sanguis::server::weapons::states::idle
+			>();
 
 	if(
 		!cancelled_
 	)
 		this->post_event(
-			sanguis::server::weapons::events::shoot(
-				_event.owner()
-			)
+			sanguis::server::weapons::events::shoot()
 		);
-	else
-		_event.owner().weapon_status(
-			sanguis::weapon_status::nothing,
-			this->context<
-				sanguis::server::weapons::weapon
-			>()
-		);
-
-	return
-		this->transit<
-			sanguis::server::weapons::states::ready
-		>();
-}
-
-boost::statechart::result
-sanguis::server::weapons::states::backswing::react(
-	sanguis::server::weapons::events::reload const &_event
-)
-{
-	sanguis::server::entities::with_weapon &from(
-		_event.from()
-	);
-
-	from.weapon_status(
-		sanguis::weapon_status::attacking,
-		this->context<
-			sanguis::server::weapons::weapon
-		>()
-	);
 
 	return
 		this->transit<
 			sanguis::server::weapons::states::reloading
-		>(
-			sanguis::server::weapons::states::reloading_parameters(
-				from.irs()
-			)
-		);
+		>();
 }
 
 boost::statechart::result
