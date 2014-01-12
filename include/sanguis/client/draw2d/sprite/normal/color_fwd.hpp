@@ -16,9 +16,11 @@ namespace sprite
 namespace normal
 {
 
-typedef sge::image::mizuiro_color<
+typedef
+sge::image::mizuiro_color<
 	sanguis::client::draw2d::sprite::normal::color_format
->::type color;
+>
+color;
 
 }
 }
