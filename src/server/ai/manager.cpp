@@ -20,6 +20,7 @@
 #include <sanguis/server/ai/update_interval.hpp>
 #include <sanguis/server/ai/update_result.hpp>
 #include <sanguis/server/ai/visible.hpp>
+#include <sanguis/server/ai/pathing/can_walk_diagonally.hpp>
 #include <sanguis/server/ai/pathing/find_target.hpp>
 #include <sanguis/server/ai/pathing/is_visible.hpp>
 #include <sanguis/server/ai/pathing/positions_are_close.hpp>
@@ -341,7 +342,8 @@ sanguis::server::ai::manager::update()
 	);
 
 	if(
-		sanguis::server::ai::pathing::positions_are_close(
+		sanguis::server::ai::pathing::can_walk_diagonally(
+			grid,
 			my_grid_pos,
 			next_position
 		)

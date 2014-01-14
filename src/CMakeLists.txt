@@ -875,6 +875,7 @@ set(
 	include/sanguis/server/ai/move_to_target.hpp
 	include/sanguis/server/ai/optional_target.hpp
 	include/sanguis/server/ai/optional_target_fwd.hpp
+	include/sanguis/server/ai/pathing/can_walk_diagonally.hpp
 	include/sanguis/server/ai/pathing/find_target.hpp
 	include/sanguis/server/ai/pathing/is_visible.hpp
 	include/sanguis/server/ai/pathing/positions_are_close.hpp
@@ -1704,6 +1705,7 @@ set(
 	src/server/ai/idle.cpp
 	src/server/ai/manager.cpp
 	src/server/ai/move_to_target.cpp
+	src/server/ai/pathing/can_walk_diagonally.cpp
 	src/server/ai/pathing/find_target.cpp
 	src/server/ai/pathing/is_visible.cpp
 	src/server/ai/pathing/positions_are_close.cpp
