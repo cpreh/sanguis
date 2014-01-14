@@ -24,9 +24,8 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/global/context_fwd.hpp>
 #include <sanguis/server/global/source_world_pair.hpp>
-#include <sanguis/server/global/world_context_fwd.hpp>
 #include <sanguis/server/global/world_map.hpp>
-#include <sanguis/server/world/context_fwd.hpp>
+#include <sanguis/server/world/context.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -42,6 +41,8 @@ namespace global
 {
 
 class context
+:
+	public sanguis::server::world::context
 {
 	FCPPT_NONCOPYABLE(
 		context
@@ -135,8 +136,6 @@ public:
 		sanguis::server::player_id
 	) const;
 private:
-	friend class sanguis::server::global::world_context;
-
 	sanguis::entity_id const
 	next_id();
 
@@ -146,23 +145,27 @@ private:
 	send_to_player(
 		sanguis::server::player_id,
 		sanguis::messages::base const &
-	);
+	)
+	override;
 
 	void
 	remove_player(
 		sanguis::server::player_id
-	);
+	)
+	override;
 
 	bool
 	request_transfer(
 		sanguis::server::global::source_world_pair
-	) const;
+	) const
+	override;
 
 	void
 	transfer_entity(
 		sanguis::server::global::source_world_pair,
 		sanguis::server::entities::unique_ptr &&
-	);
+	)
+	override;
 
 	sanguis::server::world::object &
 	world(
@@ -182,15 +185,11 @@ private:
 
 	sanguis::server::unicast_callback const send_unicast_;
 
-	typedef fcppt::scoped_ptr<
-		sanguis::server::world::context
-	> world_context_scoped_ptr;
-
-	world_context_scoped_ptr const world_context_;
-
-	typedef fcppt::scoped_ptr<
+	typedef
+	fcppt::scoped_ptr<
 		sanguis::server::environment::load_context
-	> load_context_scoped_ptr;
+	>
+	load_context_scoped_ptr;
 
 	load_context_scoped_ptr const load_context_;
 
@@ -200,7 +199,8 @@ private:
 	std::unordered_map<
 		sanguis::server::player_id,
 		sanguis::server::entities::player *
-	> player_map;
+	>
+	player_map;
 
 	player_map players_;
 

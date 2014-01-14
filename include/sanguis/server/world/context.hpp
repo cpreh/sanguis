@@ -28,13 +28,13 @@ public:
 	virtual
 	bool
 	request_transfer(
-		sanguis::server::global::source_world_pair const &
+		sanguis::server::global::source_world_pair
 	) const = 0;
 
 	virtual
 	void
 	transfer_entity(
-		sanguis::server::global::source_world_pair const &,
+		sanguis::server::global::source_world_pair,
 		sanguis::server::entities::unique_ptr &&
 	) = 0;
 

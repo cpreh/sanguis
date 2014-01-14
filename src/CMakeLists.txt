@@ -1185,8 +1185,6 @@ set(
 	include/sanguis/server/global/next_id_callback.hpp
 	include/sanguis/server/global/source_world_pair.hpp
 	include/sanguis/server/global/world_connection_map.hpp
-	include/sanguis/server/global/world_context.hpp
-	include/sanguis/server/global/world_context_fwd.hpp
 	include/sanguis/server/global/world_map.hpp
 	include/sanguis/server/global/world_map_fwd.hpp
 	include/sanguis/server/health.hpp
@@ -1864,7 +1862,6 @@ set(
 	src/server/global/context.cpp
 	src/server/global/generate_worlds.cpp
 	src/server/global/load_context.cpp
-	src/server/global/world_context.cpp
 	src/server/global/world_map.cpp
 	src/server/level_calculate.cpp
 	src/server/log.cpp

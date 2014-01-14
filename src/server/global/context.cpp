@@ -40,10 +40,10 @@
 #include <sanguis/server/global/next_id_callback.hpp>
 #include <sanguis/server/global/source_world_pair.hpp>
 #include <sanguis/server/global/world_connection_map.hpp>
-#include <sanguis/server/global/world_context.hpp>
 #include <sanguis/server/weapons/optional_target.hpp>
 #include <sanguis/server/weapons/target.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/world/context.hpp>
 #include <sanguis/server/world/grid_pos_to_center.hpp>
 #include <sanguis/server/world/map.hpp>
 #include <sanguis/server/world/object.hpp>
@@ -90,6 +90,7 @@ sanguis::server::global::context::context(
 	sanguis::server::console &_console
 )
 :
+	sanguis::server::world::context(),
 	diff_clock_(),
 	random_generator_(
 		sanguis::random_seed()
@@ -99,13 +100,6 @@ sanguis::server::global::context::context(
 	),
 	send_unicast_(
 		_send_unicast
-	),
-	world_context_(
-		fcppt::make_unique_ptr<
-			sanguis::server::global::world_context
-		>(
-			*this
-		)
 	),
 	load_context_(
 		fcppt::make_unique_ptr<
@@ -129,7 +123,7 @@ sanguis::server::global::context::context(
 			sanguis::server::world::parameters(
 				diff_clock_,
 				random_generator_,
-				*world_context_,
+				*this,
 				*load_context_
 			)
 		)
