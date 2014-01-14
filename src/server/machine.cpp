@@ -64,29 +64,20 @@ sanguis::server::machine::machine(
 		)
 	),
 	temp_buffer_(),
-	s_conn_(
-		net_.register_connect(
-			std::bind(
-				&machine::connect_callback,
-				this,
-				std::placeholders::_1
-			)
-		)
-	),
-	s_disconn_(
+	disconnect_connection_(
 		net_.register_disconnect(
 			std::bind(
-				&machine::disconnect_callback,
+				&sanguis::server::machine::disconnect_callback,
 				this,
 				std::placeholders::_1,
 				std::placeholders::_2
 			)
 		)
 	),
-	s_data_(
+	data_connection_(
 		net_.register_data(
 			std::bind(
-				&machine::data_callback,
+				&sanguis::server::machine::data_callback,
 				this,
 				std::placeholders::_1,
 				std::placeholders::_2
@@ -97,7 +88,7 @@ sanguis::server::machine::machine(
 		io_service_,
 		std::bind(
 			std::bind(
-				&machine::timer_callback,
+				&sanguis::server::machine::timer_callback,
 				this
 			)
 		),
@@ -137,7 +128,9 @@ sanguis::server::machine::send_to_all(
 	);
 
 	for(
-		auto const &id : connections
+		auto const &id
+		:
+		connections
 	)
 	{
 		if(
@@ -253,23 +246,28 @@ sanguis::server::machine::process_message(
 }
 
 void
-sanguis::server::machine::connect_callback(
-	alda::net::id const _id
-)
-{
-	// WTF
-}
-
-void
 sanguis::server::machine::disconnect_callback(
 	alda::net::id const _id,
 	fcppt::string const &
 )
+try
 {
+
 	this->process_event(
 		sanguis::server::events::disconnect(
 			_id
 		)
+	);
+}
+catch(
+	fcppt::exception const &_error
+)
+{
+	FCPPT_LOG_ERROR(
+		sanguis::server::log(),
+		fcppt::log::_
+			<< FCPPT_TEXT("Player disconnected: ")
+			<< _error.string()
 	);
 }
 

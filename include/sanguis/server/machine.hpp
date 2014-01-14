@@ -70,11 +70,6 @@ private:
 	);
 
 	void
-	connect_callback(
-		alda::net::id
-	);
-
-	void
 	disconnect_callback(
 		alda::net::id,
 		fcppt::string const &
@@ -102,9 +97,8 @@ private:
 	sanguis::net::data_buffer temp_buffer_;
 
 	fcppt::signal::scoped_connection const
-		s_conn_,
-		s_disconn_,
-		s_data_;
+		disconnect_connection_,
+		data_connection_;
 
 	sanguis::server::timer timer_;
 };
