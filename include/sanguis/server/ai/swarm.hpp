@@ -71,7 +71,6 @@ private:
 	template<
 		typename Function
 	>
-	static
 	void
 	dispatch_swarm_ai(
 		sanguis::server::entities::with_body &,

@@ -15,9 +15,6 @@
 #include <fcppt/try_dynamic_cast.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/static_downcast.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::ai::swarm::swarm(
@@ -140,26 +137,21 @@ sanguis::server::ai::swarm::target_friends() const
 sanguis::server::entities::optional_with_ai_ref const
 sanguis::server::ai::swarm::leader() const
 {
-	if(
-		friends_.empty()
-	)
-		return
-			sanguis::server::entities::optional_with_ai_ref();
-
-	sanguis::server::entities::with_ai_ref const with_ai(
-		*friends_.begin()
+	sanguis::server::ai::swarm::with_ai_set::const_iterator const it(
+		friends_.upper_bound(
+			fcppt::make_ref(
+				this->me()
+			)
+		)
 	);
 
 	return
-		std::less<
-			sanguis::server::entities::with_ai const *
-		>()(
-			with_ai.get_pointer(),
-			&this->me()
-		)
+		it
+		!=
+		friends_.end()
 		?
 			sanguis::server::entities::optional_with_ai_ref(
-				with_ai.get()
+				it->get()
 			)
 		:
 			sanguis::server::entities::optional_with_ai_ref()
@@ -238,14 +230,22 @@ sanguis::server::ai::swarm::dispatch_swarm_ai(
 		with_ai,
 		&_with_body
 	)
-		if(
+	{
+		sanguis::server::ai::swarm const *const other_ai(
 			dynamic_cast<
 				sanguis::server::ai::swarm const *
 			>(
 				&with_ai->ai()
 			)
+		);
+
+		if(
+			other_ai
+			!=
+			this
 		)
 			_function(
 				*with_ai
 			);
+	}
 }

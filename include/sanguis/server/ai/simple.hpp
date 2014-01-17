@@ -84,7 +84,7 @@ protected:
 		sanguis::server::entities::with_body &
 	);
 
-	sanguis::server::entities::with_ai const &
+	sanguis::server::entities::with_ai &
 	me() const;
 private:
 	sanguis::server::entities::with_ai &me_;

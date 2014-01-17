@@ -164,6 +164,8 @@ sanguis::server::ai::simple::update_target(
 )
 {
 	return
+		!this->aggressive()
+		||
 		!target_
 		||
 		(
@@ -212,7 +214,7 @@ sanguis::server::ai::simple::lose_target(
 		sanguis::server::ai::update_result::keep_target;
 }
 
-sanguis::server::entities::with_ai const &
+sanguis::server::entities::with_ai &
 sanguis::server::ai::simple::me() const
 {
 	return
