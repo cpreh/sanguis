@@ -8,19 +8,12 @@
 #include <sanguis/server/entities/projectiles/rocket.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
-#include <sanguis/server/weapons/accuracy.hpp>
-#include <sanguis/server/weapons/aoe.hpp>
-#include <sanguis/server/weapons/base_cooldown.hpp>
-#include <sanguis/server/weapons/cast_point.hpp>
-#include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/delayed_attack.hpp>
-#include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/make_attribute.hpp>
 #include <sanguis/server/weapons/optional_magazine_size.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
-#include <sanguis/server/weapons/range.hpp>
-#include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/rocket_launcher.hpp>
+#include <sanguis/server/weapons/rocket_launcher_parameters.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -30,37 +23,30 @@
 sanguis::server::weapons::rocket_launcher::rocket_launcher(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
-	sanguis::weapon_type const _type,
-	sanguis::server::weapons::accuracy const _accuracy,
-	sanguis::server::weapons::base_cooldown const _base_cooldown,
-	sanguis::server::weapons::cast_point const _cast_point,
-	sanguis::server::weapons::damage const _damage,
-	sanguis::server::weapons::aoe const _aoe,
-	sanguis::server::weapons::magazine_size const _magazine_size,
-	sanguis::server::weapons::reload_time const _reload_time,
-	sanguis::server::weapons::range const _range
+	sanguis::weapon_type const _weapon_type,
+	sanguis::server::weapons::rocket_launcher_parameters const &_parameters
 )
 :
 	sanguis::server::weapons::weapon(
 		_diff_clock,
 		_random_generator,
-		_type,
-		_accuracy,
-		_range,
+		_weapon_type,
+		_parameters.accuracy(),
+		_parameters.range(),
 		sanguis::server::weapons::optional_magazine_size(
-			_magazine_size
+			_parameters.magazine_size()
 		),
-		_base_cooldown,
-		_cast_point,
+		_parameters.base_cooldown(),
+		_parameters.cast_point(),
 		sanguis::server::weapons::optional_reload_time(
-			_reload_time
+			_parameters.reload_time()
 		)
 	),
 	damage_(
-		_damage
+		_parameters.damage()
 	),
 	aoe_(
-		_aoe
+		_parameters.aoe()
 	)
 {
 }

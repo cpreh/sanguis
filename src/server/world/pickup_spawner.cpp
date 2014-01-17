@@ -77,7 +77,7 @@ sanguis::server::world::pickup_spawner::pickup_spawner(
 			),
 			std::make_pair(
 				sanguis::server::pickup_probability(
-					2.f
+					1.f
 				),
 				this->make_spawn_weapon(
 					sanguis::weapon_type(
@@ -117,7 +117,7 @@ sanguis::server::world::pickup_spawner::pickup_spawner(
 			),
 			std::make_pair(
 				sanguis::server::pickup_probability(
-					0.3f
+					0.5f
 				),
 				this->make_spawn_weapon(
 					sanguis::weapon_type(

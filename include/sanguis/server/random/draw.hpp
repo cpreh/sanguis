@@ -7,6 +7,7 @@
 #include <sanguis/server/random/equal_function.hpp>
 #include <sanguis/server/random/less_function.hpp>
 #include <fcppt/algorithm/repeat.hpp>
+#include <fcppt/cast/size.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>
 #include <fcppt/random/distribution/parameters/make_uniform_indices.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
@@ -59,11 +60,19 @@ draw(
 	Result result;
 
 	result.reserve(
-		_draws.get()
+		std::min(
+			fcppt::cast::size<
+				typename
+				Source::size_type
+			>(
+				_draws.get()
+			),
+			_source.size()
+		)
 	);
 
 	fcppt::algorithm::repeat(
-		_draws.get(),
+		result.capacity(),
 		[
 			&_create_function,
 			&_source,

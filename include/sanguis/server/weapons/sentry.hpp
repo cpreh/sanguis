@@ -36,7 +36,7 @@ public:
 		sanguis::server::weapons::cast_point,
 		sanguis::server::weapons::range,
 		sanguis::server::weapons::magazine_size,
-		sanguis::server::weapons::create_function const &sentry_weapon
+		sanguis::server::weapons::create_function const &
 	);
 
 	~sentry();
