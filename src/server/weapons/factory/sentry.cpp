@@ -82,7 +82,7 @@ sanguis::server::weapons::factory::sentry(
 							)
 						),
 						sanguis::server::weapons::damage(
-							0.1f
+							1.f
 							*
 							std::sqrt(
 								difficulty.get()

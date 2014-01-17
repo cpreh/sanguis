@@ -17,6 +17,7 @@ enum class cheat_type
 	perks,
 	rocket_launcher,
 	sentry_pickup,
+	shotgun,
 	grenade_pickup,
 	fcppt_maximum = grenade_pickup
 };

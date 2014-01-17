@@ -161,6 +161,17 @@ sanguis::client::control::action_handler::action_handler(
 		)(
 			this->cheat_connection(
 				_console,
+				sanguis::cheat_type::shotgun,
+				sge::console::callback::name(
+					SGE_FONT_LIT("shotgun")
+				),
+				sge::console::callback::short_description(
+					SGE_FONT_LIT("Spawn a shotgun")
+				)
+			)
+		)(
+			this->cheat_connection(
+				_console,
 				sanguis::cheat_type::rocket_launcher,
 				sge::console::callback::name(
 					SGE_FONT_LIT("rocket_launcher")

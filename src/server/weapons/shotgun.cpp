@@ -9,18 +9,13 @@
 #include <sanguis/server/entities/projectiles/simple_bullet.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
-#include <sanguis/server/weapons/accuracy.hpp>
-#include <sanguis/server/weapons/base_cooldown.hpp>
-#include <sanguis/server/weapons/cast_point.hpp>
-#include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/delayed_attack.hpp>
-#include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/make_attribute.hpp>
 #include <sanguis/server/weapons/optional_magazine_size.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
-#include <sanguis/server/weapons/range.hpp>
-#include <sanguis/server/weapons/reload_time.hpp>
+#include <sanguis/server/weapons/shells.hpp>
 #include <sanguis/server/weapons/shotgun.hpp>
+#include <sanguis/server/weapons/shotgun_parameters.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -33,44 +28,36 @@
 sanguis::server::weapons::shotgun::shotgun(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
-	sanguis::weapon_type const _type,
-	sanguis::server::weapons::accuracy const _accuracy,
-	sanguis::server::weapons::base_cooldown const _base_cooldown,
-	sanguis::server::weapons::cast_point const _cast_point,
-	sanguis::server::weapons::shotgun::spread_radius const _spread_radius,
-	sanguis::server::weapons::shotgun::shells const _shells,
-	sanguis::server::weapons::damage const _damage,
-	sanguis::server::weapons::magazine_size const _magazine_size,
-	sanguis::server::weapons::reload_time const _reload_time,
-	sanguis::server::weapons::range const _range
+	sanguis::weapon_type const _weapon_type,
+	sanguis::server::weapons::shotgun_parameters const &_parameters
 )
 :
 	sanguis::server::weapons::weapon(
 		_diff_clock,
 		_random_generator,
-		_type,
-		_accuracy,
-		_range,
+		_weapon_type,
+		_parameters.accuracy(),
+		_parameters.range(),
 		sanguis::server::weapons::optional_magazine_size(
-			_magazine_size
+			_parameters.magazine_size()
 		),
-		_base_cooldown,
-		_cast_point,
+		_parameters.base_cooldown(),
+		_parameters.cast_point(),
 		sanguis::server::weapons::optional_reload_time(
-			_reload_time
+			_parameters.reload_time()
 		)
 	),
 	random_generator_(
 		_random_generator
 	),
 	spread_radius_(
-		_spread_radius
+		_parameters.spread_radius()
 	),
 	shells_(
-		_shells
+		_parameters.shells()
 	),
 	damage_(
-		_damage
+		_parameters.damage()
 	)
 {
 }
@@ -106,7 +93,7 @@ sanguis::server::weapons::shotgun::do_attack(
 	);
 
 	for(
-		sanguis::server::weapons::shotgun::shells::value_type index(
+		sanguis::server::weapons::shells::value_type index(
 			0u
 		);
 		index < shells_.get();

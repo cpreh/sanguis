@@ -1347,6 +1347,7 @@ set(
 	include/sanguis/server/weapons/magazine_type.hpp
 	include/sanguis/server/weapons/make_attribute.hpp
 	include/sanguis/server/weapons/melee.hpp
+	include/sanguis/server/weapons/modifiers/accuracy.hpp
 	include/sanguis/server/weapons/modifiers/aoe.hpp
 	include/sanguis/server/weapons/modifiers/apply.hpp
 	include/sanguis/server/weapons/modifiers/callback.hpp
@@ -1354,6 +1355,7 @@ set(
 	include/sanguis/server/weapons/modifiers/damage.hpp
 	include/sanguis/server/weapons/modifiers/random_amount.hpp
 	include/sanguis/server/weapons/modifiers/random_increase.hpp
+	include/sanguis/server/weapons/modifiers/spread_radius.hpp
 	include/sanguis/server/weapons/monster_spawner.hpp
 	include/sanguis/server/weapons/optional_magazine_size.hpp
 	include/sanguis/server/weapons/optional_magazine_size_fwd.hpp
@@ -1370,7 +1372,11 @@ set(
 	include/sanguis/server/weapons/rocket_launcher_parameters.hpp
 	include/sanguis/server/weapons/rocket_launcher_parameters_fwd.hpp
 	include/sanguis/server/weapons/sentry.hpp
+	include/sanguis/server/weapons/shells.hpp
 	include/sanguis/server/weapons/shotgun.hpp
+	include/sanguis/server/weapons/shotgun_parameters.hpp
+	include/sanguis/server/weapons/shotgun_parameters_fwd.hpp
+	include/sanguis/server/weapons/spread_radius.hpp
 	include/sanguis/server/weapons/states/backswing.hpp
 	include/sanguis/server/weapons/states/backswing_fwd.hpp
 	include/sanguis/server/weapons/states/castpoint.hpp
@@ -1945,6 +1951,7 @@ set(
 	src/server/weapons/rocket_launcher_parameters.cpp
 	src/server/weapons/sentry.cpp
 	src/server/weapons/shotgun.cpp
+	src/server/weapons/shotgun_parameters.cpp
 	src/server/weapons/states/backswing.cpp
 	src/server/weapons/states/castpoint.cpp
 	src/server/weapons/states/idle.cpp
