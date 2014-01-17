@@ -1255,10 +1255,16 @@ set(
 	include/sanguis/server/player_id_from_net.hpp
 	include/sanguis/server/radius.hpp
 	include/sanguis/server/random/amount.hpp
+	include/sanguis/server/random/create_function.hpp
+	include/sanguis/server/random/create_function_tag.hpp
 	include/sanguis/server/random/distributor_decl.hpp
 	include/sanguis/server/random/distributor_fwd.hpp
 	include/sanguis/server/random/distributor_impl.hpp
 	include/sanguis/server/random/draw.hpp
+	include/sanguis/server/random/equal_function.hpp
+	include/sanguis/server/random/equal_function_tag.hpp
+	include/sanguis/server/random/less_function.hpp
+	include/sanguis/server/random/less_function_tag.hpp
 	include/sanguis/server/random/make_upper_bound.hpp
 	include/sanguis/server/random/map_with_index.hpp
 	include/sanguis/server/random/max.hpp
