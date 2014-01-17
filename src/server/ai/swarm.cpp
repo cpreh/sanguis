@@ -241,6 +241,8 @@ sanguis::server::ai::swarm::dispatch_swarm_ai(
 
 		if(
 			other_ai
+			&&
+			other_ai
 			!=
 			this
 		)
