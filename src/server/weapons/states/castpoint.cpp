@@ -1,5 +1,6 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
+#include <sanguis/server/weapons/attack_result.hpp>
 #include <sanguis/server/weapons/delayed_attack.hpp>
 #include <sanguis/server/weapons/optional_target.hpp>
 #include <sanguis/server/weapons/random_angle.hpp>
@@ -82,7 +83,7 @@ sanguis::server::weapons::states::castpoint::react(
 		return
 			this->discard_event();
 
-	if(
+	switch(
 		this->context<
 			sanguis::server::weapons::weapon
 		>().do_attack(
@@ -103,9 +104,16 @@ sanguis::server::weapons::states::castpoint::react(
 			)
 		)
 	)
+	{
+	case sanguis::server::weapons::attack_result::success:
 		this->context<
 			sanguis::server::weapons::weapon
 		>().use_magazine_item();
+
+		break;
+	case sanguis::server::weapons::attack_result::failure:
+		break;
+	}
 
 	if(
 		cancelled_

@@ -8,21 +8,19 @@
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/projectiles/grenade.hpp>
-#include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/accuracy.hpp>
-#include <sanguis/server/weapons/aoe.hpp>
-#include <sanguis/server/weapons/base_cooldown.hpp>
-#include <sanguis/server/weapons/cast_point.hpp>
-#include <sanguis/server/weapons/damage.hpp>
+#include <sanguis/server/weapons/attack_result.hpp>
 #include <sanguis/server/weapons/delayed_attack.hpp>
 #include <sanguis/server/weapons/grenade.hpp>
+#include <sanguis/server/weapons/grenade_parameters.hpp>
+#include <sanguis/server/weapons/insert_to_attack_result.hpp>
 #include <sanguis/server/weapons/make_attribute.hpp>
-#include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/optional_magazine_size.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 
@@ -30,12 +28,7 @@
 sanguis::server::weapons::grenade::grenade(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
-	sanguis::server::weapons::base_cooldown const _base_cooldown,
-	sanguis::server::weapons::damage const _damage,
-	sanguis::server::weapons::aoe const _aoe,
-	sanguis::server::weapons::cast_point const _cast_point,
-	sanguis::server::weapons::range const _range,
-	sanguis::server::weapons::magazine_size const _magazine_size
+	sanguis::server::weapons::grenade_parameters const &_parameters
 )
 :
 	sanguis::server::weapons::weapon(
@@ -45,21 +38,25 @@ sanguis::server::weapons::grenade::grenade(
 			sanguis::secondary_weapon_type::grenade
 		),
 		sanguis::server::weapons::accuracy(
-			1.f
+			fcppt::literal<
+				sanguis::server::weapons::accuracy::value_type
+			>(
+				1
+			)
 		),
-		_range,
+		_parameters.range(),
 		sanguis::server::weapons::optional_magazine_size(
-			_magazine_size
+			_parameters.magazine_size()
 		),
-		_base_cooldown,
-		_cast_point,
+		_parameters.base_cooldown(),
+		_parameters.cast_point(),
 		sanguis::server::weapons::optional_reload_time()
 	),
 	damage_(
-		_damage
+		_parameters.damage()
 	),
 	aoe_(
-		_aoe
+		_parameters.aoe()
 	)
 {
 }
@@ -68,38 +65,37 @@ sanguis::server::weapons::grenade::~grenade()
 {
 }
 
-bool
+sanguis::server::weapons::attack_result
 sanguis::server::weapons::grenade::do_attack(
 	sanguis::server::weapons::delayed_attack const &_attack
 )
 {
-	sanguis::server::environment::insert_no_result(
-		_attack.environment(),
-		fcppt::make_unique_ptr<
-			sanguis::server::entities::projectiles::grenade
-		>(
-			this->diff_clock(),
-			_attack.environment().load_context(),
-			_attack.team(),
-			sanguis::server::damage::unit(
-				damage_
-			),
-			sanguis::server::radius(
-				aoe_.get()
-			),
-			_attack.target().get(),
-			sanguis::server::direction(
-				_attack.angle().get()
-			)
-		),
-		sanguis::server::entities::insert_parameters(
-			_attack.spawn_point(),
-			_attack.angle()
-		)
-	);
-
 	return
-		true;
+		sanguis::server::weapons::insert_to_attack_result(
+			_attack.environment().insert(
+				fcppt::make_unique_ptr<
+					sanguis::server::entities::projectiles::grenade
+				>(
+					this->diff_clock(),
+					_attack.environment().load_context(),
+					_attack.team(),
+					sanguis::server::damage::unit(
+						damage_
+					),
+					sanguis::server::radius(
+						aoe_.get()
+					),
+					_attack.target().get(),
+					sanguis::server::direction(
+						_attack.angle().get()
+					)
+				),
+				sanguis::server::entities::insert_parameters(
+					_attack.spawn_point(),
+					_attack.angle()
+				)
+			)
+		);
 }
 
 sanguis::string_vector

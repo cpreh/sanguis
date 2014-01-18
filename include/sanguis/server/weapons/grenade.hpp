@@ -5,12 +5,10 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/string_vector.hpp>
 #include <sanguis/server/weapons/aoe.hpp>
-#include <sanguis/server/weapons/base_cooldown.hpp>
-#include <sanguis/server/weapons/cast_point.hpp>
+#include <sanguis/server/weapons/attack_result_fwd.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/delayed_attack_fwd.hpp>
-#include <sanguis/server/weapons/magazine_size.hpp>
-#include <sanguis/server/weapons/range.hpp>
+#include <sanguis/server/weapons/grenade_parameters_fwd.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -33,17 +31,12 @@ public:
 	grenade(
 		sanguis::diff_clock const &,
 		sanguis::random_generator &,
-		sanguis::server::weapons::base_cooldown,
-		sanguis::server::weapons::damage,
-		sanguis::server::weapons::aoe,
-		sanguis::server::weapons::cast_point,
-		sanguis::server::weapons::range,
-		sanguis::server::weapons::magazine_size
+		sanguis::server::weapons::grenade_parameters const &
 	);
 
 	~grenade();
 private:
-	bool
+	sanguis::server::weapons::attack_result
 	do_attack(
 		sanguis::server::weapons::delayed_attack const &
 	)

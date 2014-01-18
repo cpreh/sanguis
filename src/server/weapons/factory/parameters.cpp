@@ -30,23 +30,27 @@ sanguis::server::weapons::factory::parameters::parameters(
 sanguis::diff_clock const &
 sanguis::server::weapons::factory::parameters::diff_clock() const
 {
-	return diff_clock_;
+	return
+		diff_clock_;
 }
 
 sanguis::random_generator &
 sanguis::server::weapons::factory::parameters::random_generator() const
 {
-	return random_generator_;
+	return
+		random_generator_;
 }
 
 sanguis::weapon_type const
 sanguis::server::weapons::factory::parameters::weapon_type() const
 {
-	return weapon_type_;
+	return
+		weapon_type_;
 }
 
 sanguis::server::entities::enemies::difficulty const
 sanguis::server::weapons::factory::parameters::difficulty() const
 {
-	return difficulty_;
+	return
+		difficulty_;
 }

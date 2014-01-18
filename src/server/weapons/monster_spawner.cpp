@@ -14,9 +14,11 @@
 #include <sanguis/server/entities/enemies/special_chance.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/accuracy.hpp>
+#include <sanguis/server/weapons/attack_result.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/delayed_attack.hpp>
+#include <sanguis/server/weapons/insert_to_attack_result.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/monster_spawner.hpp>
 #include <sanguis/server/weapons/optional_magazine_size.hpp>
@@ -75,39 +77,41 @@ sanguis::server::weapons::monster_spawner::~monster_spawner()
 {
 }
 
-bool
+sanguis::server::weapons::attack_result
 sanguis::server::weapons::monster_spawner::do_attack(
 	sanguis::server::weapons::delayed_attack const &_attack
 )
 {
 	return
-		_attack.environment().insert(
-			sanguis::server::entities::enemies::create(
-				this->diff_clock(),
-				this->random_generator(),
-				fcppt::random::distribution::make_basic(
-					fcppt::random::distribution::parameters::make_uniform_enum<
-						sanguis::creator::enemy_type
-					>()
-				)(
-					this->random_generator()
+		sanguis::server::weapons::insert_to_attack_result(
+			_attack.environment().insert(
+				sanguis::server::entities::enemies::create(
+					this->diff_clock(),
+					this->random_generator(),
+					fcppt::random::distribution::make_basic(
+						fcppt::random::distribution::parameters::make_uniform_enum<
+							sanguis::creator::enemy_type
+						>()
+					)(
+						this->random_generator()
+					),
+					_attack.environment().difficulty(),
+					_attack.environment().load_context(),
+					sanguis::server::entities::spawn_owner(
+						sanguis::server::entities::auto_weak_link()
+					),
+					sanguis::server::entities::enemies::special_chance(
+						1.f
+					)
 				),
-				_attack.environment().difficulty(),
-				_attack.environment().load_context(),
-				sanguis::server::entities::spawn_owner(
-					sanguis::server::entities::auto_weak_link()
-				),
-				sanguis::server::entities::enemies::special_chance(
-					1.f
+				sanguis::server::entities::insert_parameters(
+					sanguis::server::center(
+						_attack.target().get()
+					),
+					_attack.angle()
 				)
-			),
-			sanguis::server::entities::insert_parameters(
-				sanguis::server::center(
-					_attack.target().get()
-				),
-				_attack.angle()
 			)
-		).has_value();
+		);
 }
 
 sanguis::string_vector

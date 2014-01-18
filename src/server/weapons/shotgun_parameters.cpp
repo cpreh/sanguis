@@ -141,3 +141,12 @@ sanguis::server::weapons::shotgun_parameters::damage(
 	damage_ =
 		_damage;
 }
+
+void
+sanguis::server::weapons::shotgun_parameters::magazine_size(
+	sanguis::server::weapons::magazine_size const _magazine_size
+)
+{
+	magazine_size_ =
+		_magazine_size;
+}

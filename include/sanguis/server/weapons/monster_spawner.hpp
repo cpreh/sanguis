@@ -4,6 +4,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/string_vector.hpp>
+#include <sanguis/server/weapons/attack_result_fwd.hpp>
 #include <sanguis/server/weapons/delayed_attack_fwd.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -31,7 +32,7 @@ public:
 
 	~monster_spawner();
 private:
-	bool
+	sanguis::server::weapons::attack_result
 	do_attack(
 		sanguis::server::weapons::delayed_attack const &
 	)

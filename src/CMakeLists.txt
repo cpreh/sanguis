@@ -1307,6 +1307,8 @@ set(
 	include/sanguis/server/vector_fwd.hpp
 	include/sanguis/server/weapons/accuracy.hpp
 	include/sanguis/server/weapons/aoe.hpp
+	include/sanguis/server/weapons/attack_result.hpp
+	include/sanguis/server/weapons/attack_result_fwd.hpp
 	include/sanguis/server/weapons/backswing_time.hpp
 	include/sanguis/server/weapons/base_cooldown.hpp
 	include/sanguis/server/weapons/cast_point.hpp
@@ -1339,7 +1341,10 @@ set(
 	include/sanguis/server/weapons/factory/shotgun.hpp
 	include/sanguis/server/weapons/factory/visitor.hpp
 	include/sanguis/server/weapons/grenade.hpp
+	include/sanguis/server/weapons/grenade_parameters.hpp
+	include/sanguis/server/weapons/grenade_parameters_fwd.hpp
 	include/sanguis/server/weapons/ias.hpp
+	include/sanguis/server/weapons/insert_to_attack_result.hpp
 	include/sanguis/server/weapons/irs.hpp
 	include/sanguis/server/weapons/log.hpp
 	include/sanguis/server/weapons/log_location.hpp
@@ -1353,6 +1358,8 @@ set(
 	include/sanguis/server/weapons/modifiers/callback.hpp
 	include/sanguis/server/weapons/modifiers/container.hpp
 	include/sanguis/server/weapons/modifiers/damage.hpp
+	include/sanguis/server/weapons/modifiers/health.hpp
+	include/sanguis/server/weapons/modifiers/magazine_size.hpp
 	include/sanguis/server/weapons/modifiers/random_amount.hpp
 	include/sanguis/server/weapons/modifiers/random_increase.hpp
 	include/sanguis/server/weapons/modifiers/spread_radius.hpp
@@ -1364,6 +1371,8 @@ set(
 	include/sanguis/server/weapons/optional_target.hpp
 	include/sanguis/server/weapons/optional_target_fwd.hpp
 	include/sanguis/server/weapons/pistol.hpp
+	include/sanguis/server/weapons/pistol_parameters.hpp
+	include/sanguis/server/weapons/pistol_parameters_fwd.hpp
 	include/sanguis/server/weapons/player_start_weapon.hpp
 	include/sanguis/server/weapons/random_angle.hpp
 	include/sanguis/server/weapons/range.hpp
@@ -1372,6 +1381,9 @@ set(
 	include/sanguis/server/weapons/rocket_launcher_parameters.hpp
 	include/sanguis/server/weapons/rocket_launcher_parameters_fwd.hpp
 	include/sanguis/server/weapons/sentry.hpp
+	include/sanguis/server/weapons/sentry_parameters.hpp
+	include/sanguis/server/weapons/sentry_parameters_fwd.hpp
+	include/sanguis/server/weapons/sentry_weapon.hpp
 	include/sanguis/server/weapons/shells.hpp
 	include/sanguis/server/weapons/shotgun.hpp
 	include/sanguis/server/weapons/shotgun_parameters.hpp
@@ -1937,6 +1949,8 @@ set(
 	src/server/weapons/factory/shotgun.cpp
 	src/server/weapons/factory/visitor.cpp
 	src/server/weapons/grenade.cpp
+	src/server/weapons/grenade_parameters.cpp
+	src/server/weapons/insert_to_attack_result.cpp
 	src/server/weapons/log.cpp
 	src/server/weapons/log_location.cpp
 	src/server/weapons/make_attribute.cpp
@@ -1945,11 +1959,13 @@ set(
 	src/server/weapons/modifiers/random_increase.cpp
 	src/server/weapons/monster_spawner.cpp
 	src/server/weapons/pistol.cpp
+	src/server/weapons/pistol_parameters.cpp
 	src/server/weapons/player_start_weapon.cpp
 	src/server/weapons/random_angle.cpp
 	src/server/weapons/rocket_launcher.cpp
 	src/server/weapons/rocket_launcher_parameters.cpp
 	src/server/weapons/sentry.cpp
+	src/server/weapons/sentry_parameters.cpp
 	src/server/weapons/shotgun.cpp
 	src/server/weapons/shotgun_parameters.cpp
 	src/server/weapons/states/backswing.cpp

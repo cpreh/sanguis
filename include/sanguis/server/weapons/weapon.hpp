@@ -11,6 +11,7 @@
 #include <sanguis/server/entities/optional_with_weapon_ref.hpp>
 #include <sanguis/server/entities/with_weapon_fwd.hpp>
 #include <sanguis/server/weapons/accuracy.hpp>
+#include <sanguis/server/weapons/attack_result_fwd.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
@@ -103,7 +104,7 @@ public:
 	description() const;
 protected:
 	virtual
-	bool
+	sanguis::server::weapons::attack_result
 	do_attack(
 		sanguis::server::weapons::delayed_attack const &
 	) = 0;

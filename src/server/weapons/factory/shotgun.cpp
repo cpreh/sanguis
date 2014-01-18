@@ -17,6 +17,7 @@
 #include <sanguis/server/weapons/modifiers/apply.hpp>
 #include <sanguis/server/weapons/modifiers/container.hpp>
 #include <sanguis/server/weapons/modifiers/damage.hpp>
+#include <sanguis/server/weapons/modifiers/magazine_size.hpp>
 #include <sanguis/server/weapons/modifiers/spread_radius.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
@@ -46,6 +47,9 @@ sanguis::server::weapons::factory::shotgun(
 						sanguis::server::weapons::shotgun_parameters
 					>,
 					&sanguis::server::weapons::modifiers::spread_radius<
+						sanguis::server::weapons::shotgun_parameters
+					>,
+					&sanguis::server::weapons::modifiers::magazine_size<
 						sanguis::server::weapons::shotgun_parameters
 					>
 				},

@@ -6,6 +6,7 @@
 #include <sanguis/string_vector.hpp>
 #include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/server/weapons/aoe.hpp>
+#include <sanguis/server/weapons/attack_result_fwd.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/delayed_attack_fwd.hpp>
 #include <sanguis/server/weapons/rocket_launcher_parameters_fwd.hpp>
@@ -37,7 +38,7 @@ public:
 
 	~rocket_launcher();
 private:
-	bool
+	sanguis::server::weapons::attack_result
 	do_attack(
 		sanguis::server::weapons::delayed_attack const &
 	)

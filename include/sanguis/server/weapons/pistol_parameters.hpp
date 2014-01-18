@@ -1,14 +1,12 @@
-#ifndef SANGUIS_SERVER_WEAPONS_SHOTGUN_PARAMETERS_HPP_INCLUDED
-#define SANGUIS_SERVER_WEAPONS_SHOTGUN_PARAMETERS_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_WEAPONS_PISTOL_PARAMETERS_HPP_INCLUDED
+#define SANGUIS_SERVER_WEAPONS_PISTOL_PARAMETERS_HPP_INCLUDED
 
 #include <sanguis/server/weapons/accuracy.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/damage.hpp>
+#include <sanguis/server/weapons/pistol_parameters_fwd.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
-#include <sanguis/server/weapons/shells.hpp>
-#include <sanguis/server/weapons/shotgun_parameters_fwd.hpp>
-#include <sanguis/server/weapons/spread_radius.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
 
@@ -20,16 +18,14 @@ namespace server
 namespace weapons
 {
 
-class shotgun_parameters
+class pistol_parameters
 {
 public:
-	shotgun_parameters(
+	pistol_parameters(
 		sanguis::server::weapons::accuracy,
 		sanguis::server::weapons::base_cooldown,
-		sanguis::server::weapons::cast_point,
-		sanguis::server::weapons::spread_radius,
-		sanguis::server::weapons::shells,
 		sanguis::server::weapons::damage,
+		sanguis::server::weapons::cast_point,
 		sanguis::server::weapons::magazine_size,
 		sanguis::server::weapons::reload_time,
 		sanguis::server::weapons::range
@@ -41,17 +37,11 @@ public:
 	sanguis::server::weapons::base_cooldown const
 	base_cooldown() const;
 
-	sanguis::server::weapons::cast_point const
-	cast_point() const;
-
-	sanguis::server::weapons::spread_radius const
-	spread_radius() const;
-
-	sanguis::server::weapons::shells const
-	shells() const;
-
 	sanguis::server::weapons::damage const
 	damage() const;
+
+	sanguis::server::weapons::cast_point const
+	cast_point() const;
 
 	sanguis::server::weapons::magazine_size const
 	magazine_size() const;
@@ -68,11 +58,6 @@ public:
 	);
 
 	void
-	spread_radius(
-		sanguis::server::weapons::spread_radius
-	);
-
-	void
 	damage(
 		sanguis::server::weapons::damage
 	);
@@ -86,13 +71,9 @@ private:
 
 	sanguis::server::weapons::base_cooldown base_cooldown_;
 
-	sanguis::server::weapons::cast_point cast_point_;
-
-	sanguis::server::weapons::spread_radius spread_radius_;
-
-	sanguis::server::weapons::shells shells_;
-
 	sanguis::server::weapons::damage damage_;
+
+	sanguis::server::weapons::cast_point cast_point_;
 
 	sanguis::server::weapons::magazine_size magazine_size_;
 

@@ -5,14 +5,10 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/string_vector.hpp>
 #include <sanguis/weapon_type_fwd.hpp>
-#include <sanguis/server/weapons/accuracy.hpp>
-#include <sanguis/server/weapons/base_cooldown.hpp>
-#include <sanguis/server/weapons/cast_point.hpp>
+#include <sanguis/server/weapons/attack_result_fwd.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/delayed_attack_fwd.hpp>
-#include <sanguis/server/weapons/magazine_size.hpp>
-#include <sanguis/server/weapons/range.hpp>
-#include <sanguis/server/weapons/reload_time.hpp>
+#include <sanguis/server/weapons/pistol_parameters_fwd.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -36,18 +32,12 @@ public:
 		sanguis::diff_clock const &,
 		sanguis::random_generator &,
 		sanguis::weapon_type,
-		sanguis::server::weapons::accuracy,
-		sanguis::server::weapons::base_cooldown,
-		sanguis::server::weapons::damage,
-		sanguis::server::weapons::cast_point,
-		sanguis::server::weapons::magazine_size,
-		sanguis::server::weapons::reload_time,
-		sanguis::server::weapons::range
+		sanguis::server::weapons::pistol_parameters const &
 	);
 
 	~pistol();
 private:
-	bool
+	sanguis::server::weapons::attack_result
 	do_attack(
 		sanguis::server::weapons::delayed_attack const &
 	)

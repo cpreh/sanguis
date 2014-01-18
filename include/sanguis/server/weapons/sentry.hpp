@@ -4,12 +4,11 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/string_vector.hpp>
-#include <sanguis/server/weapons/base_cooldown.hpp>
-#include <sanguis/server/weapons/cast_point.hpp>
-#include <sanguis/server/weapons/create_function.hpp>
+#include <sanguis/server/health.hpp>
+#include <sanguis/server/weapons/attack_result_fwd.hpp>
 #include <sanguis/server/weapons/delayed_attack_fwd.hpp>
-#include <sanguis/server/weapons/magazine_size.hpp>
-#include <sanguis/server/weapons/range.hpp>
+#include <sanguis/server/weapons/sentry_parameters_fwd.hpp>
+#include <sanguis/server/weapons/sentry_weapon.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -32,16 +31,13 @@ public:
 	sentry(
 		sanguis::diff_clock const &,
 		sanguis::random_generator &,
-		sanguis::server::weapons::base_cooldown,
-		sanguis::server::weapons::cast_point,
-		sanguis::server::weapons::range,
-		sanguis::server::weapons::magazine_size,
-		sanguis::server::weapons::create_function const &
+		sanguis::server::weapons::sentry_weapon const &,
+		sanguis::server::weapons::sentry_parameters const &
 	);
 
 	~sentry();
 private:
-	bool
+	sanguis::server::weapons::attack_result
 	do_attack(
 		sanguis::server::weapons::delayed_attack const &
 	)
@@ -51,7 +47,9 @@ private:
 	attributes() const
 	override;
 
-	sanguis::server::weapons::create_function const sentry_weapon_;
+	sanguis::server::health const health_;
+
+	sanguis::server::weapons::sentry_weapon const sentry_weapon_;
 };
 
 }

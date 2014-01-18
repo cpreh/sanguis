@@ -21,6 +21,7 @@
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/pistol.hpp>
+#include <sanguis/server/weapons/pistol_parameters.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -61,32 +62,34 @@ sanguis::server::entities::enemies::factory::zombie00(
 				sanguis::weapon_type(
 					sanguis::primary_weapon_type::pistol
 				),
-				sanguis::server::weapons::accuracy(
-					0.9f
-				),
-				sanguis::server::weapons::base_cooldown(
-					sanguis::duration_second(
-						1.f
+				sanguis::server::weapons::pistol_parameters(
+					sanguis::server::weapons::accuracy(
+						0.9f
+					),
+					sanguis::server::weapons::base_cooldown(
+						sanguis::duration_second(
+							1.f
+						)
+					),
+					sanguis::server::weapons::damage(
+						10.f
+					),
+					sanguis::server::weapons::cast_point(
+						sanguis::duration_second(
+							0
+						)
+					),
+					sanguis::server::weapons::magazine_size(
+						5u
+					),
+					sanguis::server::weapons::reload_time(
+						sanguis::duration_second(
+							5.f
+						)
+					),
+					sanguis::server::weapons::range(
+						1000.f
 					)
-				),
-				sanguis::server::weapons::damage(
-					10.f
-				),
-				sanguis::server::weapons::cast_point(
-					sanguis::duration_second(
-						0
-					)
-				),
-				sanguis::server::weapons::magazine_size(
-					5u
-				),
-				sanguis::server::weapons::reload_time(
-					sanguis::duration_second(
-						5.f
-					)
-				),
-				sanguis::server::weapons::range(
-					1000.f
 				)
 			),
 			sanguis::server::pickup_probability(

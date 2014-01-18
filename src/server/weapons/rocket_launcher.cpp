@@ -8,6 +8,7 @@
 #include <sanguis/server/entities/projectiles/rocket.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/weapons/attack_result.hpp>
 #include <sanguis/server/weapons/delayed_attack.hpp>
 #include <sanguis/server/weapons/make_attribute.hpp>
 #include <sanguis/server/weapons/optional_magazine_size.hpp>
@@ -55,7 +56,7 @@ sanguis::server::weapons::rocket_launcher::~rocket_launcher()
 {
 }
 
-bool
+sanguis::server::weapons::attack_result
 sanguis::server::weapons::rocket_launcher::do_attack(
 	sanguis::server::weapons::delayed_attack const &_attack
 )
@@ -83,7 +84,7 @@ sanguis::server::weapons::rocket_launcher::do_attack(
 	);
 
 	return
-		true;
+		sanguis::server::weapons::attack_result::success;
 }
 
 sanguis::string_vector

@@ -9,17 +9,18 @@
 #include <sanguis/server/entities/projectiles/simple_bullet.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/weapons/attack_result.hpp>
 #include <sanguis/server/weapons/delayed_attack.hpp>
 #include <sanguis/server/weapons/make_attribute.hpp>
 #include <sanguis/server/weapons/optional_magazine_size.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
-#include <sanguis/server/weapons/shells.hpp>
 #include <sanguis/server/weapons/shotgun.hpp>
 #include <sanguis/server/weapons/shotgun_parameters.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/algorithm/repeat.hpp>
 #include <fcppt/random/variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/distribution/parameters/normal.hpp>
@@ -66,7 +67,7 @@ sanguis::server::weapons::shotgun::~shotgun()
 {
 }
 
-bool
+sanguis::server::weapons::attack_result
 sanguis::server::weapons::shotgun::do_attack(
 	sanguis::server::weapons::delayed_attack const &_attack
 )
@@ -92,40 +93,41 @@ sanguis::server::weapons::shotgun::do_attack(
 		)
 	);
 
-	for(
-		sanguis::server::weapons::shells::value_type index(
-			0u
-		);
-		index < shells_.get();
-		++index
-	)
-	{
-		sanguis::server::angle const angle(
-			angle_rng()
-		);
+	fcppt::algorithm::repeat(
+		shells_.get(),
+		[
+			&angle_rng,
+			&_attack,
+			this
+		]()
+		{
+			sanguis::server::angle const angle(
+				angle_rng()
+			);
 
-		sanguis::server::environment::insert_no_result(
-			_attack.environment(),
-			fcppt::make_unique_ptr<
-				sanguis::server::entities::projectiles::simple_bullet
-			>(
-				this->diff_clock(),
-				_attack.environment().load_context(),
-				_attack.team(),
-				damage_,
-				sanguis::server::direction(
-					angle.get()
+			sanguis::server::environment::insert_no_result(
+				_attack.environment(),
+				fcppt::make_unique_ptr<
+					sanguis::server::entities::projectiles::simple_bullet
+				>(
+					this->diff_clock(),
+					_attack.environment().load_context(),
+					_attack.team(),
+					damage_,
+					sanguis::server::direction(
+						angle.get()
+					)
+				),
+				sanguis::server::entities::insert_parameters(
+					_attack.spawn_point(),
+					angle
 				)
-			),
-			sanguis::server::entities::insert_parameters(
-				_attack.spawn_point(),
-				angle
-			)
-		);
-	}
+			);
+		}
+	);
 
 	return
-		true;
+		sanguis::server::weapons::attack_result::success;
 }
 
 sanguis::string_vector

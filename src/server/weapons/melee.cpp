@@ -10,6 +10,7 @@
 #include <sanguis/server/entities/projectiles/melee.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/weapons/accuracy.hpp>
+#include <sanguis/server/weapons/attack_result.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/damage.hpp>
@@ -62,7 +63,7 @@ sanguis::server::weapons::melee::~melee()
 {
 }
 
-bool
+sanguis::server::weapons::attack_result
 sanguis::server::weapons::melee::do_attack(
 	sanguis::server::weapons::delayed_attack const &_attack
 )
@@ -83,7 +84,7 @@ sanguis::server::weapons::melee::do_attack(
 	);
 
 	return
-		true;
+		sanguis::server::weapons::attack_result::success;
 }
 
 sanguis::string_vector
