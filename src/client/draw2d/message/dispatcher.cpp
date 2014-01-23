@@ -1,7 +1,7 @@
 #include <sanguis/entity_id.hpp>
-#include <sanguis/optional_primary_weapon_type.hpp>
+#include <sanguis/magazine_extra.hpp>
+#include <sanguis/magazine_size.hpp>
 #include <sanguis/weapon_description.hpp>
-#include <sanguis/weapon_type.hpp>
 #include <sanguis/creator/name.hpp>
 #include <sanguis/creator/opening_count.hpp>
 #include <sanguis/creator/top_parameters.hpp>
@@ -41,33 +41,7 @@
 #include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/client/draw2d/translate/scalar_to_client.hpp>
 #include <sanguis/client/draw2d/translate/vector_to_client.hpp>
-#include <sanguis/messages/add_aoe_projectile.hpp>
-#include <sanguis/messages/add_aura.hpp>
-#include <sanguis/messages/add_buff.hpp>
-#include <sanguis/messages/add_enemy.hpp>
-#include <sanguis/messages/add_friend.hpp>
-#include <sanguis/messages/add_own_player.hpp>
-#include <sanguis/messages/add_pickup.hpp>
-#include <sanguis/messages/add_player.hpp>
-#include <sanguis/messages/add_projectile.hpp>
-#include <sanguis/messages/add_weapon_pickup.hpp>
-#include <sanguis/messages/base.hpp>
-#include <sanguis/messages/change_weapon.hpp>
-#include <sanguis/messages/change_world.hpp>
-#include <sanguis/messages/die.hpp>
-#include <sanguis/messages/experience.hpp>
-#include <sanguis/messages/give_weapon.hpp>
-#include <sanguis/messages/health.hpp>
-#include <sanguis/messages/level_up.hpp>
-#include <sanguis/messages/max_health.hpp>
-#include <sanguis/messages/move.hpp>
-#include <sanguis/messages/remove.hpp>
-#include <sanguis/messages/remove_buff.hpp>
-#include <sanguis/messages/remove_weapon.hpp>
 #include <sanguis/messages/role_name.hpp>
-#include <sanguis/messages/rotate.hpp>
-#include <sanguis/messages/speed.hpp>
-#include <sanguis/messages/weapon_status.hpp>
 #include <sanguis/messages/adapted_types/aura_type.hpp>
 #include <sanguis/messages/adapted_types/aura_type_vector.hpp>
 #include <sanguis/messages/adapted_types/buff_type.hpp>
@@ -75,8 +49,10 @@
 #include <sanguis/messages/adapted_types/is_primary_weapon.hpp>
 #include <sanguis/messages/adapted_types/level.hpp>
 #include <sanguis/messages/adapted_types/seed.hpp>
+#include <sanguis/messages/adapted_types/weapon_attribute_vector.hpp>
 #include <sanguis/messages/adapted_types/weapon_type.hpp>
 #include <sanguis/messages/adapted_types/world_id.hpp>
+#include <sanguis/messages/convert/from_weapon_attribute_vector.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/aoe.hpp>
 #include <sanguis/messages/roles/aoe_projectile.hpp>
@@ -86,16 +62,44 @@
 #include <sanguis/messages/roles/experience.hpp>
 #include <sanguis/messages/roles/friend.hpp>
 #include <sanguis/messages/roles/health.hpp>
+#include <sanguis/messages/roles/magazine_base_size.hpp>
+#include <sanguis/messages/roles/magazine_extra_size.hpp>
 #include <sanguis/messages/roles/max_health.hpp>
 #include <sanguis/messages/roles/name.hpp>
 #include <sanguis/messages/roles/opening_count.hpp>
 #include <sanguis/messages/roles/primary_weapon.hpp>
 #include <sanguis/messages/roles/projectile.hpp>
 #include <sanguis/messages/roles/speed.hpp>
-#include <sanguis/messages/roles/weapon_description.hpp>
 #include <sanguis/messages/roles/weapon_status.hpp>
-#include <sanguis/messages/serialization/convert_string_vector.hpp>
+#include <sanguis/messages/server/add_aoe_projectile.hpp>
+#include <sanguis/messages/server/add_aura.hpp>
+#include <sanguis/messages/server/add_buff.hpp>
+#include <sanguis/messages/server/add_enemy.hpp>
+#include <sanguis/messages/server/add_friend.hpp>
+#include <sanguis/messages/server/add_own_player.hpp>
+#include <sanguis/messages/server/add_pickup.hpp>
+#include <sanguis/messages/server/add_player.hpp>
+#include <sanguis/messages/server/add_projectile.hpp>
+#include <sanguis/messages/server/add_weapon_pickup.hpp>
+#include <sanguis/messages/server/base.hpp>
+#include <sanguis/messages/server/change_weapon.hpp>
+#include <sanguis/messages/server/change_world.hpp>
+#include <sanguis/messages/server/die.hpp>
+#include <sanguis/messages/server/experience.hpp>
+#include <sanguis/messages/server/give_weapon.hpp>
+#include <sanguis/messages/server/health.hpp>
+#include <sanguis/messages/server/level_up.hpp>
+#include <sanguis/messages/server/max_health.hpp>
+#include <sanguis/messages/server/move.hpp>
+#include <sanguis/messages/server/remove.hpp>
+#include <sanguis/messages/server/remove_buff.hpp>
+#include <sanguis/messages/server/remove_weapon.hpp>
+#include <sanguis/messages/server/rotate.hpp>
+#include <sanguis/messages/server/speed.hpp>
+#include <sanguis/messages/server/weapon_status.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
+#include <alda/serialization/load/optional.hpp>
+#include <alda/serialization/load/static_size.hpp>
 #include <fcppt/dynamic_cast.hpp>
 #include <fcppt/type_name_from_info.hpp>
 #include <fcppt/text.hpp>
@@ -128,7 +132,7 @@ sanguis::client::draw2d::message::dispatcher::~dispatcher()
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::add_aoe_projectile const &_message
+	sanguis::messages::server::add_aoe_projectile const &_message
 )
 {
 	this->configure_new_object(
@@ -152,7 +156,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::add_aura const &_message
+	sanguis::messages::server::add_aura const &_message
 )
 {
 	fcppt::dynamic_cast_<
@@ -172,7 +176,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::add_buff const &_message
+	sanguis::messages::server::add_buff const &_message
 )
 {
 	fcppt::dynamic_cast_<
@@ -192,7 +196,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::add_enemy const &_message
+	sanguis::messages::server::add_enemy const &_message
 )
 {
 	this->configure_new_object(
@@ -225,7 +229,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::add_friend const &_message
+	sanguis::messages::server::add_friend const &_message
 )
 {
 	this->configure_new_object(
@@ -251,7 +255,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::add_own_player const &_message
+	sanguis::messages::server::add_own_player const &_message
 )
 {
 	this->configure_new_object(
@@ -272,34 +276,11 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		),
 		_message
 	);
-
-	sanguis::optional_primary_weapon_type const primary(
-		_message.get<
-			sanguis::messages::roles::primary_weapon
-		>()
-	);
-
-	if(
-		primary
-	)
-		(*this)(
-			sanguis::messages::give_weapon(
-				_message.get<
-					sanguis::messages::roles::entity_id
-				>(),
-				sanguis::weapon_type(
-					*primary
-				),
-				_message.get<
-					sanguis::messages::roles::weapon_description
-				>()
-			)
-		);
 }
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::add_pickup const &_message
+	sanguis::messages::server::add_pickup const &_message
 )
 {
 	this->configure_new_object(
@@ -315,7 +296,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::add_player const &_message
+	sanguis::messages::server::add_player const &_message
 )
 {
 	this->configure_new_object(
@@ -338,7 +319,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::add_projectile const &_message
+	sanguis::messages::server::add_projectile const &_message
 )
 {
 	this->configure_new_object(
@@ -354,7 +335,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::add_weapon_pickup const &_message
+	sanguis::messages::server::add_weapon_pickup const &_message
 )
 {
 	this->configure_new_object(
@@ -370,7 +351,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::change_weapon const &_message
+	sanguis::messages::server::change_weapon const &_message
 )
 {
 	fcppt::dynamic_cast_<
@@ -390,7 +371,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::change_world const &_message
+	sanguis::messages::server::change_world const &_message
 )
 {
 	env_.change_world(
@@ -421,7 +402,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::die const &_message
+	sanguis::messages::server::die const &_message
 )
 {
 	this->entity(
@@ -433,7 +414,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::experience const &_message
+	sanguis::messages::server::experience const &_message
 )
 {
 	env_.experience(
@@ -447,26 +428,36 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::give_weapon const &_message
+	sanguis::messages::server::give_weapon const &_message
 )
 {
 	env_.give_weapon(
 		sanguis::weapon_description(
-			sanguis::messages::serialization::convert_string_vector(
-				_message.get<
-					sanguis::messages::roles::weapon_description
-				>()
-			),
 			_message.get<
 				sanguis::messages::adapted_types::weapon_type
-			>()
+			>(),
+			sanguis::magazine_size(
+				_message.get<
+					sanguis::messages::roles::magazine_base_size
+				>()
+			),
+			sanguis::magazine_extra(
+				_message.get<
+					sanguis::messages::roles::magazine_extra_size
+				>()
+			),
+			sanguis::messages::convert::from_weapon_attribute_vector(
+				_message.get<
+					sanguis::messages::adapted_types::weapon_attribute_vector
+				>()
+			)
 		)
 	);
 }
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::health const &_message
+	sanguis::messages::server::health const &_message
 )
 {
 	fcppt::dynamic_cast_<
@@ -488,7 +479,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::level_up const &_message
+	sanguis::messages::server::level_up const &_message
 )
 {
 	env_.level(
@@ -502,7 +493,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::max_health const &_message
+	sanguis::messages::server::max_health const &_message
 )
 {
 	fcppt::dynamic_cast_<
@@ -524,7 +515,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::move const &_message
+	sanguis::messages::server::move const &_message
 )
 {
 	fcppt::dynamic_cast_<
@@ -552,7 +543,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::remove const &_message
+	sanguis::messages::server::remove const &_message
 )
 {
 	env_.remove(
@@ -564,7 +555,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::remove_buff const &_message
+	sanguis::messages::server::remove_buff const &_message
 )
 {
 	fcppt::dynamic_cast_<
@@ -584,7 +575,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::remove_weapon const &_message
+	sanguis::messages::server::remove_weapon const &_message
 )
 {
 	env_.remove_weapon(
@@ -596,7 +587,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::rotate const &_message
+	sanguis::messages::server::rotate const &_message
 )
 {
 	fcppt::dynamic_cast_<
@@ -616,7 +607,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::speed const &_message
+	sanguis::messages::server::speed const &_message
 )
 {
 	fcppt::dynamic_cast_<
@@ -640,7 +631,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::weapon_status const &_message
+	sanguis::messages::server::weapon_status const &_message
 )
 {
 	fcppt::dynamic_cast_<
@@ -660,7 +651,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::process_default_msg(
-	sanguis::messages::base const &_message
+	sanguis::messages::server::base const &_message
 )
 {
 	FCPPT_LOG_WARNING(

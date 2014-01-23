@@ -1,24 +1,21 @@
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/weapon_type.hpp>
-#include <sanguis/messages/base.hpp>
-#include <sanguis/messages/create.hpp>
-#include <sanguis/messages/pause.hpp>
-#include <sanguis/messages/player_attack_dest.hpp>
-#include <sanguis/messages/player_change_world.hpp>
-#include <sanguis/messages/player_direction.hpp>
-#include <sanguis/messages/player_drop_or_pickup_weapon.hpp>
-#include <sanguis/messages/player_pause.hpp>
-#include <sanguis/messages/player_position.hpp>
-#include <sanguis/messages/player_reload.hpp>
-#include <sanguis/messages/player_start_shooting.hpp>
-#include <sanguis/messages/player_stop_shooting.hpp>
-#include <sanguis/messages/player_unpause.hpp>
 #include <sanguis/messages/adapted_types/is_primary_weapon.hpp>
-#include <sanguis/messages/call/object.hpp>
+#include <sanguis/messages/client/attack_dest.hpp>
+#include <sanguis/messages/client/base.hpp>
+#include <sanguis/messages/client/change_world.hpp>
+#include <sanguis/messages/client/direction.hpp>
+#include <sanguis/messages/client/drop_or_pickup_weapon.hpp>
+#include <sanguis/messages/client/pause.hpp>
+#include <sanguis/messages/client/reload.hpp>
+#include <sanguis/messages/client/start_shooting.hpp>
+#include <sanguis/messages/client/stop_shooting.hpp>
+#include <sanguis/messages/client/unpause.hpp>
+#include <sanguis/messages/client/call/object.hpp>
 #include <sanguis/messages/roles/attack_dest.hpp>
-#include <sanguis/messages/roles/center.hpp>
 #include <sanguis/messages/roles/direction.hpp>
-#include <sanguis/server/center.hpp>
+#include <sanguis/messages/server/create.hpp>
+#include <sanguis/messages/server/pause.hpp>
 #include <sanguis/server/machine.hpp>
 #include <sanguis/server/message_functor.hpp>
 #include <sanguis/server/player_id.hpp>
@@ -70,7 +67,7 @@ sanguis::server::states::unpaused::~unpaused()
 boost::statechart::result
 sanguis::server::states::unpaused::handle_default_msg(
 	sanguis::server::player_id,
-	sanguis::messages::base const &
+	sanguis::messages::client::base const &
 )
 {
 	return
@@ -80,7 +77,7 @@ sanguis::server::states::unpaused::handle_default_msg(
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
 	sanguis::server::player_id const _id,
-	sanguis::messages::player_attack_dest const &_message
+	sanguis::messages::client::attack_dest const &_message
 )
 {
 	this->context<
@@ -99,7 +96,7 @@ sanguis::server::states::unpaused::operator()(
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
 	sanguis::server::player_id const _id,
-	sanguis::messages::player_change_world const &
+	sanguis::messages::client::change_world const &
 )
 {
 	this->context<
@@ -115,7 +112,7 @@ sanguis::server::states::unpaused::operator()(
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
 	sanguis::server::player_id const _id,
-	sanguis::messages::player_direction const &_message
+	sanguis::messages::client::direction const &_message
 )
 {
 	this->context<
@@ -136,7 +133,7 @@ sanguis::server::states::unpaused::operator()(
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
 	sanguis::server::player_id const _id,
-	sanguis::messages::player_drop_or_pickup_weapon const &_message
+	sanguis::messages::client::drop_or_pickup_weapon const &_message
 )
 {
 	this->context<
@@ -155,7 +152,7 @@ sanguis::server::states::unpaused::operator()(
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
 	sanguis::server::player_id,
-	sanguis::messages::player_pause const &
+	sanguis::messages::client::pause const &
 )
 {
 	if(
@@ -169,8 +166,8 @@ sanguis::server::states::unpaused::operator()(
 	this->context<
 		sanguis::server::machine
 	>().send_to_all(
-		*sanguis::messages::create(
-			sanguis::messages::pause()
+		*sanguis::messages::server::create(
+			sanguis::messages::server::pause()
 		)
 	);
 
@@ -183,28 +180,7 @@ sanguis::server::states::unpaused::operator()(
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
 	sanguis::server::player_id const _id,
-	sanguis::messages::player_position const &_message
-)
-{
-	this->context<
-		sanguis::server::states::running
-	>().global_context().player_position(
-		_id,
-		sanguis::server::center(
-			_message.get<
-				sanguis::messages::roles::center
-			>()
-		)
-	);
-
-	return
-		this->discard_event();
-}
-
-boost::statechart::result
-sanguis::server::states::unpaused::operator()(
-	sanguis::server::player_id const _id,
-	sanguis::messages::player_reload const &_message
+	sanguis::messages::client::reload const &_message
 )
 {
 	this->context<
@@ -223,7 +199,7 @@ sanguis::server::states::unpaused::operator()(
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
 	sanguis::server::player_id const _id,
-	sanguis::messages::player_start_shooting const &_message
+	sanguis::messages::client::start_shooting const &_message
 )
 {
 	this->context<
@@ -243,7 +219,7 @@ sanguis::server::states::unpaused::operator()(
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
 	sanguis::server::player_id const _id,
-	sanguis::messages::player_stop_shooting const &_message
+	sanguis::messages::client::stop_shooting const &_message
 )
 {
 	this->context<
@@ -263,7 +239,7 @@ sanguis::server::states::unpaused::operator()(
 boost::statechart::result
 sanguis::server::states::unpaused::operator()(
 	sanguis::server::player_id,
-	sanguis::messages::player_unpause const &
+	sanguis::messages::client::unpause const &
 )
 {
 	FCPPT_LOG_WARNING(
@@ -316,18 +292,17 @@ sanguis::server::states::unpaused::react(
 		_message.id()
 	);
 
-	static sanguis::messages::call::object<
-		boost::mpl::vector10<
-			sanguis::messages::player_attack_dest,
-			sanguis::messages::player_change_world,
-			sanguis::messages::player_direction,
-			sanguis::messages::player_drop_or_pickup_weapon,
-			sanguis::messages::player_pause,
-			sanguis::messages::player_position,
-			sanguis::messages::player_reload,
-			sanguis::messages::player_start_shooting,
-			sanguis::messages::player_stop_shooting,
-			sanguis::messages::player_unpause
+	static sanguis::messages::client::call::object<
+		boost::mpl::vector9<
+			sanguis::messages::client::attack_dest,
+			sanguis::messages::client::change_world,
+			sanguis::messages::client::direction,
+			sanguis::messages::client::drop_or_pickup_weapon,
+			sanguis::messages::client::pause,
+			sanguis::messages::client::reload,
+			sanguis::messages::client::start_shooting,
+			sanguis::messages::client::stop_shooting,
+			sanguis::messages::client::unpause
 		>,
 		functor_type
 	> dispatcher;

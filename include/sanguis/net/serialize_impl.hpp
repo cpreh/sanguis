@@ -2,9 +2,9 @@
 #define SANGUIS_NET_SERIALIZE_IMPL_HPP_INCLUDED
 
 #include <sanguis/net/message_header.hpp>
-#include <sanguis/messages/base.hpp>
-#include <sanguis/messages/serialization/serialize.hpp>
+#include <sanguis/net/serialize_message_function.hpp>
 #include <alda/endianness.hpp>
+#include <alda/message/base_decl.hpp>
 #include <alda/net/value_type.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/io/write.hpp>
@@ -20,17 +20,25 @@ namespace net
 {
 
 template<
+	typename AldaType,
 	typename Streambuf
 >
 bool
 serialize_impl(
-	sanguis::messages::base const &_message,
-	Streambuf &_streambuf
+	alda::message::base<
+		AldaType
+	> const &_message,
+	Streambuf &_streambuf,
+	sanguis::net::serialize_message_function<
+		AldaType
+	> const &_serialize_message
 )
 {
-	typedef std::basic_ostream<
+	typedef
+	std::basic_ostream<
 		alda::net::value_type
-	> stream_type;
+	>
+	stream_type;
 
 	stream_type stream(
 		&_streambuf
@@ -54,7 +62,7 @@ serialize_impl(
 		alda::endianness()
 	);
 
-	sanguis::messages::serialization::serialize(
+	_serialize_message(
 		stream,
 		_message
 	);

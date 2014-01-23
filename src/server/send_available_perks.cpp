@@ -1,8 +1,8 @@
 #include <sanguis/optional_perk_type.hpp>
-#include <sanguis/messages/available_perks.hpp>
-#include <sanguis/messages/create.hpp>
-#include <sanguis/messages/perk_tree_node.hpp>
-#include <sanguis/messages/perk_tree_node_list.hpp>
+#include <sanguis/messages/server/available_perks.hpp>
+#include <sanguis/messages/server/create.hpp>
+#include <sanguis/messages/server/types/perk_tree_node.hpp>
+#include <sanguis/messages/server/types/perk_tree_node_vector.hpp>
 #include <sanguis/server/send_available_perks.hpp>
 #include <sanguis/server/unicast_callback.hpp>
 #include <sanguis/server/entities/player.hpp>
@@ -26,7 +26,7 @@ sanguis::server::send_available_perks(
 		sanguis::server::perks::tree::object const
 	> traversal;
 
-	sanguis::messages::perk_tree_node_list nodes;
+	sanguis::messages::server::types::perk_tree_node_vector nodes;
 
 	for(
 		auto const &element
@@ -46,7 +46,7 @@ sanguis::server::send_available_perks(
 			continue;
 
 		nodes.push_back(
-			sanguis::messages::perk_tree_node(
+			sanguis::messages::server::types::perk_tree_node(
 				info->type(),
 				info->level().get(),
 				info->required_player_level().get(),
@@ -65,9 +65,8 @@ sanguis::server::send_available_perks(
 
 	_send(
 		_player.player_id(),
-		*sanguis::messages::create(
-			sanguis::messages::available_perks(
-				_player.id(),
+		*sanguis::messages::server::create(
+			sanguis::messages::server::available_perks(
 				nodes,
 				_player.skill_points().get()
 			)

@@ -2,26 +2,26 @@
 #define SANGUIS_SERVER_WEAPONS_WEAPON_HPP_INCLUDED
 
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/magazine_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
-#include <sanguis/string_vector.hpp>
+#include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/weapon_status_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/optional_with_weapon_ref.hpp>
 #include <sanguis/server/entities/with_weapon_fwd.hpp>
-#include <sanguis/server/weapons/accuracy.hpp>
 #include <sanguis/server/weapons/attack_result_fwd.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/delayed_attack_fwd.hpp>
-#include <sanguis/server/weapons/magazine_type.hpp>
-#include <sanguis/server/weapons/optional_magazine_size.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/target_fwd.hpp>
 #include <sanguis/server/weapons/weapon_fwd.hpp>
+#include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
+#include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
 #include <sanguis/server/weapons/states/backswing_fwd.hpp>
 #include <sanguis/server/weapons/states/castpoint_fwd.hpp>
 #include <sanguis/server/weapons/states/idle_fwd.hpp>
@@ -55,9 +55,9 @@ protected:
 		sanguis::diff_clock const &,
 		sanguis::random_generator &,
 		sanguis::weapon_type,
-		sanguis::server::weapons::accuracy,
+		sanguis::server::weapons::attributes::optional_accuracy,
 		sanguis::server::weapons::range,
-		sanguis::server::weapons::optional_magazine_size,
+		sanguis::server::weapons::attributes::optional_magazine_size,
 		sanguis::server::weapons::base_cooldown,
 		sanguis::server::weapons::cast_point,
 		sanguis::server::weapons::optional_reload_time
@@ -86,7 +86,7 @@ public:
 	sanguis::weapon_type
 	type() const;
 
-	sanguis::server::weapons::optional_magazine_size const
+	sanguis::server::weapons::attributes::optional_magazine_size const
 	magazine_size() const;
 
 	bool
@@ -124,7 +124,7 @@ private:
 	);
 
 	virtual
-	sanguis::string_vector
+	sanguis::weapon_attribute_vector
 	attributes() const = 0;
 
 	friend class sanguis::server::weapons::states::idle;
@@ -141,7 +141,7 @@ private:
 	bool
 	magazine_empty() const;
 
-	sanguis::server::weapons::accuracy const
+	sanguis::server::weapons::attributes::optional_accuracy const
 	accuracy() const;
 
 	sanguis::server::weapons::cast_point const
@@ -159,13 +159,13 @@ private:
 
 	sanguis::weapon_type const type_;
 
-	sanguis::server::weapons::accuracy const accuracy_;
+	sanguis::server::weapons::attributes::optional_accuracy const accuracy_;
 
 	sanguis::server::weapons::range const range_;
 
-	sanguis::server::weapons::magazine_type magazine_used_;
+	sanguis::magazine_type magazine_used_;
 
-	sanguis::server::weapons::optional_magazine_size const magazine_size_;
+	sanguis::server::weapons::attributes::optional_magazine_size const magazine_size_;
 
 	sanguis::server::weapons::cast_point const cast_point_;
 

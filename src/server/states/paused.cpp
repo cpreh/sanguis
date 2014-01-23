@@ -10,12 +10,12 @@
 #include <sanguis/server/states/paused.hpp>
 #include <sanguis/server/states/running.hpp>
 #include <sanguis/server/states/unpaused.hpp>
-#include <sanguis/messages/base.hpp>
-#include <sanguis/messages/create.hpp>
-#include <sanguis/messages/player_pause.hpp>
-#include <sanguis/messages/player_unpause.hpp>
-#include <sanguis/messages/unpause.hpp>
-#include <sanguis/messages/call/object.hpp>
+#include <sanguis/messages/client/base.hpp>
+#include <sanguis/messages/client/pause.hpp>
+#include <sanguis/messages/client/unpause.hpp>
+#include <sanguis/messages/client/call/object.hpp>
+#include <sanguis/messages/server/create.hpp>
+#include <sanguis/messages/server/unpause.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>
@@ -75,10 +75,10 @@ sanguis::server::states::paused::react(
 		_message.id()
 	);
 
-	static sanguis::messages::call::object<
+	static sanguis::messages::client::call::object<
 		boost::mpl::vector2<
-			sanguis::messages::player_pause,
-			sanguis::messages::player_unpause
+			sanguis::messages::client::pause,
+			sanguis::messages::client::unpause
 		>,
 		functor_type
 	> dispatcher;
@@ -99,14 +99,14 @@ sanguis::server::states::paused::react(
 boost::statechart::result
 sanguis::server::states::paused::operator()(
 	sanguis::server::player_id,
-	sanguis::messages::player_unpause const &
+	sanguis::messages::client::unpause const &
 )
 {
 	this->context<
 		sanguis::server::machine
 	>().send_to_all(
-		*sanguis::messages::create(
-			sanguis::messages::unpause()
+		*sanguis::messages::server::create(
+			sanguis::messages::server::unpause()
 		)
 	);
 
@@ -119,7 +119,7 @@ sanguis::server::states::paused::operator()(
 boost::statechart::result
 sanguis::server::states::paused::operator()(
 	sanguis::server::player_id,
-	sanguis::messages::player_pause const &
+	sanguis::messages::client::pause const &
 )
 {
 	FCPPT_LOG_WARNING(
@@ -135,7 +135,7 @@ sanguis::server::states::paused::operator()(
 boost::statechart::result
 sanguis::server::states::paused::handle_default_msg(
 	sanguis::server::player_id,
-	sanguis::messages::base const &
+	sanguis::messages::client::base const &
 )
 {
 	return

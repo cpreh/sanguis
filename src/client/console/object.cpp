@@ -1,9 +1,8 @@
 #include <sanguis/client/send_callback.hpp>
 #include <sanguis/client/console/object.hpp>
-#include <sanguis/messages/base.hpp>
-#include <sanguis/messages/console_command.hpp>
-#include <sanguis/messages/create.hpp>
-#include <sanguis/messages/serialization/convert_string_vector.hpp>
+#include <sanguis/messages/client/console_command.hpp>
+#include <sanguis/messages/client/create.hpp>
+#include <sanguis/messages/convert/to_string_vector.hpp>
 #include <sanguis/from_console_arg_list.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/gfx.hpp>
@@ -109,9 +108,9 @@ sanguis::client::console::object::server_callback(
 )
 {
 	send_(
-		*sanguis::messages::create(
-			sanguis::messages::console_command(
-				sanguis::messages::serialization::convert_string_vector(
+		*sanguis::messages::client::create(
+			sanguis::messages::client::console_command(
+				sanguis::messages::convert::to_string_vector(
 					sanguis::from_console_arg_list(
 						_args
 					)

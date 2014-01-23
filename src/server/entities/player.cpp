@@ -6,14 +6,12 @@
 #include <sanguis/weapon_type_to_is_primary.hpp>
 #include <sanguis/collision/world/group.hpp>
 #include <sanguis/collision/world/group_field.hpp>
-#include <sanguis/messages/add_player.hpp>
-#include <sanguis/messages/add_own_player.hpp>
-#include <sanguis/messages/create.hpp>
-#include <sanguis/messages/unique_ptr.hpp>
-#include <sanguis/messages/serialization/convert_string_vector.hpp>
+#include <sanguis/messages/server/add_player.hpp>
+#include <sanguis/messages/server/add_own_player.hpp>
+#include <sanguis/messages/server/create.hpp>
+#include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/add_sight_callback.hpp>
 #include <sanguis/server/add_weapon_pickup_callback.hpp>
-#include <sanguis/server/center.hpp>
 #include <sanguis/server/closest_entity.hpp>
 #include <sanguis/server/dim.hpp>
 #include <sanguis/server/direction.hpp>
@@ -227,7 +225,6 @@ sanguis::server::entities::player::add_exp(
 
 	this->environment()->exp_changed(
 		this->player_id(),
-		this->id(),
 		exp_
 	);
 
@@ -258,12 +255,11 @@ sanguis::server::entities::player::add_exp(
 
 	this->environment()->level_changed(
 		this->player_id(),
-		this->id(),
 		level_
 	);
 }
 
-sanguis::server::string const
+sanguis::server::string const &
 sanguis::server::entities::player::name() const
 {
 	return name_;
@@ -375,28 +371,6 @@ sanguis::server::entities::player::drop_or_pickup_weapon(
 			sanguis::server::entities::insert_parameters_center(
 				this->center()
 			)
-		);
-}
-
-void
-sanguis::server::entities::player::center_from_client(
-	sanguis::server::center const &_center
-)
-{
-	// TODO: Make sure the new place is safe!
-	if(
-		fcppt::math::vector::length_square(
-			(
-				_center
-				-
-				this->center()
-			).get()
-		)
-		<
-		5.f
-	)
-		this->center(
-			_center
 		);
 }
 
@@ -545,7 +519,7 @@ sanguis::server::entities::player::update()
 	this->update_speed();
 }
 
-sanguis::messages::unique_ptr
+sanguis::messages::server::unique_ptr
 sanguis::server::entities::player::add_message(
 	sanguis::server::player_id const _receiver
 ) const
@@ -555,39 +529,37 @@ sanguis::server::entities::player::add_message(
 		==
 		this->player_id()
 		?
-			sanguis::messages::create(
-				sanguis::messages::add_own_player(
-					this->id(),
-					this->center().get(),
-					this->angle().get(),
-					this->speed().get(),
-					this->current_health().get(),
-					this->max_health().get(),
-					this->primary_weapon_type(),
-					this->weapon_status(),
-					this->aura_types(),
-					this->buff_types(),
-					sanguis::messages::serialization::convert_string_vector(
-						this->primary_weapon_text()
-					)
-				)
-			)
+			this->add_message_impl<
+				sanguis::messages::server::add_own_player
+			>()
 		:
-			sanguis::messages::create(
-				sanguis::messages::add_player(
-					this->id(),
-					this->center().get(),
-					this->angle().get(),
-					this->speed().get(),
-					this->current_health().get(),
-					this->max_health().get(),
-					this->primary_weapon_type(),
-					this->weapon_status(),
-					this->aura_types(),
-					this->buff_types()
-				)
-			)
+			this->add_message_impl<
+				sanguis::messages::server::add_player
+			>()
 		;
+}
+
+template<
+	typename Message
+>
+sanguis::messages::server::unique_ptr
+sanguis::server::entities::player::add_message_impl() const
+{
+	return
+		sanguis::messages::server::create(
+			Message(
+				this->id(),
+				this->center().get(),
+				this->angle().get(),
+				this->speed().get(),
+				this->current_health().get(),
+				this->max_health().get(),
+				this->primary_weapon_type(),
+				this->weapon_status(),
+				this->aura_types(),
+				this->buff_types()
+			)
+		);
 }
 
 void
@@ -597,7 +569,6 @@ sanguis::server::entities::player::on_new_weapon(
 {
 	this->environment()->got_weapon(
 		this->player_id(),
-		this->id(),
 		_weapon.description()
 	);
 }
@@ -609,7 +580,6 @@ sanguis::server::entities::player::on_drop_weapon(
 {
 	this->environment()->remove_weapon(
 		this->player_id(),
-		this->id(),
 		_is_primary
 	);
 }

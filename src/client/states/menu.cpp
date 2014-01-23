@@ -10,11 +10,11 @@
 #include <sanguis/client/states/log_location.hpp>
 #include <sanguis/client/states/menu.hpp>
 #include <sanguis/client/states/waiting_for_player.hpp>
-#include <sanguis/messages/base.hpp>
-#include <sanguis/messages/connect_state.hpp>
-#include <sanguis/messages/create.hpp>
-#include <sanguis/messages/client_info.hpp>
-#include <sanguis/messages/call/object.hpp>
+#include <sanguis/messages/client/create.hpp>
+#include <sanguis/messages/client/info.hpp>
+#include <sanguis/messages/server/base.hpp>
+#include <sanguis/messages/server/connect_state.hpp>
+#include <sanguis/messages/server/call/object.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/text.hpp>
@@ -138,9 +138,9 @@ sanguis::client::states::menu::react(
 	sanguis::client::events::message const &_message
 )
 {
-	static sanguis::messages::call::object<
+	static sanguis::messages::server::call::object<
 		boost::mpl::vector1<
-			sanguis::messages::connect_state
+			sanguis::messages::server::connect_state
 		>,
 		menu
 	> dispatcher;
@@ -171,8 +171,8 @@ sanguis::client::states::menu::react(
 	this->context<
 		sanguis::client::machine
 	>().send(
-		*sanguis::messages::create(
-			sanguis::messages::client_info(
+		*sanguis::messages::client::create(
+			sanguis::messages::client::info(
 				sge::charconv::fcppt_string_to_utf8(
 					FCPPT_TEXT("player1") // TODO!
 				)
@@ -201,7 +201,7 @@ sanguis::client::states::menu::react(
 
 boost::statechart::result
 sanguis::client::states::menu::operator()(
-	sanguis::messages::connect_state const &_state // TODO: do we need this?
+	sanguis::messages::server::connect_state const &_state // TODO: do we need this?
 )
 {
 	FCPPT_LOG_DEBUG(
@@ -218,7 +218,7 @@ sanguis::client::states::menu::operator()(
 
 boost::statechart::result
 sanguis::client::states::menu::handle_default_msg(
-	sanguis::messages::base const &
+	sanguis::messages::server::base const &
 )
 {
 	return

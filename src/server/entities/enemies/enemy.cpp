@@ -3,9 +3,9 @@
 #include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/load/enemy_name.hpp>
-#include <sanguis/messages/add_enemy.hpp>
-#include <sanguis/messages/create.hpp>
-#include <sanguis/messages/unique_ptr.hpp>
+#include <sanguis/messages/server/add_enemy.hpp>
+#include <sanguis/messages/server/create.hpp>
+#include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/dim.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/exp.hpp>
@@ -149,14 +149,14 @@ sanguis::server::entities::enemies::enemy::update()
 	sanguis::server::entities::with_velocity::update();
 }
 
-sanguis::messages::unique_ptr
+sanguis::messages::server::unique_ptr
 sanguis::server::entities::enemies::enemy::add_message(
 	sanguis::server::player_id const
 ) const
 {
 	return
-		sanguis::messages::create(
-			sanguis::messages::add_enemy(
+		sanguis::messages::server::create(
+			sanguis::messages::server::add_enemy(
 				this->id(),
 				this->center().get(),
 				this->angle().get(),

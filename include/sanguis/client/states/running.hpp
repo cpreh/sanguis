@@ -14,12 +14,12 @@
 #include <sanguis/client/events/render_fwd.hpp>
 #include <sanguis/client/events/tick_fwd.hpp>
 #include <sanguis/client/states/ingame_fwd.hpp>
-#include <sanguis/messages/add_console_command_fwd.hpp>
-#include <sanguis/messages/base_fwd.hpp>
-#include <sanguis/messages/console_print_fwd.hpp>
-#include <sanguis/messages/level_up_fwd.hpp>
-#include <sanguis/messages/pause_fwd.hpp>
-#include <sanguis/messages/unpause_fwd.hpp>
+#include <sanguis/messages/server/add_console_command_fwd.hpp>
+#include <sanguis/messages/server/base_fwd.hpp>
+#include <sanguis/messages/server/console_print_fwd.hpp>
+#include <sanguis/messages/server/level_up_fwd.hpp>
+#include <sanguis/messages/server/pause_fwd.hpp>
+#include <sanguis/messages/server/unpause_fwd.hpp>
 #include <sge/input/cursor/activatable_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
@@ -97,27 +97,27 @@ public:
 
 	boost::statechart::result
 	operator()(
-		sanguis::messages::level_up const &
+		sanguis::messages::server::level_up const &
 	);
 
 	boost::statechart::result
 	operator()(
-		sanguis::messages::console_print const &
+		sanguis::messages::server::console_print const &
 	);
 
 	boost::statechart::result
 	operator()(
-		sanguis::messages::add_console_command const &
+		sanguis::messages::server::add_console_command const &
 	);
 
 	boost::statechart::result
 	operator()(
-		sanguis::messages::pause const &
+		sanguis::messages::server::pause const &
 	);
 
 	boost::statechart::result
 	operator()(
-		sanguis::messages::unpause const &
+		sanguis::messages::server::unpause const &
 	);
 
 	sanguis::client::control::environment &
@@ -136,7 +136,7 @@ private:
 
 	boost::statechart::result
 	handle_default_msg(
-		sanguis::messages::base const &
+		sanguis::messages::server::base const &
 	);
 
 	fcppt::scoped_ptr<

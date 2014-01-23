@@ -10,9 +10,11 @@
 namespace sanguis
 {
 
-typedef std::vector<
+typedef
+std::vector<
 	fcppt::string
-> string_vector;
+>
+string_vector;
 
 }
 

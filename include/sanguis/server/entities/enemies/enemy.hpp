@@ -3,7 +3,7 @@
 
 #include <sanguis/collision/world/group_field_fwd.hpp>
 #include <sanguis/creator/enemy_type.hpp>
-#include <sanguis/messages/unique_ptr.hpp>
+#include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/messages/types/string.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/pickup_probability.hpp>
@@ -62,7 +62,7 @@ protected:
 	update()
 	override;
 private:
-	sanguis::messages::unique_ptr
+	sanguis::messages::server::unique_ptr
 	add_message(
 		sanguis::server::player_id
 	) const

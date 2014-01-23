@@ -3,9 +3,8 @@
 
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/events/message_fwd.hpp>
-#include <sanguis/messages/unique_ptr.hpp>
-#include <sanguis/messages/shared_ptr.hpp>
-#include <fcppt/nonassignable.hpp>
+#include <sanguis/messages/client/unique_ptr.hpp>
+#include <sanguis/messages/client/shared_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/event.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -24,26 +23,23 @@ class message
 		message
 	>
 {
-	FCPPT_NONASSIGNABLE(
-		message
-	);
 public:
 	message(
-		sanguis::messages::unique_ptr &&,
+		sanguis::messages::client::unique_ptr &&,
 		sanguis::server::player_id
 	);
 
 	~message();
 
-	sanguis::messages::shared_ptr const
+	sanguis::messages::client::shared_ptr
 	get() const;
 
 	sanguis::server::player_id const
 	id() const;
 private:
-	sanguis::messages::shared_ptr const message_;
+	sanguis::messages::client::shared_ptr message_;
 
-	sanguis::server::player_id const id_;
+	sanguis::server::player_id id_;
 };
 
 }

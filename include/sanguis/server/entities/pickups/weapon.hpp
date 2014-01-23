@@ -4,7 +4,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/collision/world/group_field_fwd.hpp>
-#include <sanguis/messages/unique_ptr.hpp>
+#include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/entities/with_body.hpp>
@@ -66,7 +66,7 @@ private:
 	collision_groups() const
 	override;
 
-	sanguis::messages::unique_ptr
+	sanguis::messages::server::unique_ptr
 	add_message(
 		sanguis::server::player_id
 	) const

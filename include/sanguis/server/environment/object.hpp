@@ -82,7 +82,6 @@ public:
 	void
 	got_weapon(
 		sanguis::server::player_id,
-		sanguis::entity_id,
 		sanguis::weapon_description const &
 	) = 0;
 
@@ -90,7 +89,6 @@ public:
 	void
 	remove_weapon(
 		sanguis::server::player_id,
-		sanguis::entity_id,
 		sanguis::is_primary_weapon
 	) = 0;
 
@@ -140,7 +138,6 @@ public:
 	void
 	exp_changed(
 		sanguis::server::player_id,
-		sanguis::entity_id,
 		sanguis::server::exp
 	) = 0;
 
@@ -148,7 +145,6 @@ public:
 	void
 	level_changed(
 		sanguis::server::player_id,
-		sanguis::entity_id,
 		sanguis::server::level
 	) = 0;
 

@@ -95,12 +95,13 @@ sanguis::client::draw2d::scene::hud::weapon_description(
 	sanguis::weapon_description const &_description
 )
 {
+/*
 	this->weapon_text(
 		sanguis::weapon_type_to_is_primary(
 			_description.weapon_type()
 		)
 	) =
-		_description.text();
+		_description.text();*/
 
 	this->make_weapon_text();
 }

@@ -3,16 +3,16 @@
 
 #include <sanguis/entity_id.hpp>
 #include <sanguis/client/draw2d/message/dispatcher.hpp>
-#include <sanguis/messages/change_weapon.hpp>
-#include <sanguis/messages/move.hpp>
-#include <sanguis/messages/rotate.hpp>
-#include <sanguis/messages/speed.hpp>
-#include <sanguis/messages/weapon_status.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/center.hpp>
 #include <sanguis/messages/roles/primary_weapon.hpp>
 #include <sanguis/messages/roles/speed.hpp>
 #include <sanguis/messages/roles/weapon_status.hpp>
+#include <sanguis/messages/server/change_weapon.hpp>
+#include <sanguis/messages/server/move.hpp>
+#include <sanguis/messages/server/rotate.hpp>
+#include <sanguis/messages/server/speed.hpp>
+#include <sanguis/messages/server/weapon_status.hpp>
 #include <fcppt/nonassignable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/at.hpp>
@@ -44,23 +44,23 @@ class configure_entity
 	typedef boost::mpl::map<
 		boost::mpl::pair<
 			sanguis::messages::roles::center,
-			sanguis::messages::move
+			sanguis::messages::server::move
 		>,
 		boost::mpl::pair<
 			sanguis::messages::roles::angle,
-			sanguis::messages::rotate
+			sanguis::messages::server::rotate
 		>,
 		boost::mpl::pair<
 			sanguis::messages::roles::speed,
-			sanguis::messages::speed
+			sanguis::messages::server::speed
 		>,
 		boost::mpl::pair<
 			sanguis::messages::roles::primary_weapon,
-			sanguis::messages::change_weapon
+			sanguis::messages::server::change_weapon
 		>,
 		boost::mpl::pair<
 			sanguis::messages::roles::weapon_status,
-			sanguis::messages::weapon_status
+			sanguis::messages::server::weapon_status
 		>
 	> mapping;
 public:

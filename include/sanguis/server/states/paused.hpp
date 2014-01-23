@@ -4,9 +4,9 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/events/message_fwd.hpp>
 #include <sanguis/server/states/running.hpp>
-#include <sanguis/messages/base_fwd.hpp>
-#include <sanguis/messages/player_pause_fwd.hpp>
-#include <sanguis/messages/player_unpause_fwd.hpp>
+#include <sanguis/messages/client/base_fwd.hpp>
+#include <sanguis/messages/client/pause_fwd.hpp>
+#include <sanguis/messages/client/unpause_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
@@ -54,19 +54,19 @@ public:
 	boost::statechart::result
 	operator()(
 		sanguis::server::player_id,
-		sanguis::messages::player_unpause const &
+		sanguis::messages::client::unpause const &
 	);
 
 	boost::statechart::result
 	operator()(
 		sanguis::server::player_id,
-		sanguis::messages::player_pause const &
+		sanguis::messages::client::pause const &
 	);
 private:
 	boost::statechart::result
 	handle_default_msg(
 		sanguis::server::player_id,
-		sanguis::messages::base const &
+		sanguis::messages::client::base const &
 	);
 };
 

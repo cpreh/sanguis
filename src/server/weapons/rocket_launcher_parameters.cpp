@@ -7,6 +7,8 @@
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/rocket_launcher_parameters.hpp>
+#include <sanguis/server/weapons/attributes/aoe.hpp>
+#include <sanguis/server/weapons/attributes/damage.hpp>
 
 
 sanguis::server::weapons::rocket_launcher_parameters::rocket_launcher_parameters(
@@ -47,14 +49,14 @@ sanguis::server::weapons::rocket_launcher_parameters::rocket_launcher_parameters
 {
 }
 
-sanguis::server::weapons::damage const
+sanguis::server::weapons::attributes::damage const
 sanguis::server::weapons::rocket_launcher_parameters::damage() const
 {
 	return
 		damage_;
 }
 
-sanguis::server::weapons::aoe const
+sanguis::server::weapons::attributes::aoe const
 sanguis::server::weapons::rocket_launcher_parameters::aoe() const
 {
 	return
@@ -104,19 +106,21 @@ sanguis::server::weapons::rocket_launcher_parameters::range() const
 }
 
 void
-sanguis::server::weapons::rocket_launcher_parameters::damage(
+sanguis::server::weapons::rocket_launcher_parameters::extra_damage(
 	sanguis::server::weapons::damage const _damage
 )
 {
-	damage_ =
-		_damage;
+	damage_.extra(
+		_damage
+	);
 }
 
 void
-sanguis::server::weapons::rocket_launcher_parameters::aoe(
+sanguis::server::weapons::rocket_launcher_parameters::extra_aoe(
 	sanguis::server::weapons::aoe const _aoe
 )
 {
-	aoe_ =
-		_aoe;
+	aoe_.extra(
+		_aoe
+	);
 }

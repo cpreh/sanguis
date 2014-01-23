@@ -1,13 +1,13 @@
+#include <sanguis/messages/server/base.hpp>
 #include <sanguis/server/machine.hpp>
 #include <sanguis/server/make_unicast_callback.hpp>
 #include <sanguis/server/unicast_callback.hpp>
-#include <sanguis/messages/base.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::server::unicast_callback const
+sanguis::server::unicast_callback
 sanguis::server::make_unicast_callback(
 	sanguis::server::machine &_machine
 )

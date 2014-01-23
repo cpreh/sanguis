@@ -1,8 +1,8 @@
 #include <sanguis/client/scoped_pause.hpp>
 #include <sanguis/client/send_callback.hpp>
-#include <sanguis/messages/create.hpp>
-#include <sanguis/messages/player_pause.hpp>
-#include <sanguis/messages/player_unpause.hpp>
+#include <sanguis/messages/client/create.hpp>
+#include <sanguis/messages/client/pause.hpp>
+#include <sanguis/messages/client/unpause.hpp>
 
 
 sanguis::client::scoped_pause::scoped_pause(
@@ -14,8 +14,8 @@ sanguis::client::scoped_pause::scoped_pause(
 	)
 {
 	send_(
-		*sanguis::messages::create(
-			sanguis::messages::player_pause()
+		*sanguis::messages::client::create(
+			sanguis::messages::client::pause()
 		)
 	);
 }
@@ -23,8 +23,8 @@ sanguis::client::scoped_pause::scoped_pause(
 sanguis::client::scoped_pause::~scoped_pause()
 {
 	send_(
-		*sanguis::messages::create(
-			sanguis::messages::player_unpause()
+		*sanguis::messages::client::create(
+			sanguis::messages::client::unpause()
 		)
 	);
 }

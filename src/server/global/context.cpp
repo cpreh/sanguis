@@ -8,16 +8,16 @@
 #include <sanguis/perk_type.hpp>
 #include <sanguis/random_seed.hpp>
 #include <sanguis/update_diff_clock.hpp>
+#include <sanguis/weapon_description.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/load/server_context_fwd.hpp>
-#include <sanguis/messages/base.hpp>
-#include <sanguis/messages/connect_state.hpp>
-#include <sanguis/messages/create.hpp>
-#include <sanguis/messages/remove_id.hpp>
-#include <sanguis/messages/rotate.hpp>
-#include <sanguis/messages/speed.hpp>
+#include <sanguis/messages/server/base.hpp>
+#include <sanguis/messages/server/connect_state.hpp>
+#include <sanguis/messages/server/create.hpp>
+#include <sanguis/messages/server/remove_id.hpp>
+#include <sanguis/messages/server/rotate.hpp>
+#include <sanguis/messages/server/speed.hpp>
 #include <sanguis/server/angle.hpp>
-#include <sanguis/server/center.hpp>
 #include <sanguis/server/console.hpp>
 #include <sanguis/server/create_player.hpp>
 #include <sanguis/server/direction.hpp>
@@ -146,8 +146,8 @@ sanguis::server::global::context::insert_player(
 	// send this before the world gets created
 	this->send_to_player(
 		_player_id,
-		*sanguis::messages::create(
-			sanguis::messages::connect_state(
+		*sanguis::messages::server::create(
+			sanguis::messages::server::connect_state(
 				_connect_state
 			)
 		)
@@ -192,9 +192,11 @@ sanguis::server::global::context::insert_player(
 		return;
 	}
 
-	typedef fcppt::optional<
+	typedef
+	fcppt::optional<
 		sanguis::server::entities::player const &
-	> const_optional_player_ref;
+	>
+	const_optional_player_ref;
 
 	const_optional_player_ref const player_ref(
 		sanguis::server::entities::insert_with_result(
@@ -229,7 +231,14 @@ sanguis::server::global::context::insert_player(
 		return;
 	}
 
-	// send this after the player has been created
+	if(
+		player_ref->primary_weapon()
+	)
+		cur_world.got_weapon(
+			player_ref->player_id(),
+			player_ref->primary_weapon()->description()
+		);
+
 	sanguis::server::send_available_perks(
 		*player_ref,
 		send_unicast_
@@ -292,8 +301,8 @@ sanguis::server::global::context::player_target(
 
 	this->send_to_player(
 		_player_id,
-		*sanguis::messages::create(
-			sanguis::messages::rotate(
+		*sanguis::messages::server::create(
+			sanguis::messages::server::rotate(
 				player_ref.id(),
 				player_ref.angle().get()
 			)
@@ -370,25 +379,12 @@ sanguis::server::global::context::player_speed(
 
 	this->send_to_player(
 		_player_id,
-		*sanguis::messages::create(
-			sanguis::messages::speed(
+		*sanguis::messages::server::create(
+			sanguis::messages::server::speed(
 				player_ref.id(),
 				player_ref.speed().get()
 			)
 		)
-	);
-}
-
-void
-sanguis::server::global::context::player_position(
-	sanguis::server::player_id const _player_id,
-	sanguis::server::center const &_center
-)
-{
-	this->player(
-		_player_id
-	).center_from_client(
-		_center
 	);
 }
 
@@ -493,10 +489,9 @@ sanguis::server::global::context::next_id()
 void
 sanguis::server::global::context::send_to_player(
 	sanguis::server::player_id const _player_id,
-	sanguis::messages::base const &_msg
+	sanguis::messages::server::base const &_msg
 )
 {
-	// TODO: we probably want to map this id to a net::id_type
 	send_unicast_(
 		_player_id,
 		_msg
@@ -510,8 +505,8 @@ sanguis::server::global::context::remove_player(
 {
 	this->send_to_player(
 		_id,
-		*sanguis::messages::create(
-			sanguis::messages::remove_id()
+		*sanguis::messages::server::create(
+			sanguis::messages::server::remove_id()
 		)
 	);
 

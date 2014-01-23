@@ -3,7 +3,7 @@
 
 #include <sanguis/aoe_projectile_type.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/messages/unique_ptr.hpp>
+#include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/radius.hpp>
@@ -48,7 +48,7 @@ protected:
 	sanguis::server::radius const
 	aoe() const;
 private:
-	sanguis::messages::unique_ptr
+	sanguis::messages::server::unique_ptr
 	add_message(
 		sanguis::server::player_id
 	) const

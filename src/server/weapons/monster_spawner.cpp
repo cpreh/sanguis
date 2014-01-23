@@ -2,7 +2,7 @@
 #include <sanguis/duration_second.hpp>
 #include <sanguis/primary_weapon_type.hpp>
 #include <sanguis/random_generator.hpp>
-#include <sanguis/string_vector.hpp>
+#include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/center.hpp>
@@ -13,19 +13,17 @@
 #include <sanguis/server/entities/enemies/create.hpp>
 #include <sanguis/server/entities/enemies/special_chance.hpp>
 #include <sanguis/server/environment/object.hpp>
-#include <sanguis/server/weapons/accuracy.hpp>
 #include <sanguis/server/weapons/attack_result.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/delayed_attack.hpp>
 #include <sanguis/server/weapons/insert_to_attack_result.hpp>
-#include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/monster_spawner.hpp>
-#include <sanguis/server/weapons/optional_magazine_size.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/range.hpp>
-#include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
+#include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>
 #include <fcppt/random/distribution/parameters/make_uniform_enum.hpp>
 
@@ -41,17 +39,11 @@ sanguis::server::weapons::monster_spawner::monster_spawner(
 		sanguis::weapon_type(
 			sanguis::primary_weapon_type::pistol
 		),
-		sanguis::server::weapons::accuracy(
-			1.f
-		),
+		sanguis::server::weapons::attributes::optional_accuracy(),
 		sanguis::server::weapons::range(
 			1000.f
 		),
-		sanguis::server::weapons::optional_magazine_size(
-			sanguis::server::weapons::magazine_size(
-				1u
-			)
-		),
+		sanguis::server::weapons::attributes::optional_magazine_size(),
 		sanguis::server::weapons::base_cooldown(
 			sanguis::duration_second(
 				1.f
@@ -62,13 +54,7 @@ sanguis::server::weapons::monster_spawner::monster_spawner(
 				0.2f
 			)
 		),
-		sanguis::server::weapons::optional_reload_time(
-			sanguis::server::weapons::reload_time(
-				sanguis::duration_second(
-					0.5f
-				)
-			)
-		)
+		sanguis::server::weapons::optional_reload_time()
 	)
 {
 }
@@ -114,9 +100,9 @@ sanguis::server::weapons::monster_spawner::do_attack(
 		);
 }
 
-sanguis::string_vector
+sanguis::weapon_attribute_vector
 sanguis::server::weapons::monster_spawner::attributes() const
 {
 	return
-		sanguis::string_vector();
+		sanguis::weapon_attribute_vector();
 }

@@ -1,9 +1,9 @@
 #include <sanguis/aoe_projectile_type.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/load/aoe_projectile_name.hpp>
-#include <sanguis/messages/add_aoe_projectile.hpp>
-#include <sanguis/messages/create.hpp>
-#include <sanguis/messages/unique_ptr.hpp>
+#include <sanguis/messages/server/add_aoe_projectile.hpp>
+#include <sanguis/messages/server/create.hpp>
+#include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/model_name.hpp>
@@ -61,14 +61,14 @@ sanguis::server::entities::projectiles::aoe_projectile::aoe() const
 	return aoe_;
 }
 
-sanguis::messages::unique_ptr
+sanguis::messages::server::unique_ptr
 sanguis::server::entities::projectiles::aoe_projectile::add_message(
 	sanguis::server::player_id const
 ) const
 {
 	return
-		sanguis::messages::create(
-			sanguis::messages::add_aoe_projectile(
+		sanguis::messages::server::create(
+			sanguis::messages::server::add_aoe_projectile(
 				this->id(),
 				this->center().get(),
 				this->angle().get(),

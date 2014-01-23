@@ -6,8 +6,7 @@
 #include <sanguis/perk_type_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/collision/world/group_field_fwd.hpp>
-#include <sanguis/messages/unique_ptr.hpp>
-#include <sanguis/server/center_fwd.hpp>
+#include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/level.hpp>
@@ -77,7 +76,7 @@ public:
 	~player();
 
 	// own functions
-	sanguis::server::string const
+	sanguis::server::string const &
 	name() const;
 
 	void
@@ -103,11 +102,6 @@ public:
 	void
 	drop_or_pickup_weapon(
 		sanguis::is_primary_weapon
-	);
-
-	void
-	center_from_client(
-		sanguis::server::center const &
 	);
 
 	sanguis::server::perks::tree::object const &
@@ -154,11 +148,17 @@ private:
 	update()
 	override;
 
-	sanguis::messages::unique_ptr
+	sanguis::messages::server::unique_ptr
 	add_message(
 		sanguis::server::player_id
 	) const
 	override;
+
+	template<
+		typename Message
+	>
+	sanguis::messages::server::unique_ptr
+	add_message_impl() const;
 
 	void
 	on_new_weapon(

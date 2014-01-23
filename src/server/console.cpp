@@ -4,9 +4,9 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/send_callback.hpp>
 #include <sanguis/server/unicast_callback.hpp>
-#include <sanguis/messages/add_console_command.hpp>
-#include <sanguis/messages/console_print.hpp>
-#include <sanguis/messages/create.hpp>
+#include <sanguis/messages/server/add_console_command.hpp>
+#include <sanguis/messages/server/console_print.hpp>
+#include <sanguis/messages/server/create.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/callback/function.hpp>
@@ -51,8 +51,8 @@ sanguis::server::console::insert(
 )
 {
 	send_(
-		*sanguis::messages::create(
-			sanguis::messages::add_console_command(
+		*sanguis::messages::server::create(
+			sanguis::messages::server::add_console_command(
 				sge::charconv::fcppt_string_to_utf8(
 					_command
 				),
@@ -116,8 +116,8 @@ sanguis::server::console::print_line(
 {
 	unicast_(
 		_id,
-		*sanguis::messages::create(
-			sanguis::messages::console_print(
+		*sanguis::messages::server::create(
+			sanguis::messages::server::console_print(
 				sge::charconv::fcppt_string_to_utf8(
 					_line
 				)

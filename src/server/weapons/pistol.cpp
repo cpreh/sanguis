@@ -1,6 +1,6 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
-#include <sanguis/string_vector.hpp>
+#include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
@@ -10,15 +10,14 @@
 #include <sanguis/server/weapons/attack_result.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/delayed_attack.hpp>
-#include <sanguis/server/weapons/make_attribute.hpp>
-#include <sanguis/server/weapons/optional_magazine_size.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/pistol.hpp>
 #include <sanguis/server/weapons/pistol_parameters.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
-#include <fcppt/insert_to_fcppt_string.hpp>
+#include <sanguis/server/weapons/attributes/make_damage.hpp>
+#include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
+#include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/text.hpp>
 
 
 sanguis::server::weapons::pistol::pistol(
@@ -32,9 +31,11 @@ sanguis::server::weapons::pistol::pistol(
 		_diff_clock,
 		_random_generator,
 		_weapon_type,
-		_parameters.accuracy(),
+		sanguis::server::weapons::attributes::optional_accuracy(
+			_parameters.accuracy()
+		),
 		_parameters.range(),
-		sanguis::server::weapons::optional_magazine_size(
+		sanguis::server::weapons::attributes::optional_magazine_size(
 			_parameters.magazine_size()
 		),
 		_parameters.base_cooldown(),
@@ -66,7 +67,7 @@ sanguis::server::weapons::pistol::do_attack(
 			this->diff_clock(),
 			_attack.environment().load_context(),
 			_attack.team(),
-			damage_,
+			damage_.value(),
 			sanguis::server::direction(
 				_attack.angle().get()
 			)
@@ -81,16 +82,13 @@ sanguis::server::weapons::pistol::do_attack(
 		sanguis::server::weapons::attack_result::success;
 }
 
-sanguis::string_vector
+sanguis::weapon_attribute_vector
 sanguis::server::weapons::pistol::attributes() const
 {
 	return
-		sanguis::string_vector{
-			sanguis::server::weapons::make_attribute(
-				FCPPT_TEXT("damage"),
-				fcppt::insert_to_fcppt_string(
-					damage_
-				)
+		sanguis::weapon_attribute_vector{
+			sanguis::server::weapons::attributes::make_damage(
+				damage_
 			)
 		};
 }

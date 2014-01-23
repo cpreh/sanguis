@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_ID_HPP_INCLUDED
 
 #include <sanguis/entity_id.hpp>
-#include <sanguis/messages/unique_ptr.hpp>
+#include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_id_fwd.hpp>
@@ -42,7 +42,7 @@ public:
 	transfer_from_world();
 
 	virtual
-	sanguis::messages::unique_ptr
+	sanguis::messages::server::unique_ptr
 	add_message(
 		sanguis::server::player_id
 	) const = 0;

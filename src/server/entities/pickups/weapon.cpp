@@ -3,9 +3,9 @@
 #include <sanguis/collision/world/group.hpp>
 #include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/load/weapon_pickup_name.hpp>
-#include <sanguis/messages/add_weapon_pickup.hpp>
-#include <sanguis/messages/create.hpp>
-#include <sanguis/messages/unique_ptr.hpp>
+#include <sanguis/messages/server/add_weapon_pickup.hpp>
+#include <sanguis/messages/server/create.hpp>
+#include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/dim.hpp>
 #include <sanguis/server/model_name.hpp>
 #include <sanguis/server/player_id.hpp>
@@ -100,14 +100,14 @@ sanguis::server::entities::pickups::weapon::collision_groups() const
 		};
 }
 
-sanguis::messages::unique_ptr
+sanguis::messages::server::unique_ptr
 sanguis::server::entities::pickups::weapon::add_message(
 	sanguis::server::player_id const
 ) const
 {
 	return
-		sanguis::messages::create(
-			sanguis::messages::add_weapon_pickup(
+		sanguis::messages::server::create(
+			sanguis::messages::server::add_weapon_pickup(
 				this->id(),
 				this->center().get(),
 				this->angle().get(),

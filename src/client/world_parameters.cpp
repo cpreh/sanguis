@@ -20,11 +20,13 @@ sanguis::client::world_parameters::world_parameters(
 sanguis::world_id const
 sanguis::client::world_parameters::world_id() const
 {
-	return world_id_;
+	return
+		world_id_;
 }
 
 sanguis::creator::top_parameters const &
 sanguis::client::world_parameters::top_parameters() const
 {
-	return top_parameters_;
+	return
+		top_parameters_;
 }

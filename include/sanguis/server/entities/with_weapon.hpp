@@ -3,7 +3,6 @@
 
 #include <sanguis/is_primary_weapon_fwd.hpp>
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
-#include <sanguis/string_vector.hpp>
 #include <sanguis/weapon_status.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
@@ -52,9 +51,6 @@ protected:
 
 	sanguis::optional_primary_weapon_type const
 	primary_weapon_type() const;
-
-	sanguis::string_vector const
-	primary_weapon_text() const;
 public:
 	void
 	pickup_weapon(

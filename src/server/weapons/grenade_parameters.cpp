@@ -5,6 +5,9 @@
 #include <sanguis/server/weapons/grenade_parameters.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/range.hpp>
+#include <sanguis/server/weapons/attributes/aoe.hpp>
+#include <sanguis/server/weapons/attributes/damage.hpp>
+#include <sanguis/server/weapons/attributes/magazine_size.hpp>
 
 
 sanguis::server::weapons::grenade_parameters::grenade_parameters(
@@ -44,14 +47,14 @@ sanguis::server::weapons::grenade_parameters::base_cooldown() const
 		base_cooldown_;
 }
 
-sanguis::server::weapons::damage const
+sanguis::server::weapons::attributes::damage const
 sanguis::server::weapons::grenade_parameters::damage() const
 {
 	return
 		damage_;
 }
 
-sanguis::server::weapons::aoe const
+sanguis::server::weapons::attributes::aoe const
 sanguis::server::weapons::grenade_parameters::aoe() const
 {
 	return
@@ -72,7 +75,7 @@ sanguis::server::weapons::grenade_parameters::range() const
 		range_;
 }
 
-sanguis::server::weapons::magazine_size const
+sanguis::server::weapons::attributes::magazine_size const
 sanguis::server::weapons::grenade_parameters::magazine_size() const
 {
 	return
@@ -80,28 +83,31 @@ sanguis::server::weapons::grenade_parameters::magazine_size() const
 }
 
 void
-sanguis::server::weapons::grenade_parameters::damage(
+sanguis::server::weapons::grenade_parameters::extra_damage(
 	sanguis::server::weapons::damage const _damage
 )
 {
-	damage_ =
-		_damage;
+	damage_.extra(
+		_damage
+	);
 }
 
 void
-sanguis::server::weapons::grenade_parameters::aoe(
+sanguis::server::weapons::grenade_parameters::extra_aoe(
 	sanguis::server::weapons::aoe const _aoe
 )
 {
-	aoe_ =
-		_aoe;
+	aoe_.extra(
+		_aoe
+	);
 }
 
 void
-sanguis::server::weapons::grenade_parameters::magazine_size(
+sanguis::server::weapons::grenade_parameters::extra_magazine_size(
 	sanguis::server::weapons::magazine_size const _magazine_size
 )
 {
-	magazine_size_ =
-		_magazine_size;
+	magazine_size_.extra(
+		_magazine_size
+	);
 }

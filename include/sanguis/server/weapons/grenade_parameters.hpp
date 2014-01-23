@@ -8,7 +8,10 @@
 #include <sanguis/server/weapons/grenade_parameters_fwd.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/range.hpp>
-
+#include <sanguis/server/weapons/attributes/aoe.hpp>
+#include <sanguis/server/weapons/attributes/damage.hpp>
+#include <sanguis/server/weapons/attributes/magazine_size.hpp>
+#include <fcppt/nonassignable.hpp>
 
 
 namespace sanguis
@@ -20,6 +23,9 @@ namespace weapons
 
 class grenade_parameters
 {
+	FCPPT_NONASSIGNABLE(
+		grenade_parameters
+	);
 public:
 	grenade_parameters(
 		sanguis::server::weapons::base_cooldown,
@@ -33,10 +39,10 @@ public:
 	sanguis::server::weapons::base_cooldown const
 	base_cooldown() const;
 
-	sanguis::server::weapons::damage const
+	sanguis::server::weapons::attributes::damage const
 	damage() const;
 
-	sanguis::server::weapons::aoe const
+	sanguis::server::weapons::attributes::aoe const
 	aoe() const;
 
 	sanguis::server::weapons::cast_point const
@@ -45,35 +51,35 @@ public:
 	sanguis::server::weapons::range const
 	range() const;
 
-	sanguis::server::weapons::magazine_size const
+	sanguis::server::weapons::attributes::magazine_size const
 	magazine_size() const;
 
 	void
-	damage(
+	extra_damage(
 		sanguis::server::weapons::damage
 	);
 
 	void
-	aoe(
+	extra_aoe(
 		sanguis::server::weapons::aoe
 	);
 
 	void
-	magazine_size(
+	extra_magazine_size(
 		sanguis::server::weapons::magazine_size
 	);
 private:
-	sanguis::server::weapons::base_cooldown base_cooldown_;
+	sanguis::server::weapons::base_cooldown const base_cooldown_;
 
-	sanguis::server::weapons::damage damage_;
+	sanguis::server::weapons::attributes::damage damage_;
 
-	sanguis::server::weapons::aoe aoe_;
+	sanguis::server::weapons::attributes::aoe aoe_;
 
-	sanguis::server::weapons::cast_point cast_point_;
+	sanguis::server::weapons::cast_point const cast_point_;
 
-	sanguis::server::weapons::range range_;
+	sanguis::server::weapons::range const range_;
 
-	sanguis::server::weapons::magazine_size magazine_size_;
+	sanguis::server::weapons::attributes::magazine_size magazine_size_;
 };
 
 }

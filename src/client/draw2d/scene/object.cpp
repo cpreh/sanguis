@@ -41,33 +41,33 @@
 #include <sanguis/client/draw2d/sunlight/sun_angle.hpp>
 #include <sanguis/load/context.hpp>
 #include <sanguis/load/resource/context.hpp>
-#include <sanguis/messages/add_aoe_projectile.hpp>
-#include <sanguis/messages/add_aura.hpp>
-#include <sanguis/messages/add_buff.hpp>
-#include <sanguis/messages/add_enemy.hpp>
-#include <sanguis/messages/add_friend.hpp>
-#include <sanguis/messages/add_own_player.hpp>
-#include <sanguis/messages/add_pickup.hpp>
-#include <sanguis/messages/add_player.hpp>
-#include <sanguis/messages/add_projectile.hpp>
-#include <sanguis/messages/add_weapon_pickup.hpp>
-#include <sanguis/messages/base.hpp>
-#include <sanguis/messages/change_weapon.hpp>
-#include <sanguis/messages/change_world.hpp>
-#include <sanguis/messages/die.hpp>
-#include <sanguis/messages/experience.hpp>
-#include <sanguis/messages/give_weapon.hpp>
-#include <sanguis/messages/health.hpp>
-#include <sanguis/messages/level_up.hpp>
-#include <sanguis/messages/max_health.hpp>
-#include <sanguis/messages/move.hpp>
-#include <sanguis/messages/remove.hpp>
-#include <sanguis/messages/remove_buff.hpp>
-#include <sanguis/messages/remove_weapon.hpp>
-#include <sanguis/messages/rotate.hpp>
-#include <sanguis/messages/speed.hpp>
-#include <sanguis/messages/weapon_status.hpp>
-#include <sanguis/messages/call/object.hpp>
+#include <sanguis/messages/server/add_aoe_projectile.hpp>
+#include <sanguis/messages/server/add_aura.hpp>
+#include <sanguis/messages/server/add_buff.hpp>
+#include <sanguis/messages/server/add_enemy.hpp>
+#include <sanguis/messages/server/add_friend.hpp>
+#include <sanguis/messages/server/add_own_player.hpp>
+#include <sanguis/messages/server/add_pickup.hpp>
+#include <sanguis/messages/server/add_player.hpp>
+#include <sanguis/messages/server/add_projectile.hpp>
+#include <sanguis/messages/server/add_weapon_pickup.hpp>
+#include <sanguis/messages/server/base.hpp>
+#include <sanguis/messages/server/change_weapon.hpp>
+#include <sanguis/messages/server/change_world.hpp>
+#include <sanguis/messages/server/die.hpp>
+#include <sanguis/messages/server/experience.hpp>
+#include <sanguis/messages/server/give_weapon.hpp>
+#include <sanguis/messages/server/health.hpp>
+#include <sanguis/messages/server/level_up.hpp>
+#include <sanguis/messages/server/max_health.hpp>
+#include <sanguis/messages/server/move.hpp>
+#include <sanguis/messages/server/remove.hpp>
+#include <sanguis/messages/server/remove_buff.hpp>
+#include <sanguis/messages/server/remove_weapon.hpp>
+#include <sanguis/messages/server/rotate.hpp>
+#include <sanguis/messages/server/speed.hpp>
+#include <sanguis/messages/server/weapon_status.hpp>
+#include <sanguis/messages/server/call/object.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/renderer/clear/parameters.hpp>
@@ -275,36 +275,36 @@ sanguis::client::draw2d::scene::object::~object()
 
 void
 sanguis::client::draw2d::scene::object::process_message(
-	sanguis::messages::base const &_message
+	sanguis::messages::server::base const &_message
 )
 {
-	static sanguis::messages::call::object<
+	static sanguis::messages::server::call::object<
 		boost::mpl::vector25<
-			sanguis::messages::add_aoe_projectile,
-			sanguis::messages::add_aura,
-			sanguis::messages::add_buff,
-			sanguis::messages::add_enemy,
-			sanguis::messages::add_friend,
-			sanguis::messages::add_own_player,
-			sanguis::messages::add_pickup,
-			sanguis::messages::add_player,
-			sanguis::messages::add_projectile,
-			sanguis::messages::add_weapon_pickup,
-			sanguis::messages::change_weapon,
-			sanguis::messages::change_world,
-			sanguis::messages::die,
-			sanguis::messages::experience,
-			sanguis::messages::give_weapon,
-			sanguis::messages::health,
-			sanguis::messages::level_up,
-			sanguis::messages::max_health,
-			sanguis::messages::move,
-			sanguis::messages::remove,
-			sanguis::messages::remove_buff,
-			sanguis::messages::remove_weapon,
-			sanguis::messages::rotate,
-			sanguis::messages::speed,
-			sanguis::messages::weapon_status
+			sanguis::messages::server::add_aoe_projectile,
+			sanguis::messages::server::add_aura,
+			sanguis::messages::server::add_buff,
+			sanguis::messages::server::add_enemy,
+			sanguis::messages::server::add_friend,
+			sanguis::messages::server::add_own_player,
+			sanguis::messages::server::add_pickup,
+			sanguis::messages::server::add_player,
+			sanguis::messages::server::add_projectile,
+			sanguis::messages::server::add_weapon_pickup,
+			sanguis::messages::server::change_weapon,
+			sanguis::messages::server::change_world,
+			sanguis::messages::server::die,
+			sanguis::messages::server::experience,
+			sanguis::messages::server::give_weapon,
+			sanguis::messages::server::health,
+			sanguis::messages::server::level_up,
+			sanguis::messages::server::max_health,
+			sanguis::messages::server::move,
+			sanguis::messages::server::remove,
+			sanguis::messages::server::remove_buff,
+			sanguis::messages::server::remove_weapon,
+			sanguis::messages::server::rotate,
+			sanguis::messages::server::speed,
+			sanguis::messages::server::weapon_status
 		>,
 		sanguis::client::draw2d::message::dispatcher
 	> dispatcher;

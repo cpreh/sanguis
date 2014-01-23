@@ -9,7 +9,8 @@
 #include <sanguis/client/events/tick_fwd.hpp>
 #include <sanguis/client/gui/menu/object.hpp>
 #include <sanguis/client/states/menu_fwd.hpp>
-#include <sanguis/messages/connect_state_fwd.hpp>
+#include <sanguis/messages/server/base_fwd.hpp>
+#include <sanguis/messages/server/connect_state_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
@@ -92,12 +93,12 @@ public:
 
 	result_type
 	operator()(
-		sanguis::messages::connect_state const &
+		sanguis::messages::server::connect_state const &
 	);
 private:
 	boost::statechart::result
 	handle_default_msg(
-		sanguis::messages::base const &
+		sanguis::messages::server::base const &
 	);
 
 	sanguis::client::gui::menu::object menu_;

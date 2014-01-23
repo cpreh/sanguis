@@ -1,5 +1,4 @@
 #include <sanguis/is_primary_weapon.hpp>
-#include <sanguis/string_vector.hpp>
 #include <sanguis/time_unit.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
 #include <sanguis/primary_weapon_type.hpp>
@@ -7,7 +6,6 @@
 #include <sanguis/weapon_status.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/weapon_type_to_is_primary.hpp>
-#include <sanguis/messages/create.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/optional_with_weapon_ref.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
@@ -106,18 +104,6 @@ sanguis::server::entities::with_weapon::primary_weapon_type() const
 			)
 		:
 			sanguis::optional_primary_weapon_type()
-		;
-}
-
-sanguis::string_vector const
-sanguis::server::entities::with_weapon::primary_weapon_text() const
-{
-	return
-		primary_weapon_
-		?
-			primary_weapon_->description().text()
-		:
-			sanguis::string_vector()
 		;
 }
 

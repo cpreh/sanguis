@@ -5,7 +5,7 @@
 #include <sanguis/friend_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/collision/world/group_field_fwd.hpp>
-#include <sanguis/messages/unique_ptr.hpp>
+#include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team_fwd.hpp>
@@ -72,7 +72,7 @@ private:
 	team() const
 	override;
 
-	sanguis::messages::unique_ptr
+	sanguis::messages::server::unique_ptr
 	add_message(
 		sanguis::server::player_id
 	) const

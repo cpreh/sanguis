@@ -1,9 +1,9 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/projectile_type.hpp>
 #include <sanguis/collision/world/group_field.hpp>
-#include <sanguis/messages/add_projectile.hpp>
-#include <sanguis/messages/create.hpp>
-#include <sanguis/messages/unique_ptr.hpp>
+#include <sanguis/messages/server/add_projectile.hpp>
+#include <sanguis/messages/server/create.hpp>
+#include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/dim.hpp>
 #include <sanguis/server/direction.hpp>
@@ -153,14 +153,14 @@ sanguis::server::entities::projectiles::projectile::collision_groups() const
 		);
 }
 
-sanguis::messages::unique_ptr
+sanguis::messages::server::unique_ptr
 sanguis::server::entities::projectiles::projectile::add_message(
 	sanguis::server::player_id const
 ) const
 {
 	return
-		sanguis::messages::create(
-			sanguis::messages::add_projectile(
+		sanguis::messages::server::create(
+			sanguis::messages::server::add_projectile(
 				this->id(),
 				this->center().get(),
 				this->angle().get(),

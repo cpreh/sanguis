@@ -8,13 +8,14 @@
 #include <sanguis/client/events/net_error.hpp>
 #include <sanguis/client/events/render.hpp>
 #include <sanguis/client/events/tick.hpp>
-#include <sanguis/messages/base.hpp>
-#include <sanguis/messages/unique_ptr.hpp>
+#include <sanguis/messages/client/base.hpp>
+#include <sanguis/messages/server/base.hpp>
+#include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/load/context_fwd.hpp>
-#include <sanguis/net/deserialize.hpp>
 #include <sanguis/net/send_buffer_size.hpp>
-#include <sanguis/net/serialize_to_circular_buffer.hpp>
 #include <sanguis/net/receive_buffer_size.hpp>
+#include <sanguis/net/client/serialize_to_circular_buffer.hpp>
+#include <sanguis/net/server/deserialize.hpp>
 #include <sge/console/gfx.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/image2d/system_fwd.hpp>
@@ -88,7 +89,7 @@ sanguis::client::machine::machine(
 	s_conn_(
 		net_.register_connect(
 			std::bind(
-				&machine::connect_callback,
+				&sanguis::client::machine::connect_callback,
 				this
 			)
 		)
@@ -96,7 +97,7 @@ sanguis::client::machine::machine(
 	s_disconn_(
 		net_.register_error(
 			std::bind(
-				&machine::error_callback,
+				&sanguis::client::machine::error_callback,
 				this,
 				std::placeholders::_1,
 				std::placeholders::_2
@@ -106,7 +107,7 @@ sanguis::client::machine::machine(
 	s_data_(
 		net_.register_data(
 			std::bind(
-				&machine::data_callback,
+				&sanguis::client::machine::data_callback,
 				this,
 				std::placeholders::_1
 			)
@@ -177,11 +178,11 @@ sanguis::client::machine::disconnect()
 
 void
 sanguis::client::machine::send(
-	sanguis::messages::base const &_message
+	sanguis::messages::client::base const &_message
 )
 {
 	if(
-		!sanguis::net::serialize_to_circular_buffer(
+		!sanguis::net::client::serialize_to_circular_buffer(
 			_message,
 			net_.send_buffer()
 		)
@@ -192,7 +193,7 @@ sanguis::client::machine::send(
 			fcppt::log::_
 				<< FCPPT_TEXT("Not enough space left in the send_buffer")
 		);
-		// TODO:!
+		// FIXME: We have to wait for free space here!
 	}
 
 	net_.queue_send();
@@ -204,7 +205,7 @@ sanguis::client::machine::process(
 )
 {
 	this->process_event(
-		events::tick(
+		sanguis::client::events::tick(
 			_time
 		)
 	);
@@ -232,7 +233,7 @@ void
 sanguis::client::machine::quit()
 {
 	FCPPT_LOG_DEBUG(
-		client::log(),
+		sanguis::client::log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("Exiting the client!")
 	);
@@ -333,8 +334,8 @@ sanguis::client::machine::data_callback(
 		;;
 	)
 	{
-		sanguis::messages::unique_ptr ret(
-			sanguis::net::deserialize(
+		sanguis::messages::server::unique_ptr ret(
+			sanguis::net::server::deserialize(
 				_data
 			)
 		);

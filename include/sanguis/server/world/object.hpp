@@ -19,7 +19,7 @@
 #include <sanguis/creator/top_result_fwd.hpp>
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/spawn_container.hpp>
-#include <sanguis/messages/base_fwd.hpp>
+#include <sanguis/messages/server/base_fwd.hpp>
 #include <sanguis/server/angle_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/exp.hpp>
@@ -102,7 +102,7 @@ private:
 		sanguis::server::entities::unique_ptr &&,
 		sanguis::server::entities::insert_parameters const &
 	);
-
+public:
 	void
 	add_aura(
 		sanguis::entity_id,
@@ -134,7 +134,6 @@ private:
 	void
 	got_weapon(
 		sanguis::server::player_id,
-		sanguis::entity_id,
 		sanguis::weapon_description const &
 	)
 	override;
@@ -142,7 +141,6 @@ private:
 	void
 	remove_weapon(
 		sanguis::server::player_id,
-		sanguis::entity_id,
 		sanguis::is_primary_weapon
 	)
 	override;
@@ -192,7 +190,6 @@ private:
 	void
 	exp_changed(
 		sanguis::server::player_id,
-		sanguis::entity_id,
 		sanguis::server::exp
 	)
 	override;
@@ -200,7 +197,6 @@ private:
 	void
 	level_changed(
 		sanguis::server::player_id,
-		sanguis::entity_id,
 		sanguis::server::level
 	)
 	override;
@@ -254,18 +250,18 @@ private:
 		sanguis::server::player_id
 	)
 	override;
-
+private:
 	// own functions
 	void
 	send_entity_specific(
 		sanguis::entity_id,
-		sanguis::messages::base const &
+		sanguis::messages::server::base const &
 	);
 
 	void
 	send_player_specific(
 		sanguis::server::player_id,
-		sanguis::messages::base const &
+		sanguis::messages::server::base const &
 	);
 
 	void

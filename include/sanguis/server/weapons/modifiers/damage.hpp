@@ -5,6 +5,7 @@
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/modifiers/random_increase.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/reference_wrapper_impl.hpp>
 
 
@@ -29,13 +30,19 @@ damage(
 	> const _parameters
 )
 {
-	_parameters.get().damage(
-		_parameters.get().damage()
+	_parameters.get().extra_damage(
+		_parameters.get().damage().base()
 		*
 		sanguis::server::weapons::damage(
 			sanguis::server::weapons::modifiers::random_increase(
 				_random_generator,
 				_difficulty
+			)
+			-
+			fcppt::literal<
+				sanguis::server::weapons::damage::value_type
+			>(
+				1
 			)
 		)
 	);

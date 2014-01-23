@@ -1,29 +1,31 @@
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/magazine_extra.hpp>
+#include <sanguis/magazine_size.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/weapon_attribute_type.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_status.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/collision/distance_entity_pos.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
-#include <sanguis/server/weapons/accuracy.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/log_location.hpp>
-#include <sanguis/server/weapons/make_attribute.hpp>
-#include <sanguis/server/weapons/optional_magazine_size.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/target.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/weapons/attributes/make.hpp>
+#include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
+#include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
 #include <sanguis/server/weapons/events/poll.hpp>
 #include <sanguis/server/weapons/events/reload.hpp>
 #include <sanguis/server/weapons/events/shoot.hpp>
 #include <sanguis/server/weapons/events/stop.hpp>
 #include <sanguis/server/weapons/states/idle.hpp>
-#include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/join.hpp>
 #include <fcppt/assert/error.hpp>
@@ -58,9 +60,9 @@ sanguis::server::weapons::weapon::weapon(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
 	sanguis::weapon_type const _type,
-	sanguis::server::weapons::accuracy const _accuracy,
+	sanguis::server::weapons::attributes::optional_accuracy const _accuracy,
 	sanguis::server::weapons::range const _range,
-	sanguis::server::weapons::optional_magazine_size const _magazine_size,
+	sanguis::server::weapons::attributes::optional_magazine_size const _magazine_size,
 	sanguis::server::weapons::base_cooldown const _base_cooldown,
 	sanguis::server::weapons::cast_point const _cast_point,
 	sanguis::server::weapons::optional_reload_time const _reload_time
@@ -114,7 +116,7 @@ sanguis::server::weapons::weapon::weapon(
 	FCPPT_ASSERT_PRE(
 		!this->magazine_size()
 		||
-		this->magazine_size()->get() != 0u
+		this->magazine_size()->value().get() != 0u
 	);
 }
 
@@ -201,7 +203,7 @@ sanguis::server::weapons::weapon::type() const
 		type_;
 }
 
-sanguis::server::weapons::optional_magazine_size const
+sanguis::server::weapons::attributes::optional_magazine_size const
 sanguis::server::weapons::weapon::magazine_size() const
 {
 	return
@@ -247,56 +249,37 @@ sanguis::server::weapons::weapon::description() const
 {
 	return
 		sanguis::weapon_description(
-			fcppt::algorithm::join(
-				sanguis::string_vector{
-					sanguis::server::weapons::make_attribute(
-						FCPPT_TEXT("range"),
-						fcppt::insert_to_fcppt_string(
-							range_
-						)
-					),
-					sanguis::server::weapons::make_attribute(
-						FCPPT_TEXT("accuracy"),
-						fcppt::insert_to_fcppt_string(
-							accuracy_
-						)
-					),
-					sanguis::server::weapons::make_attribute(
-						FCPPT_TEXT("magazine size"),
-						magazine_size_
-						?
-							fcppt::insert_to_fcppt_string(
-								*magazine_size_
-							)
-						:
-							FCPPT_TEXT("none")
-					),
-					sanguis::server::weapons::make_attribute(
-						FCPPT_TEXT("cast point"),
-						fcppt::insert_to_fcppt_string(
-							cast_point_.get().count()
-						)
-					),
-					sanguis::server::weapons::make_attribute(
-						FCPPT_TEXT("backswing time"),
-						fcppt::insert_to_fcppt_string(
-							backswing_time_.get().count()
-						)
-					),
-					sanguis::server::weapons::make_attribute(
-						FCPPT_TEXT("reload time"),
-						reload_time_
-						?
-							fcppt::insert_to_fcppt_string(
-								reload_time_->get().count()
-							)
-						:
-							FCPPT_TEXT("none")
-					)
-				},
-				this->attributes()
+			this->type(),
+			sanguis::magazine_size(
+				this->magazine_size()
+				?
+					this->magazine_size()->base().get()
+				:
+					0u
 			),
-			this->type()
+			sanguis::magazine_extra(
+				this->magazine_size()
+				&&
+				this->magazine_size()->extra()
+				?
+					this->magazine_size()->extra()->get()
+				:
+					0u
+			),
+			// TODO: Make composing this more sane!
+			accuracy_
+			?
+				fcppt::algorithm::join(
+					sanguis::weapon_attribute_vector{
+						sanguis::server::weapons::attributes::make(
+							sanguis::weapon_attribute_type::accuracy,
+							*accuracy_
+						)
+					},
+					this->attributes()
+				)
+			:
+				this->attributes()
 		);
 }
 
@@ -339,7 +322,8 @@ sanguis::server::weapons::weapon::weapon_status(
 void
 sanguis::server::weapons::weapon::reset_magazine()
 {
-	magazine_used_ = 0;
+	magazine_used_ =
+		0u;
 }
 
 void
@@ -353,7 +337,9 @@ sanguis::server::weapons::weapon::use_magazine_item()
 	++magazine_used_;
 
 	FCPPT_ASSERT_ERROR(
-		magazine_used_ <= magazine_size_->get()
+		magazine_used_
+		<=
+		this->magazine_size()->value().get()
 	);
 }
 
@@ -361,14 +347,14 @@ bool
 sanguis::server::weapons::weapon::magazine_empty() const
 {
 	return
-		magazine_size_
+		this->magazine_size()
 		&&
 		magazine_used_
 		==
-		magazine_size_->get();
+		this->magazine_size()->value().get();
 }
 
-sanguis::server::weapons::accuracy const
+sanguis::server::weapons::attributes::optional_accuracy const
 sanguis::server::weapons::weapon::accuracy() const
 {
 	return

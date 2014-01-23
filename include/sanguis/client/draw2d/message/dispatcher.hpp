@@ -6,32 +6,32 @@
 #include <sanguis/client/draw2d/message/environment_fwd.hpp>
 #include <sanguis/client/draw2d/entities/base_fwd.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
-#include <sanguis/messages/add_aoe_projectile_fwd.hpp>
-#include <sanguis/messages/add_aura_fwd.hpp>
-#include <sanguis/messages/add_buff_fwd.hpp>
-#include <sanguis/messages/add_enemy_fwd.hpp>
-#include <sanguis/messages/add_friend_fwd.hpp>
-#include <sanguis/messages/add_own_player_fwd.hpp>
-#include <sanguis/messages/add_pickup_fwd.hpp>
-#include <sanguis/messages/add_player_fwd.hpp>
-#include <sanguis/messages/add_projectile_fwd.hpp>
-#include <sanguis/messages/add_weapon_pickup_fwd.hpp>
-#include <sanguis/messages/base_fwd.hpp>
-#include <sanguis/messages/change_weapon_fwd.hpp>
-#include <sanguis/messages/change_world_fwd.hpp>
-#include <sanguis/messages/die_fwd.hpp>
-#include <sanguis/messages/experience_fwd.hpp>
-#include <sanguis/messages/give_weapon_fwd.hpp>
-#include <sanguis/messages/health_fwd.hpp>
-#include <sanguis/messages/level_up_fwd.hpp>
-#include <sanguis/messages/max_health_fwd.hpp>
-#include <sanguis/messages/move_fwd.hpp>
-#include <sanguis/messages/remove_buff_fwd.hpp>
-#include <sanguis/messages/remove_fwd.hpp>
-#include <sanguis/messages/remove_weapon_fwd.hpp>
-#include <sanguis/messages/rotate_fwd.hpp>
-#include <sanguis/messages/speed_fwd.hpp>
-#include <sanguis/messages/weapon_status_fwd.hpp>
+#include <sanguis/messages/server/add_aoe_projectile_fwd.hpp>
+#include <sanguis/messages/server/add_aura_fwd.hpp>
+#include <sanguis/messages/server/add_buff_fwd.hpp>
+#include <sanguis/messages/server/add_enemy_fwd.hpp>
+#include <sanguis/messages/server/add_friend_fwd.hpp>
+#include <sanguis/messages/server/add_own_player_fwd.hpp>
+#include <sanguis/messages/server/add_pickup_fwd.hpp>
+#include <sanguis/messages/server/add_player_fwd.hpp>
+#include <sanguis/messages/server/add_projectile_fwd.hpp>
+#include <sanguis/messages/server/add_weapon_pickup_fwd.hpp>
+#include <sanguis/messages/server/base_fwd.hpp>
+#include <sanguis/messages/server/change_weapon_fwd.hpp>
+#include <sanguis/messages/server/change_world_fwd.hpp>
+#include <sanguis/messages/server/die_fwd.hpp>
+#include <sanguis/messages/server/experience_fwd.hpp>
+#include <sanguis/messages/server/give_weapon_fwd.hpp>
+#include <sanguis/messages/server/health_fwd.hpp>
+#include <sanguis/messages/server/level_up_fwd.hpp>
+#include <sanguis/messages/server/max_health_fwd.hpp>
+#include <sanguis/messages/server/move_fwd.hpp>
+#include <sanguis/messages/server/remove_buff_fwd.hpp>
+#include <sanguis/messages/server/remove_fwd.hpp>
+#include <sanguis/messages/server/remove_weapon_fwd.hpp>
+#include <sanguis/messages/server/rotate_fwd.hpp>
+#include <sanguis/messages/server/speed_fwd.hpp>
+#include <sanguis/messages/server/weapon_status_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -61,132 +61,132 @@ public:
 
 	result_type
 	operator()(
-		sanguis::messages::add_aoe_projectile const &
+		sanguis::messages::server::add_aoe_projectile const &
 	);
 
 	result_type
 	operator()(
-		sanguis::messages::add_aura const &
+		sanguis::messages::server::add_aura const &
 	);
 
 	result_type
 	operator()(
-		sanguis::messages::add_buff const &
+		sanguis::messages::server::add_buff const &
 	);
 
 	result_type
 	operator()(
-		sanguis::messages::add_enemy const &
+		sanguis::messages::server::add_enemy const &
 	);
 
 	result_type
 	operator()(
-		sanguis::messages::add_friend const &
+		sanguis::messages::server::add_friend const &
 	);
 
 	result_type
 	operator()(
-		sanguis::messages::add_own_player const &
+		sanguis::messages::server::add_own_player const &
 	);
 
 	result_type
 	operator()(
-		sanguis::messages::add_pickup const &
+		sanguis::messages::server::add_pickup const &
 	);
 
 	result_type
 	operator()(
-		sanguis::messages::add_player const &
+		sanguis::messages::server::add_player const &
 	);
 
 	result_type
 	operator()(
-		sanguis::messages::add_projectile const &
+		sanguis::messages::server::add_projectile const &
 	);
 
 	result_type
 	operator()(
-		sanguis::messages::add_weapon_pickup const &
+		sanguis::messages::server::add_weapon_pickup const &
 	);
 
 	result_type
 	operator()(
-		sanguis::messages::change_weapon const &
+		sanguis::messages::server::change_weapon const &
 	);
 
 	result_type
 	operator()(
-		sanguis::messages::change_world const &
+		sanguis::messages::server::change_world const &
 	);
 
 	result_type
 	operator()(
-		sanguis::messages::die const &
+		sanguis::messages::server::die const &
 	);
 
 	result_type
 	operator()(
-		sanguis::messages::experience const &
+		sanguis::messages::server::experience const &
 	);
 
 	result_type
 	operator()(
-		sanguis::messages::give_weapon const &
+		sanguis::messages::server::give_weapon const &
 	);
 
 	result_type
 	operator()(
-		sanguis::messages::health const &
+		sanguis::messages::server::health const &
 	);
 
 	result_type
 	operator()(
-		sanguis::messages::level_up const &
+		sanguis::messages::server::level_up const &
 	);
 
 	result_type
 	operator()(
-		sanguis::messages::max_health const &
+		sanguis::messages::server::max_health const &
 	);
 
 	result_type
 	operator()(
-		sanguis::messages::move const &
+		sanguis::messages::server::move const &
 	);
 
 	result_type
 	operator()(
-		sanguis::messages::remove const &
+		sanguis::messages::server::remove const &
 	);
 
 	result_type
 	operator()(
-		sanguis::messages::remove_buff const &
+		sanguis::messages::server::remove_buff const &
 	);
 
 	result_type
 	operator()(
-		sanguis::messages::remove_weapon const &
+		sanguis::messages::server::remove_weapon const &
 	);
 
 	result_type
 	operator()(
-		sanguis::messages::rotate const &
+		sanguis::messages::server::rotate const &
 	);
 
 	result_type
 	operator()(
-		sanguis::messages::speed const &
+		sanguis::messages::server::speed const &
 	);
 
 	result_type
 	operator()(
-		sanguis::messages::weapon_status const &
+		sanguis::messages::server::weapon_status const &
 	);
 
 	result_type
 	process_default_msg(
-		sanguis::messages::base const &
+		sanguis::messages::server::base const &
 	);
 private:
 	template<

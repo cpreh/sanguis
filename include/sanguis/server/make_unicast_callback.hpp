@@ -10,7 +10,7 @@ namespace sanguis
 namespace server
 {
 
-sanguis::server::unicast_callback const
+sanguis::server::unicast_callback
 make_unicast_callback(
 	sanguis::server::machine &
 );

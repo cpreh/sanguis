@@ -4,8 +4,8 @@
 #include <sanguis/io_service_fwd.hpp>
 #include <sanguis/timer.hpp>
 #include <sanguis/load/server_context.hpp>
-#include <sanguis/messages/base_fwd.hpp>
-#include <sanguis/messages/unique_ptr.hpp>
+#include <sanguis/messages/client/unique_ptr.hpp>
+#include <sanguis/messages/server/base_fwd.hpp>
 #include <sanguis/net/data_buffer.hpp>
 #include <sanguis/server/machine_fwd.hpp>
 #include <sanguis/server/player_id.hpp>
@@ -51,13 +51,13 @@ public:
 
 	void
 	send_to_all(
-		sanguis::messages::base const &
+		sanguis::messages::server::base const &
 	);
 
 	void
 	send_unicast(
 		sanguis::server::player_id,
-		sanguis::messages::base const &
+		sanguis::messages::server::base const &
 	);
 
 	sanguis::load::server_context const &
@@ -66,7 +66,7 @@ private:
 	void
 	process_message(
 		alda::net::id,
-		sanguis::messages::unique_ptr &&
+		sanguis::messages::client::unique_ptr &&
 	);
 
 	void

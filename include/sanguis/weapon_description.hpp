@@ -1,7 +1,9 @@
 #ifndef SANGUIS_WEAPON_DESCRIPTION_HPP_INCLUDED
 #define SANGUIS_WEAPON_DESCRIPTION_HPP_INCLUDED
 
-#include <sanguis/string_vector.hpp>
+#include <sanguis/magazine_extra.hpp>
+#include <sanguis/magazine_size.hpp>
+#include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
 
@@ -13,19 +15,31 @@ class weapon_description
 {
 public:
 	weapon_description(
-		sanguis::string_vector const &,
-		sanguis::weapon_type const &
+		sanguis::weapon_type const &,
+		sanguis::magazine_size,
+		sanguis::magazine_extra,
+		sanguis::weapon_attribute_vector const &
 	);
-
-	sanguis::string_vector const &
-	text() const;
 
 	sanguis::weapon_type const &
 	weapon_type() const;
-private:
-	sanguis::string_vector text_;
 
+	sanguis::magazine_size const
+	magazine_size() const;
+
+	sanguis::magazine_extra const
+	magazine_extra() const;
+
+	sanguis::weapon_attribute_vector const &
+	attributes() const;
+private:
 	sanguis::weapon_type weapon_type_;
+
+	sanguis::magazine_size magazine_size_;
+
+	sanguis::magazine_extra magazine_extra_;
+
+	sanguis::weapon_attribute_vector attributes_;
 };
 
 }

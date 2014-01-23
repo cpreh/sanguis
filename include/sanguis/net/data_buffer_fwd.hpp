@@ -10,9 +10,11 @@ namespace sanguis
 namespace net
 {
 
-typedef fcppt::container::raw_vector<
+typedef
+fcppt::container::raw_vector<
 	alda::net::value_type
-> data_buffer;
+>
+data_buffer;
 
 }
 }

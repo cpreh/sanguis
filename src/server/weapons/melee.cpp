@@ -2,28 +2,26 @@
 #include <sanguis/duration_second.hpp>
 #include <sanguis/primary_weapon_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
-#include <sanguis/string_vector.hpp>
+#include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/projectiles/melee.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
-#include <sanguis/server/weapons/accuracy.hpp>
 #include <sanguis/server/weapons/attack_result.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/delayed_attack.hpp>
-#include <sanguis/server/weapons/make_attribute.hpp>
 #include <sanguis/server/weapons/melee.hpp>
-#include <sanguis/server/weapons/optional_magazine_size.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
-#include <fcppt/insert_to_fcppt_string.hpp>
+#include <sanguis/server/weapons/attributes/make_damage.hpp>
+#include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
+#include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/text.hpp>
 
 
 sanguis::server::weapons::melee::melee(
@@ -40,11 +38,9 @@ sanguis::server::weapons::melee::melee(
 		sanguis::weapon_type(
 			sanguis::primary_weapon_type::melee
 		),
-		sanguis::server::weapons::accuracy(
-			1.f
-		),
+		sanguis::server::weapons::attributes::optional_accuracy(),
 		_range,
-		sanguis::server::weapons::optional_magazine_size(),
+		sanguis::server::weapons::attributes::optional_magazine_size(),
 		_base_cooldown,
 		sanguis::server::weapons::cast_point(
 			sanguis::duration_second(
@@ -74,7 +70,7 @@ sanguis::server::weapons::melee::do_attack(
 			sanguis::server::entities::projectiles::melee
 		>(
 			_attack.team(),
-			damage_
+			damage_.value()
 		),
 		sanguis::server::entities::insert_parameters_center(
 			sanguis::server::center(
@@ -87,16 +83,13 @@ sanguis::server::weapons::melee::do_attack(
 		sanguis::server::weapons::attack_result::success;
 }
 
-sanguis::string_vector
+sanguis::weapon_attribute_vector
 sanguis::server::weapons::melee::attributes() const
 {
 	return
-		sanguis::string_vector{
-			sanguis::server::weapons::make_attribute(
-				FCPPT_TEXT("damage"),
-				fcppt::insert_to_fcppt_string(
-					damage_
-				)
+		sanguis::weapon_attribute_vector{
+			sanguis::server::weapons::attributes::make_damage(
+				damage_
 			)
 		};
 }

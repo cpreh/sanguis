@@ -10,6 +10,9 @@
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/rocket_launcher_parameters_fwd.hpp>
+#include <sanguis/server/weapons/attributes/aoe.hpp>
+#include <sanguis/server/weapons/attributes/damage.hpp>
+#include <fcppt/nonassignable.hpp>
 
 
 namespace sanguis
@@ -21,6 +24,9 @@ namespace weapons
 
 class rocket_launcher_parameters
 {
+	FCPPT_NONASSIGNABLE(
+		rocket_launcher_parameters
+	);
 public:
 	rocket_launcher_parameters(
 		sanguis::server::weapons::damage,
@@ -33,10 +39,10 @@ public:
 		sanguis::server::weapons::range
 	);
 
-	sanguis::server::weapons::damage const
+	sanguis::server::weapons::attributes::damage const
 	damage() const;
 
-	sanguis::server::weapons::aoe const
+	sanguis::server::weapons::attributes::aoe const
 	aoe() const;
 
 	sanguis::server::weapons::accuracy const
@@ -58,30 +64,30 @@ public:
 	range() const;
 
 	void
-	damage(
+	extra_damage(
 		sanguis::server::weapons::damage
 	);
 
 	void
-	aoe(
+	extra_aoe(
 		sanguis::server::weapons::aoe
 	);
 private:
-	sanguis::server::weapons::damage damage_;
+	sanguis::server::weapons::attributes::damage damage_;
 
-	sanguis::server::weapons::aoe aoe_;
+	sanguis::server::weapons::attributes::aoe aoe_;
 
-	sanguis::server::weapons::accuracy accuracy_;
+	sanguis::server::weapons::accuracy const accuracy_;
 
-	sanguis::server::weapons::base_cooldown base_cooldown_;
+	sanguis::server::weapons::base_cooldown const base_cooldown_;
 
-	sanguis::server::weapons::cast_point cast_point_;
+	sanguis::server::weapons::cast_point const cast_point_;
 
-	sanguis::server::weapons::magazine_size magazine_size_;
+	sanguis::server::weapons::magazine_size const magazine_size_;
 
-	sanguis::server::weapons::reload_time reload_time_;
+	sanguis::server::weapons::reload_time const reload_time_;
 
-	sanguis::server::weapons::range range_;
+	sanguis::server::weapons::range const range_;
 };
 
 }

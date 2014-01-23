@@ -3,18 +3,17 @@
 #include <sanguis/string_vector.hpp>
 #include <sanguis/to_console_arg_list.hpp>
 #include <sanguis/world_id.hpp>
-#include <sanguis/messages/base_fwd.hpp>
-#include <sanguis/messages/client_info.hpp>
-#include <sanguis/messages/console_command.hpp>
-#include <sanguis/messages/create.hpp>
-#include <sanguis/messages/player_cheat.hpp>
-#include <sanguis/messages/player_choose_perk.hpp>
-#include <sanguis/messages/adapted_types/string.hpp>
 #include <sanguis/messages/adapted_types/string_vector.hpp>
-#include <sanguis/messages/call/object.hpp>
+#include <sanguis/messages/client/base_fwd.hpp>
+#include <sanguis/messages/client/cheat.hpp>
+#include <sanguis/messages/client/choose_perk.hpp>
+#include <sanguis/messages/client/console_command.hpp>
+#include <sanguis/messages/client/info.hpp>
+#include <sanguis/messages/client/call/object.hpp>
+#include <sanguis/messages/convert/from_string_vector.hpp>
 #include <sanguis/messages/roles/cheat.hpp>
 #include <sanguis/messages/roles/perk.hpp>
-#include <sanguis/messages/serialization/convert_string_vector.hpp>
+#include <sanguis/messages/roles/player_name.hpp>
 #include <sanguis/server/machine.hpp>
 #include <sanguis/server/make_unicast_callback.hpp>
 #include <sanguis/server/make_send_callback.hpp>
@@ -125,12 +124,12 @@ sanguis::server::states::running::react(
 		_message.id()
 	);
 
-	static sanguis::messages::call::object<
+	static sanguis::messages::client::call::object<
 		boost::mpl::vector4<
-			sanguis::messages::client_info,
-			sanguis::messages::console_command,
-			sanguis::messages::player_cheat,
-			sanguis::messages::player_choose_perk
+			sanguis::messages::client::info,
+			sanguis::messages::client::cheat,
+			sanguis::messages::client::choose_perk,
+			sanguis::messages::client::console_command
 		>,
 		functor_type
 	> dispatcher;
@@ -175,7 +174,7 @@ sanguis::server::states::running::react(
 boost::statechart::result
 sanguis::server::states::running::operator()(
 	sanguis::server::player_id const _id,
-	sanguis::messages::client_info const &_message
+	sanguis::messages::client::info const &_message
 )
 {
 	if(
@@ -199,7 +198,7 @@ sanguis::server::states::running::operator()(
 		_id,
 		sge::charconv::utf8_string_to_fcppt(
 			_message.get<
-				sanguis::messages::adapted_types::string
+				sanguis::messages::roles::player_name
 			>()
 		),
 		this->state_cast<
@@ -218,7 +217,7 @@ sanguis::server::states::running::operator()(
 boost::statechart::result
 sanguis::server::states::running::operator()(
 	sanguis::server::player_id const _id,
-	sanguis::messages::console_command const &_message
+	sanguis::messages::client::console_command const &_message
 )
 {
 	if(
@@ -230,7 +229,7 @@ sanguis::server::states::running::operator()(
 			this->discard_event();
 
 	sanguis::string_vector const command(
-		sanguis::messages::serialization::convert_string_vector(
+		sanguis::messages::convert::from_string_vector(
 			_message.get<
 				sanguis::messages::adapted_types::string_vector
 			>()
@@ -277,7 +276,7 @@ sanguis::server::states::running::operator()(
 boost::statechart::result
 sanguis::server::states::running::operator()(
 	sanguis::server::player_id const _id,
-	sanguis::messages::player_cheat const &_message
+	sanguis::messages::client::cheat const &_message
 )
 {
 	global_context_->player_cheat(
@@ -294,7 +293,7 @@ sanguis::server::states::running::operator()(
 boost::statechart::result
 sanguis::server::states::running::operator()(
 	sanguis::server::player_id const _id,
-	sanguis::messages::player_choose_perk const &_message
+	sanguis::messages::client::choose_perk const &_message
 )
 {
 	global_context_->player_choose_perk(
@@ -318,7 +317,7 @@ sanguis::server::states::running::global_context()
 boost::statechart::result
 sanguis::server::states::running::handle_default_msg(
 	sanguis::server::player_id const,
-	sanguis::messages::base const &
+	sanguis::messages::client::base const &
 )
 {
 	return

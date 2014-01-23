@@ -33,10 +33,8 @@ accuracy(
 	> const _parameters
 )
 {
-	_parameters.get().accuracy(
+	_parameters.get().extra_accuracy(
 		std::min(
-			_parameters.get().accuracy()
-			+
 			// TODO: What to use here?
 			sanguis::server::weapons::accuracy(
 				1.f

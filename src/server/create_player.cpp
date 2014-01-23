@@ -11,8 +11,8 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/player_unique_ptr.hpp>
-#include <sanguis/messages/add_console_command.hpp>
-#include <sanguis/messages/create.hpp>
+#include <sanguis/messages/server/add_console_command.hpp>
+#include <sanguis/messages/server/create.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/log/_.hpp>
@@ -44,8 +44,8 @@ sanguis::server::create_player(
 	)
 		_send_to_player(
 			_player_id,
-			*sanguis::messages::create(
-				sanguis::messages::add_console_command(
+			*sanguis::messages::server::create(
+				sanguis::messages::server::add_console_command(
 					sge::charconv::fcppt_string_to_utf8(
 						command.first
 					),

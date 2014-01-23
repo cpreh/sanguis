@@ -2,10 +2,13 @@
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/damage.hpp>
-#include <sanguis/server/weapons/pistol_parameters.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
+#include <sanguis/server/weapons/pistol_parameters.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
+#include <sanguis/server/weapons/attributes/accuracy.hpp>
+#include <sanguis/server/weapons/attributes/damage.hpp>
+#include <sanguis/server/weapons/attributes/magazine_size.hpp>
 
 
 sanguis::server::weapons::pistol_parameters::pistol_parameters(
@@ -42,7 +45,7 @@ sanguis::server::weapons::pistol_parameters::pistol_parameters(
 {
 }
 
-sanguis::server::weapons::accuracy const
+sanguis::server::weapons::attributes::accuracy const
 sanguis::server::weapons::pistol_parameters::accuracy() const
 {
 	return
@@ -56,7 +59,7 @@ sanguis::server::weapons::pistol_parameters::base_cooldown() const
 		base_cooldown_;
 }
 
-sanguis::server::weapons::damage const
+sanguis::server::weapons::attributes::damage const
 sanguis::server::weapons::pistol_parameters::damage() const
 {
 	return
@@ -70,7 +73,7 @@ sanguis::server::weapons::pistol_parameters::cast_point() const
 		cast_point_;
 }
 
-sanguis::server::weapons::magazine_size const
+sanguis::server::weapons::attributes::magazine_size const
 sanguis::server::weapons::pistol_parameters::magazine_size() const
 {
 	return
@@ -92,28 +95,31 @@ sanguis::server::weapons::pistol_parameters::range() const
 }
 
 void
-sanguis::server::weapons::pistol_parameters::accuracy(
+sanguis::server::weapons::pistol_parameters::extra_accuracy(
 	sanguis::server::weapons::accuracy const _accuracy
 )
 {
-	accuracy_ =
-		_accuracy;
+	accuracy_.extra(
+		_accuracy
+	);
 }
 
 void
-sanguis::server::weapons::pistol_parameters::damage(
+sanguis::server::weapons::pistol_parameters::extra_damage(
 	sanguis::server::weapons::damage const _damage
 )
 {
-	damage_ =
-		_damage;
+	damage_.extra(
+		_damage
+	);
 }
 
 void
-sanguis::server::weapons::pistol_parameters::magazine_size(
+sanguis::server::weapons::pistol_parameters::extra_magazine_size(
 	sanguis::server::weapons::magazine_size const _magazine_size
 )
 {
-	magazine_size_ =
-		_magazine_size;
+	magazine_size_.extra(
+		_magazine_size
+	);
 }

@@ -1,14 +1,15 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/io_service.hpp>
 #include <sanguis/load/server_context.hpp>
-#include <sanguis/messages/base.hpp>
-#include <sanguis/messages/unique_ptr.hpp>
+#include <sanguis/messages/client/base.hpp>
+#include <sanguis/messages/client/unique_ptr.hpp>
+#include <sanguis/messages/server/base_fwd.hpp>
 #include <sanguis/net/append_to_circular_buffer.hpp>
 #include <sanguis/net/receive_buffer_size.hpp>
 #include <sanguis/net/send_buffer_size.hpp>
-#include <sanguis/net/serialize_to_circular_buffer.hpp>
-#include <sanguis/net/serialize_to_data_buffer.hpp>
-#include <sanguis/net/deserialize.hpp>
+#include <sanguis/net/client/deserialize.hpp>
+#include <sanguis/net/server/serialize_to_circular_buffer.hpp>
+#include <sanguis/net/server/serialize_to_data_buffer.hpp>
 #include <sanguis/server/machine.hpp>
 #include <sanguis/server/log.hpp>
 #include <sanguis/server/player_id.hpp>
@@ -113,12 +114,12 @@ sanguis::server::machine::listen()
 
 void
 sanguis::server::machine::send_to_all(
-	sanguis::messages::base const &_message
+	sanguis::messages::server::base const &_message
 )
 {
 	temp_buffer_.clear();
 
-	sanguis::net::serialize_to_data_buffer(
+	sanguis::net::server::serialize_to_data_buffer(
 		_message,
 		temp_buffer_
 	);
@@ -162,7 +163,7 @@ sanguis::server::machine::send_to_all(
 void
 sanguis::server::machine::send_unicast(
 	sanguis::server::player_id const _id,
-	sanguis::messages::base const &_message
+	sanguis::messages::server::base const &_message
 )
 {
 	alda::net::id const net_id(
@@ -191,7 +192,7 @@ sanguis::server::machine::send_unicast(
 	}
 
 	if(
-		!sanguis::net::serialize_to_circular_buffer(
+		!sanguis::net::server::serialize_to_circular_buffer(
 			_message,
 			*buffer
 		)
@@ -224,7 +225,7 @@ sanguis::server::machine::resources() const
 void
 sanguis::server::machine::process_message(
 	alda::net::id const _id,
-	sanguis::messages::unique_ptr &&_message
+	sanguis::messages::client::unique_ptr &&_message
 )
 {
 	FCPPT_LOG_VERBOSE(
@@ -282,8 +283,8 @@ try
 		;;
 	)
 	{
-		sanguis::messages::unique_ptr message(
-			sanguis::net::deserialize(
+		sanguis::messages::client::unique_ptr message(
+			sanguis::net::client::deserialize(
 				_data
 			)
 		);

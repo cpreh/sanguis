@@ -11,8 +11,7 @@
 #include <sanguis/random_generator.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/load/server_context_fwd.hpp>
-#include <sanguis/messages/base_fwd.hpp>
-#include <sanguis/server/center_fwd.hpp>
+#include <sanguis/messages/server/base_fwd.hpp>
 #include <sanguis/server/console_fwd.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/speed_fwd.hpp>
@@ -106,12 +105,6 @@ public:
 	);
 
 	void
-	player_position(
-		sanguis::server::player_id,
-		sanguis::server::center const &
-	);
-
-	void
 	player_cheat(
 		sanguis::server::player_id,
 		sanguis::cheat_type
@@ -144,7 +137,7 @@ private:
 	void
 	send_to_player(
 		sanguis::server::player_id,
-		sanguis::messages::base const &
+		sanguis::messages::server::base const &
 	)
 	override;
 

@@ -8,6 +8,9 @@
 #include <sanguis/server/weapons/spread_radius.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
+#include <sanguis/server/weapons/attributes/accuracy.hpp>
+#include <sanguis/server/weapons/attributes/damage.hpp>
+#include <sanguis/server/weapons/attributes/magazine_size.hpp>
 
 
 sanguis::server::weapons::shotgun_parameters::shotgun_parameters(
@@ -52,7 +55,7 @@ sanguis::server::weapons::shotgun_parameters::shotgun_parameters(
 {
 }
 
-sanguis::server::weapons::accuracy const
+sanguis::server::weapons::attributes::accuracy const
 sanguis::server::weapons::shotgun_parameters::accuracy() const
 {
 	return
@@ -87,14 +90,14 @@ sanguis::server::weapons::shotgun_parameters::shells() const
 		shells_;
 }
 
-sanguis::server::weapons::damage const
+sanguis::server::weapons::attributes::damage const
 sanguis::server::weapons::shotgun_parameters::damage() const
 {
 	return
 		damage_;
 }
 
-sanguis::server::weapons::magazine_size const
+sanguis::server::weapons::attributes::magazine_size const
 sanguis::server::weapons::shotgun_parameters::magazine_size() const
 {
 	return
@@ -116,12 +119,13 @@ sanguis::server::weapons::shotgun_parameters::range() const
 }
 
 void
-sanguis::server::weapons::shotgun_parameters::accuracy(
+sanguis::server::weapons::shotgun_parameters::extra_accuracy(
 	sanguis::server::weapons::accuracy const _accuracy
 )
 {
-	accuracy_ =
-		_accuracy;
+	accuracy_.extra(
+		_accuracy
+	);
 }
 
 void
@@ -134,19 +138,21 @@ sanguis::server::weapons::shotgun_parameters::spread_radius(
 }
 
 void
-sanguis::server::weapons::shotgun_parameters::damage(
+sanguis::server::weapons::shotgun_parameters::extra_damage(
 	sanguis::server::weapons::damage const _damage
 )
 {
-	damage_ =
-		_damage;
+	damage_.extra(
+		_damage
+	);
 }
 
 void
-sanguis::server::weapons::shotgun_parameters::magazine_size(
+sanguis::server::weapons::shotgun_parameters::extra_magazine_size(
 	sanguis::server::weapons::magazine_size const _magazine_size
 )
 {
-	magazine_size_ =
-		_magazine_size;
+	magazine_size_.extra(
+		_magazine_size
+	);
 }

@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_WORLD_CONTEXT_HPP_INCLUDED
 
 #include <sanguis/world_id.hpp>
-#include <sanguis/messages/base_fwd.hpp>
+#include <sanguis/messages/server/base_fwd.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/global/source_world_pair.hpp>
@@ -42,7 +42,7 @@ public:
 	void
 	send_to_player(
 		sanguis::server::player_id,
-		sanguis::messages::base const &
+		sanguis::messages::server::base const &
 	) = 0;
 
 	virtual

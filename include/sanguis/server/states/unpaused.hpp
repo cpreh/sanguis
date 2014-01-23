@@ -5,17 +5,16 @@
 #include <sanguis/server/events/message_fwd.hpp>
 #include <sanguis/server/events/tick_fwd.hpp>
 #include <sanguis/server/states/running.hpp>
-#include <sanguis/messages/base_fwd.hpp>
-#include <sanguis/messages/player_attack_dest_fwd.hpp>
-#include <sanguis/messages/player_change_world_fwd.hpp>
-#include <sanguis/messages/player_direction_fwd.hpp>
-#include <sanguis/messages/player_drop_or_pickup_weapon_fwd.hpp>
-#include <sanguis/messages/player_pause_fwd.hpp>
-#include <sanguis/messages/player_position_fwd.hpp>
-#include <sanguis/messages/player_reload_fwd.hpp>
-#include <sanguis/messages/player_start_shooting_fwd.hpp>
-#include <sanguis/messages/player_stop_shooting_fwd.hpp>
-#include <sanguis/messages/player_unpause_fwd.hpp>
+#include <sanguis/messages/client/base_fwd.hpp>
+#include <sanguis/messages/client/attack_dest_fwd.hpp>
+#include <sanguis/messages/client/change_world_fwd.hpp>
+#include <sanguis/messages/client/direction_fwd.hpp>
+#include <sanguis/messages/client/drop_or_pickup_weapon_fwd.hpp>
+#include <sanguis/messages/client/pause_fwd.hpp>
+#include <sanguis/messages/client/reload_fwd.hpp>
+#include <sanguis/messages/client/start_shooting_fwd.hpp>
+#include <sanguis/messages/client/stop_shooting_fwd.hpp>
+#include <sanguis/messages/client/unpause_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
 #include <boost/statechart/custom_reaction.hpp>
@@ -69,67 +68,61 @@ public:
 	boost::statechart::result
 	operator()(
 		sanguis::server::player_id,
-		sanguis::messages::player_attack_dest const &
+		sanguis::messages::client::attack_dest const &
 	);
 
 	boost::statechart::result
 	operator()(
 		sanguis::server::player_id,
-		sanguis::messages::player_change_world const &
+		sanguis::messages::client::change_world const &
 	);
 
 	boost::statechart::result
 	operator()(
 		sanguis::server::player_id,
-		sanguis::messages::player_direction const &
+		sanguis::messages::client::direction const &
 	);
 
 	boost::statechart::result
 	operator()(
 		sanguis::server::player_id,
-		sanguis::messages::player_drop_or_pickup_weapon const &
+		sanguis::messages::client::drop_or_pickup_weapon const &
 	);
 
 	boost::statechart::result
 	operator()(
 		sanguis::server::player_id,
-		sanguis::messages::player_position const &
+		sanguis::messages::client::reload const &
 	);
 
 	boost::statechart::result
 	operator()(
 		sanguis::server::player_id,
-		sanguis::messages::player_reload const &
+		sanguis::messages::client::start_shooting const &
 	);
 
 	boost::statechart::result
 	operator()(
 		sanguis::server::player_id,
-		sanguis::messages::player_start_shooting const &
+		sanguis::messages::client::stop_shooting const &
 	);
 
 	boost::statechart::result
 	operator()(
 		sanguis::server::player_id,
-		sanguis::messages::player_stop_shooting const &
+		sanguis::messages::client::unpause const &
 	);
 
 	boost::statechart::result
 	operator()(
 		sanguis::server::player_id,
-		sanguis::messages::player_unpause const &
-	);
-
-	boost::statechart::result
-	operator()(
-		sanguis::server::player_id,
-		sanguis::messages::player_pause const &
+		sanguis::messages::client::pause const &
 	);
 private:
 	boost::statechart::result
 	handle_default_msg(
 		sanguis::server::player_id,
-		sanguis::messages::base const &
+		sanguis::messages::client::base const &
 	);
 };
 

@@ -4,8 +4,8 @@
 #include <sanguis/client/events/action_fwd.hpp>
 #include <sanguis/client/events/message_fwd.hpp>
 #include <sanguis/client/states/running.hpp>
-#include <sanguis/messages/add_own_player_fwd.hpp>
-#include <sanguis/messages/base_fwd.hpp>
+#include <sanguis/messages/server/add_own_player_fwd.hpp>
+#include <sanguis/messages/server/base_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
@@ -64,12 +64,12 @@ public:
 
 	result_type
 	operator()(
-		sanguis::messages::add_own_player const &
+		sanguis::messages::server::add_own_player const &
 	);
 private:
 	boost::statechart::result
 	handle_default_msg(
-		sanguis::messages::base const &
+		sanguis::messages::server::base const &
 	);
 };
 

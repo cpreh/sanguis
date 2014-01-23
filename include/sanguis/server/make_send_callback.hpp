@@ -10,7 +10,7 @@ namespace sanguis
 namespace server
 {
 
-sanguis::server::send_callback const
+sanguis::server::send_callback
 make_send_callback(
 	sanguis::server::machine &
 );

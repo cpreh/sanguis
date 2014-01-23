@@ -11,10 +11,10 @@
 #include <sanguis/client/states/waiting_for_player.hpp>
 #include <sanguis/client/states/has_player.hpp>
 #include <sanguis/client/states/ingame.hpp>
-#include <sanguis/messages/add_own_player.hpp>
-#include <sanguis/messages/base_fwd.hpp>
-#include <sanguis/messages/create.hpp>
-#include <sanguis/messages/call/object.hpp>
+#include <sanguis/messages/server/add_own_player.hpp>
+#include <sanguis/messages/server/base_fwd.hpp>
+#include <sanguis/messages/server/create.hpp>
+#include <sanguis/messages/server/call/object.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
@@ -50,9 +50,9 @@ sanguis::client::states::waiting_for_player::react(
 	sanguis::client::events::message const &_event
 )
 {
-	static sanguis::messages::call::object<
+	static sanguis::messages::server::call::object<
 		boost::mpl::vector1<
-			sanguis::messages::add_own_player
+			sanguis::messages::server::add_own_player
 		>,
 		sanguis::client::states::waiting_for_player
 	> dispatcher;
@@ -101,12 +101,12 @@ sanguis::client::states::waiting_for_player::react(
 
 sanguis::client::states::waiting_for_player::result_type
 sanguis::client::states::waiting_for_player::operator()(
-	sanguis::messages::add_own_player const &_message
+	sanguis::messages::server::add_own_player const &_message
 )
 {
 	this->post_event(
 		sanguis::client::events::message(
-			sanguis::messages::create(
+			sanguis::messages::server::create(
 				_message
 			)
 		)
@@ -120,7 +120,7 @@ sanguis::client::states::waiting_for_player::operator()(
 
 boost::statechart::result
 sanguis::client::states::waiting_for_player::handle_default_msg(
-	sanguis::messages::base const &
+	sanguis::messages::server::base const &
 )
 {
 	return

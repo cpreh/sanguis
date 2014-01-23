@@ -1,5 +1,6 @@
 #include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/string_vector.hpp>
+#include <sanguis/weapon_attribute_type.hpp>
+#include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/random_generator.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/angle.hpp>
@@ -11,12 +12,14 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/attack_result.hpp>
 #include <sanguis/server/weapons/delayed_attack.hpp>
-#include <sanguis/server/weapons/make_attribute.hpp>
-#include <sanguis/server/weapons/optional_magazine_size.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/shotgun.hpp>
 #include <sanguis/server/weapons/shotgun_parameters.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/weapons/attributes/make.hpp>
+#include <sanguis/server/weapons/attributes/make_damage.hpp>
+#include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
+#include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
@@ -37,9 +40,11 @@ sanguis::server::weapons::shotgun::shotgun(
 		_diff_clock,
 		_random_generator,
 		_weapon_type,
-		_parameters.accuracy(),
+		sanguis::server::weapons::attributes::optional_accuracy(
+			_parameters.accuracy()
+		),
 		_parameters.range(),
-		sanguis::server::weapons::optional_magazine_size(
+		sanguis::server::weapons::attributes::optional_magazine_size(
 			_parameters.magazine_size()
 		),
 		_parameters.base_cooldown(),
@@ -113,7 +118,7 @@ sanguis::server::weapons::shotgun::do_attack(
 					this->diff_clock(),
 					_attack.environment().load_context(),
 					_attack.team(),
-					damage_,
+					damage_.value(),
 					sanguis::server::direction(
 						angle.get()
 					)
@@ -130,28 +135,21 @@ sanguis::server::weapons::shotgun::do_attack(
 		sanguis::server::weapons::attack_result::success;
 }
 
-sanguis::string_vector
+sanguis::weapon_attribute_vector
 sanguis::server::weapons::shotgun::attributes() const
 {
 	return
-		sanguis::string_vector{
-			sanguis::server::weapons::make_attribute(
-				FCPPT_TEXT("damage"),
-				fcppt::insert_to_fcppt_string(
-					damage_
-				)
+		sanguis::weapon_attribute_vector{
+			sanguis::server::weapons::attributes::make_damage(
+				damage_
+			)/*,
+			sanguis::server::weapons::attributes::make(
+				sanguis::weapon_attribute_type::spread_radius,
+				spread_radius_
 			),
-			sanguis::server::weapons::make_attribute(
-				FCPPT_TEXT("spread radius"),
-				fcppt::insert_to_fcppt_string(
-					spread_radius_
-				)
-			),
-			sanguis::server::weapons::make_attribute(
-				FCPPT_TEXT("shells"),
-				fcppt::insert_to_fcppt_string(
-					shells_
-				)
-			)
+			sanguis::server::weapons::attributes::make(
+				sanguis::weapon_attribute_type::shells,
+				shells_
+			)*/
 		};
 }

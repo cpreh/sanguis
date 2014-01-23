@@ -10,7 +10,8 @@ namespace roles
 {
 
 struct name
-{};
+{
+};
 
 }
 }

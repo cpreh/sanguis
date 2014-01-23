@@ -3,13 +3,13 @@
 
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
-#include <sanguis/string_vector.hpp>
-#include <sanguis/server/weapons/aoe.hpp>
+#include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/server/weapons/attack_result_fwd.hpp>
-#include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/delayed_attack_fwd.hpp>
 #include <sanguis/server/weapons/grenade_parameters_fwd.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/weapons/attributes/aoe.hpp>
+#include <sanguis/server/weapons/attributes/damage.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -42,13 +42,13 @@ private:
 	)
 	override;
 
-	sanguis::string_vector
+	sanguis::weapon_attribute_vector
 	attributes() const
 	override;
 
-	sanguis::server::weapons::damage const damage_;
+	sanguis::server::weapons::attributes::damage const damage_;
 
-	sanguis::server::weapons::aoe const aoe_;
+	sanguis::server::weapons::attributes::aoe const aoe_;
 };
 
 }

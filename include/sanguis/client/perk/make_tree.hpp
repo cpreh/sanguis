@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_PERK_MAKE_TREE_HPP_INCLUDED
 
 #include <sanguis/client/perk/tree_unique_ptr.hpp>
-#include <sanguis/messages/perk_tree_node_list.hpp>
+#include <sanguis/messages/server/types/perk_tree_node_vector.hpp>
 
 
 namespace sanguis
@@ -14,7 +14,7 @@ namespace perk
 
 sanguis::client::perk::tree_unique_ptr
 make_tree(
-	sanguis::messages::perk_tree_node_list const &
+	sanguis::messages::server::types::perk_tree_node_vector const &
 );
 
 }

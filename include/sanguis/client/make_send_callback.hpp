@@ -4,14 +4,15 @@
 #include <sanguis/client/machine_fwd.hpp>
 #include <sanguis/client/send_callback.hpp>
 
+
 namespace sanguis
 {
 namespace client
 {
 
-client::send_callback const
+sanguis::client::send_callback
 make_send_callback(
-	client::machine &
+	sanguis::client::machine &
 );
 
 }

@@ -1,14 +1,14 @@
 #ifndef SANGUIS_CLIENT_MACHINE_HPP_INCLUDED
 #define SANGUIS_CLIENT_MACHINE_HPP_INCLUDED
 
-#include <sanguis/client/machine_fwd.hpp>
-#include <sanguis/client/config/settings/object_fwd.hpp>
-#include <sanguis/client/states/menu_fwd.hpp>
-#include <sanguis/client/server_callback.hpp>
-#include <sanguis/load/context_fwd.hpp>
-#include <sanguis/messages/base_fwd.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/io_service_fwd.hpp>
+#include <sanguis/client/machine_fwd.hpp>
+#include <sanguis/client/server_callback.hpp>
+#include <sanguis/client/config/settings/object_fwd.hpp>
+#include <sanguis/client/states/menu_fwd.hpp>
+#include <sanguis/load/context_fwd.hpp>
+#include <sanguis/messages/client/base_fwd.hpp>
 #include <sge/console/gfx_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
@@ -79,7 +79,7 @@ public:
 
 	void
 	send(
-		sanguis::messages::base const &
+		sanguis::messages::client::base const &
 	);
 
 	bool

@@ -31,7 +31,7 @@
 #include <sanguis/load/context_fwd.hpp>
 #include <sanguis/load/auras/context.hpp>
 #include <sanguis/load/model/collection_fwd.hpp>
-#include <sanguis/messages/base.hpp>
+#include <sanguis/messages/server/base_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/renderer/screen_size_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
@@ -77,7 +77,7 @@ public:
 
 	void
 	process_message(
-		sanguis::messages::base const &
+		sanguis::messages::server::base const &
 	);
 
 	void

@@ -5,6 +5,7 @@
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/weapons/aoe.hpp>
 #include <sanguis/server/weapons/modifiers/random_increase.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
@@ -32,8 +33,8 @@ aoe(
 	> const _parameters
 )
 {
-	_parameters.get().aoe(
-		_parameters.get().aoe()
+	_parameters.get().extra_aoe(
+		_parameters.get().aoe().base()
 		*
 		sanguis::server::weapons::aoe(
 			std::min(
@@ -41,9 +42,15 @@ aoe(
 					_random_generator,
 					_difficulty
 				),
-				_parameters.get().aoe().get()
+				_parameters.get().aoe().base().get()
 				*
 				5.f
+			)
+			-
+			fcppt::literal<
+				sanguis::server::weapons::aoe::value_type
+			>(
+				1
 			)
 		)
 	);

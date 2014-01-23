@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_WEAPONS_MODIFIERS_MAGAZINE_SIZE_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_MODIFIERS_MAGAZINE_SIZE_HPP_INCLUDED
 
+#include <sanguis/magazine_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
@@ -37,16 +38,14 @@ magazine_size(
 	> const _parameters
 )
 {
-	_parameters.get().magazine_size(
-		_parameters.get().magazine_size()
-		+
+	_parameters.get().extra_magazine_size(
 		// TODO: What to use here?
 		sanguis::server::weapons::magazine_size(
 			std::min(
 				fcppt::cast::to_unsigned(
 					fcppt::cast::float_to_int<
 						std::make_signed<
-							sanguis::server::weapons::magazine_type
+							sanguis::magazine_type
 						>::type
 					>(
 						std::sqrt(
@@ -59,10 +58,10 @@ magazine_size(
 						)
 					)
 				),
-				_parameters.get().magazine_size().get()
+				_parameters.get().magazine_size().value().get()
 				*
 				fcppt::literal<
-					sanguis::server::weapons::magazine_type
+					sanguis::magazine_type
 				>(
 					2
 				)

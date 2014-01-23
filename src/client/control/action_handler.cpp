@@ -16,15 +16,15 @@
 #include <sanguis/client/control/actions/cursor.hpp>
 #include <sanguis/client/control/actions/nullary.hpp>
 #include <sanguis/client/control/actions/scale.hpp>
-#include <sanguis/messages/create.hpp>
-#include <sanguis/messages/player_attack_dest.hpp>
-#include <sanguis/messages/player_change_world.hpp>
-#include <sanguis/messages/player_cheat.hpp>
-#include <sanguis/messages/player_direction.hpp>
-#include <sanguis/messages/player_drop_or_pickup_weapon.hpp>
-#include <sanguis/messages/player_reload.hpp>
-#include <sanguis/messages/player_start_shooting.hpp>
-#include <sanguis/messages/player_stop_shooting.hpp>
+#include <sanguis/messages/client/attack_dest.hpp>
+#include <sanguis/messages/client/change_world.hpp>
+#include <sanguis/messages/client/cheat.hpp>
+#include <sanguis/messages/client/create.hpp>
+#include <sanguis/messages/client/direction.hpp>
+#include <sanguis/messages/client/drop_or_pickup_weapon.hpp>
+#include <sanguis/messages/client/reload.hpp>
+#include <sanguis/messages/client/start_shooting.hpp>
+#include <sanguis/messages/client/stop_shooting.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/object.hpp>
 #include <sge/console/callback/name.hpp>
@@ -266,8 +266,8 @@ sanguis::client::control::action_handler::handle_cursor_action(
 		return;
 
 	send_(
-		*sanguis::messages::create(
-			sanguis::messages::player_attack_dest(
+		*sanguis::messages::client::create(
+			sanguis::messages::client::attack_dest(
 				fcppt::math::vector::structure_cast<
 					sanguis::messages::types::vector2
 				>(
@@ -289,8 +289,8 @@ sanguis::client::control::action_handler::handle_nullary_action(
 	{
 	case sanguis::client::control::actions::nullary_type::change_world:
 		send_(
-			*sanguis::messages::create(
-				sanguis::messages::player_change_world()
+			*sanguis::messages::client::create(
+				sanguis::messages::client::change_world()
 			)
 		);
 		return;
@@ -376,8 +376,8 @@ sanguis::client::control::action_handler::update_direction(
 		);
 
 	send_(
-		*sanguis::messages::create(
-			sanguis::messages::player_direction(
+		*sanguis::messages::client::create(
+			sanguis::messages::client::direction(
 				fcppt::math::vector::structure_cast<
 					sanguis::messages::types::vector2
 				>(
@@ -398,16 +398,16 @@ sanguis::client::control::action_handler::handle_shooting(
 		_value
 	)
 		send_(
-			*sanguis::messages::create(
-				sanguis::messages::player_start_shooting(
+			*sanguis::messages::client::create(
+				sanguis::messages::client::start_shooting(
 					_is_primary
 				)
 			)
 		);
 	else
 		send_(
-			*sanguis::messages::create(
-				sanguis::messages::player_stop_shooting(
+			*sanguis::messages::client::create(
+				sanguis::messages::client::stop_shooting(
 					_is_primary
 				)
 			)
@@ -420,8 +420,8 @@ sanguis::client::control::action_handler::handle_drop(
 )
 {
 	send_(
-		*sanguis::messages::create(
-			sanguis::messages::player_drop_or_pickup_weapon(
+		*sanguis::messages::client::create(
+			sanguis::messages::client::drop_or_pickup_weapon(
 				_is_primary
 			)
 		)
@@ -434,8 +434,8 @@ sanguis::client::control::action_handler::handle_reload(
 )
 {
 	send_(
-		*sanguis::messages::create(
-			sanguis::messages::player_reload(
+		*sanguis::messages::client::create(
+			sanguis::messages::client::reload(
 				_is_primary
 			)
 		)
@@ -450,8 +450,8 @@ sanguis::client::control::action_handler::send_cheat(
 )
 {
 	send_(
-		*sanguis::messages::create(
-			sanguis::messages::player_cheat(
+		*sanguis::messages::client::create(
+			sanguis::messages::client::cheat(
 				_cheat
 			)
 		)

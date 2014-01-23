@@ -89,15 +89,22 @@ sanguis::server::weapons::states::castpoint::react(
 		>().do_attack(
 			sanguis::server::weapons::delayed_attack(
 				owner.center(),
-				sanguis::server::weapons::random_angle(
-					this->context<
-						sanguis::server::weapons::weapon
-					>().random_generator(),
-					this->context<
-						sanguis::server::weapons::weapon
-					>().accuracy(),
+				this->context<
+					sanguis::server::weapons::weapon
+				>().accuracy()
+				?
+					sanguis::server::weapons::random_angle(
+						this->context<
+							sanguis::server::weapons::weapon
+						>().random_generator(),
+						this->context<
+							sanguis::server::weapons::weapon
+						>().accuracy()->value(),
+						owner.angle()
+					)
+				:
 					owner.angle()
-				),
+				,
 				owner.team(),
 				*owner.environment(),
 				*target

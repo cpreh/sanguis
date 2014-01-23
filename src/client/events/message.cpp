@@ -1,14 +1,14 @@
 #include <sanguis/client/events/message.hpp>
-#include <sanguis/messages/base.hpp>
-#include <sanguis/messages/shared_ptr.hpp>
-#include <sanguis/messages/unique_ptr.hpp>
+#include <sanguis/messages/server/base.hpp>
+#include <sanguis/messages/server/shared_ptr.hpp>
+#include <sanguis/messages/server/unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::events::message::message(
-	sanguis::messages::unique_ptr &&_value
+	sanguis::messages::server::unique_ptr &&_value
 )
 :
 	value_(
@@ -23,7 +23,7 @@ sanguis::client::events::message::~message()
 {
 }
 
-sanguis::messages::shared_ptr const
+sanguis::messages::server::shared_ptr
 sanguis::client::events::message::value() const
 {
 	return

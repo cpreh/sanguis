@@ -18,15 +18,17 @@
 #include <sanguis/client/events/tick.hpp>
 #include <sanguis/client/states/menu.hpp>
 #include <sanguis/client/states/running.hpp>
-#include <sanguis/messages/add_console_command.hpp>
-#include <sanguis/messages/base_fwd.hpp>
-#include <sanguis/messages/console_print.hpp>
-#include <sanguis/messages/create.hpp>
-#include <sanguis/messages/level_up.hpp>
-#include <sanguis/messages/pause.hpp>
-#include <sanguis/messages/unpause.hpp>
 #include <sanguis/messages/adapted_types/string.hpp>
-#include <sanguis/messages/call/object.hpp>
+#include <sanguis/messages/roles/command_description.hpp>
+#include <sanguis/messages/roles/command_name.hpp>
+#include <sanguis/messages/server/add_console_command.hpp>
+#include <sanguis/messages/server/base_fwd.hpp>
+#include <sanguis/messages/server/console_print.hpp>
+#include <sanguis/messages/server/create.hpp>
+#include <sanguis/messages/server/level_up.hpp>
+#include <sanguis/messages/server/pause.hpp>
+#include <sanguis/messages/server/unpause.hpp>
+#include <sanguis/messages/server/call/object.hpp>
 #include <sanguis/load/context.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <sge/console/object.hpp>
@@ -163,13 +165,13 @@ sanguis::client::states::running::react(
 	sanguis::client::events::message const &_event
 )
 {
-	static sanguis::messages::call::object<
+	static sanguis::messages::server::call::object<
 		boost::mpl::vector5<
-			sanguis::messages::level_up,
-			sanguis::messages::console_print,
-			sanguis::messages::add_console_command,
-			sanguis::messages::pause,
-			sanguis::messages::unpause
+			sanguis::messages::server::level_up,
+			sanguis::messages::server::console_print,
+			sanguis::messages::server::add_console_command,
+			sanguis::messages::server::pause,
+			sanguis::messages::server::unpause
 		>,
 		running
 	> dispatcher;
@@ -199,11 +201,12 @@ sanguis::client::states::running::react(
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
-	sanguis::messages::level_up const &_message
+	sanguis::messages::server::level_up const &_message
 )
 {
 	drawer_->process_message(
-		*sanguis::messages::create(
+		// TODO: Get rid of this!
+		*sanguis::messages::server::create(
 			_message
 		)
 	);
@@ -214,7 +217,7 @@ sanguis::client::states::running::operator()(
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
-	sanguis::messages::console_print const &_message
+	sanguis::messages::server::console_print const &_message
 )
 {
 	console_->sge_console().emit_message(
@@ -233,7 +236,7 @@ sanguis::client::states::running::operator()(
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
-	sanguis::messages::add_console_command const &_message
+	sanguis::messages::server::add_console_command const &_message
 )
 {
 	fcppt::string const
@@ -273,7 +276,7 @@ sanguis::client::states::running::operator()(
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
-	sanguis::messages::pause const &
+	sanguis::messages::server::pause const &
 )
 {
 	drawer_->pause(
@@ -290,7 +293,7 @@ sanguis::client::states::running::operator()(
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
-	sanguis::messages::unpause const &
+	sanguis::messages::server::unpause const &
 )
 {
 	drawer_->pause(
@@ -340,7 +343,7 @@ sanguis::client::states::running::handle_player_action(
 
 boost::statechart::result
 sanguis::client::states::running::handle_default_msg(
-	sanguis::messages::base const &_message
+	sanguis::messages::server::base const &_message
 )
 {
 	drawer_->process_message(
