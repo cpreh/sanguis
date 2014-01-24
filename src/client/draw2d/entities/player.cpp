@@ -1,5 +1,6 @@
 #include <sanguis/aura_type_vector.hpp>
 #include <sanguis/buff_type_vector.hpp>
+#include <sanguis/client/health_pair.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
@@ -10,7 +11,6 @@
 #include <sanguis/client/draw2d/entities/with_buffs_auras_model.hpp>
 #include <sanguis/client/draw2d/entities/with_buffs_auras_model_parameters.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
-#include <sanguis/client/draw2d/entities/model/health_pair.hpp>
 #include <sanguis/client/draw2d/entities/model/name.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
 #include <sanguis/client/draw2d/entities/model/optional_health_pair.hpp>
@@ -49,7 +49,7 @@ sanguis::client::draw2d::entities::player::player(
 	sanguis::client::draw2d::entities::model::load_parameters const &_load_parameters,
 	sanguis::aura_type_vector const &_auras,
 	sanguis::buff_type_vector const &_buffs,
-	sanguis::client::draw2d::entities::model::health_pair const _health_pair
+	sanguis::client::health_pair const _health_pair
 )
 :
 	sanguis::client::draw2d::entities::with_buffs_auras_model(

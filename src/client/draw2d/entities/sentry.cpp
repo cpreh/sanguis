@@ -1,11 +1,11 @@
 #include <sanguis/aura_type_vector.hpp>
 #include <sanguis/buff_type_vector.hpp>
 #include <sanguis/friend_type.hpp>
+#include <sanguis/client/health_pair.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/friend.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/sentry.hpp>
-#include <sanguis/client/draw2d/entities/model/health_pair.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/draw2d/sprite/index.hpp>
@@ -27,7 +27,7 @@ sanguis::client::draw2d::entities::sentry::sentry(
 	sanguis::load::auras::context &_aura_resources,
 	sanguis::aura_type_vector const &_auras,
 	sanguis::buff_type_vector const &_buffs,
-	sanguis::client::draw2d::entities::model::health_pair const _health_pair
+	sanguis::client::health_pair const _health_pair
 )
 :
 	sanguis::client::draw2d::entities::friend_(

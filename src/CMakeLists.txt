@@ -111,8 +111,6 @@ set(
 	include/sanguis/client/draw2d/entities/model/decay_time.hpp
 	include/sanguis/client/draw2d/entities/model/decay_time_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/expand_orders.hpp
-	include/sanguis/client/draw2d/entities/model/health_pair.hpp
-	include/sanguis/client/draw2d/entities/model/health_pair_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/healthbar.hpp
 	include/sanguis/client/draw2d/entities/model/healthbar_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/load_parameters.hpp
@@ -186,6 +184,7 @@ set(
 	include/sanguis/client/draw2d/player_center.hpp
 	include/sanguis/client/draw2d/player_center_callback.hpp
 	include/sanguis/client/draw2d/player_center_fwd.hpp
+	include/sanguis/client/draw2d/player_health_callback.hpp
 	include/sanguis/client/draw2d/radius.hpp
 	include/sanguis/client/draw2d/radius_fwd.hpp
 	include/sanguis/client/draw2d/scene/background.hpp
@@ -368,6 +367,8 @@ set(
 	include/sanguis/client/gui/perk/tab_unique_ptr.hpp
 	include/sanguis/client/gui/perk/tab_unique_ptr_vector.hpp
 	include/sanguis/client/health.hpp
+	include/sanguis/client/health_pair.hpp
+	include/sanguis/client/health_pair_fwd.hpp
 	include/sanguis/client/health_valid.hpp
 	include/sanguis/client/health_value.hpp
 	include/sanguis/client/level.hpp
@@ -377,6 +378,7 @@ set(
 	include/sanguis/client/machine_fwd.hpp
 	include/sanguis/client/make_send_callback.hpp
 	include/sanguis/client/max_health.hpp
+	include/sanguis/client/max_health_valid.hpp
 	include/sanguis/client/object.hpp
 	include/sanguis/client/perk/category.hpp
 	include/sanguis/client/perk/category_equal_range.hpp
@@ -1555,7 +1557,6 @@ set(
 	src/client/draw2d/entities/model/clamp_orientation.cpp
 	src/client/draw2d/entities/model/decay_time.cpp
 	src/client/draw2d/entities/model/expand_orders.cpp
-	src/client/draw2d/entities/model/health_pair.cpp
 	src/client/draw2d/entities/model/healthbar.cpp
 	src/client/draw2d/entities/model/load_parameters.cpp
 	src/client/draw2d/entities/model/loop_method.cpp
@@ -1619,11 +1620,13 @@ set(
 	src/client/gui/perk/make_tabs.cpp
 	src/client/gui/perk/state.cpp
 	src/client/gui/perk/tab.cpp
+	src/client/health_pair.cpp
 	src/client/health_valid.cpp
 	src/client/log.cpp
 	src/client/log_location.cpp
 	src/client/machine.cpp
 	src/client/make_send_callback.cpp
+	src/client/max_health_valid.cpp
 	src/client/object.cpp
 	src/client/perk/category_equal_range.cpp
 	src/client/perk/category_to_string.cpp

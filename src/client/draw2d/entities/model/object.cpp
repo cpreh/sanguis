@@ -17,6 +17,7 @@
 #include <sanguis/client/draw2d/entities/model/healthbar.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
+#include <sanguis/client/draw2d/entities/model/optional_health_pair.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <sanguis/client/draw2d/entities/model/part.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
@@ -326,6 +327,20 @@ sanguis::client::draw2d::entities::model::object::max_health(
 		healthbar_->max_health(
 			_max_health
 		);
+}
+
+sanguis::client::draw2d::entities::model::optional_health_pair const
+sanguis::client::draw2d::entities::model::object::health_pair() const
+{
+	return
+		healthbar_
+		?
+			sanguis::client::draw2d::entities::model::optional_health_pair(
+				healthbar_->health_pair()
+			)
+		:
+			sanguis::client::draw2d::entities::model::optional_health_pair()
+		;
 }
 
 void

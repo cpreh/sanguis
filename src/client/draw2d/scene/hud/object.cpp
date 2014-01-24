@@ -5,7 +5,9 @@
 #include <sanguis/weapon_type_to_is_primary.hpp>
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/exp_for_next_level.hpp>
+#include <sanguis/client/health_pair.hpp>
 #include <sanguis/client/level.hpp>
+#include <sanguis/client/max_health_valid.hpp>
 #include <sanguis/client/draw2d/scene/hud/object.hpp>
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/widget/bar.hpp>
@@ -28,6 +30,7 @@
 #include <sge/rucksack/vector.hpp>
 #include <fcppt/insert_to_string.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
+#include <fcppt/assert/pre.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
 #include <fcppt/config/external_end.hpp>
@@ -152,6 +155,32 @@ sanguis::client::draw2d::scene::hud::object::object(
 
 sanguis::client::draw2d::scene::hud::object::~object()
 {
+}
+
+void
+sanguis::client::draw2d::scene::hud::object::health_pair(
+	sanguis::client::health_pair const &_health_pair
+)
+{
+	FCPPT_ASSERT_PRE(
+		sanguis::client::max_health_valid(
+			_health_pair.max_health()
+		)
+	);
+
+	health_bar_.value(
+		fcppt::strong_typedef_construct_cast<
+			sanguis::gui::widget::bar::fill_level
+		>(
+			_health_pair.health().get()
+		)
+		/
+		fcppt::strong_typedef_construct_cast<
+			sanguis::gui::widget::bar::fill_level
+		>(
+			_health_pair.max_health().get()
+		)
+	);
 }
 
 void

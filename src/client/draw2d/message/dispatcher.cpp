@@ -266,6 +266,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 			env_.model_parameters(),
 			env_.player_center_callback(),
 			env_.collide_callback(),
+			env_.player_health_callback(),
 			_message.get<
 				sanguis::messages::adapted_types::aura_type_vector
 			>(),

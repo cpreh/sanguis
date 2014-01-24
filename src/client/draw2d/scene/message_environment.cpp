@@ -7,6 +7,7 @@
 #include <sanguis/client/draw2d/collide_callback.hpp>
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
 #include <sanguis/client/draw2d/player_center_callback.hpp>
+#include <sanguis/client/draw2d/player_health_callback.hpp>
 #include <sanguis/client/draw2d/entities/base.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
@@ -17,6 +18,7 @@
 #include <sanguis/client/draw2d/scene/world/object.hpp>
 #include <sanguis/load/auras/context_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <functional>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -36,6 +38,13 @@ sanguis::client::draw2d::scene::message_environment::message_environment(
 	),
 	world_(
 		_world
+	),
+	player_health_callback_(
+		std::bind(
+			&sanguis::client::draw2d::scene::hud::object::health_pair,
+			&hud_,
+			std::placeholders::_1
+		)
 	)
 {
 }
@@ -172,4 +181,11 @@ sanguis::client::draw2d::scene::message_environment::collide_callback() const
 {
 	return
 		world_.collide_callback();
+}
+
+sanguis::client::draw2d::player_health_callback const &
+sanguis::client::draw2d::scene::message_environment::player_health_callback() const
+{
+	return
+		player_health_callback_;
 }

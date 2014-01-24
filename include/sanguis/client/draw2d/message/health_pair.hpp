@@ -2,8 +2,8 @@
 #define SANGUIS_CLIENT_DRAW2D_MESSAGE_HEALTH_PAIR_HPP_INCLUDED
 
 #include <sanguis/client/health.hpp>
+#include <sanguis/client/health_pair.hpp>
 #include <sanguis/client/max_health.hpp>
-#include <sanguis/client/draw2d/entities/model/health_pair.hpp>
 #include <sanguis/messages/roles/health.hpp>
 #include <sanguis/messages/roles/max_health.hpp>
 #include <majutsu/get.hpp>
@@ -21,13 +21,13 @@ namespace message
 template<
 	typename Message
 >
-sanguis::client::draw2d::entities::model::health_pair const
+sanguis::client::health_pair const
 health_pair(
 	Message const &_message
 )
 {
 	return
-		sanguis::client::draw2d::entities::model::health_pair(
+		sanguis::client::health_pair(
 			sanguis::client::health(
 				majutsu::get<
 					sanguis::messages::roles::health

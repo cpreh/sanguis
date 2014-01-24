@@ -11,6 +11,7 @@
 #include <sanguis/client/draw2d/collide_callback.hpp>
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
 #include <sanguis/client/draw2d/player_center_callback.hpp>
+#include <sanguis/client/draw2d/player_health_callback.hpp>
 #include <sanguis/client/draw2d/entities/base_fwd.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
@@ -105,6 +106,10 @@ public:
 	virtual
 	sanguis::client::draw2d::collide_callback const &
 	collide_callback() const = 0;
+
+	virtual
+	sanguis::client::draw2d::player_health_callback const &
+	player_health_callback() const = 0;
 
 	virtual
 	~environment() = 0;

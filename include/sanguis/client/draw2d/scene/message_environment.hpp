@@ -11,6 +11,7 @@
 #include <sanguis/client/draw2d/collide_callback.hpp>
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
 #include <sanguis/client/draw2d/player_center_callback.hpp>
+#include <sanguis/client/draw2d/player_health_callback.hpp>
 #include <sanguis/client/draw2d/entities/base_fwd.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
@@ -117,11 +118,17 @@ private:
 	collide_callback() const
 	override;
 
+	sanguis::client::draw2d::player_health_callback const &
+	player_health_callback() const
+	override;
+
 	sanguis::client::draw2d::scene::object &object_;
 
 	sanguis::client::draw2d::scene::hud::object &hud_;
 
 	sanguis::client::draw2d::scene::world::object &world_;
+
+	sanguis::client::draw2d::player_health_callback const player_health_callback_;
 };
 
 }

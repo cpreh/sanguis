@@ -8,9 +8,8 @@
 #include <sanguis/client/draw2d/scene/hud/object_fwd.hpp>
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/exp_for_next_level.hpp>
-#include <sanguis/client/health.hpp>
+#include <sanguis/client/health_pair_fwd.hpp>
 #include <sanguis/client/level.hpp>
-#include <sanguis/client/max_health.hpp>
 #include <sanguis/gui/context.hpp>
 #include <sanguis/gui/fixed_area.hpp>
 #include <sanguis/gui/master.hpp>
@@ -53,13 +52,8 @@ public:
 	~object();
 
 	void
-	health(
-		sanguis::client::health
-	);
-
-	void
-	max_health(
-		sanguis::client::max_health
+	health_pair(
+		sanguis::client::health_pair const &
 	);
 
 	void

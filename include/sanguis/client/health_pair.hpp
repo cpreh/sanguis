@@ -1,20 +1,14 @@
-#ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_HEALTH_PAIR_HPP_INCLUDED
-#define SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_HEALTH_PAIR_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_HEALTH_PAIR_HPP_INCLUDED
+#define SANGUIS_CLIENT_HEALTH_PAIR_HPP_INCLUDED
 
 #include <sanguis/client/health.hpp>
+#include <sanguis/client/health_pair_fwd.hpp>
 #include <sanguis/client/max_health.hpp>
-#include <sanguis/client/draw2d/entities/model/health_pair_fwd.hpp>
 
 
 namespace sanguis
 {
 namespace client
-{
-namespace draw2d
-{
-namespace entities
-{
-namespace model
 {
 
 class health_pair
@@ -36,9 +30,6 @@ private:
 	sanguis::client::max_health max_health_;
 };
 
-}
-}
-}
 }
 }
 

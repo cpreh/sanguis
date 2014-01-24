@@ -2,9 +2,9 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_HEALTHBAR_HPP_INCLUDED
 
 #include <sanguis/client/health.hpp>
+#include <sanguis/client/health_pair_fwd.hpp>
 #include <sanguis/client/max_health.hpp>
 #include <sanguis/client/draw2d/entities/model/healthbar_fwd.hpp>
-#include <sanguis/client/draw2d/entities/model/health_pair_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/dim_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/point_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/colored/object_decl.hpp>
@@ -31,7 +31,7 @@ class healthbar
 public:
 	healthbar(
 		sanguis::client::draw2d::sprite::colored::system &,
-		sanguis::client::draw2d::entities::model::health_pair
+		sanguis::client::health_pair
 	);
 
 	~healthbar();
@@ -51,6 +51,9 @@ public:
 		sanguis::client::draw2d::sprite::point const &,
 		sanguis::client::draw2d::sprite::dim const &
 	);
+
+	sanguis::client::health_pair const
+	health_pair() const;
 private:
 	void
 	pos(

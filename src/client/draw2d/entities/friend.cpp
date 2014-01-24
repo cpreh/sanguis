@@ -1,11 +1,11 @@
 #include <sanguis/aura_type_vector.hpp>
 #include <sanguis/buff_type_vector.hpp>
 #include <sanguis/friend_type_fwd.hpp>
+#include <sanguis/client/health_pair.hpp>
 #include <sanguis/client/draw2d/entities/friend.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/with_buffs_auras_model.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
-#include <sanguis/client/draw2d/entities/model/health_pair.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
 #include <sanguis/client/draw2d/entities/model/name.hpp>
 #include <sanguis/client/draw2d/entities/model/optional_health_pair.hpp>
@@ -21,7 +21,7 @@ sanguis::client::draw2d::entities::friend_::friend_(
 	sanguis::aura_type_vector const &_auras,
 	sanguis::buff_type_vector const &_buffs,
 	sanguis::client::draw2d::entities::order_vector const &_orders,
-	sanguis::client::draw2d::entities::model::health_pair const _health_pair
+	sanguis::client::health_pair const _health_pair
 )
 :
 	sanguis::client::draw2d::entities::with_buffs_auras_model(

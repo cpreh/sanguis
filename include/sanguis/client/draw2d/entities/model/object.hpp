@@ -14,6 +14,7 @@
 #include <sanguis/client/draw2d/entities/model/decay_time_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/healthbar_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/object_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/optional_health_pair_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/part_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/index_fwd.hpp>
@@ -115,7 +116,7 @@ protected:
 
 	bool
 	walking() const;
-private:
+
 	// with_health overrides
 	void
 	health(
@@ -129,6 +130,9 @@ private:
 	)
 	override;
 
+	sanguis::client::draw2d::entities::model::optional_health_pair const
+	health_pair() const;
+private:
 	// with_weapon overrides
 	void
 	weapon(

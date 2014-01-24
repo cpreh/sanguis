@@ -1,11 +1,11 @@
 #include <sanguis/exception.hpp>
 #include <sanguis/client/health.hpp>
+#include <sanguis/client/health_pair.hpp>
 #include <sanguis/client/health_valid.hpp>
-#include <sanguis/client/health_value.hpp>
 #include <sanguis/client/max_health.hpp>
+#include <sanguis/client/max_health_valid.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/model/healthbar.hpp>
-#include <sanguis/client/draw2d/entities/model/health_pair.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/client/draw2d/sprite/system_decl.hpp>
@@ -45,7 +45,7 @@ sanguis::client::draw2d::sprite::unit const
 
 sanguis::client::draw2d::entities::model::healthbar::healthbar(
 	sanguis::client::draw2d::sprite::colored::system &_sys,
-	sanguis::client::draw2d::entities::model::health_pair const _health_pair
+	sanguis::client::health_pair const _health_pair
 )
 :
 	background_(
@@ -129,6 +129,16 @@ sanguis::client::draw2d::entities::model::healthbar::attach_to(
 	);
 }
 
+sanguis::client::health_pair const
+sanguis::client::draw2d::entities::model::healthbar::health_pair() const
+{
+	return
+		sanguis::client::health_pair(
+			health_,
+			max_health_
+		);
+}
+
 void
 sanguis::client::draw2d::entities::model::healthbar::pos(
 	sanguis::client::draw2d::sprite::point const &_pos
@@ -199,12 +209,8 @@ void
 sanguis::client::draw2d::entities::model::healthbar::recalc_health()
 {
 	FCPPT_ASSERT_PRE(
-		max_health_.get()
-		>
-		fcppt::literal<
-			sanguis::client::health_value
-		>(
-			0
+		sanguis::client::max_health_valid(
+			max_health_
 		)
 	);
 
