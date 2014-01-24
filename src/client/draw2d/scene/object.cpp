@@ -68,6 +68,8 @@
 #include <sanguis/messages/server/call/object.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/image/color/predef.hpp>
+#include <sge/input/cursor/object_fwd.hpp>
+#include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/clear/parameters.hpp>
 #include <sge/renderer/context/ffp.hpp>
 #include <sge/renderer/device/ffp.hpp>
@@ -110,7 +112,9 @@ sanguis::client::draw2d::scene::object::object(
 	sanguis::client::sound_manager &_sound_manager,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font_object,
-	sge::viewport::manager &_viewport_manager
+	sge::viewport::manager &_viewport_manager,
+	sge::input::keyboard::device &_keyboard,
+	sge::input::cursor::object &_cursor
 )
 :
 	diff_clock_(),
@@ -152,7 +156,9 @@ sanguis::client::draw2d::scene::object::object(
 			sanguis::client::draw2d::scene::hud::object
 		>(
 			_font_object,
-			renderer_
+			renderer_,
+			_keyboard,
+			_cursor
 		)
 	),
 	world_(
@@ -283,8 +289,6 @@ sanguis::client::draw2d::scene::object::update(
 	sanguis::duration const &_delta
 )
 {
-	hud_->clear_name();
-
 	if(
 		!paused_
 	)
@@ -292,6 +296,10 @@ sanguis::client::draw2d::scene::object::update(
 			diff_clock_,
 			_delta
 		);
+
+	hud_->update(
+		_delta
+	);
 
 	sanguis::map_iteration(
 		entities_,
@@ -603,9 +611,13 @@ sanguis::client::draw2d::scene::object::name_display(
 		<
 		_entity.radius().get()
 	)
+	{
+		// TODO:
+		/*
 		hud_->show_name(
 			_entity.name()
-		);
+		);*/
+	}
 }
 
 void

@@ -5,6 +5,7 @@
 #include <sanguis/is_primary_weapon_fwd.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/client/exp.hpp>
+#include <sanguis/client/exp_for_next_level.hpp>
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/collide_callback.hpp>
@@ -63,7 +64,8 @@ public:
 	virtual
 	void
 	level(
-		sanguis::client::level
+		sanguis::client::level,
+		sanguis::client::exp_for_next_level
 	) = 0;
 
 	virtual

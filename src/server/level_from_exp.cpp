@@ -1,7 +1,6 @@
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/level.hpp>
-#include <sanguis/server/level_calculate.hpp>
-#include <sanguis/server/space_unit.hpp>
+#include <sanguis/server/level_from_exp.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -10,9 +9,8 @@
 
 
 sanguis::server::level const
-sanguis::server::level_calculate(
-	sanguis::server::exp const _exp,
-	sanguis::server::level
+sanguis::server::level_from_exp(
+	sanguis::server::exp const _exp
 )
 {
 	return
@@ -20,7 +18,7 @@ sanguis::server::level_calculate(
 			sanguis::server::level
 		>(
 			fcppt::literal<
-				sanguis::server::space_unit
+				sanguis::server::exp::value_type
 			>(
 				0.3
 			)

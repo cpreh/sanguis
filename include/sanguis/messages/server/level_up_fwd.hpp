@@ -1,7 +1,9 @@
 #ifndef SANGUIS_MESSAGES_SERVER_LEVEL_UP_FWD_HPP_INCLUDED
 #define SANGUIS_MESSAGES_SERVER_LEVEL_UP_FWD_HPP_INCLUDED
 
+#include <sanguis/messages/adapted_types/exp_fwd.hpp>
 #include <sanguis/messages/adapted_types/level_fwd.hpp>
+#include <sanguis/messages/roles/exp_for_next_level.hpp>
 #include <sanguis/messages/server/types/make_message_id_fwd.hpp>
 #include <sanguis/messages/server/types/message.hpp>
 #include <alda/message/make_class_fwd.hpp>
@@ -22,12 +24,16 @@ namespace server
 typedef
 alda::message::make_class<
 	 majutsu::composite<
-		boost::mpl::vector2<
+		boost::mpl::vector3<
 			sanguis::messages::server::types::make_message_id<
 				sanguis::messages::server::types::message::level_up
 			>,
 			majutsu::role<
 				sanguis::messages::adapted_types::level
+			>,
+			majutsu::role<
+				sanguis::messages::adapted_types::exp,
+				sanguis::messages::roles::exp_for_next_level
 			>
 		>
 	>

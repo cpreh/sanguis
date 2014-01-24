@@ -1,5 +1,5 @@
-#ifndef SANGUIS_CLIENT_EXP_HPP_INCLUDED
-#define SANGUIS_CLIENT_EXP_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_EXP_FOR_NEXT_LEVEL_HPP_INCLUDED
+#define SANGUIS_CLIENT_EXP_FOR_NEXT_LEVEL_HPP_INCLUDED
 
 #include <sanguis/client/exp_value.hpp>
 #include <fcppt/strong_typedef.hpp>
@@ -12,7 +12,7 @@ namespace client
 
 FCPPT_MAKE_STRONG_TYPEDEF(
 	sanguis::client::exp_value,
-	exp
+	exp_for_next_level
 );
 
 }

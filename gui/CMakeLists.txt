@@ -14,6 +14,7 @@ set(
 	include/sanguis/gui/text_callback.hpp
 	include/sanguis/gui/text_function.hpp
 	include/sanguis/gui/viewport_adaptor.hpp
+	include/sanguis/gui/widget/bar.hpp
 	include/sanguis/gui/widget/base.hpp
 	include/sanguis/gui/widget/base_fwd.hpp
 	include/sanguis/gui/widget/base_unique_ptr.hpp
@@ -55,6 +56,7 @@ set(
 	include/sanguis/gui/widget/unique_ptr_vector.hpp
 	src/aux_/draw_image.cpp
 	src/aux_/fill_rect.cpp
+	src/aux_/shrink_rect.cpp
 	src/aux_/style/background_color.cpp
 	src/aux_/style/border_color.cpp
 	src/aux_/style/text_color.cpp
@@ -64,6 +66,7 @@ set(
 	src/include/sanguis/gui/aux_/draw_image.hpp
 	src/include/sanguis/gui/aux_/draw_sprite.hpp
 	src/include/sanguis/gui/aux_/fill_rect.hpp
+	src/include/sanguis/gui/aux_/shrink_rect.hpp
 	src/include/sanguis/gui/aux_/sprite_type_choices.hpp
 	src/include/sanguis/gui/aux_/style/background_color.hpp
 	src/include/sanguis/gui/aux_/style/border_color.hpp
@@ -73,6 +76,7 @@ set(
 	src/include/sanguis/gui/aux_/style/text_color.hpp
 	src/master.cpp
 	src/viewport_adaptor.cpp
+	src/widget/bar.cpp
 	src/widget/base.cpp
 	src/widget/box_container.cpp
 	src/widget/button.cpp

@@ -33,6 +33,8 @@
 #include <sanguis/load/model/collection_fwd.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
+#include <sge/input/cursor/object_fwd.hpp>
+#include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/screen_size_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
@@ -67,7 +69,9 @@ public:
 		sanguis::client::sound_manager &,
 		sge::renderer::device::ffp &,
 		sge::font::object &,
-		sge::viewport::manager &
+		sge::viewport::manager &,
+		sge::input::keyboard::device &,
+		sge::input::cursor::object &
 	);
 
 	~object();

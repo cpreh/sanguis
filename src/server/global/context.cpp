@@ -239,6 +239,11 @@ sanguis::server::global::context::insert_player(
 			player_ref->primary_weapon()->description()
 		);
 
+	cur_world.level_changed(
+		_player_id,
+		player_ref->level()
+	);
+
 	sanguis::server::send_available_perks(
 		*player_ref,
 		send_unicast_

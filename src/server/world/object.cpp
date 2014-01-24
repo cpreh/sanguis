@@ -45,6 +45,7 @@
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/exp.hpp>
+#include <sanguis/server/exp_for_level.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/level.hpp>
 #include <sanguis/server/log.hpp>
@@ -658,7 +659,23 @@ sanguis::server::world::object::level_changed(
 		_player_id,
 		*sanguis::messages::server::create(
 			sanguis::messages::server::level_up(
-				_level.get()
+				_level.get(),
+				// TODO: Refactor this into a function!
+				fcppt::cast::to_unsigned(
+					fcppt::cast::float_to_int<
+						std::make_signed<
+							sanguis::messages::types::exp
+						>::type
+					>(
+						sanguis::server::exp_for_level(
+							_level
+							+
+							sanguis::server::level(
+								1u
+							)
+						).get()
+					)
+				)
 			)
 		)
 	);

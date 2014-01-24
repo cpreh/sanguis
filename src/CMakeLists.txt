@@ -341,6 +341,8 @@ set(
 	include/sanguis/client/events/tick.hpp
 	include/sanguis/client/events/tick_fwd.hpp
 	include/sanguis/client/exp.hpp
+	include/sanguis/client/exp_for_next_level.hpp
+	include/sanguis/client/exp_value.hpp
 	include/sanguis/client/gui/menu/callbacks/cancel_connect.hpp
 	include/sanguis/client/gui/menu/callbacks/connect.hpp
 	include/sanguis/client/gui/menu/callbacks/object.hpp
@@ -696,6 +698,7 @@ set(
 	include/sanguis/messages/roles/enemy.hpp
 	include/sanguis/messages/roles/entity_id.hpp
 	include/sanguis/messages/roles/error_message.hpp
+	include/sanguis/messages/roles/exp_for_next_level.hpp
 	include/sanguis/messages/roles/experience.hpp
 	include/sanguis/messages/roles/friend.hpp
 	include/sanguis/messages/roles/generator_name.hpp
@@ -1210,6 +1213,7 @@ set(
 	include/sanguis/server/events/tick.hpp
 	include/sanguis/server/events/tick_fwd.hpp
 	include/sanguis/server/exp.hpp
+	include/sanguis/server/exp_for_level.hpp
 	include/sanguis/server/global/context.hpp
 	include/sanguis/server/global/context_fwd.hpp
 	include/sanguis/server/global/dest_world_pair.hpp
@@ -1223,7 +1227,7 @@ set(
 	include/sanguis/server/health.hpp
 	include/sanguis/server/health_fwd.hpp
 	include/sanguis/server/level.hpp
-	include/sanguis/server/level_calculate.hpp
+	include/sanguis/server/level_from_exp.hpp
 	include/sanguis/server/log.hpp
 	include/sanguis/server/log_location.hpp
 	include/sanguis/server/machine.hpp
@@ -1951,11 +1955,12 @@ set(
 	src/server/events/disconnect.cpp
 	src/server/events/message.cpp
 	src/server/events/tick.cpp
+	src/server/exp_for_level.cpp
 	src/server/global/context.cpp
 	src/server/global/generate_worlds.cpp
 	src/server/global/load_context.cpp
 	src/server/global/world_map.cpp
-	src/server/level_calculate.cpp
+	src/server/level_from_exp.cpp
 	src/server/log.cpp
 	src/server/log_location.cpp
 	src/server/machine.cpp

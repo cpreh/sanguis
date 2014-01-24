@@ -17,7 +17,8 @@
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
-#include <sanguis/server/level_calculate.hpp>
+#include <sanguis/server/level.hpp>
+#include <sanguis/server/level_from_exp.hpp>
 #include <sanguis/server/model_name.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/radius.hpp>
@@ -233,9 +234,8 @@ sanguis::server::entities::player::add_exp(
 			level_
 		),
 		new_level(
-			sanguis::server::level_calculate(
-				exp_,
-				old_level
+			sanguis::server::level_from_exp(
+				exp_
 			)
 		);
 
@@ -393,6 +393,13 @@ sanguis::server::entities::player::player_id() const
 {
 	return
 		player_id_;
+}
+
+sanguis::server::level const
+sanguis::server::entities::player::level() const
+{
+	return
+		level_;
 }
 
 sanguis::server::team

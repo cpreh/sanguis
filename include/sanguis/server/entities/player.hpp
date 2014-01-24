@@ -113,6 +113,9 @@ public:
 	sanguis::server::player_id const
 	player_id() const;
 
+	sanguis::server::level const
+	level() const;
+
 	sanguis::server::team
 	team() const
 	override;

@@ -86,7 +86,13 @@ sanguis::client::states::running::running(
 			>().font_object(),
 			this->context<
 				sanguis::client::machine
-			>().viewport_manager()
+			>().viewport_manager(),
+			this->context<
+				sanguis::client::machine
+			>().keyboard(),
+			this->context<
+				sanguis::client::machine
+			>().cursor()
 		)
 	),
 	input_translator_(

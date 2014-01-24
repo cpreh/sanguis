@@ -6,6 +6,7 @@
 #include <sanguis/creator/opening_count.hpp>
 #include <sanguis/creator/top_parameters.hpp>
 #include <sanguis/client/exp.hpp>
+#include <sanguis/client/exp_for_next_level.hpp>
 #include <sanguis/client/health.hpp>
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/max_health.hpp>
@@ -60,6 +61,7 @@
 #include <sanguis/messages/roles/enemy.hpp>
 #include <sanguis/messages/roles/entity_id.hpp>
 #include <sanguis/messages/roles/experience.hpp>
+#include <sanguis/messages/roles/exp_for_next_level.hpp>
 #include <sanguis/messages/roles/friend.hpp>
 #include <sanguis/messages/roles/health.hpp>
 #include <sanguis/messages/roles/magazine_base_size.hpp>
@@ -486,6 +488,11 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		sanguis::client::level(
 			_message.get<
 				sanguis::messages::adapted_types::level
+			>()
+		),
+		sanguis::client::exp_for_next_level(
+			_message.get<
+				sanguis::messages::roles::exp_for_next_level
 			>()
 		)
 	);

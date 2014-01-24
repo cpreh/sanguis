@@ -1,6 +1,7 @@
 #include <sanguis/entity_id.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/client/exp.hpp>
+#include <sanguis/client/exp_for_next_level.hpp>
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/collide_callback.hpp>
@@ -91,11 +92,13 @@ sanguis::client::draw2d::scene::message_environment::experience(
 
 void
 sanguis::client::draw2d::scene::message_environment::level(
-	sanguis::client::level const _level
+	sanguis::client::level const _level,
+	sanguis::client::exp_for_next_level const _exp_for_next_level
 )
 {
 	hud_.level(
-		_level
+		_level,
+		_exp_for_next_level
 	);
 }
 
