@@ -3,7 +3,6 @@
 
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
-#include <sanguis/client/daytime_settings_fwd.hpp>
 #include <sanguis/client/control/environment_fwd.hpp>
 #include <sanguis/client/control/input_translator_fwd.hpp>
 #include <sanguis/client/control/actions/any_fwd.hpp>
@@ -142,10 +141,6 @@ private:
 	fcppt::scoped_ptr<
 		sanguis::client::console::object
 	> const console_;
-
-	fcppt::scoped_ptr<
-		sanguis::client::daytime_settings
-	> const daytime_settings_;
 
 	fcppt::scoped_ptr<
 		sanguis::client::sound_manager

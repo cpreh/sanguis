@@ -1,4 +1,3 @@
-#include <sanguis/client/daytime_settings.hpp>
 #include <sanguis/client/log.hpp>
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/make_send_callback.hpp>
@@ -66,13 +65,6 @@ sanguis::client::states::running::running(
 			)
 		)
 	),
-	daytime_settings_(
-		fcppt::make_unique_ptr<
-			sanguis::client::daytime_settings
-		>(
-			console_->sge_console()
-		)
-	),
 	sound_manager_(
 		fcppt::make_unique_ptr<
 			sanguis::client::sound_manager
@@ -92,7 +84,6 @@ sanguis::client::states::running::running(
 			this->context<
 				sanguis::client::machine
 			>().font_object(),
-			daytime_settings_->current_time(),
 			this->context<
 				sanguis::client::machine
 			>().viewport_manager()
@@ -127,10 +118,6 @@ sanguis::client::states::running::react(
 	sanguis::client::events::tick const &_event
 )
 {
-	drawer_->set_time(
-		daytime_settings_->current_time()
-	);
-
 	drawer_->update(
 		_event.delta()
 	);

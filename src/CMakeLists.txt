@@ -75,8 +75,6 @@ set(
 	include/sanguis/client/control/scalar.hpp
 	include/sanguis/client/create.hpp
 	include/sanguis/client/create_systems.hpp
-	include/sanguis/client/daytime_settings.hpp
-	include/sanguis/client/daytime_settings_fwd.hpp
 	include/sanguis/client/draw2d/aoe.hpp
 	include/sanguis/client/draw2d/center.hpp
 	include/sanguis/client/draw2d/center_fwd.hpp
@@ -197,8 +195,8 @@ set(
 	include/sanguis/client/draw2d/scene/control_environment.hpp
 	include/sanguis/client/draw2d/scene/control_environment_fwd.hpp
 	include/sanguis/client/draw2d/scene/foreach_z_ordering.hpp
-	include/sanguis/client/draw2d/scene/hud.hpp
-	include/sanguis/client/draw2d/scene/hud_fwd.hpp
+	include/sanguis/client/draw2d/scene/hud/object.hpp
+	include/sanguis/client/draw2d/scene/hud/object_fwd.hpp
 	include/sanguis/client/draw2d/scene/message_environment.hpp
 	include/sanguis/client/draw2d/scene/message_environment_fwd.hpp
 	include/sanguis/client/draw2d/scene/object.hpp
@@ -315,18 +313,6 @@ set(
 	include/sanguis/client/draw2d/sprite/type_choices.hpp
 	include/sanguis/client/draw2d/sprite/type_choices_fwd.hpp
 	include/sanguis/client/draw2d/sprite/unit.hpp
-	include/sanguis/client/draw2d/sunlight/basic_gradients.hpp
-	include/sanguis/client/draw2d/sunlight/basic_gradients_fwd.hpp
-	include/sanguis/client/draw2d/sunlight/basic_gradients_impl.hpp
-	include/sanguis/client/draw2d/sunlight/day_gradient.hpp
-	include/sanguis/client/draw2d/sunlight/gradients.hpp
-	include/sanguis/client/draw2d/sunlight/gradients_fwd.hpp
-	include/sanguis/client/draw2d/sunlight/lerp.hpp
-	include/sanguis/client/draw2d/sunlight/make_color.hpp
-	include/sanguis/client/draw2d/sunlight/real.hpp
-	include/sanguis/client/draw2d/sunlight/rgb32f_format.hpp
-	include/sanguis/client/draw2d/sunlight/sun_angle.hpp
-	include/sanguis/client/draw2d/sunlight/time_to_gregorian.hpp
 	include/sanguis/client/draw2d/translate/scalar_from_client.hpp
 	include/sanguis/client/draw2d/translate/scalar_to_client.hpp
 	include/sanguis/client/draw2d/translate/vector_from_client.hpp
@@ -887,6 +873,8 @@ set(
 	include/sanguis/optional_primary_weapon_type_fwd.hpp
 	include/sanguis/optional_weapon_attribute_value.hpp
 	include/sanguis/optional_weapon_attribute_value_fwd.hpp
+	include/sanguis/optional_weapon_description.hpp
+	include/sanguis/optional_weapon_description_fwd.hpp
 	include/sanguis/perk_type.hpp
 	include/sanguis/perk_type_fwd.hpp
 	include/sanguis/pickup_type.hpp
@@ -1540,7 +1528,6 @@ set(
 	src/client/control/input_translator.cpp
 	src/client/create.cpp
 	src/client/create_systems.cpp
-	src/client/daytime_settings.cpp
 	src/client/draw2d/collide_parameters.cpp
 	src/client/draw2d/entities/aoe_bullet.cpp
 	src/client/draw2d/entities/base.cpp
@@ -1596,7 +1583,7 @@ set(
 	src/client/draw2d/scene/background_dim.cpp
 	src/client/draw2d/scene/background_texture_coordinates.cpp
 	src/client/draw2d/scene/control_environment.cpp
-	src/client/draw2d/scene/hud.cpp
+	src/client/draw2d/scene/hud/object.cpp
 	src/client/draw2d/scene/message_environment.cpp
 	src/client/draw2d/scene/object.cpp
 	src/client/draw2d/scene/translation.cpp
@@ -1609,11 +1596,6 @@ set(
 	src/client/draw2d/sprite/colored/system.cpp
 	src/client/draw2d/sprite/index.cpp
 	src/client/draw2d/sprite/normal/system.cpp
-	src/client/draw2d/sunlight/day_gradient.cpp
-	src/client/draw2d/sunlight/gradients.cpp
-	src/client/draw2d/sunlight/make_color.cpp
-	src/client/draw2d/sunlight/sun_angle.cpp
-	src/client/draw2d/sunlight/time_to_gregorian.cpp
 	src/client/draw2d/translate/scalar_from_client.cpp
 	src/client/draw2d/translate/scalar_to_client.cpp
 	src/client/draw2d/translate/vector_from_client.cpp

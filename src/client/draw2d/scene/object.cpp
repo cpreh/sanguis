@@ -23,9 +23,9 @@
 #include <sanguis/client/draw2d/scene/background_dim.hpp>
 #include <sanguis/client/draw2d/scene/control_environment.hpp>
 #include <sanguis/client/draw2d/scene/foreach_z_ordering.hpp>
-#include <sanguis/client/draw2d/scene/hud.hpp>
 #include <sanguis/client/draw2d/scene/message_environment.hpp>
 #include <sanguis/client/draw2d/scene/translation.hpp>
+#include <sanguis/client/draw2d/scene/hud/object.hpp>
 #include <sanguis/client/draw2d/scene/world/object.hpp>
 #include <sanguis/client/draw2d/entities/base.hpp>
 #include <sanguis/client/draw2d/entities/own.hpp>
@@ -37,8 +37,6 @@
 #include <sanguis/client/draw2d/sprite/client/system_decl.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
 #include <sanguis/client/draw2d/sprite/colored/system_decl.hpp>
-#include <sanguis/client/draw2d/sunlight/make_color.hpp>
-#include <sanguis/client/draw2d/sunlight/sun_angle.hpp>
 #include <sanguis/load/context.hpp>
 #include <sanguis/load/resource/context.hpp>
 #include <sanguis/messages/server/add_aoe_projectile.hpp>
@@ -73,19 +71,6 @@
 #include <sge/renderer/clear/parameters.hpp>
 #include <sge/renderer/context/ffp.hpp>
 #include <sge/renderer/device/ffp.hpp>
-#include <sge/renderer/state/ffp/lighting/ambient_color.hpp>
-#include <sge/renderer/state/ffp/lighting/diffuse_color.hpp>
-#include <sge/renderer/state/ffp/lighting/diffuse_from_vertex.hpp>
-#include <sge/renderer/state/ffp/lighting/specular_color.hpp>
-#include <sge/renderer/state/ffp/lighting/object.hpp>
-#include <sge/renderer/state/ffp/lighting/object_scoped_ptr.hpp>
-#include <sge/renderer/state/ffp/lighting/parameters.hpp>
-#include <sge/renderer/state/ffp/lighting/scoped.hpp>
-#include <sge/renderer/state/ffp/lighting/material/emissive_color.hpp>
-#include <sge/renderer/state/ffp/lighting/material/object.hpp>
-#include <sge/renderer/state/ffp/lighting/material/parameters.hpp>
-#include <sge/renderer/state/ffp/lighting/material/scoped.hpp>
-#include <sge/renderer/state/ffp/lighting/material/shininess.hpp>
 #include <sge/renderer/state/ffp/transform/mode.hpp>
 #include <sge/renderer/state/ffp/transform/object.hpp>
 #include <sge/renderer/state/ffp/transform/object_scoped_ptr.hpp>
@@ -100,7 +85,6 @@
 #include <sge/sprite/state/scoped.hpp>
 #include <sge/viewport/manager.hpp>
 #include <fcppt/format.hpp>
-#include <fcppt/make_cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
@@ -126,7 +110,6 @@ sanguis::client::draw2d::scene::object::object(
 	sanguis::client::sound_manager &_sound_manager,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font_object,
-	std::tm const &_current_time,
 	sge::viewport::manager &_viewport_manager
 )
 :
@@ -166,11 +149,10 @@ sanguis::client::draw2d::scene::object::object(
 	),
 	hud_(
 		fcppt::make_unique_ptr<
-			sanguis::client::draw2d::scene::hud
+			sanguis::client::draw2d::scene::hud::object
 		>(
 			_font_object,
-			renderer_,
-			_current_time
+			renderer_
 		)
 	),
 	world_(
@@ -225,9 +207,6 @@ sanguis::client::draw2d::scene::object::object(
 	),
 	entities_(),
 	own_entities_(),
-	current_time_(
-		_current_time
-	),
 	background_(
 		fcppt::make_unique_ptr<
 			sanguis::client::draw2d::scene::background
@@ -235,27 +214,6 @@ sanguis::client::draw2d::scene::object::object(
 			_resources,
 			client_system_,
 			_viewport_manager
-		)
-	),
-	material_state_(
-		renderer_.create_material_state(
-			sge::renderer::state::ffp::lighting::material::parameters(
-				sge::renderer::state::ffp::lighting::diffuse_color(
-					sge::image::color::predef::black()
-				),
-				sge::renderer::state::ffp::lighting::ambient_color(
-					sge::image::color::predef::white()
-				),
-				sge::renderer::state::ffp::lighting::specular_color(
-					sge::image::color::predef::black()
-				),
-				sge::renderer::state::ffp::lighting::material::emissive_color(
-					sge::image::color::predef::black()
-				),
-				sge::renderer::state::ffp::lighting::material::shininess(
-					0.f
-				)
-			)
 		)
 	),
 	viewport_connection_(
@@ -426,18 +384,6 @@ sanguis::client::draw2d::scene::object::pause(
 		);
 }
 
-void
-sanguis::client::draw2d::scene::object::set_time(
-	std::tm const &_current_time
-)
-{
-	current_time_ = _current_time;
-
-	hud_->time(
-		current_time_
-	);
-}
-
 sanguis::client::control::environment &
 sanguis::client::draw2d::scene::object::control_environment() const
 {
@@ -517,41 +463,12 @@ sanguis::client::draw2d::scene::object::render_systems(
 		)
 	);
 
+	background_->render(
+		_render_context,
+		*translation_
+	);
+
 	{
-		sge::renderer::state::ffp::lighting::material::scoped const scoped_material(
-			_render_context,
-			*material_state_
-		);
-
-		sge::renderer::state::ffp::lighting::object_scoped_ptr const lighting_state(
-			renderer_.create_lighting_state(
-				sge::renderer::state::ffp::lighting::parameters(
-					sge::renderer::state::ffp::lighting::enabled(
-						sge::renderer::state::ffp::lighting::ambient_color(
-							sanguis::client::draw2d::sunlight::make_color(
-								sanguis::client::draw2d::sunlight::sun_angle(
-									current_time_
-								)
-							)
-						),
-						sge::renderer::state::ffp::lighting::diffuse_from_vertex(
-							true
-						)
-					)
-				)
-			)
-		);
-
-		sge::renderer::state::ffp::lighting::scoped const scoped_lighting(
-			_render_context,
-			*lighting_state
-		);
-
-		background_->render(
-			_render_context,
-			*translation_
-		);
-
 		sge::renderer::state::ffp::transform::scoped const scoped_transform(
 			_render_context,
 			sge::renderer::state::ffp::transform::mode::world,

@@ -14,9 +14,9 @@
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/message/environment.hpp>
-#include <sanguis/client/draw2d/scene/hud_fwd.hpp>
 #include <sanguis/client/draw2d/scene/message_environment_fwd.hpp>
 #include <sanguis/client/draw2d/scene/object_fwd.hpp>
+#include <sanguis/client/draw2d/scene/hud/object_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/object_fwd.hpp>
 #include <sanguis/load/auras/context_fwd.hpp>
 
@@ -40,7 +40,7 @@ class message_environment
 public:
 	message_environment(
 		sanguis::client::draw2d::scene::object &,
-		sanguis::client::draw2d::scene::hud &,
+		sanguis::client::draw2d::scene::hud::object &,
 		sanguis::client::draw2d::scene::world::object &
 	);
 
@@ -117,7 +117,7 @@ private:
 
 	sanguis::client::draw2d::scene::object &object_;
 
-	sanguis::client::draw2d::scene::hud &hud_;
+	sanguis::client::draw2d::scene::hud::object &hud_;
 
 	sanguis::client::draw2d::scene::world::object &world_;
 };

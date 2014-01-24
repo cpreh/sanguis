@@ -10,9 +10,9 @@
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
 #include <sanguis/client/draw2d/message/environment.hpp>
-#include <sanguis/client/draw2d/scene/hud.hpp>
 #include <sanguis/client/draw2d/scene/message_environment.hpp>
 #include <sanguis/client/draw2d/scene/object.hpp>
+#include <sanguis/client/draw2d/scene/hud/object.hpp>
 #include <sanguis/client/draw2d/scene/world/object.hpp>
 #include <sanguis/load/auras/context_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -22,7 +22,7 @@
 
 sanguis::client::draw2d::scene::message_environment::message_environment(
 	sanguis::client::draw2d::scene::object &_object,
-	sanguis::client::draw2d::scene::hud &_hud,
+	sanguis::client::draw2d::scene::hud::object &_hud,
 	sanguis::client::draw2d::scene::world::object &_world
 )
 :
@@ -114,7 +114,7 @@ sanguis::client::draw2d::scene::message_environment::give_weapon(
 	sanguis::weapon_description const &_description
 )
 {
-	hud_.weapon_description(
+	hud_.add_weapon(
 		_description
 	);
 }

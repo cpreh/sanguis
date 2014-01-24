@@ -20,9 +20,9 @@
 #include <sanguis/client/draw2d/message/environment_fwd.hpp>
 #include <sanguis/client/draw2d/scene/background_fwd.hpp>
 #include <sanguis/client/draw2d/scene/control_environment_fwd.hpp>
-#include <sanguis/client/draw2d/scene/hud_fwd.hpp>
 #include <sanguis/client/draw2d/scene/message_environment_fwd.hpp>
 #include <sanguis/client/draw2d/scene/object_fwd.hpp>
+#include <sanguis/client/draw2d/scene/hud/object_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/object_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_decl.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
@@ -36,7 +36,6 @@
 #include <sge/renderer/screen_size_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
-#include <sge/renderer/state/ffp/lighting/material/object_scoped_ptr.hpp>
 #include <sge/renderer/target/viewport_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -45,7 +44,6 @@
 #include <fcppt/config/external_begin.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
-#include <ctime>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -69,7 +67,6 @@ public:
 		sanguis::client::sound_manager &,
 		sge::renderer::device::ffp &,
 		sge::font::object &,
-		std::tm const &initial_time,
 		sge::viewport::manager &
 	);
 
@@ -93,11 +90,6 @@ public:
 	void
 	pause(
 		bool
-	);
-
-	void
-	set_time(
-		std::tm const &
 	);
 
 	sanguis::client::control::environment &
@@ -211,7 +203,7 @@ private:
 	sanguis::client::draw2d::sprite::client::system client_system_;
 
 	fcppt::scoped_ptr<
-		sanguis::client::draw2d::scene::hud
+		sanguis::client::draw2d::scene::hud::object
 	> const hud_;
 
 	fcppt::scoped_ptr<
@@ -253,13 +245,9 @@ private:
 
 	own_entity_list own_entities_;
 
-	std::tm current_time_;
-
 	fcppt::scoped_ptr<
 		sanguis::client::draw2d::scene::background
 	> const background_;
-
-	sge::renderer::state::ffp::lighting::material::object_scoped_ptr const material_state_;
 
 	fcppt::signal::scoped_connection const viewport_connection_;
 };
