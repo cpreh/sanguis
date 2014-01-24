@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_WEAPONS_ATTRIBUTES_BASIC_DECL_HPP_INCLUDED
 
 #include <sanguis/server/weapons/attributes/basic_fwd.hpp>
+#include <fcppt/nonassignable.hpp>
 #include <fcppt/optional_impl.hpp>
 
 
