@@ -22,7 +22,7 @@
 #include <sge/parse/ini/value.hpp>
 #include <sge/renderer/clear/parameters.hpp>
 #include <sge/renderer/context/ffp.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/renderer/device/ffp.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <sge/viewport/manager_fwd.hpp>
@@ -237,11 +237,15 @@ sanguis::client::gui::menu::object::object(
 	),
 	gui_master_(
 		_renderer,
-		_viewport_manager,
 		_keyboard,
 		_cursor,
 		gui_context_,
 		main_container_
+	),
+	viewport_adaptor_(
+		_renderer,
+		_viewport_manager,
+		main_container_.layout()
 	),
 	quickstart_connection_(
 		quickstart_button_.click(

@@ -18,7 +18,6 @@
 #include <sge/rucksack/rect.hpp>
 #include <sge/rucksack/vector.hpp>
 #include <sge/rucksack/widget/base.hpp>
-#include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -28,7 +27,6 @@
 
 sanguis::gui::master::master(
 	sge::renderer::device::ffp &_renderer,
-	sge::viewport::manager &_viewport_manager,
 	sge::input::keyboard::device &_keyboard,
 	sge::input::cursor::object &_cursor,
 	sanguis::gui::context &_context,
@@ -46,10 +44,6 @@ sanguis::gui::master::master(
 	),
 	widget_(
 		_widget
-	),
-	viewport_adaptor_(
-		_viewport_manager,
-		_renderer
 	),
 	key_connection_(
 		_keyboard.key_callback(
@@ -88,11 +82,6 @@ sanguis::gui::master::master(
 		)
 	)
 {
-	viewport_adaptor_.child(
-		widget_.layout()
-	);
-
-	widget_.layout().relayout();
 }
 
 sanguis::gui::master::~master()

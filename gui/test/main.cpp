@@ -3,6 +3,7 @@
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/duration.hpp>
 #include <sanguis/gui/master.hpp>
+#include <sanguis/gui/viewport_adaptor.hpp>
 #include <sanguis/gui/widget/button.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/edit.hpp>
@@ -376,11 +377,16 @@ try
 
 	sanguis::gui::master master(
 		sys.renderer_ffp(),
-		sys.viewport_manager(),
 		sys.keyboard_collector(),
 		sys.cursor_demuxer(),
 		context,
 		main_widget
+	);
+
+	sanguis::gui::viewport_adaptor viewport_adaptor(
+		sys.renderer_ffp(),
+		sys.viewport_manager(),
+		main_widget.layout()
 	);
 
 	while(

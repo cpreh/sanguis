@@ -17,6 +17,7 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
+#include <sge/rucksack/rect.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -91,11 +92,20 @@ sanguis::client::gui::perk::chooser::chooser(
 	),
 	gui_master_(
 		_renderer,
-		_viewport_manager,
 		_keyboard,
 		_cursor,
 		gui_context_,
 		main_container_
+	),
+	gui_area_(
+		sge::rucksack::rect(
+			sge::rucksack::rect::vector::null(),
+			sge::rucksack::rect::dim(
+				600,
+				400
+			)
+		),
+		main_container_.layout()
 	),
 	perk_connection_(
 		_state.register_perks_change(
@@ -114,6 +124,7 @@ sanguis::client::gui::perk::chooser::chooser(
 		)
 	)
 {
+	main_container_.layout().relayout();
 }
 
 sanguis::client::gui::perk::chooser::~chooser()

@@ -6,6 +6,7 @@
 #include <sanguis/client/gui/perk/state_fwd.hpp>
 #include <sanguis/client/perk/state_fwd.hpp>
 #include <sanguis/gui/context.hpp>
+#include <sanguis/gui/fixed_area.hpp>
 #include <sanguis/gui/master.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/text.hpp>
@@ -87,6 +88,8 @@ private:
 	sanguis::gui::widget::box_container main_container_;
 
 	sanguis::gui::master gui_master_;
+
+	sanguis::gui::fixed_area gui_area_;
 
 	fcppt::signal::scoped_connection const
 		perk_connection_,

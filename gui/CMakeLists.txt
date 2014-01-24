@@ -6,12 +6,14 @@ set(
 	include/sanguis/gui/context_fwd.hpp
 	include/sanguis/gui/default_aspect.hpp
 	include/sanguis/gui/duration.hpp
+	include/sanguis/gui/fixed_area.hpp
 	include/sanguis/gui/get_focus.hpp
 	include/sanguis/gui/get_focus_fwd.hpp
 	include/sanguis/gui/master.hpp
 	include/sanguis/gui/master_fwd.hpp
 	include/sanguis/gui/text_callback.hpp
 	include/sanguis/gui/text_function.hpp
+	include/sanguis/gui/viewport_adaptor.hpp
 	include/sanguis/gui/widget/base.hpp
 	include/sanguis/gui/widget/base_fwd.hpp
 	include/sanguis/gui/widget/base_unique_ptr.hpp
@@ -58,6 +60,7 @@ set(
 	src/aux_/style/text_color.cpp
 	src/context.cpp
 	src/default_aspect.cpp
+	src/fixed_area.cpp
 	src/include/sanguis/gui/aux_/draw_image.hpp
 	src/include/sanguis/gui/aux_/draw_sprite.hpp
 	src/include/sanguis/gui/aux_/fill_rect.hpp
@@ -69,6 +72,7 @@ set(
 	src/include/sanguis/gui/aux_/style/spacing.hpp
 	src/include/sanguis/gui/aux_/style/text_color.hpp
 	src/master.cpp
+	src/viewport_adaptor.cpp
 	src/widget/base.cpp
 	src/widget/box_container.cpp
 	src/widget/button.cpp
