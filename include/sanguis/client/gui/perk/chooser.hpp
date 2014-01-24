@@ -16,7 +16,6 @@
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
-#include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
@@ -40,7 +39,6 @@ public:
 	chooser(
 		sanguis::client::perk::state &,
 		sge::renderer::device::ffp &,
-		sge::viewport::manager &,
 		sge::font::object &,
 		sge::input::cursor::object &,
 		sge::input::keyboard::device &

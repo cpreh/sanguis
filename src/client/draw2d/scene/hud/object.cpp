@@ -55,6 +55,7 @@ sanguis::client::draw2d::scene::hud::object::object(
 	frames_counter_(),
 	primary_weapon_(),
 	secondary_weapon_(),
+	gui_context_(),
 	player_name_text_(
 		_renderer,
 		_font,

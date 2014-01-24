@@ -42,9 +42,6 @@ sanguis::client::states::perk_chooser::perk_chooser(
 		>().renderer(),
 		this->context<
 			sanguis::client::machine
-		>().viewport_manager(),
-		this->context<
-			sanguis::client::machine
 		>().font_object(),
 		this->context<
 			sanguis::client::machine
