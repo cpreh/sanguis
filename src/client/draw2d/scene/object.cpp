@@ -155,6 +155,7 @@ sanguis::client::draw2d::scene::object::object(
 		fcppt::make_unique_ptr<
 			sanguis::client::draw2d::scene::hud::object
 		>(
+			resources_.resources().textures(),
 			_font_object,
 			renderer_,
 			_keyboard,

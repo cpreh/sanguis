@@ -41,6 +41,16 @@ public:
 
 	SANGUIS_GUI_SYMBOL
 	void
+	push_front(
+		sanguis::gui::widget::reference_alignment_pair const &
+	);
+
+	SANGUIS_GUI_SYMBOL
+	void
+	pop_front();
+
+	SANGUIS_GUI_SYMBOL
+	void
 	push_back(
 		sanguis::gui::widget::reference_alignment_pair const &
 	);

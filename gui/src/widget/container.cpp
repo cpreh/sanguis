@@ -75,6 +75,37 @@ sanguis::gui::widget::container::layout()
 }
 
 void
+sanguis::gui::widget::container::push_front_widget(
+	sanguis::gui::widget::base &_widget
+)
+{
+	widgets_.insert(
+		widgets_.begin(),
+		sanguis::gui::widget::reference(
+			_widget
+		)
+	);
+
+	_widget.parent(
+		sanguis::gui::widget::optional_ref(
+			*this
+		)
+	);
+}
+
+void
+sanguis::gui::widget::container::pop_front_widget()
+{
+	widgets_.front().get().parent(
+		sanguis::gui::widget::optional_ref()
+	);
+
+	widgets_.erase(
+		widgets_.begin()
+	);
+}
+
+void
 sanguis::gui::widget::container::push_back_widget(
 	sanguis::gui::widget::base &_widget
 )

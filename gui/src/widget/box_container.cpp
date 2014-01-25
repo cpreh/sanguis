@@ -56,6 +56,29 @@ sanguis::gui::widget::box_container::~box_container()
 }
 
 void
+sanguis::gui::widget::box_container::push_front(
+	sanguis::gui::widget::reference_alignment_pair const &_pair
+)
+{
+	this->push_front_widget(
+		_pair.reference().get()
+	);
+
+	layout_.push_front_child(
+		_pair.reference().get().layout(),
+		_pair.alignment()
+	);
+}
+
+void
+sanguis::gui::widget::box_container::pop_front()
+{
+	layout_.pop_front_child();
+
+	this->pop_front_widget();
+}
+
+void
 sanguis::gui::widget::box_container::push_back(
 	sanguis::gui::widget::reference_alignment_pair const &_pair
 )

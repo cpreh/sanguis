@@ -45,6 +45,14 @@ public:
 	override;
 protected:
 	void
+	push_front_widget(
+		sanguis::gui::widget::base &
+	);
+
+	void
+	pop_front_widget();
+
+	void
 	push_back_widget(
 		sanguis::gui::widget::base &
 	);

@@ -9,10 +9,12 @@
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/max_health_valid.hpp>
 #include <sanguis/client/draw2d/scene/hud/object.hpp>
+#include <sanguis/client/draw2d/scene/hud/weapon_widget.hpp>
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/widget/bar.hpp>
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
+#include <sanguis/load/resource/textures_fwd.hpp>
 #include <sanguis/gui/widget/reference_alignment_vector.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/object_fwd.hpp>
@@ -37,12 +39,16 @@
 
 
 sanguis::client::draw2d::scene::hud::object::object(
+	sanguis::load::resource::textures const &_textures,
 	sge::font::object &_font,
 	sge::renderer::device::ffp &_renderer,
 	sge::input::keyboard::device &_keyboard,
 	sge::input::cursor::object &_cursor
 )
 :
+	resources_(
+		_textures
+	),
 	exp_(
 		0u
 	),
@@ -53,8 +59,6 @@ sanguis::client::draw2d::scene::hud::object::object(
 		0u
 	),
 	frames_counter_(),
-	primary_weapon_(),
-	secondary_weapon_(),
 	gui_context_(),
 	player_name_text_(
 		_renderer,
@@ -108,6 +112,37 @@ sanguis::client::draw2d::scene::hud::object::object(
 			1.f
 		)
 	),
+	primary_weapon_(
+		resources_,
+		gui_context_,
+		_renderer,
+		_font
+	),
+	secondary_weapon_(
+		resources_,
+		gui_context_,
+		_renderer,
+		_font
+	),
+	weapon_container_(
+		gui_context_,
+		sanguis::gui::widget::reference_alignment_vector{
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					primary_weapon_.widget()
+				),
+				sge::rucksack::alignment::left_or_top
+			),
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					secondary_weapon_.widget()
+				),
+				sge::rucksack::alignment::left_or_top
+			)
+		},
+		sge::rucksack::axis::x,
+		sanguis::gui::default_aspect()
+	),
 	main_widget_(
 		gui_context_,
 		sanguis::gui::widget::reference_alignment_vector{
@@ -128,6 +163,12 @@ sanguis::client::draw2d::scene::hud::object::object(
 					health_bar_
 				),
 				sge::rucksack::alignment::left_or_top
+			),
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					weapon_container_
+				),
+				sge::rucksack::alignment::left_or_top
 			)
 		},
 		sge::rucksack::axis::y,
@@ -146,7 +187,7 @@ sanguis::client::draw2d::scene::hud::object::object(
 			sge::rucksack::vector::null(),
 			sge::rucksack::dim(
 				250,
-				200
+				300
 			)
 		),
 		main_widget_.layout()
@@ -225,14 +266,15 @@ sanguis::client::draw2d::scene::hud::object::add_weapon(
 	sanguis::weapon_description const &_description
 )
 {
-	this->weapon_description(
+	this->weapon_widget(
 		sanguis::weapon_type_to_is_primary(
 			_description.weapon_type()
 		)
-	) =
+	).weapon_description(
 		sanguis::optional_weapon_description(
 			_description
-		);
+		)
+	);
 }
 
 void
@@ -240,10 +282,11 @@ sanguis::client::draw2d::scene::hud::object::remove_weapon(
 	sanguis::is_primary_weapon const _is_primary
 )
 {
-	this->weapon_description(
+	this->weapon_widget(
 		_is_primary
-	) =
-		sanguis::optional_weapon_description();
+	).weapon_description(
+		sanguis::optional_weapon_description()
+	);
 }
 
 void
@@ -273,8 +316,8 @@ sanguis::client::draw2d::scene::hud::object::draw(
 	);
 }
 
-sanguis::optional_weapon_description &
-sanguis::client::draw2d::scene::hud::object::weapon_description(
+sanguis::client::draw2d::scene::hud::weapon_widget &
+sanguis::client::draw2d::scene::hud::object::weapon_widget(
 	sanguis::is_primary_weapon const _is_primary
 )
 {

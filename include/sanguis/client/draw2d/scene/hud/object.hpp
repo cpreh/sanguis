@@ -3,9 +3,9 @@
 
 #include <sanguis/duration.hpp>
 #include <sanguis/is_primary_weapon.hpp>
-#include <sanguis/optional_weapon_description.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/client/draw2d/scene/hud/object_fwd.hpp>
+#include <sanguis/client/draw2d/scene/hud/weapon_widget.hpp>
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/exp_for_next_level.hpp>
 #include <sanguis/client/health_pair_fwd.hpp>
@@ -16,6 +16,8 @@
 #include <sanguis/gui/widget/bar.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/text.hpp>
+#include <sanguis/load/hud/context.hpp>
+#include <sanguis/load/resource/textures_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
@@ -43,6 +45,7 @@ class object
 	);
 public:
 	object(
+		sanguis::load::resource::textures const &,
 		sge::font::object &,
 		sge::renderer::device::ffp &,
 		sge::input::keyboard::device &,
@@ -90,10 +93,12 @@ private:
 	void
 	update_exp();
 
-	sanguis::optional_weapon_description &
-	weapon_description(
+	sanguis::client::draw2d::scene::hud::weapon_widget &
+	weapon_widget(
 		sanguis::is_primary_weapon
 	);
+
+	sanguis::load::hud::context resources_;
 
 	sanguis::client::exp exp_;
 
@@ -102,10 +107,6 @@ private:
 	sanguis::client::exp_for_next_level exp_for_next_level_;
 
 	sge::timer::frames_counter frames_counter_;
-
-	sanguis::optional_weapon_description primary_weapon_;
-
-	sanguis::optional_weapon_description secondary_weapon_;
 
 	sanguis::gui::context gui_context_;
 
@@ -118,6 +119,12 @@ private:
 		sanguis::gui::widget::bar exp_bar_;
 
 		sanguis::gui::widget::bar health_bar_;
+
+			sanguis::client::draw2d::scene::hud::weapon_widget primary_weapon_;
+
+			sanguis::client::draw2d::scene::hud::weapon_widget secondary_weapon_;
+
+		sanguis::gui::widget::box_container weapon_container_;
 
 	sanguis::gui::widget::box_container main_widget_;
 

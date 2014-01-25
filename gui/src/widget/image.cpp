@@ -19,7 +19,10 @@
 #include <sge/rucksack/preferred_size.hpp>
 #include <sge/rucksack/scalar.hpp>
 #include <sge/rucksack/widget/base.hpp>
+#include <sge/texture/const_part_shared_ptr.hpp>
+#include <sge/texture/part_raw_ptr.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
@@ -32,17 +35,33 @@ sanguis::gui::widget::image::image(
 	sge::image2d::view::const_object const &_image
 )
 :
+	sanguis::gui::widget::image::image(
+		_renderer,
+		fcppt::make_shared_ptr<
+			sge::texture::part_raw_ptr
+		>(
+			sge::renderer::texture::create_planar_from_view(
+				_renderer,
+				_image,
+				sge::renderer::texture::mipmap::off(),
+				sge::renderer::resource_flags_field::null(),
+				sge::renderer::texture::emulate_srgb::no
+			)
+		)
+	)
+{
+}
+
+sanguis::gui::widget::image::image(
+	sge::renderer::device::ffp &_renderer,
+	sge::texture::const_part_shared_ptr const _texture
+)
+:
 	renderer_(
 		_renderer
 	),
 	texture_(
-		sge::renderer::texture::create_planar_from_view(
-			_renderer,
-			_image,
-			sge::renderer::texture::mipmap::off(),
-			sge::renderer::resource_flags_field::null(),
-			sge::renderer::texture::emulate_srgb::no
-		)
+		_texture
 	),
 	layout_(
 		sge::rucksack::axis_policy2(
@@ -52,7 +71,7 @@ sanguis::gui::widget::image::image(
 						sge::rucksack::scalar
 					>(
 						fcppt::cast::to_signed(
-							texture_.size().w()
+							texture_->size().w()
 						)
 					)
 				),
@@ -69,7 +88,7 @@ sanguis::gui::widget::image::image(
 						sge::rucksack::scalar
 					>(
 						fcppt::cast::to_signed(
-							texture_.size().h()
+							texture_->size().h()
 						)
 					)
 				),
@@ -105,7 +124,7 @@ sanguis::gui::widget::image::on_draw(
 	sanguis::gui::aux_::draw_image(
 		renderer_,
 		_context,
-		texture_,
+		*texture_,
 		layout_.position()
 		+
 		(
@@ -114,7 +133,7 @@ sanguis::gui::widget::image::on_draw(
 			fcppt::math::dim::structure_cast<
 				sge::rucksack::dim
 			>(
-				texture_.area().size()
+				texture_->area().size()
 			)
 		)
 		/

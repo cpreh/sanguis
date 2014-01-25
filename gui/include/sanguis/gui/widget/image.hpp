@@ -9,7 +9,7 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/widget/base_fwd.hpp>
 #include <sge/rucksack/widget/dummy.hpp>
-#include <sge/texture/part_raw_ptr.hpp>
+#include <sge/texture/const_part_shared_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -35,6 +35,12 @@ public:
 	);
 
 	SANGUIS_GUI_SYMBOL
+	image(
+		sge::renderer::device::ffp &,
+		sge::texture::const_part_shared_ptr
+	);
+
+	SANGUIS_GUI_SYMBOL
 	~image();
 
 	SANGUIS_GUI_SYMBOL
@@ -50,7 +56,7 @@ private:
 
 	sge::renderer::device::ffp &renderer_;
 
-	sge::texture::part_raw_ptr const texture_;
+	sge::texture::const_part_shared_ptr const texture_;
 
 	sge::rucksack::widget::dummy layout_;
 };

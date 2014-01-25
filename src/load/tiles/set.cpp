@@ -69,14 +69,14 @@ sanguis::load::tiles::set::set(
 				FCPPT_LOG_ERROR(
 					sanguis::load::log(),
 					fcppt::log::_
-					<<
-					FCPPT_TEXT("Tileset file ")
-					<<
-					fcppt::filesystem::path_to_string(
-						path
-					)
-					<<
-					FCPPT_TEXT(" has an invalid filename.")
+						<<
+						FCPPT_TEXT("Tileset file ")
+						<<
+						fcppt::filesystem::path_to_string(
+							path
+						)
+						<<
+						FCPPT_TEXT(" has an invalid filename.")
 				);
 
 				continue;
@@ -100,16 +100,16 @@ sanguis::load::tiles::set::set(
 			FCPPT_LOG_ERROR(
 				sanguis::load::log(),
 				fcppt::log::_
-				<<
-				FCPPT_TEXT("Tileset ")
-				<<
-				_category
-				<<
-				FCPPT_TEXT('/')
-				<<
-				_name
-				<<
-				FCPPT_TEXT(" has no default orientation.")
+					<<
+					FCPPT_TEXT("Tileset ")
+					<<
+					_category
+					<<
+					FCPPT_TEXT('/')
+					<<
+					_name
+					<<
+					FCPPT_TEXT(" has no default orientation.")
 			);
 	}
 	catch(

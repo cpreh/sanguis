@@ -196,6 +196,7 @@ set(
 	include/sanguis/client/draw2d/scene/foreach_z_ordering.hpp
 	include/sanguis/client/draw2d/scene/hud/object.hpp
 	include/sanguis/client/draw2d/scene/hud/object_fwd.hpp
+	include/sanguis/client/draw2d/scene/hud/weapon_widget.hpp
 	include/sanguis/client/draw2d/scene/message_environment.hpp
 	include/sanguis/client/draw2d/scene/message_environment_fwd.hpp
 	include/sanguis/client/draw2d/scene/object.hpp
@@ -474,6 +475,9 @@ set(
 	include/sanguis/load/enemy_name.hpp
 	include/sanguis/load/first_file.hpp
 	include/sanguis/load/friend_name.hpp
+	include/sanguis/load/hud/context.hpp
+	include/sanguis/load/hud/context_fwd.hpp
+	include/sanguis/load/hud/weapon_type.hpp
 	include/sanguis/load/log.hpp
 	include/sanguis/load/model/animation.hpp
 	include/sanguis/load/model/animation_fwd.hpp
@@ -880,6 +884,8 @@ set(
 	include/sanguis/optional_weapon_attribute_value_fwd.hpp
 	include/sanguis/optional_weapon_description.hpp
 	include/sanguis/optional_weapon_description_fwd.hpp
+	include/sanguis/optional_weapon_type.hpp
+	include/sanguis/optional_weapon_type_fwd.hpp
 	include/sanguis/perk_type.hpp
 	include/sanguis/perk_type_fwd.hpp
 	include/sanguis/pickup_type.hpp
@@ -1589,6 +1595,7 @@ set(
 	src/client/draw2d/scene/background_texture_coordinates.cpp
 	src/client/draw2d/scene/control_environment.cpp
 	src/client/draw2d/scene/hud/object.cpp
+	src/client/draw2d/scene/hud/weapon_widget.cpp
 	src/client/draw2d/scene/message_environment.cpp
 	src/client/draw2d/scene/object.cpp
 	src/client/draw2d/scene/translation.cpp
@@ -1667,6 +1674,8 @@ set(
 	src/load/enemy_name.cpp
 	src/load/first_file.cpp
 	src/load/friend_name.cpp
+	src/load/hud/context.cpp
+	src/load/hud/weapon_type.cpp
 	src/load/log.cpp
 	src/load/model/animation.cpp
 	src/load/model/base_animation_not_found.cpp
