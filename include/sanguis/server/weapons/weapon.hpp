@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_WEAPONS_WEAPON_HPP_INCLUDED
 
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/magazine_remaining.hpp>
 #include <sanguis/magazine_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
@@ -152,6 +153,12 @@ private:
 
 	sanguis::server::weapons::optional_reload_time const
 	reload_time() const;
+
+	sanguis::magazine_remaining const
+	magazine_remaining() const;
+
+	void
+	update_magazine_remaining();
 
 	sanguis::diff_clock const &diff_clock_;
 

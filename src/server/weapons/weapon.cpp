@@ -1,5 +1,6 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/magazine_extra.hpp>
+#include <sanguis/magazine_remaining.hpp>
 #include <sanguis/magazine_size.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/random_generator_fwd.hpp>
@@ -266,6 +267,15 @@ sanguis::server::weapons::weapon::description() const
 				:
 					0u
 			),
+			this->magazine_size()
+			?
+				this->magazine_remaining()
+			:
+				sanguis::magazine_remaining(
+					// TODO: Is this ok?
+					1u
+				)
+			,
 			// TODO: Make composing this more sane!
 			accuracy_
 			?
@@ -324,6 +334,11 @@ sanguis::server::weapons::weapon::reset_magazine()
 {
 	magazine_used_ =
 		0u;
+
+	if(
+		this->magazine_size()
+	)
+		this->update_magazine_remaining();
 }
 
 void
@@ -335,6 +350,8 @@ sanguis::server::weapons::weapon::use_magazine_item()
 		return;
 
 	++magazine_used_;
+
+	this->update_magazine_remaining();
 
 	FCPPT_ASSERT_ERROR(
 		magazine_used_
@@ -380,4 +397,28 @@ sanguis::server::weapons::weapon::reload_time() const
 {
 	return
 		reload_time_;
+}
+
+sanguis::magazine_remaining const
+sanguis::server::weapons::weapon::magazine_remaining() const
+{
+	FCPPT_ASSERT_PRE(
+		this->magazine_size()
+	);
+
+	return
+		sanguis::magazine_remaining(
+			this->magazine_size()->value().get()
+			-
+			magazine_used_
+		);
+}
+
+void
+sanguis::server::weapons::weapon::update_magazine_remaining()
+{
+	this->owner().magazine_remaining(
+		this->magazine_remaining(),
+		*this
+	);
 }

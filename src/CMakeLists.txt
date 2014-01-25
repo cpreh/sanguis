@@ -574,6 +574,7 @@ set(
 	include/sanguis/log_location.hpp
 	include/sanguis/log_parameters.hpp
 	include/sanguis/magazine_extra.hpp
+	include/sanguis/magazine_remaining.hpp
 	include/sanguis/magazine_size.hpp
 	include/sanguis/magazine_type.hpp
 	include/sanguis/main.hpp
@@ -711,6 +712,7 @@ set(
 	include/sanguis/messages/roles/health.hpp
 	include/sanguis/messages/roles/magazine_base_size.hpp
 	include/sanguis/messages/roles/magazine_extra_size.hpp
+	include/sanguis/messages/roles/magazine_remaining.hpp
 	include/sanguis/messages/roles/max_health.hpp
 	include/sanguis/messages/roles/max_perk_level.hpp
 	include/sanguis/messages/roles/name.hpp
@@ -778,6 +780,8 @@ set(
 	include/sanguis/messages/server/instantiate_message.hpp
 	include/sanguis/messages/server/level_up.hpp
 	include/sanguis/messages/server/level_up_fwd.hpp
+	include/sanguis/messages/server/magazine_remaining.hpp
+	include/sanguis/messages/server/magazine_remaining_fwd.hpp
 	include/sanguis/messages/server/max_health.hpp
 	include/sanguis/messages/server/max_health_fwd.hpp
 	include/sanguis/messages/server/move.hpp
@@ -1773,6 +1777,7 @@ set(
 	src/messages/server/give_weapon.cpp
 	src/messages/server/health.cpp
 	src/messages/server/level_up.cpp
+	src/messages/server/magazine_remaining.cpp
 	src/messages/server/max_health.cpp
 	src/messages/server/move.cpp
 	src/messages/server/pause.cpp

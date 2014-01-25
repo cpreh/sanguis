@@ -1,5 +1,6 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/is_primary_weapon.hpp>
+#include <sanguis/magazine_remaining.hpp>
 #include <sanguis/optional_weapon_description.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_type_to_is_primary.hpp>
@@ -286,6 +287,19 @@ sanguis::client::draw2d::scene::hud::object::remove_weapon(
 		_is_primary
 	).weapon_description(
 		sanguis::optional_weapon_description()
+	);
+}
+
+void
+sanguis::client::draw2d::scene::hud::object::magazine_remaining(
+	sanguis::is_primary_weapon const _is_primary,
+	sanguis::magazine_remaining const _magazine_remaining
+)
+{
+	this->weapon_widget(
+		_is_primary
+	).magazine_remaining(
+		_magazine_remaining
 	);
 }
 

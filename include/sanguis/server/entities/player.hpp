@@ -3,6 +3,7 @@
 
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/is_primary_weapon_fwd.hpp>
+#include <sanguis/magazine_remaining.hpp>
 #include <sanguis/perk_type_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/collision/world/group_field_fwd.hpp>
@@ -172,6 +173,13 @@ private:
 	void
 	on_drop_weapon(
 		sanguis::is_primary_weapon
+	)
+	override;
+
+	void
+	on_magazine_remaining(
+		sanguis::is_primary_weapon,
+		sanguis::magazine_remaining
 	)
 	override;
 

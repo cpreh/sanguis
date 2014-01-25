@@ -3,6 +3,7 @@
 
 #include <sanguis/duration.hpp>
 #include <sanguis/is_primary_weapon.hpp>
+#include <sanguis/magazine_remaining.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/client/draw2d/scene/hud/object_fwd.hpp>
 #include <sanguis/client/draw2d/scene/hud/weapon_widget.hpp>
@@ -78,6 +79,12 @@ public:
 	void
 	remove_weapon(
 		sanguis::is_primary_weapon
+	);
+
+	void
+	magazine_remaining(
+		sanguis::is_primary_weapon,
+		sanguis::magazine_remaining
 	);
 
 	void

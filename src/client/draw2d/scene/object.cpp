@@ -57,6 +57,7 @@
 #include <sanguis/messages/server/give_weapon.hpp>
 #include <sanguis/messages/server/health.hpp>
 #include <sanguis/messages/server/level_up.hpp>
+#include <sanguis/messages/server/magazine_remaining.hpp>
 #include <sanguis/messages/server/max_health.hpp>
 #include <sanguis/messages/server/move.hpp>
 #include <sanguis/messages/server/remove.hpp>
@@ -244,7 +245,7 @@ sanguis::client::draw2d::scene::object::process_message(
 )
 {
 	static sanguis::messages::server::call::object<
-		boost::mpl::vector25<
+		boost::mpl::vector26<
 			sanguis::messages::server::add_aoe_projectile,
 			sanguis::messages::server::add_aura,
 			sanguis::messages::server::add_buff,
@@ -262,6 +263,7 @@ sanguis::client::draw2d::scene::object::process_message(
 			sanguis::messages::server::give_weapon,
 			sanguis::messages::server::health,
 			sanguis::messages::server::level_up,
+			sanguis::messages::server::magazine_remaining,
 			sanguis::messages::server::max_health,
 			sanguis::messages::server::move,
 			sanguis::messages::server::remove,

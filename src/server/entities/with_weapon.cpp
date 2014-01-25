@@ -1,4 +1,5 @@
 #include <sanguis/is_primary_weapon.hpp>
+#include <sanguis/magazine_remaining.hpp>
 #include <sanguis/time_unit.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
 #include <sanguis/primary_weapon_type.hpp>
@@ -353,6 +354,20 @@ sanguis::server::entities::with_weapon::weapon_status(
 	);
 }
 
+void
+sanguis::server::entities::with_weapon::magazine_remaining(
+	sanguis::magazine_remaining const _magazine_remaining,
+	sanguis::server::weapons::weapon const &_weapon
+)
+{
+	this->on_magazine_remaining(
+		sanguis::weapon_type_to_is_primary(
+			_weapon.type()
+		),
+		_magazine_remaining
+	);
+}
+
 sanguis::weapon_status
 sanguis::server::entities::with_weapon::weapon_status() const
 {
@@ -447,6 +462,14 @@ sanguis::server::entities::with_weapon::on_new_weapon(
 void
 sanguis::server::entities::with_weapon::on_drop_weapon(
 	sanguis::is_primary_weapon
+)
+{
+}
+
+void
+sanguis::server::entities::with_weapon::on_magazine_remaining(
+	sanguis::is_primary_weapon,
+	sanguis::magazine_remaining
 )
 {
 }

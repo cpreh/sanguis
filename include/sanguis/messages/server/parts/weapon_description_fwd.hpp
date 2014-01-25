@@ -6,6 +6,7 @@
 #include <sanguis/messages/adapted_types/weapon_type_fwd.hpp>
 #include <sanguis/messages/roles/magazine_base_size.hpp>
 #include <sanguis/messages/roles/magazine_extra_size.hpp>
+#include <sanguis/messages/roles/magazine_remaining.hpp>
 #include <majutsu/composite_fwd.hpp>
 #include <majutsu/role_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -24,7 +25,7 @@ namespace parts
 
 typedef
 majutsu::composite<
-	boost::mpl::vector4<
+	boost::mpl::vector5<
 		majutsu::role<
 			sanguis::messages::adapted_types::weapon_type
 		>,
@@ -35,6 +36,10 @@ majutsu::composite<
 		majutsu::role<
 			sanguis::messages::adapted_types::magazine_size,
 			sanguis::messages::roles::magazine_extra_size
+		>,
+		majutsu::role<
+			sanguis::messages::adapted_types::magazine_size,
+			sanguis::messages::roles::magazine_remaining
 		>,
 		majutsu::role<
 			sanguis::messages::adapted_types::weapon_attribute_vector

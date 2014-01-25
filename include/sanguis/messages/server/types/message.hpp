@@ -36,6 +36,7 @@ enum class message
 	give_weapon,
 	health,
 	level_up,
+	magazine_remaining,
 	max_health,
 	move,
 	pause,

@@ -5,6 +5,7 @@
 #include <sanguis/entity_id.hpp>
 #include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/map_iteration.hpp>
+#include <sanguis/magazine_remaining.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
 #include <sanguis/sequence_iteration.hpp>
 #include <sanguis/timer.hpp>
@@ -31,6 +32,7 @@
 #include <sanguis/messages/server/give_weapon.hpp>
 #include <sanguis/messages/server/health.hpp>
 #include <sanguis/messages/server/level_up.hpp>
+#include <sanguis/messages/server/magazine_remaining.hpp>
 #include <sanguis/messages/server/max_health.hpp>
 #include <sanguis/messages/server/move.hpp>
 #include <sanguis/messages/server/remove.hpp>
@@ -499,6 +501,11 @@ sanguis::server::world::object::got_weapon(
 				>(
 					_description.magazine_extra().get()
 				),
+				fcppt::truncation_check_cast<
+					sanguis::messages::types::magazine_size
+				>(
+					_description.magazine_remaining().get()
+				),
 				sanguis::messages::convert::to_weapon_attribute_vector(
 					_description.attributes()
 				)
@@ -518,6 +525,29 @@ sanguis::server::world::object::remove_weapon(
 		*sanguis::messages::server::create(
 			sanguis::messages::server::remove_weapon(
 				_is_primary
+			)
+		)
+	);
+}
+
+void
+sanguis::server::world::object::magazine_remaining(
+	sanguis::server::player_id const _player_id,
+	sanguis::is_primary_weapon const _is_primary,
+	sanguis::magazine_remaining const _magazine_remaining
+)
+{
+	this->send_player_specific(
+		_player_id,
+		*sanguis::messages::server::create(
+			sanguis::messages::server::magazine_remaining(
+				_is_primary,
+				// TODO: Put this into a function!
+				fcppt::truncation_check_cast<
+					sanguis::messages::types::magazine_size
+				>(
+					_magazine_remaining.get()
+				)
 			)
 		)
 	);

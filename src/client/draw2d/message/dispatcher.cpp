@@ -1,5 +1,6 @@
 #include <sanguis/entity_id.hpp>
 #include <sanguis/magazine_extra.hpp>
+#include <sanguis/magazine_remaining.hpp>
 #include <sanguis/magazine_size.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/creator/name.hpp>
@@ -66,6 +67,7 @@
 #include <sanguis/messages/roles/health.hpp>
 #include <sanguis/messages/roles/magazine_base_size.hpp>
 #include <sanguis/messages/roles/magazine_extra_size.hpp>
+#include <sanguis/messages/roles/magazine_remaining.hpp>
 #include <sanguis/messages/roles/max_health.hpp>
 #include <sanguis/messages/roles/name.hpp>
 #include <sanguis/messages/roles/opening_count.hpp>
@@ -91,6 +93,7 @@
 #include <sanguis/messages/server/give_weapon.hpp>
 #include <sanguis/messages/server/health.hpp>
 #include <sanguis/messages/server/level_up.hpp>
+#include <sanguis/messages/server/magazine_remaining.hpp>
 #include <sanguis/messages/server/max_health.hpp>
 #include <sanguis/messages/server/move.hpp>
 #include <sanguis/messages/server/remove.hpp>
@@ -449,6 +452,11 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 					sanguis::messages::roles::magazine_extra_size
 				>()
 			),
+			sanguis::magazine_remaining(
+				_message.get<
+					sanguis::messages::roles::magazine_remaining
+				>()
+			),
 			sanguis::messages::convert::from_weapon_attribute_vector(
 				_message.get<
 					sanguis::messages::adapted_types::weapon_attribute_vector
@@ -494,6 +502,23 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		sanguis::client::exp_for_next_level(
 			_message.get<
 				sanguis::messages::roles::exp_for_next_level
+			>()
+		)
+	);
+}
+
+sanguis::client::draw2d::message::dispatcher::result_type
+sanguis::client::draw2d::message::dispatcher::operator()(
+	sanguis::messages::server::magazine_remaining const &_message
+)
+{
+	env_.magazine_remaining(
+		_message.get<
+			sanguis::messages::adapted_types::is_primary_weapon
+		>(),
+		sanguis::magazine_remaining(
+			_message.get<
+				sanguis::messages::roles::magazine_remaining
 			>()
 		)
 	);

@@ -1,3 +1,4 @@
+#include <sanguis/magazine_remaining.hpp>
 #include <sanguis/optional_weapon_description.hpp>
 #include <sanguis/client/draw2d/scene/hud/weapon_widget.hpp>
 #include <sanguis/gui/context_fwd.hpp>
@@ -8,11 +9,13 @@
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
 #include <sanguis/gui/widget/reference_alignment_vector.hpp>
 #include <sanguis/load/hud/context.hpp>
+#include <sge/font/lit.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <sge/rucksack/alignment.hpp>
+#include <fcppt/insert_to_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
 
@@ -42,12 +45,13 @@ sanguis::client::draw2d::scene::hud::weapon_widget::weapon_widget(
 				sanguis::gui::widget::reference(
 					text_
 				),
-				sge::rucksack::alignment::left_or_top
+				sge::rucksack::alignment::center
 			)
 		},
 		sge::rucksack::axis::x,
 		sanguis::gui::default_aspect()
-	)
+	),
+	description_()
 {
 }
 
@@ -60,6 +64,9 @@ sanguis::client::draw2d::scene::hud::weapon_widget::weapon_description(
 	sanguis::optional_weapon_description const &_description
 )
 {
+	description_ =
+		_description;
+
 	if(
 		image_
 	)
@@ -72,7 +79,17 @@ sanguis::client::draw2d::scene::hud::weapon_widget::weapon_description(
 	if(
 		!_description
 	)
+	{
+		text_.value(
+			sge::font::string()
+		);
+
 		return;
+	}
+
+	this->update_text(
+		description_->magazine_remaining()
+	);
 
 	image_.take(
 		fcppt::make_unique_ptr<
@@ -90,11 +107,26 @@ sanguis::client::draw2d::scene::hud::weapon_widget::weapon_description(
 			sanguis::gui::widget::reference(
 				*image_
 			),
-			sge::rucksack::alignment::left_or_top
+			sge::rucksack::alignment::center
 		)
 	);
 
 	container_.layout().relayout();
+}
+
+void
+sanguis::client::draw2d::scene::hud::weapon_widget::magazine_remaining(
+	sanguis::magazine_remaining const _magazine_remaining
+)
+{
+	if(
+		!description_
+	)
+		return;
+
+	this->update_text(
+		_magazine_remaining
+	);
 }
 
 sanguis::gui::widget::box_container &
@@ -102,4 +134,50 @@ sanguis::client::draw2d::scene::hud::weapon_widget::widget()
 {
 	return
 		container_;
+}
+
+void
+sanguis::client::draw2d::scene::hud::weapon_widget::update_text(
+	sanguis::magazine_remaining const _magazine_remaining
+)
+{
+	sge::font::string value(
+		fcppt::insert_to_string<
+			sge::font::string
+		>(
+			_magazine_remaining
+		)
+	);
+
+	if(
+		description_->magazine_size().get()
+		!=
+		0u
+	)
+		value +=
+			SGE_FONT_LIT('/')
+			+
+			fcppt::insert_to_string<
+				sge::font::string
+			>(
+				description_->magazine_size()
+			);
+
+	if(
+		description_->magazine_extra().get()
+		!=
+		0u
+	)
+		value +=
+			SGE_FONT_LIT('+')
+			+
+			fcppt::insert_to_string<
+				sge::font::string
+			>(
+				description_->magazine_extra()
+			);
+
+	text_.value(
+		value
+	);
 }

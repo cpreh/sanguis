@@ -7,6 +7,7 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/entity_id.hpp>
 #include <sanguis/is_primary_weapon_fwd.hpp>
+#include <sanguis/magazine_remaining.hpp>
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_status_fwd.hpp>
@@ -142,6 +143,14 @@ public:
 	remove_weapon(
 		sanguis::server::player_id,
 		sanguis::is_primary_weapon
+	)
+	override;
+
+	void
+	magazine_remaining(
+		sanguis::server::player_id,
+		sanguis::is_primary_weapon,
+		sanguis::magazine_remaining
 	)
 	override;
 

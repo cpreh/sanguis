@@ -2,6 +2,7 @@
 #define SANGUIS_WEAPON_DESCRIPTION_HPP_INCLUDED
 
 #include <sanguis/magazine_extra.hpp>
+#include <sanguis/magazine_remaining.hpp>
 #include <sanguis/magazine_size.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
@@ -18,6 +19,7 @@ public:
 		sanguis::weapon_type const &,
 		sanguis::magazine_size,
 		sanguis::magazine_extra,
+		sanguis::magazine_remaining,
 		sanguis::weapon_attribute_vector const &
 	);
 
@@ -30,6 +32,9 @@ public:
 	sanguis::magazine_extra const
 	magazine_extra() const;
 
+	sanguis::magazine_remaining const
+	magazine_remaining() const;
+
 	sanguis::weapon_attribute_vector const &
 	attributes() const;
 private:
@@ -38,6 +43,8 @@ private:
 	sanguis::magazine_size magazine_size_;
 
 	sanguis::magazine_extra magazine_extra_;
+
+	sanguis::magazine_remaining magazine_remaining_;
 
 	sanguis::weapon_attribute_vector attributes_;
 };

@@ -1,5 +1,6 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/entity_id.hpp>
+#include <sanguis/magazine_remaining.hpp>
 #include <sanguis/perk_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_description.hpp>
@@ -588,6 +589,19 @@ sanguis::server::entities::player::on_drop_weapon(
 	this->environment()->remove_weapon(
 		this->player_id(),
 		_is_primary
+	);
+}
+
+void
+sanguis::server::entities::player::on_magazine_remaining(
+	sanguis::is_primary_weapon const _is_primary,
+	sanguis::magazine_remaining const _magazine_remaining
+)
+{
+	this->environment()->magazine_remaining(
+		this->player_id(),
+		_is_primary,
+		_magazine_remaining
 	);
 }
 

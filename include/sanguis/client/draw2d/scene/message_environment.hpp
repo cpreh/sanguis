@@ -3,6 +3,7 @@
 
 #include <sanguis/entity_id_fwd.hpp>
 #include <sanguis/is_primary_weapon_fwd.hpp>
+#include <sanguis/magazine_remaining.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/exp_for_next_level.hpp>
@@ -95,6 +96,13 @@ private:
 	void
 	remove_weapon(
 		sanguis::is_primary_weapon
+	)
+	override;
+
+	void
+	magazine_remaining(
+		sanguis::is_primary_weapon,
+		sanguis::magazine_remaining
 	)
 	override;
 

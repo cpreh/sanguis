@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_WEAPON_HPP_INCLUDED
 
 #include <sanguis/is_primary_weapon_fwd.hpp>
+#include <sanguis/magazine_remaining.hpp>
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
 #include <sanguis/weapon_status.hpp>
 #include <sanguis/server/entities/base.hpp>
@@ -110,6 +111,12 @@ public:
 		sanguis::server::weapons::weapon const &
 	);
 
+	void
+	magazine_remaining(
+		sanguis::magazine_remaining,
+		sanguis::server::weapons::weapon const &
+	);
+
 	sanguis::weapon_status
 	weapon_status() const;
 private:
@@ -155,6 +162,13 @@ private:
 	void
 	on_drop_weapon(
 		sanguis::is_primary_weapon
+	);
+
+	virtual
+	void
+	on_magazine_remaining(
+		sanguis::is_primary_weapon,
+		sanguis::magazine_remaining
 	);
 
 	sanguis::server::weapons::unique_ptr primary_weapon_;

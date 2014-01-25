@@ -1,4 +1,5 @@
 #include <sanguis/entity_id.hpp>
+#include <sanguis/magazine_remaining.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/exp_for_next_level.hpp>
@@ -138,6 +139,18 @@ sanguis::client::draw2d::scene::message_environment::remove_weapon(
 {
 	hud_.remove_weapon(
 		_is_primary_weapon
+	);
+}
+
+void
+sanguis::client::draw2d::scene::message_environment::magazine_remaining(
+	sanguis::is_primary_weapon const _is_primary_weapon,
+	sanguis::magazine_remaining const _magazine_remaining
+)
+{
+	hud_.magazine_remaining(
+		_is_primary_weapon,
+		_magazine_remaining
 	);
 }
 

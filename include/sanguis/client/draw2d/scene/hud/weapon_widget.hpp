@@ -1,7 +1,8 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_HUD_WEAPON_WIDGET_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_HUD_WEAPON_WIDGET_HPP_INCLUDED
 
-#include <sanguis/optional_weapon_description_fwd.hpp>
+#include <sanguis/magazine_remaining.hpp>
+#include <sanguis/optional_weapon_description.hpp>
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/image_fwd.hpp>
@@ -44,9 +45,19 @@ public:
 		sanguis::optional_weapon_description const &
 	);
 
+	void
+	magazine_remaining(
+		sanguis::magazine_remaining
+	);
+
 	sanguis::gui::widget::box_container &
 	widget();
 private:
+	void
+	update_text(
+		sanguis::magazine_remaining
+	);
+
 	sanguis::load::hud::context &resources_;
 
 	sge::renderer::device::ffp &renderer_;
@@ -62,6 +73,8 @@ private:
 	sanguis::gui::widget::text text_;
 
 	sanguis::gui::widget::box_container container_;
+
+	sanguis::optional_weapon_description description_;
 };
 
 }
