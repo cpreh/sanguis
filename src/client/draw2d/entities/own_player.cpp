@@ -1,6 +1,7 @@
 #include <sanguis/aura_type_vector.hpp>
 #include <sanguis/buff_type_vector.hpp>
 #include <sanguis/client/health_pair.hpp>
+#include <sanguis/client/optional_health_pair.hpp>
 #include <sanguis/client/draw2d/collide_callback.hpp>
 #include <sanguis/client/draw2d/collide_parameters.hpp>
 #include <sanguis/client/draw2d/dim2.hpp>
@@ -13,6 +14,7 @@
 #include <sanguis/client/draw2d/entities/own_player.hpp>
 #include <sanguis/client/draw2d/entities/player.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/load/auras/context_fwd.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 
@@ -86,7 +88,8 @@ sanguis::client::draw2d::entities::own_player::speed(
 	sanguis::client::draw2d::speed const &_speed
 )
 {
-	desired_speed_ = _speed;
+	desired_speed_ =
+		_speed;
 
 	sanguis::client::draw2d::entities::player::speed(
 		_speed
@@ -134,9 +137,19 @@ sanguis::client::draw2d::entities::own_player::update()
 }
 
 void
+sanguis::client::draw2d::entities::own_player::on_die()
+{
+	sanguis::client::draw2d::entities::model::object::on_die();
+
+	player_health_callback_(
+		sanguis::client::optional_health_pair()
+	);
+}
+
+void
 sanguis::client::draw2d::entities::own_player::update_health()
 {
 	player_health_callback_(
-		*this->health_pair()
+		this->health_pair()
 	);
 }

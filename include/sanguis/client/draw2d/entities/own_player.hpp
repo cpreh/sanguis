@@ -71,6 +71,10 @@ private:
 	override;
 
 	void
+	on_die()
+	override;
+
+	void
 	update_health();
 
 	sanguis::client::draw2d::player_center_callback const player_center_callback_;

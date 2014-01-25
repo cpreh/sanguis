@@ -1,8 +1,8 @@
+#include <sanguis/client/optional_health_pair.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/name.hpp>
-#include <sanguis/client/draw2d/entities/model/optional_health_pair.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 
 
@@ -10,7 +10,7 @@ sanguis::client::draw2d::entities::model::parameters::parameters(
 	sanguis::client::draw2d::entities::model::load_parameters const &_load_parameters,
 	sanguis::client::draw2d::entities::model::name const &_name,
 	sanguis::client::draw2d::entities::order_vector const &_orders,
-	sanguis::client::draw2d::entities::model::optional_health_pair const &_health_pair,
+	sanguis::client::optional_health_pair const &_health_pair,
 	sanguis::client::draw2d::entities::model::decay_option const _decay_option
 )
 :
@@ -53,7 +53,7 @@ sanguis::client::draw2d::entities::model::parameters::orders() const
 		orders_;
 }
 
-sanguis::client::draw2d::entities::model::optional_health_pair const &
+sanguis::client::optional_health_pair const &
 sanguis::client::draw2d::entities::model::parameters::health_pair() const
 {
 	return

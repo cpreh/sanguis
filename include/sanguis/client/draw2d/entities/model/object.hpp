@@ -6,6 +6,7 @@
 #include <sanguis/weapon_status.hpp>
 #include <sanguis/client/health.hpp>
 #include <sanguis/client/max_health.hpp>
+#include <sanguis/client/optional_health_pair_fwd.hpp>
 #include <sanguis/client/draw2d/speed_fwd.hpp>
 #include <sanguis/client/draw2d/entities/container.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_health.hpp>
@@ -14,7 +15,6 @@
 #include <sanguis/client/draw2d/entities/model/decay_time_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/healthbar_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/object_fwd.hpp>
-#include <sanguis/client/draw2d/entities/model/optional_health_pair_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/part_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/index_fwd.hpp>
@@ -130,7 +130,7 @@ protected:
 	)
 	override;
 
-	sanguis::client::draw2d::entities::model::optional_health_pair const
+	sanguis::client::optional_health_pair const
 	health_pair() const;
 private:
 	// with_weapon overrides

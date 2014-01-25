@@ -155,11 +155,11 @@ sanguis::client::draw2d::entities::model::healthbar::pos(
 
 void
 sanguis::client::draw2d::entities::model::healthbar::dim(
-	sanguis::client::draw2d::sprite::dim const &dim_
+	sanguis::client::draw2d::sprite::dim const &_dim
 )
 {
 	background_.size(
-		dim_
+		_dim
 	);
 
 	foreground_.size(

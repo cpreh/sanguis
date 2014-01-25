@@ -5,6 +5,7 @@
 #include <sanguis/client/health.hpp>
 #include <sanguis/client/health_valid.hpp>
 #include <sanguis/client/max_health.hpp>
+#include <sanguis/client/optional_health_pair.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/speed_is_null.hpp>
 #include <sanguis/client/draw2d/entities/container.hpp>
@@ -17,7 +18,6 @@
 #include <sanguis/client/draw2d/entities/model/healthbar.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
-#include <sanguis/client/draw2d/entities/model/optional_health_pair.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <sanguis/client/draw2d/entities/model/part.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
@@ -329,17 +329,17 @@ sanguis::client::draw2d::entities::model::object::max_health(
 		);
 }
 
-sanguis::client::draw2d::entities::model::optional_health_pair const
+sanguis::client::optional_health_pair const
 sanguis::client::draw2d::entities::model::object::health_pair() const
 {
 	return
 		healthbar_
 		?
-			sanguis::client::draw2d::entities::model::optional_health_pair(
+			sanguis::client::optional_health_pair(
 				healthbar_->health_pair()
 			)
 		:
-			sanguis::client::draw2d::entities::model::optional_health_pair()
+			sanguis::client::optional_health_pair()
 		;
 }
 

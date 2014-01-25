@@ -119,8 +119,6 @@ set(
 	include/sanguis/client/draw2d/entities/model/name.hpp
 	include/sanguis/client/draw2d/entities/model/object.hpp
 	include/sanguis/client/draw2d/entities/model/object_fwd.hpp
-	include/sanguis/client/draw2d/entities/model/optional_health_pair.hpp
-	include/sanguis/client/draw2d/entities/model/optional_health_pair_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/orientation.hpp
 	include/sanguis/client/draw2d/entities/model/parameters.hpp
 	include/sanguis/client/draw2d/entities/model/parameters_fwd.hpp
@@ -381,6 +379,8 @@ set(
 	include/sanguis/client/max_health.hpp
 	include/sanguis/client/max_health_valid.hpp
 	include/sanguis/client/object.hpp
+	include/sanguis/client/optional_health_pair.hpp
+	include/sanguis/client/optional_health_pair_fwd.hpp
 	include/sanguis/client/perk/category.hpp
 	include/sanguis/client/perk/category_equal_range.hpp
 	include/sanguis/client/perk/category_fwd.hpp

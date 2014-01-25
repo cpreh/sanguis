@@ -1,6 +1,7 @@
 #include <sanguis/aura_type_vector.hpp>
 #include <sanguis/buff_type_vector.hpp>
 #include <sanguis/client/health_pair.hpp>
+#include <sanguis/client/optional_health_pair.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/enemy.hpp>
 #include <sanguis/client/draw2d/entities/name.hpp>
@@ -11,7 +12,6 @@
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
 #include <sanguis/client/draw2d/entities/model/name.hpp>
-#include <sanguis/client/draw2d/entities/model/optional_health_pair.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/load/enemy_name.hpp>
@@ -49,7 +49,7 @@ sanguis::client::draw2d::entities::enemy::enemy(
 					sanguis::client::draw2d::entities::order_vector{
 						sanguis::client::draw2d::z_ordering::model_generic
 					},
-					sanguis::client::draw2d::entities::model::optional_health_pair(
+					sanguis::client::optional_health_pair(
 						_health_pair
 					),
 					sanguis::client::draw2d::entities::model::decay_option::delayed

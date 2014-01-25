@@ -1,3 +1,4 @@
+#include <sanguis/client/optional_health_pair.hpp>
 #include <sanguis/client/draw2d/center.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/speed_is_null.hpp>
@@ -7,7 +8,6 @@
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/name.hpp>
-#include <sanguis/client/draw2d/entities/model/optional_health_pair.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/index.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
@@ -45,7 +45,7 @@ sanguis::client::draw2d::entities::bullet::bullet(
 				sanguis::client::draw2d::z_ordering::bullet,
 				sanguis::client::draw2d::z_ordering::bullet
 			},
-			sanguis::client::draw2d::entities::model::optional_health_pair(),
+			sanguis::client::optional_health_pair(),
 			sanguis::client::draw2d::entities::model::decay_option::immediate
 		)
 	),

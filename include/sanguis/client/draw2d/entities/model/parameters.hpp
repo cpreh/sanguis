@@ -1,11 +1,11 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_PARAMETERS_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_PARAMETERS_HPP_INCLUDED
 
+#include <sanguis/client/optional_health_pair.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/name.hpp>
-#include <sanguis/client/draw2d/entities/model/optional_health_pair.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
 
 
@@ -30,7 +30,7 @@ public:
 		sanguis::client::draw2d::entities::model::load_parameters const &,
 		sanguis::client::draw2d::entities::model::name const &,
 		sanguis::client::draw2d::entities::order_vector const &,
-		sanguis::client::draw2d::entities::model::optional_health_pair const &,
+		sanguis::client::optional_health_pair const &,
 		sanguis::client::draw2d::entities::model::decay_option
 	);
 
@@ -43,7 +43,7 @@ public:
 	sanguis::client::draw2d::entities::order_vector const &
 	orders() const;
 
-	sanguis::client::draw2d::entities::model::optional_health_pair const &
+	sanguis::client::optional_health_pair const &
 	health_pair() const;
 
 	sanguis::client::draw2d::entities::model::decay_option
@@ -55,7 +55,7 @@ private:
 
 	sanguis::client::draw2d::entities::order_vector const &orders_;
 
-	sanguis::client::draw2d::entities::model::optional_health_pair const health_pair_;
+	sanguis::client::optional_health_pair const health_pair_;
 
 	sanguis::client::draw2d::entities::model::decay_option const decay_option_;
 };

@@ -9,7 +9,7 @@
 #include <sanguis/client/draw2d/scene/hud/weapon_widget.hpp>
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/exp_for_next_level.hpp>
-#include <sanguis/client/health_pair_fwd.hpp>
+#include <sanguis/client/optional_health_pair_fwd.hpp>
 #include <sanguis/client/level.hpp>
 #include <sanguis/gui/context.hpp>
 #include <sanguis/gui/fixed_area.hpp>
@@ -57,7 +57,7 @@ public:
 
 	void
 	health_pair(
-		sanguis::client::health_pair const &
+		sanguis::client::optional_health_pair const &
 	);
 
 	void
