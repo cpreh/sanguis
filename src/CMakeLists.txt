@@ -194,6 +194,12 @@ set(
 	include/sanguis/client/draw2d/scene/foreach_z_ordering.hpp
 	include/sanguis/client/draw2d/scene/hud/object.hpp
 	include/sanguis/client/draw2d/scene/hud/object_fwd.hpp
+	include/sanguis/client/draw2d/scene/hud/weapon_attribute_name.hpp
+	include/sanguis/client/draw2d/scene/hud/weapon_attribute_text.hpp
+	include/sanguis/client/draw2d/scene/hud/weapon_name.hpp
+	include/sanguis/client/draw2d/scene/hud/weapon_name_visitor.hpp
+	include/sanguis/client/draw2d/scene/hud/weapon_tooltip.hpp
+	include/sanguis/client/draw2d/scene/hud/weapon_tooltip_fwd.hpp
 	include/sanguis/client/draw2d/scene/hud/weapon_widget.hpp
 	include/sanguis/client/draw2d/scene/message_environment.hpp
 	include/sanguis/client/draw2d/scene/message_environment_fwd.hpp
@@ -436,6 +442,7 @@ set(
 	include/sanguis/client/systems.hpp
 	include/sanguis/client/systems_fwd.hpp
 	include/sanguis/client/systems_unique_ptr.hpp
+	include/sanguis/client/to_gui_duration.hpp
 	include/sanguis/client/world_parameters.hpp
 	include/sanguis/client/world_parameters_fwd.hpp
 	include/sanguis/clock.hpp
@@ -1599,6 +1606,11 @@ set(
 	src/client/draw2d/scene/background_texture_coordinates.cpp
 	src/client/draw2d/scene/control_environment.cpp
 	src/client/draw2d/scene/hud/object.cpp
+	src/client/draw2d/scene/hud/weapon_attribute_name.cpp
+	src/client/draw2d/scene/hud/weapon_attribute_text.cpp
+	src/client/draw2d/scene/hud/weapon_name.cpp
+	src/client/draw2d/scene/hud/weapon_name_visitor.cpp
+	src/client/draw2d/scene/hud/weapon_tooltip.cpp
 	src/client/draw2d/scene/hud/weapon_widget.cpp
 	src/client/draw2d/scene/message_environment.cpp
 	src/client/draw2d/scene/object.cpp
@@ -1661,6 +1673,7 @@ set(
 	src/client/states/perk_chooser.cpp
 	src/client/states/running.cpp
 	src/client/states/waiting_for_player.cpp
+	src/client/to_gui_duration.cpp
 	src/client/world_parameters.cpp
 	src/company_name.cpp
 	src/config_app_name.cpp

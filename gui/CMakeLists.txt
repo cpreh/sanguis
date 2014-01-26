@@ -11,6 +11,7 @@ set(
 	include/sanguis/gui/get_focus_fwd.hpp
 	include/sanguis/gui/master.hpp
 	include/sanguis/gui/master_fwd.hpp
+	include/sanguis/gui/minimum_size_area.hpp
 	include/sanguis/gui/text_callback.hpp
 	include/sanguis/gui/text_function.hpp
 	include/sanguis/gui/viewport_adaptor.hpp
@@ -75,6 +76,7 @@ set(
 	src/include/sanguis/gui/aux_/style/spacing.hpp
 	src/include/sanguis/gui/aux_/style/text_color.hpp
 	src/master.cpp
+	src/minimum_size_area.cpp
 	src/viewport_adaptor.cpp
 	src/widget/bar.cpp
 	src/widget/base.cpp

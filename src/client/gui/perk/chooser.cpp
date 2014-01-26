@@ -1,9 +1,9 @@
 #include <sanguis/duration.hpp>
+#include <sanguis/client/to_gui_duration.hpp>
 #include <sanguis/client/gui/perk/chooser.hpp>
 #include <sanguis/client/gui/perk/state.hpp>
 #include <sanguis/client/perk/state.hpp>
 #include <sanguis/gui/default_aspect.hpp>
-#include <sanguis/gui/duration.hpp>
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
 #include <sanguis/gui/widget/reference_alignment_vector.hpp>
@@ -22,7 +22,6 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <chrono>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
 
@@ -96,14 +95,14 @@ sanguis::client::gui::perk::chooser::chooser(
 		main_container_
 	),
 	gui_area_(
+		main_container_,
 		sge::rucksack::rect(
 			sge::rucksack::rect::vector::null(),
 			sge::rucksack::rect::dim(
 				600,
 				400
 			)
-		),
-		main_container_.layout()
+		)
 	),
 	perk_connection_(
 		_state.register_perks_change(
@@ -135,9 +134,7 @@ sanguis::client::gui::perk::chooser::process(
 )
 {
 	gui_master_.update(
-		std::chrono::duration_cast<
-			sanguis::gui::duration
-		>(
+		sanguis::client::to_gui_duration(
 			_delta
 		)
 	);

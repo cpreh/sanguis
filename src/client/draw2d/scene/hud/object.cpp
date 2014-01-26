@@ -9,6 +9,7 @@
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/max_health_valid.hpp>
 #include <sanguis/client/optional_health_pair.hpp>
+#include <sanguis/client/to_gui_duration.hpp>
 #include <sanguis/client/draw2d/scene/hud/object.hpp>
 #include <sanguis/client/draw2d/scene/hud/weapon_widget.hpp>
 #include <sanguis/gui/default_aspect.hpp>
@@ -34,9 +35,6 @@
 #include <fcppt/insert_to_string.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/assert/pre.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <chrono>
-#include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::draw2d::scene::hud::object::object(
@@ -183,15 +181,14 @@ sanguis::client::draw2d::scene::hud::object::object(
 		main_widget_
 	),
 	gui_area_(
-		// TODO!
+		main_widget_,
 		sge::rucksack::rect(
 			sge::rucksack::vector::null(),
 			sge::rucksack::dim(
-				250,
-				300
+				200,
+				250
 			)
-		),
-		main_widget_.layout()
+		)
 	)
 {
 }
@@ -318,10 +315,7 @@ sanguis::client::draw2d::scene::hud::object::update(
 )
 {
 	gui_master_.update(
-		// TODO: Put this into a function!
-		std::chrono::duration_cast<
-			sanguis::gui::duration
-		>(
+		sanguis::client::to_gui_duration(
 			_duration
 		)
 	);

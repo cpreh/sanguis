@@ -1,8 +1,8 @@
 #include <sanguis/duration.hpp>
+#include <sanguis/client/to_gui_duration.hpp>
 #include <sanguis/client/config/settings/object.hpp>
 #include <sanguis/client/gui/menu/object.hpp>
 #include <sanguis/gui/default_aspect.hpp>
-#include <sanguis/gui/duration.hpp>
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
 #include <sanguis/gui/widget/reference_alignment_vector.hpp>
@@ -35,7 +35,6 @@
 #include <fcppt/to_std_string.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <chrono>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
 
@@ -319,9 +318,7 @@ sanguis::client::gui::menu::object::process(
 )
 {
 	gui_master_.update(
-		std::chrono::duration_cast<
-			sanguis::gui::duration
-		>(
+		sanguis::client::to_gui_duration(
 			_delta
 		)
 	);
