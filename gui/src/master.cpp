@@ -4,6 +4,9 @@
 #include <sanguis/gui/aux_/fill_rect.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sge/image/color/predef.hpp>
+#include <sge/image/color/init.hpp>
+#include <sge/image/color/rgba8.hpp>
+#include <sge/image/color/any/object.hpp>
 #include <sge/input/cursor/button_code.hpp>
 #include <sge/input/cursor/button_event.hpp>
 #include <sge/input/cursor/object.hpp>
@@ -97,7 +100,14 @@ sanguis::gui::master::draw(
 		renderer_,
 		_context,
 		widget_.layout().area(),
-		sge::image::color::predef::lightblue()
+		sge::image::color::any::object(
+			sge::image::color::rgba8(
+				(sge::image::color::init::red() %= .75)
+				(sge::image::color::init::green() %= .75)
+				(sge::image::color::init::blue() %= .75)
+				(sge::image::color::init::alpha() %= .25)
+			)
+		)
 	);
 
 	widget_.on_draw(
