@@ -16,9 +16,15 @@ sanguis::gui::minimum_size_area::minimum_size_area(
 		_pos
 	);
 
-	layout_.relayout();
+	this->relayout();
 }
 
 sanguis::gui::minimum_size_area::~minimum_size_area()
 {
+}
+
+void
+sanguis::gui::minimum_size_area::relayout()
+{
+	layout_.relayout();
 }

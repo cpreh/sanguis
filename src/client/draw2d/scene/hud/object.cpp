@@ -30,7 +30,6 @@
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <sge/rucksack/dim.hpp>
-#include <sge/rucksack/rect.hpp>
 #include <sge/rucksack/vector.hpp>
 #include <fcppt/insert_to_string.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
@@ -182,13 +181,7 @@ sanguis::client::draw2d::scene::hud::object::object(
 	),
 	gui_area_(
 		main_widget_,
-		sge::rucksack::rect(
-			sge::rucksack::vector::null(),
-			sge::rucksack::dim(
-				200,
-				250
-			)
-		)
+		sge::rucksack::vector::null()
 	)
 {
 }
@@ -282,6 +275,8 @@ sanguis::client::draw2d::scene::hud::object::add_weapon(
 			_description
 		)
 	);
+
+	gui_area_.relayout();
 }
 
 void

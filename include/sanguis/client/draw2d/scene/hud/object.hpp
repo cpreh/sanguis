@@ -12,8 +12,8 @@
 #include <sanguis/client/optional_health_pair_fwd.hpp>
 #include <sanguis/client/level.hpp>
 #include <sanguis/gui/context.hpp>
-#include <sanguis/gui/fixed_area.hpp>
 #include <sanguis/gui/master.hpp>
+#include <sanguis/gui/minimum_size_area.hpp>
 #include <sanguis/gui/widget/bar.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/text.hpp>
@@ -137,7 +137,7 @@ private:
 
 	sanguis::gui::master gui_master_;
 
-	sanguis::gui::fixed_area gui_area_;
+	sanguis::gui::minimum_size_area gui_area_;
 };
 
 }

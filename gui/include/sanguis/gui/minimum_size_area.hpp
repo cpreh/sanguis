@@ -27,6 +27,10 @@ public:
 
 	SANGUIS_GUI_SYMBOL
 	~minimum_size_area();
+
+	SANGUIS_GUI_SYMBOL
+	void
+	relayout();
 private:
 	sge::rucksack::widget::minimum_size layout_;
 };
