@@ -100,7 +100,9 @@ sanguis::collision::aux_::world::simple::object::activate_body(
 	);
 
 	for(
-		auto ghost : ghosts_
+		auto ghost
+		:
+		ghosts_
 	)
 		ghost->update_body(
 			body
@@ -152,7 +154,9 @@ sanguis::collision::aux_::world::simple::object::update(
 )
 {
 	for(
-		auto body : bodies_
+		auto body
+		:
+		bodies_
 	)
 	{
 		body->center(

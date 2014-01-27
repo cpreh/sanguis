@@ -29,6 +29,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>
+#include <fcppt/log/info.hpp>
 #include <fcppt/log/verbose.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -180,7 +181,7 @@ sanguis::server::machine::send_unicast(
 		!buffer
 	)
 	{
-		FCPPT_LOG_ERROR(
+		FCPPT_LOG_INFO(
 			sanguis::server::log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("Client ")
@@ -249,26 +250,13 @@ sanguis::server::machine::process_message(
 void
 sanguis::server::machine::disconnect_callback(
 	alda::net::id const _id,
-	fcppt::string const &
+	fcppt::string const &_error
 )
-try
 {
-
 	this->process_event(
 		sanguis::server::events::disconnect(
 			_id
 		)
-	);
-}
-catch(
-	fcppt::exception const &_error
-)
-{
-	FCPPT_LOG_ERROR(
-		sanguis::server::log(),
-		fcppt::log::_
-			<< FCPPT_TEXT("Player disconnected: ")
-			<< _error.string()
 	);
 }
 

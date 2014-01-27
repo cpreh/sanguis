@@ -82,16 +82,12 @@ try
 		)
 	);
 
-	fcppt::log::level const log_level(
-		sanguis::args::log_level(
-			vm
-		)
-	);
-
 	fcppt::log::activate_levels_recursive(
 		sanguis::log_context(),
 		sanguis::log_location(),
-		log_level
+		sanguis::args::log_level(
+			vm
+		)
 	);
 
 	sanguis::main_object_scoped_ptr const obj(

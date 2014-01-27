@@ -1128,6 +1128,8 @@ set(
 	include/sanguis/server/entities/movement_speed.hpp
 	include/sanguis/server/entities/optional_base_ref.hpp
 	include/sanguis/server/entities/optional_base_ref_fwd.hpp
+	include/sanguis/server/entities/optional_player_ref.hpp
+	include/sanguis/server/entities/optional_player_ref_fwd.hpp
 	include/sanguis/server/entities/optional_with_ai_ref.hpp
 	include/sanguis/server/entities/optional_with_ai_ref_fwd.hpp
 	include/sanguis/server/entities/optional_with_weapon_ref.hpp

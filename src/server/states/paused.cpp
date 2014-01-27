@@ -17,6 +17,7 @@
 #include <sanguis/messages/server/create.hpp>
 #include <sanguis/messages/server/unpause.hpp>
 #include <fcppt/log/_.hpp>
+#include <fcppt/log/debug.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/warning.hpp>
@@ -45,10 +46,20 @@ fcppt::log::object logger(
 
 sanguis::server::states::paused::paused()
 {
+	FCPPT_LOG_DEBUG(
+		logger,
+		fcppt::log::_
+			<< FCPPT_TEXT("create")
+	);
 }
 
 sanguis::server::states::paused::~paused()
 {
+	FCPPT_LOG_DEBUG(
+		logger,
+		fcppt::log::_
+			<< FCPPT_TEXT("destroy")
+	);
 }
 
 boost::statechart::result

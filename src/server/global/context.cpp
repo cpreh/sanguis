@@ -32,6 +32,7 @@
 #include <sanguis/server/cheat/process.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/insert_with_result.hpp>
+#include <sanguis/server/entities/optional_player_ref.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/global/context.hpp>
@@ -55,6 +56,7 @@
 #include <fcppt/assert/error.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>
+#include <fcppt/log/info.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/warning.hpp>
@@ -255,9 +257,29 @@ sanguis::server::global::context::player_disconnect(
 	sanguis::server::player_id const _player_id
 )
 {
-	this->player(
-		_player_id
-	).kill();
+	// Disconnecting clients may already be dead
+	sanguis::server::entities::optional_player_ref const player(
+		this->player_opt(
+			_player_id
+		)
+	);
+
+	if(
+		!player
+	)
+	{
+		FCPPT_LOG_INFO(
+			logger,
+			fcppt::log::_
+				<< FCPPT_TEXT("Player ")
+				<< _player_id
+				<< FCPPT_TEXT(" is already dead.")
+		);
+
+		return;
+	}
+
+	player->kill();
 }
 
 void
@@ -268,7 +290,7 @@ sanguis::server::global::context::player_target(
 {
 	// handles rotation as well
 	sanguis::server::entities::player &player_ref(
-		this->player(
+		this->player_exn(
 			_player_id
 		)
 	);
@@ -320,7 +342,7 @@ sanguis::server::global::context::player_change_world(
 	sanguis::server::player_id const _player_id
 )
 {
-	this->player(
+	this->player_exn(
 		_player_id
 	).transfer_from_world();
 }
@@ -332,7 +354,7 @@ sanguis::server::global::context::player_change_shooting(
 	sanguis::is_primary_weapon const _is_primary
 )
 {
-	this->player(
+	this->player_exn(
 		_player_id
 	).use_weapon(
 		_shooting,
@@ -346,7 +368,7 @@ sanguis::server::global::context::player_reload(
 	sanguis::is_primary_weapon const _is_primary
 )
 {
-	this->player(
+	this->player_exn(
 		_player_id
 	).reload(
 		_is_primary
@@ -359,7 +381,7 @@ sanguis::server::global::context::player_drop_or_pickup_weapon(
 	sanguis::is_primary_weapon const _is_primary
 )
 {
-	this->player(
+	this->player_exn(
 		_player_id
 	).drop_or_pickup_weapon(
 		_is_primary
@@ -373,7 +395,7 @@ sanguis::server::global::context::player_speed(
 )
 {
 	sanguis::server::entities::player &player_ref(
-		this->player(
+		this->player_exn(
 			_player_id
 		)
 	);
@@ -402,7 +424,7 @@ sanguis::server::global::context::player_cheat(
 	sanguis::server::cheat::process(
 		diff_clock_,
 		random_generator_,
-		this->player(
+		this->player_exn(
 			_player_id
 		),
 		_cheat,
@@ -417,7 +439,7 @@ sanguis::server::global::context::player_choose_perk(
 )
 {
 	sanguis::server::entities::player &player_ref(
-		this->player(
+		this->player_exn(
 			_player_id
 		)
 	);
@@ -481,7 +503,8 @@ sanguis::server::global::context::has_player(
 		players_.count(
 			_player_id
 		)
-		== 1u;
+		==
+		1u;
 }
 
 sanguis::entity_id const
@@ -594,7 +617,27 @@ sanguis::server::global::context::world(
 }
 
 sanguis::server::entities::player &
-sanguis::server::global::context::player(
+sanguis::server::global::context::player_exn(
+	sanguis::server::player_id const _player_id
+)
+{
+	sanguis::server::entities::optional_player_ref const player(
+		this->player_opt(
+			_player_id
+		)
+	);
+
+	FCPPT_ASSERT_THROW(
+		player.has_value(),
+		sanguis::exception
+	);
+
+	return
+		*player;
+}
+
+sanguis::server::entities::optional_player_ref const
+sanguis::server::global::context::player_opt(
 	sanguis::server::player_id const _player_id
 )
 {
@@ -604,11 +647,13 @@ sanguis::server::global::context::player(
 		)
 	);
 
-	FCPPT_ASSERT_THROW(
-		it != players_.end(),
-		sanguis::exception
-	);
-
 	return
-		*it->second;
+		it != players_.end()
+		?
+			sanguis::server::entities::optional_player_ref(
+				*it->second
+			)
+		:
+			sanguis::server::entities::optional_player_ref()
+		;
 }

@@ -31,6 +31,7 @@
 #include <fcppt/cast_to_enum.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>
+#include <fcppt/log/debug.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/warning.hpp>
@@ -58,10 +59,20 @@ fcppt::log::object logger(
 
 sanguis::server::states::unpaused::unpaused()
 {
+	FCPPT_LOG_DEBUG(
+		logger,
+		fcppt::log::_
+			<< FCPPT_TEXT("create")
+	);
 }
 
 sanguis::server::states::unpaused::~unpaused()
 {
+	FCPPT_LOG_DEBUG(
+		logger,
+		fcppt::log::_
+			<< FCPPT_TEXT("destroy")
+	);
 }
 
 boost::statechart::result

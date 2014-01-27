@@ -12,9 +12,11 @@ namespace server
 namespace entities
 {
 
-typedef fcppt::optional<
+typedef
+fcppt::optional<
 	sanguis::server::entities::base &
-> optional_base_ref;
+>
+optional_base_ref;
 
 }
 }

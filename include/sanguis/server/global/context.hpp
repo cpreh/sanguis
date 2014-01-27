@@ -18,6 +18,7 @@
 #include <sanguis/server/string.hpp>
 #include <sanguis/server/unicast_callback.hpp>
 #include <sanguis/server/vector_fwd.hpp>
+#include <sanguis/server/entities/optional_player_ref_fwd.hpp>
 #include <sanguis/server/entities/player_fwd.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
@@ -166,7 +167,12 @@ private:
 	);
 
 	sanguis::server::entities::player &
-	player(
+	player_exn(
+		sanguis::server::player_id
+	);
+
+	sanguis::server::entities::optional_player_ref const
+	player_opt(
 		sanguis::server::player_id
 	);
 

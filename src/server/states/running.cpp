@@ -155,12 +155,11 @@ sanguis::server::states::running::react(
 	FCPPT_LOG_INFO(
 		::logger,
 		fcppt::log::_
-			<< FCPPT_TEXT("client with id ")
+			<< FCPPT_TEXT("Client with id ")
 			<< _message.id()
-			<< FCPPT_TEXT(" disconnected")
+			<< FCPPT_TEXT(" disconnected.")
 	);
 
-	// We would have to disconnect all players associated with that connection here
 	global_context_->player_disconnect(
 		sanguis::server::player_id_from_net(
 			_message.id()
@@ -188,7 +187,7 @@ sanguis::server::states::running::operator()(
 	FCPPT_LOG_DEBUG(
 		::logger,
 		fcppt::log::_
-			<< FCPPT_TEXT("client sent client_info")
+			<< FCPPT_TEXT("client sent info")
 	)
 
 	global_context_->insert_player(
