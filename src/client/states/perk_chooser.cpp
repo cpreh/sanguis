@@ -37,6 +37,10 @@ sanguis::client::states::perk_chooser::perk_chooser(
 		this->context<
 			sanguis::client::states::has_player
 		>().perk_state(),
+		/*
+		this->context<
+			sanguis::client::states::running
+		>().hud_gui(),*/
 		this->context<
 			sanguis::client::machine
 		>().renderer(),

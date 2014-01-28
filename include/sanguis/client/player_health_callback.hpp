@@ -1,5 +1,5 @@
-#ifndef SANGUIS_CLIENT_DRAW2D_PLAYER_HEALTH_CALLBACK_HPP_INCLUDED
-#define SANGUIS_CLIENT_DRAW2D_PLAYER_HEALTH_CALLBACK_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_PLAYER_HEALTH_CALLBACK_HPP_INCLUDED
+#define SANGUIS_CLIENT_PLAYER_HEALTH_CALLBACK_HPP_INCLUDED
 
 #include <sanguis/client/optional_health_pair_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -11,8 +11,6 @@ namespace sanguis
 {
 namespace client
 {
-namespace draw2d
-{
 
 typedef
 std::function<
@@ -22,7 +20,6 @@ std::function<
 >
 player_health_callback;
 
-}
 }
 }
 

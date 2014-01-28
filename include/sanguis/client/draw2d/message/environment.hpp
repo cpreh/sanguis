@@ -3,16 +3,11 @@
 
 #include <sanguis/entity_id_fwd.hpp>
 #include <sanguis/is_primary_weapon_fwd.hpp>
-#include <sanguis/magazine_remaining.hpp>
-#include <sanguis/weapon_description_fwd.hpp>
-#include <sanguis/client/exp.hpp>
-#include <sanguis/client/exp_for_next_level.hpp>
-#include <sanguis/client/level.hpp>
+#include <sanguis/client/player_health_callback.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/collide_callback.hpp>
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
 #include <sanguis/client/draw2d/player_center_callback.hpp>
-#include <sanguis/client/draw2d/player_health_callback.hpp>
 #include <sanguis/client/draw2d/entities/base_fwd.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
@@ -59,40 +54,8 @@ public:
 
 	virtual
 	void
-	experience(
-		sanguis::client::exp
-	) = 0;
-
-	virtual
-	void
-	level(
-		sanguis::client::level,
-		sanguis::client::exp_for_next_level
-	) = 0;
-
-	virtual
-	void
 	change_world(
 		sanguis::client::world_parameters const &
-	) = 0;
-
-	virtual
-	void
-	give_weapon(
-		sanguis::weapon_description const &
-	) = 0;
-
-	virtual
-	void
-	remove_weapon(
-		sanguis::is_primary_weapon
-	) = 0;
-
-	virtual
-	void
-	magazine_remaining(
-		sanguis::is_primary_weapon,
-		sanguis::magazine_remaining
 	) = 0;
 
 	virtual
@@ -116,7 +79,7 @@ public:
 	collide_callback() const = 0;
 
 	virtual
-	sanguis::client::draw2d::player_health_callback const &
+	sanguis::client::player_health_callback const &
 	player_health_callback() const = 0;
 
 	virtual

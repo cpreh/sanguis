@@ -12,12 +12,17 @@
 #include <sanguis/client/events/net_error_fwd.hpp>
 #include <sanguis/client/events/render_fwd.hpp>
 #include <sanguis/client/events/tick_fwd.hpp>
+#include <sanguis/client/gui/hud/object_fwd.hpp>
 #include <sanguis/client/states/ingame_fwd.hpp>
 #include <sanguis/messages/server/add_console_command_fwd.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
 #include <sanguis/messages/server/console_print_fwd.hpp>
+#include <sanguis/messages/server/experience_fwd.hpp>
+#include <sanguis/messages/server/give_weapon_fwd.hpp>
 #include <sanguis/messages/server/level_up_fwd.hpp>
+#include <sanguis/messages/server/magazine_remaining_fwd.hpp>
 #include <sanguis/messages/server/pause_fwd.hpp>
+#include <sanguis/messages/server/remove_weapon_fwd.hpp>
 #include <sanguis/messages/server/unpause_fwd.hpp>
 #include <sge/input/cursor/activatable_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -96,7 +101,7 @@ public:
 
 	boost::statechart::result
 	operator()(
-		sanguis::messages::server::level_up const &
+		sanguis::messages::server::add_console_command const &
 	);
 
 	boost::statechart::result
@@ -106,12 +111,32 @@ public:
 
 	boost::statechart::result
 	operator()(
-		sanguis::messages::server::add_console_command const &
+		sanguis::messages::server::experience const &
+	);
+
+	boost::statechart::result
+	operator()(
+		sanguis::messages::server::give_weapon const &
+	);
+
+	boost::statechart::result
+	operator()(
+		sanguis::messages::server::level_up const &
+	);
+
+	boost::statechart::result
+	operator()(
+		sanguis::messages::server::magazine_remaining const &
 	);
 
 	boost::statechart::result
 	operator()(
 		sanguis::messages::server::pause const &
+	);
+
+	boost::statechart::result
+	operator()(
+		sanguis::messages::server::remove_weapon const &
 	);
 
 	boost::statechart::result
@@ -145,6 +170,10 @@ private:
 	fcppt::scoped_ptr<
 		sanguis::client::sound_manager
 	> const sound_manager_;
+
+	fcppt::scoped_ptr<
+		sanguis::client::gui::hud::object
+	> const hud_;
 
 	fcppt::scoped_ptr<
 		sanguis::client::draw2d::scene::object

@@ -1,52 +1,38 @@
 #include <sanguis/entity_id.hpp>
-#include <sanguis/magazine_remaining.hpp>
-#include <sanguis/weapon_description_fwd.hpp>
-#include <sanguis/client/exp.hpp>
-#include <sanguis/client/exp_for_next_level.hpp>
-#include <sanguis/client/level.hpp>
 #include <sanguis/client/optional_health_pair.hpp>
+#include <sanguis/client/player_health_callback.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/collide_callback.hpp>
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
 #include <sanguis/client/draw2d/player_center_callback.hpp>
-#include <sanguis/client/draw2d/player_health_callback.hpp>
 #include <sanguis/client/draw2d/entities/base.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
 #include <sanguis/client/draw2d/message/environment.hpp>
 #include <sanguis/client/draw2d/scene/message_environment.hpp>
 #include <sanguis/client/draw2d/scene/object.hpp>
-#include <sanguis/client/draw2d/scene/hud/object.hpp>
 #include <sanguis/client/draw2d/scene/world/object.hpp>
 #include <sanguis/load/auras/context_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <functional>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::draw2d::scene::message_environment::message_environment(
 	sanguis::client::draw2d::scene::object &_object,
-	sanguis::client::draw2d::scene::hud::object &_hud,
-	sanguis::client::draw2d::scene::world::object &_world
+	sanguis::client::draw2d::scene::world::object &_world,
+	sanguis::client::player_health_callback const &_player_health_callback
 )
 :
 	sanguis::client::draw2d::message::environment(),
 	object_(
 		_object
 	),
-	hud_(
-		_hud
-	),
 	world_(
 		_world
 	),
 	player_health_callback_(
-		std::bind(
-			&sanguis::client::draw2d::scene::hud::object::health_pair,
-			&hud_,
-			std::placeholders::_1
-		)
+		_player_health_callback
 	)
 {
 }
@@ -92,66 +78,12 @@ sanguis::client::draw2d::scene::message_environment::entity(
 }
 
 void
-sanguis::client::draw2d::scene::message_environment::experience(
-	sanguis::client::exp const _exp
-)
-{
-	hud_.experience(
-		_exp
-	);
-}
-
-void
-sanguis::client::draw2d::scene::message_environment::level(
-	sanguis::client::level const _level,
-	sanguis::client::exp_for_next_level const _exp_for_next_level
-)
-{
-	hud_.level(
-		_level,
-		_exp_for_next_level
-	);
-}
-
-void
 sanguis::client::draw2d::scene::message_environment::change_world(
 	sanguis::client::world_parameters const &_param
 )
 {
 	object_.change_world(
 		_param
-	);
-}
-
-void
-sanguis::client::draw2d::scene::message_environment::give_weapon(
-	sanguis::weapon_description const &_description
-)
-{
-	hud_.add_weapon(
-		_description
-	);
-}
-
-void
-sanguis::client::draw2d::scene::message_environment::remove_weapon(
-	sanguis::is_primary_weapon const _is_primary_weapon
-)
-{
-	hud_.remove_weapon(
-		_is_primary_weapon
-	);
-}
-
-void
-sanguis::client::draw2d::scene::message_environment::magazine_remaining(
-	sanguis::is_primary_weapon const _is_primary_weapon,
-	sanguis::magazine_remaining const _magazine_remaining
-)
-{
-	hud_.magazine_remaining(
-		_is_primary_weapon,
-		_magazine_remaining
 	);
 }
 
@@ -197,7 +129,7 @@ sanguis::client::draw2d::scene::message_environment::collide_callback() const
 		world_.collide_callback();
 }
 
-sanguis::client::draw2d::player_health_callback const &
+sanguis::client::player_health_callback const &
 sanguis::client::draw2d::scene::message_environment::player_health_callback() const
 {
 	return

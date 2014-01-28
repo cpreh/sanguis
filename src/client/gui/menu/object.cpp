@@ -1,6 +1,6 @@
 #include <sanguis/duration.hpp>
-#include <sanguis/client/to_gui_duration.hpp>
 #include <sanguis/client/config/settings/object.hpp>
+#include <sanguis/client/gui/to_duration.hpp>
 #include <sanguis/client/gui/menu/object.hpp>
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/text_color.hpp>
@@ -328,7 +328,7 @@ sanguis::client::gui::menu::object::process(
 )
 {
 	gui_master_.update(
-		sanguis::client::to_gui_duration(
+		sanguis::client::gui::to_duration(
 			_delta
 		)
 	);

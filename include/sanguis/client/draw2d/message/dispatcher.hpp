@@ -20,16 +20,11 @@
 #include <sanguis/messages/server/change_weapon_fwd.hpp>
 #include <sanguis/messages/server/change_world_fwd.hpp>
 #include <sanguis/messages/server/die_fwd.hpp>
-#include <sanguis/messages/server/experience_fwd.hpp>
-#include <sanguis/messages/server/give_weapon_fwd.hpp>
 #include <sanguis/messages/server/health_fwd.hpp>
-#include <sanguis/messages/server/level_up_fwd.hpp>
-#include <sanguis/messages/server/magazine_remaining_fwd.hpp>
 #include <sanguis/messages/server/max_health_fwd.hpp>
 #include <sanguis/messages/server/move_fwd.hpp>
 #include <sanguis/messages/server/remove_buff_fwd.hpp>
 #include <sanguis/messages/server/remove_fwd.hpp>
-#include <sanguis/messages/server/remove_weapon_fwd.hpp>
 #include <sanguis/messages/server/rotate_fwd.hpp>
 #include <sanguis/messages/server/speed_fwd.hpp>
 #include <sanguis/messages/server/weapon_status_fwd.hpp>
@@ -127,27 +122,7 @@ public:
 
 	result_type
 	operator()(
-		sanguis::messages::server::experience const &
-	);
-
-	result_type
-	operator()(
-		sanguis::messages::server::give_weapon const &
-	);
-
-	result_type
-	operator()(
 		sanguis::messages::server::health const &
-	);
-
-	result_type
-	operator()(
-		sanguis::messages::server::level_up const &
-	);
-
-	result_type
-	operator()(
-		sanguis::messages::server::magazine_remaining const &
 	);
 
 	result_type
@@ -168,11 +143,6 @@ public:
 	result_type
 	operator()(
 		sanguis::messages::server::remove_buff const &
-	);
-
-	result_type
-	operator()(
-		sanguis::messages::server::remove_weapon const &
 	);
 
 	result_type

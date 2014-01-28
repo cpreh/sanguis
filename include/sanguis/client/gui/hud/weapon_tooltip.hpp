@@ -1,9 +1,9 @@
-#ifndef SANGUIS_CLIENT_DRAW2D_SCENE_HUD_WEAPON_TOOLTIP_HPP_INCLUDED
-#define SANGUIS_CLIENT_DRAW2D_SCENE_HUD_WEAPON_TOOLTIP_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_GUI_HUD_WEAPON_TOOLTIP_HPP_INCLUDED
+#define SANGUIS_CLIENT_GUI_HUD_WEAPON_TOOLTIP_HPP_INCLUDED
 
 #include <sanguis/duration.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
-#include <sanguis/client/draw2d/scene/hud/weapon_tooltip_fwd.hpp>
+#include <sanguis/client/gui/hud/weapon_tooltip_fwd.hpp>
 #include <sanguis/gui/context.hpp>
 #include <sanguis/gui/master.hpp>
 #include <sanguis/gui/minimum_size_area.hpp>
@@ -25,9 +25,7 @@ namespace sanguis
 {
 namespace client
 {
-namespace draw2d
-{
-namespace scene
+namespace gui
 {
 namespace hud
 {
@@ -83,7 +81,6 @@ private:
 	sanguis::gui::minimum_size_area gui_area_;
 };
 
-}
 }
 }
 }

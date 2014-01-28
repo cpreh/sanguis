@@ -9,9 +9,9 @@
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/max_health_valid.hpp>
 #include <sanguis/client/optional_health_pair.hpp>
-#include <sanguis/client/to_gui_duration.hpp>
-#include <sanguis/client/draw2d/scene/hud/object.hpp>
-#include <sanguis/client/draw2d/scene/hud/weapon_widget.hpp>
+#include <sanguis/client/gui/to_duration.hpp>
+#include <sanguis/client/gui/hud/object.hpp>
+#include <sanguis/client/gui/hud/weapon_widget.hpp>
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/widget/bar.hpp>
@@ -37,7 +37,7 @@
 #include <fcppt/assert/pre.hpp>
 
 
-sanguis::client::draw2d::scene::hud::object::object(
+sanguis::client::gui::hud::object::object(
 	sanguis::load::resource::textures const &_textures,
 	sge::font::object &_font,
 	sge::renderer::device::ffp &_renderer,
@@ -193,12 +193,12 @@ sanguis::client::draw2d::scene::hud::object::object(
 {
 }
 
-sanguis::client::draw2d::scene::hud::object::~object()
+sanguis::client::gui::hud::object::~object()
 {
 }
 
 void
-sanguis::client::draw2d::scene::hud::object::health_pair(
+sanguis::client::gui::hud::object::health_pair(
 	sanguis::client::optional_health_pair const &_health_pair
 )
 {
@@ -233,7 +233,7 @@ sanguis::client::draw2d::scene::hud::object::health_pair(
 }
 
 void
-sanguis::client::draw2d::scene::hud::object::experience(
+sanguis::client::gui::hud::object::experience(
 	sanguis::client::exp const _exp
 )
 {
@@ -244,7 +244,7 @@ sanguis::client::draw2d::scene::hud::object::experience(
 }
 
 void
-sanguis::client::draw2d::scene::hud::object::level(
+sanguis::client::gui::hud::object::level(
 	sanguis::client::level const _level,
 	sanguis::client::exp_for_next_level const _exp_for_next_level
 )
@@ -269,7 +269,7 @@ sanguis::client::draw2d::scene::hud::object::level(
 }
 
 void
-sanguis::client::draw2d::scene::hud::object::add_weapon(
+sanguis::client::gui::hud::object::add_weapon(
 	sanguis::weapon_description const &_description
 )
 {
@@ -287,7 +287,7 @@ sanguis::client::draw2d::scene::hud::object::add_weapon(
 }
 
 void
-sanguis::client::draw2d::scene::hud::object::remove_weapon(
+sanguis::client::gui::hud::object::remove_weapon(
 	sanguis::is_primary_weapon const _is_primary
 )
 {
@@ -299,7 +299,7 @@ sanguis::client::draw2d::scene::hud::object::remove_weapon(
 }
 
 void
-sanguis::client::draw2d::scene::hud::object::magazine_remaining(
+sanguis::client::gui::hud::object::magazine_remaining(
 	sanguis::is_primary_weapon const _is_primary,
 	sanguis::magazine_remaining const _magazine_remaining
 )
@@ -312,19 +312,19 @@ sanguis::client::draw2d::scene::hud::object::magazine_remaining(
 }
 
 void
-sanguis::client::draw2d::scene::hud::object::update(
+sanguis::client::gui::hud::object::update(
 	sanguis::duration const &_duration
 )
 {
 	gui_master_.update(
-		sanguis::client::to_gui_duration(
+		sanguis::client::gui::to_duration(
 			_duration
 		)
 	);
 }
 
 void
-sanguis::client::draw2d::scene::hud::object::draw(
+sanguis::client::gui::hud::object::draw(
 	sge::renderer::context::ffp &_render_context
 )
 {
@@ -335,8 +335,8 @@ sanguis::client::draw2d::scene::hud::object::draw(
 	);
 }
 
-sanguis::client::draw2d::scene::hud::weapon_widget &
-sanguis::client::draw2d::scene::hud::object::weapon_widget(
+sanguis::client::gui::hud::weapon_widget &
+sanguis::client::gui::hud::object::weapon_widget(
 	sanguis::is_primary_weapon const _is_primary
 )
 {
@@ -350,7 +350,7 @@ sanguis::client::draw2d::scene::hud::object::weapon_widget(
 }
 
 void
-sanguis::client::draw2d::scene::hud::object::update_exp()
+sanguis::client::gui::hud::object::update_exp()
 {
 	sanguis::client::exp_for_next_level const diff(
 		exp_for_next_level_

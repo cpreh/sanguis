@@ -1,6 +1,6 @@
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/optional_weapon_description.hpp>
-#include <sanguis/client/draw2d/scene/hud/weapon_widget.hpp>
+#include <sanguis/client/gui/hud/weapon_widget.hpp>
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/text_color.hpp>
@@ -21,7 +21,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 
 
-sanguis::client::draw2d::scene::hud::weapon_widget::weapon_widget(
+sanguis::client::gui::hud::weapon_widget::weapon_widget(
 	sanguis::load::hud::context &_resources,
 	sanguis::gui::context &_gui_context,
 	sge::renderer::device::ffp &_renderer,
@@ -60,12 +60,12 @@ sanguis::client::draw2d::scene::hud::weapon_widget::weapon_widget(
 {
 }
 
-sanguis::client::draw2d::scene::hud::weapon_widget::~weapon_widget()
+sanguis::client::gui::hud::weapon_widget::~weapon_widget()
 {
 }
 
 void
-sanguis::client::draw2d::scene::hud::weapon_widget::weapon_description(
+sanguis::client::gui::hud::weapon_widget::weapon_description(
 	sanguis::optional_weapon_description const &_description
 )
 {
@@ -120,7 +120,7 @@ sanguis::client::draw2d::scene::hud::weapon_widget::weapon_description(
 }
 
 void
-sanguis::client::draw2d::scene::hud::weapon_widget::magazine_remaining(
+sanguis::client::gui::hud::weapon_widget::magazine_remaining(
 	sanguis::magazine_remaining const _magazine_remaining
 )
 {
@@ -135,14 +135,14 @@ sanguis::client::draw2d::scene::hud::weapon_widget::magazine_remaining(
 }
 
 sanguis::gui::widget::box_container &
-sanguis::client::draw2d::scene::hud::weapon_widget::widget()
+sanguis::client::gui::hud::weapon_widget::widget()
 {
 	return
 		container_;
 }
 
 void
-sanguis::client::draw2d::scene::hud::weapon_widget::update_text(
+sanguis::client::gui::hud::weapon_widget::update_text(
 	sanguis::magazine_remaining const _magazine_remaining
 )
 {

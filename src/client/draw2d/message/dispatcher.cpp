@@ -1,15 +1,8 @@
 #include <sanguis/entity_id.hpp>
-#include <sanguis/magazine_extra.hpp>
-#include <sanguis/magazine_remaining.hpp>
-#include <sanguis/magazine_size.hpp>
-#include <sanguis/weapon_description.hpp>
 #include <sanguis/creator/name.hpp>
 #include <sanguis/creator/opening_count.hpp>
 #include <sanguis/creator/top_parameters.hpp>
-#include <sanguis/client/exp.hpp>
-#include <sanguis/client/exp_for_next_level.hpp>
 #include <sanguis/client/health.hpp>
-#include <sanguis/client/level.hpp>
 #include <sanguis/client/max_health.hpp>
 #include <sanguis/client/world_parameters.hpp>
 #include <sanguis/client/draw2d/aoe.hpp>
@@ -48,26 +41,17 @@
 #include <sanguis/messages/adapted_types/aura_type_vector.hpp>
 #include <sanguis/messages/adapted_types/buff_type.hpp>
 #include <sanguis/messages/adapted_types/buff_type_vector.hpp>
-#include <sanguis/messages/adapted_types/is_primary_weapon.hpp>
-#include <sanguis/messages/adapted_types/level.hpp>
 #include <sanguis/messages/adapted_types/seed.hpp>
-#include <sanguis/messages/adapted_types/weapon_attribute_vector.hpp>
 #include <sanguis/messages/adapted_types/weapon_type.hpp>
 #include <sanguis/messages/adapted_types/world_id.hpp>
-#include <sanguis/messages/convert/from_weapon_attribute_vector.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/aoe.hpp>
 #include <sanguis/messages/roles/aoe_projectile.hpp>
 #include <sanguis/messages/roles/center.hpp>
 #include <sanguis/messages/roles/enemy.hpp>
 #include <sanguis/messages/roles/entity_id.hpp>
-#include <sanguis/messages/roles/experience.hpp>
-#include <sanguis/messages/roles/exp_for_next_level.hpp>
 #include <sanguis/messages/roles/friend.hpp>
 #include <sanguis/messages/roles/health.hpp>
-#include <sanguis/messages/roles/magazine_base_size.hpp>
-#include <sanguis/messages/roles/magazine_extra_size.hpp>
-#include <sanguis/messages/roles/magazine_remaining.hpp>
 #include <sanguis/messages/roles/max_health.hpp>
 #include <sanguis/messages/roles/name.hpp>
 #include <sanguis/messages/roles/opening_count.hpp>
@@ -89,22 +73,15 @@
 #include <sanguis/messages/server/change_weapon.hpp>
 #include <sanguis/messages/server/change_world.hpp>
 #include <sanguis/messages/server/die.hpp>
-#include <sanguis/messages/server/experience.hpp>
-#include <sanguis/messages/server/give_weapon.hpp>
 #include <sanguis/messages/server/health.hpp>
-#include <sanguis/messages/server/level_up.hpp>
-#include <sanguis/messages/server/magazine_remaining.hpp>
 #include <sanguis/messages/server/max_health.hpp>
 #include <sanguis/messages/server/move.hpp>
 #include <sanguis/messages/server/remove.hpp>
 #include <sanguis/messages/server/remove_buff.hpp>
-#include <sanguis/messages/server/remove_weapon.hpp>
 #include <sanguis/messages/server/rotate.hpp>
 #include <sanguis/messages/server/speed.hpp>
 #include <sanguis/messages/server/weapon_status.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
-#include <alda/serialization/load/optional.hpp>
-#include <alda/serialization/load/static_size.hpp>
 #include <fcppt/dynamic_cast.hpp>
 #include <fcppt/type_name_from_info.hpp>
 #include <fcppt/text.hpp>
@@ -420,54 +397,6 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 
 sanguis::client::draw2d::message::dispatcher::result_type
 sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::server::experience const &_message
-)
-{
-	env_.experience(
-		sanguis::client::exp(
-			_message.get<
-				sanguis::messages::roles::experience
-			>()
-		)
-	);
-}
-
-sanguis::client::draw2d::message::dispatcher::result_type
-sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::server::give_weapon const &_message
-)
-{
-	env_.give_weapon(
-		sanguis::weapon_description(
-			_message.get<
-				sanguis::messages::adapted_types::weapon_type
-			>(),
-			sanguis::magazine_size(
-				_message.get<
-					sanguis::messages::roles::magazine_base_size
-				>()
-			),
-			sanguis::magazine_extra(
-				_message.get<
-					sanguis::messages::roles::magazine_extra_size
-				>()
-			),
-			sanguis::magazine_remaining(
-				_message.get<
-					sanguis::messages::roles::magazine_remaining
-				>()
-			),
-			sanguis::messages::convert::from_weapon_attribute_vector(
-				_message.get<
-					sanguis::messages::adapted_types::weapon_attribute_vector
-				>()
-			)
-		)
-	);
-}
-
-sanguis::client::draw2d::message::dispatcher::result_type
-sanguis::client::draw2d::message::dispatcher::operator()(
 	sanguis::messages::server::health const &_message
 )
 {
@@ -483,42 +412,6 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		sanguis::client::health(
 			_message.get<
 				sanguis::messages::roles::health
-			>()
-		)
-	);
-}
-
-sanguis::client::draw2d::message::dispatcher::result_type
-sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::server::level_up const &_message
-)
-{
-	env_.level(
-		sanguis::client::level(
-			_message.get<
-				sanguis::messages::adapted_types::level
-			>()
-		),
-		sanguis::client::exp_for_next_level(
-			_message.get<
-				sanguis::messages::roles::exp_for_next_level
-			>()
-		)
-	);
-}
-
-sanguis::client::draw2d::message::dispatcher::result_type
-sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::server::magazine_remaining const &_message
-)
-{
-	env_.magazine_remaining(
-		_message.get<
-			sanguis::messages::adapted_types::is_primary_weapon
-		>(),
-		sanguis::magazine_remaining(
-			_message.get<
-				sanguis::messages::roles::magazine_remaining
 			>()
 		)
 	);
@@ -602,18 +495,6 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	).remove_buff(
 		_message.get<
 			sanguis::messages::adapted_types::buff_type
-		>()
-	);
-}
-
-sanguis::client::draw2d::message::dispatcher::result_type
-sanguis::client::draw2d::message::dispatcher::operator()(
-	sanguis::messages::server::remove_weapon const &_message
-)
-{
-	env_.remove_weapon(
-		_message.get<
-			sanguis::messages::adapted_types::is_primary_weapon
 		>()
 	);
 }

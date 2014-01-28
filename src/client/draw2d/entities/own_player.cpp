@@ -2,13 +2,13 @@
 #include <sanguis/buff_type_vector.hpp>
 #include <sanguis/client/health_pair.hpp>
 #include <sanguis/client/optional_health_pair.hpp>
+#include <sanguis/client/player_health_callback.hpp>
 #include <sanguis/client/draw2d/collide_callback.hpp>
 #include <sanguis/client/draw2d/collide_parameters.hpp>
 #include <sanguis/client/draw2d/dim2.hpp>
 #include <sanguis/client/draw2d/optional_player_center.hpp>
 #include <sanguis/client/draw2d/optional_speed.hpp>
 #include <sanguis/client/draw2d/player_center.hpp>
-#include <sanguis/client/draw2d/player_health_callback.hpp>
 #include <sanguis/client/draw2d/player_center_callback.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/entities/own_player.hpp>
@@ -24,7 +24,7 @@ sanguis::client::draw2d::entities::own_player::own_player(
 	sanguis::client::draw2d::entities::model::load_parameters const &_parameters,
 	sanguis::client::draw2d::player_center_callback const &_player_center_callback,
 	sanguis::client::draw2d::collide_callback const &_collide,
-	sanguis::client::draw2d::player_health_callback const &_player_health_callback,
+	sanguis::client::player_health_callback const &_player_health_callback,
 	sanguis::aura_type_vector const &_auras,
 	sanguis::buff_type_vector const &_buffs,
 	sanguis::client::health_pair const _health_pair

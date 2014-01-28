@@ -1,10 +1,10 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/weapon_description.hpp>
-#include <sanguis/client/to_gui_duration.hpp>
-#include <sanguis/client/draw2d/scene/hud/weapon_attribute_color.hpp>
-#include <sanguis/client/draw2d/scene/hud/weapon_attribute_text.hpp>
-#include <sanguis/client/draw2d/scene/hud/weapon_name.hpp>
-#include <sanguis/client/draw2d/scene/hud/weapon_tooltip.hpp>
+#include <sanguis/client/gui/to_duration.hpp>
+#include <sanguis/client/gui/hud/weapon_attribute_color.hpp>
+#include <sanguis/client/gui/hud/weapon_attribute_text.hpp>
+#include <sanguis/client/gui/hud/weapon_name.hpp>
+#include <sanguis/client/gui/hud/weapon_tooltip.hpp>
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
@@ -26,7 +26,7 @@
 #include <fcppt/algorithm/map.hpp>
 
 
-sanguis::client::draw2d::scene::hud::weapon_tooltip::weapon_tooltip(
+sanguis::client::gui::hud::weapon_tooltip::weapon_tooltip(
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sge::input::keyboard::device &_keyboard,
@@ -38,7 +38,7 @@ sanguis::client::draw2d::scene::hud::weapon_tooltip::weapon_tooltip(
 	name_text_(
 		_renderer,
 		_font,
-		sanguis::client::draw2d::scene::hud::weapon_name(
+		sanguis::client::gui::hud::weapon_name(
 			_description.weapon_type()
 		),
 		sanguis::gui::text_color(
@@ -63,11 +63,11 @@ sanguis::client::draw2d::scene::hud::weapon_tooltip::weapon_tooltip(
 					>(
 						_renderer,
 						_font,
-						sanguis::client::draw2d::scene::hud::weapon_attribute_text(
+						sanguis::client::gui::hud::weapon_attribute_text(
 							_attribute
 						),
 						sanguis::gui::text_color(
-							sanguis::client::draw2d::scene::hud::weapon_attribute_color(
+							sanguis::client::gui::hud::weapon_attribute_color(
 								_attribute.type()
 							)
 						)
@@ -125,24 +125,24 @@ sanguis::client::draw2d::scene::hud::weapon_tooltip::weapon_tooltip(
 {
 }
 
-sanguis::client::draw2d::scene::hud::weapon_tooltip::~weapon_tooltip()
+sanguis::client::gui::hud::weapon_tooltip::~weapon_tooltip()
 {
 }
 
 void
-sanguis::client::draw2d::scene::hud::weapon_tooltip::update(
+sanguis::client::gui::hud::weapon_tooltip::update(
 	sanguis::duration const &_duration
 )
 {
 	gui_master_.update(
-		sanguis::client::to_gui_duration(
+		sanguis::client::gui::to_duration(
 			_duration
 		)
 	);
 }
 
 void
-sanguis::client::draw2d::scene::hud::weapon_tooltip::draw(
+sanguis::client::gui::hud::weapon_tooltip::draw(
 	sge::renderer::context::ffp &_render_context
 )
 {

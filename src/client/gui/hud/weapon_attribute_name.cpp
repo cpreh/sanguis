@@ -1,12 +1,12 @@
 #include <sanguis/weapon_attribute_type.hpp>
-#include <sanguis/client/draw2d/scene/hud/weapon_attribute_name.hpp>
+#include <sanguis/client/gui/hud/weapon_attribute_name.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/string.hpp>
 
 
 sge::font::string
-sanguis::client::draw2d::scene::hud::weapon_attribute_name(
+sanguis::client::gui::hud::weapon_attribute_name(
 	sanguis::weapon_attribute_type const _type
 )
 {

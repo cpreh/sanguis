@@ -1,13 +1,13 @@
 #include <sanguis/primary_weapon_type.hpp>
 #include <sanguis/secondary_weapon_type.hpp>
-#include <sanguis/client/draw2d/scene/hud/weapon_name_visitor.hpp>
+#include <sanguis/client/gui/hud/weapon_name_visitor.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/string.hpp>
 
 
-sanguis::client::draw2d::scene::hud::weapon_name_visitor::result_type
-sanguis::client::draw2d::scene::hud::weapon_name_visitor::operator()(
+sanguis::client::gui::hud::weapon_name_visitor::result_type
+sanguis::client::gui::hud::weapon_name_visitor::operator()(
 	sanguis::primary_weapon_type const _primary_type
 ) const
 {
@@ -54,8 +54,8 @@ sanguis::client::draw2d::scene::hud::weapon_name_visitor::operator()(
 	FCPPT_ASSERT_UNREACHABLE;
 }
 
-sanguis::client::draw2d::scene::hud::weapon_name_visitor::result_type
-sanguis::client::draw2d::scene::hud::weapon_name_visitor::operator()(
+sanguis::client::gui::hud::weapon_name_visitor::result_type
+sanguis::client::gui::hud::weapon_name_visitor::operator()(
 	sanguis::secondary_weapon_type const _secondary_type
 ) const
 {

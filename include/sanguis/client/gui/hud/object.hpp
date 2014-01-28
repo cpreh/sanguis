@@ -1,16 +1,16 @@
-#ifndef SANGUIS_CLIENT_DRAW2D_SCENE_HUD_OBJECT_HPP_INCLUDED
-#define SANGUIS_CLIENT_DRAW2D_SCENE_HUD_OBJECT_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_GUI_HUD_OBJECT_HPP_INCLUDED
+#define SANGUIS_CLIENT_GUI_HUD_OBJECT_HPP_INCLUDED
 
 #include <sanguis/duration.hpp>
 #include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
-#include <sanguis/client/draw2d/scene/hud/object_fwd.hpp>
-#include <sanguis/client/draw2d/scene/hud/weapon_widget.hpp>
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/exp_for_next_level.hpp>
 #include <sanguis/client/optional_health_pair_fwd.hpp>
 #include <sanguis/client/level.hpp>
+#include <sanguis/client/gui/hud/object_fwd.hpp>
+#include <sanguis/client/gui/hud/weapon_widget.hpp>
 #include <sanguis/gui/context.hpp>
 #include <sanguis/gui/master.hpp>
 #include <sanguis/gui/minimum_size_area.hpp>
@@ -32,9 +32,7 @@ namespace sanguis
 {
 namespace client
 {
-namespace draw2d
-{
-namespace scene
+namespace gui
 {
 namespace hud
 {
@@ -100,7 +98,7 @@ private:
 	void
 	update_exp();
 
-	sanguis::client::draw2d::scene::hud::weapon_widget &
+	sanguis::client::gui::hud::weapon_widget &
 	weapon_widget(
 		sanguis::is_primary_weapon
 	);
@@ -127,9 +125,9 @@ private:
 
 		sanguis::gui::widget::bar health_bar_;
 
-			sanguis::client::draw2d::scene::hud::weapon_widget primary_weapon_;
+			sanguis::client::gui::hud::weapon_widget primary_weapon_;
 
-			sanguis::client::draw2d::scene::hud::weapon_widget secondary_weapon_;
+			sanguis::client::gui::hud::weapon_widget secondary_weapon_;
 
 		sanguis::gui::widget::box_container weapon_container_;
 
@@ -140,7 +138,6 @@ private:
 	sanguis::gui::minimum_size_area gui_area_;
 };
 
-}
 }
 }
 }

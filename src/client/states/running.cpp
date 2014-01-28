@@ -1,6 +1,15 @@
+#include <sanguis/magazine_extra.hpp>
+#include <sanguis/magazine_remaining.hpp>
+#include <sanguis/magazine_size.hpp>
+#include <sanguis/weapon_description.hpp>
+#include <sanguis/client/exp.hpp>
+#include <sanguis/client/exp_for_next_level.hpp>
+#include <sanguis/client/health_pair.hpp>
+#include <sanguis/client/level.hpp>
 #include <sanguis/client/log.hpp>
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/make_send_callback.hpp>
+#include <sanguis/client/player_health_callback.hpp>
 #include <sanguis/client/sound_manager.hpp>
 #include <sanguis/client/console/object.hpp>
 #include <sanguis/client/control/environment_fwd.hpp>
@@ -15,17 +24,32 @@
 #include <sanguis/client/events/overlay.hpp>
 #include <sanguis/client/events/render.hpp>
 #include <sanguis/client/events/tick.hpp>
+#include <sanguis/client/gui/hud/object.hpp>
 #include <sanguis/client/states/menu.hpp>
 #include <sanguis/client/states/running.hpp>
+#include <sanguis/load/context.hpp>
+#include <sanguis/load/resource/context.hpp>
+#include <sanguis/messages/adapted_types/is_primary_weapon.hpp>
+#include <sanguis/messages/adapted_types/level.hpp>
 #include <sanguis/messages/adapted_types/string.hpp>
+#include <sanguis/messages/adapted_types/weapon_attribute_vector.hpp>
+#include <sanguis/messages/adapted_types/weapon_type.hpp>
+#include <sanguis/messages/convert/from_weapon_attribute_vector.hpp>
 #include <sanguis/messages/roles/command_description.hpp>
 #include <sanguis/messages/roles/command_name.hpp>
+#include <sanguis/messages/roles/exp_for_next_level.hpp>
+#include <sanguis/messages/roles/experience.hpp>
+#include <sanguis/messages/roles/magazine_base_size.hpp>
+#include <sanguis/messages/roles/magazine_extra_size.hpp>
+#include <sanguis/messages/roles/magazine_remaining.hpp>
 #include <sanguis/messages/server/add_console_command.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
 #include <sanguis/messages/server/console_print.hpp>
-#include <sanguis/messages/server/create.hpp>
+#include <sanguis/messages/server/experience.hpp>
 #include <sanguis/messages/server/level_up.hpp>
+#include <sanguis/messages/server/magazine_remaining.hpp>
 #include <sanguis/messages/server/pause.hpp>
+#include <sanguis/messages/server/remove_weapon.hpp>
 #include <sanguis/messages/server/unpause.hpp>
 #include <sanguis/messages/server/call/object.hpp>
 #include <sanguis/load/context.hpp>
@@ -33,6 +57,8 @@
 #include <sge/console/object.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/input/cursor/activatable_fwd.hpp>
+#include <alda/serialization/load/optional.hpp>
+#include <alda/serialization/load/static_size.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
@@ -70,6 +96,27 @@ sanguis::client::states::running::running(
 			sanguis::client::sound_manager
 		>()
 	),
+	hud_(
+		fcppt::make_unique_ptr<
+			sanguis::client::gui::hud::object
+		>(
+			this->context<
+				sanguis::client::machine
+			>().resources().resources().textures(),
+			this->context<
+				sanguis::client::machine
+			>().font_object(),
+			this->context<
+				sanguis::client::machine
+			>().renderer(),
+			this->context<
+				sanguis::client::machine
+			>().keyboard(),
+			this->context<
+				sanguis::client::machine
+			>().cursor()
+		)
+	),
 	drawer_(
 		fcppt::make_unique_ptr<
 			sanguis::client::draw2d::scene::object
@@ -83,16 +130,14 @@ sanguis::client::states::running::running(
 			>().renderer(),
 			this->context<
 				sanguis::client::machine
-			>().font_object(),
-			this->context<
-				sanguis::client::machine
 			>().viewport_manager(),
-			this->context<
-				sanguis::client::machine
-			>().keyboard(),
-			this->context<
-				sanguis::client::machine
-			>().cursor()
+			sanguis::client::player_health_callback(
+				std::bind(
+					&sanguis::client::gui::hud::object::health_pair,
+					hud_.get(),
+					std::placeholders::_1
+				)
+			)
 		)
 	),
 	input_translator_(
@@ -128,6 +173,10 @@ sanguis::client::states::running::react(
 		_event.delta()
 	);
 
+	hud_->update(
+		_event.delta()
+	);
+
 	sound_manager_->update();
 
 	return
@@ -140,6 +189,10 @@ sanguis::client::states::running::react(
 )
 {
 	drawer_->draw(
+		_event.context()
+	);
+
+	hud_->draw(
 		_event.context()
 	);
 
@@ -159,11 +212,15 @@ sanguis::client::states::running::react(
 )
 {
 	static sanguis::messages::server::call::object<
-		boost::mpl::vector5<
-			sanguis::messages::server::level_up,
-			sanguis::messages::server::console_print,
+		boost::mpl::vector9<
 			sanguis::messages::server::add_console_command,
+			sanguis::messages::server::console_print,
+			sanguis::messages::server::experience,
+			sanguis::messages::server::give_weapon,
+			sanguis::messages::server::level_up,
+			sanguis::messages::server::magazine_remaining,
 			sanguis::messages::server::pause,
+			sanguis::messages::server::remove_weapon,
 			sanguis::messages::server::unpause
 		>,
 		running
@@ -190,41 +247,6 @@ sanguis::client::states::running::react(
 		this->transit<
 			sanguis::client::states::menu
 		>();
-}
-
-boost::statechart::result
-sanguis::client::states::running::operator()(
-	sanguis::messages::server::level_up const &_message
-)
-{
-	drawer_->process_message(
-		// TODO: Get rid of this!
-		*sanguis::messages::server::create(
-			_message
-		)
-	);
-
-	return
-		this->discard_event();
-}
-
-boost::statechart::result
-sanguis::client::states::running::operator()(
-	sanguis::messages::server::console_print const &_message
-)
-{
-	console_->sge_console().emit_message(
-		sge::font::from_fcppt_string(
-			sge::charconv::utf8_string_to_fcppt(
-				_message.get<
-					sanguis::messages::adapted_types::string
-				>()
-			)
-		)
-	);
-
-	return
-		this->discard_event();
 }
 
 boost::statechart::result
@@ -269,6 +291,121 @@ sanguis::client::states::running::operator()(
 
 boost::statechart::result
 sanguis::client::states::running::operator()(
+	sanguis::messages::server::console_print const &_message
+)
+{
+	console_->sge_console().emit_message(
+		sge::font::from_fcppt_string(
+			sge::charconv::utf8_string_to_fcppt(
+				_message.get<
+					sanguis::messages::adapted_types::string
+				>()
+			)
+		)
+	);
+
+	return
+		this->discard_event();
+}
+
+boost::statechart::result
+sanguis::client::states::running::operator()(
+	sanguis::messages::server::experience const &_message
+)
+{
+	hud_->experience(
+		sanguis::client::exp(
+			_message.get<
+				sanguis::messages::roles::experience
+			>()
+		)
+	);
+
+	return
+		this->discard_event();
+}
+
+boost::statechart::result
+sanguis::client::states::running::operator()(
+	sanguis::messages::server::give_weapon const &_message
+)
+{
+	hud_->add_weapon(
+		sanguis::weapon_description(
+			_message.get<
+				sanguis::messages::adapted_types::weapon_type
+			>(),
+			sanguis::magazine_size(
+				_message.get<
+					sanguis::messages::roles::magazine_base_size
+				>()
+			),
+			sanguis::magazine_extra(
+				_message.get<
+					sanguis::messages::roles::magazine_extra_size
+				>()
+			),
+			sanguis::magazine_remaining(
+				_message.get<
+					sanguis::messages::roles::magazine_remaining
+				>()
+			),
+			sanguis::messages::convert::from_weapon_attribute_vector(
+				_message.get<
+					sanguis::messages::adapted_types::weapon_attribute_vector
+				>()
+			)
+		)
+	);
+
+	return
+		this->discard_event();
+}
+
+boost::statechart::result
+sanguis::client::states::running::operator()(
+	sanguis::messages::server::magazine_remaining const &_message
+)
+{
+	hud_->magazine_remaining(
+		_message.get<
+			sanguis::messages::adapted_types::is_primary_weapon
+		>(),
+		sanguis::magazine_remaining(
+			_message.get<
+				sanguis::messages::roles::magazine_remaining
+			>()
+		)
+	);
+
+	return
+		this->discard_event();
+}
+
+boost::statechart::result
+sanguis::client::states::running::operator()(
+	sanguis::messages::server::level_up const &_message
+)
+{
+	hud_->level(
+		sanguis::client::level(
+			_message.get<
+				sanguis::messages::adapted_types::level
+			>()
+		),
+		sanguis::client::exp_for_next_level(
+			_message.get<
+				sanguis::messages::roles::exp_for_next_level
+			>()
+		)
+	);
+
+	return
+		this->discard_event();
+}
+
+boost::statechart::result
+sanguis::client::states::running::operator()(
 	sanguis::messages::server::pause const &
 )
 {
@@ -278,6 +415,21 @@ sanguis::client::states::running::operator()(
 
 	sound_manager_->pause(
 		true
+	);
+
+	return
+		this->discard_event();
+}
+
+boost::statechart::result
+sanguis::client::states::running::operator()(
+	sanguis::messages::server::remove_weapon const &_message
+)
+{
+	hud_->remove_weapon(
+		_message.get<
+			sanguis::messages::adapted_types::is_primary_weapon
+		>()
 	);
 
 	return

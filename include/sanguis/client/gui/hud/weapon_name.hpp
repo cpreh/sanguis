@@ -1,5 +1,5 @@
-#ifndef SANGUIS_CLIENT_DRAW2D_SCENE_HUD_WEAPON_NAME_HPP_INCLUDED
-#define SANGUIS_CLIENT_DRAW2D_SCENE_HUD_WEAPON_NAME_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_GUI_HUD_WEAPON_NAME_HPP_INCLUDED
+#define SANGUIS_CLIENT_GUI_HUD_WEAPON_NAME_HPP_INCLUDED
 
 #include <sanguis/weapon_type_fwd.hpp>
 #include <sge/font/string.hpp>
@@ -9,9 +9,7 @@ namespace sanguis
 {
 namespace client
 {
-namespace draw2d
-{
-namespace scene
+namespace gui
 {
 namespace hud
 {
@@ -21,7 +19,6 @@ weapon_name(
 	sanguis::weapon_type const &
 );
 
-}
 }
 }
 }

@@ -4,6 +4,7 @@
 #include <sanguis/random_seed.hpp>
 #include <sanguis/sequence_iteration.hpp>
 #include <sanguis/update_diff_clock.hpp>
+#include <sanguis/client/player_health_callback.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/client/control/attack_dest.hpp>
@@ -25,7 +26,6 @@
 #include <sanguis/client/draw2d/scene/foreach_z_ordering.hpp>
 #include <sanguis/client/draw2d/scene/message_environment.hpp>
 #include <sanguis/client/draw2d/scene/translation.hpp>
-#include <sanguis/client/draw2d/scene/hud/object.hpp>
 #include <sanguis/client/draw2d/scene/world/object.hpp>
 #include <sanguis/client/draw2d/entities/base.hpp>
 #include <sanguis/client/draw2d/entities/own.hpp>
@@ -53,24 +53,16 @@
 #include <sanguis/messages/server/change_weapon.hpp>
 #include <sanguis/messages/server/change_world.hpp>
 #include <sanguis/messages/server/die.hpp>
-#include <sanguis/messages/server/experience.hpp>
-#include <sanguis/messages/server/give_weapon.hpp>
 #include <sanguis/messages/server/health.hpp>
-#include <sanguis/messages/server/level_up.hpp>
-#include <sanguis/messages/server/magazine_remaining.hpp>
 #include <sanguis/messages/server/max_health.hpp>
 #include <sanguis/messages/server/move.hpp>
 #include <sanguis/messages/server/remove.hpp>
 #include <sanguis/messages/server/remove_buff.hpp>
-#include <sanguis/messages/server/remove_weapon.hpp>
 #include <sanguis/messages/server/rotate.hpp>
 #include <sanguis/messages/server/speed.hpp>
 #include <sanguis/messages/server/weapon_status.hpp>
 #include <sanguis/messages/server/call/object.hpp>
-#include <sge/font/object_fwd.hpp>
 #include <sge/image/color/predef.hpp>
-#include <sge/input/cursor/object_fwd.hpp>
-#include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/clear/parameters.hpp>
 #include <sge/renderer/context/ffp.hpp>
 #include <sge/renderer/device/ffp.hpp>
@@ -112,10 +104,8 @@ sanguis::client::draw2d::scene::object::object(
 	sanguis::load::context const &_resources,
 	sanguis::client::sound_manager &_sound_manager,
 	sge::renderer::device::ffp &_renderer,
-	sge::font::object &_font_object,
 	sge::viewport::manager &_viewport_manager,
-	sge::input::keyboard::device &_keyboard,
-	sge::input::cursor::object &_cursor
+	sanguis::client::player_health_callback const &_player_health_callback
 )
 :
 	diff_clock_(),
@@ -152,17 +142,6 @@ sanguis::client::draw2d::scene::object::object(
 		renderer_,
 		sprite_states_
 	),
-	hud_(
-		fcppt::make_unique_ptr<
-			sanguis::client::draw2d::scene::hud::object
-		>(
-			resources_.resources().textures(),
-			_font_object,
-			renderer_,
-			_keyboard,
-			_cursor
-		)
-	),
 	world_(
 		fcppt::make_unique_ptr<
 			sanguis::client::draw2d::scene::world::object
@@ -195,8 +174,8 @@ sanguis::client::draw2d::scene::object::object(
 			sanguis::client::draw2d::scene::message_environment
 		>(
 			*this,
-			*hud_,
-			*world_
+			*world_,
+			_player_health_callback
 		)
 	),
 	control_environment_(
@@ -245,7 +224,7 @@ sanguis::client::draw2d::scene::object::process_message(
 )
 {
 	static sanguis::messages::server::call::object<
-		boost::mpl::vector26<
+		boost::mpl::vector21<
 			sanguis::messages::server::add_aoe_projectile,
 			sanguis::messages::server::add_aura,
 			sanguis::messages::server::add_buff,
@@ -259,16 +238,11 @@ sanguis::client::draw2d::scene::object::process_message(
 			sanguis::messages::server::change_weapon,
 			sanguis::messages::server::change_world,
 			sanguis::messages::server::die,
-			sanguis::messages::server::experience,
-			sanguis::messages::server::give_weapon,
 			sanguis::messages::server::health,
-			sanguis::messages::server::level_up,
-			sanguis::messages::server::magazine_remaining,
 			sanguis::messages::server::max_health,
 			sanguis::messages::server::move,
 			sanguis::messages::server::remove,
 			sanguis::messages::server::remove_buff,
-			sanguis::messages::server::remove_weapon,
 			sanguis::messages::server::rotate,
 			sanguis::messages::server::speed,
 			sanguis::messages::server::weapon_status
@@ -299,10 +273,6 @@ sanguis::client::draw2d::scene::object::update(
 			diff_clock_,
 			_delta
 		);
-
-	hud_->update(
-		_delta
-	);
 
 	sanguis::map_iteration(
 		entities_,
@@ -361,10 +331,6 @@ sanguis::client::draw2d::scene::object::draw(
 )
 {
 	this->render_systems(
-		_render_context
-	);
-
-	hud_->draw(
 		_render_context
 	);
 }

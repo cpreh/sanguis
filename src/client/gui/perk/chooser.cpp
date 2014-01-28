@@ -1,5 +1,5 @@
 #include <sanguis/duration.hpp>
-#include <sanguis/client/to_gui_duration.hpp>
+#include <sanguis/client/gui/to_duration.hpp>
 #include <sanguis/client/gui/perk/chooser.hpp>
 #include <sanguis/client/gui/perk/state.hpp>
 #include <sanguis/client/perk/state.hpp>
@@ -39,6 +39,7 @@ sge::rucksack::alignment const state_alignment(
 
 sanguis::client::gui::perk::chooser::chooser(
 	sanguis::client::perk::state &_state,
+//	sanguis::client::gui::hud &_hud_gui,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sge::input::cursor::object &_cursor,
@@ -48,6 +49,10 @@ sanguis::client::gui::perk::chooser::chooser(
 	state_(
 		_state
 	),
+	/*
+	hud_gui_(
+		_hud_gui
+	),*/
 	renderer_(
 		_renderer
 	),
@@ -139,7 +144,7 @@ sanguis::client::gui::perk::chooser::process(
 )
 {
 	gui_master_.update(
-		sanguis::client::to_gui_duration(
+		sanguis::client::gui::to_duration(
 			_delta
 		)
 	);

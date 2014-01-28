@@ -5,6 +5,7 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
 #include <sanguis/random_generator.hpp>
+#include <sanguis/client/player_health_callback.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/client/control/environment_fwd.hpp>
@@ -22,7 +23,6 @@
 #include <sanguis/client/draw2d/scene/control_environment_fwd.hpp>
 #include <sanguis/client/draw2d/scene/message_environment_fwd.hpp>
 #include <sanguis/client/draw2d/scene/object_fwd.hpp>
-#include <sanguis/client/draw2d/scene/hud/object_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/object_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_decl.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
@@ -32,9 +32,6 @@
 #include <sanguis/load/auras/context.hpp>
 #include <sanguis/load/model/collection_fwd.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
-#include <sge/font/object_fwd.hpp>
-#include <sge/input/cursor/object_fwd.hpp>
-#include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/screen_size_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
@@ -68,10 +65,8 @@ public:
 		sanguis::load::context const &,
 		sanguis::client::sound_manager &,
 		sge::renderer::device::ffp &,
-		sge::font::object &,
 		sge::viewport::manager &,
-		sge::input::keyboard::device &,
-		sge::input::cursor::object &
+		sanguis::client::player_health_callback const &
 	);
 
 	~object();
@@ -99,6 +94,7 @@ public:
 	sanguis::client::control::environment &
 	control_environment() const;
 private:
+	// TODO: Create a proper interface for this
 	friend class sanguis::client::draw2d::scene::message_environment;
 
 	friend class sanguis::client::draw2d::scene::control_environment;
@@ -205,10 +201,6 @@ private:
 	sanguis::client::draw2d::sprite::colored::system colored_system_;
 
 	sanguis::client::draw2d::sprite::client::system client_system_;
-
-	fcppt::scoped_ptr<
-		sanguis::client::draw2d::scene::hud::object
-	> const hud_;
 
 	fcppt::scoped_ptr<
 		sanguis::client::draw2d::scene::world::object

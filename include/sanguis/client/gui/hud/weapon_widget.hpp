@@ -1,5 +1,5 @@
-#ifndef SANGUIS_CLIENT_DRAW2D_SCENE_HUD_WEAPON_WIDGET_HPP_INCLUDED
-#define SANGUIS_CLIENT_DRAW2D_SCENE_HUD_WEAPON_WIDGET_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_GUI_HUD_WEAPON_WIDGET_HPP_INCLUDED
+#define SANGUIS_CLIENT_GUI_HUD_WEAPON_WIDGET_HPP_INCLUDED
 
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/optional_weapon_description.hpp>
@@ -18,9 +18,7 @@ namespace sanguis
 {
 namespace client
 {
-namespace draw2d
-{
-namespace scene
+namespace gui
 {
 namespace hud
 {
@@ -77,7 +75,6 @@ private:
 	sanguis::optional_weapon_description description_;
 };
 
-}
 }
 }
 }

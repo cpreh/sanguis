@@ -1,13 +1,13 @@
 #include <sanguis/weapon_attribute.hpp>
-#include <sanguis/client/draw2d/scene/hud/weapon_attribute_name.hpp>
-#include <sanguis/client/draw2d/scene/hud/weapon_attribute_text.hpp>
+#include <sanguis/client/gui/hud/weapon_attribute_name.hpp>
+#include <sanguis/client/gui/hud/weapon_attribute_text.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/string.hpp>
 #include <fcppt/insert_to_string.hpp>
 
 
 sge::font::string
-sanguis::client::draw2d::scene::hud::weapon_attribute_text(
+sanguis::client::gui::hud::weapon_attribute_text(
 	sanguis::weapon_attribute const &_attribute
 )
 {
@@ -44,7 +44,7 @@ sanguis::client::draw2d::scene::hud::weapon_attribute_text(
 
 	return
 		result +=
-			sanguis::client::draw2d::scene::hud::weapon_attribute_name(
+			sanguis::client::gui::hud::weapon_attribute_name(
 				_attribute.type()
 			);
 }
