@@ -16,6 +16,7 @@
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
@@ -39,6 +40,7 @@ public:
 	chooser(
 		sanguis::client::perk::state &,
 		sge::renderer::device::ffp &,
+		sge::viewport::manager &,
 		sge::font::object &,
 		sge::input::cursor::object &,
 		sge::input::keyboard::device &
@@ -65,6 +67,9 @@ private:
 	sge::font::string
 	make_top_text() const;
 
+	void
+	relayout();
+
 	sanguis::client::perk::state &state_;
 
 	sge::renderer::device::ffp &renderer_;
@@ -87,9 +92,11 @@ private:
 
 	sanguis::gui::master gui_master_;
 
+	// TODO: Use a minimum size area when we know how to layout this
 	sanguis::gui::fixed_area gui_area_;
 
 	fcppt::signal::scoped_connection const
+		viewport_connection_,
 		perk_connection_,
 		level_connection_;
 };

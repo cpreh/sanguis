@@ -31,6 +31,7 @@
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <sge/rucksack/dim.hpp>
+#include <sge/rucksack/rect.hpp>
 #include <sge/rucksack/vector.hpp>
 #include <fcppt/insert_to_string.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
@@ -333,6 +334,13 @@ sanguis::client::gui::hud::object::draw(
 	gui_master_.draw(
 		_render_context
 	);
+}
+
+void
+sanguis::client::gui::hud::object::details(
+	bool const _show
+)
+{
 }
 
 sanguis::client::gui::hud::weapon_widget &

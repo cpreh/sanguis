@@ -2,10 +2,11 @@
 #define SANGUIS_CLIENT_STATES_PERK_CHOOSER_HPP_INCLUDED
 
 #include <sanguis/client/scoped_pause.hpp>
-#include <sanguis/client/gui/perk/chooser.hpp>
 #include <sanguis/client/events/action_fwd.hpp>
 #include <sanguis/client/events/overlay_fwd.hpp>
 #include <sanguis/client/events/tick_fwd.hpp>
+#include <sanguis/client/gui/hud/scoped_details.hpp>
+#include <sanguis/client/gui/perk/chooser.hpp>
 #include <sanguis/client/states/has_player.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -72,6 +73,8 @@ private:
 	sanguis::client::scoped_pause const pause_;
 
 	sanguis::client::gui::perk::chooser perk_chooser_gui_;
+
+	sanguis::client::gui::hud::scoped_details const hud_details_;
 };
 
 }

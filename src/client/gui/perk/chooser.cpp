@@ -16,13 +16,21 @@
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/renderer/device/ffp.hpp>
+#include <sge/renderer/target/onscreen.hpp>
+#include <sge/renderer/target/viewport_size.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
+#include <sge/rucksack/dim.hpp>
 #include <sge/rucksack/rect.hpp>
+#include <sge/rucksack/scalar.hpp>
+#include <sge/rucksack/vector.hpp>
+#include <sge/viewport/manager.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/cast/size.hpp>
+#include <fcppt/cast/to_signed.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
@@ -39,8 +47,8 @@ sge::rucksack::alignment const state_alignment(
 
 sanguis::client::gui::perk::chooser::chooser(
 	sanguis::client::perk::state &_state,
-//	sanguis::client::gui::hud &_hud_gui,
 	sge::renderer::device::ffp &_renderer,
+	sge::viewport::manager &_viewport_manager,
 	sge::font::object &_font,
 	sge::input::cursor::object &_cursor,
 	sge::input::keyboard::device &_keyboard
@@ -49,10 +57,6 @@ sanguis::client::gui::perk::chooser::chooser(
 	state_(
 		_state
 	),
-	/*
-	hud_gui_(
-		_hud_gui
-	),*/
 	renderer_(
 		_renderer
 	),
@@ -107,10 +111,18 @@ sanguis::client::gui::perk::chooser::chooser(
 	gui_area_(
 		main_container_,
 		sge::rucksack::rect(
-			sge::rucksack::rect::vector::null(),
-			sge::rucksack::rect::dim(
-				600,
-				400
+			sge::rucksack::vector::null(),
+			sge::rucksack::dim(
+				400,
+				250
+			)
+		)
+	),
+	viewport_connection_(
+		_viewport_manager.manage_callback(
+			std::bind(
+				&sanguis::client::gui::perk::chooser::relayout,
+				this
 			)
 		)
 	),
@@ -131,7 +143,7 @@ sanguis::client::gui::perk::chooser::chooser(
 		)
 	)
 {
-	main_container_.layout().relayout();
+	this->relayout();
 }
 
 sanguis::client::gui::perk::chooser::~chooser()
@@ -185,7 +197,7 @@ sanguis::client::gui::perk::chooser::perks()
 		)
 	);
 
-	main_container_.layout().relayout();
+	this->relayout();
 }
 
 void
@@ -213,4 +225,25 @@ sanguis::client::gui::perk::chooser::make_top_text() const
 				state_.remaining_levels()
 			)
 		);
+}
+
+void
+sanguis::client::gui::perk::chooser::relayout()
+{
+	gui_area_.position(
+		sge::rucksack::vector(
+			fcppt::cast::size<
+				sge::rucksack::scalar
+			>(
+				fcppt::cast::to_signed(
+					sge::renderer::target::viewport_size(
+						renderer_.onscreen_target()
+					).w()
+				)
+			)
+			-
+			gui_area_.area().w(),
+			0
+		)
+	);
 }

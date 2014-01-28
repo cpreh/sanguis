@@ -3,6 +3,7 @@
 
 #include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/widget/base_fwd.hpp>
+#include <sge/rucksack/rect_fwd.hpp>
 #include <sge/rucksack/vector_fwd.hpp>
 #include <sge/rucksack/widget/minimum_size.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -30,7 +31,17 @@ public:
 
 	SANGUIS_GUI_SYMBOL
 	void
+	position(
+		sge::rucksack::vector
+	);
+
+	SANGUIS_GUI_SYMBOL
+	void
 	relayout();
+
+	SANGUIS_GUI_SYMBOL
+	sge::rucksack::rect const
+	area() const;
 private:
 	sge::rucksack::widget::minimum_size layout_;
 };

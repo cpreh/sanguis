@@ -152,6 +152,9 @@ public:
 
 	sge::input::cursor::activatable &
 	cursor();
+
+	sanguis::client::gui::hud::object &
+	hud_gui();
 private:
 	void
 	handle_player_action(

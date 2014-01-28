@@ -24,6 +24,7 @@
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/rucksack/rect_fwd.hpp>
 #include <sge/timer/frames_counter.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -93,6 +94,11 @@ public:
 	void
 	draw(
 		sge::renderer::context::ffp &
+	);
+
+	void
+	details(
+		bool
 	);
 private:
 	void

@@ -474,6 +474,13 @@ sanguis::client::states::running::cursor()
 		input_translator_->cursor();
 }
 
+sanguis::client::gui::hud::object &
+sanguis::client::states::running::hud_gui()
+{
+	return
+		*hud_;
+}
+
 void
 sanguis::client::states::running::handle_player_action(
 	sanguis::client::control::actions::any const &_action

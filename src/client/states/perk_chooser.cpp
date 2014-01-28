@@ -37,13 +37,12 @@ sanguis::client::states::perk_chooser::perk_chooser(
 		this->context<
 			sanguis::client::states::has_player
 		>().perk_state(),
-		/*
-		this->context<
-			sanguis::client::states::running
-		>().hud_gui(),*/
 		this->context<
 			sanguis::client::machine
 		>().renderer(),
+		this->context<
+			sanguis::client::machine
+		>().viewport_manager(),
 		this->context<
 			sanguis::client::machine
 		>().font_object(),
@@ -53,6 +52,11 @@ sanguis::client::states::perk_chooser::perk_chooser(
 		this->context<
 			sanguis::client::machine
 		>().keyboard()
+	),
+	hud_details_(
+		this->context<
+			sanguis::client::states::running
+		>().hud_gui()
 	)
 {
 }
