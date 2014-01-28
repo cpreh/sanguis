@@ -3,6 +3,7 @@
 #include <sanguis/client/config/settings/object.hpp>
 #include <sanguis/client/gui/menu/object.hpp>
 #include <sanguis/gui/default_aspect.hpp>
+#include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
 #include <sanguis/gui/widget/reference_alignment_vector.hpp>
@@ -90,7 +91,10 @@ sanguis::client::gui::menu::object::object(
 	hostname_label_(
 		_renderer,
 		_font,
-		SGE_FONT_LIT("Hostname: ")
+		SGE_FONT_LIT("Hostname: "),
+		sanguis::gui::text_color(
+			sge::image::color::predef::black()
+		)
 	),
 	hostname_edit_(
 		_renderer,
@@ -128,7 +132,10 @@ sanguis::client::gui::menu::object::object(
 	port_label_(
 		_renderer,
 		_font,
-		SGE_FONT_LIT("Port: ")
+		SGE_FONT_LIT("Port: "),
+		sanguis::gui::text_color(
+			sge::image::color::predef::black()
+		)
 	),
 	port_edit_(
 		_renderer,
@@ -166,7 +173,10 @@ sanguis::client::gui::menu::object::object(
 	connect_text_(
 		_renderer,
 		_font,
-		SGE_FONT_LIT("")
+		SGE_FONT_LIT(""),
+		sanguis::gui::text_color(
+			sge::image::color::predef::black()
+		)
 	),
 	connect_button_(
 		_renderer,

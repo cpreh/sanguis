@@ -3,6 +3,7 @@
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/duration.hpp>
 #include <sanguis/gui/master.hpp>
+#include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/viewport_adaptor.hpp>
 #include <sanguis/gui/widget/button.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
@@ -223,7 +224,10 @@ try
 					>(
 						sys.renderer_ffp(),
 						*font,
-						_label
+						_label,
+						sanguis::gui::text_color(
+							sge::image::color::predef::black()
+						)
 					),
 					fcppt::assign::make_container<
 						sanguis::gui::widget::unique_ptr_tree::child_list

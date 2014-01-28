@@ -194,6 +194,7 @@ set(
 	include/sanguis/client/draw2d/scene/foreach_z_ordering.hpp
 	include/sanguis/client/draw2d/scene/hud/object.hpp
 	include/sanguis/client/draw2d/scene/hud/object_fwd.hpp
+	include/sanguis/client/draw2d/scene/hud/weapon_attribute_color.hpp
 	include/sanguis/client/draw2d/scene/hud/weapon_attribute_name.hpp
 	include/sanguis/client/draw2d/scene/hud/weapon_attribute_text.hpp
 	include/sanguis/client/draw2d/scene/hud/weapon_name.hpp
@@ -1608,6 +1609,7 @@ set(
 	src/client/draw2d/scene/background_texture_coordinates.cpp
 	src/client/draw2d/scene/control_environment.cpp
 	src/client/draw2d/scene/hud/object.cpp
+	src/client/draw2d/scene/hud/weapon_attribute_color.cpp
 	src/client/draw2d/scene/hud/weapon_attribute_name.cpp
 	src/client/draw2d/scene/hud/weapon_attribute_text.cpp
 	src/client/draw2d/scene/hud/weapon_name.cpp

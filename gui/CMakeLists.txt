@@ -13,9 +13,12 @@ set(
 	include/sanguis/gui/master_fwd.hpp
 	include/sanguis/gui/minimum_size_area.hpp
 	include/sanguis/gui/text_callback.hpp
+	include/sanguis/gui/text_color.hpp
+	include/sanguis/gui/text_color_fwd.hpp
 	include/sanguis/gui/text_function.hpp
 	include/sanguis/gui/viewport_adaptor.hpp
 	include/sanguis/gui/widget/bar.hpp
+	include/sanguis/gui/widget/bar_fwd.hpp
 	include/sanguis/gui/widget/base.hpp
 	include/sanguis/gui/widget/base_fwd.hpp
 	include/sanguis/gui/widget/base_unique_ptr.hpp

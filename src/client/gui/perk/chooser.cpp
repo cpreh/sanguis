@@ -4,6 +4,7 @@
 #include <sanguis/client/gui/perk/state.hpp>
 #include <sanguis/client/perk/state.hpp>
 #include <sanguis/gui/default_aspect.hpp>
+#include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
 #include <sanguis/gui/widget/reference_alignment_vector.hpp>
@@ -11,6 +12,7 @@
 #include <sge/font/lit.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
+#include <sge/image/color/predef.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
@@ -56,7 +58,10 @@ sanguis::client::gui::perk::chooser::chooser(
 	top_text_(
 		_renderer,
 		_font,
-		this->make_top_text()
+		this->make_top_text(),
+		sanguis::gui::text_color(
+			sge::image::color::predef::black()
+		)
 	),
 	gui_state_(
 		fcppt::make_unique_ptr<

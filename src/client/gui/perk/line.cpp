@@ -7,15 +7,17 @@
 #include <sanguis/client/perk/tree.hpp>
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/default_aspect.hpp>
+#include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/button.hpp>
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
 #include <sanguis/gui/widget/reference_alignment_vector.hpp>
 #include <sanguis/gui/widget/text.hpp>
-#include <sge/font/object_fwd.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/font/from_fcppt_string.hpp>
+#include <sge/font/object_fwd.hpp>
+#include <sge/image/color/predef.hpp>
+#include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <fcppt/signal/auto_connection.hpp>
@@ -52,6 +54,10 @@ sanguis::client::gui::perk::line::line(
 		_font,
 		sanguis::client::gui::perk::make_description(
 			_info
+		),
+		// TODO: Different color depending on the state of the perk
+		sanguis::gui::text_color(
+			sge::image::color::predef::black()
 		)
 	),
 	box_(

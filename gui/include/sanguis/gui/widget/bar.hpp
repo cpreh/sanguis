@@ -2,6 +2,7 @@
 #define SANGUIS_GUI_WIDGET_BAR_HPP_INCLUDED
 
 #include <sanguis/gui/symbol.hpp>
+#include <sanguis/gui/widget/bar_fwd.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sge/image/color/any/object.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>

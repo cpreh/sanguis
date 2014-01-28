@@ -3,6 +3,7 @@
 #include <sanguis/client/draw2d/scene/hud/weapon_widget.hpp>
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/default_aspect.hpp>
+#include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/image.hpp>
 #include <sanguis/gui/widget/reference.hpp>
@@ -12,6 +13,7 @@
 #include <sge/font/lit.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
+#include <sge/image/color/predef.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <sge/rucksack/alignment.hpp>
@@ -36,7 +38,10 @@ sanguis::client::draw2d::scene::hud::weapon_widget::weapon_widget(
 	text_(
 		_renderer,
 		_font,
-		sge::font::string()
+		sge::font::string(),
+		sanguis::gui::text_color(
+			sge::image::color::predef::black()
+		)
 	),
 	container_(
 		_gui_context,

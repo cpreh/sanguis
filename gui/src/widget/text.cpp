@@ -1,5 +1,4 @@
 #include <sanguis/gui/default_aspect.hpp>
-#include <sanguis/gui/aux_/style/text_color.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/text.hpp>
 #include <sge/font/metrics.hpp>
@@ -29,7 +28,8 @@
 sanguis::gui::widget::text::text(
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
-	sge::font::string const &_value
+	sge::font::string const &_value,
+	sanguis::gui::text_color const &_text_color
 )
 :
 	sanguis::gui::widget::base(),
@@ -38,6 +38,9 @@ sanguis::gui::widget::text::text(
 	),
 	font_(
 		_font
+	),
+	text_color_(
+		_text_color
 	),
 	value_(
 		_value
@@ -122,7 +125,7 @@ sanguis::gui::widget::text::on_draw(
 				layout_.size().h()
 			)
 		),
-		sanguis::gui::aux_::style::text_color(),
+		text_color_.get(),
 		sge::renderer::texture::emulate_srgb::no
 	);
 }

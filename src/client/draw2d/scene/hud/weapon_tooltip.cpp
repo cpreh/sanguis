@@ -1,19 +1,19 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/client/to_gui_duration.hpp>
+#include <sanguis/client/draw2d/scene/hud/weapon_attribute_color.hpp>
 #include <sanguis/client/draw2d/scene/hud/weapon_attribute_text.hpp>
 #include <sanguis/client/draw2d/scene/hud/weapon_name.hpp>
 #include <sanguis/client/draw2d/scene/hud/weapon_tooltip.hpp>
-#include <sanguis/gui/context.hpp>
 #include <sanguis/gui/default_aspect.hpp>
-#include <sanguis/gui/fixed_area.hpp>
-#include <sanguis/gui/master.hpp>
+#include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
 #include <sanguis/gui/widget/reference_alignment_vector.hpp>
 #include <sanguis/gui/widget/text.hpp>
 #include <sge/font/object_fwd.hpp>
+#include <sge/image/color/predef.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
@@ -40,6 +40,9 @@ sanguis::client::draw2d::scene::hud::weapon_tooltip::weapon_tooltip(
 		_font,
 		sanguis::client::draw2d::scene::hud::weapon_name(
 			_description.weapon_type()
+		),
+		sanguis::gui::text_color(
+			sge::image::color::predef::black()
 		)
 	),
 	attribute_texts_(
@@ -62,6 +65,11 @@ sanguis::client::draw2d::scene::hud::weapon_tooltip::weapon_tooltip(
 						_font,
 						sanguis::client::draw2d::scene::hud::weapon_attribute_text(
 							_attribute
+						),
+						sanguis::gui::text_color(
+							sanguis::client::draw2d::scene::hud::weapon_attribute_color(
+								_attribute.type()
+							)
 						)
 					);
 			}

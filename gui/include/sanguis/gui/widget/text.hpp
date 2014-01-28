@@ -2,6 +2,7 @@
 #define SANGUIS_GUI_WIDGET_TEXT_HPP_INCLUDED
 
 #include <sanguis/gui/symbol.hpp>
+#include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/text_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
@@ -32,7 +33,8 @@ public:
 	text(
 		sge::renderer::device::ffp &,
 		sge::font::object &,
-		sge::font::string const &
+		sge::font::string const &,
+		sanguis::gui::text_color const &
 	);
 
 	SANGUIS_GUI_SYMBOL
@@ -58,6 +60,8 @@ private:
 	sge::renderer::device::ffp &renderer_;
 
 	sge::font::object &font_;
+
+	sanguis::gui::text_color const text_color_;
 
 	sge::font::string value_;
 

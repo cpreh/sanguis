@@ -13,6 +13,7 @@
 #include <sanguis/client/draw2d/scene/hud/object.hpp>
 #include <sanguis/client/draw2d/scene/hud/weapon_widget.hpp>
 #include <sanguis/gui/default_aspect.hpp>
+#include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/widget/bar.hpp>
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
@@ -62,12 +63,18 @@ sanguis::client::draw2d::scene::hud::object::object(
 		_renderer,
 		_font,
 		// TODO!
-		SGE_FONT_LIT("Player")
+		SGE_FONT_LIT("Player"),
+		sanguis::gui::text_color(
+			sge::image::color::predef::black()
+		)
 	),
 	level_text_(
 		_renderer,
 		_font,
-		sge::font::string()
+		sge::font::string(),
+		sanguis::gui::text_color(
+			sge::image::color::predef::black()
+		)
 	),
 	top_container_(
 		gui_context_,
