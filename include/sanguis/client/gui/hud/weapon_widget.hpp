@@ -50,6 +50,9 @@ public:
 
 	sanguis::gui::widget::box_container &
 	widget();
+
+	sanguis::optional_weapon_description const &
+	weapon_description() const;
 private:
 	void
 	update_text(

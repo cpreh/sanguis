@@ -10,6 +10,7 @@
 #include <sanguis/client/optional_health_pair_fwd.hpp>
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/gui/hud/object_fwd.hpp>
+#include <sanguis/client/gui/hud/weapon_details_fwd.hpp>
 #include <sanguis/client/gui/hud/weapon_widget.hpp>
 #include <sanguis/gui/context.hpp>
 #include <sanguis/gui/master.hpp>
@@ -27,6 +28,7 @@
 #include <sge/rucksack/rect_fwd.hpp>
 #include <sge/timer/frames_counter.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/scoped_ptr_impl.hpp>
 
 
 namespace sanguis
@@ -101,15 +103,29 @@ public:
 		bool
 	);
 private:
-	void
-	update_exp();
-
 	sanguis::client::gui::hud::weapon_widget &
 	weapon_widget(
 		sanguis::is_primary_weapon
 	);
 
+	void
+	update_exp();
+
+	void
+	update_details();
+
+	void
+	create_details();
+
 	sanguis::load::hud::context resources_;
+
+	sge::font::object &font_;
+
+	sge::renderer::device::ffp &renderer_;
+
+	sge::input::keyboard::device &keyboard_;
+
+	sge::input::cursor::object &cursor_;
 
 	sanguis::client::exp exp_;
 
@@ -142,6 +158,14 @@ private:
 	sanguis::gui::master gui_master_;
 
 	sanguis::gui::minimum_size_area gui_area_;
+
+	typedef
+	fcppt::scoped_ptr<
+		sanguis::client::gui::hud::weapon_details
+	>
+	weapon_details_scoped_ptr;
+
+	weapon_details_scoped_ptr weapon_details_;
 };
 
 }

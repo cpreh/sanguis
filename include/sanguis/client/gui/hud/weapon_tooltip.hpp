@@ -1,18 +1,13 @@
 #ifndef SANGUIS_CLIENT_GUI_HUD_WEAPON_TOOLTIP_HPP_INCLUDED
 #define SANGUIS_CLIENT_GUI_HUD_WEAPON_TOOLTIP_HPP_INCLUDED
 
-#include <sanguis/duration.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/client/gui/hud/weapon_tooltip_fwd.hpp>
-#include <sanguis/gui/context.hpp>
-#include <sanguis/gui/master.hpp>
-#include <sanguis/gui/minimum_size_area.hpp>
+#include <sanguis/gui/context_fwd.hpp>
+#include <sanguis/gui/widget/base_fwd.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/text.hpp>
 #include <sge/font/object_fwd.hpp>
-#include <sge/input/cursor/object_fwd.hpp>
-#include <sge/input/keyboard/device_fwd.hpp>
-#include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -37,27 +32,17 @@ class weapon_tooltip
 	);
 public:
 	weapon_tooltip(
+		sanguis::gui::context &,
 		sge::renderer::device::ffp &,
 		sge::font::object &,
-		sge::input::keyboard::device &,
-		sge::input::cursor::object &,
 		sanguis::weapon_description const &
 	);
 
 	~weapon_tooltip();
 
-	void
-	update(
-		sanguis::duration const &
-	);
-
-	void
-	draw(
-		sge::renderer::context::ffp &
-	);
+	sanguis::gui::widget::base &
+	widget();
 private:
-	sanguis::gui::context gui_context_;
-
 	sanguis::gui::widget::text name_text_;
 
 	typedef
@@ -75,10 +60,6 @@ private:
 	text_unique_ptr_vector attribute_texts_;
 
 	sanguis::gui::widget::box_container container_;
-
-	sanguis::gui::master gui_master_;
-
-	sanguis::gui::minimum_size_area gui_area_;
 };
 
 }

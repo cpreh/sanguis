@@ -343,10 +343,13 @@ set(
 	include/sanguis/client/gui/hud/weapon_attribute_color.hpp
 	include/sanguis/client/gui/hud/weapon_attribute_name.hpp
 	include/sanguis/client/gui/hud/weapon_attribute_text.hpp
+	include/sanguis/client/gui/hud/weapon_details.hpp
+	include/sanguis/client/gui/hud/weapon_details_fwd.hpp
 	include/sanguis/client/gui/hud/weapon_name.hpp
 	include/sanguis/client/gui/hud/weapon_name_visitor.hpp
 	include/sanguis/client/gui/hud/weapon_tooltip.hpp
 	include/sanguis/client/gui/hud/weapon_tooltip_fwd.hpp
+	include/sanguis/client/gui/hud/weapon_tooltip_unique_ptr.hpp
 	include/sanguis/client/gui/hud/weapon_widget.hpp
 	include/sanguis/client/gui/menu/callbacks/cancel_connect.hpp
 	include/sanguis/client/gui/menu/callbacks/connect.hpp
@@ -1636,6 +1639,7 @@ set(
 	src/client/gui/hud/weapon_attribute_color.cpp
 	src/client/gui/hud/weapon_attribute_name.cpp
 	src/client/gui/hud/weapon_attribute_text.cpp
+	src/client/gui/hud/weapon_details.cpp
 	src/client/gui/hud/weapon_name.cpp
 	src/client/gui/hud/weapon_name_visitor.cpp
 	src/client/gui/hud/weapon_tooltip.cpp

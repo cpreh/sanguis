@@ -44,6 +44,8 @@ sanguis::client::gui::hud::weapon_attribute_text(
 
 	return
 		result +=
+			SGE_FONT_LIT(' ')
+			+
 			sanguis::client::gui::hud::weapon_attribute_name(
 				_attribute.type()
 			);

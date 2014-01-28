@@ -141,6 +141,13 @@ sanguis::client::gui::hud::weapon_widget::widget()
 		container_;
 }
 
+sanguis::optional_weapon_description const &
+sanguis::client::gui::hud::weapon_widget::weapon_description() const
+{
+	return
+		description_;
+}
+
 void
 sanguis::client::gui::hud::weapon_widget::update_text(
 	sanguis::magazine_remaining const _magazine_remaining
