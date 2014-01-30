@@ -46,6 +46,8 @@ set(
 	include/sanguis/gui/widget/reference_tree_fwd.hpp
 	include/sanguis/gui/widget/reference_tree_vector.hpp
 	include/sanguis/gui/widget/reference_vector.hpp
+	include/sanguis/gui/widget/static_text.hpp
+	include/sanguis/gui/widget/static_text_fwd.hpp
 	include/sanguis/gui/widget/tab.hpp
 	include/sanguis/gui/widget/tab_fwd.hpp
 	include/sanguis/gui/widget/text.hpp
@@ -90,6 +92,7 @@ set(
 	src/widget/image.cpp
 	src/widget/reference_alignment_pair.cpp
 	src/widget/reference_name_pair.cpp
+	src/widget/static_text.cpp
 	src/widget/tab.cpp
 	src/widget/text.cpp
 	src/widget/tree.cpp

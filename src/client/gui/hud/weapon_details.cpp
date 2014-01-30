@@ -109,16 +109,9 @@ sanguis::client::gui::hud::weapon_details::weapon_details(
 	),
 	gui_area_(
 		container_,
-		// TODO!
-		sge::rucksack::rect(
-			sge::rucksack::vector(
-				0,
-				_hud_area.bottom()
-			),
-			sge::rucksack::dim(
-				300,
-				400
-			)
+		sge::rucksack::vector(
+			0,
+			_hud_area.bottom()
 		)
 	)
 {

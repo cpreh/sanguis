@@ -6,7 +6,7 @@
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/widget/base_fwd.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
-#include <sanguis/gui/widget/text.hpp>
+#include <sanguis/gui/widget/static_text.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -43,11 +43,11 @@ public:
 	sanguis::gui::widget::base &
 	widget();
 private:
-	sanguis::gui::widget::text name_text_;
+	sanguis::gui::widget::static_text name_text_;
 
 	typedef
 	std::unique_ptr<
-		sanguis::gui::widget::text
+		sanguis::gui::widget::static_text
 	>
 	text_unique_ptr;
 

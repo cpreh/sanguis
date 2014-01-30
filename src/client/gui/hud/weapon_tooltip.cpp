@@ -11,7 +11,7 @@
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
 #include <sanguis/gui/widget/reference_alignment_vector.hpp>
-#include <sanguis/gui/widget/text.hpp>
+#include <sanguis/gui/widget/static_text.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
@@ -53,7 +53,7 @@ sanguis::client::gui::hud::weapon_tooltip::weapon_tooltip(
 			{
 				return
 					fcppt::make_unique_ptr<
-						sanguis::gui::widget::text
+						sanguis::gui::widget::static_text
 					>(
 						_renderer,
 						_font,

@@ -1,12 +1,13 @@
-#ifndef SANGUIS_GUI_WIDGET_TEXT_HPP_INCLUDED
-#define SANGUIS_GUI_WIDGET_TEXT_HPP_INCLUDED
+#ifndef SANGUIS_GUI_WIDGET_STATIC_TEXT_HPP_INCLUDED
+#define SANGUIS_GUI_WIDGET_STATIC_TEXT_HPP_INCLUDED
 
 #include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/widget/base.hpp>
-#include <sanguis/gui/widget/text_fwd.hpp>
+#include <sanguis/gui/widget/static_text_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
+#include <sge/font/draw/static_text.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/widget/base_fwd.hpp>
@@ -21,16 +22,16 @@ namespace gui
 namespace widget
 {
 
-class text
+class static_text
 :
 	public sanguis::gui::widget::base
 {
 	FCPPT_NONCOPYABLE(
-		text
+		static_text
 	);
 public:
 	SANGUIS_GUI_SYMBOL
-	text(
+	static_text(
 		sge::renderer::device::ffp &,
 		sge::font::object &,
 		sge::font::string const &,
@@ -38,19 +39,7 @@ public:
 	);
 
 	SANGUIS_GUI_SYMBOL
-	~text();
-
-	SANGUIS_GUI_SYMBOL
-	void
-	value(
-		sge::font::string const &
-	);
-
-	SANGUIS_GUI_SYMBOL
-	void
-	text_color(
-		sanguis::gui::text_color const &
-	);
+	~static_text();
 
 	SANGUIS_GUI_SYMBOL
 	sge::rucksack::widget::base &
@@ -63,13 +52,7 @@ private:
 	)
 	override;
 
-	sge::renderer::device::ffp &renderer_;
-
-	sge::font::object &font_;
-
-	sanguis::gui::text_color text_color_;
-
-	sge::font::string value_;
+	sge::font::draw::static_text static_text_;
 
 	sge::rucksack::widget::dummy layout_;
 };
@@ -79,3 +62,4 @@ private:
 }
 
 #endif
+
