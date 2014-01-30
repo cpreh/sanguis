@@ -111,10 +111,12 @@ sanguis::client::draw2d::entities::container::radius() const
 			fcppt::cast::int_to_float<
 				sanguis::client::draw2d::funit
 			>(
-				std::max(
+				std::min(
 					this->master().size().w(),
 					this->master().size().h()
 				)
+				/
+				2
 			)
 		);
 }

@@ -23,6 +23,7 @@
 #include <sanguis/client/draw2d/scene/control_environment_fwd.hpp>
 #include <sanguis/client/draw2d/scene/message_environment_fwd.hpp>
 #include <sanguis/client/draw2d/scene/object_fwd.hpp>
+#include <sanguis/client/draw2d/scene/shown_name.hpp>
 #include <sanguis/client/draw2d/scene/world/object_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_decl.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
@@ -32,6 +33,7 @@
 #include <sanguis/load/auras/context.hpp>
 #include <sanguis/load/model/collection_fwd.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
+#include <sge/font/object_fwd.hpp>
 #include <sge/renderer/screen_size_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
@@ -43,6 +45,7 @@
 #include <fcppt/config/external_begin.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
+#include <vector>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -65,6 +68,7 @@ public:
 		sanguis::load::context const &,
 		sanguis::client::sound_manager &,
 		sge::renderer::device::ffp &,
+		sge::font::object &,
 		sge::viewport::manager &,
 		sanguis::client::player_health_callback const &
 	);
@@ -194,6 +198,8 @@ private:
 
 	sge::renderer::device::ffp &renderer_;
 
+	sge::font::object &font_;
+
 	sanguis::client::draw2d::sprite::state sprite_states_;
 
 	sanguis::client::draw2d::sprite::normal::system normal_system_;
@@ -244,6 +250,14 @@ private:
 	fcppt::scoped_ptr<
 		sanguis::client::draw2d::scene::background
 	> const background_;
+
+	typedef
+	std::vector<
+		sanguis::client::draw2d::scene::shown_name
+	>
+	show_name_vector;
+
+	show_name_vector shown_names_;
 
 	fcppt::signal::scoped_connection const viewport_connection_;
 };

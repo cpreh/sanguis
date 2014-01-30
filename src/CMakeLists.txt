@@ -190,11 +190,14 @@ set(
 	include/sanguis/client/draw2d/scene/background_texture_coordinates.hpp
 	include/sanguis/client/draw2d/scene/control_environment.hpp
 	include/sanguis/client/draw2d/scene/control_environment_fwd.hpp
+	include/sanguis/client/draw2d/scene/draw_name.hpp
 	include/sanguis/client/draw2d/scene/foreach_z_ordering.hpp
 	include/sanguis/client/draw2d/scene/message_environment.hpp
 	include/sanguis/client/draw2d/scene/message_environment_fwd.hpp
 	include/sanguis/client/draw2d/scene/object.hpp
 	include/sanguis/client/draw2d/scene/object_fwd.hpp
+	include/sanguis/client/draw2d/scene/shown_name.hpp
+	include/sanguis/client/draw2d/scene/shown_name_fwd.hpp
 	include/sanguis/client/draw2d/scene/translation.hpp
 	include/sanguis/client/draw2d/scene/world/batch.hpp
 	include/sanguis/client/draw2d/scene/world/batch_fwd.hpp
@@ -1618,8 +1621,10 @@ set(
 	src/client/draw2d/scene/background_dim.cpp
 	src/client/draw2d/scene/background_texture_coordinates.cpp
 	src/client/draw2d/scene/control_environment.cpp
+	src/client/draw2d/scene/draw_name.cpp
 	src/client/draw2d/scene/message_environment.cpp
 	src/client/draw2d/scene/object.cpp
+	src/client/draw2d/scene/shown_name.cpp
 	src/client/draw2d/scene/translation.cpp
 	src/client/draw2d/scene/world/batch.cpp
 	src/client/draw2d/scene/world/generate_batches.cpp

@@ -10,6 +10,7 @@
 #include <sanguis/client/control/attack_dest.hpp>
 #include <sanguis/client/control/optional_attack_dest.hpp>
 #include <sanguis/client/control/optional_cursor_position.hpp>
+#include <sanguis/client/draw2d/center.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
 #include <sanguis/client/draw2d/optional_player_center.hpp>
@@ -23,6 +24,7 @@
 #include <sanguis/client/draw2d/scene/background.hpp>
 #include <sanguis/client/draw2d/scene/background_dim.hpp>
 #include <sanguis/client/draw2d/scene/control_environment.hpp>
+#include <sanguis/client/draw2d/scene/draw_name.hpp>
 #include <sanguis/client/draw2d/scene/foreach_z_ordering.hpp>
 #include <sanguis/client/draw2d/scene/message_environment.hpp>
 #include <sanguis/client/draw2d/scene/translation.hpp>
@@ -62,6 +64,7 @@
 #include <sanguis/messages/server/speed.hpp>
 #include <sanguis/messages/server/weapon_status.hpp>
 #include <sanguis/messages/server/call/object.hpp>
+#include <sge/font/object_fwd.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/renderer/clear/parameters.hpp>
 #include <sge/renderer/context/ffp.hpp>
@@ -104,6 +107,7 @@ sanguis::client::draw2d::scene::object::object(
 	sanguis::load::context const &_resources,
 	sanguis::client::sound_manager &_sound_manager,
 	sge::renderer::device::ffp &_renderer,
+	sge::font::object &_font,
 	sge::viewport::manager &_viewport_manager,
 	sanguis::client::player_health_callback const &_player_health_callback
 )
@@ -123,6 +127,9 @@ sanguis::client::draw2d::scene::object::object(
 	),
 	renderer_(
 		_renderer
+	),
+	font_(
+		_font
 	),
 	sprite_states_(
 		renderer_,
@@ -203,6 +210,7 @@ sanguis::client::draw2d::scene::object::object(
 			_viewport_manager
 		)
 	),
+	shown_names_(),
 	viewport_connection_(
 		_viewport_manager.manage_callback(
 			std::bind(
@@ -273,6 +281,8 @@ sanguis::client::draw2d::scene::object::update(
 			diff_clock_,
 			_delta
 		);
+
+	shown_names_.clear();
 
 	sanguis::map_iteration(
 		entities_,
@@ -465,6 +475,18 @@ sanguis::client::draw2d::scene::object::render_systems(
 				_render_context,
 				index
 			);
+
+		for(
+			sanguis::client::draw2d::scene::shown_name const &name
+			:
+			shown_names_
+		)
+			sanguis::client::draw2d::scene::draw_name(
+				renderer_,
+				font_,
+				_render_context,
+				name
+			);
 	}
 
 	sge::renderer::state::ffp::transform::scoped const scoped_transform(
@@ -517,7 +539,8 @@ sanguis::client::draw2d::scene::object::insert(
 			).str()
 		);
 
-	return *ret.first->second;
+	return
+		*ret.first->second;
 }
 
 sanguis::client::draw2d::entities::own &
@@ -566,6 +589,7 @@ sanguis::client::draw2d::scene::object::name_display(
 	)
 		return;
 
+	// TODO: Repalce radius by a proper bounding box
 	if(
 		fcppt::math::vector::distance<
 			float
@@ -580,13 +604,20 @@ sanguis::client::draw2d::scene::object::name_display(
 		<
 		_entity.radius().get()
 	)
-	{
-		// TODO:
-		/*
-		hud_->show_name(
-			_entity.name()
-		);*/
-	}
+		shown_names_.push_back(
+			sanguis::client::draw2d::scene::shown_name(
+				// TODO: Use pixel coordinates here?
+				sanguis::client::draw2d::center(
+					fcppt::math::vector::structure_cast<
+						sanguis::client::draw2d::center::value_type
+					>(
+						_entity.center().get()
+					)
+				),
+				_entity.radius(),
+				_entity.name()
+			)
+		);
 }
 
 void

@@ -134,6 +134,9 @@ sanguis::client::states::running::running(
 			>().renderer(),
 			this->context<
 				sanguis::client::machine
+			>().font_object(),
+			this->context<
+				sanguis::client::machine
 			>().viewport_manager(),
 			sanguis::client::player_health_callback(
 				std::bind(
