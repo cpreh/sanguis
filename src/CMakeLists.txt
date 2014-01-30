@@ -343,6 +343,7 @@ set(
 	include/sanguis/client/gui/hud/weapon_attribute_color.hpp
 	include/sanguis/client/gui/hud/weapon_attribute_name.hpp
 	include/sanguis/client/gui/hud/weapon_attribute_text.hpp
+	include/sanguis/client/gui/hud/weapon_attribute_value_to_string.hpp
 	include/sanguis/client/gui/hud/weapon_details.hpp
 	include/sanguis/client/gui/hud/weapon_details_fwd.hpp
 	include/sanguis/client/gui/hud/weapon_name.hpp
@@ -744,6 +745,7 @@ set(
 	include/sanguis/messages/roles/weapon_attribute_base.hpp
 	include/sanguis/messages/roles/weapon_attribute_extra.hpp
 	include/sanguis/messages/roles/weapon_status.hpp
+	include/sanguis/messages/roles/world_name.hpp
 	include/sanguis/messages/server/add_aoe_projectile.hpp
 	include/sanguis/messages/server/add_aoe_projectile_fwd.hpp
 	include/sanguis/messages/server/add_aura.hpp
@@ -1390,6 +1392,8 @@ set(
 	include/sanguis/server/weapons/attributes/optional_accuracy_fwd.hpp
 	include/sanguis/server/weapons/attributes/optional_magazine_size.hpp
 	include/sanguis/server/weapons/attributes/optional_magazine_size_fwd.hpp
+	include/sanguis/server/weapons/attributes/spread_radius.hpp
+	include/sanguis/server/weapons/attributes/spread_radius_fwd.hpp
 	include/sanguis/server/weapons/backswing_time.hpp
 	include/sanguis/server/weapons/base_cooldown.hpp
 	include/sanguis/server/weapons/cast_point.hpp
@@ -1529,6 +1533,8 @@ set(
 	include/sanguis/world_id.hpp
 	include/sanguis/world_id_fwd.hpp
 	include/sanguis/world_id_type.hpp
+	include/sanguis/world_name.hpp
+	include/sanguis/world_name_fwd.hpp
 	src/app_name.cpp
 	src/args/display_mode.cpp
 	src/args/log_level.cpp
@@ -1639,6 +1645,7 @@ set(
 	src/client/gui/hud/weapon_attribute_color.cpp
 	src/client/gui/hud/weapon_attribute_name.cpp
 	src/client/gui/hud/weapon_attribute_text.cpp
+	src/client/gui/hud/weapon_attribute_value_to_string.cpp
 	src/client/gui/hud/weapon_details.cpp
 	src/client/gui/hud/weapon_name.cpp
 	src/client/gui/hud/weapon_name_visitor.cpp
@@ -2044,6 +2051,7 @@ set(
 	src/server/weapons/attributes/magazine_size.cpp
 	src/server/weapons/attributes/make_aoe.cpp
 	src/server/weapons/attributes/make_damage.cpp
+	src/server/weapons/attributes/spread_radius.cpp
 	src/server/weapons/create.cpp
 	src/server/weapons/default_ias.cpp
 	src/server/weapons/default_irs.cpp

@@ -16,6 +16,7 @@
 #include <sanguis/client/states/ingame_fwd.hpp>
 #include <sanguis/messages/server/add_console_command_fwd.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
+#include <sanguis/messages/server/change_world_fwd.hpp>
 #include <sanguis/messages/server/console_print_fwd.hpp>
 #include <sanguis/messages/server/experience_fwd.hpp>
 #include <sanguis/messages/server/give_weapon_fwd.hpp>
@@ -102,6 +103,11 @@ public:
 	boost::statechart::result
 	operator()(
 		sanguis::messages::server::add_console_command const &
+	);
+
+	boost::statechart::result
+	operator()(
+		sanguis::messages::server::change_world const &
 	);
 
 	boost::statechart::result

@@ -12,6 +12,7 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_status_fwd.hpp>
 #include <sanguis/world_id.hpp>
+#include <sanguis/world_name.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/creator/grid.hpp>
@@ -71,7 +72,8 @@ public:
 		sanguis::server::world::parameters const &,
 		sanguis::world_id,
 		sanguis::creator::top_result const &,
-		sanguis::server::world::difficulty
+		sanguis::server::world::difficulty,
+		sanguis::world_name const &
 	);
 
 	~object();
@@ -285,6 +287,8 @@ private:
 	sanguis::creator::seed const seed_;
 
 	sanguis::server::world::difficulty const difficulty_;
+
+	sanguis::world_name const name_;
 
 	sanguis::creator::name const generator_name_;
 

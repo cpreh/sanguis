@@ -5,6 +5,7 @@
 #include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
+#include <sanguis/world_name_fwd.hpp>
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/exp_for_next_level.hpp>
 #include <sanguis/client/optional_health_pair_fwd.hpp>
@@ -89,6 +90,11 @@ public:
 	);
 
 	void
+	world_name(
+		sanguis::world_name const &
+	);
+
+	void
 	update(
 		sanguis::duration const &
 	);
@@ -136,6 +142,8 @@ private:
 	sge::timer::frames_counter frames_counter_;
 
 	sanguis::gui::context gui_context_;
+
+		sanguis::gui::widget::text world_name_text_;
 
 			sanguis::gui::widget::text player_name_text_;
 

@@ -2,6 +2,7 @@
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/magazine_size.hpp>
 #include <sanguis/weapon_description.hpp>
+#include <sanguis/world_name.hpp>
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/exp_for_next_level.hpp>
 #include <sanguis/client/health_pair.hpp>
@@ -42,9 +43,12 @@
 #include <sanguis/messages/roles/magazine_base_size.hpp>
 #include <sanguis/messages/roles/magazine_extra_size.hpp>
 #include <sanguis/messages/roles/magazine_remaining.hpp>
+#include <sanguis/messages/roles/world_name.hpp>
 #include <sanguis/messages/server/add_console_command.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
+#include <sanguis/messages/server/change_world.hpp>
 #include <sanguis/messages/server/console_print.hpp>
+#include <sanguis/messages/server/create.hpp>
 #include <sanguis/messages/server/experience.hpp>
 #include <sanguis/messages/server/level_up.hpp>
 #include <sanguis/messages/server/magazine_remaining.hpp>
@@ -212,8 +216,9 @@ sanguis::client::states::running::react(
 )
 {
 	static sanguis::messages::server::call::object<
-		boost::mpl::vector9<
+		boost::mpl::vector10<
 			sanguis::messages::server::add_console_command,
+			sanguis::messages::server::change_world,
 			sanguis::messages::server::console_print,
 			sanguis::messages::server::experience,
 			sanguis::messages::server::give_weapon,
@@ -287,6 +292,30 @@ sanguis::client::states::running::operator()(
 
 	return
 		this->discard_event();
+}
+
+boost::statechart::result
+sanguis::client::states::running::operator()(
+	sanguis::messages::server::change_world const &_message
+)
+{
+	hud_->world_name(
+		sanguis::world_name(
+			sge::charconv::utf8_string_to_fcppt(
+				_message.get<
+					sanguis::messages::roles::world_name
+				>()
+			)
+		)
+	);
+
+	// TODO: Do this via a new return value instead.
+	return
+		this->handle_default_msg(
+			*sanguis::messages::server::create(
+				_message
+			)
+		);
 }
 
 boost::statechart::result

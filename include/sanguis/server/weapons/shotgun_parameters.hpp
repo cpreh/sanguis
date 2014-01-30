@@ -13,6 +13,7 @@
 #include <sanguis/server/weapons/attributes/accuracy.hpp>
 #include <sanguis/server/weapons/attributes/damage.hpp>
 #include <sanguis/server/weapons/attributes/magazine_size.hpp>
+#include <sanguis/server/weapons/attributes/spread_radius.hpp>
 #include <fcppt/nonassignable.hpp>
 
 
@@ -50,7 +51,7 @@ public:
 	sanguis::server::weapons::cast_point const
 	cast_point() const;
 
-	sanguis::server::weapons::spread_radius const
+	sanguis::server::weapons::attributes::spread_radius const
 	spread_radius() const;
 
 	sanguis::server::weapons::shells const
@@ -74,7 +75,7 @@ public:
 	);
 
 	void
-	spread_radius(
+	extra_spread_radius(
 		sanguis::server::weapons::spread_radius
 	);
 
@@ -94,7 +95,7 @@ private:
 
 	sanguis::server::weapons::cast_point const cast_point_;
 
-	sanguis::server::weapons::spread_radius spread_radius_;
+	sanguis::server::weapons::attributes::spread_radius spread_radius_;
 
 	sanguis::server::weapons::shells const shells_;
 

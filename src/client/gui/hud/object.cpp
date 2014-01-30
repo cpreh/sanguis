@@ -4,6 +4,7 @@
 #include <sanguis/optional_weapon_description.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_type_to_is_primary.hpp>
+#include <sanguis/world_name.hpp>
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/exp_for_next_level.hpp>
 #include <sanguis/client/level.hpp>
@@ -20,6 +21,7 @@
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
 #include <sanguis/load/resource/textures_fwd.hpp>
 #include <sanguis/gui/widget/reference_alignment_vector.hpp>
+#include <sge/font/from_fcppt_string.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
@@ -74,6 +76,14 @@ sanguis::client::gui::hud::object::object(
 	),
 	frames_counter_(),
 	gui_context_(),
+	world_name_text_(
+		_renderer,
+		_font,
+		sge::font::string(),
+		sanguis::gui::text_color(
+			sge::image::color::predef::black()
+		)
+	),
 	player_name_text_(
 		_renderer,
 		_font,
@@ -166,6 +176,12 @@ sanguis::client::gui::hud::object::object(
 	main_widget_(
 		gui_context_,
 		sanguis::gui::widget::reference_alignment_vector{
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					world_name_text_
+				),
+				sge::rucksack::alignment::center
+			),
 			sanguis::gui::widget::reference_alignment_pair(
 				sanguis::gui::widget::reference(
 					top_container_
@@ -328,6 +344,18 @@ sanguis::client::gui::hud::object::magazine_remaining(
 		_is_primary
 	).magazine_remaining(
 		_magazine_remaining
+	);
+}
+
+void
+sanguis::client::gui::hud::object::world_name(
+	sanguis::world_name const &_name
+)
+{
+	world_name_text_.value(
+		sge::font::from_fcppt_string(
+			_name.get()
+		)
 	);
 }
 

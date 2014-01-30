@@ -7,6 +7,7 @@
 #include <sanguis/messages/adapted_types/world_id_fwd.hpp>
 #include <sanguis/messages/roles/generator_name.hpp>
 #include <sanguis/messages/roles/opening_count.hpp>
+#include <sanguis/messages/roles/world_name.hpp>
 #include <sanguis/messages/server/types/make_message_id_fwd.hpp>
 #include <sanguis/messages/server/types/message.hpp>
 #include <alda/message/make_class_fwd.hpp>
@@ -27,7 +28,7 @@ namespace server
 typedef
 alda::message::make_class<
 	majutsu::composite<
-		boost::mpl::vector5<
+		boost::mpl::vector6<
 			sanguis::messages::server::types::make_message_id<
 				sanguis::messages::server::types::message::change_world
 			>,
@@ -44,6 +45,10 @@ alda::message::make_class<
 			majutsu::role<
 				sanguis::messages::adapted_types::size,
 				sanguis::messages::roles::opening_count
+			>,
+			majutsu::role<
+				sanguis::messages::adapted_types::string,
+				sanguis::messages::roles::world_name
 			>
 		>
 	>

@@ -5,7 +5,6 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/world/context_fwd.hpp>
-#include <sanguis/server/world/object_unique_ptr.hpp>
 #include <sanguis/server/world/parameters_fwd.hpp>
 #include <fcppt/nonassignable.hpp>
 

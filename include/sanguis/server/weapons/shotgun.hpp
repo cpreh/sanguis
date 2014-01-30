@@ -9,9 +9,9 @@
 #include <sanguis/server/weapons/delayed_attack_fwd.hpp>
 #include <sanguis/server/weapons/shells.hpp>
 #include <sanguis/server/weapons/shotgun_parameters_fwd.hpp>
-#include <sanguis/server/weapons/spread_radius.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/attributes/damage.hpp>
+#include <sanguis/server/weapons/attributes/spread_radius.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -51,7 +51,7 @@ private:
 
 	sanguis::random_generator &random_generator_;
 
-	sanguis::server::weapons::spread_radius const spread_radius_;
+	sanguis::server::weapons::attributes::spread_radius const spread_radius_;
 
 	sanguis::server::weapons::shells const shells_;
 

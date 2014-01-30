@@ -93,7 +93,7 @@ sanguis::server::weapons::shotgun::do_attack(
 				_attack.angle().get()
 			),
 			angle_distribution::param_type::stddev(
-				spread_radius_.get()
+				spread_radius_.value().get()
 			)
 		)
 	);
@@ -142,14 +142,10 @@ sanguis::server::weapons::shotgun::attributes() const
 		sanguis::weapon_attribute_vector{
 			sanguis::server::weapons::attributes::make_damage(
 				damage_
-			)/*,
+			),
 			sanguis::server::weapons::attributes::make(
 				sanguis::weapon_attribute_type::spread_radius,
 				spread_radius_
-			),
-			sanguis::server::weapons::attributes::make(
-				sanguis::weapon_attribute_type::shells,
-				shells_
-			)*/
+			)
 		};
 }

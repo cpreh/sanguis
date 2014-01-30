@@ -11,6 +11,7 @@
 #include <sanguis/server/weapons/attributes/accuracy.hpp>
 #include <sanguis/server/weapons/attributes/damage.hpp>
 #include <sanguis/server/weapons/attributes/magazine_size.hpp>
+#include <sanguis/server/weapons/attributes/spread_radius.hpp>
 
 
 sanguis::server::weapons::shotgun_parameters::shotgun_parameters(
@@ -76,7 +77,7 @@ sanguis::server::weapons::shotgun_parameters::cast_point() const
 		cast_point_;
 }
 
-sanguis::server::weapons::spread_radius const
+sanguis::server::weapons::attributes::spread_radius const
 sanguis::server::weapons::shotgun_parameters::spread_radius() const
 {
 	return
@@ -129,12 +130,13 @@ sanguis::server::weapons::shotgun_parameters::extra_accuracy(
 }
 
 void
-sanguis::server::weapons::shotgun_parameters::spread_radius(
+sanguis::server::weapons::shotgun_parameters::extra_spread_radius(
 	sanguis::server::weapons::spread_radius const _spread_radius
 )
 {
-	spread_radius_ =
-		_spread_radius;
+	spread_radius_.extra(
+		_spread_radius
+	);
 }
 
 void

@@ -33,9 +33,10 @@ spread_radius(
 	> const _parameters
 )
 {
-	_parameters.get().spread_radius(
+	_parameters.get().extra_spread_radius(
+		-
 		std::max(
-			_parameters.get().spread_radius()
+			_parameters.get().spread_radius().base()
 			/
 			sanguis::server::weapons::spread_radius(
 				std::sqrt(

@@ -1,5 +1,6 @@
 #include <sanguis/config_app_name.hpp>
 #include <sanguis/world_id.hpp>
+#include <sanguis/world_name.hpp>
 #include <sanguis/creator/deserialize.hpp>
 #include <sanguis/creator/generate.hpp>
 #include <sanguis/creator/opening_count.hpp>
@@ -15,6 +16,7 @@
 #include <sge/config/cache_path.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/filesystem/create_directories_recursive_exn.hpp>
 #include <fcppt/io/ifstream.hpp>
@@ -102,6 +104,14 @@ sanguis::server::world::random(
 			sanguis::creator::deserialize(
 				stream
 			),
-			_difficulty
+			_difficulty,
+			// TODO
+			sanguis::world_name(
+				FCPPT_TEXT("World ")
+				+
+				fcppt::insert_to_fcppt_string(
+					_world_id
+				)
+			)
 		);
 }

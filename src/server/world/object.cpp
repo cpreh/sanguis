@@ -10,6 +10,7 @@
 #include <sanguis/sequence_iteration.hpp>
 #include <sanguis/timer.hpp>
 #include <sanguis/world_id.hpp>
+#include <sanguis/world_name.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_status.hpp>
 #include <sanguis/collision/world/body_collision_callback.hpp>
@@ -106,7 +107,8 @@ sanguis::server::world::object::object(
 	sanguis::server::world::parameters const &_parameters,
 	sanguis::world_id const _id,
 	sanguis::creator::top_result const &_generated_world,
-	sanguis::server::world::difficulty const _difficulty
+	sanguis::server::world::difficulty const _difficulty,
+	sanguis::world_name const &_name
 )
 :
 	sanguis::server::environment::object(),
@@ -118,6 +120,9 @@ sanguis::server::world::object::object(
 	),
 	difficulty_(
 		_difficulty
+	),
+	name_(
+		_name
 	),
 	generator_name_(
 		_generated_world.name()
@@ -372,6 +377,9 @@ sanguis::server::world::object::insert_with_id(
 						sanguis::messages::types::size
 					>(
 						openings_.size()
+					),
+					sge::charconv::fcppt_string_to_utf8(
+						name_.get()
 					)
 				)
 			)
