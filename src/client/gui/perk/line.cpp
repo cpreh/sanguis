@@ -1,5 +1,7 @@
+#include <sanguis/client/gui/perk/item_color.hpp>
 #include <sanguis/client/gui/perk/line.hpp>
 #include <sanguis/client/gui/perk/make_description.hpp>
+#include <sanguis/client/perk/choosable.hpp>
 #include <sanguis/client/perk/find_info_const.hpp>
 #include <sanguis/client/perk/info.hpp>
 #include <sanguis/client/perk/state.hpp>
@@ -16,7 +18,7 @@
 #include <sanguis/gui/widget/text.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/font/object_fwd.hpp>
-#include <sge/image/color/predef.hpp>
+#include <sge/image/color/any/object.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
@@ -55,9 +57,8 @@ sanguis::client::gui::perk::line::line(
 		sanguis::client::gui::perk::make_description(
 			_info
 		),
-		// TODO: Different color depending on the state of the perk
 		sanguis::gui::text_color(
-			sge::image::color::predef::black()
+			this->text_color()
 		)
 	),
 	box_(
@@ -83,6 +84,14 @@ sanguis::client::gui::perk::line::line(
 		button_.click(
 			std::bind(
 				&sanguis::client::gui::perk::line::on_click,
+				this
+			)
+		)
+	),
+	level_change_connection_(
+		state_.register_level_change(
+			std::bind(
+				&sanguis::client::gui::perk::line::on_level_change,
 				this
 			)
 		)
@@ -115,6 +124,30 @@ sanguis::client::gui::perk::line::on_click()
 					perk_type_,
 					state_.perks()
 				).value()
+			)
+		);
+}
+
+void
+sanguis::client::gui::perk::line::on_level_change()
+{
+	text_.text_color(
+		sanguis::gui::text_color(
+			this->text_color()
+		)
+	);
+}
+
+sge::image::color::any::object const
+sanguis::client::gui::perk::line::text_color() const
+{
+	return
+		sanguis::client::gui::perk::item_color(
+			sanguis::client::perk::choosable(
+				perk_type_,
+				state_.perks(),
+				state_.player_level(),
+				state_.remaining_levels()
 			)
 		);
 }

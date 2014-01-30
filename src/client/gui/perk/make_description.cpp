@@ -43,5 +43,7 @@ sanguis::client::gui::perk::make_description(
 				_info.required_parent_level()
 			)
 		)
+		+
+		SGE_FONT_LIT(')')
 		;
 }

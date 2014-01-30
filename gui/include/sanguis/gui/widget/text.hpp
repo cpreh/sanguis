@@ -47,6 +47,12 @@ public:
 	);
 
 	SANGUIS_GUI_SYMBOL
+	void
+	text_color(
+		sanguis::gui::text_color const &
+	);
+
+	SANGUIS_GUI_SYMBOL
 	sge::rucksack::widget::base &
 	layout()
 	override;
@@ -61,7 +67,7 @@ private:
 
 	sge::font::object &font_;
 
-	sanguis::gui::text_color const text_color_;
+	sanguis::gui::text_color text_color_;
 
 	sge::font::string value_;
 

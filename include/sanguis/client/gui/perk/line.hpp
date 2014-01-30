@@ -10,6 +10,7 @@
 #include <sanguis/gui/widget/button.hpp>
 #include <sanguis/gui/widget/text.hpp>
 #include <sge/font/object_fwd.hpp>
+#include <sge/image/color/any/object_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
@@ -46,6 +47,12 @@ private:
 	void
 	on_click();
 
+	void
+	on_level_change();
+
+	sge::image::color::any::object const
+	text_color() const;
+
 	sanguis::perk_type const perk_type_;
 
 	sanguis::client::perk::state &state_;
@@ -57,6 +64,8 @@ private:
 	sanguis::gui::widget::box_container box_;
 
 	fcppt::signal::scoped_connection const click_connection_;
+
+	fcppt::signal::scoped_connection const level_change_connection_;
 };
 
 }

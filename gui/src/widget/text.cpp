@@ -88,6 +88,15 @@ sanguis::gui::widget::text::value(
 		_value;
 }
 
+void
+sanguis::gui::widget::text::text_color(
+	sanguis::gui::text_color const &_text_color
+)
+{
+	text_color_ =
+		_text_color;
+}
+
 sge::rucksack::widget::base &
 sanguis::gui::widget::text::layout()
 {

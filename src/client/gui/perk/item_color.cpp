@@ -15,14 +15,18 @@ sanguis::client::gui::perk::item_color(
 	)
 	{
 	case sanguis::client::perk::choosable_state::ok:
-		return sge::image::color::predef::white();
+		return
+			sge::image::color::predef::white();
 	case sanguis::client::perk::choosable_state::parent_level:
 	case sanguis::client::perk::choosable_state::player_level:
-		return sge::image::color::predef::red();
+		return
+			sge::image::color::predef::red();
 	case sanguis::client::perk::choosable_state::max_level:
-		return sge::image::color::predef::blue();
+		return
+			sge::image::color::predef::blue();
 	case sanguis::client::perk::choosable_state::level_up:
-		return sge::image::color::predef::gray();
+		return
+			sge::image::color::predef::black();
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;
