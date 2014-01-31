@@ -11,6 +11,8 @@
 #include <sanguis/server/states/running.hpp>
 #include <sanguis/server/states/unpaused.hpp>
 #include <sanguis/messages/client/base.hpp>
+#include <sanguis/messages/client/create.hpp>
+#include <sanguis/messages/client/info.hpp>
 #include <sanguis/messages/client/pause.hpp>
 #include <sanguis/messages/client/unpause.hpp>
 #include <sanguis/messages/client/call/object.hpp>
@@ -67,32 +69,28 @@ sanguis::server::states::paused::react(
 	sanguis::server::events::message const &_message
 )
 {
-	if(
-		!this->context<
-			sanguis::server::states::running
-		>().global_context().has_player(
-			_message.id()
-		)
-	)
-		return this->forward_event();
-
-	typedef sanguis::server::message_functor<
+	typedef
+	sanguis::server::message_functor<
 		sanguis::server::states::paused,
 		boost::statechart::result
-	> functor_type;
+	>
+	functor_type;
 
 	functor_type functor(
 		*this,
 		_message.id()
 	);
 
-	static sanguis::messages::client::call::object<
-		boost::mpl::vector2<
+	static
+	sanguis::messages::client::call::object<
+		boost::mpl::vector3<
+			sanguis::messages::client::info,
 			sanguis::messages::client::pause,
 			sanguis::messages::client::unpause
 		>,
 		functor_type
-	> dispatcher;
+	>
+	dispatcher;
 
 	return
 		dispatcher(
@@ -109,22 +107,32 @@ sanguis::server::states::paused::react(
 
 boost::statechart::result
 sanguis::server::states::paused::operator()(
-	sanguis::server::player_id,
-	sanguis::messages::client::unpause const &
+	sanguis::server::player_id const _player_id,
+	sanguis::messages::client::info const &_info
 )
 {
-	this->context<
-		sanguis::server::machine
-	>().send_to_all(
-		*sanguis::messages::server::create(
-			sanguis::messages::server::unpause()
+	// TODO: Do this via a return value
+	this->post_event(
+		sanguis::server::events::message(
+			sanguis::messages::client::create(
+				_info
+			),
+			_player_id
 		)
 	);
 
 	return
-		this->transit<
-			sanguis::server::states::unpaused
-		>();
+		this->unpause_impl();
+}
+
+boost::statechart::result
+sanguis::server::states::paused::operator()(
+	sanguis::server::player_id,
+	sanguis::messages::client::unpause const &
+)
+{
+	return
+		this->unpause_impl();
 }
 
 boost::statechart::result
@@ -136,7 +144,7 @@ sanguis::server::states::paused::operator()(
 	FCPPT_LOG_WARNING(
 		::logger,
 		fcppt::log::_
-			<< FCPPT_TEXT("got superfluous pause")
+			<< FCPPT_TEXT("Got superfluous pause")
 	);
 
 	return
@@ -151,4 +159,21 @@ sanguis::server::states::paused::handle_default_msg(
 {
 	return
 		this->forward_event();
+}
+
+boost::statechart::result
+sanguis::server::states::paused::unpause_impl()
+{
+	this->context<
+		sanguis::server::machine
+	>().send_to_all(
+		*sanguis::messages::server::create(
+			sanguis::messages::server::unpause()
+		)
+	);
+
+	return
+		this->transit<
+			sanguis::server::states::unpaused
+		>();
 }

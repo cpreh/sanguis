@@ -283,20 +283,12 @@ sanguis::server::states::unpaused::react(
 	sanguis::server::events::message const &_message
 )
 {
-	if(
-		!this->context<
-			sanguis::server::states::running
-		>().global_context().has_player(
-			_message.id()
-		)
-	)
-		return
-			this->forward_event();
-
-	typedef sanguis::server::message_functor<
+	typedef
+	sanguis::server::message_functor<
 		sanguis::server::states::unpaused,
 		boost::statechart::result
-	> functor_type;
+	>
+	functor_type;
 
 	functor_type functor(
 		*this,

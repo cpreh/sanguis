@@ -99,7 +99,7 @@ sanguis::client::states::has_player::react(
 			sanguis::messages::server::level_up,
 			sanguis::messages::server::remove_id
 		>,
-		has_player
+		sanguis::client::states::has_player
 	> dispatcher;
 
 	return

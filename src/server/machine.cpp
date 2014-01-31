@@ -258,6 +258,15 @@ sanguis::server::machine::disconnect_callback(
 			_id
 		)
 	);
+
+	FCPPT_LOG_INFO(
+		sanguis::server::log(),
+		fcppt::log::_
+			<< FCPPT_TEXT("Client ")
+			<< _id
+			<< FCPPT_TEXT(" disconnected: ")
+			<< _error
+	);
 }
 
 void

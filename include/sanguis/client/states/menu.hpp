@@ -10,7 +10,7 @@
 #include <sanguis/client/gui/menu/object.hpp>
 #include <sanguis/client/states/menu_fwd.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
-#include <sanguis/messages/server/connect_state_fwd.hpp>
+#include <sanguis/messages/server/connected_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
@@ -93,7 +93,7 @@ public:
 
 	result_type
 	operator()(
-		sanguis::messages::server::connect_state const &
+		sanguis::messages::server::connected const &
 	);
 private:
 	boost::statechart::result

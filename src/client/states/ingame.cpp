@@ -43,7 +43,7 @@ sanguis::client::states::ingame::react(
 	sanguis::client::events::action const &_event
 )
 {
-	control::actions::variant const action(
+	sanguis::client::control::actions::variant const action(
 		_event.value().get()
 	);
 

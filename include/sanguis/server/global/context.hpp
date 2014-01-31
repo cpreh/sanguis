@@ -2,7 +2,6 @@
 #define SANGUIS_SERVER_GLOBAL_CONTEXT_HPP_INCLUDED
 
 #include <sanguis/cheat_type_fwd.hpp>
-#include <sanguis/connect_state_fwd.hpp>
 #include <sanguis/diff_clock.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
@@ -60,8 +59,7 @@ public:
 	insert_player(
 		sanguis::world_id,
 		sanguis::server::player_id,
-		sanguis::server::string const &name,
-		sanguis::connect_state
+		sanguis::server::string const &name
 	);
 
 	void

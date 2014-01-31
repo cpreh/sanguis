@@ -13,7 +13,7 @@
 #include <sanguis/messages/client/create.hpp>
 #include <sanguis/messages/client/info.hpp>
 #include <sanguis/messages/server/base.hpp>
-#include <sanguis/messages/server/connect_state.hpp>
+#include <sanguis/messages/server/connected.hpp>
 #include <sanguis/messages/server/call/object.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/from_std_string.hpp>
@@ -140,7 +140,7 @@ sanguis::client::states::menu::react(
 {
 	static sanguis::messages::server::call::object<
 		boost::mpl::vector1<
-			sanguis::messages::server::connect_state
+			sanguis::messages::server::connected
 		>,
 		menu
 	> dispatcher;
@@ -201,13 +201,13 @@ sanguis::client::states::menu::react(
 
 boost::statechart::result
 sanguis::client::states::menu::operator()(
-	sanguis::messages::server::connect_state const &_state // TODO: do we need this?
+	sanguis::messages::server::connected const &
 )
 {
 	FCPPT_LOG_DEBUG(
 		::logger,
 		fcppt::log::_
-			<< FCPPT_TEXT("Received connect_state")
+			<< FCPPT_TEXT("Received connected")
 	);
 
 	return

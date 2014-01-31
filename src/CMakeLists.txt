@@ -457,8 +457,6 @@ set(
 	include/sanguis/clock.hpp
 	include/sanguis/company_name.hpp
 	include/sanguis/config_app_name.hpp
-	include/sanguis/connect_state.hpp
-	include/sanguis/connect_state_fwd.hpp
 	include/sanguis/diff_clock.hpp
 	include/sanguis/diff_clock_fwd.hpp
 	include/sanguis/diff_timer.hpp
@@ -716,7 +714,6 @@ set(
 	include/sanguis/messages/roles/cheat.hpp
 	include/sanguis/messages/roles/command_description.hpp
 	include/sanguis/messages/roles/command_name.hpp
-	include/sanguis/messages/roles/connect_state.hpp
 	include/sanguis/messages/roles/direction.hpp
 	include/sanguis/messages/roles/enemy.hpp
 	include/sanguis/messages/roles/entity_id.hpp
@@ -781,8 +778,8 @@ set(
 	include/sanguis/messages/server/change_weapon_fwd.hpp
 	include/sanguis/messages/server/change_world.hpp
 	include/sanguis/messages/server/change_world_fwd.hpp
-	include/sanguis/messages/server/connect_state.hpp
-	include/sanguis/messages/server/connect_state_fwd.hpp
+	include/sanguis/messages/server/connected.hpp
+	include/sanguis/messages/server/connected_fwd.hpp
 	include/sanguis/messages/server/console_print.hpp
 	include/sanguis/messages/server/console_print_fwd.hpp
 	include/sanguis/messages/server/create.hpp
@@ -1805,7 +1802,7 @@ set(
 	src/messages/server/base.cpp
 	src/messages/server/change_weapon.cpp
 	src/messages/server/change_world.cpp
-	src/messages/server/connect_state.cpp
+	src/messages/server/connected.cpp
 	src/messages/server/console_print.cpp
 	src/messages/server/die.cpp
 	src/messages/server/experience.cpp

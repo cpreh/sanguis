@@ -1,5 +1,4 @@
 #include <sanguis/cheat_type.hpp>
-#include <sanguis/connect_state.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
 #include <sanguis/exception.hpp>
@@ -12,7 +11,7 @@
 #include <sanguis/world_id.hpp>
 #include <sanguis/load/server_context_fwd.hpp>
 #include <sanguis/messages/server/base.hpp>
-#include <sanguis/messages/server/connect_state.hpp>
+#include <sanguis/messages/server/connected.hpp>
 #include <sanguis/messages/server/create.hpp>
 #include <sanguis/messages/server/remove_id.hpp>
 #include <sanguis/messages/server/rotate.hpp>
@@ -141,17 +140,14 @@ void
 sanguis::server::global::context::insert_player(
 	sanguis::world_id const _world_id,
 	sanguis::server::player_id const _player_id,
-	sanguis::server::string const &_name,
-	sanguis::connect_state const _connect_state
+	sanguis::server::string const &_name
 )
 {
 	// send this before the world gets created
 	this->send_to_player(
 		_player_id,
 		*sanguis::messages::server::create(
-			sanguis::messages::server::connect_state(
-				_connect_state
-			)
+			sanguis::messages::server::connected()
 		)
 	);
 

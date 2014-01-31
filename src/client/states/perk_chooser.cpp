@@ -125,5 +125,5 @@ sanguis::client::states::perk_chooser::react(
 	);
 
 	return
-		this->discard_event();
+		this->forward_event();
 }

@@ -1,4 +1,3 @@
-#include <sanguis/connect_state.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/string_vector.hpp>
 #include <sanguis/to_console_arg_list.hpp>
@@ -38,6 +37,7 @@
 #include <fcppt/log/info.hpp>
 #include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>
+#include <fcppt/log/warning.hpp>
 #include <fcppt/log/parameters/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
@@ -181,8 +181,16 @@ sanguis::server::states::running::operator()(
 			_id
 		)
 	)
+	{
+		FCPPT_LOG_WARNING(
+			::logger,
+			fcppt::log::_
+				<< FCPPT_TEXT("Got multiple client infos")
+		);
+
 		return
 			this->discard_event();
+	}
 
 	FCPPT_LOG_DEBUG(
 		::logger,
@@ -199,14 +207,7 @@ sanguis::server::states::running::operator()(
 			_message.get<
 				sanguis::messages::roles::player_name
 			>()
-		),
-		this->state_cast<
-			sanguis::server::states::unpaused const *
-		>()
-		?
-			sanguis::connect_state::unpaused
-		:
-			sanguis::connect_state::paused
+		)
 	);
 
 	return
@@ -219,14 +220,6 @@ sanguis::server::states::running::operator()(
 	sanguis::messages::client::console_command const &_message
 )
 {
-	if(
-		!this->global_context().has_player(
-			_id
-		)
-	)
-		return
-			this->discard_event();
-
 	sanguis::string_vector const command(
 		sanguis::messages::convert::from_string_vector(
 			_message.get<

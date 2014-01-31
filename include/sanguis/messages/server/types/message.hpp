@@ -29,7 +29,7 @@ enum class message
 	available_perks,
 	change_weapon,
 	change_world,
-	connect_state,
+	connected,
 	console_print,
 	die,
 	experience,
