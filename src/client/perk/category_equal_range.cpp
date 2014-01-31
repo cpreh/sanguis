@@ -24,24 +24,26 @@ sanguis::client::perk::category_equal_range(
 				_end
 			)
 		:
-			std::equal_range(
-				_begin,
-				_end,
-				*_begin,
-				[](
-					sanguis::client::perk::tree const &_left,
-					sanguis::client::perk::tree const &_right
+			sanguis::client::perk::const_tree_range(
+				std::equal_range(
+					_begin,
+					_end,
+					*_begin,
+					[](
+						sanguis::client::perk::tree const &_left,
+						sanguis::client::perk::tree const &_right
+					)
+					{
+						return
+							sanguis::client::perk::to_category(
+								_left.value()->perk_type()
+							)
+							<
+							sanguis::client::perk::to_category(
+								_right.value()->perk_type()
+							);
+					}
 				)
-				{
-					return
-						sanguis::client::perk::to_category(
-							_left.value()->perk_type()
-						)
-						<
-						sanguis::client::perk::to_category(
-							_right.value()->perk_type()
-						);
-				}
 			)
 		;
 }

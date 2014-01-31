@@ -407,6 +407,7 @@ set(
 	include/sanguis/client/perk/choosable_state_fwd.hpp
 	include/sanguis/client/perk/compare.hpp
 	include/sanguis/client/perk/const_tree_range.hpp
+	include/sanguis/client/perk/const_tree_range_fwd.hpp
 	include/sanguis/client/perk/find_info.hpp
 	include/sanguis/client/perk/find_info_any.hpp
 	include/sanguis/client/perk/find_info_const.hpp
@@ -1675,6 +1676,7 @@ set(
 	src/client/perk/category_to_string.cpp
 	src/client/perk/choosable.cpp
 	src/client/perk/compare.cpp
+	src/client/perk/const_tree_range.cpp
 	src/client/perk/find_info.cpp
 	src/client/perk/find_info_const.cpp
 	src/client/perk/info.cpp

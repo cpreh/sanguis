@@ -3,7 +3,7 @@
 
 #include <sanguis/client/gui/perk/line_unique_ptr_tree_vector.hpp>
 #include <sanguis/client/gui/perk/tab_fwd.hpp>
-#include <sanguis/client/perk/const_tree_range.hpp>
+#include <sanguis/client/perk/const_tree_range_fwd.hpp>
 #include <sanguis/client/perk/state_fwd.hpp>
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/widget/tree.hpp>
