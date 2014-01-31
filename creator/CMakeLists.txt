@@ -64,10 +64,10 @@ set(
 	src/aux_/generate_maze.cpp
 	src/aux_/generator_map.cpp
 	src/aux_/generators/graveyard.cpp
-	src/aux_/generators/lines.cpp
 	src/aux_/generators/maze.cpp
 	src/aux_/parameters.cpp
 	src/aux_/perimeter_to_coords.cpp
+	src/aux_/randgen.cpp
 	src/aux_/result.cpp
 	src/aux_/serialization/background_grid.cpp
 	src/aux_/serialization/grid.cpp
@@ -96,7 +96,6 @@ set(
 	src/include/sanguis/creator/aux_/generator_map.hpp
 	src/include/sanguis/creator/aux_/generator_map_type.hpp
 	src/include/sanguis/creator/aux_/generators/graveyard.hpp
-	src/include/sanguis/creator/aux_/generators/lines.hpp
 	src/include/sanguis/creator/aux_/generators/maze.hpp
 	src/include/sanguis/creator/aux_/parameters.hpp
 	src/include/sanguis/creator/aux_/parameters_fwd.hpp
@@ -116,7 +115,16 @@ set(
 	src/include/sanguis/creator/aux_/serialization/spawn_container.hpp
 	src/include/sanguis/creator/aux_/serialization/tile_grid.hpp
 	src/include/sanguis/creator/aux_/serialization/top_result.hpp
-	src/randgen.cpp
+	src/include/sanguis/creator/aux_/uniform_int.hpp
+	src/include/sanguis/creator/aux_/uniform_int_decl.hpp
+	src/include/sanguis/creator/aux_/uniform_int_distribution_decl.hpp
+	src/include/sanguis/creator/aux_/uniform_int_distribution_fwd.hpp
+	src/include/sanguis/creator/aux_/uniform_int_distribution_impl.hpp
+	src/include/sanguis/creator/aux_/uniform_int_fwd.hpp
+	src/include/sanguis/creator/aux_/uniform_int_impl.hpp
+	src/include/sanguis/creator/aux_/uniform_int_wrapper_decl.hpp
+	src/include/sanguis/creator/aux_/uniform_int_wrapper_fwd.hpp
+	src/include/sanguis/creator/aux_/uniform_int_wrapper_impl.hpp
 	src/serialize.cpp
 	src/spawn.cpp
 	src/tile_is_solid.cpp

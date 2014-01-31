@@ -5,9 +5,7 @@
 #include <sanguis/creator/aux_/rand_value.hpp>
 #include <sanguis/creator/aux_/randgen_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/random/distribution/basic_decl.hpp>
-#include <fcppt/random/distribution/parameters/uniform_int_decl.hpp>
-#include <fcppt/random/generator/minstd_rand_decl.hpp>
+#include <fcppt/random/generator/mt19937_decl.hpp>
 
 
 namespace sanguis
@@ -35,21 +33,19 @@ public:
 	sanguis::creator::aux_::randgen::result_type
 	operator()();
 
+	static
 	sanguis::creator::aux_::randgen::result_type
-	min() const;
+	min();
 
+	static
 	sanguis::creator::aux_::randgen::result_type
-	max() const;
+	max();
 private:
-	fcppt::random::generator::minstd_rand generator_;
+	typedef
+	fcppt::random::generator::mt19937
+	generator_type;
 
-	typedef fcppt::random::distribution::basic<
-		fcppt::random::distribution::parameters::uniform_int<
-			sanguis::creator::aux_::randgen::result_type
-		>
-	> int_distribution;
-
-	int_distribution distribution_;
+	generator_type generator_;
 };
 
 }

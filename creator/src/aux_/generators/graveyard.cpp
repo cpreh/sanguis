@@ -20,6 +20,8 @@
 #include <sanguis/creator/aux_/filled_rect.hpp>
 #include <sanguis/creator/aux_/find_closest.hpp>
 #include <sanguis/creator/aux_/rect.hpp>
+#include <sanguis/creator/aux_/uniform_int.hpp>
+#include <sanguis/creator/aux_/uniform_int_wrapper_impl.hpp>
 #include <fcppt/container/grid/in_range.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <sanguis/creator/aux_/generators/graveyard.hpp>
@@ -39,29 +41,28 @@
 #include <fcppt/random/variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>
-#include <fcppt/random/distribution/parameters/make_uniform_indices.hpp>
-#include <fcppt/random/distribution/parameters/uniform_int.hpp>
-#include <fcppt/random/distribution/parameters/uniform_real.hpp>
+#include <fcppt/random/distribution/parameters/make_uniform_indices_advanced.hpp>
 #include <fcppt/random/distribution/transform/enum.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <vector>
 #include <ostream>
 #include <fcppt/config/external_end.hpp>
 
+
 namespace
 {
 
 typedef
 fcppt::random::distribution::basic<
-	fcppt::random::distribution::parameters::uniform_int<
+	sanguis::creator::aux_::uniform_int<
 		sanguis::creator::size_type
 	>
 >
-uniform_int;
+sz_uniform_int;
 
 typedef fcppt::random::variate<
 	sanguis::creator::aux_::randgen,
-	uniform_int
+	sz_uniform_int
 > variate;
 
 sanguis::creator::opening_container
@@ -98,11 +99,11 @@ sanguis::creator::aux_::generators::graveyard(
 	::variate
 	random_cell_index(
 		_parameters.randgen(),
-		uniform_int(
-			uniform_int::param_type::min(
+		sz_uniform_int(
+			sz_uniform_int::param_type::min(
 				0u
 			),
-			uniform_int::param_type::max(
+			sz_uniform_int::param_type::max(
 				maze_dim.w() *
 				maze_dim.h()
 			)));
@@ -110,22 +111,22 @@ sanguis::creator::aux_::generators::graveyard(
 	::variate
 	random_x(
 		_parameters.randgen(),
-		uniform_int(
-			uniform_int::param_type::min(
+		sz_uniform_int(
+			sz_uniform_int::param_type::min(
 				0u
 			),
-			uniform_int::param_type::max(
+			sz_uniform_int::param_type::max(
 				maze_dim.w() - 2
 		)));
 
 	::variate
 	random_y(
 		_parameters.randgen(),
-		uniform_int(
-			uniform_int::param_type::min(
+		sz_uniform_int(
+			sz_uniform_int::param_type::min(
 				0u
 			),
-			uniform_int::param_type::max(
+			sz_uniform_int::param_type::max(
 				maze_dim.h() - 2
 		)));
 
@@ -174,21 +175,21 @@ sanguis::creator::aux_::generators::graveyard(
 
 	typedef
 	fcppt::random::distribution::basic<
-		fcppt::random::distribution::parameters::uniform_real<
-			float
+		sanguis::creator::aux_::uniform_int<
+			unsigned
 		>
 	>
-	uniform_real;
+	uniform_int2;
 
 	auto fill_tile_random(
 		fcppt::random::make_variate(
 			_parameters.randgen(),
-			uniform_real(
-				uniform_real::param_type::min(
-					0.f
+			uniform_int2(
+				uniform_int2::param_type::min(
+					0u
 				),
-				uniform_real::param_type::sup(
-					1.0f
+				uniform_int2::param_type::max(
+					10u
 				)
 			)
 		)
@@ -196,7 +197,7 @@ sanguis::creator::aux_::generators::graveyard(
 
 	typedef
 	fcppt::random::distribution::basic<
-		fcppt::random::distribution::parameters::uniform_int<
+		sanguis::creator::aux_::uniform_int<
 			sanguis::creator::tile
 		>
 	> uniform_tile_enum;
@@ -227,7 +228,7 @@ sanguis::creator::aux_::generators::graveyard(
 			sanguis::creator::tile::nothing
 			&&
 			fill_tile_random()
-			< 0.1f
+			== 0
 		)
 			cell.value() =
 				random_grave();
@@ -372,21 +373,21 @@ place_spawners(
 {
 	::variate random_x(
 		randgen,
-		uniform_int(
-			uniform_int::param_type::min(
+		sz_uniform_int(
+			sz_uniform_int::param_type::min(
 				1u
 			),
-			uniform_int::param_type::max(
+			sz_uniform_int::param_type::max(
 				grid.size().w() - 2
 		)));
 
 	::variate random_y(
 		randgen,
-		uniform_int(
-			uniform_int::param_type::min(
+		sz_uniform_int(
+			sz_uniform_int::param_type::min(
 				1u
 			),
-			uniform_int::param_type::max(
+			sz_uniform_int::param_type::max(
 				grid.size().h() - 2
 		)));
 
@@ -399,7 +400,10 @@ place_spawners(
 
 	auto random_monster(
 		fcppt::random::distribution::make_basic(
-			fcppt::random::distribution::parameters::make_uniform_indices(
+			// TODO: Make a function in creator wrapping this
+			fcppt::random::distribution::parameters::make_uniform_indices_advanced<
+				sanguis::creator::aux_::uniform_int_wrapper
+			>(
 				monsters
 			)
 		)

@@ -1,16 +1,16 @@
+#include <sanguis/creator/grid.hpp>
+#include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/aux_/find_opposing_cell.hpp>
 #include <sanguis/creator/aux_/generate_maze.hpp>
 #include <sanguis/creator/aux_/reachable_grid.hpp>
 #include <sanguis/creator/aux_/reachable.hpp>
-#include <sanguis/creator/grid.hpp>
-#include <sanguis/creator/pos.hpp>
+#include <sanguis/creator/aux_/uniform_int.hpp>
 #include <fcppt/algorithm/append.hpp>
 #include <fcppt/algorithm/remove.hpp>
 #include <fcppt/container/grid/make_pos_crange.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
 #include <fcppt/optional.hpp>
 #include <fcppt/random/distribution/basic.hpp>
-#include <fcppt/random/distribution/parameters/uniform_int.hpp>
 #include <fcppt/random/variate.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -18,6 +18,7 @@
 #include <fcppt/config/external_begin.hpp>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
+
 
 sanguis::creator::grid
 sanguis::creator::aux_::generate_maze(
@@ -38,7 +39,7 @@ sanguis::creator::aux_::generate_maze(
 
 	typedef
 	fcppt::random::distribution::basic<
-		fcppt::random::distribution::parameters::uniform_int<
+		sanguis::creator::aux_::uniform_int<
 			sanguis::creator::size_type
 		>
 	>

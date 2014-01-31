@@ -2,7 +2,6 @@
 #include <sanguis/creator/aux_/generator_map.hpp>
 #include <sanguis/creator/aux_/generator_map_type.hpp>
 #include <sanguis/creator/aux_/generators/graveyard.hpp>
-#include <sanguis/creator/aux_/generators/lines.hpp>
 #include <sanguis/creator/aux_/generators/maze.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
