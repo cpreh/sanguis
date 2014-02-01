@@ -61,6 +61,13 @@ sanguis::gui::widget::base::on_char(
 }
 
 void
+sanguis::gui::widget::base::on_focus_changed(
+	bool
+)
+{
+}
+
+void
 sanguis::gui::widget::base::parent(
 	sanguis::gui::widget::optional_ref const _parent
 )

@@ -22,10 +22,21 @@ sanguis::gui::context::focus(
 	sanguis::gui::widget::base &_widget
 )
 {
+	if(
+		focus_
+	)
+		focus_->on_focus_changed(
+			false
+		);
+
 	focus_ =
 		sanguis::gui::widget::optional_ref(
 			_widget
 		);
+
+	_widget.on_focus_changed(
+		true
+	);
 }
 
 void

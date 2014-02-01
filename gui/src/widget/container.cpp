@@ -12,6 +12,7 @@
 #include <sge/rucksack/widget/base.hpp>
 #include <fcppt/algorithm/remove_if.hpp>
 #include <fcppt/math/box/contains_point.hpp>
+#include <fcppt/math/vector/arithmetic.hpp>
 
 
 sanguis::gui::widget::container::container(

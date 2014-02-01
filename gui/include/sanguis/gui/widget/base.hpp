@@ -64,6 +64,12 @@ public:
 	);
 
 	virtual
+	void
+	on_focus_changed(
+		bool
+	);
+
+	virtual
 	sge::rucksack::widget::base &
 	layout() = 0;
 

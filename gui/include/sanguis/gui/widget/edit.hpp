@@ -11,11 +11,15 @@
 #include <sge/font/char_type.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
+#include <sge/font/draw/static_text.hpp>
 #include <sge/input/keyboard/key_code_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/widget/base_fwd.hpp>
 #include <sge/rucksack/widget/dummy.hpp>
+#include <sge/timer/basic_decl.hpp>
+#include <sge/timer/clocks/delta_decl.hpp>
+#include <sge/timer/clocks/standard.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/signal/auto_connection_fwd.hpp>
 #include <fcppt/signal/object_decl.hpp>
@@ -92,7 +96,16 @@ private:
 	override;
 
 	void
-	text_change();
+	on_focus_changed(
+		bool
+	)
+	override;
+
+	void
+	text_changed();
+
+	sge::font::draw::static_text
+	make_static_text();
 
 	sge::renderer::device::ffp &renderer_;
 
@@ -103,6 +116,32 @@ private:
 	sge::font::string::size_type position_;
 
 	sge::rucksack::widget::dummy layout_;
+
+	sge::font::draw::static_text static_text_;
+
+	typedef
+	sge::timer::clocks::standard
+	clock;
+
+	typedef
+	sge::timer::clocks::delta<
+		clock
+	>
+	diff_clock;
+
+	typedef
+	sge::timer::basic<
+		diff_clock
+	>
+	diff_timer;
+
+	diff_clock clock_;
+
+	diff_timer cursor_blink_timer_;
+
+	bool has_focus_;
+
+	bool show_cursor_;
 
 	typedef
 	fcppt::signal::object<

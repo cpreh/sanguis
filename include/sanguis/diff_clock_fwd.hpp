@@ -4,12 +4,15 @@
 #include <sanguis/clock.hpp>
 #include <sge/timer/clocks/delta_fwd.hpp>
 
+
 namespace sanguis
 {
 
-typedef sge::timer::clocks::delta<
+typedef
+sge::timer::clocks::delta<
 	sanguis::clock
-> diff_clock;
+>
+diff_clock;
 
 }
 
