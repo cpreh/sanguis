@@ -11,6 +11,7 @@
 #include <sanguis/client/draw2d/player_center.hpp>
 #include <sanguis/client/draw2d/player_center_callback.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
+#include <sanguis/client/draw2d/entities/name.hpp>
 #include <sanguis/client/draw2d/entities/own_player.hpp>
 #include <sanguis/client/draw2d/entities/player.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
@@ -35,7 +36,10 @@ sanguis::client::draw2d::entities::own_player::own_player(
 		_parameters,
 		_auras,
 		_buffs,
-		_health_pair
+		_health_pair,
+		sanguis::client::draw2d::entities::name(
+			sanguis::client::draw2d::entities::name::value_type()
+		)
 	),
 	player_center_callback_(
 		_player_center_callback

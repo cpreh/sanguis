@@ -6,6 +6,7 @@
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
+#include <sanguis/client/draw2d/entities/name.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/player.hpp>
 #include <sanguis/client/draw2d/entities/with_auras_model_parameters.hpp>
@@ -49,7 +50,8 @@ sanguis::client::draw2d::entities::player::player(
 	sanguis::client::draw2d::entities::model::load_parameters const &_load_parameters,
 	sanguis::aura_type_vector const &_auras,
 	sanguis::buff_type_vector const &_buffs,
-	sanguis::client::health_pair const _health_pair
+	sanguis::client::health_pair const _health_pair,
+	sanguis::client::draw2d::entities::name const &_name
 )
 :
 	sanguis::client::draw2d::entities::with_buffs_auras_model(
@@ -79,6 +81,9 @@ sanguis::client::draw2d::entities::player::player(
 				)
 			)
 		)
+	),
+	name_(
+		_name
 	)
 {
 }
@@ -202,4 +207,11 @@ sanguis::client::draw2d::entities::player::bounding_dim() const
 		this->at(
 			top
 		).size();
+}
+
+sanguis::client::draw2d::entities::name
+sanguis::client::draw2d::entities::player::name() const
+{
+	return
+		name_;
 }

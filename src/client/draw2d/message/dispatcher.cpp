@@ -294,6 +294,13 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 			>(),
 			sanguis::client::draw2d::message::health_pair(
 				_message
+			),
+			sanguis::client::draw2d::entities::name(
+				sge::charconv::utf8_string_to_fcppt(
+					_message.get<
+						sanguis::messages::roles::name
+					>()
+				)
 			)
 		),
 		_message
