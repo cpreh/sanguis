@@ -75,6 +75,7 @@ set(
 	include/sanguis/client/control/scalar.hpp
 	include/sanguis/client/create.hpp
 	include/sanguis/client/create_systems.hpp
+	include/sanguis/client/dispatch.hpp
 	include/sanguis/client/draw2d/aoe.hpp
 	include/sanguis/client/draw2d/center.hpp
 	include/sanguis/client/draw2d/center_fwd.hpp
@@ -657,6 +658,16 @@ set(
 	include/sanguis/messages/adapted_types/weapon_type_fwd.hpp
 	include/sanguis/messages/adapted_types/world_id.hpp
 	include/sanguis/messages/adapted_types/world_id_fwd.hpp
+	include/sanguis/messages/call/dispatch.hpp
+	include/sanguis/messages/call/dispatch_visitor.hpp
+	include/sanguis/messages/call/event_result.hpp
+	include/sanguis/messages/call/event_result_fwd.hpp
+	include/sanguis/messages/call/forward_to_default.hpp
+	include/sanguis/messages/call/forward_to_default_fwd.hpp
+	include/sanguis/messages/call/result.hpp
+	include/sanguis/messages/call/result_fwd.hpp
+	include/sanguis/messages/call/result_variant.hpp
+	include/sanguis/messages/call/result_variant_fwd.hpp
 	include/sanguis/messages/client/attack_dest.hpp
 	include/sanguis/messages/client/attack_dest_fwd.hpp
 	include/sanguis/messages/client/base.hpp
@@ -669,6 +680,8 @@ set(
 	include/sanguis/messages/client/cheat_fwd.hpp
 	include/sanguis/messages/client/choose_perk.hpp
 	include/sanguis/messages/client/choose_perk_fwd.hpp
+	include/sanguis/messages/client/concrete.hpp
+	include/sanguis/messages/client/concrete_fwd.hpp
 	include/sanguis/messages/client/console_command.hpp
 	include/sanguis/messages/client/console_command_fwd.hpp
 	include/sanguis/messages/client/create.hpp
@@ -779,11 +792,14 @@ set(
 	include/sanguis/messages/server/change_weapon_fwd.hpp
 	include/sanguis/messages/server/change_world.hpp
 	include/sanguis/messages/server/change_world_fwd.hpp
+	include/sanguis/messages/server/concrete.hpp
+	include/sanguis/messages/server/concrete_fwd.hpp
 	include/sanguis/messages/server/connected.hpp
 	include/sanguis/messages/server/connected_fwd.hpp
 	include/sanguis/messages/server/console_print.hpp
 	include/sanguis/messages/server/console_print_fwd.hpp
 	include/sanguis/messages/server/create.hpp
+	include/sanguis/messages/server/create_ptr.hpp
 	include/sanguis/messages/server/die.hpp
 	include/sanguis/messages/server/die_fwd.hpp
 	include/sanguis/messages/server/experience.hpp
@@ -805,6 +821,8 @@ set(
 	include/sanguis/messages/server/parts/add_actor_fwd.hpp
 	include/sanguis/messages/server/parts/add_elements_base.hpp
 	include/sanguis/messages/server/parts/add_elements_base_fwd.hpp
+	include/sanguis/messages/server/parts/add_player.hpp
+	include/sanguis/messages/server/parts/add_player_fwd.hpp
 	include/sanguis/messages/server/parts/add_with_auras.hpp
 	include/sanguis/messages/server/parts/add_with_auras_fwd.hpp
 	include/sanguis/messages/server/parts/add_with_buffs.hpp
@@ -1054,6 +1072,7 @@ set(
 	include/sanguis/server/dim.hpp
 	include/sanguis/server/dim_fwd.hpp
 	include/sanguis/server/direction.hpp
+	include/sanguis/server/dispatch.hpp
 	include/sanguis/server/entities/auto_weak_hook.hpp
 	include/sanguis/server/entities/auto_weak_link.hpp
 	include/sanguis/server/entities/auto_weak_link_fwd.hpp
@@ -1766,6 +1785,7 @@ set(
 	src/main.cpp
 	src/main_object.cpp
 	src/media_path.cpp
+	src/messages/call/result.cpp
 	src/messages/client/attack_dest.cpp
 	src/messages/client/base.cpp
 	src/messages/client/change_world.cpp

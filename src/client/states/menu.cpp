@@ -1,4 +1,5 @@
 #include <sanguis/log_parameters.hpp>
+#include <sanguis/client/dispatch.hpp>
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/events/action.hpp>
 #include <sanguis/client/events/connected.hpp>
@@ -10,11 +11,11 @@
 #include <sanguis/client/states/log_location.hpp>
 #include <sanguis/client/states/menu.hpp>
 #include <sanguis/client/states/waiting_for_player.hpp>
+#include <sanguis/messages/call/result.hpp>
 #include <sanguis/messages/client/create.hpp>
 #include <sanguis/messages/client/info.hpp>
 #include <sanguis/messages/server/base.hpp>
 #include <sanguis/messages/server/connected.hpp>
-#include <sanguis/messages/server/call/object.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/text.hpp>
@@ -138,22 +139,27 @@ sanguis::client::states::menu::react(
 	sanguis::client::events::message const &_message
 )
 {
-	static sanguis::messages::server::call::object<
-		boost::mpl::vector1<
-			sanguis::messages::server::connected
-		>,
-		menu
-	> dispatcher;
+	auto const handle_default_msg(
+		[
+			this
+		](
+			sanguis::messages::server::base const &
+		)
+		{
+			return
+				this->forward_event();
+		}
+	);
 
 	return
-		dispatcher(
-			*_message.value(),
+		sanguis::client::dispatch<
+			boost::mpl::vector1<
+				sanguis::messages::server::connected
+			>
+		>(
 			*this,
-			std::bind(
-				&sanguis::client::states::menu::handle_default_msg,
-				this,
-				std::placeholders::_1
-			)
+			_message,
+			handle_default_msg
 		);
 }
 
@@ -171,10 +177,10 @@ sanguis::client::states::menu::react(
 	this->context<
 		sanguis::client::machine
 	>().send(
-		*sanguis::messages::client::create(
+		sanguis::messages::client::create(
 			sanguis::messages::client::info(
 				sge::charconv::fcppt_string_to_utf8(
-					FCPPT_TEXT("player1") // TODO!
+					menu_.player_name()
 				)
 			)
 		)
@@ -199,7 +205,7 @@ sanguis::client::states::menu::react(
 		this->discard_event();
 }
 
-boost::statechart::result
+sanguis::messages::call::result
 sanguis::client::states::menu::operator()(
 	sanguis::messages::server::connected const &
 )
@@ -211,16 +217,9 @@ sanguis::client::states::menu::operator()(
 	);
 
 	return
-		this->transit<
-			sanguis::client::states::waiting_for_player
-		>();
-}
-
-boost::statechart::result
-sanguis::client::states::menu::handle_default_msg(
-	sanguis::messages::server::base const &
-)
-{
-	return
-		this->forward_event();
+		sanguis::messages::call::result(
+			this->transit<
+				sanguis::client::states::waiting_for_player
+			>()
+		);
 }

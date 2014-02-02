@@ -4,7 +4,7 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/events/message_fwd.hpp>
 #include <sanguis/server/states/running.hpp>
-#include <sanguis/messages/client/base_fwd.hpp>
+#include <sanguis/messages/call/result_fwd.hpp>
 #include <sanguis/messages/client/info_fwd.hpp>
 #include <sanguis/messages/client/pause_fwd.hpp>
 #include <sanguis/messages/client/unpause_fwd.hpp>
@@ -52,30 +52,24 @@ public:
 		sanguis::server::events::message const &
 	);
 
-	boost::statechart::result
+	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::client::info const &
 	);
 
-	boost::statechart::result
+	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::client::unpause const &
 	);
 
-	boost::statechart::result
+	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::client::pause const &
 	);
 private:
-	boost::statechart::result
-	handle_default_msg(
-		sanguis::server::player_id,
-		sanguis::messages::client::base const &
-	);
-
 	boost::statechart::result
 	unpause_impl();
 };

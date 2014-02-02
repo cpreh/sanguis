@@ -8,8 +8,8 @@
 #include <sanguis/client/perk/state_fwd.hpp>
 #include <sanguis/client/states/running.hpp>
 #include <sanguis/client/states/ingame_fwd.hpp>
+#include <sanguis/messages/call/result_fwd.hpp>
 #include <sanguis/messages/server/available_perks_fwd.hpp>
-#include <sanguis/messages/server/base_fwd.hpp>
 #include <sanguis/messages/server/level_up_fwd.hpp>
 #include <sanguis/messages/server/remove_id_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -68,19 +68,21 @@ public:
 		events::action const &
 	);
 
-	typedef boost::statechart::result result_type;
+	typedef
+	sanguis::messages::call::result
+	result_type;
 
-	result_type
+	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::available_perks const &
 	);
 
-	result_type
+	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::level_up const &
 	);
 
-	result_type
+	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::remove_id const &
 	);
@@ -88,11 +90,6 @@ public:
 	sanguis::client::perk::state &
 	perk_state();
 private:
-	boost::statechart::result
-	handle_default_msg(
-		sanguis::messages::server::base const &
-	);
-
 	void
 	send_perk_choose(
 		sanguis::perk_type

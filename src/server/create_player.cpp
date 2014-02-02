@@ -44,7 +44,7 @@ sanguis::server::create_player(
 	)
 		_send_to_player(
 			_player_id,
-			*sanguis::messages::server::create(
+			sanguis::messages::server::create(
 				sanguis::messages::server::add_console_command(
 					sge::charconv::fcppt_string_to_utf8(
 						command.first

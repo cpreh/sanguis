@@ -5,7 +5,7 @@
 #include <sanguis/server/events/message_fwd.hpp>
 #include <sanguis/server/events/tick_fwd.hpp>
 #include <sanguis/server/states/running.hpp>
-#include <sanguis/messages/client/base_fwd.hpp>
+#include <sanguis/messages/call/result_fwd.hpp>
 #include <sanguis/messages/client/attack_dest_fwd.hpp>
 #include <sanguis/messages/client/change_world_fwd.hpp>
 #include <sanguis/messages/client/direction_fwd.hpp>
@@ -65,64 +65,58 @@ public:
 		sanguis::server::events::message const &
 	);
 
-	boost::statechart::result
+	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::client::attack_dest const &
 	);
 
-	boost::statechart::result
+	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::client::change_world const &
 	);
 
-	boost::statechart::result
+	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::client::direction const &
 	);
 
-	boost::statechart::result
+	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::client::drop_or_pickup_weapon const &
 	);
 
-	boost::statechart::result
+	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::client::reload const &
 	);
 
-	boost::statechart::result
+	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::client::start_shooting const &
 	);
 
-	boost::statechart::result
+	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::client::stop_shooting const &
 	);
 
-	boost::statechart::result
+	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::client::unpause const &
 	);
 
-	boost::statechart::result
+	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::client::pause const &
-	);
-private:
-	boost::statechart::result
-	handle_default_msg(
-		sanguis::server::player_id,
-		sanguis::messages::client::base const &
 	);
 };
 

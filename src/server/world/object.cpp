@@ -366,7 +366,7 @@ sanguis::server::world::object::insert_with_id(
 	)
 		this->send_player_specific(
 			player_ret->player_id(),
-			*sanguis::messages::server::create(
+			sanguis::messages::server::create(
 				sanguis::messages::server::change_world(
 					id_,
 					seed_,
@@ -428,7 +428,7 @@ sanguis::server::world::object::add_aura(
 {
 	this->send_entity_specific(
 		_id,
-		*sanguis::messages::server::create(
+		sanguis::messages::server::create(
 			sanguis::messages::server::add_aura(
 				_id,
 				_aura_type
@@ -445,7 +445,7 @@ sanguis::server::world::object::add_buff(
 {
 	this->send_entity_specific(
 		_id,
-		*sanguis::messages::server::create(
+		sanguis::messages::server::create(
 			sanguis::messages::server::add_buff(
 				_id,
 				_buff_type
@@ -462,7 +462,7 @@ sanguis::server::world::object::remove_buff(
 {
 	this->send_entity_specific(
 		_id,
-		*sanguis::messages::server::create(
+		sanguis::messages::server::create(
 			sanguis::messages::server::remove_buff(
 				_id,
 				_buff_type
@@ -479,7 +479,7 @@ sanguis::server::world::object::weapon_changed(
 {
 	this->send_entity_specific(
 		_id,
-		*sanguis::messages::server::create(
+		sanguis::messages::server::create(
 			sanguis::messages::server::change_weapon(
 				_id,
 				_wt
@@ -496,7 +496,7 @@ sanguis::server::world::object::got_weapon(
 {
 	this->send_player_specific(
 		_player_id,
-		*sanguis::messages::server::create(
+		sanguis::messages::server::create(
 			sanguis::messages::server::give_weapon(
 				_description.weapon_type(),
 				fcppt::truncation_check_cast<
@@ -530,7 +530,7 @@ sanguis::server::world::object::remove_weapon(
 {
 	this->send_player_specific(
 		_player_id,
-		*sanguis::messages::server::create(
+		sanguis::messages::server::create(
 			sanguis::messages::server::remove_weapon(
 				_is_primary
 			)
@@ -547,7 +547,7 @@ sanguis::server::world::object::magazine_remaining(
 {
 	this->send_player_specific(
 		_player_id,
-		*sanguis::messages::server::create(
+		sanguis::messages::server::create(
 			sanguis::messages::server::magazine_remaining(
 				_is_primary,
 				// TODO: Put this into a function!
@@ -569,7 +569,7 @@ sanguis::server::world::object::angle_changed(
 {
 	this->send_entity_specific(
 		_entity_id,
-		*sanguis::messages::server::create(
+		sanguis::messages::server::create(
 			sanguis::messages::server::rotate(
 				_entity_id,
 				_angle.get()
@@ -586,7 +586,7 @@ sanguis::server::world::object::center_changed(
 {
 	this->send_entity_specific(
 		_entity_id,
-		*sanguis::messages::server::create(
+		sanguis::messages::server::create(
 			sanguis::messages::server::move(
 				_entity_id,
 				_center.get()
@@ -603,7 +603,7 @@ sanguis::server::world::object::speed_changed(
 {
 	this->send_entity_specific(
 		_entity_id,
-		*sanguis::messages::server::create(
+		sanguis::messages::server::create(
 			sanguis::messages::server::speed(
 				_entity_id,
 				_speed.get()
@@ -620,7 +620,7 @@ sanguis::server::world::object::weapon_status_changed(
 {
 	this->send_entity_specific(
 		_id,
-		*sanguis::messages::server::create(
+		sanguis::messages::server::create(
 			sanguis::messages::server::weapon_status(
 				_id,
 				_weapon_status
@@ -637,7 +637,7 @@ sanguis::server::world::object::health_changed(
 {
 	this->send_entity_specific(
 		_id,
-		*sanguis::messages::server::create(
+		sanguis::messages::server::create(
 			sanguis::messages::server::health(
 				_id,
 				_health.get()
@@ -654,7 +654,7 @@ sanguis::server::world::object::max_health_changed(
 {
 	this->send_entity_specific(
 		_id,
-		*sanguis::messages::server::create(
+		sanguis::messages::server::create(
 			sanguis::messages::server::max_health(
 				_id,
 				_health.get()
@@ -671,7 +671,7 @@ sanguis::server::world::object::exp_changed(
 {
 	this->send_player_specific(
 		_player_id,
-		*sanguis::messages::server::create(
+		sanguis::messages::server::create(
 			sanguis::messages::server::experience(
 				fcppt::cast::to_unsigned(
 					fcppt::cast::float_to_int<
@@ -695,7 +695,7 @@ sanguis::server::world::object::level_changed(
 {
 	this->send_player_specific(
 		_player_id,
-		*sanguis::messages::server::create(
+		sanguis::messages::server::create(
 			sanguis::messages::server::level_up(
 				_level.get(),
 				// TODO: Refactor this into a function!
@@ -900,22 +900,26 @@ sanguis::server::world::object::remove_sight_range(
 		it != entities_.end()
 	);
 
-	this->send_player_specific(
-		_player_id,
+	if(
 		it->second->dead()
-		?
-			*sanguis::messages::server::create(
+	)
+		this->send_player_specific(
+			_player_id,
+			sanguis::messages::server::create(
 				sanguis::messages::server::die(
 					_target_id
 				)
 			)
-		:
-			*sanguis::messages::server::create(
+		);
+	else
+		this->send_player_specific(
+			_player_id,
+			sanguis::messages::server::create(
 				sanguis::messages::server::remove(
 					_target_id
 				)
 			)
-	);
+		);
 }
 
 void

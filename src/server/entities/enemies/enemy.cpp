@@ -4,7 +4,7 @@
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/load/enemy_name.hpp>
 #include <sanguis/messages/server/add_enemy.hpp>
-#include <sanguis/messages/server/create.hpp>
+#include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/dim.hpp>
 #include <sanguis/server/direction.hpp>
@@ -155,7 +155,7 @@ sanguis::server::entities::enemies::enemy::add_message(
 ) const
 {
 	return
-		sanguis::messages::server::create(
+		sanguis::messages::server::create_ptr(
 			sanguis::messages::server::add_enemy(
 				this->id(),
 				this->center().get(),

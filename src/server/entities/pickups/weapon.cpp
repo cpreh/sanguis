@@ -4,7 +4,7 @@
 #include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/load/weapon_pickup_name.hpp>
 #include <sanguis/messages/server/add_weapon_pickup.hpp>
-#include <sanguis/messages/server/create.hpp>
+#include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/dim.hpp>
 #include <sanguis/server/model_name.hpp>
@@ -106,7 +106,7 @@ sanguis::server::entities::pickups::weapon::add_message(
 ) const
 {
 	return
-		sanguis::messages::server::create(
+		sanguis::messages::server::create_ptr(
 			sanguis::messages::server::add_weapon_pickup(
 				this->id(),
 				this->center().get(),

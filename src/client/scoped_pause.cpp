@@ -14,7 +14,7 @@ sanguis::client::scoped_pause::scoped_pause(
 	)
 {
 	send_(
-		*sanguis::messages::client::create(
+		sanguis::messages::client::create(
 			sanguis::messages::client::pause()
 		)
 	);
@@ -23,7 +23,7 @@ sanguis::client::scoped_pause::scoped_pause(
 sanguis::client::scoped_pause::~scoped_pause()
 {
 	send_(
-		*sanguis::messages::client::create(
+		sanguis::messages::client::create(
 			sanguis::messages::client::unpause()
 		)
 	);

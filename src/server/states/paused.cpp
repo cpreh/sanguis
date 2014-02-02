@@ -1,6 +1,6 @@
 #include <sanguis/log_parameters.hpp>
+#include <sanguis/server/dispatch.hpp>
 #include <sanguis/server/machine.hpp>
-#include <sanguis/server/message_functor.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/events/disconnect.hpp>
 #include <sanguis/server/events/message.hpp>
@@ -10,12 +10,11 @@
 #include <sanguis/server/states/paused.hpp>
 #include <sanguis/server/states/running.hpp>
 #include <sanguis/server/states/unpaused.hpp>
+#include <sanguis/messages/call/result.hpp>
 #include <sanguis/messages/client/base.hpp>
-#include <sanguis/messages/client/create.hpp>
 #include <sanguis/messages/client/info.hpp>
 #include <sanguis/messages/client/pause.hpp>
 #include <sanguis/messages/client/unpause.hpp>
-#include <sanguis/messages/client/call/object.hpp>
 #include <sanguis/messages/server/create.hpp>
 #include <sanguis/messages/server/unpause.hpp>
 #include <fcppt/log/_.hpp>
@@ -28,8 +27,6 @@
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <boost/statechart/result.hpp>
-#include <functional>
-#include <ostream>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -69,73 +66,62 @@ sanguis::server::states::paused::react(
 	sanguis::server::events::message const &_message
 )
 {
-	typedef
-	sanguis::server::message_functor<
-		sanguis::server::states::paused,
-		boost::statechart::result
-	>
-	functor_type;
-
-	functor_type functor(
-		*this,
-		_message.id()
+	auto const handle_default_msg(
+		[
+			this
+		](
+			sanguis::server::player_id,
+			sanguis::messages::client::base const &
+		)
+		{
+			return
+				this->forward_event();
+		}
 	);
 
-	static
-	sanguis::messages::client::call::object<
-		boost::mpl::vector3<
-			sanguis::messages::client::info,
-			sanguis::messages::client::pause,
-			sanguis::messages::client::unpause
-		>,
-		functor_type
-	>
-	dispatcher;
-
 	return
-		dispatcher(
-			*_message.get(),
-			functor,
-			std::bind(
-				&sanguis::server::states::paused::handle_default_msg,
-				this,
-				_message.id(),
-				std::placeholders::_1
-			)
+		sanguis::server::dispatch<
+			boost::mpl::vector3<
+				sanguis::messages::client::info,
+				sanguis::messages::client::pause,
+				sanguis::messages::client::unpause
+			>
+		>(
+			*this,
+			_message,
+			handle_default_msg
 		);
 }
 
-boost::statechart::result
+sanguis::messages::call::result
 sanguis::server::states::paused::operator()(
-	sanguis::server::player_id const _player_id,
-	sanguis::messages::client::info const &_info
+	sanguis::server::player_id,
+	sanguis::messages::client::info const &
 )
 {
-	// TODO: Do this via a return value
 	this->post_event(
-		sanguis::server::events::message(
-			sanguis::messages::client::create(
-				_info
-			),
-			_player_id
-		)
+		*this->triggering_event()
 	);
 
 	return
-		this->unpause_impl();
+		sanguis::messages::call::result(
+			this->unpause_impl()
+		);
 }
 
-boost::statechart::result
+sanguis::messages::call::result
 sanguis::server::states::paused::operator()(
 	sanguis::server::player_id,
 	sanguis::messages::client::unpause const &
 )
 {
 	return
-		this->unpause_impl();
+		sanguis::messages::call::result(
+			this->unpause_impl()
+		);
 }
 
-boost::statechart::result
+sanguis::messages::call::result
 sanguis::server::states::paused::operator()(
 	sanguis::server::player_id,
 	sanguis::messages::client::pause const &
@@ -148,17 +134,9 @@ sanguis::server::states::paused::operator()(
 	);
 
 	return
-		this->discard_event();
-}
-
-boost::statechart::result
-sanguis::server::states::paused::handle_default_msg(
-	sanguis::server::player_id,
-	sanguis::messages::client::base const &
-)
-{
-	return
-		this->forward_event();
+		sanguis::messages::call::result(
+			this->discard_event()
+		);
 }
 
 boost::statechart::result
@@ -167,7 +145,7 @@ sanguis::server::states::paused::unpause_impl()
 	this->context<
 		sanguis::server::machine
 	>().send_to_all(
-		*sanguis::messages::server::create(
+		sanguis::messages::server::create(
 			sanguis::messages::server::unpause()
 		)
 	);

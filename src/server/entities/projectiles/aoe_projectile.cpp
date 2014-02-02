@@ -2,7 +2,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/load/aoe_projectile_name.hpp>
 #include <sanguis/messages/server/add_aoe_projectile.hpp>
-#include <sanguis/messages/server/create.hpp>
+#include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/direction.hpp>
@@ -67,7 +67,7 @@ sanguis::server::entities::projectiles::aoe_projectile::add_message(
 ) const
 {
 	return
-		sanguis::messages::server::create(
+		sanguis::messages::server::create_ptr(
 			sanguis::messages::server::add_aoe_projectile(
 				this->id(),
 				this->center().get(),

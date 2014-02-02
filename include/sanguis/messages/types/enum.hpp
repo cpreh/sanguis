@@ -13,7 +13,7 @@ namespace messages
 namespace types
 {
 
-typedef std::uint8_t enum_; // TODO: is this enough?
+typedef std::uint8_t enum_;
 
 }
 }

@@ -5,7 +5,7 @@
 #include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/load/pickup_name.hpp>
 #include <sanguis/messages/server/add_pickup.hpp>
-#include <sanguis/messages/server/create.hpp>
+#include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/dim.hpp>
@@ -142,7 +142,7 @@ sanguis::server::entities::pickups::pickup::add_message(
 ) const
 {
 	return
-		sanguis::messages::server::create(
+		sanguis::messages::server::create_ptr(
 			sanguis::messages::server::add_pickup(
 				this->id(),
 				this->center().get(),

@@ -5,7 +5,7 @@
 #include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/load/friend_name.hpp>
 #include <sanguis/messages/server/add_friend.hpp>
-#include <sanguis/messages/server/create.hpp>
+#include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/dim.hpp>
 #include <sanguis/server/health.hpp>
@@ -159,7 +159,7 @@ sanguis::server::entities::friend_::add_message(
 ) const
 {
 	return
-		sanguis::messages::server::create(
+		sanguis::messages::server::create_ptr(
 			sanguis::messages::server::add_friend(
 				this->id(),
 				this->center().get(),

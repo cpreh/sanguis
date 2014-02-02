@@ -266,7 +266,7 @@ sanguis::client::control::action_handler::handle_cursor_action(
 		return;
 
 	send_(
-		*sanguis::messages::client::create(
+		sanguis::messages::client::create(
 			sanguis::messages::client::attack_dest(
 				fcppt::math::vector::structure_cast<
 					sanguis::messages::types::vector2
@@ -289,7 +289,7 @@ sanguis::client::control::action_handler::handle_nullary_action(
 	{
 	case sanguis::client::control::actions::nullary_type::change_world:
 		send_(
-			*sanguis::messages::client::create(
+			sanguis::messages::client::create(
 				sanguis::messages::client::change_world()
 			)
 		);
@@ -376,7 +376,7 @@ sanguis::client::control::action_handler::update_direction(
 		);
 
 	send_(
-		*sanguis::messages::client::create(
+		sanguis::messages::client::create(
 			sanguis::messages::client::direction(
 				fcppt::math::vector::structure_cast<
 					sanguis::messages::types::vector2
@@ -398,7 +398,7 @@ sanguis::client::control::action_handler::handle_shooting(
 		_value
 	)
 		send_(
-			*sanguis::messages::client::create(
+			sanguis::messages::client::create(
 				sanguis::messages::client::start_shooting(
 					_is_primary
 				)
@@ -406,7 +406,7 @@ sanguis::client::control::action_handler::handle_shooting(
 		);
 	else
 		send_(
-			*sanguis::messages::client::create(
+			sanguis::messages::client::create(
 				sanguis::messages::client::stop_shooting(
 					_is_primary
 				)
@@ -420,7 +420,7 @@ sanguis::client::control::action_handler::handle_drop(
 )
 {
 	send_(
-		*sanguis::messages::client::create(
+		sanguis::messages::client::create(
 			sanguis::messages::client::drop_or_pickup_weapon(
 				_is_primary
 			)
@@ -434,7 +434,7 @@ sanguis::client::control::action_handler::handle_reload(
 )
 {
 	send_(
-		*sanguis::messages::client::create(
+		sanguis::messages::client::create(
 			sanguis::messages::client::reload(
 				_is_primary
 			)
@@ -450,7 +450,7 @@ sanguis::client::control::action_handler::send_cheat(
 )
 {
 	send_(
-		*sanguis::messages::client::create(
+		sanguis::messages::client::create(
 			sanguis::messages::client::cheat(
 				_cheat
 			)

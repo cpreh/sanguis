@@ -51,7 +51,7 @@ sanguis::server::console::insert(
 )
 {
 	send_(
-		*sanguis::messages::server::create(
+		sanguis::messages::server::create(
 			sanguis::messages::server::add_console_command(
 				sge::charconv::fcppt_string_to_utf8(
 					_command
@@ -116,7 +116,7 @@ sanguis::server::console::print_line(
 {
 	unicast_(
 		_id,
-		*sanguis::messages::server::create(
+		sanguis::messages::server::create(
 			sanguis::messages::server::console_print(
 				sge::charconv::fcppt_string_to_utf8(
 					_line

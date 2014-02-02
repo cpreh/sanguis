@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_MESSAGE_FUNCTOR_HPP_INCLUDED
 #define SANGUIS_SERVER_MESSAGE_FUNCTOR_HPP_INCLUDED
 
+#include <sanguis/messages/call/result.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <fcppt/nonassignable.hpp>
 
@@ -11,8 +12,7 @@ namespace server
 {
 
 template<
-	typename Functor,
-	typename Result
+	typename State
 >
 class message_functor
 {
@@ -20,15 +20,17 @@ class message_functor
 		message_functor
 	);
 public:
-	typedef Result result_type;
+	typedef
+	sanguis::messages::call::result
+	result_type;
 
 	message_functor(
-		Functor &_functor,
+		State &_state,
 		sanguis::server::player_id const _id
 	)
 	:
-		functor_(
-			_functor
+		state_(
+			_state
 		),
 		id_(
 			_id
@@ -39,19 +41,19 @@ public:
 	template<
 		typename Message
 	>
-	Result
+	result_type
 	operator()(
 		Message const &_message
 	) const
 	{
 		return
-			functor_(
+			state_(
 				id_,
 				_message
 			);
 	}
 private:
-	Functor &functor_;
+	State &state_;
 
 	sanguis::server::player_id const id_;
 };

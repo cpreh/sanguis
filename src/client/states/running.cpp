@@ -3,6 +3,7 @@
 #include <sanguis/magazine_size.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/world_name.hpp>
+#include <sanguis/client/dispatch.hpp>
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/exp_for_next_level.hpp>
 #include <sanguis/client/health_pair.hpp>
@@ -35,6 +36,7 @@
 #include <sanguis/messages/adapted_types/string.hpp>
 #include <sanguis/messages/adapted_types/weapon_attribute_vector.hpp>
 #include <sanguis/messages/adapted_types/weapon_type.hpp>
+#include <sanguis/messages/call/result.hpp>
 #include <sanguis/messages/convert/from_weapon_attribute_vector.hpp>
 #include <sanguis/messages/roles/command_description.hpp>
 #include <sanguis/messages/roles/command_name.hpp>
@@ -55,7 +57,6 @@
 #include <sanguis/messages/server/pause.hpp>
 #include <sanguis/messages/server/remove_weapon.hpp>
 #include <sanguis/messages/server/unpause.hpp>
-#include <sanguis/messages/server/call/object.hpp>
 #include <sanguis/load/context.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <sge/console/object.hpp>
@@ -218,31 +219,40 @@ sanguis::client::states::running::react(
 	sanguis::client::events::message const &_event
 )
 {
-	static sanguis::messages::server::call::object<
-		boost::mpl::vector10<
-			sanguis::messages::server::add_console_command,
-			sanguis::messages::server::change_world,
-			sanguis::messages::server::console_print,
-			sanguis::messages::server::experience,
-			sanguis::messages::server::give_weapon,
-			sanguis::messages::server::level_up,
-			sanguis::messages::server::magazine_remaining,
-			sanguis::messages::server::pause,
-			sanguis::messages::server::remove_weapon,
-			sanguis::messages::server::unpause
-		>,
-		running
-	> dispatcher;
+	auto const handle_default_msg(
+		[
+			this
+		](
+			sanguis::messages::server::base const &_message
+		)
+		{
+			drawer_->process_message(
+				_message
+			);
+
+			return
+				this->discard_event();
+		}
+	);
 
 	return
-		dispatcher(
-			*_event.value(),
+		sanguis::client::dispatch<
+			boost::mpl::vector10<
+				sanguis::messages::server::add_console_command,
+				sanguis::messages::server::change_world,
+				sanguis::messages::server::console_print,
+				sanguis::messages::server::experience,
+				sanguis::messages::server::give_weapon,
+				sanguis::messages::server::level_up,
+				sanguis::messages::server::magazine_remaining,
+				sanguis::messages::server::pause,
+				sanguis::messages::server::remove_weapon,
+				sanguis::messages::server::unpause
+			>
+		>(
 			*this,
-			std::bind(
-				&sanguis::client::states::running::handle_default_msg,
-				this,
-				std::placeholders::_1
-			)
+			_event,
+			handle_default_msg
 		);
 }
 
@@ -257,7 +267,7 @@ sanguis::client::states::running::react(
 		>();
 }
 
-boost::statechart::result
+sanguis::messages::call::result
 sanguis::client::states::running::operator()(
 	sanguis::messages::server::add_console_command const &_message
 )
@@ -294,10 +304,12 @@ sanguis::client::states::running::operator()(
 	);
 
 	return
-		this->discard_event();
+		sanguis::messages::call::result(
+			this->discard_event()
+		);
 }
 
-boost::statechart::result
+sanguis::messages::call::result
 sanguis::client::states::running::operator()(
 	sanguis::messages::server::change_world const &_message
 )
@@ -312,16 +324,13 @@ sanguis::client::states::running::operator()(
 		)
 	);
 
-	// TODO: Do this via a new return value instead.
 	return
-		this->handle_default_msg(
-			*sanguis::messages::server::create(
-				_message
-			)
+		sanguis::messages::call::result(
+			sanguis::messages::call::forward_to_default()
 		);
 }
 
-boost::statechart::result
+sanguis::messages::call::result
 sanguis::client::states::running::operator()(
 	sanguis::messages::server::console_print const &_message
 )
@@ -337,10 +346,12 @@ sanguis::client::states::running::operator()(
 	);
 
 	return
-		this->discard_event();
+		sanguis::messages::call::result(
+			this->discard_event()
+		);
 }
 
-boost::statechart::result
+sanguis::messages::call::result
 sanguis::client::states::running::operator()(
 	sanguis::messages::server::experience const &_message
 )
@@ -354,10 +365,12 @@ sanguis::client::states::running::operator()(
 	);
 
 	return
-		this->discard_event();
+		sanguis::messages::call::result(
+			this->discard_event()
+		);
 }
 
-boost::statechart::result
+sanguis::messages::call::result
 sanguis::client::states::running::operator()(
 	sanguis::messages::server::give_weapon const &_message
 )
@@ -391,10 +404,12 @@ sanguis::client::states::running::operator()(
 	);
 
 	return
-		this->discard_event();
+		sanguis::messages::call::result(
+			this->discard_event()
+		);
 }
 
-boost::statechart::result
+sanguis::messages::call::result
 sanguis::client::states::running::operator()(
 	sanguis::messages::server::magazine_remaining const &_message
 )
@@ -411,10 +426,12 @@ sanguis::client::states::running::operator()(
 	);
 
 	return
-		this->discard_event();
+		sanguis::messages::call::result(
+			this->discard_event()
+		);
 }
 
-boost::statechart::result
+sanguis::messages::call::result
 sanguis::client::states::running::operator()(
 	sanguis::messages::server::level_up const &_message
 )
@@ -433,10 +450,12 @@ sanguis::client::states::running::operator()(
 	);
 
 	return
-		this->discard_event();
+		sanguis::messages::call::result(
+			this->discard_event()
+		);
 }
 
-boost::statechart::result
+sanguis::messages::call::result
 sanguis::client::states::running::operator()(
 	sanguis::messages::server::pause const &
 )
@@ -450,10 +469,12 @@ sanguis::client::states::running::operator()(
 	);
 
 	return
-		this->discard_event();
+		sanguis::messages::call::result(
+			this->discard_event()
+		);
 }
 
-boost::statechart::result
+sanguis::messages::call::result
 sanguis::client::states::running::operator()(
 	sanguis::messages::server::remove_weapon const &_message
 )
@@ -465,10 +486,12 @@ sanguis::client::states::running::operator()(
 	);
 
 	return
-		this->discard_event();
+		sanguis::messages::call::result(
+			this->discard_event()
+		);
 }
 
-boost::statechart::result
+sanguis::messages::call::result
 sanguis::client::states::running::operator()(
 	sanguis::messages::server::unpause const &
 )
@@ -482,7 +505,9 @@ sanguis::client::states::running::operator()(
 	);
 
 	return
-		this->discard_event();
+		sanguis::messages::call::result(
+			this->discard_event()
+		);
 }
 
 sanguis::client::control::environment &
@@ -523,17 +548,4 @@ sanguis::client::states::running::handle_player_action(
 			_action
 		)
 	);
-}
-
-boost::statechart::result
-sanguis::client::states::running::handle_default_msg(
-	sanguis::messages::server::base const &_message
-)
-{
-	drawer_->process_message(
-		_message
-	);
-
-	return
-		this->discard_event();
 }

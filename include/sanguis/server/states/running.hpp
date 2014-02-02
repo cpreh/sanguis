@@ -8,7 +8,7 @@
 #include <sanguis/server/events/message_fwd.hpp>
 #include <sanguis/server/global/context_fwd.hpp>
 #include <sanguis/server/states/unpaused_fwd.hpp>
-#include <sanguis/messages/client/base_fwd.hpp>
+#include <sanguis/messages/call/result_fwd.hpp>
 #include <sanguis/messages/client/cheat_fwd.hpp>
 #include <sanguis/messages/client/choose_perk_fwd.hpp>
 #include <sanguis/messages/client/console_command_fwd.hpp>
@@ -69,25 +69,25 @@ public:
 		sanguis::server::events::disconnect const &
 	);
 
-	boost::statechart::result
+	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::client::info const &
 	);
 
-	boost::statechart::result
+	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::client::console_command const &
 	);
 
-	boost::statechart::result
+	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::client::cheat const &
 	);
 
-	boost::statechart::result
+	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::client::choose_perk const &
@@ -96,12 +96,6 @@ public:
 	sanguis::server::global::context &
 	global_context();
 private:
-	boost::statechart::result
-	handle_default_msg(
-		sanguis::server::player_id,
-		sanguis::messages::client::base const &
-	);
-
 	sanguis::server::console console_;
 
 	fcppt::scoped_ptr<

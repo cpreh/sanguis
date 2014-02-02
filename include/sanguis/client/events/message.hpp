@@ -32,7 +32,7 @@ public:
 
 	// TODO: Can we get rid of the shared_ptr here?
 	sanguis::messages::server::shared_ptr
-	value() const;
+	get() const;
 private:
 	sanguis::messages::server::shared_ptr value_;
 };

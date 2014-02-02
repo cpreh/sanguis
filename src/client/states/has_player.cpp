@@ -1,4 +1,5 @@
 #include <sanguis/perk_type.hpp>
+#include <sanguis/client/dispatch.hpp>
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/log.hpp>
 #include <sanguis/client/machine.hpp>
@@ -19,13 +20,13 @@
 #include <sanguis/client/states/has_player.hpp>
 #include <sanguis/messages/adapted_types/level.hpp>
 #include <sanguis/messages/adapted_types/perk_tree.hpp>
+#include <sanguis/messages/call/result.hpp>
 #include <sanguis/messages/client/create.hpp>
 #include <sanguis/messages/client/choose_perk.hpp>
 #include <sanguis/messages/roles/remaining_perk_levels.hpp>
 #include <sanguis/messages/server/available_perks.hpp>
 #include <sanguis/messages/server/level_up.hpp>
 #include <sanguis/messages/server/remove_id.hpp>
-#include <sanguis/messages/server/call/object.hpp>
 #include <alda/serialization/load/optional.hpp>
 #include <alda/serialization/load/static_size.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -93,24 +94,29 @@ sanguis::client::states::has_player::react(
 	sanguis::client::events::message const &_event
 )
 {
-	static sanguis::messages::server::call::object<
-		boost::mpl::vector3<
-			sanguis::messages::server::available_perks,
-			sanguis::messages::server::level_up,
-			sanguis::messages::server::remove_id
-		>,
-		sanguis::client::states::has_player
-	> dispatcher;
+	auto const handle_default_msg(
+		[
+			this
+		](
+			sanguis::messages::server::base const &
+		)
+		{
+			return
+				this->forward_event();
+		}
+	);
 
 	return
-		dispatcher(
-			*_event.value(),
+		sanguis::client::dispatch<
+			boost::mpl::vector3<
+				sanguis::messages::server::available_perks,
+				sanguis::messages::server::level_up,
+				sanguis::messages::server::remove_id
+			>
+		>(
 			*this,
-			std::bind(
-				&sanguis::client::states::has_player::handle_default_msg,
-				this,
-				std::placeholders::_1
-			)
+			_event,
+			handle_default_msg
 		);
 }
 
@@ -127,7 +133,7 @@ sanguis::client::states::has_player::react(
 		this->discard_event();
 }
 
-boost::statechart::result
+sanguis::messages::call::result
 sanguis::client::states::has_player::operator()(
 	sanguis::messages::server::available_perks const &_message
 )
@@ -148,10 +154,12 @@ sanguis::client::states::has_player::operator()(
 	);
 
 	return
-		this->discard_event();
+		sanguis::messages::call::result(
+			this->discard_event()
+		);
 }
 
-boost::statechart::result
+sanguis::messages::call::result
 sanguis::client::states::has_player::operator()(
 	sanguis::messages::server::level_up const &_message
 )
@@ -167,16 +175,20 @@ sanguis::client::states::has_player::operator()(
 	);
 
 	return
-		this->forward_event();
+		sanguis::messages::call::result(
+			this->forward_event()
+		);
 }
 
-boost::statechart::result
+sanguis::messages::call::result
 sanguis::client::states::has_player::operator()(
 	sanguis::messages::server::remove_id const &
 )
 {
 	return
-		this->discard_event(); //transit<gameover>();
+		sanguis::messages::call::result(
+			this->discard_event()
+		); //transit<gameover>();
 }
 
 sanguis::client::perk::state &
@@ -184,15 +196,6 @@ sanguis::client::states::has_player::perk_state()
 {
 	return
 		*perk_state_;
-}
-
-boost::statechart::result
-sanguis::client::states::has_player::handle_default_msg(
-	sanguis::messages::server::base const &
-)
-{
-	return
-		this->forward_event();
 }
 
 void
@@ -203,7 +206,7 @@ sanguis::client::states::has_player::send_perk_choose(
 	this->context<
 		sanguis::client::machine
 	>().send(
-		*sanguis::messages::client::create(
+		sanguis::messages::client::create(
 			sanguis::messages::client::choose_perk(
 				_type
 			)

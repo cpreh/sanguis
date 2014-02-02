@@ -14,8 +14,8 @@
 #include <sanguis/client/events/tick_fwd.hpp>
 #include <sanguis/client/gui/hud/object_fwd.hpp>
 #include <sanguis/client/states/ingame_fwd.hpp>
+#include <sanguis/messages/call/result_fwd.hpp>
 #include <sanguis/messages/server/add_console_command_fwd.hpp>
-#include <sanguis/messages/server/base_fwd.hpp>
 #include <sanguis/messages/server/change_world_fwd.hpp>
 #include <sanguis/messages/server/console_print_fwd.hpp>
 #include <sanguis/messages/server/experience_fwd.hpp>
@@ -98,54 +98,56 @@ public:
 		sanguis::client::events::net_error const &
 	);
 
-	typedef boost::statechart::result result_type;
+	typedef
+	sanguis::messages::call::result
+	result_type;
 
-	boost::statechart::result
+	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::add_console_command const &
 	);
 
-	boost::statechart::result
+	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::change_world const &
 	);
 
-	boost::statechart::result
+	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::console_print const &
 	);
 
-	boost::statechart::result
+	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::experience const &
 	);
 
-	boost::statechart::result
+	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::give_weapon const &
 	);
 
-	boost::statechart::result
+	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::level_up const &
 	);
 
-	boost::statechart::result
+	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::magazine_remaining const &
 	);
 
-	boost::statechart::result
+	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::pause const &
 	);
 
-	boost::statechart::result
+	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::remove_weapon const &
 	);
 
-	boost::statechart::result
+	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::unpause const &
 	);
@@ -165,11 +167,6 @@ private:
 	void
 	handle_player_action(
 		sanguis::client::control::actions::any const &
-	);
-
-	boost::statechart::result
-	handle_default_msg(
-		sanguis::messages::server::base const &
 	);
 
 	fcppt::scoped_ptr<

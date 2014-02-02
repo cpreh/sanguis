@@ -146,7 +146,7 @@ sanguis::server::global::context::insert_player(
 	// send this before the world gets created
 	this->send_to_player(
 		_player_id,
-		*sanguis::messages::server::create(
+		sanguis::messages::server::create(
 			sanguis::messages::server::connected()
 		)
 	);
@@ -324,7 +324,7 @@ sanguis::server::global::context::player_target(
 
 	this->send_to_player(
 		_player_id,
-		*sanguis::messages::server::create(
+		sanguis::messages::server::create(
 			sanguis::messages::server::rotate(
 				player_ref.id(),
 				player_ref.angle().get()
@@ -402,7 +402,7 @@ sanguis::server::global::context::player_speed(
 
 	this->send_to_player(
 		_player_id,
-		*sanguis::messages::server::create(
+		sanguis::messages::server::create(
 			sanguis::messages::server::speed(
 				player_ref.id(),
 				player_ref.speed().get()
@@ -529,7 +529,7 @@ sanguis::server::global::context::remove_player(
 {
 	this->send_to_player(
 		_id,
-		*sanguis::messages::server::create(
+		sanguis::messages::server::create(
 			sanguis::messages::server::remove_id()
 		)
 	);

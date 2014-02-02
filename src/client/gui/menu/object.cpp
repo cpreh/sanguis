@@ -57,6 +57,9 @@ sge::parse::ini::entry_name const
 	),
 	config_quickstart_port_key(
 		FCPPT_TEXT("quickstartport")
+	),
+	config_player_name_key(
+		FCPPT_TEXT("playername")
 	);
 
 sge::font::string const
@@ -87,6 +90,47 @@ sanguis::client::gui::menu::object::object(
 		_renderer,
 		_font,
 		SGE_FONT_LIT("Quickstart")
+	),
+	player_name_label_(
+		_renderer,
+		_font,
+		SGE_FONT_LIT("Name: "),
+		sanguis::gui::text_color(
+			sge::image::color::predef::black()
+		)
+	),
+	player_name_edit_(
+		_renderer,
+		_font,
+		sge::font::from_fcppt_string(
+			sge::parse::ini::get_or_create(
+				_settings.sections(),
+				config_section,
+				config_player_name_key,
+				sge::parse::ini::value(
+					sge::parse::ini::string()
+				)
+			).get()
+		)
+	),
+	player_name_line_(
+		gui_context_,
+		sanguis::gui::widget::reference_alignment_vector{
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					player_name_label_
+				),
+				sge::rucksack::alignment::center
+			),
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					player_name_edit_
+				),
+				sge::rucksack::alignment::center
+			)
+		},
+		sge::rucksack::axis::x,
+		sanguis::gui::default_aspect()
 	),
 	hostname_label_(
 		_renderer,
@@ -230,6 +274,12 @@ sanguis::client::gui::menu::object::object(
 			),
 			sanguis::gui::widget::reference_alignment_pair(
 				sanguis::gui::widget::reference(
+					player_name_line_
+				),
+				sge::rucksack::alignment::center
+			),
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
 					connect_box_
 				),
 				sge::rucksack::alignment::center
@@ -299,26 +349,40 @@ sanguis::client::gui::menu::object::object(
 
 sanguis::client::gui::menu::object::~object()
 {
-	sge::parse::ini::set_or_create(
-		settings_.sections(),
-		config_section,
-		config_port_key,
-		sge::parse::ini::value(
-			sge::font::to_fcppt_string(
-				port_edit_.text()
-			)
+	auto const save_setting(
+		[
+			this
+		](
+			sge::parse::ini::entry_name const &_entry,
+			sge::font::string const &_value
 		)
+		{
+			sge::parse::ini::set_or_create(
+				settings_.sections(),
+				config_section,
+				_entry,
+				sge::parse::ini::value(
+					sge::font::to_fcppt_string(
+						_value
+					)
+				)
+			);
+		}
 	);
 
-	sge::parse::ini::set_or_create(
-		settings_.sections(),
-		config_section,
+	save_setting(
+		config_port_key,
+		port_edit_.text()
+	);
+
+	save_setting(
 		config_hostname_key,
-		sge::parse::ini::value(
-			sge::font::to_fcppt_string(
-				hostname_edit_.text()
-			)
-		)
+		hostname_edit_.text()
+	);
+
+	save_setting(
+		config_player_name_key,
+		player_name_edit_.text()
 	);
 }
 
@@ -366,6 +430,15 @@ sanguis::client::gui::menu::object::connection_error(
 	connect_button_.text(
 		connect_text
 	);*/
+}
+
+fcppt::string
+sanguis::client::gui::menu::object::player_name() const
+{
+	return
+		sge::font::to_fcppt_string(
+			player_name_edit_.text()
+		);
 }
 
 void

@@ -9,7 +9,7 @@
 #include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/messages/server/add_player.hpp>
 #include <sanguis/messages/server/add_own_player.hpp>
-#include <sanguis/messages/server/create.hpp>
+#include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/add_sight_callback.hpp>
 #include <sanguis/server/add_weapon_pickup_callback.hpp>
@@ -62,6 +62,7 @@
 #include <sanguis/server/weapons/default_irs.hpp>
 #include <sanguis/server/weapons/player_start_weapon.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -263,7 +264,8 @@ sanguis::server::entities::player::add_exp(
 sanguis::server::string const &
 sanguis::server::entities::player::name() const
 {
-	return name_;
+	return
+		name_;
 }
 
 bool
@@ -452,7 +454,8 @@ sanguis::server::entities::player::update_speed()
 		)
 	);
 
-	// FIXME: don't set the speed to max!
+	// TODO: don't set the speed to max!
+	// Allow for controls that are not binary
 	sanguis::server::entities::property::current_to_max(
 		this->movement_speed()
 	);
@@ -554,7 +557,7 @@ sanguis::messages::server::unique_ptr
 sanguis::server::entities::player::add_message_impl() const
 {
 	return
-		sanguis::messages::server::create(
+		sanguis::messages::server::create_ptr(
 			Message(
 				this->id(),
 				this->center().get(),
@@ -565,7 +568,10 @@ sanguis::server::entities::player::add_message_impl() const
 				this->primary_weapon_type(),
 				this->weapon_status(),
 				this->aura_types(),
-				this->buff_types()
+				this->buff_types(),
+				sge::charconv::fcppt_string_to_utf8(
+					this->name()
+				)
 			)
 		);
 }

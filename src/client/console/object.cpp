@@ -108,7 +108,7 @@ sanguis::client::console::object::server_callback(
 )
 {
 	send_(
-		*sanguis::messages::client::create(
+		sanguis::messages::client::create(
 			sanguis::messages::client::console_command(
 				sanguis::messages::convert::to_string_vector(
 					sanguis::from_console_arg_list(

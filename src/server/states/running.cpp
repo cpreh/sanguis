@@ -3,20 +3,20 @@
 #include <sanguis/to_console_arg_list.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/messages/adapted_types/string_vector.hpp>
+#include <sanguis/messages/call/result.hpp>
 #include <sanguis/messages/client/base_fwd.hpp>
 #include <sanguis/messages/client/cheat.hpp>
 #include <sanguis/messages/client/choose_perk.hpp>
 #include <sanguis/messages/client/console_command.hpp>
 #include <sanguis/messages/client/info.hpp>
-#include <sanguis/messages/client/call/object.hpp>
 #include <sanguis/messages/convert/from_string_vector.hpp>
 #include <sanguis/messages/roles/cheat.hpp>
 #include <sanguis/messages/roles/perk.hpp>
 #include <sanguis/messages/roles/player_name.hpp>
+#include <sanguis/server/dispatch.hpp>
 #include <sanguis/server/machine.hpp>
 #include <sanguis/server/make_unicast_callback.hpp>
 #include <sanguis/server/make_send_callback.hpp>
-#include <sanguis/server/message_functor.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/player_id_from_net.hpp>
 #include <sanguis/server/events/disconnect.hpp>
@@ -42,7 +42,6 @@
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <boost/statechart/result.hpp>
-#include <functional>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -114,36 +113,31 @@ sanguis::server::states::running::react(
 	sanguis::server::events::message const &_message
 )
 {
-	typedef sanguis::server::message_functor<
-		sanguis::server::states::running,
-		boost::statechart::result
-	> functor_type;
-
-	functor_type functor(
-		*this,
-		_message.id()
+	auto const handle_default_msg(
+		[
+			this
+		](
+			sanguis::server::player_id,
+			sanguis::messages::client::base const &
+		)
+		{
+			return
+				this->discard_event();
+		}
 	);
 
-	static sanguis::messages::client::call::object<
-		boost::mpl::vector4<
-			sanguis::messages::client::info,
-			sanguis::messages::client::cheat,
-			sanguis::messages::client::choose_perk,
-			sanguis::messages::client::console_command
-		>,
-		functor_type
-	> dispatcher;
-
 	return
-		dispatcher(
-			*_message.get(),
-			functor,
-			std::bind(
-				&sanguis::server::states::running::handle_default_msg,
-				this,
-				_message.id(),
-				std::placeholders::_1
-			)
+		sanguis::server::dispatch<
+			boost::mpl::vector4<
+				sanguis::messages::client::info,
+				sanguis::messages::client::cheat,
+				sanguis::messages::client::choose_perk,
+				sanguis::messages::client::console_command
+			>
+		>(
+			*this,
+			_message,
+			handle_default_msg
 		);
 }
 
@@ -170,7 +164,7 @@ sanguis::server::states::running::react(
 		this->discard_event();
 }
 
-boost::statechart::result
+sanguis::messages::call::result
 sanguis::server::states::running::operator()(
 	sanguis::server::player_id const _id,
 	sanguis::messages::client::info const &_message
@@ -189,7 +183,9 @@ sanguis::server::states::running::operator()(
 		);
 
 		return
-			this->discard_event();
+			sanguis::messages::call::result(
+				this->discard_event()
+			);
 	}
 
 	FCPPT_LOG_DEBUG(
@@ -211,10 +207,12 @@ sanguis::server::states::running::operator()(
 	);
 
 	return
-		this->discard_event();
+		sanguis::messages::call::result(
+			this->discard_event()
+		);
 }
 
-boost::statechart::result
+sanguis::messages::call::result
 sanguis::server::states::running::operator()(
 	sanguis::server::player_id const _id,
 	sanguis::messages::client::console_command const &_message
@@ -232,7 +230,9 @@ sanguis::server::states::running::operator()(
 		command.empty()
 	)
 		return
-			this->discard_event();
+			sanguis::messages::call::result(
+				this->discard_event()
+			);
 
 	FCPPT_LOG_DEBUG(
 		::logger,
@@ -262,10 +262,12 @@ sanguis::server::states::running::operator()(
 	}
 
 	return
-		this->discard_event();
+		sanguis::messages::call::result(
+			this->discard_event()
+		);
 }
 
-boost::statechart::result
+sanguis::messages::call::result
 sanguis::server::states::running::operator()(
 	sanguis::server::player_id const _id,
 	sanguis::messages::client::cheat const &_message
@@ -279,10 +281,12 @@ sanguis::server::states::running::operator()(
 	);
 
 	return
-		this->discard_event();
+		sanguis::messages::call::result(
+			this->discard_event()
+		);
 }
 
-boost::statechart::result
+sanguis::messages::call::result
 sanguis::server::states::running::operator()(
 	sanguis::server::player_id const _id,
 	sanguis::messages::client::choose_perk const &_message
@@ -296,7 +300,9 @@ sanguis::server::states::running::operator()(
 	);
 
 	return
-		this->discard_event();
+		sanguis::messages::call::result(
+			this->discard_event()
+		);
 }
 
 sanguis::server::global::context &
@@ -304,14 +310,4 @@ sanguis::server::states::running::global_context()
 {
 	return
 		*global_context_;
-}
-
-boost::statechart::result
-sanguis::server::states::running::handle_default_msg(
-	sanguis::server::player_id const,
-	sanguis::messages::client::base const &
-)
-{
-	return
-		this->discard_event();
 }

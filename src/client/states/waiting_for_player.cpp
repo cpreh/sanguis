@@ -1,3 +1,4 @@
+#include <sanguis/client/dispatch.hpp>
 #include <sanguis/client/log.hpp>
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/control/actions/nullary.hpp>
@@ -11,10 +12,9 @@
 #include <sanguis/client/states/waiting_for_player.hpp>
 #include <sanguis/client/states/has_player.hpp>
 #include <sanguis/client/states/ingame.hpp>
+#include <sanguis/messages/call/result.hpp>
 #include <sanguis/messages/server/add_own_player.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
-#include <sanguis/messages/server/create.hpp>
-#include <sanguis/messages/server/call/object.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
@@ -22,7 +22,6 @@
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <boost/statechart/result.hpp>
-#include <functional>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -50,22 +49,27 @@ sanguis::client::states::waiting_for_player::react(
 	sanguis::client::events::message const &_event
 )
 {
-	static sanguis::messages::server::call::object<
-		boost::mpl::vector1<
-			sanguis::messages::server::add_own_player
-		>,
-		sanguis::client::states::waiting_for_player
-	> dispatcher;
+	auto const handle_default_msg(
+		[
+			this
+		](
+			sanguis::messages::server::base const &
+		)
+		{
+			return
+				this->forward_event();
+		}
+	);
 
 	return
-		dispatcher(
-			*_event.value(),
+		sanguis::client::dispatch<
+			boost::mpl::vector1<
+				sanguis::messages::server::add_own_player
+			>
+		>(
 			*this,
-			std::bind(
-				&sanguis::client::states::waiting_for_player::handle_default_msg,
-				this,
-				std::placeholders::_1
-			)
+			_event,
+			handle_default_msg
 		);
 }
 
@@ -99,30 +103,19 @@ sanguis::client::states::waiting_for_player::react(
 		this->discard_event();
 }
 
-sanguis::client::states::waiting_for_player::result_type
+sanguis::messages::call::result
 sanguis::client::states::waiting_for_player::operator()(
-	sanguis::messages::server::add_own_player const &_message
+	sanguis::messages::server::add_own_player const &
 )
 {
 	this->post_event(
-		sanguis::client::events::message(
-			sanguis::messages::server::create(
-				_message
-			)
-		)
+		*this->triggering_event()
 	);
 
 	return
-		this->transit<
-			sanguis::client::states::has_player
-		>();
-}
-
-boost::statechart::result
-sanguis::client::states::waiting_for_player::handle_default_msg(
-	sanguis::messages::server::base const &
-)
-{
-	return
-		this->forward_event();
+		sanguis::messages::call::result(
+			this->transit<
+				sanguis::client::states::has_player
+			>()
+		);
 }

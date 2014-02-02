@@ -9,7 +9,7 @@
 #include <sanguis/client/events/tick_fwd.hpp>
 #include <sanguis/client/gui/menu/object.hpp>
 #include <sanguis/client/states/menu_fwd.hpp>
-#include <sanguis/messages/server/base_fwd.hpp>
+#include <sanguis/messages/call/result_fwd.hpp>
 #include <sanguis/messages/server/connected_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -64,7 +64,9 @@ public:
 	virtual
 	~menu();
 
-	typedef boost::statechart::result result_type;
+	typedef
+	sanguis::messages::call::result
+	result_type;
 
 	boost::statechart::result
 	react(
@@ -91,16 +93,11 @@ public:
 		sanguis::client::events::net_error const &
 	);
 
-	result_type
+	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::connected const &
 	);
 private:
-	boost::statechart::result
-	handle_default_msg(
-		sanguis::messages::server::base const &
-	);
-
 	sanguis::client::gui::menu::object menu_;
 };
 

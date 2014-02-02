@@ -2,7 +2,7 @@
 #include <sanguis/projectile_type.hpp>
 #include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/messages/server/add_projectile.hpp>
-#include <sanguis/messages/server/create.hpp>
+#include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/dim.hpp>
@@ -159,7 +159,7 @@ sanguis::server::entities::projectiles::projectile::add_message(
 ) const
 {
 	return
-		sanguis::messages::server::create(
+		sanguis::messages::server::create_ptr(
 			sanguis::messages::server::add_projectile(
 				this->id(),
 				this->center().get(),

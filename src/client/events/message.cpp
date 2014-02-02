@@ -24,7 +24,7 @@ sanguis::client::events::message::~message()
 }
 
 sanguis::messages::server::shared_ptr
-sanguis::client::events::message::value() const
+sanguis::client::events::message::get() const
 {
 	return
 		value_;

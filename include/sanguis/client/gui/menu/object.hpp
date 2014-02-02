@@ -12,13 +12,13 @@
 #include <sanguis/gui/widget/edit.hpp>
 #include <sanguis/gui/widget/text.hpp>
 #include <sge/font/object_fwd.hpp>
-#include <sge/font/string.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/string.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 
 
@@ -61,8 +61,11 @@ public:
 
 	void
 	connection_error(
-		fcppt::string const &message
+		fcppt::string const &
 	);
+
+	fcppt::string
+	player_name() const;
 private:
 	void
 	handle_quickstart();
@@ -79,27 +82,33 @@ private:
 
 	sanguis::client::gui::menu::callbacks::object const callbacks_;
 
-	sanguis::gui::widget::button quickstart_button_;
+		sanguis::gui::widget::button quickstart_button_;
 
-			sanguis::gui::widget::text hostname_label_;
+			sanguis::gui::widget::text player_name_label_;
 
-			sanguis::gui::widget::edit hostname_edit_;
+			sanguis::gui::widget::edit player_name_edit_;
 
-		sanguis::gui::widget::box_container hostname_line_;
+		sanguis::gui::widget::box_container player_name_line_;
 
-			sanguis::gui::widget::text port_label_;
+				sanguis::gui::widget::text hostname_label_;
 
-			sanguis::gui::widget::edit port_edit_;
+				sanguis::gui::widget::edit hostname_edit_;
 
-		sanguis::gui::widget::box_container port_line_;
+			sanguis::gui::widget::box_container hostname_line_;
 
-		sanguis::gui::widget::text connect_text_;
+				sanguis::gui::widget::text port_label_;
 
-		sanguis::gui::widget::button connect_button_;
+				sanguis::gui::widget::edit port_edit_;
 
-	sanguis::gui::widget::box_container connect_box_;
+			sanguis::gui::widget::box_container port_line_;
 
-	sanguis::gui::widget::button quit_button_;
+			sanguis::gui::widget::text connect_text_;
+
+			sanguis::gui::widget::button connect_button_;
+
+		sanguis::gui::widget::box_container connect_box_;
+
+		sanguis::gui::widget::button quit_button_;
 
 	sanguis::gui::widget::box_container main_container_;
 
