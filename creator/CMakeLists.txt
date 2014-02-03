@@ -145,5 +145,5 @@ include_directories(
 sanguis_add_library(
 	sanguiscreator
 	"${SANGUIS_CREATOR_FILES}"
-	"${fcppt_core_TARGET};${sgecore_TARGET};${sgeparse_TARGET}"
+	"${fcppt_core_TARGET};${sgecore_TARGET};${sgeparse_TARGET};${sgeparsejson_TARGET}"
 )

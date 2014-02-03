@@ -2182,6 +2182,8 @@ target_link_libraries(
 	${sgeinput_TARGET}
 	${sgelog_TARGET}
 	${sgeparse_TARGET}
+	${sgeparseini_TARGET}
+	${sgeparsejson_TARGET}
 	${sgesprite_TARGET}
 	${sgerenderer_TARGET}
 	${sgesystems_TARGET}

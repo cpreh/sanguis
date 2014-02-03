@@ -101,6 +101,8 @@ set(
 	input
 	log
 	parse
+	parseini
+	parsejson
 	renderer
 	rucksack
 	sprite
