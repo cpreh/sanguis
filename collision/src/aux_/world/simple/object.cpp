@@ -230,7 +230,9 @@ sanguis::collision::aux_::world::simple::object::update(
 						);
 
 		for(
-			auto const ghost : ghosts_
+			auto const ghost
+			:
+			ghosts_
 		)
 			ghost->update_body(
 				*body1
