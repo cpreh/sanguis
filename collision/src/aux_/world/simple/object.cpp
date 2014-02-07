@@ -66,6 +66,13 @@ sanguis::collision::aux_::world::simple::object::create_body(
 					this,
 					std::placeholders::_1
 				)
+			),
+			sanguis::collision::aux_::world::simple::body_move_callback(
+				std::bind(
+					&sanguis::collision::aux_::world::simple::object::move_body,
+					this,
+					std::placeholders::_1
+				)
 			)
 		)
 	);
@@ -136,7 +143,9 @@ sanguis::collision::aux_::world::simple::object::create_ghost(
 	);
 
 	for(
-		auto const body : bodies_
+		auto const body
+		:
+		bodies_
 	)
 		result->update_body(
 			*body
@@ -159,7 +168,7 @@ sanguis::collision::aux_::world::simple::object::update(
 		bodies_
 	)
 	{
-		body->center(
+		body->move(
 			sanguis::collision::center(
 				body->center().get()
 				+

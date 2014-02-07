@@ -1,5 +1,5 @@
-#ifndef SANGUIS_COLLISION_AUX__WORLD_SIMPLE_BODY_REMOVE_CALLBACK_HPP_INCLUDED
-#define SANGUIS_COLLISION_AUX__WORLD_SIMPLE_BODY_REMOVE_CALLBACK_HPP_INCLUDED
+#ifndef SANGUIS_COLLISION_AUX__WORLD_SIMPLE_BODY_MOVE_CALLBACK_HPP_INCLUDED
+#define SANGUIS_COLLISION_AUX__WORLD_SIMPLE_BODY_MOVE_CALLBACK_HPP_INCLUDED
 
 #include <sanguis/collision/aux_/world/simple/body_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
@@ -25,7 +25,7 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 			sanguis::collision::aux_::world::simple::body &
 		)
 	>,
-	body_remove_callback
+	body_move_callback
 );
 
 }

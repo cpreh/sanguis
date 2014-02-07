@@ -6,6 +6,7 @@
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/aux_/world/simple/body_base_hook.hpp>
 #include <sanguis/collision/aux_/world/simple/body_fwd.hpp>
+#include <sanguis/collision/aux_/world/simple/body_move_callback.hpp>
 #include <sanguis/collision/aux_/world/simple/body_remove_callback.hpp>
 #include <sanguis/collision/world/body.hpp>
 #include <sanguis/collision/world/body_base_fwd.hpp>
@@ -43,7 +44,8 @@ class body
 public:
 	body(
 		sanguis::collision::world::body_parameters const &,
-		sanguis::collision::aux_::world::simple::body_remove_callback const &
+		sanguis::collision::aux_::world::simple::body_remove_callback const &,
+		sanguis::collision::aux_::world::simple::body_move_callback const &
 	);
 
 	~body()
@@ -54,6 +56,11 @@ public:
 		sanguis::collision::center
 	)
 	override;
+
+	void
+	move(
+		sanguis::collision::center
+	);
 
 	sanguis::collision::center const
 	center() const
@@ -79,6 +86,8 @@ public:
 	body_base() const;
 private:
 	sanguis::collision::aux_::world::simple::body_remove_callback const body_remove_callback_;
+
+	sanguis::collision::aux_::world::simple::body_move_callback const body_move_callback_;
 
 	sanguis::collision::world::position_change_callback const position_change_callback_;
 

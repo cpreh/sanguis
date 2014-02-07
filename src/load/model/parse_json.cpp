@@ -8,7 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sge::parse::json::start const
+sge::parse::json::start
 sanguis::load::model::parse_json(
 	boost::filesystem::path const &_path
 )

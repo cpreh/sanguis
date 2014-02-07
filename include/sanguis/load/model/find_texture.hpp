@@ -12,7 +12,7 @@ namespace load
 namespace model
 {
 
-sanguis::load::model::optional_texture_identifier const
+sanguis::load::model::optional_texture_identifier
 find_texture(
 	sge::parse::json::object const &
 );

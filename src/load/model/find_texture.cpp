@@ -9,7 +9,7 @@
 #include <fcppt/text.hpp>
 
 
-sanguis::load::model::optional_texture_identifier const
+sanguis::load::model::optional_texture_identifier
 sanguis::load::model::find_texture(
 	sge::parse::json::object const &_object
 )

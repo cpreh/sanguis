@@ -11,7 +11,7 @@ namespace load
 namespace model
 {
 
-fcppt::string const
+fcppt::string
 remove_slash(
 	fcppt::string const &
 );

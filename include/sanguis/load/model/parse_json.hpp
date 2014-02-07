@@ -14,7 +14,7 @@ namespace load
 namespace model
 {
 
-sge::parse::json::start const
+sge::parse::json::start
 parse_json(
 	boost::filesystem::path const &
 );

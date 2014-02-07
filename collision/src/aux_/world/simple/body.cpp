@@ -12,12 +12,16 @@
 
 sanguis::collision::aux_::world::simple::body::body(
 	sanguis::collision::world::body_parameters const &_parameters,
-	sanguis::collision::aux_::world::simple::body_remove_callback const &_body_remove_callback
+	sanguis::collision::aux_::world::simple::body_remove_callback const &_body_remove_callback,
+	sanguis::collision::aux_::world::simple::body_move_callback const &_body_move_callback
 )
 :
 	sanguis::collision::world::body(),
 	body_remove_callback_(
 		_body_remove_callback
+	),
+	body_move_callback_(
+		_body_move_callback
 	),
 	position_change_callback_(
 		_parameters.position_change_callback()
@@ -42,13 +46,26 @@ sanguis::collision::aux_::world::simple::body::body(
 
 sanguis::collision::aux_::world::simple::body::~body()
 {
-	body_remove_callback_(
+	body_remove_callback_.get()(
 		*this
 	);
 }
 
 void
 sanguis::collision::aux_::world::simple::body::center(
+	sanguis::collision::center const _center
+)
+{
+	center_ =
+		_center;
+
+	body_move_callback_.get()(
+		*this
+	);
+}
+
+void
+sanguis::collision::aux_::world::simple::body::move(
 	sanguis::collision::center const _center
 )
 {
