@@ -34,7 +34,7 @@
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/auras/update_sight.hpp>
 #include <sanguis/server/auras/weapon_pickup_candidates.hpp>
-#include <sanguis/server/damage/armor.hpp>
+#include <sanguis/server/damage/armor_array_fwd.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/player.hpp>
@@ -84,7 +84,7 @@ sanguis::server::entities::player::player(
 	sanguis::random_generator &_random_generator,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::health const _health,
-	sanguis::server::damage::armor const &_armor,
+	sanguis::server::damage::armor_array const &_armor,
 	sanguis::server::entities::movement_speed const _speed,
 	sanguis::server::string const &_name,
 	sanguis::server::player_id const _player_id

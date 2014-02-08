@@ -29,7 +29,8 @@ sanguis::server::weapons::melee::melee(
 	sanguis::random_generator &_random_generator,
 	sanguis::server::weapons::range const _range,
 	sanguis::server::weapons::base_cooldown const _base_cooldown,
-	sanguis::server::weapons::damage const _damage
+	sanguis::server::weapons::damage const _damage,
+	sanguis::server::damage::array const &_damage_values
 )
 :
 	sanguis::server::weapons::weapon(
@@ -51,6 +52,9 @@ sanguis::server::weapons::melee::melee(
 	),
 	damage_(
 		_damage
+	),
+	damage_values_(
+		_damage_values
 	)
 {
 }
@@ -70,7 +74,8 @@ sanguis::server::weapons::melee::do_attack(
 			sanguis::server::entities::projectiles::melee
 		>(
 			_attack.team(),
-			damage_.value()
+			damage_.value(),
+			damage_values_
 		),
 		sanguis::server::entities::insert_parameters_center(
 			sanguis::server::center(

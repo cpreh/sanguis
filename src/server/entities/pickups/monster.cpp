@@ -8,8 +8,10 @@
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/ai/create_friend.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
+#include <sanguis/server/damage/full.hpp>
 #include <sanguis/server/damage/list.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
+#include <sanguis/server/damage/normal.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/friend.hpp>
@@ -121,7 +123,11 @@ sanguis::server::entities::pickups::monster::do_pickup(
 					std::sqrt(
 						difficulty_.get()
 					)
-				)
+				),
+				sanguis::server::damage::list{
+					sanguis::server::damage::normal =
+						sanguis::server::damage::full
+				}
 			)
 		),
 		sanguis::server::entities::insert_parameters_center(

@@ -6,7 +6,10 @@
 #include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/container.hpp>
+#include <sanguis/server/damage/full.hpp>
+#include <sanguis/server/damage/list.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
+#include <sanguis/server/damage/normal.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
@@ -33,7 +36,7 @@ sanguis::server::entities::enemies::factory::wolf(
 			_parameters,
 			sanguis::server::damage::no_armor(),
 			sanguis::server::health(
-				6.f
+				10.f
 			),
 			sanguis::server::entities::movement_speed(
 				40.f
@@ -66,7 +69,11 @@ sanguis::server::entities::enemies::factory::wolf(
 					std::sqrt(
 						_parameters.difficulty().get()
 					)
-				)
+				),
+				sanguis::server::damage::list{
+					sanguis::server::damage::normal =
+						sanguis::server::damage::full
+				}
 			),
 			sanguis::server::pickup_probability(
 				0.25f

@@ -35,6 +35,7 @@
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
 #include <sanguis/server/entities/optional_base_ref_fwd.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/entities/with_id_fwd.hpp>
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
@@ -282,6 +283,11 @@ private:
 		sanguis::random_generator &
 	);
 
+	sanguis::server::entities::with_id &
+	entity(
+		sanguis::entity_id
+	);
+
 	sanguis::world_id const id_;
 
 	sanguis::creator::seed const seed_;
@@ -300,19 +306,17 @@ private:
 
 	sanguis::server::environment::load_context &load_context_;
 
-	typedef fcppt::scoped_ptr<
+	typedef
+	fcppt::scoped_ptr<
 		sanguis::collision::world::object
-	> collision_world_scoped_ptr;
+	>
+	collision_world_scoped_ptr;
 
 	collision_world_scoped_ptr const collision_world_;
 
-	sight_range_map sight_ranges_;
+	sanguis::server::world::sight_range_map sight_ranges_;
 
 	sanguis::diff_timer collision_timer_;
-
-	typedef fcppt::scoped_ptr<
-		sanguis::server::environment::object
-	> environment_scoped_ptr;
 
 	sanguis::server::world::entity_map entities_;
 

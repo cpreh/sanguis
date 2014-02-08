@@ -32,6 +32,8 @@ set(
 	include/sanguis/gui/widget/edit_fwd.hpp
 	include/sanguis/gui/widget/image.hpp
 	include/sanguis/gui/widget/image_fwd.hpp
+	include/sanguis/gui/widget/optional_focus.hpp
+	include/sanguis/gui/widget/optional_focus_fwd.hpp
 	include/sanguis/gui/widget/optional_ref.hpp
 	include/sanguis/gui/widget/optional_ref_fwd.hpp
 	include/sanguis/gui/widget/reference.hpp

@@ -8,10 +8,9 @@
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/ai/create_simple.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
-#include <sanguis/server/damage/armor.hpp>
+#include <sanguis/server/damage/armor_list.hpp>
+#include <sanguis/server/damage/armor_unit.hpp>
 #include <sanguis/server/damage/fire.hpp>
-#include <sanguis/server/damage/list.hpp>
-#include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/friend.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
@@ -83,14 +82,12 @@ sanguis::server::weapons::sentry::do_attack(
 					this->random_generator(),
 					sanguis::friend_type::sentry,
 					_attack.environment().load_context(),
-					sanguis::server::damage::armor(
-						sanguis::server::damage::list(
-							sanguis::server::damage::fire =
-								sanguis::server::damage::unit(
-									0.9f
-								)
-						)
-					),
+					sanguis::server::damage::armor_list{
+						sanguis::server::damage::fire =
+							sanguis::server::damage::armor_unit(
+								0.9f
+							)
+					},
 					health_,
 					sanguis::server::entities::movement_speed(
 						0.f

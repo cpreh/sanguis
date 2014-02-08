@@ -27,7 +27,7 @@ sanguis::server::console::console(
 )
 :
 	object_(
-		SGE_FONT_LIT('/') // TODO: is this right?
+		SGE_FONT_LIT('/')
 	),
 	send_(
 		_send

@@ -11,8 +11,8 @@
 #include <sanguis/server/buffs/burn_create.hpp>
 #include <sanguis/server/buffs/burn_interval.hpp>
 #include <sanguis/server/damage/fire.hpp>
+#include <sanguis/server/damage/full.hpp>
 #include <sanguis/server/damage/list.hpp>
-#include <sanguis/server/damage/unit.hpp>
 
 
 namespace sanguis
@@ -48,12 +48,10 @@ burn_create(
 				_diff_clock,
 				_interval,
 				_damage,
-				sanguis::server::damage::list(
+				sanguis::server::damage::list{
 					sanguis::server::damage::fire =
-						sanguis::server::damage::unit(
-							1.f
-						)
-				)
+						sanguis::server::damage::full
+				}
 			)
 		);
 }

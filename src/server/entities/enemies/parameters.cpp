@@ -9,10 +9,9 @@
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/auras/unique_ptr.hpp>
-#include <sanguis/server/damage/armor.hpp>
-#include <sanguis/server/damage/array.hpp>
+#include <sanguis/server/damage/armor_array.hpp>
+#include <sanguis/server/damage/armor_unit.hpp>
 #include <sanguis/server/damage/type.hpp>
-#include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
@@ -35,7 +34,7 @@ sanguis::server::entities::enemies::parameters::parameters(
 	sanguis::random_generator &_random_generator,
 	sanguis::creator::enemy_type const _enemy_type,
 	sanguis::server::environment::load_context &_load_context,
-	sanguis::server::damage::armor const &_armor,
+	sanguis::server::damage::armor_array const &_armor,
 	sanguis::server::health const _health,
 	sanguis::server::entities::movement_speed const _movement_speed,
 	sanguis::server::ai::create_function const &_ai_create_function,
@@ -145,7 +144,7 @@ sanguis::server::entities::enemies::parameters::load_context() const
 		load_context_;
 }
 
-sanguis::server::damage::armor const &
+sanguis::server::damage::armor_array const &
 sanguis::server::entities::enemies::parameters::armor() const
 {
 	return
@@ -350,24 +349,13 @@ sanguis::server::entities::enemies::parameters::add_aura(
 sanguis::server::entities::enemies::parameters &
 sanguis::server::entities::enemies::parameters::armor_element(
 	sanguis::server::damage::type const _type,
-	sanguis::server::damage::unit const _unit
+	sanguis::server::damage::armor_unit const _unit
 )
 {
-	// TODO: Make a proper armor class!
-
-	sanguis::server::damage::array new_array(
-		armor_.get()
-	);
-
-	new_array[
+	armor_[
 		_type
 	] =
 		_unit;
-
-	armor_ =
-		sanguis::server::damage::armor(
-			new_array
-		);
 
 	return
 		*this;

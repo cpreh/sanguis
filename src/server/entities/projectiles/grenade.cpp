@@ -10,10 +10,8 @@
 #include <sanguis/server/collision/distance_pos_pos.hpp>
 #include <sanguis/server/damage/fire.hpp>
 #include <sanguis/server/damage/list.hpp>
-#include <sanguis/server/damage/meta.hpp>
 #include <sanguis/server/damage/piercing.hpp>
 #include <sanguis/server/damage/unit.hpp>
-#include <sanguis/server/damage/wrapper.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/optional_base_ref.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
@@ -138,17 +136,16 @@ sanguis::server::entities::projectiles::grenade::remove()
 			this->team(),
 			this->aoe(),
 			damage_,
-			sanguis::server::damage::list(
+			sanguis::server::damage::list{
 				sanguis::server::damage::piercing =
 					sanguis::server::damage::unit(
 						0.5f
-					)
-			)(
+					),
 				sanguis::server::damage::fire =
 					sanguis::server::damage::unit(
 						0.5f
 					)
-			)
+			}
 		),
 		sanguis::server::entities::insert_parameters_center(
 			this->center()

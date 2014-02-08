@@ -23,8 +23,7 @@ enum class type
 	piercing,
 	fire,
 	ice,
-	pure,
-	fcppt_maximum = pure
+	fcppt_maximum = ice
 };
 
 FCPPT_PP_POP_WARNING

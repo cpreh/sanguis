@@ -74,13 +74,12 @@ sanguis::server::entities::projectiles::rocket::remove()
 			this->team(),
 			this->aoe(),
 			damage_,
-			sanguis::server::damage::list(
+			sanguis::server::damage::list{
 				sanguis::server::damage::fire =
-					sanguis::server::damage::full
-			)(
+					sanguis::server::damage::full,
 				sanguis::server::damage::piercing =
 					sanguis::server::damage::full
-			)
+			}
 		),
 		sanguis::server::entities::insert_parameters_center(
 			this->center()

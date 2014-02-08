@@ -5,7 +5,7 @@
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/container.hpp>
-#include <sanguis/server/damage/armor.hpp>
+#include <sanguis/server/damage/armor_array.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
@@ -26,7 +26,7 @@
 sanguis::server::entities::unique_ptr
 sanguis::server::entities::enemies::factory::make(
 	sanguis::server::entities::enemies::factory::parameters const &_parameters,
-	sanguis::server::damage::armor const &_armor,
+	sanguis::server::damage::armor_array const &_armor,
 	sanguis::server::health const _health,
 	sanguis::server::entities::movement_speed const _movement_speed,
 	sanguis::server::ai::create_function const &_ai_create_function,

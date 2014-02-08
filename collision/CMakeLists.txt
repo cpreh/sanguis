@@ -88,6 +88,7 @@ set(
 	src/include/sanguis/collision/aux_/world/simple/body_list.hpp
 	src/include/sanguis/collision/aux_/world/simple/body_list_grid.hpp
 	src/include/sanguis/collision/aux_/world/simple/body_list_grid_fwd.hpp
+	src/include/sanguis/collision/aux_/world/simple/body_move_callback.hpp
 	src/include/sanguis/collision/aux_/world/simple/body_remove_callback.hpp
 	src/include/sanguis/collision/aux_/world/simple/body_unique_ptr.hpp
 	src/include/sanguis/collision/aux_/world/simple/collides.hpp

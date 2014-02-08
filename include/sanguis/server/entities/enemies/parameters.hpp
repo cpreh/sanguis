@@ -11,9 +11,9 @@
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/auras/unique_ptr.hpp>
-#include <sanguis/server/damage/armor.hpp>
+#include <sanguis/server/damage/armor_array.hpp>
+#include <sanguis/server/damage/armor_unit.hpp>
 #include <sanguis/server/damage/type_fwd.hpp>
-#include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
@@ -45,7 +45,7 @@ public:
 		sanguis::random_generator &,
 		sanguis::creator::enemy_type,
 		sanguis::server::environment::load_context &,
-		sanguis::server::damage::armor const &,
+		sanguis::server::damage::armor_array const &,
 		sanguis::server::health,
 		sanguis::server::entities::movement_speed,
 		sanguis::server::ai::create_function const &,
@@ -80,7 +80,7 @@ public:
 	sanguis::server::environment::load_context &
 	load_context() const;
 
-	sanguis::server::damage::armor const &
+	sanguis::server::damage::armor_array const &
 	armor() const;
 
 	sanguis::server::health const
@@ -167,7 +167,7 @@ public:
 	sanguis::server::entities::enemies::parameters &
 	armor_element(
 		sanguis::server::damage::type,
-		sanguis::server::damage::unit
+		sanguis::server::damage::armor_unit
 	);
 private:
 	sanguis::diff_clock const &diff_clock_;
@@ -178,7 +178,7 @@ private:
 
 	sanguis::server::environment::load_context &load_context_;
 
-	sanguis::server::damage::armor armor_;
+	sanguis::server::damage::armor_array armor_;
 
 	sanguis::server::health health_;
 

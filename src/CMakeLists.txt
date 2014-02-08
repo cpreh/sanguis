@@ -717,6 +717,7 @@ set(
 	include/sanguis/messages/client/unpause_fwd.hpp
 	include/sanguis/messages/convert/from_string_vector.hpp
 	include/sanguis/messages/convert/from_weapon_attribute_vector.hpp
+	include/sanguis/messages/convert/to_magazine_size.hpp
 	include/sanguis/messages/convert/to_string_vector.hpp
 	include/sanguis/messages/convert/to_weapon_attribute_vector.hpp
 	include/sanguis/messages/role_name.hpp
@@ -1047,10 +1048,24 @@ set(
 	include/sanguis/server/create.hpp
 	include/sanguis/server/create_original.hpp
 	include/sanguis/server/create_player.hpp
-	include/sanguis/server/damage/all.hpp
-	include/sanguis/server/damage/armor.hpp
+	include/sanguis/server/damage/armor_array.hpp
+	include/sanguis/server/damage/armor_array_fwd.hpp
+	include/sanguis/server/damage/armor_list.hpp
+	include/sanguis/server/damage/armor_list_fwd.hpp
+	include/sanguis/server/damage/armor_meta.hpp
+	include/sanguis/server/damage/armor_meta_fwd.hpp
+	include/sanguis/server/damage/armor_unit.hpp
+	include/sanguis/server/damage/armor_unit_fwd.hpp
 	include/sanguis/server/damage/array.hpp
 	include/sanguis/server/damage/array_fwd.hpp
+	include/sanguis/server/damage/basic_array.hpp
+	include/sanguis/server/damage/basic_array_fwd.hpp
+	include/sanguis/server/damage/basic_list_decl.hpp
+	include/sanguis/server/damage/basic_list_fwd.hpp
+	include/sanguis/server/damage/basic_list_impl.hpp
+	include/sanguis/server/damage/basic_meta_decl.hpp
+	include/sanguis/server/damage/basic_meta_fwd.hpp
+	include/sanguis/server/damage/basic_meta_impl.hpp
 	include/sanguis/server/damage/fire.hpp
 	include/sanguis/server/damage/full.hpp
 	include/sanguis/server/damage/ice.hpp
@@ -1061,11 +1076,11 @@ set(
 	include/sanguis/server/damage/no_armor.hpp
 	include/sanguis/server/damage/normal.hpp
 	include/sanguis/server/damage/piercing.hpp
-	include/sanguis/server/damage/pure.hpp
 	include/sanguis/server/damage/type.hpp
 	include/sanguis/server/damage/type_fwd.hpp
 	include/sanguis/server/damage/type_to_string.hpp
 	include/sanguis/server/damage/unit.hpp
+	include/sanguis/server/damage/unit_fwd.hpp
 	include/sanguis/server/damage/wrapper.hpp
 	include/sanguis/server/damage/wrapper_fwd.hpp
 	include/sanguis/server/dest_world_id.hpp
@@ -1262,6 +1277,7 @@ set(
 	include/sanguis/server/events/tick_fwd.hpp
 	include/sanguis/server/exp.hpp
 	include/sanguis/server/exp_for_level.hpp
+	include/sanguis/server/exp_to_net.hpp
 	include/sanguis/server/global/context.hpp
 	include/sanguis/server/global/context_fwd.hpp
 	include/sanguis/server/global/dest_world_pair.hpp
@@ -1807,6 +1823,7 @@ set(
 	src/messages/client/unpause.cpp
 	src/messages/convert/from_string_vector.cpp
 	src/messages/convert/from_weapon_attribute_vector.cpp
+	src/messages/convert/to_magazine_size.cpp
 	src/messages/convert/to_string_vector.cpp
 	src/messages/convert/to_weapon_attribute_vector.cpp
 	src/messages/server/add_aoe_projectile.cpp
@@ -1912,7 +1929,8 @@ set(
 	src/server/create.cpp
 	src/server/create_original.cpp
 	src/server/create_player.cpp
-	src/server/damage/all.cpp
+	src/server/damage/armor_list.cpp
+	src/server/damage/armor_meta.cpp
 	src/server/damage/fire.cpp
 	src/server/damage/full.cpp
 	src/server/damage/ice.cpp
@@ -1921,7 +1939,6 @@ set(
 	src/server/damage/no_armor.cpp
 	src/server/damage/normal.cpp
 	src/server/damage/piercing.cpp
-	src/server/damage/pure.cpp
 	src/server/damage/type_to_string.cpp
 	src/server/damage/wrapper.cpp
 	src/server/entities/auto_weak_link.cpp
@@ -2027,6 +2044,7 @@ set(
 	src/server/events/message.cpp
 	src/server/events/tick.cpp
 	src/server/exp_for_level.cpp
+	src/server/exp_to_net.cpp
 	src/server/global/context.cpp
 	src/server/global/generate_worlds.cpp
 	src/server/global/load_context.cpp

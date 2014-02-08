@@ -21,7 +21,7 @@ sanguis::server::entities::enemies::modifiers::freezing(
 			sanguis::server::buffs::slow
 		>(
 			sanguis::server::radius(
-				400.f
+				200.f
 			),
 			sanguis::server::team::monsters,
 			sanguis::server::buffs::slow_factor(

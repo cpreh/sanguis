@@ -1,5 +1,6 @@
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
+#include <sanguis/server/damage/array.hpp>
 #include <sanguis/server/damage/full.hpp>
 #include <sanguis/server/damage/list.hpp>
 #include <sanguis/server/damage/meta.hpp>
@@ -12,7 +13,8 @@
 
 sanguis::server::entities::projectiles::melee::melee(
 	sanguis::server::team const _team,
-	sanguis::server::damage::unit const _damage
+	sanguis::server::damage::unit const _damage,
+	sanguis::server::damage::array const &_damage_values
 )
 :
 	sanguis::server::entities::projectiles::aoe_damage(
@@ -21,10 +23,7 @@ sanguis::server::entities::projectiles::melee::melee(
 			1.f
 		),
 		_damage,
-		sanguis::server::damage::list(
-			sanguis::server::damage::normal =
-				sanguis::server::damage::full
-		)
+		_damage_values
 	)
 {
 }

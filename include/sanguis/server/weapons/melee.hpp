@@ -4,6 +4,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
+#include <sanguis/server/damage/array.hpp>
 #include <sanguis/server/weapons/attack_result_fwd.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/damage.hpp>
@@ -34,7 +35,8 @@ public:
 		sanguis::random_generator &,
 		sanguis::server::weapons::range,
 		sanguis::server::weapons::base_cooldown,
-		sanguis::server::weapons::damage
+		sanguis::server::weapons::damage,
+		sanguis::server::damage::array const &
 	);
 
 	~melee();
@@ -50,6 +52,8 @@ private:
 	override;
 
 	sanguis::server::weapons::attributes::damage const damage_;
+
+	sanguis::server::damage::array const damage_values_;
 };
 
 }

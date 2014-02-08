@@ -16,7 +16,7 @@
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/string.hpp>
 #include <sanguis/server/team_fwd.hpp>
-#include <sanguis/server/damage/armor.hpp>
+#include <sanguis/server/damage/armor_array_fwd.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/with_auras_id.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
@@ -68,7 +68,7 @@ public:
 		sanguis::random_generator &,
 		sanguis::server::environment::load_context &,
 		sanguis::server::health,
-		sanguis::server::damage::armor const &,
+		sanguis::server::damage::armor_array const &,
 		sanguis::server::entities::movement_speed,
 		sanguis::server::string const &name,
 		sanguis::server::player_id

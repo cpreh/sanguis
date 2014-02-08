@@ -6,7 +6,7 @@
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/auras/container.hpp>
-#include <sanguis/server/damage/armor.hpp>
+#include <sanguis/server/damage/armor_array.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/factory/parameters_fwd.hpp>
@@ -27,7 +27,7 @@ namespace factory
 sanguis::server::entities::unique_ptr
 make(
 	sanguis::server::entities::enemies::factory::parameters const &,
-	sanguis::server::damage::armor const &,
+	sanguis::server::damage::armor_array const &,
 	sanguis::server::health,
 	sanguis::server::entities::movement_speed,
 	sanguis::server::ai::create_function const &,

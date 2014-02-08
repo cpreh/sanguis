@@ -21,6 +21,7 @@
 #include <sanguis/creator/opening_container.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/top_result.hpp>
+#include <sanguis/messages/convert/to_magazine_size.hpp>
 #include <sanguis/messages/convert/to_weapon_attribute_vector.hpp>
 #include <sanguis/messages/server/add_aura.hpp>
 #include <sanguis/messages/server/add_buff.hpp>
@@ -42,13 +43,12 @@
 #include <sanguis/messages/server/rotate.hpp>
 #include <sanguis/messages/server/speed.hpp>
 #include <sanguis/messages/server/weapon_status.hpp>
-#include <sanguis/messages/types/exp.hpp>
-#include <sanguis/messages/types/magazine_size.hpp>
 #include <sanguis/messages/types/size.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/exp_for_level.hpp>
+#include <sanguis/server/exp_to_net.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/level.hpp>
 #include <sanguis/server/log.hpp>
@@ -84,14 +84,11 @@
 #include <sge/timer/elapsed_and_reset.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/truncation_check_cast.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/assign/make_container.hpp>
-#include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/size.hpp>
-#include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/warning.hpp>
@@ -99,7 +96,7 @@
 #include <chrono>
 #include <functional>
 #include <memory>
-#include <type_traits>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -499,19 +496,13 @@ sanguis::server::world::object::got_weapon(
 		sanguis::messages::server::create(
 			sanguis::messages::server::give_weapon(
 				_description.weapon_type(),
-				fcppt::truncation_check_cast<
-					sanguis::messages::types::magazine_size
-				>(
+				sanguis::messages::convert::to_magazine_size(
 					_description.magazine_size().get()
 				),
-				fcppt::truncation_check_cast<
-					sanguis::messages::types::magazine_size
-				>(
+				sanguis::messages::convert::to_magazine_size(
 					_description.magazine_extra().get()
 				),
-				fcppt::truncation_check_cast<
-					sanguis::messages::types::magazine_size
-				>(
+				sanguis::messages::convert::to_magazine_size(
 					_description.magazine_remaining().get()
 				),
 				sanguis::messages::convert::to_weapon_attribute_vector(
@@ -550,10 +541,7 @@ sanguis::server::world::object::magazine_remaining(
 		sanguis::messages::server::create(
 			sanguis::messages::server::magazine_remaining(
 				_is_primary,
-				// TODO: Put this into a function!
-				fcppt::truncation_check_cast<
-					sanguis::messages::types::magazine_size
-				>(
+				sanguis::messages::convert::to_magazine_size(
 					_magazine_remaining.get()
 				)
 			)
@@ -673,14 +661,8 @@ sanguis::server::world::object::exp_changed(
 		_player_id,
 		sanguis::messages::server::create(
 			sanguis::messages::server::experience(
-				fcppt::cast::to_unsigned(
-					fcppt::cast::float_to_int<
-						std::make_signed<
-							sanguis::messages::types::exp
-						>::type
-					>(
-						_exp.get()
-					)
+				sanguis::server::exp_to_net(
+					_exp
 				)
 			)
 		)
@@ -698,20 +680,13 @@ sanguis::server::world::object::level_changed(
 		sanguis::messages::server::create(
 			sanguis::messages::server::level_up(
 				_level.get(),
-				// TODO: Refactor this into a function!
-				fcppt::cast::to_unsigned(
-					fcppt::cast::float_to_int<
-						std::make_signed<
-							sanguis::messages::types::exp
-						>::type
-					>(
-						sanguis::server::exp_for_level(
-							_level
-							+
-							sanguis::server::level(
-								1u
-							)
-						).get()
+				sanguis::server::exp_to_net(
+					sanguis::server::exp_for_level(
+						_level
+						+
+						sanguis::server::level(
+							1u
+						)
 					)
 				)
 			)
@@ -745,7 +720,9 @@ sanguis::server::world::object::request_transfer(
 	);
 
 	FCPPT_ASSERT_ERROR(
-		it != entities_.end()
+		it
+		!=
+		entities_.end()
 	);
 
 	sanguis::server::entities::base &entity(
@@ -838,19 +815,11 @@ sanguis::server::world::object::add_sight_range(
 		_target_id
 	);
 
-	sanguis::server::world::entity_map::iterator const it(
-		entities_.find(
-			_target_id
-		)
-	);
-
-	FCPPT_ASSERT_ERROR(
-		it != entities_.end()
-	);
-
 	this->send_player_specific(
 		_player_id,
-		*it->second->add_message(
+		*this->entity(
+			_target_id
+		).add_message(
 			_player_id
 		)
 	);
@@ -870,7 +839,9 @@ sanguis::server::world::object::remove_sight_range(
 		);
 
 		FCPPT_ASSERT_PRE(
-			sight_it != sight_ranges_.end()
+			sight_it
+			!=
+			sight_ranges_.end()
 		);
 
 		sight_it->second.remove(
@@ -890,18 +861,10 @@ sanguis::server::world::object::remove_sight_range(
 	// If an entity has been removed we have to tell the client that it is
 	// dead instead
 
-	sanguis::server::world::entity_map::const_iterator const it(
-		entities_.find(
-			_target_id
-		)
-	);
-
-	FCPPT_ASSERT_ERROR(
-		it != entities_.end()
-	);
-
 	if(
-		it->second->dead()
+		this->entity(
+			_target_id
+		).dead()
 	)
 		this->send_player_specific(
 			_player_id,
@@ -974,7 +937,9 @@ sanguis::server::world::object::insert_spawns(
 )
 {
 	for(
-		auto const &spawn : _spawns
+		auto const &spawn
+		:
+		_spawns
 	)
 		this->insert(
 			sanguis::server::world::spawn_entity(
@@ -988,4 +953,25 @@ sanguis::server::world::object::insert_spawns(
 				spawn
 			)
 		);
+}
+
+sanguis::server::entities::with_id &
+sanguis::server::world::object::entity(
+	sanguis::entity_id const _id
+)
+{
+	sanguis::server::world::entity_map::iterator const it(
+		entities_.find(
+			_id
+		)
+	);
+
+	FCPPT_ASSERT_ERROR(
+		it
+		!=
+		entities_.end()
+	);
+
+	return
+		*it->second;
 }

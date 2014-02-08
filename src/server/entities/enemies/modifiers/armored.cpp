@@ -1,5 +1,5 @@
 #include <sanguis/random_generator.hpp>
-#include <sanguis/server/damage/unit.hpp>
+#include <sanguis/server/damage/armor_unit.hpp>
 #include <sanguis/server/damage/type.hpp>
 #include <sanguis/server/damage/type_to_string.hpp>
 #include <sanguis/server/entities/enemies/attribute.hpp>
@@ -33,7 +33,7 @@ sanguis::server::entities::enemies::modifiers::armored(
 
 	_parameters.armor_element(
 		damage_type,
-		sanguis::server::damage::unit(
+		sanguis::server::damage::armor_unit(
 			0.9f
 		)
 	);

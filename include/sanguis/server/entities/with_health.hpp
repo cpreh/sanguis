@@ -5,7 +5,7 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/server/health_fwd.hpp>
 #include <sanguis/server/regeneration_fwd.hpp>
-#include <sanguis/server/damage/armor.hpp>
+#include <sanguis/server/damage/armor_array.hpp>
 #include <sanguis/server/damage/array_fwd.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/base.hpp>
@@ -61,7 +61,7 @@ protected:
 		sanguis::diff_clock const &,
 		sanguis::server::health,
 		sanguis::server::regeneration,
-		sanguis::server::damage::armor const &
+		sanguis::server::damage::armor_array const &
 	);
 
 	~with_health();
@@ -80,7 +80,7 @@ private:
 	void
 	max_health_change();
 
-	sanguis::server::damage::armor armor_;
+	sanguis::server::damage::armor_array armor_;
 
 	sanguis::server::entities::property::changeable health_;
 

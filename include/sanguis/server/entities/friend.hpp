@@ -10,7 +10,7 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/ai/create_function.hpp>
-#include <sanguis/server/damage/armor.hpp>
+#include <sanguis/server/damage/armor_array_fwd.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
@@ -51,7 +51,7 @@ public:
 		sanguis::random_generator &,
 		sanguis::friend_type,
 		sanguis::server::environment::load_context &,
-		sanguis::server::damage::armor const &,
+		sanguis::server::damage::armor_array const &,
 		sanguis::server::health,
 		sanguis::server::entities::movement_speed,
 		sanguis::server::ai::create_function const &,

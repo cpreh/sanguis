@@ -1,21 +1,20 @@
-#include <sanguis/server/damage/all.hpp>
-#include <sanguis/server/damage/array.hpp>
-#include <sanguis/server/damage/list.hpp>
+#include <sanguis/server/damage/armor_array.hpp>
+#include <sanguis/server/damage/armor_unit.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
-#include <sanguis/server/damage/unit.hpp>
+#include <fcppt/algorithm/array_init.hpp>
 
 
-sanguis::server::damage::armor const
+sanguis::server::damage::armor_array const
 sanguis::server::damage::no_armor()
 {
 	return
-		sanguis::server::damage::armor(
-			sanguis::server::damage::array(
-				sanguis::server::damage::all(
-					sanguis::server::damage::unit(
-						0.f
-					)
+		sanguis::server::damage::armor_array{
+			fcppt::algorithm::array_init<
+				sanguis::server::damage::armor_array::internal
+			>(
+				sanguis::server::damage::armor_unit(
+					0.f
 				)
 			)
-		);
+		};
 }

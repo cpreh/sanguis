@@ -18,7 +18,7 @@
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/collision/with_world.hpp>
-#include <sanguis/server/damage/armor.hpp>
+#include <sanguis/server/damage/armor_array.hpp>
 #include <sanguis/server/entities/friend.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
@@ -48,7 +48,7 @@ sanguis::server::entities::friend_::friend_(
 	sanguis::random_generator &_random_generator,
 	sanguis::friend_type const _ftype,
 	sanguis::server::environment::load_context &_load_context,
-	sanguis::server::damage::armor const &_armor,
+	sanguis::server::damage::armor_array const &_armor,
 	sanguis::server::health const _health,
 	sanguis::server::entities::movement_speed const _movement_speed,
 	sanguis::server::ai::create_function const &_ai,

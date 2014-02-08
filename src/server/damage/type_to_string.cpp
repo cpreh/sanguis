@@ -35,9 +35,6 @@ sanguis::server::damage::type_to_string(
 		SANGUIS_SERVER_DAMAGE_TYPE_TO_STRING_CASE(
 			ice
 		);
-		SANGUIS_SERVER_DAMAGE_TYPE_TO_STRING_CASE(
-			pure
-		);
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;
