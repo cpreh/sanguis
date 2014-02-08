@@ -3,6 +3,7 @@
 #include <sanguis/gui/get_focus.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/container.hpp>
+#include <sanguis/gui/widget/optional_focus.hpp>
 #include <sanguis/gui/widget/optional_ref.hpp>
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_vector.hpp>
@@ -10,6 +11,7 @@
 #include <sge/rucksack/rect.hpp>
 #include <sge/rucksack/vector.hpp>
 #include <sge/rucksack/widget/base.hpp>
+#include <fcppt/optional_ref_compare.hpp>
 #include <fcppt/algorithm/remove_if.hpp>
 #include <fcppt/math/box/contains_point.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -216,6 +218,50 @@ sanguis::gui::widget::container::on_click(
 		sanguis::gui::get_focus(
 			false
 		);
+}
+
+sanguis::gui::widget::optional_ref const
+sanguis::gui::widget::container::on_tab(
+	sanguis::gui::widget::optional_focus &_focus
+)
+{
+	for(
+		auto &ref
+		:
+		widgets_
+	)
+	{
+		sanguis::gui::widget::optional_ref const result(
+			ref.get().on_tab(
+				_focus
+			)
+		);
+
+		if(
+			!result
+		)
+			continue;
+
+		if(
+			!_focus.get()
+		)
+			return
+				result;
+
+		if(
+			fcppt::optional_ref_compare(
+				_focus.get(),
+				result
+			)
+		)
+			_focus =
+				sanguis::gui::widget::optional_focus(
+					sanguis::gui::widget::optional_ref()
+				);
+	}
+
+	return
+		sanguis::gui::widget::optional_ref();
 }
 
 void

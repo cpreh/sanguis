@@ -7,6 +7,8 @@
 #include <sanguis/gui/master_fwd.hpp>
 #include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/widget/base_fwd.hpp>
+#include <sanguis/gui/widget/optional_focus_fwd.hpp>
+#include <sanguis/gui/widget/optional_ref_fwd.hpp>
 #include <sge/input/cursor/button_event_fwd.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/char_event_fwd.hpp>
@@ -78,6 +80,11 @@ private:
 	void
 	handle_key(
 		sge::input::keyboard::key_code
+	);
+
+	sanguis::gui::widget::optional_ref const
+	try_focus(
+		sanguis::gui::widget::optional_focus
 	);
 
 	sge::renderer::device::ffp &renderer_;

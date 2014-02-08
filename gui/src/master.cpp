@@ -3,6 +3,8 @@
 #include <sanguis/gui/master.hpp>
 #include <sanguis/gui/aux_/fill_rect.hpp>
 #include <sanguis/gui/widget/base.hpp>
+#include <sanguis/gui/widget/optional_focus.hpp>
+#include <sanguis/gui/widget/optional_ref.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/image/color/init.hpp>
 #include <sge/image/color/rgba8.hpp>
@@ -194,9 +196,56 @@ sanguis::gui::master::handle_key(
 )
 {
 	if(
+		_key_code
+		==
+		sge::input::keyboard::key_code::tab
+	)
+	{
+		// If no focus was found, try one more time using no focus
+		// because the search can wrap around.
+		if(
+			!this->try_focus(
+				sanguis::gui::widget::optional_focus(
+					context_.focus()
+				)
+			)
+		)
+			this->try_focus(
+				sanguis::gui::widget::optional_focus(
+					sanguis::gui::widget::optional_ref()
+				)
+			);
+
+		return;
+	}
+
+	if(
 		context_.focus()
 	)
 		context_.focus()->on_key(
 			_key_code
 		);
 }
+
+sanguis::gui::widget::optional_ref const
+sanguis::gui::master::try_focus(
+	sanguis::gui::widget::optional_focus _focus
+)
+{
+	sanguis::gui::widget::optional_ref const result(
+		widget_.on_tab(
+			_focus
+		)
+	);
+
+	if(
+		result
+	)
+		context_.focus(
+			*result
+		);
+
+	return
+		result;
+}
+

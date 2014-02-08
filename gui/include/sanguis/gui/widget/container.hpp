@@ -7,6 +7,8 @@
 #include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/container_fwd.hpp>
+#include <sanguis/gui/widget/optional_focus_fwd.hpp>
+#include <sanguis/gui/widget/optional_ref_fwd.hpp>
 #include <sanguis/gui/widget/reference_vector.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/rucksack/vector_fwd.hpp>
@@ -75,6 +77,12 @@ private:
 	sanguis::gui::get_focus const
 	on_click(
 		sge::rucksack::vector
+	)
+	override;
+
+	sanguis::gui::widget::optional_ref const
+	on_tab(
+		sanguis::gui::widget::optional_focus &
 	)
 	override;
 

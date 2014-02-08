@@ -8,6 +8,8 @@
 #include <sanguis/gui/text_function.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/edit_fwd.hpp>
+#include <sanguis/gui/widget/optional_focus_fwd.hpp>
+#include <sanguis/gui/widget/optional_ref_fwd.hpp>
 #include <sge/font/char_type.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
@@ -98,6 +100,12 @@ private:
 	void
 	on_focus_changed(
 		bool
+	)
+	override;
+
+	sanguis::gui::widget::optional_ref const
+	on_tab(
+		sanguis::gui::widget::optional_focus &
 	)
 	override;
 

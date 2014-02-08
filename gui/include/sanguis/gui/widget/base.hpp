@@ -5,6 +5,7 @@
 #include <sanguis/gui/get_focus_fwd.hpp>
 #include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/widget/base_fwd.hpp>
+#include <sanguis/gui/widget/optional_focus_fwd.hpp>
 #include <sanguis/gui/widget/optional_ref.hpp>
 #include <sge/font/char_type.hpp>
 #include <sge/input/keyboard/key_code_fwd.hpp>
@@ -67,6 +68,12 @@ public:
 	void
 	on_focus_changed(
 		bool
+	);
+
+	virtual
+	sanguis::gui::widget::optional_ref const
+	on_tab(
+		sanguis::gui::widget::optional_focus &
 	);
 
 	virtual

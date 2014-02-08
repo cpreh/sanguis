@@ -11,6 +11,8 @@
 #include <sanguis/gui/aux_/style/text_color.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/edit.hpp>
+#include <sanguis/gui/widget/optional_focus.hpp>
+#include <sanguis/gui/widget/optional_ref.hpp>
 #include <sge/font/char_type.hpp>
 #include <sge/font/dim.hpp>
 #include <sge/font/flags.hpp>
@@ -401,6 +403,17 @@ sanguis::gui::widget::edit::on_focus_changed(
 
 		cursor_blink_timer_.reset();
 	}
+}
+
+sanguis::gui::widget::optional_ref const
+sanguis::gui::widget::edit::on_tab(
+	sanguis::gui::widget::optional_focus &
+)
+{
+	return
+		sanguis::gui::widget::optional_ref(
+			*this
+		);
 }
 
 sge::font::draw::static_text

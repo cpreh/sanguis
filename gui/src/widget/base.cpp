@@ -1,6 +1,7 @@
 #include <sanguis/gui/duration.hpp>
 #include <sanguis/gui/get_focus.hpp>
 #include <sanguis/gui/widget/base.hpp>
+#include <sanguis/gui/widget/optional_focus.hpp>
 #include <sanguis/gui/widget/optional_ref.hpp>
 #include <sge/font/char_type.hpp>
 #include <sge/input/keyboard/key_code.hpp>
@@ -65,6 +66,15 @@ sanguis::gui::widget::base::on_focus_changed(
 	bool
 )
 {
+}
+
+sanguis::gui::widget::optional_ref const
+sanguis::gui::widget::base::on_tab(
+	sanguis::gui::widget::optional_focus &
+)
+{
+	return
+		sanguis::gui::widget::optional_ref();
 }
 
 void
