@@ -196,11 +196,11 @@ sanguis::server::world::object::update()
 		return;
 
 	for(
-		auto const entity
+		auto const cur_entity
 		:
 		entities_
 	)
-		entity.second->world_collision(
+		cur_entity.second->world_collision(
 			grid_,
 			duration
 		);
@@ -300,7 +300,7 @@ sanguis::server::world::object::insert_with_id(
 	sanguis::server::entities::insert_parameters const &_insert_parameters
 )
 {
-	sanguis::server::entities::with_id_unique_ptr entity(
+	sanguis::server::entities::with_id_unique_ptr cur_entity(
 		&dynamic_cast<
 			sanguis::server::entities::with_id &
 		>(
@@ -309,7 +309,7 @@ sanguis::server::world::object::insert_with_id(
 	);
 
 	sanguis::entity_id const id(
-		entity->id()
+		cur_entity->id()
 	);
 
 	typedef std::pair<
@@ -321,7 +321,7 @@ sanguis::server::world::object::insert_with_id(
 		entities_.insert(
 			id,
 			std::move(
-				entity
+				cur_entity
 			)
 		)
 	);
@@ -725,7 +725,7 @@ sanguis::server::world::object::request_transfer(
 		entities_.end()
 	);
 
-	sanguis::server::entities::base &entity(
+	sanguis::server::entities::base &cur_entity(
 		*it->second
 	);
 
@@ -744,7 +744,7 @@ sanguis::server::world::object::request_transfer(
 
 		if(
 			sanguis::server::world::center_in_grid_pos(
-				entity.center(),
+				cur_entity.center(),
 				opening.get()
 			)
 			&&
@@ -755,7 +755,7 @@ sanguis::server::world::object::request_transfer(
 		)
 		{
 			// TODO: Can we do this in a different way?
-			entity.reset_body();
+			cur_entity.reset_body();
 
 			sanguis::server::entities::unique_ptr entity_ptr(
 				entities_.release(
