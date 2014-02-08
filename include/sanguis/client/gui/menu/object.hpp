@@ -10,6 +10,7 @@
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/button.hpp>
 #include <sanguis/gui/widget/edit.hpp>
+#include <sanguis/gui/widget/static_text.hpp>
 #include <sanguis/gui/widget/text.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
@@ -84,19 +85,19 @@ private:
 
 		sanguis::gui::widget::button quickstart_button_;
 
-			sanguis::gui::widget::text player_name_label_;
+			sanguis::gui::widget::static_text player_name_label_;
 
 			sanguis::gui::widget::edit player_name_edit_;
 
 		sanguis::gui::widget::box_container player_name_line_;
 
-				sanguis::gui::widget::text hostname_label_;
+				sanguis::gui::widget::static_text hostname_label_;
 
 				sanguis::gui::widget::edit hostname_edit_;
 
 			sanguis::gui::widget::box_container hostname_line_;
 
-				sanguis::gui::widget::text port_label_;
+				sanguis::gui::widget::static_text port_label_;
 
 				sanguis::gui::widget::edit port_edit_;
 
