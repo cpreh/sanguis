@@ -46,7 +46,7 @@ sanguis::server::weapons::factory::rocket_launcher(
 				},
 				sanguis::server::weapons::rocket_launcher_parameters(
 					sanguis::server::weapons::damage(
-						9.f
+						12.f
 					),
 					sanguis::server::weapons::aoe(
 						120.f

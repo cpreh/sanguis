@@ -4,7 +4,6 @@
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/damage/fire.hpp>
-#include <sanguis/server/damage/full.hpp>
 #include <sanguis/server/damage/list.hpp>
 #include <sanguis/server/damage/piercing.hpp>
 #include <sanguis/server/damage/unit.hpp>
@@ -75,10 +74,14 @@ sanguis::server::entities::projectiles::rocket::remove()
 			this->aoe(),
 			damage_,
 			sanguis::server::damage::list{
-				sanguis::server::damage::fire =
-					sanguis::server::damage::full,
 				sanguis::server::damage::piercing =
-					sanguis::server::damage::full
+					sanguis::server::damage::unit(
+						0.5f
+					),
+				sanguis::server::damage::fire =
+					sanguis::server::damage::unit(
+						0.5f
+					)
 			}
 		),
 		sanguis::server::entities::insert_parameters_center(

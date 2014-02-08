@@ -49,7 +49,7 @@ sanguis::server::weapons::factory::pistol(
 				},
 				sanguis::server::weapons::pistol_parameters(
 					sanguis::server::weapons::accuracy(
-						0.9f
+						0.95f
 					),
 					sanguis::server::weapons::base_cooldown(
 						sanguis::duration_second(

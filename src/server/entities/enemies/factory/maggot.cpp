@@ -36,7 +36,7 @@ sanguis::server::entities::enemies::factory::maggot(
 			_parameters,
 			sanguis::server::damage::no_armor(),
 			sanguis::server::health(
-				4.f
+				10.f
 				*
 				std::sqrt(
 					_parameters.difficulty().get()

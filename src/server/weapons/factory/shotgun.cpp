@@ -74,7 +74,7 @@ sanguis::server::weapons::factory::shotgun(
 						10u
 					),
 					sanguis::server::weapons::damage(
-						1.5f
+						2.5f
 					),
 					sanguis::server::weapons::magazine_size(
 						8u

@@ -47,7 +47,7 @@ sanguis::server::entities::enemies::factory::skeleton(
 			_parameters,
 			sanguis::server::damage::no_armor(),
 			sanguis::server::health(
-				15.f
+				12.f
 				*
 				std::sqrt(
 					_parameters.difficulty().get()
@@ -96,7 +96,7 @@ sanguis::server::entities::enemies::factory::skeleton(
 				>(
 					_parameters.diff_clock(),
 					sanguis::server::radius(
-						400.f
+						300.f
 					),
 					sanguis::server::team::monsters,
 					sanguis::server::buffs::burn_interval(
