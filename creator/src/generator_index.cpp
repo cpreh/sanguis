@@ -9,7 +9,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::creator::name const
+sanguis::creator::name
 sanguis::creator::generator_index(
 	sanguis::creator::generator_count_type const _index
 )

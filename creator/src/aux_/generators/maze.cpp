@@ -1,136 +1,73 @@
-#include <sge/exception.hpp>
 #include <sanguis/creator/background_grid.hpp>
 #include <sanguis/creator/background_tile.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/creator/grid.hpp>
-#include <sanguis/creator/name.hpp>
-#include <sanguis/creator/opening.hpp>
 #include <sanguis/creator/opening_container.hpp>
-#include <sanguis/creator/pos.hpp>
-#include <sanguis/creator/seed.hpp>
-#include <sanguis/creator/size_type.hpp>
 #include <sanguis/creator/spawn_container.hpp>
-#include <sanguis/creator/spawn_pos.hpp>
-#include <sanguis/creator/spawn_type.hpp>
 #include <sanguis/creator/tile.hpp>
+#include <sanguis/creator/aux_/enemy_type_container.hpp>
 #include <sanguis/creator/aux_/generate_maze.hpp>
+#include <sanguis/creator/aux_/place_openings.hpp>
+#include <sanguis/creator/aux_/place_spawners.hpp>
 #include <sanguis/creator/aux_/parameters.hpp>
-#include <sanguis/creator/aux_/randgen.hpp>
 #include <sanguis/creator/aux_/result.hpp>
-#include <sanguis/creator/aux_/filled_rect.hpp>
-#include <sanguis/creator/aux_/find_closest.hpp>
-#include <sanguis/creator/aux_/rect.hpp>
-#include <sanguis/creator/aux_/uniform_int.hpp>
-#include <sanguis/creator/aux_/uniform_int_wrapper_impl.hpp>
-#include <fcppt/container/grid/in_range.hpp>
-#include <fcppt/math/vector/structure_cast.hpp>
 #include <sanguis/creator/aux_/generators/maze.hpp>
-#include <fcppt/assert/error_message.hpp>
-#include <fcppt/algorithm/contains.hpp>
-#include <fcppt/optional_impl.hpp>
-#include <fcppt/text.hpp>
-#include <fcppt/algorithm/append.hpp>
-#include <fcppt/algorithm/remove.hpp>
-#include <fcppt/io/cerr.hpp>
-#include <fcppt/io/cout.hpp>
-#include <fcppt/container/grid/make_pos_crange.hpp>
-#include <fcppt/container/grid/make_pos_range.hpp>
-#include <fcppt/container/grid/neumann_neighbors.hpp>
-#include <fcppt/math/clamp.hpp>
-#include <fcppt/assign/make_container.hpp>
-#include <fcppt/random/distribution/basic.hpp>
-#include <fcppt/random/distribution/parameters/make_uniform_enum_advanced.hpp>
-#include <fcppt/random/distribution/transform/enum.hpp>
-#include <fcppt/random/variate.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <vector>
-#include <ostream>
-#include <fcppt/config/external_end.hpp>
+#include <sanguis/creator/aux_/random/generator.hpp>
+#include <sanguis/creator/aux_/random/uniform_size.hpp>
+#include <sanguis/creator/aux_/random/uniform_size_variate.hpp>
 
-namespace
-{
 
-// TODO: Put this typedef in a header
-typedef
-fcppt::random::distribution::basic<
-	sanguis::creator::aux_::uniform_int<
-		sanguis::creator::size_type
-	>
->
-sz_uniform_int;
-
-typedef fcppt::random::variate<
-	sanguis::creator::aux_::randgen,
-	sz_uniform_int
-> variate;
-
-sanguis::creator::opening_container
-place_openings(
-	sanguis::creator::grid const &,
-	sanguis::creator::grid::pos const,
-	sanguis::creator::opening_count const,
-	::variate &,
-	::variate &
-);
-
-sanguis::creator::spawn_container
-place_spawners(
-	sanguis::creator::grid &,
-	unsigned const,
-	sanguis::creator::aux_::randgen &
-);
-
-}
-
-// this is a maze generator that follows the algorithm described at
-// http://en.wikipedia.org/w/index.php?title=Maze_generation_algorithm&oldid=550777074#Randomized_Prim.27s_algorithm
 sanguis::creator::aux_::result
 sanguis::creator::aux_::generators::maze(
 	sanguis::creator::aux_::parameters const &_parameters
 )
 {
-	auto const
-	maze_dim =
-		sanguis::creator::grid::dim(
-			15,
-			15);
+	sanguis::creator::grid::dim const maze_dim{
+		15,
+		15
+	};
 
-	::variate
-	random_cell_index(
+	sanguis::creator::aux_::random::uniform_size_variate
+	random_cell_index{
 		_parameters.randgen(),
-		sz_uniform_int(
-			sz_uniform_int::param_type::min(
+		sanguis::creator::aux_::random::uniform_size{
+			sanguis::creator::aux_::random::uniform_size::param_type::min{
 				0u
-			),
-			sz_uniform_int::param_type::max(
-				maze_dim.w() *
-				maze_dim.h()
-			)));
+			},
+			sanguis::creator::aux_::random::uniform_size::param_type::max{
+				maze_dim.content()
+			}
+		}
+	};
 
-	::variate
-	random_x(
+	sanguis::creator::aux_::random::uniform_size_variate
+	random_x{
 		_parameters.randgen(),
-		sz_uniform_int(
-			sz_uniform_int::param_type::min(
+		sanguis::creator::aux_::random::uniform_size{
+			sanguis::creator::aux_::random::uniform_size::param_type::min{
 				0u
-			),
-			sz_uniform_int::param_type::max(
+			},
+			sanguis::creator::aux_::random::uniform_size::param_type::max{
 				maze_dim.w() - 2
-		)));
+			}
+		}
+	};
 
-	::variate
-	random_y(
+	sanguis::creator::aux_::random::uniform_size_variate
+	random_y{
 		_parameters.randgen(),
-		sz_uniform_int(
-			sz_uniform_int::param_type::min(
+		sanguis::creator::aux_::random::uniform_size{
+			sanguis::creator::aux_::random::uniform_size::param_type::min{
 				0u
-			),
-			sz_uniform_int::param_type::max(
+			},
+			sanguis::creator::aux_::random::uniform_size::param_type::max{
 				maze_dim.h() - 2
-		)));
+			}
+		}
+	};
 
 	sanguis::creator::grid
-	grid =
+	grid{
 		sanguis::creator::aux_::generate_maze(
 			maze_dim,
 			1u,
@@ -138,49 +75,40 @@ sanguis::creator::aux_::generators::maze(
 			sanguis::creator::tile::nothing,
 			sanguis::creator::tile::concrete_wall,
 			_parameters.randgen()
-		);
+		)
+	};
 
-	sanguis::creator::spawn_container
-	spawners =
-		::place_spawners(
+	sanguis::creator::spawn_container const
+	spawners{
+		sanguis::creator::aux_::place_spawners(
 			grid,
 			20u,
-			_parameters.randgen()
-		);
+			_parameters.randgen(),
+			sanguis::creator::aux_::enemy_type_container{
+				sanguis::creator::enemy_type::wolf_black,
+				sanguis::creator::enemy_type::wolf_brown,
+				sanguis::creator::enemy_type::wolf_white,
+				sanguis::creator::enemy_type::zombie00,
+				sanguis::creator::enemy_type::zombie01,
+				sanguis::creator::enemy_type::spider,
+				sanguis::creator::enemy_type::skeleton,
+				sanguis::creator::enemy_type::ghost,
+				sanguis::creator::enemy_type::maggot
+			}
+		)
+	};
 
-	sanguis::creator::pos starting_pos =
-		*sanguis::creator::aux_::find_closest(
+	sanguis::creator::opening_container const
+	openings{
+		sanguis::creator::aux_::place_openings(
 			grid,
-			sanguis::creator::pos(
-				random_x(),
-				random_y()
-			),
-			[](sanguis::creator::tile tile){
-				return tile == sanguis::creator::tile::nothing;
-			},
-			10u);
-
-	sanguis::creator::opening_container
-	openings =
-		::place_openings(
-			grid,
-			starting_pos,
 			_parameters.opening_count(),
 			random_x,
 			random_y
-		);
+		)
+	};
 
-	for(
-		auto &opening :
-		openings
-	)
-		grid
-		[
-			opening.get()
-		] =
-			sanguis::creator::tile::door;
-
-	sanguis::creator::background_grid grid_bg(
+	sanguis::creator::background_grid const grid_bg(
 		grid.size(),
 		sanguis::creator::background_tile::asphalt
 	);
@@ -192,237 +120,4 @@ sanguis::creator::aux_::generators::maze(
 			openings,
 			spawners
 		);
-}
-
-namespace
-{
-
-sanguis::creator::opening_container
-place_openings(
-	sanguis::creator::grid const &grid,
-	sanguis::creator::grid::pos const starting_pos,
-	sanguis::creator::opening_count const opening_count,
-	::variate &random_x,
-	::variate &random_y
-)
-{
-	sanguis::creator::opening_container
-	result;
-
-	// entrance
-	result.push_back(
-		sanguis::creator::opening(
-			starting_pos));
-
-	// exit
-	auto
-	closest_free =
-		[
-			&grid
-		]
-		(
-			sanguis::creator::grid::pos const &pos
-		)
-		{
-			return
-			sanguis::creator::aux_::find_closest(
-				grid,
-				pos,
-				[](sanguis::creator::tile tile){
-					return tile == sanguis::creator::tile::nothing;
-				},
-				10u);
-		};
-
-	auto
-	possible_opening =
-		closest_free(
-			sanguis::creator::grid::pos(
-				(starting_pos.x() + grid.size().w() / 2) % grid.size().w(),
-				(starting_pos.y() + grid.size().h() / 2) % grid.size().h()));
-
-	FCPPT_ASSERT_ERROR_MESSAGE(
-		possible_opening,
-		FCPPT_TEXT(
-			"Could not find a free tile close enough to the exit!"));
-
-	result.push_back(
-		sanguis::creator::opening(
-			*possible_opening));
-
-	// all remaining result
-	auto
-	current_results =
-		result.size();
-
-	unsigned iterations = 0;
-
-	while(
-		current_results <
-		opening_count.get()
-	)
-	{
-		if(
-			++iterations
-			>
-			opening_count.get() * 5
-		)
-			throw sge::exception(
-				FCPPT_TEXT(
-					"Could not place opening, giving up."));
-
-		auto
-		candidate =
-			closest_free(
-				sanguis::creator::grid::pos(
-						random_x(),
-						random_y()));
-
-		if (!candidate)
-			continue;
-
-		sanguis::creator::opening
-		next_opening =
-			sanguis::creator::opening(
-				*candidate);
-
-		if (
-			!fcppt::algorithm::contains(
-				result,
-				next_opening)
-		)
-		{
-			result.push_back(
-				next_opening);
-
-			++current_results;
-		}
-	}
-
-	return result;
-}
-
-sanguis::creator::spawn_container
-place_spawners(
-	sanguis::creator::grid &grid,
-	unsigned const spawner_count,
-	sanguis::creator::aux_::randgen &randgen
-)
-{
-	::variate random_x(
-		randgen,
-		sz_uniform_int(
-			sz_uniform_int::param_type::min(
-				1u
-			),
-			sz_uniform_int::param_type::max(
-				grid.size().w() - 2
-		)));
-
-	::variate random_y(
-		randgen,
-		sz_uniform_int(
-			sz_uniform_int::param_type::min(
-				1u
-			),
-			sz_uniform_int::param_type::max(
-				grid.size().h() - 2
-		)));
-
-	typedef
-	fcppt::random::distribution::basic<
-		sanguis::creator::aux_::uniform_int<
-			sanguis::creator::enemy_type
-		>
-	> uniform_enum;
-
-	typedef
-	fcppt::random::variate<
-		sanguis::creator::aux_::randgen,
-		uniform_enum
-	> random_monster_type;
-
-	random_monster_type
-	random_monster(
-		randgen,
-		uniform_enum(
-			fcppt::random::distribution::parameters::make_uniform_enum_advanced<
-				sanguis::creator::aux_::uniform_int_wrapper,
-				sanguis::creator::enemy_type
-			>()
-		));
-
-	sanguis::creator::spawn_container
-	spawners;
-
-	auto
-	current_spawners =
-		fcppt::literal<
-			sanguis::creator::spawn_container::size_type
-		>(
-			0);
-
-	auto
-	closest_empty =
-		[
-			&grid
-		]
-		(
-			sanguis::creator::grid::pos const &pos
-		)
-		{
-			return
-			sanguis::creator::aux_::find_closest(
-				grid,
-				pos,
-				[](sanguis::creator::tile _tile){
-					return _tile == sanguis::creator::tile::nothing;
-				},
-				10u);
-		};
-
-	unsigned iterations = 0;
-
-	while(
-		current_spawners <
-		spawner_count
-	)
-	{
-		if(
-			++iterations
-			>
-			spawner_count * 5
-		)
-			throw sge::exception(
-				FCPPT_TEXT(
-					"Could not place spawners, giving up."));
-
-		auto candidate =
-			closest_empty(
-					sanguis::creator::grid::pos(
-						random_x(),
-						random_y()));
-
-		if (!candidate)
-			continue;
-
-		grid
-		[
-			*candidate
-		] =
-		sanguis::creator::tile::spawner;
-
-		spawners.push_back(
-			sanguis::creator::spawn(
-				sanguis::creator::spawn_pos(
-					*candidate),
-				random_monster(),
-				sanguis::creator::spawn_type::spawner));
-
-		current_spawners++;
-	}
-
-	return spawners;
-}
-
 }

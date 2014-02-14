@@ -1,33 +1,37 @@
+#include <sanguis/creator/dim.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/aux_/find_opposing_cell.hpp>
 #include <sanguis/creator/aux_/generate_maze.hpp>
+#include <sanguis/creator/aux_/optional_pos.hpp>
 #include <sanguis/creator/aux_/reachable_grid.hpp>
 #include <sanguis/creator/aux_/reachable.hpp>
-#include <sanguis/creator/aux_/uniform_int.hpp>
+#include <sanguis/creator/aux_/random/generator.hpp>
+#include <sanguis/creator/aux_/random/uniform_size.hpp>
+#include <sanguis/creator/aux_/random/uniform_size_variate.hpp>
 #include <fcppt/algorithm/append.hpp>
 #include <fcppt/algorithm/remove.hpp>
 #include <fcppt/container/grid/make_pos_crange.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
-#include <fcppt/optional.hpp>
-#include <fcppt/random/distribution/basic.hpp>
-#include <fcppt/random/variate.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <limits>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
 
+// this is a maze generator that follows the algorithm described at
+// http://en.wikipedia.org/w/index.php?title=Maze_generation_algorithm&oldid=550777074#Randomized_Prim.27s_algorithm
 sanguis::creator::grid
 sanguis::creator::aux_::generate_maze(
-	sanguis::creator::grid::dim const &size,
+	sanguis::creator::dim const &size,
 	unsigned const wall_thickness,
 	unsigned const spacing,
 	sanguis::creator::tile const empty,
 	sanguis::creator::tile const wall,
-	sanguis::creator::aux_::randgen &randgen
+	sanguis::creator::aux_::random::generator &randgen
 )
 {
 	sanguis::creator::aux_::reachable_grid
@@ -37,49 +41,37 @@ sanguis::creator::aux_::generate_maze(
 			false)
 	);
 
-	typedef
-	fcppt::random::distribution::basic<
-		sanguis::creator::aux_::uniform_int<
-			sanguis::creator::size_type
-		>
-	>
-	uniform_int;
-
-	typedef fcppt::random::variate<
-		sanguis::creator::aux_::randgen,
-		uniform_int
-	> variate;
-
-	variate
+	sanguis::creator::aux_::random::uniform_size_variate
 	random_index(
 		randgen,
-		uniform_int(
-			uniform_int::param_type::min(
+		sanguis::creator::aux_::random::uniform_size(
+			sanguis::creator::aux_::random::uniform_size::param_type::min(
 				0u
 			),
-			uniform_int::param_type::max(
+			sanguis::creator::aux_::random::uniform_size::param_type::max(
+				// TODO: unsigned?
 				std::numeric_limits<unsigned>::max()
 		)));
 
-	variate
+	sanguis::creator::aux_::random::uniform_size_variate
 	random_x(
 		randgen,
-		uniform_int(
-			uniform_int::param_type::min(
+		sanguis::creator::aux_::random::uniform_size(
+			sanguis::creator::aux_::random::uniform_size::param_type::min(
 				0u
 			),
-			uniform_int::param_type::max(
+			sanguis::creator::aux_::random::uniform_size::param_type::max(
 				size.w() - 2
 		)));
 
-	variate
+	sanguis::creator::aux_::random::uniform_size_variate
 	random_y(
 		randgen,
-		uniform_int(
-			uniform_int::param_type::min(
+		sanguis::creator::aux_::random::uniform_size(
+			sanguis::creator::aux_::random::uniform_size::param_type::min(
 				0u
 			),
-			uniform_int::param_type::max(
+			sanguis::creator::aux_::random::uniform_size::param_type::max(
 				size.h() - 2
 		)));
 
@@ -123,13 +115,13 @@ sanguis::creator::aux_::generate_maze(
 				walls.size()
 			];
 
-		fcppt::optional<
-			sanguis::creator::pos
-		>
-		opposing_cell(
+		sanguis::creator::aux_::optional_pos const
+		opposing_cell{
 			sanguis::creator::aux_::find_opposing_cell(
 				raw_maze,
-				random_wall));
+				random_wall
+			)
+		};
 
 		if(
 			opposing_cell

@@ -4,6 +4,7 @@ set(
 	include/sanguis/creator/background_grid_fwd.hpp
 	include/sanguis/creator/background_tile.hpp
 	include/sanguis/creator/background_tile_fwd.hpp
+	include/sanguis/creator/count.hpp
 	include/sanguis/creator/deserialize.hpp
 	include/sanguis/creator/difference_type.hpp
 	include/sanguis/creator/dim.hpp
@@ -53,6 +54,7 @@ set(
 	include/sanguis/creator/top_parameters_fwd.hpp
 	include/sanguis/creator/top_result.hpp
 	include/sanguis/creator/top_result_fwd.hpp
+	src/aux_/closest_empty.cpp
 	src/aux_/deserialization/background_grid.cpp
 	src/aux_/deserialization/grid.cpp
 	src/aux_/deserialization/opening_container.cpp
@@ -67,7 +69,9 @@ set(
 	src/aux_/generators/maze.cpp
 	src/aux_/parameters.cpp
 	src/aux_/perimeter_to_coords.cpp
-	src/aux_/randgen.cpp
+	src/aux_/place_openings.cpp
+	src/aux_/place_spawners.cpp
+	src/aux_/random/generator.cpp
 	src/aux_/result.cpp
 	src/aux_/serialization/background_grid.cpp
 	src/aux_/serialization/grid.cpp
@@ -80,6 +84,7 @@ set(
 	src/generate.cpp
 	src/generator_count.cpp
 	src/generator_index.cpp
+	src/include/sanguis/creator/aux_/closest_empty.hpp
 	src/include/sanguis/creator/aux_/deserialization/background_grid.hpp
 	src/include/sanguis/creator/aux_/deserialization/grid.hpp
 	src/include/sanguis/creator/aux_/deserialization/opening_container.hpp
@@ -87,6 +92,7 @@ set(
 	src/include/sanguis/creator/aux_/deserialization/spawn_container.hpp
 	src/include/sanguis/creator/aux_/deserialization/tile_grid.hpp
 	src/include/sanguis/creator/aux_/deserialization/top_result.hpp
+	src/include/sanguis/creator/aux_/enemy_type_container.hpp
 	src/include/sanguis/creator/aux_/filled_rect.hpp
 	src/include/sanguis/creator/aux_/find_closest.hpp
 	src/include/sanguis/creator/aux_/find_opposing_cell.hpp
@@ -97,12 +103,30 @@ set(
 	src/include/sanguis/creator/aux_/generator_map_type.hpp
 	src/include/sanguis/creator/aux_/generators/graveyard.hpp
 	src/include/sanguis/creator/aux_/generators/maze.hpp
+	src/include/sanguis/creator/aux_/optional_pos.hpp
+	src/include/sanguis/creator/aux_/optional_pos_fwd.hpp
 	src/include/sanguis/creator/aux_/parameters.hpp
 	src/include/sanguis/creator/aux_/parameters_fwd.hpp
 	src/include/sanguis/creator/aux_/perimeter_to_coords.hpp
-	src/include/sanguis/creator/aux_/rand_value.hpp
-	src/include/sanguis/creator/aux_/randgen.hpp
-	src/include/sanguis/creator/aux_/randgen_fwd.hpp
+	src/include/sanguis/creator/aux_/place_openings.hpp
+	src/include/sanguis/creator/aux_/place_spawners.hpp
+	src/include/sanguis/creator/aux_/random/generator.hpp
+	src/include/sanguis/creator/aux_/random/generator_fwd.hpp
+	src/include/sanguis/creator/aux_/random/uniform_int.hpp
+	src/include/sanguis/creator/aux_/random/uniform_int_decl.hpp
+	src/include/sanguis/creator/aux_/random/uniform_int_distribution_decl.hpp
+	src/include/sanguis/creator/aux_/random/uniform_int_distribution_fwd.hpp
+	src/include/sanguis/creator/aux_/random/uniform_int_distribution_impl.hpp
+	src/include/sanguis/creator/aux_/random/uniform_int_fwd.hpp
+	src/include/sanguis/creator/aux_/random/uniform_int_impl.hpp
+	src/include/sanguis/creator/aux_/random/uniform_int_wrapper_decl.hpp
+	src/include/sanguis/creator/aux_/random/uniform_int_wrapper_fwd.hpp
+	src/include/sanguis/creator/aux_/random/uniform_int_wrapper_impl.hpp
+	src/include/sanguis/creator/aux_/random/uniform_size.hpp
+	src/include/sanguis/creator/aux_/random/uniform_size_fwd.hpp
+	src/include/sanguis/creator/aux_/random/uniform_size_variate.hpp
+	src/include/sanguis/creator/aux_/random/uniform_size_variate_fwd.hpp
+	src/include/sanguis/creator/aux_/random/value.hpp
 	src/include/sanguis/creator/aux_/reachable.hpp
 	src/include/sanguis/creator/aux_/reachable_grid.hpp
 	src/include/sanguis/creator/aux_/rect.hpp
@@ -115,16 +139,6 @@ set(
 	src/include/sanguis/creator/aux_/serialization/spawn_container.hpp
 	src/include/sanguis/creator/aux_/serialization/tile_grid.hpp
 	src/include/sanguis/creator/aux_/serialization/top_result.hpp
-	src/include/sanguis/creator/aux_/uniform_int.hpp
-	src/include/sanguis/creator/aux_/uniform_int_decl.hpp
-	src/include/sanguis/creator/aux_/uniform_int_distribution_decl.hpp
-	src/include/sanguis/creator/aux_/uniform_int_distribution_fwd.hpp
-	src/include/sanguis/creator/aux_/uniform_int_distribution_impl.hpp
-	src/include/sanguis/creator/aux_/uniform_int_fwd.hpp
-	src/include/sanguis/creator/aux_/uniform_int_impl.hpp
-	src/include/sanguis/creator/aux_/uniform_int_wrapper_decl.hpp
-	src/include/sanguis/creator/aux_/uniform_int_wrapper_fwd.hpp
-	src/include/sanguis/creator/aux_/uniform_int_wrapper_impl.hpp
 	src/serialize.cpp
 	src/spawn.cpp
 	src/tile_is_solid.cpp

@@ -1,8 +1,8 @@
-#ifndef SANGUIS_CREATOR_AUX__UNIFORM_INT_DISTRIBUTION_DECL_HPP_INCLUDED
-#define SANGUIS_CREATOR_AUX__UNIFORM_INT_DISTRIBUTION_DECL_HPP_INCLUDED
+#ifndef SANGUIS_CREATOR_AUX__RANDOM_UNIFORM_INT_DISTRIBUTION_DECL_HPP_INCLUDED
+#define SANGUIS_CREATOR_AUX__RANDOM_UNIFORM_INT_DISTRIBUTION_DECL_HPP_INCLUDED
 
-#include <sanguis/creator/aux_/randgen_fwd.hpp>
-#include <sanguis/creator/aux_/uniform_int_distribution_fwd.hpp>
+#include <sanguis/creator/aux_/random/generator_fwd.hpp>
+#include <sanguis/creator/aux_/random/uniform_int_distribution_fwd.hpp>
 
 
 namespace sanguis
@@ -10,6 +10,8 @@ namespace sanguis
 namespace creator
 {
 namespace aux_
+{
+namespace random
 {
 
 template<
@@ -48,7 +50,7 @@ public:
 
 	result_type
 	operator()(
-		sanguis::creator::aux_::randgen &
+		sanguis::creator::aux_::random::generator &
 	);
 private:
 	IntType min_;
@@ -56,6 +58,7 @@ private:
 	IntType max_;
 };
 
+}
 }
 }
 }

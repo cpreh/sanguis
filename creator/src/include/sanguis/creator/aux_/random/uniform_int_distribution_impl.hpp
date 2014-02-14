@@ -1,9 +1,9 @@
-#ifndef SANGUIS_CREATOR_AUX__UNIFORM_INT_DISTRIBUTION_IMPL_HPP_INCLUDED
-#define SANGUIS_CREATOR_AUX__UNIFORM_INT_DISTRIBUTION_IMPL_HPP_INCLUDED
+#ifndef SANGUIS_CREATOR_AUX__RANDOM_UNIFORM_INT_DISTRIBUTION_IMPL_HPP_INCLUDED
+#define SANGUIS_CREATOR_AUX__RANDOM_UNIFORM_INT_DISTRIBUTION_IMPL_HPP_INCLUDED
 
-#include <sanguis/creator/aux_/uniform_int_distribution_decl.hpp>
-#include <sanguis/creator/aux_/randgen.hpp>
-#include <sanguis/creator/aux_/rand_value.hpp>
+#include <sanguis/creator/aux_/random/generator.hpp>
+#include <sanguis/creator/aux_/random/uniform_int_distribution_decl.hpp>
+#include <sanguis/creator/aux_/random/value.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <type_traits>
@@ -13,7 +13,7 @@
 template<
 	typename IntType
 >
-sanguis::creator::aux_::uniform_int_distribution<
+sanguis::creator::aux_::random::uniform_int_distribution<
 	IntType
 >::param_type::param_type(
 	IntType const _min,
@@ -38,7 +38,7 @@ template<
 	typename IntType
 >
 IntType
-sanguis::creator::aux_::uniform_int_distribution<
+sanguis::creator::aux_::random::uniform_int_distribution<
 	IntType
 >::param_type::min() const
 {
@@ -50,7 +50,7 @@ template<
 	typename IntType
 >
 IntType
-sanguis::creator::aux_::uniform_int_distribution<
+sanguis::creator::aux_::random::uniform_int_distribution<
 	IntType
 >::param_type::max() const
 {
@@ -61,7 +61,7 @@ sanguis::creator::aux_::uniform_int_distribution<
 template<
 	typename IntType
 >
-sanguis::creator::aux_::uniform_int_distribution<
+sanguis::creator::aux_::random::uniform_int_distribution<
 	IntType
 >::uniform_int_distribution(
 	param_type const &_params
@@ -78,7 +78,7 @@ sanguis::creator::aux_::uniform_int_distribution<
 	FCPPT_ASSERT_PRE(
 		max_
 		<=
-		sanguis::creator::aux_::randgen::max()
+		sanguis::creator::aux_::random::randgen::max()
 	);*/
 }
 
@@ -86,13 +86,13 @@ template<
 	typename IntType
 >
 typename
-sanguis::creator::aux_::uniform_int_distribution<
+sanguis::creator::aux_::random::uniform_int_distribution<
 	IntType
 >::result_type
-sanguis::creator::aux_::uniform_int_distribution<
+sanguis::creator::aux_::random::uniform_int_distribution<
 	IntType
 >::operator()(
-	sanguis::creator::aux_::randgen &_randgen
+	sanguis::creator::aux_::random::generator &_randgen
 )
 {
 	typedef
@@ -105,7 +105,7 @@ sanguis::creator::aux_::uniform_int_distribution<
 	typedef
 	typename
 	std::common_type<
-		sanguis::creator::aux_::rand_value,
+		sanguis::creator::aux_::random::value,
 		unsigned_result_type
 	>::type
 	result_common_type;

@@ -12,7 +12,7 @@ namespace creator
 {
 
 SANGUIS_CREATOR_SYMBOL
-sanguis::creator::name const
+sanguis::creator::name
 generator_index(
 	sanguis::creator::generator_count_type
 );

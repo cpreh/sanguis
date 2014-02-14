@@ -1,5 +1,5 @@
-#ifndef SANGUIS_CREATOR_AUX__RAND_VALUE_HPP_INCLUDED
-#define SANGUIS_CREATOR_AUX__RAND_VALUE_HPP_INCLUDED
+#ifndef SANGUIS_CREATOR_AUX__RANDOM_VALUE_HPP_INCLUDED
+#define SANGUIS_CREATOR_AUX__RANDOM_VALUE_HPP_INCLUDED
 
 #include <fcppt/config/external_begin.hpp>
 #include <cstdint>
@@ -12,9 +12,12 @@ namespace creator
 {
 namespace aux_
 {
+namespace random
+{
 
-typedef std::uint32_t rand_value;
+typedef std::uint32_t value;
 
+}
 }
 }
 }

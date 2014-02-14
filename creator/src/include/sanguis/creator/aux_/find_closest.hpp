@@ -1,16 +1,16 @@
 #ifndef SANGUIS_CREATOR_AUX__FIND_CLOSEST_HPP_INCLUDED
 #define SANGUIS_CREATOR_AUX__FIND_CLOSEST_HPP_INCLUDED
 
-#include <fcppt/optional.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/container/grid/in_range.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/pos.hpp>
+#include <sanguis/creator/aux_/optional_pos.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
-#include <ostream>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace sanguis
 {
@@ -22,23 +22,14 @@ namespace aux_
 template<
 	typename Attribute
 >
-fcppt::optional<
-	sanguis::creator::pos
->
+sanguis::creator::aux_::optional_pos const
 find_closest(
 	sanguis::creator::grid const &_grid,
 	sanguis::creator::pos const _pos,
-	Attribute _attribute,
+	Attribute const _attribute,
 	sanguis::creator::pos::value_type _max_radius
 )
 {
-	typedef
-	fcppt::optional
-	<
-		sanguis::creator::pos
-	>
-	result_type;
-
 	_max_radius =
 		std::min(
 			_max_radius,
@@ -48,6 +39,7 @@ find_closest(
 			)
 		);
 
+	// TODO: unsigned?
 	unsigned leg = 0;
 	unsigned radius = 1;
 	unsigned steps = 0;
@@ -130,15 +122,15 @@ find_closest(
 		)
 		{
 			return
-				result_type(
+				sanguis::creator::aux_::optional_pos(
 					pos
 				);
 		}
 	}
-	
+
 	// nothing was found, return empty optional
 	return
-		result_type();
+		sanguis::creator::aux_::optional_pos();
 }
 
 }

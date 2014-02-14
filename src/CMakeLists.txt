@@ -1526,6 +1526,7 @@ set(
 	include/sanguis/server/world/difficulty.hpp
 	include/sanguis/server/world/entity_map.hpp
 	include/sanguis/server/world/entity_vector.hpp
+	include/sanguis/server/world/generate.hpp
 	include/sanguis/server/world/grid_pos_to_center.hpp
 	include/sanguis/server/world/make_spawner.hpp
 	include/sanguis/server/world/map.hpp
@@ -2137,6 +2138,7 @@ set(
 	src/server/world/context.cpp
 	src/server/world/entity_map.cpp
 	src/server/world/entity_vector.cpp
+	src/server/world/generate.cpp
 	src/server/world/grid_pos_to_center.cpp
 	src/server/world/make_spawner.cpp
 	src/server/world/object.cpp

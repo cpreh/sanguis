@@ -5,8 +5,8 @@
 #include <sanguis/creator/aux_/generator_map.hpp>
 #include <sanguis/creator/aux_/generator_map_type.hpp>
 #include <sanguis/creator/aux_/parameters.hpp>
-#include <sanguis/creator/aux_/randgen.hpp>
 #include <sanguis/creator/aux_/result.hpp>
+#include <sanguis/creator/aux_/random/generator.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/math/dim/comparison.hpp>
@@ -36,7 +36,7 @@ sanguis::creator::generate(
 			+ FCPPT_TEXT(" not found!")
 		);
 
-	sanguis::creator::aux_::randgen gen(
+	sanguis::creator::aux_::random::generator gen(
 		_parameters.seed()
 	);
 
