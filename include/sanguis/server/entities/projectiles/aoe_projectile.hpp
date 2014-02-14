@@ -4,9 +4,9 @@
 #include <sanguis/aoe_projectile_type.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
-#include <sanguis/server/direction.hpp>
+#include <sanguis/server/aoe.hpp>
+#include <sanguis/server/direction_fwd.hpp>
 #include <sanguis/server/player_id.hpp>
-#include <sanguis/server/radius.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/projectiles/life_time.hpp>
@@ -39,13 +39,13 @@ protected:
 		sanguis::server::entities::movement_speed,
 		sanguis::server::environment::load_context &,
 		sanguis::server::entities::projectiles::life_time,
-		sanguis::server::radius,
+		sanguis::server::aoe,
 		sanguis::server::direction
 	);
 
 	~aoe_projectile();
 
-	sanguis::server::radius const
+	sanguis::server::aoe const
 	aoe() const;
 private:
 	sanguis::messages::server::unique_ptr
@@ -56,7 +56,7 @@ private:
 
 	sanguis::aoe_projectile_type const type_;
 
-	sanguis::server::radius const aoe_;
+	sanguis::server::aoe const aoe_;
 };
 
 }

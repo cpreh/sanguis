@@ -1,4 +1,4 @@
-#include <sanguis/server/radius.hpp>
+#include <sanguis/server/aoe.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/damage/array.hpp>
 #include <sanguis/server/damage/full.hpp>
@@ -19,7 +19,7 @@ sanguis::server::entities::projectiles::melee::melee(
 :
 	sanguis::server::entities::projectiles::aoe_damage(
 		_team,
-		sanguis::server::radius(
+		sanguis::server::aoe(
 			1.f
 		),
 		_damage,

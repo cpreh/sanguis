@@ -1,4 +1,4 @@
-#include <sanguis/server/radius.hpp>
+#include <sanguis/server/aoe.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/aoe_damage.hpp>
 #include <sanguis/server/auras/container.hpp>
@@ -13,7 +13,7 @@
 
 sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 	sanguis::server::team const _team,
-	sanguis::server::radius const _radius,
+	sanguis::server::aoe const _aoe,
 	sanguis::server::damage::unit const _damage,
 	sanguis::server::damage::array const &_damage_values
 )
@@ -26,7 +26,7 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 				sanguis::server::auras::aoe_damage
 			>(
 				_team,
-				_radius,
+				_aoe,
 				_damage,
 				_damage_values
 			)

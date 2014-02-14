@@ -3,8 +3,8 @@
 
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
-#include <sanguis/server/direction.hpp>
-#include <sanguis/server/radius.hpp>
+#include <sanguis/server/aoe_fwd.hpp>
+#include <sanguis/server/direction_fwd.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/vector.hpp>
 #include <sanguis/server/damage/unit.hpp>
@@ -37,7 +37,7 @@ public:
 		sanguis::server::environment::load_context &,
 		sanguis::server::team,
 		sanguis::server::damage::unit,
-		sanguis::server::radius aoe,
+		sanguis::server::aoe,
 		sanguis::server::vector const &dest,
 		sanguis::server::direction
 	);

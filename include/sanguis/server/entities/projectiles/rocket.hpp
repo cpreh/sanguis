@@ -2,8 +2,8 @@
 #define SANGUIS_SERVER_ENTITIES_PROJECTILES_ROCKET_HPP_INCLUDED
 
 #include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/server/direction.hpp>
-#include <sanguis/server/radius.hpp>
+#include <sanguis/server/aoe_fwd.hpp>
+#include <sanguis/server/direction_fwd.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/with_health_fwd.hpp>
@@ -34,7 +34,7 @@ public:
 		sanguis::server::environment::load_context &,
 		sanguis::server::team,
 		sanguis::server::damage::unit,
-		sanguis::server::radius aoe,
+		sanguis::server::aoe,
 		sanguis::server::direction
 	);
 

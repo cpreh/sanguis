@@ -65,6 +65,13 @@ sanguis::server::entities::enemies::base_difficulty(
 			>(
 				1
 			);
+	case sanguis::creator::enemy_type::reaper:
+		return
+			fcppt::literal<
+				sanguis::server::entities::enemies::difficulty_value
+			>(
+				20
+			);
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;

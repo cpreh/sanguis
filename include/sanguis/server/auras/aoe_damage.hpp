@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_AURAS_AOE_DAMAGE_HPP_INCLUDED
 
 #include <sanguis/optional_aura_type_fwd.hpp>
-#include <sanguis/server/radius.hpp>
+#include <sanguis/server/aoe_fwd.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/damage/array.hpp>
@@ -28,7 +28,7 @@ class aoe_damage
 public:
 	aoe_damage(
 		sanguis::server::team,
-		sanguis::server::radius,
+		sanguis::server::aoe,
 		sanguis::server::damage::unit,
 		sanguis::server::damage::array const &
 	);

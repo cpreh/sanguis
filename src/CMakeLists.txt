@@ -935,6 +935,10 @@ set(
 	include/sanguis/random_generator.hpp
 	include/sanguis/random_generator_fwd.hpp
 	include/sanguis/random_seed.hpp
+	include/sanguis/random_variate.hpp
+	include/sanguis/random_variate_decl.hpp
+	include/sanguis/random_variate_fwd.hpp
+	include/sanguis/random_variate_impl.hpp
 	include/sanguis/secondary_weapon_type.hpp
 	include/sanguis/secondary_weapon_type_fwd.hpp
 	include/sanguis/sequence_iteration.hpp
@@ -986,6 +990,8 @@ set(
 	include/sanguis/server/ai/visible_fwd.hpp
 	include/sanguis/server/angle.hpp
 	include/sanguis/server/angle_fwd.hpp
+	include/sanguis/server/aoe.hpp
+	include/sanguis/server/aoe_fwd.hpp
 	include/sanguis/server/auras/aoe_damage.hpp
 	include/sanguis/server/auras/aura.hpp
 	include/sanguis/server/auras/aura_fwd.hpp
@@ -1087,6 +1093,7 @@ set(
 	include/sanguis/server/dim.hpp
 	include/sanguis/server/dim_fwd.hpp
 	include/sanguis/server/direction.hpp
+	include/sanguis/server/direction_fwd.hpp
 	include/sanguis/server/dispatch.hpp
 	include/sanguis/server/entities/auto_weak_hook.hpp
 	include/sanguis/server/entities/auto_weak_link.hpp
@@ -1113,6 +1120,7 @@ set(
 	include/sanguis/server/entities/enemies/factory/make_special.hpp
 	include/sanguis/server/entities/enemies/factory/parameters.hpp
 	include/sanguis/server/entities/enemies/factory/parameters_fwd.hpp
+	include/sanguis/server/entities/enemies/factory/reaper.hpp
 	include/sanguis/server/entities/enemies/factory/skeleton.hpp
 	include/sanguis/server/entities/enemies/factory/spider.hpp
 	include/sanguis/server/entities/enemies/factory/wolf.hpp
@@ -1145,7 +1153,9 @@ set(
 	include/sanguis/server/entities/enemies/skills/factory/create_callbacks.hpp
 	include/sanguis/server/entities/enemies/skills/factory/parameters.hpp
 	include/sanguis/server/entities/enemies/skills/factory/parameters_fwd.hpp
+	include/sanguis/server/entities/enemies/skills/factory/scatter.hpp
 	include/sanguis/server/entities/enemies/skills/factory/teleport.hpp
+	include/sanguis/server/entities/enemies/skills/scatter.hpp
 	include/sanguis/server/entities/enemies/skills/skill.hpp
 	include/sanguis/server/entities/enemies/skills/skill_fwd.hpp
 	include/sanguis/server/entities/enemies/skills/teleport.hpp
@@ -1193,6 +1203,8 @@ set(
 	include/sanguis/server/entities/projectiles/melee.hpp
 	include/sanguis/server/entities/projectiles/projectile.hpp
 	include/sanguis/server/entities/projectiles/rocket.hpp
+	include/sanguis/server/entities/projectiles/scatter.hpp
+	include/sanguis/server/entities/projectiles/scatter_create.hpp
 	include/sanguis/server/entities/projectiles/simple_bullet.hpp
 	include/sanguis/server/entities/property/add.hpp
 	include/sanguis/server/entities/property/always_max.hpp
@@ -1355,6 +1367,7 @@ set(
 	include/sanguis/server/player_id_from_args.hpp
 	include/sanguis/server/player_id_from_net.hpp
 	include/sanguis/server/radius.hpp
+	include/sanguis/server/radius_fwd.hpp
 	include/sanguis/server/random/amount.hpp
 	include/sanguis/server/random/create_function.hpp
 	include/sanguis/server/random/create_function_tag.hpp
@@ -1958,6 +1971,7 @@ set(
 	src/server/entities/enemies/factory/make_skills.cpp
 	src/server/entities/enemies/factory/make_special.cpp
 	src/server/entities/enemies/factory/parameters.cpp
+	src/server/entities/enemies/factory/reaper.cpp
 	src/server/entities/enemies/factory/skeleton.cpp
 	src/server/entities/enemies/factory/spider.cpp
 	src/server/entities/enemies/factory/wolf.cpp
@@ -1980,7 +1994,9 @@ set(
 	src/server/entities/enemies/skills/amount.cpp
 	src/server/entities/enemies/skills/factory/create_callbacks.cpp
 	src/server/entities/enemies/skills/factory/parameters.cpp
+	src/server/entities/enemies/skills/factory/scatter.cpp
 	src/server/entities/enemies/skills/factory/teleport.cpp
+	src/server/entities/enemies/skills/scatter.cpp
 	src/server/entities/enemies/skills/skill.cpp
 	src/server/entities/enemies/skills/teleport.cpp
 	src/server/entities/enemies/special.cpp
@@ -2005,6 +2021,7 @@ set(
 	src/server/entities/projectiles/melee.cpp
 	src/server/entities/projectiles/projectile.cpp
 	src/server/entities/projectiles/rocket.cpp
+	src/server/entities/projectiles/scatter.cpp
 	src/server/entities/projectiles/simple_bullet.cpp
 	src/server/entities/property/add.cpp
 	src/server/entities/property/always_max.cpp

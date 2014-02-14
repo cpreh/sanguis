@@ -1,5 +1,6 @@
 #include <sanguis/world_id.hpp>
 #include <sanguis/world_name.hpp>
+#include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/creator/opening_count.hpp>
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/start_name.hpp>
@@ -11,8 +12,17 @@
 #include <sanguis/server/global/source_world_pair.hpp>
 #include <sanguis/server/global/world_connection_map.hpp>
 #include <sanguis/server/global/world_map.hpp>
+#include <sanguis/server/entities/auto_weak_link.hpp>
+#include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/insert_parameters_center.hpp>
+#include <sanguis/server/entities/optional_base_ref.hpp>
+#include <sanguis/server/entities/spawn_owner.hpp>
+#include <sanguis/server/entities/enemies/create.hpp>
+#include <sanguis/server/entities/enemies/special_chance.hpp>
+#include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/generate.hpp>
+#include <sanguis/server/world/grid_pos_to_center.hpp>
 #include <sanguis/server/world/map.hpp>
 #include <sanguis/server/world/object.hpp>
 #include <sanguis/server/world/object_unique_ptr.hpp>
@@ -84,15 +94,17 @@ sanguis::server::global::generate_worlds(
 		)
 	);
 
+	sanguis::world_id const num_worlds(
+		10u
+	);
+
 	for(
 		sanguis::world_id::value_type current_id(
 			1u
 		);
 		current_id
-		<
-		sanguis::world_id::value_type(
-			10u
-		);
+		<=
+		num_worlds.get();
 		++current_id
 	)
 	{
@@ -168,6 +180,39 @@ sanguis::server::global::generate_worlds(
 					previous_opening
 				)
 			)
+		);
+	}
+
+	{
+		sanguis::server::world::object &last_world(
+			*worlds.at(
+				num_worlds
+			)
+		);
+
+		FCPPT_ASSERT_ERROR(
+			last_world.insert(
+				sanguis::server::entities::enemies::create(
+					_parameters.diff_clock(),
+					_parameters.random_generator(),
+					sanguis::creator::enemy_type::reaper,
+					last_world.difficulty(),
+					last_world.environment().load_context(),
+					sanguis::server::entities::spawn_owner(
+						sanguis::server::entities::auto_weak_link()
+					),
+					sanguis::server::entities::enemies::special_chance(
+						0.f
+					)
+				),
+				sanguis::server::entities::insert_parameters_center(
+					sanguis::server::world::grid_pos_to_center(
+						last_world.openings().at(
+							1
+						).get()
+					)
+				)
+			).has_value()
 		);
 	}
 

@@ -1,4 +1,5 @@
 #include <sanguis/optional_aura_type.hpp>
+#include <sanguis/server/aoe.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/aoe_damage.hpp>
@@ -12,13 +13,15 @@
 
 sanguis::server::auras::aoe_damage::aoe_damage(
 	sanguis::server::team const _team,
-	sanguis::server::radius const _radius,
+	sanguis::server::aoe const _aoe,
 	sanguis::server::damage::unit const _damage,
 	sanguis::server::damage::array const &_damage_values
 )
 :
 	sanguis::server::auras::aura(
-		_radius,
+		sanguis::server::radius(
+			_aoe.get()
+		),
 		_team,
 		sanguis::server::auras::influence::debuff
 	),

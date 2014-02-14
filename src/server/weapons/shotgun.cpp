@@ -1,7 +1,8 @@
 #include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/random_generator.hpp>
+#include <sanguis/random_variate.hpp>
 #include <sanguis/weapon_attribute_type.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
-#include <sanguis/random_generator.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/direction.hpp>
@@ -24,7 +25,6 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/repeat.hpp>
-#include <fcppt/random/variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/distribution/parameters/normal.hpp>
 
@@ -83,8 +83,7 @@ sanguis::server::weapons::shotgun::do_attack(
 		>
 	> angle_distribution;
 
-	fcppt::random::variate<
-		sanguis::random_generator,
+	sanguis::random_variate<
 		angle_distribution
 	> angle_rng(
 		random_generator_,

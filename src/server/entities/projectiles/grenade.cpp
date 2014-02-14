@@ -2,9 +2,9 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration_second.hpp>
+#include <sanguis/server/aoe.hpp>
 #include <sanguis/server/dim.hpp>
 #include <sanguis/server/direction.hpp>
-#include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/vector.hpp>
 #include <sanguis/server/collision/distance_pos_pos.hpp>
@@ -36,7 +36,7 @@ sanguis::server::entities::projectiles::grenade::grenade(
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::team const _team,
 	sanguis::server::damage::unit const _damage,
-	sanguis::server::radius const _aoe,
+	sanguis::server::aoe const _aoe,
 	sanguis::server::vector const &_dest,
 	sanguis::server::direction const _direction
 )

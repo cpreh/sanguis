@@ -39,6 +39,7 @@ sanguis::server::entities::enemies::factory::make_skills(
 			>(
 				[
 					&_diff_clock,
+					&_random_generator,
 					_difficulty
 				](
 					sanguis::server::entities::enemies::skills::factory::callback const &_callback
@@ -48,6 +49,7 @@ sanguis::server::entities::enemies::factory::make_skills(
 						_callback(
 							sanguis::server::entities::enemies::skills::factory::parameters(
 								_diff_clock,
+								_random_generator,
 								_difficulty
 							)
 						);

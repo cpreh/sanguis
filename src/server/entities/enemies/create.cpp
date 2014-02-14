@@ -10,6 +10,7 @@
 #include <sanguis/server/entities/enemies/special_chance.hpp>
 #include <sanguis/server/entities/enemies/factory/ghost.hpp>
 #include <sanguis/server/entities/enemies/factory/maggot.hpp>
+#include <sanguis/server/entities/enemies/factory/reaper.hpp>
 #include <sanguis/server/entities/enemies/factory/skeleton.hpp>
 #include <sanguis/server/entities/enemies/factory/spider.hpp>
 #include <sanguis/server/entities/enemies/factory/wolf.hpp>
@@ -92,6 +93,11 @@ sanguis::server::entities::enemies::create(
 	case sanguis::creator::enemy_type::spider:
 		return
 			sanguis::server::entities::enemies::factory::spider(
+				parameters
+			);
+	case sanguis::creator::enemy_type::reaper:
+		return
+			sanguis::server::entities::enemies::factory::reaper(
 				parameters
 			);
 	}

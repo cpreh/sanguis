@@ -4,7 +4,6 @@
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/direction.hpp>
-#include <sanguis/server/radius.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/projectiles/grenade.hpp>
 #include <sanguis/server/environment/object.hpp>
@@ -71,9 +70,7 @@ sanguis::server::weapons::grenade::do_attack(
 					_attack.environment().load_context(),
 					_attack.team(),
 					damage_.value(),
-					sanguis::server::radius(
-						aoe_.value().get()
-					),
+					aoe_.value(),
 					_attack.target().get(),
 					sanguis::server::direction(
 						_attack.angle().get()

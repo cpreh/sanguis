@@ -1,7 +1,8 @@
 #include <sanguis/perk_type.hpp>
 #include <sanguis/random_generator.hpp>
+#include <sanguis/random_variate_impl.hpp>
+#include <sanguis/server/aoe.hpp>
 #include <sanguis/server/direction.hpp>
-#include <sanguis/server/radius.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
@@ -18,7 +19,6 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/algorithm/repeat.hpp>
 #include <fcppt/math/twopi.hpp>
-#include <fcppt/random/variate_impl.hpp>
 #include <fcppt/random/distribution/basic_impl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -146,7 +146,7 @@ sanguis::server::perks::choleric::update(
 							sanguis::server::damage::unit(
 								6.f
 							),
-							sanguis::server::radius(
+							sanguis::server::aoe(
 								90.f
 							),
 							direction

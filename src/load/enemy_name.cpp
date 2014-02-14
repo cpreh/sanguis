@@ -49,6 +49,9 @@ case sanguis::creator::enemy_type::name:\
 		SANGUIS_LOAD_ENEMY_NAME_CASE(
 			maggot
 		);
+		SANGUIS_LOAD_ENEMY_NAME_CASE(
+			reaper
+		);
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;

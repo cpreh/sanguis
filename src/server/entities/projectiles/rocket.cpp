@@ -1,7 +1,7 @@
 #include <sanguis/aoe_projectile_type.hpp>
 #include <sanguis/duration_second.hpp>
+#include <sanguis/server/aoe.hpp>
 #include <sanguis/server/direction.hpp>
-#include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/damage/fire.hpp>
 #include <sanguis/server/damage/list.hpp>
@@ -24,7 +24,7 @@ sanguis::server::entities::projectiles::rocket::rocket(
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::team const _team,
 	sanguis::server::damage::unit const _damage,
-	sanguis::server::radius const _aoe,
+	sanguis::server::aoe const _aoe,
 	sanguis::server::direction const _direction
 )
 :

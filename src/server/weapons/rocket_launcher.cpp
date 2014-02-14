@@ -3,7 +3,6 @@
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/direction.hpp>
-#include <sanguis/server/radius.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/projectiles/rocket.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
@@ -78,9 +77,7 @@ sanguis::server::weapons::rocket_launcher::do_attack(
 			_attack.environment().load_context(),
 			_attack.team(),
 			damage_.value(),
-			sanguis::server::radius(
-				aoe_.value().get()
-			),
+			aoe_.value(),
 			sanguis::server::direction(
 				_attack.angle().get()
 			)

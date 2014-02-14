@@ -4,11 +4,11 @@
 #include <sanguis/messages/server/add_aoe_projectile.hpp>
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
+#include <sanguis/server/aoe.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/model_name.hpp>
 #include <sanguis/server/player_id.hpp>
-#include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/projectiles/aoe_projectile.hpp>
@@ -24,7 +24,7 @@ sanguis::server::entities::projectiles::aoe_projectile::aoe_projectile(
 	sanguis::server::entities::movement_speed const _movement_speed,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::entities::projectiles::life_time const _life_time,
-	sanguis::server::radius const _aoe,
+	sanguis::server::aoe const _aoe,
 	sanguis::server::direction const _direction
 )
 :
@@ -55,7 +55,7 @@ sanguis::server::entities::projectiles::aoe_projectile::~aoe_projectile()
 {
 }
 
-sanguis::server::radius const
+sanguis::server::aoe const
 sanguis::server::entities::projectiles::aoe_projectile::aoe() const
 {
 	return aoe_;

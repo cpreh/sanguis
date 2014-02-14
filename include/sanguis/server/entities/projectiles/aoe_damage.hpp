@@ -1,10 +1,10 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PROJECTILES_AOE_DAMAGE_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PROJECTILES_AOE_DAMAGE_HPP_INCLUDED
 
-#include <sanguis/server/radius.hpp>
+#include <sanguis/server/aoe_fwd.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/damage/array_fwd.hpp>
-#include <sanguis/server/damage/unit.hpp>
+#include <sanguis/server/damage/unit_fwd.hpp>
 #include <sanguis/server/entities/center_ghost.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -30,7 +30,7 @@ class aoe_damage
 public:
 	aoe_damage(
 		sanguis::server::team,
-		sanguis::server::radius,
+		sanguis::server::aoe,
 		sanguis::server::damage::unit,
 		sanguis::server::damage::array const &
 	);

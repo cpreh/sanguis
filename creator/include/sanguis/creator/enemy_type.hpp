@@ -20,7 +20,8 @@ enum class enemy_type
 	skeleton,
 	ghost,
 	maggot,
-	fcppt_maximum = maggot
+	reaper,
+	fcppt_maximum = reaper
 };
 
 }
