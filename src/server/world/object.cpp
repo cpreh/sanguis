@@ -294,6 +294,13 @@ sanguis::server::world::object::openings() const
 		openings_;
 }
 
+sanguis::world_id const
+sanguis::server::world::object::world_id() const
+{
+	return
+		id_;
+}
+
 sanguis::server::entities::optional_base_ref const
 sanguis::server::world::object::insert_with_id(
 	sanguis::server::entities::unique_ptr &&_entity,

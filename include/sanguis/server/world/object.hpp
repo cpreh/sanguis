@@ -94,6 +94,9 @@ public:
 
 	sanguis::creator::opening_container const &
 	openings() const;
+
+	sanguis::world_id const
+	world_id() const;
 private:
 	sanguis::server::entities::optional_base_ref const
 	insert_with_id(

@@ -43,6 +43,7 @@ set(
 	include/sanguis/creator/spawn_pos.hpp
 	include/sanguis/creator/spawn_type.hpp
 	include/sanguis/creator/spawn_type_fwd.hpp
+	include/sanguis/creator/start_name.hpp
 	include/sanguis/creator/tile.hpp
 	include/sanguis/creator/tile_fwd.hpp
 	include/sanguis/creator/tile_grid.hpp
@@ -67,6 +68,10 @@ set(
 	src/aux_/generator_map.cpp
 	src/aux_/generators/graveyard.cpp
 	src/aux_/generators/maze.cpp
+	src/aux_/generators/start.cpp
+	src/aux_/graveyard_name.cpp
+	src/aux_/maze_name.cpp
+	src/aux_/normal_generator_vector.cpp
 	src/aux_/parameters.cpp
 	src/aux_/perimeter_to_coords.cpp
 	src/aux_/place_openings.cpp
@@ -93,7 +98,6 @@ set(
 	src/include/sanguis/creator/aux_/deserialization/tile_grid.hpp
 	src/include/sanguis/creator/aux_/deserialization/top_result.hpp
 	src/include/sanguis/creator/aux_/enemy_type_container.hpp
-	src/include/sanguis/creator/aux_/filled_rect.hpp
 	src/include/sanguis/creator/aux_/find_closest.hpp
 	src/include/sanguis/creator/aux_/find_opposing_cell.hpp
 	src/include/sanguis/creator/aux_/find_reachable.hpp
@@ -103,6 +107,11 @@ set(
 	src/include/sanguis/creator/aux_/generator_map_type.hpp
 	src/include/sanguis/creator/aux_/generators/graveyard.hpp
 	src/include/sanguis/creator/aux_/generators/maze.hpp
+	src/include/sanguis/creator/aux_/generators/start.hpp
+	src/include/sanguis/creator/aux_/graveyard_name.hpp
+	src/include/sanguis/creator/aux_/maze_name.hpp
+	src/include/sanguis/creator/aux_/normal_generator_vector.hpp
+	src/include/sanguis/creator/aux_/normal_generator_vector_type.hpp
 	src/include/sanguis/creator/aux_/optional_pos.hpp
 	src/include/sanguis/creator/aux_/optional_pos_fwd.hpp
 	src/include/sanguis/creator/aux_/parameters.hpp
@@ -141,6 +150,7 @@ set(
 	src/include/sanguis/creator/aux_/serialization/top_result.hpp
 	src/serialize.cpp
 	src/spawn.cpp
+	src/start_name.cpp
 	src/tile_is_solid.cpp
 	src/tile_rect.cpp
 	src/top_parameters.cpp

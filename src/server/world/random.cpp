@@ -1,6 +1,7 @@
 #include <sanguis/world_id.hpp>
 #include <sanguis/world_name.hpp>
 #include <sanguis/creator/opening_count.hpp>
+#include <sanguis/creator/top_parameters.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/generate.hpp>
 #include <sanguis/server/world/object.hpp>
@@ -24,14 +25,7 @@ sanguis::server::world::random(
 	return
 		sanguis::server::world::generate(
 			_parameters,
-			_opening_count,
 			_world_id,
-			sanguis::server::world::random_generator_name(
-				_parameters.random_generator()
-			),
-			sanguis::server::world::random_seed(
-				_parameters.random_generator()
-			),
 			// TODO!
 			sanguis::world_name(
 				FCPPT_TEXT("World ")
@@ -40,6 +34,15 @@ sanguis::server::world::random(
 					_world_id
 				)
 			),
-			_difficulty
+			_difficulty,
+			sanguis::creator::top_parameters{
+				sanguis::server::world::random_generator_name(
+					_parameters.random_generator()
+				),
+				sanguis::server::world::random_seed(
+					_parameters.random_generator()
+				),
+				_opening_count
+			}
 		);
 }

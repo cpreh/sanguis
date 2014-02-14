@@ -3,11 +3,8 @@
 #include <sanguis/world_name.hpp>
 #include <sanguis/creator/deserialize.hpp>
 #include <sanguis/creator/generate.hpp>
-#include <sanguis/creator/name.hpp>
-#include <sanguis/creator/opening_count.hpp>
-#include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/serialize.hpp>
-#include <sanguis/creator/top_parameters.hpp>
+#include <sanguis/creator/top_parameters_fwd.hpp>
 #include <sanguis/creator/top_result.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/object.hpp>
@@ -30,12 +27,10 @@
 sanguis::server::world::object_unique_ptr
 sanguis::server::world::generate(
 	sanguis::server::world::parameters const &_parameters,
-	sanguis::creator::opening_count const _opening_count,
 	sanguis::world_id const _world_id,
-	sanguis::creator::name const &_generator_name,
-	sanguis::creator::seed const _seed,
 	sanguis::world_name const &_world_name,
-	sanguis::server::world::difficulty const _difficulty
+	sanguis::server::world::difficulty const _difficulty,
+	sanguis::creator::top_parameters const &_top_parameters
 )
 {
 	boost::filesystem::path const cache_path(
@@ -77,11 +72,7 @@ sanguis::server::world::generate(
 		sanguis::creator::serialize(
 			stream,
 			sanguis::creator::generate(
-				sanguis::creator::top_parameters(
-					_generator_name,
-					_seed,
-					_opening_count
-				)
+				_top_parameters
 			)
 		);
 	}

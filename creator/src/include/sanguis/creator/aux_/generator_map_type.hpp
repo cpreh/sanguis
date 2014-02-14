@@ -15,10 +15,12 @@ namespace creator
 namespace aux_
 {
 
-typedef std::map<
+typedef
+std::map<
 	sanguis::creator::name,
 	sanguis::creator::aux_::generator_function
-> generator_map_type;
+>
+generator_map_type;
 
 }
 }

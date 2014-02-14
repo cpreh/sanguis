@@ -1,9 +1,11 @@
-#include <sanguis/creator/name.hpp>
+#include <sanguis/creator/start_name.hpp>
+#include <sanguis/creator/aux_/graveyard_name.hpp>
+#include <sanguis/creator/aux_/maze_name.hpp>
 #include <sanguis/creator/aux_/generator_map.hpp>
 #include <sanguis/creator/aux_/generator_map_type.hpp>
 #include <sanguis/creator/aux_/generators/graveyard.hpp>
 #include <sanguis/creator/aux_/generators/maze.hpp>
-#include <fcppt/text.hpp>
+#include <sanguis/creator/aux_/generators/start.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -14,15 +16,15 @@ namespace
 
 sanguis::creator::aux_::generator_map_type const generators{
 	std::make_pair(
-		sanguis::creator::name(
-			FCPPT_TEXT("graveyard")
-		),
+		sanguis::creator::start_name(),
+		&sanguis::creator::aux_::generators::start
+	),
+	std::make_pair(
+		sanguis::creator::aux_::graveyard_name(),
 		&sanguis::creator::aux_::generators::graveyard
 	),
 	std::make_pair(
-		sanguis::creator::name(
-			FCPPT_TEXT("maze")
-		),
+		sanguis::creator::aux_::maze_name(),
 		&sanguis::creator::aux_::generators::maze
 	)
 };

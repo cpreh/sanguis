@@ -59,7 +59,7 @@ sanguis::creator::aux_::place_openings(
 	possible_opening{
 		sanguis::creator::aux_::closest_empty(
 			_grid,
-			(starting_pos + _grid.size() / 2) % _grid.size()
+			(starting_pos + _grid.size() / 2u) % _grid.size()
 		)
 	};
 
