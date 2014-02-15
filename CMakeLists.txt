@@ -1,5 +1,5 @@
 cmake_minimum_required(
-	VERSION 2.6
+	VERSION 2.8.9
 )
 
 project(
@@ -314,6 +314,20 @@ add_subdirectory(
 add_subdirectory(
 	src
 )
+
+option(
+	ENABLE_TOOLS
+	"Build tools to create content for sanguis"
+	OFF
+)
+
+if(
+	ENABLE_TOOLS
+)
+	add_subdirectory(
+		tools
+	)
+endif()
 
 install(
 	DIRECTORY

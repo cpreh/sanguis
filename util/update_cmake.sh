@@ -53,3 +53,15 @@ update_cmake \
 	src/aux_/world/projectile
 
 popd > /dev/null
+
+pushd tools/animations > /dev/null
+
+update_cmake \
+	CMakeLists.txt \
+	SANGUIS_TOOLS_ANIMATIONS_FILES \
+	include \
+	src \
+	-e '.*.ui' \
+	ui
+
+popd > /dev/null
