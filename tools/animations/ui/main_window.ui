@@ -6,191 +6,247 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>940</width>
-    <height>625</height>
+    <width>1545</width>
+    <height>990</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout_2">
-    <item row="0" column="0">
-     <widget class="QFrame" name="frame">
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="title">
+       <string>Selection</string>
       </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Part</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBox"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Weapon</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBox_3"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Animation</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBox_2"/>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>Global Delay</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="spinBox"/>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="groupBox_6">
+      <property name="title">
+       <string>Details</string>
       </property>
-      <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="2">
-        <widget class="QFrame" name="frame_3">
+      <layout class="QGridLayout" name="gridLayout_6">
+       <item row="1" column="0">
+        <widget class="QScrollArea" name="frameArea">
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="scrollAreaWidgetContents">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>681</width>
+            <height>801</height>
+           </rect>
+          </property>
+         </widget>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QFrame" name="frame_4">
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
          </property>
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout">
-          <item>
-           <widget class="QGraphicsView" name="animationPreview">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+         <layout class="QGridLayout" name="gridLayout_5">
+          <item row="1" column="0">
+           <layout class="QFormLayout" name="formLayout">
+            <property name="fieldGrowthPolicy">
+             <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
             </property>
-           </widget>
+            <item row="0" column="0">
+             <widget class="QLabel" name="delayLabel">
+              <property name="text">
+               <string>Delay</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QSpinBox" name="delaySpinBox"/>
+            </item>
+           </layout>
           </item>
-          <item>
-           <widget class="QFrame" name="frame_4">
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
+          <item row="0" column="0">
+           <widget class="QLineEdit" name="lineEdit_2">
+            <property name="text">
+             <string>no resource path selected</string>
             </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
+            <property name="frame">
+             <bool>false</bool>
             </property>
-            <layout class="QHBoxLayout" name="horizontalLayout">
-             <item>
-              <widget class="QLineEdit" name="lineEdit"/>
-             </item>
-             <item>
-              <widget class="QSlider" name="horizontalSlider">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="invertedAppearance">
-                <bool>false</bool>
-               </property>
-               <property name="invertedControls">
-                <bool>false</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButton">
-               <property name="text">
-                <string>Play / Pause</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButton_2">
-               <property name="text">
-                <string>Reset</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
          </layout>
+         <zorder></zorder>
+         <zorder></zorder>
+         <zorder>lineEdit_2</zorder>
         </widget>
        </item>
-       <item row="0" column="0">
-        <widget class="QFrame" name="frame_2">
+       <item row="1" column="2">
+        <widget class="QGraphicsView" name="animationPreview">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="backgroundBrush">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>46</red>
+            <green>46</green>
+            <blue>46</blue>
+           </color>
+          </brush>
+         </property>
+         <property name="interactive">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QFrame" name="frame">
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
          </property>
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_2">
-          <item>
-           <widget class="QLabel" name="label_3">
-            <property name="text">
-             <string>part</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="comboBox"/>
-          </item>
-          <item>
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>weapon</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="comboBox_3"/>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_2">
-            <property name="text">
-             <string>animation</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="comboBox_2"/>
-          </item>
-          <item>
-           <spacer name="verticalSpacer">
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <widget class="QSlider" name="scrubbingBar">
             <property name="orientation">
-             <enum>Qt::Vertical</enum>
+             <enum>Qt::Horizontal</enum>
             </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
+            <property name="invertedAppearance">
+             <bool>false</bool>
             </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_5">
-            <property name="text">
-             <string>global delay</string>
+            <property name="invertedControls">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QSpinBox" name="spinBox"/>
+          <item row="1" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QPushButton" name="resetButton">
+              <property name="text">
+               <string>Reset</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="playButton">
+              <property name="text">
+               <string>Play / Pause</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>120</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>Frame:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLCDNumber" name="lcdNumber"/>
+            </item>
+           </layout>
           </item>
          </layout>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QFrame" name="frame_5">
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
+       <item row="1" column="1" rowspan="2">
+        <widget class="Line" name="line_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
          </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_3">
-          <item>
-           <widget class="QGraphicsView" name="frameList"/>
-          </item>
-          <item>
-           <widget class="QFrame" name="frame_6">
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-            <layout class="QFormLayout" name="formLayout">
-             <item row="0" column="0">
-              <widget class="QSpinBox" name="spinBox_2"/>
-             </item>
-             <item row="0" column="1">
-              <widget class="QLabel" name="label_4">
-               <property name="text">
-                <string>delay</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-         </layout>
         </widget>
        </item>
       </layout>
+      <zorder>frame</zorder>
+      <zorder>frame</zorder>
+      <zorder>frame_4</zorder>
+      <zorder>animationPreview</zorder>
+      <zorder>frameArea</zorder>
+      <zorder>line_2</zorder>
      </widget>
     </item>
    </layout>
@@ -200,7 +256,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>940</width>
+     <width>1545</width>
      <height>20</height>
     </rect>
    </property>
@@ -208,8 +264,18 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionOpen"/>
-    <addaction name="actionSave"/>
+    <widget class="QMenu" name="menuOpen">
+     <property name="title">
+      <string>Open</string>
+     </property>
+     <addaction name="actionJSON"/>
+     <addaction name="actionResource_directory"/>
+    </widget>
+    <addaction name="menuOpen"/>
+    <addaction name="actionSave_3"/>
+    <addaction name="actionSave_2"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuit"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
@@ -222,6 +288,31 @@
   <action name="actionSave">
    <property name="text">
     <string>Save JSON</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Quit</string>
+   </property>
+  </action>
+  <action name="actionSave_2">
+   <property name="text">
+    <string>Save As...</string>
+   </property>
+  </action>
+  <action name="actionJSON">
+   <property name="text">
+    <string>JSON</string>
+   </property>
+  </action>
+  <action name="actionResource_directory">
+   <property name="text">
+    <string>Resource directory</string>
+   </property>
+  </action>
+  <action name="actionSave_3">
+   <property name="text">
+    <string>Save</string>
    </property>
   </action>
  </widget>
