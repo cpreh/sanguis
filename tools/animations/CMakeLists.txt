@@ -35,3 +35,10 @@ qt5_use_modules(
 	sanguis_tools_animations
 	Widgets
 )
+
+install(
+	TARGETS
+	sanguis_tools_animations
+	DESTINATION
+	${INSTALL_BINARY_DIR}
+)
