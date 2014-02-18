@@ -6,6 +6,7 @@
 #include <sanguis/load/server_context.hpp>
 #include <sanguis/messages/client/unique_ptr.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
+#include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/net/data_buffer.hpp>
 #include <sanguis/server/machine_fwd.hpp>
 #include <sanguis/server/player_id.hpp>
@@ -20,6 +21,8 @@
 #include <fcppt/string.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/state_machine.hpp>
+#include <queue>
+#include <unordered_map>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -60,6 +63,9 @@ public:
 		sanguis::messages::server::base const &
 	);
 
+	bool
+	process_overflow();
+
 	sanguis::load::server_context const &
 	resources() const;
 private:
@@ -67,6 +73,12 @@ private:
 	process_message(
 		alda::net::id,
 		sanguis::messages::client::unique_ptr &&
+	);
+
+	void
+	add_overflow_message(
+		alda::net::id,
+		sanguis::messages::server::base const &
 	);
 
 	void
@@ -95,6 +107,21 @@ private:
 	sanguis::timer frame_timer_;
 
 	sanguis::net::data_buffer temp_buffer_;
+
+	typedef
+	std::queue<
+		sanguis::messages::server::unique_ptr
+	>
+	overflow_message_queue;
+
+	typedef
+	std::unordered_map<
+		alda::net::id,
+		overflow_message_queue
+	>
+	overflow_message_map;
+
+	overflow_message_map overflow_messages_;
 
 	fcppt::signal::scoped_connection const
 		disconnect_connection_,

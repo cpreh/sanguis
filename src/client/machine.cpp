@@ -194,6 +194,8 @@ sanguis::client::machine::send(
 				<< FCPPT_TEXT("Not enough space left in the send_buffer")
 		);
 		// FIXME: We have to wait for free space here!
+		// Any client message except the very first message (which is part of the handshake)
+		// can technically be lost, so leave this for now.
 	}
 
 	net_.queue_send();

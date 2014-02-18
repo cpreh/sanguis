@@ -4,14 +4,16 @@
 #include <sanguis/messages/client/base.hpp>
 #include <sanguis/messages/client/unique_ptr.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
+#include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/net/append_to_circular_buffer.hpp>
 #include <sanguis/net/receive_buffer_size.hpp>
 #include <sanguis/net/send_buffer_size.hpp>
 #include <sanguis/net/client/deserialize.hpp>
 #include <sanguis/net/server/serialize_to_circular_buffer.hpp>
 #include <sanguis/net/server/serialize_to_data_buffer.hpp>
-#include <sanguis/server/machine.hpp>
 #include <sanguis/server/log.hpp>
+#include <sanguis/server/machine.hpp>
+#include <sanguis/server/net_id_from_player.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/player_id_from_net.hpp>
 #include <sanguis/server/events/disconnect.hpp>
@@ -27,8 +29,9 @@
 #include <fcppt/exception.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/assert/error.hpp>
 #include <fcppt/log/_.hpp>
-#include <fcppt/log/error.hpp>
+#include <fcppt/log/debug.hpp>
 #include <fcppt/log/info.hpp>
 #include <fcppt/log/verbose.hpp>
 #include <fcppt/signal/auto_connection.hpp>
@@ -66,6 +69,7 @@ sanguis::server::machine::machine(
 		)
 	),
 	temp_buffer_(),
+	overflow_messages_(),
 	disconnect_connection_(
 		net_.register_disconnect(
 			std::bind(
@@ -144,14 +148,11 @@ sanguis::server::machine::send_to_all(
 			)
 		)
 		{
-			FCPPT_LOG_ERROR(
-				sanguis::server::log(),
-				fcppt::log::_
-					<< FCPPT_TEXT("Client ")
-					<< id
-					<< FCPPT_TEXT(" has no space left in machine::send()!")
+			this->add_overflow_message(
+				id,
+				_message
 			);
-			// TODO!
+
 			continue;
 		}
 
@@ -161,6 +162,66 @@ sanguis::server::machine::send_to_all(
 	}
 }
 
+bool
+sanguis::server::machine::process_overflow()
+{
+	bool overflow_remaining{
+		false
+	};
+
+	for(
+		auto &queue_pair
+		:
+		overflow_messages_
+	)
+	{
+		sanguis::server::machine::overflow_message_queue &queue(
+			queue_pair.second
+		);
+
+		while(
+			!queue.empty()
+		)
+		{
+			sanguis::messages::server::unique_ptr const &message(
+				queue.front()
+			);
+
+			alda::net::id const net_id(
+				queue_pair.first
+			);
+
+			alda::net::buffer::circular_send::optional_ref const buffer(
+				net_.send_buffer(
+					net_id
+				)
+			);
+
+			FCPPT_ASSERT_ERROR(
+				buffer
+			);
+
+			if(
+				sanguis::net::server::serialize_to_circular_buffer(
+					*message,
+					*buffer
+				)
+			)
+				queue.pop();
+			else
+				break;
+		}
+
+		overflow_remaining =
+			!queue.empty()
+			||
+			overflow_remaining;
+	}
+
+	return
+		overflow_remaining;
+}
+
 void
 sanguis::server::machine::send_unicast(
 	sanguis::server::player_id const _id,
@@ -168,7 +229,9 @@ sanguis::server::machine::send_unicast(
 )
 {
 	alda::net::id const net_id(
-		_id.get()
+		sanguis::server::net_id_from_player(
+			_id
+		)
 	);
 
 	alda::net::buffer::circular_send::optional_ref const buffer(
@@ -199,15 +262,11 @@ sanguis::server::machine::send_unicast(
 		)
 	)
 	{
-		FCPPT_LOG_ERROR(
-			sanguis::server::log(),
-			fcppt::log::_
-				<< FCPPT_TEXT("Client ")
-				<< net_id
-				<< FCPPT_TEXT(" has no space left in machine::send_unicast()!")
+		this->add_overflow_message(
+			net_id,
+			_message
 		);
 
-		// TODO!
 		return;
 	}
 
@@ -248,11 +307,36 @@ sanguis::server::machine::process_message(
 }
 
 void
+sanguis::server::machine::add_overflow_message(
+	alda::net::id const _id,
+	sanguis::messages::server::base const &_message
+)
+{
+	overflow_messages_[
+		_id
+	].push(
+		_message.clone()
+	);
+
+	FCPPT_LOG_DEBUG(
+		sanguis::server::log(),
+		fcppt::log::_
+			<< FCPPT_TEXT("Client ")
+			<< _id
+			<< FCPPT_TEXT(" has no space left!")
+	);
+}
+
+void
 sanguis::server::machine::disconnect_callback(
 	alda::net::id const _id,
 	fcppt::string const &_error
 )
 {
+	overflow_messages_.erase(
+		_id
+	);
+
 	this->process_event(
 		sanguis::server::events::disconnect(
 			_id

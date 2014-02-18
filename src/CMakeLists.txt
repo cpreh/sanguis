@@ -1331,6 +1331,7 @@ set(
 	include/sanguis/server/net/value_decl.hpp
 	include/sanguis/server/net/value_fwd.hpp
 	include/sanguis/server/net/value_impl.hpp
+	include/sanguis/server/net_id_from_player.hpp
 	include/sanguis/server/object.hpp
 	include/sanguis/server/object_fwd.hpp
 	include/sanguis/server/optional_angle.hpp
@@ -2081,6 +2082,7 @@ set(
 	src/server/net/health_policy.cpp
 	src/server/net/speed.cpp
 	src/server/net/speed_policy.cpp
+	src/server/net_id_from_player.cpp
 	src/server/object.cpp
 	src/server/original_object.cpp
 	src/server/perks/choleric.cpp

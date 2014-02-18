@@ -78,6 +78,14 @@ sanguis::server::states::unpaused::react(
 	sanguis::server::events::tick const &_event
 )
 {
+	if(
+		this->context<
+			sanguis::server::machine
+		>().process_overflow()
+	)
+		return
+			this->discard_event();
+
 	this->context<
 		sanguis::server::states::running
 	>().global_context().update(
