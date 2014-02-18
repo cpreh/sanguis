@@ -19,7 +19,6 @@
 #include <sanguis/server/entities/ifaces/with_links.hpp>
 #include <sanguis/server/collision/body_fwd.hpp>
 #include <sanguis/server/net/angle.hpp>
-#include <sge/projectile/body/scoped_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool_fwd.hpp>
