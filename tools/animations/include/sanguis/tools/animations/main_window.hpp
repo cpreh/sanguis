@@ -31,6 +31,12 @@ public:
 	);
 
 	~main_window();
+public Q_SLOTS:
+	void
+	actionJSON();
+
+	void
+	actionQuit();
 private:
 	fcppt::scoped_ptr<
 		Ui::MainWindow
