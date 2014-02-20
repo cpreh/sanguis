@@ -2198,12 +2198,13 @@ awl_utils_add_portable_executable(
 	${SANGUIS_FILES_ABS}
 )
 
-add_definitions(
-	${awl_DEFINITIONS}
+fcppt_utils_set_target_compiler_flags(
+	sanguis
 )
 
 target_link_libraries(
 	sanguis
+	PRIVATE
 	${sanguiscreator_TARGET}
 	${sanguiscollision_TARGET}
 	${sanguisgui_TARGET}
@@ -2240,6 +2241,7 @@ if(
 )
 	target_link_libraries(
 		sanguis
+		PRIVATE
 		WS2_32
 		Mswsock
 	)

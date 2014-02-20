@@ -31,6 +31,16 @@ add_executable(
 	${SANGUIS_TOOLS_ANIMATIONS_FILES}
 )
 
+fcppt_utils_set_target_compiler_flags(
+	sanguis_tools_animations
+)
+
+target_include_directories(
+	sanguis_tools_animations
+	PRIVATE
+	${fcppt_INCLUDE_DIRS}
+)
+
 qt5_use_modules(
 	sanguis_tools_animations
 	Widgets

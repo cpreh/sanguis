@@ -1,5 +1,6 @@
 cmake_minimum_required(
-	VERSION 2.8.9
+	VERSION
+	2.8.12
 )
 
 project(
@@ -28,32 +29,10 @@ link_directories(
 	${Boost_LIBRARY_DIRS}
 )
 
-# Find Mizuiro
-
-find_package(
-	mizuiro REQUIRED
-)
-
-add_definitions(
-	${mizuiro_definitions}
-)
-
-include_directories(
-	${mizuiro_INCLUDE_DIRS}
-)
-
 # Find FCPPT
 
 find_package(
 	fcppt REQUIRED
-)
-
-add_definitions(
-	${fcppt_DEFINITIONS}
-)
-
-include_directories(
-	${fcppt_INCLUDE_DIRS}
 )
 
 # Find Threads
@@ -70,14 +49,6 @@ add_definitions(
 
 find_package(
 	awl REQUIRED
-)
-
-add_definitions(
-	${awl_DEFINITIONS}
-)
-
-include_directories(
-	${awl_INCLUDE_DIRS}
 )
 
 option(
@@ -129,26 +100,10 @@ find_package(
 	"${NEEDED_SGE_COMPONENTS}"
 )
 
-add_definitions(
-	${sge_DEFINITIONS}
-)
-
-include_directories(
-	${sge_INCLUDE_DIRS}
-)
-
 # Find ALDA
 
 find_package(
 	alda REQUIRED
-)
-
-add_definitions(
-	${alda_DEFINITIONS}
-)
-
-include_directories(
-	${alda_INCLUDE_DIRS}
 )
 
 include(
@@ -237,7 +192,12 @@ macro(
 
 	target_link_libraries(
 		"${LIBNAME}"
+		PRIVATE
 		${DEPS}
+	)
+
+	fcppt_utils_set_target_compiler_flags(
+		"${LIBNAME}"
 	)
 
 	install(

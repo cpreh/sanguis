@@ -2,10 +2,6 @@ include(
 	AwlMainGenerator
 )
 
-add_definitions(
-	${awl_DEFINITIONS}
-)
-
 include_directories(
 	include
 )
@@ -15,16 +11,32 @@ macro(
 	TEST_NAME
 	DEPS
 )
-	awl_utils_add_portable_executable(
+	set(
+		APP_NAME
 		gui_test_${TEST_NAME}
+	)
+
+	awl_utils_add_portable_executable(
+		${APP_NAME}
 		"sanguis_gui_test::main"
 		"${TEST_NAME}.cpp"
 	)
 
+	fcppt_utils_set_target_compiler_flags(
+		${APP_NAME}
+	)
+
+	target_include_directories(
+		${APP_NAME}
+		PRIVATE
+		${awl_INCLUDE_DIRS}
+	)
+
 	target_link_libraries(
-		gui_test_${TEST_NAME}
+		${APP_NAME}
+		PRIVATE
 		${sanguisgui_TARGET}
-		"${DEPS}"
+		${DEPS}
 	)
 endmacro()
 
