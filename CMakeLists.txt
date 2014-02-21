@@ -110,6 +110,10 @@ include(
 	SGECustomPath
 )
 
+fcppt_utils_install_data_dir(
+	INSTALL_DATA_DIR
+)
+
 set(
 	INSTALL_MEDIA_DIR
 	${INSTALL_DATA_DIR}/media
