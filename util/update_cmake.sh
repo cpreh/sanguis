@@ -54,6 +54,16 @@ update_cmake \
 
 popd > /dev/null
 
+pushd model > /dev/null
+
+update_cmake \
+	CMakeLists.txt \
+	SANGUIS_MODEL_FILES \
+	include \
+	src
+
+popd > /dev/null
+
 pushd tools/animations > /dev/null
 
 update_cmake \

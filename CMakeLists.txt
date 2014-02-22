@@ -276,6 +276,10 @@ add_subdirectory(
 )
 
 add_subdirectory(
+	model
+)
+
+add_subdirectory(
 	src
 )
 

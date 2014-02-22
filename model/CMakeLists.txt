@@ -1,0 +1,41 @@
+set(
+	SANGUIS_MODEL_FILES
+	include/sanguis/model/animation_delay.hpp
+	include/sanguis/model/animation_delay_fwd.hpp
+	include/sanguis/model/cell_size.hpp
+	include/sanguis/model/cell_size_fwd.hpp
+	include/sanguis/model/deserialize.hpp
+	include/sanguis/model/exception.hpp
+	include/sanguis/model/object.hpp
+	include/sanguis/model/object_fwd.hpp
+	include/sanguis/model/optional_animation_delay.hpp
+	include/sanguis/model/optional_animation_delay_fwd.hpp
+	include/sanguis/model/part.hpp
+	include/sanguis/model/part_fwd.hpp
+	include/sanguis/model/part_map.hpp
+	include/sanguis/model/serialize.hpp
+	src/aux_/deserialize/animation_delay.cpp
+	src/aux_/deserialize/cell_size.cpp
+	src/aux_/deserialize/parts.cpp
+	src/deserialize.cpp
+	src/exception.cpp
+	src/include/sanguis/model/aux_/deserialize/animation_delay.hpp
+	src/include/sanguis/model/aux_/deserialize/cell_size.hpp
+	src/include/sanguis/model/aux_/deserialize/parts.hpp
+	src/object.cpp
+)
+
+sanguis_generate_symbol_header(
+	model
+)
+
+include_directories(
+	"${CMAKE_CURRENT_SOURCE_DIR}/include"
+	"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
+)
+
+sanguis_add_library(
+	sanguismodel
+	"${SANGUIS_MODEL_FILES}"
+	"${fcppt_core_TARGET};${fcppt_filesystem_TARGET};${sgeparse_TARGET};${sgeparsejson_TARGET}"
+)

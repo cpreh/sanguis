@@ -51,5 +51,3 @@ sanguis::load::model::load_dim(
 			)
 		);
 }
-
-

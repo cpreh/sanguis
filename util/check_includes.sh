@@ -18,4 +18,8 @@ check_includes gui/include
 
 check_includes gui/src/include
 
+check_includes model/include
+
+check_includes model/src/include
+
 check_includes tools/animations/include
