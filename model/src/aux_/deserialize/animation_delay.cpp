@@ -4,7 +4,7 @@
 #include <sge/parse/json/find_member.hpp>
 #include <sge/parse/json/int_type.hpp>
 #include <sge/parse/json/object.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional_bind.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
@@ -16,32 +16,24 @@ sanguis::model::aux_::deserialize::animation_delay(
 	sge::parse::json::object const &_object
 )
 {
-	typedef
-	fcppt::optional<
-		sge::parse::json::int_type
-	>
-	optional_int_type;
-
-	optional_int_type const result{
-		sge::parse::json::find_member<
-			sge::parse::json::int_type
-		>(
-			_object.members,
-			FCPPT_TEXT("delay")
-		)
-	};
-
 	return
-		result
-		?
-			sanguis::model::optional_animation_delay{
-				sanguis::model::animation_delay{
-					std::chrono::milliseconds{
-						*result
-					}
-				}
+		fcppt::optional_bind(
+			sge::parse::json::find_member<
+				sge::parse::json::int_type
+			>(
+				_object.members,
+				FCPPT_TEXT("delay")
+			),
+			[](
+				sge::parse::json::int_type const _value
+			)
+			{
+				return
+					sanguis::model::animation_delay{
+						std::chrono::milliseconds{
+							_value
+						}
+					};
 			}
-		:
-			sanguis::model::optional_animation_delay{}
-		;
+		);
 }

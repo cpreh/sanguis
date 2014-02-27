@@ -33,7 +33,7 @@ public:
 	seed() const;
 
 	SANGUIS_CREATOR_SYMBOL
-	sanguis::creator::name const
+	sanguis::creator::name const &
 	name() const;
 
 	SANGUIS_CREATOR_SYMBOL

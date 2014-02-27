@@ -43,7 +43,7 @@ sanguis::creator::top_result::seed() const
 	return seed_;
 }
 
-sanguis::creator::name const
+sanguis::creator::name const &
 sanguis::creator::top_result::name() const
 {
 	return name_;

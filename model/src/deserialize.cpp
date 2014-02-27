@@ -1,11 +1,11 @@
+#include <sge/exception.hpp>
 #include <sanguis/model/deserialize.hpp>
 #include <sanguis/model/exception.hpp>
 #include <sanguis/model/object.hpp>
-#include <sanguis/model/aux_/deserialize/animation_delay.hpp>
-#include <sanguis/model/aux_/deserialize/cell_size.hpp>
-#include <sanguis/model/aux_/deserialize/parts.hpp>
-#include <sge/parse/exception.hpp>
+#include <sge/image2d/system_fwd.hpp>
 #include <sge/parse/json/object.hpp>
+#include <sanguis/model/aux_/deserialize/object.hpp>
+#include <sanguis/model/aux_/deserialize/parameters.hpp>
 #include <sge/parse/json/parse_file_exn.hpp>
 #include <sge/parse/json/start.hpp>
 #include <fcppt/text.hpp>
@@ -17,7 +17,8 @@
 
 sanguis::model::object
 sanguis::model::deserialize(
-	boost::filesystem::path const &_path
+	boost::filesystem::path const &_path,
+	sge::image2d::system &_image_system
 )
 try
 {
@@ -39,25 +40,17 @@ try
 				FCPPT_TEXT("The outermost element must be an object")
 			};
 
-	sge::parse::json::object const &object{
-		start.object()
-	};
-
 	return
-		sanguis::model::object{
-			sanguis::model::aux_::deserialize::cell_size(
-				object
-			),
-			sanguis::model::aux_::deserialize::animation_delay(
-				object
-			),
-			sanguis::model::aux_::deserialize::parts(
-				object
-			)
-		};
+		sanguis::model::aux_::deserialize::object(
+			sanguis::model::aux_::deserialize::parameters{
+				_path.parent_path(),
+				_image_system
+			},
+			start.object()
+		);
 }
 catch(
-	sge::parse::exception const &_error
+	sge::exception const &_error
 )
 {
 	throw

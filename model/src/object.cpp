@@ -6,6 +6,7 @@
 #include <sanguis/model/part_map.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/container/find_exn.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -14,7 +15,8 @@
 sanguis::model::object::object(
 	sanguis::model::cell_size const _cell_size,
 	sanguis::model::optional_animation_delay const _animation_delay,
-	sanguis::model::part_map &&_parts
+	sanguis::model::part_map &&_parts,
+	sanguis::model::optional_image &&_image
 )
 :
 	cell_size_{
@@ -27,7 +29,12 @@ sanguis::model::object::object(
 		std::move(
 			_parts
 		)
-	)
+	),
+	image_{
+		std::move(
+			_image
+		)
+	}
 {
 }
 
@@ -65,26 +72,22 @@ sanguis::model::object::part(
 	fcppt::string const &_name
 )
 {
-	sanguis::model::part_map::iterator const it{
-		parts_.find(
-			_name
-		)
-	};
-
-	if(
-		it
-		==
-		parts_.end()
-	)
-		throw
-			sanguis::model::exception{
-				FCPPT_TEXT("No part named ")
-				+
-				_name
-			};
-
 	return
-		it->second;
+		fcppt::container::find_exn(
+			parts_,
+			_name,
+			[
+				_name
+			]
+			{
+				return
+					sanguis::model::exception{
+						FCPPT_TEXT("No part named ")
+						+
+						_name
+					};
+			}
+		);
 }
 
 sanguis::model::part_map const &

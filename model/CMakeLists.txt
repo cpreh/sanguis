@@ -1,7 +1,15 @@
 set(
 	SANGUIS_MODEL_FILES
+	include/sanguis/model/animation.hpp
 	include/sanguis/model/animation_delay.hpp
 	include/sanguis/model/animation_delay_fwd.hpp
+	include/sanguis/model/animation_fwd.hpp
+	include/sanguis/model/animation_index.hpp
+	include/sanguis/model/animation_map.hpp
+	include/sanguis/model/animation_range.hpp
+	include/sanguis/model/animation_range_fwd.hpp
+	include/sanguis/model/animation_sound.hpp
+	include/sanguis/model/animation_sound_fwd.hpp
 	include/sanguis/model/cell_size.hpp
 	include/sanguis/model/cell_size_fwd.hpp
 	include/sanguis/model/deserialize.hpp
@@ -10,19 +18,52 @@ set(
 	include/sanguis/model/object_fwd.hpp
 	include/sanguis/model/optional_animation_delay.hpp
 	include/sanguis/model/optional_animation_delay_fwd.hpp
+	include/sanguis/model/optional_animation_sound.hpp
+	include/sanguis/model/optional_animation_sound_fwd.hpp
+	include/sanguis/model/optional_image.hpp
+	include/sanguis/model/optional_image_fwd.hpp
 	include/sanguis/model/part.hpp
 	include/sanguis/model/part_fwd.hpp
 	include/sanguis/model/part_map.hpp
 	include/sanguis/model/serialize.hpp
+	include/sanguis/model/weapon_category.hpp
+	include/sanguis/model/weapon_category_fwd.hpp
+	include/sanguis/model/weapon_category_map.hpp
+	src/animation.cpp
+	src/animation_range.cpp
+	src/aux_/deserialize/animation.cpp
 	src/aux_/deserialize/animation_delay.cpp
+	src/aux_/deserialize/animation_map.cpp
+	src/aux_/deserialize/animation_range.cpp
+	src/aux_/deserialize/animation_sound.cpp
 	src/aux_/deserialize/cell_size.cpp
-	src/aux_/deserialize/parts.cpp
+	src/aux_/deserialize/image.cpp
+	src/aux_/deserialize/object.cpp
+	src/aux_/deserialize/parameters.cpp
+	src/aux_/deserialize/part.cpp
+	src/aux_/deserialize/part_map.cpp
+	src/aux_/deserialize/weapon_category.cpp
+	src/aux_/deserialize/weapon_category_map.cpp
 	src/deserialize.cpp
 	src/exception.cpp
+	src/include/sanguis/model/aux_/deserialize/animation.hpp
 	src/include/sanguis/model/aux_/deserialize/animation_delay.hpp
+	src/include/sanguis/model/aux_/deserialize/animation_map.hpp
+	src/include/sanguis/model/aux_/deserialize/animation_range.hpp
+	src/include/sanguis/model/aux_/deserialize/animation_sound.hpp
 	src/include/sanguis/model/aux_/deserialize/cell_size.hpp
-	src/include/sanguis/model/aux_/deserialize/parts.hpp
+	src/include/sanguis/model/aux_/deserialize/image.hpp
+	src/include/sanguis/model/aux_/deserialize/map.hpp
+	src/include/sanguis/model/aux_/deserialize/object.hpp
+	src/include/sanguis/model/aux_/deserialize/parameters.hpp
+	src/include/sanguis/model/aux_/deserialize/parameters_fwd.hpp
+	src/include/sanguis/model/aux_/deserialize/part.hpp
+	src/include/sanguis/model/aux_/deserialize/part_map.hpp
+	src/include/sanguis/model/aux_/deserialize/weapon_category.hpp
+	src/include/sanguis/model/aux_/deserialize/weapon_category_map.hpp
 	src/object.cpp
+	src/part.cpp
+	src/weapon_category.cpp
 )
 
 sanguis_generate_symbol_header(
@@ -37,5 +78,5 @@ include_directories(
 sanguis_add_library(
 	sanguismodel
 	"${SANGUIS_MODEL_FILES}"
-	"${fcppt_core_TARGET};${fcppt_filesystem_TARGET};${sgeparse_TARGET};${sgeparsejson_TARGET}"
+	"${fcppt_core_TARGET};${fcppt_filesystem_TARGET};${sgeimage2d_TARGET};${sgeparse_TARGET};${sgeparsejson_TARGET}"
 )

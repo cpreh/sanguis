@@ -1,15 +1,13 @@
-#ifndef SANGUIS_MODEL_OBJECT_HPP_INCLUDED
-#define SANGUIS_MODEL_OBJECT_HPP_INCLUDED
+#ifndef SANGUIS_MODEL_ANIMATION_HPP_INCLUDED
+#define SANGUIS_MODEL_ANIMATION_HPP_INCLUDED
 
-#include <sanguis/model/cell_size.hpp>
-#include <sanguis/model/object_fwd.hpp>
+#include <sanguis/model/animation_fwd.hpp>
+#include <sanguis/model/animation_range.hpp>
 #include <sanguis/model/optional_animation_delay.hpp>
+#include <sanguis/model/optional_animation_sound.hpp>
 #include <sanguis/model/optional_image.hpp>
-#include <sanguis/model/part_fwd.hpp>
-#include <sanguis/model/part_map.hpp>
 #include <sanguis/model/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/string.hpp>
 
 
 namespace sanguis
@@ -17,32 +15,32 @@ namespace sanguis
 namespace model
 {
 
-class object
+class animation
 {
 	FCPPT_NONCOPYABLE(
-		object
+		animation
 	);
 public:
-	object(
-		sanguis::model::cell_size,
+	animation(
+		sanguis::model::animation_range,
 		sanguis::model::optional_animation_delay,
-		sanguis::model::part_map &&,
+		sanguis::model::optional_animation_sound const &,
 		sanguis::model::optional_image &&
 	);
 
 	SANGUIS_MODEL_SYMBOL
-	object(
-		object &&
+	animation(
+		animation &&
 	);
 
 	SANGUIS_MODEL_SYMBOL
-	object &
+	animation &
 	operator=(
-		object &&
+		animation &&
 	);
 
 	SANGUIS_MODEL_SYMBOL
-	~object();
+	~animation();
 
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::optional_animation_delay const
@@ -55,24 +53,20 @@ public:
 	);
 
 	SANGUIS_MODEL_SYMBOL
-	sanguis::model::part &
-	part(
-		fcppt::string const &
+	sanguis::model::optional_animation_sound const
+	animation_sound() const;
+
+	SANGUIS_MODEL_SYMBOL
+	void
+	animation_sound(
+		sanguis::model::optional_animation_sound const &
 	);
-
-	SANGUIS_MODEL_SYMBOL
-	sanguis::model::part_map const &
-	parts() const;
-
-	SANGUIS_MODEL_SYMBOL
-	sanguis::model::cell_size const
-	cell_size() const;
 private:
-	sanguis::model::cell_size cell_size_;
+	sanguis::model::animation_range animation_range_;
 
 	sanguis::model::optional_animation_delay animation_delay_;
 
-	sanguis::model::part_map parts_;
+	sanguis::model::optional_animation_sound animation_sound_;
 
 	sanguis::model::optional_image image_;
 };

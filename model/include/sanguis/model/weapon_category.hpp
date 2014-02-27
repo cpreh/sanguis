@@ -1,11 +1,11 @@
-#ifndef SANGUIS_MODEL_PART_HPP_INCLUDED
-#define SANGUIS_MODEL_PART_HPP_INCLUDED
+#ifndef SANGUIS_MODEL_WEAPON_CATEGORY_HPP_INCLUDED
+#define SANGUIS_MODEL_WEAPON_CATEGORY_HPP_INCLUDED
 
+#include <sanguis/model/animation_fwd.hpp>
+#include <sanguis/model/animation_map.hpp>
 #include <sanguis/model/optional_image.hpp>
-#include <sanguis/model/part_fwd.hpp>
 #include <sanguis/model/symbol.hpp>
 #include <sanguis/model/weapon_category_fwd.hpp>
-#include <sanguis/model/weapon_category_map.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
 
@@ -15,42 +15,42 @@ namespace sanguis
 namespace model
 {
 
-class part
+class weapon_category
 {
 	FCPPT_NONCOPYABLE(
-		part
+		weapon_category
 	);
 public:
-	part(
-		sanguis::model::weapon_category_map &&,
+	weapon_category(
+		sanguis::model::animation_map &&,
 		sanguis::model::optional_image &&
 	);
 
 	SANGUIS_MODEL_SYMBOL
-	part(
-		part &&
-	);
-
-	SANGUIS_MODEL_SYMBOL
-	part &
-	operator=(
-		part &&
-	);
-
-	SANGUIS_MODEL_SYMBOL
-	~part();
-
-	SANGUIS_MODEL_SYMBOL
-	sanguis::model::weapon_category &
 	weapon_category(
+		weapon_category &&
+	);
+
+	SANGUIS_MODEL_SYMBOL
+	weapon_category &
+	operator=(
+		weapon_category &&
+	);
+
+	SANGUIS_MODEL_SYMBOL
+	~weapon_category();
+
+	SANGUIS_MODEL_SYMBOL
+	sanguis::model::animation &
+	animation(
 		fcppt::string const &
 	);
 
 	SANGUIS_MODEL_SYMBOL
-	sanguis::model::weapon_category_map const &
-	weapon_categories() const;
+	sanguis::model::animation_map const &
+	animations() const;
 private:
-	sanguis::model::weapon_category_map weapon_categories_;
+	sanguis::model::animation_map animations_;
 
 	sanguis::model::optional_image image_;
 };
