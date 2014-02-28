@@ -1,5 +1,5 @@
 #include <sanguis/model/exception.hpp>
-#include <sanguis/model/optional_image.hpp>
+#include <sanguis/model/optional_image_name.hpp>
 #include <sanguis/model/part.hpp>
 #include <sanguis/model/weapon_category_fwd.hpp>
 #include <sanguis/model/weapon_category_map.hpp>
@@ -13,7 +13,7 @@
 
 sanguis::model::part::part(
 	sanguis::model::weapon_category_map &&_weapon_categories,
-	sanguis::model::optional_image &&_image
+	sanguis::model::optional_image_name const &_image_name
 )
 :
 	weapon_categories_(
@@ -21,10 +21,8 @@ sanguis::model::part::part(
 			_weapon_categories
 		)
 	),
-	image_(
-		std::move(
-			_image
-		)
+	image_name_(
+		_image_name
 	)
 {
 }
@@ -70,4 +68,11 @@ sanguis::model::part::weapon_categories() const
 {
 	return
 		weapon_categories_;
+}
+
+sanguis::model::optional_image_name const &
+sanguis::model::part::image_name() const
+{
+	return
+		image_name_;
 }

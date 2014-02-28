@@ -2,6 +2,7 @@
 #include <sanguis/model/exception.hpp>
 #include <sanguis/model/object.hpp>
 #include <sanguis/model/optional_animation_delay.hpp>
+#include <sanguis/model/optional_image_name.hpp>
 #include <sanguis/model/part_fwd.hpp>
 #include <sanguis/model/part_map.hpp>
 #include <fcppt/string.hpp>
@@ -16,7 +17,7 @@ sanguis::model::object::object(
 	sanguis::model::cell_size const _cell_size,
 	sanguis::model::optional_animation_delay const _animation_delay,
 	sanguis::model::part_map &&_parts,
-	sanguis::model::optional_image &&_image
+	sanguis::model::optional_image_name const &_image_name
 )
 :
 	cell_size_{
@@ -30,10 +31,8 @@ sanguis::model::object::object(
 			_parts
 		)
 	),
-	image_{
-		std::move(
-			_image
-		)
+	image_name_{
+		_image_name
 	}
 {
 }
@@ -102,4 +101,11 @@ sanguis::model::object::cell_size() const
 {
 	return
 		cell_size_;
+}
+
+sanguis::model::optional_image_name const &
+sanguis::model::object::image_name() const
+{
+	return
+		image_name_;
 }

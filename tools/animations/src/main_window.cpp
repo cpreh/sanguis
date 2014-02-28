@@ -65,8 +65,7 @@ sanguis::tools::animations::main_window::actionJSON()
 			sanguis::model::deserialize(
 				sanguis::tools::animations::qt_string_to_fcppt(
 					result
-				),
-				sge_systems_.image_system()
+				)
 			)
 		);
 	}

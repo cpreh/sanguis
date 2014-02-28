@@ -1,11 +1,8 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/exception.hpp>
 #include <sanguis/load/model/make_delay.hpp>
-#include <sanguis/load/model/optional_delay.hpp>
-#include <sge/parse/json/find_member.hpp>
-#include <sge/parse/json/int_type.hpp>
-#include <sge/parse/json/object.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <sanguis/model/animation.hpp>
+#include <sanguis/model/optional_animation_delay.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
@@ -14,43 +11,30 @@
 
 sanguis::duration const
 sanguis::load::model::make_delay(
-	sge::parse::json::object const &_object,
-	sanguis::load::model::optional_delay const &_opt_delay
+	sanguis::model::animation const &_animation,
+	sanguis::model::optional_animation_delay const &_header_delay
 )
 {
-	typedef fcppt::optional<
-		sge::parse::json::int_type
-	> optional_int;
-
-	optional_int const opt_value(
-		sge::parse::json::find_member<
-			sge::parse::json::int_type
-		>(
-			_object.members,
-			FCPPT_TEXT("delay")
-		)
+	sanguis::model::optional_animation_delay const delay(
+		_animation.animation_delay()
+		?
+			_animation.animation_delay()
+		:
+			_header_delay
 	);
 
 	if(
-		opt_value
+		!delay
 	)
-		return
-			std::chrono::duration_cast<
-				sanguis::duration
-			>(
-				std::chrono::milliseconds(
-					*opt_value
-				)
+		throw
+			sanguis::exception(
+				FCPPT_TEXT("delay not in header but not in specified leaf TODO either!")
 			);
 
-	if(
-		_opt_delay
-	)
-		return
-			*_opt_delay;
-
-	throw
-		sanguis::exception(
-			FCPPT_TEXT("delay not in header but not in specified leaf TODO either!")
+	return
+		std::chrono::duration_cast<
+			sanguis::duration
+		>(
+			delay->get()
 		);
 }

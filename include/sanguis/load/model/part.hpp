@@ -6,7 +6,7 @@
 #include <sanguis/load/model/part_fwd.hpp>
 #include <sanguis/load/model/weapon_category_fwd.hpp>
 #include <sanguis/load/model/weapon_category_map.hpp>
-#include <sge/parse/json/object_fwd.hpp>
+#include <sanguis/model/part_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -24,7 +24,7 @@ class part
 	);
 public:
 	part(
-		sge::parse::json::object const &,
+		sanguis::model::part const &,
 		sanguis::load::model::global_parameters const &
 	);
 

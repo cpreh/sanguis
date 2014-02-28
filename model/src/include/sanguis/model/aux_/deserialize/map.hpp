@@ -1,7 +1,6 @@
 #ifndef SANGUIS_MODEL_AUX__DESERIALIZE_MAP_HPP_INCLUDED
 #define SANGUIS_MODEL_AUX__DESERIALIZE_MAP_HPP_INCLUDED
 
-#include <sanguis/model/aux_/deserialize/parameters_fwd.hpp>
 #include <sge/parse/json/find_member_exn.hpp>
 #include <sge/parse/json/member.hpp>
 #include <sge/parse/json/object.hpp>
@@ -26,14 +25,12 @@ template<
 >
 Result
 map(
-	sanguis::model::aux_::deserialize::parameters const &_parameters,
 	sge::parse::json::object const &_object,
 	sge::parse::json::string const &_name,
 	typename
 	Result::mapped_type (
 		*_deserialize_inner
 	)(
-		sanguis::model::aux_::deserialize::parameters const &,
 		sge::parse::json::object const &
 	)
 )
@@ -49,7 +46,6 @@ map(
 				_name
 			).members,
 			[
-				&_parameters,
 				_deserialize_inner
 			](
 				sge::parse::json::member const &_member
@@ -59,7 +55,6 @@ map(
 					std::make_pair(
 						_member.first,
 						_deserialize_inner(
-							_parameters,
 							_member.second.get<
 								sge::parse::json::object
 							>()

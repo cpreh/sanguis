@@ -4,7 +4,7 @@
 #include <sanguis/model/cell_size.hpp>
 #include <sanguis/model/object_fwd.hpp>
 #include <sanguis/model/optional_animation_delay.hpp>
-#include <sanguis/model/optional_image.hpp>
+#include <sanguis/model/optional_image_name.hpp>
 #include <sanguis/model/part_fwd.hpp>
 #include <sanguis/model/part_map.hpp>
 #include <sanguis/model/symbol.hpp>
@@ -27,7 +27,7 @@ public:
 		sanguis::model::cell_size,
 		sanguis::model::optional_animation_delay,
 		sanguis::model::part_map &&,
-		sanguis::model::optional_image &&
+		sanguis::model::optional_image_name const &
 	);
 
 	SANGUIS_MODEL_SYMBOL
@@ -67,6 +67,10 @@ public:
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::cell_size const
 	cell_size() const;
+
+	SANGUIS_MODEL_SYMBOL
+	sanguis::model::optional_image_name const &
+	image_name() const;
 private:
 	sanguis::model::cell_size cell_size_;
 
@@ -74,7 +78,7 @@ private:
 
 	sanguis::model::part_map parts_;
 
-	sanguis::model::optional_image image_;
+	sanguis::model::optional_image_name image_name_;
 };
 
 }

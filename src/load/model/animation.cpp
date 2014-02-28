@@ -5,29 +5,29 @@
 #include <sanguis/load/model/make_texture.hpp>
 #include <sanguis/load/model/optional_sound.hpp>
 #include <sanguis/load/resource/animation/series.hpp>
+#include <sanguis/model/animation.hpp>
 
 
 sanguis::load::model::animation::animation(
-	sge::parse::json::object const &_json_object,
+	sanguis::model::animation const &_animation,
 	sanguis::load::model::global_parameters const &_parameters
 )
 :
 	texture_(
 		sanguis::load::model::make_texture(
-			_json_object,
 			_parameters
 		)
 	),
 	series_(
 		sanguis::load::model::make_series(
-			_json_object,
+			_animation,
 			_parameters,
 			*texture_
 		)
 	),
 	sound_(
 		sanguis::load::model::make_sound(
-			_json_object,
+			_animation.animation_sound(),
 			_parameters.sounds()
 		)
 	)

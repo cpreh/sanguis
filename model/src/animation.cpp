@@ -2,17 +2,14 @@
 #include <sanguis/model/animation_range.hpp>
 #include <sanguis/model/optional_animation_delay.hpp>
 #include <sanguis/model/optional_animation_sound.hpp>
-#include <sanguis/model/optional_image.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <utility>
-#include <fcppt/config/external_end.hpp>
+#include <sanguis/model/optional_image_name.hpp>
 
 
 sanguis::model::animation::animation(
 	sanguis::model::animation_range const _animation_range,
 	sanguis::model::optional_animation_delay const _animation_delay,
 	sanguis::model::optional_animation_sound const &_animation_sound,
-	sanguis::model::optional_image &&_image
+	sanguis::model::optional_image_name const &_image_name
 )
 :
 	animation_range_{
@@ -24,10 +21,8 @@ sanguis::model::animation::animation(
 	animation_sound_{
 		_animation_sound
 	},
-	image_{
-		std::move(
-			_image
-		)
+	image_name_{
+		_image_name
 	}
 {
 }
@@ -43,6 +38,13 @@ sanguis::model::animation::operator=(
 
 sanguis::model::animation::~animation()
 {
+}
+
+sanguis::model::animation_range const
+sanguis::model::animation::animation_range() const
+{
+	return
+		animation_range_;
 }
 
 sanguis::model::optional_animation_delay const
@@ -75,4 +77,11 @@ sanguis::model::animation::animation_sound(
 {
 	animation_sound_ =
 		_animation_sound;
+}
+
+sanguis::model::optional_image_name const &
+sanguis::model::animation::image_name() const
+{
+	return
+		image_name_;
 }

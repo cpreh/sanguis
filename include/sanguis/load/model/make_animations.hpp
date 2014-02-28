@@ -3,7 +3,7 @@
 
 #include <sanguis/load/model/animation_map.hpp>
 #include <sanguis/load/model/global_parameters_fwd.hpp>
-#include <sge/parse/json/object_fwd.hpp>
+#include <sanguis/model/weapon_category_fwd.hpp>
 
 
 namespace sanguis
@@ -15,7 +15,7 @@ namespace model
 
 sanguis::load::model::animation_map
 make_animations(
-	sge::parse::json::object const &,
+	sanguis::model::weapon_category const &,
 	sanguis::load::model::global_parameters const &
 );
 

@@ -3,7 +3,7 @@
 
 #include <sanguis/model/animation_fwd.hpp>
 #include <sanguis/model/animation_map.hpp>
-#include <sanguis/model/optional_image.hpp>
+#include <sanguis/model/optional_image_name.hpp>
 #include <sanguis/model/symbol.hpp>
 #include <sanguis/model/weapon_category_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -23,7 +23,7 @@ class weapon_category
 public:
 	weapon_category(
 		sanguis::model::animation_map &&,
-		sanguis::model::optional_image &&
+		sanguis::model::optional_image_name const &
 	);
 
 	SANGUIS_MODEL_SYMBOL
@@ -49,10 +49,14 @@ public:
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::animation_map const &
 	animations() const;
+
+	SANGUIS_MODEL_SYMBOL
+	sanguis::model::optional_image_name const &
+	image_name() const;
 private:
 	sanguis::model::animation_map animations_;
 
-	sanguis::model::optional_image image_;
+	sanguis::model::optional_image_name image_name_;
 };
 
 }

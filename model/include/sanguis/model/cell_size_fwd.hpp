@@ -1,8 +1,8 @@
 #ifndef SANGUIS_MODEL_CELL_SIZE_FWD_HPP_INCLUDED
 #define SANGUIS_MODEL_CELL_SIZE_FWD_HPP_INCLUDED
 
-#include <sge/image2d/dim_fwd.hpp>
-#include <fcppt/make_strong_typedef.hpp>
+#include <sanguis/model/cell_size_unit.hpp>
+#include <fcppt/math/dim/static.hpp>
 
 
 namespace sanguis
@@ -10,10 +10,12 @@ namespace sanguis
 namespace model
 {
 
-FCPPT_MAKE_STRONG_TYPEDEF(
-	sge::image2d::dim,
-	cell_size
-);
+typedef
+fcppt::math::dim::static_<
+	sanguis::model::cell_size_unit,
+	2
+>
+cell_size;
 
 }
 }

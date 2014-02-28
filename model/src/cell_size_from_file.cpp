@@ -1,7 +1,7 @@
-#include <sanguis/model/deserialize.hpp>
+#include <sanguis/model/cell_size.hpp>
+#include <sanguis/model/cell_size_from_file.hpp>
 #include <sanguis/model/exception.hpp>
-#include <sanguis/model/object.hpp>
-#include <sanguis/model/aux_/deserialize/object.hpp>
+#include <sanguis/model/aux_/deserialize/cell_size.hpp>
 #include <sge/parse/json/parse_file_exn.hpp>
 #include <sge/parse/json/start.hpp>
 #include <fcppt/exception.hpp>
@@ -10,14 +10,14 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::model::object
-sanguis::model::deserialize(
+sanguis::model::cell_size
+sanguis::model::cell_size_from_file(
 	boost::filesystem::path const &_path
 )
 try
 {
 	return
-		sanguis::model::aux_::deserialize::object(
+		sanguis::model::aux_::deserialize::cell_size(
 			sge::parse::json::parse_file_exn(
 				_path
 			).object()

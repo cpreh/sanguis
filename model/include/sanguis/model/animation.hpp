@@ -5,7 +5,7 @@
 #include <sanguis/model/animation_range.hpp>
 #include <sanguis/model/optional_animation_delay.hpp>
 #include <sanguis/model/optional_animation_sound.hpp>
-#include <sanguis/model/optional_image.hpp>
+#include <sanguis/model/optional_image_name.hpp>
 #include <sanguis/model/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -25,7 +25,7 @@ public:
 		sanguis::model::animation_range,
 		sanguis::model::optional_animation_delay,
 		sanguis::model::optional_animation_sound const &,
-		sanguis::model::optional_image &&
+		sanguis::model::optional_image_name const &
 	);
 
 	SANGUIS_MODEL_SYMBOL
@@ -41,6 +41,10 @@ public:
 
 	SANGUIS_MODEL_SYMBOL
 	~animation();
+
+	SANGUIS_MODEL_SYMBOL
+	sanguis::model::animation_range const
+	animation_range() const;
 
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::optional_animation_delay const
@@ -61,6 +65,10 @@ public:
 	animation_sound(
 		sanguis::model::optional_animation_sound const &
 	);
+
+	SANGUIS_MODEL_SYMBOL
+	sanguis::model::optional_image_name const &
+	image_name() const;
 private:
 	sanguis::model::animation_range animation_range_;
 
@@ -68,7 +76,7 @@ private:
 
 	sanguis::model::optional_animation_sound animation_sound_;
 
-	sanguis::model::optional_image image_;
+	sanguis::model::optional_image_name image_name_;
 };
 
 }

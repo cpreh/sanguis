@@ -1,7 +1,7 @@
 #include <sanguis/model/animation_fwd.hpp>
 #include <sanguis/model/animation_map.hpp>
 #include <sanguis/model/exception.hpp>
-#include <sanguis/model/optional_image.hpp>
+#include <sanguis/model/optional_image_name.hpp>
 #include <sanguis/model/weapon_category.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
@@ -13,7 +13,7 @@
 
 sanguis::model::weapon_category::weapon_category(
 	sanguis::model::animation_map &&_animations,
-	sanguis::model::optional_image &&_image
+	sanguis::model::optional_image_name const &_image_name
 )
 :
 	animations_(
@@ -21,10 +21,8 @@ sanguis::model::weapon_category::weapon_category(
 			_animations
 		)
 	),
-	image_(
-		std::move(
-			_image
-		)
+	image_name_(
+		_image_name
 	)
 {
 }
@@ -72,4 +70,11 @@ sanguis::model::weapon_category::animations() const
 {
 	return
 		animations_;
+}
+
+sanguis::model::optional_image_name const &
+sanguis::model::weapon_category::image_name() const
+{
+	return
+		image_name_;
 }

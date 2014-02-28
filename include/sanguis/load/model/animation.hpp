@@ -5,7 +5,7 @@
 #include <sanguis/load/model/optional_sound.hpp>
 #include <sanguis/load/model/global_parameters_fwd.hpp>
 #include <sanguis/load/resource/animation/series.hpp>
-#include <sge/parse/json/object_fwd.hpp>
+#include <sanguis/model/animation_fwd.hpp>
 #include <sge/texture/const_part_shared_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -24,7 +24,7 @@ class animation
 	);
 public:
 	animation(
-		sge::parse::json::object const &,
+		sanguis::model::animation const &,
 		sanguis::load::model::global_parameters const &
 	);
 

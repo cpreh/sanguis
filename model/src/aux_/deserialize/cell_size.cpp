@@ -13,16 +13,14 @@ sanguis::model::aux_::deserialize::cell_size(
 )
 {
 	return
-		sanguis::model::cell_size{
-			sge::parse::json::convert::to_static_container<
-				sanguis::model::cell_size::value_type
+		sge::parse::json::convert::to_static_container<
+			sanguis::model::cell_size
+		>(
+			sge::parse::json::find_member_exn<
+				sge::parse::json::array
 			>(
-				sge::parse::json::find_member_exn<
-					sge::parse::json::array
-				>(
-					_object.members,
-					FCPPT_TEXT("cell_dimensions")
-				)
+				_object.members,
+				FCPPT_TEXT("cell_dimensions")
 			)
-		};
+		);
 }

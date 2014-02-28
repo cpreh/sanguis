@@ -3,7 +3,7 @@
 
 #include <sanguis/load/model/optional_sound_fwd.hpp>
 #include <sanguis/load/resource/sounds_fwd.hpp>
-#include <sge/parse/json/object_fwd.hpp>
+#include <sanguis/model/optional_animation_sound_fwd.hpp>
 
 
 namespace sanguis
@@ -15,7 +15,7 @@ namespace model
 
 sanguis::load::model::optional_sound
 make_sound(
-	sge::parse::json::object const &,
+	sanguis::model::optional_animation_sound const &,
 	sanguis::load::resource::sounds const &
 );
 

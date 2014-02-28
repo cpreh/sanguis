@@ -1,11 +1,7 @@
 #include <sanguis/load/server_context.hpp>
-#include <sanguis/load/model/json_header.hpp>
-#include <sanguis/load/model/load_dim.hpp>
+#include <sanguis/load/model/convert_cell_size.hpp>
 #include <sanguis/load/model/make_path.hpp>
-#include <sanguis/load/model/parse_json.hpp>
-#include <sge/parse/json/array.hpp>
-#include <sge/parse/json/object.hpp>
-#include <sge/parse/json/start.hpp>
+#include <sanguis/model/cell_size_from_file.hpp>
 #include <sge/renderer/dim2.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/assert/error.hpp>
@@ -39,16 +35,9 @@ sanguis::load::server_context::model_dim(
 		if(
 			it != dims_.end()
 		)
-			return it->second.get();
+			return
+				it->second.get();
 	}
-
-	sge::parse::json::start const start_return(
-		sanguis::load::model::parse_json(
-			sanguis::load::model::make_path(
-				_model_name
-			)
-		)
-	);
 
 	typedef std::pair<
 		dim_map::iterator,
@@ -59,9 +48,11 @@ sanguis::load::server_context::model_dim(
 		dims_.insert(
 			std::make_pair(
 				_model_name,
-				sanguis::load::model::load_dim(
-					sanguis::load::model::json_header(
-						start_return.object()
+				sanguis::load::model::convert_cell_size(
+					sanguis::model::cell_size_from_file(
+						sanguis::load::model::make_path(
+							_model_name
+						)
 					)
 				)
 			)

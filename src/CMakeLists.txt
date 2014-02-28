@@ -507,12 +507,9 @@ set(
 	include/sanguis/load/model/collection_fwd.hpp
 	include/sanguis/load/model/context.hpp
 	include/sanguis/load/model/context_fwd.hpp
-	include/sanguis/load/model/find_texture.hpp
+	include/sanguis/load/model/convert_cell_size.hpp
 	include/sanguis/load/model/global_parameters.hpp
 	include/sanguis/load/model/global_parameters_fwd.hpp
-	include/sanguis/load/model/json_header.hpp
-	include/sanguis/load/model/load_delay.hpp
-	include/sanguis/load/model/load_dim.hpp
 	include/sanguis/load/model/lookup_animation_name.hpp
 	include/sanguis/load/model/lookup_weapon_name.hpp
 	include/sanguis/load/model/make_animations.hpp
@@ -525,23 +522,16 @@ set(
 	include/sanguis/load/model/make_weapon_categories.hpp
 	include/sanguis/load/model/object.hpp
 	include/sanguis/load/model/object_fwd.hpp
-	include/sanguis/load/model/optional_delay.hpp
-	include/sanguis/load/model/optional_delay_fwd.hpp
 	include/sanguis/load/model/optional_sound.hpp
 	include/sanguis/load/model/optional_sound_fwd.hpp
-	include/sanguis/load/model/optional_texture_identifier.hpp
-	include/sanguis/load/model/optional_texture_identifier_fwd.hpp
-	include/sanguis/load/model/parse_json.hpp
 	include/sanguis/load/model/part.hpp
 	include/sanguis/load/model/part_fwd.hpp
 	include/sanguis/load/model/part_map.hpp
 	include/sanguis/load/model/part_result.hpp
 	include/sanguis/load/model/part_result_fwd.hpp
 	include/sanguis/load/model/part_unique_ptr.hpp
-	include/sanguis/load/model/remove_slash.hpp
 	include/sanguis/load/model/sound.hpp
 	include/sanguis/load/model/sound_fwd.hpp
-	include/sanguis/load/model/split_pair.hpp
 	include/sanguis/load/model/weapon_category.hpp
 	include/sanguis/load/model/weapon_category_fwd.hpp
 	include/sanguis/load/model/weapon_category_map.hpp
@@ -1770,11 +1760,8 @@ set(
 	src/load/model/calc_rect.cpp
 	src/load/model/collection.cpp
 	src/load/model/context.cpp
-	src/load/model/find_texture.cpp
+	src/load/model/convert_cell_size.cpp
 	src/load/model/global_parameters.cpp
-	src/load/model/json_header.cpp
-	src/load/model/load_delay.cpp
-	src/load/model/load_dim.cpp
 	src/load/model/lookup_animation_name.cpp
 	src/load/model/lookup_weapon_name.cpp
 	src/load/model/make_animations.cpp
@@ -1786,7 +1773,6 @@ set(
 	src/load/model/make_texture.cpp
 	src/load/model/make_weapon_categories.cpp
 	src/load/model/object.cpp
-	src/load/model/parse_json.cpp
 	src/load/model/part.cpp
 	src/load/model/part_result.cpp
 	src/load/model/sound.cpp
@@ -2207,6 +2193,7 @@ target_link_libraries(
 	PRIVATE
 	${sanguiscreator_TARGET}
 	${sanguiscollision_TARGET}
+	${sanguismodel_TARGET}
 	${sanguisgui_TARGET}
 	${fcppt_core_TARGET}
 	${fcppt_filesystem_TARGET}

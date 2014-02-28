@@ -25,11 +25,15 @@ sanguis::load::model::make_path(
 			path
 		)
 	)
-		throw sanguis::exception(
-			FCPPT_TEXT("Model ")
-			+ _name
-			+ FCPPT_TEXT(" not found!")
-		);
+		throw
+			sanguis::exception{
+				FCPPT_TEXT("Model ")
+				+
+				_name
+				+
+				FCPPT_TEXT(" not found!")
+			};
 
-	return path;
+	return
+		path;
 }

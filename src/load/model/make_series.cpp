@@ -6,16 +6,13 @@
 #include <sanguis/load/model/make_series.hpp>
 #include <sanguis/load/resource/animation/entity.hpp>
 #include <sanguis/load/resource/animation/series.hpp>
+#include <sanguis/model/animation.hpp>
+#include <sanguis/model/animation_range.hpp>
 #include <sge/renderer/lock_rect.hpp>
 #include <sge/renderer/size_type.hpp>
 #include <sge/texture/const_part_shared_ptr.hpp>
 #include <sge/texture/part.hpp>
 #include <sge/texture/part_raw_ref.hpp>
-#include <sge/parse/json/array.hpp>
-#include <sge/parse/json/element_vector.hpp>
-#include <sge/parse/json/find_member_exn.hpp>
-#include <sge/parse/json/object.hpp>
-#include <sge/parse/json/convert/to_int.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/text.hpp>
@@ -26,7 +23,7 @@
 
 sanguis::load::resource::animation::series
 sanguis::load::model::make_series(
-	sge::parse::json::object const &_json_object,
+	sanguis::model::animation const &_animation,
 	sanguis::load::model::global_parameters const &_parameters,
 	sge::texture::part const &_texture
 )
@@ -35,59 +32,26 @@ sanguis::load::model::make_series(
 		_texture.area()
 	);
 
-	sanguis::load::resource::animation::series series;
-
-	// range must be specified
-	sge::parse::json::element_vector const &range(
-		sge::parse::json::find_member_exn<
-			sge::parse::json::array
-		>(
-			_json_object.members,
-			FCPPT_TEXT("range")
-		).elements
+	sanguis::model::animation_range const range(
+		_animation.animation_range()
 	);
 
 	if(
-		range.size() < 2
-	)
-		throw sanguis::exception(
-			FCPPT_TEXT("range has too few elements in ")
-			+
-			fcppt::filesystem::path_to_string(
-				_parameters.path()
-			)
-		);
-
-	sge::renderer::size_type const
-		begin(
-			sge::parse::json::convert::to_int<
-				sge::renderer::size_type
-			>(
-				range[0]
-			)
-		),
-		end(
-			sge::parse::json::convert::to_int<
-				sge::renderer::size_type
-			>(
-				range[1]
-			)
-		);
-
-	if(
-		begin >= end
+		range.begin()
+		>=
+		range.end()
 	)
 		throw sanguis::exception(
 			FCPPT_TEXT("begin/end invalid: begin = ")
 			+
 			fcppt::insert_to_fcppt_string(
-				begin
+				range.begin()
 			)
 			+
 			FCPPT_TEXT(", end = ")
 			+
 			fcppt::insert_to_fcppt_string(
-				end
+				range.end()
 			)
 			+
 			FCPPT_TEXT(" in ")
@@ -97,16 +61,20 @@ sanguis::load::model::make_series(
 			)
 		);
 
+	sanguis::load::resource::animation::series series;
+
 	sanguis::duration const delay(
 		sanguis::load::model::make_delay(
-			_json_object,
+			_animation,
 			_parameters.delay()
 		)
 	);
 
 	for(
-		sge::renderer::size_type index = begin;
-		index != end;
+		sge::renderer::size_type index(
+			range.begin()
+		);
+		index != range.end();
 		++index
 	)
 	{
@@ -146,7 +114,7 @@ sanguis::load::model::make_series(
 				FCPPT_TEXT(". This happened when trying to load index ")
 				+
 				fcppt::insert_to_fcppt_string(
-					begin
+					range.begin()
 				)
 			);
 

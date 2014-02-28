@@ -1,7 +1,6 @@
-#include <sanguis/model/optional_image.hpp>
-#include <sanguis/model/aux_/deserialize/image.hpp>
-#include <sanguis/model/aux_/deserialize/parameters.hpp>
-#include <sge/image2d/load_exn.hpp>
+#include <sanguis/model/image_name.hpp>
+#include <sanguis/model/optional_image_name.hpp>
+#include <sanguis/model/aux_/deserialize/image_name.hpp>
 #include <sge/parse/json/find_member.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/string.hpp>
@@ -9,9 +8,8 @@
 #include <fcppt/text.hpp>
 
 
-sanguis::model::optional_image
-sanguis::model::aux_::deserialize::image(
-	sanguis::model::aux_::deserialize::parameters const &_parameters,
+sanguis::model::optional_image_name
+sanguis::model::aux_::deserialize::image_name(
 	sge::parse::json::object const &_object
 )
 {
@@ -23,17 +21,12 @@ sanguis::model::aux_::deserialize::image(
 				_object.members,
 				FCPPT_TEXT("texture")
 			),
-			[
-				&_parameters
-			](
+			[](
 				sge::parse::json::string const &_texture_file
 			)
 			{
 				return
-					sge::image2d::load_exn(
-						_parameters.image_system(),
-						_parameters.dir_path()
-						/
+					sanguis::model::image_name(
 						_texture_file
 					);
 			}

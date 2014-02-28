@@ -6,7 +6,7 @@
 #include <sanguis/load/model/animation_map.hpp>
 #include <sanguis/load/model/global_parameters_fwd.hpp>
 #include <sanguis/load/model/weapon_category_fwd.hpp>
-#include <sge/parse/json/object_fwd.hpp>
+#include <sanguis/model/weapon_category_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -24,7 +24,7 @@ class weapon_category
 	);
 public:
 	weapon_category(
-		sge::parse::json::object const &,
+		sanguis::model::weapon_category const &,
 		sanguis::load::model::global_parameters const &
 	);
 
