@@ -80,3 +80,9 @@ sanguis_add_library(
 	"${SANGUIS_MODEL_FILES}"
 	"${fcppt_core_TARGET};${fcppt_filesystem_TARGET};${sgeimage2d_TARGET};${sgeparse_TARGET};${sgeparsejson_TARGET}"
 )
+
+target_include_directories(
+	sanguismodel
+	INTERFACE
+	"${CMAKE_CURRENT_SOURCE_DIR}/include"
+)

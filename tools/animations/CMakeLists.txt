@@ -15,9 +15,15 @@ qt5_wrap_ui(
 
 set(
 	SANGUIS_TOOLS_ANIMATIONS_FILES
+	include/sanguis/tools/animations/fcppt_string_to_qt.hpp
 	include/sanguis/tools/animations/main_window.hpp
+	include/sanguis/tools/animations/qt_string_to_fcppt.hpp
+	include/sanguis/tools/animations/sge_systems.hpp
+	include/sanguis/tools/animations/sge_systems_fwd.hpp
+	src/fcppt_string_to_qt.cpp
 	src/main.cpp
 	src/main_window.cpp
+	src/qt_string_to_fcppt.cpp
 	ui/main_window.ui
 )
 
@@ -33,6 +39,13 @@ add_executable(
 
 fcppt_utils_set_target_compiler_flags(
 	sanguis_tools_animations
+)
+
+target_link_libraries(
+	sanguis_tools_animations
+	${sgeimage_TARGET}
+	${sgesystems_TARGET}
+	sanguismodel
 )
 
 target_include_directories(
