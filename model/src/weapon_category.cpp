@@ -25,6 +25,17 @@ sanguis::model::weapon_category::weapon_category(
 		_image_name
 	)
 {
+	if(
+		animations_.count(
+			FCPPT_TEXT("none")
+		)
+		==
+		0u
+	)
+		throw
+			sanguis::model::exception(
+				FCPPT_TEXT("None animation not available!")
+			);
 }
 
 SANGUIS_MODEL_SYMBOL

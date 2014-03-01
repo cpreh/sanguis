@@ -2,6 +2,7 @@
 #include <sanguis/load/model/convert_cell_size.hpp>
 #include <sanguis/load/model/global_parameters.hpp>
 #include <sanguis/load/model/make_parts.hpp>
+#include <sanguis/load/model/path_to_json_file.hpp>
 #include <sanguis/load/model/part.hpp>
 #include <sanguis/load/model/part_map.hpp>
 #include <sanguis/load/model/part_result.hpp>
@@ -25,7 +26,9 @@ sanguis::load::model::make_parts(
 {
 	sanguis::model::object const loaded_object(
 		sanguis::model::deserialize(
-			_path
+			sanguis::load::model::path_to_json_file(
+				_path
+			)
 		)
 	);
 

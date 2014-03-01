@@ -171,7 +171,7 @@ sanguis::client::states::menu::react(
 	FCPPT_LOG_DEBUG(
 		::logger,
 		fcppt::log::_
-			<< FCPPT_TEXT("menu: connect")
+			<< FCPPT_TEXT("Connected, sending client info")
 	);
 
 	this->context<
@@ -213,7 +213,7 @@ sanguis::client::states::menu::operator()(
 	FCPPT_LOG_DEBUG(
 		::logger,
 		fcppt::log::_
-			<< FCPPT_TEXT("Received connected")
+			<< FCPPT_TEXT("Received connected message")
 	);
 
 	return

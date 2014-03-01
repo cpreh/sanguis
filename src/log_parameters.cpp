@@ -7,7 +7,7 @@
 #include <fcppt/log/parameters/with_context.hpp>
 
 
-fcppt::log::parameters::object const
+fcppt::log::parameters::object
 sanguis::log_parameters(
 	fcppt::log::location const &_location
 )

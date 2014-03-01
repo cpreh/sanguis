@@ -3,6 +3,7 @@
 #include <sanguis/args/display_mode.hpp>
 #include <sanguis/args/log_level.hpp>
 #include <sanguis/args/multi_sampling.hpp>
+#include <sanguis/args/sge_log_level.hpp>
 #include <sanguis/client/create_systems.hpp>
 #include <sanguis/client/systems.hpp>
 #include <sanguis/client/systems_unique_ptr.hpp>
@@ -57,7 +58,7 @@ sanguis::client::create_systems(
 				.log_settings(
 					sge::systems::log_settings(
 						sge::log::location(),
-						sanguis::args::log_level(
+						sanguis::args::sge_log_level(
 							_vm
 						)
 					)

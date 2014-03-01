@@ -181,7 +181,7 @@ if(
 	)
 endif()
 
-macro(
+function(
 	sanguis_add_library_base
 	LIBNAME
 	FILES
@@ -200,6 +200,12 @@ macro(
 		${DEPS}
 	)
 
+	target_include_directories(
+		"${LIBNAME}"
+		PUBLIC
+		"${CMAKE_CURRENT_SOURCE_DIR}/include"
+	)
+
 	fcppt_utils_set_target_compiler_flags(
 		"${LIBNAME}"
 	)
@@ -210,9 +216,9 @@ macro(
 		DESTINATION
 		"${INSTALL_LIBRARY_DIR}"
 	)
-endmacro()
+endfunction()
 
-macro(
+function(
 	sanguis_add_library
 	LIBNAME
 	FILES
@@ -261,7 +267,7 @@ macro(
 		INTERNAL
 		""
 	)
-endmacro()
+endfunction()
 
 add_subdirectory(
 	creator

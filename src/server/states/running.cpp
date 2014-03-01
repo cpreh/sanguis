@@ -35,7 +35,6 @@
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/info.hpp>
-#include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/log/parameters/object.hpp>

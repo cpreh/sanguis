@@ -13,6 +13,7 @@ set(
 	include/sanguis/args/resolution.hpp
 	include/sanguis/args/server_only.hpp
 	include/sanguis/args/server_port.hpp
+	include/sanguis/args/sge_log_level.hpp
 	include/sanguis/aura_type.hpp
 	include/sanguis/aura_type_fwd.hpp
 	include/sanguis/aura_type_vector.hpp
@@ -530,6 +531,7 @@ set(
 	include/sanguis/load/model/part_result.hpp
 	include/sanguis/load/model/part_result_fwd.hpp
 	include/sanguis/load/model/part_unique_ptr.hpp
+	include/sanguis/load/model/path_to_json_file.hpp
 	include/sanguis/load/model/sound.hpp
 	include/sanguis/load/model/sound_fwd.hpp
 	include/sanguis/load/model/weapon_category.hpp
@@ -1585,6 +1587,7 @@ set(
 	src/args/resolution.cpp
 	src/args/server_only.cpp
 	src/args/server_port.cpp
+	src/args/sge_log_level.cpp
 	src/client/config/homedir.cpp
 	src/client/config/settings/file.cpp
 	src/client/config/settings/object.cpp
@@ -1775,6 +1778,7 @@ set(
 	src/load/model/object.cpp
 	src/load/model/part.cpp
 	src/load/model/part_result.cpp
+	src/load/model/path_to_json_file.cpp
 	src/load/model/sound.cpp
 	src/load/model/weapon_category.cpp
 	src/load/next_file.cpp
@@ -2173,9 +2177,6 @@ include(
 
 include_directories(
 	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/include
-	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/collision/include
-	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/creator/include
-	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/gui/include
 )
 
 awl_utils_add_portable_executable(
@@ -2210,7 +2211,6 @@ target_link_libraries(
 	${sgelog_TARGET}
 	${sgeparse_TARGET}
 	${sgeparseini_TARGET}
-	${sgeparsejson_TARGET}
 	${sgesprite_TARGET}
 	${sgerenderer_TARGET}
 	${sgesystems_TARGET}

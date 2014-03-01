@@ -41,10 +41,8 @@ fcppt_utils_set_target_compiler_flags(
 	sanguis_tools_animations
 )
 
-# TODO: Remove sgeimage
 target_link_libraries(
 	sanguis_tools_animations
-	${sgeimage_TARGET}
 	${sgesystems_TARGET}
 	${sanguismodel_TARGET}
 )

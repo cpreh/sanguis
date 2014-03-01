@@ -1,1 +1,30 @@
-{"header":{"cell_dimensions":[254,254],"delay":160},"parts":[{"smoke0":{"weapon_categories":[{"none":{"animations":[{"none":{"range":[0,16]}}]}}],"texture":"smoke0.png"}},{"smoke1":{"weapon_categories":[{"none":{"animations":[{"none":{"range":[0,16]}}]}}],"texture":"smoke1.png"}}]}
+{
+	"cell_dimensions":[254,254],
+	"delay":160,
+	"parts":{
+		"smoke0":{
+			"weapon_categories":{
+				"none":{
+					"animations":{
+						"none":{
+							"range":[0,16]
+						}
+					}
+				}
+			},
+			"texture":"smoke0.png"
+		},
+		"smoke1":{
+			"weapon_categories":{
+				"none":{
+					"animations":{
+						"none":{
+							"range":[0,16]
+						}
+					}
+				}
+			},
+			"texture":"smoke1.png"
+		}
+	}
+}

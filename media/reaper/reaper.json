@@ -1,19 +1,21 @@
 {
-	"header":{
-		"cell_dimensions":[64,64],
-		"delay":40
-	},
+	"cell_dimensions":[64,64],
+	"delay":40,
 	"texture":"reaper.png",
-	"parts":[{
+	"parts":{
 		"default":{
-			"weapon_categories":[{
+			"weapon_categories":{
 				"none":{
-					"animations":[
-						{"none":{"range":[0,1]}},
-						{"walking":{"range":[1,26]}}
-					]
+					"animations":{
+						"none":{
+							"range":[0,1]
+						},
+						"walking":{
+							"range":[1,26]
+						}
+					}
 				}
-			}]
+			}
 		}
-	}]
+	}
 }

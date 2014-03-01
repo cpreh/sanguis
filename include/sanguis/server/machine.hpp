@@ -94,6 +94,17 @@ private:
 	);
 
 	void
+	disconnect_player(
+		alda::net::id
+	);
+
+	void
+	data_error(
+		alda::net::id,
+		fcppt::string const &
+	);
+
+	void
 	timer_callback();
 
 	sanguis::load::server_context resources_;

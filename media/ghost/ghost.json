@@ -1,6 +1,27 @@
-{"header":{"cell_dimensions":[64,48],"delay":40},"texture":"default_none.png","parts":[{"default":{"weapon_categories":[{"none":{"animations":[
-{"attacking":{"range":[0,35],"cast_point":11}},
-{"dying":{"range":[36,49]}},
-{"none":{"range":[50,64]}},
-{"walking":{"range":[65,84]}}
-]}}]}}]}
+{
+	"cell_dimensions":[64,48],
+	"delay":40,
+	"texture":"default_none.png",
+	"parts":{
+		"default":{
+			"weapon_categories":{
+				"none":{
+					"animations":{
+						"attacking":{
+							"range":[0,35]
+						},
+						"dying":{
+							"range":[36,49]
+						},
+						"none":{
+							"range":[50,64]
+						},
+						"walking":{
+							"range":[65,84]
+						}
+					}
+				}
+			}
+		}
+	}
+}

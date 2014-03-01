@@ -75,3 +75,12 @@ update_cmake \
 	ui
 
 popd > /dev/null
+
+pushd tools/check_json > /dev/null
+
+update_cmake \
+	CMakeLists.txt \
+	SANGUIS_TOOLS_CHECK_JSON_FILES \
+	src
+
+popd > /dev/null

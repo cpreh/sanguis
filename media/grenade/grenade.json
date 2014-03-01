@@ -1,3 +1,25 @@
-{"header":{"cell_dimensions":[32,32],"delay":40},"texture":"grenade.png","parts":[{"default":{"weapon_categories":[{"none":{"animations":[{"walking":{"range":[0,30]}},{"none":{"range":[0,1]}},{"dying":{"range":[0,1],
-"sound":"explosion.ogg"
-}}]}}]}}]}
+{
+	"cell_dimensions":[32,32],
+	"delay":40,
+	"texture":"grenade.png",
+	"parts":{
+		"default":{
+			"weapon_categories":{
+				"none":{
+					"animations":{
+						"walking":{
+							"range":[0,30]
+						},
+						"none":{
+							"range":[0,1]
+						},
+						"dying":{
+							"range":[0,1],
+							"sound":"explosion.ogg"
+						}
+					}
+				}
+			}
+		}
+	}
+}

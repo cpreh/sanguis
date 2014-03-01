@@ -154,9 +154,7 @@ sanguis_generate_symbol_header(
 )
 
 include_directories(
-	"${CMAKE_CURRENT_SOURCE_DIR}/include"
 	"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
-	"${FCPPT_UTILS_PROJECT_SOURCE_DIR}/creator/include"
 )
 
 set(

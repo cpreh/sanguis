@@ -9,7 +9,7 @@ sanguis::model::exception::exception(
 )
 :
 	fcppt::exception(
-		FCPPT_TEXT("model: ")
+		FCPPT_TEXT("sanguis::model: ")
 		+
 		_message
 	)

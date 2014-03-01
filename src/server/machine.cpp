@@ -1,5 +1,6 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/io_service.hpp>
+#include <sanguis/log_parameters.hpp>
 #include <sanguis/load/server_context.hpp>
 #include <sanguis/messages/client/base.hpp>
 #include <sanguis/messages/client/unique_ptr.hpp>
@@ -11,7 +12,7 @@
 #include <sanguis/net/client/deserialize.hpp>
 #include <sanguis/net/server/serialize_to_circular_buffer.hpp>
 #include <sanguis/net/server/serialize_to_data_buffer.hpp>
-#include <sanguis/server/log.hpp>
+#include <sanguis/server/log_location.hpp>
 #include <sanguis/server/machine.hpp>
 #include <sanguis/server/net_id_from_player.hpp>
 #include <sanguis/server/player_id.hpp>
@@ -32,7 +33,9 @@
 #include <fcppt/assert/error.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
+#include <fcppt/log/error.hpp>
 #include <fcppt/log/info.hpp>
+#include <fcppt/log/object.hpp>
 #include <fcppt/log/verbose.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -41,6 +44,19 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
+
+namespace
+{
+
+fcppt::log::object logger(
+	sanguis::log_parameters(
+		sanguis::server::log_location()
+		/
+		FCPPT_TEXT("machine")
+	)
+);
+
+}
 
 sanguis::server::machine::machine(
 	alda::net::port const _port,
@@ -245,7 +261,7 @@ sanguis::server::machine::send_unicast(
 	)
 	{
 		FCPPT_LOG_INFO(
-			sanguis::server::log(),
+			::logger,
 			fcppt::log::_
 				<< FCPPT_TEXT("Client ")
 				<< net_id
@@ -289,7 +305,7 @@ sanguis::server::machine::process_message(
 )
 {
 	FCPPT_LOG_VERBOSE(
-		sanguis::server::log(),
+		::logger,
 		fcppt::log::_
 			<< FCPPT_TEXT("process_message")
 	);
@@ -319,7 +335,7 @@ sanguis::server::machine::add_overflow_message(
 	);
 
 	FCPPT_LOG_DEBUG(
-		sanguis::server::log(),
+		::logger,
 		fcppt::log::_
 			<< FCPPT_TEXT("Client ")
 			<< _id
@@ -333,23 +349,17 @@ sanguis::server::machine::disconnect_callback(
 	fcppt::string const &_error
 )
 {
-	overflow_messages_.erase(
-		_id
-	);
-
-	this->process_event(
-		sanguis::server::events::disconnect(
-			_id
-		)
-	);
-
 	FCPPT_LOG_INFO(
-		sanguis::server::log(),
+		::logger,
 		fcppt::log::_
 			<< FCPPT_TEXT("Client ")
 			<< _id
 			<< FCPPT_TEXT(" disconnected: ")
 			<< _error
+	);
+
+	this->disconnect_player(
+		_id
 	);
 }
 
@@ -387,7 +397,7 @@ catch(
 	fcppt::exception const &_error
 )
 {
-	this->disconnect_callback(
+	this->data_error(
 		_id,
 		_error.string()
 	);
@@ -396,9 +406,49 @@ catch(
 	...
 )
 {
-	this->disconnect_callback(
+	this->data_error(
 		_id,
 		FCPPT_TEXT("Unknown error")
+	);
+}
+
+void
+sanguis::server::machine::disconnect_player(
+	alda::net::id const _id
+)
+{
+	overflow_messages_.erase(
+		_id
+	);
+
+	this->process_event(
+		sanguis::server::events::disconnect(
+			_id
+		)
+	);
+}
+
+void
+sanguis::server::machine::data_error(
+	alda::net::id const _id,
+	fcppt::string const &_error
+)
+{
+	FCPPT_LOG_ERROR(
+		::logger,
+		fcppt::log::_
+			<< FCPPT_TEXT("Error while processing message from client ")
+			<< _id
+			<< FCPPT_TEXT(": ")
+			<< _error
+	);
+
+	net_.disconnect(
+		_id
+	);
+
+	this->disconnect_player(
+		_id
 	);
 }
 

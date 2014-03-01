@@ -1,1 +1,18 @@
-{"header":{"cell_dimensions":[63,63],"delay":40},"texture":"fire.png","parts":[{"default":{"weapon_categories":[{"none":{"animations":[{"none":{"range":[0,10]}}]}}]}}]}
+{
+	"cell_dimensions":[63,63],
+	"delay":40,
+	"texture":"fire.png",
+	"parts":{
+		"default":{
+			"weapon_categories":{
+				"none":{
+					"animations":{
+						"none":{
+							"range":[0,10]
+						}
+					}
+				}
+			}
+		}
+	}
+}

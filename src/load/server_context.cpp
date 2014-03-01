@@ -1,6 +1,7 @@
 #include <sanguis/load/server_context.hpp>
 #include <sanguis/load/model/convert_cell_size.hpp>
 #include <sanguis/load/model/make_path.hpp>
+#include <sanguis/load/model/path_to_json_file.hpp>
 #include <sanguis/model/cell_size_from_file.hpp>
 #include <sge/renderer/dim2.hpp>
 #include <fcppt/string.hpp>
@@ -50,8 +51,10 @@ sanguis::load::server_context::model_dim(
 				_model_name,
 				sanguis::load::model::convert_cell_size(
 					sanguis::model::cell_size_from_file(
-						sanguis::load::model::make_path(
-							_model_name
+						sanguis::load::model::path_to_json_file(
+							sanguis::load::model::make_path(
+								_model_name
+							)
 						)
 					)
 				)
