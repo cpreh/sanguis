@@ -45,6 +45,7 @@ target_link_libraries(
 	sanguis_tools_animations
 	${sgesystems_TARGET}
 	${sanguismodel_TARGET}
+	${Boost_FILESYSTEM_LIBRARIES}
 )
 
 target_include_directories(
