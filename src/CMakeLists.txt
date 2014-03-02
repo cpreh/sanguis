@@ -1407,6 +1407,7 @@ set(
 	include/sanguis/server/timer_impl.hpp
 	include/sanguis/server/timer_impl_fwd.hpp
 	include/sanguis/server/unicast_callback.hpp
+	include/sanguis/server/unknown_player_exception.hpp
 	include/sanguis/server/update_sight_callback.hpp
 	include/sanguis/server/update_target_callback.hpp
 	include/sanguis/server/update_weapon_pickup_callback.hpp
@@ -2097,6 +2098,7 @@ set(
 	src/server/states/unpaused.cpp
 	src/server/timer.cpp
 	src/server/timer_impl.cpp
+	src/server/unknown_player_exception.cpp
 	src/server/weapons/attributes/accuracy.cpp
 	src/server/weapons/attributes/aoe.cpp
 	src/server/weapons/attributes/damage.cpp

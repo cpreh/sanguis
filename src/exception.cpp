@@ -11,7 +11,8 @@ sanguis::exception::exception(
 :
 	sge::exception(
 		FCPPT_TEXT("sanguis: ")
-		+ _what
+		+
+		_what
 	)
 {
 }

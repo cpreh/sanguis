@@ -17,6 +17,7 @@
 #include <sanguis/server/net_id_from_player.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/player_id_from_net.hpp>
+#include <sanguis/server/unknown_player_exception.hpp>
 #include <sanguis/server/events/disconnect.hpp>
 #include <sanguis/server/events/message.hpp>
 #include <sanguis/server/events/tick.hpp>
@@ -385,12 +386,26 @@ try
 		)
 			return;
 
-		this->process_message(
-			_id,
-			std::move(
-				message
-			)
-		);
+		try
+		{
+			this->process_message(
+				_id,
+				std::move(
+					message
+				)
+			);
+		}
+		catch(
+			sanguis::server::unknown_player_exception const &_error
+		)
+		{
+			FCPPT_LOG_DEBUG(
+				::logger,
+				fcppt::log::_
+					<< FCPPT_TEXT("Client currently has no player ")
+					<< _error.string()
+			);
+		}
 	}
 }
 catch(

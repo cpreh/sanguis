@@ -1,7 +1,6 @@
 #include <sanguis/cheat_type.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
-#include <sanguis/exception.hpp>
 #include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/perk_type.hpp>
@@ -27,6 +26,7 @@
 #include <sanguis/server/string.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/unicast_callback.hpp>
+#include <sanguis/server/unknown_player_exception.hpp>
 #include <sanguis/server/vector.hpp>
 #include <sanguis/server/cheat/process.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
@@ -625,7 +625,7 @@ sanguis::server::global::context::player_exn(
 
 	FCPPT_ASSERT_THROW(
 		player.has_value(),
-		sanguis::exception
+		sanguis::server::unknown_player_exception
 	);
 
 	return
