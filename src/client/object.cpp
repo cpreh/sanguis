@@ -61,7 +61,7 @@ sanguis::client::object::object(
 		)
 	),
 	renderer_(
-		sys_->renderer_core()
+		sys_->renderer_device_core()
 	),
 	font_object_(
 		sys_->font_system().create_font(
@@ -73,7 +73,7 @@ sanguis::client::object::object(
 	),
 	console_gfx_(
 		console_,
-		sys_->renderer_ffp(),
+		sys_->renderer_device_ffp(),
 		*font_object_,
 		sys_->image_system(),
 		sys_->keyboard_collector(),
@@ -88,7 +88,7 @@ sanguis::client::object::object(
 	),
 	resources_(
 		sys_->image_system(),
-		sys_->renderer_core(),
+		sys_->renderer_device_core(),
 		sys_->audio_loader(),
 		sys_->audio_player()
 	),
@@ -105,7 +105,7 @@ sanguis::client::object::object(
 		console_gfx_.get(),
 		sys_->keyboard_collector(),
 		sys_->cursor_demuxer(),
-		sys_->renderer_ffp(),
+		sys_->renderer_device_ffp(),
 		sys_->image_system(),
 		io_service_,
 		sys_->viewport_manager()

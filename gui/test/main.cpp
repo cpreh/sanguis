@@ -41,9 +41,9 @@
 #include <sge/renderer/device/ffp.hpp>
 #include <sge/renderer/display_mode/desired_fps.hpp>
 #include <sge/renderer/display_mode/optional_object.hpp>
+#include <sge/renderer/display_mode/parameters.hpp>
 #include <sge/renderer/display_mode/to_dpi.hpp>
-#include <sge/renderer/parameters/object.hpp>
-#include <sge/renderer/parameters/vsync.hpp>
+#include <sge/renderer/display_mode/vsync.hpp>
 #include <sge/renderer/pixel_format/color.hpp>
 #include <sge/renderer/pixel_format/depth_stencil.hpp>
 #include <sge/renderer/pixel_format/object.hpp>
@@ -130,14 +130,14 @@ try
 		)
 		(
 			sge::systems::renderer(
-				sge::renderer::parameters::object(
-					sge::renderer::pixel_format::object(
-						sge::renderer::pixel_format::color::depth32,
-						sge::renderer::pixel_format::depth_stencil::off,
-						sge::renderer::pixel_format::optional_multi_samples(),
-						sge::renderer::pixel_format::srgb::no
-					),
-					sge::renderer::parameters::vsync::on,
+				sge::renderer::pixel_format::object(
+					sge::renderer::pixel_format::color::depth32,
+					sge::renderer::pixel_format::depth_stencil::off,
+					sge::renderer::pixel_format::optional_multi_samples(),
+					sge::renderer::pixel_format::srgb::no
+				),
+				sge::renderer::display_mode::parameters(
+					sge::renderer::display_mode::vsync::on,
 					sge::renderer::display_mode::optional_object()
 				),
 				sge::viewport::fill_on_resize()
@@ -167,14 +167,14 @@ try
 			sge::font::parameters()
 			.dpi(
 				sge::renderer::display_mode::to_dpi(
-					sys.renderer_ffp().display_mode()
+					sys.renderer_device_ffp().display_mode()
 				)
 			)
 		)
 	);
 
 	sanguis::gui::widget::button button(
-		sys.renderer_ffp(),
+		sys.renderer_device_ffp(),
 		*font,
 		SGE_FONT_LIT("Quit")
 	);
@@ -193,13 +193,13 @@ try
 	);
 
 	sanguis::gui::widget::edit edit(
-		sys.renderer_ffp(),
+		sys.renderer_device_ffp(),
 		*font,
 		SGE_FONT_LIT("Test")
 	);
 
 	sanguis::gui::widget::image image(
-		sys.renderer_ffp(),
+		sys.renderer_device_ffp(),
 		sys.image_system().load(
 			sanguis::build_media_path()
 			/
@@ -222,7 +222,7 @@ try
 					fcppt::make_unique_ptr<
 						sanguis::gui::widget::text
 					>(
-						sys.renderer_ffp(),
+						sys.renderer_device_ffp(),
 						*font,
 						_label,
 						sanguis::gui::text_color(
@@ -236,7 +236,7 @@ try
 							fcppt::make_unique_ptr<
 								sanguis::gui::widget::button
 							>(
-								sys.renderer_ffp(),
+								sys.renderer_device_ffp(),
 								*font,
 								SGE_FONT_LIT("Child 1")
 							)
@@ -246,7 +246,7 @@ try
 							fcppt::make_unique_ptr<
 								sanguis::gui::widget::button
 							>(
-								sys.renderer_ffp(),
+								sys.renderer_device_ffp(),
 								*font,
 								SGE_FONT_LIT("Child 2 asdljasdljasdklasdjklasdjlkasdjaskldjjasdkljasdklasdjlk")
 							)
@@ -314,7 +314,7 @@ try
 	);
 
 	sanguis::gui::widget::tab tab(
-		sys.renderer_ffp(),
+		sys.renderer_device_ffp(),
 		*font,
 		context,
 		sanguis::gui::widget::reference_name_vector{
@@ -380,7 +380,7 @@ try
 	);
 
 	sanguis::gui::master master(
-		sys.renderer_ffp(),
+		sys.renderer_device_ffp(),
 		sys.keyboard_collector(),
 		sys.cursor_demuxer(),
 		context,
@@ -388,7 +388,7 @@ try
 	);
 
 	sanguis::gui::viewport_adaptor viewport_adaptor(
-		sys.renderer_ffp(),
+		sys.renderer_device_ffp(),
 		sys.viewport_manager(),
 		main_widget.layout()
 	);
@@ -399,7 +399,7 @@ try
 	{
 		sge::timer::scoped_frame_limiter const limiter(
 			sge::renderer::display_mode::desired_fps(
-				sys.renderer_ffp().display_mode()
+				sys.renderer_device_ffp().display_mode()
 			)
 		);
 
@@ -411,8 +411,8 @@ try
 		);
 
 		sge::renderer::context::scoped_ffp const scoped_block(
-			sys.renderer_ffp(),
-			sys.renderer_ffp().onscreen_target()
+			sys.renderer_device_ffp(),
+			sys.renderer_device_ffp().onscreen_target()
 		);
 
 		scoped_block.get().clear(

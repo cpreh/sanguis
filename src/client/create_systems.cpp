@@ -10,11 +10,18 @@
 #include <sge/audio/loader_capabilities_field.hpp>
 #include <sge/config/log_path.hpp>
 #include <sge/config/own_app_name.hpp>
+#include <sge/image/capabilities.hpp>
+#include <sge/image/capabilities_field.hpp>
 #include <sge/media/extension.hpp>
 #include <sge/media/extension_set.hpp>
 #include <sge/media/optional_extension_set.hpp>
 #include <sge/log/location.hpp>
-#include <sge/renderer/parameters/object.hpp>
+#include <sge/renderer/display_mode/parameters.hpp>
+#include <sge/renderer/display_mode/vsync.hpp>
+#include <sge/renderer/pixel_format/color.hpp>
+#include <sge/renderer/pixel_format/depth_stencil.hpp>
+#include <sge/renderer/pixel_format/object.hpp>
+#include <sge/renderer/pixel_format/srgb.hpp>
 #include <sge/systems/audio_loader.hpp>
 #include <sge/systems/audio_player_default.hpp>
 #include <sge/systems/cursor_option_field.hpp>
@@ -82,16 +89,16 @@ sanguis::client::create_systems(
 			)
 			(
 				sge::systems::renderer(
-					sge::renderer::parameters::object(
-						sge::renderer::pixel_format::object(
-							sge::renderer::pixel_format::color::depth32,
-							sge::renderer::pixel_format::depth_stencil::d24s8,
-							sanguis::args::multi_sampling(
-								_vm
-							),
-							sge::renderer::pixel_format::srgb::no
+					sge::renderer::pixel_format::object(
+						sge::renderer::pixel_format::color::depth32,
+						sge::renderer::pixel_format::depth_stencil::d24s8,
+						sanguis::args::multi_sampling(
+							_vm
 						),
-						sge::renderer::parameters::vsync::on,
+						sge::renderer::pixel_format::srgb::no
+					),
+					sge::renderer::display_mode::parameters(
+						sge::renderer::display_mode::vsync::on,
 						sanguis::args::display_mode(
 							_vm
 						)
