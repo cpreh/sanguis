@@ -1,5 +1,5 @@
-#ifndef SANGUIS_TOOLS_ANIMATIONS_QT_STRING_TO_FCPPT_HPP_INCLUDED
-#define SANGUIS_TOOLS_ANIMATIONS_QT_STRING_TO_FCPPT_HPP_INCLUDED
+#ifndef SANGUIS_TOOLS_ANIMATIONS_QTUTIL_FROM_FCPPT_STRING_HPP_INCLUDED
+#define SANGUIS_TOOLS_ANIMATIONS_QTUTIL_FROM_FCPPT_STRING_HPP_INCLUDED
 
 #include <fcppt/string.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -13,12 +13,15 @@ namespace tools
 {
 namespace animations
 {
+namespace qtutil
+{
 
-fcppt::string
-qt_string_to_fcppt(
-	QString const &
+QString
+from_fcppt_string(
+	fcppt::string const &
 );
 
+}
 }
 }
 }

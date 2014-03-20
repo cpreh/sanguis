@@ -1,10 +1,13 @@
 #ifndef SANGUIS_TOOLS_ANIMATIONS_MAIN_WINDOW_HPP_INCLUDED
 #define SANGUIS_TOOLS_ANIMATIONS_MAIN_WINDOW_HPP_INCLUDED
 
+#include <sanguis/model/object.hpp>
 #include <sanguis/tools/animations/sge_systems_fwd.hpp>
+#include <fcppt/optional_decl.hpp>
 #include <fcppt/scoped_ptr_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <QMainWindow>
+#include <QString>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -38,12 +41,30 @@ public Q_SLOTS:
 
 	void
 	actionQuit();
+
+	void
+	selectedPartChanged(
+		QString const &
+	);
+
+	void
+	selectedWeaponChanged(
+		QString const &
+	);
 private:
 	sanguis::tools::animations::sge_systems &sge_systems_;
 
 	fcppt::scoped_ptr<
 		Ui::MainWindow
 	> const ui_;
+
+	typedef
+	fcppt::optional<
+		sanguis::model::object
+	>
+	optional_model;
+
+	optional_model loaded_model_;
 };
 
 }

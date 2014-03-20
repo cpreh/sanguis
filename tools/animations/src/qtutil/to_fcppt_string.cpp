@@ -1,4 +1,4 @@
-#include <sanguis/tools/animations/qt_string_to_fcppt.hpp>
+#include <sanguis/tools/animations/qtutil/to_fcppt_string.hpp>
 #include <fcppt/public_config.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -7,7 +7,7 @@
 
 
 fcppt::string
-sanguis::tools::animations::qt_string_to_fcppt(
+sanguis::tools::animations::qtutil::to_fcppt_string(
 	QString const &_string
 )
 {

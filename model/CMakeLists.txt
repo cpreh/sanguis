@@ -47,9 +47,22 @@ set(
 	src/aux_/deserialize/part_map.cpp
 	src/aux_/deserialize/weapon_category.cpp
 	src/aux_/deserialize/weapon_category_map.cpp
+	src/aux_/serialize/animation.cpp
+	src/aux_/serialize/animation_delay.cpp
+	src/aux_/serialize/animation_map.cpp
+	src/aux_/serialize/animation_range.cpp
+	src/aux_/serialize/animation_sound.cpp
+	src/aux_/serialize/cell_size.cpp
+	src/aux_/serialize/image_name.cpp
+	src/aux_/serialize/object.cpp
+	src/aux_/serialize/part.cpp
+	src/aux_/serialize/part_map.cpp
+	src/aux_/serialize/weapon_category.cpp
+	src/aux_/serialize/weapon_category_map.cpp
 	src/cell_size_from_file.cpp
 	src/deserialize.cpp
 	src/exception.cpp
+	src/include/sanguis/model/aux_/animation_range_vector.hpp
 	src/include/sanguis/model/aux_/deserialize/animation.hpp
 	src/include/sanguis/model/aux_/deserialize/animation_delay.hpp
 	src/include/sanguis/model/aux_/deserialize/animation_map.hpp
@@ -63,8 +76,22 @@ set(
 	src/include/sanguis/model/aux_/deserialize/part_map.hpp
 	src/include/sanguis/model/aux_/deserialize/weapon_category.hpp
 	src/include/sanguis/model/aux_/deserialize/weapon_category_map.hpp
+	src/include/sanguis/model/aux_/serialize/animation.hpp
+	src/include/sanguis/model/aux_/serialize/animation_delay.hpp
+	src/include/sanguis/model/aux_/serialize/animation_map.hpp
+	src/include/sanguis/model/aux_/serialize/animation_range.hpp
+	src/include/sanguis/model/aux_/serialize/animation_sound.hpp
+	src/include/sanguis/model/aux_/serialize/cell_size.hpp
+	src/include/sanguis/model/aux_/serialize/image_name.hpp
+	src/include/sanguis/model/aux_/serialize/map.hpp
+	src/include/sanguis/model/aux_/serialize/object.hpp
+	src/include/sanguis/model/aux_/serialize/part.hpp
+	src/include/sanguis/model/aux_/serialize/part_map.hpp
+	src/include/sanguis/model/aux_/serialize/weapon_category.hpp
+	src/include/sanguis/model/aux_/serialize/weapon_category_map.hpp
 	src/object.cpp
 	src/part.cpp
+	src/serialize.cpp
 	src/weapon_category.cpp
 )
 
