@@ -40,6 +40,9 @@ public Q_SLOTS:
 	actionJSON();
 
 	void
+	actionSave();
+
+	void
 	actionQuit();
 
 	void
@@ -50,6 +53,16 @@ public Q_SLOTS:
 	void
 	selectedWeaponChanged(
 		QString const &
+	);
+
+	void
+	selectedAnimationChanged(
+		QString const &
+	);
+
+	void
+	globalDelayChanged(
+		int
 	);
 private:
 	sanguis::tools::animations::sge_systems &sge_systems_;
@@ -65,6 +78,8 @@ private:
 	optional_model;
 
 	optional_model loaded_model_;
+
+	QString json_file_;
 };
 
 }

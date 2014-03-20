@@ -409,11 +409,62 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>animationComboBox</sender>
+   <signal>currentIndexChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>selectedAnimationChanged(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>54</x>
+     <y>189</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>772</x>
+     <y>494</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>globalDelaySpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>globalDelayChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>54</x>
+     <y>937</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>772</x>
+     <y>494</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionSave</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>actionSave()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>772</x>
+     <y>494</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>actionQuit()</slot>
   <slot>actionJSON()</slot>
   <slot>selectedPartChanged(QString)</slot>
   <slot>selectedWeaponChanged(QString)</slot>
+  <slot>selectedAnimationChanged(QString)</slot>
+  <slot>globalDelayChanged(int)</slot>
+  <slot>actionSave()</slot>
  </slots>
 </ui>
