@@ -10,14 +10,21 @@ set(
 	include/sanguis/model/animation_range_fwd.hpp
 	include/sanguis/model/animation_sound.hpp
 	include/sanguis/model/animation_sound_fwd.hpp
+	include/sanguis/model/cell_area.hpp
+	include/sanguis/model/cell_area_from_index.hpp
+	include/sanguis/model/cell_area_fwd.hpp
 	include/sanguis/model/cell_size.hpp
 	include/sanguis/model/cell_size_from_file.hpp
 	include/sanguis/model/cell_size_fwd.hpp
 	include/sanguis/model/cell_size_unit.hpp
 	include/sanguis/model/deserialize.hpp
+	include/sanguis/model/dim.hpp
+	include/sanguis/model/dim_fwd.hpp
 	include/sanguis/model/exception.hpp
 	include/sanguis/model/image_name.hpp
 	include/sanguis/model/image_name_fwd.hpp
+	include/sanguis/model/image_size.hpp
+	include/sanguis/model/image_size_fwd.hpp
 	include/sanguis/model/object.hpp
 	include/sanguis/model/object_fwd.hpp
 	include/sanguis/model/optional_animation_delay.hpp
@@ -59,6 +66,7 @@ set(
 	src/aux_/serialize/part_map.cpp
 	src/aux_/serialize/weapon_category.cpp
 	src/aux_/serialize/weapon_category_map.cpp
+	src/cell_are_from_index.cpp
 	src/cell_size_from_file.cpp
 	src/deserialize.cpp
 	src/exception.cpp

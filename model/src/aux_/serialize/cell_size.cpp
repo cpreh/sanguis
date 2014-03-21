@@ -14,7 +14,7 @@ sanguis::model::aux_::serialize::cell_size(
 		sge::parse::json::member(
 			FCPPT_TEXT("cell_dimensions"),
 			sge::parse::json::convert::from_container(
-				_cell_size
+				_cell_size.get()
 			)
 		);
 }

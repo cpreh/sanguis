@@ -1,16 +1,17 @@
 #include <sanguis/load/model/calc_rect.hpp>
 #include <sanguis/load/model/cell_size.hpp>
+#include <sanguis/model/animation_index.hpp>
+#include <sanguis/model/cell_area.hpp>
+#include <sanguis/model/cell_area_from_index.hpp>
+#include <sanguis/model/cell_size.hpp>
+#include <sanguis/model/image_size.hpp>
 #include <sge/renderer/dim2.hpp>
 #include <sge/renderer/lock_rect.hpp>
 #include <sge/renderer/size_type.hpp>
-#include <fcppt/literal.hpp>
-#include <fcppt/assert/error.hpp>
-#include <fcppt/math/dim/arithmetic.hpp>
-#include <fcppt/math/dim/fill.hpp>
+#include <fcppt/cast/size.hpp>
+#include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <algorithm>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/math/vector/structure_cast.hpp>
 
 
 sge::renderer::lock_rect const
@@ -20,61 +21,43 @@ sanguis::load::model::calc_rect(
 	sge::renderer::size_type const _index
 )
 {
-	if(
-		_area.size().w() == _cell_size.get().w()
-	)
-	{
-		FCPPT_ASSERT_ERROR(
-			_index == 0u
-		);
-
-		return
-			sge::renderer::lock_rect(
-				sge::renderer::lock_rect::vector::null(),
-				_cell_size.get()
-			);
-	}
-
-	sge::renderer::dim2 const cell_size_edited(
-		_cell_size.get()
-		+
-		fcppt::math::dim::fill<
-			sge::renderer::dim2::dim_wrapper::value
-		>(
-			1u
-		)
-	);
-
-	sge::renderer::size_type const cells_per_row(
-		std::max(
-			_area.size().w()
-			/
-			cell_size_edited.w()
-			,
-			fcppt::literal<
-				sge::renderer::size_type
+	sanguis::model::cell_area const result(
+		sanguis::model::cell_area_from_index(
+			sanguis::model::image_size(
+				fcppt::math::dim::structure_cast<
+					sanguis::model::image_size::value_type
+				>(
+					_area.size()
+				)
+			),
+			sanguis::model::cell_size(
+				fcppt::math::dim::structure_cast<
+					sanguis::model::cell_size::value_type
+				>(
+					_cell_size.get()
+				)
+			),
+			fcppt::cast::size<
+				sanguis::model::animation_index
 			>(
-				1u
+				_index
 			)
 		)
 	);
 
 	return
 		sge::renderer::lock_rect(
-			sge::renderer::lock_rect::vector(
-				_index
-				%
-				cells_per_row
-				,
-				_index
-				/
-				cells_per_row
+			fcppt::math::vector::structure_cast<
+				sge::renderer::lock_rect::vector
+			>(
+				result.pos()
 			)
-			*
-			cell_size_edited
 			+
-			_area.pos()
-			,
-			_cell_size.get()
+			_area.pos(),
+			fcppt::math::dim::structure_cast<
+				sge::renderer::lock_rect::dim
+			>(
+				result.size()
+			)
 		);
 }

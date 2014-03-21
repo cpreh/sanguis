@@ -14,7 +14,7 @@ sanguis::load::model::convert_cell_size(
 			fcppt::math::dim::structure_cast<
 				sanguis::load::model::cell_size::value_type
 			>(
-				_cell_size
+				_cell_size.get()
 			)
 		);
 }

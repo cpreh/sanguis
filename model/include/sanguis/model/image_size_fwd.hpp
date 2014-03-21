@@ -1,5 +1,5 @@
-#ifndef SANGUIS_MODEL_CELL_SIZE_FWD_HPP_INCLUDED
-#define SANGUIS_MODEL_CELL_SIZE_FWD_HPP_INCLUDED
+#ifndef SANGUIS_MODEL_IMAGE_SIZE_FWD_HPP_INCLUDED
+#define SANGUIS_MODEL_IMAGE_SIZE_FWD_HPP_INCLUDED
 
 #include <sanguis/model/dim_fwd.hpp>
 #include <fcppt/make_strong_typedef.hpp>
@@ -12,7 +12,7 @@ namespace model
 
 FCPPT_MAKE_STRONG_TYPEDEF(
 	sanguis::model::dim,
-	cell_size
+	image_size
 );
 
 }
