@@ -165,6 +165,7 @@ sanguis::creator::aux_::generators::graveyard(
 	spawners{
 		sanguis::creator::aux_::place_spawners(
 			grid,
+			openings[0],
 			10u,
 			_parameters.randgen(),
 			sanguis::creator::aux_::enemy_type_container{

@@ -66,7 +66,7 @@ sanguis::creator::aux_::place_openings(
 	FCPPT_ASSERT_ERROR_MESSAGE(
 		possible_opening.has_value(),
 		FCPPT_TEXT(
-			"Could not find a free tile close enough to the exit!"
+			"Could not find a free tile anywhere!"
 		)
 	);
 
@@ -82,27 +82,12 @@ sanguis::creator::aux_::place_openings(
 		result.size()
 	};
 
-	sanguis::creator::opening_count::value_type iterations{
-		0u
-	};
-
 	while(
 		current_results
 		<
 		_opening_count.get()
 	)
 	{
-		if(
-			++iterations
-			>
-			_opening_count.get() * 5
-		)
-			throw sanguis::creator::exception(
-				FCPPT_TEXT(
-					"Could not place opening, giving up."
-				)
-			);
-
 		sanguis::creator::aux_::optional_pos const
 		candidate{
 			sanguis::creator::aux_::closest_empty(
@@ -114,10 +99,12 @@ sanguis::creator::aux_::place_openings(
 			)
 		};
 
-		if(
-			!candidate
-		)
-			continue;
+		FCPPT_ASSERT_ERROR_MESSAGE(
+			candidate.has_value(),
+			FCPPT_TEXT(
+				"Could not find a free tile anywhere!"
+			)
+		);
 
 		sanguis::creator::opening const
 		next_opening{
@@ -126,31 +113,18 @@ sanguis::creator::aux_::place_openings(
 			)
 		};
 
-		if(
-			!fcppt::algorithm::contains(
-				result,
-				next_opening
-			)
-		)
-		{
-			result.push_back(
-				next_opening
-			);
-
-			++current_results;
-		}
-	}
-
-	for(
-		auto const &opening
-		:
-		result
-	)
 		_grid
 		[
-			opening.get()
+			next_opening.get()
 		] =
 			sanguis::creator::tile::door;
+
+		result.push_back(
+			next_opening
+		);
+
+		++current_results;
+	}
 
 	return
 		result;

@@ -15,15 +15,22 @@
 #include <sanguis/creator/aux_/random/uniform_int_wrapper_impl.hpp>
 #include <sanguis/creator/aux_/random/uniform_size.hpp>
 #include <sanguis/creator/aux_/random/uniform_size_variate.hpp>
+#include <sanguis/creator/aux_/tile_is_visible.hpp>
+#include <fcppt/io/cout.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/pre.hpp>
+#include <fcppt/assert/error_message.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>
 #include <fcppt/random/distribution/parameters/make_uniform_indices_advanced.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <ostream>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::creator::spawn_container
 sanguis::creator::aux_::place_spawners(
 	sanguis::creator::grid &_grid,
+	sanguis::creator::opening const &_start_portal,
 	sanguis::creator::count const _spawner_count,
 	sanguis::creator::aux_::random::generator &_generator,
 	sanguis::creator::aux_::enemy_type_container const &_enemy_types
@@ -94,17 +101,6 @@ sanguis::creator::aux_::place_spawners(
 		_spawner_count
 	)
 	{
-		if(
-			++iterations
-			>
-			_spawner_count * 5
-		)
-			throw sanguis::creator::exception{
-				FCPPT_TEXT(
-					"Could not place spawners, giving up."
-				)
-			};
-
 		sanguis::creator::aux_::optional_pos const
 		candidate{
 			sanguis::creator::aux_::closest_empty(
@@ -116,32 +112,60 @@ sanguis::creator::aux_::place_spawners(
 			)
 		};
 
-		if(
-			!candidate
-		)
-			continue;
-
-		_grid
-		[
-			*candidate
-		] =
-			sanguis::creator::tile::spawner;
-
-		spawners.push_back(
-			sanguis::creator::spawn{
-				sanguis::creator::spawn_pos{
-					*candidate
-				},
-				_enemy_types[
-					random_monster(
-						_generator
-					)
-				],
-				sanguis::creator::spawn_type::spawner
-			}
+		FCPPT_ASSERT_ERROR_MESSAGE(
+			candidate.has_value(),
+			FCPPT_TEXT(
+				"Could not find a free tile anywhere!"
+			)
 		);
 
-		++current_spawners;
+
+		if(
+			!
+			sanguis::creator::aux_::tile_is_visible(
+				*candidate,
+				_start_portal.get()
+			)
+		)
+		{
+			_grid
+			[
+				*candidate
+			] =
+				sanguis::creator::tile::spawner;
+
+			spawners.push_back(
+				sanguis::creator::spawn{
+					sanguis::creator::spawn_pos{
+						*candidate
+					},
+					_enemy_types[
+						random_monster(
+							_generator
+						)
+					],
+					sanguis::creator::spawn_type::spawner
+				}
+			);
+
+			++current_spawners;
+		}
+
+		if(
+			++iterations
+			>
+			_spawner_count * 5
+		)
+		{
+			fcppt::io::cout()
+				<< FCPPT_TEXT("gave up on placing ")
+				<< (_spawner_count - current_spawners)
+				<< FCPPT_TEXT(" spawners due to visibility after ")
+				<< iterations
+				<< FCPPT_TEXT(" tries.")
+				<< std::endl;
+			break;
+		}
 	}
 
 	return

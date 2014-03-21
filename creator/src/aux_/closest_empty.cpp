@@ -4,6 +4,9 @@
 #include <sanguis/creator/aux_/closest_empty.hpp>
 #include <sanguis/creator/aux_/find_closest.hpp>
 #include <sanguis/creator/aux_/optional_pos.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <algorithm>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::creator::aux_::optional_pos const
@@ -24,6 +27,6 @@ sanguis::creator::aux_::closest_empty(
 					==
 					sanguis::creator::tile::nothing;
 			},
-			10u
+			std::max(_grid.size().w(), _grid.size().h())
 		);
 }

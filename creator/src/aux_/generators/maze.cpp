@@ -78,10 +78,21 @@ sanguis::creator::aux_::generators::maze(
 		)
 	};
 
+	sanguis::creator::opening_container const
+	openings{
+		sanguis::creator::aux_::place_openings(
+			grid,
+			_parameters.opening_count(),
+			random_x,
+			random_y
+		)
+	};
+
 	sanguis::creator::spawn_container const
 	spawners{
 		sanguis::creator::aux_::place_spawners(
 			grid,
+			openings[0],
 			20u,
 			_parameters.randgen(),
 			sanguis::creator::aux_::enemy_type_container{
@@ -95,16 +106,6 @@ sanguis::creator::aux_::generators::maze(
 				sanguis::creator::enemy_type::ghost,
 				sanguis::creator::enemy_type::maggot
 			}
-		)
-	};
-
-	sanguis::creator::opening_container const
-	openings{
-		sanguis::creator::aux_::place_openings(
-			grid,
-			_parameters.opening_count(),
-			random_x,
-			random_y
 		)
 	};
 
