@@ -457,6 +457,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>delaySpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>delayChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>487</x>
+     <y>898</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>772</x>
+     <y>494</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>soundEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>soundChanged(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>529</x>
+     <y>926</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>772</x>
+     <y>494</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>actionQuit()</slot>
@@ -466,5 +498,7 @@
   <slot>selectedAnimationChanged(QString)</slot>
   <slot>globalDelayChanged(int)</slot>
   <slot>actionSave()</slot>
+  <slot>delayChanged(int)</slot>
+  <slot>soundChanged(QString)</slot>
  </slots>
 </ui>

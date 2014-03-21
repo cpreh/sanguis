@@ -15,11 +15,15 @@ qt5_wrap_ui(
 
 set(
 	SANGUIS_TOOLS_ANIMATIONS_FILES
+	include/sanguis/tools/animations/int_to_delay.hpp
 	include/sanguis/tools/animations/main_window.hpp
+	include/sanguis/tools/animations/optional_animation_ref.hpp
+	include/sanguis/tools/animations/optional_animation_ref_fwd.hpp
 	include/sanguis/tools/animations/qtutil/from_fcppt_string.hpp
 	include/sanguis/tools/animations/qtutil/to_fcppt_string.hpp
 	include/sanguis/tools/animations/sge_systems.hpp
 	include/sanguis/tools/animations/sge_systems_fwd.hpp
+	src/int_to_delay.cpp
 	src/main.cpp
 	src/main_window.cpp
 	src/qtutil/from_fcppt_string.cpp

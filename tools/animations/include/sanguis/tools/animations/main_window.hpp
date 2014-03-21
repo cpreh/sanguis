@@ -2,6 +2,7 @@
 #define SANGUIS_TOOLS_ANIMATIONS_MAIN_WINDOW_HPP_INCLUDED
 
 #include <sanguis/model/object.hpp>
+#include <sanguis/tools/animations/optional_animation_ref_fwd.hpp>
 #include <sanguis/tools/animations/sge_systems_fwd.hpp>
 #include <fcppt/optional_decl.hpp>
 #include <fcppt/scoped_ptr_decl.hpp>
@@ -64,7 +65,20 @@ public Q_SLOTS:
 	globalDelayChanged(
 		int
 	);
+
+	void
+	delayChanged(
+		int
+	);
+
+	void
+	soundChanged(
+		QString const &
+	);
 private:
+	sanguis::tools::animations::optional_animation_ref const
+	current_animation();
+
 	sanguis::tools::animations::sge_systems &sge_systems_;
 
 	fcppt::scoped_ptr<

@@ -1,11 +1,13 @@
 #include <sanguis/model/animation.hpp>
-#include <sanguis/model/animation_delay.hpp>
+#include <sanguis/model/animation_sound.hpp>
 #include <sanguis/model/deserialize.hpp>
 #include <sanguis/model/exception.hpp>
 #include <sanguis/model/object.hpp>
-#include <sanguis/model/optional_animation_delay.hpp>
+#include <sanguis/model/optional_animation_sound.hpp>
 #include <sanguis/model/serialize.hpp>
+#include <sanguis/tools/animations/int_to_delay.hpp>
 #include <sanguis/tools/animations/main_window.hpp>
+#include <sanguis/tools/animations/optional_animation_ref.hpp>
 #include <sanguis/tools/animations/sge_systems.hpp>
 #include <sanguis/tools/animations/qtutil/from_fcppt_string.hpp>
 #include <sanguis/tools/animations/qtutil/to_fcppt_string.hpp>
@@ -21,7 +23,6 @@
 #include <QObject>
 #include <QString>
 #include <ui_main_window.h>
-#include <chrono>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -252,61 +253,35 @@ sanguis::tools::animations::main_window::selectedWeaponChanged(
 
 void
 sanguis::tools::animations::main_window::selectedAnimationChanged(
-	QString const &_string
+	QString const &
 )
 {
-	QString const selected_part(
-		ui_->partComboBox->currentText()
-	);
-
-	QString const selected_weapon_category(
-		ui_->weaponComboBox->currentText()
+	sanguis::tools::animations::optional_animation_ref const animation(
+		this->current_animation()
 	);
 
 	if(
-		!loaded_model_
-		||
-		selected_part.isEmpty()
-		||
-		selected_weapon_category.isEmpty()
-		||
-		_string.isEmpty()
+		!animation
 	)
 		return;
 
-	sanguis::model::animation const &animation(
-		loaded_model_->part(
-			sanguis::tools::animations::qtutil::to_fcppt_string(
-				selected_part
-			)
-		).weapon_category(
-			sanguis::tools::animations::qtutil::to_fcppt_string(
-				selected_weapon_category
-			)
-		).animation(
-			sanguis::tools::animations::qtutil::to_fcppt_string(
-				_string
-			)
-		)
-	);
-
 	ui_->delaySpinBox->setValue(
-		animation.animation_delay()
+		animation->animation_delay()
 		?
 			fcppt::truncation_check_cast<
 				int
 			>(
-				animation.animation_delay()->get().count()
+				animation->animation_delay()->get().count()
 			)
 		:
 			0
 	);
 
 	ui_->soundEdit->setText(
-		animation.animation_sound()
+		animation->animation_sound()
 		?
 			sanguis::tools::animations::qtutil::from_fcppt_string(
-				animation.animation_sound()->get()
+				animation->animation_sound()->get()
 			)
 		:
 			QString()
@@ -324,18 +299,102 @@ sanguis::tools::animations::main_window::globalDelayChanged(
 		return;
 
 	loaded_model_->animation_delay(
-		_value
-		!=
-		0
+		sanguis::tools::animations::int_to_delay(
+			_value
+		)
+	);
+}
+
+void
+sanguis::tools::animations::main_window::delayChanged(
+	int const _value
+)
+{
+	sanguis::tools::animations::optional_animation_ref const animation(
+		this->current_animation()
+	);
+
+	if(
+		!animation
+	)
+		return;
+
+	animation->animation_delay(
+		sanguis::tools::animations::int_to_delay(
+			_value
+		)
+	);
+}
+
+void
+sanguis::tools::animations::main_window::soundChanged(
+	QString const &_name
+)
+{
+	sanguis::tools::animations::optional_animation_ref const animation(
+		this->current_animation()
+	);
+
+	if(
+		!animation
+	)
+		return;
+
+	animation->animation_sound(
+		_name.isEmpty()
 		?
-			sanguis::model::optional_animation_delay(
-				sanguis::model::animation_delay(
-					std::chrono::milliseconds(
-						_value
+			sanguis::model::optional_animation_sound(
+				sanguis::model::animation_sound(
+					sanguis::tools::animations::qtutil::to_fcppt_string(
+						_name
 					)
 				)
 			)
 		:
-			sanguis::model::optional_animation_delay()
+			sanguis::model::optional_animation_sound()
 	);
+}
+
+sanguis::tools::animations::optional_animation_ref const
+sanguis::tools::animations::main_window::current_animation()
+{
+	QString const selected_part(
+		ui_->partComboBox->currentText()
+	);
+
+	QString const selected_weapon_category(
+		ui_->weaponComboBox->currentText()
+	);
+
+	QString const selected_animation(
+		ui_->animationComboBox->currentText()
+	);
+
+	return
+		!loaded_model_
+		||
+		selected_part.isEmpty()
+		||
+		selected_weapon_category.isEmpty()
+		||
+		selected_animation.isEmpty()
+		?
+			sanguis::tools::animations::optional_animation_ref()
+		:
+			sanguis::tools::animations::optional_animation_ref(
+				loaded_model_->part(
+					sanguis::tools::animations::qtutil::to_fcppt_string(
+						selected_part
+					)
+				).weapon_category(
+					sanguis::tools::animations::qtutil::to_fcppt_string(
+						selected_weapon_category
+					)
+				).animation(
+					sanguis::tools::animations::qtutil::to_fcppt_string(
+						selected_animation
+					)
+				)
+			)
+		;
 }
