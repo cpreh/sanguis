@@ -7,6 +7,7 @@
 #include <sanguis/creator/spawn_pos.hpp>
 #include <sanguis/creator/spawn_type.hpp>
 #include <sanguis/creator/tile.hpp>
+#include <sanguis/creator/tile_is_visible.hpp>
 #include <sanguis/creator/aux_/closest_empty.hpp>
 #include <sanguis/creator/aux_/enemy_type_container.hpp>
 #include <sanguis/creator/aux_/optional_pos.hpp>
@@ -15,7 +16,6 @@
 #include <sanguis/creator/aux_/random/uniform_int_wrapper_impl.hpp>
 #include <sanguis/creator/aux_/random/uniform_size.hpp>
 #include <sanguis/creator/aux_/random/uniform_size_variate.hpp>
-#include <sanguis/creator/aux_/tile_is_visible.hpp>
 #include <fcppt/io/cout.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/pre.hpp>
@@ -122,7 +122,7 @@ sanguis::creator::aux_::place_spawners(
 
 		if(
 			!
-			sanguis::creator::aux_::tile_is_visible(
+			sanguis::creator::tile_is_visible(
 				_grid,
 				*candidate,
 				_start_portal.get()

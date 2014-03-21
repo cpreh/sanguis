@@ -1,16 +1,17 @@
-#ifndef SANGUIS_CREATOR_AUX__TILE_IS_VISIBLE_HPP_INCLUDED
-#define SANGUIS_CREATOR_AUX__TILE_IS_VISIBLE_HPP_INCLUDED
+#ifndef SANGUIS_CREATOR_TILE_IS_VISIBLE_HPP_INCLUDED
+#define SANGUIS_CREATOR_TILE_IS_VISIBLE_HPP_INCLUDED
 
-#include <sanguis/creator/pos_fwd.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
+#include <sanguis/creator/pos_fwd.hpp>
+#include <sanguis/creator/symbol.hpp>
+
 
 namespace sanguis
 {
 namespace creator
 {
-namespace aux_
-{
 
+SANGUIS_CREATOR_SYMBOL
 bool
 tile_is_visible(
 	sanguis::creator::grid const &,
@@ -18,7 +19,6 @@ tile_is_visible(
 	sanguis::creator::pos const &
 );
 
-}
 }
 }
 

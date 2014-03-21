@@ -28,7 +28,6 @@ set(
 	include/sanguis/creator/opening_count.hpp
 	include/sanguis/creator/pos.hpp
 	include/sanguis/creator/pos_fwd.hpp
-	include/sanguis/creator/reachable_cells.hpp
 	include/sanguis/creator/rect.hpp
 	include/sanguis/creator/rect_fwd.hpp
 	include/sanguis/creator/seed.hpp
@@ -50,6 +49,7 @@ set(
 	include/sanguis/creator/tile_grid.hpp
 	include/sanguis/creator/tile_grid_fwd.hpp
 	include/sanguis/creator/tile_is_solid.hpp
+	include/sanguis/creator/tile_is_visible.hpp
 	include/sanguis/creator/tile_rect.hpp
 	include/sanguis/creator/tile_size.hpp
 	include/sanguis/creator/top_parameters.hpp
@@ -85,7 +85,6 @@ set(
 	src/aux_/serialization/spawn.cpp
 	src/aux_/serialization/spawn_container.cpp
 	src/aux_/serialization/top_result.cpp
-	src/aux_/tile_is_visible.cpp
 	src/deserialize.cpp
 	src/exception.cpp
 	src/generate.cpp
@@ -150,12 +149,11 @@ set(
 	src/include/sanguis/creator/aux_/serialization/spawn_container.hpp
 	src/include/sanguis/creator/aux_/serialization/tile_grid.hpp
 	src/include/sanguis/creator/aux_/serialization/top_result.hpp
-	src/include/sanguis/creator/aux_/tile_is_visible.hpp
-	src/reachable_cells.cpp
 	src/serialize.cpp
 	src/spawn.cpp
 	src/start_name.cpp
 	src/tile_is_solid.cpp
+	src/tile_is_visible.cpp
 	src/tile_rect.cpp
 	src/top_parameters.cpp
 	src/top_result.cpp

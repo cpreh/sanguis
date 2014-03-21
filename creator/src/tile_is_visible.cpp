@@ -1,7 +1,7 @@
-#include <sanguis/creator/aux_/tile_is_visible.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/signed_pos.hpp>
+#include <sanguis/creator/tile_is_visible.hpp>
 #include <fcppt/math/bresenham_thick.hpp>
 #include <sanguis/creator/tile_is_solid.hpp>
 #include <fcppt/container/grid/in_range.hpp>
@@ -10,7 +10,7 @@
 
 
 bool
-sanguis::creator::aux_::tile_is_visible(
+sanguis::creator::tile_is_visible(
 	sanguis::creator::grid const &_grid,
 	sanguis::creator::pos const &_pos1,
 	sanguis::creator::pos const &_pos2
