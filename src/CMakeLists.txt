@@ -2,7 +2,6 @@ set(
 	SANGUIS_FILES
 	include/sanguis/aoe_projectile_type.hpp
 	include/sanguis/aoe_projectile_type_fwd.hpp
-	include/sanguis/app_name.hpp
 	include/sanguis/args/display_mode.hpp
 	include/sanguis/args/log_level.hpp
 	include/sanguis/args/multi_sampling.hpp
@@ -458,8 +457,6 @@ set(
 	include/sanguis/client/world_parameters.hpp
 	include/sanguis/client/world_parameters_fwd.hpp
 	include/sanguis/clock.hpp
-	include/sanguis/company_name.hpp
-	include/sanguis/config_app_name.hpp
 	include/sanguis/diff_clock.hpp
 	include/sanguis/diff_clock_fwd.hpp
 	include/sanguis/diff_timer.hpp
@@ -578,9 +575,6 @@ set(
 	include/sanguis/load/weapon_pickup_name.hpp
 	include/sanguis/load/weapon_pickup_name_visitor.hpp
 	include/sanguis/log.hpp
-	include/sanguis/log_context.hpp
-	include/sanguis/log_location.hpp
-	include/sanguis/log_parameters.hpp
 	include/sanguis/magazine_extra.hpp
 	include/sanguis/magazine_remaining.hpp
 	include/sanguis/magazine_size.hpp
@@ -1579,7 +1573,6 @@ set(
 	include/sanguis/world_id_type.hpp
 	include/sanguis/world_name.hpp
 	include/sanguis/world_name_fwd.hpp
-	src/app_name.cpp
 	src/args/display_mode.cpp
 	src/args/log_level.cpp
 	src/args/multi_sampling.cpp
@@ -1740,8 +1733,6 @@ set(
 	src/client/states/running.cpp
 	src/client/states/waiting_for_player.cpp
 	src/client/world_parameters.cpp
-	src/company_name.cpp
-	src/config_app_name.cpp
 	src/duration_second.cpp
 	src/exception.cpp
 	src/from_console_arg_list.cpp
@@ -1801,9 +1792,6 @@ set(
 	src/load/weapon_pickup_name.cpp
 	src/load/weapon_pickup_name_visitor.cpp
 	src/log.cpp
-	src/log_context.cpp
-	src/log_location.cpp
-	src/log_parameters.cpp
 	src/main.cpp
 	src/main_object.cpp
 	src/media_path.cpp
@@ -2194,10 +2182,11 @@ fcppt_utils_set_target_compiler_flags(
 target_link_libraries(
 	sanguis
 	PRIVATE
-	${sanguiscreator_TARGET}
 	${sanguiscollision_TARGET}
-	${sanguismodel_TARGET}
+	${sanguiscore_TARGET}
+	${sanguiscreator_TARGET}
 	${sanguisgui_TARGET}
+	${sanguismodel_TARGET}
 	${fcppt_core_TARGET}
 	${fcppt_filesystem_TARGET}
 	${awl_TARGET}

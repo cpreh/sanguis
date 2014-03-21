@@ -1,5 +1,5 @@
-#include <sanguis/log_parameters.hpp>
 #include <sanguis/log_context.hpp>
+#include <sanguis/log_parameters.hpp>
 #include <fcppt/io/clog.hpp>
 #include <fcppt/log/level.hpp>
 #include <fcppt/log/location_fwd.hpp>

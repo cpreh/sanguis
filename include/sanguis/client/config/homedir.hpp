@@ -13,7 +13,7 @@ namespace client
 namespace config
 {
 
-boost::filesystem::path const
+boost::filesystem::path
 homedir();
 
 }

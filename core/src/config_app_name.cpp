@@ -1,6 +1,6 @@
-#include <sge/config/app_name.hpp>
 #include <sanguis/app_name.hpp>
 #include <sanguis/config_app_name.hpp>
+#include <sge/config/app_name.hpp>
 
 
 sge::config::app_name

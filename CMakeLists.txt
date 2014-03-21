@@ -270,11 +270,15 @@ function(
 endfunction()
 
 add_subdirectory(
-	creator
+	collision
 )
 
 add_subdirectory(
-	collision
+	core
+)
+
+add_subdirectory(
+	creator
 )
 
 add_subdirectory(

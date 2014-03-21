@@ -6,7 +6,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-boost::filesystem::path const
+boost::filesystem::path
 sanguis::client::config::homedir()
 {
 	return

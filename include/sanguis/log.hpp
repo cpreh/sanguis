@@ -3,6 +3,7 @@
 
 #include <fcppt/log/object_fwd.hpp>
 
+
 namespace sanguis
 {
 

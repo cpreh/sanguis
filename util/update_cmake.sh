@@ -54,6 +54,16 @@ update_cmake \
 
 popd > /dev/null
 
+pushd core > /dev/null
+
+update_cmake \
+	CMakeLists.txt \
+	SANGUIS_CORE_FILES \
+	include \
+	src
+
+popd > /dev/null
+
 pushd model > /dev/null
 
 update_cmake \

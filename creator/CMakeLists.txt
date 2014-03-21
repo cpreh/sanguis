@@ -22,6 +22,7 @@ set(
 	include/sanguis/creator/grid_fwd.hpp
 	include/sanguis/creator/grid_spiral_range.hpp
 	include/sanguis/creator/grid_spiral_range_fwd.hpp
+	include/sanguis/creator/log_location.hpp
 	include/sanguis/creator/name.hpp
 	include/sanguis/creator/opening.hpp
 	include/sanguis/creator/opening_container.hpp
@@ -71,6 +72,7 @@ set(
 	src/aux_/generators/maze.cpp
 	src/aux_/generators/start.cpp
 	src/aux_/graveyard_name.cpp
+	src/aux_/log.cpp
 	src/aux_/maze_name.cpp
 	src/aux_/normal_generator_vector.cpp
 	src/aux_/parameters.cpp
@@ -110,6 +112,7 @@ set(
 	src/include/sanguis/creator/aux_/generators/maze.hpp
 	src/include/sanguis/creator/aux_/generators/start.hpp
 	src/include/sanguis/creator/aux_/graveyard_name.hpp
+	src/include/sanguis/creator/aux_/log.hpp
 	src/include/sanguis/creator/aux_/maze_name.hpp
 	src/include/sanguis/creator/aux_/normal_generator_vector.hpp
 	src/include/sanguis/creator/aux_/normal_generator_vector_type.hpp
@@ -149,6 +152,7 @@ set(
 	src/include/sanguis/creator/aux_/serialization/spawn_container.hpp
 	src/include/sanguis/creator/aux_/serialization/tile_grid.hpp
 	src/include/sanguis/creator/aux_/serialization/top_result.hpp
+	src/log_location.cpp
 	src/serialize.cpp
 	src/spawn.cpp
 	src/start_name.cpp
@@ -170,5 +174,5 @@ include_directories(
 sanguis_add_library(
 	sanguiscreator
 	"${SANGUIS_CREATOR_FILES}"
-	"${fcppt_core_TARGET};${sgecore_TARGET};${sgeparse_TARGET};${sgeparsejson_TARGET}"
+	"${sanguiscore_TARGET};${fcppt_core_TARGET};${sgecore_TARGET};${sgeparse_TARGET};${sgeparsejson_TARGET}"
 )

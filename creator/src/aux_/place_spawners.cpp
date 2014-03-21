@@ -10,21 +10,20 @@
 #include <sanguis/creator/tile_is_visible.hpp>
 #include <sanguis/creator/aux_/closest_empty.hpp>
 #include <sanguis/creator/aux_/enemy_type_container.hpp>
+#include <sanguis/creator/aux_/log.hpp>
 #include <sanguis/creator/aux_/optional_pos.hpp>
 #include <sanguis/creator/aux_/place_spawners.hpp>
 #include <sanguis/creator/aux_/random/generator.hpp>
 #include <sanguis/creator/aux_/random/uniform_int_wrapper_impl.hpp>
 #include <sanguis/creator/aux_/random/uniform_size.hpp>
 #include <sanguis/creator/aux_/random/uniform_size_variate.hpp>
-#include <fcppt/io/cout.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/assert/error_message.hpp>
+#include <fcppt/log/_.hpp>
+#include <fcppt/log/error.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>
 #include <fcppt/random/distribution/parameters/make_uniform_indices_advanced.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <ostream>
-#include <fcppt/config/external_end.hpp>
 
 
 sanguis::creator::spawn_container
@@ -158,13 +157,16 @@ sanguis::creator::aux_::place_spawners(
 			_spawner_count * 5
 		)
 		{
-			fcppt::io::cout()
-				<< FCPPT_TEXT("gave up on placing ")
-				<< (_spawner_count - current_spawners)
-				<< FCPPT_TEXT(" spawners due to visibility after ")
-				<< iterations
-				<< FCPPT_TEXT(" tries.")
-				<< std::endl;
+			FCPPT_LOG_ERROR(
+				sanguis::creator::aux_::log(),
+				fcppt::log::_
+					<< FCPPT_TEXT("gave up on placing ")
+					<< (_spawner_count - current_spawners)
+					<< FCPPT_TEXT(" spawners due to visibility after ")
+					<< iterations
+					<< FCPPT_TEXT(" tries.")
+			);
+
 			break;
 		}
 	}
