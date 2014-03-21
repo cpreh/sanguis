@@ -9,6 +9,7 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 
 
+// TODO use the copypasted version from creator::aux_ here instead
 bool
 sanguis::server::ai::pathing::is_visible(
 	sanguis::creator::grid const &_grid,

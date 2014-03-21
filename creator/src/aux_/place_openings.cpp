@@ -16,7 +16,6 @@
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/math/vector/dim.hpp>
 
-
 sanguis::creator::opening_container
 sanguis::creator::aux_::place_openings(
 	sanguis::creator::grid &_grid,
@@ -76,11 +75,22 @@ sanguis::creator::aux_::place_openings(
 		}
 	);
 
-	// all remaining result
+	for(
+		auto const &portal
+		:
+		result
+	)
+		_grid
+		[
+			portal.get()
+		] =
+			sanguis::creator::tile::door;
+
 	sanguis::creator::opening_container::size_type
 	current_results{
 		result.size()
 	};
+
 
 	while(
 		current_results

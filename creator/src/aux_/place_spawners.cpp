@@ -123,6 +123,7 @@ sanguis::creator::aux_::place_spawners(
 		if(
 			!
 			sanguis::creator::aux_::tile_is_visible(
+				_grid,
 				*candidate,
 				_start_portal.get()
 			)
