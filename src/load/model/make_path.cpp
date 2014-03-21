@@ -17,6 +17,8 @@ sanguis::load::model::make_path(
 	boost::filesystem::path const path(
 		sanguis::media_path()
 		/
+		FCPPT_TEXT("models")
+		/
 		_name
 	);
 
