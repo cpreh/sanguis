@@ -14,6 +14,7 @@ sanguis::tools::animations::qtutil::from_sge_color_format(
 	sge::image::color::format const _format
 )
 {
+	// TODO: Which ones should we use here?
 	switch(
 		_format
 	)

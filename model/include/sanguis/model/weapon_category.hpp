@@ -47,6 +47,12 @@ public:
 	);
 
 	SANGUIS_MODEL_SYMBOL
+	sanguis::model::animation const &
+	animation(
+		fcppt::string const &
+	) const;
+
+	SANGUIS_MODEL_SYMBOL
 	sanguis::model::animation_map const &
 	animations() const;
 

@@ -89,6 +89,21 @@ sanguis::model::object::part(
 		);
 }
 
+sanguis::model::part const &
+sanguis::model::object::part(
+	fcppt::string const &_name
+) const
+{
+	return
+		const_cast<
+			sanguis::model::object &
+		>(
+			*this
+		).part(
+			_name
+		);
+}
+
 sanguis::model::part_map const &
 sanguis::model::object::parts() const
 {

@@ -51,6 +51,11 @@ public:
 		sanguis::load::resource::animation::entity_vector const &
 	);
 
+	explicit
+	series(
+		sanguis::load::resource::animation::entity_vector &&
+	);
+
 	void
 	push_back(
 		sanguis::load::resource::animation::entity const &

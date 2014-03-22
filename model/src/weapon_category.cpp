@@ -76,6 +76,21 @@ sanguis::model::weapon_category::animation(
 		);
 }
 
+sanguis::model::animation const &
+sanguis::model::weapon_category::animation(
+	fcppt::string const &_name
+) const
+{
+	return
+		const_cast<
+			sanguis::model::weapon_category &
+		>(
+			*this
+		).animation(
+			_name
+		);
+}
+
 sanguis::model::animation_map const &
 sanguis::model::weapon_category::animations() const
 {

@@ -21,6 +21,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <sanguis/load/resource/animation/entity.hpp>
 #include <sanguis/load/resource/animation/entity_vector.hpp>
 #include <sanguis/load/resource/animation/series.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::load::resource::animation::series::series()
@@ -35,6 +38,18 @@ sanguis::load::resource::animation::series::series(
 :
 	entities_(
 		_entities
+	)
+{
+}
+
+sanguis::load::resource::animation::series::series(
+	sanguis::load::resource::animation::entity_vector &&_entities
+)
+:
+	entities_(
+		std::move(
+			_entities
+		)
 	)
 {
 }

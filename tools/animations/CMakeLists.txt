@@ -15,8 +15,15 @@ qt5_wrap_ui(
 
 set(
 	SANGUIS_TOOLS_ANIMATIONS_FILES
+	include/sanguis/tools/animations/const_optional_image_file_ref.hpp
+	include/sanguis/tools/animations/const_optional_image_file_ref_fwd.hpp
 	include/sanguis/tools/animations/exception.hpp
+	include/sanguis/tools/animations/find_image_file.hpp
+	include/sanguis/tools/animations/frame.hpp
+	include/sanguis/tools/animations/frame_fwd.hpp
+	include/sanguis/tools/animations/image_file_map.hpp
 	include/sanguis/tools/animations/int_to_delay.hpp
+	include/sanguis/tools/animations/load_image_files.hpp
 	include/sanguis/tools/animations/main_window.hpp
 	include/sanguis/tools/animations/optional_animation_ref.hpp
 	include/sanguis/tools/animations/optional_animation_ref_fwd.hpp
@@ -28,7 +35,10 @@ set(
 	include/sanguis/tools/animations/sge_systems.hpp
 	include/sanguis/tools/animations/sge_systems_fwd.hpp
 	src/exception.cpp
+	src/find_image_file.cpp
+	src/frame.cpp
 	src/int_to_delay.cpp
+	src/load_image_files.cpp
 	src/main.cpp
 	src/main_window.cpp
 	src/qtutil/from_fcppt_string.cpp

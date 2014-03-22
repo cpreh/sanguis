@@ -61,6 +61,12 @@ public:
 	);
 
 	SANGUIS_MODEL_SYMBOL
+	sanguis::model::part const &
+	part(
+		fcppt::string const &
+	) const;
+
+	SANGUIS_MODEL_SYMBOL
 	sanguis::model::part_map const &
 	parts() const;
 

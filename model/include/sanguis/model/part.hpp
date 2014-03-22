@@ -47,6 +47,12 @@ public:
 	);
 
 	SANGUIS_MODEL_SYMBOL
+	sanguis::model::weapon_category const &
+	weapon_category(
+		fcppt::string const &
+	) const;
+
+	SANGUIS_MODEL_SYMBOL
 	sanguis::model::weapon_category_map const &
 	weapon_categories() const;
 

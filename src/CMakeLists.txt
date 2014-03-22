@@ -498,7 +498,6 @@ set(
 	include/sanguis/load/model/animation_map.hpp
 	include/sanguis/load/model/animation_unique_ptr.hpp
 	include/sanguis/load/model/base_animation_not_found.hpp
-	include/sanguis/load/model/calc_rect.hpp
 	include/sanguis/load/model/cell_size.hpp
 	include/sanguis/load/model/cell_size_fwd.hpp
 	include/sanguis/load/model/collection.hpp
@@ -1752,7 +1751,6 @@ set(
 	src/load/log.cpp
 	src/load/model/animation.cpp
 	src/load/model/base_animation_not_found.cpp
-	src/load/model/calc_rect.cpp
 	src/load/model/collection.cpp
 	src/load/model/context.cpp
 	src/load/model/convert_cell_size.cpp

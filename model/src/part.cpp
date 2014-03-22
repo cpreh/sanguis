@@ -63,6 +63,21 @@ sanguis::model::part::weapon_category(
 		);
 }
 
+sanguis::model::weapon_category const &
+sanguis::model::part::weapon_category(
+	fcppt::string const &_name
+) const
+{
+	return
+		const_cast<
+			sanguis::model::part &
+		>(
+			*this
+		).weapon_category(
+			_name
+		);
+}
+
 sanguis::model::weapon_category_map const &
 sanguis::model::part::weapon_categories() const
 {
