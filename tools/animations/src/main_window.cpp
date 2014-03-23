@@ -1,33 +1,25 @@
 #include <sanguis/model/animation.hpp>
 #include <sanguis/model/animation_sound.hpp>
-#include <sanguis/model/cell_area.hpp>
 #include <sanguis/model/deserialize.hpp>
 #include <sanguis/model/exception.hpp>
-#include <sanguis/model/image_size.hpp>
-#include <sanguis/model/make_cell_areas.hpp>
 #include <sanguis/model/object.hpp>
 #include <sanguis/model/optional_animation_sound.hpp>
 #include <sanguis/model/serialize.hpp>
 #include <sanguis/tools/animations/const_optional_image_file_ref.hpp>
 #include <sanguis/tools/animations/find_image_file.hpp>
-#include <sanguis/tools/animations/frame.hpp>
 #include <sanguis/tools/animations/int_to_delay.hpp>
 #include <sanguis/tools/animations/load_image_files.hpp>
 #include <sanguis/tools/animations/main_window.hpp>
+#include <sanguis/tools/animations/make_frames.hpp>
 #include <sanguis/tools/animations/optional_animation_ref.hpp>
-#include <sanguis/tools/animations/sge_systems.hpp>
 #include <sanguis/tools/animations/qtutil/from_fcppt_string.hpp>
 #include <sanguis/tools/animations/qtutil/to_fcppt_string.hpp>
-#include <sge/image2d/file.hpp>
-#include <sge/image2d/view/const_object.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/truncation_check_cast.hpp>
-#include <fcppt/algorithm/map.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <QFileDialog>
@@ -39,15 +31,10 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::tools::animations::main_window::main_window(
-	sanguis::tools::animations::sge_systems &_sge_systems
-)
+sanguis::tools::animations::main_window::main_window()
 :
 	QMainWindow(
 		nullptr
-	),
-	sge_systems_(
-		_sge_systems
 	),
 	ui_(
 		fcppt::make_unique_ptr<
@@ -132,7 +119,6 @@ sanguis::tools::animations::main_window::actionJSON()
 	{
 		image_files_ =
 			sanguis::tools::animations::load_image_files(
-				sge_systems_.image_system(),
 				boost::filesystem::path(
 					fcppt_json_file
 				).remove_filename(),
@@ -360,34 +346,11 @@ sanguis::tools::animations::main_window::selectedAnimationChanged(
 		return;
 
 	frames_ =
-		fcppt::algorithm::map<
-			frame_container
-		>(
-			sanguis::model::make_cell_areas(
-				sanguis::model::image_size(
-					fcppt::math::dim::structure_cast<
-						sanguis::model::image_size::value_type
-					>(
-						file->size()
-					)
-				),
-				loaded_model_->cell_size(),
-				animation->animation_range()
-			),
-			[
-				this,
-				file
-			](
-				sanguis::model::cell_area const &_area
-			)
-			{
-				return
-					sanguis::tools::animations::frame(
-						*ui_->scrollAreaWidgetContents,
-						file->view(),
-						_area
-					);
-			}
+		sanguis::tools::animations::make_frames(
+			*file,
+			*ui_->scrollAreaWidgetContents,
+			*loaded_model_,
+			*animation
 		);
 }
 

@@ -3,9 +3,9 @@
 
 #include <sanguis/model/cell_area_fwd.hpp>
 #include <sanguis/tools/animations/frame_fwd.hpp>
-#include <sge/image2d/view/const_object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <QImage>
 #include <QLabel>
 #include <QPixmap>
 #include <QWidget>
@@ -28,7 +28,7 @@ class frame
 public:
 	frame(
 		QWidget &,
-		sge::image2d::view::const_object const &,
+		QImage const &,
 		sanguis::model::cell_area const &
 	);
 

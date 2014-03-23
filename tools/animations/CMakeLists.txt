@@ -20,20 +20,19 @@ set(
 	include/sanguis/tools/animations/exception.hpp
 	include/sanguis/tools/animations/find_image_file.hpp
 	include/sanguis/tools/animations/frame.hpp
+	include/sanguis/tools/animations/frame_container.hpp
 	include/sanguis/tools/animations/frame_fwd.hpp
 	include/sanguis/tools/animations/image_file_map.hpp
 	include/sanguis/tools/animations/int_to_delay.hpp
 	include/sanguis/tools/animations/load_image_files.hpp
 	include/sanguis/tools/animations/main_window.hpp
+	include/sanguis/tools/animations/make_frames.hpp
 	include/sanguis/tools/animations/optional_animation_ref.hpp
 	include/sanguis/tools/animations/optional_animation_ref_fwd.hpp
 	include/sanguis/tools/animations/qtutil/from_fcppt_string.hpp
-	include/sanguis/tools/animations/qtutil/from_sge_color_format.hpp
-	include/sanguis/tools/animations/qtutil/image_from_view.hpp
-	include/sanguis/tools/animations/qtutil/image_unique_ptr.hpp
+	include/sanguis/tools/animations/qtutil/sub_image.hpp
 	include/sanguis/tools/animations/qtutil/to_fcppt_string.hpp
-	include/sanguis/tools/animations/sge_systems.hpp
-	include/sanguis/tools/animations/sge_systems_fwd.hpp
+	include/sanguis/tools/animations/qtutil/to_rect.hpp
 	src/exception.cpp
 	src/find_image_file.cpp
 	src/frame.cpp
@@ -41,9 +40,9 @@ set(
 	src/load_image_files.cpp
 	src/main.cpp
 	src/main_window.cpp
+	src/make_frames.cpp
 	src/qtutil/from_fcppt_string.cpp
-	src/qtutil/from_sge_color_format.cpp
-	src/qtutil/image_from_view.cpp
+	src/qtutil/sub_image.cpp
 	src/qtutil/to_fcppt_string.cpp
 	ui/main_window.ui
 )
@@ -68,10 +67,8 @@ target_link_libraries(
 	sanguis_tools_animations
 	${sanguismodel_TARGET}
 	${sgecore_TARGET}
-	${sgeimagecolor_TARGET}
-	${sgeimage2d_TARGET}
-	${sgesystems_TARGET}
 	${fcppt_core_TARGET}
+	${fcppt_filesystem_TARGET}
 	${Boost_FILESYSTEM_LIBRARIES}
 )
 

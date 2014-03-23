@@ -5,8 +5,8 @@
 #include <sanguis/model/weapon_category.hpp>
 #include <sanguis/tools/animations/image_file_map.hpp>
 #include <sanguis/tools/animations/load_image_files.hpp>
-#include <sge/image2d/file.hpp>
-#include <sge/image2d/system.hpp>
+#include <sanguis/tools/animations/qtutil/from_fcppt_string.hpp>
+#include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <utility>
@@ -15,7 +15,6 @@
 
 sanguis::tools::animations::image_file_map
 sanguis::tools::animations::load_image_files(
-	sge::image2d::system &_image_system,
 	boost::filesystem::path const &_path,
 	sanguis::model::object const &_model
 )
@@ -24,7 +23,6 @@ sanguis::tools::animations::load_image_files(
 
 	auto const load_image(
 		[
-			&_image_system,
 			&_path,
 			&result
 		](
@@ -49,13 +47,27 @@ sanguis::tools::animations::load_image_files(
 			)
 				return;
 
-			result.insert(
-				std::make_pair(
-					*_name,
-					_image_system.load(
+			QImage image(
+				sanguis::tools::animations::qtutil::from_fcppt_string(
+					fcppt::filesystem::path_to_string(
 						_path
 						/
 						_name->get()
+					)
+				)
+			);
+
+			// TODO
+			if(
+				image.isNull()
+			)
+				return;
+
+			result.insert(
+				std::make_pair(
+					*_name,
+					std::move(
+						image
 					)
 				)
 			);

@@ -1,35 +1,29 @@
 #include <sanguis/model/cell_area.hpp>
 #include <sanguis/tools/animations/frame.hpp>
-#include <sanguis/tools/animations/qtutil/image_from_view.hpp>
-#include <sge/image2d/rect.hpp>
-#include <sge/image2d/view/const_object.hpp>
-#include <sge/image2d/view/sub.hpp>
+#include <sanguis/tools/animations/qtutil/sub_image.hpp>
+#include <sanguis/tools/animations/qtutil/to_rect.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/math/box/structure_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <QImage>
 #include <QLabel>
 #include <QPixmap>
+#include <QRect>
 #include <QWidget>
 #include <fcppt/config/external_end.hpp>
 
 
 sanguis::tools::animations::frame::frame(
 	QWidget &_parent,
-	sge::image2d::view::const_object const &_view,
+	QImage const &_image,
 	sanguis::model::cell_area const &_area
 )
 :
 	pixmap_(
 		QPixmap::fromImage(
-			*sanguis::tools::animations::qtutil::image_from_view(
-				sge::image2d::view::sub(
-					_view,
-					fcppt::math::box::structure_cast<
-						sge::image2d::rect
-					>(
-						_area
-					)
+			sanguis::tools::animations::qtutil::sub_image(
+				_image,
+				sanguis::tools::animations::qtutil::to_rect(
+					_area
 				)
 			)
 		)

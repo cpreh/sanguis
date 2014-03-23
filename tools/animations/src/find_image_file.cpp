@@ -46,7 +46,7 @@ sanguis::tools::animations::find_image_file(
 			)
 				result =
 					sanguis::tools::animations::const_optional_image_file_ref(
-						*it->second
+						it->second
 					);
 		}
 	);
