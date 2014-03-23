@@ -6,6 +6,7 @@
 #include <fcppt/config/external_begin.hpp>
 #include <QImage>
 #include <QLabel>
+#include <QLayout>
 #include <QPixmap>
 #include <QRect>
 #include <QWidget>
@@ -36,6 +37,10 @@ sanguis::tools::animations::frame::frame(
 		)
 	)
 {
+	_parent.layout()->addWidget(
+		label_.get()
+	);
+
 	label_->setPixmap(
 		pixmap_
 	);
