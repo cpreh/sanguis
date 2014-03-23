@@ -93,10 +93,11 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>696</width>
-            <height>774</height>
+            <width>683</width>
+            <height>770</height>
            </rect>
           </property>
+          <layout class="QGridLayout" name="gridLayout_2"/>
          </widget>
         </widget>
        </item>
@@ -278,7 +279,7 @@
      <x>0</x>
      <y>0</y>
      <width>1545</width>
-     <height>18</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
