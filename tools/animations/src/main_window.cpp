@@ -12,6 +12,7 @@
 #include <sanguis/tools/animations/main_window.hpp>
 #include <sanguis/tools/animations/make_frames.hpp>
 #include <sanguis/tools/animations/optional_animation_ref.hpp>
+#include <sanguis/tools/animations/qtutil/flow_layout.hpp>
 #include <sanguis/tools/animations/qtutil/from_fcppt_string.hpp>
 #include <sanguis/tools/animations/qtutil/to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -48,6 +49,10 @@ sanguis::tools::animations::main_window::main_window()
 {
 	ui_->setupUi(
 		this
+	);
+
+	ui_->scrollAreaWidgetContents->setLayout(
+		new sanguis::tools::animations::qtutil::FlowLayout()
 	);
 }
 

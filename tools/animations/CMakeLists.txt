@@ -29,6 +29,7 @@ set(
 	include/sanguis/tools/animations/make_frames.hpp
 	include/sanguis/tools/animations/optional_animation_ref.hpp
 	include/sanguis/tools/animations/optional_animation_ref_fwd.hpp
+	include/sanguis/tools/animations/qtutil/flow_layout.hpp
 	include/sanguis/tools/animations/qtutil/from_fcppt_string.hpp
 	include/sanguis/tools/animations/qtutil/sub_image.hpp
 	include/sanguis/tools/animations/qtutil/to_fcppt_string.hpp
@@ -41,6 +42,7 @@ set(
 	src/main.cpp
 	src/main_window.cpp
 	src/make_frames.cpp
+	src/qtutil/flow_layout.cpp
 	src/qtutil/from_fcppt_string.cpp
 	src/qtutil/sub_image.cpp
 	src/qtutil/to_fcppt_string.cpp
