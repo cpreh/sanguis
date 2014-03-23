@@ -4,6 +4,7 @@
 #include <sanguis/tools/animations/qtutil/to_rect.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <QFrame>
 #include <QImage>
 #include <QLabel>
 #include <QLayout>
@@ -39,6 +40,10 @@ sanguis::tools::animations::frame::frame(
 {
 	_parent.layout()->addWidget(
 		label_.get()
+	);
+
+	label_->setFrameShape(
+		QFrame::StyledPanel
 	);
 
 	label_->setPixmap(
