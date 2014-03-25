@@ -159,7 +159,8 @@ include_directories(
 
 set(
 	COLLISION_LINK_TARGETS
-	"${fcppt_core_TARGET};${sanguiscreator_TARGET}"
+	${fcppt_core_TARGET}
+	${sanguiscreator_TARGET}
 )
 
 if(
