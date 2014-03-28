@@ -1,6 +1,35 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e -u
+
+function toupper()
+{
+	echo $(tr 'a-z' 'A-Z' <<< "$1")
+}
+
+function update_impl()
+{
+	local sublibrary="$1"
+
+	local upperpath=$(toupper "${sublibrary}")
+
+	pushd "${sublibrary}" >> /dev/null
+
+	update_cmake \
+		CMakeLists.txt \
+		SANGUIS_"${upperpath/\//_}"_FILES \
+		"${@:2}"
+
+	popd >> /dev/null
+}
+
+function update_sublibrary()
+{
+	update_impl \
+		"$@" \
+		include \
+		src
+}
 
 update_cmake \
 	src/CMakeLists.txt \
@@ -8,31 +37,11 @@ update_cmake \
 	src \
 	include
 
-pushd creator > /dev/null
+update_sublibrary creator
 
-update_cmake \
-	CMakeLists.txt \
-	SANGUIS_CREATOR_FILES \
-	include \
-	src
+update_sublibrary gui
 
-popd > /dev/null
-
-pushd gui > /dev/null
-
-update_cmake \
-	CMakeLists.txt \
-	SANGUIS_GUI_FILES \
-	include \
-	src
-
-popd > /dev/null
-
-pushd collision > /dev/null
-
-update_cmake \
-	CMakeLists.txt \
-	SANGUIS_COLLISION_FILES \
+update_impl collision \
 	include \
 	-n \
 	src \
@@ -45,6 +54,7 @@ update_cmake \
 	src/include/sanguis/collision/aux_/world/simple \
 	src/aux_/world/simple
 
+pushd collision >> /dev/null
 
 update_cmake \
 	CMakeLists.txt \
@@ -52,45 +62,17 @@ update_cmake \
 	src/include/sanguis/collision/aux_/world/projectile \
 	src/aux_/world/projectile
 
-popd > /dev/null
+popd >> /dev/null
 
-pushd core > /dev/null
+update_sublibrary core
 
-update_cmake \
-	CMakeLists.txt \
-	SANGUIS_CORE_FILES \
-	include \
-	src
+update_sublibrary model
 
-popd > /dev/null
-
-pushd model > /dev/null
-
-update_cmake \
-	CMakeLists.txt \
-	SANGUIS_MODEL_FILES \
-	include \
-	src
-
-popd > /dev/null
-
-pushd tools/animations > /dev/null
-
-update_cmake \
-	CMakeLists.txt \
-	SANGUIS_TOOLS_ANIMATIONS_FILES \
-	include \
+update_impl tools/animations \
 	src \
+	include \
 	-e '.*.ui' \
 	ui
 
-popd > /dev/null
-
-pushd tools/check_json > /dev/null
-
-update_cmake \
-	CMakeLists.txt \
-	SANGUIS_TOOLS_CHECK_JSON_FILES \
+update_impl tools/check_json \
 	src
-
-popd > /dev/null
