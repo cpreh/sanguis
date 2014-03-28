@@ -23,6 +23,7 @@ class object
 		object
 	);
 public:
+	SANGUIS_MODEL_SYMBOL
 	object(
 		sanguis::model::cell_size,
 		sanguis::model::optional_animation_delay,

@@ -14,8 +14,7 @@ set(
 	src/log_parameters.cpp
 )
 
-fcppt_generate_symbol_header(
-	"SANGUIS_STATIC_LINK"
+sanguis_generate_symbol_header_base(
 	"sanguiscore"
 	"SANGUIS"
 	"sanguis"

@@ -49,45 +49,14 @@ set(
 	ui/main_window.ui
 )
 
-add_executable(
-	sanguis_tools_animations
-	${SANGUIS_TOOLS_ANIMATIONS_FILES}
-)
-
-fcppt_utils_set_target_compiler_flags(
-	sanguis_tools_animations
-)
-
-target_include_directories(
-	sanguis_tools_animations
-	PRIVATE
-	${CMAKE_CURRENT_SOURCE_DIR}/include
-	${CMAKE_CURRENT_BINARY_DIR}
-)
-
-target_link_libraries(
-	sanguis_tools_animations
-	${sanguismodel_TARGET}
-	${sgecore_TARGET}
-	${fcppt_core_TARGET}
-	${fcppt_filesystem_TARGET}
-	${Boost_FILESYSTEM_LIBRARIES}
-)
-
-target_include_directories(
-	sanguis_tools_animations
-	PRIVATE
-	${fcppt_INCLUDE_DIRS}
+sanguis_add_tool(
+	animations
+	"${SANGUIS_TOOLS_ANIMATIONS_FILES}"
+	"${fcppt_INCLUDE_DIRS}"
+	"${sanguismodel_TARGET};${sgecore_TARGET};${fcppt_core_TARGET};${fcppt_filesystem_TARGET};${Boost_FILESYSTEM_LIBRARIES}"
 )
 
 qt5_use_modules(
 	sanguis_tools_animations
 	Widgets
-)
-
-install(
-	TARGETS
-	sanguis_tools_animations
-	DESTINATION
-	${INSTALL_BINARY_DIR}
 )

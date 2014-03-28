@@ -131,6 +131,20 @@ include(
 )
 
 function(
+	sanguis_generate_symbol_header_base
+	EXPORT_NAME
+	SYMBOL_NAME
+	RELATIVE_PATH
+)
+	fcppt_generate_symbol_header(
+		"SANGUIS_STATIC_LINK"
+		"${EXPORT_NAME}"
+		"${SYMBOL_NAME}"
+		"${RELATIVE_PATH}"
+	)
+endfunction()
+
+function(
 	sanguis_generate_symbol_header
 	LIB_NAME
 )
@@ -140,8 +154,7 @@ function(
 		UPPER_NAME
 	)
 
-	fcppt_generate_symbol_header(
-		"SANGUIS_STATIC_LINK"
+	sanguis_generate_symbol_header_base(
 		"sanguis${LIB_NAME}"
 		"SANGUIS_${UPPER_NAME}"
 		"sanguis/${LIB_NAME}"
