@@ -1,6 +1,8 @@
 #include <sanguis/tools/libmergeimage/image.hpp>
 #include <sanguis/tools/libmergeimage/image_vector.hpp>
 #include <sanguis/tools/libmergeimage/merge_images.hpp>
+#include <sanguis/tools/libmergeimage/path.hpp>
+#include <sanguis/tools/libmergeimage/path_to_string.hpp>
 #include <sge/image/capabilities_field.hpp>
 #include <sge/image2d/save_from_view.hpp>
 #include <sge/image2d/view/const_object.hpp>
@@ -11,8 +13,10 @@
 #include <sge/systems/with_image2d.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
+#include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/io/cerr.hpp>
+#include <fcppt/io/ofstream.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/mpl/vector/vector10.hpp>
@@ -71,15 +75,26 @@ try
 		argv[2]
 	);
 
-	unsigned counter(
-		0u
-	);
-
 	for(
-		sanguis::tools::libmergeimage::image const &image
-		:
-		result
+		sanguis::tools::libmergeimage::image_vector::size_type index(
+			0u
+		);
+		index < result.size();
+		++index
 	)
+	{
+		sanguis::tools::libmergeimage::image const &image(
+			result[
+				index
+			]
+		);
+
+		fcppt::string const index_string(
+			fcppt::insert_to_fcppt_string(
+				index
+			)
+		);
+
 		sge::image2d::save_from_view(
 			sys.image_system(),
 			sge::image2d::view::const_object(
@@ -88,13 +103,47 @@ try
 			output_path
 			/
 			(
-				fcppt::insert_to_fcppt_string(
-					counter++
-				)
+				index_string
 				+
 				FCPPT_TEXT(".png")
 			)
 		);
+
+		// TODO: Just for testing
+		fcppt::io::ofstream stream(
+			output_path
+			/
+			(
+				index_string
+				+
+				FCPPT_TEXT(".txt")
+			)
+		);
+
+		if(
+			!stream.is_open()
+		)
+		{
+			fcppt::io::cerr()
+				<< FCPPT_TEXT("Can't open text file\n");
+
+			return
+				EXIT_FAILURE;
+		}
+
+		for(
+			sanguis::tools::libmergeimage::path const &path
+			:
+			image.paths()
+		)
+			stream
+				<<
+				sanguis::tools::libmergeimage::path_to_string(
+					path
+				)
+				<<
+				FCPPT_TEXT('\n');
+	}
 
 	return
 		EXIT_SUCCESS;

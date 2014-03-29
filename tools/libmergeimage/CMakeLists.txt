@@ -9,6 +9,7 @@ set(
 	include/sanguis/tools/libmergeimage/log_location.hpp
 	include/sanguis/tools/libmergeimage/merge_images.hpp
 	include/sanguis/tools/libmergeimage/path.hpp
+	include/sanguis/tools/libmergeimage/path_to_string.hpp
 	include/sanguis/tools/libmergeimage/path_vector.hpp
 	src/aux_/best_size.cpp
 	src/aux_/calc_cell_size.cpp
@@ -43,6 +44,7 @@ set(
 	src/include/sanguis/tools/libmergeimage/aux_/tree_depth.hpp
 	src/log_location.cpp
 	src/merge_images.cpp
+	src/path_to_string.cpp
 )
 
 sanguis_generate_symbol_header_base(
