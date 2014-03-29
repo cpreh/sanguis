@@ -25,3 +25,7 @@ check_includes model/include
 check_includes model/src/include
 
 check_includes tools/animations/include
+
+check_includes tools/libmergeimage/include
+
+check_includes tools/libmergeimage/src/include

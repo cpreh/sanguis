@@ -1,7 +1,8 @@
-#ifndef SANGUIS_TOOLS_LIBMERGEIMAGE_HPP_INCLUDED
-#define SANGUIS_TOOLS_LIBMERGEIMAGE_HPP_INCLUDED
+#ifndef SANGUIS_TOOLS_LIBMERGEIMAGE_MERGE_IMAGES_HPP_INCLUDED
+#define SANGUIS_TOOLS_LIBMERGEIMAGE_MERGE_IMAGES_HPP_INCLUDED
 
-#include <sanguis/model/object.hpp>
+#include <sge/image2d/system_fwd.hpp>
+#include <sanguis/tools/libmergeimage/image_vector.hpp>
 #include <sanguis/tools/libmergeimage/symbol.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
@@ -16,8 +17,9 @@ namespace libmergeimage
 {
 
 SANGUIS_TOOLS_LIBMERGEIMAGE_SYMBOL
-sanguis::model::object
-merge_paths(
+sanguis::tools::libmergeimage::image_vector
+merge_images(
+	sge::image2d::system &,
 	boost::filesystem::path const &
 );
 
