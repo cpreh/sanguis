@@ -53,14 +53,12 @@ sanguis_generate_symbol_header_base(
 	sanguis/tools/libmergeimage
 )
 
+include_directories(
+	"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
+)
+
 sanguis_add_library(
 	sanguistoolsmergeimage
 	"${SANGUIS_TOOLS_LIBMERGEIMAGE_FILES}"
 	"${sanguiscore_TARGET};${sgeimage_TARGET};${sgeimagecolor_TARGET};${sgeimage2d_TARGET};${fcppt_core_TARGET};${fcppt_filesystem_TARGET};${Boost_FILESYSTEM_LIBRARIES}"
-)
-
-target_include_directories(
-	sanguistoolsmergeimage
-	PRIVATE
-	"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
 )
