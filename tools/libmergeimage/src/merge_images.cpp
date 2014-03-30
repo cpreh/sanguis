@@ -36,6 +36,7 @@ sanguis::tools::libmergeimage::merge_images(
 	sanguis::tools::libmergeimage::aux_::cell_size const cell_size(
 		sanguis::tools::libmergeimage::aux_::calc_cell_size(
 			_image_system,
+			_base_path,
 			gathered_paths
 		)
 	);
