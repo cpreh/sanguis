@@ -110,6 +110,7 @@ sanguis::server::perks::tree::create()
 		)
 	);
 
+/*
 	sanguis::server::perks::tree::object &health(
 		ret->back()
 	);
@@ -129,7 +130,7 @@ sanguis::server::perks::tree::create()
 				)
 			)
 		)
-	);
+	);*/
 
 	return
 		std::move(

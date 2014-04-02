@@ -1332,7 +1332,6 @@ set(
 	include/sanguis/server/perks/level_diff.hpp
 	include/sanguis/server/perks/perk.hpp
 	include/sanguis/server/perks/perk_fwd.hpp
-	include/sanguis/server/perks/regeneration.hpp
 	include/sanguis/server/perks/tree/choosable.hpp
 	include/sanguis/server/perks/tree/choose.hpp
 	include/sanguis/server/perks/tree/create.hpp
@@ -2069,7 +2068,6 @@ set(
 	src/server/perks/ims.cpp
 	src/server/perks/irs.cpp
 	src/server/perks/perk.cpp
-	src/server/perks/regeneration.cpp
 	src/server/perks/tree/choosable.cpp
 	src/server/perks/tree/choose.cpp
 	src/server/perks/tree/create.cpp

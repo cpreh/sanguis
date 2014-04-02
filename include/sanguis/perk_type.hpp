@@ -14,8 +14,7 @@ enum class perk_type
 	ias,
 	ims,
 	irs,
-	regeneration,
-	fcppt_maximum = regeneration
+	fcppt_maximum = irs
 };
 
 }

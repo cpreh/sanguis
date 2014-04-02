@@ -8,7 +8,6 @@
 #include <sanguis/server/perks/ias.hpp>
 #include <sanguis/server/perks/ims.hpp>
 #include <sanguis/server/perks/irs.hpp>
-#include <sanguis/server/perks/regeneration.hpp>
 #include <sanguis/server/perks/unique_ptr.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/assert/unreachable.hpp>
@@ -52,11 +51,6 @@ sanguis::server::perks::create(
 		return
 			fcppt::make_unique_ptr<
 				sanguis::server::perks::irs
-			>();
-	case sanguis::perk_type::regeneration:
-		return
-			fcppt::make_unique_ptr<
-				sanguis::server::perks::regeneration
 			>();
 	}
 

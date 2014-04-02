@@ -24,8 +24,6 @@ sanguis::client::perk::to_string(
 		return FCPPT_TEXT("ims");
 	case sanguis::perk_type::irs:
 		return FCPPT_TEXT("irs");
-	case sanguis::perk_type::regeneration:
-		return FCPPT_TEXT("regeneration");
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;

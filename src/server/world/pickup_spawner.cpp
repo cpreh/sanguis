@@ -182,7 +182,7 @@ sanguis::server::world::pickup_spawner::spawn_health(
 			env_.load_context(),
 			sanguis::server::team::players,
 			sanguis::server::health(
-				2.f
+				10.f
 				*
 				std::sqrt(
 					_difficulty.get()

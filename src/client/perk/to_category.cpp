@@ -28,9 +28,6 @@ sanguis::client::perk::to_category(
 	case sanguis::perk_type::irs:
 		return
 			sanguis::client::perk::category::attack;
-	case sanguis::perk_type::regeneration:
-		return
-			sanguis::client::perk::category::survival;
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;
