@@ -13,8 +13,12 @@
 #include <sge/rucksack/widget/base.hpp>
 #include <fcppt/optional_ref_compare.hpp>
 #include <fcppt/algorithm/remove_if.hpp>
+#include <fcppt/cast/to_signed.hpp>
 #include <fcppt/math/box/contains_point.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <iterator>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::gui::widget::container::container(
@@ -79,61 +83,94 @@ sanguis::gui::widget::container::layout()
 
 void
 sanguis::gui::widget::container::push_front_widget(
-	sanguis::gui::widget::base &_widget
+	sanguis::gui::widget::reference const _widget
 )
 {
-	widgets_.insert(
+	this->insert_widget(
 		widgets_.begin(),
-		sanguis::gui::widget::reference(
-			_widget
-		)
-	);
-
-	_widget.parent(
-		sanguis::gui::widget::optional_ref(
-			*this
-		)
+		_widget
 	);
 }
 
 void
 sanguis::gui::widget::container::pop_front_widget()
 {
-	widgets_.front().get().parent(
-		sanguis::gui::widget::optional_ref()
-	);
-
-	widgets_.erase(
+	this->erase_widget(
 		widgets_.begin()
 	);
 }
 
 void
 sanguis::gui::widget::container::push_back_widget(
-	sanguis::gui::widget::base &_widget
+	sanguis::gui::widget::reference const _widget
 )
 {
-	widgets_.push_back(
-		sanguis::gui::widget::reference(
-			_widget
-		)
-	);
-
-	_widget.parent(
-		sanguis::gui::widget::optional_ref(
-			*this
-		)
+	this->insert_widget(
+		widgets_.end(),
+		_widget
 	);
 }
 
 void
 sanguis::gui::widget::container::pop_back_widget()
 {
-	widgets_.back().get().parent(
+	this->erase_widget(
+		std::prev(
+			widgets_.end()
+		)
+	);
+}
+
+void
+sanguis::gui::widget::container::replace_widgets(
+	sanguis::gui::widget::reference_vector::size_type const _pos,
+	sanguis::gui::widget::reference const _widget
+)
+{
+	this->insert_widget(
+		this->erase_widget(
+			std::next(
+				widgets_.begin(),
+				fcppt::cast::to_signed(
+					_pos
+				)
+			)
+		),
+		_widget
+	);
+}
+
+void
+sanguis::gui::widget::container::insert_widget(
+	sanguis::gui::widget::reference_vector::iterator const _pos,
+	sanguis::gui::widget::reference const _widget
+)
+{
+	widgets_.insert(
+		_pos,
+		_widget
+	);
+
+	_widget.get().parent(
+		sanguis::gui::widget::optional_ref(
+			*this
+		)
+	);
+}
+
+sanguis::gui::widget::reference_vector::iterator
+sanguis::gui::widget::container::erase_widget(
+	sanguis::gui::widget::reference_vector::iterator const _pos
+)
+{
+	_pos->get().parent(
 		sanguis::gui::widget::optional_ref()
 	);
 
-	widgets_.pop_back();
+	return
+		widgets_.erase(
+			_pos
+		);
 }
 
 void

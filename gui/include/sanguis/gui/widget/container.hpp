@@ -9,6 +9,7 @@
 #include <sanguis/gui/widget/container_fwd.hpp>
 #include <sanguis/gui/widget/optional_focus_fwd.hpp>
 #include <sanguis/gui/widget/optional_ref_fwd.hpp>
+#include <sanguis/gui/widget/reference_fwd.hpp>
 #include <sanguis/gui/widget/reference_vector.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/rucksack/vector_fwd.hpp>
@@ -48,7 +49,7 @@ public:
 protected:
 	void
 	push_front_widget(
-		sanguis::gui::widget::base &
+		sanguis::gui::widget::reference
 	);
 
 	void
@@ -56,12 +57,29 @@ protected:
 
 	void
 	push_back_widget(
-		sanguis::gui::widget::base &
+		sanguis::gui::widget::reference
 	);
 
 	void
 	pop_back_widget();
+
+	void
+	replace_widgets(
+		sanguis::gui::widget::reference_vector::size_type,
+		sanguis::gui::widget::reference
+	);
 private:
+	void
+	insert_widget(
+		sanguis::gui::widget::reference_vector::iterator,
+		sanguis::gui::widget::reference
+	);
+
+	sanguis::gui::widget::reference_vector::iterator
+	erase_widget(
+		sanguis::gui::widget::reference_vector::iterator
+	);
+
 	void
 	on_update(
 		sanguis::gui::duration

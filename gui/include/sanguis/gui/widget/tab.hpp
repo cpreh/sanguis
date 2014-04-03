@@ -4,6 +4,7 @@
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
+#include <sanguis/gui/widget/expander.hpp>
 #include <sanguis/gui/widget/reference_name_vector.hpp>
 #include <sanguis/gui/widget/tab_fwd.hpp>
 #include <sanguis/gui/widget/unique_ptr_vector.hpp>
@@ -41,6 +42,8 @@ private:
 	sanguis::gui::widget::unique_ptr_vector top_buttons_;
 
 	sanguis::gui::widget::box_container top_buttons_box_;
+
+	sanguis::gui::widget::expander expander_;
 };
 
 }

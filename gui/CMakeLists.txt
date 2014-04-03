@@ -28,8 +28,12 @@ set(
 	include/sanguis/gui/widget/button_fwd.hpp
 	include/sanguis/gui/widget/container.hpp
 	include/sanguis/gui/widget/container_fwd.hpp
+	include/sanguis/gui/widget/dummy.hpp
+	include/sanguis/gui/widget/dummy_fwd.hpp
 	include/sanguis/gui/widget/edit.hpp
 	include/sanguis/gui/widget/edit_fwd.hpp
+	include/sanguis/gui/widget/expander.hpp
+	include/sanguis/gui/widget/expander_fwd.hpp
 	include/sanguis/gui/widget/image.hpp
 	include/sanguis/gui/widget/image_fwd.hpp
 	include/sanguis/gui/widget/optional_focus.hpp
@@ -90,7 +94,9 @@ set(
 	src/widget/box_container.cpp
 	src/widget/button.cpp
 	src/widget/container.cpp
+	src/widget/dummy.cpp
 	src/widget/edit.cpp
+	src/widget/expander.cpp
 	src/widget/image.cpp
 	src/widget/reference_alignment_pair.cpp
 	src/widget/reference_name_pair.cpp

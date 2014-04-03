@@ -77,9 +77,8 @@ sanguis::gui::widget::tab::tab(
 								]
 								()
 								{
-									_self.pop_back();
-
-									_self.push_back(
+									_self.replace(
+										1u,
 										sanguis::gui::widget::reference_alignment_pair(
 											_widget,
 											sge::rucksack::alignment::right_or_bottom
@@ -134,6 +133,9 @@ sanguis::gui::widget::tab::tab(
 		),
 		sge::rucksack::axis::x,
 		sanguis::gui::default_aspect()
+	),
+	expander_(
+		sge::rucksack::axis::y
 	)
 {
 	this->push_back(
@@ -151,9 +153,18 @@ sanguis::gui::widget::tab::tab(
 		this->push_back(
 			sanguis::gui::widget::reference_alignment_pair(
 				_widgets.front().reference(),
-				sge::rucksack::alignment::right_or_bottom
+				sge::rucksack::alignment::left_or_top
 			)
 		);
+
+	this->push_back(
+		sanguis::gui::widget::reference_alignment_pair(
+			sanguis::gui::widget::reference(
+				expander_
+			),
+			sge::rucksack::alignment::left_or_top
+		)
+	);
 }
 
 sanguis::gui::widget::tab::~tab()

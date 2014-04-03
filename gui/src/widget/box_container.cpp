@@ -61,7 +61,7 @@ sanguis::gui::widget::box_container::push_front(
 )
 {
 	this->push_front_widget(
-		_pair.reference().get()
+		_pair.reference()
 	);
 
 	layout_.push_front_child(
@@ -84,10 +84,30 @@ sanguis::gui::widget::box_container::push_back(
 )
 {
 	this->push_back_widget(
-		_pair.reference().get()
+		_pair.reference()
 	);
 
 	layout_.push_back_child(
+		_pair.reference().get().layout(),
+		_pair.alignment()
+	);
+}
+
+void
+sanguis::gui::widget::box_container::replace(
+	sge::rucksack::widget::box::base::size_type const _index,
+	sanguis::gui::widget::reference_alignment_pair const &_pair
+)
+{
+	this->replace_widgets(
+		_index,
+		_pair.reference()
+	);
+
+	layout_.replace_children(
+		layout_.child_position(
+			_index
+		),
 		_pair.reference().get().layout(),
 		_pair.alignment()
 	);
