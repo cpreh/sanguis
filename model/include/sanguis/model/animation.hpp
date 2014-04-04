@@ -21,6 +21,7 @@ class animation
 		animation
 	);
 public:
+	SANGUIS_MODEL_SYMBOL
 	animation(
 		sanguis::model::animation_range,
 		sanguis::model::optional_animation_delay,

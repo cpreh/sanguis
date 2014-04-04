@@ -1,6 +1,6 @@
+#include <sanguis/tools/libmergeimage/count_type.hpp>
 #include <sanguis/tools/libmergeimage/exception.hpp>
 #include <sanguis/tools/libmergeimage/aux_/count_maximum.hpp>
-#include <sanguis/tools/libmergeimage/aux_/count_type.hpp>
 #include <sanguis/tools/libmergeimage/aux_/merge_paths.hpp>
 #include <sanguis/tools/libmergeimage/aux_/path_vector.hpp>
 #include <sanguis/tools/libmergeimage/aux_/path_vector_vector.hpp>
@@ -31,7 +31,7 @@ sanguis::tools::libmergeimage::aux_::merge_paths(
 	// process, we get a set of integer tuples such that every tuple's sum
 	// is at least b/2 except for the last.
 
-	sanguis::tools::libmergeimage::aux_::count_type const half(
+	sanguis::tools::libmergeimage::count_type const half(
 		_maximum.get()
 		/
 		2

@@ -1,5 +1,6 @@
 set(
 	SANGUIS_TOOLS_LIBMERGEIMAGE_FILES
+	include/sanguis/tools/libmergeimage/count_type.hpp
 	include/sanguis/tools/libmergeimage/exception.hpp
 	include/sanguis/tools/libmergeimage/image.hpp
 	include/sanguis/tools/libmergeimage/image_fwd.hpp
@@ -8,13 +9,22 @@ set(
 	include/sanguis/tools/libmergeimage/image_vector.hpp
 	include/sanguis/tools/libmergeimage/log_location.hpp
 	include/sanguis/tools/libmergeimage/merge_images.hpp
+	include/sanguis/tools/libmergeimage/merge_result.hpp
+	include/sanguis/tools/libmergeimage/merge_result_fwd.hpp
 	include/sanguis/tools/libmergeimage/path.hpp
+	include/sanguis/tools/libmergeimage/path_count_pair.hpp
+	include/sanguis/tools/libmergeimage/path_count_pair_fwd.hpp
+	include/sanguis/tools/libmergeimage/path_count_pair_vector.hpp
 	include/sanguis/tools/libmergeimage/path_to_string.hpp
-	include/sanguis/tools/libmergeimage/path_vector.hpp
+	include/sanguis/tools/libmergeimage/saved_image.hpp
+	include/sanguis/tools/libmergeimage/saved_image_fwd.hpp
+	include/sanguis/tools/libmergeimage/saved_image_vector.hpp
+	include/sanguis/tools/libmergeimage/to_model.hpp
 	src/aux_/best_size.cpp
 	src/aux_/calc_cell_size.cpp
 	src/aux_/cells_in_dim.cpp
-	src/aux_/convert_paths.cpp
+	src/aux_/convert_path.cpp
+	src/aux_/fold_paths.cpp
 	src/aux_/gather_paths.cpp
 	src/aux_/log.cpp
 	src/aux_/make_image.cpp
@@ -28,10 +38,10 @@ set(
 	src/include/sanguis/tools/libmergeimage/aux_/cell_size.hpp
 	src/include/sanguis/tools/libmergeimage/aux_/cell_size_fwd.hpp
 	src/include/sanguis/tools/libmergeimage/aux_/cells_in_dim.hpp
-	src/include/sanguis/tools/libmergeimage/aux_/convert_paths.hpp
+	src/include/sanguis/tools/libmergeimage/aux_/convert_path.hpp
 	src/include/sanguis/tools/libmergeimage/aux_/count_maximum.hpp
 	src/include/sanguis/tools/libmergeimage/aux_/count_maximum_fwd.hpp
-	src/include/sanguis/tools/libmergeimage/aux_/count_type.hpp
+	src/include/sanguis/tools/libmergeimage/aux_/fold_paths.hpp
 	src/include/sanguis/tools/libmergeimage/aux_/gather_paths.hpp
 	src/include/sanguis/tools/libmergeimage/aux_/log.hpp
 	src/include/sanguis/tools/libmergeimage/aux_/make_image.hpp
@@ -44,7 +54,11 @@ set(
 	src/include/sanguis/tools/libmergeimage/aux_/tree_depth.hpp
 	src/log_location.cpp
 	src/merge_images.cpp
+	src/merge_result.cpp
+	src/path_count_pair.cpp
 	src/path_to_string.cpp
+	src/saved_image.cpp
+	src/to_model.cpp
 )
 
 sanguis_generate_symbol_header_base(
@@ -60,5 +74,5 @@ include_directories(
 sanguis_add_library(
 	sanguistoolsmergeimage
 	"${SANGUIS_TOOLS_LIBMERGEIMAGE_FILES}"
-	"${sanguiscore_TARGET};${sgeimage_TARGET};${sgeimagecolor_TARGET};${sgeimage2d_TARGET};${fcppt_core_TARGET};${fcppt_filesystem_TARGET};${Boost_FILESYSTEM_LIBRARIES}"
+	"${sanguiscore_TARGET};${sanguismodel_TARGET};${sgeimage_TARGET};${sgeimagecolor_TARGET};${sgeimage2d_TARGET};${fcppt_core_TARGET};${fcppt_filesystem_TARGET};${Boost_FILESYSTEM_LIBRARIES}"
 )

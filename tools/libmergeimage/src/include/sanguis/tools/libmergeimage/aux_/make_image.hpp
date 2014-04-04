@@ -24,7 +24,7 @@ make_image(
 	sge::image2d::system &,
 	boost::filesystem::path const &,
 	sanguis::tools::libmergeimage::aux_::cell_size,
-	sanguis::tools::libmergeimage::aux_::path_vector const &
+	sanguis::tools::libmergeimage::aux_::path_vector
 );
 
 }

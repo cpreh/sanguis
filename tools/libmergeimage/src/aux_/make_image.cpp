@@ -3,7 +3,7 @@
 #include <sanguis/tools/libmergeimage/image_store.hpp>
 #include <sanguis/tools/libmergeimage/aux_/best_size.hpp>
 #include <sanguis/tools/libmergeimage/aux_/cell_size.hpp>
-#include <sanguis/tools/libmergeimage/aux_/convert_paths.hpp>
+#include <sanguis/tools/libmergeimage/aux_/fold_paths.hpp>
 #include <sanguis/tools/libmergeimage/aux_/make_image.hpp>
 #include <sanguis/tools/libmergeimage/aux_/path_vector.hpp>
 #include <sge/image/size_type.hpp>
@@ -26,6 +26,7 @@
 #include <fcppt/math/dim/output.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
+#include <algorithm>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -34,9 +35,14 @@ sanguis::tools::libmergeimage::aux_::make_image(
 	sge::image2d::system &_image_system,
 	boost::filesystem::path const &_base_path,
 	sanguis::tools::libmergeimage::aux_::cell_size const _cell_size,
-	sanguis::tools::libmergeimage::aux_::path_vector const &_paths
+	sanguis::tools::libmergeimage::aux_::path_vector _paths
 )
 {
+	std::sort(
+		_paths.begin(),
+		_paths.end()
+	);
+
 	sge::image::size_type const border_sz(
 		sanguis::tools::libmergeimage::aux_::best_size(
 			_paths.size(),
@@ -135,7 +141,7 @@ sanguis::tools::libmergeimage::aux_::make_image(
 
 	return
 		sanguis::tools::libmergeimage::image(
-			sanguis::tools::libmergeimage::aux_::convert_paths(
+			sanguis::tools::libmergeimage::aux_::fold_paths(
 				_paths
 			),
 			std::move(

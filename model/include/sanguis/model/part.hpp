@@ -21,6 +21,8 @@ class part
 		part
 	);
 public:
+	part();
+
 	part(
 		sanguis::model::weapon_category_map &&,
 		sanguis::model::optional_image_name const &
@@ -51,6 +53,12 @@ public:
 	weapon_category(
 		fcppt::string const &
 	) const;
+
+	SANGUIS_MODEL_SYMBOL
+	sanguis::model::weapon_category &
+	operator[](
+		fcppt::string const &
+	);
 
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::weapon_category_map const &

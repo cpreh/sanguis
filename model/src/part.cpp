@@ -11,6 +11,13 @@
 #include <fcppt/config/external_end.hpp>
 
 
+sanguis::model::part::part()
+:
+	weapon_categories_(),
+	image_name_()
+{
+}
+
 sanguis::model::part::part(
 	sanguis::model::weapon_category_map &&_weapon_categories,
 	sanguis::model::optional_image_name const &_image_name
@@ -76,6 +83,17 @@ sanguis::model::part::weapon_category(
 		).weapon_category(
 			_name
 		);
+}
+
+sanguis::model::weapon_category &
+sanguis::model::part::operator[](
+	fcppt::string const &_name
+)
+{
+	return
+		weapon_categories_[
+			_name
+		];
 }
 
 sanguis::model::weapon_category_map const &

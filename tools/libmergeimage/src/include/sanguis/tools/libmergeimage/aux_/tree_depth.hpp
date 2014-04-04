@@ -1,7 +1,7 @@
 #ifndef SANGUIS_TOOLS_LIBMERGEIMAGE_AUX__TREE_DEPTH_HPP_INCLUDED
 #define SANGUIS_TOOLS_LIBMERGEIMAGE_AUX__TREE_DEPTH_HPP_INCLUDED
 
-#include <sanguis/tools/libmergeimage/aux_/count_type.hpp>
+#include <sanguis/tools/libmergeimage/count_type.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <type_traits>
 #include <fcppt/config/external_end.hpp>
@@ -18,7 +18,7 @@ namespace aux_
 
 typedef
 std::integral_constant<
-	sanguis::tools::libmergeimage::aux_::count_type,
+	sanguis::tools::libmergeimage::count_type,
 	3
 >
 tree_depth;

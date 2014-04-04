@@ -104,6 +104,17 @@ sanguis::model::object::part(
 		);
 }
 
+sanguis::model::part &
+sanguis::model::object::operator[](
+	fcppt::string const &_name
+)
+{
+	return
+		parts_[
+			_name
+		];
+}
+
 sanguis::model::part_map const &
 sanguis::model::object::parts() const
 {

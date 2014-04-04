@@ -5,11 +5,19 @@
 #include <sanguis/model/weapon_category.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/assert/error.hpp>
 #include <fcppt/container/find_exn.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
+
+sanguis::model::weapon_category::weapon_category()
+:
+	animations_(),
+	image_name_()
+{
+}
 
 sanguis::model::weapon_category::weapon_category(
 	sanguis::model::animation_map &&_animations,
@@ -89,6 +97,24 @@ sanguis::model::weapon_category::animation(
 		).animation(
 			_name
 		);
+}
+
+void
+sanguis::model::weapon_category::insert(
+	fcppt::string const &_name,
+	sanguis::model::animation &&_animation
+)
+{
+	FCPPT_ASSERT_ERROR(
+		animations_.insert(
+			std::make_pair(
+				_name,
+				std::move(
+					_animation
+				)
+			)
+		).second
+	);
 }
 
 sanguis::model::animation_map const &

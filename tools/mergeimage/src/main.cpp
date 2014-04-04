@@ -1,8 +1,12 @@
+#include <sanguis/model/image_name.hpp>
+#include <sanguis/model/serialize.hpp>
 #include <sanguis/tools/libmergeimage/image.hpp>
 #include <sanguis/tools/libmergeimage/image_vector.hpp>
 #include <sanguis/tools/libmergeimage/merge_images.hpp>
-#include <sanguis/tools/libmergeimage/path.hpp>
-#include <sanguis/tools/libmergeimage/path_to_string.hpp>
+#include <sanguis/tools/libmergeimage/merge_result.hpp>
+#include <sanguis/tools/libmergeimage/saved_image.hpp>
+#include <sanguis/tools/libmergeimage/saved_image_vector.hpp>
+#include <sanguis/tools/libmergeimage/to_model.hpp>
 #include <sge/image/capabilities_field.hpp>
 #include <sge/image2d/save_from_view.hpp>
 #include <sge/image2d/view/const_object.hpp>
@@ -15,8 +19,9 @@
 #include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/filesystem/normalize.hpp>
+#include <fcppt/filesystem/stem.hpp>
 #include <fcppt/io/cerr.hpp>
-#include <fcppt/io/ofstream.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/mpl/vector/vector10.hpp>
@@ -62,37 +67,47 @@ try
 		)
 	);
 
-	sanguis::tools::libmergeimage::image_vector const result(
+	sanguis::tools::libmergeimage::merge_result const result(
 		sanguis::tools::libmergeimage::merge_images(
 			sys.image_system(),
-			boost::filesystem::path(
-				argv[1]
+			fcppt::filesystem::normalize(
+				boost::filesystem::path(
+					argv[1]
+				)
 			)
 		)
 	);
 
 	boost::filesystem::path const output_path(
-		argv[2]
+		fcppt::filesystem::normalize(
+			boost::filesystem::path(
+				argv[2]
+			)
+		)
 	);
+
+	sanguis::tools::libmergeimage::saved_image_vector saved_images;
 
 	for(
 		sanguis::tools::libmergeimage::image_vector::size_type index(
 			0u
 		);
-		index < result.size();
+		index < result.images().size();
 		++index
 	)
 	{
 		sanguis::tools::libmergeimage::image const &image(
-			result[
+			result.images()[
 				index
 			]
 		);
 
-		fcppt::string const index_string(
+		fcppt::string const file_name(
 			fcppt::insert_to_fcppt_string(
 				index
 			)
+			+
+			FCPPT_TEXT(".png")
 		);
 
 		sge::image2d::save_from_view(
@@ -102,48 +117,34 @@ try
 			),
 			output_path
 			/
-			(
-				index_string
-				+
-				FCPPT_TEXT(".png")
-			)
+			file_name
 		);
 
-		// TODO: Just for testing
-		fcppt::io::ofstream stream(
-			output_path
-			/
-			(
-				index_string
-				+
-				FCPPT_TEXT(".txt")
-			)
-		);
-
-		if(
-			!stream.is_open()
-		)
-		{
-			fcppt::io::cerr()
-				<< FCPPT_TEXT("Can't open text file\n");
-
-			return
-				EXIT_FAILURE;
-		}
-
-		for(
-			sanguis::tools::libmergeimage::path const &path
-			:
-			image.paths()
-		)
-			stream
-				<<
-				sanguis::tools::libmergeimage::path_to_string(
-					path
+		saved_images.push_back(
+			sanguis::tools::libmergeimage::saved_image(
+				image.paths(),
+				sanguis::model::image_name(
+					file_name
 				)
-				<<
-				FCPPT_TEXT('\n');
+			)
+		);
 	}
+
+	sanguis::model::serialize(
+		output_path
+		/
+		(
+			fcppt::filesystem::stem(
+				output_path
+			)
+			+
+			FCPPT_TEXT(".json")
+		),
+		sanguis::tools::libmergeimage::to_model(
+			result.cell_size(),
+			saved_images
+		)
+	);
 
 	return
 		EXIT_SUCCESS;
