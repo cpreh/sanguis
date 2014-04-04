@@ -41,6 +41,9 @@ public Q_SLOTS:
 	actionJSON();
 
 	void
+	actionResourcePath();
+
+	void
 	actionSave();
 
 	void

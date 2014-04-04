@@ -93,8 +93,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>683</width>
-            <height>770</height>
+            <width>696</width>
+            <height>774</height>
            </rect>
           </property>
          </widget>
@@ -278,7 +278,7 @@
      <x>0</x>
      <y>0</y>
      <width>1545</width>
-     <height>20</height>
+     <height>18</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -489,6 +489,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionResource_directory</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>actionResourcePath()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>772</x>
+     <y>494</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>actionQuit()</slot>
@@ -500,5 +516,6 @@
   <slot>actionSave()</slot>
   <slot>delayChanged(int)</slot>
   <slot>soundChanged(QString)</slot>
+  <slot>actionResourcePath()</slot>
  </slots>
 </ui>

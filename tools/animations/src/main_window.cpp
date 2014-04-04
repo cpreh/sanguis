@@ -175,6 +175,22 @@ sanguis::tools::animations::main_window::actionJSON()
 }
 
 void
+sanguis::tools::animations::main_window::actionResourcePath()
+{
+	QString const chosen_directory{
+		QFileDialog::getExistingDirectory(
+			this,
+			tr("Open the resource directory")
+		)
+	};
+
+	if(
+		chosen_directory.isEmpty()
+	)
+		return;
+}
+
+void
 sanguis::tools::animations::main_window::actionSave()
 {
 	if(
