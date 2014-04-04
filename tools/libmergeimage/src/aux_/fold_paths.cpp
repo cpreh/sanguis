@@ -26,41 +26,35 @@ sanguis::tools::libmergeimage::aux_::fold_paths(
 			sanguis::tools::libmergeimage::aux_::path_vector::const_iterator const _end
 		)
 		{
-			if(
+			return
 				_begin
 				==
 				_end
-			)
-				return
-					_end;
-
-			boost::filesystem::path const &path1(
-				*_begin
-			);
-
-			return
-				std::find_if(
-					std::next(
-						_begin
-					),
-					_end,
-					[
-						&path1
-					](
-						boost::filesystem::path const &_path2
-					)
-					{
-						return
-							!std::equal(
-								path1.begin(),
-								std::next(
-									path1.begin(),
-									sanguis::tools::libmergeimage::aux_::tree_depth::value
-								),
-								_path2.begin()
-							);
-					}
-				);
+				?
+					_end
+				:
+					std::find_if(
+						std::next(
+							_begin
+						),
+						_end,
+						[
+							_begin
+						](
+							boost::filesystem::path const &_path2
+						)
+						{
+							return
+								!std::equal(
+									_begin->begin(),
+									std::next(
+										_begin->begin(),
+										sanguis::tools::libmergeimage::aux_::tree_depth::value
+									),
+									_path2.begin()
+								);
+						}
+					);
 		}
 	);
 
