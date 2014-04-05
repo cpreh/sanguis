@@ -1,5 +1,5 @@
 #include <sanguis/args/options.hpp>
-#include <sge/console/output_line_limit.hpp>
+#include <sge/console/gfx/output_line_limit.hpp>
 #include <sge/renderer/pixel_format/multi_samples_value.hpp>
 #include <sge/renderer/screen_unit.hpp>
 #include <alda/net/port.hpp>
@@ -31,10 +31,10 @@ sanguis::args::options()
 		(
 			"history-size",
 			po::value<
-				sge::console::output_line_limit::value_type
+				sge::console::gfx::output_line_limit::value_type
 			>()->default_value(
 				fcppt::literal<
-					sge::console::output_line_limit::value_type
+					sge::console::gfx::output_line_limit::value_type
 				>(
 					1000
 				)

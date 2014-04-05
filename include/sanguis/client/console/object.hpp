@@ -4,8 +4,8 @@
 #include <sanguis/client/send_callback.hpp>
 #include <sanguis/client/console/object_fwd.hpp>
 #include <sge/console/arg_list.hpp>
-#include <sge/console/gfx_fwd.hpp>
 #include <sge/console/object_fwd.hpp>
+#include <sge/console/gfx/object_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
@@ -26,7 +26,7 @@ class object
 	);
 public:
 	object(
-		sge::console::gfx &,
+		sge::console::gfx::object &,
 		sanguis::client::send_callback const &
 	);
 
@@ -59,7 +59,7 @@ private:
 		sge::console::arg_list const &
 	);
 
-	sge::console::gfx &gfx_;
+	sge::console::gfx::object &gfx_;
 
 	sanguis::client::send_callback const send_;
 

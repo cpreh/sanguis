@@ -2186,6 +2186,7 @@ target_link_libraries(
 	${sgecharconv_TARGET}
 	${sgeconfig_TARGET}
 	${sgeconsole_TARGET}
+	${sgeconsolegfx_TARGET}
 	${sgecore_TARGET}
 	${sgefont_TARGET}
 	${sgefontdraw_TARGET}

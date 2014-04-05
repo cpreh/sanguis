@@ -9,6 +9,7 @@
 #include <sanguis/messages/server/create.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <sge/console/arg_list.hpp>
+#include <sge/console/prefix.hpp>
 #include <sge/console/callback/function.hpp>
 #include <sge/console/callback/name.hpp>
 #include <sge/console/callback/parameters.hpp>
@@ -27,7 +28,9 @@ sanguis::server::console::console(
 )
 :
 	object_(
-		SGE_FONT_LIT('/')
+		sge::console::prefix(
+			SGE_FONT_LIT('/')
+		)
 	),
 	send_(
 		_send

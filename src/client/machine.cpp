@@ -16,7 +16,7 @@
 #include <sanguis/net/receive_buffer_size.hpp>
 #include <sanguis/net/client/serialize_to_circular_buffer.hpp>
 #include <sanguis/net/server/deserialize.hpp>
-#include <sge/console/gfx.hpp>
+#include <sge/console/gfx/object.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/image2d/system_fwd.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
@@ -52,7 +52,7 @@ sanguis::client::machine::machine(
 	sanguis::load::context const &_resources,
 	sge::window::system &_window_system,
 	sge::font::object &_font_object,
-	sge::console::gfx &_console_gfx,
+	sge::console::gfx::object &_console_gfx,
 	sge::input::keyboard::device &_keyboard,
 	sge::input::cursor::object &_cursor,
 	sge::renderer::device::ffp &_renderer,
@@ -275,7 +275,7 @@ sanguis::client::machine::font_object() const
 	return font_object_;
 }
 
-sge::console::gfx &
+sge::console::gfx::object &
 sanguis::client::machine::console_gfx()
 {
 	return console_gfx_;

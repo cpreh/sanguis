@@ -5,10 +5,10 @@
 #include <sanguis/messages/convert/to_string_vector.hpp>
 #include <sanguis/from_console_arg_list.hpp>
 #include <sge/console/arg_list.hpp>
-#include <sge/console/gfx.hpp>
 #include <sge/console/object.hpp>
 #include <sge/console/callback/name.hpp>
 #include <sge/console/callback/parameters.hpp>
+#include <sge/console/gfx/object.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <fcppt/string.hpp>
@@ -18,7 +18,7 @@
 
 
 sanguis::client::console::object::object(
-	sge::console::gfx &_gfx,
+	sge::console::gfx::object &_gfx,
 	sanguis::client::send_callback const &_send
 )
 :
@@ -43,7 +43,7 @@ sanguis::client::console::object::register_server_command(
 )
 {
 	server_connections_.add(
-		gfx_.object().insert(
+		gfx_.console_object().insert(
 			sge::console::callback::parameters(
 				std::bind(
 					&sanguis::client::console::object::server_callback,
@@ -99,7 +99,7 @@ sge::console::object &
 sanguis::client::console::object::sge_console()
 {
 	return
-		gfx_.object();
+		gfx_.console_object();
 }
 
 void
