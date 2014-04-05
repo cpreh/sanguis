@@ -25,6 +25,7 @@ set(
 	include/sanguis/tools/animations/image_file_map.hpp
 	include/sanguis/tools/animations/int_to_delay.hpp
 	include/sanguis/tools/animations/load_image_files.hpp
+	include/sanguis/tools/animations/main.hpp
 	include/sanguis/tools/animations/main_window.hpp
 	include/sanguis/tools/animations/make_frames.hpp
 	include/sanguis/tools/animations/optional_animation_ref.hpp
@@ -34,6 +35,8 @@ set(
 	include/sanguis/tools/animations/qtutil/sub_image.hpp
 	include/sanguis/tools/animations/qtutil/to_fcppt_string.hpp
 	include/sanguis/tools/animations/qtutil/to_rect.hpp
+	include/sanguis/tools/animations/sge_systems.hpp
+	include/sanguis/tools/animations/sge_systems_fwd.hpp
 	src/exception.cpp
 	src/find_image_file.cpp
 	src/frame.cpp
@@ -53,7 +56,8 @@ sanguis_add_tool(
 	animations
 	"${SANGUIS_TOOLS_ANIMATIONS_FILES}"
 	"${fcppt_INCLUDE_DIRS}"
-	"${sanguismodel_TARGET};${sgecore_TARGET};${fcppt_core_TARGET};${fcppt_filesystem_TARGET};${Boost_FILESYSTEM_LIBRARIES}"
+	"${sanguismodel_TARGET};${sgesystems_TARGET};${sgecore_TARGET};${awl_TARGET};${fcppt_core_TARGET};${fcppt_filesystem_TARGET};${Boost_FILESYSTEM_LIBRARIES}"
+	TRUE
 )
 
 qt5_use_modules(

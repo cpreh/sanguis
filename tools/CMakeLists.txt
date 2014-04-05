@@ -4,16 +4,27 @@ function(
 	TOOL_FILES
 	INCLUDE_DIRS
 	LINK_LIBS
+	IS_GUI
 )
 	set(
 		FULL_NAME
 		sanguis_tools_${TOOL_NAME}
 	)
 
-	add_executable(
-		${FULL_NAME}
-		${TOOL_FILES}
+	if(
+		IS_GUI
 	)
+		awl_utils_add_portable_executable(
+			"${FULL_NAME}"
+			"sanguis::tools::${TOOL_NAME}::main"
+			${TOOL_FILES}
+		)
+	else()
+		add_executable(
+			${FULL_NAME}
+			${TOOL_FILES}
+		)
+	endif()
 
 	fcppt_utils_set_target_compiler_flags(
 		${FULL_NAME}

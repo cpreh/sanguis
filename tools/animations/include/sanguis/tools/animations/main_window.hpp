@@ -6,6 +6,7 @@
 #include <sanguis/tools/animations/frame_container.hpp>
 #include <sanguis/tools/animations/image_file_map.hpp>
 #include <sanguis/tools/animations/optional_animation_ref_fwd.hpp>
+#include <sanguis/tools/animations/sge_systems_fwd.hpp>
 #include <fcppt/optional_decl.hpp>
 #include <fcppt/scoped_ptr_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -33,7 +34,10 @@ class main_window
 {
 	Q_OBJECT
 public:
-	main_window();
+	explicit
+	main_window(
+		sanguis::tools::animations::sge_systems const &
+	);
 
 	~main_window();
 public Q_SLOTS:

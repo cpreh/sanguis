@@ -2157,10 +2157,6 @@ fcppt_utils_append_source_dir_and_make_groups(
 	SANGUIS_FILES_ABS
 )
 
-include(
-	AwlMainGenerator
-)
-
 include_directories(
 	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/include
 )

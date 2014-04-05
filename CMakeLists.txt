@@ -282,6 +282,10 @@ function(
 	)
 endfunction()
 
+include(
+	AwlMainGenerator
+)
+
 add_subdirectory(
 	core
 )

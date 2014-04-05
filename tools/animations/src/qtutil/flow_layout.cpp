@@ -44,16 +44,16 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::tools::animations::qtutil::FlowLayout::FlowLayout(QWidget *parent, int margin, int hSpacing, int vSpacing)
-    : QLayout(parent), m_hSpace(hSpacing), m_vSpace(vSpacing)
+sanguis::tools::animations::qtutil::FlowLayout::FlowLayout(QWidget *_parent, int _margin, int hSpacing, int vSpacing)
+    : QLayout(_parent), itemList(), m_hSpace(hSpacing), m_vSpace(vSpacing)
 {
-    setContentsMargins(margin, margin, margin, margin);
+    setContentsMargins(_margin, _margin, _margin, _margin);
 }
 
-sanguis::tools::animations::qtutil::FlowLayout::FlowLayout(int margin, int hSpacing, int vSpacing)
-    : m_hSpace(hSpacing), m_vSpace(vSpacing)
+sanguis::tools::animations::qtutil::FlowLayout::FlowLayout(int _margin, int hSpacing, int vSpacing)
+    : QLayout(), itemList(), m_hSpace(hSpacing), m_vSpace(vSpacing)
 {
-    setContentsMargins(margin, margin, margin, margin);
+    setContentsMargins(_margin, _margin, _margin, _margin);
 }
 
 sanguis::tools::animations::qtutil::FlowLayout::~FlowLayout()
@@ -180,13 +180,13 @@ int sanguis::tools::animations::qtutil::FlowLayout::doLayout(const QRect &rect, 
 }
 int sanguis::tools::animations::qtutil::FlowLayout::smartSpacing(QStyle::PixelMetric pm) const
 {
-    QObject *parent = this->parent();
-    if (!parent) {
+    QObject *cur_parent = this->parent();
+    if (!cur_parent) {
         return -1;
-    } else if (parent->isWidgetType()) {
-        QWidget *pw = static_cast<QWidget *>(parent);
+    } else if (cur_parent->isWidgetType()) {
+        QWidget *pw = static_cast<QWidget *>(cur_parent);
         return pw->style()->pixelMetric(pm, 0, pw);
     } else {
-        return static_cast<QLayout *>(parent)->spacing();
+        return static_cast<QLayout *>(cur_parent)->spacing();
     }
 }

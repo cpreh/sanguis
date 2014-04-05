@@ -1,23 +1,16 @@
-#include <sanguis/model/image_name.hpp>
 #include <sanguis/model/serialize.hpp>
-#include <sanguis/tools/libmergeimage/image.hpp>
-#include <sanguis/tools/libmergeimage/image_vector.hpp>
 #include <sanguis/tools/libmergeimage/merge_images.hpp>
 #include <sanguis/tools/libmergeimage/merge_result.hpp>
-#include <sanguis/tools/libmergeimage/saved_image.hpp>
+#include <sanguis/tools/libmergeimage/save_images.hpp>
 #include <sanguis/tools/libmergeimage/saved_image_vector.hpp>
 #include <sanguis/tools/libmergeimage/to_model.hpp>
 #include <sge/image/capabilities_field.hpp>
-#include <sge/image2d/save_from_view.hpp>
-#include <sge/image2d/view/const_object.hpp>
 #include <sge/media/optional_extension_set.hpp>
 #include <sge/systems/image2d.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/systems/make_list.hpp>
 #include <sge/systems/with_image2d.hpp>
 #include <fcppt/exception.hpp>
-#include <fcppt/insert_to_fcppt_string.hpp>
-#include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/filesystem/normalize.hpp>
 #include <fcppt/filesystem/stem.hpp>
@@ -86,49 +79,13 @@ try
 		)
 	);
 
-	sanguis::tools::libmergeimage::saved_image_vector saved_images;
-
-	for(
-		sanguis::tools::libmergeimage::image_vector::size_type index(
-			0u
-		);
-		index < result.images().size();
-		++index
-	)
-	{
-		sanguis::tools::libmergeimage::image const &image(
-			result.images()[
-				index
-			]
-		);
-
-		fcppt::string const file_name(
-			fcppt::insert_to_fcppt_string(
-				index
-			)
-			+
-			FCPPT_TEXT(".png")
-		);
-
-		sge::image2d::save_from_view(
+	sanguis::tools::libmergeimage::saved_image_vector const saved_images(
+		sanguis::tools::libmergeimage::save_images(
 			sys.image_system(),
-			sge::image2d::view::const_object(
-				image.store().wrapped_view()
-			),
-			output_path
-			/
-			file_name
-		);
-
-		saved_images.push_back(
-			sanguis::tools::libmergeimage::saved_image(
-				image.paths(),
-				sanguis::model::image_name(
-					file_name
-				)
-			)
-		);
-	}
+			output_path,
+			result.images()
+		)
+	);
 
 	sanguis::model::serialize(
 		output_path

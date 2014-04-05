@@ -16,6 +16,7 @@ set(
 	include/sanguis/tools/libmergeimage/path_count_pair_fwd.hpp
 	include/sanguis/tools/libmergeimage/path_count_pair_vector.hpp
 	include/sanguis/tools/libmergeimage/path_to_string.hpp
+	include/sanguis/tools/libmergeimage/save_images.hpp
 	include/sanguis/tools/libmergeimage/saved_image.hpp
 	include/sanguis/tools/libmergeimage/saved_image_fwd.hpp
 	include/sanguis/tools/libmergeimage/saved_image_vector.hpp
@@ -57,6 +58,7 @@ set(
 	src/merge_result.cpp
 	src/path_count_pair.cpp
 	src/path_to_string.cpp
+	src/save_images.cpp
 	src/saved_image.cpp
 	src/to_model.cpp
 )

@@ -12,6 +12,7 @@
 #include <sanguis/tools/animations/main_window.hpp>
 #include <sanguis/tools/animations/make_frames.hpp>
 #include <sanguis/tools/animations/optional_animation_ref.hpp>
+#include <sanguis/tools/animations/sge_systems_fwd.hpp>
 #include <sanguis/tools/animations/qtutil/flow_layout.hpp>
 #include <sanguis/tools/animations/qtutil/from_fcppt_string.hpp>
 #include <sanguis/tools/animations/qtutil/to_fcppt_string.hpp>
@@ -32,7 +33,9 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::tools::animations::main_window::main_window()
+sanguis::tools::animations::main_window::main_window(
+	sanguis::tools::animations::sge_systems const &_sge_systems
+)
 :
 	QMainWindow(
 		nullptr
