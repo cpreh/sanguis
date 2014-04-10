@@ -106,16 +106,12 @@ set(
 	src/widget/tree.cpp
 )
 
-sanguis_generate_symbol_header(
-	gui
-)
-
 include_directories(
 	"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
 )
 
 sanguis_add_library(
-	sanguisgui
+	gui
 	"${SANGUIS_GUI_FILES}"
 	"${fcppt_core_TARGET};${sgefont_TARGET};${sgefontdraw_TARGET};${sgeimagecolor_TARGET};${sgeinput_TARGET};${sgerenderer_TARGET};${sgerucksack_TARGET};${sgesprite_TARGET};${sgetexture_TARGET}"
 )

@@ -1,16 +1,14 @@
 #include <sanguis/app_name.hpp>
 #include <sanguis/company_name.hpp>
-#include <sanguis/args/log_level.hpp>
-#include <sanguis/args/options.hpp>
-#include <sanguis/args/parse.hpp>
-#include <sanguis/args/server_only.hpp>
-#include <sanguis/client/create.hpp>
-#include <sanguis/server/create_original.hpp>
 #include <sanguis/log_context.hpp>
 #include <sanguis/log_location.hpp>
 #include <sanguis/main.hpp>
-#include <sanguis/main_object.hpp>
-#include <sanguis/main_object_scoped_ptr.hpp>
+#include <sanguis/client/create.hpp>
+#include <sanguis/client/object_base.hpp>
+#include <sanguis/client/object_base_unique_ptr.hpp>
+#include <sanguis/client/args/log_level.hpp>
+#include <sanguis/client/args/options.hpp>
+#include <sanguis/client/args/parse.hpp>
 #include <sge/config/app_name.hpp>
 #include <sge/config/log_path.hpp>
 #include <awl/show_error.hpp>
@@ -42,11 +40,11 @@ sanguis::main(
 try
 {
 	boost::program_options::options_description desc(
-		sanguis::args::options()
+		sanguis::client::args::options()
 	);
 
 	boost::program_options::variables_map const vm(
-		sanguis::args::parse(
+		sanguis::client::args::parse(
 			_function_context.argc(),
 			_function_context.argv(),
 			desc
@@ -85,27 +83,19 @@ try
 	fcppt::log::activate_levels_recursive(
 		sanguis::log_context(),
 		sanguis::log_location(),
-		sanguis::args::log_level(
+		sanguis::client::args::log_level(
 			vm
 		)
 	);
 
-	sanguis::main_object_scoped_ptr const obj(
-		sanguis::args::server_only(
+	sanguis::client::object_base_unique_ptr const client(
+		sanguis::client::create(
 			vm
 		)
-		?
-			sanguis::server::create_original(
-				vm
-			)
-		:
-			sanguis::client::create(
-				vm
-			)
-		);
+	);
 
 	return
-		obj->run();
+		client->run();
 }
 catch(
 	fcppt::exception const &_error

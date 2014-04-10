@@ -37,9 +37,7 @@ update_cmake \
 	src \
 	include
 
-update_sublibrary creator
-
-update_sublibrary gui
+update_sublibrary client
 
 update_impl collision \
 	include \
@@ -64,9 +62,17 @@ update_cmake \
 
 popd >> /dev/null
 
+update_sublibrary common
+
 update_sublibrary core
 
+update_sublibrary creator
+
+update_sublibrary gui
+
 update_sublibrary model
+
+update_sublibrary server
 
 update_impl tools/animations \
 	src \

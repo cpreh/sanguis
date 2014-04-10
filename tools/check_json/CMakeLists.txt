@@ -15,7 +15,7 @@ fcppt_utils_set_target_compiler_flags(
 target_link_libraries(
 	sanguis_tools_check_json
 	PRIVATE
-	${sanguismodel_TARGET}
+	${sanguis_model_TARGET}
 	${fcppt_core_TARGET}
 	${Boost_FILESYSTEM_LIBRARIES}
 )

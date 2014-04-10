@@ -163,16 +163,12 @@ set(
 	src/top_result.cpp
 )
 
-sanguis_generate_symbol_header(
-	creator
-)
-
 include_directories(
 	"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
 )
 
 sanguis_add_library(
-	sanguiscreator
+	creator
 	"${SANGUIS_CREATOR_FILES}"
-	"${sanguiscore_TARGET};${fcppt_core_TARGET};${sgecore_TARGET};${sgeparse_TARGET};${sgeparsejson_TARGET}"
+	"${sanguis_core_TARGET};${fcppt_core_TARGET};${sgecore_TARGET};${sgeparse_TARGET};${sgeparsejson_TARGET}"
 )

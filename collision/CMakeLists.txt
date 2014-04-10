@@ -149,10 +149,6 @@ if(
 	)
 endif()
 
-sanguis_generate_symbol_header(
-	collision
-)
-
 include_directories(
 	"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
 )
@@ -160,7 +156,7 @@ include_directories(
 set(
 	COLLISION_LINK_TARGETS
 	${fcppt_core_TARGET}
-	${sanguiscreator_TARGET}
+	${sanguis_creator_TARGET}
 )
 
 if(
@@ -174,7 +170,7 @@ if(
 endif()
 
 sanguis_add_library(
-	sanguiscollision
+	collision
 	"${SANGUIS_COLLISION_FILES}"
 	"${COLLISION_LINK_TARGETS}"
 )

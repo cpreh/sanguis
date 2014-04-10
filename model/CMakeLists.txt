@@ -106,16 +106,12 @@ set(
 	src/weapon_category.cpp
 )
 
-sanguis_generate_symbol_header(
-	model
-)
-
 include_directories(
 	"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
 )
 
 sanguis_add_library(
-	sanguismodel
+	model
 	"${SANGUIS_MODEL_FILES}"
 	"${fcppt_core_TARGET};${fcppt_filesystem_TARGET};${sgeparse_TARGET};${sgeparsejson_TARGET}"
 )

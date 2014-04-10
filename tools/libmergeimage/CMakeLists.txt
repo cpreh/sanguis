@@ -63,18 +63,12 @@ set(
 	src/to_model.cpp
 )
 
-sanguis_generate_symbol_header_base(
-	sanguistoolsmergeimage
-	SANGUIS_TOOLS_LIBMERGEIMAGE
-	sanguis/tools/libmergeimage
-)
-
 include_directories(
 	"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
 )
 
 sanguis_add_library(
-	sanguistoolsmergeimage
+	tools_libmergeimage
 	"${SANGUIS_TOOLS_LIBMERGEIMAGE_FILES}"
-	"${sanguiscore_TARGET};${sanguismodel_TARGET};${sgeimage_TARGET};${sgeimagecolor_TARGET};${sgeimage2d_TARGET};${fcppt_core_TARGET};${fcppt_filesystem_TARGET};${Boost_FILESYSTEM_LIBRARIES}"
+	"${sanguis_core_TARGET};${sanguis_model_TARGET};${sgeimage_TARGET};${sgeimagecolor_TARGET};${sgeimage2d_TARGET};${fcppt_core_TARGET};${fcppt_filesystem_TARGET};${Boost_FILESYSTEM_LIBRARIES}"
 )

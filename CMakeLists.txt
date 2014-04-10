@@ -154,10 +154,18 @@ function(
 		UPPER_NAME
 	)
 
+	string(
+		REPLACE
+		"_"
+		"/"
+		LIB_PATH
+		"${LIB_NAME}"
+	)
+
 	sanguis_generate_symbol_header_base(
-		"sanguis${LIB_NAME}"
+		"sanguis_${LIB_NAME}"
 		"SANGUIS_${UPPER_NAME}"
-		"sanguis/${LIB_NAME}"
+		"sanguis/${LIB_PATH}"
 	)
 endfunction()
 
@@ -183,14 +191,6 @@ if(
 	message(
 		FATAL_ERROR
 		"You disabled both STATIC and SHARED"
-	)
-endif()
-
-if(
-	NOT ENABLE_SHARED AND ENABLE_STATIC
-)
-	add_definitions(
-		"-D SANGUIS_STATIC_LINK"
 	)
 endif()
 
@@ -237,6 +237,15 @@ function(
 	FILES
 	DEPS
 )
+	set(
+		FULL_NAME
+		sanguis_${LIBNAME}
+	)
+
+	sanguis_generate_symbol_header(
+		${LIBNAME}
+	)
+
 	fcppt_utils_add_source_groups(
 		"${FILES}"
 	)
@@ -244,16 +253,27 @@ function(
 	if(
 		ENABLE_STATIC
 	)
+		set(
+			FULL_NAME_STATIC
+			"${FULL_NAME}_static"
+		)
+
 		sanguis_add_library_base(
-			"${LIBNAME}_static"
+			"${FULL_NAME_STATIC}"
 			"${FILES}"
 			"${DEPS}"
 			"STATIC"
 		)
 
 		set(
-			"${LIBNAME}_TARGET_TEMP"
-			"${LIBNAME}_static"
+			"${FULL_NAME}_TARGET_TEMP"
+			"${FULL_NAME_STATIC}"
+		)
+
+		target_compile_definitions(
+			"${FULL_NAME_STATIC}"
+			PUBLIC
+			"SANGUIS_STATIC_LINK"
 		)
 	endif()
 
@@ -261,21 +281,21 @@ function(
 		ENABLE_SHARED
 	)
 		sanguis_add_library_base(
-			"${LIBNAME}"
+			"${FULL_NAME}"
 			"${FILES}"
 			"${DEPS}"
 			"SHARED"
 		)
 
 		set(
-			"${LIBNAME}_TARGET_TEMP"
-			"${LIBNAME}"
+			"${FULL_NAME}_TARGET_TEMP"
+			"${FULL_NAME}"
 		)
 	endif()
 
 	set(
-		"${LIBNAME}_TARGET"
-		"${${LIBNAME}_TARGET_TEMP}"
+		"${FULL_NAME}_TARGET"
+		"${${FULL_NAME}_TARGET_TEMP}"
 		CACHE
 		INTERNAL
 		""
@@ -284,6 +304,10 @@ endfunction()
 
 include(
 	AwlMainGenerator
+)
+
+add_subdirectory(
+	client
 )
 
 add_subdirectory(
@@ -299,11 +323,19 @@ add_subdirectory(
 )
 
 add_subdirectory(
+	common
+)
+
+add_subdirectory(
 	gui
 )
 
 add_subdirectory(
 	model
+)
+
+add_subdirectory(
+	server
 )
 
 add_subdirectory(

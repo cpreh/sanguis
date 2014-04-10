@@ -35,7 +35,7 @@ macro(
 	target_link_libraries(
 		${APP_NAME}
 		PRIVATE
-		${sanguisgui_TARGET}
+		${sanguis_gui_TARGET}
 		${DEPS}
 	)
 endmacro()

@@ -6,9 +6,15 @@ check_includes include
 
 check_includes src SANGUIS_
 
+check_includes client/include
+
 check_includes collision/include
 
 check_includes collision/src/include
+
+check_includes common/include
+
+check_includes common/src/include
 
 check_includes core/include
 

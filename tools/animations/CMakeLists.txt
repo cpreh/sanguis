@@ -56,7 +56,7 @@ sanguis_add_tool(
 	animations
 	"${SANGUIS_TOOLS_ANIMATIONS_FILES}"
 	"${fcppt_INCLUDE_DIRS}"
-	"${sanguismodel_TARGET};${sgesystems_TARGET};${sgecore_TARGET};${awl_TARGET};${fcppt_core_TARGET};${fcppt_filesystem_TARGET};${Boost_FILESYSTEM_LIBRARIES}"
+	"${sanguis_model_TARGET};${sgesystems_TARGET};${sgecore_TARGET};${awl_TARGET};${fcppt_core_TARGET};${fcppt_filesystem_TARGET};${Boost_FILESYSTEM_LIBRARIES}"
 	TRUE
 )
 

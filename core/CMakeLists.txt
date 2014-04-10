@@ -14,14 +14,8 @@ set(
 	src/log_parameters.cpp
 )
 
-sanguis_generate_symbol_header_base(
-	"sanguiscore"
-	"SANGUIS"
-	"sanguis"
-)
-
 sanguis_add_library(
-	sanguiscore
+	core
 	"${SANGUIS_CORE_FILES}"
 	"${sgeconfig_TARGET};${fcppt_core_TARGET}"
 )
