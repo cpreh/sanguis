@@ -307,10 +307,6 @@ include(
 )
 
 add_subdirectory(
-	client
-)
-
-add_subdirectory(
 	core
 )
 
@@ -323,6 +319,10 @@ add_subdirectory(
 )
 
 add_subdirectory(
+	model
+)
+
+add_subdirectory(
 	common
 )
 
@@ -331,11 +331,11 @@ add_subdirectory(
 )
 
 add_subdirectory(
-	model
+	server
 )
 
 add_subdirectory(
-	server
+	client
 )
 
 add_subdirectory(
