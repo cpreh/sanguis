@@ -2,9 +2,7 @@
 
 INCLUDE_BINARY="check_includes"
 
-check_includes include
-
-check_includes src SANGUIS_
+check_includes main/include
 
 check_includes client/include
 

@@ -108,7 +108,9 @@ set(
 	include/sanguis/server/console_command_pair_fwd.hpp
 	include/sanguis/server/console_command_vector.hpp
 	include/sanguis/server/console_fwd.hpp
+	include/sanguis/server/create.hpp
 	include/sanguis/server/create_player.hpp
+	include/sanguis/server/create_player.hpp.hpp
 	include/sanguis/server/damage/armor_array.hpp
 	include/sanguis/server/damage/armor_array_fwd.hpp
 	include/sanguis/server/damage/armor_list.hpp
@@ -393,6 +395,9 @@ set(
 	include/sanguis/server/net/value_impl.hpp
 	include/sanguis/server/net_id_from_player.hpp
 	include/sanguis/server/object.hpp
+	include/sanguis/server/object_base.hpp
+	include/sanguis/server/object_base_fwd.hpp
+	include/sanguis/server/object_base_unique_ptr.hpp
 	include/sanguis/server/object_fwd.hpp
 	include/sanguis/server/optional_angle.hpp
 	include/sanguis/server/optional_angle_fwd.hpp
@@ -666,6 +671,7 @@ set(
 	src/server/collision/with_world.cpp
 	src/server/collision/with_world_move.cpp
 	src/server/console.cpp
+	src/server/create.cpp
 	src/server/create_player.cpp
 	src/server/damage/armor_list.cpp
 	src/server/damage/armor_meta.cpp
@@ -811,6 +817,7 @@ set(
 	src/server/net/speed_policy.cpp
 	src/server/net_id_from_player.cpp
 	src/server/object.cpp
+	src/server/object_base.cpp
 	src/server/perks/choleric.cpp
 	src/server/perks/create.cpp
 	src/server/perks/health.cpp
@@ -902,4 +909,34 @@ sanguis_add_library(
 	server
 	"${SANGUIS_SERVER_FILES}"
 	"${sanguis_common_TARGET};${sanguis_collision_TARGET};${sanguis_core_TARGET};${sanguis_creator_TARGET};${sanguis_model_TARGET};${sgecharconv_TARGET};${sgeconfig_TARGET};${sgeconsole_TARGET};${sgefont_TARGET};${sgetimer_TARGET};${alda_TARGET};${fcppt_filesystem_TARGET};${fcppt_core_TARGET};${Boost_FILESYSTEM_LIBRARIES}"
+)
+
+set(
+	SERVER_NAME
+	sanguis_dedicated_server
+)
+
+add_executable(
+	${SERVER_NAME}
+	main.cpp
+)
+
+fcppt_utils_set_target_compiler_flags(
+	${SERVER_NAME}
+)
+
+# TODO: Clean this up
+target_link_libraries(
+	${SERVER_NAME}
+	PRIVATE
+	${sanguis_server_TARGET}
+	${alda_TARGET}
+	${fcppt_core_TARGET}
+)
+
+install(
+	TARGETS
+	${SERVER_NAME}
+	DESTINATION
+	${INSTALL_BINARY_DIR}
 )

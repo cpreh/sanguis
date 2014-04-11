@@ -31,11 +31,7 @@ function update_sublibrary()
 		src
 }
 
-update_cmake \
-	src/CMakeLists.txt \
-	SANGUIS_FILES \
-	src \
-	include
+update_sublibrary main
 
 update_sublibrary client
 

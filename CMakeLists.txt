@@ -11,6 +11,24 @@ include(
 	FcpptCMakeUtils
 )
 
+option(
+	ENABLE_CLIENT
+	"Build the client in addition to the dedicated server"
+	ON
+)
+
+option(
+	ENABLE_PROJECTILE
+	"Build the projectile collision backend"
+	OFF
+)
+
+option(
+	ENABLE_TOOLS
+	"Build tools to create content for sanguis"
+	OFF
+)
+
 # Find Boost
 
 find_package(
@@ -35,61 +53,73 @@ find_package(
 	fcppt REQUIRED
 )
 
-# Find Threads
-
-find_package(
-	FcpptThreads REQUIRED
-)
-
-add_definitions(
-	${FcpptThreads_DEFINITIONS}
-)
-
-# Find AWL
-
-find_package(
-	awl REQUIRED
-)
-
-option(
-	ENABLE_PROJECTILE
-	"Build the projectile collision backend"
-	OFF
-)
-
-# Find SGE
 set(
-	NEEDED_SGE_COMPONENTS
-	audio
+	SGE_COMPONENTS
 	charconv
 	config
 	console
-	core
 	font
-	fontdraw
-	imagecolor
-	image2d
-	input
-	log
-	parse
-	parseini
-	parsejson
-	renderer
-	rucksack
-	sprite
-	systems
-	texture
 	timer
-	viewport
-	window
 )
+
+if(
+	ENABLE_CLIENT
+)
+	# Find Threads
+
+	find_package(
+		FcpptThreads REQUIRED
+	)
+
+	add_definitions(
+		${FcpptThreads_DEFINITIONS}
+	)
+
+	# Find AWL
+
+	find_package(
+		awl REQUIRED
+	)
+
+	list(
+		APPEND
+		SGE_COMPONENTS
+		audio
+		consolegfx
+		fontdraw
+		imagecolor
+		image2d
+		input
+		log
+		parse
+		parseini
+		parsejson
+		renderer
+		rucksack
+		sprite
+		systems
+		texture
+		viewport
+		window
+	)
+endif()
+
+if(
+	ENABLE_TOOLS
+)
+	list(
+		APPEND
+		SGE_COMPONENTS
+		image2d
+	)
+endif()
 
 if(
 	ENABLE_PROJECTILE
 )
 	list(
 		APPEND
-		NEEDED_SGE_COMPONENTS
+		SGE_COMPONENTS
 		projectile
 	)
 endif()
@@ -97,7 +127,7 @@ endif()
 find_package(
 	sge REQUIRED
 	COMPONENTS
-	"${NEEDED_SGE_COMPONENTS}"
+	"${SGE_COMPONENTS}"
 )
 
 # Find ALDA
@@ -302,10 +332,6 @@ function(
 	)
 endfunction()
 
-include(
-	AwlMainGenerator
-)
-
 add_subdirectory(
 	core
 )
@@ -334,19 +360,17 @@ add_subdirectory(
 	server
 )
 
-add_subdirectory(
-	client
+if(
+	ENABLE_CLIENT
 )
+	add_subdirectory(
+		client
+	)
 
-add_subdirectory(
-	src
-)
-
-option(
-	ENABLE_TOOLS
-	"Build tools to create content for sanguis"
-	OFF
-)
+	add_subdirectory(
+		main
+	)
+endif()
 
 if(
 	ENABLE_TOOLS

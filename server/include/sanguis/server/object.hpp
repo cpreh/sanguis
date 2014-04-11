@@ -3,6 +3,7 @@
 
 #include <sanguis/io_service.hpp>
 #include <sanguis/server/machine.hpp>
+#include <sanguis/server/object_base.hpp>
 #include <sanguis/server/object_fwd.hpp>
 #include <sanguis/server/symbol.hpp>
 #include <alda/net/port.hpp>
@@ -16,6 +17,8 @@ namespace server
 {
 
 class object
+:
+	public sanguis::server::object_base
 {
 	FCPPT_NONCOPYABLE(
 		object

@@ -1,4 +1,5 @@
 #include <sanguis/server/object.hpp>
+#include <sanguis/server/object_base.hpp>
 #include <sanguis/server/events/disconnect.hpp>
 #include <sanguis/server/events/message.hpp>
 #include <sanguis/server/events/tick.hpp>
@@ -11,6 +12,7 @@ sanguis::server::object::object(
 	alda::net::port const _port
 )
 :
+	sanguis::server::object_base(),
 	io_service_(),
 	machine_(
 		_port,
