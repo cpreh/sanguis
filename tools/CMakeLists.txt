@@ -1,3 +1,7 @@
+include(
+	AwlMainGenerator
+)
+
 function(
 	sanguis_add_tool
 	TOOL_NAME
