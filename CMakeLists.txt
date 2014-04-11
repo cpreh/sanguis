@@ -59,6 +59,8 @@ set(
 	config
 	console
 	font
+	parse
+	parsejson
 	timer
 )
 
@@ -91,9 +93,7 @@ if(
 		image2d
 		input
 		log
-		parse
 		parseini
-		parsejson
 		renderer
 		rucksack
 		sprite
