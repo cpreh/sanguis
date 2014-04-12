@@ -99,7 +99,7 @@ sanguis::collision::aux_::world::projectile::body::activate(
 {
 	scoped_.reset();
 
-	scoped_.take(
+	scoped_ =
 		fcppt::make_unique_ptr<
 			sge::projectile::body::scoped
 		>(
@@ -109,8 +109,7 @@ sanguis::collision::aux_::world::projectile::body::activate(
 				collision_groups_,
 				_global_groups
 			)
-		)
-	);
+		);
 }
 
 void

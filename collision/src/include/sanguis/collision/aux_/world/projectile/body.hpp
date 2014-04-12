@@ -11,8 +11,10 @@
 #include <sge/projectile/body/object.hpp>
 #include <sge/projectile/body/scoped_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <memory>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -75,11 +77,11 @@ private:
 	fcppt::signal::scoped_connection const position_connection_;
 
 	typedef
-	fcppt::scoped_ptr<
+	std::unique_ptr<
 		sge::projectile::body::scoped
-	> scoped_scoped_ptr;
+	> scoped_unique_ptr;
 
-	scoped_scoped_ptr scoped_;
+	scoped_unique_ptr scoped_;
 };
 
 }
