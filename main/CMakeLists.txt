@@ -37,18 +37,6 @@ target_link_libraries(
 	${Boost_PROGRAM_OPTIONS_LIBRARIES}
 )
 
-# TODO: Which library/exe needs this?
-if(
-	WIN32
-)
-	target_link_libraries(
-		sanguis
-		PRIVATE
-		WS2_32
-		Mswsock
-	)
-endif()
-
 install(
 	TARGETS
 	sanguis

@@ -498,7 +498,7 @@ include_directories(
 sanguis_add_library(
 	common
 	"${SANGUIS_COMMON_FILES}"
-	"${sanguis_creator_TARGET};${sgecharconv_TARGET};${alda_TARGET};${fcppt_filesystem_TARGET};${fcppt_core_TARGET};${Boost_FILESYSTEM_LIBRARIES};${Boost_SYSTEM_LIBRARIES}"
+	"${sanguis_creator_TARGET};${sgecharconv_TARGET};${alda_TARGET};${fcppt_filesystem_TARGET};${fcppt_core_TARGET};${Boost_FILESYSTEM_LIBRARIES};${Boost_SYSTEM_LIBRARIES};${ASIO_LIBS}"
 )
 
 if(

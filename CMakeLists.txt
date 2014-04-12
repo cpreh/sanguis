@@ -332,6 +332,15 @@ function(
 	)
 endfunction()
 
+if(
+	WIN32
+)
+	set(
+		ASIO_LIBS
+		WS2_32
+	)
+endif()
+
 add_subdirectory(
 	core
 )
