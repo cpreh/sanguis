@@ -31,7 +31,6 @@ set(
 	include/sanguis/server/ai/rotate_and_move_to_target.hpp
 	include/sanguis/server/ai/rotate_to.hpp
 	include/sanguis/server/ai/rotate_to_target.hpp
-	include/sanguis/server/ai/scoped_ptr.hpp
 	include/sanguis/server/ai/search_new_target.hpp
 	include/sanguis/server/ai/sight_range.hpp
 	include/sanguis/server/ai/sight_range_fwd.hpp

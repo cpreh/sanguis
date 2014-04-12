@@ -26,8 +26,8 @@
 #include <sanguis/server/global/world_map.hpp>
 #include <sanguis/server/world/context.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/scoped_ptr_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <memory>
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>
 
@@ -183,12 +183,12 @@ private:
 	sanguis::server::unicast_callback const send_unicast_;
 
 	typedef
-	fcppt::scoped_ptr<
+	std::unique_ptr<
 		sanguis::server::environment::load_context
 	>
-	load_context_scoped_ptr;
+	load_context_unique_ptr;
 
-	load_context_scoped_ptr const load_context_;
+	load_context_unique_ptr const load_context_;
 
 	sanguis::server::console &console_;
 

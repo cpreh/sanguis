@@ -14,7 +14,7 @@
 #include <sanguis/world_id.hpp>
 #include <sanguis/world_name.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
-#include <sanguis/collision/world/object_fwd.hpp>
+#include <sanguis/collision/world/object_unique_ptr.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/name.hpp>
 #include <sanguis/creator/opening_container.hpp>
@@ -49,8 +49,6 @@
 #include <sanguis/server/world/parameters_fwd.hpp>
 #include <sanguis/server/world/sight_range_map.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/scoped_ptr_impl.hpp>
-
 
 
 namespace sanguis
@@ -309,13 +307,7 @@ private:
 
 	sanguis::server::environment::load_context &load_context_;
 
-	typedef
-	fcppt::scoped_ptr<
-		sanguis::collision::world::object
-	>
-	collision_world_scoped_ptr;
-
-	collision_world_scoped_ptr const collision_world_;
+	sanguis::collision::world::object_unique_ptr const collision_world_;
 
 	sanguis::server::world::sight_range_map sight_ranges_;
 

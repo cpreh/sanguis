@@ -7,7 +7,6 @@
 #include <sge/image2d/system_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/scoped_ptr_impl.hpp>
 
 
 sanguis::client::load::resource::textures const &

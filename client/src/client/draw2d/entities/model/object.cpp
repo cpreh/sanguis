@@ -221,7 +221,7 @@ sanguis::client::draw2d::entities::model::object::is_decayed() const
 void
 sanguis::client::draw2d::entities::model::object::on_die()
 {
-	decay_time_.take(
+	decay_time_ =
 		fcppt::make_unique_ptr<
 			sanguis::client::draw2d::entities::model::decay_time
 		>(
@@ -237,8 +237,7 @@ sanguis::client::draw2d::entities::model::object::on_die()
 				sanguis::duration_second(
 					0
 				)
-		)
-	);
+		);
 
 	healthbar_.reset();
 

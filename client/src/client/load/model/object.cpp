@@ -113,7 +113,7 @@ sanguis::client::load::model::object::random_part(
 	if(
 		!random_part_
 	)
-		random_part_.take(
+		random_part_ =
 			fcppt::make_unique_ptr<
 				part_rand
 			>(
@@ -126,8 +126,7 @@ sanguis::client::load::model::object::random_part(
 						this->parts().size() - 1u
 					)
 				)
-			)
-		);
+			);
 
 	return
 		*std::next(

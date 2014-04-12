@@ -7,7 +7,9 @@
 #include <sanguis/common/symbol.hpp>
 #include <alda/net/io_service_wrapper_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/scoped_ptr_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <memory>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -43,11 +45,13 @@ public:
 	alda::net::io_service_wrapper const &
 	impl() const;
 private:
-	typedef fcppt::scoped_ptr<
+	typedef
+	std::unique_ptr<
 		sanguis::io_service_impl
-	> impl_scoped_ptr;
+	>
+	impl_unique_ptr;
 
-	impl_scoped_ptr const impl_;
+	impl_unique_ptr const impl_;
 };
 
 }

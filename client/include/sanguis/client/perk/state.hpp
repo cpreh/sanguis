@@ -17,7 +17,6 @@
 #include <sanguis/client/perk/tree_fwd.hpp>
 #include <sanguis/client/perk/tree_unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/signal/auto_connection_fwd.hpp>
 #include <fcppt/signal/object_decl.hpp>
 
@@ -89,11 +88,7 @@ public:
 private:
 	sanguis::client::perk::send_callback const send_callback_;
 
-	typedef fcppt::scoped_ptr<
-		sanguis::client::perk::tree
-	> tree_scoped_ptr;
-
-	tree_scoped_ptr perks_;
+	sanguis::client::perk::tree_unique_ptr perks_;
 
 	sanguis::client::player_level current_level_;
 

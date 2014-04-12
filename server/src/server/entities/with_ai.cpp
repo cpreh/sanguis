@@ -84,7 +84,7 @@ sanguis::server::entities::with_ai::ai() const
 void
 sanguis::server::entities::with_ai::on_create()
 {
-	manager_.take(
+	manager_ =
 		fcppt::make_unique_ptr<
 			sanguis::server::ai::manager
 		>(
@@ -92,6 +92,5 @@ sanguis::server::entities::with_ai::on_create()
 			random_generator_,
 			*ai_,
 			*this
-		)
-	);
+		);
 }

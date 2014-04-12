@@ -13,14 +13,14 @@
 #include <sanguis/client/load/context.hpp>
 #include <sge/console/object.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
-#include <sge/font/object_scoped_ptr.hpp>
+#include <sge/font/object_unique_ptr.hpp>
 #include <alda/net/port.hpp>
 #include <awl/main/exit_code.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/scoped_state_machine.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/variables_map.hpp>
+#include <memory>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -70,15 +70,15 @@ private:
 
 	sanguis::io_service io_service_;
 
-	typedef fcppt::scoped_ptr<
+	typedef std::unique_ptr<
 		sanguis::client::systems
-	> systems_scoped_ptr;
+	> systems_unique_ptr;
 
-	systems_scoped_ptr const sys_;
+	systems_unique_ptr const sys_;
 
 	sge::renderer::device::core &renderer_;
 
-	sge::font::object_scoped_ptr const font_object_;
+	sge::font::object_unique_ptr const font_object_;
 
 	sge::console::object console_;
 
@@ -90,7 +90,7 @@ private:
 
 	sanguis::timer frame_timer_;
 
-	fcppt::scoped_ptr<
+	std::unique_ptr<
 		sanguis::client::server
 	> server_;
 

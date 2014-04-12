@@ -46,7 +46,7 @@ sanguis::server::collision::ghost::transfer(
 {
 	this->destroy();
 
-	impl_.take(
+	impl_ =
 		_world.create_ghost(
 			sanguis::collision::world::ghost_parameters(
 				sanguis::collision::center(
@@ -59,8 +59,7 @@ sanguis::server::collision::ghost::transfer(
 				body_exit_callback_,
 				collision_groups_
 			)
-		)
-	);
+		);
 }
 
 void

@@ -3,14 +3,13 @@
 
 #include <sanguis/collision/world/body_enter_callback.hpp>
 #include <sanguis/collision/world/body_exit_callback.hpp>
-#include <sanguis/collision/world/ghost_fwd.hpp>
+#include <sanguis/collision/world/ghost_unique_ptr.hpp>
 #include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/collision/ghost_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/scoped_ptr_impl.hpp>
 
 
 namespace sanguis
@@ -57,13 +56,7 @@ private:
 
 	sanguis::server::radius const radius_;
 
-	typedef
-	fcppt::scoped_ptr<
-		sanguis::collision::world::ghost
-	>
-	ghost_scoped_ptr;
-
-	ghost_scoped_ptr impl_;
+	sanguis::collision::world::ghost_unique_ptr impl_;
 };
 
 }

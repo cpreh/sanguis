@@ -13,7 +13,9 @@
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/scoped_ptr_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <memory>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -70,11 +72,11 @@ private:
 
 	sanguis::client::draw2d::collide_callback const collide_callback_;
 
-	typedef fcppt::scoped_ptr<
+	typedef std::unique_ptr<
 		sanguis::client::draw2d::scene::world::state
-	> state_scoped_ptr;
+	> state_unique_ptr;
 
-	state_scoped_ptr state_;
+	state_unique_ptr state_;
 
 };
 

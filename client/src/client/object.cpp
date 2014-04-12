@@ -247,13 +247,12 @@ sanguis::client::object::create_server(
 		server_.reset();
 	}
 
-	server_.take(
+	server_ =
 		fcppt::make_unique_ptr<
 			sanguis::client::server
 		>(
 			_port
-		)
-	);
+		);
 }
 
 awl::main::exit_code const

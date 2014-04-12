@@ -4,8 +4,10 @@
 #include <sanguis/client/load/context_fwd.hpp>
 #include <sanguis/client/load/model/collection_fwd.hpp>
 #include <sanguis/client/load/resource/context_fwd.hpp>
-#include <fcppt/scoped_ptr_decl.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <memory>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -35,9 +37,9 @@ private:
 
 	~context();
 
-	mutable fcppt::scoped_ptr<
+	std::unique_ptr<
 		sanguis::client::load::model::collection
-	> collection_;
+	> const collection_;
 };
 
 }

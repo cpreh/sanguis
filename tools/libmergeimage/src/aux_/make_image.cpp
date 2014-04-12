@@ -10,7 +10,7 @@
 #include <sge/image/algorithm/may_overlap.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/image2d/file.hpp>
-#include <sge/image2d/file_scoped_ptr.hpp>
+#include <sge/image2d/file_unique_ptr.hpp>
 #include <sge/image2d/load_exn.hpp>
 #include <sge/image2d/rect.hpp>
 #include <sge/image2d/system_fwd.hpp>
@@ -83,7 +83,7 @@ sanguis::tools::libmergeimage::aux_::make_image(
 			suffix_path
 		);
 
-		sge::image2d::file_scoped_ptr const img(
+		sge::image2d::file_unique_ptr const img(
 			sge::image2d::load_exn(
 				_image_system,
 				cur_path

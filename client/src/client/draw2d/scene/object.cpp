@@ -71,7 +71,7 @@
 #include <sge/renderer/device/ffp.hpp>
 #include <sge/renderer/state/ffp/transform/mode.hpp>
 #include <sge/renderer/state/ffp/transform/object.hpp>
-#include <sge/renderer/state/ffp/transform/object_scoped_ptr.hpp>
+#include <sge/renderer/state/ffp/transform/object_unique_ptr.hpp>
 #include <sge/renderer/state/ffp/transform/parameters.hpp>
 #include <sge/renderer/state/ffp/transform/scoped.hpp>
 #include <sge/renderer/target/onscreen.hpp>
@@ -404,7 +404,7 @@ sanguis::client::draw2d::scene::object::render_systems(
 		return;
 	}
 
-	sge::renderer::state::ffp::transform::object_scoped_ptr const projection_state(
+	sge::renderer::state::ffp::transform::object_unique_ptr const projection_state(
 		renderer_.create_transform_state(
 			sge::renderer::state::ffp::transform::parameters(
 				*projection_matrix
@@ -429,7 +429,7 @@ sanguis::client::draw2d::scene::object::render_systems(
 		sprite_states_
 	);
 
-	sge::renderer::state::ffp::transform::object_scoped_ptr const transform_state(
+	sge::renderer::state::ffp::transform::object_unique_ptr const transform_state(
 		renderer_.create_transform_state(
 			sge::renderer::state::ffp::transform::parameters(
 				fcppt::math::matrix::translation(

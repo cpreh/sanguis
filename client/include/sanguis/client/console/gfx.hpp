@@ -8,7 +8,7 @@
 #include <sge/image2d/system_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
-#include <sge/renderer/texture/planar_scoped_ptr.hpp>
+#include <sge/renderer/texture/planar_unique_ptr.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
@@ -47,7 +47,7 @@ private:
 
 	sge::renderer::device::ffp &renderer_;
 
-	sge::renderer::texture::planar_scoped_ptr const texture_;
+	sge::renderer::texture::planar_unique_ptr const texture_;
 
 	sge::console::gfx::object impl_;
 

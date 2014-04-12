@@ -40,11 +40,11 @@
 #include <sge/renderer/target/viewport_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/ptr_container/ptr_list.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
+#include <memory>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
@@ -208,7 +208,7 @@ private:
 
 	sanguis::client::draw2d::sprite::client::system client_system_;
 
-	fcppt::scoped_ptr<
+	std::unique_ptr<
 		sanguis::client::draw2d::scene::world::object
 	> const world_;
 
@@ -222,15 +222,15 @@ private:
 
 	sanguis::client::draw2d::insert_own_callback const insert_own_callback_;
 
-	fcppt::scoped_ptr<
+	std::unique_ptr<
 		sanguis::client::draw2d::message::environment
 	> const message_environment_;
 
-	fcppt::scoped_ptr<
+	std::unique_ptr<
 		sanguis::client::control::environment
 	> const control_environment_;
 
-	fcppt::scoped_ptr<
+	std::unique_ptr<
 		sanguis::client::draw2d::message::dispatcher
 	> const message_dispatcher_;
 
@@ -247,7 +247,7 @@ private:
 
 	own_entity_list own_entities_;
 
-	fcppt::scoped_ptr<
+	std::unique_ptr<
 		sanguis::client::draw2d::scene::background
 	> const background_;
 

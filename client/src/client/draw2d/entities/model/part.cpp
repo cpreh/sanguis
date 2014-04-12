@@ -31,7 +31,6 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_comparison.hpp>
 #include <fcppt/optional_impl.hpp>
-#include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/dim.hpp>
@@ -266,7 +265,7 @@ sanguis::client::draw2d::entities::model::part::load_animation(
 		)
 	);
 
-	animation_.take(
+	animation_ =
 		fcppt::make_unique_ptr<
 			sanguis::client::draw2d::sprite::normal::texture_animation
 		>(
@@ -274,8 +273,7 @@ sanguis::client::draw2d::entities::model::part::load_animation(
 			loop_method,
 			ref_,
 			diff_clock_
-		)
-	);
+		);
 
 	ref_.size(
 		fcppt::math::dim::structure_cast<
@@ -305,11 +303,10 @@ sanguis::client::draw2d::entities::model::part::load_animation(
 
 		break;
 	case sanguis::client::draw2d::sprite::animation::loop_method::repeat:
-		sound_.take(
+		sound_ =
 			animation.sound()->buffer()->create_nonpositional(
 				sge::audio::sound::nonpositional_parameters()
-			)
-		);
+			);
 
 		if(
 			sound_

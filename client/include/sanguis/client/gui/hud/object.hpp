@@ -29,7 +29,9 @@
 #include <sge/rucksack/rect_fwd.hpp>
 #include <sge/timer/frames_counter.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/scoped_ptr_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <memory>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -168,12 +170,12 @@ private:
 	sanguis::gui::minimum_size_area gui_area_;
 
 	typedef
-	fcppt::scoped_ptr<
+	std::unique_ptr<
 		sanguis::client::gui::hud::weapon_details
 	>
-	weapon_details_scoped_ptr;
+	weapon_details_unique_ptr;
 
-	weapon_details_scoped_ptr weapon_details_;
+	weapon_details_unique_ptr weapon_details_;
 };
 
 }

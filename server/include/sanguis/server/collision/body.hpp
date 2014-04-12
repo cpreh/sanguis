@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_COLLISION_BODY_HPP_INCLUDED
 
 #include <sanguis/collision/world/body_base_fwd.hpp>
-#include <sanguis/collision/world/body_fwd.hpp>
+#include <sanguis/collision/world/body_unique_ptr.hpp>
 #include <sanguis/collision/world/group_field_fwd.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/server/center.hpp>
@@ -11,7 +11,6 @@
 #include <sanguis/server/collision/body_fwd.hpp>
 #include <sanguis/server/collision/position_callback.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/scoped_ptr_impl.hpp>
 
 
 namespace sanguis
@@ -71,11 +70,7 @@ private:
 
 	sanguis::server::collision::position_callback const position_callback_;
 
-	typedef fcppt::scoped_ptr<
-		sanguis::collision::world::body
-	> body_scoped_ptr;
-
-	body_scoped_ptr body_;
+	sanguis::collision::world::body_unique_ptr body_;
 };
 
 }

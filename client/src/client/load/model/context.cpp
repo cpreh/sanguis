@@ -2,7 +2,6 @@
 #include <sanguis/client/load/model/context.hpp>
 #include <sanguis/client/load/resource/context_fwd.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/scoped_ptr_impl.hpp>
 
 
 sanguis::client::load::model::collection const &

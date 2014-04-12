@@ -96,7 +96,7 @@ sanguis::client::gui::hud::weapon_widget::weapon_description(
 		description_->magazine_remaining()
 	);
 
-	image_.take(
+	image_ =
 		fcppt::make_unique_ptr<
 			sanguis::gui::widget::image
 		>(
@@ -104,8 +104,7 @@ sanguis::client::gui::hud::weapon_widget::weapon_description(
 			resources_.weapon_icon(
 				_description->weapon_type()
 			)
-		)
-	);
+		);
 
 	container_.push_front(
 		sanguis::gui::widget::reference_alignment_pair(

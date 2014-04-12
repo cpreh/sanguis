@@ -473,7 +473,7 @@ sanguis::client::gui::hud::object::update_details()
 void
 sanguis::client::gui::hud::object::create_details()
 {
-	weapon_details_.take(
+	weapon_details_ =
 		fcppt::make_unique_ptr<
 			sanguis::client::gui::hud::weapon_details
 		>(
@@ -485,6 +485,5 @@ sanguis::client::gui::hud::object::create_details()
 			primary_weapon_.weapon_description(),
 			secondary_weapon_.weapon_description(),
 			gui_area_.area()
-		)
-	);
+		);
 }

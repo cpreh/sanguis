@@ -5,7 +5,7 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/ai/manager_fwd.hpp>
-#include <sanguis/server/ai/scoped_ptr.hpp>
+#include <sanguis/server/ai/unique_ptr.hpp>
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 #include <sanguis/server/entities/with_auras_id.hpp>
@@ -16,7 +16,9 @@
 #include <sanguis/server/weapons/irs.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/scoped_ptr_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <memory>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -65,14 +67,15 @@ private:
 
 	sanguis::random_generator &random_generator_;
 
-	sanguis::server::ai::scoped_ptr ai_;
+	sanguis::server::ai::unique_ptr ai_;
 
 	typedef
-	fcppt::scoped_ptr<
+	std::unique_ptr<
 		sanguis::server::ai::manager
-	> manager_scoped_ptr;
+	>
+	manager_unique_ptr;
 
-	manager_scoped_ptr manager_;
+	manager_unique_ptr manager_;
 };
 
 }

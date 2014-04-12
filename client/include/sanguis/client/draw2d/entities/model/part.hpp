@@ -4,7 +4,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
-#include <sge/audio/sound/base_scoped_ptr.hpp>
+#include <sge/audio/sound/base_unique_ptr.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object_fwd.hpp>
@@ -14,7 +14,9 @@
 #include <sanguis/client/load/model/part_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_decl.hpp>
-#include <fcppt/scoped_ptr_decl.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <memory>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -108,7 +110,7 @@ private:
 
 	sanguis::optional_primary_weapon_type weapon_;
 
-	typedef fcppt::scoped_ptr<
+	typedef std::unique_ptr<
 		sanguis::client::draw2d::sprite::normal::texture_animation
 	> scoped_texture_animation;
 
@@ -116,7 +118,7 @@ private:
 
 	bool animation_ended_;
 
-	sge::audio::sound::base_scoped_ptr sound_;
+	sge::audio::sound::base_unique_ptr sound_;
 };
 
 }

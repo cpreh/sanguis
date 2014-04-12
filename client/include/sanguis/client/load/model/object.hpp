@@ -12,10 +12,10 @@
 #include <fcppt/random/distribution/basic_fwd.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
+#include <memory>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -85,7 +85,7 @@ private:
 		part_map_distribution
 	> part_rand;
 
-	mutable fcppt::scoped_ptr<
+	mutable std::unique_ptr<
 		part_rand
 	> random_part_;
 };

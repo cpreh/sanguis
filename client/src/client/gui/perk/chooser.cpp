@@ -177,7 +177,7 @@ sanguis::client::gui::perk::chooser::perks()
 {
 	main_container_.pop_back();
 
-	gui_state_.take(
+	gui_state_ =
 		fcppt::make_unique_ptr<
 			sanguis::client::gui::perk::state
 		>(
@@ -185,8 +185,7 @@ sanguis::client::gui::perk::chooser::perks()
 			font_,
 			gui_context_,
 			state_
-		)
-	);
+		);
 
 	main_container_.push_back(
 		sanguis::gui::widget::reference_alignment_pair(

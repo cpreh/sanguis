@@ -8,10 +8,10 @@
 #include <sanguis/tools/animations/optional_animation_ref_fwd.hpp>
 #include <sanguis/tools/animations/sge_systems_fwd.hpp>
 #include <fcppt/optional_decl.hpp>
-#include <fcppt/scoped_ptr_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <QMainWindow>
 #include <QString>
+#include <memory>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
@@ -86,7 +86,7 @@ private:
 	sanguis::tools::animations::optional_animation_ref const
 	current_animation();
 
-	fcppt::scoped_ptr<
+	std::unique_ptr<
 		Ui::MainWindow
 	> const ui_;
 

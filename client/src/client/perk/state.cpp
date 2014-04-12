@@ -59,11 +59,10 @@ sanguis::client::perk::state::perks(
 	sanguis::client::perk::remaining_levels const _remaining_levels
 )
 {
-	perks_.take(
+	perks_ =
 		std::move(
 			_perks
-		)
-	);
+		);
 
 	remaining_levels_ =
 		_remaining_levels;

@@ -111,7 +111,7 @@ sanguis::server::collision::body::transfer(
 {
 	this->destroy();
 
-	body_.take(
+	body_ =
 		_world.create_body(
 			sanguis::collision::world::body_parameters(
 				sanguis::collision::center(
@@ -140,8 +140,7 @@ sanguis::server::collision::body::transfer(
 				_collision_groups,
 				body_base_
 			)
-		)
-	);
+		);
 
 	_world.activate_body(
 		*body_

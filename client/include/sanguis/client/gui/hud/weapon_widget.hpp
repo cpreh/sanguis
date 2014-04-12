@@ -11,7 +11,9 @@
 #include <sge/font/object_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/scoped_ptr_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <memory>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -64,12 +66,12 @@ private:
 	sge::renderer::device::ffp &renderer_;
 
 	typedef
-	fcppt::scoped_ptr<
+	std::unique_ptr<
 		sanguis::gui::widget::image
 	>
-	image_scoped_ptr;
+	image_unique_ptr;
 
-	image_scoped_ptr image_;
+	image_unique_ptr image_;
 
 	sanguis::gui::widget::text text_;
 

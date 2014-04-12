@@ -7,7 +7,9 @@
 #include <sanguis/server/timer_fwd.hpp>
 #include <sanguis/server/timer_impl_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/scoped_ptr_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <memory>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -29,7 +31,7 @@ public:
 
 	~timer();
 private:
-	fcppt::scoped_ptr<
+	std::unique_ptr<
 		sanguis::server::timer_impl
 	> const impl_;
 };

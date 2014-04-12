@@ -18,7 +18,6 @@
 #include <sanguis/tools/animations/qtutil/to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
-#include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/truncation_check_cast.hpp>
 #include <fcppt/assert/error.hpp>

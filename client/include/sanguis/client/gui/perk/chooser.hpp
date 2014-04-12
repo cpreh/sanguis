@@ -18,8 +18,10 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <memory>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -81,12 +83,12 @@ private:
 	sanguis::gui::widget::text top_text_;
 
 	typedef
-	fcppt::scoped_ptr<
+	std::unique_ptr<
 		sanguis::client::gui::perk::state
 	>
-	state_scoped_ptr;
+	state_unique_ptr;
 
-	state_scoped_ptr gui_state_;
+	state_unique_ptr gui_state_;
 
 	sanguis::gui::widget::box_container main_container_;
 

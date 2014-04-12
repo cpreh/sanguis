@@ -29,12 +29,11 @@
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/pickups/weapon_ref.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
-#include <sanguis/server/perks/tree/object_fwd.hpp>
+#include <sanguis/server/perks/tree/object_unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/reference_wrapper_comparison.hpp>
 #include <fcppt/reference_wrapper_std_hash.hpp>
-#include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <set>
 #include <fcppt/config/external_end.hpp>
@@ -205,11 +204,7 @@ private:
 
 	sanguis::server::skill_points skill_points_;
 
-	typedef fcppt::scoped_ptr<
-		sanguis::server::perks::tree::object
-	> perk_tree_scoped_ptr;
-
-	perk_tree_scoped_ptr perk_tree_;
+	sanguis::server::perks::tree::object_unique_ptr const perk_tree_;
 
 	sanguis::server::speed desired_speed_;
 

@@ -21,9 +21,9 @@
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/load/animation_type_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
+#include <memory>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -170,11 +170,11 @@ private:
 
 	sanguis::weapon_status weapon_status_;
 
-	fcppt::scoped_ptr<
+	std::unique_ptr<
 		sanguis::client::draw2d::entities::model::healthbar
 	> healthbar_;
 
-	fcppt::scoped_ptr<
+	std::unique_ptr<
 		sanguis::client::draw2d::entities::model::decay_time
 	> decay_time_;
 

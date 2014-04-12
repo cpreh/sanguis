@@ -72,7 +72,7 @@ sanguis::client::draw2d::scene::world::object::change(
 	sanguis::client::draw2d::optional_translation const _translation
 )
 {
-	state_.take(
+	state_ =
 		fcppt::make_unique_ptr<
 			sanguis::client::draw2d::scene::world::state
 		>(
@@ -80,8 +80,7 @@ sanguis::client::draw2d::scene::world::object::change(
 			tiles_context_,
 			_parameters,
 			_translation
-		)
-	);
+		);
 }
 
 sanguis::client::draw2d::collide_callback const &

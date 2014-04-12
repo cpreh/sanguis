@@ -50,7 +50,6 @@
 #include <sanguis/server/world/parameters.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
-#include <fcppt/scoped_ptr_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/log/_.hpp>
