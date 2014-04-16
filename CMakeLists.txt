@@ -362,16 +362,16 @@ add_subdirectory(
 )
 
 add_subdirectory(
-	gui
-)
-
-add_subdirectory(
 	server
 )
 
 if(
 	ENABLE_CLIENT
 )
+	add_subdirectory(
+		gui
+	)
+
 	add_subdirectory(
 		client
 	)
