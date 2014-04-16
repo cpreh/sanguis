@@ -77,12 +77,6 @@ if(
 		${FcpptThreads_DEFINITIONS}
 	)
 
-	# Find AWL
-
-	find_package(
-		awl REQUIRED
-	)
-
 	list(
 		APPEND
 		SGE_COMPONENTS
@@ -101,6 +95,16 @@ if(
 		texture
 		viewport
 		window
+	)
+endif()
+
+if(
+	ENABLE_CLIENT
+	OR
+	ENABLE_TOOLS
+)
+	find_package(
+		awl REQUIRED
 	)
 endif()
 
