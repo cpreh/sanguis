@@ -38,7 +38,7 @@ var draw_tiles = function(ctx, width, height, threshold, tilesize)
 
 			if (grid[j][i])
 				ctx.drawImage(
-					sprite,
+					sprit,
 					i * tilesize,
 					j * tilesize,
 					tilesize,
