@@ -105,8 +105,7 @@ intersect = (line, rect) ->
 		line.p1.y <= rect.pos.y + rect.dim.h and
 		line.p2.y >= rect.pos.y
 
-#seed = new Rand().randn()
-seed = 2109415156
+seed = new Rand().randn()
 console.log "seed: #{seed}"
 rng = new Rand(seed)
 
@@ -218,7 +217,8 @@ init = ->
 		for rect in rects
 			if inside(mouse_pos(event), rect)
 				draw_rect ctx, tilesize, rect, '#f00'
-				draw_rect ctx, tilesize, rect.neighbor, '#0f0'
+				if rect.neighbor?
+					draw_rect ctx, tilesize, rect.neighbor, '#0f0'
 
 	canvas.addEventListener 'click', highlight_rect
 

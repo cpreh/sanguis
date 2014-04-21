@@ -135,7 +135,7 @@
     return line.p2.x >= rect.pos.x && line.p1.x <= rect.pos.x + rect.dim.w && line.p1.y <= rect.pos.y + rect.dim.h && line.p2.y >= rect.pos.y;
   };
 
-  seed = 2109415156;
+  seed = new Rand().randn();
 
   console.log("seed: " + seed);
 
@@ -239,7 +239,11 @@
         rect = rects[_i];
         if (inside(mouse_pos(event), rect)) {
           draw_rect(ctx, tilesize, rect, '#f00');
-          _results.push(draw_rect(ctx, tilesize, rect.neighbor, '#0f0'));
+          if (rect.neighbor != null) {
+            _results.push(draw_rect(ctx, tilesize, rect.neighbor, '#0f0'));
+          } else {
+            _results.push(void 0);
+          }
         } else {
           _results.push(void 0);
         }
