@@ -1,9 +1,9 @@
 #include <sanguis/model/animation_fwd.hpp>
 #include <sanguis/model/animation_map.hpp>
+#include <sanguis/model/animation_name.hpp>
 #include <sanguis/model/exception.hpp>
 #include <sanguis/model/optional_image_name.hpp>
 #include <sanguis/model/weapon_category.hpp>
-#include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/container/find_exn.hpp>
@@ -35,7 +35,9 @@ sanguis::model::weapon_category::weapon_category(
 {
 	if(
 		animations_.count(
-			FCPPT_TEXT("none")
+			sanguis::model::animation_name(
+				FCPPT_TEXT("none")
+			)
 		)
 		==
 		0u
@@ -63,7 +65,7 @@ sanguis::model::weapon_category::~weapon_category()
 
 sanguis::model::animation &
 sanguis::model::weapon_category::animation(
-	fcppt::string const &_name
+	sanguis::model::animation_name const &_name
 )
 {
 	return
@@ -78,7 +80,7 @@ sanguis::model::weapon_category::animation(
 					sanguis::model::exception{
 						FCPPT_TEXT("No animation named ")
 						+
-						_name
+						_name.get()
 					};
 			}
 		);
@@ -86,7 +88,7 @@ sanguis::model::weapon_category::animation(
 
 sanguis::model::animation const &
 sanguis::model::weapon_category::animation(
-	fcppt::string const &_name
+	sanguis::model::animation_name const &_name
 ) const
 {
 	return
@@ -101,7 +103,7 @@ sanguis::model::weapon_category::animation(
 
 void
 sanguis::model::weapon_category::insert(
-	fcppt::string const &_name,
+	sanguis::model::animation_name const &_name,
 	sanguis::model::animation &&_animation
 )
 {
@@ -115,6 +117,13 @@ sanguis::model::weapon_category::insert(
 			)
 		).second
 	);
+}
+
+sanguis::model::animation_map &
+sanguis::model::weapon_category::animations()
+{
+	return
+		animations_;
 }
 
 sanguis::model::animation_map const &

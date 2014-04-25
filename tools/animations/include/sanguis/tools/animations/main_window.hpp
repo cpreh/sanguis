@@ -1,7 +1,10 @@
 #ifndef SANGUIS_TOOLS_ANIMATIONS_MAIN_WINDOW_HPP_INCLUDED
 #define SANGUIS_TOOLS_ANIMATIONS_MAIN_WINDOW_HPP_INCLUDED
 
+#include <sanguis/model/animation_name_fwd.hpp>
 #include <sanguis/model/object.hpp>
+#include <sanguis/model/part_name_fwd.hpp>
+#include <sanguis/model/weapon_category_name_fwd.hpp>
 #include <sanguis/tools/animations/frame.hpp>
 #include <sanguis/tools/animations/frame_container.hpp>
 #include <sanguis/tools/animations/image_file_map.hpp>
@@ -9,7 +12,9 @@
 #include <sanguis/tools/animations/sge_systems_fwd.hpp>
 #include <fcppt/optional_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/filesystem/path.hpp>
 #include <QMainWindow>
+#include <QMessageBox>
 #include <QString>
 #include <memory>
 #include <vector>
@@ -54,19 +59,13 @@ public Q_SLOTS:
 	actionQuit();
 
 	void
-	selectedPartChanged(
-		QString const &
-	);
+	selectedPartChanged();
 
 	void
-	selectedWeaponChanged(
-		QString const &
-	);
+	selectedWeaponChanged();
 
 	void
-	selectedAnimationChanged(
-		QString const &
-	);
+	selectedAnimationChanged();
 
 	void
 	globalDelayChanged(
@@ -86,6 +85,56 @@ private:
 	sanguis::tools::animations::optional_animation_ref const
 	current_animation();
 
+	void
+	open_json(
+		boost::filesystem::path const &
+	);
+
+	typedef
+	fcppt::optional<
+		sanguis::model::part_name
+	>
+	optional_part_name;
+
+	typedef
+	fcppt::optional<
+		sanguis::model::weapon_category_name
+	>
+	optional_weapon_category_name;
+
+	typedef
+	fcppt::optional<
+		sanguis::model::animation_name
+	>
+	optional_animation_name;
+
+	optional_part_name
+	selected_part() const;
+
+	optional_weapon_category_name
+	selected_weapon_category() const;
+
+	optional_animation_name
+	selected_animation() const;
+
+	typedef
+	fcppt::optional<
+		boost::filesystem::path
+	>
+	optional_path;
+
+	optional_path
+	output_path();
+
+	void
+	message_box(
+		QMessageBox::Icon,
+		QString const &,
+		QString const &
+	);
+
+	sanguis::tools::animations::sge_systems const &sge_systems_;
+
 	std::unique_ptr<
 		Ui::MainWindow
 	> const ui_;
@@ -98,7 +147,7 @@ private:
 
 	optional_model loaded_model_;
 
-	QString json_file_;
+	optional_path json_file_;
 
 	sanguis::tools::animations::image_file_map image_files_;
 

@@ -7,9 +7,9 @@
 #include <sanguis/model/optional_image_name.hpp>
 #include <sanguis/model/part_fwd.hpp>
 #include <sanguis/model/part_map.hpp>
+#include <sanguis/model/part_name_fwd.hpp>
 #include <sanguis/model/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/string.hpp>
 
 
 namespace sanguis
@@ -58,20 +58,24 @@ public:
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::part &
 	part(
-		fcppt::string const &
+		sanguis::model::part_name const &
 	);
 
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::part const &
 	part(
-		fcppt::string const &
+		sanguis::model::part_name const &
 	) const;
 
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::part &
 	operator[](
-		fcppt::string const &
+		sanguis::model::part_name const &
 	);
+
+	SANGUIS_MODEL_SYMBOL
+	sanguis::model::part_map &
+	parts();
 
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::part_map const &

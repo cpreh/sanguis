@@ -47,7 +47,7 @@ map(
 					{
 						return
 							sge::parse::json::member(
-								_pair.first,
+								_pair.first.get(),
 								_serialize_inner(
 									_pair.second
 								)

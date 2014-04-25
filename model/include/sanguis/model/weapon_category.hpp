@@ -3,11 +3,11 @@
 
 #include <sanguis/model/animation_fwd.hpp>
 #include <sanguis/model/animation_map.hpp>
+#include <sanguis/model/animation_name_fwd.hpp>
 #include <sanguis/model/optional_image_name.hpp>
 #include <sanguis/model/symbol.hpp>
 #include <sanguis/model/weapon_category_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/string.hpp>
 
 
 namespace sanguis
@@ -45,21 +45,25 @@ public:
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::animation &
 	animation(
-		fcppt::string const &
+		sanguis::model::animation_name const &
 	);
 
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::animation const &
 	animation(
-		fcppt::string const &
+		sanguis::model::animation_name const &
 	) const;
 
 	SANGUIS_MODEL_SYMBOL
 	void
 	insert(
-		fcppt::string const &,
+		sanguis::model::animation_name const &,
 		sanguis::model::animation &&
 	);
+
+	SANGUIS_MODEL_SYMBOL
+	sanguis::model::animation_map &
+	animations();
 
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::animation_map const &

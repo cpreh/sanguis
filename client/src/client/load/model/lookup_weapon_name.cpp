@@ -2,8 +2,8 @@
 #include <sanguis/primary_weapon_type.hpp>
 #include <sanguis/client/load/primary_weapon_name.hpp>
 #include <sanguis/client/load/model/lookup_weapon_name.hpp>
+#include <sanguis/model/weapon_category_name.hpp>
 #include <fcppt/enum_size.hpp>
-#include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/array_fold.hpp>
 #include <fcppt/algorithm/find_exn.hpp>
@@ -20,7 +20,7 @@ namespace
 {
 
 typedef std::array<
-	fcppt::string,
+	sanguis::model::weapon_category_name,
 	fcppt::cast::size<
 		std::size_t
 	>(
@@ -54,11 +54,11 @@ weapon_type_array const weapon_types(
 
 sanguis::optional_primary_weapon_type const
 sanguis::client::load::model::lookup_weapon_name(
-	fcppt::string const &_str
+	sanguis::model::weapon_category_name const &_name
 )
 {
 	return
-		_str
+		_name.get()
 		==
 		FCPPT_TEXT("none")
 		?
@@ -73,7 +73,7 @@ sanguis::client::load::model::lookup_weapon_name(
 						fcppt::algorithm::find_exn(
 							weapon_types.begin(),
 							weapon_types.end(),
-							_str
+							_name
 						)
 					)
 				)

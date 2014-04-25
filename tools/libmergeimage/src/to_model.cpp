@@ -1,5 +1,6 @@
 #include <sanguis/model/animation.hpp>
 #include <sanguis/model/animation_index.hpp>
+#include <sanguis/model/animation_name.hpp>
 #include <sanguis/model/animation_range.hpp>
 #include <sanguis/model/cell_size.hpp>
 #include <sanguis/model/object.hpp>
@@ -7,6 +8,8 @@
 #include <sanguis/model/optional_animation_sound.hpp>
 #include <sanguis/model/optional_image_name.hpp>
 #include <sanguis/model/part_map.hpp>
+#include <sanguis/model/part_name.hpp>
+#include <sanguis/model/weapon_category_name.hpp>
 #include <sanguis/tools/libmergeimage/path.hpp>
 #include <sanguis/tools/libmergeimage/path_count_pair.hpp>
 #include <sanguis/tools/libmergeimage/saved_image.hpp>
@@ -68,17 +71,23 @@ sanguis::tools::libmergeimage::to_model(
 			);
 
 			result[
-				path[
-					0
-				]
+				sanguis::model::part_name(
+					path[
+						0
+					]
+				)
 			][
-				path[
-					1
-				]
+				sanguis::model::weapon_category_name(
+					path[
+						1
+					]
+				)
 			].insert(
-				path[
-					2
-				],
+				sanguis::model::animation_name(
+					path[
+						2
+					]
+				),
 				sanguis::model::animation(
 					sanguis::model::animation_range(
 						cell_index,

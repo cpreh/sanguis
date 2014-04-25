@@ -53,7 +53,10 @@ map(
 			{
 				return
 					std::make_pair(
-						_member.first,
+						typename
+						Result::key_type(
+							_member.first
+						),
 						_deserialize_inner(
 							_member.second.get<
 								sge::parse::json::object

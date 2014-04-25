@@ -3,7 +3,7 @@
 #include <sge/parse/json/member.hpp>
 #include <sge/parse/json/optional_member.hpp>
 #include <sge/parse/json/convert/from_int.hpp>
-#include <fcppt/optional_bind.hpp>
+#include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/text.hpp>
 
 
@@ -13,7 +13,7 @@ sanguis::model::aux_::serialize::animation_delay(
 )
 {
 	return
-		fcppt::optional_bind(
+		fcppt::optional_bind_construct(
 			_opt_delay,
 			[](
 				sanguis::model::animation_delay const &_delay

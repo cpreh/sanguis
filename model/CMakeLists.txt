@@ -6,6 +6,8 @@ set(
 	include/sanguis/model/animation_fwd.hpp
 	include/sanguis/model/animation_index.hpp
 	include/sanguis/model/animation_map.hpp
+	include/sanguis/model/animation_name.hpp
+	include/sanguis/model/animation_name_fwd.hpp
 	include/sanguis/model/animation_range.hpp
 	include/sanguis/model/animation_range_fwd.hpp
 	include/sanguis/model/animation_sound.hpp
@@ -38,10 +40,14 @@ set(
 	include/sanguis/model/part.hpp
 	include/sanguis/model/part_fwd.hpp
 	include/sanguis/model/part_map.hpp
+	include/sanguis/model/part_name.hpp
+	include/sanguis/model/part_name_fwd.hpp
 	include/sanguis/model/serialize.hpp
 	include/sanguis/model/weapon_category.hpp
 	include/sanguis/model/weapon_category_fwd.hpp
 	include/sanguis/model/weapon_category_map.hpp
+	include/sanguis/model/weapon_category_name.hpp
+	include/sanguis/model/weapon_category_name_fwd.hpp
 	src/animation.cpp
 	src/animation_range.cpp
 	src/aux_/deserialize/animation.cpp

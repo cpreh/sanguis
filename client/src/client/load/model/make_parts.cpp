@@ -54,7 +54,7 @@ sanguis::client::load::model::make_parts(
 				{
 					return
 						std::make_pair(
-							_part_pair.first,
+							_part_pair.first.get(),
 							fcppt::make_unique_ptr<
 								sanguis::client::load::model::part
 							>(

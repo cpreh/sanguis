@@ -1,11 +1,11 @@
 #include <sanguis/client/load/animation_name.hpp>
 #include <sanguis/client/load/animation_type.hpp>
-#include <fcppt/string.hpp>
+#include <sanguis/model/animation_name.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
 
-fcppt::string
+sanguis::model::animation_name
 sanguis::client::load::animation_name(
 	sanguis::client::load::animation_type const _type
 )
@@ -15,8 +15,10 @@ sanguis::client::load::animation_name(
 )\
 case sanguis::client::load::animation_type::name:\
 	return \
-		FCPPT_TEXT(\
-			#name\
+		sanguis::model::animation_name(\
+			FCPPT_TEXT(\
+				#name\
+			)\
 		)
 	switch(
 		_type

@@ -3,7 +3,7 @@
 #include <sanguis/model/part.hpp>
 #include <sanguis/model/weapon_category_fwd.hpp>
 #include <sanguis/model/weapon_category_map.hpp>
-#include <fcppt/string.hpp>
+#include <sanguis/model/weapon_category_name.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/find_exn.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -49,7 +49,7 @@ sanguis::model::part::~part()
 
 sanguis::model::weapon_category &
 sanguis::model::part::weapon_category(
-	fcppt::string const &_name
+	sanguis::model::weapon_category_name const &_name
 )
 {
 	return
@@ -64,7 +64,7 @@ sanguis::model::part::weapon_category(
 					sanguis::model::exception{
 						FCPPT_TEXT("No weapon category named ")
 						+
-						_name
+						_name.get()
 					};
 			}
 		);
@@ -72,7 +72,7 @@ sanguis::model::part::weapon_category(
 
 sanguis::model::weapon_category const &
 sanguis::model::part::weapon_category(
-	fcppt::string const &_name
+	sanguis::model::weapon_category_name const &_name
 ) const
 {
 	return
@@ -87,13 +87,20 @@ sanguis::model::part::weapon_category(
 
 sanguis::model::weapon_category &
 sanguis::model::part::operator[](
-	fcppt::string const &_name
+	sanguis::model::weapon_category_name const &_name
 )
 {
 	return
 		weapon_categories_[
 			_name
 		];
+}
+
+sanguis::model::weapon_category_map &
+sanguis::model::part::weapon_categories()
+{
+	return
+		weapon_categories_;
 }
 
 sanguis::model::weapon_category_map const &

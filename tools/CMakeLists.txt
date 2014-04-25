@@ -56,10 +56,6 @@ function(
 endfunction()
 
 add_subdirectory(
-	animations
-)
-
-add_subdirectory(
 	check_json
 )
 
@@ -69,4 +65,8 @@ add_subdirectory(
 
 add_subdirectory(
 	mergeimage
+)
+
+add_subdirectory(
+	animations
 )

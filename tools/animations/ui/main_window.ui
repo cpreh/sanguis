@@ -93,8 +93,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>681</width>
-            <height>753</height>
+            <width>696</width>
+            <height>774</height>
            </rect>
           </property>
          </widget>
@@ -278,7 +278,7 @@
      <x>0</x>
      <y>0</y>
      <width>1545</width>
-     <height>20</height>
+     <height>18</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -386,7 +386,7 @@
    <sender>partComboBox</sender>
    <signal>currentTextChanged(QString)</signal>
    <receiver>MainWindow</receiver>
-   <slot>selectedPartChanged(QString)</slot>
+   <slot>selectedPartChanged()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>54</x>
@@ -402,7 +402,7 @@
    <sender>weaponComboBox</sender>
    <signal>currentIndexChanged(QString)</signal>
    <receiver>MainWindow</receiver>
-   <slot>selectedWeaponChanged(QString)</slot>
+   <slot>selectedWeaponChanged()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>54</x>
@@ -418,7 +418,7 @@
    <sender>animationComboBox</sender>
    <signal>currentIndexChanged(QString)</signal>
    <receiver>MainWindow</receiver>
-   <slot>selectedAnimationChanged(QString)</slot>
+   <slot>selectedAnimationChanged()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>54</x>
@@ -514,9 +514,9 @@
  <slots>
   <slot>actionQuit()</slot>
   <slot>actionJSON()</slot>
-  <slot>selectedPartChanged(QString)</slot>
-  <slot>selectedWeaponChanged(QString)</slot>
-  <slot>selectedAnimationChanged(QString)</slot>
+  <slot>selectedPartChanged()</slot>
+  <slot>selectedWeaponChanged()</slot>
+  <slot>selectedAnimationChanged()</slot>
   <slot>globalDelayChanged(int)</slot>
   <slot>actionSave()</slot>
   <slot>delayChanged(int)</slot>

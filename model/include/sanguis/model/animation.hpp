@@ -7,7 +7,6 @@
 #include <sanguis/model/optional_animation_sound.hpp>
 #include <sanguis/model/optional_image_name.hpp>
 #include <sanguis/model/symbol.hpp>
-#include <fcppt/noncopyable.hpp>
 
 
 namespace sanguis
@@ -17,9 +16,6 @@ namespace model
 
 class animation
 {
-	FCPPT_NONCOPYABLE(
-		animation
-	);
 public:
 	SANGUIS_MODEL_SYMBOL
 	animation(
@@ -31,7 +27,18 @@ public:
 
 	SANGUIS_MODEL_SYMBOL
 	animation(
+		animation const &
+	);
+
+	SANGUIS_MODEL_SYMBOL
+	animation(
 		animation &&
+	);
+
+	SANGUIS_MODEL_SYMBOL
+	animation &
+	operator=(
+		animation const &
 	);
 
 	SANGUIS_MODEL_SYMBOL

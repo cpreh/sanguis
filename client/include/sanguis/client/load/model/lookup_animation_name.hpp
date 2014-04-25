@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_LOAD_MODEL_LOOKUP_ANIMATION_NAME_HPP_INCLUDED
 
 #include <sanguis/client/load/animation_type_fwd.hpp>
-#include <fcppt/string.hpp>
+#include <sanguis/model/animation_name_fwd.hpp>
 
 
 namespace sanguis
@@ -16,7 +16,7 @@ namespace model
 
 sanguis::client::load::animation_type
 lookup_animation_name(
-	fcppt::string const &
+	sanguis::model::animation_name const &
 );
 
 }

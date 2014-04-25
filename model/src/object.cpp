@@ -5,7 +5,7 @@
 #include <sanguis/model/optional_image_name.hpp>
 #include <sanguis/model/part_fwd.hpp>
 #include <sanguis/model/part_map.hpp>
-#include <fcppt/string.hpp>
+#include <sanguis/model/part_name.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/find_exn.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -68,7 +68,7 @@ sanguis::model::object::animation_delay(
 
 sanguis::model::part &
 sanguis::model::object::part(
-	fcppt::string const &_name
+	sanguis::model::part_name const &_name
 )
 {
 	return
@@ -83,7 +83,7 @@ sanguis::model::object::part(
 					sanguis::model::exception{
 						FCPPT_TEXT("No part named ")
 						+
-						_name
+						_name.get()
 					};
 			}
 		);
@@ -91,7 +91,7 @@ sanguis::model::object::part(
 
 sanguis::model::part const &
 sanguis::model::object::part(
-	fcppt::string const &_name
+	sanguis::model::part_name const &_name
 ) const
 {
 	return
@@ -106,13 +106,20 @@ sanguis::model::object::part(
 
 sanguis::model::part &
 sanguis::model::object::operator[](
-	fcppt::string const &_name
+	sanguis::model::part_name const &_name
 )
 {
 	return
 		parts_[
 			_name
 		];
+}
+
+sanguis::model::part_map &
+sanguis::model::object::parts()
+{
+	return
+		parts_;
 }
 
 sanguis::model::part_map const &

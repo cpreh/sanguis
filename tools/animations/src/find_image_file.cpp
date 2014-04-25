@@ -1,21 +1,23 @@
 #include <sanguis/model/animation.hpp>
+#include <sanguis/model/animation_name.hpp>
 #include <sanguis/model/object.hpp>
 #include <sanguis/model/optional_image_name.hpp>
 #include <sanguis/model/part.hpp>
+#include <sanguis/model/part_name.hpp>
 #include <sanguis/model/weapon_category.hpp>
+#include <sanguis/model/weapon_category_name.hpp>
 #include <sanguis/tools/animations/const_optional_image_file_ref.hpp>
 #include <sanguis/tools/animations/find_image_file.hpp>
 #include <sanguis/tools/animations/image_file_map.hpp>
-#include <fcppt/string.hpp>
 
 
 sanguis::tools::animations::const_optional_image_file_ref const
 sanguis::tools::animations::find_image_file(
 	sanguis::tools::animations::image_file_map const &_image_files,
 	sanguis::model::object const &_model,
-	fcppt::string const &_part_name,
-	fcppt::string const &_weapon_name,
-	fcppt::string const &_animation_name
+	sanguis::model::part_name const &_part_name,
+	sanguis::model::weapon_category_name const &_weapon_name,
+	sanguis::model::animation_name const &_animation_name
 )
 {
 	sanguis::tools::animations::const_optional_image_file_ref result;

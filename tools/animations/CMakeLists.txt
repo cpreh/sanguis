@@ -22,16 +22,19 @@ set(
 	include/sanguis/tools/animations/frame.hpp
 	include/sanguis/tools/animations/frame_container.hpp
 	include/sanguis/tools/animations/frame_fwd.hpp
+	include/sanguis/tools/animations/get_or_default_animation.hpp
 	include/sanguis/tools/animations/image_file_map.hpp
 	include/sanguis/tools/animations/int_to_delay.hpp
 	include/sanguis/tools/animations/load_image_files.hpp
 	include/sanguis/tools/animations/main.hpp
 	include/sanguis/tools/animations/main_window.hpp
 	include/sanguis/tools/animations/make_frames.hpp
+	include/sanguis/tools/animations/merge_models.hpp
 	include/sanguis/tools/animations/optional_animation_ref.hpp
 	include/sanguis/tools/animations/optional_animation_ref_fwd.hpp
 	include/sanguis/tools/animations/qtutil/flow_layout.hpp
 	include/sanguis/tools/animations/qtutil/from_fcppt_string.hpp
+	include/sanguis/tools/animations/qtutil/string_to_optional.hpp
 	include/sanguis/tools/animations/qtutil/sub_image.hpp
 	include/sanguis/tools/animations/qtutil/to_fcppt_string.hpp
 	include/sanguis/tools/animations/qtutil/to_rect.hpp
@@ -40,11 +43,13 @@ set(
 	src/exception.cpp
 	src/find_image_file.cpp
 	src/frame.cpp
+	src/get_or_default_animation.cpp
 	src/int_to_delay.cpp
 	src/load_image_files.cpp
 	src/main.cpp
 	src/main_window.cpp
 	src/make_frames.cpp
+	src/merge_models.cpp
 	src/qtutil/flow_layout.cpp
 	src/qtutil/from_fcppt_string.cpp
 	src/qtutil/sub_image.cpp
@@ -56,7 +61,7 @@ sanguis_add_tool(
 	animations
 	"${SANGUIS_TOOLS_ANIMATIONS_FILES}"
 	"${fcppt_INCLUDE_DIRS}"
-	"${sanguis_model_TARGET};${sgesystems_TARGET};${sgecore_TARGET};${awl_TARGET};${fcppt_core_TARGET};${fcppt_filesystem_TARGET};${Boost_FILESYSTEM_LIBRARIES}"
+	"${sanguis_model_TARGET};${sanguis_tools_libmergeimage_TARGET};${sgeimage2d_TARGET};${sgesystems_TARGET};${sgecore_TARGET};${awl_TARGET};${fcppt_core_TARGET};${fcppt_filesystem_TARGET};${Boost_FILESYSTEM_LIBRARIES}"
 	TRUE
 )
 

@@ -1,8 +1,8 @@
 #include <sanguis/client/load/animation_name.hpp>
 #include <sanguis/client/load/animation_type.hpp>
 #include <sanguis/client/load/model/lookup_animation_name.hpp>
+#include <sanguis/model/animation_name.hpp>
 #include <fcppt/enum_size.hpp>
-#include <fcppt/string.hpp>
 #include <fcppt/algorithm/array_fold.hpp>
 #include <fcppt/algorithm/find_exn.hpp>
 #include <fcppt/cast/int_to_enum.hpp>
@@ -17,7 +17,7 @@ namespace
 {
 
 typedef std::array<
-	fcppt::string,
+	sanguis::model::animation_name,
 	fcppt::enum_size<
 		sanguis::client::load::animation_type
 	>::value
@@ -47,7 +47,7 @@ animation_type_array const animation_types(
 
 sanguis::client::load::animation_type
 sanguis::client::load::model::lookup_animation_name(
-	fcppt::string const &_str
+	sanguis::model::animation_name const &_name
 )
 {
 	return
@@ -59,7 +59,7 @@ sanguis::client::load::model::lookup_animation_name(
 				fcppt::algorithm::find_exn(
 					animation_types.begin(),
 					animation_types.end(),
-					_str
+					_name
 				)
 			)
 		);

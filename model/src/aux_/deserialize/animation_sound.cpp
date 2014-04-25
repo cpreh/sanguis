@@ -4,7 +4,7 @@
 #include <sge/parse/json/find_member.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/string.hpp>
-#include <fcppt/optional_bind.hpp>
+#include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/text.hpp>
 
 
@@ -14,7 +14,7 @@ sanguis::model::aux_::deserialize::animation_sound(
 )
 {
 	return
-		fcppt::optional_bind(
+		fcppt::optional_bind_construct(
 			sge::parse::json::find_member<
 				sge::parse::json::string
 			>(

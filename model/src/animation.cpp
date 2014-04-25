@@ -28,7 +28,16 @@ sanguis::model::animation::animation(
 }
 
 sanguis::model::animation::animation(
+	animation const &
+) = default;
+
+sanguis::model::animation::animation(
 	animation &&
+) = default;
+
+sanguis::model::animation &
+sanguis::model::animation::operator=(
+	animation const &
 ) = default;
 
 sanguis::model::animation &

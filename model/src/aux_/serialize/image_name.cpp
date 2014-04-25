@@ -2,7 +2,7 @@
 #include <sanguis/model/aux_/serialize/image_name.hpp>
 #include <sge/parse/json/member.hpp>
 #include <sge/parse/json/optional_member.hpp>
-#include <fcppt/optional_bind.hpp>
+#include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/text.hpp>
 
 
@@ -12,7 +12,7 @@ sanguis::model::aux_::serialize::image_name(
 )
 {
 	return
-		fcppt::optional_bind(
+		fcppt::optional_bind_construct(
 			_opt_name,
 			[](
 				sanguis::model::image_name const &_name

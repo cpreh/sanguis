@@ -6,8 +6,8 @@
 #include <sanguis/model/symbol.hpp>
 #include <sanguis/model/weapon_category_fwd.hpp>
 #include <sanguis/model/weapon_category_map.hpp>
+#include <sanguis/model/weapon_category_name_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/string.hpp>
 
 
 namespace sanguis
@@ -45,20 +45,24 @@ public:
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::weapon_category &
 	weapon_category(
-		fcppt::string const &
+		sanguis::model::weapon_category_name const &
 	);
 
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::weapon_category const &
 	weapon_category(
-		fcppt::string const &
+		sanguis::model::weapon_category_name const &
 	) const;
 
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::weapon_category &
 	operator[](
-		fcppt::string const &
+		sanguis::model::weapon_category_name const &
 	);
+
+	SANGUIS_MODEL_SYMBOL
+	sanguis::model::weapon_category_map &
+	weapon_categories();
 
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::weapon_category_map const &
