@@ -53,41 +53,44 @@ class Rect
 	constructor: (@pos, @dim) ->
 		@neighbor = undefined
 
+	@top = ->
+		new AALine(
+			@pos,
+			new Pos(@pos.x + @dim.w, @pos.y))
+	@right = ->
+		new AALine(
+			new Pos(@pos.x + @dim.w, @pos.y),
+			new Pos(@pos.x + @dim.w, @pos.y + @dim.h))
+
+	@bottom = ->
+		new AALine(
+			new Pos(@pos.x + @dim.w, @pos.y + @dim.h),
+			new Pos(@pos.x, @pos.y + @dim.h))
+	@left = ->
+		new AALine(
+			new Pos(@pos.x, @pos.y + @dim.h),
+			@pos)
+
 	clip: (other) ->
 		if inside(other.pos, @) and inside(other.pos.plus(other.dim), @)
 			@dim.w = other.pos.x - @pos.x - 1
 			@neighbor = other
 
-		top = new AALine(
-				@pos,
-				new Pos(@pos.x + @dim.w, @pos.y))
-		if intersect top, other
+		if intersect @top(), other
 			oldy = @pos.y
 			@pos.y = other.pos.y + other.dim.h + 1
 			@dim.h -= @pos.y - oldy
 			@neighbor = other
 
-		right =
-			new AALine(
-				new Pos(@pos.x + @dim.w, @pos.y),
-				new Pos(@pos.x + @dim.w, @pos.y + @dim.h))
-		if intersect right, other
+		if intersect @right(), other
 			@dim.w = other.pos.x - 1 - @pos.x
 			@neighbor = other
 
-		bottom =
-			new AALine(
-				new Pos(@pos.x + @dim.w, @pos.y + @dim.h),
-				new Pos(@pos.x, @pos.y + @dim.h))
-		if intersect bottom, other
+		if intersect @bottom(), other
 			@dim.h = other.pos.y - 1 - @pos.y
 			@neighbor = other
 
-		left =
-			new AALine(
-				new Pos(@pos.x, @pos.y + @dim.h),
-				@pos)
-		if intersect left, other
+		if intersect @left(), other
 			oldx = @pos.x
 			@pos.x = other.pos.x + other.dim.w + 1
 			@dim.w -= @pos.x - oldx
@@ -149,6 +152,23 @@ generate_rects = (ctx, width, height) ->
 			rects.push rect
 
 	rects
+
+find_closest = (graph, nodes) ->
+	ret = undefined
+	min_length = Infinity
+	for n1 in graph
+		for n2 in nodes
+			if distance(n1, n2) < min_length
+				ret = n2
+	ret
+
+build_graph = (loose) ->
+	graph = []
+	while loose.length > 0
+		next = find_closest graph, loose
+		graph.push loose[next]
+		delete loose[next]
+
 
 draw_rect = (ctx, tilesize, rect, color) ->
 	ctx.fillStyle = color ? "#883"
