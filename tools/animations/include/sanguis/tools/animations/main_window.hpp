@@ -2,13 +2,13 @@
 #define SANGUIS_TOOLS_ANIMATIONS_MAIN_WINDOW_HPP_INCLUDED
 
 #include <sanguis/model/animation_name_fwd.hpp>
-#include <sanguis/model/object.hpp>
 #include <sanguis/model/part_name_fwd.hpp>
 #include <sanguis/model/weapon_category_name_fwd.hpp>
 #include <sanguis/tools/animations/frame.hpp>
 #include <sanguis/tools/animations/frame_container.hpp>
 #include <sanguis/tools/animations/image_file_map.hpp>
 #include <sanguis/tools/animations/optional_animation_ref_fwd.hpp>
+#include <sanguis/tools/animations/path_model_pair.hpp>
 #include <sanguis/tools/animations/sge_systems_fwd.hpp>
 #include <fcppt/optional_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -141,13 +141,11 @@ private:
 
 	typedef
 	fcppt::optional<
-		sanguis::model::object
+		sanguis::tools::animations::path_model_pair
 	>
-	optional_model;
+	optional_path_model_pair;
 
-	optional_model loaded_model_;
-
-	optional_path json_file_;
+	optional_path_model_pair loaded_model_;
 
 	sanguis::tools::animations::image_file_map image_files_;
 

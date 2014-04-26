@@ -32,6 +32,8 @@ set(
 	include/sanguis/tools/animations/merge_models.hpp
 	include/sanguis/tools/animations/optional_animation_ref.hpp
 	include/sanguis/tools/animations/optional_animation_ref_fwd.hpp
+	include/sanguis/tools/animations/path_model_pair.hpp
+	include/sanguis/tools/animations/path_model_pair_fwd.hpp
 	include/sanguis/tools/animations/qtutil/flow_layout.hpp
 	include/sanguis/tools/animations/qtutil/from_fcppt_string.hpp
 	include/sanguis/tools/animations/qtutil/string_to_optional.hpp
@@ -50,6 +52,7 @@ set(
 	src/main_window.cpp
 	src/make_frames.cpp
 	src/merge_models.cpp
+	src/path_model_pair.cpp
 	src/qtutil/flow_layout.cpp
 	src/qtutil/from_fcppt_string.cpp
 	src/qtutil/sub_image.cpp

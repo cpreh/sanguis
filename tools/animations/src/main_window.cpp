@@ -15,6 +15,7 @@
 #include <sanguis/tools/animations/make_frames.hpp>
 #include <sanguis/tools/animations/merge_models.hpp>
 #include <sanguis/tools/animations/optional_animation_ref.hpp>
+#include <sanguis/tools/animations/path_model_pair.hpp>
 #include <sanguis/tools/animations/sge_systems.hpp>
 #include <sanguis/tools/animations/qtutil/flow_layout.hpp>
 #include <sanguis/tools/animations/qtutil/from_fcppt_string.hpp>
@@ -59,7 +60,6 @@ sanguis::tools::animations::main_window::main_window(
 		>()
 	),
 	loaded_model_(),
-	json_file_(),
 	image_files_(),
 	frames_()
 {
@@ -130,7 +130,7 @@ try
 	);
 
 	if(
-		!json_file_
+		!loaded_model_
 	)
 	{
 		this->message_box(
@@ -185,7 +185,7 @@ try
 		loaded_model_
 		?
 			sanguis::tools::animations::merge_models(
-				*loaded_model_,
+				loaded_model_->model(),
 				std::move(
 					converted_model
 				)
@@ -240,8 +240,8 @@ sanguis::tools::animations::main_window::actionSave()
 	try
 	{
 		sanguis::model::serialize(
-			*json_file_,
-			*loaded_model_
+			loaded_model_->path(),
+			loaded_model_->model()
 		);
 	}
 	catch(
@@ -287,7 +287,7 @@ sanguis::tools::animations::main_window::selectedPartChanged()
 	for(
 		auto const &weapon_category
 		:
-		loaded_model_->part(
+		loaded_model_->model().part(
 			*part
 		).weapon_categories()
 	)
@@ -324,7 +324,7 @@ sanguis::tools::animations::main_window::selectedWeaponChanged()
 	for(
 		auto const &animation
 		:
-		loaded_model_->part(
+		loaded_model_->model().part(
 			*part
 		).weapon_category(
 			*weapon_category
@@ -375,7 +375,7 @@ sanguis::tools::animations::main_window::selectedAnimationChanged()
 	sanguis::tools::animations::const_optional_image_file_ref const file(
 		sanguis::tools::animations::find_image_file(
 			image_files_,
-			*loaded_model_,
+			loaded_model_->model(),
 			*this->selected_part(),
 			*this->selected_weapon_category(),
 			*this->selected_animation()
@@ -393,7 +393,7 @@ sanguis::tools::animations::main_window::selectedAnimationChanged()
 		sanguis::tools::animations::make_frames(
 			*file,
 			*ui_->scrollAreaWidgetContents,
-			*loaded_model_,
+			loaded_model_->model(),
 			*animation
 		);
 }
@@ -408,7 +408,7 @@ sanguis::tools::animations::main_window::globalDelayChanged(
 	)
 		return;
 
-	loaded_model_->animation_delay(
+	loaded_model_->model().animation_delay(
 		sanguis::tools::animations::int_to_delay(
 			_value
 		)
@@ -484,7 +484,7 @@ sanguis::tools::animations::main_window::current_animation()
 		animation
 		?
 			sanguis::tools::animations::optional_animation_ref(
-				loaded_model_->part(
+				loaded_model_->model().part(
 					*part
 				).weapon_category(
 					*weapon_category
@@ -502,16 +502,18 @@ sanguis::tools::animations::main_window::open_json(
 	boost::filesystem::path const &_path
 )
 {
-	json_file_ =
-		_path;
+	loaded_model_.reset();
 
 	ui_->partComboBox->clear();
 
 	try
 	{
 		loaded_model_ =
-			sanguis::model::deserialize(
-				_path
+			sanguis::tools::animations::path_model_pair(
+				_path,
+				sanguis::model::deserialize(
+					_path
+				)
 			);
 	}
 	catch(
@@ -542,7 +544,7 @@ sanguis::tools::animations::main_window::open_json(
 				boost::filesystem::path(
 					_path
 				).remove_filename(),
-				*loaded_model_
+				loaded_model_->model()
 			);
 	}
 	catch(
@@ -563,7 +565,7 @@ sanguis::tools::animations::main_window::open_json(
 	for(
 		auto const &part
 		:
-		loaded_model_->parts()
+		loaded_model_->model().parts()
 	)
 		ui_->partComboBox->insertItem(
 			0,
@@ -573,12 +575,12 @@ sanguis::tools::animations::main_window::open_json(
 		);
 
 	ui_->globalDelaySpinBox->setValue(
-		loaded_model_->animation_delay()
+		loaded_model_->model().animation_delay()
 		?
 			fcppt::truncation_check_cast<
 				int
 			>(
-				loaded_model_->animation_delay()->get().count()
+				loaded_model_->model().animation_delay()->get().count()
 			)
 		:
 			0
@@ -622,11 +624,11 @@ sanguis::tools::animations::main_window::optional_path
 sanguis::tools::animations::main_window::output_path()
 {
 	return
-		json_file_
+		loaded_model_
 		?
 			sanguis::tools::animations::main_window::optional_path(
 				boost::filesystem::path(
-					*json_file_
+					loaded_model_->path()
 				).remove_filename()
 			)
 		:

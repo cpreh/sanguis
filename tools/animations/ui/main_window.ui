@@ -294,7 +294,7 @@
     </widget>
     <addaction name="separator"/>
     <addaction name="menuOpen"/>
-    <addaction name="actionExport"/>
+    <addaction name="actionSave"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
@@ -322,11 +322,6 @@
     <string>Quit</string>
    </property>
   </action>
-  <action name="actionSaveAs">
-   <property name="text">
-    <string>Save As...</string>
-   </property>
-  </action>
   <action name="actionJSON">
    <property name="text">
     <string>JSON</string>
@@ -340,11 +335,6 @@
   <action name="actionSave">
    <property name="text">
     <string>Save</string>
-   </property>
-  </action>
-  <action name="actionExport">
-   <property name="text">
-    <string>Export</string>
    </property>
   </action>
  </widget>
@@ -447,22 +437,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>actionSave</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>actionSave()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>772</x>
-     <y>494</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>delaySpinBox</sender>
    <signal>valueChanged(int)</signal>
    <receiver>MainWindow</receiver>
@@ -499,6 +473,22 @@
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
    <slot>actionResourcePath()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>772</x>
+     <y>494</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionSave</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>actionSave()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
