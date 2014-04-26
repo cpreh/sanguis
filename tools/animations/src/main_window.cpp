@@ -28,6 +28,7 @@
 #include <sanguis/tools/libmergeimage/saved_image_vector.hpp>
 #include <sanguis/tools/libmergeimage/to_model.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/truncation_check_cast.hpp>
 #include <fcppt/assert/error.hpp>
@@ -147,7 +148,18 @@ try
 	}
 
 	sanguis::tools::animations::main_window::optional_path const save_path(
-		this->output_path()
+		loaded_model_
+		?
+			this->resource_path()
+		:
+			sanguis::tools::animations::qtutil::string_to_optional<
+				boost::filesystem::path
+			>(
+				QFileDialog::getExistingDirectory(
+					this,
+					tr("Select a directory to save the merged images to")
+				)
+			)
 	);
 
 	if(
@@ -556,6 +568,8 @@ sanguis::tools::animations::main_window::open_json(
 
 	ui_->partComboBox->clear();
 
+	ui_->resourcePathEdit->clear();
+
 	try
 	{
 		loaded_model_ =
@@ -587,13 +601,19 @@ sanguis::tools::animations::main_window::open_json(
 		loaded_model_.has_value()
 	);
 
+	ui_->resourcePathEdit->setText(
+		sanguis::tools::animations::qtutil::from_fcppt_string(
+			fcppt::filesystem::path_to_string(
+				*this->resource_path()
+			)
+		)
+	);
+
 	try
 	{
 		image_files_ =
 			sanguis::tools::animations::load_image_files(
-				boost::filesystem::path(
-					_path
-				).remove_filename(),
+				*this->resource_path(),
 				loaded_model_->model()
 			);
 	}
@@ -671,26 +691,21 @@ sanguis::tools::animations::main_window::selected_animation() const
 }
 
 sanguis::tools::animations::main_window::optional_path
-sanguis::tools::animations::main_window::output_path()
+sanguis::tools::animations::main_window::resource_path()
 {
 	return
-		loaded_model_
-		?
-			sanguis::tools::animations::main_window::optional_path(
-				boost::filesystem::path(
-					loaded_model_->path()
-				).remove_filename()
+		fcppt::optional_bind_construct(
+			loaded_model_,
+			[](
+				sanguis::tools::animations::path_model_pair const &_model
 			)
-		:
-			sanguis::tools::animations::qtutil::string_to_optional<
-				boost::filesystem::path
-			>(
-				QFileDialog::getExistingDirectory(
-					this,
-					tr("Select a directory to save the merged images to")
-				)
-			)
-		;
+			{
+				return
+					boost::filesystem::path(
+						_model.path()
+					).remove_filename();
+			}
+		);
 }
 
 void

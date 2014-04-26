@@ -127,7 +127,7 @@ private:
 	optional_path;
 
 	optional_path
-	output_path();
+	resource_path();
 
 	void
 	message_box(
