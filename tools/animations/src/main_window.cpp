@@ -10,6 +10,7 @@
 #include <sanguis/model/serialize.hpp>
 #include <sanguis/model/weapon_category_name.hpp>
 #include <sanguis/tools/animations/const_optional_image_file_ref.hpp>
+#include <sanguis/tools/animations/delay_to_int.hpp>
 #include <sanguis/tools/animations/find_image_file.hpp>
 #include <sanguis/tools/animations/int_to_delay.hpp>
 #include <sanguis/tools/animations/load_image_files.hpp>
@@ -45,7 +46,6 @@
 #include <QPixmap>
 #include <QString>
 #include <ui_main_window.h>
-#include <chrono>
 #include <exception>
 #include <iterator>
 #include <utility>
@@ -502,6 +502,8 @@ sanguis::tools::animations::main_window::globalDelayChanged(
 			_value
 		)
 	);
+
+	this->update_frame_timer();
 }
 
 void
@@ -523,6 +525,8 @@ sanguis::tools::animations::main_window::delayChanged(
 			_value
 		)
 	);
+
+	this->update_frame_timer();
 }
 
 void
@@ -587,21 +591,8 @@ sanguis::tools::animations::main_window::updateFrame()
 void
 sanguis::tools::animations::main_window::playFrames()
 {
-	sanguis::tools::animations::optional_animation_ref const animation(
-		this->current_animation()
-	);
-
-	if(
-		!animation
-	)
-		return;
-
 	sanguis::model::optional_animation_delay const delay(
-		animation->animation_delay()
-		?
-			animation->animation_delay()
-		:
-			loaded_model_->model().animation_delay()
+		this->current_animation_delay()
 	);
 
 	if(
@@ -622,14 +613,8 @@ sanguis::tools::animations::main_window::playFrames()
 	}
 
 	frame_timer_.start(
-		fcppt::cast::size<
-			int
-		>(
-			std::chrono::duration_cast<
-				std::chrono::milliseconds
-			>(
-				delay->get()
-			).count()
+		sanguis::tools::animations::delay_to_int(
+			*delay
 		)
 	);
 
@@ -839,6 +824,47 @@ sanguis::tools::animations::main_window::resource_path()
 					).remove_filename();
 			}
 		);
+}
+
+void
+sanguis::tools::animations::main_window::update_frame_timer()
+{
+	sanguis::model::optional_animation_delay const delay(
+		this->current_animation_delay()
+	);
+
+	if(
+		!delay
+	)
+		this->resetFrames();
+	else
+		frame_timer_.setInterval(
+			sanguis::tools::animations::delay_to_int(
+				*delay
+			)
+		);
+}
+
+sanguis::model::optional_animation_delay const
+sanguis::tools::animations::main_window::current_animation_delay()
+{
+	sanguis::tools::animations::optional_animation_ref const animation(
+		this->current_animation()
+	);
+
+	if(
+		!animation
+	)
+		return
+			sanguis::model::optional_animation_delay();
+
+	return
+		animation->animation_delay()
+		?
+			animation->animation_delay()
+		:
+			loaded_model_->model().animation_delay()
+		;
 }
 
 void

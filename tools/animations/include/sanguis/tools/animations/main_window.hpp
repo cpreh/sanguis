@@ -2,6 +2,7 @@
 #define SANGUIS_TOOLS_ANIMATIONS_MAIN_WINDOW_HPP_INCLUDED
 
 #include <sanguis/model/animation_name_fwd.hpp>
+#include <sanguis/model/optional_animation_delay_fwd.hpp>
 #include <sanguis/model/part_name_fwd.hpp>
 #include <sanguis/model/weapon_category_name_fwd.hpp>
 #include <sanguis/tools/animations/frame.hpp>
@@ -138,6 +139,12 @@ private:
 
 	optional_path
 	resource_path();
+
+	void
+	update_frame_timer();
+
+	sanguis::model::optional_animation_delay const
+	current_animation_delay();
 
 	void
 	message_box(

@@ -17,6 +17,7 @@ set(
 	SANGUIS_TOOLS_ANIMATIONS_FILES
 	include/sanguis/tools/animations/const_optional_image_file_ref.hpp
 	include/sanguis/tools/animations/const_optional_image_file_ref_fwd.hpp
+	include/sanguis/tools/animations/delay_to_int.hpp
 	include/sanguis/tools/animations/exception.hpp
 	include/sanguis/tools/animations/find_image_file.hpp
 	include/sanguis/tools/animations/frame.hpp
@@ -42,6 +43,7 @@ set(
 	include/sanguis/tools/animations/qtutil/to_rect.hpp
 	include/sanguis/tools/animations/sge_systems.hpp
 	include/sanguis/tools/animations/sge_systems_fwd.hpp
+	src/delay_to_int.cpp
 	src/exception.cpp
 	src/find_image_file.cpp
 	src/frame.cpp
