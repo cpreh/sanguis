@@ -167,28 +167,6 @@
          </layout>
         </widget>
        </item>
-       <item row="1" column="2">
-        <widget class="QGraphicsView" name="animationPreview">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="backgroundBrush">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>46</red>
-            <green>46</green>
-            <blue>46</blue>
-           </color>
-          </brush>
-         </property>
-         <property name="interactive">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
        <item row="2" column="2">
         <widget class="QFrame" name="frame">
          <property name="frameShape">
@@ -262,12 +240,19 @@
          </property>
         </widget>
        </item>
+       <item row="1" column="2">
+        <widget class="QLabel" name="animationPreview">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
       </layout>
       <zorder>frame</zorder>
       <zorder>frame_4</zorder>
-      <zorder>animationPreview</zorder>
       <zorder>frameArea</zorder>
       <zorder>line_2</zorder>
+      <zorder>animationPreview</zorder>
      </widget>
     </item>
    </layout>
@@ -516,6 +501,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>playButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>playFrames()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>963</x>
+     <y>909</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>772</x>
+     <y>494</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>resetButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>resetFrames()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>878</x>
+     <y>909</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>772</x>
+     <y>494</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>actionQuit()</slot>
@@ -529,5 +546,8 @@
   <slot>soundChanged(QString)</slot>
   <slot>actionResourcePath()</slot>
   <slot>actionSound()</slot>
+  <slot>updateFrame()</slot>
+  <slot>playFrames()</slot>
+  <slot>resetFrames()</slot>
  </slots>
 </ui>

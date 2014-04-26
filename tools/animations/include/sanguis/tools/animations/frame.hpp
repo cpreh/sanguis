@@ -45,6 +45,9 @@ public:
 
 	QLabel &
 	label();
+
+	QPixmap const &
+	pixmap() const;
 private:
 	typedef
 	std::unique_ptr<

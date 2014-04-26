@@ -16,6 +16,7 @@
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QString>
+#include <QTimer>
 #include <memory>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
@@ -84,6 +85,15 @@ public Q_SLOTS:
 	soundChanged(
 		QString const &
 	);
+
+	void
+	updateFrame();
+
+	void
+	playFrames();
+
+	void
+	resetFrames();
 private:
 	sanguis::tools::animations::optional_animation_ref const
 	current_animation();
@@ -152,7 +162,11 @@ private:
 
 	sanguis::tools::animations::image_file_map image_files_;
 
+	QTimer frame_timer_;
+
 	sanguis::tools::animations::frame_container frames_;
+
+	sanguis::tools::animations::frame_container::const_iterator frame_iterator_;
 };
 
 }

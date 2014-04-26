@@ -72,3 +72,10 @@ sanguis::tools::animations::frame::label()
 	return
 		*label_;
 }
+
+QPixmap const &
+sanguis::tools::animations::frame::pixmap() const
+{
+	return
+		pixmap_;
+}

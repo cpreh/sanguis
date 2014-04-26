@@ -4,6 +4,7 @@
 #include <sanguis/model/deserialize.hpp>
 #include <sanguis/model/exception.hpp>
 #include <sanguis/model/object.hpp>
+#include <sanguis/model/optional_animation_delay.hpp>
 #include <sanguis/model/optional_animation_sound.hpp>
 #include <sanguis/model/part_name.hpp>
 #include <sanguis/model/serialize.hpp>
@@ -32,6 +33,7 @@
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/truncation_check_cast.hpp>
 #include <fcppt/assert/error.hpp>
+#include <fcppt/cast/size.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/filesystem/stem.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -40,9 +42,12 @@
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QObject>
+#include <QPixmap>
 #include <QString>
 #include <ui_main_window.h>
+#include <chrono>
 #include <exception>
+#include <iterator>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -64,7 +69,11 @@ sanguis::tools::animations::main_window::main_window(
 	),
 	loaded_model_(),
 	image_files_(),
-	frames_()
+	frame_timer_(
+		this
+	),
+	frames_(),
+	frame_iterator_()
 {
 	ui_->setupUi(
 		this
@@ -72,6 +81,13 @@ sanguis::tools::animations::main_window::main_window(
 
 	ui_->scrollAreaWidgetContents->setLayout(
 		new sanguis::tools::animations::qtutil::FlowLayout()
+	);
+
+	connect(
+		&frame_timer_,
+		SIGNAL(timeout()),
+		this,
+		SLOT(updateFrame())
 	);
 }
 
@@ -407,6 +423,12 @@ sanguis::tools::animations::main_window::selectedAnimationChanged()
 		this->current_animation()
 	);
 
+	bool const animation_was_playing(
+		frame_timer_.isActive()
+	);
+
+	this->resetFrames();
+
 	if(
 		!animation
 	)
@@ -458,6 +480,11 @@ sanguis::tools::animations::main_window::selectedAnimationChanged()
 			loaded_model_->model(),
 			*animation
 		);
+
+	if(
+		animation_was_playing
+	)
+		this->playFrames();
 }
 
 void
@@ -518,6 +545,112 @@ sanguis::tools::animations::main_window::soundChanged(
 		>(
 			_name
 		)
+	);
+}
+
+void
+sanguis::tools::animations::main_window::updateFrame()
+{
+	if(
+		frame_iterator_
+		==
+		frames_.end()
+	)
+		frame_iterator_ =
+			frames_.begin();
+
+	if(
+		frame_iterator_
+		==
+		frames_.end()
+	)
+		return;
+
+	this->ui_->animationPreview->setPixmap(
+		frame_iterator_->pixmap()
+	);
+
+	++frame_iterator_;
+
+	ui_->lcdNumber->display(
+		fcppt::cast::size<
+			int
+		>(
+			std::distance(
+				frames_.cbegin(),
+				frame_iterator_
+			)
+		)
+	);
+}
+
+void
+sanguis::tools::animations::main_window::playFrames()
+{
+	sanguis::tools::animations::optional_animation_ref const animation(
+		this->current_animation()
+	);
+
+	if(
+		!animation
+	)
+		return;
+
+	sanguis::model::optional_animation_delay const delay(
+		animation->animation_delay()
+		?
+			animation->animation_delay()
+		:
+			loaded_model_->model().animation_delay()
+	);
+
+	if(
+		!delay
+	)
+	{
+		this->message_box(
+			QMessageBox::Icon::Critical,
+			QString(
+				tr("No animation delay")
+			),
+			QString(
+				tr("No animation delay specified. Can't play the animation.")
+			)
+		);
+
+		return;
+	}
+
+	frame_timer_.start(
+		fcppt::cast::size<
+			int
+		>(
+			std::chrono::duration_cast<
+				std::chrono::milliseconds
+			>(
+				delay->get()
+			).count()
+		)
+	);
+
+	frame_iterator_ =
+		frames_.begin();
+}
+
+void
+sanguis::tools::animations::main_window::resetFrames()
+{
+	frame_iterator_ =
+		sanguis::tools::animations::frame_container::iterator();
+
+	frame_timer_.stop();
+
+	ui_->lcdNumber->display(
+		0
+	);
+
+	this->ui_->animationPreview->setPixmap(
+		QPixmap()
 	);
 }
 
