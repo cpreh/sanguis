@@ -500,6 +500,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>openSoundButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>actionSound()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>209</x>
+     <y>926</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>772</x>
+     <y>494</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>actionQuit()</slot>
@@ -512,5 +528,6 @@
   <slot>delayChanged(int)</slot>
   <slot>soundChanged(QString)</slot>
   <slot>actionResourcePath()</slot>
+  <slot>actionSound()</slot>
  </slots>
 </ui>

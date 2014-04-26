@@ -4,6 +4,7 @@
 #include <sanguis/model/deserialize.hpp>
 #include <sanguis/model/exception.hpp>
 #include <sanguis/model/object.hpp>
+#include <sanguis/model/optional_animation_sound.hpp>
 #include <sanguis/model/part_name.hpp>
 #include <sanguis/model/serialize.hpp>
 #include <sanguis/model/weapon_category_name.hpp>
@@ -30,6 +31,7 @@
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/truncation_check_cast.hpp>
 #include <fcppt/assert/error.hpp>
+#include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/filesystem/stem.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
@@ -266,6 +268,54 @@ void
 sanguis::tools::animations::main_window::actionQuit()
 {
 	qApp->quit();
+}
+
+void
+sanguis::tools::animations::main_window::actionSound()
+{
+	sanguis::tools::animations::optional_animation_ref const animation(
+		this->current_animation()
+	);
+
+	if(
+		!animation
+	)
+		return;
+
+	sanguis::tools::animations::main_window::optional_path const chosen_sound_file{
+		sanguis::tools::animations::qtutil::string_to_optional<
+			boost::filesystem::path
+		>(
+			QFileDialog::getOpenFileName(
+				this,
+				tr("Open Sound"),
+				QString()
+			)
+		)
+	};
+
+	if(
+		!chosen_sound_file
+	)
+		return;
+
+	sanguis::model::animation_sound const animation_sound{
+		fcppt::filesystem::path_to_string(
+			chosen_sound_file->filename()
+		)
+	};
+
+	animation->animation_sound(
+		sanguis::model::optional_animation_sound(
+			animation_sound
+		)
+	);
+
+	this->ui_->soundEdit->setText(
+		sanguis::tools::animations::qtutil::from_fcppt_string(
+			animation_sound.get()
+		)
+	);
 }
 
 void

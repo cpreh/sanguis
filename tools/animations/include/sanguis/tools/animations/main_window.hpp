@@ -59,6 +59,9 @@ public Q_SLOTS:
 	actionQuit();
 
 	void
+	actionSound();
+
+	void
 	selectedPartChanged();
 
 	void
