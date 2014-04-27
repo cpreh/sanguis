@@ -227,7 +227,7 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="2">
+       <item row="1" column="2" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
         <widget class="QLabel" name="animationPreview">
          <property name="text">
           <string/>
