@@ -6,6 +6,13 @@ set(
 	include/sanguis/creator/background_tile_fwd.hpp
 	include/sanguis/creator/count.hpp
 	include/sanguis/creator/deserialize.hpp
+	include/sanguis/creator/destructible.hpp
+	include/sanguis/creator/destructible_container.hpp
+	include/sanguis/creator/destructible_fwd.hpp
+	include/sanguis/creator/destructible_pos.hpp
+	include/sanguis/creator/destructible_pos_fwd.hpp
+	include/sanguis/creator/destructible_type.hpp
+	include/sanguis/creator/destructible_type_fwd.hpp
 	include/sanguis/creator/difference_type.hpp
 	include/sanguis/creator/dim.hpp
 	include/sanguis/creator/dim_fwd.hpp
@@ -42,6 +49,7 @@ set(
 	include/sanguis/creator/spawn_container.hpp
 	include/sanguis/creator/spawn_fwd.hpp
 	include/sanguis/creator/spawn_pos.hpp
+	include/sanguis/creator/spawn_pos_fwd.hpp
 	include/sanguis/creator/spawn_type.hpp
 	include/sanguis/creator/spawn_type_fwd.hpp
 	include/sanguis/creator/start_name.hpp
@@ -59,6 +67,8 @@ set(
 	include/sanguis/creator/top_result_fwd.hpp
 	src/aux_/closest_empty.cpp
 	src/aux_/deserialization/background_grid.cpp
+	src/aux_/deserialization/destructible.cpp
+	src/aux_/deserialization/destructible_container.cpp
 	src/aux_/deserialization/grid.cpp
 	src/aux_/deserialization/opening_container.cpp
 	src/aux_/deserialization/spawn.cpp
@@ -82,18 +92,23 @@ set(
 	src/aux_/random/generator.cpp
 	src/aux_/result.cpp
 	src/aux_/serialization/background_grid.cpp
+	src/aux_/serialization/destructible.cpp
+	src/aux_/serialization/destructible_container.cpp
 	src/aux_/serialization/grid.cpp
 	src/aux_/serialization/opening_container.cpp
 	src/aux_/serialization/spawn.cpp
 	src/aux_/serialization/spawn_container.cpp
 	src/aux_/serialization/top_result.cpp
 	src/deserialize.cpp
+	src/destructible.cpp
 	src/exception.cpp
 	src/generate.cpp
 	src/generator_count.cpp
 	src/generator_index.cpp
 	src/include/sanguis/creator/aux_/closest_empty.hpp
 	src/include/sanguis/creator/aux_/deserialization/background_grid.hpp
+	src/include/sanguis/creator/aux_/deserialization/destructible.hpp
+	src/include/sanguis/creator/aux_/deserialization/destructible_container.hpp
 	src/include/sanguis/creator/aux_/deserialization/grid.hpp
 	src/include/sanguis/creator/aux_/deserialization/opening_container.hpp
 	src/include/sanguis/creator/aux_/deserialization/spawn.hpp
@@ -146,6 +161,8 @@ set(
 	src/include/sanguis/creator/aux_/result.hpp
 	src/include/sanguis/creator/aux_/result_fwd.hpp
 	src/include/sanguis/creator/aux_/serialization/background_grid.hpp
+	src/include/sanguis/creator/aux_/serialization/destructible.hpp
+	src/include/sanguis/creator/aux_/serialization/destructible_container.hpp
 	src/include/sanguis/creator/aux_/serialization/grid.hpp
 	src/include/sanguis/creator/aux_/serialization/opening_container.hpp
 	src/include/sanguis/creator/aux_/serialization/spawn.hpp

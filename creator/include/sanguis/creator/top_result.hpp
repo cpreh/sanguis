@@ -2,6 +2,7 @@
 #define SANGUIS_CREATOR_TOP_RESULT_HPP_INCLUDED
 
 #include <sanguis/creator/background_grid.hpp>
+#include <sanguis/creator/destructible_container.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/name.hpp>
 #include <sanguis/creator/opening_container.hpp>
@@ -25,7 +26,8 @@ public:
 		sanguis::creator::grid const &,
 		sanguis::creator::background_grid const &,
 		sanguis::creator::opening_container const &,
-		sanguis::creator::spawn_container const &
+		sanguis::creator::spawn_container const &,
+		sanguis::creator::destructible_container const &
 	);
 
 	SANGUIS_CREATOR_SYMBOL
@@ -51,6 +53,10 @@ public:
 	SANGUIS_CREATOR_SYMBOL
 	sanguis::creator::spawn_container const &
 	spawns() const;
+
+	SANGUIS_CREATOR_SYMBOL
+	sanguis::creator::destructible_container const &
+	destructibles() const;
 private:
 	sanguis::creator::seed seed_;
 
@@ -63,6 +69,8 @@ private:
 	sanguis::creator::opening_container openings_;
 
 	sanguis::creator::spawn_container spawns_;
+
+	sanguis::creator::destructible_container destructibles_;
 };
 
 }

@@ -15,6 +15,7 @@
 #include <sanguis/world_name.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/collision/world/object_unique_ptr.hpp>
+#include <sanguis/creator/destructible_container.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/name.hpp>
 #include <sanguis/creator/opening_container.hpp>
@@ -282,6 +283,12 @@ private:
 		sanguis::creator::spawn_container const &,
 		sanguis::diff_clock const &,
 		sanguis::random_generator &
+	);
+
+	void
+	insert_destructibles(
+		sanguis::creator::destructible_container const &,
+		sanguis::diff_clock const &
 	);
 
 	sanguis::server::entities::with_id &

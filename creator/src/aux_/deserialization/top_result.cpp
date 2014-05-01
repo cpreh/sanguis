@@ -2,6 +2,7 @@
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/top_result.hpp>
 #include <sanguis/creator/aux_/deserialization/background_grid.hpp>
+#include <sanguis/creator/aux_/deserialization/destructible_container.hpp>
 #include <sanguis/creator/aux_/deserialization/grid.hpp>
 #include <sanguis/creator/aux_/deserialization/opening_container.hpp>
 #include <sanguis/creator/aux_/deserialization/spawn_container.hpp>
@@ -70,6 +71,14 @@ sanguis::creator::aux_::deserialization::top_result(
 				>(
 					_object.members,
 					FCPPT_TEXT("spawns")
+				)
+			),
+			sanguis::creator::aux_::deserialization::destructible_container(
+				sge::parse::json::find_member_exn<
+					sge::parse::json::array
+				>(
+					_object.members,
+					FCPPT_TEXT("destructibles")
 				)
 			)
 		);

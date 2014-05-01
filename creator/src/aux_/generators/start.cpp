@@ -1,5 +1,9 @@
 #include <sanguis/creator/background_grid.hpp>
 #include <sanguis/creator/background_tile.hpp>
+#include <sanguis/creator/destructible.hpp>
+#include <sanguis/creator/destructible_container.hpp>
+#include <sanguis/creator/destructible_pos.hpp>
+#include <sanguis/creator/destructible_type.hpp>
 #include <sanguis/creator/dim.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/opening.hpp>
@@ -84,6 +88,18 @@ sanguis::creator::aux_::generators::start(
 				start_portal,
 				exit_portal
 			},
-			sanguis::creator::spawn_container()
+			sanguis::creator::spawn_container(),
+			sanguis::creator::destructible_container{
+				// TODO: Just for testing
+				sanguis::creator::destructible(
+					sanguis::creator::destructible_pos(
+						sanguis::creator::pos(
+							2,
+							2
+						)
+					),
+					sanguis::creator::destructible_type::barrel
+				)
+			}
 		};
 }

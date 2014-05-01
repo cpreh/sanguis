@@ -1,5 +1,6 @@
 #include <sanguis/creator/background_grid.hpp>
 #include <sanguis/creator/background_tile.hpp>
+#include <sanguis/creator/destructible_container.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/opening_container.hpp>
@@ -182,6 +183,7 @@ sanguis::creator::aux_::generators::graveyard(
 			grid,
 			grid_bg,
 			openings,
-			spawners
+			spawners,
+			sanguis::creator::destructible_container() // TODO
 		);
 }

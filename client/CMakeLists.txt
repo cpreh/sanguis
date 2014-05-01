@@ -145,6 +145,7 @@ set(
 	include/sanguis/client/draw2d/entities/with_buffs_parameters_fwd.hpp
 	include/sanguis/client/draw2d/entities/with_buffs_parameters_impl.hpp
 	include/sanguis/client/draw2d/factory/aoe_projectile.hpp
+	include/sanguis/client/draw2d/factory/destructible.hpp
 	include/sanguis/client/draw2d/factory/enemy.hpp
 	include/sanguis/client/draw2d/factory/friend.hpp
 	include/sanguis/client/draw2d/factory/own_player.hpp
@@ -561,6 +562,7 @@ set(
 	src/client/control/axis_direction_min.cpp
 	src/client/control/environment.cpp
 	src/client/control/input_translator.cpp
+	src/client/create.cpp
 	src/client/create_systems.cpp
 	src/client/draw2d/collide_parameters.cpp
 	src/client/draw2d/entities/aoe_bullet.cpp
@@ -601,6 +603,7 @@ set(
 	src/client/draw2d/entities/with_buffs_auras_model.cpp
 	src/client/draw2d/entities/with_buffs_auras_model_parameters.cpp
 	src/client/draw2d/factory/aoe_projectile.cpp
+	src/client/draw2d/factory/destructible.cpp
 	src/client/draw2d/factory/enemy.cpp
 	src/client/draw2d/factory/friend.cpp
 	src/client/draw2d/factory/own_player.cpp
@@ -711,6 +714,8 @@ set(
 	src/client/machine.cpp
 	src/client/make_send_callback.cpp
 	src/client/max_health_valid.cpp
+	src/client/net/deserialize.cpp
+	src/client/net/serialize_to_circular_buffer.cpp
 	src/client/object.cpp
 	src/client/object_base.cpp
 	src/client/perk/category_equal_range.cpp
@@ -738,9 +743,6 @@ set(
 	src/client/states/running.cpp
 	src/client/states/waiting_for_player.cpp
 	src/client/world_parameters.cpp
-	src/create.cpp
-	src/net/deserialize.cpp
-	src/net/serialize_to_circular_buffer.cpp
 )
 
 sanguis_generate_symbol_header(

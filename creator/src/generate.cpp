@@ -68,6 +68,7 @@ sanguis::creator::generate(
 			result.grid(),
 			result.background_grid(),
 			result.openings(),
-			result.spawns()
+			result.spawns(),
+			result.destructibles()
 		);
 }

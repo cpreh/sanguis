@@ -21,6 +21,7 @@
 #include <sanguis/client/draw2d/entities/ifaces/with_weapon.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
 #include <sanguis/client/draw2d/factory/aoe_projectile.hpp>
+#include <sanguis/client/draw2d/factory/destructible.hpp>
 #include <sanguis/client/draw2d/factory/enemy.hpp>
 #include <sanguis/client/draw2d/factory/friend.hpp>
 #include <sanguis/client/draw2d/factory/pickup.hpp>
@@ -41,6 +42,7 @@
 #include <sanguis/messages/adapted_types/aura_type_vector.hpp>
 #include <sanguis/messages/adapted_types/buff_type.hpp>
 #include <sanguis/messages/adapted_types/buff_type_vector.hpp>
+#include <sanguis/messages/adapted_types/destructible_type.hpp>
 #include <sanguis/messages/adapted_types/seed.hpp>
 #include <sanguis/messages/adapted_types/weapon_type.hpp>
 #include <sanguis/messages/adapted_types/world_id.hpp>
@@ -62,6 +64,7 @@
 #include <sanguis/messages/server/add_aoe_projectile.hpp>
 #include <sanguis/messages/server/add_aura.hpp>
 #include <sanguis/messages/server/add_buff.hpp>
+#include <sanguis/messages/server/add_destructible.hpp>
 #include <sanguis/messages/server/add_enemy.hpp>
 #include <sanguis/messages/server/add_friend.hpp>
 #include <sanguis/messages/server/add_own_player.hpp>
@@ -173,6 +176,22 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		_message.get<
 			sanguis::messages::adapted_types::buff_type
 		>()
+	);
+}
+
+sanguis::client::draw2d::message::dispatcher::result_type
+sanguis::client::draw2d::message::dispatcher::operator()(
+	sanguis::messages::server::add_destructible const &_message
+)
+{
+	this->configure_new_object(
+		sanguis::client::draw2d::factory::destructible(
+			env_.model_parameters(),
+			_message.get<
+				sanguis::messages::adapted_types::destructible_type
+			>()
+		),
+		_message
 	);
 }
 

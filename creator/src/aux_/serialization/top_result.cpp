@@ -1,5 +1,6 @@
 #include <sanguis/creator/top_result.hpp>
 #include <sanguis/creator/aux_/serialization/background_grid.hpp>
+#include <sanguis/creator/aux_/serialization/destructible_container.hpp>
 #include <sanguis/creator/aux_/serialization/grid.hpp>
 #include <sanguis/creator/aux_/serialization/opening_container.hpp>
 #include <sanguis/creator/aux_/serialization/spawn_container.hpp>
@@ -65,6 +66,13 @@ sanguis::creator::aux_::serialization::top_result(
 					FCPPT_TEXT("spawns"),
 					sanguis::creator::aux_::serialization::spawn_container(
 						_result.spawns()
+					)
+				)
+			)(
+				sge::parse::json::member(
+					FCPPT_TEXT("destructibles"),
+					sanguis::creator::aux_::serialization::destructible_container(
+						_result.destructibles()
 					)
 				)
 			)

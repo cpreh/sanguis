@@ -17,6 +17,7 @@
 #include <sanguis/collision/world/create.hpp>
 #include <sanguis/collision/world/parameters.hpp>
 #include <sanguis/collision/world/object.hpp>
+#include <sanguis/creator/destructible_container.hpp>
 #include <sanguis/creator/opening.hpp>
 #include <sanguis/creator/opening_container.hpp>
 #include <sanguis/creator/spawn_container.hpp>
@@ -72,8 +73,10 @@
 #include <sanguis/server/global/source_world_pair.hpp>
 #include <sanguis/server/world/center_in_grid_pos.hpp>
 #include <sanguis/server/world/context.hpp>
+#include <sanguis/server/world/destructible_parameters.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/entity_map.hpp>
+#include <sanguis/server/world/make_destructible.hpp>
 #include <sanguis/server/world/object.hpp>
 #include <sanguis/server/world/parameters.hpp>
 #include <sanguis/server/world/sight_range.hpp>
@@ -171,6 +174,11 @@ sanguis::server::world::object::object(
 		_generated_world.spawns(),
 		_parameters.diff_clock(),
 		_parameters.random_generator()
+	);
+
+	this->insert_destructibles(
+		_generated_world.destructibles(),
+		_parameters.diff_clock()
 	);
 }
 
@@ -958,6 +966,30 @@ sanguis::server::world::object::insert_spawns(
 			),
 			sanguis::server::world::spawn_parameters(
 				spawn
+			)
+		);
+}
+
+void
+sanguis::server::world::object::insert_destructibles(
+	sanguis::creator::destructible_container const &_destructibles,
+	sanguis::diff_clock const &_diff_clock
+)
+{
+	for(
+		auto const &destructible
+		:
+		_destructibles
+	)
+		this->insert(
+			sanguis::server::world::make_destructible(
+				destructible.type(),
+				_diff_clock,
+				this->load_context(),
+				difficulty_
+			),
+			sanguis::server::world::destructible_parameters(
+				destructible
 			)
 		);
 }

@@ -159,6 +159,7 @@ set(
 	include/sanguis/server/entities/center_ghost.hpp
 	include/sanguis/server/entities/center_simple.hpp
 	include/sanguis/server/entities/check_dim.hpp
+	include/sanguis/server/entities/destructible.hpp
 	include/sanguis/server/entities/enemies/attribute.hpp
 	include/sanguis/server/entities/enemies/attribute_container.hpp
 	include/sanguis/server/entities/enemies/attribute_fwd.hpp
@@ -429,6 +430,7 @@ set(
 	include/sanguis/server/player_id.hpp
 	include/sanguis/server/player_id_from_args.hpp
 	include/sanguis/server/player_id_from_net.hpp
+	include/sanguis/server/player_id_fwd.hpp
 	include/sanguis/server/radius.hpp
 	include/sanguis/server/radius_fwd.hpp
 	include/sanguis/server/random/amount.hpp
@@ -601,11 +603,13 @@ set(
 	include/sanguis/server/world/center_to_grid_pos.hpp
 	include/sanguis/server/world/context.hpp
 	include/sanguis/server/world/context_fwd.hpp
+	include/sanguis/server/world/destructible_parameters.hpp
 	include/sanguis/server/world/difficulty.hpp
 	include/sanguis/server/world/entity_map.hpp
 	include/sanguis/server/world/entity_vector.hpp
 	include/sanguis/server/world/generate.hpp
 	include/sanguis/server/world/grid_pos_to_center.hpp
+	include/sanguis/server/world/make_destructible.hpp
 	include/sanguis/server/world/make_spawner.hpp
 	include/sanguis/server/world/map.hpp
 	include/sanguis/server/world/object.hpp
@@ -689,6 +693,7 @@ set(
 	src/server/entities/center_ghost.cpp
 	src/server/entities/center_simple.cpp
 	src/server/entities/check_dim.cpp
+	src/server/entities/destructible.cpp
 	src/server/entities/enemies/attribute.cpp
 	src/server/entities/enemies/base_difficulty.cpp
 	src/server/entities/enemies/create.cpp
@@ -888,10 +893,12 @@ set(
 	src/server/world/center_in_grid_pos.cpp
 	src/server/world/center_to_grid_pos.cpp
 	src/server/world/context.cpp
+	src/server/world/destructible_parameters.cpp
 	src/server/world/entity_map.cpp
 	src/server/world/entity_vector.cpp
 	src/server/world/generate.cpp
 	src/server/world/grid_pos_to_center.cpp
+	src/server/world/make_destructible.cpp
 	src/server/world/make_spawner.cpp
 	src/server/world/object.cpp
 	src/server/world/parameters.cpp

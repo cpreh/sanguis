@@ -30,6 +30,7 @@ set(
 	include/sanguis/is_primary_weapon.hpp
 	include/sanguis/is_primary_weapon_fwd.hpp
 	include/sanguis/load/aoe_projectile_name.hpp
+	include/sanguis/load/destructible_name.hpp
 	include/sanguis/load/enemy_name.hpp
 	include/sanguis/load/friend_name.hpp
 	include/sanguis/load/model/make_path.hpp
@@ -54,6 +55,8 @@ set(
 	include/sanguis/messages/adapted_types/buff_type_vector_fwd.hpp
 	include/sanguis/messages/adapted_types/char_type.hpp
 	include/sanguis/messages/adapted_types/char_type_fwd.hpp
+	include/sanguis/messages/adapted_types/destructible_type.hpp
+	include/sanguis/messages/adapted_types/destructible_type_fwd.hpp
 	include/sanguis/messages/adapted_types/entity_id.hpp
 	include/sanguis/messages/adapted_types/entity_id_fwd.hpp
 	include/sanguis/messages/adapted_types/enum.hpp
@@ -174,7 +177,6 @@ set(
 	include/sanguis/messages/roles/direction.hpp
 	include/sanguis/messages/roles/enemy.hpp
 	include/sanguis/messages/roles/entity_id.hpp
-	include/sanguis/messages/roles/error_message.hpp
 	include/sanguis/messages/roles/exp_for_next_level.hpp
 	include/sanguis/messages/roles/experience.hpp
 	include/sanguis/messages/roles/friend.hpp
@@ -211,6 +213,8 @@ set(
 	include/sanguis/messages/server/add_buff_fwd.hpp
 	include/sanguis/messages/server/add_console_command.hpp
 	include/sanguis/messages/server/add_console_command_fwd.hpp
+	include/sanguis/messages/server/add_destructible.hpp
+	include/sanguis/messages/server/add_destructible_fwd.hpp
 	include/sanguis/messages/server/add_enemy.hpp
 	include/sanguis/messages/server/add_enemy_fwd.hpp
 	include/sanguis/messages/server/add_friend.hpp
@@ -409,6 +413,7 @@ set(
 	src/io_service.cpp
 	src/io_service_impl.cpp
 	src/load/aoe_projectile_name.cpp
+	src/load/destructible_name.cpp
 	src/load/enemy_name.cpp
 	src/load/friend_name.cpp
 	src/load/model/make_path.cpp
@@ -445,6 +450,7 @@ set(
 	src/messages/server/add_aura.cpp
 	src/messages/server/add_buff.cpp
 	src/messages/server/add_console_command.cpp
+	src/messages/server/add_destructible.cpp
 	src/messages/server/add_enemy.cpp
 	src/messages/server/add_friend.cpp
 	src/messages/server/add_own_player.cpp

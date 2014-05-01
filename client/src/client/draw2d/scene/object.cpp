@@ -44,6 +44,7 @@
 #include <sanguis/messages/server/add_aoe_projectile.hpp>
 #include <sanguis/messages/server/add_aura.hpp>
 #include <sanguis/messages/server/add_buff.hpp>
+#include <sanguis/messages/server/add_destructible.hpp>
 #include <sanguis/messages/server/add_enemy.hpp>
 #include <sanguis/messages/server/add_friend.hpp>
 #include <sanguis/messages/server/add_own_player.hpp>
@@ -232,10 +233,11 @@ sanguis::client::draw2d::scene::object::process_message(
 )
 {
 	static sanguis::messages::server::call::object<
-		boost::mpl::vector21<
+		boost::mpl::vector22<
 			sanguis::messages::server::add_aoe_projectile,
 			sanguis::messages::server::add_aura,
 			sanguis::messages::server::add_buff,
+			sanguis::messages::server::add_destructible,
 			sanguis::messages::server::add_enemy,
 			sanguis::messages::server::add_friend,
 			sanguis::messages::server::add_own_player,
