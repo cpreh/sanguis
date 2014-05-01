@@ -90,6 +90,8 @@ set(
 	src/aux_/place_openings.cpp
 	src/aux_/place_spawners.cpp
 	src/aux_/random/generator.cpp
+	src/aux_/random/uniform_pos.cpp
+	src/aux_/random/uniform_pos_parameters.cpp
 	src/aux_/result.cpp
 	src/aux_/serialization/background_grid.cpp
 	src/aux_/serialization/destructible.cpp
@@ -150,6 +152,9 @@ set(
 	src/include/sanguis/creator/aux_/random/uniform_int_wrapper_decl.hpp
 	src/include/sanguis/creator/aux_/random/uniform_int_wrapper_fwd.hpp
 	src/include/sanguis/creator/aux_/random/uniform_int_wrapper_impl.hpp
+	src/include/sanguis/creator/aux_/random/uniform_pos.hpp
+	src/include/sanguis/creator/aux_/random/uniform_pos_fwd.hpp
+	src/include/sanguis/creator/aux_/random/uniform_pos_parameters.hpp
 	src/include/sanguis/creator/aux_/random/uniform_size.hpp
 	src/include/sanguis/creator/aux_/random/uniform_size_fwd.hpp
 	src/include/sanguis/creator/aux_/random/uniform_size_variate.hpp

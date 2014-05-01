@@ -1,6 +1,7 @@
 #include <sanguis/creator/count.hpp>
 #include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/grid.hpp>
+#include <sanguis/creator/opening_container.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/size_type.hpp>
 #include <sanguis/creator/spawn_container.hpp>
@@ -15,8 +16,7 @@
 #include <sanguis/creator/aux_/place_spawners.hpp>
 #include <sanguis/creator/aux_/random/generator.hpp>
 #include <sanguis/creator/aux_/random/uniform_int_wrapper_impl.hpp>
-#include <sanguis/creator/aux_/random/uniform_size.hpp>
-#include <sanguis/creator/aux_/random/uniform_size_variate.hpp>
+#include <sanguis/creator/aux_/random/uniform_pos.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/assert/error_message.hpp>
@@ -29,47 +29,16 @@
 sanguis::creator::spawn_container
 sanguis::creator::aux_::place_spawners(
 	sanguis::creator::grid &_grid,
-	sanguis::creator::opening const &_start_portal,
+	sanguis::creator::opening_container const &_openings,
 	sanguis::creator::count const _spawner_count,
 	sanguis::creator::aux_::random::generator &_generator,
 	sanguis::creator::aux_::enemy_type_container const &_enemy_types
 )
 {
-	auto const boundary(
-		[](
-			sanguis::creator::size_type const _sz
-		)
-		{
-			FCPPT_ASSERT_PRE(
-				_sz
-				>=
-				3u
-			);
-
-			return
-				sanguis::creator::aux_::random::uniform_size{
-					sanguis::creator::aux_::random::uniform_size::param_type::min{
-						1u
-					},
-					sanguis::creator::aux_::random::uniform_size::param_type::max{
-						_sz - 2
-					}
-				};
-		}
-	);
-
-	sanguis::creator::aux_::random::uniform_size_variate random_x{
+	sanguis::creator::aux_::random::uniform_pos
+	random_pos{
 		_generator,
-		boundary(
-			_grid.size().w()
-		)
-	};
-
-	sanguis::creator::aux_::random::uniform_size_variate random_y{
-		_generator,
-		boundary(
-			_grid.size().h()
-		)
+		_grid.size()
 	};
 
 	auto random_monster(
@@ -104,10 +73,7 @@ sanguis::creator::aux_::place_spawners(
 		candidate{
 			sanguis::creator::aux_::closest_empty(
 				_grid,
-				sanguis::creator::pos{
-					random_x(),
-					random_y()
-				}
+				random_pos()
 			)
 		};
 
@@ -120,11 +86,13 @@ sanguis::creator::aux_::place_spawners(
 
 
 		if(
+			!_openings.empty()
+			&&
 			!
 			sanguis::creator::tile_is_visible(
 				_grid,
 				*candidate,
-				_start_portal.get()
+				_openings[0].get()
 			)
 		)
 		{

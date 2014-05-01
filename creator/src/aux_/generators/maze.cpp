@@ -13,9 +13,6 @@
 #include <sanguis/creator/aux_/parameters.hpp>
 #include <sanguis/creator/aux_/result.hpp>
 #include <sanguis/creator/aux_/generators/maze.hpp>
-#include <sanguis/creator/aux_/random/generator.hpp>
-#include <sanguis/creator/aux_/random/uniform_size.hpp>
-#include <sanguis/creator/aux_/random/uniform_size_variate.hpp>
 
 
 sanguis::creator::aux_::result
@@ -26,45 +23,6 @@ sanguis::creator::aux_::generators::maze(
 	sanguis::creator::grid::dim const maze_dim{
 		15,
 		15
-	};
-
-	sanguis::creator::aux_::random::uniform_size_variate
-	random_cell_index{
-		_parameters.randgen(),
-		sanguis::creator::aux_::random::uniform_size{
-			sanguis::creator::aux_::random::uniform_size::param_type::min{
-				0u
-			},
-			sanguis::creator::aux_::random::uniform_size::param_type::max{
-				maze_dim.content()
-			}
-		}
-	};
-
-	sanguis::creator::aux_::random::uniform_size_variate
-	random_x{
-		_parameters.randgen(),
-		sanguis::creator::aux_::random::uniform_size{
-			sanguis::creator::aux_::random::uniform_size::param_type::min{
-				0u
-			},
-			sanguis::creator::aux_::random::uniform_size::param_type::max{
-				maze_dim.w() - 2
-			}
-		}
-	};
-
-	sanguis::creator::aux_::random::uniform_size_variate
-	random_y{
-		_parameters.randgen(),
-		sanguis::creator::aux_::random::uniform_size{
-			sanguis::creator::aux_::random::uniform_size::param_type::min{
-				0u
-			},
-			sanguis::creator::aux_::random::uniform_size::param_type::max{
-				maze_dim.h() - 2
-			}
-		}
 	};
 
 	sanguis::creator::grid
@@ -83,9 +41,8 @@ sanguis::creator::aux_::generators::maze(
 	openings{
 		sanguis::creator::aux_::place_openings(
 			grid,
-			_parameters.opening_count(),
-			random_x,
-			random_y
+			_parameters.randgen(),
+			_parameters.opening_count()
 		)
 	};
 
@@ -93,7 +50,7 @@ sanguis::creator::aux_::generators::maze(
 	spawners{
 		sanguis::creator::aux_::place_spawners(
 			grid,
-			openings[0],
+			openings,
 			20u,
 			_parameters.randgen(),
 			sanguis::creator::aux_::enemy_type_container{

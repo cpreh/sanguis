@@ -14,8 +14,6 @@
 #include <sanguis/creator/aux_/result.hpp>
 #include <sanguis/creator/aux_/random/generator.hpp>
 #include <sanguis/creator/aux_/random/uniform_int.hpp>
-#include <sanguis/creator/aux_/random/uniform_size.hpp>
-#include <sanguis/creator/aux_/random/uniform_size_variate.hpp>
 #include <sanguis/creator/aux_/generators/graveyard.hpp>
 #include <fcppt/container/grid/make_pos_range.hpp>
 #include <fcppt/random/make_variate.hpp>
@@ -31,45 +29,6 @@ sanguis::creator::aux_::generators::graveyard(
 	sanguis::creator::grid::dim const maze_dim{
 		9,
 		9
-	};
-
-	sanguis::creator::aux_::random::uniform_size_variate
-	random_cell_index{
-		_parameters.randgen(),
-		sanguis::creator::aux_::random::uniform_size{
-			sanguis::creator::aux_::random::uniform_size::param_type::min{
-				0u
-			},
-			sanguis::creator::aux_::random::uniform_size::param_type::max{
-				maze_dim.content()
-			}
-		}
-	};
-
-	sanguis::creator::aux_::random::uniform_size_variate
-	random_x{
-		_parameters.randgen(),
-		sanguis::creator::aux_::random::uniform_size{
-			sanguis::creator::aux_::random::uniform_size::param_type::min{
-				0u
-			},
-			sanguis::creator::aux_::random::uniform_size::param_type::max{
-				maze_dim.w() - 2
-			}
-		}
-	};
-
-	sanguis::creator::aux_::random::uniform_size_variate
-	random_y{
-		_parameters.randgen(),
-		sanguis::creator::aux_::random::uniform_size{
-			sanguis::creator::aux_::random::uniform_size::param_type::min{
-				0u
-			},
-			sanguis::creator::aux_::random::uniform_size::param_type::max{
-				maze_dim.h() - 2
-			}
-		}
 	};
 
 	sanguis::creator::grid
@@ -88,9 +47,8 @@ sanguis::creator::aux_::generators::graveyard(
 	openings{
 		sanguis::creator::aux_::place_openings(
 			grid,
-			_parameters.opening_count(),
-			random_x,
-			random_y
+			_parameters.randgen(),
+			_parameters.opening_count()
 		)
 	};
 
@@ -166,7 +124,7 @@ sanguis::creator::aux_::generators::graveyard(
 	spawners{
 		sanguis::creator::aux_::place_spawners(
 			grid,
-			openings[0],
+			openings,
 			10u,
 			_parameters.randgen(),
 			sanguis::creator::aux_::enemy_type_container{

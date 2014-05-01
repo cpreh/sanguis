@@ -8,7 +8,7 @@
 #include <sanguis/creator/aux_/closest_empty.hpp>
 #include <sanguis/creator/aux_/place_openings.hpp>
 #include <sanguis/creator/aux_/optional_pos.hpp>
-#include <sanguis/creator/aux_/random/uniform_size_variate.hpp>
+#include <sanguis/creator/aux_/random/uniform_pos.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/contains.hpp>
 #include <fcppt/assert/error_message.hpp>
@@ -16,21 +16,24 @@
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/math/vector/dim.hpp>
 
+
 sanguis::creator::opening_container
 sanguis::creator::aux_::place_openings(
 	sanguis::creator::grid &_grid,
-	sanguis::creator::opening_count const _opening_count,
-	sanguis::creator::aux_::random::uniform_size_variate &_random_x,
-	sanguis::creator::aux_::random::uniform_size_variate &_random_y
+	sanguis::creator::aux_::random::generator &_generator,
+	sanguis::creator::opening_count const _opening_count
 )
 {
+	sanguis::creator::aux_::random::uniform_pos
+	random_pos{
+		_generator,
+		_grid.size()
+	};
+
 	sanguis::creator::aux_::optional_pos const opt_starting_pos{
 		sanguis::creator::aux_::closest_empty(
 			_grid,
-			sanguis::creator::pos(
-				_random_x(),
-				_random_y()
-			)
+			random_pos()
 		)
 	};
 
@@ -102,10 +105,7 @@ sanguis::creator::aux_::place_openings(
 		candidate{
 			sanguis::creator::aux_::closest_empty(
 				_grid,
-				sanguis::creator::grid::pos{
-					_random_x(),
-					_random_y()
-				}
+				random_pos()
 			)
 		};
 
