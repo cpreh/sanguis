@@ -1,4 +1,3 @@
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/creator/destructible_type.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
@@ -17,7 +16,6 @@
 sanguis::server::entities::unique_ptr
 sanguis::server::world::make_destructible(
 	sanguis::creator::destructible_type const _type,
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::world::difficulty const _difficulty
 )
@@ -40,7 +38,6 @@ sanguis::server::world::make_destructible(
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::destructible
 		>(
-			_diff_clock,
 			_type,
 			_load_context,
 			sanguis::server::health(

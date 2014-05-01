@@ -49,8 +49,6 @@ private:
 		sanguis::server::perks::level_diff
 	);
 
-	sanguis::diff_clock const &diff_clock_;
-
 	sanguis::diff_timer shoot_timer_;
 
 	typedef fcppt::random::distribution::basic<

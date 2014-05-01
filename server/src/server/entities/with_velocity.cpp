@@ -18,7 +18,6 @@
 
 
 sanguis::server::entities::with_velocity::with_velocity(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::server::dim const _dim,
 	sanguis::server::entities::property::initial const &_movement_speed,
 	sanguis::server::direction const _direction
@@ -27,7 +26,6 @@ sanguis::server::entities::with_velocity::with_velocity(
 	sanguis::server::entities::ifaces::with_id(),
 	sanguis::server::entities::ifaces::with_velocity(),
 	sanguis::server::entities::with_body(
-		_diff_clock,
 		_dim
 	),
 	movement_speed_(
@@ -37,10 +35,10 @@ sanguis::server::entities::with_velocity::with_velocity(
 		_direction
 	),
 	net_center_(
-		_diff_clock
+		this->diff_clock()
 	),
 	net_speed_(
-		_diff_clock
+		this->diff_clock()
 	),
 	speed_change_(
 		movement_speed_.register_change_callback(

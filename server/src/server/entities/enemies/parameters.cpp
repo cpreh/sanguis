@@ -1,4 +1,3 @@
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/exp.hpp>
@@ -7,7 +6,7 @@
 #include <sanguis/server/regeneration.hpp>
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/auras/aura.hpp>
-#include <sanguis/server/auras/container.hpp>
+#include <sanguis/server/auras/create_callback_container.hpp>
 #include <sanguis/server/auras/unique_ptr.hpp>
 #include <sanguis/server/damage/armor_array.hpp>
 #include <sanguis/server/damage/armor_unit.hpp>
@@ -30,7 +29,6 @@
 
 
 sanguis::server::entities::enemies::parameters::parameters(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
 	sanguis::creator::enemy_type const _enemy_type,
 	sanguis::server::environment::load_context &_load_context,
@@ -43,12 +41,9 @@ sanguis::server::entities::enemies::parameters::parameters(
 	sanguis::server::exp const _exp,
 	sanguis::server::entities::enemies::difficulty const _difficulty,
 	sanguis::server::entities::spawn_owner const &_spawn_owner,
-	sanguis::server::auras::container &&_auras
+	sanguis::server::auras::create_callback_container const &_auras
 )
 :
-	diff_clock_(
-		_diff_clock
-	),
 	random_generator_(
 		_random_generator
 	),
@@ -95,9 +90,7 @@ sanguis::server::entities::enemies::parameters::parameters(
 		_spawn_owner
 	),
 	auras_(
-		std::move(
-			_auras
-		)
+		_auras
 	),
 	ias_(
 		sanguis::server::weapons::default_ias()
@@ -114,13 +107,6 @@ sanguis::server::entities::enemies::parameters::parameters(
 
 sanguis::server::entities::enemies::parameters::~parameters()
 {
-}
-
-sanguis::diff_clock const &
-sanguis::server::entities::enemies::parameters::diff_clock() const
-{
-	return
-		diff_clock_;
 }
 
 sanguis::random_generator &
@@ -214,8 +200,8 @@ sanguis::server::entities::enemies::parameters::spawn_owner() const
 		spawn_owner_;
 }
 
-sanguis::server::auras::container &
-sanguis::server::entities::enemies::parameters::auras()
+sanguis::server::auras::create_callback_container const &
+sanguis::server::entities::enemies::parameters::auras() const
 {
 	return
 		auras_;
@@ -333,13 +319,11 @@ sanguis::server::entities::enemies::parameters::irs(
 
 sanguis::server::entities::enemies::parameters &
 sanguis::server::entities::enemies::parameters::add_aura(
-	sanguis::server::auras::unique_ptr &&_aura
+	sanguis::server::auras::create_callback const &_aura
 )
 {
 	auras_.push_back(
-		std::move(
-			_aura
-		)
+		_aura
 	);
 
 	return

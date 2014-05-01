@@ -1,4 +1,3 @@
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/pickup_type.hpp>
 #include <sanguis/collision/world/group.hpp>
@@ -37,7 +36,6 @@ sanguis::server::entities::pickups::pickup::~pickup()
 }
 
 sanguis::server::entities::pickups::pickup::pickup(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::pickup_type const _ptype,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::team const _team
@@ -45,7 +43,6 @@ sanguis::server::entities::pickups::pickup::pickup(
 :
 	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::with_body(
-		_diff_clock,
 		_load_context.entity_dim(
 			sanguis::server::model_name(
 				sanguis::load::pickup_name(
@@ -66,7 +63,7 @@ sanguis::server::entities::pickups::pickup::pickup(
 	),
 	life_timer_(
 		sanguis::diff_timer::parameters(
-			_diff_clock,
+			this->diff_clock(),
 			std::chrono::seconds(
 				30
 			)

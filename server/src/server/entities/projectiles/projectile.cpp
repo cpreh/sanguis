@@ -1,4 +1,3 @@
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/projectile_type.hpp>
 #include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/messages/server/add_projectile.hpp>
@@ -29,15 +28,8 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::projectile_type
-sanguis::server::entities::projectiles::projectile::ptype() const
-{
-	return ptype_;
-}
-
 sanguis::server::entities::projectiles::projectile::projectile(
-	sanguis::diff_clock const &_diff_clock,
-	sanguis::projectile_type const _ptype,
+	sanguis::projectile_type const _projectile_type,
 	sanguis::server::team const _team,
 	sanguis::server::entities::movement_speed const _movement_speed,
 	sanguis::server::model_name const &_model_name,
@@ -52,7 +44,6 @@ sanguis::server::entities::projectiles::projectile::projectile(
 	),
 	sanguis::server::entities::with_links(),
 	sanguis::server::entities::with_velocity(
-		_diff_clock,
 		_load_context.entity_dim(
 			_model_name
 		),
@@ -64,12 +55,12 @@ sanguis::server::entities::projectiles::projectile::projectile(
 	team_(
 		_team
 	),
-	ptype_(
-		_ptype
+	projectile_type_(
+		_projectile_type
 	),
 	life_timer_(
 		sanguis::diff_timer::parameters(
-			_diff_clock,
+			this->diff_clock(),
 			_life_time.get()
 		)
 	)
@@ -165,7 +156,7 @@ sanguis::server::entities::projectiles::projectile::add_message(
 				this->center().get(),
 				this->angle().get(),
 				this->speed().get(),
-				this->ptype()
+				projectile_type_
 			)
 		);
 }

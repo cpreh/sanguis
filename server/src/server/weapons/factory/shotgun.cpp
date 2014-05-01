@@ -31,7 +31,6 @@ sanguis::server::weapons::factory::shotgun(
 		fcppt::make_unique_ptr<
 			sanguis::server::weapons::shotgun
 		>(
-			_parameters.diff_clock(),
 			_parameters.random_generator(),
 			_parameters.weapon_type(),
 			sanguis::server::weapons::modifiers::apply(

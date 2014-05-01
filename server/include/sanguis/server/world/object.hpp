@@ -3,8 +3,7 @@
 
 #include <sanguis/aura_type_fwd.hpp>
 #include <sanguis/buff_type_fwd.hpp>
-#include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/diff_timer.hpp>
+#include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
 #include <sanguis/is_primary_weapon_fwd.hpp>
 #include <sanguis/magazine_remaining.hpp>
@@ -79,7 +78,9 @@ public:
 	~object();
 
 	void
-	update();
+	update(
+		sanguis::duration const &
+	);
 
 	sanguis::server::entities::optional_base_ref const
 	insert(
@@ -281,14 +282,12 @@ private:
 	void
 	insert_spawns(
 		sanguis::creator::spawn_container const &,
-		sanguis::diff_clock const &,
 		sanguis::random_generator &
 	);
 
 	void
 	insert_destructibles(
-		sanguis::creator::destructible_container const &,
-		sanguis::diff_clock const &
+		sanguis::creator::destructible_container const &
 	);
 
 	sanguis::server::entities::with_id &
@@ -317,8 +316,6 @@ private:
 	sanguis::collision::world::object_unique_ptr const collision_world_;
 
 	sanguis::server::world::sight_range_map sight_ranges_;
-
-	sanguis::diff_timer collision_timer_;
 
 	sanguis::server::world::entity_map entities_;
 

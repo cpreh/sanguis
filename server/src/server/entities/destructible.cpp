@@ -1,4 +1,3 @@
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/collision/world/group.hpp>
 #include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/creator/destructible_type.hpp>
@@ -24,7 +23,6 @@
 
 
 sanguis::server::entities::destructible::destructible(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::creator::destructible_type const _type,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::health const _health,
@@ -33,7 +31,6 @@ sanguis::server::entities::destructible::destructible(
 )
 :
 	sanguis::server::entities::with_body(
-		_diff_clock,
 		_load_context.entity_dim(
 			sanguis::server::model_name(
 				sanguis::load::destructible_name(
@@ -46,7 +43,6 @@ sanguis::server::entities::destructible::destructible(
 		_load_context.next_id()
 	),
 	sanguis::server::entities::with_health(
-		_diff_clock,
 		_health,
 		sanguis::server::regeneration(
 			0.f

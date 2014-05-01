@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_WEAPONS_MONSTER_SPAWNER_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_MONSTER_SPAWNER_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/server/weapons/attack_result_fwd.hpp>
@@ -25,8 +24,8 @@ class monster_spawner
 		monster_spawner
 	);
 public:
+	explicit
 	monster_spawner(
-		sanguis::diff_clock const &,
 		sanguis::random_generator &
 	);
 

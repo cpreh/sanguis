@@ -1,4 +1,3 @@
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/regeneration.hpp>
@@ -99,7 +98,6 @@ sanguis::server::entities::with_health::max_health() const
 }
 
 sanguis::server::entities::with_health::with_health(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::server::health const _max_health,
 	sanguis::server::regeneration const _regeneration,
 	sanguis::server::damage::armor_array const &_armor
@@ -121,14 +119,14 @@ sanguis::server::entities::with_health::with_health(
 	),
 	regeneration_timer_(
 		sanguis::diff_timer::parameters(
-			_diff_clock,
+			this->diff_clock(),
 			std::chrono::seconds(
 				1
 			)
 		)
 	),
 	net_health_(
-		_diff_clock
+		this->diff_clock()
 	),
 	health_change_(
 		health_.register_change_callback(

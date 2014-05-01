@@ -1,4 +1,3 @@
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/friend_type.hpp>
 #include <sanguis/primary_weapon_type.hpp>
 #include <sanguis/random_generator.hpp>
@@ -33,14 +32,10 @@
 
 
 sanguis::server::world::pickup_spawner::pickup_spawner(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
 	sanguis::server::environment::object &_env
 )
 :
-	diff_clock_(
-		_diff_clock
-	),
 	random_generator_(
 		_random_generator
 	),
@@ -178,7 +173,6 @@ sanguis::server::world::pickup_spawner::spawn_health(
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::pickups::health
 		>(
-			diff_clock_,
 			env_.load_context(),
 			sanguis::server::team::players,
 			sanguis::server::health(
@@ -203,7 +197,6 @@ sanguis::server::world::pickup_spawner::spawn_monster(
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::pickups::monster
 		>(
-			diff_clock_,
 			random_generator_,
 			env_.load_context(),
 			sanguis::server::team::players,
@@ -225,11 +218,9 @@ sanguis::server::world::pickup_spawner::spawn_weapon(
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::pickups::weapon
 		>(
-			diff_clock_,
 			env_.load_context(),
 			sanguis::server::team::players,
 			sanguis::server::weapons::create(
-				diff_clock_,
 				random_generator_,
 				_weapon_type,
 				_difficulty

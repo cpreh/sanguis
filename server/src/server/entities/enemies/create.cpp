@@ -1,4 +1,3 @@
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/entities/base.hpp>
@@ -25,7 +24,6 @@
 
 sanguis::server::entities::unique_ptr
 sanguis::server::entities::enemies::create(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
 	sanguis::creator::enemy_type const _enemy_type,
 	sanguis::server::world::difficulty const _difficulty,
@@ -35,7 +33,6 @@ sanguis::server::entities::enemies::create(
 )
 {
 	sanguis::server::entities::enemies::factory::parameters const parameters(
-		_diff_clock,
 		_random_generator,
 		_enemy_type,
 		sanguis::server::entities::enemies::difficulty(

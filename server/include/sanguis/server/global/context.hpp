@@ -2,7 +2,6 @@
 #define SANGUIS_SERVER_GLOBAL_CONTEXT_HPP_INCLUDED
 
 #include <sanguis/cheat_type_fwd.hpp>
-#include <sanguis/diff_clock.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
 #include <sanguis/is_primary_weapon_fwd.hpp>
@@ -173,8 +172,6 @@ private:
 	player_opt(
 		sanguis::server::player_id
 	);
-
-	sanguis::diff_clock diff_clock_;
 
 	sanguis::random_generator random_generator_;
 

@@ -31,9 +31,6 @@ sanguis::server::entities::enemies::skills::scatter::scatter(
 )
 :
 	sanguis::server::entities::enemies::skills::skill(),
-	diff_clock_(
-		_diff_clock
-	),
 	random_generator_(
 		_random_generator
 	),
@@ -85,7 +82,6 @@ sanguis::server::entities::enemies::skills::scatter::update(
 				fcppt::make_unique_ptr<
 					sanguis::server::entities::projectiles::scatter
 				>(
-					diff_clock_,
 					random_generator_,
 					env->load_context(),
 					_entity.team(),
@@ -105,7 +101,6 @@ sanguis::server::entities::enemies::skills::scatter::update(
 								fcppt::make_unique_ptr<
 									sanguis::server::entities::projectiles::rocket
 								>(
-									diff_clock_,
 									_env.load_context(),
 									_team,
 									// TODO

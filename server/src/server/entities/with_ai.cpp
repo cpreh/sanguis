@@ -2,7 +2,7 @@
 #include <sanguis/server/ai/base.hpp>
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/ai/manager.hpp>
-#include <sanguis/server/auras/container.hpp>
+#include <sanguis/server/auras/create_callback_container.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_auras_id.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
@@ -20,11 +20,10 @@
 
 
 sanguis::server::entities::with_ai::with_ai(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator  &_random_generator,
 	sanguis::server::ai::create_function const &_create_ai,
 	sanguis::server::weapons::unique_ptr &&_start_weapon,
-	sanguis::server::auras::container &&_auras,
+	sanguis::server::auras::create_callback_container const &_auras,
 	sanguis::server::weapons::ias const _ias,
 	sanguis::server::weapons::irs const _irs
 )
@@ -32,9 +31,7 @@ sanguis::server::entities::with_ai::with_ai(
 	sanguis::server::entities::ifaces::with_links(),
 	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::with_auras_id(
-		std::move(
-			_auras
-		)
+		_auras
 	),
 	sanguis::server::entities::with_weapon(
 		std::move(
@@ -42,9 +39,6 @@ sanguis::server::entities::with_ai::with_ai(
 		),
 		_ias,
 		_irs
-	),
-	diff_clock_(
-		_diff_clock
 	),
 	random_generator_(
 		_random_generator
@@ -88,7 +82,7 @@ sanguis::server::entities::with_ai::on_create()
 		fcppt::make_unique_ptr<
 			sanguis::server::ai::manager
 		>(
-			diff_clock_,
+			this->diff_clock(),
 			random_generator_,
 			*ai_,
 			*this

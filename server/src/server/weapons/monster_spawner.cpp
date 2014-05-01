@@ -1,4 +1,3 @@
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/primary_weapon_type.hpp>
 #include <sanguis/random_generator.hpp>
@@ -29,12 +28,10 @@
 
 
 sanguis::server::weapons::monster_spawner::monster_spawner(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator
 )
 :
 	sanguis::server::weapons::weapon(
-		_diff_clock,
 		_random_generator,
 		sanguis::weapon_type(
 			sanguis::primary_weapon_type::pistol
@@ -72,7 +69,6 @@ sanguis::server::weapons::monster_spawner::do_attack(
 		sanguis::server::weapons::insert_to_attack_result(
 			_attack.environment().insert(
 				sanguis::server::entities::enemies::create(
-					this->diff_clock(),
 					this->random_generator(),
 					fcppt::random::distribution::make_basic(
 						fcppt::random::distribution::parameters::make_uniform_enum<

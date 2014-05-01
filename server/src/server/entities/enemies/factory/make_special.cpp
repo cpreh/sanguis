@@ -29,10 +29,6 @@ sanguis::server::entities::enemies::factory::make_special(
 	sanguis::server::entities::enemies::parameters &&_parameters
 )
 {
-	sanguis::diff_clock const &diff_clock(
-		_parameters.diff_clock()
-	);
-
 	sanguis::server::entities::enemies::difficulty const difficulty(
 		_parameters.difficulty()
 	);
@@ -72,8 +68,7 @@ sanguis::server::entities::enemies::factory::make_special(
 				_random_generator,
 				amounts[
 					0
-				],
-				difficulty
+				]
 			)
 		)
 	);
@@ -95,12 +90,10 @@ sanguis::server::entities::enemies::factory::make_special(
 			),
 			modifier_result,
 			sanguis::server::entities::enemies::factory::make_skills(
-				diff_clock,
 				_random_generator,
 				amounts[
 					1
-				],
-				difficulty
+				]
 			)
 		);
 }

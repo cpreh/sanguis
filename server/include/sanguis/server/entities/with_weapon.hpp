@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_WITH_WEAPON_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_WITH_WEAPON_HPP_INCLUDED
 
+#include <sanguis/duration.hpp>
 #include <sanguis/is_primary_weapon_fwd.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
@@ -48,6 +49,12 @@ protected:
 	virtual
 	void
 	update()
+	override;
+
+	void
+	tick(
+		sanguis::duration const &
+	)
 	override;
 
 	sanguis::optional_primary_weapon_type const
@@ -144,6 +151,12 @@ private:
 
 	void
 	update_weapon(
+		sanguis::server::entities::with_weapon::optional_weapon_ref const &
+	);
+
+	void
+	tick_weapon(
+		sanguis::duration const &,
 		sanguis::server::entities::with_weapon::optional_weapon_ref const &
 	);
 

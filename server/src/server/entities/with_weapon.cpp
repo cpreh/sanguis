@@ -90,6 +90,26 @@ sanguis::server::entities::with_weapon::update()
 		);
 }
 
+void
+sanguis::server::entities::with_weapon::tick(
+	sanguis::duration const &_duration
+)
+{
+	sanguis::server::entities::base::tick(
+		_duration
+	);
+
+	this->tick_weapon(
+		_duration,
+		this->primary_weapon_ref()
+	);
+
+	this->tick_weapon(
+		_duration,
+		this->secondary_weapon_ref()
+	);
+}
+
 sanguis::optional_primary_weapon_type const
 sanguis::server::entities::with_weapon::primary_weapon_type() const
 {
@@ -430,6 +450,20 @@ sanguis::server::entities::with_weapon::update_weapon(
 		_weapon
 	)
 		_weapon->update();
+}
+
+void
+sanguis::server::entities::with_weapon::tick_weapon(
+	sanguis::duration const &_duration,
+	sanguis::server::entities::with_weapon::optional_weapon_ref const &_weapon
+)
+{
+	if(
+		_weapon
+	)
+		_weapon->tick(
+			_duration
+		);
 }
 
 void

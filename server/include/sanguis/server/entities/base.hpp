@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_BASE_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_BASE_HPP_INCLUDED
 
+#include <sanguis/diff_clock.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
@@ -45,6 +46,12 @@ public:
 	virtual
 	void
 	update();
+
+	virtual
+	void
+	tick(
+		sanguis::duration const &
+	);
 
 	/**
 	\brief Called when the entity is removed from the game
@@ -91,6 +98,9 @@ public:
 
 	virtual
 	~base();
+protected:
+	sanguis::diff_clock const &
+	diff_clock() const;
 private:
 	virtual
 	void
@@ -103,6 +113,8 @@ private:
 	);
 
 	sanguis::server::environment::optional_object_ref environment_;
+
+	sanguis::diff_clock diff_clock_;
 };
 
 }

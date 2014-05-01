@@ -28,7 +28,6 @@ sanguis::server::weapons::factory::rocket_launcher(
 		fcppt::make_unique_ptr<
 			sanguis::server::weapons::rocket_launcher
 		>(
-			_parameters.diff_clock(),
 			_parameters.random_generator(),
 			_parameters.weapon_type(),
 			sanguis::server::weapons::modifiers::apply(

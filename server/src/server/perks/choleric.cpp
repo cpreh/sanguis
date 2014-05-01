@@ -35,9 +35,6 @@ sanguis::server::perks::choleric::choleric(
 	sanguis::server::perks::perk(
 		sanguis::perk_type::choleric
 	),
-	diff_clock_(
-		_diff_clock
-	),
 	shoot_timer_(
 		sanguis::diff_timer::parameters(
 			_diff_clock,
@@ -126,7 +123,6 @@ sanguis::server::perks::choleric::update(
 						fcppt::make_unique_ptr<
 							sanguis::server::entities::projectiles::simple_bullet
 						>(
-							diff_clock_,
 							_env.load_context(),
 							_entity.team(),
 							sanguis::server::damage::unit(
@@ -140,7 +136,6 @@ sanguis::server::perks::choleric::update(
 						fcppt::make_unique_ptr<
 							sanguis::server::entities::projectiles::rocket
 						>(
-							diff_clock_,
 							_env.load_context(),
 							_entity.team(),
 							sanguis::server::damage::unit(

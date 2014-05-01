@@ -1,4 +1,3 @@
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>
@@ -9,7 +8,6 @@
 
 
 sanguis::server::entities::enemies::factory::parameters::parameters(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
 	sanguis::creator::enemy_type const _enemy_type,
 	sanguis::server::entities::enemies::difficulty const _difficulty,
@@ -18,9 +16,6 @@ sanguis::server::entities::enemies::factory::parameters::parameters(
 	sanguis::server::entities::enemies::special_chance const _special_chance
 )
 :
-	diff_clock_(
-		_diff_clock
-	),
 	random_generator_(
 		_random_generator
 	),
@@ -40,13 +35,6 @@ sanguis::server::entities::enemies::factory::parameters::parameters(
 		_special_chance
 	)
 {
-}
-
-sanguis::diff_clock const &
-sanguis::server::entities::enemies::factory::parameters::diff_clock() const
-{
-	return
-		diff_clock_;
 }
 
 sanguis::random_generator &

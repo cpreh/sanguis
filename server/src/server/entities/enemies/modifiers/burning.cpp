@@ -25,7 +25,6 @@ sanguis::server::entities::enemies::modifiers::burning(
 		sanguis::server::auras::burn_create<
 			sanguis::server::buffs::burn
 		>(
-			_parameters.diff_clock(),
 			sanguis::server::radius(
 				400.f
 			),

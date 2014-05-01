@@ -1,5 +1,5 @@
-#ifndef SANGUIS_SERVER_ENTITIES_ENEMIES_SKILLS_FACTORY_CALLBACK_VECTOR_HPP_INCLUDED
-#define SANGUIS_SERVER_ENTITIES_ENEMIES_SKILLS_FACTORY_CALLBACK_VECTOR_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_ENTITIES_ENEMIES_SKILLS_FACTORY_CONTAINER_HPP_INCLUDED
+#define SANGUIS_SERVER_ENTITIES_ENEMIES_SKILLS_FACTORY_CONTAINER_HPP_INCLUDED
 
 #include <sanguis/server/entities/enemies/skills/factory/callback.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -24,7 +24,7 @@ typedef
 std::vector<
 	sanguis::server::entities::enemies::skills::factory::callback
 >
-callback_vector;
+container;
 
 }
 }

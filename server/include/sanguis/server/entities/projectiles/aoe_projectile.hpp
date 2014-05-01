@@ -2,7 +2,6 @@
 #define SANGUIS_SERVER_ENTITIES_PROJECTILES_AOE_PROJECTILE_HPP_INCLUDED
 
 #include <sanguis/aoe_projectile_type.hpp>
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/aoe.hpp>
 #include <sanguis/server/direction_fwd.hpp>
@@ -33,7 +32,6 @@ class aoe_projectile
 	);
 protected:
 	aoe_projectile(
-		sanguis::diff_clock const &,
 		sanguis::aoe_projectile_type,
 		sanguis::server::team,
 		sanguis::server::entities::movement_speed,

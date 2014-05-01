@@ -3,7 +3,7 @@
 #include <sanguis/server/entities/enemies/attribute_container.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/entities/enemies/finalize_special_parameters.hpp>
-#include <sanguis/server/entities/enemies/skills/container.hpp>
+#include <sanguis/server/entities/enemies/skills/factory/container.hpp>
 #include <sanguis/server/entities/enemies/parameters.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 
@@ -12,7 +12,7 @@ sanguis::server::entities::enemies::parameters &
 sanguis::server::entities::enemies::finalize_special_parameters(
 	sanguis::server::entities::enemies::parameters &_parameters,
 	sanguis::server::entities::enemies::attribute_container const &_attributes,
-	sanguis::server::entities::enemies::skills::container const &_skills
+	sanguis::server::entities::enemies::skills::factory::container const &_skills
 )
 {
 	// TODO: Assign variable factors to modifiers/skills

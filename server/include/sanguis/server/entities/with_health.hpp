@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_ENTITIES_WITH_HEALTH_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_WITH_HEALTH_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/server/health_fwd.hpp>
 #include <sanguis/server/regeneration_fwd.hpp>
@@ -58,7 +57,6 @@ public:
 	max_health() const;
 protected:
 	with_health(
-		sanguis::diff_clock const &,
 		sanguis::server::health,
 		sanguis::server::regeneration,
 		sanguis::server::damage::armor_array const &

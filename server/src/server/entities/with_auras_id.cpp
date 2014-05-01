@@ -1,7 +1,7 @@
 #include <sanguis/aura_type_vector.hpp>
 #include <sanguis/optional_aura_type.hpp>
 #include <sanguis/server/auras/aura.hpp>
-#include <sanguis/server/auras/container.hpp>
+#include <sanguis/server/auras/create_callback_container.hpp>
 #include <sanguis/server/auras/unique_ptr.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
 #include <sanguis/server/entities/with_auras_id.hpp>
@@ -44,14 +44,12 @@ sanguis::server::entities::with_auras_id::add_aura(
 }
 
 sanguis::server::entities::with_auras_id::with_auras_id(
-	sanguis::server::auras::container &&_auras
+	sanguis::server::auras::create_callback_container const &_auras
 )
 :
 	sanguis::server::entities::ifaces::with_id(),
 	sanguis::server::entities::with_auras(
-		std::move(
-			_auras
-		)
+		_auras
 	)
 {
 }
@@ -66,13 +64,13 @@ sanguis::server::entities::with_auras_id::aura_types() const
 	sanguis::aura_type_vector ret;
 
 	for(
-		auto const &aura
+		sanguis::server::auras::unique_ptr const &aura
 		:
 		this->auras()
 	)
 	{
 		sanguis::optional_aura_type const type(
-			aura.type()
+			aura->type()
 		);
 
 		if(

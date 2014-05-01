@@ -84,7 +84,6 @@
 #include <sanguis/server/world/spawn_entity.hpp>
 #include <sanguis/server/world/spawn_parameters.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
-#include <sge/timer/elapsed_and_reset.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
@@ -96,7 +95,6 @@
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <chrono>
 #include <functional>
 #include <memory>
 #include <utility>
@@ -154,31 +152,20 @@ sanguis::server::world::object::object(
 		)
 	),
 	sight_ranges_(),
-	collision_timer_(
-		sanguis::diff_timer::parameters(
-			_parameters.diff_clock(),
-			std::chrono::seconds(
-				1
-			)
-		)
-	),
 	entities_(),
 	server_entities_(),
 	pickup_spawner_(
-		_parameters.diff_clock(),
 		_parameters.random_generator(),
 		this->environment()
 	)
 {
 	this->insert_spawns(
 		_generated_world.spawns(),
-		_parameters.diff_clock(),
 		_parameters.random_generator()
 	);
 
 	this->insert_destructibles(
-		_generated_world.destructibles(),
-		_parameters.diff_clock()
+		_generated_world.destructibles()
 	);
 }
 
@@ -187,16 +174,10 @@ sanguis::server::world::object::~object()
 }
 
 void
-sanguis::server::world::object::update()
+sanguis::server::world::object::update(
+	sanguis::duration const &_elapsed_time
+)
 {
-	sanguis::duration const duration(
-		sge::timer::elapsed_and_reset<
-			sanguis::duration
-		>(
-			collision_timer_
-		)
-	);
-
 	// Don't process worlds that have no players in them
 	if(
 		sight_ranges_.empty()
@@ -210,18 +191,24 @@ sanguis::server::world::object::update()
 	)
 		cur_entity.second->world_collision(
 			grid_,
-			duration
+			_elapsed_time
 		);
 
 	collision_world_->update(
-		duration
+		_elapsed_time
 	);
 
 	auto const update_entity(
-		[](
+		[
+			_elapsed_time
+		](
 			sanguis::server::entities::base &_entity
 		)
 		{
+			_entity.tick(
+				_elapsed_time
+			);
+
 			_entity.update();
 		}
 	);
@@ -947,7 +934,6 @@ sanguis::server::world::object::send_player_specific(
 void
 sanguis::server::world::object::insert_spawns(
 	sanguis::creator::spawn_container const &_spawns,
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator
 )
 {
@@ -959,7 +945,6 @@ sanguis::server::world::object::insert_spawns(
 		this->insert(
 			sanguis::server::world::spawn_entity(
 				spawn,
-				_diff_clock,
 				_random_generator,
 				this->load_context(),
 				difficulty_
@@ -972,8 +957,7 @@ sanguis::server::world::object::insert_spawns(
 
 void
 sanguis::server::world::object::insert_destructibles(
-	sanguis::creator::destructible_container const &_destructibles,
-	sanguis::diff_clock const &_diff_clock
+	sanguis::creator::destructible_container const &_destructibles
 )
 {
 	for(
@@ -984,7 +968,6 @@ sanguis::server::world::object::insert_destructibles(
 		this->insert(
 			sanguis::server::world::make_destructible(
 				destructible.type(),
-				_diff_clock,
 				this->load_context(),
 				difficulty_
 			),

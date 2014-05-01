@@ -1,4 +1,3 @@
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator.hpp>
 #include <sanguis/random_variate.hpp>
 #include <sanguis/weapon_attribute_type.hpp>
@@ -30,14 +29,12 @@
 
 
 sanguis::server::weapons::shotgun::shotgun(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
 	sanguis::weapon_type const _weapon_type,
 	sanguis::server::weapons::shotgun_parameters const &_parameters
 )
 :
 	sanguis::server::weapons::weapon(
-		_diff_clock,
 		_random_generator,
 		_weapon_type,
 		sanguis::server::weapons::attributes::optional_accuracy(
@@ -114,7 +111,6 @@ sanguis::server::weapons::shotgun::do_attack(
 				fcppt::make_unique_ptr<
 					sanguis::server::entities::projectiles::simple_bullet
 				>(
-					this->diff_clock(),
 					_attack.environment().load_context(),
 					_attack.team(),
 					damage_.value(),

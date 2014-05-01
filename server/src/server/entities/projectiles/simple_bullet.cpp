@@ -1,4 +1,3 @@
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/projectile_type.hpp>
 #include <sanguis/server/dim.hpp>
@@ -19,7 +18,6 @@
 
 
 sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::team const _team,
 	sanguis::server::damage::unit const _damage,
@@ -27,7 +25,6 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 )
 :
 	sanguis::server::entities::projectiles::projectile(
-		_diff_clock,
 		sanguis::projectile_type::simple_bullet,
 		_team,
 		sanguis::server::entities::movement_speed(

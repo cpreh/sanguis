@@ -1,4 +1,3 @@
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/friend_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
@@ -34,7 +33,6 @@
 
 
 sanguis::server::entities::pickups::monster::monster(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::team const _team,
@@ -43,13 +41,9 @@ sanguis::server::entities::pickups::monster::monster(
 )
 :
 	sanguis::server::entities::pickups::pickup(
-		_diff_clock,
 		sanguis::pickup_type::monster,
 		_load_context,
 		_team
-	),
-	diff_clock_(
-		_diff_clock
 	),
 	random_generator_(
 		_random_generator
@@ -76,7 +70,6 @@ sanguis::server::entities::pickups::monster::do_pickup(
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::friend_
 		>(
-			diff_clock_,
 			random_generator_,
 			friend_type_,
 			this->environment()->load_context(),
@@ -106,7 +99,6 @@ sanguis::server::entities::pickups::monster::do_pickup(
 			fcppt::make_unique_ptr<
 				sanguis::server::weapons::melee
 			>(
-				diff_clock_,
 				random_generator_,
 				sanguis::server::weapons::range(
 					100.f

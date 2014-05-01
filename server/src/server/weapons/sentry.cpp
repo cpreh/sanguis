@@ -1,4 +1,3 @@
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/friend_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/secondary_weapon_type.hpp>
@@ -31,14 +30,12 @@
 
 
 sanguis::server::weapons::sentry::sentry(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
 	sanguis::server::weapons::sentry_weapon const &_sentry_weapon,
 	sanguis::server::weapons::sentry_parameters const &_parameters
 )
 :
 	sanguis::server::weapons::weapon(
-		_diff_clock,
 		_random_generator,
 		sanguis::weapon_type(
 			sanguis::secondary_weapon_type::sentry
@@ -78,7 +75,6 @@ sanguis::server::weapons::sentry::do_attack(
 				fcppt::make_unique_ptr<
 					sanguis::server::entities::friend_
 				>(
-					this->diff_clock(),
 					this->random_generator(),
 					sanguis::friend_type::sentry,
 					_attack.environment().load_context(),

@@ -5,7 +5,7 @@
 #include <sanguis/server/ai/create_simple.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/auras/aura.hpp>
-#include <sanguis/server/auras/container.hpp>
+#include <sanguis/server/auras/create_callback_container.hpp>
 #include <sanguis/server/damage/full.hpp>
 #include <sanguis/server/damage/list.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
@@ -53,7 +53,6 @@ sanguis::server::entities::enemies::factory::maggot(
 			fcppt::make_unique_ptr<
 				sanguis::server::weapons::melee
 			>(
-				_parameters.diff_clock(),
 				_parameters.random_generator(),
 				sanguis::server::weapons::range(
 					75.f
@@ -81,6 +80,6 @@ sanguis::server::entities::enemies::factory::maggot(
 			sanguis::server::exp(
 				1.f
 			),
-			sanguis::server::auras::container()
+			sanguis::server::auras::create_callback_container()
 		);
 }

@@ -1,4 +1,3 @@
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/weapon_type.hpp>
@@ -23,14 +22,12 @@
 
 
 sanguis::server::weapons::rocket_launcher::rocket_launcher(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
 	sanguis::weapon_type const _weapon_type,
 	sanguis::server::weapons::rocket_launcher_parameters const &_parameters
 )
 :
 	sanguis::server::weapons::weapon(
-		_diff_clock,
 		_random_generator,
 		_weapon_type,
 		sanguis::server::weapons::attributes::optional_accuracy(
@@ -73,7 +70,6 @@ sanguis::server::weapons::rocket_launcher::do_attack(
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::projectiles::rocket
 		>(
-			this->diff_clock(),
 			_attack.environment().load_context(),
 			_attack.team(),
 			damage_.value(),

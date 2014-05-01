@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_ENTITIES_SPAWNS_LIMITED_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_SPAWNS_LIMITED_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/creator/enemy_type_fwd.hpp>
@@ -34,7 +33,6 @@ class limited
 	);
 public:
 	limited(
-		sanguis::diff_clock const &,
 		sanguis::random_generator &,
 		sanguis::creator::enemy_type,
 		sanguis::server::world::difficulty,

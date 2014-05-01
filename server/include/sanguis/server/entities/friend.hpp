@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_ENTITIES_FRIEND_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_FRIEND_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/friend_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/collision/world/group_field_fwd.hpp>
@@ -47,7 +46,6 @@ class friend_
 	);
 public:
 	friend_(
-		sanguis::diff_clock const &,
 		sanguis::random_generator &,
 		sanguis::friend_type,
 		sanguis::server::environment::load_context &,

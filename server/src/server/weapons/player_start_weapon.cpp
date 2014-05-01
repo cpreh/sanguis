@@ -1,4 +1,3 @@
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/primary_weapon_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
@@ -19,7 +18,6 @@
 
 sanguis::server::weapons::unique_ptr
 sanguis::server::weapons::player_start_weapon(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator
 )
 {
@@ -27,7 +25,6 @@ sanguis::server::weapons::player_start_weapon(
 		fcppt::make_unique_ptr<
 			sanguis::server::weapons::pistol
 		>(
-			_diff_clock,
 			_random_generator,
 			sanguis::weapon_type(
 				sanguis::primary_weapon_type::pistol

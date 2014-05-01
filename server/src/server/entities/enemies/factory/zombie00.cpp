@@ -7,7 +7,7 @@
 #include <sanguis/server/ai/create_simple.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/auras/aura.hpp>
-#include <sanguis/server/auras/container.hpp>
+#include <sanguis/server/auras/create_callback_container.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
@@ -57,7 +57,6 @@ sanguis::server::entities::enemies::factory::zombie00(
 			fcppt::make_unique_ptr<
 				sanguis::server::weapons::pistol
 			>(
-				_parameters.diff_clock(),
 				_parameters.random_generator(),
 				sanguis::weapon_type(
 					sanguis::primary_weapon_type::pistol
@@ -98,6 +97,6 @@ sanguis::server::entities::enemies::factory::zombie00(
 			sanguis::server::exp(
 				10.f
 			),
-			sanguis::server::auras::container()
+			sanguis::server::auras::create_callback_container()
 		);
 }

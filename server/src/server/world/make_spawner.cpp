@@ -1,4 +1,3 @@
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/entities/base.hpp>
@@ -16,7 +15,6 @@
 sanguis::server::entities::unique_ptr
 sanguis::server::world::make_spawner(
 	sanguis::creator::enemy_type const _enemy_type,
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
 	sanguis::server::world::difficulty const _difficulty
 )
@@ -25,7 +23,6 @@ sanguis::server::world::make_spawner(
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::spawns::limited
 		>(
-			_diff_clock,
 			_random_generator,
 			_enemy_type,
 			_difficulty,

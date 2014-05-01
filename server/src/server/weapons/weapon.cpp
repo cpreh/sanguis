@@ -1,9 +1,11 @@
-#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/diff_clock.hpp>
+#include <sanguis/duration.hpp>
 #include <sanguis/magazine_extra.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/magazine_size.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/update_diff_clock.hpp>
 #include <sanguis/weapon_attribute_type.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_status.hpp>
@@ -58,7 +60,6 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::weapons::weapon::weapon(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
 	sanguis::weapon_type const _type,
 	sanguis::server::weapons::attributes::optional_accuracy const _accuracy,
@@ -69,9 +70,7 @@ sanguis::server::weapons::weapon::weapon(
 	sanguis::server::weapons::optional_reload_time const _reload_time
 )
 :
-	diff_clock_(
-		_diff_clock
-	),
+	diff_clock_(),
 	random_generator_(
 		_random_generator
 	),
@@ -194,6 +193,17 @@ sanguis::server::weapons::weapon::update()
 
 	this->process_event(
 		sanguis::server::weapons::events::poll()
+	);
+}
+
+void
+sanguis::server::weapons::weapon::tick(
+	sanguis::duration const &_duration
+)
+{
+	sanguis::update_diff_clock(
+		diff_clock_,
+		_duration
 	);
 }
 

@@ -1,7 +1,8 @@
 #ifndef SANGUIS_SERVER_WEAPONS_WEAPON_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_WEAPON_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/diff_clock.hpp>
+#include <sanguis/duration.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/magazine_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
@@ -53,7 +54,6 @@ class weapon
 	);
 protected:
 	weapon(
-		sanguis::diff_clock const &,
 		sanguis::random_generator &,
 		sanguis::weapon_type,
 		sanguis::server::weapons::attributes::optional_accuracy,
@@ -83,6 +83,11 @@ public:
 
 	void
 	update();
+
+	void
+	tick(
+		sanguis::duration const &
+	);
 
 	sanguis::weapon_type
 	type() const;
@@ -160,7 +165,7 @@ private:
 	void
 	update_magazine_remaining();
 
-	sanguis::diff_clock const &diff_clock_;
+	sanguis::diff_clock diff_clock_;
 
 	sanguis::random_generator &random_generator_;
 

@@ -5,7 +5,6 @@
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/perk_type.hpp>
 #include <sanguis/random_seed.hpp>
-#include <sanguis/update_diff_clock.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/messages/server/base.hpp>
@@ -91,7 +90,6 @@ sanguis::server::global::context::context(
 )
 :
 	sanguis::server::world::context(),
-	diff_clock_(),
 	random_generator_(
 		sanguis::random_seed()
 	),
@@ -121,7 +119,6 @@ sanguis::server::global::context::context(
 	worlds_(
 		sanguis::server::global::generate_worlds(
 			sanguis::server::world::parameters(
-				diff_clock_,
 				random_generator_,
 				*this,
 				*load_context_
@@ -152,7 +149,6 @@ sanguis::server::global::context::insert_player(
 
 	sanguis::server::entities::player_unique_ptr player_ptr(
 		sanguis::server::create_player(
-			diff_clock_,
 			random_generator_,
 			*load_context_,
 			_name,
@@ -417,7 +413,6 @@ sanguis::server::global::context::player_cheat(
 )
 {
 	sanguis::server::cheat::process(
-		diff_clock_,
 		random_generator_,
 		this->player_exn(
 			_player_id
@@ -467,17 +462,14 @@ sanguis::server::global::context::update(
 	sanguis::duration const &_diff
 )
 {
-	sanguis::update_diff_clock(
-		diff_clock_,
-		_diff
-	);
-
 	for(
 		auto const &cur_world
 		:
 		worlds_.worlds()
 	)
-		cur_world.second->update();
+		cur_world.second->update(
+			_diff
+		);
 }
 
 bool

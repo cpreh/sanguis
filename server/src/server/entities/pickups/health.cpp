@@ -1,4 +1,3 @@
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/pickup_type.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/team.hpp>
@@ -11,14 +10,12 @@
 
 
 sanguis::server::entities::pickups::health::health(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::team const _team,
 	sanguis::server::health const _amount
 )
 :
 	sanguis::server::entities::pickups::pickup(
-		_diff_clock,
 		sanguis::pickup_type::health,
 		_load_context,
 		_team

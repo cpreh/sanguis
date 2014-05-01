@@ -56,6 +56,8 @@ set(
 	include/sanguis/server/auras/burn_create.hpp
 	include/sanguis/server/auras/collision_groups.hpp
 	include/sanguis/server/auras/container.hpp
+	include/sanguis/server/auras/create_callback.hpp
+	include/sanguis/server/auras/create_callback_container.hpp
 	include/sanguis/server/auras/influence.hpp
 	include/sanguis/server/auras/influence_fwd.hpp
 	include/sanguis/server/auras/slow_create.hpp
@@ -66,6 +68,7 @@ set(
 	include/sanguis/server/auras/unique_ptr.hpp
 	include/sanguis/server/auras/update_sight.hpp
 	include/sanguis/server/auras/weapon_pickup_candidates.hpp
+	include/sanguis/server/auras/wrap_create.hpp
 	include/sanguis/server/buffs/buff.hpp
 	include/sanguis/server/buffs/buff_fwd.hpp
 	include/sanguis/server/buffs/burn.hpp
@@ -206,7 +209,7 @@ set(
 	include/sanguis/server/entities/enemies/skills/container.hpp
 	include/sanguis/server/entities/enemies/skills/cooldown.hpp
 	include/sanguis/server/entities/enemies/skills/factory/callback.hpp
-	include/sanguis/server/entities/enemies/skills/factory/callback_vector.hpp
+	include/sanguis/server/entities/enemies/skills/factory/container.hpp
 	include/sanguis/server/entities/enemies/skills/factory/create_callbacks.hpp
 	include/sanguis/server/entities/enemies/skills/factory/parameters.hpp
 	include/sanguis/server/entities/enemies/skills/factory/parameters_fwd.hpp

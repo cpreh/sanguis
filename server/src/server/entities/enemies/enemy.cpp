@@ -1,4 +1,3 @@
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/collision/world/group.hpp>
 #include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/creator/enemy_type.hpp>
@@ -49,7 +48,6 @@ sanguis::server::entities::enemies::enemy::enemy(
 )
 :
 	sanguis::server::entities::with_ai(
-		_parameters.diff_clock(),
 		_parameters.random_generator(),
 		_parameters.ai_create_function(),
 		std::move(
@@ -66,14 +64,12 @@ sanguis::server::entities::enemies::enemy::enemy(
 		_parameters.load_context().next_id()
 	),
 	sanguis::server::entities::with_health(
-		_parameters.diff_clock(),
 		_parameters.health(),
 		_parameters.regeneration(),
 		_parameters.armor()
 	),
 	sanguis::server::entities::with_links(),
 	sanguis::server::entities::with_velocity(
-		_parameters.diff_clock(),
 		_parameters.load_context().entity_dim(
 			sanguis::server::model_name(
 				sanguis::load::enemy_name(

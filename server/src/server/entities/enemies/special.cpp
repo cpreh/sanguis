@@ -4,10 +4,13 @@
 #include <sanguis/server/entities/enemies/make_name.hpp>
 #include <sanguis/server/entities/enemies/parameters.hpp>
 #include <sanguis/server/entities/enemies/special.hpp>
-#include <sanguis/server/entities/enemies/skills/container.hpp>
 #include <sanguis/server/entities/enemies/skills/skill.hpp>
+#include <sanguis/server/entities/enemies/skills/unique_ptr.hpp>
+#include <sanguis/server/entities/enemies/skills/factory/callback.hpp>
+#include <sanguis/server/entities/enemies/skills/factory/container.hpp>
+#include <sanguis/server/entities/enemies/skills/factory/parameters.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
-#include <fcppt/container/ptr/push_back_unique_ptr.hpp>
+#include <fcppt/algorithm/map.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -16,7 +19,7 @@
 sanguis::server::entities::enemies::special::special(
 	sanguis::server::entities::enemies::parameters &&_parameters,
 	sanguis::server::entities::enemies::attribute_container const &_attributes,
-	sanguis::server::entities::enemies::skills::container &&_skills
+	sanguis::server::entities::enemies::skills::factory::container const &_skills
 )
 :
 	sanguis::server::entities::enemies::enemy(
@@ -28,28 +31,39 @@ sanguis::server::entities::enemies::special::special(
 			)
 		)
 	),
-	skills_(),
+	skills_(
+		fcppt::algorithm::map<
+			sanguis::server::entities::enemies::skills::container
+		>(
+			_skills,
+			[
+				&_parameters,
+				this
+			](
+				sanguis::server::entities::enemies::skills::factory::callback const &_create
+			)
+			{
+				return
+					_create(
+						sanguis::server::entities::enemies::skills::factory::parameters(
+							this->diff_clock(),
+							_parameters.random_generator(),
+							_parameters.difficulty()
+						)
+					);
+			}
+		)
+	),
 	name_(
 		sge::charconv::fcppt_string_to_utf8(
 			sanguis::server::entities::enemies::make_name(
 				_attributes,
-				_skills,
+				skills_,
 				this->enemy_type()
 			)
 		)
 	)
 {
-	for(
-		auto &skill
-		:
-		_skills
-	)
-		fcppt::container::ptr::push_back_unique_ptr(
-			skills_,
-			std::move(
-				skill
-			)
-		);
 }
 
 sanguis::server::entities::enemies::special::~special()
@@ -62,11 +76,11 @@ sanguis::server::entities::enemies::special::update()
 	sanguis::server::entities::enemies::enemy::update();
 
 	for(
-		auto &skill
+		sanguis::server::entities::enemies::skills::unique_ptr const &skill
 		:
 		skills_
 	)
-		skill.update(
+		skill->update(
 			*this
 		);
 }

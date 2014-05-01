@@ -4,7 +4,6 @@
 #include <sanguis/server/random/draw.hpp>
 #include <sanguis/server/random/equal_function.hpp>
 #include <sanguis/server/random/less_function.hpp>
-#include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/entities/enemies/factory/make_modifiers.hpp>
 #include <sanguis/server/entities/enemies/modifiers/callback.hpp>
 #include <sanguis/server/entities/enemies/modifiers/container.hpp>
@@ -17,8 +16,7 @@
 sanguis::server::entities::enemies::modifiers::container
 sanguis::server::entities::enemies::factory::make_modifiers(
 	sanguis::random_generator &_random_generator,
-	sanguis::server::random::amount const _amount,
-	sanguis::server::entities::enemies::difficulty const _difficulty
+	sanguis::server::random::amount const _amount
 )
 {
 	return

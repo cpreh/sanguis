@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PLAYER_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PLAYER_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/is_primary_weapon_fwd.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/perk_type_fwd.hpp>
@@ -63,7 +62,6 @@ class player
 	);
 public:
 	player(
-		sanguis::diff_clock const &,
 		sanguis::random_generator &,
 		sanguis::server::environment::load_context &,
 		sanguis::server::health,
@@ -191,8 +189,6 @@ private:
 		sanguis::server::entities::pickups::weapon_ref
 	>
 	weapon_pickup_set;
-
-	sanguis::diff_clock const &diff_clock_;
 
 	sanguis::server::string const name_;
 

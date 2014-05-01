@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_ENTITIES_DESTRUCTIBLE_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_DESTRUCTIBLE_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/collision/world/group_field_fwd.hpp>
 #include <sanguis/creator/destructible_type.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
@@ -37,7 +36,6 @@ class destructible
 	);
 public:
 	destructible(
-		sanguis::diff_clock const &,
 		sanguis::creator::destructible_type,
 		sanguis::server::environment::load_context &,
 		sanguis::server::health,

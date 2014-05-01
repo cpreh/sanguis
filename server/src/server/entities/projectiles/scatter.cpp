@@ -1,4 +1,3 @@
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/projectile_type.hpp>
@@ -25,7 +24,6 @@
 
 
 sanguis::server::entities::projectiles::scatter::scatter(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::team const _team,
@@ -34,7 +32,6 @@ sanguis::server::entities::projectiles::scatter::scatter(
 )
 :
 	sanguis::server::entities::projectiles::projectile(
-		_diff_clock,
 		sanguis::projectile_type::simple_bullet,
 		_team,
 		sanguis::server::entities::movement_speed(
@@ -57,7 +54,7 @@ sanguis::server::entities::projectiles::scatter::scatter(
 	),
 	shoot_timer_(
 		sanguis::diff_timer::parameters(
-			_diff_clock,
+			this->diff_clock(),
 			// TODO
 			sanguis::duration_second(
 				0.5f

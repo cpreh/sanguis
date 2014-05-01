@@ -1,4 +1,3 @@
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/collision/world/body_base.hpp>
 #include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/server/angle.hpp>
@@ -28,7 +27,6 @@
 
 
 sanguis::server::entities::with_body::with_body(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::server::dim const _dim
 )
 :
@@ -64,7 +62,7 @@ sanguis::server::entities::with_body::with_body(
 		// TODO: Put the collision groups here!
 	),
 	net_angle_(
-		_diff_clock
+		this->diff_clock()
 	)
 {
 }

@@ -1,5 +1,4 @@
 #include <sanguis/aoe_projectile_type.hpp>
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/server/aoe.hpp>
@@ -32,7 +31,6 @@
 
 
 sanguis::server::entities::projectiles::grenade::grenade(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::team const _team,
 	sanguis::server::damage::unit const _damage,
@@ -42,7 +40,6 @@ sanguis::server::entities::projectiles::grenade::grenade(
 )
 :
 	sanguis::server::entities::projectiles::aoe_projectile(
-		_diff_clock,
 		sanguis::aoe_projectile_type::grenade,
 		_team,
 		sanguis::server::entities::movement_speed(
@@ -59,7 +56,7 @@ sanguis::server::entities::projectiles::grenade::grenade(
 	),
 	slowdown_timer_(
 		sanguis::diff_timer::parameters(
-			_diff_clock,
+			this->diff_clock(),
 			std::chrono::milliseconds(
 				100
 			)

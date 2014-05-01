@@ -1,4 +1,3 @@
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/friend_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/collision/world/group.hpp>
@@ -16,7 +15,7 @@
 #include <sanguis/server/ai/base.hpp>
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/auras/aura.hpp>
-#include <sanguis/server/auras/container.hpp>
+#include <sanguis/server/auras/create_callback_container.hpp>
 #include <sanguis/server/collision/with_world.hpp>
 #include <sanguis/server/damage/armor_array.hpp>
 #include <sanguis/server/entities/friend.hpp>
@@ -44,7 +43,6 @@
 
 
 sanguis::server::entities::friend_::friend_(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
 	sanguis::friend_type const _ftype,
 	sanguis::server::environment::load_context &_load_context,
@@ -57,13 +55,12 @@ sanguis::server::entities::friend_::friend_(
 :
 	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::with_ai(
-		_diff_clock,
 		_random_generator,
 		_ai,
 		std::move(
 			_weapon
 		),
-		sanguis::server::auras::container(),
+		sanguis::server::auras::create_callback_container(),
 		sanguis::server::weapons::default_ias(),
 		sanguis::server::weapons::default_irs()
 	),
@@ -72,7 +69,6 @@ sanguis::server::entities::friend_::friend_(
 		_load_context.next_id()
 	),
 	sanguis::server::entities::with_health(
-		_diff_clock,
 		_health,
 		sanguis::server::regeneration(
 			0.f
@@ -81,7 +77,6 @@ sanguis::server::entities::friend_::friend_(
 	),
 	sanguis::server::entities::with_links(),
 	sanguis::server::entities::with_velocity(
-		_diff_clock,
 		_load_context.entity_dim(
 			sanguis::server::model_name(
 				sanguis::load::friend_name(

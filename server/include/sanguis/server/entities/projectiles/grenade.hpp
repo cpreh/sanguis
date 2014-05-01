@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PROJECTILES_GRENADE_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PROJECTILES_GRENADE_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/server/aoe_fwd.hpp>
 #include <sanguis/server/direction_fwd.hpp>
@@ -33,7 +32,6 @@ class grenade
 	);
 public:
 	grenade(
-		sanguis::diff_clock const &,
 		sanguis::server::environment::load_context &,
 		sanguis::server::team,
 		sanguis::server::damage::unit,

@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_WORLD_PICKUP_SPAWNER_HPP_INCLUDED
 #define SANGUIS_SERVER_WORLD_PICKUP_SPAWNER_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
@@ -33,7 +32,6 @@ class pickup_spawner
 	);
 public:
 	pickup_spawner(
-		sanguis::diff_clock const &,
 		sanguis::random_generator &,
 		sanguis::server::environment::object &
 	);
@@ -85,8 +83,6 @@ private:
 	make_spawn_weapon(
 		sanguis::weapon_type const &
 	);
-
-	sanguis::diff_clock const &diff_clock_;
 
 	sanguis::random_generator &random_generator_;
 

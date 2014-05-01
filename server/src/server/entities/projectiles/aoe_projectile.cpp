@@ -1,5 +1,4 @@
 #include <sanguis/aoe_projectile_type.hpp>
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/load/aoe_projectile_name.hpp>
 #include <sanguis/messages/server/add_aoe_projectile.hpp>
 #include <sanguis/messages/server/create_ptr.hpp>
@@ -18,7 +17,6 @@
 
 
 sanguis::server::entities::projectiles::aoe_projectile::aoe_projectile(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::aoe_projectile_type const _type,
 	sanguis::server::team const _team,
 	sanguis::server::entities::movement_speed const _movement_speed,
@@ -29,7 +27,6 @@ sanguis::server::entities::projectiles::aoe_projectile::aoe_projectile(
 )
 :
 	sanguis::server::entities::projectiles::projectile(
-		_diff_clock,
 		sanguis::projectile_type::aoe,
 		_team,
 		_movement_speed,

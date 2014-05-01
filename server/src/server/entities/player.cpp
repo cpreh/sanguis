@@ -1,4 +1,3 @@
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/entity_id.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/perk_type.hpp>
@@ -31,9 +30,10 @@
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/string.hpp>
 #include <sanguis/server/team.hpp>
-#include <sanguis/server/auras/container.hpp>
+#include <sanguis/server/auras/create_callback_container.hpp>
 #include <sanguis/server/auras/update_sight.hpp>
 #include <sanguis/server/auras/weapon_pickup_candidates.hpp>
+#include <sanguis/server/auras/wrap_create.hpp>
 #include <sanguis/server/damage/armor_array_fwd.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
@@ -68,7 +68,6 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assign/make_container.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/atan2.hpp>
@@ -80,7 +79,6 @@
 
 
 sanguis::server::entities::player::player(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::health const _health,
@@ -92,7 +90,6 @@ sanguis::server::entities::player::player(
 :
 	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::with_velocity(
-		_diff_clock,
 		_load_context.entity_dim(
 			sanguis::server::model_name(
 				FCPPT_TEXT("player")
@@ -111,10 +108,8 @@ sanguis::server::entities::player::player(
 		)
 	),
 	sanguis::server::entities::with_auras_id(
-		fcppt::assign::make_container<
-			sanguis::server::auras::container
-		>(
-			fcppt::make_unique_ptr<
+		sanguis::server::auras::create_callback_container{
+			sanguis::server::auras::wrap_create<
 				sanguis::server::auras::update_sight
 			>(
 				sanguis::server::radius(
@@ -134,9 +129,8 @@ sanguis::server::entities::player::player(
 						std::placeholders::_1
 					)
 				)
-			)
-		)(
-			fcppt::make_unique_ptr<
+			),
+			sanguis::server::auras::wrap_create<
 				sanguis::server::auras::weapon_pickup_candidates
 			>(
 				// with_velocity needs to be initialized first!
@@ -156,14 +150,13 @@ sanguis::server::entities::player::player(
 					)
 				)
 			)
-		).move_container()
+		}
 	),
 	sanguis::server::entities::with_buffs(),
 	sanguis::server::entities::with_id(
 		_load_context.next_id()
 	),
 	sanguis::server::entities::with_health(
-		_diff_clock,
 		_health,
 		sanguis::server::regeneration(
 			0.f
@@ -172,19 +165,14 @@ sanguis::server::entities::player::player(
 	),
 	sanguis::server::entities::with_links(),
 	sanguis::server::entities::with_perks(
-		_diff_clock,
 		_random_generator
 	),
 	sanguis::server::entities::with_weapon(
 		sanguis::server::weapons::player_start_weapon(
-			_diff_clock,
 			_random_generator
 		),
 		sanguis::server::weapons::default_ias(),
 		sanguis::server::weapons::default_irs()
-	),
-	diff_clock_(
-		_diff_clock
 	),
 	name_(
 		_name
@@ -364,7 +352,6 @@ sanguis::server::entities::player::drop_or_pickup_weapon(
 			fcppt::make_unique_ptr<
 				sanguis::server::entities::pickups::weapon
 			>(
-				diff_clock_,
 				this->environment()->load_context(),
 				this->team(),
 				std::move(

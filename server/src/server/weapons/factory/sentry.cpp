@@ -1,4 +1,3 @@
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/primary_weapon_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
@@ -30,10 +29,6 @@ sanguis::server::weapons::factory::sentry(
 	sanguis::server::weapons::factory::parameters const &_parameters
 )
 {
-	sanguis::diff_clock const &diff_clock(
-		_parameters.diff_clock()
-	);
-
 	sanguis::random_generator &random_generator(
 		_parameters.random_generator()
 	);
@@ -46,11 +41,9 @@ sanguis::server::weapons::factory::sentry(
 		fcppt::make_unique_ptr<
 			sanguis::server::weapons::sentry
 		>(
-			diff_clock,
 			random_generator,
 			sanguis::server::weapons::sentry_weapon(
 				[
-					&diff_clock,
 					&random_generator,
 					difficulty
 				]
@@ -60,7 +53,6 @@ sanguis::server::weapons::factory::sentry(
 						fcppt::make_unique_ptr<
 							sanguis::server::weapons::pistol
 						>(
-							diff_clock,
 							random_generator,
 							sanguis::weapon_type(
 								sanguis::primary_weapon_type::pistol

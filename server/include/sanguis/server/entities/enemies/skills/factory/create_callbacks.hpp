@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_ENEMIES_SKILLS_FACTORY_CREATE_CALLBACKS_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_ENEMIES_SKILLS_FACTORY_CREATE_CALLBACKS_HPP_INCLUDED
 
-#include <sanguis/server/entities/enemies/skills/factory/callback_vector.hpp>
+#include <sanguis/server/entities/enemies/skills/factory/container.hpp>
 
 
 namespace sanguis
@@ -17,7 +17,7 @@ namespace skills
 namespace factory
 {
 
-sanguis::server::entities::enemies::skills::factory::callback_vector const &
+sanguis::server::entities::enemies::skills::factory::container const &
 create_callbacks();
 
 }

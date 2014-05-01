@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PICKUPS_PICKUP_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PICKUPS_PICKUP_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/pickup_type.hpp>
 #include <sanguis/collision/world/group_field_fwd.hpp>
@@ -47,7 +46,6 @@ public:
 	~pickup();
 protected:
 	pickup(
-		sanguis::diff_clock const &,
 		sanguis::pickup_type,
 		sanguis::server::environment::load_context &,
 		sanguis::server::team

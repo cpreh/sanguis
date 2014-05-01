@@ -6,8 +6,8 @@
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/buff.hpp>
+#include <sanguis/server/auras/create_callback.hpp>
 #include <sanguis/server/auras/influence.hpp>
-#include <sanguis/server/auras/unique_ptr.hpp>
 #include <sanguis/server/buffs/burn_create.hpp>
 #include <sanguis/server/buffs/burn_interval.hpp>
 #include <sanguis/server/damage/fire.hpp>
@@ -25,9 +25,8 @@ namespace auras
 template<
 	typename Buff
 >
-sanguis::server::auras::unique_ptr
+sanguis::server::auras::create_callback
 burn_create(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::server::radius const _radius,
 	sanguis::server::team const _team,
 	sanguis::server::buffs::burn_interval const _interval,
@@ -35,24 +34,37 @@ burn_create(
 )
 {
 	return
-		fcppt::make_unique_ptr<
-			sanguis::server::auras::buff
-		>(
-			_radius,
-			_team,
-			sanguis::aura_type::burn,
-			sanguis::server::auras::influence::debuff,
-			sanguis::server::buffs::burn_create<
-				Buff
-			>(
-				_diff_clock,
+		sanguis::server::auras::create_callback(
+			[
+				_radius,
 				_interval,
 				_damage,
-				sanguis::server::damage::list{
-					sanguis::server::damage::fire =
-						sanguis::server::damage::full
-				}
+				_team
+			](
+				sanguis::diff_clock const &_diff_clock
 			)
+			{
+				return
+					fcppt::make_unique_ptr<
+						sanguis::server::auras::buff
+					>(
+						_radius,
+						_team,
+						sanguis::aura_type::burn,
+						sanguis::server::auras::influence::debuff,
+						sanguis::server::buffs::burn_create<
+							Buff
+						>(
+							_diff_clock,
+							_interval,
+							_damage,
+							sanguis::server::damage::list{
+								sanguis::server::damage::fire =
+									sanguis::server::damage::full
+							}
+						)
+					);
+			}
 		);
 }
 

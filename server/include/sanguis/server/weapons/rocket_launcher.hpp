@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_WEAPONS_ROCKET_LAUNCHER_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_ROCKET_LAUNCHER_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/weapon_type_fwd.hpp>
@@ -30,7 +29,6 @@ class rocket_launcher
 	);
 public:
 	rocket_launcher(
-		sanguis::diff_clock const &,
 		sanguis::random_generator &,
 		sanguis::weapon_type,
 		sanguis::server::weapons::rocket_launcher_parameters const &

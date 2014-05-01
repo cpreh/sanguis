@@ -20,7 +20,6 @@
 
 
 sanguis::server::entities::projectiles::rocket::rocket(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::team const _team,
 	sanguis::server::damage::unit const _damage,
@@ -29,7 +28,6 @@ sanguis::server::entities::projectiles::rocket::rocket(
 )
 :
 	sanguis::server::entities::projectiles::aoe_projectile(
-		_diff_clock,
 		sanguis::aoe_projectile_type::rocket,
 		_team,
 		sanguis::server::entities::movement_speed(

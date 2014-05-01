@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PROJECTILES_PROJECTILE_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PROJECTILES_PROJECTILE_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/projectile_type.hpp>
 #include <sanguis/collision/world/group_field_fwd.hpp>
@@ -44,12 +43,8 @@ class projectile
 	FCPPT_NONCOPYABLE(
 		projectile
 	);
-public:
-	sanguis::projectile_type
-	ptype() const;
 protected:
 	projectile(
-		sanguis::diff_clock const &,
 		sanguis::projectile_type,
 		sanguis::server::team,
 		sanguis::server::entities::movement_speed,
@@ -109,7 +104,7 @@ private:
 
 	sanguis::server::team const team_;
 
-	sanguis::projectile_type const ptype_;
+	sanguis::projectile_type const projectile_type_;
 
 	sanguis::diff_timer life_timer_;
 };

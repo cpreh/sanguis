@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_ENTITIES_SPAWNS_SPAWN_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_SPAWNS_SPAWN_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/angle.hpp>
@@ -45,7 +44,6 @@ public:
 	~spawn();
 protected:
 	spawn(
-		sanguis::diff_clock const &,
 		sanguis::random_generator &,
 		sanguis::creator::enemy_type,
 		sanguis::server::world::difficulty
@@ -90,8 +88,6 @@ private:
 	typedef fcppt::optional<
 		sanguis::server::angle
 	> optional_angle;
-
-	sanguis::diff_clock const &diff_clock_;
 
 	sanguis::random_generator &random_generator_;
 

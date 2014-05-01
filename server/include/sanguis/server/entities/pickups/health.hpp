@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PICKUPS_HEALTH_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PICKUPS_HEALTH_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
@@ -28,7 +27,6 @@ class health
 	);
 public:
 	health(
-		sanguis::diff_clock const &,
 		sanguis::server::environment::load_context &,
 		sanguis::server::team,
 		sanguis::server::health

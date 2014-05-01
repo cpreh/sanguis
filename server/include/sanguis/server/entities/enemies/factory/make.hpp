@@ -5,7 +5,7 @@
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/ai/create_function.hpp>
-#include <sanguis/server/auras/container.hpp>
+#include <sanguis/server/auras/create_callback_container.hpp>
 #include <sanguis/server/damage/armor_array.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
@@ -34,7 +34,7 @@ make(
 	sanguis::server::weapons::unique_ptr &&,
 	sanguis::server::pickup_probability,
 	sanguis::server::exp,
-	sanguis::server::auras::container &&
+	sanguis::server::auras::create_callback_container const &
 );
 
 }

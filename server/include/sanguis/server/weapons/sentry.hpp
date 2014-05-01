@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_WEAPONS_SENTRY_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_SENTRY_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/server/health.hpp>
@@ -29,7 +28,6 @@ class sentry
 	);
 public:
 	sentry(
-		sanguis::diff_clock const &,
 		sanguis::random_generator &,
 		sanguis::server::weapons::sentry_weapon const &,
 		sanguis::server::weapons::sentry_parameters const &

@@ -32,7 +32,7 @@ sanguis::server::entities::with_perks::add_perk(
 				perks_,
 				_type,
 				sanguis::server::perks::create(
-					diff_clock_,
+					this->diff_clock(),
 					random_generator_,
 					_type
 				)
@@ -44,15 +44,11 @@ sanguis::server::entities::with_perks::add_perk(
 }
 
 sanguis::server::entities::with_perks::with_perks(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator
 )
 :
 	sanguis::server::entities::base(),
 	sanguis::server::entities::ifaces::with_team(),
-	diff_clock_(
-		_diff_clock
-	),
 	random_generator_(
 		_random_generator
 	),

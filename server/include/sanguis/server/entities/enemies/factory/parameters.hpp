@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_ENTITIES_ENEMIES_FACTORY_PARAMETERS_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_ENEMIES_FACTORY_PARAMETERS_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>
@@ -30,7 +29,6 @@ class parameters
 	);
 public:
 	parameters(
-		sanguis::diff_clock const &,
 		sanguis::random_generator &,
 		sanguis::creator::enemy_type,
 		sanguis::server::entities::enemies::difficulty,
@@ -38,9 +36,6 @@ public:
 		sanguis::server::entities::spawn_owner const &,
 		sanguis::server::entities::enemies::special_chance
 	);
-
-	sanguis::diff_clock const &
-	diff_clock() const;
 
 	sanguis::random_generator &
 	random_generator() const;
@@ -60,8 +55,6 @@ public:
 	sanguis::server::entities::enemies::special_chance const
 	special_chance() const;
 private:
-	sanguis::diff_clock const &diff_clock_;
-
 	sanguis::random_generator &random_generator_;
 
 	sanguis::creator::enemy_type const enemy_type_;

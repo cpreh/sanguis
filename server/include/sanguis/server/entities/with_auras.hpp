@@ -3,12 +3,10 @@
 
 #include <sanguis/server/auras/aura_fwd.hpp>
 #include <sanguis/server/auras/container.hpp>
+#include <sanguis/server/auras/create_callback_container.hpp>
 #include <sanguis/server/auras/unique_ptr.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <boost/ptr_container/ptr_list.hpp>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -34,21 +32,15 @@ public:
 protected:
 	explicit
 	with_auras(
-		sanguis::server::auras::container &&
+		sanguis::server::auras::create_callback_container const &
 	);
 
 	~with_auras();
 
-	typedef
-	boost::ptr_list<
-		sanguis::server::auras::aura
-	>
-	aura_container;
-
-	aura_container const &
+	sanguis::server::auras::container const &
 	auras() const;
 private:
-	aura_container auras_;
+	sanguis::server::auras::container auras_;
 };
 
 }

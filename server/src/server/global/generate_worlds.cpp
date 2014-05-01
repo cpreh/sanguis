@@ -193,7 +193,6 @@ sanguis::server::global::generate_worlds(
 		FCPPT_ASSERT_ERROR(
 			last_world.insert(
 				sanguis::server::entities::enemies::create(
-					_parameters.diff_clock(),
 					_parameters.random_generator(),
 					sanguis::creator::enemy_type::reaper,
 					last_world.difficulty(),

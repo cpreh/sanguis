@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PROJECTILES_SCATTER_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PROJECTILES_SCATTER_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/random_variate_decl.hpp>
@@ -36,7 +35,6 @@ class scatter
 	);
 public:
 	scatter(
-		sanguis::diff_clock const &,
 		sanguis::random_generator &,
 		sanguis::server::environment::load_context &,
 		sanguis::server::team,

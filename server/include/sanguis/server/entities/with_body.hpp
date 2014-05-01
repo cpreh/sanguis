@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_ENTITIES_WITH_BODY_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_WITH_BODY_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/collision/world/body_base.hpp>
 #include <sanguis/collision/world/group_field_fwd.hpp>
 #include <sanguis/server/angle.hpp>
@@ -44,8 +43,8 @@ class with_body
 		with_body
 	);
 public:
+	explicit
 	with_body(
-		sanguis::diff_clock const &,
 		sanguis::server::dim
 	);
 

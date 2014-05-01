@@ -23,7 +23,6 @@ sanguis::server::weapons::factory::dual_pistols(
 		fcppt::make_unique_ptr<
 			sanguis::server::weapons::pistol
 		>(
-			_parameters.diff_clock(),
 			_parameters.random_generator(),
 			_parameters.weapon_type(),
 			sanguis::server::weapons::pistol_parameters(

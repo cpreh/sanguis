@@ -49,8 +49,6 @@ private:
 	attribute() const
 	override;
 
-	sanguis::diff_clock const &diff_clock_;
-
 	sanguis::random_generator &random_generator_;
 
 	sanguis::diff_timer cooldown_timer_;

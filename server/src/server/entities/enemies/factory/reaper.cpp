@@ -5,7 +5,7 @@
 #include <sanguis/server/ai/create_simple.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/auras/aura.hpp>
-#include <sanguis/server/auras/container.hpp>
+#include <sanguis/server/auras/create_callback_container.hpp>
 #include <sanguis/server/damage/full.hpp>
 #include <sanguis/server/damage/list.hpp>
 #include <sanguis/server/damage/normal.hpp>
@@ -20,18 +20,16 @@
 #include <sanguis/server/entities/enemies/factory/reaper.hpp>
 #include <sanguis/server/entities/enemies/modifiers/parameters.hpp>
 #include <sanguis/server/entities/enemies/modifiers/regenerating.hpp>
-#include <sanguis/server/entities/enemies/skills/container.hpp>
-#include <sanguis/server/entities/enemies/skills/skill.hpp>
-#include <sanguis/server/entities/enemies/skills/factory/parameters.hpp>
+#include <sanguis/server/entities/enemies/skills/factory/container.hpp>
 #include <sanguis/server/entities/enemies/skills/factory/scatter.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/melee.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/assign/make_container.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cmath>
+#include <functional>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -42,7 +40,6 @@ sanguis::server::entities::enemies::factory::reaper(
 )
 {
 	sanguis::server::entities::enemies::parameters enemy_parameters(
-		_parameters.diff_clock(),
 		_parameters.random_generator(),
 		_parameters.enemy_type(),
 		_parameters.load_context(),
@@ -65,7 +62,6 @@ sanguis::server::entities::enemies::factory::reaper(
 		fcppt::make_unique_ptr<
 			sanguis::server::weapons::melee
 		>(
-			_parameters.diff_clock(),
 			_parameters.random_generator(),
 			sanguis::server::weapons::range(
 				75.f
@@ -95,26 +91,13 @@ sanguis::server::entities::enemies::factory::reaper(
 		),
 		_parameters.difficulty(),
 		_parameters.spawn_owner(),
-		sanguis::server::auras::container(
+		sanguis::server::auras::create_callback_container(
 			// TODO
 		)
 	);
 
 	sanguis::server::entities::enemies::modifiers::parameters const modifiers_parameters(
 		_parameters.random_generator()
-	);
-
-	sanguis::server::entities::enemies::attribute_container const attributes{
-		sanguis::server::entities::enemies::modifiers::regenerating(
-			enemy_parameters,
-			modifiers_parameters
-		)
-	};
-
-	sanguis::server::entities::enemies::skills::factory::parameters const skills_parameters(
-		_parameters.diff_clock(),
-		_parameters.random_generator(),
-		_parameters.difficulty()
 	);
 
 	return
@@ -124,13 +107,14 @@ sanguis::server::entities::enemies::factory::reaper(
 			std::move(
 				enemy_parameters
 			),
-			attributes,
-			fcppt::assign::make_container<
-				sanguis::server::entities::enemies::skills::container
-			>(
-				sanguis::server::entities::enemies::skills::factory::scatter(
-					skills_parameters
+			sanguis::server::entities::enemies::attribute_container{
+				sanguis::server::entities::enemies::modifiers::regenerating(
+					enemy_parameters,
+					modifiers_parameters
 				)
-			).move_container()
+			},
+			sanguis::server::entities::enemies::skills::factory::container{
+				sanguis::server::entities::enemies::skills::factory::scatter
+			}
 		);
 }

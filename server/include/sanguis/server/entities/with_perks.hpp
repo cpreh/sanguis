@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_ENTITIES_WITH_PERKS_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_WITH_PERKS_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/perk_type_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/entities/base.hpp>
@@ -35,8 +34,8 @@ public:
 		sanguis::perk_type
 	);
 protected:
+	explicit
 	with_perks(
-		sanguis::diff_clock const &,
 		sanguis::random_generator &
 	);
 
@@ -50,8 +49,6 @@ private:
 		sanguis::perk_type,
 		sanguis::server::perks::perk
 	> perk_container;
-
-	sanguis::diff_clock const &diff_clock_;
 
 	sanguis::random_generator &random_generator_;
 

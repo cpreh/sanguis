@@ -1,5 +1,4 @@
 #include <sanguis/cheat_type.hpp>
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/friend_type.hpp>
 #include <sanguis/perk_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
@@ -27,7 +26,6 @@
 
 void
 sanguis::server::cheat::process(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
 	sanguis::server::entities::player &_player,
 	sanguis::cheat_type const _cheat_type,
@@ -67,7 +65,6 @@ sanguis::server::cheat::process(
 			fcppt::make_unique_ptr<
 				sanguis::server::entities::pickups::monster
 			>(
-				_diff_clock,
 				_random_generator,
 				environment->load_context(),
 				sanguis::server::team::players,
@@ -87,13 +84,11 @@ sanguis::server::cheat::process(
 			fcppt::make_unique_ptr<
 				sanguis::server::entities::pickups::weapon
 			>(
-				_diff_clock,
 				environment->load_context(),
 				sanguis::server::team::players,
 				fcppt::make_unique_ptr<
 					sanguis::server::weapons::monster_spawner
 				>(
-					_diff_clock,
 					_random_generator
 				)
 			),
@@ -111,11 +106,9 @@ sanguis::server::cheat::process(
 			fcppt::make_unique_ptr<
 				sanguis::server::entities::pickups::weapon
 			>(
-				_diff_clock,
 				environment->load_context(),
 				sanguis::server::team::players,
 				sanguis::server::weapons::create(
-					_diff_clock,
 					_random_generator,
 					sanguis::server::cheat::weapon_type(
 						_cheat_type

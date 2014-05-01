@@ -6,11 +6,8 @@
 #include <sanguis/server/entities/enemies/parameters_fwd.hpp>
 #include <sanguis/server/entities/enemies/attribute_container.hpp>
 #include <sanguis/server/entities/enemies/skills/container.hpp>
-#include <sanguis/server/entities/enemies/skills/skill_fwd.hpp>
+#include <sanguis/server/entities/enemies/skills/factory/container.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <boost/ptr_container/ptr_vector.hpp>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -33,7 +30,7 @@ public:
 	special(
 		sanguis::server::entities::enemies::parameters &&,
 		sanguis::server::entities::enemies::attribute_container const &,
-		sanguis::server::entities::enemies::skills::container &&
+		sanguis::server::entities::enemies::skills::factory::container const &
 	);
 
 	~special()
@@ -47,13 +44,7 @@ private:
 	name() const
 	override;
 
-	typedef
-	boost::ptr_vector<
-		sanguis::server::entities::enemies::skills::skill
-	>
-	skill_container;
-
-	skill_container skills_;
+	sanguis::server::entities::enemies::skills::container const skills_;
 
 	sanguis::messages::types::string const name_;
 };

@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_ENTITIES_WITH_VELOCITY_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_WITH_VELOCITY_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/dim_fwd.hpp>
@@ -39,7 +38,6 @@ class with_velocity
 	);
 protected:
 	with_velocity(
-		sanguis::diff_clock const &,
 		sanguis::server::dim,
 		sanguis::server::entities::property::initial const &speed,
 		sanguis::server::direction
