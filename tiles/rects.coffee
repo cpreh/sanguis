@@ -48,25 +48,24 @@ class AALine
 				[@p1, @p2] = [@p2, @p1]
 				return
 
-
 class Rect
 	constructor: (@pos, @dim) ->
-		@neighbor = undefined
+		@adj = []
 
-	@top = ->
+	top: ->
 		new AALine(
 			@pos,
 			new Pos(@pos.x + @dim.w, @pos.y))
-	@right = ->
+	right: ->
 		new AALine(
 			new Pos(@pos.x + @dim.w, @pos.y),
 			new Pos(@pos.x + @dim.w, @pos.y + @dim.h))
 
-	@bottom = ->
+	bottom: ->
 		new AALine(
-			new Pos(@pos.x + @dim.w, @pos.y + @dim.h),
+			@pos.plus(@dim),
 			new Pos(@pos.x, @pos.y + @dim.h))
-	@left = ->
+	left: ->
 		new AALine(
 			new Pos(@pos.x, @pos.y + @dim.h),
 			@pos)
@@ -74,27 +73,27 @@ class Rect
 	clip: (other) ->
 		if inside(other.pos, @) and inside(other.pos.plus(other.dim), @)
 			@dim.w = other.pos.x - @pos.x - 1
-			@neighbor = other
+			@adj.push other
 
 		if intersect @top(), other
 			oldy = @pos.y
 			@pos.y = other.pos.y + other.dim.h + 1
 			@dim.h -= @pos.y - oldy
-			@neighbor = other
+			@adj.push other
 
 		if intersect @right(), other
 			@dim.w = other.pos.x - 1 - @pos.x
-			@neighbor = other
+			@adj.push other
 
 		if intersect @bottom(), other
 			@dim.h = other.pos.y - 1 - @pos.y
-			@neighbor = other
+			@adj.push other
 
 		if intersect @left(), other
 			oldx = @pos.x
 			@pos.x = other.pos.x + other.dim.w + 1
 			@dim.w -= @pos.x - oldx
-			@neighbor = other
+			@adj.push other
 
 inside = (point, rect) ->
 	return point.x >= rect.pos.x and
@@ -162,13 +161,11 @@ find_closest = (graph, nodes) ->
 				ret = n2
 	ret
 
-build_graph = (loose) ->
+build_graph = (rects) ->
 	graph = []
-	while loose.length > 0
-		next = find_closest graph, loose
-		graph.push loose[next]
-		delete loose[next]
-
+	for rect in rects
+		graph.push rect
+		closest = find_closest(rect, rects)
 
 draw_rect = (ctx, tilesize, rect, color) ->
 	ctx.fillStyle = color ? "#883"
@@ -188,17 +185,22 @@ draw_rect = (ctx, tilesize, rect, color) ->
 		tilesize * (rect.dim.w - 2),
 		tilesize * (rect.dim.h - 2))
 
+
+clear = (ctx, color) ->
+	ctx.fillStyle = color ? "#aaa"
+	ctx.fillRect(
+		0,
+		0,
+		canvas.width,
+		canvas.height)
+
+
 draw_rects = (ctx, tilesize, width, height, rects) ->
 	canvas = ctx.canvas
 	gridsize = new Dim canvas.width / tilesize, canvas.height / tilesize
 	console.log "grid: #{gridsize.w} x #{gridsize.h}"
 
-	ctx.fillStyle = "#aaa"
-	ctx.fillRect(
-		0
-		0
-		canvas.width,
-		canvas.height)
+	clear ctx
 
 	set_tile = (x, y, color) ->
 		ctx.fillStyle = color ? "#883"
@@ -218,12 +220,102 @@ draw_rects = (ctx, tilesize, width, height, rects) ->
 		draw_rect ctx, tilesize, rect, '#883'
 
 
+draw_corridor = (ctx, tilesize, p1, p2) ->
+	set_tile = (x, y, color) ->
+		ctx.fillStyle = color ? '#883'
+		ctx.fillRect(
+			tilesize * x,
+			tilesize * y,
+			tilesize,
+			tilesize)
+
+	dx = p2.x - p1.x
+	dy = p2.y - p1.y
+
+	sign = (x) -> if x > 0 then 1 else if x == 0 then 0 else -1
+	sgnx = sign dx
+	sgny = sign dy
+
+	if Math.abs(dy) > Math.abs(dx)
+		# outer
+		unless dx == 0
+			ctx.fillStyle = '#088'
+			ctx.fillRect(
+				tilesize * (p1.x),
+				tilesize * (p1.y - 1),
+				tilesize * (p2.x - p1.x + 1.5 * sgnx + 0.5),
+				tilesize * (3))
+		ctx.fillStyle = '#800'
+		ctx.fillRect(
+			tilesize * (p2.x - 1),
+			tilesize * (p1.y),
+			tilesize * (3),
+			tilesize * (p2.y - p1.y + 1))
+
+		# inner
+		ctx.fillStyle = '#ff0'
+		ctx.fillRect(
+			tilesize * (p1.x),
+			tilesize * (p1.y),
+			tilesize * (p2.x - p1.x)
+			tilesize * (1))
+		ctx.fillRect(
+			tilesize * (p2.x),
+			tilesize * (p1.y),
+			tilesize * (1),
+			tilesize * (p2.y - p1.y))
+	else
+		# outer
+		unless dy == 0
+			ctx.fillStyle = '#808'
+			ctx.fillRect(
+				tilesize * (p1.x - 1),
+				tilesize * (p1.y),
+				tilesize * (3),
+				tilesize * (p2.y - p1.y + 1.5 * sgny + 0.5))
+		ctx.fillStyle = '#080'
+		ctx.fillRect(
+			tilesize * (p1.x),
+			tilesize * (p2.y - 1),
+			tilesize * (p2.x - p1.x + 1),
+			tilesize * (3))
+
+		# inner
+		ctx.fillStyle = '#ff0'
+		ctx.fillRect(
+			tilesize * (p1.x),
+			tilesize * (p1.y),
+			tilesize * (1),
+			tilesize * (p2.y - p1.y))
+		ctx.fillRect(
+			tilesize * (p1.x),
+			tilesize * (p2.y),
+			tilesize * (p2.x - p1.x),
+			tilesize * (1))
+
+	set_tile p1.x, p1.y, '#0ff'
+	set_tile p2.x, p2.y, '#0ff'
+
+
 init = ->
 	canvas = document.getElementById 'canvas'
 	ctx = canvas.getContext '2d'
 	rects = generate_rects()
-	tilesize = 4
-	draw_rects ctx, tilesize, 800, 600, rects
+	#rects = build_graph(rects)
+	tilesize = 8
+	#draw_rects ctx, tilesize, 800, 600, rects
+
+	###
+	draw_corridor ctx,
+		tilesize,
+		new Pos(5, 5),
+		new Pos(15, 8)
+
+	draw_corridor ctx,
+		tilesize,
+		new Pos(15, 15),
+		new Pos(18, 25)
+	###
 
 	mouse_pos = (event) ->
 		rect = canvas.getBoundingClientRect()
@@ -231,15 +323,18 @@ init = ->
 			(event.clientX - rect.left) // tilesize,
 			(event.clientY - rect.top) // tilesize)
 
+	redraw = (event) ->
+		clear ctx
+		draw_corridor ctx, tilesize, new Pos(25, 25), mouse_pos(event)
+
 	highlight_rect = (event) ->
-		console.log mouse_pos event
 		draw_rects ctx, tilesize, 800, 600, rects
 		for rect in rects
 			if inside(mouse_pos(event), rect)
 				draw_rect ctx, tilesize, rect, '#f00'
-				if rect.neighbor?
+				for neighbor in rect.adj
 					draw_rect ctx, tilesize, rect.neighbor, '#0f0'
 
-	canvas.addEventListener 'click', highlight_rect
+	canvas.addEventListener 'mousemove', redraw
 
 window.addEventListener 'load', init
