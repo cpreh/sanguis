@@ -7,16 +7,12 @@ namespace sanguis
 
 template<
 	typename Sequence,
-	typename UpdateAction,
-	typename Predicate,
-	typename RemoveAction
+	typename UpdateAction
 >
 void
 sequence_iteration(
 	Sequence &_sequence,
-	UpdateAction const &_update_action,
-	Predicate const &_predicate,
-	RemoveAction const &_remove_action
+	UpdateAction const &_update_action
 )
 {
 	for(
@@ -26,25 +22,15 @@ sequence_iteration(
 		it != _sequence.end();
 	)
 	{
-		_update_action(
-			*it
-		);
-
 		if(
-			_predicate(
+			_update_action(
 				*it
 			)
 		)
-		{
-			_remove_action(
-				*it
-			);
-
 			it =
 				_sequence.erase(
 					it
 				);
-		}
 		else
 			++it;
 	}

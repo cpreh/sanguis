@@ -2,7 +2,6 @@
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/world/entity_map.hpp>
-#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -17,7 +16,7 @@ sanguis::server::world::entity_map::entity_map()
 sanguis::server::world::entity_map::~entity_map()
 {
 	for(
-		auto element
+		auto &element
 		:
 		impl_
 	)
@@ -31,11 +30,12 @@ sanguis::server::world::entity_map::insert(
 )
 {
 	return
-		fcppt::container::ptr::insert_unique_ptr_map(
-			impl_,
-			_id,
-			std::move(
-				_entity
+		impl_.insert(
+			std::make_pair(
+				_id,
+				std::move(
+					_entity
+				)
 			)
 		);
 }
@@ -93,10 +93,18 @@ sanguis::server::world::entity_map::release(
 	iterator const _it
 )
 {
+	sanguis::server::entities::with_id_unique_ptr result(
+		std::move(
+			_it->second
+		)
+	);
+
+	impl_.erase(
+		_it
+	);
+
 	return
-		sanguis::server::entities::with_id_unique_ptr(
-			impl_.release(
-				_it
-			).release()
+		std::move(
+			result
 		);
 }

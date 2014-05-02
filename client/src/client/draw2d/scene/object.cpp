@@ -87,8 +87,6 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
-#include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/math/matrix/arithmetic.hpp>
 #include <fcppt/math/matrix/translation.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -291,48 +289,30 @@ sanguis::client::draw2d::scene::object::update(
 		[
 			this
 		](
-			sanguis::client::draw2d::entities::base &_entity
+			sanguis::client::draw2d::entities::unique_ptr const &_entity
 		)
 		{
-			_entity.update();
+			_entity->update();
 
 			this->name_display(
-				_entity
+				*_entity
 			);
-		},
-		[](
-			sanguis::client::draw2d::entities::base const &_entity
-		)
-		{
+
 			return
-				_entity.may_be_removed();
-		},
-		[](
-			sanguis::client::draw2d::entities::base &
-		)
-		{
+				_entity->may_be_removed();
 		}
 	);
 
 	sanguis::sequence_iteration(
 		own_entities_,
 		[](
-			sanguis::client::draw2d::entities::own &_entity
+			sanguis::client::draw2d::entities::own_unique_ptr const &_entity
 		)
 		{
-			_entity.update();
-		},
-		[](
-			sanguis::client::draw2d::entities::own const &_entity
-		)
-		{
+			_entity->update();
+
 			return
-				_entity.may_be_removed();
-		},
-		[](
-			sanguis::client::draw2d::entities::own &
-		)
-		{
+				_entity->may_be_removed();
 		}
 	);
 }
@@ -355,7 +335,7 @@ sanguis::client::draw2d::scene::object::pause(
 	paused_ = _paused;
 
 	for(
-		auto cur
+		auto &cur
 		:
 		entities_
 	)
@@ -368,7 +348,7 @@ sanguis::client::draw2d::scene::object::pause(
 		:
 		own_entities_
 	)
-		cur.pause(
+		cur->pause(
 			_paused
 		);
 }
@@ -520,11 +500,12 @@ sanguis::client::draw2d::scene::object::insert(
 	> ret_type;
 
 	ret_type const ret(
-		fcppt::container::ptr::insert_unique_ptr_map(
-			entities_,
-			_id,
-			std::move(
-				_entity
+		entities_.insert(
+			std::make_pair(
+				_id,
+				std::move(
+					_entity
+				)
 			)
 		)
 	);
@@ -550,15 +531,14 @@ sanguis::client::draw2d::scene::object::insert_own(
 	sanguis::client::draw2d::entities::own_unique_ptr &&_entity
 )
 {
-	fcppt::container::ptr::push_back_unique_ptr(
-		own_entities_,
+	own_entities_.push_back(
 		std::move(
 			_entity
 		)
 	);
 
 	return
-		own_entities_.back();
+		*own_entities_.back();
 }
 
 void
@@ -718,21 +698,11 @@ sanguis::client::draw2d::scene::object::change_world(
 	sanguis::map_iteration(
 		entities_,
 		[](
-			sanguis::client::draw2d::entities::base &
-		)
-		{
-		},
-		[](
-			sanguis::client::draw2d::entities::base const &_entity
+			sanguis::client::draw2d::entities::unique_ptr const &_entity
 		)
 		{
 			return
-				_entity.dead();
-		},
-		[](
-			sanguis::client::draw2d::entities::base &
-		)
-		{
+				_entity->dead();
 		}
 	);
 

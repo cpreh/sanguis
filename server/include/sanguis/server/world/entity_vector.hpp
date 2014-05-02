@@ -5,7 +5,7 @@
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/ptr_container/ptr_vector.hpp>
+#include <vector>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -22,9 +22,11 @@ class entity_vector
 		entity_vector
 	);
 
-	typedef boost::ptr_vector<
-		sanguis::server::entities::base
-	> impl;
+	typedef
+	std::vector<
+		sanguis::server::entities::unique_ptr
+	>
+	impl;
 public:
 	typedef impl::iterator iterator;
 

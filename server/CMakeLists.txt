@@ -630,6 +630,7 @@ set(
 	include/sanguis/server/world/sight_range_map.hpp
 	include/sanguis/server/world/spawn_entity.hpp
 	include/sanguis/server/world/spawn_parameters.hpp
+	include/sanguis/server/world/update_entity.hpp
 	src/server/ai/angle_to_target.cpp
 	src/server/ai/base.cpp
 	src/server/ai/create_friend.cpp
@@ -912,6 +913,7 @@ set(
 	src/server/world/sight_range.cpp
 	src/server/world/spawn_entity.cpp
 	src/server/world/spawn_parameters.cpp
+	src/server/world/update_entity.cpp
 )
 
 sanguis_add_library(

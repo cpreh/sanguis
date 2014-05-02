@@ -42,8 +42,8 @@
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/ptr_container/ptr_list.hpp>
-#include <boost/ptr_container/ptr_map.hpp>
+#include <list>
+#include <map>
 #include <memory>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
@@ -234,14 +234,18 @@ private:
 		sanguis::client::draw2d::message::dispatcher
 	> const message_dispatcher_;
 
-	typedef boost::ptr_map<
+	typedef
+	std::map<
 		sanguis::entity_id,
-		sanguis::client::draw2d::entities::base
-	> entity_map;
+		sanguis::client::draw2d::entities::unique_ptr
+	>
+	entity_map;
 
-	typedef boost::ptr_list<
-		sanguis::client::draw2d::entities::own
-	> own_entity_list;
+	typedef
+	std::list<
+		sanguis::client::draw2d::entities::own_unique_ptr
+	>
+	own_entity_list;
 
 	entity_map entities_;
 

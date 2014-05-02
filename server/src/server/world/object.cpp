@@ -83,6 +83,7 @@
 #include <sanguis/server/world/sight_range_map.hpp>
 #include <sanguis/server/world/spawn_entity.hpp>
 #include <sanguis/server/world/spawn_parameters.hpp>
+#include <sanguis/server/world/update_entity.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
@@ -185,7 +186,7 @@ sanguis::server::world::object::update(
 		return;
 
 	for(
-		auto const cur_entity
+		auto &cur_entity
 		:
 		entities_
 	)
@@ -198,52 +199,18 @@ sanguis::server::world::object::update(
 		_elapsed_time
 	);
 
-	auto const update_entity(
-		[
-			_elapsed_time
-		](
-			sanguis::server::entities::base &_entity
-		)
-		{
-			_entity.tick(
-				_elapsed_time
-			);
-
-			_entity.update();
-		}
-	);
-
-	auto const entity_dead(
-		[](
-			sanguis::server::entities::base const &_entity
-		)
-		{
-			return
-				_entity.dead();
-		}
-	);
-
-	auto const remove_entity(
-		[](
-			sanguis::server::entities::base &_entity
-		)
-		{
-			_entity.remove();
-		}
-	);
+	sanguis::server::world::update_entity const update_entity{
+		_elapsed_time
+	};
 
 	sanguis::map_iteration(
 		entities_,
-		update_entity,
-		entity_dead,
-		remove_entity
+		update_entity
 	);
 
 	sanguis::sequence_iteration(
 		server_entities_,
-		update_entity,
-		entity_dead,
-		remove_entity
+		update_entity
 	);
 }
 

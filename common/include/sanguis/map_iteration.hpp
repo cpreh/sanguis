@@ -7,16 +7,12 @@ namespace sanguis
 
 template<
 	typename Map,
-	typename UpdateAction,
-	typename Predicate,
-	typename DestroyAction
+	typename UpdateAction
 >
 void
 map_iteration(
 	Map &_map,
-	UpdateAction const &_update_action,
-	Predicate const &_predicate,
-	DestroyAction const &_destroy_action
+	UpdateAction const &_update_action
 )
 {
 	for(
@@ -32,24 +28,14 @@ map_iteration(
 	{
 		++next;
 
-		_update_action(
-			*it->second
-		);
-
 		if(
-			_predicate(
-				*it->second
+			_update_action(
+				it->second
 			)
 		)
-		{
-			_destroy_action(
-				*it->second
-			);
-
 			_map.erase(
 				it
 			);
-		}
 	}
 }
 
