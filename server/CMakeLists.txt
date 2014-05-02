@@ -606,12 +606,17 @@ set(
 	include/sanguis/server/world/center_to_grid_pos.hpp
 	include/sanguis/server/world/context.hpp
 	include/sanguis/server/world/context_fwd.hpp
-	include/sanguis/server/world/destructible_parameters.hpp
 	include/sanguis/server/world/difficulty.hpp
 	include/sanguis/server/world/entity_map.hpp
 	include/sanguis/server/world/entity_vector.hpp
 	include/sanguis/server/world/generate.hpp
+	include/sanguis/server/world/generate_destructibles.hpp
+	include/sanguis/server/world/generate_single_spawns.hpp
+	include/sanguis/server/world/generate_spawns.hpp
 	include/sanguis/server/world/grid_pos_to_center.hpp
+	include/sanguis/server/world/insert_pair.hpp
+	include/sanguis/server/world/insert_pair_container.hpp
+	include/sanguis/server/world/insert_pair_fwd.hpp
 	include/sanguis/server/world/make_destructible.hpp
 	include/sanguis/server/world/make_spawner.hpp
 	include/sanguis/server/world/map.hpp
@@ -621,6 +626,8 @@ set(
 	include/sanguis/server/world/parameters.hpp
 	include/sanguis/server/world/parameters_fwd.hpp
 	include/sanguis/server/world/pickup_spawner.hpp
+	include/sanguis/server/world/place_callback.hpp
+	include/sanguis/server/world/place_multiple.hpp
 	include/sanguis/server/world/random.hpp
 	include/sanguis/server/world/random_generator_name.hpp
 	include/sanguis/server/world/random_seed.hpp
@@ -897,21 +904,24 @@ set(
 	src/server/world/center_in_grid_pos.cpp
 	src/server/world/center_to_grid_pos.cpp
 	src/server/world/context.cpp
-	src/server/world/destructible_parameters.cpp
 	src/server/world/entity_map.cpp
 	src/server/world/entity_vector.cpp
 	src/server/world/generate.cpp
+	src/server/world/generate_destructibles.cpp
+	src/server/world/generate_single_spawns.cpp
+	src/server/world/generate_spawns.cpp
 	src/server/world/grid_pos_to_center.cpp
+	src/server/world/insert_pair.cpp
 	src/server/world/make_destructible.cpp
 	src/server/world/make_spawner.cpp
 	src/server/world/object.cpp
 	src/server/world/parameters.cpp
 	src/server/world/pickup_spawner.cpp
+	src/server/world/place_multiple.cpp
 	src/server/world/random.cpp
 	src/server/world/random_generator_name.cpp
 	src/server/world/random_seed.cpp
 	src/server/world/sight_range.cpp
-	src/server/world/spawn_entity.cpp
 	src/server/world/spawn_parameters.cpp
 	src/server/world/update_entity.cpp
 )

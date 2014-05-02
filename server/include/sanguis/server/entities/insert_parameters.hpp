@@ -4,7 +4,6 @@
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
-#include <fcppt/nonassignable.hpp>
 
 
 namespace sanguis
@@ -16,9 +15,6 @@ namespace entities
 
 class insert_parameters
 {
-	FCPPT_NONASSIGNABLE(
-		insert_parameters
-	);
 public:
 	insert_parameters(
 		sanguis::server::center const &,
@@ -31,9 +27,9 @@ public:
 	server::angle const
 	angle() const;
 private:
-	sanguis::server::center const center_;
+	sanguis::server::center center_;
 
-	sanguis::server::angle const angle_;
+	sanguis::server::angle angle_;
 };
 
 }

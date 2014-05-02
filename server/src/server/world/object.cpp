@@ -17,9 +17,11 @@
 #include <sanguis/collision/world/create.hpp>
 #include <sanguis/collision/world/parameters.hpp>
 #include <sanguis/collision/world/object.hpp>
+#include <sanguis/creator/destructible.hpp>
 #include <sanguis/creator/destructible_container.hpp>
 #include <sanguis/creator/opening.hpp>
 #include <sanguis/creator/opening_container.hpp>
+#include <sanguis/creator/spawn.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/top_result.hpp>
 #include <sanguis/messages/convert/to_magazine_size.hpp>
@@ -73,16 +75,16 @@
 #include <sanguis/server/global/source_world_pair.hpp>
 #include <sanguis/server/world/center_in_grid_pos.hpp>
 #include <sanguis/server/world/context.hpp>
-#include <sanguis/server/world/destructible_parameters.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/entity_map.hpp>
-#include <sanguis/server/world/make_destructible.hpp>
+#include <sanguis/server/world/generate_destructibles.hpp>
+#include <sanguis/server/world/generate_spawns.hpp>
+#include <sanguis/server/world/insert_pair.hpp>
+#include <sanguis/server/world/insert_pair_container.hpp>
 #include <sanguis/server/world/object.hpp>
 #include <sanguis/server/world/parameters.hpp>
 #include <sanguis/server/world/sight_range.hpp>
 #include <sanguis/server/world/sight_range_map.hpp>
-#include <sanguis/server/world/spawn_entity.hpp>
-#include <sanguis/server/world/spawn_parameters.hpp>
 #include <sanguis/server/world/update_entity.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -166,7 +168,8 @@ sanguis::server::world::object::object(
 	);
 
 	this->insert_destructibles(
-		_generated_world.destructibles()
+		_generated_world.destructibles(),
+		_parameters.random_generator()
 	);
 }
 
@@ -242,6 +245,38 @@ sanguis::server::world::object::insert(
 			)
 		;
 }
+
+sanguis::server::entities::optional_base_ref const
+sanguis::server::world::object::insert(
+	sanguis::server::world::insert_pair &&_pair
+)
+{
+	return
+		this->insert(
+			std::move(
+				_pair.entity()
+			),
+			_pair.insert_parameters()
+		);
+}
+
+void
+sanguis::server::world::object::insert(
+	sanguis::server::world::insert_pair_container &&_pairs
+)
+{
+	for(
+		sanguis::server::world::insert_pair &element
+		:
+		_pairs
+	)
+		this->insert(
+			std::move(
+				element
+			)
+		);
+}
+
 sanguis::server::environment::object &
 sanguis::server::world::object::environment()
 {
@@ -905,41 +940,37 @@ sanguis::server::world::object::insert_spawns(
 )
 {
 	for(
-		auto const &spawn
+		sanguis::creator::spawn const &spawn
 		:
 		_spawns
 	)
 		this->insert(
-			sanguis::server::world::spawn_entity(
+			sanguis::server::world::generate_spawns(
 				spawn,
 				_random_generator,
 				this->load_context(),
 				difficulty_
-			),
-			sanguis::server::world::spawn_parameters(
-				spawn
 			)
 		);
 }
 
 void
 sanguis::server::world::object::insert_destructibles(
-	sanguis::creator::destructible_container const &_destructibles
+	sanguis::creator::destructible_container const &_destructibles,
+	sanguis::random_generator &_random_generator
 )
 {
 	for(
-		auto const &destructible
+		sanguis::creator::destructible const &destructible
 		:
 		_destructibles
 	)
 		this->insert(
-			sanguis::server::world::make_destructible(
-				destructible.type(),
+			sanguis::server::world::generate_destructibles(
+				_random_generator,
+				destructible,
 				this->load_context(),
 				difficulty_
-			),
-			sanguis::server::world::destructible_parameters(
-				destructible
 			)
 		);
 }

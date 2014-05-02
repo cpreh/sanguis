@@ -15,7 +15,7 @@
 
 sanguis::server::entities::unique_ptr
 sanguis::server::world::make_destructible(
-	sanguis::creator::destructible_type const _type,
+	sanguis::creator::destructible_type const _destructible_type,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::world::difficulty const _difficulty
 )
@@ -38,7 +38,7 @@ sanguis::server::world::make_destructible(
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::destructible
 		>(
-			_type,
+			_destructible_type,
 			_load_context,
 			sanguis::server::health(
 				1.f
@@ -48,5 +48,4 @@ sanguis::server::world::make_destructible(
 			sanguis::server::damage::no_armor(),
 			difficulty
 		);
-
 }

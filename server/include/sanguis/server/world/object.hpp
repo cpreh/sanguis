@@ -44,6 +44,8 @@
 #include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/entity_map.hpp>
 #include <sanguis/server/world/entity_vector.hpp>
+#include <sanguis/server/world/insert_pair_fwd.hpp>
+#include <sanguis/server/world/insert_pair_container.hpp>
 #include <sanguis/server/world/object_fwd.hpp>
 #include <sanguis/server/world/pickup_spawner.hpp>
 #include <sanguis/server/world/parameters_fwd.hpp>
@@ -88,6 +90,16 @@ public:
 		sanguis::server::entities::insert_parameters const &
 	)
 	override;
+
+	sanguis::server::entities::optional_base_ref const
+	insert(
+		sanguis::server::world::insert_pair &&
+	);
+
+	void
+	insert(
+		sanguis::server::world::insert_pair_container &&
+	);
 
 	sanguis::server::environment::object &
 	environment();
@@ -287,7 +299,8 @@ private:
 
 	void
 	insert_destructibles(
-		sanguis::creator::destructible_container const &
+		sanguis::creator::destructible_container const &,
+		sanguis::random_generator &
 	);
 
 	sanguis::server::entities::with_id &
