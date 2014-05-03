@@ -68,7 +68,6 @@ set(
 	include/sanguis/server/auras/unique_ptr.hpp
 	include/sanguis/server/auras/update_sight.hpp
 	include/sanguis/server/auras/weapon_pickup_candidates.hpp
-	include/sanguis/server/auras/wrap_create.hpp
 	include/sanguis/server/buffs/buff.hpp
 	include/sanguis/server/buffs/buff_fwd.hpp
 	include/sanguis/server/buffs/burn.hpp
