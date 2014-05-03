@@ -470,7 +470,6 @@ set(
 	include/sanguis/server/states/running_fwd.hpp
 	include/sanguis/server/states/unpaused.hpp
 	include/sanguis/server/states/unpaused_fwd.hpp
-	include/sanguis/server/string.hpp
 	include/sanguis/server/team.hpp
 	include/sanguis/server/team_fwd.hpp
 	include/sanguis/server/timer.hpp

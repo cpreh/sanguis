@@ -2,6 +2,7 @@
 #include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/optional_weapon_description.hpp>
+#include <sanguis/player_name.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_type_to_is_primary.hpp>
 #include <sanguis/world_name.hpp>
@@ -87,8 +88,7 @@ sanguis::client::gui::hud::object::object(
 	player_name_text_(
 		_renderer,
 		_font,
-		// TODO!
-		SGE_FONT_LIT("Player"),
+		sge::font::string(),
 		sanguis::gui::text_color(
 			sge::image::color::predef::black()
 		)
@@ -353,6 +353,18 @@ sanguis::client::gui::hud::object::world_name(
 )
 {
 	world_name_text_.value(
+		sge::font::from_fcppt_string(
+			_name.get()
+		)
+	);
+}
+
+void
+sanguis::client::gui::hud::object::player_name(
+	sanguis::player_name const &_name
+)
+{
+	player_name_text_.value(
 		sge::font::from_fcppt_string(
 			_name.get()
 		)

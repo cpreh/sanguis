@@ -4,6 +4,7 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/magazine_remaining.hpp>
+#include <sanguis/player_name_fwd.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/world_name_fwd.hpp>
 #include <sanguis/client/exp.hpp>
@@ -94,6 +95,11 @@ public:
 	void
 	world_name(
 		sanguis::world_name const &
+	);
+
+	void
+	player_name(
+		sanguis::player_name const &
 	);
 
 	void

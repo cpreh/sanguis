@@ -1,6 +1,7 @@
 #include <sanguis/magazine_extra.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/magazine_size.hpp>
+#include <sanguis/player_name.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/world_name.hpp>
 #include <sanguis/client/dispatch.hpp>
@@ -36,6 +37,7 @@
 #include <sanguis/messages/adapted_types/string.hpp>
 #include <sanguis/messages/adapted_types/weapon_attribute_vector.hpp>
 #include <sanguis/messages/adapted_types/weapon_type.hpp>
+#include <sanguis/messages/call/forward_to_default.hpp>
 #include <sanguis/messages/call/result.hpp>
 #include <sanguis/messages/convert/from_weapon_attribute_vector.hpp>
 #include <sanguis/messages/roles/command_description.hpp>
@@ -47,6 +49,7 @@
 #include <sanguis/messages/roles/magazine_remaining.hpp>
 #include <sanguis/messages/roles/world_name.hpp>
 #include <sanguis/messages/server/add_console_command.hpp>
+#include <sanguis/messages/server/add_own_player.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
 #include <sanguis/messages/server/change_world.hpp>
 #include <sanguis/messages/server/console_print.hpp>
@@ -236,8 +239,9 @@ sanguis::client::states::running::react(
 
 	return
 		sanguis::client::dispatch<
-			boost::mpl::vector10<
+			boost::mpl::vector11<
 				sanguis::messages::server::add_console_command,
+				sanguis::messages::server::add_own_player,
 				sanguis::messages::server::change_world,
 				sanguis::messages::server::console_print,
 				sanguis::messages::server::experience,
@@ -305,6 +309,27 @@ sanguis::client::states::running::operator()(
 	return
 		sanguis::messages::call::result(
 			this->discard_event()
+		);
+}
+
+sanguis::messages::call::result
+sanguis::client::states::running::operator()(
+	sanguis::messages::server::add_own_player const &_message
+)
+{
+	hud_->player_name(
+		sanguis::player_name(
+			sge::charconv::utf8_string_to_fcppt(
+				_message.get<
+					sanguis::messages::roles::name
+				>()
+			)
+		)
+	);
+
+	return
+		sanguis::messages::call::result(
+			sanguis::messages::call::forward_to_default()
 		);
 }
 

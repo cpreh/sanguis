@@ -1,9 +1,9 @@
+#include <sanguis/player_name.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/console_command_vector.hpp>
 #include <sanguis/server/create_player.hpp>
 #include <sanguis/server/log.hpp>
 #include <sanguis/server/player_id.hpp>
-#include <sanguis/server/string.hpp>
 #include <sanguis/server/unicast_callback.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
 #include <sanguis/server/damage/list.hpp>
@@ -22,7 +22,7 @@ sanguis::server::entities::player_unique_ptr
 sanguis::server::create_player(
 	sanguis::random_generator &_random_generator,
 	sanguis::server::environment::load_context &_load_context,
-	sanguis::server::string const &_name,
+	sanguis::player_name const &_name,
 	sanguis::server::unicast_callback const &_send_to_player,
 	sanguis::server::player_id const _player_id,
 	sanguis::server::console_command_vector const &_known_commands

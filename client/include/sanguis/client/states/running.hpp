@@ -16,6 +16,7 @@
 #include <sanguis/client/states/ingame_fwd.hpp>
 #include <sanguis/messages/call/result_fwd.hpp>
 #include <sanguis/messages/server/add_console_command_fwd.hpp>
+#include <sanguis/messages/server/add_own_player_fwd.hpp>
 #include <sanguis/messages/server/change_world_fwd.hpp>
 #include <sanguis/messages/server/console_print_fwd.hpp>
 #include <sanguis/messages/server/experience_fwd.hpp>
@@ -105,6 +106,11 @@ public:
 	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::add_console_command const &
+	);
+
+	sanguis::messages::call::result
+	operator()(
+		sanguis::messages::server::add_own_player const &
 	);
 
 	sanguis::messages::call::result

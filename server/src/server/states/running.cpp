@@ -1,4 +1,5 @@
 #include <sanguis/log_parameters.hpp>
+#include <sanguis/player_name.hpp>
 #include <sanguis/string_vector.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/messages/adapted_types/string_vector.hpp>
@@ -198,10 +199,12 @@ sanguis::server::states::running::operator()(
 			0u // FIXME: which world id?
 		),
 		_id,
-		sge::charconv::utf8_string_to_fcppt(
-			_message.get<
-				sanguis::messages::roles::player_name
-			>()
+		sanguis::player_name(
+			sge::charconv::utf8_string_to_fcppt(
+				_message.get<
+					sanguis::messages::roles::player_name
+				>()
+			)
 		)
 	);
 

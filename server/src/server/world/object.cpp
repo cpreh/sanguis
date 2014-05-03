@@ -59,7 +59,6 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/source_world_id.hpp>
 #include <sanguis/server/speed.hpp>
-#include <sanguis/server/string.hpp>
 #include <sanguis/server/collision/body_collision.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>

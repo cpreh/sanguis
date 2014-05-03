@@ -6,6 +6,7 @@
 #include <sanguis/entity_id.hpp>
 #include <sanguis/is_primary_weapon_fwd.hpp>
 #include <sanguis/perk_type_fwd.hpp>
+#include <sanguis/player_name_fwd.hpp>
 #include <sanguis/random_generator.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
@@ -13,7 +14,6 @@
 #include <sanguis/server/load_fwd.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/speed_fwd.hpp>
-#include <sanguis/server/string.hpp>
 #include <sanguis/server/unicast_callback.hpp>
 #include <sanguis/server/vector_fwd.hpp>
 #include <sanguis/server/entities/optional_player_ref_fwd.hpp>
@@ -58,7 +58,7 @@ public:
 	insert_player(
 		sanguis::world_id,
 		sanguis::server::player_id,
-		sanguis::server::string const &name
+		sanguis::player_name const &
 	);
 
 	void

@@ -16,13 +16,15 @@
 #include <sanguis/client/perk/make_tree.hpp>
 #include <sanguis/client/perk/remaining_levels.hpp>
 #include <sanguis/client/perk/state.hpp>
-#include <sanguis/client/states/running.hpp>
+#include <sanguis/client/perk/tree.hpp>
 #include <sanguis/client/states/has_player.hpp>
+#include <sanguis/client/states/running.hpp>
 #include <sanguis/messages/adapted_types/level.hpp>
 #include <sanguis/messages/adapted_types/perk_tree.hpp>
 #include <sanguis/messages/call/result.hpp>
 #include <sanguis/messages/client/create.hpp>
 #include <sanguis/messages/client/choose_perk.hpp>
+#include <sanguis/messages/roles/name.hpp>
 #include <sanguis/messages/roles/remaining_perk_levels.hpp>
 #include <sanguis/messages/server/available_perks.hpp>
 #include <sanguis/messages/server/level_up.hpp>
@@ -31,8 +33,6 @@
 #include <alda/serialization/load/static_size.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/container/raw_vector_impl.hpp>
-#include <fcppt/container/tree/object_impl.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/config/external_begin.hpp>

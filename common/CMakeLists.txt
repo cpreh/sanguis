@@ -366,6 +366,8 @@ set(
 	include/sanguis/perk_type_fwd.hpp
 	include/sanguis/pickup_type.hpp
 	include/sanguis/pickup_type_fwd.hpp
+	include/sanguis/player_name.hpp
+	include/sanguis/player_name_fwd.hpp
 	include/sanguis/primary_weapon_type.hpp
 	include/sanguis/primary_weapon_type_fwd.hpp
 	include/sanguis/projectile_type.hpp

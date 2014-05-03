@@ -2,6 +2,7 @@
 #include <sanguis/entity_id.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/perk_type.hpp>
+#include <sanguis/player_name.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_type_to_is_primary.hpp>
@@ -29,7 +30,6 @@
 #include <sanguis/server/skill_points.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/speed.hpp>
-#include <sanguis/server/string.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/create_callback_container.hpp>
 #include <sanguis/server/auras/update_sight.hpp>
@@ -84,7 +84,7 @@ sanguis::server::entities::player::player(
 	sanguis::server::health const _health,
 	sanguis::server::damage::armor_array const &_armor,
 	sanguis::server::entities::movement_speed const _speed,
-	sanguis::server::string const &_name,
+	sanguis::player_name const &_name,
 	sanguis::server::player_id const _player_id
 )
 :
@@ -265,7 +265,7 @@ sanguis::server::entities::player::add_exp(
 	);
 }
 
-sanguis::server::string const &
+sanguis::player_name const &
 sanguis::server::entities::player::name() const
 {
 	return
@@ -573,7 +573,7 @@ sanguis::server::entities::player::add_message_impl() const
 				this->aura_types(),
 				this->buff_types(),
 				sge::charconv::fcppt_string_to_utf8(
-					this->name()
+					this->name().get()
 				)
 			)
 		);

@@ -4,6 +4,7 @@
 #include <sanguis/is_primary_weapon_fwd.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/perk_type_fwd.hpp>
+#include <sanguis/player_name.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/collision/world/group_field_fwd.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
@@ -13,7 +14,6 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/skill_points.hpp>
 #include <sanguis/server/speed.hpp>
-#include <sanguis/server/string.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/damage/armor_array_fwd.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
@@ -67,14 +67,14 @@ public:
 		sanguis::server::health,
 		sanguis::server::damage::armor_array const &,
 		sanguis::server::entities::movement_speed,
-		sanguis::server::string const &name,
+		sanguis::player_name const &,
 		sanguis::server::player_id
 	);
 
 	~player();
 
 	// own functions
-	sanguis::server::string const &
+	sanguis::player_name const &
 	name() const;
 
 	void
@@ -190,7 +190,7 @@ private:
 	>
 	weapon_pickup_set;
 
-	sanguis::server::string const name_;
+	sanguis::player_name const name_;
 
 	sanguis::server::player_id const player_id_;
 

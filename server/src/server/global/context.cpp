@@ -4,6 +4,7 @@
 #include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/perk_type.hpp>
+#include <sanguis/player_name.hpp>
 #include <sanguis/random_seed.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/world_id.hpp>
@@ -22,7 +23,6 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/send_available_perks.hpp>
 #include <sanguis/server/speed.hpp>
-#include <sanguis/server/string.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/unicast_callback.hpp>
 #include <sanguis/server/unknown_player_exception.hpp>
@@ -136,7 +136,7 @@ void
 sanguis::server::global::context::insert_player(
 	sanguis::world_id const _world_id,
 	sanguis::server::player_id const _player_id,
-	sanguis::server::string const &_name
+	sanguis::player_name const &_name
 )
 {
 	// send this before the world gets created
