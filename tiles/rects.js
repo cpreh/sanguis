@@ -318,14 +318,14 @@
       return Math.abs(x - y) < 0.001;
     };
     if (close(mid.y, start.y)) {
-      dir1 = new Dim(sign(mid.x - start.x), 0);
+      dir1 = new Dim((Math.floor(thickness / 2)) * sign(mid.x - start.x), 0);
     } else {
-      dir1 = new Dim(0, sign(mid.y - start.y));
+      dir1 = new Dim(0, (Math.floor(thickness / 2)) * sign(mid.y - start.y));
     }
     if (close(mid.y, end.y)) {
-      dir2 = new Dim(sign(mid.x - end.x), 0);
+      dir2 = new Dim((Math.floor(thickness / 2)) * sign(mid.x - end.x), 0);
     } else {
-      dir2 = new Dim(0, sign(mid.y - end.y));
+      dir2 = new Dim(0, (Math.floor(thickness / 2)) * sign(mid.y - end.y));
     }
 
     /*
@@ -336,9 +336,9 @@
      */
     if (close(end.x, start.x) || close(end.y, start.y)) {
       if (close(end.x, start.x)) {
-        dir = new Dim(0, sign(end.y - start.y));
+        dir = new Dim(0, (Math.floor(thickness / 2)) * sign(end.y - start.y));
       } else {
-        dir = new Dim(sign(end.x - start.x), 0);
+        dir = new Dim((Math.floor(thickness / 2)) * sign(end.x - start.x), 0);
       }
       fill_rect(start.plus(dir), end.minus(dir), thickness, '#f00');
     } else {
@@ -402,15 +402,15 @@
     canvas.addEventListener('mousemove', redraw);
     canvas.addEventListener('keydown', redraw);
     outer_slider.addEventListener('input', function(event) {
-      outer_label.innerHTML = outer.value;
+      outer_label.innerHTML = outer_slider.value;
       return redraw(event);
     });
     inner_slider.addEventListener('input', function(event) {
-      inner_label.innerHTML = inner.value;
+      inner_label.innerHTML = inner_slider.value;
       return redraw(event);
     });
     return tilesize_slider.addEventListener('input', function(event) {
-      tilesize_label.innerHTML = tilesize.value;
+      tilesize_label.innerHTML = tilesize_slider.value;
       return redraw(event);
     });
   };

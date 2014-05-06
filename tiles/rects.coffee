@@ -271,22 +271,22 @@ draw_corridor = (ctx, tilesize, p1, p2, thickness, inner_thickness, flipped) ->
 	# determine orientation of starting tile
 	if close(mid.y, start.y)
 		dir1 = new Dim(
-			sign(mid.x - start.x),
+			(thickness // 2) * sign(mid.x - start.x),
 			0)
 	else
 		dir1 = new Dim(
 			0,
-			sign(mid.y - start.y))
+			(thickness // 2) * sign(mid.y - start.y))
 	
 	# determine orientation of end tile
 	if close(mid.y, end.y)
 		dir2 = new Dim(
-			sign(mid.x - end.x),
+			(thickness // 2) * sign(mid.x - end.x),
 			0)
 	else
 		dir2 = new Dim(
 			0,
-			sign(mid.y - end.y))
+			(thickness // 2) * sign(mid.y - end.y))
 
 	###
 	# horizontal or vertical paths without mid have only one rect
@@ -296,9 +296,9 @@ draw_corridor = (ctx, tilesize, p1, p2, thickness, inner_thickness, flipped) ->
 	###
 	if close(end.x, start.x) or close(end.y, start.y)
 		if close(end.x, start.x)
-			dir = new Dim(0,sign(end.y - start.y))
+			dir = new Dim(0,(thickness // 2) * sign(end.y - start.y))
 		else
-			dir = new Dim(sign(end.x - start.x),0)
+			dir = new Dim((thickness // 2) * sign(end.x - start.x),0)
 		fill_rect start.plus(dir), end.minus(dir), thickness, '#f00'
 	else
 		fill_rect start.plus(dir1), mid, thickness, '#080'
@@ -366,13 +366,13 @@ init = ->
 	canvas.addEventListener 'keydown', redraw
 
 	outer_slider.addEventListener 'input', (event) ->
-		outer_label.innerHTML = outer.value
+		outer_label.innerHTML = outer_slider.value
 		redraw event
 	inner_slider.addEventListener 'input', (event) ->
-		inner_label.innerHTML = inner.value
+		inner_label.innerHTML = inner_slider.value
 		redraw event
 	tilesize_slider.addEventListener 'input', (event) ->
-		tilesize_label.innerHTML = tilesize.value
+		tilesize_label.innerHTML = tilesize_slider.value
 		redraw event
 
 window.addEventListener 'load', init
