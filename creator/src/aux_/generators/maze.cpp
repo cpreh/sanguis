@@ -8,6 +8,7 @@
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/aux_/enemy_type_container.hpp>
 #include <sanguis/creator/aux_/generate_maze.hpp>
+#include <sanguis/creator/aux_/place_destructibles.hpp>
 #include <sanguis/creator/aux_/place_openings.hpp>
 #include <sanguis/creator/aux_/place_spawners.hpp>
 #include <sanguis/creator/aux_/parameters.hpp>
@@ -67,6 +68,14 @@ sanguis::creator::aux_::generators::maze(
 		)
 	};
 
+	sanguis::creator::destructible_container const
+	destructibles{
+		sanguis::creator::aux_::place_destructibles(
+			grid,
+			_parameters.randgen()
+		)
+	};
+
 	sanguis::creator::background_grid const grid_bg(
 		grid.size(),
 		sanguis::creator::background_tile::asphalt
@@ -78,6 +87,6 @@ sanguis::creator::aux_::generators::maze(
 			grid_bg,
 			openings,
 			spawners,
-			sanguis::creator::destructible_container() // TODO
+			destructibles
 		);
 }
