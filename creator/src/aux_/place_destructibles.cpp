@@ -9,8 +9,10 @@
 #include <sanguis/creator/tile_is_solid.hpp>
 #include <fcppt/math/clamp.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
+#include <fcppt/container/grid/make_pos_crange.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/make_variate.hpp>
+
 
 sanguis::creator::destructible_container
 sanguis::creator::aux_::place_destructibles(
@@ -62,7 +64,7 @@ sanguis::creator::aux_::place_destructibles(
 			auto neighbors(
 				fcppt::container::grid::neumann_neighbors(
 					_pos));
-			
+
 			for(auto &n : neighbors)
 				if (
 					_grid[n]
@@ -75,35 +77,34 @@ sanguis::creator::aux_::place_destructibles(
 		}
 	);
 
-	for(unsigned y = 0u; y < _grid.size().h(); ++y)
-		for(unsigned x = 0u; x < _grid.size().w(); ++x)
-		{
-			sanguis::creator::pos
-			const
-			pos{x, y};
-
-			if
-			(
-				!
-				sanguis::creator::tile_is_solid(
-					_grid[
-						pos
-					]
-				)
-				&&
-				place_stuff_random(
-					number_of_wall_neighbors(
-						pos
-					)
+	for(
+		auto const &entry
+		:
+		fcppt::container::grid::make_pos_crange(
+			_grid
+		)
+	)
+		if
+		(
+			!
+			sanguis::creator::tile_is_solid(
+				entry.value()
+			)
+			&&
+			place_stuff_random(
+				number_of_wall_neighbors(
+					entry.pos()
 				)
 			)
-				result.push_back(
-					sanguis::creator::destructible(
-						sanguis::creator::destructible_pos(pos),
-						sanguis::creator::destructible_type::barrel
-					)
-				);
-		}
+		)
+			result.push_back(
+				sanguis::creator::destructible(
+					sanguis::creator::destructible_pos(
+						entry.pos()
+					),
+					sanguis::creator::destructible_type::barrel
+				)
+			);
 
 	return
 		result;
