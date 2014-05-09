@@ -9,7 +9,7 @@
 #include <sanguis/server/collision/body.hpp>
 #include <sanguis/server/collision/position_callback.hpp>
 #include <sanguis/server/collision/result.hpp>
-#include <sanguis/server/entities/check_dim.hpp>
+#include <sanguis/server/entities/convert_model_size.hpp>
 #include <sanguis/server/entities/radius.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/entities/with_body.hpp>
@@ -27,7 +27,7 @@
 
 
 sanguis::server::entities::with_body::with_body(
-	sanguis::server::dim const _dim
+	sanguis::server::model_size const _model_size
 )
 :
 	sanguis::server::entities::with_ghosts(),
@@ -36,8 +36,8 @@ sanguis::server::entities::with_body::with_body(
 	sanguis::server::entities::ifaces::with_links(),
 	sanguis::collision::world::body_base(),
 	dim_(
-		sanguis::server::entities::check_dim(
-			_dim
+		sanguis::server::entities::convert_model_size(
+			_model_size
 		)
 	),
 	angle_(

@@ -1,8 +1,10 @@
 #include <sanguis/server/direction.hpp>
+#include <sanguis/server/model_size.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/optional_result.hpp>
 #include <sanguis/server/collision/with_world_move.hpp>
 #include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/movement_speed_initial.hpp>
 #include <sanguis/server/entities/speed_to_abs.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_body.hpp>
@@ -10,7 +12,6 @@
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/entities/ifaces/with_velocity.hpp>
 #include <sanguis/server/entities/property/changeable.hpp>
-#include <sanguis/server/entities/property/initial_fwd.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -18,18 +19,18 @@
 
 
 sanguis::server::entities::with_velocity::with_velocity(
-	sanguis::server::dim const _dim,
-	sanguis::server::entities::property::initial const &_movement_speed,
+	sanguis::server::model_size const _model_size,
+	sanguis::server::entities::movement_speed_initial const _movement_speed,
 	sanguis::server::direction const _direction
 )
 :
 	sanguis::server::entities::ifaces::with_id(),
 	sanguis::server::entities::ifaces::with_velocity(),
 	sanguis::server::entities::with_body(
-		_dim
+		_model_size
 	),
 	movement_speed_(
-		_movement_speed
+		_movement_speed.get()
 	),
 	direction_(
 		_direction

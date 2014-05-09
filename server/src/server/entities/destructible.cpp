@@ -31,7 +31,7 @@ sanguis::server::entities::destructible::destructible(
 )
 :
 	sanguis::server::entities::with_body(
-		_load_context.entity_dim(
+		_load_context.model_size(
 			sanguis::server::model_name(
 				sanguis::load::destructible_name(
 					_type

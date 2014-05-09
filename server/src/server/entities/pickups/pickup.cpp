@@ -7,8 +7,8 @@
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/center.hpp>
-#include <sanguis/server/dim.hpp>
 #include <sanguis/server/model_name.hpp>
+#include <sanguis/server/model_size.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/entities/player.hpp>
@@ -25,28 +25,22 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::pickup_type
-sanguis::server::entities::pickups::pickup::ptype() const
-{
-	return ptype_;
-}
-
 sanguis::server::entities::pickups::pickup::~pickup()
 {
 }
 
 sanguis::server::entities::pickups::pickup::pickup(
-	sanguis::pickup_type const _ptype,
+	sanguis::pickup_type const _pickup_type,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::team const _team
 )
 :
 	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::with_body(
-		_load_context.entity_dim(
+		_load_context.model_size(
 			sanguis::server::model_name(
 				sanguis::load::pickup_name(
-					_ptype
+					_pickup_type
 				)
 			)
 		)
@@ -58,8 +52,8 @@ sanguis::server::entities::pickups::pickup::pickup(
 	team_(
 		_team
 	),
-	ptype_(
-		_ptype
+	pickup_type_(
+		_pickup_type
 	),
 	life_timer_(
 		sanguis::diff_timer::parameters(
@@ -144,7 +138,7 @@ sanguis::server::entities::pickups::pickup::add_message(
 				this->id(),
 				this->center().get(),
 				this->angle().get(),
-				this->ptype()
+				pickup_type_
 			)
 		);
 }

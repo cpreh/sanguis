@@ -2,8 +2,8 @@
 #include <sanguis/creator/spawn_pos.hpp>
 #include <sanguis/creator/spawn_type.hpp>
 #include <sanguis/load/enemy_name.hpp>
-#include <sanguis/server/dim.hpp>
 #include <sanguis/server/model_name.hpp>
+#include <sanguis/server/model_size.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>
@@ -52,7 +52,7 @@ sanguis::server::world::generate_single_spawns(
 				}
 			),
 			_pos.get(),
-			_load_context.entity_dim(
+			_load_context.model_size(
 				sanguis::server::model_name(
 					sanguis::load::enemy_name(
 						_type

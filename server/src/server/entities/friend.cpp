@@ -9,6 +9,7 @@
 #include <sanguis/server/dim.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/model_name.hpp>
+#include <sanguis/server/model_size.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/regeneration.hpp>
 #include <sanguis/server/team.hpp>
@@ -20,6 +21,7 @@
 #include <sanguis/server/damage/armor_array.hpp>
 #include <sanguis/server/entities/friend.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
+#include <sanguis/server/entities/movement_speed_initial.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
@@ -30,7 +32,7 @@
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/pickups/pickup.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
-#include <sanguis/server/entities/property/initial.hpp>
+#include <sanguis/server/entities/property/initial_zero.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/weapons/default_ias.hpp>
 #include <sanguis/server/weapons/default_irs.hpp>
@@ -77,19 +79,16 @@ sanguis::server::entities::friend_::friend_(
 	),
 	sanguis::server::entities::with_links(),
 	sanguis::server::entities::with_velocity(
-		_load_context.entity_dim(
+		_load_context.model_size(
 			sanguis::server::model_name(
 				sanguis::load::friend_name(
 					_ftype
 				)
 			)
 		),
-		sanguis::server::entities::property::initial(
-			sanguis::server::entities::property::initial::base(
+		sanguis::server::entities::movement_speed_initial(
+			sanguis::server::entities::property::initial_zero(
 				_movement_speed.get()
-			),
-			sanguis::server::entities::property::initial::current(
-				0.f
 			)
 		),
 		sanguis::server::direction(

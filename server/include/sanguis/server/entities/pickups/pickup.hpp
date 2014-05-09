@@ -39,9 +39,6 @@ class pickup
 		pickup
 	);
 public:
-	sanguis::pickup_type
-	ptype() const;
-
 	virtual
 	~pickup();
 protected:
@@ -89,7 +86,7 @@ private:
 
 	sanguis::server::team const team_;
 
-	sanguis::pickup_type const ptype_;
+	sanguis::pickup_type const pickup_type_;
 
 	sanguis::diff_timer life_timer_;
 };

@@ -4,15 +4,16 @@
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/center.hpp>
-#include <sanguis/server/dim.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/model_name.hpp>
+#include <sanguis/server/model_size.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/collision/result_fwd.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
 #include <sanguis/server/damage/list.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
+#include <sanguis/server/entities/movement_speed_initial.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_health.hpp>
 #include <sanguis/server/entities/with_links.hpp>
@@ -44,11 +45,13 @@ sanguis::server::entities::projectiles::projectile::projectile(
 	),
 	sanguis::server::entities::with_links(),
 	sanguis::server::entities::with_velocity(
-		_load_context.entity_dim(
+		_load_context.model_size(
 			_model_name
 		),
-		sanguis::server::entities::property::initial_max(
-			_movement_speed.get()
+		sanguis::server::entities::movement_speed_initial(
+			sanguis::server::entities::property::initial_max(
+				_movement_speed.get()
+			)
 		),
 		_direction
 	),

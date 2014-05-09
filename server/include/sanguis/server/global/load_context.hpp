@@ -2,9 +2,9 @@
 #define SANGUIS_SERVER_GLOBAL_LOAD_CONTEXT_HPP_INCLUDED
 
 #include <sanguis/entity_id.hpp>
-#include <sanguis/server/dim_fwd.hpp>
 #include <sanguis/server/load_fwd.hpp>
-#include <sanguis/server/model_name.hpp>
+#include <sanguis/server/model_name_fwd.hpp>
+#include <sanguis/server/model_size_fwd.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/global/next_id_callback.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -30,15 +30,18 @@ public:
 		sanguis::server::global::next_id_callback const &
 	);
 
-	~load_context();
+	~load_context()
+	override;
 private:
-	sanguis::server::dim const
-	entity_dim(
+	sanguis::server::model_size const
+	model_size(
 		sanguis::server::model_name const &
-	) const;
+	) const
+	override;
 
 	sanguis::entity_id const
-	next_id() const;
+	next_id()
+	override;
 
 	sanguis::server::load const &model_context_;
 

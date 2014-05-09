@@ -6,6 +6,7 @@
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/dim.hpp>
+#include <sanguis/server/model_size_fwd.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/speed_fwd.hpp>
 #include <sanguis/server/collision/body.hpp>
@@ -45,7 +46,7 @@ class with_body
 public:
 	explicit
 	with_body(
-		sanguis::server::dim
+		sanguis::server::model_size
 	);
 
 	~with_body();

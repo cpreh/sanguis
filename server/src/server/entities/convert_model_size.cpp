@@ -2,8 +2,9 @@
 #include <sanguis/creator/tile_size.hpp>
 #include <sanguis/server/dim.hpp>
 #include <sanguis/server/log.hpp>
+#include <sanguis/server/model_size.hpp>
 #include <sanguis/server/space_unit.hpp>
-#include <sanguis/server/entities/check_dim.hpp>
+#include <sanguis/server/entities/convert_model_size.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/int_to_float.hpp>
@@ -49,12 +50,12 @@ check_size(
 }
 
 sanguis::server::dim const
-sanguis::server::entities::check_dim(
-	sanguis::server::dim const _dim
+sanguis::server::entities::convert_model_size(
+	sanguis::server::model_size const _dim
 )
 {
 	sanguis::server::dim const scaled(
-		_dim
+		_dim.get()
 		/
 		sanguis::collision::scale()
 	);

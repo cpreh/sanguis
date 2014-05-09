@@ -160,7 +160,7 @@ set(
 	include/sanguis/server/entities/base_fwd.hpp
 	include/sanguis/server/entities/center_ghost.hpp
 	include/sanguis/server/entities/center_simple.hpp
-	include/sanguis/server/entities/check_dim.hpp
+	include/sanguis/server/entities/convert_model_size.hpp
 	include/sanguis/server/entities/destructible.hpp
 	include/sanguis/server/entities/enemies/attribute.hpp
 	include/sanguis/server/entities/enemies/attribute_container.hpp
@@ -237,6 +237,9 @@ set(
 	include/sanguis/server/entities/is_type.hpp
 	include/sanguis/server/entities/link_container.hpp
 	include/sanguis/server/entities/movement_speed.hpp
+	include/sanguis/server/entities/movement_speed_fwd.hpp
+	include/sanguis/server/entities/movement_speed_initial.hpp
+	include/sanguis/server/entities/movement_speed_initial_fwd.hpp
 	include/sanguis/server/entities/optional_base_ref.hpp
 	include/sanguis/server/entities/optional_base_ref_fwd.hpp
 	include/sanguis/server/entities/optional_player_ref.hpp
@@ -286,6 +289,7 @@ set(
 	include/sanguis/server/entities/property/initial.hpp
 	include/sanguis/server/entities/property/initial_fwd.hpp
 	include/sanguis/server/entities/property/initial_max.hpp
+	include/sanguis/server/entities/property/initial_zero.hpp
 	include/sanguis/server/entities/property/linear.hpp
 	include/sanguis/server/entities/property/linear_change.hpp
 	include/sanguis/server/entities/property/linear_decrease.hpp
@@ -373,6 +377,9 @@ set(
 	include/sanguis/server/make_unicast_callback.hpp
 	include/sanguis/server/message_functor.hpp
 	include/sanguis/server/model_name.hpp
+	include/sanguis/server/model_name_fwd.hpp
+	include/sanguis/server/model_size.hpp
+	include/sanguis/server/model_size_fwd.hpp
 	include/sanguis/server/net/angle.hpp
 	include/sanguis/server/net/angle_fwd.hpp
 	include/sanguis/server/net/angle_policy.hpp
@@ -701,7 +708,7 @@ set(
 	src/server/entities/base.cpp
 	src/server/entities/center_ghost.cpp
 	src/server/entities/center_simple.cpp
-	src/server/entities/check_dim.cpp
+	src/server/entities/convert_model_size.cpp
 	src/server/entities/destructible.cpp
 	src/server/entities/enemies/attribute.cpp
 	src/server/entities/enemies/base_difficulty.cpp
@@ -776,6 +783,7 @@ set(
 	src/server/entities/property/current_to_max.cpp
 	src/server/entities/property/initial.cpp
 	src/server/entities/property/initial_max.cpp
+	src/server/entities/property/initial_zero.cpp
 	src/server/entities/property/linear.cpp
 	src/server/entities/property/linear_change.cpp
 	src/server/entities/property/linear_decrease.cpp

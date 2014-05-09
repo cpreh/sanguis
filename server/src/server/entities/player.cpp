@@ -15,13 +15,13 @@
 #include <sanguis/server/add_sight_callback.hpp>
 #include <sanguis/server/add_weapon_pickup_callback.hpp>
 #include <sanguis/server/closest_entity.hpp>
-#include <sanguis/server/dim.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/level.hpp>
 #include <sanguis/server/level_from_exp.hpp>
 #include <sanguis/server/model_name.hpp>
+#include <sanguis/server/model_size.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/regeneration.hpp>
@@ -37,6 +37,7 @@
 #include <sanguis/server/damage/armor_array_fwd.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
+#include <sanguis/server/entities/movement_speed_initial.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/with_auras_id.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
@@ -49,7 +50,7 @@
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/pickups/weapon.hpp>
 #include <sanguis/server/entities/property/current_to_max.hpp>
-#include <sanguis/server/entities/property/initial.hpp>
+#include <sanguis/server/entities/property/initial_zero.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/perks/perk.hpp>
@@ -90,17 +91,14 @@ sanguis::server::entities::player::player(
 :
 	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::with_velocity(
-		_load_context.entity_dim(
+		_load_context.model_size(
 			sanguis::server::model_name(
 				FCPPT_TEXT("player")
 			)
 		),
-		sanguis::server::entities::property::initial(
-			sanguis::server::entities::property::initial::base(
+		sanguis::server::entities::movement_speed_initial(
+			sanguis::server::entities::property::initial_zero(
 				_speed.get()
-			),
-			sanguis::server::entities::property::initial::current(
-				0.f
 			)
 		),
 		sanguis::server::direction(

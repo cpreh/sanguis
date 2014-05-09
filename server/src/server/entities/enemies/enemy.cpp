@@ -19,6 +19,7 @@
 #include <sanguis/server/entities/exp_area.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
+#include <sanguis/server/entities/movement_speed_initial.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
 #include <sanguis/server/entities/with_id.hpp>
@@ -28,7 +29,7 @@
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
 #include <sanguis/server/entities/enemies/parameters.hpp>
-#include <sanguis/server/entities/property/initial.hpp>
+#include <sanguis/server/entities/property/initial_zero.hpp>
 #include <sanguis/server/entities/spawns/spawn.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/load_context.hpp>
@@ -70,19 +71,16 @@ sanguis::server::entities::enemies::enemy::enemy(
 	),
 	sanguis::server::entities::with_links(),
 	sanguis::server::entities::with_velocity(
-		_parameters.load_context().entity_dim(
+		_parameters.load_context().model_size(
 			sanguis::server::model_name(
 				sanguis::load::enemy_name(
 					_parameters.enemy_type()
 				)
 			)
 		),
-		sanguis::server::entities::property::initial(
-			sanguis::server::entities::property::initial::base(
+		sanguis::server::entities::movement_speed_initial(
+			sanguis::server::entities::property::initial_zero(
 				_parameters.movement_speed().get()
-			),
-			sanguis::server::entities::property::initial::current(
-				0.f
 			)
 		),
 		sanguis::server::direction(

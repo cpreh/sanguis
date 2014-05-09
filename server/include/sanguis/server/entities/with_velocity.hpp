@@ -3,17 +3,17 @@
 
 #include <sanguis/duration.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
-#include <sanguis/server/dim_fwd.hpp>
 #include <sanguis/server/direction.hpp>
+#include <sanguis/server/model_size_fwd.hpp>
 #include <sanguis/server/speed_fwd.hpp>
 #include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/movement_speed_initial_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_velocity_fwd.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/entities/ifaces/with_velocity.hpp>
 #include <sanguis/server/entities/property/changeable.hpp>
-#include <sanguis/server/entities/property/initial_fwd.hpp>
 #include <sanguis/server/net/center.hpp>
 #include <sanguis/server/net/speed.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -38,8 +38,8 @@ class with_velocity
 	);
 protected:
 	with_velocity(
-		sanguis::server::dim,
-		sanguis::server::entities::property::initial const &speed,
+		sanguis::server::model_size,
+		sanguis::server::entities::movement_speed_initial,
 		sanguis::server::direction
 	);
 

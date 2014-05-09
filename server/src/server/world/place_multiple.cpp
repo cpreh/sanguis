@@ -2,7 +2,7 @@
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile_size.hpp>
 #include <sanguis/server/angle.hpp>
-#include <sanguis/server/dim.hpp>
+#include <sanguis/server/model_size.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/vector.hpp>
@@ -35,12 +35,12 @@ sanguis::server::world::place_multiple(
 	sanguis::random_generator &_random_generator,
 	sanguis::server::world::place_callback const &_place,
 	sanguis::creator::pos const _pos,
-	sanguis::server::dim const _dim
+	sanguis::server::model_size const _model_size
 )
 {
 	sanguis::server::radius const radius(
 		sanguis::server::entities::radius(
-			_dim
+			_model_size.get()
 		)
 	);
 

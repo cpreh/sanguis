@@ -1,7 +1,8 @@
 #include <sanguis/entity_id.hpp>
-#include <sanguis/server/dim.hpp>
+#include <sanguis/model/cell_size.hpp>
 #include <sanguis/server/load.hpp>
 #include <sanguis/server/model_name.hpp>
+#include <sanguis/server/model_size.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/global/load_context.hpp>
 #include <sanguis/server/global/next_id_callback.hpp>
@@ -27,23 +28,25 @@ sanguis::server::global::load_context::~load_context()
 {
 }
 
-sanguis::server::dim const
-sanguis::server::global::load_context::entity_dim(
+sanguis::server::model_size const
+sanguis::server::global::load_context::model_size(
 	sanguis::server::model_name const &_model_name
 ) const
 {
 	return
-		fcppt::math::dim::structure_cast<
-			sanguis::server::dim
-		>(
-			model_context_.model_dim(
-				_model_name.get()
-			).get()
+		sanguis::server::model_size(
+			fcppt::math::dim::structure_cast<
+				sanguis::server::model_size::value_type
+			>(
+				model_context_.model_dim(
+					_model_name.get()
+				).get()
+			)
 		);
 }
 
 sanguis::entity_id const
-sanguis::server::global::load_context::next_id() const
+sanguis::server::global::load_context::next_id()
 {
 	return
 		next_id_callback_();
