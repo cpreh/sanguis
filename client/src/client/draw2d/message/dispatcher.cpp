@@ -37,7 +37,6 @@
 #include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/client/draw2d/translate/scalar_to_client.hpp>
 #include <sanguis/client/draw2d/translate/vector_to_client.hpp>
-#include <sanguis/messages/role_name.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/aoe.hpp>
 #include <sanguis/messages/roles/aura_type.hpp>
@@ -86,6 +85,7 @@
 #include <sanguis/messages/server/speed.hpp>
 #include <sanguis/messages/server/weapon_status.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
+#include <majutsu/unwrap_role.hpp>
 #include <fcppt/dynamic_cast.hpp>
 #include <fcppt/type_name_from_info.hpp>
 #include <fcppt/text.hpp>
@@ -638,7 +638,7 @@ sanguis::client::draw2d::message::dispatcher::configure_new_object(
 					boost::mpl::_1
 				>
 			>,
-			sanguis::messages::role_name<
+			majutsu::unwrap_role<
 				boost::mpl::_1
 			>
 		>

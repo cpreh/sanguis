@@ -165,7 +165,6 @@ set(
 	include/sanguis/messages/convert/to_magazine_size.hpp
 	include/sanguis/messages/convert/to_string_vector.hpp
 	include/sanguis/messages/convert/to_weapon_attribute_vector.hpp
-	include/sanguis/messages/role_name.hpp
 	include/sanguis/messages/roles/angle.hpp
 	include/sanguis/messages/roles/aoe.hpp
 	include/sanguis/messages/roles/aoe_projectile_type.hpp
