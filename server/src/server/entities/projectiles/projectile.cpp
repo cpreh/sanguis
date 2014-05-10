@@ -1,5 +1,10 @@
 #include <sanguis/projectile_type.hpp>
 #include <sanguis/collision/world/group_field.hpp>
+#include <sanguis/messages/roles/angle.hpp>
+#include <sanguis/messages/roles/center.hpp>
+#include <sanguis/messages/roles/entity_id.hpp>
+#include <sanguis/messages/roles/projectile_type.hpp>
+#include <sanguis/messages/roles/speed.hpp>
 #include <sanguis/messages/server/add_projectile.hpp>
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
@@ -155,11 +160,16 @@ sanguis::server::entities::projectiles::projectile::add_message(
 	return
 		sanguis::messages::server::create_ptr(
 			sanguis::messages::server::add_projectile(
-				this->id(),
-				this->center().get(),
-				this->angle().get(),
-				this->speed().get(),
-				projectile_type_
+				sanguis::messages::roles::entity_id{} =
+					this->id(),
+				sanguis::messages::roles::center{} =
+					this->center().get(),
+				sanguis::messages::roles::angle{} =
+					this->angle().get(),
+				sanguis::messages::roles::speed{} =
+					this->speed().get(),
+				sanguis::messages::roles::projectile_type{} =
+					projectile_type_
 			)
 		);
 }

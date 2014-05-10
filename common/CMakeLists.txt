@@ -168,20 +168,29 @@ set(
 	include/sanguis/messages/role_name.hpp
 	include/sanguis/messages/roles/angle.hpp
 	include/sanguis/messages/roles/aoe.hpp
-	include/sanguis/messages/roles/aoe_projectile.hpp
+	include/sanguis/messages/roles/aoe_projectile_type.hpp
 	include/sanguis/messages/roles/attack_dest.hpp
+	include/sanguis/messages/roles/aura_type.hpp
+	include/sanguis/messages/roles/aura_type_container.hpp
+	include/sanguis/messages/roles/buff_type.hpp
+	include/sanguis/messages/roles/buff_type_container.hpp
 	include/sanguis/messages/roles/center.hpp
-	include/sanguis/messages/roles/cheat.hpp
+	include/sanguis/messages/roles/cheat_type.hpp
 	include/sanguis/messages/roles/command_description.hpp
 	include/sanguis/messages/roles/command_name.hpp
+	include/sanguis/messages/roles/console_command.hpp
+	include/sanguis/messages/roles/console_message.hpp
+	include/sanguis/messages/roles/destructible_type.hpp
 	include/sanguis/messages/roles/direction.hpp
-	include/sanguis/messages/roles/enemy.hpp
+	include/sanguis/messages/roles/enemy_type.hpp
 	include/sanguis/messages/roles/entity_id.hpp
 	include/sanguis/messages/roles/exp_for_next_level.hpp
 	include/sanguis/messages/roles/experience.hpp
-	include/sanguis/messages/roles/friend.hpp
+	include/sanguis/messages/roles/friend_type.hpp
 	include/sanguis/messages/roles/generator_name.hpp
 	include/sanguis/messages/roles/health.hpp
+	include/sanguis/messages/roles/is_primary_weapon.hpp
+	include/sanguis/messages/roles/level.hpp
 	include/sanguis/messages/roles/magazine_base_size.hpp
 	include/sanguis/messages/roles/magazine_extra_size.hpp
 	include/sanguis/messages/roles/magazine_remaining.hpp
@@ -189,21 +198,27 @@ set(
 	include/sanguis/messages/roles/max_perk_level.hpp
 	include/sanguis/messages/roles/name.hpp
 	include/sanguis/messages/roles/opening_count.hpp
-	include/sanguis/messages/roles/perk.hpp
 	include/sanguis/messages/roles/perk_label.hpp
 	include/sanguis/messages/roles/perk_level.hpp
 	include/sanguis/messages/roles/perk_parent.hpp
-	include/sanguis/messages/roles/pickup.hpp
+	include/sanguis/messages/roles/perk_tree.hpp
+	include/sanguis/messages/roles/perk_type.hpp
+	include/sanguis/messages/roles/pickup_type.hpp
 	include/sanguis/messages/roles/player_name.hpp
 	include/sanguis/messages/roles/primary_weapon.hpp
-	include/sanguis/messages/roles/projectile.hpp
+	include/sanguis/messages/roles/projectile_type.hpp
 	include/sanguis/messages/roles/remaining_perk_levels.hpp
 	include/sanguis/messages/roles/required_perk_parent_level.hpp
 	include/sanguis/messages/roles/required_perk_player_level.hpp
+	include/sanguis/messages/roles/seed.hpp
 	include/sanguis/messages/roles/speed.hpp
 	include/sanguis/messages/roles/weapon_attribute_base.hpp
+	include/sanguis/messages/roles/weapon_attribute_container.hpp
 	include/sanguis/messages/roles/weapon_attribute_extra.hpp
+	include/sanguis/messages/roles/weapon_attribute_type.hpp
 	include/sanguis/messages/roles/weapon_status.hpp
+	include/sanguis/messages/roles/weapon_type.hpp
+	include/sanguis/messages/roles/world_id.hpp
 	include/sanguis/messages/roles/world_name.hpp
 	include/sanguis/messages/server/add_aoe_projectile.hpp
 	include/sanguis/messages/server/add_aoe_projectile_fwd.hpp

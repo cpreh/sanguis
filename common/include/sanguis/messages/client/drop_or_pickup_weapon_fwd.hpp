@@ -4,6 +4,7 @@
 #include <sanguis/messages/adapted_types/is_primary_weapon_fwd.hpp>
 #include <sanguis/messages/client/types/make_message_id_fwd.hpp>
 #include <sanguis/messages/client/types/message.hpp>
+#include <sanguis/messages/roles/is_primary_weapon.hpp>
 #include <alda/message/make_class_fwd.hpp>
 #include <majutsu/composite_fwd.hpp>
 #include <majutsu/role_fwd.hpp>
@@ -27,7 +28,8 @@ alda::message::make_class<
 				sanguis::messages::client::types::message::drop_or_pickup_weapon
 			>,
 			majutsu::role<
-				sanguis::messages::adapted_types::is_primary_weapon
+				sanguis::messages::adapted_types::is_primary_weapon,
+				sanguis::messages::roles::is_primary_weapon
 			>
 		>
 	>

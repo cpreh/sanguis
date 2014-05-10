@@ -1,6 +1,8 @@
 #ifndef SANGUIS_MESSAGES_ROLES_PLAYER_NAME_HPP_INCLUDED
 #define SANGUIS_MESSAGES_ROLES_PLAYER_NAME_HPP_INCLUDED
 
+#include <majutsu/make_role_tag.hpp>
+
 
 namespace sanguis
 {
@@ -9,9 +11,9 @@ namespace messages
 namespace roles
 {
 
-struct player_name
-{
-};
+MAJUTSU_MAKE_ROLE_TAG(
+	player_name
+);
 
 }
 }

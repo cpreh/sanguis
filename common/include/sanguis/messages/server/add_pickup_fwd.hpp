@@ -3,7 +3,7 @@
 
 #include <sanguis/pickup_type_fwd.hpp>
 #include <sanguis/messages/adapted_types/enum_fwd.hpp>
-#include <sanguis/messages/roles/pickup.hpp>
+#include <sanguis/messages/roles/pickup_type.hpp>
 #include <sanguis/messages/server/parts/add_elements_base_fwd.hpp>
 #include <sanguis/messages/server/types/bind_entity_message_fwd.hpp>
 #include <sanguis/messages/server/types/message.hpp>
@@ -34,7 +34,7 @@ alda::message::make_class<
 				sanguis::messages::adapted_types::enum_<
 					sanguis::pickup_type
 				>,
-				sanguis::messages::roles::pickup
+				sanguis::messages::roles::pickup_type
 			>
 		>
 	>

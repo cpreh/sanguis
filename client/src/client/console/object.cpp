@@ -4,6 +4,7 @@
 #include <sanguis/messages/client/console_command.hpp>
 #include <sanguis/messages/client/create.hpp>
 #include <sanguis/messages/convert/to_string_vector.hpp>
+#include <sanguis/messages/roles/console_command.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/object.hpp>
 #include <sge/console/callback/name.hpp>
@@ -110,11 +111,12 @@ sanguis::client::console::object::server_callback(
 	send_(
 		sanguis::messages::client::create(
 			sanguis::messages::client::console_command(
-				sanguis::messages::convert::to_string_vector(
-					sanguis::client::from_console_arg_list(
-						_args
+				sanguis::messages::roles::console_command{} =
+					sanguis::messages::convert::to_string_vector(
+						sanguis::client::from_console_arg_list(
+							_args
+						)
 					)
-				)
 			)
 		)
 	);

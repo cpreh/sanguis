@@ -32,21 +32,21 @@
 #include <sanguis/client/states/running.hpp>
 #include <sanguis/client/load/context.hpp>
 #include <sanguis/client/load/resource/context.hpp>
-#include <sanguis/messages/adapted_types/is_primary_weapon.hpp>
-#include <sanguis/messages/adapted_types/level.hpp>
-#include <sanguis/messages/adapted_types/string.hpp>
-#include <sanguis/messages/adapted_types/weapon_attribute_vector.hpp>
-#include <sanguis/messages/adapted_types/weapon_type.hpp>
 #include <sanguis/messages/call/forward_to_default.hpp>
 #include <sanguis/messages/call/result.hpp>
 #include <sanguis/messages/convert/from_weapon_attribute_vector.hpp>
 #include <sanguis/messages/roles/command_description.hpp>
 #include <sanguis/messages/roles/command_name.hpp>
+#include <sanguis/messages/roles/console_message.hpp>
 #include <sanguis/messages/roles/exp_for_next_level.hpp>
 #include <sanguis/messages/roles/experience.hpp>
+#include <sanguis/messages/roles/is_primary_weapon.hpp>
+#include <sanguis/messages/roles/level.hpp>
 #include <sanguis/messages/roles/magazine_base_size.hpp>
 #include <sanguis/messages/roles/magazine_extra_size.hpp>
 #include <sanguis/messages/roles/magazine_remaining.hpp>
+#include <sanguis/messages/roles/weapon_attribute_container.hpp>
+#include <sanguis/messages/roles/weapon_type.hpp>
 #include <sanguis/messages/roles/world_name.hpp>
 #include <sanguis/messages/server/add_console_command.hpp>
 #include <sanguis/messages/server/add_own_player.hpp>
@@ -55,6 +55,7 @@
 #include <sanguis/messages/server/console_print.hpp>
 #include <sanguis/messages/server/create.hpp>
 #include <sanguis/messages/server/experience.hpp>
+#include <sanguis/messages/server/give_weapon.hpp>
 #include <sanguis/messages/server/level_up.hpp>
 #include <sanguis/messages/server/magazine_remaining.hpp>
 #include <sanguis/messages/server/pause.hpp>
@@ -66,7 +67,6 @@
 #include <sge/input/cursor/activatable_fwd.hpp>
 #include <alda/serialization/load/optional.hpp>
 #include <alda/serialization/load/static_size.hpp>
-#include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -363,7 +363,7 @@ sanguis::client::states::running::operator()(
 		sge::font::from_fcppt_string(
 			sge::charconv::utf8_string_to_fcppt(
 				_message.get<
-					sanguis::messages::adapted_types::string
+					sanguis::messages::roles::console_message
 				>()
 			)
 		)
@@ -402,7 +402,7 @@ sanguis::client::states::running::operator()(
 	hud_->add_weapon(
 		sanguis::weapon_description(
 			_message.get<
-				sanguis::messages::adapted_types::weapon_type
+				sanguis::messages::roles::weapon_type
 			>(),
 			sanguis::magazine_size(
 				_message.get<
@@ -421,7 +421,7 @@ sanguis::client::states::running::operator()(
 			),
 			sanguis::messages::convert::from_weapon_attribute_vector(
 				_message.get<
-					sanguis::messages::adapted_types::weapon_attribute_vector
+					sanguis::messages::roles::weapon_attribute_container
 				>()
 			)
 		)
@@ -440,7 +440,7 @@ sanguis::client::states::running::operator()(
 {
 	hud_->magazine_remaining(
 		_message.get<
-			sanguis::messages::adapted_types::is_primary_weapon
+			sanguis::messages::roles::is_primary_weapon
 		>(),
 		sanguis::magazine_remaining(
 			_message.get<
@@ -463,7 +463,7 @@ sanguis::client::states::running::operator()(
 	hud_->level(
 		sanguis::client::level(
 			_message.get<
-				sanguis::messages::adapted_types::level
+				sanguis::messages::roles::level
 			>()
 		),
 		sanguis::client::exp_for_next_level(
@@ -505,7 +505,7 @@ sanguis::client::states::running::operator()(
 {
 	hud_->remove_weapon(
 		_message.get<
-			sanguis::messages::adapted_types::is_primary_weapon
+			sanguis::messages::roles::is_primary_weapon
 		>()
 	);
 

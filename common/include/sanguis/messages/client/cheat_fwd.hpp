@@ -3,7 +3,7 @@
 
 #include <sanguis/cheat_type_fwd.hpp>
 #include <sanguis/messages/adapted_types/enum_fwd.hpp>
-#include <sanguis/messages/roles/cheat.hpp>
+#include <sanguis/messages/roles/cheat_type.hpp>
 #include <sanguis/messages/client/types/make_message_id_fwd.hpp>
 #include <sanguis/messages/client/types/message.hpp>
 #include <alda/message/make_class_fwd.hpp>
@@ -32,7 +32,7 @@ alda::message::make_class<
 				sanguis::messages::adapted_types::enum_<
 					sanguis::cheat_type
 				>,
-				sanguis::messages::roles::cheat
+				sanguis::messages::roles::cheat_type
 			>
 		>
 	>

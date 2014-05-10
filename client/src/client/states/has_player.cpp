@@ -19,12 +19,13 @@
 #include <sanguis/client/perk/tree.hpp>
 #include <sanguis/client/states/has_player.hpp>
 #include <sanguis/client/states/running.hpp>
-#include <sanguis/messages/adapted_types/level.hpp>
-#include <sanguis/messages/adapted_types/perk_tree.hpp>
 #include <sanguis/messages/call/result.hpp>
 #include <sanguis/messages/client/create.hpp>
 #include <sanguis/messages/client/choose_perk.hpp>
+#include <sanguis/messages/roles/level.hpp>
 #include <sanguis/messages/roles/name.hpp>
+#include <sanguis/messages/roles/perk_tree.hpp>
+#include <sanguis/messages/roles/perk_type.hpp>
 #include <sanguis/messages/roles/remaining_perk_levels.hpp>
 #include <sanguis/messages/server/available_perks.hpp>
 #include <sanguis/messages/server/level_up.hpp>
@@ -141,7 +142,7 @@ sanguis::client::states::has_player::operator()(
 	perk_state_->perks(
 		sanguis::client::perk::make_tree(
 			_message.get<
-				sanguis::messages::adapted_types::perk_tree
+				sanguis::messages::roles::perk_tree
 			>()
 		),
 		sanguis::client::perk::remaining_levels(
@@ -168,7 +169,7 @@ sanguis::client::states::has_player::operator()(
 		sanguis::client::player_level(
 			sanguis::client::level(
 				_message.get<
-					sanguis::messages::adapted_types::level
+					sanguis::messages::roles::level
 				>()
 			)
 		)
@@ -208,7 +209,8 @@ sanguis::client::states::has_player::send_perk_choose(
 	>().send(
 		sanguis::messages::client::create(
 			sanguis::messages::client::choose_perk(
-				_type
+				sanguis::messages::roles::perk_type{} =
+					_type
 			)
 		)
 	);

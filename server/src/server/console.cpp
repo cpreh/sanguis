@@ -4,6 +4,9 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/send_callback.hpp>
 #include <sanguis/server/unicast_callback.hpp>
+#include <sanguis/messages/roles/command_description.hpp>
+#include <sanguis/messages/roles/command_name.hpp>
+#include <sanguis/messages/roles/console_message.hpp>
 #include <sanguis/messages/server/add_console_command.hpp>
 #include <sanguis/messages/server/console_print.hpp>
 #include <sanguis/messages/server/create.hpp>
@@ -56,12 +59,14 @@ sanguis::server::console::insert(
 	send_(
 		sanguis::messages::server::create(
 			sanguis::messages::server::add_console_command(
-				sge::charconv::fcppt_string_to_utf8(
-					_command
-				),
-				sge::charconv::fcppt_string_to_utf8(
-					_description
-				)
+				sanguis::messages::roles::command_name{} =
+					sge::charconv::fcppt_string_to_utf8(
+						_command
+					),
+				sanguis::messages::roles::command_description{} =
+					sge::charconv::fcppt_string_to_utf8(
+						_description
+					)
 			)
 		)
 	);
@@ -121,9 +126,10 @@ sanguis::server::console::print_line(
 		_id,
 		sanguis::messages::server::create(
 			sanguis::messages::server::console_print(
-				sge::charconv::fcppt_string_to_utf8(
-					_line
-				)
+				sanguis::messages::roles::console_message{} =
+					sge::charconv::fcppt_string_to_utf8(
+						_line
+					)
 			)
 		)
 	);

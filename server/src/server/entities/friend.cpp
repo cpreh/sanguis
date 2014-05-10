@@ -3,6 +3,17 @@
 #include <sanguis/collision/world/group.hpp>
 #include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/load/friend_name.hpp>
+#include <sanguis/messages/roles/angle.hpp>
+#include <sanguis/messages/roles/aura_type_container.hpp>
+#include <sanguis/messages/roles/buff_type_container.hpp>
+#include <sanguis/messages/roles/center.hpp>
+#include <sanguis/messages/roles/entity_id.hpp>
+#include <sanguis/messages/roles/friend_type.hpp>
+#include <sanguis/messages/roles/health.hpp>
+#include <sanguis/messages/roles/max_health.hpp>
+#include <sanguis/messages/roles/primary_weapon.hpp>
+#include <sanguis/messages/roles/speed.hpp>
+#include <sanguis/messages/roles/weapon_status.hpp>
 #include <sanguis/messages/server/add_friend.hpp>
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
@@ -46,7 +57,7 @@
 
 sanguis::server::entities::friend_::friend_(
 	sanguis::random_generator &_random_generator,
-	sanguis::friend_type const _ftype,
+	sanguis::friend_type const _friend_type,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::damage::armor_array const &_armor,
 	sanguis::server::health const _health,
@@ -82,7 +93,7 @@ sanguis::server::entities::friend_::friend_(
 		_load_context.model_size(
 			sanguis::server::model_name(
 				sanguis::load::friend_name(
-					_ftype
+					_friend_type
 				)
 			)
 		),
@@ -95,8 +106,8 @@ sanguis::server::entities::friend_::friend_(
 			0.f
 		)
 	),
-	ftype_(
-		_ftype
+	friend_type_(
+		_friend_type
 	)
 {
 }
@@ -107,7 +118,7 @@ sanguis::server::entities::friend_::on_transfer(
 )
 {
 	if(
-		ftype_
+		friend_type_
 		==
 		sanguis::friend_type::sentry
 		&&
@@ -155,17 +166,28 @@ sanguis::server::entities::friend_::add_message(
 	return
 		sanguis::messages::server::create_ptr(
 			sanguis::messages::server::add_friend(
-				this->id(),
-				this->center().get(),
-				this->angle().get(),
-				this->speed().get(),
-				this->current_health().get(),
-				this->max_health().get(),
-				this->primary_weapon_type(),
-				this->weapon_status(),
-				this->aura_types(),
-				this->buff_types(),
-				ftype_
+				sanguis::messages::roles::entity_id{} =
+					this->id(),
+				sanguis::messages::roles::center{} =
+					this->center().get(),
+				sanguis::messages::roles::angle{} =
+					this->angle().get(),
+				sanguis::messages::roles::speed{} =
+					this->speed().get(),
+				sanguis::messages::roles::health{} =
+					this->current_health().get(),
+				sanguis::messages::roles::max_health{} =
+					this->max_health().get(),
+				sanguis::messages::roles::primary_weapon{} =
+					this->primary_weapon_type(),
+				sanguis::messages::roles::weapon_status{} =
+					this->weapon_status(),
+				sanguis::messages::roles::aura_type_container{} =
+					this->aura_types(),
+				sanguis::messages::roles::buff_type_container{} =
+					this->buff_types(),
+				sanguis::messages::roles::friend_type{} =
+					friend_type_
 			)
 		);
 }

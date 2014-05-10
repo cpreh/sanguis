@@ -2,7 +2,6 @@
 #include <sanguis/player_name.hpp>
 #include <sanguis/string_vector.hpp>
 #include <sanguis/world_id.hpp>
-#include <sanguis/messages/adapted_types/string_vector.hpp>
 #include <sanguis/messages/call/result.hpp>
 #include <sanguis/messages/client/base_fwd.hpp>
 #include <sanguis/messages/client/cheat.hpp>
@@ -10,8 +9,9 @@
 #include <sanguis/messages/client/console_command.hpp>
 #include <sanguis/messages/client/info.hpp>
 #include <sanguis/messages/convert/from_string_vector.hpp>
-#include <sanguis/messages/roles/cheat.hpp>
-#include <sanguis/messages/roles/perk.hpp>
+#include <sanguis/messages/roles/console_command.hpp>
+#include <sanguis/messages/roles/cheat_type.hpp>
+#include <sanguis/messages/roles/perk_type.hpp>
 #include <sanguis/messages/roles/player_name.hpp>
 #include <sanguis/server/dispatch.hpp>
 #include <sanguis/server/machine.hpp>
@@ -223,7 +223,7 @@ sanguis::server::states::running::operator()(
 	sanguis::string_vector const command(
 		sanguis::messages::convert::from_string_vector(
 			_message.get<
-				sanguis::messages::adapted_types::string_vector
+				sanguis::messages::roles::console_command
 			>()
 		)
 	);
@@ -278,7 +278,7 @@ sanguis::server::states::running::operator()(
 	global_context_->player_cheat(
 		_id,
 		_message.get<
-			sanguis::messages::roles::cheat
+			sanguis::messages::roles::cheat_type
 		>()
 	);
 
@@ -297,7 +297,7 @@ sanguis::server::states::running::operator()(
 	global_context_->player_choose_perk(
 		_id,
 		_message.get<
-			sanguis::messages::roles::perk
+			sanguis::messages::roles::perk_type
 		>()
 	);
 

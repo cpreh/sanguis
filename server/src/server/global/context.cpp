@@ -8,6 +8,9 @@
 #include <sanguis/random_seed.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/world_id.hpp>
+#include <sanguis/messages/roles/angle.hpp>
+#include <sanguis/messages/roles/entity_id.hpp>
+#include <sanguis/messages/roles/speed.hpp>
 #include <sanguis/messages/server/base.hpp>
 #include <sanguis/messages/server/connected.hpp>
 #include <sanguis/messages/server/create.hpp>
@@ -321,8 +324,10 @@ sanguis::server::global::context::player_target(
 		_player_id,
 		sanguis::messages::server::create(
 			sanguis::messages::server::rotate(
-				player_ref.id(),
-				player_ref.angle().get()
+				sanguis::messages::roles::entity_id{} =
+					player_ref.id(),
+				sanguis::messages::roles::angle{} =
+					player_ref.angle().get()
 			)
 		)
 	);
@@ -399,8 +404,10 @@ sanguis::server::global::context::player_speed(
 		_player_id,
 		sanguis::messages::server::create(
 			sanguis::messages::server::speed(
-				player_ref.id(),
-				player_ref.speed().get()
+				sanguis::messages::roles::entity_id{} =
+					player_ref.id(),
+				sanguis::messages::roles::speed{} =
+					player_ref.speed().get()
 			)
 		)
 	);

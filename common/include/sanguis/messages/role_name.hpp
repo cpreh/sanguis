@@ -12,7 +12,7 @@ template<
 >
 struct role_name
 {
-	typedef typename Role::alias type;
+	typedef typename Role::tag type;
 };
 
 }

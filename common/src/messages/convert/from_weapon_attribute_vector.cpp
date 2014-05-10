@@ -2,10 +2,10 @@
 #include <sanguis/weapon_attribute_base.hpp>
 #include <sanguis/weapon_attribute_extra.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
-#include <sanguis/messages/adapted_types/weapon_attribute_type.hpp>
 #include <sanguis/messages/convert/from_weapon_attribute_vector.hpp>
 #include <sanguis/messages/roles/weapon_attribute_base.hpp>
 #include <sanguis/messages/roles/weapon_attribute_extra.hpp>
+#include <sanguis/messages/roles/weapon_attribute_type.hpp>
 #include <sanguis/messages/server/types/weapon_attribute.hpp>
 #include <sanguis/messages/server/types/weapon_attribute_vector.hpp>
 #include <fcppt/algorithm/map.hpp>
@@ -28,7 +28,7 @@ sanguis::messages::convert::from_weapon_attribute_vector(
 				return
 					sanguis::weapon_attribute(
 						_attribute.get<
-							sanguis::messages::adapted_types::weapon_attribute_type
+							sanguis::messages::roles::weapon_attribute_type
 						>(),
 						sanguis::weapon_attribute_base(
 							_attribute.get<

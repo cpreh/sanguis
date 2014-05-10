@@ -5,6 +5,7 @@
 #include <sanguis/client/draw2d/message/dispatcher.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/center.hpp>
+#include <sanguis/messages/roles/entity_id.hpp>
 #include <sanguis/messages/roles/primary_weapon.hpp>
 #include <sanguis/messages/roles/speed.hpp>
 #include <sanguis/messages/roles/weapon_status.hpp>
@@ -101,10 +102,12 @@ public:
 				mapping,
 				Role
 			>::type(
-				id_,
-				message_. template get<
-					Role
-				>()
+				sanguis::messages::roles::entity_id{} =
+					id_,
+				Role{} =
+					message_. template get<
+						Role
+					>()
 			)
 		);
 	}

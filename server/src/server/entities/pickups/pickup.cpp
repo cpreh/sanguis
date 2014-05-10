@@ -3,6 +3,10 @@
 #include <sanguis/collision/world/group.hpp>
 #include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/load/pickup_name.hpp>
+#include <sanguis/messages/roles/angle.hpp>
+#include <sanguis/messages/roles/center.hpp>
+#include <sanguis/messages/roles/entity_id.hpp>
+#include <sanguis/messages/roles/pickup_type.hpp>
 #include <sanguis/messages/server/add_pickup.hpp>
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
@@ -135,10 +139,14 @@ sanguis::server::entities::pickups::pickup::add_message(
 	return
 		sanguis::messages::server::create_ptr(
 			sanguis::messages::server::add_pickup(
-				this->id(),
-				this->center().get(),
-				this->angle().get(),
-				pickup_type_
+				sanguis::messages::roles::entity_id{} =
+					this->id(),
+				sanguis::messages::roles::center{} =
+					this->center().get(),
+				sanguis::messages::roles::angle{} =
+					this->angle().get(),
+				sanguis::messages::roles::pickup_type{} =
+					pickup_type_
 			)
 		);
 }

@@ -1,6 +1,9 @@
 #ifndef SANGUIS_MESSAGES_ROLES_PERK_LABEL_HPP_INCLUDED
 #define SANGUIS_MESSAGES_ROLES_PERK_LABEL_HPP_INCLUDED
 
+#include <majutsu/make_role_tag.hpp>
+
+
 namespace sanguis
 {
 namespace messages
@@ -8,8 +11,9 @@ namespace messages
 namespace roles
 {
 
-struct perk_label
-{};
+MAJUTSU_MAKE_ROLE_TAG(
+	perk_label
+);
 
 }
 }

@@ -3,6 +3,7 @@
 
 #include <sanguis/messages/adapted_types/level_fwd.hpp>
 #include <sanguis/messages/adapted_types/perk_tree_fwd.hpp>
+#include <sanguis/messages/roles/perk_tree.hpp>
 #include <sanguis/messages/roles/remaining_perk_levels.hpp>
 #include <sanguis/messages/server/types/make_message_id_fwd.hpp>
 #include <sanguis/messages/server/types/message.hpp>
@@ -29,7 +30,8 @@ alda::message::make_class<
 				sanguis::messages::server::types::message::available_perks
 			>,
 			majutsu::role<
-				sanguis::messages::adapted_types::perk_tree
+				sanguis::messages::adapted_types::perk_tree,
+				sanguis::messages::roles::perk_tree
 			>,
 			majutsu::role<
 				sanguis::messages::adapted_types::level,

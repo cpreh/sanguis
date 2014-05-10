@@ -1,6 +1,5 @@
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/weapon_type.hpp>
-#include <sanguis/messages/adapted_types/is_primary_weapon.hpp>
 #include <sanguis/messages/call/result.hpp>
 #include <sanguis/messages/client/attack_dest.hpp>
 #include <sanguis/messages/client/base.hpp>
@@ -14,6 +13,7 @@
 #include <sanguis/messages/client/unpause.hpp>
 #include <sanguis/messages/roles/attack_dest.hpp>
 #include <sanguis/messages/roles/direction.hpp>
+#include <sanguis/messages/roles/is_primary_weapon.hpp>
 #include <sanguis/messages/server/create.hpp>
 #include <sanguis/messages/server/pause.hpp>
 #include <sanguis/server/dispatch.hpp>
@@ -207,7 +207,7 @@ sanguis::server::states::unpaused::operator()(
 	>().global_context().player_drop_or_pickup_weapon(
 		_id,
 		_message.get<
-			sanguis::messages::adapted_types::is_primary_weapon
+			sanguis::messages::roles::is_primary_weapon
 		>()
 	);
 
@@ -260,7 +260,7 @@ sanguis::server::states::unpaused::operator()(
 	>().global_context().player_reload(
 		_id,
 		_message.get<
-			sanguis::messages::adapted_types::is_primary_weapon
+			sanguis::messages::roles::is_primary_weapon
 		>()
 	);
 
@@ -282,7 +282,7 @@ sanguis::server::states::unpaused::operator()(
 		_id,
 		true,
 		_message.get<
-			sanguis::messages::adapted_types::is_primary_weapon
+			sanguis::messages::roles::is_primary_weapon
 		>()
 	);
 
@@ -304,7 +304,7 @@ sanguis::server::states::unpaused::operator()(
 		_id,
 		false,
 		_message.get<
-			sanguis::messages::adapted_types::is_primary_weapon
+			sanguis::messages::roles::is_primary_weapon
 		>()
 	);
 

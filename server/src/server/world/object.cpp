@@ -26,6 +26,30 @@
 #include <sanguis/creator/top_result.hpp>
 #include <sanguis/messages/convert/to_magazine_size.hpp>
 #include <sanguis/messages/convert/to_weapon_attribute_vector.hpp>
+#include <sanguis/messages/roles/angle.hpp>
+#include <sanguis/messages/roles/aura_type.hpp>
+#include <sanguis/messages/roles/buff_type.hpp>
+#include <sanguis/messages/roles/center.hpp>
+#include <sanguis/messages/roles/entity_id.hpp>
+#include <sanguis/messages/roles/experience.hpp>
+#include <sanguis/messages/roles/exp_for_next_level.hpp>
+#include <sanguis/messages/roles/generator_name.hpp>
+#include <sanguis/messages/roles/health.hpp>
+#include <sanguis/messages/roles/is_primary_weapon.hpp>
+#include <sanguis/messages/roles/level.hpp>
+#include <sanguis/messages/roles/magazine_base_size.hpp>
+#include <sanguis/messages/roles/magazine_extra_size.hpp>
+#include <sanguis/messages/roles/magazine_remaining.hpp>
+#include <sanguis/messages/roles/max_health.hpp>
+#include <sanguis/messages/roles/opening_count.hpp>
+#include <sanguis/messages/roles/primary_weapon.hpp>
+#include <sanguis/messages/roles/seed.hpp>
+#include <sanguis/messages/roles/speed.hpp>
+#include <sanguis/messages/roles/weapon_attribute_container.hpp>
+#include <sanguis/messages/roles/weapon_status.hpp>
+#include <sanguis/messages/roles/weapon_type.hpp>
+#include <sanguis/messages/roles/world_id.hpp>
+#include <sanguis/messages/roles/world_name.hpp>
 #include <sanguis/messages/server/add_aura.hpp>
 #include <sanguis/messages/server/add_buff.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
@@ -368,19 +392,24 @@ sanguis::server::world::object::insert_with_id(
 			player_ret->player_id(),
 			sanguis::messages::server::create(
 				sanguis::messages::server::change_world(
-					id_,
-					seed_,
-					sge::charconv::fcppt_string_to_utf8(
-						generator_name_.get()
-					),
-					fcppt::cast::size<
-						sanguis::messages::types::size
-					>(
-						openings_.size()
-					),
-					sge::charconv::fcppt_string_to_utf8(
-						name_.get()
-					)
+					sanguis::messages::roles::world_id{} =
+						id_,
+					sanguis::messages::roles::seed{} =
+						seed_,
+					sanguis::messages::roles::generator_name{} =
+						sge::charconv::fcppt_string_to_utf8(
+							generator_name_.get()
+						),
+					sanguis::messages::roles::opening_count{} =
+						fcppt::cast::size<
+							sanguis::messages::types::size
+						>(
+							openings_.size()
+						),
+					sanguis::messages::roles::world_name{} =
+						sge::charconv::fcppt_string_to_utf8(
+							name_.get()
+						)
 				)
 			)
 		);
@@ -430,8 +459,10 @@ sanguis::server::world::object::add_aura(
 		_id,
 		sanguis::messages::server::create(
 			sanguis::messages::server::add_aura(
-				_id,
-				_aura_type
+				sanguis::messages::roles::entity_id{} =
+					_id,
+				sanguis::messages::roles::aura_type{} =
+					_aura_type
 			)
 		)
 	);
@@ -447,8 +478,10 @@ sanguis::server::world::object::add_buff(
 		_id,
 		sanguis::messages::server::create(
 			sanguis::messages::server::add_buff(
-				_id,
-				_buff_type
+				sanguis::messages::roles::entity_id{} =
+					_id,
+				sanguis::messages::roles::buff_type{} =
+					_buff_type
 			)
 		)
 	);
@@ -464,8 +497,10 @@ sanguis::server::world::object::remove_buff(
 		_id,
 		sanguis::messages::server::create(
 			sanguis::messages::server::remove_buff(
-				_id,
-				_buff_type
+				sanguis::messages::roles::entity_id{} =
+					_id,
+				sanguis::messages::roles::buff_type{} =
+					_buff_type
 			)
 		)
 	);
@@ -474,15 +509,17 @@ sanguis::server::world::object::remove_buff(
 void
 sanguis::server::world::object::weapon_changed(
 	sanguis::entity_id const _id,
-	sanguis::optional_primary_weapon_type const _wt
+	sanguis::optional_primary_weapon_type const _weapon_type
 )
 {
 	this->send_entity_specific(
 		_id,
 		sanguis::messages::server::create(
 			sanguis::messages::server::change_weapon(
-				_id,
-				_wt
+				sanguis::messages::roles::entity_id{} =
+					_id,
+				sanguis::messages::roles::primary_weapon{} =
+					_weapon_type
 			)
 		)
 	);
@@ -498,19 +535,24 @@ sanguis::server::world::object::got_weapon(
 		_player_id,
 		sanguis::messages::server::create(
 			sanguis::messages::server::give_weapon(
-				_description.weapon_type(),
-				sanguis::messages::convert::to_magazine_size(
-					_description.magazine_size().get()
-				),
-				sanguis::messages::convert::to_magazine_size(
-					_description.magazine_extra().get()
-				),
-				sanguis::messages::convert::to_magazine_size(
-					_description.magazine_remaining().get()
-				),
-				sanguis::messages::convert::to_weapon_attribute_vector(
-					_description.attributes()
-				)
+				sanguis::messages::roles::weapon_type{} =
+					_description.weapon_type(),
+				sanguis::messages::roles::magazine_base_size{} =
+					sanguis::messages::convert::to_magazine_size(
+						_description.magazine_size().get()
+					),
+				sanguis::messages::roles::magazine_extra_size{} =
+					sanguis::messages::convert::to_magazine_size(
+						_description.magazine_extra().get()
+					),
+				sanguis::messages::roles::magazine_remaining{} =
+					sanguis::messages::convert::to_magazine_size(
+						_description.magazine_remaining().get()
+					),
+				sanguis::messages::roles::weapon_attribute_container{} =
+					sanguis::messages::convert::to_weapon_attribute_vector(
+						_description.attributes()
+					)
 			)
 		)
 	);
@@ -526,7 +568,8 @@ sanguis::server::world::object::remove_weapon(
 		_player_id,
 		sanguis::messages::server::create(
 			sanguis::messages::server::remove_weapon(
-				_is_primary
+				sanguis::messages::roles::is_primary_weapon{} =
+					_is_primary
 			)
 		)
 	);
@@ -543,10 +586,12 @@ sanguis::server::world::object::magazine_remaining(
 		_player_id,
 		sanguis::messages::server::create(
 			sanguis::messages::server::magazine_remaining(
-				_is_primary,
-				sanguis::messages::convert::to_magazine_size(
-					_magazine_remaining.get()
-				)
+				sanguis::messages::roles::is_primary_weapon{} =
+					_is_primary,
+				sanguis::messages::roles::magazine_remaining{} =
+					sanguis::messages::convert::to_magazine_size(
+						_magazine_remaining.get()
+					)
 			)
 		)
 	);
@@ -562,8 +607,10 @@ sanguis::server::world::object::angle_changed(
 		_entity_id,
 		sanguis::messages::server::create(
 			sanguis::messages::server::rotate(
-				_entity_id,
-				_angle.get()
+				sanguis::messages::roles::entity_id{} =
+					_entity_id,
+				sanguis::messages::roles::angle{} =
+					_angle.get()
 			)
 		)
 	);
@@ -579,8 +626,10 @@ sanguis::server::world::object::center_changed(
 		_entity_id,
 		sanguis::messages::server::create(
 			sanguis::messages::server::move(
-				_entity_id,
-				_center.get()
+				sanguis::messages::roles::entity_id{} =
+					_entity_id,
+				sanguis::messages::roles::center{} =
+					_center.get()
 			)
 		)
 	);
@@ -596,8 +645,10 @@ sanguis::server::world::object::speed_changed(
 		_entity_id,
 		sanguis::messages::server::create(
 			sanguis::messages::server::speed(
-				_entity_id,
-				_speed.get()
+				sanguis::messages::roles::entity_id{} =
+					_entity_id,
+				sanguis::messages::roles::speed{} =
+					_speed.get()
 			)
 		)
 	);
@@ -613,8 +664,10 @@ sanguis::server::world::object::weapon_status_changed(
 		_id,
 		sanguis::messages::server::create(
 			sanguis::messages::server::weapon_status(
-				_id,
-				_weapon_status
+				sanguis::messages::roles::entity_id{} =
+					_id,
+				sanguis::messages::roles::weapon_status{} =
+					_weapon_status
 			)
 		)
 	);
@@ -630,8 +683,10 @@ sanguis::server::world::object::health_changed(
 		_id,
 		sanguis::messages::server::create(
 			sanguis::messages::server::health(
-				_id,
-				_health.get()
+				sanguis::messages::roles::entity_id{} =
+					_id,
+				sanguis::messages::roles::health{} =
+					_health.get()
 			)
 		)
 	);
@@ -647,8 +702,10 @@ sanguis::server::world::object::max_health_changed(
 		_id,
 		sanguis::messages::server::create(
 			sanguis::messages::server::max_health(
-				_id,
-				_health.get()
+				sanguis::messages::roles::entity_id{} =
+					_id,
+				sanguis::messages::roles::max_health{} =
+					_health.get()
 			)
 		)
 	);
@@ -664,9 +721,10 @@ sanguis::server::world::object::exp_changed(
 		_player_id,
 		sanguis::messages::server::create(
 			sanguis::messages::server::experience(
-				sanguis::server::exp_to_net(
-					_exp
-				)
+				sanguis::messages::roles::experience{} =
+					sanguis::server::exp_to_net(
+						_exp
+					)
 			)
 		)
 	);
@@ -682,16 +740,18 @@ sanguis::server::world::object::level_changed(
 		_player_id,
 		sanguis::messages::server::create(
 			sanguis::messages::server::level_up(
-				_level.get(),
-				sanguis::server::exp_to_net(
-					sanguis::server::exp_for_level(
-						_level
-						+
-						sanguis::server::level(
-							1u
+				sanguis::messages::roles::level{} =
+					_level.get(),
+				sanguis::messages::roles::exp_for_next_level{} =
+					sanguis::server::exp_to_net(
+						sanguis::server::exp_for_level(
+							_level
+							+
+							sanguis::server::level(
+								1u
+							)
 						)
 					)
-				)
 			)
 		)
 	);
@@ -873,7 +933,8 @@ sanguis::server::world::object::remove_sight_range(
 			_player_id,
 			sanguis::messages::server::create(
 				sanguis::messages::server::die(
-					_target_id
+					sanguis::messages::roles::entity_id{} =
+						_target_id
 				)
 			)
 		);
@@ -882,7 +943,8 @@ sanguis::server::world::object::remove_sight_range(
 			_player_id,
 			sanguis::messages::server::create(
 				sanguis::messages::server::remove(
-					_target_id
+					sanguis::messages::roles::entity_id{} =
+						_target_id
 				)
 			)
 		);

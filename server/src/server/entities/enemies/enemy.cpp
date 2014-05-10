@@ -2,6 +2,18 @@
 #include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/load/enemy_name.hpp>
+#include <sanguis/messages/roles/angle.hpp>
+#include <sanguis/messages/roles/aura_type_container.hpp>
+#include <sanguis/messages/roles/buff_type_container.hpp>
+#include <sanguis/messages/roles/center.hpp>
+#include <sanguis/messages/roles/enemy_type.hpp>
+#include <sanguis/messages/roles/entity_id.hpp>
+#include <sanguis/messages/roles/health.hpp>
+#include <sanguis/messages/roles/max_health.hpp>
+#include <sanguis/messages/roles/name.hpp>
+#include <sanguis/messages/roles/primary_weapon.hpp>
+#include <sanguis/messages/roles/speed.hpp>
+#include <sanguis/messages/roles/weapon_status.hpp>
 #include <sanguis/messages/server/add_enemy.hpp>
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
@@ -150,18 +162,30 @@ sanguis::server::entities::enemies::enemy::add_message(
 	return
 		sanguis::messages::server::create_ptr(
 			sanguis::messages::server::add_enemy(
-				this->id(),
-				this->center().get(),
-				this->angle().get(),
-				this->speed().get(),
-				this->current_health().get(),
-				this->max_health().get(),
-				this->primary_weapon_type(),
-				this->weapon_status(),
-				this->aura_types(),
-				this->buff_types(),
-				this->enemy_type(),
-				this->name()
+				sanguis::messages::roles::entity_id{} =
+					this->id(),
+				sanguis::messages::roles::center{} =
+					this->center().get(),
+				sanguis::messages::roles::angle{} =
+					this->angle().get(),
+				sanguis::messages::roles::speed{} =
+					this->speed().get(),
+				sanguis::messages::roles::health{} =
+					this->current_health().get(),
+				sanguis::messages::roles::max_health{} =
+					this->max_health().get(),
+				sanguis::messages::roles::primary_weapon{} =
+					this->primary_weapon_type(),
+				sanguis::messages::roles::weapon_status{} =
+					this->weapon_status(),
+				sanguis::messages::roles::aura_type_container{} =
+					this->aura_types(),
+				sanguis::messages::roles::buff_type_container{} =
+					this->buff_types(),
+				sanguis::messages::roles::enemy_type{} =
+					this->enemy_type(),
+				sanguis::messages::roles::name{} =
+					this->name()
 			)
 		);
 }

@@ -4,6 +4,7 @@
 #include <sanguis/messages/adapted_types/exp_fwd.hpp>
 #include <sanguis/messages/adapted_types/level_fwd.hpp>
 #include <sanguis/messages/roles/exp_for_next_level.hpp>
+#include <sanguis/messages/roles/level.hpp>
 #include <sanguis/messages/server/types/make_message_id_fwd.hpp>
 #include <sanguis/messages/server/types/message.hpp>
 #include <alda/message/make_class_fwd.hpp>
@@ -29,7 +30,8 @@ alda::message::make_class<
 				sanguis::messages::server::types::message::level_up
 			>,
 			majutsu::role<
-				sanguis::messages::adapted_types::level
+				sanguis::messages::adapted_types::level,
+				sanguis::messages::roles::level
 			>,
 			majutsu::role<
 				sanguis::messages::adapted_types::exp,

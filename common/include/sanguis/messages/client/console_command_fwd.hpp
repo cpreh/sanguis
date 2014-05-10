@@ -4,6 +4,7 @@
 #include <sanguis/messages/adapted_types/string_vector_fwd.hpp>
 #include <sanguis/messages/client/types/make_message_id_fwd.hpp>
 #include <sanguis/messages/client/types/message.hpp>
+#include <sanguis/messages/roles/console_command.hpp>
 #include <alda/message/make_class_fwd.hpp>
 #include <majutsu/composite_fwd.hpp>
 #include <majutsu/role_fwd.hpp>
@@ -27,7 +28,8 @@ alda::message::make_class<
 				sanguis::messages::client::types::message::console_command
 			>,
 			majutsu::role<
-				sanguis::messages::adapted_types::string_vector
+				sanguis::messages::adapted_types::string_vector,
+				sanguis::messages::roles::console_command
 			>
 		>
 	>

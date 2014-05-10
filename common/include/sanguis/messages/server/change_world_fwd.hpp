@@ -7,6 +7,8 @@
 #include <sanguis/messages/adapted_types/world_id_fwd.hpp>
 #include <sanguis/messages/roles/generator_name.hpp>
 #include <sanguis/messages/roles/opening_count.hpp>
+#include <sanguis/messages/roles/seed.hpp>
+#include <sanguis/messages/roles/world_id.hpp>
 #include <sanguis/messages/roles/world_name.hpp>
 #include <sanguis/messages/server/types/make_message_id_fwd.hpp>
 #include <sanguis/messages/server/types/message.hpp>
@@ -33,10 +35,12 @@ alda::message::make_class<
 				sanguis::messages::server::types::message::change_world
 			>,
 			majutsu::role<
-				sanguis::messages::adapted_types::world_id
+				sanguis::messages::adapted_types::world_id,
+				sanguis::messages::roles::world_id
 			>,
 			majutsu::role<
-				sanguis::messages::adapted_types::seed
+				sanguis::messages::adapted_types::seed,
+				sanguis::messages::roles::seed
 			>,
 			majutsu::role<
 				sanguis::messages::adapted_types::string,

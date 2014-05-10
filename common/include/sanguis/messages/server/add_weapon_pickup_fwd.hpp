@@ -2,6 +2,7 @@
 #define SANGUIS_MESSAGES_SERVER_ADD_WEAPON_PICKUP_FWD_HPP_INCLUDED
 
 #include <sanguis/messages/adapted_types/weapon_type_fwd.hpp>
+#include <sanguis/messages/roles/weapon_type.hpp>
 #include <sanguis/messages/server/parts/add_elements_base_fwd.hpp>
 #include <sanguis/messages/server/types/bind_entity_message_fwd.hpp>
 #include <sanguis/messages/server/types/message.hpp>
@@ -29,7 +30,8 @@ alda::message::make_class<
 			>,
 			sanguis::messages::server::parts::add_elements_base,
 			majutsu::role<
-				sanguis::messages::adapted_types::weapon_type
+				sanguis::messages::adapted_types::weapon_type,
+				sanguis::messages::roles::weapon_type
 			>
 		>
 	>

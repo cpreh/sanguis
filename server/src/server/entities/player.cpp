@@ -8,6 +8,17 @@
 #include <sanguis/weapon_type_to_is_primary.hpp>
 #include <sanguis/collision/world/group.hpp>
 #include <sanguis/collision/world/group_field.hpp>
+#include <sanguis/messages/roles/angle.hpp>
+#include <sanguis/messages/roles/aura_type_container.hpp>
+#include <sanguis/messages/roles/buff_type_container.hpp>
+#include <sanguis/messages/roles/center.hpp>
+#include <sanguis/messages/roles/entity_id.hpp>
+#include <sanguis/messages/roles/health.hpp>
+#include <sanguis/messages/roles/max_health.hpp>
+#include <sanguis/messages/roles/name.hpp>
+#include <sanguis/messages/roles/primary_weapon.hpp>
+#include <sanguis/messages/roles/speed.hpp>
+#include <sanguis/messages/roles/weapon_status.hpp>
 #include <sanguis/messages/server/add_player.hpp>
 #include <sanguis/messages/server/add_own_player.hpp>
 #include <sanguis/messages/server/create_ptr.hpp>
@@ -560,19 +571,30 @@ sanguis::server::entities::player::add_message_impl() const
 	return
 		sanguis::messages::server::create_ptr(
 			Message(
-				this->id(),
-				this->center().get(),
-				this->angle().get(),
-				this->speed().get(),
-				this->current_health().get(),
-				this->max_health().get(),
-				this->primary_weapon_type(),
-				this->weapon_status(),
-				this->aura_types(),
-				this->buff_types(),
-				sge::charconv::fcppt_string_to_utf8(
-					this->name().get()
-				)
+				sanguis::messages::roles::entity_id{} =
+					this->id(),
+				sanguis::messages::roles::center{} =
+					this->center().get(),
+				sanguis::messages::roles::angle{} =
+					this->angle().get(),
+				sanguis::messages::roles::speed{} =
+					this->speed().get(),
+				sanguis::messages::roles::health{} =
+					this->current_health().get(),
+				sanguis::messages::roles::max_health{} =
+					this->max_health().get(),
+				sanguis::messages::roles::primary_weapon{} =
+					this->primary_weapon_type(),
+				sanguis::messages::roles::weapon_status{} =
+					this->weapon_status(),
+				sanguis::messages::roles::aura_type_container{} =
+					this->aura_types(),
+				sanguis::messages::roles::buff_type_container{} =
+					this->buff_types(),
+				sanguis::messages::roles::name{} =
+					sge::charconv::fcppt_string_to_utf8(
+						this->name().get()
+					)
 			)
 		);
 }

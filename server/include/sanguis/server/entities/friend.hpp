@@ -80,7 +80,7 @@ private:
 	collision_groups() const
 	override;
 
-	sanguis::friend_type const ftype_;
+	sanguis::friend_type const friend_type_;
 };
 
 }

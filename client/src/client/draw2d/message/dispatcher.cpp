@@ -38,29 +38,30 @@
 #include <sanguis/client/draw2d/translate/scalar_to_client.hpp>
 #include <sanguis/client/draw2d/translate/vector_to_client.hpp>
 #include <sanguis/messages/role_name.hpp>
-#include <sanguis/messages/adapted_types/aura_type.hpp>
-#include <sanguis/messages/adapted_types/aura_type_vector.hpp>
-#include <sanguis/messages/adapted_types/buff_type.hpp>
-#include <sanguis/messages/adapted_types/buff_type_vector.hpp>
-#include <sanguis/messages/adapted_types/destructible_type.hpp>
-#include <sanguis/messages/adapted_types/seed.hpp>
-#include <sanguis/messages/adapted_types/weapon_type.hpp>
-#include <sanguis/messages/adapted_types/world_id.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/aoe.hpp>
-#include <sanguis/messages/roles/aoe_projectile.hpp>
+#include <sanguis/messages/roles/aura_type.hpp>
+#include <sanguis/messages/roles/aura_type_container.hpp>
+#include <sanguis/messages/roles/aoe_projectile_type.hpp>
+#include <sanguis/messages/roles/buff_type.hpp>
+#include <sanguis/messages/roles/buff_type_container.hpp>
 #include <sanguis/messages/roles/center.hpp>
-#include <sanguis/messages/roles/enemy.hpp>
+#include <sanguis/messages/roles/destructible_type.hpp>
+#include <sanguis/messages/roles/enemy_type.hpp>
 #include <sanguis/messages/roles/entity_id.hpp>
-#include <sanguis/messages/roles/friend.hpp>
+#include <sanguis/messages/roles/friend_type.hpp>
 #include <sanguis/messages/roles/health.hpp>
 #include <sanguis/messages/roles/max_health.hpp>
 #include <sanguis/messages/roles/name.hpp>
 #include <sanguis/messages/roles/opening_count.hpp>
+#include <sanguis/messages/roles/pickup_type.hpp>
 #include <sanguis/messages/roles/primary_weapon.hpp>
-#include <sanguis/messages/roles/projectile.hpp>
+#include <sanguis/messages/roles/projectile_type.hpp>
+#include <sanguis/messages/roles/seed.hpp>
 #include <sanguis/messages/roles/speed.hpp>
 #include <sanguis/messages/roles/weapon_status.hpp>
+#include <sanguis/messages/roles/weapon_type.hpp>
+#include <sanguis/messages/roles/world_id.hpp>
 #include <sanguis/messages/server/add_aoe_projectile.hpp>
 #include <sanguis/messages/server/add_aura.hpp>
 #include <sanguis/messages/server/add_buff.hpp>
@@ -125,7 +126,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 			env_.model_parameters(),
 			env_.insert_own_callback(),
 			_message.get<
-				sanguis::messages::roles::aoe_projectile
+				sanguis::messages::roles::aoe_projectile_type
 			>(),
 			sanguis::client::draw2d::aoe(
 				sanguis::client::draw2d::translate::scalar_to_client(
@@ -154,7 +155,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		)
 	).add_aura(
 		_message.get<
-			sanguis::messages::adapted_types::aura_type
+			sanguis::messages::roles::aura_type
 		>()
 	);
 }
@@ -174,7 +175,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		)
 	).add_buff(
 		_message.get<
-			sanguis::messages::adapted_types::buff_type
+			sanguis::messages::roles::buff_type
 		>()
 	);
 }
@@ -188,7 +189,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		sanguis::client::draw2d::factory::destructible(
 			env_.model_parameters(),
 			_message.get<
-				sanguis::messages::adapted_types::destructible_type
+				sanguis::messages::roles::destructible_type
 			>()
 		),
 		_message
@@ -205,13 +206,13 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 			env_.model_parameters(),
 			env_.aura_resources(),
 			_message.get<
-				sanguis::messages::roles::enemy
+				sanguis::messages::roles::enemy_type
 			>(),
 			_message.get<
-				sanguis::messages::adapted_types::aura_type_vector
+				sanguis::messages::roles::aura_type_container
 			>(),
 			_message.get<
-				sanguis::messages::adapted_types::buff_type_vector
+				sanguis::messages::roles::buff_type_container
 			>(),
 			sanguis::client::draw2d::entities::name(
 				sge::charconv::utf8_string_to_fcppt(
@@ -238,13 +239,13 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 			env_.model_parameters(),
 			env_.aura_resources(),
 			_message.get<
-				sanguis::messages::roles::friend_
+				sanguis::messages::roles::friend_type
 			>(),
 			_message.get<
-				sanguis::messages::adapted_types::aura_type_vector
+				sanguis::messages::roles::aura_type_container
 			>(),
 			_message.get<
-				sanguis::messages::adapted_types::buff_type_vector
+				sanguis::messages::roles::buff_type_container
 			>(),
 			sanguis::client::draw2d::message::health_pair(
 				_message
@@ -267,10 +268,10 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 			env_.collide_callback(),
 			env_.player_health_callback(),
 			_message.get<
-				sanguis::messages::adapted_types::aura_type_vector
+				sanguis::messages::roles::aura_type_container
 			>(),
 			_message.get<
-				sanguis::messages::adapted_types::buff_type_vector
+				sanguis::messages::roles::buff_type_container
 			>(),
 			sanguis::client::draw2d::message::health_pair(
 				_message
@@ -289,7 +290,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		sanguis::client::draw2d::factory::pickup(
 			env_.model_parameters(),
 			_message.get<
-				sanguis::messages::roles::pickup
+				sanguis::messages::roles::pickup_type
 			>()
 		),
 		_message
@@ -306,10 +307,10 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 			env_.aura_resources(),
 			env_.model_parameters(),
 			_message.get<
-				sanguis::messages::adapted_types::aura_type_vector
+				sanguis::messages::roles::aura_type_container
 			>(),
 			_message.get<
-				sanguis::messages::adapted_types::buff_type_vector
+				sanguis::messages::roles::buff_type_container
 			>(),
 			sanguis::client::draw2d::message::health_pair(
 				_message
@@ -335,7 +336,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		sanguis::client::draw2d::factory::projectile(
 			env_.model_parameters(),
 			_message.get<
-				sanguis::messages::roles::projectile
+				sanguis::messages::roles::projectile_type
 			>()
 		),
 		_message
@@ -351,7 +352,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		sanguis::client::draw2d::factory::weapon_pickup(
 			env_.model_parameters(),
 			_message.get<
-				sanguis::messages::adapted_types::weapon_type
+				sanguis::messages::roles::weapon_type
 			>()
 		),
 		_message
@@ -386,7 +387,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	env_.change_world(
 		sanguis::client::world_parameters(
 			_message.get<
-				sanguis::messages::adapted_types::world_id
+				sanguis::messages::roles::world_id
 			>(),
 			sanguis::creator::top_parameters(
 				sanguis::creator::name(
@@ -397,7 +398,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 					)
 				),
 				_message.get<
-					sanguis::messages::adapted_types::seed
+					sanguis::messages::roles::seed
 				>(),
 				sanguis::creator::opening_count(
 					_message.get<
@@ -520,7 +521,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 		)
 	).remove_buff(
 		_message.get<
-			sanguis::messages::adapted_types::buff_type
+			sanguis::messages::roles::buff_type
 		>()
 	);
 }

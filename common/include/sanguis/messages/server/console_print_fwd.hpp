@@ -2,6 +2,7 @@
 #define SANGUIS_MESSAGES_SERVER_CONSOLE_PRINT_FWD_HPP_INCLUDED
 
 #include <sanguis/messages/adapted_types/string_fwd.hpp>
+#include <sanguis/messages/roles/console_message.hpp>
 #include <sanguis/messages/server/types/make_message_id_fwd.hpp>
 #include <sanguis/messages/server/types/message.hpp>
 #include <alda/message/make_class_fwd.hpp>
@@ -27,7 +28,8 @@ alda::message::make_class<
 				sanguis::messages::server::types::message::console_print
 			>,
 			majutsu::role<
-				sanguis::messages::adapted_types::string
+				sanguis::messages::adapted_types::string,
+				sanguis::messages::roles::console_message
 			>
 		>
 	>

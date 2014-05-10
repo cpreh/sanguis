@@ -1,4 +1,12 @@
 #include <sanguis/optional_perk_type.hpp>
+#include <sanguis/messages/roles/max_perk_level.hpp>
+#include <sanguis/messages/roles/perk_label.hpp>
+#include <sanguis/messages/roles/perk_level.hpp>
+#include <sanguis/messages/roles/perk_parent.hpp>
+#include <sanguis/messages/roles/perk_tree.hpp>
+#include <sanguis/messages/roles/remaining_perk_levels.hpp>
+#include <sanguis/messages/roles/required_perk_parent_level.hpp>
+#include <sanguis/messages/roles/required_perk_player_level.hpp>
 #include <sanguis/messages/server/available_perks.hpp>
 #include <sanguis/messages/server/create.hpp>
 #include <sanguis/messages/server/types/perk_tree_node.hpp>
@@ -47,18 +55,24 @@ sanguis::server::send_available_perks(
 
 		nodes.push_back(
 			sanguis::messages::server::types::perk_tree_node(
-				info->type(),
-				info->level().get(),
-				info->required_player_level().get(),
-				info->required_parent_level().get(),
-				info->max_level().get(),
-				element.parent()->value().has_value()
-				?
-					sanguis::optional_perk_type(
-						element.parent()->value()->type()
-					)
-				:
-					sanguis::optional_perk_type()
+				sanguis::messages::roles::perk_label{} =
+					info->type(),
+				sanguis::messages::roles::perk_level{} =
+					info->level().get(),
+				sanguis::messages::roles::required_perk_player_level{} =
+					info->required_player_level().get(),
+				sanguis::messages::roles::required_perk_parent_level{} =
+					info->required_parent_level().get(),
+				sanguis::messages::roles::max_perk_level{} =
+					info->max_level().get(),
+				sanguis::messages::roles::perk_parent{} =
+					element.parent()->value().has_value()
+					?
+						sanguis::optional_perk_type(
+							element.parent()->value()->type()
+						)
+					:
+						sanguis::optional_perk_type()
 			)
 		);
 	}
@@ -67,8 +81,10 @@ sanguis::server::send_available_perks(
 		_player.player_id(),
 		sanguis::messages::server::create(
 			sanguis::messages::server::available_perks(
-				nodes,
-				_player.skill_points().get()
+				sanguis::messages::roles::perk_tree{} =
+					nodes,
+				sanguis::messages::roles::remaining_perk_levels{} =
+					_player.skill_points().get()
 			)
 		)
 	);

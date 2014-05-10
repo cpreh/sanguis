@@ -25,6 +25,10 @@
 #include <sanguis/messages/client/reload.hpp>
 #include <sanguis/messages/client/start_shooting.hpp>
 #include <sanguis/messages/client/stop_shooting.hpp>
+#include <sanguis/messages/roles/attack_dest.hpp>
+#include <sanguis/messages/roles/cheat_type.hpp>
+#include <sanguis/messages/roles/direction.hpp>
+#include <sanguis/messages/roles/is_primary_weapon.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/object.hpp>
 #include <sge/console/callback/name.hpp>
@@ -268,12 +272,13 @@ sanguis::client::control::action_handler::handle_cursor_action(
 	send_(
 		sanguis::messages::client::create(
 			sanguis::messages::client::attack_dest(
-				fcppt::math::vector::structure_cast<
-					sanguis::messages::types::vector2
-				>(
-					*dest
+				sanguis::messages::roles::attack_dest{} =
+					fcppt::math::vector::structure_cast<
+						sanguis::messages::types::vector2
+					>(
+						*dest
+					)
 				)
-			)
 		)
 	);
 }
@@ -378,12 +383,13 @@ sanguis::client::control::action_handler::update_direction(
 	send_(
 		sanguis::messages::client::create(
 			sanguis::messages::client::direction(
-				fcppt::math::vector::structure_cast<
-					sanguis::messages::types::vector2
-				>(
-					direction_
+				sanguis::messages::roles::direction{} =
+					fcppt::math::vector::structure_cast<
+						sanguis::messages::types::vector2
+					>(
+						direction_
+					)
 				)
-			)
 		)
 	);
 }
@@ -400,7 +406,8 @@ sanguis::client::control::action_handler::handle_shooting(
 		send_(
 			sanguis::messages::client::create(
 				sanguis::messages::client::start_shooting(
-					_is_primary
+					sanguis::messages::roles::is_primary_weapon{} =
+						_is_primary
 				)
 			)
 		);
@@ -408,7 +415,8 @@ sanguis::client::control::action_handler::handle_shooting(
 		send_(
 			sanguis::messages::client::create(
 				sanguis::messages::client::stop_shooting(
-					_is_primary
+					sanguis::messages::roles::is_primary_weapon{} =
+						_is_primary
 				)
 			)
 		);
@@ -422,7 +430,8 @@ sanguis::client::control::action_handler::handle_drop(
 	send_(
 		sanguis::messages::client::create(
 			sanguis::messages::client::drop_or_pickup_weapon(
-				_is_primary
+				sanguis::messages::roles::is_primary_weapon{} =
+					_is_primary
 			)
 		)
 	);
@@ -436,7 +445,8 @@ sanguis::client::control::action_handler::handle_reload(
 	send_(
 		sanguis::messages::client::create(
 			sanguis::messages::client::reload(
-				_is_primary
+				sanguis::messages::roles::is_primary_weapon{} =
+					_is_primary
 			)
 		)
 	);
@@ -452,7 +462,8 @@ sanguis::client::control::action_handler::send_cheat(
 	send_(
 		sanguis::messages::client::create(
 			sanguis::messages::client::cheat(
-				_cheat
+				sanguis::messages::roles::cheat_type{} =
+					_cheat
 			)
 		)
 	);

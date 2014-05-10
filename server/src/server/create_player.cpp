@@ -10,6 +10,8 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/player_unique_ptr.hpp>
+#include <sanguis/messages/roles/command_description.hpp>
+#include <sanguis/messages/roles/command_name.hpp>
 #include <sanguis/messages/server/add_console_command.hpp>
 #include <sanguis/messages/server/create.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
@@ -44,12 +46,14 @@ sanguis::server::create_player(
 			_player_id,
 			sanguis::messages::server::create(
 				sanguis::messages::server::add_console_command(
-					sge::charconv::fcppt_string_to_utf8(
-						command.first
-					),
-					sge::charconv::fcppt_string_to_utf8(
-						command.second
-					)
+					sanguis::messages::roles::command_name{} =
+						sge::charconv::fcppt_string_to_utf8(
+							command.first
+						),
+					sanguis::messages::roles::command_description{} =
+						sge::charconv::fcppt_string_to_utf8(
+							command.second
+						)
 				)
 			)
 		);

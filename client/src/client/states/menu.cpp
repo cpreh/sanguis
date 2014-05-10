@@ -14,6 +14,7 @@
 #include <sanguis/messages/call/result.hpp>
 #include <sanguis/messages/client/create.hpp>
 #include <sanguis/messages/client/info.hpp>
+#include <sanguis/messages/roles/player_name.hpp>
 #include <sanguis/messages/server/base.hpp>
 #include <sanguis/messages/server/connected.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
@@ -179,9 +180,10 @@ sanguis::client::states::menu::react(
 	>().send(
 		sanguis::messages::client::create(
 			sanguis::messages::client::info(
-				sge::charconv::fcppt_string_to_utf8(
-					menu_.player_name()
-				)
+				sanguis::messages::roles::player_name{} =
+					sge::charconv::fcppt_string_to_utf8(
+						menu_.player_name()
+					)
 			)
 		)
 	);
