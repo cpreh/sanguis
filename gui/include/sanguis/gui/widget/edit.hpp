@@ -2,6 +2,7 @@
 #define SANGUIS_GUI_WIDGET_EDIT_HPP_INCLUDED
 
 #include <sanguis/gui/duration.hpp>
+#include <sanguis/gui/focus_change_fwd.hpp>
 #include <sanguis/gui/get_focus_fwd.hpp>
 #include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/text_callback.hpp>
@@ -99,7 +100,7 @@ private:
 
 	void
 	on_focus_changed(
-		bool
+		sanguis::gui::focus_change
 	)
 	override;
 

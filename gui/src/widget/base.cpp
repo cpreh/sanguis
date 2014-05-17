@@ -1,4 +1,5 @@
 #include <sanguis/gui/duration.hpp>
+#include <sanguis/gui/focus_change.hpp>
 #include <sanguis/gui/get_focus.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/optional_focus.hpp>
@@ -63,7 +64,7 @@ sanguis::gui::widget::base::on_char(
 
 void
 sanguis::gui::widget::base::on_focus_changed(
-	bool
+	sanguis::gui::focus_change
 )
 {
 }

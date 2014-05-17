@@ -10,6 +10,7 @@
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/button.hpp>
 #include <sanguis/gui/widget/edit.hpp>
+#include <sanguis/gui/widget/frame.hpp>
 #include <sanguis/gui/widget/static_text.hpp>
 #include <sanguis/gui/widget/text.hpp>
 #include <sge/font/object_fwd.hpp>
@@ -91,23 +92,25 @@ private:
 
 		sanguis::gui::widget::box_container player_name_line_;
 
-				sanguis::gui::widget::static_text hostname_label_;
+					sanguis::gui::widget::static_text hostname_label_;
 
-				sanguis::gui::widget::edit hostname_edit_;
+					sanguis::gui::widget::edit hostname_edit_;
 
-			sanguis::gui::widget::box_container hostname_line_;
+				sanguis::gui::widget::box_container hostname_line_;
 
-				sanguis::gui::widget::static_text port_label_;
+					sanguis::gui::widget::static_text port_label_;
 
-				sanguis::gui::widget::edit port_edit_;
+					sanguis::gui::widget::edit port_edit_;
 
-			sanguis::gui::widget::box_container port_line_;
+				sanguis::gui::widget::box_container port_line_;
 
-			sanguis::gui::widget::text connect_text_;
+				sanguis::gui::widget::text connect_text_;
 
-			sanguis::gui::widget::button connect_button_;
+				sanguis::gui::widget::button connect_button_;
 
-		sanguis::gui::widget::box_container connect_box_;
+			sanguis::gui::widget::box_container connect_box_;
+
+		sanguis::gui::widget::frame connect_frame_;
 
 		sanguis::gui::widget::button quit_button_;
 

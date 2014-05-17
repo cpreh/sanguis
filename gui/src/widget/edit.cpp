@@ -1,5 +1,6 @@
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/duration.hpp>
+#include <sanguis/gui/focus_change.hpp>
 #include <sanguis/gui/get_focus.hpp>
 #include <sanguis/gui/text_callback.hpp>
 #include <sanguis/gui/text_function.hpp>
@@ -388,11 +389,13 @@ sanguis::gui::widget::edit::on_char(
 
 void
 sanguis::gui::widget::edit::on_focus_changed(
-	bool const _has_focus
+	sanguis::gui::focus_change const _change
 )
 {
 	has_focus_ =
-		_has_focus;
+		_change
+		==
+		sanguis::gui::focus_change::gained;
 
 	if(
 		has_focus_

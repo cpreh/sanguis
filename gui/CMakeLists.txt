@@ -7,6 +7,8 @@ set(
 	include/sanguis/gui/default_aspect.hpp
 	include/sanguis/gui/duration.hpp
 	include/sanguis/gui/fixed_area.hpp
+	include/sanguis/gui/focus_change.hpp
+	include/sanguis/gui/focus_change_fwd.hpp
 	include/sanguis/gui/get_focus.hpp
 	include/sanguis/gui/get_focus_fwd.hpp
 	include/sanguis/gui/master.hpp
@@ -34,6 +36,8 @@ set(
 	include/sanguis/gui/widget/edit_fwd.hpp
 	include/sanguis/gui/widget/expander.hpp
 	include/sanguis/gui/widget/expander_fwd.hpp
+	include/sanguis/gui/widget/frame.hpp
+	include/sanguis/gui/widget/frame_fwd.hpp
 	include/sanguis/gui/widget/image.hpp
 	include/sanguis/gui/widget/image_fwd.hpp
 	include/sanguis/gui/widget/optional_focus.hpp
@@ -97,6 +101,7 @@ set(
 	src/widget/dummy.cpp
 	src/widget/edit.cpp
 	src/widget/expander.cpp
+	src/widget/frame.cpp
 	src/widget/image.cpp
 	src/widget/reference_alignment_pair.cpp
 	src/widget/reference_name_pair.cpp

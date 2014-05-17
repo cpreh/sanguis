@@ -258,6 +258,10 @@ sanguis::client::gui::menu::object::object(
 		sge::rucksack::axis::y,
 		sanguis::gui::default_aspect()
 	),
+	connect_frame_(
+		_renderer,
+		connect_box_
+	),
 	quit_button_(
 		_renderer,
 		_font,
@@ -280,7 +284,7 @@ sanguis::client::gui::menu::object::object(
 			),
 			sanguis::gui::widget::reference_alignment_pair(
 				sanguis::gui::widget::reference(
-					connect_box_
+					connect_frame_
 				),
 				sge::rucksack::alignment::center
 			),

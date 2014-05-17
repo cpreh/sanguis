@@ -1,18 +1,20 @@
-#ifndef SANGUIS_GUI_WIDGET_BASE_HPP_INCLUDED
-#define SANGUIS_GUI_WIDGET_BASE_HPP_INCLUDED
+#ifndef SANGUIS_GUI_WIDGET_FRAME_HPP_INCLUDED
+#define SANGUIS_GUI_WIDGET_FRAME_HPP_INCLUDED
 
-#include <sanguis/gui/duration.hpp>
 #include <sanguis/gui/focus_change_fwd.hpp>
 #include <sanguis/gui/get_focus_fwd.hpp>
 #include <sanguis/gui/symbol.hpp>
-#include <sanguis/gui/widget/base_fwd.hpp>
+#include <sanguis/gui/widget/base.hpp>
+#include <sanguis/gui/widget/frame_fwd.hpp>
 #include <sanguis/gui/widget/optional_focus_fwd.hpp>
-#include <sanguis/gui/widget/optional_ref.hpp>
+#include <sanguis/gui/widget/optional_ref_fwd.hpp>
 #include <sge/font/char_type.hpp>
 #include <sge/input/keyboard/key_code_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
+#include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/vector_fwd.hpp>
 #include <sge/rucksack/widget/base_fwd.hpp>
+#include <sge/rucksack/widget/frame.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -23,88 +25,70 @@ namespace gui
 namespace widget
 {
 
-class base
+class frame
+:
+	public sanguis::gui::widget::base
 {
 	FCPPT_NONCOPYABLE(
-		base
+		frame
 	);
-protected:
-	base();
 public:
 	SANGUIS_GUI_SYMBOL
-	virtual
-	~base() = 0;
-
-	virtual
-	void
-	on_update(
-		sanguis::gui::duration
+	frame(
+		sge::renderer::device::ffp &,
+		sanguis::gui::widget::base &
 	);
 
-	virtual
+	SANGUIS_GUI_SYMBOL
+	~frame()
+	override;
+
+	SANGUIS_GUI_SYMBOL
+	sge::rucksack::widget::base &
+	layout()
+	override;
+private:
 	void
 	on_draw(
 		sge::renderer::context::ffp &
-	) = 0;
+	)
+	override;
 
-	virtual
 	sanguis::gui::get_focus const
 	on_click(
 		sge::rucksack::vector
-	);
+	)
+	override;
 
-	virtual
 	void
 	on_key(
 		sge::input::keyboard::key_code
-	);
+	)
+	override;
 
-	virtual
 	void
 	on_char(
 		sge::font::char_type
-	);
+	)
+	override;
 
-	virtual
 	void
 	on_focus_changed(
 		sanguis::gui::focus_change
-	);
+	)
+	override;
 
-	virtual
 	sanguis::gui::widget::optional_ref const
 	on_tab(
 		sanguis::gui::widget::optional_focus &
-	);
+	)
+	override;
 
-	virtual
-	sge::rucksack::widget::base &
-	layout() = 0;
+	sge::renderer::device::ffp &renderer_;
 
-	void
-	parent(
-		sanguis::gui::widget::optional_ref
-	);
+	sanguis::gui::widget::base &child_;
 
-	SANGUIS_GUI_SYMBOL
-	void
-	enable(
-		bool
-	);
-
-	SANGUIS_GUI_SYMBOL
-	bool
-	enabled() const;
-private:
-	virtual
-	void
-	unregister(
-		sanguis::gui::widget::base const &
-	);
-
-	sanguis::gui::widget::optional_ref parent_;
-
-	bool enabled_;
+	sge::rucksack::widget::frame layout_;
 };
 
 }

@@ -1,4 +1,5 @@
 #include <sanguis/gui/context.hpp>
+#include <sanguis/gui/focus_change.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/optional_ref.hpp>
 #include <fcppt/assert/error.hpp>
@@ -26,7 +27,7 @@ sanguis::gui::context::focus(
 		focus_
 	)
 		focus_->on_focus_changed(
-			false
+			sanguis::gui::focus_change::lost
 		);
 
 	focus_ =
@@ -35,7 +36,7 @@ sanguis::gui::context::focus(
 		);
 
 	_widget.on_focus_changed(
-		true
+		sanguis::gui::focus_change::gained
 	);
 }
 
