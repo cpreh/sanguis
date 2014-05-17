@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_GUI_MENU_OBJECT_HPP_INCLUDED
 
 #include <sanguis/duration.hpp>
+#include <sanguis/client/gui/menu/resolution_chooser.hpp>
 #include <sanguis/client/gui/menu/callbacks/object.hpp>
 #include <sanguis/client/config/settings/object_fwd.hpp>
 #include <sanguis/gui/context.hpp>
@@ -16,8 +17,10 @@
 #include <sge/font/object_fwd.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
+#include <sge/renderer/system_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/renderer/device/index_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
@@ -40,7 +43,9 @@ class object
 	);
 public:
 	object(
+		sge::renderer::system const &,
 		sge::renderer::device::ffp &,
+		sge::renderer::device::index,
 		sge::viewport::manager &,
 		sge::font::object &,
 		sge::input::cursor::object &,
@@ -85,6 +90,8 @@ private:
 	sanguis::client::gui::menu::callbacks::object const callbacks_;
 
 		sanguis::gui::widget::button quickstart_button_;
+
+		sanguis::client::gui::menu::resolution_chooser resolution_chooser_;
 
 			sanguis::gui::widget::static_text player_name_label_;
 

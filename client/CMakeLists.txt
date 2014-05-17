@@ -353,6 +353,7 @@ set(
 	include/sanguis/client/gui/menu/callbacks/quit.hpp
 	include/sanguis/client/gui/menu/callbacks/retry_connect.hpp
 	include/sanguis/client/gui/menu/object.hpp
+	include/sanguis/client/gui/menu/resolution_chooser.hpp
 	include/sanguis/client/gui/perk/chooser.hpp
 	include/sanguis/client/gui/perk/chooser_fwd.hpp
 	include/sanguis/client/gui/perk/item_color.hpp
@@ -657,6 +658,7 @@ set(
 	src/client/gui/hud/weapon_widget.cpp
 	src/client/gui/menu/callbacks/object.cpp
 	src/client/gui/menu/object.cpp
+	src/client/gui/menu/resolution_chooser.cpp
 	src/client/gui/perk/chooser.cpp
 	src/client/gui/perk/item_color.cpp
 	src/client/gui/perk/line.cpp

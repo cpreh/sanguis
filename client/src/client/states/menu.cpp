@@ -56,7 +56,13 @@ sanguis::client::states::menu::menu(
 	menu_(
 		this->context<
 			sanguis::client::machine
+		>().renderer_system(),
+		this->context<
+			sanguis::client::machine
 		>().renderer(),
+		this->context<
+			sanguis::client::machine
+		>().renderer_index(),
 		this->context<
 			sanguis::client::machine
 		>().viewport_manager(),

@@ -14,7 +14,9 @@
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/image2d/system_fwd.hpp>
+#include <sge/renderer/system_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/renderer/device/index.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <sge/window/system_fwd.hpp>
 #include <alda/net/host.hpp>
@@ -55,7 +57,9 @@ public:
 		sge::console::gfx::object &,
 		sge::input::keyboard::device &,
 		sge::input::cursor::object &,
+		sge::renderer::system const &,
 		sge::renderer::device::ffp &,
+		sge::renderer::device::index,
 		sge::image2d::system &,
 		sanguis::io_service &,
 		sge::viewport::manager &
@@ -96,8 +100,14 @@ public:
 	sanguis::client::config::settings::object &
 	settings();
 
+	sge::renderer::system const &
+	renderer_system() const;
+
 	sge::renderer::device::ffp &
 	renderer() const;
+
+	sge::renderer::device::index const
+	renderer_index() const;
 
 	sge::image2d::system &
 	image_loader() const;
@@ -143,7 +153,11 @@ private:
 
 	sge::input::keyboard::device &keyboard_;
 
+	sge::renderer::system const &renderer_system_;
+
 	sge::renderer::device::ffp &renderer_;
+
+	sge::renderer::device::index const renderer_index_;
 
 	sge::image2d::system &image_loader_;
 

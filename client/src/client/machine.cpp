@@ -21,8 +21,10 @@
 #include <sge/image2d/system_fwd.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
+#include <sge/renderer/system_fwd.hpp>
 #include <sge/renderer/context/scoped_ffp.hpp>
 #include <sge/renderer/device/ffp.hpp>
+#include <sge/renderer/device/index.hpp>
 #include <sge/renderer/target/onscreen.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/viewport/manager_fwd.hpp>
@@ -55,7 +57,9 @@ sanguis::client::machine::machine(
 	sge::console::gfx::object &_console_gfx,
 	sge::input::keyboard::device &_keyboard,
 	sge::input::cursor::object &_cursor,
+	sge::renderer::system const &_renderer_system,
 	sge::renderer::device::ffp &_renderer,
+	sge::renderer::device::index const _renderer_index,
 	sge::image2d::system &_image_loader,
 	sanguis::io_service &_io_service,
 	sge::viewport::manager &_viewport_manager
@@ -70,8 +74,14 @@ sanguis::client::machine::machine(
 	keyboard_(
 		_keyboard
 	),
+	renderer_system_(
+		_renderer_system
+	),
 	renderer_(
 		_renderer
+	),
+	renderer_index_(
+		_renderer_index
 	),
 	image_loader_(
 		_image_loader
@@ -248,61 +258,85 @@ sanguis::client::machine::quit()
 sanguis::client::config::settings::object &
 sanguis::client::machine::settings()
 {
-	return settings_;
+	return
+		settings_;
+}
+
+sge::renderer::system const &
+sanguis::client::machine::renderer_system() const
+{
+	return
+		renderer_system_;
 }
 
 sge::renderer::device::ffp &
 sanguis::client::machine::renderer() const
 {
-	return renderer_;
+	return
+		renderer_;
+}
+
+sge::renderer::device::index const
+sanguis::client::machine::renderer_index() const
+{
+	return
+		renderer_index_;
 }
 
 sge::image2d::system &
 sanguis::client::machine::image_loader() const
 {
-	return image_loader_;
+	return
+		image_loader_;
 }
 
 sge::input::keyboard::device &
 sanguis::client::machine::keyboard() const
 {
-	return keyboard_;
+	return
+		keyboard_;
 }
 
 sge::font::object &
 sanguis::client::machine::font_object() const
 {
-	return font_object_;
+	return
+		font_object_;
 }
 
 sge::console::gfx::object &
 sanguis::client::machine::console_gfx()
 {
-	return console_gfx_;
+	return
+		console_gfx_;
 }
 
 sanguis::client::load::context const &
 sanguis::client::machine::resources() const
 {
-	return resources_;
+	return
+		resources_;
 }
 
 sge::input::cursor::object &
 sanguis::client::machine::cursor()
 {
-	return cursor_;
+	return
+		cursor_;
 }
 
 sge::input::cursor::object const &
 sanguis::client::machine::cursor() const
 {
-	return cursor_;
+	return
+		cursor_;
 }
 
 sge::viewport::manager &
 sanguis::client::machine::viewport_manager() const
 {
-	return viewport_manager_;
+	return
+		viewport_manager_;
 }
 
 void

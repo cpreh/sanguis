@@ -25,8 +25,10 @@
 #include <sge/parse/ini/string.hpp>
 #include <sge/parse/ini/value.hpp>
 #include <sge/renderer/clear/parameters.hpp>
+#include <sge/renderer/system_fwd.hpp>
 #include <sge/renderer/context/ffp.hpp>
 #include <sge/renderer/device/ffp.hpp>
+#include <sge/renderer/device/index.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <sge/viewport/manager_fwd.hpp>
@@ -78,7 +80,9 @@ cancel_text(
 }
 
 sanguis::client::gui::menu::object::object(
+	sge::renderer::system const &_renderer_system,
 	sge::renderer::device::ffp &_renderer,
+	sge::renderer::device::index const _renderer_index,
 	sge::viewport::manager &_viewport_manager,
 	sge::font::object &_font,
 	sge::input::cursor::object &_cursor,
@@ -99,6 +103,13 @@ sanguis::client::gui::menu::object::object(
 		_font,
 		SGE_FONT_LIT("Quickstart"),
 		sanguis::gui::optional_needed_width()
+	),
+	resolution_chooser_(
+		gui_context_,
+		_font,
+		_renderer_system,
+		_renderer,
+		_renderer_index
 	),
 	player_name_label_(
 		_renderer,
@@ -293,6 +304,12 @@ sanguis::client::gui::menu::object::object(
 			sanguis::gui::widget::reference_alignment_pair(
 				sanguis::gui::widget::reference(
 					quickstart_button_
+				),
+				sge::rucksack::alignment::center
+			),
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					resolution_chooser_.widget()
 				),
 				sge::rucksack::alignment::center
 			),
