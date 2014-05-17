@@ -4,10 +4,10 @@
 #include <sanguis/gui/click_callback.hpp>
 #include <sanguis/gui/click_function.hpp>
 #include <sanguis/gui/get_focus_fwd.hpp>
+#include <sanguis/gui/optional_needed_width_fwd.hpp>
 #include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/button_fwd.hpp>
-#include <sge/font/dim.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
 #include <sge/font/draw/static_text.hpp>
@@ -40,7 +40,8 @@ public:
 	button(
 		sge::renderer::device::ffp &,
 		sge::font::object &,
-		sge::font::string const &
+		sge::font::string const &,
+		sanguis::gui::optional_needed_width
 	);
 
 	SANGUIS_GUI_SYMBOL
@@ -55,6 +56,12 @@ public:
 	SANGUIS_GUI_SYMBOL
 	sge::font::string const &
 	text() const;
+
+	SANGUIS_GUI_SYMBOL
+	void
+	text(
+		sge::font::string const &
+	);
 
 	SANGUIS_GUI_SYMBOL
 	sge::rucksack::widget::base &
@@ -73,6 +80,11 @@ private:
 	)
 	override;
 
+	sge::font::draw::static_text
+	make_static_text(
+		sge::font::string const &
+	);
+
 	sge::renderer::device::ffp &renderer_;
 
 	sge::font::object &font_;
@@ -80,8 +92,6 @@ private:
 	sge::font::string text_;
 
 	sge::font::draw::static_text static_text_;
-
-	sge::font::dim const font_size_;
 
 	sge::rucksack::widget::dummy layout_;
 

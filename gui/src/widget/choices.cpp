@@ -47,7 +47,8 @@ sanguis::gui::widget::choices::choices(
 	left_button_(
 		_renderer,
 		_font,
-		SGE_FONT_LIT("<")
+		SGE_FONT_LIT("<"),
+		sanguis::gui::optional_needed_width()
 	),
 	middle_text_(
 		_renderer,
@@ -73,7 +74,8 @@ sanguis::gui::widget::choices::choices(
 	right_button_(
 		_renderer,
 		_font,
-		SGE_FONT_LIT(">")
+		SGE_FONT_LIT(">"),
+		sanguis::gui::optional_needed_width()
 	),
 	index_{
 		_index

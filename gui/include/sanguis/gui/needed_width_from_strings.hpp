@@ -3,6 +3,7 @@
 
 #include <sanguis/gui/needed_width.hpp>
 #include <sanguis/gui/string_container.hpp>
+#include <sanguis/gui/symbol.hpp>
 #include <sge/font/object_fwd.hpp>
 
 
@@ -11,6 +12,7 @@ namespace sanguis
 namespace gui
 {
 
+SANGUIS_GUI_SYMBOL
 sanguis::gui::needed_width const
 needed_width_from_strings(
 	sge::font::object &,

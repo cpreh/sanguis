@@ -1,6 +1,7 @@
 #include <sanguis/gui/click_callback.hpp>
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/get_focus.hpp>
+#include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/aux_/fill_rect.hpp>
 #include <sanguis/gui/aux_/style/background_color.hpp>
 #include <sanguis/gui/aux_/style/border_color.hpp>
@@ -10,6 +11,7 @@
 #include <sanguis/gui/aux_/style/text_color.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/button.hpp>
+#include <sge/font/dim.hpp>
 #include <sge/font/metrics.hpp>
 #include <sge/font/object.hpp>
 #include <sge/font/rect.hpp>
@@ -19,6 +21,7 @@
 #include <sge/font/v_center.hpp>
 #include <sge/font/vector.hpp>
 #include <sge/font/align_h/left.hpp>
+#include <sge/font/draw/static_text.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/renderer/texture/emulate_srgb.hpp>
@@ -43,7 +46,8 @@
 sanguis::gui::widget::button::button(
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
-	sge::font::string const &_text
+	sge::font::string const &_text,
+	sanguis::gui::optional_needed_width const _needed_width
 )
 :
 	sanguis::gui::widget::base(),
@@ -57,25 +61,21 @@ sanguis::gui::widget::button::button(
 		_text
 	),
 	static_text_(
-		_renderer,
-		_font,
-		_text,
-		sge::font::text_parameters(
-			sge::font::align_h::left()
-		),
-		sge::font::vector::null(),
-		sanguis::gui::aux_::style::text_color(),
-		sge::renderer::texture::emulate_srgb::no
-	),
-	font_size_(
-		static_text_.logical_size().w(),
-		_font.metrics().height().get()
+		this->make_static_text(
+			_text
+		)
 	),
 	layout_(
 		sge::rucksack::axis_policy2(
 			sge::rucksack::axis_policy(
 				sge::rucksack::minimum_size(
-					font_size_.w()
+					(
+						_needed_width
+						?
+							_needed_width->get()
+						:
+							static_text_.logical_size().w()
+					)
 					+
 					sanguis::gui::aux_::style::spacing::value
 				),
@@ -88,7 +88,7 @@ sanguis::gui::widget::button::button(
 			),
 			sge::rucksack::axis_policy(
 				sge::rucksack::minimum_size(
-					font_size_.h()
+					_font.metrics().height().get()
 					+
 					sanguis::gui::aux_::style::spacing::value
 				),
@@ -128,6 +128,17 @@ sanguis::gui::widget::button::text() const
 		text_;
 }
 
+void
+sanguis::gui::widget::button::text(
+	sge::font::string const &_text
+)
+{
+	static_text_ =
+		this->make_static_text(
+			_text
+		);
+}
+
 sge::rucksack::widget::base &
 sanguis::gui::widget::button::layout()
 {
@@ -143,12 +154,7 @@ sanguis::gui::widget::button::on_draw(
 	sanguis::gui::aux_::fill_rect(
 		renderer_,
 		_context,
-		sge::rucksack::rect(
-			layout_.position(),
-			font_size_
-			+
-			sanguis::gui::aux_::style::spacing::value
-		),
+		layout_.area(),
 		sanguis::gui::aux_::style::border_color()
 	);
 
@@ -159,8 +165,10 @@ sanguis::gui::widget::button::on_draw(
 			layout_.position()
 			+
 			sanguis::gui::aux_::style::outer_border::value,
-			font_size_
-			+
+			layout_.size()
+			-
+			2
+			*
 			sanguis::gui::aux_::style::outer_border::value
 		),
 		sanguis::gui::aux_::style::background_color()
@@ -211,5 +219,24 @@ sanguis::gui::widget::button::on_click(
 	return
 		sanguis::gui::get_focus(
 			true
+		);
+}
+
+sge::font::draw::static_text
+sanguis::gui::widget::button::make_static_text(
+	sge::font::string const &_text
+)
+{
+	return
+		sge::font::draw::static_text(
+			renderer_,
+			font_,
+			_text,
+			sge::font::text_parameters(
+				sge::font::align_h::left()
+			),
+			sge::font::vector::null(),
+			sanguis::gui::aux_::style::text_color(),
+			sge::renderer::texture::emulate_srgb::no
 		);
 }

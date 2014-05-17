@@ -1,5 +1,6 @@
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/default_aspect.hpp>
+#include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/button.hpp>
 #include <sanguis/gui/widget/reference.hpp>
@@ -67,7 +68,8 @@ sanguis::gui::widget::tab::tab(
 						sanguis::gui::widget::button(
 							_renderer_arg,
 							_font_arg,
-							_name
+							_name,
+							sanguis::gui::optional_needed_width()
 						),
 						click_connection_(
 							this->click(

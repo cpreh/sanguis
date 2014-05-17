@@ -185,7 +185,8 @@ try
 	sanguis::gui::widget::button button(
 		sys.renderer_device_ffp(),
 		*font,
-		SGE_FONT_LIT("Quit")
+		SGE_FONT_LIT("Quit"),
+		sanguis::gui::optional_needed_width()
 	);
 
 	fcppt::signal::scoped_connection const quit_connection(
@@ -248,7 +249,8 @@ try
 							>(
 								sys.renderer_device_ffp(),
 								*font,
-								SGE_FONT_LIT("Child 1")
+								SGE_FONT_LIT("Child 1"),
+								sanguis::gui::optional_needed_width()
 							)
 						)
 					)(
@@ -258,7 +260,8 @@ try
 							>(
 								sys.renderer_device_ffp(),
 								*font,
-								SGE_FONT_LIT("Child 2 asdljasdljasdklasdjklasdjlkasdjaskldjjasdkljasdklasdjlk")
+								SGE_FONT_LIT("Child 2 asdljasdljasdklasdjklasdjlkasdjaskldjjasdkljasdklasdjlk"),
+								sanguis::gui::optional_needed_width()
 							)
 						)
 					)

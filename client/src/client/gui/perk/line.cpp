@@ -50,7 +50,8 @@ sanguis::client::gui::perk::line::line(
 			sanguis::client::perk::to_string(
 				_info.perk_type()
 			)
-		)
+		),
+		sanguis::gui::optional_needed_width()
 	),
 	text_(
 		_renderer,

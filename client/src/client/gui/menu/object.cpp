@@ -3,7 +3,9 @@
 #include <sanguis/client/gui/to_duration.hpp>
 #include <sanguis/client/gui/menu/object.hpp>
 #include <sanguis/gui/default_aspect.hpp>
+#include <sanguis/gui/needed_width_from_strings.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
+#include <sanguis/gui/string_container.hpp>
 #include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
@@ -68,6 +70,11 @@ connect_text(
 	SGE_FONT_LIT("Connect")
 );
 
+sge::font::string const
+cancel_text(
+	SGE_FONT_LIT("Cancel")
+);
+
 }
 
 sanguis::client::gui::menu::object::object(
@@ -90,7 +97,8 @@ sanguis::client::gui::menu::object::object(
 	quickstart_button_(
 		_renderer,
 		_font,
-		SGE_FONT_LIT("Quickstart")
+		SGE_FONT_LIT("Quickstart"),
+		sanguis::gui::optional_needed_width()
 	),
 	player_name_label_(
 		_renderer,
@@ -227,7 +235,16 @@ sanguis::client::gui::menu::object::object(
 	connect_button_(
 		_renderer,
 		_font,
-		connect_text
+		connect_text,
+		sanguis::gui::optional_needed_width(
+			sanguis::gui::needed_width_from_strings(
+				_font,
+				sanguis::gui::string_container{
+					connect_text,
+					cancel_text
+				}
+			)
+		)
 	),
 	connect_box_(
 		gui_context_,
@@ -267,7 +284,8 @@ sanguis::client::gui::menu::object::object(
 	quit_button_(
 		_renderer,
 		_font,
-		SGE_FONT_LIT("Quit")
+		SGE_FONT_LIT("Quit"),
+		sanguis::gui::optional_needed_width()
 	),
 	main_container_(
 		gui_context_,
@@ -432,10 +450,9 @@ sanguis::client::gui::menu::object::connection_error(
 		)
 	);
 
-/*
 	connect_button_.text(
 		connect_text
-	);*/
+	);
 }
 
 fcppt::string
@@ -526,14 +543,18 @@ sanguis::client::gui::menu::object::handle_connect()
 		connect_text_.value(
 			SGE_FONT_LIT("Connecting...")
 		);
+
+		connect_button_.text(
+			cancel_text
+		);
 	}
 	else
 	{
 		callbacks_.cancel_connect()();
 
-/*		connect_button_.text(
+		connect_button_.text(
 			connect_text
-		);*/
+		);
 
 		connect_text_.value(
 			SGE_FONT_LIT("")
