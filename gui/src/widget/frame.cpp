@@ -36,6 +36,11 @@ sanguis::gui::widget::frame::frame(
 		}
 	}
 {
+	child_.parent(
+		sanguis::gui::widget::optional_ref(
+			*this
+		)
+	);
 }
 
 sanguis::gui::widget::frame::~frame()

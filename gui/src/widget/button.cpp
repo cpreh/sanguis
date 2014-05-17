@@ -68,7 +68,7 @@ sanguis::gui::widget::button::button(
 		sge::renderer::texture::emulate_srgb::no
 	),
 	font_size_(
-		static_text_.rect().w(),
+		static_text_.logical_size().w(),
 		_font.metrics().height().get()
 	),
 	layout_(

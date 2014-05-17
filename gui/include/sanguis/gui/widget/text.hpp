@@ -1,6 +1,7 @@
 #ifndef SANGUIS_GUI_WIDGET_TEXT_HPP_INCLUDED
 #define SANGUIS_GUI_WIDGET_TEXT_HPP_INCLUDED
 
+#include <sanguis/gui/optional_needed_width_fwd.hpp>
 #include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/widget/base.hpp>
@@ -34,7 +35,8 @@ public:
 		sge::renderer::device::ffp &,
 		sge::font::object &,
 		sge::font::string const &,
-		sanguis::gui::text_color const &
+		sanguis::gui::text_color const &,
+		sanguis::gui::optional_needed_width
 	);
 
 	SANGUIS_GUI_SYMBOL

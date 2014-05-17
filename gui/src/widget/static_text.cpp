@@ -45,11 +45,11 @@ sanguis::gui::widget::static_text::static_text(
 		sge::rucksack::axis_policy2(
 			sge::rucksack::axis_policy(
 				sge::rucksack::minimum_size(
-					static_text_.rect().w()
+					static_text_.logical_size().w()
 				),
 				sge::rucksack::preferred_size(
 					sge::rucksack::optional_scalar(
-						static_text_.rect().w()
+						static_text_.logical_size().w()
 					)
 				),
 				sge::rucksack::is_expanding(

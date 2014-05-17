@@ -2,11 +2,16 @@
 #include <sanguis/gui/context.hpp>
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/duration.hpp>
+#include <sanguis/gui/index.hpp>
 #include <sanguis/gui/master.hpp>
+#include <sanguis/gui/optional_index.hpp>
+#include <sanguis/gui/optional_needed_width.hpp>
+#include <sanguis/gui/string_container.hpp>
 #include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/viewport_adaptor.hpp>
 #include <sanguis/gui/widget/button.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
+#include <sanguis/gui/widget/choices.hpp>
 #include <sanguis/gui/widget/edit.hpp>
 #include <sanguis/gui/widget/image.hpp>
 #include <sanguis/gui/widget/reference.hpp>
@@ -67,7 +72,10 @@
 #include <sge/systems/with_input.hpp>
 #include <sge/systems/with_renderer.hpp>
 #include <sge/systems/with_window.hpp>
+#include <sge/timer/basic.hpp>
+#include <sge/timer/elapsed_and_reset.hpp>
 #include <sge/timer/scoped_frame_limiter.hpp>
+#include <sge/timer/clocks/standard.hpp>
 #include <sge/viewport/fill_on_resize.hpp>
 #include <sge/window/dim.hpp>
 #include <sge/window/parameters.hpp>
@@ -88,6 +96,7 @@
 #include <main.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
+#include <chrono>
 #include <exception>
 #include <fcppt/config/external_end.hpp>
 
@@ -227,7 +236,8 @@ try
 						_label,
 						sanguis::gui::text_color(
 							sge::image::color::predef::black()
-						)
+						),
+						sanguis::gui::optional_needed_width()
 					),
 					fcppt::assign::make_container<
 						sanguis::gui::widget::unique_ptr_tree::child_list
@@ -359,6 +369,23 @@ try
 		sanguis::gui::default_aspect()
 	);
 
+	sanguis::gui::string_container const string_choices{
+		SGE_FONT_LIT("Choices Short"),
+		SGE_FONT_LIT("Choices Loooooooooooooooooooooooooooooooooooong")
+	};
+
+	sanguis::gui::widget::choices choices(
+		context,
+		sys.renderer_device_ffp(),
+		*font,
+		string_choices,
+		sanguis::gui::optional_index(
+			sanguis::gui::index(
+				0u
+			)
+		)
+	);
+
 	sanguis::gui::widget::box_container main_widget(
 		context,
 		sanguis::gui::widget::reference_alignment_vector{
@@ -371,6 +398,12 @@ try
 			sanguis::gui::widget::reference_alignment_pair(
 				sanguis::gui::widget::reference(
 					line_widget
+				),
+				sge::rucksack::alignment::center
+			),
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					choices
 				),
 				sge::rucksack::alignment::center
 			)
@@ -393,6 +426,20 @@ try
 		main_widget.layout()
 	);
 
+	typedef
+	sge::timer::basic<
+		sge::timer::clocks::standard
+	>
+	frame_timer_type;
+
+	frame_timer_type frame_timer(
+		frame_timer_type::parameters(
+			std::chrono::seconds(
+				1
+			)
+		)
+	);
+
 	while(
 		sys.window_system().poll()
 	)
@@ -404,9 +451,10 @@ try
 		);
 
 		master.update(
-			// FIXME
-			sanguis::gui::duration(
-				0
+			sge::timer::elapsed_and_reset<
+				sanguis::gui::duration
+			>(
+				frame_timer
 			)
 		);
 

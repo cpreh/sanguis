@@ -11,9 +11,21 @@ set(
 	include/sanguis/gui/focus_change_fwd.hpp
 	include/sanguis/gui/get_focus.hpp
 	include/sanguis/gui/get_focus_fwd.hpp
+	include/sanguis/gui/index.hpp
+	include/sanguis/gui/index_callback.hpp
+	include/sanguis/gui/index_function.hpp
+	include/sanguis/gui/index_fwd.hpp
 	include/sanguis/gui/master.hpp
 	include/sanguis/gui/master_fwd.hpp
 	include/sanguis/gui/minimum_size_area.hpp
+	include/sanguis/gui/needed_width.hpp
+	include/sanguis/gui/needed_width_from_strings.hpp
+	include/sanguis/gui/needed_width_fwd.hpp
+	include/sanguis/gui/optional_index.hpp
+	include/sanguis/gui/optional_index_fwd.hpp
+	include/sanguis/gui/optional_needed_width.hpp
+	include/sanguis/gui/optional_needed_width_fwd.hpp
+	include/sanguis/gui/string_container.hpp
 	include/sanguis/gui/text_callback.hpp
 	include/sanguis/gui/text_color.hpp
 	include/sanguis/gui/text_color_fwd.hpp
@@ -28,6 +40,8 @@ set(
 	include/sanguis/gui/widget/box_container_fwd.hpp
 	include/sanguis/gui/widget/button.hpp
 	include/sanguis/gui/widget/button_fwd.hpp
+	include/sanguis/gui/widget/choices.hpp
+	include/sanguis/gui/widget/choices_fwd.hpp
 	include/sanguis/gui/widget/container.hpp
 	include/sanguis/gui/widget/container_fwd.hpp
 	include/sanguis/gui/widget/dummy.hpp
@@ -92,11 +106,13 @@ set(
 	src/include/sanguis/gui/aux_/style/text_color.hpp
 	src/master.cpp
 	src/minimum_size_area.cpp
+	src/needed_width_from_strings.cpp
 	src/viewport_adaptor.cpp
 	src/widget/bar.cpp
 	src/widget/base.cpp
 	src/widget/box_container.cpp
 	src/widget/button.cpp
+	src/widget/choices.cpp
 	src/widget/container.cpp
 	src/widget/dummy.cpp
 	src/widget/edit.cpp

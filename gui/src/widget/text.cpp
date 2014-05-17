@@ -1,4 +1,5 @@
 #include <sanguis/gui/default_aspect.hpp>
+#include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/text.hpp>
 #include <sge/font/metrics.hpp>
@@ -7,7 +8,7 @@
 #include <sge/font/text_parameters.hpp>
 #include <sge/font/v_center.hpp>
 #include <sge/font/vector.hpp>
-#include <sge/font/align_h/left.hpp>
+#include <sge/font/align_h/center.hpp>
 #include <sge/font/align_h/max_width.hpp>
 #include <sge/font/draw/simple.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
@@ -29,7 +30,8 @@ sanguis::gui::widget::text::text(
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sge::font::string const &_value,
-	sanguis::gui::text_color const &_text_color
+	sanguis::gui::text_color const &_text_color,
+	sanguis::gui::optional_needed_width const _needed_width
 )
 :
 	sanguis::gui::widget::base(),
@@ -49,13 +51,17 @@ sanguis::gui::widget::text::text(
 		sge::rucksack::axis_policy2(
 			sge::rucksack::axis_policy(
 				sge::rucksack::minimum_size(
-					0
+					_needed_width
+					?
+						_needed_width->get()
+					:
+						0
 				),
 				sge::rucksack::preferred_size(
 					sge::rucksack::optional_scalar()
 				),
 				sge::rucksack::is_expanding(
-					true
+					!_needed_width.has_value()
 				)
 			),
 			sge::rucksack::axis_policy(
@@ -115,7 +121,7 @@ sanguis::gui::widget::text::on_draw(
 		font_,
 		value_,
 		sge::font::text_parameters(
-			sge::font::align_h::left(
+			sge::font::align_h::center(
 				sge::font::align_h::max_width(
 					layout_.size().w()
 				)

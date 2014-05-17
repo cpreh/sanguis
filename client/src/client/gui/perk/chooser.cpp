@@ -4,6 +4,7 @@
 #include <sanguis/client/gui/perk/state.hpp>
 #include <sanguis/client/perk/state.hpp>
 #include <sanguis/gui/default_aspect.hpp>
+#include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
@@ -70,7 +71,8 @@ sanguis::client::gui::perk::chooser::chooser(
 		this->make_top_text(),
 		sanguis::gui::text_color(
 			sge::image::color::predef::black()
-		)
+		),
+		sanguis::gui::optional_needed_width()
 	),
 	gui_state_(
 		fcppt::make_unique_ptr<

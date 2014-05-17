@@ -4,6 +4,7 @@
 #include <sanguis/client/load/hud/context.hpp>
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/default_aspect.hpp>
+#include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/image.hpp>
@@ -41,7 +42,8 @@ sanguis::client::gui::hud::weapon_widget::weapon_widget(
 		sge::font::string(),
 		sanguis::gui::text_color(
 			sge::image::color::predef::black()
-		)
+		),
+		sanguis::gui::optional_needed_width()
 	),
 	container_(
 		_gui_context,

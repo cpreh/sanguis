@@ -17,6 +17,7 @@
 #include <sanguis/client/gui/hud/weapon_widget.hpp>
 #include <sanguis/client/load/resource/textures_fwd.hpp>
 #include <sanguis/gui/default_aspect.hpp>
+#include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/widget/bar.hpp>
 #include <sanguis/gui/widget/reference.hpp>
@@ -83,7 +84,8 @@ sanguis::client::gui::hud::object::object(
 		sge::font::string(),
 		sanguis::gui::text_color(
 			sge::image::color::predef::black()
-		)
+		),
+		sanguis::gui::optional_needed_width()
 	),
 	player_name_text_(
 		_renderer,
@@ -91,7 +93,8 @@ sanguis::client::gui::hud::object::object(
 		sge::font::string(),
 		sanguis::gui::text_color(
 			sge::image::color::predef::black()
-		)
+		),
+		sanguis::gui::optional_needed_width()
 	),
 	level_text_(
 		_renderer,
@@ -99,7 +102,8 @@ sanguis::client::gui::hud::object::object(
 		sge::font::string(),
 		sanguis::gui::text_color(
 			sge::image::color::predef::black()
-		)
+		),
+		sanguis::gui::optional_needed_width()
 	),
 	top_container_(
 		gui_context_,

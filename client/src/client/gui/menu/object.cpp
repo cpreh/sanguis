@@ -3,6 +3,7 @@
 #include <sanguis/client/gui/to_duration.hpp>
 #include <sanguis/client/gui/menu/object.hpp>
 #include <sanguis/gui/default_aspect.hpp>
+#include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
@@ -220,7 +221,8 @@ sanguis::client::gui::menu::object::object(
 		SGE_FONT_LIT(""),
 		sanguis::gui::text_color(
 			sge::image::color::predef::black()
-		)
+		),
+		sanguis::gui::optional_needed_width()
 	),
 	connect_button_(
 		_renderer,
