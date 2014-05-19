@@ -23,12 +23,12 @@ sanguis::gui::widget::frame::frame(
 )
 :
 	sanguis::gui::widget::base(),
-	renderer_{
+	renderer_(
 		_renderer
-	},
-	child_{
+	),
+	child_(
 		_child
-	},
+	),
 	layout_{
 		_child.layout(),
 		sge::rucksack::padding{

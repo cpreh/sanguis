@@ -43,9 +43,9 @@ sanguis::client::gui::menu::resolution_chooser::resolution_chooser(
 			_index
 		)
 	),
-	renderer_{
+	renderer_(
 		_renderer
-	},
+	),
 	choices_(
 		_context,
 		_renderer,
