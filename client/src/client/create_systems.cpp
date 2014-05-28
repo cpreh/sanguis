@@ -15,6 +15,8 @@
 #include <sge/media/extension_set.hpp>
 #include <sge/media/optional_extension_set.hpp>
 #include <sge/log/location.hpp>
+#include <sge/log/option.hpp>
+#include <sge/log/option_container.hpp>
 #include <sge/renderer/display_mode/parameters.hpp>
 #include <sge/renderer/display_mode/vsync.hpp>
 #include <sge/renderer/pixel_format/color.hpp>
@@ -63,10 +65,14 @@ sanguis::client::create_systems(
 				sge::systems::config()
 				.log_settings(
 					sge::systems::log_settings(
-						sge::log::location(),
-						sanguis::client::args::sge_log_level(
-							_vm
-						)
+						sge::log::option_container{
+							sge::log::option{
+								sge::log::location(),
+								sanguis::client::args::sge_log_level(
+									_vm
+								)
+							}
+						}
 					)
 					.redirect(
 						sge::config::log_path(
