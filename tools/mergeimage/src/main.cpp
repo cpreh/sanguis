@@ -4,7 +4,6 @@
 #include <sanguis/tools/libmergeimage/save_images.hpp>
 #include <sanguis/tools/libmergeimage/saved_image_vector.hpp>
 #include <sanguis/tools/libmergeimage/to_model.hpp>
-#include <sge/image/capabilities_field.hpp>
 #include <sge/media/optional_extension_set.hpp>
 #include <sge/systems/image2d.hpp>
 #include <sge/systems/instance.hpp>
@@ -54,7 +53,6 @@ try
 		sge::systems::make_list
 		(
 			sge::systems::image2d(
-				sge::image::capabilities_field::null(),
 				sge::media::optional_extension_set()
 			)
 		)

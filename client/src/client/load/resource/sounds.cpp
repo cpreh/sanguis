@@ -4,8 +4,8 @@
 #include <sge/audio/buffer.hpp>
 #include <sge/audio/buffer_shared_ptr.hpp>
 #include <sge/audio/file.hpp>
-#include <sge/audio/file_unique_ptr.hpp>
 #include <sge/audio/loader.hpp>
+#include <sge/audio/optional_file_unique_ptr.hpp>
 #include <sge/audio/player.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -62,7 +62,7 @@ sanguis::client::load::resource::sounds::load_path(
 				boost::filesystem::path const &path
 			)
 			{
-				sge::audio::file_unique_ptr const file(
+				sge::audio::optional_file_unique_ptr const file(
 					multi_loader_.load(
 						path
 					)
@@ -73,7 +73,7 @@ sanguis::client::load::resource::sounds::load_path(
 					?
 						sge::audio::buffer_shared_ptr(
 							player_.create_buffer(
-								*file
+								**file
 							)
 						)
 					:

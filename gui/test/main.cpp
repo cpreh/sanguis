@@ -32,10 +32,10 @@
 #include <sge/font/object_unique_ptr.hpp>
 #include <sge/font/parameters.hpp>
 #include <sge/font/system.hpp>
-#include <sge/image/capabilities_field.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/image2d/file.hpp>
-#include <sge/image2d/system.hpp>
+#include <sge/image2d/load_exn.hpp>
+#include <sge/image2d/system_fwd.hpp>
 #include <sge/image2d/view/const_object.hpp>
 #include <sge/media/extension.hpp>
 #include <sge/media/extension_set.hpp>
@@ -159,7 +159,6 @@ try
 		)
 		(
 			sge::systems::image2d(
-				sge::image::capabilities_field::null(),
 				sge::media::optional_extension_set(
 					sge::media::extension_set{
 						sge::media::extension(
@@ -210,7 +209,8 @@ try
 
 	sanguis::gui::widget::image image(
 		sys.renderer_device_ffp(),
-		sys.image_system().load(
+		sge::image2d::load_exn(
+			sys.image_system(),
 			sanguis::build_media_path()
 			/
 			FCPPT_TEXT("car.png")

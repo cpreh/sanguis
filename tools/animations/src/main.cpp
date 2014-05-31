@@ -1,7 +1,6 @@
 #include <sanguis/tools/animations/main.hpp>
 #include <sanguis/tools/animations/main_window.hpp>
 #include <sanguis/tools/animations/sge_systems.hpp>
-#include <sge/image/capabilities_field.hpp>
 #include <sge/media/optional_extension_set.hpp>
 #include <sge/systems/image2d.hpp>
 #include <sge/systems/make_list.hpp>
@@ -35,7 +34,6 @@ try
 		sge::systems::make_list
 		(
 			sge::systems::image2d(
-				sge::image::capabilities_field::null(),
 				sge::media::optional_extension_set()
 			)
 		)

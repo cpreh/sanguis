@@ -6,11 +6,8 @@
 #include <sanguis/client/args/display_mode.hpp>
 #include <sanguis/client/args/multi_sampling.hpp>
 #include <sanguis/client/args/sge_log_level.hpp>
-#include <sge/audio/loader_capabilities_field.hpp>
 #include <sge/config/log_path.hpp>
 #include <sge/config/own_app_name.hpp>
-#include <sge/image/capabilities.hpp>
-#include <sge/image/capabilities_field.hpp>
 #include <sge/media/extension.hpp>
 #include <sge/media/extension_set.hpp>
 #include <sge/media/optional_extension_set.hpp>
@@ -118,9 +115,6 @@ sanguis::client::create_systems(
 			)
 			(
 				sge::systems::image2d(
-					sge::image::capabilities_field{
-						sge::image::capabilities::threadsafe
-					},
 					sge::media::optional_extension_set(
 						sge::media::extension_set{
 							sge::media::extension(
@@ -132,7 +126,6 @@ sanguis::client::create_systems(
 			)
 			(
 				sge::systems::audio_loader(
-					sge::audio::loader_capabilities_field::null(),
 					sge::media::optional_extension_set(
 						sge::media::extension_set{
 							sge::media::extension(
