@@ -6,9 +6,12 @@
 #include <sanguis/gui/widget/optional_focus.hpp>
 #include <sanguis/gui/widget/optional_ref.hpp>
 #include <sge/image/color/predef.hpp>
-#include <sge/image/color/init.hpp>
 #include <sge/image/color/rgba8.hpp>
 #include <sge/image/color/any/object.hpp>
+#include <sge/image/color/init/alpha.hpp>
+#include <sge/image/color/init/blue.hpp>
+#include <sge/image/color/init/green.hpp>
+#include <sge/image/color/init/red.hpp>
 #include <sge/input/cursor/button_code.hpp>
 #include <sge/input/cursor/button_event.hpp>
 #include <sge/input/cursor/object.hpp>
