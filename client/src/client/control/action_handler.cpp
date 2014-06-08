@@ -41,7 +41,7 @@
 #include <fcppt/math/clamp.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/signal/auto_connection.hpp>
-#include <fcppt/signal/connection_manager.hpp>
+#include <fcppt/signal/auto_connection_container.hpp>
 #include <fcppt/variant/apply_unary.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
@@ -73,7 +73,7 @@ sanguis::client::control::action_handler::action_handler(
 	),
 	cheat_connections_(
 		fcppt::assign::make_container<
-			fcppt::signal::connection_manager::container
+			fcppt::signal::auto_connection_container
 		>(
 			this->cheat_connection(
 				_console,

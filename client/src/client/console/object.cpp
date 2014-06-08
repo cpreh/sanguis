@@ -43,7 +43,7 @@ sanguis::client::console::object::register_server_command(
 	fcppt::string const &_description
 )
 {
-	server_connections_.add(
+	server_connections_.push_back(
 		gfx_.console_object().insert(
 			sge::console::callback::parameters(
 				std::bind(

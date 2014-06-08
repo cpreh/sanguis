@@ -20,7 +20,7 @@
 #include <sge/console/callback/name.hpp>
 #include <sge/console/callback/short_description.hpp>
 #include <fcppt/signal/auto_connection_fwd.hpp>
-#include <fcppt/signal/connection_manager.hpp>
+#include <fcppt/signal/auto_connection_container.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -118,7 +118,7 @@ private:
 
 	sanguis::client::control::direction_vector direction_;
 
-	fcppt::signal::connection_manager const cheat_connections_;
+	fcppt::signal::auto_connection_container const cheat_connections_;
 };
 
 }

@@ -9,7 +9,7 @@
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
-#include <fcppt/signal/connection_manager.hpp>
+#include <fcppt/signal/auto_connection_container.hpp>
 
 
 namespace sanguis
@@ -63,7 +63,7 @@ private:
 
 	sanguis::client::send_callback const send_;
 
-	fcppt::signal::connection_manager server_connections_;
+	fcppt::signal::auto_connection_container server_connections_;
 };
 
 }
