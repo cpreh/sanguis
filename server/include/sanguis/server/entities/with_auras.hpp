@@ -35,7 +35,8 @@ protected:
 		sanguis::server::auras::create_callback_container const &
 	);
 
-	~with_auras();
+	~with_auras()
+	override;
 
 	sanguis::server::auras::container const &
 	auras() const;

@@ -64,8 +64,8 @@ protected:
 		sanguis::server::weapons::optional_reload_time
 	);
 public:
-	virtual
-	~weapon() = 0;
+	~weapon()
+	override = 0;
 
 	void
 	owner(

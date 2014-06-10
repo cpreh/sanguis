@@ -35,7 +35,8 @@ public:
 		sanguis::server::damage::array const &
 	);
 
-	~aoe_damage();
+	~aoe_damage()
+	override;
 private:
 	bool
 	dead() const

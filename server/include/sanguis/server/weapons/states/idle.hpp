@@ -48,7 +48,6 @@ public:
 		my_context
 	);
 
-	virtual
 	~idle()
 	override;
 

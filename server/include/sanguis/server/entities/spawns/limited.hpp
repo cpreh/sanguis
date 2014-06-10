@@ -42,7 +42,8 @@ public:
 		sanguis::server::entities::spawns::total_count
 	);
 
-	~limited();
+	~limited()
+	override;
 private:
 	bool
 	dead() const

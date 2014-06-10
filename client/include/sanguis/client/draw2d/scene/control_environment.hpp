@@ -32,7 +32,8 @@ public:
 		sanguis::client::draw2d::scene::object &
 	);
 
-	~control_environment();
+	~control_environment()
+	override;
 private:
 	sanguis::client::control::optional_attack_dest const
 	translate_attack_dest(
@@ -41,7 +42,8 @@ private:
 	override;
 
 	sanguis::client::control::optional_cursor_position const
-	position() const;
+	position() const
+	override;
 
 	void
 	update_position(

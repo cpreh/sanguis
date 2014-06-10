@@ -35,7 +35,8 @@ public:
 		sanguis::server::weapons::shotgun_parameters const &
 	);
 
-	~shotgun();
+	~shotgun()
+	override;
 private:
 	sanguis::server::weapons::attack_result
 	do_attack(

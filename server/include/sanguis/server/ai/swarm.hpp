@@ -34,7 +34,8 @@ public:
 		sanguis::server::ai::sight_range
 	);
 
-	~swarm();
+	~swarm()
+	override;
 private:
 	sanguis::server::ai::update_result
 	friend_in_range(

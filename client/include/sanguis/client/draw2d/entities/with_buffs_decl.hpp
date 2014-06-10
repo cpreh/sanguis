@@ -51,9 +51,9 @@ public:
 		parameters_type const &
 	);
 
-	~with_buffs();
+	~with_buffs()
+	override;
 protected:
-	virtual
 	void
 	update()
 	override;

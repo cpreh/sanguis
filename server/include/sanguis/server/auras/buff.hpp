@@ -36,7 +36,8 @@ public:
 		sanguis::server::buffs::create_callback const &
 	);
 
-	~buff();
+	~buff()
+	override;
 private:
 	sanguis::optional_aura_type const
 	type() const
@@ -45,12 +46,14 @@ private:
 	void
 	enter(
 		sanguis::server::entities::with_body &
-	);
+	)
+	override;
 
 	void
 	leave(
 		sanguis::server::entities::with_body &
-	);
+	)
+	override;
 
 	sanguis::aura_type const aura_type_;
 

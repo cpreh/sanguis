@@ -32,7 +32,8 @@ public:
 		sanguis::server::weapons::grenade_parameters const &
 	);
 
-	~grenade();
+	~grenade()
+	override;
 private:
 	sanguis::server::weapons::attack_result
 	do_attack(

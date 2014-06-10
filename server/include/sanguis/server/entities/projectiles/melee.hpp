@@ -31,7 +31,8 @@ public:
 		sanguis::server::damage::array const &
 	);
 
-	~melee();
+	~melee()
+	override;
 };
 
 }

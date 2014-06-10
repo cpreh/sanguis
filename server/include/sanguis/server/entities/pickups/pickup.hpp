@@ -39,8 +39,8 @@ class pickup
 		pickup
 	);
 public:
-	virtual
-	~pickup();
+	~pickup()
+	override;
 protected:
 	pickup(
 		sanguis::pickup_type,

@@ -31,7 +31,8 @@ public:
 		sanguis::server::entities::spawn_owner const &
 	);
 
-	~friend_();
+	~friend_()
+	override;
 private:
 	sanguis::server::ai::update_result
 	lose_target(

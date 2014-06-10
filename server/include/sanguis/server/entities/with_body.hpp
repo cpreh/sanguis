@@ -49,7 +49,8 @@ public:
 		sanguis::server::model_size
 	);
 
-	~with_body();
+	~with_body()
+	override;
 
 	// entities::base overridden functions
 	sanguis::server::center const

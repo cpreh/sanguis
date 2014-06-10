@@ -52,9 +52,9 @@ public:
 		parameters_type const &
 	);
 
-	~with_auras();
+	~with_auras()
+	override;
 protected:
-	virtual
 	void
 	update()
 	override;

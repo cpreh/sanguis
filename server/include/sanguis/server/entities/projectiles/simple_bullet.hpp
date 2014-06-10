@@ -34,7 +34,8 @@ public:
 		sanguis::server::direction
 	);
 
-	~simple_bullet();
+	~simple_bullet()
+	override;
 private:
 	void
 	do_damage(

@@ -46,7 +46,8 @@ public:
 		sanguis::tools::animations::sge_systems const &
 	);
 
-	~main_window();
+	~main_window()
+	override;
 public Q_SLOTS:
 	void
 	actionJSON();

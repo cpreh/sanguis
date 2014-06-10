@@ -34,8 +34,8 @@ public:
 		my_context
 	);
 
-	virtual
-	~ingame_menu();
+	~ingame_menu()
+	override;
 };
 
 }

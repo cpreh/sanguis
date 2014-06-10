@@ -29,7 +29,8 @@ public:
 		sanguis::random_generator &
 	);
 
-	~monster_spawner();
+	~monster_spawner()
+	override;
 private:
 	sanguis::server::weapons::attack_result
 	do_attack(

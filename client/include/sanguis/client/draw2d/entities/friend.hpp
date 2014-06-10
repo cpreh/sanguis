@@ -39,7 +39,8 @@ public:
 		sanguis::client::health_pair
 	);
 
-	~friend_();
+	~friend_()
+	override;
 };
 
 }

@@ -41,7 +41,8 @@ protected:
 		sanguis::server::direction
 	);
 
-	~aoe_projectile();
+	~aoe_projectile()
+	override;
 
 	sanguis::server::aoe const
 	aoe() const;

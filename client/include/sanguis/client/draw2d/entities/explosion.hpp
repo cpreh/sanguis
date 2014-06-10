@@ -39,7 +39,8 @@ public:
 		sanguis::client::draw2d::aoe
 	);
 
-	~explosion();
+	~explosion()
+	override;
 private:
 	// base overrides
 

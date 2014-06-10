@@ -45,7 +45,8 @@ public:
 	);
 
 	SANGUIS_GUI_SYMBOL
-	~button();
+	~button()
+	override;
 
 	SANGUIS_GUI_SYMBOL
 	fcppt::signal::auto_connection

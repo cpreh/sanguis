@@ -37,7 +37,8 @@ public:
 		sanguis::client::draw2d::entities::model::object const &
 	);
 
-	~burn();
+	~burn()
+	override;
 private:
 	void
 	update(

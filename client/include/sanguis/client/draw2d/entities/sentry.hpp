@@ -36,7 +36,8 @@ public:
 		sanguis::client::health_pair
 	);
 
-	~sentry();
+	~sentry()
+	override;
 
 	void
 	orientation(

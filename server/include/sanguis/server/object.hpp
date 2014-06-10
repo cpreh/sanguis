@@ -31,11 +31,13 @@ public:
 	);
 
 	SANGUIS_SERVER_SYMBOL
-	~object();
+	~object()
+	override;
 
 	SANGUIS_SERVER_SYMBOL
 	void
-	run();
+	run()
+	override;
 
 	SANGUIS_SERVER_SYMBOL
 	void

@@ -31,8 +31,8 @@ protected:
 		sanguis::entity_id
 	);
 public:
-	virtual
-	~with_id() = 0;
+	~with_id()
+	override = 0;
 
 	sanguis::entity_id const
 	id() const

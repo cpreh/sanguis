@@ -58,7 +58,8 @@ public:
 		sanguis::client::draw2d::sprite::dim const &
 	);
 
-	~container();
+	~container()
+	override;
 
 	sanguis::client::draw2d::sprite::center const
 	center() const

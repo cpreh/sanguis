@@ -71,7 +71,8 @@ public:
 		sanguis::server::player_id
 	);
 
-	~player();
+	~player()
+	override;
 
 	// own functions
 	sanguis::player_name const &

@@ -15,5 +15,4 @@ class expander;
 }
 }
 
-
 #endif

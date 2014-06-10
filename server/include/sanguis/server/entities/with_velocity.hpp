@@ -54,8 +54,8 @@ protected:
 	)
 	override;
 public:
-	virtual
-	~with_velocity();
+	~with_velocity()
+	override;
 
 	void
 	world_collision(

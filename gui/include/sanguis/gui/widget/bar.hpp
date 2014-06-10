@@ -43,7 +43,8 @@ public:
 	);
 
 	SANGUIS_GUI_SYMBOL
-	~bar();
+	~bar()
+	override;
 
 	SANGUIS_GUI_SYMBOL
 	void

@@ -28,7 +28,8 @@ public:
 		sanguis::messages::server::unique_ptr &&
 	);
 
-	~message();
+	~message()
+	override;
 
 	// TODO: Can we get rid of the shared_ptr here?
 	sanguis::messages::server::shared_ptr

@@ -40,7 +40,8 @@ public:
 	);
 
 	SANGUIS_GUI_SYMBOL
-	~container();
+	~container()
+	override;
 
 	SANGUIS_GUI_SYMBOL
 	sge::rucksack::widget::base &

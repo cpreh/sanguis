@@ -47,8 +47,8 @@ public:
 		my_context
 	);
 
-	virtual
-	~console();
+	~console()
+	override;
 
 	boost::statechart::result
 	react(

@@ -47,7 +47,8 @@ public:
 		sanguis::io_service &
 	);
 
-	~machine();
+	~machine()
+	override;
 
 	void
 	listen();

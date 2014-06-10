@@ -44,9 +44,9 @@ protected:
 		sanguis::server::weapons::irs
 	);
 
-	~with_weapon();
+	~with_weapon()
+	override;
 
-	virtual
 	void
 	update()
 	override;

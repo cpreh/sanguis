@@ -36,7 +36,8 @@ protected:
 		sanguis::server::auras::create_callback_container const &
 	);
 
-	~with_auras_id();
+	~with_auras_id()
+	override;
 
 	sanguis::aura_type_vector
 	aura_types() const;

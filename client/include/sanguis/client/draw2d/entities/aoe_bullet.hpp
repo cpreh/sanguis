@@ -37,7 +37,8 @@ public:
 		sanguis::client::draw2d::aoe
 	);
 
-	~aoe_bullet();
+	~aoe_bullet()
+	override;
 private:
 	void
 	on_die()

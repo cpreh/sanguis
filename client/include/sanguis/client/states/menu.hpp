@@ -61,8 +61,8 @@ public:
 		my_context
 	);
 
-	virtual
-	~menu();
+	~menu()
+	override;
 
 	typedef
 	sanguis::messages::call::result

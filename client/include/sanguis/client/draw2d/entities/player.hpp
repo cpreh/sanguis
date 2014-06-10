@@ -40,7 +40,8 @@ public:
 		sanguis::client::draw2d::entities::name const &
 	);
 
-	~player();
+	~player()
+	override;
 
 	void
 	orientation(
@@ -62,7 +63,8 @@ protected:
 	bounding_dim() const;
 
 	sanguis::client::draw2d::entities::name
-	name() const;
+	name() const
+	override;
 
 	using sanguis::client::draw2d::entities::container::orientation;
 

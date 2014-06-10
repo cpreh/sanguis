@@ -44,7 +44,8 @@ public:
 		sanguis::client::health_pair
 	);
 
-	~own_player();
+	~own_player()
+	override;
 private:
 	void
 	health(

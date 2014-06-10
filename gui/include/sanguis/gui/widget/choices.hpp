@@ -40,7 +40,8 @@ public:
 	);
 
 	SANGUIS_GUI_SYMBOL
-	~choices();
+	~choices()
+	override;
 
 	SANGUIS_GUI_SYMBOL
 	fcppt::signal::auto_connection

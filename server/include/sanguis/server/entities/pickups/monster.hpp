@@ -36,7 +36,8 @@ public:
 		sanguis::server::entities::enemies::difficulty
 	);
 
-	~monster();
+	~monster()
+	override;
 private:
 	void
 	do_pickup(

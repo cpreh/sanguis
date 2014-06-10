@@ -51,7 +51,8 @@ public:
 	);
 
 	SANGUIS_GUI_SYMBOL
-	~edit();
+	~edit()
+	override;
 
 	SANGUIS_GUI_SYMBOL
 	sge::font::string const &

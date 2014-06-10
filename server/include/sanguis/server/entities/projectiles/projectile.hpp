@@ -54,7 +54,8 @@ protected:
 		sanguis::server::direction
 	);
 
-	~projectile();
+	~projectile()
+	override;
 
 	void
 	expire();

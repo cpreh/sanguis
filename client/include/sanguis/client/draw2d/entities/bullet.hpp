@@ -31,10 +31,12 @@ public:
 		sanguis::client::draw2d::entities::model::name const &
 	);
 
-	~bullet();
+	~bullet()
+	override;
 private:
 	void
-	update();
+	update()
+	override;
 
 	fcppt::optional<
 		sanguis::client::draw2d::sprite::center

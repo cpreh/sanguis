@@ -62,7 +62,8 @@ protected:
 		sanguis::server::damage::armor_array const &
 	);
 
-	~with_health();
+	~with_health()
+	override;
 
 	void
 	update()

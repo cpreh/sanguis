@@ -32,24 +32,28 @@ public:
 		sanguis::server::remove_weapon_pickup_callback const &
 	);
 
-	~weapon_pickup_candidates();
+	~weapon_pickup_candidates()
+	override;
 private:
 	sanguis::optional_aura_type const
 	type() const
 	override;
 
 	sanguis::collision::world::group_field const
-	collision_groups() const;
+	collision_groups() const
+	override;
 
 	void
 	enter(
 		sanguis::server::entities::with_body &
-	);
+	)
+	override;
 
 	void
 	leave(
 		sanguis::server::entities::with_body &
-	);
+	)
+	override;
 
 	sanguis::server::add_weapon_pickup_callback const add_;
 

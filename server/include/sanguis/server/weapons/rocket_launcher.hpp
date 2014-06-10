@@ -34,7 +34,8 @@ public:
 		sanguis::server::weapons::rocket_launcher_parameters const &
 	);
 
-	~rocket_launcher();
+	~rocket_launcher()
+	override;
 private:
 	sanguis::server::weapons::attack_result
 	do_attack(

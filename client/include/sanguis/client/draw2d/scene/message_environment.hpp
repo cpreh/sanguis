@@ -40,7 +40,8 @@ public:
 		sanguis::client::player_health_callback const &
 	);
 
-	~message_environment();
+	~message_environment()
+	override;
 private:
 	sanguis::client::draw2d::entities::base &
 	insert(

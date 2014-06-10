@@ -24,8 +24,8 @@ public:
 	);
 
 	SANGUIS_MODEL_SYMBOL
-	virtual
-	~exception() throw();
+	~exception() throw()
+	override;
 };
 
 }

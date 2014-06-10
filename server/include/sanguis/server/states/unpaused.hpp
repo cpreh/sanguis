@@ -52,8 +52,8 @@ public:
 
 	unpaused();
 
-	virtual
-	~unpaused();
+	~unpaused()
+	override;
 
 	boost::statechart::result
 	react(

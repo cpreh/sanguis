@@ -33,7 +33,8 @@ public:
 		sanguis::server::weapons::sentry_parameters const &
 	);
 
-	~sentry();
+	~sentry()
+	override;
 private:
 	sanguis::server::weapons::attack_result
 	do_attack(

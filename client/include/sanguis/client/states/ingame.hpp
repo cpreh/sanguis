@@ -43,8 +43,8 @@ public:
 		my_context
 	);
 
-	virtual
-	~ingame();
+	~ingame()
+	override;
 
 	typedef boost::statechart::result result_type;
 

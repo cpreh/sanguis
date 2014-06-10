@@ -40,7 +40,8 @@ public:
 		sanguis::server::direction
 	);
 
-	~grenade();
+	~grenade()
+	override;
 private:
 	bool
 	on_transfer(

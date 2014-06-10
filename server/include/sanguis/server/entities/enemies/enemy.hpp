@@ -49,7 +49,8 @@ public:
 		sanguis::server::entities::enemies::parameters &&
 	);
 
-	~enemy();
+	~enemy()
+	override;
 
 	sanguis::creator::enemy_type
 	enemy_type() const;

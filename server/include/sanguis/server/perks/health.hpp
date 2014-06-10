@@ -24,13 +24,15 @@ class health
 public:
 	health();
 
-	~health();
+	~health()
+	override;
 private:
 	void
 	change(
 		sanguis::server::entities::with_perks &,
 		sanguis::server::perks::level_diff
-	);
+	)
+	override;
 };
 
 }

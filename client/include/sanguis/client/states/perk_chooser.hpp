@@ -52,8 +52,8 @@ public:
 		my_context
 	);
 
-	virtual
-	~perk_chooser();
+	~perk_chooser()
+	override;
 
 	boost::statechart::result
 	react(

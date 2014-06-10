@@ -76,8 +76,8 @@ public:
 		my_context
 	);
 
-	virtual
-	~running();
+	~running()
+	override;
 
 	boost::statechart::result
 	react(

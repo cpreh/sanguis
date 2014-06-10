@@ -39,7 +39,8 @@ public:
 		sanguis::client::health_pair
 	);
 
-	~enemy();
+	~enemy()
+	override;
 private:
 	sanguis::client::draw2d::entities::name
 	name() const

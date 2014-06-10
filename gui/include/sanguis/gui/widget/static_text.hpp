@@ -39,7 +39,8 @@ public:
 	);
 
 	SANGUIS_GUI_SYMBOL
-	~static_text();
+	~static_text()
+	override;
 
 	SANGUIS_GUI_SYMBOL
 	sge::rucksack::widget::base &

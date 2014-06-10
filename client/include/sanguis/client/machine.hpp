@@ -65,7 +65,8 @@ public:
 		sge::viewport::manager &
 	);
 
-	~machine();
+	~machine()
+	override;
 
 	void
 	quickstart(

@@ -29,8 +29,8 @@ class with_links
 protected:
 	with_links();
 public:
-	virtual
-	~with_links() = 0;
+	~with_links()
+	override = 0;
 
 	sanguis::server::entities::auto_weak_link
 	link()
@@ -38,7 +38,8 @@ public:
 	final;
 protected:
 	void
-	reset_links();
+	reset_links()
+	override;
 private:
 	friend class sanguis::server::entities::auto_weak_link;
 

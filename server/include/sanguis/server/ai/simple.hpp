@@ -34,7 +34,8 @@ public:
 		sanguis::server::ai::sight_range
 	);
 
-	~simple();
+	~simple()
+	override;
 protected:
 	sanguis::server::ai::update_result
 	new_target(

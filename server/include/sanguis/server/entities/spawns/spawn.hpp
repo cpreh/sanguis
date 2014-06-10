@@ -41,7 +41,8 @@ public:
 		sanguis::server::entities::base &
 	);
 
-	~spawn();
+	~spawn()
+	override;
 protected:
 	spawn(
 		sanguis::random_generator &,

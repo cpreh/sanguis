@@ -37,7 +37,8 @@ public:
 		sanguis::server::damage::array const &
 	);
 
-	~melee();
+	~melee()
+	override;
 private:
 	sanguis::server::weapons::attack_result
 	do_attack(

@@ -36,7 +36,8 @@ public:
 		sanguis::server::direction
 	);
 
-	~rocket();
+	~rocket()
+	override;
 private:
 	void
 	do_damage(

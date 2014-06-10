@@ -33,7 +33,8 @@ public:
 		sanguis::server::damage::array const &
 	);
 
-	~aoe_damage();
+	~aoe_damage()
+	override;
 private:
 	sanguis::optional_aura_type const
 	type() const
@@ -42,12 +43,14 @@ private:
 	void
 	enter(
 		sanguis::server::entities::with_body &
-	);
+	)
+	override;
 
 	void
 	leave(
 		sanguis::server::entities::with_body &
-	);
+	)
+	override;
 
 	sanguis::server::damage::unit const damage_;
 

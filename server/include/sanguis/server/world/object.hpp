@@ -76,7 +76,8 @@ public:
 		sanguis::world_name const &
 	);
 
-	~object();
+	~object()
+	override;
 
 	void
 	update(

@@ -53,7 +53,6 @@ public:
 		my_context
 	);
 
-	virtual
 	~reloading()
 	override;
 

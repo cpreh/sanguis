@@ -35,7 +35,8 @@ public:
 		sanguis::server::damage::array const &
 	);
 
-	~burn();
+	~burn()
+	override;
 private:
 	sanguis::buff_type
 	type() const

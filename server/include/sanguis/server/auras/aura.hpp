@@ -31,8 +31,8 @@ class aura
 		aura
 	);
 public:
-	virtual
-	~aura();
+	~aura()
+	override;
 
 	sanguis::server::collision::ghost_unique_ptr
 	create_ghost();
@@ -54,17 +54,20 @@ private:
 	boost::logic::tribool const
 	can_collide_with(
 		sanguis::collision::world::body_base const &
-	) const;
+	) const
+	override;
 
 	void
 	body_enter(
 		sanguis::collision::world::body_base &
-	);
+	)
+	override;
 
 	void
 	body_exit(
 		sanguis::collision::world::body_base &
-	);
+	)
+	override;
 
 	virtual
 	void

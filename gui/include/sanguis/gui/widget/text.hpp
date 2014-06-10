@@ -40,7 +40,8 @@ public:
 	);
 
 	SANGUIS_GUI_SYMBOL
-	~text();
+	~text()
+	override;
 
 	SANGUIS_GUI_SYMBOL
 	void

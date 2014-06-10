@@ -37,7 +37,8 @@ public:
 		sanguis::server::exp
 	);
 
-	~exp_area();
+	~exp_area()
+	override;
 private:
 	void
 	remove()

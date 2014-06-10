@@ -54,7 +54,6 @@ public:
 		my_context
 	);
 
-	virtual
 	~backswing()
 	override;
 

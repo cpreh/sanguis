@@ -25,8 +25,8 @@ class center_ghost
 protected:
 	center_ghost();
 public:
-	virtual
-	~center_ghost() = 0;
+	~center_ghost()
+	override = 0;
 protected:
 	bool
 	on_transfer(

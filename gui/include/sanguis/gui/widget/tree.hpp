@@ -32,7 +32,8 @@ public:
 	);
 
 	SANGUIS_GUI_SYMBOL
-	~tree();
+	~tree()
+	override;
 private:
 	sanguis::gui::widget::unique_ptr_vector boxes_;
 };

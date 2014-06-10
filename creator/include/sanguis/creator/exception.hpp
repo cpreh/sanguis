@@ -24,8 +24,8 @@ public:
 	);
 
 	SANGUIS_CREATOR_SYMBOL
-	virtual
-	~exception() throw();
+	~exception() throw()
+	override;
 };
 
 }

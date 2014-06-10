@@ -35,7 +35,8 @@ public:
 		sanguis::server::remove_target_callback const &
 	);
 
-	~target();
+	~target()
+	override;
 private:
 	sanguis::optional_aura_type const
 	type() const
@@ -44,12 +45,14 @@ private:
 	void
 	enter(
 		sanguis::server::entities::with_body &
-	);
+	)
+	override;
 
 	void
 	leave(
 		sanguis::server::entities::with_body &
-	);
+	)
+	override;
 
 	sanguis::server::add_target_callback const add_target_;
 

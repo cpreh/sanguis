@@ -30,8 +30,8 @@ public:
 	override
 	final;
 
-	virtual
-	~center_simple() = 0;
+	~center_simple()
+	override = 0;
 protected:
 	bool
 	on_transfer(

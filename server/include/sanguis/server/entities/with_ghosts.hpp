@@ -30,7 +30,8 @@ class with_ghosts
 public:
 	with_ghosts();
 
-	~with_ghosts();
+	~with_ghosts()
+	override;
 protected:
 	void
 	add_ghost(

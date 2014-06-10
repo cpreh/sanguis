@@ -35,19 +35,22 @@ public:
 		sanguis::random_generator &
 	);
 
-	~choleric();
+	~choleric()
+	override;
 private:
 	void
 	update(
 		sanguis::server::entities::with_perks &,
 		sanguis::server::environment::object &
-	);
+	)
+	override;
 
 	void
 	change(
 		sanguis::server::entities::with_perks &,
 		sanguis::server::perks::level_diff
-	);
+	)
+	override;
 
 	sanguis::diff_timer shoot_timer_;
 

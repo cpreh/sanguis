@@ -44,7 +44,8 @@ public:
 protected:
 	with_buffs();
 
-	~with_buffs();
+	~with_buffs()
+	override;
 
 	void
 	update()

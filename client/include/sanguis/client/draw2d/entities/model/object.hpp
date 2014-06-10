@@ -57,14 +57,14 @@ public:
 		sanguis::client::draw2d::entities::model::parameters const &
 	);
 
-	~object();
+	~object()
+	override;
 protected:
-	virtual
 	void
-	update();
+	update()
+	override;
 
 	// with_orientation overrides
-	virtual
 	void
 	orientation(
 		sanguis::client::draw2d::sprite::rotation
@@ -94,13 +94,11 @@ protected:
 	is_decayed() const
 	override;
 
-	virtual
 	void
 	on_die()
 	override;
 
 	// with_speed overrides
-	virtual
 	void
 	speed(
 		sanguis::client::draw2d::speed const &

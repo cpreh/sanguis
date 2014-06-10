@@ -37,7 +37,8 @@ public:
 	);
 
 	SANGUIS_GUI_SYMBOL
-	~tab();
+	~tab()
+	override;
 private:
 	sanguis::gui::widget::unique_ptr_vector top_buttons_;
 

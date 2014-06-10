@@ -42,7 +42,8 @@ public:
 		sanguis::server::entities::projectiles::scatter_create const &
 	);
 
-	~scatter();
+	~scatter()
+	override;
 private:
 	void
 	update()

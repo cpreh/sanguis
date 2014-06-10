@@ -33,7 +33,8 @@ public:
 		sanguis::server::entities::property::value
 	);
 
-	~always_max();
+	~always_max()
+	override;
 
 	sanguis::server::entities::property::value
 	current() const;
@@ -46,7 +47,8 @@ private:
 	void
 	on_recalc_max(
 		sanguis::server::entities::property::value
-	);
+	)
+	override;
 
 	sanguis::server::entities::property::value current_;
 

@@ -44,7 +44,8 @@ public:
 		sanguis::server::weapons::unique_ptr &&
 	);
 
-	~weapon();
+	~weapon()
+	override;
 
 	sanguis::server::weapons::unique_ptr
 	obtain();

@@ -41,7 +41,8 @@ public:
 	);
 
 	SANGUIS_GUI_SYMBOL
-	~box_container();
+	~box_container()
+	override;
 
 	SANGUIS_GUI_SYMBOL
 	void

@@ -39,7 +39,8 @@ protected:
 		sanguis::random_generator &
 	);
 
-	~with_perks();
+	~with_perks()
+	override;
 
 	void
 	update()

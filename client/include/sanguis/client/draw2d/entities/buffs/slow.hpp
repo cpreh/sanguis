@@ -27,7 +27,8 @@ class slow
 public:
 	slow();
 
-	~slow();
+	~slow()
+	override;
 private:
 	void
 	apply(

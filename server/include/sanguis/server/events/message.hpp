@@ -29,7 +29,8 @@ public:
 		sanguis::server::player_id
 	);
 
-	~message();
+	~message()
+	override;
 
 	sanguis::messages::client::shared_ptr
 	get() const;

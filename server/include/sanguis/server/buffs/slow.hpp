@@ -28,7 +28,8 @@ public:
 		sanguis::server::buffs::slow_factor
 	);
 
-	~slow();
+	~slow()
+	override;
 private:
 	sanguis::buff_type
 	type() const

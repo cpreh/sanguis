@@ -43,8 +43,8 @@ public:
 
 	paused();
 
-	virtual
-	~paused();
+	~paused()
+	override;
 
 	// reactions
 	boost::statechart::result

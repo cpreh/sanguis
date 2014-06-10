@@ -32,7 +32,8 @@ public:
 		sanguis::server::health
 	);
 
-	~health();
+	~health()
+	override;
 private:
 	void
 	do_pickup(

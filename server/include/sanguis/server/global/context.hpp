@@ -52,7 +52,8 @@ public:
 		sanguis::server::console &
 	);
 
-	~context();
+	~context()
+	override;
 
 	void
 	insert_player(

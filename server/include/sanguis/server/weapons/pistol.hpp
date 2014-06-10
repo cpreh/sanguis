@@ -33,7 +33,8 @@ public:
 		sanguis::server::weapons::pistol_parameters const &
 	);
 
-	~pistol();
+	~pistol()
+	override;
 private:
 	sanguis::server::weapons::attack_result
 	do_attack(

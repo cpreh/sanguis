@@ -49,7 +49,6 @@ public:
 		my_context
 	);
 
-	virtual
 	~castpoint()
 	override;
 
