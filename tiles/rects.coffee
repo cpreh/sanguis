@@ -168,7 +168,6 @@ class Corridor
 		)
 
 	draw: (flipped) ->
-		console.log 'draw()'
 		flipped = flipped ? false
 
 		start = @p1
@@ -223,15 +222,15 @@ class Corridor
 			@_fill_rect mid, end.plus(dir2), @thickness, '#883'
 
 		# fill the inner area
-		@_fill_rect start.plus(dir1), mid, @inner_thickness, '#000'
-		@_fill_rect mid, end.plus(dir2), @inner_thickness, '#000'
+		@_fill_rect start.plus(dir1), mid, @inner_thickness, '#fff'
+		@_fill_rect mid, end.plus(dir2), @inner_thickness, '#fff'
 
 		# draw the start and end points
 		###
 		@_set_tile mid.x, mid.y, '#00f'
 		###
-		@_set_tile @p1.x, @p1.y, '#000'
-		@_set_tile @p2.x, @p2.y, '#000'
+		@_set_tile @p1.x, @p1.y, '#fff'
+		@_set_tile @p2.x, @p2.y, '#fff'
 
 inside = (point, rect) ->
 	return point.x >= rect.pos.x and
@@ -240,10 +239,10 @@ inside = (point, rect) ->
 		point.y <= rect.pos.y + rect.dim.h
 
 intersect = (line, rect) ->
-	return line.p2.x >= rect.pos.x and
-		line.p2.y >= rect.pos.y and
-		line.p1.x <= rect.pos.x + rect.dim.w and
-		line.p1.y <= rect.pos.y + rect.dim.h
+	return line.p2.x > rect.pos.x and
+		line.p2.y > rect.pos.y and
+		line.p1.x < rect.pos.x + rect.dim.w and
+		line.p1.y < rect.pos.y + rect.dim.h
 
 random_int = (a, b) ->
 	a + randn() % (b - a + 1)
@@ -298,8 +297,10 @@ generate_rects = (ctx, width, height) ->
 			y2 = undefined
 			if edge in [Edge.top, Edge.bottom]
 				xmin = 1 + Math.max rect.pos.x, neighbor.pos.x
-				xmax = -2 + Math.min rect.pos.x + rect.dim.w, neighbor.pos.x + neighbor.dim.w
-				x2 = x1 = random_int xmin, xmax
+				xmax = -1 + Math.min rect.pos.x + rect.dim.w, neighbor.pos.x + neighbor.dim.w
+				if xmin >= xmax
+					console.log 'ouch'
+				x2 = x1 = xmin#random_int xmin, xmax
 				if edge == Edge.top
 					y1 = rect.pos.y - 2
 					y2 = rect.pos.y
@@ -308,8 +309,10 @@ generate_rects = (ctx, width, height) ->
 					y2 = rect.pos.y + rect.dim.h + 1
 			if edge in [Edge.left, Edge.right]
 				ymin = 1 + Math.max rect.pos.y, neighbor.pos.y
-				ymax = -2 + Math.min rect.pos.y + rect.dim.h, neighbor.pos.y + neighbor.dim.h
-				y2 = y1 = random_int ymin, ymax
+				ymax = -1 + Math.min rect.pos.y + rect.dim.h, neighbor.pos.y + neighbor.dim.h
+				if ymin >= ymax
+					console.log 'ouch'
+				y2 = y1 = ymin #random_int ymin, ymax
 				if edge == Edge.left
 					x1 = rect.pos.x - 2
 					x2 = rect.pos.x
@@ -392,7 +395,7 @@ change_seed = (s) ->
 init = ->
 	seed_input = document.getElementById 'seed'
 	seed_input.value = seed
-	seed_input.addEventListener 'change', -> change_seed seed_input.value
+	seed_input.addEventListener 'change', -> change_seed seed_input.value // 1
 	regenerate()
 
 regenerate = ->
@@ -424,7 +427,6 @@ regenerate = ->
 	canvas.addEventListener 'keydown', redraw
 
 	draw_rects ctx, tilesize, 800, 600, rects
-	console.log corr
 	for c in corr
 		c.draw()
 

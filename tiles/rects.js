@@ -212,7 +212,6 @@
 
     Corridor.prototype.draw = function(flipped) {
       var close, dir, dir1, dir2, end, mid, sign, start;
-      console.log('draw()');
       flipped = flipped != null ? flipped : false;
       start = this.p1;
       mid = void 0;
@@ -262,14 +261,14 @@
         this._fill_rect(start.plus(dir1), mid, this.thickness, '#883');
         this._fill_rect(mid, end.plus(dir2), this.thickness, '#883');
       }
-      this._fill_rect(start.plus(dir1), mid, this.inner_thickness, '#000');
-      this._fill_rect(mid, end.plus(dir2), this.inner_thickness, '#000');
+      this._fill_rect(start.plus(dir1), mid, this.inner_thickness, '#fff');
+      this._fill_rect(mid, end.plus(dir2), this.inner_thickness, '#fff');
 
       /*
       		@_set_tile mid.x, mid.y, '#00f'
        */
-      this._set_tile(this.p1.x, this.p1.y, '#000');
-      return this._set_tile(this.p2.x, this.p2.y, '#000');
+      this._set_tile(this.p1.x, this.p1.y, '#fff');
+      return this._set_tile(this.p2.x, this.p2.y, '#fff');
     };
 
     return Corridor;
@@ -281,7 +280,7 @@
   };
 
   intersect = function(line, rect) {
-    return line.p2.x >= rect.pos.x && line.p2.y >= rect.pos.y && line.p1.x <= rect.pos.x + rect.dim.w && line.p1.y <= rect.pos.y + rect.dim.h;
+    return line.p2.x > rect.pos.x && line.p2.y > rect.pos.y && line.p1.x < rect.pos.x + rect.dim.w && line.p1.y < rect.pos.y + rect.dim.h;
   };
 
   random_int = function(a, b) {
@@ -334,8 +333,11 @@
         y2 = void 0;
         if (edge === Edge.top || edge === Edge.bottom) {
           xmin = 1 + Math.max(rect.pos.x, neighbor.pos.x);
-          xmax = -2 + Math.min(rect.pos.x + rect.dim.w, neighbor.pos.x + neighbor.dim.w);
-          x2 = x1 = random_int(xmin, xmax);
+          xmax = -1 + Math.min(rect.pos.x + rect.dim.w, neighbor.pos.x + neighbor.dim.w);
+          if (xmin >= xmax) {
+            console.log('ouch');
+          }
+          x2 = x1 = xmin;
           if (edge === Edge.top) {
             y1 = rect.pos.y - 2;
             y2 = rect.pos.y;
@@ -347,8 +349,11 @@
         }
         if (edge === Edge.left || edge === Edge.right) {
           ymin = 1 + Math.max(rect.pos.y, neighbor.pos.y);
-          ymax = -2 + Math.min(rect.pos.y + rect.dim.h, neighbor.pos.y + neighbor.dim.h);
-          y2 = y1 = random_int(ymin, ymax);
+          ymax = -1 + Math.min(rect.pos.y + rect.dim.h, neighbor.pos.y + neighbor.dim.h);
+          if (ymin >= ymax) {
+            console.log('ouch');
+          }
+          y2 = y1 = ymin;
           if (edge === Edge.left) {
             x1 = rect.pos.x - 2;
             x2 = rect.pos.x;
@@ -428,7 +433,7 @@
     seed_input = document.getElementById('seed');
     seed_input.value = seed;
     seed_input.addEventListener('change', function() {
-      return change_seed(seed_input.value);
+      return change_seed(Math.floor(seed_input.value / 1));
     });
     return regenerate();
   };
@@ -467,7 +472,6 @@
     canvas.addEventListener('mousemove', redraw);
     canvas.addEventListener('keydown', redraw);
     draw_rects(ctx, tilesize, 800, 600, rects);
-    console.log(corr);
     _results = [];
     for (_i = 0, _len = corr.length; _i < _len; _i++) {
       c = corr[_i];
