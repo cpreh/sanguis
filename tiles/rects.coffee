@@ -50,9 +50,17 @@ class AALine
 				[@p1, @p2] = [@p2, @p1]
 				return
 
+class Edge
+	@none: -1
+	@right: 0
+	@top: 1
+	@left: 2
+	@bottom: 3
+
 class Rect
+	neighbor: undefined
+
 	constructor: (@pos, @dim) ->
-		@adj = []
 
 	top: ->
 		new AALine(
@@ -61,41 +69,169 @@ class Rect
 	right: ->
 		new AALine(
 			new Pos(@pos.x + @dim.w, @pos.y),
-			new Pos(@pos.x + @dim.w, @pos.y + @dim.h))
+			@pos.plus @dim)
 
 	bottom: ->
 		new AALine(
-			@pos.plus(@dim),
-			new Pos(@pos.x, @pos.y + @dim.h))
+			new Pos(@pos.x, @pos.y + @dim.h),
+			@pos.plus @dim)
 	left: ->
 		new AALine(
 			new Pos(@pos.x, @pos.y + @dim.h),
 			@pos)
 
 	clip: (other) ->
+		last = undefined
+		#before = new Dim(@dim.w, @dim.h)
 		if inside(other.pos, @) and inside(other.pos.plus(other.dim), @)
-			@dim.w = other.pos.x - @pos.x - 1
-			@adj.push other
+			@dim.w = other.pos.x - 1 - @pos.x
+			last = Edge.right
 
 		if intersect @top(), other
 			oldy = @pos.y
 			@pos.y = other.pos.y + other.dim.h + 1
 			@dim.h -= @pos.y - oldy
-			@adj.push other
+			last = Edge.top
 
 		if intersect @right(), other
 			@dim.w = other.pos.x - 1 - @pos.x
-			@adj.push other
+			last = Edge.right
 
 		if intersect @bottom(), other
 			@dim.h = other.pos.y - 1 - @pos.y
-			@adj.push other
+			last = Edge.bottom
 
 		if intersect @left(), other
 			oldx = @pos.x
 			@pos.x = other.pos.x + other.dim.w + 1
 			@dim.w -= @pos.x - oldx
-			@adj.push other
+			last = Edge.left
+
+		# modified?
+		#not (before.w == @dim.w and before.h == @dim.h)
+		last
+
+###
+# a corridor from point 'p1' to point 'p2'
+# with at most one bend in the middle, open at each end to connect rooms
+# 'thickness' wide total, leaving
+# 'inner_thickness' space between sides,
+# following the x or y axis first, respectively
+###
+class Corridor
+	_bounds: undefined
+
+	constructor: (@ctx, @tilesize, @p1, @p2, @thickness, @inner_thickness) ->
+		@_bounds =
+			new Rect(
+				new Pos(
+					@p1.x - @thickness // 2,
+					@p1.y - @thickness // 2
+				),
+				new Dim(
+					@p2.x - @p1.x + @thickness
+					@p2.y - @p1.y + @thickness
+				)
+			)
+
+	###
+	# Helper function to fill a rectangle spanned by two points
+	# d is the diameter. If the diameter is even, this results
+	# in an asymmetric shape.
+	###
+	_fill_rect: (a, b, d, color) ->
+		[x1, x2] = if a.x < b.x then [a.x, b.x] else [b.x, a.x]
+		[y1, y2] = if a.y < b.y then [a.y, b.y] else [b.y, a.y]
+		w = x2 - x1
+		h = y2 - y1
+		@ctx.fillStyle = color
+		@ctx.fillRect(
+			@tilesize * (x1 - d//2),
+			@tilesize * (y1 - d//2),
+			@tilesize * (w + d),
+			@tilesize * (h + d))
+
+	# set a single tile
+	_set_tile: (x, y, color) ->
+		@_fill_rect(new Pos(x, y), new Pos(x, y), 1, color ? '#0ff')
+
+	bounds: ->
+		new Rect(
+			new Pos(
+				@p1.x - @thickness // 2,
+				@p1.y - @thickness // 2
+			),
+			new Dim(
+				@p2.x - @p1.x + @thickness
+				@p2.y - @p1.y + @thickness
+			)
+		)
+
+	draw: (flipped) ->
+		console.log 'draw()'
+		flipped = flipped ? false
+
+		start = @p1
+		mid = undefined
+		if flipped
+			mid = new Pos(@p1.x, @p2.y)
+		else
+			mid = new Pos(@p2.x, @p1.y)
+		end = @p2
+
+		sign = (x) ->
+			if x < 0 then -1 else if close(x, 0) then 0 else 1
+
+		# floating point comparison using epsilon
+		close = (x, y) ->
+			Math.abs(x - y) < 0.001
+
+		# determine orientation of starting tile
+		if close(mid.y, start.y)
+			dir1 = new Dim(
+				(@thickness // 2) * sign(mid.x - start.x),
+				0)
+		else
+			dir1 = new Dim(
+				0,
+				(@thickness // 2) * sign(mid.y - start.y))
+		
+		# determine orientation of end tile
+		if close(mid.y, end.y)
+			dir2 = new Dim(
+				(@thickness // 2) * sign(mid.x - end.x),
+				0)
+		else
+			dir2 = new Dim(
+				0,
+				(@thickness // 2) * sign(mid.y - end.y))
+
+		###
+		# horizontal or vertical paths without mid have only one rect
+		# all other paths consist of two rects
+		# cut off one tile on the side leading into and out of the corridor,
+		# respectively
+		###
+		if close(end.x, start.x) or close(end.y, start.y)
+			if close(end.x, start.x)
+				dir = new Dim(0,(@thickness // 2) * sign(end.y - start.y))
+			else
+				dir = new Dim((@thickness // 2) * sign(end.x - start.x),0)
+			@_fill_rect start.plus(dir), end.minus(dir), @thickness, '#883'
+		else
+			@_fill_rect start.plus(dir1), mid, @thickness, '#883'
+			@_fill_rect mid, end.plus(dir2), @thickness, '#883'
+
+		# fill the inner area
+		@_fill_rect start.plus(dir1), mid, @inner_thickness, '#000'
+		@_fill_rect mid, end.plus(dir2), @inner_thickness, '#000'
+
+		# draw the start and end points
+		###
+		@_set_tile mid.x, mid.y, '#00f'
+		###
+		@_set_tile @p1.x, @p1.y, '#000'
+		@_set_tile @p2.x, @p2.y, '#000'
 
 inside = (point, rect) ->
 	return point.x >= rect.pos.x and
@@ -105,12 +241,12 @@ inside = (point, rect) ->
 
 intersect = (line, rect) ->
 	return line.p2.x >= rect.pos.x and
+		line.p2.y >= rect.pos.y and
 		line.p1.x <= rect.pos.x + rect.dim.w and
-		line.p1.y <= rect.pos.y + rect.dim.h and
-		line.p2.y >= rect.pos.y
+		line.p1.y <= rect.pos.y + rect.dim.h
 
 seed = new Rand().randn()
-console.log "seed: #{seed}"
+#console.log "seed: #{seed}"
 rng = new Rand(seed)
 
 randn = -> rng.randn()
@@ -129,45 +265,70 @@ shuffle = (a) ->
 	a
 
 generate_rects = (ctx, width, height) ->
-	rects = []
+	random_rect = (i) ->
+		x = random_int 0, 100 - 3
+		y = random_int 0, 75 - 3
+		w = Math.min(random_int(5, 15+i), 100 - x)
+		h = Math.min(random_int(5, 15+i), 75 - y)
 
-	for i in [1..100]
-		x = random_int 0, 100
-		y = random_int 0, 75
-		w = Math.min(random_int(10, 40), 100 - x)
-		h = Math.min(random_int(10, 40), 75 - y)
-
-		rect = new Rect(
+		new Rect(
 			new Pos(x, y),
 			new Dim(w, h))
 
+	rects = [random_rect(1)]
+	corr = []
+
+	for i in [1..100]
+		rect = random_rect(i)
+
 		wellformed = true
 
+		neighbor = undefined
+		edge = undefined
+
 		for other in rects
-			rect.clip other
+			e = rect.clip other
+			if e?
+				neighbor = other
+				edge = e
 			wellformed = rect.dim.w > 2 and rect.dim.h > 2
 			unless wellformed
 				break
 
-		if wellformed
+
+		if wellformed and neighbor
+			rect.neighbor = neighbor
+			x1 = undefined
+			y1 = undefined
+			x2 = undefined
+			y2 = undefined
+			if edge in [Edge.top, Edge.bottom]
+				xmin = 1 + Math.max rect.pos.x, neighbor.pos.x
+				xmax = -1 + Math.min rect.pos.x + rect.dim.w, neighbor.pos.x + neighbor.dim.w
+				x2 = x1 = random_int xmin, xmax
+				if edge == Edge.top
+					y1 = rect.pos.y - 2
+					y2 = rect.pos.y
+				if edge == Edge.bottom
+					y1 = rect.pos.y + rect.dim.h - 1
+					y2 = rect.pos.y + rect.dim.h + 1
+			if edge in [Edge.left, Edge.right]
+				ymin = 1 + Math.max rect.pos.y, neighbor.pos.y
+				ymax = -1 + Math.min rect.pos.y + rect.dim.h, neighbor.pos.y + neighbor.dim.h
+				y2 = y1 = random_int ymin, ymax
+				if edge == Edge.left
+					x1 = rect.pos.x - 2
+					x2 = rect.pos.x
+				if edge == Edge.right
+					x1 = rect.pos.x + rect.dim.w - 1
+					x2 = rect.pos.x + rect.dim.w + 1
+
+			corr.push new Corridor(
+				ctx, 8, new Pos(x1, y1), new Pos(x2, y2), 3, 1)
+
 			rects.push rect
 
-	rects
-
-find_closest = (graph, nodes) ->
-	ret = undefined
-	min_length = Infinity
-	for n1 in graph
-		for n2 in nodes
-			if distance(n1, n2) < min_length
-				ret = n2
-	ret
-
-build_graph = (rects) ->
-	graph = []
-	for rect in rects
-		graph.push rect
-		closest = find_closest(rect, rects)
+	[rects, corr]
 
 draw_rect = (ctx, tilesize, rect, color) ->
 	ctx.fillStyle = color ? "#883"
@@ -200,7 +361,6 @@ clear = (ctx, color) ->
 draw_rects = (ctx, tilesize, width, height, rects) ->
 	canvas = ctx.canvas
 	gridsize = new Dim canvas.width / tilesize, canvas.height / tilesize
-	console.log "grid: #{gridsize.w} x #{gridsize.h}"
 
 	clear ctx
 
@@ -218,106 +378,17 @@ draw_rects = (ctx, tilesize, width, height, rects) ->
 		shuffle r
 		return "rgb(#{r[0]},#{r[1]},#{r[2]})"
 
-	for rect in rects
+	draw_rect ctx, tilesize, rects[0], '#f0f'
+
+	for rect in rects[1..]
 		draw_rect ctx, tilesize, rect, '#883'
 
-###
-# draw a corridor from point 'p1' to point 'p2'
-# with at most one bend in the middle, open at each end to connect rooms
-# 'thickness' wide total, leaving
-# 'inner_thickness' space between sides,
-# 'flipped' determines in which direction the corridor bends,
-# following the x or y axis first, respectively
-###
-draw_corridor = (ctx, tilesize, p1, p2, thickness, inner_thickness, flipped) ->
-	flipped = flipped ? false
-
-	start = p1
-	mid = undefined
-	if flipped
-		mid = new Pos(p1.x, p2.y)
-	else
-		mid = new Pos(p2.x, p1.y)
-	end = p2
-
-	###
-	# Helper function to fill a rectangle spanned by two points
-	# d is the diameter. If the diameter is even, this results
-	# in an asymmetric shape.
-	###
-	fill_rect = (a, b, d, color) ->
-		[x1, x2] = if a.x < b.x then [a.x, b.x] else [b.x, a.x]
-		[y1, y2] = if a.y < b.y then [a.y, b.y] else [b.y, a.y]
-		w = x2 - x1
-		h = y2 - y1
-		ctx.fillStyle = color
-		ctx.fillRect(
-			tilesize * (x1 - d//2),
-			tilesize * (y1 - d//2),
-			tilesize * (w + d),
-			tilesize * (h + d))
-
-	# set a single tile
-	set_tile = (x, y, color) ->
-		fill_rect(new Pos(x, y), new Pos(x, y), 1, color ? '#0ff')
-
-	sign = (x) ->
-		if x < 0 then -1 else if close(x, 0) then 0 else 1
-
-	# floating point comparison using epsilon
-	close = (x, y) ->
-		Math.abs(x - y) < 0.001
-
-	# determine orientation of starting tile
-	if close(mid.y, start.y)
-		dir1 = new Dim(
-			(thickness // 2) * sign(mid.x - start.x),
-			0)
-	else
-		dir1 = new Dim(
-			0,
-			(thickness // 2) * sign(mid.y - start.y))
-	
-	# determine orientation of end tile
-	if close(mid.y, end.y)
-		dir2 = new Dim(
-			(thickness // 2) * sign(mid.x - end.x),
-			0)
-	else
-		dir2 = new Dim(
-			0,
-			(thickness // 2) * sign(mid.y - end.y))
-
-	###
-	# horizontal or vertical paths without mid have only one rect
-	# all other paths consist of two rects
-	# cut off one tile on the side leading into and out of the corridor,
-	# respectively
-	###
-	if close(end.x, start.x) or close(end.y, start.y)
-		if close(end.x, start.x)
-			dir = new Dim(0,(thickness // 2) * sign(end.y - start.y))
-		else
-			dir = new Dim((thickness // 2) * sign(end.x - start.x),0)
-		fill_rect start.plus(dir), end.minus(dir), thickness, '#f00'
-	else
-		fill_rect start.plus(dir1), mid, thickness, '#080'
-		fill_rect mid, end.plus(dir2), thickness, '#808'
-
-	# fill the inner area
-	fill_rect start, mid, inner_thickness, '#ff0'
-	fill_rect mid, end, inner_thickness, '#ff0'
-
-	# draw the start and end points
-	set_tile p1.x, p1.y, '#0f0'
-	set_tile p2.x, p2.y, '#f0f'
 
 
 init = ->
 	canvas = document.getElementById 'canvas'
 	ctx = canvas.getContext '2d'
-	rects = generate_rects()
-	#rects = build_graph(rects)
+	[rects, corr] = generate_rects ctx
 
 	outer_slider = document.getElementById 'outer'
 	outer_label = document.getElementById 'outer_label'
@@ -335,32 +406,39 @@ init = ->
 			(event.clientX - rect.left) // tilesize(),
 			(event.clientY - rect.top) // tilesize())
 
+		###
 	redraw = (event) ->
 		clear ctx
-		draw_corridor(
+		(new Corridor(
 			ctx,
 			tilesize(),
 			new Pos(5, 5),
 			new Pos(15, 2),
 			Math.floor(outer_slider.value),
-			Math.floor(inner_slider.value),
-			false)
-		draw_corridor(
+			Math.floor(inner_slider.value)
+		)).draw(false)
+			
+		(new Corridor(
 			ctx,
 			tilesize(),
 			new Pos(25, 25),
 			mouse_pos(event),
 			Math.floor(outer_slider.value),
-			Math.floor(inner_slider.value),
-			event.shiftKey)
+			Math.floor(inner_slider.value)
+		)).draw(event.shiftKey)
+		###
 
 	highlight_rect = (event) ->
 		draw_rects ctx, tilesize(), 800, 600, rects
 		for rect in rects
 			if inside(mouse_pos(event), rect)
 				draw_rect ctx, tilesize(), rect, '#f00'
-				for neighbor in rect.adj
+				if rect.neighbor
 					draw_rect ctx, tilesize(), rect.neighbor, '#0f0'
+		for c in corr
+			c.draw()
+
+	redraw = highlight_rect
 
 	canvas.addEventListener 'mousemove', redraw
 	canvas.addEventListener 'keydown', redraw
@@ -374,5 +452,10 @@ init = ->
 	tilesize_slider.addEventListener 'input', (event) ->
 		tilesize_label.innerHTML = tilesize_slider.value
 		redraw event
+
+	draw_rects ctx, tilesize(), 800, 600, rects
+	console.log corr
+	for c in corr
+		c.draw()
 
 window.addEventListener 'load', init
