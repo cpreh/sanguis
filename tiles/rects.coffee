@@ -245,12 +245,6 @@ intersect = (line, rect) ->
 		line.p1.x <= rect.pos.x + rect.dim.w and
 		line.p1.y <= rect.pos.y + rect.dim.h
 
-seed = new Rand().randn()
-#console.log "seed: #{seed}"
-rng = new Rand(seed)
-
-randn = -> rng.randn()
-
 random_int = (a, b) ->
 	a + randn() % (b - a + 1)
 
@@ -383,58 +377,44 @@ draw_rects = (ctx, tilesize, width, height, rects) ->
 	for rect in rects[1..]
 		draw_rect ctx, tilesize, rect, '#883'
 
+seed = new Rand().randn()
+rng = new Rand(seed)
+randn = -> rng.randn()
 
+change_seed = (s) ->
+	seed = s ? new Rand().randn()
+	console.log "seed: #{seed}"
+	rng = new Rand(seed)
+
+	randn = -> rng.randn()
+	regenerate()
 
 init = ->
+	seed_input = document.getElementById 'seed'
+	seed_input.value = seed
+	seed_input.addEventListener 'change', -> change_seed seed_input.value
+	regenerate()
+
+regenerate = ->
 	canvas = document.getElementById 'canvas'
 	ctx = canvas.getContext '2d'
 	[rects, corr] = generate_rects ctx
 
-	outer_slider = document.getElementById 'outer'
-	outer_label = document.getElementById 'outer_label'
-	inner_slider = document.getElementById 'inner'
-	inner_label = document.getElementById 'inner_label'
-	tilesize_slider = document.getElementById 'tilesize'
-	tilesize_label = document.getElementById 'tilesize_label'
-
-	tilesize = ->
-		tilesize_slider.value
+	tilesize = 8
 
 	mouse_pos = (event) ->
 		rect = canvas.getBoundingClientRect()
 		new Pos(
-			(event.clientX - rect.left) // tilesize(),
-			(event.clientY - rect.top) // tilesize())
-
-		###
-	redraw = (event) ->
-		clear ctx
-		(new Corridor(
-			ctx,
-			tilesize(),
-			new Pos(5, 5),
-			new Pos(15, 2),
-			Math.floor(outer_slider.value),
-			Math.floor(inner_slider.value)
-		)).draw(false)
-			
-		(new Corridor(
-			ctx,
-			tilesize(),
-			new Pos(25, 25),
-			mouse_pos(event),
-			Math.floor(outer_slider.value),
-			Math.floor(inner_slider.value)
-		)).draw(event.shiftKey)
-		###
+			(event.clientX - rect.left) // tilesize,
+			(event.clientY - rect.top) // tilesize)
 
 	highlight_rect = (event) ->
-		draw_rects ctx, tilesize(), 800, 600, rects
+		draw_rects ctx, tilesize, 800, 600, rects
 		for rect in rects
 			if inside(mouse_pos(event), rect)
-				draw_rect ctx, tilesize(), rect, '#f00'
+				draw_rect ctx, tilesize, rect, '#f00'
 				if rect.neighbor
-					draw_rect ctx, tilesize(), rect.neighbor, '#0f0'
+					draw_rect ctx, tilesize, rect.neighbor, '#0f0'
 		for c in corr
 			c.draw()
 
@@ -443,17 +423,7 @@ init = ->
 	canvas.addEventListener 'mousemove', redraw
 	canvas.addEventListener 'keydown', redraw
 
-	outer_slider.addEventListener 'input', (event) ->
-		outer_label.innerHTML = outer_slider.value
-		redraw event
-	inner_slider.addEventListener 'input', (event) ->
-		inner_label.innerHTML = inner_slider.value
-		redraw event
-	tilesize_slider.addEventListener 'input', (event) ->
-		tilesize_label.innerHTML = tilesize_slider.value
-		redraw event
-
-	draw_rects ctx, tilesize(), 800, 600, rects
+	draw_rects ctx, tilesize, 800, 600, rects
 	console.log corr
 	for c in corr
 		c.draw()
