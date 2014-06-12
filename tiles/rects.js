@@ -342,7 +342,7 @@
         y2 = void 0;
         if (edge === Edge.top || edge === Edge.bottom) {
           xmin = 1 + Math.max(rect.pos.x, neighbor.pos.x);
-          xmax = -1 + Math.min(rect.pos.x + rect.dim.w, neighbor.pos.x + neighbor.dim.w);
+          xmax = -2 + Math.min(rect.pos.x + rect.dim.w, neighbor.pos.x + neighbor.dim.w);
           x2 = x1 = random_int(xmin, xmax);
           if (edge === Edge.top) {
             y1 = rect.pos.y - 2;
@@ -355,7 +355,7 @@
         }
         if (edge === Edge.left || edge === Edge.right) {
           ymin = 1 + Math.max(rect.pos.y, neighbor.pos.y);
-          ymax = -1 + Math.min(rect.pos.y + rect.dim.h, neighbor.pos.y + neighbor.dim.h);
+          ymax = -2 + Math.min(rect.pos.y + rect.dim.h, neighbor.pos.y + neighbor.dim.h);
           y2 = y1 = random_int(ymin, ymax);
           if (edge === Edge.left) {
             x1 = rect.pos.x - 2;
