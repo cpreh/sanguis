@@ -221,16 +221,17 @@ class Corridor
 			@_fill_rect start.plus(dir1), mid, @thickness, '#883'
 			@_fill_rect mid, end.plus(dir2), @thickness, '#883'
 
+		inner_color = '#444'
 		# fill the inner area
-		@_fill_rect start.plus(dir1), mid, @inner_thickness, '#fff'
-		@_fill_rect mid, end.plus(dir2), @inner_thickness, '#fff'
+		@_fill_rect start.plus(dir1), mid, @inner_thickness, inner_color
+		@_fill_rect mid, end.plus(dir2), @inner_thickness, inner_color
 
 		# draw the start and end points
 		###
 		@_set_tile mid.x, mid.y, '#00f'
 		###
-		@_set_tile @p1.x, @p1.y, '#fff'
-		@_set_tile @p2.x, @p2.y, '#fff'
+		@_set_tile @p1.x, @p1.y, inner_color
+		@_set_tile @p2.x, @p2.y, inner_color
 
 inside = (point, rect) ->
 	return point.x >= rect.pos.x and
@@ -289,40 +290,43 @@ generate_rects = (ctx, width, height) ->
 				break
 
 
-		if wellformed and neighbor
-			rect.neighbor = neighbor
-			x1 = undefined
-			y1 = undefined
-			x2 = undefined
-			y2 = undefined
-			if edge in [Edge.top, Edge.bottom]
-				xmin = 1 + Math.max rect.pos.x, neighbor.pos.x
-				xmax = -1 + Math.min rect.pos.x + rect.dim.w, neighbor.pos.x + neighbor.dim.w
-				if xmin >= xmax
-					console.log 'ouch'
-				x2 = x1 = xmin#random_int xmin, xmax
-				if edge == Edge.top
-					y1 = rect.pos.y - 2
-					y2 = rect.pos.y
-				if edge == Edge.bottom
-					y1 = rect.pos.y + rect.dim.h - 1
-					y2 = rect.pos.y + rect.dim.h + 1
-			if edge in [Edge.left, Edge.right]
-				ymin = 1 + Math.max rect.pos.y, neighbor.pos.y
-				ymax = -1 + Math.min rect.pos.y + rect.dim.h, neighbor.pos.y + neighbor.dim.h
-				if ymin >= ymax
-					console.log 'ouch'
-				y2 = y1 = ymin #random_int ymin, ymax
-				if edge == Edge.left
-					x1 = rect.pos.x - 2
-					x2 = rect.pos.x
-				if edge == Edge.right
-					x1 = rect.pos.x + rect.dim.w - 1
-					x2 = rect.pos.x + rect.dim.w + 1
+		unless wellformed and neighbor
+			continue
 
+		rect.neighbor = neighbor
+		x1 = undefined
+		y1 = undefined
+		x2 = undefined
+		y2 = undefined
+		if edge in [Edge.top, Edge.bottom]
+			xmin = 1 + Math.max rect.pos.x, neighbor.pos.x
+			xmax = -2 + Math.min rect.pos.x + rect.dim.w, neighbor.pos.x + neighbor.dim.w
+			if xmin >= xmax
+				wellformed = false
+			x2 = x1 = random_int xmin, xmax
+			if edge == Edge.top
+				y1 = rect.pos.y - 2
+				y2 = rect.pos.y
+			if edge == Edge.bottom
+				y1 = rect.pos.y + rect.dim.h - 1
+				y2 = rect.pos.y + rect.dim.h + 1
+		if edge in [Edge.left, Edge.right]
+			ymin = 1 + Math.max rect.pos.y, neighbor.pos.y
+			ymax = -2 + Math.min rect.pos.y + rect.dim.h, neighbor.pos.y + neighbor.dim.h
+			if ymin >= ymax
+				wellformed = false
+			y2 = y1 = random_int ymin, ymax
+			if edge == Edge.left
+				x1 = rect.pos.x - 2
+				x2 = rect.pos.x
+			if edge == Edge.right
+				x1 = rect.pos.x + rect.dim.w - 1
+				x2 = rect.pos.x + rect.dim.w + 1
+
+
+		if wellformed
 			corr.push new Corridor(
 				ctx, 8, new Pos(x1, y1), new Pos(x2, y2), 3, 1)
-
 			rects.push rect
 
 	[rects, corr]

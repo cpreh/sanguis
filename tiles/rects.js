@@ -211,7 +211,7 @@
     };
 
     Corridor.prototype.draw = function(flipped) {
-      var close, dir, dir1, dir2, end, mid, sign, start;
+      var close, dir, dir1, dir2, end, inner_color, mid, sign, start;
       flipped = flipped != null ? flipped : false;
       start = this.p1;
       mid = void 0;
@@ -261,14 +261,15 @@
         this._fill_rect(start.plus(dir1), mid, this.thickness, '#883');
         this._fill_rect(mid, end.plus(dir2), this.thickness, '#883');
       }
-      this._fill_rect(start.plus(dir1), mid, this.inner_thickness, '#fff');
-      this._fill_rect(mid, end.plus(dir2), this.inner_thickness, '#fff');
+      inner_color = '#444';
+      this._fill_rect(start.plus(dir1), mid, this.inner_thickness, inner_color);
+      this._fill_rect(mid, end.plus(dir2), this.inner_thickness, inner_color);
 
       /*
       		@_set_tile mid.x, mid.y, '#00f'
        */
-      this._set_tile(this.p1.x, this.p1.y, '#fff');
-      return this._set_tile(this.p2.x, this.p2.y, '#fff');
+      this._set_tile(this.p1.x, this.p1.y, inner_color);
+      return this._set_tile(this.p2.x, this.p2.y, inner_color);
     };
 
     return Corridor;
@@ -325,44 +326,47 @@
           break;
         }
       }
-      if (wellformed && neighbor) {
-        rect.neighbor = neighbor;
-        x1 = void 0;
-        y1 = void 0;
-        x2 = void 0;
-        y2 = void 0;
-        if (edge === Edge.top || edge === Edge.bottom) {
-          xmin = 1 + Math.max(rect.pos.x, neighbor.pos.x);
-          xmax = -1 + Math.min(rect.pos.x + rect.dim.w, neighbor.pos.x + neighbor.dim.w);
-          if (xmin >= xmax) {
-            console.log('ouch');
-          }
-          x2 = x1 = xmin;
-          if (edge === Edge.top) {
-            y1 = rect.pos.y - 2;
-            y2 = rect.pos.y;
-          }
-          if (edge === Edge.bottom) {
-            y1 = rect.pos.y + rect.dim.h - 1;
-            y2 = rect.pos.y + rect.dim.h + 1;
-          }
+      if (!(wellformed && neighbor)) {
+        continue;
+      }
+      rect.neighbor = neighbor;
+      x1 = void 0;
+      y1 = void 0;
+      x2 = void 0;
+      y2 = void 0;
+      if (edge === Edge.top || edge === Edge.bottom) {
+        xmin = 1 + Math.max(rect.pos.x, neighbor.pos.x);
+        xmax = -2 + Math.min(rect.pos.x + rect.dim.w, neighbor.pos.x + neighbor.dim.w);
+        if (xmin >= xmax) {
+          wellformed = false;
         }
-        if (edge === Edge.left || edge === Edge.right) {
-          ymin = 1 + Math.max(rect.pos.y, neighbor.pos.y);
-          ymax = -1 + Math.min(rect.pos.y + rect.dim.h, neighbor.pos.y + neighbor.dim.h);
-          if (ymin >= ymax) {
-            console.log('ouch');
-          }
-          y2 = y1 = ymin;
-          if (edge === Edge.left) {
-            x1 = rect.pos.x - 2;
-            x2 = rect.pos.x;
-          }
-          if (edge === Edge.right) {
-            x1 = rect.pos.x + rect.dim.w - 1;
-            x2 = rect.pos.x + rect.dim.w + 1;
-          }
+        x2 = x1 = random_int(xmin, xmax);
+        if (edge === Edge.top) {
+          y1 = rect.pos.y - 2;
+          y2 = rect.pos.y;
         }
+        if (edge === Edge.bottom) {
+          y1 = rect.pos.y + rect.dim.h - 1;
+          y2 = rect.pos.y + rect.dim.h + 1;
+        }
+      }
+      if (edge === Edge.left || edge === Edge.right) {
+        ymin = 1 + Math.max(rect.pos.y, neighbor.pos.y);
+        ymax = -2 + Math.min(rect.pos.y + rect.dim.h, neighbor.pos.y + neighbor.dim.h);
+        if (ymin >= ymax) {
+          wellformed = false;
+        }
+        y2 = y1 = random_int(ymin, ymax);
+        if (edge === Edge.left) {
+          x1 = rect.pos.x - 2;
+          x2 = rect.pos.x;
+        }
+        if (edge === Edge.right) {
+          x1 = rect.pos.x + rect.dim.w - 1;
+          x2 = rect.pos.x + rect.dim.w + 1;
+        }
+      }
+      if (wellformed) {
         corr.push(new Corridor(ctx, 8, new Pos(x1, y1), new Pos(x2, y2), 3, 1));
         rects.push(rect);
       }
