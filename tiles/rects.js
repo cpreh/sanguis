@@ -281,7 +281,7 @@
   };
 
   intersect = function(line, rect) {
-    return line.p2.x > rect.pos.x && line.p2.y > rect.pos.y && line.p1.x < rect.pos.x + rect.dim.w && line.p1.y < rect.pos.y + rect.dim.h;
+    return line.p2.x >= rect.pos.x && line.p2.y >= rect.pos.y && line.p1.x <= rect.pos.x + rect.dim.w && line.p1.y <= rect.pos.y + rect.dim.h;
   };
 
   random_int = function(a, b) {
@@ -298,16 +298,18 @@
   };
 
   generate_rects = function(ctx, width, height) {
-    var corr, e, edge, i, neighbor, other, random_rect, rect, rects, wellformed, x1, x2, xmax, xmin, y1, y2, ymax, ymin, _i, _j, _len;
+    var corr, e, edge, h, i, neighbor, other, random_rect, rect, rects, w, wellformed, x1, x2, xmax, xmin, y1, y2, ymax, ymin, _i, _j, _len;
     random_rect = function(i) {
       var h, w, x, y;
       x = random_int(0, 100 - 3);
       y = random_int(0, 75 - 3);
-      w = Math.min(random_int(5, 15 + i), 100 - x);
-      h = Math.min(random_int(5, 15 + i), 75 - y);
+      w = Math.min(random_int(5, 15 + Math.floor(i / 2)), 100 - x);
+      h = Math.min(random_int(5, 15 + Math.floor(i / 2)), 75 - y);
       return new Rect(new Pos(x, y), new Dim(w, h));
     };
-    rects = [random_rect(1)];
+    w = random_int(15, 35);
+    h = random_int(15, 35);
+    rects = [new Rect(new Pos(random_int(0, 100 - w), random_int(0, 75 - h)), new Dim(w, h))];
     corr = [];
     for (i = _i = 1; _i <= 100; i = ++_i) {
       rect = random_rect(i);

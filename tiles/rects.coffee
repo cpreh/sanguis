@@ -240,10 +240,10 @@ inside = (point, rect) ->
 		point.y <= rect.pos.y + rect.dim.h
 
 intersect = (line, rect) ->
-	return line.p2.x > rect.pos.x and
-		line.p2.y > rect.pos.y and
-		line.p1.x < rect.pos.x + rect.dim.w and
-		line.p1.y < rect.pos.y + rect.dim.h
+	return line.p2.x >= rect.pos.x and
+		line.p2.y >= rect.pos.y and
+		line.p1.x <= rect.pos.x + rect.dim.w and
+		line.p1.y <= rect.pos.y + rect.dim.h
 
 random_int = (a, b) ->
 	a + randn() % (b - a + 1)
@@ -262,14 +262,23 @@ generate_rects = (ctx, width, height) ->
 	random_rect = (i) ->
 		x = random_int 0, 100 - 3
 		y = random_int 0, 75 - 3
-		w = Math.min(random_int(5, 15+i), 100 - x)
-		h = Math.min(random_int(5, 15+i), 75 - y)
+		w = Math.min(random_int(5, 15+i//2), 100 - x)
+		h = Math.min(random_int(5, 15+i//2), 75 - y)
 
 		new Rect(
 			new Pos(x, y),
 			new Dim(w, h))
 
-	rects = [random_rect(1)]
+	w = random_int(15, 35)
+	h = random_int(15, 35)
+	rects = [
+		new Rect(
+			new Pos(
+				random_int(0, 100 - w),
+				random_int(0, 75 - h)),
+			new Dim(w, h)
+		)
+	]
 	corr = []
 
 	for i in [1..100]
