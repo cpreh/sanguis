@@ -30,9 +30,17 @@ class entity_map
 	>
 	impl;
 public:
-	typedef impl::iterator iterator;
+	typedef
+	impl::value_type
+	value_type;
 
-	typedef impl::const_iterator const_iterator;
+	typedef
+	impl::iterator
+	iterator;
+
+	typedef
+	impl::const_iterator
+	const_iterator;
 
 	entity_map();
 

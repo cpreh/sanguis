@@ -7,6 +7,10 @@
 #include <sanguis/collision/world/ghost.hpp>
 #include <sanguis/collision/world/ghost_parameters.hpp>
 #include <sanguis/collision/world/group_field.hpp>
+#include <fcppt/algorithm/map_iteration.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::collision::aux_::world::simple::ghost::ghost(
@@ -74,7 +78,49 @@ sanguis::collision::aux_::world::simple::ghost::collision_groups() const
 }
 
 void
-sanguis::collision::aux_::world::simple::ghost::update_body(
+sanguis::collision::aux_::world::simple::ghost::pre_update_bodies()
+{
+	for(
+		auto &body
+		:
+		bodies_
+	)
+		body.second =
+			body_status::marked_for_deletion;
+}
+
+void
+sanguis::collision::aux_::world::simple::ghost::post_update_bodies()
+{
+	fcppt::algorithm::map_iteration(
+		bodies_,
+		[
+			this
+		](
+			body_map::value_type const &_element
+		)
+		{
+			if(
+				_element.second
+				==
+				body_status::marked_for_deletion
+			)
+			{
+				body_exit_callback_.get()(
+					_element.first->body_base()
+				);
+
+				return
+					true;
+			}
+
+			return false;
+		}
+	);
+}
+
+void
+sanguis::collision::aux_::world::simple::ghost::update_near_body(
 	sanguis::collision::aux_::world::simple::body &_body
 )
 {
@@ -85,7 +131,12 @@ sanguis::collision::aux_::world::simple::ghost::update_body(
 		)
 	);
 
-	body_set::iterator const it(
+	if(
+		!collides
+	)
+		return;
+
+	body_map::iterator const it(
 		bodies_.find(
 			&_body
 		)
@@ -93,29 +144,44 @@ sanguis::collision::aux_::world::simple::ghost::update_body(
 
 	if(
 		it == bodies_.end()
-		&&
-		collides
 	)
 	{
 		bodies_.insert(
-			&_body
+			std::make_pair(
+				&_body,
+				body_status::normal
+			)
 		);
 
 		body_enter_callback_.get()(
 			_body.body_base()
 		);
 	}
-	else if(
-		it != bodies_.end()
-		&&
-		!collides
+	else
+		it->second =
+			body_status::normal;
+}
+
+void
+sanguis::collision::aux_::world::simple::ghost::new_body(
+	sanguis::collision::aux_::world::simple::body &_body
+)
+{
+	if(
+		sanguis::collision::aux_::world::simple::collides(
+			_body,
+			*this
+		)
 	)
 	{
-		bodies_.erase(
-			it
+		bodies_.insert(
+			std::make_pair(
+				&_body,
+				body_status::normal
+			)
 		);
 
-		body_exit_callback_.get()(
+		body_enter_callback_.get()(
 			_body.body_base()
 		);
 	}
@@ -126,7 +192,7 @@ sanguis::collision::aux_::world::simple::ghost::remove_body(
 	sanguis::collision::aux_::world::simple::body &_body
 )
 {
-	body_set::iterator const it(
+	body_map::iterator const it(
 		bodies_.find(
 			&_body
 		)

@@ -4,10 +4,8 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
 #include <sanguis/is_primary_weapon.hpp>
-#include <sanguis/map_iteration.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
-#include <sanguis/sequence_iteration.hpp>
 #include <sanguis/timer.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/world_name.hpp>
@@ -113,6 +111,8 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/try_dynamic_cast.hpp>
+#include <fcppt/algorithm/map_iteration_second.hpp>
+#include <fcppt/algorithm/sequence_iteration.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/assign/make_container.hpp>
@@ -229,12 +229,12 @@ sanguis::server::world::object::update(
 		_elapsed_time
 	};
 
-	sanguis::map_iteration(
+	fcppt::algorithm::map_iteration_second(
 		entities_,
 		update_entity
 	);
 
-	sanguis::sequence_iteration(
+	fcppt::algorithm::sequence_iteration(
 		server_entities_,
 		update_entity
 	);

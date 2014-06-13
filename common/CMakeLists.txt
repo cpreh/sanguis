@@ -41,7 +41,6 @@ set(
 	include/sanguis/magazine_remaining.hpp
 	include/sanguis/magazine_size.hpp
 	include/sanguis/magazine_type.hpp
-	include/sanguis/map_iteration.hpp
 	include/sanguis/media_path.hpp
 	include/sanguis/messages/adapted_types/aura_type.hpp
 	include/sanguis/messages/adapted_types/aura_type_fwd.hpp
@@ -395,7 +394,6 @@ set(
 	include/sanguis/random_variate_impl.hpp
 	include/sanguis/secondary_weapon_type.hpp
 	include/sanguis/secondary_weapon_type_fwd.hpp
-	include/sanguis/sequence_iteration.hpp
 	include/sanguis/string_vector.hpp
 	include/sanguis/time_unit.hpp
 	include/sanguis/timer.hpp

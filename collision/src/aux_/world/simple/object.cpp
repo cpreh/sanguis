@@ -16,14 +16,21 @@
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
 #include <sanguis/collision/world/object.hpp>
 #include <sanguis/collision/world/parameters.hpp>
+#include <sanguis/creator/difference_type.hpp>
 #include <sanguis/creator/pos.hpp>
+#include <sanguis/creator/signed_pos.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/array_push_back.hpp>
 #include <fcppt/assert/error.hpp>
+#include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/static_downcast.hpp>
+#include <fcppt/container/grid/clamp_signed_pos.hpp>
 #include <fcppt/container/grid/in_range.hpp>
+#include <fcppt/container/grid/make_pos_range_start_end.hpp>
 #include <fcppt/container/grid/moore_neighbors.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <utility>
@@ -111,7 +118,7 @@ sanguis::collision::aux_::world::simple::object::activate_body(
 		:
 		ghosts_
 	)
-		ghost->update_body(
+		ghost->new_body(
 			body
 		);
 }
@@ -147,7 +154,7 @@ sanguis::collision::aux_::world::simple::object::create_ghost(
 		:
 		bodies_
 	)
-		result->update_body(
+		result->new_body(
 			*body
 		);
 
@@ -228,15 +235,71 @@ sanguis::collision::aux_::world::simple::object::update(
 							body1->body_base(),
 							body2.body_base()
 						);
+	}
+
+	for(
+		auto const ghost
+		:
+		ghosts_
+	)
+	{
+		ghost->pre_update_bodies();
+
+		auto const signed_pos(
+			fcppt::math::vector::structure_cast<
+				sanguis::creator::signed_pos
+			>(
+				sanguis::collision::aux_::world::simple::grid_position(
+					ghost->center()
+				)
+			)
+		);
+
+		auto const rounded_radius(
+			fcppt::cast::float_to_int<
+				sanguis::creator::difference_type
+			>(
+				std::ceil(
+					ghost->radius().get()
+				)
+			)
+		);
 
 		for(
-			auto const ghost
+			auto const grid_entry
 			:
-			ghosts_
+			fcppt::container::grid::make_pos_range_start_end(
+				body_list_grid_,
+				fcppt::container::grid::clamp_signed_pos(
+					signed_pos
+					-
+					rounded_radius,
+					body_list_grid_.size()
+				),
+				fcppt::container::grid::clamp_signed_pos(
+					signed_pos
+					+
+					rounded_radius
+					+
+					fcppt::literal<
+						sanguis::creator::difference_type
+					>(
+						1
+					),
+					body_list_grid_.size()
+				)
+			)
 		)
-			ghost->update_body(
-				*body1
-			);
+			for(
+				auto &body
+				:
+				grid_entry.value()
+			)
+				ghost->update_near_body(
+					body
+				);
+
+		ghost->post_update_bodies();
 	}
 }
 

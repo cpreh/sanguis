@@ -1,8 +1,6 @@
 #include <sanguis/exception.hpp>
-#include <sanguis/map_iteration.hpp>
 #include <sanguis/random_generator.hpp>
 #include <sanguis/random_seed.hpp>
-#include <sanguis/sequence_iteration.hpp>
 #include <sanguis/update_diff_clock.hpp>
 #include <sanguis/client/player_health_callback.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
@@ -87,6 +85,8 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/algorithm/map_iteration_second.hpp>
+#include <fcppt/algorithm/sequence_iteration.hpp>
 #include <fcppt/math/matrix/arithmetic.hpp>
 #include <fcppt/math/matrix/translation.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -284,7 +284,7 @@ sanguis::client::draw2d::scene::object::update(
 
 	shown_names_.clear();
 
-	sanguis::map_iteration(
+	fcppt::algorithm::map_iteration_second(
 		entities_,
 		[
 			this
@@ -303,7 +303,7 @@ sanguis::client::draw2d::scene::object::update(
 		}
 	);
 
-	sanguis::sequence_iteration(
+	fcppt::algorithm::sequence_iteration(
 		own_entities_,
 		[](
 			sanguis::client::draw2d::entities::own_unique_ptr const &_entity
@@ -695,7 +695,7 @@ sanguis::client::draw2d::scene::object::change_world(
 {
 	own_entities_.clear();
 
-	sanguis::map_iteration(
+	fcppt::algorithm::map_iteration_second(
 		entities_,
 		[](
 			sanguis::client::draw2d::entities::unique_ptr const &_entity

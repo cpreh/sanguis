@@ -13,7 +13,7 @@
 #include <sanguis/collision/world/group_field.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <unordered_set>
+#include <unordered_map>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -60,7 +60,18 @@ public:
 	collision_groups() const;
 
 	void
-	update_body(
+	pre_update_bodies();
+
+	void
+	post_update_bodies();
+
+	void
+	update_near_body(
+		sanguis::collision::aux_::world::simple::body &
+	);
+
+	void
+	new_body(
 		sanguis::collision::aux_::world::simple::body &
 	);
 
@@ -81,13 +92,20 @@ private:
 
 	sanguis::collision::center center_;
 
-	typedef
-	std::unordered_set<
-		sanguis::collision::aux_::world::simple::body *
-	>
-	body_set;
+	enum class body_status
+	{
+		marked_for_deletion,
+		normal
+	};
 
-	body_set bodies_;
+	typedef
+	std::unordered_map<
+		sanguis::collision::aux_::world::simple::body *,
+		body_status
+	>
+	body_map;
+
+	body_map bodies_;
 };
 
 }
