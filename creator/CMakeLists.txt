@@ -77,9 +77,11 @@ set(
 	src/aux_/find_opposing_cell.cpp
 	src/aux_/find_reachable.cpp
 	src/aux_/generate_maze.cpp
+	src/aux_/generate_rooms.cpp
 	src/aux_/generator_map.cpp
 	src/aux_/generators/graveyard.cpp
 	src/aux_/generators/maze.cpp
+	src/aux_/generators/rooms.cpp
 	src/aux_/generators/start.cpp
 	src/aux_/graveyard_name.cpp
 	src/aux_/log.cpp
@@ -94,6 +96,7 @@ set(
 	src/aux_/random/uniform_pos.cpp
 	src/aux_/random/uniform_pos_parameters.cpp
 	src/aux_/result.cpp
+	src/aux_/rooms_name.cpp
 	src/aux_/serialization/background_grid.cpp
 	src/aux_/serialization/destructible.cpp
 	src/aux_/serialization/destructible_container.cpp
@@ -123,11 +126,13 @@ set(
 	src/include/sanguis/creator/aux_/find_opposing_cell.hpp
 	src/include/sanguis/creator/aux_/find_reachable.hpp
 	src/include/sanguis/creator/aux_/generate_maze.hpp
+	src/include/sanguis/creator/aux_/generate_rooms.hpp
 	src/include/sanguis/creator/aux_/generator_function.hpp
 	src/include/sanguis/creator/aux_/generator_map.hpp
 	src/include/sanguis/creator/aux_/generator_map_type.hpp
 	src/include/sanguis/creator/aux_/generators/graveyard.hpp
 	src/include/sanguis/creator/aux_/generators/maze.hpp
+	src/include/sanguis/creator/aux_/generators/rooms.hpp
 	src/include/sanguis/creator/aux_/generators/start.hpp
 	src/include/sanguis/creator/aux_/graveyard_name.hpp
 	src/include/sanguis/creator/aux_/log.hpp
@@ -167,6 +172,7 @@ set(
 	src/include/sanguis/creator/aux_/rect.hpp
 	src/include/sanguis/creator/aux_/result.hpp
 	src/include/sanguis/creator/aux_/result_fwd.hpp
+	src/include/sanguis/creator/aux_/rooms_name.hpp
 	src/include/sanguis/creator/aux_/serialization/background_grid.hpp
 	src/include/sanguis/creator/aux_/serialization/destructible.hpp
 	src/include/sanguis/creator/aux_/serialization/destructible_container.hpp

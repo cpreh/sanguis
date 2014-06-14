@@ -2,6 +2,7 @@
 #define SANGUIS_CREATOR_AUX__RECT_HPP_INCLUDED
 
 #include <sanguis/creator/pos.hpp>
+#include <sanguis/creator/rect.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <fcppt/config/external_end.hpp>
@@ -20,8 +21,7 @@ template
 void
 rect
 (
-	sanguis::creator::pos const &_start,
-	sanguis::creator::pos const &_end,
+	sanguis::creator::rect const &_rect,
 	Callback const &_callback
 )
 {
@@ -29,10 +29,13 @@ rect
 	sanguis::creator::pos::value_type
 	int_type;
 
-	int_type x0 = _start[0];
-	int_type y0 = _start[1];
-	int_type x1 = _end[0];
-	int_type y1 = _end[1];
+	auto p0 = _rect.pos();
+	auto p1 = _rect.pos() + _rect.size();
+
+	int_type x0 = p0.x();
+	int_type y0 = p0.y();
+	int_type x1 = p1.x();
+	int_type y1 = p1.y();
 
 	if (x0 > x1)
 		std::swap(x0, x1);
