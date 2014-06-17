@@ -21,8 +21,8 @@ sanguis::creator::aux_::generators::rooms(
 	grid{
 		sanguis::creator::aux_::generate_rooms(
 			sanguis::creator::grid::dim{
-				50u,
-				30u
+				100u,
+				75u
 			},
 			sanguis::creator::tile::concrete_wall,
 			sanguis::creator::tile::nothing,
@@ -49,23 +49,11 @@ sanguis::creator::aux_::generators::rooms(
 
 	sanguis::creator::background_grid const bg_grid{
 		grid.size(),
-		sanguis::creator::background_tile::grass
+		sanguis::creator::background_tile::asphalt
 	};
 
 	sanguis::creator::spawn_container const
-	spawners{
-		/*
-		sanguis::creator::aux_::place_spawners(
-			grid,
-			openings,
-			10u,
-			_parameters.randgen(),
-			sanguis::creator::aux_::enemy_type_container{
-				sanguis::creator::enemy_type::zombie00
-			}
-		)
-		*/
-	};
+	spawners{};
 
 	return
 		sanguis::creator::aux_::result(

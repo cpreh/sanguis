@@ -1,19 +1,24 @@
-#include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/aux_/generate_rooms.hpp>
 #include <sanguis/creator/aux_/random/generator.hpp>
 #include <sanguis/creator/aux_/random/uniform_size.hpp>
 #include <sanguis/creator/aux_/random/uniform_size_variate.hpp>
 #include <sanguis/creator/aux_/rect.hpp>
-#include <sanguis/creator/rect.hpp>
+#include <sanguis/creator/difference_type.hpp>
+#include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/pos.hpp>
+#include <sanguis/creator/rect.hpp>
+#include <sanguis/creator/signed_pos.hpp>
 #include <fcppt/math/box/contains_point.hpp>
+#include <fcppt/math/box/output.hpp>
+#include <fcppt/math/box/rect.hpp>
+#include <fcppt/math/box/structure_cast.hpp>
+#include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/optional.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/make_variate.hpp>
-#include <fcppt/io/cout.hpp>
-#include <fcppt/math/box/output.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <algorithm>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
@@ -29,57 +34,68 @@ namespace
 		bottom
 	};
 
+	using signed_rect =
+		fcppt::math::box::object<
+			sanguis::creator::difference_type,
+			2
+		>;
+
+	using pos_type =
+		sanguis::creator::signed_pos;
+
+	using int_type =
+		pos_type::value_type;
+
 	struct
 	line
 	{
-		sanguis::creator::rect::vector p1;
-		sanguis::creator::rect::vector p2;
+		pos_type p1;
+		pos_type p2;
 	};
 
-	using pos =
-		sanguis::creator::rect::vector;
-
-	pos
+	pos_type
 	topleft(
-		sanguis::creator::rect const &_rect
+		::signed_rect const &_rect
 	)
 	{
-		return _rect.pos();
+		return
+			_rect.pos();
 	}
 
-	pos
+	pos_type
 	topright(
-		sanguis::creator::rect const &_rect
+		::signed_rect const &_rect
 	)
 	{
-		return pos{
-			_rect.pos().x() + _rect.w(),
-			_rect.pos().y()
+		return pos_type{
+			_rect.right(),
+			_rect.top()
 		};
 	}
 
-	pos
+	pos_type
 	bottomleft(
-		sanguis::creator::rect const &_rect
+		::signed_rect const &_rect
 	)
 	{
-		return pos{
-			_rect.pos().x(),
-			_rect.pos().y() + _rect.h()
+		return pos_type{
+			_rect.left(),
+			_rect.bottom()
 		};
 	}
 
-	pos
+	pos_type
 	bottomright(
-		sanguis::creator::rect const &_rect
+		::signed_rect const &_rect
 	)
 	{
-		return _rect.pos() + _rect.size();
+		return
+			_rect.pos() + _rect.size();
 	}
 
 	::line
 	side(
-		sanguis::creator::rect const &_rect,
+		::signed_rect const &_rect,
 		::edge _edge
 	){
 
@@ -94,36 +110,30 @@ namespace
 			case ::edge::right:
 				return ::line{topright(_rect), bottomright(_rect)};
 			default:
-				throw sanguis::creator::exception(FCPPT_TEXT("there are only four sides to rectangle!"));
+				throw sanguis::creator::exception(
+					FCPPT_TEXT("there are only four sides to a rectangle!"));
 		}
 	}
 
 	bool
 	intersect(
-		::line const &line,
-		sanguis::creator::rect const &rect
+		::line const &_line,
+		::signed_rect const &_rect
 	)
 	{
 		return
-			line.p2.x() >= rect.pos().x() &&
-			line.p2.y() >= rect.pos().y() &&
-			line.p1.x() <= rect.pos().x() + rect.w() &&
-			line.p1.y() <= rect.pos().y() + rect.h();
+			_line.p2.x() >= _rect.left() &&
+			_line.p2.y() >= _rect.top() &&
+			_line.p1.x() <= _rect.left() + _rect.w() &&
+			_line.p1.y() <= _rect.top() + _rect.h();
 	}
 
 	edge
 	clip(
-		sanguis::creator::rect &cur,
-		sanguis::creator::rect const &other
+		::signed_rect &cur,
+		::signed_rect const &other
 	)
 	{
-		using pos =
-			sanguis::creator::rect::vector;
-		using int_type =
-			pos::value_type;
-
-		pos const &p1 = cur.pos();
-		pos const &o1 = other.pos();
 
 		::edge last{
 			::edge::none
@@ -134,7 +144,7 @@ namespace
 			fcppt::math::box::contains_point(cur, ::bottomright(other))
 		)
 		{
-			cur.w(o1.x() - 1 - p1.x());
+			cur.w(other.left() - cur.left() - 1);
 			last = ::edge::right;
 		}
 
@@ -142,14 +152,9 @@ namespace
 			intersect(::side(cur, ::edge::top), other)
 		)
 		{
-			int_type oldy = p1.y();
-			cur.pos(
-				pos{
-					::bottomright(other).x() + 1,
-					p1.y()
-				}
-			);
-			cur.h(cur.h() - p1.y() - oldy);
+			::int_type oldy = cur.top();
+			cur.top(other.bottom() + 1);
+			cur.h(cur.h() - (cur.top() - oldy));
 			last = ::edge::top;
 		}
 
@@ -157,7 +162,7 @@ namespace
 			intersect(::side(cur, ::edge::right), other)
 		)
 		{
-			cur.w(o1.x() - 1 - p1.x());
+			cur.w(other.left() - cur.left() - 1);
 			last = ::edge::right;
 		}
 
@@ -165,7 +170,7 @@ namespace
 			intersect(::side(cur, ::edge::bottom), other)
 		)
 		{
-			cur.h(o1.y() - 1 - p1.y());
+			cur.h(other.top() - cur.top() - 1);
 			last = ::edge::bottom;
 		}
 
@@ -173,14 +178,10 @@ namespace
 			intersect(::side(cur, ::edge::left), other)
 		)
 		{
-			int_type oldx = p1.x();
-			cur.pos(
-				pos{
-					o1.x() + other.w() + 1,
-					p1.y()
-				}
-			);
-			cur.w(cur.w() - p1.x() - oldx);
+			::int_type oldx = cur.left();
+			cur.left(
+				other.right() + 1);
+			cur.w(cur.w() - (cur.left() - oldx));
 			last = ::edge::left;
 		}
 
@@ -199,7 +200,7 @@ sanguis::creator::aux_::generate_rooms(
 	typedef
 	fcppt::random::distribution::basic<
 		sanguis::creator::aux_::random::uniform_int<
-			unsigned
+			::int_type
 		>
 	>
 	uniform_int2;
@@ -207,8 +208,8 @@ sanguis::creator::aux_::generate_rooms(
 	auto rand_int =
 		[&_randgen]
 		(
-			 unsigned min,
-			 unsigned max
+			 ::int_type min,
+			 ::int_type max
 		 )
 		{
 			return
@@ -225,22 +226,21 @@ sanguis::creator::aux_::generate_rooms(
 			);
 		};
 
-	using int_type =
-		sanguis::creator::size_type;
+	::int_type startw =
+		rand_int(10, 20)();
+	::int_type starth =
+		rand_int(10, 20)();
 
-	int_type startw =
-		rand_int(10u, 20u)();
-	int_type starth =
-		rand_int(10u, 20u)();
-
-	std::vector<sanguis::creator::rect>
+	std::vector<
+		signed_rect
+	>
 	rects{
-		sanguis::creator::rect{
-			sanguis::creator::rect::vector{
-				rand_int(0u, _size.w() - startw)(),
-				rand_int(0u, _size.h() - starth)()
+		signed_rect{
+			signed_rect::vector{
+				rand_int(0, static_cast<::int_type>(_size.w()) - startw - 1)(),
+				rand_int(0, static_cast<::int_type>(_size.h()) - starth - 1)()
 			},
-			sanguis::creator::rect::dim{
+			signed_rect::dim{
 				startw,
 				starth
 			}
@@ -248,26 +248,25 @@ sanguis::creator::aux_::generate_rooms(
 	};
 
 	for (
-		unsigned i = 0u;
-		i < 100u;
+		::int_type i = 0;
+		i < 100;
 		++i
 	)
 	{
-		fcppt::io::cout() << i << ' ';
-		int_type w = rand_int(5u, 15u + i/2u)();
-		int_type h = rand_int(5u, 15u + i/2u)();
-		int_type x = rand_int(0u, _size.w() - w)();
-		int_type y = rand_int(0u, _size.h() - h)();
+		::int_type w = rand_int(5, std::min(15 + i/2, static_cast<::int_type>(_size.w() - 1)))();
+		::int_type h = rand_int(5, std::min(15 + i/2, static_cast<::int_type>(_size.h() - 1)))();
+		::int_type x = rand_int(0, static_cast<::int_type>(_size.w()) - w - 1)();
+		::int_type y = rand_int(0, static_cast<::int_type>(_size.h()) - h - 1)();
 
-		sanguis::creator::rect rect{
-			sanguis::creator::rect::vector(
+		signed_rect rect{
+			signed_rect::vector{
 				x,
 				y
-			),
-			sanguis::creator::rect::dim(
+			},
+			signed_rect::dim{
 				w,
 				h
-			)
+			}
 		};
 
 		bool
@@ -280,7 +279,7 @@ sanguis::creator::aux_::generate_rooms(
 			
 
 		fcppt::optional<
-			sanguis::creator::rect
+			signed_rect
 		> neighbor;
 
 		for (
@@ -309,15 +308,12 @@ sanguis::creator::aux_::generate_rooms(
 				break;
 		}
 
-		// fcppt::io::cout() << (wellformed ? 1 : 0) << (neighbor ? 1 : 0) << ' ';
-
 		// has become too small or doesn't touch any other rect
 		if (!wellformed || !neighbor)
 			continue;
 
 		rects.push_back(
-			rect
-		);
+				rect);
 	}
 
 	sanguis::creator::grid
@@ -343,16 +339,18 @@ sanguis::creator::aux_::generate_rooms(
 		}
 	);
 
-	fcppt::io::cout() << FCPPT_TEXT("rects: ");
 	for (
 		auto &rect
 		:
 		rects
 	)
 	{
-		fcppt::io::cout() << rect << std::endl;
 		sanguis::creator::aux_::rect(
-			rect,
+			fcppt::math::box::structure_cast<
+				sanguis::creator::rect
+			>(
+				rect
+			),
 			fill_with_wall
 		);
 	}
