@@ -77,7 +77,6 @@ set(
 	src/aux_/find_opposing_cell.cpp
 	src/aux_/find_reachable.cpp
 	src/aux_/generate_maze.cpp
-	src/aux_/generate_rooms.cpp
 	src/aux_/generator_map.cpp
 	src/aux_/generators/graveyard.cpp
 	src/aux_/generators/maze.cpp
@@ -122,11 +121,11 @@ set(
 	src/include/sanguis/creator/aux_/deserialization/tile_grid.hpp
 	src/include/sanguis/creator/aux_/deserialization/top_result.hpp
 	src/include/sanguis/creator/aux_/enemy_type_container.hpp
+	src/include/sanguis/creator/aux_/filled_rect.hpp
 	src/include/sanguis/creator/aux_/find_closest.hpp
 	src/include/sanguis/creator/aux_/find_opposing_cell.hpp
 	src/include/sanguis/creator/aux_/find_reachable.hpp
 	src/include/sanguis/creator/aux_/generate_maze.hpp
-	src/include/sanguis/creator/aux_/generate_rooms.hpp
 	src/include/sanguis/creator/aux_/generator_function.hpp
 	src/include/sanguis/creator/aux_/generator_map.hpp
 	src/include/sanguis/creator/aux_/generator_map_type.hpp
