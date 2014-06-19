@@ -4,10 +4,10 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/server/damage/array.hpp>
+#include <sanguis/server/weapons/attack_fwd.hpp>
 #include <sanguis/server/weapons/attack_result_fwd.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/damage.hpp>
-#include <sanguis/server/weapons/delayed_attack_fwd.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/attributes/damage.hpp>
@@ -42,7 +42,7 @@ public:
 private:
 	sanguis::server::weapons::attack_result
 	do_attack(
-		sanguis::server::weapons::delayed_attack const &
+		sanguis::server::weapons::attack const &
 	)
 	override;
 

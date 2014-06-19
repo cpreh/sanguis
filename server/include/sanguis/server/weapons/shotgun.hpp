@@ -4,8 +4,8 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/weapon_type_fwd.hpp>
+#include <sanguis/server/weapons/attack_fwd.hpp>
 #include <sanguis/server/weapons/attack_result_fwd.hpp>
-#include <sanguis/server/weapons/delayed_attack_fwd.hpp>
 #include <sanguis/server/weapons/shells.hpp>
 #include <sanguis/server/weapons/shotgun_parameters_fwd.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
@@ -40,7 +40,7 @@ public:
 private:
 	sanguis::server::weapons::attack_result
 	do_attack(
-		sanguis::server::weapons::delayed_attack const &
+		sanguis::server::weapons::attack const &
 	)
 	override;
 

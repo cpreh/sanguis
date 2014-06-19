@@ -6,13 +6,14 @@
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
+#include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/projectiles/melee.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
+#include <sanguis/server/weapons/attack.hpp>
 #include <sanguis/server/weapons/attack_result.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/damage.hpp>
-#include <sanguis/server/weapons/delayed_attack.hpp>
 #include <sanguis/server/weapons/melee.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/range.hpp>
@@ -62,7 +63,7 @@ sanguis::server::weapons::melee::~melee()
 
 sanguis::server::weapons::attack_result
 sanguis::server::weapons::melee::do_attack(
-	sanguis::server::weapons::delayed_attack const &_attack
+	sanguis::server::weapons::attack const &_attack
 )
 {
 	sanguis::server::environment::insert_no_result(
@@ -70,7 +71,7 @@ sanguis::server::weapons::melee::do_attack(
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::projectiles::melee
 		>(
-			_attack.team(),
+			this->owner().team(),
 			damage_.value(),
 			damage_values_
 		),

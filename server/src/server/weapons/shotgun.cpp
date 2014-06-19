@@ -7,11 +7,12 @@
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
+#include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/projectiles/simple_bullet.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/weapons/attack.hpp>
 #include <sanguis/server/weapons/attack_result.hpp>
-#include <sanguis/server/weapons/delayed_attack.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/shotgun.hpp>
 #include <sanguis/server/weapons/shotgun_parameters.hpp>
@@ -71,7 +72,7 @@ sanguis::server::weapons::shotgun::~shotgun()
 
 sanguis::server::weapons::attack_result
 sanguis::server::weapons::shotgun::do_attack(
-	sanguis::server::weapons::delayed_attack const &_attack
+	sanguis::server::weapons::attack const &_attack
 )
 {
 	typedef fcppt::random::distribution::basic<
@@ -112,14 +113,14 @@ sanguis::server::weapons::shotgun::do_attack(
 					sanguis::server::entities::projectiles::simple_bullet
 				>(
 					_attack.environment().load_context(),
-					_attack.team(),
+					this->owner().team(),
 					damage_.value(),
 					sanguis::server::direction(
 						angle.get()
 					)
 				),
 				sanguis::server::entities::insert_parameters(
-					_attack.spawn_point(),
+					this->owner().center(),
 					angle
 				)
 			);

@@ -13,11 +13,11 @@
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/optional_with_weapon_ref.hpp>
 #include <sanguis/server/entities/with_weapon_fwd.hpp>
+#include <sanguis/server/weapons/attack_fwd.hpp>
 #include <sanguis/server/weapons/attack_result_fwd.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
-#include <sanguis/server/weapons/delayed_attack_fwd.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/target_fwd.hpp>
@@ -112,7 +112,7 @@ protected:
 	virtual
 	sanguis::server::weapons::attack_result
 	do_attack(
-		sanguis::server::weapons::delayed_attack const &
+		sanguis::server::weapons::attack const &
 	) = 0;
 
 	sanguis::diff_clock const &
@@ -120,10 +120,10 @@ protected:
 
 	sanguis::random_generator &
 	random_generator() const;
-private:
+
 	sanguis::server::entities::with_weapon &
 	owner() const;
-
+private:
 	void
 	weapon_status(
 		sanguis::weapon_status

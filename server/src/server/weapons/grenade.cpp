@@ -4,10 +4,11 @@
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
+#include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/projectiles/grenade.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/weapons/attack.hpp>
 #include <sanguis/server/weapons/attack_result.hpp>
-#include <sanguis/server/weapons/delayed_attack.hpp>
 #include <sanguis/server/weapons/grenade.hpp>
 #include <sanguis/server/weapons/grenade_parameters.hpp>
 #include <sanguis/server/weapons/insert_to_attack_result.hpp>
@@ -54,7 +55,7 @@ sanguis::server::weapons::grenade::~grenade()
 
 sanguis::server::weapons::attack_result
 sanguis::server::weapons::grenade::do_attack(
-	sanguis::server::weapons::delayed_attack const &_attack
+	sanguis::server::weapons::attack const &_attack
 )
 {
 	return
@@ -64,7 +65,7 @@ sanguis::server::weapons::grenade::do_attack(
 					sanguis::server::entities::projectiles::grenade
 				>(
 					_attack.environment().load_context(),
-					_attack.team(),
+					this->owner().team(),
 					damage_.value(),
 					aoe_.value(),
 					_attack.target().get(),
@@ -73,7 +74,7 @@ sanguis::server::weapons::grenade::do_attack(
 					)
 				),
 				sanguis::server::entities::insert_parameters(
-					_attack.spawn_point(),
+					this->owner().center(),
 					_attack.angle()
 				)
 			)

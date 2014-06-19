@@ -1,7 +1,7 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
+#include <sanguis/server/weapons/attack.hpp>
 #include <sanguis/server/weapons/attack_result.hpp>
-#include <sanguis/server/weapons/delayed_attack.hpp>
 #include <sanguis/server/weapons/optional_target.hpp>
 #include <sanguis/server/weapons/random_angle.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
@@ -87,8 +87,7 @@ sanguis::server::weapons::states::castpoint::react(
 		this->context<
 			sanguis::server::weapons::weapon
 		>().do_attack(
-			sanguis::server::weapons::delayed_attack(
-				owner.center(),
+			sanguis::server::weapons::attack(
 				this->context<
 					sanguis::server::weapons::weapon
 				>().accuracy()
@@ -105,7 +104,6 @@ sanguis::server::weapons::states::castpoint::react(
 				:
 					owner.angle()
 				,
-				owner.team(),
 				*owner.environment(),
 				*target
 			)

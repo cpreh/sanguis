@@ -15,8 +15,8 @@
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/optional_base_ref.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/weapons/attack.hpp>
 #include <sanguis/server/weapons/attack_result.hpp>
-#include <sanguis/server/weapons/delayed_attack.hpp>
 #include <sanguis/server/weapons/insert_to_attack_result.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/sentry.hpp>
@@ -66,7 +66,7 @@ sanguis::server::weapons::sentry::~sentry()
 
 sanguis::server::weapons::attack_result
 sanguis::server::weapons::sentry::do_attack(
-	sanguis::server::weapons::delayed_attack const &_attack
+	sanguis::server::weapons::attack const &_attack
 )
 {
 	return

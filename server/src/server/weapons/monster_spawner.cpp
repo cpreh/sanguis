@@ -12,10 +12,10 @@
 #include <sanguis/server/entities/enemies/create.hpp>
 #include <sanguis/server/entities/enemies/special_chance.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/weapons/attack.hpp>
 #include <sanguis/server/weapons/attack_result.hpp>
 #include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
-#include <sanguis/server/weapons/delayed_attack.hpp>
 #include <sanguis/server/weapons/insert_to_attack_result.hpp>
 #include <sanguis/server/weapons/monster_spawner.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
@@ -62,7 +62,7 @@ sanguis::server::weapons::monster_spawner::~monster_spawner()
 
 sanguis::server::weapons::attack_result
 sanguis::server::weapons::monster_spawner::do_attack(
-	sanguis::server::weapons::delayed_attack const &_attack
+	sanguis::server::weapons::attack const &_attack
 )
 {
 	return

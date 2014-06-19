@@ -495,6 +495,8 @@ set(
 	include/sanguis/server/vector_fwd.hpp
 	include/sanguis/server/weapons/accuracy.hpp
 	include/sanguis/server/weapons/aoe.hpp
+	include/sanguis/server/weapons/attack.hpp
+	include/sanguis/server/weapons/attack_fwd.hpp
 	include/sanguis/server/weapons/attack_result.hpp
 	include/sanguis/server/weapons/attack_result_fwd.hpp
 	include/sanguis/server/weapons/attributes/accuracy.hpp
@@ -527,8 +529,6 @@ set(
 	include/sanguis/server/weapons/damage.hpp
 	include/sanguis/server/weapons/default_ias.hpp
 	include/sanguis/server/weapons/default_irs.hpp
-	include/sanguis/server/weapons/delayed_attack.hpp
-	include/sanguis/server/weapons/delayed_attack_fwd.hpp
 	include/sanguis/server/weapons/events/poll.hpp
 	include/sanguis/server/weapons/events/poll_fwd.hpp
 	include/sanguis/server/weapons/events/reload.hpp
@@ -861,6 +861,7 @@ set(
 	src/server/timer_impl.cpp
 	src/server/to_console_arg_list.cpp
 	src/server/unknown_player_exception.cpp
+	src/server/weapons/attack.cpp
 	src/server/weapons/attributes/accuracy.cpp
 	src/server/weapons/attributes/aoe.cpp
 	src/server/weapons/attributes/damage.cpp
@@ -871,7 +872,6 @@ set(
 	src/server/weapons/create.cpp
 	src/server/weapons/default_ias.cpp
 	src/server/weapons/default_irs.cpp
-	src/server/weapons/delayed_attack.cpp
 	src/server/weapons/factory/dual_pistols.cpp
 	src/server/weapons/factory/grenade.cpp
 	src/server/weapons/factory/parameters.cpp
