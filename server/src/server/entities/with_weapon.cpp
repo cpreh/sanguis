@@ -7,6 +7,7 @@
 #include <sanguis/weapon_status.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/weapon_type_to_is_primary.hpp>
+#include <sanguis/server/damage/type.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/optional_with_weapon_ref.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
@@ -23,6 +24,7 @@
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/unique_ptr_to_optional.hpp>
+#include <fcppt/algorithm/array_init_move.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/variant/get.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -51,7 +53,20 @@ sanguis::server::entities::with_weapon::with_weapon(
 	),
 	reload_speed_(
 		_irs.get()
-	)
+	),
+	extra_damages_{
+		fcppt::algorithm::array_init_move<
+			extra_damage_array::internal
+		>(
+			[]
+			{
+				return
+					sanguis::server::entities::property::always_max(
+						0.f
+					);
+			}
+		)
+	}
 {
 	if(
 		_start_weapon
@@ -220,7 +235,8 @@ sanguis::server::entities::with_weapon::target(
 	sanguis::server::weapons::optional_target const _target
 )
 {
-	target_ = _target;
+	target_ =
+		_target;
 }
 
 sanguis::server::weapons::optional_target const
@@ -303,6 +319,17 @@ sanguis::server::entities::with_weapon::reload_speed()
 {
 	return
 		reload_speed_;
+}
+
+sanguis::server::entities::property::always_max &
+sanguis::server::entities::with_weapon::extra_damage(
+	sanguis::server::damage::type const _damage_type
+)
+{
+	return
+		extra_damages_[
+			_damage_type
+		];
 }
 
 sanguis::server::weapons::ias const

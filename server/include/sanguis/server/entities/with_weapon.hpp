@@ -6,6 +6,8 @@
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
 #include <sanguis/weapon_status.hpp>
+#include <sanguis/server/damage/basic_array.hpp>
+#include <sanguis/server/damage/type_fwd.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
@@ -99,6 +101,11 @@ public:
 
 	sanguis::server::entities::property::always_max &
 	reload_speed();
+
+	sanguis::server::entities::property::always_max &
+	extra_damage(
+		sanguis::server::damage::type
+	);
 
 	sanguis::server::weapons::ias const
 	ias() const;
@@ -195,6 +202,14 @@ private:
 	sanguis::server::entities::property::always_max
 		attack_speed_,
 		reload_speed_;
+
+	typedef
+	sanguis::server::damage::basic_array<
+		sanguis::server::entities::property::always_max
+	>
+	extra_damage_array;
+
+	extra_damage_array extra_damages_;
 };
 
 }

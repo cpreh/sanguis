@@ -24,11 +24,6 @@ class base
 		base
 	);
 public:
-	explicit
-	base(
-		sanguis::server::entities::property::value
-	);
-
 	sanguis::server::entities::property::constant const
 	constant() const;
 
@@ -53,6 +48,20 @@ public:
 		sanguis::server::entities::property::linear_decrease const &
 	);
 protected:
+	explicit
+	base(
+		sanguis::server::entities::property::value
+	);
+
+	base(
+		base &&
+	);
+
+	base &
+	operator=(
+		base &&
+	);
+
 	virtual
 	~base();
 private:
@@ -65,7 +74,7 @@ private:
 		sanguis::server::entities::property::value
 	) = 0;
 
-	sanguis::server::entities::property::value const base_;
+	sanguis::server::entities::property::value base_;
 
 	sanguis::server::entities::property::constant constant_;
 

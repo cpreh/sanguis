@@ -33,6 +33,15 @@ public:
 		sanguis::server::entities::property::value
 	);
 
+	always_max(
+		always_max &&
+	);
+
+	always_max &
+	operator=(
+		always_max &&
+	);
+
 	~always_max()
 	override;
 
