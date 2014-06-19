@@ -496,13 +496,14 @@ sanguis::creator::aux_::generators::rooms(
 	}
 
 	auto
-	set_floor(
+	set_tile(
 		[
 			&grid,
 			&bg_grid
 		]
 		(
-			::pos_type input_pos
+			::pos_type input_pos,
+			sanguis::creator::tile tile
 		)
 		{
 			auto pos(
@@ -516,37 +517,7 @@ sanguis::creator::aux_::generators::rooms(
 			grid[
 				pos
 			] =
-				sanguis::creator::tile::nothing;
-
-			bg_grid[
-				pos
-			] =
-				sanguis::creator::background_tile::space_floor;
-		}
-	);
-
-	auto
-	set_wall(
-		[
-			&grid,
-			&bg_grid
-		]
-		(
-			::pos_type input_pos
-		)
-		{
-			auto pos(
-				fcppt::math::vector::structure_cast<
-					sanguis::creator::pos
-				>(
-					input_pos
-				)
-			);
-
-			grid[
-				pos
-			] =
-				sanguis::creator::tile::concrete_wall;
+				tile;
 
 			bg_grid[
 				pos
@@ -560,40 +531,44 @@ sanguis::creator::aux_::generators::rooms(
 		::pos_type const &pos{corr.first};
 		::edge const &e{corr.second};
 
-		set_floor(pos);
+		using sanguis::creator::tile;
 
 		switch (e)
 		{
 			case ::edge::top:
 			{
-				set_floor(pos + ::pos_type{ 0, -1 });
-				set_floor(pos + ::pos_type{ 0, -2 });
-				set_wall(pos + ::pos_type{ -1, -1 });
-				set_wall(pos + ::pos_type{ +1, -1 });
+				set_tile(pos + ::pos_type{ 0, -1 }, tile::nothing);
+				set_tile(pos + ::pos_type{ 0, -2 }, tile::nothing);
+				set_tile(pos + ::pos_type{ -1, -1 }, tile::concrete_wall);
+				set_tile(pos + ::pos_type{ +1, -1 }, tile::concrete_wall);
+				set_tile(pos, tile::space_door_open_h);
 				break;
 			}
 			case ::edge::bottom:
 			{
-				set_floor(pos + ::pos_type{ 0, -1 });
-				set_floor(pos + ::pos_type{ 0, +1 });
-				set_wall(pos + ::pos_type{ -1, 0 });
-				set_wall(pos + ::pos_type{ +1, 0 });
+				set_tile(pos + ::pos_type{ 0, -1 }, tile::nothing);
+				set_tile(pos + ::pos_type{ 0, +1 }, tile::nothing);
+				set_tile(pos + ::pos_type{ -1, 0 }, tile::concrete_wall);
+				set_tile(pos + ::pos_type{ +1, 0 }, tile::concrete_wall);
+				set_tile(pos, tile::space_door_open_h);
 				break;
 			}
 			case ::edge::left:
 			{
-				set_floor(pos + ::pos_type{ -1, 0 });
-				set_floor(pos + ::pos_type{ -2, 0 });
-				set_wall(pos + ::pos_type{ -1, -1 });
-				set_wall(pos + ::pos_type{ -1, +1 });
+				set_tile(pos + ::pos_type{ -1, 0 }, tile::nothing);
+				set_tile(pos + ::pos_type{ -2, 0 }, tile::nothing);
+				set_tile(pos + ::pos_type{ -1, -1 }, tile::concrete_wall);
+				set_tile(pos + ::pos_type{ -1, +1 }, tile::concrete_wall);
+				set_tile(pos, tile::space_door_open_v);
 				break;
 			}
 			case ::edge::right:
 			{
-				set_floor(pos + ::pos_type{ -1, 0 });
-				set_floor(pos + ::pos_type{ +1, 0 });
-				set_wall(pos + ::pos_type{ 0, -1 });
-				set_wall(pos + ::pos_type{ 0, +1 });
+				set_tile(pos + ::pos_type{ -1, 0 }, tile::nothing);
+				set_tile(pos + ::pos_type{ +1, 0 }, tile::nothing);
+				set_tile(pos + ::pos_type{ 0, -1 }, tile::concrete_wall);
+				set_tile(pos + ::pos_type{ 0, +1 }, tile::concrete_wall);
+				set_tile(pos, tile::space_door_open_v);
 				break;
 			}
 			default:

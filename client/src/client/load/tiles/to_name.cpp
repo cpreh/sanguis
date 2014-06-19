@@ -18,6 +18,14 @@ sanguis::client::load::tiles::to_name(
 		return FCPPT_TEXT("concrete_wall");
 	case sanguis::creator::tile::door:
 		return FCPPT_TEXT("door");
+	case sanguis::creator::tile::space_door_closed_v:
+		return FCPPT_TEXT("space_door_closed_v");
+	case sanguis::creator::tile::space_door_open_v:
+		return FCPPT_TEXT("space_door_open_v");
+	case sanguis::creator::tile::space_door_closed_h:
+		return FCPPT_TEXT("space_door_closed_h");
+	case sanguis::creator::tile::space_door_open_h:
+		return FCPPT_TEXT("space_door_open_h");
 	case sanguis::creator::tile::grave1:
 		return FCPPT_TEXT("grave1");
 	case sanguis::creator::tile::grave2:

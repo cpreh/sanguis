@@ -13,6 +13,10 @@ enum class tile
 {
 	nothing,
 	door,
+	space_door_closed_v,
+	space_door_open_v,
+	space_door_closed_h,
+	space_door_open_h,
 	spawner,
 	grave1,
 	grave2,
