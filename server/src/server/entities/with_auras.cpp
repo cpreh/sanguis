@@ -30,20 +30,17 @@ sanguis::server::entities::with_auras::with_auras(
 )
 :
 	sanguis::server::entities::with_ghosts(),
-	auras_(
-		std::move(
-			_auras
-		)
-	)
+	auras_()
 {
-	// TODO: Simplify this
 	for(
-		sanguis::server::auras::unique_ptr const &aura
+		sanguis::server::auras::unique_ptr &aura
 		:
 		_auras
 	)
-		this->sanguis::server::entities::with_ghosts::add_ghost(
-			aura->create_ghost()
+		this->add_aura(
+			std::move(
+				aura
+			)
 		);
 }
 
