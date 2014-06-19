@@ -325,7 +325,7 @@ sanguis::creator::aux_::generators::rooms(
 		::edge
 		clipped_edge{
 			::edge::none};
-			
+
 
 		fcppt::optional<
 			::signed_rect
@@ -677,7 +677,11 @@ sanguis::creator::aux_::generators::rooms(
 	spawners.push_back(
 		sanguis::creator::spawn{
 			sanguis::creator::spawn_pos{
-				rects.front().pos() + sanguis::creator::pos{1u,1u}
+				fcppt::math::vector::structure_cast<
+					sanguis::creator::pos
+				>(
+					rects.front().pos() + sanguis::creator::signed_pos{1,1}
+				)
 			},
 			enemy_types[
 				random_monster(
