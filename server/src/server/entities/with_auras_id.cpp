@@ -8,6 +8,7 @@
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/environment/optional_object_ref.hpp>
+#include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -63,26 +64,17 @@ sanguis::server::entities::with_auras_id::~with_auras_id()
 sanguis::aura_type_vector
 sanguis::server::entities::with_auras_id::aura_types() const
 {
-	sanguis::aura_type_vector ret;
-
-	for(
-		sanguis::server::auras::unique_ptr const &aura
-		:
-		this->auras()
-	)
-	{
-		sanguis::optional_aura_type const type(
-			aura->type()
-		);
-
-		if(
-			type
-		)
-			ret.push_back(
-				*type
-			);
-	}
-
 	return
-		ret;
+		fcppt::algorithm::map_optional<
+			sanguis::aura_type_vector
+		>(
+			this->auras(),
+			[](
+				sanguis::server::auras::unique_ptr const &_aura
+			)
+			{
+				return
+					_aura->type();
+			}
+		);
 }
