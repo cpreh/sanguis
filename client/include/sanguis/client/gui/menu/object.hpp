@@ -127,6 +127,8 @@ private:
 
 	sanguis::gui::viewport_adaptor viewport_adaptor_;
 
+	bool connect_running_;
+
 	fcppt::signal::scoped_connection const
 		quickstart_connection_,
 		connect_connection_,

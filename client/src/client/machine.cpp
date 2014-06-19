@@ -34,15 +34,16 @@
 #include <alda/net/parameters.hpp>
 #include <alda/net/port.hpp>
 #include <alda/net/buffer/circular_receive/object_fwd.hpp>
+#include <fcppt/from_std_string.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/system/error_code.hpp>
+#include <boost/system/system_error.hpp>
 #include <functional>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -156,9 +157,25 @@ sanguis::client::machine::quickstart(
 			<< FCPPT_TEXT("machine::quickstart()")
 	);
 
-	server_callback_(
-		_port
-	);
+	try
+	{
+		server_callback_(
+			_port
+		);
+	}
+	catch(
+		boost::system::system_error const &_error
+	)
+	{
+		this->error_callback(
+			fcppt::from_std_string(
+				_error.what()
+			),
+			_error.code()
+		);
+
+		return;
+	}
 
 	this->connect(
 		alda::net::host(
@@ -354,7 +371,7 @@ sanguis::client::machine::error_callback(
 )
 {
 	this->process_event(
-		events::net_error(
+		sanguis::client::events::net_error(
 			_message,
 			_error
 		)

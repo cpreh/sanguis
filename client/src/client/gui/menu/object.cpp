@@ -347,6 +347,9 @@ sanguis::client::gui::menu::object::object(
 		_viewport_manager,
 		main_container_.layout()
 	),
+	connect_running_{
+		false
+	},
 	quickstart_connection_(
 		quickstart_button_.click(
 			std::bind(
@@ -470,6 +473,9 @@ sanguis::client::gui::menu::object::connection_error(
 	connect_button_.text(
 		connect_text
 	);
+
+	connect_running_ =
+		false;
 }
 
 fcppt::string
@@ -484,6 +490,14 @@ sanguis::client::gui::menu::object::player_name() const
 void
 sanguis::client::gui::menu::object::handle_quickstart()
 {
+	if(
+		connect_running_
+	)
+		return;
+
+	connect_running_ =
+		true;
+
 	callbacks_.quickstart()(
 		alda::net::port(
 			fcppt::extract_from_string_exn<
@@ -505,7 +519,9 @@ sanguis::client::gui::menu::object::handle_quickstart()
 void
 sanguis::client::gui::menu::object::handle_text_changed()
 {
-	typedef unsigned long port_type;
+	typedef
+	unsigned long
+	port_type;
 
 	typedef
 	fcppt::optional<
@@ -535,9 +551,7 @@ void
 sanguis::client::gui::menu::object::handle_connect()
 {
 	if(
-		connect_button_.text()
-		==
-		connect_text
+		!connect_running_
 	)
 	{
 		callbacks_.connect()(
@@ -577,4 +591,7 @@ sanguis::client::gui::menu::object::handle_connect()
 			SGE_FONT_LIT("")
 		);
 	}
+
+	connect_running_ =
+		!connect_running_;
 }
