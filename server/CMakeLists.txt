@@ -410,6 +410,7 @@ set(
 	include/sanguis/server/object_fwd.hpp
 	include/sanguis/server/optional_angle.hpp
 	include/sanguis/server/optional_angle_fwd.hpp
+	include/sanguis/server/perks/change_factor.hpp
 	include/sanguis/server/perks/change_simple.hpp
 	include/sanguis/server/perks/choleric.hpp
 	include/sanguis/server/perks/create.hpp

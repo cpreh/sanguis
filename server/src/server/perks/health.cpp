@@ -2,9 +2,13 @@
 #include <sanguis/server/entities/with_health.hpp>
 #include <sanguis/server/entities/with_perks.hpp>
 #include <sanguis/server/entities/property/constant_change.hpp>
+#include <sanguis/server/perks/change_factor.hpp>
 #include <sanguis/server/perks/change_simple.hpp>
 #include <sanguis/server/perks/health.hpp>
 #include <sanguis/server/perks/level_diff.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <functional>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::perks::health::health()
@@ -30,8 +34,13 @@ sanguis::server::perks::health::change(
 	>(
 		&sanguis::server::entities::property::constant_change,
 		_entity,
-		&sanguis::server::entities::with_health::health,
-		20.f,
+		std::bind(
+			&sanguis::server::entities::with_health::health,
+			std::placeholders::_1
+		),
+		sanguis::server::perks::change_factor(
+			20.f
+		),
 		_diff
 	);
 }

@@ -1,9 +1,9 @@
 #ifndef SANGUIS_SERVER_PERKS_CHANGE_SIMPLE_HPP_INCLUDED
 #define SANGUIS_SERVER_PERKS_CHANGE_SIMPLE_HPP_INCLUDED
 
+#include <sanguis/server/perks/change_factor.hpp>
 #include <sanguis/server/perks/level_diff.hpp>
 #include <sanguis/server/entities/with_perks_fwd.hpp>
-#include <sanguis/server/entities/property/value.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 
 
@@ -24,20 +24,19 @@ change_simple(
 	ChangeFunction const &_change_function,
 	sanguis::server::entities::with_perks &_entity,
 	ElemFunction const &_elem_function,
-	sanguis::server::entities::property::value const _factor,
+	sanguis::server::perks::change_factor const _factor,
 	sanguis::server::perks::level_diff const _diff
 )
 {
 	_change_function(
-		(
+		_elem_function(
 			dynamic_cast<
 				Class &
 			>(
 				_entity
 			)
-			.*_elem_function
-		)(),
-		_factor
+		),
+		_factor.get()
 		*
 		fcppt::cast::int_to_float<
 			sanguis::server::entities::property::value
