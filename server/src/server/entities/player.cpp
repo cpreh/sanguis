@@ -72,6 +72,7 @@
 #include <sanguis/server/weapons/default_ias.hpp>
 #include <sanguis/server/weapons/default_irs.hpp>
 #include <sanguis/server/weapons/player_start_weapon.hpp>
+#include <sanguis/server/weapons/optional_unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/literal.hpp>
@@ -180,8 +181,10 @@ sanguis::server::entities::player::player(
 		_random_generator
 	),
 	sanguis::server::entities::with_weapon(
-		sanguis::server::weapons::player_start_weapon(
-			_random_generator
+		sanguis::server::weapons::optional_unique_ptr(
+			sanguis::server::weapons::player_start_weapon(
+				_random_generator
+			)
 		),
 		sanguis::server::weapons::default_ias(),
 		sanguis::server::weapons::default_irs()
@@ -315,7 +318,7 @@ sanguis::server::entities::player::drop_or_pickup_weapon(
 	sanguis::is_primary_weapon const _is_primary
 )
 {
-	sanguis::server::weapons::unique_ptr dropped(
+	sanguis::server::weapons::optional_unique_ptr dropped(
 		this->drop_weapon(
 			_is_primary
 		)
@@ -358,7 +361,7 @@ sanguis::server::entities::player::drop_or_pickup_weapon(
 	if(
 		dropped
 		&&
-		dropped->usable()
+		(*dropped)->usable()
 	)
 		this->environment()->insert(
 			fcppt::make_unique_ptr<
@@ -367,7 +370,7 @@ sanguis::server::entities::player::drop_or_pickup_weapon(
 				this->environment()->load_context(),
 				this->team(),
 				std::move(
-					dropped
+					*dropped
 				)
 			),
 			sanguis::server::entities::insert_parameters_center(

@@ -10,6 +10,7 @@
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/weapons/ias.hpp>
 #include <sanguis/server/weapons/irs.hpp>
+#include <sanguis/server/weapons/optional_unique_ptr.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -36,8 +37,10 @@ sanguis::server::entities::with_ai::with_ai(
 		)
 	),
 	sanguis::server::entities::with_weapon(
-		std::move(
-			_start_weapon
+		sanguis::server::weapons::optional_unique_ptr(
+			std::move(
+				_start_weapon
+			)
 		),
 		_ias,
 		_irs

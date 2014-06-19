@@ -574,6 +574,8 @@ set(
 	include/sanguis/server/weapons/optional_reload_time_fwd.hpp
 	include/sanguis/server/weapons/optional_target.hpp
 	include/sanguis/server/weapons/optional_target_fwd.hpp
+	include/sanguis/server/weapons/optional_unique_ptr.hpp
+	include/sanguis/server/weapons/optional_unique_ptr_fwd.hpp
 	include/sanguis/server/weapons/pistol.hpp
 	include/sanguis/server/weapons/pistol_parameters.hpp
 	include/sanguis/server/weapons/pistol_parameters_fwd.hpp

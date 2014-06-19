@@ -14,9 +14,11 @@ namespace server
 namespace weapons
 {
 
-typedef std::unique_ptr<
+typedef
+std::unique_ptr<
 	sanguis::server::weapons::weapon
-> unique_ptr;
+>
+unique_ptr;
 
 }
 }

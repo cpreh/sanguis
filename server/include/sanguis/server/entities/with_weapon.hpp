@@ -17,7 +17,7 @@
 #include <sanguis/server/weapons/ias.hpp>
 #include <sanguis/server/weapons/irs.hpp>
 #include <sanguis/server/weapons/optional_target.hpp>
-#include <sanguis/server/weapons/unique_ptr.hpp>
+#include <sanguis/server/weapons/optional_unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -41,7 +41,7 @@ class with_weapon
 	);
 protected:
 	with_weapon(
-		sanguis::server::weapons::unique_ptr &&,
+		sanguis::server::weapons::optional_unique_ptr &&,
 		sanguis::server::weapons::ias,
 		sanguis::server::weapons::irs
 	);
@@ -67,7 +67,7 @@ public:
 		sanguis::server::weapons::unique_ptr &&
 	);
 
-	sanguis::server::weapons::unique_ptr
+	sanguis::server::weapons::optional_unique_ptr
 	drop_weapon(
 		sanguis::is_primary_weapon
 	);
@@ -151,7 +151,7 @@ private:
 		sanguis::is_primary_weapon
 	) const;
 
-	sanguis::server::weapons::unique_ptr &
+	sanguis::server::weapons::optional_unique_ptr &
 	is_primary_to_weapon_unique_ptr(
 		sanguis::is_primary_weapon
 	);
@@ -191,9 +191,9 @@ private:
 		sanguis::magazine_remaining
 	);
 
-	sanguis::server::weapons::unique_ptr primary_weapon_;
+	sanguis::server::weapons::optional_unique_ptr primary_weapon_;
 
-	sanguis::server::weapons::unique_ptr secondary_weapon_;
+	sanguis::server::weapons::optional_unique_ptr secondary_weapon_;
 
 	sanguis::server::weapons::optional_target target_;
 
