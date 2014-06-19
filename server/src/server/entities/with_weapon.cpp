@@ -98,7 +98,7 @@ sanguis::server::entities::with_weapon::update()
 	if(
 		this->secondary_weapon()
 		&&
-		this->secondary_weapon()->usable()
+		!this->secondary_weapon()->usable()
 	)
 		this->drop_weapon(
 			sanguis::is_primary_weapon(
