@@ -1,3 +1,5 @@
+#include <fcppt/assert/unreachable.hpp>
+#include <fcppt/io/cout.hpp>
 #include <fcppt/math/box/center.hpp>
 #include <fcppt/math/box/contains_point.hpp>
 #include <fcppt/math/box/object.hpp>
@@ -241,96 +243,6 @@ sanguis::creator::aux_::generators::rooms(
 			);
 		};
 
-	::int_type startw =
-		rand_int(10, 20)();
-	::int_type starth =
-		rand_int(10, 20)();
-
-	std::vector<
-		signed_rect
-	>
-	rects{
-		signed_rect{
-			signed_rect::vector{
-				rand_int(0, static_cast<::int_type>(size.w()) - startw - 1)(),
-				rand_int(0, static_cast<::int_type>(size.h()) - starth - 1)()
-			},
-			signed_rect::dim{
-				startw,
-				starth
-			}
-		}
-	};
-
-	for (
-		::int_type i = 0;
-		i < 100;
-		++i
-	)
-	{
-		::int_type w = rand_int(5, std::min(15 + i/2, static_cast<::int_type>(size.w() - 1)))();
-		::int_type h = rand_int(5, std::min(15 + i/2, static_cast<::int_type>(size.h() - 1)))();
-		::int_type x = rand_int(0, static_cast<::int_type>(size.w()) - w - 1)();
-		::int_type y = rand_int(0, static_cast<::int_type>(size.h()) - h - 1)();
-
-		signed_rect rect{
-			signed_rect::vector{
-				x,
-				y
-			},
-			signed_rect::dim{
-				w,
-				h
-			}
-		};
-
-		bool
-		wellformed{
-			true};
-
-		::edge
-		clipped_edge{
-			::edge::none};
-			
-
-		fcppt::optional<
-			signed_rect
-		> neighbor;
-
-		for (
-			auto const &other
-			:
-			rects
-		)
-		{
-			clipped_edge =
-				::clip(
-					rect,
-					other);
-
-			// rect has just been clipped with other,
-			// so it's next to it
-			if (clipped_edge != ::edge::none)
-				neighbor = other;
-
-			wellformed =
-				rect.w() > 2
-				&&
-				rect.h() > 2;
-
-			// rect has been clipped into oblivion, discard it
-			if (!wellformed)
-				break;
-		}
-
-		// has become too small or doesn't touch any other rect
-		if (!wellformed || !neighbor)
-			continue;
-
-		rects.push_back(
-				rect);
-	}
-
 	sanguis::creator::grid
 	grid{
 		sanguis::creator::grid::dim{
@@ -344,6 +256,199 @@ sanguis::creator::aux_::generators::rooms(
 		grid.size(),
 		sanguis::creator::background_tile::space
 	};
+
+	::int_type startw =
+		rand_int(10, 20)();
+	::int_type starth =
+		rand_int(10, 20)();
+
+	std::vector<
+		::signed_rect
+	>
+	rects{
+		::signed_rect{
+			::signed_rect::vector{
+				rand_int(0, static_cast<::int_type>(size.w()) - startw - 1)(),
+				rand_int(0, static_cast<::int_type>(size.h()) - starth - 1)()
+			},
+			::signed_rect::dim{
+				startw,
+				starth
+			}
+		}
+	};
+
+	using corridor =
+		std::pair<
+			::pos_type,
+			::edge
+		>;
+
+	std::vector<
+		corridor
+	>
+	corridors;
+
+	for (
+		::int_type i = 0;
+		i < 100;
+		++i
+	)
+	{
+		::signed_rect rect;
+
+		{
+			::int_type w = rand_int(5, std::min(15 + i/2, static_cast<::int_type>(size.w() - 1)))();
+			::int_type h = rand_int(5, std::min(15 + i/2, static_cast<::int_type>(size.h() - 1)))();
+			::int_type x = rand_int(0, static_cast<::int_type>(size.w()) - w - 1)();
+			::int_type y = rand_int(0, static_cast<::int_type>(size.h()) - h - 1)();
+
+			rect = ::signed_rect{
+				::signed_rect::vector{
+					x,
+					y
+				},
+				::signed_rect::dim{
+					w,
+					h
+				}
+			};
+		}
+
+		bool
+		wellformed{
+			true};
+
+		::edge
+		clipped_edge{
+			::edge::none};
+			
+
+		fcppt::optional<
+			::signed_rect
+		> neighbor;
+
+		for (
+			auto const &other
+			:
+			rects
+		)
+		{
+			::edge e =
+				::clip(
+					rect,
+					other);
+
+			// rect has just been clipped with other,
+			// so it's next to it
+			if (e != ::edge::none)
+			{
+				neighbor = other;
+				clipped_edge = e;
+			}
+
+			wellformed =
+				rect.w() > 2
+				&&
+				rect.h() > 2;
+
+			// rect has been clipped into oblivion, discard it
+			if (!wellformed)
+				break;
+		}
+
+		if (!wellformed || !neighbor)
+			continue;
+
+		switch (clipped_edge)
+		{
+			case ::edge::top:
+			case ::edge::bottom:
+			{
+				int_type xmin{
+					std::max(
+						rect.left(),
+						neighbor->left()
+					) +
+					1
+				};
+
+				int_type xmax{
+					std::min(
+						rect.right(),
+						neighbor->right()
+					) -
+					2
+				};
+
+				if (xmin >= xmax)
+					continue;
+
+				::int_type x{
+					rand_int(xmin, xmax)()
+				};
+
+				corridors.push_back(
+					std::make_pair(
+						::pos_type{
+							x,
+							clipped_edge == ::edge::top
+							?
+							rect.top()
+							:
+							rect.bottom()
+						},
+						clipped_edge));
+
+				break;
+			}
+			case ::edge::left:
+			case ::edge::right:
+			{
+				int_type ymin{
+					std::max(
+						rect.top(),
+						neighbor->top()
+					) +
+					1
+				};
+
+				int_type ymax{
+					std::min(
+						rect.bottom(),
+						neighbor->bottom()
+					) -
+					2
+				};
+
+				if (ymin >= ymax)
+					continue;
+
+				::int_type y{
+					rand_int(ymin, ymax)()
+				};
+
+				corridors.push_back(
+					std::make_pair(
+						::pos_type{
+							clipped_edge == ::edge::left
+							?
+							rect.left()
+							:
+							rect.right(),
+							y
+						},
+						clipped_edge));
+
+				break;
+			}
+			default:
+				FCPPT_ASSERT_UNREACHABLE;
+		}
+
+		rects.push_back(
+			rect);
+	}
 
 	for (
 		auto &rect
@@ -390,7 +495,114 @@ sanguis::creator::aux_::generators::rooms(
 		);
 	}
 
-	auto rect_to_pos(
+	auto
+	set_floor(
+		[
+			&grid,
+			&bg_grid
+		]
+		(
+			::pos_type input_pos
+		)
+		{
+			auto pos(
+				fcppt::math::vector::structure_cast<
+					sanguis::creator::pos
+				>(
+					input_pos
+				)
+			);
+
+			grid[
+				pos
+			] =
+				sanguis::creator::tile::nothing;
+
+			bg_grid[
+				pos
+			] =
+				sanguis::creator::background_tile::space_floor;
+		}
+	);
+
+	auto
+	set_wall(
+		[
+			&grid,
+			&bg_grid
+		]
+		(
+			::pos_type input_pos
+		)
+		{
+			auto pos(
+				fcppt::math::vector::structure_cast<
+					sanguis::creator::pos
+				>(
+					input_pos
+				)
+			);
+
+			grid[
+				pos
+			] =
+				sanguis::creator::tile::concrete_wall;
+
+			bg_grid[
+				pos
+			] =
+				sanguis::creator::background_tile::space_floor;
+		}
+	);
+
+	for (auto &corr : corridors)
+	{
+		::pos_type const &pos{corr.first};
+		::edge const &e{corr.second};
+
+		set_floor(pos);
+
+		switch (e)
+		{
+			case ::edge::top:
+			{
+				set_floor(pos + ::pos_type{ 0, -1 });
+				set_floor(pos + ::pos_type{ 0, -2 });
+				set_wall(pos + ::pos_type{ -1, -1 });
+				set_wall(pos + ::pos_type{ +1, -1 });
+				break;
+			}
+			case ::edge::bottom:
+			{
+				set_floor(pos + ::pos_type{ 0, -1 });
+				set_floor(pos + ::pos_type{ 0, +1 });
+				set_wall(pos + ::pos_type{ -1, 0 });
+				set_wall(pos + ::pos_type{ +1, 0 });
+				break;
+			}
+			case ::edge::left:
+			{
+				set_floor(pos + ::pos_type{ -1, 0 });
+				set_floor(pos + ::pos_type{ -2, 0 });
+				set_wall(pos + ::pos_type{ -1, -1 });
+				set_wall(pos + ::pos_type{ -1, +1 });
+				break;
+			}
+			case ::edge::right:
+			{
+				set_floor(pos + ::pos_type{ -1, 0 });
+				set_floor(pos + ::pos_type{ +1, 0 });
+				set_wall(pos + ::pos_type{ 0, -1 });
+				set_wall(pos + ::pos_type{ 0, +1 });
+				break;
+			}
+			default:
+				FCPPT_ASSERT_UNREACHABLE;
+		}
+	}
+
+	auto
+	rect_to_pos(
 		[]
 		(
 			signed_rect _rect
