@@ -11,7 +11,7 @@
 #include <sanguis/server/buffs/burn_interval.hpp>
 #include <sanguis/server/buffs/define_special.hpp>
 #include <sanguis/server/damage/full.hpp>
-#include <sanguis/server/damage/list.hpp>
+#include <sanguis/server/damage/make_array.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
 #include <sanguis/server/damage/normal.hpp>
 #include <sanguis/server/damage/unit.hpp>
@@ -76,10 +76,10 @@ sanguis::server::entities::enemies::factory::skeleton(
 				sanguis::server::weapons::damage(
 					10.f
 				),
-				sanguis::server::damage::list{
+				sanguis::server::damage::make_array({
 					sanguis::server::damage::normal =
 						sanguis::server::damage::full
-				}
+				})
 			),
 			sanguis::server::pickup_probability(
 				0.75f

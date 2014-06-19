@@ -15,8 +15,6 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/collision/result_fwd.hpp>
-#include <sanguis/server/damage/no_armor.hpp>
-#include <sanguis/server/damage/list.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/movement_speed_initial.hpp>
 #include <sanguis/server/entities/with_body.hpp>

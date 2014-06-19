@@ -112,29 +112,28 @@ set(
 	include/sanguis/server/create_player.hpp.hpp
 	include/sanguis/server/damage/armor_array.hpp
 	include/sanguis/server/damage/armor_array_fwd.hpp
-	include/sanguis/server/damage/armor_list.hpp
-	include/sanguis/server/damage/armor_list_fwd.hpp
 	include/sanguis/server/damage/armor_meta.hpp
 	include/sanguis/server/damage/armor_meta_fwd.hpp
+	include/sanguis/server/damage/armor_meta_list.hpp
 	include/sanguis/server/damage/armor_unit.hpp
 	include/sanguis/server/damage/armor_unit_fwd.hpp
 	include/sanguis/server/damage/array.hpp
 	include/sanguis/server/damage/array_fwd.hpp
 	include/sanguis/server/damage/basic_array.hpp
 	include/sanguis/server/damage/basic_array_fwd.hpp
-	include/sanguis/server/damage/basic_list_decl.hpp
-	include/sanguis/server/damage/basic_list_fwd.hpp
-	include/sanguis/server/damage/basic_list_impl.hpp
+	include/sanguis/server/damage/basic_make_array.hpp
 	include/sanguis/server/damage/basic_meta_decl.hpp
 	include/sanguis/server/damage/basic_meta_fwd.hpp
 	include/sanguis/server/damage/basic_meta_impl.hpp
+	include/sanguis/server/damage/basic_meta_list.hpp
 	include/sanguis/server/damage/fire.hpp
 	include/sanguis/server/damage/full.hpp
 	include/sanguis/server/damage/ice.hpp
-	include/sanguis/server/damage/list.hpp
-	include/sanguis/server/damage/list_fwd.hpp
+	include/sanguis/server/damage/make_armor_array.hpp
+	include/sanguis/server/damage/make_array.hpp
 	include/sanguis/server/damage/meta.hpp
 	include/sanguis/server/damage/meta_fwd.hpp
+	include/sanguis/server/damage/meta_list.hpp
 	include/sanguis/server/damage/no_armor.hpp
 	include/sanguis/server/damage/normal.hpp
 	include/sanguis/server/damage/piercing.hpp
@@ -693,12 +692,12 @@ set(
 	src/server/console.cpp
 	src/server/create.cpp
 	src/server/create_player.cpp
-	src/server/damage/armor_list.cpp
 	src/server/damage/armor_meta.cpp
 	src/server/damage/fire.cpp
 	src/server/damage/full.cpp
 	src/server/damage/ice.cpp
-	src/server/damage/list.cpp
+	src/server/damage/make_armor_array.cpp
+	src/server/damage/make_array.cpp
 	src/server/damage/meta.cpp
 	src/server/damage/no_armor.cpp
 	src/server/damage/normal.cpp

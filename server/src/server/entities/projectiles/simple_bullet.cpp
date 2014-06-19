@@ -5,7 +5,7 @@
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/damage/full.hpp>
-#include <sanguis/server/damage/list.hpp>
+#include <sanguis/server/damage/make_array.hpp>
 #include <sanguis/server/damage/piercing.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
@@ -58,10 +58,10 @@ sanguis::server::entities::projectiles::simple_bullet::do_damage(
 {
 	_entity.damage(
 		damage_,
-		sanguis::server::damage::list{
+		sanguis::server::damage::make_array({
 			sanguis::server::damage::piercing =
 				sanguis::server::damage::full
-		}
+		})
 	);
 
 	this->expire();

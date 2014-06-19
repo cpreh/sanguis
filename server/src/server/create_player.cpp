@@ -6,7 +6,6 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/unicast_callback.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
-#include <sanguis/server/damage/list.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/player_unique_ptr.hpp>

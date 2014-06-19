@@ -4,7 +4,7 @@
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/damage/fire.hpp>
-#include <sanguis/server/damage/list.hpp>
+#include <sanguis/server/damage/make_array.hpp>
 #include <sanguis/server/damage/piercing.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
@@ -71,7 +71,7 @@ sanguis::server::entities::projectiles::rocket::remove()
 			this->team(),
 			this->aoe(),
 			damage_,
-			sanguis::server::damage::list{
+			sanguis::server::damage::make_array({
 				sanguis::server::damage::piercing =
 					sanguis::server::damage::unit(
 						0.5f
@@ -80,7 +80,7 @@ sanguis::server::entities::projectiles::rocket::remove()
 					sanguis::server::damage::unit(
 						0.5f
 					)
-			}
+			})
 		),
 		sanguis::server::entities::insert_parameters_center(
 			this->center()
