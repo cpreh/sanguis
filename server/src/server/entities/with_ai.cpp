@@ -2,7 +2,7 @@
 #include <sanguis/server/ai/base.hpp>
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/ai/manager.hpp>
-#include <sanguis/server/auras/create_callback_container.hpp>
+#include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_auras_id.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
@@ -23,7 +23,7 @@ sanguis::server::entities::with_ai::with_ai(
 	sanguis::random_generator  &_random_generator,
 	sanguis::server::ai::create_function const &_create_ai,
 	sanguis::server::weapons::unique_ptr &&_start_weapon,
-	sanguis::server::auras::create_callback_container const &_auras,
+	sanguis::server::auras::container &&_auras,
 	sanguis::server::weapons::ias const _ias,
 	sanguis::server::weapons::irs const _irs
 )
@@ -31,7 +31,9 @@ sanguis::server::entities::with_ai::with_ai(
 	sanguis::server::entities::ifaces::with_links(),
 	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::with_auras_id(
-		_auras
+		std::move(
+			_auras
+		)
 	),
 	sanguis::server::entities::with_weapon(
 		std::move(

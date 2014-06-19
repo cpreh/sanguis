@@ -6,7 +6,7 @@
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/ai/create_simple.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
-#include <sanguis/server/auras/create_callback_container.hpp>
+#include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/auras/slow_create.hpp>
 #include <sanguis/server/buffs/define_special.hpp>
 #include <sanguis/server/buffs/slow.hpp>
@@ -26,6 +26,7 @@
 #include <sanguis/server/weapons/melee.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/assign/make_container.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cmath>
 #include <fcppt/config/external_end.hpp>
@@ -86,7 +87,9 @@ sanguis::server::entities::enemies::factory::ghost(
 			sanguis::server::exp(
 				10.f
 			),
-			sanguis::server::auras::create_callback_container{
+			fcppt::assign::make_container<
+				sanguis::server::auras::container
+			>(
 				sanguis::server::auras::slow_create<
 					ghost_slow
 				>(
@@ -98,6 +101,6 @@ sanguis::server::entities::enemies::factory::ghost(
 						0.1f
 					)
 				)
-			}
+			).move_container()
 		);
 }

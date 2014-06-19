@@ -1,5 +1,4 @@
 #include <sanguis/buff_type.hpp>
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/server/buffs/buff.hpp>
 #include <sanguis/server/buffs/burn.hpp>
@@ -13,7 +12,6 @@
 
 sanguis::server::buffs::burn::burn(
 	sanguis::server::entities::with_health &_entity,
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::server::buffs::burn_interval const _interval,
 	sanguis::server::damage::unit const _damage,
 	sanguis::server::damage::array const &_damage_values
@@ -23,7 +21,7 @@ sanguis::server::buffs::burn::burn(
 	),
 	interval_timer_(
 		sanguis::diff_timer::parameters(
-			_diff_clock,
+			_entity.diff_clock(),
 			_interval.get()
 		)
 	),

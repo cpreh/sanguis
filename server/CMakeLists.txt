@@ -56,8 +56,6 @@ set(
 	include/sanguis/server/auras/burn_create.hpp
 	include/sanguis/server/auras/collision_groups.hpp
 	include/sanguis/server/auras/container.hpp
-	include/sanguis/server/auras/create_callback.hpp
-	include/sanguis/server/auras/create_callback_container.hpp
 	include/sanguis/server/auras/influence.hpp
 	include/sanguis/server/auras/influence_fwd.hpp
 	include/sanguis/server/auras/slow_create.hpp

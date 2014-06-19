@@ -1,4 +1,3 @@
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/entity_id.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/perk_type.hpp>
@@ -42,7 +41,7 @@
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/team.hpp>
-#include <sanguis/server/auras/create_callback_container.hpp>
+#include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/auras/update_sight.hpp>
 #include <sanguis/server/auras/weapon_pickup_candidates.hpp>
 #include <sanguis/server/damage/armor_array_fwd.hpp>
@@ -80,6 +79,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/assign/make_container.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/atan2.hpp>
@@ -117,65 +117,52 @@ sanguis::server::entities::player::player(
 		)
 	),
 	sanguis::server::entities::with_auras_id(
-		sanguis::server::auras::create_callback_container{
-			[
-				this
-			](
-				sanguis::diff_clock const &
+		fcppt::assign::make_container<
+			sanguis::server::auras::container
+		>(
+			fcppt::make_unique_ptr<
+				sanguis::server::auras::update_sight
+			>(
+				sanguis::server::radius(
+					2000.f
+				),
+				sanguis::server::add_sight_callback(
+					std::bind(
+						&sanguis::server::entities::player::add_sight_range,
+						this,
+						std::placeholders::_1
+					)
+				),
+				sanguis::server::remove_sight_callback(
+					std::bind(
+						&sanguis::server::entities::player::remove_sight_range,
+						this,
+						std::placeholders::_1
+					)
+				)
 			)
-			{
-				return
-					fcppt::make_unique_ptr<
-						sanguis::server::auras::update_sight
-					>(
-						sanguis::server::radius(
-							2000.f
-						),
-						sanguis::server::add_sight_callback(
-							std::bind(
-								&sanguis::server::entities::player::add_sight_range,
-								this,
-								std::placeholders::_1
-							)
-						),
-						sanguis::server::remove_sight_callback(
-							std::bind(
-								&sanguis::server::entities::player::remove_sight_range,
-								this,
-								std::placeholders::_1
-							)
-						)
-					);
-			},
-			[
-				this
-			](
-				sanguis::diff_clock const &
+		)(
+			fcppt::make_unique_ptr<
+				sanguis::server::auras::weapon_pickup_candidates
+			>(
+				// with_velocity needs to be initialized first!
+				this->radius(),
+				sanguis::server::add_weapon_pickup_callback(
+					std::bind(
+						&sanguis::server::entities::player::weapon_pickup_add_candidate,
+						this,
+						std::placeholders::_1
+					)
+				),
+				sanguis::server::remove_weapon_pickup_callback(
+					std::bind(
+						&sanguis::server::entities::player::weapon_pickup_remove_candidate,
+						this,
+						std::placeholders::_1
+					)
+				)
 			)
-			{
-				return
-					fcppt::make_unique_ptr<
-						sanguis::server::auras::weapon_pickup_candidates
-					>(
-						// with_velocity needs to be initialized first!
-						this->radius(),
-						sanguis::server::add_weapon_pickup_callback(
-							std::bind(
-								&sanguis::server::entities::player::weapon_pickup_add_candidate,
-								this,
-								std::placeholders::_1
-							)
-						),
-						sanguis::server::remove_weapon_pickup_callback(
-							std::bind(
-								&sanguis::server::entities::player::weapon_pickup_remove_candidate,
-								this,
-								std::placeholders::_1
-							)
-						)
-					);
-			}
-		}
+		).move_container()
 	),
 	sanguis::server::entities::with_buffs(),
 	sanguis::server::entities::with_id(

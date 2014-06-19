@@ -1,7 +1,5 @@
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/container.hpp>
-#include <sanguis/server/auras/create_callback.hpp>
-#include <sanguis/server/auras/create_callback_container.hpp>
 #include <sanguis/server/auras/unique_ptr.hpp>
 #include <sanguis/server/collision/ghost.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
@@ -28,21 +26,24 @@ sanguis::server::entities::with_auras::add_aura(
 }
 
 sanguis::server::entities::with_auras::with_auras(
-	sanguis::server::auras::create_callback_container const &_auras
+	sanguis::server::auras::container &&_auras
 )
 :
 	sanguis::server::entities::with_ghosts(),
-	auras_()
+	auras_(
+		std::move(
+			_auras
+		)
+	)
 {
+	// TODO: Simplify this
 	for(
-		sanguis::server::auras::create_callback const &create_aura
+		sanguis::server::auras::unique_ptr const &aura
 		:
 		_auras
 	)
-		this->add_aura(
-			create_aura(
-				this->diff_clock()
-			)
+		this->sanguis::server::entities::with_ghosts::add_ghost(
+			aura->create_ghost()
 		);
 }
 

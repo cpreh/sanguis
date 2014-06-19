@@ -27,7 +27,7 @@
 #include <sanguis/server/ai/base.hpp>
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/auras/aura.hpp>
-#include <sanguis/server/auras/create_callback_container.hpp>
+#include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/collision/with_world.hpp>
 #include <sanguis/server/damage/armor_array.hpp>
 #include <sanguis/server/entities/friend.hpp>
@@ -73,7 +73,7 @@ sanguis::server::entities::friend_::friend_(
 		std::move(
 			_weapon
 		),
-		sanguis::server::auras::create_callback_container(),
+		sanguis::server::auras::container(),
 		sanguis::server::weapons::default_ias(),
 		sanguis::server::weapons::default_irs()
 	),

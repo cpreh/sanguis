@@ -8,8 +8,8 @@
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/regeneration.hpp>
 #include <sanguis/server/ai/create_function.hpp>
-#include <sanguis/server/auras/create_callback.hpp>
-#include <sanguis/server/auras/create_callback_container.hpp>
+#include <sanguis/server/auras/container.hpp>
+#include <sanguis/server/auras/unique_ptr.hpp>
 #include <sanguis/server/damage/armor_array.hpp>
 #include <sanguis/server/damage/armor_unit.hpp>
 #include <sanguis/server/damage/type_fwd.hpp>
@@ -52,7 +52,7 @@ public:
 		sanguis::server::exp,
 		sanguis::server::entities::enemies::difficulty,
 		sanguis::server::entities::spawn_owner const &,
-		sanguis::server::auras::create_callback_container const &
+		sanguis::server::auras::container &&
 	);
 
 	parameters(
@@ -105,8 +105,8 @@ public:
 	sanguis::server::entities::spawn_owner const &
 	spawn_owner() const;
 
-	sanguis::server::auras::create_callback_container const &
-	auras() const;
+	sanguis::server::auras::container &
+	auras();
 
 	sanguis::server::weapons::ias const
 	ias() const;
@@ -156,7 +156,7 @@ public:
 
 	sanguis::server::entities::enemies::parameters &
 	add_aura(
-		sanguis::server::auras::create_callback const &
+		sanguis::server::auras::unique_ptr &&
 	);
 
 	sanguis::server::entities::enemies::parameters &
@@ -191,7 +191,7 @@ private:
 
 	sanguis::server::entities::spawn_owner const spawn_owner_;
 
-	sanguis::server::auras::create_callback_container auras_;
+	sanguis::server::auras::container auras_;
 
 	sanguis::server::weapons::ias ias_;
 

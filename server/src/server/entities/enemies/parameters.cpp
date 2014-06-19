@@ -6,7 +6,7 @@
 #include <sanguis/server/regeneration.hpp>
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/auras/aura.hpp>
-#include <sanguis/server/auras/create_callback_container.hpp>
+#include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/auras/unique_ptr.hpp>
 #include <sanguis/server/damage/armor_array.hpp>
 #include <sanguis/server/damage/armor_unit.hpp>
@@ -41,7 +41,7 @@ sanguis::server::entities::enemies::parameters::parameters(
 	sanguis::server::exp const _exp,
 	sanguis::server::entities::enemies::difficulty const _difficulty,
 	sanguis::server::entities::spawn_owner const &_spawn_owner,
-	sanguis::server::auras::create_callback_container const &_auras
+	sanguis::server::auras::container &&_auras
 )
 :
 	random_generator_(
@@ -90,7 +90,9 @@ sanguis::server::entities::enemies::parameters::parameters(
 		_spawn_owner
 	),
 	auras_(
-		_auras
+		std::move(
+			_auras
+		)
 	),
 	ias_(
 		sanguis::server::weapons::default_ias()
@@ -200,8 +202,8 @@ sanguis::server::entities::enemies::parameters::spawn_owner() const
 		spawn_owner_;
 }
 
-sanguis::server::auras::create_callback_container const &
-sanguis::server::entities::enemies::parameters::auras() const
+sanguis::server::auras::container &
+sanguis::server::entities::enemies::parameters::auras()
 {
 	return
 		auras_;
@@ -319,11 +321,13 @@ sanguis::server::entities::enemies::parameters::irs(
 
 sanguis::server::entities::enemies::parameters &
 sanguis::server::entities::enemies::parameters::add_aura(
-	sanguis::server::auras::create_callback const &_aura
+	sanguis::server::auras::unique_ptr &&_aura
 )
 {
 	auras_.push_back(
-		_aura
+		std::move(
+			_aura
+		)
 	);
 
 	return

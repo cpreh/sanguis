@@ -2,7 +2,6 @@
 #define SANGUIS_SERVER_BUFFS_BURN_HPP_INCLUDED
 
 #include <sanguis/buff_type_fwd.hpp>
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/server/buffs/buff.hpp>
 #include <sanguis/server/buffs/burn_interval.hpp>
@@ -29,7 +28,6 @@ class burn
 public:
 	burn(
 		sanguis::server::entities::with_health &,
-		sanguis::diff_clock const &,
 		sanguis::server::buffs::burn_interval,
 		sanguis::server::damage::unit,
 		sanguis::server::damage::array const &

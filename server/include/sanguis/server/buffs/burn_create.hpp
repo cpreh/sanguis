@@ -28,7 +28,6 @@ template<
 >
 sanguis::server::buffs::create_callback
 burn_create(
-	sanguis::diff_clock const &_diff_clock,
 	sanguis::server::buffs::burn_interval const _interval,
 	sanguis::server::damage::unit const _damage,
 	sanguis::server::damage::array const &_damage_values
@@ -44,7 +43,6 @@ burn_create(
 
 	return
 		[
-			&_diff_clock,
 			_interval,
 			_damage,
 			_damage_values
@@ -63,7 +61,6 @@ burn_create(
 							Buff
 						>(
 							*with_health,
-							_diff_clock,
 							_interval,
 							_damage,
 							_damage_values

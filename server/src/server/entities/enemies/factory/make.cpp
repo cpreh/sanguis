@@ -4,7 +4,7 @@
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/auras/aura.hpp>
-#include <sanguis/server/auras/create_callback_container.hpp>
+#include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/damage/armor_array.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
@@ -33,7 +33,7 @@ sanguis::server::entities::enemies::factory::make(
 	sanguis::server::weapons::unique_ptr &&_weapon,
 	sanguis::server::pickup_probability const _pickup_probability,
 	sanguis::server::exp const _exp,
-	sanguis::server::auras::create_callback_container const &_auras
+	sanguis::server::auras::container &&_auras
 )
 {
 	sanguis::server::entities::enemies::parameters parameters(
@@ -51,7 +51,9 @@ sanguis::server::entities::enemies::factory::make(
 		_exp,
 		_parameters.difficulty(),
 		_parameters.spawn_owner(),
-		_auras
+		std::move(
+			_auras
+		)
 	);
 
 	typedef

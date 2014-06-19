@@ -98,7 +98,8 @@ public:
 
 	virtual
 	~base();
-protected:
+
+	// TODO: Move this to another class?
 	sanguis::diff_clock const &
 	diff_clock() const;
 private:
@@ -112,6 +113,7 @@ private:
 		sanguis::server::entities::transfer_parameters const &
 	);
 
+	// TODO: Move this to another class?
 	sanguis::server::environment::optional_object_ref environment_;
 
 	sanguis::diff_clock diff_clock_;

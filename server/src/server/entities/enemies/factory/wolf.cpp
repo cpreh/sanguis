@@ -5,7 +5,7 @@
 #include <sanguis/server/ai/create_swarm.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/auras/aura.hpp>
-#include <sanguis/server/auras/create_callback_container.hpp>
+#include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/damage/full.hpp>
 #include <sanguis/server/damage/list.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
@@ -80,6 +80,6 @@ sanguis::server::entities::enemies::factory::wolf(
 			sanguis::server::exp(
 				10.f
 			),
-			sanguis::server::auras::create_callback_container()
+			sanguis::server::auras::container()
 		);
 }
