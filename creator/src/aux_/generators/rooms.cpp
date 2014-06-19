@@ -10,6 +10,8 @@
 #include <fcppt/optional.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/make_variate.hpp>
+#include <fcppt/random/distribution/make_basic.hpp>
+#include <fcppt/random/distribution/parameters/make_uniform_indices_advanced.hpp>
 #include <sanguis/creator/aux_/enemy_type_container.hpp>
 #include <sanguis/creator/aux_/filled_rect.hpp>
 #include <sanguis/creator/aux_/generators/rooms.hpp>
@@ -32,6 +34,7 @@
 #include <sanguis/creator/signed_pos.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/tile.hpp>
+#include <sanguis/creator/tile_is_solid.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <vector>
@@ -617,8 +620,73 @@ sanguis::creator::aux_::generators::rooms(
 		sanguis::creator::tile::door;
 	}
 
-	sanguis::creator::spawn_container const
+	sanguis::creator::spawn_container
 	spawners{};
+
+	sanguis::creator::aux_::enemy_type_container
+	enemy_types{
+		sanguis::creator::enemy_type::zombie00,
+		sanguis::creator::enemy_type::zombie01,
+		sanguis::creator::enemy_type::maggot
+	};
+
+	auto random_monster(
+		fcppt::random::distribution::make_basic(
+			fcppt::random::distribution::parameters::make_uniform_indices_advanced<
+				sanguis::creator::aux_::random::uniform_int_wrapper
+			>(
+				enemy_types
+			)
+		)
+	);
+
+	// TODO more sensible spawner placement
+	sanguis::creator::aux_::filled_rect(
+		fcppt::math::box::structure_cast<
+			sanguis::creator::rect
+		>(
+			rects.back()
+		),
+		[&]
+		(sanguis::creator::pos _pos)
+		{
+			if (
+				sanguis::creator::tile_is_solid(
+					grid[
+						_pos
+					]
+				)
+			)
+				return;
+			spawners.push_back(
+				sanguis::creator::spawn{
+					sanguis::creator::spawn_pos{
+						_pos
+					},
+					enemy_types[
+						random_monster(
+							_parameters.randgen()
+						)
+					],
+					sanguis::creator::spawn_type::single
+				}
+			);
+		}
+	);
+
+	spawners.push_back(
+		sanguis::creator::spawn{
+			sanguis::creator::spawn_pos{
+				rects.front().pos() + sanguis::creator::pos{1u,1u}
+			},
+			enemy_types[
+				random_monster(
+					_parameters.randgen()
+				)
+			],
+			sanguis::creator::spawn_type::single
+		}
+	);
 
 	return
 		sanguis::creator::aux_::result(

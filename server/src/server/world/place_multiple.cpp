@@ -7,6 +7,7 @@
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/vector.hpp>
 #include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/convert_model_size.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/radius.hpp>
 #include <sanguis/server/world/grid_pos_to_center.hpp>
@@ -40,7 +41,8 @@ sanguis::server::world::place_multiple(
 {
 	sanguis::server::radius const radius(
 		sanguis::server::entities::radius(
-			_model_size.get()
+			sanguis::server::entities::convert_model_size(
+				_model_size)
 		)
 	);
 
