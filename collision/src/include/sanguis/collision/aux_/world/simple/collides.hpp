@@ -3,7 +3,6 @@
 
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/radius.hpp>
-#include <sanguis/collision/aux_/world/simple/groups_collide.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/length.hpp>
 
@@ -31,11 +30,6 @@ collides(
 )
 {
 	return
-		sanguis::collision::aux_::world::simple::groups_collide(
-			_left.collision_group(),
-			_right.collision_group()
-		)
-		&&
 		fcppt::math::vector::length(
 			_left.center().get()
 			-

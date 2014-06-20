@@ -130,7 +130,7 @@ sanguis::collision::aux_::world::simple::ghost::post_update_bodies()
 
 void
 sanguis::collision::aux_::world::simple::ghost::update_near_body(
-	sanguis::collision::aux_::world::simple::body &_body
+	sanguis::collision::aux_::world::simple::body const &_body
 )
 {
 	bool const collides(
@@ -173,7 +173,7 @@ sanguis::collision::aux_::world::simple::ghost::update_near_body(
 
 void
 sanguis::collision::aux_::world::simple::ghost::new_body(
-	sanguis::collision::aux_::world::simple::body &_body
+	sanguis::collision::aux_::world::simple::body const &_body
 )
 {
 	if(
@@ -198,7 +198,7 @@ sanguis::collision::aux_::world::simple::ghost::new_body(
 
 void
 sanguis::collision::aux_::world::simple::ghost::remove_body(
-	sanguis::collision::aux_::world::simple::body &_body
+	sanguis::collision::aux_::world::simple::body const &_body
 )
 {
 	body_map::iterator const it(

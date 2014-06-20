@@ -11,9 +11,11 @@
 #include <sanguis/collision/world/body_unique_ptr.hpp>
 #include <sanguis/collision/world/ghost_parameters_fwd.hpp>
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
+#include <sanguis/collision/world/group.hpp>
 #include <sanguis/collision/world/object.hpp>
 #include <sanguis/collision/world/parameters_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/container/enum_array_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_set>
 #include <fcppt/config/external_end.hpp>
@@ -85,15 +87,20 @@ private:
 		sanguis::collision::aux_::world::simple::body &
 	);
 
-	sanguis::collision::world::body_collision_callback const body_collision_callback_;
-
+public:
+	// TODO
 	typedef
 	std::unordered_set<
 		sanguis::collision::aux_::world::simple::body *
 	>
 	body_set;
 
-	body_set bodies_;
+	typedef
+	fcppt::container::enum_array<
+		sanguis::collision::world::group,
+		body_set
+	>
+	body_set_array;
 
 	typedef
 	std::unordered_set<
@@ -101,9 +108,27 @@ private:
 	>
 	ghost_set;
 
-	ghost_set ghosts_;
+	typedef
+	fcppt::container::enum_array<
+		sanguis::collision::world::group,
+		ghost_set
+	>
+	ghost_set_array;
 
-	sanguis::collision::aux_::world::simple::body_list_grid body_list_grid_;
+	typedef
+	fcppt::container::enum_array<
+		sanguis::collision::world::group,
+		sanguis::collision::aux_::world::simple::body_list_grid
+	>
+	body_list_grid_array;
+private:
+	sanguis::collision::world::body_collision_callback const body_collision_callback_;
+
+	body_set_array body_sets_;
+
+	ghost_set_array ghost_sets_;
+
+	body_list_grid_array body_list_grids_;
 };
 
 }

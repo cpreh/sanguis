@@ -67,17 +67,17 @@ public:
 
 	void
 	update_near_body(
-		sanguis::collision::aux_::world::simple::body &
+		sanguis::collision::aux_::world::simple::body const &
 	);
 
 	void
 	new_body(
-		sanguis::collision::aux_::world::simple::body &
+		sanguis::collision::aux_::world::simple::body const &
 	);
 
 	void
 	remove_body(
-		sanguis::collision::aux_::world::simple::body &
+		sanguis::collision::aux_::world::simple::body const &
 	);
 private:
 	sanguis::collision::aux_::world::simple::ghost_remove_callback const ghost_remove_callback_;
@@ -100,7 +100,7 @@ private:
 
 	typedef
 	std::unordered_map<
-		sanguis::collision::aux_::world::simple::body *,
+		sanguis::collision::aux_::world::simple::body const *,
 		body_status
 	>
 	body_map;
