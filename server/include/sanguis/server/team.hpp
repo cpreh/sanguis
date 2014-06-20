@@ -12,8 +12,7 @@ namespace server
 enum class team
 {
 	players,
-	monsters,
-	neutral
+	monsters
 };
 
 }

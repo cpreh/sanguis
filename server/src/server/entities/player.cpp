@@ -6,7 +6,6 @@
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_type_to_is_primary.hpp>
 #include <sanguis/collision/world/group.hpp>
-#include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/aura_type_container.hpp>
 #include <sanguis/messages/roles/buff_type_container.hpp>
@@ -624,11 +623,9 @@ sanguis::server::entities::player::on_magazine_remaining(
 	);
 }
 
-sanguis::collision::world::group_field const
-sanguis::server::entities::player::collision_groups() const
+sanguis::collision::world::group
+sanguis::server::entities::player::collision_group() const
 {
 	return
-		sanguis::collision::world::group_field{
-			sanguis::collision::world::group::player
-		};
+		sanguis::collision::world::group::player;
 }

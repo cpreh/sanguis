@@ -1,7 +1,6 @@
 #include <sanguis/friend_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/collision/world/group.hpp>
-#include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/load/friend_name.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/aura_type_container.hpp>
@@ -193,11 +192,9 @@ sanguis::server::entities::friend_::add_message(
 }
 
 
-sanguis::collision::world::group_field const
-sanguis::server::entities::friend_::collision_groups() const
+sanguis::collision::world::group
+sanguis::server::entities::friend_::collision_group() const
 {
 	return
-		sanguis::collision::world::group_field{
-			sanguis::collision::world::group::player
-		};
+		sanguis::collision::world::group::player;
 }

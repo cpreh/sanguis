@@ -6,7 +6,7 @@
 #include <sanguis/collision/world/body.hpp>
 #include <sanguis/collision/world/body_base_fwd.hpp>
 #include <sanguis/collision/world/body_parameters.hpp>
-#include <sanguis/collision/world/group_field.hpp>
+#include <sanguis/collision/world/group.hpp>
 #include <sanguis/collision/world/position_change_callback.hpp>
 
 
@@ -29,8 +29,8 @@ sanguis::collision::aux_::world::simple::body::body(
 	radius_(
 		_parameters.radius()
 	),
-	collision_groups_(
-		_parameters.collision_groups()
+	collision_group_(
+		_parameters.collision_group()
 	),
 	body_base_(
 		_parameters.body_base()
@@ -107,11 +107,11 @@ sanguis::collision::aux_::world::simple::body::radius() const
 		radius_;
 }
 
-sanguis::collision::world::group_field const
-sanguis::collision::aux_::world::simple::body::collision_groups() const
+sanguis::collision::world::group
+sanguis::collision::aux_::world::simple::body::collision_group() const
 {
 	return
-		collision_groups_;
+		collision_group_;
 }
 
 sanguis::collision::world::body_base &

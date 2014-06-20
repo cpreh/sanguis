@@ -1,5 +1,5 @@
 #include <sanguis/projectile_type.hpp>
-#include <sanguis/collision/world/group_field.hpp>
+#include <sanguis/collision/world/group.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/center.hpp>
 #include <sanguis/messages/roles/entity_id.hpp>
@@ -22,7 +22,7 @@
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
-#include <sanguis/server/entities/projectiles/collision_groups.hpp>
+#include <sanguis/server/entities/projectiles/collision_group.hpp>
 #include <sanguis/server/entities/projectiles/life_time.hpp>
 #include <sanguis/server/entities/projectiles/projectile.hpp>
 #include <sanguis/server/entities/property/initial_max.hpp>
@@ -141,11 +141,11 @@ sanguis::server::entities::projectiles::projectile::collision_with_body(
 		);
 }
 
-sanguis::collision::world::group_field const
-sanguis::server::entities::projectiles::projectile::collision_groups() const
+sanguis::collision::world::group
+sanguis::server::entities::projectiles::projectile::collision_group() const
 {
 	return
-		sanguis::server::entities::projectiles::collision_groups(
+		sanguis::server::entities::projectiles::collision_group(
 			this->team()
 		);
 }

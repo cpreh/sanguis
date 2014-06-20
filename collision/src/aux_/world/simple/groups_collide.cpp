@@ -1,60 +1,41 @@
 #include <sanguis/collision/aux_/world/group_pair.hpp>
 #include <sanguis/collision/aux_/world/group_relation.hpp>
 #include <sanguis/collision/aux_/world/simple/groups_collide.hpp>
-#include <sanguis/collision/world/group_field.hpp>
+#include <sanguis/collision/world/group.hpp>
+#include <fcppt/homogenous_pair_comparison.hpp>
+#include <fcppt/algorithm/contains_if.hpp>
 
-
-namespace
-{
-
-bool
-test_pair(
-	sanguis::collision::world::group_field const &_field1,
-	sanguis::collision::world::group_field const &_field2,
-	sanguis::collision::aux_::world::group_pair const &_pair
-)
-{
-	return
-		(
-			_field1
-			&
-			_pair.first
-		)
-		&&
-		(
-			_field2
-			&
-			_pair.second
-		);
-}
-
-}
 
 bool
 sanguis::collision::aux_::world::simple::groups_collide(
-	sanguis::collision::world::group_field const &_field1,
-	sanguis::collision::world::group_field const &_field2
+	sanguis::collision::world::group const _group1,
+	sanguis::collision::world::group const _group2
 )
 {
-	for(
-		auto const pair
-		:
-		sanguis::collision::aux_::world::group_relation()
-	)
-		if(
-			test_pair(
-				_field1,
-				_field2,
-				pair
+	return
+		fcppt::algorithm::contains_if(
+			sanguis::collision::aux_::world::group_relation(),
+			[
+				_group1,
+				_group2
+			](
+				sanguis::collision::aux_::world::group_pair const _pair
 			)
-			||
-			test_pair(
-				_field2,
-				_field1,
-				pair
-			)
-		)
-			return true;
-
-	return false;
+			{
+				return
+					_pair
+					==
+					sanguis::collision::aux_::world::group_pair(
+						_group1,
+						_group2
+					)
+					||
+					_pair
+					==
+					sanguis::collision::aux_::world::group_pair(
+						_group2,
+						_group1
+					);
+			}
+		);
 }

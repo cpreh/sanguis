@@ -54,7 +54,7 @@ set(
 	include/sanguis/server/auras/aura_fwd.hpp
 	include/sanguis/server/auras/buff.hpp
 	include/sanguis/server/auras/burn_create.hpp
-	include/sanguis/server/auras/collision_groups.hpp
+	include/sanguis/server/auras/collision_group.hpp
 	include/sanguis/server/auras/container.hpp
 	include/sanguis/server/auras/influence.hpp
 	include/sanguis/server/auras/influence_fwd.hpp
@@ -256,7 +256,7 @@ set(
 	include/sanguis/server/entities/player_unique_ptr.hpp
 	include/sanguis/server/entities/projectiles/aoe_damage.hpp
 	include/sanguis/server/entities/projectiles/aoe_projectile.hpp
-	include/sanguis/server/entities/projectiles/collision_groups.hpp
+	include/sanguis/server/entities/projectiles/collision_group.hpp
 	include/sanguis/server/entities/projectiles/grenade.hpp
 	include/sanguis/server/entities/projectiles/life_time.hpp
 	include/sanguis/server/entities/projectiles/melee.hpp
@@ -667,7 +667,7 @@ set(
 	src/server/auras/aoe_damage.cpp
 	src/server/auras/aura.cpp
 	src/server/auras/buff.cpp
-	src/server/auras/collision_groups.cpp
+	src/server/auras/collision_group.cpp
 	src/server/auras/target.cpp
 	src/server/auras/target_kind_to_influence.cpp
 	src/server/auras/update_sight.cpp
@@ -766,7 +766,7 @@ set(
 	src/server/entities/player.cpp
 	src/server/entities/projectiles/aoe_damage.cpp
 	src/server/entities/projectiles/aoe_projectile.cpp
-	src/server/entities/projectiles/collision_groups.cpp
+	src/server/entities/projectiles/collision_group.cpp
 	src/server/entities/projectiles/grenade.cpp
 	src/server/entities/projectiles/melee.cpp
 	src/server/entities/projectiles/projectile.cpp

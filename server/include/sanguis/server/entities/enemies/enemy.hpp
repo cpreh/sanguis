@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_ENEMIES_ENEMY_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_ENEMIES_ENEMY_HPP_INCLUDED
 
-#include <sanguis/collision/world/group_field_fwd.hpp>
+#include <sanguis/collision/world/group_fwd.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/messages/types/string.hpp>
@@ -69,8 +69,8 @@ private:
 	) const
 	override;
 
-	sanguis::collision::world::group_field const
-	collision_groups() const
+	sanguis::collision::world::group
+	collision_group() const
 	override;
 
 	void

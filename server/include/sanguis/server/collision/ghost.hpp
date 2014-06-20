@@ -4,7 +4,7 @@
 #include <sanguis/collision/world/body_enter_callback.hpp>
 #include <sanguis/collision/world/body_exit_callback.hpp>
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
-#include <sanguis/collision/world/group_field.hpp>
+#include <sanguis/collision/world/group.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/center_fwd.hpp>
@@ -26,7 +26,7 @@ class ghost
 	);
 public:
 	ghost(
-		sanguis::collision::world::group_field const &,
+		sanguis::collision::world::group,
 		sanguis::collision::world::body_enter_callback const &,
 		sanguis::collision::world::body_exit_callback const &,
 		sanguis::server::radius
@@ -48,7 +48,7 @@ public:
 		sanguis::server::center
 	);
 private:
-	sanguis::collision::world::group_field const collision_groups_;
+	sanguis::collision::world::group const collision_group_;
 
 	sanguis::collision::world::body_enter_callback const body_enter_callback_;
 

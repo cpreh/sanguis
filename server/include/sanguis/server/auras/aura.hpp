@@ -3,7 +3,7 @@
 
 #include <sanguis/optional_aura_type_fwd.hpp>
 #include <sanguis/collision/world/body_base_fwd.hpp>
-#include <sanguis/collision/world/group_field_fwd.hpp>
+#include <sanguis/collision/world/group_fwd.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/influence.hpp>
@@ -48,8 +48,8 @@ protected:
 	);
 private:
 	virtual
-	sanguis::collision::world::group_field const
-	collision_groups() const;
+	sanguis::collision::world::group
+	collision_group() const;
 
 	boost::logic::tribool const
 	can_collide_with(

@@ -15,7 +15,6 @@
 #include <sanguis/collision/world/ghost_parameters.hpp>
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
 #include <sanguis/collision/world/group.hpp>
-#include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/collision/world/object.hpp>
 #include <sanguis/collision/world/object_unique_ptr.hpp>
 #include <sanguis/collision/world/parameters.hpp>
@@ -144,9 +143,7 @@ main()
 								{
 								}
 							},
-							sanguis::collision::world::group_field{
-								sanguis::collision::world::group::enemy
-							},
+							sanguis::collision::world::group::enemy,
 							fake_body_base
 						}
 					);
@@ -198,9 +195,7 @@ main()
 									}
 								)
 							),
-							sanguis::collision::world::group_field{
-								sanguis::collision::world::group::projectile_enemy
-							}
+							sanguis::collision::world::group::projectile_enemy
 						)
 					);
 			}

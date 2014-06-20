@@ -23,6 +23,7 @@ template<
 	typename Type1,
 	typename Type2
 >
+inline
 bool
 collides(
 	Type1 const &_left,
@@ -31,8 +32,8 @@ collides(
 {
 	return
 		sanguis::collision::aux_::world::simple::groups_collide(
-			_left.collision_groups(),
-			_right.collision_groups()
+			_left.collision_group(),
+			_right.collision_group()
 		)
 		&&
 		fcppt::math::vector::length(

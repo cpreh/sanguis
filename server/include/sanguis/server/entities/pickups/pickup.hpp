@@ -3,7 +3,7 @@
 
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/pickup_type.hpp>
-#include <sanguis/collision/world/group_field_fwd.hpp>
+#include <sanguis/collision/world/group_fwd.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
@@ -68,8 +68,8 @@ private:
 	)
 	override;
 
-	sanguis::collision::world::group_field const
-	collision_groups() const
+	sanguis::collision::world::group
+	collision_group() const
 	override;
 
 	virtual

@@ -1,6 +1,5 @@
 #include <sanguis/optional_aura_type.hpp>
 #include <sanguis/collision/world/group.hpp>
-#include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/server/add_sight_callback.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/remove_sight_callback.hpp>
@@ -21,7 +20,8 @@ sanguis::server::auras::update_sight::update_sight(
 :
 	sanguis::server::auras::aura(
 		_radius,
-		sanguis::server::team::neutral,
+		// TODO: This doesn't make any sense here
+		sanguis::server::team::players,
 		sanguis::server::auras::influence::debuff
 	),
 	add_(
@@ -44,13 +44,11 @@ sanguis::server::auras::update_sight::type() const
 		sanguis::optional_aura_type();
 }
 
-sanguis::collision::world::group_field const
-sanguis::server::auras::update_sight::collision_groups() const
+sanguis::collision::world::group
+sanguis::server::auras::update_sight::collision_group() const
 {
 	return
-		sanguis::collision::world::group_field{
-			sanguis::collision::world::group::sight_range
-		};
+		sanguis::collision::world::group::sight_range;
 }
 
 void

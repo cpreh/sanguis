@@ -1,9 +1,9 @@
 #include <sanguis/collision/world/body_base.hpp>
-#include <sanguis/collision/world/group_field.hpp>
+#include <sanguis/collision/world/group.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/aura.hpp>
-#include <sanguis/server/auras/collision_groups.hpp>
+#include <sanguis/server/auras/collision_group.hpp>
 #include <sanguis/server/auras/influence.hpp>
 #include <sanguis/server/collision/ghost.hpp>
 #include <sanguis/server/collision/ghost_base.hpp>
@@ -28,7 +28,7 @@ sanguis::server::auras::aura::create_ghost()
 			fcppt::make_unique_ptr<
 				sanguis::server::collision::ghost
 			>(
-				this->collision_groups(),
+				this->collision_group(),
 				this->body_enter_callback(),
 				this->body_exit_callback(),
 				radius_
@@ -55,11 +55,11 @@ sanguis::server::auras::aura::aura(
 {
 }
 
-sanguis::collision::world::group_field const
-sanguis::server::auras::aura::collision_groups() const
+sanguis::collision::world::group
+sanguis::server::auras::aura::collision_group() const
 {
 	return
-		sanguis::server::auras::collision_groups(
+		sanguis::server::auras::collision_group(
 			team_,
 			influence_
 		);

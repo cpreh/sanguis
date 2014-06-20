@@ -1,6 +1,5 @@
 #include <sanguis/optional_aura_type.hpp>
 #include <sanguis/collision/world/group.hpp>
-#include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/server/add_weapon_pickup_callback.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/remove_weapon_pickup_callback.hpp>
@@ -21,7 +20,8 @@ sanguis::server::auras::weapon_pickup_candidates::weapon_pickup_candidates(
 :
 	sanguis::server::auras::aura(
 		_radius,
-		sanguis::server::team::neutral,
+		// TODO: Remove this
+		sanguis::server::team::players,
 		sanguis::server::auras::influence::debuff
 	),
 	add_(
@@ -44,13 +44,11 @@ sanguis::server::auras::weapon_pickup_candidates::type() const
 		sanguis::optional_aura_type();
 }
 
-sanguis::collision::world::group_field const
-sanguis::server::auras::weapon_pickup_candidates::collision_groups() const
+sanguis::collision::world::group
+sanguis::server::auras::weapon_pickup_candidates::collision_group() const
 {
 	return
-		sanguis::collision::world::group_field{
-			sanguis::collision::world::group::weapon_pickup_sight
-		};
+		sanguis::collision::world::group::weapon_pickup_sight;
 }
 
 void

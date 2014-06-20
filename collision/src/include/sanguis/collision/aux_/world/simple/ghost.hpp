@@ -10,7 +10,7 @@
 #include <sanguis/collision/world/body_exit_callback.hpp>
 #include <sanguis/collision/world/ghost.hpp>
 #include <sanguis/collision/world/ghost_parameters_fwd.hpp>
-#include <sanguis/collision/world/group_field.hpp>
+#include <sanguis/collision/world/group.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_map>
@@ -56,8 +56,8 @@ public:
 	sanguis::collision::radius const
 	radius() const;
 
-	sanguis::collision::world::group_field const
-	collision_groups() const;
+	sanguis::collision::world::group
+	collision_group() const;
 
 	void
 	pre_update_bodies();
@@ -88,7 +88,7 @@ private:
 
 	sanguis::collision::world::body_exit_callback const body_exit_callback_;
 
-	sanguis::collision::world::group_field const collision_groups_;
+	sanguis::collision::world::group const collision_group_;
 
 	sanguis::collision::center center_;
 

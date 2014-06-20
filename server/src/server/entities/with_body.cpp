@@ -1,5 +1,4 @@
 #include <sanguis/collision/world/body_base.hpp>
-#include <sanguis/collision/world/group_field.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/dim.hpp>
@@ -139,7 +138,7 @@ sanguis::server::entities::with_body::on_transfer(
 		_parameters.world(),
 		_parameters.center(),
 		this->initial_speed(),
-		this->collision_groups()
+		this->collision_group()
 	);
 
 	return

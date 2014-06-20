@@ -3,7 +3,7 @@
 
 #include <sanguis/friend_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
-#include <sanguis/collision/world/group_field_fwd.hpp>
+#include <sanguis/collision/world/group_fwd.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/player_id.hpp>
@@ -76,8 +76,8 @@ private:
 	) const
 	override;
 
-	sanguis::collision::world::group_field const
-	collision_groups() const
+	sanguis::collision::world::group
+	collision_group() const
 	override;
 
 	sanguis::friend_type const friend_type_;
