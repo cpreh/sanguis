@@ -22,7 +22,7 @@ target_include_directories(
 	PRIVATE
 	${Boost_INCLUDE_DIRS}
 	${fcppt_INCLUDE_DIRS}
-	${CMAKE_SOURCE_DIR}/creator/include
+	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/creator/include
 )
 
 target_link_libraries(
