@@ -3,9 +3,7 @@
 #include <sanguis/server/add_weapon_pickup_callback.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/remove_weapon_pickup_callback.hpp>
-#include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/aura.hpp>
-#include <sanguis/server/auras/influence.hpp>
 #include <sanguis/server/auras/weapon_pickup_candidates.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/pickups/weapon.hpp>
@@ -20,9 +18,7 @@ sanguis::server::auras::weapon_pickup_candidates::weapon_pickup_candidates(
 :
 	sanguis::server::auras::aura(
 		_radius,
-		// TODO: Remove this
-		sanguis::server::team::players,
-		sanguis::server::auras::influence::debuff
+		sanguis::collision::world::group::weapon_pickup_sight
 	),
 	add_(
 		_add
@@ -42,13 +38,6 @@ sanguis::server::auras::weapon_pickup_candidates::type() const
 {
 	return
 		sanguis::optional_aura_type();
-}
-
-sanguis::collision::world::group
-sanguis::server::auras::weapon_pickup_candidates::collision_group() const
-{
-	return
-		sanguis::collision::world::group::weapon_pickup_sight;
 }
 
 void

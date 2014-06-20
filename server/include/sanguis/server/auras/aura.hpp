@@ -5,8 +5,6 @@
 #include <sanguis/collision/world/body_base_fwd.hpp>
 #include <sanguis/collision/world/group_fwd.hpp>
 #include <sanguis/server/radius.hpp>
-#include <sanguis/server/team.hpp>
-#include <sanguis/server/auras/influence.hpp>
 #include <sanguis/server/collision/ghost_base.hpp>
 #include <sanguis/server/collision/ghost_unique_ptr.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
@@ -43,14 +41,9 @@ public:
 protected:
 	aura(
 		sanguis::server::radius,
-		sanguis::server::team,
-		sanguis::server::auras::influence
+		sanguis::collision::world::group
 	);
 private:
-	virtual
-	sanguis::collision::world::group
-	collision_group() const;
-
 	boost::logic::tribool const
 	can_collide_with(
 		sanguis::collision::world::body_base const &
@@ -83,9 +76,7 @@ private:
 
 	sanguis::server::radius const radius_;
 
-	sanguis::server::team const team_;
-
-	sanguis::server::auras::influence const influence_;
+	sanguis::collision::world::group const collision_group_;
 };
 
 }

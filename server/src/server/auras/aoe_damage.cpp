@@ -4,6 +4,7 @@
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/aoe_damage.hpp>
 #include <sanguis/server/auras/aura.hpp>
+#include <sanguis/server/auras/collision_group.hpp>
 #include <sanguis/server/auras/influence.hpp>
 #include <sanguis/server/damage/array.hpp>
 #include <sanguis/server/damage/unit.hpp>
@@ -22,8 +23,10 @@ sanguis::server::auras::aoe_damage::aoe_damage(
 		sanguis::server::radius(
 			_aoe.get()
 		),
-		_team,
-		sanguis::server::auras::influence::debuff
+		sanguis::server::auras::collision_group(
+			_team,
+			sanguis::server::auras::influence::debuff
+		)
 	),
 	damage_(
 		_damage

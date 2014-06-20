@@ -3,9 +3,7 @@
 #include <sanguis/server/add_sight_callback.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/remove_sight_callback.hpp>
-#include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/aura.hpp>
-#include <sanguis/server/auras/influence.hpp>
 #include <sanguis/server/auras/update_sight.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_id.hpp>
@@ -20,9 +18,7 @@ sanguis::server::auras::update_sight::update_sight(
 :
 	sanguis::server::auras::aura(
 		_radius,
-		// TODO: This doesn't make any sense here
-		sanguis::server::team::players,
-		sanguis::server::auras::influence::debuff
+		sanguis::collision::world::group::sight_range
 	),
 	add_(
 		_add
@@ -42,13 +38,6 @@ sanguis::server::auras::update_sight::type() const
 {
 	return
 		sanguis::optional_aura_type();
-}
-
-sanguis::collision::world::group
-sanguis::server::auras::update_sight::collision_group() const
-{
-	return
-		sanguis::collision::world::group::sight_range;
 }
 
 void

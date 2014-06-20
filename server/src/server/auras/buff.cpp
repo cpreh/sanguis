@@ -4,6 +4,7 @@
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/buff.hpp>
+#include <sanguis/server/auras/collision_group.hpp>
 #include <sanguis/server/auras/influence.hpp>
 #include <sanguis/server/buffs/buff.hpp>
 #include <sanguis/server/buffs/create_callback.hpp>
@@ -22,8 +23,10 @@ sanguis::server::auras::buff::buff(
 :
 	sanguis::server::auras::aura(
 		_radius,
-		_team,
-		_influence
+		sanguis::server::auras::collision_group(
+			_team,
+			_influence
+		)
 	),
 	aura_type_(
 		_aura_type

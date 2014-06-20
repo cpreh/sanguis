@@ -4,6 +4,7 @@
 #include <sanguis/server/remove_target_callback.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/aura.hpp>
+#include <sanguis/server/auras/collision_group.hpp>
 #include <sanguis/server/auras/target.hpp>
 #include <sanguis/server/auras/influence.hpp>
 #include <sanguis/server/auras/target_kind.hpp>
@@ -21,9 +22,11 @@ sanguis::server::auras::target::target(
 :
 	sanguis::server::auras::aura(
 		_radius,
-		_team,
-		sanguis::server::auras::target_kind_to_influence(
-			_kind
+		sanguis::server::auras::collision_group(
+			_team,
+			sanguis::server::auras::target_kind_to_influence(
+				_kind
+			)
 		)
 	),
 	add_target_(

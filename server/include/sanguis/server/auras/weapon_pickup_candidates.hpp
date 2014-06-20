@@ -2,7 +2,6 @@
 #define SANGUIS_SERVER_AURAS_WEAPON_PICKUP_CANDIDATES_HPP_INCLUDED
 
 #include <sanguis/optional_aura_type_fwd.hpp>
-#include <sanguis/collision/world/group_fwd.hpp>
 #include <sanguis/server/add_weapon_pickup_callback.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/remove_weapon_pickup_callback.hpp>
@@ -37,10 +36,6 @@ public:
 private:
 	sanguis::optional_aura_type const
 	type() const
-	override;
-
-	sanguis::collision::world::group
-	collision_group() const
 	override;
 
 	void
