@@ -174,3 +174,7 @@ sanguis_add_library(
 	"${SANGUIS_COLLISION_FILES}"
 	"${COLLISION_LINK_TARGETS}"
 )
+
+add_subdirectory(
+	bench
+)
