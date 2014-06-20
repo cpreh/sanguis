@@ -62,8 +62,8 @@ sanguis::collision::aux_::world::projectile::body::body(
 			)
 		)
 	),
-	collision_groups_(
-		_parameters.collision_groups()
+	collision_group_(
+		_parameters.collision_group()
 	),
 	position_connection_(
 		impl_.position_change(
@@ -106,7 +106,7 @@ sanguis::collision::aux_::world::projectile::body::activate(
 			_world,
 			impl_,
 			sanguis::collision::aux_::world::projectile::make_groups(
-				collision_groups_,
+				collision_group_,
 				_global_groups
 			)
 		);

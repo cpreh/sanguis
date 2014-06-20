@@ -69,7 +69,7 @@ sanguis::collision::aux_::world::projectile::ghost::ghost(
 		_world,
 		impl_,
 		sanguis::collision::aux_::world::projectile::make_groups(
-			_parameters.collision_groups(),
+			_parameters.collision_group(),
 			_global_groups
 		)
 	)
