@@ -42,6 +42,15 @@ sanguis::collision::aux_::world::simple::ghost::ghost(
 
 sanguis::collision::aux_::world::simple::ghost::~ghost()
 {
+	for(
+		auto &body
+		:
+		bodies_
+	)
+		body_exit_callback_.get()(
+			body.first->body_base()
+		);
+
 	ghost_remove_callback_(
 		*this
 	);
