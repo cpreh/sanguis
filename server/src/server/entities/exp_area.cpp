@@ -12,6 +12,7 @@
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/algorithm/map_iteration_second.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/cast/static_downcast_ptr.hpp>
@@ -55,29 +56,21 @@ sanguis::server::entities::exp_area::~exp_area()
 void
 sanguis::server::entities::exp_area::remove()
 {
-	for(
-		weak_link_map::iterator it(
-			player_links_.begin()
-		),
-		next(
-			it
-		);
-		it != player_links_.end();
-		it = next
-	)
-	{
-		++next;
-
-		if(
-			!it->second
+	fcppt::algorithm::map_iteration_second(
+		player_links_,
+		[](
+			sanguis::server::entities::auto_weak_link const &_link
 		)
-			player_links_.erase(
-				it
-			);
-	}
+		{
+			return
+				!_link;
+		}
+	);
 
 	for(
-		auto &player_link : player_links_
+		auto &player_link
+		:
+		player_links_
 	)
 		fcppt::cast::static_downcast<
 			sanguis::server::entities::player &
@@ -99,7 +92,8 @@ sanguis::server::entities::exp_area::remove()
 bool
 sanguis::server::entities::exp_area::dead() const
 {
-	return true;
+	return
+		true;
 }
 
 boost::logic::tribool const
