@@ -19,7 +19,7 @@
 #include <sanguis/server/weapons/create.hpp>
 #include <sanguis/server/weapons/monster_spawner.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
-#include <fcppt/foreach_enumerator.hpp>
+#include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
@@ -125,9 +125,12 @@ sanguis::server::cheat::process(
 
 		return;
 	case sanguis::cheat_type::perks:
-		FCPPT_FOREACH_ENUMERATOR(
-			perk,
-			sanguis::perk_type
+		for(
+			auto perk
+			:
+			fcppt::make_enum_range<
+				sanguis::perk_type
+			>()
 		)
 			while(
 				_player.perk_choosable(

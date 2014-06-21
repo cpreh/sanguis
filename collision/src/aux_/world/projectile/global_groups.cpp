@@ -3,7 +3,7 @@
 #include <sanguis/collision/world/group.hpp>
 #include <sge/projectile/world.hpp>
 #include <sge/projectile/group/object.hpp>
-#include <fcppt/foreach_enumerator.hpp>
+#include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
@@ -15,9 +15,12 @@ sanguis::collision::aux_::world::projectile::global_groups::global_groups(
 :
 	groups_()
 {
-	FCPPT_FOREACH_ENUMERATOR(
-		index,
-		sanguis::collision::world::group
+	for(
+		auto index
+		:
+		fcppt::make_enum_range<
+			sanguis::collision::world::group
+		>()
 	)
 		fcppt::container::ptr::insert_unique_ptr_map(
 			groups_,

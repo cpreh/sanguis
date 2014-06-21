@@ -23,7 +23,6 @@
 #include <sanguis/client/draw2d/scene/background_dim.hpp>
 #include <sanguis/client/draw2d/scene/control_environment.hpp>
 #include <sanguis/client/draw2d/scene/draw_name.hpp>
-#include <sanguis/client/draw2d/scene/foreach_z_ordering.hpp>
 #include <sanguis/client/draw2d/scene/message_environment.hpp>
 #include <sanguis/client/draw2d/scene/translation.hpp>
 #include <sanguis/client/draw2d/scene/world/object.hpp>
@@ -82,6 +81,7 @@
 #include <sge/sprite/state/scoped.hpp>
 #include <sge/viewport/manager.hpp>
 #include <fcppt/format.hpp>
+#include <fcppt/make_enum_range_start_end.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
@@ -448,10 +448,13 @@ sanguis::client::draw2d::scene::object::render_systems(
 			_render_context
 		);
 
-		SANGUIS_CLIENT_DRAW2D_SCENE_FOREACH_Z_ORDERING(
-			index,
-			sanguis::client::draw2d::z_ordering::corpses,
-			sanguis::client::draw2d::z_ordering::flare
+		for(
+			auto index
+			:
+			fcppt::make_enum_range_start_end(
+				sanguis::client::draw2d::z_ordering::corpses,
+				sanguis::client::draw2d::z_ordering::flare
+			)
 		)
 			normal_system_.render(
 				_render_context,
@@ -477,10 +480,13 @@ sanguis::client::draw2d::scene::object::render_systems(
 		*transform_state
 	);
 
-	SANGUIS_CLIENT_DRAW2D_SCENE_FOREACH_Z_ORDERING(
-		index,
-		sanguis::client::draw2d::z_ordering::healthbar_lower,
-		sanguis::client::draw2d::z_ordering::healthbar_upper
+	for(
+		auto const index
+		:
+		fcppt::make_enum_range_start_end(
+			sanguis::client::draw2d::z_ordering::healthbar_lower,
+			sanguis::client::draw2d::z_ordering::healthbar_upper
+		)
 	)
 		colored_system_.render(
 			_render_context,

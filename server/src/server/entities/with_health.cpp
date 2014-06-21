@@ -17,8 +17,8 @@
 #include <sanguis/server/entities/property/subtract.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
-#include <fcppt/foreach_enumerator.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_enum_range.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
 #include <functional>
@@ -31,9 +31,12 @@ sanguis::server::entities::with_health::damage(
 	sanguis::server::damage::array const &_amounts
 )
 {
-	FCPPT_FOREACH_ENUMERATOR(
-		index,
-		sanguis::server::damage::type
+	for(
+		auto const index
+		:
+		fcppt::make_enum_range<
+			sanguis::server::damage::type
+		>()
 	)
 		sanguis::server::entities::property::subtract(
 			health_,
