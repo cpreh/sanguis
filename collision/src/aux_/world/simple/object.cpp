@@ -22,13 +22,12 @@
 #include <sanguis/creator/difference_type.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/signed_pos.hpp>
-#include <fcppt/enum_size.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/array_init_move.hpp>
 #include <fcppt/algorithm/array_push_back.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/cast/int_to_enum.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/container/enum_array_impl.hpp>
@@ -39,7 +38,6 @@
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/range/irange.hpp>
 #include <boost/range/adaptor/filtered.hpp>
 #include <boost/range/adaptor/transformed.hpp>
 #include <cstddef>
@@ -62,47 +60,32 @@ auto const _name(\
 		return \
 			boost::adaptors::transform(\
 				boost::adaptors::filter(\
-					boost::irange(\
-						fcppt::literal<\
-							std::size_t\
-						>(\
-							0 \
-						),\
-						fcppt::enum_size<\
-							sanguis::collision::world::group\
-						>::value\
-					),\
+					fcppt::make_enum_range<\
+						sanguis::collision::world::group\
+					>(),\
 					[\
 						_group\
 					](\
-						int const _group2\
+						sanguis::collision::world::group const _group2\
 					)\
 					{\
 						return \
 							sanguis::collision::aux_::world::simple::groups_collide(\
 								_group,\
-								fcppt::cast::int_to_enum<\
-									sanguis::collision::world::group\
-								>(\
-									_group2\
-								)\
+								_group2\
 							);\
 					}\
 				),\
 				[\
 					&_array\
 				](\
-					int const _index\
+					sanguis::collision::world::group const _index\
 				)\
 				-> _type::reference \
 				{\
 					return \
 						_array[\
-							fcppt::cast::int_to_enum<\
-								sanguis::collision::world::group\
-							>(\
-								_index\
-							)\
+							_index\
 						];\
 				}\
 			); \
