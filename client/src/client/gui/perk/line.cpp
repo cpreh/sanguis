@@ -9,6 +9,7 @@
 #include <sanguis/client/perk/tree.hpp>
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/default_aspect.hpp>
+#include <sanguis/gui/needed_width.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
@@ -62,7 +63,11 @@ sanguis::client::gui::perk::line::line(
 		sanguis::gui::text_color(
 			this->text_color()
 		),
-		sanguis::gui::optional_needed_width()
+		sanguis::gui::optional_needed_width(
+			sanguis::gui::needed_width(
+				400 // TODO!
+			)
+		)
 	),
 	box_(
 		_context,

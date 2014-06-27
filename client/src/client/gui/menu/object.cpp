@@ -345,7 +345,7 @@ sanguis::client::gui::menu::object::object(
 	viewport_adaptor_(
 		_renderer,
 		_viewport_manager,
-		main_container_.layout()
+		main_container_
 	),
 	connect_running_{
 		false

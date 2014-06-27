@@ -426,7 +426,7 @@ try
 	sanguis::gui::viewport_adaptor viewport_adaptor(
 		sys.renderer_device_ffp(),
 		sys.viewport_manager(),
-		main_widget.layout()
+		main_widget
 	);
 
 	typedef

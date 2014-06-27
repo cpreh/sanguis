@@ -15,7 +15,7 @@
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
-#include <sge/rucksack/rect_fwd.hpp>
+#include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <vector>
@@ -40,12 +40,12 @@ public:
 	weapon_details(
 		sanguis::client::load::hud::context &,
 		sge::renderer::device::ffp &,
+		sge::viewport::manager &,
 		sge::font::object &,
 		sge::input::keyboard::device &,
 		sge::input::cursor::object &,
 		sanguis::optional_weapon_description const &,
-		sanguis::optional_weapon_description const &,
-		sge::rucksack::rect
+		sanguis::optional_weapon_description const &
 	);
 
 	~weapon_details();

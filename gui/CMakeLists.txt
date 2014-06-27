@@ -6,11 +6,12 @@ set(
 	include/sanguis/gui/context_fwd.hpp
 	include/sanguis/gui/default_aspect.hpp
 	include/sanguis/gui/duration.hpp
-	include/sanguis/gui/fixed_area.hpp
 	include/sanguis/gui/focus_change.hpp
 	include/sanguis/gui/focus_change_fwd.hpp
 	include/sanguis/gui/get_focus.hpp
 	include/sanguis/gui/get_focus_fwd.hpp
+	include/sanguis/gui/gravity.hpp
+	include/sanguis/gui/gravity_fwd.hpp
 	include/sanguis/gui/index.hpp
 	include/sanguis/gui/index_callback.hpp
 	include/sanguis/gui/index_function.hpp
@@ -54,6 +55,8 @@ set(
 	include/sanguis/gui/widget/frame_fwd.hpp
 	include/sanguis/gui/widget/image.hpp
 	include/sanguis/gui/widget/image_fwd.hpp
+	include/sanguis/gui/widget/minimum_size.hpp
+	include/sanguis/gui/widget/minimum_size_fwd.hpp
 	include/sanguis/gui/widget/optional_focus.hpp
 	include/sanguis/gui/widget/optional_focus_fwd.hpp
 	include/sanguis/gui/widget/optional_ref.hpp
@@ -86,16 +89,21 @@ set(
 	include/sanguis/gui/widget/unique_ptr_vector.hpp
 	src/aux_/draw_image.cpp
 	src/aux_/fill_rect.cpp
+	src/aux_/gravity_east.cpp
+	src/aux_/gravity_south.cpp
+	src/aux_/make_container_pair.cpp
 	src/aux_/shrink_rect.cpp
 	src/aux_/style/background_color.cpp
 	src/aux_/style/border_color.cpp
 	src/aux_/style/text_color.cpp
 	src/context.cpp
 	src/default_aspect.cpp
-	src/fixed_area.cpp
 	src/include/sanguis/gui/aux_/draw_image.hpp
 	src/include/sanguis/gui/aux_/draw_sprite.hpp
 	src/include/sanguis/gui/aux_/fill_rect.hpp
+	src/include/sanguis/gui/aux_/gravity_east.hpp
+	src/include/sanguis/gui/aux_/gravity_south.hpp
+	src/include/sanguis/gui/aux_/make_container_pair.hpp
 	src/include/sanguis/gui/aux_/shrink_rect.hpp
 	src/include/sanguis/gui/aux_/sprite_type_choices.hpp
 	src/include/sanguis/gui/aux_/style/background_color.hpp
@@ -104,6 +112,7 @@ set(
 	src/include/sanguis/gui/aux_/style/outer_border.hpp
 	src/include/sanguis/gui/aux_/style/spacing.hpp
 	src/include/sanguis/gui/aux_/style/text_color.hpp
+	src/include/sanguis/gui/aux_/swap_pair.hpp
 	src/master.cpp
 	src/minimum_size_area.cpp
 	src/needed_width_from_strings.cpp
@@ -119,6 +128,7 @@ set(
 	src/widget/expander.cpp
 	src/widget/frame.cpp
 	src/widget/image.cpp
+	src/widget/minimum_size.cpp
 	src/widget/reference_alignment_pair.cpp
 	src/widget/reference_name_pair.cpp
 	src/widget/static_text.cpp

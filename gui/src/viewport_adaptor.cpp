@@ -1,6 +1,6 @@
 #include <sanguis/gui/viewport_adaptor.hpp>
+#include <sanguis/gui/widget/base.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
-#include <sge/rucksack/widget/base_fwd.hpp>
 #include <sge/rucksack/widget/viewport_adaptor.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 
@@ -8,7 +8,7 @@
 sanguis::gui::viewport_adaptor::viewport_adaptor(
 	sge::renderer::device::core &_device,
 	sge::viewport::manager &_viewport_manager,
-	sge::rucksack::widget::base &_widget
+	sanguis::gui::widget::base &_widget
 )
 :
 	impl_(
@@ -17,7 +17,7 @@ sanguis::gui::viewport_adaptor::viewport_adaptor(
 	)
 {
 	impl_.child(
-		_widget
+		_widget.layout()
 	);
 
 	impl_.relayout();
@@ -25,4 +25,10 @@ sanguis::gui::viewport_adaptor::viewport_adaptor(
 
 sanguis::gui::viewport_adaptor::~viewport_adaptor()
 {
+}
+
+void
+sanguis::gui::viewport_adaptor::relayout()
+{
+	impl_.relayout();
 }

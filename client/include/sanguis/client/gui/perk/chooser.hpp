@@ -6,8 +6,8 @@
 #include <sanguis/client/gui/perk/state_fwd.hpp>
 #include <sanguis/client/perk/state_fwd.hpp>
 #include <sanguis/gui/context.hpp>
-#include <sanguis/gui/fixed_area.hpp>
 #include <sanguis/gui/master.hpp>
+#include <sanguis/gui/minimum_size_area.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/text.hpp>
 #include <sge/font/object_fwd.hpp>
@@ -94,11 +94,9 @@ private:
 
 	sanguis::gui::master gui_master_;
 
-	// TODO: Use a minimum size area when we know how to layout this
-	sanguis::gui::fixed_area gui_area_;
+	sanguis::gui::minimum_size_area gui_area_;
 
 	fcppt::signal::scoped_connection const
-		viewport_connection_,
 		perk_connection_,
 		level_connection_;
 };

@@ -29,6 +29,7 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/rect_fwd.hpp>
 #include <sge/timer/frames_counter.hpp>
+#include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <memory>
@@ -54,6 +55,7 @@ public:
 		sanguis::client::load::resource::textures const &,
 		sge::font::object &,
 		sge::renderer::device::ffp &,
+		sge::viewport::manager &,
 		sge::input::keyboard::device &,
 		sge::input::cursor::object &
 	);
@@ -136,6 +138,8 @@ private:
 	sge::font::object &font_;
 
 	sge::renderer::device::ffp &renderer_;
+
+	sge::viewport::manager &viewport_manager_;
 
 	sge::input::keyboard::device &keyboard_;
 

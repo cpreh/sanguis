@@ -4,6 +4,7 @@
 #include <sanguis/client/gui/perk/state.hpp>
 #include <sanguis/client/perk/state.hpp>
 #include <sanguis/gui/default_aspect.hpp>
+#include <sanguis/gui/gravity.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/widget/reference.hpp>
@@ -19,19 +20,12 @@
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp.hpp>
 #include <sge/renderer/target/onscreen.hpp>
-#include <sge/renderer/target/viewport_size.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
-#include <sge/rucksack/dim.hpp>
-#include <sge/rucksack/rect.hpp>
-#include <sge/rucksack/scalar.hpp>
-#include <sge/rucksack/vector.hpp>
 #include <sge/viewport/manager.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/cast/size.hpp>
-#include <fcppt/cast/to_signed.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
@@ -111,22 +105,11 @@ sanguis::client::gui::perk::chooser::chooser(
 		main_container_
 	),
 	gui_area_(
+		_renderer,
+		_viewport_manager,
+		gui_context_,
 		main_container_,
-		sge::rucksack::rect(
-			sge::rucksack::vector::null(),
-			sge::rucksack::dim(
-				400,
-				250
-			)
-		)
-	),
-	viewport_connection_(
-		_viewport_manager.manage_callback(
-			std::bind(
-				&sanguis::client::gui::perk::chooser::relayout,
-				this
-			)
-		)
+		sanguis::gui::gravity::north_east
 	),
 	perk_connection_(
 		_state.register_perks_change(
@@ -145,7 +128,6 @@ sanguis::client::gui::perk::chooser::chooser(
 		)
 	)
 {
-	this->relayout();
 }
 
 sanguis::client::gui::perk::chooser::~chooser()
@@ -198,7 +180,7 @@ sanguis::client::gui::perk::chooser::perks()
 		)
 	);
 
-	this->relayout();
+	gui_area_.relayout();
 }
 
 void
@@ -226,25 +208,4 @@ sanguis::client::gui::perk::chooser::make_top_text() const
 				state_.remaining_levels()
 			)
 		);
-}
-
-void
-sanguis::client::gui::perk::chooser::relayout()
-{
-	gui_area_.position(
-		sge::rucksack::vector(
-			fcppt::cast::size<
-				sge::rucksack::scalar
-			>(
-				fcppt::cast::to_signed(
-					sge::renderer::target::viewport_size(
-						renderer_.onscreen_target()
-					).w()
-				)
-			)
-			-
-			gui_area_.area().w(),
-			0
-		)
-	);
 }

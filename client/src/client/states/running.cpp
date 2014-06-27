@@ -118,6 +118,9 @@ sanguis::client::states::running::running(
 			>().renderer(),
 			this->context<
 				sanguis::client::machine
+			>().viewport_manager(),
+			this->context<
+				sanguis::client::machine
 			>().keyboard(),
 			this->context<
 				sanguis::client::machine

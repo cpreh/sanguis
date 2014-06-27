@@ -17,6 +17,7 @@
 #include <sanguis/client/gui/hud/weapon_widget.hpp>
 #include <sanguis/client/load/resource/textures_fwd.hpp>
 #include <sanguis/gui/default_aspect.hpp>
+#include <sanguis/gui/gravity.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/widget/bar.hpp>
@@ -32,12 +33,11 @@
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/context/ffp.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/renderer/device/ffp.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <sge/rucksack/dim.hpp>
-#include <sge/rucksack/rect.hpp>
-#include <sge/rucksack/vector.hpp>
+#include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/insert_to_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
@@ -48,6 +48,7 @@ sanguis::client::gui::hud::object::object(
 	sanguis::client::load::resource::textures const &_textures,
 	sge::font::object &_font,
 	sge::renderer::device::ffp &_renderer,
+	sge::viewport::manager &_viewport_manager,
 	sge::input::keyboard::device &_keyboard,
 	sge::input::cursor::object &_cursor
 )
@@ -60,6 +61,9 @@ sanguis::client::gui::hud::object::object(
 	),
 	renderer_(
 		_renderer
+	),
+	viewport_manager_(
+		_viewport_manager
 	),
 	keyboard_(
 		_keyboard
@@ -222,8 +226,11 @@ sanguis::client::gui::hud::object::object(
 		main_widget_
 	),
 	gui_area_(
+		_renderer,
+		_viewport_manager,
+		gui_context_,
 		main_widget_,
-		sge::rucksack::vector::null()
+		sanguis::gui::gravity::north_west
 	),
 	weapon_details_()
 {
@@ -495,11 +502,11 @@ sanguis::client::gui::hud::object::create_details()
 		>(
 			resources_,
 			renderer_,
+			viewport_manager_,
 			font_,
 			keyboard_,
 			cursor_,
 			primary_weapon_.weapon_description(),
-			secondary_weapon_.weapon_description(),
-			gui_area_.area()
+			secondary_weapon_.weapon_description()
 		);
 }

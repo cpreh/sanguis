@@ -4,6 +4,8 @@
 #include <sanguis/gui/widget/dummy.hpp>
 #include <sanguis/gui/widget/expander_fwd.hpp>
 #include <sge/rucksack/axis_fwd.hpp>
+#include <sge/rucksack/widget/base_fwd.hpp>
+#include <sge/rucksack/widget/dummy.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -29,6 +31,12 @@ public:
 
 	~expander()
 	override;
+private:
+	sge::rucksack::widget::base &
+	layout()
+	override;
+
+	sge::rucksack::widget::dummy layout_;
 };
 
 }

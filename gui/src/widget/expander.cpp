@@ -9,6 +9,7 @@
 #include <sge/rucksack/optional_scalar.hpp>
 #include <sge/rucksack/preferred_size.hpp>
 #include <sge/rucksack/scalar.hpp>
+#include <sge/rucksack/widget/base_fwd.hpp>
 #include <fcppt/literal.hpp>
 
 
@@ -16,7 +17,8 @@ sanguis::gui::widget::expander::expander(
 	sge::rucksack::axis const _axis
 )
 :
-	sanguis::gui::widget::dummy(
+	sanguis::gui::widget::dummy(),
+	layout_(
 		sge::rucksack::axis_policy2(
 			sge::rucksack::axis_policy(
 				sge::rucksack::minimum_size(
@@ -58,7 +60,13 @@ sanguis::gui::widget::expander::expander(
 {
 }
 
-
 sanguis::gui::widget::expander::~expander()
 {
+}
+
+sge::rucksack::widget::base &
+sanguis::gui::widget::expander::layout()
+{
+	return
+		layout_;
 }

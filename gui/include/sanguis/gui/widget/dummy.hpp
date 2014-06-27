@@ -4,9 +4,6 @@
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/dummy_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <sge/rucksack/axis_policy2_fwd.hpp>
-#include <sge/rucksack/widget/base_fwd.hpp>
-#include <sge/rucksack/widget/dummy.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -25,10 +22,7 @@ class dummy
 		dummy
 	);
 public:
-	explicit
-	dummy(
-		sge::rucksack::axis_policy2 const &
-	);
+	dummy();
 
 	~dummy()
 	override;
@@ -38,12 +32,6 @@ private:
 		sge::renderer::context::ffp &
 	)
 	override;
-
-	sge::rucksack::widget::base &
-	layout()
-	override;
-
-	sge::rucksack::widget::dummy layout_;
 };
 
 }
