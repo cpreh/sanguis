@@ -5,8 +5,10 @@
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/team.hpp>
+#include <sanguis/server/damage/explosive.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
+#include <sanguis/server/entities/modify_damages.hpp>
 #include <sanguis/server/entities/enemies/attribute.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
 #include <sanguis/server/entities/enemies/skills/cooldown.hpp>
@@ -77,6 +79,13 @@ sanguis::server::entities::enemies::skills::scatter::update(
 			env
 		]
 		{
+			sanguis::server::damage::modified_array const damage_modifiers(
+				sanguis::server::entities::modify_damages(
+					_entity,
+					sanguis::server::damage::explosive()
+				)
+			);
+
 			sanguis::server::environment::insert_no_result(
 				*_entity.environment(),
 				fcppt::make_unique_ptr<
@@ -90,7 +99,7 @@ sanguis::server::entities::enemies::skills::scatter::update(
 					),
 					sanguis::server::entities::projectiles::scatter_create(
 						[
-							this
+							damage_modifiers
 						](
 							sanguis::server::environment::object &_env,
 							sanguis::server::team const _team,
@@ -107,6 +116,7 @@ sanguis::server::entities::enemies::skills::scatter::update(
 									sanguis::server::damage::unit(
 										10.f
 									),
+									damage_modifiers,
 									// TODO
 									sanguis::server::aoe(
 										100.f

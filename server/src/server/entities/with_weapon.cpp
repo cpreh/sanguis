@@ -7,6 +7,7 @@
 #include <sanguis/weapon_status.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/weapon_type_to_is_primary.hpp>
+#include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/damage/type.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/optional_with_weapon_ref.hpp>
@@ -327,6 +328,19 @@ sanguis::server::entities::with_weapon::extra_damage(
 		extra_damages_[
 			_damage_type
 		];
+}
+
+sanguis::server::damage::unit const
+sanguis::server::entities::with_weapon::extra_damage_value(
+	sanguis::server::damage::type const _damage_type
+) const
+{
+	return
+		sanguis::server::damage::unit(
+			extra_damages_[
+				_damage_type
+			].current()
+		);
 }
 
 sanguis::server::weapons::ias const

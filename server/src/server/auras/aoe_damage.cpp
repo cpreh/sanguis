@@ -6,7 +6,7 @@
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/collision_group.hpp>
 #include <sanguis/server/auras/influence.hpp>
-#include <sanguis/server/damage/array.hpp>
+#include <sanguis/server/damage/modified_array.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_health.hpp>
@@ -16,7 +16,7 @@ sanguis::server::auras::aoe_damage::aoe_damage(
 	sanguis::server::team const _team,
 	sanguis::server::aoe const _aoe,
 	sanguis::server::damage::unit const _damage,
-	sanguis::server::damage::array const &_damage_values
+	sanguis::server::damage::modified_array const &_damage_values
 )
 :
 	sanguis::server::auras::aura(

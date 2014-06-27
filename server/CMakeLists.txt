@@ -126,6 +126,7 @@ set(
 	include/sanguis/server/damage/basic_meta_fwd.hpp
 	include/sanguis/server/damage/basic_meta_impl.hpp
 	include/sanguis/server/damage/basic_meta_list.hpp
+	include/sanguis/server/damage/explosive.hpp
 	include/sanguis/server/damage/fire.hpp
 	include/sanguis/server/damage/full.hpp
 	include/sanguis/server/damage/ice.hpp
@@ -134,6 +135,10 @@ set(
 	include/sanguis/server/damage/meta.hpp
 	include/sanguis/server/damage/meta_fwd.hpp
 	include/sanguis/server/damage/meta_list.hpp
+	include/sanguis/server/damage/modified_array.hpp
+	include/sanguis/server/damage/modified_array_fwd.hpp
+	include/sanguis/server/damage/modified_unit.hpp
+	include/sanguis/server/damage/modified_unit_fwd.hpp
 	include/sanguis/server/damage/no_armor.hpp
 	include/sanguis/server/damage/normal.hpp
 	include/sanguis/server/damage/piercing.hpp
@@ -142,6 +147,8 @@ set(
 	include/sanguis/server/damage/type_to_string.hpp
 	include/sanguis/server/damage/unit.hpp
 	include/sanguis/server/damage/unit_fwd.hpp
+	include/sanguis/server/damage/unit_value.hpp
+	include/sanguis/server/damage/unmodified.hpp
 	include/sanguis/server/damage/wrapper.hpp
 	include/sanguis/server/damage/wrapper_fwd.hpp
 	include/sanguis/server/dest_world_id.hpp
@@ -233,6 +240,7 @@ set(
 	include/sanguis/server/entities/insert_with_result.hpp
 	include/sanguis/server/entities/is_type.hpp
 	include/sanguis/server/entities/link_container.hpp
+	include/sanguis/server/entities/modify_damages.hpp
 	include/sanguis/server/entities/movement_speed.hpp
 	include/sanguis/server/entities/movement_speed_fwd.hpp
 	include/sanguis/server/entities/movement_speed_initial.hpp
@@ -693,6 +701,7 @@ set(
 	src/server/create.cpp
 	src/server/create_player.cpp
 	src/server/damage/armor_meta.cpp
+	src/server/damage/explosive.cpp
 	src/server/damage/fire.cpp
 	src/server/damage/full.cpp
 	src/server/damage/ice.cpp
@@ -703,6 +712,7 @@ set(
 	src/server/damage/normal.cpp
 	src/server/damage/piercing.cpp
 	src/server/damage/type_to_string.cpp
+	src/server/damage/unmodified.cpp
 	src/server/damage/wrapper.cpp
 	src/server/entities/auto_weak_link.cpp
 	src/server/entities/base.cpp
@@ -759,6 +769,7 @@ set(
 	src/server/entities/ifaces/with_velocity.cpp
 	src/server/entities/insert_parameters.cpp
 	src/server/entities/insert_parameters_center.cpp
+	src/server/entities/modify_damages.cpp
 	src/server/entities/pickups/health.cpp
 	src/server/entities/pickups/monster.cpp
 	src/server/entities/pickups/pickup.cpp

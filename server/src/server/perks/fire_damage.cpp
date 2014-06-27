@@ -41,7 +41,7 @@ sanguis::server::perks::fire_damage::change(
 			sanguis::server::damage::type::fire
 		),
 		sanguis::server::perks::change_factor(
-			0.2f
+			0.3f
 		),
 		_diff
 	);

@@ -2,7 +2,7 @@
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/aoe_damage.hpp>
 #include <sanguis/server/auras/container.hpp>
-#include <sanguis/server/damage/array_fwd.hpp>
+#include <sanguis/server/damage/modified_array_fwd.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/center_ghost.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
@@ -15,7 +15,7 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 	sanguis::server::team const _team,
 	sanguis::server::aoe const _aoe,
 	sanguis::server::damage::unit const _damage,
-	sanguis::server::damage::array const &_damage_values
+	sanguis::server::damage::modified_array const &_damage_values
 )
 :
 	sanguis::server::entities::with_auras(

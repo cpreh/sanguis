@@ -7,6 +7,7 @@
 #include <sanguis/server/buffs/unique_ptr.hpp>
 #include <sanguis/server/damage/array_fwd.hpp>
 #include <sanguis/server/damage/unit.hpp>
+#include <sanguis/server/damage/unmodified.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_health.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -63,8 +64,10 @@ burn_create(
 							*with_health,
 							_interval,
 							_damage,
-							_damage_values
-
+							// TODO: Auras must know their owner to fix this
+							sanguis::server::damage::unmodified(
+								_damage_values
+							)
 						)
 					);
 

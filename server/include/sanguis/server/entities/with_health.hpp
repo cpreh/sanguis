@@ -5,7 +5,7 @@
 #include <sanguis/server/health_fwd.hpp>
 #include <sanguis/server/regeneration_fwd.hpp>
 #include <sanguis/server/damage/armor_array.hpp>
-#include <sanguis/server/damage/array_fwd.hpp>
+#include <sanguis/server/damage/modified_array_fwd.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_health_fwd.hpp>
@@ -38,7 +38,7 @@ public:
 	void
 	damage(
 		sanguis::server::damage::unit,
-		sanguis::server::damage::array const &
+		sanguis::server::damage::modified_array const &
 	);
 
 	void

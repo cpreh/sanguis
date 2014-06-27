@@ -3,7 +3,7 @@
 #include <sanguis/server/regeneration.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/damage/armor_array.hpp>
-#include <sanguis/server/damage/array.hpp>
+#include <sanguis/server/damage/modified_array.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/damage/type.hpp>
 #include <sanguis/server/entities/base.hpp>
@@ -28,7 +28,7 @@
 void
 sanguis::server::entities::with_health::damage(
 	sanguis::server::damage::unit const _damage,
-	sanguis::server::damage::array const &_amounts
+	sanguis::server::damage::modified_array const &_amounts
 )
 {
 	for(

@@ -3,9 +3,7 @@
 #include <sanguis/server/aoe.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/team.hpp>
-#include <sanguis/server/damage/fire.hpp>
-#include <sanguis/server/damage/make_array.hpp>
-#include <sanguis/server/damage/piercing.hpp>
+#include <sanguis/server/damage/modified_array.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
@@ -23,6 +21,7 @@ sanguis::server::entities::projectiles::rocket::rocket(
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::team const _team,
 	sanguis::server::damage::unit const _damage,
+	sanguis::server::damage::modified_array const &_damage_modifiers,
 	sanguis::server::aoe const _aoe,
 	sanguis::server::direction const _direction
 )
@@ -44,6 +43,9 @@ sanguis::server::entities::projectiles::rocket::rocket(
 	),
 	damage_(
 		_damage
+	),
+	damage_modifiers_(
+		_damage_modifiers
 	)
 {
 }
@@ -71,16 +73,7 @@ sanguis::server::entities::projectiles::rocket::remove()
 			this->team(),
 			this->aoe(),
 			damage_,
-			sanguis::server::damage::make_array({
-				sanguis::server::damage::piercing =
-					sanguis::server::damage::unit(
-						0.5f
-					),
-				sanguis::server::damage::fire =
-					sanguis::server::damage::unit(
-						0.5f
-					)
-			})
+			damage_modifiers_
 		),
 		sanguis::server::entities::insert_parameters_center(
 			this->center()

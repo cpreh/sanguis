@@ -7,6 +7,7 @@
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
 #include <sanguis/weapon_status.hpp>
 #include <sanguis/server/damage/basic_array.hpp>
+#include <sanguis/server/damage/unit_fwd.hpp>
 #include <sanguis/server/damage/type_fwd.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
@@ -106,6 +107,11 @@ public:
 	extra_damage(
 		sanguis::server::damage::type
 	);
+
+	sanguis::server::damage::unit const
+	extra_damage_value(
+		sanguis::server::damage::type
+	) const;
 
 	sanguis::server::weapons::ias const
 	ias() const;

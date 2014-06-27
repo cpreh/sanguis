@@ -3,7 +3,7 @@
 
 #include <sanguis/server/aoe_fwd.hpp>
 #include <sanguis/server/team_fwd.hpp>
-#include <sanguis/server/damage/array_fwd.hpp>
+#include <sanguis/server/damage/modified_array_fwd.hpp>
 #include <sanguis/server/damage/unit_fwd.hpp>
 #include <sanguis/server/entities/center_ghost.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
@@ -32,7 +32,7 @@ public:
 		sanguis::server::team,
 		sanguis::server::aoe,
 		sanguis::server::damage::unit,
-		sanguis::server::damage::array const &
+		sanguis::server::damage::modified_array const &
 	);
 
 	~aoe_damage()

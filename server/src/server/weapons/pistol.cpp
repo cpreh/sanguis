@@ -1,8 +1,12 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/weapon_type.hpp>
+#include <sanguis/server/damage/full.hpp>
+#include <sanguis/server/damage/make_array.hpp>
+#include <sanguis/server/damage/piercing.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
+#include <sanguis/server/entities/modify_damages.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/projectiles/simple_bullet.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
@@ -65,6 +69,13 @@ sanguis::server::weapons::pistol::do_attack(
 			_attack.environment().load_context(),
 			this->owner().team(),
 			damage_.value(),
+			sanguis::server::entities::modify_damages(
+				this->owner(),
+				sanguis::server::damage::make_array({
+					sanguis::server::damage::piercing =
+						sanguis::server::damage::full
+				})
+			),
 			sanguis::server::direction(
 				_attack.angle().get()
 			)

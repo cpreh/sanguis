@@ -4,9 +4,6 @@
 #include <sanguis/server/model_name.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/team.hpp>
-#include <sanguis/server/damage/full.hpp>
-#include <sanguis/server/damage/make_array.hpp>
-#include <sanguis/server/damage/piercing.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/with_health.hpp>
@@ -21,6 +18,7 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::team const _team,
 	sanguis::server::damage::unit const _damage,
+	sanguis::server::damage::modified_array const &_damage_modifiers,
 	sanguis::server::direction const _direction
 )
 :
@@ -43,6 +41,9 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 	),
 	damage_(
 		_damage
+	),
+	damage_modifiers_(
+		_damage_modifiers
 	)
 {
 }
@@ -58,10 +59,7 @@ sanguis::server::entities::projectiles::simple_bullet::do_damage(
 {
 	_entity.damage(
 		damage_,
-		sanguis::server::damage::make_array({
-			sanguis::server::damage::piercing =
-				sanguis::server::damage::full
-		})
+		damage_modifiers_
 	);
 
 	this->expire();

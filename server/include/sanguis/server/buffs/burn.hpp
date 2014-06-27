@@ -5,7 +5,7 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/server/buffs/buff.hpp>
 #include <sanguis/server/buffs/burn_interval.hpp>
-#include <sanguis/server/damage/array.hpp>
+#include <sanguis/server/damage/modified_array.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/with_health_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -30,7 +30,7 @@ public:
 		sanguis::server::entities::with_health &,
 		sanguis::server::buffs::burn_interval,
 		sanguis::server::damage::unit,
-		sanguis::server::damage::array const &
+		sanguis::server::damage::modified_array const &
 	);
 
 	~burn()
@@ -56,7 +56,7 @@ private:
 
 	sanguis::server::damage::unit const damage_;
 
-	sanguis::server::damage::array const damage_values_;
+	sanguis::server::damage::modified_array const damage_values_;
 };
 
 }

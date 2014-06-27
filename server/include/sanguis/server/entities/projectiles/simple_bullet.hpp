@@ -3,6 +3,7 @@
 
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/team_fwd.hpp>
+#include <sanguis/server/damage/modified_array.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/with_health_fwd.hpp>
 #include <sanguis/server/entities/projectiles/projectile.hpp>
@@ -31,6 +32,7 @@ public:
 		sanguis::server::environment::load_context &,
 		sanguis::server::team,
 		sanguis::server::damage::unit,
+		sanguis::server::damage::modified_array const &,
 		sanguis::server::direction
 	);
 
@@ -44,6 +46,8 @@ private:
 	override;
 
 	sanguis::server::damage::unit const damage_;
+
+	sanguis::server::damage::modified_array const damage_modifiers_;
 };
 
 }

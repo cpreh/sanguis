@@ -6,7 +6,11 @@
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/space_unit.hpp>
+#include <sanguis/server/damage/full.hpp>
+#include <sanguis/server/damage/make_array.hpp>
+#include <sanguis/server/damage/piercing.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
+#include <sanguis/server/entities/modify_damages.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/projectiles/simple_bullet.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
@@ -115,6 +119,13 @@ sanguis::server::weapons::shotgun::do_attack(
 					_attack.environment().load_context(),
 					this->owner().team(),
 					damage_.value(),
+					sanguis::server::entities::modify_damages(
+						this->owner(),
+						sanguis::server::damage::make_array({
+							sanguis::server::damage::piercing =
+								sanguis::server::damage::full
+						})
+					),
 					sanguis::server::direction(
 						angle.get()
 					)

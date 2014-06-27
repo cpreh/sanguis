@@ -3,7 +3,7 @@
 #include <sanguis/server/buffs/buff.hpp>
 #include <sanguis/server/buffs/burn.hpp>
 #include <sanguis/server/buffs/burn_interval.hpp>
-#include <sanguis/server/damage/array.hpp>
+#include <sanguis/server/damage/modified_array.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/with_health.hpp>
 #include <sge/timer/reset_when_expired.hpp>
@@ -14,7 +14,7 @@ sanguis::server::buffs::burn::burn(
 	sanguis::server::entities::with_health &_entity,
 	sanguis::server::buffs::burn_interval const _interval,
 	sanguis::server::damage::unit const _damage,
-	sanguis::server::damage::array const &_damage_values
+	sanguis::server::damage::modified_array const &_damage_values
 ):
 	entity_(
 		_entity

@@ -6,6 +6,7 @@
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
+#include <sanguis/server/entities/modify_damages.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/projectiles/melee.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
@@ -73,7 +74,10 @@ sanguis::server::weapons::melee::do_attack(
 		>(
 			this->owner().team(),
 			damage_.value(),
-			damage_values_
+			sanguis::server::entities::modify_damages(
+				this->owner(),
+				damage_values_
+			)
 		),
 		sanguis::server::entities::insert_parameters_center(
 			sanguis::server::center(

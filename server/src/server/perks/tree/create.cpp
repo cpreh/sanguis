@@ -90,5 +90,21 @@ sanguis::server::perks::tree::create()
 					)
 				)
 			)
-		).move_container();
+		)(
+			sanguis::server::perks::tree::object(
+				sanguis::server::perks::tree::status(
+					sanguis::perk_type::fire_damage,
+					sanguis::server::perks::tree::required_player_level(
+						0u
+					),
+					sanguis::server::perks::tree::required_parent_level(
+						0u
+					),
+					sanguis::server::perks::tree::max_level(
+						10u
+					)
+				)
+			)
+		)
+		.move_container();
 }

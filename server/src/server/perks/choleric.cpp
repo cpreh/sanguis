@@ -4,10 +4,16 @@
 #include <sanguis/server/aoe.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/space_unit.hpp>
+#include <sanguis/server/damage/explosive.hpp>
+#include <sanguis/server/damage/full.hpp>
+#include <sanguis/server/damage/make_array.hpp>
+#include <sanguis/server/damage/piercing.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
+#include <sanguis/server/entities/modify_damages.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/with_perks.hpp>
+#include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/projectiles/simple_bullet.hpp>
 #include <sanguis/server/entities/projectiles/rocket.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
@@ -84,6 +90,14 @@ sanguis::server::perks::choleric::update(
 		this->level() < rocket_level
 	);
 
+	sanguis::server::entities::with_weapon const &with_weapon(
+		dynamic_cast<
+			sanguis::server::entities::with_weapon const &
+		>(
+			_entity
+		)
+	);
+
 	fcppt::algorithm::repeat(
 		spawn_bullets
 		?
@@ -107,6 +121,7 @@ sanguis::server::perks::choleric::update(
 			this,
 			&_env,
 			&_entity,
+			&with_weapon,
 			spawn_bullets
 		]
 		()
@@ -126,7 +141,14 @@ sanguis::server::perks::choleric::update(
 							_env.load_context(),
 							_entity.team(),
 							sanguis::server::damage::unit(
-								5.f
+								10.f
+							),
+							sanguis::server::entities::modify_damages(
+								with_weapon,
+								sanguis::server::damage::make_array({
+									sanguis::server::damage::piercing =
+										sanguis::server::damage::full
+								})
 							),
 							direction
 						)
@@ -139,7 +161,11 @@ sanguis::server::perks::choleric::update(
 							_env.load_context(),
 							_entity.team(),
 							sanguis::server::damage::unit(
-								6.f
+								15.f
+							),
+							sanguis::server::entities::modify_damages(
+								with_weapon,
+								sanguis::server::damage::explosive()
 							),
 							sanguis::server::aoe(
 								90.f
