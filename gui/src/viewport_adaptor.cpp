@@ -11,6 +11,9 @@ sanguis::gui::viewport_adaptor::viewport_adaptor(
 	sanguis::gui::widget::base &_widget
 )
 :
+	widget_(
+		_widget
+	),
 	impl_(
 		_viewport_manager,
 		_device
@@ -31,4 +34,11 @@ void
 sanguis::gui::viewport_adaptor::relayout()
 {
 	impl_.relayout();
+}
+
+sanguis::gui::widget::base &
+sanguis::gui::viewport_adaptor::widget()
+{
+	return
+		widget_;
 }

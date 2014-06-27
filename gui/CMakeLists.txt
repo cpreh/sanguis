@@ -16,6 +16,8 @@ set(
 	include/sanguis/gui/index_callback.hpp
 	include/sanguis/gui/index_function.hpp
 	include/sanguis/gui/index_fwd.hpp
+	include/sanguis/gui/main_area.hpp
+	include/sanguis/gui/main_area_fwd.hpp
 	include/sanguis/gui/master.hpp
 	include/sanguis/gui/master_fwd.hpp
 	include/sanguis/gui/minimum_size_area.hpp
@@ -115,6 +117,7 @@ set(
 	src/include/sanguis/gui/aux_/style/spacing.hpp
 	src/include/sanguis/gui/aux_/style/text_color.hpp
 	src/include/sanguis/gui/aux_/swap_pair.hpp
+	src/main_area.cpp
 	src/master.cpp
 	src/minimum_size_area.cpp
 	src/needed_width_from_strings.cpp

@@ -97,19 +97,19 @@ sanguis::client::gui::perk::chooser::chooser(
 		sge::rucksack::axis::y,
 		sanguis::gui::default_aspect()
 	),
-	gui_master_(
-		_renderer,
-		_keyboard,
-		_cursor,
-		gui_context_,
-		main_container_
-	),
 	gui_area_(
 		_renderer,
 		_viewport_manager,
 		gui_context_,
 		main_container_,
 		sanguis::gui::gravity::north_east
+	),
+	gui_master_(
+		_renderer,
+		_keyboard,
+		_cursor,
+		gui_context_,
+		gui_area_
 	),
 	perk_connection_(
 		_state.register_perks_change(

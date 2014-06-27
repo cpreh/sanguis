@@ -415,18 +415,18 @@ try
 		sanguis::gui::default_aspect()
 	);
 
+	sanguis::gui::viewport_adaptor viewport_adaptor(
+		sys.renderer_device_ffp(),
+		sys.viewport_manager(),
+		main_widget
+	);
+
 	sanguis::gui::master master(
 		sys.renderer_device_ffp(),
 		sys.keyboard_collector(),
 		sys.cursor_demuxer(),
 		context,
-		main_widget
-	);
-
-	sanguis::gui::viewport_adaptor viewport_adaptor(
-		sys.renderer_device_ffp(),
-		sys.viewport_manager(),
-		main_widget
+		viewport_adaptor
 	);
 
 	typedef

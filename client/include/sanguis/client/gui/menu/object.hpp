@@ -123,9 +123,9 @@ private:
 
 	sanguis::gui::widget::box_container main_container_;
 
-	sanguis::gui::master gui_master_;
-
 	sanguis::gui::viewport_adaptor viewport_adaptor_;
+
+	sanguis::gui::master gui_master_;
 
 	bool connect_running_;
 

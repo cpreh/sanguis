@@ -335,17 +335,17 @@ sanguis::client::gui::menu::object::object(
 		sge::rucksack::axis::y,
 		sanguis::gui::default_aspect()
 	),
+	viewport_adaptor_(
+		_renderer,
+		_viewport_manager,
+		main_container_
+	),
 	gui_master_(
 		_renderer,
 		_keyboard,
 		_cursor,
 		gui_context_,
-		main_container_
-	),
-	viewport_adaptor_(
-		_renderer,
-		_viewport_manager,
-		main_container_
+		viewport_adaptor_
 	),
 	connect_running_{
 		false

@@ -2,6 +2,7 @@
 #define SANGUIS_GUI_MINIMUM_SIZE_AREA_HPP_INCLUDED
 
 #include <sanguis/gui/context_fwd.hpp>
+#include <sanguis/gui/main_area.hpp>
 #include <sanguis/gui/gravity_fwd.hpp>
 #include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/viewport_adaptor.hpp>
@@ -20,6 +21,8 @@ namespace gui
 {
 
 class minimum_size_area
+:
+	public sanguis::gui::main_area
 {
 	FCPPT_NONCOPYABLE(
 		minimum_size_area
@@ -41,6 +44,12 @@ public:
 	void
 	relayout();
 private:
+	sanguis::gui::widget::base &
+	widget()
+	override;
+
+	sanguis::gui::widget::base &widget_;
+
 	sanguis::gui::widget::minimum_size minimum_size_;
 
 	sanguis::gui::widget::expander horizontal_expander_;

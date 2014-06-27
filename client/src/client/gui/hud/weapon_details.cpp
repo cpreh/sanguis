@@ -101,19 +101,19 @@ sanguis::client::gui::hud::weapon_details::weapon_details(
 		sge::rucksack::axis::y,
 		sanguis::gui::default_aspect()
 	),
-	gui_master_(
-		_renderer,
-		_keyboard,
-		_cursor,
-		gui_context_,
-		container_
-	),
 	gui_area_(
 		_renderer,
 		_viewport_manager,
 		gui_context_,
 		container_,
 		sanguis::gui::gravity::south_west
+	),
+	gui_master_(
+		_renderer,
+		_keyboard,
+		_cursor,
+		gui_context_,
+		gui_area_
 	)
 {
 }

@@ -92,9 +92,9 @@ private:
 
 	sanguis::gui::widget::box_container main_container_;
 
-	sanguis::gui::master gui_master_;
-
 	sanguis::gui::minimum_size_area gui_area_;
+
+	sanguis::gui::master gui_master_;
 
 	fcppt::signal::scoped_connection const
 		perk_connection_,

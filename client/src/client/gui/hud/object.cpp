@@ -218,19 +218,19 @@ sanguis::client::gui::hud::object::object(
 		sge::rucksack::axis::y,
 		sanguis::gui::default_aspect()
 	),
-	gui_master_(
-		_renderer,
-		_keyboard,
-		_cursor,
-		gui_context_,
-		main_widget_
-	),
 	gui_area_(
 		_renderer,
 		_viewport_manager,
 		gui_context_,
 		main_widget_,
 		sanguis::gui::gravity::north_west
+	),
+	gui_master_(
+		_renderer,
+		_keyboard,
+		_cursor,
+		gui_context_,
+		gui_area_
 	),
 	weapon_details_()
 {

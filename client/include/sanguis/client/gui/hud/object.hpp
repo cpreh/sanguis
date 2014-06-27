@@ -175,9 +175,9 @@ private:
 
 	sanguis::gui::widget::box_container main_widget_;
 
-	sanguis::gui::master gui_master_;
-
 	sanguis::gui::minimum_size_area gui_area_;
+
+	sanguis::gui::master gui_master_;
 
 	typedef
 	std::unique_ptr<

@@ -2,8 +2,8 @@
 #define SANGUIS_GUI_MASTER_HPP_INCLUDED
 
 #include <sanguis/gui/duration.hpp>
-#include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/context_fwd.hpp>
+#include <sanguis/gui/main_area_fwd.hpp>
 #include <sanguis/gui/master_fwd.hpp>
 #include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/widget/base_fwd.hpp>
@@ -39,7 +39,7 @@ public:
 		sge::input::keyboard::device &,
 		sge::input::cursor::object &,
 		sanguis::gui::context &,
-		sanguis::gui::widget::base &
+		sanguis::gui::main_area &
 	);
 
 	SANGUIS_GUI_SYMBOL

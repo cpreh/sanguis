@@ -23,6 +23,9 @@ sanguis::gui::minimum_size_area::minimum_size_area(
 	sanguis::gui::gravity const _gravity
 )
 :
+	widget_(
+		_widget
+	),
 	minimum_size_(
 		_widget
 	),
@@ -96,4 +99,11 @@ void
 sanguis::gui::minimum_size_area::relayout()
 {
 	viewport_adaptor_.relayout();
+}
+
+sanguis::gui::widget::base &
+sanguis::gui::minimum_size_area::widget()
+{
+	return
+		widget_;
 }

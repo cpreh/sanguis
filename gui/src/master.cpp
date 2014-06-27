@@ -1,5 +1,6 @@
 #include <sanguis/gui/context.hpp>
 #include <sanguis/gui/duration.hpp>
+#include <sanguis/gui/main_area.hpp>
 #include <sanguis/gui/master.hpp>
 #include <sanguis/gui/aux_/fill_rect.hpp>
 #include <sanguis/gui/widget/base.hpp>
@@ -38,7 +39,7 @@ sanguis::gui::master::master(
 	sge::input::keyboard::device &_keyboard,
 	sge::input::cursor::object &_cursor,
 	sanguis::gui::context &_context,
-	sanguis::gui::widget::base &_widget
+	sanguis::gui::main_area &_main_area
 )
 :
 	renderer_(
@@ -51,7 +52,7 @@ sanguis::gui::master::master(
 		_context
 	),
 	widget_(
-		_widget
+		_main_area.widget()
 	),
 	key_connection_(
 		_keyboard.key_callback(

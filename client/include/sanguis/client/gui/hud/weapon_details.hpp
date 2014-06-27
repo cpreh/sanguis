@@ -72,9 +72,9 @@ private:
 
 	sanguis::gui::widget::box_container container_;
 
-	sanguis::gui::master gui_master_;
-
 	sanguis::gui::minimum_size_area gui_area_;
+
+	sanguis::gui::master gui_master_;
 };
 
 }
