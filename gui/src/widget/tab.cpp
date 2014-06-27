@@ -1,6 +1,7 @@
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
+#include <sanguis/gui/aux_/relayout_ancestor.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/button.hpp>
 #include <sanguis/gui/widget/reference.hpp>
@@ -87,7 +88,9 @@ sanguis::gui::widget::tab::tab(
 										)
 									);
 
-									_self.layout().relayout();
+									sanguis::gui::aux_::relayout_ancestor(
+										_self
+									);
 								}
 							)
 						)

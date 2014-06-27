@@ -92,6 +92,7 @@ set(
 	src/aux_/gravity_east.cpp
 	src/aux_/gravity_south.cpp
 	src/aux_/make_container_pair.cpp
+	src/aux_/relayout_ancestor.cpp
 	src/aux_/shrink_rect.cpp
 	src/aux_/style/background_color.cpp
 	src/aux_/style/border_color.cpp
@@ -104,6 +105,7 @@ set(
 	src/include/sanguis/gui/aux_/gravity_east.hpp
 	src/include/sanguis/gui/aux_/gravity_south.hpp
 	src/include/sanguis/gui/aux_/make_container_pair.hpp
+	src/include/sanguis/gui/aux_/relayout_ancestor.hpp
 	src/include/sanguis/gui/aux_/shrink_rect.hpp
 	src/include/sanguis/gui/aux_/sprite_type_choices.hpp
 	src/include/sanguis/gui/aux_/style/background_color.hpp

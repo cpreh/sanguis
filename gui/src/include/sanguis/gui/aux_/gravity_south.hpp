@@ -2,7 +2,6 @@
 #define SANGUIS_GUI_AUX__GRAVITY_SOUTH_HPP_INCLUDED
 
 #include <sanguis/gui/gravity_fwd.hpp>
-#include <fcppt/strong_typedef.hpp>
 
 
 namespace sanguis
