@@ -12,6 +12,7 @@ enum class perk_type
 	choleric,
 	health,
 	fire_damage,
+	piercing_damage,
 	ias,
 	ims,
 	irs,

@@ -9,6 +9,7 @@
 #include <sanguis/server/perks/ims.hpp>
 #include <sanguis/server/perks/irs.hpp>
 #include <sanguis/server/perks/perk.hpp>
+#include <sanguis/server/perks/piercing_damage.hpp>
 #include <sanguis/server/perks/unique_ptr.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/assert/unreachable.hpp>
@@ -42,6 +43,11 @@ sanguis::server::perks::create(
 		return
 			fcppt::make_unique_ptr<
 				sanguis::server::perks::fire_damage
+			>();
+	case sanguis::perk_type::piercing_damage:
+		return
+			fcppt::make_unique_ptr<
+				sanguis::server::perks::piercing_damage
 			>();
 	case sanguis::perk_type::ias:
 		return

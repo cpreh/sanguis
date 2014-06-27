@@ -418,6 +418,7 @@ set(
 	include/sanguis/server/perks/change_factor.hpp
 	include/sanguis/server/perks/change_simple.hpp
 	include/sanguis/server/perks/choleric.hpp
+	include/sanguis/server/perks/constant_damage_change.hpp
 	include/sanguis/server/perks/create.hpp
 	include/sanguis/server/perks/fire_damage.hpp
 	include/sanguis/server/perks/health.hpp
@@ -427,6 +428,7 @@ set(
 	include/sanguis/server/perks/level_diff.hpp
 	include/sanguis/server/perks/perk.hpp
 	include/sanguis/server/perks/perk_fwd.hpp
+	include/sanguis/server/perks/piercing_damage.hpp
 	include/sanguis/server/perks/tree/choosable.hpp
 	include/sanguis/server/perks/tree/choose.hpp
 	include/sanguis/server/perks/tree/container.hpp
@@ -851,6 +853,7 @@ set(
 	src/server/object.cpp
 	src/server/object_base.cpp
 	src/server/perks/choleric.cpp
+	src/server/perks/constant_damage_change.cpp
 	src/server/perks/create.cpp
 	src/server/perks/fire_damage.cpp
 	src/server/perks/health.cpp
@@ -858,6 +861,7 @@ set(
 	src/server/perks/ims.cpp
 	src/server/perks/irs.cpp
 	src/server/perks/perk.cpp
+	src/server/perks/piercing_damage.cpp
 	src/server/perks/tree/choosable.cpp
 	src/server/perks/tree/choose.cpp
 	src/server/perks/tree/create.cpp

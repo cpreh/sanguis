@@ -23,6 +23,9 @@ sanguis::client::perk::to_string(
 	case sanguis::perk_type::fire_damage:
 		return
 			FCPPT_TEXT("fire damage");
+	case sanguis::perk_type::piercing_damage:
+		return
+			FCPPT_TEXT("piercing damage");
 	case sanguis::perk_type::ias:
 		return
 			FCPPT_TEXT("increased attack speed");

@@ -13,11 +13,11 @@ sanguis::server::damage::explosive()
 		sanguis::server::damage::make_array({
 			sanguis::server::damage::piercing =
 				sanguis::server::damage::unit(
-					0.5f
+					0.3f
 				),
 			sanguis::server::damage::fire =
 				sanguis::server::damage::unit(
-					0.5f
+					0.7f
 				)
 		});
 }

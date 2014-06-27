@@ -105,6 +105,21 @@ sanguis::server::perks::tree::create()
 					)
 				)
 			)
+		)(
+			sanguis::server::perks::tree::object(
+				sanguis::server::perks::tree::status(
+					sanguis::perk_type::piercing_damage,
+					sanguis::server::perks::tree::required_player_level(
+						0u
+					),
+					sanguis::server::perks::tree::required_parent_level(
+						0u
+					),
+					sanguis::server::perks::tree::max_level(
+						10u
+					)
+				)
+			)
 		)
 		.move_container();
 }
