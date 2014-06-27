@@ -28,7 +28,7 @@
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/pickups/weapon_ref.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
-#include <sanguis/server/perks/tree/object_unique_ptr.hpp>
+#include <sanguis/server/perks/tree/container.hpp>
 #include <sanguis/server/weapons/weapon_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/reference_wrapper_comparison.hpp>
@@ -103,7 +103,7 @@ public:
 		sanguis::is_primary_weapon
 	);
 
-	sanguis::server::perks::tree::object const &
+	sanguis::server::perks::tree::container const &
 	perk_tree() const;
 
 	sanguis::server::skill_points const
@@ -201,7 +201,7 @@ private:
 
 	sanguis::server::skill_points skill_points_;
 
-	sanguis::server::perks::tree::object_unique_ptr const perk_tree_;
+	sanguis::server::perks::tree::container perk_tree_;
 
 	sanguis::server::speed desired_speed_;
 

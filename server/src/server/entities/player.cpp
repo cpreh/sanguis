@@ -66,7 +66,7 @@
 #include <sanguis/server/perks/tree/create.hpp>
 #include <sanguis/server/perks/tree/choosable.hpp>
 #include <sanguis/server/perks/tree/choose.hpp>
-#include <sanguis/server/perks/tree/object.hpp>
+#include <sanguis/server/perks/tree/container.hpp>
 #include <sanguis/server/perks/tree/status.hpp>
 #include <sanguis/server/weapons/default_ias.hpp>
 #include <sanguis/server/weapons/default_irs.hpp>
@@ -279,7 +279,7 @@ sanguis::server::entities::player::perk_choosable(
 		skill_points_.get() > 0u
 		&&
 		sanguis::server::perks::tree::choosable(
-			*perk_tree_,
+			perk_tree_,
 			_perk,
 			level_
 		);
@@ -291,7 +291,7 @@ sanguis::server::entities::player::add_perk(
 )
 {
 	sanguis::server::perks::tree::choose(
-		*perk_tree_,
+		perk_tree_,
 		_type
 	);
 
@@ -378,11 +378,11 @@ sanguis::server::entities::player::drop_or_pickup_weapon(
 		);
 }
 
-sanguis::server::perks::tree::object const &
+sanguis::server::perks::tree::container const &
 sanguis::server::entities::player::perk_tree() const
 {
 	return
-		*perk_tree_;
+		perk_tree_;
 }
 
 sanguis::server::skill_points const

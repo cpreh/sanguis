@@ -421,17 +421,17 @@ set(
 	include/sanguis/server/perks/perk_fwd.hpp
 	include/sanguis/server/perks/tree/choosable.hpp
 	include/sanguis/server/perks/tree/choose.hpp
+	include/sanguis/server/perks/tree/container.hpp
 	include/sanguis/server/perks/tree/create.hpp
-	include/sanguis/server/perks/tree/equal.hpp
+	include/sanguis/server/perks/tree/find_node.hpp
 	include/sanguis/server/perks/tree/max_level.hpp
 	include/sanguis/server/perks/tree/object.hpp
 	include/sanguis/server/perks/tree/object_fwd.hpp
-	include/sanguis/server/perks/tree/optional_status.hpp
-	include/sanguis/server/perks/tree/optional_status_fwd.hpp
 	include/sanguis/server/perks/tree/required_parent_level.hpp
 	include/sanguis/server/perks/tree/required_player_level.hpp
 	include/sanguis/server/perks/tree/status.hpp
 	include/sanguis/server/perks/tree/status_fwd.hpp
+	include/sanguis/server/perks/tree/type_from_container.hpp
 	include/sanguis/server/perks/unique_ptr.hpp
 	include/sanguis/server/pickup_probability.hpp
 	include/sanguis/server/player_id.hpp
@@ -850,7 +850,6 @@ set(
 	src/server/perks/tree/choosable.cpp
 	src/server/perks/tree/choose.cpp
 	src/server/perks/tree/create.cpp
-	src/server/perks/tree/equal.cpp
 	src/server/perks/tree/status.cpp
 	src/server/player_id_from_args.cpp
 	src/server/player_id_from_net.cpp
