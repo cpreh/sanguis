@@ -11,6 +11,7 @@ enum class perk_type
 {
 	choleric,
 	health,
+	fire_damage,
 	ias,
 	ims,
 	irs,

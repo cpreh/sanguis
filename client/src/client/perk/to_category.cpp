@@ -19,6 +19,9 @@ sanguis::client::perk::to_category(
 	case sanguis::perk_type::health:
 		return
 			sanguis::client::perk::category::survival;
+	case sanguis::perk_type::fire_damage:
+		return
+			sanguis::client::perk::category::attack;
 	case sanguis::perk_type::ias:
 		return
 			sanguis::client::perk::category::attack;

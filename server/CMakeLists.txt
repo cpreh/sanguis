@@ -411,6 +411,7 @@ set(
 	include/sanguis/server/perks/change_simple.hpp
 	include/sanguis/server/perks/choleric.hpp
 	include/sanguis/server/perks/create.hpp
+	include/sanguis/server/perks/fire_damage.hpp
 	include/sanguis/server/perks/health.hpp
 	include/sanguis/server/perks/ias.hpp
 	include/sanguis/server/perks/ims.hpp
@@ -425,7 +426,6 @@ set(
 	include/sanguis/server/perks/tree/max_level.hpp
 	include/sanguis/server/perks/tree/object.hpp
 	include/sanguis/server/perks/tree/object_fwd.hpp
-	include/sanguis/server/perks/tree/object_unique_ptr.hpp
 	include/sanguis/server/perks/tree/optional_status.hpp
 	include/sanguis/server/perks/tree/optional_status_fwd.hpp
 	include/sanguis/server/perks/tree/required_parent_level.hpp
@@ -841,6 +841,7 @@ set(
 	src/server/object_base.cpp
 	src/server/perks/choleric.cpp
 	src/server/perks/create.cpp
+	src/server/perks/fire_damage.cpp
 	src/server/perks/health.cpp
 	src/server/perks/ias.cpp
 	src/server/perks/ims.cpp

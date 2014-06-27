@@ -15,15 +15,23 @@ sanguis::client::perk::to_string(
 	)
 	{
 	case sanguis::perk_type::choleric:
-		return FCPPT_TEXT("choleric");
+		return
+			FCPPT_TEXT("choleric");
 	case sanguis::perk_type::health:
-		return FCPPT_TEXT("health");
+		return
+			FCPPT_TEXT("health");
+	case sanguis::perk_type::fire_damage:
+		return
+			FCPPT_TEXT("fire damage");
 	case sanguis::perk_type::ias:
-		return FCPPT_TEXT("ias");
+		return
+			FCPPT_TEXT("increased attack speed");
 	case sanguis::perk_type::ims:
-		return FCPPT_TEXT("ims");
+		return
+			FCPPT_TEXT("increased movement speed");
 	case sanguis::perk_type::irs:
-		return FCPPT_TEXT("irs");
+		return
+			FCPPT_TEXT("increased reload speed");
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;
