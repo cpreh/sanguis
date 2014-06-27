@@ -38,7 +38,8 @@ public:
 	);
 
 	SANGUIS_GUI_SYMBOL
-	~minimum_size_area();
+	~minimum_size_area()
+	override;
 
 	SANGUIS_GUI_SYMBOL
 	void
