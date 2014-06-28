@@ -21,6 +21,7 @@
 #include <sanguis/gui/minimum_size_area.hpp>
 #include <sanguis/gui/widget/bar.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
+#include <sanguis/gui/widget/expander.hpp>
 #include <sanguis/gui/widget/text.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
@@ -158,6 +159,8 @@ private:
 		sanguis::gui::widget::text world_name_text_;
 
 			sanguis::gui::widget::text player_name_text_;
+
+			sanguis::gui::widget::expander name_level_gap_;
 
 			sanguis::gui::widget::text level_text_;
 

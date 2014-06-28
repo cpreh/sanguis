@@ -1,6 +1,7 @@
 #ifndef SANGUIS_GUI_WIDGET_EXPANDER_HPP_INCLUDED
 #define SANGUIS_GUI_WIDGET_EXPANDER_HPP_INCLUDED
 
+#include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/widget/dummy.hpp>
 #include <sanguis/gui/widget/expander_fwd.hpp>
 #include <sge/rucksack/axis_fwd.hpp>
@@ -24,11 +25,13 @@ class expander
 		expander
 	);
 public:
+	SANGUIS_GUI_SYMBOL
 	explicit
 	expander(
 		sge::rucksack::axis
 	);
 
+	SANGUIS_GUI_SYMBOL
 	~expander()
 	override;
 private:

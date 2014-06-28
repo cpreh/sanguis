@@ -100,6 +100,9 @@ sanguis::client::gui::hud::object::object(
 		),
 		sanguis::gui::optional_needed_width()
 	),
+	name_level_gap_(
+		sge::rucksack::axis::x
+	),
 	level_text_(
 		_renderer,
 		_font,
@@ -120,9 +123,15 @@ sanguis::client::gui::hud::object::object(
 			),
 			sanguis::gui::widget::reference_alignment_pair(
 				sanguis::gui::widget::reference(
+					name_level_gap_
+				),
+				sge::rucksack::alignment::left_or_top
+			),
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
 					level_text_
 				),
-				sge::rucksack::alignment::right_or_bottom
+				sge::rucksack::alignment::left_or_top
 			)
 		},
 		sge::rucksack::axis::x,
