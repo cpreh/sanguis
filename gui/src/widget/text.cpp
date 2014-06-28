@@ -1,13 +1,16 @@
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
+#include <sanguis/gui/aux_/relayout_ancestor.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/text.hpp>
 #include <sge/font/metrics.hpp>
 #include <sge/font/object.hpp>
 #include <sge/font/string.hpp>
+#include <sge/font/text.hpp>
 #include <sge/font/text_parameters.hpp>
 #include <sge/font/v_center.hpp>
 #include <sge/font/vector.hpp>
+#include <sge/font/align_h/left.hpp>
 #include <sge/font/align_h/center.hpp>
 #include <sge/font/align_h/max_width.hpp>
 #include <sge/font/draw/simple.hpp>
@@ -44,26 +47,15 @@ sanguis::gui::widget::text::text(
 	text_color_(
 		_text_color
 	),
+	needed_width_(
+		_needed_width
+	),
 	value_(
 		_value
 	),
 	layout_(
 		sge::rucksack::axis_policy2(
-			sge::rucksack::axis_policy(
-				sge::rucksack::minimum_size(
-					_needed_width
-					?
-						_needed_width->get()
-					:
-						0
-				),
-				sge::rucksack::preferred_size(
-					sge::rucksack::optional_scalar()
-				),
-				sge::rucksack::is_expanding(
-					!_needed_width.has_value()
-				)
-			),
+			this->horizontal_policy(),
 			sge::rucksack::axis_policy(
 				sge::rucksack::minimum_size(
 					font_.metrics().height().get()
@@ -92,6 +84,18 @@ sanguis::gui::widget::text::value(
 {
 	value_ =
 		_value;
+
+	layout_.axis_policy(
+		sge::rucksack::axis_policy2(
+			this->horizontal_policy(),
+			layout_.axis_policy().y(),
+			sanguis::gui::default_aspect()
+		)
+	);
+
+	sanguis::gui::aux_::relayout_ancestor(
+		*this
+	);
 }
 
 void
@@ -143,4 +147,31 @@ sanguis::gui::widget::text::on_draw(
 		text_color_.get(),
 		sge::renderer::texture::emulate_srgb::no
 	);
+}
+
+
+sge::rucksack::axis_policy
+sanguis::gui::widget::text::horizontal_policy() const
+{
+	return
+		sge::rucksack::axis_policy(
+			sge::rucksack::minimum_size(
+				needed_width_
+				?
+					needed_width_->get()
+				:
+					font_.create_text(
+						value_,
+						sge::font::text_parameters(
+							sge::font::align_h::left()
+						)
+					)->logical_size().w()
+			),
+			sge::rucksack::preferred_size(
+				sge::rucksack::optional_scalar()
+			),
+			sge::rucksack::is_expanding(
+				false
+			)
+		);
 }

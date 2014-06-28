@@ -138,9 +138,6 @@ sanguis::gui::widget::tab::tab(
 		),
 		sge::rucksack::axis::x,
 		sanguis::gui::default_aspect()
-	),
-	expander_(
-		sge::rucksack::axis::y
 	)
 {
 	this->push_back(
@@ -161,15 +158,6 @@ sanguis::gui::widget::tab::tab(
 				sge::rucksack::alignment::left_or_top
 			)
 		);
-
-	this->push_back(
-		sanguis::gui::widget::reference_alignment_pair(
-			sanguis::gui::widget::reference(
-				expander_
-			),
-			sge::rucksack::alignment::left_or_top
-		)
-	);
 }
 
 sanguis::gui::widget::tab::~tab()

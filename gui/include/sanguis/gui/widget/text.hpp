@@ -1,7 +1,7 @@
 #ifndef SANGUIS_GUI_WIDGET_TEXT_HPP_INCLUDED
 #define SANGUIS_GUI_WIDGET_TEXT_HPP_INCLUDED
 
-#include <sanguis/gui/optional_needed_width_fwd.hpp>
+#include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/widget/base.hpp>
@@ -10,6 +10,7 @@
 #include <sge/font/string.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/rucksack/axis_policy_fwd.hpp>
 #include <sge/rucksack/widget/base_fwd.hpp>
 #include <sge/rucksack/widget/dummy.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -66,11 +67,16 @@ private:
 	)
 	override;
 
+	sge::rucksack::axis_policy
+	horizontal_policy() const;
+
 	sge::renderer::device::ffp &renderer_;
 
 	sge::font::object &font_;
 
 	sanguis::gui::text_color text_color_;
+
+	sanguis::gui::optional_needed_width const needed_width_;
 
 	sge::font::string value_;
 
