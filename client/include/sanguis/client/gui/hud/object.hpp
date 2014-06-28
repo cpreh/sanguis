@@ -176,6 +176,8 @@ private:
 
 		sanguis::gui::widget::box_container weapon_container_;
 
+		sanguis::gui::widget::expander bottom_expander_;
+
 	sanguis::gui::widget::box_container main_widget_;
 
 	sanguis::gui::minimum_size_area gui_area_;

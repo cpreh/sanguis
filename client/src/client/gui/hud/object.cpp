@@ -190,6 +190,9 @@ sanguis::client::gui::hud::object::object(
 		sge::rucksack::axis::x,
 		sanguis::gui::default_aspect()
 	),
+	bottom_expander_(
+		sge::rucksack::axis::y
+	),
 	main_widget_(
 		gui_context_,
 		sanguis::gui::widget::reference_alignment_vector{
@@ -203,23 +206,29 @@ sanguis::client::gui::hud::object::object(
 				sanguis::gui::widget::reference(
 					top_container_
 				),
-				sge::rucksack::alignment::left_or_top
+				sge::rucksack::alignment::center
 			),
 			sanguis::gui::widget::reference_alignment_pair(
 				sanguis::gui::widget::reference(
 					exp_bar_
 				),
-				sge::rucksack::alignment::left_or_top
+				sge::rucksack::alignment::center
 			),
 			sanguis::gui::widget::reference_alignment_pair(
 				sanguis::gui::widget::reference(
 					health_bar_
 				),
-				sge::rucksack::alignment::left_or_top
+				sge::rucksack::alignment::center
 			),
 			sanguis::gui::widget::reference_alignment_pair(
 				sanguis::gui::widget::reference(
 					weapon_container_
+				),
+				sge::rucksack::alignment::left_or_top
+			),
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					bottom_expander_
 				),
 				sge::rucksack::alignment::left_or_top
 			)
