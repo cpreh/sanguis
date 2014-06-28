@@ -223,7 +223,7 @@ sanguis::client::gui::hud::object::object(
 		_viewport_manager,
 		gui_context_,
 		main_widget_,
-		sanguis::gui::gravity::north_west
+		sanguis::gui::gravity::north_east
 	),
 	gui_master_(
 		_renderer,

@@ -69,9 +69,6 @@ private:
 	sge::font::string
 	make_top_text() const;
 
-	void
-	relayout();
-
 	sanguis::client::perk::state &state_;
 
 	sge::renderer::device::ffp &renderer_;
