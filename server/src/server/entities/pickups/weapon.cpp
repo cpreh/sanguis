@@ -1,9 +1,16 @@
+#include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/collision/world/group.hpp>
 #include <sanguis/load/weapon_pickup_name.hpp>
+#include <sanguis/messages/convert/to_magazine_size.hpp>
+#include <sanguis/messages/convert/to_weapon_attribute_vector.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/center.hpp>
 #include <sanguis/messages/roles/entity_id.hpp>
+#include <sanguis/messages/roles/magazine_base_size.hpp>
+#include <sanguis/messages/roles/magazine_extra_size.hpp>
+#include <sanguis/messages/roles/magazine_remaining.hpp>
+#include <sanguis/messages/roles/weapon_attribute_container.hpp>
 #include <sanguis/messages/roles/weapon_type.hpp>
 #include <sanguis/messages/server/add_weapon_pickup.hpp>
 #include <sanguis/messages/server/create_ptr.hpp>
@@ -103,6 +110,10 @@ sanguis::server::entities::pickups::weapon::add_message(
 	sanguis::server::player_id const
 ) const
 {
+	sanguis::weapon_description const description(
+		weapon_->description()
+	);
+
 	return
 		sanguis::messages::server::create_ptr(
 			sanguis::messages::server::add_weapon_pickup(
@@ -113,7 +124,25 @@ sanguis::server::entities::pickups::weapon::add_message(
 				sanguis::messages::roles::angle{} =
 					this->angle().get(),
 				sanguis::messages::roles::weapon_type{} =
-					weapon_->type()
+					weapon_->type(),
+				// TODO: Unify this with give_weapon
+				sanguis::messages::roles::magazine_base_size{} =
+					sanguis::messages::convert::to_magazine_size(
+						description.magazine_size().get()
+					),
+				sanguis::messages::roles::magazine_extra_size{} =
+					sanguis::messages::convert::to_magazine_size(
+						description.magazine_extra().get()
+					),
+				sanguis::messages::roles::magazine_remaining{} =
+					sanguis::messages::convert::to_magazine_size(
+						description.magazine_remaining().get()
+					),
+				sanguis::messages::roles::weapon_attribute_container{} =
+					sanguis::messages::convert::to_weapon_attribute_vector(
+						description.attributes()
+					)
+
 			)
 		);
 }
