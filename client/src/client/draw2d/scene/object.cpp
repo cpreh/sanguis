@@ -87,6 +87,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map_iteration_second.hpp>
 #include <fcppt/algorithm/sequence_iteration.hpp>
+#include <fcppt/container/find_exn.hpp>
 #include <fcppt/math/matrix/arithmetic.hpp>
 #include <fcppt/math/matrix/translation.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -633,26 +634,25 @@ sanguis::client::draw2d::scene::object::entity(
 	sanguis::entity_id const _id
 )
 {
-	entity_map::iterator const it(
-		entities_.find(
-			_id
-		)
-	);
-
-	if(
-		it == entities_.end()
-	)
-		throw sanguis::exception(
-			(
-				fcppt::format(
-					FCPPT_TEXT("Object with id %1% not in entity map!")
-				)
-				% _id
-			).str()
-		);
-
 	return
-		*it->second;
+		*fcppt::container::find_exn(
+			entities_,
+			_id,
+			[
+				_id
+			]{
+				return
+					sanguis::exception{
+						(
+							fcppt::format(
+								FCPPT_TEXT("Object with id %1% not in entity map!")
+							)
+							% _id
+						)
+						.str()
+					};
+			}
+		);
 }
 
 sanguis::client::draw2d::optional_translation const
