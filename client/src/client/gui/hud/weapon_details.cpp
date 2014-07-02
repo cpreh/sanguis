@@ -20,11 +20,11 @@
 #include <sge/rucksack/vector.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/algorithm/fold.hpp>
+#include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/algorithm/map.hpp>
+#include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <utility>
-#include <vector>
+#include <array>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -41,40 +41,45 @@ sanguis::client::gui::hud::weapon_details::weapon_details(
 :
 	gui_context_(),
 	tooltips_(
-		fcppt::algorithm::fold(
-			std::vector<
-				sanguis::optional_weapon_description
-			>{
+		fcppt::algorithm::map_optional<
+			tooltip_vector
+		>(
+			std::array<
+				sanguis::optional_weapon_description,
+				2
+			>{{
 				_weapon1,
 				_weapon2
-			},
-			tooltip_vector(),
+			}},
 			[
 				this,
 				&_renderer,
 				&_font
 			](
-				sanguis::optional_weapon_description const &_desc,
-				tooltip_vector &&_state
+				sanguis::optional_weapon_description const &_desc
 			)
 			{
-				if(
-					_desc
-				)
-					_state.push_back(
-						fcppt::make_unique_ptr<
-							sanguis::client::gui::hud::weapon_tooltip
-						>(
-							gui_context_,
-							_renderer,
-							_font,
-							*_desc
-						)
-					);
-
 				return
-					std::move(
-						_state
+					fcppt::optional_bind_construct(
+						_desc,
+						[
+							this,
+							&_renderer,
+							&_font
+						](
+							sanguis::weapon_description const &_ndesc
+						)
+						{
+							return
+								fcppt::make_unique_ptr<
+									sanguis::client::gui::hud::weapon_tooltip
+								>(
+									gui_context_,
+									_renderer,
+									_font,
+									_ndesc
+								);
+						}
 					);
 			}
 		)
