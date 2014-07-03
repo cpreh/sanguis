@@ -1,28 +1,64 @@
 {
-	"cell_dimensions":[96,48],
-	"delay":20,
-	"texture":"default_none.png",
-	"parts":{
-		"default":{
-			"weapon_categories":{
-				"none":{
-					"animations":{
-						"attacking":{
-							"range":[0,25],
-							"sound":"hit/hit.ogg"
-						},
-						"dying":{
-							"range":[25,35]
-						},
-						"none":{
-							"range":[25,26]
-						},
-						"walking":{
-							"range":[35,95]
+	"parts" :
+		{
+			"default" :
+				{
+					"weapon_categories" :
+						{
+							"none" :
+								{
+									"animations" :
+										{
+											"walking" :
+												{
+													"texture" :
+														"0.png",
+													"range" :
+														[
+															54,
+															72
+														]
+												},
+											"none" :
+												{
+													"texture" :
+														"0.png",
+													"range" :
+														[
+															53,
+															54
+														]
+												},
+											"attacking" :
+												{
+													"texture" :
+														"0.png",
+													"range" :
+														[
+															0,
+															34
+														]
+												},
+											"dying" :
+												{
+													"texture" :
+														"0.png",
+													"range" :
+														[
+															34,
+															53
+														]
+												}
+										}
+								}
 						}
-					}
 				}
-			}
-		}
-	}
+		},
+	"delay" :
+		41,
+	"cell_dimensions" :
+		[
+			96,
+			96
+		]
 }

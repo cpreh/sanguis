@@ -78,7 +78,7 @@ sanguis::creator::aux_::place_spawners(
 		};
 
 		FCPPT_ASSERT_ERROR_MESSAGE(
-			candidate.has_value(),
+			candidate,
 			FCPPT_TEXT(
 				"Could not find a free tile anywhere!"
 			)
