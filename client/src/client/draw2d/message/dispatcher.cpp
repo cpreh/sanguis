@@ -10,8 +10,8 @@
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/entities/base.hpp>
-#include <sanguis/client/draw2d/entities/name.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
+#include <sanguis/client/draw2d/entities/hover/name.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_auras.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_buffs.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_center.hpp>
@@ -214,7 +214,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 			_message.get<
 				sanguis::messages::roles::buff_type_container
 			>(),
-			sanguis::client::draw2d::entities::name(
+			sanguis::client::draw2d::entities::hover::name(
 				sge::charconv::utf8_string_to_fcppt(
 					_message.get<
 						sanguis::messages::roles::name
@@ -315,7 +315,7 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 			sanguis::client::draw2d::message::health_pair(
 				_message
 			),
-			sanguis::client::draw2d::entities::name(
+			sanguis::client::draw2d::entities::hover::name(
 				sge::charconv::utf8_string_to_fcppt(
 					_message.get<
 						sanguis::messages::roles::name

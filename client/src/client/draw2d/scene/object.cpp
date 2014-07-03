@@ -6,8 +6,8 @@
 #include <sanguis/client/sound_manager_fwd.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/client/control/attack_dest.hpp>
+#include <sanguis/client/control/cursor_position.hpp>
 #include <sanguis/client/control/optional_attack_dest.hpp>
-#include <sanguis/client/control/optional_cursor_position.hpp>
 #include <sanguis/client/draw2d/center.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
@@ -18,19 +18,23 @@
 #include <sanguis/client/draw2d/translation.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
+#include <sanguis/client/draw2d/entities/base.hpp>
+#include <sanguis/client/draw2d/entities/own.hpp>
+#include <sanguis/client/draw2d/entities/own_unique_ptr.hpp>
+#include <sanguis/client/draw2d/entities/hover/optional_info.hpp>
+#include <sanguis/client/draw2d/message/dispatcher.hpp>
 #include <sanguis/client/draw2d/scene/object.hpp>
 #include <sanguis/client/draw2d/scene/background.hpp>
 #include <sanguis/client/draw2d/scene/background_dim.hpp>
 #include <sanguis/client/draw2d/scene/control_environment.hpp>
-#include <sanguis/client/draw2d/scene/draw_name.hpp>
 #include <sanguis/client/draw2d/scene/message_environment.hpp>
 #include <sanguis/client/draw2d/scene/translation.hpp>
+#include <sanguis/client/draw2d/scene/hover/base.hpp>
+#include <sanguis/client/draw2d/scene/hover/base_unique_ptr.hpp>
+#include <sanguis/client/draw2d/scene/hover/create.hpp>
+#include <sanguis/client/draw2d/scene/hover/parameters.hpp>
 #include <sanguis/client/draw2d/scene/world/object.hpp>
-#include <sanguis/client/draw2d/entities/base.hpp>
-#include <sanguis/client/draw2d/entities/own.hpp>
-#include <sanguis/client/draw2d/entities/own_unique_ptr.hpp>
-#include <sanguis/client/draw2d/message/dispatcher.hpp>
-#include <sanguis/client/draw2d/sprite/float_unit.hpp>
+#include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/state.hpp>
 #include <sanguis/client/draw2d/sprite/state_choices.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_decl.hpp>
@@ -84,6 +88,7 @@
 #include <fcppt/make_enum_range_start_end.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/optional_bind.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map_iteration_second.hpp>
 #include <fcppt/algorithm/sequence_iteration.hpp>
@@ -92,12 +97,10 @@
 #include <fcppt/math/matrix/translation.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/construct.hpp>
-#include <fcppt/math/vector/distance.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
-#include <fcppt/signal/connection.hpp>
+#include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector30.hpp>
-#include <ctime>
 #include <functional>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -210,7 +213,7 @@ sanguis::client::draw2d::scene::object::object(
 			_viewport_manager
 		)
 	),
-	shown_names_(),
+	hovers_(),
 	viewport_connection_(
 		_viewport_manager.manage_callback(
 			std::bind(
@@ -283,21 +286,43 @@ sanguis::client::draw2d::scene::object::update(
 			_delta
 		);
 
-	shown_names_.clear();
+	sanguis::client::control::optional_attack_dest const attack_dest{
+		fcppt::optional_bind(
+			control_environment_->position(),
+			[
+				this
+			](
+				sanguis::client::control::cursor_position const _pos
+			)
+			{
+				return
+					control_environment_->translate_attack_dest(
+						_pos
+					);
+			}
+		)
+	};
+
+	hovers_.clear();
 
 	fcppt::algorithm::map_iteration_second(
 		entities_,
 		[
-			this
+			this,
+			attack_dest
 		](
 			sanguis::client::draw2d::entities::unique_ptr const &_entity
 		)
 		{
 			_entity->update();
 
-			this->name_display(
-				*_entity
-			);
+			if(
+				attack_dest
+			)
+				this->hover_display(
+					*_entity,
+					*attack_dest
+				);
 
 			return
 				_entity->may_be_removed();
@@ -463,15 +488,12 @@ sanguis::client::draw2d::scene::object::render_systems(
 			);
 
 		for(
-			sanguis::client::draw2d::scene::shown_name const &name
+			sanguis::client::draw2d::scene::hover::base_unique_ptr const &hover
 			:
-			shown_names_
+			hovers_
 		)
-			sanguis::client::draw2d::scene::draw_name(
-				renderer_,
-				font_,
-				_render_context,
-				name
+			hover->draw(
+				_render_context
 			);
 	}
 
@@ -549,64 +571,46 @@ sanguis::client::draw2d::scene::object::insert_own(
 }
 
 void
-sanguis::client::draw2d::scene::object::name_display(
-	sanguis::client::draw2d::entities::base const &_entity
+sanguis::client::draw2d::scene::object::hover_display(
+	sanguis::client::draw2d::entities::base const &_entity,
+	sanguis::client::control::attack_dest const _pos
 )
 {
 	if(
 		_entity.dead()
-	)
-		return;
-
-	sanguis::client::control::optional_cursor_position const pos(
-		control_environment_->position()
-	);
-
-	if(
-		!pos
-	)
-		return;
-
-	sanguis::client::control::optional_attack_dest const attack_dest(
-		control_environment_->translate_attack_dest(
-			*pos
-		)
-	);
-
-	if(
-		!attack_dest
-	)
-		return;
-
-	// TODO: Repalce radius by a proper bounding box
-	if(
-		fcppt::math::vector::distance<
-			float
-		>(
-			fcppt::math::vector::structure_cast<
-				sanguis::client::control::attack_dest
-			>(
-				_entity.center().get()
-			),
-			*attack_dest
-		)
-		<
-		_entity.radius().get()
-	)
-		shown_names_.push_back(
-			sanguis::client::draw2d::scene::shown_name(
-				// TODO: Use pixel coordinates here?
-				sanguis::client::draw2d::center(
-					fcppt::math::vector::structure_cast<
-						sanguis::client::draw2d::center::value_type
-					>(
-						_entity.center().get()
-					)
-				),
-				_entity.radius(),
-				_entity.name()
+		||
+		!_entity.cursor_collision(
+			sanguis::client::draw2d::sprite::center(
+				fcppt::math::vector::structure_cast<
+					sanguis::client::draw2d::sprite::center::value_type
+				>(
+					_pos
+				)
 			)
-		);
+		)
+	)
+		return;
+
+	sanguis::client::draw2d::entities::hover::optional_info const info(
+		_entity.hover()
+	);
+
+	if(
+		!info
+	)
+		return;
+
+	hovers_.push_back(
+		sanguis::client::draw2d::scene::hover::create(
+			sanguis::client::draw2d::scene::hover::parameters(
+				renderer_,
+				font_,
+				_entity.center(),
+				_entity.radius()
+			),
+			*info
+		)
+	);
 }
 
 void

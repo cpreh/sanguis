@@ -86,6 +86,14 @@ set(
 	include/sanguis/client/draw2d/entities/enemy.hpp
 	include/sanguis/client/draw2d/entities/explosion.hpp
 	include/sanguis/client/draw2d/entities/friend.hpp
+	include/sanguis/client/draw2d/entities/hover/info.hpp
+	include/sanguis/client/draw2d/entities/hover/info_fwd.hpp
+	include/sanguis/client/draw2d/entities/hover/name.hpp
+	include/sanguis/client/draw2d/entities/hover/name_fwd.hpp
+	include/sanguis/client/draw2d/entities/hover/optional_info.hpp
+	include/sanguis/client/draw2d/entities/hover/optional_info_fwd.hpp
+	include/sanguis/client/draw2d/entities/hover/variant.hpp
+	include/sanguis/client/draw2d/entities/hover/variant_fwd.hpp
 	include/sanguis/client/draw2d/entities/ifaces/with_auras.hpp
 	include/sanguis/client/draw2d/entities/ifaces/with_buffs.hpp
 	include/sanguis/client/draw2d/entities/ifaces/with_center.hpp
@@ -113,8 +121,6 @@ set(
 	include/sanguis/client/draw2d/entities/model/parameters_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/part.hpp
 	include/sanguis/client/draw2d/entities/model/part_fwd.hpp
-	include/sanguis/client/draw2d/entities/name.hpp
-	include/sanguis/client/draw2d/entities/name_fwd.hpp
 	include/sanguis/client/draw2d/entities/order_vector.hpp
 	include/sanguis/client/draw2d/entities/own.hpp
 	include/sanguis/client/draw2d/entities/own_fwd.hpp
@@ -180,13 +186,17 @@ set(
 	include/sanguis/client/draw2d/scene/background_texture_coordinates.hpp
 	include/sanguis/client/draw2d/scene/control_environment.hpp
 	include/sanguis/client/draw2d/scene/control_environment_fwd.hpp
-	include/sanguis/client/draw2d/scene/draw_name.hpp
+	include/sanguis/client/draw2d/scene/hover/base.hpp
+	include/sanguis/client/draw2d/scene/hover/base_fwd.hpp
+	include/sanguis/client/draw2d/scene/hover/base_unique_ptr.hpp
+	include/sanguis/client/draw2d/scene/hover/create.hpp
+	include/sanguis/client/draw2d/scene/hover/name.hpp
+	include/sanguis/client/draw2d/scene/hover/parameters.hpp
+	include/sanguis/client/draw2d/scene/hover/parameters_fwd.hpp
 	include/sanguis/client/draw2d/scene/message_environment.hpp
 	include/sanguis/client/draw2d/scene/message_environment_fwd.hpp
 	include/sanguis/client/draw2d/scene/object.hpp
 	include/sanguis/client/draw2d/scene/object_fwd.hpp
-	include/sanguis/client/draw2d/scene/shown_name.hpp
-	include/sanguis/client/draw2d/scene/shown_name_fwd.hpp
 	include/sanguis/client/draw2d/scene/translation.hpp
 	include/sanguis/client/draw2d/scene/world/batch.hpp
 	include/sanguis/client/draw2d/scene/world/batch_fwd.hpp
@@ -576,6 +586,7 @@ set(
 	src/client/draw2d/entities/enemy.cpp
 	src/client/draw2d/entities/explosion.cpp
 	src/client/draw2d/entities/friend.cpp
+	src/client/draw2d/entities/hover/info.cpp
 	src/client/draw2d/entities/ifaces/with_auras.cpp
 	src/client/draw2d/entities/ifaces/with_buffs.cpp
 	src/client/draw2d/entities/ifaces/with_center.cpp
@@ -619,10 +630,12 @@ set(
 	src/client/draw2d/scene/background_dim.cpp
 	src/client/draw2d/scene/background_texture_coordinates.cpp
 	src/client/draw2d/scene/control_environment.cpp
-	src/client/draw2d/scene/draw_name.cpp
+	src/client/draw2d/scene/hover/base.cpp
+	src/client/draw2d/scene/hover/create.cpp
+	src/client/draw2d/scene/hover/name.cpp
+	src/client/draw2d/scene/hover/parameters.cpp
 	src/client/draw2d/scene/message_environment.cpp
 	src/client/draw2d/scene/object.cpp
-	src/client/draw2d/scene/shown_name.cpp
 	src/client/draw2d/scene/translation.cpp
 	src/client/draw2d/scene/world/batch.cpp
 	src/client/draw2d/scene/world/generate_batches.cpp

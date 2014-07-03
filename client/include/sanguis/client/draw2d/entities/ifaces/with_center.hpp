@@ -32,10 +32,6 @@ public:
 	center(
 		sanguis::client::draw2d::sprite::center const &
 	) = 0;
-
-	virtual
-	sanguis::client::draw2d::sprite::center const
-	center() const = 0;
 };
 
 }

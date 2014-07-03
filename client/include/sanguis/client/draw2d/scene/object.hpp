@@ -8,6 +8,7 @@
 #include <sanguis/client/player_health_callback.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
+#include <sanguis/client/control/attack_dest_fwd.hpp>
 #include <sanguis/client/control/environment_fwd.hpp>
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
 #include <sanguis/client/draw2d/optional_player_center.hpp>
@@ -23,7 +24,7 @@
 #include <sanguis/client/draw2d/scene/control_environment_fwd.hpp>
 #include <sanguis/client/draw2d/scene/message_environment_fwd.hpp>
 #include <sanguis/client/draw2d/scene/object_fwd.hpp>
-#include <sanguis/client/draw2d/scene/shown_name.hpp>
+#include <sanguis/client/draw2d/scene/hover/base_unique_ptr.hpp>
 #include <sanguis/client/draw2d/scene/world/object_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_decl.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
@@ -120,8 +121,9 @@ private:
 	);
 
 	void
-	name_display(
-		sanguis::client::draw2d::entities::base const &
+	hover_display(
+		sanguis::client::draw2d::entities::base const &,
+		sanguis::client::control::attack_dest
 	);
 
 	void
@@ -257,11 +259,11 @@ private:
 
 	typedef
 	std::vector<
-		sanguis::client::draw2d::scene::shown_name
+		sanguis::client::draw2d::scene::hover::base_unique_ptr
 	>
-	show_name_vector;
+	hover_vector;
 
-	show_name_vector shown_names_;
+	hover_vector hovers_;
 
 	fcppt::signal::scoped_connection const viewport_connection_;
 };

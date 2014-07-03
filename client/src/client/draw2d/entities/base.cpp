@@ -1,6 +1,5 @@
 #include <sanguis/client/draw2d/entities/base.hpp>
-#include <sanguis/client/draw2d/entities/name.hpp>
-#include <fcppt/string.hpp>
+#include <sanguis/client/draw2d/entities/hover/optional_info.hpp>
 
 
 sanguis::client::draw2d::entities::base::base()
@@ -20,13 +19,11 @@ sanguis::client::draw2d::entities::base::may_be_removed() const
 		this->is_decayed();
 }
 
-sanguis::client::draw2d::entities::name
-sanguis::client::draw2d::entities::base::name() const
+sanguis::client::draw2d::entities::hover::optional_info
+sanguis::client::draw2d::entities::base::hover() const
 {
 	return
-		sanguis::client::draw2d::entities::name(
-			fcppt::string()
-		);
+		sanguis::client::draw2d::entities::hover::optional_info();
 }
 
 sanguis::client::draw2d::entities::base::~base()

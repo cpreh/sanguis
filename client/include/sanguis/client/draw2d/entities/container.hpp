@@ -69,6 +69,12 @@ public:
 	radius() const
 	override;
 
+	bool
+	cursor_collision(
+		sanguis::client::draw2d::sprite::center
+	) const
+	override;
+
 	void
 	color(
 		sanguis::client::draw2d::sprite::normal::color const &

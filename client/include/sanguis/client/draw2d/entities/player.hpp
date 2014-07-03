@@ -5,8 +5,9 @@
 #include <sanguis/buff_type_vector.hpp>
 #include <sanguis/client/health_pair_fwd.hpp>
 #include <sanguis/client/draw2d/speed_fwd.hpp>
-#include <sanguis/client/draw2d/entities/name.hpp>
 #include <sanguis/client/draw2d/entities/with_buffs_auras_model.hpp>
+#include <sanguis/client/draw2d/entities/hover/name.hpp>
+#include <sanguis/client/draw2d/entities/hover/optional_info_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/dim_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
@@ -37,7 +38,7 @@ public:
 		sanguis::aura_type_vector const &,
 		sanguis::buff_type_vector const &,
 		sanguis::client::health_pair,
-		sanguis::client::draw2d::entities::name const &
+		sanguis::client::draw2d::entities::hover::name const &
 	);
 
 	~player()
@@ -62,15 +63,15 @@ protected:
 	sanguis::client::draw2d::sprite::dim const
 	bounding_dim() const;
 
-	sanguis::client::draw2d::entities::name
-	name() const
+	sanguis::client::draw2d::entities::hover::optional_info
+	hover() const
 	override;
 
 	using sanguis::client::draw2d::entities::container::orientation;
 
 	using sanguis::client::draw2d::entities::container::speed;
 
-	sanguis::client::draw2d::entities::name const name_;
+	sanguis::client::draw2d::entities::hover::name const name_;
 };
 
 }
