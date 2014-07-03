@@ -20,7 +20,6 @@ set(
 	include/sanguis/gui/main_area_fwd.hpp
 	include/sanguis/gui/master.hpp
 	include/sanguis/gui/master_fwd.hpp
-	include/sanguis/gui/minimum_size_area.hpp
 	include/sanguis/gui/needed_width.hpp
 	include/sanguis/gui/needed_width_from_strings.hpp
 	include/sanguis/gui/needed_width_fwd.hpp
@@ -28,6 +27,7 @@ set(
 	include/sanguis/gui/optional_index_fwd.hpp
 	include/sanguis/gui/optional_needed_width.hpp
 	include/sanguis/gui/optional_needed_width_fwd.hpp
+	include/sanguis/gui/screen_corner.hpp
 	include/sanguis/gui/string_container.hpp
 	include/sanguis/gui/text_callback.hpp
 	include/sanguis/gui/text_color.hpp
@@ -119,8 +119,8 @@ set(
 	src/include/sanguis/gui/aux_/swap_pair.hpp
 	src/main_area.cpp
 	src/master.cpp
-	src/minimum_size_area.cpp
 	src/needed_width_from_strings.cpp
+	src/screen_corner.cpp
 	src/viewport_adaptor.cpp
 	src/widget/bar.cpp
 	src/widget/base.cpp

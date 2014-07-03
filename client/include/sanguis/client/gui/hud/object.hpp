@@ -18,7 +18,7 @@
 #include <sanguis/client/load/resource/textures_fwd.hpp>
 #include <sanguis/gui/context.hpp>
 #include <sanguis/gui/master.hpp>
-#include <sanguis/gui/minimum_size_area.hpp>
+#include <sanguis/gui/screen_corner.hpp>
 #include <sanguis/gui/widget/bar.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/expander.hpp>
@@ -180,7 +180,7 @@ private:
 
 	sanguis::gui::widget::box_container main_widget_;
 
-	sanguis::gui::minimum_size_area gui_area_;
+	sanguis::gui::screen_corner gui_area_;
 
 	sanguis::gui::master gui_master_;
 

@@ -1,5 +1,5 @@
-#ifndef SANGUIS_GUI_MINIMUM_SIZE_AREA_HPP_INCLUDED
-#define SANGUIS_GUI_MINIMUM_SIZE_AREA_HPP_INCLUDED
+#ifndef SANGUIS_GUI_SCREEN_CORNER_HPP_INCLUDED
+#define SANGUIS_GUI_SCREEN_CORNER_HPP_INCLUDED
 
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/main_area.hpp>
@@ -20,16 +20,16 @@ namespace sanguis
 namespace gui
 {
 
-class minimum_size_area
+class screen_corner
 :
 	public sanguis::gui::main_area
 {
 	FCPPT_NONCOPYABLE(
-		minimum_size_area
+		screen_corner
 	);
 public:
 	SANGUIS_GUI_SYMBOL
-	minimum_size_area(
+	screen_corner(
 		sge::renderer::device::core &,
 		sge::viewport::manager &,
 		sanguis::gui::context &,
@@ -38,12 +38,13 @@ public:
 	);
 
 	SANGUIS_GUI_SYMBOL
-	~minimum_size_area()
+	~screen_corner()
 	override;
 
 	SANGUIS_GUI_SYMBOL
 	void
-	relayout();
+	relayout()
+	override;
 private:
 	sanguis::gui::widget::base &
 	widget()

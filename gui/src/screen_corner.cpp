@@ -1,6 +1,6 @@
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/default_aspect.hpp>
-#include <sanguis/gui/minimum_size_area.hpp>
+#include <sanguis/gui/screen_corner.hpp>
 #include <sanguis/gui/gravity.hpp>
 #include <sanguis/gui/aux_/make_container_pair.hpp>
 #include <sanguis/gui/aux_/gravity_east.hpp>
@@ -15,7 +15,7 @@
 #include <sge/viewport/manager_fwd.hpp>
 
 
-sanguis::gui::minimum_size_area::minimum_size_area(
+sanguis::gui::screen_corner::screen_corner(
 	sge::renderer::device::core &_renderer,
 	sge::viewport::manager &_viewport_manager,
 	sanguis::gui::context &_gui_context,
@@ -91,18 +91,18 @@ sanguis::gui::minimum_size_area::minimum_size_area(
 {
 }
 
-sanguis::gui::minimum_size_area::~minimum_size_area()
+sanguis::gui::screen_corner::~screen_corner()
 {
 }
 
 void
-sanguis::gui::minimum_size_area::relayout()
+sanguis::gui::screen_corner::relayout()
 {
 	viewport_adaptor_.relayout();
 }
 
 sanguis::gui::widget::base &
-sanguis::gui::minimum_size_area::widget()
+sanguis::gui::screen_corner::widget()
 {
 	return
 		widget_;

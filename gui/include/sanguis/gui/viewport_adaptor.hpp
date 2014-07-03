@@ -36,7 +36,8 @@ public:
 
 	SANGUIS_GUI_SYMBOL
 	void
-	relayout();
+	relayout()
+	override;
 private:
 	sanguis::gui::widget::base &
 	widget()

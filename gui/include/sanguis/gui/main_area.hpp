@@ -25,6 +25,10 @@ public:
 	virtual
 	sanguis::gui::widget::base &
 	widget() = 0;
+
+	virtual
+	void
+	relayout() = 0;
 };
 
 }
