@@ -31,11 +31,11 @@ public:
 
 	~minimum_size()
 	override;
-private:
+
 	sge::rucksack::widget::base &
 	layout()
 	override;
-
+private:
 	sge::rucksack::widget::minimum_size layout_;
 };
 

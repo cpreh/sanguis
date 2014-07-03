@@ -22,11 +22,11 @@ sanguis::client::draw2d::scene::hover::create(
 	public:
 		explicit
 		visitor(
-			sanguis::client::draw2d::scene::hover::parameters const &_parameters
+			sanguis::client::draw2d::scene::hover::parameters const &_nparameters
 		)
 		:
 			parameters_(
-				_parameters
+				_nparameters
 			)
 		{
 		}

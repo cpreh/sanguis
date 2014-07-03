@@ -6,6 +6,7 @@ set(
 	include/sanguis/gui/context_fwd.hpp
 	include/sanguis/gui/default_aspect.hpp
 	include/sanguis/gui/duration.hpp
+	include/sanguis/gui/fixed_position.hpp
 	include/sanguis/gui/focus_change.hpp
 	include/sanguis/gui/focus_change_fwd.hpp
 	include/sanguis/gui/get_focus.hpp
@@ -101,6 +102,7 @@ set(
 	src/aux_/style/text_color.cpp
 	src/context.cpp
 	src/default_aspect.cpp
+	src/fixed_position.cpp
 	src/include/sanguis/gui/aux_/draw_image.hpp
 	src/include/sanguis/gui/aux_/draw_sprite.hpp
 	src/include/sanguis/gui/aux_/fill_rect.hpp
