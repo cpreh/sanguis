@@ -1,17 +1,17 @@
-#include <sanguis/gui/fixed_position.hpp>
-#include <sanguis/gui/main_area.hpp>
+#include <sanguis/gui/main_area/base.hpp>
+#include <sanguis/gui/main_area/fixed_position.hpp>
 #include <sanguis/gui/widget/base_fwd.hpp>
 #include <sanguis/gui/widget/minimum_size.hpp>
 #include <sge/rucksack/vector.hpp>
 #include <sge/rucksack/widget/base.hpp>
 
 
-sanguis::gui::fixed_position::fixed_position(
+sanguis::gui::main_area::fixed_position::fixed_position(
 	sanguis::gui::widget::base &_widget,
 	sge::rucksack::vector const _position
 )
 :
-	sanguis::gui::main_area(),
+	sanguis::gui::main_area::base(),
 	widget_(
 		_widget
 	),
@@ -26,18 +26,18 @@ sanguis::gui::fixed_position::fixed_position(
 	this->relayout();
 }
 
-sanguis::gui::fixed_position::~fixed_position()
+sanguis::gui::main_area::fixed_position::~fixed_position()
 {
 }
 
 void
-sanguis::gui::fixed_position::relayout()
+sanguis::gui::main_area::fixed_position::relayout()
 {
 	minimum_size_.layout().relayout();
 }
 
 sanguis::gui::widget::base &
-sanguis::gui::fixed_position::widget()
+sanguis::gui::main_area::fixed_position::widget()
 {
 	return
 		widget_;

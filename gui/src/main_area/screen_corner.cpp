@@ -1,11 +1,12 @@
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/default_aspect.hpp>
-#include <sanguis/gui/screen_corner.hpp>
 #include <sanguis/gui/gravity.hpp>
 #include <sanguis/gui/aux_/make_container_pair.hpp>
 #include <sanguis/gui/aux_/gravity_east.hpp>
 #include <sanguis/gui/aux_/gravity_south.hpp>
 #include <sanguis/gui/aux_/swap_pair.hpp>
+#include <sanguis/gui/main_area/base.hpp>
+#include <sanguis/gui/main_area/screen_corner.hpp>
 #include <sanguis/gui/widget/base_fwd.hpp>
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
@@ -15,7 +16,7 @@
 #include <sge/viewport/manager_fwd.hpp>
 
 
-sanguis::gui::screen_corner::screen_corner(
+sanguis::gui::main_area::screen_corner::screen_corner(
 	sge::renderer::device::core &_renderer,
 	sge::viewport::manager &_viewport_manager,
 	sanguis::gui::context &_gui_context,
@@ -23,6 +24,7 @@ sanguis::gui::screen_corner::screen_corner(
 	sanguis::gui::gravity const _gravity
 )
 :
+	sanguis::gui::main_area::base(),
 	widget_(
 		_widget
 	),
@@ -91,18 +93,18 @@ sanguis::gui::screen_corner::screen_corner(
 {
 }
 
-sanguis::gui::screen_corner::~screen_corner()
+sanguis::gui::main_area::screen_corner::~screen_corner()
 {
 }
 
 void
-sanguis::gui::screen_corner::relayout()
+sanguis::gui::main_area::screen_corner::relayout()
 {
 	viewport_adaptor_.relayout();
 }
 
 sanguis::gui::widget::base &
-sanguis::gui::screen_corner::widget()
+sanguis::gui::main_area::screen_corner::widget()
 {
 	return
 		widget_;

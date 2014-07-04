@@ -119,6 +119,10 @@ sanguis::client::gui::hud::weapon_details::weapon_details(
 		_cursor,
 		gui_context_,
 		gui_area_
+	),
+	gui_background_(
+		_renderer,
+		gui_area_
 	)
 {
 }
@@ -145,6 +149,7 @@ sanguis::client::gui::hud::weapon_details::draw(
 )
 {
 	gui_master_.draw(
-		_render_context
+		_render_context,
+		gui_background_
 	);
 }

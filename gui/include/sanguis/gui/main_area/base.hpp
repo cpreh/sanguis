@@ -1,7 +1,7 @@
-#ifndef SANGUIS_GUI_MAIN_AREA_HPP_INCLUDED
-#define SANGUIS_GUI_MAIN_AREA_HPP_INCLUDED
+#ifndef SANGUIS_GUI_MAIN_AREA_BASE_HPP_INCLUDED
+#define SANGUIS_GUI_MAIN_AREA_BASE_HPP_INCLUDED
 
-#include <sanguis/gui/main_area_fwd.hpp>
+#include <sanguis/gui/main_area/base_fwd.hpp>
 #include <sanguis/gui/widget/base_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -10,17 +10,19 @@ namespace sanguis
 {
 namespace gui
 {
+namespace main_area
+{
 
-class main_area
+class base
 {
 	FCPPT_NONCOPYABLE(
-		main_area
+		base
 	);
 protected:
-	main_area();
+	base();
 
 	virtual
-	~main_area() = 0;
+	~base() = 0;
 public:
 	virtual
 	sanguis::gui::widget::base &
@@ -31,6 +33,7 @@ public:
 	relayout() = 0;
 };
 
+}
 }
 }
 

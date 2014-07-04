@@ -1,18 +1,11 @@
 #include <sanguis/gui/context.hpp>
 #include <sanguis/gui/duration.hpp>
-#include <sanguis/gui/main_area.hpp>
+#include <sanguis/gui/draw.hpp>
 #include <sanguis/gui/master.hpp>
-#include <sanguis/gui/aux_/fill_rect.hpp>
+#include <sanguis/gui/main_area/base.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/optional_focus.hpp>
 #include <sanguis/gui/widget/optional_ref.hpp>
-#include <sge/image/color/predef.hpp>
-#include <sge/image/color/rgba8.hpp>
-#include <sge/image/color/any/object.hpp>
-#include <sge/image/color/init/alpha.hpp>
-#include <sge/image/color/init/blue.hpp>
-#include <sge/image/color/init/green.hpp>
-#include <sge/image/color/init/red.hpp>
 #include <sge/input/cursor/button_code.hpp>
 #include <sge/input/cursor/button_event.hpp>
 #include <sge/input/cursor/object.hpp>
@@ -24,7 +17,6 @@
 #include <sge/input/keyboard/key_repeat_event.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp.hpp>
-#include <sge/rucksack/rect.hpp>
 #include <sge/rucksack/vector.hpp>
 #include <sge/rucksack/widget/base.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -39,7 +31,7 @@ sanguis::gui::master::master(
 	sge::input::keyboard::device &_keyboard,
 	sge::input::cursor::object &_cursor,
 	sanguis::gui::context &_context,
-	sanguis::gui::main_area &_main_area
+	sanguis::gui::main_area::base &_main_area
 )
 :
 	renderer_(
@@ -51,8 +43,8 @@ sanguis::gui::master::master(
 	context_(
 		_context
 	),
-	widget_(
-		_main_area.widget()
+	main_area_(
+		_main_area
 	),
 	key_connection_(
 		_keyboard.key_callback(
@@ -99,25 +91,14 @@ sanguis::gui::master::~master()
 
 void
 sanguis::gui::master::draw(
-	sge::renderer::context::ffp &_context
+	sge::renderer::context::ffp &_context,
+	sanguis::gui::background::base &_background
 )
 {
-	sanguis::gui::aux_::fill_rect(
-		renderer_,
+	sanguis::gui::draw(
 		_context,
-		widget_.layout().area(),
-		sge::image::color::any::object(
-			sge::image::color::rgba8(
-				(sge::image::color::init::red() %= .75)
-				(sge::image::color::init::green() %= .75)
-				(sge::image::color::init::blue() %= .75)
-				(sge::image::color::init::alpha() %= .25)
-			)
-		)
-	);
-
-	widget_.on_draw(
-		_context
+		_background,
+		main_area_
 	);
 }
 
@@ -126,7 +107,7 @@ sanguis::gui::master::update(
 	sanguis::gui::duration const _duration
 )
 {
-	widget_.on_update(
+	this->widget().on_update(
 		_duration
 	);
 }
@@ -185,7 +166,7 @@ sanguis::gui::master::button_event(
 		==
 		sge::input::cursor::button_code::left
 	)
-		widget_.on_click(
+		this->widget().on_click(
 			fcppt::math::vector::structure_cast<
 				sge::rucksack::vector
 			>(
@@ -237,7 +218,7 @@ sanguis::gui::master::try_focus(
 )
 {
 	sanguis::gui::widget::optional_ref const result(
-		widget_.on_tab(
+		this->widget().on_tab(
 			_focus
 		)
 	);
@@ -251,4 +232,11 @@ sanguis::gui::master::try_focus(
 
 	return
 		result;
+}
+
+sanguis::gui::widget::base &
+sanguis::gui::master::widget()
+{
+	return
+		main_area_.widget();
 }

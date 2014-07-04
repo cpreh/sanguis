@@ -1,12 +1,15 @@
 set(
 	SANGUIS_GUI_FILES
+	include/sanguis/gui/background/base.hpp
+	include/sanguis/gui/background/base_fwd.hpp
+	include/sanguis/gui/background/colored.hpp
 	include/sanguis/gui/click_callback.hpp
 	include/sanguis/gui/click_function.hpp
 	include/sanguis/gui/context.hpp
 	include/sanguis/gui/context_fwd.hpp
 	include/sanguis/gui/default_aspect.hpp
+	include/sanguis/gui/draw.hpp
 	include/sanguis/gui/duration.hpp
-	include/sanguis/gui/fixed_position.hpp
 	include/sanguis/gui/focus_change.hpp
 	include/sanguis/gui/focus_change_fwd.hpp
 	include/sanguis/gui/get_focus.hpp
@@ -17,8 +20,11 @@ set(
 	include/sanguis/gui/index_callback.hpp
 	include/sanguis/gui/index_function.hpp
 	include/sanguis/gui/index_fwd.hpp
-	include/sanguis/gui/main_area.hpp
-	include/sanguis/gui/main_area_fwd.hpp
+	include/sanguis/gui/main_area/base.hpp
+	include/sanguis/gui/main_area/base_fwd.hpp
+	include/sanguis/gui/main_area/fixed_position.hpp
+	include/sanguis/gui/main_area/screen_corner.hpp
+	include/sanguis/gui/main_area/viewport_adaptor.hpp
 	include/sanguis/gui/master.hpp
 	include/sanguis/gui/master_fwd.hpp
 	include/sanguis/gui/needed_width.hpp
@@ -28,13 +34,11 @@ set(
 	include/sanguis/gui/optional_index_fwd.hpp
 	include/sanguis/gui/optional_needed_width.hpp
 	include/sanguis/gui/optional_needed_width_fwd.hpp
-	include/sanguis/gui/screen_corner.hpp
 	include/sanguis/gui/string_container.hpp
 	include/sanguis/gui/text_callback.hpp
 	include/sanguis/gui/text_color.hpp
 	include/sanguis/gui/text_color_fwd.hpp
 	include/sanguis/gui/text_function.hpp
-	include/sanguis/gui/viewport_adaptor.hpp
 	include/sanguis/gui/widget/bar.hpp
 	include/sanguis/gui/widget/bar_fwd.hpp
 	include/sanguis/gui/widget/base.hpp
@@ -100,9 +104,11 @@ set(
 	src/aux_/style/background_color.cpp
 	src/aux_/style/border_color.cpp
 	src/aux_/style/text_color.cpp
+	src/background/base.cpp
+	src/background/colored.cpp
 	src/context.cpp
 	src/default_aspect.cpp
-	src/fixed_position.cpp
+	src/draw.cpp
 	src/include/sanguis/gui/aux_/draw_image.hpp
 	src/include/sanguis/gui/aux_/draw_sprite.hpp
 	src/include/sanguis/gui/aux_/fill_rect.hpp
@@ -119,11 +125,12 @@ set(
 	src/include/sanguis/gui/aux_/style/spacing.hpp
 	src/include/sanguis/gui/aux_/style/text_color.hpp
 	src/include/sanguis/gui/aux_/swap_pair.hpp
-	src/main_area.cpp
+	src/main_area/base.cpp
+	src/main_area/fixed_position.cpp
+	src/main_area/screen_corner.cpp
+	src/main_area/viewport_adaptor.cpp
 	src/master.cpp
 	src/needed_width_from_strings.cpp
-	src/screen_corner.cpp
-	src/viewport_adaptor.cpp
 	src/widget/bar.cpp
 	src/widget/base.cpp
 	src/widget/box_container.cpp

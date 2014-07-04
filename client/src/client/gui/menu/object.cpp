@@ -335,7 +335,7 @@ sanguis::client::gui::menu::object::object(
 		sge::rucksack::axis::y,
 		sanguis::gui::default_aspect()
 	),
-	viewport_adaptor_(
+	gui_area_(
 		_renderer,
 		_viewport_manager,
 		main_container_
@@ -345,7 +345,11 @@ sanguis::client::gui::menu::object::object(
 		_keyboard,
 		_cursor,
 		gui_context_,
-		viewport_adaptor_
+		gui_area_
+	),
+	gui_background_(
+		_renderer,
+		gui_area_
 	),
 	connect_running_{
 		false
@@ -455,7 +459,8 @@ sanguis::client::gui::menu::object::draw(
 	);
 
 	gui_master_.draw(
-		_render_context
+		_render_context,
+		gui_background_
 	);
 }
 

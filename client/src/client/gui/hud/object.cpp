@@ -251,6 +251,10 @@ sanguis::client::gui::hud::object::object(
 		gui_context_,
 		gui_area_
 	),
+	gui_background_(
+		_renderer,
+		gui_area_
+	),
 	weapon_details_()
 {
 }
@@ -428,7 +432,8 @@ sanguis::client::gui::hud::object::draw(
 	frames_counter_.update();
 
 	gui_master_.draw(
-		_render_context
+		_render_context,
+		gui_background_
 	);
 
 	if(

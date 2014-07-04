@@ -7,7 +7,8 @@
 #include <sanguis/client/draw2d/sprite/center_fwd.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
 #include <sanguis/gui/context.hpp>
-#include <sanguis/gui/fixed_position.hpp>
+#include <sanguis/gui/background/colored.hpp>
+#include <sanguis/gui/main_area/fixed_position.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/image.hpp>
 #include <sge/font/object_fwd.hpp>
@@ -69,7 +70,9 @@ private:
 
 	sanguis::gui::widget::box_container container_;
 
-	sanguis::gui::fixed_position gui_area_;
+	sanguis::gui::main_area::fixed_position gui_area_;
+
+	sanguis::gui::background::colored gui_background_;
 };
 
 }

@@ -7,7 +7,8 @@
 #include <sanguis/client/perk/state_fwd.hpp>
 #include <sanguis/gui/context.hpp>
 #include <sanguis/gui/master.hpp>
-#include <sanguis/gui/screen_corner.hpp>
+#include <sanguis/gui/background/colored.hpp>
+#include <sanguis/gui/main_area/screen_corner.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/text.hpp>
 #include <sge/font/object_fwd.hpp>
@@ -89,9 +90,11 @@ private:
 
 	sanguis::gui::widget::box_container main_container_;
 
-	sanguis::gui::screen_corner gui_area_;
+	sanguis::gui::main_area::screen_corner gui_area_;
 
 	sanguis::gui::master gui_master_;
+
+	sanguis::gui::background::colored gui_background_;
 
 	fcppt::signal::scoped_connection const
 		perk_connection_,

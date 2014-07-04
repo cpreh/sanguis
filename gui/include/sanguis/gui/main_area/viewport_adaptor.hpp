@@ -1,8 +1,8 @@
-#ifndef SANGUIS_GUI_VIEWPORT_ADAPTOR_HPP_INCLUDED
-#define SANGUIS_GUI_VIEWPORT_ADAPTOR_HPP_INCLUDED
+#ifndef SANGUIS_GUI_MAIN_AREA_VIEWPORT_ADAPTOR_HPP_INCLUDED
+#define SANGUIS_GUI_MAIN_AREA_VIEWPORT_ADAPTOR_HPP_INCLUDED
 
-#include <sanguis/gui/main_area.hpp>
 #include <sanguis/gui/symbol.hpp>
+#include <sanguis/gui/main_area/base.hpp>
 #include <sanguis/gui/widget/base_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <sge/rucksack/widget/viewport_adaptor.hpp>
@@ -14,10 +14,12 @@ namespace sanguis
 {
 namespace gui
 {
+namespace main_area
+{
 
 class viewport_adaptor
 :
-	public sanguis::gui::main_area
+	public sanguis::gui::main_area::base
 {
 	FCPPT_NONCOPYABLE(
 		viewport_adaptor
@@ -48,6 +50,7 @@ private:
 	sge::rucksack::widget::viewport_adaptor impl_;
 };
 
+}
 }
 }
 

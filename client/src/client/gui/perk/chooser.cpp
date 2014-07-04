@@ -111,6 +111,10 @@ sanguis::client::gui::perk::chooser::chooser(
 		gui_context_,
 		gui_area_
 	),
+	gui_background_(
+		_renderer,
+		gui_area_
+	),
 	perk_connection_(
 		_state.register_perks_change(
 			std::bind(
@@ -152,7 +156,8 @@ sanguis::client::gui::perk::chooser::draw(
 )
 {
 	gui_master_.draw(
-		_context
+		_context,
+		gui_background_
 	);
 }
 

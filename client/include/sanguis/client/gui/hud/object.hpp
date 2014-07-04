@@ -18,7 +18,8 @@
 #include <sanguis/client/load/resource/textures_fwd.hpp>
 #include <sanguis/gui/context.hpp>
 #include <sanguis/gui/master.hpp>
-#include <sanguis/gui/screen_corner.hpp>
+#include <sanguis/gui/background/colored.hpp>
+#include <sanguis/gui/main_area/screen_corner.hpp>
 #include <sanguis/gui/widget/bar.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/expander.hpp>
@@ -183,9 +184,11 @@ private:
 
 	sanguis::gui::widget::box_container main_widget_;
 
-	sanguis::gui::screen_corner gui_area_;
+	sanguis::gui::main_area::screen_corner gui_area_;
 
 	sanguis::gui::master gui_master_;
+
+	sanguis::gui::background::colored gui_background_;
 
 	typedef
 	std::unique_ptr<

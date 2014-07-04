@@ -3,9 +3,10 @@
 
 #include <sanguis/gui/duration.hpp>
 #include <sanguis/gui/context_fwd.hpp>
-#include <sanguis/gui/main_area_fwd.hpp>
 #include <sanguis/gui/master_fwd.hpp>
 #include <sanguis/gui/symbol.hpp>
+#include <sanguis/gui/background/base_fwd.hpp>
+#include <sanguis/gui/main_area/base_fwd.hpp>
 #include <sanguis/gui/widget/base_fwd.hpp>
 #include <sanguis/gui/widget/optional_focus_fwd.hpp>
 #include <sanguis/gui/widget/optional_ref_fwd.hpp>
@@ -39,7 +40,7 @@ public:
 		sge::input::keyboard::device &,
 		sge::input::cursor::object &,
 		sanguis::gui::context &,
-		sanguis::gui::main_area &
+		sanguis::gui::main_area::base &
 	);
 
 	SANGUIS_GUI_SYMBOL
@@ -48,7 +49,8 @@ public:
 	SANGUIS_GUI_SYMBOL
 	void
 	draw(
-		sge::renderer::context::ffp &
+		sge::renderer::context::ffp &,
+		sanguis::gui::background::base &
 	);
 
 	SANGUIS_GUI_SYMBOL
@@ -87,13 +89,16 @@ private:
 		sanguis::gui::widget::optional_focus
 	);
 
+	sanguis::gui::widget::base &
+	widget();
+
 	sge::renderer::device::ffp &renderer_;
 
 	sge::input::cursor::object &cursor_;
 
 	sanguis::gui::context &context_;
 
-	sanguis::gui::widget::base &widget_;
+	sanguis::gui::main_area::base &main_area_;
 
 	fcppt::signal::scoped_connection const
 		key_connection_,

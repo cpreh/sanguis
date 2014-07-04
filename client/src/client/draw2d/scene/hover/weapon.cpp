@@ -7,6 +7,7 @@
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/load/hud/context.hpp>
 #include <sanguis/gui/default_aspect.hpp>
+#include <sanguis/gui/draw.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
 #include <sanguis/gui/widget/reference_alignment_vector.hpp>
 #include <sanguis/gui/widget/reference.hpp>
@@ -95,6 +96,10 @@ sanguis::client::draw2d::scene::hover::weapon::weapon(
 	gui_area_(
 		container_,
 		_center.get()
+	),
+	gui_background_(
+		_renderer,
+		gui_area_
 	)
 {
 }
@@ -108,9 +113,9 @@ sanguis::client::draw2d::scene::hover::weapon::draw(
 	sge::renderer::context::ffp &_render_context
 )
 {
-/*
-	// TODO: Make a background class for widgets
-	gui_area_.widget().draw(
-		_render_context
-	);*/
+	sanguis::gui::draw(
+		_render_context,
+		gui_background_,
+		gui_area_
+	);
 }

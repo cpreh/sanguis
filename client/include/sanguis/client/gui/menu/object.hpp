@@ -7,7 +7,8 @@
 #include <sanguis/client/config/settings/object_fwd.hpp>
 #include <sanguis/gui/context.hpp>
 #include <sanguis/gui/master.hpp>
-#include <sanguis/gui/viewport_adaptor.hpp>
+#include <sanguis/gui/background/colored.hpp>
+#include <sanguis/gui/main_area/viewport_adaptor.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/button.hpp>
 #include <sanguis/gui/widget/edit.hpp>
@@ -123,9 +124,11 @@ private:
 
 	sanguis::gui::widget::box_container main_container_;
 
-	sanguis::gui::viewport_adaptor viewport_adaptor_;
+	sanguis::gui::main_area::viewport_adaptor gui_area_;
 
 	sanguis::gui::master gui_master_;
+
+	sanguis::gui::background::colored gui_background_;
 
 	bool connect_running_;
 

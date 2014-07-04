@@ -8,7 +8,8 @@
 #include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/string_container.hpp>
 #include <sanguis/gui/text_color.hpp>
-#include <sanguis/gui/viewport_adaptor.hpp>
+#include <sanguis/gui/background/colored.hpp>
+#include <sanguis/gui/main_area/viewport_adaptor.hpp>
 #include <sanguis/gui/widget/button.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/choices.hpp>
@@ -415,7 +416,7 @@ try
 		sanguis::gui::default_aspect()
 	);
 
-	sanguis::gui::viewport_adaptor viewport_adaptor(
+	sanguis::gui::main_area::viewport_adaptor main_area(
 		sys.renderer_device_ffp(),
 		sys.viewport_manager(),
 		main_widget
@@ -426,7 +427,12 @@ try
 		sys.keyboard_collector(),
 		sys.cursor_demuxer(),
 		context,
-		viewport_adaptor
+		main_area
+	);
+
+	sanguis::gui::background::colored background(
+		sys.renderer_device_ffp(),
+		main_area
 	);
 
 	typedef
@@ -474,7 +480,8 @@ try
 		);
 
 		master.draw(
-			scoped_block.get()
+			scoped_block.get(),
+			background
 		);
 	}
 

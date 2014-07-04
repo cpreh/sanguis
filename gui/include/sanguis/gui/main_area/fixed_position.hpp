@@ -1,8 +1,8 @@
-#ifndef SANGUIS_GUI_FIXED_POSITION_HPP_INCLUDED
-#define SANGUIS_GUI_FIXED_POSITION_HPP_INCLUDED
+#ifndef SANGUIS_GUI_MAIN_AREA_FIXED_POSITION_HPP_INCLUDED
+#define SANGUIS_GUI_MAIN_AREA_FIXED_POSITION_HPP_INCLUDED
 
-#include <sanguis/gui/main_area.hpp>
 #include <sanguis/gui/symbol.hpp>
+#include <sanguis/gui/main_area/base.hpp>
 #include <sanguis/gui/widget/base_fwd.hpp>
 #include <sanguis/gui/widget/minimum_size.hpp>
 #include <sge/rucksack/vector_fwd.hpp>
@@ -13,10 +13,12 @@ namespace sanguis
 {
 namespace gui
 {
+namespace main_area
+{
 
 class fixed_position
 :
-	public sanguis::gui::main_area
+	public sanguis::gui::main_area::base
 {
 	FCPPT_NONCOPYABLE(
 		fixed_position
@@ -46,6 +48,7 @@ private:
 	sanguis::gui::widget::minimum_size minimum_size_;
 };
 
+}
 }
 }
 
