@@ -341,7 +341,6 @@ sanguis::client::gui::menu::object::object(
 		main_container_
 	),
 	gui_master_(
-		_renderer,
 		_keyboard,
 		_cursor,
 		gui_context_,

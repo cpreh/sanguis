@@ -423,7 +423,6 @@ try
 	);
 
 	sanguis::gui::master master(
-		sys.renderer_device_ffp(),
 		sys.keyboard_collector(),
 		sys.cursor_demuxer(),
 		context,

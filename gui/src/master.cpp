@@ -16,7 +16,6 @@
 #include <sge/input/keyboard/key_event.hpp>
 #include <sge/input/keyboard/key_repeat_event.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <sge/renderer/device/ffp.hpp>
 #include <sge/rucksack/vector.hpp>
 #include <sge/rucksack/widget/base.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -27,16 +26,12 @@
 
 
 sanguis::gui::master::master(
-	sge::renderer::device::ffp &_renderer,
 	sge::input::keyboard::device &_keyboard,
 	sge::input::cursor::object &_cursor,
 	sanguis::gui::context &_context,
 	sanguis::gui::main_area::base &_main_area
 )
 :
-	renderer_(
-		_renderer
-	),
 	cursor_(
 		_cursor
 	),

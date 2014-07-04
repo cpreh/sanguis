@@ -114,7 +114,6 @@ sanguis::client::gui::hud::weapon_details::weapon_details(
 		sanguis::gui::gravity::south_west
 	),
 	gui_master_(
-		_renderer,
 		_keyboard,
 		_cursor,
 		gui_context_,

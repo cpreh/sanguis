@@ -245,7 +245,6 @@ sanguis::client::gui::hud::object::object(
 		sanguis::gui::gravity::north_east
 	),
 	gui_master_(
-		_renderer,
 		_keyboard,
 		_cursor,
 		gui_context_,

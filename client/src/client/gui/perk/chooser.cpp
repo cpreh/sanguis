@@ -105,7 +105,6 @@ sanguis::client::gui::perk::chooser::chooser(
 		sanguis::gui::gravity::north_west
 	),
 	gui_master_(
-		_renderer,
 		_keyboard,
 		_cursor,
 		gui_context_,
