@@ -2,6 +2,8 @@
 #include <sanguis/client/config/settings/object.hpp>
 #include <sanguis/client/gui/to_duration.hpp>
 #include <sanguis/client/gui/menu/object.hpp>
+#include <sanguis/client/load/resource/texture_identifier.hpp>
+#include <sanguis/client/load/resource/textures.hpp>
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/needed_width_from_strings.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
@@ -87,6 +89,7 @@ sanguis::client::gui::menu::object::object(
 	sge::font::object &_font,
 	sge::input::cursor::object &_cursor,
 	sge::input::keyboard::device &_keyboard,
+	sanguis::client::load::resource::textures const &_textures,
 	sanguis::client::config::settings::object &_settings,
 	sanguis::client::gui::menu::callbacks::object const &_callbacks
 )
@@ -348,7 +351,12 @@ sanguis::client::gui::menu::object::object(
 	),
 	gui_background_(
 		_renderer,
-		gui_area_
+		gui_area_,
+		_textures.load(
+			sanguis::client::load::resource::texture_identifier(
+				FCPPT_TEXT("asphalt")
+			)
+		)
 	),
 	connect_running_{
 		false

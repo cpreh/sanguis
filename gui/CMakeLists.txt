@@ -3,6 +3,7 @@ set(
 	include/sanguis/gui/background/base.hpp
 	include/sanguis/gui/background/base_fwd.hpp
 	include/sanguis/gui/background/colored.hpp
+	include/sanguis/gui/background/image.hpp
 	include/sanguis/gui/click_callback.hpp
 	include/sanguis/gui/click_function.hpp
 	include/sanguis/gui/context.hpp
@@ -95,6 +96,7 @@ set(
 	include/sanguis/gui/widget/unique_ptr_tree_vector.hpp
 	include/sanguis/gui/widget/unique_ptr_vector.hpp
 	src/aux_/draw_image.cpp
+	src/aux_/draw_image_stretched.cpp
 	src/aux_/fill_rect.cpp
 	src/aux_/gravity_east.cpp
 	src/aux_/gravity_south.cpp
@@ -106,14 +108,17 @@ set(
 	src/aux_/style/text_color.cpp
 	src/background/base.cpp
 	src/background/colored.cpp
+	src/background/image.cpp
 	src/context.cpp
 	src/default_aspect.cpp
 	src/draw.cpp
 	src/include/sanguis/gui/aux_/draw_image.hpp
+	src/include/sanguis/gui/aux_/draw_image_stretched.hpp
 	src/include/sanguis/gui/aux_/draw_sprite.hpp
 	src/include/sanguis/gui/aux_/fill_rect.hpp
 	src/include/sanguis/gui/aux_/gravity_east.hpp
 	src/include/sanguis/gui/aux_/gravity_south.hpp
+	src/include/sanguis/gui/aux_/image_sprite_choices.hpp
 	src/include/sanguis/gui/aux_/make_container_pair.hpp
 	src/include/sanguis/gui/aux_/relayout_ancestor.hpp
 	src/include/sanguis/gui/aux_/shrink_rect.hpp

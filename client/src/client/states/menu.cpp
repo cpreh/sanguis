@@ -8,6 +8,8 @@
 #include <sanguis/client/events/net_error.hpp>
 #include <sanguis/client/events/render.hpp>
 #include <sanguis/client/events/tick.hpp>
+#include <sanguis/client/load/context.hpp>
+#include <sanguis/client/load/resource/context.hpp>
 #include <sanguis/client/states/log_location.hpp>
 #include <sanguis/client/states/menu.hpp>
 #include <sanguis/client/states/waiting_for_player.hpp>
@@ -75,6 +77,9 @@ sanguis::client::states::menu::menu(
 		this->context<
 			sanguis::client::machine
 		>().keyboard(),
+		this->context<
+			sanguis::client::machine
+		>().resources().resources().textures(),
 		this->context<
 			sanguis::client::machine
 		>().settings(),
