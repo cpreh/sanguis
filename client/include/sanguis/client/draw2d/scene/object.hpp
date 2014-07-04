@@ -33,6 +33,7 @@
 #include <sanguis/client/load/context_fwd.hpp>
 #include <sanguis/client/load/auras/context.hpp>
 #include <sanguis/client/load/model/collection_fwd.hpp>
+#include <sanguis/client/load/hud/context_fwd.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/renderer/screen_size_fwd.hpp>
@@ -67,6 +68,7 @@ class object
 public:
 	object(
 		sanguis::client::load::context const &,
+		sanguis::client::load::hud::context &,
 		sanguis::client::sound_manager &,
 		sge::renderer::device::ffp &,
 		sge::font::object &,
@@ -195,6 +197,8 @@ private:
 	sanguis::client::sound_manager &sound_manager_;
 
 	sanguis::client::load::context const &resources_;
+
+	sanguis::client::load::hud::context &hud_resources_;
 
 	sanguis::client::load::auras::context aura_resources_;
 

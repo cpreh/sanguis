@@ -2,7 +2,8 @@
 #include <sanguis/client/draw2d/scene/hover/base_unique_ptr.hpp>
 #include <sanguis/client/draw2d/scene/hover/create.hpp>
 #include <sanguis/client/draw2d/scene/hover/name.hpp>
-#include <sanguis/client/draw2d/scene/hover/parameters_fwd.hpp>
+#include <sanguis/client/draw2d/scene/hover/parameters.hpp>
+#include <sanguis/client/draw2d/scene/hover/weapon.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/nonassignable.hpp>
 #include <fcppt/variant/apply_unary.hpp>
@@ -46,6 +47,23 @@ sanguis::client::draw2d::scene::hover::create(
 				>(
 					parameters_,
 					_name
+				);
+		}
+
+		result_type
+		operator()(
+			sanguis::client::draw2d::entities::hover::weapon const &_weapon
+		) const
+		{
+			return
+				fcppt::make_unique_ptr<
+					sanguis::client::draw2d::scene::hover::weapon
+				>(
+					parameters_.renderer(),
+					parameters_.font(),
+					parameters_.center(),
+					parameters_.load_context(),
+					_weapon
 				);
 		}
 	private:

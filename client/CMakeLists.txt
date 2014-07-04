@@ -94,6 +94,8 @@ set(
 	include/sanguis/client/draw2d/entities/hover/optional_info_fwd.hpp
 	include/sanguis/client/draw2d/entities/hover/variant.hpp
 	include/sanguis/client/draw2d/entities/hover/variant_fwd.hpp
+	include/sanguis/client/draw2d/entities/hover/weapon.hpp
+	include/sanguis/client/draw2d/entities/hover/weapon_fwd.hpp
 	include/sanguis/client/draw2d/entities/ifaces/with_auras.hpp
 	include/sanguis/client/draw2d/entities/ifaces/with_buffs.hpp
 	include/sanguis/client/draw2d/entities/ifaces/with_center.hpp
@@ -130,6 +132,7 @@ set(
 	include/sanguis/client/draw2d/entities/player_fwd.hpp
 	include/sanguis/client/draw2d/entities/sentry.hpp
 	include/sanguis/client/draw2d/entities/unique_ptr.hpp
+	include/sanguis/client/draw2d/entities/weapon_pickup.hpp
 	include/sanguis/client/draw2d/entities/with_auras_decl.hpp
 	include/sanguis/client/draw2d/entities/with_auras_fwd.hpp
 	include/sanguis/client/draw2d/entities/with_auras_impl.hpp
@@ -193,6 +196,10 @@ set(
 	include/sanguis/client/draw2d/scene/hover/name.hpp
 	include/sanguis/client/draw2d/scene/hover/parameters.hpp
 	include/sanguis/client/draw2d/scene/hover/parameters_fwd.hpp
+	include/sanguis/client/draw2d/scene/hover/weapon.hpp
+	include/sanguis/client/draw2d/scene/hover/weapon_attribute.hpp
+	include/sanguis/client/draw2d/scene/hover/weapon_attribute_fwd.hpp
+	include/sanguis/client/draw2d/scene/hover/weapon_attribute_unique_ptr.hpp
 	include/sanguis/client/draw2d/scene/message_environment.hpp
 	include/sanguis/client/draw2d/scene/message_environment_fwd.hpp
 	include/sanguis/client/draw2d/scene/object.hpp
@@ -545,6 +552,7 @@ set(
 	include/sanguis/client/systems.hpp
 	include/sanguis/client/systems_fwd.hpp
 	include/sanguis/client/systems_unique_ptr.hpp
+	include/sanguis/client/weapon_description_from_message.hpp
 	include/sanguis/client/world_parameters.hpp
 	include/sanguis/client/world_parameters_fwd.hpp
 	src/client/args/display_mode.cpp
@@ -609,6 +617,7 @@ set(
 	src/client/draw2d/entities/own_player.cpp
 	src/client/draw2d/entities/player.cpp
 	src/client/draw2d/entities/sentry.cpp
+	src/client/draw2d/entities/weapon_pickup.cpp
 	src/client/draw2d/entities/with_auras_model.cpp
 	src/client/draw2d/entities/with_auras_model_parameters.cpp
 	src/client/draw2d/entities/with_buffs_auras_model.cpp
@@ -634,6 +643,8 @@ set(
 	src/client/draw2d/scene/hover/create.cpp
 	src/client/draw2d/scene/hover/name.cpp
 	src/client/draw2d/scene/hover/parameters.cpp
+	src/client/draw2d/scene/hover/weapon.cpp
+	src/client/draw2d/scene/hover/weapon_attribute.cpp
 	src/client/draw2d/scene/message_environment.cpp
 	src/client/draw2d/scene/object.cpp
 	src/client/draw2d/scene/translation.cpp

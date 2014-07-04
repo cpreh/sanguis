@@ -1,8 +1,5 @@
-#include <sanguis/magazine_extra.hpp>
 #include <sanguis/magazine_remaining.hpp>
-#include <sanguis/magazine_size.hpp>
 #include <sanguis/player_name.hpp>
-#include <sanguis/weapon_description.hpp>
 #include <sanguis/world_name.hpp>
 #include <sanguis/client/dispatch.hpp>
 #include <sanguis/client/exp.hpp>
@@ -14,6 +11,7 @@
 #include <sanguis/client/make_send_callback.hpp>
 #include <sanguis/client/player_health_callback.hpp>
 #include <sanguis/client/sound_manager.hpp>
+#include <sanguis/client/weapon_description_from_message.hpp>
 #include <sanguis/client/console/object.hpp>
 #include <sanguis/client/control/environment_fwd.hpp>
 #include <sanguis/client/control/input_translator.hpp>
@@ -34,7 +32,6 @@
 #include <sanguis/client/load/resource/context.hpp>
 #include <sanguis/messages/call/forward_to_default.hpp>
 #include <sanguis/messages/call/result.hpp>
-#include <sanguis/messages/convert/from_weapon_attribute_vector.hpp>
 #include <sanguis/messages/roles/command_description.hpp>
 #include <sanguis/messages/roles/command_name.hpp>
 #include <sanguis/messages/roles/console_message.hpp>
@@ -42,11 +39,7 @@
 #include <sanguis/messages/roles/experience.hpp>
 #include <sanguis/messages/roles/is_primary_weapon.hpp>
 #include <sanguis/messages/roles/level.hpp>
-#include <sanguis/messages/roles/magazine_base_size.hpp>
-#include <sanguis/messages/roles/magazine_extra_size.hpp>
 #include <sanguis/messages/roles/magazine_remaining.hpp>
-#include <sanguis/messages/roles/weapon_attribute_container.hpp>
-#include <sanguis/messages/roles/weapon_type.hpp>
 #include <sanguis/messages/roles/world_name.hpp>
 #include <sanguis/messages/server/add_console_command.hpp>
 #include <sanguis/messages/server/add_own_player.hpp>
@@ -134,6 +127,7 @@ sanguis::client::states::running::running(
 			this->context<
 				sanguis::client::machine
 			>().resources(),
+			hud_->resources(),
 			*sound_manager_,
 			this->context<
 				sanguis::client::machine
@@ -403,30 +397,8 @@ sanguis::client::states::running::operator()(
 )
 {
 	hud_->add_weapon(
-		sanguis::weapon_description(
-			_message.get<
-				sanguis::messages::roles::weapon_type
-			>(),
-			sanguis::magazine_size(
-				_message.get<
-					sanguis::messages::roles::magazine_base_size
-				>()
-			),
-			sanguis::magazine_extra(
-				_message.get<
-					sanguis::messages::roles::magazine_extra_size
-				>()
-			),
-			sanguis::magazine_remaining(
-				_message.get<
-					sanguis::messages::roles::magazine_remaining
-				>()
-			),
-			sanguis::messages::convert::from_weapon_attribute_vector(
-				_message.get<
-					sanguis::messages::roles::weapon_attribute_container
-				>()
-			)
+		sanguis::client::weapon_description_from_message(
+			_message
 		)
 	);
 

@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_HOVER_VARIANT_FWD_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/entities/hover/name_fwd.hpp>
+#include <sanguis/client/draw2d/entities/hover/weapon_fwd.hpp>
 #include <fcppt/variant/object_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
@@ -21,8 +22,9 @@ namespace hover
 
 typedef
 fcppt::variant::object<
-	boost::mpl::vector1<
-		sanguis::client::draw2d::entities::hover::name
+	boost::mpl::vector2<
+		sanguis::client::draw2d::entities::hover::name,
+		sanguis::client::draw2d::entities::hover::weapon
 	>
 >
 variant;

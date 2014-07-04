@@ -4,6 +4,7 @@
 #include <sanguis/creator/top_parameters.hpp>
 #include <sanguis/client/health.hpp>
 #include <sanguis/client/max_health.hpp>
+#include <sanguis/client/weapon_description_from_message.hpp>
 #include <sanguis/client/world_parameters.hpp>
 #include <sanguis/client/draw2d/aoe.hpp>
 #include <sanguis/client/draw2d/log.hpp>
@@ -59,7 +60,6 @@
 #include <sanguis/messages/roles/seed.hpp>
 #include <sanguis/messages/roles/speed.hpp>
 #include <sanguis/messages/roles/weapon_status.hpp>
-#include <sanguis/messages/roles/weapon_type.hpp>
 #include <sanguis/messages/roles/world_id.hpp>
 #include <sanguis/messages/server/add_aoe_projectile.hpp>
 #include <sanguis/messages/server/add_aura.hpp>
@@ -85,6 +85,8 @@
 #include <sanguis/messages/server/speed.hpp>
 #include <sanguis/messages/server/weapon_status.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
+#include <alda/serialization/load/optional.hpp>
+#include <alda/serialization/load/static_size.hpp>
 #include <majutsu/unwrap_role.hpp>
 #include <fcppt/dynamic_cast.hpp>
 #include <fcppt/type_name_from_info.hpp>
@@ -351,9 +353,9 @@ sanguis::client::draw2d::message::dispatcher::operator()(
 	this->configure_new_object(
 		sanguis::client::draw2d::factory::weapon_pickup(
 			env_.model_parameters(),
-			_message.get<
-				sanguis::messages::roles::weapon_type
-			>()
+			sanguis::client::weapon_description_from_message(
+				_message
+			)
 		),
 		_message
 	);

@@ -1,0 +1,116 @@
+#include <sanguis/weapon_attribute_fwd.hpp>
+#include <sanguis/client/draw2d/entities/hover/weapon.hpp>
+#include <sanguis/client/draw2d/scene/hover/base.hpp>
+#include <sanguis/client/draw2d/scene/hover/weapon.hpp>
+#include <sanguis/client/draw2d/scene/hover/weapon_attribute.hpp>
+#include <sanguis/client/draw2d/scene/hover/weapon_attribute_unique_ptr.hpp>
+#include <sanguis/client/draw2d/sprite/center.hpp>
+#include <sanguis/client/load/hud/context.hpp>
+#include <sanguis/gui/default_aspect.hpp>
+#include <sanguis/gui/widget/reference_alignment_pair.hpp>
+#include <sanguis/gui/widget/reference_alignment_vector.hpp>
+#include <sanguis/gui/widget/reference.hpp>
+#include <sge/font/object_fwd.hpp>
+#include <sge/renderer/context/ffp_fwd.hpp>
+#include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/rucksack/alignment.hpp>
+#include <sge/rucksack/axis.hpp>
+#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/algorithm/join.hpp>
+#include <fcppt/algorithm/map.hpp>
+
+
+sanguis::client::draw2d::scene::hover::weapon::weapon(
+	sge::renderer::device::ffp &_renderer,
+	sge::font::object &_font,
+	sanguis::client::draw2d::sprite::center const _center,
+	sanguis::client::load::hud::context &_hud_resources,
+	sanguis::client::draw2d::entities::hover::weapon const &_info
+)
+:
+	gui_context_(),
+	image_(
+		_renderer,
+		_hud_resources.weapon_icon(
+			_info.get().weapon_type()
+		)
+	),
+	weapon_attributes_(
+		fcppt::algorithm::map<
+			sanguis::client::draw2d::scene::hover::weapon::weapon_attribute_vector
+		>(
+			_info.get().attributes(),
+			[
+				this,
+				&_renderer,
+				&_font
+			](
+				sanguis::weapon_attribute const &_attribute
+			)
+			{
+				return
+					fcppt::make_unique_ptr<
+						sanguis::client::draw2d::scene::hover::weapon_attribute
+					>(
+						gui_context_,
+						_renderer,
+						_font,
+						_attribute
+					);
+			}
+		)
+	),
+	container_(
+		gui_context_,
+		fcppt::algorithm::join(
+			sanguis::gui::widget::reference_alignment_vector{
+				sanguis::gui::widget::reference_alignment_pair{
+					sanguis::gui::widget::reference{
+						image_
+					},
+					sge::rucksack::alignment::center
+				}
+			},
+			fcppt::algorithm::map<
+				sanguis::gui::widget::reference_alignment_vector
+			>(
+				weapon_attributes_,
+				[](
+					sanguis::client::draw2d::scene::hover::weapon_attribute_unique_ptr const &_attribute
+				)
+				{
+					return
+						sanguis::gui::widget::reference_alignment_pair{
+							sanguis::gui::widget::reference{
+								_attribute->widget()
+							},
+							sge::rucksack::alignment::center
+						};
+				}
+			)
+		),
+		sge::rucksack::axis::y,
+		sanguis::gui::default_aspect()
+	),
+	gui_area_(
+		container_,
+		_center.get()
+	)
+{
+}
+
+sanguis::client::draw2d::scene::hover::weapon::~weapon()
+{
+}
+
+void
+sanguis::client::draw2d::scene::hover::weapon::draw(
+	sge::renderer::context::ffp &_render_context
+)
+{
+/*
+	// TODO: Make a background class for widgets
+	gui_area_.widget().draw(
+		_render_context
+	);*/
+}

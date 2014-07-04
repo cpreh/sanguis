@@ -252,4 +252,3 @@ sanguis::gui::master::try_focus(
 	return
 		result;
 }
-

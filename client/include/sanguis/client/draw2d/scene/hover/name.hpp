@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_HOVER_NAME_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_HOVER_NAME_HPP_INCLUDED
 
-#include <sanguis/client/draw2d/entities/hover/name.hpp>
+#include <sanguis/client/draw2d/entities/hover/name_fwd.hpp>
 #include <sanguis/client/draw2d/scene/hover/base.hpp>
 #include <sanguis/client/draw2d/scene/hover/parameters_fwd.hpp>
 #include <sge/font/draw/static_text.hpp>

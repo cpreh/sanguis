@@ -119,6 +119,9 @@ public:
 	details(
 		bool
 	);
+
+	sanguis::client::load::hud::context &
+	resources();
 private:
 	sanguis::client::gui::hud::weapon_widget &
 	weapon_widget(

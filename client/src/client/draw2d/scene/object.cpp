@@ -41,6 +41,7 @@
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
 #include <sanguis/client/draw2d/sprite/colored/system_decl.hpp>
 #include <sanguis/client/load/context.hpp>
+#include <sanguis/client/load/hud/context_fwd.hpp>
 #include <sanguis/client/load/resource/context.hpp>
 #include <sanguis/messages/server/add_aoe_projectile.hpp>
 #include <sanguis/messages/server/add_aura.hpp>
@@ -108,6 +109,7 @@
 
 sanguis::client::draw2d::scene::object::object(
 	sanguis::client::load::context const &_resources,
+	sanguis::client::load::hud::context &_hud_resources,
 	sanguis::client::sound_manager &_sound_manager,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
@@ -124,6 +126,9 @@ sanguis::client::draw2d::scene::object::object(
 	),
 	resources_(
 		_resources
+	),
+	hud_resources_(
+		_hud_resources
 	),
 	aura_resources_(
 		resources_.resources().textures()
@@ -358,7 +363,8 @@ sanguis::client::draw2d::scene::object::pause(
 	bool const _paused
 )
 {
-	paused_ = _paused;
+	paused_ =
+		_paused;
 
 	for(
 		auto &cur
@@ -382,7 +388,8 @@ sanguis::client::draw2d::scene::object::pause(
 sanguis::client::control::environment &
 sanguis::client::draw2d::scene::object::control_environment() const
 {
-	return *control_environment_;
+	return
+		*control_environment_;
 }
 
 void
@@ -463,45 +470,37 @@ sanguis::client::draw2d::scene::object::render_systems(
 		*translation_
 	);
 
-	{
-		sge::renderer::state::ffp::transform::scoped const scoped_transform(
-			_render_context,
-			sge::renderer::state::ffp::transform::mode::world,
-			*transform_state
-		);
-
-		world_->draw(
-			_render_context
-		);
-
-		for(
-			auto index
-			:
-			fcppt::make_enum_range_start_end(
-				sanguis::client::draw2d::z_ordering::corpses,
-				sanguis::client::draw2d::z_ordering::flare
-			)
-		)
-			normal_system_.render(
-				_render_context,
-				index
-			);
-
-		for(
-			sanguis::client::draw2d::scene::hover::base_unique_ptr const &hover
-			:
-			hovers_
-		)
-			hover->draw(
-				_render_context
-			);
-	}
-
 	sge::renderer::state::ffp::transform::scoped const scoped_transform(
 		_render_context,
 		sge::renderer::state::ffp::transform::mode::world,
 		*transform_state
 	);
+
+	world_->draw(
+		_render_context
+	);
+
+	for(
+		auto index
+		:
+		fcppt::make_enum_range_start_end(
+			sanguis::client::draw2d::z_ordering::corpses,
+			sanguis::client::draw2d::z_ordering::flare
+		)
+	)
+		normal_system_.render(
+			_render_context,
+			index
+		);
+
+	for(
+		sanguis::client::draw2d::scene::hover::base_unique_ptr const &hover
+		:
+		hovers_
+	)
+		hover->draw(
+			_render_context
+		);
 
 	for(
 		auto const index
@@ -605,6 +604,7 @@ sanguis::client::draw2d::scene::object::hover_display(
 			sanguis::client::draw2d::scene::hover::parameters(
 				renderer_,
 				font_,
+				hud_resources_,
 				_entity.center(),
 				_entity.radius()
 			),

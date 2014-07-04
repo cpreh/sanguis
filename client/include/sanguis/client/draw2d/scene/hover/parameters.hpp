@@ -4,6 +4,7 @@
 #include <sanguis/client/draw2d/radius.hpp>
 #include <sanguis/client/draw2d/scene/hover/parameters_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
+#include <sanguis/client/load/hud/context_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <fcppt/nonassignable.hpp>
@@ -29,6 +30,7 @@ public:
 	parameters(
 		sge::renderer::device::ffp &,
 		sge::font::object &,
+		sanguis::client::load::hud::context &,
 		sanguis::client::draw2d::sprite::center,
 		sanguis::client::draw2d::radius
 	);
@@ -39,6 +41,9 @@ public:
 	sge::font::object &
 	font() const;
 
+	sanguis::client::load::hud::context &
+	load_context() const;
+
 	sanguis::client::draw2d::sprite::center const
 	center() const;
 
@@ -48,6 +53,8 @@ private:
 	sge::renderer::device::ffp &renderer_;
 
 	sge::font::object &font_;
+
+	sanguis::client::load::hud::context &load_context_;
 
 	sanguis::client::draw2d::sprite::center const center_;
 
