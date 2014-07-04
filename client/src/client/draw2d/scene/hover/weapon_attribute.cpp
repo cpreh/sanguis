@@ -31,12 +31,17 @@ sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 		_font,
 		sanguis::client::gui::hud::weapon_attribute_name(
 			_attribute.type()
-		),
+		)
+		+
+		SGE_FONT_LIT(": "),
 		sanguis::gui::text_color(
 			sanguis::client::gui::hud::weapon_attribute_color(
 				_attribute.type()
 			)
 		)
+	},
+	expander1_{
+		sge::rucksack::axis::x
 	},
 	value_{
 		_renderer,
@@ -62,7 +67,8 @@ sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 	diff_{
 		_renderer,
 		_font,
-		SGE_FONT_LIT("TODO"),
+		// TODO:
+		sge::font::string(),
 		sanguis::gui::text_color(
 			sge::image::color::predef::black()
 		)
@@ -73,6 +79,12 @@ sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 			sanguis::gui::widget::reference_alignment_pair{
 				sanguis::gui::widget::reference{
 					name_
+				},
+				sge::rucksack::alignment::center
+			},
+			sanguis::gui::widget::reference_alignment_pair{
+				sanguis::gui::widget::reference{
+					expander1_
 				},
 				sge::rucksack::alignment::center
 			},

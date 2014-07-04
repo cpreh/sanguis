@@ -6,6 +6,7 @@
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/widget/base_fwd.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
+#include <sanguis/gui/widget/expander.hpp>
 #include <sanguis/gui/widget/static_text.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
@@ -42,6 +43,8 @@ public:
 	widget();
 private:
 	sanguis::gui::widget::static_text name_;
+
+	sanguis::gui::widget::expander expander1_;
 
 	sanguis::gui::widget::static_text value_;
 

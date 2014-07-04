@@ -85,7 +85,7 @@ sanguis::client::draw2d::scene::hover::weapon::weapon(
 							sanguis::gui::widget::reference{
 								_attribute->widget()
 							},
-							sge::rucksack::alignment::center
+							sge::rucksack::alignment::left_or_top
 						};
 				}
 			)
