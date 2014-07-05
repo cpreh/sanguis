@@ -13,6 +13,7 @@
 #include <sanguis/client/events/render_fwd.hpp>
 #include <sanguis/client/events/tick_fwd.hpp>
 #include <sanguis/client/gui/hud/object_fwd.hpp>
+#include <sanguis/client/load/hud/context.hpp>
 #include <sanguis/client/states/ingame_fwd.hpp>
 #include <sanguis/messages/call/result_fwd.hpp>
 #include <sanguis/messages/server/add_console_command_fwd.hpp>
@@ -174,6 +175,13 @@ private:
 	handle_player_action(
 		sanguis::client::control::actions::any const &
 	);
+
+	void
+	do_pause(
+		bool
+	);
+
+	sanguis::client::load::hud::context hud_resources_;
 
 	std::unique_ptr<
 		sanguis::client::console::object

@@ -77,6 +77,11 @@ sanguis::client::states::running::running(
 	my_base(
 		_ctx
 	),
+	hud_resources_(
+		this->context<
+			sanguis::client::machine
+		>().resources().resources().textures()
+	),
 	console_(
 		fcppt::make_unique_ptr<
 			sanguis::client::console::object
@@ -100,9 +105,7 @@ sanguis::client::states::running::running(
 		fcppt::make_unique_ptr<
 			sanguis::client::gui::hud::object
 		>(
-			this->context<
-				sanguis::client::machine
-			>().resources().resources().textures(),
+			hud_resources_,
 			this->context<
 				sanguis::client::machine
 			>().font_object(),
@@ -127,7 +130,7 @@ sanguis::client::states::running::running(
 			this->context<
 				sanguis::client::machine
 			>().resources(),
-			hud_->resources(),
+			hud_resources_,
 			*sound_manager_,
 			this->context<
 				sanguis::client::machine
@@ -459,11 +462,7 @@ sanguis::client::states::running::operator()(
 	sanguis::messages::server::pause const &
 )
 {
-	drawer_->pause(
-		true
-	);
-
-	sound_manager_->pause(
+	this->do_pause(
 		true
 	);
 
@@ -495,11 +494,7 @@ sanguis::client::states::running::operator()(
 	sanguis::messages::server::unpause const &
 )
 {
-	drawer_->pause(
-		false
-	);
-
-	sound_manager_->pause(
+	this->do_pause(
 		false
 	);
 
@@ -546,5 +541,19 @@ sanguis::client::states::running::handle_player_action(
 		sanguis::client::events::action(
 			_action
 		)
+	);
+}
+
+void
+sanguis::client::states::running::do_pause(
+	bool const _pause
+)
+{
+	drawer_->pause(
+		_pause
+	);
+
+	sound_manager_->pause(
+		_pause
 	);
 }

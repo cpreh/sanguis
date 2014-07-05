@@ -14,8 +14,7 @@
 #include <sanguis/client/gui/hud/object_fwd.hpp>
 #include <sanguis/client/gui/hud/weapon_details_fwd.hpp>
 #include <sanguis/client/gui/hud/weapon_widget.hpp>
-#include <sanguis/client/load/hud/context.hpp>
-#include <sanguis/client/load/resource/textures_fwd.hpp>
+#include <sanguis/client/load/hud/context_fwd.hpp>
 #include <sanguis/gui/context.hpp>
 #include <sanguis/gui/master.hpp>
 #include <sanguis/gui/background/colored.hpp>
@@ -54,7 +53,7 @@ class object
 	);
 public:
 	object(
-		sanguis::client::load::resource::textures const &,
+		sanguis::client::load::hud::context &,
 		sge::font::object &,
 		sge::renderer::device::ffp &,
 		sge::viewport::manager &,
@@ -120,9 +119,6 @@ public:
 	details(
 		bool
 	);
-
-	sanguis::client::load::hud::context &
-	resources();
 private:
 	sanguis::client::gui::hud::weapon_widget &
 	weapon_widget(
@@ -138,7 +134,7 @@ private:
 	void
 	create_details();
 
-	sanguis::client::load::hud::context resources_;
+	sanguis::client::load::hud::context &resources_;
 
 	sge::font::object &font_;
 

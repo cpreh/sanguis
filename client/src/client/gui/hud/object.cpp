@@ -15,8 +15,7 @@
 #include <sanguis/client/gui/hud/object.hpp>
 #include <sanguis/client/gui/hud/weapon_details.hpp>
 #include <sanguis/client/gui/hud/weapon_widget.hpp>
-#include <sanguis/client/load/hud/context.hpp>
-#include <sanguis/client/load/resource/textures_fwd.hpp>
+#include <sanguis/client/load/hud/context_fwd.hpp>
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/gravity.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
@@ -46,7 +45,7 @@
 
 
 sanguis::client::gui::hud::object::object(
-	sanguis::client::load::resource::textures const &_textures,
+	sanguis::client::load::hud::context &_resources,
 	sge::font::object &_font,
 	sge::renderer::device::ffp &_renderer,
 	sge::viewport::manager &_viewport_manager,
@@ -55,7 +54,7 @@ sanguis::client::gui::hud::object::object(
 )
 :
 	resources_(
-		_textures
+		_resources
 	),
 	font_(
 		_font
@@ -454,13 +453,6 @@ sanguis::client::gui::hud::object::details(
 		this->create_details();
 	else
 		weapon_details_.reset();
-}
-
-sanguis::client::load::hud::context &
-sanguis::client::gui::hud::object::resources()
-{
-	return
-		resources_;
 }
 
 sanguis::client::gui::hud::weapon_widget &
