@@ -1,6 +1,6 @@
 #include <sanguis/duration_second.hpp>
 #include <sanguis/server/weapons/aoe.hpp>
-#include <sanguis/server/weapons/base_cooldown.hpp>
+#include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/grenade.hpp>
@@ -45,9 +45,9 @@ sanguis::server::weapons::factory::grenade(
 					>
 				},
 				sanguis::server::weapons::grenade_parameters(
-					sanguis::server::weapons::base_cooldown(
+					sanguis::server::weapons::backswing_time(
 						sanguis::duration_second(
-							0.7f
+							0.6f
 						)
 					),
 					sanguis::server::weapons::damage(

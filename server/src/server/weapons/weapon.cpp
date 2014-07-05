@@ -3,7 +3,6 @@
 #include <sanguis/magazine_extra.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/magazine_size.hpp>
-#include <sanguis/log_parameters.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/update_diff_clock.hpp>
 #include <sanguis/weapon_attribute_type.hpp>
@@ -14,9 +13,7 @@
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
-#include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
-#include <sanguis/server/weapons/log_location.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/target.hpp>
@@ -29,32 +26,13 @@
 #include <sanguis/server/weapons/events/shoot.hpp>
 #include <sanguis/server/weapons/events/stop.hpp>
 #include <sanguis/server/weapons/states/idle.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/algorithm/join.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/pre.hpp>
-#include <fcppt/log/_.hpp>
-#include <fcppt/log/location.hpp>
-#include <fcppt/log/object.hpp>
-#include <fcppt/log/warning.hpp>
-#include <fcppt/log/parameters/object.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 
-
-namespace
-{
-
-fcppt::log::object logger(
-	sanguis::log_parameters(
-		sanguis::server::weapons::log_location()
-		/
-		FCPPT_TEXT("weapon")
-	)
-);
-
-}
 
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
@@ -65,7 +43,7 @@ sanguis::server::weapons::weapon::weapon(
 	sanguis::server::weapons::attributes::optional_accuracy const _accuracy,
 	sanguis::server::weapons::range const _range,
 	sanguis::server::weapons::attributes::optional_magazine_size const _magazine_size,
-	sanguis::server::weapons::base_cooldown const _base_cooldown,
+	sanguis::server::weapons::backswing_time const _backswing_time,
 	sanguis::server::weapons::cast_point const _cast_point,
 	sanguis::server::weapons::optional_reload_time const _reload_time
 )
@@ -93,30 +71,19 @@ sanguis::server::weapons::weapon::weapon(
 		_cast_point
 	),
 	backswing_time_(
-		_base_cooldown.get()
-		-
-		_cast_point.get()
+		_backswing_time
 	),
 	reload_time_(
 		_reload_time
 	),
 	owner_()
 {
-	if(
-		_cast_point.get()
-		>
-		_base_cooldown.get()
-	)
-		FCPPT_LOG_WARNING(
-			::logger,
-			fcppt::log::_
-				<< FCPPT_TEXT("A weapon's cast point interval is bigger than its cooldown!")
-	);
-
 	FCPPT_ASSERT_PRE(
 		!this->magazine_size()
 		||
-		this->magazine_size()->value().get() != 0u
+		this->magazine_size()->value().get()
+		!=
+		0u
 	);
 }
 

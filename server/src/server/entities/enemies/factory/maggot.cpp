@@ -16,7 +16,7 @@
 #include <sanguis/server/entities/enemies/factory/make.hpp>
 #include <sanguis/server/entities/enemies/factory/maggot.hpp>
 #include <sanguis/server/entities/enemies/factory/parameters.hpp>
-#include <sanguis/server/weapons/base_cooldown.hpp>
+#include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/melee.hpp>
 #include <sanguis/server/weapons/range.hpp>
@@ -57,7 +57,7 @@ sanguis::server::entities::enemies::factory::maggot(
 				sanguis::server::weapons::range(
 					75.f
 				),
-				sanguis::server::weapons::base_cooldown(
+				sanguis::server::weapons::backswing_time(
 					sanguis::duration_second(
 						1.f
 					)

@@ -6,7 +6,7 @@
 #include <sanguis/server/damage/array.hpp>
 #include <sanguis/server/weapons/attack_fwd.hpp>
 #include <sanguis/server/weapons/attack_result_fwd.hpp>
-#include <sanguis/server/weapons/base_cooldown.hpp>
+#include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
@@ -32,7 +32,7 @@ public:
 	melee(
 		sanguis::random_generator &,
 		sanguis::server::weapons::range,
-		sanguis::server::weapons::base_cooldown,
+		sanguis::server::weapons::backswing_time,
 		sanguis::server::weapons::damage,
 		sanguis::server::damage::array const &
 	);

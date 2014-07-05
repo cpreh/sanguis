@@ -529,7 +529,6 @@ set(
 	include/sanguis/server/weapons/attributes/spread_radius.hpp
 	include/sanguis/server/weapons/attributes/spread_radius_fwd.hpp
 	include/sanguis/server/weapons/backswing_time.hpp
-	include/sanguis/server/weapons/base_cooldown.hpp
 	include/sanguis/server/weapons/cast_point.hpp
 	include/sanguis/server/weapons/const_optional_ref.hpp
 	include/sanguis/server/weapons/const_optional_ref_fwd.hpp

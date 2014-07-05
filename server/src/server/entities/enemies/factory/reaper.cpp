@@ -22,7 +22,7 @@
 #include <sanguis/server/entities/enemies/modifiers/regenerating.hpp>
 #include <sanguis/server/entities/enemies/skills/factory/container.hpp>
 #include <sanguis/server/entities/enemies/skills/factory/scatter.hpp>
-#include <sanguis/server/weapons/base_cooldown.hpp>
+#include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/melee.hpp>
 #include <sanguis/server/weapons/range.hpp>
@@ -66,7 +66,7 @@ sanguis::server::entities::enemies::factory::reaper(
 			sanguis::server::weapons::range(
 				75.f
 			),
-			sanguis::server::weapons::base_cooldown(
+			sanguis::server::weapons::backswing_time(
 				sanguis::duration_second(
 					2.f
 				)

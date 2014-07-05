@@ -14,7 +14,7 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/attack.hpp>
 #include <sanguis/server/weapons/attack_result.hpp>
-#include <sanguis/server/weapons/base_cooldown.hpp>
+#include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/insert_to_attack_result.hpp>
 #include <sanguis/server/weapons/monster_spawner.hpp>
@@ -41,9 +41,9 @@ sanguis::server::weapons::monster_spawner::monster_spawner(
 			1000.f
 		),
 		sanguis::server::weapons::attributes::optional_magazine_size(),
-		sanguis::server::weapons::base_cooldown(
+		sanguis::server::weapons::backswing_time(
 			sanguis::duration_second(
-				1.f
+				0.8f
 			)
 		),
 		sanguis::server::weapons::cast_point(

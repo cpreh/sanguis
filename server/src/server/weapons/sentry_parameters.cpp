@@ -1,5 +1,5 @@
 #include <sanguis/server/health.hpp>
-#include <sanguis/server/weapons/base_cooldown.hpp>
+#include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/range.hpp>
@@ -8,7 +8,7 @@
 
 sanguis::server::weapons::sentry_parameters::sentry_parameters(
 	sanguis::server::health const _health,
-	sanguis::server::weapons::base_cooldown const _base_cooldown,
+	sanguis::server::weapons::backswing_time const _backswing_time,
 	sanguis::server::weapons::cast_point const _cast_point,
 	sanguis::server::weapons::range const _range,
 	sanguis::server::weapons::magazine_size const _magazine_size
@@ -17,8 +17,8 @@ sanguis::server::weapons::sentry_parameters::sentry_parameters(
 	health_(
 		_health
 	),
-	base_cooldown_(
-		_base_cooldown
+	backswing_time_(
+		_backswing_time
 	),
 	cast_point_(
 		_cast_point
@@ -39,11 +39,11 @@ sanguis::server::weapons::sentry_parameters::health() const
 		health_;
 }
 
-sanguis::server::weapons::base_cooldown const
-sanguis::server::weapons::sentry_parameters::base_cooldown() const
+sanguis::server::weapons::backswing_time const
+sanguis::server::weapons::sentry_parameters::backswing_time() const
 {
 	return
-		base_cooldown_;
+		backswing_time_;
 }
 
 sanguis::server::weapons::cast_point const

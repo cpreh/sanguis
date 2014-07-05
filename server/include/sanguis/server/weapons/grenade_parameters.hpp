@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_WEAPONS_GRENADE_PARAMETERS_HPP_INCLUDED
 
 #include <sanguis/server/weapons/aoe.hpp>
-#include <sanguis/server/weapons/base_cooldown.hpp>
+#include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/grenade_parameters_fwd.hpp>
@@ -28,7 +28,7 @@ class grenade_parameters
 	);
 public:
 	grenade_parameters(
-		sanguis::server::weapons::base_cooldown,
+		sanguis::server::weapons::backswing_time,
 		sanguis::server::weapons::damage,
 		sanguis::server::weapons::aoe,
 		sanguis::server::weapons::cast_point,
@@ -36,8 +36,8 @@ public:
 		sanguis::server::weapons::magazine_size
 	);
 
-	sanguis::server::weapons::base_cooldown const
-	base_cooldown() const;
+	sanguis::server::weapons::backswing_time const
+	backswing_time() const;
 
 	sanguis::server::weapons::attributes::damage const
 	damage() const;
@@ -69,7 +69,7 @@ public:
 		sanguis::server::weapons::magazine_size
 	);
 private:
-	sanguis::server::weapons::base_cooldown const base_cooldown_;
+	sanguis::server::weapons::backswing_time const backswing_time_;
 
 	sanguis::server::weapons::attributes::damage damage_;
 

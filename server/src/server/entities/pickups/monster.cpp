@@ -22,7 +22,7 @@
 #include <sanguis/server/entities/pickups/pickup.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/environment/object.hpp>
-#include <sanguis/server/weapons/base_cooldown.hpp>
+#include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/melee.hpp>
 #include <sanguis/server/weapons/range.hpp>
@@ -103,7 +103,7 @@ sanguis::server::entities::pickups::monster::do_pickup(
 				sanguis::server::weapons::range(
 					100.f
 				),
-				sanguis::server::weapons::base_cooldown(
+				sanguis::server::weapons::backswing_time(
 					sanguis::duration_second(
 						1.f
 					)

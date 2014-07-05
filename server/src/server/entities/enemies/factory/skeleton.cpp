@@ -21,7 +21,7 @@
 #include <sanguis/server/entities/enemies/factory/make.hpp>
 #include <sanguis/server/entities/enemies/factory/parameters.hpp>
 #include <sanguis/server/entities/enemies/factory/skeleton.hpp>
-#include <sanguis/server/weapons/base_cooldown.hpp>
+#include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/melee.hpp>
 #include <sanguis/server/weapons/range.hpp>
@@ -68,7 +68,7 @@ sanguis::server::entities::enemies::factory::skeleton(
 				sanguis::server::weapons::range(
 					100.f
 				),
-				sanguis::server::weapons::base_cooldown(
+				sanguis::server::weapons::backswing_time(
 					sanguis::duration_second(
 						1.f
 					)

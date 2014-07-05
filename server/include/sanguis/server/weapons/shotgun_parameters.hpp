@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_WEAPONS_SHOTGUN_PARAMETERS_HPP_INCLUDED
 
 #include <sanguis/server/weapons/accuracy.hpp>
-#include <sanguis/server/weapons/base_cooldown.hpp>
+#include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/shells.hpp>
@@ -32,7 +32,7 @@ class shotgun_parameters
 public:
 	shotgun_parameters(
 		sanguis::server::weapons::accuracy,
-		sanguis::server::weapons::base_cooldown,
+		sanguis::server::weapons::backswing_time,
 		sanguis::server::weapons::cast_point,
 		sanguis::server::weapons::spread_radius,
 		sanguis::server::weapons::shells,
@@ -45,8 +45,8 @@ public:
 	sanguis::server::weapons::attributes::accuracy const
 	accuracy() const;
 
-	sanguis::server::weapons::base_cooldown const
-	base_cooldown() const;
+	sanguis::server::weapons::backswing_time const
+	backswing_time() const;
 
 	sanguis::server::weapons::cast_point const
 	cast_point() const;
@@ -91,7 +91,7 @@ public:
 private:
 	sanguis::server::weapons::attributes::accuracy accuracy_;
 
-	sanguis::server::weapons::base_cooldown const base_cooldown_;
+	sanguis::server::weapons::backswing_time const backswing_time_;
 
 	sanguis::server::weapons::cast_point const cast_point_;
 

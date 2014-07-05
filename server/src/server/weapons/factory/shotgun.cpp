@@ -1,6 +1,6 @@
 #include <sanguis/duration_second.hpp>
 #include <sanguis/server/weapons/accuracy.hpp>
-#include <sanguis/server/weapons/base_cooldown.hpp>
+#include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
@@ -56,9 +56,9 @@ sanguis::server::weapons::factory::shotgun(
 					sanguis::server::weapons::accuracy(
 						0.9f
 					),
-					sanguis::server::weapons::base_cooldown(
+					sanguis::server::weapons::backswing_time(
 						sanguis::duration_second(
-							1.f
+							0.5f
 						)
 					),
 					sanguis::server::weapons::cast_point(

@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_WEAPONS_SENTRY_PARAMETERS_HPP_INCLUDED
 
 #include <sanguis/server/health.hpp>
-#include <sanguis/server/weapons/base_cooldown.hpp>
+#include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/range.hpp>
@@ -25,7 +25,7 @@ class sentry_parameters
 public:
 	sentry_parameters(
 		sanguis::server::health,
-		sanguis::server::weapons::base_cooldown,
+		sanguis::server::weapons::backswing_time,
 		sanguis::server::weapons::cast_point,
 		sanguis::server::weapons::range,
 		sanguis::server::weapons::magazine_size
@@ -34,8 +34,8 @@ public:
 	sanguis::server::health const
 	health() const;
 
-	sanguis::server::weapons::base_cooldown const
-	base_cooldown() const;
+	sanguis::server::weapons::backswing_time const
+	backswing_time() const;
 
 	sanguis::server::weapons::cast_point const
 	cast_point() const;
@@ -53,7 +53,7 @@ public:
 private:
 	sanguis::server::health health_;
 
-	sanguis::server::weapons::base_cooldown const base_cooldown_;
+	sanguis::server::weapons::backswing_time const backswing_time_;
 
 	sanguis::server::weapons::cast_point const cast_point_;
 

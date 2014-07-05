@@ -44,7 +44,7 @@ sanguis::server::weapons::rocket_launcher::rocket_launcher(
 				_parameters.magazine_size()
 			)
 		),
-		_parameters.base_cooldown(),
+		_parameters.backswing_time(),
 		_parameters.cast_point(),
 		sanguis::server::weapons::optional_reload_time(
 			_parameters.reload_time()

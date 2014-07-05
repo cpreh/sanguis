@@ -3,7 +3,7 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/weapons/accuracy.hpp>
-#include <sanguis/server/weapons/base_cooldown.hpp>
+#include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
@@ -33,9 +33,9 @@ sanguis::server::weapons::player_start_weapon(
 				sanguis::server::weapons::accuracy(
 					0.8f
 				),
-				sanguis::server::weapons::base_cooldown(
+				sanguis::server::weapons::backswing_time(
 					sanguis::duration_second(
-						0.5f
+						0.3f
 					)
 				),
 				sanguis::server::weapons::damage(

@@ -16,7 +16,6 @@
 #include <sanguis/server/weapons/attack_fwd.hpp>
 #include <sanguis/server/weapons/attack_result_fwd.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
-#include <sanguis/server/weapons/base_cooldown.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/range.hpp>
@@ -59,7 +58,7 @@ protected:
 		sanguis::server::weapons::attributes::optional_accuracy,
 		sanguis::server::weapons::range,
 		sanguis::server::weapons::attributes::optional_magazine_size,
-		sanguis::server::weapons::base_cooldown,
+		sanguis::server::weapons::backswing_time,
 		sanguis::server::weapons::cast_point,
 		sanguis::server::weapons::optional_reload_time
 	);

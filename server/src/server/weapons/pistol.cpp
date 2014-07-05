@@ -13,7 +13,7 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/attack.hpp>
 #include <sanguis/server/weapons/attack_result.hpp>
-#include <sanguis/server/weapons/base_cooldown.hpp>
+#include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/pistol.hpp>
 #include <sanguis/server/weapons/pistol_parameters.hpp>
@@ -40,7 +40,7 @@ sanguis::server::weapons::pistol::pistol(
 		sanguis::server::weapons::attributes::optional_magazine_size(
 			_parameters.magazine_size()
 		),
-		_parameters.base_cooldown(),
+		_parameters.backswing_time(),
 		_parameters.cast_point(),
 		sanguis::server::weapons::optional_reload_time(
 			_parameters.reload_time()

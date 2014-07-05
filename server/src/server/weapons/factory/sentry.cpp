@@ -4,7 +4,7 @@
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/weapons/accuracy.hpp>
-#include <sanguis/server/weapons/base_cooldown.hpp>
+#include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
@@ -71,7 +71,7 @@ sanguis::server::weapons::factory::sentry(
 									sanguis::server::weapons::accuracy(
 										0.95f
 									),
-									sanguis::server::weapons::base_cooldown(
+									sanguis::server::weapons::backswing_time(
 										sanguis::duration_second(
 											0.06f
 										)
@@ -118,9 +118,9 @@ sanguis::server::weapons::factory::sentry(
 					sanguis::server::health(
 						100.f
 					),
-					sanguis::server::weapons::base_cooldown(
+					sanguis::server::weapons::backswing_time(
 						sanguis::duration_second(
-							5.f
+							3.f
 						)
 					),
 					sanguis::server::weapons::cast_point(

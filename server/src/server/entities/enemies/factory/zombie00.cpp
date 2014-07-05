@@ -16,7 +16,7 @@
 #include <sanguis/server/entities/enemies/factory/parameters.hpp>
 #include <sanguis/server/entities/enemies/factory/zombie00.hpp>
 #include <sanguis/server/weapons/accuracy.hpp>
-#include <sanguis/server/weapons/base_cooldown.hpp>
+#include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
@@ -65,7 +65,7 @@ sanguis::server::entities::enemies::factory::zombie00(
 					sanguis::server::weapons::accuracy(
 						0.9f
 					),
-					sanguis::server::weapons::base_cooldown(
+					sanguis::server::weapons::backswing_time(
 						sanguis::duration_second(
 							1.f
 						)

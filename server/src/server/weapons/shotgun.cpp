@@ -49,7 +49,7 @@ sanguis::server::weapons::shotgun::shotgun(
 		sanguis::server::weapons::attributes::optional_magazine_size(
 			_parameters.magazine_size()
 		),
-		_parameters.base_cooldown(),
+		_parameters.backswing_time(),
 		_parameters.cast_point(),
 		sanguis::server::weapons::optional_reload_time(
 			_parameters.reload_time()
