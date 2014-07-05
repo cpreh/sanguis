@@ -2,6 +2,7 @@
 #include <sanguis/client/draw2d/scene/hover/weapon_attribute.hpp>
 #include <sanguis/client/gui/hud/weapon_attribute_color.hpp>
 #include <sanguis/client/gui/hud/weapon_attribute_name.hpp>
+#include <sanguis/client/gui/hud/weapon_attribute_value_to_string.hpp>
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/text_color.hpp>
@@ -16,7 +17,6 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
-#include <fcppt/insert_to_string.hpp>
 
 
 sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
@@ -46,9 +46,7 @@ sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 	value_{
 		_renderer,
 		_font,
-		fcppt::insert_to_string<
-			sge::font::string
-		>(
+		sanguis::client::gui::hud::weapon_attribute_value_to_string(
 			// TODO
 			_attribute.extra().get()
 			?
