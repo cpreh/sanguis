@@ -26,6 +26,7 @@
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <fcppt/assert/pre.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -69,9 +70,18 @@ sanguis::server::entities::pickups::weapon::~weapon()
 sanguis::server::weapons::unique_ptr
 sanguis::server::entities::pickups::weapon::obtain()
 {
+	// TODO: Should we make a function for this?
+	sanguis::server::weapons::unique_ptr result(
+		std::move(
+			*weapon_
+		)
+	);
+
+	weapon_.reset();
+
 	return
 		std::move(
-			weapon_
+			result
 		);
 }
 
@@ -79,16 +89,14 @@ sanguis::weapon_type const
 sanguis::server::entities::pickups::weapon::weapon_type() const
 {
 	return
-		weapon_->type();
+		this->get().type();
 }
 
 bool
 sanguis::server::entities::pickups::weapon::dead() const
 {
 	return
-		!weapon_
-		||
-		!weapon_->usable();
+		!weapon_;
 }
 
 sanguis::server::team
@@ -111,7 +119,7 @@ sanguis::server::entities::pickups::weapon::add_message(
 ) const
 {
 	sanguis::weapon_description const description(
-		weapon_->description()
+		this->get().description()
 	);
 
 	return
@@ -124,7 +132,7 @@ sanguis::server::entities::pickups::weapon::add_message(
 				sanguis::messages::roles::angle{} =
 					this->angle().get(),
 				sanguis::messages::roles::weapon_type{} =
-					weapon_->type(),
+					description.weapon_type(),
 				// TODO: Unify this with give_weapon
 				sanguis::messages::roles::magazine_base_size{} =
 					sanguis::messages::convert::to_magazine_size(
@@ -145,4 +153,15 @@ sanguis::server::entities::pickups::weapon::add_message(
 
 			)
 		);
+}
+
+sanguis::server::weapons::weapon &
+sanguis::server::entities::pickups::weapon::get() const
+{
+	FCPPT_ASSERT_PRE(
+		weapon_
+	);
+
+	return
+		**weapon_;
 }

@@ -21,6 +21,7 @@
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/target_fwd.hpp>
 #include <sanguis/server/weapons/weapon_fwd.hpp>
+#include <sanguis/server/weapons/attributes/magazine_size_fwd.hpp>
 #include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
 #include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
 #include <sanguis/server/weapons/states/backswing_fwd.hpp>
@@ -91,7 +92,7 @@ public:
 	sanguis::weapon_type
 	type() const;
 
-	sanguis::server::weapons::attributes::optional_magazine_size const
+	sanguis::server::weapons::attributes::magazine_size const
 	magazine_size() const;
 
 	bool
@@ -101,9 +102,6 @@ public:
 
 	bool
 	owner_target_in_range() const;
-
-	bool
-	usable() const;
 
 	sanguis::weapon_description
 	description() const;

@@ -12,7 +12,9 @@
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/pickups/weapon_fwd.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
+#include <sanguis/server/weapons/optional_unique_ptr.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
+#include <sanguis/server/weapons/weapon_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -71,9 +73,12 @@ private:
 	) const
 	override;
 
+	sanguis::server::weapons::weapon &
+	get() const;
+
 	sanguis::server::team const team_;
 
-	sanguis::server::weapons::unique_ptr weapon_;
+	sanguis::server::weapons::optional_unique_ptr weapon_;
 };
 
 }

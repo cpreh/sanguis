@@ -94,16 +94,6 @@ sanguis::server::weapons::states::backswing::react(
 )
 {
 	if(
-		!this->context<
-			sanguis::server::weapons::weapon
-		>().usable()
-	)
-		return
-			this->transit<
-				sanguis::server::weapons::states::idle
-			>();
-
-	if(
 		!cancelled_
 	)
 		this->post_event(

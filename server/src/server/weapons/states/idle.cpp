@@ -70,14 +70,7 @@ sanguis::server::weapons::states::idle::react(
 )
 {
 	return
-		this->context<
-			sanguis::server::weapons::weapon
-		>().usable()
-		?
-			this->transit<
-				sanguis::server::weapons::states::reloading
-			>()
-		:
-			this->discard_event()
-		;
+		this->transit<
+			sanguis::server::weapons::states::reloading
+		>();
 }

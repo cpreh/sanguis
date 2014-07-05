@@ -14,10 +14,12 @@
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
+#include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/target.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/weapons/attributes/magazine_size.hpp>
 #include <sanguis/server/weapons/attributes/make.hpp>
 #include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
 #include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
@@ -79,9 +81,7 @@ sanguis::server::weapons::weapon::weapon(
 	owner_()
 {
 	FCPPT_ASSERT_PRE(
-		!this->magazine_size()
-		||
-		this->magazine_size()->value().get()
+		this->magazine_size().value().get()
 		!=
 		0u
 	);
@@ -119,11 +119,6 @@ sanguis::server::weapons::weapon::owner(
 void
 sanguis::server::weapons::weapon::attack()
 {
-	if(
-		!this->usable()
-	)
-		return;
-
 	this->process_event(
 		sanguis::server::weapons::events::shoot()
 	);
@@ -132,11 +127,6 @@ sanguis::server::weapons::weapon::attack()
 void
 sanguis::server::weapons::weapon::reload()
 {
-	if(
-		!this->usable()
-	)
-		return;
-
 	this->process_event(
 		sanguis::server::weapons::events::reload()
 	);
@@ -153,11 +143,6 @@ sanguis::server::weapons::weapon::stop()
 void
 sanguis::server::weapons::weapon::update()
 {
-	if(
-		!this->usable()
-	)
-		return;
-
 	this->process_event(
 		sanguis::server::weapons::events::poll()
 	);
@@ -181,11 +166,20 @@ sanguis::server::weapons::weapon::type() const
 		type_;
 }
 
-sanguis::server::weapons::attributes::optional_magazine_size const
+sanguis::server::weapons::attributes::magazine_size const
 sanguis::server::weapons::weapon::magazine_size() const
 {
 	return
-		magazine_size_;
+		magazine_size_
+		?
+			*magazine_size_
+		:
+			sanguis::server::weapons::attributes::magazine_size(
+				sanguis::server::weapons::magazine_size(
+					1u
+				)
+			)
+		;
 }
 
 bool
@@ -213,15 +207,6 @@ sanguis::server::weapons::weapon::owner_target_in_range() const
 		);
 }
 
-bool
-sanguis::server::weapons::weapon::usable() const
-{
-	return
-		!this->magazine_empty()
-		||
-		reload_time_.has_value();
-}
-
 sanguis::weapon_description
 sanguis::server::weapons::weapon::description() const
 {
@@ -229,30 +214,16 @@ sanguis::server::weapons::weapon::description() const
 		sanguis::weapon_description(
 			this->type(),
 			sanguis::magazine_size(
-				this->magazine_size()
-				?
-					this->magazine_size()->base().get()
-				:
-					0u
+				this->magazine_size().base().get()
 			),
 			sanguis::magazine_extra(
-				this->magazine_size()
-				&&
-				this->magazine_size()->extra()
+				this->magazine_size().extra()
 				?
-					this->magazine_size()->extra()->get()
+					this->magazine_size().extra()->get()
 				:
 					0u
 			),
-			this->magazine_size()
-			?
-				this->magazine_remaining()
-			:
-				sanguis::magazine_remaining(
-					// TODO: Is this ok?
-					1u
-				)
-			,
+			this->magazine_remaining(),
 			// TODO: Make composing this more sane!
 			accuracy_
 			?
@@ -312,20 +283,12 @@ sanguis::server::weapons::weapon::reset_magazine()
 	magazine_used_ =
 		0u;
 
-	if(
-		this->magazine_size()
-	)
-		this->update_magazine_remaining();
+	this->update_magazine_remaining();
 }
 
 void
 sanguis::server::weapons::weapon::use_magazine_item()
 {
-	if(
-		!magazine_size_
-	)
-		return;
-
 	++magazine_used_;
 
 	this->update_magazine_remaining();
@@ -333,7 +296,7 @@ sanguis::server::weapons::weapon::use_magazine_item()
 	FCPPT_ASSERT_ERROR(
 		magazine_used_
 		<=
-		this->magazine_size()->value().get()
+		this->magazine_size().value().get()
 	);
 }
 
@@ -341,11 +304,9 @@ bool
 sanguis::server::weapons::weapon::magazine_empty() const
 {
 	return
-		this->magazine_size()
-		&&
 		magazine_used_
 		==
-		this->magazine_size()->value().get();
+		this->magazine_size().value().get();
 }
 
 sanguis::server::weapons::attributes::optional_accuracy const
@@ -379,13 +340,9 @@ sanguis::server::weapons::weapon::reload_time() const
 sanguis::magazine_remaining const
 sanguis::server::weapons::weapon::magazine_remaining() const
 {
-	FCPPT_ASSERT_PRE(
-		this->magazine_size()
-	);
-
 	return
 		sanguis::magazine_remaining(
-			this->magazine_size()->value().get()
+			this->magazine_size().value().get()
 			-
 			magazine_used_
 		);

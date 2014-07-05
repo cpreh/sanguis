@@ -359,8 +359,6 @@ sanguis::server::entities::player::drop_or_pickup_weapon(
 
 	if(
 		dropped
-		&&
-		(*dropped)->usable()
 	)
 		this->environment()->insert(
 			fcppt::make_unique_ptr<

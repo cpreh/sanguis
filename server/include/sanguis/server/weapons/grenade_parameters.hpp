@@ -6,11 +6,9 @@
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/grenade_parameters_fwd.hpp>
-#include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/attributes/aoe.hpp>
 #include <sanguis/server/weapons/attributes/damage.hpp>
-#include <sanguis/server/weapons/attributes/magazine_size.hpp>
 #include <fcppt/nonassignable.hpp>
 
 
@@ -32,8 +30,7 @@ public:
 		sanguis::server::weapons::damage,
 		sanguis::server::weapons::aoe,
 		sanguis::server::weapons::cast_point,
-		sanguis::server::weapons::range,
-		sanguis::server::weapons::magazine_size
+		sanguis::server::weapons::range
 	);
 
 	sanguis::server::weapons::backswing_time const
@@ -51,9 +48,6 @@ public:
 	sanguis::server::weapons::range const
 	range() const;
 
-	sanguis::server::weapons::attributes::magazine_size const
-	magazine_size() const;
-
 	void
 	extra_damage(
 		sanguis::server::weapons::damage
@@ -62,11 +56,6 @@ public:
 	void
 	extra_aoe(
 		sanguis::server::weapons::aoe
-	);
-
-	void
-	extra_magazine_size(
-		sanguis::server::weapons::magazine_size
 	);
 private:
 	sanguis::server::weapons::backswing_time const backswing_time_;
@@ -78,8 +67,6 @@ private:
 	sanguis::server::weapons::cast_point const cast_point_;
 
 	sanguis::server::weapons::range const range_;
-
-	sanguis::server::weapons::attributes::magazine_size magazine_size_;
 };
 
 }

@@ -75,10 +75,6 @@ sanguis::server::weapons::states::reloading::react(
 
 	return
 		cancelled_
-		||
-		!this->context<
-			sanguis::server::weapons::weapon
-		>().usable()
 		?
 			this->transit<
 				sanguis::server::weapons::states::idle
