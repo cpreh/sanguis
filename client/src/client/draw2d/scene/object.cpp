@@ -494,15 +494,6 @@ sanguis::client::draw2d::scene::object::render_systems(
 		);
 
 	for(
-		sanguis::client::draw2d::scene::hover::base_unique_ptr const &hover
-		:
-		hovers_
-	)
-		hover->draw(
-			_render_context
-		);
-
-	for(
 		auto const index
 		:
 		fcppt::make_enum_range_start_end(
@@ -513,6 +504,15 @@ sanguis::client::draw2d::scene::object::render_systems(
 		colored_system_.render(
 			_render_context,
 			index
+		);
+
+	for(
+		sanguis::client::draw2d::scene::hover::base_unique_ptr const &hover
+		:
+		hovers_
+	)
+		hover->draw(
+			_render_context
 		);
 }
 
