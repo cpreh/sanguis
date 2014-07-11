@@ -306,6 +306,10 @@ sanguis::gui::widget::container::unregister(
 	sanguis::gui::widget::base const &_widget
 )
 {
+	context_.destroy(
+		_widget
+	);
+
 	fcppt::algorithm::remove_if(
 		widgets_,
 		[

@@ -33,7 +33,7 @@ public:
 
 	void
 	destroy(
-		sanguis::gui::widget::base &
+		sanguis::gui::widget::base const &
 	);
 
 	sanguis::gui::widget::optional_ref const

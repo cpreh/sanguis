@@ -42,7 +42,7 @@ sanguis::gui::context::focus(
 
 void
 sanguis::gui::context::destroy(
-	sanguis::gui::widget::base &_widget
+	sanguis::gui::widget::base const &_widget
 )
 {
 	if(
