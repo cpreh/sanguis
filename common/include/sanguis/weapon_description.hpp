@@ -4,6 +4,7 @@
 #include <sanguis/magazine_extra.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/magazine_size.hpp>
+#include <sanguis/reload_time.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
@@ -22,6 +23,7 @@ public:
 		sanguis::magazine_size,
 		sanguis::magazine_extra,
 		sanguis::magazine_remaining,
+		sanguis::reload_time,
 		sanguis::weapon_attribute_vector const &
 	);
 
@@ -42,6 +44,10 @@ public:
 	magazine_remaining() const;
 
 	SANGUIS_COMMON_SYMBOL
+	sanguis::reload_time const
+	reload_time() const;
+
+	SANGUIS_COMMON_SYMBOL
 	sanguis::weapon_attribute_vector const &
 	attributes() const;
 private:
@@ -52,6 +58,8 @@ private:
 	sanguis::magazine_extra magazine_extra_;
 
 	sanguis::magazine_remaining magazine_remaining_;
+
+	sanguis::reload_time reload_time_;
 
 	sanguis::weapon_attribute_vector attributes_;
 };

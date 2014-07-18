@@ -1,6 +1,7 @@
 #include <sanguis/magazine_extra.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/magazine_size.hpp>
+#include <sanguis/reload_time.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_type.hpp>
@@ -11,6 +12,7 @@ sanguis::weapon_description::weapon_description(
 	sanguis::magazine_size const _magazine_size,
 	sanguis::magazine_extra const _magazine_extra,
 	sanguis::magazine_remaining const _magazine_remaining,
+	sanguis::reload_time const _reload_time,
 	sanguis::weapon_attribute_vector const &_attributes
 )
 :
@@ -25,6 +27,9 @@ sanguis::weapon_description::weapon_description(
 	),
 	magazine_remaining_(
 		_magazine_remaining
+	),
+	reload_time_(
+		_reload_time
 	),
 	attributes_(
 		_attributes
@@ -58,6 +63,13 @@ sanguis::weapon_description::magazine_remaining() const
 {
 	return
 		magazine_remaining_;
+}
+
+sanguis::reload_time const
+sanguis::weapon_description::reload_time() const
+{
+	return
+		reload_time_;
 }
 
 sanguis::weapon_attribute_vector const &

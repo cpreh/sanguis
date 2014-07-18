@@ -10,6 +10,7 @@
 #include <sanguis/messages/roles/magazine_base_size.hpp>
 #include <sanguis/messages/roles/magazine_extra_size.hpp>
 #include <sanguis/messages/roles/magazine_remaining.hpp>
+#include <sanguis/messages/roles/reload_time.hpp>
 #include <sanguis/messages/roles/weapon_attribute_container.hpp>
 #include <sanguis/messages/roles/weapon_type.hpp>
 #include <sanguis/messages/server/add_weapon_pickup.hpp>
@@ -146,6 +147,8 @@ sanguis::server::entities::pickups::weapon::add_message(
 					sanguis::messages::convert::to_magazine_size(
 						description.magazine_remaining().get()
 					),
+				sanguis::messages::roles::reload_time{} =
+					description.reload_time().get(),
 				sanguis::messages::roles::weapon_attribute_container{} =
 					sanguis::messages::convert::to_weapon_attribute_vector(
 						description.attributes()

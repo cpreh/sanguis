@@ -56,6 +56,8 @@ set(
 	include/sanguis/messages/adapted_types/char_type_fwd.hpp
 	include/sanguis/messages/adapted_types/destructible_type.hpp
 	include/sanguis/messages/adapted_types/destructible_type_fwd.hpp
+	include/sanguis/messages/adapted_types/duration.hpp
+	include/sanguis/messages/adapted_types/duration_fwd.hpp
 	include/sanguis/messages/adapted_types/entity_id.hpp
 	include/sanguis/messages/adapted_types/entity_id_fwd.hpp
 	include/sanguis/messages/adapted_types/enum.hpp
@@ -88,6 +90,8 @@ set(
 	include/sanguis/messages/adapted_types/string_fwd.hpp
 	include/sanguis/messages/adapted_types/string_vector.hpp
 	include/sanguis/messages/adapted_types/string_vector_fwd.hpp
+	include/sanguis/messages/adapted_types/time_unit.hpp
+	include/sanguis/messages/adapted_types/time_unit_fwd.hpp
 	include/sanguis/messages/adapted_types/vector2.hpp
 	include/sanguis/messages/adapted_types/vector2_fwd.hpp
 	include/sanguis/messages/adapted_types/weapon_attribute_type.hpp
@@ -205,6 +209,7 @@ set(
 	include/sanguis/messages/roles/player_name.hpp
 	include/sanguis/messages/roles/primary_weapon.hpp
 	include/sanguis/messages/roles/projectile_type.hpp
+	include/sanguis/messages/roles/reload_time.hpp
 	include/sanguis/messages/roles/remaining_perk_levels.hpp
 	include/sanguis/messages/roles/required_perk_parent_level.hpp
 	include/sanguis/messages/roles/required_perk_player_level.hpp
@@ -392,6 +397,7 @@ set(
 	include/sanguis/random_variate_decl.hpp
 	include/sanguis/random_variate_fwd.hpp
 	include/sanguis/random_variate_impl.hpp
+	include/sanguis/reload_time.hpp
 	include/sanguis/secondary_weapon_type.hpp
 	include/sanguis/secondary_weapon_type_fwd.hpp
 	include/sanguis/string_vector.hpp

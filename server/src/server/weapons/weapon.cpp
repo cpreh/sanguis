@@ -1,9 +1,11 @@
 #include <sanguis/diff_clock.hpp>
 #include <sanguis/duration.hpp>
+#include <sanguis/duration_second.hpp>
 #include <sanguis/magazine_extra.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/magazine_size.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/reload_time.hpp>
 #include <sanguis/update_diff_clock.hpp>
 #include <sanguis/weapon_attribute_type.hpp>
 #include <sanguis/weapon_description.hpp>
@@ -224,6 +226,15 @@ sanguis::server::weapons::weapon::description() const
 					0u
 			),
 			this->magazine_remaining(),
+			this->reload_time()
+			?
+				*this->reload_time()
+			:
+				sanguis::reload_time(
+					sanguis::duration_second(
+						0.f
+					)
+				),
 			// TODO: Make composing this more sane!
 			accuracy_
 			?

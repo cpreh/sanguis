@@ -41,6 +41,7 @@
 #include <sanguis/messages/roles/max_health.hpp>
 #include <sanguis/messages/roles/opening_count.hpp>
 #include <sanguis/messages/roles/primary_weapon.hpp>
+#include <sanguis/messages/roles/reload_time.hpp>
 #include <sanguis/messages/roles/seed.hpp>
 #include <sanguis/messages/roles/speed.hpp>
 #include <sanguis/messages/roles/weapon_attribute_container.hpp>
@@ -549,6 +550,8 @@ sanguis::server::world::object::got_weapon(
 					sanguis::messages::convert::to_magazine_size(
 						_description.magazine_remaining().get()
 					),
+				sanguis::messages::roles::reload_time{} =
+					_description.reload_time().get(),
 				sanguis::messages::roles::weapon_attribute_container{} =
 					sanguis::messages::convert::to_weapon_attribute_vector(
 						_description.attributes()
