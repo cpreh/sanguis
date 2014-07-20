@@ -8,6 +8,7 @@
 #include <sanguis/gui/string_container.hpp>
 #include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/aux_/style/text_color.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/choices.hpp>
 #include <sanguis/gui/widget/reference.hpp>
@@ -29,6 +30,7 @@
 
 sanguis::gui::widget::choices::choices(
 	sanguis::gui::context &_context,
+	sanguis::gui::style::base const &_style,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sanguis::gui::string_container const &_strings,
@@ -45,6 +47,7 @@ sanguis::gui::widget::choices::choices(
 		_strings
 	),
 	left_button_(
+		_style,
 		_renderer,
 		_font,
 		SGE_FONT_LIT("<"),
@@ -72,6 +75,7 @@ sanguis::gui::widget::choices::choices(
 		)
 	),
 	right_button_(
+		_style,
 		_renderer,
 		_font,
 		SGE_FONT_LIT(">"),

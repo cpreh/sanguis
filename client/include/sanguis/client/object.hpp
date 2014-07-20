@@ -11,6 +11,7 @@
 #include <sanguis/client/config/settings/saver.hpp>
 #include <sanguis/client/console/gfx.hpp>
 #include <sanguis/client/load/context.hpp>
+#include <sanguis/gui/style/base_unique_ptr.hpp>
 #include <sge/console/object.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <sge/font/object_unique_ptr.hpp>
@@ -79,6 +80,8 @@ private:
 	sge::renderer::device::core &renderer_;
 
 	sge::font::object_unique_ptr const font_object_;
+
+	sanguis::gui::style::base_unique_ptr const gui_style_;
 
 	sge::console::object console_;
 

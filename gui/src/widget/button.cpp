@@ -2,13 +2,7 @@
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/get_focus.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
-#include <sanguis/gui/aux_/fill_rect.hpp>
-#include <sanguis/gui/aux_/style/background_color.hpp>
-#include <sanguis/gui/aux_/style/border_color.hpp>
-#include <sanguis/gui/aux_/style/inner_border.hpp>
-#include <sanguis/gui/aux_/style/outer_border.hpp>
-#include <sanguis/gui/aux_/style/spacing.hpp>
-#include <sanguis/gui/aux_/style/text_color.hpp>
+#include <sanguis/gui/style/base.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/button.hpp>
 #include <sge/font/dim.hpp>
@@ -22,6 +16,7 @@
 #include <sge/font/vector.hpp>
 #include <sge/font/align_h/left.hpp>
 #include <sge/font/draw/static_text.hpp>
+#include <sge/image/color/any/object.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/renderer/texture/emulate_srgb.hpp>
@@ -36,7 +31,6 @@
 #include <sge/rucksack/vector.hpp>
 #include <sge/rucksack/widget/base_fwd.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/signal/auto_connection.hpp>
@@ -44,6 +38,7 @@
 
 
 sanguis::gui::widget::button::button(
+	sanguis::gui::style::base const &_style,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sge::font::string const &_text,
@@ -51,6 +46,9 @@ sanguis::gui::widget::button::button(
 )
 :
 	sanguis::gui::widget::base(),
+	style_(
+		_style
+	),
 	renderer_(
 		_renderer
 	),
@@ -77,7 +75,7 @@ sanguis::gui::widget::button::button(
 							static_text_.logical_size().w()
 					)
 					+
-					sanguis::gui::aux_::style::spacing::value
+					_style.button_spacing().w()
 				),
 				sge::rucksack::preferred_size(
 					sge::rucksack::optional_scalar()
@@ -90,7 +88,7 @@ sanguis::gui::widget::button::button(
 				sge::rucksack::minimum_size(
 					_font.metrics().height().get()
 					+
-					sanguis::gui::aux_::style::spacing::value
+					_style.button_spacing().h()
 				),
 				sge::rucksack::preferred_size(
 					sge::rucksack::optional_scalar()
@@ -151,38 +149,22 @@ sanguis::gui::widget::button::on_draw(
 	sge::renderer::context::ffp &_context
 )
 {
-	sanguis::gui::aux_::fill_rect(
+	style_.draw_button(
 		renderer_,
 		_context,
-		layout_.area(),
-		sanguis::gui::aux_::style::border_color()
+		this->layout().area()
 	);
 
-	sanguis::gui::aux_::fill_rect(
-		renderer_,
-		_context,
-		sge::rucksack::rect(
-			layout_.position()
-			+
-			sanguis::gui::aux_::style::outer_border::value,
-			layout_.size()
-			-
-			2
-			*
-			sanguis::gui::aux_::style::outer_border::value
-		),
-		sanguis::gui::aux_::style::background_color()
-	);
-
+	// TODO: Make align_h::center usable in static_text
 	static_text_.pos(
 		fcppt::math::vector::structure_cast<
-			sge::rucksack::vector
+			sge::font::vector
 		>(
 			layout_.position()
 			+
-			sanguis::gui::aux_::style::outer_border::value
-			+
-			sanguis::gui::aux_::style::inner_border::value
+			style_.button_spacing().w()
+			/
+			2
 		)
 		+
 		sge::font::vector(
@@ -191,7 +173,7 @@ sanguis::gui::widget::button::on_draw(
 				font_.metrics().height(),
 				layout_.size().h()
 				-
-				sanguis::gui::aux_::style::spacing::value
+				style_.button_spacing().w()
 			)
 		)
 	);
@@ -236,7 +218,7 @@ sanguis::gui::widget::button::make_static_text(
 				sge::font::align_h::left()
 			),
 			sge::font::vector::null(),
-			sanguis::gui::aux_::style::text_color(),
+			style_.text_color(),
 			sge::renderer::texture::emulate_srgb::no
 		);
 }

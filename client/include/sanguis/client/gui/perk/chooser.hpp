@@ -9,6 +9,7 @@
 #include <sanguis/gui/master.hpp>
 #include <sanguis/gui/background/colored.hpp>
 #include <sanguis/gui/main_area/screen_corner.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/text.hpp>
 #include <sge/font/object_fwd.hpp>
@@ -42,6 +43,7 @@ class chooser
 public:
 	chooser(
 		sanguis::client::perk::state &,
+		sanguis::gui::style::base const &,
 		sge::renderer::device::ffp &,
 		sge::viewport::manager &,
 		sge::font::object &,
@@ -71,6 +73,8 @@ private:
 	make_top_text() const;
 
 	sanguis::client::perk::state &state_;
+
+	sanguis::gui::style::base const &style_;
 
 	sge::renderer::device::ffp &renderer_;
 

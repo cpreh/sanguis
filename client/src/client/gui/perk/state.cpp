@@ -3,6 +3,7 @@
 #include <sanguis/client/gui/perk/tab.hpp>
 #include <sanguis/client/perk/state_fwd.hpp>
 #include <sanguis/gui/context_fwd.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_name_pair.hpp>
 #include <sanguis/gui/widget/reference_name_vector.hpp>
@@ -15,6 +16,7 @@ sanguis::client::gui::perk::state::state(
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sanguis::gui::context &_context,
+	sanguis::gui::style::base const &_style,
 	sanguis::client::perk::state &_state
 )
 :
@@ -23,13 +25,15 @@ sanguis::client::gui::perk::state::state(
 			_renderer,
 			_font,
 			_context,
+			_style,
 			_state
 		)
 	),
 	main_tab_(
+		_context,
+		_style,
 		_renderer,
 		_font,
-		_context,
 		fcppt::algorithm::map<
 			sanguis::gui::widget::reference_name_vector
 		>(

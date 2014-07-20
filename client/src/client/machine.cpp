@@ -11,6 +11,7 @@
 #include <sanguis/client/load/context_fwd.hpp>
 #include <sanguis/client/net/deserialize.hpp>
 #include <sanguis/client/net/serialize_to_circular_buffer.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/messages/client/base.hpp>
 #include <sanguis/messages/server/base.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
@@ -53,6 +54,7 @@ sanguis::client::machine::machine(
 	sanguis::client::config::settings::object &_settings,
 	sanguis::client::server_callback const &_server_callback,
 	sanguis::client::load::context const &_resources,
+	sanguis::gui::style::base const &_gui_style,
 	sge::window::system &_window_system,
 	sge::font::object &_font_object,
 	sge::console::gfx::object &_console_gfx,
@@ -71,6 +73,9 @@ sanguis::client::machine::machine(
 	),
 	resources_(
 		_resources
+	),
+	gui_style_(
+		_gui_style
 	),
 	keyboard_(
 		_keyboard
@@ -277,6 +282,13 @@ sanguis::client::machine::settings()
 {
 	return
 		settings_;
+}
+
+sanguis::gui::style::base const &
+sanguis::client::machine::gui_style() const
+{
+	return
+		gui_style_;
 }
 
 sge::renderer::system const &

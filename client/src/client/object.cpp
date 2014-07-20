@@ -13,6 +13,8 @@
 #include <sanguis/client/events/render.hpp>
 #include <sanguis/client/events/tick.hpp>
 #include <sanguis/client/states/menu.hpp>
+#include <sanguis/gui/style/base.hpp>
+#include <sanguis/gui/style/create.hpp>
 #include <sge/audio/player.hpp>
 #include <sge/config/media_path.hpp>
 #include <sge/console/prefix.hpp>
@@ -69,6 +71,9 @@ sanguis::client::object::object(
 			sge::font::parameters()
 		)
 	),
+	gui_style_(
+		sanguis::gui::style::create()
+	),
 	console_(
 		sge::console::prefix(
 			FCPPT_TEXT('/')
@@ -103,6 +108,7 @@ sanguis::client::object::object(
 			std::placeholders::_1
 		),
 		resources_,
+		*gui_style_,
 		sys_->window_system(),
 		*font_object_,
 		console_gfx_.get(),

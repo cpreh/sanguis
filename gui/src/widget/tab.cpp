@@ -2,6 +2,7 @@
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/aux_/relayout_ancestor.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/button.hpp>
 #include <sanguis/gui/widget/reference.hpp>
@@ -25,9 +26,10 @@
 
 
 sanguis::gui::widget::tab::tab(
+	sanguis::gui::context &_context,
+	sanguis::gui::style::base const &_style,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
-	sanguis::gui::context &_context,
 	sanguis::gui::widget::reference_name_vector const &_widgets
 )
 :
@@ -43,6 +45,7 @@ sanguis::gui::widget::tab::tab(
 		>(
 			_widgets,
 			[
+				&_style,
 				&_renderer,
 				&_font,
 				this
@@ -59,6 +62,7 @@ sanguis::gui::widget::tab::tab(
 					);
 				public:
 					gui_button(
+						sanguis::gui::style::base const &_style_arg,
 						sge::renderer::device::ffp &_renderer_arg,
 						sge::font::object &_font_arg,
 						sge::font::string const &_name,
@@ -67,6 +71,7 @@ sanguis::gui::widget::tab::tab(
 					)
 					:
 						sanguis::gui::widget::button(
+							_style_arg,
 							_renderer_arg,
 							_font_arg,
 							_name,
@@ -108,6 +113,7 @@ sanguis::gui::widget::tab::tab(
 					fcppt::make_unique_ptr<
 						gui_button
 					>(
+						_style,
 						_renderer,
 						_font,
 						_pair.name(),

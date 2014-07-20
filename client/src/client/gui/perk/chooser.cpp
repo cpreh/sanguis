@@ -7,6 +7,7 @@
 #include <sanguis/gui/gravity.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/text_color.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
 #include <sanguis/gui/widget/reference_alignment_vector.hpp>
@@ -42,6 +43,7 @@ sge::rucksack::alignment const state_alignment(
 
 sanguis::client::gui::perk::chooser::chooser(
 	sanguis::client::perk::state &_state,
+	sanguis::gui::style::base const &_style,
 	sge::renderer::device::ffp &_renderer,
 	sge::viewport::manager &_viewport_manager,
 	sge::font::object &_font,
@@ -51,6 +53,9 @@ sanguis::client::gui::perk::chooser::chooser(
 :
 	state_(
 		_state
+	),
+	style_(
+		_style
 	),
 	renderer_(
 		_renderer
@@ -75,6 +80,7 @@ sanguis::client::gui::perk::chooser::chooser(
 			_renderer,
 			_font,
 			gui_context_,
+			_style,
 			_state
 		)
 	),
@@ -172,6 +178,7 @@ sanguis::client::gui::perk::chooser::perks()
 			renderer_,
 			font_,
 			gui_context_,
+			style_,
 			state_
 		);
 

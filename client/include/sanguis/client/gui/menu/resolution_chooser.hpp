@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_GUI_MENU_RESOLUTION_CHOOSER_HPP_INCLUDED
 
 #include <sanguis/gui/context_fwd.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/base_fwd.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/button.hpp>
@@ -32,6 +33,7 @@ class resolution_chooser
 public:
 	resolution_chooser(
 		sanguis::gui::context &,
+		sanguis::gui::style::base const &,
 		sge::font::object &,
 		sge::renderer::system const &,
 		sge::renderer::device::ffp &,

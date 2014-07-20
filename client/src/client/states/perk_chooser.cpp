@@ -39,6 +39,9 @@ sanguis::client::states::perk_chooser::perk_chooser(
 		>().perk_state(),
 		this->context<
 			sanguis::client::machine
+		>().gui_style(),
+		this->context<
+			sanguis::client::machine
 		>().renderer(),
 		this->context<
 			sanguis::client::machine

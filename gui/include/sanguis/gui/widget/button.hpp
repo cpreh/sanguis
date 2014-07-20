@@ -6,6 +6,7 @@
 #include <sanguis/gui/get_focus_fwd.hpp>
 #include <sanguis/gui/optional_needed_width_fwd.hpp>
 #include <sanguis/gui/symbol.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/button_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
@@ -38,6 +39,7 @@ class button
 public:
 	SANGUIS_GUI_SYMBOL
 	button(
+		sanguis::gui::style::base const &,
 		sge::renderer::device::ffp &,
 		sge::font::object &,
 		sge::font::string const &,
@@ -85,6 +87,8 @@ private:
 	make_static_text(
 		sge::font::string const &
 	);
+
+	sanguis::gui::style::base const &style_;
 
 	sge::renderer::device::ffp &renderer_;
 

@@ -7,6 +7,7 @@
 #include <sanguis/gui/optional_index.hpp>
 #include <sanguis/gui/string_container.hpp>
 #include <sanguis/gui/symbol.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/button.hpp>
 #include <sanguis/gui/widget/choices_fwd.hpp>
@@ -33,6 +34,7 @@ public:
 	SANGUIS_GUI_SYMBOL
 	choices(
 		sanguis::gui::context &,
+		sanguis::gui::style::base const &,
 		sge::renderer::device::ffp &,
 		sge::font::object &,
 		sanguis::gui::string_container const &,

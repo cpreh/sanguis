@@ -111,7 +111,10 @@ sanguis::client::states::menu::menu(
 					sanguis::client::machine
 				>()
 			)
-		)
+		),
+		this->context<
+			sanguis::client::machine
+		>().gui_style()
 	)
 {
 }

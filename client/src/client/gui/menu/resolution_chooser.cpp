@@ -5,6 +5,7 @@
 #include <sanguis/gui/optional_index.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/string_container.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/base_fwd.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/button.hpp>
@@ -32,6 +33,7 @@
 
 sanguis::client::gui::menu::resolution_chooser::resolution_chooser(
 	sanguis::gui::context &_context,
+	sanguis::gui::style::base const &_style,
 	sge::font::object &_font,
 	sge::renderer::system const &_system,
 	sge::renderer::device::ffp &_renderer,
@@ -48,6 +50,7 @@ sanguis::client::gui::menu::resolution_chooser::resolution_chooser(
 	),
 	choices_(
 		_context,
+		_style,
 		_renderer,
 		_font,
 		// TODO: Add window mode
@@ -79,6 +82,7 @@ sanguis::client::gui::menu::resolution_chooser::resolution_chooser(
 			)
 	),
 	apply_button_(
+		_style,
 		_renderer,
 		_font,
 		SGE_FONT_LIT("Apply"),

@@ -3,6 +3,7 @@
 
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/symbol.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/reference_name_vector.hpp>
 #include <sanguis/gui/widget/tab_fwd.hpp>
@@ -29,9 +30,10 @@ class tab
 public:
 	SANGUIS_GUI_SYMBOL
 	tab(
+		sanguis::gui::context &,
+		sanguis::gui::style::base const &,
 		sge::renderer::device::ffp &,
 		sge::font::object &,
-		sanguis::gui::context &,
 		sanguis::gui::widget::reference_name_vector const &
 	);
 

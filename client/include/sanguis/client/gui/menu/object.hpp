@@ -10,6 +10,7 @@
 #include <sanguis/gui/master.hpp>
 #include <sanguis/gui/background/image.hpp>
 #include <sanguis/gui/main_area/viewport_adaptor.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/button.hpp>
 #include <sanguis/gui/widget/edit.hpp>
@@ -54,7 +55,8 @@ public:
 		sge::input::keyboard::device &,
 		sanguis::client::load::resource::textures const &,
 		sanguis::client::config::settings::object &,
-		sanguis::client::gui::menu::callbacks::object const &
+		sanguis::client::gui::menu::callbacks::object const &,
+		sanguis::gui::style::base const &
 	);
 
 	~object();

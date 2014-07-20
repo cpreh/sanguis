@@ -10,6 +10,9 @@
 #include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/background/colored.hpp>
 #include <sanguis/gui/main_area/viewport_adaptor.hpp>
+#include <sanguis/gui/style/base.hpp>
+#include <sanguis/gui/style/base_unique_ptr.hpp>
+#include <sanguis/gui/style/create.hpp>
 #include <sanguis/gui/widget/button.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/choices.hpp>
@@ -182,7 +185,12 @@ try
 		)
 	);
 
+	sanguis::gui::style::base_unique_ptr const style{
+		sanguis::gui::style::create()
+	};
+
 	sanguis::gui::widget::button button(
+		*style,
 		sys.renderer_device_ffp(),
 		*font,
 		SGE_FONT_LIT("Quit"),
@@ -222,6 +230,7 @@ try
 
 	auto const make_tree(
 		[
+			&style,
 			&sys,
 			&font
 		](
@@ -248,6 +257,7 @@ try
 							fcppt::make_unique_ptr<
 								sanguis::gui::widget::button
 							>(
+								*style,
 								sys.renderer_device_ffp(),
 								*font,
 								SGE_FONT_LIT("Child 1"),
@@ -259,6 +269,7 @@ try
 							fcppt::make_unique_ptr<
 								sanguis::gui::widget::button
 							>(
+								*style,
 								sys.renderer_device_ffp(),
 								*font,
 								SGE_FONT_LIT("Child 2 asdljasdljasdklasdjklasdjlkasdjaskldjjasdkljasdklasdjlk"),
@@ -328,9 +339,10 @@ try
 	);
 
 	sanguis::gui::widget::tab tab(
+		context,
+		*style,
 		sys.renderer_device_ffp(),
 		*font,
-		context,
 		sanguis::gui::widget::reference_name_vector{
 			sanguis::gui::widget::reference_name_pair(
 				sanguis::gui::widget::reference(
@@ -380,6 +392,7 @@ try
 
 	sanguis::gui::widget::choices choices(
 		context,
+		*style,
 		sys.renderer_device_ffp(),
 		*font,
 		string_choices,

@@ -12,6 +12,7 @@
 #include <sanguis/gui/needed_width.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/text_color.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/button.hpp>
 #include <sanguis/gui/widget/reference.hpp>
@@ -34,6 +35,7 @@ sanguis::client::gui::perk::line::line(
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sanguis::gui::context &_context,
+	sanguis::gui::style::base const &_style,
 	sanguis::client::perk::state &_state,
 	sanguis::client::perk::info const &_info
 )
@@ -45,6 +47,7 @@ sanguis::client::gui::perk::line::line(
 		_state
 	),
 	button_(
+		_style,
 		_renderer,
 		_font,
 		sge::font::from_fcppt_string(

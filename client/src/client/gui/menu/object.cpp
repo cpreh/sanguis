@@ -9,6 +9,7 @@
 #include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/string_container.hpp>
 #include <sanguis/gui/text_color.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
 #include <sanguis/gui/widget/reference_alignment_vector.hpp>
@@ -91,7 +92,8 @@ sanguis::client::gui::menu::object::object(
 	sge::input::keyboard::device &_keyboard,
 	sanguis::client::load::resource::textures const &_textures,
 	sanguis::client::config::settings::object &_settings,
-	sanguis::client::gui::menu::callbacks::object const &_callbacks
+	sanguis::client::gui::menu::callbacks::object const &_callbacks,
+	sanguis::gui::style::base const &_style
 )
 :
 	settings_(
@@ -102,6 +104,7 @@ sanguis::client::gui::menu::object::object(
 		_callbacks
 	),
 	quickstart_button_(
+		_style,
 		_renderer,
 		_font,
 		SGE_FONT_LIT("Quickstart"),
@@ -109,6 +112,7 @@ sanguis::client::gui::menu::object::object(
 	),
 	resolution_chooser_(
 		gui_context_,
+		_style,
 		_font,
 		_renderer_system,
 		_renderer,
@@ -247,6 +251,7 @@ sanguis::client::gui::menu::object::object(
 		sanguis::gui::optional_needed_width()
 	),
 	connect_button_(
+		_style,
 		_renderer,
 		_font,
 		connect_text,
@@ -296,6 +301,7 @@ sanguis::client::gui::menu::object::object(
 		connect_box_
 	),
 	quit_button_(
+		_style,
 		_renderer,
 		_font,
 		SGE_FONT_LIT("Quit"),

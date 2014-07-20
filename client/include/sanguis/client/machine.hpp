@@ -8,6 +8,7 @@
 #include <sanguis/client/config/settings/object_fwd.hpp>
 #include <sanguis/client/states/menu_fwd.hpp>
 #include <sanguis/client/load/context_fwd.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/messages/client/base_fwd.hpp>
 #include <sge/console/gfx/object_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
@@ -52,6 +53,7 @@ public:
 		sanguis::client::config::settings::object &,
 		sanguis::client::server_callback const &,
 		sanguis::client::load::context const &,
+		sanguis::gui::style::base const &,
 		sge::window::system &,
 		sge::font::object &,
 		sge::console::gfx::object &,
@@ -100,6 +102,9 @@ public:
 
 	sanguis::client::config::settings::object &
 	settings();
+
+	sanguis::gui::style::base const &
+	gui_style() const;
 
 	sge::renderer::system const &
 	renderer_system() const;
@@ -151,6 +156,8 @@ private:
 	sanguis::client::config::settings::object &settings_;
 
 	sanguis::client::load::context const &resources_;
+
+	sanguis::gui::style::base const &gui_style_;
 
 	sge::input::keyboard::device &keyboard_;
 

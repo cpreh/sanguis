@@ -6,6 +6,7 @@
 #include <sanguis/client/perk/info_fwd.hpp>
 #include <sanguis/client/perk/state_fwd.hpp>
 #include <sanguis/gui/context_fwd.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/button.hpp>
 #include <sanguis/gui/widget/text.hpp>
@@ -35,6 +36,7 @@ public:
 		sge::renderer::device::ffp &,
 		sge::font::object &,
 		sanguis::gui::context &,
+		sanguis::gui::style::base const &,
 		sanguis::client::perk::state &,
 		sanguis::client::perk::info const &
 	);

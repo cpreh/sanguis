@@ -36,6 +36,10 @@ set(
 	include/sanguis/gui/optional_needed_width.hpp
 	include/sanguis/gui/optional_needed_width_fwd.hpp
 	include/sanguis/gui/string_container.hpp
+	include/sanguis/gui/style/base.hpp
+	include/sanguis/gui/style/base_fwd.hpp
+	include/sanguis/gui/style/base_unique_ptr.hpp
+	include/sanguis/gui/style/create.hpp
 	include/sanguis/gui/text_callback.hpp
 	include/sanguis/gui/text_color.hpp
 	include/sanguis/gui/text_color_fwd.hpp
@@ -105,6 +109,7 @@ set(
 	src/aux_/shrink_rect.cpp
 	src/aux_/style/background_color.cpp
 	src/aux_/style/border_color.cpp
+	src/aux_/style/simple.cpp
 	src/aux_/style/text_color.cpp
 	src/background/base.cpp
 	src/background/colored.cpp
@@ -127,6 +132,7 @@ set(
 	src/include/sanguis/gui/aux_/style/border_color.hpp
 	src/include/sanguis/gui/aux_/style/inner_border.hpp
 	src/include/sanguis/gui/aux_/style/outer_border.hpp
+	src/include/sanguis/gui/aux_/style/simple.hpp
 	src/include/sanguis/gui/aux_/style/spacing.hpp
 	src/include/sanguis/gui/aux_/style/text_color.hpp
 	src/include/sanguis/gui/aux_/swap_pair.hpp
@@ -136,6 +142,8 @@ set(
 	src/main_area/viewport_adaptor.cpp
 	src/master.cpp
 	src/needed_width_from_strings.cpp
+	src/style/base.cpp
+	src/style/create.cpp
 	src/widget/bar.cpp
 	src/widget/base.cpp
 	src/widget/box_container.cpp
