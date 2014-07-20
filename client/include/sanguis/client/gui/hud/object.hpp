@@ -19,6 +19,7 @@
 #include <sanguis/gui/master.hpp>
 #include <sanguis/gui/background/colored.hpp>
 #include <sanguis/gui/main_area/screen_corner.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/bar.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/expander.hpp>
@@ -54,6 +55,7 @@ class object
 public:
 	object(
 		sanguis::client::load::hud::context &,
+		sanguis::gui::style::base const &,
 		sge::font::object &,
 		sge::renderer::device::ffp &,
 		sge::viewport::manager &,

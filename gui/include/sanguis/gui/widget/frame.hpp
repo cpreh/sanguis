@@ -4,6 +4,7 @@
 #include <sanguis/gui/focus_change_fwd.hpp>
 #include <sanguis/gui/get_focus_fwd.hpp>
 #include <sanguis/gui/symbol.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/frame_fwd.hpp>
 #include <sanguis/gui/widget/optional_focus_fwd.hpp>
@@ -35,6 +36,7 @@ class frame
 public:
 	SANGUIS_GUI_SYMBOL
 	frame(
+		sanguis::gui::style::base const &,
 		sge::renderer::device::ffp &,
 		sanguis::gui::widget::base &
 	);
@@ -83,6 +85,8 @@ private:
 		sanguis::gui::widget::optional_focus &
 	)
 	override;
+
+	sanguis::gui::style::base const &style_;
 
 	sge::renderer::device::ffp &renderer_;
 

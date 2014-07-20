@@ -11,6 +11,10 @@ set(
 	include/sanguis/gui/default_aspect.hpp
 	include/sanguis/gui/draw.hpp
 	include/sanguis/gui/duration.hpp
+	include/sanguis/gui/fill_color.hpp
+	include/sanguis/gui/fill_color_fwd.hpp
+	include/sanguis/gui/fill_level.hpp
+	include/sanguis/gui/fill_level_fwd.hpp
 	include/sanguis/gui/focus_change.hpp
 	include/sanguis/gui/focus_change_fwd.hpp
 	include/sanguis/gui/get_focus.hpp

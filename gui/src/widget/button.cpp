@@ -218,7 +218,7 @@ sanguis::gui::widget::button::make_static_text(
 				sge::font::align_h::left()
 			),
 			sge::font::vector::null(),
-			style_.text_color(),
+			style_.text_color().get(),
 			sge::renderer::texture::emulate_srgb::no
 		);
 }

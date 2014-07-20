@@ -108,6 +108,9 @@ sanguis::client::states::running::running(
 			hud_resources_,
 			this->context<
 				sanguis::client::machine
+			>().gui_style(),
+			this->context<
+				sanguis::client::machine
 			>().font_object(),
 			this->context<
 				sanguis::client::machine

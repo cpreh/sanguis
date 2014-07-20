@@ -7,8 +7,7 @@
 #include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/string_container.hpp>
 #include <sanguis/gui/text_color.hpp>
-#include <sanguis/gui/aux_/style/text_color.hpp>
-#include <sanguis/gui/style/base_fwd.hpp>
+#include <sanguis/gui/style/base.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/choices.hpp>
 #include <sanguis/gui/widget/reference.hpp>
@@ -64,9 +63,7 @@ sanguis::gui::widget::choices::choices(
 		:
 			sge::font::string()
 		,
-		sanguis::gui::text_color(
-			sanguis::gui::aux_::style::text_color()
-		),
+		_style.text_color(),
 		sanguis::gui::optional_needed_width(
 			sanguis::gui::needed_width_from_strings(
 				_font,

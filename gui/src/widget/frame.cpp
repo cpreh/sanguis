@@ -1,7 +1,6 @@
 #include <sanguis/gui/focus_change.hpp>
 #include <sanguis/gui/get_focus.hpp>
-#include <sanguis/gui/aux_/fill_rect.hpp>
-#include <sanguis/gui/aux_/style/border_color.hpp>
+#include <sanguis/gui/style/base.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/frame.hpp>
 #include <sanguis/gui/widget/optional_focus.hpp>
@@ -10,19 +9,21 @@
 #include <sge/input/keyboard/key_code.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
-#include <sge/rucksack/dim.hpp>
 #include <sge/rucksack/padding.hpp>
 #include <sge/rucksack/rect.hpp>
-#include <sge/rucksack/scalar.hpp>
 #include <sge/rucksack/widget/base_fwd.hpp>
 
 
 sanguis::gui::widget::frame::frame(
+	sanguis::gui::style::base const &_style,
 	sge::renderer::device::ffp &_renderer,
 	sanguis::gui::widget::base &_child
 )
 :
 	sanguis::gui::widget::base(),
+	style_(
+		_style
+	),
 	renderer_(
 		_renderer
 	),
@@ -31,9 +32,7 @@ sanguis::gui::widget::frame::frame(
 	),
 	layout_{
 		_child.layout(),
-		sge::rucksack::padding{
-			10
-		}
+		_style.frame_padding()
 	}
 {
 	child_.parent(
@@ -59,76 +58,11 @@ sanguis::gui::widget::frame::on_draw(
 	sge::renderer::context::ffp &_context
 )
 {
-	sge::rucksack::scalar const border_size(
-		layout_.padding().get()
-		/
-		2
-	);
-
-	sanguis::gui::aux_::fill_rect(
+	style_.draw_frame(
 		renderer_,
 		_context,
-		sge::rucksack::rect(
-			this->layout().position(),
-			sge::rucksack::dim(
-				this->layout().size().w(),
-				border_size
-			)
-		),
-		sanguis::gui::aux_::style::border_color()
-	);
-
-	sanguis::gui::aux_::fill_rect(
-		renderer_,
-		_context,
-		sge::rucksack::rect(
-			this->layout().position(),
-			sge::rucksack::dim(
-				border_size,
-				this->layout().size().h()
-			)
-		),
-		sanguis::gui::aux_::style::border_color()
-	);
-
-	sanguis::gui::aux_::fill_rect(
-		renderer_,
-		_context,
-		sge::rucksack::rect(
-			this->layout().position()
-			+
-			sge::rucksack::dim(
-				this->layout().size().w()
-				-
-				border_size,
-				0
-			),
-			sge::rucksack::dim(
-				border_size,
-				this->layout().size().h()
-			)
-		),
-		sanguis::gui::aux_::style::border_color()
-	);
-
-	sanguis::gui::aux_::fill_rect(
-		renderer_,
-		_context,
-		sge::rucksack::rect(
-			this->layout().position()
-			+
-			sge::rucksack::dim(
-				0,
-				this->layout().size().h()
-				-
-				border_size
-			),
-			sge::rucksack::dim(
-				this->layout().size().w(),
-				border_size
-			)
-		),
-		sanguis::gui::aux_::style::border_color()
+		this->layout().area(),
+		layout_.padding()
 	);
 
 	child_.on_draw(

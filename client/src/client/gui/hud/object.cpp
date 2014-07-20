@@ -17,9 +17,12 @@
 #include <sanguis/client/gui/hud/weapon_widget.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
 #include <sanguis/gui/default_aspect.hpp>
+#include <sanguis/gui/fill_color.hpp>
+#include <sanguis/gui/fill_level.hpp>
 #include <sanguis/gui/gravity.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/text_color.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/bar.hpp>
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
@@ -46,6 +49,7 @@
 
 sanguis::client::gui::hud::object::object(
 	sanguis::client::load::hud::context &_resources,
+	sanguis::gui::style::base const &_style,
 	sge::font::object &_font,
 	sge::renderer::device::ffp &_renderer,
 	sge::viewport::manager &_viewport_manager,
@@ -138,24 +142,30 @@ sanguis::client::gui::hud::object::object(
 		sanguis::gui::default_aspect()
 	),
 	exp_bar_(
+		_style,
 		_renderer,
 		sge::rucksack::dim(
 			200,
 			10
 		),
-		sge::image::color::predef::forestgreen(),
-		sanguis::gui::widget::bar::fill_level(
+		sanguis::gui::fill_color(
+			sge::image::color::predef::forestgreen()
+		),
+		sanguis::gui::fill_level(
 			0.f
 		)
 	),
 	health_bar_(
+		_style,
 		_renderer,
 		sge::rucksack::dim(
 			200,
 			20
 		),
-		sge::image::color::predef::red(),
-		sanguis::gui::widget::bar::fill_level(
+		sanguis::gui::fill_color(
+			sge::image::color::predef::red()
+		),
+		sanguis::gui::fill_level(
 			1.f
 		)
 	),
@@ -279,18 +289,18 @@ sanguis::client::gui::hud::object::health_pair(
 		_health_pair
 		?
 			fcppt::strong_typedef_construct_cast<
-				sanguis::gui::widget::bar::fill_level
+				sanguis::gui::fill_level
 			>(
 				_health_pair->health().get()
 			)
 			/
 			fcppt::strong_typedef_construct_cast<
-				sanguis::gui::widget::bar::fill_level
+				sanguis::gui::fill_level
 			>(
 				_health_pair->max_health().get()
 			)
 		:
-			sanguis::gui::widget::bar::fill_level(
+			sanguis::gui::fill_level(
 				0.f
 			)
 	);
@@ -487,7 +497,7 @@ sanguis::client::gui::hud::object::update_exp()
 
 	exp_bar_.value(
 		fcppt::strong_typedef_construct_cast<
-			sanguis::gui::widget::bar::fill_level
+			sanguis::gui::fill_level
 		>(
 			exp_.get()
 			-
@@ -495,7 +505,7 @@ sanguis::client::gui::hud::object::update_exp()
 		)
 		/
 		fcppt::strong_typedef_construct_cast<
-			sanguis::gui::widget::bar::fill_level
+			sanguis::gui::fill_level
 		>(
 			diff.get()
 		)

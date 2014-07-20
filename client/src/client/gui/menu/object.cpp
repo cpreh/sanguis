@@ -127,6 +127,7 @@ sanguis::client::gui::menu::object::object(
 		)
 	),
 	player_name_edit_(
+		_style,
 		_renderer,
 		_font,
 		sge::font::from_fcppt_string(
@@ -168,6 +169,7 @@ sanguis::client::gui::menu::object::object(
 		)
 	),
 	hostname_edit_(
+		_style,
 		_renderer,
 		_font,
 		sge::font::from_fcppt_string(
@@ -209,6 +211,7 @@ sanguis::client::gui::menu::object::object(
 		)
 	),
 	port_edit_(
+		_style,
 		_renderer,
 		_font,
 		sge::font::from_fcppt_string(
@@ -297,6 +300,7 @@ sanguis::client::gui::menu::object::object(
 		sanguis::gui::default_aspect()
 	),
 	connect_frame_(
+		_style,
 		_renderer,
 		connect_box_
 	),

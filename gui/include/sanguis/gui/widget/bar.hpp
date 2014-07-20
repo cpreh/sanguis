@@ -1,10 +1,12 @@
 #ifndef SANGUIS_GUI_WIDGET_BAR_HPP_INCLUDED
 #define SANGUIS_GUI_WIDGET_BAR_HPP_INCLUDED
 
+#include <sanguis/gui/fill_color.hpp>
+#include <sanguis/gui/fill_level.hpp>
 #include <sanguis/gui/symbol.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/bar_fwd.hpp>
 #include <sanguis/gui/widget/base.hpp>
-#include <sge/image/color/any/object.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/dim_fwd.hpp>
@@ -29,17 +31,13 @@ class bar
 		bar
 	);
 public:
-	FCPPT_MAKE_STRONG_TYPEDEF(
-		float,
-		fill_level
-	);
-
 	SANGUIS_GUI_SYMBOL
 	bar(
+		sanguis::gui::style::base const &,
 		sge::renderer::device::ffp &,
 		sge::rucksack::dim,
-		sge::image::color::any::object const &,
-		sanguis::gui::widget::bar::fill_level
+		sanguis::gui::fill_color const &,
+		sanguis::gui::fill_level
 	);
 
 	SANGUIS_GUI_SYMBOL
@@ -49,7 +47,7 @@ public:
 	SANGUIS_GUI_SYMBOL
 	void
 	value(
-		sanguis::gui::widget::bar::fill_level
+		sanguis::gui::fill_level
 	);
 private:
 	void
@@ -62,11 +60,13 @@ private:
 	layout()
 	override;
 
+	sanguis::gui::style::base const &style_;
+
 	sge::renderer::device::ffp &renderer_;
 
-	sge::image::color::any::object const foreground_;
+	sanguis::gui::fill_color const foreground_;
 
-	sanguis::gui::widget::bar::fill_level value_;
+	sanguis::gui::fill_level value_;
 
 	sge::rucksack::widget::dummy layout_;
 };

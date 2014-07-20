@@ -211,6 +211,7 @@ try
 	);
 
 	sanguis::gui::widget::edit edit(
+		*style,
 		sys.renderer_device_ffp(),
 		*font,
 		SGE_FONT_LIT("Test")
