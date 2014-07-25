@@ -43,6 +43,7 @@
 #include <sanguis/client/load/context.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
 #include <sanguis/client/load/resource/context.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/messages/server/add_aoe_projectile.hpp>
 #include <sanguis/messages/server/add_aura.hpp>
 #include <sanguis/messages/server/add_buff.hpp>
@@ -111,6 +112,7 @@ sanguis::client::draw2d::scene::object::object(
 	sanguis::client::load::context const &_resources,
 	sanguis::client::load::hud::context &_hud_resources,
 	sanguis::client::sound_manager &_sound_manager,
+	sanguis::gui::style::base const &_gui_style,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sge::viewport::manager &_viewport_manager,
@@ -132,6 +134,9 @@ sanguis::client::draw2d::scene::object::object(
 	),
 	aura_resources_(
 		resources_.resources().textures()
+	),
+	gui_style_(
+		_gui_style
 	),
 	renderer_(
 		_renderer
@@ -602,6 +607,7 @@ sanguis::client::draw2d::scene::object::hover_display(
 	hovers_.push_back(
 		sanguis::client::draw2d::scene::hover::create(
 			sanguis::client::draw2d::scene::hover::parameters(
+				gui_style_,
 				renderer_,
 				font_,
 				hud_resources_,

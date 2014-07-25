@@ -138,6 +138,8 @@ private:
 
 	sanguis::client::load::hud::context &resources_;
 
+	sanguis::gui::style::base const &gui_style_;
+
 	sge::font::object &font_;
 
 	sge::renderer::device::ffp &renderer_;

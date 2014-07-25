@@ -1,5 +1,6 @@
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/aux_/draw_image.hpp>
+#include <sanguis/gui/style/base.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/image.hpp>
 #include <sge/image2d/view/const_object_fwd.hpp>
@@ -31,11 +32,13 @@
 
 
 sanguis::gui::widget::image::image(
+	sanguis::gui::style::base const &_style,
 	sge::renderer::device::ffp &_renderer,
 	sge::image2d::view::const_object const &_image
 )
 :
 	sanguis::gui::widget::image::image(
+		_style,
 		_renderer,
 		fcppt::make_shared_ptr<
 			sge::texture::part_raw_ptr
@@ -53,10 +56,14 @@ sanguis::gui::widget::image::image(
 }
 
 sanguis::gui::widget::image::image(
+	sanguis::gui::style::base const &_style,
 	sge::renderer::device::ffp &_renderer,
 	sge::texture::const_part_shared_ptr const _texture
 )
 :
+	style_(
+		_style
+	),
 	renderer_(
 		_renderer
 	),
@@ -74,6 +81,8 @@ sanguis::gui::widget::image::image(
 							texture_->size().w()
 						)
 					)
+					+
+					style_.image_spacing().w()
 				),
 				sge::rucksack::preferred_size(
 					sge::rucksack::optional_scalar()
@@ -91,6 +100,8 @@ sanguis::gui::widget::image::image(
 							texture_->size().h()
 						)
 					)
+					+
+					style_.image_spacing().h()
 				),
 				sge::rucksack::preferred_size(
 					sge::rucksack::optional_scalar()
@@ -121,6 +132,12 @@ sanguis::gui::widget::image::on_draw(
 	sge::renderer::context::ffp &_context
 )
 {
+	style_.draw_image(
+		renderer_,
+		_context,
+		this->layout().area()
+	);
+
 	sanguis::gui::aux_::draw_image(
 		renderer_,
 		_context,

@@ -58,6 +58,7 @@ sanguis::client::gui::perk::line::line(
 		sanguis::gui::optional_needed_width()
 	),
 	text_(
+		_style,
 		_renderer,
 		_font,
 		sanguis::client::gui::perk::make_description(

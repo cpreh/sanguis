@@ -1,6 +1,7 @@
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/aux_/relayout_ancestor.hpp>
+#include <sanguis/gui/style/base.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/text.hpp>
 #include <sge/font/metrics.hpp>
@@ -23,6 +24,7 @@
 #include <sge/rucksack/minimum_size.hpp>
 #include <sge/rucksack/optional_scalar.hpp>
 #include <sge/rucksack/preferred_size.hpp>
+#include <sge/rucksack/rect.hpp>
 #include <sge/rucksack/widget/base_fwd.hpp>
 #include <sge/rucksack/widget/dummy.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -30,6 +32,7 @@
 
 
 sanguis::gui::widget::text::text(
+	sanguis::gui::style::base const &_style,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sge::font::string const &_value,
@@ -38,6 +41,9 @@ sanguis::gui::widget::text::text(
 )
 :
 	sanguis::gui::widget::base(),
+	style_(
+		_style
+	),
 	renderer_(
 		_renderer
 	),
@@ -59,6 +65,8 @@ sanguis::gui::widget::text::text(
 			sge::rucksack::axis_policy(
 				sge::rucksack::minimum_size(
 					font_.metrics().height().get()
+					+
+					style_.text_spacing().h()
 				),
 				sge::rucksack::preferred_size(
 					sge::rucksack::optional_scalar()
@@ -119,6 +127,12 @@ sanguis::gui::widget::text::on_draw(
 	sge::renderer::context::ffp &_context
 )
 {
+	style_.draw_text(
+		renderer_,
+		_context,
+		this->layout().area()
+	);
+
 	sge::font::draw::simple(
 		renderer_,
 		_context,
@@ -156,16 +170,20 @@ sanguis::gui::widget::text::horizontal_policy() const
 	return
 		sge::rucksack::axis_policy(
 			sge::rucksack::minimum_size(
-				needed_width_
-				?
-					needed_width_->get()
-				:
-					font_.create_text(
-						value_,
-						sge::font::text_parameters(
-							sge::font::align_h::left()
-						)
-					)->logical_size().w()
+				(
+					needed_width_
+					?
+						needed_width_->get()
+					:
+						font_.create_text(
+							value_,
+							sge::font::text_parameters(
+								sge::font::align_h::left()
+							)
+						)->logical_size().w()
+				)
+				+
+				style_.text_spacing().w()
 			),
 			sge::rucksack::preferred_size(
 				sge::rucksack::optional_scalar()

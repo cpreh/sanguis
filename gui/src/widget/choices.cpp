@@ -53,6 +53,7 @@ sanguis::gui::widget::choices::choices(
 		sanguis::gui::optional_needed_width()
 	),
 	middle_text_(
+		_style,
 		_renderer,
 		_font,
 		_index

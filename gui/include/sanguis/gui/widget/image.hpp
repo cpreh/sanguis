@@ -2,6 +2,7 @@
 #define SANGUIS_GUI_WIDGET_IMAGE_HPP_INCLUDED
 
 #include <sanguis/gui/symbol.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/image_fwd.hpp>
 #include <sge/image2d/view/const_object_fwd.hpp>
@@ -30,12 +31,14 @@ class image
 public:
 	SANGUIS_GUI_SYMBOL
 	image(
+		sanguis::gui::style::base const &,
 		sge::renderer::device::ffp &,
 		sge::image2d::view::const_object const &
 	);
 
 	SANGUIS_GUI_SYMBOL
 	image(
+		sanguis::gui::style::base const &,
 		sge::renderer::device::ffp &,
 		sge::texture::const_part_shared_ptr
 	);
@@ -54,6 +57,8 @@ private:
 		sge::renderer::context::ffp &
 	)
 	override;
+
+	sanguis::gui::style::base const &style_;
 
 	sge::renderer::device::ffp &renderer_;
 

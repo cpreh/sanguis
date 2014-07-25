@@ -6,6 +6,7 @@
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/text_color.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/image.hpp>
 #include <sanguis/gui/widget/reference.hpp>
@@ -25,6 +26,7 @@
 sanguis::client::gui::hud::weapon_widget::weapon_widget(
 	sanguis::client::load::hud::context &_resources,
 	sanguis::gui::context &_gui_context,
+	sanguis::gui::style::base const &_gui_style,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font
 )
@@ -32,11 +34,15 @@ sanguis::client::gui::hud::weapon_widget::weapon_widget(
 	resources_(
 		_resources
 	),
+	gui_style_(
+		_gui_style
+	),
 	renderer_(
 		_renderer
 	),
 	image_(),
 	text_(
+		_gui_style,
 		_renderer,
 		_font,
 		sge::font::string(),
@@ -102,6 +108,7 @@ sanguis::client::gui::hud::weapon_widget::weapon_description(
 		fcppt::make_unique_ptr<
 			sanguis::gui::widget::image
 		>(
+			gui_style_,
 			renderer_,
 			resources_.weapon_icon(
 				_description->weapon_type()

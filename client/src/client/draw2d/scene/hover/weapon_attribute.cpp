@@ -6,6 +6,7 @@
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/text_color.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/base_fwd.hpp>
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
@@ -21,12 +22,14 @@
 
 sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 	sanguis::gui::context &_gui_context,
+	sanguis::gui::style::base const &_gui_style,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sanguis::weapon_attribute const &_attribute
 )
 :
 	name_{
+		_gui_style,
 		_renderer,
 		_font,
 		sanguis::client::gui::hud::weapon_attribute_name(
@@ -44,6 +47,7 @@ sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 		sge::rucksack::axis::x
 	},
 	value_{
+		_gui_style,
 		_renderer,
 		_font,
 		sanguis::client::gui::hud::weapon_attribute_value_to_string(
@@ -63,6 +67,7 @@ sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 		)
 	},
 	diff_{
+		_gui_style,
 		_renderer,
 		_font,
 		// TODO:

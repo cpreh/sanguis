@@ -7,6 +7,7 @@
 #include <sanguis/client/load/hud/context_fwd.hpp>
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/gravity.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
 #include <sanguis/gui/widget/reference_alignment_vector.hpp>
@@ -30,6 +31,7 @@
 
 sanguis::client::gui::hud::weapon_details::weapon_details(
 	sanguis::client::load::hud::context &_resources,
+	sanguis::gui::style::base const &_gui_style,
 	sge::renderer::device::ffp &_renderer,
 	sge::viewport::manager &_viewport_manager,
 	sge::font::object &_font,
@@ -53,6 +55,7 @@ sanguis::client::gui::hud::weapon_details::weapon_details(
 			}},
 			[
 				this,
+				&_gui_style,
 				&_renderer,
 				&_font
 			](
@@ -64,6 +67,7 @@ sanguis::client::gui::hud::weapon_details::weapon_details(
 						_desc,
 						[
 							this,
+							&_gui_style,
 							&_renderer,
 							&_font
 						](
@@ -75,6 +79,7 @@ sanguis::client::gui::hud::weapon_details::weapon_details(
 									sanguis::client::gui::hud::weapon_tooltip
 								>(
 									gui_context_,
+									_gui_style,
 									_renderer,
 									_font,
 									_ndesc

@@ -4,6 +4,7 @@
 #include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/text_color.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/text_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
@@ -33,6 +34,7 @@ class text
 public:
 	SANGUIS_GUI_SYMBOL
 	text(
+		sanguis::gui::style::base const &,
 		sge::renderer::device::ffp &,
 		sge::font::object &,
 		sge::font::string const &,
@@ -69,6 +71,8 @@ private:
 
 	sge::rucksack::axis_policy
 	horizontal_policy() const;
+
+	sanguis::gui::style::base const &style_;
 
 	sge::renderer::device::ffp &renderer_;
 

@@ -81,6 +81,30 @@ public:
 	) const = 0;
 
 	virtual
+	sge::rucksack::dim const
+	image_spacing() const = 0;
+
+	virtual
+	void
+	draw_image(
+		sge::renderer::device::ffp &,
+		sge::renderer::context::ffp &,
+		sge::rucksack::rect
+	) const = 0;
+
+	virtual
+	sge::rucksack::dim const
+	text_spacing() const = 0;
+
+	virtual
+	void
+	draw_text(
+		sge::renderer::device::ffp &,
+		sge::renderer::context::ffp &,
+		sge::rucksack::rect
+	) const = 0;
+
+	virtual
 	sanguis::gui::text_color
 	text_color() const = 0;
 };

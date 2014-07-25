@@ -255,6 +255,38 @@ sanguis::gui::aux_::style::simple::draw_edit(
 	);
 }
 
+sge::rucksack::dim const
+sanguis::gui::aux_::style::simple::image_spacing() const
+{
+	return
+		sge::rucksack::dim::null();
+}
+
+void
+sanguis::gui::aux_::style::simple::draw_image(
+	sge::renderer::device::ffp &,
+	sge::renderer::context::ffp &,
+	sge::rucksack::rect
+) const
+{
+}
+
+sge::rucksack::dim const
+sanguis::gui::aux_::style::simple::text_spacing() const
+{
+	return
+		sge::rucksack::dim::null();
+}
+
+void
+sanguis::gui::aux_::style::simple::draw_text(
+	sge::renderer::device::ffp &,
+	sge::renderer::context::ffp &,
+	sge::rucksack::rect
+) const
+{
+}
+
 sanguis::gui::text_color
 sanguis::gui::aux_::style::simple::text_color() const
 {

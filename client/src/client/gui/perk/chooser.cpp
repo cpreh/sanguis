@@ -65,6 +65,7 @@ sanguis::client::gui::perk::chooser::chooser(
 	),
 	gui_context_(),
 	top_text_(
+		_style,
 		_renderer,
 		_font,
 		this->make_top_text(),

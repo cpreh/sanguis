@@ -3,6 +3,7 @@
 
 #include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/text_color.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/static_text_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
@@ -32,6 +33,7 @@ class static_text
 public:
 	SANGUIS_GUI_SYMBOL
 	static_text(
+		sanguis::gui::style::base const &,
 		sge::renderer::device::ffp &,
 		sge::font::object &,
 		sge::font::string const &,
@@ -52,6 +54,10 @@ private:
 		sge::renderer::context::ffp &
 	)
 	override;
+
+	sanguis::gui::style::base const &style_;
+
+	sge::renderer::device::ffp &renderer_;
 
 	sge::font::draw::static_text static_text_;
 

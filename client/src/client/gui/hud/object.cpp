@@ -49,7 +49,7 @@
 
 sanguis::client::gui::hud::object::object(
 	sanguis::client::load::hud::context &_resources,
-	sanguis::gui::style::base const &_style,
+	sanguis::gui::style::base const &_gui_style,
 	sge::font::object &_font,
 	sge::renderer::device::ffp &_renderer,
 	sge::viewport::manager &_viewport_manager,
@@ -59,6 +59,9 @@ sanguis::client::gui::hud::object::object(
 :
 	resources_(
 		_resources
+	),
+	gui_style_(
+		_gui_style
 	),
 	font_(
 		_font
@@ -87,6 +90,7 @@ sanguis::client::gui::hud::object::object(
 	frames_counter_(),
 	gui_context_(),
 	world_name_text_(
+		_gui_style,
 		_renderer,
 		_font,
 		sge::font::string(),
@@ -96,6 +100,7 @@ sanguis::client::gui::hud::object::object(
 		sanguis::gui::optional_needed_width()
 	),
 	player_name_text_(
+		_gui_style,
 		_renderer,
 		_font,
 		sge::font::string(),
@@ -108,6 +113,7 @@ sanguis::client::gui::hud::object::object(
 		sge::rucksack::axis::x
 	),
 	level_text_(
+		_gui_style,
 		_renderer,
 		_font,
 		sge::font::string(),
@@ -142,7 +148,7 @@ sanguis::client::gui::hud::object::object(
 		sanguis::gui::default_aspect()
 	),
 	exp_bar_(
-		_style,
+		_gui_style,
 		_renderer,
 		sge::rucksack::dim(
 			200,
@@ -156,7 +162,7 @@ sanguis::client::gui::hud::object::object(
 		)
 	),
 	health_bar_(
-		_style,
+		_gui_style,
 		_renderer,
 		sge::rucksack::dim(
 			200,
@@ -172,12 +178,14 @@ sanguis::client::gui::hud::object::object(
 	primary_weapon_(
 		resources_,
 		gui_context_,
+		_gui_style,
 		_renderer,
 		_font
 	),
 	secondary_weapon_(
 		resources_,
 		gui_context_,
+		_gui_style,
 		_renderer,
 		_font
 	),
@@ -533,6 +541,7 @@ sanguis::client::gui::hud::object::create_details()
 			sanguis::client::gui::hud::weapon_details
 		>(
 			resources_,
+			gui_style_,
 			renderer_,
 			viewport_manager_,
 			font_,

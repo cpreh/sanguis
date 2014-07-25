@@ -59,6 +59,7 @@ sanguis::client::draw2d::scene::hover::create(
 				fcppt::make_unique_ptr<
 					sanguis::client::draw2d::scene::hover::weapon
 				>(
+					parameters_.gui_style(),
 					parameters_.renderer(),
 					parameters_.font(),
 					parameters_.center(),

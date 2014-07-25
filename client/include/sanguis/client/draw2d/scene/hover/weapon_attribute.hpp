@@ -4,6 +4,7 @@
 #include <sanguis/weapon_attribute_fwd.hpp>
 #include <sanguis/client/draw2d/scene/hover/weapon_attribute_fwd.hpp>
 #include <sanguis/gui/context_fwd.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/base_fwd.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/expander.hpp>
@@ -32,6 +33,7 @@ class weapon_attribute
 public:
 	weapon_attribute(
 		sanguis::gui::context &,
+		sanguis::gui::style::base const &,
 		sge::renderer::device::ffp &,
 		sge::font::object &,
 		sanguis::weapon_attribute const &

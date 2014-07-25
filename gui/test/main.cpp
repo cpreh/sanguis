@@ -218,6 +218,7 @@ try
 	);
 
 	sanguis::gui::widget::image image(
+		*style,
 		sys.renderer_device_ffp(),
 		sge::image2d::load_exn(
 			sys.image_system(),
@@ -243,6 +244,7 @@ try
 					fcppt::make_unique_ptr<
 						sanguis::gui::widget::text
 					>(
+						*style,
 						sys.renderer_device_ffp(),
 						*font,
 						_label,

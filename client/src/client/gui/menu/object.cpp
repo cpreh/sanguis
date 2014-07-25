@@ -93,7 +93,7 @@ sanguis::client::gui::menu::object::object(
 	sanguis::client::load::resource::textures const &_textures,
 	sanguis::client::config::settings::object &_settings,
 	sanguis::client::gui::menu::callbacks::object const &_callbacks,
-	sanguis::gui::style::base const &_style
+	sanguis::gui::style::base const &_gui_style
 )
 :
 	settings_(
@@ -104,7 +104,7 @@ sanguis::client::gui::menu::object::object(
 		_callbacks
 	),
 	quickstart_button_(
-		_style,
+		_gui_style,
 		_renderer,
 		_font,
 		SGE_FONT_LIT("Quickstart"),
@@ -112,13 +112,14 @@ sanguis::client::gui::menu::object::object(
 	),
 	resolution_chooser_(
 		gui_context_,
-		_style,
+		_gui_style,
 		_font,
 		_renderer_system,
 		_renderer,
 		_renderer_index
 	),
 	player_name_label_(
+		_gui_style,
 		_renderer,
 		_font,
 		SGE_FONT_LIT("Name: "),
@@ -127,7 +128,7 @@ sanguis::client::gui::menu::object::object(
 		)
 	),
 	player_name_edit_(
-		_style,
+		_gui_style,
 		_renderer,
 		_font,
 		sge::font::from_fcppt_string(
@@ -161,6 +162,7 @@ sanguis::client::gui::menu::object::object(
 		sanguis::gui::default_aspect()
 	),
 	hostname_label_(
+		_gui_style,
 		_renderer,
 		_font,
 		SGE_FONT_LIT("Hostname: "),
@@ -169,7 +171,7 @@ sanguis::client::gui::menu::object::object(
 		)
 	),
 	hostname_edit_(
-		_style,
+		_gui_style,
 		_renderer,
 		_font,
 		sge::font::from_fcppt_string(
@@ -203,6 +205,7 @@ sanguis::client::gui::menu::object::object(
 		sanguis::gui::default_aspect()
 	),
 	port_label_(
+		_gui_style,
 		_renderer,
 		_font,
 		SGE_FONT_LIT("Port: "),
@@ -211,7 +214,7 @@ sanguis::client::gui::menu::object::object(
 		)
 	),
 	port_edit_(
-		_style,
+		_gui_style,
 		_renderer,
 		_font,
 		sge::font::from_fcppt_string(
@@ -245,6 +248,7 @@ sanguis::client::gui::menu::object::object(
 		sanguis::gui::default_aspect()
 	),
 	connect_text_(
+		_gui_style,
 		_renderer,
 		_font,
 		SGE_FONT_LIT(""),
@@ -254,7 +258,7 @@ sanguis::client::gui::menu::object::object(
 		sanguis::gui::optional_needed_width()
 	),
 	connect_button_(
-		_style,
+		_gui_style,
 		_renderer,
 		_font,
 		connect_text,
@@ -300,12 +304,12 @@ sanguis::client::gui::menu::object::object(
 		sanguis::gui::default_aspect()
 	),
 	connect_frame_(
-		_style,
+		_gui_style,
 		_renderer,
 		connect_box_
 	),
 	quit_button_(
-		_style,
+		_gui_style,
 		_renderer,
 		_font,
 		SGE_FONT_LIT("Quit"),

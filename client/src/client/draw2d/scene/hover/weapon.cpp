@@ -8,6 +8,7 @@
 #include <sanguis/client/load/hud/context.hpp>
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/draw.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
 #include <sanguis/gui/widget/reference_alignment_vector.hpp>
 #include <sanguis/gui/widget/reference.hpp>
@@ -22,6 +23,7 @@
 
 
 sanguis::client::draw2d::scene::hover::weapon::weapon(
+	sanguis::gui::style::base const &_gui_style,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sanguis::client::draw2d::sprite::center const _center,
@@ -31,6 +33,7 @@ sanguis::client::draw2d::scene::hover::weapon::weapon(
 :
 	gui_context_(),
 	image_(
+		_gui_style,
 		_renderer,
 		_hud_resources.weapon_icon(
 			_info.get().weapon_type()
@@ -43,6 +46,7 @@ sanguis::client::draw2d::scene::hover::weapon::weapon(
 			_info.get().attributes(),
 			[
 				this,
+				&_gui_style,
 				&_renderer,
 				&_font
 			](
@@ -54,6 +58,7 @@ sanguis::client::draw2d::scene::hover::weapon::weapon(
 						sanguis::client::draw2d::scene::hover::weapon_attribute
 					>(
 						gui_context_,
+						_gui_style,
 						_renderer,
 						_font,
 						_attribute

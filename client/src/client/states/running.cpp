@@ -137,6 +137,9 @@ sanguis::client::states::running::running(
 			*sound_manager_,
 			this->context<
 				sanguis::client::machine
+			>().gui_style(),
+			this->context<
+				sanguis::client::machine
 			>().renderer(),
 			this->context<
 				sanguis::client::machine

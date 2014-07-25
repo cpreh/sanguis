@@ -5,6 +5,7 @@
 #include <sanguis/optional_weapon_description.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
 #include <sanguis/gui/context_fwd.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/image_fwd.hpp>
 #include <sanguis/gui/widget/text.hpp>
@@ -34,6 +35,7 @@ public:
 	weapon_widget(
 		sanguis::client::load::hud::context &,
 		sanguis::gui::context &,
+		sanguis::gui::style::base const &,
 		sge::renderer::device::ffp &,
 		sge::font::object &
 	);
@@ -62,6 +64,8 @@ private:
 	);
 
 	sanguis::client::load::hud::context &resources_;
+
+	sanguis::gui::style::base const &gui_style_;
 
 	sge::renderer::device::ffp &renderer_;
 

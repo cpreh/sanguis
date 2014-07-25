@@ -82,6 +82,30 @@ private:
 	) const
 	override;
 
+	sge::rucksack::dim const
+	image_spacing() const
+	override;
+
+	void
+	draw_image(
+		sge::renderer::device::ffp &,
+		sge::renderer::context::ffp &,
+		sge::rucksack::rect
+	) const
+	override;
+
+	sge::rucksack::dim const
+	text_spacing() const
+	override;
+
+	void
+	draw_text(
+		sge::renderer::device::ffp &,
+		sge::renderer::context::ffp &,
+		sge::rucksack::rect
+	) const
+	override;
+
 	sanguis::gui::text_color
 	text_color() const
 	override;
