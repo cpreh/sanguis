@@ -45,9 +45,7 @@ sanguis::gui::widget::bar::bar(
 					_dim.w()
 				),
 				sge::rucksack::preferred_size(
-					sge::rucksack::optional_scalar(
-						_dim.w()
-					)
+					sge::rucksack::optional_scalar()
 				),
 				sge::rucksack::is_expanding(
 					false
@@ -58,9 +56,7 @@ sanguis::gui::widget::bar::bar(
 					_dim.h()
 				),
 				sge::rucksack::preferred_size(
-					sge::rucksack::optional_scalar(
-						_dim.h()
-					)
+					sge::rucksack::optional_scalar()
 				),
 				sge::rucksack::is_expanding(
 					false
