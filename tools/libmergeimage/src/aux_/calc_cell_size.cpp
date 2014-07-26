@@ -1,10 +1,13 @@
+#include <sanguis/tools/libmergeimage/exception.hpp>
 #include <sanguis/tools/libmergeimage/aux_/calc_cell_size.hpp>
 #include <sanguis/tools/libmergeimage/aux_/cell_size.hpp>
 #include <sanguis/tools/libmergeimage/aux_/path_vector_vector.hpp>
+#include <sge/image/exception.hpp>
 #include <sge/image2d/dim.hpp>
 #include <sge/image2d/file.hpp>
 #include <sge/image2d/load_exn.hpp>
 #include <sge/image2d/system_fwd.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
@@ -17,6 +20,7 @@ sanguis::tools::libmergeimage::aux_::calc_cell_size(
 	boost::filesystem::path const &_base_path,
 	sanguis::tools::libmergeimage::aux_::path_vector_vector const &_paths
 )
+try
 {
 	FCPPT_ASSERT_PRE(
 		!_paths.empty()
@@ -35,4 +39,15 @@ sanguis::tools::libmergeimage::aux_::calc_cell_size(
 				)
 			)->size()
 		);
+}
+catch(
+	sge::image::exception const &_error
+)
+{
+	throw
+		sanguis::tools::libmergeimage::exception{
+			FCPPT_TEXT("Couldn't load an image to determine the cell size: ")
+			+
+			_error.string()
+		};
 }
