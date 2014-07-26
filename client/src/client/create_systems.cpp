@@ -30,11 +30,11 @@
 #include <sge/systems/list.hpp>
 #include <sge/systems/log_settings.hpp>
 #include <sge/systems/make_list.hpp>
+#include <sge/systems/original_window.hpp>
 #include <sge/systems/renderer.hpp>
 #include <sge/systems/window.hpp>
 #include <sge/viewport/fill_on_resize.hpp>
 #include <sge/window/dim.hpp>
-#include <sge/window/parameters.hpp>
 #include <sge/window/title.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
@@ -81,7 +81,7 @@ sanguis::client::create_systems(
 			)
 			(
 				sge::systems::window(
-					sge::window::parameters(
+					sge::systems::original_window(
 						sge::window::title(
 							sanguis::app_name()
 						),
