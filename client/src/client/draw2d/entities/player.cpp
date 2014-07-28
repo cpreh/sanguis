@@ -38,13 +38,11 @@ namespace
 {
 
 sanguis::client::draw2d::sprite::point const
-	player_body_center(25,32),
-	player_leg_center(32,32);
+	player_body_center(24,48);
 
 sanguis::client::draw2d::sprite::index const
 	top(1),
 	bottom(0);
-
 }
 
 sanguis::client::draw2d::entities::player::player(
@@ -134,13 +132,6 @@ sanguis::client::draw2d::entities::player::update()
 	sanguis::client::draw2d::entities::with_buffs_auras_model::update();
 
 	sanguis::client::draw2d::vector2 const
-		leg_center(
-			fcppt::math::vector::structure_cast<
-				sanguis::client::draw2d::vector2
-			>(
-				player_leg_center
-			)
-		),
 		body_center(
 			fcppt::math::vector::structure_cast<
 				sanguis::client::draw2d::vector2
@@ -151,18 +142,18 @@ sanguis::client::draw2d::entities::player::update()
 
 	sanguis::client::draw2d::sprite::rotation const sprite_rotation(
 		this->at(
-			bottom
+			top
 		).rotation()
 	);
 
 	sanguis::client::draw2d::vector2 const new_rotation(
 		fcppt::math::point_rotate(
-			leg_center,
+			body_center,
 			fcppt::math::dim::structure_cast<
 				sanguis::client::draw2d::vector2
 			>(
 				this->at(
-					bottom
+					top
 				).size()
 				/
 				fcppt::literal<
@@ -175,29 +166,19 @@ sanguis::client::draw2d::entities::player::update()
 		)
 	);
 
-	sanguis::client::draw2d::vector2 const
-		rot_abs(
-			fcppt::math::vector::structure_cast<
-				sanguis::client::draw2d::vector2
-			>(
-				this->at(
-					bottom
-				).pos()
-			)
-			+
-			new_rotation
-		),
-		top_pos(
-			rot_abs - body_center
-		);
-
 	this->at(
 		top
 	).pos(
 		fcppt::math::vector::structure_cast<
 			sanguis::client::draw2d::sprite::point
 		>(
-			top_pos
+			sge::sprite::center(
+				this->at(
+					top
+				)
+			)
+			-
+			new_rotation
 		)
 	);
 }
