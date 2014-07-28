@@ -15,11 +15,11 @@ namespace tiles
 
 enum class direction
 {
-	north,
-	west,
-	east,
-	south,
-	fcppt_maximum = south
+	north_west,
+	north_east,
+	south_west,
+	south_east,
+	fcppt_maximum = south_east
 };
 
 }

@@ -1,12 +1,18 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_TO_TILE_TEXTURE_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_TO_TILE_TEXTURE_HPP_INCLUDED
 
+#include <sanguis/client/draw2d/scene/world/make_tile_neighbors.hpp>
+#include <sanguis/client/draw2d/scene/world/make_tile_pair.hpp>
+#include <sanguis/client/draw2d/scene/world/tile_neighbors.hpp>
 #include <sanguis/client/draw2d/scene/world/tile_orientation.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile_grid.hpp>
+#include <sanguis/client/load/tiles/const_optional_texture_container_ref.hpp>
 #include <sanguis/client/load/tiles/context.hpp>
+#include <sanguis/client/load/tiles/optional_pair.hpp>
 #include <sanguis/client/load/tiles/orientation.hpp>
 #include <sanguis/client/load/tiles/set.hpp>
+#include <sanguis/client/load/tiles/texture_container.hpp>
 #include <sge/texture/const_part_shared_ptr.hpp>
 
 
@@ -33,36 +39,59 @@ to_tile_texture(
 	sanguis::creator::pos const _pos
 )
 {
-	Tile const tile(
-		_grid[
+	sanguis::client::draw2d::scene::world::tile_neighbors<
+		Tile
+	> const tiles(
+		sanguis::client::draw2d::scene::world::make_tile_neighbors(
+			_grid,
 			_pos
-		]
+		)
 	);
+
+	sanguis::client::load::tiles::optional_pair<
+		Tile
+	> const pair(
+		sanguis::client::draw2d::scene::world::make_tile_pair(
+			tiles
+		)
+	);
+
+	// TODO: Warning? Error?
+	if(
+		!pair
+	)
+		return
+			sge::texture::const_part_shared_ptr();
 
 	sanguis::client::load::tiles::set const &set(
 		_tiles.set(
-			tile
+			*pair
 		)
 	);
 
-	sge::texture::const_part_shared_ptr const best_match(
+	sanguis::client::load::tiles::const_optional_texture_container_ref const textures(
 		set.orientation(
 			sanguis::client::draw2d::scene::world::tile_orientation(
-				_grid,
-				_pos
+				*pair,
+				tiles
 			)
 		)
 	);
 
+	// TODO: Warning? Error?
+	if(
+		!textures
+		||
+		textures->empty()
+	)
+		return
+			sge::texture::const_part_shared_ptr();
+
+	// TODO: Make this random
 	return
-		best_match
-		?
-			best_match
-		:
-			set.orientation(
-				sanguis::client::load::tiles::orientation::null()
-			)
-		;
+		textures->at(
+			0u
+		);
 }
 
 }

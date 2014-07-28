@@ -11,7 +11,6 @@ namespace creator
 
 enum class background_tile
 {
-	nothing,
 	space,
 	space_floor,
 	asphalt,

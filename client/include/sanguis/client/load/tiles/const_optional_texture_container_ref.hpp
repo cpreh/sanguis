@@ -1,0 +1,8 @@
+#ifndef SANGUIS_CLIENT_LOAD_TILES_CONST_OPTIONAL_TEXTURE_CONTAINER_REF_HPP_INCLUDED
+#define SANGUIS_CLIENT_LOAD_TILES_CONST_OPTIONAL_TEXTURE_CONTAINER_REF_HPP_INCLUDED
+
+#include <sanguis/client/load/tiles/const_optional_texture_container_ref_fwd.hpp>
+#include <fcppt/optional_impl.hpp>
+
+
+#endif

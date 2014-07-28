@@ -14,15 +14,17 @@ sanguis::client::load::tiles::background_to_name(
 	)
 	{
 	case sanguis::creator::background_tile::space:
-		return FCPPT_TEXT("space");
+		return
+			FCPPT_TEXT("space");
 	case sanguis::creator::background_tile::space_floor:
-		return FCPPT_TEXT("space_floor");
+		return
+			FCPPT_TEXT("space_floor");
 	case sanguis::creator::background_tile::grass:
-		return FCPPT_TEXT("grass");
+		return
+			FCPPT_TEXT("grass");
 	case sanguis::creator::background_tile::asphalt:
-		return FCPPT_TEXT("asphalt");
-	case sanguis::creator::background_tile::nothing:
-		break;
+		return
+			FCPPT_TEXT("asphalt");
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;

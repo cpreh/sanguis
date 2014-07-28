@@ -4,12 +4,16 @@
 #include <sanguis/creator/background_tile_fwd.hpp>
 #include <sanguis/creator/tile_fwd.hpp>
 #include <sanguis/client/load/resource/textures_fwd.hpp>
+#include <sanguis/client/load/tiles/background_tile_pair_fwd.hpp>
 #include <sanguis/client/load/tiles/category.hpp>
 #include <sanguis/client/load/tiles/context_fwd.hpp>
+#include <sanguis/client/load/tiles/pair.hpp>
 #include <sanguis/client/load/tiles/set_fwd.hpp>
+#include <sanguis/client/load/tiles/tile_pair_fwd.hpp>
+#include <fcppt/homogenous_pair_comparison.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/ptr_container/ptr_map.hpp>
+#include <map>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -37,12 +41,12 @@ public:
 
 	sanguis::client::load::tiles::set const &
 	set(
-		sanguis::creator::tile
+		sanguis::client::load::tiles::tile_pair
 	);
 
 	sanguis::client::load::tiles::set const &
 	set(
-		sanguis::creator::background_tile
+		sanguis::client::load::tiles::background_tile_pair
 	);
 private:
 	template<
@@ -57,17 +61,29 @@ private:
 		sanguis::client::load::tiles::category const &
 	);
 
-	typedef
-	boost::ptr_map<
-		sanguis::creator::tile,
+	template<
+		typename TileType
+	>
+	// TODO: unordered_map
+	using
+	map_type
+	=
+	std::map<
+		sanguis::client::load::tiles::pair<
+			TileType
+		>,
 		sanguis::client::load::tiles::set
+	>;
+
+	typedef
+	map_type<
+		sanguis::creator::tile
 	>
 	set_map;
 
 	typedef
-	boost::ptr_map<
-		sanguis::creator::background_tile,
-		sanguis::client::load::tiles::set
+	map_type<
+		sanguis::creator::background_tile
 	>
 	background_set_map;
 

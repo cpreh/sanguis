@@ -1,11 +1,11 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_TILE_ORIENTATION_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_TILE_ORIENTATION_HPP_INCLUDED
 
-#include <sanguis/client/draw2d/scene/world/tile_is_same.hpp>
-#include <sanguis/creator/pos.hpp>
-#include <sanguis/creator/tile_grid.hpp>
+#include <sanguis/client/draw2d/scene/world/tile_neighbors.hpp>
 #include <sanguis/client/load/tiles/direction.hpp>
 #include <sanguis/client/load/tiles/orientation.hpp>
+#include <sanguis/client/load/tiles/pair.hpp>
+#include <fcppt/make_enum_range.hpp>
 
 
 namespace sanguis
@@ -24,69 +24,34 @@ template<
 >
 sanguis::client::load::tiles::orientation const
 tile_orientation(
-	sanguis::creator::tile_grid<
+	sanguis::client::load::tiles::pair<
 		Tile
-	> const &_grid,
-	sanguis::creator::pos const &_pos
+	> const &_pair,
+	sanguis::client::draw2d::scene::world::tile_neighbors<
+		Tile
+	> const _neighbors
 )
 {
 	sanguis::client::load::tiles::orientation orientation{
 		sanguis::client::load::tiles::orientation::null()
 	};
 
-	Tile const tile(
-		_grid[
-			_pos
-		]
-	);
-
-	orientation[
-		sanguis::client::load::tiles::direction::north
-	] =
-		sanguis::client::draw2d::scene::world::tile_is_same(
-			tile,
-			_grid,
-			sanguis::creator::pos(
-				_pos.x(),
-				_pos.y() - 1
-			)
-		);
-
-	orientation[
-		sanguis::client::load::tiles::direction::west
-	] =
-		sanguis::client::draw2d::scene::world::tile_is_same(
-			tile,
-			_grid,
-			sanguis::creator::pos(
-				_pos.x() - 1,
-				_pos.y()
-			)
-		);
-
-	orientation[
-		sanguis::client::load::tiles::direction::east
-	] =
-		sanguis::client::draw2d::scene::world::tile_is_same(
-			tile,
-			_grid,
-			sanguis::creator::pos(
-				_pos.x() + 1,
-				_pos.y()
-			)
-		);
-
-	orientation[
-		sanguis::client::load::tiles::direction::south
-	] =
-		sanguis::client::draw2d::scene::world::tile_is_same(
-			tile,
-			_grid,
-			sanguis::creator::pos(
-				_pos.x(),
-				_pos.y() + 1
-			)
-		);
+	// TODO: Check if the tile is _pair.second?
+	for(
+		sanguis::client::load::tiles::direction const value
+		:
+		fcppt::make_enum_range<
+			sanguis::client::load::tiles::direction
+		>()
+	)
+		orientation[
+			value
+		] =
+			_neighbors[
+				value
+			]
+			==
+			_pair.first;
 
 	return
 		orientation;

@@ -12,7 +12,9 @@
 #include <sanguis/client/draw2d/scene/world/sprite/vector.hpp>
 #include <sanguis/creator/tile_grid.hpp>
 #include <sanguis/client/load/tiles/context_fwd.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/container/grid/make_pos_crange_start_end.hpp>
+#include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -31,7 +33,8 @@ namespace world
 {
 
 template<
-	typename Tile
+	typename Tile,
+	typename Filter
 >
 sanguis::client::draw2d::scene::world::sprite::vector
 fill_batches(
@@ -42,11 +45,12 @@ fill_batches(
 	> const &_grid,
 	sanguis::client::draw2d::scene::world::lower_bound const &_lower_bound,
 	sanguis::client::draw2d::scene::world::upper_bound const &_upper_bound,
-	Tile const _nothing,
+	Filter const _filter,
 	sanguis::client::draw2d::scene::world::sprite::dim const &_tile_dim,
 	sanguis::client::draw2d::scene::world::is_background const _is_background
 )
 {
+	// TODO: map_optional by moving _sprites
 	for(
 		auto const &source_element
 		:
@@ -58,9 +62,9 @@ fill_batches(
 	)
 	{
 		if(
-			source_element.value()
-			==
-			_nothing
+			_filter(
+				source_element.value()
+			)
 		)
 			continue;
 
@@ -75,6 +79,14 @@ fill_batches(
 					)
 					*
 					_tile_dim
+					-
+					_tile_dim
+					/
+					fcppt::literal<
+						sanguis::client::draw2d::scene::world::sprite::dim::value_type
+					>(
+						2
+					)
 				)
 				.size(
 					_tile_dim

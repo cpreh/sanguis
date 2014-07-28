@@ -24,6 +24,7 @@
 #include <fcppt/container/grid/make_pos_range.hpp>
 #include <fcppt/math/ceil_div.hpp>
 #include <fcppt/math/map.hpp>
+#include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/dim.hpp>
@@ -40,6 +41,26 @@ sanguis::client::draw2d::scene::world::generate_batches(
 	sanguis::client::draw2d::scene::world::sprite::buffers &_sprite_buffers
 )
 {
+	sanguis::creator::grid::dim const min_size{
+		fcppt::math::dim::fill<
+			sanguis::creator::grid::dim::dim_wrapper::value
+		>(
+			fcppt::literal<
+				sanguis::creator::grid::dim::value_type
+			>(
+				1u
+			)
+		)
+	};
+
+	if(
+		_grid.size()
+		<=
+		min_size
+	)
+		return
+			sanguis::client::draw2d::scene::world::batch_grid();
+
 	sanguis::client::draw2d::scene::world::batch_grid ret(
 		fcppt::math::dim::structure_cast<
 			sanguis::client::draw2d::scene::world::batch_grid::dim
@@ -47,7 +68,9 @@ sanguis::client::draw2d::scene::world::generate_batches(
 			fcppt::math::map<
 				sanguis::creator::grid::dim
 			>(
-				_grid.size(),
+				_grid.size()
+				-
+				min_size,
 				[](
 					sanguis::creator::grid::dim::value_type const _value
 				)
@@ -110,7 +133,9 @@ sanguis::client::draw2d::scene::world::generate_batches(
 			fcppt::container::grid::clamp_pos(
 				result_element.pos()
 				*
-				batch_dim_pos,
+				batch_dim_pos
+				+
+				min_size,
 				_grid.size()
 			)
 		);
@@ -133,7 +158,15 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				_grid,
 				lower_bound,
 				upper_bound,
-				sanguis::creator::tile::nothing,
+				[](
+					sanguis::creator::tile const _value
+				)
+				{
+					return
+						_value
+						==
+						sanguis::creator::tile::nothing;
+				},
 				tile_dim,
 				sanguis::client::draw2d::scene::world::is_background(
 					false
@@ -149,7 +182,13 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				_background_grid,
 				lower_bound,
 				upper_bound,
-				sanguis::creator::background_tile::nothing,
+				[](
+					sanguis::creator::background_tile
+				)
+				{
+					return
+						false;
+				},
 				tile_dim,
 				sanguis::client::draw2d::scene::world::is_background(
 					true

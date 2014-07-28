@@ -214,6 +214,8 @@ set(
 	include/sanguis/client/draw2d/scene/world/generate_batches.hpp
 	include/sanguis/client/draw2d/scene/world/is_background.hpp
 	include/sanguis/client/draw2d/scene/world/lower_bound.hpp
+	include/sanguis/client/draw2d/scene/world/make_tile_neighbors.hpp
+	include/sanguis/client/draw2d/scene/world/make_tile_pair.hpp
 	include/sanguis/client/draw2d/scene/world/object.hpp
 	include/sanguis/client/draw2d/scene/world/object_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/buffers.hpp
@@ -242,7 +244,8 @@ set(
 	include/sanguis/client/draw2d/scene/world/sprite/vector.hpp
 	include/sanguis/client/draw2d/scene/world/state.hpp
 	include/sanguis/client/draw2d/scene/world/state_fwd.hpp
-	include/sanguis/client/draw2d/scene/world/tile_is_same.hpp
+	include/sanguis/client/draw2d/scene/world/tile_neighbors.hpp
+	include/sanguis/client/draw2d/scene/world/tile_neighbors_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/tile_orientation.hpp
 	include/sanguis/client/draw2d/scene/world/tile_size.hpp
 	include/sanguis/client/draw2d/scene/world/to_tile_texture.hpp
@@ -466,17 +469,32 @@ set(
 	include/sanguis/client/load/resource/textures.hpp
 	include/sanguis/client/load/resource/textures_fwd.hpp
 	include/sanguis/client/load/skip_directories.hpp
+	include/sanguis/client/load/tiles/background_tile_pair.hpp
+	include/sanguis/client/load/tiles/background_tile_pair_fwd.hpp
 	include/sanguis/client/load/tiles/background_to_name.hpp
 	include/sanguis/client/load/tiles/category.hpp
+	include/sanguis/client/load/tiles/const_optional_texture_container_ref.hpp
+	include/sanguis/client/load/tiles/const_optional_texture_container_ref_fwd.hpp
 	include/sanguis/client/load/tiles/context.hpp
 	include/sanguis/client/load/tiles/context_fwd.hpp
+	include/sanguis/client/load/tiles/decode_name.hpp
 	include/sanguis/client/load/tiles/direction.hpp
 	include/sanguis/client/load/tiles/direction_fwd.hpp
+	include/sanguis/client/load/tiles/make_textures.hpp
 	include/sanguis/client/load/tiles/name.hpp
+	include/sanguis/client/load/tiles/optional_orientation.hpp
+	include/sanguis/client/load/tiles/optional_orientation_fwd.hpp
+	include/sanguis/client/load/tiles/optional_pair.hpp
+	include/sanguis/client/load/tiles/optional_pair_fwd.hpp
 	include/sanguis/client/load/tiles/orientation.hpp
 	include/sanguis/client/load/tiles/orientation_fwd.hpp
+	include/sanguis/client/load/tiles/pair.hpp
+	include/sanguis/client/load/tiles/pair_fwd.hpp
 	include/sanguis/client/load/tiles/set.hpp
 	include/sanguis/client/load/tiles/set_fwd.hpp
+	include/sanguis/client/load/tiles/texture_container.hpp
+	include/sanguis/client/load/tiles/tile_pair.hpp
+	include/sanguis/client/load/tiles/tile_pair_fwd.hpp
 	include/sanguis/client/load/tiles/to_name.hpp
 	include/sanguis/client/log.hpp
 	include/sanguis/client/log_location.hpp
@@ -732,6 +750,8 @@ set(
 	src/client/load/skip_directories.cpp
 	src/client/load/tiles/background_to_name.cpp
 	src/client/load/tiles/context.cpp
+	src/client/load/tiles/decode_name.cpp
+	src/client/load/tiles/make_textures.cpp
 	src/client/load/tiles/set.cpp
 	src/client/load/tiles/to_name.cpp
 	src/client/log.cpp
@@ -777,5 +797,5 @@ sanguis_generate_symbol_header(
 sanguis_add_library(
 	client
 	"${SANGUIS_CLIENT_FILES}"
-	"${sanguis_collision_TARGET};${sanguis_common_TARGET};${sanguis_core_TARGET};${sanguis_creator_TARGET};${sanguis_gui_TARGET};${sanguis_model_TARGET};${sanguis_server_TARGET};${sgeaudio_TARGET};${sgecharconv_TARGET};${sgeconfig_TARGET};${sgeconsole_TARGET};${sgeconsolegfx_TARGET};${sgecore_TARGET};${sgefont_TARGET};${sgefontdraw_TARGET};${sgeimagecolor_TARGET};${sgeinput_TARGET};${sgelog_TARGET};${sgeparse_TARGET};${sgeparseini_TARGET};${sgerenderer_TARGET};${sgesprite_TARGET};${sgesystems_TARGET};${sgetimer_TARGET};${sgetexture_TARGET};${sgeviewport_TARGET};${sgewindow_TARGET};${alda_TARGET};${awl_TARGET};${fcppt_filesystem_TARGET};${fcppt_core_TARGET};${FcpptThreads_LIBRARIES};${Boost_PROGRAM_OPTIONS_LIBRARIES}"
+	"${sanguis_collision_TARGET};${sanguis_common_TARGET};${sanguis_core_TARGET};${sanguis_creator_TARGET};${sanguis_gui_TARGET};${sanguis_model_TARGET};${sanguis_server_TARGET};${sgeaudio_TARGET};${sgecharconv_TARGET};${sgeconfig_TARGET};${sgeconsole_TARGET};${sgeconsolegfx_TARGET};${sgecore_TARGET};${sgefont_TARGET};${sgefontdraw_TARGET};${sgeimagecolor_TARGET};${sgeinput_TARGET};${sgelog_TARGET};${sgeparse_TARGET};${sgeparseini_TARGET};${sgeparsejson_TARGET};${sgerenderer_TARGET};${sgesprite_TARGET};${sgesystems_TARGET};${sgetimer_TARGET};${sgetexture_TARGET};${sgeviewport_TARGET};${sgewindow_TARGET};${alda_TARGET};${awl_TARGET};${fcppt_filesystem_TARGET};${fcppt_core_TARGET};${FcpptThreads_LIBRARIES};${Boost_PROGRAM_OPTIONS_LIBRARIES}"
 )
