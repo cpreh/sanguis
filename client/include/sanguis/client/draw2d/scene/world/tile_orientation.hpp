@@ -6,6 +6,7 @@
 #include <sanguis/client/load/tiles/orientation.hpp>
 #include <sanguis/client/load/tiles/pair.hpp>
 #include <fcppt/make_enum_range.hpp>
+#include <fcppt/assert/error.hpp>
 
 
 namespace sanguis
@@ -44,14 +45,30 @@ tile_orientation(
 			sanguis::client::load::tiles::direction
 		>()
 	)
-		orientation[
-			value
-		] =
+	{
+		Tile const tile(
 			_neighbors[
 				value
 			]
+		);
+
+		FCPPT_ASSERT_ERROR(
+			tile
+			==
+			_pair.first
+			||
+			tile
+			==
+			_pair.second
+		);
+
+		orientation[
+			value
+		] =
+			tile
 			==
 			_pair.first;
+	}
 
 	return
 		orientation;

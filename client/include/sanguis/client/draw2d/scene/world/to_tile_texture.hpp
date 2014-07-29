@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_TO_TILE_TEXTURE_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_TO_TILE_TEXTURE_HPP_INCLUDED
 
+#include <sanguis/client/draw2d/log.hpp>
 #include <sanguis/client/draw2d/scene/world/make_tile_neighbors.hpp>
 #include <sanguis/client/draw2d/scene/world/make_tile_pair.hpp>
 #include <sanguis/client/draw2d/scene/world/tile_neighbors.hpp>
@@ -14,6 +15,8 @@
 #include <sanguis/client/load/tiles/set.hpp>
 #include <sanguis/client/load/tiles/texture_container.hpp>
 #include <sge/texture/const_part_shared_ptr.hpp>
+#include <fcppt/log/_.hpp>
+#include <fcppt/log/error.hpp>
 
 
 namespace sanguis
@@ -56,12 +59,19 @@ to_tile_texture(
 		)
 	);
 
-	// TODO: Warning? Error?
 	if(
 		!pair
 	)
+	{
+		FCPPT_LOG_ERROR(
+			sanguis::client::draw2d::log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("Invalid tile combination")
+		);
+
 		return
 			sge::texture::const_part_shared_ptr();
+	}
 
 	sanguis::client::load::tiles::set const &set(
 		_tiles.set(
@@ -78,14 +88,21 @@ to_tile_texture(
 		)
 	);
 
-	// TODO: Warning? Error?
 	if(
 		!textures
 		||
 		textures->empty()
 	)
+	{
+		FCPPT_LOG_ERROR(
+			sanguis::client::draw2d::log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("No texture for tile combation")
+		);
+
 		return
 			sge::texture::const_part_shared_ptr();
+	}
 
 	// TODO: Make this random
 	return

@@ -4,6 +4,8 @@
 #include <sanguis/client/draw2d/scene/world/tile_neighbors.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile_grid.hpp>
+#include <fcppt/assert/pre.hpp>
+#include <fcppt/container/grid/in_range.hpp>
 
 
 namespace sanguis
@@ -38,7 +40,14 @@ make_tile_neighbors(
 		)
 		-> Tile
 		{
-			// TODO: Check for in_range?
+			// TODO: Remove this once everything works
+			FCPPT_ASSERT_PRE(
+				fcppt::container::grid::in_range(
+					_grid,
+					_npos
+				)
+			);
+
 			return
 				_grid[
 					_npos
