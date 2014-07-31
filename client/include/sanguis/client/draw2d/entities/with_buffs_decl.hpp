@@ -4,13 +4,13 @@
 #include <sanguis/buff_type_fwd.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/client/draw2d/entities/with_buffs_parameters_fwd.hpp>
-#include <sanguis/client/draw2d/entities/buffs/base_fwd.hpp>
+#include <sanguis/client/draw2d/entities/buffs/unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_buffs.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
 #include <sanguis/client/load/model/collection_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/ptr_container/ptr_map.hpp>
+#include <map>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -77,9 +77,9 @@ private:
 	sanguis::client::load::model::collection const &model_collection_;
 
 	typedef
-	boost::ptr_map<
+	std::map<
 		sanguis::buff_type,
-		sanguis::client::draw2d::entities::buffs::base
+		sanguis::client::draw2d::entities::buffs::unique_ptr
 	>
 	buff_map;
 

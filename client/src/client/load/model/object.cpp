@@ -8,6 +8,7 @@
 #include <sanguis/model/cell_size.hpp>
 #include <sge/exception.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/to_signed.hpp>
@@ -114,9 +115,7 @@ sanguis::client::load::model::object::random_part(
 		!random_part_
 	)
 		random_part_ =
-			fcppt::make_unique_ptr<
-				part_rand
-			>(
+			part_rand(
 				_random_generator,
 				part_map_distribution(
 					part_map_distribution::param_type::min(

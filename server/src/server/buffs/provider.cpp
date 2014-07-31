@@ -6,7 +6,6 @@
 #include <fcppt/reference_wrapper_comparison.hpp>
 #include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>

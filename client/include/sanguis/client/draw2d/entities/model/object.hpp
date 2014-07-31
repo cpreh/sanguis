@@ -22,8 +22,8 @@
 #include <sanguis/client/load/animation_type_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/ptr_container/ptr_vector.hpp>
 #include <memory>
+#include <vector>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -178,9 +178,13 @@ private:
 
 	sanguis::client::draw2d::entities::model::decay_option const decay_option_;
 
-	typedef boost::ptr_vector<
-		sanguis::client::draw2d::entities::model::part
-	> part_vector;
+	typedef
+	std::vector<
+		std::unique_ptr<
+			sanguis::client::draw2d::entities::model::part
+		>
+	>
+	part_vector;
 
 	part_vector parts_;
 };

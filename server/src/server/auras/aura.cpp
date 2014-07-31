@@ -4,9 +4,7 @@
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/collision/ghost.hpp>
 #include <sanguis/server/collision/ghost_base.hpp>
-#include <sanguis/server/collision/ghost_unique_ptr.hpp>
 #include <sanguis/server/entities/with_body.hpp>
-#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
@@ -17,20 +15,16 @@ sanguis::server::auras::aura::~aura()
 {
 }
 
-sanguis::server::collision::ghost_unique_ptr
+sanguis::server::collision::ghost
 sanguis::server::auras::aura::create_ghost()
 {
 	return
-		sanguis::server::collision::ghost_unique_ptr(
-			fcppt::make_unique_ptr<
-				sanguis::server::collision::ghost
-			>(
-				collision_group_,
-				this->body_enter_callback(),
-				this->body_exit_callback(),
-				radius_
-			)
-		);
+		sanguis::server::collision::ghost{
+			collision_group_,
+			this->body_enter_callback(),
+			this->body_exit_callback(),
+			radius_
+		};
 }
 
 sanguis::server::auras::aura::aura(

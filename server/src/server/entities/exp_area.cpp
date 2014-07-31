@@ -10,7 +10,6 @@
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
-#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/map_iteration_second.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/cast/static_downcast.hpp>
@@ -33,16 +32,14 @@ sanguis::server::entities::exp_area::exp_area(
 	player_links_()
 {
 	this->add_ghost(
-		fcppt::make_unique_ptr<
-			sanguis::server::collision::ghost
-		>(
+		sanguis::server::collision::ghost{
 			sanguis::collision::world::group::projectile_enemy,
 			this->body_enter_callback(),
 			this->body_exit_callback(),
 			sanguis::server::radius(
 				2000.f // TODO
 			)
-		)
+		}
 	);
 }
 

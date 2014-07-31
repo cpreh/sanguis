@@ -30,7 +30,6 @@
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/assert/unreachable_message.hpp>
 #include <fcppt/cast/size.hpp>
-#include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/text.hpp>
@@ -107,8 +106,7 @@ sanguis::client::draw2d::entities::model::object::object(
 		:
 		model
 	)
-		fcppt::container::ptr::push_back_unique_ptr(
-			parts_,
+		parts_.push_back(
 			fcppt::make_unique_ptr<
 				sanguis::client::draw2d::entities::model::part
 			>(
@@ -154,7 +152,7 @@ sanguis::client::draw2d::entities::model::object::update()
 		:
 		parts_
 	)
-		cur_part.update();
+		cur_part->update();
 }
 
 void
@@ -167,7 +165,7 @@ sanguis::client::draw2d::entities::model::object::orientation(
 		:
 		parts_
 	)
-		cur_part.orientation(
+		cur_part->orientation(
 			_rot
 		);
 }
@@ -180,7 +178,7 @@ sanguis::client::draw2d::entities::model::object::orientation(
 {
 	parts_.at(
 		_index.get()
-	).orientation(
+	)->orientation(
 		_rot
 	);
 }
@@ -202,7 +200,7 @@ sanguis::client::draw2d::entities::model::object::pause(
 		:
 		parts_
 	)
-		cur_part.pause(
+		cur_part->pause(
 			_value
 		);
 }
@@ -281,7 +279,7 @@ sanguis::client::draw2d::entities::model::object::part(
 )
 {
 	return
-		parts_.at(
+		*parts_.at(
 			_idx.get()
 		);
 }
@@ -352,7 +350,7 @@ sanguis::client::draw2d::entities::model::object::weapon(
 		:
 		parts_
 	)
-		cur_part.weapon(
+		cur_part->weapon(
 			_weapon
 		);
 
@@ -394,7 +392,7 @@ sanguis::client::draw2d::entities::model::object::change_animation(
 		);
 
 		while(
-			!cur_part.try_animation(
+			!cur_part->try_animation(
 				part_anim
 			)
 		)
@@ -482,8 +480,10 @@ sanguis::client::draw2d::entities::model::object::animations_ended() const
 		parts_
 	)
 		if(
-			!cur_part.ended()
+			!cur_part->ended()
 		)
-			return false;
-	return true;
+			return
+				false;
+	return
+		true;
 }

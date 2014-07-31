@@ -5,8 +5,8 @@
 #include <sanguis/collision/world/body_base_fwd.hpp>
 #include <sanguis/collision/world/group_fwd.hpp>
 #include <sanguis/server/radius.hpp>
+#include <sanguis/server/collision/ghost.hpp>
 #include <sanguis/server/collision/ghost_base.hpp>
-#include <sanguis/server/collision/ghost_unique_ptr.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -32,7 +32,7 @@ public:
 	~aura()
 	override;
 
-	sanguis::server::collision::ghost_unique_ptr
+	sanguis::server::collision::ghost
 	create_ghost();
 
 	virtual

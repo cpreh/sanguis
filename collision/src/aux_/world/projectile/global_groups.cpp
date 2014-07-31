@@ -5,33 +5,43 @@
 #include <sge/projectile/group/object.hpp>
 #include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/algorithm/map.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::collision::aux_::world::projectile::global_groups::global_groups(
 	sge::projectile::world &_world
 )
 :
-	groups_()
-{
-	for(
-		auto index
-		:
-		fcppt::make_enum_range<
-			sanguis::collision::world::group
-		>()
-	)
-		fcppt::container::ptr::insert_unique_ptr_map(
-			groups_,
-			index,
-			fcppt::make_unique_ptr<
-				sge::projectile::group::object
-			>(
-				_world
+	groups_(
+		fcppt::algorithm::map<
+			group_map
+		>(
+			fcppt::make_enum_range<
+				sanguis::collision::world::group
+			>(),
+			[
+				&_world
+			](
+				sanguis::collision::world::group const _group
 			)
-		);
-
+			{
+				return
+					std::make_pair(
+						_group,
+						fcppt::make_unique_ptr<
+							sge::projectile::group::object
+						>(
+							_world
+						)
+					);
+			}
+		)
+	)
+{
 	for(
 		auto pair
 		:

@@ -3,13 +3,12 @@
 
 #include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
-#include <sanguis/server/collision/ghost_fwd.hpp>
-#include <sanguis/server/collision/ghost_unique_ptr.hpp>
+#include <sanguis/server/collision/ghost.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/ptr_container/ptr_list.hpp>
+#include <vector>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -35,7 +34,7 @@ public:
 protected:
 	void
 	add_ghost(
-		sanguis::server::collision::ghost_unique_ptr &&
+		sanguis::server::collision::ghost &&
 	);
 
 	virtual
@@ -61,9 +60,11 @@ private:
 		sanguis::collision::world::object &
 	);
 
-	typedef boost::ptr_list<
+	typedef
+	std::vector<
 		sanguis::server::collision::ghost
-	> ghost_list;
+	>
+	ghost_list;
 
 	ghost_list ghosts_;
 };

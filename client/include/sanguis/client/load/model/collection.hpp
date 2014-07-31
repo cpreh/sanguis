@@ -4,10 +4,11 @@
 #include <sanguis/client/load/model/collection_fwd.hpp>
 #include <sanguis/client/load/model/object_fwd.hpp>
 #include <sanguis/client/load/resource/context_fwd.hpp>
-#include <fcppt/string.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/string.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/ptr_container/ptr_map.hpp>
+#include <memory>
+#include <unordered_map>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -40,10 +41,18 @@ public:
 private:
 	sanguis::client::load::resource::context const &ctx_;
 
-	typedef boost::ptr_map<
-		fcppt::string,
+	typedef
+	std::unique_ptr<
 		sanguis::client::load::model::object
-	> model_map;
+	>
+	model_unique_ptr;
+
+	typedef
+	std::unordered_map<
+		fcppt::string,
+		model_unique_ptr
+	>
+	model_map;
 
 	mutable model_map models_;
 };
