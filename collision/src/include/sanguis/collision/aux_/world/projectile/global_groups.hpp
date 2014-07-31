@@ -4,7 +4,7 @@
 #include <sanguis/collision/aux_/world/projectile/global_groups_fwd.hpp>
 #include <sanguis/collision/world/group_fwd.hpp>
 #include <sge/projectile/world_fwd.hpp>
-#include <sge/projectile/group/unique_ptr.hpp>
+#include <sge/projectile/group/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <map>
