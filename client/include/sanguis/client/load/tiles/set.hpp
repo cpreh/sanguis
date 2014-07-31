@@ -34,6 +34,15 @@ public:
 		sanguis::client::load::tiles::name const &
 	);
 
+	set(
+		set &&
+	);
+
+	set &
+	operator=(
+		set &&
+	);
+
 	~set();
 
 	sge::texture::const_part_shared_ptr

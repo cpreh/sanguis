@@ -9,7 +9,7 @@
 #include <sanguis/client/load/tiles/set_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/ptr_container/ptr_map.hpp>
+#include <map>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -58,14 +58,14 @@ private:
 	);
 
 	typedef
-	boost::ptr_map<
+	std::map<
 		sanguis::creator::tile,
 		sanguis::client::load::tiles::set
 	>
 	set_map;
 
 	typedef
-	boost::ptr_map<
+	std::map<
 		sanguis::creator::background_tile,
 		sanguis::client::load::tiles::set
 	>

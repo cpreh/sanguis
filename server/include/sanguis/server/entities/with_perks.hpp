@@ -6,10 +6,10 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_perks_fwd.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
-#include <sanguis/server/perks/perk_fwd.hpp>
+#include <sanguis/server/perks/unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/ptr_container/ptr_map.hpp>
+#include <map>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -46,10 +46,12 @@ protected:
 	update()
 	override;
 private:
-	typedef boost::ptr_map<
+	typedef
+	std::map<
 		sanguis::perk_type,
-		sanguis::server::perks::perk
-	> perk_container;
+		sanguis::server::perks::unique_ptr
+	>
+	perk_container;
 
 	sanguis::random_generator &random_generator_;
 

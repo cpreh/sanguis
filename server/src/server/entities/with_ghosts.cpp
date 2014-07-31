@@ -1,13 +1,11 @@
 #include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/collision/ghost.hpp>
-#include <sanguis/server/collision/ghost_unique_ptr.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/environment/optional_object_ref.hpp>
-#include <fcppt/container/ptr/push_back_unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -26,11 +24,10 @@ sanguis::server::entities::with_ghosts::~with_ghosts()
 
 void
 sanguis::server::entities::with_ghosts::add_ghost(
-	sanguis::server::collision::ghost_unique_ptr &&_ghost
+	sanguis::server::collision::ghost &&_ghost
 )
 {
-	fcppt::container::ptr::push_back_unique_ptr(
-		ghosts_,
+	ghosts_.push_back(
 		std::move(
 			_ghost
 		)
@@ -64,7 +61,8 @@ sanguis::server::entities::with_ghosts::on_transfer(
 			_params.world()
 		);
 
-	return true;
+	return
+		true;
 }
 
 void

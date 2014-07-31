@@ -94,7 +94,6 @@ set(
 	include/sanguis/server/collision/ghost.hpp
 	include/sanguis/server/collision/ghost_base.hpp
 	include/sanguis/server/collision/ghost_fwd.hpp
-	include/sanguis/server/collision/ghost_unique_ptr.hpp
 	include/sanguis/server/collision/optional_result.hpp
 	include/sanguis/server/collision/optional_result_fwd.hpp
 	include/sanguis/server/collision/position_callback.hpp

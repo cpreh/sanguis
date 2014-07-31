@@ -34,6 +34,15 @@ sanguis::server::collision::ghost::ghost(
 {
 }
 
+sanguis::server::collision::ghost::ghost(
+	ghost &&
+) = default;
+
+sanguis::server::collision::ghost &
+sanguis::server::collision::ghost::operator=(
+	ghost &&
+) = default;
+
 sanguis::server::collision::ghost::~ghost()
 {
 }

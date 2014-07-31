@@ -5,7 +5,7 @@
 #include <sanguis/server/ai/pathing/start.hpp>
 #include <sanguis/server/ai/pathing/target.hpp>
 #include <sanguis/server/ai/pathing/trail.hpp>
-#include <fcppt/algorithm/contains_set.hpp>
+#include <fcppt/container/find_opt.hpp>
 #include <fcppt/container/grid/in_range.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
 #include <fcppt/math/vector/comparison.hpp>
@@ -108,7 +108,7 @@ sanguis::server::ai::pathing::find_target(
 					pos
 				)
 				&&
-				!fcppt::algorithm::contains_set(
+				!fcppt::container::find_opt(
 					predecessors,
 					pos
 				)

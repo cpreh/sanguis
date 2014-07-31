@@ -32,6 +32,15 @@ public:
 		sanguis::server::radius
 	);
 
+	ghost(
+		ghost &&
+	);
+
+	ghost &
+	operator=(
+		ghost &&
+	);
+
 	~ghost();
 
 	void
@@ -48,13 +57,13 @@ public:
 		sanguis::server::center
 	);
 private:
-	sanguis::collision::world::group const collision_group_;
+	sanguis::collision::world::group collision_group_;
 
-	sanguis::collision::world::body_enter_callback const body_enter_callback_;
+	sanguis::collision::world::body_enter_callback body_enter_callback_;
 
-	sanguis::collision::world::body_exit_callback const body_exit_callback_;
+	sanguis::collision::world::body_exit_callback body_exit_callback_;
 
-	sanguis::server::radius const radius_;
+	sanguis::server::radius radius_;
 
 	sanguis::collision::world::ghost_unique_ptr impl_;
 };

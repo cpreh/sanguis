@@ -127,6 +127,15 @@ sanguis::client::load::tiles::set::set(
 	}
 }
 
+sanguis::client::load::tiles::set::set(
+	set &&
+) = default;
+
+sanguis::client::load::tiles::set &
+sanguis::client::load::tiles::set::operator=(
+	set &&
+) = default;
+
 sanguis::client::load::tiles::set::~set()
 {
 }

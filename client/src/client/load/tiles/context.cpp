@@ -8,7 +8,9 @@
 #include <sanguis/client/load/tiles/to_name.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::load::tiles::context::context(
@@ -80,20 +82,20 @@ sanguis::client::load::tiles::context::any_set(
 	if(
 		it != _map.end()
 	)
-		return *it->second;
+		return
+			it->second;
 
 	return
-		*fcppt::container::ptr::insert_unique_ptr_map(
-			_map,
-			_tile,
-			fcppt::make_unique_ptr<
-				sanguis::client::load::tiles::set
-			>(
-				textures_,
-				_category,
-				sanguis::client::load::tiles::name(
-					_to_name(
-						_tile
+		_map.insert(
+			std::make_pair(
+				_tile,
+				sanguis::client::load::tiles::set(
+					textures_,
+					_category,
+					sanguis::client::load::tiles::name(
+						_to_name(
+							_tile
+						)
 					)
 				)
 			)

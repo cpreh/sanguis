@@ -7,7 +7,6 @@
 #include <sanguis/client/draw2d/entities/buffs/base.hpp>
 #include <sanguis/client/draw2d/entities/buffs/create.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/container/ptr/insert_unique_ptr_map.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -112,15 +111,16 @@ sanguis::client::draw2d::entities::with_buffs<
 	insert_result;
 
 	insert_result const result(
-		fcppt::container::ptr::insert_unique_ptr_map(
-			buffs_,
-			_type,
-			sanguis::client::draw2d::entities::buffs::create(
-				diff_clock_,
-				normal_system_,
-				model_collection_,
-				*this,
-				_type
+		buffs_.insert(
+			std::make_pair(
+				_type,
+				sanguis::client::draw2d::entities::buffs::create(
+					diff_clock_,
+					normal_system_,
+					model_collection_,
+					*this,
+					_type
+				)
 			)
 		)
 	);
