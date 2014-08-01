@@ -5,6 +5,7 @@
 #include <sanguis/client/draw2d/scene/world/make_tile_neighbors.hpp>
 #include <sanguis/client/draw2d/scene/world/make_tile_pair.hpp>
 #include <sanguis/client/draw2d/scene/world/tile_neighbors.hpp>
+#include <sanguis/client/draw2d/scene/world/tile_neighbors_to_string.hpp>
 #include <sanguis/client/draw2d/scene/world/tile_orientation.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile_grid.hpp>
@@ -66,7 +67,11 @@ to_tile_texture(
 		FCPPT_LOG_ERROR(
 			sanguis::client::draw2d::log(),
 			fcppt::log::_
-				<< FCPPT_TEXT("Invalid tile combination")
+				<< FCPPT_TEXT("Tile combination ")
+				<< sanguis::client::draw2d::scene::world::tile_neighbors_to_string(
+					tiles
+				)
+				<< FCPPT_TEXT(" not available.")
 		);
 
 		return
@@ -97,7 +102,10 @@ to_tile_texture(
 		FCPPT_LOG_ERROR(
 			sanguis::client::draw2d::log(),
 			fcppt::log::_
-				<< FCPPT_TEXT("No texture for tile combation")
+				<< FCPPT_TEXT("No texture for tile combation ")
+				<< sanguis::client::draw2d::scene::world::tile_neighbors_to_string(
+					tiles
+				)
 		);
 
 		return

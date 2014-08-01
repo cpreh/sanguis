@@ -246,6 +246,7 @@ set(
 	include/sanguis/client/draw2d/scene/world/state_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/tile_neighbors.hpp
 	include/sanguis/client/draw2d/scene/world/tile_neighbors_fwd.hpp
+	include/sanguis/client/draw2d/scene/world/tile_neighbors_to_string.hpp
 	include/sanguis/client/draw2d/scene/world/tile_orientation.hpp
 	include/sanguis/client/draw2d/scene/world/tile_size.hpp
 	include/sanguis/client/draw2d/scene/world/to_tile_texture.hpp
@@ -492,10 +493,12 @@ set(
 	include/sanguis/client/load/tiles/pair_fwd.hpp
 	include/sanguis/client/load/tiles/set.hpp
 	include/sanguis/client/load/tiles/set_fwd.hpp
+	include/sanguis/client/load/tiles/sort_pair.hpp
 	include/sanguis/client/load/tiles/texture_container.hpp
 	include/sanguis/client/load/tiles/tile_pair.hpp
 	include/sanguis/client/load/tiles/tile_pair_fwd.hpp
 	include/sanguis/client/load/tiles/to_name.hpp
+	include/sanguis/client/load/tiles/to_name_any.hpp
 	include/sanguis/client/log.hpp
 	include/sanguis/client/log_location.hpp
 	include/sanguis/client/machine.hpp
@@ -754,6 +757,7 @@ set(
 	src/client/load/tiles/make_textures.cpp
 	src/client/load/tiles/set.cpp
 	src/client/load/tiles/to_name.cpp
+	src/client/load/tiles/to_name_any.cpp
 	src/client/log.cpp
 	src/client/log_location.cpp
 	src/client/machine.cpp

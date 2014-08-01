@@ -58,7 +58,8 @@ sanguis::client::load::tiles::make_textures(
 								fcppt::math::dim::fill<
 									sanguis::model::dim::dim_wrapper::value
 								>(
-									64ul
+									// TODO: Read this from the json file
+									96ul
 								)
 							),
 							fcppt::cast::size<
