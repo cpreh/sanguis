@@ -39,6 +39,12 @@ public:
 		boost::filesystem::path const &
 	) const;
 
+	// TODO: optional
+	sge::texture::const_part_shared_ptr
+	load_opt(
+		boost::filesystem::path const &
+	) const;
+
 	textures(
 		sge::renderer::device::core &,
 		sge::image2d::system &

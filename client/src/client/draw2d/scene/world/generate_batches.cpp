@@ -12,10 +12,8 @@
 #include <sanguis/client/draw2d/scene/world/sprite/dim.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/vector.hpp>
 #include <sanguis/creator/background_grid.hpp>
-#include <sanguis/creator/background_tile.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/pos.hpp>
-#include <sanguis/creator/tile.hpp>
 #include <sanguis/client/load/tiles/context_fwd.hpp>
 #include <sge/sprite/geometry/make_random_access_range.hpp>
 #include <sge/sprite/geometry/sort_and_update.hpp>
@@ -158,15 +156,6 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				_grid,
 				lower_bound,
 				upper_bound,
-				[](
-					sanguis::creator::tile const _value
-				)
-				{
-					return
-						_value
-						==
-						sanguis::creator::tile::nothing;
-				},
 				tile_dim,
 				sanguis::client::draw2d::scene::world::is_background(
 					false
@@ -182,13 +171,6 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				_background_grid,
 				lower_bound,
 				upper_bound,
-				[](
-					sanguis::creator::background_tile
-				)
-				{
-					return
-						false;
-				},
 				tile_dim,
 				sanguis::client::draw2d::scene::world::is_background(
 					true

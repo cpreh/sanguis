@@ -57,53 +57,57 @@ sanguis::client::load::tiles::set::set(
 )
 :
 	texture_{
-		_textures.load(
+		_textures.load_opt(
 			_path
 			/
 			FCPPT_TEXT("texture.png")
 		)
 	},
 	elements_{
-		fcppt::algorithm::map_optional<
-			element_map
-		>(
-			sge::parse::json::parse_file_exn(
-				_path
-				/
-				FCPPT_TEXT("mapping.json")
-			).object().members,
-			[
-				this,
-				&_textures
-			](
-				sge::parse::json::member const &_member
+		texture_
+		?
+			fcppt::algorithm::map_optional<
+				element_map
+			>(
+				sge::parse::json::parse_file_exn(
+					_path
+					/
+					FCPPT_TEXT("mapping.json")
+				).object().members,
+				[
+					this,
+					&_textures
+				](
+					sge::parse::json::member const &_member
+				)
+				{
+					return
+						fcppt::optional_bind_construct(
+							sanguis::client::load::tiles::decode_name(
+								_member.first
+							),
+							[
+								this,
+								&_textures,
+								&_member
+							](
+								sanguis::client::load::tiles::orientation const &_orientation
+							)
+							{
+								return
+									std::make_pair(
+										_orientation,
+										sanguis::client::load::tiles::make_textures(
+											*texture_,
+											_member.second
+										)
+									);
+							}
+						);
+				}
 			)
-			{
-				return
-					fcppt::optional_bind_construct(
-						sanguis::client::load::tiles::decode_name(
-							_member.first
-						),
-						[
-							this,
-							&_textures,
-							&_member
-						](
-							sanguis::client::load::tiles::orientation const &_orientation
-						)
-						{
-							return
-								std::make_pair(
-									_orientation,
-									sanguis::client::load::tiles::make_textures(
-										*texture_,
-										_member.second
-									)
-								);
-						}
-					);
-			}
-		)
+		:
+			element_map()
 	}
 {
 }

@@ -33,8 +33,7 @@ namespace world
 {
 
 template<
-	typename Tile,
-	typename Filter
+	typename Tile
 >
 sanguis::client::draw2d::scene::world::sprite::vector
 fill_batches(
@@ -45,7 +44,6 @@ fill_batches(
 	> const &_grid,
 	sanguis::client::draw2d::scene::world::lower_bound const &_lower_bound,
 	sanguis::client::draw2d::scene::world::upper_bound const &_upper_bound,
-	Filter const _filter,
 	sanguis::client::draw2d::scene::world::sprite::dim const &_tile_dim,
 	sanguis::client::draw2d::scene::world::is_background const _is_background
 )
@@ -61,10 +59,17 @@ fill_batches(
 		)
 	)
 	{
-		if(
-			_filter(
-				source_element.value()
+		// TODO: optional_unique_ptr
+		sge::texture::const_part_shared_ptr const texture(
+			sanguis::client::draw2d::scene::world::to_tile_texture(
+				_tiles,
+				_grid,
+				source_element.pos()
 			)
+		);
+
+		if(
+			!texture
 		)
 			continue;
 
@@ -92,11 +97,7 @@ fill_batches(
 					_tile_dim
 				)
 				.texture(
-					sanguis::client::draw2d::scene::world::to_tile_texture(
-						_tiles,
-						_grid,
-						source_element.pos()
-					)
+					texture
 				)
 				.template set<
 					sanguis::client::draw2d::scene::world::sprite::is_background_role

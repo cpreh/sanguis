@@ -1,5 +1,6 @@
 #include <sanguis/exception.hpp>
 #include <sanguis/media_path.hpp>
+#include <sanguis/client/load/log.hpp>
 #include <sanguis/client/load/resource/search_texture_names.hpp>
 #include <sanguis/client/load/resource/texture_identifier.hpp>
 #include <sanguis/client/load/resource/textures.hpp>
@@ -14,8 +15,12 @@
 #include <sge/renderer/texture/mipmap/off.hpp>
 #include <sge/texture/const_part_shared_ptr.hpp>
 #include <sge/texture/part_raw_ptr.hpp>
+#include <fcppt/exception.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/filesystem/path_to_string.hpp>
+#include <fcppt/log/_.hpp>
+#include <fcppt/log/error.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <functional>
@@ -56,6 +61,38 @@ sanguis::client::load::resource::textures::load(
 				)
 			)
 		);
+}
+
+sge::texture::const_part_shared_ptr
+sanguis::client::load::resource::textures::load_opt(
+	boost::filesystem::path const &_path
+) const
+try
+{
+	return
+		this->load(
+			_path
+		);
+}
+catch(
+	fcppt::exception const &_error
+)
+{
+	FCPPT_LOG_ERROR(
+		sanguis::client::load::log(),
+		fcppt::log::_
+			<<
+			FCPPT_TEXT("Failed to load ")
+			<<
+			fcppt::filesystem::path_to_string(
+				_path
+			)
+			<<
+			_error.string()
+	);
+
+	return
+		sge::texture::const_part_shared_ptr();
 }
 
 sanguis::client::load::resource::textures::textures(
