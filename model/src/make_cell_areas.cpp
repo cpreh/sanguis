@@ -8,14 +8,12 @@
 #include <sanguis/model/image_size.hpp>
 #include <sanguis/model/make_cell_areas.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
+#include <fcppt/make_int_range.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/math/box/contains.hpp>
 #include <fcppt/math/box/output.hpp>
 #include <fcppt/math/dim/output.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <boost/range/counting_range.hpp>
-#include <fcppt/config/external_end.hpp>
 
 
 sanguis::model::cell_area_container
@@ -49,8 +47,7 @@ sanguis::model::make_cell_areas(
 		fcppt::algorithm::map<
 			sanguis::model::cell_area_container
 		>(
-			// TODO: How do we fix the sign conversion in boost here?
-			boost::counting_range(
+			fcppt::make_int_range(
 				_range.begin(),
 				_range.end()
 			),

@@ -88,6 +88,8 @@ catch(
 				_path
 			)
 			<<
+			FCPPT_TEXT(": ")
+			<<
 			_error.string()
 	);
 
