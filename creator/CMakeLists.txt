@@ -54,6 +54,7 @@ set(
 	include/sanguis/creator/spawn_type_fwd.hpp
 	include/sanguis/creator/start_name.hpp
 	include/sanguis/creator/tile.hpp
+	include/sanguis/creator/tile_connects.hpp
 	include/sanguis/creator/tile_fwd.hpp
 	include/sanguis/creator/tile_grid.hpp
 	include/sanguis/creator/tile_grid_fwd.hpp
@@ -185,6 +186,7 @@ set(
 	src/serialize.cpp
 	src/spawn.cpp
 	src/start_name.cpp
+	src/tile_connects.cpp
 	src/tile_is_solid.cpp
 	src/tile_is_visible.cpp
 	src/tile_rect.cpp

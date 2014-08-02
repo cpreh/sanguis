@@ -33,6 +33,7 @@
 #include <sge/sprite/state/default_options.hpp>
 #include <sge/sprite/state/object_impl.hpp>
 #include <sge/sprite/state/parameters.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/int_to_float.hpp>
@@ -100,7 +101,17 @@ sanguis::client::draw2d::scene::world::state::draw(
 	sanguis::client::draw2d::scene::world::batch_grid::pos const
 		lower(
 			fcppt::container::grid::clamp_signed_pos(
-				int_translation
+				(
+					int_translation
+					-
+					sanguis::client::draw2d::scene::world::tile_size::value
+					/
+					fcppt::literal<
+						sanguis::client::draw2d::scene::world::sprite::unit
+					>(
+						2
+					)
+				)
 				/
 				batch_size_trans,
 				batches_.size()

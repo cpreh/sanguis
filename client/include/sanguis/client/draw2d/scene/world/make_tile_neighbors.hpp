@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_MAKE_TILE_NEIGHBORS_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_MAKE_TILE_NEIGHBORS_HPP_INCLUDED
 
+#include <sanguis/client/draw2d/scene/world/filter_tile.hpp>
 #include <sanguis/client/draw2d/scene/world/tile_neighbors.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile_grid.hpp>
@@ -49,9 +50,11 @@ make_tile_neighbors(
 			);
 
 			return
-				_grid[
-					_npos
-				];
+				sanguis::client::draw2d::scene::world::filter_tile(
+					_grid[
+						_npos
+					]
+				);
 		}
 	);
 

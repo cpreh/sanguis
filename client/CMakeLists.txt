@@ -211,8 +211,11 @@ set(
 	include/sanguis/client/draw2d/scene/world/batch_grid_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/batch_size.hpp
 	include/sanguis/client/draw2d/scene/world/fill_batches.hpp
+	include/sanguis/client/draw2d/scene/world/fill_non_connecting_batches.hpp
+	include/sanguis/client/draw2d/scene/world/filter_tile.hpp
 	include/sanguis/client/draw2d/scene/world/generate_batches.hpp
 	include/sanguis/client/draw2d/scene/world/is_background.hpp
+	include/sanguis/client/draw2d/scene/world/log_tile_error.hpp
 	include/sanguis/client/draw2d/scene/world/lower_bound.hpp
 	include/sanguis/client/draw2d/scene/world/make_tile_neighbors.hpp
 	include/sanguis/client/draw2d/scene/world/make_tile_pair.hpp
@@ -249,6 +252,7 @@ set(
 	include/sanguis/client/draw2d/scene/world/tile_neighbors_to_string.hpp
 	include/sanguis/client/draw2d/scene/world/tile_orientation.hpp
 	include/sanguis/client/draw2d/scene/world/tile_size.hpp
+	include/sanguis/client/draw2d/scene/world/to_non_connecting_tile_texture.hpp
 	include/sanguis/client/draw2d/scene/world/to_tile_texture.hpp
 	include/sanguis/client/draw2d/scene/world/upper_bound.hpp
 	include/sanguis/client/draw2d/speed.hpp
@@ -670,9 +674,11 @@ set(
 	src/client/draw2d/scene/object.cpp
 	src/client/draw2d/scene/translation.cpp
 	src/client/draw2d/scene/world/batch.cpp
+	src/client/draw2d/scene/world/fill_non_connecting_batches.cpp
 	src/client/draw2d/scene/world/generate_batches.cpp
 	src/client/draw2d/scene/world/object.cpp
 	src/client/draw2d/scene/world/state.cpp
+	src/client/draw2d/scene/world/to_non_connecting_tile_texture.cpp
 	src/client/draw2d/speed_is_null.cpp
 	src/client/draw2d/sprite/client/system.cpp
 	src/client/draw2d/sprite/colored/system.cpp

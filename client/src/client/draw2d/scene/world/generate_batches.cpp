@@ -2,14 +2,13 @@
 #include <sanguis/client/draw2d/scene/world/batch_grid.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_size.hpp>
 #include <sanguis/client/draw2d/scene/world/fill_batches.hpp>
+#include <sanguis/client/draw2d/scene/world/fill_non_connecting_batches.hpp>
 #include <sanguis/client/draw2d/scene/world/generate_batches.hpp>
 #include <sanguis/client/draw2d/scene/world/is_background.hpp>
 #include <sanguis/client/draw2d/scene/world/lower_bound.hpp>
-#include <sanguis/client/draw2d/scene/world/tile_size.hpp>
 #include <sanguis/client/draw2d/scene/world/upper_bound.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/buffers.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/compare.hpp>
-#include <sanguis/client/draw2d/scene/world/sprite/dim.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/vector.hpp>
 #include <sanguis/creator/background_grid.hpp>
 #include <sanguis/creator/grid.hpp>
@@ -66,9 +65,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 			fcppt::math::map<
 				sanguis::creator::grid::dim
 			>(
-				_grid.size()
-				-
-				min_size,
+				_grid.size(),
 				[](
 					sanguis::creator::grid::dim::value_type const _value
 				)
@@ -119,14 +116,6 @@ sanguis::client::draw2d::scene::world::generate_batches(
 		)
 	)
 	{
-		sanguis::client::draw2d::scene::world::sprite::dim const tile_dim(
-			fcppt::math::dim::fill<
-				sanguis::client::draw2d::scene::world::sprite::dim::dim_wrapper::value
-			>(
-				sanguis::client::draw2d::scene::world::tile_size::value
-			)
-		);
-
 		sanguis::client::draw2d::scene::world::lower_bound const lower_bound(
 			fcppt::container::grid::clamp_pos(
 				result_element.pos()
@@ -156,10 +145,27 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				_grid,
 				lower_bound,
 				upper_bound,
-				tile_dim,
 				sanguis::client::draw2d::scene::world::is_background(
 					false
 				)
+			);
+
+		sprites =
+			sanguis::client::draw2d::scene::world::fill_non_connecting_batches(
+				std::move(
+					sprites
+				),
+				_tiles,
+				_grid,
+				sanguis::client::draw2d::scene::world::lower_bound(
+					fcppt::container::grid::clamp_pos(
+						result_element.pos()
+						*
+						batch_dim_pos,
+						_grid.size()
+					)
+				),
+				upper_bound
 			);
 
 		sprites =
@@ -171,7 +177,6 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				_background_grid,
 				lower_bound,
 				upper_bound,
-				tile_dim,
 				sanguis::client::draw2d::scene::world::is_background(
 					true
 				)
