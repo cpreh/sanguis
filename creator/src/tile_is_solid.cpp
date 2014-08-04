@@ -13,7 +13,7 @@ sanguis::creator::tile_is_solid(
 	)
 	{
 	case sanguis::creator::tile::nothing:
-	case sanguis::creator::tile::door:
+	case sanguis::creator::tile::stairs:
 	case sanguis::creator::tile::space_door_open_h:
 	case sanguis::creator::tile::space_door_open_v:
 	case sanguis::creator::tile::spawner:

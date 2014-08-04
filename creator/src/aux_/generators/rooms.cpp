@@ -617,7 +617,7 @@ sanguis::creator::aux_::generators::rooms(
 			opening.get()
 		]
 		=
-		sanguis::creator::tile::door;
+		sanguis::creator::tile::stairs;
 	}
 
 	sanguis::creator::spawn_container

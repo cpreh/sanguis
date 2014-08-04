@@ -75,7 +75,7 @@ sanguis::creator::aux_::generators::start(
 	grid[
 		exit_portal.get()
 	] =
-		sanguis::creator::tile::door;
+		sanguis::creator::tile::stairs;
 
 	return
 		sanguis::creator::aux_::result{

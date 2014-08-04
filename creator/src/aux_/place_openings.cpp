@@ -87,7 +87,7 @@ sanguis::creator::aux_::place_openings(
 		[
 			portal.get()
 		] =
-			sanguis::creator::tile::door;
+			sanguis::creator::tile::stairs;
 
 	sanguis::creator::opening_container::size_type
 	current_results{
@@ -127,7 +127,7 @@ sanguis::creator::aux_::place_openings(
 		[
 			next_opening.get()
 		] =
-			sanguis::creator::tile::door;
+			sanguis::creator::tile::stairs;
 
 		result.push_back(
 			next_opening

@@ -12,7 +12,7 @@ namespace creator
 enum class tile
 {
 	nothing,
-	door,
+	stairs,
 	space_door_closed_v,
 	space_door_open_v,
 	space_door_closed_h,
