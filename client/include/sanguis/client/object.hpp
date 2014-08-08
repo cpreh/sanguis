@@ -3,6 +3,7 @@
 
 #include <sanguis/io_service.hpp>
 #include <sanguis/timer.hpp>
+#include <sanguis/client/cursor.hpp>
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/object_base.hpp>
 #include <sanguis/client/server_fwd.hpp>
@@ -88,6 +89,8 @@ private:
 	sanguis::client::console::gfx console_gfx_;
 
 	sanguis::client::load::context resources_;
+
+	sanguis::client::cursor cursor_;
 
 	sanguis::client::machine machine_;
 

@@ -1,4 +1,5 @@
 #include <sanguis/log_parameters.hpp>
+#include <sanguis/client/cursor.hpp>
 #include <sanguis/client/dispatch.hpp>
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/events/action.hpp>
@@ -142,6 +143,12 @@ sanguis::client::states::menu::react(
 )
 {
 	menu_.draw(
+		_event.context()
+	);
+
+	this->context<
+		sanguis::client::machine
+	>().cursor_gfx().draw(
 		_event.context()
 	);
 

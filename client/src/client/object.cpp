@@ -100,6 +100,11 @@ sanguis::client::object::object(
 		sys_->audio_loader(),
 		sys_->audio_player()
 	),
+	cursor_{
+		sys_->renderer_device_ffp(),
+		sys_->cursor_demuxer(),
+		resources_.resources().textures()
+	},
 	machine_(
 		settings_,
 		std::bind(
@@ -119,7 +124,8 @@ sanguis::client::object::object(
 		sys_->renderer_device_index(),
 		sys_->image_system(),
 		io_service_,
-		sys_->viewport_manager()
+		sys_->viewport_manager(),
+		cursor_
 	),
 	frame_timer_(
 		sanguis::timer::parameters(

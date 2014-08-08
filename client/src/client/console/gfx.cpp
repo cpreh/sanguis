@@ -55,6 +55,7 @@ sanguis::client::console::gfx::gfx(
 		_renderer
 	),
 	texture_(
+		// TODO: Use resources here
 		sge::renderer::texture::create_planar_from_path(
 			sanguis::media_path()
 			/ FCPPT_TEXT("console_back.png"),

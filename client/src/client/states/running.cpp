@@ -1,6 +1,7 @@
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/player_name.hpp>
 #include <sanguis/world_name.hpp>
+#include <sanguis/client/cursor.hpp>
 #include <sanguis/client/dispatch.hpp>
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/exp_for_next_level.hpp>
@@ -216,6 +217,13 @@ sanguis::client::states::running::react(
 		sanguis::client::events::overlay(
 			_event.context()
 		)
+	);
+
+	// TODO: Put this in draw2d
+	this->context<
+		sanguis::client::machine
+	>().cursor_gfx().draw(
+		_event.context()
 	);
 
 	return

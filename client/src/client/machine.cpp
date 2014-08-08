@@ -1,5 +1,6 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/io_service.hpp>
+#include <sanguis/client/cursor_fwd.hpp>
 #include <sanguis/client/log.hpp>
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/config/settings/object_fwd.hpp>
@@ -65,7 +66,8 @@ sanguis::client::machine::machine(
 	sge::renderer::device::index const _renderer_index,
 	sge::image2d::system &_image_loader,
 	sanguis::io_service &_io_service,
-	sge::viewport::manager &_viewport_manager
+	sge::viewport::manager &_viewport_manager,
+	sanguis::client::cursor &_cursor_gfx
 )
 :
 	settings_(
@@ -143,6 +145,9 @@ sanguis::client::machine::machine(
 	),
 	cursor_(
 		_cursor
+	),
+	cursor_gfx_(
+		_cursor_gfx
 	)
 {
 }
@@ -366,6 +371,13 @@ sanguis::client::machine::viewport_manager() const
 {
 	return
 		viewport_manager_;
+}
+
+sanguis::client::cursor &
+sanguis::client::machine::cursor_gfx() const
+{
+	return
+		cursor_gfx_;
 }
 
 void

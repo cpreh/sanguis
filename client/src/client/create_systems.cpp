@@ -87,6 +87,7 @@ sanguis::client::create_systems(
 						),
 						dimensions
 					)
+					.hide_cursor()
 				)
 			)
 			(

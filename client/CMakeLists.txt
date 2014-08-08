@@ -63,6 +63,8 @@ set(
 	include/sanguis/client/control/scalar.hpp
 	include/sanguis/client/create.hpp
 	include/sanguis/client/create_systems.hpp
+	include/sanguis/client/cursor.hpp
+	include/sanguis/client/cursor_fwd.hpp
 	include/sanguis/client/dispatch.hpp
 	include/sanguis/client/draw2d/aoe.hpp
 	include/sanguis/client/draw2d/center.hpp
@@ -607,6 +609,7 @@ set(
 	src/client/control/input_translator.cpp
 	src/client/create.cpp
 	src/client/create_systems.cpp
+	src/client/cursor.cpp
 	src/client/draw2d/collide_parameters.cpp
 	src/client/draw2d/entities/aoe_bullet.cpp
 	src/client/draw2d/entities/base.cpp

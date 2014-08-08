@@ -3,6 +3,7 @@
 
 #include <sanguis/duration.hpp>
 #include <sanguis/io_service_fwd.hpp>
+#include <sanguis/client/cursor_fwd.hpp>
 #include <sanguis/client/machine_fwd.hpp>
 #include <sanguis/client/server_callback.hpp>
 #include <sanguis/client/config/settings/object_fwd.hpp>
@@ -64,7 +65,8 @@ public:
 		sge::renderer::device::index,
 		sge::image2d::system &,
 		sanguis::io_service &,
-		sge::viewport::manager &
+		sge::viewport::manager &,
+		sanguis::client::cursor &
 	);
 
 	~machine()
@@ -138,6 +140,9 @@ public:
 
 	sge::viewport::manager &
 	viewport_manager() const;
+
+	sanguis::client::cursor &
+	cursor_gfx() const;
 private:
 	void
 	connect_callback();
@@ -187,6 +192,8 @@ private:
 	sanguis::client::server_callback const server_callback_;
 
 	sge::input::cursor::object &cursor_;
+
+	sanguis::client::cursor &cursor_gfx_;
 };
 
 }
