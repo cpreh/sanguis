@@ -56,7 +56,6 @@ sanguis::client::cursor::draw(
 	sge::renderer::context::ffp &_context
 )
 {
-	// TODO: Draw other things like cooldowns as well
 	cursor_.draw(
 		_context
 	);

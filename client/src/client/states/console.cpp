@@ -95,5 +95,5 @@ sanguis::client::states::console::react(
 	);
 
 	return
-		this->discard_event();
+		this->forward_event();
 }

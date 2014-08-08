@@ -2,6 +2,7 @@
 #include <sanguis/random_generator.hpp>
 #include <sanguis/random_seed.hpp>
 #include <sanguis/update_diff_clock.hpp>
+#include <sanguis/client/cursor.hpp>
 #include <sanguis/client/player_health_callback.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
@@ -116,7 +117,8 @@ sanguis::client::draw2d::scene::object::object(
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sge::viewport::manager &_viewport_manager,
-	sanguis::client::player_health_callback const &_player_health_callback
+	sanguis::client::player_health_callback const &_player_health_callback,
+	sanguis::client::cursor &_cursor
 )
 :
 	diff_clock_(),
@@ -143,6 +145,9 @@ sanguis::client::draw2d::scene::object::object(
 	),
 	font_(
 		_font
+	),
+	cursor_(
+		_cursor
 	),
 	sprite_states_(
 		renderer_,
@@ -361,6 +366,18 @@ sanguis::client::draw2d::scene::object::draw(
 	this->render_systems(
 		_render_context
 	);
+}
+
+void
+sanguis::client::draw2d::scene::object::overlay(
+	sge::renderer::context::ffp &_render_context
+)
+{
+	cursor_.draw(
+		_render_context
+	);
+
+	// TODO: Draw additional info
 }
 
 void

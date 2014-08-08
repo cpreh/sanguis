@@ -10,6 +10,7 @@
 #include <sanguis/client/draw2d/scene/object_fwd.hpp>
 #include <sanguis/client/events/message_fwd.hpp>
 #include <sanguis/client/events/net_error_fwd.hpp>
+#include <sanguis/client/events/overlay_fwd.hpp>
 #include <sanguis/client/events/render_fwd.hpp>
 #include <sanguis/client/events/tick_fwd.hpp>
 #include <sanguis/client/gui/hud/object_fwd.hpp>
@@ -57,12 +58,15 @@ class running
 		running
 	);
 public:
-	typedef boost::mpl::list4<
+	typedef boost::mpl::list5<
 		boost::statechart::custom_reaction<
 			sanguis::client::events::tick
 		>,
 		boost::statechart::custom_reaction<
 			sanguis::client::events::render
+		>,
+		boost::statechart::custom_reaction<
+			sanguis::client::events::overlay
 		>,
 		boost::statechart::custom_reaction<
 			sanguis::client::events::message
@@ -88,6 +92,11 @@ public:
 	boost::statechart::result
 	react(
 		sanguis::client::events::render const &
+	);
+
+	boost::statechart::result
+	react(
+		sanguis::client::events::overlay const &
 	);
 
 	boost::statechart::result

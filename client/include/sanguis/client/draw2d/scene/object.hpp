@@ -5,6 +5,7 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
 #include <sanguis/random_generator.hpp>
+#include <sanguis/client/cursor_fwd.hpp>
 #include <sanguis/client/player_health_callback.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
@@ -75,7 +76,8 @@ public:
 		sge::renderer::device::ffp &,
 		sge::font::object &,
 		sge::viewport::manager &,
-		sanguis::client::player_health_callback const &
+		sanguis::client::player_health_callback const &,
+		sanguis::client::cursor &
 	);
 
 	~object();
@@ -92,6 +94,11 @@ public:
 
 	void
 	draw(
+		sge::renderer::context::ffp &
+	);
+
+	void
+	overlay(
 		sge::renderer::context::ffp &
 	);
 
@@ -209,6 +216,8 @@ private:
 	sge::renderer::device::ffp &renderer_;
 
 	sge::font::object &font_;
+
+	sanguis::client::cursor &cursor_;
 
 	sanguis::client::draw2d::sprite::state sprite_states_;
 

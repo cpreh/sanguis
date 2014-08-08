@@ -1,7 +1,6 @@
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/player_name.hpp>
 #include <sanguis/world_name.hpp>
-#include <sanguis/client/cursor.hpp>
 #include <sanguis/client/dispatch.hpp>
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/exp_for_next_level.hpp>
@@ -154,7 +153,10 @@ sanguis::client::states::running::running(
 					hud_.get(),
 					std::placeholders::_1
 				)
-			)
+			),
+			this->context<
+				sanguis::client::machine
+			>().cursor_gfx()
 		)
 	),
 	input_translator_(
@@ -219,10 +221,16 @@ sanguis::client::states::running::react(
 		)
 	);
 
-	// TODO: Put this in draw2d
-	this->context<
-		sanguis::client::machine
-	>().cursor_gfx().draw(
+	return
+		this->discard_event();
+}
+
+boost::statechart::result
+sanguis::client::states::running::react(
+	sanguis::client::events::overlay const &_event
+)
+{
+	drawer_->overlay(
 		_event.context()
 	);
 
