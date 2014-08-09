@@ -20,7 +20,6 @@
 #include <sanguis/net/receive_buffer_size.hpp>
 #include <sge/console/gfx/object.hpp>
 #include <sge/font/object_fwd.hpp>
-#include <sge/image2d/system_fwd.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/system_fwd.hpp>
@@ -64,7 +63,6 @@ sanguis::client::machine::machine(
 	sge::renderer::system const &_renderer_system,
 	sge::renderer::device::ffp &_renderer,
 	sge::renderer::device::index const _renderer_index,
-	sge::image2d::system &_image_loader,
 	sanguis::io_service &_io_service,
 	sge::viewport::manager &_viewport_manager,
 	sanguis::client::cursor &_cursor_gfx
@@ -90,9 +88,6 @@ sanguis::client::machine::machine(
 	),
 	renderer_index_(
 		_renderer_index
-	),
-	image_loader_(
-		_image_loader
 	),
 	viewport_manager_(
 		_viewport_manager
@@ -315,13 +310,6 @@ sanguis::client::machine::renderer_index() const
 {
 	return
 		renderer_index_;
-}
-
-sge::image2d::system &
-sanguis::client::machine::image_loader() const
-{
-	return
-		image_loader_;
 }
 
 sge::input::keyboard::device &

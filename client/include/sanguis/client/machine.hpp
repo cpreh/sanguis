@@ -15,7 +15,6 @@
 #include <sge/font/object_fwd.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
-#include <sge/image2d/system_fwd.hpp>
 #include <sge/renderer/system_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/renderer/device/index.hpp>
@@ -63,7 +62,6 @@ public:
 		sge::renderer::system const &,
 		sge::renderer::device::ffp &,
 		sge::renderer::device::index,
-		sge::image2d::system &,
 		sanguis::io_service &,
 		sge::viewport::manager &,
 		sanguis::client::cursor &
@@ -117,9 +115,6 @@ public:
 	sge::renderer::device::index const
 	renderer_index() const;
 
-	sge::image2d::system &
-	image_loader() const;
-
 	sge::input::keyboard::device &
 	keyboard() const;
 
@@ -171,8 +166,6 @@ private:
 	sge::renderer::device::ffp &renderer_;
 
 	sge::renderer::device::index const renderer_index_;
-
-	sge::image2d::system &image_loader_;
 
 	sge::viewport::manager &viewport_manager_;
 

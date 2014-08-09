@@ -122,7 +122,6 @@ sanguis::client::object::object(
 		sys_->renderer_system(),
 		sys_->renderer_device_ffp(),
 		sys_->renderer_device_index(),
-		sys_->image_system(),
 		io_service_,
 		sys_->viewport_manager(),
 		cursor_
