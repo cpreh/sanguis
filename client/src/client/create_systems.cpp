@@ -139,6 +139,5 @@ sanguis::client::create_systems(
 			(
 				sge::systems::audio_player_default()
 			)
-			// TODO: make sure that we can load truetype fonts, use a multi loader here as well!
 		);
 }

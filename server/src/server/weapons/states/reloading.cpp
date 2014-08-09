@@ -1,4 +1,5 @@
 #include <sanguis/diff_timer.hpp>
+#include <sanguis/duration.hpp>
 #include <sanguis/weapon_status.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/events/poll.hpp>
@@ -9,6 +10,7 @@
 #include <sanguis/server/weapons/states/idle.hpp>
 #include <sanguis/server/weapons/states/reloading.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
+#include <sge/timer/remaining.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -49,6 +51,16 @@ sanguis::server::weapons::states::reloading::reloading(
 		sanguis::server::weapons::weapon
 	>().weapon_status(
 		sanguis::weapon_status::reloading
+	);
+
+	this->context<
+		sanguis::server::weapons::weapon
+	>().reload_time(
+		sge::timer::remaining<
+			sanguis::duration
+		>(
+			reload_time_
+		)
 	);
 }
 

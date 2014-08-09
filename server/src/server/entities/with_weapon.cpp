@@ -1,3 +1,4 @@
+#include <sanguis/duration.hpp>
 #include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/time_unit.hpp>
@@ -402,6 +403,20 @@ sanguis::server::entities::with_weapon::weapon_status(
 }
 
 void
+sanguis::server::entities::with_weapon::reload_time(
+	sanguis::duration const _reload_time,
+	sanguis::server::weapons::weapon const &_weapon
+)
+{
+	this->on_reload_time(
+		sanguis::weapon_type_to_is_primary(
+			_weapon.type()
+		),
+		_reload_time
+	);
+}
+
+void
 sanguis::server::entities::with_weapon::magazine_remaining(
 	sanguis::magazine_remaining const _magazine_remaining,
 	sanguis::server::weapons::weapon const &_weapon
@@ -531,6 +546,14 @@ void
 sanguis::server::entities::with_weapon::on_magazine_remaining(
 	sanguis::is_primary_weapon,
 	sanguis::magazine_remaining
+)
+{
+}
+
+void
+sanguis::server::entities::with_weapon::on_reload_time(
+	sanguis::is_primary_weapon,
+	sanguis::duration
 )
 {
 }

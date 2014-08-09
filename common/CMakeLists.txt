@@ -304,6 +304,8 @@ set(
 	include/sanguis/messages/server/parts/weapon_description_fwd.hpp
 	include/sanguis/messages/server/pause.hpp
 	include/sanguis/messages/server/pause_fwd.hpp
+	include/sanguis/messages/server/reload.hpp
+	include/sanguis/messages/server/reload_fwd.hpp
 	include/sanguis/messages/server/remove.hpp
 	include/sanguis/messages/server/remove_buff.hpp
 	include/sanguis/messages/server/remove_buff_fwd.hpp
@@ -493,6 +495,7 @@ set(
 	src/messages/server/max_health.cpp
 	src/messages/server/move.cpp
 	src/messages/server/pause.cpp
+	src/messages/server/reload.cpp
 	src/messages/server/remove.cpp
 	src/messages/server/remove_buff.cpp
 	src/messages/server/remove_id.cpp

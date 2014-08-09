@@ -1,3 +1,4 @@
+#include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/perk_type.hpp>
@@ -618,6 +619,19 @@ sanguis::server::entities::player::on_magazine_remaining(
 		this->player_id(),
 		_is_primary,
 		_magazine_remaining
+	);
+}
+
+void
+sanguis::server::entities::player::on_reload_time(
+	sanguis::is_primary_weapon const _is_primary,
+	sanguis::duration const _reload_time
+)
+{
+	this->environment()->reload_time(
+		this->player_id(),
+		_is_primary,
+		_reload_time
 	);
 }
 

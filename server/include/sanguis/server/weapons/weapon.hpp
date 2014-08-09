@@ -126,6 +126,11 @@ private:
 		sanguis::weapon_status
 	);
 
+	void
+	reload_time(
+		sanguis::duration
+	);
+
 	virtual
 	sanguis::weapon_attribute_vector
 	attributes() const = 0;

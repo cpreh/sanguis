@@ -3,6 +3,7 @@
 
 #include <sanguis/aura_type_fwd.hpp>
 #include <sanguis/buff_type_fwd.hpp>
+#include <sanguis/duration.hpp>
 #include <sanguis/entity_id_fwd.hpp>
 #include <sanguis/is_primary_weapon_fwd.hpp>
 #include <sanguis/magazine_remaining.hpp>
@@ -99,6 +100,14 @@ public:
 		sanguis::server::player_id,
 		sanguis::is_primary_weapon,
 		sanguis::magazine_remaining
+	) = 0;
+
+	virtual
+	void
+	reload_time(
+		sanguis::server::player_id,
+		sanguis::is_primary_weapon,
+		sanguis::duration
 	) = 0;
 
 	virtual

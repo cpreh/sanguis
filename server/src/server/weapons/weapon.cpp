@@ -289,6 +289,17 @@ sanguis::server::weapons::weapon::weapon_status(
 }
 
 void
+sanguis::server::weapons::weapon::reload_time(
+	sanguis::duration const _reload_time
+)
+{
+	this->owner().reload_time(
+		_reload_time,
+		*this
+	);
+}
+
+void
 sanguis::server::weapons::weapon::reset_magazine()
 {
 	magazine_used_ =

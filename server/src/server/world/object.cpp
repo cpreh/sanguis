@@ -63,6 +63,7 @@
 #include <sanguis/messages/server/magazine_remaining.hpp>
 #include <sanguis/messages/server/max_health.hpp>
 #include <sanguis/messages/server/move.hpp>
+#include <sanguis/messages/server/reload.hpp>
 #include <sanguis/messages/server/remove.hpp>
 #include <sanguis/messages/server/remove_buff.hpp>
 #include <sanguis/messages/server/remove_weapon.hpp>
@@ -595,6 +596,26 @@ sanguis::server::world::object::magazine_remaining(
 					sanguis::messages::convert::to_magazine_size(
 						_magazine_remaining.get()
 					)
+			)
+		)
+	);
+}
+
+void
+sanguis::server::world::object::reload_time(
+	sanguis::server::player_id const _player_id,
+	sanguis::is_primary_weapon const _is_primary,
+	sanguis::duration const _reload_time
+)
+{
+	this->send_player_specific(
+		_player_id,
+		sanguis::messages::server::create(
+			sanguis::messages::server::reload(
+				sanguis::messages::roles::is_primary_weapon{} =
+					_is_primary,
+				sanguis::messages::roles::reload_time{} =
+					_reload_time
 			)
 		)
 	);

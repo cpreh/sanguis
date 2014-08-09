@@ -173,6 +173,14 @@ public:
 	override;
 
 	void
+	reload_time(
+		sanguis::server::player_id,
+		sanguis::is_primary_weapon,
+		sanguis::duration
+	)
+	override;
+
+	void
 	angle_changed(
 		sanguis::entity_id,
 		sanguis::server::angle

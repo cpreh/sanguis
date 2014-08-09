@@ -64,6 +64,8 @@ set(
 	include/sanguis/client/create.hpp
 	include/sanguis/client/create_systems.hpp
 	include/sanguis/client/cursor.hpp
+	include/sanguis/client/cursor_area.hpp
+	include/sanguis/client/cursor_area_fwd.hpp
 	include/sanguis/client/cursor_fwd.hpp
 	include/sanguis/client/dispatch.hpp
 	include/sanguis/client/draw2d/aoe.hpp
@@ -518,6 +520,8 @@ set(
 	include/sanguis/client/object_base.hpp
 	include/sanguis/client/object_base_fwd.hpp
 	include/sanguis/client/object_base_unique_ptr.hpp
+	include/sanguis/client/optional_cursor_area.hpp
+	include/sanguis/client/optional_cursor_area_fwd.hpp
 	include/sanguis/client/optional_health_pair.hpp
 	include/sanguis/client/optional_health_pair_fwd.hpp
 	include/sanguis/client/perk/category.hpp

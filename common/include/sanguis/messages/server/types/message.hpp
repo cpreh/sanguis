@@ -41,6 +41,7 @@ enum class message
 	max_health,
 	move,
 	pause,
+	reload,
 	remove,
 	remove_buff,
 	remove_id,

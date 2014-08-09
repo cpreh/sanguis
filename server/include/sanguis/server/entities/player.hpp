@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_PLAYER_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_PLAYER_HPP_INCLUDED
 
+#include <sanguis/duration.hpp>
 #include <sanguis/is_primary_weapon_fwd.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/perk_type_fwd.hpp>
@@ -178,6 +179,13 @@ private:
 	on_magazine_remaining(
 		sanguis::is_primary_weapon,
 		sanguis::magazine_remaining
+	)
+	override;
+
+	void
+	on_reload_time(
+		sanguis::is_primary_weapon,
+		sanguis::duration
 	)
 	override;
 

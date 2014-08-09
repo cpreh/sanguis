@@ -132,6 +132,12 @@ public:
 	);
 
 	void
+	reload_time(
+		sanguis::duration,
+		sanguis::server::weapons::weapon const &
+	);
+
+	void
 	magazine_remaining(
 		sanguis::magazine_remaining,
 		sanguis::server::weapons::weapon const &
@@ -195,6 +201,13 @@ private:
 	on_magazine_remaining(
 		sanguis::is_primary_weapon,
 		sanguis::magazine_remaining
+	);
+
+	virtual
+	void
+	on_reload_time(
+		sanguis::is_primary_weapon,
+		sanguis::duration
 	);
 
 	sanguis::server::weapons::optional_unique_ptr primary_weapon_;
