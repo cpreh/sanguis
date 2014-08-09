@@ -3,6 +3,7 @@
 #include <sanguis/random_seed.hpp>
 #include <sanguis/update_diff_clock.hpp>
 #include <sanguis/client/cursor.hpp>
+#include <sanguis/client/optional_cursor_area.hpp>
 #include <sanguis/client/player_health_callback.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
@@ -377,7 +378,18 @@ sanguis::client::draw2d::scene::object::overlay(
 		_render_context
 	);
 
-	// TODO: Draw additional info
+	sanguis::client::optional_cursor_area const area(
+		cursor_.area()
+	);
+
+/*
+	if(
+		area
+	)
+		sanguis::client::draw2d::scene::cursor_info(
+			_render_context,
+			area
+		);*/
 }
 
 void
