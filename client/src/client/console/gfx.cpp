@@ -1,5 +1,6 @@
-#include <sanguis/media_path.hpp>
 #include <sanguis/client/console/gfx.hpp>
+#include <sanguis/client/load/resource/texture_identifier.hpp>
+#include <sanguis/client/load/resource/textures.hpp>
 #include <sge/console/object_fwd.hpp>
 #include <sge/console/gfx/font_color.hpp>
 #include <sge/console/gfx/sprite_object.hpp>
@@ -8,23 +9,16 @@
 #include <sge/console/gfx/output_line_limit.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/image/color/predef.hpp>
-#include <sge/image2d/system_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
-#include <sge/renderer/screen_size.hpp>
-#include <sge/renderer/resource_flags_field.hpp>
+#include <sge/renderer/pixel_rect.hpp>
+#include <sge/renderer/pixel_unit.hpp>
 #include <sge/renderer/device/ffp.hpp>
 #include <sge/renderer/target/onscreen.hpp>
-#include <sge/renderer/target/viewport_size.hpp>
-#include <sge/renderer/texture/mipmap/off.hpp>
-#include <sge/renderer/texture/create_planar_from_path.hpp>
-#include <sge/renderer/texture/emulate_srgb.hpp>
-#include <sge/renderer/texture/planar.hpp>
+#include <sge/renderer/target/viewport.hpp>
 #include <sge/texture/part_raw_ref.hpp>
 #include <sge/viewport/manager.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/cast/size.hpp>
-#include <fcppt/cast/to_signed.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -36,7 +30,7 @@ namespace
 
 sge::console::gfx::sprite_object::dim const
 make_sprite_dim(
-	sge::renderer::device::ffp &
+	sge::renderer::target::viewport const &_viewport
 );
 
 }
@@ -45,30 +39,22 @@ sanguis::client::console::gfx::gfx(
 	sge::console::object &_console,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font_object,
-	sge::image2d::system &_image_loader,
 	sge::input::keyboard::device &_keyboard,
 	sge::viewport::manager &_viewport_manager,
-	sge::console::gfx::output_line_limit const _history_size
+	sge::console::gfx::output_line_limit const _history_size,
+	sanguis::client::load::resource::textures const &_textures
 )
 :
-	renderer_(
-		_renderer
-	),
 	texture_(
-		// TODO: Use resources here
-		sge::renderer::texture::create_planar_from_path(
-			sanguis::media_path()
-			/ FCPPT_TEXT("console_back.png"),
-			renderer_,
-			_image_loader,
-			sge::renderer::texture::mipmap::off(),
-			sge::renderer::resource_flags_field::null(),
-			sge::renderer::texture::emulate_srgb::yes
+		_textures.load(
+			sanguis::client::load::resource::texture_identifier(
+				FCPPT_TEXT("console_background")
+			)
 		)
 	),
 	impl_(
 		_console,
-		renderer_,
+		_renderer,
 		sge::console::gfx::font_color(
 			sge::image::color::predef::white()
 		),
@@ -77,18 +63,14 @@ sanguis::client::console::gfx::gfx(
 		sge::console::gfx::sprite_object(
 			sge::console::gfx::sprite_parameters()
 			.texture(
-				fcppt::make_shared_ptr<
-					sge::texture::part_raw_ref
-				>(
-					*texture_
-				)
+				texture_
 			)
 			.pos(
 				sge::console::gfx::sprite_object::vector::null()
 			)
 			.size(
 				::make_sprite_dim(
-					renderer_
+					_renderer.onscreen_target().viewport()
 				)
 			)
 		),
@@ -98,7 +80,8 @@ sanguis::client::console::gfx::gfx(
 		_viewport_manager.manage_callback(
 			std::bind(
 				&sanguis::client::console::gfx::on_resize,
-				this
+				this,
+				std::placeholders::_1
 			)
 		)
 	)
@@ -112,15 +95,18 @@ sanguis::client::console::gfx::~gfx()
 sge::console::gfx::object &
 sanguis::client::console::gfx::get()
 {
-	return impl_;
+	return
+		impl_;
 }
 
 void
-sanguis::client::console::gfx::on_resize()
+sanguis::client::console::gfx::on_resize(
+	sge::renderer::target::viewport const &_viewport
+)
 {
 	impl_.background_sprite().size(
 		::make_sprite_dim(
-			renderer_
+			_viewport
 		)
 	);
 }
@@ -130,13 +116,11 @@ namespace
 
 sge::console::gfx::sprite_object::dim const
 make_sprite_dim(
-	sge::renderer::device::ffp &_device
+	sge::renderer::target::viewport const &_viewport
 )
 {
-	sge::renderer::screen_size const viewport_dim(
-		sge::renderer::target::viewport_size(
-			_device.onscreen_target()
-		)
+	sge::renderer::pixel_rect::dim const viewport_dim(
+		_viewport.get().size()
 	);
 
 	return
@@ -144,21 +128,17 @@ make_sprite_dim(
 			fcppt::cast::size<
 				sge::console::gfx::sprite_object::dim::value_type
 			>(
-				fcppt::cast::to_signed(
-					viewport_dim.w()
-				)
+				viewport_dim.w()
 			),
 			fcppt::cast::size<
 				sge::console::gfx::sprite_object::dim::value_type
 			>(
-				fcppt::cast::to_signed(
-					viewport_dim.h()
-					/
-					fcppt::literal<
-						sge::renderer::screen_unit
-					>(
-						2
-					)
+				viewport_dim.h()
+				/
+				fcppt::literal<
+					sge::renderer::pixel_unit
+				>(
+					2
 				)
 			)
 		);

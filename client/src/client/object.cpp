@@ -79,11 +79,16 @@ sanguis::client::object::object(
 			FCPPT_TEXT('/')
 		)
 	),
+	resources_(
+		sys_->image_system(),
+		sys_->renderer_device_core(),
+		sys_->audio_loader(),
+		sys_->audio_player()
+	),
 	console_gfx_(
 		console_,
 		sys_->renderer_device_ffp(),
 		*font_object_,
-		sys_->image_system(),
 		sys_->keyboard_collector(),
 		sys_->viewport_manager(),
 		sge::console::gfx::output_line_limit(
@@ -92,13 +97,8 @@ sanguis::client::object::object(
 			].as<
 				sge::console::gfx::output_line_limit::value_type
 			>()
-		)
-	),
-	resources_(
-		sys_->image_system(),
-		sys_->renderer_device_core(),
-		sys_->audio_loader(),
-		sys_->audio_player()
+		),
+		resources_.resources().textures()
 	),
 	cursor_{
 		sys_->renderer_device_ffp(),

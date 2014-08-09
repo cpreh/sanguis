@@ -86,9 +86,9 @@ private:
 
 	sge::console::object console_;
 
-	sanguis::client::console::gfx console_gfx_;
-
 	sanguis::client::load::context resources_;
+
+	sanguis::client::console::gfx console_gfx_;
 
 	sanguis::client::cursor cursor_;
 
