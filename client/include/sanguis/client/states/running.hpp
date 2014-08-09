@@ -26,6 +26,7 @@
 #include <sanguis/messages/server/level_up_fwd.hpp>
 #include <sanguis/messages/server/magazine_remaining_fwd.hpp>
 #include <sanguis/messages/server/pause_fwd.hpp>
+#include <sanguis/messages/server/reload_fwd.hpp>
 #include <sanguis/messages/server/remove_weapon_fwd.hpp>
 #include <sanguis/messages/server/unpause_fwd.hpp>
 #include <sge/input/cursor/activatable_fwd.hpp>
@@ -156,6 +157,11 @@ public:
 	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::pause const &
+	);
+
+	sanguis::messages::call::result
+	operator()(
+		sanguis::messages::server::reload const &
 	);
 
 	sanguis::messages::call::result

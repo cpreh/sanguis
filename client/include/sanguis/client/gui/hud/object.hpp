@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_GUI_HUD_OBJECT_HPP_INCLUDED
 #define SANGUIS_CLIENT_GUI_HUD_OBJECT_HPP_INCLUDED
 
+#include <sanguis/diff_clock.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/magazine_remaining.hpp>
@@ -33,6 +34,7 @@
 #include <sge/timer/frames_counter.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/optional_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <memory>
 #include <fcppt/config/external_end.hpp>
@@ -98,6 +100,12 @@ public:
 	);
 
 	void
+	reload_time(
+		sanguis::is_primary_weapon,
+		sanguis::duration
+	);
+
+	void
 	world_name(
 		sanguis::world_name const &
 	);
@@ -113,6 +121,11 @@ public:
 	);
 
 	void
+	pause(
+		bool
+	);
+
+	void
 	draw(
 		sge::renderer::context::ffp &
 	);
@@ -122,9 +135,42 @@ public:
 		bool
 	);
 private:
-	sanguis::client::gui::hud::weapon_widget &
+	typedef
+	std::unique_ptr<
+		sanguis::client::gui::hud::weapon_widget
+	>
+	weapon_widget_unique_ptr;
+
+	typedef
+	fcppt::optional<
+		weapon_widget_unique_ptr
+	>
+	optional_weapon_widget_unique_ptr;
+
+	optional_weapon_widget_unique_ptr &
 	weapon_widget(
 		sanguis::is_primary_weapon
+	);
+
+	sanguis::client::gui::hud::weapon_widget &
+	weapon_widget_checked(
+		sanguis::is_primary_weapon
+	);
+
+	template<
+		typename Function
+	>
+	void
+	update_weapon_widgets(
+		Function const &
+	);
+
+	template<
+		typename Function
+	>
+	void
+	foreach_weapon(
+		Function const &
 	);
 
 	void
@@ -135,6 +181,8 @@ private:
 
 	void
 	create_details();
+
+	sanguis::diff_clock reload_clock_;
 
 	sanguis::client::load::hud::context &resources_;
 
@@ -174,9 +222,9 @@ private:
 
 		sanguis::gui::widget::bar health_bar_;
 
-			sanguis::client::gui::hud::weapon_widget primary_weapon_;
+			optional_weapon_widget_unique_ptr primary_weapon_;
 
-			sanguis::client::gui::hud::weapon_widget secondary_weapon_;
+			optional_weapon_widget_unique_ptr secondary_weapon_;
 
 		sanguis::gui::widget::box_container weapon_container_;
 
@@ -197,6 +245,8 @@ private:
 	weapon_details_unique_ptr;
 
 	weapon_details_unique_ptr weapon_details_;
+
+	bool paused_;
 };
 
 }

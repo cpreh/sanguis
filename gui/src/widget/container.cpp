@@ -141,6 +141,22 @@ sanguis::gui::widget::container::replace_widgets(
 }
 
 void
+sanguis::gui::widget::container::clear_widgets()
+{
+	for(
+		auto it(
+			widgets_.begin()
+		);
+		it != widgets_.end();
+		it =
+			this->erase_widget(
+				it
+			)
+	)
+		;
+}
+
+void
 sanguis::gui::widget::container::insert_widget(
 	sanguis::gui::widget::reference_vector::iterator const _pos,
 	sanguis::gui::widget::reference const _widget

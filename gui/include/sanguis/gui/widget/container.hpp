@@ -69,6 +69,9 @@ protected:
 		sanguis::gui::widget::reference_vector::size_type,
 		sanguis::gui::widget::reference
 	);
+
+	void
+	clear_widgets();
 private:
 	void
 	insert_widget(

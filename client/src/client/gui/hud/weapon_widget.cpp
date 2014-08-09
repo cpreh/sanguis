@@ -1,9 +1,15 @@
+#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/diff_timer.hpp>
+#include <sanguis/duration.hpp>
+#include <sanguis/duration_second.hpp>
 #include <sanguis/magazine_remaining.hpp>
-#include <sanguis/optional_weapon_description.hpp>
+#include <sanguis/weapon_description.hpp>
 #include <sanguis/client/gui/hud/weapon_widget.hpp>
 #include <sanguis/client/load/hud/context.hpp>
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/default_aspect.hpp>
+#include <sanguis/gui/fill_color.hpp>
+#include <sanguis/gui/fill_level.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
@@ -19,52 +25,95 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <sge/rucksack/alignment.hpp>
+#include <sge/rucksack/dim.hpp>
+#include <sge/timer/elapsed_fractional.hpp>
 #include <fcppt/insert_to_string.hpp>
-#include <fcppt/make_unique_ptr.hpp>
 
 
 sanguis::client::gui::hud::weapon_widget::weapon_widget(
+	sanguis::diff_clock const &_diff_clock,
 	sanguis::client::load::hud::context &_resources,
 	sanguis::gui::context &_gui_context,
 	sanguis::gui::style::base const &_gui_style,
 	sge::renderer::device::ffp &_renderer,
-	sge::font::object &_font
+	sge::font::object &_font,
+	sanguis::weapon_description const &_description
 )
 :
-	resources_(
-		_resources
+	description_(
+		_description
 	),
-	gui_style_(
-		_gui_style
+	reload_time_(
+		sanguis::diff_timer::parameters(
+			_diff_clock,
+			sanguis::duration_second(
+				// TODO: What should we choose here?
+				1
+			)
+		)
+		.expired(
+			true
+		)
 	),
-	renderer_(
-		_renderer
+	image_(
+		_gui_style,
+		_renderer,
+		_resources.weapon_icon(
+			_description.weapon_type()
+		)
 	),
-	image_(),
 	text_(
 		_gui_style,
 		_renderer,
 		_font,
-		sge::font::string(),
+		this->make_text(
+			_description.magazine_remaining()
+		),
 		sanguis::gui::text_color(
 			sge::image::color::predef::black()
 		),
 		sanguis::gui::optional_needed_width()
 	),
+	cooldown_bar_{
+		_gui_style,
+		_renderer,
+		sge::rucksack::dim{
+			10,
+			50 // TODO: Should this be expanding?
+		},
+		sge::rucksack::axis::y,
+		sanguis::gui::fill_color{
+			sge::image::color::predef::blue()
+		},
+		sanguis::gui::fill_level{
+			1.f
+		}
+	},
 	container_(
 		_gui_context,
 		sanguis::gui::widget::reference_alignment_vector{
 			sanguis::gui::widget::reference_alignment_pair(
 				sanguis::gui::widget::reference(
+					image_
+				),
+				sge::rucksack::alignment::center
+			),
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
 					text_
+				),
+				sge::rucksack::alignment::center
+			),
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					cooldown_bar_
 				),
 				sge::rucksack::alignment::center
 			)
 		},
 		sge::rucksack::axis::x,
 		sanguis::gui::default_aspect()
-	),
-	description_()
+	)
 {
 }
 
@@ -73,72 +122,40 @@ sanguis::client::gui::hud::weapon_widget::~weapon_widget()
 }
 
 void
-sanguis::client::gui::hud::weapon_widget::weapon_description(
-	sanguis::optional_weapon_description const &_description
-)
-{
-	description_ =
-		_description;
-
-	if(
-		image_
-	)
-	{
-		container_.pop_front();
-
-		image_.reset();
-	}
-
-	if(
-		!_description
-	)
-	{
-		text_.value(
-			sge::font::string()
-		);
-
-		return;
-	}
-
-	this->update_text(
-		description_->magazine_remaining()
-	);
-
-	image_ =
-		fcppt::make_unique_ptr<
-			sanguis::gui::widget::image
-		>(
-			gui_style_,
-			renderer_,
-			resources_.weapon_icon(
-				_description->weapon_type()
-			)
-		);
-
-	container_.push_front(
-		sanguis::gui::widget::reference_alignment_pair(
-			sanguis::gui::widget::reference(
-				*image_
-			),
-			sge::rucksack::alignment::center
-		)
-	);
-
-	container_.layout().relayout();
-}
-
-void
 sanguis::client::gui::hud::weapon_widget::magazine_remaining(
 	sanguis::magazine_remaining const _magazine_remaining
 )
 {
-	if(
-		!description_
-	)
-		return;
+	text_.value(
+		this->make_text(
+			_magazine_remaining
+		)
+	);
+}
 
-	this->update_text(
-		_magazine_remaining
+void
+sanguis::client::gui::hud::weapon_widget::reload_time(
+	sanguis::duration const _reload_time
+)
+{
+	reload_time_.interval(
+		_reload_time
+	);
+
+	reload_time_.reset();
+}
+
+void
+sanguis::client::gui::hud::weapon_widget::update()
+{
+	cooldown_bar_.value(
+		sanguis::gui::fill_level(
+			sge::timer::elapsed_fractional<
+				sanguis::gui::fill_level::value_type
+			>(
+				reload_time_
+			)
+		)
 	);
 }
 
@@ -149,17 +166,17 @@ sanguis::client::gui::hud::weapon_widget::widget()
 		container_;
 }
 
-sanguis::optional_weapon_description const &
+sanguis::weapon_description const &
 sanguis::client::gui::hud::weapon_widget::weapon_description() const
 {
 	return
 		description_;
 }
 
-void
-sanguis::client::gui::hud::weapon_widget::update_text(
+sge::font::string
+sanguis::client::gui::hud::weapon_widget::make_text(
 	sanguis::magazine_remaining const _magazine_remaining
-)
+) const
 {
 	sge::font::string value(
 		fcppt::insert_to_string<
@@ -170,7 +187,7 @@ sanguis::client::gui::hud::weapon_widget::update_text(
 	);
 
 	if(
-		description_->magazine_size().get()
+		description_.magazine_size().get()
 		!=
 		0u
 	)
@@ -180,11 +197,11 @@ sanguis::client::gui::hud::weapon_widget::update_text(
 			fcppt::insert_to_string<
 				sge::font::string
 			>(
-				description_->magazine_size()
+				description_.magazine_size()
 			);
 
 	if(
-		description_->magazine_extra().get()
+		description_.magazine_extra().get()
 		!=
 		0u
 	)
@@ -194,10 +211,9 @@ sanguis::client::gui::hud::weapon_widget::update_text(
 			fcppt::insert_to_string<
 				sge::font::string
 			>(
-				description_->magazine_extra()
+				description_.magazine_extra()
 			);
 
-	text_.value(
-		value
-	);
+	return
+		value;
 }

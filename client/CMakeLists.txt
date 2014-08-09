@@ -374,6 +374,7 @@ set(
 	include/sanguis/client/gui/hud/weapon_tooltip_fwd.hpp
 	include/sanguis/client/gui/hud/weapon_tooltip_unique_ptr.hpp
 	include/sanguis/client/gui/hud/weapon_widget.hpp
+	include/sanguis/client/gui/hud/weapon_widget_fwd.hpp
 	include/sanguis/client/gui/menu/callbacks/cancel_connect.hpp
 	include/sanguis/client/gui/menu/callbacks/connect.hpp
 	include/sanguis/client/gui/menu/callbacks/object.hpp

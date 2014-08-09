@@ -121,6 +121,14 @@ sanguis::gui::widget::box_container::pop_back()
 	this->pop_back_widget();
 }
 
+void
+sanguis::gui::widget::box_container::clear()
+{
+	layout_.clear();
+
+	this->clear_widgets();
+}
+
 sge::rucksack::widget::box::base &
 sanguis::gui::widget::box_container::box_layout()
 {

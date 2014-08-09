@@ -43,8 +43,14 @@
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/insert_to_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
+#include <fcppt/assert/error.hpp>
 #include <fcppt/assert/pre.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <chrono>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::gui::hud::object::object(
@@ -57,6 +63,7 @@ sanguis::client::gui::hud::object::object(
 	sge::input::cursor::object &_cursor
 )
 :
+	reload_clock_(),
 	resources_(
 		_resources
 	),
@@ -177,36 +184,11 @@ sanguis::client::gui::hud::object::object(
 			1.f
 		)
 	),
-	primary_weapon_(
-		resources_,
-		gui_context_,
-		_gui_style,
-		_renderer,
-		_font
-	),
-	secondary_weapon_(
-		resources_,
-		gui_context_,
-		_gui_style,
-		_renderer,
-		_font
-	),
+	primary_weapon_(),
+	secondary_weapon_(),
 	weapon_container_(
 		gui_context_,
-		sanguis::gui::widget::reference_alignment_vector{
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
-					primary_weapon_.widget()
-				),
-				sge::rucksack::alignment::left_or_top
-			),
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
-					secondary_weapon_.widget()
-				),
-				sge::rucksack::alignment::left_or_top
-			)
-		},
+		sanguis::gui::widget::reference_alignment_vector{},
 		sge::rucksack::axis::x,
 		sanguis::gui::default_aspect()
 	),
@@ -273,7 +255,10 @@ sanguis::client::gui::hud::object::object(
 		_renderer,
 		gui_area_
 	),
-	weapon_details_()
+	weapon_details_(),
+	paused_{
+		false
+	}
 {
 }
 
@@ -357,19 +342,31 @@ sanguis::client::gui::hud::object::add_weapon(
 	sanguis::weapon_description const &_description
 )
 {
-	this->weapon_widget(
-		sanguis::weapon_type_to_is_primary(
-			_description.weapon_type()
-		)
-	).weapon_description(
-		sanguis::optional_weapon_description(
-			_description
-		)
+	this->update_weapon_widgets(
+		[
+			&_description,
+			this
+		]{
+			this->weapon_widget(
+				sanguis::weapon_type_to_is_primary(
+					_description.weapon_type()
+				)
+			) =
+				optional_weapon_widget_unique_ptr(
+					fcppt::make_unique_ptr<
+						sanguis::client::gui::hud::weapon_widget
+					>(
+						reload_clock_,
+						resources_,
+						gui_context_,
+						gui_style_,
+						renderer_,
+						font_,
+						_description
+					)
+				);
+		}
 	);
-
-	gui_area_.relayout();
-
-	this->update_details();
 }
 
 void
@@ -377,13 +374,16 @@ sanguis::client::gui::hud::object::remove_weapon(
 	sanguis::is_primary_weapon const _is_primary
 )
 {
-	this->weapon_widget(
-		_is_primary
-	).weapon_description(
-		sanguis::optional_weapon_description()
+	this->update_weapon_widgets(
+		[
+			_is_primary,
+			this
+		]{
+			this->weapon_widget(
+				_is_primary
+			).reset();
+		}
 	);
-
-	this->update_details();
 }
 
 void
@@ -392,10 +392,23 @@ sanguis::client::gui::hud::object::magazine_remaining(
 	sanguis::magazine_remaining const _magazine_remaining
 )
 {
-	this->weapon_widget(
+	this->weapon_widget_checked(
 		_is_primary
 	).magazine_remaining(
 		_magazine_remaining
+	);
+}
+
+void
+sanguis::client::gui::hud::object::reload_time(
+	sanguis::is_primary_weapon const _is_primary,
+	sanguis::duration const _reload_time
+)
+{
+	this->weapon_widget_checked(
+		_is_primary
+	).reload_time(
+		_reload_time
 	);
 }
 
@@ -440,6 +453,35 @@ sanguis::client::gui::hud::object::update(
 		weapon_details_->update(
 			_duration
 		);
+
+	if(
+		!paused_
+	)
+		reload_clock_.update(
+			std::chrono::duration_cast<
+				sanguis::diff_clock::duration
+			>(
+				_duration
+			)
+		);
+
+	this->foreach_weapon(
+		[](
+			sanguis::client::gui::hud::weapon_widget &_widget
+		)
+		{
+			_widget.update();
+		}
+	);
+}
+
+void
+sanguis::client::gui::hud::object::pause(
+	bool const _paused
+)
+{
+	paused_ =
+		_paused;
 }
 
 void
@@ -475,7 +517,7 @@ sanguis::client::gui::hud::object::details(
 		weapon_details_.reset();
 }
 
-sanguis::client::gui::hud::weapon_widget &
+sanguis::client::gui::hud::object::optional_weapon_widget_unique_ptr &
 sanguis::client::gui::hud::object::weapon_widget(
 	sanguis::is_primary_weapon const _is_primary
 )
@@ -487,6 +529,93 @@ sanguis::client::gui::hud::object::weapon_widget(
 		:
 			secondary_weapon_
 		;
+}
+
+sanguis::client::gui::hud::weapon_widget &
+sanguis::client::gui::hud::object::weapon_widget_checked(
+	sanguis::is_primary_weapon const _is_primary
+)
+{
+	optional_weapon_widget_unique_ptr &res(
+		this->weapon_widget(
+			_is_primary
+		)
+	);
+
+	FCPPT_ASSERT_ERROR(
+		res
+	);
+
+	return
+		**res;
+}
+
+template<
+	typename Function
+>
+void
+sanguis::client::gui::hud::object::update_weapon_widgets(
+	Function const &_function
+)
+{
+	weapon_container_.clear();
+
+	_function();
+
+	this->foreach_weapon(
+		[
+			this
+		](
+			sanguis::client::gui::hud::weapon_widget &_widget
+		)
+		{
+			weapon_container_.push_back(
+				sanguis::gui::widget::reference_alignment_pair{
+					sanguis::gui::widget::reference{
+						_widget.widget()
+					},
+					sge::rucksack::alignment::center
+				}
+			);
+		}
+	);
+
+	gui_area_.relayout();
+
+	this->update_details();
+}
+
+template<
+	typename Function
+>
+void
+sanguis::client::gui::hud::object::foreach_weapon(
+	Function const &_function
+)
+{
+	auto const apply_maybe(
+		[
+			&_function
+		](
+			optional_weapon_widget_unique_ptr const &_ptr
+		)
+		{
+			if(
+				_ptr
+			)
+				_function(
+					**_ptr
+				);
+		}
+	);
+
+	apply_maybe(
+		primary_weapon_
+	);
+
+	apply_maybe(
+		secondary_weapon_
+	);
 }
 
 void
@@ -538,6 +667,27 @@ sanguis::client::gui::hud::object::update_details()
 void
 sanguis::client::gui::hud::object::create_details()
 {
+	auto const maybe_description(
+		[](
+			optional_weapon_widget_unique_ptr const &_widget
+		)
+		-> sanguis::optional_weapon_description
+		{
+			return
+				fcppt::optional_bind_construct(
+					_widget,
+					[](
+						weapon_widget_unique_ptr const &_ptr
+					)
+					-> sanguis::weapon_description
+					{
+						return
+							_ptr->weapon_description();
+					}
+				);
+		}
+	);
+
 	weapon_details_ =
 		fcppt::make_unique_ptr<
 			sanguis::client::gui::hud::weapon_details
@@ -549,7 +699,11 @@ sanguis::client::gui::hud::object::create_details()
 			font_,
 			keyboard_,
 			cursor_,
-			primary_weapon_.weapon_description(),
-			secondary_weapon_.weapon_description()
+			maybe_description(
+				primary_weapon_
+			),
+			maybe_description(
+				secondary_weapon_
+			)
 		);
 }

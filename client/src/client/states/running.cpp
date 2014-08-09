@@ -40,6 +40,7 @@
 #include <sanguis/messages/roles/is_primary_weapon.hpp>
 #include <sanguis/messages/roles/level.hpp>
 #include <sanguis/messages/roles/magazine_remaining.hpp>
+#include <sanguis/messages/roles/reload_time.hpp>
 #include <sanguis/messages/roles/world_name.hpp>
 #include <sanguis/messages/server/add_console_command.hpp>
 #include <sanguis/messages/server/add_own_player.hpp>
@@ -52,6 +53,7 @@
 #include <sanguis/messages/server/level_up.hpp>
 #include <sanguis/messages/server/magazine_remaining.hpp>
 #include <sanguis/messages/server/pause.hpp>
+#include <sanguis/messages/server/reload.hpp>
 #include <sanguis/messages/server/remove_weapon.hpp>
 #include <sanguis/messages/server/unpause.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
@@ -261,7 +263,7 @@ sanguis::client::states::running::react(
 
 	return
 		sanguis::client::dispatch<
-			boost::mpl::vector11<
+			boost::mpl::vector12<
 				sanguis::messages::server::add_console_command,
 				sanguis::messages::server::add_own_player,
 				sanguis::messages::server::change_world,
@@ -271,6 +273,7 @@ sanguis::client::states::running::react(
 				sanguis::messages::server::level_up,
 				sanguis::messages::server::magazine_remaining,
 				sanguis::messages::server::pause,
+				sanguis::messages::server::reload,
 				sanguis::messages::server::remove_weapon,
 				sanguis::messages::server::unpause
 			>
@@ -496,6 +499,26 @@ sanguis::client::states::running::operator()(
 
 sanguis::messages::call::result
 sanguis::client::states::running::operator()(
+	sanguis::messages::server::reload const &_message
+)
+{
+	hud_->reload_time(
+		_message.get<
+			sanguis::messages::roles::is_primary_weapon
+		>(),
+		_message.get<
+			sanguis::messages::roles::reload_time
+		>()
+	);
+
+	return
+		sanguis::messages::call::result(
+			this->discard_event()
+		);
+}
+
+sanguis::messages::call::result
+sanguis::client::states::running::operator()(
 	sanguis::messages::server::remove_weapon const &_message
 )
 {
@@ -576,6 +599,10 @@ sanguis::client::states::running::do_pause(
 	);
 
 	sound_manager_->pause(
+		_pause
+	);
+
+	hud_->pause(
 		_pause
 	);
 }

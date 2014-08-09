@@ -18,6 +18,7 @@
 #include <sge/rucksack/padding.hpp>
 #include <sge/rucksack/rect.hpp>
 #include <sge/rucksack/scalar.hpp>
+#include <sge/rucksack/vector.hpp>
 #include <fcppt/cast/enum_to_int.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/int_to_float.hpp>
@@ -130,7 +131,21 @@ sanguis::gui::aux_::style::simple::draw_bar(
 		_renderer,
 		_context,
 		sge::rucksack::rect(
-			inner_rect.pos(),
+			_axis
+			==
+			sge::rucksack::axis::y
+			?
+				sge::rucksack::vector(
+					inner_rect.pos().x(),
+					inner_rect.pos().y()
+					+
+					inner_rect.h()
+					-
+					fill_size
+				)
+			:
+				inner_rect.pos()
+			,
 			sge::rucksack::dim(
 				_axis
 				==

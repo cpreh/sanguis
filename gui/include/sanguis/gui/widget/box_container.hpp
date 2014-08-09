@@ -72,6 +72,9 @@ public:
 	);
 
 	SANGUIS_GUI_SYMBOL
+	void
+	clear();
+
 	sge::rucksack::widget::box::base &
 	box_layout();
 private:
