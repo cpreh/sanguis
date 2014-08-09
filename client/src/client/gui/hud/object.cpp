@@ -154,6 +154,7 @@ sanguis::client::gui::hud::object::object(
 			200,
 			10
 		),
+		sge::rucksack::axis::x,
 		sanguis::gui::fill_color(
 			sge::image::color::predef::forestgreen()
 		),
@@ -168,6 +169,7 @@ sanguis::client::gui::hud::object::object(
 			200,
 			20
 		),
+		sge::rucksack::axis::x,
 		sanguis::gui::fill_color(
 			sge::image::color::predef::red()
 		),

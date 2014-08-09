@@ -9,6 +9,7 @@
 #include <sanguis/gui/widget/base.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/rucksack/axis.hpp>
 #include <sge/rucksack/dim_fwd.hpp>
 #include <sge/rucksack/widget/base_fwd.hpp>
 #include <sge/rucksack/widget/dummy.hpp>
@@ -36,6 +37,7 @@ public:
 		sanguis::gui::style::base const &,
 		sge::renderer::device::ffp &,
 		sge::rucksack::dim,
+		sge::rucksack::axis,
 		sanguis::gui::fill_color const &,
 		sanguis::gui::fill_level
 	);
@@ -63,6 +65,8 @@ private:
 	sanguis::gui::style::base const &style_;
 
 	sge::renderer::device::ffp &renderer_;
+
+	sge::rucksack::axis const axis_;
 
 	sanguis::gui::fill_color const foreground_;
 

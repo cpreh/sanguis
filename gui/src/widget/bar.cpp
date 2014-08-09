@@ -21,6 +21,7 @@ sanguis::gui::widget::bar::bar(
 	sanguis::gui::style::base const &_style,
 	sge::renderer::device::ffp &_renderer,
 	sge::rucksack::dim const _dim,
+	sge::rucksack::axis const _axis,
 	sanguis::gui::fill_color const &_foreground,
 	sanguis::gui::fill_level const _value
 )
@@ -32,6 +33,9 @@ sanguis::gui::widget::bar::bar(
 	renderer_(
 		_renderer
 	),
+	axis_{
+		_axis
+	},
 	foreground_(
 		_foreground
 	),
@@ -90,6 +94,7 @@ sanguis::gui::widget::bar::on_draw(
 		renderer_,
 		_render_context,
 		this->layout().area(),
+		axis_,
 		value_,
 		foreground_
 	);

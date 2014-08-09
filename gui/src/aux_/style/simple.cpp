@@ -13,10 +13,12 @@
 #include <sanguis/gui/style/base.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/rucksack/axis.hpp>
 #include <sge/rucksack/dim.hpp>
 #include <sge/rucksack/padding.hpp>
 #include <sge/rucksack/rect.hpp>
 #include <sge/rucksack/scalar.hpp>
+#include <fcppt/cast/enum_to_int.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
@@ -77,6 +79,7 @@ sanguis::gui::aux_::style::simple::draw_bar(
 	sge::renderer::device::ffp &_renderer,
 	sge::renderer::context::ffp &_context,
 	sge::rucksack::rect const _area,
+	sge::rucksack::axis const _axis,
 	sanguis::gui::fill_level const _fill_level,
 	sanguis::gui::fill_color const &_fill_color
 ) const
@@ -102,24 +105,48 @@ sanguis::gui::aux_::style::simple::draw_bar(
 		sanguis::gui::aux_::style::background_color()
 	);
 
+	sge::rucksack::scalar const fill_size(
+		fcppt::cast::float_to_int<
+			sge::rucksack::scalar
+		>(
+			fcppt::cast::int_to_float<
+				sanguis::gui::fill_level::value_type
+			>(
+				inner_rect.size()[
+					// TODO: Make a function in rucksack for this
+					fcppt::cast::enum_to_int<
+						fcppt::math::size_type
+					>(
+						_axis
+					)
+				]
+			)
+			*
+			_fill_level.get()
+		)
+	);
+
 	sanguis::gui::aux_::fill_rect(
 		_renderer,
 		_context,
 		sge::rucksack::rect(
 			inner_rect.pos(),
 			sge::rucksack::dim(
-				fcppt::cast::float_to_int<
-					sge::rucksack::scalar
-				>(
-					fcppt::cast::int_to_float<
-						sanguis::gui::fill_level::value_type
-					>(
-						inner_rect.w()
-					)
-					*
-					_fill_level.get()
-				),
-				inner_rect.h()
+				_axis
+				==
+				sge::rucksack::axis::x
+				?
+					fill_size
+				:
+					inner_rect.w()
+				,
+				_axis
+				==
+				sge::rucksack::axis::y
+				?
+					fill_size
+				:
+					inner_rect.h()
 			)
 		),
 		_fill_color.get()
