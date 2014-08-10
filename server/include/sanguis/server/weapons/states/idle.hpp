@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_WEAPONS_STATES_IDLE_HPP_INCLUDED
 
 #include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/weapons/events/poll_fwd.hpp>
 #include <sanguis/server/weapons/events/reload_fwd.hpp>
 #include <sanguis/server/weapons/events/shoot_fwd.hpp>
 #include <sanguis/server/weapons/states/idle_fwd.hpp>
@@ -34,12 +35,15 @@ class idle
 		idle
 	);
 public:
-	typedef boost::mpl::list2<
+	typedef boost::mpl::list3<
 		boost::statechart::custom_reaction<
 			sanguis::server::weapons::events::shoot
 		>,
 		boost::statechart::custom_reaction<
 			sanguis::server::weapons::events::reload
+		>,
+		boost::statechart::custom_reaction<
+			sanguis::server::weapons::events::poll
 		>
 	> reactions;
 
@@ -59,6 +63,11 @@ public:
 	boost::statechart::result
 	react(
 		sanguis::server::weapons::events::reload const &
+	);
+
+	boost::statechart::result
+	react(
+		sanguis::server::weapons::events::poll const &
 	);
 };
 

@@ -74,3 +74,21 @@ sanguis::server::weapons::states::idle::react(
 			sanguis::server::weapons::states::reloading
 		>();
 }
+
+boost::statechart::result
+sanguis::server::weapons::states::idle::react(
+	sanguis::server::weapons::events::poll const &
+)
+{
+	if(
+		this->context<
+			sanguis::server::weapons::weapon
+		>().magazine_empty()
+	)
+		this->post_event(
+			sanguis::server::weapons::events::reload()
+		);
+
+	return
+		this->discard_event();
+}
