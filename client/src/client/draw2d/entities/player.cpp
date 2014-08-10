@@ -169,15 +169,15 @@ sanguis::client::draw2d::entities::player::update()
 	this->at(
 		top
 	).pos(
+		sge::sprite::center(
+			this->at(
+				top
+			)
+		)
+		-
 		fcppt::math::vector::structure_cast<
 			sanguis::client::draw2d::sprite::point
 		>(
-			sge::sprite::center(
-				this->at(
-					top
-				)
-			)
-			-
 			new_rotation
 		)
 	);
