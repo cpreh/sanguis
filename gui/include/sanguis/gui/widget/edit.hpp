@@ -23,7 +23,6 @@
 #include <sge/rucksack/widget/dummy.hpp>
 #include <sge/timer/basic_decl.hpp>
 #include <sge/timer/clocks/delta_decl.hpp>
-#include <sge/timer/clocks/standard.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/signal/auto_connection_fwd.hpp>
 #include <fcppt/signal/object_decl.hpp>
@@ -134,12 +133,8 @@ private:
 	sge::font::draw::static_text static_text_;
 
 	typedef
-	sge::timer::clocks::standard
-	clock;
-
-	typedef
 	sge::timer::clocks::delta<
-		clock
+		sanguis::gui::duration
 	>
 	diff_clock;
 
