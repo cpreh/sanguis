@@ -14,6 +14,7 @@ set(
 	include/sanguis/diff_clock.hpp
 	include/sanguis/diff_clock_fwd.hpp
 	include/sanguis/diff_timer.hpp
+	include/sanguis/diff_timer_fwd.hpp
 	include/sanguis/duration.hpp
 	include/sanguis/duration_second.hpp
 	include/sanguis/entity_id.hpp
@@ -405,6 +406,7 @@ set(
 	include/sanguis/string_vector.hpp
 	include/sanguis/time_unit.hpp
 	include/sanguis/timer.hpp
+	include/sanguis/timer_fwd.hpp
 	include/sanguis/update_diff_clock.hpp
 	include/sanguis/weapon_attribute.hpp
 	include/sanguis/weapon_attribute_base.hpp

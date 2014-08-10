@@ -10,7 +10,7 @@ namespace sanguis
 
 typedef
 sge::timer::clocks::delta<
-	sanguis::clock
+	sanguis::clock::duration
 >
 diff_clock;
 
