@@ -1,11 +1,11 @@
 #include <sanguis/client/gui/perk/item_color.hpp>
 #include <sanguis/client/perk/choosable_state.hpp>
+#include <sanguis/gui/text_color.hpp>
 #include <sge/image/color/predef.hpp>
-#include <sge/image/color/any/object.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
 
-sge::image::color::any::object const
+sanguis::gui::text_color
 sanguis::client::gui::perk::item_color(
 	sanguis::client::perk::choosable_state const _state
 )
@@ -16,17 +16,25 @@ sanguis::client::gui::perk::item_color(
 	{
 	case sanguis::client::perk::choosable_state::ok:
 		return
-			sge::image::color::predef::white();
+			sanguis::gui::text_color{
+				sge::image::color::predef::white()
+			};
 	case sanguis::client::perk::choosable_state::parent_level:
 	case sanguis::client::perk::choosable_state::player_level:
 		return
-			sge::image::color::predef::red();
+			sanguis::gui::text_color{
+				sge::image::color::predef::red()
+			};
 	case sanguis::client::perk::choosable_state::max_level:
 		return
-			sge::image::color::predef::blue();
+			sanguis::gui::text_color{
+				sge::image::color::predef::blue()
+			};
 	case sanguis::client::perk::choosable_state::level_up:
 		return
-			sge::image::color::predef::black();
+			sanguis::gui::text_color{
+				sge::image::color::predef::black()
+			};
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;

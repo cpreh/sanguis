@@ -11,6 +11,7 @@
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/max_health_valid.hpp>
 #include <sanguis/client/optional_health_pair.hpp>
+#include <sanguis/client/gui/default_text_color.hpp>
 #include <sanguis/client/gui/to_duration.hpp>
 #include <sanguis/client/gui/hud/object.hpp>
 #include <sanguis/client/gui/hud/weapon_details.hpp>
@@ -21,7 +22,6 @@
 #include <sanguis/gui/fill_level.hpp>
 #include <sanguis/gui/gravity.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
-#include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/bar.hpp>
 #include <sanguis/gui/widget/reference.hpp>
@@ -32,7 +32,6 @@
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
 #include <sge/image/color/predef.hpp>
-#include <sge/image/color/any/object.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/context/ffp.hpp>
@@ -101,9 +100,7 @@ sanguis::client::gui::hud::object::object(
 		_renderer,
 		_font,
 		sge::font::string(),
-		sanguis::gui::text_color(
-			sge::image::color::predef::black()
-		),
+		sanguis::client::gui::default_text_color(),
 		sanguis::gui::optional_needed_width()
 	),
 	player_name_text_(
@@ -111,9 +108,7 @@ sanguis::client::gui::hud::object::object(
 		_renderer,
 		_font,
 		sge::font::string(),
-		sanguis::gui::text_color(
-			sge::image::color::predef::black()
-		),
+		sanguis::client::gui::default_text_color(),
 		sanguis::gui::optional_needed_width()
 	),
 	name_level_gap_(
@@ -124,9 +119,7 @@ sanguis::client::gui::hud::object::object(
 		_renderer,
 		_font,
 		sge::font::string(),
-		sanguis::gui::text_color(
-			sge::image::color::predef::black()
-		),
+		sanguis::client::gui::default_text_color(),
 		sanguis::gui::optional_needed_width()
 	),
 	top_container_(

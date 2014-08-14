@@ -4,6 +4,7 @@
 #include <sanguis/duration_second.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/weapon_description.hpp>
+#include <sanguis/client/gui/default_text_color.hpp>
 #include <sanguis/client/gui/hud/weapon_widget.hpp>
 #include <sanguis/client/load/hud/context.hpp>
 #include <sanguis/gui/context_fwd.hpp>
@@ -69,9 +70,7 @@ sanguis::client::gui::hud::weapon_widget::weapon_widget(
 		this->make_text(
 			_description.magazine_remaining()
 		),
-		sanguis::gui::text_color(
-			sge::image::color::predef::black()
-		),
+		sanguis::client::gui::default_text_color(),
 		sanguis::gui::optional_needed_width()
 	),
 	cooldown_bar_{

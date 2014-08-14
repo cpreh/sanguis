@@ -21,7 +21,6 @@
 #include <sanguis/gui/widget/text.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/font/object_fwd.hpp>
-#include <sge/image/color/any/object.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
@@ -64,9 +63,7 @@ sanguis::client::gui::perk::line::line(
 		sanguis::client::gui::perk::make_description(
 			_info
 		),
-		sanguis::gui::text_color(
-			this->text_color()
-		),
+		this->text_color(),
 		sanguis::gui::optional_needed_width(
 			sanguis::gui::needed_width(
 				400 // TODO!
@@ -144,13 +141,11 @@ void
 sanguis::client::gui::perk::line::on_level_change()
 {
 	text_.text_color(
-		sanguis::gui::text_color(
-			this->text_color()
-		)
+		this->text_color()
 	);
 }
 
-sge::image::color::any::object const
+sanguis::gui::text_color
 sanguis::client::gui::perk::line::text_color() const
 {
 	return

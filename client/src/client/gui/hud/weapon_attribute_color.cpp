@@ -1,15 +1,15 @@
 #include <sanguis/weapon_attribute_type.hpp>
+#include <sanguis/client/gui/default_text_color.hpp>
 #include <sanguis/client/gui/hud/weapon_attribute_color.hpp>
-#include <sge/image/color/predef.hpp>
-#include <sge/image/color/any/object.hpp>
+#include <sanguis/gui/text_color.hpp>
 
 
-sge::image::color::any::object const
+sanguis::gui::text_color
 sanguis::client::gui::hud::weapon_attribute_color(
 	sanguis::weapon_attribute_type const _type
 )
 {
 	// TODO
 	return
-		sge::image::color::predef::black();
+		sanguis::client::gui::default_text_color();
 }

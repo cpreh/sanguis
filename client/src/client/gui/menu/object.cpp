@@ -1,5 +1,6 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/client/config/settings/object.hpp>
+#include <sanguis/client/gui/default_text_color.hpp>
 #include <sanguis/client/gui/to_duration.hpp>
 #include <sanguis/client/gui/menu/object.hpp>
 #include <sanguis/client/load/resource/texture_identifier.hpp>
@@ -8,7 +9,6 @@
 #include <sanguis/gui/needed_width_from_strings.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/string_container.hpp>
-#include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
@@ -123,9 +123,7 @@ sanguis::client::gui::menu::object::object(
 		_renderer,
 		_font,
 		SGE_FONT_LIT("Name: "),
-		sanguis::gui::text_color(
-			sge::image::color::predef::black()
-		)
+		sanguis::client::gui::default_text_color()
 	),
 	player_name_edit_(
 		_gui_style,
@@ -166,9 +164,7 @@ sanguis::client::gui::menu::object::object(
 		_renderer,
 		_font,
 		SGE_FONT_LIT("Hostname: "),
-		sanguis::gui::text_color(
-			sge::image::color::predef::black()
-		)
+		sanguis::client::gui::default_text_color()
 	),
 	hostname_edit_(
 		_gui_style,
@@ -209,9 +205,7 @@ sanguis::client::gui::menu::object::object(
 		_renderer,
 		_font,
 		SGE_FONT_LIT("Port: "),
-		sanguis::gui::text_color(
-			sge::image::color::predef::black()
-		)
+		sanguis::client::gui::default_text_color()
 	),
 	port_edit_(
 		_gui_style,
@@ -252,9 +246,7 @@ sanguis::client::gui::menu::object::object(
 		_renderer,
 		_font,
 		SGE_FONT_LIT(""),
-		sanguis::gui::text_color(
-			sge::image::color::predef::black()
-		),
+		sanguis::client::gui::default_text_color(),
 		sanguis::gui::optional_needed_width()
 	),
 	connect_button_(

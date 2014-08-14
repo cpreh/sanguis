@@ -1,11 +1,11 @@
 #include <sanguis/weapon_attribute.hpp>
 #include <sanguis/client/draw2d/scene/hover/weapon_attribute.hpp>
+#include <sanguis/client/gui/default_text_color.hpp>
 #include <sanguis/client/gui/hud/weapon_attribute_color.hpp>
 #include <sanguis/client/gui/hud/weapon_attribute_name.hpp>
 #include <sanguis/client/gui/hud/weapon_attribute_value_to_string.hpp>
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/default_aspect.hpp>
-#include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/base_fwd.hpp>
 #include <sanguis/gui/widget/reference.hpp>
@@ -14,7 +14,6 @@
 #include <sge/font/lit.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
-#include <sge/image/color/predef.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
@@ -62,9 +61,7 @@ sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 			:
 				_attribute.base().get()
 		),
-		sanguis::gui::text_color(
-			sge::image::color::predef::black()
-		)
+		sanguis::client::gui::default_text_color()
 	},
 	diff_{
 		_gui_style,
@@ -72,9 +69,7 @@ sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 		_font,
 		// TODO:
 		sge::font::string(),
-		sanguis::gui::text_color(
-			sge::image::color::predef::black()
-		)
+		sanguis::client::gui::default_text_color()
 	},
 	container_{
 		_gui_context,

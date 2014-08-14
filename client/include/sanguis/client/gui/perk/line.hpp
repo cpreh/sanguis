@@ -6,12 +6,12 @@
 #include <sanguis/client/perk/info_fwd.hpp>
 #include <sanguis/client/perk/state_fwd.hpp>
 #include <sanguis/gui/context_fwd.hpp>
+#include <sanguis/gui/text_color_fwd.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/button.hpp>
 #include <sanguis/gui/widget/text.hpp>
 #include <sge/font/object_fwd.hpp>
-#include <sge/image/color/any/object_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
@@ -52,7 +52,7 @@ private:
 	void
 	on_level_change();
 
-	sge::image::color::any::object const
+	sanguis::gui::text_color
 	text_color() const;
 
 	sanguis::perk_type const perk_type_;

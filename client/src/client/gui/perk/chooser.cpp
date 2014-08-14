@@ -1,4 +1,5 @@
 #include <sanguis/duration.hpp>
+#include <sanguis/client/gui/default_text_color.hpp>
 #include <sanguis/client/gui/to_duration.hpp>
 #include <sanguis/client/gui/perk/chooser.hpp>
 #include <sanguis/client/gui/perk/state.hpp>
@@ -6,7 +7,6 @@
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/gravity.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
-#include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
@@ -15,7 +15,6 @@
 #include <sge/font/lit.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
-#include <sge/image/color/predef.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
@@ -69,9 +68,7 @@ sanguis::client::gui::perk::chooser::chooser(
 		_renderer,
 		_font,
 		this->make_top_text(),
-		sanguis::gui::text_color(
-			sge::image::color::predef::black()
-		),
+		sanguis::client::gui::default_text_color(),
 		sanguis::gui::optional_needed_width()
 	),
 	gui_state_(

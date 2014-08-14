@@ -359,6 +359,7 @@ set(
 	include/sanguis/client/exp_for_next_level.hpp
 	include/sanguis/client/exp_value.hpp
 	include/sanguis/client/from_console_arg_list.hpp
+	include/sanguis/client/gui/default_text_color.hpp
 	include/sanguis/client/gui/hud/object.hpp
 	include/sanguis/client/gui/hud/object_fwd.hpp
 	include/sanguis/client/gui/hud/scoped_details.hpp
@@ -703,6 +704,7 @@ set(
 	src/client/events/render.cpp
 	src/client/events/tick.cpp
 	src/client/from_console_arg_list.cpp
+	src/client/gui/default_text_color.cpp
 	src/client/gui/hud/object.cpp
 	src/client/gui/hud/scoped_details.cpp
 	src/client/gui/hud/weapon_attribute_color.cpp
