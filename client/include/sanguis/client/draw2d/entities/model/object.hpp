@@ -6,14 +6,13 @@
 #include <sanguis/weapon_status.hpp>
 #include <sanguis/client/health.hpp>
 #include <sanguis/client/max_health.hpp>
-#include <sanguis/client/optional_health_pair_fwd.hpp>
+#include <sanguis/client/optional_health_pair.hpp>
 #include <sanguis/client/draw2d/speed_fwd.hpp>
 #include <sanguis/client/draw2d/entities/container.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_health.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_weapon.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_time_fwd.hpp>
-#include <sanguis/client/draw2d/entities/model/healthbar_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/object_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/part_fwd.hpp>
@@ -168,9 +167,7 @@ private:
 
 	sanguis::weapon_status weapon_status_;
 
-	std::unique_ptr<
-		sanguis::client::draw2d::entities::model::healthbar
-	> healthbar_;
+	sanguis::client::optional_health_pair health_pair_;
 
 	std::unique_ptr<
 		sanguis::client::draw2d::entities::model::decay_time

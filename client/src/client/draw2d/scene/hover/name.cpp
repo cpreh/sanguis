@@ -1,5 +1,4 @@
 #include <sanguis/client/draw2d/entities/hover/name.hpp>
-#include <sanguis/client/draw2d/scene/hover/base.hpp>
 #include <sanguis/client/draw2d/scene/hover/name.hpp>
 #include <sanguis/client/draw2d/scene/hover/parameters.hpp>
 #include <sge/font/from_fcppt_string.hpp>
@@ -26,7 +25,6 @@ sanguis::client::draw2d::scene::hover::name::name(
 	sanguis::client::draw2d::entities::hover::name const &_name
 )
 :
-	sanguis::client::draw2d::scene::hover::base(),
 	text_(
 		_parameters.renderer(),
 		_parameters.font(),
@@ -61,6 +59,15 @@ sanguis::client::draw2d::scene::hover::name::name(
 		)
 	);
 }
+
+sanguis::client::draw2d::scene::hover::name::name(
+	name &&
+) = default;
+
+sanguis::client::draw2d::scene::hover::name &
+sanguis::client::draw2d::scene::hover::name::operator=(
+	name &&
+) = default;
 
 sanguis::client::draw2d::scene::hover::name::~name()
 {

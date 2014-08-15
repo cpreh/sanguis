@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SPRITE_SYSTEM_IMPL_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SPRITE_SYSTEM_IMPL_HPP_INCLUDED
 
+#include <sanguis/client/draw2d/sprite/buffers_impl.hpp>
 #include <sanguis/client/draw2d/sprite/order.hpp>
 #include <sanguis/client/draw2d/sprite/state.hpp>
 #include <sanguis/client/draw2d/sprite/state_choices.hpp>
@@ -9,8 +10,6 @@
 #include <sge/renderer/device/core_fwd.hpp>
 #include <sge/sprite/buffers/option.hpp>
 #include <sge/sprite/buffers/parameters.hpp>
-#include <sge/sprite/buffers/single_impl.hpp>
-#include <sge/sprite/buffers/with_declaration_impl.hpp>
 #include <sge/sprite/compare/default.hpp>
 #include <sge/sprite/intrusive/ordered/collection_impl.hpp>
 #include <sge/sprite/process/geometry_options.hpp>

@@ -23,7 +23,7 @@ namespace hover
 typedef
 fcppt::variant::object<
 	boost::mpl::vector2<
-		sanguis::client::draw2d::entities::hover::name,
+		sanguis::client::draw2d::entities::hover::name_and_health,
 		sanguis::client::draw2d::entities::hover::weapon
 	>
 >

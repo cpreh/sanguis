@@ -1,7 +1,9 @@
+#include <sanguis/client/draw2d/entities/hover/name_and_health_fwd.hpp>
 #include <sanguis/client/draw2d/entities/hover/info.hpp>
+#include <sanguis/client/draw2d/entities/hover/weapon_fwd.hpp>
 #include <sanguis/client/draw2d/scene/hover/base_unique_ptr.hpp>
 #include <sanguis/client/draw2d/scene/hover/create.hpp>
-#include <sanguis/client/draw2d/scene/hover/name.hpp>
+#include <sanguis/client/draw2d/scene/hover/name_and_health.hpp>
 #include <sanguis/client/draw2d/scene/hover/parameters.hpp>
 #include <sanguis/client/draw2d/scene/hover/weapon.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -38,15 +40,15 @@ sanguis::client::draw2d::scene::hover::create(
 
 		result_type
 		operator()(
-			sanguis::client::draw2d::entities::hover::name const &_name
+			sanguis::client::draw2d::entities::hover::name_and_health const &_name_and_health
 		) const
 		{
 			return
 				fcppt::make_unique_ptr<
-					sanguis::client::draw2d::scene::hover::name
+					sanguis::client::draw2d::scene::hover::name_and_health
 				>(
 					parameters_,
-					_name
+					_name_and_health
 				);
 		}
 

@@ -95,7 +95,6 @@ sanguis::client::draw2d::scene::message_environment::model_parameters() const
 			object_.diff_clock(),
 			object_.random_generator(),
 			object_.sound_manager(),
-			object_.colored_system(),
 			object_.normal_system(),
 			object_.load_collection()
 		);

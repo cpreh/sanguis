@@ -4,7 +4,6 @@
 #include <sanguis/client/draw2d/sprite/type_choices.hpp>
 #include <sanguis/client/draw2d/sprite/colored/choices_fwd.hpp>
 #include <sge/sprite/config/choices.hpp>
-#include <sge/sprite/config/intrusive.hpp>
 #include <sge/sprite/config/normal_size.hpp>
 #include <sge/sprite/config/with_color.hpp>
 

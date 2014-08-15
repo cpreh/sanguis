@@ -15,7 +15,6 @@
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_time.hpp>
 #include <sanguis/client/draw2d/entities/model/expand_orders.hpp>
-#include <sanguis/client/draw2d/entities/model/healthbar.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
@@ -67,24 +66,19 @@ sanguis::client::draw2d::entities::model::object::object(
 	weapon_status_(
 		sanguis::weapon_status::nothing
 	),
-	healthbar_(
+	health_pair_{
 		_parameters.health_pair()
 		&&
 		sanguis::client::health_valid(
 			_parameters.health_pair()->health()
 		)
 		?
-			fcppt::make_unique_ptr<
-				sanguis::client::draw2d::entities::model::healthbar
-			>(
-				_parameters.load_parameters().colored_system(),
-				*_parameters.health_pair()
-			)
+			sanguis::client::optional_health_pair{
+				_parameters.health_pair()
+			}
 		:
-			std::unique_ptr<
-				sanguis::client::draw2d::entities::model::healthbar
-			>()
-	),
+			sanguis::client::optional_health_pair{}
+	},
 	decay_time_(),
 	decay_option_(
 		_parameters.decay_option()
@@ -138,14 +132,6 @@ void
 sanguis::client::draw2d::entities::model::object::update()
 {
 	sanguis::client::draw2d::entities::container::update();
-
-	if(
-		healthbar_
-	)
-		healthbar_->attach_to(
-			this->master().pos(),
-			this->master().size()
-		);
 
 	for(
 		auto &cur_part
@@ -237,7 +223,7 @@ sanguis::client::draw2d::entities::model::object::on_die()
 				)
 		);
 
-	healthbar_.reset();
+	health_pair_.reset();
 
 	this->change_animation();
 
@@ -303,12 +289,12 @@ sanguis::client::draw2d::entities::model::object::health(
 			_health
 		)
 	)
-		healthbar_.reset();
+		health_pair_.reset();
 
 	if(
-		healthbar_
+		health_pair_
 	)
-		healthbar_->health(
+		health_pair_->health(
 			_health
 		);
 }
@@ -319,9 +305,9 @@ sanguis::client::draw2d::entities::model::object::max_health(
 )
 {
 	if(
-		healthbar_
+		health_pair_
 	)
-		healthbar_->max_health(
+		health_pair_->max_health(
 			_max_health
 		);
 }
@@ -330,14 +316,7 @@ sanguis::client::optional_health_pair const
 sanguis::client::draw2d::entities::model::object::health_pair() const
 {
 	return
-		healthbar_
-		?
-			sanguis::client::optional_health_pair(
-				healthbar_->health_pair()
-			)
-		:
-			sanguis::client::optional_health_pair()
-		;
+		health_pair_;
 }
 
 void

@@ -1,12 +1,11 @@
-#ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_FRIEND_HPP_INCLUDED
-#define SANGUIS_CLIENT_DRAW2D_ENTITIES_FRIEND_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_OTHER_PLAYER_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_ENTITIES_OTHER_PLAYER_HPP_INCLUDED
 
 #include <sanguis/aura_type_vector.hpp>
 #include <sanguis/buff_type_vector.hpp>
-#include <sanguis/friend_type_fwd.hpp>
 #include <sanguis/client/health_pair_fwd.hpp>
-#include <sanguis/client/draw2d/entities/order_vector.hpp>
-#include <sanguis/client/draw2d/entities/with_buffs_auras_model.hpp>
+#include <sanguis/client/draw2d/entities/player.hpp>
+#include <sanguis/client/draw2d/entities/hover/name.hpp>
 #include <sanguis/client/draw2d/entities/hover/optional_info_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
@@ -22,30 +21,31 @@ namespace draw2d
 namespace entities
 {
 
-class friend_
+class other_player
 :
-	public sanguis::client::draw2d::entities::with_buffs_auras_model
+	public sanguis::client::draw2d::entities::player
 {
 	FCPPT_NONCOPYABLE(
-		friend_
+		other_player
 	);
 public:
-	friend_(
-		sanguis::client::draw2d::entities::model::load_parameters const &,
+	other_player(
 		sanguis::client::load::auras::context &,
-		sanguis::friend_type,
+		sanguis::client::draw2d::entities::model::load_parameters const &,
 		sanguis::aura_type_vector const &,
 		sanguis::buff_type_vector const &,
-		sanguis::client::draw2d::entities::order_vector const &,
-		sanguis::client::health_pair
+		sanguis::client::health_pair,
+		sanguis::client::draw2d::entities::hover::name const &
 	);
 
-	~friend_()
+	~other_player()
 	override;
 private:
 	sanguis::client::draw2d::entities::hover::optional_info
 	hover() const
 	override;
+
+	sanguis::client::draw2d::entities::hover::name const name_;
 };
 
 }

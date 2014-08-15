@@ -24,6 +24,16 @@ public:
 
 	sanguis::client::max_health const
 	max_health() const;
+
+	void
+	health(
+		sanguis::client::health
+	);
+
+	void
+	max_health(
+		sanguis::client::max_health
+	);
 private:
 	sanguis::client::health health_;
 

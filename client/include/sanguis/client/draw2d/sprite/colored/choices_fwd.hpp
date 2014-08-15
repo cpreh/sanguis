@@ -4,7 +4,6 @@
 #include <sanguis/client/draw2d/sprite/type_choices_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/colored/color_format.hpp>
 #include <sge/sprite/config/choices_fwd.hpp>
-#include <sge/sprite/config/intrusive_fwd.hpp>
 #include <sge/sprite/config/normal_size_fwd.hpp>
 #include <sge/sprite/config/with_color_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -26,11 +25,10 @@ namespace colored
 typedef sge::sprite::config::choices<
 	sanguis::client::draw2d::sprite::type_choices,
 	sge::sprite::config::normal_size,
-	boost::mpl::vector2<
+	boost::mpl::vector1<
 		sge::sprite::config::with_color<
 			sanguis::client::draw2d::sprite::colored::color_format
-		>,
-		sge::sprite::config::intrusive
+		>
 	>
 > choices;
 

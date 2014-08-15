@@ -29,7 +29,6 @@
 #include <sanguis/client/draw2d/scene/world/object_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_decl.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
-#include <sanguis/client/draw2d/sprite/colored/system_decl.hpp>
 #include <sanguis/client/draw2d/sprite/state_decl.hpp>
 #include <sanguis/client/load/context_fwd.hpp>
 #include <sanguis/client/load/auras/context.hpp>
@@ -181,9 +180,6 @@ private:
 	sanguis::client::draw2d::sprite::normal::system &
 	normal_system();
 
-	sanguis::client::draw2d::sprite::colored::system &
-	colored_system();
-
 	sanguis::client::draw2d::sprite::client::system &
 	client_system();
 
@@ -222,8 +218,6 @@ private:
 	sanguis::client::draw2d::sprite::state sprite_states_;
 
 	sanguis::client::draw2d::sprite::normal::system normal_system_;
-
-	sanguis::client::draw2d::sprite::colored::system colored_system_;
 
 	sanguis::client::draw2d::sprite::client::system client_system_;
 

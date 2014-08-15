@@ -1,7 +1,7 @@
 #include <sanguis/aura_type_vector.hpp>
 #include <sanguis/buff_type_vector.hpp>
 #include <sanguis/client/health_pair.hpp>
-#include <sanguis/client/draw2d/entities/player.hpp>
+#include <sanguis/client/draw2d/entities/other_player.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/hover/name_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
@@ -23,7 +23,7 @@ sanguis::client::draw2d::factory::player(
 	return
 		sanguis::client::draw2d::entities::unique_ptr(
 			fcppt::make_unique_ptr<
-				sanguis::client::draw2d::entities::player
+				sanguis::client::draw2d::entities::other_player
 			>(
 				_auras_load_context,
 				_parameters,

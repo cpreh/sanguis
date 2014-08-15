@@ -93,9 +93,13 @@ set(
 	include/sanguis/client/draw2d/entities/hover/info.hpp
 	include/sanguis/client/draw2d/entities/hover/info_fwd.hpp
 	include/sanguis/client/draw2d/entities/hover/name.hpp
+	include/sanguis/client/draw2d/entities/hover/name_and_health.hpp
+	include/sanguis/client/draw2d/entities/hover/name_and_health_fwd.hpp
 	include/sanguis/client/draw2d/entities/hover/name_fwd.hpp
 	include/sanguis/client/draw2d/entities/hover/optional_info.hpp
 	include/sanguis/client/draw2d/entities/hover/optional_info_fwd.hpp
+	include/sanguis/client/draw2d/entities/hover/optional_name.hpp
+	include/sanguis/client/draw2d/entities/hover/optional_name_fwd.hpp
 	include/sanguis/client/draw2d/entities/hover/variant.hpp
 	include/sanguis/client/draw2d/entities/hover/variant_fwd.hpp
 	include/sanguis/client/draw2d/entities/hover/weapon.hpp
@@ -114,8 +118,6 @@ set(
 	include/sanguis/client/draw2d/entities/model/decay_time.hpp
 	include/sanguis/client/draw2d/entities/model/decay_time_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/expand_orders.hpp
-	include/sanguis/client/draw2d/entities/model/healthbar.hpp
-	include/sanguis/client/draw2d/entities/model/healthbar_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/load_parameters.hpp
 	include/sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/loop_method.hpp
@@ -128,6 +130,7 @@ set(
 	include/sanguis/client/draw2d/entities/model/part.hpp
 	include/sanguis/client/draw2d/entities/model/part_fwd.hpp
 	include/sanguis/client/draw2d/entities/order_vector.hpp
+	include/sanguis/client/draw2d/entities/other_player.hpp
 	include/sanguis/client/draw2d/entities/own.hpp
 	include/sanguis/client/draw2d/entities/own_fwd.hpp
 	include/sanguis/client/draw2d/entities/own_player.hpp
@@ -197,7 +200,10 @@ set(
 	include/sanguis/client/draw2d/scene/hover/base_fwd.hpp
 	include/sanguis/client/draw2d/scene/hover/base_unique_ptr.hpp
 	include/sanguis/client/draw2d/scene/hover/create.hpp
+	include/sanguis/client/draw2d/scene/hover/healthbar.hpp
+	include/sanguis/client/draw2d/scene/hover/healthbar_fwd.hpp
 	include/sanguis/client/draw2d/scene/hover/name.hpp
+	include/sanguis/client/draw2d/scene/hover/name_and_health.hpp
 	include/sanguis/client/draw2d/scene/hover/parameters.hpp
 	include/sanguis/client/draw2d/scene/hover/parameters_fwd.hpp
 	include/sanguis/client/draw2d/scene/hover/weapon.hpp
@@ -267,6 +273,9 @@ set(
 	include/sanguis/client/draw2d/sprite/animation/texture_decl.hpp
 	include/sanguis/client/draw2d/sprite/animation/texture_fwd.hpp
 	include/sanguis/client/draw2d/sprite/animation/texture_impl.hpp
+	include/sanguis/client/draw2d/sprite/buffers_decl.hpp
+	include/sanguis/client/draw2d/sprite/buffers_fwd.hpp
+	include/sanguis/client/draw2d/sprite/buffers_impl.hpp
 	include/sanguis/client/draw2d/sprite/center.hpp
 	include/sanguis/client/draw2d/sprite/center_fwd.hpp
 	include/sanguis/client/draw2d/sprite/client/choices.hpp
@@ -290,8 +299,6 @@ set(
 	include/sanguis/client/draw2d/sprite/colored/object_fwd.hpp
 	include/sanguis/client/draw2d/sprite/colored/parameters.hpp
 	include/sanguis/client/draw2d/sprite/colored/parameters_fwd.hpp
-	include/sanguis/client/draw2d/sprite/colored/system_decl.hpp
-	include/sanguis/client/draw2d/sprite/colored/system_fwd.hpp
 	include/sanguis/client/draw2d/sprite/dim.hpp
 	include/sanguis/client/draw2d/sprite/dim_fwd.hpp
 	include/sanguis/client/draw2d/sprite/float_unit.hpp
@@ -629,6 +636,7 @@ set(
 	src/client/draw2d/entities/explosion.cpp
 	src/client/draw2d/entities/friend.cpp
 	src/client/draw2d/entities/hover/info.cpp
+	src/client/draw2d/entities/hover/name_and_health.cpp
 	src/client/draw2d/entities/ifaces/with_auras.cpp
 	src/client/draw2d/entities/ifaces/with_buffs.cpp
 	src/client/draw2d/entities/ifaces/with_center.cpp
@@ -640,13 +648,13 @@ set(
 	src/client/draw2d/entities/model/clamp_orientation.cpp
 	src/client/draw2d/entities/model/decay_time.cpp
 	src/client/draw2d/entities/model/expand_orders.cpp
-	src/client/draw2d/entities/model/healthbar.cpp
 	src/client/draw2d/entities/model/load_parameters.cpp
 	src/client/draw2d/entities/model/loop_method.cpp
 	src/client/draw2d/entities/model/object.cpp
 	src/client/draw2d/entities/model/orientation.cpp
 	src/client/draw2d/entities/model/parameters.cpp
 	src/client/draw2d/entities/model/part.cpp
+	src/client/draw2d/entities/other_player.cpp
 	src/client/draw2d/entities/own.cpp
 	src/client/draw2d/entities/own_player.cpp
 	src/client/draw2d/entities/player.cpp
@@ -675,7 +683,9 @@ set(
 	src/client/draw2d/scene/control_environment.cpp
 	src/client/draw2d/scene/hover/base.cpp
 	src/client/draw2d/scene/hover/create.cpp
+	src/client/draw2d/scene/hover/healthbar.cpp
 	src/client/draw2d/scene/hover/name.cpp
+	src/client/draw2d/scene/hover/name_and_health.cpp
 	src/client/draw2d/scene/hover/parameters.cpp
 	src/client/draw2d/scene/hover/weapon.cpp
 	src/client/draw2d/scene/hover/weapon_attribute.cpp
@@ -690,7 +700,6 @@ set(
 	src/client/draw2d/scene/world/to_non_connecting_tile_texture.cpp
 	src/client/draw2d/speed_is_null.cpp
 	src/client/draw2d/sprite/client/system.cpp
-	src/client/draw2d/sprite/colored/system.cpp
 	src/client/draw2d/sprite/index.cpp
 	src/client/draw2d/sprite/normal/system.cpp
 	src/client/draw2d/translate/scalar_from_client.cpp

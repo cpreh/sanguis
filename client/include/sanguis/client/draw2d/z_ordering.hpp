@@ -22,9 +22,7 @@ enum class z_ordering
 	bullet,
 	pickup,
 	player_upper,
-	flare,
-	healthbar_lower,
-	healthbar_upper
+	flare
 };
 
 }

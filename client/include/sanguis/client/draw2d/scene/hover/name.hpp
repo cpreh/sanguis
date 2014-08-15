@@ -2,7 +2,6 @@
 #define SANGUIS_CLIENT_DRAW2D_SCENE_HOVER_NAME_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/entities/hover/name_fwd.hpp>
-#include <sanguis/client/draw2d/scene/hover/base.hpp>
 #include <sanguis/client/draw2d/scene/hover/parameters_fwd.hpp>
 #include <sge/font/draw/static_text.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
@@ -21,8 +20,6 @@ namespace hover
 {
 
 class name
-:
-	public sanguis::client::draw2d::scene::hover::base
 {
 	FCPPT_NONCOPYABLE(
 		name
@@ -33,15 +30,22 @@ public:
 		sanguis::client::draw2d::entities::hover::name const &
 	);
 
-	~name()
-	override;
-private:
+	name(
+		name &&
+	);
+
+	name &
+	operator=(
+		name &&
+	);
+
+	~name();
+
 	void
 	draw(
 		sge::renderer::context::ffp &
-	)
-	override;
-
+	);
+private:
 	sge::font::draw::static_text text_;
 };
 

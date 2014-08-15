@@ -30,3 +30,21 @@ sanguis::client::health_pair::max_health() const
 	return
 		max_health_;
 }
+
+void
+sanguis::client::health_pair::health(
+	sanguis::client::health const _health
+)
+{
+	health_ =
+		_health;
+}
+
+void
+sanguis::client::health_pair::max_health(
+	sanguis::client::max_health const _max_health
+)
+{
+	max_health_ =
+		_max_health;
+}

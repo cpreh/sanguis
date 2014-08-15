@@ -11,9 +11,6 @@
 #include <sanguis/client/draw2d/entities/with_auras_model_parameters.hpp>
 #include <sanguis/client/draw2d/entities/with_buffs_auras_model.hpp>
 #include <sanguis/client/draw2d/entities/with_buffs_auras_model_parameters.hpp>
-#include <sanguis/client/draw2d/entities/hover/info.hpp>
-#include <sanguis/client/draw2d/entities/hover/name.hpp>
-#include <sanguis/client/draw2d/entities/hover/optional_info.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
 #include <sanguis/client/draw2d/entities/model/name.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
@@ -50,8 +47,7 @@ sanguis::client::draw2d::entities::player::player(
 	sanguis::client::draw2d::entities::model::load_parameters const &_load_parameters,
 	sanguis::aura_type_vector const &_auras,
 	sanguis::buff_type_vector const &_buffs,
-	sanguis::client::health_pair const _health_pair,
-	sanguis::client::draw2d::entities::hover::name const &_name
+	sanguis::client::health_pair const _health_pair
 )
 :
 	sanguis::client::draw2d::entities::with_buffs_auras_model(
@@ -81,9 +77,6 @@ sanguis::client::draw2d::entities::player::player(
 				)
 			)
 		)
-	),
-	name_(
-		_name
 	)
 {
 }
@@ -190,21 +183,4 @@ sanguis::client::draw2d::entities::player::bounding_dim() const
 		this->at(
 			top
 		).size();
-}
-
-sanguis::client::draw2d::entities::hover::optional_info
-sanguis::client::draw2d::entities::player::hover() const
-{
-	// TODO: Move name somewhere else
-	return
-		name_.get().empty()
-		?
-			sanguis::client::draw2d::entities::hover::optional_info()
-		:
-			sanguis::client::draw2d::entities::hover::optional_info(
-				sanguis::client::draw2d::entities::hover::info(
-					name_
-				)
-			)
-		;
 }

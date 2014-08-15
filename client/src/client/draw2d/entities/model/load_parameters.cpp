@@ -2,7 +2,6 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
-#include <sanguis/client/draw2d/sprite/colored/system_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
 #include <sanguis/client/load/model/collection_fwd.hpp>
 
@@ -11,7 +10,6 @@ sanguis::client::draw2d::entities::model::load_parameters::load_parameters(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::random_generator &_random_generator,
 	sanguis::client::sound_manager &_sound_manager,
-	sanguis::client::draw2d::sprite::colored::system &_colored_system,
 	sanguis::client::draw2d::sprite::normal::system &_normal_system,
 	sanguis::client::load::model::collection const &_collection
 )
@@ -24,9 +22,6 @@ sanguis::client::draw2d::entities::model::load_parameters::load_parameters(
 	),
 	sound_manager_(
 		_sound_manager
-	),
-	colored_system_(
-		_colored_system
 	),
 	normal_system_(
 		_normal_system
@@ -53,12 +48,6 @@ sanguis::random_generator &
 sanguis::client::draw2d::entities::model::load_parameters::random_generator() const
 {
 	return random_generator_;
-}
-
-sanguis::client::draw2d::sprite::colored::system &
-sanguis::client::draw2d::entities::model::load_parameters::colored_system() const
-{
-	return colored_system_;
 }
 
 sanguis::client::draw2d::sprite::normal::system &

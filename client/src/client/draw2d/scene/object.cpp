@@ -41,7 +41,6 @@
 #include <sanguis/client/draw2d/sprite/state_choices.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_decl.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
-#include <sanguis/client/draw2d/sprite/colored/system_decl.hpp>
 #include <sanguis/client/load/context.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
 #include <sanguis/client/load/resource/context.hpp>
@@ -157,10 +156,6 @@ sanguis::client::draw2d::scene::object::object(
 		>()
 	),
 	normal_system_(
-		renderer_,
-		sprite_states_
-	),
-	colored_system_(
 		renderer_,
 		sprite_states_
 	),
@@ -528,19 +523,6 @@ sanguis::client::draw2d::scene::object::render_systems(
 		);
 
 	for(
-		auto const index
-		:
-		fcppt::make_enum_range_start_end(
-			sanguis::client::draw2d::z_ordering::healthbar_lower,
-			sanguis::client::draw2d::z_ordering::healthbar_upper
-		)
-	)
-		colored_system_.render(
-			_render_context,
-			index
-		);
-
-	for(
 		sanguis::client::draw2d::scene::hover::base_unique_ptr const &hover
 		:
 		hovers_
@@ -797,13 +779,6 @@ sanguis::client::draw2d::scene::object::normal_system()
 {
 	return
 		normal_system_;
-}
-
-sanguis::client::draw2d::sprite::colored::system &
-sanguis::client::draw2d::scene::object::colored_system()
-{
-	return
-		colored_system_;
 }
 
 sanguis::client::draw2d::sprite::client::system &
