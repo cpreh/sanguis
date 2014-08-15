@@ -177,10 +177,10 @@ private:
 	update_exp();
 
 	void
-	update_details();
+	create_details();
 
 	void
-	create_details();
+	destroy_details();
 
 	sanguis::diff_clock reload_clock_;
 
@@ -191,12 +191,6 @@ private:
 	sge::font::object &font_;
 
 	sge::renderer::device::ffp &renderer_;
-
-	sge::viewport::manager &viewport_manager_;
-
-	sge::input::keyboard::device &keyboard_;
-
-	sge::input::cursor::object &cursor_;
 
 	sanguis::client::exp exp_;
 

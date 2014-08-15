@@ -75,15 +75,6 @@ sanguis::client::gui::hud::object::object(
 	renderer_(
 		_renderer
 	),
-	viewport_manager_(
-		_viewport_manager
-	),
-	keyboard_(
-		_keyboard
-	),
-	cursor_(
-		_cursor
-	),
 	exp_(
 		0u
 	),
@@ -441,13 +432,6 @@ sanguis::client::gui::hud::object::update(
 	);
 
 	if(
-		weapon_details_
-	)
-		weapon_details_->update(
-			_duration
-		);
-
-	if(
 		!paused_
 	)
 		reload_clock_.update(
@@ -488,13 +472,6 @@ sanguis::client::gui::hud::object::draw(
 		_render_context,
 		gui_background_
 	);
-
-	if(
-		weapon_details_
-	)
-		weapon_details_->draw(
-			_render_context
-		);
 }
 
 void
@@ -506,8 +483,12 @@ sanguis::client::gui::hud::object::details(
 		_show
 	)
 		this->create_details();
-	else
-		weapon_details_.reset();
+	else if(
+		weapon_details_
+	)
+		this->destroy_details();
+
+	gui_area_.relayout();
 }
 
 sanguis::client::gui::hud::object::optional_weapon_widget_unique_ptr &
@@ -573,9 +554,16 @@ sanguis::client::gui::hud::object::update_weapon_widgets(
 		}
 	);
 
-	gui_area_.relayout();
+	if(
+		weapon_details_
+	)
+	{
+		this->destroy_details();
 
-	this->update_details();
+		this->create_details();
+	}
+
+	gui_area_.relayout();
 }
 
 template<
@@ -645,19 +633,6 @@ sanguis::client::gui::hud::object::update_exp()
 }
 
 void
-sanguis::client::gui::hud::object::update_details()
-{
-	if(
-		weapon_details_
-	)
-	{
-		weapon_details_.reset();
-
-		this->create_details();
-	}
-}
-
-void
 sanguis::client::gui::hud::object::create_details()
 {
 	auto const maybe_description(
@@ -681,17 +656,19 @@ sanguis::client::gui::hud::object::create_details()
 		}
 	);
 
+	FCPPT_ASSERT_PRE(
+		!weapon_details_
+	);
+
 	weapon_details_ =
 		fcppt::make_unique_ptr<
 			sanguis::client::gui::hud::weapon_details
 		>(
+			gui_context_,
 			resources_,
 			gui_style_,
 			renderer_,
-			viewport_manager_,
 			font_,
-			keyboard_,
-			cursor_,
 			maybe_description(
 				primary_weapon_
 			),
@@ -699,4 +676,25 @@ sanguis::client::gui::hud::object::create_details()
 				secondary_weapon_
 			)
 		);
+
+	main_widget_.push_back(
+		sanguis::gui::widget::reference_alignment_pair{
+			sanguis::gui::widget::reference{
+				weapon_details_->widget()
+			},
+			sge::rucksack::alignment::left_or_top
+		}
+	);
+}
+
+void
+sanguis::client::gui::hud::object::destroy_details()
+{
+	FCPPT_ASSERT_PRE(
+		weapon_details_
+	);
+
+	main_widget_.pop_back();
+
+	weapon_details_.reset();
 }
