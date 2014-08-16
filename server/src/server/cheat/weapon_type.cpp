@@ -18,16 +18,16 @@ sanguis::server::cheat::weapon_type(
 	case sanguis::cheat_type::exp:
 	case sanguis::cheat_type::heal:
 	case sanguis::cheat_type::kill:
-	case sanguis::cheat_type::monster_pickup:
+	case sanguis::cheat_type::friendly_spider:
 	case sanguis::cheat_type::monster_spawner:
 	case sanguis::cheat_type::perks:
 		break;
-	case sanguis::cheat_type::sentry_pickup:
+	case sanguis::cheat_type::sentry:
 		return
 			sanguis::weapon_type(
 				sanguis::secondary_weapon_type::sentry
 			);
-	case sanguis::cheat_type::grenade_pickup:
+	case sanguis::cheat_type::grenade:
 		return
 			sanguis::weapon_type(
 				sanguis::secondary_weapon_type::grenade

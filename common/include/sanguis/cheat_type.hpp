@@ -12,14 +12,14 @@ enum class cheat_type
 	exp,
 	heal,
 	kill,
-	monster_pickup,
+	friendly_spider,
 	monster_spawner,
 	perks,
 	rocket_launcher,
-	sentry_pickup,
+	sentry,
 	shotgun,
-	grenade_pickup,
-	fcppt_maximum = grenade_pickup
+	grenade,
+	fcppt_maximum = grenade
 };
 
 }

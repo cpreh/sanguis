@@ -60,7 +60,7 @@ sanguis::server::cheat::process(
 	case sanguis::cheat_type::kill:
 		_player.kill();
 		return;
-	case sanguis::cheat_type::monster_pickup:
+	case sanguis::cheat_type::friendly_spider:
 		environment->insert(
 			fcppt::make_unique_ptr<
 				sanguis::server::entities::pickups::monster
@@ -98,8 +98,8 @@ sanguis::server::cheat::process(
 		);
 
 		return;
-	case sanguis::cheat_type::sentry_pickup:
-	case sanguis::cheat_type::grenade_pickup:
+	case sanguis::cheat_type::sentry:
+	case sanguis::cheat_type::grenade:
 	case sanguis::cheat_type::shotgun:
 	case sanguis::cheat_type::rocket_launcher:
 		environment->insert(

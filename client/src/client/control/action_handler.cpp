@@ -110,12 +110,12 @@ sanguis::client::control::action_handler::action_handler(
 		)(
 			this->cheat_connection(
 				_console,
-				sanguis::cheat_type::monster_pickup,
+				sanguis::cheat_type::friendly_spider,
 				sge::console::callback::name(
-					SGE_FONT_LIT("monster_pickup")
+					SGE_FONT_LIT("friendly_spider")
 				),
 				sge::console::callback::short_description(
-					SGE_FONT_LIT("Spawn a monster pickup")
+					SGE_FONT_LIT("Spawn a friendly spider")
 				)
 			)
 		)(
@@ -143,23 +143,23 @@ sanguis::client::control::action_handler::action_handler(
 		)(
 			this->cheat_connection(
 				_console,
-				sanguis::cheat_type::sentry_pickup,
+				sanguis::cheat_type::sentry,
 				sge::console::callback::name(
-					SGE_FONT_LIT("sentry_pickup")
+					SGE_FONT_LIT("sentry")
 				),
 				sge::console::callback::short_description(
-					SGE_FONT_LIT("Spawn a sentry pickup")
+					SGE_FONT_LIT("Spawn a sentry")
 				)
 			)
 		)(
 			this->cheat_connection(
 				_console,
-				sanguis::cheat_type::grenade_pickup,
+				sanguis::cheat_type::grenade,
 				sge::console::callback::name(
-					SGE_FONT_LIT("grenade_pickup")
+					SGE_FONT_LIT("grenade")
 				),
 				sge::console::callback::short_description(
-					SGE_FONT_LIT("Spawn a grenade pickup")
+					SGE_FONT_LIT("Spawn a grenade")
 				)
 			)
 		)(
