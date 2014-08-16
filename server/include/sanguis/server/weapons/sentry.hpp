@@ -3,12 +3,12 @@
 
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
-#include <sanguis/server/health.hpp>
 #include <sanguis/server/weapons/attack_fwd.hpp>
 #include <sanguis/server/weapons/attack_result_fwd.hpp>
 #include <sanguis/server/weapons/sentry_parameters_fwd.hpp>
 #include <sanguis/server/weapons/sentry_weapon.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/weapons/attributes/health.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -46,9 +46,11 @@ private:
 	attributes() const
 	override;
 
-	sanguis::server::health const health_;
+	sanguis::server::weapons::attributes::health const health_;
 
 	sanguis::server::weapons::sentry_weapon const sentry_weapon_;
+
+	sanguis::weapon_attribute_vector const attributes_;
 };
 
 }

@@ -2,6 +2,7 @@
 #include <sanguis/friend_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/secondary_weapon_type.hpp>
+#include <sanguis/weapon_attribute_type.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/center.hpp>
@@ -26,9 +27,11 @@
 #include <sanguis/server/weapons/sentry_weapon.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/attributes/magazine_size.hpp>
+#include <sanguis/server/weapons/attributes/make.hpp>
 #include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
 #include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/algorithm/join.hpp>
 
 
 sanguis::server::weapons::sentry::sentry(
@@ -65,6 +68,9 @@ sanguis::server::weapons::sentry::sentry(
 	),
 	sentry_weapon_(
 		_sentry_weapon
+	),
+	attributes_(
+		_sentry_weapon.get()()->attributes()
 	)
 {
 }
@@ -93,7 +99,7 @@ sanguis::server::weapons::sentry::do_attack(
 								0.9f
 							)
 					}),
-					health_,
+					health_.value(),
 					sanguis::server::entities::movement_speed(
 						0.f
 					),
@@ -117,7 +123,14 @@ sanguis::server::weapons::sentry::do_attack(
 sanguis::weapon_attribute_vector
 sanguis::server::weapons::sentry::attributes() const
 {
-	// TODO:
 	return
-		sanguis::weapon_attribute_vector{};
+		fcppt::algorithm::join(
+			sanguis::weapon_attribute_vector{
+				sanguis::server::weapons::attributes::make(
+					sanguis::weapon_attribute_type::health,
+					health_
+				)
+			},
+			attributes_
+		);
 }

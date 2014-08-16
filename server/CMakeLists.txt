@@ -516,6 +516,8 @@ set(
 	include/sanguis/server/weapons/attributes/basic_impl.hpp
 	include/sanguis/server/weapons/attributes/damage.hpp
 	include/sanguis/server/weapons/attributes/damage_fwd.hpp
+	include/sanguis/server/weapons/attributes/health.hpp
+	include/sanguis/server/weapons/attributes/health_fwd.hpp
 	include/sanguis/server/weapons/attributes/magazine_size.hpp
 	include/sanguis/server/weapons/attributes/magazine_size_fwd.hpp
 	include/sanguis/server/weapons/attributes/make.hpp
@@ -879,6 +881,7 @@ set(
 	src/server/weapons/attributes/accuracy.cpp
 	src/server/weapons/attributes/aoe.cpp
 	src/server/weapons/attributes/damage.cpp
+	src/server/weapons/attributes/health.cpp
 	src/server/weapons/attributes/magazine_size.cpp
 	src/server/weapons/attributes/make_aoe.cpp
 	src/server/weapons/attributes/make_damage.cpp

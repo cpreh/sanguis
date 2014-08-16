@@ -1,12 +1,13 @@
 #ifndef SANGUIS_SERVER_WEAPONS_SENTRY_PARAMETERS_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_SENTRY_PARAMETERS_HPP_INCLUDED
 
-#include <sanguis/server/health.hpp>
+#include <sanguis/server/health_fwd.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/sentry_parameters_fwd.hpp>
+#include <sanguis/server/weapons/attributes/health.hpp>
 #include <fcppt/nonassignable.hpp>
 
 
@@ -31,7 +32,7 @@ public:
 		sanguis::server::weapons::magazine_size
 	);
 
-	sanguis::server::health const
+	sanguis::server::weapons::attributes::health const
 	health() const;
 
 	sanguis::server::weapons::backswing_time const
@@ -47,11 +48,11 @@ public:
 	magazine_size() const;
 
 	void
-	health(
+	extra_health(
 		sanguis::server::health
 	);
 private:
-	sanguis::server::health health_;
+	sanguis::server::weapons::attributes::health health_;
 
 	sanguis::server::weapons::backswing_time const backswing_time_;
 

@@ -105,6 +105,10 @@ public:
 
 	sanguis::weapon_description
 	description() const;
+
+	virtual
+	sanguis::weapon_attribute_vector
+	attributes() const = 0;
 protected:
 	virtual
 	sanguis::server::weapons::attack_result
@@ -120,6 +124,7 @@ protected:
 
 	sanguis::server::entities::with_weapon &
 	owner() const;
+
 private:
 	void
 	weapon_status(
@@ -130,10 +135,6 @@ private:
 	reload_time(
 		sanguis::duration
 	);
-
-	virtual
-	sanguis::weapon_attribute_vector
-	attributes() const = 0;
 
 	friend class sanguis::server::weapons::states::idle;
 	friend class sanguis::server::weapons::states::reloading;

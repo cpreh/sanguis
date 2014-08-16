@@ -4,6 +4,7 @@
 #include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/sentry_parameters.hpp>
+#include <sanguis/server/weapons/attributes/health.hpp>
 
 
 sanguis::server::weapons::sentry_parameters::sentry_parameters(
@@ -32,7 +33,7 @@ sanguis::server::weapons::sentry_parameters::sentry_parameters(
 {
 }
 
-sanguis::server::health const
+sanguis::server::weapons::attributes::health const
 sanguis::server::weapons::sentry_parameters::health() const
 {
 	return
@@ -68,10 +69,11 @@ sanguis::server::weapons::sentry_parameters::magazine_size() const
 }
 
 void
-sanguis::server::weapons::sentry_parameters::health(
+sanguis::server::weapons::sentry_parameters::extra_health(
 	sanguis::server::health const _health
 )
 {
-	health_ =
-		_health;
+	health_.extra(
+		_health
+	);
 }

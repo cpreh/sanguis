@@ -29,8 +29,8 @@ health(
 	> const _parameters
 )
 {
-	_parameters.get().health(
-		_parameters.get().health()
+	_parameters.get().extra_health(
+		_parameters.get().health().base()
 		*
 		sanguis::server::health(
 			sanguis::server::weapons::modifiers::random_increase(
