@@ -1,19 +1,25 @@
 #include <sanguis/client/health_pair_fwd.hpp>
+#include <sanguis/client/draw2d/radius.hpp>
 #include <sanguis/client/draw2d/entities/hover/name_fwd.hpp>
 #include <sanguis/client/draw2d/entities/hover/name_and_health.hpp>
 #include <sanguis/client/draw2d/scene/hover/base.hpp>
 #include <sanguis/client/draw2d/scene/hover/healthbar.hpp>
 #include <sanguis/client/draw2d/scene/hover/name.hpp>
 #include <sanguis/client/draw2d/scene/hover/name_and_health.hpp>
-#include <sanguis/client/draw2d/scene/hover/parameters.hpp>
+#include <sanguis/client/draw2d/sprite/center.hpp>
+#include <sge/font/object_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
+#include <sge/renderer/device/ffp_fwd.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/optional_impl.hpp>
 
 
 sanguis::client::draw2d::scene::hover::name_and_health::name_and_health(
-	sanguis::client::draw2d::scene::hover::parameters const &_parameters,
+	sge::renderer::device::ffp &_renderer,
+	sge::font::object &_font,
+	sanguis::client::draw2d::sprite::center const _center,
+	sanguis::client::draw2d::radius const _radius,
 	sanguis::client::draw2d::entities::hover::name_and_health const &_name_and_health
 )
 :
@@ -21,7 +27,9 @@ sanguis::client::draw2d::scene::hover::name_and_health::name_and_health(
 		fcppt::optional_bind_construct(
 			_name_and_health.health(),
 			[
-				&_parameters
+				&_renderer,
+				_center,
+				_radius
 			](
 				sanguis::client::health_pair const _health
 			)
@@ -30,9 +38,9 @@ sanguis::client::draw2d::scene::hover::name_and_health::name_and_health(
 					fcppt::make_unique_ptr<
 						sanguis::client::draw2d::scene::hover::healthbar
 					>(
-						_parameters.renderer(),
-						_parameters.center(),
-						_parameters.radius(),
+						_renderer,
+						_center,
+						_radius,
 						_health
 					);
 			}
@@ -42,14 +50,20 @@ sanguis::client::draw2d::scene::hover::name_and_health::name_and_health(
 		fcppt::optional_bind_construct(
 			_name_and_health.name(),
 			[
-				&_parameters
+				&_renderer,
+				&_font,
+				_center,
+				_radius
 			](
 				sanguis::client::draw2d::entities::hover::name const &_name
 			)
 			{
 				return
 					sanguis::client::draw2d::scene::hover::name(
-						_parameters,
+						_renderer,
+						_font,
+						_center,
+						_radius,
 						_name
 					);
 			}

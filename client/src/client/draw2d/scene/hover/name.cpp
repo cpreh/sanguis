@@ -1,6 +1,7 @@
+#include <sanguis/client/draw2d/radius.hpp>
 #include <sanguis/client/draw2d/entities/hover/name.hpp>
 #include <sanguis/client/draw2d/scene/hover/name.hpp>
-#include <sanguis/client/draw2d/scene/hover/parameters.hpp>
+#include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/font/metrics.hpp>
 #include <sge/font/object.hpp>
@@ -14,6 +15,7 @@
 #include <sge/font/draw/static_text.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
+#include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/renderer/texture/emulate_srgb.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
@@ -21,13 +23,16 @@
 
 
 sanguis::client::draw2d::scene::hover::name::name(
-	sanguis::client::draw2d::scene::hover::parameters const &_parameters,
+	sge::renderer::device::ffp &_renderer,
+	sge::font::object &_font,
+	sanguis::client::draw2d::sprite::center const _center,
+	sanguis::client::draw2d::radius const _radius,
 	sanguis::client::draw2d::entities::hover::name const &_name
 )
 :
 	text_(
-		_parameters.renderer(),
-		_parameters.font(),
+		_renderer,
+		_font,
 		sge::font::from_fcppt_string(
 			_name.get()
 		),
@@ -35,12 +40,12 @@ sanguis::client::draw2d::scene::hover::name::name(
 			sge::font::align_h::left()
 		),
 		sge::font::vector(
-			_parameters.center().get().x(),
-			_parameters.center().get().y()
+			_center.get().x(),
+			_center.get().y()
 			-
-			_parameters.radius().get()
+			_radius.get()
 			-
-			_parameters.font().metrics().height().get()
+			_font.metrics().height().get()
 		),
 		sge::image::color::predef::white(),
 		sge::renderer::texture::emulate_srgb::no

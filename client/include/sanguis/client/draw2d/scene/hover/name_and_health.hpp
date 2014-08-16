@@ -1,12 +1,15 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_HOVER_NAME_AND_HEALTH_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_HOVER_NAME_AND_HEALTH_HPP_INCLUDED
 
+#include <sanguis/client/draw2d/radius_fwd.hpp>
 #include <sanguis/client/draw2d/entities/hover/name_and_health_fwd.hpp>
 #include <sanguis/client/draw2d/scene/hover/base.hpp>
 #include <sanguis/client/draw2d/scene/hover/healthbar.hpp>
 #include <sanguis/client/draw2d/scene/hover/name.hpp>
-#include <sanguis/client/draw2d/scene/hover/parameters_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/center_fwd.hpp>
+#include <sge/font/object_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
+#include <sge/renderer/device/ffp_fwd.hpp>
 #include <fcppt/optional_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -34,7 +37,10 @@ class name_and_health
 	);
 public:
 	name_and_health(
-		sanguis::client::draw2d::scene::hover::parameters const &,
+		sge::renderer::device::ffp &,
+		sge::font::object &,
+		sanguis::client::draw2d::sprite::center,
+		sanguis::client::draw2d::radius,
 		sanguis::client::draw2d::entities::hover::name_and_health const &
 	);
 

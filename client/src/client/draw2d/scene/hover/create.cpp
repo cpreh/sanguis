@@ -47,7 +47,10 @@ sanguis::client::draw2d::scene::hover::create(
 				fcppt::make_unique_ptr<
 					sanguis::client::draw2d::scene::hover::name_and_health
 				>(
-					parameters_,
+					parameters_.renderer(),
+					parameters_.font(),
+					parameters_.center(),
+					parameters_.radius(),
 					_name_and_health
 				);
 		}
