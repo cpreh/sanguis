@@ -1,11 +1,11 @@
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/fill_color.hpp>
 #include <sanguis/gui/fill_level.hpp>
+#include <sanguis/gui/renderer/base_fwd.hpp>
 #include <sanguis/gui/style/base.hpp>
 #include <sanguis/gui/widget/bar.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/axis_policy.hpp>
 #include <sge/rucksack/axis_policy2.hpp>
 #include <sge/rucksack/dim.hpp>
@@ -19,7 +19,6 @@
 
 sanguis::gui::widget::bar::bar(
 	sanguis::gui::style::base const &_style,
-	sge::renderer::device::ffp &_renderer,
 	sge::rucksack::dim const _dim,
 	sge::rucksack::axis const _axis,
 	sanguis::gui::fill_color const &_foreground,
@@ -29,9 +28,6 @@ sanguis::gui::widget::bar::bar(
 	sanguis::gui::widget::base(),
 	style_(
 		_style
-	),
-	renderer_(
-		_renderer
 	),
 	axis_{
 		_axis
@@ -87,11 +83,12 @@ sanguis::gui::widget::bar::value(
 
 void
 sanguis::gui::widget::bar::on_draw(
+	sanguis::gui::renderer::base &_renderer,
 	sge::renderer::context::ffp &_render_context
 )
 {
 	style_.draw_bar(
-		renderer_,
+		_renderer,
 		_render_context,
 		this->layout().area(),
 		axis_,

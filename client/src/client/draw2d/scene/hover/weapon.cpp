@@ -26,6 +26,7 @@
 
 sanguis::client::draw2d::scene::hover::weapon::weapon(
 	sanguis::gui::style::base const &_gui_style,
+	sanguis::gui::renderer::base &_gui_renderer,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sanguis::client::draw2d::sprite::center const _center,
@@ -34,10 +35,12 @@ sanguis::client::draw2d::scene::hover::weapon::weapon(
 	sanguis::client::draw2d::entities::hover::weapon const &_info
 )
 :
+	gui_renderer_(
+		_gui_renderer
+	),
 	gui_context_(),
 	image_(
 		_gui_style,
-		_renderer,
 		_hud_resources.weapon_icon(
 			_info.get().weapon_type()
 		)
@@ -113,7 +116,6 @@ sanguis::client::draw2d::scene::hover::weapon::weapon(
 		_center.get()
 	),
 	gui_background_(
-		_renderer,
 		gui_area_
 	)
 {
@@ -129,6 +131,7 @@ sanguis::client::draw2d::scene::hover::weapon::draw(
 )
 {
 	sanguis::gui::draw(
+		gui_renderer_,
 		_render_context,
 		gui_background_,
 		gui_area_

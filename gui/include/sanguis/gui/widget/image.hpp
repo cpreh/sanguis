@@ -2,6 +2,7 @@
 #define SANGUIS_GUI_WIDGET_IMAGE_HPP_INCLUDED
 
 #include <sanguis/gui/symbol.hpp>
+#include <sanguis/gui/renderer/base_fwd.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/image_fwd.hpp>
@@ -39,7 +40,6 @@ public:
 	SANGUIS_GUI_SYMBOL
 	image(
 		sanguis::gui::style::base const &,
-		sge::renderer::device::ffp &,
 		sge::texture::const_part_shared_ptr
 	);
 
@@ -54,13 +54,12 @@ public:
 private:
 	void
 	on_draw(
+		sanguis::gui::renderer::base &,
 		sge::renderer::context::ffp &
 	)
 	override;
 
 	sanguis::gui::style::base const &style_;
-
-	sge::renderer::device::ffp &renderer_;
 
 	sge::texture::const_part_shared_ptr const texture_;
 

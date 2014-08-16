@@ -3,7 +3,6 @@ set(
 	include/sanguis/gui/background/base.hpp
 	include/sanguis/gui/background/base_fwd.hpp
 	include/sanguis/gui/background/colored.hpp
-	include/sanguis/gui/background/image.hpp
 	include/sanguis/gui/click_callback.hpp
 	include/sanguis/gui/click_function.hpp
 	include/sanguis/gui/context.hpp
@@ -39,6 +38,11 @@ set(
 	include/sanguis/gui/optional_index_fwd.hpp
 	include/sanguis/gui/optional_needed_width.hpp
 	include/sanguis/gui/optional_needed_width_fwd.hpp
+	include/sanguis/gui/renderer/base.hpp
+	include/sanguis/gui/renderer/base_fwd.hpp
+	include/sanguis/gui/renderer/base_unique_ptr.hpp
+	include/sanguis/gui/renderer/create_scoped.hpp
+	include/sanguis/gui/renderer/create_stateless.hpp
 	include/sanguis/gui/string_container.hpp
 	include/sanguis/gui/style/base.hpp
 	include/sanguis/gui/style/base_fwd.hpp
@@ -104,12 +108,13 @@ set(
 	include/sanguis/gui/widget/unique_ptr_tree_vector.hpp
 	include/sanguis/gui/widget/unique_ptr_vector.hpp
 	src/aux_/draw_image.cpp
-	src/aux_/draw_image_stretched.cpp
 	src/aux_/fill_rect.cpp
 	src/aux_/gravity_east.cpp
 	src/aux_/gravity_south.cpp
 	src/aux_/make_container_pair.cpp
 	src/aux_/relayout_ancestor.cpp
+	src/aux_/renderer/scoped.cpp
+	src/aux_/renderer/stateless.cpp
 	src/aux_/shrink_rect.cpp
 	src/aux_/style/background_color.cpp
 	src/aux_/style/border_color.cpp
@@ -117,12 +122,10 @@ set(
 	src/aux_/style/text_color.cpp
 	src/background/base.cpp
 	src/background/colored.cpp
-	src/background/image.cpp
 	src/context.cpp
 	src/default_aspect.cpp
 	src/draw.cpp
 	src/include/sanguis/gui/aux_/draw_image.hpp
-	src/include/sanguis/gui/aux_/draw_image_stretched.hpp
 	src/include/sanguis/gui/aux_/draw_sprite.hpp
 	src/include/sanguis/gui/aux_/fill_rect.hpp
 	src/include/sanguis/gui/aux_/gravity_east.hpp
@@ -130,6 +133,8 @@ set(
 	src/include/sanguis/gui/aux_/image_sprite_choices.hpp
 	src/include/sanguis/gui/aux_/make_container_pair.hpp
 	src/include/sanguis/gui/aux_/relayout_ancestor.hpp
+	src/include/sanguis/gui/aux_/renderer/scoped.hpp
+	src/include/sanguis/gui/aux_/renderer/stateless.hpp
 	src/include/sanguis/gui/aux_/shrink_rect.hpp
 	src/include/sanguis/gui/aux_/sprite_type_choices.hpp
 	src/include/sanguis/gui/aux_/style/background_color.hpp
@@ -146,6 +151,9 @@ set(
 	src/main_area/viewport_adaptor.cpp
 	src/master.cpp
 	src/needed_width_from_strings.cpp
+	src/renderer/base.cpp
+	src/renderer/create_scoped.cpp
+	src/renderer/create_stateless.cpp
 	src/style/base.cpp
 	src/style/create.cpp
 	src/widget/bar.cpp

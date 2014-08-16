@@ -78,6 +78,8 @@
 #include <sanguis/creator/name.hpp>
 #include <sanguis/creator/opening_count.hpp>
 #include <sanguis/creator/top_parameters.hpp>
+#include <sanguis/gui/renderer/base.hpp>
+#include <sanguis/gui/renderer/create_stateless.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/aoe.hpp>
@@ -223,6 +225,11 @@ sanguis::client::draw2d::scene::object::object(
 	),
 	cursor_(
 		_cursor
+	),
+	gui_renderer_(
+		sanguis::gui::renderer::create_stateless(
+			_renderer
+		)
 	),
 	player_health_callback_(
 		_player_health_callback
@@ -664,6 +671,7 @@ sanguis::client::draw2d::scene::object::hover_display(
 		sanguis::client::draw2d::scene::hover::create(
 			sanguis::client::draw2d::scene::hover::parameters(
 				gui_style_,
+				*gui_renderer_,
 				renderer_,
 				font_,
 				hud_resources_,

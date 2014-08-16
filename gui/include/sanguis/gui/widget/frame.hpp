@@ -5,6 +5,7 @@
 #include <sanguis/gui/get_focus_fwd.hpp>
 #include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
+#include <sanguis/gui/renderer/base_fwd.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/frame_fwd.hpp>
 #include <sanguis/gui/widget/optional_focus_fwd.hpp>
@@ -12,7 +13,6 @@
 #include <sge/font/char_type.hpp>
 #include <sge/input/keyboard/key_code_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/vector_fwd.hpp>
 #include <sge/rucksack/widget/base_fwd.hpp>
 #include <sge/rucksack/widget/frame.hpp>
@@ -37,7 +37,6 @@ public:
 	SANGUIS_GUI_SYMBOL
 	frame(
 		sanguis::gui::style::base const &,
-		sge::renderer::device::ffp &,
 		sanguis::gui::widget::base &
 	);
 
@@ -52,6 +51,7 @@ public:
 private:
 	void
 	on_draw(
+		sanguis::gui::renderer::base &,
 		sge::renderer::context::ffp &
 	)
 	override;
@@ -87,8 +87,6 @@ private:
 	override;
 
 	sanguis::gui::style::base const &style_;
-
-	sge::renderer::device::ffp &renderer_;
 
 	sanguis::gui::widget::base &child_;
 

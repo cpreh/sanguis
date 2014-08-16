@@ -4,6 +4,7 @@
 #include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/text_color.hpp>
+#include <sanguis/gui/renderer/base_fwd.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/text_fwd.hpp>
@@ -65,6 +66,7 @@ public:
 private:
 	void
 	on_draw(
+		sanguis::gui::renderer::base &,
 		sge::renderer::context::ffp &
 	)
 	override;

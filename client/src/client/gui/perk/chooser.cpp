@@ -115,7 +115,6 @@ sanguis::client::gui::perk::chooser::chooser(
 		gui_area_
 	),
 	gui_background_(
-		_renderer,
 		gui_area_
 	),
 	perk_connection_(
@@ -158,7 +157,8 @@ sanguis::client::gui::perk::chooser::draw(
 	sge::renderer::context::ffp &_context
 )
 {
-	gui_master_.draw(
+	gui_master_.draw_with_states(
+		renderer_,
 		_context,
 		gui_background_
 	);

@@ -3,6 +3,7 @@
 #include <sanguis/client/draw2d/scene/hover/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
+#include <sanguis/gui/renderer/base_fwd.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
@@ -11,6 +12,7 @@
 
 sanguis::client::draw2d::scene::hover::parameters::parameters(
 	sanguis::gui::style::base const &_gui_style,
+	sanguis::gui::renderer::base &_gui_renderer,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sanguis::client::load::hud::context &_load_context,
@@ -21,6 +23,9 @@ sanguis::client::draw2d::scene::hover::parameters::parameters(
 :
 	gui_style_(
 		_gui_style
+	),
+	gui_renderer_(
+		_gui_renderer
 	),
 	renderer_(
 		_renderer
@@ -48,6 +53,13 @@ sanguis::client::draw2d::scene::hover::parameters::gui_style() const
 {
 	return
 		gui_style_;
+}
+
+sanguis::gui::renderer::base &
+sanguis::client::draw2d::scene::hover::parameters::gui_renderer() const
+{
+	return
+		gui_renderer_;
 }
 
 sge::renderer::device::ffp &

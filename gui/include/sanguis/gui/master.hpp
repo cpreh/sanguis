@@ -7,6 +7,7 @@
 #include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/background/base_fwd.hpp>
 #include <sanguis/gui/main_area/base_fwd.hpp>
+#include <sanguis/gui/renderer/base_fwd.hpp>
 #include <sanguis/gui/widget/base_fwd.hpp>
 #include <sanguis/gui/widget/optional_focus_fwd.hpp>
 #include <sanguis/gui/widget/optional_ref_fwd.hpp>
@@ -18,6 +19,7 @@
 #include <sge/input/keyboard/key_event_fwd.hpp>
 #include <sge/input/keyboard/key_repeat_event_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
+#include <sge/renderer/device/ffp_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 
@@ -47,6 +49,15 @@ public:
 	SANGUIS_GUI_SYMBOL
 	void
 	draw(
+		sanguis::gui::renderer::base &,
+		sge::renderer::context::ffp &,
+		sanguis::gui::background::base &
+	);
+
+	SANGUIS_GUI_SYMBOL
+	void
+	draw_with_states(
+		sge::renderer::device::ffp &,
 		sge::renderer::context::ffp &,
 		sanguis::gui::background::base &
 	);

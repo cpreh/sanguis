@@ -1,4 +1,5 @@
 #include <sanguis/gui/default_aspect.hpp>
+#include <sanguis/gui/renderer/base.hpp>
 #include <sanguis/gui/style/base.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/static_text.hpp>
@@ -35,9 +36,6 @@ sanguis::gui::widget::static_text::static_text(
 	sanguis::gui::widget::base(),
 	style_(
 		_style
-	),
-	renderer_(
-		_renderer
 	),
 	static_text_(
 		_renderer,
@@ -106,11 +104,12 @@ sanguis::gui::widget::static_text::layout()
 
 void
 sanguis::gui::widget::static_text::on_draw(
+	sanguis::gui::renderer::base &_renderer,
 	sge::renderer::context::ffp &_context
 )
 {
 	style_.draw_text(
-		renderer_,
+		_renderer,
 		_context,
 		this->layout().area()
 	);
@@ -127,7 +126,8 @@ sanguis::gui::widget::static_text::on_draw(
 		)
 	);
 
-	static_text_.draw(
-		_context
+	_renderer.draw_static_text(
+		_context,
+		static_text_
 	);
 }

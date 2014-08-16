@@ -9,7 +9,7 @@
 #include <sge/sprite/buffers/single.hpp>
 #include <sge/sprite/buffers/with_declaration.hpp>
 #include <sge/sprite/process/one.hpp>
-#include <sge/sprite/state/all_choices.hpp>
+#include <sge/sprite/state/no_choices.hpp>
 #include <sge/sprite/state/object.hpp>
 #include <sge/sprite/state/parameters.hpp>
 
@@ -42,7 +42,7 @@ draw_sprite(
 	sprite_buffers;
 
 	typedef
-	sge::sprite::state::all_choices
+	sge::sprite::state::no_choices
 	state_choices;
 
 	typedef

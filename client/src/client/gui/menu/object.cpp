@@ -3,8 +3,6 @@
 #include <sanguis/client/gui/default_text_color.hpp>
 #include <sanguis/client/gui/to_duration.hpp>
 #include <sanguis/client/gui/menu/object.hpp>
-#include <sanguis/client/load/resource/texture_identifier.hpp>
-#include <sanguis/client/load/resource/textures.hpp>
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/needed_width_from_strings.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
@@ -90,7 +88,6 @@ sanguis::client::gui::menu::object::object(
 	sge::font::object &_font,
 	sge::input::cursor::object &_cursor,
 	sge::input::keyboard::device &_keyboard,
-	sanguis::client::load::resource::textures const &_textures,
 	sanguis::client::config::settings::object &_settings,
 	sanguis::client::gui::menu::callbacks::object const &_callbacks,
 	sanguis::gui::style::base const &_gui_style
@@ -98,6 +95,9 @@ sanguis::client::gui::menu::object::object(
 :
 	settings_(
 		_settings
+	),
+	renderer_(
+		_renderer
 	),
 	gui_context_(),
 	callbacks_(
@@ -297,7 +297,6 @@ sanguis::client::gui::menu::object::object(
 	),
 	connect_frame_(
 		_gui_style,
-		_renderer,
 		connect_box_
 	),
 	quit_button_(
@@ -356,13 +355,7 @@ sanguis::client::gui::menu::object::object(
 		gui_area_
 	),
 	gui_background_(
-		_renderer,
-		gui_area_,
-		_textures.load(
-			sanguis::client::load::resource::texture_identifier(
-				FCPPT_TEXT("asphalt")
-			)
-		)
+		gui_area_
 	),
 	connect_running_{
 		false
@@ -471,7 +464,8 @@ sanguis::client::gui::menu::object::draw(
 		)
 	);
 
-	gui_master_.draw(
+	gui_master_.draw_with_states(
+		renderer_,
 		_render_context,
 		gui_background_
 	);

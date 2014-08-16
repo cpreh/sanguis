@@ -3,6 +3,7 @@
 
 #include <sanguis/gui/background/base_fwd.hpp>
 #include <sanguis/gui/main_area/base_fwd.hpp>
+#include <sanguis/gui/renderer/base_fwd.hpp>
 #include <sanguis/gui/widget/base_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/rucksack/rect_fwd.hpp>
@@ -32,6 +33,7 @@ public:
 
 	void
 	draw(
+		sanguis::gui::renderer::base &,
 		sge::renderer::context::ffp &
 	);
 
@@ -41,6 +43,7 @@ private:
 	virtual
 	void
 	on_draw(
+		sanguis::gui::renderer::base &,
 		sge::renderer::context::ffp &,
 		sge::rucksack::rect
 	) = 0;

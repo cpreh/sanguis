@@ -1,7 +1,6 @@
 #include <sanguis/gui/fill_color.hpp>
 #include <sanguis/gui/fill_level.hpp>
 #include <sanguis/gui/text_color.hpp>
-#include <sanguis/gui/aux_/fill_rect.hpp>
 #include <sanguis/gui/aux_/shrink_rect.hpp>
 #include <sanguis/gui/aux_/style/background_color.hpp>
 #include <sanguis/gui/aux_/style/border_color.hpp>
@@ -10,9 +9,9 @@
 #include <sanguis/gui/aux_/style/simple.hpp>
 #include <sanguis/gui/aux_/style/spacing.hpp>
 #include <sanguis/gui/aux_/style/text_color.hpp>
+#include <sanguis/gui/renderer/base.hpp>
 #include <sanguis/gui/style/base.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <sge/rucksack/dim.hpp>
 #include <sge/rucksack/padding.hpp>
@@ -46,20 +45,18 @@ sanguis::gui::aux_::style::simple::button_spacing() const
 
 void
 sanguis::gui::aux_::style::simple::draw_button(
-	sge::renderer::device::ffp &_renderer,
+	sanguis::gui::renderer::base &_renderer,
 	sge::renderer::context::ffp &_context,
 	sge::rucksack::rect const _area
 ) const
 {
-	sanguis::gui::aux_::fill_rect(
-		_renderer,
+	_renderer.fill_rect(
 		_context,
 		_area,
 		sanguis::gui::aux_::style::border_color()
 	);
 
-	sanguis::gui::aux_::fill_rect(
-		_renderer,
+	_renderer.fill_rect(
 		_context,
 		sge::rucksack::rect(
 			_area.pos()
@@ -77,7 +74,7 @@ sanguis::gui::aux_::style::simple::draw_button(
 
 void
 sanguis::gui::aux_::style::simple::draw_bar(
-	sge::renderer::device::ffp &_renderer,
+	sanguis::gui::renderer::base &_renderer,
 	sge::renderer::context::ffp &_context,
 	sge::rucksack::rect const _area,
 	sge::rucksack::axis const _axis,
@@ -85,8 +82,7 @@ sanguis::gui::aux_::style::simple::draw_bar(
 	sanguis::gui::fill_color const &_fill_color
 ) const
 {
-	sanguis::gui::aux_::fill_rect(
-		_renderer,
+	_renderer.fill_rect(
 		_context,
 		_area,
 		sanguis::gui::aux_::style::border_color()
@@ -99,8 +95,7 @@ sanguis::gui::aux_::style::simple::draw_bar(
 		)
 	);
 
-	sanguis::gui::aux_::fill_rect(
-		_renderer,
+	_renderer.fill_rect(
 		_context,
 		inner_rect,
 		sanguis::gui::aux_::style::background_color()
@@ -127,8 +122,7 @@ sanguis::gui::aux_::style::simple::draw_bar(
 		)
 	);
 
-	sanguis::gui::aux_::fill_rect(
-		_renderer,
+	_renderer.fill_rect(
 		_context,
 		sge::rucksack::rect(
 			_axis
@@ -180,7 +174,7 @@ sanguis::gui::aux_::style::simple::frame_padding() const
 
 void
 sanguis::gui::aux_::style::simple::draw_frame(
-	sge::renderer::device::ffp &_renderer,
+	sanguis::gui::renderer::base &_renderer,
 	sge::renderer::context::ffp &_context,
 	sge::rucksack::rect const _area,
 	sge::rucksack::padding const _padding
@@ -192,8 +186,7 @@ sanguis::gui::aux_::style::simple::draw_frame(
 		2
 	);
 
-	sanguis::gui::aux_::fill_rect(
-		_renderer,
+	_renderer.fill_rect(
 		_context,
 		sge::rucksack::rect(
 			_area.pos(),
@@ -205,8 +198,7 @@ sanguis::gui::aux_::style::simple::draw_frame(
 		sanguis::gui::aux_::style::border_color()
 	);
 
-	sanguis::gui::aux_::fill_rect(
-		_renderer,
+	_renderer.fill_rect(
 		_context,
 		sge::rucksack::rect(
 			_area.pos(),
@@ -218,8 +210,7 @@ sanguis::gui::aux_::style::simple::draw_frame(
 		sanguis::gui::aux_::style::border_color()
 	);
 
-	sanguis::gui::aux_::fill_rect(
-		_renderer,
+	_renderer.fill_rect(
 		_context,
 		sge::rucksack::rect(
 			_area.pos()
@@ -238,8 +229,7 @@ sanguis::gui::aux_::style::simple::draw_frame(
 		sanguis::gui::aux_::style::border_color()
 	);
 
-	sanguis::gui::aux_::fill_rect(
-		_renderer,
+	_renderer.fill_rect(
 		_context,
 		sge::rucksack::rect(
 			_area.pos()
@@ -268,20 +258,18 @@ sanguis::gui::aux_::style::simple::edit_spacing() const
 
 void
 sanguis::gui::aux_::style::simple::draw_edit(
-	sge::renderer::device::ffp &_renderer,
+	sanguis::gui::renderer::base &_renderer,
 	sge::renderer::context::ffp &_context,
 	sge::rucksack::rect const _area
 ) const
 {
-	sanguis::gui::aux_::fill_rect(
-		_renderer,
+	_renderer.fill_rect(
 		_context,
 		_area,
 		sanguis::gui::aux_::style::border_color()
 	);
 
-	sanguis::gui::aux_::fill_rect(
-		_renderer,
+	_renderer.fill_rect(
 		_context,
 		sge::rucksack::rect(
 			_area.pos()
@@ -306,7 +294,7 @@ sanguis::gui::aux_::style::simple::image_spacing() const
 
 void
 sanguis::gui::aux_::style::simple::draw_image(
-	sge::renderer::device::ffp &,
+	sanguis::gui::renderer::base &,
 	sge::renderer::context::ffp &,
 	sge::rucksack::rect
 ) const
@@ -322,7 +310,7 @@ sanguis::gui::aux_::style::simple::text_spacing() const
 
 void
 sanguis::gui::aux_::style::simple::draw_text(
-	sge::renderer::device::ffp &,
+	sanguis::gui::renderer::base &,
 	sge::renderer::context::ffp &,
 	sge::rucksack::rect
 ) const

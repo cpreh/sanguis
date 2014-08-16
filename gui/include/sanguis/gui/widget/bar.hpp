@@ -4,11 +4,11 @@
 #include <sanguis/gui/fill_color.hpp>
 #include <sanguis/gui/fill_level.hpp>
 #include <sanguis/gui/symbol.hpp>
+#include <sanguis/gui/renderer/base_fwd.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/bar_fwd.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <sge/rucksack/dim_fwd.hpp>
 #include <sge/rucksack/widget/base_fwd.hpp>
@@ -35,7 +35,6 @@ public:
 	SANGUIS_GUI_SYMBOL
 	bar(
 		sanguis::gui::style::base const &,
-		sge::renderer::device::ffp &,
 		sge::rucksack::dim,
 		sge::rucksack::axis,
 		sanguis::gui::fill_color const &,
@@ -54,6 +53,7 @@ public:
 private:
 	void
 	on_draw(
+		sanguis::gui::renderer::base &,
 		sge::renderer::context::ffp &
 	)
 	override;
@@ -63,8 +63,6 @@ private:
 	override;
 
 	sanguis::gui::style::base const &style_;
-
-	sge::renderer::device::ffp &renderer_;
 
 	sge::rucksack::axis const axis_;
 

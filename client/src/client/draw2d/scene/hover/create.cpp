@@ -65,6 +65,7 @@ sanguis::client::draw2d::scene::hover::create(
 					sanguis::client::draw2d::scene::hover::weapon
 				>(
 					parameters_.gui_style(),
+					parameters_.gui_renderer(),
 					parameters_.renderer(),
 					parameters_.font(),
 					parameters_.center(),

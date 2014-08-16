@@ -7,6 +7,7 @@
 #include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/text_callback.hpp>
 #include <sanguis/gui/text_function.hpp>
+#include <sanguis/gui/renderer/base_fwd.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/edit_fwd.hpp>
@@ -78,6 +79,7 @@ private:
 
 	void
 	on_draw(
+		sanguis::gui::renderer::base &,
 		sge::renderer::context::ffp &
 	)
 	override;

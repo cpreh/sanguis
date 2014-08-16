@@ -5,10 +5,9 @@
 #include <sanguis/client/gui/menu/resolution_chooser.hpp>
 #include <sanguis/client/gui/menu/callbacks/object.hpp>
 #include <sanguis/client/config/settings/object_fwd.hpp>
-#include <sanguis/client/load/resource/textures_fwd.hpp>
 #include <sanguis/gui/context.hpp>
 #include <sanguis/gui/master.hpp>
-#include <sanguis/gui/background/image.hpp>
+#include <sanguis/gui/background/colored.hpp>
 #include <sanguis/gui/main_area/viewport_adaptor.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
@@ -53,7 +52,6 @@ public:
 		sge::font::object &,
 		sge::input::cursor::object &,
 		sge::input::keyboard::device &,
-		sanguis::client::load::resource::textures const &,
 		sanguis::client::config::settings::object &,
 		sanguis::client::gui::menu::callbacks::object const &,
 		sanguis::gui::style::base const &
@@ -89,6 +87,8 @@ private:
 	handle_connect();
 
 	sanguis::client::config::settings::object &settings_;
+
+	sge::renderer::device::ffp &renderer_;
 
 	sanguis::gui::context gui_context_;
 
@@ -132,7 +132,7 @@ private:
 
 	sanguis::gui::master gui_master_;
 
-	sanguis::gui::background::image gui_background_;
+	sanguis::gui::background::colored gui_background_;
 
 	bool connect_running_;
 

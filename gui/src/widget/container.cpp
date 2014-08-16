@@ -1,6 +1,7 @@
 #include <sanguis/gui/context.hpp>
 #include <sanguis/gui/duration.hpp>
 #include <sanguis/gui/get_focus.hpp>
+#include <sanguis/gui/renderer/base_fwd.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/container.hpp>
 #include <sanguis/gui/widget/optional_focus.hpp>
@@ -210,17 +211,20 @@ sanguis::gui::widget::container::on_update(
 
 void
 sanguis::gui::widget::container::on_draw(
+	sanguis::gui::renderer::base &_renderer,
 	sge::renderer::context::ffp &_context
 )
 {
 	this->foreach_widget(
 		[
+			&_renderer,
 			&_context
 		](
 			sanguis::gui::widget::base &_widget
 		)
 		{
 			_widget.on_draw(
+				_renderer,
 				_context
 			);
 		}

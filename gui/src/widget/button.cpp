@@ -2,6 +2,7 @@
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/get_focus.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
+#include <sanguis/gui/renderer/base.hpp>
 #include <sanguis/gui/style/base.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/button.hpp>
@@ -146,11 +147,12 @@ sanguis::gui::widget::button::layout()
 
 void
 sanguis::gui::widget::button::on_draw(
+	sanguis::gui::renderer::base &_renderer,
 	sge::renderer::context::ffp &_context
 )
 {
 	style_.draw_button(
-		renderer_,
+		_renderer,
 		_context,
 		this->layout().area()
 	);
@@ -178,8 +180,9 @@ sanguis::gui::widget::button::on_draw(
 		)
 	);
 
-	static_text_.draw(
-		_context
+	_renderer.draw_static_text(
+		_context,
+		static_text_
 	);
 }
 

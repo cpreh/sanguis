@@ -4,8 +4,8 @@
 #include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/background/base.hpp>
 #include <sanguis/gui/main_area/base_fwd.hpp>
+#include <sanguis/gui/renderer/base_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/rect_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -26,8 +26,8 @@ class colored
 	);
 public:
 	SANGUIS_GUI_SYMBOL
+	explicit
 	colored(
-		sge::renderer::device::ffp &,
 		sanguis::gui::main_area::base &
 	);
 
@@ -37,12 +37,11 @@ public:
 private:
 	void
 	on_draw(
+		sanguis::gui::renderer::base &,
 		sge::renderer::context::ffp &,
 		sge::rucksack::rect
 	)
 	override;
-
-	sge::renderer::device::ffp &renderer_;
 };
 
 }

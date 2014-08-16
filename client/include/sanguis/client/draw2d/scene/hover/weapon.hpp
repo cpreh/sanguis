@@ -10,6 +10,7 @@
 #include <sanguis/gui/context.hpp>
 #include <sanguis/gui/background/colored.hpp>
 #include <sanguis/gui/main_area/fixed_position.hpp>
+#include <sanguis/gui/renderer/base_fwd.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/image.hpp>
@@ -43,6 +44,7 @@ class weapon
 public:
 	weapon(
 		sanguis::gui::style::base const &,
+		sanguis::gui::renderer::base &,
 		sge::renderer::device::ffp &,
 		sge::font::object &,
 		sanguis::client::draw2d::sprite::center,
@@ -59,6 +61,8 @@ private:
 		sge::renderer::context::ffp &
 	)
 	override;
+
+	sanguis::gui::renderer::base &gui_renderer_;
 
 	sanguis::gui::context gui_context_;
 

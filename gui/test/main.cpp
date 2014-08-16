@@ -446,7 +446,6 @@ try
 	);
 
 	sanguis::gui::background::colored background(
-		sys.renderer_device_ffp(),
 		main_area
 	);
 
@@ -494,7 +493,8 @@ try
 			)
 		);
 
-		master.draw(
+		master.draw_with_states(
+			sys.renderer_device_ffp(),
 			scoped_block.get(),
 			background
 		);

@@ -1,6 +1,7 @@
 #ifndef SANGUIS_GUI_WIDGET_DUMMY_HPP_INCLUDED
 #define SANGUIS_GUI_WIDGET_DUMMY_HPP_INCLUDED
 
+#include <sanguis/gui/renderer/base_fwd.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/dummy_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
@@ -29,6 +30,7 @@ public:
 private:
 	void
 	on_draw(
+		sanguis::gui::renderer::base &,
 		sge::renderer::context::ffp &
 	)
 	override;

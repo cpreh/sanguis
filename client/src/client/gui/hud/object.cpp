@@ -140,7 +140,6 @@ sanguis::client::gui::hud::object::object(
 	),
 	exp_bar_(
 		_gui_style,
-		_renderer,
 		sge::rucksack::dim(
 			200,
 			10
@@ -155,7 +154,6 @@ sanguis::client::gui::hud::object::object(
 	),
 	health_bar_(
 		_gui_style,
-		_renderer,
 		sge::rucksack::dim(
 			200,
 			20
@@ -236,7 +234,6 @@ sanguis::client::gui::hud::object::object(
 		gui_area_
 	),
 	gui_background_(
-		_renderer,
 		gui_area_
 	),
 	weapon_details_(),
@@ -468,7 +465,8 @@ sanguis::client::gui::hud::object::draw(
 {
 	frames_counter_.update();
 
-	gui_master_.draw(
+	gui_master_.draw_with_states(
+		renderer_,
 		_render_context,
 		gui_background_
 	);

@@ -5,9 +5,9 @@
 #include <sanguis/gui/fill_level_fwd.hpp>
 #include <sanguis/gui/symbol.hpp>
 #include <sanguis/gui/text_color_fwd.hpp>
+#include <sanguis/gui/renderer/base_fwd.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/axis_fwd.hpp>
 #include <sge/rucksack/dim_fwd.hpp>
 #include <sge/rucksack/padding_fwd.hpp>
@@ -41,7 +41,7 @@ public:
 	virtual
 	void
 	draw_button(
-		sge::renderer::device::ffp &,
+		sanguis::gui::renderer::base &,
 		sge::renderer::context::ffp &,
 		sge::rucksack::rect
 	) const = 0;
@@ -49,7 +49,7 @@ public:
 	virtual
 	void
 	draw_bar(
-		sge::renderer::device::ffp &,
+		sanguis::gui::renderer::base &,
 		sge::renderer::context::ffp &,
 		sge::rucksack::rect,
 		sge::rucksack::axis,
@@ -64,7 +64,7 @@ public:
 	virtual
 	void
 	draw_frame(
-		sge::renderer::device::ffp &,
+		sanguis::gui::renderer::base &,
 		sge::renderer::context::ffp &,
 		sge::rucksack::rect,
 		sge::rucksack::padding
@@ -77,7 +77,7 @@ public:
 	virtual
 	void
 	draw_edit(
-		sge::renderer::device::ffp &,
+		sanguis::gui::renderer::base &,
 		sge::renderer::context::ffp &,
 		sge::rucksack::rect
 	) const = 0;
@@ -89,7 +89,7 @@ public:
 	virtual
 	void
 	draw_image(
-		sge::renderer::device::ffp &,
+		sanguis::gui::renderer::base &,
 		sge::renderer::context::ffp &,
 		sge::rucksack::rect
 	) const = 0;
@@ -101,7 +101,7 @@ public:
 	virtual
 	void
 	draw_text(
-		sge::renderer::device::ffp &,
+		sanguis::gui::renderer::base &,
 		sge::renderer::context::ffp &,
 		sge::rucksack::rect
 	) const = 0;

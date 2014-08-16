@@ -1,6 +1,7 @@
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/aux_/relayout_ancestor.hpp>
+#include <sanguis/gui/renderer/base.hpp>
 #include <sanguis/gui/style/base.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/text.hpp>
@@ -14,7 +15,7 @@
 #include <sge/font/align_h/left.hpp>
 #include <sge/font/align_h/center.hpp>
 #include <sge/font/align_h/max_width.hpp>
-#include <sge/font/draw/simple.hpp>
+#include <sge/font/draw/static_text.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/renderer/texture/emulate_srgb.hpp>
@@ -124,18 +125,18 @@ sanguis::gui::widget::text::layout()
 
 void
 sanguis::gui::widget::text::on_draw(
+	sanguis::gui::renderer::base &_renderer,
 	sge::renderer::context::ffp &_context
 )
 {
 	style_.draw_text(
-		renderer_,
+		_renderer,
 		_context,
 		this->layout().area()
 	);
 
-	sge::font::draw::simple(
+	sge::font::draw::static_text const static_text(
 		renderer_,
-		_context,
 		font_,
 		value_,
 		sge::font::text_parameters(
@@ -160,6 +161,11 @@ sanguis::gui::widget::text::on_draw(
 		),
 		text_color_.get(),
 		sge::renderer::texture::emulate_srgb::no
+	);
+
+	_renderer.draw_static_text(
+		_context,
+		static_text
 	);
 }
 

@@ -1,5 +1,6 @@
 #include <sanguis/gui/focus_change.hpp>
 #include <sanguis/gui/get_focus.hpp>
+#include <sanguis/gui/renderer/base_fwd.hpp>
 #include <sanguis/gui/style/base.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/frame.hpp>
@@ -8,7 +9,6 @@
 #include <sge/font/char_type.hpp>
 #include <sge/input/keyboard/key_code.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/padding.hpp>
 #include <sge/rucksack/rect.hpp>
 #include <sge/rucksack/widget/base_fwd.hpp>
@@ -16,16 +16,12 @@
 
 sanguis::gui::widget::frame::frame(
 	sanguis::gui::style::base const &_style,
-	sge::renderer::device::ffp &_renderer,
 	sanguis::gui::widget::base &_child
 )
 :
 	sanguis::gui::widget::base(),
 	style_(
 		_style
-	),
-	renderer_(
-		_renderer
 	),
 	child_(
 		_child
@@ -55,17 +51,19 @@ sanguis::gui::widget::frame::layout()
 
 void
 sanguis::gui::widget::frame::on_draw(
+	sanguis::gui::renderer::base &_renderer,
 	sge::renderer::context::ffp &_context
 )
 {
 	style_.draw_frame(
-		renderer_,
+		_renderer,
 		_context,
 		this->layout().area(),
 		layout_.padding()
 	);
 
 	child_.on_draw(
+		_renderer,
 		_context
 	);
 }

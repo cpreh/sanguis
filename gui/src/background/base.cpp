@@ -1,5 +1,6 @@
 #include <sanguis/gui/background/base.hpp>
 #include <sanguis/gui/main_area/base.hpp>
+#include <sanguis/gui/renderer/base_fwd.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/rucksack/rect.hpp>
@@ -22,10 +23,12 @@ sanguis::gui::background::base::~base()
 
 void
 sanguis::gui::background::base::draw(
+	sanguis::gui::renderer::base &_renderer,
 	sge::renderer::context::ffp &_context
 )
 {
 	this->on_draw(
+		_renderer,
 		_context,
 		this->widget().layout().area()
 	);

@@ -1,5 +1,6 @@
 #include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/aux_/draw_image.hpp>
+#include <sanguis/gui/renderer/base.hpp>
 #include <sanguis/gui/style/base.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/image.hpp>
@@ -39,7 +40,6 @@ sanguis::gui::widget::image::image(
 :
 	sanguis::gui::widget::image::image(
 		_style,
-		_renderer,
 		fcppt::make_shared_ptr<
 			sge::texture::part_raw_ptr
 		>(
@@ -57,15 +57,11 @@ sanguis::gui::widget::image::image(
 
 sanguis::gui::widget::image::image(
 	sanguis::gui::style::base const &_style,
-	sge::renderer::device::ffp &_renderer,
 	sge::texture::const_part_shared_ptr const _texture
 )
 :
 	style_(
 		_style
-	),
-	renderer_(
-		_renderer
 	),
 	texture_(
 		_texture
@@ -129,17 +125,17 @@ sanguis::gui::widget::image::layout()
 
 void
 sanguis::gui::widget::image::on_draw(
+	sanguis::gui::renderer::base &_renderer,
 	sge::renderer::context::ffp &_context
 )
 {
 	style_.draw_image(
-		renderer_,
+		_renderer,
 		_context,
 		this->layout().area()
 	);
 
-	sanguis::gui::aux_::draw_image(
-		renderer_,
+	_renderer.draw_image(
 		_context,
 		*texture_,
 		layout_.position()

@@ -6,6 +6,7 @@
 #include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/text_function.hpp>
 #include <sanguis/gui/aux_/fill_rect.hpp>
+#include <sanguis/gui/renderer/base.hpp>
 #include <sanguis/gui/style/base.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/edit.hpp>
@@ -186,6 +187,7 @@ sanguis::gui::widget::edit::on_update(
 
 void
 sanguis::gui::widget::edit::on_draw(
+	sanguis::gui::renderer::base &_renderer,
 	sge::renderer::context::ffp &_context
 )
 {
@@ -194,13 +196,14 @@ sanguis::gui::widget::edit::on_draw(
 		this->make_static_text();
 
 	style_.draw_edit(
-		renderer_,
+		_renderer,
 		_context,
 		this->layout().area()
 	);
 
-	static_text_.draw(
-		_context
+	_renderer.draw_static_text(
+		_context,
+		static_text_
 	);
 
 	if(
@@ -216,8 +219,7 @@ sanguis::gui::widget::edit::on_draw(
 		)
 	);
 
-	sanguis::gui::aux_::fill_rect(
-		renderer_,
+	_renderer.fill_rect(
 		_context,
 		sge::rucksack::rect(
 			cursor_rect.pos()

@@ -2,7 +2,9 @@
 #include <sanguis/gui/duration.hpp>
 #include <sanguis/gui/draw.hpp>
 #include <sanguis/gui/master.hpp>
+#include <sanguis/gui/aux_/renderer/scoped.hpp>
 #include <sanguis/gui/main_area/base.hpp>
+#include <sanguis/gui/renderer/base_fwd.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/optional_focus.hpp>
 #include <sanguis/gui/widget/optional_ref.hpp>
@@ -16,6 +18,7 @@
 #include <sge/input/keyboard/key_event.hpp>
 #include <sge/input/keyboard/key_repeat_event.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
+#include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/vector.hpp>
 #include <sge/rucksack/widget/base.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -86,11 +89,33 @@ sanguis::gui::master::~master()
 
 void
 sanguis::gui::master::draw(
+	sanguis::gui::renderer::base &_renderer,
 	sge::renderer::context::ffp &_context,
 	sanguis::gui::background::base &_background
 )
 {
 	sanguis::gui::draw(
+		_renderer,
+		_context,
+		_background,
+		main_area_
+	);
+}
+
+void
+sanguis::gui::master::draw_with_states(
+	sge::renderer::device::ffp &_renderer,
+	sge::renderer::context::ffp &_context,
+	sanguis::gui::background::base &_background
+)
+{
+	sanguis::gui::aux_::renderer::scoped renderer(
+		_renderer,
+		_context
+	);
+
+	sanguis::gui::draw(
+		renderer,
 		_context,
 		_background,
 		main_area_

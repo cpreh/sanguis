@@ -34,6 +34,7 @@
 #include <sanguis/client/load/auras/context.hpp>
 #include <sanguis/client/load/model/collection_fwd.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
+#include <sanguis/gui/renderer/base_unique_ptr.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/messages/server/add_aoe_projectile_fwd.hpp>
 #include <sanguis/messages/server/add_aura_fwd.hpp>
@@ -364,6 +365,8 @@ private:
 	sge::font::object &font_;
 
 	sanguis::client::cursor &cursor_;
+
+	sanguis::gui::renderer::base_unique_ptr const gui_renderer_;
 
 	sanguis::client::player_health_callback const player_health_callback_;
 

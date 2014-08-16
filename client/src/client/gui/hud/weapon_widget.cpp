@@ -58,7 +58,6 @@ sanguis::client::gui::hud::weapon_widget::weapon_widget(
 	),
 	image_(
 		_gui_style,
-		_renderer,
 		_resources.weapon_icon(
 			_description.weapon_type()
 		)
@@ -75,7 +74,6 @@ sanguis::client::gui::hud::weapon_widget::weapon_widget(
 	),
 	cooldown_bar_{
 		_gui_style,
-		_renderer,
 		sge::rucksack::dim{
 			10,
 			50 // TODO: Should this be expanding?
