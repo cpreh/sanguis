@@ -1,8 +1,9 @@
-#ifndef SANGUIS_CLIENT_DRAW2D_MESSAGE_CONFIGURE_ENTITY_HPP_INCLUDED
-#define SANGUIS_CLIENT_DRAW2D_MESSAGE_CONFIGURE_ENTITY_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_SCENE_CONFIGURE_ENTITY_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_SCENE_CONFIGURE_ENTITY_HPP_INCLUDED
 
 #include <sanguis/entity_id.hpp>
-#include <sanguis/client/draw2d/message/dispatcher.hpp>
+#include <sanguis/client/draw2d/scene/configure_entity_fwd.hpp>
+#include <sanguis/client/draw2d/scene/object.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/center.hpp>
 #include <sanguis/messages/roles/entity_id.hpp>
@@ -30,7 +31,7 @@ namespace client
 {
 namespace draw2d
 {
-namespace message
+namespace scene
 {
 
 template<
@@ -65,10 +66,12 @@ class configure_entity
 		>
 	> mapping;
 public:
-	typedef void result_type;
+	typedef
+	void
+	result_type;
 
 	configure_entity(
-		sanguis::client::draw2d::message::dispatcher &_dispatcher,
+		sanguis::client::draw2d::scene::object &_dispatcher,
 		entity_id const _id,
 		Message const &_message
 	)
@@ -126,7 +129,7 @@ public:
 	{
 	}
 private:
-	sanguis::client::draw2d::message::dispatcher &dispatcher_;
+	sanguis::client::draw2d::scene::object &dispatcher_;
 
 	entity_id const id_;
 

@@ -6,12 +6,12 @@
 #include <sanguis/entity_id.hpp>
 #include <sanguis/random_generator.hpp>
 #include <sanguis/client/cursor_fwd.hpp>
+#include <sanguis/client/draw_base.hpp>
 #include <sanguis/client/player_health_callback.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/client/control/attack_dest_fwd.hpp>
 #include <sanguis/client/control/environment_fwd.hpp>
-#include <sanguis/client/draw2d/insert_own_callback.hpp>
 #include <sanguis/client/draw2d/optional_player_center.hpp>
 #include <sanguis/client/draw2d/optional_translation.hpp>
 #include <sanguis/client/draw2d/player_center_callback.hpp>
@@ -19,11 +19,10 @@
 #include <sanguis/client/draw2d/entities/own_fwd.hpp>
 #include <sanguis/client/draw2d/entities/own_unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
-#include <sanguis/client/draw2d/message/dispatcher_fwd.hpp>
-#include <sanguis/client/draw2d/message/environment_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/scene/background_fwd.hpp>
+#include <sanguis/client/draw2d/scene/configure_entity_fwd.hpp>
 #include <sanguis/client/draw2d/scene/control_environment_fwd.hpp>
-#include <sanguis/client/draw2d/scene/message_environment_fwd.hpp>
 #include <sanguis/client/draw2d/scene/object_fwd.hpp>
 #include <sanguis/client/draw2d/scene/hover/base_unique_ptr.hpp>
 #include <sanguis/client/draw2d/scene/world/object_fwd.hpp>
@@ -35,13 +34,36 @@
 #include <sanguis/client/load/model/collection_fwd.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
+#include <sanguis/messages/server/add_aoe_projectile_fwd.hpp>
+#include <sanguis/messages/server/add_aura_fwd.hpp>
+#include <sanguis/messages/server/add_buff_fwd.hpp>
+#include <sanguis/messages/server/add_destructible_fwd.hpp>
+#include <sanguis/messages/server/add_enemy_fwd.hpp>
+#include <sanguis/messages/server/add_friend_fwd.hpp>
+#include <sanguis/messages/server/add_own_player_fwd.hpp>
+#include <sanguis/messages/server/add_pickup_fwd.hpp>
+#include <sanguis/messages/server/add_player_fwd.hpp>
+#include <sanguis/messages/server/add_projectile_fwd.hpp>
+#include <sanguis/messages/server/add_weapon_pickup_fwd.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
+#include <sanguis/messages/server/change_weapon_fwd.hpp>
+#include <sanguis/messages/server/change_world_fwd.hpp>
+#include <sanguis/messages/server/die_fwd.hpp>
+#include <sanguis/messages/server/health_fwd.hpp>
+#include <sanguis/messages/server/max_health_fwd.hpp>
+#include <sanguis/messages/server/move_fwd.hpp>
+#include <sanguis/messages/server/remove_buff_fwd.hpp>
+#include <sanguis/messages/server/remove_fwd.hpp>
+#include <sanguis/messages/server/rotate_fwd.hpp>
+#include <sanguis/messages/server/speed_fwd.hpp>
+#include <sanguis/messages/server/weapon_status_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/renderer/screen_size_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/renderer/target/viewport_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
+#include <alda/call/friend_dispatcher.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -62,6 +84,8 @@ namespace scene
 {
 
 class object
+:
+	public sanguis::client::draw_base
 {
 	FCPPT_NONCOPYABLE(
 		object
@@ -79,40 +103,45 @@ public:
 		sanguis::client::cursor &
 	);
 
-	~object();
+	~object()
+	override;
 
+	sanguis::client::draw2d::optional_translation const
+	translation() const;
+private:
 	void
 	process_message(
 		sanguis::messages::server::base const &
-	);
+	)
+	override;
 
 	void
 	update(
 		sanguis::duration const &
-	);
+	)
+	override;
 
 	void
 	draw(
 		sge::renderer::context::ffp &
-	);
+	)
+	override;
 
 	void
 	overlay(
 		sge::renderer::context::ffp &
-	);
+	)
+	override;
 
 	void
 	pause(
 		bool
-	);
+	)
+	override;
 
 	sanguis::client::control::environment &
-	control_environment() const;
-private:
-	// TODO: Create a proper interface for this
-	friend class sanguis::client::draw2d::scene::message_environment;
-
-	friend class sanguis::client::draw2d::scene::control_environment;
+	control_environment() const
+	override;
 
 	void
 	render_systems(
@@ -146,9 +175,6 @@ private:
 		sanguis::entity_id
 	);
 
-	sanguis::client::draw2d::optional_translation const
-	translation() const;
-
 	void
 	player_center(
 		sanguis::client::draw2d::optional_player_center
@@ -162,38 +188,149 @@ private:
 		sanguis::client::world_parameters const &
 	);
 
-	sanguis::diff_clock const &
-	diff_clock() const;
-
-	sanguis::random_generator &
-	random_generator();
-
-	sanguis::client::sound_manager &
-	sound_manager() const;
-
-	sanguis::client::draw2d::player_center_callback const &
-	player_center_callback() const;
-
-	sanguis::client::draw2d::insert_own_callback const &
-	insert_own_callback() const;
-
-	sanguis::client::draw2d::sprite::normal::system &
-	normal_system();
-
-	sanguis::client::draw2d::sprite::client::system &
-	client_system();
-
-	sanguis::client::load::model::collection const &
-	load_collection() const;
-
-	sanguis::client::load::auras::context &
-	aura_resources();
-
 	sge::renderer::screen_size const
 	screen_size() const;
 
 	sge::renderer::target::viewport const
 	viewport() const;
+
+	sanguis::client::draw2d::entities::model::load_parameters const
+	model_parameters();
+
+	ALDA_CALL_FRIEND_DISPATCHER;
+
+	typedef
+	void
+	result_type;
+
+	result_type
+	operator()(
+		sanguis::messages::server::add_aoe_projectile const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::server::add_aura const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::server::add_buff const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::server::add_destructible const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::server::add_enemy const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::server::add_friend const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::server::add_own_player const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::server::add_pickup const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::server::add_player const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::server::add_projectile const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::server::add_weapon_pickup const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::server::change_weapon const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::server::change_world const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::server::die const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::server::health const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::server::max_health const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::server::move const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::server::remove const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::server::remove_buff const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::server::rotate const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::server::speed const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::server::weapon_status const &
+	);
+
+	result_type
+	process_default_msg(
+		sanguis::messages::server::base const &
+	);
+
+	template<
+		typename Msg
+	>
+	friend class sanguis::client::draw2d::scene::configure_entity;
+
+	template<
+		typename Msg
+	>
+	void
+	configure_new_object(
+		sanguis::client::draw2d::entities::unique_ptr &&,
+		Msg const &
+	);
 
 	sanguis::diff_clock diff_clock_;
 
@@ -201,7 +338,7 @@ private:
 
 	sanguis::client::sound_manager &sound_manager_;
 
-	sanguis::client::load::context const &resources_;
+	sanguis::client::load::model::collection const &model_collection_;
 
 	sanguis::client::load::hud::context &hud_resources_;
 
@@ -214,6 +351,8 @@ private:
 	sge::font::object &font_;
 
 	sanguis::client::cursor &cursor_;
+
+	sanguis::client::player_health_callback const player_health_callback_;
 
 	sanguis::client::draw2d::sprite::state sprite_states_;
 
@@ -231,21 +370,9 @@ private:
 
 	sanguis::client::draw2d::optional_translation translation_;
 
-	sanguis::client::draw2d::player_center_callback const player_center_callback_;
-
-	sanguis::client::draw2d::insert_own_callback const insert_own_callback_;
-
-	std::unique_ptr<
-		sanguis::client::draw2d::message::environment
-	> const message_environment_;
-
 	std::unique_ptr<
 		sanguis::client::control::environment
 	> const control_environment_;
-
-	std::unique_ptr<
-		sanguis::client::draw2d::message::dispatcher
-	> const message_dispatcher_;
 
 	typedef
 	std::map<

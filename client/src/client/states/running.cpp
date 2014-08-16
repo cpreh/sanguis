@@ -2,6 +2,7 @@
 #include <sanguis/player_name.hpp>
 #include <sanguis/world_name.hpp>
 #include <sanguis/client/dispatch.hpp>
+#include <sanguis/client/draw_base.hpp>
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/exp_for_next_level.hpp>
 #include <sanguis/client/health_pair.hpp>
@@ -16,7 +17,7 @@
 #include <sanguis/client/control/environment_fwd.hpp>
 #include <sanguis/client/control/input_translator.hpp>
 #include <sanguis/client/control/actions/any_fwd.hpp>
-#include <sanguis/client/draw2d/scene/object.hpp>
+#include <sanguis/client/draw2d/create.hpp>
 #include <sanguis/client/events/action.hpp>
 #include <sanguis/client/events/connected.hpp>
 #include <sanguis/client/events/menu.hpp>
@@ -129,9 +130,7 @@ sanguis::client::states::running::running(
 		)
 	),
 	drawer_(
-		fcppt::make_unique_ptr<
-			sanguis::client::draw2d::scene::object
-		>(
+		sanguis::client::draw2d::create(
 			this->context<
 				sanguis::client::machine
 			>().resources(),

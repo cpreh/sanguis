@@ -1,5 +1,5 @@
-#ifndef SANGUIS_CLIENT_DRAW2D_MESSAGE_HEALTH_PAIR_HPP_INCLUDED
-#define SANGUIS_CLIENT_DRAW2D_MESSAGE_HEALTH_PAIR_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_SCENE_HEALTH_PAIR_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_SCENE_HEALTH_PAIR_HPP_INCLUDED
 
 #include <sanguis/client/health.hpp>
 #include <sanguis/client/health_pair.hpp>
@@ -15,7 +15,7 @@ namespace client
 {
 namespace draw2d
 {
-namespace message
+namespace scene
 {
 
 template<

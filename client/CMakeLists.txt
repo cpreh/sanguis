@@ -74,6 +74,7 @@ set(
 	include/sanguis/client/draw2d/collide_callback.hpp
 	include/sanguis/client/draw2d/collide_parameters.hpp
 	include/sanguis/client/draw2d/collide_parameters_fwd.hpp
+	include/sanguis/client/draw2d/create.hpp
 	include/sanguis/client/draw2d/dim2.hpp
 	include/sanguis/client/draw2d/dim2_fwd.hpp
 	include/sanguis/client/draw2d/entities/aoe_bullet.hpp
@@ -173,12 +174,6 @@ set(
 	include/sanguis/client/draw2d/insert_own_callback.hpp
 	include/sanguis/client/draw2d/log.hpp
 	include/sanguis/client/draw2d/log_location.hpp
-	include/sanguis/client/draw2d/message/configure_entity.hpp
-	include/sanguis/client/draw2d/message/dispatcher.hpp
-	include/sanguis/client/draw2d/message/dispatcher_fwd.hpp
-	include/sanguis/client/draw2d/message/environment.hpp
-	include/sanguis/client/draw2d/message/environment_fwd.hpp
-	include/sanguis/client/draw2d/message/health_pair.hpp
 	include/sanguis/client/draw2d/optional_player_center.hpp
 	include/sanguis/client/draw2d/optional_player_center_fwd.hpp
 	include/sanguis/client/draw2d/optional_speed.hpp
@@ -194,8 +189,11 @@ set(
 	include/sanguis/client/draw2d/scene/background_dim.hpp
 	include/sanguis/client/draw2d/scene/background_fwd.hpp
 	include/sanguis/client/draw2d/scene/background_texture_coordinates.hpp
+	include/sanguis/client/draw2d/scene/configure_entity.hpp
+	include/sanguis/client/draw2d/scene/configure_entity_fwd.hpp
 	include/sanguis/client/draw2d/scene/control_environment.hpp
 	include/sanguis/client/draw2d/scene/control_environment_fwd.hpp
+	include/sanguis/client/draw2d/scene/health_pair.hpp
 	include/sanguis/client/draw2d/scene/hover/base.hpp
 	include/sanguis/client/draw2d/scene/hover/base_fwd.hpp
 	include/sanguis/client/draw2d/scene/hover/base_unique_ptr.hpp
@@ -346,6 +344,9 @@ set(
 	include/sanguis/client/draw2d/vector2_fwd.hpp
 	include/sanguis/client/draw2d/z_ordering.hpp
 	include/sanguis/client/draw2d/z_ordering_fwd.hpp
+	include/sanguis/client/draw_base.hpp
+	include/sanguis/client/draw_base_fwd.hpp
+	include/sanguis/client/draw_base_unique_ptr.hpp
 	include/sanguis/client/events/action.hpp
 	include/sanguis/client/events/action_fwd.hpp
 	include/sanguis/client/events/connected.hpp
@@ -593,6 +594,8 @@ set(
 	include/sanguis/client/systems_fwd.hpp
 	include/sanguis/client/systems_unique_ptr.hpp
 	include/sanguis/client/weapon_description_from_message.hpp
+	include/sanguis/client/weapon_pair.hpp
+	include/sanguis/client/weapon_pair_fwd.hpp
 	include/sanguis/client/world_parameters.hpp
 	include/sanguis/client/world_parameters_fwd.hpp
 	src/client/args/display_mode.cpp
@@ -624,6 +627,7 @@ set(
 	src/client/create_systems.cpp
 	src/client/cursor.cpp
 	src/client/draw2d/collide_parameters.cpp
+	src/client/draw2d/create.cpp
 	src/client/draw2d/entities/aoe_bullet.cpp
 	src/client/draw2d/entities/base.cpp
 	src/client/draw2d/entities/buffs/base.cpp
@@ -675,8 +679,6 @@ set(
 	src/client/draw2d/factory/weapon_pickup.cpp
 	src/client/draw2d/log.cpp
 	src/client/draw2d/log_location.cpp
-	src/client/draw2d/message/dispatcher.cpp
-	src/client/draw2d/message/environment.cpp
 	src/client/draw2d/scene/background.cpp
 	src/client/draw2d/scene/background_dim.cpp
 	src/client/draw2d/scene/background_texture_coordinates.cpp
@@ -689,7 +691,6 @@ set(
 	src/client/draw2d/scene/hover/parameters.cpp
 	src/client/draw2d/scene/hover/weapon.cpp
 	src/client/draw2d/scene/hover/weapon_attribute.cpp
-	src/client/draw2d/scene/message_environment.cpp
 	src/client/draw2d/scene/object.cpp
 	src/client/draw2d/scene/translation.cpp
 	src/client/draw2d/scene/world/batch.cpp
@@ -706,6 +707,7 @@ set(
 	src/client/draw2d/translate/scalar_to_client.cpp
 	src/client/draw2d/translate/vector_from_client.cpp
 	src/client/draw2d/translate/vector_to_client.cpp
+	src/client/draw_base.cpp
 	src/client/events/action.cpp
 	src/client/events/message.cpp
 	src/client/events/net_error.cpp
