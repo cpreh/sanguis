@@ -1,6 +1,8 @@
 #include <sanguis/weapon_attribute_fwd.hpp>
+#include <sanguis/client/weapon_pair_fwd.hpp>
 #include <sanguis/client/draw2d/entities/hover/weapon.hpp>
 #include <sanguis/client/draw2d/scene/hover/base.hpp>
+#include <sanguis/client/draw2d/scene/hover/compare_weapons.hpp>
 #include <sanguis/client/draw2d/scene/hover/weapon.hpp>
 #include <sanguis/client/draw2d/scene/hover/weapon_attribute.hpp>
 #include <sanguis/client/draw2d/scene/hover/weapon_attribute_unique_ptr.hpp>
@@ -28,6 +30,7 @@ sanguis::client::draw2d::scene::hover::weapon::weapon(
 	sge::font::object &_font,
 	sanguis::client::draw2d::sprite::center const _center,
 	sanguis::client::load::hud::context &_hud_resources,
+	sanguis::client::weapon_pair const &_player_weapons,
 	sanguis::client::draw2d::entities::hover::weapon const &_info
 )
 :
@@ -46,9 +49,11 @@ sanguis::client::draw2d::scene::hover::weapon::weapon(
 			_info.get().attributes(),
 			[
 				this,
+				&_info,
 				&_gui_style,
 				&_renderer,
-				&_font
+				&_font,
+				&_player_weapons
 			](
 				sanguis::weapon_attribute const &_attribute
 			)
@@ -61,7 +66,12 @@ sanguis::client::draw2d::scene::hover::weapon::weapon(
 						_gui_style,
 						_renderer,
 						_font,
-						_attribute
+						_attribute,
+						sanguis::client::draw2d::scene::hover::compare_weapons(
+							_info.get().weapon_type(),
+							_attribute,
+							_player_weapons
+						)
 					);
 			}
 		)

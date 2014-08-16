@@ -197,6 +197,7 @@ set(
 	include/sanguis/client/draw2d/scene/hover/base.hpp
 	include/sanguis/client/draw2d/scene/hover/base_fwd.hpp
 	include/sanguis/client/draw2d/scene/hover/base_unique_ptr.hpp
+	include/sanguis/client/draw2d/scene/hover/compare_weapons.hpp
 	include/sanguis/client/draw2d/scene/hover/create.hpp
 	include/sanguis/client/draw2d/scene/hover/healthbar.hpp
 	include/sanguis/client/draw2d/scene/hover/healthbar_fwd.hpp
@@ -206,6 +207,8 @@ set(
 	include/sanguis/client/draw2d/scene/hover/parameters_fwd.hpp
 	include/sanguis/client/draw2d/scene/hover/weapon.hpp
 	include/sanguis/client/draw2d/scene/hover/weapon_attribute.hpp
+	include/sanguis/client/draw2d/scene/hover/weapon_attribute_diff.hpp
+	include/sanguis/client/draw2d/scene/hover/weapon_attribute_diff_fwd.hpp
 	include/sanguis/client/draw2d/scene/hover/weapon_attribute_fwd.hpp
 	include/sanguis/client/draw2d/scene/hover/weapon_attribute_unique_ptr.hpp
 	include/sanguis/client/draw2d/scene/message_environment.hpp
@@ -372,6 +375,7 @@ set(
 	include/sanguis/client/gui/hud/object_fwd.hpp
 	include/sanguis/client/gui/hud/scoped_details.hpp
 	include/sanguis/client/gui/hud/weapon_attribute_color.hpp
+	include/sanguis/client/gui/hud/weapon_attribute_diff_to_string.hpp
 	include/sanguis/client/gui/hud/weapon_attribute_name.hpp
 	include/sanguis/client/gui/hud/weapon_attribute_text.hpp
 	include/sanguis/client/gui/hud/weapon_attribute_value_to_string.hpp
@@ -593,6 +597,7 @@ set(
 	include/sanguis/client/systems.hpp
 	include/sanguis/client/systems_fwd.hpp
 	include/sanguis/client/systems_unique_ptr.hpp
+	include/sanguis/client/weapon_attribute_total.hpp
 	include/sanguis/client/weapon_description_from_message.hpp
 	include/sanguis/client/weapon_pair.hpp
 	include/sanguis/client/weapon_pair_fwd.hpp
@@ -684,6 +689,7 @@ set(
 	src/client/draw2d/scene/background_texture_coordinates.cpp
 	src/client/draw2d/scene/control_environment.cpp
 	src/client/draw2d/scene/hover/base.cpp
+	src/client/draw2d/scene/hover/compare_weapons.cpp
 	src/client/draw2d/scene/hover/create.cpp
 	src/client/draw2d/scene/hover/healthbar.cpp
 	src/client/draw2d/scene/hover/name.cpp
@@ -719,6 +725,7 @@ set(
 	src/client/gui/hud/object.cpp
 	src/client/gui/hud/scoped_details.cpp
 	src/client/gui/hud/weapon_attribute_color.cpp
+	src/client/gui/hud/weapon_attribute_diff_to_string.cpp
 	src/client/gui/hud/weapon_attribute_name.cpp
 	src/client/gui/hud/weapon_attribute_text.cpp
 	src/client/gui/hud/weapon_attribute_value_to_string.cpp
@@ -818,7 +825,9 @@ set(
 	src/client/states/perk_chooser.cpp
 	src/client/states/running.cpp
 	src/client/states/waiting_for_player.cpp
+	src/client/weapon_attribute_total.cpp
 	src/client/world_parameters.cpp
+	src/weapon_pair.cpp
 )
 
 sanguis_generate_symbol_header(

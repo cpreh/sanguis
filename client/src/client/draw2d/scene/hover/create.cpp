@@ -69,6 +69,7 @@ sanguis::client::draw2d::scene::hover::create(
 					parameters_.font(),
 					parameters_.center(),
 					parameters_.load_context(),
+					parameters_.player_weapons(),
 					_weapon
 				);
 		}

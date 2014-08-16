@@ -1,3 +1,4 @@
+#include <sanguis/client/weapon_pair_fwd.hpp>
 #include <sanguis/client/draw2d/radius.hpp>
 #include <sanguis/client/draw2d/scene/hover/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
@@ -13,6 +14,7 @@ sanguis::client::draw2d::scene::hover::parameters::parameters(
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sanguis::client::load::hud::context &_load_context,
+	sanguis::client::weapon_pair const &_player_weapons,
 	sanguis::client::draw2d::sprite::center const _center,
 	sanguis::client::draw2d::radius const _radius
 )
@@ -28,6 +30,9 @@ sanguis::client::draw2d::scene::hover::parameters::parameters(
 	),
 	load_context_(
 		_load_context
+	),
+	player_weapons_(
+		_player_weapons
 	),
 	center_{
 		_center
@@ -64,6 +69,13 @@ sanguis::client::draw2d::scene::hover::parameters::load_context() const
 {
 	return
 		load_context_;
+}
+
+sanguis::client::weapon_pair const &
+sanguis::client::draw2d::scene::hover::parameters::player_weapons() const
+{
+	return
+		player_weapons_;
 }
 
 sanguis::client::draw2d::sprite::center const

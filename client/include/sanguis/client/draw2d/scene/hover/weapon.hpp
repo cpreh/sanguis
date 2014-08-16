@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_HOVER_WEAPON_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_HOVER_WEAPON_HPP_INCLUDED
 
+#include <sanguis/client/weapon_pair_fwd.hpp>
 #include <sanguis/client/draw2d/entities/hover/weapon_fwd.hpp>
 #include <sanguis/client/draw2d/scene/hover/base.hpp>
 #include <sanguis/client/draw2d/scene/hover/weapon_attribute_unique_ptr.hpp>
@@ -46,6 +47,7 @@ public:
 		sge::font::object &,
 		sanguis::client::draw2d::sprite::center,
 		sanguis::client::load::hud::context &,
+		sanguis::client::weapon_pair const &,
 		sanguis::client::draw2d::entities::hover::weapon const &
 	);
 

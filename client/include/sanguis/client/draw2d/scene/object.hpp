@@ -9,6 +9,7 @@
 #include <sanguis/client/draw_base.hpp>
 #include <sanguis/client/player_health_callback.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
+#include <sanguis/client/weapon_pair.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/client/control/attack_dest_fwd.hpp>
 #include <sanguis/client/control/environment_fwd.hpp>
@@ -49,11 +50,13 @@
 #include <sanguis/messages/server/change_weapon_fwd.hpp>
 #include <sanguis/messages/server/change_world_fwd.hpp>
 #include <sanguis/messages/server/die_fwd.hpp>
+#include <sanguis/messages/server/give_weapon_fwd.hpp>
 #include <sanguis/messages/server/health_fwd.hpp>
 #include <sanguis/messages/server/max_health_fwd.hpp>
 #include <sanguis/messages/server/move_fwd.hpp>
 #include <sanguis/messages/server/remove_buff_fwd.hpp>
 #include <sanguis/messages/server/remove_fwd.hpp>
+#include <sanguis/messages/server/remove_weapon_fwd.hpp>
 #include <sanguis/messages/server/rotate_fwd.hpp>
 #include <sanguis/messages/server/speed_fwd.hpp>
 #include <sanguis/messages/server/weapon_status_fwd.hpp>
@@ -275,6 +278,11 @@ private:
 
 	result_type
 	operator()(
+		sanguis::messages::server::give_weapon const &
+	);
+
+	result_type
+	operator()(
 		sanguis::messages::server::health const &
 	);
 
@@ -296,6 +304,11 @@ private:
 	result_type
 	operator()(
 		sanguis::messages::server::remove_buff const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::server::remove_weapon const &
 	);
 
 	result_type
@@ -369,6 +382,8 @@ private:
 	sanguis::client::draw2d::optional_player_center player_center_;
 
 	sanguis::client::draw2d::optional_translation translation_;
+
+	sanguis::client::weapon_pair player_weapons_;
 
 	std::unique_ptr<
 		sanguis::client::control::environment

@@ -92,6 +92,7 @@
 #include <sanguis/messages/roles/entity_id.hpp>
 #include <sanguis/messages/roles/friend_type.hpp>
 #include <sanguis/messages/roles/health.hpp>
+#include <sanguis/messages/roles/is_primary_weapon.hpp>
 #include <sanguis/messages/roles/max_health.hpp>
 #include <sanguis/messages/roles/name.hpp>
 #include <sanguis/messages/roles/opening_count.hpp>
@@ -117,11 +118,13 @@
 #include <sanguis/messages/server/change_weapon.hpp>
 #include <sanguis/messages/server/change_world.hpp>
 #include <sanguis/messages/server/die.hpp>
+#include <sanguis/messages/server/give_weapon.hpp>
 #include <sanguis/messages/server/health.hpp>
 #include <sanguis/messages/server/max_health.hpp>
 #include <sanguis/messages/server/move.hpp>
 #include <sanguis/messages/server/remove.hpp>
 #include <sanguis/messages/server/remove_buff.hpp>
+#include <sanguis/messages/server/remove_weapon.hpp>
 #include <sanguis/messages/server/rotate.hpp>
 #include <sanguis/messages/server/speed.hpp>
 #include <sanguis/messages/server/weapon_status.hpp>
@@ -251,6 +254,7 @@ sanguis::client::draw2d::scene::object::object(
 	),
 	player_center_(),
 	translation_(),
+	player_weapons_(),
 	control_environment_(
 		fcppt::make_unique_ptr<
 			sanguis::client::draw2d::scene::control_environment
@@ -298,7 +302,7 @@ sanguis::client::draw2d::scene::object::process_message(
 )
 {
 	static sanguis::messages::server::call::object<
-		boost::mpl::vector22<
+		boost::mpl::vector24<
 			sanguis::messages::server::add_aoe_projectile,
 			sanguis::messages::server::add_aura,
 			sanguis::messages::server::add_buff,
@@ -313,11 +317,13 @@ sanguis::client::draw2d::scene::object::process_message(
 			sanguis::messages::server::change_weapon,
 			sanguis::messages::server::change_world,
 			sanguis::messages::server::die,
+			sanguis::messages::server::give_weapon,
 			sanguis::messages::server::health,
 			sanguis::messages::server::max_health,
 			sanguis::messages::server::move,
 			sanguis::messages::server::remove,
 			sanguis::messages::server::remove_buff,
+			sanguis::messages::server::remove_weapon,
 			sanguis::messages::server::rotate,
 			sanguis::messages::server::speed,
 			sanguis::messages::server::weapon_status
@@ -661,6 +667,7 @@ sanguis::client::draw2d::scene::object::hover_display(
 				renderer_,
 				font_,
 				hud_resources_,
+				player_weapons_,
 				_entity.center(),
 				_entity.radius()
 			),
@@ -1120,6 +1127,18 @@ sanguis::client::draw2d::scene::object::operator()(
 
 sanguis::client::draw2d::scene::object::result_type
 sanguis::client::draw2d::scene::object::operator()(
+	sanguis::messages::server::give_weapon const &_message
+)
+{
+	player_weapons_.add(
+		sanguis::client::weapon_description_from_message(
+			_message
+		)
+	);
+}
+
+sanguis::client::draw2d::scene::object::result_type
+sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::health const &_message
 )
 {
@@ -1218,6 +1237,18 @@ sanguis::client::draw2d::scene::object::operator()(
 	).remove_buff(
 		_message.get<
 			sanguis::messages::roles::buff_type
+		>()
+	);
+}
+
+sanguis::client::draw2d::scene::object::result_type
+sanguis::client::draw2d::scene::object::operator()(
+	sanguis::messages::server::remove_weapon const &_message
+)
+{
+	player_weapons_.remove(
+		_message.get<
+			sanguis::messages::roles::is_primary_weapon
 		>()
 	);
 }

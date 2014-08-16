@@ -1,6 +1,7 @@
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/client/gui/default_text_color.hpp>
 #include <sanguis/client/gui/hud/weapon_attribute_color.hpp>
+#include <sanguis/client/gui/hud/weapon_attribute_name.hpp>
 #include <sanguis/client/gui/hud/weapon_attribute_text.hpp>
 #include <sanguis/client/gui/hud/weapon_name.hpp>
 #include <sanguis/client/gui/hud/weapon_tooltip.hpp>
@@ -13,6 +14,7 @@
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
 #include <sanguis/gui/widget/reference_alignment_vector.hpp>
 #include <sanguis/gui/widget/static_text.hpp>
+#include <sge/font/lit.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/alignment.hpp>
@@ -61,6 +63,12 @@ sanguis::client::gui::hud::weapon_tooltip::weapon_tooltip(
 						_font,
 						sanguis::client::gui::hud::weapon_attribute_text(
 							_attribute
+						)
+						+
+						SGE_FONT_LIT(' ')
+						+
+						sanguis::client::gui::hud::weapon_attribute_name(
+							_attribute.type()
 						),
 						sanguis::client::gui::hud::weapon_attribute_color(
 							_attribute.type()

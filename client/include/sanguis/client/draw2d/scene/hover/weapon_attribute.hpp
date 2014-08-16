@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_SCENE_HOVER_WEAPON_ATTRIBUTE_HPP_INCLUDED
 
 #include <sanguis/weapon_attribute_fwd.hpp>
+#include <sanguis/client/draw2d/scene/hover/weapon_attribute_diff_fwd.hpp>
 #include <sanguis/client/draw2d/scene/hover/weapon_attribute_fwd.hpp>
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
@@ -36,7 +37,8 @@ public:
 		sanguis::gui::style::base const &,
 		sge::renderer::device::ffp &,
 		sge::font::object &,
-		sanguis::weapon_attribute const &
+		sanguis::weapon_attribute const &,
+		sanguis::client::draw2d::scene::hover::weapon_attribute_diff
 	);
 
 	~weapon_attribute();
@@ -49,6 +51,8 @@ private:
 	sanguis::gui::widget::expander expander1_;
 
 	sanguis::gui::widget::static_text value_;
+
+	sanguis::gui::widget::expander expander2_;
 
 	sanguis::gui::widget::static_text diff_;
 

@@ -28,10 +28,15 @@ public:
 	);
 
 	sanguis::optional_weapon_description const &
-	compare(
+	get(
 		sanguis::is_primary_weapon
 	) const;
 private:
+	sanguis::optional_weapon_description &
+	get(
+		sanguis::is_primary_weapon
+	);
+
 	sanguis::optional_weapon_description primary_;
 
 	sanguis::optional_weapon_description secondary_;
