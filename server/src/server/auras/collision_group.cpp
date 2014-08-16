@@ -11,35 +11,37 @@ sanguis::server::auras::collision_group(
 	sanguis::server::auras::influence const _influence
 )
 {
-	if(
-		(
-			_team == sanguis::server::team::players
-			&& _influence == sanguis::server::auras::influence::buff
-		)
-		||
-		(
-			_team == sanguis::server::team::monsters
-			&& _influence == sanguis::server::auras::influence::debuff
-		)
-
+	switch(
+		_influence
 	)
-		return
-			sanguis::collision::world::group::projectile_enemy;
-
-	if(
-		(
-			_team == sanguis::server::team::players
-			&& _influence == sanguis::server::auras::influence::debuff
+	{
+	case sanguis::server::auras::influence::buff:
+		switch(
+			_team
 		)
-		||
-		(
-			_team == sanguis::server::team::monsters
-			&& _influence == sanguis::server::auras::influence::buff
+		{
+		case sanguis::server::team::players:
+			return
+				sanguis::collision::world::group::projectile_enemy;
+		case sanguis::server::team::monsters:
+			return
+				sanguis::collision::world::group::projectile_player;
+		}
+		break;
+	case sanguis::server::auras::influence::debuff:
+		switch(
+			_team
 		)
-
-	)
-		return
-			sanguis::collision::world::group::projectile_player;
+		{
+		case sanguis::server::team::players:
+			return
+				sanguis::collision::world::group::projectile_player;
+		case sanguis::server::team::monsters:
+			return
+				sanguis::collision::world::group::projectile_enemy;
+		}
+		break;
+	}
 
 	FCPPT_ASSERT_UNREACHABLE;
 }

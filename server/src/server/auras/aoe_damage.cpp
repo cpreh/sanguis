@@ -15,6 +15,7 @@
 sanguis::server::auras::aoe_damage::aoe_damage(
 	sanguis::server::team const _team,
 	sanguis::server::aoe const _aoe,
+	sanguis::server::auras::influence const _influence,
 	sanguis::server::damage::unit const _damage,
 	sanguis::server::damage::modified_array const &_damage_values
 )
@@ -25,7 +26,7 @@ sanguis::server::auras::aoe_damage::aoe_damage(
 		),
 		sanguis::server::auras::collision_group(
 			_team,
-			sanguis::server::auras::influence::debuff
+			_influence
 		)
 	),
 	damage_(

@@ -5,6 +5,7 @@
 #include <sanguis/server/aoe_fwd.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/auras/aura.hpp>
+#include <sanguis/server/auras/influence_fwd.hpp>
 #include <sanguis/server/damage/modified_array.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
@@ -29,6 +30,7 @@ public:
 	aoe_damage(
 		sanguis::server::team,
 		sanguis::server::aoe,
+		sanguis::server::auras::influence,
 		sanguis::server::damage::unit,
 		sanguis::server::damage::modified_array const &
 	);
