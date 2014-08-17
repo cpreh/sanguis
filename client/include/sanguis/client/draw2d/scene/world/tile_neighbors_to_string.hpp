@@ -7,6 +7,9 @@
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/join_strings.hpp>
 #include <fcppt/algorithm/map.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <vector>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis

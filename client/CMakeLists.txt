@@ -211,8 +211,6 @@ set(
 	include/sanguis/client/draw2d/scene/hover/weapon_attribute_diff_fwd.hpp
 	include/sanguis/client/draw2d/scene/hover/weapon_attribute_fwd.hpp
 	include/sanguis/client/draw2d/scene/hover/weapon_attribute_unique_ptr.hpp
-	include/sanguis/client/draw2d/scene/message_environment.hpp
-	include/sanguis/client/draw2d/scene/message_environment_fwd.hpp
 	include/sanguis/client/draw2d/scene/object.hpp
 	include/sanguis/client/draw2d/scene/object_fwd.hpp
 	include/sanguis/client/draw2d/scene/translation.hpp

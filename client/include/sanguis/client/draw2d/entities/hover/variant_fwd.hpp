@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_HOVER_VARIANT_FWD_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_HOVER_VARIANT_FWD_HPP_INCLUDED
 
-#include <sanguis/client/draw2d/entities/hover/name_fwd.hpp>
+#include <sanguis/client/draw2d/entities/hover/name_and_health_fwd.hpp>
 #include <sanguis/client/draw2d/entities/hover/weapon_fwd.hpp>
 #include <fcppt/variant/object_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
