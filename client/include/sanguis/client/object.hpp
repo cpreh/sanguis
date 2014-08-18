@@ -15,6 +15,7 @@
 #include <sanguis/gui/style/base_unique_ptr.hpp>
 #include <sge/console/object.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
+#include <sge/font/added_unique_ptr.hpp>
 #include <sge/font/object_unique_ptr.hpp>
 #include <alda/net/port.hpp>
 #include <awl/main/exit_code.hpp>
@@ -79,6 +80,8 @@ private:
 	systems_unique_ptr const sys_;
 
 	sge::renderer::device::core &renderer_;
+
+	sge::font::added_unique_ptr const added_font_;
 
 	sge::font::object_unique_ptr const font_object_;
 

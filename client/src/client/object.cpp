@@ -1,4 +1,5 @@
 #include <sanguis/duration.hpp>
+#include <sanguis/media_path.hpp>
 #include <sanguis/client/create_systems.hpp>
 #include <sanguis/client/log.hpp>
 #include <sanguis/client/object.hpp>
@@ -19,6 +20,7 @@
 #include <sge/config/media_path.hpp>
 #include <sge/console/prefix.hpp>
 #include <sge/console/gfx/output_line_limit.hpp>
+#include <sge/font/added.hpp>
 #include <sge/font/object.hpp>
 #include <sge/font/parameters.hpp>
 #include <sge/font/system.hpp>
@@ -66,9 +68,21 @@ sanguis::client::object::object(
 	renderer_(
 		sys_->renderer_device_core()
 	),
+	added_font_(
+		sys_->font_system().add_font(
+			sanguis::media_path()
+			/
+			FCPPT_TEXT("font")
+			/
+			FCPPT_TEXT("Electrolize-Regular.ttf")
+		)
+	),
 	font_object_(
 		sys_->font_system().create_font(
 			sge::font::parameters()
+			.family(
+				FCPPT_TEXT("Electrolize")
+			)
 		)
 	),
 	gui_style_(
