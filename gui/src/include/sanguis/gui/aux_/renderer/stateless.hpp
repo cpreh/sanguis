@@ -58,6 +58,14 @@ private:
 	override;
 
 	void
+	draw_image_repeat(
+		sge::renderer::context::ffp &,
+		sge::texture::part const &,
+		sge::rucksack::rect
+	)
+	override;
+
+	void
 	draw_static_text(
 		sge::renderer::context::ffp &,
 		sge::font::draw::static_text const &

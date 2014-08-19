@@ -108,6 +108,7 @@ set(
 	include/sanguis/gui/widget/unique_ptr_tree_vector.hpp
 	include/sanguis/gui/widget/unique_ptr_vector.hpp
 	src/aux_/draw_image.cpp
+	src/aux_/draw_image_repeat.cpp
 	src/aux_/fill_rect.cpp
 	src/aux_/gravity_east.cpp
 	src/aux_/gravity_south.cpp
@@ -126,6 +127,7 @@ set(
 	src/default_aspect.cpp
 	src/draw.cpp
 	src/include/sanguis/gui/aux_/draw_image.hpp
+	src/include/sanguis/gui/aux_/draw_image_repeat.hpp
 	src/include/sanguis/gui/aux_/draw_sprite.hpp
 	src/include/sanguis/gui/aux_/fill_rect.hpp
 	src/include/sanguis/gui/aux_/gravity_east.hpp

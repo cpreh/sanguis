@@ -1,5 +1,6 @@
 #include <sanguis/gui/aux_/fill_rect.hpp>
 #include <sanguis/gui/aux_/draw_image.hpp>
+#include <sanguis/gui/aux_/draw_image_repeat.hpp>
 #include <sanguis/gui/aux_/renderer/stateless.hpp>
 #include <sanguis/gui/renderer/base.hpp>
 #include <sge/font/draw/set_matrices.hpp>
@@ -54,6 +55,21 @@ sanguis::gui::aux_::renderer::stateless::draw_image(
 		_context,
 		_texture,
 		_pos
+	);
+}
+
+void
+sanguis::gui::aux_::renderer::stateless::draw_image_repeat(
+	sge::renderer::context::ffp &_context,
+	sge::texture::part const &_texture,
+	sge::rucksack::rect const _area
+)
+{
+	sanguis::gui::aux_::draw_image_repeat(
+		renderer_,
+		_context,
+		_texture,
+		_area
 	);
 }
 

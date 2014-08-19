@@ -21,7 +21,12 @@ namespace gui
 namespace aux_
 {
 
-typedef
+template<
+	sge::sprite::config::texture_coordinates TextureCoordinates
+>
+using
+image_sprite_choices
+=
 sge::sprite::config::choices<
 	sanguis::gui::aux_::sprite_type_choices,
 	sge::sprite::config::normal_size,
@@ -30,12 +35,11 @@ sge::sprite::config::choices<
 			sge::sprite::config::texture_level_count<
 				1u
 			>,
-			sge::sprite::config::texture_coordinates::automatic,
+			TextureCoordinates,
 			sge::sprite::config::texture_ownership::reference
 		>
 	>
->
-image_sprite_choices;
+>;
 
 }
 }
