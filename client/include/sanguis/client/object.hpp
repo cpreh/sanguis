@@ -85,11 +85,11 @@ private:
 
 	sge::font::object_unique_ptr const font_object_;
 
+	sanguis::client::load::context resources_;
+
 	sanguis::gui::style::base_unique_ptr const gui_style_;
 
 	sge::console::object console_;
-
-	sanguis::client::load::context resources_;
 
 	sanguis::client::console::gfx console_gfx_;
 

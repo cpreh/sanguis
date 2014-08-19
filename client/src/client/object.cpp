@@ -15,7 +15,7 @@
 #include <sanguis/client/events/tick.hpp>
 #include <sanguis/client/states/menu.hpp>
 #include <sanguis/gui/style/base.hpp>
-#include <sanguis/gui/style/create.hpp>
+#include <sanguis/client/gui/style/simple.hpp>
 #include <sge/audio/player.hpp>
 #include <sge/config/media_path.hpp>
 #include <sge/console/prefix.hpp>
@@ -83,14 +83,11 @@ sanguis::client::object::object(
 			.family(
 				FCPPT_TEXT("Electrolize")
 			)
-		)
-	),
-	gui_style_(
-		sanguis::gui::style::create()
-	),
-	console_(
-		sge::console::prefix(
-			FCPPT_TEXT('/')
+			.ttf_size(
+				sge::font::ttf_size(
+					20u
+				)
+			)
 		)
 	),
 	resources_(
@@ -98,6 +95,16 @@ sanguis::client::object::object(
 		sys_->renderer_device_core(),
 		sys_->audio_loader(),
 		sys_->audio_player()
+	),
+	gui_style_(
+		fcppt::make_unique_ptr<client::gui::style::simple>(
+			resources_.resources().textures()
+		)
+	),
+	console_(
+		sge::console::prefix(
+			FCPPT_TEXT('/')
+		)
 	),
 	console_gfx_(
 		console_,

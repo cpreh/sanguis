@@ -411,6 +411,13 @@ set(
 	include/sanguis/client/gui/perk/tab_fwd.hpp
 	include/sanguis/client/gui/perk/tab_unique_ptr.hpp
 	include/sanguis/client/gui/perk/tab_unique_ptr_vector.hpp
+	include/sanguis/client/gui/style/background_color.hpp
+	include/sanguis/client/gui/style/border_color.hpp
+	include/sanguis/client/gui/style/inner_border.hpp
+	include/sanguis/client/gui/style/outer_border.hpp
+	include/sanguis/client/gui/style/simple.hpp
+	include/sanguis/client/gui/style/spacing.hpp
+	include/sanguis/client/gui/style/text_color.hpp
 	include/sanguis/client/gui/to_duration.hpp
 	include/sanguis/client/health.hpp
 	include/sanguis/client/health_pair.hpp
@@ -742,6 +749,10 @@ set(
 	src/client/gui/perk/make_tabs.cpp
 	src/client/gui/perk/state.cpp
 	src/client/gui/perk/tab.cpp
+	src/client/gui/style/background_color.cpp
+	src/client/gui/style/border_color.cpp
+	src/client/gui/style/simple.cpp
+	src/client/gui/style/text_color.cpp
 	src/client/gui/to_duration.cpp
 	src/client/health_pair.cpp
 	src/client/health_valid.cpp
