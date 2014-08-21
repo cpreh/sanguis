@@ -146,7 +146,7 @@ sanguis::server::machine::send_to_all(
 		temp_buffer_
 	);
 
-	alda::net::server::connection_id_container const &connections(
+	alda::net::server::connection_id_container const connections(
 		net_.connections()
 	);
 
@@ -156,11 +156,19 @@ sanguis::server::machine::send_to_all(
 		connections
 	)
 	{
+		alda::net::buffer::circular_send::optional_ref const buffer{
+			net_.send_buffer(
+				id
+			)
+		};
+
+		FCPPT_ASSERT_ERROR(
+			buffer
+		);
+
 		if(
 			!sanguis::net::append_to_circular_buffer(
-				*net_.send_buffer(
-					id
-				),
+				*buffer,
 				temp_buffer_
 			)
 		)
