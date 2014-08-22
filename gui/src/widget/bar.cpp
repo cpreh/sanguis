@@ -48,7 +48,9 @@ sanguis::gui::widget::bar::bar(
 					sge::rucksack::optional_scalar()
 				),
 				sge::rucksack::is_expanding(
-					false
+					_axis
+					==
+					sge::rucksack::axis::x
 				)
 			),
 			sge::rucksack::axis_policy(
@@ -59,7 +61,9 @@ sanguis::gui::widget::bar::bar(
 					sge::rucksack::optional_scalar()
 				),
 				sge::rucksack::is_expanding(
-					false
+					_axis
+					==
+					sge::rucksack::axis::y
 				)
 			),
 			sanguis::gui::default_aspect()
