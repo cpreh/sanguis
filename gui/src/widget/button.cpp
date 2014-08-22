@@ -7,6 +7,8 @@
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/button.hpp>
 #include <sge/font/dim.hpp>
+#include <sge/font/flags.hpp>
+#include <sge/font/flags_field.hpp>
 #include <sge/font/metrics.hpp>
 #include <sge/font/object.hpp>
 #include <sge/font/rect.hpp>
@@ -32,6 +34,7 @@
 #include <sge/rucksack/vector.hpp>
 #include <sge/rucksack/widget/base_fwd.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/signal/auto_connection.hpp>
@@ -157,14 +160,13 @@ sanguis::gui::widget::button::on_draw(
 		this->layout().area()
 	);
 
-	// TODO: Make align_h::center usable in static_text
 	static_text_.pos(
 		fcppt::math::vector::structure_cast<
 			sge::font::vector
 		>(
 			layout_.position()
 			+
-			style_.button_spacing().w()
+			style_.button_spacing()
 			/
 			2
 		)
@@ -175,7 +177,7 @@ sanguis::gui::widget::button::on_draw(
 				font_.metrics().height(),
 				layout_.size().h()
 				-
-				style_.button_spacing().w()
+				style_.button_spacing().h()
 			)
 		)
 	);
@@ -219,6 +221,11 @@ sanguis::gui::widget::button::make_static_text(
 			_text,
 			sge::font::text_parameters(
 				sge::font::align_h::left()
+			)
+			.flags(
+				sge::font::flags_field{
+					sge::font::flags::no_multi_line
+				}
 			),
 			sge::font::vector::null(),
 			style_.text_color().get(),

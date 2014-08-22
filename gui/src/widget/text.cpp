@@ -5,6 +5,8 @@
 #include <sanguis/gui/style/base.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/text.hpp>
+#include <sge/font/flags.hpp>
+#include <sge/font/flags_field.hpp>
 #include <sge/font/metrics.hpp>
 #include <sge/font/object.hpp>
 #include <sge/font/string.hpp>
@@ -145,6 +147,11 @@ sanguis::gui::widget::text::on_draw(
 					layout_.size().w()
 				)
 			)
+		)
+		.flags(
+			sge::font::flags_field{
+				sge::font::flags::no_multi_line
+			}
 		),
 		fcppt::math::vector::structure_cast<
 			sge::font::vector
@@ -168,7 +175,6 @@ sanguis::gui::widget::text::on_draw(
 		static_text
 	);
 }
-
 
 sge::rucksack::axis_policy
 sanguis::gui::widget::text::horizontal_policy() const

@@ -421,13 +421,11 @@ sanguis::gui::widget::edit::make_static_text()
 					)
 				)
 			)
-			// FIXME: no_multi_line does something weird in pango
-			/*
 			.flags(
 				sge::font::flags_field{
 					sge::font::flags::no_multi_line
 				}
-			)*/,
+			),
 			fcppt::math::vector::structure_cast<
 				sge::font::vector
 			>(

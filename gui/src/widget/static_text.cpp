@@ -3,6 +3,8 @@
 #include <sanguis/gui/style/base.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/static_text.hpp>
+#include <sge/font/flags.hpp>
+#include <sge/font/flags_field.hpp>
 #include <sge/font/metrics.hpp>
 #include <sge/font/object.hpp>
 #include <sge/font/rect.hpp>
@@ -43,6 +45,11 @@ sanguis::gui::widget::static_text::static_text(
 		_value,
 		sge::font::text_parameters(
 			sge::font::align_h::left()
+		)
+		.flags(
+			sge::font::flags_field{
+				sge::font::flags::no_multi_line
+			}
 		),
 		sge::font::vector::null(),
 		_text_color.get(),

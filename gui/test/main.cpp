@@ -189,6 +189,8 @@ try
 		sanguis::gui::style::create()
 	};
 
+	sanguis::gui::context context;
+
 	sanguis::gui::widget::button button(
 		*style,
 		sys.renderer_device_ffp(),
@@ -227,8 +229,6 @@ try
 			FCPPT_TEXT("car.png")
 		)->view()
 	);
-
-	sanguis::gui::context context;
 
 	auto const make_tree(
 		[
