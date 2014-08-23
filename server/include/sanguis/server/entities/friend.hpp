@@ -2,7 +2,6 @@
 #define SANGUIS_SERVER_ENTITIES_FRIEND_HPP_INCLUDED
 
 #include <sanguis/friend_type.hpp>
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/collision/world/group_fwd.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/health.hpp>
@@ -46,7 +45,6 @@ class friend_
 	);
 public:
 	friend_(
-		sanguis::random_generator &,
 		sanguis::friend_type,
 		sanguis::server::environment::load_context &,
 		sanguis::server::damage::armor_array const &,

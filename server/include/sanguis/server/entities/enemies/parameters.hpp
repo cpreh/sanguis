@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_ENTITIES_ENEMIES_PARAMETERS_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_ENEMIES_PARAMETERS_HPP_INCLUDED
 
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
@@ -40,7 +39,6 @@ class parameters
 	);
 public:
 	parameters(
-		sanguis::random_generator &,
 		sanguis::creator::enemy_type,
 		sanguis::server::environment::load_context &,
 		sanguis::server::damage::armor_array const &,
@@ -65,9 +63,6 @@ public:
 	) = delete;
 
 	~parameters();
-
-	sanguis::random_generator &
-	random_generator() const;
 
 	sanguis::creator::enemy_type
 	enemy_type() const;
@@ -165,8 +160,6 @@ public:
 		sanguis::server::damage::armor_unit
 	);
 private:
-	sanguis::random_generator &random_generator_;
-
 	sanguis::creator::enemy_type const enemy_type_;
 
 	sanguis::server::environment::load_context &load_context_;

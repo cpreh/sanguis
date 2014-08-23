@@ -57,6 +57,7 @@ sanguis::server::entities::enemies::factory::ghost(
 				60.f
 			),
 			sanguis::server::ai::create_simple(
+				_parameters.random_generator(),
 				sanguis::server::ai::sight_range(
 					1000.f
 				)

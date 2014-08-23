@@ -1,3 +1,4 @@
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/entities/enemies/attribute_container.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
 #include <sanguis/server/entities/enemies/finalize_special_parameters.hpp>
@@ -17,6 +18,7 @@
 
 
 sanguis::server::entities::enemies::special::special(
+	sanguis::random_generator &_random_generator,
 	sanguis::server::entities::enemies::parameters &&_parameters,
 	sanguis::server::entities::enemies::attribute_container const &_attributes,
 	sanguis::server::entities::enemies::skills::factory::container const &_skills
@@ -37,6 +39,7 @@ sanguis::server::entities::enemies::special::special(
 		>(
 			_skills,
 			[
+				&_random_generator,
 				&_parameters,
 				this
 			](
@@ -47,7 +50,7 @@ sanguis::server::entities::enemies::special::special(
 					_create(
 						sanguis::server::entities::enemies::skills::factory::parameters(
 							this->diff_clock(),
-							_parameters.random_generator(),
+							_random_generator,
 							_parameters.difficulty()
 						)
 					);

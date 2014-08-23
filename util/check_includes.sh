@@ -2,8 +2,6 @@
 
 INCLUDE_BINARY="check_includes"
 
-check_includes main/include
-
 check_includes client/include
 
 check_includes collision/include
@@ -24,9 +22,13 @@ check_includes gui/include
 
 check_includes gui/src/include
 
+check_includes main/include
+
 check_includes model/include
 
 check_includes model/src/include
+
+check_includes server/include
 
 check_includes tools/animations/include
 

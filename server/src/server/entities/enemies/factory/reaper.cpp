@@ -40,7 +40,6 @@ sanguis::server::entities::enemies::factory::reaper(
 )
 {
 	sanguis::server::entities::enemies::parameters enemy_parameters(
-		_parameters.random_generator(),
 		_parameters.enemy_type(),
 		_parameters.load_context(),
 		sanguis::server::damage::no_armor(),
@@ -55,6 +54,7 @@ sanguis::server::entities::enemies::factory::reaper(
 			150.f
 		),
 		sanguis::server::ai::create_simple(
+			_parameters.random_generator(),
 			sanguis::server::ai::sight_range(
 				1000.f
 			)
@@ -104,6 +104,7 @@ sanguis::server::entities::enemies::factory::reaper(
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::enemies::special
 		>(
+			_parameters.random_generator(),
 			std::move(
 				enemy_parameters
 			),

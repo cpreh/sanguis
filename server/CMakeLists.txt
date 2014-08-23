@@ -4,24 +4,28 @@ set(
 	include/sanguis/server/add_target_callback.hpp
 	include/sanguis/server/add_weapon_pickup_callback.hpp
 	include/sanguis/server/ai/angle_to_target.hpp
-	include/sanguis/server/ai/base.hpp
-	include/sanguis/server/ai/base_fwd.hpp
+	include/sanguis/server/ai/behavior/attack.hpp
+	include/sanguis/server/ai/behavior/base.hpp
+	include/sanguis/server/ai/behavior/base_fwd.hpp
+	include/sanguis/server/ai/behavior/base_unique_ptr.hpp
+	include/sanguis/server/ai/behavior/status.hpp
+	include/sanguis/server/ai/behavior/status_fwd.hpp
+	include/sanguis/server/ai/behavior/wander.hpp
+	include/sanguis/server/ai/context.hpp
+	include/sanguis/server/ai/context_fwd.hpp
 	include/sanguis/server/ai/create_friend.hpp
 	include/sanguis/server/ai/create_function.hpp
 	include/sanguis/server/ai/create_simple.hpp
 	include/sanguis/server/ai/create_swarm.hpp
 	include/sanguis/server/ai/entity_set.hpp
-	include/sanguis/server/ai/friend.hpp
 	include/sanguis/server/ai/idle.hpp
 	include/sanguis/server/ai/is_patrolling.hpp
-	include/sanguis/server/ai/manager.hpp
-	include/sanguis/server/ai/manager_fwd.hpp
 	include/sanguis/server/ai/move_to_target.hpp
-	include/sanguis/server/ai/optional_target.hpp
-	include/sanguis/server/ai/optional_target_fwd.hpp
 	include/sanguis/server/ai/pathing/can_walk_diagonally.hpp
 	include/sanguis/server/ai/pathing/find_target.hpp
 	include/sanguis/server/ai/pathing/is_visible.hpp
+	include/sanguis/server/ai/pathing/optional_target.hpp
+	include/sanguis/server/ai/pathing/optional_target_fwd.hpp
 	include/sanguis/server/ai/pathing/positions_are_close.hpp
 	include/sanguis/server/ai/pathing/start.hpp
 	include/sanguis/server/ai/pathing/start_fwd.hpp
@@ -31,20 +35,19 @@ set(
 	include/sanguis/server/ai/rotate_and_move_to_target.hpp
 	include/sanguis/server/ai/rotate_to.hpp
 	include/sanguis/server/ai/rotate_to_target.hpp
-	include/sanguis/server/ai/search_new_target.hpp
 	include/sanguis/server/ai/sight_range.hpp
 	include/sanguis/server/ai/sight_range_fwd.hpp
-	include/sanguis/server/ai/simple.hpp
 	include/sanguis/server/ai/stop.hpp
-	include/sanguis/server/ai/swarm.hpp
-	include/sanguis/server/ai/target.hpp
-	include/sanguis/server/ai/target_fwd.hpp
-	include/sanguis/server/ai/unique_ptr.hpp
+	include/sanguis/server/ai/tree/base.hpp
+	include/sanguis/server/ai/tree/base_fwd.hpp
+	include/sanguis/server/ai/tree/base_unique_ptr.hpp
+	include/sanguis/server/ai/tree/container.hpp
+	include/sanguis/server/ai/tree/leaf.hpp
+	include/sanguis/server/ai/tree/make_leaf.hpp
+	include/sanguis/server/ai/tree/priority_sequence.hpp
+	include/sanguis/server/ai/tree/status.hpp
+	include/sanguis/server/ai/tree/status_fwd.hpp
 	include/sanguis/server/ai/update_interval.hpp
-	include/sanguis/server/ai/update_result.hpp
-	include/sanguis/server/ai/update_result_fwd.hpp
-	include/sanguis/server/ai/visible.hpp
-	include/sanguis/server/ai/visible_fwd.hpp
 	include/sanguis/server/angle.hpp
 	include/sanguis/server/angle_fwd.hpp
 	include/sanguis/server/aoe.hpp
@@ -108,7 +111,6 @@ set(
 	include/sanguis/server/console_fwd.hpp
 	include/sanguis/server/create.hpp
 	include/sanguis/server/create_player.hpp
-	include/sanguis/server/create_player.hpp.hpp
 	include/sanguis/server/damage/armor_array.hpp
 	include/sanguis/server/damage/armor_array_fwd.hpp
 	include/sanguis/server/damage/armor_meta.hpp
@@ -458,6 +460,7 @@ set(
 	include/sanguis/server/random/draw.hpp
 	include/sanguis/server/random/equal_function.hpp
 	include/sanguis/server/random/equal_function_tag.hpp
+	include/sanguis/server/random/grid_pos.hpp
 	include/sanguis/server/random/less_function.hpp
 	include/sanguis/server/random/less_function_tag.hpp
 	include/sanguis/server/random/make_upper_bound.hpp
@@ -654,13 +657,14 @@ set(
 	include/sanguis/server/world/spawn_parameters.hpp
 	include/sanguis/server/world/update_entity.hpp
 	src/server/ai/angle_to_target.cpp
-	src/server/ai/base.cpp
+	src/server/ai/behavior/attack.cpp
+	src/server/ai/behavior/base.cpp
+	src/server/ai/behavior/wander.cpp
+	src/server/ai/context.cpp
 	src/server/ai/create_friend.cpp
 	src/server/ai/create_simple.cpp
 	src/server/ai/create_swarm.cpp
-	src/server/ai/friend.cpp
 	src/server/ai/idle.cpp
-	src/server/ai/manager.cpp
 	src/server/ai/move_to_target.cpp
 	src/server/ai/pathing/can_walk_diagonally.cpp
 	src/server/ai/pathing/find_target.cpp
@@ -669,10 +673,10 @@ set(
 	src/server/ai/rotate_and_move_to_target.cpp
 	src/server/ai/rotate_to.cpp
 	src/server/ai/rotate_to_target.cpp
-	src/server/ai/search_new_target.cpp
-	src/server/ai/simple.cpp
 	src/server/ai/stop.cpp
-	src/server/ai/swarm.cpp
+	src/server/ai/tree/base.cpp
+	src/server/ai/tree/leaf.cpp
+	src/server/ai/tree/priority_sequence.cpp
 	src/server/ai/update_interval.cpp
 	src/server/auras/aoe_damage.cpp
 	src/server/auras/aura.cpp
@@ -868,6 +872,7 @@ set(
 	src/server/perks/tree/status.cpp
 	src/server/player_id_from_args.cpp
 	src/server/player_id_from_net.cpp
+	src/server/random/grid_pos.cpp
 	src/server/send_available_perks.cpp
 	src/server/states/log_location.cpp
 	src/server/states/paused.cpp

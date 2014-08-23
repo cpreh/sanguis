@@ -24,8 +24,6 @@
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
-#include <sanguis/server/ai/base.hpp>
-#include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/entities/exp_area.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
@@ -60,7 +58,6 @@ sanguis::server::entities::enemies::enemy::enemy(
 )
 :
 	sanguis::server::entities::with_ai(
-		_parameters.random_generator(),
 		_parameters.ai_create_function(),
 		std::move(
 			_parameters.weapon()

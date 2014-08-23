@@ -25,7 +25,6 @@ sanguis::creator::aux_::random::uniform_pos::uniform_pos(
 {
 }
 
-
 sanguis::creator::pos
 sanguis::creator::aux_::random::uniform_pos::operator()()
 {

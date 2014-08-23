@@ -1,10 +1,10 @@
 #ifndef SANGUIS_SERVER_ENTITIES_WITH_AI_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_WITH_AI_HPP_INCLUDED
 
-#include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/diff_timer.hpp>
+#include <sanguis/server/ai/context.hpp>
 #include <sanguis/server/ai/create_function.hpp>
-#include <sanguis/server/ai/manager_fwd.hpp>
-#include <sanguis/server/ai/unique_ptr.hpp>
+#include <sanguis/server/ai/tree/base_unique_ptr.hpp>
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 #include <sanguis/server/entities/with_auras_id.hpp>
@@ -39,7 +39,6 @@ class with_ai
 	);
 protected:
 	with_ai(
-		sanguis::random_generator &,
 		sanguis::server::ai::create_function const &,
 		sanguis::server::weapons::unique_ptr &&,
 		sanguis::server::auras::container &&,
@@ -53,25 +52,18 @@ protected:
 	void
 	update()
 	override;
-public:
-	sanguis::server::ai::base const &
-	ai() const;
 private:
 	void
 	on_create()
 	override;
 
-	sanguis::random_generator &random_generator_;
+	sanguis::diff_timer update_timer_;
 
-	sanguis::server::ai::unique_ptr ai_;
+	sanguis::server::ai::create_function const create_ai_;
 
-	typedef
-	std::unique_ptr<
-		sanguis::server::ai::manager
-	>
-	manager_unique_ptr;
+	sanguis::server::ai::context ai_context_;
 
-	manager_unique_ptr manager_;
+	sanguis::server::ai::tree::base_unique_ptr ai_;
 };
 
 }

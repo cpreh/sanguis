@@ -1,5 +1,5 @@
-#ifndef SANGUIS_NET_SERVER_DESERIALIZE_HPP_INCLUDED
-#define SANGUIS_NET_SERVER_DESERIALIZE_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_NET_DESERIALIZE_HPP_INCLUDED
+#define SANGUIS_SERVER_NET_DESERIALIZE_HPP_INCLUDED
 
 #include <sanguis/messages/client/unique_ptr.hpp>
 #include <alda/net/buffer/circular_receive/object_fwd.hpp>

@@ -70,7 +70,6 @@ sanguis::server::entities::pickups::monster::do_pickup(
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::friend_
 		>(
-			random_generator_,
 			friend_type_,
 			this->environment()->load_context(),
 			sanguis::server::damage::no_armor(),

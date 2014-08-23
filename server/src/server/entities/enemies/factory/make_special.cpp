@@ -85,6 +85,7 @@ sanguis::server::entities::enemies::factory::make_special(
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::enemies::special
 		>(
+			_random_generator,
 			std::move(
 				_parameters
 			),

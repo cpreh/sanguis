@@ -61,6 +61,8 @@ sanguis::gui::aux_::draw_image_repeat(
 				_texture.size()
 			)
 		)
-		.size(_rect.size())
+		.size(
+			_rect.size()
+		)
 	);
 }

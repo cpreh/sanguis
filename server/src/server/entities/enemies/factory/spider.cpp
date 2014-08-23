@@ -46,6 +46,7 @@ sanguis::server::entities::enemies::factory::spider(
 				75.f
 			),
 			sanguis::server::ai::create_simple(
+				_parameters.random_generator(),
 				sanguis::server::ai::sight_range(
 					1000.f
 				)

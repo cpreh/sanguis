@@ -1,5 +1,4 @@
 #include <sanguis/friend_type.hpp>
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/collision/world/group.hpp>
 #include <sanguis/load/friend_name.hpp>
 #include <sanguis/messages/roles/angle.hpp>
@@ -23,7 +22,6 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/regeneration.hpp>
 #include <sanguis/server/team.hpp>
-#include <sanguis/server/ai/base.hpp>
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/container.hpp>
@@ -55,7 +53,6 @@
 
 
 sanguis::server::entities::friend_::friend_(
-	sanguis::random_generator &_random_generator,
 	sanguis::friend_type const _friend_type,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::damage::armor_array const &_armor,
@@ -67,7 +64,6 @@ sanguis::server::entities::friend_::friend_(
 :
 	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::with_ai(
-		_random_generator,
 		_ai,
 		std::move(
 			_weapon

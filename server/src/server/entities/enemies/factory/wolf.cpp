@@ -46,6 +46,7 @@ sanguis::server::entities::enemies::factory::wolf(
 				)
 			),
 			sanguis::server::ai::create_swarm(
+				_parameters.random_generator(),
 				sanguis::server::ai::sight_range(
 					1000.f
 				)

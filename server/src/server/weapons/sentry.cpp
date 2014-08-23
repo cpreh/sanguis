@@ -90,7 +90,6 @@ sanguis::server::weapons::sentry::do_attack(
 				fcppt::make_unique_ptr<
 					sanguis::server::entities::friend_
 				>(
-					this->random_generator(),
 					sanguis::friend_type::sentry,
 					_attack.environment().load_context(),
 					sanguis::server::damage::make_armor_array({
@@ -104,6 +103,7 @@ sanguis::server::weapons::sentry::do_attack(
 						0.f
 					),
 					sanguis::server::ai::create_simple(
+						this->random_generator(),
 						sanguis::server::ai::sight_range(
 							1000.f
 						)

@@ -1,10 +1,10 @@
+#include <sanguis/server/ai/context_fwd.hpp>
 #include <sanguis/server/ai/create_friend.hpp>
 #include <sanguis/server/ai/create_function.hpp>
-#include <sanguis/server/ai/friend.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
+#include <sanguis/server/ai/behavior/attack.hpp>
+#include <sanguis/server/ai/tree/make_leaf.hpp>
 #include <sanguis/server/entities/spawn_owner_fwd.hpp>
-#include <sanguis/server/entities/with_ai_fwd.hpp>
-#include <fcppt/make_unique_ptr.hpp>
 
 
 sanguis::server::ai::create_function
@@ -18,16 +18,16 @@ sanguis::server::ai::create_friend(
 			_sight_range,
 			&_spawn_owner
 		](
-			sanguis::server::entities::with_ai &_entity
+			sanguis::server::ai::context &_context
 		)
 		{
+			// TODO:
 			return
-				fcppt::make_unique_ptr<
-					sanguis::server::ai::friend_
+				sanguis::server::ai::tree::make_leaf<
+					sanguis::server::ai::behavior::attack
 				>(
-					_entity,
-					_sight_range,
-					_spawn_owner
+					_context,
+					_sight_range
 				);
 		};
 }

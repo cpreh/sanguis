@@ -118,5 +118,6 @@ sanguis::client::draw2d::entities::explosion::update()
 bool
 sanguis::client::draw2d::entities::explosion::may_be_removed() const
 {
-	return ended_;
+	return
+		ended_;
 }
