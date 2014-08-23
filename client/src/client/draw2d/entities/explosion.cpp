@@ -72,7 +72,7 @@ sanguis::client::draw2d::entities::explosion::explosion(
 					fcppt::literal<
 						sanguis::client::draw2d::funit
 					>(
-						2
+						1.5
 					)
 				)
 			)
