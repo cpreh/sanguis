@@ -97,6 +97,13 @@ sanguis::server::entities::auto_weak_link::operator bool() const
 }
 
 bool
+sanguis::server::entities::auto_weak_link::has_value() const
+{
+	return
+		this->is_linked();
+}
+
+bool
 sanguis::server::entities::auto_weak_link::operator==(
 	sanguis::server::entities::auto_weak_link const &_link
 ) const

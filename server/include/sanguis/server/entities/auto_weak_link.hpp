@@ -54,6 +54,9 @@ public:
 	operator bool() const;
 
 	bool
+	has_value() const;
+
+	bool
 	operator==(
 		sanguis::server::entities::auto_weak_link const &
 	) const;

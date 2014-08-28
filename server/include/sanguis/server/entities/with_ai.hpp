@@ -10,6 +10,7 @@
 #include <sanguis/server/entities/with_auras_id.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/ifaces/with_links.hpp>
+#include <sanguis/server/entities/ifaces/with_health.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/weapons/ias.hpp>
 #include <sanguis/server/weapons/irs.hpp>
@@ -29,6 +30,7 @@ namespace entities
 
 class with_ai
 :
+	public virtual sanguis::server::entities::ifaces::with_health,
 	public virtual sanguis::server::entities::ifaces::with_links,
 	public virtual sanguis::server::entities::ifaces::with_team,
 	public sanguis::server::entities::with_auras_id,

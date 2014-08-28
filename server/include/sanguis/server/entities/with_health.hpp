@@ -9,6 +9,7 @@
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_health_fwd.hpp>
+#include <sanguis/server/entities/ifaces/with_health.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/entities/ifaces/with_links.hpp>
 #include <sanguis/server/entities/property/always_max.hpp>
@@ -28,6 +29,7 @@ namespace entities
 class with_health
 :
 	public virtual sanguis::server::entities::base,
+	public virtual sanguis::server::entities::ifaces::with_health,
 	public virtual sanguis::server::entities::ifaces::with_id,
 	public virtual sanguis::server::entities::ifaces::with_links
 {
@@ -45,7 +47,8 @@ public:
 	kill();
 
 	sanguis::server::entities::property::changeable &
-	health();
+	health()
+	override;
 
 	sanguis::server::entities::property::always_max &
 	regeneration();

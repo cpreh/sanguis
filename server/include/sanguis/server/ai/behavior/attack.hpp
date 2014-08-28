@@ -9,7 +9,9 @@
 #include <sanguis/server/ai/behavior/status_fwd.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
+#include <sanguis/server/entities/property/change_event_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/signal/scoped_connection.hpp>
 
 
 namespace sanguis
@@ -61,6 +63,11 @@ private:
 		sanguis::server::entities::with_body &
 	);
 
+	void
+	health_changed(
+		sanguis::server::entities::property::change_event const &
+	);
+
 	sanguis::server::entities::auto_weak_link
 	closest_target() const;
 
@@ -69,6 +76,8 @@ private:
 	sanguis::server::ai::entity_set potential_targets_;
 
 	sanguis::server::entities::auto_weak_link target_;
+
+	fcppt::signal::scoped_connection const health_connection_;
 };
 
 }

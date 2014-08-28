@@ -17,7 +17,6 @@
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_links.hpp>
-#include <sanguis/server/world/center_to_grid_pos.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/assert/error.hpp>
@@ -81,13 +80,7 @@ sanguis::server::ai::behavior::follow_friend::do_start()
 		;
 
 	return
-		target_
-		&&
-		context_.path_find(
-			sanguis::server::world::center_to_grid_pos(
-				target_->center()
-			)
-		);
+		target_.has_value();
 }
 
 void

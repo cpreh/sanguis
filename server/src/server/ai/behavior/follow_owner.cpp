@@ -9,7 +9,6 @@
 #include <sanguis/server/ai/behavior/status.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>
 #include <sanguis/server/entities/with_links.hpp>
-#include <sanguis/server/world/center_to_grid_pos.hpp>
 
 
 sanguis::server::ai::behavior::follow_owner::follow_owner(
@@ -35,13 +34,7 @@ bool
 sanguis::server::ai::behavior::follow_owner::do_start()
 {
 	return
-		spawn_owner_.get()
-		&&
-		context_.path_find(
-			sanguis::server::world::center_to_grid_pos(
-				spawn_owner_.get()->center()
-			)
-		);
+		spawn_owner_.get().has_value();
 }
 
 void

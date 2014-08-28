@@ -26,14 +26,19 @@
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_links.hpp>
+#include <sanguis/server/entities/property/change_event.hpp>
+#include <sanguis/server/entities/property/changeable.hpp>
+#include <sanguis/server/entities/property/value.hpp>
 #include <sanguis/server/weapons/optional_target.hpp>
 #include <sanguis/server/weapons/target.hpp>
 #include <sanguis/server/world/center_to_grid_pos.hpp>
 #include <sanguis/server/world/grid_pos_to_center.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/assert/error.hpp>
+#include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
@@ -49,7 +54,16 @@ sanguis::server::ai::behavior::attack::attack(
 		_context
 	),
 	potential_targets_(),
-	target_()
+	target_(),
+	health_connection_{
+		_context.me().health().register_change_callback(
+			std::bind(
+				&sanguis::server::ai::behavior::attack::health_changed,
+				this,
+				std::placeholders::_1
+			)
+		)
+	}
 {
 	_context.me().add_aura(
 		fcppt::make_unique_ptr<
@@ -85,6 +99,12 @@ sanguis::server::ai::behavior::attack::~attack()
 bool
 sanguis::server::ai::behavior::attack::do_start()
 {
+	if(
+		target_
+	)
+		return
+			true;
+
 	target_ =
 		this->closest_target();
 
@@ -120,6 +140,16 @@ sanguis::server::ai::behavior::attack::update(
 	sanguis::duration
 )
 {
+	sanguis::server::entities::auto_weak_link const closer_target(
+		this->closest_target()
+	);
+
+	if(
+		closer_target
+	)
+		target_ =
+			closer_target;
+
 	if(
 		!target_
 	)
@@ -201,22 +231,6 @@ sanguis::server::ai::behavior::attack::target_enters(
 		)
 		.second
 	);
-
-	if(
-		target_
-		&&
-		sanguis::server::collision::distance_entity_entity(
-			_with_body,
-			context_.me()
-		)
-		<
-		sanguis::server::collision::distance_entity_entity(
-			*target_,
-			context_.me()
-		)
-	)
-		target_ =
-			_with_body.link();
 }
 
 void
@@ -244,6 +258,47 @@ sanguis::server::ai::behavior::attack::target_leaves(
 	)
 		target_ =
 			sanguis::server::entities::auto_weak_link();
+}
+
+void
+sanguis::server::ai::behavior::attack::health_changed(
+	sanguis::server::entities::property::change_event const &_event
+)
+{
+	if(
+		target_
+		||
+		_event.diff().get()
+		>=
+		fcppt::literal<
+			sanguis::server::entities::property::value
+		>(
+			0
+		)
+	)
+		return;
+
+	fcppt::optional<
+		sanguis::server::entities::with_body &
+	> const result(
+		sanguis::server::closest_entity(
+			context_.me(),
+			potential_targets_,
+			[](
+				sanguis::server::entities::with_body const &
+			)
+			{
+				return
+					true;
+			}
+		)
+	);
+
+	if(
+		result
+	)
+		target_ =
+			result->link();
 }
 
 sanguis::server::entities::auto_weak_link

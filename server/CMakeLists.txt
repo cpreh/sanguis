@@ -239,6 +239,7 @@ set(
 	include/sanguis/server/entities/exp_area.hpp
 	include/sanguis/server/entities/friend.hpp
 	include/sanguis/server/entities/ifaces/with_angle.hpp
+	include/sanguis/server/entities/ifaces/with_health.hpp
 	include/sanguis/server/entities/ifaces/with_id.hpp
 	include/sanguis/server/entities/ifaces/with_links.hpp
 	include/sanguis/server/entities/ifaces/with_links_fwd.hpp
@@ -783,6 +784,7 @@ set(
 	src/server/entities/exp_area.cpp
 	src/server/entities/friend.cpp
 	src/server/entities/ifaces/with_angle.cpp
+	src/server/entities/ifaces/with_health.cpp
 	src/server/entities/ifaces/with_id.cpp
 	src/server/entities/ifaces/with_links.cpp
 	src/server/entities/ifaces/with_team.cpp
