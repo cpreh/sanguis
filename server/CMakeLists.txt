@@ -16,6 +16,7 @@ set(
 	include/sanguis/server/ai/create_friend.hpp
 	include/sanguis/server/ai/create_function.hpp
 	include/sanguis/server/ai/create_simple.hpp
+	include/sanguis/server/ai/create_stationary.hpp
 	include/sanguis/server/ai/create_swarm.hpp
 	include/sanguis/server/ai/entity_set.hpp
 	include/sanguis/server/ai/idle.hpp
@@ -663,6 +664,7 @@ set(
 	src/server/ai/context.cpp
 	src/server/ai/create_friend.cpp
 	src/server/ai/create_simple.cpp
+	src/server/ai/create_stationary.cpp
 	src/server/ai/create_swarm.cpp
 	src/server/ai/idle.cpp
 	src/server/ai/move_to_target.cpp

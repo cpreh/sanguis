@@ -7,7 +7,7 @@
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/health.hpp>
-#include <sanguis/server/ai/create_simple.hpp>
+#include <sanguis/server/ai/create_stationary.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/damage/armor_unit.hpp>
 #include <sanguis/server/damage/fire.hpp>
@@ -102,8 +102,7 @@ sanguis::server::weapons::sentry::do_attack(
 					sanguis::server::entities::movement_speed(
 						0.f
 					),
-					sanguis::server::ai::create_simple(
-						this->random_generator(),
+					sanguis::server::ai::create_stationary(
 						sanguis::server::ai::sight_range(
 							1000.f
 						)
