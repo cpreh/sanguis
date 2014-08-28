@@ -8,6 +8,7 @@ set(
 	include/sanguis/server/ai/behavior/base.hpp
 	include/sanguis/server/ai/behavior/base_fwd.hpp
 	include/sanguis/server/ai/behavior/base_unique_ptr.hpp
+	include/sanguis/server/ai/behavior/follow_owner.hpp
 	include/sanguis/server/ai/behavior/status.hpp
 	include/sanguis/server/ai/behavior/status_fwd.hpp
 	include/sanguis/server/ai/behavior/wander.hpp
@@ -665,6 +666,7 @@ set(
 	src/server/ai/angle_to_target.cpp
 	src/server/ai/behavior/attack.cpp
 	src/server/ai/behavior/base.cpp
+	src/server/ai/behavior/follow_owner.cpp
 	src/server/ai/behavior/wander.cpp
 	src/server/ai/context.cpp
 	src/server/ai/create_friend.cpp
