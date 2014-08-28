@@ -1,10 +1,10 @@
-#include <sanguis/server/center.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/optional_angle.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/ai/is_patrolling.hpp>
 #include <sanguis/server/ai/move_to_target.hpp>
 #include <sanguis/server/ai/update_interval.hpp>
+#include <sanguis/server/ai/target.hpp>
 #include <sanguis/server/collision/distance_entity_pos.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
@@ -20,7 +20,7 @@ void
 sanguis::server::ai::move_to_target(
 	sanguis::server::entities::with_ai &_me,
 	sanguis::server::optional_angle const _angle,
-	sanguis::server::center const _target,
+	sanguis::server::ai::target const _target,
 	sanguis::server::ai::is_patrolling const _is_patrolling
 )
 {
@@ -60,7 +60,7 @@ sanguis::server::ai::move_to_target(
 					*
 					sanguis::server::collision::distance_entity_pos(
 						_me,
-						_target.get()
+						_target.get().get()
 					)
 					/
 					sanguis::server::ai::update_interval().count()

@@ -19,8 +19,11 @@ set(
 	include/sanguis/server/ai/create_stationary.hpp
 	include/sanguis/server/ai/create_swarm.hpp
 	include/sanguis/server/ai/entity_set.hpp
+	include/sanguis/server/ai/go_to_target.hpp
 	include/sanguis/server/ai/idle.hpp
+	include/sanguis/server/ai/in_range.hpp
 	include/sanguis/server/ai/is_patrolling.hpp
+	include/sanguis/server/ai/is_visible.hpp
 	include/sanguis/server/ai/move_to_target.hpp
 	include/sanguis/server/ai/pathing/can_walk_diagonally.hpp
 	include/sanguis/server/ai/pathing/find_target.hpp
@@ -39,6 +42,8 @@ set(
 	include/sanguis/server/ai/sight_range.hpp
 	include/sanguis/server/ai/sight_range_fwd.hpp
 	include/sanguis/server/ai/stop.hpp
+	include/sanguis/server/ai/target.hpp
+	include/sanguis/server/ai/target_fwd.hpp
 	include/sanguis/server/ai/tree/base.hpp
 	include/sanguis/server/ai/tree/base_fwd.hpp
 	include/sanguis/server/ai/tree/base_unique_ptr.hpp
@@ -666,6 +671,7 @@ set(
 	src/server/ai/create_simple.cpp
 	src/server/ai/create_stationary.cpp
 	src/server/ai/create_swarm.cpp
+	src/server/ai/go_to_target.cpp
 	src/server/ai/idle.cpp
 	src/server/ai/move_to_target.cpp
 	src/server/ai/pathing/can_walk_diagonally.cpp

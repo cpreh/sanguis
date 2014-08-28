@@ -1,17 +1,17 @@
-#include <sanguis/server/center.hpp>
 #include <sanguis/server/optional_angle.hpp>
 #include <sanguis/server/ai/angle_to_target.hpp>
 #include <sanguis/server/ai/is_patrolling.hpp>
 #include <sanguis/server/ai/move_to_target.hpp>
 #include <sanguis/server/ai/rotate_and_move_to_target.hpp>
 #include <sanguis/server/ai/rotate_to.hpp>
+#include <sanguis/server/ai/target.hpp>
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 
 
 void
 sanguis::server::ai::rotate_and_move_to_target(
 	sanguis::server::entities::with_ai &_me,
-	sanguis::server::center const _target,
+	sanguis::server::ai::target const _target,
 	sanguis::server::ai::is_patrolling const _is_patrolling
 )
 {

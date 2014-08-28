@@ -7,6 +7,7 @@
 #include <sanguis/server/ai/idle.hpp>
 #include <sanguis/server/ai/is_patrolling.hpp>
 #include <sanguis/server/ai/rotate_and_move_to_target.hpp>
+#include <sanguis/server/ai/target.hpp>
 #include <sanguis/server/ai/behavior/base.hpp>
 #include <sanguis/server/ai/behavior/status.hpp>
 #include <sanguis/server/ai/behavior/wander.hpp>
@@ -95,9 +96,11 @@ sanguis::server::ai::behavior::wander::update(
 
 	sanguis::server::ai::rotate_and_move_to_target(
 		context_.me(),
-		sanguis::server::world::grid_pos_to_center(
-			target->get()
-		),
+		sanguis::server::ai::target{
+			sanguis::server::world::grid_pos_to_center(
+				target->get()
+			)
+		},
 		sanguis::server::ai::is_patrolling(
 			true
 		)

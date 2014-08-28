@@ -1,8 +1,8 @@
 #include <sanguis/server/angle.hpp>
-#include <sanguis/server/center.hpp>
 #include <sanguis/server/optional_angle.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/ai/angle_to_target.hpp>
+#include <sanguis/server/ai/target.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/math/vector/distance.hpp>
@@ -12,12 +12,12 @@
 sanguis::server::optional_angle const
 sanguis::server::ai::angle_to_target(
 	sanguis::server::entities::with_ai &_me,
-	sanguis::server::center const _target
+	sanguis::server::ai::target const _target
 )
 {
 	return
 		fcppt::math::vector::distance(
-			_target.get(),
+			_target.get().get(),
 			_me.center().get()
 		)
 		<
@@ -35,7 +35,7 @@ sanguis::server::ai::angle_to_target(
 						sanguis::server::space_unit
 					>(
 						_me.center().get(),
-						_target.get()
+						_target.get().get()
 					)
 				)
 			)

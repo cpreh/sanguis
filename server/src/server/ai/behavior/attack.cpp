@@ -9,17 +9,16 @@
 #include <sanguis/server/remove_target_callback.hpp>
 #include <sanguis/server/ai/context.hpp>
 #include <sanguis/server/ai/idle.hpp>
+#include <sanguis/server/ai/in_range.hpp>
 #include <sanguis/server/ai/is_patrolling.hpp>
-#include <sanguis/server/ai/rotate_and_move_to_target.hpp>
-#include <sanguis/server/ai/rotate_to_target.hpp>
+#include <sanguis/server/ai/is_visible.hpp>
+#include <sanguis/server/ai/go_to_target.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
-#include <sanguis/server/ai/stop.hpp>
+#include <sanguis/server/ai/target.hpp>
 #include <sanguis/server/ai/behavior/base.hpp>
 #include <sanguis/server/ai/behavior/status.hpp>
 #include <sanguis/server/ai/behavior/attack.hpp>
 #include <sanguis/server/ai/pathing/is_visible.hpp>
-#include <sanguis/server/ai/pathing/positions_are_close.hpp>
-#include <sanguis/server/ai/pathing/optional_target.hpp>
 #include <sanguis/server/auras/target.hpp>
 #include <sanguis/server/auras/target_kind.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
@@ -127,17 +126,13 @@ sanguis::server::ai::behavior::attack::update(
 		return
 			sanguis::server::ai::behavior::status::failure;
 
-	sanguis::server::ai::pathing::optional_target const grid_target{
-		context_.continue_path()
-	};
-
 	sanguis::creator::pos const target_grid_pos{
 		sanguis::server::world::center_to_grid_pos(
 			target_->center()
 		)
 	};
 
-	bool const is_visible{
+	sanguis::server::ai::is_visible const is_visible{
 		sanguis::server::ai::pathing::is_visible(
 			context_.grid(),
 			target_grid_pos,
@@ -148,7 +143,7 @@ sanguis::server::ai::behavior::attack::update(
 	};
 
 	context_.me().target(
-		is_visible
+		is_visible.get()
 		?
 			sanguis::server::weapons::optional_target(
 				sanguis::server::weapons::target(
@@ -163,81 +158,31 @@ sanguis::server::ai::behavior::attack::update(
 		true
 	};
 
-	bool const in_range(
+	sanguis::server::ai::in_range const in_range{
 		context_.me().in_range(
 			weapon_to_use
 		)
-	);
+	};
 
 	context_.me().use_weapon(
-		is_visible
+		is_visible.get()
 		&&
-		in_range
+		in_range.get()
 		,
 		weapon_to_use
 	);
 
-	sanguis::server::ai::is_patrolling const is_patrolling{
-		false
-	};
-
-	if(
-		is_visible
-	)
-	{
-		if(
-			in_range
-		)
-		{
-			sanguis::server::ai::stop(
-				context_.me()
-			);
-
-			sanguis::server::ai::rotate_to_target(
-				context_.me(),
-				target_->center()
-			);
-
-			context_.clear_path();
+	sanguis::server::ai::go_to_target(
+		context_,
+		in_range,
+		is_visible,
+		sanguis::server::ai::target{
+			target_->center()
+		},
+		sanguis::server::ai::is_patrolling{
+			false
 		}
-		else
-			sanguis::server::ai::rotate_and_move_to_target(
-				context_.me(),
-				target_->center(),
-				is_patrolling
-			);
-
-		return
-			sanguis::server::ai::behavior::status::running;
-	}
-
-	if(
-		grid_target
-	)
-	{
-		sanguis::server::ai::rotate_and_move_to_target(
-			context_.me(),
-			sanguis::server::world::grid_pos_to_center(
-				grid_target->get()
-			),
-			is_patrolling
-		);
-
-		return
-			sanguis::server::ai::behavior::status::running;
-	}
-
-	if(
-		!grid_target
-		||
-		!sanguis::server::ai::pathing::positions_are_close(
-			grid_target->get(),
-			target_grid_pos
-		)
-	)
-		context_.path_find(
-			target_grid_pos
-		);
+	);
 
 	return
 		sanguis::server::ai::behavior::status::running;
