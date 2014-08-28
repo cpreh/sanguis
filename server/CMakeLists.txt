@@ -8,6 +8,7 @@ set(
 	include/sanguis/server/ai/behavior/base.hpp
 	include/sanguis/server/ai/behavior/base_fwd.hpp
 	include/sanguis/server/ai/behavior/base_unique_ptr.hpp
+	include/sanguis/server/ai/behavior/follow_friend.hpp
 	include/sanguis/server/ai/behavior/follow_owner.hpp
 	include/sanguis/server/ai/behavior/status.hpp
 	include/sanguis/server/ai/behavior/status_fwd.hpp
@@ -20,6 +21,7 @@ set(
 	include/sanguis/server/ai/create_stationary.hpp
 	include/sanguis/server/ai/create_swarm.hpp
 	include/sanguis/server/ai/entity_set.hpp
+	include/sanguis/server/ai/go_close_to_target.hpp
 	include/sanguis/server/ai/go_to_target.hpp
 	include/sanguis/server/ai/idle.hpp
 	include/sanguis/server/ai/in_range.hpp
@@ -666,6 +668,7 @@ set(
 	src/server/ai/angle_to_target.cpp
 	src/server/ai/behavior/attack.cpp
 	src/server/ai/behavior/base.cpp
+	src/server/ai/behavior/follow_friend.cpp
 	src/server/ai/behavior/follow_owner.cpp
 	src/server/ai/behavior/wander.cpp
 	src/server/ai/context.cpp
@@ -673,6 +676,7 @@ set(
 	src/server/ai/create_simple.cpp
 	src/server/ai/create_stationary.cpp
 	src/server/ai/create_swarm.cpp
+	src/server/ai/go_close_to_target.cpp
 	src/server/ai/go_to_target.cpp
 	src/server/ai/idle.cpp
 	src/server/ai/move_to_target.cpp
