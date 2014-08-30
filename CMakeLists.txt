@@ -90,6 +90,7 @@ if(
 		parseini
 		renderer
 		rucksack
+		rucksackviewport
 		sprite
 		systems
 		texture
