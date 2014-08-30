@@ -8,7 +8,6 @@
 #include <sanguis/client/draw2d/scene/hover/weapon_attribute_unique_ptr.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/load/hud/context.hpp>
-#include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/draw.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
@@ -108,8 +107,7 @@ sanguis::client::draw2d::scene::hover::weapon::weapon(
 				}
 			)
 		),
-		sge::rucksack::axis::y,
-		sanguis::gui::default_aspect()
+		sge::rucksack::axis::y
 	),
 	gui_area_(
 		container_,

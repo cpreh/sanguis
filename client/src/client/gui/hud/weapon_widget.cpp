@@ -8,7 +8,6 @@
 #include <sanguis/client/gui/hud/weapon_widget.hpp>
 #include <sanguis/client/load/hud/context.hpp>
 #include <sanguis/gui/context_fwd.hpp>
-#include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/fill_color.hpp>
 #include <sanguis/gui/fill_level.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
@@ -108,8 +107,7 @@ sanguis::client::gui::hud::weapon_widget::weapon_widget(
 				sge::rucksack::alignment::center
 			)
 		},
-		sge::rucksack::axis::x,
-		sanguis::gui::default_aspect()
+		sge::rucksack::axis::x
 	)
 {
 }

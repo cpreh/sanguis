@@ -1,5 +1,4 @@
 #include <sanguis/gui/context_fwd.hpp>
-#include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/gravity.hpp>
 #include <sanguis/gui/aux_/make_container_pair.hpp>
 #include <sanguis/gui/aux_/gravity_east.hpp>
@@ -58,8 +57,7 @@ sanguis::gui::main_area::screen_corner::screen_corner(
 				)
 			}
 		),
-		sge::rucksack::axis::x,
-		sanguis::gui::default_aspect()
+		sge::rucksack::axis::x
 	),
 	vertical_container_(
 		_gui_context,
@@ -82,8 +80,7 @@ sanguis::gui::main_area::screen_corner::screen_corner(
 				)
 			}
 		),
-		sge::rucksack::axis::y,
-		sanguis::gui::default_aspect()
+		sge::rucksack::axis::y
 	),
 	viewport_adaptor_(
 		_renderer,

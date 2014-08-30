@@ -5,7 +5,7 @@
 #include <sanguis/gui/main_area/base.hpp>
 #include <sanguis/gui/widget/base_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
-#include <sge/rucksack/widget/viewport_adaptor.hpp>
+#include <sge/rucksack/viewport/adaptor.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -47,7 +47,7 @@ private:
 
 	sanguis::gui::widget::base &widget_;
 
-	sge::rucksack::widget::viewport_adaptor impl_;
+	sge::rucksack::viewport::adaptor impl_;
 };
 
 }

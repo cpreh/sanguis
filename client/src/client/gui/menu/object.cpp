@@ -3,7 +3,6 @@
 #include <sanguis/client/gui/default_text_color.hpp>
 #include <sanguis/client/gui/to_duration.hpp>
 #include <sanguis/client/gui/menu/object.hpp>
-#include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/needed_width_from_strings.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/string_container.hpp>
@@ -156,8 +155,7 @@ sanguis::client::gui::menu::object::object(
 				sge::rucksack::alignment::center
 			)
 		},
-		sge::rucksack::axis::x,
-		sanguis::gui::default_aspect()
+		sge::rucksack::axis::x
 	),
 	hostname_label_(
 		_gui_style,
@@ -197,8 +195,7 @@ sanguis::client::gui::menu::object::object(
 				sge::rucksack::alignment::center
 			)
 		},
-		sge::rucksack::axis::x,
-		sanguis::gui::default_aspect()
+		sge::rucksack::axis::x
 	),
 	port_label_(
 		_gui_style,
@@ -238,8 +235,7 @@ sanguis::client::gui::menu::object::object(
 				sge::rucksack::alignment::center
 			)
 		},
-		sge::rucksack::axis::x,
-		sanguis::gui::default_aspect()
+		sge::rucksack::axis::x
 	),
 	connect_text_(
 		_gui_style,
@@ -292,8 +288,7 @@ sanguis::client::gui::menu::object::object(
 				sge::rucksack::alignment::center
 			)
 		},
-		sge::rucksack::axis::y,
-		sanguis::gui::default_aspect()
+		sge::rucksack::axis::y
 	),
 	connect_frame_(
 		_gui_style,
@@ -340,8 +335,7 @@ sanguis::client::gui::menu::object::object(
 				sge::rucksack::alignment::center
 			)
 		},
-		sge::rucksack::axis::y,
-		sanguis::gui::default_aspect()
+		sge::rucksack::axis::y
 	),
 	gui_area_(
 		_renderer,

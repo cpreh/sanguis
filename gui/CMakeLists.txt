@@ -7,7 +7,6 @@ set(
 	include/sanguis/gui/click_function.hpp
 	include/sanguis/gui/context.hpp
 	include/sanguis/gui/context_fwd.hpp
-	include/sanguis/gui/default_aspect.hpp
 	include/sanguis/gui/draw.hpp
 	include/sanguis/gui/duration.hpp
 	include/sanguis/gui/fill_color.hpp
@@ -124,7 +123,6 @@ set(
 	src/background/base.cpp
 	src/background/colored.cpp
 	src/context.cpp
-	src/default_aspect.cpp
 	src/draw.cpp
 	src/include/sanguis/gui/aux_/draw_image.hpp
 	src/include/sanguis/gui/aux_/draw_image_repeat.hpp
@@ -185,7 +183,7 @@ include_directories(
 sanguis_add_library(
 	gui
 	"${SANGUIS_GUI_FILES}"
-	"${fcppt_core_TARGET};${sgefont_TARGET};${sgefontdraw_TARGET};${sgeimagecolor_TARGET};${sgeinput_TARGET};${sgerenderer_TARGET};${sgerucksack_TARGET};${sgesprite_TARGET};${sgetexture_TARGET}"
+	"${fcppt_core_TARGET};${sgefont_TARGET};${sgefontdraw_TARGET};${sgeimagecolor_TARGET};${sgeinput_TARGET};${sgerenderer_TARGET};${sgerucksack_TARGET};${sgerucksackviewport_TARGET};${sgesprite_TARGET};${sgetexture_TARGET}"
 )
 
 add_subdirectory(

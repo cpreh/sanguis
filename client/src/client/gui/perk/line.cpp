@@ -8,7 +8,6 @@
 #include <sanguis/client/perk/to_string.hpp>
 #include <sanguis/client/perk/tree.hpp>
 #include <sanguis/gui/context_fwd.hpp>
-#include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
@@ -81,8 +80,7 @@ sanguis::client::gui::perk::line::line(
 				sge::rucksack::alignment::center
 			)
 		},
-		sge::rucksack::axis::x,
-		sanguis::gui::default_aspect()
+		sge::rucksack::axis::x
 	),
 	click_connection_(
 		button_.click(

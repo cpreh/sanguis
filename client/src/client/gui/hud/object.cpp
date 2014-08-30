@@ -17,7 +17,6 @@
 #include <sanguis/client/gui/hud/weapon_details.hpp>
 #include <sanguis/client/gui/hud/weapon_widget.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
-#include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/fill_color.hpp>
 #include <sanguis/gui/fill_level.hpp>
 #include <sanguis/gui/gravity.hpp>
@@ -135,8 +134,7 @@ sanguis::client::gui::hud::object::object(
 				sge::rucksack::alignment::left_or_top
 			)
 		},
-		sge::rucksack::axis::x,
-		sanguis::gui::default_aspect()
+		sge::rucksack::axis::x
 	),
 	exp_bar_(
 		_gui_style,
@@ -171,8 +169,7 @@ sanguis::client::gui::hud::object::object(
 	weapon_container_(
 		gui_context_,
 		sanguis::gui::widget::reference_alignment_vector{},
-		sge::rucksack::axis::x,
-		sanguis::gui::default_aspect()
+		sge::rucksack::axis::x
 	),
 	bottom_expander_(
 		sge::rucksack::axis::y
@@ -217,8 +214,7 @@ sanguis::client::gui::hud::object::object(
 				sge::rucksack::alignment::left_or_top
 			)
 		},
-		sge::rucksack::axis::y,
-		sanguis::gui::default_aspect()
+		sge::rucksack::axis::y
 	),
 	gui_area_(
 		_renderer,

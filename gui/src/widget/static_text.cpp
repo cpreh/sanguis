@@ -1,4 +1,3 @@
-#include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/renderer/base.hpp>
 #include <sanguis/gui/style/base.hpp>
 #include <sanguis/gui/widget/base.hpp>
@@ -17,9 +16,6 @@
 #include <sge/renderer/texture/emulate_srgb.hpp>
 #include <sge/rucksack/axis_policy.hpp>
 #include <sge/rucksack/axis_policy2.hpp>
-#include <sge/rucksack/is_expanding.hpp>
-#include <sge/rucksack/minimum_size.hpp>
-#include <sge/rucksack/optional_scalar.hpp>
 #include <sge/rucksack/preferred_size.hpp>
 #include <sge/rucksack/widget/base_fwd.hpp>
 #include <sge/rucksack/widget/dummy.hpp>
@@ -55,46 +51,24 @@ sanguis::gui::widget::static_text::static_text(
 		_text_color.get(),
 		sge::renderer::texture::emulate_srgb::no
 	),
-	layout_(
-		sge::rucksack::axis_policy2(
-			// TODO: Make this easier to initialize
-			sge::rucksack::axis_policy(
-				sge::rucksack::minimum_size(
+	layout_{
+		sge::rucksack::axis_policy2{
+			sge::rucksack::axis_policy{
+				sge::rucksack::preferred_size{
 					static_text_.logical_size().w()
 					+
 					style_.text_spacing().w()
-				),
-				sge::rucksack::preferred_size(
-					sge::rucksack::optional_scalar(
-						static_text_.logical_size().w()
-						+
-						style_.text_spacing().w()
-					)
-				),
-				sge::rucksack::is_expanding(
-					false
-				)
-			),
-			sge::rucksack::axis_policy(
-				sge::rucksack::minimum_size(
+				}
+			},
+			sge::rucksack::axis_policy{
+				sge::rucksack::preferred_size{
 					_font.metrics().height().get()
 					+
 					style_.text_spacing().h()
-				),
-				sge::rucksack::preferred_size(
-					sge::rucksack::optional_scalar(
-						_font.metrics().height().get()
-						+
-						style_.text_spacing().h()
-					)
-				),
-				sge::rucksack::is_expanding(
-					false
-				)
-			),
-			sanguis::gui::default_aspect()
-		)
-	)
+				}
+			}
+		}
+	}
 {
 }
 

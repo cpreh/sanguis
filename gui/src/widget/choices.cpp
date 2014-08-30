@@ -1,5 +1,4 @@
 #include <sanguis/gui/context_fwd.hpp>
-#include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/index.hpp>
 #include <sanguis/gui/index_callback.hpp>
 #include <sanguis/gui/needed_width_from_strings.hpp>
@@ -39,8 +38,7 @@ sanguis::gui::widget::choices::choices(
 	sanguis::gui::widget::box_container(
 		_context,
 		sanguis::gui::widget::reference_alignment_vector(),
-		sge::rucksack::axis::x,
-		sanguis::gui::default_aspect()
+		sge::rucksack::axis::x
 	),
 	strings_(
 		_strings

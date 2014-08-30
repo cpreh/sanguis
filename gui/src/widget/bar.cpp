@@ -1,4 +1,3 @@
-#include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/fill_color.hpp>
 #include <sanguis/gui/fill_level.hpp>
 #include <sanguis/gui/renderer/base_fwd.hpp>
@@ -6,13 +5,14 @@
 #include <sanguis/gui/widget/bar.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
+#include <sge/rucksack/axis.hpp>
 #include <sge/rucksack/axis_policy.hpp>
-#include <sge/rucksack/axis_policy2.hpp>
+#include <sge/rucksack/axis_to_index.hpp>
 #include <sge/rucksack/dim.hpp>
-#include <sge/rucksack/is_expanding.hpp>
+#include <sge/rucksack/make_axis_policy.hpp>
 #include <sge/rucksack/minimum_size.hpp>
 #include <sge/rucksack/preferred_size.hpp>
-#include <sge/rucksack/optional_scalar.hpp>
+#include <sge/rucksack/scalar.hpp>
 #include <sge/rucksack/rect.hpp>
 #include <sge/rucksack/widget/base.hpp>
 
@@ -38,37 +38,43 @@ sanguis::gui::widget::bar::bar(
 	value_(
 		_value
 	),
-	layout_(
-		sge::rucksack::axis_policy2(
-			sge::rucksack::axis_policy(
-				sge::rucksack::minimum_size(
-					_dim.w()
-				),
-				sge::rucksack::preferred_size(
-					sge::rucksack::optional_scalar()
-				),
-				sge::rucksack::is_expanding(
+	layout_{
+		sge::rucksack::make_axis_policy(
+			[
+				_axis,
+				_dim
+			](
+				sge::rucksack::axis const _cur_axis
+			)
+			{
+				sge::rucksack::scalar const ret{
+					_dim[
+						sge::rucksack::axis_to_index(
+							_cur_axis
+						)
+					]
+				};
+
+				return
 					_axis
 					==
-					sge::rucksack::axis::x
-				)
-			),
-			sge::rucksack::axis_policy(
-				sge::rucksack::minimum_size(
-					_dim.h()
-				),
-				sge::rucksack::preferred_size(
-					sge::rucksack::optional_scalar()
-				),
-				sge::rucksack::is_expanding(
-					_axis
-					==
-					sge::rucksack::axis::y
-				)
-			),
-			sanguis::gui::default_aspect()
+					_cur_axis
+					?
+						sge::rucksack::axis_policy{
+							sge::rucksack::minimum_size{
+								ret
+							}
+						}
+					:
+						sge::rucksack::axis_policy{
+							sge::rucksack::preferred_size{
+								ret
+							}
+						}
+					;
+			}
 		)
-	)
+	}
 {
 }
 

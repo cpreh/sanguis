@@ -6,7 +6,6 @@
 #include <sanguis/client/gui/hud/weapon_name.hpp>
 #include <sanguis/client/gui/hud/weapon_tooltip.hpp>
 #include <sanguis/gui/context_fwd.hpp>
-#include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
@@ -106,8 +105,7 @@ sanguis::client::gui::hud::weapon_tooltip::weapon_tooltip(
 				}
 			)
 		),
-		sge::rucksack::axis::y,
-		sanguis::gui::default_aspect()
+		sge::rucksack::axis::y
 	)
 {
 }

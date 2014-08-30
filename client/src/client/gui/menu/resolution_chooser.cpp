@@ -1,6 +1,5 @@
 #include <sanguis/client/gui/menu/resolution_chooser.hpp>
 #include <sanguis/gui/context_fwd.hpp>
-#include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/index.hpp>
 #include <sanguis/gui/optional_index.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
@@ -104,8 +103,7 @@ sanguis::client::gui::menu::resolution_chooser::resolution_chooser(
 				sge::rucksack::alignment::center
 			}
 		},
-		sge::rucksack::axis::y,
-		sanguis::gui::default_aspect()
+		sge::rucksack::axis::y
 	),
 	apply_connection_{
 		apply_button_.click(

@@ -8,7 +8,7 @@
 #include <sge/input/keyboard/key_code.hpp>
 #include <sge/rucksack/vector.hpp>
 #include <sge/rucksack/widget/base.hpp>
-#include <sge/rucksack/widget/optional_parent.hpp>
+#include <sge/rucksack/widget/optional_ref.hpp>
 
 
 sanguis::gui::widget::base::base()
@@ -87,7 +87,7 @@ sanguis::gui::widget::base::parent(
 		parent_
 	)
 		this->layout().parent(
-			sge::rucksack::widget::optional_parent()
+			sge::rucksack::widget::optional_ref()
 		);
 
 	parent_ =
@@ -97,7 +97,7 @@ sanguis::gui::widget::base::parent(
 		_parent
 	)
 		this->layout().parent(
-			sge::rucksack::widget::optional_parent(
+			sge::rucksack::widget::optional_ref(
 				_parent->layout()
 			)
 		);

@@ -1,4 +1,3 @@
-#include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/aux_/draw_image.hpp>
 #include <sanguis/gui/renderer/base.hpp>
 #include <sanguis/gui/style/base.hpp>
@@ -12,12 +11,11 @@
 #include <sge/renderer/texture/emulate_srgb.hpp>
 #include <sge/renderer/texture/planar.hpp>
 #include <sge/renderer/texture/mipmap/off.hpp>
+#include <sge/rucksack/axis.hpp>
 #include <sge/rucksack/axis_policy.hpp>
-#include <sge/rucksack/axis_policy2.hpp>
+#include <sge/rucksack/axis_to_index.hpp>
 #include <sge/rucksack/dim.hpp>
-#include <sge/rucksack/is_expanding.hpp>
-#include <sge/rucksack/minimum_size.hpp>
-#include <sge/rucksack/optional_scalar.hpp>
+#include <sge/rucksack/make_axis_policy.hpp>
 #include <sge/rucksack/preferred_size.hpp>
 #include <sge/rucksack/scalar.hpp>
 #include <sge/rucksack/widget/base.hpp>
@@ -66,49 +64,39 @@ sanguis::gui::widget::image::image(
 	texture_(
 		_texture
 	),
-	layout_(
-		sge::rucksack::axis_policy2(
-			sge::rucksack::axis_policy(
-				sge::rucksack::minimum_size(
-					fcppt::cast::size<
-						sge::rucksack::scalar
-					>(
-						fcppt::cast::to_signed(
-							texture_->size().w()
-						)
-					)
-					+
-					style_.image_spacing().w()
-				),
-				sge::rucksack::preferred_size(
-					sge::rucksack::optional_scalar()
-				),
-				sge::rucksack::is_expanding(
-					false
-				)
-			),
-			sge::rucksack::axis_policy(
-				sge::rucksack::minimum_size(
-					fcppt::cast::size<
-						sge::rucksack::scalar
-					>(
-						fcppt::cast::to_signed(
-							texture_->size().h()
-						)
-					)
-					+
-					style_.image_spacing().h()
-				),
-				sge::rucksack::preferred_size(
-					sge::rucksack::optional_scalar()
-				),
-				sge::rucksack::is_expanding(
-					false
-				)
-			),
-			sanguis::gui::default_aspect()
+	layout_{
+		sge::rucksack::make_axis_policy(
+			[
+				this
+			](
+				sge::rucksack::axis const _axis
+			)
+			{
+				return
+					sge::rucksack::axis_policy{
+						sge::rucksack::preferred_size{
+							fcppt::cast::size<
+								sge::rucksack::scalar
+							>(
+								fcppt::cast::to_signed(
+									texture_->size()[
+										sge::rucksack::axis_to_index(
+											_axis
+										)
+									]
+								)
+							)
+							+
+							style_.image_spacing()[
+								sge::rucksack::axis_to_index(
+									_axis
+								)
+							]
+						}
+					};
+			}
 		)
-	)
+	}
 {
 }
 

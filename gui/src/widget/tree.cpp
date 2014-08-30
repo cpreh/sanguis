@@ -1,5 +1,4 @@
 #include <sanguis/gui/context_fwd.hpp>
-#include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/reference.hpp>
@@ -13,13 +12,10 @@
 #include <sge/rucksack/axis.hpp>
 #include <sge/rucksack/axis_policy.hpp>
 #include <sge/rucksack/axis_policy2.hpp>
-#include <sge/rucksack/is_expanding.hpp>
 #include <sge/rucksack/minimum_size.hpp>
-#include <sge/rucksack/optional_scalar.hpp>
 #include <sge/rucksack/preferred_size.hpp>
 #include <sge/rucksack/scalar.hpp>
 #include <sge/rucksack/widget/dummy.hpp>
-#include <sge/rucksack/widget/box/base.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -39,8 +35,7 @@ sanguis::gui::widget::tree::tree(
 	sanguis::gui::widget::box_container(
 		_context,
 		sanguis::gui::widget::reference_alignment_vector(),
-		sge::rucksack::axis::y,
-		sanguis::gui::default_aspect()
+		sge::rucksack::axis::y
 	),
 	boxes_(
 		fcppt::algorithm::map_concat_move<
@@ -92,42 +87,26 @@ sanguis::gui::widget::tree::tree(
 												sge::rucksack::alignment::left_or_top
 											)
 										},
-										sge::rucksack::axis::x,
-										sanguis::gui::default_aspect()
+										sge::rucksack::axis::x
 									),
-									padding_(
-										sge::rucksack::axis_policy2(
-											sge::rucksack::axis_policy(
-												sge::rucksack::minimum_size(
+									padding_{
+										sge::rucksack::axis_policy2{
+											sge::rucksack::axis_policy{
+												sge::rucksack::preferred_size{
 													_indent
-												),
-												sge::rucksack::preferred_size(
-													sge::rucksack::optional_scalar(
-														_indent
-													)
-												),
-												sge::rucksack::is_expanding(
-													false
-												)
-											),
-											sge::rucksack::axis_policy(
-												sge::rucksack::minimum_size(
+												}
+											},
+											sge::rucksack::axis_policy{
+												sge::rucksack::minimum_size{
 													fcppt::literal<
 														sge::rucksack::scalar
 													>(
 														0
 													)
-												),
-												sge::rucksack::preferred_size(
-													sge::rucksack::optional_scalar()
-												),
-												sge::rucksack::is_expanding(
-													false
-												)
-											),
-											sanguis::gui::default_aspect()
-										)
-									)
+												}
+											}
+										}
+									}
 								{
 									this->box_layout().push_front_child(
 										padding_,

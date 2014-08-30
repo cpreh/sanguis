@@ -1,5 +1,4 @@
 #include <sanguis/gui/click_callback.hpp>
-#include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/get_focus.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/renderer/base.hpp>
@@ -23,12 +22,8 @@
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/renderer/texture/emulate_srgb.hpp>
-#include <sge/rucksack/aspect.hpp>
 #include <sge/rucksack/axis_policy.hpp>
 #include <sge/rucksack/axis_policy2.hpp>
-#include <sge/rucksack/is_expanding.hpp>
-#include <sge/rucksack/minimum_size.hpp>
-#include <sge/rucksack/optional_scalar.hpp>
 #include <sge/rucksack/preferred_size.hpp>
 #include <sge/rucksack/scalar.hpp>
 #include <sge/rucksack/vector.hpp>
@@ -67,10 +62,10 @@ sanguis::gui::widget::button::button(
 			_text
 		)
 	),
-	layout_(
-		sge::rucksack::axis_policy2(
-			sge::rucksack::axis_policy(
-				sge::rucksack::minimum_size(
+	layout_{
+		sge::rucksack::axis_policy2{
+			sge::rucksack::axis_policy{
+				sge::rucksack::preferred_size{
 					(
 						_needed_width
 						?
@@ -80,30 +75,17 @@ sanguis::gui::widget::button::button(
 					)
 					+
 					_style.button_spacing().w()
-				),
-				sge::rucksack::preferred_size(
-					sge::rucksack::optional_scalar()
-				),
-				sge::rucksack::is_expanding(
-					false
-				)
-			),
-			sge::rucksack::axis_policy(
-				sge::rucksack::minimum_size(
+				}
+			},
+			sge::rucksack::axis_policy{
+				sge::rucksack::preferred_size{
 					_font.metrics().height().get()
 					+
 					_style.button_spacing().h()
-				),
-				sge::rucksack::preferred_size(
-					sge::rucksack::optional_scalar()
-				),
-				sge::rucksack::is_expanding(
-					false
-				)
-			),
-			sanguis::gui::default_aspect()
-		)
-	),
+				}
+			}
+		}
+	},
 	click_()
 {
 }

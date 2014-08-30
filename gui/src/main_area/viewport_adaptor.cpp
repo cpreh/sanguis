@@ -2,7 +2,6 @@
 #include <sanguis/gui/main_area/viewport_adaptor.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
-#include <sge/rucksack/widget/viewport_adaptor.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 
 

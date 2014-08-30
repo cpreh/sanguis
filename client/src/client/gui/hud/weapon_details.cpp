@@ -4,7 +4,6 @@
 #include <sanguis/client/gui/hud/weapon_tooltip_unique_ptr.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
 #include <sanguis/gui/context_fwd.hpp>
-#include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/base_fwd.hpp>
 #include <sanguis/gui/widget/reference.hpp>
@@ -100,8 +99,7 @@ sanguis::client::gui::hud::weapon_details::weapon_details(
 					);
 			}
 		),
-		sge::rucksack::axis::y,
-		sanguis::gui::default_aspect()
+		sge::rucksack::axis::y
 	)
 {
 }

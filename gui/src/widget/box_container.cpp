@@ -4,17 +4,15 @@
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
 #include <sanguis/gui/widget/reference_alignment_vector.hpp>
 #include <sanguis/gui/widget/reference_vector.hpp>
-#include <sge/rucksack/aspect.hpp>
 #include <sge/rucksack/axis.hpp>
-#include <sge/rucksack/widget/box/base.hpp>
+#include <sge/rucksack/widget/box.hpp>
 #include <fcppt/algorithm/map.hpp>
 
 
 sanguis::gui::widget::box_container::box_container(
 	sanguis::gui::context &_context,
 	sanguis::gui::widget::reference_alignment_vector const &_widgets,
-	sge::rucksack::axis const _axis,
-	sge::rucksack::aspect const _aspect
+	sge::rucksack::axis const _axis
 )
 :
 	sanguis::gui::widget::container(
@@ -36,8 +34,7 @@ sanguis::gui::widget::box_container::box_container(
 		layout_
 	),
 	layout_(
-		_axis,
-		_aspect
+		_axis
 	)
 {
 	for(
@@ -95,7 +92,7 @@ sanguis::gui::widget::box_container::push_back(
 
 void
 sanguis::gui::widget::box_container::replace(
-	sge::rucksack::widget::box::base::size_type const _index,
+	sge::rucksack::widget::box::size_type const _index,
 	sanguis::gui::widget::reference_alignment_pair const &_pair
 )
 {
@@ -129,7 +126,7 @@ sanguis::gui::widget::box_container::clear()
 	this->clear_widgets();
 }
 
-sge::rucksack::widget::box::base &
+sge::rucksack::widget::box &
 sanguis::gui::widget::box_container::box_layout()
 {
 	return

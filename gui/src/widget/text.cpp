@@ -1,4 +1,3 @@
-#include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/aux_/relayout_ancestor.hpp>
 #include <sanguis/gui/renderer/base.hpp>
@@ -23,9 +22,6 @@
 #include <sge/renderer/texture/emulate_srgb.hpp>
 #include <sge/rucksack/axis_policy.hpp>
 #include <sge/rucksack/axis_policy2.hpp>
-#include <sge/rucksack/is_expanding.hpp>
-#include <sge/rucksack/minimum_size.hpp>
-#include <sge/rucksack/optional_scalar.hpp>
 #include <sge/rucksack/preferred_size.hpp>
 #include <sge/rucksack/rect.hpp>
 #include <sge/rucksack/widget/base_fwd.hpp>
@@ -62,25 +58,18 @@ sanguis::gui::widget::text::text(
 	value_(
 		_value
 	),
-	layout_(
-		sge::rucksack::axis_policy2(
+	layout_{
+		sge::rucksack::axis_policy2{
 			this->horizontal_policy(),
-			sge::rucksack::axis_policy(
-				sge::rucksack::minimum_size(
+			sge::rucksack::axis_policy{
+				sge::rucksack::preferred_size{
 					font_.metrics().height().get()
 					+
 					style_.text_spacing().h()
-				),
-				sge::rucksack::preferred_size(
-					sge::rucksack::optional_scalar()
-				),
-				sge::rucksack::is_expanding(
-					false
-				)
-			),
-			sanguis::gui::default_aspect()
-		)
-	)
+				}
+			}
+		}
+	}
 {
 }
 
@@ -99,8 +88,7 @@ sanguis::gui::widget::text::value(
 	layout_.axis_policy(
 		sge::rucksack::axis_policy2(
 			this->horizontal_policy(),
-			layout_.axis_policy().y(),
-			sanguis::gui::default_aspect()
+			layout_.axis_policy().y()
 		)
 	);
 
@@ -180,8 +168,8 @@ sge::rucksack::axis_policy
 sanguis::gui::widget::text::horizontal_policy() const
 {
 	return
-		sge::rucksack::axis_policy(
-			sge::rucksack::minimum_size(
+		sge::rucksack::axis_policy{
+			sge::rucksack::preferred_size{
 				(
 					needed_width_
 					?
@@ -196,12 +184,6 @@ sanguis::gui::widget::text::horizontal_policy() const
 				)
 				+
 				style_.text_spacing().w()
-			),
-			sge::rucksack::preferred_size(
-				sge::rucksack::optional_scalar()
-			),
-			sge::rucksack::is_expanding(
-				false
-			)
-		);
+			}
+		};
 }

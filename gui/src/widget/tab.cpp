@@ -1,5 +1,4 @@
 #include <sanguis/gui/context_fwd.hpp>
-#include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/aux_/relayout_ancestor.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
@@ -36,8 +35,7 @@ sanguis::gui::widget::tab::tab(
 	sanguis::gui::widget::box_container(
 		_context,
 		sanguis::gui::widget::reference_alignment_vector(),
-		sge::rucksack::axis::y,
-		sanguis::gui::default_aspect()
+		sge::rucksack::axis::y
 	),
 	top_buttons_(
 		fcppt::algorithm::map<
@@ -89,7 +87,7 @@ sanguis::gui::widget::tab::tab(
 										1u,
 										sanguis::gui::widget::reference_alignment_pair(
 											_widget,
-											sge::rucksack::alignment::right_or_bottom
+											sge::rucksack::alignment::left_or_top
 										)
 									);
 
@@ -142,8 +140,7 @@ sanguis::gui::widget::tab::tab(
 					);
 			}
 		),
-		sge::rucksack::axis::x,
-		sanguis::gui::default_aspect()
+		sge::rucksack::axis::x
 	)
 {
 	this->push_back(

@@ -4,7 +4,6 @@
 #include <sanguis/client/gui/perk/chooser.hpp>
 #include <sanguis/client/gui/perk/state.hpp>
 #include <sanguis/client/perk/state.hpp>
-#include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/gravity.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
@@ -98,8 +97,7 @@ sanguis::client::gui::perk::chooser::chooser(
 				state_alignment
 			)
 		},
-		sge::rucksack::axis::y,
-		sanguis::gui::default_aspect()
+		sge::rucksack::axis::y
 	),
 	gui_area_(
 		_renderer,

@@ -7,7 +7,6 @@
 #include <sanguis/client/gui/hud/weapon_attribute_name.hpp>
 #include <sanguis/client/gui/hud/weapon_attribute_text.hpp>
 #include <sanguis/gui/context_fwd.hpp>
-#include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/base_fwd.hpp>
@@ -124,8 +123,7 @@ sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 				sge::rucksack::alignment::center
 			}
 		},
-		sge::rucksack::axis::x,
-		sanguis::gui::default_aspect()
+		sge::rucksack::axis::x
 	}
 {
 }

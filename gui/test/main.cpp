@@ -1,6 +1,5 @@
 #include <sanguis/build/media_path.hpp>
 #include <sanguis/gui/context.hpp>
-#include <sanguis/gui/default_aspect.hpp>
 #include <sanguis/gui/duration.hpp>
 #include <sanguis/gui/index.hpp>
 #include <sanguis/gui/master.hpp>
@@ -384,8 +383,7 @@ try
 				sge::rucksack::alignment::center
 			)
 		},
-		sge::rucksack::axis::x,
-		sanguis::gui::default_aspect()
+		sge::rucksack::axis::x
 	);
 
 	sanguis::gui::string_container const string_choices{
@@ -428,8 +426,7 @@ try
 				sge::rucksack::alignment::center
 			)
 		},
-		sge::rucksack::axis::y,
-		sanguis::gui::default_aspect()
+		sge::rucksack::axis::y
 	);
 
 	sanguis::gui::main_area::viewport_adaptor main_area(

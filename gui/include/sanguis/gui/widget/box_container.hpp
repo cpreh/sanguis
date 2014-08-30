@@ -9,10 +9,9 @@
 #include <sanguis/gui/widget/reference_alignment_pair_fwd.hpp>
 #include <sanguis/gui/widget/reference_alignment_vector.hpp>
 #include <sge/rucksack/alignment_fwd.hpp>
-#include <sge/rucksack/aspect_fwd.hpp>
 #include <sge/rucksack/axis_fwd.hpp>
 #include <sge/rucksack/widget/base_fwd.hpp>
-#include <sge/rucksack/widget/box/base.hpp>
+#include <sge/rucksack/widget/box.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/strong_typedef.hpp>
 
@@ -36,8 +35,7 @@ public:
 	box_container(
 		sanguis::gui::context &,
 		sanguis::gui::widget::reference_alignment_vector const &,
-		sge::rucksack::axis,
-		sge::rucksack::aspect
+		sge::rucksack::axis
 	);
 
 	SANGUIS_GUI_SYMBOL
@@ -67,7 +65,7 @@ public:
 	SANGUIS_GUI_SYMBOL
 	void
 	replace(
-		sge::rucksack::widget::box::base::size_type,
+		sge::rucksack::widget::box::size_type,
 		sanguis::gui::widget::reference_alignment_pair const &
 	);
 
@@ -75,10 +73,10 @@ public:
 	void
 	clear();
 
-	sge::rucksack::widget::box::base &
+	sge::rucksack::widget::box &
 	box_layout();
 private:
-	sge::rucksack::widget::box::base layout_;
+	sge::rucksack::widget::box layout_;
 };
 
 }
