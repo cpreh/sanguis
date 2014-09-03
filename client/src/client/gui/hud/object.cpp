@@ -112,7 +112,7 @@ sanguis::client::gui::hud::object::object(
 		sanguis::client::gui::default_text_color(),
 		sanguis::gui::optional_needed_width()
 	),
-	top_container_(
+	text_container_(
 		gui_context_,
 		sanguis::gui::widget::reference_alignment_vector{
 			sanguis::gui::widget::reference_alignment_pair(
@@ -164,17 +164,7 @@ sanguis::client::gui::hud::object::object(
 			1.f
 		)
 	),
-	primary_weapon_(),
-	secondary_weapon_(),
-	weapon_container_(
-		gui_context_,
-		sanguis::gui::widget::reference_alignment_vector{},
-		sge::rucksack::axis::x
-	),
-	bottom_expander_(
-		sge::rucksack::axis::y
-	),
-	main_widget_(
+	middle_container_(
 		gui_context_,
 		sanguis::gui::widget::reference_alignment_vector{
 			sanguis::gui::widget::reference_alignment_pair(
@@ -185,13 +175,7 @@ sanguis::client::gui::hud::object::object(
 			),
 			sanguis::gui::widget::reference_alignment_pair(
 				sanguis::gui::widget::reference(
-					top_container_
-				),
-				sge::rucksack::alignment::center
-			),
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
-					exp_bar_
+					text_container_
 				),
 				sge::rucksack::alignment::center
 			),
@@ -203,25 +187,75 @@ sanguis::client::gui::hud::object::object(
 			),
 			sanguis::gui::widget::reference_alignment_pair(
 				sanguis::gui::widget::reference(
-					weapon_container_
+					exp_bar_
+				),
+				sge::rucksack::alignment::center
+			)
+		},
+		sge::rucksack::axis::y
+	),
+	primary_expander_(
+		sge::rucksack::axis::x
+	),
+	primary_weapon_(),
+	primary_weapon_container_(
+		gui_context_,
+		sanguis::gui::widget::reference_alignment_vector{
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					primary_expander_
+				),
+				sge::rucksack::alignment::center
+			)
+		},
+		sge::rucksack::axis::x
+	),
+	secondary_expander_(
+		sge::rucksack::axis::x
+	),
+	secondary_weapon_(),
+	secondary_weapon_container_(
+		gui_context_,
+		sanguis::gui::widget::reference_alignment_vector{
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					secondary_expander_
+				),
+				sge::rucksack::alignment::center
+			)
+		},
+		sge::rucksack::axis::x
+	),
+	main_widget_(
+		gui_context_,
+		sanguis::gui::widget::reference_alignment_vector{
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					primary_weapon_container_
 				),
 				sge::rucksack::alignment::left_or_top
 			),
 			sanguis::gui::widget::reference_alignment_pair(
 				sanguis::gui::widget::reference(
-					bottom_expander_
+					middle_container_
+				),
+				sge::rucksack::alignment::center
+			),
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					secondary_weapon_container_
 				),
 				sge::rucksack::alignment::left_or_top
 			)
 		},
-		sge::rucksack::axis::y
+		sge::rucksack::axis::x
 	),
 	gui_area_(
 		_renderer,
 		_viewport_manager,
 		gui_context_,
 		main_widget_,
-		sanguis::gui::gravity::north_east
+		sanguis::gui::gravity::north_west
 	),
 	gui_master_(
 		_keyboard,
@@ -526,7 +560,8 @@ sanguis::client::gui::hud::object::update_weapon_widgets(
 	Function const &_function
 )
 {
-	weapon_container_.clear();
+	primary_weapon_container_.clear();
+	secondary_weapon_container_.clear();
 
 	_function();
 
@@ -537,14 +572,28 @@ sanguis::client::gui::hud::object::update_weapon_widgets(
 			sanguis::client::gui::hud::weapon_widget &_widget
 		)
 		{
-			weapon_container_.push_back(
+			sanguis::weapon_type_to_is_primary(
+				_widget.weapon_description().weapon_type()
+			).get()
+			?
+			primary_weapon_container_.push_back(
 				sanguis::gui::widget::reference_alignment_pair{
 					sanguis::gui::widget::reference{
 						_widget.widget()
 					},
 					sge::rucksack::alignment::center
 				}
-			);
+			)
+			:
+			secondary_weapon_container_.push_back(
+				sanguis::gui::widget::reference_alignment_pair{
+					sanguis::gui::widget::reference{
+						_widget.widget()
+					},
+					sge::rucksack::alignment::center
+				}
+			)
+			;
 		}
 	);
 

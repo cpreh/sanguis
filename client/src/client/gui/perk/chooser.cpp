@@ -104,7 +104,7 @@ sanguis::client::gui::perk::chooser::chooser(
 		_viewport_manager,
 		gui_context_,
 		main_container_,
-		sanguis::gui::gravity::north_west
+		sanguis::gui::gravity::north_east
 	),
 	gui_master_(
 		_keyboard,

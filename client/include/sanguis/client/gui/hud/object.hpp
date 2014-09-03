@@ -202,27 +202,33 @@ private:
 
 	sanguis::gui::context gui_context_;
 
-		sanguis::gui::widget::text world_name_text_;
+			sanguis::gui::widget::text world_name_text_;
 
-			sanguis::gui::widget::text player_name_text_;
+				sanguis::gui::widget::text player_name_text_;
 
-			sanguis::gui::widget::expander name_level_gap_;
+				sanguis::gui::widget::expander name_level_gap_;
 
-			sanguis::gui::widget::text level_text_;
+				sanguis::gui::widget::text level_text_;
 
-		sanguis::gui::widget::box_container top_container_;
+			sanguis::gui::widget::box_container text_container_;
 
-		sanguis::gui::widget::bar exp_bar_;
+			sanguis::gui::widget::bar exp_bar_;
 
-		sanguis::gui::widget::bar health_bar_;
+			sanguis::gui::widget::bar health_bar_;
+
+		sanguis::gui::widget::box_container middle_container_;
+
+			sanguis::gui::widget::expander primary_expander_;
 
 			optional_weapon_widget_unique_ptr primary_weapon_;
 
+		sanguis::gui::widget::box_container primary_weapon_container_;
+
+			sanguis::gui::widget::expander secondary_expander_;
+
 			optional_weapon_widget_unique_ptr secondary_weapon_;
 
-		sanguis::gui::widget::box_container weapon_container_;
-
-		sanguis::gui::widget::expander bottom_expander_;
+		sanguis::gui::widget::box_container secondary_weapon_container_;
 
 	sanguis::gui::widget::box_container main_widget_;
 
