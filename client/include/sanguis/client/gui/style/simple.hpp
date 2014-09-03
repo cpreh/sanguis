@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_GUI_STYLE_SIMPLE_HPP_INCLUDED
 #define SANGUIS_CLIENT_GUI_STYLE_SIMPLE_HPP_INCLUDED
 
-#include <sanguis/client/load/resource/textures.hpp>
+#include <sanguis/client/load/resource/textures_fwd.hpp>
 #include <sanguis/gui/fill_color_fwd.hpp>
 #include <sanguis/gui/fill_level_fwd.hpp>
 #include <sanguis/gui/text_color_fwd.hpp>
@@ -13,6 +13,7 @@
 #include <sge/rucksack/padding_fwd.hpp>
 #include <sge/rucksack/rect_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+
 
 namespace sanguis
 {
@@ -31,6 +32,7 @@ class simple
 		simple
 	);
 public:
+	explicit
 	simple(
 		sanguis::client::load::resource::textures const &
 	);

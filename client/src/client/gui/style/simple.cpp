@@ -1,4 +1,5 @@
 #include <sanguis/client/gui/style/simple.hpp>
+#include <sanguis/client/load/resource/textures.hpp>
 #include <sanguis/client/load/resource/texture_identifier.hpp>
 #include <sanguis/gui/fill_level.hpp>
 #include <sanguis/gui/text_color.hpp>
@@ -27,6 +28,7 @@
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/size_type.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
+
 
 sanguis::client::gui::style::simple::simple(
 	sanguis::client::load::resource::textures const &_textures
