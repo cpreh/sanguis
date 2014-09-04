@@ -5,6 +5,7 @@
 #include <sanguis/gui/widget/reference_alignment_vector.hpp>
 #include <sanguis/gui/widget/reference_vector.hpp>
 #include <sge/rucksack/axis.hpp>
+#include <sge/rucksack/padding.hpp>
 #include <sge/rucksack/widget/box.hpp>
 #include <fcppt/algorithm/map.hpp>
 
@@ -34,7 +35,10 @@ sanguis::gui::widget::box_container::box_container(
 		layout_
 	),
 	layout_(
-		_axis
+		_axis,
+		sge::rucksack::padding{
+			4
+		}
 	)
 {
 	for(
