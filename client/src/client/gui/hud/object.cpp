@@ -194,6 +194,10 @@ sanguis::client::gui::hud::object::object(
 		},
 		sge::rucksack::axis::y
 	),
+	middle_frame_(
+		_gui_style,
+		middle_container_
+	),
 	primary_expander_(
 		sge::rucksack::axis::x
 	),
@@ -210,6 +214,10 @@ sanguis::client::gui::hud::object::object(
 		},
 		sge::rucksack::axis::x
 	),
+	primary_weapon_frame_(
+		_gui_style,
+		primary_weapon_container_
+	),
 	secondary_expander_(
 		sge::rucksack::axis::x
 	),
@@ -225,6 +233,10 @@ sanguis::client::gui::hud::object::object(
 			)
 		},
 		sge::rucksack::axis::x
+	),
+	secondary_weapon_frame_(
+		_gui_style,
+		secondary_weapon_container_
 	),
 	main_widget_(
 		gui_context_,

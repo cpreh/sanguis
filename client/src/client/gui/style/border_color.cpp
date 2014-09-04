@@ -7,5 +7,5 @@ sge::image::color::any::object
 sanguis::client::gui::style::border_color()
 {
 	return
-		sge::image::color::predef::black();
+		sge::image::color::predef::magenta();
 }

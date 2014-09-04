@@ -112,6 +112,13 @@ private:
 	) const
 	override;
 
+	void
+	draw_transparent_frame(
+		sanguis::gui::renderer::base &,
+		sge::renderer::context::ffp &,
+		sge::rucksack::rect
+	) const;
+
 	sanguis::gui::text_color
 	text_color() const
 	override;

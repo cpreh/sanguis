@@ -58,105 +58,13 @@ sanguis::client::gui::style::simple::draw_button(
 	sge::rucksack::rect const _area
 ) const
 {
-	const sge::rucksack::rect::value_type tilesize{12};
-
-	for (auto const &tile :
-		{
-			std::make_pair<>(sge::rucksack::vector{0,0}, FCPPT_TEXT("hud_frame_transparent_nw")),
-			std::make_pair<>(sge::rucksack::vector{_area.size().w() - tilesize,0}, FCPPT_TEXT("hud_frame_transparent_ne")),
-			std::make_pair<>(sge::rucksack::vector{_area.size().w() - tilesize,_area.size().h() - tilesize}, FCPPT_TEXT("hud_frame_transparent_se")),
-			std::make_pair<>(sge::rucksack::vector{0,_area.size().h() - tilesize}, FCPPT_TEXT("hud_frame_transparent_sw"))
-		}
-	)
-	{
-		sge::texture::const_part_shared_ptr part{
-			textures_.load(
-				sanguis::client::load::resource::texture_identifier{
-					tile.second
-				}
-			)
-		};
-
-		_renderer.draw_image(
-				_context,
-				*part,
-				_area.pos() + tile.first
-		);
-	}
-
-	sge::texture::const_part_shared_ptr part_v{
-		textures_.load(
-			sanguis::client::load::resource::texture_identifier{
-				FCPPT_TEXT("hud_frame_transparent_v")
-			}
-		)
-	};
-
-	sge::texture::const_part_shared_ptr part_h{
-		textures_.load(
-			sanguis::client::load::resource::texture_identifier{
-				FCPPT_TEXT("hud_frame_transparent_h")
-			}
-		)
-	};
-
-	_renderer.draw_image_repeat(
-			_context,
-			*part_v,
-			sge::rucksack::rect{
-				sge::rucksack::rect::vector{
-					_area.pos() + sge::rucksack::vector{_area.size().w() - tilesize, tilesize}
-				},
-				sge::rucksack::rect::dim{
-					tilesize,
-					_area.size().h() - 2 * tilesize
-				}
-			}
+	draw_transparent_frame(
+		_renderer,
+		_context,
+		_area
 	);
-
-	_renderer.draw_image_repeat(
-			_context,
-			*part_v,
-			sge::rucksack::rect{
-				sge::rucksack::rect::vector{
-					_area.pos() + sge::rucksack::vector{0,tilesize}
-				},
-				sge::rucksack::rect::dim{
-					tilesize,
-					_area.size().h() - 2 * tilesize
-				}
-			}
-	);
-
-	_renderer.draw_image_repeat(
-			_context,
-			*part_h,
-			sge::rucksack::rect{
-				sge::rucksack::rect::vector{
-					_area.pos() + sge::rucksack::vector{tilesize,0}
-				},
-				sge::rucksack::rect::dim{
-					_area.size().w() - 2 * tilesize,
-					tilesize
-				}
-			}
-	);
-
-	_renderer.draw_image_repeat(
-			_context,
-			*part_h,
-			sge::rucksack::rect{
-				sge::rucksack::rect::vector{
-					_area.pos() + sge::rucksack::vector{tilesize,_area.size().h() - tilesize}
-				},
-				sge::rucksack::rect::dim{
-					_area.size().w() - 2 * tilesize,
-					tilesize
-				}
-			}
-	);
-
 }
+
 
 void
 sanguis::client::gui::style::simple::draw_bar(
@@ -168,12 +76,6 @@ sanguis::client::gui::style::simple::draw_bar(
 	sanguis::gui::fill_color const &_fill_color
 ) const
 {
-	_renderer.fill_rect(
-		_context,
-		_area,
-		sanguis::client::gui::style::border_color()
-	);
-
 	sge::rucksack::rect const inner_rect(
 		fcppt::math::box::shrink(
 			_area,
@@ -269,12 +171,18 @@ sanguis::client::gui::style::simple::draw_frame(
 	sge::rucksack::padding const _padding
 ) const
 {
+	draw_transparent_frame(
+		_renderer,
+		_context,
+		_area
+	);
+
+	/*
 	sge::rucksack::scalar const border_size(
 		_padding.get()
 		/
 		2
 	);
-
 
 	_renderer.fill_rect(
 		_context,
@@ -337,6 +245,7 @@ sanguis::client::gui::style::simple::draw_frame(
 		),
 		sanguis::client::gui::style::border_color()
 	);
+	*/
 }
 
 sge::rucksack::dim const
@@ -353,6 +262,13 @@ sanguis::client::gui::style::simple::draw_edit(
 	sge::rucksack::rect const _area
 ) const
 {
+	draw_transparent_frame(
+		_renderer,
+		_context,
+		_area
+	);
+
+	/*
 	_renderer.fill_rect(
 		_context,
 		_area,
@@ -373,6 +289,7 @@ sanguis::client::gui::style::simple::draw_edit(
 		),
 		sanguis::client::gui::style::background_color()
 	);
+	*/
 }
 
 sge::rucksack::dim const
@@ -425,4 +342,123 @@ sanguis::client::gui::style::simple::spacing() const
 		>(
 			sanguis::client::gui::style::spacing::value
 		);
+}
+
+void
+sanguis::client::gui::style::simple::draw_transparent_frame(
+	sanguis::gui::renderer::base &_renderer,
+	sge::renderer::context::ffp &_context,
+	sge::rucksack::rect const _area
+) const
+{
+	const sge::rucksack::rect::value_type tilesize{12};
+
+	for (auto const &tile :
+		{
+			std::make_pair<>(
+				sge::rucksack::vector{0,0},
+				FCPPT_TEXT("hud_frame_transparent_nw")
+			),
+			std::make_pair<>(
+				sge::rucksack::vector{_area.size().w() - tilesize,0},
+				FCPPT_TEXT("hud_frame_transparent_ne")
+			),
+			std::make_pair<>(
+				sge::rucksack::vector{_area.size().w() - tilesize,_area.size().h() - tilesize},
+				FCPPT_TEXT("hud_frame_transparent_se")
+			),
+			std::make_pair<>(
+				sge::rucksack::vector{0,_area.size().h() - tilesize},
+				FCPPT_TEXT("hud_frame_transparent_sw")
+			)
+		}
+	)
+	{
+		sge::texture::const_part_shared_ptr part{
+			textures_.load(
+				sanguis::client::load::resource::texture_identifier{
+					tile.second
+				}
+			)
+		};
+
+		_renderer.draw_image(
+				_context,
+				*part,
+				_area.pos() + tile.first
+		);
+	}
+
+	sge::texture::const_part_shared_ptr part_v{
+		textures_.load(
+			sanguis::client::load::resource::texture_identifier{
+				FCPPT_TEXT("hud_frame_transparent_v")
+			}
+		)
+	};
+
+	sge::texture::const_part_shared_ptr part_h{
+		textures_.load(
+			sanguis::client::load::resource::texture_identifier{
+				FCPPT_TEXT("hud_frame_transparent_h")
+			}
+		)
+	};
+
+	_renderer.draw_image_repeat(
+			_context,
+			*part_v,
+			sge::rucksack::rect{
+				sge::rucksack::rect::vector{
+					_area.pos() + sge::rucksack::vector{_area.size().w() - tilesize, tilesize}
+				},
+				sge::rucksack::rect::dim{
+					tilesize,
+					_area.size().h() - 2 * tilesize
+				}
+			}
+	);
+
+	_renderer.draw_image_repeat(
+			_context,
+			*part_v,
+			sge::rucksack::rect{
+				sge::rucksack::rect::vector{
+					_area.pos() + sge::rucksack::vector{0,tilesize}
+				},
+				sge::rucksack::rect::dim{
+					tilesize,
+					_area.size().h() - 2 * tilesize
+				}
+			}
+	);
+
+	_renderer.draw_image_repeat(
+			_context,
+			*part_h,
+			sge::rucksack::rect{
+				sge::rucksack::rect::vector{
+					_area.pos() + sge::rucksack::vector{tilesize,0}
+				},
+				sge::rucksack::rect::dim{
+					_area.size().w() - 2 * tilesize,
+					tilesize
+				}
+			}
+	);
+
+	_renderer.draw_image_repeat(
+			_context,
+			*part_h,
+			sge::rucksack::rect{
+				sge::rucksack::rect::vector{
+					_area.pos() + sge::rucksack::vector{tilesize,_area.size().h() - tilesize}
+				},
+				sge::rucksack::rect::dim{
+					_area.size().w() - 2 * tilesize,
+					tilesize
+				}
+			}
+	);
+
 }

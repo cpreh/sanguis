@@ -18,7 +18,7 @@ namespace style
 typedef
 std::integral_constant<
 	sge::rucksack::scalar,
-	4
+	0
 >
 outer_border;
 
