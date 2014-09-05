@@ -3,6 +3,7 @@
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile_is_solid.hpp>
+#include <sanguis/creator/tile_is_visible.hpp>
 #include <sanguis/server/add_target_callback.hpp>
 #include <sanguis/server/closest_entity.hpp>
 #include <sanguis/server/radius.hpp>
@@ -18,7 +19,6 @@
 #include <sanguis/server/ai/behavior/base.hpp>
 #include <sanguis/server/ai/behavior/status.hpp>
 #include <sanguis/server/ai/behavior/attack.hpp>
-#include <sanguis/server/ai/pathing/is_visible.hpp>
 #include <sanguis/server/auras/target.hpp>
 #include <sanguis/server/auras/target_kind.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
@@ -111,7 +111,7 @@ sanguis::server::ai::behavior::attack::do_start()
 	return
 		target_
 		&&
-		sanguis::server::ai::pathing::is_visible(
+		sanguis::creator::tile_is_visible(
 			context_.grid(),
 			sanguis::server::world::center_to_grid_pos(
 				target_->center()
@@ -163,7 +163,7 @@ sanguis::server::ai::behavior::attack::update(
 	};
 
 	sanguis::server::ai::is_visible const is_visible{
-		sanguis::server::ai::pathing::is_visible(
+		sanguis::creator::tile_is_visible(
 			context_.grid(),
 			target_grid_pos,
 			sanguis::server::world::center_to_grid_pos(
@@ -324,7 +324,7 @@ sanguis::server::ai::behavior::attack::closest_target() const
 			)
 			{
 				return
-					sanguis::server::ai::pathing::is_visible(
+					sanguis::creator::tile_is_visible(
 						context_.grid(),
 						sanguis::server::world::center_to_grid_pos(
 							_ref.center()

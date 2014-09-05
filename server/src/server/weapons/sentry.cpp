@@ -5,11 +5,11 @@
 #include <sanguis/weapon_attribute_type.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/weapon_type.hpp>
+#include <sanguis/creator/tile_is_visible.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/ai/create_stationary.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
-#include <sanguis/server/ai/pathing/is_visible.hpp>
 #include <sanguis/server/damage/armor_unit.hpp>
 #include <sanguis/server/damage/fire.hpp>
 #include <sanguis/server/damage/make_armor_array.hpp>
@@ -87,7 +87,7 @@ sanguis::server::weapons::sentry::do_attack(
 )
 {
 	return
-		!sanguis::server::ai::pathing::is_visible(
+		!sanguis::creator::tile_is_visible(
 			_attack.environment().grid(),
 			sanguis::server::world::center_to_grid_pos(
 				sanguis::server::center{
