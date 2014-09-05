@@ -9,6 +9,7 @@
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/ai/create_stationary.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
+#include <sanguis/server/ai/pathing/is_visible.hpp>
 #include <sanguis/server/damage/armor_unit.hpp>
 #include <sanguis/server/damage/fire.hpp>
 #include <sanguis/server/damage/make_armor_array.hpp>
@@ -30,6 +31,7 @@
 #include <sanguis/server/weapons/attributes/make.hpp>
 #include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
 #include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
+#include <sanguis/server/world/center_to_grid_pos.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/join.hpp>
 
@@ -85,38 +87,53 @@ sanguis::server::weapons::sentry::do_attack(
 )
 {
 	return
-		sanguis::server::weapons::insert_to_attack_result(
-			_attack.environment().insert(
-				fcppt::make_unique_ptr<
-					sanguis::server::entities::friend_
-				>(
-					sanguis::friend_type::sentry,
-					_attack.environment().load_context(),
-					sanguis::server::damage::make_armor_array({
-						sanguis::server::damage::fire =
-							sanguis::server::damage::armor_unit(
-								0.9f
+		!sanguis::server::ai::pathing::is_visible(
+			_attack.environment().grid(),
+			sanguis::server::world::center_to_grid_pos(
+				sanguis::server::center{
+					_attack.target().get()
+				}
+			),
+			sanguis::server::world::center_to_grid_pos(
+				this->owner().center()
+			)
+		)
+		?
+			sanguis::server::weapons::attack_result::failure
+		:
+			sanguis::server::weapons::insert_to_attack_result(
+				_attack.environment().insert(
+					fcppt::make_unique_ptr<
+						sanguis::server::entities::friend_
+					>(
+						sanguis::friend_type::sentry,
+						_attack.environment().load_context(),
+						sanguis::server::damage::make_armor_array({
+							sanguis::server::damage::fire =
+								sanguis::server::damage::armor_unit(
+									0.9f
+								)
+						}),
+						health_.value(),
+						sanguis::server::entities::movement_speed(
+							0.f
+						),
+						sanguis::server::ai::create_stationary(
+							sanguis::server::ai::sight_range(
+								1000.f
 							)
-					}),
-					health_.value(),
-					sanguis::server::entities::movement_speed(
-						0.f
+						),
+						sentry_weapon_.get()()
 					),
-					sanguis::server::ai::create_stationary(
-						sanguis::server::ai::sight_range(
-							1000.f
-						)
-					),
-					sentry_weapon_.get()()
-				),
-				sanguis::server::entities::insert_parameters(
-					sanguis::server::center(
-						_attack.target().get()
-					),
-					_attack.angle()
+					sanguis::server::entities::insert_parameters(
+						sanguis::server::center(
+							_attack.target().get()
+						),
+						_attack.angle()
+					)
 				)
 			)
-		);
+		;
 }
 
 sanguis::weapon_attribute_vector

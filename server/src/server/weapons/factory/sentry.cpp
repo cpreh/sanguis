@@ -125,7 +125,7 @@ sanguis::server::weapons::factory::sentry(
 					),
 					sanguis::server::weapons::cast_point(
 						sanguis::duration_second(
-							2.f
+							0.1f
 						)
 					),
 					sanguis::server::weapons::range(
