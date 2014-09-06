@@ -174,7 +174,14 @@ sanguis::client::gui::style::simple::draw_frame(
 	draw_transparent_frame(
 		_renderer,
 		_context,
-		_area
+		sge::rucksack::rect{
+			_area.pos(),
+			_area.size() +
+			sge::rucksack::dim{
+				_padding.get() / 2,
+				_padding.get() / 2
+			}
+		}
 	);
 
 	/*
@@ -268,7 +275,6 @@ sanguis::client::gui::style::simple::draw_edit(
 		_area
 	);
 
-	/*
 	_renderer.fill_rect(
 		_context,
 		_area,
@@ -289,7 +295,6 @@ sanguis::client::gui::style::simple::draw_edit(
 		),
 		sanguis::client::gui::style::background_color()
 	);
-	*/
 }
 
 sge::rucksack::dim const

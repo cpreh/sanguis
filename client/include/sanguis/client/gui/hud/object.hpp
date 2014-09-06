@@ -18,7 +18,7 @@
 #include <sanguis/client/load/hud/context_fwd.hpp>
 #include <sanguis/gui/context.hpp>
 #include <sanguis/gui/master.hpp>
-#include <sanguis/gui/background/colored.hpp>
+#include <sanguis/gui/background/none.hpp>
 #include <sanguis/gui/main_area/screen_corner.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/bar.hpp>
@@ -26,6 +26,7 @@
 #include <sanguis/gui/widget/expander.hpp>
 #include <sanguis/gui/widget/frame.hpp>
 #include <sanguis/gui/widget/text.hpp>
+#include <sanguis/gui/widget/preferred_size.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
@@ -221,17 +222,25 @@ private:
 
 		sanguis::gui::widget::frame middle_frame_;
 
-				sanguis::gui::widget::expander primary_expander_;
+					sanguis::gui::widget::preferred_size primary_dummy_widget_h_;
 
-				optional_weapon_widget_unique_ptr primary_weapon_;
+					optional_weapon_widget_unique_ptr primary_weapon_;
+
+				sanguis::gui::widget::box_container primary_weapon_container_inner_;
+
+				sanguis::gui::widget::preferred_size primary_dummy_widget_w_;
 
 			sanguis::gui::widget::box_container primary_weapon_container_;
 
 		sanguis::gui::widget::frame primary_weapon_frame_;
 
-				sanguis::gui::widget::expander secondary_expander_;
+					sanguis::gui::widget::preferred_size secondary_dummy_widget_h_;
 
-				optional_weapon_widget_unique_ptr secondary_weapon_;
+					optional_weapon_widget_unique_ptr secondary_weapon_;
+
+				sanguis::gui::widget::box_container secondary_weapon_container_inner_;
+
+				sanguis::gui::widget::preferred_size secondary_dummy_widget_w_;
 
 			sanguis::gui::widget::box_container secondary_weapon_container_;
 
@@ -243,7 +252,7 @@ private:
 
 	sanguis::gui::master gui_master_;
 
-	sanguis::gui::background::colored gui_background_;
+	sanguis::gui::background::none gui_background_;
 
 	typedef
 	std::unique_ptr<

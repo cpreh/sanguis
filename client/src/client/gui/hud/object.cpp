@@ -198,41 +198,95 @@ sanguis::client::gui::hud::object::object(
 		_gui_style,
 		middle_container_
 	),
-	primary_expander_(
-		sge::rucksack::axis::x
+	primary_dummy_widget_h_(
+		sge::rucksack::dim{
+			0,
+			84
+		}
 	),
 	primary_weapon_(),
+	primary_weapon_container_inner_(
+		gui_context_,
+		sanguis::gui::widget::reference_alignment_vector{
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					primary_dummy_widget_h_
+				),
+				sge::rucksack::alignment::center
+			)
+		},
+		sge::rucksack::axis::y
+	),
+	primary_dummy_widget_w_(
+		sge::rucksack::dim{
+			150,
+			0
+		}
+	),
 	primary_weapon_container_(
 		gui_context_,
 		sanguis::gui::widget::reference_alignment_vector{
 			sanguis::gui::widget::reference_alignment_pair(
 				sanguis::gui::widget::reference(
-					primary_expander_
+					primary_dummy_widget_w_
+				),
+				sge::rucksack::alignment::center
+			),
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					primary_weapon_container_inner_
 				),
 				sge::rucksack::alignment::center
 			)
 		},
-		sge::rucksack::axis::x
+		sge::rucksack::axis::y
 	),
 	primary_weapon_frame_(
 		_gui_style,
 		primary_weapon_container_
 	),
-	secondary_expander_(
-		sge::rucksack::axis::x
+	secondary_dummy_widget_h_(
+		sge::rucksack::dim{
+			0,
+			84
+		}
 	),
 	secondary_weapon_(),
+	secondary_weapon_container_inner_(
+		gui_context_,
+		sanguis::gui::widget::reference_alignment_vector{
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					secondary_dummy_widget_h_
+				),
+				sge::rucksack::alignment::center
+			)
+		},
+		sge::rucksack::axis::y
+	),
+	secondary_dummy_widget_w_(
+		sge::rucksack::dim{
+			150,
+			0
+		}
+	),
 	secondary_weapon_container_(
 		gui_context_,
 		sanguis::gui::widget::reference_alignment_vector{
 			sanguis::gui::widget::reference_alignment_pair(
 				sanguis::gui::widget::reference(
-					secondary_expander_
+					secondary_dummy_widget_w_
+				),
+				sge::rucksack::alignment::center
+			),
+			sanguis::gui::widget::reference_alignment_pair(
+				sanguis::gui::widget::reference(
+					secondary_weapon_container_inner_
 				),
 				sge::rucksack::alignment::center
 			)
 		},
-		sge::rucksack::axis::x
+		sge::rucksack::axis::y
 	),
 	secondary_weapon_frame_(
 		_gui_style,
@@ -243,19 +297,19 @@ sanguis::client::gui::hud::object::object(
 		sanguis::gui::widget::reference_alignment_vector{
 			sanguis::gui::widget::reference_alignment_pair(
 				sanguis::gui::widget::reference(
-					primary_weapon_container_
+					primary_weapon_frame_
 				),
 				sge::rucksack::alignment::left_or_top
 			),
 			sanguis::gui::widget::reference_alignment_pair(
 				sanguis::gui::widget::reference(
-					middle_container_
+					middle_frame_
 				),
 				sge::rucksack::alignment::center
 			),
 			sanguis::gui::widget::reference_alignment_pair(
 				sanguis::gui::widget::reference(
-					secondary_weapon_container_
+					secondary_weapon_frame_
 				),
 				sge::rucksack::alignment::left_or_top
 			)
@@ -572,8 +626,24 @@ sanguis::client::gui::hud::object::update_weapon_widgets(
 	Function const &_function
 )
 {
-	primary_weapon_container_.clear();
-	secondary_weapon_container_.clear();
+	primary_weapon_container_inner_.clear();
+	primary_weapon_container_inner_.push_back(
+		sanguis::gui::widget::reference_alignment_pair{
+			sanguis::gui::widget::reference{
+				primary_dummy_widget_h_
+			},
+			sge::rucksack::alignment::center
+		}
+	);
+	secondary_weapon_container_inner_.clear();
+	secondary_weapon_container_inner_.push_back(
+		sanguis::gui::widget::reference_alignment_pair{
+			sanguis::gui::widget::reference{
+				secondary_dummy_widget_h_
+			},
+			sge::rucksack::alignment::center
+		}
+	);
 
 	_function();
 
@@ -584,28 +654,34 @@ sanguis::client::gui::hud::object::update_weapon_widgets(
 			sanguis::client::gui::hud::weapon_widget &_widget
 		)
 		{
-			sanguis::weapon_type_to_is_primary(
-				_widget.weapon_description().weapon_type()
-			).get()
-			?
-			primary_weapon_container_.push_back(
-				sanguis::gui::widget::reference_alignment_pair{
-					sanguis::gui::widget::reference{
-						_widget.widget()
-					},
-					sge::rucksack::alignment::center
-				}
+			if(
+				sanguis::weapon_type_to_is_primary(
+					_widget.weapon_description().weapon_type()
+				).get()
 			)
-			:
-			secondary_weapon_container_.push_back(
-				sanguis::gui::widget::reference_alignment_pair{
-					sanguis::gui::widget::reference{
-						_widget.widget()
-					},
-					sge::rucksack::alignment::center
-				}
-			)
-			;
+			{
+				primary_weapon_container_inner_.clear();
+				primary_weapon_container_inner_.push_back(
+					sanguis::gui::widget::reference_alignment_pair{
+						sanguis::gui::widget::reference{
+							_widget.widget()
+						},
+						sge::rucksack::alignment::center
+					}
+				);
+			}
+			else
+			{
+				secondary_weapon_container_inner_.clear();
+				secondary_weapon_container_inner_.push_back(
+					sanguis::gui::widget::reference_alignment_pair{
+						sanguis::gui::widget::reference{
+							_widget.widget()
+						},
+						sge::rucksack::alignment::center
+					}
+				);
+			}
 		}
 	);
 
