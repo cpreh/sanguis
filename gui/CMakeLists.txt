@@ -3,6 +3,7 @@ set(
 	include/sanguis/gui/background/base.hpp
 	include/sanguis/gui/background/base_fwd.hpp
 	include/sanguis/gui/background/colored.hpp
+	include/sanguis/gui/background/none.hpp
 	include/sanguis/gui/click_callback.hpp
 	include/sanguis/gui/click_function.hpp
 	include/sanguis/gui/context.hpp
@@ -80,6 +81,7 @@ set(
 	include/sanguis/gui/widget/optional_focus_fwd.hpp
 	include/sanguis/gui/widget/optional_ref.hpp
 	include/sanguis/gui/widget/optional_ref_fwd.hpp
+	include/sanguis/gui/widget/preferred_size.hpp
 	include/sanguis/gui/widget/reference.hpp
 	include/sanguis/gui/widget/reference_alignment_pair.hpp
 	include/sanguis/gui/widget/reference_alignment_pair_fwd.hpp
@@ -122,6 +124,7 @@ set(
 	src/aux_/style/text_color.cpp
 	src/background/base.cpp
 	src/background/colored.cpp
+	src/background/none.cpp
 	src/context.cpp
 	src/draw.cpp
 	src/include/sanguis/gui/aux_/draw_image.hpp
@@ -168,6 +171,7 @@ set(
 	src/widget/frame.cpp
 	src/widget/image.cpp
 	src/widget/minimum_size.cpp
+	src/widget/preferred_size.cpp
 	src/widget/reference_alignment_pair.cpp
 	src/widget/reference_name_pair.cpp
 	src/widget/static_text.cpp
