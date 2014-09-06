@@ -30,7 +30,8 @@ public:
 		sanguis::server::entities::enemies::parameters &&
 	);
 
-	~normal();
+	~normal()
+	override;
 private:
 	sanguis::messages::types::string const &
 	name() const
