@@ -56,7 +56,8 @@ sanguis::client::draw2d::entities::model::object::object(
 			_parameters.load_parameters().collection()[
 				_parameters.name().get()
 			].cell_size().get()
-		)
+		),
+		_parameters.color()
 	),
 	sanguis::client::draw2d::entities::ifaces::with_health(),
 	sanguis::client::draw2d::entities::ifaces::with_weapon(),

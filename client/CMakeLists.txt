@@ -89,6 +89,7 @@ set(
 	include/sanguis/client/draw2d/entities/bullet.hpp
 	include/sanguis/client/draw2d/entities/container.hpp
 	include/sanguis/client/draw2d/entities/enemy.hpp
+	include/sanguis/client/draw2d/entities/enemy_color.hpp
 	include/sanguis/client/draw2d/entities/explosion.hpp
 	include/sanguis/client/draw2d/entities/friend.hpp
 	include/sanguis/client/draw2d/entities/hover/info.hpp
@@ -130,6 +131,8 @@ set(
 	include/sanguis/client/draw2d/entities/model/parameters_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/part.hpp
 	include/sanguis/client/draw2d/entities/model/part_fwd.hpp
+	include/sanguis/client/draw2d/entities/name.hpp
+	include/sanguis/client/draw2d/entities/name_fwd.hpp
 	include/sanguis/client/draw2d/entities/order_vector.hpp
 	include/sanguis/client/draw2d/entities/other_player.hpp
 	include/sanguis/client/draw2d/entities/own.hpp
@@ -318,6 +321,7 @@ set(
 	include/sanguis/client/draw2d/sprite/normal/texture_animation.hpp
 	include/sanguis/client/draw2d/sprite/normal/texture_animation_decl.hpp
 	include/sanguis/client/draw2d/sprite/normal/texture_animation_fwd.hpp
+	include/sanguis/client/draw2d/sprite/normal/white.hpp
 	include/sanguis/client/draw2d/sprite/order.hpp
 	include/sanguis/client/draw2d/sprite/order_fwd.hpp
 	include/sanguis/client/draw2d/sprite/point.hpp
@@ -647,9 +651,11 @@ set(
 	src/client/draw2d/entities/bullet.cpp
 	src/client/draw2d/entities/container.cpp
 	src/client/draw2d/entities/enemy.cpp
+	src/client/draw2d/entities/enemy_color.cpp
 	src/client/draw2d/entities/explosion.cpp
 	src/client/draw2d/entities/friend.cpp
 	src/client/draw2d/entities/hover/info.cpp
+	src/client/draw2d/entities/hover/name.cpp
 	src/client/draw2d/entities/hover/name_and_health.cpp
 	src/client/draw2d/entities/ifaces/with_auras.cpp
 	src/client/draw2d/entities/ifaces/with_buffs.cpp
@@ -714,6 +720,7 @@ set(
 	src/client/draw2d/sprite/client/system.cpp
 	src/client/draw2d/sprite/index.cpp
 	src/client/draw2d/sprite/normal/system.cpp
+	src/client/draw2d/sprite/normal/white.cpp
 	src/client/draw2d/translate/scalar_from_client.cpp
 	src/client/draw2d/translate/scalar_to_client.cpp
 	src/client/draw2d/translate/vector_from_client.cpp

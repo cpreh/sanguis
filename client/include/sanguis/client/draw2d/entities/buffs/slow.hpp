@@ -3,7 +3,9 @@
 
 #include <sanguis/client/draw2d/entities/buffs/base.hpp>
 #include <sanguis/client/draw2d/entities/model/object_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/normal/color.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/optional_decl.hpp>
 
 
 namespace sanguis
@@ -41,6 +43,14 @@ private:
 		sanguis::client::draw2d::entities::model::object &
 	)
 	override;
+
+	typedef
+	fcppt::optional<
+		sanguis::client::draw2d::sprite::normal::color
+	>
+	optional_color;
+
+	optional_color previous_color_;
 };
 
 }

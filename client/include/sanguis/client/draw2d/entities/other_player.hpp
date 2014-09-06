@@ -4,6 +4,7 @@
 #include <sanguis/aura_type_vector.hpp>
 #include <sanguis/buff_type_vector.hpp>
 #include <sanguis/client/health_pair_fwd.hpp>
+#include <sanguis/client/draw2d/entities/name_fwd.hpp>
 #include <sanguis/client/draw2d/entities/player.hpp>
 #include <sanguis/client/draw2d/entities/hover/name.hpp>
 #include <sanguis/client/draw2d/entities/hover/optional_info_fwd.hpp>
@@ -35,7 +36,7 @@ public:
 		sanguis::aura_type_vector const &,
 		sanguis::buff_type_vector const &,
 		sanguis::client::health_pair,
-		sanguis::client::draw2d::entities::hover::name const &
+		sanguis::client::draw2d::entities::name const &
 	);
 
 	~other_player()

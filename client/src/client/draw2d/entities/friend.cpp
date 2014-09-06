@@ -14,6 +14,7 @@
 #include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
 #include <sanguis/client/draw2d/entities/model/name.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
+#include <sanguis/client/draw2d/sprite/normal/white.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
 #include <sanguis/load/friend_name.hpp>
 
@@ -50,7 +51,8 @@ sanguis::client::draw2d::entities::friend_::friend_(
 					sanguis::client::optional_health_pair(
 						_health_pair
 					),
-					sanguis::client::draw2d::entities::model::decay_option::delayed
+					sanguis::client::draw2d::entities::model::decay_option::delayed,
+					sanguis::client::draw2d::sprite::normal::white()
 				)
 			)
 		)

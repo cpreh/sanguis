@@ -14,11 +14,10 @@
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/index.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
-#include <sanguis/client/draw2d/sprite/normal/color_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/normal/color.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sanguis/client/draw2d/sprite/normal/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
-#include <sge/image/color/predef.hpp>
 #include <sge/image/color/any/object.hpp>
 #include <sge/sprite/center.hpp>
 #include <sge/sprite/intrusive/connection.hpp>
@@ -38,7 +37,8 @@ sanguis::client::draw2d::entities::container::container(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::client::draw2d::sprite::normal::system &_normal_system,
 	sanguis::client::draw2d::entities::order_vector const &_orders,
-	sanguis::client::draw2d::sprite::dim const &_dim
+	sanguis::client::draw2d::sprite::dim const _dim,
+	sanguis::client::draw2d::sprite::normal::color const _color
 )
 :
 	sanguis::client::draw2d::entities::base(),
@@ -81,8 +81,8 @@ sanguis::client::draw2d::entities::container::container(
 				.size(
 					_dim
 				)
-				.any_color(
-					sge::image::color::predef::white()
+				.color(
+					_color
 				)
 			)
 		);
@@ -152,6 +152,13 @@ sanguis::client::draw2d::entities::container::color(
 		sprite.color(
 			_color
 		);
+}
+
+sanguis::client::draw2d::sprite::normal::color const
+sanguis::client::draw2d::entities::container::color() const
+{
+	return
+		this->master().color();
 }
 
 void

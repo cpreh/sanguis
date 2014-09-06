@@ -6,11 +6,14 @@
 #include <sge/image/color/predef.hpp>
 #include <sge/image/color/any/convert.hpp>
 #include <sge/image/color/any/object.hpp>
+#include <fcppt/optional_impl.hpp>
+#include <fcppt/assert/pre.hpp>
 
 
 sanguis::client::draw2d::entities::buffs::slow::slow()
 :
-	sanguis::client::draw2d::entities::buffs::base()
+	sanguis::client::draw2d::entities::buffs::base(),
+	previous_color_()
 {
 }
 
@@ -23,6 +26,13 @@ sanguis::client::draw2d::entities::buffs::slow::apply(
 	sanguis::client::draw2d::entities::model::object &_model
 )
 {
+	FCPPT_ASSERT_PRE(
+		!previous_color_
+	);
+
+	previous_color_ =
+		_model.color();
+
 	_model.color(
 		sge::image::color::any::convert<
 			sanguis::client::draw2d::sprite::normal::color_format
@@ -37,12 +47,13 @@ sanguis::client::draw2d::entities::buffs::slow::remove(
 	sanguis::client::draw2d::entities::model::object &_model
 )
 {
-	// TODO: We should restore the previous color
-	_model.color(
-		sge::image::color::any::convert<
-			sanguis::client::draw2d::sprite::normal::color_format
-		>(
-			sge::image::color::predef::white()
-		)
+	FCPPT_ASSERT_PRE(
+		previous_color_
 	);
+
+	_model.color(
+		*previous_color_
+	);
+
+	previous_color_.reset();
 }

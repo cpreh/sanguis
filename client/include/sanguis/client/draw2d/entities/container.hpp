@@ -55,7 +55,8 @@ public:
 		sanguis::diff_clock const &,
 		sanguis::client::draw2d::sprite::normal::system &,
 		sanguis::client::draw2d::entities::order_vector const &,
-		sanguis::client::draw2d::sprite::dim const &
+		sanguis::client::draw2d::sprite::dim,
+		sanguis::client::draw2d::sprite::normal::color
 	);
 
 	~container()
@@ -79,6 +80,9 @@ public:
 	color(
 		sanguis::client::draw2d::sprite::normal::color const &
 	);
+
+	sanguis::client::draw2d::sprite::normal::color const
+	color() const;
 
 	typedef
 	sprite_vector::iterator

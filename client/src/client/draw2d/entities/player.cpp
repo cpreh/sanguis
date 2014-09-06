@@ -21,6 +21,7 @@
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/draw2d/sprite/unit.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
+#include <sanguis/client/draw2d/sprite/normal/white.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
@@ -73,7 +74,8 @@ sanguis::client::draw2d::entities::player::player(
 					sanguis::client::optional_health_pair(
 						_health_pair
 					),
-					sanguis::client::draw2d::entities::model::decay_option::delayed
+					sanguis::client::draw2d::entities::model::decay_option::delayed,
+					sanguis::client::draw2d::sprite::normal::white()
 				)
 			)
 		)

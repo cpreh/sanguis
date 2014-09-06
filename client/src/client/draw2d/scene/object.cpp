@@ -29,10 +29,10 @@
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/base.hpp>
+#include <sanguis/client/draw2d/entities/name.hpp>
 #include <sanguis/client/draw2d/entities/own.hpp>
 #include <sanguis/client/draw2d/entities/own_unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
-#include <sanguis/client/draw2d/entities/hover/name.hpp>
 #include <sanguis/client/draw2d/entities/hover/optional_info.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_auras.hpp>
@@ -90,6 +90,7 @@
 #include <sanguis/messages/roles/buff_type_container.hpp>
 #include <sanguis/messages/roles/center.hpp>
 #include <sanguis/messages/roles/destructible_type.hpp>
+#include <sanguis/messages/roles/enemy_kind.hpp>
 #include <sanguis/messages/roles/enemy_type.hpp>
 #include <sanguis/messages/roles/entity_id.hpp>
 #include <sanguis/messages/roles/friend_type.hpp>
@@ -914,12 +915,15 @@ sanguis::client::draw2d::scene::object::operator()(
 				sanguis::messages::roles::enemy_type
 			>(),
 			_message.get<
+				sanguis::messages::roles::enemy_kind
+			>(),
+			_message.get<
 				sanguis::messages::roles::aura_type_container
 			>(),
 			_message.get<
 				sanguis::messages::roles::buff_type_container
 			>(),
-			sanguis::client::draw2d::entities::hover::name(
+			sanguis::client::draw2d::entities::name(
 				sge::charconv::utf8_string_to_fcppt(
 					_message.get<
 						sanguis::messages::roles::name
@@ -1026,7 +1030,7 @@ sanguis::client::draw2d::scene::object::operator()(
 			sanguis::client::draw2d::scene::health_pair(
 				_message
 			),
-			sanguis::client::draw2d::entities::hover::name(
+			sanguis::client::draw2d::entities::name(
 				sge::charconv::utf8_string_to_fcppt(
 					_message.get<
 						sanguis::messages::roles::name

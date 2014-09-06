@@ -10,6 +10,7 @@
 #include <sanguis/client/draw2d/entities/model/name.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
+#include <sanguis/client/draw2d/sprite/normal/white.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
 
@@ -28,7 +29,8 @@ sanguis::client::draw2d::entities::aoe_bullet::aoe_bullet(
 				sanguis::client::draw2d::z_ordering::bullet
 			},
 			sanguis::client::optional_health_pair(),
-			sanguis::client::draw2d::entities::model::decay_option::immediate
+			sanguis::client::draw2d::entities::model::decay_option::immediate,
+			sanguis::client::draw2d::sprite::normal::white()
 		)
 	),
 	diff_clock_(

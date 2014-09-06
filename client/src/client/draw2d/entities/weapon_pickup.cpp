@@ -11,6 +11,7 @@
 #include <sanguis/client/draw2d/entities/model/name.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
+#include <sanguis/client/draw2d/sprite/normal/white.hpp>
 #include <sanguis/load/weapon_pickup_name.hpp>
 
 
@@ -31,7 +32,8 @@ sanguis::client::draw2d::entities::weapon_pickup::weapon_pickup(
 				sanguis::client::draw2d::z_ordering::pickup
 			},
 			sanguis::client::optional_health_pair(),
-			sanguis::client::draw2d::entities::model::decay_option::immediate
+			sanguis::client::draw2d::entities::model::decay_option::immediate,
+			sanguis::client::draw2d::sprite::normal::white()
 		)
 	),
 	weapon_description_(

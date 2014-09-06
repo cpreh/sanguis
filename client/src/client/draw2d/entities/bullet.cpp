@@ -13,6 +13,7 @@
 #include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/client/draw2d/sprite/unit.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
+#include <sanguis/client/draw2d/sprite/normal/white.hpp>
 #include <sge/sprite/center.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -46,7 +47,8 @@ sanguis::client::draw2d::entities::bullet::bullet(
 				sanguis::client::draw2d::z_ordering::bullet
 			},
 			sanguis::client::optional_health_pair(),
-			sanguis::client::draw2d::entities::model::decay_option::immediate
+			sanguis::client::draw2d::entities::model::decay_option::immediate,
+			sanguis::client::draw2d::sprite::normal::white()
 		)
 	),
 	origin_()

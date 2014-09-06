@@ -7,6 +7,7 @@
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/name.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/normal/color.hpp>
 
 
 namespace sanguis
@@ -31,7 +32,8 @@ public:
 		sanguis::client::draw2d::entities::model::name const &,
 		sanguis::client::draw2d::entities::order_vector const &,
 		sanguis::client::optional_health_pair const &,
-		sanguis::client::draw2d::entities::model::decay_option
+		sanguis::client::draw2d::entities::model::decay_option,
+		sanguis::client::draw2d::sprite::normal::color
 	);
 
 	sanguis::client::draw2d::entities::model::load_parameters const &
@@ -48,6 +50,9 @@ public:
 
 	sanguis::client::draw2d::entities::model::decay_option
 	decay_option() const;
+
+	sanguis::client::draw2d::sprite::normal::color const
+	color() const;
 private:
 	sanguis::client::draw2d::entities::model::load_parameters const &load_parameters_;
 
@@ -58,6 +63,8 @@ private:
 	sanguis::client::optional_health_pair const health_pair_;
 
 	sanguis::client::draw2d::entities::model::decay_option const decay_option_;
+
+	sanguis::client::draw2d::sprite::normal::color const color_;
 };
 
 }

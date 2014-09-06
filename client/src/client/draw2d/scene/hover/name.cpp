@@ -13,7 +13,6 @@
 #include <sge/font/draw/set_matrices.hpp>
 #include <sge/font/draw/set_states.hpp>
 #include <sge/font/draw/static_text.hpp>
-#include <sge/image/color/predef.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/renderer/texture/emulate_srgb.hpp>
@@ -34,7 +33,7 @@ sanguis::client::draw2d::scene::hover::name::name(
 		_renderer,
 		_font,
 		sge::font::from_fcppt_string(
-			_name.get()
+			_name.text()
 		),
 		sge::font::text_parameters(
 			sge::font::align_h::left()
@@ -47,7 +46,7 @@ sanguis::client::draw2d::scene::hover::name::name(
 			-
 			_font.metrics().height().get()
 		),
-		sge::image::color::predef::white(),
+		_name.color(),
 		sge::renderer::texture::emulate_srgb::no
 	)
 {

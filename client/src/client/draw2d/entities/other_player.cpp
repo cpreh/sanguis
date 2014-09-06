@@ -1,6 +1,7 @@
 #include <sanguis/aura_type_vector.hpp>
 #include <sanguis/buff_type_vector.hpp>
 #include <sanguis/client/health_pair_fwd.hpp>
+#include <sanguis/client/draw2d/entities/name.hpp>
 #include <sanguis/client/draw2d/entities/other_player.hpp>
 #include <sanguis/client/draw2d/entities/player.hpp>
 #include <sanguis/client/draw2d/entities/hover/name.hpp>
@@ -10,6 +11,7 @@
 #include <sanguis/client/draw2d/entities/hover/optional_name.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
+#include <sge/image/color/predef.hpp>
 
 
 sanguis::client::draw2d::entities::other_player::other_player(
@@ -18,7 +20,7 @@ sanguis::client::draw2d::entities::other_player::other_player(
 	sanguis::aura_type_vector const &_auras,
 	sanguis::buff_type_vector const &_buffers,
 	sanguis::client::health_pair const _health,
-	sanguis::client::draw2d::entities::hover::name const &_name
+	sanguis::client::draw2d::entities::name const &_name
 )
 :
 	sanguis::client::draw2d::entities::other_player::player(
@@ -28,9 +30,10 @@ sanguis::client::draw2d::entities::other_player::other_player(
 		_buffers,
 		_health
 	),
-	name_(
-		_name
-	)
+	name_{
+		_name.get(),
+		sge::image::color::predef::white()
+	}
 {
 }
 
