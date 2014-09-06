@@ -3,6 +3,7 @@
 #include <sanguis/random_generator.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/weapon_type.hpp>
+#include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
@@ -77,6 +78,7 @@ sanguis::server::weapons::monster_spawner::do_attack(
 					)(
 						this->random_generator()
 					),
+					sanguis::creator::enemy_kind::normal,
 					_attack.environment().difficulty(),
 					_attack.environment().load_context(),
 					sanguis::server::entities::spawn_owner(

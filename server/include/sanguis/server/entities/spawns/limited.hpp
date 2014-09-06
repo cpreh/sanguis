@@ -3,6 +3,7 @@
 
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/creator/enemy_kind_fwd.hpp>
 #include <sanguis/creator/enemy_type_fwd.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/spawns/count_per_wave.hpp>
@@ -35,6 +36,7 @@ public:
 	limited(
 		sanguis::random_generator &,
 		sanguis::creator::enemy_type,
+		sanguis::creator::enemy_kind,
 		sanguis::server::world::difficulty,
 		sanguis::server::entities::spawns::count_per_wave,
 		sanguis::server::entities::spawns::interval,

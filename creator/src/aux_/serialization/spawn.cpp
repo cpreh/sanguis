@@ -40,6 +40,13 @@ sanguis::creator::aux_::serialization::spawn(
 						_spawn.spawn_type()
 					)
 				)
+			)(
+				sge::parse::json::member(
+					FCPPT_TEXT("enemy_kind"),
+					sge::parse::json::convert::from_enum(
+						_spawn.enemy_kind()
+					)
+				)
 			)
 		);
 }

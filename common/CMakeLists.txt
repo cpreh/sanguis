@@ -17,6 +17,8 @@ set(
 	include/sanguis/diff_timer_fwd.hpp
 	include/sanguis/duration.hpp
 	include/sanguis/duration_second.hpp
+	include/sanguis/enemy_kind.hpp
+	include/sanguis/enemy_kind_fwd.hpp
 	include/sanguis/entity_id.hpp
 	include/sanguis/entity_id_fwd.hpp
 	include/sanguis/entity_id_type.hpp
@@ -185,6 +187,7 @@ set(
 	include/sanguis/messages/roles/console_message.hpp
 	include/sanguis/messages/roles/destructible_type.hpp
 	include/sanguis/messages/roles/direction.hpp
+	include/sanguis/messages/roles/enemy_kind.hpp
 	include/sanguis/messages/roles/enemy_type.hpp
 	include/sanguis/messages/roles/entity_id.hpp
 	include/sanguis/messages/roles/exp_for_next_level.hpp

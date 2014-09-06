@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_ENEMIES_ENEMY_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_ENEMIES_ENEMY_HPP_INCLUDED
 
+#include <sanguis/enemy_kind_fwd.hpp>
 #include <sanguis/collision/world/group_fwd.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
@@ -52,9 +53,6 @@ public:
 	~enemy()
 	override;
 
-	sanguis::creator::enemy_type
-	enemy_type() const;
-
 	sanguis::server::team
 	team() const
 	override;
@@ -62,6 +60,9 @@ protected:
 	void
 	update()
 	override;
+
+	sanguis::creator::enemy_type
+	enemy_type() const;
 private:
 	sanguis::messages::server::unique_ptr
 	add_message(
@@ -79,7 +80,11 @@ private:
 
 	virtual
 	sanguis::messages::types::string const &
-	name() const;
+	name() const = 0;
+
+	virtual
+	sanguis::enemy_kind
+	enemy_kind() const = 0;
 
 	sanguis::creator::enemy_type const enemy_type_;
 
@@ -90,9 +95,6 @@ private:
 	sanguis::server::entities::enemies::difficulty const difficulty_;
 
 	sanguis::server::entities::spawn_owner const spawn_owner_;
-
-	// TODO: Remove this member and implement it elsewhere!
-	sanguis::messages::types::string const name_;
 };
 
 }

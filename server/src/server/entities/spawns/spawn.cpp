@@ -1,4 +1,5 @@
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
@@ -33,6 +34,7 @@ sanguis::server::entities::spawns::spawn::~spawn()
 sanguis::server::entities::spawns::spawn::spawn(
 	sanguis::random_generator &_random_generator,
 	sanguis::creator::enemy_type const _enemy_type,
+	sanguis::creator::enemy_kind const _enemy_kind,
 	sanguis::server::world::difficulty const _difficulty
 )
 :
@@ -42,12 +44,15 @@ sanguis::server::entities::spawns::spawn::spawn(
 	random_generator_(
 		_random_generator
 	),
-	enemy_type_(
+	enemy_type_{
 		_enemy_type
-	),
-	difficulty_(
+	},
+	enemy_kind_{
+		_enemy_kind
+	},
+	difficulty_{
 		_difficulty
-	),
+	},
 	center_(),
 	angle_()
 {
@@ -114,6 +119,7 @@ sanguis::server::entities::spawns::spawn::update()
 					sanguis::server::entities::enemies::create(
 						random_generator_,
 						enemy_type_,
+						enemy_kind_,
 						difficulty_,
 						this->environment()->load_context(),
 						sanguis::server::entities::spawn_owner(

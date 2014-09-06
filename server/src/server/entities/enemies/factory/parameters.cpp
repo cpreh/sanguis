@@ -10,6 +10,7 @@
 sanguis::server::entities::enemies::factory::parameters::parameters(
 	sanguis::random_generator &_random_generator,
 	sanguis::creator::enemy_type const _enemy_type,
+	sanguis::creator::enemy_kind const _enemy_kind,
 	sanguis::server::entities::enemies::difficulty const _difficulty,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::entities::spawn_owner const &_spawn_owner,
@@ -22,6 +23,9 @@ sanguis::server::entities::enemies::factory::parameters::parameters(
 	enemy_type_(
 		_enemy_type
 	),
+	enemy_kind_{
+		_enemy_kind
+	},
 	difficulty_(
 		_difficulty
 	),
@@ -49,6 +53,13 @@ sanguis::server::entities::enemies::factory::parameters::enemy_type() const
 {
 	return
 		enemy_type_;
+}
+
+sanguis::creator::enemy_kind
+sanguis::server::entities::enemies::factory::parameters::enemy_kind() const
+{
+	return
+		enemy_kind_;
 }
 
 sanguis::server::entities::enemies::difficulty const

@@ -200,6 +200,7 @@ set(
 	include/sanguis/server/entities/enemies/factory/zombie01.hpp
 	include/sanguis/server/entities/enemies/finalize_special_parameters.hpp
 	include/sanguis/server/entities/enemies/fwd.hpp
+	include/sanguis/server/entities/enemies/is_unique.hpp
 	include/sanguis/server/entities/enemies/make_name.hpp
 	include/sanguis/server/entities/enemies/modifiers/agile.hpp
 	include/sanguis/server/entities/enemies/modifiers/amount.hpp
@@ -215,6 +216,7 @@ set(
 	include/sanguis/server/entities/enemies/modifiers/parameters.hpp
 	include/sanguis/server/entities/enemies/modifiers/parameters_fwd.hpp
 	include/sanguis/server/entities/enemies/modifiers/regenerating.hpp
+	include/sanguis/server/entities/enemies/normal.hpp
 	include/sanguis/server/entities/enemies/parameters.hpp
 	include/sanguis/server/entities/enemies/parameters_fwd.hpp
 	include/sanguis/server/entities/enemies/skills/amount.hpp
@@ -769,6 +771,7 @@ set(
 	src/server/entities/enemies/modifiers/health.cpp
 	src/server/entities/enemies/modifiers/parameters.cpp
 	src/server/entities/enemies/modifiers/regenerating.cpp
+	src/server/entities/enemies/normal.cpp
 	src/server/entities/enemies/parameters.cpp
 	src/server/entities/enemies/skills/amount.cpp
 	src/server/entities/enemies/skills/factory/create_callbacks.cpp

@@ -1,4 +1,6 @@
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/creator/enemy_kind.hpp>
+#include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/creator/spawn_pos.hpp>
 #include <sanguis/creator/spawn_type.hpp>
 #include <sanguis/load/enemy_name.hpp>
@@ -19,7 +21,8 @@
 
 sanguis::server::world::insert_pair_container
 sanguis::server::world::generate_single_spawns(
-	sanguis::creator::enemy_type const _type,
+	sanguis::creator::enemy_type const _enemy_type,
+	sanguis::creator::enemy_kind const _enemy_kind,
 	sanguis::creator::spawn_pos const _pos,
 	sanguis::random_generator &_random_generator,
 	sanguis::server::environment::load_context &_load_context,
@@ -32,14 +35,16 @@ sanguis::server::world::generate_single_spawns(
 			sanguis::server::world::place_callback(
 				[
 					&_random_generator,
-					_type,
+					_enemy_type,
+					_enemy_kind,
 					_difficulty,
 					&_load_context]
 				{
 					return
 						sanguis::server::entities::enemies::create(
 							_random_generator,
-							_type,
+							_enemy_type,
+							_enemy_kind,
 							_difficulty,
 							_load_context,
 							sanguis::server::entities::spawn_owner(
@@ -55,7 +60,7 @@ sanguis::server::world::generate_single_spawns(
 			_load_context.model_size(
 				sanguis::server::model_name(
 					sanguis::load::enemy_name(
-						_type
+						_enemy_type
 					)
 				)
 			)

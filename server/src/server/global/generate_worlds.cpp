@@ -1,5 +1,6 @@
 #include <sanguis/world_id.hpp>
 #include <sanguis/world_name.hpp>
+#include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/creator/opening_count.hpp>
 #include <sanguis/creator/seed.hpp>
@@ -195,6 +196,7 @@ sanguis::server::global::generate_worlds(
 				sanguis::server::entities::enemies::create(
 					_parameters.random_generator(),
 					sanguis::creator::enemy_type::reaper,
+					sanguis::creator::enemy_kind::unique,
 					last_world.difficulty(),
 					last_world.environment().load_context(),
 					sanguis::server::entities::spawn_owner(

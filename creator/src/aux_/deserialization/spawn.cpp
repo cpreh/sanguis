@@ -1,3 +1,4 @@
+#include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/spawn.hpp>
@@ -53,6 +54,17 @@ sanguis::creator::aux_::deserialization::spawn(
 				),
 				fcppt::enum_max_value<
 					sanguis::creator::spawn_type
+				>::value
+			),
+			sge::parse::json::convert::to_enum<
+				sanguis::creator::enemy_kind
+			>(
+				sge::parse::json::find_member_value_exn(
+					_object.members,
+					FCPPT_TEXT("enemy_kind")
+				),
+				fcppt::enum_max_value<
+					sanguis::creator::enemy_kind
 				>::value
 			)
 		);

@@ -27,6 +27,7 @@ sanguis::server::world::generate_spawns(
 		return
 			sanguis::server::world::generate_single_spawns(
 				_spawn.enemy_type(),
+				_spawn.enemy_kind(),
 				_spawn.pos(),
 				_random_generator,
 				_load_context,
@@ -39,6 +40,7 @@ sanguis::server::world::generate_spawns(
 			>(
 				sanguis::server::world::make_spawner(
 					_spawn.enemy_type(),
+					_spawn.enemy_kind(),
 					_spawn.pos(),
 					_random_generator,
 					_difficulty

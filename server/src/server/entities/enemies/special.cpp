@@ -1,7 +1,10 @@
+#include <sanguis/enemy_kind.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/messages/types/string.hpp>
 #include <sanguis/server/entities/enemies/attribute_container.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
 #include <sanguis/server/entities/enemies/finalize_special_parameters.hpp>
+#include <sanguis/server/entities/enemies/is_unique.hpp>
 #include <sanguis/server/entities/enemies/make_name.hpp>
 #include <sanguis/server/entities/enemies/parameters.hpp>
 #include <sanguis/server/entities/enemies/special.hpp>
@@ -21,7 +24,8 @@ sanguis::server::entities::enemies::special::special(
 	sanguis::random_generator &_random_generator,
 	sanguis::server::entities::enemies::parameters &&_parameters,
 	sanguis::server::entities::enemies::attribute_container const &_attributes,
-	sanguis::server::entities::enemies::skills::factory::container const &_skills
+	sanguis::server::entities::enemies::skills::factory::container const &_skills,
+	sanguis::server::entities::enemies::is_unique const _is_unique
 )
 :
 	sanguis::server::entities::enemies::enemy(
@@ -57,7 +61,7 @@ sanguis::server::entities::enemies::special::special(
 			}
 		)
 	),
-	name_(
+	name_{
 		sge::charconv::fcppt_string_to_utf8(
 			sanguis::server::entities::enemies::make_name(
 				_attributes,
@@ -65,7 +69,10 @@ sanguis::server::entities::enemies::special::special(
 				this->enemy_type()
 			)
 		)
-	)
+	},
+	is_unique_{
+		_is_unique
+	}
 {
 }
 
@@ -93,4 +100,16 @@ sanguis::server::entities::enemies::special::name() const
 {
 	return
 		name_;
+}
+
+sanguis::enemy_kind
+sanguis::server::entities::enemies::special::enemy_kind() const
+{
+	return
+		is_unique_.get()
+		?
+			sanguis::enemy_kind::unique
+		:
+			sanguis::enemy_kind::champion
+		;
 }

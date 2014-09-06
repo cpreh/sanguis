@@ -3,6 +3,7 @@
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/attribute_container.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
+#include <sanguis/server/entities/enemies/is_unique.hpp>
 #include <sanguis/server/entities/enemies/parameters.hpp>
 #include <sanguis/server/entities/enemies/special.hpp>
 #include <sanguis/server/entities/enemies/factory/make_modifiers.hpp>
@@ -26,7 +27,8 @@
 sanguis::server::entities::unique_ptr
 sanguis::server::entities::enemies::factory::make_special(
 	sanguis::random_generator &_random_generator,
-	sanguis::server::entities::enemies::parameters &&_parameters
+	sanguis::server::entities::enemies::parameters &&_parameters,
+	sanguis::server::entities::enemies::is_unique const _is_unique
 )
 {
 	sanguis::server::entities::enemies::difficulty const difficulty(
@@ -42,15 +44,22 @@ sanguis::server::entities::enemies::factory::make_special(
 	split_array const amounts(
 		sanguis::server::random::split(
 			_random_generator,
-			// TODO: How many?
 			sanguis::server::random::min(
 				sanguis::server::random::amount(
-					2u
+					_is_unique.get()
+					?
+						3u
+					:
+						1u
 				)
 			),
 			sanguis::server::random::max(
 				sanguis::server::random::amount(
-					5u
+					_is_unique.get()
+					?
+						5u
+					:
+						2u
 				)
 			),
 			split_array{{
@@ -95,6 +104,7 @@ sanguis::server::entities::enemies::factory::make_special(
 				amounts[
 					1
 				]
-			)
+			),
+			_is_unique
 		);
 }

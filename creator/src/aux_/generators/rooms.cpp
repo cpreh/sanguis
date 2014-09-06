@@ -1,5 +1,4 @@
 #include <fcppt/assert/unreachable.hpp>
-#include <fcppt/io/cout.hpp>
 #include <fcppt/math/box/center.hpp>
 #include <fcppt/math/box/contains_point.hpp>
 #include <fcppt/math/box/object.hpp>
@@ -26,6 +25,7 @@
 #include <sanguis/creator/background_tile.hpp>
 #include <sanguis/creator/destructible_container.hpp>
 #include <sanguis/creator/difference_type.hpp>
+#include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/grid.hpp>
@@ -668,7 +668,8 @@ sanguis::creator::aux_::generators::rooms(
 							_parameters.randgen()
 						)
 					],
-					sanguis::creator::spawn_type::single
+					sanguis::creator::spawn_type::single,
+					sanguis::creator::enemy_kind::normal
 				}
 			);
 		}
@@ -688,7 +689,8 @@ sanguis::creator::aux_::generators::rooms(
 					_parameters.randgen()
 				)
 			],
-			sanguis::creator::spawn_type::single
+			sanguis::creator::spawn_type::single,
+			sanguis::creator::enemy_kind::normal
 		}
 	);
 

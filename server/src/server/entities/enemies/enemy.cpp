@@ -5,6 +5,7 @@
 #include <sanguis/messages/roles/aura_type_container.hpp>
 #include <sanguis/messages/roles/buff_type_container.hpp>
 #include <sanguis/messages/roles/center.hpp>
+#include <sanguis/messages/roles/enemy_kind.hpp>
 #include <sanguis/messages/roles/enemy_type.hpp>
 #include <sanguis/messages/roles/entity_id.hpp>
 #include <sanguis/messages/roles/health.hpp>
@@ -45,7 +46,6 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
-#include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -109,26 +109,12 @@ sanguis::server::entities::enemies::enemy::enemy(
 	),
 	spawn_owner_(
 		_parameters.spawn_owner()
-	),
-	name_(
-		sge::charconv::fcppt_string_to_utf8(
-			sanguis::load::enemy_name(
-				enemy_type_
-			)
-		)
 	)
 {
 }
 
 sanguis::server::entities::enemies::enemy::~enemy()
 {
-}
-
-sanguis::creator::enemy_type
-sanguis::server::entities::enemies::enemy::enemy_type() const
-{
-	return
-		enemy_type_;
 }
 
 sanguis::server::team
@@ -148,6 +134,13 @@ sanguis::server::entities::enemies::enemy::update()
 	sanguis::server::entities::with_health::update();
 
 	sanguis::server::entities::with_velocity::update();
+}
+
+sanguis::creator::enemy_type
+sanguis::server::entities::enemies::enemy::enemy_type() const
+{
+	return
+		enemy_type_;
 }
 
 sanguis::messages::server::unique_ptr
@@ -180,6 +173,8 @@ sanguis::server::entities::enemies::enemy::add_message(
 					this->buff_types(),
 				sanguis::messages::roles::enemy_type{} =
 					this->enemy_type(),
+				sanguis::messages::roles::enemy_kind{} =
+					this->enemy_kind(),
 				sanguis::messages::roles::name{} =
 					this->name()
 			)
@@ -225,11 +220,4 @@ sanguis::server::entities::enemies::enemy::remove()
 		difficulty_,
 		this->center()
 	);
-}
-
-sanguis::messages::types::string const &
-sanguis::server::entities::enemies::enemy::name() const
-{
-	return
-		name_;
 }

@@ -1,4 +1,5 @@
 #include <sanguis/duration_second.hpp>
+#include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/creator/spawn_pos.hpp>
 #include <sanguis/server/entities/base.hpp>
@@ -18,6 +19,7 @@
 sanguis::server::world::insert_pair
 sanguis::server::world::make_spawner(
 	sanguis::creator::enemy_type const _enemy_type,
+	sanguis::creator::enemy_kind const _enemy_kind,
 	sanguis::creator::spawn_pos const _pos,
 	sanguis::random_generator &_random_generator,
 	sanguis::server::world::difficulty const _difficulty
@@ -30,6 +32,7 @@ sanguis::server::world::make_spawner(
 			>(
 				_random_generator,
 				_enemy_type,
+				_enemy_kind,
 				_difficulty,
 				// TODO!
 				sanguis::server::entities::spawns::count_per_wave(

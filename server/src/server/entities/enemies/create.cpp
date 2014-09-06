@@ -1,4 +1,5 @@
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/spawn_owner_fwd.hpp>
@@ -26,15 +27,17 @@ sanguis::server::entities::unique_ptr
 sanguis::server::entities::enemies::create(
 	sanguis::random_generator &_random_generator,
 	sanguis::creator::enemy_type const _enemy_type,
+	sanguis::creator::enemy_kind const _enemy_kind,
 	sanguis::server::world::difficulty const _difficulty,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::entities::spawn_owner const &_spawn,
 	sanguis::server::entities::enemies::special_chance const _special_chance
 )
 {
-	sanguis::server::entities::enemies::factory::parameters const parameters(
+	sanguis::server::entities::enemies::factory::parameters const parameters{
 		_random_generator,
 		_enemy_type,
+		_enemy_kind,
 		sanguis::server::entities::enemies::difficulty(
 			sanguis::server::entities::enemies::base_difficulty(
 				_enemy_type
@@ -49,7 +52,7 @@ sanguis::server::entities::enemies::create(
 		_load_context,
 		_spawn,
 		_special_chance
-	);
+	};
 
 	switch(
 		_enemy_type

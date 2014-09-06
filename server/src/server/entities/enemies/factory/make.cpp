@@ -8,7 +8,8 @@
 #include <sanguis/server/damage/armor_array.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
-#include <sanguis/server/entities/enemies/enemy.hpp>
+#include <sanguis/server/entities/enemies/is_unique.hpp>
+#include <sanguis/server/entities/enemies/normal.hpp>
 #include <sanguis/server/entities/enemies/parameters.hpp>
 #include <sanguis/server/entities/enemies/factory/make.hpp>
 #include <sanguis/server/entities/enemies/factory/make_special.hpp>
@@ -74,7 +75,15 @@ sanguis::server::entities::enemies::factory::make(
 		)
 	);
 
+	sanguis::server::entities::enemies::is_unique const is_unique{
+		_parameters.enemy_kind()
+		==
+		sanguis::creator::enemy_kind::unique
+	};
+
 	return
+		is_unique.get()
+		||
 		distribution(
 			_parameters.random_generator()
 		)
@@ -85,11 +94,12 @@ sanguis::server::entities::enemies::factory::make(
 				_parameters.random_generator(),
 				std::move(
 					parameters
-				)
+				),
+				is_unique
 			)
 		:
 			fcppt::make_unique_ptr<
-				sanguis::server::entities::enemies::enemy
+				sanguis::server::entities::enemies::normal
 			>(
 				std::move(
 					parameters

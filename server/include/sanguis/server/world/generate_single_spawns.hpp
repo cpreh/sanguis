@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_WORLD_GENERATE_SINGLE_SPAWNS_HPP_INCLUDED
 
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/creator/enemy_kind_fwd.hpp>
 #include <sanguis/creator/enemy_type_fwd.hpp>
 #include <sanguis/creator/spawn_pos_fwd.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
@@ -19,6 +20,7 @@ namespace world
 sanguis::server::world::insert_pair_container
 generate_single_spawns(
 	sanguis::creator::enemy_type,
+	sanguis::creator::enemy_kind,
 	sanguis::creator::spawn_pos,
 	sanguis::random_generator &,
 	sanguis::server::environment::load_context &,

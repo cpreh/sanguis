@@ -14,6 +14,7 @@
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/attribute_container.hpp>
+#include <sanguis/server/entities/enemies/is_unique.hpp>
 #include <sanguis/server/entities/enemies/parameters.hpp>
 #include <sanguis/server/entities/enemies/special.hpp>
 #include <sanguis/server/entities/enemies/factory/parameters.hpp>
@@ -116,6 +117,9 @@ sanguis::server::entities::enemies::factory::reaper(
 			},
 			sanguis::server::entities::enemies::skills::factory::container{
 				sanguis::server::entities::enemies::skills::factory::scatter
+			},
+			sanguis::server::entities::enemies::is_unique{
+				true
 			}
 		);
 }

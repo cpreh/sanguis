@@ -1,4 +1,5 @@
 #include <sanguis/creator/count.hpp>
+#include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/opening_container.hpp>
@@ -112,7 +113,8 @@ sanguis::creator::aux_::place_spawners(
 							_generator
 						)
 					],
-					sanguis::creator::spawn_type::spawner
+					sanguis::creator::spawn_type::spawner,
+					sanguis::creator::enemy_kind::normal
 				}
 			);
 

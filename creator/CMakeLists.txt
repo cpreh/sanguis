@@ -16,6 +16,8 @@ set(
 	include/sanguis/creator/difference_type.hpp
 	include/sanguis/creator/dim.hpp
 	include/sanguis/creator/dim_fwd.hpp
+	include/sanguis/creator/enemy_kind.hpp
+	include/sanguis/creator/enemy_kind_fwd.hpp
 	include/sanguis/creator/enemy_type.hpp
 	include/sanguis/creator/enemy_type_fwd.hpp
 	include/sanguis/creator/exception.hpp

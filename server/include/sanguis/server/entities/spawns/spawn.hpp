@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_SPAWNS_SPAWN_HPP_INCLUDED
 
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
@@ -47,6 +48,7 @@ protected:
 	spawn(
 		sanguis::random_generator &,
 		sanguis::creator::enemy_type,
+		sanguis::creator::enemy_kind,
 		sanguis::server::world::difficulty
 	);
 private:
@@ -93,6 +95,8 @@ private:
 	sanguis::random_generator &random_generator_;
 
 	sanguis::creator::enemy_type const enemy_type_;
+
+	sanguis::creator::enemy_kind const enemy_kind_;
 
 	sanguis::server::world::difficulty const difficulty_;
 

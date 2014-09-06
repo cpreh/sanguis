@@ -3,6 +3,7 @@
 
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/entities/enemies/is_unique.hpp>
 #include <sanguis/server/entities/enemies/parameters_fwd.hpp>
 
 
@@ -20,7 +21,8 @@ namespace factory
 sanguis::server::entities::unique_ptr
 make_special(
 	sanguis::random_generator &,
-	sanguis::server::entities::enemies::parameters &&
+	sanguis::server::entities::enemies::parameters &&,
+	sanguis::server::entities::enemies::is_unique
 );
 
 }
