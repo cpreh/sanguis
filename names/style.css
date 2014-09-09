@@ -8,15 +8,26 @@ body
 #edit
 {
 	background-color: transparent;
+	color: #f90;
 	width:	400px;
-	color: #fb0;
 	width:	50%;
 	text-align:	center;
 	font-size:	2cm;
-	font-family: "Alegreya SC";
+	font-family: "Marcellus SC";
 	margin-top: 100px;
 	margin-bottom: 100px;
 	margin-left: auto;
 	margin-right: auto;
-	text-shadow: 4px 4px 24px #a00;
+
+	-webkit-animation: myfirst 5s infinite;
+
+}
+
+@-webkit-keyframes myfirst {
+	0% {padding-left: 0px; color: #f90; text-shadow: 0px 0px 20px red;}
+	25% {text-shadow: 0px 3px 15px yellow;}
+	50% {text-shadow: 3px 0px 15px orange;}
+	75% {text-shadow: -3px 0px 15px #f90;}
+	98% {padding-left: 0px; color: #f90; text-shadow: 0px 0px 20px red;}
+	100% {padding-left: 20px; color: transparent; text-shadow: 0px 0px 20px red;}
 }
