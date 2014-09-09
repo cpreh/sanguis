@@ -1,0 +1,22 @@
+body
+{
+	padding: 0;
+	margin: 0;
+	background-color: black;
+}
+
+#edit
+{
+	background-color: transparent;
+	width:	400px;
+	color: #fb0;
+	width:	50%;
+	text-align:	center;
+	font-size:	2cm;
+	font-family: "Alegreya SC";
+	margin-top: 100px;
+	margin-bottom: 100px;
+	margin-left: auto;
+	margin-right: auto;
+	text-shadow: 4px 4px 24px #a00;
+}
