@@ -14,11 +14,11 @@ sanguis::server::entities::enemies::normal::normal(
 	sanguis::server::entities::enemies::parameters &&_parameters
 )
 :
-	sanguis::server::entities::enemies::enemy{
+	sanguis::server::entities::enemies::enemy(
 		std::move(
 			_parameters
 		)
-	},
+	),
 	name_{
 		sge::charconv::fcppt_string_to_utf8(
 			sanguis::load::enemy_name(
