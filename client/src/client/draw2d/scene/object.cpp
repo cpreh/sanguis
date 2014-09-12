@@ -155,7 +155,6 @@
 #include <alda/serialization/load/static_size.hpp>
 #include <majutsu/is_role.hpp>
 #include <majutsu/unwrap_role.hpp>
-#include <fcppt/dynamic_cast.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/make_enum_range_start_end.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -165,6 +164,7 @@
 #include <fcppt/type_name_from_info.hpp>
 #include <fcppt/algorithm/map_iteration_second.hpp>
 #include <fcppt/algorithm/sequence_iteration.hpp>
+#include <fcppt/cast/dynamic.hpp>
 #include <fcppt/container/find_exn.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/warning.hpp>
@@ -851,7 +851,7 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::add_aura const &_message
 )
 {
-	fcppt::dynamic_cast_<
+	fcppt::cast::dynamic<
 		sanguis::client::draw2d::entities::ifaces::with_auras &
 	>(
 		this->entity(
@@ -871,7 +871,7 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::add_buff const &_message
 )
 {
-	fcppt::dynamic_cast_<
+	fcppt::cast::dynamic<
 		sanguis::client::draw2d::entities::ifaces::with_buffs &
 	>(
 		this->entity(
@@ -1079,7 +1079,7 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::change_weapon const &_message
 )
 {
-	fcppt::dynamic_cast_<
+	fcppt::cast::dynamic<
 		sanguis::client::draw2d::entities::ifaces::with_weapon &
 	>(
 		this->entity(
@@ -1154,7 +1154,7 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::health const &_message
 )
 {
-	fcppt::dynamic_cast_<
+	fcppt::cast::dynamic<
 		sanguis::client::draw2d::entities::ifaces::with_health &
 	>(
 		this->entity(
@@ -1176,7 +1176,7 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::max_health const &_message
 )
 {
-	fcppt::dynamic_cast_<
+	fcppt::cast::dynamic<
 		sanguis::client::draw2d::entities::ifaces::with_health &
 	>(
 		this->entity(
@@ -1198,7 +1198,7 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::move const &_message
 )
 {
-	fcppt::dynamic_cast_<
+	fcppt::cast::dynamic<
 		sanguis::client::draw2d::entities::ifaces::with_center &
 	>(
 		this->entity(
@@ -1238,7 +1238,7 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::remove_buff const &_message
 )
 {
-	fcppt::dynamic_cast_<
+	fcppt::cast::dynamic<
 		sanguis::client::draw2d::entities::ifaces::with_buffs &
 	>(
 		this->entity(
@@ -1270,7 +1270,7 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::rotate const &_message
 )
 {
-	fcppt::dynamic_cast_<
+	fcppt::cast::dynamic<
 		sanguis::client::draw2d::entities::ifaces::with_orientation &
 	>(
 		this->entity(
@@ -1290,7 +1290,7 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::speed const &_message
 )
 {
-	fcppt::dynamic_cast_<
+	fcppt::cast::dynamic<
 		sanguis::client::draw2d::entities::ifaces::with_speed &
 	>(
 		this->entity(
@@ -1314,7 +1314,7 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::weapon_status const &_message
 )
 {
-	fcppt::dynamic_cast_<
+	fcppt::cast::dynamic<
 		sanguis::client::draw2d::entities::ifaces::with_weapon &
 	>(
 		this->entity(

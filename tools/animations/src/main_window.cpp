@@ -32,9 +32,9 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/optional_impl.hpp>
-#include <fcppt/truncation_check_cast.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/size.hpp>
+#include <fcppt/cast/truncation_check.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/filesystem/stem.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -437,7 +437,7 @@ sanguis::tools::animations::main_window::selectedAnimationChanged()
 	ui_->delaySpinBox->setValue(
 		animation->animation_delay()
 		?
-			fcppt::truncation_check_cast<
+			fcppt::cast::truncation_check<
 				int
 			>(
 				animation->animation_delay()->get().count()
@@ -765,7 +765,7 @@ sanguis::tools::animations::main_window::open_json(
 	ui_->globalDelaySpinBox->setValue(
 		loaded_model_->model().animation_delay()
 		?
-			fcppt::truncation_check_cast<
+			fcppt::cast::truncation_check<
 				int
 			>(
 				loaded_model_->model().animation_delay()->get().count()

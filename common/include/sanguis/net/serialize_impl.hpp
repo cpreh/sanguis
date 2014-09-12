@@ -8,7 +8,7 @@
 #include <alda/net/value_type.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/io/write.hpp>
-#include <fcppt/truncation_check_cast.hpp>
+#include <fcppt/cast/truncation_check.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <ostream>
 #include <fcppt/config/external_end.hpp>
@@ -45,7 +45,7 @@ serialize_impl(
 	);
 
 	sanguis::net::message_header const header(
-		fcppt::truncation_check_cast<
+		fcppt::cast::truncation_check<
 			sanguis::net::message_header
 		>(
 			_message.size()
