@@ -2,7 +2,8 @@
 #include <sanguis/server/ai/rotate_to.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_body.hpp>
-#include <fcppt/try_dynamic_cast.hpp>
+#include <fcppt/maybe_void.hpp>
+#include <fcppt/cast/try_dynamic.hpp>
 
 
 void
@@ -11,12 +12,21 @@ sanguis::server::ai::rotate_to(
 	sanguis::server::angle const _angle
 )
 {
-	FCPPT_TRY_DYNAMIC_CAST(
-		sanguis::server::entities::with_body *,
-		with_body,
-		&_me
-	)
-		with_body->angle(
+	fcppt::maybe_void(
+		fcppt::cast::try_dynamic<
+			sanguis::server::entities::with_body &
+		>(
+			_me
+		),
+		[
 			_angle
-		);
+		](
+			sanguis::server::entities::with_body &_with_body
+		)
+		{
+			_with_body.angle(
+				_angle
+			);
+		}
+	);
 }

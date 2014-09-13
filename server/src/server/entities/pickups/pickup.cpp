@@ -21,7 +21,8 @@
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/pickups/pickup.hpp>
 #include <sanguis/server/environment/load_context.hpp>
-#include <fcppt/try_dynamic_cast.hpp>
+#include <fcppt/maybe.hpp>
+#include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
 #include <chrono>
@@ -72,13 +73,15 @@ sanguis::server::entities::pickups::pickup::pickup(
 bool
 sanguis::server::entities::pickups::pickup::dead() const
 {
-	return life_timer_.expired();
+	return
+		life_timer_.expired();
 }
 
 sanguis::server::team
 sanguis::server::entities::pickups::pickup::team() const
 {
-	return team_;
+	return
+		team_;
 }
 
 boost::logic::tribool const
@@ -86,18 +89,29 @@ sanguis::server::entities::pickups::pickup::can_collide_with_body(
 	sanguis::server::entities::with_body const &_body
 ) const
 {
-	FCPPT_TRY_DYNAMIC_CAST(
-		sanguis::server::entities::player const *,
-		player,
-		&_body
-	)
-	{
-		return
-			player->team() == this->team();
-	}
-
 	return
-		false;
+		fcppt::maybe(
+			fcppt::cast::try_dynamic<
+				sanguis::server::entities::player const &
+			>(
+				_body
+			),
+			[]{
+				return
+					false;
+			},
+			[
+				this
+			](
+				sanguis::server::entities::player const &_player
+			)
+			{
+				return
+					_player.team()
+					==
+					this->team();
+			}
+		);
 }
 
 void

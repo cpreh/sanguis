@@ -111,14 +111,15 @@
 #include <sanguis/server/world/update_entity.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/try_dynamic_cast.hpp>
 #include <fcppt/algorithm/map_iteration_second.hpp>
 #include <fcppt/algorithm/sequence_iteration.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/cast/size.hpp>
+#include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/warning.hpp>
@@ -385,36 +386,45 @@ sanguis::server::world::object::insert_with_id(
 			sanguis::server::entities::optional_base_ref();
 	}
 
-	FCPPT_TRY_DYNAMIC_CAST(
-		sanguis::server::entities::player const *,
-		player_ret,
-		&result
-	)
-		this->send_player_specific(
-			player_ret->player_id(),
-			sanguis::messages::server::create(
-				sanguis::messages::server::change_world(
-					sanguis::messages::roles::world_id{} =
-						id_,
-					sanguis::messages::roles::seed{} =
-						seed_,
-					sanguis::messages::roles::generator_name{} =
-						sge::charconv::fcppt_string_to_utf8(
-							generator_name_.get()
-						),
-					sanguis::messages::roles::opening_count{} =
-						fcppt::cast::size<
-							sanguis::messages::types::size
-						>(
-							openings_.size()
-						),
-					sanguis::messages::roles::world_name{} =
-						sge::charconv::fcppt_string_to_utf8(
-							name_.get()
-						)
+	fcppt::maybe_void(
+		fcppt::cast::try_dynamic<
+			sanguis::server::entities::player const &
+		>(
+			result
+		),
+		[
+			this
+		](
+			sanguis::server::entities::player const &_player
+		)
+		{
+			this->send_player_specific(
+				_player.player_id(),
+				sanguis::messages::server::create(
+					sanguis::messages::server::change_world(
+						sanguis::messages::roles::world_id{} =
+							id_,
+						sanguis::messages::roles::seed{} =
+							seed_,
+						sanguis::messages::roles::generator_name{} =
+							sge::charconv::fcppt_string_to_utf8(
+								generator_name_.get()
+							),
+						sanguis::messages::roles::opening_count{} =
+							fcppt::cast::size<
+								sanguis::messages::types::size
+							>(
+								openings_.size()
+							),
+						sanguis::messages::roles::world_name{} =
+							sge::charconv::fcppt_string_to_utf8(
+								name_.get()
+							)
+					)
 				)
-			)
-		);
+			);
+		}
+	);
 
 	return
 		sanguis::server::entities::optional_base_ref(

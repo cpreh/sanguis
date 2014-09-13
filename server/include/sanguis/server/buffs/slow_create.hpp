@@ -8,7 +8,8 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/try_dynamic_cast.hpp>
+#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <type_traits>
 #include <fcppt/config/external_end.hpp>
@@ -44,24 +45,30 @@ slow_create(
 			sanguis::server::entities::base &_entity
 		)
 		{
-			FCPPT_TRY_DYNAMIC_CAST(
-				sanguis::server::entities::with_velocity *,
-				with_velocity,
-				&_entity
-			)
-				return
-					sanguis::server::buffs::unique_ptr(
-						fcppt::make_unique_ptr<
-							Buff
-						>(
-							*with_velocity,
-							_factor
-
-						)
-					);
-
 			return
-				sanguis::server::buffs::unique_ptr();
+				fcppt::optional_bind_construct(
+					fcppt::cast::try_dynamic<
+						sanguis::server::entities::with_velocity &
+					>(
+						_entity
+					),
+					[
+						_factor
+					](
+						sanguis::server::entities::with_velocity &_with_velocity
+					)
+					{
+						return
+							sanguis::server::buffs::unique_ptr{
+								fcppt::make_unique_ptr<
+									Buff
+								>(
+									_with_velocity,
+									_factor
+								)
+							};
+					}
+				);
 		};
 }
 

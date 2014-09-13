@@ -11,7 +11,8 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_health.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/try_dynamic_cast.hpp>
+#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <type_traits>
 #include <fcppt/config/external_end.hpp>
@@ -51,28 +52,37 @@ burn_create(
 			sanguis::server::entities::base &_entity
 		)
 		{
-			FCPPT_TRY_DYNAMIC_CAST(
-				sanguis::server::entities::with_health *,
-				with_health,
-				&_entity
-			)
-				return
-					sanguis::server::buffs::unique_ptr(
-						fcppt::make_unique_ptr<
-							Buff
-						>(
-							*with_health,
-							_interval,
-							_damage,
-							// TODO: Auras must know their owner to fix this
-							sanguis::server::damage::unmodified(
-								_damage_values
-							)
-						)
-					);
-
 			return
-				sanguis::server::buffs::unique_ptr();
+				fcppt::optional_bind_construct(
+					fcppt::cast::try_dynamic<
+						sanguis::server::entities::with_health &
+					>(
+						_entity
+					),
+					[
+						_interval,
+						_damage,
+						_damage_values
+					](
+						sanguis::server::entities::with_health &_with_health
+					)
+					{
+						return
+							sanguis::server::buffs::unique_ptr(
+								fcppt::make_unique_ptr<
+									Buff
+								>(
+									_with_health,
+									_interval,
+									_damage,
+									// TODO: Auras must know their owner to fix this
+									sanguis::server::damage::unmodified(
+										_damage_values
+									)
+								)
+							);
+					}
+				);
 		};
 }
 

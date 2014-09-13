@@ -1,7 +1,8 @@
 #include <sanguis/server/ai/stop.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
-#include <fcppt/try_dynamic_cast.hpp>
+#include <fcppt/maybe_void.hpp>
+#include <fcppt/cast/try_dynamic.hpp>
 
 
 void
@@ -9,12 +10,19 @@ sanguis::server::ai::stop(
 	sanguis::server::entities::with_ai &_me
 )
 {
-	FCPPT_TRY_DYNAMIC_CAST(
-		sanguis::server::entities::with_velocity *,
-		movable,
-		&_me
-	)
-		movable->movement_speed().current(
-			0
-		);
+	fcppt::maybe_void(
+		fcppt::cast::try_dynamic<
+			sanguis::server::entities::with_velocity &
+		>(
+			_me
+		),
+		[](
+			sanguis::server::entities::with_velocity &_movable
+		)
+		{
+			_movable.movement_speed().current(
+				0
+			);
+		}
+	);
 }

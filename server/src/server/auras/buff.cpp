@@ -8,7 +8,7 @@
 #include <sanguis/server/auras/influence.hpp>
 #include <sanguis/server/buffs/buff.hpp>
 #include <sanguis/server/buffs/create_callback.hpp>
-#include <sanguis/server/buffs/unique_ptr.hpp>
+#include <sanguis/server/buffs/optional_unique_ptr.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
 
@@ -56,7 +56,7 @@ sanguis::server::auras::buff::enter(
 	sanguis::server::entities::with_body &_entity
 )
 {
-	sanguis::server::buffs::unique_ptr new_buff(
+	sanguis::server::buffs::optional_unique_ptr new_buff(
 		create_callback_(
 			_entity
 		)
@@ -72,7 +72,7 @@ sanguis::server::auras::buff::enter(
 				_entity
 			),
 			std::move(
-				new_buff
+				*new_buff
 			)
 		);
 }

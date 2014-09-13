@@ -7,7 +7,8 @@
 #include <sanguis/server/auras/update_sight.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_id.hpp>
-#include <fcppt/try_dynamic_cast.hpp>
+#include <fcppt/maybe_void.hpp>
+#include <fcppt/cast/try_dynamic.hpp>
 
 
 sanguis::server::auras::update_sight::update_sight(
@@ -45,17 +46,23 @@ sanguis::server::auras::update_sight::enter(
 	sanguis::server::entities::with_body &_entity
 )
 {
-	FCPPT_TRY_DYNAMIC_CAST(
-		sanguis::server::entities::with_id const *,
-		with_id,
-		&_entity
-	)
-		(
-			add_.get()
+	fcppt::maybe_void(
+		fcppt::cast::try_dynamic<
+			sanguis::server::entities::with_id const &
+		>(
+			_entity
+		),
+		[
+			this
+		](
+			sanguis::server::entities::with_id const &_with_id
 		)
-		(
-			with_id->id()
-		);
+		{
+			add_.get()(
+				_with_id.id()
+			);
+		}
+	);
 }
 
 void
@@ -63,15 +70,21 @@ sanguis::server::auras::update_sight::leave(
 	sanguis::server::entities::with_body &_entity
 )
 {
-	FCPPT_TRY_DYNAMIC_CAST(
-		sanguis::server::entities::with_id const *,
-		with_id,
-		&_entity
-	)
-		(
-			remove_.get()
+	fcppt::maybe_void(
+		fcppt::cast::try_dynamic<
+			sanguis::server::entities::with_id const &
+		>(
+			_entity
+		),
+		[
+			this
+		](
+			sanguis::server::entities::with_id const &_with_id
 		)
-		(
-			with_id->id()
-		);
+		{
+			remove_.get()(
+				_with_id.id()
+			);
+		}
+	);
 }

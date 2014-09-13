@@ -14,9 +14,11 @@ namespace server
 namespace buffs
 {
 
-typedef std::unique_ptr<
+typedef
+std::unique_ptr<
 	sanguis::server::buffs::buff
-> unique_ptr;
+>
+unique_ptr;
 
 }
 }

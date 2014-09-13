@@ -18,7 +18,9 @@
 #include <sanguis/server/entities/ifaces/with_links.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/try_dynamic_cast.hpp>
+#include <fcppt/maybe.hpp>
+#include <fcppt/maybe_void.hpp>
+#include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
 #include <functional>
@@ -208,18 +210,33 @@ sanguis::server::entities::with_body::can_collide_with(
 	sanguis::collision::world::body_base const &_body_base
 ) const
 {
-	FCPPT_TRY_DYNAMIC_CAST(
-		sanguis::server::entities::with_body const *,
-		entity,
-		&_body_base
-	)
-		return
-			this->can_collide_with_body(
-				*entity
-			);
-
 	return
-		boost::logic::indeterminate;
+		fcppt::maybe(
+			fcppt::cast::try_dynamic<
+				sanguis::server::entities::with_body const &
+			>(
+				_body_base
+			),
+			[]{
+				return
+					boost::logic::tribool{
+						boost::logic::indeterminate
+					};
+			},
+			[
+				this
+			](
+				sanguis::server::entities::with_body const &_entity
+			)
+			{
+				return
+					boost::logic::tribool{
+						this->can_collide_with_body(
+							_entity
+						)
+					};
+			}
+		);
 }
 
 void
@@ -227,14 +244,23 @@ sanguis::server::entities::with_body::collision(
 	sanguis::collision::world::body_base &_body_base
 )
 {
-	FCPPT_TRY_DYNAMIC_CAST(
-		sanguis::server::entities::with_body *,
-		entity,
-		&_body_base
-	)
-		this->collision_with_body(
-			*entity
-		);
+	fcppt::maybe_void(
+		fcppt::cast::try_dynamic<
+			sanguis::server::entities::with_body &
+		>(
+			_body_base
+		),
+		[
+			this
+		](
+			sanguis::server::entities::with_body &_entity
+		)
+		{
+			this->collision_with_body(
+				_entity
+			);
+		}
+	);
 }
 
 boost::logic::tribool const

@@ -10,7 +10,8 @@
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/try_dynamic_cast.hpp>
+#include <fcppt/maybe_void.hpp>
+#include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <fcppt/config/external_end.hpp>
@@ -24,64 +25,73 @@ sanguis::server::ai::move_to_target(
 	sanguis::server::ai::is_patrolling const _is_patrolling
 )
 {
-	// TODO: Even sentries have a velocity, we could get rid of this dynamic cast
-	FCPPT_TRY_DYNAMIC_CAST(
-		sanguis::server::entities::with_velocity *,
-		movable,
-		&_me
-	)
-	{
-		sanguis::server::entities::property::changeable &speed(
-			movable->movement_speed()
-		);
-
-		if(
-			_angle
+	fcppt::maybe_void(
+		// TODO: Even sentries have a velocity, we could get rid of this dynamic cast
+		fcppt::cast::try_dynamic<
+			sanguis::server::entities::with_velocity &
+		>(
+			_me
+		),
+		[
+			_angle,
+			_target,
+			_is_patrolling
+		](
+			sanguis::server::entities::with_velocity &_movable
 		)
 		{
-			movable->direction(
-				sanguis::server::direction(
-					_angle->get()
-				)
+			sanguis::server::entities::property::changeable &speed(
+				_movable.movement_speed()
 			);
 
-			// Set the movement at most to 1.3 the speed it would
-			// take an entity to reach its target in a single AI
-			// tick.
-			// TODO: The factor should be dependant upon how fast
-			// the target is moving.
-			speed.current(
-				std::min(
-					fcppt::literal<
-						sanguis::server::space_unit
-					>(
-						1.3f
+			if(
+				_angle
+			)
+			{
+				_movable.direction(
+					sanguis::server::direction(
+						_angle->get()
 					)
-					*
-					sanguis::server::collision::distance_entity_pos(
-						_me,
-						_target.get().get()
-					)
-					/
-					sanguis::server::ai::update_interval().count()
-					,
-					_is_patrolling.get()
-					?
-						speed.max()
-						/
+				);
+
+				// Set the movement at most to 1.3 the speed it would
+				// take an entity to reach its target in a single AI
+				// tick.
+				// TODO: The factor should be dependant upon how fast
+				// the target is moving.
+				speed.current(
+					std::min(
 						fcppt::literal<
 							sanguis::server::space_unit
 						>(
-							3
+							1.3f
 						)
-					:
-						speed.max()
-				)
-			);
+						*
+						sanguis::server::collision::distance_entity_pos(
+							_movable,
+							_target.get().get()
+						)
+						/
+						sanguis::server::ai::update_interval().count()
+						,
+						_is_patrolling.get()
+						?
+							speed.max()
+							/
+							fcppt::literal<
+								sanguis::server::space_unit
+							>(
+								3
+							)
+						:
+							speed.max()
+					)
+				);
+			}
+			else
+				speed.current(
+					0
+				);
 		}
-		else
-			speed.current(
-				0
-			);
-	}
+	);
 }
