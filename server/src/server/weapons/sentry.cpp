@@ -20,7 +20,6 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/attack.hpp>
 #include <sanguis/server/weapons/attack_result.hpp>
-#include <sanguis/server/weapons/insert_to_attack_result.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/sentry.hpp>
@@ -34,6 +33,7 @@
 #include <sanguis/server/world/center_to_grid_pos.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/join.hpp>
+#include <fcppt/cast/static_downcast.hpp>
 
 
 sanguis::server::weapons::sentry::sentry(
@@ -73,7 +73,8 @@ sanguis::server::weapons::sentry::sentry(
 	),
 	attributes_(
 		_sentry_weapon.get()()->attributes()
-	)
+	),
+	spawned_sentry_()
 {
 }
 
@@ -86,7 +87,7 @@ sanguis::server::weapons::sentry::do_attack(
 	sanguis::server::weapons::attack const &_attack
 )
 {
-	return
+	if(
 		!sanguis::creator::tile_is_visible(
 			_attack.environment().grid(),
 			sanguis::server::world::center_to_grid_pos(
@@ -98,42 +99,68 @@ sanguis::server::weapons::sentry::do_attack(
 				this->owner().center()
 			)
 		)
-		?
-			sanguis::server::weapons::attack_result::failure
-		:
-			sanguis::server::weapons::insert_to_attack_result(
-				_attack.environment().insert(
-					fcppt::make_unique_ptr<
-						sanguis::server::entities::friend_
-					>(
-						sanguis::friend_type::sentry,
-						_attack.environment().load_context(),
-						sanguis::server::damage::make_armor_array({
-							sanguis::server::damage::fire =
-								sanguis::server::damage::armor_unit(
-									0.9f
-								)
-						}),
-						health_.value(),
-						sanguis::server::entities::movement_speed(
-							0.f
-						),
-						sanguis::server::ai::create_stationary(
-							sanguis::server::ai::sight_range(
-								1000.f
-							)
-						),
-						sentry_weapon_.get()()
-					),
-					sanguis::server::entities::insert_parameters(
-						sanguis::server::center(
-							_attack.target().get()
-						),
-						_attack.angle()
+	)
+		return
+			sanguis::server::weapons::attack_result::failure;
+
+	sanguis::server::entities::optional_base_ref const inserted{
+		_attack.environment().insert(
+			fcppt::make_unique_ptr<
+				sanguis::server::entities::friend_
+			>(
+				sanguis::friend_type::sentry,
+				_attack.environment().load_context(),
+				sanguis::server::damage::make_armor_array({
+					sanguis::server::damage::fire =
+						sanguis::server::damage::armor_unit(
+							0.9f
+						)
+				}),
+				health_.value(),
+				sanguis::server::entities::movement_speed(
+					0.f
+				),
+				sanguis::server::ai::create_stationary(
+					sanguis::server::ai::sight_range(
+						1000.f
 					)
-				)
+				),
+				sentry_weapon_.get()()
+			),
+			sanguis::server::entities::insert_parameters(
+				sanguis::server::center(
+					_attack.target().get()
+				),
+				_attack.angle()
 			)
-		;
+		)
+	};
+
+	if(
+		!inserted
+	)
+		return
+			sanguis::server::weapons::attack_result::failure;
+
+	// TODO: Can we improve the typing on these?
+	if(
+		spawned_sentry_
+	)
+		fcppt::cast::static_downcast<
+			sanguis::server::entities::friend_ &
+		>(
+			*spawned_sentry_
+		).kill();
+
+	spawned_sentry_ =
+		dynamic_cast<
+			sanguis::server::entities::friend_ &
+		>(
+			*inserted
+		).link();
+
+	return
+		sanguis::server::weapons::attack_result::success;
 }
 
 sanguis::weapon_attribute_vector

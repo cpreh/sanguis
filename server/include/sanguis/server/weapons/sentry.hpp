@@ -3,6 +3,7 @@
 
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
+#include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/weapons/attack_fwd.hpp>
 #include <sanguis/server/weapons/attack_result_fwd.hpp>
 #include <sanguis/server/weapons/sentry_parameters_fwd.hpp>
@@ -51,6 +52,8 @@ private:
 	sanguis::server::weapons::sentry_weapon const sentry_weapon_;
 
 	sanguis::weapon_attribute_vector const attributes_;
+
+	sanguis::server::entities::auto_weak_link spawned_sentry_;
 };
 
 }
