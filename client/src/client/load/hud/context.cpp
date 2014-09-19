@@ -6,8 +6,10 @@
 #include <sanguis/client/load/hud/weapon_type.hpp>
 #include <sanguis/client/load/resource/textures.hpp>
 #include <sge/texture/const_part_shared_ptr.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
+#include <fcppt/container/find_opt.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/filesystem/stem.hpp>
 #include <fcppt/log/_.hpp>
@@ -16,6 +18,7 @@
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
+#include <boost/range/iterator_range.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -27,23 +30,21 @@ sanguis::client::load::hud::context::context(
 	weapon_icons_()
 {
 	for(
-		boost::filesystem::directory_iterator it(
-			sanguis::media_path()
-			/
-			FCPPT_TEXT("hud")
-			/
-			FCPPT_TEXT("icons")
-			/
-			FCPPT_TEXT("weapons")
-		);
-		it != boost::filesystem::directory_iterator();
-		++it
+		boost::filesystem::path const &path
+		:
+		boost::make_iterator_range(
+			boost::filesystem::directory_iterator(
+				sanguis::media_path()
+				/
+				FCPPT_TEXT("hud")
+				/
+				FCPPT_TEXT("icons")
+				/
+				FCPPT_TEXT("weapons")
+			)
+		)
 	)
 	{
-		boost::filesystem::path const path(
-			it->path()
-		);
-
 		sanguis::optional_weapon_type const weapon_type(
 			sanguis::client::load::hud::weapon_type(
 				fcppt::filesystem::stem(
@@ -94,18 +95,19 @@ sanguis::client::load::hud::context::weapon_icon(
 	sanguis::weapon_type const _weapon_type
 )
 {
-	weapon_icon_map::const_iterator const it(
-		weapon_icons_.find(
+	fcppt::optional<
+		sge::texture::const_part_shared_ptr
+	> const icon{
+		fcppt::container::find_opt(
+			weapon_icons_,
 			_weapon_type
 		)
-	);
+	};
 
 	FCPPT_ASSERT_ERROR(
-		it
-		!=
-		weapon_icons_.end()
+		icon
 	);
 
 	return
-		it->second;
+		*icon;
 }
