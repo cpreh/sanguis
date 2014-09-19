@@ -16,11 +16,11 @@ enum class z_ordering
 	background,
 	corpses,
 	destructible,
+	pickup,
 	aura,
 	model_generic,
 	player_lower,
 	bullet,
-	pickup,
 	player_upper,
 	flare
 };
