@@ -51,6 +51,9 @@ sanguis::gui::widget::container::container(
 					*this
 				)
 			);
+
+			return
+				sanguis::gui::widget::container::foreach_result::continue_;
 		}
 	);
 }
@@ -71,6 +74,9 @@ sanguis::gui::widget::container::~container()
 			this->context_.destroy(
 				_widget
 			);
+
+			return
+				sanguis::gui::widget::container::foreach_result::continue_;
 		}
 	);
 }
@@ -205,6 +211,9 @@ sanguis::gui::widget::container::on_update(
 			_widget.on_update(
 				_duration
 			);
+
+			return
+				sanguis::gui::widget::container::foreach_result::continue_;
 		}
 	);
 }
@@ -227,6 +236,9 @@ sanguis::gui::widget::container::on_draw(
 				_renderer,
 				_context
 			);
+
+			return
+				sanguis::gui::widget::container::foreach_result::continue_;
 		}
 	);
 }
@@ -258,16 +270,24 @@ sanguis::gui::widget::container::on_click(
 					_pos
 				)
 			)
-				return;
+				return
+					sanguis::gui::widget::container::foreach_result::continue_;
 
 			if(
 				_widget.on_click(
 					_pos
-				).get()
+				)
+				==
+				sanguis::gui::get_focus{
+					true
+				}
 			)
 				this->context_.focus(
 					_widget
 				);
+
+			return
+				sanguis::gui::widget::container::foreach_result::abort;
 		}
 	);
 
@@ -359,7 +379,12 @@ sanguis::gui::widget::container::foreach_widget(
 		:
 		widgets_
 	)
-		_function(
-			ref.get()
-		);
+		if(
+			_function(
+				ref.get()
+			)
+			==
+			sanguis::gui::widget::container::foreach_result::abort
+		)
+			return;
 }

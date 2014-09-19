@@ -116,6 +116,12 @@ private:
 	)
 	override;
 
+	enum class foreach_result
+	{
+		abort,
+		continue_
+	};
+
 	template<
 		typename Function
 	>
