@@ -1,5 +1,4 @@
 #include <sanguis/cheat_type.hpp>
-#include <sanguis/friend_type.hpp>
 #include <sanguis/perk_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
@@ -12,7 +11,6 @@
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
-#include <sanguis/server/entities/pickups/monster.hpp>
 #include <sanguis/server/entities/pickups/weapon.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/environment/optional_object_ref.hpp>
@@ -60,25 +58,6 @@ sanguis::server::cheat::process(
 	case sanguis::cheat_type::kill:
 		_player.kill();
 		return;
-	case sanguis::cheat_type::friendly_spider:
-		environment->insert(
-			fcppt::make_unique_ptr<
-				sanguis::server::entities::pickups::monster
-			>(
-				_random_generator,
-				environment->load_context(),
-				sanguis::server::team::players,
-				sanguis::friend_type::spider,
-				sanguis::server::entities::enemies::difficulty(
-					100.f
-				)
-			),
-			sanguis::server::entities::insert_parameters_center(
-				_player.center()
-			)
-		);
-
-		return;
 	case sanguis::cheat_type::monster_spawner:
 		environment->insert(
 			fcppt::make_unique_ptr<
@@ -98,6 +77,7 @@ sanguis::server::cheat::process(
 		);
 
 		return;
+	case sanguis::cheat_type::friendly_spider:
 	case sanguis::cheat_type::sentry:
 	case sanguis::cheat_type::grenade:
 	case sanguis::cheat_type::shotgun:

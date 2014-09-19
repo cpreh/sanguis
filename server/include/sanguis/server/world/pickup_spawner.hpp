@@ -52,12 +52,6 @@ private:
 	);
 
 	void
-	spawn_monster(
-		sanguis::server::center,
-		sanguis::server::entities::enemies::difficulty
-	);
-
-	void
 	spawn_weapon(
 		sanguis::server::center,
 		sanguis::server::entities::enemies::difficulty,

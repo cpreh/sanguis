@@ -80,6 +80,11 @@ sanguis::client::gui::hud::weapon_name_visitor::operator()(
 			sentry,
 			SGE_FONT_LIT("Sentry")
 		);
+
+		SANGUIS_WEAPON_NAME_SECONDARY_CASE(
+			spider,
+			SGE_FONT_LIT("Spider")
+		);
 	}
 
 #undef SANGUIS_WEAPON_NAME_SECONDARY_CASE

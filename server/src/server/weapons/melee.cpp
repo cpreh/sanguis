@@ -12,12 +12,10 @@
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/weapons/attack.hpp>
 #include <sanguis/server/weapons/attack_result.hpp>
-#include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
-#include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/melee.hpp>
+#include <sanguis/server/weapons/melee_parameters.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
-#include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/attributes/make_damage.hpp>
 #include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
@@ -27,10 +25,7 @@
 
 sanguis::server::weapons::melee::melee(
 	sanguis::random_generator &_random_generator,
-	sanguis::server::weapons::range const _range,
-	sanguis::server::weapons::backswing_time const _backswing_time,
-	sanguis::server::weapons::damage const _damage,
-	sanguis::server::damage::array const &_damage_values
+	sanguis::server::weapons::melee_parameters const &_parameters
 )
 :
 	sanguis::server::weapons::weapon(
@@ -39,9 +34,9 @@ sanguis::server::weapons::melee::melee(
 			sanguis::primary_weapon_type::melee
 		),
 		sanguis::server::weapons::attributes::optional_accuracy(),
-		_range,
+		_parameters.range(),
 		sanguis::server::weapons::attributes::optional_magazine_size(),
-		_backswing_time,
+		_parameters.backswing_time(),
 		sanguis::server::weapons::cast_point(
 			sanguis::duration_second(
 				0.f
@@ -49,11 +44,11 @@ sanguis::server::weapons::melee::melee(
 		),
 		sanguis::server::weapons::optional_reload_time()
 	),
-	damage_(
-		_damage
-	),
+	damage_{
+		_parameters.damage()
+	},
 	damage_values_(
-		_damage_values
+		_parameters.damage_values()
 	)
 {
 }

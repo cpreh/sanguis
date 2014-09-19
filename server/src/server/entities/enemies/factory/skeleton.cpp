@@ -24,6 +24,7 @@
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/melee.hpp>
+#include <sanguis/server/weapons/melee_parameters.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/assign/make_container.hpp>
@@ -66,21 +67,23 @@ sanguis::server::entities::enemies::factory::skeleton(
 				sanguis::server::weapons::melee
 			>(
 				_parameters.random_generator(),
-				sanguis::server::weapons::range(
-					100.f
-				),
-				sanguis::server::weapons::backswing_time(
-					sanguis::duration_second(
-						1.f
-					)
-				),
-				sanguis::server::weapons::damage(
-					10.f
-				),
-				sanguis::server::damage::make_array({
-					sanguis::server::damage::normal =
-						sanguis::server::damage::full
-				})
+				sanguis::server::weapons::melee_parameters{
+					sanguis::server::weapons::range(
+						100.f
+					),
+					sanguis::server::weapons::backswing_time(
+						sanguis::duration_second(
+							1.f
+						)
+					),
+					sanguis::server::weapons::damage(
+						10.f
+					),
+					sanguis::server::damage::make_array({
+						sanguis::server::damage::normal =
+							sanguis::server::damage::full
+					})
+				}
 			),
 			sanguis::server::pickup_probability(
 				0.75f

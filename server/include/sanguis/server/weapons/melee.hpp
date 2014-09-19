@@ -6,9 +6,7 @@
 #include <sanguis/server/damage/array.hpp>
 #include <sanguis/server/weapons/attack_fwd.hpp>
 #include <sanguis/server/weapons/attack_result_fwd.hpp>
-#include <sanguis/server/weapons/backswing_time.hpp>
-#include <sanguis/server/weapons/damage.hpp>
-#include <sanguis/server/weapons/range.hpp>
+#include <sanguis/server/weapons/melee_parameters_fwd.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/attributes/damage.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -31,10 +29,7 @@ class melee
 public:
 	melee(
 		sanguis::random_generator &,
-		sanguis::server::weapons::range,
-		sanguis::server::weapons::backswing_time,
-		sanguis::server::weapons::damage,
-		sanguis::server::damage::array const &
+		sanguis::server::weapons::melee_parameters const &
 	);
 
 	~melee()

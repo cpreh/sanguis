@@ -268,7 +268,6 @@ set(
 	include/sanguis/server/entities/optional_with_weapon_ref.hpp
 	include/sanguis/server/entities/optional_with_weapon_ref_fwd.hpp
 	include/sanguis/server/entities/pickups/health.hpp
-	include/sanguis/server/entities/pickups/monster.hpp
 	include/sanguis/server/entities/pickups/pickup.hpp
 	include/sanguis/server/entities/pickups/weapon.hpp
 	include/sanguis/server/entities/pickups/weapon_fwd.hpp
@@ -573,6 +572,7 @@ set(
 	include/sanguis/server/weapons/factory/secondary.hpp
 	include/sanguis/server/weapons/factory/sentry.hpp
 	include/sanguis/server/weapons/factory/shotgun.hpp
+	include/sanguis/server/weapons/factory/spider.hpp
 	include/sanguis/server/weapons/factory/visitor.hpp
 	include/sanguis/server/weapons/grenade.hpp
 	include/sanguis/server/weapons/grenade_parameters.hpp
@@ -584,6 +584,8 @@ set(
 	include/sanguis/server/weapons/log_location.hpp
 	include/sanguis/server/weapons/magazine_size.hpp
 	include/sanguis/server/weapons/melee.hpp
+	include/sanguis/server/weapons/melee_parameters.hpp
+	include/sanguis/server/weapons/melee_parameters_fwd.hpp
 	include/sanguis/server/weapons/modifiers/accuracy.hpp
 	include/sanguis/server/weapons/modifiers/aoe.hpp
 	include/sanguis/server/weapons/modifiers/apply.hpp
@@ -628,6 +630,9 @@ set(
 	include/sanguis/server/weapons/shotgun_parameters_fwd.hpp
 	include/sanguis/server/weapons/spawn.hpp
 	include/sanguis/server/weapons/spawn_weapon.hpp
+	include/sanguis/server/weapons/spider.hpp
+	include/sanguis/server/weapons/spider_parameters.hpp
+	include/sanguis/server/weapons/spider_parameters_fwd.hpp
 	include/sanguis/server/weapons/spread_radius.hpp
 	include/sanguis/server/weapons/states/backswing.hpp
 	include/sanguis/server/weapons/states/backswing_fwd.hpp
@@ -805,7 +810,6 @@ set(
 	src/server/entities/insert_parameters_center.cpp
 	src/server/entities/modify_damages.cpp
 	src/server/entities/pickups/health.cpp
-	src/server/entities/pickups/monster.cpp
 	src/server/entities/pickups/pickup.cpp
 	src/server/entities/pickups/weapon.cpp
 	src/server/entities/player.cpp
@@ -932,6 +936,7 @@ set(
 	src/server/weapons/factory/secondary.cpp
 	src/server/weapons/factory/sentry.cpp
 	src/server/weapons/factory/shotgun.cpp
+	src/server/weapons/factory/spider.cpp
 	src/server/weapons/factory/visitor.cpp
 	src/server/weapons/grenade.cpp
 	src/server/weapons/grenade_parameters.cpp
@@ -939,6 +944,7 @@ set(
 	src/server/weapons/log.cpp
 	src/server/weapons/log_location.cpp
 	src/server/weapons/melee.cpp
+	src/server/weapons/melee_parameters.cpp
 	src/server/weapons/modifiers/random_amount.cpp
 	src/server/weapons/modifiers/random_increase.cpp
 	src/server/weapons/monster_spawner.cpp
@@ -953,6 +959,8 @@ set(
 	src/server/weapons/shotgun.cpp
 	src/server/weapons/shotgun_parameters.cpp
 	src/server/weapons/spawn.cpp
+	src/server/weapons/spider.cpp
+	src/server/weapons/spider_parameters.cpp
 	src/server/weapons/states/backswing.cpp
 	src/server/weapons/states/castpoint.cpp
 	src/server/weapons/states/idle.cpp

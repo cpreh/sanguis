@@ -48,6 +48,11 @@ sanguis::client::load::hud::weapon_type(
 	);
 
 	SANGUIS_LOAD_HUD_WEAPON_TYPE_CASE(
+		spider,
+		secondary_weapon_type
+	);
+
+	SANGUIS_LOAD_HUD_WEAPON_TYPE_CASE(
 		grenade,
 		secondary_weapon_type
 	);

@@ -6,6 +6,8 @@
 #include <fcppt/assert/unreachable.hpp>
 
 
+// TODO: These shouldn't be paths
+
 sanguis::aux_::load::weapon_pickup_name_visitor::result_type
 sanguis::aux_::load::weapon_pickup_name_visitor::operator()(
 	sanguis::primary_weapon_type const _type
@@ -47,6 +49,9 @@ sanguis::aux_::load::weapon_pickup_name_visitor::operator()(
 	case sanguis::secondary_weapon_type::sentry:
 		return
 			FCPPT_TEXT("pickups/sentry");
+	case sanguis::secondary_weapon_type::spider:
+		return
+			FCPPT_TEXT("pickups/monster");
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;

@@ -4,6 +4,7 @@
 #include <sanguis/server/weapons/factory/grenade.hpp>
 #include <sanguis/server/weapons/factory/secondary.hpp>
 #include <sanguis/server/weapons/factory/sentry.hpp>
+#include <sanguis/server/weapons/factory/spider.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
 
@@ -25,6 +26,11 @@ sanguis::server::weapons::factory::secondary(
 	case sanguis::secondary_weapon_type::sentry:
 		return
 			sanguis::server::weapons::factory::sentry(
+				_parameters
+			);
+	case sanguis::secondary_weapon_type::spider:
+		return
+			sanguis::server::weapons::factory::spider(
 				_parameters
 			);
 	}

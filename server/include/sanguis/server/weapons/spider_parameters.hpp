@@ -1,11 +1,11 @@
-#ifndef SANGUIS_SERVER_WEAPONS_SENTRY_PARAMETERS_HPP_INCLUDED
-#define SANGUIS_SERVER_WEAPONS_SENTRY_PARAMETERS_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_WEAPONS_SPIDER_PARAMETERS_HPP_INCLUDED
+#define SANGUIS_SERVER_WEAPONS_SPIDER_PARAMETERS_HPP_INCLUDED
 
 #include <sanguis/server/health_fwd.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/range.hpp>
-#include <sanguis/server/weapons/sentry_parameters_fwd.hpp>
+#include <sanguis/server/weapons/spider_parameters_fwd.hpp>
 #include <sanguis/server/weapons/attributes/health.hpp>
 #include <fcppt/nonassignable.hpp>
 
@@ -17,13 +17,13 @@ namespace server
 namespace weapons
 {
 
-class sentry_parameters
+class spider_parameters
 {
 	FCPPT_NONASSIGNABLE(
-		sentry_parameters
+		spider_parameters
 	);
 public:
-	sentry_parameters(
+	spider_parameters(
 		sanguis::server::health,
 		sanguis::server::weapons::backswing_time,
 		sanguis::server::weapons::cast_point,

@@ -11,7 +11,8 @@ enum class secondary_weapon_type
 {
 	grenade,
 	sentry,
-	fcppt_maximum = sentry
+	spider,
+	fcppt_maximum = spider
 };
 
 }
