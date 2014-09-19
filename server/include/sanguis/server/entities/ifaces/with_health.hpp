@@ -28,6 +28,10 @@ public:
 	virtual
 	sanguis::server::entities::property::changeable &
 	health() = 0;
+
+	virtual
+	void
+	kill() = 0;
 };
 
 }

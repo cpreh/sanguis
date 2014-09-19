@@ -3,12 +3,11 @@
 
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
-#include <sanguis/server/entities/auto_weak_link.hpp>
+#include <sanguis/server/entities/optional_base_ref_fwd.hpp>
 #include <sanguis/server/weapons/attack_fwd.hpp>
-#include <sanguis/server/weapons/attack_result_fwd.hpp>
 #include <sanguis/server/weapons/sentry_parameters_fwd.hpp>
-#include <sanguis/server/weapons/sentry_weapon.hpp>
-#include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/weapons/spawn.hpp>
+#include <sanguis/server/weapons/spawn_weapon.hpp>
 #include <sanguis/server/weapons/attributes/health.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -22,7 +21,7 @@ namespace weapons
 
 class sentry
 :
-	public sanguis::server::weapons::weapon
+	public sanguis::server::weapons::spawn
 {
 	FCPPT_NONCOPYABLE(
 		sentry
@@ -30,30 +29,25 @@ class sentry
 public:
 	sentry(
 		sanguis::random_generator &,
-		sanguis::server::weapons::sentry_weapon const &,
+		sanguis::server::weapons::spawn_weapon const &,
 		sanguis::server::weapons::sentry_parameters const &
 	);
 
 	~sentry()
 	override;
 private:
-	sanguis::server::weapons::attack_result
-	do_attack(
-		sanguis::server::weapons::attack const &
+	sanguis::server::entities::optional_base_ref const
+	do_spawn(
+		sanguis::server::weapons::attack const &,
+		sanguis::server::weapons::spawn_weapon const &
 	)
 	override;
 
 	sanguis::weapon_attribute_vector
-	attributes() const
+	extra_attributes() const
 	override;
 
 	sanguis::server::weapons::attributes::health const health_;
-
-	sanguis::server::weapons::sentry_weapon const sentry_weapon_;
-
-	sanguis::weapon_attribute_vector const attributes_;
-
-	sanguis::server::entities::auto_weak_link spawned_sentry_;
 };
 
 }

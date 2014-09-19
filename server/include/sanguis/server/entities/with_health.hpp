@@ -44,7 +44,8 @@ public:
 	);
 
 	void
-	kill();
+	kill()
+	override;
 
 	sanguis::server::entities::property::changeable &
 	health()

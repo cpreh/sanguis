@@ -13,7 +13,7 @@
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/sentry.hpp>
 #include <sanguis/server/weapons/sentry_parameters.hpp>
-#include <sanguis/server/weapons/sentry_weapon.hpp>
+#include <sanguis/server/weapons/spawn_weapon.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/factory/parameters.hpp>
 #include <sanguis/server/weapons/factory/sentry.hpp>
@@ -43,7 +43,7 @@ sanguis::server::weapons::factory::sentry(
 			sanguis::server::weapons::sentry
 		>(
 			random_generator,
-			sanguis::server::weapons::sentry_weapon(
+			sanguis::server::weapons::spawn_weapon(
 				[
 					&random_generator,
 					difficulty

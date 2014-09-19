@@ -2,12 +2,9 @@
 #include <sanguis/friend_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/secondary_weapon_type.hpp>
-#include <sanguis/weapon_attribute_type.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/weapon_type.hpp>
-#include <sanguis/creator/tile_is_visible.hpp>
 #include <sanguis/server/center.hpp>
-#include <sanguis/server/health.hpp>
 #include <sanguis/server/ai/create_stationary.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/damage/armor_unit.hpp>
@@ -19,62 +16,39 @@
 #include <sanguis/server/entities/optional_base_ref.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/attack.hpp>
-#include <sanguis/server/weapons/attack_result.hpp>
-#include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/sentry.hpp>
 #include <sanguis/server/weapons/sentry_parameters.hpp>
-#include <sanguis/server/weapons/sentry_weapon.hpp>
-#include <sanguis/server/weapons/weapon.hpp>
-#include <sanguis/server/weapons/attributes/magazine_size.hpp>
-#include <sanguis/server/weapons/attributes/make.hpp>
-#include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
-#include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
-#include <sanguis/server/world/center_to_grid_pos.hpp>
+#include <sanguis/server/weapons/spawn.hpp>
+#include <sanguis/server/weapons/spawn_weapon.hpp>
+#include <sanguis/server/weapons/attributes/make_health.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/algorithm/join.hpp>
-#include <fcppt/cast/static_downcast.hpp>
 
 
 sanguis::server::weapons::sentry::sentry(
 	sanguis::random_generator &_random_generator,
-	sanguis::server::weapons::sentry_weapon const &_sentry_weapon,
+	sanguis::server::weapons::spawn_weapon const &_spawn_weapon,
 	sanguis::server::weapons::sentry_parameters const &_parameters
 )
 :
-	sanguis::server::weapons::weapon(
+	sanguis::server::weapons::spawn{
 		_random_generator,
-		sanguis::weapon_type(
+		sanguis::weapon_type{
 			sanguis::secondary_weapon_type::sentry
-		),
-		sanguis::server::weapons::attributes::optional_accuracy(),
+		},
+		_spawn_weapon,
 		_parameters.range(),
-		sanguis::server::weapons::attributes::optional_magazine_size(
-			sanguis::server::weapons::attributes::magazine_size(
-				_parameters.magazine_size()
-			)
-		),
 		_parameters.backswing_time(),
 		_parameters.cast_point(),
-		// TODO: This should be a property
-		sanguis::server::weapons::optional_reload_time(
-			sanguis::server::weapons::reload_time(
-				sanguis::duration_second(
-					60.f
-				)
+		sanguis::server::weapons::reload_time{
+			sanguis::duration_second(
+				60.f
 			)
-		)
-	),
-	health_(
+		}
+	},
+	health_{
 		_parameters.health()
-	),
-	sentry_weapon_(
-		_sentry_weapon
-	),
-	attributes_(
-		_sentry_weapon.get()()->attributes()
-	),
-	spawned_sentry_()
+	}
 {
 }
 
@@ -82,28 +56,13 @@ sanguis::server::weapons::sentry::~sentry()
 {
 }
 
-sanguis::server::weapons::attack_result
-sanguis::server::weapons::sentry::do_attack(
-	sanguis::server::weapons::attack const &_attack
+sanguis::server::entities::optional_base_ref const
+sanguis::server::weapons::sentry::do_spawn(
+	sanguis::server::weapons::attack const &_attack,
+	sanguis::server::weapons::spawn_weapon const &_spawn_weapon
 )
 {
-	if(
-		!sanguis::creator::tile_is_visible(
-			_attack.environment().grid(),
-			sanguis::server::world::center_to_grid_pos(
-				sanguis::server::center{
-					_attack.target().get()
-				}
-			),
-			sanguis::server::world::center_to_grid_pos(
-				this->owner().center()
-			)
-		)
-	)
-		return
-			sanguis::server::weapons::attack_result::failure;
-
-	sanguis::server::entities::optional_base_ref const inserted{
+	return
 		_attack.environment().insert(
 			fcppt::make_unique_ptr<
 				sanguis::server::entities::friend_
@@ -125,7 +84,7 @@ sanguis::server::weapons::sentry::do_attack(
 						1000.f
 					)
 				),
-				sentry_weapon_.get()()
+				_spawn_weapon.get()()
 			),
 			sanguis::server::entities::insert_parameters(
 				sanguis::server::center(
@@ -133,47 +92,16 @@ sanguis::server::weapons::sentry::do_attack(
 				),
 				_attack.angle()
 			)
-		)
-	};
-
-	if(
-		!inserted
-	)
-		return
-			sanguis::server::weapons::attack_result::failure;
-
-	// TODO: Can we improve the typing on these?
-	if(
-		spawned_sentry_
-	)
-		fcppt::cast::static_downcast<
-			sanguis::server::entities::friend_ &
-		>(
-			*spawned_sentry_
-		).kill();
-
-	spawned_sentry_ =
-		dynamic_cast<
-			sanguis::server::entities::friend_ &
-		>(
-			*inserted
-		).link();
-
-	return
-		sanguis::server::weapons::attack_result::success;
+		);
 }
 
 sanguis::weapon_attribute_vector
-sanguis::server::weapons::sentry::attributes() const
+sanguis::server::weapons::sentry::extra_attributes() const
 {
 	return
-		fcppt::algorithm::join(
-			sanguis::weapon_attribute_vector{
-				sanguis::server::weapons::attributes::make(
-					sanguis::weapon_attribute_type::health,
-					health_
-				)
-			},
-			attributes_
-		);
+		sanguis::weapon_attribute_vector{
+			sanguis::server::weapons::attributes::make_health(
+				health_
+			)
+		};
 }

@@ -539,6 +539,7 @@ set(
 	include/sanguis/server/weapons/attributes/make.hpp
 	include/sanguis/server/weapons/attributes/make_aoe.hpp
 	include/sanguis/server/weapons/attributes/make_damage.hpp
+	include/sanguis/server/weapons/attributes/make_health.hpp
 	include/sanguis/server/weapons/attributes/optional_accuracy.hpp
 	include/sanguis/server/weapons/attributes/optional_accuracy_fwd.hpp
 	include/sanguis/server/weapons/attributes/optional_magazine_size.hpp
@@ -621,11 +622,12 @@ set(
 	include/sanguis/server/weapons/sentry.hpp
 	include/sanguis/server/weapons/sentry_parameters.hpp
 	include/sanguis/server/weapons/sentry_parameters_fwd.hpp
-	include/sanguis/server/weapons/sentry_weapon.hpp
 	include/sanguis/server/weapons/shells.hpp
 	include/sanguis/server/weapons/shotgun.hpp
 	include/sanguis/server/weapons/shotgun_parameters.hpp
 	include/sanguis/server/weapons/shotgun_parameters_fwd.hpp
+	include/sanguis/server/weapons/spawn.hpp
+	include/sanguis/server/weapons/spawn_weapon.hpp
 	include/sanguis/server/weapons/spread_radius.hpp
 	include/sanguis/server/weapons/states/backswing.hpp
 	include/sanguis/server/weapons/states/backswing_fwd.hpp
@@ -916,6 +918,7 @@ set(
 	src/server/weapons/attributes/magazine_size.cpp
 	src/server/weapons/attributes/make_aoe.cpp
 	src/server/weapons/attributes/make_damage.cpp
+	src/server/weapons/attributes/make_health.cpp
 	src/server/weapons/attributes/spread_radius.cpp
 	src/server/weapons/create.cpp
 	src/server/weapons/default_ias.cpp
@@ -949,6 +952,7 @@ set(
 	src/server/weapons/sentry_parameters.cpp
 	src/server/weapons/shotgun.cpp
 	src/server/weapons/shotgun_parameters.cpp
+	src/server/weapons/spawn.cpp
 	src/server/weapons/states/backswing.cpp
 	src/server/weapons/states/castpoint.cpp
 	src/server/weapons/states/idle.cpp
