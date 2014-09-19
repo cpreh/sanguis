@@ -10,16 +10,16 @@ namespace sanguis
 enum class cheat_type
 {
 	exp,
+	grenade,
 	heal,
 	kill,
-	friendly_spider,
 	monster_spawner,
 	perks,
 	rocket_launcher,
 	sentry,
 	shotgun,
-	grenade,
-	fcppt_maximum = grenade
+	spider,
+	fcppt_maximum = spider
 };
 
 }

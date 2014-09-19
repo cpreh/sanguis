@@ -110,12 +110,12 @@ sanguis::client::control::action_handler::action_handler(
 		)(
 			this->cheat_connection(
 				_console,
-				sanguis::cheat_type::friendly_spider,
+				sanguis::cheat_type::spider,
 				sge::console::callback::name(
-					SGE_FONT_LIT("friendly_spider")
+					SGE_FONT_LIT("spider")
 				),
 				sge::console::callback::short_description(
-					SGE_FONT_LIT("Spawn a friendly spider")
+					SGE_FONT_LIT("Spawn a spider weapon")
 				)
 			)
 		)(

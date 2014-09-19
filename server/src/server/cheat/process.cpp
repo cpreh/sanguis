@@ -77,7 +77,7 @@ sanguis::server::cheat::process(
 		);
 
 		return;
-	case sanguis::cheat_type::friendly_spider:
+	case sanguis::cheat_type::spider:
 	case sanguis::cheat_type::sentry:
 	case sanguis::cheat_type::grenade:
 	case sanguis::cheat_type::shotgun:

@@ -26,7 +26,7 @@ sanguis::server::cheat::weapon_type(
 			sanguis::weapon_type(
 				sanguis::secondary_weapon_type::sentry
 			);
-	case sanguis::cheat_type::friendly_spider:
+	case sanguis::cheat_type::spider:
 		return
 			sanguis::weapon_type(
 				sanguis::secondary_weapon_type::spider
