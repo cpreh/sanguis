@@ -13,9 +13,10 @@
 #include <sanguis/server/weapons/factory/pistol.hpp>
 #include <sanguis/server/weapons/modifiers/accuracy.hpp>
 #include <sanguis/server/weapons/modifiers/apply.hpp>
-#include <sanguis/server/weapons/modifiers/container.hpp>
 #include <sanguis/server/weapons/modifiers/damage.hpp>
 #include <sanguis/server/weapons/modifiers/magazine_size.hpp>
+#include <sanguis/server/weapons/modifiers/make_guaranteed.hpp>
+#include <sanguis/server/weapons/modifiers/make_potential.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
 
@@ -33,19 +34,17 @@ sanguis::server::weapons::factory::pistol(
 			sanguis::server::weapons::modifiers::apply(
 				_parameters.random_generator(),
 				_parameters.difficulty(),
-				sanguis::server::weapons::modifiers::container<
+				sanguis::server::weapons::modifiers::make_guaranteed<
 					sanguis::server::weapons::pistol_parameters
-				>{
-					&sanguis::server::weapons::modifiers::damage<
-						sanguis::server::weapons::pistol_parameters
-					>,
-					&sanguis::server::weapons::modifiers::accuracy<
-						sanguis::server::weapons::pistol_parameters
-					>,
-					&sanguis::server::weapons::modifiers::magazine_size<
-						sanguis::server::weapons::pistol_parameters
-					>
-				},
+				>(
+					sanguis::server::weapons::modifiers::damage{}
+				),
+				sanguis::server::weapons::modifiers::make_potential<
+					sanguis::server::weapons::pistol_parameters
+				>(
+					sanguis::server::weapons::modifiers::accuracy{},
+					sanguis::server::weapons::modifiers::magazine_size{}
+				),
 				sanguis::server::weapons::pistol_parameters(
 					sanguis::server::weapons::accuracy(
 						0.95f

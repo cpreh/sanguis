@@ -18,35 +18,39 @@ namespace weapons
 namespace modifiers
 {
 
-template<
-	typename Parameters
->
-void
-damage(
-	sanguis::random_generator &_random_generator,
-	sanguis::server::entities::enemies::difficulty const _difficulty,
-	fcppt::reference_wrapper<
-		Parameters
-	> const _parameters
-)
+struct damage
 {
-	_parameters.get().extra_damage(
-		_parameters.get().damage().base()
-		*
-		sanguis::server::weapons::damage(
-			sanguis::server::weapons::modifiers::random_increase(
-				_random_generator,
-				_difficulty
+	template<
+		typename Parameters
+	>
+	static
+	void
+	make(
+		sanguis::random_generator &_random_generator,
+		sanguis::server::entities::enemies::difficulty const _difficulty,
+		fcppt::reference_wrapper<
+			Parameters
+		> const _parameters
+	)
+	{
+		_parameters.get().extra_damage(
+			_parameters.get().damage().base()
+			*
+			sanguis::server::weapons::damage(
+				sanguis::server::weapons::modifiers::random_increase(
+					_random_generator,
+					_difficulty
+				)
+				-
+				fcppt::literal<
+					sanguis::server::weapons::damage::value_type
+				>(
+					1
+				)
 			)
-			-
-			fcppt::literal<
-				sanguis::server::weapons::damage::value_type
-			>(
-				1
-			)
-		)
-	);
-}
+		);
+	}
+};
 
 }
 }

@@ -21,41 +21,45 @@ namespace weapons
 namespace modifiers
 {
 
-template<
-	typename Parameters
->
-void
-accuracy(
-	sanguis::random_generator &_random_generator,
-	sanguis::server::entities::enemies::difficulty const _difficulty,
-	fcppt::reference_wrapper<
-		Parameters
-	> const _parameters
-)
+struct accuracy
 {
-	_parameters.get().extra_accuracy(
-		std::min(
-			// TODO: What to use here?
-			sanguis::server::weapons::accuracy(
-				1.f
-				-
-				std::exp(
-					-std::sqrt(
-						sanguis::server::weapons::modifiers::random_increase(
-							_random_generator,
-							_difficulty
+	template<
+		typename Parameters
+	>
+	static
+	void
+	make(
+		sanguis::random_generator &_random_generator,
+		sanguis::server::entities::enemies::difficulty const _difficulty,
+		fcppt::reference_wrapper<
+			Parameters
+		> const _parameters
+	)
+	{
+		_parameters.get().extra_accuracy(
+			std::min(
+				// TODO: What to use here?
+				sanguis::server::weapons::accuracy(
+					1.f
+					-
+					std::exp(
+						-std::sqrt(
+							sanguis::server::weapons::modifiers::random_increase(
+								_random_generator,
+								_difficulty
+							)
 						)
+						/
+						100.f
 					)
-					/
-					100.f
+				),
+				sanguis::server::weapons::accuracy(
+					1.f
 				)
-			),
-			sanguis::server::weapons::accuracy(
-				1.f
 			)
-		)
-	);
-}
+		);
+	}
+};
 
 }
 }

@@ -21,37 +21,41 @@ namespace weapons
 namespace modifiers
 {
 
-template<
-	typename Parameters
->
-void
-spread_radius(
-	sanguis::random_generator &_random_generator,
-	sanguis::server::entities::enemies::difficulty const _difficulty,
-	fcppt::reference_wrapper<
-		Parameters
-	> const _parameters
-)
+struct spread_radius
 {
-	_parameters.get().extra_spread_radius(
-		-
-		std::max(
-			_parameters.get().spread_radius().base()
-			/
-			sanguis::server::weapons::spread_radius(
-				std::sqrt(
-					sanguis::server::weapons::modifiers::random_increase(
-						_random_generator,
-						_difficulty
+	template<
+		typename Parameters
+	>
+	static
+	void
+	make(
+		sanguis::random_generator &_random_generator,
+		sanguis::server::entities::enemies::difficulty const _difficulty,
+		fcppt::reference_wrapper<
+			Parameters
+		> const _parameters
+	)
+	{
+		_parameters.get().extra_spread_radius(
+			-
+			std::max(
+				_parameters.get().spread_radius().base()
+				/
+				sanguis::server::weapons::spread_radius(
+					std::sqrt(
+						sanguis::server::weapons::modifiers::random_increase(
+							_random_generator,
+							_difficulty
+						)
 					)
+				),
+				sanguis::server::weapons::spread_radius(
+					0.f
 				)
-			),
-			sanguis::server::weapons::spread_radius(
-				0.f
 			)
-		)
-	);
-}
+		);
+	}
+};
 
 }
 }

@@ -26,49 +26,53 @@ namespace weapons
 namespace modifiers
 {
 
-template<
-	typename Parameters
->
-void
-magazine_size(
-	sanguis::random_generator &_random_generator,
-	sanguis::server::entities::enemies::difficulty const _difficulty,
-	fcppt::reference_wrapper<
-		Parameters
-	> const _parameters
-)
+struct magazine_size
 {
-	_parameters.get().extra_magazine_size(
-		// TODO: What to use here?
-		sanguis::server::weapons::magazine_size(
-			std::min(
-				fcppt::cast::to_unsigned(
-					fcppt::cast::float_to_int<
-						std::make_signed<
-							sanguis::magazine_type
-						>::type
-					>(
-						std::sqrt(
+	template<
+		typename Parameters
+	>
+	static
+	void
+	make(
+		sanguis::random_generator &_random_generator,
+		sanguis::server::entities::enemies::difficulty const _difficulty,
+		fcppt::reference_wrapper<
+			Parameters
+		> const _parameters
+	)
+	{
+		_parameters.get().extra_magazine_size(
+			// TODO: What to use here?
+			sanguis::server::weapons::magazine_size(
+				std::min(
+					fcppt::cast::to_unsigned(
+						fcppt::cast::float_to_int<
+							std::make_signed<
+								sanguis::magazine_type
+							>::type
+						>(
 							std::sqrt(
-								sanguis::server::weapons::modifiers::random_increase(
-									_random_generator,
-									_difficulty
+								std::sqrt(
+									sanguis::server::weapons::modifiers::random_increase(
+										_random_generator,
+										_difficulty
+									)
 								)
 							)
 						)
+					),
+					_parameters.get().magazine_size().value().get()
+					*
+					fcppt::literal<
+						sanguis::magazine_type
+					>(
+						2
 					)
-				),
-				_parameters.get().magazine_size().value().get()
-				*
-				fcppt::literal<
-					sanguis::magazine_type
-				>(
-					2
 				)
 			)
-		)
-	);
-}
+		);
+	}
+};
 
 }
 }

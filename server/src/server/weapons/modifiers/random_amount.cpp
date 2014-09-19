@@ -25,7 +25,7 @@ sanguis::server::weapons::modifiers::random_amount(
 			parameters(
 				parameters::min(
 					sanguis::server::random::amount(
-						1u
+						0u
 					)
 				),
 				parameters::max(

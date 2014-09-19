@@ -18,9 +18,10 @@
 #include <sanguis/server/weapons/factory/parameters.hpp>
 #include <sanguis/server/weapons/factory/sentry.hpp>
 #include <sanguis/server/weapons/modifiers/apply.hpp>
-#include <sanguis/server/weapons/modifiers/container.hpp>
 #include <sanguis/server/weapons/modifiers/damage.hpp>
 #include <sanguis/server/weapons/modifiers/health.hpp>
+#include <sanguis/server/weapons/modifiers/make_guaranteed.hpp>
+#include <sanguis/server/weapons/modifiers/make_potential.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
 
@@ -60,13 +61,14 @@ sanguis::server::weapons::factory::sentry(
 							sanguis::server::weapons::modifiers::apply(
 								random_generator,
 								difficulty,
-								sanguis::server::weapons::modifiers::container<
+								sanguis::server::weapons::modifiers::make_guaranteed<
 									sanguis::server::weapons::pistol_parameters
-								>{
-									&sanguis::server::weapons::modifiers::damage<
-										sanguis::server::weapons::pistol_parameters
-									>
-								},
+								>(
+									sanguis::server::weapons::modifiers::damage{}
+								),
+								sanguis::server::weapons::modifiers::make_potential<
+									sanguis::server::weapons::pistol_parameters
+								>(),
 								sanguis::server::weapons::pistol_parameters(
 									sanguis::server::weapons::accuracy(
 										0.95f
@@ -107,13 +109,14 @@ sanguis::server::weapons::factory::sentry(
 			sanguis::server::weapons::modifiers::apply(
 				_parameters.random_generator(),
 				_parameters.difficulty(),
-				sanguis::server::weapons::modifiers::container<
+				sanguis::server::weapons::modifiers::make_guaranteed<
 					sanguis::server::weapons::sentry_parameters
-				>{
-					&sanguis::server::weapons::modifiers::health<
-						sanguis::server::weapons::sentry_parameters
-					>
-				},
+				>(),
+				sanguis::server::weapons::modifiers::make_potential<
+					sanguis::server::weapons::sentry_parameters
+				>(
+					sanguis::server::weapons::modifiers::health{}
+				),
 				sanguis::server::weapons::sentry_parameters(
 					sanguis::server::health(
 						100.f

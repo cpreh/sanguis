@@ -14,8 +14,9 @@
 #include <sanguis/server/weapons/factory/rocket_launcher.hpp>
 #include <sanguis/server/weapons/modifiers/apply.hpp>
 #include <sanguis/server/weapons/modifiers/aoe.hpp>
-#include <sanguis/server/weapons/modifiers/container.hpp>
 #include <sanguis/server/weapons/modifiers/damage.hpp>
+#include <sanguis/server/weapons/modifiers/make_guaranteed.hpp>
+#include <sanguis/server/weapons/modifiers/make_potential.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
 
@@ -33,16 +34,16 @@ sanguis::server::weapons::factory::rocket_launcher(
 			sanguis::server::weapons::modifiers::apply(
 				_parameters.random_generator(),
 				_parameters.difficulty(),
-				sanguis::server::weapons::modifiers::container<
+				sanguis::server::weapons::modifiers::make_guaranteed<
 					sanguis::server::weapons::rocket_launcher_parameters
-				>{
-					&sanguis::server::weapons::modifiers::damage<
-						sanguis::server::weapons::rocket_launcher_parameters
-					>,
-					&sanguis::server::weapons::modifiers::aoe<
-						sanguis::server::weapons::rocket_launcher_parameters
-					>
-				},
+				>(
+					sanguis::server::weapons::modifiers::damage{}
+				),
+				sanguis::server::weapons::modifiers::make_potential<
+					sanguis::server::weapons::rocket_launcher_parameters
+				>(
+					sanguis::server::weapons::modifiers::aoe{}
+				),
 				sanguis::server::weapons::rocket_launcher_parameters(
 					sanguis::server::weapons::damage(
 						12.f

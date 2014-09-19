@@ -85,6 +85,8 @@ set(
 	include/sanguis/server/buffs/comparator.hpp
 	include/sanguis/server/buffs/create_callback.hpp
 	include/sanguis/server/buffs/define_special.hpp
+	include/sanguis/server/buffs/optional_unique_ptr.hpp
+	include/sanguis/server/buffs/optional_unique_ptr_fwd.hpp
 	include/sanguis/server/buffs/provider.hpp
 	include/sanguis/server/buffs/provider_fwd.hpp
 	include/sanguis/server/buffs/slow.hpp
@@ -587,8 +589,15 @@ set(
 	include/sanguis/server/weapons/modifiers/callback.hpp
 	include/sanguis/server/weapons/modifiers/container.hpp
 	include/sanguis/server/weapons/modifiers/damage.hpp
+	include/sanguis/server/weapons/modifiers/guaranteed.hpp
+	include/sanguis/server/weapons/modifiers/guaranteed_tag.hpp
 	include/sanguis/server/weapons/modifiers/health.hpp
 	include/sanguis/server/weapons/modifiers/magazine_size.hpp
+	include/sanguis/server/weapons/modifiers/make.hpp
+	include/sanguis/server/weapons/modifiers/make_guaranteed.hpp
+	include/sanguis/server/weapons/modifiers/make_potential.hpp
+	include/sanguis/server/weapons/modifiers/potential.hpp
+	include/sanguis/server/weapons/modifiers/potential_tag.hpp
 	include/sanguis/server/weapons/modifiers/random_amount.hpp
 	include/sanguis/server/weapons/modifiers/random_increase.hpp
 	include/sanguis/server/weapons/modifiers/spread_radius.hpp

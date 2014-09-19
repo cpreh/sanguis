@@ -11,8 +11,9 @@
 #include <sanguis/server/weapons/factory/parameters.hpp>
 #include <sanguis/server/weapons/modifiers/apply.hpp>
 #include <sanguis/server/weapons/modifiers/aoe.hpp>
-#include <sanguis/server/weapons/modifiers/container.hpp>
 #include <sanguis/server/weapons/modifiers/damage.hpp>
+#include <sanguis/server/weapons/modifiers/make_guaranteed.hpp>
+#include <sanguis/server/weapons/modifiers/make_potential.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
 
@@ -29,16 +30,16 @@ sanguis::server::weapons::factory::grenade(
 			sanguis::server::weapons::modifiers::apply(
 				_parameters.random_generator(),
 				_parameters.difficulty(),
-				sanguis::server::weapons::modifiers::container<
+				sanguis::server::weapons::modifiers::make_guaranteed<
 					sanguis::server::weapons::grenade_parameters
-				>{
-					&sanguis::server::weapons::modifiers::damage<
-						sanguis::server::weapons::grenade_parameters
-					>,
-					&sanguis::server::weapons::modifiers::aoe<
-						sanguis::server::weapons::grenade_parameters
-					>
-				},
+				>(
+					sanguis::server::weapons::modifiers::damage{}
+				),
+				sanguis::server::weapons::modifiers::make_potential<
+					sanguis::server::weapons::grenade_parameters
+				>(
+					sanguis::server::weapons::modifiers::aoe{}
+				),
 				sanguis::server::weapons::grenade_parameters(
 					sanguis::server::weapons::backswing_time(
 						sanguis::duration_second(

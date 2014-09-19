@@ -9,6 +9,8 @@
 #include <sanguis/server/random/equal_function.hpp>
 #include <sanguis/server/random/less_function.hpp>
 #include <sanguis/server/weapons/modifiers/container.hpp>
+#include <sanguis/server/weapons/modifiers/guaranteed.hpp>
+#include <sanguis/server/weapons/modifiers/potential.hpp>
 #include <sanguis/server/weapons/modifiers/random_amount.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
@@ -30,7 +32,10 @@ Parameters
 apply(
 	sanguis::random_generator &_random_generator,
 	sanguis::server::entities::enemies::difficulty const _difficulty,
-	sanguis::server::weapons::modifiers::container<
+	sanguis::server::weapons::modifiers::guaranteed<
+		Parameters
+	> const &_guaranteed_modifiers,
+	sanguis::server::weapons::modifiers::potential<
 		Parameters
 	> const &_potential_modifiers,
 	Parameters _parameters
@@ -52,13 +57,13 @@ apply(
 			modifier_container
 		>(
 			_random_generator,
-			_potential_modifiers,
+			_potential_modifiers.get(),
 			sanguis::server::weapons::modifiers::random_amount(
 				_random_generator,
 				fcppt::strong_typedef_construct_cast<
 					sanguis::server::random::amount
 				>(
-					_potential_modifiers.size()
+					_potential_modifiers.get().size()
 				)
 			),
 			sanguis::server::random::create_function<
@@ -106,6 +111,19 @@ apply(
 			)
 		)
 	);
+
+	for(
+		auto const &modifier
+		:
+		_guaranteed_modifiers.get()
+	)
+		modifier(
+			_random_generator,
+			_difficulty,
+			fcppt::make_ref(
+				_parameters
+			)
+		);
 
 	for(
 		auto const &modifier
