@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_LOAD_TILES_TEXTURE_CONTAINER_HPP_INCLUDED
 #define SANGUIS_CLIENT_LOAD_TILES_TEXTURE_CONTAINER_HPP_INCLUDED
 
-#include <sge/texture/const_part_shared_ptr.hpp>
+#include <sge/texture/const_part_unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
@@ -18,7 +18,7 @@ namespace tiles
 
 typedef
 std::vector<
-	sge::texture::const_part_shared_ptr
+	sge::texture::const_part_unique_ptr
 >
 texture_container;
 

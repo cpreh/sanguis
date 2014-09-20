@@ -36,7 +36,7 @@ typedef sge::sprite::config::choices<
 				1u
 			>,
 			sge::sprite::config::texture_coordinates::automatic,
-			sge::sprite::config::texture_ownership::shared
+			sge::sprite::config::texture_ownership::reference
 		>,
 		sanguis::client::draw2d::scene::world::sprite::is_background
 	>

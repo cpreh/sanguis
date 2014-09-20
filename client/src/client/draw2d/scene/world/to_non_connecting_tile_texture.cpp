@@ -7,12 +7,12 @@
 #include <sanguis/client/load/tiles/tile_pair.hpp>
 #include <sanguis/client/load/tiles/to_name.hpp>
 #include <sanguis/creator/tile.hpp>
-#include <sge/texture/const_part_shared_ptr.hpp>
+#include <sge/texture/const_optional_part_ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>
 
 
-sge::texture::const_part_shared_ptr
+sge::texture::const_optional_part_ref const
 sanguis::client::draw2d::scene::world::to_non_connecting_tile_texture(
 	sanguis::client::load::tiles::context &_tiles,
 	sanguis::creator::tile const _tile
@@ -45,12 +45,14 @@ sanguis::client::draw2d::scene::world::to_non_connecting_tile_texture(
 		);
 
 		return
-			sge::texture::const_part_shared_ptr();
+			sge::texture::const_optional_part_ref{};
 	}
 
 	// TODO: Make this random
 	return
-		container->at(
-			0
-		);
+		sge::texture::const_optional_part_ref{
+			*container->at(
+				0
+			)
+		};
 }

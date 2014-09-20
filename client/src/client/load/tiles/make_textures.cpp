@@ -12,7 +12,7 @@
 #include <sge/renderer/lock_rect.hpp>
 #include <sge/texture/part.hpp>
 #include <sge/texture/part_raw_ref.hpp>
-#include <fcppt/make_shared_ptr.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
@@ -43,7 +43,7 @@ sanguis::client::load::tiles::make_textures(
 			)
 			{
 				return
-					fcppt::make_shared_ptr<
+					fcppt::make_unique_ptr<
 						sge::texture::part_raw_ref
 					>(
 						_part.texture(),

@@ -3,7 +3,7 @@
 
 #include <sanguis/client/load/tiles/context_fwd.hpp>
 #include <sanguis/creator/tile_fwd.hpp>
-#include <sge/texture/const_part_shared_ptr.hpp>
+#include <sge/texture/const_optional_part_ref.hpp>
 
 
 namespace sanguis
@@ -17,7 +17,7 @@ namespace scene
 namespace world
 {
 
-sge::texture::const_part_shared_ptr
+sge::texture::const_optional_part_ref const
 to_non_connecting_tile_texture(
 	sanguis::client::load::tiles::context &,
 	sanguis::creator::tile

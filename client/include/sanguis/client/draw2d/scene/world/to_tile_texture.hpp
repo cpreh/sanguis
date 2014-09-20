@@ -15,7 +15,7 @@
 #include <sanguis/client/load/tiles/orientation.hpp>
 #include <sanguis/client/load/tiles/set.hpp>
 #include <sanguis/client/load/tiles/texture_container.hpp>
-#include <sge/texture/const_part_shared_ptr.hpp>
+#include <sge/texture/const_optional_part_ref.hpp>
 #include <fcppt/log/_.hpp>
 
 
@@ -33,7 +33,7 @@ namespace world
 template<
 	typename Tile
 >
-sge::texture::const_part_shared_ptr
+sge::texture::const_optional_part_ref const
 to_tile_texture(
 	sanguis::client::load::tiles::context &_tiles,
 	sanguis::creator::tile_grid<
@@ -73,7 +73,7 @@ to_tile_texture(
 		);
 
 		return
-			sge::texture::const_part_shared_ptr();
+			sge::texture::const_optional_part_ref{};
 	}
 
 	sanguis::client::load::tiles::set const &set(
@@ -106,14 +106,16 @@ to_tile_texture(
 		);
 
 		return
-			sge::texture::const_part_shared_ptr();
+			sge::texture::const_optional_part_ref{};
 	}
 
 	// TODO: Make this random
 	return
-		textures->at(
-			0u
-		);
+		sge::texture::const_optional_part_ref{
+			*textures->at(
+				0u
+			)
+		};
 }
 
 }

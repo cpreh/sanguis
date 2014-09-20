@@ -10,6 +10,7 @@
 #include <sanguis/client/draw2d/scene/world/sprite/vector.hpp>
 #include <sanguis/client/load/tiles/context_fwd.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
+#include <sge/texture/const_optional_part_ref.hpp>
 #include <fcppt/container/grid/make_pos_crange_start_end.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/vector/dim.hpp>
@@ -48,8 +49,7 @@ sanguis::client::draw2d::scene::world::fill_non_connecting_batches(
 		)
 	)
 	{
-		// TODO: optional_ref?
-		sge::texture::const_part_shared_ptr const texture(
+		sge::texture::const_optional_part_ref const texture(
 			sanguis::client::draw2d::scene::world::to_non_connecting_tile_texture(
 				_tiles,
 				source_element.value()
@@ -78,7 +78,9 @@ sanguis::client::draw2d::scene::world::fill_non_connecting_batches(
 					tile_dim
 				)
 				.texture(
-					texture
+					sanguis::client::draw2d::scene::world::sprite::object::texture_type{
+						texture
+					}
 				)
 				.set<
 					sanguis::client::draw2d::scene::world::sprite::is_background_role

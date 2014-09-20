@@ -13,6 +13,7 @@
 #include <sanguis/client/draw2d/scene/world/sprite/vector.hpp>
 #include <sanguis/creator/tile_grid.hpp>
 #include <sanguis/client/load/tiles/context_fwd.hpp>
+#include <sge/texture/const_optional_part_ref.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/container/grid/make_pos_crange_start_end.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
@@ -69,8 +70,7 @@ fill_batches(
 		)
 	)
 	{
-		// TODO: optional_unique_ptr
-		sge::texture::const_part_shared_ptr const texture(
+		sge::texture::const_optional_part_ref const texture(
 			sanguis::client::draw2d::scene::world::to_tile_texture(
 				_tiles,
 				_grid,
@@ -107,9 +107,11 @@ fill_batches(
 					tile_dim
 				)
 				.texture(
-					texture
+					sanguis::client::draw2d::scene::world::sprite::object::texture_type{
+						texture
+					}
 				)
-				.template set<
+				. template set<
 					sanguis::client::draw2d::scene::world::sprite::is_background_role
 				>(
 					_is_background.get()

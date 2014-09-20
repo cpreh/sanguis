@@ -9,6 +9,7 @@
 #include <sanguis/client/load/tiles/set.hpp>
 #include <sge/parse/json/member.hpp>
 #include <sge/parse/json/parse_file_exn.hpp>
+#include <sge/texture/part.hpp>
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
