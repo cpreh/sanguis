@@ -2,10 +2,9 @@
 #include <sanguis/client/draw2d/entities/bullet.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
-#include <sanguis/client/draw2d/entities/model/name.hpp>
 #include <sanguis/client/draw2d/factory/projectile.hpp>
+#include <sanguis/load/model/bullet_path.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
 
@@ -28,9 +27,7 @@ sanguis::client::draw2d::factory::projectile(
 					sanguis::client::draw2d::entities::bullet
 				>(
 					_parameters,
-					sanguis::client::draw2d::entities::model::name(
-						FCPPT_TEXT("bullet")
-					)
+					sanguis::load::model::bullet_path()
 				)
 			);
 	}

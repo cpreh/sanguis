@@ -1,5 +1,6 @@
 #include <sanguis/projectile_type.hpp>
 #include <sanguis/collision/world/group.hpp>
+#include <sanguis/load/model/path.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/center.hpp>
 #include <sanguis/messages/roles/entity_id.hpp>
@@ -10,7 +11,6 @@
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/direction.hpp>
-#include <sanguis/server/model_name.hpp>
 #include <sanguis/server/model_size.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
@@ -36,7 +36,7 @@ sanguis::server::entities::projectiles::projectile::projectile(
 	sanguis::projectile_type const _projectile_type,
 	sanguis::server::team const _team,
 	sanguis::server::entities::movement_speed const _movement_speed,
-	sanguis::server::model_name const &_model_name,
+	sanguis::load::model::path const &_model_path,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::entities::projectiles::life_time const _life_time,
 	sanguis::server::direction const _direction
@@ -49,7 +49,7 @@ sanguis::server::entities::projectiles::projectile::projectile(
 	sanguis::server::entities::with_links(),
 	sanguis::server::entities::with_velocity(
 		_load_context.model_size(
-			_model_name
+			_model_path
 		),
 		sanguis::server::entities::movement_speed_initial(
 			sanguis::server::entities::property::initial_max(

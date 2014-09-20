@@ -1,6 +1,6 @@
 #include <sanguis/collision/world/group.hpp>
 #include <sanguis/creator/enemy_type.hpp>
-#include <sanguis/load/enemy_name.hpp>
+#include <sanguis/load/model/enemy_path.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/aura_type_container.hpp>
 #include <sanguis/messages/roles/buff_type_container.hpp>
@@ -21,7 +21,6 @@
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
-#include <sanguis/server/model_name.hpp>
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
@@ -80,10 +79,8 @@ sanguis::server::entities::enemies::enemy::enemy(
 	sanguis::server::entities::with_links(),
 	sanguis::server::entities::with_velocity(
 		_parameters.load_context().model_size(
-			sanguis::server::model_name(
-				sanguis::load::enemy_name(
-					_parameters.enemy_type()
-				)
+			sanguis::load::model::enemy_path(
+				_parameters.enemy_type()
 			)
 		),
 		sanguis::server::entities::movement_speed_initial(

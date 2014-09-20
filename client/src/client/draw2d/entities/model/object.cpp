@@ -47,14 +47,14 @@ sanguis::client::draw2d::entities::model::object::object(
 		sanguis::client::draw2d::entities::model::expand_orders(
 			_parameters.orders(),
 			_parameters.load_parameters().collection()[
-				_parameters.name().get()
+				_parameters.path()
 			].size()
 		),
 		fcppt::math::dim::structure_cast<
 			sanguis::client::draw2d::sprite::dim
 		>(
 			_parameters.load_parameters().collection()[
-				_parameters.name().get()
+				_parameters.path()
 			].cell_size().get()
 		),
 		_parameters.color()
@@ -88,7 +88,7 @@ sanguis::client::draw2d::entities::model::object::object(
 {
 	sanguis::client::load::model::object const &model(
 		_parameters.load_parameters().collection()[
-			_parameters.name().get()
+			_parameters.path()
 		]
 	);
 

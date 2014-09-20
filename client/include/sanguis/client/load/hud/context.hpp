@@ -33,6 +33,7 @@ public:
 
 	~context();
 
+	// TODO: optional_ref
 	sge::texture::const_part_shared_ptr const
 	weapon_icon(
 		sanguis::weapon_type

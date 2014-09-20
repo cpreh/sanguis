@@ -1,7 +1,7 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/pickup_type.hpp>
 #include <sanguis/collision/world/group.hpp>
-#include <sanguis/load/pickup_name.hpp>
+#include <sanguis/load/model/pickup_path.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/center.hpp>
 #include <sanguis/messages/roles/entity_id.hpp>
@@ -10,7 +10,6 @@
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/center.hpp>
-#include <sanguis/server/model_name.hpp>
 #include <sanguis/server/model_size.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
@@ -42,10 +41,8 @@ sanguis::server::entities::pickups::pickup::pickup(
 	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::with_body(
 		_load_context.model_size(
-			sanguis::server::model_name(
-				sanguis::load::pickup_name(
-					_pickup_type
-				)
+			sanguis::load::model::pickup_path(
+				_pickup_type
 			)
 		)
 	),

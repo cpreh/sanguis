@@ -8,11 +8,10 @@
 #include <sanguis/client/draw2d/entities/hover/weapon.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
-#include <sanguis/client/draw2d/entities/model/name.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/normal/white.hpp>
-#include <sanguis/load/weapon_pickup_name.hpp>
+#include <sanguis/load/model/weapon_pickup_path.hpp>
 
 
 sanguis::client::draw2d::entities::weapon_pickup::weapon_pickup(
@@ -23,10 +22,8 @@ sanguis::client::draw2d::entities::weapon_pickup::weapon_pickup(
 	sanguis::client::draw2d::entities::model::object(
 		sanguis::client::draw2d::entities::model::parameters(
 			_load_parameters,
-			sanguis::client::draw2d::entities::model::name(
-				sanguis::load::weapon_pickup_name(
-					_weapon_description.weapon_type()
-				)
+			sanguis::load::model::weapon_pickup_path(
+				_weapon_description.weapon_type()
 			),
 			sanguis::client::draw2d::entities::order_vector{
 				sanguis::client::draw2d::z_ordering::pickup

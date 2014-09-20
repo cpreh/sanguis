@@ -4,11 +4,11 @@
 #include <sanguis/client/load/model/collection_fwd.hpp>
 #include <sanguis/client/load/model/object_fwd.hpp>
 #include <sanguis/client/load/resource/context_fwd.hpp>
+#include <sanguis/load/model/path.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/string.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <map>
 #include <memory>
-#include <unordered_map>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -29,7 +29,7 @@ class collection
 public:
 	sanguis::client::load::model::object const &
 	operator[](
-		fcppt::string const &
+		sanguis::load::model::path const &
 	) const;
 
 	explicit
@@ -39,7 +39,7 @@ public:
 
 	~collection();
 private:
-	sanguis::client::load::resource::context const &ctx_;
+	sanguis::client::load::resource::context const &resources_;
 
 	typedef
 	std::unique_ptr<
@@ -48,8 +48,8 @@ private:
 	model_unique_ptr;
 
 	typedef
-	std::unordered_map<
-		fcppt::string,
+	std::map<
+		sanguis::load::model::path,
 		model_unique_ptr
 	>
 	model_map;

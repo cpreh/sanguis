@@ -2,9 +2,9 @@
 #include <sanguis/duration_second.hpp>
 #include <sanguis/projectile_type.hpp>
 #include <sanguis/random_variate_impl.hpp>
+#include <sanguis/load/model/bullet_path.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/direction.hpp>
-#include <sanguis/server/model_name.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
@@ -17,7 +17,6 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/environment/optional_object_ref.hpp>
 #include <sge/timer/reset_when_expired.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/random/distribution/basic_impl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real_impl.hpp>
@@ -38,9 +37,7 @@ sanguis::server::entities::projectiles::scatter::scatter(
 			300.f
 		),
 		// TODO
-		sanguis::server::model_name(
-			FCPPT_TEXT("bullet")
-		),
+		sanguis::load::model::bullet_path(),
 		_load_context,
 		sanguis::server::entities::projectiles::life_time(
 			sanguis::duration_second(

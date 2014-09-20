@@ -10,8 +10,6 @@ check_includes collision/src/include
 
 check_includes common/include
 
-check_includes common/src/include
-
 check_includes core/include
 
 check_includes creator/include

@@ -15,13 +15,11 @@ sanguis::load::pickup_name(
 	)
 	{
 	case sanguis::pickup_type::health:
-		return fcppt::string(
-			FCPPT_TEXT("pickups/hp")
-		);
+		return
+			FCPPT_TEXT("hp");
 	case sanguis::pickup_type::monster:
-		return fcppt::string(
-			FCPPT_TEXT("pickups/monster")
-		);
+		return
+			FCPPT_TEXT("monster");
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;

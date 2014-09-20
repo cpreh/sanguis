@@ -1,6 +1,6 @@
 #include <sanguis/friend_type.hpp>
 #include <sanguis/collision/world/group.hpp>
-#include <sanguis/load/friend_name.hpp>
+#include <sanguis/load/model/friend_path.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/aura_type_container.hpp>
 #include <sanguis/messages/roles/buff_type_container.hpp>
@@ -17,7 +17,6 @@
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/dim.hpp>
 #include <sanguis/server/health.hpp>
-#include <sanguis/server/model_name.hpp>
 #include <sanguis/server/model_size.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/regeneration.hpp>
@@ -86,10 +85,8 @@ sanguis::server::entities::friend_::friend_(
 	sanguis::server::entities::with_links(),
 	sanguis::server::entities::with_velocity(
 		_load_context.model_size(
-			sanguis::server::model_name(
-				sanguis::load::friend_name(
-					_friend_type
-				)
+			sanguis::load::model::friend_path(
+				_friend_type
 			)
 		),
 		sanguis::server::entities::movement_speed_initial(

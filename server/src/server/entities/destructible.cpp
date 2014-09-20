@@ -1,6 +1,6 @@
 #include <sanguis/collision/world/group.hpp>
 #include <sanguis/creator/destructible_type.hpp>
-#include <sanguis/load/destructible_name.hpp>
+#include <sanguis/load/model/destructible_path.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/center.hpp>
 #include <sanguis/messages/roles/destructible_type.hpp>
@@ -9,7 +9,6 @@
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/health_fwd.hpp>
-#include <sanguis/server/model_name.hpp>
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/player_id_fwd.hpp>
 #include <sanguis/server/regeneration.hpp>
@@ -35,10 +34,8 @@ sanguis::server::entities::destructible::destructible(
 :
 	sanguis::server::entities::with_body(
 		_load_context.model_size(
-			sanguis::server::model_name(
-				sanguis::load::destructible_name(
-					_type
-				)
+			sanguis::load::model::destructible_path(
+				_type
 			)
 		)
 	),

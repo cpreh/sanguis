@@ -1,7 +1,7 @@
 #include <sanguis/entity_id.hpp>
+#include <sanguis/load/model/path_fwd.hpp>
 #include <sanguis/model/cell_size.hpp>
 #include <sanguis/server/load.hpp>
-#include <sanguis/server/model_name.hpp>
 #include <sanguis/server/model_size.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/global/load_context.hpp>
@@ -30,7 +30,7 @@ sanguis::server::global::load_context::~load_context()
 
 sanguis::server::model_size const
 sanguis::server::global::load_context::model_size(
-	sanguis::server::model_name const &_model_name
+	sanguis::load::model::path const &_model_path
 ) const
 {
 	return
@@ -39,7 +39,7 @@ sanguis::server::global::load_context::model_size(
 				sanguis::server::model_size::value_type
 			>(
 				model_context_.model_dim(
-					_model_name.get()
+					_model_path
 				).get()
 			)
 		);

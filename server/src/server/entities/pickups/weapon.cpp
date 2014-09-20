@@ -1,7 +1,7 @@
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/collision/world/group.hpp>
-#include <sanguis/load/weapon_pickup_name.hpp>
+#include <sanguis/load/model/weapon_pickup_path.hpp>
 #include <sanguis/messages/convert/to_magazine_size.hpp>
 #include <sanguis/messages/convert/to_weapon_attribute_vector.hpp>
 #include <sanguis/messages/roles/angle.hpp>
@@ -16,7 +16,6 @@
 #include <sanguis/messages/server/add_weapon_pickup.hpp>
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
-#include <sanguis/server/model_name.hpp>
 #include <sanguis/server/model_size.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
@@ -42,10 +41,8 @@ sanguis::server::entities::pickups::weapon::weapon(
 	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::with_body(
 		_load_context.model_size(
-			sanguis::server::model_name(
-				sanguis::load::weapon_pickup_name(
-					_weapon->type()
-				)
+			sanguis::load::model::weapon_pickup_path(
+				_weapon->type()
 			)
 		)
 	),

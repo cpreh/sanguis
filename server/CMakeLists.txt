@@ -394,8 +394,6 @@ set(
 	include/sanguis/server/make_send_callback.hpp
 	include/sanguis/server/make_unicast_callback.hpp
 	include/sanguis/server/message_functor.hpp
-	include/sanguis/server/model_name.hpp
-	include/sanguis/server/model_name_fwd.hpp
 	include/sanguis/server/model_size.hpp
 	include/sanguis/server/model_size_fwd.hpp
 	include/sanguis/server/net/angle.hpp

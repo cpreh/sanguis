@@ -18,12 +18,11 @@
 #include <sanguis/client/draw2d/entities/hover/optional_name.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
-#include <sanguis/client/draw2d/entities/model/name.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/normal/color_format.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
-#include <sanguis/load/enemy_name.hpp>
+#include <sanguis/load/model/enemy_path.hpp>
 #include <sge/image/color/any/convert.hpp>
 
 
@@ -51,10 +50,8 @@ sanguis::client::draw2d::entities::enemy::enemy(
 				_auras,
 				sanguis::client::draw2d::entities::model::parameters(
 					_load_parameters,
-					sanguis::client::draw2d::entities::model::name(
-						sanguis::load::enemy_name(
-							_enemy_type
-						)
+					sanguis::load::model::enemy_path(
+						_enemy_type
 					),
 					sanguis::client::draw2d::entities::order_vector{
 						sanguis::client::draw2d::z_ordering::model_generic

@@ -5,9 +5,9 @@
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
-#include <sanguis/client/draw2d/entities/model/name.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/normal/color.hpp>
+#include <sanguis/load/model/path.hpp>
 
 
 namespace sanguis
@@ -29,7 +29,7 @@ class parameters
 public:
 	parameters(
 		sanguis::client::draw2d::entities::model::load_parameters const &,
-		sanguis::client::draw2d::entities::model::name const &,
+		sanguis::load::model::path const &,
 		sanguis::client::draw2d::entities::order_vector const &,
 		sanguis::client::optional_health_pair const &,
 		sanguis::client::draw2d::entities::model::decay_option,
@@ -39,8 +39,8 @@ public:
 	sanguis::client::draw2d::entities::model::load_parameters const &
 	load_parameters() const;
 
-	sanguis::client::draw2d::entities::model::name const &
-	name() const;
+	sanguis::load::model::path const &
+	path() const;
 
 	sanguis::client::draw2d::entities::order_vector const &
 	orders() const;
@@ -56,7 +56,7 @@ public:
 private:
 	sanguis::client::draw2d::entities::model::load_parameters const &load_parameters_;
 
-	sanguis::client::draw2d::entities::model::name const &name_;
+	sanguis::load::model::path const &path_;
 
 	sanguis::client::draw2d::entities::order_vector const &orders_;
 

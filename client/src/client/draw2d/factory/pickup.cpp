@@ -5,12 +5,11 @@
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
-#include <sanguis/client/draw2d/entities/model/name.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <sanguis/client/draw2d/factory/pickup.hpp>
 #include <sanguis/client/draw2d/sprite/normal/white.hpp>
-#include <sanguis/load/pickup_name.hpp>
+#include <sanguis/load/model/pickup_path.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
 
@@ -26,10 +25,8 @@ sanguis::client::draw2d::factory::pickup(
 		>(
 			sanguis::client::draw2d::entities::model::parameters(
 				_parameters,
-				sanguis::client::draw2d::entities::model::name(
-					sanguis::load::pickup_name(
-						_pickup_type
-					)
+				sanguis::load::model::pickup_path(
+					_pickup_type
 				),
 				sanguis::client::draw2d::entities::order_vector{
 					sanguis::client::draw2d::z_ordering::pickup

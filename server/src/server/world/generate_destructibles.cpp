@@ -1,7 +1,6 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/creator/destructible.hpp>
-#include <sanguis/load/destructible_name.hpp>
-#include <sanguis/server/model_name.hpp>
+#include <sanguis/load/model/destructible_path.hpp>
 #include <sanguis/server/model_size.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/environment/load_context.hpp>
@@ -41,10 +40,8 @@ sanguis::server::world::generate_destructibles(
 			),
 			_destructible.pos().get(),
 			_load_context.model_size(
-				sanguis::server::model_name(
-					sanguis::load::destructible_name(
-						_destructible.type()
-					)
+				sanguis::load::model::destructible_path(
+					_destructible.type()
 				)
 			)
 		);

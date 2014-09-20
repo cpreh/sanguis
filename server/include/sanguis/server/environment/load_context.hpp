@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENVIRONMENT_LOAD_CONTEXT_HPP_INCLUDED
 
 #include <sanguis/entity_id.hpp>
-#include <sanguis/server/model_name_fwd.hpp>
+#include <sanguis/load/model/path_fwd.hpp>
 #include <sanguis/server/model_size_fwd.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -26,7 +26,7 @@ public:
 	virtual
 	sanguis::server::model_size const
 	model_size(
-		sanguis::server::model_name const &
+		sanguis::load::model::path const &
 	) const = 0;
 
 	virtual

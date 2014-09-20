@@ -451,9 +451,16 @@ set(
 	src/load/destructible_name.cpp
 	src/load/enemy_name.cpp
 	src/load/friend_name.cpp
+	src/load/model/aoe_projectile_path.cpp
+	src/load/model/bullet_path.cpp
+	src/load/model/destructible_path.cpp
+	src/load/model/enemy_path.cpp
+	src/load/model/friend_path.cpp
 	src/load/model/make_path.cpp
 	src/load/model/path_to_json_file.cpp
 	src/load/model/pickup_path.cpp
+	src/load/model/player_path.cpp
+	src/load/model/weapon_pickup_path.cpp
 	src/load/pickup_name.cpp
 	src/load/weapon_pickup_name.cpp
 	src/media_path.cpp

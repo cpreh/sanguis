@@ -7,6 +7,7 @@
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_type_to_is_primary.hpp>
 #include <sanguis/collision/world/group.hpp>
+#include <sanguis/load/model/player_path.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/aura_type_container.hpp>
 #include <sanguis/messages/roles/buff_type_container.hpp>
@@ -30,7 +31,6 @@
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/level.hpp>
 #include <sanguis/server/level_from_exp.hpp>
-#include <sanguis/server/model_name.hpp>
 #include <sanguis/server/model_size.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/radius.hpp>
@@ -79,7 +79,6 @@
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -104,9 +103,7 @@ sanguis::server::entities::player::player(
 	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::with_velocity(
 		_load_context.model_size(
-			sanguis::server::model_name(
-				FCPPT_TEXT("player")
-			)
+			sanguis::load::model::player_path()
 		),
 		sanguis::server::entities::movement_speed_initial(
 			sanguis::server::entities::property::initial_zero(

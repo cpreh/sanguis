@@ -12,11 +12,10 @@
 #include <sanguis/client/draw2d/entities/hover/optional_name.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
-#include <sanguis/client/draw2d/entities/model/name.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/normal/white.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
-#include <sanguis/load/friend_name.hpp>
+#include <sanguis/load/model/friend_path.hpp>
 
 
 sanguis::client::draw2d::entities::friend_::friend_(
@@ -42,10 +41,8 @@ sanguis::client::draw2d::entities::friend_::friend_(
 				_auras,
 				sanguis::client::draw2d::entities::model::parameters(
 					_load_parameters,
-					sanguis::client::draw2d::entities::model::name(
-						sanguis::load::friend_name(
-							_friend_type
-						)
+					sanguis::load::model::friend_path(
+						_friend_type
 					),
 					_orders,
 					sanguis::client::optional_health_pair(

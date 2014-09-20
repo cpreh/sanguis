@@ -10,15 +10,28 @@ sanguis::load::friend_name(
 	sanguis::friend_type const _type
 )
 {
+#define SANGUIS_LOAD_FRIEND_NAME_CASE(\
+	name\
+)\
+case sanguis::friend_type::name:\
+	return \
+		FCPPT_TEXT(\
+			#name\
+		)
+
 	switch(
 		_type
 	)
 	{
-	case sanguis::friend_type::spider:
-		return FCPPT_TEXT("friendly_spider");
-	case sanguis::friend_type::sentry:
-		return FCPPT_TEXT("sentry");
+		SANGUIS_LOAD_FRIEND_NAME_CASE(
+			spider
+		);
+		SANGUIS_LOAD_FRIEND_NAME_CASE(
+			sentry
+		);
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;
+
+#undef SANGUIS_LOAD_FRIEND_NAME_CASE
 }

@@ -4,9 +4,9 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/projectile_type.hpp>
 #include <sanguis/collision/world/group_fwd.hpp>
+#include <sanguis/load/model/path_fwd.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/direction.hpp>
-#include <sanguis/server/model_name.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/collision/result_fwd.hpp>
@@ -48,7 +48,7 @@ protected:
 		sanguis::projectile_type,
 		sanguis::server::team,
 		sanguis::server::entities::movement_speed,
-		sanguis::server::model_name const &,
+		sanguis::load::model::path const &,
 		sanguis::server::environment::load_context &,
 		sanguis::server::entities::projectiles::life_time,
 		sanguis::server::direction

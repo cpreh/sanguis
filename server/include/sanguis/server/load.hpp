@@ -3,8 +3,8 @@
 
 #include <sanguis/model/cell_size.hpp>
 #include <sanguis/server/load_fwd.hpp>
+#include <sanguis/load/model/path.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/string.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <map>
 #include <fcppt/config/external_end.hpp>
@@ -27,13 +27,15 @@ public:
 
 	sanguis::model::cell_size const
 	model_dim(
-		fcppt::string const &
+		sanguis::load::model::path const &
 	) const;
 private:
-	typedef std::map<
-		fcppt::string,
+	typedef
+	std::map<
+		sanguis::load::model::path,
 		sanguis::model::cell_size
-	> dim_map;
+	>
+	dim_map;
 
 	mutable dim_map dims_;
 };

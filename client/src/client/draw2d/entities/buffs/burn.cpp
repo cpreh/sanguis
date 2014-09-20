@@ -17,6 +17,7 @@
 #include <sanguis/client/load/model/object.hpp>
 #include <sanguis/client/load/model/part.hpp>
 #include <sanguis/client/load/model/weapon_category.hpp>
+#include <sanguis/load/model/path.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/image/color/any/object.hpp>
 #include <sge/sprite/center.hpp>
@@ -25,6 +26,9 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/filesystem/path.hpp>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::draw2d::entities::buffs::burn::burn(
@@ -70,7 +74,11 @@ sanguis::client::draw2d::entities::buffs::burn::burn(
 	),
 	animation_(
 		_model_collection[
-			FCPPT_TEXT("fire")
+			sanguis::load::model::path{
+				boost::filesystem::path{
+					FCPPT_TEXT("fire")
+				}
+			}
 		][
 			FCPPT_TEXT("default")
 		]

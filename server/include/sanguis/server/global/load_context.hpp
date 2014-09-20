@@ -2,8 +2,8 @@
 #define SANGUIS_SERVER_GLOBAL_LOAD_CONTEXT_HPP_INCLUDED
 
 #include <sanguis/entity_id.hpp>
+#include <sanguis/load/model/path_fwd.hpp>
 #include <sanguis/server/load_fwd.hpp>
-#include <sanguis/server/model_name_fwd.hpp>
 #include <sanguis/server/model_size_fwd.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/global/next_id_callback.hpp>
@@ -35,7 +35,7 @@ public:
 private:
 	sanguis::server::model_size const
 	model_size(
-		sanguis::server::model_name const &
+		sanguis::load::model::path const &
 	) const
 	override;
 

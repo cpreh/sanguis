@@ -20,6 +20,7 @@
 #include <sanguis/client/load/model/object.hpp>
 #include <sanguis/client/load/model/part.hpp>
 #include <sanguis/client/load/model/weapon_category.hpp>
+#include <sanguis/load/model/path.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/image/color/any/object.hpp>
 #include <sge/sprite/intrusive/connection.hpp>
@@ -28,6 +29,9 @@
 #include <fcppt/text.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/math/dim/fill.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/filesystem/path.hpp>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::draw2d::entities::explosion::explosion(
@@ -86,7 +90,13 @@ sanguis::client::draw2d::entities::explosion::explosion(
 	),
 	animation_(
 		_model_collection[
-			FCPPT_TEXT("particles/flare")
+			sanguis::load::model::path{
+				boost::filesystem::path{
+					FCPPT_TEXT("particles")
+				}
+				/
+				FCPPT_TEXT("flare")
+			}
 		]
 		.random_part(
 			_random_generator

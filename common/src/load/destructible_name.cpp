@@ -15,9 +15,8 @@ sanguis::load::destructible_name(
 	)
 	{
 	case sanguis::creator::destructible_type::barrel:
-		return fcppt::string(
-			FCPPT_TEXT("barrel")
-		);
+		return
+			FCPPT_TEXT("barrel");
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;

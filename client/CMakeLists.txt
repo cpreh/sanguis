@@ -123,7 +123,6 @@ set(
 	include/sanguis/client/draw2d/entities/model/load_parameters.hpp
 	include/sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/loop_method.hpp
-	include/sanguis/client/draw2d/entities/model/name.hpp
 	include/sanguis/client/draw2d/entities/model/object.hpp
 	include/sanguis/client/draw2d/entities/model/object_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/orientation.hpp
