@@ -43,7 +43,7 @@ typedef sge::sprite::config::choices<
 				1u
 			>,
 			sge::sprite::config::texture_coordinates::automatic,
-			sge::sprite::config::texture_ownership::shared
+			sge::sprite::config::texture_ownership::reference
 		>,
 		sge::sprite::config::with_color<
 			sanguis::client::draw2d::sprite::normal::color_format

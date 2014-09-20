@@ -45,13 +45,6 @@ sanguis::client::console::gfx::gfx(
 	sanguis::client::load::resource::textures const &_textures
 )
 :
-	texture_(
-		_textures.load(
-			sanguis::client::load::resource::texture_identifier(
-				FCPPT_TEXT("console_background")
-			)
-		)
-	),
 	impl_(
 		_console,
 		_renderer,
@@ -63,7 +56,13 @@ sanguis::client::console::gfx::gfx(
 		sge::console::gfx::sprite_object(
 			sge::console::gfx::sprite_parameters()
 			.texture(
-				texture_
+				sge::console::gfx::sprite_object::texture_type{
+					_textures.load(
+						sanguis::client::load::resource::texture_identifier(
+							FCPPT_TEXT("console_background")
+						)
+					)
+				}
 			)
 			.pos(
 				sge::console::gfx::sprite_object::vector::null()

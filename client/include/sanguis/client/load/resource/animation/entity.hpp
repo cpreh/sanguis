@@ -4,7 +4,9 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/client/load/resource/animation/entity_fwd.hpp>
 #include <sge/renderer/dim2_fwd.hpp>
-#include <sge/texture/const_part_shared_ptr.hpp>
+#include <sge/texture/const_part_unique_ptr.hpp>
+#include <sge/texture/part_fwd.hpp>
+#include <fcppt/noncopyable.hpp>
 
 
 namespace sanguis
@@ -20,31 +22,38 @@ namespace animation
 
 class entity
 {
-public:
-	// TODO: Why shared_ptr?
-	entity(
-		sanguis::duration const &delay,
-		sge::texture::const_part_shared_ptr
+	FCPPT_NONCOPYABLE(
+		entity
 	);
+public:
+	entity(
+		sanguis::duration,
+		sge::texture::const_part_unique_ptr &&
+	);
+
+	entity(
+		entity &&
+	);
+
+	entity &
+	operator=(
+		entity &&
+	);
+
+	~entity();
 
 	sanguis::duration const
 	delay() const;
 
-	sge::texture::const_part_shared_ptr
-	tex() const;
-
-	// TODO: What does this do?
-	void
-	tex(
-		sge::texture::const_part_shared_ptr
-	);
+	sge::texture::part const &
+	texture() const;
 
 	sge::renderer::dim2 const
 	dim() const;
 private:
 	sanguis::duration delay_;
 
-	sge::texture::const_part_shared_ptr tex_part_;
+	sge::texture::const_part_unique_ptr texture_;
 };
 
 }

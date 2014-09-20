@@ -6,7 +6,7 @@
 #include <sanguis/client/load/model/global_parameters_fwd.hpp>
 #include <sanguis/client/load/resource/animation/series.hpp>
 #include <sanguis/model/animation_fwd.hpp>
-#include <sge/texture/const_part_shared_ptr.hpp>
+#include <sge/texture/part_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -38,7 +38,7 @@ public:
 	sanguis::client::load::model::optional_sound const &
 	sound() const;
 private:
-	sge::texture::const_part_shared_ptr const texture_;
+	sge::texture::part const &texture_;
 
 	sanguis::client::load::resource::animation::series const series_;
 

@@ -22,7 +22,7 @@ sanguis::client::load::model::animation::animation(
 		sanguis::client::load::model::make_series(
 			_animation,
 			_parameters,
-			*texture_
+			texture_
 		)
 	),
 	sound_(

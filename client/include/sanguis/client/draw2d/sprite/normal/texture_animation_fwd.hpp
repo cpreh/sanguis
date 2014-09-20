@@ -16,9 +16,11 @@ namespace sprite
 namespace normal
 {
 
-typedef sanguis::client::draw2d::sprite::animation::texture<
+typedef
+sanguis::client::draw2d::sprite::animation::texture<
 	sanguis::client::draw2d::sprite::normal::choices
-> texture_animation;
+>
+texture_animation;
 
 }
 }

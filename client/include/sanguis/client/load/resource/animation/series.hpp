@@ -5,9 +5,7 @@
 #include <sanguis/client/load/resource/animation/entity.hpp>
 #include <sanguis/client/load/resource/animation/entity_vector.hpp>
 #include <sge/renderer/dim2.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <vector>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/noncopyable.hpp>
 
 
 namespace sanguis
@@ -23,28 +21,27 @@ namespace animation
 
 class series
 {
+	FCPPT_NONCOPYABLE(
+		series
+	);
 public:
 	typedef sanguis::client::load::resource::animation::entity_vector::const_iterator const_iterator;
-
-	series();
-
-	explicit
-	series(
-		sanguis::client::load::resource::animation::entity_vector const &
-	);
 
 	explicit
 	series(
 		sanguis::client::load::resource::animation::entity_vector &&
 	);
 
-	void
-	push_back(
-		sanguis::client::load::resource::animation::entity const &
+	series(
+		series &&
 	);
 
-	sanguis::client::load::resource::animation::entity_vector &
-	entities();
+	series &
+	operator=(
+		series &&
+	);
+
+	~series();
 
 	sanguis::client::load::resource::animation::entity_vector const &
 	entities() const;

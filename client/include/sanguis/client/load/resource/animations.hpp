@@ -4,7 +4,7 @@
 #include <sanguis/client/load/resource/animations_fwd.hpp>
 #include <sanguis/client/load/resource/textures_fwd.hpp>
 #include <sanguis/client/load/resource/animation/series.hpp>
-#include <sge/texture/const_part_shared_ptr.hpp>
+#include <sge/texture/const_part_unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
@@ -27,7 +27,7 @@ class animations
 		animations
 	);
 public:
-	sanguis::client::load::resource::animation::series
+	sanguis::client::load::resource::animation::series const &
 	load(
 		boost::filesystem::path const &
 	) const;
@@ -44,7 +44,7 @@ private:
 		boost::filesystem::path const &
 	) const;
 
-	sge::texture::const_part_shared_ptr
+	sge::texture::const_part_unique_ptr
 	load_texture(
 		boost::filesystem::path const &
 	) const;

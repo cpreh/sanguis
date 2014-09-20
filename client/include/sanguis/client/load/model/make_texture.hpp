@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_LOAD_MODEL_MAKE_TEXTURE_HPP_INCLUDED
 
 #include <sanguis/client/load/model/global_parameters_fwd.hpp>
-#include <sge/texture/const_part_shared_ptr.hpp>
+#include <sge/texture/part_fwd.hpp>
 
 
 namespace sanguis
@@ -14,7 +14,7 @@ namespace load
 namespace model
 {
 
-sge::texture::const_part_shared_ptr
+sge::texture::part const &
 make_texture(
 	sanguis::client::load::model::global_parameters const &
 );

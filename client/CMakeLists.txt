@@ -317,7 +317,6 @@ set(
 	include/sanguis/client/draw2d/sprite/normal/parameters_fwd.hpp
 	include/sanguis/client/draw2d/sprite/normal/system_decl.hpp
 	include/sanguis/client/draw2d/sprite/normal/system_fwd.hpp
-	include/sanguis/client/draw2d/sprite/normal/texture_animation.hpp
 	include/sanguis/client/draw2d/sprite/normal/texture_animation_decl.hpp
 	include/sanguis/client/draw2d/sprite/normal/texture_animation_fwd.hpp
 	include/sanguis/client/draw2d/sprite/normal/white.hpp
@@ -718,6 +717,7 @@ set(
 	src/client/draw2d/sprite/client/system.cpp
 	src/client/draw2d/sprite/index.cpp
 	src/client/draw2d/sprite/normal/system.cpp
+	src/client/draw2d/sprite/normal/texture_animation.cpp
 	src/client/draw2d/sprite/normal/white.cpp
 	src/client/draw2d/translate/scalar_from_client.cpp
 	src/client/draw2d/translate/scalar_to_client.cpp

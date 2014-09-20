@@ -13,7 +13,7 @@
 #include <sge/renderer/lock_rect.hpp>
 #include <sge/texture/part.hpp>
 #include <sge/texture/part_raw_ref.hpp>
-#include <fcppt/make_shared_ptr.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -71,8 +71,7 @@ sanguis::client::load::model::make_series(
 					return
 						sanguis::client::load::resource::animation::entity(
 							delay,
-							// TODO: Why shared_ptr?
-							fcppt::make_shared_ptr<
+							fcppt::make_unique_ptr<
 								sge::texture::part_raw_ref
 							>(
 								_texture.texture(),

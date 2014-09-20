@@ -4,8 +4,9 @@
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/client/load/resource/textures_fwd.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
-#include <sge/texture/const_part_shared_ptr.hpp>
+#include <sge/texture/part_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/reference_wrapper_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <map>
 #include <fcppt/config/external_end.hpp>
@@ -34,15 +35,18 @@ public:
 	~context();
 
 	// TODO: optional_ref
-	sge::texture::const_part_shared_ptr const
+	sge::texture::part const &
 	weapon_icon(
 		sanguis::weapon_type
 	);
 private:
+	// TODO: Hash for enums
 	typedef
 	std::map<
 		sanguis::weapon_type,
-		sge::texture::const_part_shared_ptr
+		fcppt::reference_wrapper<
+			sge::texture::part const
+		>
 	>
 	weapon_icon_map;
 

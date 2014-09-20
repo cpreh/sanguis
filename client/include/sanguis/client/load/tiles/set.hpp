@@ -8,7 +8,7 @@
 #include <sanguis/client/load/tiles/orientation.hpp>
 #include <sanguis/client/load/tiles/set_fwd.hpp>
 #include <sanguis/client/load/tiles/texture_container.hpp>
-#include <sge/texture/const_part_shared_ptr.hpp>
+#include <sge/texture/const_optional_part_ref.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/container/bitfield/std_hash.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -59,7 +59,7 @@ private:
 		boost::filesystem::path const &
 	);
 
-	sge::texture::const_part_shared_ptr texture_;
+	sge::texture::const_optional_part_ref texture_;
 
 	typedef
 	std::unordered_map<

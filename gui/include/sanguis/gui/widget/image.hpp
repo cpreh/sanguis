@@ -6,12 +6,10 @@
 #include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/image_fwd.hpp>
-#include <sge/image2d/view/const_object_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/widget/base_fwd.hpp>
 #include <sge/rucksack/widget/dummy.hpp>
-#include <sge/texture/const_part_shared_ptr.hpp>
+#include <sge/texture/part_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -33,14 +31,7 @@ public:
 	SANGUIS_GUI_SYMBOL
 	image(
 		sanguis::gui::style::base const &,
-		sge::renderer::device::ffp &,
-		sge::image2d::view::const_object const &
-	);
-
-	SANGUIS_GUI_SYMBOL
-	image(
-		sanguis::gui::style::base const &,
-		sge::texture::const_part_shared_ptr
+		sge::texture::part const &
 	);
 
 	SANGUIS_GUI_SYMBOL
@@ -61,7 +52,7 @@ private:
 
 	sanguis::gui::style::base const &style_;
 
-	sge::texture::const_part_shared_ptr const texture_;
+	sge::texture::part const &texture_;
 
 	sge::rucksack::widget::dummy layout_;
 };

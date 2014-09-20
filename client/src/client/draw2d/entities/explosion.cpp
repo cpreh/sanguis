@@ -13,7 +13,6 @@
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sanguis/client/draw2d/sprite/normal/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
-#include <sanguis/client/draw2d/sprite/normal/texture_animation.hpp>
 #include <sanguis/client/load/animation_type.hpp>
 #include <sanguis/client/load/model/animation.hpp>
 #include <sanguis/client/load/model/collection.hpp>
@@ -24,7 +23,6 @@
 #include <sge/image/color/predef.hpp>
 #include <sge/image/color/any/object.hpp>
 #include <sge/sprite/intrusive/connection.hpp>
-#include <sge/texture/const_part_shared_ptr.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/float_to_int.hpp>
@@ -82,7 +80,7 @@ sanguis::client::draw2d::entities::explosion::explosion(
 			)
 		)
 		.texture(
-			sge::texture::const_part_shared_ptr()
+			sanguis::client::draw2d::sprite::normal::object::texture_type{}
 		)
 		.any_color(
 			sge::image::color::predef::white()

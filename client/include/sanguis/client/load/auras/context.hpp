@@ -4,8 +4,9 @@
 #include <sanguis/aura_type.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
 #include <sanguis/client/load/resource/textures_fwd.hpp>
-#include <sge/texture/const_part_shared_ptr.hpp>
+#include <sge/texture/part_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/reference_wrapper_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <map>
 #include <fcppt/config/external_end.hpp>
@@ -33,20 +34,22 @@ public:
 
 	~context();
 
-	sge::texture::const_part_shared_ptr
+	sge::texture::part const &
 	texture(
 		sanguis::aura_type
 	);
 private:
-	// TODO: We need a has for enums
+	// TODO: We need a hash for enums
 	typedef
 	std::map<
 		sanguis::aura_type,
-		sge::texture::const_part_shared_ptr
+		fcppt::reference_wrapper<
+			sge::texture::part const
+		>
 	>
 	texture_map;
 
-	texture_map textures_;
+	texture_map const textures_;
 };
 
 }

@@ -34,7 +34,7 @@ typedef sge::sprite::config::choices<
 				1u
 			>,
 			sge::sprite::config::texture_coordinates::custom,
-			sge::sprite::config::texture_ownership::shared
+			sge::sprite::config::texture_ownership::reference
 		>,
 		sge::sprite::config::intrusive
 	>

@@ -1,5 +1,6 @@
 #include <sanguis/build/media_path.hpp>
 #include <sanguis/gui/context.hpp>
+#include <sanguis/gui/create_texture.hpp>
 #include <sanguis/gui/duration.hpp>
 #include <sanguis/gui/index.hpp>
 #include <sanguis/gui/master.hpp>
@@ -58,6 +59,7 @@
 #include <sge/renderer/pixel_format/optional_multi_samples.hpp>
 #include <sge/renderer/pixel_format/srgb.hpp>
 #include <sge/renderer/target/onscreen.hpp>
+#include <sge/renderer/texture/planar.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <sge/systems/cursor_demuxer.hpp>
@@ -76,6 +78,7 @@
 #include <sge/systems/with_input.hpp>
 #include <sge/systems/with_renderer.hpp>
 #include <sge/systems/with_window.hpp>
+#include <sge/texture/part_raw_ptr.hpp>
 #include <sge/timer/basic.hpp>
 #include <sge/timer/elapsed_and_reset.hpp>
 #include <sge/timer/scoped_frame_limiter.hpp>
@@ -218,15 +221,21 @@ try
 		SGE_FONT_LIT("Test")
 	);
 
+	sge::texture::part_raw_ptr const car_image(
+		sanguis::gui::create_texture(
+			sys.renderer_device_core(),
+			sge::image2d::load_exn(
+				sys.image_system(),
+				sanguis::build_media_path()
+				/
+				FCPPT_TEXT("car.png")
+			)->view()
+		)
+	);
+
 	sanguis::gui::widget::image image(
 		*style,
-		sys.renderer_device_ffp(),
-		sge::image2d::load_exn(
-			sys.image_system(),
-			sanguis::build_media_path()
-			/
-			FCPPT_TEXT("car.png")
-		)->view()
+		car_image
 	);
 
 	auto const make_tree(

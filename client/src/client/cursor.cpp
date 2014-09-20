@@ -7,7 +7,6 @@
 #include <sge/renderer/size_type.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/systems/cursor_hotspot.hpp>
-#include <sge/texture/const_part_shared_ptr.hpp>
 #include <sge/texture/part.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/optional_bind_construct.hpp>
@@ -24,25 +23,25 @@ sanguis::client::cursor::cursor(
 	sanguis::client::load::resource::textures const &_textures
 )
 :
-	texture_{
+	texture_(
 		_textures.load(
 			sanguis::client::load::resource::texture_identifier(
 				FCPPT_TEXT("cursor")
 			)
 		)
-	},
+	),
 	input_cursor_(
 		_cursor
 	),
 	cursor_{
 		_renderer,
 		_cursor,
-		*texture_,
+		texture_,
 		sge::systems::cursor_hotspot{
 			fcppt::math::dim::structure_cast<
 				sge::systems::cursor_hotspot::value_type
 			>(
-				texture_->size()
+				texture_.size()
 				/
 				fcppt::literal<
 					sge::renderer::size_type
@@ -93,7 +92,7 @@ sanguis::client::cursor::area() const
 						fcppt::math::dim::structure_cast<
 							sanguis::client::cursor_area::dim
 						>(
-							texture_->size()
+							texture_.size()
 						)
 					);
 			}

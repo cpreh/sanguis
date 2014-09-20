@@ -8,6 +8,7 @@ set(
 	include/sanguis/gui/click_function.hpp
 	include/sanguis/gui/context.hpp
 	include/sanguis/gui/context_fwd.hpp
+	include/sanguis/gui/create_texture.hpp
 	include/sanguis/gui/draw.hpp
 	include/sanguis/gui/duration.hpp
 	include/sanguis/gui/fill_color.hpp
@@ -126,6 +127,7 @@ set(
 	src/background/colored.cpp
 	src/background/none.cpp
 	src/context.cpp
+	src/create_texture.cpp
 	src/draw.cpp
 	src/include/sanguis/gui/aux_/draw_image.hpp
 	src/include/sanguis/gui/aux_/draw_image_repeat.hpp

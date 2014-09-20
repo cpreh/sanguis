@@ -7,7 +7,7 @@
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/systems/custom_cursor.hpp>
-#include <sge/texture/const_part_shared_ptr.hpp>
+#include <sge/texture/part_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -38,7 +38,7 @@ public:
 	sanguis::client::optional_cursor_area const
 	area() const;
 private:
-	sge::texture::const_part_shared_ptr const texture_;
+	sge::texture::part const &texture_;
 
 	sge::input::cursor::object &input_cursor_;
 

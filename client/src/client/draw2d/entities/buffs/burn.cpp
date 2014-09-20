@@ -10,7 +10,6 @@
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sanguis/client/draw2d/sprite/normal/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
-#include <sanguis/client/draw2d/sprite/normal/texture_animation.hpp>
 #include <sanguis/client/load/animation_type.hpp>
 #include <sanguis/client/load/model/animation.hpp>
 #include <sanguis/client/load/model/collection.hpp>
@@ -22,7 +21,6 @@
 #include <sge/image/color/any/object.hpp>
 #include <sge/sprite/center.hpp>
 #include <sge/sprite/intrusive/connection.hpp>
-#include <sge/texture/const_part_shared_ptr.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
@@ -66,7 +64,7 @@ sanguis::client::draw2d::entities::buffs::burn::burn(
 			)
 		)
 		.texture(
-			sge::texture::const_part_shared_ptr()
+			sanguis::client::draw2d::sprite::normal::object::texture_type{}
 		)
 		.any_color(
 			sge::image::color::predef::white()

@@ -57,7 +57,7 @@ public:
 	texture(
 		sanguis::client::load::resource::animation::series const &,
 		sanguis::client::draw2d::sprite::animation::loop_method,
-		object &init_sprite,
+		object &,
 		sanguis::diff_clock const &
 	);
 
@@ -73,7 +73,7 @@ private:
 	void
 	handle_end();
 
-	sanguis::client::load::resource::animation::series series_;
+	sanguis::client::load::resource::animation::series const &series_;
 
 	sanguis::client::draw2d::sprite::animation::loop_method action_;
 

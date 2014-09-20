@@ -112,7 +112,9 @@ sanguis::client::draw2d::sprite::animation::texture<
 	);
 
 	spr_.texture(
-		pos_->tex()
+		typename object::texture_type{
+			pos_->texture()
+		}
 	);
 
 	return false;
@@ -127,10 +129,13 @@ sanguis::client::draw2d::sprite::animation::texture<
 >::reset()
 {
 	spr_.texture(
-		series_.begin()->tex()
+		typename object::texture_type{
+			series_.begin()->texture()
+		}
 	);
 
-	pos_ = series_.begin();
+	pos_ =
+		series_.begin();
 
 	cur_timer_.interval(
 		series_.begin()->delay()
@@ -145,7 +150,8 @@ sanguis::client::draw2d::sprite::animation::texture<
 	Choices
 >::series() const
 {
-	return series_;
+	return
+		series_;
 }
 
 template<

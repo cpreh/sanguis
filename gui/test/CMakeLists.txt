@@ -61,6 +61,7 @@ add_gui_test(
 		${sgerenderer_TARGET}
 		${sgerucksack_TARGET}
 		${sgesystems_TARGET}
+		${sgetexture_TARGET}
 		${sgetimer_TARGET}
 		${sgeviewport_TARGET}
 		${sgewindow_TARGET}

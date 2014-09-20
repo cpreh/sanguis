@@ -18,29 +18,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include <sanguis/client/load/resource/animation/entity.hpp>
 #include <sanguis/client/load/resource/animation/entity_vector.hpp>
 #include <sanguis/client/load/resource/animation/series.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
-sanguis::client::load::resource::animation::series::series()
-:
-	entities_()
-{
-}
-
-sanguis::client::load::resource::animation::series::series(
-	sanguis::client::load::resource::animation::entity_vector const &_entities
-)
-:
-	entities_(
-		_entities
-	)
-{
-}
 
 sanguis::client::load::resource::animation::series::series(
 	sanguis::client::load::resource::animation::entity_vector &&_entities
@@ -54,42 +37,43 @@ sanguis::client::load::resource::animation::series::series(
 {
 }
 
-void
-sanguis::client::load::resource::animation::series::push_back(
-	sanguis::client::load::resource::animation::entity const &_entity
-)
-{
-	entities_.push_back(
-		_entity
-	);
-}
+sanguis::client::load::resource::animation::series::series(
+	series &&
+) = default;
 
-sanguis::client::load::resource::animation::entity_vector &
-sanguis::client::load::resource::animation::series::entities()
+sanguis::client::load::resource::animation::series &
+sanguis::client::load::resource::animation::series::operator=(
+	series &&
+) = default;
+
+sanguis::client::load::resource::animation::series::~series()
 {
-	return entities_;
 }
 
 sanguis::client::load::resource::animation::entity_vector const &
 sanguis::client::load::resource::animation::series::entities() const
 {
-	return entities_;
+	return
+		entities_;
 }
 
 sanguis::client::load::resource::animation::series::const_iterator
 sanguis::client::load::resource::animation::series::begin() const
 {
-	return entities_.begin();
+	return
+		entities_.begin();
 }
 
 sanguis::client::load::resource::animation::series::const_iterator
 sanguis::client::load::resource::animation::series::end() const
 {
-	return entities_.end();
+	return
+		entities_.end();
 }
 
 bool
 sanguis::client::load::resource::animation::series::empty() const
 {
-	return entities_.empty();
+	return
+		entities_.empty();
 }

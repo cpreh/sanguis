@@ -11,7 +11,7 @@
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/draw2d/sprite/animation/loop_method.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
-#include <sanguis/client/draw2d/sprite/normal/texture_animation.hpp>
+#include <sanguis/client/draw2d/sprite/normal/texture_animation_decl.hpp>
 #include <sanguis/client/load/animation_type.hpp>
 #include <sanguis/client/load/optional_animation_type.hpp>
 #include <sanguis/client/load/model/animation.hpp>

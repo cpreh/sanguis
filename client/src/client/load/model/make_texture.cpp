@@ -2,12 +2,12 @@
 #include <sanguis/client/load/model/global_parameters.hpp>
 #include <sanguis/client/load/model/make_texture.hpp>
 #include <sanguis/client/load/resource/textures.hpp>
-#include <sge/texture/const_part_shared_ptr.hpp>
+#include <sge/texture/part_fwd.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 
 
-sge::texture::const_part_shared_ptr
+sge::texture::part const &
 sanguis::client::load::model::make_texture(
 	sanguis::client::load::model::global_parameters const &_parameters
 )

@@ -168,9 +168,11 @@ sanguis::client::draw2d::entities::with_auras<
 					)
 				)
 				.texture(
-					aura_load_context_.texture(
-						_aura
-					)
+					sanguis::client::draw2d::sprite::normal::object::texture_type{
+						aura_load_context_.texture(
+							_aura
+						)
+					}
 				)
 				.texture_size()
 			)

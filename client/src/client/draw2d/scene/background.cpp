@@ -59,7 +59,9 @@ sanguis::client::draw2d::scene::background::background(
 			)
 		)
 		.texture(
-			texture_
+			sanguis::client::draw2d::sprite::client::object::texture_type{
+				texture_
+			}
 		)
 		.texture_coordinates(
 			sanguis::client::draw2d::scene::background_texture_coordinates(
@@ -67,7 +69,7 @@ sanguis::client::draw2d::scene::background::background(
 					sanguis::client::draw2d::translation::value_type::null()
 				),
 				client_system_.renderer(),
-				*texture_
+				texture_
 			)
 		)
 	),
@@ -96,7 +98,7 @@ sanguis::client::draw2d::scene::background::render(
 		sanguis::client::draw2d::scene::background_texture_coordinates(
 			_translation,
 			client_system_.renderer(),
-			*texture_
+			texture_
 		)
 	);
 

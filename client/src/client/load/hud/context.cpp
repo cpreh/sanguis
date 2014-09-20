@@ -5,8 +5,10 @@
 #include <sanguis/client/load/hud/context.hpp>
 #include <sanguis/client/load/hud/weapon_type.hpp>
 #include <sanguis/client/load/resource/textures.hpp>
-#include <sge/texture/const_part_shared_ptr.hpp>
+#include <sge/texture/part_fwd.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/optional_impl.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/container/find_opt.hpp>
@@ -77,8 +79,10 @@ sanguis::client::load::hud::context::context(
 			weapon_icons_.insert(
 				std::make_pair(
 					*weapon_type,
-					_textures.load(
-						path
+					fcppt::make_cref(
+						_textures.load(
+							path
+						)
 					)
 				)
 			).second
@@ -90,13 +94,13 @@ sanguis::client::load::hud::context::~context()
 {
 }
 
-sge::texture::const_part_shared_ptr const
+sge::texture::part const &
 sanguis::client::load::hud::context::weapon_icon(
 	sanguis::weapon_type const _weapon_type
 )
 {
 	fcppt::optional<
-		sge::texture::const_part_shared_ptr
+		weapon_icon_map::mapped_type
 	> const icon{
 		fcppt::container::find_opt(
 			weapon_icons_,
@@ -109,5 +113,5 @@ sanguis::client::load::hud::context::weapon_icon(
 	);
 
 	return
-		*icon;
+		icon->get();
 }

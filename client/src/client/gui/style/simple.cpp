@@ -19,7 +19,7 @@
 #include <sge/rucksack/rect.hpp>
 #include <sge/rucksack/scalar.hpp>
 #include <sge/rucksack/vector.hpp>
-#include <sge/texture/const_part_shared_ptr.hpp>
+#include <sge/texture/part_fwd.hpp>
 #include <fcppt/cast/enum_to_int.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/int_to_float.hpp>
@@ -379,7 +379,7 @@ sanguis::client::gui::style::simple::draw_transparent_frame(
 		}
 	)
 	{
-		sge::texture::const_part_shared_ptr part{
+		sge::texture::part const &part{
 			textures_.load(
 				sanguis::client::load::resource::texture_identifier{
 					tile.second
@@ -389,12 +389,12 @@ sanguis::client::gui::style::simple::draw_transparent_frame(
 
 		_renderer.draw_image(
 				_context,
-				*part,
+				part,
 				_area.pos() + tile.first
 		);
 	}
 
-	sge::texture::const_part_shared_ptr part_v{
+	sge::texture::part const &part_v{
 		textures_.load(
 			sanguis::client::load::resource::texture_identifier{
 				FCPPT_TEXT("hud_frame_transparent_v")
@@ -402,7 +402,7 @@ sanguis::client::gui::style::simple::draw_transparent_frame(
 		)
 	};
 
-	sge::texture::const_part_shared_ptr part_h{
+	sge::texture::part const &part_h{
 		textures_.load(
 			sanguis::client::load::resource::texture_identifier{
 				FCPPT_TEXT("hud_frame_transparent_h")
@@ -412,7 +412,7 @@ sanguis::client::gui::style::simple::draw_transparent_frame(
 
 	_renderer.draw_image_repeat(
 			_context,
-			*part_v,
+			part_v,
 			sge::rucksack::rect{
 				sge::rucksack::rect::vector{
 					_area.pos() + sge::rucksack::vector{_area.size().w() - tilesize, tilesize}
@@ -426,7 +426,7 @@ sanguis::client::gui::style::simple::draw_transparent_frame(
 
 	_renderer.draw_image_repeat(
 			_context,
-			*part_v,
+			part_v,
 			sge::rucksack::rect{
 				sge::rucksack::rect::vector{
 					_area.pos() + sge::rucksack::vector{0,tilesize}
@@ -440,7 +440,7 @@ sanguis::client::gui::style::simple::draw_transparent_frame(
 
 	_renderer.draw_image_repeat(
 			_context,
-			*part_h,
+			part_h,
 			sge::rucksack::rect{
 				sge::rucksack::rect::vector{
 					_area.pos() + sge::rucksack::vector{tilesize,0}
@@ -454,7 +454,7 @@ sanguis::client::gui::style::simple::draw_transparent_frame(
 
 	_renderer.draw_image_repeat(
 			_context,
-			*part_h,
+			part_h,
 			sge::rucksack::rect{
 				sge::rucksack::rect::vector{
 					_area.pos() + sge::rucksack::vector{tilesize,_area.size().h() - tilesize}

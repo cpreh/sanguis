@@ -9,7 +9,9 @@
 #include <sanguis/client/load/resource/animation/entity.hpp>
 #include <sanguis/client/load/resource/animation/entity_vector.hpp>
 #include <sanguis/client/load/resource/animation/series.hpp>
-#include <sge/texture/const_part_shared_ptr.hpp>
+#include <sge/texture/const_part_unique_ptr.hpp>
+#include <sge/texture/part.hpp>
+#include <fcppt/assign/make_container.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/io/ifstream.hpp>
 #include <fcppt/io/istringstream.hpp>
@@ -31,7 +33,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::client::load::resource::animation::series
+sanguis::client::load::resource::animation::series const &
 sanguis::client::load::resource::animations::load(
 	boost::filesystem::path const &_dir
 ) const
@@ -63,6 +65,7 @@ sanguis::client::load::resource::animations::~animations()
 {
 }
 
+// TODO: Rewrite this!
 sanguis::client::load::resource::animation::series
 sanguis::client::load::resource::animations::do_load(
 	boost::filesystem::path const &_dir
@@ -175,7 +178,7 @@ sanguis::client::load::resource::animations::do_load(
 			std::ios_base::beg
 		);
 
-	sanguis::client::load::resource::animation::series anim;
+	sanguis::client::load::resource::animation::entity_vector anim;
 
 	unsigned lineno(
 		const_delay
@@ -274,10 +277,15 @@ sanguis::client::load::resource::animations::do_load(
 		++lineno;
 	}
 
-	return anim;
+	return
+		sanguis::client::load::resource::animation::series(
+			std::move(
+				anim
+			)
+		);
 }
 
-sge::texture::const_part_shared_ptr
+sge::texture::const_part_unique_ptr
 sanguis::client::load::resource::animations::load_texture(
 	boost::filesystem::path const &_path
 ) const
@@ -336,7 +344,9 @@ sanguis::client::load::resource::animations::load_without_frames_file(
 
 	return
 		sanguis::client::load::resource::animation::series(
-			sanguis::client::load::resource::animation::entity_vector{
+			fcppt::assign::make_container<
+				sanguis::client::load::resource::animation::entity_vector
+			>(
 				sanguis::client::load::resource::animation::entity(
 					sanguis::duration_second(
 						1.f
@@ -345,6 +355,6 @@ sanguis::client::load::resource::animations::load_without_frames_file(
 						first_path
 					)
 				)
-			}
+			)
 		);
 }

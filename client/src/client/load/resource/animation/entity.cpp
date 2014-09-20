@@ -22,46 +22,59 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <sanguis/client/load/resource/animation/entity.hpp>
 #include <sge/renderer/dim2.hpp>
 #include <sge/renderer/lock_rect.hpp>
-#include <sge/texture/const_part_shared_ptr.hpp>
+#include <sge/texture/const_part_unique_ptr.hpp>
 #include <sge/texture/part.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::load::resource::animation::entity::entity(
-	sanguis::duration const &_res,
-	sge::texture::const_part_shared_ptr const _tex_part
+	sanguis::duration const _delay,
+	sge::texture::const_part_unique_ptr &&_texture
 )
 :
 	delay_(
-		_res.count()
+		_delay
 	),
-	tex_part_(
-		_tex_part
+	texture_(
+		std::move(
+			_texture
+		)
 	)
+{
+}
+
+sanguis::client::load::resource::animation::entity::entity(
+	entity &&
+) = default;
+
+sanguis::client::load::resource::animation::entity &
+sanguis::client::load::resource::animation::entity::operator=(
+	entity &&
+) = default;
+
+sanguis::client::load::resource::animation::entity::~entity()
 {
 }
 
 sanguis::duration const
 sanguis::client::load::resource::animation::entity::delay() const
 {
-	return delay_;
+	return
+		delay_;
 }
 
-sge::texture::const_part_shared_ptr
-sanguis::client::load::resource::animation::entity::tex() const
+sge::texture::part const &
+sanguis::client::load::resource::animation::entity::texture() const
 {
-	return tex_part_;
-}
-
-void
-sanguis::client::load::resource::animation::entity::tex(
-	sge::texture::const_part_shared_ptr const _tex_part
-)
-{
-	tex_part_ = _tex_part;
+	return
+		*texture_;
 }
 
 sge::renderer::dim2 const
 sanguis::client::load::resource::animation::entity::dim() const
 {
-	return tex_part_->area().size();
+	return
+		this->texture().area().size();
 }
