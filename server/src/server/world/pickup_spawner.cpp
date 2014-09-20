@@ -104,6 +104,16 @@ sanguis::server::world::pickup_spawner::pickup_spawner(
 						sanguis::secondary_weapon_type::sentry
 					)
 				)
+			),
+			std::make_pair(
+				sanguis::server::pickup_probability(
+					0.5f
+				),
+				this->make_spawn_weapon(
+					sanguis::weapon_type(
+						sanguis::secondary_weapon_type::spider
+					)
+				)
 			)
 		}
 	),

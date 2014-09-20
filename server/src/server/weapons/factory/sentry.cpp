@@ -79,11 +79,7 @@ sanguis::server::weapons::factory::sentry(
 										)
 									),
 									sanguis::server::weapons::damage(
-										1.f
-										*
-										std::sqrt(
-											difficulty.get()
-										)
+										2.f
 									),
 									sanguis::server::weapons::cast_point(
 										sanguis::duration_second(
