@@ -3,8 +3,8 @@
 #include <sanguis/client/load/model/make_series.hpp>
 #include <sanguis/client/load/model/make_sound.hpp>
 #include <sanguis/client/load/model/make_texture.hpp>
-#include <sanguis/client/load/model/optional_sound.hpp>
 #include <sanguis/client/load/resource/animation/series.hpp>
+#include <sanguis/client/load/resource/optional_sound.hpp>
 #include <sanguis/model/animation.hpp>
 
 
@@ -45,7 +45,7 @@ sanguis::client::load::model::animation::series() const
 		series_;
 }
 
-sanguis::client::load::model::optional_sound const &
+sanguis::client::load::resource::optional_sound const &
 sanguis::client::load::model::animation::sound() const
 {
 	return

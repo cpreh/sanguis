@@ -463,16 +463,12 @@ set(
 	include/sanguis/client/load/model/make_weapon_categories.hpp
 	include/sanguis/client/load/model/object.hpp
 	include/sanguis/client/load/model/object_fwd.hpp
-	include/sanguis/client/load/model/optional_sound.hpp
-	include/sanguis/client/load/model/optional_sound_fwd.hpp
 	include/sanguis/client/load/model/part.hpp
 	include/sanguis/client/load/model/part_fwd.hpp
 	include/sanguis/client/load/model/part_map.hpp
 	include/sanguis/client/load/model/part_result.hpp
 	include/sanguis/client/load/model/part_result_fwd.hpp
 	include/sanguis/client/load/model/part_unique_ptr.hpp
-	include/sanguis/client/load/model/sound.hpp
-	include/sanguis/client/load/model/sound_fwd.hpp
 	include/sanguis/client/load/model/weapon_category.hpp
 	include/sanguis/client/load/model/weapon_category_fwd.hpp
 	include/sanguis/client/load/model/weapon_category_map.hpp
@@ -490,6 +486,8 @@ set(
 	include/sanguis/client/load/resource/animations_fwd.hpp
 	include/sanguis/client/load/resource/context.hpp
 	include/sanguis/client/load/resource/context_fwd.hpp
+	include/sanguis/client/load/resource/optional_sound.hpp
+	include/sanguis/client/load/resource/optional_sound_fwd.hpp
 	include/sanguis/client/load/resource/search_texture_names.hpp
 	include/sanguis/client/load/resource/sounds.hpp
 	include/sanguis/client/load/resource/sounds_fwd.hpp
@@ -787,7 +785,6 @@ set(
 	src/client/load/model/object.cpp
 	src/client/load/model/part.cpp
 	src/client/load/model/part_result.cpp
-	src/client/load/model/sound.cpp
 	src/client/load/model/weapon_category.cpp
 	src/client/load/next_file.cpp
 	src/client/load/primary_weapon_name.cpp

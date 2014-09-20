@@ -17,7 +17,6 @@
 #include <sanguis/client/load/model/animation.hpp>
 #include <sanguis/client/load/model/base_animation_not_found.hpp>
 #include <sanguis/client/load/model/part.hpp>
-#include <sanguis/client/load/model/sound.hpp>
 #include <sanguis/client/load/model/weapon_category.hpp>
 #include <sanguis/client/load/resource/animation/series.hpp>
 #include <sge/audio/buffer.hpp>
@@ -296,7 +295,7 @@ sanguis::client::draw2d::entities::model::part::load_animation(
 	{
 	case sanguis::client::draw2d::sprite::animation::loop_method::stop_at_end:
 		sound_manager_.add(
-			animation.sound()->buffer()->create_nonpositional(
+			animation.sound()->create_nonpositional(
 				sge::audio::sound::nonpositional_parameters()
 			)
 		);
@@ -304,7 +303,7 @@ sanguis::client::draw2d::entities::model::part::load_animation(
 		break;
 	case sanguis::client::draw2d::sprite::animation::loop_method::repeat:
 		sound_ =
-			animation.sound()->buffer()->create_nonpositional(
+			animation.sound()->create_nonpositional(
 				sge::audio::sound::nonpositional_parameters()
 			);
 
@@ -332,5 +331,6 @@ sanguis::client::draw2d::entities::model::part::update_orientation(
 sanguis::client::draw2d::sprite::rotation
 sanguis::client::draw2d::entities::model::part::orientation() const
 {
-	return ref_.rotation();
+	return
+		ref_.rotation();
 }

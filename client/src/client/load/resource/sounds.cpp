@@ -1,11 +1,14 @@
 #include <sanguis/media_path.hpp>
+#include <sanguis/client/load/resource/optional_sound.hpp>
 #include <sanguis/client/load/resource/sounds.hpp>
 #include <sge/audio/buffer.hpp>
-#include <sge/audio/buffer_shared_ptr.hpp>
+#include <sge/audio/buffer_unique_ptr.hpp>
 #include <sge/audio/file.hpp>
+#include <sge/audio/file_unique_ptr.hpp>
 #include <sge/audio/loader.hpp>
-#include <sge/audio/optional_file_unique_ptr.hpp>
 #include <sge/audio/player.hpp>
+#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -32,7 +35,7 @@ sanguis::client::load::resource::sounds::~sounds()
 {
 }
 
-sge::audio::buffer_shared_ptr
+sanguis::client::load::resource::optional_sound const
 sanguis::client::load::resource::sounds::load(
 	fcppt::string const &_name
 ) const
@@ -47,38 +50,54 @@ sanguis::client::load::resource::sounds::load(
 		);
 }
 
-sge::audio::buffer_shared_ptr
+sanguis::client::load::resource::optional_sound const
 sanguis::client::load::resource::sounds::load_path(
 	boost::filesystem::path const &_path
 ) const
 {
 	return
-		fcppt::container::get_or_insert(
-			buffers_,
-			_path,
-			[
-				this
-			](
-				boost::filesystem::path const &path
-			)
-			{
-				sge::audio::optional_file_unique_ptr const file(
-					multi_loader_.load(
-						path
-					)
-				);
-
-				return
-					file
-					?
-						sge::audio::buffer_shared_ptr(
-							player_.create_buffer(
-								**file
-							)
+		fcppt::optional_bind_construct(
+			fcppt::container::get_or_insert(
+				buffers_,
+				_path,
+				[
+					this
+				](
+					boost::filesystem::path const &_npath
+				)
+				-> optional_buffer
+				{
+					sge::audio::optional_file_unique_ptr const opt_file{
+						multi_loader_.load(
+							_npath
 						)
-					:
-						sge::audio::buffer_shared_ptr()
-					;
+					};
+
+					return
+						fcppt::optional_bind_construct(
+							opt_file,
+							[
+								this
+							](
+								sge::audio::file_unique_ptr const &_file
+							)
+							-> sge::audio::buffer_unique_ptr
+							{
+								return
+									player_.create_buffer(
+										*_file
+									);
+							}
+						);
+				}
+			),
+			[](
+				sge::audio::buffer_unique_ptr const &_buffer
+			)
+			-> sge::audio::buffer &
+			{
+				return
+					*_buffer;
 			}
 		);
 }

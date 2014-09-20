@@ -1,11 +1,13 @@
 #ifndef SANGUIS_CLIENT_LOAD_RESOURCE_SOUNDS_HPP_INCLUDED
 #define SANGUIS_CLIENT_LOAD_RESOURCE_SOUNDS_HPP_INCLUDED
 
+#include <sanguis/client/load/resource/optional_sound_fwd.hpp>
 #include <sanguis/client/load/resource/sounds_fwd.hpp>
-#include <sge/audio/buffer_shared_ptr.hpp>
+#include <sge/audio/buffer_unique_ptr.hpp>
 #include <sge/audio/loader_fwd.hpp>
 #include <sge/audio/player_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/optional_decl.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
@@ -35,20 +37,26 @@ public:
 
 	~sounds();
 
-	sge::audio::buffer_shared_ptr
+	sanguis::client::load::resource::optional_sound const
 	load(
 		fcppt::string const &
 	) const;
 
-	sge::audio::buffer_shared_ptr
+	sanguis::client::load::resource::optional_sound const
 	load_path(
 		boost::filesystem::path const &
 	) const;
 private:
 	typedef
+	fcppt::optional<
+		sge::audio::buffer_unique_ptr
+	>
+	optional_buffer;
+
+	typedef
 	std::map<
 		boost::filesystem::path,
-		sge::audio::buffer_shared_ptr
+		optional_buffer
 	>
 	buffer_map;
 
