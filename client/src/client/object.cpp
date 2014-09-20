@@ -1,5 +1,6 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/media_path.hpp>
+#include <sanguis/log_stream.hpp>
 #include <sanguis/client/create_systems.hpp>
 #include <sanguis/client/log.hpp>
 #include <sanguis/client/object.hpp>
@@ -45,6 +46,7 @@
 #include <chrono>
 #include <exception>
 #include <functional>
+#include <ostream>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -280,6 +282,12 @@ sanguis::client::object::create_server(
 
 		server_.reset();
 	}
+	else
+		// The server and the client both do logging and this ensures
+		// that it's thread-safe
+		sanguis::log_stream().sync_with_stdio(
+			true
+		);
 
 	server_ =
 		fcppt::make_unique_ptr<

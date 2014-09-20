@@ -1,6 +1,6 @@
 #include <sanguis/log_context.hpp>
 #include <sanguis/log_parameters.hpp>
-#include <fcppt/io/clog.hpp>
+#include <sanguis/log_stream.hpp>
 #include <fcppt/log/level.hpp>
 #include <fcppt/log/location_fwd.hpp>
 #include <fcppt/log/parameters/object.hpp>
@@ -18,7 +18,7 @@ sanguis::log_parameters(
 			_location
 		)
 		.level_defaults(
-			fcppt::io::clog(),
+			sanguis::log_stream(),
 			fcppt::log::level::warning
 		)
 		.enabled(
