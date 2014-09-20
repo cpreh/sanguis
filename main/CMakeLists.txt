@@ -12,10 +12,6 @@ fcppt_utils_add_source_groups(
 	"${SANGUIS_MAIN_FILES}"
 )
 
-include_directories(
-	${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-
 awl_utils_add_portable_executable(
 	sanguis
 	"sanguis::main"
@@ -35,6 +31,12 @@ target_link_libraries(
 	${awl_TARGET}
 	${sgeconfig_TARGET}
 	${Boost_PROGRAM_OPTIONS_LIBRARIES}
+)
+
+target_include_directories(
+	sanguis
+	PRIVATE
+	${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
 install(

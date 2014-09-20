@@ -180,14 +180,22 @@ set(
 	src/widget/tree.cpp
 )
 
-include_directories(
-	"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
-)
-
 sanguis_add_library(
 	gui
 	"${SANGUIS_GUI_FILES}"
-	"${fcppt_core_TARGET};${sgefont_TARGET};${sgefontdraw_TARGET};${sgeimagecolor_TARGET};${sgeinput_TARGET};${sgerenderer_TARGET};${sgerucksack_TARGET};${sgerucksackviewport_TARGET};${sgesprite_TARGET};${sgetexture_TARGET}"
+	DEPS
+		${fcppt_core_TARGET}
+		${sgefont_TARGET}
+		${sgefontdraw_TARGET}
+		${sgeimagecolor_TARGET}
+		${sgeinput_TARGET}
+		${sgerenderer_TARGET}
+		${sgerucksack_TARGET}
+		${sgerucksackviewport_TARGET}
+		${sgesprite_TARGET}
+		${sgetexture_TARGET}
+	INCLUDES
+		"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
 )
 
 add_subdirectory(

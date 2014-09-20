@@ -196,12 +196,15 @@ set(
 	src/top_result.cpp
 )
 
-include_directories(
-	"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
-)
-
 sanguis_add_library(
 	creator
 	"${SANGUIS_CREATOR_FILES}"
-	"${sanguis_core_TARGET};${fcppt_core_TARGET};${sgecore_TARGET};${sgeparse_TARGET};${sgeparsejson_TARGET}"
+	DEPS
+		${sanguis_core_TARGET}
+		${fcppt_core_TARGET}
+		${sgecore_TARGET}
+		${sgeparse_TARGET}
+		${sgeparsejson_TARGET}
+	INCLUDES
+		"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
 )

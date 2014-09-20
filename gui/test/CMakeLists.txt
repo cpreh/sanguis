@@ -2,15 +2,23 @@ include(
 	AwlMainGenerator
 )
 
-include_directories(
-	include
-)
-
-macro(
+function(
 	add_gui_test
 	TEST_NAME
-	DEPS
 )
+	set(
+		MULTI_ARGS
+		"DEPS"
+	)
+
+	cmake_parse_arguments(
+		""
+		""
+		""
+		"${MULTI_ARGS}"
+		${ARGN}
+	)
+
 	set(
 		APP_NAME
 		gui_test_${TEST_NAME}
@@ -30,17 +38,30 @@ macro(
 		${APP_NAME}
 		PRIVATE
 		${awl_INCLUDE_DIRS}
+		${CMAKE_CURRENT_SOURCE_DIR}/include
 	)
 
 	target_link_libraries(
 		${APP_NAME}
 		PRIVATE
 		${sanguis_gui_TARGET}
-		${DEPS}
+		${_DEPS}
 	)
-endmacro()
+endfunction()
 
 add_gui_test(
 	main
-	"${Boost_FILESYSTEM_LIBRARY};${fcppt_core_TARGET};${awl_TARGET};${sgefont_TARGET};${sgeimagecolor_TARGET};${sgeimage2d_TARGET};${sgerenderer_TARGET};${sgerucksack_TARGET};${sgesystems_TARGET};${sgetimer_TARGET};${sgeviewport_TARGET};${sgewindow_TARGET}"
+	DEPS
+		${Boost_FILESYSTEM_LIBRARY}
+		${fcppt_core_TARGET}
+		${awl_TARGET}
+		${sgefont_TARGET}
+		${sgeimagecolor_TARGET}
+		${sgeimage2d_TARGET}
+		${sgerenderer_TARGET}
+		${sgerucksack_TARGET}
+		${sgesystems_TARGET}
+		${sgetimer_TARGET}
+		${sgeviewport_TARGET}
+		${sgewindow_TARGET}
 )

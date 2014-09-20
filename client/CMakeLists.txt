@@ -853,5 +853,41 @@ sanguis_generate_symbol_header(
 sanguis_add_library(
 	client
 	"${SANGUIS_CLIENT_FILES}"
-	"${sanguis_collision_TARGET};${sanguis_common_TARGET};${sanguis_core_TARGET};${sanguis_creator_TARGET};${sanguis_gui_TARGET};${sanguis_model_TARGET};${sanguis_server_TARGET};${sgeaudio_TARGET};${sgecharconv_TARGET};${sgeconfig_TARGET};${sgeconsole_TARGET};${sgeconsolegfx_TARGET};${sgecore_TARGET};${sgefont_TARGET};${sgefontdraw_TARGET};${sgeimagecolor_TARGET};${sgeinput_TARGET};${sgelog_TARGET};${sgeparse_TARGET};${sgeparseini_TARGET};${sgeparsejson_TARGET};${sgerenderer_TARGET};${sgesprite_TARGET};${sgesystems_TARGET};${sgetimer_TARGET};${sgetexture_TARGET};${sgeviewport_TARGET};${sgewindow_TARGET};${alda_TARGET};${awl_TARGET};${fcppt_filesystem_TARGET};${fcppt_core_TARGET};${FcpptThreads_LIBRARIES};${Boost_PROGRAM_OPTIONS_LIBRARIES}"
+	DEPS
+		${sanguis_collision_TARGET}
+		${sanguis_common_TARGET}
+		${sanguis_core_TARGET}
+		${sanguis_creator_TARGET}
+		${sanguis_gui_TARGET}
+		${sanguis_model_TARGET}
+		${sanguis_server_TARGET}
+		${sgeaudio_TARGET}
+		${sgecharconv_TARGET}
+		${sgeconfig_TARGET}
+		${sgeconsole_TARGET}
+		${sgeconsolegfx_TARGET}
+		${sgecore_TARGET}
+		${sgefont_TARGET}
+		${sgefontdraw_TARGET}
+		${sgeimagecolor_TARGET}
+		${sgeinput_TARGET}
+		${sgelog_TARGET}
+		${sgeparse_TARGET}
+		${sgeparseini_TARGET}
+		${sgeparsejson_TARGET}
+		${sgerenderer_TARGET}
+		${sgesprite_TARGET}
+		${sgesystems_TARGET}
+		${sgetimer_TARGET}
+		${sgetexture_TARGET}
+		${sgeviewport_TARGET}
+		${sgewindow_TARGET}
+		${alda_TARGET}
+		${awl_TARGET}
+		${fcppt_filesystem_TARGET}
+		${fcppt_core_TARGET}
+		${FcpptThreads_LIBRARIES}
+		${Boost_PROGRAM_OPTIONS_LIBRARIES}
+	COMPILE_FLAGS
+		${FcpptThreads_DEFINITIONS}
 )

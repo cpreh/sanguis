@@ -112,12 +112,14 @@ set(
 	src/weapon_category.cpp
 )
 
-include_directories(
-	"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
-)
-
 sanguis_add_library(
 	model
 	"${SANGUIS_MODEL_FILES}"
-	"${fcppt_core_TARGET};${fcppt_filesystem_TARGET};${sgeparse_TARGET};${sgeparsejson_TARGET}"
+	DEPS
+		${fcppt_core_TARGET}
+		${fcppt_filesystem_TARGET}
+		${sgeparse_TARGET}
+		${sgeparsejson_TARGET}
+	INCLUDES
+		"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
 )

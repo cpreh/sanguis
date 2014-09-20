@@ -63,12 +63,18 @@ set(
 	src/to_model.cpp
 )
 
-include_directories(
-	"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
-)
-
 sanguis_add_library(
 	tools_libmergeimage
 	"${SANGUIS_TOOLS_LIBMERGEIMAGE_FILES}"
-	"${sanguis_core_TARGET};${sanguis_model_TARGET};${sgeimage_TARGET};${sgeimagecolor_TARGET};${sgeimage2d_TARGET};${fcppt_core_TARGET};${fcppt_filesystem_TARGET};${Boost_FILESYSTEM_LIBRARIES}"
+	DEPS
+		${sanguis_core_TARGET}
+		${sanguis_model_TARGET}
+		${sgeimage_TARGET}
+		${sgeimagecolor_TARGET}
+		${sgeimage2d_TARGET}
+		${fcppt_core_TARGET}
+		${fcppt_filesystem_TARGET}
+		${Boost_FILESYSTEM_LIBRARIES}
+	INCLUDES
+		"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
 )

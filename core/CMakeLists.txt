@@ -17,5 +17,7 @@ set(
 sanguis_add_library(
 	core
 	"${SANGUIS_CORE_FILES}"
-	"${sgeconfig_TARGET};${fcppt_core_TARGET}"
+	DEPS
+		${sgeconfig_TARGET}
+		${fcppt_core_TARGET}
 )

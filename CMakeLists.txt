@@ -73,10 +73,6 @@ if(
 		FcpptThreads REQUIRED
 	)
 
-	add_definitions(
-		${FcpptThreads_DEFINITIONS}
-	)
-
 	list(
 		APPEND
 		SGE_COMPONENTS
@@ -229,13 +225,32 @@ if(
 	)
 endif()
 
+include(
+	CMakeParseArguments
+)
+
 function(
 	sanguis_add_library_base
 	LIBNAME
-	FILES
-	DEPS
 	VARIANT
+	FILES
 )
+	set(
+		MULTI_ARGS
+		"DEPS"
+		"INCLUDES"
+		"COMPILE_FLAGS"
+		"COMPILE_DEFINITIONS"
+	)
+
+	cmake_parse_arguments(
+		""
+		""
+		""
+		"${MULTI_ARGS}"
+		${ARGN}
+	)
+
 	add_library(
 		"${LIBNAME}"
 		"${VARIANT}"
@@ -245,17 +260,27 @@ function(
 	target_link_libraries(
 		"${LIBNAME}"
 		PRIVATE
-		${DEPS}
+		${_DEPS}
+	)
+
+	target_compile_definitions(
+		"${LIBNAME}"
+		PRIVATE
+		${_COMPILE_DEFINITIONS}
 	)
 
 	target_include_directories(
 		"${LIBNAME}"
 		PUBLIC
 		"${CMAKE_CURRENT_SOURCE_DIR}/include"
+		PRIVATE
+		${_INCLUDES}
 	)
 
 	fcppt_utils_set_target_compiler_flags(
 		"${LIBNAME}"
+		ADDITIONAL_FLAGS
+		${_COMPILE_FLAGS}
 	)
 
 	install(
@@ -270,8 +295,26 @@ function(
 	sanguis_add_library
 	LIBNAME
 	FILES
-	DEPS
 )
+	set(
+		MULTI_ARGS
+		"DEPS"
+		"INCLUDES"
+		"COMPILE_FLAGS"
+		"COMPILE_DEFINITIONS"
+		"COMPILE_DEFINITIONS_SHARED_PUBLIC"
+		"COMPILE_DEFINITIONS_SHARED_PRIVATE"
+		"COMPILE_DEFINITIONS_STATIC_PUBLIC"
+	)
+
+	cmake_parse_arguments(
+		""
+		""
+		""
+		"${MULTI_ARGS}"
+		${ARGN}
+	)
+
 	set(
 		FULL_NAME
 		sanguis_${LIBNAME}
@@ -295,9 +338,16 @@ function(
 
 		sanguis_add_library_base(
 			"${FULL_NAME_STATIC}"
-			"${FILES}"
-			"${DEPS}"
 			"STATIC"
+			"${FILES}"
+			DEPS
+				${_DEPS}
+			COMPILE_DEFINITIONS
+				${_COMPILE_DEFINITIONS}
+			COMPILE_FLAGS
+				${_COMPILE_FLAGS}
+			INCLUDES
+				${_INCLUDES}
 		)
 
 		set(
@@ -309,6 +359,7 @@ function(
 			"${FULL_NAME_STATIC}"
 			PUBLIC
 			"SANGUIS_STATIC_LINK"
+			${_COMPILE_DEFINITIONS_STATIC_PUBLIC}
 		)
 	endif()
 
@@ -317,9 +368,24 @@ function(
 	)
 		sanguis_add_library_base(
 			"${FULL_NAME}"
-			"${FILES}"
-			"${DEPS}"
 			"SHARED"
+			"${FILES}"
+			DEPS
+				${_DEPS}
+			COMPILE_DEFINITIONS
+				${_COMPILE_DEFINITIONS}
+			COMPILE_FLAGS
+				${_COMPILE_FLAGS}
+			INCLUDES
+				${_INCLUDES}
+		)
+
+		target_compile_definitions(
+			"${FULL_NAME}"
+			PUBLIC
+			${_COMPILE_DEFINITIONS_SHARED_PUBLIC}
+			PRIVATE
+			${_COMPILE_DEFINITIONS_SHARED_PRIVATE}
 		)
 
 		set(

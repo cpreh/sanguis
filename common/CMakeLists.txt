@@ -36,8 +36,18 @@ set(
 	include/sanguis/load/destructible_name.hpp
 	include/sanguis/load/enemy_name.hpp
 	include/sanguis/load/friend_name.hpp
+	include/sanguis/load/model/aoe_projectile_path.hpp
+	include/sanguis/load/model/bullet_path.hpp
+	include/sanguis/load/model/destructible_path.hpp
+	include/sanguis/load/model/enemy_path.hpp
+	include/sanguis/load/model/friend_path.hpp
 	include/sanguis/load/model/make_path.hpp
+	include/sanguis/load/model/path.hpp
+	include/sanguis/load/model/path_fwd.hpp
 	include/sanguis/load/model/path_to_json_file.hpp
+	include/sanguis/load/model/pickup_path.hpp
+	include/sanguis/load/model/player_path.hpp
+	include/sanguis/load/model/weapon_pickup_path.hpp
 	include/sanguis/load/pickup_name.hpp
 	include/sanguis/load/weapon_pickup_name.hpp
 	include/sanguis/magazine_extra.hpp
@@ -433,10 +443,8 @@ set(
 	include/sanguis/world_id_type.hpp
 	include/sanguis/world_name.hpp
 	include/sanguis/world_name_fwd.hpp
-	src/aux_/load/weapon_pickup_name_visitor.cpp
 	src/duration_second.cpp
 	src/exception.cpp
-	src/include/sanguis/aux_/load/weapon_pickup_name_visitor.hpp
 	src/io_service.cpp
 	src/io_service_impl.cpp
 	src/load/aoe_projectile_name.cpp
@@ -445,6 +453,7 @@ set(
 	src/load/friend_name.cpp
 	src/load/model/make_path.cpp
 	src/load/model/path_to_json_file.cpp
+	src/load/model/pickup_path.cpp
 	src/load/pickup_name.cpp
 	src/load/weapon_pickup_name.cpp
 	src/media_path.cpp
@@ -525,34 +534,22 @@ set(
 	src/weapon_type_to_is_primary.cpp
 )
 
-include_directories(
-	${CMAKE_CURRENT_SOURCE_DIR}/src/include
-)
-
 sanguis_add_library(
 	common
 	"${SANGUIS_COMMON_FILES}"
-	"${sanguis_creator_TARGET};${sgecharconv_TARGET};${alda_TARGET};${fcppt_filesystem_TARGET};${fcppt_core_TARGET};${Boost_FILESYSTEM_LIBRARIES};${Boost_SYSTEM_LIBRARIES};${ASIO_LIBS}"
-)
-
-if(
-	ENABLE_SHARED
-)
-	target_compile_definitions(
-		sanguis_common
-		PUBLIC
+	DEPS
+		${sanguis_creator_TARGET}
+		${sgecharconv_TARGET}
+		${alda_TARGET}
+		${fcppt_filesystem_TARGET}
+		${fcppt_core_TARGET}
+		${Boost_FILESYSTEM_LIBRARIES}
+		${Boost_SYSTEM_LIBRARIES}
+		${ASIO_LIBS}
+	COMPILE_DEFINITIONS_SHARED_PUBLIC
 		ALDA_EXTERNAL_INSTANTIATION
-		PRIVATE
+	COMPILE_DEFINITIONS_SHARED_PRIVATE
 		alda_external_EXPORTS
-	)
-endif()
-
-if(
-	ENABLE_STATIC
-)
-	target_compile_definitions(
-		sanguis_common_static
-		PUBLIC
+	COMPILE_DEFINITIONS_STATIC_PUBLIC
 		ALDA_EXTERNAL_STATIC_LINK
-	)
-endif()
+)

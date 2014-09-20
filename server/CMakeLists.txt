@@ -994,7 +994,22 @@ set(
 sanguis_add_library(
 	server
 	"${SANGUIS_SERVER_FILES}"
-	"${sanguis_common_TARGET};${sanguis_collision_TARGET};${sanguis_core_TARGET};${sanguis_creator_TARGET};${sanguis_model_TARGET};${sgecharconv_TARGET};${sgeconfig_TARGET};${sgeconsole_TARGET};${sgefont_TARGET};${sgetimer_TARGET};${alda_TARGET};${fcppt_filesystem_TARGET};${fcppt_core_TARGET};${Boost_FILESYSTEM_LIBRARIES};${ASIO_LIBS}"
+	DEPS
+		${sanguis_common_TARGET}
+		${sanguis_collision_TARGET}
+		${sanguis_core_TARGET}
+		${sanguis_creator_TARGET}
+		${sanguis_model_TARGET}
+		${sgecharconv_TARGET}
+		${sgeconfig_TARGET}
+		${sgeconsole_TARGET}
+		${sgefont_TARGET}
+		${sgetimer_TARGET}
+		${alda_TARGET}
+		${fcppt_filesystem_TARGET}
+		${fcppt_core_TARGET}
+		${Boost_FILESYSTEM_LIBRARIES}
+		${ASIO_LIBS}
 )
 
 set(

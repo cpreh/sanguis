@@ -147,10 +147,6 @@ if(
 	)
 endif()
 
-include_directories(
-	"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
-)
-
 set(
 	COLLISION_LINK_TARGETS
 	${fcppt_core_TARGET}
@@ -170,7 +166,10 @@ endif()
 sanguis_add_library(
 	collision
 	"${SANGUIS_COLLISION_FILES}"
-	"${COLLISION_LINK_TARGETS}"
+	DEPS
+		${COLLISION_LINK_TARGETS}
+	INCLUDES
+		"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
 )
 
 add_subdirectory(
