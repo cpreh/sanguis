@@ -16,8 +16,8 @@
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/projectiles/aoe_projectile.hpp>
+#include <sanguis/server/entities/projectiles/base.hpp>
 #include <sanguis/server/entities/projectiles/life_time.hpp>
-#include <sanguis/server/entities/projectiles/projectile.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 
 
@@ -31,8 +31,7 @@ sanguis::server::entities::projectiles::aoe_projectile::aoe_projectile(
 	sanguis::server::direction const _direction
 )
 :
-	sanguis::server::entities::projectiles::projectile(
-		sanguis::projectile_type::aoe,
+	sanguis::server::entities::projectiles::base(
 		_team,
 		_movement_speed,
 		sanguis::load::model::aoe_projectile_path(

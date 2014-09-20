@@ -8,8 +8,8 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
+#include <sanguis/server/entities/projectiles/base.hpp>
 #include <sanguis/server/entities/projectiles/life_time.hpp>
-#include <sanguis/server/entities/projectiles/projectile.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -25,7 +25,7 @@ namespace projectiles
 
 class aoe_projectile
 :
-	public sanguis::server::entities::projectiles::projectile
+	public sanguis::server::entities::projectiles::base
 {
 	FCPPT_NONCOPYABLE(
 		aoe_projectile

@@ -1,6 +1,5 @@
 #include <sanguis/duration_second.hpp>
 #include <sanguis/projectile_type.hpp>
-#include <sanguis/load/model/bullet_path.hpp>
 #include <sanguis/server/dim.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/team.hpp>
@@ -22,12 +21,11 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 )
 :
 	sanguis::server::entities::projectiles::projectile(
-		sanguis::projectile_type::simple_bullet,
+		sanguis::projectile_type::bullet,
 		_team,
 		sanguis::server::entities::movement_speed(
 			500.f
 		),
-		sanguis::load::model::bullet_path(),
 		_load_context,
 		sanguis::server::entities::projectiles::life_time(
 			sanguis::duration_second(

@@ -277,6 +277,7 @@ set(
 	include/sanguis/server/entities/player_unique_ptr.hpp
 	include/sanguis/server/entities/projectiles/aoe_damage.hpp
 	include/sanguis/server/entities/projectiles/aoe_projectile.hpp
+	include/sanguis/server/entities/projectiles/base.hpp
 	include/sanguis/server/entities/projectiles/collision_group.hpp
 	include/sanguis/server/entities/projectiles/grenade.hpp
 	include/sanguis/server/entities/projectiles/life_time.hpp
@@ -813,6 +814,7 @@ set(
 	src/server/entities/player.cpp
 	src/server/entities/projectiles/aoe_damage.cpp
 	src/server/entities/projectiles/aoe_projectile.cpp
+	src/server/entities/projectiles/base.cpp
 	src/server/entities/projectiles/collision_group.cpp
 	src/server/entities/projectiles/grenade.cpp
 	src/server/entities/projectiles/melee.cpp

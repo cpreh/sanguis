@@ -2,7 +2,6 @@
 #include <sanguis/duration_second.hpp>
 #include <sanguis/projectile_type.hpp>
 #include <sanguis/random_variate_impl.hpp>
-#include <sanguis/load/model/bullet_path.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/team.hpp>
@@ -31,13 +30,12 @@ sanguis::server::entities::projectiles::scatter::scatter(
 )
 :
 	sanguis::server::entities::projectiles::projectile(
-		sanguis::projectile_type::simple_bullet,
+		sanguis::projectile_type::bullet,
 		_team,
 		sanguis::server::entities::movement_speed(
 			300.f
 		),
 		// TODO
-		sanguis::load::model::bullet_path(),
 		_load_context,
 		sanguis::server::entities::projectiles::life_time(
 			sanguis::duration_second(
@@ -96,7 +94,6 @@ sanguis::server::entities::projectiles::scatter::update()
 		)
 	)
 		return;
-
 
 	sanguis::server::angle const random_angle(
 		angle_rng_()

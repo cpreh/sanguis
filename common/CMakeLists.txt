@@ -37,7 +37,6 @@ set(
 	include/sanguis/load/enemy_name.hpp
 	include/sanguis/load/friend_name.hpp
 	include/sanguis/load/model/aoe_projectile_path.hpp
-	include/sanguis/load/model/bullet_path.hpp
 	include/sanguis/load/model/destructible_path.hpp
 	include/sanguis/load/model/enemy_path.hpp
 	include/sanguis/load/model/friend_path.hpp
@@ -47,8 +46,10 @@ set(
 	include/sanguis/load/model/path_to_json_file.hpp
 	include/sanguis/load/model/pickup_path.hpp
 	include/sanguis/load/model/player_path.hpp
+	include/sanguis/load/model/projectile_path.hpp
 	include/sanguis/load/model/weapon_pickup_path.hpp
 	include/sanguis/load/pickup_name.hpp
+	include/sanguis/load/projectile_name.hpp
 	include/sanguis/load/weapon_pickup_name.hpp
 	include/sanguis/magazine_extra.hpp
 	include/sanguis/magazine_remaining.hpp
@@ -452,7 +453,6 @@ set(
 	src/load/enemy_name.cpp
 	src/load/friend_name.cpp
 	src/load/model/aoe_projectile_path.cpp
-	src/load/model/bullet_path.cpp
 	src/load/model/destructible_path.cpp
 	src/load/model/enemy_path.cpp
 	src/load/model/friend_path.cpp
@@ -460,8 +460,10 @@ set(
 	src/load/model/path_to_json_file.cpp
 	src/load/model/pickup_path.cpp
 	src/load/model/player_path.cpp
+	src/load/model/projectile_path.cpp
 	src/load/model/weapon_pickup_path.cpp
 	src/load/pickup_name.cpp
+	src/load/projectile_name.cpp
 	src/load/weapon_pickup_name.cpp
 	src/media_path.cpp
 	src/messages/call/result.cpp

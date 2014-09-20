@@ -9,9 +9,8 @@ namespace sanguis
 
 enum class projectile_type
 {
-	simple_bullet,
-	aoe, // TODO: Remove this!
-	fcppt_maximum = aoe
+	bullet,
+	fcppt_maximum = bullet
 };
 
 }
