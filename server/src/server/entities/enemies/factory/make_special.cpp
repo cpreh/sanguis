@@ -2,7 +2,6 @@
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/attribute_container.hpp>
-#include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/entities/enemies/is_unique.hpp>
 #include <sanguis/server/entities/enemies/parameters.hpp>
 #include <sanguis/server/entities/enemies/special.hpp>
@@ -31,10 +30,6 @@ sanguis::server::entities::enemies::factory::make_special(
 	sanguis::server::entities::enemies::is_unique const _is_unique
 )
 {
-	sanguis::server::entities::enemies::difficulty const difficulty(
-		_parameters.difficulty()
-	);
-
 	typedef
 	sanguis::server::random::split_array<
 		2
