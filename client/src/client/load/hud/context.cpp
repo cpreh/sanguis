@@ -43,7 +43,8 @@ sanguis::client::load::hud::context::context(
 				FCPPT_TEXT("icons")
 				/
 				FCPPT_TEXT("weapons")
-			)
+			),
+			boost::filesystem::directory_iterator()
 		)
 	)
 	{

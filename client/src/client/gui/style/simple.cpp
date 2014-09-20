@@ -379,13 +379,13 @@ sanguis::client::gui::style::simple::draw_transparent_frame(
 		}
 	)
 	{
-		sge::texture::part const &part{
+		sge::texture::part const &part(
 			textures_.load(
 				sanguis::client::load::resource::texture_identifier{
 					tile.second
 				}
 			)
-		};
+		);
 
 		_renderer.draw_image(
 				_context,
@@ -394,21 +394,21 @@ sanguis::client::gui::style::simple::draw_transparent_frame(
 		);
 	}
 
-	sge::texture::part const &part_v{
+	sge::texture::part const &part_v(
 		textures_.load(
 			sanguis::client::load::resource::texture_identifier{
 				FCPPT_TEXT("hud_frame_transparent_v")
 			}
 		)
-	};
+	);
 
-	sge::texture::part const &part_h{
+	sge::texture::part const &part_h(
 		textures_.load(
 			sanguis::client::load::resource::texture_identifier{
 				FCPPT_TEXT("hud_frame_transparent_h")
 			}
 		)
-	};
+	);
 
 	_renderer.draw_image_repeat(
 			_context,

@@ -30,7 +30,8 @@ sanguis::client::load::auras::context::context(
 					sanguis::media_path()
 					/
 					FCPPT_TEXT("auras")
-				)
+				),
+				boost::filesystem::directory_iterator()
 			),
 			[
 				&_resources
