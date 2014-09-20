@@ -4,7 +4,6 @@
 #include <sanguis/client/load/resource/search_texture_names.hpp>
 #include <sanguis/client/load/resource/texture_identifier.hpp>
 #include <sanguis/client/load/resource/textures.hpp>
-#include <sanguis/client/load/resource/map_get_or_create.hpp>
 #include <sge/image2d/file.hpp>
 #include <sge/image2d/system.hpp>
 #include <sge/renderer/resource_flags_field.hpp>
@@ -18,6 +17,7 @@
 #include <fcppt/exception.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>
@@ -33,7 +33,7 @@ sanguis::client::load::resource::textures::load(
 ) const
 {
 	return
-		sanguis::client::load::resource::map_get_or_create(
+		fcppt::container::get_or_insert(
 			textures_,
 			_id,
 			std::bind(
@@ -51,7 +51,7 @@ sanguis::client::load::resource::textures::load(
 {
 	return
 		sge::texture::const_part_shared_ptr(
-			sanguis::client::load::resource::map_get_or_create(
+			fcppt::container::get_or_insert(
 				unnamed_textures_,
 				_path,
 				std::bind(

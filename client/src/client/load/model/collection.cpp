@@ -3,9 +3,8 @@
 #include <sanguis/client/load/resource/context_fwd.hpp>
 #include <sanguis/load/model/make_path.hpp>
 #include <sanguis/load/model/path.hpp>
-#include <fcppt/from_optional.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/container/find_opt.hpp>
+#include <fcppt/container/get_or_insert.hpp>
 
 
 sanguis::client::load::model::object const &
@@ -14,31 +13,24 @@ sanguis::client::load::model::collection::operator[](
 ) const
 {
 	return
-		*fcppt::from_optional(
-			fcppt::container::find_opt(
-				models_,
-				_path
-			),
+		*fcppt::container::get_or_insert(
+			models_,
+			_path,
 			[
-				this,
-				&_path
-			]()
-			-> model_unique_ptr &
+				this
+			](
+				sanguis::load::model::path const &_npath
+			)
 			{
 				return
-					models_.insert(
-						std::make_pair(
-							_path,
-							fcppt::make_unique_ptr<
-								sanguis::client::load::model::object
-							>(
-								sanguis::load::model::make_path(
-									_path
-								),
-								resources_
-							)
-						)
-					).first->second;
+					fcppt::make_unique_ptr<
+						sanguis::client::load::model::object
+					>(
+						sanguis::load::model::make_path(
+							_npath
+						),
+						resources_
+					);
 			}
 		);
 }

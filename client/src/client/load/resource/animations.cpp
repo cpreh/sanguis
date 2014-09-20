@@ -5,7 +5,6 @@
 #include <sanguis/client/load/log.hpp>
 #include <sanguis/client/load/next_file.hpp>
 #include <sanguis/client/load/resource/animations.hpp>
-#include <sanguis/client/load/resource/map_get_or_create.hpp>
 #include <sanguis/client/load/resource/textures.hpp>
 #include <sanguis/client/load/resource/animation/entity.hpp>
 #include <sanguis/client/load/resource/animation/entity_vector.hpp>
@@ -20,6 +19,7 @@
 #include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/predicate.hpp>
@@ -37,7 +37,7 @@ sanguis::client::load::resource::animations::load(
 ) const
 {
 	return
-		sanguis::client::load::resource::map_get_or_create(
+		fcppt::container::get_or_insert(
 			animations_,
 			_dir,
 			std::bind(

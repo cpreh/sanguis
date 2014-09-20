@@ -1,5 +1,4 @@
 #include <sanguis/media_path.hpp>
-#include <sanguis/client/load/resource/map_get_or_create.hpp>
 #include <sanguis/client/load/resource/sounds.hpp>
 #include <sge/audio/buffer.hpp>
 #include <sge/audio/buffer_shared_ptr.hpp>
@@ -8,6 +7,7 @@
 #include <sge/audio/optional_file_unique_ptr.hpp>
 #include <sge/audio/player.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -53,7 +53,7 @@ sanguis::client::load::resource::sounds::load_path(
 ) const
 {
 	return
-		sanguis::client::load::resource::map_get_or_create(
+		fcppt::container::get_or_insert(
 			buffers_,
 			_path,
 			[

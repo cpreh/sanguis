@@ -491,7 +491,6 @@ set(
 	include/sanguis/client/load/resource/animations_fwd.hpp
 	include/sanguis/client/load/resource/context.hpp
 	include/sanguis/client/load/resource/context_fwd.hpp
-	include/sanguis/client/load/resource/map_get_or_create.hpp
 	include/sanguis/client/load/resource/search_texture_names.hpp
 	include/sanguis/client/load/resource/sounds.hpp
 	include/sanguis/client/load/resource/sounds_fwd.hpp

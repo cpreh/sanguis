@@ -8,12 +8,8 @@
 #include <sanguis/client/load/tiles/sort_pair.hpp>
 #include <sanguis/client/load/tiles/tile_pair.hpp>
 #include <sanguis/client/load/tiles/to_name.hpp>
-#include <fcppt/from_optional.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/container/find_opt.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <utility>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/container/get_or_insert.hpp>
 
 
 sanguis::client::load::tiles::context::context(
@@ -76,53 +72,36 @@ sanguis::client::load::tiles::context::any_set(
 	sanguis::client::load::tiles::category const &_category
 )
 {
-	typename Map::key_type const sorted(
-		sanguis::client::load::tiles::sort_pair(
-			_pair
-		)
-	);
-
 	return
-		fcppt::from_optional(
-			fcppt::container::find_opt(
-				static_cast<
-					Map const &
-				>(
-					_map
-				),
-				sorted
+		fcppt::container::get_or_insert(
+			_map,
+			sanguis::client::load::tiles::sort_pair(
+				_pair
 			),
 			[
 				this,
-				sorted,
-				&_map,
 				&_to_name,
 				&_category
-			]()
-			->
-			sanguis::client::load::tiles::set const &
+			](
+				typename Map::key_type const _sorted
+			)
 			{
 				return
-					_map.insert(
-						std::make_pair(
-							sorted,
-							sanguis::client::load::tiles::set(
-								textures_,
-								_category,
-								sanguis::client::load::tiles::name(
-									_to_name(
-										sorted.first
-									)
-									+
-									FCPPT_TEXT('_')
-									+
-									_to_name(
-										sorted.second
-									)
-								)
+					sanguis::client::load::tiles::set(
+						textures_,
+						_category,
+						sanguis::client::load::tiles::name(
+							_to_name(
+								_sorted.first
+							)
+							+
+							FCPPT_TEXT('_')
+							+
+							_to_name(
+								_sorted.second
 							)
 						)
-					).first->second;
+					);
 			}
 		);
 }
