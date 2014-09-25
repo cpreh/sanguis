@@ -62,6 +62,13 @@ private:
 	attributes() const
 	override;
 
+	void
+	owner_lost()
+	override;
+
+	void
+	kill_spawned();
+
 	virtual
 	sanguis::weapon_attribute_vector
 	extra_attributes() const = 0;

@@ -116,6 +116,10 @@ protected:
 		sanguis::server::weapons::attack const &
 	) = 0;
 
+	virtual
+	void
+	owner_lost();
+
 	sanguis::diff_clock const &
 	diff_clock() const;
 

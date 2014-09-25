@@ -115,6 +115,8 @@ sanguis::server::weapons::weapon::owner(
 
 		owner_ =
 			sanguis::server::entities::optional_with_weapon_ref();
+
+		this->owner_lost();
 	}
 }
 
@@ -250,6 +252,12 @@ sanguis::server::weapons::weapon::description() const
 			:
 				this->attributes()
 		);
+}
+
+
+void
+sanguis::server::weapons::weapon::owner_lost()
+{
 }
 
 sanguis::diff_clock const &

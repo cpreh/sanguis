@@ -104,14 +104,7 @@ sanguis::server::weapons::spawn::do_attack(
 					sanguis::server::entities::base &_inserted
 				)
 				{
-					if(
-						spawned_
-					)
-						dynamic_cast<
-							sanguis::server::entities::ifaces::with_health &
-						>(
-							*spawned_
-						).kill();
+					this->kill_spawned();
 
 					spawned_ =
 						dynamic_cast<
@@ -135,4 +128,23 @@ sanguis::server::weapons::spawn::attributes() const
 			this->extra_attributes(),
 			attributes_
 		);
+}
+
+void
+sanguis::server::weapons::spawn::owner_lost()
+{
+	this->kill_spawned();
+}
+
+void
+sanguis::server::weapons::spawn::kill_spawned()
+{
+	if(
+		spawned_
+	)
+		dynamic_cast<
+			sanguis::server::entities::ifaces::with_health &
+		>(
+			*spawned_
+		).kill();
 }
