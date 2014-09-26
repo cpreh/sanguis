@@ -7,10 +7,14 @@
 #include <sanguis/client/machine_fwd.hpp>
 #include <sanguis/client/server_callback.hpp>
 #include <sanguis/client/config/settings/object_fwd.hpp>
-#include <sanguis/client/states/menu_fwd.hpp>
 #include <sanguis/client/load/context_fwd.hpp>
+#include <sanguis/client/states/menu_fwd.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/messages/client/base_fwd.hpp>
+#include <alda/net/host.hpp>
+#include <alda/net/port.hpp>
+#include <alda/net/buffer/circular_receive/object_fwd.hpp>
+#include <alda/net/client/object.hpp>
 #include <sge/console/gfx/object_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
@@ -20,10 +24,6 @@
 #include <sge/renderer/device/index.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <sge/window/system_fwd.hpp>
-#include <alda/net/host.hpp>
-#include <alda/net/port.hpp>
-#include <alda/net/buffer/circular_receive/object_fwd.hpp>
-#include <alda/net/client/object.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/signal/scoped_connection.hpp>

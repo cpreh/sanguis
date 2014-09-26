@@ -9,18 +9,18 @@
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/weapon_status_fwd.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/world_name.hpp>
-#include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/collision/world/object_unique_ptr.hpp>
 #include <sanguis/creator/destructible_container.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/name.hpp>
 #include <sanguis/creator/opening_container.hpp>
-#include <sanguis/creator/top_result_fwd.hpp>
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/spawn_container.hpp>
+#include <sanguis/creator/top_result_fwd.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
 #include <sanguis/server/angle_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
@@ -43,11 +43,11 @@
 #include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/entity_map.hpp>
 #include <sanguis/server/world/entity_vector.hpp>
-#include <sanguis/server/world/insert_pair_fwd.hpp>
 #include <sanguis/server/world/insert_pair_container.hpp>
+#include <sanguis/server/world/insert_pair_fwd.hpp>
 #include <sanguis/server/world/object_fwd.hpp>
-#include <sanguis/server/world/pickup_spawner.hpp>
 #include <sanguis/server/world/parameters_fwd.hpp>
+#include <sanguis/server/world/pickup_spawner.hpp>
 #include <sanguis/server/world/sight_range_map.hpp>
 #include <fcppt/noncopyable.hpp>
 

@@ -4,8 +4,8 @@
 #include <sanguis/aura_type_vector.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/client/draw2d/entities/with_auras_parameters_decl.hpp>
-#include <sanguis/client/load/auras/context_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
+#include <sanguis/client/load/auras/context_fwd.hpp>
 
 
 template<

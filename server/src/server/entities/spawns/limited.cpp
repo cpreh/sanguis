@@ -7,9 +7,9 @@
 #include <sanguis/server/entities/spawns/interval.hpp>
 #include <sanguis/server/entities/spawns/limit.hpp>
 #include <sanguis/server/entities/spawns/limited.hpp>
-#include <sanguis/server/entities/spawns/total_count.hpp>
 #include <sanguis/server/entities/spawns/size_type.hpp>
 #include <sanguis/server/entities/spawns/spawn.hpp>
+#include <sanguis/server/entities/spawns/total_count.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/assert/pre.hpp>

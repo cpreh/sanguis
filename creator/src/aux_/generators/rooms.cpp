@@ -1,26 +1,3 @@
-#include <fcppt/assert/unreachable.hpp>
-#include <fcppt/math/box/center.hpp>
-#include <fcppt/math/box/contains_point.hpp>
-#include <fcppt/math/box/object.hpp>
-#include <fcppt/math/box/output.hpp>
-#include <fcppt/math/box/rect.hpp>
-#include <fcppt/math/box/structure_cast.hpp>
-#include <fcppt/math/vector/structure_cast.hpp>
-#include <fcppt/optional.hpp>
-#include <fcppt/random/distribution/basic.hpp>
-#include <fcppt/random/make_variate.hpp>
-#include <fcppt/random/distribution/make_basic.hpp>
-#include <fcppt/random/distribution/parameters/make_uniform_indices_advanced.hpp>
-#include <sanguis/creator/aux_/enemy_type_container.hpp>
-#include <sanguis/creator/aux_/filled_rect.hpp>
-#include <sanguis/creator/aux_/generators/rooms.hpp>
-#include <sanguis/creator/aux_/parameters.hpp>
-#include <sanguis/creator/aux_/place_spawners.hpp>
-#include <sanguis/creator/aux_/random/generator.hpp>
-#include <sanguis/creator/aux_/random/uniform_size.hpp>
-#include <sanguis/creator/aux_/random/uniform_size_variate.hpp>
-#include <sanguis/creator/aux_/rect.hpp>
-#include <sanguis/creator/aux_/result.hpp>
 #include <sanguis/creator/background_grid.hpp>
 #include <sanguis/creator/background_tile.hpp>
 #include <sanguis/creator/destructible_container.hpp>
@@ -35,10 +12,34 @@
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/tile_is_solid.hpp>
+#include <sanguis/creator/aux_/enemy_type_container.hpp>
+#include <sanguis/creator/aux_/filled_rect.hpp>
+#include <sanguis/creator/aux_/parameters.hpp>
+#include <sanguis/creator/aux_/place_spawners.hpp>
+#include <sanguis/creator/aux_/rect.hpp>
+#include <sanguis/creator/aux_/result.hpp>
+#include <sanguis/creator/aux_/generators/rooms.hpp>
+#include <sanguis/creator/aux_/random/generator.hpp>
+#include <sanguis/creator/aux_/random/uniform_size.hpp>
+#include <sanguis/creator/aux_/random/uniform_size_variate.hpp>
+#include <fcppt/optional.hpp>
+#include <fcppt/assert/unreachable.hpp>
+#include <fcppt/math/box/center.hpp>
+#include <fcppt/math/box/contains_point.hpp>
+#include <fcppt/math/box/object.hpp>
+#include <fcppt/math/box/output.hpp>
+#include <fcppt/math/box/rect.hpp>
+#include <fcppt/math/box/structure_cast.hpp>
+#include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/random/make_variate.hpp>
+#include <fcppt/random/distribution/basic.hpp>
+#include <fcppt/random/distribution/make_basic.hpp>
+#include <fcppt/random/distribution/parameters/make_uniform_indices_advanced.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
+
 
 namespace
 {

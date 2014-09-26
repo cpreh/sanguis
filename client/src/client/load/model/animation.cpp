@@ -3,8 +3,8 @@
 #include <sanguis/client/load/model/make_series.hpp>
 #include <sanguis/client/load/model/make_sound.hpp>
 #include <sanguis/client/load/model/make_texture.hpp>
-#include <sanguis/client/load/resource/animation/series.hpp>
 #include <sanguis/client/load/resource/optional_sound.hpp>
+#include <sanguis/client/load/resource/animation/series.hpp>
 #include <sanguis/model/animation.hpp>
 
 

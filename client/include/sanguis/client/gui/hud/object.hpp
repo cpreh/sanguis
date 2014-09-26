@@ -10,8 +10,8 @@
 #include <sanguis/world_name_fwd.hpp>
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/exp_for_next_level.hpp>
-#include <sanguis/client/optional_health_pair_fwd.hpp>
 #include <sanguis/client/level.hpp>
+#include <sanguis/client/optional_health_pair_fwd.hpp>
 #include <sanguis/client/gui/hud/object_fwd.hpp>
 #include <sanguis/client/gui/hud/weapon_details_fwd.hpp>
 #include <sanguis/client/gui/hud/weapon_widget.hpp>
@@ -25,8 +25,8 @@
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/expander.hpp>
 #include <sanguis/gui/widget/frame.hpp>
-#include <sanguis/gui/widget/text.hpp>
 #include <sanguis/gui/widget/preferred_size.hpp>
+#include <sanguis/gui/widget/text.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>

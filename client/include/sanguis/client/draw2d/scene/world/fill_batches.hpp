@@ -12,8 +12,8 @@
 #include <sanguis/client/draw2d/scene/world/sprite/container.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/dim.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/vector.hpp>
-#include <sanguis/creator/tile_grid.hpp>
 #include <sanguis/client/load/tiles/context_fwd.hpp>
+#include <sanguis/creator/tile_grid.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/fill.hpp>

@@ -8,8 +8,8 @@
 #include <sanguis/client/draw2d/entities/name_fwd.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
-#include <sanguis/creator/enemy_type_fwd.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
+#include <sanguis/creator/enemy_type_fwd.hpp>
 
 
 namespace sanguis

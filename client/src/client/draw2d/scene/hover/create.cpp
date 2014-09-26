@@ -1,5 +1,5 @@
-#include <sanguis/client/draw2d/entities/hover/name_and_health_fwd.hpp>
 #include <sanguis/client/draw2d/entities/hover/info.hpp>
+#include <sanguis/client/draw2d/entities/hover/name_and_health_fwd.hpp>
 #include <sanguis/client/draw2d/entities/hover/weapon_fwd.hpp>
 #include <sanguis/client/draw2d/scene/hover/base_unique_ptr.hpp>
 #include <sanguis/client/draw2d/scene/hover/create.hpp>

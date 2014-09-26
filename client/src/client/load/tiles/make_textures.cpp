@@ -17,8 +17,8 @@
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/math/box/structure_cast.hpp>
-#include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/dim/fill.hpp>
+#include <fcppt/math/dim/structure_cast.hpp>
 
 
 sanguis::client::load::tiles::texture_container

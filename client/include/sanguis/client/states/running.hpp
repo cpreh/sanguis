@@ -3,10 +3,10 @@
 
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
+#include <sanguis/client/console/object_fwd.hpp>
 #include <sanguis/client/control/environment_fwd.hpp>
 #include <sanguis/client/control/input_translator_fwd.hpp>
 #include <sanguis/client/control/actions/any_fwd.hpp>
-#include <sanguis/client/console/object_fwd.hpp>
 #include <sanguis/client/draw/base_unique_ptr.hpp>
 #include <sanguis/client/events/message_fwd.hpp>
 #include <sanguis/client/events/net_error_fwd.hpp>

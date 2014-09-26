@@ -7,8 +7,8 @@
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
 #include <sanguis/weapon_status.hpp>
 #include <sanguis/server/damage/basic_array.hpp>
-#include <sanguis/server/damage/unit_fwd.hpp>
 #include <sanguis/server/damage/type_fwd.hpp>
+#include <sanguis/server/damage/unit_fwd.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>

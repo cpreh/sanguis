@@ -1,7 +1,7 @@
 #include <sanguis/model/animation.hpp>
 #include <sanguis/model/cell_area.hpp>
-#include <sanguis/model/make_cell_areas.hpp>
 #include <sanguis/model/image_size.hpp>
+#include <sanguis/model/make_cell_areas.hpp>
 #include <sanguis/model/object.hpp>
 #include <sanguis/tools/animations/frame.hpp>
 #include <sanguis/tools/animations/frame_container.hpp>

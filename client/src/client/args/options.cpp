@@ -1,7 +1,7 @@
 #include <sanguis/client/args/options.hpp>
 #include <sge/console/gfx/output_line_limit.hpp>
-#include <sge/renderer/pixel_format/multi_samples_value.hpp>
 #include <sge/renderer/screen_unit.hpp>
+#include <sge/renderer/pixel_format/multi_samples_value.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/options_description.hpp>

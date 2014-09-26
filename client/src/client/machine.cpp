@@ -16,8 +16,12 @@
 #include <sanguis/messages/client/base.hpp>
 #include <sanguis/messages/server/base.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
-#include <sanguis/net/send_buffer_size.hpp>
 #include <sanguis/net/receive_buffer_size.hpp>
+#include <sanguis/net/send_buffer_size.hpp>
+#include <alda/net/host.hpp>
+#include <alda/net/parameters.hpp>
+#include <alda/net/port.hpp>
+#include <alda/net/buffer/circular_receive/object_fwd.hpp>
 #include <sge/console/gfx/object.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
@@ -31,10 +35,6 @@
 #include <sge/viewport/manager_fwd.hpp>
 #include <sge/window/system.hpp>
 #include <awl/main/exit_success.hpp>
-#include <alda/net/host.hpp>
-#include <alda/net/parameters.hpp>
-#include <alda/net/port.hpp>
-#include <alda/net/buffer/circular_receive/object_fwd.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>

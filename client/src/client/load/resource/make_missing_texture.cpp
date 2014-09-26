@@ -10,8 +10,8 @@
 #include <sge/image2d/view/object.hpp>
 #include <sge/image2d/view/sub.hpp>
 #include <sge/image2d/view/to_const.hpp>
-#include <sge/renderer/device/core_fwd.hpp>
 #include <sge/renderer/resource_flags_field.hpp>
+#include <sge/renderer/device/core_fwd.hpp>
 #include <sge/renderer/texture/create_planar_from_view.hpp>
 #include <sge/renderer/texture/emulate_srgb.hpp>
 #include <sge/renderer/texture/planar.hpp>

@@ -9,8 +9,8 @@
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/factory/grenade.hpp>
 #include <sanguis/server/weapons/factory/parameters.hpp>
-#include <sanguis/server/weapons/modifiers/apply.hpp>
 #include <sanguis/server/weapons/modifiers/aoe.hpp>
+#include <sanguis/server/weapons/modifiers/apply.hpp>
 #include <sanguis/server/weapons/modifiers/damage.hpp>
 #include <sanguis/server/weapons/modifiers/make_guaranteed.hpp>
 #include <sanguis/server/weapons/modifiers/make_potential.hpp>

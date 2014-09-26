@@ -1,5 +1,4 @@
 #include <sanguis/client/gui/style/text_color.hpp>
-#include <sge/image/color/any/object.hpp>
 #include <sge/image/color/rgba8.hpp>
 #include <sge/image/color/any/object.hpp>
 #include <sge/image/color/init/alpha.hpp>

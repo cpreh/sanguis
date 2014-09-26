@@ -2,8 +2,8 @@
 #include <sanguis/client/draw2d/entities/model/orientation.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/math/twopi.hpp>
 #include <fcppt/assert/error.hpp>
+#include <fcppt/math/twopi.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <cmath>

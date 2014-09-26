@@ -2,8 +2,8 @@
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/player_level.hpp>
 #include <sanguis/client/perk/info.hpp>
-#include <sanguis/client/perk/max_level.hpp>
 #include <sanguis/client/perk/level.hpp>
+#include <sanguis/client/perk/max_level.hpp>
 #include <sanguis/client/perk/required_parent_level.hpp>
 #include <sanguis/client/perk/required_player_level.hpp>
 

@@ -13,8 +13,8 @@
 #include <sanguis/gui/style/base.hpp>
 #include <sanguis/gui/style/base_unique_ptr.hpp>
 #include <sanguis/gui/style/create.hpp>
-#include <sanguis/gui/widget/button.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
+#include <sanguis/gui/widget/button.hpp>
 #include <sanguis/gui/widget/choices.hpp>
 #include <sanguis/gui/widget/edit.hpp>
 #include <sanguis/gui/widget/image.hpp>
@@ -64,10 +64,10 @@
 #include <sge/rucksack/axis.hpp>
 #include <sge/systems/cursor_demuxer.hpp>
 #include <sge/systems/cursor_option_field.hpp>
-#include <sge/systems/keyboard_collector.hpp>
 #include <sge/systems/image2d.hpp>
 #include <sge/systems/input.hpp>
 #include <sge/systems/instance.hpp>
+#include <sge/systems/keyboard_collector.hpp>
 #include <sge/systems/make_list.hpp>
 #include <sge/systems/original_window.hpp>
 #include <sge/systems/renderer.hpp>
@@ -99,11 +99,11 @@
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/container/tree/map.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
-#include <main.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <chrono>
 #include <exception>
+#include <main.hpp>
 #include <fcppt/config/external_end.hpp>
 
 

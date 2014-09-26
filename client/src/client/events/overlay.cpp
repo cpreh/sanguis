@@ -1,5 +1,5 @@
-#include <sge/renderer/context/ffp_fwd.hpp>
 #include <sanguis/client/events/overlay.hpp>
+#include <sge/renderer/context/ffp_fwd.hpp>
 
 
 sanguis::client::events::overlay::overlay(

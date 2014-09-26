@@ -45,9 +45,9 @@
 #include <QObject>
 #include <QPixmap>
 #include <QString>
-#include <ui_main_window.h>
 #include <exception>
 #include <iterator>
+#include <ui_main_window.h>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 

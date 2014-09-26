@@ -4,8 +4,8 @@
 #include <sanguis/client/server_fwd.hpp>
 #include <sanguis/server/object.hpp>
 #include <alda/net/port.hpp>
-#include <fcppt/noncopyable.hpp>
 #include <awl/main/exit_code.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <mutex>
 #include <thread>

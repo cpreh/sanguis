@@ -20,12 +20,12 @@
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/speed_fwd.hpp>
-#include <sanguis/server/environment/load_context_fwd.hpp>
-#include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
 #include <sanguis/server/entities/optional_base_ref_fwd.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
+#include <sanguis/server/environment/load_context_fwd.hpp>
+#include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <fcppt/noncopyable.hpp>
 

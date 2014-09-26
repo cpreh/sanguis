@@ -4,7 +4,6 @@
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/team.hpp>
-#include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>
@@ -15,6 +14,7 @@
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/spawns/size_type.hpp>
 #include <sanguis/server/entities/spawns/spawn.hpp>
+#include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <fcppt/algorithm/repeat.hpp>
 #include <fcppt/assert/pre.hpp>

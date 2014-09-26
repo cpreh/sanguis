@@ -7,8 +7,8 @@
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/factory/enemy.hpp>
-#include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
+#include <sanguis/creator/enemy_type.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
 

@@ -1,5 +1,5 @@
-#include <sanguis/collision/world/body_base_fwd.hpp>
 #include <sanguis/collision/aux_/world/projectile/from_sge_user_data.hpp>
+#include <sanguis/collision/world/body_base_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/any.hpp>
 #include <fcppt/config/external_end.hpp>

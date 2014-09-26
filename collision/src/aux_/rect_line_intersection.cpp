@@ -6,8 +6,8 @@
 #include <sanguis/collision/aux_/line_segment.hpp>
 #include <sanguis/collision/aux_/optional_intersection.hpp>
 #include <sanguis/collision/aux_/pos.hpp>
-#include <sanguis/collision/aux_/rect_line_intersection.hpp>
 #include <sanguis/collision/aux_/rect.hpp>
+#include <sanguis/collision/aux_/rect_line_intersection.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <array>

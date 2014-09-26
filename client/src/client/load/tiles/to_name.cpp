@@ -1,5 +1,5 @@
-#include <sanguis/creator/tile.hpp>
 #include <sanguis/client/load/tiles/to_name.hpp>
+#include <sanguis/creator/tile.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/unreachable.hpp>

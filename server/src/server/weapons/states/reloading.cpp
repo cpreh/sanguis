@@ -1,6 +1,7 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/weapon_status.hpp>
+#include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/events/poll.hpp>
 #include <sanguis/server/weapons/events/reload.hpp>
@@ -9,7 +10,6 @@
 #include <sanguis/server/weapons/states/castpoint.hpp>
 #include <sanguis/server/weapons/states/idle.hpp>
 #include <sanguis/server/weapons/states/reloading.hpp>
-#include <sanguis/server/entities/with_weapon.hpp>
 #include <sge/timer/remaining.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>

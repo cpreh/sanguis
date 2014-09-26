@@ -7,11 +7,11 @@
 #include <sanguis/client/health_pair_fwd.hpp>
 #include <sanguis/client/draw2d/entities/name_fwd.hpp>
 #include <sanguis/client/draw2d/entities/with_buffs_auras_model.hpp>
-#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/hover/name.hpp>
 #include <sanguis/client/draw2d/entities/hover/optional_info_fwd.hpp>
-#include <sanguis/creator/enemy_type_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
+#include <sanguis/creator/enemy_type_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 

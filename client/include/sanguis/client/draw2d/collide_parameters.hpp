@@ -3,9 +3,9 @@
 
 #include <sanguis/duration.hpp>
 #include <sanguis/client/draw2d/center.hpp>
+#include <sanguis/client/draw2d/collide_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/dim2.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
-#include <sanguis/client/draw2d/collide_parameters_fwd.hpp>
 
 
 namespace sanguis

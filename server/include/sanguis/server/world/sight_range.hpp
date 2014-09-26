@@ -2,8 +2,8 @@
 #define SANGUIS_SERVER_WORLD_SIGHT_RANGE_HPP_INCLUDED
 
 #include <sanguis/entity_id.hpp>
-#include <sanguis/server/world/sight_range_fwd.hpp>
 #include <sanguis/server/world/sight_range_entry_set.hpp>
+#include <sanguis/server/world/sight_range_fwd.hpp>
 
 
 namespace sanguis

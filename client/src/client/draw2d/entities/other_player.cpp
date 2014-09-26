@@ -4,9 +4,9 @@
 #include <sanguis/client/draw2d/entities/name.hpp>
 #include <sanguis/client/draw2d/entities/other_player.hpp>
 #include <sanguis/client/draw2d/entities/player.hpp>
+#include <sanguis/client/draw2d/entities/hover/info.hpp>
 #include <sanguis/client/draw2d/entities/hover/name.hpp>
 #include <sanguis/client/draw2d/entities/hover/name_and_health.hpp>
-#include <sanguis/client/draw2d/entities/hover/info.hpp>
 #include <sanguis/client/draw2d/entities/hover/optional_info.hpp>
 #include <sanguis/client/draw2d/entities/hover/optional_name.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>

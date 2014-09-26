@@ -15,8 +15,8 @@
 #include <sanguis/server/entities/property/always_max.hpp>
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <sanguis/server/net/health.hpp>
-#include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/signal/scoped_connection.hpp>
 
 
 namespace sanguis

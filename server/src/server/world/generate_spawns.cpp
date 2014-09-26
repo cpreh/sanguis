@@ -4,11 +4,11 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
-#include <sanguis/server/world/generate_spawns.hpp>
 #include <sanguis/server/world/generate_single_spawns.hpp>
+#include <sanguis/server/world/generate_spawns.hpp>
 #include <sanguis/server/world/make_spawner.hpp>
-#include <fcppt/assign/make_container.hpp>
 #include <fcppt/assert/unreachable.hpp>
+#include <fcppt/assign/make_container.hpp>
 
 
 sanguis::server::world::insert_pair_container

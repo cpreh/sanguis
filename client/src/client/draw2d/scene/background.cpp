@@ -10,8 +10,8 @@
 #include <sanguis/client/draw2d/sprite/client/system_decl.hpp>
 #include <sanguis/client/load/context.hpp>
 #include <sanguis/client/load/resource/context.hpp>
-#include <sanguis/client/load/resource/textures.hpp>
 #include <sanguis/client/load/resource/texture_identifier.hpp>
+#include <sanguis/client/load/resource/textures.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/sprite/intrusive/connection.hpp>
 #include <sge/viewport/manager.hpp>

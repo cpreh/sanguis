@@ -1,5 +1,5 @@
-#include <sanguis/client/control/action_visitor.hpp>
 #include <sanguis/client/control/action_handler.hpp>
+#include <sanguis/client/control/action_visitor.hpp>
 #include <sanguis/client/control/actions/binary_fwd.hpp>
 #include <sanguis/client/control/actions/cursor_fwd.hpp>
 #include <sanguis/client/control/actions/nullary_fwd.hpp>

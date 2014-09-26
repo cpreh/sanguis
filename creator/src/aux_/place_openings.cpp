@@ -6,8 +6,8 @@
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/aux_/closest_empty.hpp>
-#include <sanguis/creator/aux_/place_openings.hpp>
 #include <sanguis/creator/aux_/optional_pos.hpp>
+#include <sanguis/creator/aux_/place_openings.hpp>
 #include <sanguis/creator/aux_/random/uniform_pos.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/contains.hpp>

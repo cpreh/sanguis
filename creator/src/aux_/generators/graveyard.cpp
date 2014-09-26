@@ -8,13 +8,13 @@
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/aux_/enemy_type_container.hpp>
 #include <sanguis/creator/aux_/generate_maze.hpp>
+#include <sanguis/creator/aux_/parameters.hpp>
 #include <sanguis/creator/aux_/place_openings.hpp>
 #include <sanguis/creator/aux_/place_spawners.hpp>
-#include <sanguis/creator/aux_/parameters.hpp>
 #include <sanguis/creator/aux_/result.hpp>
+#include <sanguis/creator/aux_/generators/graveyard.hpp>
 #include <sanguis/creator/aux_/random/generator.hpp>
 #include <sanguis/creator/aux_/random/uniform_int.hpp>
-#include <sanguis/creator/aux_/generators/graveyard.hpp>
 #include <fcppt/container/grid/make_pos_range.hpp>
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>

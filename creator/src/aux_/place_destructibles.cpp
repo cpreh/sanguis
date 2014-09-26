@@ -1,17 +1,17 @@
-#include <sanguis/creator/aux_/place_destructibles.hpp>
-#include <sanguis/creator/aux_/random/generator.hpp>
-#include <sanguis/creator/aux_/random/uniform_int.hpp>
-#include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/destructible.hpp>
 #include <sanguis/creator/destructible_container.hpp>
+#include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/tile_is_solid.hpp>
-#include <fcppt/math/clamp.hpp>
-#include <fcppt/container/grid/neumann_neighbors.hpp>
+#include <sanguis/creator/aux_/place_destructibles.hpp>
+#include <sanguis/creator/aux_/random/generator.hpp>
+#include <sanguis/creator/aux_/random/uniform_int.hpp>
 #include <fcppt/container/grid/make_pos_crange.hpp>
-#include <fcppt/random/distribution/basic.hpp>
+#include <fcppt/container/grid/neumann_neighbors.hpp>
+#include <fcppt/math/clamp.hpp>
 #include <fcppt/random/make_variate.hpp>
+#include <fcppt/random/distribution/basic.hpp>
 
 
 sanguis::creator::destructible_container

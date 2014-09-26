@@ -1,5 +1,5 @@
-#include <sanguis/io_service_callback.hpp>
 #include <sanguis/io_service.hpp>
+#include <sanguis/io_service_callback.hpp>
 #include <sanguis/io_service_impl.hpp>
 #include <alda/net/io_service_wrapper.hpp>
 #include <fcppt/make_unique_ptr.hpp>

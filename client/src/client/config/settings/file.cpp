@@ -1,5 +1,5 @@
-#include <sanguis/client/config/settings/file.hpp>
 #include <sanguis/client/config/homedir.hpp>
+#include <sanguis/client/config/settings/file.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>

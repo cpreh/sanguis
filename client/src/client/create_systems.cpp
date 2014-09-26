@@ -8,12 +8,12 @@
 #include <sanguis/client/args/sge_log_level.hpp>
 #include <sge/config/log_path.hpp>
 #include <sge/config/own_app_name.hpp>
-#include <sge/media/extension.hpp>
-#include <sge/media/extension_set.hpp>
-#include <sge/media/optional_extension_set.hpp>
 #include <sge/log/location.hpp>
 #include <sge/log/option.hpp>
 #include <sge/log/option_container.hpp>
+#include <sge/media/extension.hpp>
+#include <sge/media/extension_set.hpp>
+#include <sge/media/optional_extension_set.hpp>
 #include <sge/renderer/display_mode/parameters.hpp>
 #include <sge/renderer/display_mode/vsync.hpp>
 #include <sge/renderer/pixel_format/color.hpp>
@@ -22,8 +22,8 @@
 #include <sge/renderer/pixel_format/srgb.hpp>
 #include <sge/systems/audio_loader.hpp>
 #include <sge/systems/audio_player_default.hpp>
-#include <sge/systems/cursor_option_field.hpp>
 #include <sge/systems/config.hpp>
+#include <sge/systems/cursor_option_field.hpp>
 #include <sge/systems/font.hpp>
 #include <sge/systems/image2d.hpp>
 #include <sge/systems/input.hpp>

@@ -1,6 +1,6 @@
-#include <sanguis/gui/aux_/fill_rect.hpp>
 #include <sanguis/gui/aux_/draw_image.hpp>
 #include <sanguis/gui/aux_/draw_image_repeat.hpp>
+#include <sanguis/gui/aux_/fill_rect.hpp>
 #include <sanguis/gui/aux_/renderer/stateless.hpp>
 #include <sanguis/gui/renderer/base.hpp>
 #include <sge/font/draw/set_matrices.hpp>

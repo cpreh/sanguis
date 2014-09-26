@@ -20,8 +20,8 @@
 #include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/normal/color_format.hpp>
-#include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
+#include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/load/model/enemy_path.hpp>
 #include <sge/image/color/any/convert.hpp>
 

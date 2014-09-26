@@ -20,8 +20,8 @@
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
-#include <fcppt/math/vector/normalize.hpp>
 #include <fcppt/math/vector/length.hpp>
+#include <fcppt/math/vector/normalize.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 
 

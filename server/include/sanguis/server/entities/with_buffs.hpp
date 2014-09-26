@@ -10,9 +10,9 @@
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <unordered_map>
 #include <set>
 #include <typeindex>
+#include <unordered_map>
 #include <fcppt/config/external_end.hpp>
 
 

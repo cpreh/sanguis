@@ -1,11 +1,11 @@
 #include <sanguis/perk_type.hpp>
+#include <sanguis/server/entities/with_perks.hpp>
+#include <sanguis/server/entities/with_weapon.hpp>
+#include <sanguis/server/entities/property/linear_change.hpp>
 #include <sanguis/server/perks/change_factor.hpp>
 #include <sanguis/server/perks/change_simple.hpp>
 #include <sanguis/server/perks/irs.hpp>
 #include <sanguis/server/perks/level_diff.hpp>
-#include <sanguis/server/entities/with_perks.hpp>
-#include <sanguis/server/entities/with_weapon.hpp>
-#include <sanguis/server/entities/property/linear_change.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>

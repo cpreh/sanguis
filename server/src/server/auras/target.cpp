@@ -5,8 +5,8 @@
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/collision_group.hpp>
-#include <sanguis/server/auras/target.hpp>
 #include <sanguis/server/auras/influence.hpp>
+#include <sanguis/server/auras/target.hpp>
 #include <sanguis/server/auras/target_kind.hpp>
 #include <sanguis/server/auras/target_kind_to_influence.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>

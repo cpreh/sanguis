@@ -2,8 +2,8 @@
 #include <sanguis/collision/vector2.hpp>
 #include <sanguis/collision/aux_/cross2.hpp>
 #include <sanguis/collision/aux_/is_null.hpp>
-#include <sanguis/collision/aux_/line_segment.hpp>
 #include <sanguis/collision/aux_/line_line_intersect.hpp>
+#include <sanguis/collision/aux_/line_segment.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 

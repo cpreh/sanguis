@@ -1,9 +1,9 @@
 #ifndef SANGUIS_SERVER_BUFFS_BURN_CREATE_HPP_INCLUDED
 #define SANGUIS_SERVER_BUFFS_BURN_CREATE_HPP_INCLUDED
 
-#include <sanguis/server/buffs/create_callback.hpp>
 #include <sanguis/server/buffs/burn.hpp>
 #include <sanguis/server/buffs/burn_interval.hpp>
+#include <sanguis/server/buffs/create_callback.hpp>
 #include <sanguis/server/buffs/unique_ptr.hpp>
 #include <sanguis/server/damage/array_fwd.hpp>
 #include <sanguis/server/damage/unit.hpp>

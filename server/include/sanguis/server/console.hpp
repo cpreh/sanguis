@@ -1,18 +1,18 @@
 #ifndef SANGUIS_SERVER_CONSOLE_HPP_INCLUDED
 #define SANGUIS_SERVER_CONSOLE_HPP_INCLUDED
 
+#include <sanguis/server/console_command_vector.hpp>
 #include <sanguis/server/console_fwd.hpp>
+#include <sanguis/server/player_id.hpp>
 #include <sanguis/server/send_callback.hpp>
 #include <sanguis/server/unicast_callback.hpp>
-#include <sanguis/server/console_command_vector.hpp>
-#include <sanguis/server/player_id.hpp>
-#include <sge/console/object.hpp>
 #include <sge/console/arg_list.hpp>
+#include <sge/console/object.hpp>
 #include <sge/console/callback/function.hpp>
-#include <fcppt/signal/auto_connection_fwd.hpp>
 #include <fcppt/homogenous_pair_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/signal/auto_connection_fwd.hpp>
 
 
 namespace sanguis

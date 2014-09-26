@@ -4,8 +4,8 @@
 #include <sanguis/gui/focus_change_fwd.hpp>
 #include <sanguis/gui/get_focus_fwd.hpp>
 #include <sanguis/gui/symbol.hpp>
-#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/renderer/base_fwd.hpp>
+#include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/frame_fwd.hpp>
 #include <sanguis/gui/widget/optional_focus_fwd.hpp>

@@ -20,12 +20,11 @@
 #include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
 #include <sanguis/client/draw2d/log.hpp>
-#include <sanguis/client/draw2d/speed.hpp>
-#include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/optional_player_center.hpp>
 #include <sanguis/client/draw2d/optional_translation.hpp>
 #include <sanguis/client/draw2d/player_center.hpp>
 #include <sanguis/client/draw2d/player_center_callback.hpp>
+#include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/translation.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
@@ -35,7 +34,6 @@
 #include <sanguis/client/draw2d/entities/own_unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/hover/optional_info.hpp>
-#include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_auras.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_buffs.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_center.hpp>
@@ -43,21 +41,22 @@
 #include <sanguis/client/draw2d/entities/ifaces/with_orientation.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_speed.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_weapon.hpp>
+#include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
 #include <sanguis/client/draw2d/factory/aoe_projectile.hpp>
 #include <sanguis/client/draw2d/factory/destructible.hpp>
 #include <sanguis/client/draw2d/factory/enemy.hpp>
 #include <sanguis/client/draw2d/factory/friend.hpp>
-#include <sanguis/client/draw2d/factory/pickup.hpp>
-#include <sanguis/client/draw2d/factory/projectile.hpp>
-#include <sanguis/client/draw2d/factory/player.hpp>
 #include <sanguis/client/draw2d/factory/own_player.hpp>
+#include <sanguis/client/draw2d/factory/pickup.hpp>
+#include <sanguis/client/draw2d/factory/player.hpp>
+#include <sanguis/client/draw2d/factory/projectile.hpp>
 #include <sanguis/client/draw2d/factory/weapon_pickup.hpp>
-#include <sanguis/client/draw2d/scene/object.hpp>
 #include <sanguis/client/draw2d/scene/background.hpp>
 #include <sanguis/client/draw2d/scene/background_dim.hpp>
 #include <sanguis/client/draw2d/scene/configure_entity.hpp>
 #include <sanguis/client/draw2d/scene/control_environment.hpp>
 #include <sanguis/client/draw2d/scene/health_pair.hpp>
+#include <sanguis/client/draw2d/scene/object.hpp>
 #include <sanguis/client/draw2d/scene/translation.hpp>
 #include <sanguis/client/draw2d/scene/hover/base.hpp>
 #include <sanguis/client/draw2d/scene/hover/base_unique_ptr.hpp>
@@ -73,8 +72,8 @@
 #include <sanguis/client/draw2d/translate/scalar_to_client.hpp>
 #include <sanguis/client/draw2d/translate/vector_to_client.hpp>
 #include <sanguis/client/load/context.hpp>
-#include <sanguis/client/load/model/context.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
+#include <sanguis/client/load/model/context.hpp>
 #include <sanguis/client/load/resource/context.hpp>
 #include <sanguis/creator/name.hpp>
 #include <sanguis/creator/opening_count.hpp>
@@ -84,9 +83,9 @@
 #include <sanguis/gui/style/base_fwd.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/aoe.hpp>
+#include <sanguis/messages/roles/aoe_projectile_type.hpp>
 #include <sanguis/messages/roles/aura_type.hpp>
 #include <sanguis/messages/roles/aura_type_container.hpp>
-#include <sanguis/messages/roles/aoe_projectile_type.hpp>
 #include <sanguis/messages/roles/buff_type.hpp>
 #include <sanguis/messages/roles/buff_type_container.hpp>
 #include <sanguis/messages/roles/center.hpp>
@@ -133,6 +132,8 @@
 #include <sanguis/messages/server/speed.hpp>
 #include <sanguis/messages/server/weapon_status.hpp>
 #include <sanguis/messages/server/call/object.hpp>
+#include <alda/serialization/load/optional.hpp>
+#include <alda/serialization/load/static_size.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/image/color/predef.hpp>
@@ -152,14 +153,12 @@
 #include <sge/sprite/state/default_options.hpp>
 #include <sge/sprite/state/scoped.hpp>
 #include <sge/viewport/manager.hpp>
-#include <alda/serialization/load/optional.hpp>
-#include <alda/serialization/load/static_size.hpp>
 #include <majutsu/is_role.hpp>
 #include <majutsu/unwrap_role.hpp>
 #include <fcppt/format.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/make_enum_range_start_end.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/literal.hpp>
 #include <fcppt/optional_bind.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/type_name_from_info.hpp>
@@ -182,8 +181,8 @@
 #include <boost/mpl/transform_view.hpp>
 #include <boost/mpl/vector/vector30.hpp>
 #include <functional>
-#include <utility>
 #include <typeinfo>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 

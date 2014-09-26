@@ -1,6 +1,6 @@
-#include <sanguis/server/random/amount.hpp>
 #include <sanguis/server/entities/enemies/modifiers/amount.hpp>
 #include <sanguis/server/entities/enemies/modifiers/create_callbacks.hpp>
+#include <sanguis/server/random/amount.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 
 

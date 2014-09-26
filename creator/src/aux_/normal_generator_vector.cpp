@@ -1,8 +1,8 @@
 #include <sanguis/creator/aux_/graveyard_name.hpp>
 #include <sanguis/creator/aux_/maze_name.hpp>
-#include <sanguis/creator/aux_/rooms_name.hpp>
 #include <sanguis/creator/aux_/normal_generator_vector.hpp>
 #include <sanguis/creator/aux_/normal_generator_vector_type.hpp>
+#include <sanguis/creator/aux_/rooms_name.hpp>
 
 
 namespace

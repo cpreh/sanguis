@@ -4,9 +4,9 @@
 #include <sge/renderer/screen_size.hpp>
 #include <sge/renderer/screen_unit.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/math/vector/arithmetic.hpp>
 
 
 sanguis::client::draw2d::translation const

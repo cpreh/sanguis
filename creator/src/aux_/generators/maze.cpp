@@ -8,10 +8,10 @@
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/aux_/enemy_type_container.hpp>
 #include <sanguis/creator/aux_/generate_maze.hpp>
+#include <sanguis/creator/aux_/parameters.hpp>
 #include <sanguis/creator/aux_/place_destructibles.hpp>
 #include <sanguis/creator/aux_/place_openings.hpp>
 #include <sanguis/creator/aux_/place_spawners.hpp>
-#include <sanguis/creator/aux_/parameters.hpp>
 #include <sanguis/creator/aux_/result.hpp>
 #include <sanguis/creator/aux_/generators/maze.hpp>
 

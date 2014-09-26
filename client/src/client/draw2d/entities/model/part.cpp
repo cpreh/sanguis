@@ -3,10 +3,10 @@
 #include <sanguis/optional_primary_weapon_type.hpp>
 #include <sanguis/client/sound_manager.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
-#include <sanguis/client/draw2d/entities/model/part.hpp>
 #include <sanguis/client/draw2d/entities/model/clamp_orientation.hpp>
 #include <sanguis/client/draw2d/entities/model/loop_method.hpp>
 #include <sanguis/client/draw2d/entities/model/orientation.hpp>
+#include <sanguis/client/draw2d/entities/model/part.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/draw2d/sprite/animation/loop_method.hpp>
@@ -31,9 +31,9 @@
 #include <fcppt/optional_comparison.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/assert/error.hpp>
+#include <fcppt/math/diff.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/dim.hpp>
-#include <fcppt/math/diff.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
 #include <fcppt/config/external_end.hpp>

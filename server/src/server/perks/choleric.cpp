@@ -14,8 +14,8 @@
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/with_perks.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
-#include <sanguis/server/entities/projectiles/simple_bullet.hpp>
 #include <sanguis/server/entities/projectiles/rocket.hpp>
+#include <sanguis/server/entities/projectiles/simple_bullet.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/perks/choleric.hpp>
@@ -23,11 +23,11 @@
 #include <sanguis/server/perks/perk.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/repeat.hpp>
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/random/distribution/basic_impl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real_impl.hpp>
-#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
 #include <fcppt/config/external_end.hpp>

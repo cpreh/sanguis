@@ -13,8 +13,8 @@
 #include <sge/font/text_parameters.hpp>
 #include <sge/font/v_center.hpp>
 #include <sge/font/vector.hpp>
-#include <sge/font/align_h/left.hpp>
 #include <sge/font/align_h/center.hpp>
+#include <sge/font/align_h/left.hpp>
 #include <sge/font/align_h/max_width.hpp>
 #include <sge/font/draw/static_text.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>

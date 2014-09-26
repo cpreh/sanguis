@@ -2,9 +2,9 @@
 #define SANGUIS_CLIENT_GUI_MENU_OBJECT_HPP_INCLUDED
 
 #include <sanguis/duration.hpp>
+#include <sanguis/client/config/settings/object_fwd.hpp>
 #include <sanguis/client/gui/menu/resolution_chooser.hpp>
 #include <sanguis/client/gui/menu/callbacks/object.hpp>
-#include <sanguis/client/config/settings/object_fwd.hpp>
 #include <sanguis/gui/context.hpp>
 #include <sanguis/gui/master.hpp>
 #include <sanguis/gui/background/colored.hpp>

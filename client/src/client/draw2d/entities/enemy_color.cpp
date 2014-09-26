@@ -1,7 +1,6 @@
 #include <sanguis/enemy_kind.hpp>
 #include <sanguis/client/draw2d/entities/enemy_color.hpp>
 #include <sge/image/color/predef.hpp>
-#include <sge/image/color/any/object.hpp>
 #include <sge/image/color/rgba8.hpp>
 #include <sge/image/color/any/object.hpp>
 #include <sge/image/color/init/alpha.hpp>

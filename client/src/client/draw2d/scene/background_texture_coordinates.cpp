@@ -1,6 +1,6 @@
 #include <sanguis/client/draw2d/translation.hpp>
-#include <sanguis/client/draw2d/scene/background_texture_coordinates.hpp>
 #include <sanguis/client/draw2d/scene/background_dim.hpp>
+#include <sanguis/client/draw2d/scene/background_texture_coordinates.hpp>
 #include <sanguis/client/draw2d/sprite/client/texture_coordinates.hpp>
 #include <sge/texture/part.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>

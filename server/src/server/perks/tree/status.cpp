@@ -1,8 +1,8 @@
 #include <sanguis/perk_type.hpp>
 #include <sanguis/server/level.hpp>
 #include <sanguis/server/perks/tree/max_level.hpp>
-#include <sanguis/server/perks/tree/required_player_level.hpp>
 #include <sanguis/server/perks/tree/required_parent_level.hpp>
+#include <sanguis/server/perks/tree/required_player_level.hpp>
 #include <sanguis/server/perks/tree/status.hpp>
 #include <fcppt/assert/pre.hpp>
 

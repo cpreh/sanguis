@@ -7,9 +7,9 @@
 #include <sanguis/creator/top_parameters_fwd.hpp>
 #include <sanguis/creator/top_result.hpp>
 #include <sanguis/server/world/difficulty.hpp>
+#include <sanguis/server/world/generate.hpp>
 #include <sanguis/server/world/object.hpp>
 #include <sanguis/server/world/object_unique_ptr.hpp>
-#include <sanguis/server/world/generate.hpp>
 #include <sanguis/server/world/parameters_fwd.hpp>
 #include <sge/config/cache_path.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>

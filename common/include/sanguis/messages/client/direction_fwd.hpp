@@ -2,9 +2,9 @@
 #define SANGUIS_MESSAGES_CLIENT_DIRECTION_FWD_HPP_INCLUDED
 
 #include <sanguis/messages/adapted_types/vector2_fwd.hpp>
-#include <sanguis/messages/roles/direction.hpp>
 #include <sanguis/messages/client/types/make_message_id_fwd.hpp>
 #include <sanguis/messages/client/types/message.hpp>
+#include <sanguis/messages/roles/direction.hpp>
 #include <alda/message/make_class_fwd.hpp>
 #include <majutsu/composite_fwd.hpp>
 #include <majutsu/role_fwd.hpp>

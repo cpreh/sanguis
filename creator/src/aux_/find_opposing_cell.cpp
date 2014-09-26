@@ -2,13 +2,13 @@
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/aux_/find_opposing_cell.hpp>
+#include <fcppt/optional_impl.hpp>
+#include <fcppt/algorithm/contains.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/container/grid/neumann_neighbor_array.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/comparison.hpp>
-#include <fcppt/algorithm/contains.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <iterator>
@@ -47,7 +47,7 @@ sanguis::creator::aux_::find_opposing_cell
 		:
 		fcppt::container::grid::neumann_neighbors(
 			cell)
-		
+
 	)
 	{
 		sanguis::creator::pos const

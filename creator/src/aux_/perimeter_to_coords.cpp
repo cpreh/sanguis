@@ -1,6 +1,7 @@
-#include <fcppt/assert/error.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/aux_/perimeter_to_coords.hpp>
+#include <fcppt/assert/error.hpp>
+
 
 sanguis::creator::grid::pos
 sanguis::creator::aux_::perimeter_to_coords(

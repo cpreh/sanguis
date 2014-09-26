@@ -3,8 +3,8 @@
 
 #include <sanguis/model/image_name.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <unordered_map>
 #include <QImage>
+#include <unordered_map>
 #include <fcppt/config/external_end.hpp>
 
 

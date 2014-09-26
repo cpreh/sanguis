@@ -12,9 +12,9 @@
 #include <sanguis/server/weapons/melee.hpp>
 #include <sanguis/server/weapons/melee_parameters.hpp>
 #include <sanguis/server/weapons/range.hpp>
+#include <sanguis/server/weapons/spawn_weapon.hpp>
 #include <sanguis/server/weapons/spider.hpp>
 #include <sanguis/server/weapons/spider_parameters.hpp>
-#include <sanguis/server/weapons/spawn_weapon.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/factory/parameters.hpp>
 #include <sanguis/server/weapons/factory/spider.hpp>

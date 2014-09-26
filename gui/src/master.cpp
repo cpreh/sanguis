@@ -1,6 +1,6 @@
 #include <sanguis/gui/context.hpp>
-#include <sanguis/gui/duration.hpp>
 #include <sanguis/gui/draw.hpp>
+#include <sanguis/gui/duration.hpp>
 #include <sanguis/gui/master.hpp>
 #include <sanguis/gui/aux_/renderer/scoped.hpp>
 #include <sanguis/gui/main_area/base.hpp>

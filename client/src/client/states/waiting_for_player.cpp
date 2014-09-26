@@ -10,9 +10,9 @@
 #include <sanguis/client/events/overlay.hpp>
 #include <sanguis/client/events/render.hpp>
 #include <sanguis/client/events/tick.hpp>
-#include <sanguis/client/states/waiting_for_player.hpp>
 #include <sanguis/client/states/has_player.hpp>
 #include <sanguis/client/states/ingame.hpp>
+#include <sanguis/client/states/waiting_for_player.hpp>
 #include <sanguis/messages/call/result.hpp>
 #include <sanguis/messages/server/add_own_player.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>

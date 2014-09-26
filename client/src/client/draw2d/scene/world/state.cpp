@@ -13,6 +13,7 @@
 #include <sanguis/client/draw2d/scene/world/state.hpp>
 #include <sanguis/client/draw2d/scene/world/tile_size.hpp>
 #include <sanguis/client/draw2d/sprite/unit.hpp>
+#include <sanguis/client/load/tiles/context_fwd.hpp>
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/dim2.hpp>
 #include <sanguis/collision/optional_result.hpp>
@@ -24,7 +25,6 @@
 #include <sanguis/creator/generate.hpp>
 #include <sanguis/creator/signed_pos.hpp>
 #include <sanguis/creator/top_result.hpp>
-#include <sanguis/client/load/tiles/context_fwd.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <sge/renderer/vertex/scoped_declaration.hpp>

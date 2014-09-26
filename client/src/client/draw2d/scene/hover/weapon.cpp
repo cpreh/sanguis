@@ -10,9 +10,9 @@
 #include <sanguis/client/load/hud/context.hpp>
 #include <sanguis/gui/draw.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
+#include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
 #include <sanguis/gui/widget/reference_alignment_vector.hpp>
-#include <sanguis/gui/widget/reference.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>

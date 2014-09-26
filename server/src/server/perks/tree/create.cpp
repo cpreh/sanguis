@@ -3,9 +3,9 @@
 #include <sanguis/server/perks/tree/create.hpp>
 #include <sanguis/server/perks/tree/max_level.hpp>
 #include <sanguis/server/perks/tree/object.hpp>
-#include <sanguis/server/perks/tree/status.hpp>
 #include <sanguis/server/perks/tree/required_parent_level.hpp>
 #include <sanguis/server/perks/tree/required_player_level.hpp>
+#include <sanguis/server/perks/tree/status.hpp>
 #include <fcppt/assign/make_container.hpp>
 
 

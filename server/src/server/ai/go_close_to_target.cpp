@@ -1,8 +1,8 @@
 #include <sanguis/creator/tile_is_visible.hpp>
 #include <sanguis/server/ai/context_fwd.hpp>
-#include <sanguis/server/ai/in_range.hpp>
 #include <sanguis/server/ai/go_close_to_target.hpp>
 #include <sanguis/server/ai/go_to_target.hpp>
+#include <sanguis/server/ai/in_range.hpp>
 #include <sanguis/server/ai/is_patrolling.hpp>
 #include <sanguis/server/ai/is_visible.hpp>
 #include <sanguis/server/ai/target.hpp>

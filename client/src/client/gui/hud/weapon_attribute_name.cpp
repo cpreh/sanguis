@@ -1,8 +1,8 @@
 #include <sanguis/weapon_attribute_type.hpp>
 #include <sanguis/client/gui/hud/weapon_attribute_name.hpp>
-#include <fcppt/assert/unreachable.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/string.hpp>
+#include <fcppt/assert/unreachable.hpp>
 
 
 sge::font::string

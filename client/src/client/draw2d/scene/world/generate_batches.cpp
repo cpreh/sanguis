@@ -12,10 +12,10 @@
 #include <sanguis/client/draw2d/scene/world/sprite/buffers.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/compare.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/container.hpp>
+#include <sanguis/client/load/tiles/context_fwd.hpp>
 #include <sanguis/creator/background_grid.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/pos.hpp>
-#include <sanguis/client/load/tiles/context_fwd.hpp>
 #include <sge/sprite/geometry/make_random_access_range.hpp>
 #include <sge/sprite/geometry/sort_and_update.hpp>
 #include <fcppt/cast/size.hpp>

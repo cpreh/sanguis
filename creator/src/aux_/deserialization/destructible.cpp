@@ -1,7 +1,7 @@
-#include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/destructible.hpp>
 #include <sanguis/creator/destructible_pos.hpp>
 #include <sanguis/creator/destructible_type.hpp>
+#include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/aux_/deserialization/destructible.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/find_member_exn.hpp>

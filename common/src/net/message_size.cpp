@@ -1,5 +1,5 @@
-#include <sanguis/net/message_size.hpp>
 #include <sanguis/net/message_header_size.hpp>
+#include <sanguis/net/message_size.hpp>
 #include <alda/net/size_type.hpp>
 
 

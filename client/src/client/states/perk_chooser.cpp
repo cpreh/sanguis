@@ -1,6 +1,6 @@
+#include <sanguis/client/cursor.hpp>
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/make_send_callback.hpp>
-#include <sanguis/client/cursor.hpp>
 #include <sanguis/client/control/actions/nullary.hpp>
 #include <sanguis/client/control/actions/nullary_type.hpp>
 #include <sanguis/client/control/actions/variant.hpp>

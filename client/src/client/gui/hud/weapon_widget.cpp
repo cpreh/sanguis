@@ -5,8 +5,8 @@
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/client/gui/default_text_color.hpp>
-#include <sanguis/client/gui/style/text_color.hpp>
 #include <sanguis/client/gui/hud/weapon_widget.hpp>
+#include <sanguis/client/gui/style/text_color.hpp>
 #include <sanguis/client/load/hud/context.hpp>
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/fill_color.hpp>
@@ -24,8 +24,8 @@
 #include <sge/font/string.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
-#include <sge/rucksack/axis.hpp>
 #include <sge/rucksack/alignment.hpp>
+#include <sge/rucksack/axis.hpp>
 #include <sge/rucksack/dim.hpp>
 #include <sge/timer/elapsed_fractional.hpp>
 #include <fcppt/insert_to_string.hpp>

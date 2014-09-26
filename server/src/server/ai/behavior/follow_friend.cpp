@@ -3,8 +3,8 @@
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/remove_target_callback.hpp>
 #include <sanguis/server/ai/context.hpp>
-#include <sanguis/server/ai/idle.hpp>
 #include <sanguis/server/ai/go_close_to_target.hpp>
+#include <sanguis/server/ai/idle.hpp>
 #include <sanguis/server/ai/is_patrolling.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/ai/behavior/base.hpp>

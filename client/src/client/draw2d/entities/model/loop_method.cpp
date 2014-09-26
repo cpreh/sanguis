@@ -1,6 +1,6 @@
-#include <sanguis/client/load/animation_type.hpp>
 #include <sanguis/client/draw2d/entities/model/loop_method.hpp>
 #include <sanguis/client/draw2d/sprite/animation/loop_method.hpp>
+#include <sanguis/client/load/animation_type.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
 

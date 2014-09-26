@@ -36,8 +36,8 @@
 #include <sge/console/callback/short_description.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/timer/reset_when_expired.hpp>
-#include <fcppt/assign/make_container.hpp>
 #include <fcppt/assert/unreachable.hpp>
+#include <fcppt/assign/make_container.hpp>
 #include <fcppt/math/clamp.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/signal/auto_connection.hpp>

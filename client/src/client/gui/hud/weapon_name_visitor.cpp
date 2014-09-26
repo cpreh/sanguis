@@ -1,9 +1,9 @@
 #include <sanguis/primary_weapon_type.hpp>
 #include <sanguis/secondary_weapon_type.hpp>
 #include <sanguis/client/gui/hud/weapon_name_visitor.hpp>
-#include <fcppt/assert/unreachable.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/string.hpp>
+#include <fcppt/assert/unreachable.hpp>
 
 
 sanguis::client::gui::hud::weapon_name_visitor::result_type

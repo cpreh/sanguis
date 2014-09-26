@@ -1,8 +1,8 @@
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/gravity.hpp>
-#include <sanguis/gui/aux_/make_container_pair.hpp>
 #include <sanguis/gui/aux_/gravity_east.hpp>
 #include <sanguis/gui/aux_/gravity_south.hpp>
+#include <sanguis/gui/aux_/make_container_pair.hpp>
 #include <sanguis/gui/aux_/swap_pair.hpp>
 #include <sanguis/gui/main_area/base.hpp>
 #include <sanguis/gui/main_area/screen_corner.hpp>

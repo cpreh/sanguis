@@ -6,9 +6,9 @@
 #include <sanguis/collision/world/ghost_parameters.hpp>
 #include <sanguis/collision/world/group.hpp>
 #include <sanguis/collision/world/object.hpp>
-#include <fcppt/assert/pre.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/collision/ghost.hpp>
+#include <fcppt/assert/pre.hpp>
 
 
 sanguis::server::collision::ghost::ghost(

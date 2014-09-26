@@ -1,5 +1,5 @@
-#include <sanguis/client/args/resolution.hpp>
 #include <sanguis/client/args/optional_resolution.hpp>
+#include <sanguis/client/args/resolution.hpp>
 #include <sge/renderer/screen_size.hpp>
 #include <sge/renderer/screen_unit.hpp>
 #include <fcppt/config/external_begin.hpp>

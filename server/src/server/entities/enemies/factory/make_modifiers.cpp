@@ -1,13 +1,13 @@
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/server/entities/enemies/factory/make_modifiers.hpp>
+#include <sanguis/server/entities/enemies/modifiers/callback.hpp>
+#include <sanguis/server/entities/enemies/modifiers/container.hpp>
+#include <sanguis/server/entities/enemies/modifiers/create_callbacks.hpp>
 #include <sanguis/server/random/amount.hpp>
 #include <sanguis/server/random/create_function.hpp>
 #include <sanguis/server/random/draw.hpp>
 #include <sanguis/server/random/equal_function.hpp>
 #include <sanguis/server/random/less_function.hpp>
-#include <sanguis/server/entities/enemies/factory/make_modifiers.hpp>
-#include <sanguis/server/entities/enemies/modifiers/callback.hpp>
-#include <sanguis/server/entities/enemies/modifiers/container.hpp>
-#include <sanguis/server/entities/enemies/modifiers/create_callbacks.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>

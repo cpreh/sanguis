@@ -1,8 +1,6 @@
 #ifndef SANGUIS_CLIENT_LOAD_TILES_CONTEXT_HPP_INCLUDED
 #define SANGUIS_CLIENT_LOAD_TILES_CONTEXT_HPP_INCLUDED
 
-#include <sanguis/creator/background_tile_fwd.hpp>
-#include <sanguis/creator/tile_fwd.hpp>
 #include <sanguis/client/load/resource/textures_fwd.hpp>
 #include <sanguis/client/load/tiles/background_tile_pair_fwd.hpp>
 #include <sanguis/client/load/tiles/category.hpp>
@@ -10,6 +8,8 @@
 #include <sanguis/client/load/tiles/pair.hpp>
 #include <sanguis/client/load/tiles/set_fwd.hpp>
 #include <sanguis/client/load/tiles/tile_pair_fwd.hpp>
+#include <sanguis/creator/background_tile_fwd.hpp>
+#include <sanguis/creator/tile_fwd.hpp>
 #include <sge/texture/const_part_unique_ptr.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <fcppt/homogenous_pair_comparison.hpp>

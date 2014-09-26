@@ -13,12 +13,12 @@
 #include <sanguis/client/draw2d/scene/world/tile_neighbors_to_string.hpp>
 #include <sanguis/client/draw2d/scene/world/tile_orientation.hpp>
 #include <sanguis/client/draw2d/scene/world/to_tile_texture_base.hpp>
-#include <sanguis/creator/pos.hpp>
-#include <sanguis/creator/tile_grid.hpp>
 #include <sanguis/client/load/tiles/context.hpp>
 #include <sanguis/client/load/tiles/orientation.hpp>
 #include <sanguis/client/load/tiles/pair.hpp>
 #include <sanguis/client/load/tiles/set.hpp>
+#include <sanguis/creator/pos.hpp>
+#include <sanguis/creator/tile_grid.hpp>
 #include <sge/texture/const_optional_part_ref.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/log/_.hpp>

@@ -2,8 +2,8 @@
 #include <sanguis/collision/dim2.hpp>
 #include <sanguis/collision/unit.hpp>
 #include <sanguis/collision/aux_/world/projectile/from_sge_user_data.hpp>
-#include <sanguis/collision/aux_/world/projectile/global_groups_fwd.hpp>
 #include <sanguis/collision/aux_/world/projectile/ghost.hpp>
+#include <sanguis/collision/aux_/world/projectile/global_groups_fwd.hpp>
 #include <sanguis/collision/aux_/world/projectile/make_groups.hpp>
 #include <sanguis/collision/aux_/world/projectile/to_sge_dim.hpp>
 #include <sanguis/collision/aux_/world/projectile/to_sge_vector.hpp>
@@ -12,9 +12,9 @@
 #include <sanguis/collision/world/ghost_parameters.hpp>
 #include <sge/projectile/world_fwd.hpp>
 #include <sge/projectile/body/object.hpp>
+#include <sge/projectile/ghost/object.hpp>
 #include <sge/projectile/ghost/parameters.hpp>
 #include <sge/projectile/ghost/position.hpp>
-#include <sge/projectile/ghost/object.hpp>
 #include <sge/projectile/ghost/size.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>

@@ -1,11 +1,11 @@
 #include <sanguis/exception.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
-#include <sanguis/model/part_fwd.hpp>
 #include <sanguis/client/load/model/global_parameters_fwd.hpp>
 #include <sanguis/client/load/model/make_weapon_categories.hpp>
 #include <sanguis/client/load/model/part.hpp>
 #include <sanguis/client/load/model/weapon_category.hpp>
 #include <sanguis/client/load/model/weapon_category_map.hpp>
+#include <sanguis/model/part_fwd.hpp>
 #include <fcppt/text.hpp>
 
 

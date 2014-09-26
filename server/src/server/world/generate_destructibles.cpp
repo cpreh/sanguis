@@ -8,8 +8,8 @@
 #include <sanguis/server/world/generate_destructibles.hpp>
 #include <sanguis/server/world/insert_pair_container.hpp>
 #include <sanguis/server/world/make_destructible.hpp>
-#include <sanguis/server/world/place_multiple.hpp>
 #include <sanguis/server/world/place_callback.hpp>
+#include <sanguis/server/world/place_multiple.hpp>
 
 
 sanguis::server::world::insert_pair_container

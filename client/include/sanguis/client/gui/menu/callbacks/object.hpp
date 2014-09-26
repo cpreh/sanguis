@@ -1,8 +1,8 @@
 #ifndef SANGUIS_CLIENT_GUI_MENU_CALLBACKS_OBJECT_HPP_INCLUDED
 #define SANGUIS_CLIENT_GUI_MENU_CALLBACKS_OBJECT_HPP_INCLUDED
 
-#include <sanguis/client/gui/menu/callbacks/connect.hpp>
 #include <sanguis/client/gui/menu/callbacks/cancel_connect.hpp>
+#include <sanguis/client/gui/menu/callbacks/connect.hpp>
 #include <sanguis/client/gui/menu/callbacks/quickstart.hpp>
 #include <sanguis/client/gui/menu/callbacks/quit.hpp>
 #include <fcppt/nonassignable.hpp>

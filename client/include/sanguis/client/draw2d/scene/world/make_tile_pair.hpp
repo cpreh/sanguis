@@ -1,10 +1,10 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_MAKE_TILE_PAIR_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_MAKE_TILE_PAIR_HPP_INCLUDED
 
+#include <sanguis/client/draw2d/scene/world/tile_neighbors.hpp>
 #include <sanguis/client/load/tiles/direction.hpp>
 #include <sanguis/client/load/tiles/optional_pair.hpp>
 #include <sanguis/client/load/tiles/pair.hpp>
-#include <sanguis/client/draw2d/scene/world/tile_neighbors.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/range/size.hpp>
 #include <boost/range/algorithm/sort.hpp>

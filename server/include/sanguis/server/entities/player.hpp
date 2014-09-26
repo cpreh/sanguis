@@ -20,8 +20,8 @@
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/with_auras_id.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
-#include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_health.hpp>
+#include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/with_perks.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>

@@ -12,8 +12,8 @@
 #include <sge/rucksack/make_axis_policy.hpp>
 #include <sge/rucksack/minimum_size.hpp>
 #include <sge/rucksack/preferred_size.hpp>
-#include <sge/rucksack/scalar.hpp>
 #include <sge/rucksack/rect.hpp>
+#include <sge/rucksack/scalar.hpp>
 #include <sge/rucksack/widget/base.hpp>
 
 

@@ -2,8 +2,8 @@
 #define SANGUIS_CLIENT_STATES_INGAME_HPP_INCLUDED
 
 #include <sanguis/client/events/action_fwd.hpp>
-#include <sanguis/client/states/ingame_fwd.hpp>
 #include <sanguis/client/states/has_player.hpp>
+#include <sanguis/client/states/ingame_fwd.hpp>
 #include <sge/input/cursor/scoped_activation.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>

@@ -27,8 +27,8 @@
 #include <fcppt/math/point_rotate.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
-#include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/vector/signed_angle_between_cast.hpp>
+#include <fcppt/math/vector/structure_cast.hpp>
 
 
 namespace

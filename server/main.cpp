@@ -6,9 +6,9 @@
 #include <fcppt/text.hpp>
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <cstdlib>
 #include <exception>
 #include <iostream>
-#include <cstdlib>
 #include <fcppt/config/external_end.hpp>
 
 

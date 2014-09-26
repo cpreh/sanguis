@@ -1,5 +1,5 @@
-#include <sanguis/client/perk/const_tree_range.hpp>
 #include <sanguis/client/perk/category_equal_range.hpp>
+#include <sanguis/client/perk/const_tree_range.hpp>
 #include <sanguis/client/perk/info.hpp>
 #include <sanguis/client/perk/to_category.hpp>
 #include <sanguis/client/perk/tree.hpp>

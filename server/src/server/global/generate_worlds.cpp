@@ -8,11 +8,6 @@
 #include <sanguis/creator/top_parameters.hpp>
 #include <sanguis/server/dest_world_id.hpp>
 #include <sanguis/server/source_world_id.hpp>
-#include <sanguis/server/global/dest_world_pair.hpp>
-#include <sanguis/server/global/generate_worlds.hpp>
-#include <sanguis/server/global/source_world_pair.hpp>
-#include <sanguis/server/global/world_connection_map.hpp>
-#include <sanguis/server/global/world_map.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
@@ -21,6 +16,11 @@
 #include <sanguis/server/entities/enemies/create.hpp>
 #include <sanguis/server/entities/enemies/special_chance.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/global/dest_world_pair.hpp>
+#include <sanguis/server/global/generate_worlds.hpp>
+#include <sanguis/server/global/source_world_pair.hpp>
+#include <sanguis/server/global/world_connection_map.hpp>
+#include <sanguis/server/global/world_map.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/generate.hpp>
 #include <sanguis/server/world/grid_pos_to_center.hpp>

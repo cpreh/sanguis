@@ -6,8 +6,8 @@
 #include <sanguis/client/events/action_fwd.hpp>
 #include <sanguis/client/events/message_fwd.hpp>
 #include <sanguis/client/perk/state_fwd.hpp>
-#include <sanguis/client/states/running.hpp>
 #include <sanguis/client/states/ingame_fwd.hpp>
+#include <sanguis/client/states/running.hpp>
 #include <sanguis/messages/call/result_fwd.hpp>
 #include <sanguis/messages/server/available_perks_fwd.hpp>
 #include <sanguis/messages/server/level_up_fwd.hpp>

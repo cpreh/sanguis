@@ -1,5 +1,5 @@
-#include <sanguis/creator/tile_connects.hpp>
 #include <sanguis/creator/tile.hpp>
+#include <sanguis/creator/tile_connects.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
 

@@ -2,8 +2,8 @@
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/pickup_probability.hpp>
-#include <sanguis/server/team.hpp>
 #include <sanguis/server/radius.hpp>
+#include <sanguis/server/team.hpp>
 #include <sanguis/server/ai/create_simple.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/auras/container.hpp>

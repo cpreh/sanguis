@@ -1,6 +1,6 @@
+#include <sanguis/weapon_attribute.hpp>
 #include <sanguis/weapon_attribute_base.hpp>
 #include <sanguis/weapon_attribute_extra.hpp>
-#include <sanguis/weapon_attribute.hpp>
 #include <sanguis/weapon_attribute_type.hpp>
 
 

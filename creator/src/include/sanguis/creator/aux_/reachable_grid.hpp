@@ -1,8 +1,9 @@
 #ifndef SANGUIS_CREATOR_AUX__REACHABLE_GRID_HPP_INCLUDED
 #define SANGUIS_CREATOR_AUX__REACHABLE_GRID_HPP_INCLUDED
 
-#include <fcppt/container/grid/object.hpp>
 #include <sanguis/creator/aux_/reachable.hpp>
+#include <fcppt/container/grid/object.hpp>
+
 
 namespace sanguis
 {

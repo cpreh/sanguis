@@ -19,8 +19,8 @@
 #include <sanguis/creator/aux_/random/uniform_int_wrapper_impl.hpp>
 #include <sanguis/creator/aux_/random/uniform_pos.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assert/pre.hpp>
 #include <fcppt/assert/error_message.hpp>
+#include <fcppt/assert/pre.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>

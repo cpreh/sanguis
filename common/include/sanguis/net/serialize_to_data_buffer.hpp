@@ -2,8 +2,8 @@
 #define SANGUIS_NET_SERIALIZE_TO_DATA_BUFFER_HPP_INCLUDED
 
 #include <sanguis/net/data_buffer.hpp>
-#include <sanguis/net/serialize_message_function.hpp>
 #include <sanguis/net/serialize_impl.hpp>
+#include <sanguis/net/serialize_message_function.hpp>
 #include <alda/message/base_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/iostreams/stream_buffer.hpp>

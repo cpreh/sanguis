@@ -1,10 +1,10 @@
+#include <sanguis/client/sound_manager.hpp>
 #include <sge/audio/sound/base.hpp>
 #include <sge/audio/sound/base_unique_ptr.hpp>
 #include <sge/audio/sound/do_pause.hpp>
 #include <sge/audio/sound/pause_or_resume.hpp>
 #include <sge/audio/sound/play_status.hpp>
 #include <sge/audio/sound/repeat.hpp>
-#include <sanguis/client/sound_manager.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>

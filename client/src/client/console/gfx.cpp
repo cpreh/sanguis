@@ -3,10 +3,10 @@
 #include <sanguis/client/load/resource/textures.hpp>
 #include <sge/console/object_fwd.hpp>
 #include <sge/console/gfx/font_color.hpp>
-#include <sge/console/gfx/sprite_object.hpp>
-#include <sge/console/gfx/sprite_parameters.hpp>
 #include <sge/console/gfx/object.hpp>
 #include <sge/console/gfx/output_line_limit.hpp>
+#include <sge/console/gfx/sprite_object.hpp>
+#include <sge/console/gfx/sprite_parameters.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>

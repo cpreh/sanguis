@@ -12,11 +12,11 @@
 #include <sanguis/server/entities/enemies/attribute.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
 #include <sanguis/server/entities/enemies/skills/cooldown.hpp>
-#include <sanguis/server/entities/enemies/skills/skill.hpp>
 #include <sanguis/server/entities/enemies/skills/scatter.hpp>
+#include <sanguis/server/entities/enemies/skills/skill.hpp>
 #include <sanguis/server/entities/projectiles/rocket.hpp>
-#include <sanguis/server/entities/projectiles/scatter_create.hpp>
 #include <sanguis/server/entities/projectiles/scatter.hpp>
+#include <sanguis/server/entities/projectiles/scatter_create.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/environment/optional_object_ref.hpp>

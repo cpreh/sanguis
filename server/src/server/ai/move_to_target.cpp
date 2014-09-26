@@ -3,8 +3,8 @@
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/ai/is_patrolling.hpp>
 #include <sanguis/server/ai/move_to_target.hpp>
-#include <sanguis/server/ai/update_interval.hpp>
 #include <sanguis/server/ai/target.hpp>
+#include <sanguis/server/ai/update_interval.hpp>
 #include <sanguis/server/collision/distance_entity_pos.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>

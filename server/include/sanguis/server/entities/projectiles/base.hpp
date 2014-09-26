@@ -8,8 +8,8 @@
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/collision/result_fwd.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
-#include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_health_fwd.hpp>
+#include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>

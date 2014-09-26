@@ -5,8 +5,8 @@
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/make_send_callback.hpp>
 #include <sanguis/client/player_level.hpp>
-#include <sanguis/client/control/action_handler.hpp>
 #include <sanguis/client/console/object.hpp>
+#include <sanguis/client/control/action_handler.hpp>
 #include <sanguis/client/events/action.hpp>
 #include <sanguis/client/events/menu.hpp>
 #include <sanguis/client/events/message.hpp>
@@ -21,8 +21,8 @@
 #include <sanguis/client/states/has_player.hpp>
 #include <sanguis/client/states/running.hpp>
 #include <sanguis/messages/call/result.hpp>
-#include <sanguis/messages/client/create.hpp>
 #include <sanguis/messages/client/choose_perk.hpp>
+#include <sanguis/messages/client/create.hpp>
 #include <sanguis/messages/roles/level.hpp>
 #include <sanguis/messages/roles/name.hpp>
 #include <sanguis/messages/roles/perk_tree.hpp>

@@ -1,12 +1,12 @@
 #ifndef SANGUIS_NET_DESERIALIZE_HPP_INCLUDED
 #define SANGUIS_NET_DESERIALIZE_HPP_INCLUDED
 
+#include <sanguis/exception.hpp>
 #include <sanguis/net/deserialize_message_function.hpp>
 #include <sanguis/net/message_header.hpp>
 #include <sanguis/net/message_header_size.hpp>
 #include <sanguis/net/message_size.hpp>
 #include <sanguis/net/stream_exceptions.hpp>
-#include <sanguis/exception.hpp>
 #include <alda/endianness.hpp>
 #include <alda/message/base_decl.hpp>
 #include <alda/message/base_unique_ptr.hpp>

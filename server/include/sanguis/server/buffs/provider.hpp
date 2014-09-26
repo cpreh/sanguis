@@ -4,9 +4,9 @@
 #include <sanguis/server/buffs/provider_fwd.hpp>
 #include <sanguis/server/buffs/unique_ptr.hpp>
 #include <sanguis/server/entities/with_buffs_fwd.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <fcppt/reference_wrapper_decl.hpp>
 #include <fcppt/reference_wrapper_std_hash.hpp>
-#include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>

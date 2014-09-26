@@ -5,13 +5,13 @@
 #include <sanguis/client/control/actions/binary_type_fwd.hpp>
 #include <sanguis/client/control/actions/callback.hpp>
 #include <sanguis/client/control/actions/nullary_type_fwd.hpp>
-#include <sge/input/keyboard/device_fwd.hpp>
-#include <sge/input/keyboard/key_event_fwd.hpp>
 #include <sge/input/cursor/activatable.hpp>
-#include <sge/input/cursor/move_event_fwd.hpp>
 #include <sge/input/cursor/button_event_fwd.hpp>
+#include <sge/input/cursor/move_event_fwd.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/cursor/position_unit.hpp>
+#include <sge/input/keyboard/device_fwd.hpp>
+#include <sge/input/keyboard/key_event_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 

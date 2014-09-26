@@ -10,6 +10,7 @@
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/speed_fwd.hpp>
 #include <sanguis/server/collision/body.hpp>
+#include <sanguis/server/collision/body_fwd.hpp>
 #include <sanguis/server/collision/result_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
@@ -17,7 +18,6 @@
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/entities/ifaces/with_links.hpp>
-#include <sanguis/server/collision/body_fwd.hpp>
 #include <sanguis/server/net/angle.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>

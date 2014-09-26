@@ -4,8 +4,8 @@
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/damage/armor_array.hpp>
 #include <sanguis/server/damage/modified_array.hpp>
-#include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/damage/type.hpp>
+#include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_health.hpp>
 #include <sanguis/server/entities/ifaces/with_health.hpp>

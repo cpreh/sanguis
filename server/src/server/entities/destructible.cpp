@@ -16,8 +16,8 @@
 #include <sanguis/server/damage/armor_array_fwd.hpp>
 #include <sanguis/server/entities/destructible.hpp>
 #include <sanguis/server/entities/with_body.hpp>
-#include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_health.hpp>
+#include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/environment/load_context.hpp>

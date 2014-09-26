@@ -8,8 +8,8 @@
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/damage/full.hpp>
 #include <sanguis/server/damage/make_array.hpp>
-#include <sanguis/server/damage/normal.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
+#include <sanguis/server/damage/normal.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>

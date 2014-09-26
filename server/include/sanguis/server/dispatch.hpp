@@ -1,12 +1,12 @@
 #ifndef SANGUIS_SERVER_DISPATCH_HPP_INCLUDED
 #define SANGUIS_SERVER_DISPATCH_HPP_INCLUDED
 
-#include <sanguis/server/message_functor.hpp>
-#include <sanguis/server/player_id.hpp>
-#include <sanguis/server/events/message.hpp>
 #include <sanguis/messages/call/dispatch.hpp>
 #include <sanguis/messages/client/base_fwd.hpp>
 #include <sanguis/messages/client/call/object.hpp>
+#include <sanguis/server/message_functor.hpp>
+#include <sanguis/server/player_id.hpp>
+#include <sanguis/server/events/message.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/result.hpp>
 #include <functional>

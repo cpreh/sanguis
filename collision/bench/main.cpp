@@ -5,11 +5,11 @@
 #include <sanguis/collision/vector2.hpp>
 #include <sanguis/collision/world/body.hpp>
 #include <sanguis/collision/world/body_base.hpp>
+#include <sanguis/collision/world/body_collision_callback.hpp>
 #include <sanguis/collision/world/body_enter_callback.hpp>
 #include <sanguis/collision/world/body_exit_callback.hpp>
 #include <sanguis/collision/world/body_parameters.hpp>
 #include <sanguis/collision/world/body_unique_ptr.hpp>
-#include <sanguis/collision/world/body_collision_callback.hpp>
 #include <sanguis/collision/world/create.hpp>
 #include <sanguis/collision/world/ghost.hpp>
 #include <sanguis/collision/world/ghost_parameters.hpp>

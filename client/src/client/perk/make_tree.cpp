@@ -3,8 +3,8 @@
 #include <sanguis/client/player_level.hpp>
 #include <sanguis/client/perk/compare.hpp>
 #include <sanguis/client/perk/info.hpp>
-#include <sanguis/client/perk/max_level.hpp>
 #include <sanguis/client/perk/make_tree.hpp>
+#include <sanguis/client/perk/max_level.hpp>
 #include <sanguis/client/perk/optional_info.hpp>
 #include <sanguis/client/perk/required_parent_level.hpp>
 #include <sanguis/client/perk/required_player_level.hpp>
@@ -17,10 +17,10 @@
 #include <sanguis/messages/roles/required_perk_parent_level.hpp>
 #include <sanguis/messages/roles/required_perk_player_level.hpp>
 #include <sanguis/messages/server/types/perk_tree_node_vector.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/find_if_exn.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/container/tree/pre_order.hpp>
-#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>

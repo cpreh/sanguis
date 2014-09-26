@@ -4,10 +4,10 @@
 #include <sanguis/enemy_kind_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/messages/types/string.hpp>
+#include <sanguis/server/entities/enemies/attribute_container.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
 #include <sanguis/server/entities/enemies/is_unique.hpp>
 #include <sanguis/server/entities/enemies/parameters_fwd.hpp>
-#include <sanguis/server/entities/enemies/attribute_container.hpp>
 #include <sanguis/server/entities/enemies/skills/container.hpp>
 #include <sanguis/server/entities/enemies/skills/factory/container.hpp>
 #include <fcppt/noncopyable.hpp>

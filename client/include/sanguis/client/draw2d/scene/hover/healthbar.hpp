@@ -3,10 +3,10 @@
 
 #include <sanguis/client/health_pair_fwd.hpp>
 #include <sanguis/client/draw2d/radius_fwd.hpp>
+#include <sanguis/client/draw2d/scene/hover/healthbar_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/buffers_decl.hpp>
 #include <sanguis/client/draw2d/sprite/center_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/colored/choices.hpp>
-#include <sanguis/client/draw2d/scene/hover/healthbar_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/sprite/render/range_decl.hpp>

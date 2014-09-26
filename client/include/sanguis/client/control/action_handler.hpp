@@ -19,9 +19,9 @@
 #include <sge/console/object_fwd.hpp>
 #include <sge/console/callback/name.hpp>
 #include <sge/console/callback/short_description.hpp>
-#include <fcppt/signal/auto_connection_fwd.hpp>
-#include <fcppt/signal/auto_connection_container.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/signal/auto_connection_container.hpp>
+#include <fcppt/signal/auto_connection_fwd.hpp>
 
 
 namespace sanguis

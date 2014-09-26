@@ -1,8 +1,8 @@
 #ifndef SANGUIS_MESSAGES_CLIENT_CONCRETE_FWD_HPP_INCLUDED
 #define SANGUIS_MESSAGES_CLIENT_CONCRETE_FWD_HPP_INCLUDED
 
-#include <alda/message/concrete_fwd.hpp>
 #include <sanguis/messages/client/types/alda_type_fwd.hpp>
+#include <alda/message/concrete_fwd.hpp>
 
 
 namespace sanguis

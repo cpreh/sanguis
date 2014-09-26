@@ -4,8 +4,8 @@
 #include <sanguis/creator/aux_/find_opposing_cell.hpp>
 #include <sanguis/creator/aux_/generate_maze.hpp>
 #include <sanguis/creator/aux_/optional_pos.hpp>
-#include <sanguis/creator/aux_/reachable_grid.hpp>
 #include <sanguis/creator/aux_/reachable.hpp>
+#include <sanguis/creator/aux_/reachable_grid.hpp>
 #include <sanguis/creator/aux_/random/generator.hpp>
 #include <sanguis/creator/aux_/random/uniform_size.hpp>
 #include <sanguis/creator/aux_/random/uniform_size_variate.hpp>

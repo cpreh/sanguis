@@ -8,9 +8,9 @@
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <cstdlib>
 #include <exception>
 #include <functional>
-#include <cstdlib>
 #include <mutex>
 #include <fcppt/config/external_end.hpp>
 

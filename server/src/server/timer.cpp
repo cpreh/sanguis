@@ -1,7 +1,7 @@
 #include <sanguis/io_service_fwd.hpp>
+#include <sanguis/server/timer.hpp>
 #include <sanguis/server/timer_callback.hpp>
 #include <sanguis/server/timer_duration.hpp>
-#include <sanguis/server/timer.hpp>
 #include <sanguis/server/timer_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 

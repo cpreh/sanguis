@@ -7,8 +7,8 @@
 #include <alda/message/base_decl.hpp>
 #include <alda/net/value_type.hpp>
 #include <fcppt/assert/pre.hpp>
-#include <fcppt/io/write.hpp>
 #include <fcppt/cast/truncation_check.hpp>
+#include <fcppt/io/write.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <ostream>
 #include <fcppt/config/external_end.hpp>

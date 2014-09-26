@@ -30,8 +30,8 @@
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <boost/statechart/result.hpp>
-#include <ostream>
 #include <functional>
+#include <ostream>
 #include <fcppt/config/external_end.hpp>
 
 

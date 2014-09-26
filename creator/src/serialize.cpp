@@ -1,6 +1,6 @@
 #include <sanguis/creator/exception.hpp>
-#include <sanguis/creator/top_result_fwd.hpp>
 #include <sanguis/creator/serialize.hpp>
+#include <sanguis/creator/top_result_fwd.hpp>
 #include <sanguis/creator/aux_/serialization/top_result.hpp>
 #include <sge/parse/json/array.hpp>
 #include <sge/parse/json/object.hpp>

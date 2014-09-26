@@ -1,7 +1,7 @@
 #include <sanguis/creator/destructible_type.hpp>
 #include <sanguis/load/destructible_name.hpp>
-#include <sanguis/load/model/path.hpp>
 #include <sanguis/load/model/destructible_path.hpp>
+#include <sanguis/load/model/path.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>

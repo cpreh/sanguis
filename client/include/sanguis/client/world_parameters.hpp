@@ -1,8 +1,8 @@
 #ifndef SANGUIS_CLIENT_WORLD_PARAMETERS_HPP_INCLUDED
 #define SANGUIS_CLIENT_WORLD_PARAMETERS_HPP_INCLUDED
 
-#include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/world_id.hpp>
+#include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/creator/top_parameters.hpp>
 #include <fcppt/nonassignable.hpp>
 

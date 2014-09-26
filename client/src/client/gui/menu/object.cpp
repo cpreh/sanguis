@@ -10,6 +10,8 @@
 #include <sanguis/gui/widget/reference.hpp>
 #include <sanguis/gui/widget/reference_alignment_pair.hpp>
 #include <sanguis/gui/widget/reference_alignment_vector.hpp>
+#include <alda/net/host.hpp>
+#include <alda/net/port.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/object_fwd.hpp>
@@ -24,16 +26,14 @@
 #include <sge/parse/ini/set_or_create.hpp>
 #include <sge/parse/ini/string.hpp>
 #include <sge/parse/ini/value.hpp>
-#include <sge/renderer/clear/parameters.hpp>
 #include <sge/renderer/system_fwd.hpp>
+#include <sge/renderer/clear/parameters.hpp>
 #include <sge/renderer/context/ffp.hpp>
 #include <sge/renderer/device/ffp.hpp>
 #include <sge/renderer/device/index.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <sge/viewport/manager_fwd.hpp>
-#include <alda/net/host.hpp>
-#include <alda/net/port.hpp>
 #include <fcppt/extract_from_string.hpp>
 #include <fcppt/extract_from_string_exn.hpp>
 #include <fcppt/optional_impl.hpp>

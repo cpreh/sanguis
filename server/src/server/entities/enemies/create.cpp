@@ -10,13 +10,13 @@
 #include <sanguis/server/entities/enemies/special_chance.hpp>
 #include <sanguis/server/entities/enemies/factory/ghost.hpp>
 #include <sanguis/server/entities/enemies/factory/maggot.hpp>
+#include <sanguis/server/entities/enemies/factory/parameters.hpp>
 #include <sanguis/server/entities/enemies/factory/reaper.hpp>
 #include <sanguis/server/entities/enemies/factory/skeleton.hpp>
 #include <sanguis/server/entities/enemies/factory/spider.hpp>
 #include <sanguis/server/entities/enemies/factory/wolf.hpp>
 #include <sanguis/server/entities/enemies/factory/zombie00.hpp>
 #include <sanguis/server/entities/enemies/factory/zombie01.hpp>
-#include <sanguis/server/entities/enemies/factory/parameters.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <fcppt/assert/unreachable.hpp>

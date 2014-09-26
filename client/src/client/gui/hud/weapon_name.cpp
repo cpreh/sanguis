@@ -1,8 +1,8 @@
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/client/gui/hud/weapon_name.hpp>
 #include <sanguis/client/gui/hud/weapon_name_visitor.hpp>
-#include <fcppt/variant/apply_unary.hpp>
 #include <sge/font/string.hpp>
+#include <fcppt/variant/apply_unary.hpp>
 
 
 sge::font::string

@@ -8,12 +8,12 @@
 #include <sanguis/client/load/model/part_result.hpp>
 #include <sanguis/client/load/resource/context_fwd.hpp>
 #include <sanguis/model/cell_size.hpp>
-#include <fcppt/random/variate_decl.hpp>
-#include <fcppt/random/distribution/basic_decl.hpp>
-#include <fcppt/random/distribution/parameters/uniform_int_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_decl.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/random/variate_decl.hpp>
+#include <fcppt/random/distribution/basic_decl.hpp>
+#include <fcppt/random/distribution/parameters/uniform_int_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <fcppt/config/external_end.hpp>

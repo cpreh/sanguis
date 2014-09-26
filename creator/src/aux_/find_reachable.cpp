@@ -1,11 +1,12 @@
-#include <sanguis/creator/aux_/find_reachable.hpp>
-#include <sanguis/creator/aux_/reachable.hpp>
-#include <sanguis/creator/aux_/reachable_grid.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile_is_solid.hpp>
+#include <sanguis/creator/aux_/find_reachable.hpp>
+#include <sanguis/creator/aux_/reachable.hpp>
+#include <sanguis/creator/aux_/reachable_grid.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
 #include <fcppt/container/grid/object.hpp>
+
 
 sanguis::creator::aux_::reachable_grid
 sanguis::creator::aux_::find_reachable(

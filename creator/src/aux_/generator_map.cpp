@@ -1,9 +1,9 @@
 #include <sanguis/creator/start_name.hpp>
+#include <sanguis/creator/aux_/generator_map.hpp>
+#include <sanguis/creator/aux_/generator_map_type.hpp>
 #include <sanguis/creator/aux_/graveyard_name.hpp>
 #include <sanguis/creator/aux_/maze_name.hpp>
 #include <sanguis/creator/aux_/rooms_name.hpp>
-#include <sanguis/creator/aux_/generator_map.hpp>
-#include <sanguis/creator/aux_/generator_map_type.hpp>
 #include <sanguis/creator/aux_/generators/graveyard.hpp>
 #include <sanguis/creator/aux_/generators/maze.hpp>
 #include <sanguis/creator/aux_/generators/rooms.hpp>

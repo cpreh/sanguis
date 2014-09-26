@@ -26,12 +26,12 @@
 #include <sanguis/client/load/animation_type.hpp>
 #include <sanguis/client/load/model/collection.hpp>
 #include <sanguis/client/load/model/object.hpp>
+#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/assert/unreachable_message.hpp>
 #include <fcppt/cast/size.hpp>
-#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <memory>
 #include <fcppt/config/external_end.hpp>

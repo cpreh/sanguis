@@ -5,8 +5,8 @@
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/team.hpp>
-#include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
+#include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/entities/pickups/health.hpp>

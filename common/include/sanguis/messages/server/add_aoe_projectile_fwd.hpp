@@ -4,15 +4,15 @@
 #include <sanguis/aoe_projectile_type_fwd.hpp>
 #include <sanguis/messages/adapted_types/enum_fwd.hpp>
 #include <sanguis/messages/adapted_types/space_unit_fwd.hpp>
-#include <sanguis/messages/roles/aoe_projectile_type.hpp>
 #include <sanguis/messages/roles/aoe.hpp>
+#include <sanguis/messages/roles/aoe_projectile_type.hpp>
 #include <sanguis/messages/server/parts/add_elements_base_fwd.hpp>
 #include <sanguis/messages/server/parts/speed_fwd.hpp>
 #include <sanguis/messages/server/types/bind_entity_message_fwd.hpp>
 #include <sanguis/messages/server/types/message.hpp>
 #include <alda/message/make_class_fwd.hpp>
-#include <majutsu/role_fwd.hpp>
 #include <majutsu/composite_fwd.hpp>
+#include <majutsu/role_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <fcppt/config/external_end.hpp>

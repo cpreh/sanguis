@@ -9,8 +9,8 @@
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 #include <sanguis/server/entities/with_auras_id.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
-#include <sanguis/server/entities/ifaces/with_links.hpp>
 #include <sanguis/server/entities/ifaces/with_health.hpp>
+#include <sanguis/server/entities/ifaces/with_links.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/weapons/ias.hpp>
 #include <sanguis/server/weapons/irs.hpp>

@@ -1,5 +1,5 @@
-#include <sanguis/client/perk/info.hpp>
 #include <sanguis/client/gui/perk/make_description.hpp>
+#include <sanguis/client/perk/info.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/string.hpp>

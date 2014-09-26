@@ -1,9 +1,9 @@
 #ifndef SANGUIS_SERVER_LOAD_HPP_INCLUDED
 #define SANGUIS_SERVER_LOAD_HPP_INCLUDED
 
+#include <sanguis/load/model/path.hpp>
 #include <sanguis/model/cell_size.hpp>
 #include <sanguis/server/load_fwd.hpp>
-#include <sanguis/load/model/path.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <map>

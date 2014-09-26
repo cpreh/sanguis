@@ -12,8 +12,8 @@
 #include <sanguis/server/ai/behavior/status.hpp>
 #include <sanguis/server/ai/behavior/wander.hpp>
 #include <sanguis/server/ai/pathing/optional_target.hpp>
-#include <sanguis/server/world/grid_pos_to_center.hpp>
 #include <sanguis/server/random/grid_pos.hpp>
+#include <sanguis/server/world/grid_pos_to_center.hpp>
 
 
 sanguis::server::ai::behavior::wander::wander(

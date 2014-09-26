@@ -5,9 +5,9 @@
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/server/entities/optional_base_ref_fwd.hpp>
 #include <sanguis/server/weapons/attack_fwd.hpp>
-#include <sanguis/server/weapons/spider_parameters_fwd.hpp>
 #include <sanguis/server/weapons/spawn.hpp>
 #include <sanguis/server/weapons/spawn_weapon.hpp>
+#include <sanguis/server/weapons/spider_parameters_fwd.hpp>
 #include <sanguis/server/weapons/attributes/health.hpp>
 #include <fcppt/noncopyable.hpp>
 

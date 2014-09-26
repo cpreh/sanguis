@@ -13,8 +13,8 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
-#include <sanguis/server/entities/enemies/factory/make.hpp>
 #include <sanguis/server/entities/enemies/factory/maggot.hpp>
+#include <sanguis/server/entities/enemies/factory/make.hpp>
 #include <sanguis/server/entities/enemies/factory/parameters.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/damage.hpp>

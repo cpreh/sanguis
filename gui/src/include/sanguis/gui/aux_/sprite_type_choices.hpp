@@ -3,8 +3,8 @@
 
 #include <sge/rucksack/scalar.hpp>
 #include <sge/sprite/config/float_type.hpp>
-#include <sge/sprite/config/unit_type.hpp>
 #include <sge/sprite/config/type_choices.hpp>
+#include <sge/sprite/config/unit_type.hpp>
 
 
 namespace sanguis

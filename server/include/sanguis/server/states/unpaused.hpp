@@ -1,10 +1,6 @@
 #ifndef SANGUIS_SERVER_STATES_UNPAUSED_HPP_INCLUDED
 #define SANGUIS_SERVER_STATES_UNPAUSED_HPP_INCLUDED
 
-#include <sanguis/server/player_id.hpp>
-#include <sanguis/server/events/message_fwd.hpp>
-#include <sanguis/server/events/tick_fwd.hpp>
-#include <sanguis/server/states/running.hpp>
 #include <sanguis/messages/call/result_fwd.hpp>
 #include <sanguis/messages/client/attack_dest_fwd.hpp>
 #include <sanguis/messages/client/change_world_fwd.hpp>
@@ -15,11 +11,15 @@
 #include <sanguis/messages/client/start_shooting_fwd.hpp>
 #include <sanguis/messages/client/stop_shooting_fwd.hpp>
 #include <sanguis/messages/client/unpause_fwd.hpp>
+#include <sanguis/server/player_id.hpp>
+#include <sanguis/server/events/message_fwd.hpp>
+#include <sanguis/server/events/tick_fwd.hpp>
+#include <sanguis/server/states/running.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
 #include <boost/statechart/custom_reaction.hpp>
-#include <boost/statechart/simple_state.hpp>
 #include <boost/statechart/result.hpp>
+#include <boost/statechart/simple_state.hpp>
 #include <fcppt/config/external_end.hpp>
 
 

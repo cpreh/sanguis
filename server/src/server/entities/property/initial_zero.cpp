@@ -1,5 +1,5 @@
-#include <sanguis/server/entities/property/initial_zero.hpp>
 #include <sanguis/server/entities/property/initial.hpp>
+#include <sanguis/server/entities/property/initial_zero.hpp>
 #include <sanguis/server/entities/property/value.hpp>
 
 

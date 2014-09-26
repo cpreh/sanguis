@@ -6,8 +6,8 @@
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
 #include <sanguis/collision/world/group.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
-#include <sanguis/server/radius.hpp>
 #include <sanguis/server/center_fwd.hpp>
+#include <sanguis/server/radius.hpp>
 #include <sanguis/server/collision/ghost_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 

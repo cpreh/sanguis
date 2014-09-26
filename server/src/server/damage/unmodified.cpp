@@ -1,8 +1,8 @@
 #include <sanguis/server/damage/array.hpp>
 #include <sanguis/server/damage/modified_array.hpp>
 #include <sanguis/server/damage/modified_unit.hpp>
-#include <sanguis/server/damage/unmodified.hpp>
 #include <sanguis/server/damage/type.hpp>
+#include <sanguis/server/damage/unmodified.hpp>
 #include <fcppt/algorithm/enum_array_fold.hpp>
 
 

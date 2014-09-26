@@ -5,10 +5,10 @@
 #include <sanguis/client/load/resource/texture_name_map.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/io/ifstream.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/warning.hpp>
-#include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/filesystem/path.hpp>

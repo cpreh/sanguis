@@ -1,13 +1,13 @@
 #include <sanguis/random_generator.hpp>
+#include <sanguis/server/entities/enemies/factory/make_skills.hpp>
+#include <sanguis/server/entities/enemies/skills/factory/callback.hpp>
+#include <sanguis/server/entities/enemies/skills/factory/container.hpp>
+#include <sanguis/server/entities/enemies/skills/factory/create_callbacks.hpp>
 #include <sanguis/server/random/amount.hpp>
 #include <sanguis/server/random/create_function.hpp>
 #include <sanguis/server/random/draw.hpp>
 #include <sanguis/server/random/equal_function.hpp>
 #include <sanguis/server/random/less_function.hpp>
-#include <sanguis/server/entities/enemies/factory/make_skills.hpp>
-#include <sanguis/server/entities/enemies/skills/factory/callback.hpp>
-#include <sanguis/server/entities/enemies/skills/factory/container.hpp>
-#include <sanguis/server/entities/enemies/skills/factory/create_callbacks.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>

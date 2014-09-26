@@ -1,15 +1,15 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/magazine_remaining.hpp>
-#include <sanguis/time_unit.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
 #include <sanguis/primary_weapon_type.hpp>
+#include <sanguis/time_unit.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_status.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/weapon_type_to_is_primary.hpp>
-#include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/damage/type.hpp>
+#include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/optional_with_weapon_ref.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
@@ -22,8 +22,8 @@
 #include <sanguis/server/weapons/const_optional_ref.hpp>
 #include <sanguis/server/weapons/ias.hpp>
 #include <sanguis/server/weapons/irs.hpp>
-#include <sanguis/server/weapons/optional_unique_ptr.hpp>
 #include <sanguis/server/weapons/optional_target.hpp>
+#include <sanguis/server/weapons/optional_unique_ptr.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/unique_ptr_to_optional.hpp>

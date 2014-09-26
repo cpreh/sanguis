@@ -1,10 +1,10 @@
 #include <sanguis/aoe_projectile_type.hpp>
 #include <sanguis/client/draw2d/aoe.hpp>
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
-#include <sanguis/client/draw2d/factory/aoe_projectile.hpp>
 #include <sanguis/client/draw2d/entities/aoe_bullet.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
+#include <sanguis/client/draw2d/factory/aoe_projectile.hpp>
 #include <sanguis/load/model/aoe_projectile_path.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 

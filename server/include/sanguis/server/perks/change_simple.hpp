@@ -1,9 +1,9 @@
 #ifndef SANGUIS_SERVER_PERKS_CHANGE_SIMPLE_HPP_INCLUDED
 #define SANGUIS_SERVER_PERKS_CHANGE_SIMPLE_HPP_INCLUDED
 
+#include <sanguis/server/entities/with_perks_fwd.hpp>
 #include <sanguis/server/perks/change_factor.hpp>
 #include <sanguis/server/perks/level_diff.hpp>
-#include <sanguis/server/entities/with_perks_fwd.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 
 

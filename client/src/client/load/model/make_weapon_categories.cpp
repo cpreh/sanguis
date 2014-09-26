@@ -1,8 +1,8 @@
 #include <sanguis/client/load/model/global_parameters.hpp>
 #include <sanguis/client/load/model/lookup_weapon_name.hpp>
 #include <sanguis/client/load/model/make_weapon_categories.hpp>
-#include <sanguis/client/load/model/weapon_category_map.hpp>
 #include <sanguis/client/load/model/weapon_category.hpp>
+#include <sanguis/client/load/model/weapon_category_map.hpp>
 #include <sanguis/model/part.hpp>
 #include <sanguis/model/weapon_category_map.hpp>
 #include <fcppt/make_unique_ptr.hpp>

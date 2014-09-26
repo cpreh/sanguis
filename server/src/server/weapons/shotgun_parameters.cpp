@@ -3,11 +3,11 @@
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
+#include <sanguis/server/weapons/range.hpp>
+#include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/shells.hpp>
 #include <sanguis/server/weapons/shotgun_parameters.hpp>
 #include <sanguis/server/weapons/spread_radius.hpp>
-#include <sanguis/server/weapons/range.hpp>
-#include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/attributes/accuracy.hpp>
 #include <sanguis/server/weapons/attributes/damage.hpp>
 #include <sanguis/server/weapons/attributes/magazine_size.hpp>

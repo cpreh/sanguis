@@ -12,8 +12,8 @@
 #include <sge/font/object.hpp>
 #include <sge/font/rect.hpp>
 #include <sge/font/string.hpp>
-#include <sge/font/unit.hpp>
 #include <sge/font/text_parameters.hpp>
+#include <sge/font/unit.hpp>
 #include <sge/font/v_center.hpp>
 #include <sge/font/vector.hpp>
 #include <sge/font/align_h/left.hpp>

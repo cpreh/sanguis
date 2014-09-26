@@ -1,7 +1,7 @@
 #include <sanguis/client/health_pair_fwd.hpp>
 #include <sanguis/client/draw2d/radius.hpp>
-#include <sanguis/client/draw2d/entities/hover/name_fwd.hpp>
 #include <sanguis/client/draw2d/entities/hover/name_and_health.hpp>
+#include <sanguis/client/draw2d/entities/hover/name_fwd.hpp>
 #include <sanguis/client/draw2d/scene/hover/base.hpp>
 #include <sanguis/client/draw2d/scene/hover/healthbar.hpp>
 #include <sanguis/client/draw2d/scene/hover/name.hpp>

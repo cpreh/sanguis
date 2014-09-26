@@ -1,15 +1,15 @@
-#include <sanguis/client/gui/style/simple.hpp>
-#include <sanguis/client/load/resource/textures.hpp>
-#include <sanguis/client/load/resource/texture_identifier.hpp>
-#include <sanguis/gui/fill_level.hpp>
-#include <sanguis/gui/text_color.hpp>
 #include <sanguis/client/gui/style/background_color.hpp>
 #include <sanguis/client/gui/style/border_color.hpp>
 #include <sanguis/client/gui/style/inner_border.hpp>
 #include <sanguis/client/gui/style/outer_border.hpp>
+#include <sanguis/client/gui/style/simple.hpp>
 #include <sanguis/client/gui/style/spacing.hpp>
 #include <sanguis/client/gui/style/text_color.hpp>
+#include <sanguis/client/load/resource/texture_identifier.hpp>
+#include <sanguis/client/load/resource/textures.hpp>
 #include <sanguis/gui/fill_color.hpp>
+#include <sanguis/gui/fill_level.hpp>
+#include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/renderer/base.hpp>
 #include <sanguis/gui/style/base.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
@@ -23,10 +23,10 @@
 #include <fcppt/cast/enum_to_int.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/int_to_float.hpp>
+#include <fcppt/math/size_type.hpp>
 #include <fcppt/math/box/shrink.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/fill.hpp>
-#include <fcppt/math/size_type.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 
 

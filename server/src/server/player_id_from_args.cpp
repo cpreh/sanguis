@@ -1,8 +1,8 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/player_id_from_args.hpp>
 #include <sanguis/server/player_id_from_net.hpp>
-#include <sge/console/arg_list.hpp>
 #include <alda/net/id.hpp>
+#include <sge/console/arg_list.hpp>
 #include <fcppt/extract_from_string_exn.hpp>
 
 

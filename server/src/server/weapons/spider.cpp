@@ -17,10 +17,10 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/attack.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
-#include <sanguis/server/weapons/spider.hpp>
-#include <sanguis/server/weapons/spider_parameters.hpp>
 #include <sanguis/server/weapons/spawn.hpp>
 #include <sanguis/server/weapons/spawn_weapon.hpp>
+#include <sanguis/server/weapons/spider.hpp>
+#include <sanguis/server/weapons/spider_parameters.hpp>
 #include <sanguis/server/weapons/attributes/make_health.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 

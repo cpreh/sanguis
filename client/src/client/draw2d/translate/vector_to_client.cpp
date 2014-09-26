@@ -1,6 +1,6 @@
 #include <sanguis/client/draw2d/vector2.hpp>
-#include <sanguis/client/draw2d/translate/vector_to_client.hpp>
 #include <sanguis/client/draw2d/translate/scalar_to_client.hpp>
+#include <sanguis/client/draw2d/translate/vector_to_client.hpp>
 #include <sanguis/messages/types/vector2.hpp>
 #include <fcppt/math/map.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>

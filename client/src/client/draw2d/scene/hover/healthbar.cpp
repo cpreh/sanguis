@@ -6,10 +6,10 @@
 #include <sanguis/client/draw2d/sprite/unit.hpp>
 #include <sanguis/client/draw2d/sprite/colored/color.hpp>
 #include <sanguis/client/draw2d/sprite/colored/color_format.hpp>
-#include <sanguis/client/draw2d/sprite/colored/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/colored/object.hpp>
-#include <sge/image/color/rgba8.hpp>
+#include <sanguis/client/draw2d/sprite/colored/parameters.hpp>
 #include <sge/image/color/predef.hpp>
+#include <sge/image/color/rgba8.hpp>
 #include <sge/image/color/any/convert.hpp>
 #include <sge/image/color/any/object.hpp>
 #include <sge/image/color/init/alpha.hpp>
@@ -31,9 +31,9 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/int_to_float.hpp>
-#include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/fill.hpp>
+#include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <initializer_list>

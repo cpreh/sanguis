@@ -1,11 +1,12 @@
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/dim2.hpp>
 #include <sanguis/collision/duration.hpp>
+#include <sanguis/collision/optional_result.hpp>
+#include <sanguis/collision/result.hpp>
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/test_move.hpp>
 #include <sanguis/collision/unit.hpp>
 #include <sanguis/collision/vector2.hpp>
-#include <sanguis/collision/optional_result.hpp>
 #include <sanguis/collision/aux_/adjust_speed.hpp>
 #include <sanguis/collision/aux_/dir.hpp>
 #include <sanguis/collision/aux_/is_null.hpp>
@@ -13,7 +14,6 @@
 #include <sanguis/collision/aux_/make_spiral_range.hpp>
 #include <sanguis/collision/aux_/pos.hpp>
 #include <sanguis/collision/aux_/rect.hpp>
-#include <sanguis/collision/result.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/creator/grid_spiral_range.hpp>
 #include <sanguis/creator/pos.hpp>

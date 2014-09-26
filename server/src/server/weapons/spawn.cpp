@@ -3,12 +3,12 @@
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/creator/tile_is_visible.hpp>
 #include <sanguis/server/center.hpp>
-#include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/ifaces/with_health.hpp>
 #include <sanguis/server/entities/ifaces/with_links.hpp>
+#include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/attack.hpp>
 #include <sanguis/server/weapons/attack_result.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>

@@ -1,6 +1,6 @@
 #include <sanguis/duration.hpp>
-#include <sanguis/media_path.hpp>
 #include <sanguis/log_stream.hpp>
+#include <sanguis/media_path.hpp>
 #include <sanguis/client/create_systems.hpp>
 #include <sanguis/client/log.hpp>
 #include <sanguis/client/object.hpp>
@@ -15,9 +15,10 @@
 #include <sanguis/client/events/overlay.hpp>
 #include <sanguis/client/events/render.hpp>
 #include <sanguis/client/events/tick.hpp>
+#include <sanguis/client/gui/style/simple.hpp>
 #include <sanguis/client/states/menu.hpp>
 #include <sanguis/gui/style/base.hpp>
-#include <sanguis/client/gui/style/simple.hpp>
+#include <alda/net/port.hpp>
 #include <sge/audio/player.hpp>
 #include <sge/config/media_path.hpp>
 #include <sge/console/prefix.hpp>
@@ -31,7 +32,6 @@
 #include <sge/timer/elapsed_and_reset.hpp>
 #include <sge/timer/scoped_frame_limiter.hpp>
 #include <sge/window/system.hpp>
-#include <alda/net/port.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/exit_failure.hpp>
 #include <awl/main/exit_success.hpp>
