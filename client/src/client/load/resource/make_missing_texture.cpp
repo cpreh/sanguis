@@ -1,5 +1,6 @@
 #include <sanguis/client/load/resource/make_missing_texture.hpp>
 #include <sge/image/color/predef.hpp>
+#include <sge/image/color/any/object.hpp>
 #include <sge/image2d/dim.hpp>
 #include <sge/image2d/rect.hpp>
 #include <sge/image2d/vector.hpp>
@@ -45,6 +46,14 @@ sanguis::client::load::resource::make_missing_texture(
 		2
 	};
 
+	sge::image::color::any::object const color1{
+		sge::image::color::predef::magenta()
+	};
+
+	sge::image::color::any::object const color2{
+		sge::image::color::predef::black()
+	};
+
 	sge::image2d::algorithm::fill(
 		sge::image2d::view::sub(
 			sge::image2d::view::object(
@@ -55,7 +64,7 @@ sanguis::client::load::resource::make_missing_texture(
 				half_dim
 			}
 		),
-		sge::image::color::predef::purple()
+		color1
 	);
 
 	sge::image2d::algorithm::fill(
@@ -71,7 +80,7 @@ sanguis::client::load::resource::make_missing_texture(
 				half_dim
 			}
 		),
-		sge::image::color::predef::black()
+		color2
 	);
 
 	sge::image2d::algorithm::fill(
@@ -87,7 +96,7 @@ sanguis::client::load::resource::make_missing_texture(
 				half_dim
 			}
 		),
-		sge::image::color::predef::black()
+		color2
 	);
 
 	sge::image2d::algorithm::fill(
@@ -103,7 +112,7 @@ sanguis::client::load::resource::make_missing_texture(
 				half_dim
 			}
 		),
-		sge::image::color::predef::purple()
+		color1
 	);
 
 	return

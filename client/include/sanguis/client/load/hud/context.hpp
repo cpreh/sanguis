@@ -37,6 +37,8 @@ public:
 	);
 private:
 	sanguis::client::load::hud::weapon_icon_map const weapon_icons_;
+
+	sge::texture::part const &missing_texture_;
 };
 
 }
