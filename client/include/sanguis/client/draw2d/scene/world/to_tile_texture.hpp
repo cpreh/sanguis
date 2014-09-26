@@ -66,7 +66,8 @@ to_tile_texture(
 			),
 			[
 				&neighbors
-			]
+			]()
+			-> sge::texture::const_optional_part_ref
 			{
 				FCPPT_LOG_ERROR(
 					sanguis::client::draw2d::log(),
@@ -91,6 +92,7 @@ to_tile_texture(
 					Tile
 				> const _pair
 			)
+			-> sge::texture::const_optional_part_ref
 			{
 				return
 					sanguis::client::draw2d::scene::world::filter_tile_pair(
