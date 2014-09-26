@@ -1,5 +1,5 @@
-#ifndef SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_FILTER_TILE_HPP_INCLUDED
-#define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_FILTER_TILE_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_FILTER_CONNECTING_TILES_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_FILTER_CONNECTING_TILES_HPP_INCLUDED
 
 #include <sanguis/creator/background_tile.hpp>
 #include <sanguis/creator/tile.hpp>
@@ -19,7 +19,7 @@ namespace world
 
 inline
 sanguis::creator::tile
-filter_tile(
+filter_connecting_tiles(
 	sanguis::creator::tile const _tile
 )
 {
@@ -36,7 +36,7 @@ filter_tile(
 
 inline
 sanguis::creator::background_tile
-filter_tile(
+filter_connecting_tiles(
 	sanguis::creator::background_tile const _tile
 )
 {

@@ -225,7 +225,8 @@ set(
 	include/sanguis/client/draw2d/scene/world/fill_batches.hpp
 	include/sanguis/client/draw2d/scene/world/fill_batches_base.hpp
 	include/sanguis/client/draw2d/scene/world/fill_non_connecting_batches.hpp
-	include/sanguis/client/draw2d/scene/world/filter_tile.hpp
+	include/sanguis/client/draw2d/scene/world/filter_connecting_tiles.hpp
+	include/sanguis/client/draw2d/scene/world/filter_tile_pair.hpp
 	include/sanguis/client/draw2d/scene/world/generate_batches.hpp
 	include/sanguis/client/draw2d/scene/world/is_background.hpp
 	include/sanguis/client/draw2d/scene/world/log_tile_error.hpp
