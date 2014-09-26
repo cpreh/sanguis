@@ -1,4 +1,3 @@
-#include <sanguis/client/load/resource/animations.hpp>
 #include <sanguis/client/load/resource/context.hpp>
 #include <sanguis/client/load/resource/sounds.hpp>
 #include <sanguis/client/load/resource/textures.hpp>
@@ -12,19 +11,15 @@
 sanguis::client::load::resource::textures const &
 sanguis::client::load::resource::context::textures() const
 {
-	return *textures_;
-}
-
-sanguis::client::load::resource::animations const &
-sanguis::client::load::resource::context::animations() const
-{
-	return *animations_;
+	return
+		*textures_;
 }
 
 sanguis::client::load::resource::sounds const &
 sanguis::client::load::resource::context::sounds() const
 {
-	return *sounds_;
+	return
+		*sounds_;
 }
 
 sanguis::client::load::resource::context::context(
@@ -40,13 +35,6 @@ sanguis::client::load::resource::context::context(
 		>(
 			_renderer,
 			_image_loader
-		)
-	),
-	animations_(
-		fcppt::make_unique_ptr<
-			sanguis::client::load::resource::animations
-		>(
-			*textures_
 		)
 	),
 	sounds_(

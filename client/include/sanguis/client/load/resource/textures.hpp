@@ -1,7 +1,6 @@
 #ifndef SANGUIS_CLIENT_LOAD_RESOURCE_TEXTURES_HPP_INCLUDED
 #define SANGUIS_CLIENT_LOAD_RESOURCE_TEXTURES_HPP_INCLUDED
 
-#include <sanguis/client/load/resource/animations_fwd.hpp>
 #include <sanguis/client/load/resource/texture_identifier.hpp>
 #include <sanguis/client/load/resource/texture_name_map.hpp>
 #include <sge/image2d/system_fwd.hpp>
@@ -56,8 +55,6 @@ public:
 
 	~textures();
 private:
-	friend class sanguis::client::load::resource::animations;
-
 	sge::texture::const_part_unique_ptr
 	do_load(
 		sanguis::client::load::resource::texture_identifier const &

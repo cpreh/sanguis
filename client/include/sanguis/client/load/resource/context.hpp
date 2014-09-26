@@ -2,7 +2,6 @@
 #define SANGUIS_CLIENT_LOAD_RESOURCE_CONTEXT_HPP_INCLUDED
 
 #include <sanguis/client/load/context_fwd.hpp>
-#include <sanguis/client/load/resource/animations_fwd.hpp>
 #include <sanguis/client/load/resource/sounds_fwd.hpp>
 #include <sanguis/client/load/resource/textures_fwd.hpp>
 #include <sge/audio/loader_fwd.hpp>
@@ -35,9 +34,6 @@ public:
 
 	sanguis::client::load::resource::sounds const &
 	sounds() const;
-
-	sanguis::client::load::resource::animations const &
-	animations() const;
 private:
 	friend class sanguis::client::load::context;
 
@@ -53,10 +49,6 @@ private:
 	std::unique_ptr<
 		sanguis::client::load::resource::textures
 	> const textures_;
-
-	std::unique_ptr<
-		sanguis::client::load::resource::animations
-	> const animations_;
 
 	std::unique_ptr<
 		sanguis::client::load::resource::sounds

@@ -484,8 +484,6 @@ set(
 	include/sanguis/client/load/resource/animation/entity_vector.hpp
 	include/sanguis/client/load/resource/animation/series.hpp
 	include/sanguis/client/load/resource/animation/series_fwd.hpp
-	include/sanguis/client/load/resource/animations.hpp
-	include/sanguis/client/load/resource/animations_fwd.hpp
 	include/sanguis/client/load/resource/context.hpp
 	include/sanguis/client/load/resource/context_fwd.hpp
 	include/sanguis/client/load/resource/make_missing_texture.hpp
@@ -794,7 +792,6 @@ set(
 	src/client/load/primary_weapon_name.cpp
 	src/client/load/resource/animation/entity.cpp
 	src/client/load/resource/animation/series.cpp
-	src/client/load/resource/animations.cpp
 	src/client/load/resource/context.cpp
 	src/client/load/resource/make_missing_texture.cpp
 	src/client/load/resource/search_texture_names.cpp
