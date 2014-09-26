@@ -77,7 +77,7 @@ sanguis::server::weapons::factory::spider(
 										)
 									),
 									sanguis::server::weapons::damage{
-										2.f
+										3.f
 									},
 									sanguis::server::damage::make_array({
 										sanguis::server::damage::normal =
@@ -101,7 +101,7 @@ sanguis::server::weapons::factory::spider(
 				),
 				sanguis::server::weapons::spider_parameters(
 					sanguis::server::health(
-						50.f
+						100.f
 					),
 					sanguis::server::weapons::backswing_time(
 						sanguis::duration_second(
