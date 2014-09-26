@@ -16,6 +16,7 @@
 
 
 sanguis::client::draw2d::scene::world::object::object(
+	sanguis::random_generator &_random_generator,
 	sge::renderer::device::core &_renderer,
 	sanguis::client::load::resource::textures const &_textures,
 	sanguis::client::draw::debug const _debug
@@ -33,6 +34,9 @@ sanguis::client::draw2d::scene::world::object::object(
 			this,
 			std::placeholders::_1
 		)
+	),
+	random_generator_(
+		_random_generator
 	),
 	debug_{
 		_debug
@@ -81,6 +85,7 @@ sanguis::client::draw2d::scene::world::object::change(
 		fcppt::make_unique_ptr<
 			sanguis::client::draw2d::scene::world::state
 		>(
+			random_generator_,
 			renderer_,
 			tiles_context_,
 			debug_,

@@ -1,3 +1,4 @@
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/scene/world/fill_batches_base.hpp>
 #include <sanguis/client/draw2d/scene/world/fill_non_connecting_batches.hpp>
@@ -17,6 +18,7 @@
 
 sanguis::client::draw2d::scene::world::sprite::container
 sanguis::client::draw2d::scene::world::fill_non_connecting_batches(
+	sanguis::random_generator &_random_generator,
 	sanguis::client::draw2d::scene::world::sprite::container &&_sprites,
 	sanguis::client::draw::debug const _debug,
 	sanguis::client::load::tiles::context &_tiles,
@@ -44,6 +46,7 @@ sanguis::client::draw2d::scene::world::fill_non_connecting_batches(
 					_pos;
 			},
 			[
+				&_random_generator,
 				&_tiles,
 				&_grid,
 				_debug
@@ -53,6 +56,7 @@ sanguis::client::draw2d::scene::world::fill_non_connecting_batches(
 			{
 				return
 					sanguis::client::draw2d::scene::world::to_non_connecting_tile_texture(
+						_random_generator,
 						_tiles,
 						_debug,
 						_grid[

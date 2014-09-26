@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_TO_TILE_TEXTURE_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_TO_TILE_TEXTURE_HPP_INCLUDED
 
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/log.hpp>
 #include <sanguis/client/draw2d/scene/world/filter_tile_pair.hpp>
@@ -40,6 +41,7 @@ template<
 >
 sge::texture::const_optional_part_ref const
 to_tile_texture(
+	sanguis::random_generator &_random_generator,
 	sanguis::client::load::tiles::context &_tiles,
 	sanguis::client::draw::debug const _debug,
 	sanguis::creator::tile_grid<
@@ -80,6 +82,7 @@ to_tile_texture(
 					sge::texture::const_optional_part_ref{};
 			},
 			[
+				&_random_generator,
 				&_tiles,
 				&neighbors,
 				_debug
@@ -97,6 +100,7 @@ to_tile_texture(
 						sge::texture::const_optional_part_ref{}
 					:
 						sanguis::client::draw2d::scene::world::to_tile_texture_base(
+							_random_generator,
 							_tiles.set(
 								_pair
 							).orientation(

@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_OBJECT_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_OBJECT_HPP_INCLUDED
 
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/collide_callback.hpp>
@@ -37,6 +38,7 @@ class object
 	);
 public:
 	object(
+		sanguis::random_generator &,
 		sge::renderer::device::core &,
 		sanguis::client::load::resource::textures const &,
 		sanguis::client::draw::debug
@@ -73,6 +75,8 @@ private:
 	sanguis::client::load::tiles::context tiles_context_;
 
 	sanguis::client::draw2d::collide_callback const collide_callback_;
+
+	sanguis::random_generator &random_generator_;
 
 	sanguis::client::draw::debug const debug_;
 

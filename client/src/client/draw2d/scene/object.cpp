@@ -255,6 +255,7 @@ sanguis::client::draw2d::scene::object::object(
 		fcppt::make_unique_ptr<
 			sanguis::client::draw2d::scene::world::object
 		>(
+			random_generator_,
 			renderer_,
 			_resources.resources().textures(),
 			_debug

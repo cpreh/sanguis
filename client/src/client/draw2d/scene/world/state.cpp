@@ -1,3 +1,4 @@
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/client/world_parameters.hpp>
 #include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/collide_parameters.hpp>
@@ -49,6 +50,7 @@
 
 
 sanguis::client::draw2d::scene::world::state::state(
+	sanguis::random_generator &_random_generator,
 	sge::renderer::device::core &_renderer,
 	sanguis::client::load::tiles::context &_tiles,
 	sanguis::client::draw::debug const _debug,
@@ -57,6 +59,7 @@ sanguis::client::draw2d::scene::world::state::state(
 )
 :
 	sanguis::client::draw2d::scene::world::state::state(
+		_random_generator,
 		_renderer,
 		_tiles,
 		_debug,
@@ -213,6 +216,7 @@ sanguis::client::draw2d::scene::world::state::test_collision(
 }
 
 sanguis::client::draw2d::scene::world::state::state(
+	sanguis::random_generator &_random_generator,
 	sge::renderer::device::core &_renderer,
 	sanguis::client::load::tiles::context &_tiles,
 	sanguis::client::draw::debug const _debug,
@@ -236,6 +240,7 @@ sanguis::client::draw2d::scene::world::state::state(
 	),
 	batches_(
 		sanguis::client::draw2d::scene::world::generate_batches(
+			_random_generator,
 			_debug,
 			grid_,
 			_result.background_grid(),

@@ -1,3 +1,4 @@
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/scene/world/batch.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_grid.hpp>
@@ -33,6 +34,7 @@
 
 sanguis::client::draw2d::scene::world::batch_grid
 sanguis::client::draw2d::scene::world::generate_batches(
+	sanguis::random_generator &_random_generator,
 	sanguis::client::draw::debug const _debug,
 	sanguis::creator::grid const &_grid,
 	sanguis::creator::background_grid const &_background_grid,
@@ -137,6 +139,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 
 		sprites =
 			sanguis::client::draw2d::scene::world::fill_batches(
+				_random_generator,
 				std::move(
 					sprites
 				),
@@ -152,6 +155,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 
 		sprites =
 			sanguis::client::draw2d::scene::world::fill_non_connecting_batches(
+				_random_generator,
 				std::move(
 					sprites
 				),
@@ -171,6 +175,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 
 		sprites =
 			sanguis::client::draw2d::scene::world::fill_batches(
+				_random_generator,
 				std::move(
 					sprites
 				),

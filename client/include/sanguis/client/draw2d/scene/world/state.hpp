@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_STATE_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_STATE_HPP_INCLUDED
 
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/collide_parameters_fwd.hpp>
@@ -36,6 +37,7 @@ class state
 	);
 public:
 	state(
+		sanguis::random_generator &,
 		sge::renderer::device::core &,
 		sanguis::client::load::tiles::context &,
 		sanguis::client::draw::debug,
@@ -61,6 +63,7 @@ public:
 	) const;
 private:
 	state(
+		sanguis::random_generator &,
 		sge::renderer::device::core &,
 		sanguis::client::load::tiles::context &,
 		sanguis::client::draw::debug,

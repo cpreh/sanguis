@@ -1,3 +1,4 @@
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/scene/world/log_tile_error.hpp>
 #include <sanguis/client/draw2d/scene/world/to_non_connecting_tile_texture.hpp>
@@ -16,6 +17,7 @@
 
 sge::texture::const_optional_part_ref const
 sanguis::client::draw2d::scene::world::to_non_connecting_tile_texture(
+	sanguis::random_generator &_random_generator,
 	sanguis::client::load::tiles::context &_tiles,
 	sanguis::client::draw::debug const _debug,
 	sanguis::creator::tile const _tile
@@ -33,6 +35,7 @@ sanguis::client::draw2d::scene::world::to_non_connecting_tile_texture(
 			sge::texture::const_optional_part_ref{}
 		:
 			sanguis::client::draw2d::scene::world::to_tile_texture_base(
+				_random_generator,
 				_tiles.set(
 					sanguis::client::load::tiles::tile_pair(
 						_tile,

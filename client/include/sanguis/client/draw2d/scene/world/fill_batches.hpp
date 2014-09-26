@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_FILL_BATCHES_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_FILL_BATCHES_HPP_INCLUDED
 
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/scene/world/fill_batches_base.hpp>
 #include <sanguis/client/draw2d/scene/world/is_background.hpp>
@@ -38,6 +39,7 @@ template<
 >
 sanguis::client::draw2d::scene::world::sprite::container
 fill_batches(
+	sanguis::random_generator &_random_generator,
 	sanguis::client::draw2d::scene::world::sprite::container &&_sprites,
 	sanguis::client::draw::debug const _debug,
 	sanguis::client::load::tiles::context &_tiles,
@@ -78,6 +80,7 @@ fill_batches(
 					);
 			},
 			[
+				&_random_generator,
 				&_tiles,
 				&_grid,
 				_debug
@@ -87,6 +90,7 @@ fill_batches(
 			{
 				return
 					sanguis::client::draw2d::scene::world::to_tile_texture(
+						_random_generator,
 						_tiles,
 						_debug,
 						_grid,

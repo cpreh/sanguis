@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_FILL_NON_CONNECTING_BATCHES_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_FILL_NON_CONNECTING_BATCHES_HPP_INCLUDED
 
+#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/scene/world/lower_bound.hpp>
 #include <sanguis/client/draw2d/scene/world/upper_bound.hpp>
@@ -22,6 +23,7 @@ namespace world
 
 sanguis::client::draw2d::scene::world::sprite::container
 fill_non_connecting_batches(
+	sanguis::random_generator &,
 	sanguis::client::draw2d::scene::world::sprite::container &&,
 	sanguis::client::draw::debug const _debug,
 	sanguis::client::load::tiles::context &,
