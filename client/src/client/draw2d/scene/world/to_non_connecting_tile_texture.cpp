@@ -8,6 +8,7 @@
 #include <sanguis/client/load/tiles/tile_pair.hpp>
 #include <sanguis/client/load/tiles/to_name.hpp>
 #include <sanguis/creator/tile.hpp>
+#include <sanguis/creator/tile_connects.hpp>
 #include <sge/texture/const_optional_part_ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>
@@ -24,6 +25,10 @@ sanguis::client::draw2d::scene::world::to_non_connecting_tile_texture(
 		_tile
 		==
 		sanguis::creator::tile::nothing
+		||
+		sanguis::creator::tile_connects(
+			_tile
+		)
 		?
 			sge::texture::const_optional_part_ref{}
 		:
