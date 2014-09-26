@@ -18,6 +18,7 @@
 #include <sge/renderer/texture/mipmap/off.hpp>
 #include <sge/texture/const_part_unique_ptr.hpp>
 #include <sge/texture/part_raw_ptr.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/fill.hpp>
@@ -46,7 +47,11 @@ sanguis::client::load::resource::make_missing_texture(
 	sge::image2d::dim const half_dim{
 		dim
 		/
-		2
+		fcppt::literal<
+			sge::image::size_type
+		>(
+			2
+		)
 	};
 
 	sge::image2d::algorithm::fill(
