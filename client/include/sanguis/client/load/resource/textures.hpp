@@ -46,6 +46,9 @@ public:
 		boost::filesystem::path const &
 	) const;
 
+	sge::texture::part const &
+	missing_texture() const;
+
 	textures(
 		sge::renderer::device::core &,
 		sge::image2d::system &
@@ -84,6 +87,8 @@ private:
 	mutable texture_map textures_;
 
 	mutable unnamed_texture_map unnamed_textures_;
+
+	sge::texture::const_part_unique_ptr const missing_texture_;
 };
 
 }

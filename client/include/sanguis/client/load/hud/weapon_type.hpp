@@ -16,7 +16,7 @@ namespace hud
 
 sanguis::optional_weapon_type const
 weapon_type(
-	fcppt::string
+	fcppt::string const &
 );
 
 }

@@ -1,6 +1,7 @@
 #include <sanguis/exception.hpp>
 #include <sanguis/media_path.hpp>
 #include <sanguis/client/load/log.hpp>
+#include <sanguis/client/load/resource/make_missing_texture.hpp>
 #include <sanguis/client/load/resource/search_texture_names.hpp>
 #include <sanguis/client/load/resource/texture_identifier.hpp>
 #include <sanguis/client/load/resource/textures.hpp>
@@ -100,6 +101,13 @@ catch(
 		sge::texture::const_optional_part_ref();
 }
 
+sge::texture::part const &
+sanguis::client::load::resource::textures::missing_texture() const
+{
+	return
+		*missing_texture_;
+}
+
 sanguis::client::load::resource::textures::textures(
 	sge::renderer::device::core &_renderer,
 	sge::image2d::system &_image_loader
@@ -115,7 +123,12 @@ sanguis::client::load::resource::textures::textures(
 		sanguis::client::load::resource::search_texture_names()
 	),
 	textures_(),
-	unnamed_textures_()
+	unnamed_textures_(),
+	missing_texture_(
+		sanguis::client::load::resource::make_missing_texture(
+			_renderer
+		)
+	)
 {
 }
 

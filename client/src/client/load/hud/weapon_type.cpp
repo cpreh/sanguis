@@ -8,7 +8,7 @@
 
 sanguis::optional_weapon_type const
 sanguis::client::load::hud::weapon_type(
-	fcppt::string const _name
+	fcppt::string const &_name
 )
 {
 #define SANGUIS_LOAD_HUD_WEAPON_TYPE_CASE(\

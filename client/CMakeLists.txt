@@ -486,6 +486,7 @@ set(
 	include/sanguis/client/load/resource/animations_fwd.hpp
 	include/sanguis/client/load/resource/context.hpp
 	include/sanguis/client/load/resource/context_fwd.hpp
+	include/sanguis/client/load/resource/make_missing_texture.hpp
 	include/sanguis/client/load/resource/optional_sound.hpp
 	include/sanguis/client/load/resource/optional_sound_fwd.hpp
 	include/sanguis/client/load/resource/search_texture_names.hpp
@@ -792,6 +793,7 @@ set(
 	src/client/load/resource/animation/series.cpp
 	src/client/load/resource/animations.cpp
 	src/client/load/resource/context.cpp
+	src/client/load/resource/make_missing_texture.cpp
 	src/client/load/resource/search_texture_names.cpp
 	src/client/load/resource/sounds.cpp
 	src/client/load/resource/textures.cpp
@@ -864,6 +866,7 @@ sanguis_add_library(
 		${sgecore_TARGET}
 		${sgefont_TARGET}
 		${sgefontdraw_TARGET}
+		${sgeimage2d_TARGET}
 		${sgeimagecolor_TARGET}
 		${sgeinput_TARGET}
 		${sgelog_TARGET}
