@@ -1,22 +1,14 @@
-#include <sanguis/exception.hpp>
 #include <sanguis/media_path.hpp>
+#include <sanguis/client/load/resource/parse_texture_file.hpp>
 #include <sanguis/client/load/resource/search_texture_names.hpp>
-#include <sanguis/client/load/resource/texture_identifier.hpp>
 #include <sanguis/client/load/resource/texture_name_map.hpp>
-#include <sanguis/client/load/log.hpp>
-#include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/algorithm/fold.hpp>
 #include <fcppt/filesystem/extension.hpp>
-#include <fcppt/filesystem/path_to_string.hpp>
-#include <fcppt/io/ifstream.hpp>
-#include <fcppt/log/_.hpp>
-#include <fcppt/log/warning.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/algorithm/string/trim.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
-#include <iosfwd>
-#include <string>
+#include <boost/range/iterator_range.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -24,108 +16,40 @@
 sanguis::client::load::resource::texture_name_map
 sanguis::client::load::resource::search_texture_names()
 {
-	sanguis::client::load::resource::texture_name_map names;
-
-	// look for .tex files
-	for(
-		boost::filesystem::directory_iterator it(
-			sanguis::media_path()
-		), end;
-		it != end;
-		++it
-	)
-	{
-		boost::filesystem::path const &path(
-			it->path()
-		);
-
-		if(
-			!boost::filesystem::is_regular_file(
-				path
-			)
-			||
-			fcppt::filesystem::extension(
-				path
-			)
-			!= FCPPT_TEXT(".tex")
-		)
-			continue;
-
-		// and parse line by line
-		fcppt::io::ifstream file(
-			path
-		);
-
-		if(
-			!file.is_open()
-		)
-			throw sanguis::exception(
-				FCPPT_TEXT("error opening id file \"")
-				+ fcppt::filesystem::path_to_string(
-					path
-				)
-				+ FCPPT_TEXT('"')
-			);
-
-		std::streamsize line_num(0);
-
-		fcppt::string line;
-
-		while(
-			std::getline(
-				file,
-				line
-			)
-		)
-		{
-			++line_num;
-
-			boost::algorithm::trim(
-				line
-			);
-
-			if (line.empty())
-				continue;
-
-			fcppt::string::size_type const equal(
-				line.find(
-					FCPPT_TEXT("=")
-				)
-			);
-
-			if(
-				equal == fcppt::string::npos
+	return
+		fcppt::algorithm::fold(
+			boost::make_iterator_range(
+				boost::filesystem::directory_iterator(
+					sanguis::media_path()
+				),
+				boost::filesystem::directory_iterator()
+			),
+			sanguis::client::load::resource::texture_name_map(),
+			[](
+				boost::filesystem::path const &_path,
+				sanguis::client::load::resource::texture_name_map &&_result
 			)
 			{
-				FCPPT_LOG_WARNING(
-					sanguis::client::load::log(),
-					fcppt::log::_
-						<< FCPPT_TEXT("Error in .id file \")")
-						<< fcppt::filesystem::path_to_string(
-							path
-						)
-						<< FCPPT_TEXT("\" in line ")
-						<< line_num
-						<< FCPPT_TEXT('!'));
-				continue;
-			}
-
-			names[
-				sanguis::client::load::resource::texture_identifier(
-					line.substr(
-						0,
-						equal
+				return
+					boost::filesystem::is_regular_file(
+						_path
 					)
-				)
-			] =
-				line.substr(
-					equal + 1
-				);
-		}
-	}
-
-	return
-		std::move(
-			names
+					&&
+					fcppt::filesystem::extension(
+						_path
+					)
+					==
+					FCPPT_TEXT(".tex")
+					?
+						sanguis::client::load::resource::parse_texture_file(
+							_path,
+							std::move(
+								_result
+							)
+						)
+					:
+						_result
+					;
+			}
 		);
 }

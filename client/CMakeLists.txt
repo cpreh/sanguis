@@ -489,6 +489,7 @@ set(
 	include/sanguis/client/load/resource/make_missing_texture.hpp
 	include/sanguis/client/load/resource/optional_sound.hpp
 	include/sanguis/client/load/resource/optional_sound_fwd.hpp
+	include/sanguis/client/load/resource/parse_texture_file.hpp
 	include/sanguis/client/load/resource/search_texture_names.hpp
 	include/sanguis/client/load/resource/sounds.hpp
 	include/sanguis/client/load/resource/sounds_fwd.hpp
@@ -794,6 +795,7 @@ set(
 	src/client/load/resource/animation/series.cpp
 	src/client/load/resource/context.cpp
 	src/client/load/resource/make_missing_texture.cpp
+	src/client/load/resource/parse_texture_file.cpp
 	src/client/load/resource/search_texture_names.cpp
 	src/client/load/resource/sounds.cpp
 	src/client/load/resource/textures.cpp
