@@ -32,7 +32,7 @@ sanguis::client::draw2d::scene::world::fill_non_connecting_batches(
 	// TODO: Put this in a function
 	sanguis::client::draw2d::scene::world::sprite::dim const tile_dim(
 		fcppt::math::dim::fill<
-			sanguis::client::draw2d::scene::world::sprite::dim::dim_wrapper::value
+			sanguis::client::draw2d::scene::world::sprite::dim
 		>(
 			sanguis::client::draw2d::scene::world::tile_size::value
 		)

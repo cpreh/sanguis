@@ -40,13 +40,9 @@ sanguis::client::draw2d::scene::world::generate_batches(
 {
 	sanguis::creator::grid::dim const min_size{
 		fcppt::math::dim::fill<
-			sanguis::creator::grid::dim::dim_wrapper::value
+			sanguis::creator::grid::dim
 		>(
-			fcppt::literal<
-				sanguis::creator::grid::dim::value_type
-			>(
-				1u
-			)
+			1u
 		)
 	};
 
@@ -88,7 +84,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 
 	sanguis::creator::grid::dim const batch_dim(
 		fcppt::math::dim::fill<
-			sanguis::creator::pos::dim_wrapper::value
+			sanguis::creator::grid::dim
 		>(
 			sanguis::client::draw2d::scene::world::batch_size::value
 		)

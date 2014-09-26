@@ -106,7 +106,7 @@ sanguis::client::draw2d::scene::hover::healthbar::healthbar(
 							_radius.get()
 							+
 							fcppt::math::dim::fill<
-								sanguis::client::draw2d::sprite::dim::dim_wrapper::value
+								sanguis::client::draw2d::sprite::dim
 							>(
 								border_size
 							)

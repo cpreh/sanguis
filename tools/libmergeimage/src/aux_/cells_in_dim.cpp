@@ -16,7 +16,7 @@ sanguis::tools::libmergeimage::aux_::cells_in_dim(
 	return
 		(
 			fcppt::math::dim::fill<
-				sge::image2d::dim::dim_wrapper::value
+				sge::image2d::dim
 			>(
 				_size
 			)

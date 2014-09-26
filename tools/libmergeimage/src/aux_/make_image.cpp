@@ -52,7 +52,7 @@ sanguis::tools::libmergeimage::aux_::make_image(
 
 	sanguis::tools::libmergeimage::image_store dest(
 		fcppt::math::dim::fill<
-			sanguis::tools::libmergeimage::image_store::dim::dim_wrapper::value
+			sanguis::tools::libmergeimage::image_store::dim
 		>(
 			border_sz
 		)

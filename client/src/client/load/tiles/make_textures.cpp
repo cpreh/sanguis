@@ -61,7 +61,7 @@ sanguis::client::load::tiles::make_textures(
 								),
 								sanguis::model::cell_size(
 									fcppt::math::dim::fill<
-										sanguis::model::dim::dim_wrapper::value
+										sanguis::model::dim
 									>(
 										// TODO: Read this from the json file
 										96ul

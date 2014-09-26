@@ -343,7 +343,7 @@ sanguis::client::gui::style::simple::spacing() const
 {
 	return
 		fcppt::math::dim::fill<
-			sge::rucksack::dim::dim_wrapper::value
+			sge::rucksack::dim
 		>(
 			sanguis::client::gui::style::spacing::value
 		);

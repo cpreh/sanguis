@@ -25,7 +25,7 @@ sanguis::server::world::grid_pos_to_center(
 				sanguis::creator::tile_size::value
 				+
 				fcppt::math::vector::fill<
-					sanguis::creator::pos::dim_wrapper::value
+					sanguis::creator::pos
 				>(
 					sanguis::creator::tile_size::value
 					/

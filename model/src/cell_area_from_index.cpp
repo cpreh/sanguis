@@ -43,7 +43,7 @@ sanguis::model::cell_area_from_index(
 		_cell_size.get()
 		+
 		fcppt::math::dim::fill<
-			sanguis::model::dim::dim_wrapper::value
+			sanguis::model::dim
 		>(
 			1u
 		)

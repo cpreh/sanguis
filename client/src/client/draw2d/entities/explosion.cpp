@@ -64,7 +64,7 @@ sanguis::client::draw2d::entities::explosion::explosion(
 		)
 		.size(
 			fcppt::math::dim::fill<
-				sanguis::client::draw2d::sprite::dim::dim_wrapper::value
+				sanguis::client::draw2d::sprite::dim
 			>(
 				fcppt::cast::float_to_int<
 					sanguis::client::draw2d::sprite::unit

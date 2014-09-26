@@ -30,7 +30,7 @@ sanguis::creator::tile_rect(
 			sanguis::creator::rect(
 				sanguis::creator::rect::vector::null(),
 				fcppt::math::dim::fill<
-					sanguis::creator::rect::dim::dim_wrapper::value
+					sanguis::creator::rect::dim
 				>(
 					sanguis::creator::tile_size::value
 				)
