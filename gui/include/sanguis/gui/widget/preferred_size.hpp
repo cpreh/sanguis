@@ -1,9 +1,12 @@
 #ifndef SANGUIS_GUI_WIDGET_PREFERRED_SIZE_HPP_INCLUDED
 #define SANGUIS_GUI_WIDGET_PREFERRED_SIZE_HPP_INCLUDED
 
+#include <sanguis/gui/symbol.hpp>
+#include <sanguis/gui/widget/dummy.hpp>
 #include <sge/rucksack/dim_fwd.hpp>
 #include <sge/rucksack/widget/base_fwd.hpp>
 #include <sge/rucksack/widget/dummy.hpp>
+#include <fcppt/noncopyable.hpp>
 
 
 namespace sanguis

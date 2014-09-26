@@ -5,7 +5,6 @@
 #include <sge/rucksack/dim.hpp>
 #include <sge/rucksack/preferred_size.hpp>
 #include <sge/rucksack/widget/base_fwd.hpp>
-#include <sge/rucksack/widget/dummy.hpp>
 
 
 sanguis::gui::widget::preferred_size::preferred_size(
