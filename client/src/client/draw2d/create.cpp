@@ -1,7 +1,8 @@
 #include <sanguis/client/cursor_fwd.hpp>
-#include <sanguis/client/draw_base_unique_ptr.hpp>
 #include <sanguis/client/player_health_callback.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
+#include <sanguis/client/draw/base_unique_ptr.hpp>
+#include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/create.hpp>
 #include <sanguis/client/draw2d/scene/object.hpp>
 #include <sanguis/client/load/context_fwd.hpp>
@@ -13,7 +14,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 
 
-sanguis::client::draw_base_unique_ptr
+sanguis::client::draw::base_unique_ptr
 sanguis::client::draw2d::create(
 	sanguis::client::load::context const &_load_context,
 	sanguis::client::load::hud::context &_hud_context,
@@ -23,7 +24,8 @@ sanguis::client::draw2d::create(
 	sge::font::object &_font,
 	sge::viewport::manager &_viewport_manager,
 	sanguis::client::player_health_callback const &_player_health_callback,
-	sanguis::client::cursor &_cursor
+	sanguis::client::cursor &_cursor,
+	sanguis::client::draw::debug const _debug
 )
 {
 	return
@@ -38,6 +40,7 @@ sanguis::client::draw2d::create(
 			_font,
 			_viewport_manager,
 			_player_health_callback,
-			_cursor
+			_cursor,
+			_debug
 		);
 }

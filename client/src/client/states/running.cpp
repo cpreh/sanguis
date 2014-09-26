@@ -2,7 +2,6 @@
 #include <sanguis/player_name.hpp>
 #include <sanguis/world_name.hpp>
 #include <sanguis/client/dispatch.hpp>
-#include <sanguis/client/draw_base.hpp>
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/exp_for_next_level.hpp>
 #include <sanguis/client/health_pair.hpp>
@@ -13,10 +12,12 @@
 #include <sanguis/client/player_health_callback.hpp>
 #include <sanguis/client/sound_manager.hpp>
 #include <sanguis/client/weapon_description_from_message.hpp>
+#include <sanguis/client/args/draw_debug.hpp>
 #include <sanguis/client/console/object.hpp>
 #include <sanguis/client/control/environment_fwd.hpp>
 #include <sanguis/client/control/input_translator.hpp>
 #include <sanguis/client/control/actions/any_fwd.hpp>
+#include <sanguis/client/draw/base.hpp>
 #include <sanguis/client/draw2d/create.hpp>
 #include <sanguis/client/events/action.hpp>
 #include <sanguis/client/events/connected.hpp>
@@ -157,7 +158,12 @@ sanguis::client::states::running::running(
 			),
 			this->context<
 				sanguis::client::machine
-			>().cursor_gfx()
+			>().cursor_gfx(),
+			sanguis::client::args::draw_debug(
+				this->context<
+					sanguis::client::machine
+				>().options()
+			)
 		)
 	),
 	input_translator_(

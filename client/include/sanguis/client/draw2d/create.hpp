@@ -2,9 +2,10 @@
 #define SANGUIS_CLIENT_DRAW2D_CREATE_HPP_INCLUDED
 
 #include <sanguis/client/cursor_fwd.hpp>
-#include <sanguis/client/draw_base_unique_ptr.hpp>
 #include <sanguis/client/player_health_callback.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
+#include <sanguis/client/draw/base_unique_ptr.hpp>
+#include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/load/context_fwd.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
@@ -20,7 +21,7 @@ namespace client
 namespace draw2d
 {
 
-sanguis::client::draw_base_unique_ptr
+sanguis::client::draw::base_unique_ptr
 create(
 	sanguis::client::load::context const &,
 	sanguis::client::load::hud::context &,
@@ -30,7 +31,8 @@ create(
 	sge::font::object &,
 	sge::viewport::manager &,
 	sanguis::client::player_health_callback const &,
-	sanguis::client::cursor &
+	sanguis::client::cursor &,
+	sanguis::client::draw::debug
 );
 
 }

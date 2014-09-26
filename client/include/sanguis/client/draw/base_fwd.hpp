@@ -6,9 +6,12 @@ namespace sanguis
 {
 namespace client
 {
+namespace draw
+{
 
-class draw_base;
+class base;
 
+}
 }
 }
 

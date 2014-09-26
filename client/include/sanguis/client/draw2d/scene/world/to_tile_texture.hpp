@@ -1,8 +1,8 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_TO_TILE_TEXTURE_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_TO_TILE_TEXTURE_HPP_INCLUDED
 
+#include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/log.hpp>
-#include <sanguis/client/draw2d/scene/world/debug.hpp>
 #include <sanguis/client/draw2d/scene/world/filter_tile_pair.hpp>
 #include <sanguis/client/draw2d/scene/world/log_tile_error.hpp>
 #include <sanguis/client/draw2d/scene/world/make_tile_neighbors.hpp>
@@ -41,7 +41,7 @@ template<
 sge::texture::const_optional_part_ref const
 to_tile_texture(
 	sanguis::client::load::tiles::context &_tiles,
-	sanguis::client::draw2d::scene::world::debug const _debug,
+	sanguis::client::draw::debug const _debug,
 	sanguis::creator::tile_grid<
 		Tile
 	> const &_grid,

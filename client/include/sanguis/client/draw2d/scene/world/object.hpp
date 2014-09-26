@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_OBJECT_HPP_INCLUDED
 
 #include <sanguis/client/world_parameters_fwd.hpp>
+#include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/collide_callback.hpp>
 #include <sanguis/client/draw2d/collide_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/optional_speed_fwd.hpp>
@@ -37,7 +38,8 @@ class object
 public:
 	object(
 		sge::renderer::device::core &,
-		sanguis::client::load::resource::textures const &
+		sanguis::client::load::resource::textures const &,
+		sanguis::client::draw::debug
 	);
 
 	~object();
@@ -72,9 +74,13 @@ private:
 
 	sanguis::client::draw2d::collide_callback const collide_callback_;
 
-	typedef std::unique_ptr<
+	sanguis::client::draw::debug const debug_;
+
+	typedef
+	std::unique_ptr<
 		sanguis::client::draw2d::scene::world::state
-	> state_unique_ptr;
+	>
+	state_unique_ptr;
 
 	state_unique_ptr state_;
 

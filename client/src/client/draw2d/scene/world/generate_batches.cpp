@@ -1,7 +1,7 @@
+#include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/scene/world/batch.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_grid.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_size.hpp>
-#include <sanguis/client/draw2d/scene/world/debug.hpp>
 #include <sanguis/client/draw2d/scene/world/fill_batches.hpp>
 #include <sanguis/client/draw2d/scene/world/fill_non_connecting_batches.hpp>
 #include <sanguis/client/draw2d/scene/world/generate_batches.hpp>
@@ -33,6 +33,7 @@
 
 sanguis::client::draw2d::scene::world::batch_grid
 sanguis::client::draw2d::scene::world::generate_batches(
+	sanguis::client::draw::debug const _debug,
 	sanguis::creator::grid const &_grid,
 	sanguis::creator::background_grid const &_background_grid,
 	sanguis::client::load::tiles::context &_tiles,
@@ -106,10 +107,6 @@ sanguis::client::draw2d::scene::world::generate_batches(
 	);
 
 	// TODO: This should be a config option
-	sanguis::client::draw2d::scene::world::debug const debug{
-		true
-	};
-
 	for(
 		auto const &result_element
 		:
@@ -143,7 +140,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				std::move(
 					sprites
 				),
-				debug,
+				_debug,
 				_tiles,
 				_grid,
 				lower_bound,
@@ -158,7 +155,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				std::move(
 					sprites
 				),
-				debug,
+				_debug,
 				_tiles,
 				_grid,
 				sanguis::client::draw2d::scene::world::lower_bound(
@@ -177,7 +174,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				std::move(
 					sprites
 				),
-				debug,
+				_debug,
 				_tiles,
 				_background_grid,
 				lower_bound,

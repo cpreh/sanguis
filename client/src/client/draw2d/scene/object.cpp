@@ -4,7 +4,6 @@
 #include <sanguis/random_seed.hpp>
 #include <sanguis/update_diff_clock.hpp>
 #include <sanguis/client/cursor.hpp>
-#include <sanguis/client/draw_base.hpp>
 #include <sanguis/client/health.hpp>
 #include <sanguis/client/max_health.hpp>
 #include <sanguis/client/player_health_callback.hpp>
@@ -14,6 +13,8 @@
 #include <sanguis/client/control/attack_dest.hpp>
 #include <sanguis/client/control/cursor_position.hpp>
 #include <sanguis/client/control/optional_attack_dest.hpp>
+#include <sanguis/client/draw/base.hpp>
+#include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/aoe.hpp>
 #include <sanguis/client/draw2d/center.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
@@ -195,10 +196,11 @@ sanguis::client::draw2d::scene::object::object(
 	sge::font::object &_font,
 	sge::viewport::manager &_viewport_manager,
 	sanguis::client::player_health_callback const &_player_health_callback,
-	sanguis::client::cursor &_cursor
+	sanguis::client::cursor &_cursor,
+	sanguis::client::draw::debug const _debug
 )
 :
-	sanguis::client::draw_base(),
+	sanguis::client::draw::base(),
 	diff_clock_(),
 	random_generator_(
 		sanguis::random_seed()
@@ -254,7 +256,8 @@ sanguis::client::draw2d::scene::object::object(
 			sanguis::client::draw2d::scene::world::object
 		>(
 			renderer_,
-			_resources.resources().textures()
+			_resources.resources().textures(),
+			_debug
 		)
 	),
 	paused_(

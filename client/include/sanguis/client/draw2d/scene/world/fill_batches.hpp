@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_FILL_BATCHES_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_FILL_BATCHES_HPP_INCLUDED
 
-#include <sanguis/client/draw2d/scene/world/debug.hpp>
+#include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/scene/world/fill_batches_base.hpp>
 #include <sanguis/client/draw2d/scene/world/is_background.hpp>
 #include <sanguis/client/draw2d/scene/world/lower_bound.hpp>
@@ -39,7 +39,7 @@ template<
 sanguis::client::draw2d::scene::world::sprite::container
 fill_batches(
 	sanguis::client::draw2d::scene::world::sprite::container &&_sprites,
-	sanguis::client::draw2d::scene::world::debug const _debug,
+	sanguis::client::draw::debug const _debug,
 	sanguis::client::load::tiles::context &_tiles,
 	sanguis::creator::tile_grid<
 		Tile

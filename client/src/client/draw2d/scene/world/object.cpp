@@ -1,4 +1,5 @@
 #include <sanguis/client/world_parameters_fwd.hpp>
+#include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/collide_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/optional_speed.hpp>
 #include <sanguis/client/draw2d/optional_translation.hpp>
@@ -16,7 +17,8 @@
 
 sanguis::client::draw2d::scene::world::object::object(
 	sge::renderer::device::core &_renderer,
-	sanguis::client::load::resource::textures const &_textures
+	sanguis::client::load::resource::textures const &_textures,
+	sanguis::client::draw::debug const _debug
 )
 :
 	renderer_(
@@ -32,6 +34,9 @@ sanguis::client::draw2d::scene::world::object::object(
 			std::placeholders::_1
 		)
 	),
+	debug_{
+		_debug
+	},
 	state_()
 {
 }
@@ -78,6 +83,7 @@ sanguis::client::draw2d::scene::world::object::change(
 		>(
 			renderer_,
 			tiles_context_,
+			debug_,
 			_parameters,
 			_translation
 		);

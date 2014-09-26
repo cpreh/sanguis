@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_TO_TILE_TEXTURE_BASE_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_TO_TILE_TEXTURE_BASE_HPP_INCLUDED
 
-#include <sanguis/client/draw2d/scene/world/debug.hpp>
+#include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/load/tiles/const_optional_texture_container_ref.hpp>
 #include <sge/texture/const_optional_part_ref.hpp>
 #include <sge/texture/part_fwd.hpp>
@@ -24,7 +24,7 @@ template<
 sge::texture::const_optional_part_ref const
 to_tile_texture_base(
 	sanguis::client::load::tiles::const_optional_texture_container_ref const &_textures,
-	sanguis::client::draw2d::scene::world::debug const _debug,
+	sanguis::client::draw::debug const _debug,
 	sge::texture::part const &_default,
 	DebugMessage const &_debug_message
 )

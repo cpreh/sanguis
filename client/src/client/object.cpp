@@ -7,6 +7,7 @@
 #include <sanguis/client/object_base.hpp>
 #include <sanguis/client/server.hpp>
 #include <sanguis/client/systems.hpp>
+#include <sanguis/client/args/history_size.hpp>
 #include <sanguis/client/config/settings/file.hpp>
 #include <sanguis/client/events/connected.hpp>
 #include <sanguis/client/events/message.hpp>
@@ -20,7 +21,6 @@
 #include <sge/audio/player.hpp>
 #include <sge/config/media_path.hpp>
 #include <sge/console/prefix.hpp>
-#include <sge/console/gfx/output_line_limit.hpp>
 #include <sge/font/added.hpp>
 #include <sge/font/object.hpp>
 #include <sge/font/parameters.hpp>
@@ -114,12 +114,8 @@ sanguis::client::object::object(
 		*font_object_,
 		sys_->keyboard_collector(),
 		sys_->viewport_manager(),
-		sge::console::gfx::output_line_limit(
-			_variables_map[
-				"history-size"
-			].as<
-				sge::console::gfx::output_line_limit::value_type
-			>()
+		sanguis::client::args::history_size(
+			_variables_map
 		),
 		resources_.resources().textures()
 	),
@@ -130,6 +126,7 @@ sanguis::client::object::object(
 	},
 	machine_(
 		settings_,
+		_variables_map,
 		std::bind(
 			&sanguis::client::object::create_server,
 			this,

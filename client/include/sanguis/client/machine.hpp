@@ -28,6 +28,7 @@
 #include <fcppt/string.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/program_options/variables_map.hpp>
 #include <boost/statechart/state_machine.hpp>
 #include <boost/system/error_code.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -51,6 +52,7 @@ class machine
 public:
 	machine(
 		sanguis::client::config::settings::object &,
+		boost::program_options::variables_map const &,
 		sanguis::client::server_callback const &,
 		sanguis::client::load::context const &,
 		sanguis::gui::style::base const &,
@@ -103,6 +105,9 @@ public:
 	sanguis::client::config::settings::object &
 	settings();
 
+	boost::program_options::variables_map const &
+	options() const;
+
 	sanguis::gui::style::base const &
 	gui_style() const;
 
@@ -154,6 +159,8 @@ private:
 	);
 
 	sanguis::client::config::settings::object &settings_;
+
+	boost::program_options::variables_map const &options_;
 
 	sanguis::client::load::context const &resources_;
 

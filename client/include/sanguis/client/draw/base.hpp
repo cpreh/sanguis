@@ -2,8 +2,8 @@
 #define SANGUIS_CLIENT_DRAW_BASE_HPP_INCLUDED
 
 #include <sanguis/duration.hpp>
-#include <sanguis/client/draw_base_fwd.hpp>
 #include <sanguis/client/control/environment_fwd.hpp>
+#include <sanguis/client/draw/base_fwd.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -13,17 +13,19 @@ namespace sanguis
 {
 namespace client
 {
+namespace draw
+{
 
-class draw_base
+class base
 {
 	FCPPT_NONCOPYABLE(
-		draw_base
+		base
 	);
 protected:
-	draw_base();
+	base();
 public:
 	virtual
-	~draw_base() = 0;
+	~base() = 0;
 
 	virtual
 	void
@@ -60,6 +62,7 @@ public:
 	control_environment() const = 0;
 };
 
+}
 }
 }
 

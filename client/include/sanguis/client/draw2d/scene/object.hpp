@@ -6,13 +6,14 @@
 #include <sanguis/entity_id.hpp>
 #include <sanguis/random_generator.hpp>
 #include <sanguis/client/cursor_fwd.hpp>
-#include <sanguis/client/draw_base.hpp>
 #include <sanguis/client/player_health_callback.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
 #include <sanguis/client/weapon_pair.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/client/control/attack_dest_fwd.hpp>
 #include <sanguis/client/control/environment_fwd.hpp>
+#include <sanguis/client/draw/base.hpp>
+#include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/optional_player_center.hpp>
 #include <sanguis/client/draw2d/optional_translation.hpp>
 #include <sanguis/client/draw2d/player_center_callback.hpp>
@@ -89,7 +90,7 @@ namespace scene
 
 class object
 :
-	public sanguis::client::draw_base
+	public sanguis::client::draw::base
 {
 	FCPPT_NONCOPYABLE(
 		object
@@ -104,7 +105,8 @@ public:
 		sge::font::object &,
 		sge::viewport::manager &,
 		sanguis::client::player_health_callback const &,
-		sanguis::client::cursor &
+		sanguis::client::cursor &,
+		sanguis::client::draw::debug
 	);
 
 	~object()

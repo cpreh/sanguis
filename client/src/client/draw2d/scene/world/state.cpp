@@ -1,4 +1,5 @@
 #include <sanguis/client/world_parameters.hpp>
+#include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/collide_parameters.hpp>
 #include <sanguis/client/draw2d/optional_speed.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
@@ -50,6 +51,7 @@
 sanguis::client::draw2d::scene::world::state::state(
 	sge::renderer::device::core &_renderer,
 	sanguis::client::load::tiles::context &_tiles,
+	sanguis::client::draw::debug const _debug,
 	sanguis::client::world_parameters const &_parameters,
 	sanguis::client::draw2d::optional_translation const _translation
 )
@@ -57,6 +59,7 @@ sanguis::client::draw2d::scene::world::state::state(
 	sanguis::client::draw2d::scene::world::state::state(
 		_renderer,
 		_tiles,
+		_debug,
 		sanguis::creator::generate(
 			_parameters.top_parameters()
 		),
@@ -212,6 +215,7 @@ sanguis::client::draw2d::scene::world::state::test_collision(
 sanguis::client::draw2d::scene::world::state::state(
 	sge::renderer::device::core &_renderer,
 	sanguis::client::load::tiles::context &_tiles,
+	sanguis::client::draw::debug const _debug,
 	sanguis::creator::top_result const &_result,
 	sanguis::client::draw2d::optional_translation const _translation
 )
@@ -232,6 +236,7 @@ sanguis::client::draw2d::scene::world::state::state(
 	),
 	batches_(
 		sanguis::client::draw2d::scene::world::generate_batches(
+			_debug,
 			grid_,
 			_result.background_grid(),
 			_tiles,

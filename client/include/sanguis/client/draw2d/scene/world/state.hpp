@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_STATE_HPP_INCLUDED
 
 #include <sanguis/client/world_parameters_fwd.hpp>
+#include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/collide_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/optional_speed_fwd.hpp>
 #include <sanguis/client/draw2d/optional_translation.hpp>
@@ -37,6 +38,7 @@ public:
 	state(
 		sge::renderer::device::core &,
 		sanguis::client::load::tiles::context &,
+		sanguis::client::draw::debug,
 		sanguis::client::world_parameters const &,
 		sanguis::client::draw2d::optional_translation
 	);
@@ -61,6 +63,7 @@ private:
 	state(
 		sge::renderer::device::core &,
 		sanguis::client::load::tiles::context &,
+		sanguis::client::draw::debug,
 		sanguis::creator::top_result const &,
 		sanguis::client::draw2d::optional_translation
 	);

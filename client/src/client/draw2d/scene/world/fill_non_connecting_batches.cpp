@@ -1,4 +1,4 @@
-#include <sanguis/client/draw2d/scene/world/debug.hpp>
+#include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/scene/world/fill_batches_base.hpp>
 #include <sanguis/client/draw2d/scene/world/fill_non_connecting_batches.hpp>
 #include <sanguis/client/draw2d/scene/world/is_background.hpp>
@@ -18,7 +18,7 @@
 sanguis::client::draw2d::scene::world::sprite::container
 sanguis::client::draw2d::scene::world::fill_non_connecting_batches(
 	sanguis::client::draw2d::scene::world::sprite::container &&_sprites,
-	sanguis::client::draw2d::scene::world::debug const _debug,
+	sanguis::client::draw::debug const _debug,
 	sanguis::client::load::tiles::context &_tiles,
 	sanguis::creator::grid const &_grid,
 	sanguis::client::draw2d::scene::world::lower_bound const &_lower_bound,

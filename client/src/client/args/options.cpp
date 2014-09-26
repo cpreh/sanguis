@@ -81,15 +81,6 @@ sanguis::client::args::options()
 			"sets the display height"
 		)
 		(
-			"fullscreen",
-			po::value<
-				bool
-			>()->default_value(
-				false
-			),
-			"start in fullscreen mode"
-		)
-		(
 			"multisamples",
 			po::value<
 				sge::renderer::pixel_format::multi_samples_value
@@ -97,7 +88,17 @@ sanguis::client::args::options()
 				0u
 			),
 			"sets the number of samples done for anti aliasing"
+		)
+		(
+			"draw-debug",
+			po::value<
+				bool
+			>()->default_value(
+				false
+			),
+			"Debug tiles"
 		);
 
-	return desc;
+	return
+		desc;
 }

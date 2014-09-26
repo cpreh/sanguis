@@ -1,6 +1,8 @@
 set(
 	SANGUIS_CLIENT_FILES
 	include/sanguis/client/args/display_mode.hpp
+	include/sanguis/client/args/draw_debug.hpp
+	include/sanguis/client/args/history_size.hpp
 	include/sanguis/client/args/log_level.hpp
 	include/sanguis/client/args/multi_sampling.hpp
 	include/sanguis/client/args/optional_resolution.hpp
@@ -68,6 +70,10 @@ set(
 	include/sanguis/client/cursor_area_fwd.hpp
 	include/sanguis/client/cursor_fwd.hpp
 	include/sanguis/client/dispatch.hpp
+	include/sanguis/client/draw/base.hpp
+	include/sanguis/client/draw/base_fwd.hpp
+	include/sanguis/client/draw/base_unique_ptr.hpp
+	include/sanguis/client/draw/debug.hpp
 	include/sanguis/client/draw2d/aoe.hpp
 	include/sanguis/client/draw2d/center.hpp
 	include/sanguis/client/draw2d/center_fwd.hpp
@@ -221,7 +227,6 @@ set(
 	include/sanguis/client/draw2d/scene/world/batch_grid.hpp
 	include/sanguis/client/draw2d/scene/world/batch_grid_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/batch_size.hpp
-	include/sanguis/client/draw2d/scene/world/debug.hpp
 	include/sanguis/client/draw2d/scene/world/fill_batches.hpp
 	include/sanguis/client/draw2d/scene/world/fill_batches_base.hpp
 	include/sanguis/client/draw2d/scene/world/fill_non_connecting_batches.hpp
@@ -354,9 +359,6 @@ set(
 	include/sanguis/client/draw2d/vector2_fwd.hpp
 	include/sanguis/client/draw2d/z_ordering.hpp
 	include/sanguis/client/draw2d/z_ordering_fwd.hpp
-	include/sanguis/client/draw_base.hpp
-	include/sanguis/client/draw_base_fwd.hpp
-	include/sanguis/client/draw_base_unique_ptr.hpp
 	include/sanguis/client/events/action.hpp
 	include/sanguis/client/events/action_fwd.hpp
 	include/sanguis/client/events/connected.hpp
@@ -617,6 +619,8 @@ set(
 	include/sanguis/client/world_parameters.hpp
 	include/sanguis/client/world_parameters_fwd.hpp
 	src/client/args/display_mode.cpp
+	src/client/args/draw_debug.cpp
+	src/client/args/history_size.cpp
 	src/client/args/log_level.cpp
 	src/client/args/multi_sampling.cpp
 	src/client/args/options.cpp
@@ -644,6 +648,7 @@ set(
 	src/client/create.cpp
 	src/client/create_systems.cpp
 	src/client/cursor.cpp
+	src/client/draw/base.cpp
 	src/client/draw2d/collide_parameters.cpp
 	src/client/draw2d/create.cpp
 	src/client/draw2d/entities/aoe_bullet.cpp
@@ -731,7 +736,6 @@ set(
 	src/client/draw2d/translate/scalar_to_client.cpp
 	src/client/draw2d/translate/vector_from_client.cpp
 	src/client/draw2d/translate/vector_to_client.cpp
-	src/client/draw_base.cpp
 	src/client/events/action.cpp
 	src/client/events/message.cpp
 	src/client/events/net_error.cpp
