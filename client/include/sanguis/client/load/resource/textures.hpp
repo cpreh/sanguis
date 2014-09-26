@@ -3,6 +3,8 @@
 
 #include <sanguis/client/load/resource/texture_identifier.hpp>
 #include <sanguis/client/load/resource/texture_name_map.hpp>
+#include <sge/image/size_type.hpp>
+#include <sge/image/color/any/object_fwd.hpp>
 #include <sge/image2d/system_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <sge/texture/const_optional_part_ref_fwd.hpp>
@@ -47,6 +49,13 @@ public:
 
 	sge::texture::part const &
 	missing_texture() const;
+
+	sge::texture::const_part_unique_ptr
+	make_missing_texture(
+		sge::image::size_type,
+		sge::image::color::any::object const &,
+		sge::image::color::any::object const &
+	) const;
 
 	textures(
 		sge::renderer::device::core &,

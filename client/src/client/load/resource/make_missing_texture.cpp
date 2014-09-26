@@ -1,5 +1,5 @@
 #include <sanguis/client/load/resource/make_missing_texture.hpp>
-#include <sge/image/color/predef.hpp>
+#include <sge/image/size_type.hpp>
 #include <sge/image/color/any/object.hpp>
 #include <sge/image2d/dim.hpp>
 #include <sge/image2d/rect.hpp>
@@ -25,14 +25,17 @@
 
 sge::texture::const_part_unique_ptr
 sanguis::client::load::resource::make_missing_texture(
-	sge::renderer::device::core &_renderer
+	sge::renderer::device::core &_renderer,
+	sge::image::size_type const _size,
+	sge::image::color::any::object const &_color1,
+	sge::image::color::any::object const &_color2
 )
 {
 	sge::image2d::dim const dim{
 		fcppt::math::dim::fill<
 			sge::image2d::dim
 		>(
-			64u
+			_size
 		)
 	};
 
@@ -46,14 +49,6 @@ sanguis::client::load::resource::make_missing_texture(
 		2
 	};
 
-	sge::image::color::any::object const color1{
-		sge::image::color::predef::magenta()
-	};
-
-	sge::image::color::any::object const color2{
-		sge::image::color::predef::black()
-	};
-
 	sge::image2d::algorithm::fill(
 		sge::image2d::view::sub(
 			sge::image2d::view::object(
@@ -64,7 +59,7 @@ sanguis::client::load::resource::make_missing_texture(
 				half_dim
 			}
 		),
-		color1
+		_color1
 	);
 
 	sge::image2d::algorithm::fill(
@@ -80,7 +75,7 @@ sanguis::client::load::resource::make_missing_texture(
 				half_dim
 			}
 		),
-		color2
+		_color2
 	);
 
 	sge::image2d::algorithm::fill(
@@ -96,7 +91,7 @@ sanguis::client::load::resource::make_missing_texture(
 				half_dim
 			}
 		),
-		color2
+		_color2
 	);
 
 	sge::image2d::algorithm::fill(
@@ -112,7 +107,7 @@ sanguis::client::load::resource::make_missing_texture(
 				half_dim
 			}
 		),
-		color1
+		_color1
 	);
 
 	return

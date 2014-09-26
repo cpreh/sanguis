@@ -1,6 +1,7 @@
 #include <sanguis/client/draw2d/scene/world/batch.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_grid.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_size.hpp>
+#include <sanguis/client/draw2d/scene/world/debug.hpp>
 #include <sanguis/client/draw2d/scene/world/fill_batches.hpp>
 #include <sanguis/client/draw2d/scene/world/fill_non_connecting_batches.hpp>
 #include <sanguis/client/draw2d/scene/world/generate_batches.hpp>
@@ -9,7 +10,7 @@
 #include <sanguis/client/draw2d/scene/world/upper_bound.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/buffers.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/compare.hpp>
-#include <sanguis/client/draw2d/scene/world/sprite/vector.hpp>
+#include <sanguis/client/draw2d/scene/world/sprite/container.hpp>
 #include <sanguis/creator/background_grid.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/pos.hpp>
@@ -80,7 +81,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 		)
 	);
 
-	sanguis::client::draw2d::scene::world::sprite::vector sprites;
+	sanguis::client::draw2d::scene::world::sprite::container sprites;
 
 	sanguis::creator::grid::dim const batch_dim(
 		fcppt::math::dim::fill<
@@ -103,6 +104,11 @@ sanguis::client::draw2d::scene::world::generate_batches(
 			batch_dim
 		)
 	);
+
+	// TODO: This should be a config option
+	sanguis::client::draw2d::scene::world::debug const debug{
+		true
+	};
 
 	for(
 		auto const &result_element
@@ -137,6 +143,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				std::move(
 					sprites
 				),
+				debug,
 				_tiles,
 				_grid,
 				lower_bound,
@@ -151,6 +158,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				std::move(
 					sprites
 				),
+				debug,
 				_tiles,
 				_grid,
 				sanguis::client::draw2d::scene::world::lower_bound(
@@ -169,6 +177,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				std::move(
 					sprites
 				),
+				debug,
 				_tiles,
 				_background_grid,
 				lower_bound,

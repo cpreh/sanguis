@@ -5,6 +5,9 @@
 #include <sanguis/client/load/resource/search_texture_names.hpp>
 #include <sanguis/client/load/resource/texture_identifier.hpp>
 #include <sanguis/client/load/resource/textures.hpp>
+#include <sge/image/size_type.hpp>
+#include <sge/image/color/predef.hpp>
+#include <sge/image/color/any/object.hpp>
 #include <sge/image2d/file.hpp>
 #include <sge/image2d/system.hpp>
 #include <sge/renderer/resource_flags_field.hpp>
@@ -14,9 +17,10 @@
 #include <sge/renderer/texture/planar.hpp>
 #include <sge/renderer/texture/mipmap/off.hpp>
 #include <sge/texture/const_optional_part_ref.hpp>
+#include <sge/texture/const_part_unique_ptr.hpp>
 #include <sge/texture/part_raw_ptr.hpp>
-#include <sge/texture/part_unique_ptr.hpp>
 #include <fcppt/exception.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/find_exn.hpp>
@@ -108,6 +112,22 @@ sanguis::client::load::resource::textures::missing_texture() const
 		*missing_texture_;
 }
 
+sge::texture::const_part_unique_ptr
+sanguis::client::load::resource::textures::make_missing_texture(
+	sge::image::size_type const _size,
+	sge::image::color::any::object const &_color1,
+	sge::image::color::any::object const &_color2
+) const
+{
+	return
+		sanguis::client::load::resource::make_missing_texture(
+			renderer_,
+			_size,
+			_color1,
+			_color2
+		);
+}
+
 sanguis::client::load::resource::textures::textures(
 	sge::renderer::device::core &_renderer,
 	sge::image2d::system &_image_loader
@@ -125,8 +145,14 @@ sanguis::client::load::resource::textures::textures(
 	textures_(),
 	unnamed_textures_(),
 	missing_texture_(
-		sanguis::client::load::resource::make_missing_texture(
-			_renderer
+		this->make_missing_texture(
+			fcppt::literal<
+				sge::image::size_type
+			>(
+				64
+			),
+			sge::image::color::predef::magenta(),
+			sge::image::color::predef::black()
 		)
 	)
 {

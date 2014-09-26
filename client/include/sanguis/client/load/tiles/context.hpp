@@ -10,6 +10,8 @@
 #include <sanguis/client/load/tiles/pair.hpp>
 #include <sanguis/client/load/tiles/set_fwd.hpp>
 #include <sanguis/client/load/tiles/tile_pair_fwd.hpp>
+#include <sge/texture/const_part_unique_ptr.hpp>
+#include <sge/texture/part_fwd.hpp>
 #include <fcppt/homogenous_pair_comparison.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -48,6 +50,15 @@ public:
 	set(
 		sanguis::client::load::tiles::background_tile_pair
 	);
+
+	sge::texture::part const &
+	missing_texture() const;
+
+	sge::texture::part const &
+	missing_background_texture() const;
+
+	sge::texture::part const &
+	missing_object_texture() const;
 private:
 	template<
 		typename Map,
@@ -92,6 +103,12 @@ private:
 	set_map sets_;
 
 	background_set_map background_sets_;
+
+	sge::texture::const_part_unique_ptr const missing_texture_;
+
+	sge::texture::const_part_unique_ptr const missing_background_texture_;
+
+	sge::texture::const_part_unique_ptr const missing_object_texture_;
 };
 
 }
