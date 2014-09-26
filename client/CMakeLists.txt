@@ -439,6 +439,8 @@ set(
 	include/sanguis/client/load/first_file.hpp
 	include/sanguis/client/load/hud/context.hpp
 	include/sanguis/client/load/hud/context_fwd.hpp
+	include/sanguis/client/load/hud/make_weapon_icons.hpp
+	include/sanguis/client/load/hud/weapon_icon_map.hpp
 	include/sanguis/client/load/hud/weapon_type.hpp
 	include/sanguis/client/load/log.hpp
 	include/sanguis/client/load/model/animation.hpp
@@ -767,6 +769,7 @@ set(
 	src/client/load/context.cpp
 	src/client/load/first_file.cpp
 	src/client/load/hud/context.cpp
+	src/client/load/hud/make_weapon_icons.cpp
 	src/client/load/hud/weapon_type.cpp
 	src/client/load/log.cpp
 	src/client/load/model/animation.cpp
