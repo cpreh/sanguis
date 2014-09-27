@@ -78,15 +78,28 @@ sanguis::server::machine::machine(
 			sanguis::net::receive_buffer_size()
 		)
 	),
+	desired_frame_time_{
+		std::chrono::milliseconds(
+			16
+		)
+	},
 	frame_timer_(
 		sanguis::timer::parameters(
-			std::chrono::seconds(
-				1
-			)
+			desired_frame_time_
 		)
 	),
 	temp_buffer_(),
 	overflow_messages_(),
+	timer_(
+		io_service_,
+		std::bind(
+			std::bind(
+				&sanguis::server::machine::timer_callback,
+				this
+			)
+		),
+		desired_frame_time_
+	),
 	disconnect_connection_(
 		net_.register_disconnect(
 			std::bind(
@@ -105,18 +118,6 @@ sanguis::server::machine::machine(
 				std::placeholders::_1,
 				std::placeholders::_2
 			)
-		)
-	),
-	timer_(
-		io_service_,
-		std::bind(
-			std::bind(
-				&sanguis::server::machine::timer_callback,
-				this
-			)
-		),
-		std::chrono::milliseconds(
-			16
 		)
 	)
 {
