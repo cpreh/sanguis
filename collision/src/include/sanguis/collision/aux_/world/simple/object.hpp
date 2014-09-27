@@ -14,6 +14,7 @@
 #include <sanguis/collision/world/group.hpp>
 #include <sanguis/collision/world/object.hpp>
 #include <sanguis/collision/world/parameters_fwd.hpp>
+#include <sanguis/creator/dim.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/container/enum_array_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -123,6 +124,8 @@ public:
 	body_list_grid_array;
 private:
 	sanguis::collision::world::body_collision_callback const body_collision_callback_;
+
+	sanguis::creator::dim const grid_size_;
 
 	body_set_array body_sets_;
 

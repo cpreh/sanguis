@@ -47,6 +47,8 @@
 
 
 // TODO: With C++14 we can have polymorphic lambdas and return type deduction
+// C++11 lambas are monomorphic while polymorphic functions don't have return
+// type deduction. Therefore we need macros here.
 #define SANGUIS_COLLISION_FILTER_BY_GROUP(\
 	_name,\
 	_type\
@@ -120,6 +122,9 @@ sanguis::collision::aux_::world::simple::object::object(
 	body_collision_callback_(
 		_parameters.body_collision_callback()
 	),
+	grid_size_{
+		_parameters.grid_size()
+	},
 	body_sets_(),
 	ghost_sets_(),
 	body_list_grids_{
@@ -329,18 +334,19 @@ sanguis::collision::aux_::world::simple::object::update(
 					body1_pos
 				)
 			)
-				for(
-					auto const &grid
-					:
-					filter_body_grids(
-						body_list_grids_,
-						body1->collision_group()
+				// Every grid is of the same size
+				if(
+					fcppt::container::grid::in_range_dim(
+						grid_size_,
+						grid_pos2
 					)
 				)
-					if(
-						fcppt::container::grid::in_range(
-							grid,
-							grid_pos2
+					for(
+						auto const &grid
+						:
+						filter_body_grids(
+							body_list_grids_,
+							body1->collision_group()
 						)
 					)
 						for(
