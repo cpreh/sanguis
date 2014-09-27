@@ -20,12 +20,13 @@
 #include <sanguis/collision/world/parameters.hpp>
 #include <sanguis/collision/world/position_change_callback.hpp>
 #include <sanguis/creator/dim.hpp>
+#include <fcppt/make_int_range_count.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/algorithm/repeat.hpp>
+#include <fcppt/math/dim/fill.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
-#include <boost/range/irange.hpp>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
@@ -44,10 +45,11 @@ main()
 					{
 					}
 				},
-				sanguis::creator::dim{
-					100u,
+				fcppt::math::dim::fill<
+					sanguis::creator::dim
+				>(
 					100u
-				}
+				)
 			}
 		)
 	};
@@ -110,8 +112,7 @@ main()
 		fcppt::algorithm::map<
 			body_container
 		>(
-			boost::irange(
-				0,
+			fcppt::make_int_range_count(
 				count
 			),
 			[
@@ -155,8 +156,7 @@ main()
 		fcppt::algorithm::map<
 			ghost_container
 		>(
-			boost::irange(
-				0,
+			fcppt::make_int_range_count(
 				count
 			),
 			[
