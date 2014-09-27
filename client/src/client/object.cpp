@@ -29,7 +29,8 @@
 #include <sge/renderer/device/core.hpp>
 #include <sge/renderer/display_mode/desired_fps.hpp>
 #include <sge/renderer/display_mode/optional_object.hpp>
-#include <sge/timer/elapsed_and_reset.hpp>
+#include <sge/timer/absolute_impl.hpp>
+#include <sge/timer/difference_and_reset.hpp>
 #include <sge/timer/scoped_frame_limiter.hpp>
 #include <sge/window/system.hpp>
 #include <awl/main/exit_code.hpp>
@@ -43,7 +44,6 @@
 #include <fcppt/log/fatal.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/variables_map.hpp>
-#include <chrono>
 #include <exception>
 #include <functional>
 #include <ostream>
@@ -147,11 +147,7 @@ sanguis::client::object::object(
 		cursor_
 	),
 	frame_timer_(
-		sanguis::timer::parameters(
-			std::chrono::seconds(
-				1
-			)
-		)
+		frame_timer::parameters()
 	),
 	server_(),
 	scoped_machine_(
@@ -240,7 +236,8 @@ sanguis::client::object::loop_handler()
 
 	if(
 		server_
-		&& !server_->running()
+		&&
+		!server_->running()
 	)
 		sys_->window_system().quit(
 			awl::main::exit_failure()
@@ -248,7 +245,7 @@ sanguis::client::object::loop_handler()
 
 	if(
 		!machine_.process(
-			sge::timer::elapsed_and_reset<
+			sge::timer::difference_and_reset<
 				sanguis::duration
 			>(
 				frame_timer_

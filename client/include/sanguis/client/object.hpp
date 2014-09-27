@@ -1,8 +1,8 @@
 #ifndef SANGUIS_CLIENT_OBJECT_HPP_INCLUDED
 #define SANGUIS_CLIENT_OBJECT_HPP_INCLUDED
 
+#include <sanguis/clock.hpp>
 #include <sanguis/io_service.hpp>
-#include <sanguis/timer.hpp>
 #include <sanguis/client/cursor.hpp>
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/object_base.hpp>
@@ -18,6 +18,7 @@
 #include <sge/font/added_unique_ptr.hpp>
 #include <sge/font/object_unique_ptr.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
+#include <sge/timer/absolute_decl.hpp>
 #include <awl/main/exit_code.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_state_machine.hpp>
@@ -97,7 +98,13 @@ private:
 
 	sanguis::client::machine machine_;
 
-	sanguis::timer frame_timer_;
+	typedef
+	sge::timer::absolute<
+		sanguis::clock
+	>
+	frame_timer;
+
+	frame_timer frame_timer_;
 
 	std::unique_ptr<
 		sanguis::client::server
