@@ -39,7 +39,7 @@ sanguis::collision::aux_::world::projectile::ghost::ghost(
 			sge::projectile::ghost::size(
 				sanguis::collision::aux_::world::projectile::to_sge_dim(
 					fcppt::math::dim::fill<
-						sanguis::collision::dim2::dim_wrapper::value
+						sanguis::collision::dim2
 					>(
 						_parameters.radius().get()
 					)
