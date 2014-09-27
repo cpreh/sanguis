@@ -90,9 +90,11 @@ sanguis::client::load::resource::parse_texture_file(
 				)
 			)
 		] =
-			line.substr(
-				equal + 1
-			);
+			boost::filesystem::path{
+				line.substr(
+					equal + 1
+				)
+			};
 	}
 
 	return
