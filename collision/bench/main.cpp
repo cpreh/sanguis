@@ -66,10 +66,6 @@ main()
 	>
 	ghost_container;
 
-	int const count{
-		1000
-	};
-
 	class body_base
 	:
 		public sanguis::collision::world::body_base
@@ -108,47 +104,90 @@ main()
 
 	body_base fake_body_base;
 
-	body_container const bodies(
-		fcppt::algorithm::map<
-			body_container
-		>(
-			fcppt::make_int_range_count(
-				count
-			),
-			[
-				&world,
-				&fake_body_base
-			](
-				int
+	auto const make_bodies(
+		[
+			&world,
+			&fake_body_base
+		](
+			unsigned const _count,
+			sanguis::collision::world::group const _group
+		)
+		{
+			return
+				fcppt::algorithm::map<
+					body_container
+				>(
+					fcppt::make_int_range_count(
+						_count
+					),
+					[
+						&world,
+						&fake_body_base,
+						_group
+					](
+						unsigned
+					)
+					{
+						return
+							world->create_body(
+								sanguis::collision::world::body_parameters{
+									sanguis::collision::center{
+										sanguis::collision::vector2{
+											10.f,
+											10.f
+										}
+									},
+									sanguis::collision::speed{
+										sanguis::collision::vector2::null()
+									},
+									sanguis::collision::radius{
+										50.f
+									},
+									sanguis::collision::world::position_change_callback{
+										[](
+											sanguis::collision::center
+										)
+										{
+										}
+									},
+									_group,
+									fake_body_base
+								}
+							);
+					}
+				);
+		}
+	);
+
+	auto const activate_bodies(
+		[
+			&world
+		](
+			body_container const &_bodies
+		)
+		{
+			for(
+				sanguis::collision::world::body_unique_ptr const &body
+				:
+				_bodies
 			)
-			{
-				return
-					world->create_body(
-						sanguis::collision::world::body_parameters{
-							sanguis::collision::center{
-								sanguis::collision::vector2{
-									10.f,
-									10.f
-								}
-							},
-							sanguis::collision::speed{
-								sanguis::collision::vector2::null()
-							},
-							sanguis::collision::radius{
-								50.f
-							},
-							sanguis::collision::world::position_change_callback{
-								[](
-									sanguis::collision::center
-								)
-								{
-								}
-							},
-							sanguis::collision::world::group::enemy,
-							fake_body_base
-						}
-					);
-			}
+				world->activate_body(
+					*body
+				);
+		}
+	);
+
+	body_container const enemies(
+		make_bodies(
+			1000,
+			sanguis::collision::world::group::enemy
+		)
+	);
+
+	body_container const players(
+		make_bodies(
+			10,
+			sanguis::collision::world::group::player
 		)
 	);
 
@@ -157,7 +196,7 @@ main()
 			ghost_container
 		>(
 			fcppt::make_int_range_count(
-				count
+				1000
 			),
 			[
 				&world
@@ -202,14 +241,13 @@ main()
 		)
 	);
 
-	for(
-		sanguis::collision::world::body_unique_ptr const &body
-		:
-		bodies
-	)
-		world->activate_body(
-			*body
-		);
+	activate_bodies(
+		enemies
+	);
+
+	activate_bodies(
+		players
+	);
 
 	fcppt::algorithm::repeat(
 		100,
