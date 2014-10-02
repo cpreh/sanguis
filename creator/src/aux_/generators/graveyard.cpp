@@ -115,10 +115,46 @@ sanguis::creator::aux_::generators::graveyard(
 				random_grave();
 	}
 
-	sanguis::creator::background_grid const grid_bg{
+	sanguis::creator::background_grid grid_bg{
 		grid.size(),
 		sanguis::creator::background_tile::grass
 	};
+
+	auto random_dirt_grass(
+		fcppt::random::make_variate(
+			_parameters.randgen(),
+			uniform_int2{
+				uniform_int2::param_type::min{
+					0u
+				},
+				uniform_int2::param_type::max{
+					1u
+				}
+			}
+		)
+	);
+
+	for(
+		auto const pos
+		:
+		fcppt::container::grid::make_pos_range_start_end(
+			grid_bg,
+			sanguis::creator::pos(
+				1,
+				1
+			),
+			sanguis::creator::pos(
+				grid.size().w() - 1u,
+				grid.size().h() - 1u
+			)
+		)
+	)
+		pos.value() =
+			random_dirt_grass()
+			?
+			sanguis::creator::background_tile::dirt
+			:
+			sanguis::creator::background_tile::grass;
 
 	sanguis::creator::spawn_container const
 	spawners{
