@@ -15,13 +15,18 @@
 #include <sanguis/creator/aux_/parameters_fwd.hpp>
 #include <sanguis/creator/aux_/result.hpp>
 #include <sanguis/creator/aux_/generators/start.hpp>
+#include <sanguis/creator/aux_/random/generator.hpp>
+#include <sanguis/creator/aux_/random/uniform_int.hpp>
+#include <sanguis/creator/aux_/parameters.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/grid/make_pos_range_start_end.hpp>
+#include <fcppt/random/make_variate.hpp>
+#include <fcppt/random/distribution/basic.hpp>
 
 
 sanguis::creator::aux_::result
 sanguis::creator::aux_::generators::start(
-	sanguis::creator::aux_::parameters const &
+	sanguis::creator::aux_::parameters const &_parameters
 )
 {
 	sanguis::creator::dim const grid_size{
@@ -72,6 +77,55 @@ sanguis::creator::aux_::generators::start(
 		}
 	};
 
+	sanguis::creator::background_grid bg_grid{
+		grid_size,
+		sanguis::creator::background_tile::dirt
+	};
+
+	typedef
+	fcppt::random::distribution::basic<
+		sanguis::creator::aux_::random::uniform_int<
+			unsigned
+		>
+	>
+	uniform_int2;
+
+	auto random_dirt_grass(
+		fcppt::random::make_variate(
+			_parameters.randgen(),
+			uniform_int2{
+				uniform_int2::param_type::min{
+					0u
+				},
+				uniform_int2::param_type::max{
+					1u
+				}
+			}
+		)
+	);
+
+	for(
+		auto const pos
+		:
+		fcppt::container::grid::make_pos_range_start_end(
+			bg_grid,
+			sanguis::creator::pos(
+				1,
+				1
+			),
+			sanguis::creator::pos(
+				grid_size.w() - 1u,
+				grid_size.h() - 1u
+			)
+		)
+	)
+		pos.value() =
+			random_dirt_grass()
+			?
+			sanguis::creator::background_tile::dirt
+			:
+			sanguis::creator::background_tile::grass;
+
 	grid[
 		exit_portal.get()
 	] =
@@ -80,10 +134,7 @@ sanguis::creator::aux_::generators::start(
 	return
 		sanguis::creator::aux_::result{
 			grid,
-			sanguis::creator::background_grid{
-				grid_size,
-				sanguis::creator::background_tile::grass
-			},
+			bg_grid,
 			sanguis::creator::opening_container{
 				start_portal,
 				exit_portal

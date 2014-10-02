@@ -14,6 +14,7 @@ enum class background_tile
 	space,
 	space_floor,
 	asphalt,
+	dirt,
 	grass,
 	fcppt_maximum = grass
 };
