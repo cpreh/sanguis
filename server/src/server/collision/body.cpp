@@ -1,8 +1,8 @@
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/world/body.hpp>
+#include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters.hpp>
-#include <sanguis/collision/world/group.hpp>
 #include <sanguis/collision/world/object.hpp>
 #include <sanguis/collision/world/position_change_callback.hpp>
 #include <sanguis/server/center.hpp>
@@ -106,7 +106,7 @@ sanguis::server::collision::body::transfer(
 	sanguis::collision::world::object &_world,
 	sanguis::server::center const _center,
 	sanguis::server::speed const _speed,
-	sanguis::collision::world::group const _collision_group
+	sanguis::collision::world::body_group const _collision_group
 )
 {
 	this->destroy();

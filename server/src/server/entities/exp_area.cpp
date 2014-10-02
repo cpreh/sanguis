@@ -1,5 +1,5 @@
 #include <sanguis/collision/world/body_base_fwd.hpp>
-#include <sanguis/collision/world/group.hpp>
+#include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/collision/ghost.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
@@ -33,7 +33,7 @@ sanguis::server::entities::exp_area::exp_area(
 {
 	this->add_ghost(
 		sanguis::server::collision::ghost{
-			sanguis::collision::world::group::projectile_enemy,
+			sanguis::collision::world::ghost_group::target_player,
 			this->body_enter_callback(),
 			this->body_exit_callback(),
 			sanguis::server::radius(

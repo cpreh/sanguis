@@ -6,8 +6,8 @@
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/symbol.hpp>
 #include <sanguis/collision/world/body_base_fwd.hpp>
+#include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters_fwd.hpp>
-#include <sanguis/collision/world/group.hpp>
 #include <sanguis/collision/world/position_change_callback.hpp>
 #include <fcppt/nonassignable.hpp>
 
@@ -31,7 +31,7 @@ public:
 		sanguis::collision::speed,
 		sanguis::collision::radius,
 		sanguis::collision::world::position_change_callback const &,
-		sanguis::collision::world::group,
+		sanguis::collision::world::body_group,
 		sanguis::collision::world::body_base &
 	);
 
@@ -47,7 +47,7 @@ public:
 	sanguis::collision::world::position_change_callback const &
 	position_change_callback() const;
 
-	sanguis::collision::world::group
+	sanguis::collision::world::body_group
 	collision_group() const;
 
 	sanguis::collision::world::body_base &
@@ -61,7 +61,7 @@ private:
 
 	sanguis::collision::world::position_change_callback const position_change_callback_;
 
-	sanguis::collision::world::group const collision_group_;
+	sanguis::collision::world::body_group const collision_group_;
 
 	sanguis::collision::world::body_base &body_base_;
 };

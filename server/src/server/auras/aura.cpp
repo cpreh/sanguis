@@ -1,5 +1,5 @@
 #include <sanguis/collision/world/body_base.hpp>
-#include <sanguis/collision/world/group.hpp>
+#include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/collision/ghost.hpp>
@@ -29,7 +29,7 @@ sanguis::server::auras::aura::create_ghost()
 
 sanguis::server::auras::aura::aura(
 	sanguis::server::radius const _radius,
-	sanguis::collision::world::group const _collision_group
+	sanguis::collision::world::ghost_group const _collision_group
 )
 :
 	sanguis::server::collision::ghost_base(),

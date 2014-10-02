@@ -1,4 +1,4 @@
-#include <sanguis/collision/world/group.hpp>
+#include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/creator/destructible_type.hpp>
 #include <sanguis/load/model/destructible_path.hpp>
 #include <sanguis/messages/roles/angle.hpp>
@@ -94,11 +94,11 @@ sanguis::server::entities::destructible::team() const
 		sanguis::server::team::monsters;
 }
 
-sanguis::collision::world::group
+sanguis::collision::world::body_group
 sanguis::server::entities::destructible::collision_group() const
 {
 	return
-		sanguis::collision::world::group::enemy;
+		sanguis::collision::world::body_group::enemy;
 }
 
 sanguis::messages::server::unique_ptr

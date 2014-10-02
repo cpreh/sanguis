@@ -2,8 +2,8 @@
 #define SANGUIS_SERVER_COLLISION_BODY_HPP_INCLUDED
 
 #include <sanguis/collision/world/body_base_fwd.hpp>
+#include <sanguis/collision/world/body_group_fwd.hpp>
 #include <sanguis/collision/world/body_unique_ptr.hpp>
-#include <sanguis/collision/world/group_fwd.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/radius.hpp>
@@ -58,7 +58,7 @@ public:
 		sanguis::collision::world::object &,
 		sanguis::server::center,
 		sanguis::server::speed,
-		sanguis::collision::world::group
+		sanguis::collision::world::body_group
 	);
 
 	void

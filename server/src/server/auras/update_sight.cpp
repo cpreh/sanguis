@@ -1,5 +1,5 @@
 #include <sanguis/optional_aura_type.hpp>
-#include <sanguis/collision/world/group.hpp>
+#include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/server/add_sight_callback.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/remove_sight_callback.hpp>
@@ -19,7 +19,7 @@ sanguis::server::auras::update_sight::update_sight(
 :
 	sanguis::server::auras::aura(
 		_radius,
-		sanguis::collision::world::group::sight_range
+		sanguis::collision::world::ghost_group::player_sight
 	),
 	add_(
 		_add

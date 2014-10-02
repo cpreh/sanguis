@@ -8,13 +8,14 @@
 #include <sanguis/collision/world/body_collision_callback.hpp>
 #include <sanguis/collision/world/body_enter_callback.hpp>
 #include <sanguis/collision/world/body_exit_callback.hpp>
+#include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters.hpp>
 #include <sanguis/collision/world/body_unique_ptr.hpp>
 #include <sanguis/collision/world/create.hpp>
 #include <sanguis/collision/world/ghost.hpp>
+#include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_parameters.hpp>
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
-#include <sanguis/collision/world/group.hpp>
 #include <sanguis/collision/world/object.hpp>
 #include <sanguis/collision/world/object_unique_ptr.hpp>
 #include <sanguis/collision/world/parameters.hpp>
@@ -110,7 +111,7 @@ main()
 			&fake_body_base
 		](
 			unsigned const _count,
-			sanguis::collision::world::group const _group
+			sanguis::collision::world::body_group const _group
 		)
 		{
 			return
@@ -180,14 +181,14 @@ main()
 	body_container const enemies(
 		make_bodies(
 			1000,
-			sanguis::collision::world::group::enemy
+			sanguis::collision::world::body_group::enemy
 		)
 	);
 
 	body_container const players(
 		make_bodies(
 			10,
-			sanguis::collision::world::group::player
+			sanguis::collision::world::body_group::player
 		)
 	);
 
@@ -234,7 +235,7 @@ main()
 									}
 								)
 							),
-							sanguis::collision::world::group::projectile_enemy
+							sanguis::collision::world::ghost_group::player_sight
 						)
 					);
 			}

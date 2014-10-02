@@ -5,8 +5,8 @@
 #include <sanguis/collision/aux_/world/simple/ghost.hpp>
 #include <sanguis/collision/aux_/world/simple/ghost_remove_callback.hpp>
 #include <sanguis/collision/world/ghost.hpp>
+#include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_parameters.hpp>
-#include <sanguis/collision/world/group.hpp>
 #include <fcppt/algorithm/map_iteration.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -79,7 +79,7 @@ sanguis::collision::aux_::world::simple::ghost::radius() const
 		radius_;
 }
 
-sanguis::collision::world::group
+sanguis::collision::world::ghost_group
 sanguis::collision::aux_::world::simple::ghost::collision_group() const
 {
 	return

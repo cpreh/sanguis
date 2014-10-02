@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_PROJECTILES_BASE_HPP_INCLUDED
 
 #include <sanguis/diff_timer.hpp>
-#include <sanguis/collision/world/group_fwd.hpp>
+#include <sanguis/collision/world/body_group_fwd.hpp>
 #include <sanguis/load/model/path_fwd.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/team.hpp>
@@ -83,7 +83,7 @@ private:
 	)
 	override;
 
-	sanguis::collision::world::group
+	sanguis::collision::world::body_group
 	collision_group() const
 	override;
 

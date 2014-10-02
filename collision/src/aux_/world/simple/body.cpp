@@ -5,8 +5,8 @@
 #include <sanguis/collision/aux_/world/simple/body_remove_callback.hpp>
 #include <sanguis/collision/world/body.hpp>
 #include <sanguis/collision/world/body_base_fwd.hpp>
+#include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters.hpp>
-#include <sanguis/collision/world/group.hpp>
 #include <sanguis/collision/world/position_change_callback.hpp>
 
 
@@ -107,7 +107,7 @@ sanguis::collision::aux_::world::simple::body::radius() const
 		radius_;
 }
 
-sanguis::collision::world::group
+sanguis::collision::world::body_group
 sanguis::collision::aux_::world::simple::body::collision_group() const
 {
 	return

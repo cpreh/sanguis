@@ -7,7 +7,7 @@
 #include <sanguis/perk_type_fwd.hpp>
 #include <sanguis/player_name.hpp>
 #include <sanguis/random_generator_fwd.hpp>
-#include <sanguis/collision/world/group_fwd.hpp>
+#include <sanguis/collision/world/body_group_fwd.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
@@ -189,7 +189,7 @@ private:
 	)
 	override;
 
-	sanguis::collision::world::group
+	sanguis::collision::world::body_group
 	collision_group() const
 	override;
 

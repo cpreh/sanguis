@@ -3,8 +3,8 @@
 #include <sanguis/collision/world/body_enter_callback.hpp>
 #include <sanguis/collision/world/body_exit_callback.hpp>
 #include <sanguis/collision/world/ghost.hpp>
+#include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_parameters.hpp>
-#include <sanguis/collision/world/group.hpp>
 #include <sanguis/collision/world/object.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/collision/ghost.hpp>
@@ -12,7 +12,7 @@
 
 
 sanguis::server::collision::ghost::ghost(
-	sanguis::collision::world::group const _collision_group,
+	sanguis::collision::world::ghost_group const _collision_group,
 	sanguis::collision::world::body_enter_callback const &_body_enter_callback,
 	sanguis::collision::world::body_exit_callback const &_body_exit_callback,
 	sanguis::server::radius const _radius

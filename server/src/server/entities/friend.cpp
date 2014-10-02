@@ -1,5 +1,5 @@
 #include <sanguis/friend_type.hpp>
-#include <sanguis/collision/world/group.hpp>
+#include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/load/model/friend_path.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/aura_type_container.hpp>
@@ -185,9 +185,9 @@ sanguis::server::entities::friend_::add_message(
 }
 
 
-sanguis::collision::world::group
+sanguis::collision::world::body_group
 sanguis::server::entities::friend_::collision_group() const
 {
 	return
-		sanguis::collision::world::group::player;
+		sanguis::collision::world::body_group::player;
 }

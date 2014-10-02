@@ -2,8 +2,8 @@
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/world/body_base_fwd.hpp>
+#include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters.hpp>
-#include <sanguis/collision/world/group.hpp>
 #include <sanguis/collision/world/position_change_callback.hpp>
 
 
@@ -12,7 +12,7 @@ sanguis::collision::world::body_parameters::body_parameters(
 	sanguis::collision::speed const _speed,
 	sanguis::collision::radius const _radius,
 	sanguis::collision::world::position_change_callback const &_position_change_callback,
-	sanguis::collision::world::group const _collision_group,
+	sanguis::collision::world::body_group const _collision_group,
 	sanguis::collision::world::body_base &_body_base
 )
 :
@@ -65,7 +65,7 @@ sanguis::collision::world::body_parameters::position_change_callback() const
 		position_change_callback_;
 }
 
-sanguis::collision::world::group
+sanguis::collision::world::body_group
 sanguis::collision::world::body_parameters::collision_group() const
 {
 	return

@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_ENEMIES_ENEMY_HPP_INCLUDED
 
 #include <sanguis/enemy_kind_fwd.hpp>
-#include <sanguis/collision/world/group_fwd.hpp>
+#include <sanguis/collision/world/body_group_fwd.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/messages/types/string.hpp>
@@ -70,7 +70,7 @@ private:
 	) const
 	override;
 
-	sanguis::collision::world::group
+	sanguis::collision::world::body_group
 	collision_group() const
 	override;
 

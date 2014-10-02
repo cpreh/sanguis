@@ -3,7 +3,7 @@
 
 #include <sanguis/optional_aura_type_fwd.hpp>
 #include <sanguis/collision/world/body_base_fwd.hpp>
-#include <sanguis/collision/world/group_fwd.hpp>
+#include <sanguis/collision/world/ghost_group_fwd.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/collision/ghost.hpp>
 #include <sanguis/server/collision/ghost_base.hpp>
@@ -41,7 +41,7 @@ public:
 protected:
 	aura(
 		sanguis::server::radius,
-		sanguis::collision::world::group
+		sanguis::collision::world::ghost_group
 	);
 private:
 	boost::logic::tribool const
@@ -76,7 +76,7 @@ private:
 
 	sanguis::server::radius const radius_;
 
-	sanguis::collision::world::group const collision_group_;
+	sanguis::collision::world::ghost_group const collision_group_;
 };
 
 }

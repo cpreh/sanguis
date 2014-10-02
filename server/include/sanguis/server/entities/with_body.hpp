@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_BODY_HPP_INCLUDED
 
 #include <sanguis/collision/world/body_base.hpp>
-#include <sanguis/collision/world/group_fwd.hpp>
+#include <sanguis/collision/world/body_group_fwd.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/dim.hpp>
@@ -134,7 +134,7 @@ private:
 	);
 
 	virtual
-	sanguis::collision::world::group
+	sanguis::collision::world::body_group
 	collision_group() const = 0;
 
 	virtual

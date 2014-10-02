@@ -1,4 +1,4 @@
-#include <sanguis/collision/world/group.hpp>
+#include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/load/model/path.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/direction.hpp>
@@ -130,7 +130,7 @@ sanguis::server::entities::projectiles::base::collision_with_body(
 		);
 }
 
-sanguis::collision::world::group
+sanguis::collision::world::body_group
 sanguis::server::entities::projectiles::base::collision_group() const
 {
 	return

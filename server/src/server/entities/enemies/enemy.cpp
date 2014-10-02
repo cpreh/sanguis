@@ -1,4 +1,4 @@
-#include <sanguis/collision/world/group.hpp>
+#include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/load/model/enemy_path.hpp>
 #include <sanguis/messages/roles/angle.hpp>
@@ -178,11 +178,11 @@ sanguis::server::entities::enemies::enemy::add_message(
 		);
 }
 
-sanguis::collision::world::group
+sanguis::collision::world::body_group
 sanguis::server::entities::enemies::enemy::collision_group() const
 {
 	return
-		sanguis::collision::world::group::enemy;
+		sanguis::collision::world::body_group::enemy;
 }
 
 void

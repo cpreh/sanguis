@@ -7,11 +7,12 @@
 #include <sanguis/collision/aux_/world/simple/ghost_fwd.hpp>
 #include <sanguis/collision/world/body_collision_callback.hpp>
 #include <sanguis/collision/world/body_fwd.hpp>
+#include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters_fwd.hpp>
 #include <sanguis/collision/world/body_unique_ptr.hpp>
+#include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_parameters_fwd.hpp>
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
-#include <sanguis/collision/world/group.hpp>
 #include <sanguis/collision/world/object.hpp>
 #include <sanguis/collision/world/parameters_fwd.hpp>
 #include <sanguis/creator/dim.hpp>
@@ -98,7 +99,7 @@ public:
 
 	typedef
 	fcppt::container::enum_array<
-		sanguis::collision::world::group,
+		sanguis::collision::world::body_group,
 		body_set
 	>
 	body_set_array;
@@ -111,14 +112,14 @@ public:
 
 	typedef
 	fcppt::container::enum_array<
-		sanguis::collision::world::group,
+		sanguis::collision::world::ghost_group,
 		ghost_set
 	>
 	ghost_set_array;
 
 	typedef
 	fcppt::container::enum_array<
-		sanguis::collision::world::group,
+		sanguis::collision::world::body_group,
 		sanguis::collision::aux_::world::simple::body_list_grid
 	>
 	body_list_grid_array;

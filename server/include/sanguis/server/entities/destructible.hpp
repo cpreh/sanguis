@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_DESTRUCTIBLE_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_DESTRUCTIBLE_HPP_INCLUDED
 
-#include <sanguis/collision/world/group_fwd.hpp>
+#include <sanguis/collision/world/body_group_fwd.hpp>
 #include <sanguis/creator/destructible_type.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/health_fwd.hpp>
@@ -58,7 +58,7 @@ private:
 	team() const
 	override;
 
-	sanguis::collision::world::group
+	sanguis::collision::world::body_group
 	collision_group() const
 	override;
 

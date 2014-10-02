@@ -6,7 +6,7 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_type_to_is_primary.hpp>
-#include <sanguis/collision/world/group.hpp>
+#include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/load/model/player_path.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/aura_type_container.hpp>
@@ -632,9 +632,9 @@ sanguis::server::entities::player::on_reload_time(
 	);
 }
 
-sanguis::collision::world::group
+sanguis::collision::world::body_group
 sanguis::server::entities::player::collision_group() const
 {
 	return
-		sanguis::collision::world::group::player;
+		sanguis::collision::world::body_group::player;
 }

@@ -1,11 +1,11 @@
-#include <sanguis/collision/world/group.hpp>
+#include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/collision_group.hpp>
 #include <sanguis/server/auras/influence.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
 
-sanguis::collision::world::group
+sanguis::collision::world::ghost_group
 sanguis::server::auras::collision_group(
 	sanguis::server::team const _team,
 	sanguis::server::auras::influence const _influence
@@ -22,10 +22,10 @@ sanguis::server::auras::collision_group(
 		{
 		case sanguis::server::team::players:
 			return
-				sanguis::collision::world::group::projectile_enemy;
+				sanguis::collision::world::ghost_group::target_player;
 		case sanguis::server::team::monsters:
 			return
-				sanguis::collision::world::group::projectile_player;
+				sanguis::collision::world::ghost_group::target_enemy;
 		}
 		break;
 	case sanguis::server::auras::influence::debuff:
@@ -35,10 +35,10 @@ sanguis::server::auras::collision_group(
 		{
 		case sanguis::server::team::players:
 			return
-				sanguis::collision::world::group::projectile_player;
+				sanguis::collision::world::ghost_group::target_enemy;
 		case sanguis::server::team::monsters:
 			return
-				sanguis::collision::world::group::projectile_enemy;
+				sanguis::collision::world::ghost_group::target_player;
 		}
 		break;
 	}

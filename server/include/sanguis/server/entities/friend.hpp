@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_FRIEND_HPP_INCLUDED
 
 #include <sanguis/friend_type.hpp>
-#include <sanguis/collision/world/group_fwd.hpp>
+#include <sanguis/collision/world/body_group_fwd.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/player_id.hpp>
@@ -74,7 +74,7 @@ private:
 	) const
 	override;
 
-	sanguis::collision::world::group
+	sanguis::collision::world::body_group
 	collision_group() const
 	override;
 

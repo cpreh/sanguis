@@ -11,7 +11,7 @@
 #include <sanguis/collision/world/body.hpp>
 #include <sanguis/collision/world/body_base_fwd.hpp>
 #include <sanguis/collision/world/body_parameters_fwd.hpp>
-#include <sanguis/collision/world/group.hpp>
+#include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/position_change_callback.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
@@ -80,7 +80,7 @@ public:
 	sanguis::collision::radius const
 	radius() const;
 
-	sanguis::collision::world::group
+	sanguis::collision::world::body_group
 	collision_group() const;
 
 	sanguis::collision::world::body_base &
@@ -94,7 +94,7 @@ private:
 
 	sanguis::collision::radius const radius_;
 
-	sanguis::collision::world::group const collision_group_;
+	sanguis::collision::world::body_group const collision_group_;
 
 	sanguis::collision::world::body_base &body_base_;
 
