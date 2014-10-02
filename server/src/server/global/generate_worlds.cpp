@@ -3,7 +3,6 @@
 #include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/creator/opening_count.hpp>
-#include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/start_name.hpp>
 #include <sanguis/creator/top_parameters.hpp>
 #include <sanguis/server/dest_world_id.hpp>
@@ -29,6 +28,7 @@
 #include <sanguis/server/world/object_unique_ptr.hpp>
 #include <sanguis/server/world/parameters.hpp>
 #include <sanguis/server/world/random.hpp>
+#include <sanguis/server/world/random_seed.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -85,9 +85,9 @@ sanguis::server::global::generate_worlds(
 			difficulty,
 			sanguis::creator::top_parameters(
 				sanguis::creator::start_name(),
-				sanguis::creator::seed{
-					0u
-				},
+				sanguis::server::world::random_seed(
+					_parameters.random_generator()
+				),
 				sanguis::creator::opening_count{
 					2u
 				}
