@@ -26,7 +26,7 @@ public:
 	virtual
 	sanguis::client::control::optional_attack_dest const
 	translate_attack_dest(
-		sanguis::client::control::cursor_position const &
+		sanguis::client::control::cursor_position
 	) const = 0;
 
 	virtual

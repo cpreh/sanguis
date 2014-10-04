@@ -29,7 +29,7 @@ class control_environment
 public:
 	explicit
 	control_environment(
-		sanguis::client::draw2d::scene::object &
+		sanguis::client::draw2d::scene::object const &
 	);
 
 	~control_environment()
@@ -37,7 +37,7 @@ public:
 private:
 	sanguis::client::control::optional_attack_dest const
 	translate_attack_dest(
-		sanguis::client::control::cursor_position const &
+		sanguis::client::control::cursor_position
 	) const
 	override;
 
@@ -51,7 +51,7 @@ private:
 	)
 	override;
 
-	sanguis::client::draw2d::scene::object &object_;
+	sanguis::client::draw2d::scene::object const &object_;
 
 	sanguis::client::control::optional_cursor_position position_;
 };
