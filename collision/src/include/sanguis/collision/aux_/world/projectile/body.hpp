@@ -5,8 +5,8 @@
 #include <sanguis/collision/speed_fwd.hpp>
 #include <sanguis/collision/aux_/world/projectile/global_groups_fwd.hpp>
 #include <sanguis/collision/world/body.hpp>
+#include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters_fwd.hpp>
-#include <sanguis/collision/world/group.hpp>
 #include <sge/projectile/world_fwd.hpp>
 #include <sge/projectile/body/object.hpp>
 #include <sge/projectile/body/scoped_fwd.hpp>
@@ -72,7 +72,7 @@ private:
 
 	sge::projectile::body::object impl_;
 
-	sanguis::collision::world::group const collision_group_;
+	sanguis::collision::world::body_group const collision_group_;
 
 	fcppt::signal::scoped_connection const position_connection_;
 

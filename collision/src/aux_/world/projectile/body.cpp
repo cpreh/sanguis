@@ -3,8 +3,7 @@
 #include <sanguis/collision/aux_/world/projectile/body.hpp>
 #include <sanguis/collision/aux_/world/projectile/create_circle.hpp>
 #include <sanguis/collision/aux_/world/projectile/from_sge_vector.hpp>
-#include <sanguis/collision/aux_/world/projectile/global_groups_fwd.hpp>
-#include <sanguis/collision/aux_/world/projectile/make_groups.hpp>
+#include <sanguis/collision/aux_/world/projectile/global_groups.hpp>
 #include <sanguis/collision/aux_/world/projectile/to_sge_user_data.hpp>
 #include <sanguis/collision/aux_/world/projectile/to_sge_vector.hpp>
 #include <sanguis/collision/world/body.hpp>
@@ -18,7 +17,9 @@
 #include <sge/projectile/body/rotation.hpp>
 #include <sge/projectile/body/scoped.hpp>
 #include <sge/projectile/body/solidity/nonsolid.hpp>
+#include <sge/projectile/group/sequence.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
 
@@ -105,10 +106,13 @@ sanguis::collision::aux_::world::projectile::body::activate(
 		>(
 			_world,
 			impl_,
-			sanguis::collision::aux_::world::projectile::make_groups(
-				collision_group_,
-				_global_groups
-			)
+			sge::projectile::group::sequence{
+				fcppt::make_ref(
+					_global_groups.body_group(
+						collision_group_
+					)
+				)
+			}
 		);
 }
 

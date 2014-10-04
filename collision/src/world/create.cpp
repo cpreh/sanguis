@@ -1,8 +1,11 @@
 #include <sanguis/collision/world/create.hpp>
 #include <sanguis/collision/world/object_unique_ptr.hpp>
 #include <sanguis/collision/world/parameters_fwd.hpp>
-//#include <sanguis/collision/aux_/world/projectile/object.hpp>
+#if defined(SANGUIS_COLLISION_ENABLE_PROJECTILE)
+#include <sanguis/collision/aux_/world/projectile/object.hpp>
+#else
 #include <sanguis/collision/aux_/world/simple/object.hpp>
+#endif
 #include <fcppt/make_unique_ptr.hpp>
 
 
@@ -13,8 +16,11 @@ sanguis::collision::world::create(
 {
 	return
 		fcppt::make_unique_ptr<
-//			sanguis::collision::aux_::world::projectile::object
+#if defined(SANGUIS_COLLISION_ENABLE_PROJECTILE)
+			sanguis::collision::aux_::world::projectile::object
+#else
 			sanguis::collision::aux_::world::simple::object
+#endif
 		>(
 			_parameters
 		);

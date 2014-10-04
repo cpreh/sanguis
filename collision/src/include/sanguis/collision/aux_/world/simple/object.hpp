@@ -89,8 +89,6 @@ private:
 		sanguis::collision::aux_::world::simple::body &
 	);
 
-public:
-	// TODO
 	typedef
 	std::unordered_set<
 		sanguis::collision::aux_::world::simple::body *
@@ -123,7 +121,7 @@ public:
 		sanguis::collision::aux_::world::simple::body_list_grid
 	>
 	body_list_grid_array;
-private:
+
 	sanguis::collision::world::body_collision_callback const body_collision_callback_;
 
 	sanguis::creator::dim const grid_size_;

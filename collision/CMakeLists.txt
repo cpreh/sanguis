@@ -56,10 +56,6 @@ set(
 	src/aux_/world/body_groups_for_body_group.cpp
 	src/aux_/world/body_groups_for_ghost_group.cpp
 	src/aux_/world/ghost_groups_for_body_group.cpp
-	src/aux_/world/simple/body.cpp
-	src/aux_/world/simple/ghost.cpp
-	src/aux_/world/simple/grid_position.cpp
-	src/aux_/world/simple/object.cpp
 	src/include/sanguis/collision/aux_/adjust_speed.hpp
 	src/include/sanguis/collision/aux_/cross2.hpp
 	src/include/sanguis/collision/aux_/dir.hpp
@@ -89,6 +85,25 @@ set(
 	src/include/sanguis/collision/aux_/world/ghost_group_container.hpp
 	src/include/sanguis/collision/aux_/world/ghost_groups_for_body_group.hpp
 	src/include/sanguis/collision/aux_/world/make_groups.hpp
+	src/result.cpp
+	src/test.cpp
+	src/test_move.cpp
+	src/world/body.cpp
+	src/world/body_base.cpp
+	src/world/body_parameters.cpp
+	src/world/create.cpp
+	src/world/ghost.cpp
+	src/world/ghost_parameters.cpp
+	src/world/object.cpp
+	src/world/parameters.cpp
+)
+
+set(
+	SANGUIS_COLLISION_SIMPLE_FILES
+	src/aux_/world/simple/body.cpp
+	src/aux_/world/simple/ghost.cpp
+	src/aux_/world/simple/grid_position.cpp
+	src/aux_/world/simple/object.cpp
 	src/include/sanguis/collision/aux_/world/simple/body.hpp
 	src/include/sanguis/collision/aux_/world/simple/body_base_hook.hpp
 	src/include/sanguis/collision/aux_/world/simple/body_fwd.hpp
@@ -105,17 +120,6 @@ set(
 	src/include/sanguis/collision/aux_/world/simple/ghost_unique_ptr.hpp
 	src/include/sanguis/collision/aux_/world/simple/grid_position.hpp
 	src/include/sanguis/collision/aux_/world/simple/object.hpp
-	src/result.cpp
-	src/test.cpp
-	src/test_move.cpp
-	src/world/body.cpp
-	src/world/body_base.cpp
-	src/world/body_parameters.cpp
-	src/world/create.cpp
-	src/world/ghost.cpp
-	src/world/ghost_parameters.cpp
-	src/world/object.cpp
-	src/world/parameters.cpp
 )
 
 set(
@@ -126,7 +130,6 @@ set(
 	src/aux_/world/projectile/from_sge_vector.cpp
 	src/aux_/world/projectile/ghost.cpp
 	src/aux_/world/projectile/global_groups.cpp
-	src/aux_/world/projectile/make_groups.cpp
 	src/aux_/world/projectile/object.cpp
 	src/aux_/world/projectile/to_sge_dim.cpp
 	src/aux_/world/projectile/to_sge_user_data.cpp
@@ -138,11 +141,16 @@ set(
 	src/include/sanguis/collision/aux_/world/projectile/ghost.hpp
 	src/include/sanguis/collision/aux_/world/projectile/global_groups.hpp
 	src/include/sanguis/collision/aux_/world/projectile/global_groups_fwd.hpp
-	src/include/sanguis/collision/aux_/world/projectile/make_groups.hpp
 	src/include/sanguis/collision/aux_/world/projectile/object.hpp
 	src/include/sanguis/collision/aux_/world/projectile/to_sge_dim.hpp
 	src/include/sanguis/collision/aux_/world/projectile/to_sge_user_data.hpp
 	src/include/sanguis/collision/aux_/world/projectile/to_sge_vector.hpp
+)
+
+set(
+	SANGUIS_COLLISION_LINK_TARGETS
+	${fcppt_core_TARGET}
+	${sanguis_creator_TARGET}
 )
 
 if(
@@ -153,21 +161,23 @@ if(
 		SANGUIS_COLLISION_FILES
 		"${SANGUIS_COLLISION_PROJECTILE_FILES}"
 	)
-endif()
 
-set(
-	COLLISION_LINK_TARGETS
-	${fcppt_core_TARGET}
-	${sanguis_creator_TARGET}
-)
-
-if(
-	ENABLE_PROJECTILE
-)
 	list(
 		APPEND
-		COLLISION_LINK_TARGETS
+		SANGUIS_COLLISION_LINK_TARGETS
 		${sgeprojectile_TARGET}
+	)
+
+	list(
+		APPEND
+		SANGUIS_COLLISION_DEFINITIONS
+		SANGUIS_COLLISION_ENABLE_PROJECTILE
+	)
+else()
+	list(
+		APPEND
+		SANGUIS_COLLISION_FILES
+		"${SANGUIS_COLLISION_SIMPLE_FILES}"
 	)
 endif()
 
@@ -175,9 +185,11 @@ sanguis_add_library(
 	collision
 	"${SANGUIS_COLLISION_FILES}"
 	DEPS
-		${COLLISION_LINK_TARGETS}
+		${SANGUIS_COLLISION_LINK_TARGETS}
 	INCLUDES
 		"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
+	COMPILE_DEFINITIONS
+		"${SANGUIS_COLLISION_DEFINITIONS}"
 )
 
 add_subdirectory(

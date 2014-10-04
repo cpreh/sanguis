@@ -3,8 +3,7 @@
 #include <sanguis/collision/unit.hpp>
 #include <sanguis/collision/aux_/world/projectile/from_sge_user_data.hpp>
 #include <sanguis/collision/aux_/world/projectile/ghost.hpp>
-#include <sanguis/collision/aux_/world/projectile/global_groups_fwd.hpp>
-#include <sanguis/collision/aux_/world/projectile/make_groups.hpp>
+#include <sanguis/collision/aux_/world/projectile/global_groups.hpp>
 #include <sanguis/collision/aux_/world/projectile/to_sge_dim.hpp>
 #include <sanguis/collision/aux_/world/projectile/to_sge_vector.hpp>
 #include <sanguis/collision/world/body_callback.hpp>
@@ -16,7 +15,9 @@
 #include <sge/projectile/ghost/parameters.hpp>
 #include <sge/projectile/ghost/position.hpp>
 #include <sge/projectile/ghost/size.hpp>
+#include <sge/projectile/group/sequence.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/signal/auto_connection.hpp>
@@ -68,10 +69,13 @@ sanguis::collision::aux_::world::projectile::ghost::ghost(
 	scoped_(
 		_world,
 		impl_,
-		sanguis::collision::aux_::world::projectile::make_groups(
-			_parameters.collision_group(),
-			_global_groups
-		)
+		sge::projectile::group::sequence{
+			fcppt::make_ref(
+				_global_groups.ghost_group(
+					_parameters.collision_group()
+				)
+			)
+		}
 	)
 {
 }

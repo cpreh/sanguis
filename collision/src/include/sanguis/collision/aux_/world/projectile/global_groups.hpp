@@ -2,7 +2,8 @@
 #define SANGUIS_COLLISION_AUX__WORLD_PROJECTILE_GLOBAL_GROUPS_HPP_INCLUDED
 
 #include <sanguis/collision/aux_/world/projectile/global_groups_fwd.hpp>
-#include <sanguis/collision/world/group_fwd.hpp>
+#include <sanguis/collision/world/body_group.hpp>
+#include <sanguis/collision/world/ghost_group.hpp>
 #include <sge/projectile/world_fwd.hpp>
 #include <sge/projectile/group/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -37,21 +38,39 @@ public:
 	~global_groups();
 
 	sge::projectile::group::object &
-	group(
-		sanguis::collision::world::group
+	body_group(
+		sanguis::collision::world::body_group
+	) const;
+
+	sge::projectile::group::object &
+	ghost_group(
+		sanguis::collision::world::ghost_group
 	) const;
 private:
 	typedef
-	std::map<
-		sanguis::collision::world::group,
-		std::unique_ptr<
-			sge::projectile::group::object
-		>
+	std::unique_ptr<
+		sge::projectile::group::object
 	>
-	group_map;
+	group_unique_ptr;
 
-	// TODO: why are the groups in projectile nonconst everywhere?
-	mutable group_map groups_;
+	typedef
+	std::map<
+		sanguis::collision::world::body_group,
+		group_unique_ptr
+	>
+	body_group_map;
+
+	typedef
+	std::map<
+		sanguis::collision::world::ghost_group,
+		group_unique_ptr
+	>
+	ghost_group_map;
+
+	// TODO: why are groups in projectile nonconst everywhere?
+	mutable body_group_map body_groups_;
+
+	mutable ghost_group_map ghost_groups_;
 };
 
 }
