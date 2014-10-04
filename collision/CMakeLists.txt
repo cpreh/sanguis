@@ -53,6 +53,9 @@ set(
 	src/aux_/make_range.cpp
 	src/aux_/make_spiral_range.cpp
 	src/aux_/rect_line_intersection.cpp
+	src/aux_/world/body_groups_for_body_group.cpp
+	src/aux_/world/body_groups_for_ghost_group.cpp
+	src/aux_/world/ghost_groups_for_body_group.cpp
 	src/aux_/world/simple/body.cpp
 	src/aux_/world/simple/ghost.cpp
 	src/aux_/world/simple/grid_position.cpp
@@ -78,8 +81,13 @@ set(
 	src/include/sanguis/collision/aux_/rect_line_intersection.hpp
 	src/include/sanguis/collision/aux_/world/body_ghost_group_pair.hpp
 	src/include/sanguis/collision/aux_/world/body_ghost_group_relation.hpp
+	src/include/sanguis/collision/aux_/world/body_group_container.hpp
 	src/include/sanguis/collision/aux_/world/body_group_pair.hpp
 	src/include/sanguis/collision/aux_/world/body_group_relation.hpp
+	src/include/sanguis/collision/aux_/world/body_groups_for_body_group.hpp
+	src/include/sanguis/collision/aux_/world/body_groups_for_ghost_group.hpp
+	src/include/sanguis/collision/aux_/world/ghost_group_container.hpp
+	src/include/sanguis/collision/aux_/world/ghost_groups_for_body_group.hpp
 	src/include/sanguis/collision/aux_/world/simple/body.hpp
 	src/include/sanguis/collision/aux_/world/simple/body_base_hook.hpp
 	src/include/sanguis/collision/aux_/world/simple/body_fwd.hpp
