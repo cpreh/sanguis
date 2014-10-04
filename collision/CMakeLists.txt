@@ -88,6 +88,7 @@ set(
 	src/include/sanguis/collision/aux_/world/body_groups_for_ghost_group.hpp
 	src/include/sanguis/collision/aux_/world/ghost_group_container.hpp
 	src/include/sanguis/collision/aux_/world/ghost_groups_for_body_group.hpp
+	src/include/sanguis/collision/aux_/world/make_groups.hpp
 	src/include/sanguis/collision/aux_/world/simple/body.hpp
 	src/include/sanguis/collision/aux_/world/simple/body_base_hook.hpp
 	src/include/sanguis/collision/aux_/world/simple/body_fwd.hpp
