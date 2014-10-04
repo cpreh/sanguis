@@ -1,3 +1,4 @@
+#include <sanguis/client/control/attack_dest.hpp>
 #include <sanguis/client/control/cursor_position.hpp>
 #include <sanguis/client/control/environment.hpp>
 #include <sanguis/client/control/optional_attack_dest.hpp>
@@ -45,16 +46,18 @@ sanguis::client::draw2d::scene::control_environment::translate_attack_dest(
 			)
 			{
 				return
-					sanguis::client::draw2d::translate::vector_from_client(
-						fcppt::math::vector::structure_cast<
-							sanguis::client::draw2d::vector2
-						>(
-							-
-							_translation.get()
-							+
-							_cursor_position
+					sanguis::client::control::attack_dest{
+						sanguis::client::draw2d::translate::vector_from_client(
+							fcppt::math::vector::structure_cast<
+								sanguis::client::draw2d::vector2
+							>(
+								-
+								_translation.get()
+								+
+								_cursor_position
+							)
 						)
-					);
+					};
 			}
 		);
 }
