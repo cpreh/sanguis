@@ -428,9 +428,65 @@ sanguis::client::draw2d::scene::object::draw(
 	sge::renderer::context::ffp &_render_context
 )
 {
+	sge::sprite::optional_matrix const projection_matrix(
+		sge::sprite::projection_matrix(
+			this->viewport()
+		)
+	);
+
+	if(
+		!projection_matrix
+		||
+		!translation_
+	)
+	{
+		_render_context.clear(
+			sge::renderer::clear::parameters()
+			.back_buffer(
+				sge::image::color::predef::black()
+			)
+		);
+
+		return;
+	}
+
+	sge::renderer::state::ffp::transform::object_unique_ptr const projection_state(
+		renderer_.create_transform_state(
+			sge::renderer::state::ffp::transform::parameters(
+				*projection_matrix
+			)
+		)
+	);
+
+	sge::renderer::state::ffp::transform::scoped const scoped_projection(
+		_render_context,
+		sge::renderer::state::ffp::transform::mode::projection,
+		*projection_state
+	);
+
+	sge::sprite::state::scoped<
+		sanguis::client::draw2d::sprite::state_choices
+	> const scoped_state(
+		renderer_,
+		_render_context,
+		sge::sprite::state::default_options<
+			sanguis::client::draw2d::sprite::state_choices
+		>(),
+		sprite_states_
+	);
+
 	this->render_systems(
 		_render_context
 	);
+
+	for(
+		sanguis::client::draw2d::scene::hover::base_unique_ptr const &hover
+		:
+		hovers_
+	)
+		hover->draw(
+			_render_context
+		);
 }
 
 void
@@ -482,53 +538,6 @@ sanguis::client::draw2d::scene::object::render_systems(
 	sge::renderer::context::ffp &_render_context
 )
 {
-	sge::sprite::optional_matrix const projection_matrix(
-		sge::sprite::projection_matrix(
-			this->viewport()
-		)
-	);
-
-	if(
-		!projection_matrix
-		||
-		!translation_
-	)
-	{
-		_render_context.clear(
-			sge::renderer::clear::parameters()
-			.back_buffer(
-				sge::image::color::predef::black()
-			)
-		);
-
-		return;
-	}
-
-	sge::renderer::state::ffp::transform::object_unique_ptr const projection_state(
-		renderer_.create_transform_state(
-			sge::renderer::state::ffp::transform::parameters(
-				*projection_matrix
-			)
-		)
-	);
-
-	sge::renderer::state::ffp::transform::scoped const scoped_projection(
-		_render_context,
-		sge::renderer::state::ffp::transform::mode::projection,
-		*projection_state
-	);
-
-	sge::sprite::state::scoped<
-		sanguis::client::draw2d::sprite::state_choices
-	> const scoped_state(
-		renderer_,
-		_render_context,
-		sge::sprite::state::default_options<
-			sanguis::client::draw2d::sprite::state_choices
-		>(),
-		sprite_states_
-	);
-
 	sge::renderer::state::ffp::transform::object_unique_ptr const transform_state(
 		renderer_.create_transform_state(
 			sge::renderer::state::ffp::transform::parameters(
@@ -566,7 +575,7 @@ sanguis::client::draw2d::scene::object::render_systems(
 	);
 
 	for(
-		auto index
+		auto const index
 		:
 		fcppt::make_enum_range_start_end(
 			sanguis::client::draw2d::z_ordering::corpses,
@@ -576,15 +585,6 @@ sanguis::client::draw2d::scene::object::render_systems(
 		normal_system_.render(
 			_render_context,
 			index
-		);
-
-	for(
-		sanguis::client::draw2d::scene::hover::base_unique_ptr const &hover
-		:
-		hovers_
-	)
-		hover->draw(
-			_render_context
 		);
 }
 
