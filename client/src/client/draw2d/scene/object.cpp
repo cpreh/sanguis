@@ -475,6 +475,38 @@ sanguis::client::draw2d::scene::object::draw(
 		sprite_states_
 	);
 
+	background_->render(
+		_render_context,
+		*translation_
+	);
+
+	sge::renderer::state::ffp::transform::object_unique_ptr const transform_state(
+		renderer_.create_transform_state(
+			sge::renderer::state::ffp::transform::parameters(
+				fcppt::math::matrix::translation(
+					fcppt::math::vector::construct(
+						fcppt::math::vector::structure_cast<
+							sanguis::client::draw2d::vector2
+						>(
+							translation_->get()
+						),
+						fcppt::literal<
+							sanguis::client::draw2d::funit
+						>(
+							0
+						)
+					)
+				)
+			)
+		)
+	);
+
+	sge::renderer::state::ffp::transform::scoped const scoped_transform(
+		_render_context,
+		sge::renderer::state::ffp::transform::mode::world,
+		*transform_state
+	);
+
 	this->render_systems(
 		_render_context
 	);
@@ -538,38 +570,6 @@ sanguis::client::draw2d::scene::object::render_systems(
 	sge::renderer::context::ffp &_render_context
 )
 {
-	sge::renderer::state::ffp::transform::object_unique_ptr const transform_state(
-		renderer_.create_transform_state(
-			sge::renderer::state::ffp::transform::parameters(
-				fcppt::math::matrix::translation(
-					fcppt::math::vector::construct(
-						fcppt::math::vector::structure_cast<
-							sanguis::client::draw2d::vector2
-						>(
-							translation_->get()
-						),
-						fcppt::literal<
-							sanguis::client::draw2d::funit
-						>(
-							0
-						)
-					)
-				)
-			)
-		)
-	);
-
-	background_->render(
-		_render_context,
-		*translation_
-	);
-
-	sge::renderer::state::ffp::transform::scoped const scoped_transform(
-		_render_context,
-		sge::renderer::state::ffp::transform::mode::world,
-		*transform_state
-	);
-
 	world_->draw(
 		_render_context
 	);
