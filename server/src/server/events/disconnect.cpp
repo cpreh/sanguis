@@ -15,5 +15,6 @@ sanguis::server::events::disconnect::disconnect(
 alda::net::id const
 sanguis::server::events::disconnect::id() const
 {
-	return id_;
+	return
+		id_;
 }

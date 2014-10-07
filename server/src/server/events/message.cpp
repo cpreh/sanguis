@@ -31,11 +31,13 @@ sanguis::server::events::message::~message()
 sanguis::messages::client::shared_ptr
 sanguis::server::events::message::get() const
 {
-	return message_;
+	return
+		message_;
 }
 
 sanguis::server::player_id const
 sanguis::server::events::message::id() const
 {
-	return id_;
+	return
+		id_;
 }

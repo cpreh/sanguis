@@ -14,6 +14,7 @@
 #include <sanguis/server/net_id_from_player.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/player_id_from_net.hpp>
+#include <sanguis/server/slowdown.hpp>
 #include <sanguis/server/unknown_player_exception.hpp>
 #include <sanguis/server/events/disconnect.hpp>
 #include <sanguis/server/events/message.hpp>
@@ -27,6 +28,7 @@
 #include <alda/net/buffer/circular_receive/object_fwd.hpp>
 #include <alda/net/buffer/circular_send/optional_ref.hpp>
 #include <alda/net/server/connection_id_container.hpp>
+#include <sge/timer/difference_fractional.hpp>
 #include <sge/timer/elapsed_and_reset.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/string.hpp>
@@ -479,13 +481,22 @@ sanguis::server::machine::data_error(
 void
 sanguis::server::machine::timer_callback()
 {
+	sanguis::server::slowdown const slowdown{
+		sge::timer::difference_fractional<
+			sanguis::server::slowdown::value_type
+		>(
+			frame_timer_
+		)
+	};
+
 	this->process_event(
 		sanguis::server::events::tick(
 			sge::timer::elapsed_and_reset<
 				sanguis::duration
 			>(
 				frame_timer_
-			)
+			),
+			slowdown
 		)
 	);
 }
