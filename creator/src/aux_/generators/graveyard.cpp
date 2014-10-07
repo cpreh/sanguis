@@ -81,40 +81,6 @@ sanguis::creator::aux_::generators::graveyard(
 		>
 	> uniform_tile_enum;
 
-	auto random_grave(
-		fcppt::random::make_variate(
-			_parameters.randgen(),
-			uniform_tile_enum(
-				uniform_tile_enum::param_type::min(
-					sanguis::creator::tile::grave1
-				),
-				uniform_tile_enum::param_type::max(
-					sanguis::creator::tile::grave5
-				)
-			)
-		)
-	);
-
-	for(
-		auto cell
-		:
-		fcppt::container::grid::make_pos_range(
-			grid
-		)
-	)
-	{
-		if(
-			cell.value()
-			==
-			sanguis::creator::tile::nothing
-			&&
-			fill_tile_random()
-			== 0
-		)
-			cell.value() =
-				random_grave();
-	}
-
 	sanguis::creator::background_grid grid_bg{
 		grid.size(),
 		sanguis::creator::background_tile::grass
@@ -156,6 +122,45 @@ sanguis::creator::aux_::generators::graveyard(
 			:
 			sanguis::creator::background_tile::grass;
 
+	auto random_grave(
+		fcppt::random::make_variate(
+			_parameters.randgen(),
+			uniform_tile_enum(
+				uniform_tile_enum::param_type::min(
+					sanguis::creator::tile::grave2
+				),
+				uniform_tile_enum::param_type::max(
+					sanguis::creator::tile::grave5
+				)
+			)
+		)
+	);
+
+	for(
+		auto cell
+		:
+		fcppt::container::grid::make_pos_range(
+			grid
+		)
+	)
+	{
+		if(
+			cell.value()
+			==
+			sanguis::creator::tile::nothing
+			&&
+			fill_tile_random()
+			== 0
+			&&
+			grid_bg[
+				cell.pos()
+			] ==
+			sanguis::creator::background_tile::grass
+		)
+			cell.value() =
+				random_grave();
+	}
+
 	sanguis::creator::spawn_container const
 	spawners{
 		sanguis::creator::aux_::place_spawners(
@@ -168,7 +173,8 @@ sanguis::creator::aux_::generators::graveyard(
 				sanguis::creator::enemy_type::zombie01,
 				sanguis::creator::enemy_type::skeleton,
 				sanguis::creator::enemy_type::ghost
-			}
+			},
+			sanguis::creator::tile::grave1
 		)
 	};
 

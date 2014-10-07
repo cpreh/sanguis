@@ -33,7 +33,8 @@ sanguis::creator::aux_::place_spawners(
 	sanguis::creator::opening_container const &_openings,
 	sanguis::creator::count const _spawner_count,
 	sanguis::creator::aux_::random::generator &_generator,
-	sanguis::creator::aux_::enemy_type_container const &_enemy_types
+	sanguis::creator::aux_::enemy_type_container const &_enemy_types,
+	sanguis::creator::tile const _spawner_tile
 )
 {
 	sanguis::creator::aux_::random::uniform_pos
@@ -101,7 +102,7 @@ sanguis::creator::aux_::place_spawners(
 			[
 				*candidate
 			] =
-				sanguis::creator::tile::spawner;
+				_spawner_tile;
 
 			spawners.push_back(
 				sanguis::creator::spawn{
