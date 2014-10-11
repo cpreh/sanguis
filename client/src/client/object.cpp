@@ -146,9 +146,7 @@ sanguis::client::object::object(
 		sys_->viewport_manager(),
 		cursor_
 	),
-	frame_timer_(
-		frame_timer::parameters()
-	),
+	frame_timer_(),
 	server_(),
 	scoped_machine_(
 		machine_

@@ -401,6 +401,9 @@ set(
 	include/sanguis/server/net/angle_fwd.hpp
 	include/sanguis/server/net/angle_policy.hpp
 	include/sanguis/server/net/angle_policy_fwd.hpp
+	include/sanguis/server/net/basic_value_decl.hpp
+	include/sanguis/server/net/basic_value_fwd.hpp
+	include/sanguis/server/net/basic_value_impl.hpp
 	include/sanguis/server/net/center.hpp
 	include/sanguis/server/net/center_fwd.hpp
 	include/sanguis/server/net/center_policy.hpp
@@ -410,6 +413,7 @@ set(
 	include/sanguis/server/net/health_fwd.hpp
 	include/sanguis/server/net/health_policy.hpp
 	include/sanguis/server/net/health_policy_fwd.hpp
+	include/sanguis/server/net/instantiate_value.hpp
 	include/sanguis/server/net/serialize_to_circular_buffer.hpp
 	include/sanguis/server/net/serialize_to_data_buffer.hpp
 	include/sanguis/server/net/speed.hpp
@@ -488,6 +492,7 @@ set(
 	include/sanguis/server/send_available_perks.hpp
 	include/sanguis/server/send_callback.hpp
 	include/sanguis/server/skill_points.hpp
+	include/sanguis/server/slowdown.hpp
 	include/sanguis/server/source_world_id.hpp
 	include/sanguis/server/space_unit.hpp
 	include/sanguis/server/speed.hpp

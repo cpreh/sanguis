@@ -1,12 +1,10 @@
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/net/angle.hpp>
 #include <sanguis/server/net/angle_policy.hpp>
-#include <sanguis/server/net/value_impl.hpp>
+#include <sanguis/server/net/instantiate_value.hpp>
 
 
-template
-class
-sanguis::server::net::value<
+SANGUIS_SERVER_NET_INSTANTIATE_VALUE(
 	sanguis::server::angle,
 	sanguis::server::net::angle_policy
->;
+);

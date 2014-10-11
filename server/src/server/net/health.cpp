@@ -1,12 +1,10 @@
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/net/health.hpp>
 #include <sanguis/server/net/health_policy.hpp>
-#include <sanguis/server/net/value_impl.hpp>
+#include <sanguis/server/net/instantiate_value.hpp>
 
 
-template
-class
-sanguis::server::net::value<
+SANGUIS_SERVER_NET_INSTANTIATE_VALUE(
 	sanguis::server::health,
 	sanguis::server::net::health_policy
->;
+);
