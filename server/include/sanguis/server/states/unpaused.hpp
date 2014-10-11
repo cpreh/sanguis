@@ -14,6 +14,7 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/events/message_fwd.hpp>
 #include <sanguis/server/events/tick_fwd.hpp>
+#include <sanguis/server/net/slowdown.hpp>
 #include <sanguis/server/states/running.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
@@ -118,6 +119,8 @@ public:
 		sanguis::server::player_id,
 		sanguis::messages::client::pause const &
 	);
+private:
+	sanguis::server::net::slowdown slowdown_;
 };
 
 }

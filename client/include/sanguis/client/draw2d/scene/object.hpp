@@ -2,11 +2,11 @@
 #define SANGUIS_CLIENT_DRAW2D_SCENE_OBJECT_HPP_INCLUDED
 
 #include <sanguis/diff_clock.hpp>
-#include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
 #include <sanguis/random_generator.hpp>
 #include <sanguis/client/cursor_fwd.hpp>
 #include <sanguis/client/player_health_callback.hpp>
+#include <sanguis/client/slowed_duration_fwd.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
 #include <sanguis/client/weapon_pair.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
@@ -123,7 +123,7 @@ private:
 
 	void
 	update(
-		sanguis::duration const &
+		sanguis::client::slowed_duration
 	)
 	override;
 

@@ -1,6 +1,7 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/io_service.hpp>
 #include <sanguis/log_parameters.hpp>
+#include <sanguis/slowdown.hpp>
 #include <sanguis/messages/client/base.hpp>
 #include <sanguis/messages/client/unique_ptr.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
@@ -14,7 +15,6 @@
 #include <sanguis/server/net_id_from_player.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/player_id_from_net.hpp>
-#include <sanguis/server/slowdown.hpp>
 #include <sanguis/server/unknown_player_exception.hpp>
 #include <sanguis/server/events/disconnect.hpp>
 #include <sanguis/server/events/message.hpp>
@@ -481,9 +481,9 @@ sanguis::server::machine::data_error(
 void
 sanguis::server::machine::timer_callback()
 {
-	sanguis::server::slowdown const slowdown{
+	sanguis::slowdown const slowdown{
 		sge::timer::difference_fractional<
-			sanguis::server::slowdown::value_type
+			sanguis::slowdown::value_type
 		>(
 			frame_timer_
 		)

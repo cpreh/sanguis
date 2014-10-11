@@ -7,6 +7,7 @@
 #include <sanguis/client/health.hpp>
 #include <sanguis/client/max_health.hpp>
 #include <sanguis/client/player_health_callback.hpp>
+#include <sanguis/client/slowed_duration.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
 #include <sanguis/client/weapon_description_from_message.hpp>
 #include <sanguis/client/world_parameters.hpp>
@@ -355,7 +356,7 @@ sanguis::client::draw2d::scene::object::process_message(
 
 void
 sanguis::client::draw2d::scene::object::update(
-	sanguis::duration const &_delta
+	sanguis::client::slowed_duration const _delta
 )
 {
 	if(
@@ -363,7 +364,7 @@ sanguis::client::draw2d::scene::object::update(
 	)
 		sanguis::update_diff_clock(
 			diff_clock_,
-			_delta
+			_delta.get()
 		);
 
 	sanguis::client::control::optional_attack_dest const attack_dest{

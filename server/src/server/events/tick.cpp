@@ -1,11 +1,11 @@
 #include <sanguis/duration.hpp>
-#include <sanguis/server/slowdown.hpp>
+#include <sanguis/slowdown.hpp>
 #include <sanguis/server/events/tick.hpp>
 
 
 sanguis::server::events::tick::tick(
 	sanguis::duration const &_delta,
-	sanguis::server::slowdown const _slowdown
+	sanguis::slowdown const _slowdown
 )
 :
 	delta_{
@@ -24,7 +24,7 @@ sanguis::server::events::tick::delta() const
 		delta_;
 }
 
-sanguis::server::slowdown const
+sanguis::slowdown const
 sanguis::server::events::tick::slowdown() const
 {
 	return

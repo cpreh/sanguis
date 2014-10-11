@@ -47,6 +47,7 @@ enum class message
 	remove_id,
 	remove_weapon,
 	rotate,
+	slowdown,
 	speed,
 	unpause,
 	weapon_status,

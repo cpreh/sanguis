@@ -1,5 +1,6 @@
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/player_name.hpp>
+#include <sanguis/slowdown.hpp>
 #include <sanguis/world_name.hpp>
 #include <sanguis/client/dispatch.hpp>
 #include <sanguis/client/exp.hpp>
@@ -10,6 +11,7 @@
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/make_send_callback.hpp>
 #include <sanguis/client/player_health_callback.hpp>
+#include <sanguis/client/slowed_duration.hpp>
 #include <sanguis/client/sound_manager.hpp>
 #include <sanguis/client/weapon_description_from_message.hpp>
 #include <sanguis/client/args/draw_debug.hpp>
@@ -43,6 +45,7 @@
 #include <sanguis/messages/roles/level.hpp>
 #include <sanguis/messages/roles/magazine_remaining.hpp>
 #include <sanguis/messages/roles/reload_time.hpp>
+#include <sanguis/messages/roles/slowdown.hpp>
 #include <sanguis/messages/roles/world_name.hpp>
 #include <sanguis/messages/server/add_console_command.hpp>
 #include <sanguis/messages/server/add_own_player.hpp>
@@ -57,6 +60,7 @@
 #include <sanguis/messages/server/pause.hpp>
 #include <sanguis/messages/server/reload.hpp>
 #include <sanguis/messages/server/remove_weapon.hpp>
+#include <sanguis/messages/server/slowdown.hpp>
 #include <sanguis/messages/server/unpause.hpp>
 #include <alda/serialization/load/optional.hpp>
 #include <alda/serialization/load/static_size.hpp>
@@ -64,6 +68,7 @@
 #include <sge/console/object.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/input/cursor/activatable_fwd.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
@@ -182,7 +187,14 @@ sanguis::client::states::running::running(
 				std::placeholders::_1
 			)
 		)
-	)
+	),
+	slowdown_{
+		fcppt::literal<
+			sanguis::slowdown::value_type
+		>(
+			1
+		)
+	}
 {
 }
 
@@ -195,12 +207,22 @@ sanguis::client::states::running::react(
 	sanguis::client::events::tick const &_event
 )
 {
-	drawer_->update(
+	sanguis::client::slowed_duration const slowed_duration{
 		_event.delta()
+		*
+		slowdown_.get()
+	};
+
+	drawer_->update(
+		slowed_duration
 	);
 
 	hud_->update(
 		_event.delta()
+	);
+
+	hud_->update_server(
+		slowed_duration
 	);
 
 	sound_manager_->update();
@@ -268,7 +290,7 @@ sanguis::client::states::running::react(
 
 	return
 		sanguis::client::dispatch<
-			boost::mpl::vector12<
+			boost::mpl::vector13<
 				sanguis::messages::server::add_console_command,
 				sanguis::messages::server::add_own_player,
 				sanguis::messages::server::change_world,
@@ -280,6 +302,7 @@ sanguis::client::states::running::react(
 				sanguis::messages::server::pause,
 				sanguis::messages::server::reload,
 				sanguis::messages::server::remove_weapon,
+				sanguis::messages::server::slowdown,
 				sanguis::messages::server::unpause
 			>
 		>(
@@ -536,6 +559,24 @@ sanguis::client::states::running::operator()(
 	return
 		sanguis::messages::call::result(
 			sanguis::messages::call::forward_to_default()
+		);
+}
+
+sanguis::messages::call::result
+sanguis::client::states::running::operator()(
+	sanguis::messages::server::slowdown const &_message
+)
+{
+	slowdown_ =
+		sanguis::slowdown{
+			_message.get<
+				sanguis::messages::roles::slowdown
+			>()
+		};
+
+	return
+		sanguis::messages::call::result(
+			this->discard_event()
 		);
 }
 

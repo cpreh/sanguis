@@ -416,6 +416,10 @@ set(
 	include/sanguis/server/net/instantiate_value.hpp
 	include/sanguis/server/net/serialize_to_circular_buffer.hpp
 	include/sanguis/server/net/serialize_to_data_buffer.hpp
+	include/sanguis/server/net/slowdown.hpp
+	include/sanguis/server/net/slowdown_fwd.hpp
+	include/sanguis/server/net/slowdown_policy.hpp
+	include/sanguis/server/net/slowdown_policy_fwd.hpp
 	include/sanguis/server/net/speed.hpp
 	include/sanguis/server/net/speed_fwd.hpp
 	include/sanguis/server/net/speed_policy.hpp
@@ -492,7 +496,6 @@ set(
 	include/sanguis/server/send_available_perks.hpp
 	include/sanguis/server/send_callback.hpp
 	include/sanguis/server/skill_points.hpp
-	include/sanguis/server/slowdown.hpp
 	include/sanguis/server/source_world_id.hpp
 	include/sanguis/server/space_unit.hpp
 	include/sanguis/server/speed.hpp
@@ -888,6 +891,8 @@ set(
 	src/server/net/health_policy.cpp
 	src/server/net/serialize_to_circular_buffer.cpp
 	src/server/net/serialize_to_data_buffer.cpp
+	src/server/net/slowdown.cpp
+	src/server/net/slowdown_policy.cpp
 	src/server/net/speed.cpp
 	src/server/net/speed_policy.cpp
 	src/server/net_id_from_player.cpp

@@ -1,3 +1,4 @@
+#include <sanguis/clock.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/messages/call/result.hpp>
@@ -14,8 +15,10 @@
 #include <sanguis/messages/roles/attack_dest.hpp>
 #include <sanguis/messages/roles/direction.hpp>
 #include <sanguis/messages/roles/is_primary_weapon.hpp>
+#include <sanguis/messages/roles/slowdown.hpp>
 #include <sanguis/messages/server/create.hpp>
 #include <sanguis/messages/server/pause.hpp>
+#include <sanguis/messages/server/slowdown.hpp>
 #include <sanguis/server/dispatch.hpp>
 #include <sanguis/server/machine.hpp>
 #include <sanguis/server/player_id.hpp>
@@ -56,6 +59,10 @@ fcppt::log::object logger(
 }
 
 sanguis::server::states::unpaused::unpaused()
+:
+	slowdown_{
+		sanguis::clock()
+	}
 {
 	FCPPT_LOG_DEBUG(
 		logger,
@@ -78,6 +85,10 @@ sanguis::server::states::unpaused::react(
 	sanguis::server::events::tick const &_event
 )
 {
+	slowdown_.set(
+		_event.slowdown()
+	);
+
 	if(
 		this->context<
 			sanguis::server::machine
@@ -91,6 +102,20 @@ sanguis::server::states::unpaused::react(
 	>().global_context().update(
 		_event.delta()
 	);
+
+	if(
+		slowdown_.update()
+	)
+		this->context<
+			sanguis::server::machine
+		>().send_to_all(
+			sanguis::messages::server::create(
+				sanguis::messages::server::slowdown{
+					sanguis::messages::roles::slowdown{} =
+						_event.slowdown().get()
+				}
+			)
+		);
 
 	return
 		this->discard_event();

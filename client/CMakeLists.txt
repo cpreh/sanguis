@@ -595,6 +595,8 @@ set(
 	include/sanguis/client/server.hpp
 	include/sanguis/client/server_callback.hpp
 	include/sanguis/client/server_fwd.hpp
+	include/sanguis/client/slowed_duration.hpp
+	include/sanguis/client/slowed_duration_fwd.hpp
 	include/sanguis/client/sound_manager.hpp
 	include/sanguis/client/sound_manager_fwd.hpp
 	include/sanguis/client/states/console.hpp

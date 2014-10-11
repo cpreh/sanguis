@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_STATES_RUNNING_HPP_INCLUDED
 #define SANGUIS_CLIENT_STATES_RUNNING_HPP_INCLUDED
 
+#include <sanguis/slowdown.hpp>
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
 #include <sanguis/client/console/object_fwd.hpp>
@@ -28,6 +29,7 @@
 #include <sanguis/messages/server/pause_fwd.hpp>
 #include <sanguis/messages/server/reload_fwd.hpp>
 #include <sanguis/messages/server/remove_weapon_fwd.hpp>
+#include <sanguis/messages/server/slowdown_fwd.hpp>
 #include <sanguis/messages/server/unpause_fwd.hpp>
 #include <sge/input/cursor/activatable_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -171,6 +173,11 @@ public:
 
 	sanguis::messages::call::result
 	operator()(
+		sanguis::messages::server::slowdown const &
+	);
+
+	sanguis::messages::call::result
+	operator()(
 		sanguis::messages::server::unpause const &
 	);
 
@@ -215,6 +222,8 @@ private:
 	std::unique_ptr<
 		sanguis::client::control::input_translator
 	> const input_translator_;
+
+	sanguis::slowdown slowdown_;
 };
 
 }

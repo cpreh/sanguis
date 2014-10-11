@@ -229,6 +229,7 @@ set(
 	include/sanguis/messages/roles/required_perk_parent_level.hpp
 	include/sanguis/messages/roles/required_perk_player_level.hpp
 	include/sanguis/messages/roles/seed.hpp
+	include/sanguis/messages/roles/slowdown.hpp
 	include/sanguis/messages/roles/speed.hpp
 	include/sanguis/messages/roles/weapon_attribute_base.hpp
 	include/sanguis/messages/roles/weapon_attribute_container.hpp
@@ -337,6 +338,8 @@ set(
 	include/sanguis/messages/server/serialization/instantiate_message.hpp
 	include/sanguis/messages/server/serialization/serialize.hpp
 	include/sanguis/messages/server/shared_ptr.hpp
+	include/sanguis/messages/server/slowdown.hpp
+	include/sanguis/messages/server/slowdown_fwd.hpp
 	include/sanguis/messages/server/speed.hpp
 	include/sanguis/messages/server/speed_fwd.hpp
 	include/sanguis/messages/server/types/alda_type.hpp
@@ -417,6 +420,8 @@ set(
 	include/sanguis/reload_time.hpp
 	include/sanguis/secondary_weapon_type.hpp
 	include/sanguis/secondary_weapon_type_fwd.hpp
+	include/sanguis/slowdown.hpp
+	include/sanguis/slowdown_fwd.hpp
 	include/sanguis/string_vector.hpp
 	include/sanguis/time_unit.hpp
 	include/sanguis/timer.hpp
@@ -529,6 +534,7 @@ set(
 	src/messages/server/serialization/details.cpp
 	src/messages/server/serialization/global_context.cpp
 	src/messages/server/serialization/serialize.cpp
+	src/messages/server/slowdown.cpp
 	src/messages/server/speed.cpp
 	src/messages/server/unpause.cpp
 	src/messages/server/weapon_status.cpp

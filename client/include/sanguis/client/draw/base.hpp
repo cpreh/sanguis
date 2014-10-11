@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW_BASE_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW_BASE_HPP_INCLUDED
 
-#include <sanguis/duration.hpp>
+#include <sanguis/client/slowed_duration_fwd.hpp>
 #include <sanguis/client/control/environment_fwd.hpp>
 #include <sanguis/client/draw/base_fwd.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
@@ -36,7 +36,7 @@ public:
 	virtual
 	void
 	update(
-		sanguis::duration const &
+		sanguis::client::slowed_duration
 	) = 0;
 
 	virtual

@@ -11,6 +11,7 @@
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/max_health_valid.hpp>
 #include <sanguis/client/optional_health_pair.hpp>
+#include <sanguis/client/slowed_duration.hpp>
 #include <sanguis/client/gui/default_text_color.hpp>
 #include <sanguis/client/gui/to_duration.hpp>
 #include <sanguis/client/gui/hud/object.hpp>
@@ -515,7 +516,7 @@ sanguis::client::gui::hud::object::player_name(
 
 void
 sanguis::client::gui::hud::object::update(
-	sanguis::duration const &_duration
+	sanguis::duration const _duration
 )
 {
 	gui_master_.update(
@@ -523,17 +524,6 @@ sanguis::client::gui::hud::object::update(
 			_duration
 		)
 	);
-
-	if(
-		!paused_
-	)
-		reload_clock_.update(
-			std::chrono::duration_cast<
-				sanguis::diff_clock::duration
-			>(
-				_duration
-			)
-		);
 
 	this->foreach_weapon(
 		[](
@@ -543,6 +533,23 @@ sanguis::client::gui::hud::object::update(
 			_widget.update();
 		}
 	);
+}
+
+void
+sanguis::client::gui::hud::object::update_server(
+	sanguis::client::slowed_duration const _duration
+)
+{
+	if(
+		!paused_
+	)
+		reload_clock_.update(
+			std::chrono::duration_cast<
+				sanguis::diff_clock::duration
+			>(
+				_duration.get()
+			)
+		);
 }
 
 void
