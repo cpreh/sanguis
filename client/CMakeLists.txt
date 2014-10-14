@@ -144,6 +144,8 @@ set(
 	include/sanguis/client/draw2d/entities/own_fwd.hpp
 	include/sanguis/client/draw2d/entities/own_player.hpp
 	include/sanguis/client/draw2d/entities/own_unique_ptr.hpp
+	include/sanguis/client/draw2d/entities/particle.hpp
+	include/sanguis/client/draw2d/entities/particle_name.hpp
 	include/sanguis/client/draw2d/entities/player.hpp
 	include/sanguis/client/draw2d/entities/player_fwd.hpp
 	include/sanguis/client/draw2d/entities/sentry.hpp
@@ -332,6 +334,8 @@ set(
 	include/sanguis/client/draw2d/sprite/normal/texture_animation_decl.hpp
 	include/sanguis/client/draw2d/sprite/normal/texture_animation_fwd.hpp
 	include/sanguis/client/draw2d/sprite/normal/white.hpp
+	include/sanguis/client/draw2d/sprite/optional_dim.hpp
+	include/sanguis/client/draw2d/sprite/optional_dim_fwd.hpp
 	include/sanguis/client/draw2d/sprite/order.hpp
 	include/sanguis/client/draw2d/sprite/order_fwd.hpp
 	include/sanguis/client/draw2d/sprite/point.hpp
@@ -688,6 +692,7 @@ set(
 	src/client/draw2d/entities/other_player.cpp
 	src/client/draw2d/entities/own.cpp
 	src/client/draw2d/entities/own_player.cpp
+	src/client/draw2d/entities/particle.cpp
 	src/client/draw2d/entities/player.cpp
 	src/client/draw2d/entities/sentry.cpp
 	src/client/draw2d/entities/weapon_pickup.cpp
