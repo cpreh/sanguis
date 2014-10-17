@@ -4,6 +4,7 @@
 #include <sanguis/client/health_pair.hpp>
 #include <sanguis/client/optional_health_pair.hpp>
 #include <sanguis/client/draw2d/entities/friend.hpp>
+#include <sanguis/client/draw2d/entities/load_parameters.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/with_buffs_auras_model.hpp>
 #include <sanguis/client/draw2d/entities/hover/info.hpp>
@@ -11,7 +12,6 @@
 #include <sanguis/client/draw2d/entities/hover/optional_info.hpp>
 #include <sanguis/client/draw2d/entities/hover/optional_name.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
-#include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/normal/white.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
@@ -19,7 +19,7 @@
 
 
 sanguis::client::draw2d::entities::friend_::friend_(
-	sanguis::client::draw2d::entities::model::load_parameters const &_load_parameters,
+	sanguis::client::draw2d::entities::load_parameters const &_load_parameters,
 	sanguis::client::load::auras::context &_aura_resources,
 	sanguis::friend_type const _friend_type,
 	sanguis::aura_type_vector const &_auras,

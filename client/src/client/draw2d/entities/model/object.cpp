@@ -9,13 +9,13 @@
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/speed_is_null.hpp>
 #include <sanguis/client/draw2d/entities/container.hpp>
+#include <sanguis/client/draw2d/entities/load_parameters.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_health.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_weapon.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_time.hpp>
 #include <sanguis/client/draw2d/entities/model/expand_orders.hpp>
-#include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <sanguis/client/draw2d/entities/model/part.hpp>
@@ -84,6 +84,7 @@ sanguis::client::draw2d::entities::model::object::object(
 	decay_option_(
 		_parameters.decay_option()
 	),
+	// TODO: Initialize this directly
 	parts_()
 {
 	sanguis::client::load::model::object const &model(
@@ -174,7 +175,9 @@ bool
 sanguis::client::draw2d::entities::model::object::dead() const
 {
 	return
-		decay_time_.get() != nullptr;
+		decay_time_.get()
+		!=
+		nullptr;
 }
 
 void
@@ -452,7 +455,8 @@ sanguis::client::draw2d::entities::model::object::animations_ended() const
 		!=
 		sanguis::client::load::animation_type::dying
 	)
-		return true;
+		return
+			true;
 
 	for(
 		auto const &cur_part

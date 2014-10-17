@@ -5,13 +5,14 @@
 #include <sanguis/buff_type_vector.hpp>
 #include <sanguis/enemy_kind_fwd.hpp>
 #include <sanguis/client/health_pair_fwd.hpp>
+#include <sanguis/client/draw2d/entities/create_parameters_fwd.hpp>
+#include <sanguis/client/draw2d/entities/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/name_fwd.hpp>
 #include <sanguis/client/draw2d/entities/with_buffs_auras_model.hpp>
 #include <sanguis/client/draw2d/entities/hover/name.hpp>
 #include <sanguis/client/draw2d/entities/hover/optional_info_fwd.hpp>
-#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
-#include <sanguis/creator/enemy_type_fwd.hpp>
+#include <sanguis/creator/enemy_type.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -33,7 +34,7 @@ class enemy
 	);
 public:
 	enemy(
-		sanguis::client::draw2d::entities::model::load_parameters const &,
+		sanguis::client::draw2d::entities::load_parameters const &,
 		sanguis::client::load::auras::context &,
 		sanguis::creator::enemy_type,
 		sanguis::enemy_kind,
@@ -46,9 +47,17 @@ public:
 	~enemy()
 	override;
 private:
+	void
+	on_create(
+		sanguis::client::draw2d::entities::create_parameters const &
+	)
+	override;
+
 	sanguis::client::draw2d::entities::hover::optional_info
 	hover() const
 	override;
+
+	sanguis::creator::enemy_type const enemy_type_;
 
 	sanguis::client::draw2d::entities::hover::name const name_;
 };

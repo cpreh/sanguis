@@ -23,12 +23,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
-#include <sanguis/exception.hpp>
 #include <sanguis/client/draw2d/sprite/animation/loop_method.hpp>
 #include <sanguis/client/draw2d/sprite/animation/texture_decl.hpp>
 #include <sanguis/client/load/resource/animation/series.hpp>
 #include <sge/sprite/object.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
@@ -69,13 +67,6 @@ sanguis::client::draw2d::sprite::animation::texture<
 		series_.begin()
 	)
 {
-	if(
-		series_.empty()
-	)
-		throw sanguis::exception(
-			FCPPT_TEXT("animation::texture series is empty!")
-		);
-
 	this->reset();
 }
 

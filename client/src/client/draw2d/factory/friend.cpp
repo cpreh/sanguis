@@ -4,9 +4,9 @@
 #include <sanguis/client/health_pair.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/friend.hpp>
+#include <sanguis/client/draw2d/entities/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/sentry.hpp>
-#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/factory/friend.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -15,7 +15,7 @@
 
 sanguis::client::draw2d::entities::unique_ptr
 sanguis::client::draw2d::factory::friend_(
-	sanguis::client::draw2d::entities::model::load_parameters const &_parameters,
+	sanguis::client::draw2d::entities::load_parameters const &_parameters,
 	sanguis::client::load::auras::context &_aura_load_context,
 	sanguis::friend_type const _friend_type,
 	sanguis::aura_type_vector const &_auras,

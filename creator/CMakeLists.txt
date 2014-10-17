@@ -4,6 +4,7 @@ set(
 	include/sanguis/creator/background_grid_fwd.hpp
 	include/sanguis/creator/background_tile.hpp
 	include/sanguis/creator/background_tile_fwd.hpp
+	include/sanguis/creator/center_to_grid_pos.hpp
 	include/sanguis/creator/count.hpp
 	include/sanguis/creator/deserialize.hpp
 	include/sanguis/creator/destructible.hpp
@@ -36,6 +37,8 @@ set(
 	include/sanguis/creator/opening.hpp
 	include/sanguis/creator/opening_container.hpp
 	include/sanguis/creator/opening_count.hpp
+	include/sanguis/creator/optional_background_tile.hpp
+	include/sanguis/creator/optional_background_tile_fwd.hpp
 	include/sanguis/creator/pos.hpp
 	include/sanguis/creator/pos_fwd.hpp
 	include/sanguis/creator/rect.hpp

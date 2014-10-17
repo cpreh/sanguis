@@ -16,9 +16,11 @@ namespace draw2d
 namespace entities
 {
 
-typedef std::unique_ptr<
+typedef
+std::unique_ptr<
 	sanguis::client::draw2d::entities::own
-> own_unique_ptr;
+>
+own_unique_ptr;
 
 }
 }

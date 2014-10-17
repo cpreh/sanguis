@@ -18,8 +18,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
+#include <sanguis/exception.hpp>
 #include <sanguis/client/load/resource/animation/entity_vector.hpp>
 #include <sanguis/client/load/resource/animation/series.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -35,6 +37,12 @@ sanguis::client::load::resource::animation::series::series(
 		)
 	)
 {
+	if(
+		entities_.empty()
+	)
+		throw sanguis::exception(
+			FCPPT_TEXT("animation::texture series is empty!")
+		);
 }
 
 sanguis::client::load::resource::animation::series::series(
@@ -69,11 +77,4 @@ sanguis::client::load::resource::animation::series::end() const
 {
 	return
 		entities_.end();
-}
-
-bool
-sanguis::client::load::resource::animation::series::empty() const
-{
-	return
-		entities_.empty();
 }

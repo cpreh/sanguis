@@ -30,7 +30,6 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_comparison.hpp>
 #include <fcppt/optional_impl.hpp>
-#include <fcppt/assert/error.hpp>
 #include <fcppt/math/diff.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/dim.hpp>
@@ -252,10 +251,6 @@ sanguis::client::draw2d::entities::model::part::load_animation(
 
 	sanguis::client::load::resource::animation::series const &series(
 		animation.series()
-	);
-
-	FCPPT_ASSERT_ERROR(
-		!series.empty()
 	);
 
 	sanguis::client::draw2d::sprite::animation::loop_method const loop_method(

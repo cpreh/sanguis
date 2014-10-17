@@ -6,6 +6,8 @@
 #include <sanguis/client/draw2d/scene/world/object.hpp>
 #include <sanguis/client/draw2d/scene/world/state.hpp>
 #include <sanguis/client/load/resource/textures_fwd.hpp>
+#include <sanguis/creator/optional_background_tile.hpp>
+#include <sanguis/creator/pos.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -99,6 +101,21 @@ sanguis::client::draw2d::scene::world::object::collide_callback() const
 {
 	return
 		collide_callback_;
+}
+
+sanguis::creator::optional_background_tile
+sanguis::client::draw2d::scene::world::object::background_tile(
+	sanguis::creator::pos const _pos
+) const
+{
+	FCPPT_ASSERT_PRE(
+		state_
+	);
+
+	return
+		state_->background_tile(
+			_pos
+		);
 }
 
 sanguis::client::draw2d::optional_speed const

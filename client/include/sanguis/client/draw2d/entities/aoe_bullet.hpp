@@ -1,14 +1,10 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_AOE_BULLET_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_AOE_BULLET_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/client/draw2d/aoe.hpp>
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
-#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
+#include <sanguis/client/draw2d/entities/load_parameters.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
-#include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
-#include <sanguis/client/load/model/collection_fwd.hpp>
 #include <sanguis/load/model/path_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -31,7 +27,7 @@ class aoe_bullet
 	);
 public:
 	aoe_bullet(
-		sanguis::client::draw2d::entities::model::load_parameters const &,
+		sanguis::client::draw2d::entities::load_parameters const &,
 		sanguis::client::draw2d::insert_own_callback const &,
 		sanguis::load::model::path const &,
 		sanguis::client::draw2d::aoe
@@ -44,13 +40,7 @@ private:
 	on_die()
 	override;
 
-	sanguis::diff_clock const &diff_clock_;
-
-	sanguis::random_generator &random_generator_;
-
-	sanguis::client::load::model::collection const &model_collection_;
-
-	sanguis::client::draw2d::sprite::normal::system &normal_system_;
+	sanguis::client::draw2d::entities::load_parameters const load_parameters_;
 
 	sanguis::client::draw2d::insert_own_callback const insert_;
 

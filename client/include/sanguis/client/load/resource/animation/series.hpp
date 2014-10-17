@@ -51,9 +51,6 @@ public:
 
 	const_iterator
 	end() const;
-
-	bool
-	empty() const;
 private:
 	sanguis::client::load::resource::animation::entity_vector entities_;
 };

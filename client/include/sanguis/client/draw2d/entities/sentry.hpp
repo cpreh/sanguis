@@ -5,7 +5,7 @@
 #include <sanguis/buff_type_vector.hpp>
 #include <sanguis/client/health_pair_fwd.hpp>
 #include <sanguis/client/draw2d/entities/friend.hpp>
-#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
+#include <sanguis/client/draw2d/entities/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -29,7 +29,7 @@ class sentry
 	);
 public:
 	sentry(
-		sanguis::client::draw2d::entities::model::load_parameters const &,
+		sanguis::client::draw2d::entities::load_parameters const &,
 		sanguis::client::load::auras::context &,
 		sanguis::aura_type_vector const &,
 		sanguis::buff_type_vector const &,

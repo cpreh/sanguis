@@ -5,8 +5,8 @@
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/bullet.hpp>
+#include <sanguis/client/draw2d/entities/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
-#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/index.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
@@ -34,7 +34,7 @@ sanguis::client::draw2d::sprite::index const
 }
 
 sanguis::client::draw2d::entities::bullet::bullet(
-	sanguis::client::draw2d::entities::model::load_parameters const &_parameters,
+	sanguis::client::draw2d::entities::load_parameters const &_parameters,
 	sanguis::load::model::path const &_path
 )
 :

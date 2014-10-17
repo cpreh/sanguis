@@ -14,14 +14,15 @@
 #include <sanguis/client/control/environment_fwd.hpp>
 #include <sanguis/client/draw/base.hpp>
 #include <sanguis/client/draw/debug.hpp>
+#include <sanguis/client/draw2d/insert_own_callback.hpp>
 #include <sanguis/client/draw2d/optional_player_center.hpp>
 #include <sanguis/client/draw2d/optional_translation.hpp>
 #include <sanguis/client/draw2d/player_center_callback.hpp>
 #include <sanguis/client/draw2d/entities/base_fwd.hpp>
+#include <sanguis/client/draw2d/entities/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/own_fwd.hpp>
 #include <sanguis/client/draw2d/entities/own_unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
-#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/scene/background_fwd.hpp>
 #include <sanguis/client/draw2d/scene/configure_entity_fwd.hpp>
 #include <sanguis/client/draw2d/scene/control_environment_fwd.hpp>
@@ -200,8 +201,11 @@ private:
 	sge::renderer::target::viewport const
 	viewport() const;
 
-	sanguis::client::draw2d::entities::model::load_parameters const
-	model_parameters();
+	sanguis::client::draw2d::entities::load_parameters const
+	load_parameters();
+
+	sanguis::client::draw2d::insert_own_callback
+	insert_own_callback();
 
 	ALDA_CALL_FRIEND_DISPATCHER;
 
@@ -335,17 +339,17 @@ private:
 	);
 
 	template<
-		typename Msg
+		typename Message
 	>
 	friend class sanguis::client::draw2d::scene::configure_entity;
 
 	template<
-		typename Msg
+		typename Message
 	>
 	void
 	configure_new_object(
 		sanguis::client::draw2d::entities::unique_ptr &&,
-		Msg const &
+		Message const &
 	);
 
 	sanguis::diff_clock diff_clock_;

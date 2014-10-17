@@ -12,7 +12,10 @@
 #include <sanguis/client/draw2d/scene/world/sprite/buffers.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/state.hpp>
 #include <sanguis/client/load/tiles/context_fwd.hpp>
+#include <sanguis/creator/background_grid.hpp>
 #include <sanguis/creator/grid.hpp>
+#include <sanguis/creator/optional_background_tile_fwd.hpp>
+#include <sanguis/creator/pos_fwd.hpp>
 #include <sanguis/creator/top_result_fwd.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
@@ -61,6 +64,11 @@ public:
 	test_collision(
 		sanguis::client::draw2d::collide_parameters const &
 	) const;
+
+	sanguis::creator::optional_background_tile
+	background_tile(
+		sanguis::creator::pos
+	) const;
 private:
 	state(
 		sanguis::random_generator &,
@@ -78,6 +86,8 @@ private:
 	sanguis::client::draw2d::scene::world::sprite::state sprite_state_;
 
 	sanguis::creator::grid const grid_;
+
+	sanguis::creator::background_grid const background_grid_;
 
 	sanguis::client::draw2d::scene::world::batch_grid const batches_;
 

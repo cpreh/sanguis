@@ -4,8 +4,8 @@
 #include <sanguis/aoe_projectile_type_fwd.hpp>
 #include <sanguis/client/draw2d/aoe.hpp>
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
+#include <sanguis/client/draw2d/entities/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
-#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 
 
 namespace sanguis
@@ -19,7 +19,7 @@ namespace factory
 
 sanguis::client::draw2d::entities::unique_ptr
 aoe_projectile(
-	sanguis::client::draw2d::entities::model::load_parameters const &,
+	sanguis::client::draw2d::entities::load_parameters const &,
 	sanguis::client::draw2d::insert_own_callback const &,
 	sanguis::aoe_projectile_type,
 	sanguis::client::draw2d::aoe

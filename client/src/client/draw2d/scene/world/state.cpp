@@ -23,6 +23,8 @@
 #include <sanguis/collision/unit.hpp>
 #include <sanguis/creator/difference_type.hpp>
 #include <sanguis/creator/generate.hpp>
+#include <sanguis/creator/optional_background_tile.hpp>
+#include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/signed_pos.hpp>
 #include <sanguis/creator/top_result.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
@@ -41,6 +43,7 @@
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/container/grid/clamp_signed_pos.hpp>
+#include <fcppt/container/grid/in_range.hpp>
 #include <fcppt/container/grid/make_pos_crange_start_end.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
@@ -215,6 +218,26 @@ sanguis::client::draw2d::scene::world::state::test_collision(
 		;
 }
 
+sanguis::creator::optional_background_tile
+sanguis::client::draw2d::scene::world::state::background_tile(
+	sanguis::creator::pos const _pos
+) const
+{
+	return
+		fcppt::container::grid::in_range(
+			background_grid_,
+			_pos
+		)
+		?
+			sanguis::creator::optional_background_tile{
+				background_grid_[
+					_pos
+				]
+			}
+		:
+			sanguis::creator::optional_background_tile{};
+}
+
 sanguis::client::draw2d::scene::world::state::state(
 	sanguis::random_generator &_random_generator,
 	sge::renderer::device::core &_renderer,
@@ -238,6 +261,9 @@ sanguis::client::draw2d::scene::world::state::state(
 	grid_(
 		_result.grid()
 	),
+	background_grid_{
+		_result.background_grid()
+	},
 	batches_(
 		sanguis::client::draw2d::scene::world::generate_batches(
 			_random_generator,

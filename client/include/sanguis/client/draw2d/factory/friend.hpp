@@ -5,8 +5,8 @@
 #include <sanguis/buff_type_vector.hpp>
 #include <sanguis/friend_type_fwd.hpp>
 #include <sanguis/client/health_pair_fwd.hpp>
+#include <sanguis/client/draw2d/entities/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
-#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
 
 
@@ -21,7 +21,7 @@ namespace factory
 
 sanguis::client::draw2d::entities::unique_ptr
 friend_(
-	sanguis::client::draw2d::entities::model::load_parameters const &,
+	sanguis::client::draw2d::entities::load_parameters const &,
 	sanguis::client::load::auras::context &,
 	sanguis::friend_type,
 	sanguis::aura_type_vector const &,

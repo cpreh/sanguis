@@ -3,6 +3,7 @@
 
 #include <sanguis/client/draw2d/radius_fwd.hpp>
 #include <sanguis/client/draw2d/entities/base_fwd.hpp>
+#include <sanguis/client/draw2d/entities/create_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/hover/optional_info_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/center_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -62,6 +63,12 @@ public:
 	cursor_collision(
 		sanguis::client::draw2d::sprite::center
 	) const = 0;
+
+	virtual
+	void
+	on_create(
+		sanguis::client::draw2d::entities::create_parameters const &
+	);
 
 	virtual
 	~base() = 0;

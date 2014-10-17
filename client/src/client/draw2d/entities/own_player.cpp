@@ -11,9 +11,9 @@
 #include <sanguis/client/draw2d/player_center.hpp>
 #include <sanguis/client/draw2d/player_center_callback.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
+#include <sanguis/client/draw2d/entities/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/own_player.hpp>
 #include <sanguis/client/draw2d/entities/player.hpp>
-#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
@@ -21,7 +21,7 @@
 
 sanguis::client::draw2d::entities::own_player::own_player(
 	sanguis::client::load::auras::context &_auras_load_context,
-	sanguis::client::draw2d::entities::model::load_parameters const &_parameters,
+	sanguis::client::draw2d::entities::load_parameters const &_parameters,
 	sanguis::client::draw2d::player_center_callback const &_player_center_callback,
 	sanguis::client::draw2d::collide_callback const &_collide,
 	sanguis::client::player_health_callback const &_player_health_callback,

@@ -4,9 +4,9 @@
 #include <sanguis/client/player_health_callback.hpp>
 #include <sanguis/client/draw2d/collide_callback.hpp>
 #include <sanguis/client/draw2d/player_center_callback.hpp>
+#include <sanguis/client/draw2d/entities/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/own_player.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
-#include <sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/factory/own_player.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -15,7 +15,7 @@
 sanguis::client::draw2d::entities::unique_ptr
 sanguis::client::draw2d::factory::own_player(
 	sanguis::client::load::auras::context &_auras_load_context,
-	sanguis::client::draw2d::entities::model::load_parameters const &_parameters,
+	sanguis::client::draw2d::entities::load_parameters const &_parameters,
 	sanguis::client::draw2d::player_center_callback const &_player_center_callback,
 	sanguis::client::draw2d::collide_callback const &_collide_callback,
 	sanguis::client::player_health_callback const &_player_health_callback,

@@ -15,6 +15,7 @@ enum class z_ordering
 {
 	background,
 	corpses,
+	ground,
 	destructible,
 	pickup,
 	aura,

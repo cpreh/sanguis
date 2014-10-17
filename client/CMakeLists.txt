@@ -94,8 +94,11 @@ set(
 	include/sanguis/client/draw2d/entities/buffs/unique_ptr.hpp
 	include/sanguis/client/draw2d/entities/bullet.hpp
 	include/sanguis/client/draw2d/entities/container.hpp
+	include/sanguis/client/draw2d/entities/create_parameters.hpp
+	include/sanguis/client/draw2d/entities/create_parameters_fwd.hpp
 	include/sanguis/client/draw2d/entities/enemy.hpp
 	include/sanguis/client/draw2d/entities/enemy_color.hpp
+	include/sanguis/client/draw2d/entities/enemy_spawn_particle.hpp
 	include/sanguis/client/draw2d/entities/explosion.hpp
 	include/sanguis/client/draw2d/entities/friend.hpp
 	include/sanguis/client/draw2d/entities/hover/info.hpp
@@ -120,14 +123,14 @@ set(
 	include/sanguis/client/draw2d/entities/ifaces/with_speed.hpp
 	include/sanguis/client/draw2d/entities/ifaces/with_visibility.hpp
 	include/sanguis/client/draw2d/entities/ifaces/with_weapon.hpp
+	include/sanguis/client/draw2d/entities/load_parameters.hpp
+	include/sanguis/client/draw2d/entities/load_parameters_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/clamp_orientation.hpp
 	include/sanguis/client/draw2d/entities/model/decay_option.hpp
 	include/sanguis/client/draw2d/entities/model/decay_option_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/decay_time.hpp
 	include/sanguis/client/draw2d/entities/model/decay_time_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/expand_orders.hpp
-	include/sanguis/client/draw2d/entities/model/load_parameters.hpp
-	include/sanguis/client/draw2d/entities/model/load_parameters_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/loop_method.hpp
 	include/sanguis/client/draw2d/entities/model/object.hpp
 	include/sanguis/client/draw2d/entities/model/object_fwd.hpp
@@ -138,6 +141,8 @@ set(
 	include/sanguis/client/draw2d/entities/model/part_fwd.hpp
 	include/sanguis/client/draw2d/entities/name.hpp
 	include/sanguis/client/draw2d/entities/name_fwd.hpp
+	include/sanguis/client/draw2d/entities/optional_own_unique_ptr.hpp
+	include/sanguis/client/draw2d/entities/optional_own_unique_ptr_fwd.hpp
 	include/sanguis/client/draw2d/entities/order_vector.hpp
 	include/sanguis/client/draw2d/entities/other_player.hpp
 	include/sanguis/client/draw2d/entities/own.hpp
@@ -229,6 +234,7 @@ set(
 	include/sanguis/client/draw2d/scene/world/batch_grid.hpp
 	include/sanguis/client/draw2d/scene/world/batch_grid_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/batch_size.hpp
+	include/sanguis/client/draw2d/scene/world/center_to_grid_pos.hpp
 	include/sanguis/client/draw2d/scene/world/fill_batches.hpp
 	include/sanguis/client/draw2d/scene/world/fill_batches_base.hpp
 	include/sanguis/client/draw2d/scene/world/fill_non_connecting_batches.hpp
@@ -665,8 +671,10 @@ set(
 	src/client/draw2d/entities/buffs/slow.cpp
 	src/client/draw2d/entities/bullet.cpp
 	src/client/draw2d/entities/container.cpp
+	src/client/draw2d/entities/create_parameters.cpp
 	src/client/draw2d/entities/enemy.cpp
 	src/client/draw2d/entities/enemy_color.cpp
+	src/client/draw2d/entities/enemy_spawn_particle.cpp
 	src/client/draw2d/entities/explosion.cpp
 	src/client/draw2d/entities/friend.cpp
 	src/client/draw2d/entities/hover/info.cpp
@@ -680,10 +688,10 @@ set(
 	src/client/draw2d/entities/ifaces/with_speed.cpp
 	src/client/draw2d/entities/ifaces/with_visibility.cpp
 	src/client/draw2d/entities/ifaces/with_weapon.cpp
+	src/client/draw2d/entities/load_parameters.cpp
 	src/client/draw2d/entities/model/clamp_orientation.cpp
 	src/client/draw2d/entities/model/decay_time.cpp
 	src/client/draw2d/entities/model/expand_orders.cpp
-	src/client/draw2d/entities/model/load_parameters.cpp
 	src/client/draw2d/entities/model/loop_method.cpp
 	src/client/draw2d/entities/model/object.cpp
 	src/client/draw2d/entities/model/orientation.cpp
@@ -727,6 +735,7 @@ set(
 	src/client/draw2d/scene/object.cpp
 	src/client/draw2d/scene/translation.cpp
 	src/client/draw2d/scene/world/batch.cpp
+	src/client/draw2d/scene/world/center_to_grid_pos.cpp
 	src/client/draw2d/scene/world/fill_non_connecting_batches.cpp
 	src/client/draw2d/scene/world/generate_batches.cpp
 	src/client/draw2d/scene/world/missing_tile_texture.cpp

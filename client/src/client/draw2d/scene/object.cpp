@@ -30,6 +30,8 @@
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/base.hpp>
+#include <sanguis/client/draw2d/entities/create_parameters.hpp>
+#include <sanguis/client/draw2d/entities/load_parameters.hpp>
 #include <sanguis/client/draw2d/entities/name.hpp>
 #include <sanguis/client/draw2d/entities/own.hpp>
 #include <sanguis/client/draw2d/entities/own_unique_ptr.hpp>
@@ -42,7 +44,6 @@
 #include <sanguis/client/draw2d/entities/ifaces/with_orientation.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_speed.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_weapon.hpp>
-#include <sanguis/client/draw2d/entities/model/load_parameters.hpp>
 #include <sanguis/client/draw2d/factory/aoe_projectile.hpp>
 #include <sanguis/client/draw2d/factory/destructible.hpp>
 #include <sanguis/client/draw2d/factory/enemy.hpp>
@@ -63,6 +64,7 @@
 #include <sanguis/client/draw2d/scene/hover/base_unique_ptr.hpp>
 #include <sanguis/client/draw2d/scene/hover/create.hpp>
 #include <sanguis/client/draw2d/scene/hover/parameters.hpp>
+#include <sanguis/client/draw2d/scene/world/center_to_grid_pos.hpp>
 #include <sanguis/client/draw2d/scene/world/object.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
@@ -90,6 +92,7 @@
 #include <sanguis/messages/roles/buff_type.hpp>
 #include <sanguis/messages/roles/buff_type_container.hpp>
 #include <sanguis/messages/roles/center.hpp>
+#include <sanguis/messages/roles/created.hpp>
 #include <sanguis/messages/roles/destructible_type.hpp>
 #include <sanguis/messages/roles/enemy_kind.hpp>
 #include <sanguis/messages/roles/enemy_type.hpp>
@@ -154,6 +157,7 @@
 #include <sge/sprite/state/default_options.hpp>
 #include <sge/sprite/state/scoped.hpp>
 #include <sge/viewport/manager.hpp>
+#include <majutsu/get.hpp>
 #include <majutsu/is_role.hpp>
 #include <majutsu/unwrap_role.hpp>
 #include <fcppt/format.hpp>
@@ -807,17 +811,30 @@ sanguis::client::draw2d::scene::object::viewport() const
 		renderer_.onscreen_target().viewport();
 }
 
-sanguis::client::draw2d::entities::model::load_parameters const
-sanguis::client::draw2d::scene::object::model_parameters()
+sanguis::client::draw2d::entities::load_parameters const
+sanguis::client::draw2d::scene::object::load_parameters()
 {
 	return
-		sanguis::client::draw2d::entities::model::load_parameters{
+		sanguis::client::draw2d::entities::load_parameters{
 			diff_clock_,
 			random_generator_,
 			sound_manager_,
 			normal_system_,
 			model_collection_
 		};
+}
+
+sanguis::client::draw2d::insert_own_callback
+sanguis::client::draw2d::scene::object::insert_own_callback()
+{
+	return
+		sanguis::client::draw2d::insert_own_callback(
+			std::bind(
+				&sanguis::client::draw2d::scene::object::insert_own,
+				this,
+				std::placeholders::_1
+			)
+		);
 }
 
 sanguis::client::draw2d::scene::object::result_type
@@ -827,14 +844,8 @@ sanguis::client::draw2d::scene::object::operator()(
 {
 	this->configure_new_object(
 		sanguis::client::draw2d::factory::aoe_projectile(
-			this->model_parameters(),
-			sanguis::client::draw2d::insert_own_callback(
-				std::bind(
-					&sanguis::client::draw2d::scene::object::insert_own,
-					this,
-					std::placeholders::_1
-				)
-			),
+			this->load_parameters(),
+			this->insert_own_callback(),
 			_message.get<
 				sanguis::messages::roles::aoe_projectile_type
 			>(),
@@ -897,7 +908,7 @@ sanguis::client::draw2d::scene::object::operator()(
 {
 	this->configure_new_object(
 		sanguis::client::draw2d::factory::destructible(
-			this->model_parameters(),
+			this->load_parameters(),
 			_message.get<
 				sanguis::messages::roles::destructible_type
 			>()
@@ -913,7 +924,7 @@ sanguis::client::draw2d::scene::object::operator()(
 {
 	this->configure_new_object(
 		sanguis::client::draw2d::factory::enemy(
-			this->model_parameters(),
+			this->load_parameters(),
 			aura_resources_,
 			_message.get<
 				sanguis::messages::roles::enemy_type
@@ -949,7 +960,7 @@ sanguis::client::draw2d::scene::object::operator()(
 {
 	this->configure_new_object(
 		sanguis::client::draw2d::factory::friend_(
-			this->model_parameters(),
+			this->load_parameters(),
 			aura_resources_,
 			_message.get<
 				sanguis::messages::roles::friend_type
@@ -976,7 +987,7 @@ sanguis::client::draw2d::scene::object::operator()(
 	this->configure_new_object(
 		sanguis::client::draw2d::factory::own_player(
 			aura_resources_,
-			this->model_parameters(),
+			this->load_parameters(),
 			sanguis::client::draw2d::player_center_callback(
 				std::bind(
 					&sanguis::client::draw2d::scene::object::player_center,
@@ -1007,7 +1018,7 @@ sanguis::client::draw2d::scene::object::operator()(
 {
 	this->configure_new_object(
 		sanguis::client::draw2d::factory::pickup(
-			this->model_parameters(),
+			this->load_parameters(),
 			_message.get<
 				sanguis::messages::roles::pickup_type
 			>()
@@ -1024,7 +1035,7 @@ sanguis::client::draw2d::scene::object::operator()(
 	this->configure_new_object(
 		sanguis::client::draw2d::factory::player(
 			aura_resources_,
-			this->model_parameters(),
+			this->load_parameters(),
 			_message.get<
 				sanguis::messages::roles::aura_type_container
 			>(),
@@ -1053,7 +1064,7 @@ sanguis::client::draw2d::scene::object::operator()(
 {
 	this->configure_new_object(
 		sanguis::client::draw2d::factory::projectile(
-			this->model_parameters(),
+			this->load_parameters(),
 			_message.get<
 				sanguis::messages::roles::projectile_type
 			>()
@@ -1069,7 +1080,7 @@ sanguis::client::draw2d::scene::object::operator()(
 {
 	this->configure_new_object(
 		sanguis::client::draw2d::factory::weapon_pickup(
-			this->model_parameters(),
+			this->load_parameters(),
 			sanguis::client::weapon_description_from_message(
 				_message
 			)
@@ -1352,31 +1363,35 @@ sanguis::client::draw2d::scene::object::process_default_msg(
 
 
 template<
-	typename Msg
+	typename Message
 >
 void
 sanguis::client::draw2d::scene::object::configure_new_object(
 	sanguis::client::draw2d::entities::unique_ptr &&_ptr,
-	Msg const &_message
+	Message const &_message
 )
 {
 	sanguis::entity_id const id(
-		_message. template get<
+		majutsu::get<
 			sanguis::messages::roles::entity_id
-		>()
+		>(
+			_message
+		)
 	);
 
-	this->insert(
-		std::move(
-			_ptr
-		),
-		id
+	sanguis::client::draw2d::entities::base &inserted(
+		this->insert(
+			std::move(
+				_ptr
+			),
+			id
+		)
 	);
 
 	fcppt::mpl::for_each<
 		boost::mpl::transform_view<
 			boost::mpl::filter_view<
-				typename Msg::memory_type::types,
+				typename Message::memory_type::types,
 				majutsu::is_role<
 					boost::mpl::_1
 				>
@@ -1387,11 +1402,30 @@ sanguis::client::draw2d::scene::object::configure_new_object(
 		>
 	>(
 		sanguis::client::draw2d::scene::configure_entity<
-			Msg
+			Message
 		>(
 			*this,
 			id,
 			_message
 		)
 	);
+
+	if(
+		majutsu::get<
+			sanguis::messages::roles::created
+		>(
+			_message
+		)
+	)
+		inserted.on_create(
+			sanguis::client::draw2d::entities::create_parameters{
+				this->insert_own_callback(),
+				this->load_parameters(),
+				world_->background_tile(
+					sanguis::client::draw2d::scene::world::center_to_grid_pos(
+						inserted.center()
+					)
+				)
+			}
+		);
 }
