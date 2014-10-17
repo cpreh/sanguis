@@ -6,17 +6,33 @@ function(
 	sanguis_add_tool
 	TOOL_NAME
 	TOOL_FILES
-	INCLUDE_DIRS
-	LINK_LIBS
-	IS_GUI
 )
+	set(
+		SINGLE_ARGS
+		"IS_GUI"
+	)
+
+	set(
+		MULTI_ARGS
+		"INCLUDE_DIRS"
+		"LINK_LIBS"
+	)
+
+	cmake_parse_arguments(
+		""
+		""
+		"${SINGLE_ARGS}"
+		"${MULTI_ARGS}"
+		${ARGN}
+	)
+
 	set(
 		FULL_NAME
 		sanguis_tools_${TOOL_NAME}
 	)
 
 	if(
-		IS_GUI
+		_IS_GUI
 	)
 		awl_utils_add_portable_executable(
 			"${FULL_NAME}"
@@ -39,12 +55,12 @@ function(
 		PRIVATE
 		${CMAKE_CURRENT_SOURCE_DIR}/include
 		${CMAKE_CURRENT_BINARY_DIR}
-		${INCLUDE_DIRS}
+		${_INCLUDE_DIRS}
 	)
 
 	target_link_libraries(
 		${FULL_NAME}
-		${LINK_LIBS}
+		${_LINK_LIBS}
 	)
 
 	install(

@@ -205,6 +205,7 @@ sanguis_add_library(
 	DEPS
 		${sanguis_core_TARGET}
 		${fcppt_core_TARGET}
+		${fcppt_log_TARGET}
 		${sgecore_TARGET}
 		${sgeparse_TARGET}
 		${sgeparsejson_TARGET}

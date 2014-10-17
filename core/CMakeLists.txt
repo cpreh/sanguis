@@ -22,4 +22,5 @@ sanguis_add_library(
 	DEPS
 		${sgeconfig_TARGET}
 		${fcppt_core_TARGET}
+		${fcppt_log_TARGET}
 )

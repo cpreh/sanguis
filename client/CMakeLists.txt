@@ -912,8 +912,9 @@ sanguis_add_library(
 		${sgewindow_TARGET}
 		${alda_TARGET}
 		${awl_TARGET}
-		${fcppt_filesystem_TARGET}
 		${fcppt_core_TARGET}
+		${fcppt_filesystem_TARGET}
+		${fcppt_log_TARGET}
 		${FcpptThreads_LIBRARIES}
 		${Boost_PROGRAM_OPTIONS_LIBRARIES}
 	COMPILE_FLAGS

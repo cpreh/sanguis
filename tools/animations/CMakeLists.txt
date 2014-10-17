@@ -65,9 +65,20 @@ set(
 sanguis_add_tool(
 	animations
 	"${SANGUIS_TOOLS_ANIMATIONS_FILES}"
-	"${fcppt_INCLUDE_DIRS}"
-	"${sanguis_model_TARGET};${sanguis_tools_libmergeimage_TARGET};${sgeimage2d_TARGET};${sgesystems_TARGET};${sgecore_TARGET};${awl_TARGET};${fcppt_core_TARGET};${fcppt_filesystem_TARGET};${Boost_FILESYSTEM_LIBRARIES}"
-	TRUE
+	INCLUDE_DIRS
+		${fcppt_INCLUDE_DIRS}
+	LINK_LIBS
+		${sanguis_model_TARGET}
+		${sanguis_tools_libmergeimage_TARGET}
+		${sgeimage2d_TARGET}
+		${sgesystems_TARGET}
+		${sgecore_TARGET}
+		${awl_TARGET}
+		${fcppt_core_TARGET}
+		${fcppt_filesystem_TARGET}
+		${Boost_FILESYSTEM_LIBRARIES}
+	IS_GUI
+		TRUE
 )
 
 qt5_use_modules(

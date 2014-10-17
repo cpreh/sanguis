@@ -28,6 +28,7 @@ target_link_libraries(
 	${sanguis_client_TARGET}
 	${sanguis_core_TARGET}
 	${fcppt_core_TARGET}
+	${fcppt_log_TARGET}
 	${awl_TARGET}
 	${sgeconfig_TARGET}
 	${Boost_PROGRAM_OPTIONS_LIBRARIES}
