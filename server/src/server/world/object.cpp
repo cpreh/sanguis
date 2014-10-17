@@ -13,6 +13,7 @@
 #include <sanguis/world_name.hpp>
 #include <sanguis/collision/world/body_collision_callback.hpp>
 #include <sanguis/collision/world/create.hpp>
+#include <sanguis/collision/world/created.hpp>
 #include <sanguis/collision/world/object.hpp>
 #include <sanguis/collision/world/parameters.hpp>
 #include <sanguis/creator/destructible.hpp>
@@ -903,7 +904,8 @@ sanguis::server::world::object::load_context() const
 void
 sanguis::server::world::object::add_sight_range(
 	sanguis::server::player_id const _player_id,
-	sanguis::entity_id const _target_id
+	sanguis::entity_id const _target_id,
+	sanguis::collision::world::created const _created
 )
 {
 	sight_ranges_[
@@ -917,7 +919,8 @@ sanguis::server::world::object::add_sight_range(
 		*this->entity(
 			_target_id
 		).add_message(
-			_player_id
+			_player_id,
+			_created
 		)
 	);
 }

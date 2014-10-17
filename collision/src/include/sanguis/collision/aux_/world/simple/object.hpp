@@ -10,6 +10,7 @@
 #include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters_fwd.hpp>
 #include <sanguis/collision/world/body_unique_ptr.hpp>
+#include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_parameters_fwd.hpp>
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
@@ -58,7 +59,8 @@ private:
 
 	void
 	activate_body(
-		sanguis::collision::world::body &
+		sanguis::collision::world::body &,
+		sanguis::collision::world::created
 	)
 	override;
 

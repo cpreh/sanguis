@@ -1,5 +1,6 @@
 #include <sanguis/aura_type.hpp>
 #include <sanguis/optional_aura_type.hpp>
+#include <sanguis/collision/world/created.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/aura.hpp>
@@ -53,7 +54,8 @@ sanguis::server::auras::buff::type() const
 
 void
 sanguis::server::auras::buff::enter(
-	sanguis::server::entities::with_body &_entity
+	sanguis::server::entities::with_body &_entity,
+	sanguis::collision::world::created
 )
 {
 	sanguis::server::buffs::optional_unique_ptr new_buff(

@@ -1,4 +1,5 @@
 #include <sanguis/optional_aura_type.hpp>
+#include <sanguis/collision/world/created.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/server/add_weapon_pickup_callback.hpp>
 #include <sanguis/server/radius.hpp>
@@ -42,7 +43,8 @@ sanguis::server::auras::weapon_pickup_candidates::type() const
 
 void
 sanguis::server::auras::weapon_pickup_candidates::enter(
-	sanguis::server::entities::with_body &_body
+	sanguis::server::entities::with_body &_body,
+	sanguis::collision::world::created
 )
 {
 	add_.get()(

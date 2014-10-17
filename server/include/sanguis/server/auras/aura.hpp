@@ -3,6 +3,7 @@
 
 #include <sanguis/optional_aura_type_fwd.hpp>
 #include <sanguis/collision/world/body_base_fwd.hpp>
+#include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/collision/world/ghost_group_fwd.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/collision/ghost.hpp>
@@ -52,7 +53,8 @@ private:
 
 	void
 	body_enter(
-		sanguis::collision::world::body_base &
+		sanguis::collision::world::body_base &,
+		sanguis::collision::world::created
 	)
 	override;
 
@@ -65,7 +67,8 @@ private:
 	virtual
 	void
 	enter(
-		sanguis::server::entities::with_body &
+		sanguis::server::entities::with_body &,
+		sanguis::collision::world::created
 	) = 0;
 
 	virtual

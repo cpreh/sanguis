@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_AURAS_UPDATE_SIGHT_HPP_INCLUDED
 
 #include <sanguis/optional_aura_type_fwd.hpp>
+#include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/server/add_sight_callback.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/remove_sight_callback.hpp>
@@ -40,7 +41,8 @@ private:
 
 	void
 	enter(
-		sanguis::server::entities::with_body &
+		sanguis::server::entities::with_body &,
+		sanguis::collision::world::created
 	)
 	override;
 

@@ -4,6 +4,7 @@
 #include <sanguis/collision/world/body_base_fwd.hpp>
 #include <sanguis/collision/world/body_enter_callback.hpp>
 #include <sanguis/collision/world/body_exit_callback.hpp>
+#include <sanguis/collision/world/created_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool_fwd.hpp>
@@ -40,20 +41,11 @@ protected:
 	sanguis::collision::world::body_exit_callback
 	body_exit_callback();
 private:
-	void
-	collision_begin(
-		sanguis::collision::world::body_base &
-	);
-
-	void
-	collision_end(
-		sanguis::collision::world::body_base &
-	);
-
 	virtual
 	void
 	body_enter(
-		sanguis::collision::world::body_base &
+		sanguis::collision::world::body_base &,
+		sanguis::collision::world::created
 	) = 0;
 
 	virtual

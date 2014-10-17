@@ -8,6 +8,7 @@
 #include <sanguis/collision/aux_/world/simple/ghost_remove_callback.hpp>
 #include <sanguis/collision/world/body_enter_callback.hpp>
 #include <sanguis/collision/world/body_exit_callback.hpp>
+#include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/collision/world/ghost.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_parameters_fwd.hpp>
@@ -72,7 +73,8 @@ public:
 
 	void
 	new_body(
-		sanguis::collision::aux_::world::simple::body const &
+		sanguis::collision::aux_::world::simple::body const &,
+		sanguis::collision::world::created
 	);
 
 	void

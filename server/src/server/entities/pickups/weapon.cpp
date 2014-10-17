@@ -1,11 +1,13 @@
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/collision/world/body_group.hpp>
+#include <sanguis/collision/world/created.hpp>
 #include <sanguis/load/model/weapon_pickup_path.hpp>
 #include <sanguis/messages/convert/to_magazine_size.hpp>
 #include <sanguis/messages/convert/to_weapon_attribute_vector.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/center.hpp>
+#include <sanguis/messages/roles/created.hpp>
 #include <sanguis/messages/roles/entity_id.hpp>
 #include <sanguis/messages/roles/magazine_base_size.hpp>
 #include <sanguis/messages/roles/magazine_extra_size.hpp>
@@ -113,7 +115,8 @@ sanguis::server::entities::pickups::weapon::collision_group() const
 
 sanguis::messages::server::unique_ptr
 sanguis::server::entities::pickups::weapon::add_message(
-	sanguis::server::player_id const
+	sanguis::server::player_id const,
+	sanguis::collision::world::created const _created
 ) const
 {
 	sanguis::weapon_description const description(
@@ -129,6 +132,8 @@ sanguis::server::entities::pickups::weapon::add_message(
 					this->center().get(),
 				sanguis::messages::roles::angle{} =
 					this->angle().get(),
+				sanguis::messages::roles::created{} =
+					_created.get(),
 				sanguis::messages::roles::weapon_type{} =
 					description.weapon_type(),
 				// TODO: Unify this with give_weapon

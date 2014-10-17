@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_ID_HPP_INCLUDED
 
 #include <sanguis/entity_id.hpp>
+#include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/entities/base.hpp>
@@ -44,7 +45,8 @@ public:
 	virtual
 	sanguis::messages::server::unique_ptr
 	add_message(
-		sanguis::server::player_id
+		sanguis::server::player_id,
+		sanguis::collision::world::created
 	) const = 0;
 private:
 	sanguis::entity_id const id_;

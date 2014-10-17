@@ -13,6 +13,7 @@
 #include <sanguis/weapon_status_fwd.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/world_name.hpp>
+#include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/collision/world/object_unique_ptr.hpp>
 #include <sanguis/creator/destructible_container.hpp>
 #include <sanguis/creator/grid.hpp>
@@ -269,14 +270,15 @@ public:
 	void
 	add_sight_range(
 		sanguis::server::player_id,
-		sanguis::entity_id target_id
+		sanguis::entity_id,
+		sanguis::collision::world::created
 	)
 	override;
 
 	void
 	remove_sight_range(
 		sanguis::server::player_id,
-		sanguis::entity_id target_id
+		sanguis::entity_id
 	)
 	override;
 

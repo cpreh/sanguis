@@ -1,4 +1,5 @@
 #include <sanguis/collision/world/body_base_fwd.hpp>
+#include <sanguis/collision/world/created.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/collision/ghost.hpp>
@@ -105,7 +106,8 @@ sanguis::server::entities::exp_area::can_collide_with(
 
 void
 sanguis::server::entities::exp_area::body_enter(
-	sanguis::collision::world::body_base &_base
+	sanguis::collision::world::body_base &_base,
+	sanguis::collision::world::created
 )
 {
 	sanguis::server::entities::player &entity(

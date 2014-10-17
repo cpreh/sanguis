@@ -1,4 +1,5 @@
 #include <sanguis/collision/world/body_base.hpp>
+#include <sanguis/collision/world/created.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/auras/aura.hpp>
@@ -53,7 +54,8 @@ sanguis::server::auras::aura::can_collide_with(
 
 void
 sanguis::server::auras::aura::body_enter(
-	sanguis::collision::world::body_base &_base
+	sanguis::collision::world::body_base &_base,
+	sanguis::collision::world::created const _created
 )
 {
 	this->enter(
@@ -61,7 +63,8 @@ sanguis::server::auras::aura::body_enter(
 			sanguis::server::entities::with_body &
 		>(
 			_base
-		)
+		),
+		_created
 	);
 }
 

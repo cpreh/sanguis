@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_AURAS_AOE_DAMAGE_HPP_INCLUDED
 
 #include <sanguis/optional_aura_type_fwd.hpp>
+#include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/server/aoe_fwd.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/auras/aura.hpp>
@@ -44,7 +45,8 @@ private:
 
 	void
 	enter(
-		sanguis::server::entities::with_body &
+		sanguis::server::entities::with_body &,
+		sanguis::collision::world::created
 	)
 	override;
 

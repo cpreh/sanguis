@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_EXP_AREA_HPP_INCLUDED
 
 #include <sanguis/collision/world/body_base_fwd.hpp>
+#include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/collision/ghost_base.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
@@ -56,7 +57,8 @@ private:
 
 	void
 	body_enter(
-		sanguis::collision::world::body_base &
+		sanguis::collision::world::body_base &,
+		sanguis::collision::world::created
 	)
 	override;
 

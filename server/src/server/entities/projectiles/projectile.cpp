@@ -1,7 +1,9 @@
 #include <sanguis/projectile_type.hpp>
+#include <sanguis/collision/world/created.hpp>
 #include <sanguis/load/model/projectile_path.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/center.hpp>
+#include <sanguis/messages/roles/created.hpp>
 #include <sanguis/messages/roles/entity_id.hpp>
 #include <sanguis/messages/roles/projectile_type.hpp>
 #include <sanguis/messages/roles/speed.hpp>
@@ -49,7 +51,8 @@ sanguis::server::entities::projectiles::projectile::~projectile()
 
 sanguis::messages::server::unique_ptr
 sanguis::server::entities::projectiles::projectile::add_message(
-	sanguis::server::player_id const
+	sanguis::server::player_id const,
+	sanguis::collision::world::created const _created
 ) const
 {
 	return
@@ -61,6 +64,8 @@ sanguis::server::entities::projectiles::projectile::add_message(
 					this->center().get(),
 				sanguis::messages::roles::angle{} =
 					this->angle().get(),
+				sanguis::messages::roles::created{} =
+					_created.get(),
 				sanguis::messages::roles::speed{} =
 					this->speed().get(),
 				sanguis::messages::roles::projectile_type{} =

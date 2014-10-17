@@ -1,9 +1,11 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/pickup_type.hpp>
 #include <sanguis/collision/world/body_group.hpp>
+#include <sanguis/collision/world/created.hpp>
 #include <sanguis/load/model/pickup_path.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/center.hpp>
+#include <sanguis/messages/roles/created.hpp>
 #include <sanguis/messages/roles/entity_id.hpp>
 #include <sanguis/messages/roles/pickup_type.hpp>
 #include <sanguis/messages/server/add_pickup.hpp>
@@ -141,7 +143,8 @@ sanguis::server::entities::pickups::pickup::collision_group() const
 
 sanguis::messages::server::unique_ptr
 sanguis::server::entities::pickups::pickup::add_message(
-	sanguis::server::player_id const
+	sanguis::server::player_id const,
+	sanguis::collision::world::created const _created
 ) const
 {
 	return
@@ -153,6 +156,8 @@ sanguis::server::entities::pickups::pickup::add_message(
 					this->center().get(),
 				sanguis::messages::roles::angle{} =
 					this->angle().get(),
+				sanguis::messages::roles::created{} =
+					_created.get(),
 				sanguis::messages::roles::pickup_type{} =
 					pickup_type_
 			)

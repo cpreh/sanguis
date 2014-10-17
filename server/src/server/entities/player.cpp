@@ -7,11 +7,13 @@
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_type_to_is_primary.hpp>
 #include <sanguis/collision/world/body_group.hpp>
+#include <sanguis/collision/world/created.hpp>
 #include <sanguis/load/model/player_path.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/aura_type_container.hpp>
 #include <sanguis/messages/roles/buff_type_container.hpp>
 #include <sanguis/messages/roles/center.hpp>
+#include <sanguis/messages/roles/created.hpp>
 #include <sanguis/messages/roles/entity_id.hpp>
 #include <sanguis/messages/roles/health.hpp>
 #include <sanguis/messages/roles/max_health.hpp>
@@ -128,7 +130,8 @@ sanguis::server::entities::player::player(
 					std::bind(
 						&sanguis::server::entities::player::add_sight_range,
 						this,
-						std::placeholders::_1
+						std::placeholders::_1,
+						std::placeholders::_2
 					)
 				),
 				sanguis::server::remove_sight_callback(
@@ -460,12 +463,14 @@ sanguis::server::entities::player::update_speed()
 
 void
 sanguis::server::entities::player::add_sight_range(
-	sanguis::entity_id const _entity_id
+	sanguis::entity_id const _entity_id,
+	sanguis::collision::world::created const _created
 )
 {
 	this->environment()->add_sight_range(
 		this->player_id(),
-		_entity_id
+		_entity_id,
+		_created
 	);
 }
 
@@ -529,7 +534,8 @@ sanguis::server::entities::player::update()
 
 sanguis::messages::server::unique_ptr
 sanguis::server::entities::player::add_message(
-	sanguis::server::player_id const _receiver
+	sanguis::server::player_id const _receiver,
+	sanguis::collision::world::created const _created
 ) const
 {
 	return
@@ -539,11 +545,15 @@ sanguis::server::entities::player::add_message(
 		?
 			this->add_message_impl<
 				sanguis::messages::server::add_own_player
-			>()
+			>(
+				_created
+			)
 		:
 			this->add_message_impl<
 				sanguis::messages::server::add_player
-			>()
+			>(
+				_created
+			)
 		;
 }
 
@@ -551,7 +561,9 @@ template<
 	typename Message
 >
 sanguis::messages::server::unique_ptr
-sanguis::server::entities::player::add_message_impl() const
+sanguis::server::entities::player::add_message_impl(
+	sanguis::collision::world::created const _created
+) const
 {
 	return
 		sanguis::messages::server::create_ptr(
@@ -562,6 +574,8 @@ sanguis::server::entities::player::add_message_impl() const
 					this->center().get(),
 				sanguis::messages::roles::angle{} =
 					this->angle().get(),
+				sanguis::messages::roles::created{} =
+					_created.get(),
 				sanguis::messages::roles::speed{} =
 					this->speed().get(),
 				sanguis::messages::roles::health{} =

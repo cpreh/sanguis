@@ -12,6 +12,7 @@
 #include <sanguis/collision/world/body_parameters.hpp>
 #include <sanguis/collision/world/body_unique_ptr.hpp>
 #include <sanguis/collision/world/create.hpp>
+#include <sanguis/collision/world/created.hpp>
 #include <sanguis/collision/world/ghost.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_parameters.hpp>
@@ -173,7 +174,10 @@ main()
 				_bodies
 			)
 				world->activate_body(
-					*body
+					*body,
+					sanguis::collision::world::created{
+						true
+					}
 				);
 		}
 	);
@@ -218,22 +222,19 @@ main()
 								2000.f
 							},
 							sanguis::collision::world::body_enter_callback(
-								sanguis::collision::world::body_callback(
-									[](
-										sanguis::collision::world::body_base &
-									)
-									{
-									}
+								[](
+									sanguis::collision::world::body_base &,
+									sanguis::collision::world::created
 								)
+								{
+								}
 							),
 							sanguis::collision::world::body_exit_callback(
-								sanguis::collision::world::body_callback(
-									[](
-										sanguis::collision::world::body_base &
-									)
-									{
-									}
+								[](
+									sanguis::collision::world::body_base &
 								)
+								{
+								}
 							),
 							sanguis::collision::world::ghost_group::player_sight
 						)

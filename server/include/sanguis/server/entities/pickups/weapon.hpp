@@ -3,6 +3,7 @@
 
 #include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/collision/world/body_group_fwd.hpp>
+#include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
@@ -27,8 +28,6 @@ namespace entities
 namespace pickups
 {
 
-// TODO: This is a new class of pickups that aren't picked up automatically.
-// Maybe we should create a new base class for this!
 class weapon
 :
 	public virtual sanguis::server::entities::ifaces::with_team,
@@ -69,7 +68,8 @@ private:
 
 	sanguis::messages::server::unique_ptr
 	add_message(
-		sanguis::server::player_id
+		sanguis::server::player_id,
+		sanguis::collision::world::created
 	) const
 	override;
 

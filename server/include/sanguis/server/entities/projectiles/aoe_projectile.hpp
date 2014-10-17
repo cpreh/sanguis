@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_PROJECTILES_AOE_PROJECTILE_HPP_INCLUDED
 
 #include <sanguis/aoe_projectile_type.hpp>
+#include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/aoe.hpp>
 #include <sanguis/server/direction_fwd.hpp>
@@ -49,7 +50,8 @@ protected:
 private:
 	sanguis::messages::server::unique_ptr
 	add_message(
-		sanguis::server::player_id
+		sanguis::server::player_id,
+		sanguis::collision::world::created
 	) const
 	override;
 

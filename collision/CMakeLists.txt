@@ -22,7 +22,6 @@ set(
 	include/sanguis/collision/world/body.hpp
 	include/sanguis/collision/world/body_base.hpp
 	include/sanguis/collision/world/body_base_fwd.hpp
-	include/sanguis/collision/world/body_callback.hpp
 	include/sanguis/collision/world/body_collision_callback.hpp
 	include/sanguis/collision/world/body_enter_callback.hpp
 	include/sanguis/collision/world/body_exit_callback.hpp
@@ -33,6 +32,8 @@ set(
 	include/sanguis/collision/world/body_parameters_fwd.hpp
 	include/sanguis/collision/world/body_unique_ptr.hpp
 	include/sanguis/collision/world/create.hpp
+	include/sanguis/collision/world/created.hpp
+	include/sanguis/collision/world/created_fwd.hpp
 	include/sanguis/collision/world/ghost.hpp
 	include/sanguis/collision/world/ghost_fwd.hpp
 	include/sanguis/collision/world/ghost_group.hpp

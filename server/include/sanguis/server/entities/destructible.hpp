@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_DESTRUCTIBLE_HPP_INCLUDED
 
 #include <sanguis/collision/world/body_group_fwd.hpp>
+#include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/creator/destructible_type.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/health_fwd.hpp>
@@ -64,7 +65,8 @@ private:
 
 	sanguis::messages::server::unique_ptr
 	add_message(
-		sanguis::server::player_id
+		sanguis::server::player_id,
+		sanguis::collision::world::created
 	) const
 	override;
 

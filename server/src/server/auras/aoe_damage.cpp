@@ -1,4 +1,5 @@
 #include <sanguis/optional_aura_type.hpp>
+#include <sanguis/collision/world/created.hpp>
 #include <sanguis/server/aoe.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
@@ -51,7 +52,8 @@ sanguis::server::auras::aoe_damage::type() const
 
 void
 sanguis::server::auras::aoe_damage::enter(
-	sanguis::server::entities::with_body &_with_body
+	sanguis::server::entities::with_body &_with_body,
+	sanguis::collision::world::created
 )
 {
 	dynamic_cast<

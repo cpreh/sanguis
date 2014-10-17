@@ -10,6 +10,7 @@
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/weapon_status_fwd.hpp>
+#include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/angle_fwd.hpp>
@@ -178,7 +179,8 @@ public:
 	void
 	add_sight_range(
 		sanguis::server::player_id,
-		sanguis::entity_id
+		sanguis::entity_id,
+		sanguis::collision::world::created
 	) = 0;
 
 	virtual

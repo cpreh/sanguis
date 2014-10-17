@@ -1,4 +1,5 @@
 #include <sanguis/collision/world/body_group.hpp>
+#include <sanguis/collision/world/created.hpp>
 #include <sanguis/creator/destructible_type.hpp>
 #include <sanguis/load/model/destructible_path.hpp>
 #include <sanguis/messages/roles/angle.hpp>
@@ -103,7 +104,8 @@ sanguis::server::entities::destructible::collision_group() const
 
 sanguis::messages::server::unique_ptr
 sanguis::server::entities::destructible::add_message(
-	sanguis::server::player_id
+	sanguis::server::player_id const,
+	sanguis::collision::world::created const _created
 ) const
 {
 	return
@@ -115,6 +117,8 @@ sanguis::server::entities::destructible::add_message(
 					this->center().get(),
 				sanguis::messages::roles::angle{} =
 					this->angle().get(),
+				sanguis::messages::roles::created{} =
+					_created.get(),
 				sanguis::messages::roles::destructible_type{} =
 					type_
 			)

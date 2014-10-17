@@ -196,6 +196,7 @@ set(
 	include/sanguis/messages/roles/command_name.hpp
 	include/sanguis/messages/roles/console_command.hpp
 	include/sanguis/messages/roles/console_message.hpp
+	include/sanguis/messages/roles/created.hpp
 	include/sanguis/messages/roles/destructible_type.hpp
 	include/sanguis/messages/roles/direction.hpp
 	include/sanguis/messages/roles/enemy_kind.hpp

@@ -3,6 +3,7 @@
 
 #include <sanguis/aura_type.hpp>
 #include <sanguis/optional_aura_type_fwd.hpp>
+#include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/auras/aura.hpp>
@@ -45,7 +46,8 @@ private:
 
 	void
 	enter(
-		sanguis::server::entities::with_body &
+		sanguis::server::entities::with_body &,
+		sanguis::collision::world::created
 	)
 	override;
 

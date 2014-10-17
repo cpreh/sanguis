@@ -5,6 +5,7 @@
 #include <sanguis/collision/world/body_fwd.hpp>
 #include <sanguis/collision/world/body_parameters_fwd.hpp>
 #include <sanguis/collision/world/body_unique_ptr.hpp>
+#include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/collision/world/ghost_parameters_fwd.hpp>
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
@@ -38,7 +39,8 @@ public:
 	virtual
 	void
 	activate_body(
-		sanguis::collision::world::body &
+		sanguis::collision::world::body &,
+		sanguis::collision::world::created
 	) = 0;
 
 	virtual

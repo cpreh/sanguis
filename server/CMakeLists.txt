@@ -518,7 +518,6 @@ set(
 	include/sanguis/server/to_console_arg_list.hpp
 	include/sanguis/server/unicast_callback.hpp
 	include/sanguis/server/unknown_player_exception.hpp
-	include/sanguis/server/update_sight_callback.hpp
 	include/sanguis/server/update_target_callback.hpp
 	include/sanguis/server/update_weapon_pickup_callback.hpp
 	include/sanguis/server/vector.hpp

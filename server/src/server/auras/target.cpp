@@ -1,4 +1,5 @@
 #include <sanguis/optional_aura_type.hpp>
+#include <sanguis/collision/world/created.hpp>
 #include <sanguis/server/add_target_callback.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/remove_target_callback.hpp>
@@ -51,7 +52,8 @@ sanguis::server::auras::target::type() const
 
 void
 sanguis::server::auras::target::enter(
-	sanguis::server::entities::with_body &_target
+	sanguis::server::entities::with_body &_target,
+	sanguis::collision::world::created
 )
 {
 	add_target_.get()(

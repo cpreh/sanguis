@@ -8,6 +8,7 @@
 #include <sanguis/player_name.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/collision/world/body_group_fwd.hpp>
+#include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
@@ -129,7 +130,8 @@ private:
 
 	void
 	add_sight_range(
-		sanguis::entity_id
+		sanguis::entity_id,
+		sanguis::collision::world::created
 	);
 
 	void
@@ -153,7 +155,8 @@ private:
 
 	sanguis::messages::server::unique_ptr
 	add_message(
-		sanguis::server::player_id
+		sanguis::server::player_id,
+		sanguis::collision::world::created
 	) const
 	override;
 
@@ -161,7 +164,9 @@ private:
 		typename Message
 	>
 	sanguis::messages::server::unique_ptr
-	add_message_impl() const;
+	add_message_impl(
+		sanguis::collision::world::created
+	) const;
 
 	void
 	on_new_weapon(

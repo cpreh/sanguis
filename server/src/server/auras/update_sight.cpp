@@ -1,4 +1,5 @@
 #include <sanguis/optional_aura_type.hpp>
+#include <sanguis/collision/world/created.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/server/add_sight_callback.hpp>
 #include <sanguis/server/radius.hpp>
@@ -43,7 +44,8 @@ sanguis::server::auras::update_sight::type() const
 
 void
 sanguis::server::auras::update_sight::enter(
-	sanguis::server::entities::with_body &_entity
+	sanguis::server::entities::with_body &_entity,
+	sanguis::collision::world::created const _created
 )
 {
 	fcppt::maybe_void(
@@ -53,13 +55,15 @@ sanguis::server::auras::update_sight::enter(
 			_entity
 		),
 		[
-			this
+			this,
+			_created
 		](
 			sanguis::server::entities::with_id const &_with_id
 		)
 		{
-			add_.get()(
-				_with_id.id()
+			add_(
+				_with_id.id(),
+				_created
 			);
 		}
 	);
@@ -82,7 +86,7 @@ sanguis::server::auras::update_sight::leave(
 			sanguis::server::entities::with_id const &_with_id
 		)
 		{
-			remove_.get()(
+			remove_(
 				_with_id.id()
 			);
 		}

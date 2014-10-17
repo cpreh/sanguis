@@ -17,6 +17,7 @@
 #include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters_fwd.hpp>
 #include <sanguis/collision/world/body_unique_ptr.hpp>
+#include <sanguis/collision/world/created.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_parameters_fwd.hpp>
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
@@ -125,7 +126,8 @@ sanguis::collision::aux_::world::simple::object::create_body(
 
 void
 sanguis::collision::aux_::world::simple::object::activate_body(
-	sanguis::collision::world::body &_body
+	sanguis::collision::world::body &_body,
+	sanguis::collision::world::created const _created
 )
 {
 	sanguis::collision::aux_::world::simple::body &body(
@@ -155,7 +157,8 @@ sanguis::collision::aux_::world::simple::object::activate_body(
 			]
 		)
 			ghost->new_body(
-				body
+				body,
+				_created
 			);
 }
 
@@ -202,7 +205,10 @@ sanguis::collision::aux_::world::simple::object::create_ghost(
 			]
 		)
 			result->new_body(
-				*body
+				*body,
+				sanguis::collision::world::created{
+					false
+				}
 			);
 
 	return

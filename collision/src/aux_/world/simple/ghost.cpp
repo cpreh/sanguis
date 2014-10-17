@@ -4,6 +4,7 @@
 #include <sanguis/collision/aux_/world/simple/collides.hpp>
 #include <sanguis/collision/aux_/world/simple/ghost.hpp>
 #include <sanguis/collision/aux_/world/simple/ghost_remove_callback.hpp>
+#include <sanguis/collision/world/created.hpp>
 #include <sanguis/collision/world/ghost.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_parameters.hpp>
@@ -47,7 +48,7 @@ sanguis::collision::aux_::world::simple::ghost::~ghost()
 		:
 		bodies_
 	)
-		body_exit_callback_.get()(
+		body_exit_callback_(
 			body.first->body_base()
 		);
 
@@ -115,7 +116,7 @@ sanguis::collision::aux_::world::simple::ghost::post_update_bodies()
 				body_status::marked_for_deletion
 			)
 			{
-				body_exit_callback_.get()(
+				body_exit_callback_(
 					_element.first->body_base()
 				);
 
@@ -162,8 +163,11 @@ sanguis::collision::aux_::world::simple::ghost::update_near_body(
 			)
 		);
 
-		body_enter_callback_.get()(
-			_body.body_base()
+		body_enter_callback_(
+			_body.body_base(),
+			sanguis::collision::world::created{
+				false
+			}
 		);
 	}
 	else
@@ -173,7 +177,8 @@ sanguis::collision::aux_::world::simple::ghost::update_near_body(
 
 void
 sanguis::collision::aux_::world::simple::ghost::new_body(
-	sanguis::collision::aux_::world::simple::body const &_body
+	sanguis::collision::aux_::world::simple::body const &_body,
+	sanguis::collision::world::created const _created
 )
 {
 	if(
@@ -190,8 +195,9 @@ sanguis::collision::aux_::world::simple::ghost::new_body(
 			)
 		);
 
-		body_enter_callback_.get()(
-			_body.body_base()
+		body_enter_callback_(
+			_body.body_base(),
+			_created
 		);
 	}
 }
@@ -215,7 +221,7 @@ sanguis::collision::aux_::world::simple::ghost::remove_body(
 			it
 		);
 
-		body_exit_callback_.get()(
+		body_exit_callback_(
 			_body.body_base()
 		);
 	}

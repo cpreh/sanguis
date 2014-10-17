@@ -1,10 +1,12 @@
 #include <sanguis/collision/world/body_group.hpp>
+#include <sanguis/collision/world/created.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/load/model/enemy_path.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/aura_type_container.hpp>
 #include <sanguis/messages/roles/buff_type_container.hpp>
 #include <sanguis/messages/roles/center.hpp>
+#include <sanguis/messages/roles/created.hpp>
 #include <sanguis/messages/roles/enemy_kind.hpp>
 #include <sanguis/messages/roles/enemy_type.hpp>
 #include <sanguis/messages/roles/entity_id.hpp>
@@ -142,7 +144,8 @@ sanguis::server::entities::enemies::enemy::enemy_type() const
 
 sanguis::messages::server::unique_ptr
 sanguis::server::entities::enemies::enemy::add_message(
-	sanguis::server::player_id const
+	sanguis::server::player_id const,
+	sanguis::collision::world::created const _created
 ) const
 {
 	return
@@ -154,6 +157,8 @@ sanguis::server::entities::enemies::enemy::add_message(
 					this->center().get(),
 				sanguis::messages::roles::angle{} =
 					this->angle().get(),
+				sanguis::messages::roles::created{} =
+					_created.get(),
 				sanguis::messages::roles::speed{} =
 					this->speed().get(),
 				sanguis::messages::roles::health{} =

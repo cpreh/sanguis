@@ -3,6 +3,7 @@
 #include <sanguis/collision/world/body.hpp>
 #include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters.hpp>
+#include <sanguis/collision/world/created.hpp>
 #include <sanguis/collision/world/object.hpp>
 #include <sanguis/collision/world/position_change_callback.hpp>
 #include <sanguis/server/center.hpp>
@@ -109,6 +110,10 @@ sanguis::server::collision::body::transfer(
 	sanguis::collision::world::body_group const _collision_group
 )
 {
+	sanguis::collision::world::created const created{
+		!body_
+	};
+
 	this->destroy();
 
 	body_ =
@@ -143,7 +148,8 @@ sanguis::server::collision::body::transfer(
 		);
 
 	_world.activate_body(
-		*body_
+		*body_,
+		created
 	);
 }
 

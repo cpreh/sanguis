@@ -3,6 +3,7 @@
 
 #include <sanguis/enemy_kind_fwd.hpp>
 #include <sanguis/collision/world/body_group_fwd.hpp>
+#include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/messages/types/string.hpp>
@@ -66,7 +67,8 @@ protected:
 private:
 	sanguis::messages::server::unique_ptr
 	add_message(
-		sanguis::server::player_id
+		sanguis::server::player_id,
+		sanguis::collision::world::created
 	) const
 	override;
 
