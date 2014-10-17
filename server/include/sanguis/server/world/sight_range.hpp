@@ -36,7 +36,7 @@ public:
 	bool
 	empty() const;
 private:
-	sight_range_entry_set entries_;
+	sanguis::server::world::sight_range_entry_set entries_;
 };
 
 }

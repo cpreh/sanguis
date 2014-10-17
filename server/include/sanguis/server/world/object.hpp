@@ -240,7 +240,7 @@ public:
 	pickup_chance(
 		sanguis::server::pickup_probability,
 		sanguis::server::entities::enemies::difficulty,
-		sanguis::server::center const&
+		sanguis::server::center
 	)
 	override;
 

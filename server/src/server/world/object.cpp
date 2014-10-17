@@ -795,7 +795,7 @@ void
 sanguis::server::world::object::pickup_chance(
 	sanguis::server::pickup_probability const _spawn_chance,
 	sanguis::server::entities::enemies::difficulty const _difficulty,
-	sanguis::server::center const &_center
+	sanguis::server::center const _center
 )
 {
 	pickup_spawner_.spawn(
@@ -1001,7 +1001,7 @@ sanguis::server::world::object::send_entity_specific(
 )
 {
 	for(
-		auto sight_range
+		sanguis::server::world::sight_range_map::value_type const &sight_range
 		:
 		sight_ranges_
 	)

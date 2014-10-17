@@ -42,14 +42,16 @@ sanguis::server::entities::base::transfer(
 			)
 		)
 	)
-		return false;
+		return
+			false;
 
 	if(
 		create
 	)
 		this->on_create();
 
-	return true;
+	return
+		true;
 }
 
 void
