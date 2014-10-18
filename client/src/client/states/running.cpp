@@ -70,6 +70,7 @@
 #include <sge/input/cursor/activatable_fwd.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/assert/error.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -573,6 +574,14 @@ sanguis::client::states::running::operator()(
 				sanguis::messages::roles::slowdown
 			>()
 		};
+
+	FCPPT_ASSERT_ERROR(
+		slowdown_
+		>
+		sanguis::slowdown{
+			0.f
+		}
+	);
 
 	return
 		sanguis::messages::call::result(
