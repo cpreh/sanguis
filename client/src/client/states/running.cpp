@@ -209,7 +209,7 @@ sanguis::client::states::running::react(
 {
 	sanguis::client::slowed_duration const slowed_duration{
 		_event.delta()
-		*
+		/
 		slowdown_.get()
 	};
 
