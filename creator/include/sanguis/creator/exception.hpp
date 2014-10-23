@@ -2,9 +2,9 @@
 #define SANGUIS_CREATOR_EXCEPTION_HPP_INCLUDED
 
 #include <sanguis/creator/symbol.hpp>
-#include <fcppt/class_symbol.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/symbol/class.hpp>
 
 
 namespace sanguis
@@ -12,7 +12,7 @@ namespace sanguis
 namespace creator
 {
 
-class FCPPT_CLASS_SYMBOL exception
+class FCPPT_SYMBOL_CLASS exception
 :
 	public fcppt::exception
 {

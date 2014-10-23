@@ -72,7 +72,6 @@ sanguis_add_tool(
 		${sanguis_tools_libmergeimage_TARGET}
 		${sgeimage2d_TARGET}
 		${sgesystems_TARGET}
-		${sgecore_TARGET}
 		${awl_TARGET}
 		${fcppt_core_TARGET}
 		${fcppt_filesystem_TARGET}

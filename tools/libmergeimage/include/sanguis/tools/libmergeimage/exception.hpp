@@ -1,7 +1,7 @@
 #ifndef SANGUIS_TOOLS_LIBMERGEIMAGE_EXCEPTION_HPP_INCLUDED
 #define SANGUIS_TOOLS_LIBMERGEIMAGE_EXCEPTION_HPP_INCLUDED
 
-#include <sge/exception.hpp>
+#include <fcppt/exception.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/assert/information_fwd.hpp>
 
@@ -15,7 +15,7 @@ namespace libmergeimage
 
 class exception
 :
-	public sge::exception
+	public fcppt::exception
 {
 public:
 	explicit

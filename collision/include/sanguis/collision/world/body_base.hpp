@@ -3,8 +3,8 @@
 
 #include <sanguis/collision/symbol.hpp>
 #include <sanguis/collision/world/body_base_fwd.hpp>
-#include <fcppt/class_symbol.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/symbol/class.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool_fwd.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -17,7 +17,7 @@ namespace collision
 namespace world
 {
 
-class FCPPT_CLASS_SYMBOL body_base
+class FCPPT_SYMBOL_CLASS body_base
 {
 	FCPPT_NONCOPYABLE(
 		body_base

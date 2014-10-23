@@ -163,15 +163,19 @@ include(
 
 function(
 	sanguis_generate_symbol_header_base
-	EXPORT_NAME
+	EXPORTS_NAME
 	SYMBOL_NAME
 	RELATIVE_PATH
 )
 	fcppt_generate_symbol_header(
-		"SANGUIS_STATIC_LINK"
-		"${EXPORT_NAME}"
-		"${SYMBOL_NAME}"
-		"${RELATIVE_PATH}"
+		STATIC_LINK_FLAG
+			"SANGUIS_STATIC_LINK"
+		EXPORTS_NAME
+			"${EXPORTS_NAME}"
+		SYMBOL_NAME
+			"${SYMBOL_NAME}"
+		RELATIVE_PATH
+			"${RELATIVE_PATH}"
 	)
 endfunction()
 

@@ -6,7 +6,7 @@
 #include <sanguis/client/load/model/part.hpp>
 #include <sanguis/client/load/resource/context_fwd.hpp>
 #include <sanguis/model/cell_size.hpp>
-#include <sge/exception.hpp>
+#include <sge/core/exception.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/string.hpp>
@@ -52,7 +52,7 @@ try
 	);
 }
 catch(
-	sge::exception const &_error
+	sge::core::exception const &_error
 )
 {
 	FCPPT_LOG_ERROR(

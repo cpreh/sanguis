@@ -1,15 +1,16 @@
 #include <sanguis/exception.hpp>
-#include <sge/exception.hpp>
+#include <fcppt/exception.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/information_fwd.hpp>
+#include <fcppt/assert/make_message.hpp>
 
 
 sanguis::exception::exception(
 	fcppt::string const &_what
 )
 :
-	sge::exception(
+	fcppt::exception(
 		FCPPT_TEXT("sanguis: ")
 		+
 		_what
@@ -21,8 +22,10 @@ sanguis::exception::exception(
 	fcppt::assert_::information const &_info
 )
 :
-	sge::exception(
-		_info
+	fcppt::exception(
+		fcppt::assert_::make_message(
+			_info
+		)
 	)
 {
 }
