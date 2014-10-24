@@ -71,12 +71,12 @@
 #include <sge/renderer/target/viewport_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/optional_decl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <list>
 #include <map>
 #include <memory>
-#include <vector>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -420,12 +420,12 @@ private:
 	> const background_;
 
 	typedef
-	std::vector<
+	fcppt::optional<
 		sanguis::client::draw2d::scene::hover::base_unique_ptr
 	>
-	hover_vector;
+	optional_hover_unique_ptr;
 
-	hover_vector hovers_;
+	optional_hover_unique_ptr hover_;
 
 	fcppt::signal::scoped_connection const viewport_connection_;
 };

@@ -79,9 +79,8 @@ sanguis::server::entities::destructible::remove()
 		this->environment()
 	)
 		this->environment()->pickup_chance(
-			// TODO
 			sanguis::server::pickup_probability(
-				1.f
+				0.1f
 			),
 			difficulty_,
 			this->center()

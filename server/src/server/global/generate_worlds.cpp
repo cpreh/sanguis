@@ -29,6 +29,7 @@
 #include <sanguis/server/world/parameters.hpp>
 #include <sanguis/server/world/random.hpp>
 #include <sanguis/server/world/random_seed.hpp>
+#include <fcppt/make_int_range.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -100,19 +101,20 @@ sanguis::server::global::generate_worlds(
 	);
 
 	for(
-		sanguis::world_id::value_type current_id(
-			1u
-		);
-		current_id
-		<=
-		num_worlds.get();
-		++current_id
+		auto const world_id
+		:
+		fcppt::make_int_range(
+			sanguis::world_id{
+				1u
+			},
+			sanguis::world_id{
+				num_worlds.get()
+				+
+				1u
+			}
+		)
 	)
 	{
-		sanguis::world_id const world_id(
-			current_id
-		);
-
 		insert_world(
 			sanguis::server::world::random(
 				_parameters,
@@ -124,13 +126,8 @@ sanguis::server::global::generate_worlds(
 			)
 		);
 
-		if(
-			current_id == 0u
-		)
-			continue;
-
 		sanguis::world_id const previous_id(
-			current_id - 1u
+			world_id.get() - 1u
 		);
 
 		sanguis::creator::opening const current_opening(

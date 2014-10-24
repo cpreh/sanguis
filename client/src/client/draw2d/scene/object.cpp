@@ -164,7 +164,9 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/make_enum_range_start_end.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/optional_bind.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/type_name_from_info.hpp>
 #include <fcppt/algorithm/map_iteration_second.hpp>
@@ -289,7 +291,7 @@ sanguis::client::draw2d::scene::object::object(
 			_viewport_manager
 		)
 	),
-	hovers_(),
+	hover_(),
 	viewport_connection_(
 		_viewport_manager.manage_callback(
 			std::bind(
@@ -388,7 +390,8 @@ sanguis::client::draw2d::scene::object::update(
 		)
 	};
 
-	hovers_.clear();
+	hover_ =
+		sanguis::client::draw2d::scene::object::optional_hover_unique_ptr();
 
 	fcppt::algorithm::map_iteration_second(
 		entities_,
@@ -516,14 +519,19 @@ sanguis::client::draw2d::scene::object::draw(
 		_render_context
 	);
 
-	for(
-		sanguis::client::draw2d::scene::hover::base_unique_ptr const &hover
-		:
-		hovers_
-	)
-		hover->draw(
-			_render_context
-		);
+	fcppt::maybe_void(
+		hover_,
+		[
+			&_render_context
+		](
+			sanguis::client::draw2d::scene::hover::base_unique_ptr const &_hover
+		)
+		{
+			_hover->draw(
+				_render_context
+			);
+		}
+	);
 }
 
 void
@@ -676,7 +684,7 @@ sanguis::client::draw2d::scene::object::hover_display(
 	)
 		return;
 
-	hovers_.push_back(
+	hover_ =
 		sanguis::client::draw2d::scene::hover::create(
 			sanguis::client::draw2d::scene::hover::parameters(
 				gui_style_,
@@ -689,8 +697,7 @@ sanguis::client::draw2d::scene::object::hover_display(
 				_entity.radius()
 			),
 			*info
-		)
-	);
+		);
 }
 
 void
