@@ -46,6 +46,7 @@
 #include <sanguis/client/draw2d/entities/ifaces/with_weapon.hpp>
 #include <sanguis/client/draw2d/factory/aoe_projectile.hpp>
 #include <sanguis/client/draw2d/factory/destructible.hpp>
+#include <sanguis/client/draw2d/factory/doodad.hpp>
 #include <sanguis/client/draw2d/factory/enemy.hpp>
 #include <sanguis/client/draw2d/factory/friend.hpp>
 #include <sanguis/client/draw2d/factory/own_player.hpp>
@@ -94,6 +95,7 @@
 #include <sanguis/messages/roles/center.hpp>
 #include <sanguis/messages/roles/created.hpp>
 #include <sanguis/messages/roles/destructible_type.hpp>
+#include <sanguis/messages/roles/doodad_type.hpp>
 #include <sanguis/messages/roles/enemy_kind.hpp>
 #include <sanguis/messages/roles/enemy_type.hpp>
 #include <sanguis/messages/roles/entity_id.hpp>
@@ -114,6 +116,7 @@
 #include <sanguis/messages/server/add_aura.hpp>
 #include <sanguis/messages/server/add_buff.hpp>
 #include <sanguis/messages/server/add_destructible.hpp>
+#include <sanguis/messages/server/add_doodad.hpp>
 #include <sanguis/messages/server/add_enemy.hpp>
 #include <sanguis/messages/server/add_friend.hpp>
 #include <sanguis/messages/server/add_own_player.hpp>
@@ -320,11 +323,12 @@ sanguis::client::draw2d::scene::object::process_message(
 )
 {
 	static sanguis::messages::server::call::object<
-		boost::mpl::vector24<
+		boost::mpl::vector25<
 			sanguis::messages::server::add_aoe_projectile,
 			sanguis::messages::server::add_aura,
 			sanguis::messages::server::add_buff,
 			sanguis::messages::server::add_destructible,
+			sanguis::messages::server::add_doodad,
 			sanguis::messages::server::add_enemy,
 			sanguis::messages::server::add_friend,
 			sanguis::messages::server::add_own_player,
@@ -918,6 +922,22 @@ sanguis::client::draw2d::scene::object::operator()(
 			this->load_parameters(),
 			_message.get<
 				sanguis::messages::roles::destructible_type
+			>()
+		),
+		_message
+	);
+}
+
+sanguis::client::draw2d::scene::object::result_type
+sanguis::client::draw2d::scene::object::operator()(
+	sanguis::messages::server::add_doodad const &_message
+)
+{
+	this->configure_new_object(
+		sanguis::client::draw2d::factory::doodad(
+			this->load_parameters(),
+			_message.get<
+				sanguis::messages::roles::doodad_type
 			>()
 		),
 		_message

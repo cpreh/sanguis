@@ -15,6 +15,8 @@ set(
 	include/sanguis/diff_clock_fwd.hpp
 	include/sanguis/diff_timer.hpp
 	include/sanguis/diff_timer_fwd.hpp
+	include/sanguis/doodad_type.hpp
+	include/sanguis/doodad_type_fwd.hpp
 	include/sanguis/duration.hpp
 	include/sanguis/duration_second.hpp
 	include/sanguis/enemy_kind.hpp
@@ -34,10 +36,12 @@ set(
 	include/sanguis/is_primary_weapon_fwd.hpp
 	include/sanguis/load/aoe_projectile_name.hpp
 	include/sanguis/load/destructible_name.hpp
+	include/sanguis/load/doodad_name.hpp
 	include/sanguis/load/enemy_name.hpp
 	include/sanguis/load/friend_name.hpp
 	include/sanguis/load/model/aoe_projectile_path.hpp
 	include/sanguis/load/model/destructible_path.hpp
+	include/sanguis/load/model/doodad_path.hpp
 	include/sanguis/load/model/enemy_path.hpp
 	include/sanguis/load/model/friend_path.hpp
 	include/sanguis/load/model/make_path.hpp
@@ -70,6 +74,8 @@ set(
 	include/sanguis/messages/adapted_types/char_type_fwd.hpp
 	include/sanguis/messages/adapted_types/destructible_type.hpp
 	include/sanguis/messages/adapted_types/destructible_type_fwd.hpp
+	include/sanguis/messages/adapted_types/doodad_type.hpp
+	include/sanguis/messages/adapted_types/doodad_type_fwd.hpp
 	include/sanguis/messages/adapted_types/duration.hpp
 	include/sanguis/messages/adapted_types/duration_fwd.hpp
 	include/sanguis/messages/adapted_types/entity_id.hpp
@@ -199,6 +205,7 @@ set(
 	include/sanguis/messages/roles/created.hpp
 	include/sanguis/messages/roles/destructible_type.hpp
 	include/sanguis/messages/roles/direction.hpp
+	include/sanguis/messages/roles/doodad_type.hpp
 	include/sanguis/messages/roles/enemy_kind.hpp
 	include/sanguis/messages/roles/enemy_type.hpp
 	include/sanguis/messages/roles/entity_id.hpp
@@ -250,6 +257,8 @@ set(
 	include/sanguis/messages/server/add_console_command_fwd.hpp
 	include/sanguis/messages/server/add_destructible.hpp
 	include/sanguis/messages/server/add_destructible_fwd.hpp
+	include/sanguis/messages/server/add_doodad.hpp
+	include/sanguis/messages/server/add_doodad_fwd.hpp
 	include/sanguis/messages/server/add_enemy.hpp
 	include/sanguis/messages/server/add_enemy_fwd.hpp
 	include/sanguis/messages/server/add_friend.hpp
@@ -456,10 +465,12 @@ set(
 	src/io_service_impl.cpp
 	src/load/aoe_projectile_name.cpp
 	src/load/destructible_name.cpp
+	src/load/doodad_name.cpp
 	src/load/enemy_name.cpp
 	src/load/friend_name.cpp
 	src/load/model/aoe_projectile_path.cpp
 	src/load/model/destructible_path.cpp
+	src/load/model/doodad_path.cpp
 	src/load/model/enemy_path.cpp
 	src/load/model/friend_path.cpp
 	src/load/model/make_path.cpp
@@ -502,6 +513,7 @@ set(
 	src/messages/server/add_buff.cpp
 	src/messages/server/add_console_command.cpp
 	src/messages/server/add_destructible.cpp
+	src/messages/server/add_doodad.cpp
 	src/messages/server/add_enemy.cpp
 	src/messages/server/add_friend.cpp
 	src/messages/server/add_own_player.cpp

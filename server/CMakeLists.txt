@@ -177,6 +177,7 @@ set(
 	include/sanguis/server/entities/center_simple.hpp
 	include/sanguis/server/entities/convert_model_size.hpp
 	include/sanguis/server/entities/destructible.hpp
+	include/sanguis/server/entities/doodad.hpp
 	include/sanguis/server/entities/enemies/attribute.hpp
 	include/sanguis/server/entities/enemies/attribute_container.hpp
 	include/sanguis/server/entities/enemies/attribute_fwd.hpp
@@ -763,6 +764,7 @@ set(
 	src/server/entities/center_simple.cpp
 	src/server/entities/convert_model_size.cpp
 	src/server/entities/destructible.cpp
+	src/server/entities/doodad.cpp
 	src/server/entities/enemies/attribute.cpp
 	src/server/entities/enemies/base_difficulty.cpp
 	src/server/entities/enemies/create.cpp

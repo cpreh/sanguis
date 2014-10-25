@@ -42,6 +42,7 @@
 #include <sanguis/messages/server/add_aura_fwd.hpp>
 #include <sanguis/messages/server/add_buff_fwd.hpp>
 #include <sanguis/messages/server/add_destructible_fwd.hpp>
+#include <sanguis/messages/server/add_doodad_fwd.hpp>
 #include <sanguis/messages/server/add_enemy_fwd.hpp>
 #include <sanguis/messages/server/add_friend_fwd.hpp>
 #include <sanguis/messages/server/add_own_player_fwd.hpp>
@@ -231,6 +232,11 @@ private:
 	result_type
 	operator()(
 		sanguis::messages::server::add_destructible const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::server::add_doodad const &
 	);
 
 	result_type

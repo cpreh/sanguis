@@ -35,5 +35,6 @@ sanguis::server::entities::center_simple::on_transfer(
 	center_ =
 		_parameters.center();
 
-	return true;
+	return
+		true;
 }

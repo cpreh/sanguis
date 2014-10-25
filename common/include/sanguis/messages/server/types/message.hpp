@@ -20,6 +20,7 @@ enum class message
 	add_buff,
 	add_console_command,
 	add_destructible,
+	add_doodad,
 	add_enemy,
 	add_friend,
 	add_own_player,

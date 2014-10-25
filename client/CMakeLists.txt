@@ -178,6 +178,7 @@ set(
 	include/sanguis/client/draw2d/entities/with_buffs_parameters_impl.hpp
 	include/sanguis/client/draw2d/factory/aoe_projectile.hpp
 	include/sanguis/client/draw2d/factory/destructible.hpp
+	include/sanguis/client/draw2d/factory/doodad.hpp
 	include/sanguis/client/draw2d/factory/enemy.hpp
 	include/sanguis/client/draw2d/factory/friend.hpp
 	include/sanguis/client/draw2d/factory/own_player.hpp
@@ -710,6 +711,7 @@ set(
 	src/client/draw2d/entities/with_buffs_auras_model_parameters.cpp
 	src/client/draw2d/factory/aoe_projectile.cpp
 	src/client/draw2d/factory/destructible.cpp
+	src/client/draw2d/factory/doodad.cpp
 	src/client/draw2d/factory/enemy.cpp
 	src/client/draw2d/factory/friend.cpp
 	src/client/draw2d/factory/own_player.cpp
