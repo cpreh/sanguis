@@ -26,7 +26,7 @@
 #include <sanguis/server/weapons/optional_unique_ptr.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
-#include <fcppt/unique_ptr_to_optional.hpp>
+#include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/algorithm/array_init_move.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/pre.hpp>
@@ -356,7 +356,7 @@ sanguis::server::entities::with_weapon::primary_weapon() const
 {
 	return
 		sanguis::server::weapons::const_optional_ref(
-			fcppt::unique_ptr_to_optional(
+			this->weapon_ref(
 				primary_weapon_
 			)
 		);
@@ -367,7 +367,7 @@ sanguis::server::entities::with_weapon::secondary_weapon() const
 {
 	return
 		sanguis::server::weapons::const_optional_ref(
-			fcppt::unique_ptr_to_optional(
+			this->weapon_ref(
 				secondary_weapon_
 			)
 		);
@@ -441,7 +441,7 @@ sanguis::server::entities::with_weapon::optional_weapon_ref const
 sanguis::server::entities::with_weapon::primary_weapon_ref() const
 {
 	return
-		fcppt::unique_ptr_to_optional(
+		this->weapon_ref(
 			primary_weapon_
 		);
 }
@@ -450,8 +450,27 @@ sanguis::server::entities::with_weapon::optional_weapon_ref const
 sanguis::server::entities::with_weapon::secondary_weapon_ref() const
 {
 	return
-		fcppt::unique_ptr_to_optional(
+		this->weapon_ref(
 			secondary_weapon_
+		);
+}
+
+sanguis::server::entities::with_weapon::optional_weapon_ref const
+sanguis::server::entities::with_weapon::weapon_ref(
+	sanguis::server::weapons::optional_unique_ptr const &_weapon
+) const
+{
+	return
+		fcppt::optional_bind_construct(
+			_weapon,
+			[](
+				sanguis::server::weapons::unique_ptr const &_ptr
+			)
+			-> sanguis::server::weapons::weapon &
+			{
+				return
+					*_ptr;
+			}
 		);
 }
 
