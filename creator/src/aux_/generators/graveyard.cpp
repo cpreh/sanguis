@@ -3,7 +3,7 @@
 #include <sanguis/creator/destructible_container.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/creator/grid.hpp>
-#include <sanguis/creator/opening_container.hpp>
+#include <sanguis/creator/opening_container_array.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/aux_/enemy_type_container.hpp>
@@ -43,14 +43,14 @@ sanguis::creator::aux_::generators::graveyard(
 		)
 	};
 
-	sanguis::creator::opening_container
-	openings{
+	sanguis::creator::opening_container_array const
+	openings(
 		sanguis::creator::aux_::place_openings(
 			grid,
 			_parameters.randgen(),
-			_parameters.opening_count()
+			_parameters.opening_count_array()
 		)
-	};
+	);
 
 	typedef
 	fcppt::random::distribution::basic<
@@ -137,7 +137,7 @@ sanguis::creator::aux_::generators::graveyard(
 	);
 
 	for(
-		auto cell
+		auto const cell
 		:
 		fcppt::container::grid::make_pos_range(
 			grid

@@ -5,8 +5,9 @@
 #include <sanguis/creator/destructible_container.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/name.hpp>
-#include <sanguis/creator/opening_container.hpp>
+#include <sanguis/creator/opening_container_array.hpp>
 #include <sanguis/creator/seed.hpp>
+#include <sanguis/creator/spawn_boss.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/symbol.hpp>
 #include <sanguis/creator/top_result_fwd.hpp>
@@ -22,10 +23,11 @@ class top_result
 public:
 	top_result(
 		sanguis::creator::seed,
-		sanguis::creator::name,
+		sanguis::creator::name const &,
+		sanguis::creator::spawn_boss,
 		sanguis::creator::grid const &,
 		sanguis::creator::background_grid const &,
-		sanguis::creator::opening_container const &,
+		sanguis::creator::opening_container_array const &,
 		sanguis::creator::spawn_container const &,
 		sanguis::creator::destructible_container const &
 	);
@@ -39,6 +41,10 @@ public:
 	name() const;
 
 	SANGUIS_CREATOR_SYMBOL
+	sanguis::creator::spawn_boss const
+	spawn_boss() const;
+
+	SANGUIS_CREATOR_SYMBOL
 	sanguis::creator::grid const &
 	grid() const;
 
@@ -47,7 +53,7 @@ public:
 	background_grid() const;
 
 	SANGUIS_CREATOR_SYMBOL
-	sanguis::creator::opening_container const &
+	sanguis::creator::opening_container_array const &
 	openings() const;
 
 	SANGUIS_CREATOR_SYMBOL
@@ -62,11 +68,13 @@ private:
 
 	sanguis::creator::name name_;
 
+	sanguis::creator::spawn_boss spawn_boss_;
+
 	sanguis::creator::grid grid_;
 
 	sanguis::creator::background_grid background_grid_;
 
-	sanguis::creator::opening_container openings_;
+	sanguis::creator::opening_container_array openings_;
 
 	sanguis::creator::spawn_container spawns_;
 

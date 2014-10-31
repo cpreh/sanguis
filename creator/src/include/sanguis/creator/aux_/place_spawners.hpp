@@ -3,7 +3,7 @@
 
 #include <sanguis/creator/count.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
-#include <sanguis/creator/opening_container.hpp>
+#include <sanguis/creator/opening_container_array_fwd.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/aux_/enemy_type_container.hpp>
@@ -20,7 +20,7 @@ namespace aux_
 sanguis::creator::spawn_container
 place_spawners(
 	sanguis::creator::grid &,
-	sanguis::creator::opening_container const &,
+	sanguis::creator::opening_container_array const &,
 	sanguis::creator::count,
 	sanguis::creator::aux_::random::generator &,
 	sanguis::creator::aux_::enemy_type_container const &,

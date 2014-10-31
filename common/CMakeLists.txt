@@ -90,6 +90,8 @@ set(
 	include/sanguis/messages/adapted_types/level_fwd.hpp
 	include/sanguis/messages/adapted_types/magazine_size.hpp
 	include/sanguis/messages/adapted_types/magazine_size_fwd.hpp
+	include/sanguis/messages/adapted_types/opening_count_array.hpp
+	include/sanguis/messages/adapted_types/opening_count_array_fwd.hpp
 	include/sanguis/messages/adapted_types/optional_primary_weapon_type.hpp
 	include/sanguis/messages/adapted_types/optional_primary_weapon_type_fwd.hpp
 	include/sanguis/messages/adapted_types/optional_weapon_attribute_value.hpp
@@ -238,6 +240,7 @@ set(
 	include/sanguis/messages/roles/required_perk_player_level.hpp
 	include/sanguis/messages/roles/seed.hpp
 	include/sanguis/messages/roles/slowdown.hpp
+	include/sanguis/messages/roles/spawn_boss.hpp
 	include/sanguis/messages/roles/speed.hpp
 	include/sanguis/messages/roles/weapon_attribute_base.hpp
 	include/sanguis/messages/roles/weapon_attribute_container.hpp
@@ -377,6 +380,8 @@ set(
 	include/sanguis/messages/types/level.hpp
 	include/sanguis/messages/types/magazine_size.hpp
 	include/sanguis/messages/types/message_type.hpp
+	include/sanguis/messages/types/opening_count_array.hpp
+	include/sanguis/messages/types/opening_count_array_fwd.hpp
 	include/sanguis/messages/types/size.hpp
 	include/sanguis/messages/types/space_unit.hpp
 	include/sanguis/messages/types/string.hpp

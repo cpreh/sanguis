@@ -2,18 +2,20 @@
 #include <sanguis/creator/destructible_container.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/name.hpp>
-#include <sanguis/creator/opening_container.hpp>
+#include <sanguis/creator/opening_container_array.hpp>
 #include <sanguis/creator/seed.hpp>
+#include <sanguis/creator/spawn_boss.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/top_result.hpp>
 
 
 sanguis::creator::top_result::top_result(
 	sanguis::creator::seed const _seed,
-	sanguis::creator::name const _name,
+	sanguis::creator::name const &_name,
+	sanguis::creator::spawn_boss const _spawn_boss,
 	sanguis::creator::grid const &_grid,
 	sanguis::creator::background_grid const &_background_grid,
-	sanguis::creator::opening_container const &_openings,
+	sanguis::creator::opening_container_array const &_openings,
 	sanguis::creator::spawn_container const &_spawns,
 	sanguis::creator::destructible_container const &_destructibles
 )
@@ -24,6 +26,9 @@ sanguis::creator::top_result::top_result(
 	name_(
 		_name
 	),
+	spawn_boss_{
+		_spawn_boss
+	},
 	grid_(
 		_grid
 	),
@@ -56,6 +61,13 @@ sanguis::creator::top_result::name() const
 		name_;
 }
 
+sanguis::creator::spawn_boss const
+sanguis::creator::top_result::spawn_boss() const
+{
+	return
+		spawn_boss_;
+}
+
 sanguis::creator::grid const &
 sanguis::creator::top_result::grid() const
 {
@@ -70,7 +82,7 @@ sanguis::creator::top_result::background_grid() const
 		background_grid_;
 }
 
-sanguis::creator::opening_container const &
+sanguis::creator::opening_container_array const &
 sanguis::creator::top_result::openings() const
 {
 	return

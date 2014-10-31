@@ -1,6 +1,7 @@
 #include <sanguis/world_id.hpp>
 #include <sanguis/world_name.hpp>
-#include <sanguis/creator/opening_count.hpp>
+#include <sanguis/creator/opening_count_array.hpp>
+#include <sanguis/creator/spawn_boss.hpp>
 #include <sanguis/creator/top_parameters.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/generate.hpp>
@@ -17,7 +18,8 @@
 sanguis::server::world::object_unique_ptr
 sanguis::server::world::random(
 	sanguis::server::world::parameters const &_parameters,
-	sanguis::creator::opening_count const _opening_count,
+	sanguis::creator::opening_count_array const _opening_count_array,
+	sanguis::creator::spawn_boss const _spawn_boss,
 	sanguis::world_id const _world_id,
 	sanguis::server::world::difficulty const _difficulty
 )
@@ -42,7 +44,8 @@ sanguis::server::world::random(
 				sanguis::server::world::random_seed(
 					_parameters.random_generator()
 				),
-				_opening_count
+				_opening_count_array,
+				_spawn_boss
 			}
 		);
 }

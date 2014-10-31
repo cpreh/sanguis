@@ -8,6 +8,8 @@
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/opening.hpp>
 #include <sanguis/creator/opening_container.hpp>
+#include <sanguis/creator/opening_container_array.hpp>
+#include <sanguis/creator/opening_type.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/spawn_container.hpp>
@@ -19,6 +21,8 @@
 #include <sanguis/creator/aux_/random/uniform_int.hpp>
 #include <sanguis/creator/aux_/parameters.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/algorithm/enum_array_fold.hpp>
+#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/container/grid/make_pos_range_start_end.hpp>
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
@@ -135,10 +139,35 @@ sanguis::creator::aux_::generators::start(
 		sanguis::creator::aux_::result{
 			grid,
 			bg_grid,
-			sanguis::creator::opening_container{
-				start_portal,
-				exit_portal
-			},
+			fcppt::algorithm::enum_array_fold<
+				sanguis::creator::opening_container_array
+			>(
+				[
+					start_portal,
+					exit_portal
+				](
+					sanguis::creator::opening_type const _opening_type
+				)
+				{
+					switch(
+						_opening_type
+					)
+					{
+					case sanguis::creator::opening_type::entry:
+						return
+							sanguis::creator::opening_container{
+								start_portal
+							};
+					case sanguis::creator::opening_type::exit:
+						return
+							sanguis::creator::opening_container{
+								exit_portal
+							};
+					}
+
+					FCPPT_ASSERT_UNREACHABLE;
+				}
+			),
 			sanguis::creator::spawn_container(),
 			sanguis::creator::destructible_container{
 				// TODO: Just for testing

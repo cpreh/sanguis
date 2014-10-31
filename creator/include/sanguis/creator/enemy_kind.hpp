@@ -13,7 +13,8 @@ enum class enemy_kind
 {
 	normal,
 	unique,
-	fcppt_maximum = unique
+	boss,
+	fcppt_maximum = boss
 };
 
 }

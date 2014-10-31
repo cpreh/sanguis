@@ -2,7 +2,11 @@
 #include <sanguis/world_name.hpp>
 #include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/enemy_type.hpp>
+#include <sanguis/creator/opening.hpp>
 #include <sanguis/creator/opening_count.hpp>
+#include <sanguis/creator/opening_count_array.hpp>
+#include <sanguis/creator/opening_type.hpp>
+#include <sanguis/creator/spawn_boss.hpp>
 #include <sanguis/creator/start_name.hpp>
 #include <sanguis/creator/top_parameters.hpp>
 #include <sanguis/server/dest_world_id.hpp>
@@ -31,7 +35,9 @@
 #include <sanguis/server/world/random_seed.hpp>
 #include <fcppt/make_int_range.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/algorithm/enum_array_fold.hpp>
 #include <fcppt/assert/error.hpp>
+#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -89,8 +95,30 @@ sanguis::server::global::generate_worlds(
 				sanguis::server::world::random_seed(
 					_parameters.random_generator()
 				),
-				sanguis::creator::opening_count{
-					2u
+				fcppt::algorithm::enum_array_fold<
+					sanguis::creator::opening_count_array
+				>(
+					[](
+						sanguis::creator::opening_type const _type
+					)
+					{
+						switch(
+							_type
+						)
+						{
+						case sanguis::creator::opening_type::entry:
+						case sanguis::creator::opening_type::exit:
+							return
+								sanguis::creator::opening_count{
+									1u
+								};
+						}
+
+						FCPPT_ASSERT_UNREACHABLE;
+					}
+				),
+				sanguis::creator::spawn_boss{
+					false
 				}
 			)
 		)
@@ -118,9 +146,32 @@ sanguis::server::global::generate_worlds(
 		insert_world(
 			sanguis::server::world::random(
 				_parameters,
-				sanguis::creator::opening_count(
-					2u
+				fcppt::algorithm::enum_array_fold<
+					sanguis::creator::opening_count_array
+				>(
+					[](
+						sanguis::creator::opening_type const _opening_type
+					)
+					{
+						switch(
+							_opening_type
+						)
+						{
+						case sanguis::creator::opening_type::entry:
+						case sanguis::creator::opening_type::exit:
+							return
+								sanguis::creator::opening_count{
+									1u
+								};
+						}
+
+						FCPPT_ASSERT_UNREACHABLE;
+					}
 				),
+				// TODO
+				sanguis::creator::spawn_boss{
+					false
+				},
 				world_id,
 				difficulty++ // TODO: How to scale this?
 			)
@@ -133,7 +184,9 @@ sanguis::server::global::generate_worlds(
 		sanguis::creator::opening const current_opening(
 			worlds[
 				world_id
-			]->openings().at(
+			]->openings()[
+				sanguis::creator::opening_type::entry
+			].at(
 				0u
 			)
 		);
@@ -141,8 +194,10 @@ sanguis::server::global::generate_worlds(
 		sanguis::creator::opening const previous_opening(
 			worlds[
 				previous_id
-			]->openings().at(
-				1u
+			]->openings()[
+				sanguis::creator::opening_type::exit
+			].at(
+				0u
 			)
 		);
 
@@ -205,8 +260,10 @@ sanguis::server::global::generate_worlds(
 				),
 				sanguis::server::entities::insert_parameters_center(
 					sanguis::server::world::grid_pos_to_center(
-						last_world.openings().at(
-							1
+						last_world.openings()[
+							sanguis::creator::opening_type::exit
+						].at(
+							0
 						).get()
 					)
 				)

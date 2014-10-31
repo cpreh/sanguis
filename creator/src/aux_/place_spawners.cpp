@@ -2,7 +2,8 @@
 #include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/grid.hpp>
-#include <sanguis/creator/opening_container.hpp>
+#include <sanguis/creator/opening.hpp>
+#include <sanguis/creator/opening_container_array.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/size_type.hpp>
 #include <sanguis/creator/spawn_container.hpp>
@@ -19,6 +20,7 @@
 #include <sanguis/creator/aux_/random/uniform_int_wrapper_impl.hpp>
 #include <sanguis/creator/aux_/random/uniform_pos.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/algorithm/fold.hpp>
 #include <fcppt/assert/error_message.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/log/_.hpp>
@@ -30,7 +32,7 @@
 sanguis::creator::spawn_container
 sanguis::creator::aux_::place_spawners(
 	sanguis::creator::grid &_grid,
-	sanguis::creator::opening_container const &_openings,
+	sanguis::creator::opening_container_array const &_openings,
 	sanguis::creator::count const _spawner_count,
 	sanguis::creator::aux_::random::generator &_generator,
 	sanguis::creator::aux_::enemy_type_container const &_enemy_types,
@@ -88,13 +90,29 @@ sanguis::creator::aux_::place_spawners(
 
 
 		if(
-			!_openings.empty()
-			&&
-			!
-			sanguis::creator::tile_is_visible(
-				_grid,
-				*candidate,
-				_openings[0].get()
+			// TODO: Use any_of for ranges
+			!fcppt::algorithm::fold(
+				_openings[
+					sanguis::creator::opening_type::entry
+				],
+				false,
+				[
+					&_grid,
+					&candidate
+				](
+					sanguis::creator::opening const _cur,
+					bool const _value
+				)
+				{
+					return
+						_value
+						||
+						sanguis::creator::tile_is_visible(
+							_grid,
+							*candidate,
+							_cur.get()
+						);
+				}
 			)
 		)
 		{

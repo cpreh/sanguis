@@ -7,6 +7,10 @@
 #include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/pos.hpp>
+#include <sanguis/creator/opening.hpp>
+#include <sanguis/creator/opening_container.hpp>
+#include <sanguis/creator/opening_container_array.hpp>
+#include <sanguis/creator/opening_type.hpp>
 #include <sanguis/creator/rect.hpp>
 #include <sanguis/creator/signed_pos.hpp>
 #include <sanguis/creator/spawn_container.hpp>
@@ -16,6 +20,7 @@
 #include <sanguis/creator/aux_/filled_rect.hpp>
 #include <sanguis/creator/aux_/parameters.hpp>
 #include <sanguis/creator/aux_/place_spawners.hpp>
+#include <sanguis/creator/aux_/set_opening_tiles.hpp>
 #include <sanguis/creator/aux_/rect.hpp>
 #include <sanguis/creator/aux_/result.hpp>
 #include <sanguis/creator/aux_/generators/rooms.hpp>
@@ -23,6 +28,7 @@
 #include <sanguis/creator/aux_/random/uniform_size.hpp>
 #include <sanguis/creator/aux_/random/uniform_size_variate.hpp>
 #include <fcppt/optional.hpp>
+#include <fcppt/algorithm/enum_array_fold.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/math/box/center.hpp>
 #include <fcppt/math/box/contains_point.hpp>
@@ -221,7 +227,7 @@ sanguis::creator::aux_::generators::rooms(
 	>
 	uniform_int2;
 
-	sanguis::creator::grid::dim size{
+	sanguis::creator::grid::dim const size{
 		100u,
 		75u
 	};
@@ -229,8 +235,8 @@ sanguis::creator::aux_::generators::rooms(
 	auto rand_int =
 		[&_parameters]
 		(
-			 ::int_type min,
-			 ::int_type max
+			 ::int_type const min,
+			 ::int_type const max
 		 )
 		{
 			return
@@ -302,10 +308,10 @@ sanguis::creator::aux_::generators::rooms(
 		::signed_rect rect;
 
 		{
-			::int_type w = rand_int(5, std::min(15 + i/2, static_cast<::int_type>(size.w() - 1)))();
-			::int_type h = rand_int(5, std::min(15 + i/2, static_cast<::int_type>(size.h() - 1)))();
-			::int_type x = rand_int(0, static_cast<::int_type>(size.w()) - w - 1)();
-			::int_type y = rand_int(0, static_cast<::int_type>(size.h()) - h - 1)();
+			::int_type const w = rand_int(5, std::min(15 + i/2, static_cast<::int_type>(size.w() - 1)))();
+			::int_type const h = rand_int(5, std::min(15 + i/2, static_cast<::int_type>(size.h() - 1)))();
+			::int_type const x = rand_int(0, static_cast<::int_type>(size.w()) - w - 1)();
+			::int_type const y = rand_int(0, static_cast<::int_type>(size.h()) - h - 1)();
 
 			rect = ::signed_rect{
 				::signed_rect::vector{
@@ -409,7 +415,7 @@ sanguis::creator::aux_::generators::rooms(
 			case ::edge::left:
 			case ::edge::right:
 			{
-				int_type ymin{
+				int_type const ymin{
 					std::max(
 						rect.top(),
 						neighbor->top()
@@ -417,7 +423,7 @@ sanguis::creator::aux_::generators::rooms(
 					1
 				};
 
-				int_type ymax{
+				int_type const ymax{
 					std::min(
 						rect.bottom(),
 						neighbor->bottom()
@@ -428,7 +434,7 @@ sanguis::creator::aux_::generators::rooms(
 				if (ymin >= ymax)
 					continue;
 
-				::int_type y{
+				::int_type const y{
 					rand_int(ymin, ymax)()
 				};
 
@@ -455,7 +461,7 @@ sanguis::creator::aux_::generators::rooms(
 	}
 
 	for (
-		auto &rect
+		auto const &rect
 		:
 		rects
 	)
@@ -469,7 +475,7 @@ sanguis::creator::aux_::generators::rooms(
 			[
 				&grid
 			]
-			(sanguis::creator::pos _pos)
+			(sanguis::creator::pos const _pos)
 			{
 				grid[
 					_pos
@@ -488,7 +494,7 @@ sanguis::creator::aux_::generators::rooms(
 			[
 				&bg_grid
 			]
-			(sanguis::creator::pos _pos)
+			(sanguis::creator::pos const _pos)
 			{
 				bg_grid[
 					_pos
@@ -499,7 +505,7 @@ sanguis::creator::aux_::generators::rooms(
 		);
 	}
 
-	auto
+	auto const
 	set_tile(
 		[
 			&grid,
@@ -530,7 +536,7 @@ sanguis::creator::aux_::generators::rooms(
 		}
 	);
 
-	for (auto &corr : corridors)
+	for (auto const &corr : corridors)
 	{
 		::pos_type const &pos{corr.first};
 		::edge const &e{corr.second};
@@ -598,33 +604,56 @@ sanguis::creator::aux_::generators::rooms(
 		}
 	);
 
-	sanguis::creator::opening_container
-	openings{
-		sanguis::creator::opening{
-			rect_to_pos(
-				rects.front()
+	sanguis::creator::opening_container_array const
+	openings(
+		fcppt::algorithm::enum_array_fold<
+			sanguis::creator::opening_container_array
+		>(
+			[
+				&rect_to_pos,
+				&rects
+			](
+				sanguis::creator::opening_type const _type
 			)
-		},
-		sanguis::creator::opening{
-			rect_to_pos(
-				rects.back()
-			)
-		}
-	};
+			{
+				switch(
+					_type
+				)
+				{
+				case sanguis::creator::opening_type::entry:
+					return
+						sanguis::creator::opening_container{
+							sanguis::creator::opening{
+								rect_to_pos(
+									rects.front()
+								)
+							}
+						};
+				case sanguis::creator::opening_type::exit:
+					return
+						sanguis::creator::opening_container{
+							sanguis::creator::opening{
+								rect_to_pos(
+									rects.back()
+								)
+							}
+						};
+				}
 
-	for (auto &opening : openings)
-	{
-		grid[
-			opening.get()
-		]
-		=
-		sanguis::creator::tile::stairs;
-	}
+				FCPPT_ASSERT_UNREACHABLE;
+			}
+		)
+	);
+
+	sanguis::creator::aux_::set_opening_tiles(
+		grid,
+		openings
+	);
 
 	sanguis::creator::spawn_container
 	spawners{};
 
-	sanguis::creator::aux_::enemy_type_container
+	sanguis::creator::aux_::enemy_type_container const
 	enemy_types{
 		sanguis::creator::enemy_type::zombie00,
 		sanguis::creator::enemy_type::zombie01,
@@ -649,7 +678,7 @@ sanguis::creator::aux_::generators::rooms(
 			rects.back()
 		),
 		[&]
-		(sanguis::creator::pos _pos)
+		(sanguis::creator::pos const _pos)
 		{
 			if (
 				sanguis::creator::tile_is_solid(

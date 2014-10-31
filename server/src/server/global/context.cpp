@@ -8,6 +8,8 @@
 #include <sanguis/random_seed.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/world_id.hpp>
+#include <sanguis/creator/opening.hpp>
+#include <sanguis/creator/opening_type.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/entity_id.hpp>
 #include <sanguis/messages/roles/speed.hpp>
@@ -203,8 +205,10 @@ sanguis::server::global::context::insert_player(
 			sanguis::server::entities::insert_parameters(
 				sanguis::server::world::grid_pos_to_center(
 					cur_world.openings()[
-						0u
-					].get()
+						sanguis::creator::opening_type::entry
+					].at(
+						0
+					).get()
 				),
 				sanguis::server::angle(
 					0.f

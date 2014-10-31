@@ -18,8 +18,9 @@
 #include <sanguis/creator/destructible_container.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/name.hpp>
-#include <sanguis/creator/opening_container.hpp>
+#include <sanguis/creator/opening_container_array.hpp>
 #include <sanguis/creator/seed.hpp>
+#include <sanguis/creator/spawn_boss.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/top_result_fwd.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
@@ -105,7 +106,7 @@ public:
 	sanguis::server::environment::object &
 	environment();
 
-	sanguis::creator::opening_container const &
+	sanguis::creator::opening_container_array const &
 	openings() const;
 
 	sanguis::world_id const
@@ -328,9 +329,11 @@ private:
 
 	sanguis::creator::name const generator_name_;
 
+	sanguis::creator::spawn_boss const spawn_boss_;
+
 	sanguis::creator::grid const grid_;
 
-	sanguis::creator::opening_container const openings_;
+	sanguis::creator::opening_container_array const openings_;
 
 	sanguis::server::world::context &global_context_;
 

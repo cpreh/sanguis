@@ -659,6 +659,7 @@ set(
 	include/sanguis/server/world/context.hpp
 	include/sanguis/server/world/context_fwd.hpp
 	include/sanguis/server/world/difficulty.hpp
+	include/sanguis/server/world/difficulty_fwd.hpp
 	include/sanguis/server/world/entity_map.hpp
 	include/sanguis/server/world/entity_vector.hpp
 	include/sanguis/server/world/generate.hpp

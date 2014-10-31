@@ -1,7 +1,7 @@
 #include <sanguis/creator/background_grid.hpp>
 #include <sanguis/creator/destructible_container.hpp>
 #include <sanguis/creator/grid.hpp>
-#include <sanguis/creator/opening_container.hpp>
+#include <sanguis/creator/opening_container_array.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/aux_/result.hpp>
 
@@ -9,7 +9,7 @@
 sanguis::creator::aux_::result::result(
 	sanguis::creator::grid const &_grid,
 	sanguis::creator::background_grid const &_background_grid,
-	sanguis::creator::opening_container const &_openings,
+	sanguis::creator::opening_container_array const &_openings,
 	sanguis::creator::spawn_container const &_spawns,
 	sanguis::creator::destructible_container const &_destructibles
 )
@@ -46,7 +46,7 @@ sanguis::creator::aux_::result::background_grid() const
 		background_grid_;
 }
 
-sanguis::creator::opening_container const &
+sanguis::creator::opening_container_array const &
 sanguis::creator::aux_::result::openings() const
 {
 	return

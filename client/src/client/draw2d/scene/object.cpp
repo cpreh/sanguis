@@ -81,6 +81,9 @@
 #include <sanguis/client/load/resource/context.hpp>
 #include <sanguis/creator/name.hpp>
 #include <sanguis/creator/opening_count.hpp>
+#include <sanguis/creator/opening_count_array.hpp>
+#include <sanguis/creator/opening_type.hpp>
+#include <sanguis/creator/spawn_boss.hpp>
 #include <sanguis/creator/top_parameters.hpp>
 #include <sanguis/gui/renderer/base.hpp>
 #include <sanguis/gui/renderer/create_stateless.hpp>
@@ -172,6 +175,7 @@
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/type_name_from_info.hpp>
+#include <fcppt/algorithm/enum_array_fold.hpp>
 #include <fcppt/algorithm/map_iteration_second.hpp>
 #include <fcppt/algorithm/sequence_iteration.hpp>
 #include <fcppt/cast/dynamic.hpp>
@@ -1157,11 +1161,30 @@ sanguis::client::draw2d::scene::object::operator()(
 				_message.get<
 					sanguis::messages::roles::seed
 				>(),
-				sanguis::creator::opening_count(
+				fcppt::algorithm::enum_array_fold<
+					sanguis::creator::opening_count_array
+				>(
+					[
+						&_message
+					](
+						sanguis::creator::opening_type const _opening_type
+					)
+					{
+						return
+							sanguis::creator::opening_count(
+								_message.get<
+									sanguis::messages::roles::opening_count
+								>()[
+									_opening_type
+								]
+							);
+					}
+				),
+				sanguis::creator::spawn_boss{
 					_message.get<
-						sanguis::messages::roles::opening_count
+						sanguis::messages::roles::spawn_boss
 					>()
-				)
+				}
 			)
 		)
 	);

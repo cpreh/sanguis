@@ -6,7 +6,6 @@ set(
 	include/sanguis/creator/background_tile_fwd.hpp
 	include/sanguis/creator/center_to_grid_pos.hpp
 	include/sanguis/creator/count.hpp
-	include/sanguis/creator/deserialize.hpp
 	include/sanguis/creator/destructible.hpp
 	include/sanguis/creator/destructible_container.hpp
 	include/sanguis/creator/destructible_fwd.hpp
@@ -36,7 +35,15 @@ set(
 	include/sanguis/creator/name.hpp
 	include/sanguis/creator/opening.hpp
 	include/sanguis/creator/opening_container.hpp
+	include/sanguis/creator/opening_container_array.hpp
+	include/sanguis/creator/opening_container_array_fwd.hpp
 	include/sanguis/creator/opening_count.hpp
+	include/sanguis/creator/opening_count_array.hpp
+	include/sanguis/creator/opening_count_array_fwd.hpp
+	include/sanguis/creator/opening_count_fwd.hpp
+	include/sanguis/creator/opening_fwd.hpp
+	include/sanguis/creator/opening_type.hpp
+	include/sanguis/creator/opening_type_fwd.hpp
 	include/sanguis/creator/optional_background_tile.hpp
 	include/sanguis/creator/optional_background_tile_fwd.hpp
 	include/sanguis/creator/pos.hpp
@@ -46,11 +53,12 @@ set(
 	include/sanguis/creator/seed.hpp
 	include/sanguis/creator/seed_fwd.hpp
 	include/sanguis/creator/seed_type.hpp
-	include/sanguis/creator/serialize.hpp
 	include/sanguis/creator/signed_pos.hpp
 	include/sanguis/creator/signed_pos_fwd.hpp
 	include/sanguis/creator/size_type.hpp
 	include/sanguis/creator/spawn.hpp
+	include/sanguis/creator/spawn_boss.hpp
+	include/sanguis/creator/spawn_boss_fwd.hpp
 	include/sanguis/creator/spawn_container.hpp
 	include/sanguis/creator/spawn_fwd.hpp
 	include/sanguis/creator/spawn_pos.hpp
@@ -72,14 +80,6 @@ set(
 	include/sanguis/creator/top_result.hpp
 	include/sanguis/creator/top_result_fwd.hpp
 	src/aux_/closest_empty.cpp
-	src/aux_/deserialization/background_grid.cpp
-	src/aux_/deserialization/destructible.cpp
-	src/aux_/deserialization/destructible_container.cpp
-	src/aux_/deserialization/grid.cpp
-	src/aux_/deserialization/opening_container.cpp
-	src/aux_/deserialization/spawn.cpp
-	src/aux_/deserialization/spawn_container.cpp
-	src/aux_/deserialization/top_result.cpp
 	src/aux_/find_opposing_cell.cpp
 	src/aux_/find_reachable.cpp
 	src/aux_/generate_maze.cpp
@@ -102,30 +102,13 @@ set(
 	src/aux_/random/uniform_pos_parameters.cpp
 	src/aux_/result.cpp
 	src/aux_/rooms_name.cpp
-	src/aux_/serialization/background_grid.cpp
-	src/aux_/serialization/destructible.cpp
-	src/aux_/serialization/destructible_container.cpp
-	src/aux_/serialization/grid.cpp
-	src/aux_/serialization/opening_container.cpp
-	src/aux_/serialization/spawn.cpp
-	src/aux_/serialization/spawn_container.cpp
-	src/aux_/serialization/top_result.cpp
-	src/deserialize.cpp
+	src/aux_/set_opening_tiles.cpp
 	src/destructible.cpp
 	src/exception.cpp
 	src/generate.cpp
 	src/generator_count.cpp
 	src/generator_index.cpp
 	src/include/sanguis/creator/aux_/closest_empty.hpp
-	src/include/sanguis/creator/aux_/deserialization/background_grid.hpp
-	src/include/sanguis/creator/aux_/deserialization/destructible.hpp
-	src/include/sanguis/creator/aux_/deserialization/destructible_container.hpp
-	src/include/sanguis/creator/aux_/deserialization/grid.hpp
-	src/include/sanguis/creator/aux_/deserialization/opening_container.hpp
-	src/include/sanguis/creator/aux_/deserialization/spawn.hpp
-	src/include/sanguis/creator/aux_/deserialization/spawn_container.hpp
-	src/include/sanguis/creator/aux_/deserialization/tile_grid.hpp
-	src/include/sanguis/creator/aux_/deserialization/top_result.hpp
 	src/include/sanguis/creator/aux_/enemy_type_container.hpp
 	src/include/sanguis/creator/aux_/filled_rect.hpp
 	src/include/sanguis/creator/aux_/find_closest.hpp
@@ -178,17 +161,8 @@ set(
 	src/include/sanguis/creator/aux_/result.hpp
 	src/include/sanguis/creator/aux_/result_fwd.hpp
 	src/include/sanguis/creator/aux_/rooms_name.hpp
-	src/include/sanguis/creator/aux_/serialization/background_grid.hpp
-	src/include/sanguis/creator/aux_/serialization/destructible.hpp
-	src/include/sanguis/creator/aux_/serialization/destructible_container.hpp
-	src/include/sanguis/creator/aux_/serialization/grid.hpp
-	src/include/sanguis/creator/aux_/serialization/opening_container.hpp
-	src/include/sanguis/creator/aux_/serialization/spawn.hpp
-	src/include/sanguis/creator/aux_/serialization/spawn_container.hpp
-	src/include/sanguis/creator/aux_/serialization/tile_grid.hpp
-	src/include/sanguis/creator/aux_/serialization/top_result.hpp
+	src/include/sanguis/creator/aux_/set_opening_tiles.hpp
 	src/log_location.cpp
-	src/serialize.cpp
 	src/spawn.cpp
 	src/start_name.cpp
 	src/tile_connects.cpp

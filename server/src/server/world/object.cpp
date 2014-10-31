@@ -19,7 +19,8 @@
 #include <sanguis/creator/destructible.hpp>
 #include <sanguis/creator/destructible_container.hpp>
 #include <sanguis/creator/opening.hpp>
-#include <sanguis/creator/opening_container.hpp>
+#include <sanguis/creator/opening_container_array.hpp>
+#include <sanguis/creator/opening_type.hpp>
 #include <sanguis/creator/spawn.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/top_result.hpp>
@@ -44,6 +45,7 @@
 #include <sanguis/messages/roles/primary_weapon.hpp>
 #include <sanguis/messages/roles/reload_time.hpp>
 #include <sanguis/messages/roles/seed.hpp>
+#include <sanguis/messages/roles/spawn_boss.hpp>
 #include <sanguis/messages/roles/speed.hpp>
 #include <sanguis/messages/roles/weapon_attribute_container.hpp>
 #include <sanguis/messages/roles/weapon_status.hpp>
@@ -71,6 +73,7 @@
 #include <sanguis/messages/server/rotate.hpp>
 #include <sanguis/messages/server/speed.hpp>
 #include <sanguis/messages/server/weapon_status.hpp>
+#include <sanguis/messages/types/opening_count_array.hpp>
 #include <sanguis/messages/types/size.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
@@ -111,9 +114,11 @@
 #include <sanguis/server/world/sight_range_map.hpp>
 #include <sanguis/server/world/update_entity.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
+#include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/algorithm/enum_array_fold.hpp>
 #include <fcppt/algorithm/map_iteration_second.hpp>
 #include <fcppt/algorithm/sequence_iteration.hpp>
 #include <fcppt/assert/error.hpp>
@@ -155,6 +160,9 @@ sanguis::server::world::object::object(
 	generator_name_(
 		_generated_world.name()
 	),
+	spawn_boss_{
+		_generated_world.spawn_boss()
+	},
 	grid_(
 		_generated_world.grid()
 	),
@@ -311,7 +319,7 @@ sanguis::server::world::object::environment()
 		*this;
 }
 
-sanguis::creator::opening_container const &
+sanguis::creator::opening_container_array const &
 sanguis::server::world::object::openings() const
 {
 	return
@@ -412,15 +420,31 @@ sanguis::server::world::object::insert_with_id(
 								generator_name_.get()
 							),
 						sanguis::messages::roles::opening_count{} =
-							fcppt::cast::size<
-								sanguis::messages::types::size
+							fcppt::algorithm::enum_array_fold<
+								sanguis::messages::types::opening_count_array
 							>(
-								openings_.size()
+								[
+									this
+								](
+									sanguis::creator::opening_type const _opening_type
+								)
+								{
+									return
+										fcppt::cast::size<
+											sanguis::messages::types::size
+										>(
+											openings_[
+												_opening_type
+											].size()
+										);
+								}
 							),
 						sanguis::messages::roles::world_name{} =
 							sge::charconv::fcppt_string_to_utf8(
 								name_.get()
-							)
+							),
+						sanguis::messages::roles::spawn_boss{} =
+							spawn_boss_.get()
 					)
 				)
 			);
@@ -828,49 +852,58 @@ sanguis::server::world::object::request_transfer(
 	);
 
 	for(
-		sanguis::creator::opening opening
+		auto const opening_type
 		:
-		openings_
+		fcppt::make_enum_range<
+			sanguis::creator::opening_type
+		>()
 	)
-	{
-		sanguis::server::global::source_world_pair const source_pair(
-			sanguis::server::source_world_id(
-				id_
-			),
-			opening
-		);
-
-		if(
-			sanguis::server::world::center_in_grid_pos(
-				cur_entity.center(),
-				opening.get()
-			)
-			&&
-			global_context_.request_transfer(
-				source_pair
-			)
-
+		for(
+			sanguis::creator::opening const opening
+			:
+			openings_[
+				opening_type
+			]
 		)
 		{
-			// TODO: Can we do this in a different way?
-			cur_entity.reset_body();
+			sanguis::server::global::source_world_pair const source_pair{
+				sanguis::server::source_world_id(
+					id_
+				),
+				opening
+			};
 
-			sanguis::server::entities::unique_ptr entity_ptr(
-				entities_.release(
-					it
+			if(
+				sanguis::server::world::center_in_grid_pos(
+					cur_entity.center(),
+					opening.get()
 				)
-			);
-
-			global_context_.transfer_entity(
-				source_pair,
-				std::move(
-					entity_ptr
+				&&
+				global_context_.request_transfer(
+					source_pair
 				)
-			);
 
-			return;
+			)
+			{
+				// TODO: Can we do this in a different way?
+				cur_entity.reset_body();
+
+				sanguis::server::entities::unique_ptr entity_ptr(
+					entities_.release(
+						it
+					)
+				);
+
+				global_context_.transfer_entity(
+					source_pair,
+					std::move(
+						entity_ptr
+					)
+				);
+
+				return;
+			}
 		}
-	}
 }
 
 sanguis::server::world::difficulty const

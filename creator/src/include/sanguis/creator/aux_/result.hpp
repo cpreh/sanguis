@@ -4,7 +4,7 @@
 #include <sanguis/creator/background_grid.hpp>
 #include <sanguis/creator/destructible_container.hpp>
 #include <sanguis/creator/grid.hpp>
-#include <sanguis/creator/opening_container.hpp>
+#include <sanguis/creator/opening_container_array.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/aux_/result_fwd.hpp>
 #include <fcppt/nonassignable.hpp>
@@ -26,7 +26,7 @@ public:
 	result(
 		sanguis::creator::grid const &,
 		sanguis::creator::background_grid const &,
-		sanguis::creator::opening_container const &,
+		sanguis::creator::opening_container_array const &,
 		sanguis::creator::spawn_container const &,
 		sanguis::creator::destructible_container const &
 	);
@@ -37,7 +37,7 @@ public:
 	sanguis::creator::background_grid const &
 	background_grid() const;
 
-	sanguis::creator::opening_container const &
+	sanguis::creator::opening_container_array const &
 	openings() const;
 
 	sanguis::creator::spawn_container const &
@@ -50,7 +50,7 @@ private:
 
 	sanguis::creator::background_grid const background_grid_;
 
-	sanguis::creator::opening_container const openings_;
+	sanguis::creator::opening_container_array const openings_;
 
 	sanguis::creator::spawn_container const spawns_;
 
