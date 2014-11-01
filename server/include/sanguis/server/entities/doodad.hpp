@@ -6,6 +6,7 @@
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/player_id_fwd.hpp>
 #include <sanguis/server/entities/center_simple.hpp>
+#include <sanguis/server/entities/doodad_fwd.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -31,12 +32,16 @@ protected:
 		sanguis::server::environment::load_context &,
 		sanguis::doodad_type
 	);
-
+public:
 	~doodad()
 	override = 0;
 
 	void
 	kill();
+
+	bool
+	dead() const
+	override;
 private:
 	sanguis::messages::server::unique_ptr
 	add_message(

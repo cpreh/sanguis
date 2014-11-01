@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_WORLD_UPDATE_ENTITY_HPP_INCLUDED
 
 #include <sanguis/duration.hpp>
+#include <sanguis/server/entities/doodad_unique_ptr.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <fcppt/nonassignable.hpp>
@@ -28,6 +29,11 @@ public:
 	bool
 	operator()(
 		sanguis::server::entities::unique_ptr const &
+	) const;
+
+	bool
+	operator()(
+		sanguis::server::entities::doodad_unique_ptr const &
 	) const;
 
 	bool

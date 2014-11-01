@@ -1,10 +1,10 @@
 #ifndef SANGUIS_SERVER_WORLD_ENTITY_VECTOR_HPP_INCLUDED
 #define SANGUIS_SERVER_WORLD_ENTITY_VECTOR_HPP_INCLUDED
 
-#include <sanguis/server/entities/base_fwd.hpp>
-#include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/world/entity_vector_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <memory>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
@@ -16,6 +16,9 @@ namespace server
 namespace world
 {
 
+template<
+	typename Type
+>
 class entity_vector
 {
 	FCPPT_NONCOPYABLE(
@@ -23,14 +26,21 @@ class entity_vector
 	);
 
 	typedef
+	std::unique_ptr<
+		Type
+	>
+	entity_unique_ptr;
+
+	typedef
 	std::vector<
-		sanguis::server::entities::unique_ptr
+		entity_unique_ptr
 	>
 	impl;
 public:
-	typedef impl::iterator iterator;
-
-	typedef impl::const_iterator const_iterator;
+	typedef
+	typename
+	impl::iterator
+	iterator;
 
 	entity_vector();
 
@@ -38,10 +48,10 @@ public:
 
 	void
 	push_back(
-		sanguis::server::entities::unique_ptr &&
+		entity_unique_ptr &&
 	);
 
-	sanguis::server::entities::base &
+	Type &
 	back();
 
 	iterator

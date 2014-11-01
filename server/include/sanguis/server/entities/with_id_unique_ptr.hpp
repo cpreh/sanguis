@@ -14,9 +14,11 @@ namespace server
 namespace entities
 {
 
-typedef std::unique_ptr<
+typedef
+std::unique_ptr<
 	sanguis::server::entities::with_id
-> with_id_unique_ptr;
+>
+with_id_unique_ptr;
 
 }
 }

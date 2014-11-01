@@ -44,7 +44,9 @@
 #include <sanguis/server/world/context_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/entity_map.hpp>
-#include <sanguis/server/world/entity_vector.hpp>
+#include <sanguis/server/world/entity_vector_fwd.hpp>
+#include <sanguis/server/world/entity_vector_base.hpp>
+#include <sanguis/server/world/entity_vector_doodad.hpp>
 #include <sanguis/server/world/insert_pair_container.hpp>
 #include <sanguis/server/world/insert_pair_fwd.hpp>
 #include <sanguis/server/world/object_fwd.hpp>
@@ -52,6 +54,10 @@
 #include <sanguis/server/world/pickup_spawner.hpp>
 #include <sanguis/server/world/sight_range_map.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/optional_fwd.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <memory>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -118,9 +124,19 @@ private:
 		sanguis::server::entities::insert_parameters const &
 	);
 
-	sanguis::server::entities::optional_base_ref const
+	template<
+		typename Entity
+	>
+	fcppt::optional<
+		Entity &
+	> const
 	insert_base(
-		sanguis::server::entities::unique_ptr &&,
+		sanguis::server::world::entity_vector<
+			Entity
+		> &,
+		std::unique_ptr<
+			Entity
+		> &&,
 		sanguis::server::entities::insert_parameters const &
 	);
 public:
@@ -353,11 +369,13 @@ private:
 
 	sanguis::server::world::entity_map entities_;
 
-	sanguis::server::world::entity_vector server_entities_;
+	sanguis::server::world::entity_vector_base server_entities_;
 
-	sanguis::server::world::pickup_spawner pickup_spawner_;
+	sanguis::server::world::entity_vector_doodad portal_blockers_;
 
 	unsigned portal_block_count_;
+
+	sanguis::server::world::pickup_spawner pickup_spawner_;
 };
 
 }

@@ -178,6 +178,8 @@ set(
 	include/sanguis/server/entities/convert_model_size.hpp
 	include/sanguis/server/entities/destructible.hpp
 	include/sanguis/server/entities/doodad.hpp
+	include/sanguis/server/entities/doodad_fwd.hpp
+	include/sanguis/server/entities/doodad_unique_ptr.hpp
 	include/sanguis/server/entities/enemies/attribute.hpp
 	include/sanguis/server/entities/enemies/attribute_container.hpp
 	include/sanguis/server/entities/enemies/attribute_fwd.hpp
@@ -278,6 +280,7 @@ set(
 	include/sanguis/server/entities/player.hpp
 	include/sanguis/server/entities/player_fwd.hpp
 	include/sanguis/server/entities/player_unique_ptr.hpp
+	include/sanguis/server/entities/portal_blocker.hpp
 	include/sanguis/server/entities/projectiles/aoe_damage.hpp
 	include/sanguis/server/entities/projectiles/aoe_projectile.hpp
 	include/sanguis/server/entities/projectiles/base.hpp
@@ -664,6 +667,10 @@ set(
 	include/sanguis/server/world/difficulty_fwd.hpp
 	include/sanguis/server/world/entity_map.hpp
 	include/sanguis/server/world/entity_vector.hpp
+	include/sanguis/server/world/entity_vector_base.hpp
+	include/sanguis/server/world/entity_vector_doodad.hpp
+	include/sanguis/server/world/entity_vector_fwd.hpp
+	include/sanguis/server/world/entity_vector_impl.hpp
 	include/sanguis/server/world/generate.hpp
 	include/sanguis/server/world/generate_destructibles.hpp
 	include/sanguis/server/world/generate_single_spawns.hpp
@@ -673,6 +680,7 @@ set(
 	include/sanguis/server/world/insert_pair_container.hpp
 	include/sanguis/server/world/insert_pair_fwd.hpp
 	include/sanguis/server/world/make_destructible.hpp
+	include/sanguis/server/world/make_portal_blocker.hpp
 	include/sanguis/server/world/make_spawner.hpp
 	include/sanguis/server/world/map.hpp
 	include/sanguis/server/world/object.hpp
@@ -826,6 +834,7 @@ set(
 	src/server/entities/pickups/pickup.cpp
 	src/server/entities/pickups/weapon.cpp
 	src/server/entities/player.cpp
+	src/server/entities/portal_blocker.cpp
 	src/server/entities/projectiles/aoe_damage.cpp
 	src/server/entities/projectiles/aoe_projectile.cpp
 	src/server/entities/projectiles/base.cpp
@@ -986,7 +995,8 @@ set(
 	src/server/world/center_to_grid_pos.cpp
 	src/server/world/context.cpp
 	src/server/world/entity_map.cpp
-	src/server/world/entity_vector.cpp
+	src/server/world/entity_vector_base.cpp
+	src/server/world/entity_vector_doodad.cpp
 	src/server/world/generate.cpp
 	src/server/world/generate_destructibles.cpp
 	src/server/world/generate_single_spawns.cpp
@@ -994,6 +1004,7 @@ set(
 	src/server/world/grid_pos_to_center.cpp
 	src/server/world/insert_pair.cpp
 	src/server/world/make_destructible.cpp
+	src/server/world/make_portal_blocker.cpp
 	src/server/world/make_spawner.cpp
 	src/server/world/object.cpp
 	src/server/world/parameters.cpp

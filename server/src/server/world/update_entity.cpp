@@ -1,5 +1,7 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/doodad.hpp>
+#include <sanguis/server/entities/doodad_unique_ptr.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
@@ -19,6 +21,17 @@ sanguis::server::world::update_entity::update_entity(
 bool
 sanguis::server::world::update_entity::operator()(
 	sanguis::server::entities::unique_ptr const &_entity
+) const
+{
+	return
+		this->impl(
+			_entity
+		);
+}
+
+bool
+sanguis::server::world::update_entity::operator()(
+	sanguis::server::entities::doodad_unique_ptr const &_entity
 ) const
 {
 	return

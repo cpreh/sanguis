@@ -89,7 +89,9 @@
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/body_collision.hpp>
 #include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/doodad.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
+#include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/is_type.hpp>
 #include <sanguis/server/entities/optional_base_ref.hpp>
 #include <sanguis/server/entities/player.hpp>
@@ -106,8 +108,10 @@
 #include <sanguis/server/world/entity_map.hpp>
 #include <sanguis/server/world/generate_destructibles.hpp>
 #include <sanguis/server/world/generate_spawns.hpp>
+#include <sanguis/server/world/grid_pos_to_center.hpp>
 #include <sanguis/server/world/insert_pair.hpp>
 #include <sanguis/server/world/insert_pair_container.hpp>
+#include <sanguis/server/world/make_portal_blocker.hpp>
 #include <sanguis/server/world/object.hpp>
 #include <sanguis/server/world/parameters.hpp>
 #include <sanguis/server/world/sight_range.hpp>
@@ -115,8 +119,8 @@
 #include <sanguis/server/world/update_entity.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/make_enum_range.hpp>
-#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/maybe_void.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/enum_array_fold.hpp>
 #include <fcppt/algorithm/map_iteration_second.hpp>
@@ -192,13 +196,14 @@ sanguis::server::world::object::object(
 	sight_ranges_(),
 	entities_(),
 	server_entities_(),
+	portal_blockers_(),
+	portal_block_count_{
+		0u
+	},
 	pickup_spawner_(
 		_parameters.random_generator(),
 		this->environment()
-	),
-	portal_block_count_{
-		0u
-	}
+	)
 {
 	this->insert_spawns(
 		_generated_world.spawns(),
@@ -253,6 +258,11 @@ sanguis::server::world::object::update(
 		server_entities_,
 		update_entity
 	);
+
+	fcppt::algorithm::sequence_iteration(
+		portal_blockers_,
+		update_entity
+	);
 }
 
 sanguis::server::entities::optional_base_ref const
@@ -276,6 +286,7 @@ sanguis::server::world::object::insert(
 			)
 		:
 			this->insert_base(
+				server_entities_,
 				std::move(
 					_entity
 				),
@@ -460,21 +471,31 @@ sanguis::server::world::object::insert_with_id(
 		);
 }
 
-sanguis::server::entities::optional_base_ref const
+template<
+	typename Entity
+>
+fcppt::optional<
+	Entity &
+> const
 sanguis::server::world::object::insert_base(
-	sanguis::server::entities::unique_ptr &&_entity,
+	sanguis::server::world::entity_vector<
+		Entity
+	> &_container,
+	std::unique_ptr<
+		Entity
+	> &&_entity,
 	sanguis::server::entities::insert_parameters const &_insert_parameters
 )
 {
 	// These are only very simple entities that don't need special treatment
-	server_entities_.push_back(
+	_container.push_back(
 		std::move(
 			_entity
 		)
 	);
 
-	sanguis::server::entities::base &ref(
-		server_entities_.back()
+	Entity &ref(
+		_container.back()
 	);
 
 	ref.transfer(
@@ -484,9 +505,11 @@ sanguis::server::world::object::insert_base(
 	);
 
 	return
-		sanguis::server::entities::optional_base_ref(
+		fcppt::optional<
+			Entity &
+		>{
 			ref
-		);
+		};
 }
 
 void
@@ -925,6 +948,32 @@ sanguis::server::world::object::request_transfer(
 void
 sanguis::server::world::object::add_portal_blocker()
 {
+	if(
+		portal_block_count_
+		==
+		0u
+	)
+	{
+		for(
+			auto const &portal
+			:
+			openings_[
+				sanguis::creator::opening_type::exit
+			]
+		)
+			this->insert_base(
+				portal_blockers_,
+				sanguis::server::world::make_portal_blocker(
+					this->load_context()
+				),
+				sanguis::server::entities::insert_parameters_center(
+					sanguis::server::world::grid_pos_to_center(
+						portal.get()
+					)
+				)
+			);
+	}
+
 	++portal_block_count_;
 }
 
@@ -938,6 +987,18 @@ sanguis::server::world::object::remove_portal_blocker()
 	);
 
 	--portal_block_count_;
+
+	if(
+		portal_block_count_
+		==
+		0u
+	)
+		for(
+			auto const &portal_blocker
+			:
+			portal_blockers_
+		)
+			portal_blocker->kill();
 }
 
 sanguis::server::world::difficulty const

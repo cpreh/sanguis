@@ -44,6 +44,13 @@ sanguis::server::entities::doodad::kill()
 		true;
 }
 
+bool
+sanguis::server::entities::doodad::dead() const
+{
+	return
+		dead_;
+}
+
 sanguis::messages::server::unique_ptr
 sanguis::server::entities::doodad::add_message(
 	sanguis::server::player_id,
