@@ -64,6 +64,10 @@ protected:
 
 	sanguis::creator::enemy_type
 	enemy_type() const;
+
+	void
+	remove()
+	override;
 private:
 	sanguis::messages::server::unique_ptr
 	add_message(
@@ -74,10 +78,6 @@ private:
 
 	sanguis::collision::world::body_group
 	collision_group() const
-	override;
-
-	void
-	remove()
 	override;
 
 	virtual

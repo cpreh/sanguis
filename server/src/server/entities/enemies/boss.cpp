@@ -3,6 +3,7 @@
 #include <sanguis/server/entities/enemies/boss.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
 #include <sanguis/server/entities/enemies/parameters.hpp>
+#include <sanguis/server/environment/object.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -29,6 +30,20 @@ sanguis::server::entities::enemies::boss::boss(
 
 sanguis::server::entities::enemies::boss::~boss()
 {
+}
+
+void
+sanguis::server::entities::enemies::boss::on_create()
+{
+	this->environment()->add_portal_blocker();
+}
+
+void
+sanguis::server::entities::enemies::boss::remove()
+{
+	sanguis::server::entities::enemies::enemy::remove();
+
+	this->environment()->remove_portal_blocker();
 }
 
 sanguis::messages::types::string const &

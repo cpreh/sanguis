@@ -195,7 +195,10 @@ sanguis::server::world::object::object(
 	pickup_spawner_(
 		_parameters.random_generator(),
 		this->environment()
-	)
+	),
+	portal_block_count_{
+		0u
+	}
 {
 	this->insert_spawns(
 		_generated_world.spawns(),
@@ -858,6 +861,18 @@ sanguis::server::world::object::request_transfer(
 			sanguis::creator::opening_type
 		>()
 	)
+	{
+		if(
+			opening_type
+			==
+			sanguis::creator::opening_type::exit
+			&&
+			portal_block_count_
+			>
+			0u
+		)
+			continue;
+
 		for(
 			sanguis::creator::opening const opening
 			:
@@ -904,6 +919,25 @@ sanguis::server::world::object::request_transfer(
 				return;
 			}
 		}
+	}
+}
+
+void
+sanguis::server::world::object::add_portal_blocker()
+{
+	++portal_block_count_;
+}
+
+void
+sanguis::server::world::object::remove_portal_blocker()
+{
+	FCPPT_ASSERT_ERROR(
+		portal_block_count_
+		>
+		0u
+	);
+
+	--portal_block_count_;
 }
 
 sanguis::server::world::difficulty const

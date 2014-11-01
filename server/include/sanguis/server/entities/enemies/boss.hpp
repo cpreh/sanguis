@@ -33,6 +33,14 @@ public:
 	~boss()
 	override;
 private:
+	void
+	on_create()
+	override;
+
+	void
+	remove()
+	override;
+
 	sanguis::messages::types::string const &
 	name() const
 	override;

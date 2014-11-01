@@ -203,6 +203,14 @@ public:
 	) = 0;
 
 	virtual
+	void
+	add_portal_blocker() = 0;
+
+	virtual
+	void
+	remove_portal_blocker() = 0;
+
+	virtual
 	sanguis::server::world::difficulty const
 	difficulty() const = 0;
 

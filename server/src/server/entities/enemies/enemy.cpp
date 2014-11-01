@@ -142,6 +142,40 @@ sanguis::server::entities::enemies::enemy::enemy_type() const
 		enemy_type_;
 }
 
+void
+sanguis::server::entities::enemies::enemy::remove()
+{
+	if(
+		spawn_owner_.get()
+	)
+		fcppt::cast::static_downcast<
+			sanguis::server::entities::spawns::spawn &
+		>(
+			*spawn_owner_.get()
+		)
+		.unregister(
+			*this
+		);
+
+	sanguis::server::environment::insert_no_result(
+		*this->environment(),
+		fcppt::make_unique_ptr<
+			sanguis::server::entities::exp_area
+		>(
+			exp_
+		),
+		sanguis::server::entities::insert_parameters_center(
+			this->center()
+		)
+	);
+
+	this->environment()->pickup_chance(
+		pickup_probability_,
+		difficulty_,
+		this->center()
+	);
+}
+
 sanguis::messages::server::unique_ptr
 sanguis::server::entities::enemies::enemy::add_message(
 	sanguis::server::player_id const,
@@ -188,38 +222,4 @@ sanguis::server::entities::enemies::enemy::collision_group() const
 {
 	return
 		sanguis::collision::world::body_group::enemy;
-}
-
-void
-sanguis::server::entities::enemies::enemy::remove()
-{
-	if(
-		spawn_owner_.get()
-	)
-		fcppt::cast::static_downcast<
-			sanguis::server::entities::spawns::spawn &
-		>(
-			*spawn_owner_.get()
-		)
-		.unregister(
-			*this
-		);
-
-	sanguis::server::environment::insert_no_result(
-		*this->environment(),
-		fcppt::make_unique_ptr<
-			sanguis::server::entities::exp_area
-		>(
-			exp_
-		),
-		sanguis::server::entities::insert_parameters_center(
-			this->center()
-		)
-	);
-
-	this->environment()->pickup_chance(
-		pickup_probability_,
-		difficulty_,
-		this->center()
-	);
 }

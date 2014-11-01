@@ -252,6 +252,14 @@ public:
 	)
 	override;
 
+	void
+	add_portal_blocker()
+	override;
+
+	void
+	remove_portal_blocker()
+	override;
+
 	sanguis::server::world::difficulty const
 	difficulty() const
 	override;
@@ -348,6 +356,8 @@ private:
 	sanguis::server::world::entity_vector server_entities_;
 
 	sanguis::server::world::pickup_spawner pickup_spawner_;
+
+	unsigned portal_block_count_;
 };
 
 }
