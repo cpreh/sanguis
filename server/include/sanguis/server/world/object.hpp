@@ -295,7 +295,7 @@ public:
 	void
 	add_sight_range(
 		sanguis::server::player_id,
-		sanguis::entity_id,
+		sanguis::server::entities::with_id const &,
 		sanguis::collision::world::created
 	)
 	override;
@@ -303,7 +303,7 @@ public:
 	void
 	remove_sight_range(
 		sanguis::server::player_id,
-		sanguis::entity_id
+		sanguis::server::entities::with_id const &
 	)
 	override;
 
@@ -336,11 +336,6 @@ private:
 	insert_destructibles(
 		sanguis::creator::destructible_container const &,
 		sanguis::random_generator &
-	);
-
-	sanguis::server::entities::with_id &
-	entity(
-		sanguis::entity_id
 	);
 
 	sanguis::world_id const id_;

@@ -1032,21 +1032,19 @@ sanguis::server::world::object::load_context() const
 void
 sanguis::server::world::object::add_sight_range(
 	sanguis::server::player_id const _player_id,
-	sanguis::entity_id const _target_id,
+	sanguis::server::entities::with_id const &_target,
 	sanguis::collision::world::created const _created
 )
 {
 	sight_ranges_[
 		_player_id
 	].add(
-		_target_id
+		_target.id()
 	);
 
 	this->send_player_specific(
 		_player_id,
-		*this->entity(
-			_target_id
-		).add_message(
+		*_target.add_message(
 			_player_id,
 			_created
 		)
@@ -1056,7 +1054,7 @@ sanguis::server::world::object::add_sight_range(
 void
 sanguis::server::world::object::remove_sight_range(
 	sanguis::server::player_id const _player_id,
-	sanguis::entity_id const _target_id
+	sanguis::server::entities::with_id const &_target
 )
 {
 	{
@@ -1073,7 +1071,7 @@ sanguis::server::world::object::remove_sight_range(
 		);
 
 		sight_it->second.remove(
-			_target_id
+			_target.id()
 		);
 
 		// If the player sees nothing here, he must have been deleted
@@ -1090,16 +1088,14 @@ sanguis::server::world::object::remove_sight_range(
 	// dead instead
 
 	if(
-		this->entity(
-			_target_id
-		).dead()
+		_target.dead()
 	)
 		this->send_player_specific(
 			_player_id,
 			sanguis::messages::server::create(
 				sanguis::messages::server::die(
 					sanguis::messages::roles::entity_id{} =
-						_target_id
+						_target.id()
 				)
 			)
 		);
@@ -1109,7 +1105,7 @@ sanguis::server::world::object::remove_sight_range(
 			sanguis::messages::server::create(
 				sanguis::messages::server::remove(
 					sanguis::messages::roles::entity_id{} =
-						_target_id
+						_target.id()
 				)
 			)
 		);
@@ -1199,25 +1195,4 @@ sanguis::server::world::object::insert_destructibles(
 				difficulty_
 			)
 		);
-}
-
-sanguis::server::entities::with_id &
-sanguis::server::world::object::entity(
-	sanguis::entity_id const _id
-)
-{
-	sanguis::server::world::entity_map::iterator const it(
-		entities_.find(
-			_id
-		)
-	);
-
-	FCPPT_ASSERT_ERROR(
-		it
-		!=
-		entities_.end()
-	);
-
-	return
-		*it->second;
 }

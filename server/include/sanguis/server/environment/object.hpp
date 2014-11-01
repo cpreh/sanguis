@@ -24,6 +24,7 @@
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
 #include <sanguis/server/entities/optional_base_ref_fwd.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/entities/with_id_fwd.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
@@ -179,7 +180,7 @@ public:
 	void
 	add_sight_range(
 		sanguis::server::player_id,
-		sanguis::entity_id,
+		sanguis::server::entities::with_id const &,
 		sanguis::collision::world::created
 	) = 0;
 
@@ -187,7 +188,7 @@ public:
 	void
 	remove_sight_range(
 		sanguis::server::player_id,
-		sanguis::entity_id
+		sanguis::server::entities::with_id const &
 	) = 0;
 
 	virtual

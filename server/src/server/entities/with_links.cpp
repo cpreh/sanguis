@@ -8,7 +8,6 @@ sanguis::server::entities::with_links::with_links()
 :
 	sanguis::server::entities::base(),
 	sanguis::server::entities::ifaces::with_links(),
-	sanguis::server::entities::ifaces::with_team(),
 	links_()
 {
 }

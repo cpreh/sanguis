@@ -21,6 +21,10 @@ namespace world
 typedef
 boost::mpl::map<
 	sanguis::collision::aux_::world::body_ghost_group_pair<
+		sanguis::collision::world::body_group::doodad,
+		sanguis::collision::world::ghost_group::player_sight
+	>,
+	sanguis::collision::aux_::world::body_ghost_group_pair<
 		sanguis::collision::world::body_group::enemy,
 		sanguis::collision::world::ghost_group::player_sight
 	>,

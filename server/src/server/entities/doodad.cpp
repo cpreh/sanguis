@@ -1,5 +1,7 @@
 #include <sanguis/doodad_type.hpp>
+#include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/created.hpp>
+#include <sanguis/load/model/doodad_path.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/center.hpp>
 #include <sanguis/messages/roles/created.hpp>
@@ -9,9 +11,10 @@
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/player_id.hpp>
-#include <sanguis/server/entities/center_simple.hpp>
 #include <sanguis/server/entities/doodad.hpp>
+#include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_id.hpp>
+#include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 
 
@@ -20,10 +23,17 @@ sanguis::server::entities::doodad::doodad(
 	sanguis::doodad_type const _doodad_type
 )
 :
+	sanguis::server::entities::with_body(
+		_load_context.model_size(
+			sanguis::load::model::doodad_path(
+				_doodad_type
+			)
+		)
+	),
 	sanguis::server::entities::with_id(
 		_load_context.next_id()
 	),
-	sanguis::server::entities::center_simple(),
+	sanguis::server::entities::with_links(),
 	doodad_type_{
 		_doodad_type
 	},
@@ -49,6 +59,25 @@ sanguis::server::entities::doodad::dead() const
 {
 	return
 		dead_;
+}
+
+void
+sanguis::server::entities::doodad::update()
+{
+	sanguis::server::entities::with_body::update();
+}
+
+void
+sanguis::server::entities::doodad::destroy()
+{
+	sanguis::server::entities::with_body::destroy();
+}
+
+sanguis::collision::world::body_group
+sanguis::server::entities::doodad::collision_group() const
+{
+	return
+		sanguis::collision::world::body_group::doodad;
 }
 
 sanguis::messages::server::unique_ptr

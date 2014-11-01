@@ -46,6 +46,7 @@ sanguis::creator::generate(
 		)(
 			sanguis::creator::aux_::parameters(
 				gen,
+				_parameters.spawn_boss(),
 				_parameters.opening_count_array()
 			)
 		)

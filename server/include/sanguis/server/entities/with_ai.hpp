@@ -54,11 +54,11 @@ protected:
 	void
 	update()
 	override;
-private:
+
 	void
 	on_create()
 	override;
-
+private:
 	sanguis::diff_timer update_timer_;
 
 	sanguis::server::ai::create_function const create_ai_;

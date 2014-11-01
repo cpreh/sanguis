@@ -62,7 +62,7 @@ sanguis::server::auras::update_sight::enter(
 		)
 		{
 			add_(
-				_with_id.id(),
+				_with_id,
 				_created
 			);
 		}
@@ -87,7 +87,7 @@ sanguis::server::auras::update_sight::leave(
 		)
 		{
 			remove_(
-				_with_id.id()
+				_with_id
 			);
 		}
 	);

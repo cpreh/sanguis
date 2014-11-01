@@ -130,13 +130,13 @@ private:
 
 	void
 	add_sight_range(
-		sanguis::entity_id,
+		sanguis::server::entities::with_id const &,
 		sanguis::collision::world::created
 	);
 
 	void
 	remove_sight_range(
-		sanguis::entity_id
+		sanguis::server::entities::with_id const &
 	);
 
 	void

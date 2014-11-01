@@ -94,6 +94,7 @@ set(
 	src/aux_/normal_generator_vector.cpp
 	src/aux_/parameters.cpp
 	src/aux_/perimeter_to_coords.cpp
+	src/aux_/place_boss.cpp
 	src/aux_/place_destructibles.cpp
 	src/aux_/place_openings.cpp
 	src/aux_/place_spawners.cpp
@@ -132,6 +133,7 @@ set(
 	src/include/sanguis/creator/aux_/parameters.hpp
 	src/include/sanguis/creator/aux_/parameters_fwd.hpp
 	src/include/sanguis/creator/aux_/perimeter_to_coords.hpp
+	src/include/sanguis/creator/aux_/place_boss.hpp
 	src/include/sanguis/creator/aux_/place_destructibles.hpp
 	src/include/sanguis/creator/aux_/place_openings.hpp
 	src/include/sanguis/creator/aux_/place_spawners.hpp

@@ -14,6 +14,7 @@
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
+#include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -30,7 +31,8 @@ class destructible
 	public sanguis::server::entities::with_body,
 	public sanguis::server::entities::with_id,
 	public sanguis::server::entities::with_health,
-	public sanguis::server::entities::with_links
+	public sanguis::server::entities::with_links,
+	public virtual sanguis::server::entities::ifaces::with_team
 {
 	FCPPT_NONCOPYABLE(
 		destructible

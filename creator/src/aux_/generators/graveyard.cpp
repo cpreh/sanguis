@@ -174,6 +174,7 @@ sanguis::creator::aux_::generators::graveyard(
 				sanguis::creator::enemy_type::skeleton,
 				sanguis::creator::enemy_type::ghost
 			},
+			_parameters.spawn_boss(),
 			sanguis::creator::tile::grave1
 		)
 	};

@@ -19,7 +19,7 @@
 #include <sanguis/creator/aux_/enemy_type_container.hpp>
 #include <sanguis/creator/aux_/filled_rect.hpp>
 #include <sanguis/creator/aux_/parameters.hpp>
-#include <sanguis/creator/aux_/place_spawners.hpp>
+#include <sanguis/creator/aux_/place_boss.hpp>
 #include <sanguis/creator/aux_/set_opening_tiles.hpp>
 #include <sanguis/creator/aux_/rect.hpp>
 #include <sanguis/creator/aux_/result.hpp>
@@ -652,6 +652,15 @@ sanguis::creator::aux_::generators::rooms(
 
 	sanguis::creator::spawn_container
 	spawners{};
+
+	if(
+		_parameters.spawn_boss().get()
+	)
+		spawners.push_back(
+			sanguis::creator::aux_::place_boss(
+				openings
+			)
+		);
 
 	sanguis::creator::aux_::enemy_type_container const
 	enemy_types{

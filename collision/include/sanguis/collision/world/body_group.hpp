@@ -13,6 +13,7 @@ namespace world
 
 enum class body_group
 {
+	doodad,
 	enemy,
 	pickup,
 	projectile_enemy,

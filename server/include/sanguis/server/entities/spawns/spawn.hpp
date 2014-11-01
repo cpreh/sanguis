@@ -6,7 +6,6 @@
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
-#include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_links.hpp>
@@ -58,10 +57,6 @@ private:
 
 	sanguis::server::angle const
 	angle() const
-	override;
-
-	sanguis::server::team
-	team() const
 	override;
 
 	bool

@@ -2,12 +2,15 @@
 #define SANGUIS_SERVER_ENTITIES_DOODAD_HPP_INCLUDED
 
 #include <sanguis/doodad_type.hpp>
+#include <sanguis/collision/world/body_group_fwd.hpp>
 #include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/player_id_fwd.hpp>
-#include <sanguis/server/entities/center_simple.hpp>
 #include <sanguis/server/entities/doodad_fwd.hpp>
+#include <sanguis/server/entities/with_body.hpp>
+#include <sanguis/server/entities/with_ghosts.hpp>
 #include <sanguis/server/entities/with_id.hpp>
+#include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -21,8 +24,9 @@ namespace entities
 
 class doodad
 :
+	public sanguis::server::entities::with_body,
 	public sanguis::server::entities::with_id,
-	public sanguis::server::entities::center_simple
+	public sanguis::server::entities::with_links
 {
 	FCPPT_NONCOPYABLE(
 		doodad
@@ -42,7 +46,19 @@ public:
 	bool
 	dead() const
 	override;
+
+	void
+	update()
+	override;
+
+	void
+	destroy()
+	override;
 private:
+	sanguis::collision::world::body_group
+	collision_group() const
+	override;
+
 	sanguis::messages::server::unique_ptr
 	add_message(
 		sanguis::server::player_id,

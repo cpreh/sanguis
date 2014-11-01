@@ -6,6 +6,7 @@
 #include <sanguis/creator/opening_container_array.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/size_type.hpp>
+#include <sanguis/creator/spawn_boss.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/spawn_pos.hpp>
 #include <sanguis/creator/spawn_type.hpp>
@@ -15,6 +16,7 @@
 #include <sanguis/creator/aux_/enemy_type_container.hpp>
 #include <sanguis/creator/aux_/log.hpp>
 #include <sanguis/creator/aux_/optional_pos.hpp>
+#include <sanguis/creator/aux_/place_boss.hpp>
 #include <sanguis/creator/aux_/place_spawners.hpp>
 #include <sanguis/creator/aux_/random/generator.hpp>
 #include <sanguis/creator/aux_/random/uniform_int_wrapper_impl.hpp>
@@ -36,6 +38,7 @@ sanguis::creator::aux_::place_spawners(
 	sanguis::creator::count const _spawner_count,
 	sanguis::creator::aux_::random::generator &_generator,
 	sanguis::creator::aux_::enemy_type_container const &_enemy_types,
+	sanguis::creator::spawn_boss const _spawn_boss,
 	sanguis::creator::tile const _spawner_tile
 )
 {
@@ -57,6 +60,15 @@ sanguis::creator::aux_::place_spawners(
 
 	sanguis::creator::spawn_container
 	spawners;
+
+	if(
+		_spawn_boss.get()
+	)
+		spawners.push_back(
+			sanguis::creator::aux_::place_boss(
+				_openings
+			)
+		);
 
 	sanguis::creator::spawn_container::size_type
 	current_spawners{

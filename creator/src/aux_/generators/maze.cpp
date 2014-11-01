@@ -64,7 +64,8 @@ sanguis::creator::aux_::generators::maze(
 				sanguis::creator::enemy_type::skeleton,
 				sanguis::creator::enemy_type::ghost,
 				sanguis::creator::enemy_type::maggot
-			}
+			},
+			_parameters.spawn_boss()
 		)
 	};
 

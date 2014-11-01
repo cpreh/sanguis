@@ -1,5 +1,6 @@
 #include <sanguis/enemy_kind.hpp>
 #include <sanguis/messages/types/string.hpp>
+#include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/enemies/boss.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
 #include <sanguis/server/entities/enemies/parameters.hpp>
@@ -36,6 +37,8 @@ void
 sanguis::server::entities::enemies::boss::on_create()
 {
 	this->environment()->add_portal_blocker();
+
+	sanguis::server::entities::with_ai::on_create();
 }
 
 void

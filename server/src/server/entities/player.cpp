@@ -1,5 +1,4 @@
 #include <sanguis/duration.hpp>
-#include <sanguis/entity_id.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/perk_type.hpp>
 #include <sanguis/player_name.hpp>
@@ -463,25 +462,25 @@ sanguis::server::entities::player::update_speed()
 
 void
 sanguis::server::entities::player::add_sight_range(
-	sanguis::entity_id const _entity_id,
+	sanguis::server::entities::with_id const &_entity,
 	sanguis::collision::world::created const _created
 )
 {
 	this->environment()->add_sight_range(
 		this->player_id(),
-		_entity_id,
+		_entity,
 		_created
 	);
 }
 
 void
 sanguis::server::entities::player::remove_sight_range(
-	sanguis::entity_id const _entity_id
+	sanguis::server::entities::with_id const &_entity
 )
 {
 	this->environment()->remove_sight_range(
 		this->player_id(),
-		_entity_id
+		_entity
 	);
 }
 
