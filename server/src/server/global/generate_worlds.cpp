@@ -170,7 +170,11 @@ sanguis::server::global::generate_worlds(
 				),
 				// TODO
 				sanguis::creator::spawn_boss{
-					false
+					world_id
+					==
+					sanguis::world_id{
+						1u
+					}
 				},
 				world_id,
 				difficulty++ // TODO: How to scale this?

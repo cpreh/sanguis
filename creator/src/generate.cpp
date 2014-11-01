@@ -1,6 +1,8 @@
 #include <sanguis/creator/exception.hpp>
+#include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/generate.hpp>
 #include <sanguis/creator/opening_count.hpp>
+#include <sanguis/creator/spawn.hpp>
 #include <sanguis/creator/top_parameters.hpp>
 #include <sanguis/creator/top_result.hpp>
 #include <sanguis/creator/aux_/generator_map.hpp>
@@ -9,6 +11,7 @@
 #include <sanguis/creator/aux_/random/generator.hpp>
 #include <fcppt/make_enum_range.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/algorithm/contains_if.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/container/find_exn.hpp>
 #include <fcppt/math/dim/comparison.hpp>
@@ -70,6 +73,24 @@ sanguis::creator::generate(
 		==
 		result.background_grid().size()
 	);
+
+	if(
+		_parameters.spawn_boss().get()
+	)
+		FCPPT_ASSERT_ERROR(
+			fcppt::algorithm::contains_if(
+				result.spawns(),
+				[](
+					sanguis::creator::spawn const &_spawn
+				)
+				{
+					return
+						_spawn.enemy_kind()
+						==
+						sanguis::creator::enemy_kind::boss;
+				}
+			)
+		);
 
 	return
 		sanguis::creator::top_result(
