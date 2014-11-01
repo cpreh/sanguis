@@ -1,0 +1,34 @@
+{
+	"parts" :
+		{
+			"default" :
+				{
+					"weapon_categories" :
+						{
+							"none" :
+								{
+									"animations" :
+										{
+											"none" :
+												{
+													"texture" :
+														"0.png",
+													"range" :
+														[
+															0,
+															1
+														]
+												}
+										}
+								}
+						}
+				}
+		},
+	"delay" :
+		40,
+	"cell_dimensions" :
+		[
+			96,
+			96
+		]
+}
