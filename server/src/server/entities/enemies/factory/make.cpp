@@ -12,11 +12,13 @@
 #include <sanguis/server/entities/enemies/normal.hpp>
 #include <sanguis/server/entities/enemies/parameters.hpp>
 #include <sanguis/server/entities/enemies/factory/make.hpp>
+#include <sanguis/server/entities/enemies/factory/make_boss.hpp>
 #include <sanguis/server/entities/enemies/factory/make_special.hpp>
 #include <sanguis/server/entities/enemies/factory/parameters.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -56,54 +58,76 @@ sanguis::server::entities::enemies::factory::make(
 		)
 	);
 
-	typedef
-	fcppt::random::distribution::basic<
-		fcppt::random::distribution::parameters::uniform_real<
-			float
-		>
-	>
-	distribution_type;
-
-	distribution_type distribution(
-		distribution_type::param_type(
-			distribution_type::param_type::min(
-				0.f
-			),
-			distribution_type::param_type::sup(
-				1.f
-			)
-		)
-	);
-
-	sanguis::server::entities::enemies::is_unique const is_unique{
+	switch(
 		_parameters.enemy_kind()
-		==
-		sanguis::creator::enemy_kind::unique
-	};
+	)
+	{
+	case sanguis::creator::enemy_kind::normal:
+		{
+			typedef
+			fcppt::random::distribution::basic<
+				fcppt::random::distribution::parameters::uniform_real<
+					float
+				>
+			>
+			distribution_type;
 
-	return
-		is_unique.get()
-		||
-		distribution(
-			_parameters.random_generator()
-		)
-		<
-		_parameters.special_chance().get()
-		?
+			distribution_type distribution(
+				distribution_type::param_type(
+					distribution_type::param_type::min(
+						0.f
+					),
+					distribution_type::param_type::sup(
+						1.f
+					)
+				)
+			);
+
+			return
+				distribution(
+					_parameters.random_generator()
+				)
+				<
+				_parameters.special_chance().get()
+				?
+					sanguis::server::entities::enemies::factory::make_special(
+						_parameters.random_generator(),
+						std::move(
+							parameters
+						),
+						sanguis::server::entities::enemies::is_unique{
+							false
+						}
+					)
+				:
+					fcppt::make_unique_ptr<
+						sanguis::server::entities::enemies::normal
+					>(
+						std::move(
+							parameters
+						)
+					)
+				;
+		}
+	case sanguis::creator::enemy_kind::unique:
+		return
 			sanguis::server::entities::enemies::factory::make_special(
 				_parameters.random_generator(),
 				std::move(
 					parameters
 				),
-				is_unique
-			)
-		:
-			fcppt::make_unique_ptr<
-				sanguis::server::entities::enemies::normal
-			>(
+				sanguis::server::entities::enemies::is_unique{
+					true
+				}
+			);
+	case sanguis::creator::enemy_kind::boss:
+		return
+			sanguis::server::entities::enemies::factory::make_boss(
 				std::move(
 					parameters
 				)
-			)
-		;
+			);
+	}
+
+	FCPPT_ASSERT_UNREACHABLE;
 }

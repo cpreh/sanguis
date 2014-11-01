@@ -35,6 +35,9 @@ sanguis::client::draw2d::entities::enemy_color(
 	case sanguis::enemy_kind::unique:
 		return
 			sge::image::color::predef::gold();
+	case sanguis::enemy_kind::boss:
+		return
+			sge::image::color::predef::red();
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;

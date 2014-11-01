@@ -182,6 +182,7 @@ set(
 	include/sanguis/server/entities/enemies/attribute_container.hpp
 	include/sanguis/server/entities/enemies/attribute_fwd.hpp
 	include/sanguis/server/entities/enemies/base_difficulty.hpp
+	include/sanguis/server/entities/enemies/boss.hpp
 	include/sanguis/server/entities/enemies/create.hpp
 	include/sanguis/server/entities/enemies/difficulty.hpp
 	include/sanguis/server/entities/enemies/difficulty_value.hpp
@@ -190,6 +191,7 @@ set(
 	include/sanguis/server/entities/enemies/factory/ghost.hpp
 	include/sanguis/server/entities/enemies/factory/maggot.hpp
 	include/sanguis/server/entities/enemies/factory/make.hpp
+	include/sanguis/server/entities/enemies/factory/make_boss.hpp
 	include/sanguis/server/entities/enemies/factory/make_modifiers.hpp
 	include/sanguis/server/entities/enemies/factory/make_skills.hpp
 	include/sanguis/server/entities/enemies/factory/make_special.hpp
@@ -768,11 +770,13 @@ set(
 	src/server/entities/doodad.cpp
 	src/server/entities/enemies/attribute.cpp
 	src/server/entities/enemies/base_difficulty.cpp
+	src/server/entities/enemies/boss.cpp
 	src/server/entities/enemies/create.cpp
 	src/server/entities/enemies/enemy.cpp
 	src/server/entities/enemies/factory/ghost.cpp
 	src/server/entities/enemies/factory/maggot.cpp
 	src/server/entities/enemies/factory/make.cpp
+	src/server/entities/enemies/factory/make_boss.cpp
 	src/server/entities/enemies/factory/make_modifiers.cpp
 	src/server/entities/enemies/factory/make_skills.cpp
 	src/server/entities/enemies/factory/make_special.cpp

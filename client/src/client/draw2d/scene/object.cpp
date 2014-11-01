@@ -111,6 +111,7 @@
 #include <sanguis/messages/roles/pickup_type.hpp>
 #include <sanguis/messages/roles/primary_weapon.hpp>
 #include <sanguis/messages/roles/projectile_type.hpp>
+#include <sanguis/messages/roles/spawn_boss.hpp>
 #include <sanguis/messages/roles/seed.hpp>
 #include <sanguis/messages/roles/speed.hpp>
 #include <sanguis/messages/roles/weapon_status.hpp>
