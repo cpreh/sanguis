@@ -26,6 +26,7 @@
 #include <sanguis/client/draw2d/scene/background_fwd.hpp>
 #include <sanguis/client/draw2d/scene/configure_entity_fwd.hpp>
 #include <sanguis/client/draw2d/scene/control_environment_fwd.hpp>
+#include <sanguis/client/draw2d/scene/light_fwd.hpp>
 #include <sanguis/client/draw2d/scene/object_fwd.hpp>
 #include <sanguis/client/draw2d/scene/hover/base_unique_ptr.hpp>
 #include <sanguis/client/draw2d/scene/world/object_fwd.hpp>
@@ -424,6 +425,10 @@ private:
 	std::unique_ptr<
 		sanguis::client::draw2d::scene::background
 	> const background_;
+
+	std::unique_ptr<
+		sanguis::client::draw2d::scene::light
+	> const light_;
 
 	typedef
 	fcppt::optional<

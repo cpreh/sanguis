@@ -59,6 +59,7 @@
 #include <sanguis/client/draw2d/scene/configure_entity.hpp>
 #include <sanguis/client/draw2d/scene/control_environment.hpp>
 #include <sanguis/client/draw2d/scene/health_pair.hpp>
+#include <sanguis/client/draw2d/scene/light.hpp>
 #include <sanguis/client/draw2d/scene/object.hpp>
 #include <sanguis/client/draw2d/scene/translation.hpp>
 #include <sanguis/client/draw2d/scene/hover/base.hpp>
@@ -299,6 +300,15 @@ sanguis::client::draw2d::scene::object::object(
 			_viewport_manager
 		)
 	),
+	light_(
+		fcppt::make_unique_ptr<
+			sanguis::client::draw2d::scene::light
+		>(
+			_resources,
+			client_system_,
+			_viewport_manager
+		)
+	),
 	hover_(),
 	viewport_connection_(
 		_viewport_manager.manage_callback(
@@ -526,6 +536,11 @@ sanguis::client::draw2d::scene::object::draw(
 
 	this->render_systems(
 		_render_context
+	);
+
+	light_->render(
+		_render_context,
+		*player_center_
 	);
 
 	fcppt::maybe_void(

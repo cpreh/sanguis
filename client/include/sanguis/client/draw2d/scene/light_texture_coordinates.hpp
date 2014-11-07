@@ -1,0 +1,29 @@
+#ifndef SANGUIS_CLIENT_DRAW2D_SCENE_LIGHT_TEXTURE_COORDINATES_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_SCENE_LIGHT_TEXTURE_COORDINATES_HPP_INCLUDED
+
+#include <sanguis/client/draw2d/sprite/client/texture_coordinates.hpp>
+#include <sge/renderer/device/core_fwd.hpp>
+#include <sge/texture/part_fwd.hpp>
+
+
+namespace sanguis
+{
+namespace client
+{
+namespace draw2d
+{
+namespace scene
+{
+
+sanguis::client::draw2d::sprite::client::texture_coordinates const
+light_texture_coordinates(
+	sge::renderer::device::core &,
+	sge::texture::part const &
+);
+
+}
+}
+}
+}
+
+#endif

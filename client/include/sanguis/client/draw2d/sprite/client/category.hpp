@@ -17,7 +17,8 @@ namespace client
 
 enum class category
 {
-	background
+	background,
+	light
 };
 
 }

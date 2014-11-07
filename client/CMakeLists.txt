@@ -227,6 +227,9 @@ set(
 	include/sanguis/client/draw2d/scene/hover/weapon_attribute_diff_fwd.hpp
 	include/sanguis/client/draw2d/scene/hover/weapon_attribute_fwd.hpp
 	include/sanguis/client/draw2d/scene/hover/weapon_attribute_unique_ptr.hpp
+	include/sanguis/client/draw2d/scene/light.hpp
+	include/sanguis/client/draw2d/scene/light_fwd.hpp
+	include/sanguis/client/draw2d/scene/light_texture_coordinates.hpp
 	include/sanguis/client/draw2d/scene/object.hpp
 	include/sanguis/client/draw2d/scene/object_fwd.hpp
 	include/sanguis/client/draw2d/scene/translation.hpp
@@ -734,6 +737,8 @@ set(
 	src/client/draw2d/scene/hover/parameters.cpp
 	src/client/draw2d/scene/hover/weapon.cpp
 	src/client/draw2d/scene/hover/weapon_attribute.cpp
+	src/client/draw2d/scene/light.cpp
+	src/client/draw2d/scene/light_texture_coordinates.cpp
 	src/client/draw2d/scene/object.cpp
 	src/client/draw2d/scene/translation.cpp
 	src/client/draw2d/scene/world/batch.cpp
