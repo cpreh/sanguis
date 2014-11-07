@@ -13,8 +13,6 @@ namespace draw2d
 
 enum class z_ordering
 {
-	background,
-	corpses,
 	ground,
 	destructible,
 	pickup,
@@ -23,7 +21,8 @@ enum class z_ordering
 	player_lower,
 	bullet,
 	player_upper,
-	flare
+	flare,
+	fcppt_maximum = flare
 };
 
 }

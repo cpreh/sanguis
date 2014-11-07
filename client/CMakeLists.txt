@@ -300,6 +300,8 @@ set(
 	include/sanguis/client/draw2d/sprite/buffers_impl.hpp
 	include/sanguis/client/draw2d/sprite/center.hpp
 	include/sanguis/client/draw2d/sprite/center_fwd.hpp
+	include/sanguis/client/draw2d/sprite/client/category.hpp
+	include/sanguis/client/draw2d/sprite/client/category_fwd.hpp
 	include/sanguis/client/draw2d/sprite/client/choices.hpp
 	include/sanguis/client/draw2d/sprite/client/choices_fwd.hpp
 	include/sanguis/client/draw2d/sprite/client/object.hpp
@@ -343,8 +345,6 @@ set(
 	include/sanguis/client/draw2d/sprite/normal/white.hpp
 	include/sanguis/client/draw2d/sprite/optional_dim.hpp
 	include/sanguis/client/draw2d/sprite/optional_dim_fwd.hpp
-	include/sanguis/client/draw2d/sprite/order.hpp
-	include/sanguis/client/draw2d/sprite/order_fwd.hpp
 	include/sanguis/client/draw2d/sprite/point.hpp
 	include/sanguis/client/draw2d/sprite/point_fwd.hpp
 	include/sanguis/client/draw2d/sprite/rotation.hpp

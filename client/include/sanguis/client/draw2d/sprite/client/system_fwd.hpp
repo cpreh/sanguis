@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_SPRITE_CLIENT_SYSTEM_FWD_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/sprite/system_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/client/category_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/client/choices_fwd.hpp>
 
 
@@ -16,9 +17,12 @@ namespace sprite
 namespace client
 {
 
-typedef sanguis::client::draw2d::sprite::system<
-	sanguis::client::draw2d::sprite::client::choices
-> system;
+typedef
+sanguis::client::draw2d::sprite::system<
+	sanguis::client::draw2d::sprite::client::choices,
+	sanguis::client::draw2d::sprite::client::category
+>
+system;
 
 }
 }

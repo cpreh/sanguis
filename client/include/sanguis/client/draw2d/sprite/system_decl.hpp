@@ -2,7 +2,6 @@
 #define SANGUIS_CLIENT_DRAW2D_SPRITE_SYSTEM_DECL_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/sprite/buffers_decl.hpp>
-#include <sanguis/client/draw2d/sprite/order.hpp>
 #include <sanguis/client/draw2d/sprite/state.hpp>
 #include <sanguis/client/draw2d/sprite/system_fwd.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
@@ -21,7 +20,8 @@ namespace sprite
 {
 
 template<
-	typename Choices
+	typename Choices,
+	typename Category
 >
 class system
 {
@@ -29,12 +29,17 @@ class system
 		system
 	);
 
-	typedef sge::sprite::intrusive::ordered::collection<
+	typedef
+	sge::sprite::intrusive::ordered::collection<
 		Choices,
-		sanguis::client::draw2d::sprite::order
-	> collection;
+		Category
+	>
+	collection;
 
-	typedef typename collection::connection_type connection_type;
+	typedef
+	typename
+	collection::connection_type
+	connection_type;
 public:
 	system(
 		sge::renderer::device::core &,
@@ -46,13 +51,13 @@ public:
 
 	connection_type &
 	connection(
-		sanguis::client::draw2d::sprite::order
+		Category
 	);
 
 	void
 	render(
 		sge::renderer::context::core &,
-		sanguis::client::draw2d::sprite::order
+		Category
 	);
 
 	sge::renderer::device::core &

@@ -2,7 +2,6 @@
 #define SANGUIS_CLIENT_DRAW2D_SPRITE_SYSTEM_IMPL_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/sprite/buffers_impl.hpp>
-#include <sanguis/client/draw2d/sprite/order.hpp>
 #include <sanguis/client/draw2d/sprite/state.hpp>
 #include <sanguis/client/draw2d/sprite/state_choices.hpp>
 #include <sanguis/client/draw2d/sprite/system_decl.hpp>
@@ -21,10 +20,12 @@
 
 
 template<
-	typename Choices
+	typename Choices,
+	typename Category
 >
 sanguis::client::draw2d::sprite::system<
-	Choices
+	Choices,
+	Category
 >::system(
 	sge::renderer::device::core &_renderer,
 	sanguis::client::draw2d::sprite::state &_state
@@ -42,42 +43,49 @@ sanguis::client::draw2d::sprite::system<
 }
 
 template<
-	typename Choices
+	typename Choices,
+	typename Category
 >
 sanguis::client::draw2d::sprite::system<
-	Choices
+	Choices,
+	Category
 >::~system()
 {
 }
 
 template<
-	typename Choices
+	typename Choices,
+	typename Category
 >
 typename
 sanguis::client::draw2d::sprite::system<
-	Choices
+	Choices,
+	Category
 >::connection_type &
 sanguis::client::draw2d::sprite::system<
-	Choices
+	Choices,
+	Category
 >::connection(
-	sanguis::client::draw2d::sprite::order const _order
+	Category const _category
 )
 {
 	return
 		collection_.connection(
-			_order
+			_category
 		);
 }
 
 template<
-	typename Choices
+	typename Choices,
+	typename Category
 >
 void
 sanguis::client::draw2d::sprite::system<
-	Choices
+	Choices,
+	Category
 >::render(
 	sge::renderer::context::core &_render_context,
-	sanguis::client::draw2d::sprite::order const _order
+	Category const _category
 )
 {
 	sge::sprite::process::with_options<
@@ -87,7 +95,7 @@ sanguis::client::draw2d::sprite::system<
 	>(
 		_render_context,
 		collection_.get(
-			_order
+			_category
 		).range(),
 		buffers_,
 		sge::sprite::compare::default_(),
@@ -101,14 +109,17 @@ sanguis::client::draw2d::sprite::system<
 }
 
 template<
-	typename Choices
+	typename Choices,
+	typename Category
 >
 sge::renderer::device::core &
 sanguis::client::draw2d::sprite::system<
-	Choices
+	Choices,
+	Category
 >::renderer() const
 {
-	return buffers_.parameters().device();
+	return
+		buffers_.parameters().device();
 }
 
 #endif

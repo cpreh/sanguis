@@ -1,10 +1,10 @@
 #include <sanguis/client/draw2d/translation.hpp>
-#include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/scene/background.hpp>
 #include <sanguis/client/draw2d/scene/background_dim.hpp>
 #include <sanguis/client/draw2d/scene/background_texture_coordinates.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
+#include <sanguis/client/draw2d/sprite/client/category.hpp>
 #include <sanguis/client/draw2d/sprite/client/object.hpp>
 #include <sanguis/client/draw2d/sprite/client/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_decl.hpp>
@@ -43,7 +43,7 @@ sanguis::client::draw2d::scene::background::background(
 		sanguis::client::draw2d::sprite::client::parameters()
 		.connection(
 			client_system_.connection(
-				sanguis::client::draw2d::z_ordering::background
+				sanguis::client::draw2d::sprite::client::category::background
 			)
 		)
 		.pos(
@@ -104,7 +104,7 @@ sanguis::client::draw2d::scene::background::render(
 
 	client_system_.render(
 		_render_context,
-		sanguis::client::draw2d::z_ordering::background
+		sanguis::client::draw2d::sprite::client::category::background
 	);
 }
 

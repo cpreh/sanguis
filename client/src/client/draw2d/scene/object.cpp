@@ -169,7 +169,7 @@
 #include <majutsu/unwrap_role.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_enum_range_start_end.hpp>
+#include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/optional_bind.hpp>
@@ -599,10 +599,9 @@ sanguis::client::draw2d::scene::object::render_systems(
 	for(
 		auto const index
 		:
-		fcppt::make_enum_range_start_end(
-			sanguis::client::draw2d::z_ordering::corpses,
-			sanguis::client::draw2d::z_ordering::flare
-		)
+		fcppt::make_enum_range<
+			sanguis::client::draw2d::z_ordering
+		>()
 	)
 		normal_system_.render(
 			_render_context,
