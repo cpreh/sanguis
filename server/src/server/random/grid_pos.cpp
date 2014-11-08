@@ -3,6 +3,7 @@
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/size_type.hpp>
 #include <sanguis/server/random/grid_pos.hpp>
+#include <fcppt/container/grid/size_type.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
 
@@ -10,6 +11,7 @@
 sanguis::creator::pos const
 sanguis::server::random::grid_pos(
 	sanguis::random_generator &_random_generator,
+	sanguis::creator::pos const _pos,
 	sanguis::creator::dim const _dim
 )
 {
@@ -22,18 +24,25 @@ sanguis::server::random::grid_pos(
 	// TODO: Generalize this somewhere!
 
 	auto const make_distribution(
-		[](
-			sanguis::creator::size_type const _size
+		[
+			_pos,
+			_dim
+		](
+			fcppt::container::grid::size_type const _index
 		)
 		{
 			return
 				fcppt::random::distribution::make_basic(
 					random_parameters(
 						random_parameters::min(
-							0u
+							_pos[
+								_index
+							]
 						),
 						random_parameters::max(
-							_size - 1u
+							_dim[
+								_index
+							] - 1u
 						)
 					)
 				);
@@ -42,13 +51,13 @@ sanguis::server::random::grid_pos(
 
 	auto random_x(
 		make_distribution(
-			_dim.w()
+			0
 		)
 	);
 
 	auto random_y(
 		make_distribution(
-			_dim.h()
+			1
 		)
 	);
 

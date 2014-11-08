@@ -10,11 +10,14 @@ set(
 	include/sanguis/server/ai/behavior/base_unique_ptr.hpp
 	include/sanguis/server/ai/behavior/follow_friend.hpp
 	include/sanguis/server/ai/behavior/follow_owner.hpp
+	include/sanguis/server/ai/behavior/patrol.hpp
 	include/sanguis/server/ai/behavior/status.hpp
 	include/sanguis/server/ai/behavior/status_fwd.hpp
+	include/sanguis/server/ai/behavior/stay.hpp
 	include/sanguis/server/ai/behavior/wander.hpp
 	include/sanguis/server/ai/context.hpp
 	include/sanguis/server/ai/context_fwd.hpp
+	include/sanguis/server/ai/create_boss.hpp
 	include/sanguis/server/ai/create_friend.hpp
 	include/sanguis/server/ai/create_function.hpp
 	include/sanguis/server/ai/create_simple.hpp
@@ -22,11 +25,14 @@ set(
 	include/sanguis/server/ai/create_swarm.hpp
 	include/sanguis/server/ai/entity_set.hpp
 	include/sanguis/server/ai/go_close_to_target.hpp
+	include/sanguis/server/ai/go_to_grid_pos.hpp
 	include/sanguis/server/ai/go_to_target.hpp
 	include/sanguis/server/ai/idle.hpp
 	include/sanguis/server/ai/in_range.hpp
 	include/sanguis/server/ai/is_patrolling.hpp
+	include/sanguis/server/ai/is_patrolling_fwd.hpp
 	include/sanguis/server/ai/is_visible.hpp
+	include/sanguis/server/ai/make_path.hpp
 	include/sanguis/server/ai/move_to_target.hpp
 	include/sanguis/server/ai/pathing/can_walk_diagonally.hpp
 	include/sanguis/server/ai/pathing/find_target.hpp
@@ -485,7 +491,9 @@ set(
 	include/sanguis/server/random/draw.hpp
 	include/sanguis/server/random/equal_function.hpp
 	include/sanguis/server/random/equal_function_tag.hpp
+	include/sanguis/server/random/grid_distance.hpp
 	include/sanguis/server/random/grid_pos.hpp
+	include/sanguis/server/random/grid_pos_around.hpp
 	include/sanguis/server/random/less_function.hpp
 	include/sanguis/server/random/less_function_tag.hpp
 	include/sanguis/server/random/make_upper_bound.hpp
@@ -706,15 +714,20 @@ set(
 	src/server/ai/behavior/base.cpp
 	src/server/ai/behavior/follow_friend.cpp
 	src/server/ai/behavior/follow_owner.cpp
+	src/server/ai/behavior/patrol.cpp
+	src/server/ai/behavior/stay.cpp
 	src/server/ai/behavior/wander.cpp
 	src/server/ai/context.cpp
+	src/server/ai/create_boss.cpp
 	src/server/ai/create_friend.cpp
 	src/server/ai/create_simple.cpp
 	src/server/ai/create_stationary.cpp
 	src/server/ai/create_swarm.cpp
 	src/server/ai/go_close_to_target.cpp
+	src/server/ai/go_to_grid_pos.cpp
 	src/server/ai/go_to_target.cpp
 	src/server/ai/idle.cpp
+	src/server/ai/make_path.cpp
 	src/server/ai/move_to_target.cpp
 	src/server/ai/pathing/can_walk_diagonally.cpp
 	src/server/ai/pathing/find_target.cpp
@@ -930,6 +943,7 @@ set(
 	src/server/player_id_from_args.cpp
 	src/server/player_id_from_net.cpp
 	src/server/random/grid_pos.cpp
+	src/server/random/grid_pos_around.cpp
 	src/server/send_available_perks.cpp
 	src/server/states/log_location.cpp
 	src/server/states/paused.cpp
