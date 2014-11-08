@@ -38,17 +38,17 @@ sanguis::client::draw2d::scene::light_texture_coordinates(
 		>(
 			texture_dim
 		)
-		+
-		fcppt::math::vector::fill<
-			sanguis::client::draw2d::sprite::client::texture_coordinates::value_type
-		>(
-			0.5f
-		)
 	};
 
 	return
 		sanguis::client::draw2d::sprite::client::texture_coordinates{
 			-coordinates,
 			+coordinates
+			+
+			fcppt::math::vector::fill<
+				sanguis::client::draw2d::sprite::client::texture_coordinates::value_type
+			>(
+				1.f
+			)
 		};
 }

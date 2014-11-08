@@ -19,7 +19,7 @@
 #include <sge/renderer/state/core/sampler/scoped_single.hpp>
 #include <sge/renderer/state/core/sampler/address/mode.hpp>
 #include <sge/renderer/state/core/sampler/address/mode_all.hpp>
-#include <sge/renderer/state/core/sampler/filter/default.hpp>
+#include <sge/renderer/state/core/sampler/filter/point.hpp>
 #include <sge/renderer/texture/stage.hpp>
 #include <sge/sprite/center.hpp>
 #include <sge/sprite/intrusive/connection.hpp>
@@ -85,7 +85,7 @@ sanguis::client::draw2d::scene::light::light(
 				sge::renderer::state::core::sampler::address::mode_all(
 					sge::renderer::state::core::sampler::address::mode::clamp
 				),
-				sge::renderer::state::core::sampler::filter::default_()
+				sge::renderer::state::core::sampler::filter::point()
 			}
 		)
 	},
