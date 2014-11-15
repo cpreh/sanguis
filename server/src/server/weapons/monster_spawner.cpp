@@ -20,6 +20,7 @@
 #include <sanguis/server/weapons/insert_to_attack_result.hpp>
 #include <sanguis/server/weapons/monster_spawner.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
+#include <sanguis/server/weapons/parameters.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
@@ -33,26 +34,27 @@ sanguis::server::weapons::monster_spawner::monster_spawner(
 )
 :
 	sanguis::server::weapons::weapon(
-		_random_generator,
-		sanguis::weapon_type(
-			sanguis::primary_weapon_type::pistol
-		),
-		sanguis::server::weapons::attributes::optional_accuracy(),
-		sanguis::server::weapons::range(
-			1000.f
-		),
-		sanguis::server::weapons::attributes::optional_magazine_size(),
-		sanguis::server::weapons::backswing_time(
-			sanguis::duration_second(
-				0.8f
-			)
-		),
-		sanguis::server::weapons::cast_point(
-			sanguis::duration_second(
-				0.2f
-			)
-		),
-		sanguis::server::weapons::optional_reload_time()
+		sanguis::server::weapons::parameters{
+			_random_generator, sanguis::weapon_type(
+				sanguis::primary_weapon_type::pistol
+			),
+			sanguis::server::weapons::attributes::optional_accuracy(),
+			sanguis::server::weapons::range(
+				1000.f
+			),
+			sanguis::server::weapons::attributes::optional_magazine_size(),
+			sanguis::server::weapons::backswing_time(
+				sanguis::duration_second(
+					0.8f
+				)
+			),
+			sanguis::server::weapons::cast_point(
+				sanguis::duration_second(
+					0.2f
+				)
+			),
+			sanguis::server::weapons::optional_reload_time()
+		}
 	)
 {
 }

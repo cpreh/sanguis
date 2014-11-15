@@ -15,6 +15,7 @@
 #include <sanguis/server/weapons/attack_result.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
+#include <sanguis/server/weapons/parameters.hpp>
 #include <sanguis/server/weapons/pistol.hpp>
 #include <sanguis/server/weapons/pistol_parameters.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
@@ -31,20 +32,22 @@ sanguis::server::weapons::pistol::pistol(
 )
 :
 	sanguis::server::weapons::weapon(
-		_random_generator,
-		_weapon_type,
-		sanguis::server::weapons::attributes::optional_accuracy(
-			_parameters.accuracy()
-		),
-		_parameters.range(),
-		sanguis::server::weapons::attributes::optional_magazine_size(
-			_parameters.magazine_size()
-		),
-		_parameters.backswing_time(),
-		_parameters.cast_point(),
-		sanguis::server::weapons::optional_reload_time(
-			_parameters.reload_time()
-		)
+		sanguis::server::weapons::parameters{
+			_random_generator,
+			_weapon_type,
+			sanguis::server::weapons::attributes::optional_accuracy(
+				_parameters.accuracy()
+			),
+			_parameters.range(),
+			sanguis::server::weapons::attributes::optional_magazine_size(
+				_parameters.magazine_size()
+			),
+			_parameters.backswing_time(),
+			_parameters.cast_point(),
+			sanguis::server::weapons::optional_reload_time(
+				_parameters.reload_time()
+			)
+		}
 	),
 	damage_(
 		_parameters.damage()

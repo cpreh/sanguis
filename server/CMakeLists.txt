@@ -242,6 +242,7 @@ set(
 	include/sanguis/server/entities/enemies/skills/factory/parameters_fwd.hpp
 	include/sanguis/server/entities/enemies/skills/factory/scatter.hpp
 	include/sanguis/server/entities/enemies/skills/factory/teleport.hpp
+	include/sanguis/server/entities/enemies/skills/mother_spider.hpp
 	include/sanguis/server/entities/enemies/skills/scatter.hpp
 	include/sanguis/server/entities/enemies/skills/skill.hpp
 	include/sanguis/server/entities/enemies/skills/skill_fwd.hpp
@@ -631,6 +632,8 @@ set(
 	include/sanguis/server/weapons/optional_target_fwd.hpp
 	include/sanguis/server/weapons/optional_unique_ptr.hpp
 	include/sanguis/server/weapons/optional_unique_ptr_fwd.hpp
+	include/sanguis/server/weapons/parameters.hpp
+	include/sanguis/server/weapons/parameters_fwd.hpp
 	include/sanguis/server/weapons/pistol.hpp
 	include/sanguis/server/weapons/pistol_parameters.hpp
 	include/sanguis/server/weapons/pistol_parameters_fwd.hpp
@@ -828,6 +831,7 @@ set(
 	src/server/entities/enemies/skills/factory/parameters.cpp
 	src/server/entities/enemies/skills/factory/scatter.cpp
 	src/server/entities/enemies/skills/factory/teleport.cpp
+	src/server/entities/enemies/skills/mother_spider.cpp
 	src/server/entities/enemies/skills/scatter.cpp
 	src/server/entities/enemies/skills/skill.cpp
 	src/server/entities/enemies/skills/teleport.cpp
@@ -987,6 +991,7 @@ set(
 	src/server/weapons/modifiers/random_amount.cpp
 	src/server/weapons/modifiers/random_increase.cpp
 	src/server/weapons/monster_spawner.cpp
+	src/server/weapons/parameters.cpp
 	src/server/weapons/pistol.cpp
 	src/server/weapons/pistol_parameters.cpp
 	src/server/weapons/player_start_weapon.cpp

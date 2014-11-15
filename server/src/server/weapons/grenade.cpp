@@ -17,6 +17,7 @@
 #include <sanguis/server/weapons/grenade_parameters.hpp>
 #include <sanguis/server/weapons/insert_to_attack_result.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
+#include <sanguis/server/weapons/parameters.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/attributes/make_aoe.hpp>
@@ -32,23 +33,25 @@ sanguis::server::weapons::grenade::grenade(
 )
 :
 	sanguis::server::weapons::weapon(
-		_random_generator,
-		sanguis::weapon_type(
-			sanguis::secondary_weapon_type::grenade
-		),
-		sanguis::server::weapons::attributes::optional_accuracy(),
-		_parameters.range(),
-		sanguis::server::weapons::attributes::optional_magazine_size(),
-		_parameters.backswing_time(),
-		_parameters.cast_point(),
-		// TODO: This should be a property
-		sanguis::server::weapons::optional_reload_time(
-			sanguis::server::weapons::reload_time(
-				sanguis::duration_second(
-					10.f
+		sanguis::server::weapons::parameters{
+			_random_generator,
+			sanguis::weapon_type(
+				sanguis::secondary_weapon_type::grenade
+			),
+			sanguis::server::weapons::attributes::optional_accuracy(),
+			_parameters.range(),
+			sanguis::server::weapons::attributes::optional_magazine_size(),
+			_parameters.backswing_time(),
+			_parameters.cast_point(),
+			// TODO: This should be a property
+			sanguis::server::weapons::optional_reload_time(
+				sanguis::server::weapons::reload_time(
+					sanguis::duration_second(
+						10.f
+					)
 				)
 			)
-		)
+		}
 	),
 	damage_(
 		_parameters.damage()

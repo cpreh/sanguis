@@ -12,6 +12,7 @@
 #include <sanguis/server/weapons/attack.hpp>
 #include <sanguis/server/weapons/attack_result.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
+#include <sanguis/server/weapons/parameters.hpp>
 #include <sanguis/server/weapons/rocket_launcher.hpp>
 #include <sanguis/server/weapons/rocket_launcher_parameters.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
@@ -31,24 +32,26 @@ sanguis::server::weapons::rocket_launcher::rocket_launcher(
 )
 :
 	sanguis::server::weapons::weapon(
-		_random_generator,
-		_weapon_type,
-		sanguis::server::weapons::attributes::optional_accuracy(
-			sanguis::server::weapons::attributes::accuracy(
-				_parameters.accuracy()
+		sanguis::server::weapons::parameters{
+			_random_generator,
+			_weapon_type,
+			sanguis::server::weapons::attributes::optional_accuracy(
+				sanguis::server::weapons::attributes::accuracy(
+					_parameters.accuracy()
+				)
+			),
+			_parameters.range(),
+			sanguis::server::weapons::attributes::optional_magazine_size(
+				sanguis::server::weapons::attributes::magazine_size(
+					_parameters.magazine_size()
+				)
+			),
+			_parameters.backswing_time(),
+			_parameters.cast_point(),
+			sanguis::server::weapons::optional_reload_time(
+				_parameters.reload_time()
 			)
-		),
-		_parameters.range(),
-		sanguis::server::weapons::attributes::optional_magazine_size(
-			sanguis::server::weapons::attributes::magazine_size(
-				_parameters.magazine_size()
-			)
-		),
-		_parameters.backswing_time(),
-		_parameters.cast_point(),
-		sanguis::server::weapons::optional_reload_time(
-			_parameters.reload_time()
-		)
+		}
 	),
 	damage_(
 		_parameters.damage()

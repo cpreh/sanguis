@@ -1,9 +1,9 @@
-#ifndef SANGUIS_SERVER_ENTITIES_ENEMIES_SKILLS_SKILL_HPP_INCLUDED
-#define SANGUIS_SERVER_ENTITIES_ENEMIES_SKILLS_SKILL_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_ENTITIES_ENEMIES_SKILLS_MOTHER_SPIDER_HPP_INCLUDED
+#define SANGUIS_SERVER_ENTITIES_ENEMIES_SKILLS_MOTHER_SPIDER_HPP_INCLUDED
 
 #include <sanguis/server/entities/enemies/attribute_fwd.hpp>
 #include <sanguis/server/entities/enemies/enemy_fwd.hpp>
-#include <sanguis/server/entities/enemies/skills/skill_fwd.hpp>
+#include <sanguis/server/entities/enemies/skills/skill.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -18,32 +18,28 @@ namespace enemies
 namespace skills
 {
 
-class skill
+class mother_spider
+:
+	public sanguis::server::entities::enemies::skills::skill
 {
 	FCPPT_NONCOPYABLE(
-		skill
+		mother_spider
 	);
-protected:
-	skill();
 public:
-	virtual
-	~skill() = 0;
+	mother_spider();
 
-	virtual
-	void
-	update(
-		sanguis::server::entities::enemies::enemy &
-	);
-
-	virtual
+	~mother_spider()
+	override;
+private:
 	void
 	on_die(
 		sanguis::server::entities::enemies::enemy const &
-	);
+	)
+	override;
 
-	virtual
 	sanguis::server::entities::enemies::attribute
-	attribute() const = 0;
+	attribute() const
+	override;
 };
 
 }

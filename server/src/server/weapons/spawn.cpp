@@ -15,6 +15,7 @@
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
+#include <sanguis/server/weapons/parameters.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/spawn.hpp>
 #include <sanguis/server/weapons/spawn_weapon.hpp>
@@ -38,21 +39,23 @@ sanguis::server::weapons::spawn::spawn(
 )
 :
 	sanguis::server::weapons::weapon{
-		_random_generator,
-		_weapon_type,
-		sanguis::server::weapons::attributes::optional_accuracy(),
-		_range,
-		sanguis::server::weapons::attributes::optional_magazine_size{
-			sanguis::server::weapons::attributes::magazine_size{
-				sanguis::server::weapons::magazine_size{
-					1u
+		sanguis::server::weapons::parameters{
+			_random_generator,
+			_weapon_type,
+			sanguis::server::weapons::attributes::optional_accuracy(),
+			_range,
+			sanguis::server::weapons::attributes::optional_magazine_size{
+				sanguis::server::weapons::attributes::magazine_size{
+					sanguis::server::weapons::magazine_size{
+						1u
+					}
 				}
+			},
+			_backswing_time,
+			_cast_point,
+			sanguis::server::weapons::optional_reload_time{
+				_reload_time
 			}
-		},
-		_backswing_time,
-		_cast_point,
-		sanguis::server::weapons::optional_reload_time{
-			_reload_time
 		}
 	},
 	spawn_weapon_(

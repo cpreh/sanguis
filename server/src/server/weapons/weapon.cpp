@@ -18,9 +18,11 @@
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
+#include <sanguis/server/weapons/parameters.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/target.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/weapons/attributes/accuracy.hpp>
 #include <sanguis/server/weapons/attributes/magazine_size.hpp>
 #include <sanguis/server/weapons/attributes/make.hpp>
 #include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
@@ -30,6 +32,8 @@
 #include <sanguis/server/weapons/events/shoot.hpp>
 #include <sanguis/server/weapons/events/stop.hpp>
 #include <sanguis/server/weapons/states/idle.hpp>
+#include <fcppt/from_optional.hpp>
+#include <fcppt/maybe.hpp>
 #include <fcppt/algorithm/join.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/pre.hpp>
@@ -42,44 +46,37 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::weapons::weapon::weapon(
-	sanguis::random_generator &_random_generator,
-	sanguis::weapon_type const _type,
-	sanguis::server::weapons::attributes::optional_accuracy const _accuracy,
-	sanguis::server::weapons::range const _range,
-	sanguis::server::weapons::attributes::optional_magazine_size const _magazine_size,
-	sanguis::server::weapons::backswing_time const _backswing_time,
-	sanguis::server::weapons::cast_point const _cast_point,
-	sanguis::server::weapons::optional_reload_time const _reload_time
+	sanguis::server::weapons::parameters const &_parameters
 )
 :
 	diff_clock_(),
 	random_generator_(
-		_random_generator
+		_parameters.random_generator()
 	),
-	type_(
-		_type
-	),
-	accuracy_(
-		_accuracy
-	),
-	range_(
-		_range
-	),
-	magazine_used_(
+	type_{
+		_parameters.weapon_type()
+	},
+	accuracy_{
+		_parameters.accuracy()
+	},
+	range_{
+		_parameters.range()
+	},
+	magazine_used_{
 		0u
-	),
-	magazine_size_(
-		_magazine_size
-	),
-	cast_point_(
-		_cast_point
-	),
-	backswing_time_(
-		_backswing_time
-	),
-	reload_time_(
-		_reload_time
-	),
+	},
+	magazine_size_{
+		_parameters.magazine_size()
+	},
+	cast_point_{
+		_parameters.cast_point()
+	},
+	backswing_time_{
+		_parameters.backswing_time()
+	},
+	reload_time_{
+		_parameters.reload_time()
+	},
 	owner_()
 {
 	FCPPT_ASSERT_PRE(
@@ -204,10 +201,24 @@ bool
 sanguis::server::weapons::weapon::owner_target_in_range() const
 {
 	return
-		this->owner().target()
-		&&
-		this->in_range(
-			*this->owner().target()
+		fcppt::maybe(
+			this->owner().target(),
+			[]
+			{
+				return
+					false;
+			},
+			[
+				this
+			](
+				sanguis::server::weapons::target const &_target
+			)
+			{
+				return
+					this->in_range(
+						_target
+					);
+			}
 		);
 }
 
@@ -217,40 +228,62 @@ sanguis::server::weapons::weapon::description() const
 	return
 		sanguis::weapon_description(
 			this->type(),
-			sanguis::magazine_size(
+			sanguis::magazine_size{
 				this->magazine_size().base().get()
-			),
-			sanguis::magazine_extra(
-				this->magazine_size().extra()
-				?
-					this->magazine_size().extra()->get()
-				:
-					0u
-			),
+			},
+			sanguis::magazine_extra{
+				fcppt::from_optional(
+					this->magazine_size().extra(),
+					[]
+					{
+						return
+							sanguis::server::weapons::magazine_size{
+								0u
+							};
+					}
+				).get()
+			},
 			this->magazine_remaining(),
-			this->reload_time()
-			?
-				*this->reload_time()
-			:
-				sanguis::reload_time(
-					sanguis::duration_second(
-						0.f
-					)
-				),
+			fcppt::from_optional(
+				this->reload_time(),
+				[]
+				{
+					return
+						sanguis::reload_time(
+							sanguis::duration_second(
+								0.f
+							)
+						);
+				}
+			),
 			// TODO: Make composing this more sane!
-			accuracy_
-			?
-				fcppt::algorithm::join(
-					sanguis::weapon_attribute_vector{
-						sanguis::server::weapons::attributes::make(
-							sanguis::weapon_attribute_type::accuracy,
-							*accuracy_
-						)
-					},
-					this->attributes()
+			fcppt::maybe(
+				accuracy_,
+				[
+					this
+				]
+				{
+					return
+						this->attributes();
+				},
+				[
+					this
+				](
+					sanguis::server::weapons::attributes::accuracy const _accuracy
 				)
-			:
-				this->attributes()
+				{
+					return
+						fcppt::algorithm::join(
+							sanguis::weapon_attribute_vector{
+								sanguis::server::weapons::attributes::make(
+									sanguis::weapon_attribute_type::accuracy,
+									_accuracy
+								)
+							},
+							this->attributes()
+						);
+				}
+			)
 		);
 }
 

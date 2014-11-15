@@ -18,6 +18,7 @@
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
+#include <sanguis/server/weapons/parameters_fwd.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/target_fwd.hpp>
 #include <sanguis/server/weapons/weapon_fwd.hpp>
@@ -53,15 +54,9 @@ class weapon
 		weapon
 	);
 protected:
+	explicit
 	weapon(
-		sanguis::random_generator &,
-		sanguis::weapon_type,
-		sanguis::server::weapons::attributes::optional_accuracy,
-		sanguis::server::weapons::range,
-		sanguis::server::weapons::attributes::optional_magazine_size,
-		sanguis::server::weapons::backswing_time,
-		sanguis::server::weapons::cast_point,
-		sanguis::server::weapons::optional_reload_time
+		sanguis::server::weapons::parameters const &
 	);
 public:
 	~weapon()
@@ -128,7 +123,6 @@ protected:
 
 	sanguis::server::entities::with_weapon &
 	owner() const;
-
 private:
 	void
 	weapon_status(
