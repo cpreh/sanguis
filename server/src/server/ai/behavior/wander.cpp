@@ -4,12 +4,14 @@
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/server/ai/context.hpp>
 #include <sanguis/server/ai/go_to_grid_pos.hpp>
-#include <sanguis/server/ai/is_patrolling.hpp>
 #include <sanguis/server/ai/make_path.hpp>
+#include <sanguis/server/ai/speed_factor.hpp>
 #include <sanguis/server/ai/behavior/base.hpp>
 #include <sanguis/server/ai/behavior/status.hpp>
 #include <sanguis/server/ai/behavior/wander.hpp>
 #include <sanguis/server/random/grid_pos.hpp>
+#include <fcppt/literal.hpp>
+#include <fcppt/make_literal_strong_typedef.hpp>
 
 
 sanguis::server::ai::behavior::wander::wander(
@@ -59,8 +61,10 @@ sanguis::server::ai::behavior::wander::update(
 	return
 		sanguis::server::ai::go_to_grid_pos(
 			context_,
-			sanguis::server::ai::is_patrolling{
-				true
-			}
+			fcppt::literal<
+				sanguis::server::ai::speed_factor
+			>(
+				0.3f
+			)
 		);
 }

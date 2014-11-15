@@ -3,8 +3,8 @@
 #include <sanguis/server/ai/go_close_to_target.hpp>
 #include <sanguis/server/ai/go_to_target.hpp>
 #include <sanguis/server/ai/in_range.hpp>
-#include <sanguis/server/ai/is_patrolling.hpp>
 #include <sanguis/server/ai/is_visible.hpp>
+#include <sanguis/server/ai/speed_factor.hpp>
 #include <sanguis/server/ai/target.hpp>
 #include <sanguis/server/collision/distance_entity_pos.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
@@ -16,7 +16,7 @@ void
 sanguis::server::ai::go_close_to_target(
 	sanguis::server::ai::context &_context,
 	sanguis::server::ai::target const _target,
-	sanguis::server::ai::is_patrolling const _is_patrolling
+	sanguis::server::ai::speed_factor const _speed_factor
 )
 {
 	sanguis::server::ai::go_to_target(
@@ -46,6 +46,6 @@ sanguis::server::ai::go_close_to_target(
 			)
 		},
 		_target,
-		_is_patrolling
+		_speed_factor
 	);
 }

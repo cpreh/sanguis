@@ -29,8 +29,6 @@ set(
 	include/sanguis/server/ai/go_to_target.hpp
 	include/sanguis/server/ai/idle.hpp
 	include/sanguis/server/ai/in_range.hpp
-	include/sanguis/server/ai/is_patrolling.hpp
-	include/sanguis/server/ai/is_patrolling_fwd.hpp
 	include/sanguis/server/ai/is_visible.hpp
 	include/sanguis/server/ai/make_path.hpp
 	include/sanguis/server/ai/move_to_target.hpp
@@ -49,6 +47,8 @@ set(
 	include/sanguis/server/ai/rotate_to_target.hpp
 	include/sanguis/server/ai/sight_range.hpp
 	include/sanguis/server/ai/sight_range_fwd.hpp
+	include/sanguis/server/ai/speed_factor.hpp
+	include/sanguis/server/ai/speed_factor_fwd.hpp
 	include/sanguis/server/ai/stop.hpp
 	include/sanguis/server/ai/target.hpp
 	include/sanguis/server/ai/target_fwd.hpp

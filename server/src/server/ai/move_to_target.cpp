@@ -1,8 +1,8 @@
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/optional_angle.hpp>
 #include <sanguis/server/space_unit.hpp>
-#include <sanguis/server/ai/is_patrolling.hpp>
 #include <sanguis/server/ai/move_to_target.hpp>
+#include <sanguis/server/ai/speed_factor.hpp>
 #include <sanguis/server/ai/target.hpp>
 #include <sanguis/server/ai/update_interval.hpp>
 #include <sanguis/server/collision/distance_entity_pos.hpp>
@@ -22,7 +22,7 @@ sanguis::server::ai::move_to_target(
 	sanguis::server::entities::with_ai &_me,
 	sanguis::server::optional_angle const _angle,
 	sanguis::server::ai::target const _target,
-	sanguis::server::ai::is_patrolling const _is_patrolling
+	sanguis::server::ai::speed_factor const _speed_factor
 )
 {
 	fcppt::maybe_void(
@@ -35,7 +35,7 @@ sanguis::server::ai::move_to_target(
 		[
 			_angle,
 			_target,
-			_is_patrolling
+			_speed_factor
 		](
 			sanguis::server::entities::with_velocity &_movable
 		)
@@ -74,17 +74,9 @@ sanguis::server::ai::move_to_target(
 						/
 						sanguis::server::ai::update_interval().count()
 						,
-						_is_patrolling.get()
-						?
-							speed.max()
-							/
-							fcppt::literal<
-								sanguis::server::space_unit
-							>(
-								3
-							)
-						:
-							speed.max()
+						speed.max()
+						*
+						_speed_factor.get()
 					)
 				);
 			}

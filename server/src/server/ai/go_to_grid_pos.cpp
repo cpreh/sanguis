@@ -1,8 +1,8 @@
 #include <sanguis/server/ai/context.hpp>
 #include <sanguis/server/ai/go_to_grid_pos.hpp>
 #include <sanguis/server/ai/idle.hpp>
-#include <sanguis/server/ai/is_patrolling.hpp>
 #include <sanguis/server/ai/rotate_and_move_to_target.hpp>
+#include <sanguis/server/ai/speed_factor.hpp>
 #include <sanguis/server/ai/target.hpp>
 #include <sanguis/server/ai/behavior/status.hpp>
 #include <sanguis/server/ai/pathing/optional_target.hpp>
@@ -12,7 +12,7 @@
 sanguis::server::ai::behavior::status
 sanguis::server::ai::go_to_grid_pos(
 	sanguis::server::ai::context &_context,
-	sanguis::server::ai::is_patrolling const _is_patrolling
+	sanguis::server::ai::speed_factor const _speed_factor
 )
 {
 	sanguis::server::ai::pathing::optional_target const target{
@@ -38,7 +38,7 @@ sanguis::server::ai::go_to_grid_pos(
 				target->get()
 			)
 		},
-		_is_patrolling
+		_speed_factor
 	);
 
 	return

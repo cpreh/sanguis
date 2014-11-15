@@ -2,10 +2,10 @@
 #include <sanguis/server/ai/context.hpp>
 #include <sanguis/server/ai/go_to_target.hpp>
 #include <sanguis/server/ai/in_range.hpp>
-#include <sanguis/server/ai/is_patrolling.hpp>
 #include <sanguis/server/ai/is_visible.hpp>
 #include <sanguis/server/ai/rotate_and_move_to_target.hpp>
 #include <sanguis/server/ai/rotate_to_target.hpp>
+#include <sanguis/server/ai/speed_factor.hpp>
 #include <sanguis/server/ai/stop.hpp>
 #include <sanguis/server/ai/target.hpp>
 #include <sanguis/server/ai/pathing/optional_target.hpp>
@@ -20,7 +20,7 @@ sanguis::server::ai::go_to_target(
 	sanguis::server::ai::in_range const _in_range,
 	sanguis::server::ai::is_visible const _is_visible,
 	sanguis::server::ai::target const _target,
-	sanguis::server::ai::is_patrolling const _is_patrolling
+	sanguis::server::ai::speed_factor const _speed_factor
 )
 {
 	if(
@@ -46,7 +46,7 @@ sanguis::server::ai::go_to_target(
 			sanguis::server::ai::rotate_and_move_to_target(
 				_context.me(),
 				_target,
-				_is_patrolling
+				_speed_factor
 			);
 
 		return;
@@ -67,7 +67,7 @@ sanguis::server::ai::go_to_target(
 					grid_target->get()
 				)
 			},
-			_is_patrolling
+			_speed_factor
 		);
 
 		return;

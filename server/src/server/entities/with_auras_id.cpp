@@ -1,5 +1,5 @@
+#include <sanguis/aura_type.hpp>
 #include <sanguis/aura_type_vector.hpp>
-#include <sanguis/optional_aura_type.hpp>
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/auras/unique_ptr.hpp>
@@ -7,8 +7,8 @@
 #include <sanguis/server/entities/with_auras_id.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/environment/object.hpp>
-#include <sanguis/server/environment/optional_object_ref.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -19,23 +19,32 @@ sanguis::server::entities::with_auras_id::add_aura(
 	sanguis::server::auras::unique_ptr &&_aura
 )
 {
-	sanguis::server::environment::optional_object_ref const env(
-		this->environment()
+	fcppt::maybe_void(
+		this->environment(),
+		[
+			this,
+			&_aura
+		](
+			sanguis::server::environment::object &_environment
+		)
+		{
+			fcppt::maybe_void(
+				_aura->type(),
+				[
+					this,
+					&_environment
+				](
+					sanguis::aura_type const _aura_type
+				)
+				{
+					_environment.add_aura(
+						this->id(),
+						_aura_type
+					);
+				}
+			);
+		}
 	);
-
-	sanguis::optional_aura_type const type(
-		_aura->type()
-	);
-
-	if(
-		env
-		&&
-		type
-	)
-		env->add_aura(
-			this->id(),
-			*type
-		);
 
 	sanguis::server::entities::with_auras::add_aura(
 		std::move(

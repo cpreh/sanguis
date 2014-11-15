@@ -3,8 +3,8 @@
 
 #include <sanguis/server/ai/context_fwd.hpp>
 #include <sanguis/server/ai/in_range.hpp>
-#include <sanguis/server/ai/is_patrolling.hpp>
 #include <sanguis/server/ai/is_visible.hpp>
+#include <sanguis/server/ai/speed_factor_fwd.hpp>
 #include <sanguis/server/ai/target_fwd.hpp>
 
 
@@ -21,7 +21,7 @@ go_to_target(
 	sanguis::server::ai::in_range,
 	sanguis::server::ai::is_visible,
 	sanguis::server::ai::target,
-	sanguis::server::ai::is_patrolling
+	sanguis::server::ai::speed_factor
 );
 
 }

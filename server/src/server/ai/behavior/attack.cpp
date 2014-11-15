@@ -12,9 +12,9 @@
 #include <sanguis/server/ai/go_to_target.hpp>
 #include <sanguis/server/ai/idle.hpp>
 #include <sanguis/server/ai/in_range.hpp>
-#include <sanguis/server/ai/is_patrolling.hpp>
 #include <sanguis/server/ai/is_visible.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
+#include <sanguis/server/ai/speed_factor.hpp>
 #include <sanguis/server/ai/target.hpp>
 #include <sanguis/server/ai/behavior/attack.hpp>
 #include <sanguis/server/ai/behavior/base.hpp>
@@ -34,6 +34,7 @@
 #include <sanguis/server/world/center_to_grid_pos.hpp>
 #include <sanguis/server/world/grid_pos_to_center.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -209,9 +210,11 @@ sanguis::server::ai::behavior::attack::update(
 		sanguis::server::ai::target{
 			target_->center()
 		},
-		sanguis::server::ai::is_patrolling{
-			false
-		}
+		fcppt::literal<
+			sanguis::server::ai::speed_factor
+		>(
+			1
+		)
 	);
 
 	return

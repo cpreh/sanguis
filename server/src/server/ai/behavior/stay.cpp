@@ -1,8 +1,8 @@
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/ai/context.hpp>
 #include <sanguis/server/ai/go_to_grid_pos.hpp>
-#include <sanguis/server/ai/is_patrolling.hpp>
 #include <sanguis/server/ai/make_path.hpp>
+#include <sanguis/server/ai/speed_factor.hpp>
 #include <sanguis/server/ai/behavior/base.hpp>
 #include <sanguis/server/ai/behavior/status.hpp>
 #include <sanguis/server/ai/behavior/stay.hpp>
@@ -10,6 +10,7 @@
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/world/center_to_grid_pos.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_literal_strong_typedef.hpp>
 
 
 sanguis::server::ai::behavior::stay::stay(
@@ -72,8 +73,10 @@ sanguis::server::ai::behavior::stay::update(
 	return
 		sanguis::server::ai::go_to_grid_pos(
 			context_,
-			sanguis::server::ai::is_patrolling{
-				false
-			}
+			fcppt::literal<
+				sanguis::server::ai::speed_factor
+			>(
+				1
+			)
 		);
 }

@@ -2,13 +2,15 @@
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/ai/context.hpp>
 #include <sanguis/server/ai/go_close_to_target.hpp>
-#include <sanguis/server/ai/is_patrolling.hpp>
+#include <sanguis/server/ai/speed_factor.hpp>
 #include <sanguis/server/ai/target.hpp>
 #include <sanguis/server/ai/behavior/base.hpp>
 #include <sanguis/server/ai/behavior/follow_owner.hpp>
 #include <sanguis/server/ai/behavior/status.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>
 #include <sanguis/server/entities/with_links.hpp>
+#include <fcppt/literal.hpp>
+#include <fcppt/make_literal_strong_typedef.hpp>
 
 
 sanguis::server::ai::behavior::follow_owner::follow_owner(
@@ -59,9 +61,11 @@ sanguis::server::ai::behavior::follow_owner::update(
 		sanguis::server::ai::target{
 			spawn_owner_.get()->center()
 		},
-		sanguis::server::ai::is_patrolling{
-			false
-		}
+		fcppt::literal<
+			sanguis::server::ai::speed_factor
+		>(
+			1
+		)
 	);
 
 	return
