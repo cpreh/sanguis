@@ -159,6 +159,11 @@ public:
 		sanguis::server::damage::type,
 		sanguis::server::damage::armor_unit
 	);
+
+	sanguis::server::entities::enemies::parameters &
+	ai(
+		sanguis::server::ai::create_function const &
+	);
 private:
 	sanguis::creator::enemy_type const enemy_type_;
 

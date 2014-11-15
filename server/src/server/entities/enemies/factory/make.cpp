@@ -123,6 +123,7 @@ sanguis::server::entities::enemies::factory::make(
 	case sanguis::creator::enemy_kind::boss:
 		return
 			sanguis::server::entities::enemies::factory::make_boss(
+				_parameters.random_generator(),
 				std::move(
 					parameters
 				)

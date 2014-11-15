@@ -336,3 +336,15 @@ sanguis::server::entities::enemies::parameters::armor_element(
 	return
 		*this;
 }
+
+sanguis::server::entities::enemies::parameters &
+sanguis::server::entities::enemies::parameters::ai(
+	sanguis::server::ai::create_function const &_ai_create_function
+)
+{
+	ai_create_function_ =
+		_ai_create_function;
+
+	return
+		*this;
+}
