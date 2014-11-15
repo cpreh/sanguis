@@ -50,12 +50,6 @@ pushd collision >> /dev/null
 
 update_cmake \
 	CMakeLists.txt \
-	SANGUIS_COLLISION_PROJECTILE_FILES \
-	src/include/sanguis/collision/aux_/world/projectile \
-	src/aux_/world/projectile
-
-update_cmake \
-	CMakeLists.txt \
 	SANGUIS_COLLISION_SIMPLE_FILES \
 	src/include/sanguis/collision/aux_/world/simple \
 	src/aux_/world/simple

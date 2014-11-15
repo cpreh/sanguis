@@ -18,12 +18,6 @@ option(
 )
 
 option(
-	ENABLE_PROJECTILE
-	"Build the projectile collision backend"
-	OFF
-)
-
-option(
 	ENABLE_TOOLS
 	"Build tools to create content for sanguis"
 	OFF
@@ -112,16 +106,6 @@ if(
 		APPEND
 		SGE_COMPONENTS
 		image2d
-	)
-endif()
-
-if(
-	ENABLE_PROJECTILE
-)
-	list(
-		APPEND
-		SGE_COMPONENTS
-		projectile
 	)
 endif()
 
