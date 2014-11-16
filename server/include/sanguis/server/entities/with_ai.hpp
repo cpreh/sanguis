@@ -58,6 +58,9 @@ protected:
 	void
 	on_create()
 	override;
+public:
+	sanguis::server::ai::create_function const &
+	create_ai() const;
 private:
 	sanguis::diff_timer update_timer_;
 

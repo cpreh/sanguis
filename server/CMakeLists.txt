@@ -238,6 +238,7 @@ set(
 	include/sanguis/server/entities/enemies/skills/factory/callback.hpp
 	include/sanguis/server/entities/enemies/skills/factory/container.hpp
 	include/sanguis/server/entities/enemies/skills/factory/create_callbacks.hpp
+	include/sanguis/server/entities/enemies/skills/factory/mother_spider.hpp
 	include/sanguis/server/entities/enemies/skills/factory/parameters.hpp
 	include/sanguis/server/entities/enemies/skills/factory/parameters_fwd.hpp
 	include/sanguis/server/entities/enemies/skills/factory/scatter.hpp
@@ -830,6 +831,7 @@ set(
 	src/server/entities/enemies/parameters.cpp
 	src/server/entities/enemies/skills/amount.cpp
 	src/server/entities/enemies/skills/factory/create_callbacks.cpp
+	src/server/entities/enemies/skills/factory/mother_spider.cpp
 	src/server/entities/enemies/skills/factory/parameters.cpp
 	src/server/entities/enemies/skills/factory/scatter.cpp
 	src/server/entities/enemies/skills/factory/teleport.cpp

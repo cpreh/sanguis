@@ -1,8 +1,22 @@
+#include <sanguis/server/exp.hpp>
+#include <sanguis/server/health.hpp>
+#include <sanguis/server/pickup_probability.hpp>
+#include <sanguis/server/auras/aura.hpp>
+#include <sanguis/server/auras/container.hpp>
+#include <sanguis/server/entities/auto_weak_link.hpp>
+#include <sanguis/server/entities/insert_parameters_center.hpp>
+#include <sanguis/server/entities/spawn_owner.hpp>
 #include <sanguis/server/entities/enemies/attribute.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
+#include <sanguis/server/entities/enemies/normal.hpp>
+#include <sanguis/server/entities/enemies/parameters.hpp>
 #include <sanguis/server/entities/enemies/skills/mother_spider.hpp>
 #include <sanguis/server/entities/enemies/skills/skill.hpp>
+#include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/weapons/weapon.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/algorithm/repeat.hpp>
 #include <fcppt/assert/pre.hpp>
 
 
@@ -27,27 +41,32 @@ sanguis::server::entities::enemies::skills::mother_spider::on_die(
 		_enemy.environment()
 	);
 
-/*
-	// TODO: Make copies smaller
+	// TODO: Make copies of enemies smaller
 	fcppt::algorithm::repeat(
 		1u,
-		[]
+		[
+			&_enemy
+		]
 		{
 			_enemy.environment()->insert(
 				fcppt::make_unique_ptr<
-					sanguis::server::entities::enemies::enemy
+					sanguis::server::entities::enemies::normal
 				>(
 					sanguis::server::entities::enemies::parameters{
 						_enemy.enemy_type(),
 						_enemy.environment()->load_context(),
-						_enemy.armor_array(),
-						_enemy.health()
+						_enemy.armor(),
+						// TODO: This parameter should probably be of type max_health
+						sanguis::server::health{
+							_enemy.max_health().get()
+						}
 						/
 						sanguis::server::health{
 							4.f
 						},
-						_enemy.ai_create_function(),
-						_enemy.weapon().clone(),
+						_enemy.max_movement_speed(),
+						_enemy.create_ai(),
+						_enemy.primary_weapon()->clone(),
 						sanguis::server::pickup_probability{
 							0.f
 						},
@@ -62,10 +81,13 @@ sanguis::server::entities::enemies::skills::mother_spider::on_die(
 						),
 						sanguis::server::auras::container{}
 					}
+				),
+				sanguis::server::entities::insert_parameters_center(
+					_enemy.center()
 				)
 			);
 		}
-	);*/
+	);
 }
 
 sanguis::server::entities::enemies::attribute

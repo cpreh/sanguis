@@ -101,6 +101,13 @@ sanguis::server::entities::with_health::max_health() const
 		);
 }
 
+sanguis::server::damage::armor_array const &
+sanguis::server::entities::with_health::armor() const
+{
+	return
+		armor_;
+}
+
 sanguis::server::entities::with_health::with_health(
 	sanguis::server::health const _max_health,
 	sanguis::server::regeneration const _regeneration,

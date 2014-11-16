@@ -57,13 +57,19 @@ public:
 	sanguis::server::team
 	team() const
 	override;
+
+	sanguis::creator::enemy_type
+	enemy_type() const;
+
+	sanguis::server::exp const
+	exp() const;
+
+	sanguis::server::entities::enemies::difficulty const
+	difficulty() const;
 protected:
 	void
 	update()
 	override;
-
-	sanguis::creator::enemy_type
-	enemy_type() const;
 
 	void
 	remove()

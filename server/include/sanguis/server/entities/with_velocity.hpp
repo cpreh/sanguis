@@ -7,6 +7,7 @@
 #include <sanguis/server/model_size_fwd.hpp>
 #include <sanguis/server/speed_fwd.hpp>
 #include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/movement_speed_fwd.hpp>
 #include <sanguis/server/entities/movement_speed_initial_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_body.hpp>
@@ -66,6 +67,9 @@ public:
 
 	sanguis::server::entities::property::changeable &
 	movement_speed();
+
+	sanguis::server::entities::movement_speed const
+	max_movement_speed() const;
 
 	sanguis::server::direction const
 	direction() const;

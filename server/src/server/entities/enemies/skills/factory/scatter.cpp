@@ -1,6 +1,7 @@
 #include <sanguis/duration_second.hpp>
 #include <sanguis/server/entities/enemies/skills/cooldown.hpp>
 #include <sanguis/server/entities/enemies/skills/scatter.hpp>
+#include <sanguis/server/entities/enemies/skills/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/skills/factory/parameters.hpp>
 #include <sanguis/server/entities/enemies/skills/factory/scatter.hpp>
 #include <fcppt/make_unique_ptr.hpp>

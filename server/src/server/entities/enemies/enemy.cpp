@@ -123,6 +123,27 @@ sanguis::server::entities::enemies::enemy::team() const
 		sanguis::server::team::monsters;
 }
 
+sanguis::creator::enemy_type
+sanguis::server::entities::enemies::enemy::enemy_type() const
+{
+	return
+		enemy_type_;
+}
+
+sanguis::server::exp const
+sanguis::server::entities::enemies::enemy::exp() const
+{
+	return
+		exp_;
+}
+
+sanguis::server::entities::enemies::difficulty const
+sanguis::server::entities::enemies::enemy::difficulty() const
+{
+	return
+		difficulty_;
+}
+
 void
 sanguis::server::entities::enemies::enemy::update()
 {
@@ -133,13 +154,6 @@ sanguis::server::entities::enemies::enemy::update()
 	sanguis::server::entities::with_health::update();
 
 	sanguis::server::entities::with_velocity::update();
-}
-
-sanguis::creator::enemy_type
-sanguis::server::entities::enemies::enemy::enemy_type() const
-{
-	return
-		enemy_type_;
 }
 
 void

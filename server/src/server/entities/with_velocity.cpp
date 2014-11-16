@@ -4,6 +4,7 @@
 #include <sanguis/server/collision/optional_result.hpp>
 #include <sanguis/server/collision/with_world_move.hpp>
 #include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/movement_speed_initial.hpp>
 #include <sanguis/server/entities/speed_to_abs.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
@@ -120,6 +121,15 @@ sanguis::server::entities::with_velocity::movement_speed()
 {
 	return
 		movement_speed_;
+}
+
+sanguis::server::entities::movement_speed const
+sanguis::server::entities::with_velocity::max_movement_speed() const
+{
+	return
+		sanguis::server::entities::movement_speed{
+			movement_speed_.max()
+		};
 }
 
 sanguis::server::direction const

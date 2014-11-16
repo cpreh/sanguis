@@ -59,6 +59,9 @@ public:
 
 	sanguis::server::health const
 	max_health() const;
+
+	sanguis::server::damage::armor_array const &
+	armor() const;
 protected:
 	with_health(
 		sanguis::server::health,

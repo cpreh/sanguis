@@ -101,3 +101,10 @@ sanguis::server::entities::with_ai::on_create()
 			ai_context_
 		);
 }
+
+sanguis::server::ai::create_function const &
+sanguis::server::entities::with_ai::create_ai() const
+{
+	return
+		create_ai_;
+}

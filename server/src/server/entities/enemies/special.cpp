@@ -95,6 +95,21 @@ sanguis::server::entities::enemies::special::update()
 		);
 }
 
+void
+sanguis::server::entities::enemies::special::remove()
+{
+	sanguis::server::entities::enemies::enemy::remove();
+
+	for(
+		sanguis::server::entities::enemies::skills::unique_ptr const &skill
+		:
+		skills_
+	)
+		skill->on_die(
+			*this
+		);
+}
+
 sanguis::messages::types::string const &
 sanguis::server::entities::enemies::special::name() const
 {

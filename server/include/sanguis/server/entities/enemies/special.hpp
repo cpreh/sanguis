@@ -45,6 +45,10 @@ private:
 	update()
 	override;
 
+	void
+	remove()
+	override;
+
 	sanguis::messages::types::string const &
 	name() const
 	override;
