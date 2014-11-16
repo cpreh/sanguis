@@ -6,8 +6,10 @@
 #include <sanguis/server/entities/optional_base_ref_fwd.hpp>
 #include <sanguis/server/weapons/attack_fwd.hpp>
 #include <sanguis/server/weapons/spawn.hpp>
+#include <sanguis/server/weapons/spawn_parameters_fwd.hpp>
 #include <sanguis/server/weapons/spawn_weapon.hpp>
 #include <sanguis/server/weapons/spider_parameters_fwd.hpp>
+#include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/attributes/health.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -35,7 +37,16 @@ public:
 
 	~spider()
 	override;
+
+	spider(
+		sanguis::server::weapons::spawn_parameters const &,
+		sanguis::server::weapons::attributes::health
+	);
 private:
+	sanguis::server::weapons::unique_ptr
+	clone() const
+	override;
+
 	sanguis::server::entities::optional_base_ref const
 	do_spawn(
 		sanguis::server::weapons::attack const &,

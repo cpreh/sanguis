@@ -19,7 +19,10 @@
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/parameters.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
+#include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/weapons/attributes/aoe.hpp>
+#include <sanguis/server/weapons/attributes/damage.hpp>
 #include <sanguis/server/weapons/attributes/make_aoe.hpp>
 #include <sanguis/server/weapons/attributes/make_damage.hpp>
 #include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
@@ -64,6 +67,37 @@ sanguis::server::weapons::grenade::grenade(
 
 sanguis::server::weapons::grenade::~grenade()
 {
+}
+
+sanguis::server::weapons::grenade::grenade(
+	sanguis::server::weapons::parameters const &_parameters,
+	sanguis::server::weapons::attributes::damage const _damage,
+	sanguis::server::weapons::attributes::aoe const _aoe
+)
+:
+	sanguis::server::weapons::weapon{
+		_parameters
+	},
+	damage_{
+		_damage
+	},
+	aoe_{
+		_aoe
+	}
+{
+}
+
+sanguis::server::weapons::unique_ptr
+sanguis::server::weapons::grenade::clone() const
+{
+	return
+		fcppt::make_unique_ptr<
+			sanguis::server::weapons::grenade
+		>(
+			this->parameters(),
+			damage_,
+			aoe_
+		);
 }
 
 sanguis::server::weapons::attack_result

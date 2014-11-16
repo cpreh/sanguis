@@ -21,6 +21,7 @@
 #include <sanguis/server/weapons/parameters_fwd.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/target_fwd.hpp>
+#include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon_fwd.hpp>
 #include <sanguis/server/weapons/attributes/magazine_size_fwd.hpp>
 #include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
@@ -104,6 +105,10 @@ public:
 	virtual
 	sanguis::weapon_attribute_vector
 	attributes() const = 0;
+
+	virtual
+	sanguis::server::weapons::unique_ptr
+	clone() const = 0;
 protected:
 	virtual
 	sanguis::server::weapons::attack_result
@@ -123,7 +128,15 @@ protected:
 
 	sanguis::server::entities::with_weapon &
 	owner() const;
+
+	sanguis::server::weapons::parameters
+	parameters() const;
 private:
+	friend class sanguis::server::weapons::states::idle;
+	friend class sanguis::server::weapons::states::reloading;
+	friend class sanguis::server::weapons::states::backswing;
+	friend class sanguis::server::weapons::states::castpoint;
+
 	void
 	weapon_status(
 		sanguis::weapon_status
@@ -133,11 +146,6 @@ private:
 	reload_time(
 		sanguis::duration
 	);
-
-	friend class sanguis::server::weapons::states::idle;
-	friend class sanguis::server::weapons::states::reloading;
-	friend class sanguis::server::weapons::states::backswing;
-	friend class sanguis::server::weapons::states::castpoint;
 
 	void
 	reset_magazine();

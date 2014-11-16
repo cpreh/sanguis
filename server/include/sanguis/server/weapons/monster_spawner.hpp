@@ -5,6 +5,8 @@
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/server/weapons/attack_fwd.hpp>
 #include <sanguis/server/weapons/attack_result_fwd.hpp>
+#include <sanguis/server/weapons/parameters_fwd.hpp>
+#include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -31,7 +33,16 @@ public:
 
 	~monster_spawner()
 	override;
+
+	explicit
+	monster_spawner(
+		sanguis::server::weapons::parameters const &
+	);
 private:
+	sanguis::server::weapons::unique_ptr
+	clone() const
+	override;
+
 	sanguis::server::weapons::attack_result
 	do_attack(
 		sanguis::server::weapons::attack const &

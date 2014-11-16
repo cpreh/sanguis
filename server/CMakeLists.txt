@@ -652,6 +652,8 @@ set(
 	include/sanguis/server/weapons/shotgun_parameters.hpp
 	include/sanguis/server/weapons/shotgun_parameters_fwd.hpp
 	include/sanguis/server/weapons/spawn.hpp
+	include/sanguis/server/weapons/spawn_parameters.hpp
+	include/sanguis/server/weapons/spawn_parameters_fwd.hpp
 	include/sanguis/server/weapons/spawn_weapon.hpp
 	include/sanguis/server/weapons/spider.hpp
 	include/sanguis/server/weapons/spider_parameters.hpp
@@ -1003,6 +1005,7 @@ set(
 	src/server/weapons/shotgun.cpp
 	src/server/weapons/shotgun_parameters.cpp
 	src/server/weapons/spawn.cpp
+	src/server/weapons/spawn_parameters.cpp
 	src/server/weapons/spider.cpp
 	src/server/weapons/spider_parameters.cpp
 	src/server/weapons/states/backswing.cpp

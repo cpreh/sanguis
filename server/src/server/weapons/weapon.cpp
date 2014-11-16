@@ -171,16 +171,18 @@ sanguis::server::weapons::attributes::magazine_size const
 sanguis::server::weapons::weapon::magazine_size() const
 {
 	return
-		magazine_size_
-		?
-			*magazine_size_
-		:
-			sanguis::server::weapons::attributes::magazine_size(
-				sanguis::server::weapons::magazine_size(
-					1u
-				)
-			)
-		;
+		fcppt::from_optional(
+			magazine_size_,
+			[]
+			{
+				return
+					sanguis::server::weapons::attributes::magazine_size(
+						sanguis::server::weapons::magazine_size(
+							1u
+						)
+					);
+			}
+		);
 }
 
 bool
@@ -316,6 +318,22 @@ sanguis::server::weapons::weapon::owner() const
 
 	return
 		*owner_;
+}
+
+sanguis::server::weapons::parameters
+sanguis::server::weapons::weapon::parameters() const
+{
+	return
+		sanguis::server::weapons::parameters{
+			this->random_generator(),
+			this->type(),
+			this->accuracy(),
+			range_,
+			magazine_size_,
+			this->backswing_time(),
+			this->cast_point(),
+			this->reload_time()
+		};
 }
 
 void

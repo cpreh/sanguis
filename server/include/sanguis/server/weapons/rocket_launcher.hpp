@@ -6,7 +6,9 @@
 #include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/server/weapons/attack_fwd.hpp>
 #include <sanguis/server/weapons/attack_result_fwd.hpp>
+#include <sanguis/server/weapons/parameters_fwd.hpp>
 #include <sanguis/server/weapons/rocket_launcher_parameters_fwd.hpp>
+#include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/attributes/aoe.hpp>
 #include <sanguis/server/weapons/attributes/damage.hpp>
@@ -36,7 +38,17 @@ public:
 
 	~rocket_launcher()
 	override;
+
+	rocket_launcher(
+		sanguis::server::weapons::parameters const &,
+		sanguis::server::weapons::attributes::damage,
+		sanguis::server::weapons::attributes::aoe
+	);
 private:
+	sanguis::server::weapons::unique_ptr
+	clone() const
+	override;
+
 	sanguis::server::weapons::attack_result
 	do_attack(
 		sanguis::server::weapons::attack const &

@@ -22,9 +22,11 @@
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/parameters.hpp>
 #include <sanguis/server/weapons/range.hpp>
+#include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
 #include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>
 #include <fcppt/random/distribution/parameters/make_uniform_enum.hpp>
 
@@ -61,6 +63,27 @@ sanguis::server::weapons::monster_spawner::monster_spawner(
 
 sanguis::server::weapons::monster_spawner::~monster_spawner()
 {
+}
+
+sanguis::server::weapons::monster_spawner::monster_spawner(
+	sanguis::server::weapons::parameters const &_parameters
+)
+:
+	sanguis::server::weapons::weapon{
+		_parameters
+	}
+{
+}
+
+sanguis::server::weapons::unique_ptr
+sanguis::server::weapons::monster_spawner::clone() const
+{
+	return
+		fcppt::make_unique_ptr<
+			sanguis::server::weapons::monster_spawner
+		>(
+			this->parameters()
+		);
 }
 
 sanguis::server::weapons::attack_result

@@ -12,6 +12,7 @@
 #include <sanguis/server/weapons/cast_point.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
+#include <sanguis/server/weapons/spawn_parameters_fwd.hpp>
 #include <sanguis/server/weapons/spawn_weapon.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -44,6 +45,14 @@ public:
 
 	~spawn()
 	override;
+protected:
+	explicit
+	spawn(
+		sanguis::server::weapons::spawn_parameters const &
+	);
+
+	sanguis::server::weapons::spawn_parameters
+	spawn_parameters() const;
 private:
 	sanguis::server::weapons::attack_result
 	do_attack(

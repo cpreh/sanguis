@@ -18,6 +18,7 @@
 #include <sanguis/server/weapons/parameters.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/spawn.hpp>
+#include <sanguis/server/weapons/spawn_parameters.hpp>
 #include <sanguis/server/weapons/spawn_weapon.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/attributes/magazine_size.hpp>
@@ -38,38 +39,61 @@ sanguis::server::weapons::spawn::spawn(
 	sanguis::server::weapons::reload_time const _reload_time
 )
 :
-	sanguis::server::weapons::weapon{
-		sanguis::server::weapons::parameters{
-			_random_generator,
-			_weapon_type,
-			sanguis::server::weapons::attributes::optional_accuracy(),
-			_range,
-			sanguis::server::weapons::attributes::optional_magazine_size{
-				sanguis::server::weapons::attributes::magazine_size{
-					sanguis::server::weapons::magazine_size{
-						1u
+	sanguis::server::weapons::spawn{
+		sanguis::server::weapons::spawn_parameters{
+			sanguis::server::weapons::parameters{
+				_random_generator,
+				_weapon_type,
+				sanguis::server::weapons::attributes::optional_accuracy(),
+				_range,
+				sanguis::server::weapons::attributes::optional_magazine_size{
+					sanguis::server::weapons::attributes::magazine_size{
+						sanguis::server::weapons::magazine_size{
+							1u
+						}
 					}
+				},
+				_backswing_time,
+				_cast_point,
+				sanguis::server::weapons::optional_reload_time{
+					_reload_time
 				}
 			},
-			_backswing_time,
-			_cast_point,
-			sanguis::server::weapons::optional_reload_time{
-				_reload_time
-			}
+			_spawn_weapon
 		}
-	},
-	spawn_weapon_(
-		_spawn_weapon
-	),
-	attributes_(
-		_spawn_weapon.get()()->attributes()
-	),
-	spawned_()
+	}
 {
 }
 
 sanguis::server::weapons::spawn::~spawn()
 {
+}
+
+sanguis::server::weapons::spawn::spawn(
+	sanguis::server::weapons::spawn_parameters const &_spawn_parameters
+)
+:
+	sanguis::server::weapons::weapon{
+		_spawn_parameters.parameters()
+	},
+	spawn_weapon_{
+		_spawn_parameters.spawn_weapon()
+	},
+	attributes_(
+		spawn_weapon_.get()()->attributes()
+	),
+	spawned_()
+{
+}
+
+sanguis::server::weapons::spawn_parameters
+sanguis::server::weapons::spawn::spawn_parameters() const
+{
+	return
+		sanguis::server::weapons::spawn_parameters{
+			this->parameters(),
+			spawn_weapon_
+		};
 }
 
 sanguis::server::weapons::attack_result

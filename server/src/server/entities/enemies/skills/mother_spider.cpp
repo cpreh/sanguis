@@ -1,8 +1,9 @@
 #include <sanguis/server/entities/enemies/attribute.hpp>
-#include <sanguis/server/entities/enemies/enemy_fwd.hpp>
+#include <sanguis/server/entities/enemies/enemy.hpp>
 #include <sanguis/server/entities/enemies/skills/mother_spider.hpp>
 #include <sanguis/server/entities/enemies/skills/skill.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/assert/pre.hpp>
 
 
 sanguis::server::entities::enemies::skills::mother_spider::mother_spider()
@@ -18,9 +19,18 @@ sanguis::server::entities::enemies::skills::mother_spider::on_die(
 	sanguis::server::entities::enemies::enemy const &_enemy
 )
 {
+	FCPPT_ASSERT_PRE(
+		_enemy.primary_weapon()
+	);
+
+	FCPPT_ASSERT_PRE(
+		_enemy.environment()
+	);
+
 /*
+	// TODO: Make copies smaller
 	fcppt::algorithm::repeat(
-		4u,
+		1u,
 		[]
 		{
 			_enemy.environment()->insert(
@@ -37,11 +47,7 @@ sanguis::server::entities::enemies::skills::mother_spider::on_die(
 							4.f
 						},
 						_enemy.ai_create_function(),
-						// TODO!
-						fcppt::make_unique_ptr<
-							sanguis::server::weapons::melee
-						>(
-						),
+						_enemy.weapon().clone(),
 						sanguis::server::pickup_probability{
 							0.f
 						},

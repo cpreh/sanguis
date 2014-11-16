@@ -17,6 +17,8 @@
 #include <sanguis/server/weapons/rocket_launcher_parameters.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/attributes/accuracy.hpp>
+#include <sanguis/server/weapons/attributes/aoe.hpp>
+#include <sanguis/server/weapons/attributes/damage.hpp>
 #include <sanguis/server/weapons/attributes/magazine_size.hpp>
 #include <sanguis/server/weapons/attributes/make_aoe.hpp>
 #include <sanguis/server/weapons/attributes/make_damage.hpp>
@@ -64,6 +66,37 @@ sanguis::server::weapons::rocket_launcher::rocket_launcher(
 
 sanguis::server::weapons::rocket_launcher::~rocket_launcher()
 {
+}
+
+sanguis::server::weapons::rocket_launcher::rocket_launcher(
+	sanguis::server::weapons::parameters const &_parameters,
+	sanguis::server::weapons::attributes::damage const _damage,
+	sanguis::server::weapons::attributes::aoe const _aoe
+)
+:
+	sanguis::server::weapons::weapon{
+		_parameters
+	},
+	damage_{
+		_damage
+	},
+	aoe_{
+		_aoe
+	}
+{
+}
+
+sanguis::server::weapons::unique_ptr
+sanguis::server::weapons::rocket_launcher::clone() const
+{
+	return
+		fcppt::make_unique_ptr<
+			sanguis::server::weapons::rocket_launcher
+		>(
+			this->parameters(),
+			damage_,
+			aoe_
+		);
 }
 
 sanguis::server::weapons::attack_result

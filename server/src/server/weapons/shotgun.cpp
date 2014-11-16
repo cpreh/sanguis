@@ -19,13 +19,17 @@
 #include <sanguis/server/weapons/attack_result.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/parameters.hpp>
+#include <sanguis/server/weapons/shells.hpp>
 #include <sanguis/server/weapons/shotgun.hpp>
 #include <sanguis/server/weapons/shotgun_parameters.hpp>
+#include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/weapons/attributes/damage.hpp>
 #include <sanguis/server/weapons/attributes/make.hpp>
 #include <sanguis/server/weapons/attributes/make_damage.hpp>
 #include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
 #include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
+#include <sanguis/server/weapons/attributes/spread_radius.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
@@ -58,9 +62,6 @@ sanguis::server::weapons::shotgun::shotgun(
 			)
 		}
 	),
-	random_generator_(
-		_random_generator
-	),
 	spread_radius_(
 		_parameters.spread_radius()
 	),
@@ -77,6 +78,42 @@ sanguis::server::weapons::shotgun::~shotgun()
 {
 }
 
+sanguis::server::weapons::shotgun::shotgun(
+	sanguis::server::weapons::parameters const &_parameters,
+	sanguis::server::weapons::attributes::spread_radius const _spread_radius,
+	sanguis::server::weapons::shells const _shells,
+	sanguis::server::weapons::attributes::damage const _damage
+)
+:
+	sanguis::server::weapons::weapon{
+		_parameters
+	},
+	spread_radius_{
+		_spread_radius
+	},
+	shells_{
+		_shells
+	},
+	damage_{
+		_damage
+	}
+{
+}
+
+sanguis::server::weapons::unique_ptr
+sanguis::server::weapons::shotgun::clone() const
+{
+	return
+		fcppt::make_unique_ptr<
+			sanguis::server::weapons::shotgun
+		>(
+			this->parameters(),
+			spread_radius_,
+			shells_,
+			damage_
+		);
+}
+
 sanguis::server::weapons::attack_result
 sanguis::server::weapons::shotgun::do_attack(
 	sanguis::server::weapons::attack const &_attack
@@ -91,7 +128,7 @@ sanguis::server::weapons::shotgun::do_attack(
 	sanguis::random_variate<
 		angle_distribution
 	> angle_rng(
-		random_generator_,
+		this->random_generator(),
 		angle_distribution(
 			angle_distribution::param_type::mean(
 				_attack.angle().get()

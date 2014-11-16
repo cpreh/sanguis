@@ -18,7 +18,9 @@
 #include <sanguis/server/weapons/parameters.hpp>
 #include <sanguis/server/weapons/pistol.hpp>
 #include <sanguis/server/weapons/pistol_parameters.hpp>
+#include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/weapons/attributes/damage.hpp>
 #include <sanguis/server/weapons/attributes/make_damage.hpp>
 #include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
 #include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
@@ -57,6 +59,32 @@ sanguis::server::weapons::pistol::pistol(
 
 sanguis::server::weapons::pistol::~pistol()
 {
+}
+
+sanguis::server::weapons::pistol::pistol(
+	sanguis::server::weapons::parameters const &_parameters,
+	sanguis::server::weapons::attributes::damage const _damage
+)
+:
+	sanguis::server::weapons::weapon(
+		_parameters
+	),
+	damage_{
+		_damage
+	}
+{
+}
+
+sanguis::server::weapons::unique_ptr
+sanguis::server::weapons::pistol::clone() const
+{
+	return
+		fcppt::make_unique_ptr<
+			sanguis::server::weapons::pistol
+		>(
+			this->parameters(),
+			damage_
+		);
 }
 
 sanguis::server::weapons::attack_result

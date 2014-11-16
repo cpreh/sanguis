@@ -4,6 +4,7 @@
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/center.hpp>
+#include <sanguis/server/damage/array.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/modify_damages.hpp>
@@ -17,7 +18,9 @@
 #include <sanguis/server/weapons/melee_parameters.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/parameters.hpp>
+#include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/weapons/attributes/damage.hpp>
 #include <sanguis/server/weapons/attributes/make_damage.hpp>
 #include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
 #include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
@@ -58,6 +61,37 @@ sanguis::server::weapons::melee::melee(
 
 sanguis::server::weapons::melee::~melee()
 {
+}
+
+sanguis::server::weapons::melee::melee(
+	sanguis::server::weapons::parameters const &_parameters,
+	sanguis::server::weapons::attributes::damage const _damage,
+	sanguis::server::damage::array const &_damage_values
+)
+:
+	sanguis::server::weapons::weapon{
+		_parameters
+	},
+	damage_{
+		_damage
+	},
+	damage_values_(
+		_damage_values
+	)
+{
+}
+
+sanguis::server::weapons::unique_ptr
+sanguis::server::weapons::melee::clone() const
+{
+	return
+		fcppt::make_unique_ptr<
+			sanguis::server::weapons::melee
+		>(
+			this->parameters(),
+			damage_,
+			damage_values_
+		);
 }
 
 sanguis::server::weapons::attack_result

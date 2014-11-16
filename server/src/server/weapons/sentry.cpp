@@ -20,7 +20,10 @@
 #include <sanguis/server/weapons/sentry.hpp>
 #include <sanguis/server/weapons/sentry_parameters.hpp>
 #include <sanguis/server/weapons/spawn.hpp>
+#include <sanguis/server/weapons/spawn_parameters.hpp>
 #include <sanguis/server/weapons/spawn_weapon.hpp>
+#include <sanguis/server/weapons/unique_ptr.hpp>
+#include <sanguis/server/weapons/attributes/health.hpp>
 #include <sanguis/server/weapons/attributes/make_health.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
@@ -54,6 +57,32 @@ sanguis::server::weapons::sentry::sentry(
 
 sanguis::server::weapons::sentry::~sentry()
 {
+}
+
+sanguis::server::weapons::sentry::sentry(
+	sanguis::server::weapons::spawn_parameters const &_spawn_parameters,
+	sanguis::server::weapons::attributes::health const _health
+)
+:
+	sanguis::server::weapons::spawn{
+		_spawn_parameters
+	},
+	health_{
+		_health
+	}
+{
+}
+
+sanguis::server::weapons::unique_ptr
+sanguis::server::weapons::sentry::clone() const
+{
+	return
+		fcppt::make_unique_ptr<
+			sanguis::server::weapons::sentry
+		>(
+			this->spawn_parameters(),
+			health_
+		);
 }
 
 sanguis::server::entities::optional_base_ref const

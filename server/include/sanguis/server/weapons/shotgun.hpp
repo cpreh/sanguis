@@ -6,8 +6,10 @@
 #include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/server/weapons/attack_fwd.hpp>
 #include <sanguis/server/weapons/attack_result_fwd.hpp>
+#include <sanguis/server/weapons/parameters_fwd.hpp>
 #include <sanguis/server/weapons/shells.hpp>
 #include <sanguis/server/weapons/shotgun_parameters_fwd.hpp>
+#include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/attributes/damage.hpp>
 #include <sanguis/server/weapons/attributes/spread_radius.hpp>
@@ -37,7 +39,18 @@ public:
 
 	~shotgun()
 	override;
+
+	shotgun(
+		sanguis::server::weapons::parameters const &,
+		sanguis::server::weapons::attributes::spread_radius,
+		sanguis::server::weapons::shells,
+		sanguis::server::weapons::attributes::damage
+	);
 private:
+	sanguis::server::weapons::unique_ptr
+	clone() const
+	override;
+
 	sanguis::server::weapons::attack_result
 	do_attack(
 		sanguis::server::weapons::attack const &
@@ -47,8 +60,6 @@ private:
 	sanguis::weapon_attribute_vector
 	attributes() const
 	override;
-
-	sanguis::random_generator &random_generator_;
 
 	sanguis::server::weapons::attributes::spread_radius const spread_radius_;
 
