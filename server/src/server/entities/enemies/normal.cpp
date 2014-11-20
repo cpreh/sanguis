@@ -4,6 +4,7 @@
 #include <sanguis/server/entities/enemies/enemy.hpp>
 #include <sanguis/server/entities/enemies/normal.hpp>
 #include <sanguis/server/entities/enemies/parameters.hpp>
+#include <sanguis/server/entities/enemies/pretty_name.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -21,7 +22,7 @@ sanguis::server::entities::enemies::normal::normal(
 	),
 	name_{
 		sge::charconv::fcppt_string_to_utf8(
-			sanguis::load::enemy_name(
+			sanguis::server::entities::enemies::pretty_name(
 				this->enemy_type()
 			)
 		)

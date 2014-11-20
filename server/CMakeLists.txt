@@ -232,6 +232,7 @@ set(
 	include/sanguis/server/entities/enemies/normal.hpp
 	include/sanguis/server/entities/enemies/parameters.hpp
 	include/sanguis/server/entities/enemies/parameters_fwd.hpp
+	include/sanguis/server/entities/enemies/pretty_name.hpp
 	include/sanguis/server/entities/enemies/skills/amount.hpp
 	include/sanguis/server/entities/enemies/skills/container.hpp
 	include/sanguis/server/entities/enemies/skills/cooldown.hpp
@@ -829,6 +830,7 @@ set(
 	src/server/entities/enemies/modifiers/regenerating.cpp
 	src/server/entities/enemies/normal.cpp
 	src/server/entities/enemies/parameters.cpp
+	src/server/entities/enemies/pretty_name.cpp
 	src/server/entities/enemies/skills/amount.cpp
 	src/server/entities/enemies/skills/factory/create_callbacks.cpp
 	src/server/entities/enemies/skills/factory/mother_spider.cpp
