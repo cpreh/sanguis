@@ -4,6 +4,7 @@
 #include <sanguis/client/draw2d/collide_parameters.hpp>
 #include <sanguis/client/draw2d/optional_speed.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
+#include <sanguis/client/draw2d/translation_fwd.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/scene/background_dim.hpp>
 #include <sanguis/client/draw2d/scene/world/base.hpp>
@@ -64,7 +65,6 @@ sanguis::client::draw2d::scene::world::state::state(
 	sanguis::client::load::tiles::context &_tiles,
 	sanguis::client::draw::debug const _debug,
 	sanguis::client::world_parameters const &_parameters,
-	sanguis::client::draw2d::optional_translation const _translation,
 	sanguis::client::draw2d::scene::world::parameters const &_world_parameters
 )
 :
@@ -76,7 +76,6 @@ sanguis::client::draw2d::scene::world::state::state(
 		sanguis::creator::generate(
 			_parameters.top_parameters()
 		),
-		_translation,
 		_parameters.top_parameters().name(),
 		_world_parameters
 	)
@@ -89,13 +88,12 @@ sanguis::client::draw2d::scene::world::state::~state()
 
 void
 sanguis::client::draw2d::scene::world::state::draw(
-	sge::renderer::context::core &_render_context
+	sge::renderer::context::core &_render_context,
+	sanguis::client::draw2d::translation const _translation
 )
 {
 	if(
 		batches_.empty()
-		||
-		!translation_
 	)
 		return;
 
@@ -112,7 +110,7 @@ sanguis::client::draw2d::scene::world::state::draw(
 			fcppt::math::vector::structure_cast<
 				sanguis::creator::signed_pos
 			>(
-				-translation_->get()
+				-_translation.get()
 			)
 		);
 
@@ -188,15 +186,6 @@ sanguis::client::draw2d::scene::world::state::draw_after(
 	);
 }
 
-void
-sanguis::client::draw2d::scene::world::state::translation(
-	sanguis::client::draw2d::optional_translation const _translation
-)
-{
-	translation_
-		= _translation;
-}
-
 sanguis::client::draw2d::optional_speed const
 sanguis::client::draw2d::scene::world::state::test_collision(
 	sanguis::client::draw2d::collide_parameters const &_parameters
@@ -259,7 +248,6 @@ sanguis::client::draw2d::scene::world::state::state(
 	sanguis::client::load::tiles::context &_tiles,
 	sanguis::client::draw::debug const _debug,
 	sanguis::creator::top_result const &_result,
-	sanguis::client::draw2d::optional_translation const _translation,
 	sanguis::creator::name const &_name,
 	sanguis::client::draw2d::scene::world::parameters const &_parameters
 )
@@ -290,9 +278,6 @@ sanguis::client::draw2d::scene::world::state::state(
 			_tiles,
 			sprite_buffers_
 		)
-	),
-	translation_(
-		_translation
 	),
 	effects_{
 		sanguis::client::draw2d::scene::world::create(

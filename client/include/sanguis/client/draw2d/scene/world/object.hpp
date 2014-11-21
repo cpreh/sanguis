@@ -7,7 +7,7 @@
 #include <sanguis/client/draw2d/collide_callback.hpp>
 #include <sanguis/client/draw2d/collide_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/optional_speed_fwd.hpp>
-#include <sanguis/client/draw2d/optional_translation_fwd.hpp>
+#include <sanguis/client/draw2d/translation_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/object_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/parameters.hpp>
 #include <sanguis/client/draw2d/scene/world/render_parameters_fwd.hpp>
@@ -53,7 +53,8 @@ public:
 
 	void
 	draw(
-		sge::renderer::context::core &
+		sge::renderer::context::core &,
+		sanguis::client::draw2d::translation
 	);
 
 	void
@@ -62,14 +63,8 @@ public:
 	);
 
 	void
-	translation(
-		sanguis::client::draw2d::optional_translation
-	);
-
-	void
 	change(
-		sanguis::client::world_parameters const &,
-		sanguis::client::draw2d::optional_translation
+		sanguis::client::world_parameters const &
 	);
 
 	sanguis::client::draw2d::collide_callback const &

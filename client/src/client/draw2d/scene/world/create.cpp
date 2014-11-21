@@ -30,6 +30,15 @@ sanguis::client::draw2d::scene::world::create(
 				_parameters.client_system(),
 				_parameters.viewport_manager()
 			);
+	if(
+		_name.get()
+		==
+		FCPPT_TEXT("start_area")
+	)
+		return
+			fcppt::make_unique_ptr<
+				sanguis::client::draw2d::scene::world::none
+			>();
 
 	FCPPT_LOG_ERROR(
 		sanguis::client::draw2d::log(),

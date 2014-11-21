@@ -420,13 +420,21 @@ sanguis::client::draw2d::scene::object::update(
 		{
 			_entity->update();
 
-			if(
-				attack_dest
-			)
-				this->hover_display(
-					*_entity,
-					*attack_dest
-				);
+			fcppt::maybe_void(
+				attack_dest,
+				[
+					this,
+					&_entity
+				](
+					sanguis::client::control::attack_dest const _attack_dest
+				)
+				{
+					this->hover_display(
+						*_entity,
+						_attack_dest
+					);
+				}
+			);
 
 			return
 				_entity->may_be_removed();
@@ -534,7 +542,8 @@ sanguis::client::draw2d::scene::object::draw(
 	);
 
 	world_->draw(
-		_render_context
+		_render_context,
+		*translation_
 	);
 
 	for(
@@ -550,7 +559,6 @@ sanguis::client::draw2d::scene::object::draw(
 			index
 		);
 
-		// TODO: Calculate translation in this function
 		world_->draw_after(
 			sanguis::client::draw2d::scene::world::render_parameters{
 				_render_context,
@@ -790,10 +798,6 @@ sanguis::client::draw2d::scene::object::update_translation()
 					this->screen_size()
 				)
 			);
-
-	world_->translation(
-		translation_
-	);
 }
 
 void
@@ -815,8 +819,7 @@ sanguis::client::draw2d::scene::object::change_world(
 	);
 
 	world_->change(
-		_parameters,
-		translation_
+		_parameters
 	);
 }
 

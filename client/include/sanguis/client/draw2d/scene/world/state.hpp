@@ -6,7 +6,7 @@
 #include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/collide_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/optional_speed_fwd.hpp>
-#include <sanguis/client/draw2d/optional_translation.hpp>
+#include <sanguis/client/draw2d/translation_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/base_unique_ptr.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_grid.hpp>
 #include <sanguis/client/draw2d/scene/world/parameters_fwd.hpp>
@@ -49,7 +49,6 @@ public:
 		sanguis::client::load::tiles::context &,
 		sanguis::client::draw::debug,
 		sanguis::client::world_parameters const &,
-		sanguis::client::draw2d::optional_translation,
 		sanguis::client::draw2d::scene::world::parameters const &
 	);
 
@@ -57,17 +56,13 @@ public:
 
 	void
 	draw(
-		sge::renderer::context::core &
+		sge::renderer::context::core &,
+		sanguis::client::draw2d::translation
 	);
 
 	void
 	draw_after(
 		sanguis::client::draw2d::scene::world::render_parameters const &
-	);
-
-	void
-	translation(
-		sanguis::client::draw2d::optional_translation
 	);
 
 	sanguis::client::draw2d::optional_speed const
@@ -86,7 +81,6 @@ private:
 		sanguis::client::load::tiles::context &,
 		sanguis::client::draw::debug,
 		sanguis::creator::top_result const &,
-		sanguis::client::draw2d::optional_translation,
 		sanguis::creator::name const &,
 		sanguis::client::draw2d::scene::world::parameters const &
 	);
@@ -102,8 +96,6 @@ private:
 	sanguis::creator::background_grid const background_grid_;
 
 	sanguis::client::draw2d::scene::world::batch_grid const batches_;
-
-	sanguis::client::draw2d::optional_translation translation_;
 
 	sanguis::client::draw2d::scene::world::base_unique_ptr const effects_;
 };

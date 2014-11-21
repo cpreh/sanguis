@@ -2,7 +2,7 @@
 #include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/collide_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/optional_speed.hpp>
-#include <sanguis/client/draw2d/optional_translation.hpp>
+#include <sanguis/client/draw2d/translation.hpp>
 #include <sanguis/client/draw2d/scene/world/object.hpp>
 #include <sanguis/client/draw2d/scene/world/parameters.hpp>
 #include <sanguis/client/draw2d/scene/world/render_parameters_fwd.hpp>
@@ -59,14 +59,16 @@ sanguis::client::draw2d::scene::world::object::~object()
 
 void
 sanguis::client::draw2d::scene::world::object::draw(
-	sge::renderer::context::core &_render_context
+	sge::renderer::context::core &_render_context,
+	sanguis::client::draw2d::translation const _translation
 )
 {
 	if(
 		state_
 	)
 		state_->draw(
-			_render_context
+			_render_context,
+			_translation
 		);
 }
 
@@ -84,22 +86,8 @@ sanguis::client::draw2d::scene::world::object::draw_after(
 }
 
 void
-sanguis::client::draw2d::scene::world::object::translation(
-	sanguis::client::draw2d::optional_translation const _translation
-)
-{
-	if(
-		state_
-	)
-		state_->translation(
-			_translation
-		);
-}
-
-void
 sanguis::client::draw2d::scene::world::object::change(
-	sanguis::client::world_parameters const &_parameters,
-	sanguis::client::draw2d::optional_translation const _translation
+	sanguis::client::world_parameters const &_parameters
 )
 {
 	state_ =
@@ -111,7 +99,6 @@ sanguis::client::draw2d::scene::world::object::change(
 			tiles_context_,
 			debug_,
 			_parameters,
-			_translation,
 			parameters_
 		);
 }
