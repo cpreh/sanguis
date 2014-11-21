@@ -1,9 +1,7 @@
 #include <sanguis/client/slowed_duration.hpp>
-#include <sanguis/client/draw2d/player_center.hpp>
-#include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/scene/world/base.hpp>
 #include <sanguis/client/draw2d/scene/world/none.hpp>
-#include <sge/renderer/context/core_fwd.hpp>
+#include <sanguis/client/draw2d/scene/world/render_parameters.hpp>
 
 
 sanguis::client::draw2d::scene::world::none::none()
@@ -25,9 +23,7 @@ sanguis::client::draw2d::scene::world::none::update(
 
 void
 sanguis::client::draw2d::scene::world::none::draw_after(
-	sge::renderer::context::core &,
-	sanguis::client::draw2d::player_center,
-	sanguis::client::draw2d::z_ordering
+	sanguis::client::draw2d::scene::world::render_parameters const &
 )
 {
 }

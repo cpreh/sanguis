@@ -68,6 +68,7 @@
 #include <sanguis/client/draw2d/scene/world/center_to_grid_pos.hpp>
 #include <sanguis/client/draw2d/scene/world/object.hpp>
 #include <sanguis/client/draw2d/scene/world/parameters.hpp>
+#include <sanguis/client/draw2d/scene/world/render_parameters.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/client/draw2d/sprite/state.hpp>
@@ -551,9 +552,11 @@ sanguis::client::draw2d::scene::object::draw(
 
 		// TODO: Calculate translation in this function
 		world_->draw_after(
-			_render_context,
-			*player_center_,
-			index
+			sanguis::client::draw2d::scene::world::render_parameters{
+				_render_context,
+				*player_center_,
+				index
+			}
 		);
 	}
 

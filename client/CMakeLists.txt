@@ -261,6 +261,8 @@ set(
 	include/sanguis/client/draw2d/scene/world/object_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/parameters.hpp
 	include/sanguis/client/draw2d/scene/world/parameters_fwd.hpp
+	include/sanguis/client/draw2d/scene/world/render_parameters.hpp
+	include/sanguis/client/draw2d/scene/world/render_parameters_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/buffers.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/buffers_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/choices.hpp
@@ -760,6 +762,7 @@ set(
 	src/client/draw2d/scene/world/none.cpp
 	src/client/draw2d/scene/world/object.cpp
 	src/client/draw2d/scene/world/parameters.cpp
+	src/client/draw2d/scene/world/render_parameters.cpp
 	src/client/draw2d/scene/world/state.cpp
 	src/client/draw2d/scene/world/to_non_connecting_tile_texture.cpp
 	src/client/draw2d/speed_is_null.cpp

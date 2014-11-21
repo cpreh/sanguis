@@ -3,10 +3,9 @@
 #include <sanguis/client/draw2d/collide_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/optional_speed.hpp>
 #include <sanguis/client/draw2d/optional_translation.hpp>
-#include <sanguis/client/draw2d/player_center.hpp>
-#include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/scene/world/object.hpp>
 #include <sanguis/client/draw2d/scene/world/parameters.hpp>
+#include <sanguis/client/draw2d/scene/world/render_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/state.hpp>
 #include <sanguis/client/load/resource/textures_fwd.hpp>
 #include <sanguis/creator/optional_background_tile.hpp>
@@ -73,18 +72,14 @@ sanguis::client::draw2d::scene::world::object::draw(
 
 void
 sanguis::client::draw2d::scene::world::object::draw_after(
-	sge::renderer::context::core &_render_context,
-	sanguis::client::draw2d::player_center const _player_center,
-	sanguis::client::draw2d::z_ordering const _z_ordering
+	sanguis::client::draw2d::scene::world::render_parameters const &_render_parameters
 )
 {
 	if(
 		state_
 	)
 		state_->draw_after(
-			_render_context,
-			_player_center,
-			_z_ordering
+			_render_parameters
 		);
 }
 

@@ -3,10 +3,8 @@
 #include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/collide_parameters.hpp>
 #include <sanguis/client/draw2d/optional_speed.hpp>
-#include <sanguis/client/draw2d/player_center.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
-#include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/scene/background_dim.hpp>
 #include <sanguis/client/draw2d/scene/world/base.hpp>
 #include <sanguis/client/draw2d/scene/world/batch.hpp>
@@ -15,6 +13,7 @@
 #include <sanguis/client/draw2d/scene/world/create.hpp>
 #include <sanguis/client/draw2d/scene/world/generate_batches.hpp>
 #include <sanguis/client/draw2d/scene/world/parameters_fwd.hpp>
+#include <sanguis/client/draw2d/scene/world/render_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/state.hpp>
 #include <sanguis/client/draw2d/scene/world/tile_size.hpp>
 #include <sanguis/client/draw2d/sprite/unit.hpp>
@@ -181,15 +180,11 @@ sanguis::client::draw2d::scene::world::state::draw(
 
 void
 sanguis::client::draw2d::scene::world::state::draw_after(
-	sge::renderer::context::core &_render_context,
-	sanguis::client::draw2d::player_center const _player_center,
-	sanguis::client::draw2d::z_ordering const _z_ordering
+	sanguis::client::draw2d::scene::world::render_parameters const &_render_parameters
 )
 {
 	effects_->draw_after(
-		_render_context,
-		_player_center,
-		_z_ordering
+		_render_parameters
 	);
 }
 

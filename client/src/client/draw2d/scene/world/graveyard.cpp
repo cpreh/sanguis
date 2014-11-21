@@ -1,11 +1,10 @@
 #include <sanguis/client/slowed_duration.hpp>
-#include <sanguis/client/draw2d/player_center.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/scene/world/base.hpp>
 #include <sanguis/client/draw2d/scene/world/graveyard.hpp>
+#include <sanguis/client/draw2d/scene/world/render_parameters.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_fwd.hpp>
 #include <sanguis/client/load/context_fwd.hpp>
-#include <sge/renderer/context/core_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 
 
@@ -37,18 +36,16 @@ sanguis::client::draw2d::scene::world::graveyard::update(
 
 void
 sanguis::client::draw2d::scene::world::graveyard::draw_after(
-	sge::renderer::context::core &_render_context,
-	sanguis::client::draw2d::player_center const _player_center,
-	sanguis::client::draw2d::z_ordering const _z_ordering
+	sanguis::client::draw2d::scene::world::render_parameters const &_parameters
 )
 {
 	if(
-		_z_ordering
+		_parameters.z_ordering()
 		==
 		sanguis::client::draw2d::z_ordering::player_upper
 	)
 		light_.draw(
-			_render_context,
-			_player_center
+			_parameters.render_context(),
+			_parameters.player_center()
 		);
 }

@@ -2,13 +2,11 @@
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_GRAVEYARD_HPP_INCLUDED
 
 #include <sanguis/client/slowed_duration_fwd.hpp>
-#include <sanguis/client/draw2d/player_center_fwd.hpp>
-#include <sanguis/client/draw2d/z_ordering_fwd.hpp>
 #include <sanguis/client/draw2d/scene/light.hpp>
 #include <sanguis/client/draw2d/scene/world/base.hpp>
+#include <sanguis/client/draw2d/scene/world/render_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_fwd.hpp>
 #include <sanguis/client/load/context_fwd.hpp>
-#include <sge/renderer/context/core_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -49,9 +47,7 @@ private:
 
 	void
 	draw_after(
-		sge::renderer::context::core &,
-		sanguis::client::draw2d::player_center,
-		sanguis::client::draw2d::z_ordering
+		sanguis::client::draw2d::scene::world::render_parameters const &
 	)
 	override;
 
