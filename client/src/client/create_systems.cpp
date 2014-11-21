@@ -34,7 +34,6 @@
 #include <sge/systems/renderer.hpp>
 #include <sge/systems/window.hpp>
 #include <sge/viewport/fill_on_resize.hpp>
-#include <sge/window/dim.hpp>
 #include <sge/window/title.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
@@ -48,11 +47,6 @@ sanguis::client::create_systems(
 	boost::program_options::variables_map const &_vm
 )
 {
-	sge::window::dim const dimensions(
-		1024,
-		768
-	);
-
 	return
 		fcppt::make_unique_ptr<
 			sanguis::client::systems
@@ -84,8 +78,7 @@ sanguis::client::create_systems(
 					sge::systems::original_window(
 						sge::window::title(
 							sanguis::app_name()
-						),
-						dimensions
+						)
 					)
 					.hide_cursor()
 				)

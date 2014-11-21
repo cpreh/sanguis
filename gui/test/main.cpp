@@ -84,7 +84,6 @@
 #include <sge/timer/scoped_frame_limiter.hpp>
 #include <sge/timer/clocks/standard.hpp>
 #include <sge/viewport/fill_on_resize.hpp>
-#include <sge/window/dim.hpp>
 #include <sge/window/system.hpp>
 #include <sge/window/title.hpp>
 #include <awl/show_error.hpp>
@@ -135,10 +134,6 @@ try
 				sge::systems::original_window(
 					sge::window::title(
 						FCPPT_TEXT("gui test")
-					),
-					sge::window::dim(
-						1024,
-						768
 					)
 				)
 			)
