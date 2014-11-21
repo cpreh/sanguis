@@ -1,18 +1,44 @@
 {
-	"cell_dimensions":[64,64],
-	"delay":40,
-	"texture":"barrel01.png",
-	"parts":{
-		"default":{
-			"weapon_categories":{
-				"none":{
-					"animations":{
-						"none":{
-							"range":[0,1]
+	"parts" :
+		{
+			"default" :
+				{
+					"weapon_categories" :
+						{
+							"none" :
+								{
+									"animations" :
+										{
+											"none" :
+												{
+													"texture" :
+														"0.png",
+													"range" :
+														[
+															16,
+															17
+														]
+												},
+											"dying" :
+												{
+													"texture" :
+														"0.png",
+													"range" :
+														[
+															0,
+															16
+														]
+												}
+										}
+								}
 						}
-					}
 				}
-			}
-		}
-	}
+		},
+	"delay" :
+		40,
+	"cell_dimensions" :
+		[
+			64,
+			64
+		]
 }
