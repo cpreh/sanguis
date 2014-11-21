@@ -8,7 +8,10 @@
 #include <sanguis/client/draw2d/collide_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/optional_speed_fwd.hpp>
 #include <sanguis/client/draw2d/optional_translation_fwd.hpp>
+#include <sanguis/client/draw2d/player_center_fwd.hpp>
+#include <sanguis/client/draw2d/z_ordering_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/object_fwd.hpp>
+#include <sanguis/client/draw2d/scene/world/parameters.hpp>
 #include <sanguis/client/draw2d/scene/world/state_fwd.hpp>
 #include <sanguis/client/load/resource/textures_fwd.hpp>
 #include <sanguis/client/load/tiles/context.hpp>
@@ -43,6 +46,7 @@ public:
 		sanguis::random_generator &,
 		sge::renderer::device::core &,
 		sanguis::client::load::resource::textures const &,
+		sanguis::client::draw2d::scene::world::parameters const &,
 		sanguis::client::draw::debug
 	);
 
@@ -51,6 +55,13 @@ public:
 	void
 	draw(
 		sge::renderer::context::core &
+	);
+
+	void
+	draw_after(
+		sge::renderer::context::core &,
+		sanguis::client::draw2d::player_center,
+		sanguis::client::draw2d::z_ordering
 	);
 
 	void
@@ -84,6 +95,8 @@ private:
 	sanguis::client::draw2d::collide_callback const collide_callback_;
 
 	sanguis::random_generator &random_generator_;
+
+	sanguis::client::draw2d::scene::world::parameters const parameters_;
 
 	sanguis::client::draw::debug const debug_;
 

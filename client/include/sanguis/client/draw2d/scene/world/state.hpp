@@ -7,13 +7,18 @@
 #include <sanguis/client/draw2d/collide_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/optional_speed_fwd.hpp>
 #include <sanguis/client/draw2d/optional_translation.hpp>
+#include <sanguis/client/draw2d/player_center_fwd.hpp>
+#include <sanguis/client/draw2d/z_ordering_fwd.hpp>
+#include <sanguis/client/draw2d/scene/world/base_unique_ptr.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_grid.hpp>
+#include <sanguis/client/draw2d/scene/world/parameters_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/state_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/buffers.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/state.hpp>
 #include <sanguis/client/load/tiles/context_fwd.hpp>
 #include <sanguis/creator/background_grid.hpp>
 #include <sanguis/creator/grid.hpp>
+#include <sanguis/creator/name_fwd.hpp>
 #include <sanguis/creator/optional_background_tile_fwd.hpp>
 #include <sanguis/creator/pos_fwd.hpp>
 #include <sanguis/creator/top_result_fwd.hpp>
@@ -45,7 +50,8 @@ public:
 		sanguis::client::load::tiles::context &,
 		sanguis::client::draw::debug,
 		sanguis::client::world_parameters const &,
-		sanguis::client::draw2d::optional_translation
+		sanguis::client::draw2d::optional_translation,
+		sanguis::client::draw2d::scene::world::parameters const &
 	);
 
 	~state();
@@ -53,6 +59,13 @@ public:
 	void
 	draw(
 		sge::renderer::context::core &
+	);
+
+	void
+	draw_after(
+		sge::renderer::context::core &,
+		sanguis::client::draw2d::player_center,
+		sanguis::client::draw2d::z_ordering
 	);
 
 	void
@@ -76,7 +89,9 @@ private:
 		sanguis::client::load::tiles::context &,
 		sanguis::client::draw::debug,
 		sanguis::creator::top_result const &,
-		sanguis::client::draw2d::optional_translation
+		sanguis::client::draw2d::optional_translation,
+		sanguis::creator::name const &,
+		sanguis::client::draw2d::scene::world::parameters const &
 	);
 
 	sge::renderer::device::core &renderer_;
@@ -92,6 +107,8 @@ private:
 	sanguis::client::draw2d::scene::world::batch_grid const batches_;
 
 	sanguis::client::draw2d::optional_translation translation_;
+
+	sanguis::client::draw2d::scene::world::base_unique_ptr const effects_;
 };
 
 }

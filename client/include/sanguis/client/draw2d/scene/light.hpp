@@ -38,7 +38,7 @@ public:
 	~light();
 
 	void
-	render(
+	draw(
 		sge::renderer::context::core &,
 		sanguis::client::draw2d::player_center
 	);

@@ -29,6 +29,7 @@ public:
 		sanguis::creator::spawn_boss
 	);
 
+	SANGUIS_CREATOR_SYMBOL
 	sanguis::creator::name const &
 	name() const;
 

@@ -59,7 +59,6 @@
 #include <sanguis/client/draw2d/scene/configure_entity.hpp>
 #include <sanguis/client/draw2d/scene/control_environment.hpp>
 #include <sanguis/client/draw2d/scene/health_pair.hpp>
-#include <sanguis/client/draw2d/scene/light.hpp>
 #include <sanguis/client/draw2d/scene/object.hpp>
 #include <sanguis/client/draw2d/scene/translation.hpp>
 #include <sanguis/client/draw2d/scene/hover/base.hpp>
@@ -68,6 +67,7 @@
 #include <sanguis/client/draw2d/scene/hover/parameters.hpp>
 #include <sanguis/client/draw2d/scene/world/center_to_grid_pos.hpp>
 #include <sanguis/client/draw2d/scene/world/object.hpp>
+#include <sanguis/client/draw2d/scene/world/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/client/draw2d/sprite/state.hpp>
@@ -273,6 +273,11 @@ sanguis::client::draw2d::scene::object::object(
 			random_generator_,
 			renderer_,
 			_resources.resources().textures(),
+			sanguis::client::draw2d::scene::world::parameters{
+				_resources,
+				client_system_,
+				_viewport_manager
+			},
 			_debug
 		)
 	),
@@ -294,15 +299,6 @@ sanguis::client::draw2d::scene::object::object(
 	background_(
 		fcppt::make_unique_ptr<
 			sanguis::client::draw2d::scene::background
-		>(
-			_resources,
-			client_system_,
-			_viewport_manager
-		)
-	),
-	light_(
-		fcppt::make_unique_ptr<
-			sanguis::client::draw2d::scene::light
 		>(
 			_resources,
 			client_system_,
@@ -465,6 +461,8 @@ sanguis::client::draw2d::scene::object::draw(
 		!projection_matrix
 		||
 		!translation_
+		||
+		!player_center_
 	)
 	{
 		_render_context.clear(
@@ -534,14 +532,30 @@ sanguis::client::draw2d::scene::object::draw(
 		*transform_state
 	);
 
-	this->render_systems(
+	world_->draw(
 		_render_context
 	);
 
-	light_->render(
-		_render_context,
-		*player_center_
-	);
+	for(
+		auto const index
+		:
+		fcppt::make_enum_range<
+			sanguis::client::draw2d::z_ordering
+		>()
+	)
+	{
+		normal_system_.render(
+			_render_context,
+			index
+		);
+
+		// TODO: Calculate translation in this function
+		world_->draw_after(
+			_render_context,
+			*player_center_,
+			index
+		);
+	}
 
 	fcppt::maybe_void(
 		hover_,
@@ -600,28 +614,6 @@ sanguis::client::draw2d::scene::object::control_environment() const
 {
 	return
 		*control_environment_;
-}
-
-void
-sanguis::client::draw2d::scene::object::render_systems(
-	sge::renderer::context::ffp &_render_context
-)
-{
-	world_->draw(
-		_render_context
-	);
-
-	for(
-		auto const index
-		:
-		fcppt::make_enum_range<
-			sanguis::client::draw2d::z_ordering
-		>()
-	)
-		normal_system_.render(
-			_render_context,
-			index
-		);
 }
 
 sanguis::client::draw2d::entities::base &

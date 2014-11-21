@@ -233,26 +233,34 @@ set(
 	include/sanguis/client/draw2d/scene/object.hpp
 	include/sanguis/client/draw2d/scene/object_fwd.hpp
 	include/sanguis/client/draw2d/scene/translation.hpp
+	include/sanguis/client/draw2d/scene/world/base.hpp
+	include/sanguis/client/draw2d/scene/world/base_fwd.hpp
+	include/sanguis/client/draw2d/scene/world/base_unique_ptr.hpp
 	include/sanguis/client/draw2d/scene/world/batch.hpp
 	include/sanguis/client/draw2d/scene/world/batch_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/batch_grid.hpp
 	include/sanguis/client/draw2d/scene/world/batch_grid_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/batch_size.hpp
 	include/sanguis/client/draw2d/scene/world/center_to_grid_pos.hpp
+	include/sanguis/client/draw2d/scene/world/create.hpp
 	include/sanguis/client/draw2d/scene/world/fill_batches.hpp
 	include/sanguis/client/draw2d/scene/world/fill_batches_base.hpp
 	include/sanguis/client/draw2d/scene/world/fill_non_connecting_batches.hpp
 	include/sanguis/client/draw2d/scene/world/filter_connecting_tiles.hpp
 	include/sanguis/client/draw2d/scene/world/filter_tile_pair.hpp
 	include/sanguis/client/draw2d/scene/world/generate_batches.hpp
+	include/sanguis/client/draw2d/scene/world/graveyard.hpp
 	include/sanguis/client/draw2d/scene/world/is_background.hpp
 	include/sanguis/client/draw2d/scene/world/log_tile_error.hpp
 	include/sanguis/client/draw2d/scene/world/lower_bound.hpp
 	include/sanguis/client/draw2d/scene/world/make_tile_neighbors.hpp
 	include/sanguis/client/draw2d/scene/world/make_tile_pair.hpp
 	include/sanguis/client/draw2d/scene/world/missing_tile_texture.hpp
+	include/sanguis/client/draw2d/scene/world/none.hpp
 	include/sanguis/client/draw2d/scene/world/object.hpp
 	include/sanguis/client/draw2d/scene/world/object_fwd.hpp
+	include/sanguis/client/draw2d/scene/world/parameters.hpp
+	include/sanguis/client/draw2d/scene/world/parameters_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/buffers.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/buffers_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/choices.hpp
@@ -741,12 +749,17 @@ set(
 	src/client/draw2d/scene/light_texture_coordinates.cpp
 	src/client/draw2d/scene/object.cpp
 	src/client/draw2d/scene/translation.cpp
+	src/client/draw2d/scene/world/base.cpp
 	src/client/draw2d/scene/world/batch.cpp
 	src/client/draw2d/scene/world/center_to_grid_pos.cpp
+	src/client/draw2d/scene/world/create.cpp
 	src/client/draw2d/scene/world/fill_non_connecting_batches.cpp
 	src/client/draw2d/scene/world/generate_batches.cpp
+	src/client/draw2d/scene/world/graveyard.cpp
 	src/client/draw2d/scene/world/missing_tile_texture.cpp
+	src/client/draw2d/scene/world/none.cpp
 	src/client/draw2d/scene/world/object.cpp
+	src/client/draw2d/scene/world/parameters.cpp
 	src/client/draw2d/scene/world/state.cpp
 	src/client/draw2d/scene/world/to_non_connecting_tile_texture.cpp
 	src/client/draw2d/speed_is_null.cpp

@@ -3,26 +3,32 @@
 #include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/collide_parameters.hpp>
 #include <sanguis/client/draw2d/optional_speed.hpp>
+#include <sanguis/client/draw2d/player_center.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
+#include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/scene/background_dim.hpp>
+#include <sanguis/client/draw2d/scene/world/base.hpp>
 #include <sanguis/client/draw2d/scene/world/batch.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_grid.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_size.hpp>
+#include <sanguis/client/draw2d/scene/world/create.hpp>
 #include <sanguis/client/draw2d/scene/world/generate_batches.hpp>
+#include <sanguis/client/draw2d/scene/world/parameters_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/state.hpp>
 #include <sanguis/client/draw2d/scene/world/tile_size.hpp>
 #include <sanguis/client/draw2d/sprite/unit.hpp>
 #include <sanguis/client/load/tiles/context_fwd.hpp>
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/dim2.hpp>
-#include <sanguis/collision/optional_result.hpp>
+#include <sanguis/collision/result.hpp>
 #include <sanguis/collision/scale.hpp>
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/test_move.hpp>
 #include <sanguis/collision/unit.hpp>
 #include <sanguis/creator/difference_type.hpp>
 #include <sanguis/creator/generate.hpp>
+#include <sanguis/creator/name_fwd.hpp>
 #include <sanguis/creator/optional_background_tile.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/signed_pos.hpp>
@@ -38,6 +44,7 @@
 #include <sge/sprite/state/object_impl.hpp>
 #include <sge/sprite/state/parameters.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/int_to_float.hpp>
@@ -58,7 +65,8 @@ sanguis::client::draw2d::scene::world::state::state(
 	sanguis::client::load::tiles::context &_tiles,
 	sanguis::client::draw::debug const _debug,
 	sanguis::client::world_parameters const &_parameters,
-	sanguis::client::draw2d::optional_translation const _translation
+	sanguis::client::draw2d::optional_translation const _translation,
+	sanguis::client::draw2d::scene::world::parameters const &_world_parameters
 )
 :
 	sanguis::client::draw2d::scene::world::state::state(
@@ -69,7 +77,9 @@ sanguis::client::draw2d::scene::world::state::state(
 		sanguis::creator::generate(
 			_parameters.top_parameters()
 		),
-		_translation
+		_translation,
+		_parameters.top_parameters().name(),
+		_world_parameters
 	)
 {
 }
@@ -170,14 +180,26 @@ sanguis::client::draw2d::scene::world::state::draw(
 }
 
 void
+sanguis::client::draw2d::scene::world::state::draw_after(
+	sge::renderer::context::core &_render_context,
+	sanguis::client::draw2d::player_center const _player_center,
+	sanguis::client::draw2d::z_ordering const _z_ordering
+)
+{
+	effects_->draw_after(
+		_render_context,
+		_player_center,
+		_z_ordering
+	);
+}
+
+void
 sanguis::client::draw2d::scene::world::state::translation(
 	sanguis::client::draw2d::optional_translation const _translation
 )
 {
 	translation_
 		= _translation;
-
-	// TODO: Update fog of war!
 }
 
 sanguis::client::draw2d::optional_speed const
@@ -185,37 +207,35 @@ sanguis::client::draw2d::scene::world::state::test_collision(
 	sanguis::client::draw2d::collide_parameters const &_parameters
 ) const
 {
-	sanguis::collision::optional_result const result(
-		sanguis::collision::test_move(
-			sanguis::collision::center(
-				_parameters.center().get()
-			),
-			fcppt::math::dim::structure_cast<
-				sanguis::collision::dim2
-			>(
-				_parameters.size()
-			)
-			/
-			sanguis::collision::scale(),
-			sanguis::collision::speed(
-				_parameters.speed().get()
-			),
-			_parameters.duration(),
-			grid_
-		)
-	);
-
 	return
-		result
-		?
-			sanguis::client::draw2d::optional_speed(
-				sanguis::client::draw2d::speed(
-					result->speed().get()
+		fcppt::optional_bind_construct(
+			sanguis::collision::test_move(
+				sanguis::collision::center(
+					_parameters.center().get()
+				),
+				fcppt::math::dim::structure_cast<
+					sanguis::collision::dim2
+				>(
+					_parameters.size()
 				)
+				/
+				sanguis::collision::scale(),
+				sanguis::collision::speed(
+					_parameters.speed().get()
+				),
+				_parameters.duration(),
+				grid_
+			),
+			[](
+				sanguis::collision::result const &_result
 			)
-		:
-			sanguis::client::draw2d::optional_speed()
-		;
+			{
+				return
+					sanguis::client::draw2d::speed(
+						_result.speed().get()
+					);
+			}
+		);
 }
 
 sanguis::creator::optional_background_tile
@@ -244,7 +264,9 @@ sanguis::client::draw2d::scene::world::state::state(
 	sanguis::client::load::tiles::context &_tiles,
 	sanguis::client::draw::debug const _debug,
 	sanguis::creator::top_result const &_result,
-	sanguis::client::draw2d::optional_translation const _translation
+	sanguis::client::draw2d::optional_translation const _translation,
+	sanguis::creator::name const &_name,
+	sanguis::client::draw2d::scene::world::parameters const &_parameters
 )
 :
 	renderer_(
@@ -276,6 +298,12 @@ sanguis::client::draw2d::scene::world::state::state(
 	),
 	translation_(
 		_translation
-	)
+	),
+	effects_{
+		sanguis::client::draw2d::scene::world::create(
+			_name,
+			_parameters
+		)
+	}
 {
 }

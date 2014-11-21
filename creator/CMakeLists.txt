@@ -33,6 +33,7 @@ set(
 	include/sanguis/creator/grid_spiral_range_fwd.hpp
 	include/sanguis/creator/log_location.hpp
 	include/sanguis/creator/name.hpp
+	include/sanguis/creator/name_fwd.hpp
 	include/sanguis/creator/opening.hpp
 	include/sanguis/creator/opening_container.hpp
 	include/sanguis/creator/opening_container_array.hpp

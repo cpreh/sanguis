@@ -105,7 +105,7 @@ sanguis::client::draw2d::scene::light::~light()
 }
 
 void
-sanguis::client::draw2d::scene::light::render(
+sanguis::client::draw2d::scene::light::draw(
 	sge::renderer::context::core &_render_context,
 	sanguis::client::draw2d::player_center const _player_center
 )
