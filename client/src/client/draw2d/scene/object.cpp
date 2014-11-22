@@ -563,6 +563,7 @@ sanguis::client::draw2d::scene::object::draw(
 			sanguis::client::draw2d::scene::world::render_parameters{
 				_render_context,
 				*player_center_,
+				*translation_,
 				index
 			}
 		);
