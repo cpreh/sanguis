@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_STATE_HPP_INCLUDED
 
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/client/slowed_duration_fwd.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/collide_parameters_fwd.hpp>
@@ -53,6 +54,11 @@ public:
 	);
 
 	~state();
+
+	void
+	update(
+		sanguis::client::slowed_duration
+	);
 
 	void
 	draw(

@@ -389,6 +389,10 @@ sanguis::client::draw2d::scene::object::update(
 			_delta.get()
 		);
 
+	world_->update(
+		_delta
+	);
+
 	sanguis::client::control::optional_attack_dest const attack_dest{
 		fcppt::optional_bind(
 			control_environment_->position(),

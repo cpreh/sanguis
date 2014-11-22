@@ -1,3 +1,5 @@
+#include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/client/slowed_duration.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/collide_parameters_fwd.hpp>
@@ -55,6 +57,19 @@ sanguis::client::draw2d::scene::world::object::object(
 
 sanguis::client::draw2d::scene::world::object::~object()
 {
+}
+
+void
+sanguis::client::draw2d::scene::world::object::update(
+	sanguis::client::slowed_duration const _slowed_duration
+)
+{
+	if(
+		state_
+	)
+		state_->update(
+			_slowed_duration
+		);
 }
 
 void
