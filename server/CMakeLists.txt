@@ -18,6 +18,7 @@ set(
 	include/sanguis/server/ai/behavior/wander.hpp
 	include/sanguis/server/ai/context.hpp
 	include/sanguis/server/ai/context_fwd.hpp
+	include/sanguis/server/ai/create_attack_health.hpp
 	include/sanguis/server/ai/create_boss.hpp
 	include/sanguis/server/ai/create_friend.hpp
 	include/sanguis/server/ai/create_function.hpp
@@ -727,6 +728,7 @@ set(
 	src/server/ai/behavior/stay.cpp
 	src/server/ai/behavior/wander.cpp
 	src/server/ai/context.cpp
+	src/server/ai/create_attack_health.cpp
 	src/server/ai/create_boss.cpp
 	src/server/ai/create_friend.cpp
 	src/server/ai/create_simple.cpp

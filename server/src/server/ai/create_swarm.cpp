@@ -3,12 +3,15 @@
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/ai/create_swarm.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
+#include <sanguis/server/ai/speed_factor.hpp>
 #include <sanguis/server/ai/behavior/attack.hpp>
 #include <sanguis/server/ai/behavior/follow_friend.hpp>
 #include <sanguis/server/ai/behavior/wander.hpp>
 #include <sanguis/server/ai/tree/container.hpp>
 #include <sanguis/server/ai/tree/make_leaf.hpp>
 #include <sanguis/server/ai/tree/priority_sequence.hpp>
+#include <fcppt/literal.hpp>
+#include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/assign/make_container.hpp>
 
@@ -52,7 +55,12 @@ sanguis::server::ai::create_swarm(
 							sanguis::server::ai::behavior::wander
 						>(
 							_context,
-							_random_generator
+							_random_generator,
+							fcppt::literal<
+								sanguis::server::ai::speed_factor
+							>(
+								0.3f
+							)
 						)
 					)
 				);

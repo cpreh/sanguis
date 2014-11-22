@@ -3,7 +3,7 @@
 
 #include <sanguis/server/ai/context_fwd.hpp>
 #include <sanguis/server/ai/sight_range_fwd.hpp>
-#include <sanguis/server/ai/speed_factor_fwd.hpp>
+#include <sanguis/server/ai/speed_factor.hpp>
 #include <sanguis/server/ai/behavior/attack.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -27,7 +27,8 @@ class attack_health
 public:
 	attack_health(
 		sanguis::server::ai::context &,
-		sanguis::server::ai::sight_range
+		sanguis::server::ai::sight_range,
+		sanguis::server::ai::speed_factor
 	);
 
 	~attack_health()
@@ -36,6 +37,8 @@ private:
 	sanguis::server::ai::speed_factor const
 	speed_factor() const
 	override;
+
+	sanguis::server::ai::speed_factor const speed_factor_;
 };
 
 }

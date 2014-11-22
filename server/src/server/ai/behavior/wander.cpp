@@ -10,13 +10,12 @@
 #include <sanguis/server/ai/behavior/status.hpp>
 #include <sanguis/server/ai/behavior/wander.hpp>
 #include <sanguis/server/random/grid_pos.hpp>
-#include <fcppt/literal.hpp>
-#include <fcppt/make_literal_strong_typedef.hpp>
 
 
 sanguis::server::ai::behavior::wander::wander(
 	sanguis::server::ai::context &_context,
-	sanguis::random_generator &_random_generator
+	sanguis::random_generator &_random_generator,
+	sanguis::server::ai::speed_factor const _speed_factor
 )
 :
 	sanguis::server::ai::behavior::base(
@@ -24,7 +23,10 @@ sanguis::server::ai::behavior::wander::wander(
 	),
 	random_generator_(
 		_random_generator
-	)
+	),
+	speed_factor_{
+		_speed_factor
+	}
 {
 }
 
@@ -60,10 +62,6 @@ sanguis::server::ai::behavior::wander::update(
 	return
 		sanguis::server::ai::go_to_grid_pos(
 			this->context(),
-			fcppt::literal<
-				sanguis::server::ai::speed_factor
-			>(
-				0.3f
-			)
+			speed_factor_
 		);
 }

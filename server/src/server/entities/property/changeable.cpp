@@ -6,7 +6,6 @@
 #include <sanguis/server/entities/property/initial.hpp>
 #include <sanguis/server/entities/property/value.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/assert/error.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -118,7 +117,8 @@ sanguis::server::entities::property::changeable::on_recalc_max(
 		max_
 	);
 
-	max_ = _max;
+	max_ =
+		_max;
 
 	max_change_signal_(
 		sanguis::server::entities::property::change_event(
@@ -137,7 +137,11 @@ sanguis::server::entities::property::changeable::on_recalc_max(
 void
 sanguis::server::entities::property::changeable::check_current()
 {
-	FCPPT_ASSERT_ERROR(
-		current_ <= max_
-	);
+	if(
+		current_
+		>
+		max_
+	)
+		current_ =
+			max_;
 }

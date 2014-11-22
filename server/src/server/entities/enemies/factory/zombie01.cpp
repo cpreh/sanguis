@@ -2,7 +2,7 @@
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/pickup_probability.hpp>
-#include <sanguis/server/ai/create_simple.hpp>
+#include <sanguis/server/ai/create_attack_health.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/container.hpp>
@@ -46,7 +46,7 @@ sanguis::server::entities::enemies::factory::zombie01(
 			sanguis::server::entities::movement_speed(
 				200.f
 			),
-			sanguis::server::ai::create_simple(
+			sanguis::server::ai::create_attack_health(
 				_parameters.random_generator(),
 				sanguis::server::ai::sight_range(
 					1000.f

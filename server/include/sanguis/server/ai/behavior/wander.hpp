@@ -4,6 +4,7 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/ai/context_fwd.hpp>
+#include <sanguis/server/ai/speed_factor.hpp>
 #include <sanguis/server/ai/behavior/base.hpp>
 #include <sanguis/server/ai/behavior/status_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -28,7 +29,8 @@ class wander
 public:
 	wander(
 		sanguis::server::ai::context &,
-		sanguis::random_generator &
+		sanguis::random_generator &,
+		sanguis::server::ai::speed_factor
 	);
 
 	~wander()
@@ -49,6 +51,8 @@ public:
 	override;
 private:
 	sanguis::random_generator &random_generator_;
+
+	sanguis::server::ai::speed_factor const speed_factor_;
 };
 
 }
