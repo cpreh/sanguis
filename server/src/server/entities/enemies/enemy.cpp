@@ -48,6 +48,7 @@
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -159,17 +160,24 @@ sanguis::server::entities::enemies::enemy::update()
 void
 sanguis::server::entities::enemies::enemy::remove()
 {
-	if(
-		spawn_owner_.get()
-	)
-		fcppt::cast::static_downcast<
-			sanguis::server::entities::spawns::spawn &
-		>(
-			*spawn_owner_.get()
+	fcppt::maybe_void(
+		spawn_owner_.get().get(),
+		[
+			this
+		](
+			sanguis::server::entities::with_links &_spawn_owner
 		)
-		.unregister(
-			*this
-		);
+		{
+			fcppt::cast::static_downcast<
+				sanguis::server::entities::spawns::spawn &
+			>(
+				_spawn_owner
+			)
+			.unregister(
+				*this
+			);
+		}
+	);
 
 	sanguis::server::environment::insert_no_result(
 		*this->environment(),

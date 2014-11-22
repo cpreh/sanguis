@@ -58,7 +58,7 @@ sanguis::server::entities::exp_area::remove()
 		)
 		{
 			return
-				!_link;
+				!_link.get();
 		}
 	);
 
@@ -70,7 +70,7 @@ sanguis::server::entities::exp_area::remove()
 		fcppt::cast::static_downcast<
 			sanguis::server::entities::player &
 		>(
-			*player_link.second
+			*player_link.second.get()
 		).add_exp(
 			sanguis::server::exp(
 				exp_.get()

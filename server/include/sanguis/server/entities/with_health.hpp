@@ -55,10 +55,12 @@ public:
 	regeneration();
 
 	sanguis::server::health const
-	current_health() const;
+	current_health() const
+	override;
 
 	sanguis::server::health const
-	max_health() const;
+	max_health() const
+	override;
 
 	sanguis::server::damage::armor_array const &
 	armor() const;

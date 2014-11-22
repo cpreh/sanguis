@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_IFACES_WITH_HEALTH_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_IFACES_WITH_HEALTH_HPP_INCLUDED
 
+#include <sanguis/server/health_fwd.hpp>
 #include <sanguis/server/entities/property/changeable_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -28,6 +29,14 @@ public:
 	virtual
 	sanguis::server::entities::property::changeable &
 	health() = 0;
+
+	virtual
+	sanguis::server::health const
+	current_health() const = 0;
+
+	virtual
+	sanguis::server::health const
+	max_health() const = 0;
 
 	virtual
 	void

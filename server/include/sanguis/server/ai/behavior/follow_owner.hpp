@@ -48,8 +48,6 @@ public:
 	)
 	override;
 private:
-	sanguis::server::ai::context &context_;
-
 	sanguis::server::entities::spawn_owner const spawn_owner_;
 };
 

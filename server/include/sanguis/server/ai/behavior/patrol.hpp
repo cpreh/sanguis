@@ -49,8 +49,6 @@ public:
 	)
 	override;
 private:
-	sanguis::server::ai::context &context_;
-
 	sanguis::random_generator &random_generator_;
 
 	sanguis::creator::pos const start_pos_;

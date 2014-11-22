@@ -64,8 +64,6 @@ private:
 	sanguis::server::entities::auto_weak_link
 	first_target() const;
 
-	sanguis::server::ai::context &context_;
-
 	sanguis::server::ai::entity_set potential_targets_;
 
 	sanguis::server::entities::auto_weak_link target_;

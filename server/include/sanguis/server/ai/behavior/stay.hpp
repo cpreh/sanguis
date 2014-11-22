@@ -48,8 +48,6 @@ public:
 	)
 	override;
 private:
-	sanguis::server::ai::context &context_;
-
 	sanguis::server::center const start_pos_;
 };
 

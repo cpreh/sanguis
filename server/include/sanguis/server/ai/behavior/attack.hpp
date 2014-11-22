@@ -5,6 +5,7 @@
 #include <sanguis/server/ai/context_fwd.hpp>
 #include <sanguis/server/ai/entity_set.hpp>
 #include <sanguis/server/ai/sight_range_fwd.hpp>
+#include <sanguis/server/ai/speed_factor_fwd.hpp>
 #include <sanguis/server/ai/behavior/base.hpp>
 #include <sanguis/server/ai/behavior/status_fwd.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
@@ -71,7 +72,9 @@ private:
 	sanguis::server::entities::auto_weak_link
 	closest_target() const;
 
-	sanguis::server::ai::context &context_;
+	virtual
+	sanguis::server::ai::speed_factor const
+	speed_factor() const;
 
 	sanguis::server::ai::entity_set potential_targets_;
 

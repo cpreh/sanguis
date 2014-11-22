@@ -21,6 +21,8 @@
 #include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/maybe.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -33,7 +35,7 @@ sanguis::server::ai::behavior::follow_friend::follow_friend(
 	sanguis::server::ai::sight_range const _sight_range
 )
 :
-	context_(
+	sanguis::server::ai::behavior::base(
 		_context
 	),
 	potential_targets_(),
@@ -46,7 +48,7 @@ sanguis::server::ai::behavior::follow_friend::follow_friend(
 			sanguis::server::radius(
 				_sight_range.get()
 			),
-			context_.me().team(),
+			this->me().team(),
 			sanguis::server::auras::target_kind::friend_,
 			sanguis::server::add_target_callback(
 				std::bind(
@@ -82,19 +84,19 @@ sanguis::server::ai::behavior::follow_friend::do_start()
 		;
 
 	return
-		target_.has_value();
+		target_.get().has_value();
 }
 
 void
 sanguis::server::ai::behavior::follow_friend::do_stop()
 {
-	context_.clear_path();
+	this->context().clear_path();
 
 	target_ =
 		sanguis::server::entities::auto_weak_link();
 
 	sanguis::server::ai::idle(
-		context_.me()
+		this->me()
 	);
 }
 
@@ -103,26 +105,35 @@ sanguis::server::ai::behavior::follow_friend::update(
 	sanguis::duration
 )
 {
-	if(
-		!target_
-	)
-		return
-			sanguis::server::ai::behavior::status::failure;
-
-	sanguis::server::ai::go_close_to_target(
-		context_,
-		sanguis::server::ai::target{
-			target_->center()
-		},
-		fcppt::literal<
-			sanguis::server::ai::speed_factor
-		>(
-			1
-		)
-	);
-
 	return
-		sanguis::server::ai::behavior::status::running;
+		fcppt::maybe(
+			target_.get(),
+			[]{
+				return
+					sanguis::server::ai::behavior::status::failure;
+			},
+			[
+				this
+			](
+				sanguis::server::entities::with_links const &_target
+			)
+			{
+				sanguis::server::ai::go_close_to_target(
+					this->context(),
+					sanguis::server::ai::target{
+						_target.center()
+					},
+					fcppt::literal<
+						sanguis::server::ai::speed_factor
+					>(
+						1
+					)
+				);
+
+				return
+					sanguis::server::ai::behavior::status::running;
+			}
+		);
 }
 
 void
@@ -158,16 +169,25 @@ sanguis::server::ai::behavior::follow_friend::target_leaves(
 		1u
 	);
 
-	if(
-		target_
-		&&
-		sanguis::server::entities::same_object(
-			*target_,
-			_with_body
+	fcppt::maybe_void(
+		target_.get(),
+		[
+			&_with_body,
+			this
+		](
+			sanguis::server::entities::with_links const &_target
 		)
-	)
-		target_ =
-			sanguis::server::entities::auto_weak_link();
+		{
+			if(
+				sanguis::server::entities::same_object(
+					_target,
+					_with_body
+				)
+			)
+				target_ =
+					sanguis::server::entities::auto_weak_link();
+		}
+	);
 }
 
 sanguis::server::entities::auto_weak_link

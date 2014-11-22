@@ -26,6 +26,7 @@
 #include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
 #include <sanguis/server/world/center_to_grid_pos.hpp>
 #include <fcppt/maybe.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/algorithm/join.hpp>
 
 
@@ -166,12 +167,17 @@ sanguis::server::weapons::spawn::owner_lost()
 void
 sanguis::server::weapons::spawn::kill_spawned()
 {
-	if(
-		spawned_
-	)
-		dynamic_cast<
-			sanguis::server::entities::ifaces::with_health &
-		>(
-			*spawned_
-		).kill();
+	fcppt::maybe_void(
+		spawned_.get(),
+		[](
+			sanguis::server::entities::with_links &_spawned
+		)
+		{
+			dynamic_cast<
+				sanguis::server::entities::ifaces::with_health &
+			>(
+				_spawned
+			).kill();
+		}
+	);
 }

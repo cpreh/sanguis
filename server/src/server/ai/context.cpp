@@ -91,11 +91,18 @@ sanguis::creator::grid const &
 sanguis::server::ai::context::grid() const
 {
 	return
-		me_.environment()->grid();
+		this->me().environment()->grid();
 }
 
 sanguis::server::entities::with_ai &
 sanguis::server::ai::context::me()
+{
+	return
+		me_;
+}
+
+sanguis::server::entities::with_ai const &
+sanguis::server::ai::context::me() const
 {
 	return
 		me_;

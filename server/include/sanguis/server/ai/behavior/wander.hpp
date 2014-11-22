@@ -48,8 +48,6 @@ public:
 	)
 	override;
 private:
-	sanguis::server::ai::context &context_;
-
 	sanguis::random_generator &random_generator_;
 };
 

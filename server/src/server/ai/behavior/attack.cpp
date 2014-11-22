@@ -22,6 +22,7 @@
 #include <sanguis/server/auras/target.hpp>
 #include <sanguis/server/auras/target_kind.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
+#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/same_object.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_body.hpp>
@@ -37,7 +38,8 @@
 #include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/maybe.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -50,8 +52,7 @@ sanguis::server::ai::behavior::attack::attack(
 	sanguis::server::ai::sight_range const _sight_range
 )
 :
-	sanguis::server::ai::behavior::base(),
-	context_(
+	sanguis::server::ai::behavior::base(
 		_context
 	),
 	potential_targets_(),
@@ -66,14 +67,14 @@ sanguis::server::ai::behavior::attack::attack(
 		)
 	}
 {
-	_context.me().add_aura(
+	this->me().add_aura(
 		fcppt::make_unique_ptr<
 			sanguis::server::auras::target
 		>(
 			sanguis::server::radius(
 				_sight_range.get()
 			),
-			context_.me().team(),
+			this->me().team(),
 			sanguis::server::auras::target_kind::enemy,
 			sanguis::server::add_target_callback(
 				std::bind(
@@ -101,7 +102,7 @@ bool
 sanguis::server::ai::behavior::attack::do_start()
 {
 	if(
-		target_
+		target_.get()
 	)
 		return
 			true;
@@ -110,29 +111,42 @@ sanguis::server::ai::behavior::attack::do_start()
 		this->closest_target();
 
 	return
-		target_
-		&&
-		sanguis::creator::tile_is_visible(
-			context_.grid(),
-			sanguis::server::world::center_to_grid_pos(
-				target_->center()
-			),
-			sanguis::server::world::center_to_grid_pos(
-				context_.me().center()
+		fcppt::maybe(
+			target_.get(),
+			[]{
+				return
+					false;
+			},
+			[
+				this
+			](
+				sanguis::server::entities::with_links const &_target
 			)
+			{
+				return
+					sanguis::creator::tile_is_visible(
+						this->context().grid(),
+						sanguis::server::world::center_to_grid_pos(
+							_target.center()
+						),
+						sanguis::server::world::center_to_grid_pos(
+							this->me().center()
+						)
+					);
+			}
 		);
 }
 
 void
 sanguis::server::ai::behavior::attack::do_stop()
 {
-	context_.clear_path();
+	this->context().clear_path();
 
 	target_ =
 		sanguis::server::entities::auto_weak_link();
 
 	sanguis::server::ai::idle(
-		context_.me()
+		this->me()
 	);
 }
 
@@ -146,79 +160,84 @@ sanguis::server::ai::behavior::attack::update(
 	);
 
 	if(
-		closer_target
+		closer_target.get()
 	)
 		target_ =
 			closer_target;
 
-	if(
-		!target_
-	)
-		return
-			sanguis::server::ai::behavior::status::failure;
-
-	sanguis::creator::pos const target_grid_pos{
-		sanguis::server::world::center_to_grid_pos(
-			target_->center()
-		)
-	};
-
-	sanguis::server::ai::is_visible const is_visible{
-		sanguis::creator::tile_is_visible(
-			context_.grid(),
-			target_grid_pos,
-			sanguis::server::world::center_to_grid_pos(
-				context_.me().center()
-			)
-		)
-	};
-
-	context_.me().target(
-		is_visible.get()
-		?
-			sanguis::server::weapons::optional_target(
-				sanguis::server::weapons::target(
-					target_->center().get()
-				)
-			)
-		:
-			sanguis::server::weapons::optional_target()
-	);
-
-	sanguis::is_primary_weapon const weapon_to_use{
-		true
-	};
-
-	sanguis::server::ai::in_range const in_range{
-		context_.me().in_range(
-			weapon_to_use
-		)
-	};
-
-	context_.me().use_weapon(
-		is_visible.get()
-		&&
-		in_range.get()
-		,
-		weapon_to_use
-	);
-
-	sanguis::server::ai::go_to_target(
-		context_,
-		in_range,
-		is_visible,
-		sanguis::server::ai::target{
-			target_->center()
-		},
-		fcppt::literal<
-			sanguis::server::ai::speed_factor
-		>(
-			1
-		)
-	);
-
 	return
-		sanguis::server::ai::behavior::status::running;
+		fcppt::maybe(
+			target_.get(),
+			[]{
+				return
+					sanguis::server::ai::behavior::status::failure;
+			},
+			[
+				this
+			](
+				sanguis::server::entities::with_links const &_target
+			)
+			{
+				sanguis::creator::pos const target_grid_pos{
+					sanguis::server::world::center_to_grid_pos(
+						_target.center()
+					)
+				};
+
+				sanguis::server::ai::is_visible const is_visible{
+					sanguis::creator::tile_is_visible(
+						this->context().grid(),
+						target_grid_pos,
+						sanguis::server::world::center_to_grid_pos(
+							this->me().center()
+						)
+					)
+				};
+
+				this->me().target(
+					is_visible.get()
+					?
+						sanguis::server::weapons::optional_target(
+							sanguis::server::weapons::target(
+								_target.center().get()
+							)
+						)
+					:
+						sanguis::server::weapons::optional_target()
+				);
+
+				sanguis::is_primary_weapon const weapon_to_use{
+					true
+				};
+
+				sanguis::server::ai::in_range const in_range{
+					this->me().in_range(
+						weapon_to_use
+					)
+				};
+
+				this->me().use_weapon(
+					is_visible.get()
+					&&
+					in_range.get()
+					,
+					weapon_to_use
+				);
+
+				sanguis::server::ai::go_to_target(
+					this->context(),
+					in_range,
+					is_visible,
+					sanguis::server::ai::target{
+						_target.center()
+					},
+					this->speed_factor()
+				);
+
+				return
+					sanguis::server::ai::behavior::status::running;
+			}
+		);
 }
 
 void
@@ -251,16 +270,25 @@ sanguis::server::ai::behavior::attack::target_leaves(
 		1u
 	);
 
-	if(
-		target_
-		&&
-		sanguis::server::entities::same_object(
-			*target_,
-			_with_body
+	fcppt::maybe_void(
+		target_.get(),
+		[
+			&_with_body,
+			this
+		](
+			sanguis::server::entities::base const &_target
 		)
-	)
-		target_ =
-			sanguis::server::entities::auto_weak_link();
+		{
+			if(
+				sanguis::server::entities::same_object(
+					_target,
+					_with_body
+				)
+			)
+				target_ =
+					sanguis::server::entities::auto_weak_link();
+		}
+	);
 }
 
 void
@@ -269,7 +297,7 @@ sanguis::server::ai::behavior::attack::health_changed(
 )
 {
 	if(
-		target_
+		target_.get()
 		||
 		_event.diff().get()
 		>=
@@ -281,11 +309,9 @@ sanguis::server::ai::behavior::attack::health_changed(
 	)
 		return;
 
-	fcppt::optional<
-		sanguis::server::entities::with_body &
-	> const result(
+	fcppt::maybe_void(
 		sanguis::server::closest_entity(
-			context_.me(),
+			this->me(),
 			potential_targets_,
 			[](
 				sanguis::server::entities::with_body const &
@@ -294,14 +320,17 @@ sanguis::server::ai::behavior::attack::health_changed(
 				return
 					true;
 			}
+		),
+		[
+			this
+		](
+			sanguis::server::entities::with_body &_result
 		)
+		{
+			target_ =
+				_result.link();
+		}
 	);
-
-	if(
-		result
-	)
-		target_ =
-			result->link();
 }
 
 sanguis::server::entities::auto_weak_link
@@ -309,39 +338,54 @@ sanguis::server::ai::behavior::attack::closest_target() const
 {
 	sanguis::creator::pos const my_grid_pos(
 		sanguis::server::world::center_to_grid_pos(
-			context_.me().center()
-		)
-	);
-
-	fcppt::optional<
-		sanguis::server::entities::with_body &
-	> const result(
-		sanguis::server::closest_entity(
-			context_.me(),
-			potential_targets_,
-			[
-				this,
-				my_grid_pos
-			](
-				sanguis::server::entities::with_body const &_ref
-			)
-			{
-				return
-					sanguis::creator::tile_is_visible(
-						context_.grid(),
-						sanguis::server::world::center_to_grid_pos(
-							_ref.center()
-						),
-						my_grid_pos
-					);
-			}
+			this->me().center()
 		)
 	);
 
 	return
-		result
-		?
-			result->link()
-		:
-			sanguis::server::entities::auto_weak_link();
+		fcppt::maybe(
+			sanguis::server::closest_entity(
+				this->me(),
+				potential_targets_,
+				[
+					this,
+					my_grid_pos
+				](
+					sanguis::server::entities::with_body const &_ref
+				)
+				{
+					return
+						sanguis::creator::tile_is_visible(
+							this->context().grid(),
+							sanguis::server::world::center_to_grid_pos(
+								_ref.center()
+							),
+							my_grid_pos
+						);
+				}
+			),
+			[]
+			{
+				return
+					sanguis::server::entities::auto_weak_link();
+			},
+			[](
+				sanguis::server::entities::with_body &_result
+			)
+			{
+				return
+					_result.link();
+			}
+		);
+}
+
+sanguis::server::ai::speed_factor const
+sanguis::server::ai::behavior::attack::speed_factor() const
+{
+	return
+		fcppt::literal<
+			sanguis::server::ai::speed_factor
+		>(
+			1
+		);
 }

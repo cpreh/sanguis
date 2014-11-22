@@ -11,6 +11,7 @@
 #include <sanguis/server/entities/with_links.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_literal_strong_typedef.hpp>
+#include <fcppt/maybe.hpp>
 
 
 sanguis::server::ai::behavior::follow_owner::follow_owner(
@@ -18,8 +19,7 @@ sanguis::server::ai::behavior::follow_owner::follow_owner(
 	sanguis::server::entities::spawn_owner const &_spawn_owner
 )
 :
-	sanguis::server::ai::behavior::base(),
-	context_(
+	sanguis::server::ai::behavior::base(
 		_context
 	),
 	spawn_owner_{
@@ -36,13 +36,13 @@ bool
 sanguis::server::ai::behavior::follow_owner::do_start()
 {
 	return
-		spawn_owner_.get().has_value();
+		spawn_owner_.get().get().has_value();
 }
 
 void
 sanguis::server::ai::behavior::follow_owner::do_stop()
 {
-	context_.clear_path();
+	this->context().clear_path();
 }
 
 sanguis::server::ai::behavior::status
@@ -50,24 +50,34 @@ sanguis::server::ai::behavior::follow_owner::update(
 	sanguis::duration
 )
 {
-	if(
-		!spawn_owner_.get()
-	)
-		return
-			sanguis::server::ai::behavior::status::failure;
-
-	sanguis::server::ai::go_close_to_target(
-		context_,
-		sanguis::server::ai::target{
-			spawn_owner_.get()->center()
-		},
-		fcppt::literal<
-			sanguis::server::ai::speed_factor
-		>(
-			1
-		)
-	);
-
 	return
-		sanguis::server::ai::behavior::status::running;
+		fcppt::maybe(
+			spawn_owner_.get().get(),
+			[]{
+				return
+					sanguis::server::ai::behavior::status::failure;
+			},
+			[
+				this
+			](
+				sanguis::server::entities::with_links const &_spawn_owner
+			)
+			{
+
+				sanguis::server::ai::go_close_to_target(
+					this->context(),
+					sanguis::server::ai::target{
+						_spawn_owner.center()
+					},
+					fcppt::literal<
+						sanguis::server::ai::speed_factor
+					>(
+						1
+					)
+				);
+
+				return
+					sanguis::server::ai::behavior::status::running;
+			}
+		);
 }

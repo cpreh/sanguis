@@ -5,6 +5,7 @@ set(
 	include/sanguis/server/add_weapon_pickup_callback.hpp
 	include/sanguis/server/ai/angle_to_target.hpp
 	include/sanguis/server/ai/behavior/attack.hpp
+	include/sanguis/server/ai/behavior/attack_health.hpp
 	include/sanguis/server/ai/behavior/base.hpp
 	include/sanguis/server/ai/behavior/base_fwd.hpp
 	include/sanguis/server/ai/behavior/base_unique_ptr.hpp
@@ -718,6 +719,7 @@ set(
 	include/sanguis/server/world/update_entity.hpp
 	src/server/ai/angle_to_target.cpp
 	src/server/ai/behavior/attack.cpp
+	src/server/ai/behavior/attack_health.cpp
 	src/server/ai/behavior/base.cpp
 	src/server/ai/behavior/follow_friend.cpp
 	src/server/ai/behavior/follow_owner.cpp

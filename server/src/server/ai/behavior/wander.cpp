@@ -19,8 +19,7 @@ sanguis::server::ai::behavior::wander::wander(
 	sanguis::random_generator &_random_generator
 )
 :
-	sanguis::server::ai::behavior::base(),
-	context_(
+	sanguis::server::ai::behavior::base(
 		_context
 	),
 	random_generator_(
@@ -38,11 +37,11 @@ sanguis::server::ai::behavior::wander::do_start()
 {
 	return
 		sanguis::server::ai::make_path(
-			context_,
+			this->context(),
 			sanguis::server::random::grid_pos(
 				random_generator_,
 				sanguis::creator::pos::null(),
-				context_.grid().size()
+				this->context().grid().size()
 			)
 		);
 }
@@ -50,7 +49,7 @@ sanguis::server::ai::behavior::wander::do_start()
 void
 sanguis::server::ai::behavior::wander::do_stop()
 {
-	context_.clear_path();
+	this->context().clear_path();
 }
 
 sanguis::server::ai::behavior::status
@@ -60,7 +59,7 @@ sanguis::server::ai::behavior::wander::update(
 {
 	return
 		sanguis::server::ai::go_to_grid_pos(
-			context_,
+			this->context(),
 			fcppt::literal<
 				sanguis::server::ai::speed_factor
 			>(

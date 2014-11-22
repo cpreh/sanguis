@@ -75,7 +75,8 @@ closest_entity(
 		}
 	}
 
-	return ret;
+	return
+		ret;
 }
 
 }

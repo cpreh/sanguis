@@ -46,6 +46,9 @@ public:
 
 	sanguis::server::entities::with_ai &
 	me();
+
+	sanguis::server::entities::with_ai const &
+	me() const;
 private:
 	sanguis::server::entities::with_ai &me_;
 

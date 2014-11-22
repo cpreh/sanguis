@@ -17,8 +17,7 @@ sanguis::server::ai::behavior::stay::stay(
 	sanguis::server::ai::context &_context
 )
 :
-	sanguis::server::ai::behavior::base(),
-	context_(
+	sanguis::server::ai::behavior::base(
 		_context
 	),
 	start_pos_{
@@ -37,7 +36,7 @@ sanguis::server::ai::behavior::stay::do_start()
 	if(
 		sanguis::server::collision::distance_pos_pos(
 			start_pos_.get(),
-			context_.me().center().get()
+			this->me().center().get()
 		)
 		<
 		fcppt::literal<
@@ -52,7 +51,7 @@ sanguis::server::ai::behavior::stay::do_start()
 
 	return
 		sanguis::server::ai::make_path(
-			context_,
+			this->context(),
 			sanguis::server::world::center_to_grid_pos(
 				start_pos_
 			)
@@ -62,7 +61,7 @@ sanguis::server::ai::behavior::stay::do_start()
 void
 sanguis::server::ai::behavior::stay::do_stop()
 {
-	context_.clear_path();
+	this->context().clear_path();
 }
 
 sanguis::server::ai::behavior::status
@@ -72,7 +71,7 @@ sanguis::server::ai::behavior::stay::update(
 {
 	return
 		sanguis::server::ai::go_to_grid_pos(
-			context_,
+			this->context(),
 			fcppt::literal<
 				sanguis::server::ai::speed_factor
 			>(
