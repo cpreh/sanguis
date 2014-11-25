@@ -2,14 +2,16 @@
 #include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/timer.hpp>
 #include <sanguis/client/send_callback.hpp>
+#include <sanguis/client/control/attack_dest.hpp>
 #include <sanguis/client/control/action_handler.hpp>
 #include <sanguis/client/control/action_visitor.hpp>
 #include <sanguis/client/control/axis_direction_max.hpp>
 #include <sanguis/client/control/axis_direction_min.hpp>
+#include <sanguis/client/control/cursor_position.hpp>
 #include <sanguis/client/control/direction_vector.hpp>
 #include <sanguis/client/control/environment.hpp>
 #include <sanguis/client/control/key_scale.hpp>
-#include <sanguis/client/control/optional_attack_dest.hpp>
+#include <sanguis/client/control/optional_cursor_position.hpp>
 #include <sanguis/client/control/scalar.hpp>
 #include <sanguis/client/control/actions/any.hpp>
 #include <sanguis/client/control/actions/binary.hpp>
@@ -36,6 +38,7 @@
 #include <sge/console/callback/short_description.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/math/clamp.hpp>
@@ -51,7 +54,7 @@
 
 sanguis::client::control::action_handler::action_handler(
 	sanguis::client::send_callback const &_send,
-	sanguis::client::control::environment &_environment,
+	sanguis::client::control::environment const &_environment,
 	sge::console::object &_console
 )
 :
@@ -71,6 +74,7 @@ sanguis::client::control::action_handler::action_handler(
 	direction_(
 		sanguis::client::control::direction_vector::null()
 	),
+	cursor_position_(),
 	cheat_connections_(
 		fcppt::assign::make_container<
 			fcppt::signal::auto_connection_container
@@ -185,7 +189,6 @@ sanguis::client::control::action_handler::action_handler(
 				)
 			)
 		)
-		.move_container()
 	)
 {
 }
@@ -242,6 +245,9 @@ sanguis::client::control::action_handler::handle_cursor_action(
 	sanguis::client::control::actions::cursor const &_action
 )
 {
+	cursor_position_ =
+		_action.position();
+
 	if(
 		!sge::timer::reset_when_expired(
 			rotation_timer_
@@ -249,37 +255,39 @@ sanguis::client::control::action_handler::handle_cursor_action(
 	)
 		return;
 
-	environment_.update_position(
-		_action.position()
-	);
-
-	if(
-		!_action.position()
-	)
-		return;
-
-	sanguis::client::control::optional_attack_dest const dest(
-		environment_.translate_attack_dest(
-			*_action.position()
+	fcppt::maybe_void(
+		cursor_position_,
+		[
+			this
+		](
+			sanguis::client::control::cursor_position const _pos
 		)
-	);
-
-	if(
-		!dest
-	)
-		return;
-
-	send_(
-		sanguis::messages::client::create(
-			sanguis::messages::client::attack_dest(
-				sanguis::messages::roles::attack_dest{} =
-					fcppt::math::vector::structure_cast<
-						sanguis::messages::types::vector2
-					>(
-						*dest
-					)
+		{
+			fcppt::maybe_void(
+				environment_.translate_attack_dest(
+					_pos
+				),
+				[
+					this
+				](
+					sanguis::client::control::attack_dest const _dest
 				)
-		)
+				{
+					send_(
+						sanguis::messages::client::create(
+							sanguis::messages::client::attack_dest(
+								sanguis::messages::roles::attack_dest{} =
+									fcppt::math::vector::structure_cast<
+										sanguis::messages::types::vector2
+									>(
+										_dest
+									)
+								)
+						)
+					);
+				}
+			);
+		}
 	);
 }
 
@@ -365,6 +373,13 @@ sanguis::client::control::action_handler::handle_scale_action(
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;
+}
+
+sanguis::client::control::optional_cursor_position const &
+sanguis::client::control::action_handler::cursor_position() const
+{
+	return
+		cursor_position_;
 }
 
 void

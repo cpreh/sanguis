@@ -16,8 +16,9 @@
 #include <sanguis/client/weapon_description_from_message.hpp>
 #include <sanguis/client/args/draw_debug.hpp>
 #include <sanguis/client/console/object.hpp>
-#include <sanguis/client/control/environment_fwd.hpp>
+#include <sanguis/client/control/environment.hpp>
 #include <sanguis/client/control/input_translator.hpp>
+#include <sanguis/client/control/optional_cursor_position.hpp>
 #include <sanguis/client/control/actions/any_fwd.hpp>
 #include <sanguis/client/draw/base.hpp>
 #include <sanguis/client/draw2d/create.hpp>
@@ -208,25 +209,10 @@ sanguis::client::states::running::react(
 	sanguis::client::events::tick const &_event
 )
 {
-	sanguis::client::slowed_duration const slowed_duration{
-		_event.delta()
-		/
-		slowdown_.get()
-	};
-
-	drawer_->update(
-		slowed_duration
+	this->update(
+		_event,
+		sanguis::client::control::optional_cursor_position()
 	);
-
-	hud_->update(
-		_event.delta()
-	);
-
-	hud_->update_server(
-		slowed_duration
-	);
-
-	sound_manager_->update();
 
 	return
 		this->discard_event();
@@ -604,13 +590,6 @@ sanguis::client::states::running::operator()(
 		);
 }
 
-sanguis::client::control::environment &
-sanguis::client::states::running::control_environment()
-{
-	return
-		drawer_->control_environment();
-}
-
 sanguis::client::console::object &
 sanguis::client::states::running::console()
 {
@@ -630,6 +609,41 @@ sanguis::client::states::running::hud_gui()
 {
 	return
 		*hud_;
+}
+
+sanguis::client::control::environment const &
+sanguis::client::states::running::control_environment() const
+{
+	return
+		*drawer_;
+}
+
+void
+sanguis::client::states::running::update(
+	sanguis::client::events::tick const &_event,
+	sanguis::client::control::optional_cursor_position const &_cursor_position
+)
+{
+	sanguis::client::slowed_duration const slowed_duration{
+		_event.delta()
+		/
+		slowdown_.get()
+	};
+
+	drawer_->update(
+		slowed_duration,
+		_cursor_position
+	);
+
+	hud_->update(
+		_event.delta()
+	);
+
+	hud_->update_server(
+		slowed_duration
+	);
+
+	sound_manager_->update();
 }
 
 void

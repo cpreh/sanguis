@@ -5,6 +5,7 @@
 #include <sanguis/client/control/action_handler_fwd.hpp>
 #include <sanguis/client/events/action_fwd.hpp>
 #include <sanguis/client/events/message_fwd.hpp>
+#include <sanguis/client/events/tick_fwd.hpp>
 #include <sanguis/client/perk/state_fwd.hpp>
 #include <sanguis/client/states/ingame_fwd.hpp>
 #include <sanguis/client/states/running.hpp>
@@ -41,9 +42,12 @@ class has_player
 		has_player
 	);
 public:
-	typedef boost::mpl::list2<
+	typedef boost::mpl::list3<
 		boost::statechart::custom_reaction<
 			sanguis::client::events::message
+		>,
+		boost::statechart::custom_reaction<
+			sanguis::client::events::tick
 		>,
 		boost::statechart::custom_reaction<
 			sanguis::client::events::action
@@ -65,7 +69,12 @@ public:
 
 	boost::statechart::result
 	react(
-		events::action const &
+		sanguis::client::events::tick const &
+	);
+
+	boost::statechart::result
+	react(
+		sanguis::client::events::action const &
 	);
 
 	typedef

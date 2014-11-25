@@ -124,6 +124,22 @@ sanguis::client::states::has_player::react(
 
 boost::statechart::result
 sanguis::client::states::has_player::react(
+	sanguis::client::events::tick const &_event
+)
+{
+	this->context<
+		sanguis::client::states::running
+	>().update(
+		_event,
+		action_handler_->cursor_position()
+	);
+
+	return
+		this->discard_event();
+}
+
+boost::statechart::result
+sanguis::client::states::has_player::react(
 	sanguis::client::events::action const &_event
 )
 {

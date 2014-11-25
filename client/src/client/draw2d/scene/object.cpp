@@ -14,6 +14,7 @@
 #include <sanguis/client/control/attack_dest.hpp>
 #include <sanguis/client/control/cursor_position.hpp>
 #include <sanguis/client/control/optional_attack_dest.hpp>
+#include <sanguis/client/control/optional_cursor_position.hpp>
 #include <sanguis/client/draw/base.hpp>
 #include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/aoe.hpp>
@@ -57,7 +58,6 @@
 #include <sanguis/client/draw2d/scene/background.hpp>
 #include <sanguis/client/draw2d/scene/background_dim.hpp>
 #include <sanguis/client/draw2d/scene/configure_entity.hpp>
-#include <sanguis/client/draw2d/scene/control_environment.hpp>
 #include <sanguis/client/draw2d/scene/health_pair.hpp>
 #include <sanguis/client/draw2d/scene/object.hpp>
 #include <sanguis/client/draw2d/scene/translation.hpp>
@@ -75,6 +75,7 @@
 #include <sanguis/client/draw2d/sprite/state_choices.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_decl.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
+#include <sanguis/client/draw2d/translate/vector_from_client.hpp>
 #include <sanguis/client/draw2d/translate/scalar_to_client.hpp>
 #include <sanguis/client/draw2d/translate/vector_to_client.hpp>
 #include <sanguis/client/load/context.hpp>
@@ -175,6 +176,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/optional_bind.hpp>
+#include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/type_name_from_info.hpp>
@@ -288,13 +290,6 @@ sanguis::client::draw2d::scene::object::object(
 	player_center_(),
 	translation_(),
 	player_weapons_(),
-	control_environment_(
-		fcppt::make_unique_ptr<
-			sanguis::client::draw2d::scene::control_environment
-		>(
-			*this
-		)
-	),
 	entities_(),
 	own_entities_(),
 	background_(
@@ -320,13 +315,6 @@ sanguis::client::draw2d::scene::object::object(
 
 sanguis::client::draw2d::scene::object::~object()
 {
-}
-
-sanguis::client::draw2d::optional_translation const
-sanguis::client::draw2d::scene::object::translation() const
-{
-	return
-		translation_;
 }
 
 void
@@ -378,24 +366,27 @@ sanguis::client::draw2d::scene::object::process_message(
 
 void
 sanguis::client::draw2d::scene::object::update(
-	sanguis::client::slowed_duration const _delta
+	sanguis::client::slowed_duration const _delta,
+	sanguis::client::control::optional_cursor_position const &_cursor_position
 )
 {
 	if(
 		!paused_
 	)
+	{
 		sanguis::update_diff_clock(
 			diff_clock_,
 			_delta.get()
 		);
 
-	world_->update(
-		_delta
-	);
+		world_->update(
+			_delta
+		);
+	}
 
 	sanguis::client::control::optional_attack_dest const attack_dest{
 		fcppt::optional_bind(
-			control_environment_->position(),
+			_cursor_position,
 			[
 				this
 			](
@@ -403,7 +394,7 @@ sanguis::client::draw2d::scene::object::update(
 			)
 			{
 				return
-					control_environment_->translate_attack_dest(
+					this->translate_attack_dest(
 						_pos
 					);
 			}
@@ -625,11 +616,35 @@ sanguis::client::draw2d::scene::object::pause(
 		);
 }
 
-sanguis::client::control::environment &
-sanguis::client::draw2d::scene::object::control_environment() const
+sanguis::client::control::optional_attack_dest const
+sanguis::client::draw2d::scene::object::translate_attack_dest(
+	sanguis::client::control::cursor_position const _cursor_position
+) const
 {
 	return
-		*control_environment_;
+		fcppt::optional_bind_construct(
+			translation_,
+			[
+				_cursor_position
+			](
+				sanguis::client::draw2d::translation const _translation
+			)
+			{
+				return
+					sanguis::client::control::attack_dest{
+						sanguis::client::draw2d::translate::vector_from_client(
+							fcppt::math::vector::structure_cast<
+								sanguis::client::draw2d::vector2
+							>(
+								-
+								_translation.get()
+								+
+								_cursor_position
+							)
+						)
+					};
+			}
+		);
 }
 
 sanguis::client::draw2d::entities::base &

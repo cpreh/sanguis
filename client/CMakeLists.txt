@@ -207,8 +207,6 @@ set(
 	include/sanguis/client/draw2d/scene/background_texture_coordinates.hpp
 	include/sanguis/client/draw2d/scene/configure_entity.hpp
 	include/sanguis/client/draw2d/scene/configure_entity_fwd.hpp
-	include/sanguis/client/draw2d/scene/control_environment.hpp
-	include/sanguis/client/draw2d/scene/control_environment_fwd.hpp
 	include/sanguis/client/draw2d/scene/health_pair.hpp
 	include/sanguis/client/draw2d/scene/hover/base.hpp
 	include/sanguis/client/draw2d/scene/hover/base_fwd.hpp
@@ -737,7 +735,6 @@ set(
 	src/client/draw2d/scene/background.cpp
 	src/client/draw2d/scene/background_dim.cpp
 	src/client/draw2d/scene/background_texture_coordinates.cpp
-	src/client/draw2d/scene/control_environment.cpp
 	src/client/draw2d/scene/hover/base.cpp
 	src/client/draw2d/scene/hover/compare_weapons.cpp
 	src/client/draw2d/scene/hover/create.cpp

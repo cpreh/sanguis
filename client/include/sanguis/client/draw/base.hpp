@@ -2,7 +2,8 @@
 #define SANGUIS_CLIENT_DRAW_BASE_HPP_INCLUDED
 
 #include <sanguis/client/slowed_duration_fwd.hpp>
-#include <sanguis/client/control/environment_fwd.hpp>
+#include <sanguis/client/control/environment.hpp>
+#include <sanguis/client/control/optional_cursor_position_fwd.hpp>
 #include <sanguis/client/draw/base_fwd.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
@@ -17,6 +18,8 @@ namespace draw
 {
 
 class base
+:
+	public sanguis::client::control::environment
 {
 	FCPPT_NONCOPYABLE(
 		base
@@ -36,7 +39,8 @@ public:
 	virtual
 	void
 	update(
-		sanguis::client::slowed_duration
+		sanguis::client::slowed_duration,
+		sanguis::client::control::optional_cursor_position const &
 	) = 0;
 
 	virtual
@@ -56,10 +60,6 @@ public:
 	pause(
 		bool
 	) = 0;
-
-	virtual
-	sanguis::client::control::environment &
-	control_environment() const = 0;
 };
 
 }

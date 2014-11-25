@@ -9,6 +9,7 @@
 #include <sanguis/client/control/direction_vector.hpp>
 #include <sanguis/client/control/environment_fwd.hpp>
 #include <sanguis/client/control/key_scale.hpp>
+#include <sanguis/client/control/optional_cursor_position.hpp>
 #include <sanguis/client/control/scalar.hpp>
 #include <sanguis/client/control/actions/any_fwd.hpp>
 #include <sanguis/client/control/actions/binary_fwd.hpp>
@@ -39,7 +40,7 @@ class action_handler
 public:
 	action_handler(
 		sanguis::client::send_callback const &,
-		sanguis::client::control::environment &,
+		sanguis::client::control::environment const &,
 		sge::console::object &
 	);
 
@@ -69,6 +70,9 @@ public:
 	handle_scale_action(
 		sanguis::client::control::actions::scale const &
 	);
+
+	sanguis::client::control::optional_cursor_position const &
+	cursor_position() const;
 private:
 	void
 	update_direction(
@@ -112,11 +116,13 @@ private:
 
 	sanguis::client::send_callback const send_;
 
-	sanguis::client::control::environment &environment_;
+	sanguis::client::control::environment const &environment_;
 
 	sanguis::timer rotation_timer_;
 
 	sanguis::client::control::direction_vector direction_;
+
+	sanguis::client::control::optional_cursor_position cursor_position_;
 
 	fcppt::signal::auto_connection_container const cheat_connections_;
 };

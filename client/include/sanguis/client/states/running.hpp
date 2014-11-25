@@ -7,6 +7,7 @@
 #include <sanguis/client/console/object_fwd.hpp>
 #include <sanguis/client/control/environment_fwd.hpp>
 #include <sanguis/client/control/input_translator_fwd.hpp>
+#include <sanguis/client/control/optional_cursor_position_fwd.hpp>
 #include <sanguis/client/control/actions/any_fwd.hpp>
 #include <sanguis/client/draw/base_unique_ptr.hpp>
 #include <sanguis/client/events/message_fwd.hpp>
@@ -181,9 +182,6 @@ public:
 		sanguis::messages::server::unpause const &
 	);
 
-	sanguis::client::control::environment &
-	control_environment();
-
 	sanguis::client::console::object &
 	console();
 
@@ -192,6 +190,15 @@ public:
 
 	sanguis::client::gui::hud::object &
 	hud_gui();
+
+	sanguis::client::control::environment const &
+	control_environment() const;
+
+	void
+	update(
+		sanguis::client::events::tick const &,
+		sanguis::client::control::optional_cursor_position const &
+	);
 private:
 	void
 	handle_player_action(

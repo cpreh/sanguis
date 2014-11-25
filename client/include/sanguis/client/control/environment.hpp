@@ -4,7 +4,6 @@
 #include <sanguis/client/control/cursor_position_fwd.hpp>
 #include <sanguis/client/control/environment_fwd.hpp>
 #include <sanguis/client/control/optional_attack_dest_fwd.hpp>
-#include <sanguis/client/control/optional_cursor_position_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -28,16 +27,6 @@ public:
 	translate_attack_dest(
 		sanguis::client::control::cursor_position
 	) const = 0;
-
-	virtual
-	sanguis::client::control::optional_cursor_position const
-	position() const = 0;
-
-	virtual
-	void
-	update_position(
-		sanguis::client::control::optional_cursor_position const &
-	) = 0;
 
 	virtual
 	~environment() = 0;

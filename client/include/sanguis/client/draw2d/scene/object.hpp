@@ -11,7 +11,9 @@
 #include <sanguis/client/weapon_pair.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/client/control/attack_dest_fwd.hpp>
-#include <sanguis/client/control/environment_fwd.hpp>
+#include <sanguis/client/control/cursor_position_fwd.hpp>
+#include <sanguis/client/control/optional_attack_dest_fwd.hpp>
+#include <sanguis/client/control/optional_cursor_position_fwd.hpp>
 #include <sanguis/client/draw/base.hpp>
 #include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
@@ -25,7 +27,6 @@
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/scene/background_fwd.hpp>
 #include <sanguis/client/draw2d/scene/configure_entity_fwd.hpp>
-#include <sanguis/client/draw2d/scene/control_environment_fwd.hpp>
 #include <sanguis/client/draw2d/scene/object_fwd.hpp>
 #include <sanguis/client/draw2d/scene/hover/base_unique_ptr.hpp>
 #include <sanguis/client/draw2d/scene/world/object_fwd.hpp>
@@ -113,9 +114,6 @@ public:
 
 	~object()
 	override;
-
-	sanguis::client::draw2d::optional_translation const
-	translation() const;
 private:
 	void
 	process_message(
@@ -125,7 +123,8 @@ private:
 
 	void
 	update(
-		sanguis::client::slowed_duration
+		sanguis::client::slowed_duration,
+		sanguis::client::control::optional_cursor_position const &
 	)
 	override;
 
@@ -147,8 +146,10 @@ private:
 	)
 	override;
 
-	sanguis::client::control::environment &
-	control_environment() const
+	sanguis::client::control::optional_attack_dest const
+	translate_attack_dest(
+		sanguis::client::control::cursor_position
+	) const
 	override;
 
 	sanguis::client::draw2d::entities::base &
@@ -394,10 +395,6 @@ private:
 	sanguis::client::draw2d::optional_translation translation_;
 
 	sanguis::client::weapon_pair player_weapons_;
-
-	std::unique_ptr<
-		sanguis::client::control::environment
-	> const control_environment_;
 
 	typedef
 	std::map<
