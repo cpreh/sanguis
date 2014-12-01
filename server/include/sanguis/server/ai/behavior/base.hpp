@@ -41,7 +41,7 @@ public:
 	update(
 		sanguis::duration
 	) = 0;
-protected:
+
 	sanguis::server::ai::context &
 	context();
 
