@@ -27,8 +27,8 @@ class base
 protected:
 	base();
 public:
-	virtual
-	~base() = 0;
+	~base()
+	override;
 
 	virtual
 	void
