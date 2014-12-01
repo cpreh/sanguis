@@ -4,8 +4,6 @@
 #include <sanguis/server/ai/tree/priority_sequence.hpp>
 #include <sanguis/server/ai/tree/status.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/range/iterator_range_core.hpp>
-#include <iterator>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -32,7 +30,7 @@ sanguis::server::ai::tree::priority_sequence::run(
 )
 {
 	for(
-		auto const  &child
+		auto const &child
 		:
 		children_
 	)

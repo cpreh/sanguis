@@ -61,6 +61,7 @@ set(
 	include/sanguis/server/ai/tree/leaf.hpp
 	include/sanguis/server/ai/tree/make_leaf.hpp
 	include/sanguis/server/ai/tree/priority_sequence.hpp
+	include/sanguis/server/ai/tree/sequence.hpp
 	include/sanguis/server/ai/tree/status.hpp
 	include/sanguis/server/ai/tree/status_fwd.hpp
 	include/sanguis/server/ai/update_interval.hpp
@@ -750,6 +751,7 @@ set(
 	src/server/ai/tree/base.cpp
 	src/server/ai/tree/leaf.cpp
 	src/server/ai/tree/priority_sequence.cpp
+	src/server/ai/tree/sequence.cpp
 	src/server/ai/update_interval.cpp
 	src/server/auras/aoe_damage.cpp
 	src/server/auras/aura.cpp
