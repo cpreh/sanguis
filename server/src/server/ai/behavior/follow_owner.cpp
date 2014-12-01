@@ -3,10 +3,10 @@
 #include <sanguis/server/ai/context.hpp>
 #include <sanguis/server/ai/go_close_to_target.hpp>
 #include <sanguis/server/ai/speed_factor.hpp>
+#include <sanguis/server/ai/status.hpp>
 #include <sanguis/server/ai/target.hpp>
 #include <sanguis/server/ai/behavior/base.hpp>
 #include <sanguis/server/ai/behavior/follow_owner.hpp>
-#include <sanguis/server/ai/behavior/status.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <fcppt/literal.hpp>
@@ -39,7 +39,7 @@ sanguis::server::ai::behavior::follow_owner::start()
 		spawn_owner_.get().get().has_value();
 }
 
-sanguis::server::ai::behavior::status
+sanguis::server::ai::status
 sanguis::server::ai::behavior::follow_owner::update(
 	sanguis::duration
 )
@@ -49,7 +49,7 @@ sanguis::server::ai::behavior::follow_owner::update(
 			spawn_owner_.get().get(),
 			[]{
 				return
-					sanguis::server::ai::behavior::status::failure;
+					sanguis::server::ai::status::failure;
 			},
 			[
 				this
@@ -71,7 +71,7 @@ sanguis::server::ai::behavior::follow_owner::update(
 				);
 
 				return
-					sanguis::server::ai::behavior::status::running;
+					sanguis::server::ai::status::running;
 			}
 		);
 }

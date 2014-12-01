@@ -13,10 +13,10 @@
 #include <sanguis/server/ai/is_visible.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/ai/speed_factor.hpp>
+#include <sanguis/server/ai/status.hpp>
 #include <sanguis/server/ai/target.hpp>
 #include <sanguis/server/ai/behavior/attack.hpp>
 #include <sanguis/server/ai/behavior/base.hpp>
-#include <sanguis/server/ai/behavior/status.hpp>
 #include <sanguis/server/auras/target.hpp>
 #include <sanguis/server/auras/target_kind.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
@@ -124,7 +124,7 @@ sanguis::server::ai::behavior::attack::start()
 		);
 }
 
-sanguis::server::ai::behavior::status
+sanguis::server::ai::status
 sanguis::server::ai::behavior::attack::update(
 	sanguis::duration
 )
@@ -147,7 +147,7 @@ sanguis::server::ai::behavior::attack::update(
 			target_.get(),
 			[]{
 				return
-					sanguis::server::ai::behavior::status::failure;
+					sanguis::server::ai::status::failure;
 			},
 			[
 				this
@@ -208,7 +208,7 @@ sanguis::server::ai::behavior::attack::update(
 				);
 
 				return
-					sanguis::server::ai::behavior::status::running;
+					sanguis::server::ai::status::running;
 			}
 		);
 }

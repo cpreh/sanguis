@@ -3,8 +3,8 @@
 #include <sanguis/server/ai/go_to_grid_pos.hpp>
 #include <sanguis/server/ai/make_path.hpp>
 #include <sanguis/server/ai/speed_factor.hpp>
+#include <sanguis/server/ai/status.hpp>
 #include <sanguis/server/ai/behavior/base.hpp>
-#include <sanguis/server/ai/behavior/status.hpp>
 #include <sanguis/server/ai/behavior/stay.hpp>
 #include <sanguis/server/collision/distance_pos_pos.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
@@ -54,7 +54,7 @@ sanguis::server::ai::behavior::stay::start()
 		);
 }
 
-sanguis::server::ai::behavior::status
+sanguis::server::ai::status
 sanguis::server::ai::behavior::stay::update(
 	sanguis::duration
 )

@@ -12,8 +12,6 @@ set(
 	include/sanguis/server/ai/behavior/follow_friend.hpp
 	include/sanguis/server/ai/behavior/follow_owner.hpp
 	include/sanguis/server/ai/behavior/patrol.hpp
-	include/sanguis/server/ai/behavior/status.hpp
-	include/sanguis/server/ai/behavior/status_fwd.hpp
 	include/sanguis/server/ai/behavior/stay.hpp
 	include/sanguis/server/ai/behavior/wander.hpp
 	include/sanguis/server/ai/context.hpp
@@ -51,6 +49,8 @@ set(
 	include/sanguis/server/ai/sight_range_fwd.hpp
 	include/sanguis/server/ai/speed_factor.hpp
 	include/sanguis/server/ai/speed_factor_fwd.hpp
+	include/sanguis/server/ai/status.hpp
+	include/sanguis/server/ai/status_fwd.hpp
 	include/sanguis/server/ai/stop.hpp
 	include/sanguis/server/ai/target.hpp
 	include/sanguis/server/ai/target_fwd.hpp
@@ -62,8 +62,6 @@ set(
 	include/sanguis/server/ai/tree/make_leaf.hpp
 	include/sanguis/server/ai/tree/priority_sequence.hpp
 	include/sanguis/server/ai/tree/sequence.hpp
-	include/sanguis/server/ai/tree/status.hpp
-	include/sanguis/server/ai/tree/status_fwd.hpp
 	include/sanguis/server/ai/update_interval.hpp
 	include/sanguis/server/angle.hpp
 	include/sanguis/server/angle_fwd.hpp

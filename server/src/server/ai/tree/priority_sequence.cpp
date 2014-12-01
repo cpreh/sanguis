@@ -1,8 +1,8 @@
 #include <sanguis/duration.hpp>
+#include <sanguis/server/ai/status.hpp>
 #include <sanguis/server/ai/tree/base.hpp>
 #include <sanguis/server/ai/tree/container.hpp>
 #include <sanguis/server/ai/tree/priority_sequence.hpp>
-#include <sanguis/server/ai/tree/status.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -24,7 +24,7 @@ sanguis::server::ai::tree::priority_sequence::~priority_sequence()
 {
 }
 
-sanguis::server::ai::tree::status
+sanguis::server::ai::status
 sanguis::server::ai::tree::priority_sequence::run(
 	sanguis::duration const _duration
 )
@@ -41,17 +41,17 @@ sanguis::server::ai::tree::priority_sequence::run(
 			)
 		)
 		{
-		case sanguis::server::ai::tree::status::ended_failure:
+		case sanguis::server::ai::status::failure:
 			continue;
-		case sanguis::server::ai::tree::status::ended_success:
+		case sanguis::server::ai::status::success:
 			return
-				sanguis::server::ai::tree::status::ended_success;
-		case sanguis::server::ai::tree::status::running:
+				sanguis::server::ai::status::success;
+		case sanguis::server::ai::status::running:
 			return
-				sanguis::server::ai::tree::status::running;
+				sanguis::server::ai::status::running;
 		}
 	}
 
 	return
-		sanguis::server::ai::tree::status::ended_failure;
+		sanguis::server::ai::status::failure;
 }

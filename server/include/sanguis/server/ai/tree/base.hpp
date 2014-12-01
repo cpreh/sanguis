@@ -2,8 +2,8 @@
 #define SANGUIS_SERVER_AI_TREE_BASE_HPP_INCLUDED
 
 #include <sanguis/duration.hpp>
+#include <sanguis/server/ai/status_fwd.hpp>
 #include <sanguis/server/ai/tree/base_fwd.hpp>
-#include <sanguis/server/ai/tree/status_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -28,7 +28,7 @@ public:
 	~base() = 0;
 
 	virtual
-	sanguis::server::ai::tree::status
+	sanguis::server::ai::status
 	run(
 		sanguis::duration
 	) = 0;

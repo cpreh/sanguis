@@ -5,8 +5,8 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/ai/context_fwd.hpp>
 #include <sanguis/server/ai/speed_factor.hpp>
+#include <sanguis/server/ai/status_fwd.hpp>
 #include <sanguis/server/ai/behavior/base.hpp>
-#include <sanguis/server/ai/behavior/status_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -40,7 +40,7 @@ public:
 	start()
 	override;
 
-	sanguis::server::ai::behavior::status
+	sanguis::server::ai::status
 	update(
 		sanguis::duration
 	)

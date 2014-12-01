@@ -6,8 +6,8 @@
 #include <sanguis/server/ai/entity_set.hpp>
 #include <sanguis/server/ai/sight_range_fwd.hpp>
 #include <sanguis/server/ai/speed_factor_fwd.hpp>
+#include <sanguis/server/ai/status_fwd.hpp>
 #include <sanguis/server/ai/behavior/base.hpp>
-#include <sanguis/server/ai/behavior/status_fwd.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/optional_with_body_ref_fwd.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
@@ -45,7 +45,7 @@ public:
 	start()
 	override;
 
-	sanguis::server::ai::behavior::status
+	sanguis::server::ai::status
 	update(
 		sanguis::duration
 	)

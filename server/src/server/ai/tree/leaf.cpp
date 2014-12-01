@@ -1,10 +1,9 @@
 #include <sanguis/duration.hpp>
+#include <sanguis/server/ai/status.hpp>
 #include <sanguis/server/ai/behavior/base.hpp>
 #include <sanguis/server/ai/behavior/base_unique_ptr.hpp>
-#include <sanguis/server/ai/behavior/status.hpp>
 #include <sanguis/server/ai/tree/base.hpp>
 #include <sanguis/server/ai/tree/leaf.hpp>
-#include <sanguis/server/ai/tree/status.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -31,7 +30,7 @@ sanguis::server::ai::tree::leaf::~leaf()
 {
 }
 
-sanguis::server::ai::tree::status
+sanguis::server::ai::status
 sanguis::server::ai::tree::leaf::run(
 	sanguis::duration const _duration
 )
@@ -46,7 +45,7 @@ sanguis::server::ai::tree::leaf::run(
 		!started_
 	)
 		return
-			sanguis::server::ai::tree::status::ended_failure;
+			sanguis::server::ai::status::failure;
 
 	switch(
 		behavior_->update(
@@ -54,22 +53,22 @@ sanguis::server::ai::tree::leaf::run(
 		)
 	)
 	{
-	case sanguis::server::ai::behavior::status::running:
+	case sanguis::server::ai::status::running:
 		return
-			sanguis::server::ai::tree::status::running;
+			sanguis::server::ai::status::running;
 
-	case sanguis::server::ai::behavior::status::success:
+	case sanguis::server::ai::status::success:
 		started_ =
 			false;
 
 		return
-			sanguis::server::ai::tree::status::ended_success;
-	case sanguis::server::ai::behavior::status::failure:
+			sanguis::server::ai::status::success;
+	case sanguis::server::ai::status::failure:
 		started_ =
 			false;
 
 		return
-			sanguis::server::ai::tree::status::ended_failure;
+			sanguis::server::ai::status::failure;
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;

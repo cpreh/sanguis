@@ -2,9 +2,9 @@
 #define SANGUIS_SERVER_AI_TREE_LEAF_HPP_INCLUDED
 
 #include <sanguis/duration.hpp>
+#include <sanguis/server/ai/status_fwd.hpp>
 #include <sanguis/server/ai/behavior/base_unique_ptr.hpp>
 #include <sanguis/server/ai/tree/base.hpp>
-#include <sanguis/server/ai/tree/status_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -33,7 +33,7 @@ public:
 	~leaf()
 	override;
 private:
-	sanguis::server::ai::tree::status
+	sanguis::server::ai::status
 	run(
 		sanguis::duration
 	)

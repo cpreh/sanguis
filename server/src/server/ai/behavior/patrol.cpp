@@ -5,8 +5,8 @@
 #include <sanguis/server/ai/go_to_grid_pos.hpp>
 #include <sanguis/server/ai/make_path.hpp>
 #include <sanguis/server/ai/speed_factor.hpp>
+#include <sanguis/server/ai/status.hpp>
 #include <sanguis/server/ai/behavior/base.hpp>
-#include <sanguis/server/ai/behavior/status.hpp>
 #include <sanguis/server/ai/behavior/patrol.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/random/grid_distance.hpp>
@@ -56,7 +56,7 @@ sanguis::server::ai::behavior::patrol::start()
 		);
 }
 
-sanguis::server::ai::behavior::status
+sanguis::server::ai::status
 sanguis::server::ai::behavior::patrol::update(
 	sanguis::duration
 )

@@ -6,9 +6,9 @@
 #include <sanguis/server/ai/go_close_to_target.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/ai/speed_factor.hpp>
+#include <sanguis/server/ai/status.hpp>
 #include <sanguis/server/ai/behavior/base.hpp>
 #include <sanguis/server/ai/behavior/follow_friend.hpp>
-#include <sanguis/server/ai/behavior/status.hpp>
 #include <sanguis/server/auras/target.hpp>
 #include <sanguis/server/auras/target_kind.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
@@ -99,7 +99,7 @@ sanguis::server::ai::behavior::follow_friend::start()
 		);
 }
 
-sanguis::server::ai::behavior::status
+sanguis::server::ai::status
 sanguis::server::ai::behavior::follow_friend::update(
 	sanguis::duration
 )
@@ -109,7 +109,7 @@ sanguis::server::ai::behavior::follow_friend::update(
 			target_.get(),
 			[]{
 				return
-					sanguis::server::ai::behavior::status::failure;
+					sanguis::server::ai::status::failure;
 			},
 			[
 				this
@@ -130,7 +130,7 @@ sanguis::server::ai::behavior::follow_friend::update(
 				);
 
 				return
-					sanguis::server::ai::behavior::status::running;
+					sanguis::server::ai::status::running;
 			}
 		);
 }

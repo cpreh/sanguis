@@ -3,8 +3,8 @@
 
 #include <sanguis/duration.hpp>
 #include <sanguis/server/ai/context_fwd.hpp>
+#include <sanguis/server/ai/status_fwd.hpp>
 #include <sanguis/server/ai/behavior/base.hpp>
-#include <sanguis/server/ai/behavior/status_fwd.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -38,7 +38,7 @@ public:
 	start()
 	override;
 
-	sanguis::server::ai::behavior::status
+	sanguis::server::ai::status
 	update(
 		sanguis::duration
 	)

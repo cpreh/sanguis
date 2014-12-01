@@ -3,13 +3,13 @@
 #include <sanguis/server/ai/idle.hpp>
 #include <sanguis/server/ai/rotate_and_move_to_target.hpp>
 #include <sanguis/server/ai/speed_factor.hpp>
+#include <sanguis/server/ai/status.hpp>
 #include <sanguis/server/ai/target.hpp>
-#include <sanguis/server/ai/behavior/status.hpp>
 #include <sanguis/server/ai/pathing/optional_target.hpp>
 #include <sanguis/server/world/grid_pos_to_center.hpp>
 
 
-sanguis::server::ai::behavior::status
+sanguis::server::ai::status
 sanguis::server::ai::go_to_grid_pos(
 	sanguis::server::ai::context &_context,
 	sanguis::server::ai::speed_factor const _speed_factor
@@ -28,7 +28,7 @@ sanguis::server::ai::go_to_grid_pos(
 		);
 
 		return
-			sanguis::server::ai::behavior::status::success;
+			sanguis::server::ai::status::success;
 	}
 
 	sanguis::server::ai::rotate_and_move_to_target(
@@ -42,6 +42,6 @@ sanguis::server::ai::go_to_grid_pos(
 	);
 
 	return
-		sanguis::server::ai::behavior::status::running;
+		sanguis::server::ai::status::running;
 
 }
