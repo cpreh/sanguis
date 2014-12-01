@@ -35,7 +35,7 @@ sanguis::server::ai::behavior::wander::~wander()
 }
 
 bool
-sanguis::server::ai::behavior::wander::do_start()
+sanguis::server::ai::behavior::wander::start()
 {
 	return
 		sanguis::server::ai::make_path(
@@ -46,12 +46,6 @@ sanguis::server::ai::behavior::wander::do_start()
 				this->context().grid().size()
 			)
 		);
-}
-
-void
-sanguis::server::ai::behavior::wander::do_stop()
-{
-	this->context().clear_path();
 }
 
 sanguis::server::ai::behavior::status

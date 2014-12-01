@@ -15,7 +15,6 @@ namespace tree
 
 enum class status
 {
-	started,
 	ended_failure,
 	ended_success,
 	running

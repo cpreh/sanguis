@@ -39,11 +39,9 @@ private:
 	)
 	override;
 
-	void
-	clear()
-	override;
-
 	sanguis::server::ai::behavior::base_unique_ptr const behavior_;
+
+	bool started_;
 };
 
 }

@@ -20,6 +20,9 @@ sanguis::server::ai::tree::leaf::leaf(
 		std::move(
 			_behavior
 		)
+	},
+	started_{
+		false
 	}
 {
 }
@@ -34,15 +37,16 @@ sanguis::server::ai::tree::leaf::run(
 )
 {
 	if(
-		!behavior_->is_started()
+		!started_
+	)
+		started_ =
+			behavior_->start();
+
+	if(
+		!started_
 	)
 		return
-			behavior_->start()
-			?
-				sanguis::server::ai::tree::status::started
-			:
-				sanguis::server::ai::tree::status::ended_failure
-			;
+			sanguis::server::ai::tree::status::ended_failure;
 
 	switch(
 		behavior_->update(
@@ -55,25 +59,18 @@ sanguis::server::ai::tree::leaf::run(
 			sanguis::server::ai::tree::status::running;
 
 	case sanguis::server::ai::behavior::status::success:
-		behavior_->stop();
+		started_ =
+			false;
 
 		return
 			sanguis::server::ai::tree::status::ended_success;
 	case sanguis::server::ai::behavior::status::failure:
-		behavior_->stop();
+		started_ =
+			false;
 
 		return
 			sanguis::server::ai::tree::status::ended_failure;
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;
-}
-
-void
-sanguis::server::ai::tree::leaf::clear()
-{
-	if(
-		behavior_->is_started()
-	)
-		behavior_->stop();
 }

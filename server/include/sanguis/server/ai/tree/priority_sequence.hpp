@@ -39,10 +39,6 @@ private:
 	)
 	override;
 
-	void
-	clear()
-	override;
-
 	sanguis::server::ai::tree::container children_;
 };
 

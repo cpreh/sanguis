@@ -4,7 +4,6 @@
 #include <sanguis/server/remove_target_callback.hpp>
 #include <sanguis/server/ai/context.hpp>
 #include <sanguis/server/ai/go_close_to_target.hpp>
-#include <sanguis/server/ai/idle.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/ai/speed_factor.hpp>
 #include <sanguis/server/ai/behavior/base.hpp>
@@ -73,7 +72,7 @@ sanguis::server::ai::behavior::follow_friend::~follow_friend()
 }
 
 bool
-sanguis::server::ai::behavior::follow_friend::do_start()
+sanguis::server::ai::behavior::follow_friend::start()
 {
 	target_ =
 		potential_targets_.empty()
@@ -85,19 +84,6 @@ sanguis::server::ai::behavior::follow_friend::do_start()
 
 	return
 		target_.get().has_value();
-}
-
-void
-sanguis::server::ai::behavior::follow_friend::do_stop()
-{
-	this->context().clear_path();
-
-	target_ =
-		sanguis::server::entities::auto_weak_link();
-
-	sanguis::server::ai::idle(
-		this->me()
-	);
 }
 
 sanguis::server::ai::behavior::status

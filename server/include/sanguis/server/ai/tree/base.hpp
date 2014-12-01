@@ -32,10 +32,6 @@ public:
 	run(
 		sanguis::duration
 	) = 0;
-
-	virtual
-	void
-	clear() = 0;
 };
 
 }

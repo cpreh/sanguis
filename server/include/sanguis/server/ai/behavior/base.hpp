@@ -32,22 +32,9 @@ public:
 	virtual
 	~base() = 0;
 
-	bool
-	is_started() const;
-
-	bool
-	start();
-
 	virtual
 	bool
-	do_start() = 0;
-
-	void
-	stop();
-
-	virtual
-	void
-	do_stop() = 0;
+	start() = 0;
 
 	virtual
 	sanguis::server::ai::behavior::status
@@ -68,8 +55,6 @@ protected:
 	me() const;
 private:
 	sanguis::server::ai::context &context_;
-
-	bool started_;
 };
 
 }

@@ -10,7 +10,6 @@
 #include <sanguis/server/remove_target_callback.hpp>
 #include <sanguis/server/ai/context.hpp>
 #include <sanguis/server/ai/go_to_target.hpp>
-#include <sanguis/server/ai/idle.hpp>
 #include <sanguis/server/ai/in_range.hpp>
 #include <sanguis/server/ai/is_visible.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
@@ -99,7 +98,7 @@ sanguis::server::ai::behavior::attack::~attack()
 }
 
 bool
-sanguis::server::ai::behavior::attack::do_start()
+sanguis::server::ai::behavior::attack::start()
 {
 	if(
 		target_.get()
@@ -135,19 +134,6 @@ sanguis::server::ai::behavior::attack::do_start()
 					);
 			}
 		);
-}
-
-void
-sanguis::server::ai::behavior::attack::do_stop()
-{
-	this->context().clear_path();
-
-	target_ =
-		sanguis::server::entities::auto_weak_link();
-
-	sanguis::server::ai::idle(
-		this->me()
-	);
 }
 
 sanguis::server::ai::behavior::status

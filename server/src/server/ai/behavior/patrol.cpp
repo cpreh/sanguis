@@ -40,7 +40,7 @@ sanguis::server::ai::behavior::patrol::~patrol()
 }
 
 bool
-sanguis::server::ai::behavior::patrol::do_start()
+sanguis::server::ai::behavior::patrol::start()
 {
 	return
 		sanguis::server::ai::make_path(
@@ -54,12 +54,6 @@ sanguis::server::ai::behavior::patrol::do_start()
 				}
 			)
 		);
-}
-
-void
-sanguis::server::ai::behavior::patrol::do_stop()
-{
-	this->context().clear_path();
 }
 
 sanguis::server::ai::behavior::status

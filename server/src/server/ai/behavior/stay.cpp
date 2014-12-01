@@ -31,37 +31,27 @@ sanguis::server::ai::behavior::stay::~stay()
 }
 
 bool
-sanguis::server::ai::behavior::stay::do_start()
+sanguis::server::ai::behavior::stay::start()
 {
-	if(
+	return
 		sanguis::server::collision::distance_pos_pos(
 			start_pos_.get(),
 			this->me().center().get()
 		)
-		<
+		>=
 		fcppt::literal<
 			sanguis::server::space_unit
 		>(
 			// TODO
 			500.f
 		)
-	)
-		return
-			false;
-
-	return
+		&&
 		sanguis::server::ai::make_path(
 			this->context(),
 			sanguis::server::world::center_to_grid_pos(
 				start_pos_
 			)
 		);
-}
-
-void
-sanguis::server::ai::behavior::stay::do_stop()
-{
-	this->context().clear_path();
 }
 
 sanguis::server::ai::behavior::status

@@ -33,16 +33,10 @@ sanguis::server::ai::behavior::follow_owner::~follow_owner()
 }
 
 bool
-sanguis::server::ai::behavior::follow_owner::do_start()
+sanguis::server::ai::behavior::follow_owner::start()
 {
 	return
 		spawn_owner_.get().get().has_value();
-}
-
-void
-sanguis::server::ai::behavior::follow_owner::do_stop()
-{
-	this->context().clear_path();
 }
 
 sanguis::server::ai::behavior::status

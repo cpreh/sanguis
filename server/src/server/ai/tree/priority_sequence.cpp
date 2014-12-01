@@ -32,34 +32,17 @@ sanguis::server::ai::tree::priority_sequence::run(
 )
 {
 	for(
-		auto it(
-			children_.begin()
-		);
-		it != children_.end();
-		++it
+		auto const  &child
+		:
+		children_
 	)
 	{
 		switch(
-			(*it)->run(
+			child->run(
 				_duration
 			)
 		)
 		{
-		case sanguis::server::ai::tree::status::started:
-			for(
-				auto &elem
-				:
-				boost::make_iterator_range(
-					std::next(
-						it
-					),
-					children_.end()
-				)
-			)
-				elem->clear();
-
-			return
-				sanguis::server::ai::tree::status::started;
 		case sanguis::server::ai::tree::status::ended_failure:
 			continue;
 		case sanguis::server::ai::tree::status::ended_success:
@@ -73,15 +56,4 @@ sanguis::server::ai::tree::priority_sequence::run(
 
 	return
 		sanguis::server::ai::tree::status::ended_failure;
-}
-
-void
-sanguis::server::ai::tree::priority_sequence::clear()
-{
-	for(
-		auto const &child
-		:
-		children_
-	)
-		child->clear();
 }

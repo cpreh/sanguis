@@ -41,11 +41,7 @@ public:
 	override;
 
 	bool
-	do_start()
-	override;
-
-	void
-	do_stop()
+	start()
 	override;
 
 	sanguis::server::ai::behavior::status
