@@ -63,10 +63,13 @@ closest_entity(
 				entity.get()
 			)
 			&&
-			new_distance < distance
+			new_distance
+			<
+			distance
 		)
 		{
-			distance = new_distance;
+			distance =
+				new_distance;
 
 			ret =
 				result_type(

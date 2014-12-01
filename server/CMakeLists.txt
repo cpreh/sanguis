@@ -282,6 +282,8 @@ set(
 	include/sanguis/server/entities/optional_player_ref_fwd.hpp
 	include/sanguis/server/entities/optional_with_ai_ref.hpp
 	include/sanguis/server/entities/optional_with_ai_ref_fwd.hpp
+	include/sanguis/server/entities/optional_with_body_ref.hpp
+	include/sanguis/server/entities/optional_with_body_ref_fwd.hpp
 	include/sanguis/server/entities/optional_with_weapon_ref.hpp
 	include/sanguis/server/entities/optional_with_weapon_ref_fwd.hpp
 	include/sanguis/server/entities/pickups/health.hpp

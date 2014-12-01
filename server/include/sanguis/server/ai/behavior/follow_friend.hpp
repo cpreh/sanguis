@@ -8,6 +8,7 @@
 #include <sanguis/server/ai/behavior/base.hpp>
 #include <sanguis/server/ai/behavior/status_fwd.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
+#include <sanguis/server/entities/optional_with_body_ref_fwd.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -57,7 +58,7 @@ private:
 		sanguis::server::entities::with_body &
 	);
 
-	sanguis::server::entities::auto_weak_link
+	sanguis::server::entities::optional_with_body_ref
 	first_target() const;
 
 	sanguis::server::ai::entity_set potential_targets_;

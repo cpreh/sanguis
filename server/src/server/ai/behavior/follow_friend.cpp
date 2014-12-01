@@ -12,6 +12,7 @@
 #include <sanguis/server/auras/target.hpp>
 #include <sanguis/server/auras/target_kind.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
+#include <sanguis/server/entities/optional_with_body_ref.hpp>
 #include <sanguis/server/entities/same_object.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_body.hpp>
@@ -74,16 +75,28 @@ sanguis::server::ai::behavior::follow_friend::~follow_friend()
 bool
 sanguis::server::ai::behavior::follow_friend::start()
 {
-	target_ =
-		potential_targets_.empty()
-		?
-			sanguis::server::entities::auto_weak_link()
-		:
-			this->first_target()
-		;
-
 	return
-		target_.get().has_value();
+		// TODO: Create a function for this
+		fcppt::maybe(
+			this->first_target(),
+			[]
+			{
+				return
+					false;
+			},
+			[
+				this
+			](
+				sanguis::server::entities::with_body &_target
+			)
+			{
+				target_ =
+					_target.link();
+
+				return
+					true;
+			}
+		);
 }
 
 sanguis::server::ai::behavior::status
@@ -137,7 +150,7 @@ sanguis::server::ai::behavior::follow_friend::target_enters(
 	);
 
 	target_ =
-		this->first_target();
+		this->first_target()->link();
 }
 
 void
@@ -155,6 +168,7 @@ sanguis::server::ai::behavior::follow_friend::target_leaves(
 		1u
 	);
 
+	// TODO: Create a function for this!
 	fcppt::maybe_void(
 		target_.get(),
 		[
@@ -176,13 +190,16 @@ sanguis::server::ai::behavior::follow_friend::target_leaves(
 	);
 }
 
-sanguis::server::entities::auto_weak_link
+sanguis::server::entities::optional_with_body_ref
 sanguis::server::ai::behavior::follow_friend::first_target() const
 {
-	FCPPT_ASSERT_PRE(
-		!potential_targets_.empty()
-	);
-
 	return
-		potential_targets_.begin()->get().link();
+		potential_targets_.empty()
+		?
+			sanguis::server::entities::optional_with_body_ref{}
+		:
+			sanguis::server::entities::optional_with_body_ref{
+				potential_targets_.begin()->get()
+			}
+		;
 }
