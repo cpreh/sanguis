@@ -1,6 +1,7 @@
 #include <sanguis/client/load/resource/make_missing_texture.hpp>
 #include <sge/image/size_type.hpp>
 #include <sge/image/color/any/object.hpp>
+#include <sge/image/view/wrap.hpp>
 #include <sge/image2d/dim.hpp>
 #include <sge/image2d/rect.hpp>
 #include <sge/image2d/vector.hpp>
@@ -9,7 +10,6 @@
 #include <sge/image2d/view/const_object.hpp>
 #include <sge/image2d/view/object.hpp>
 #include <sge/image2d/view/sub.hpp>
-#include <sge/image2d/view/to_const.hpp>
 #include <sge/renderer/resource_flags_field.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <sge/renderer/texture/create_planar_from_view.hpp>
@@ -40,80 +40,96 @@ sanguis::client::load::resource::make_missing_texture(
 		)
 	};
 
-	sge::image2d::store::rgba8 store{
-		dim
-	};
-
-	sge::image2d::dim const half_dim{
-		dim
-		/
-		fcppt::literal<
-			sge::image::size_type
-		>(
-			2
+	sge::image2d::store::rgba8 const store{
+		dim,
+		[
+			dim,
+			&_color1,
+			&_color2
+		](
+			sge::image2d::store::rgba8::view_type const &_view
 		)
+		{
+			sge::image2d::dim const half_dim{
+				dim
+				/
+				fcppt::literal<
+					sge::image::size_type
+				>(
+					2
+				)
+			};
+
+			sge::image2d::algorithm::fill(
+				sge::image2d::view::sub(
+					sge::image2d::view::object(
+						sge::image::view::wrap(
+							_view
+						)
+					),
+					sge::image2d::rect{
+						sge::image2d::vector::null(),
+						half_dim
+					}
+				),
+				_color1
+			);
+
+			sge::image2d::algorithm::fill(
+				sge::image2d::view::sub(
+					sge::image2d::view::object(
+						sge::image::view::wrap(
+							_view
+						)
+					),
+					sge::image2d::rect{
+						sge::image2d::vector{
+							0,
+							half_dim.h()
+						},
+						half_dim
+					}
+				),
+				_color2
+			);
+
+			sge::image2d::algorithm::fill(
+				sge::image2d::view::sub(
+					sge::image2d::view::object(
+						sge::image::view::wrap(
+							_view
+						)
+					),
+					sge::image2d::rect{
+						sge::image2d::vector{
+							half_dim.w(),
+							0
+						},
+						half_dim
+					}
+				),
+				_color2
+			);
+
+			sge::image2d::algorithm::fill(
+				sge::image2d::view::sub(
+					sge::image2d::view::object(
+						sge::image::view::wrap(
+							_view
+						)
+					),
+					sge::image2d::rect{
+						sge::image2d::vector{
+							half_dim.w(),
+							half_dim.h()
+						},
+						half_dim
+					}
+				),
+				_color1
+			);
+		}
 	};
-
-	sge::image2d::algorithm::fill(
-		sge::image2d::view::sub(
-			sge::image2d::view::object(
-				store.wrapped_view()
-			),
-			sge::image2d::rect{
-				sge::image2d::vector::null(),
-				half_dim
-			}
-		),
-		_color1
-	);
-
-	sge::image2d::algorithm::fill(
-		sge::image2d::view::sub(
-			sge::image2d::view::object(
-				store.wrapped_view()
-			),
-			sge::image2d::rect{
-				sge::image2d::vector{
-					0,
-					half_dim.h()
-				},
-				half_dim
-			}
-		),
-		_color2
-	);
-
-	sge::image2d::algorithm::fill(
-		sge::image2d::view::sub(
-			sge::image2d::view::object(
-				store.wrapped_view()
-			),
-			sge::image2d::rect{
-				sge::image2d::vector{
-					half_dim.w(),
-					0
-				},
-				half_dim
-			}
-		),
-		_color2
-	);
-
-	sge::image2d::algorithm::fill(
-		sge::image2d::view::sub(
-			sge::image2d::view::object(
-				store.wrapped_view()
-			),
-			sge::image2d::rect{
-				sge::image2d::vector{
-					half_dim.w(),
-					half_dim.h()
-				},
-				half_dim
-			}
-		),
-		_color1
-	);
 
 	return
 		fcppt::make_unique_ptr<
@@ -121,10 +137,8 @@ sanguis::client::load::resource::make_missing_texture(
 		>(
 			sge::renderer::texture::create_planar_from_view(
 				_renderer,
-				sge::image2d::view::to_const(
-					sge::image2d::view::object(
-						store.wrapped_view()
-					)
+				sge::image2d::view::const_object(
+					store.const_wrapped_view()
 				),
 				sge::renderer::texture::mipmap::off(),
 				sge::renderer::resource_flags_field::null(),
