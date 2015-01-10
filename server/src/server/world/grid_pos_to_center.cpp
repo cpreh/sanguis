@@ -5,6 +5,7 @@
 #include <sanguis/server/vector.hpp>
 #include <sanguis/server/world/grid_pos_to_center.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/cast/int_to_float_fun.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/fill.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -18,7 +19,8 @@ sanguis::server::world::grid_pos_to_center(
 	return
 		sanguis::server::center(
 			fcppt::math::vector::structure_cast<
-				sanguis::server::vector
+				sanguis::server::vector,
+				fcppt::cast::int_to_float_fun
 			>(
 				_pos
 				*

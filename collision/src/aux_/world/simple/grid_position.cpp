@@ -3,6 +3,8 @@
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/signed_pos.hpp>
 #include <sanguis/creator/tile_size.hpp>
+#include <fcppt/cast/float_to_int_fun.hpp>
+#include <fcppt/cast/int_to_float_fun.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -15,10 +17,12 @@ sanguis::collision::aux_::world::simple::grid_position(
 {
 	return
 		fcppt::math::vector::structure_cast<
-			sanguis::creator::pos
+			sanguis::creator::pos,
+			fcppt::cast::float_to_int_fun
 		>(
 			fcppt::math::vector::structure_cast<
-				sanguis::creator::signed_pos
+				sanguis::creator::signed_pos,
+				fcppt::cast::int_to_float_fun
 			>(
 				_center.get()
 			)

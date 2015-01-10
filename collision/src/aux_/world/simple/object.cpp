@@ -34,6 +34,7 @@
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/static_downcast.hpp>
+#include <fcppt/cast/to_signed_fun.hpp>
 #include <fcppt/container/enum_array_impl.hpp>
 #include <fcppt/container/grid/clamp_signed_pos.hpp>
 #include <fcppt/container/grid/in_range.hpp>
@@ -349,7 +350,8 @@ sanguis::collision::aux_::world::simple::object::update(
 
 			auto const signed_pos(
 				fcppt::math::vector::structure_cast<
-					sanguis::creator::signed_pos
+					sanguis::creator::signed_pos,
+					fcppt::cast::to_signed_fun
 				>(
 					sanguis::collision::aux_::world::simple::grid_position(
 						ghost->center()

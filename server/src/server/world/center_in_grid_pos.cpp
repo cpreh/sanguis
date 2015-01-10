@@ -2,6 +2,7 @@
 #include <sanguis/creator/tile_size.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/world/center_in_grid_pos.hpp>
+#include <fcppt/cast/float_to_int_fun.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -15,7 +16,8 @@ sanguis::server::world::center_in_grid_pos(
 {
 	return
 		fcppt::math::vector::structure_cast<
-			sanguis::creator::pos
+			sanguis::creator::pos,
+			fcppt::cast::float_to_int_fun
 		>(
 			_center.get()
 		)

@@ -17,9 +17,11 @@
 #include <sge/texture/part.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/cast/size.hpp>
+#include <fcppt/cast/size_fun.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/math/dim/to_signed.hpp>
 #include <fcppt/math/vector/dim.hpp>
 
 
@@ -102,9 +104,12 @@ sanguis::gui::widget::image::on_draw(
 			layout_.size()
 			-
 			fcppt::math::dim::structure_cast<
-				sge::rucksack::dim
+				sge::rucksack::dim,
+				fcppt::cast::size_fun
 			>(
-				texture_.area().size()
+				fcppt::math::dim::to_signed(
+					texture_.area().size()
+				)
 			)
 		)
 		/

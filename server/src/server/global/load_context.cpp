@@ -6,6 +6,7 @@
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/global/load_context.hpp>
 #include <sanguis/server/global/next_id_callback.hpp>
+#include <fcppt/cast/int_to_float_fun.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 
 
@@ -36,7 +37,8 @@ sanguis::server::global::load_context::model_size(
 	return
 		sanguis::server::model_size(
 			fcppt::math::dim::structure_cast<
-				sanguis::server::model_size::value_type
+				sanguis::server::model_size::value_type,
+				fcppt::cast::int_to_float_fun
 			>(
 				model_context_.model_dim(
 					_model_path

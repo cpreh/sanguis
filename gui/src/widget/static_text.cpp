@@ -19,6 +19,7 @@
 #include <sge/rucksack/preferred_size.hpp>
 #include <sge/rucksack/widget/base_fwd.hpp>
 #include <sge/rucksack/widget/dummy.hpp>
+#include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 
@@ -97,7 +98,8 @@ sanguis::gui::widget::static_text::on_draw(
 
 	static_text_.pos(
 		fcppt::math::vector::structure_cast<
-			sge::font::vector
+			sge::font::vector,
+			fcppt::cast::size_fun
 		>(
 			this->layout().position()
 			+

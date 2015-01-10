@@ -11,7 +11,7 @@
 #include <sge/input/cursor/button_code.hpp>
 #include <sge/input/cursor/button_event.hpp>
 #include <sge/input/cursor/object.hpp>
-#include <sge/input/cursor/optional_position.hpp>
+#include <sge/input/cursor/position.hpp>
 #include <sge/input/keyboard/char_event.hpp>
 #include <sge/input/keyboard/device.hpp>
 #include <sge/input/keyboard/key_code.hpp>
@@ -21,6 +21,8 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/vector.hpp>
 #include <sge/rucksack/widget/base.hpp>
+#include <fcppt/maybe_void.hpp>
+#include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -160,12 +162,19 @@ sanguis::gui::master::char_event(
 	sge::input::keyboard::char_event const &_event
 )
 {
-	if(
-		context_.focus()
-	)
-		context_.focus()->on_char(
-			_event.character()
-		);
+	fcppt::maybe_void(
+		context_.focus(),
+		[
+			&_event
+		](
+			sanguis::gui::widget::base &_focus
+		)
+		{
+			_focus.on_char(
+				_event.character()
+			);
+		}
+	);
 }
 
 void
@@ -173,26 +182,32 @@ sanguis::gui::master::button_event(
 	sge::input::cursor::button_event const &_event
 )
 {
-	sge::input::cursor::optional_position const pos(
-		cursor_.position()
-	);
-
-	if(
-		pos
-		&&
-		_event.pressed()
-		&&
-		_event.button_code()
-		==
-		sge::input::cursor::button_code::left
-	)
-		this->widget().on_click(
-			fcppt::math::vector::structure_cast<
-				sge::rucksack::vector
-			>(
-				*pos
+	fcppt::maybe_void(
+		cursor_.position(),
+		[
+			this,
+			&_event
+		](
+			sge::input::cursor::position const _pos
+		)
+		{
+			if(
+				_event.pressed()
+				&&
+				_event.button_code()
+				==
+				sge::input::cursor::button_code::left
 			)
-		);
+				this->widget().on_click(
+					fcppt::math::vector::structure_cast<
+						sge::rucksack::vector,
+						fcppt::cast::size_fun
+					>(
+						_pos
+					)
+				);
+		}
+	);
 }
 
 void
@@ -224,12 +239,19 @@ sanguis::gui::master::handle_key(
 		return;
 	}
 
-	if(
-		context_.focus()
-	)
-		context_.focus()->on_key(
+	fcppt::maybe_void(
+		context_.focus(),
+		[
 			_key_code
-		);
+		](
+			sanguis::gui::widget::base &_focus
+		)
+		{
+			_focus.on_key(
+				_key_code
+			);
+		}
+	);
 }
 
 sanguis::gui::widget::optional_ref const
@@ -243,12 +265,19 @@ sanguis::gui::master::try_focus(
 		)
 	);
 
-	if(
-		result
-	)
-		context_.focus(
-			*result
-		);
+	fcppt::maybe_void(
+		result,
+		[
+			this
+		](
+			sanguis::gui::widget::base &_focus_window
+		)
+		{
+			context_.focus(
+				_focus_window
+			);
+		}
+	);
 
 	return
 		result;

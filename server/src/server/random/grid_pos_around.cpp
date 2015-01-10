@@ -6,11 +6,14 @@
 #include <sanguis/server/random/grid_pos.hpp>
 #include <sanguis/server/random/grid_pos_around.hpp>
 #include <fcppt/cast/to_signed.hpp>
+#include <fcppt/cast/to_signed_fun.hpp>
+#include <fcppt/cast/to_unsigned_fun.hpp>
 #include <fcppt/container/grid/clamp_pos.hpp>
 #include <fcppt/container/grid/clamp_signed_pos.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/math/vector/to_dim.hpp>
 
 
 sanguis::creator::pos const
@@ -25,11 +28,13 @@ sanguis::server::random::grid_pos_around(
 		sanguis::server::random::grid_pos(
 			_random_generator,
 			fcppt::math::vector::structure_cast<
-				sanguis::creator::pos
+				sanguis::creator::pos,
+				fcppt::cast::to_unsigned_fun
 			>(
 				fcppt::container::grid::clamp_signed_pos(
 					fcppt::math::vector::structure_cast<
-						sanguis::creator::signed_pos
+						sanguis::creator::signed_pos,
+						fcppt::cast::to_signed_fun
 					>(
 						_pos
 					)
@@ -40,9 +45,7 @@ sanguis::server::random::grid_pos_around(
 					_size
 				)
 			),
-			fcppt::math::vector::structure_cast<
-				sanguis::creator::dim
-			>(
+			fcppt::math::vector::to_dim(
 				fcppt::container::grid::clamp_pos(
 					_pos
 					+

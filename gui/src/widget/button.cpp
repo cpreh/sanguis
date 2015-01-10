@@ -29,6 +29,7 @@
 #include <sge/rucksack/vector.hpp>
 #include <sge/rucksack/widget/base_fwd.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -144,7 +145,8 @@ sanguis::gui::widget::button::on_draw(
 
 	static_text_.pos(
 		fcppt::math::vector::structure_cast<
-			sge::font::vector
+			sge::font::vector,
+			fcppt::cast::size_fun
 		>(
 			layout_.position()
 			+

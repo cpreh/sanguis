@@ -16,7 +16,9 @@
 #include <sge/sprite/intrusive/connection.hpp>
 #include <sge/viewport/manager.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/math/dim/to_signed.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -51,10 +53,13 @@ sanguis::client::draw2d::scene::background::background(
 		)
 		.size(
 			fcppt::math::dim::structure_cast<
-				sanguis::client::draw2d::sprite::dim
+				sanguis::client::draw2d::sprite::dim,
+				fcppt::cast::size_fun
 			>(
-				sanguis::client::draw2d::scene::background_dim(
-					client_system_.renderer()
+				fcppt::math::dim::to_signed(
+					sanguis::client::draw2d::scene::background_dim(
+						client_system_.renderer()
+					)
 				)
 			)
 		)
@@ -113,10 +118,13 @@ sanguis::client::draw2d::scene::background::reset_viewport()
 {
 	sprite_.size(
 		fcppt::math::dim::structure_cast<
-			sanguis::client::draw2d::sprite::dim
+			sanguis::client::draw2d::sprite::dim,
+			fcppt::cast::size_fun
 		>(
-			sanguis::client::draw2d::scene::background_dim(
-				client_system_.renderer()
+			fcppt::math::dim::to_signed(
+				sanguis::client::draw2d::scene::background_dim(
+					client_system_.renderer()
+				)
 			)
 		)
 	);

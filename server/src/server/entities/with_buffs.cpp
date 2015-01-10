@@ -19,6 +19,7 @@ sanguis::server::entities::with_buffs::add_buff(
 	sanguis::server::buffs::unique_ptr &&_buff
 )
 {
+	// TODO: Clean this up
 	std::type_index const index(
 		typeid(
 			*_buff

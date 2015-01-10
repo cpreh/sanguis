@@ -30,8 +30,10 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_comparison.hpp>
 #include <fcppt/optional_impl.hpp>
+#include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/diff.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/math/dim/to_signed.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
@@ -271,9 +273,12 @@ sanguis::client::draw2d::entities::model::part::load_animation(
 
 	ref_.size(
 		fcppt::math::dim::structure_cast<
-			sanguis::client::draw2d::sprite::dim
+			sanguis::client::draw2d::sprite::dim,
+			fcppt::cast::size_fun
 		>(
-			series.begin()->dim()
+			fcppt::math::dim::to_signed(
+				series.begin()->dim()
+			)
 		)
 	);
 

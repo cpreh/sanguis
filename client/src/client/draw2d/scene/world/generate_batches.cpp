@@ -25,7 +25,7 @@
 #include <fcppt/math/map.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/fill.hpp>
-#include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/math/dim/to_vector.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -59,28 +59,24 @@ sanguis::client::draw2d::scene::world::generate_batches(
 			sanguis::client::draw2d::scene::world::batch_grid();
 
 	sanguis::client::draw2d::scene::world::batch_grid ret(
-		fcppt::math::dim::structure_cast<
-			sanguis::client::draw2d::scene::world::batch_grid::dim
+		fcppt::math::map<
+			sanguis::creator::grid::dim
 		>(
-			fcppt::math::map<
-				sanguis::creator::grid::dim
-			>(
-				_grid.size(),
-				[](
-					sanguis::creator::grid::dim::value_type const _value
-				)
-				{
-					return
-						fcppt::math::ceil_div(
-							_value,
-							fcppt::cast::size<
-								sanguis::creator::grid::dim::value_type
-							>(
-								sanguis::client::draw2d::scene::world::batch_size::value
-							)
-						);
-				}
+			_grid.size(),
+			[](
+				sanguis::creator::grid::dim::value_type const _value
 			)
+			{
+				return
+					fcppt::math::ceil_div(
+						_value,
+						fcppt::cast::size<
+							sanguis::creator::grid::dim::value_type
+						>(
+							sanguis::client::draw2d::scene::world::batch_size::value
+						)
+					);
+			}
 		)
 	);
 
@@ -101,9 +97,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 	);
 
 	sanguis::creator::pos const batch_dim_pos(
-		fcppt::math::dim::structure_cast<
-			sanguis::creator::pos
-		>(
+		fcppt::math::dim::to_vector(
 			batch_dim
 		)
 	);

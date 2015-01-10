@@ -16,6 +16,7 @@
 #include <sanguis/client/draw2d/entities/player.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
+#include <fcppt/cast/int_to_float_fun.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 
 
@@ -106,7 +107,8 @@ sanguis::client::draw2d::entities::own_player::update()
 				this->float_center(),
 				this->speed(),
 				fcppt::math::dim::structure_cast<
-					sanguis::client::draw2d::dim2
+					sanguis::client::draw2d::dim2,
+					fcppt::cast::int_to_float_fun
 				>(
 					this->bounding_dim()
 				)

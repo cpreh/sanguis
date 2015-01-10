@@ -1,4 +1,6 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/optional_perk_type.hpp>
+#include <sanguis/perk_type.hpp>
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/player_level.hpp>
 #include <sanguis/client/perk/compare.hpp>
@@ -9,6 +11,7 @@
 #include <sanguis/client/perk/required_parent_level.hpp>
 #include <sanguis/client/perk/required_player_level.hpp>
 #include <sanguis/client/perk/to_category.hpp>
+#include <sanguis/client/perk/to_string.hpp>
 #include <sanguis/client/perk/tree.hpp>
 #include <sanguis/messages/roles/max_perk_level.hpp>
 #include <sanguis/messages/roles/perk_label.hpp>
@@ -17,7 +20,9 @@
 #include <sanguis/messages/roles/required_perk_parent_level.hpp>
 #include <sanguis/messages/roles/required_perk_player_level.hpp>
 #include <sanguis/messages/server/types/perk_tree_node_vector.hpp>
+#include <fcppt/maybe.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/algorithm/find_if_exn.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/container/tree/pre_order.hpp>
@@ -140,27 +145,50 @@ tree_position(
 	sanguis::optional_perk_type const _parent_enum
 )
 {
-	if(
-		!_parent_enum
-	)
-		return
-			_tree;
-
-	typedef fcppt::container::tree::pre_order<
-		sanguis::client::perk::tree
-	> traversal;
-
-	traversal const trav(
-		_tree
-	);
-
 	return
-		*fcppt::algorithm::find_if_exn(
-			trav.begin(),
-			trav.end(),
-			sanguis::client::perk::compare(
-				*_parent_enum
+		fcppt::maybe(
+			_parent_enum,
+			[
+				&_tree
+			]()
+			->
+			sanguis::client::perk::tree &
+			{
+				return
+					_tree;
+			},
+			[
+				&_tree
+			](
+				sanguis::perk_type const _parent_type
 			)
+			->
+			sanguis::client::perk::tree &
+			{
+				return
+					*fcppt::algorithm::find_if_exn(
+						fcppt::container::tree::pre_order<
+							sanguis::client::perk::tree
+						>(
+							_tree
+						),
+						sanguis::client::perk::compare(
+							_parent_type
+						),
+						[
+							_parent_type
+						]{
+							return
+								sanguis::exception{
+									FCPPT_TEXT("Can't find tree position of perk ")
+									+
+									sanguis::client::perk::to_string(
+										_parent_type
+									)
+								};
+						}
+					);
+			}
 		);
 }
 

@@ -14,6 +14,7 @@
 #include <sge/image2d/system_fwd.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map.hpp>
+#include <fcppt/cast/size_fun.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -66,7 +67,8 @@ sanguis::tools::libmergeimage::merge_images(
 		sanguis::tools::libmergeimage::merge_result(
 			sanguis::model::cell_size(
 				fcppt::math::dim::structure_cast<
-					sanguis::model::cell_size::value_type
+					sanguis::model::cell_size::value_type,
+					fcppt::cast::size_fun
 				>(
 					cell_size.get()
 				)

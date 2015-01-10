@@ -5,9 +5,11 @@
 #include <sge/renderer/screen_size.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <sge/texture/part.hpp>
-#include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/cast/int_to_float_fun.hpp>
+#include <fcppt/math/dim/to_vector.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/fill.hpp>
+#include <fcppt/math/vector/structure_cast.hpp>
 
 
 sanguis::client::draw2d::sprite::client::texture_coordinates const
@@ -27,16 +29,22 @@ sanguis::client::draw2d::scene::light_texture_coordinates(
 	};
 
 	sanguis::client::draw2d::sprite::client::texture_coordinates::value_type const coordinates{
-		fcppt::math::dim::structure_cast<
-			sanguis::client::draw2d::sprite::client::texture_coordinates::value_type
+		fcppt::math::vector::structure_cast<
+			sanguis::client::draw2d::sprite::client::texture_coordinates::value_type,
+			fcppt::cast::int_to_float_fun
 		>(
-			background
+			fcppt::math::dim::to_vector(
+				background
+			)
 		)
 		/
-		fcppt::math::dim::structure_cast<
-			sanguis::client::draw2d::sprite::client::texture_coordinates::value_type
+		fcppt::math::vector::structure_cast<
+			sanguis::client::draw2d::sprite::client::texture_coordinates::value_type,
+			fcppt::cast::int_to_float_fun
 		>(
-			texture_dim
+			fcppt::math::dim::to_vector(
+				texture_dim
+			)
 		)
 	};
 

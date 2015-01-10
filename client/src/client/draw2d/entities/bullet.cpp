@@ -18,7 +18,9 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/cast/float_to_int.hpp>
+#include <fcppt/cast/float_to_int_fun.hpp>
 #include <fcppt/cast/int_to_float.hpp>
+#include <fcppt/cast/int_to_float_fun.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/length.hpp>
 #include <fcppt/math/vector/normalize.hpp>
@@ -101,7 +103,8 @@ sanguis::client::draw2d::entities::bullet::update()
 
 	sanguis::client::draw2d::center const cur_center(
 		fcppt::math::vector::structure_cast<
-			sanguis::client::draw2d::center::value_type
+			sanguis::client::draw2d::center::value_type,
+			fcppt::cast::int_to_float_fun
 		>(
 			this->center().get()
 		)
@@ -147,7 +150,8 @@ sanguis::client::draw2d::entities::bullet::update()
 			tail
 		),
 		fcppt::math::vector::structure_cast<
-			sanguis::client::draw2d::sprite::point
+			sanguis::client::draw2d::sprite::point,
+			fcppt::cast::float_to_int_fun
 		>(
 			new_center.get()
 		)

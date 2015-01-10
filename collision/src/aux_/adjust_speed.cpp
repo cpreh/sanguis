@@ -12,7 +12,7 @@
 #include <fcppt/assert/error.hpp>
 #include <fcppt/math/box/expand.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
-#include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/math/dim/to_vector.hpp>
 
 
 sanguis::collision::speed const
@@ -27,9 +27,7 @@ sanguis::collision::aux_::adjust_speed(
 		sanguis::collision::aux_::rect_line_intersection(
 			fcppt::math::box::expand(
 				_obstacle,
-				fcppt::math::dim::structure_cast<
-					sanguis::collision::aux_::rect::vector
-				>(
+				fcppt::math::dim::to_vector(
 					_entity_size
 					/
 					fcppt::literal<

@@ -2,6 +2,7 @@
 #include <sanguis/buff_type_vector.hpp>
 #include <sanguis/client/health_pair.hpp>
 #include <sanguis/client/optional_health_pair.hpp>
+#include <sanguis/client/draw2d/dim2.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
@@ -24,9 +25,12 @@
 #include <sanguis/client/load/auras/context_fwd.hpp>
 #include <sanguis/load/model/player_path.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/cast/float_to_int_fun.hpp>
+#include <fcppt/cast/int_to_float_fun.hpp>
 #include <fcppt/math/point_rotate.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/math/dim/to_vector.hpp>
 #include <fcppt/math/vector/signed_angle_between_cast.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 
@@ -126,7 +130,8 @@ sanguis::client::draw2d::entities::player::update()
 	sanguis::client::draw2d::vector2 const
 		body_center(
 			fcppt::math::vector::structure_cast<
-				sanguis::client::draw2d::vector2
+				sanguis::client::draw2d::vector2,
+				fcppt::cast::int_to_float_fun
 			>(
 				player_body_center
 			)
@@ -141,17 +146,20 @@ sanguis::client::draw2d::entities::player::update()
 	sanguis::client::draw2d::vector2 const new_rotation(
 		fcppt::math::point_rotate(
 			body_center,
-			fcppt::math::dim::structure_cast<
-				sanguis::client::draw2d::vector2
-			>(
-				this->at(
-					top
-				).size()
-				/
-				fcppt::literal<
-					sanguis::client::draw2d::sprite::unit
+			fcppt::math::dim::to_vector(
+				fcppt::math::dim::structure_cast<
+					sanguis::client::draw2d::dim2,
+					fcppt::cast::int_to_float_fun
 				>(
-					2
+					this->at(
+						top
+					).size()
+					/
+					fcppt::literal<
+						sanguis::client::draw2d::sprite::unit
+					>(
+						2
+					)
 				)
 			),
 			sprite_rotation
@@ -168,7 +176,8 @@ sanguis::client::draw2d::entities::player::update()
 		)
 		-
 		fcppt::math::vector::structure_cast<
-			sanguis::client::draw2d::sprite::point
+			sanguis::client::draw2d::sprite::point,
+			fcppt::cast::float_to_int_fun
 		>(
 			new_rotation
 		)

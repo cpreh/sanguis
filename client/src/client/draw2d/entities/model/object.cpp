@@ -31,7 +31,9 @@
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/assert/unreachable_message.hpp>
 #include <fcppt/cast/size.hpp>
+#include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/math/dim/to_signed.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <memory>
 #include <fcppt/config/external_end.hpp>
@@ -51,11 +53,14 @@ sanguis::client::draw2d::entities::model::object::object(
 			].size()
 		),
 		fcppt::math::dim::structure_cast<
-			sanguis::client::draw2d::sprite::dim
+			sanguis::client::draw2d::sprite::dim,
+			fcppt::cast::size_fun
 		>(
-			_parameters.load_parameters().collection()[
-				_parameters.path()
-			].cell_size().get()
+			fcppt::math::dim::to_signed(
+				_parameters.load_parameters().collection()[
+					_parameters.path()
+				].cell_size().get()
+			)
 		),
 		_parameters.color()
 	),

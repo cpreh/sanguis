@@ -17,11 +17,14 @@
 #include <sge/input/cursor/button_event.hpp>
 #include <sge/input/cursor/move_event.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
+#include <sge/input/cursor/position.hpp>
 #include <sge/input/keyboard/device.hpp>
 #include <sge/input/keyboard/key_code.hpp>
 #include <sge/input/keyboard/key_event.hpp>
 #include <sge/input/mouse/device.hpp>
+#include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/assert/unreachable.hpp>
+#include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -169,17 +172,21 @@ sanguis::client::control::input_translator::move_callback(
 	callback_(
 		sanguis::client::control::actions::any(
 			sanguis::client::control::actions::cursor(
-				_event.position()
-				?
-					sanguis::client::control::optional_cursor_position(
-						fcppt::math::vector::structure_cast<
-							sanguis::client::control::cursor_position
-						>(
-							*_event.position()
-						)
+				fcppt::optional_bind_construct(
+					_event.position(),
+					[](
+						sge::input::cursor::position const _position
 					)
-				:
-					sanguis::client::control::optional_cursor_position()
+					{
+						return
+							fcppt::math::vector::structure_cast<
+								sanguis::client::control::cursor_position,
+								fcppt::cast::size_fun
+							>(
+								_position
+							);
+					}
+				)
 			)
 		)
 	);

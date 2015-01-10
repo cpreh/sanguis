@@ -4,6 +4,8 @@
 #include <sanguis/creator/tile_is_solid.hpp>
 #include <sanguis/server/ai/pathing/can_walk_diagonally.hpp>
 #include <sanguis/server/ai/pathing/positions_are_close.hpp>
+#include <fcppt/cast/to_signed_fun.hpp>
+#include <fcppt/cast/to_unsigned_fun.hpp>
 #include <fcppt/container/grid/in_range.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/comparison.hpp>
@@ -36,7 +38,8 @@ sanguis::server::ai::pathing::can_walk_diagonally(
 
 	sanguis::creator::signed_pos const spos1(
 		fcppt::math::vector::structure_cast<
-			sanguis::creator::signed_pos
+			sanguis::creator::signed_pos,
+			fcppt::cast::to_signed_fun
 		>(
 			_pos1
 		)
@@ -44,7 +47,8 @@ sanguis::server::ai::pathing::can_walk_diagonally(
 
 	sanguis::creator::signed_pos const spos2(
 		fcppt::math::vector::structure_cast<
-			sanguis::creator::signed_pos
+			sanguis::creator::signed_pos,
+			fcppt::cast::to_signed_fun
 		>(
 			_pos2
 		)
@@ -79,7 +83,8 @@ sanguis::server::ai::pathing::can_walk_diagonally(
 	{
 		sanguis::creator::pos const pos(
 			fcppt::math::vector::structure_cast<
-				sanguis::creator::pos
+				sanguis::creator::pos,
+				fcppt::cast::to_unsigned_fun
 			>(
 				spos
 			)

@@ -7,6 +7,7 @@
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/signed_pos.hpp>
 #include <sanguis/creator/tile_size.hpp>
+#include <fcppt/cast/float_to_int_fun.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/container/grid/clamp_signed_pos.hpp>
 #include <fcppt/container/grid/make_pos_crange_start_end.hpp>
@@ -34,7 +35,8 @@ sanguis::collision::aux_::make_range(
 	sanguis::creator::pos const lower(
 		fcppt::container::grid::clamp_signed_pos(
 			fcppt::math::vector::structure_cast<
-				sanguis::creator::signed_pos
+				sanguis::creator::signed_pos,
+				fcppt::cast::float_to_int_fun
 			>(
 				_center.get()
 				-
@@ -50,7 +52,8 @@ sanguis::collision::aux_::make_range(
 		fcppt::container::grid::clamp_signed_pos(
 			fcppt::math::vector::ceil_div_signed(
 				fcppt::math::vector::structure_cast<
-					sanguis::creator::signed_pos
+					sanguis::creator::signed_pos,
+					fcppt::cast::float_to_int_fun
 				>(
 					_center.get()
 					+

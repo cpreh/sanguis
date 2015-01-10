@@ -26,7 +26,9 @@
 #include <fcppt/from_optional.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/math/dim/to_signed.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -108,10 +110,13 @@ sanguis::client::draw2d::entities::particle::particle(
 				{
 					return
 						fcppt::math::dim::structure_cast<
-							sanguis::client::draw2d::sprite::dim
+							sanguis::client::draw2d::sprite::dim,
+							fcppt::cast::size_fun
 						>(
-							// TODO: Make this easier
-							_animation_series.entities().back().texture().area().size()
+							fcppt::math::dim::to_signed(
+								// TODO: Make this easier
+								_animation_series.entities().back().texture().area().size()
+							)
 						);
 				}
 			)

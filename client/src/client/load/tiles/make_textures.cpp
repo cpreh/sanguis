@@ -15,6 +15,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/cast/size.hpp>
+#include <fcppt/cast/size_fun.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/math/box/structure_cast.hpp>
 #include <fcppt/math/dim/fill.hpp>
@@ -48,13 +49,15 @@ sanguis::client::load::tiles::make_textures(
 					>(
 						_part.texture(),
 						fcppt::math::box::structure_cast<
-							sge::renderer::lock_rect
+							sge::renderer::lock_rect,
+							fcppt::cast::size_fun
 						>(
 							// TODO: Put this function somewhere else
 							sanguis::model::cell_area_from_index(
 								sanguis::model::image_size(
 									fcppt::math::dim::structure_cast<
-										sanguis::model::dim
+										sanguis::model::dim,
+										fcppt::cast::size_fun
 									>(
 										_part.size()
 									)

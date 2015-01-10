@@ -3,6 +3,7 @@
 #include <sanguis/creator/signed_pos.hpp>
 #include <sanguis/server/ai/pathing/positions_are_close.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/cast/to_signed_fun.hpp>
 #include <fcppt/math/diff.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 
@@ -15,7 +16,8 @@ sanguis::server::ai::pathing::positions_are_close(
 {
 	sanguis::creator::signed_pos const spos1(
 		fcppt::math::vector::structure_cast<
-			sanguis::creator::signed_pos
+			sanguis::creator::signed_pos,
+			fcppt::cast::to_signed_fun
 		>(
 			_pos1
 		)
@@ -23,7 +25,8 @@ sanguis::server::ai::pathing::positions_are_close(
 
 	sanguis::creator::signed_pos const spos2(
 		fcppt::math::vector::structure_cast<
-			sanguis::creator::signed_pos
+			sanguis::creator::signed_pos,
+			fcppt::cast::to_signed_fun
 		>(
 			_pos2
 		)

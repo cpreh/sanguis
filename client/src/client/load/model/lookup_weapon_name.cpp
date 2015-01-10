@@ -1,3 +1,4 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
 #include <sanguis/primary_weapon_type.hpp>
 #include <sanguis/client/load/primary_weapon_name.hpp>
@@ -73,7 +74,19 @@ sanguis::client::load::model::lookup_weapon_name(
 						fcppt::algorithm::find_exn(
 							weapon_types.begin(),
 							weapon_types.end(),
-							_name
+							_name,
+							[
+								&_name
+							]{
+								return
+									sanguis::exception{
+										FCPPT_TEXT("lookup_weapon_name ")
+										+
+										_name.get()
+										+
+										FCPPT_TEXT(" failed!")
+									};
+							}
 						)
 					)
 				)

@@ -49,15 +49,18 @@
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/int_to_float.hpp>
+#include <fcppt/cast/size_fun.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/container/grid/clamp_signed_pos.hpp>
 #include <fcppt/container/grid/in_range.hpp>
 #include <fcppt/container/grid/make_pos_crange_start_end.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/math/dim/to_vector.hpp>
 #include <fcppt/math/vector/ceil_div_signed.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/math/vector/to_signed.hpp>
 
 
 sanguis::client::draw2d::scene::world::state::state(
@@ -119,7 +122,8 @@ sanguis::client::draw2d::scene::world::state::draw(
 	sanguis::creator::signed_pos const
 		int_translation(
 			fcppt::math::vector::structure_cast<
-				sanguis::creator::signed_pos
+				sanguis::creator::signed_pos,
+				fcppt::cast::size_fun
 			>(
 				-_translation.get()
 			)
@@ -149,11 +153,16 @@ sanguis::client::draw2d::scene::world::state::draw(
 				fcppt::math::vector::ceil_div_signed(
 					int_translation
 					+
-					fcppt::math::dim::structure_cast<
-						sanguis::creator::signed_pos
+					fcppt::math::vector::structure_cast<
+						sanguis::creator::signed_pos,
+						fcppt::cast::size_fun
 					>(
-						sanguis::client::draw2d::scene::background_dim(
-							renderer_
+						fcppt::math::vector::to_signed(
+							fcppt::math::dim::to_vector(
+								sanguis::client::draw2d::scene::background_dim(
+									renderer_
+								)
+							)
 						)
 					),
 					batch_size_trans
@@ -209,7 +218,8 @@ sanguis::client::draw2d::scene::world::state::test_collision(
 					_parameters.center().get()
 				),
 				fcppt::math::dim::structure_cast<
-					sanguis::collision::dim2
+					sanguis::collision::dim2,
+					fcppt::cast::size_fun
 				>(
 					_parameters.size()
 				)

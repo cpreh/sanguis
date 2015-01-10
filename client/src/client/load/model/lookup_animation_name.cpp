@@ -1,8 +1,10 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/client/load/animation_name.hpp>
 #include <sanguis/client/load/animation_type.hpp>
 #include <sanguis/client/load/model/lookup_animation_name.hpp>
 #include <sanguis/model/animation_name.hpp>
 #include <fcppt/enum_size.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/algorithm/array_fold.hpp>
 #include <fcppt/algorithm/find_exn.hpp>
 #include <fcppt/cast/int_to_enum.hpp>
@@ -59,7 +61,19 @@ sanguis::client::load::model::lookup_animation_name(
 				fcppt::algorithm::find_exn(
 					animation_types.begin(),
 					animation_types.end(),
-					_name
+					_name,
+					[
+						&_name
+					]{
+						return
+							sanguis::exception{
+								FCPPT_TEXT("lookup_animation_name ")
+								+
+								_name.get()
+								+
+								FCPPT_TEXT(" failed!")
+							};
+					}
 				)
 			)
 		);

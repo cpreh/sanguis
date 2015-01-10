@@ -30,12 +30,15 @@
 #include <fcppt/optional.hpp>
 #include <fcppt/algorithm/enum_array_fold.hpp>
 #include <fcppt/assert/unreachable.hpp>
+#include <fcppt/cast/size_fun.hpp>
+#include <fcppt/cast/to_unsigned_fun.hpp>
 #include <fcppt/math/box/center.hpp>
 #include <fcppt/math/box/contains_point.hpp>
 #include <fcppt/math/box/object.hpp>
 #include <fcppt/math/box/output.hpp>
 #include <fcppt/math/box/rect.hpp>
 #include <fcppt/math/box/structure_cast.hpp>
+#include <fcppt/math/vector/fill.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
@@ -468,7 +471,8 @@ sanguis::creator::aux_::generators::rooms(
 	{
 		sanguis::creator::aux_::rect(
 			fcppt::math::box::structure_cast<
-				sanguis::creator::rect
+				sanguis::creator::rect,
+				fcppt::cast::size_fun
 			>(
 				rect
 			),
@@ -487,7 +491,8 @@ sanguis::creator::aux_::generators::rooms(
 
 		sanguis::creator::aux_::filled_rect(
 			fcppt::math::box::structure_cast<
-				sanguis::creator::rect
+				sanguis::creator::rect,
+				fcppt::cast::size_fun
 			>(
 				rect
 			),
@@ -518,7 +523,8 @@ sanguis::creator::aux_::generators::rooms(
 		{
 			auto pos(
 				fcppt::math::vector::structure_cast<
-					sanguis::creator::pos
+					sanguis::creator::pos,
+					fcppt::cast::to_unsigned_fun
 				>(
 					input_pos
 				)
@@ -594,13 +600,14 @@ sanguis::creator::aux_::generators::rooms(
 		)
 		{
 			return
-			fcppt::math::vector::structure_cast<
-				sanguis::creator::pos
-			>
-			(
-				fcppt::math::box::center(
-					_rect)
-			);
+				fcppt::math::vector::structure_cast<
+					sanguis::creator::pos,
+					fcppt::cast::to_unsigned_fun
+				>
+				(
+					fcppt::math::box::center(
+						_rect)
+				);
 		}
 	);
 
@@ -682,7 +689,8 @@ sanguis::creator::aux_::generators::rooms(
 	// TODO more sensible spawner placement
 	sanguis::creator::aux_::filled_rect(
 		fcppt::math::box::structure_cast<
-			sanguis::creator::rect
+			sanguis::creator::rect,
+			fcppt::cast::to_unsigned_fun
 		>(
 			rects.back()
 		),
@@ -718,9 +726,21 @@ sanguis::creator::aux_::generators::rooms(
 		sanguis::creator::spawn{
 			sanguis::creator::spawn_pos{
 				fcppt::math::vector::structure_cast<
-					sanguis::creator::pos
+					sanguis::creator::pos,
+					fcppt::cast::to_unsigned_fun
 				>(
-					rects.front().pos() + sanguis::creator::signed_pos{1,1}
+					fcppt::math::vector::structure_cast<
+						sanguis::creator::signed_pos,
+						fcppt::cast::size_fun
+					>(
+						rects.front().pos()
+						+
+						fcppt::math::vector::fill<
+							sanguis::creator::signed_pos
+						>(
+							1
+						)
+					)
 				)
 			},
 			enemy_types[

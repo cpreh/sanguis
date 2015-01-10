@@ -3,6 +3,7 @@
 
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile_size.hpp>
+#include <fcppt/cast/float_to_int_fun.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/object_impl.hpp>
 #include <fcppt/math/vector/static.hpp>
@@ -28,7 +29,8 @@ center_to_grid_pos(
 {
 	return
 		fcppt::math::vector::structure_cast<
-			sanguis::creator::pos
+			sanguis::creator::pos,
+			fcppt::cast::float_to_int_fun
 		>(
 			_center
 		)

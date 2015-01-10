@@ -13,10 +13,12 @@
 #include <sanguis/client/draw2d/scene/world/sprite/vector.hpp>
 #include <sanguis/creator/tile_grid.hpp>
 #include <sge/texture/const_optional_part_ref.hpp>
+#include <fcppt/cast/size_fun.hpp>
 #include <fcppt/container/grid/make_pos_crange_start_end.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/math/vector/to_signed.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -87,9 +89,12 @@ fill_batches_base(
 				.pos(
 					_transform(
 						fcppt::math::vector::structure_cast<
-							sanguis::client::draw2d::scene::world::sprite::vector
+							sanguis::client::draw2d::scene::world::sprite::vector,
+							fcppt::cast::size_fun
 						>(
-							source_element.pos()
+							fcppt::math::vector::to_signed(
+								source_element.pos()
+							)
 						)
 						*
 						tile_dim

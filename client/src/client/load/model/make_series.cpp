@@ -15,6 +15,7 @@
 #include <sge/texture/part_raw_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/map.hpp>
+#include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -46,14 +47,16 @@ sanguis::client::load::model::make_series(
 				sanguis::model::make_cell_areas(
 					sanguis::model::image_size(
 						fcppt::math::dim::structure_cast<
-							sanguis::model::image_size::value_type
+							sanguis::model::image_size::value_type,
+							fcppt::cast::size_fun
 						>(
 							area.size()
 						)
 					),
 					sanguis::model::cell_size(
 						fcppt::math::dim::structure_cast<
-							sanguis::model::cell_size::value_type
+							sanguis::model::cell_size::value_type,
+							fcppt::cast::size_fun
 						>(
 							_parameters.cell_size().get()
 						)
@@ -77,14 +80,16 @@ sanguis::client::load::model::make_series(
 								_texture.texture(),
 								sge::renderer::lock_rect(
 									fcppt::math::vector::structure_cast<
-										sge::renderer::lock_rect::vector
+										sge::renderer::lock_rect::vector,
+										fcppt::cast::size_fun
 									>(
 										_cell_area.pos()
 									)
 									+
 									area.pos(),
 									fcppt::math::dim::structure_cast<
-										sge::renderer::lock_rect::dim
+										sge::renderer::lock_rect::dim,
+										fcppt::cast::size_fun
 									>(
 										_cell_area.size()
 									)

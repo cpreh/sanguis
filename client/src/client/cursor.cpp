@@ -4,6 +4,7 @@
 #include <sanguis/client/load/resource/textures.hpp>
 #include <sge/input/cursor/object.hpp>
 #include <sge/input/cursor/position.hpp>
+#include <sge/renderer/dim2.hpp>
 #include <sge/renderer/size_type.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/systems/cursor_hotspot.hpp>
@@ -11,10 +12,14 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/math/dim/to_signed.hpp>
+#include <fcppt/math/dim/to_vector.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/math/vector/to_signed.hpp>
 
 
 sanguis::client::cursor::cursor(
@@ -38,15 +43,18 @@ sanguis::client::cursor::cursor(
 		_cursor,
 		texture_,
 		sge::systems::cursor_hotspot{
-			fcppt::math::dim::structure_cast<
-				sge::systems::cursor_hotspot::value_type
+			fcppt::math::vector::structure_cast<
+				sge::systems::cursor_hotspot::value_type,
+				fcppt::cast::size_fun
 			>(
-				texture_.size()
-				/
-				fcppt::literal<
-					sge::renderer::size_type
-				>(
-					2
+				fcppt::math::dim::to_vector(
+					texture_.size()
+					/
+					fcppt::literal<
+						sge::renderer::size_type
+					>(
+						2
+					)
 				)
 			)
 		}
@@ -85,14 +93,20 @@ sanguis::client::cursor::area() const
 						_pos
 						-
 						fcppt::math::vector::structure_cast<
-							sanguis::client::cursor_area::vector
+							sanguis::client::cursor_area::vector,
+							fcppt::cast::size_fun
 						>(
-							cursor_.hotspot().get()
+							fcppt::math::vector::to_signed(
+								cursor_.hotspot().get()
+							)
 						),
 						fcppt::math::dim::structure_cast<
-							sanguis::client::cursor_area::dim
+							sanguis::client::cursor_area::dim,
+							fcppt::cast::size_fun
 						>(
-							texture_.size()
+							fcppt::math::dim::to_signed(
+								texture_.size()
+							)
 						)
 					);
 			}

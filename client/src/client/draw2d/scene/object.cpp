@@ -184,6 +184,8 @@
 #include <fcppt/algorithm/map_iteration_second.hpp>
 #include <fcppt/algorithm/sequence_iteration.hpp>
 #include <fcppt/cast/dynamic.hpp>
+#include <fcppt/cast/float_to_int_fun.hpp>
+#include <fcppt/cast/int_to_float_fun.hpp>
 #include <fcppt/container/find_exn.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/warning.hpp>
@@ -515,7 +517,8 @@ sanguis::client::draw2d::scene::object::draw(
 				fcppt::math::matrix::translation(
 					fcppt::math::vector::construct(
 						fcppt::math::vector::structure_cast<
-							sanguis::client::draw2d::vector2
+							sanguis::client::draw2d::vector2,
+							fcppt::cast::int_to_float_fun
 						>(
 							translation_->get()
 						),
@@ -634,7 +637,8 @@ sanguis::client::draw2d::scene::object::translate_attack_dest(
 					sanguis::client::control::attack_dest{
 						sanguis::client::draw2d::translate::vector_from_client(
 							fcppt::math::vector::structure_cast<
-								sanguis::client::draw2d::vector2
+								sanguis::client::draw2d::vector2,
+								fcppt::cast::int_to_float_fun
 							>(
 								-
 								_translation.get()
@@ -712,7 +716,8 @@ sanguis::client::draw2d::scene::object::hover_display(
 		!_entity.cursor_collision(
 			sanguis::client::draw2d::sprite::center(
 				fcppt::math::vector::structure_cast<
-					sanguis::client::draw2d::sprite::center::value_type
+					sanguis::client::draw2d::sprite::center::value_type,
+					fcppt::cast::float_to_int_fun
 				>(
 					_pos
 				)
@@ -1307,7 +1312,8 @@ sanguis::client::draw2d::scene::object::operator()(
 	).center(
 		sanguis::client::draw2d::sprite::center(
 			fcppt::math::vector::structure_cast<
-				sanguis::client::draw2d::sprite::point
+				sanguis::client::draw2d::sprite::point,
+				fcppt::cast::float_to_int_fun
 			>(
 				sanguis::client::draw2d::translate::vector_to_client(
 					_message.get<

@@ -23,7 +23,9 @@
 #include <sge/sprite/intrusive/connection.hpp>
 #include <sge/timer/elapsed.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
+#include <fcppt/cast/float_to_int_fun.hpp>
 #include <fcppt/cast/int_to_float.hpp>
+#include <fcppt/cast/int_to_float_fun.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/distance.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -169,7 +171,8 @@ sanguis::client::draw2d::entities::container::center(
 	center_ =
 		sanguis::client::draw2d::center(
 			fcppt::math::vector::structure_cast<
-				sanguis::client::draw2d::center::value_type
+				sanguis::client::draw2d::center::value_type,
+				fcppt::cast::int_to_float_fun
 			>(
 				_center.get()
 			)
@@ -325,7 +328,8 @@ sanguis::client::draw2d::entities::container::update()
 	this->update_center(
 		sanguis::client::draw2d::sprite::center(
 			fcppt::math::vector::structure_cast<
-				sanguis::client::draw2d::sprite::center::value_type
+				sanguis::client::draw2d::sprite::center::value_type,
+				fcppt::cast::float_to_int_fun
 			>(
 				center_.get()
 			)

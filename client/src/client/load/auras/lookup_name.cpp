@@ -1,8 +1,10 @@
 #include <sanguis/aura_type.hpp>
+#include <sanguis/exception.hpp>
 #include <sanguis/client/load/aura_name.hpp>
 #include <sanguis/client/load/auras/lookup_name.hpp>
 #include <fcppt/enum_size.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/algorithm/array_fold.hpp>
 #include <fcppt/algorithm/find_exn.hpp>
 #include <fcppt/cast/int_to_enum.hpp>
@@ -60,7 +62,19 @@ sanguis::client::load::auras::lookup_name(
 				fcppt::algorithm::find_exn(
 					aura_types.begin(),
 					aura_types.end(),
-					_str
+					_str,
+					[
+						&_str
+					]{
+						return
+							sanguis::exception{
+								FCPPT_TEXT("auras::lookup_name ")
+								+
+								_str
+								+
+								FCPPT_TEXT(" failed!")
+							};
+					}
 				)
 			)
 		);

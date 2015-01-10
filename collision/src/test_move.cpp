@@ -18,10 +18,13 @@
 #include <sanguis/creator/grid_spiral_range.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/rect.hpp>
+#include <sanguis/creator/signed_pos.hpp>
 #include <sanguis/creator/tile_is_solid.hpp>
 #include <sanguis/creator/tile_rect.hpp>
 #include <sanguis/creator/tile_size.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/cast/int_to_float_fun.hpp>
+#include <fcppt/cast/to_unsigned_fun.hpp>
 #include <fcppt/container/grid/in_range.hpp>
 #include <fcppt/math/box/intersects.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
@@ -60,7 +63,7 @@ sanguis::collision::test_move(
 	);
 
 	for(
-		auto const &entry
+		sanguis::creator::signed_pos const entry
 		:
 		sanguis::collision::aux_::make_spiral_range(
 			sanguis::collision::center(
@@ -76,7 +79,8 @@ sanguis::collision::test_move(
 	{
 		sanguis::creator::pos const cur_pos(
 			fcppt::math::vector::structure_cast<
-				sanguis::creator::pos
+				sanguis::creator::pos,
+				fcppt::cast::to_unsigned_fun
 			>(
 				entry
 			)
@@ -133,20 +137,23 @@ sanguis::collision::test_move(
 
 		sanguis::collision::aux_::rect const entry_rect(
 			fcppt::math::vector::structure_cast<
-				sanguis::collision::aux_::rect::vector
+				sanguis::collision::aux_::rect::vector,
+				fcppt::cast::int_to_float_fun
 			>(
 				tile_rect.pos()
 			)
 			+
 			fcppt::math::vector::structure_cast<
-				sanguis::collision::aux_::rect::vector
+				sanguis::collision::aux_::rect::vector,
+				fcppt::cast::int_to_float_fun
 			>(
 				cur_pos
 				*
 				sanguis::creator::tile_size::value
 			),
 			fcppt::math::dim::structure_cast<
-				sanguis::collision::aux_::rect::dim
+				sanguis::collision::aux_::rect::dim,
+				fcppt::cast::int_to_float_fun
 			>(
 				tile_rect.size()
 			)

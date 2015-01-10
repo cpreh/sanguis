@@ -10,8 +10,10 @@
 #include <sge/sprite/types/repetition.hpp>
 #include <sge/texture/const_optional_part_ref.hpp>
 #include <sge/texture/part_fwd.hpp>
-#include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/cast/int_to_float_fun.hpp>
+#include <fcppt/math/dim/to_vector.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/structure_cast.hpp>
 
 
 void
@@ -49,16 +51,22 @@ sanguis::gui::aux_::draw_image_repeat(
 			)
 		)
 		.repetition(
-			fcppt::math::dim::structure_cast<
-				repetition_type
+			fcppt::math::vector::structure_cast<
+				repetition_type,
+				fcppt::cast::int_to_float_fun
 			>(
-				_rect.size()
+				fcppt::math::dim::to_vector(
+					_rect.size()
+				)
 			)
 			/
-			fcppt::math::dim::structure_cast<
-				repetition_type
+			fcppt::math::vector::structure_cast<
+				repetition_type,
+				fcppt::cast::int_to_float_fun
 			>(
-				_texture.size()
+				fcppt::math::dim::to_vector(
+					_texture.size()
+				)
 			)
 		)
 		.size(

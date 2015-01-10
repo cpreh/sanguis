@@ -41,6 +41,8 @@
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/assign/make_container.hpp>
+#include <fcppt/cast/int_to_float_fun.hpp>
+#include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/clamp.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/signal/auto_connection.hpp>
@@ -278,7 +280,8 @@ sanguis::client::control::action_handler::handle_cursor_action(
 							sanguis::messages::client::attack_dest(
 								sanguis::messages::roles::attack_dest{} =
 									fcppt::math::vector::structure_cast<
-										sanguis::messages::types::vector2
+										sanguis::messages::types::vector2,
+										fcppt::cast::int_to_float_fun
 									>(
 										_dest
 									)
@@ -400,7 +403,8 @@ sanguis::client::control::action_handler::update_direction(
 			sanguis::messages::client::direction(
 				sanguis::messages::roles::direction{} =
 					fcppt::math::vector::structure_cast<
-						sanguis::messages::types::vector2
+						sanguis::messages::types::vector2,
+						fcppt::cast::size_fun
 					>(
 						direction_
 					)

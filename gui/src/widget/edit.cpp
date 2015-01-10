@@ -46,6 +46,7 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/string_conv_locale.hpp>
 #include <fcppt/assert/error.hpp>
+#include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/signal/auto_connection.hpp>
@@ -227,12 +228,13 @@ sanguis::gui::widget::edit::on_click(
 	sge::font::optional_index const index(
 		static_text_.text().pos_to_index(
 			fcppt::math::vector::structure_cast<
-				sge::font::vector
+				sge::font::vector,
+				fcppt::cast::size_fun
 			>(
 				_pos
-				-
-				static_text_.pos()
 			)
+			-
+			static_text_.pos()
 		)
 	);
 
@@ -411,7 +413,8 @@ sanguis::gui::widget::edit::make_static_text()
 				}
 			),
 			fcppt::math::vector::structure_cast<
-				sge::font::vector
+				sge::font::vector,
+				fcppt::cast::size_fun
 			>(
 				layout_.position()
 				+
