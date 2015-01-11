@@ -12,6 +12,10 @@
 #include <sanguis/tools/animations/path_model_pair.hpp>
 #include <sanguis/tools/animations/sge_systems_fwd.hpp>
 #include <fcppt/optional_decl.hpp>
+#include <fcppt/config/clang_version_at_least.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <QMainWindow>
@@ -34,6 +38,11 @@ namespace tools
 {
 namespace animations
 {
+
+FCPPT_PP_PUSH_WARNING
+#if FCPPT_CONFIG_CLANG_VERSION_AT_LEAST(3, 6)
+FCPPT_PP_DISABLE_GCC_WARNING(-Winconsistent-missing-override)
+#endif
 
 class main_window
 :
@@ -176,6 +185,8 @@ private:
 
 	sanguis::tools::animations::frame_container::const_iterator frame_iterator_;
 };
+
+FCPPT_PP_POP_WARNING
 
 }
 }
