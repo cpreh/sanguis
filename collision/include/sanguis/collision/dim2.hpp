@@ -2,7 +2,7 @@
 #define SANGUIS_COLLISION_DIM2_HPP_INCLUDED
 
 #include <sanguis/collision/dim2_fwd.hpp>
-#include <fcppt/math/dim/object_impl.hpp>
+#include <fcppt/math/dim/static.hpp>
 
 
 #endif

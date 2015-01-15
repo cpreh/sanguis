@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_DIM_FWD_HPP_INCLUDED
 
 #include <sanguis/server/space_unit.hpp>
-#include <fcppt/math/dim/static.hpp>
+#include <fcppt/math/dim/static_fwd.hpp>
 
 
 namespace sanguis

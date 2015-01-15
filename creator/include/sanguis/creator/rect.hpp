@@ -2,7 +2,7 @@
 #define SANGUIS_CREATOR_RECT_HPP_INCLUDED
 
 #include <sanguis/creator/rect_fwd.hpp>
-#include <fcppt/math/box/object_impl.hpp>
+#include <fcppt/math/box/rect.hpp>
 
 
 #endif

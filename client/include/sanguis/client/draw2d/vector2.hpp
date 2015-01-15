@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_VECTOR2_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/vector2_fwd.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
+#include <fcppt/math/vector/static.hpp>
 
 
 #endif

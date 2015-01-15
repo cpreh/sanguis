@@ -1,7 +1,6 @@
 #ifndef SANGUIS_TOOLS_ANIMATIONS_QTUTIL_TO_RECT_HPP_INCLUDED
 #define SANGUIS_TOOLS_ANIMATIONS_QTUTIL_TO_RECT_HPP_INCLUDED
 
-#include <fcppt/math/box/object_impl.hpp>
 #include <fcppt/math/box/rect.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <QRect>

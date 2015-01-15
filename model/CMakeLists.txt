@@ -79,6 +79,7 @@ set(
 	src/deserialize.cpp
 	src/exception.cpp
 	src/include/sanguis/model/aux_/animation_range_vector.hpp
+	src/include/sanguis/model/aux_/animation_range_vector_fwd.hpp
 	src/include/sanguis/model/aux_/deserialize/animation.hpp
 	src/include/sanguis/model/aux_/deserialize/animation_delay.hpp
 	src/include/sanguis/model/aux_/deserialize/animation_map.hpp

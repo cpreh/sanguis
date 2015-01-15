@@ -2,7 +2,7 @@
 #define SANGUIS_MODEL_DIM_HPP_INCLUDED
 
 #include <sanguis/model/dim_fwd.hpp>
-#include <fcppt/math/dim/object_impl.hpp>
+#include <fcppt/math/dim/static.hpp>
 
 
 #endif

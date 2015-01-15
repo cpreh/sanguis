@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_CONTROL_DIRECTION_VECTOR_FWD_HPP_INCLUDED
 
 #include <sanguis/client/control/scalar.hpp>
-#include <fcppt/math/vector/static.hpp>
+#include <fcppt/math/vector/static_fwd.hpp>
 
 
 namespace sanguis

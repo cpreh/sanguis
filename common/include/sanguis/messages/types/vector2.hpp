@@ -2,7 +2,7 @@
 #define SANGUIS_MESSAGES_TYPES_VECTOR2_HPP_INCLUDED
 
 #include <sanguis/messages/types/vector2_fwd.hpp>
-#include <fcppt/math/vector/object_impl.hpp>
+#include <fcppt/math/vector/static.hpp>
 
 
 #endif

@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_CURSOR_AREA_HPP_INCLUDED
 
 #include <sanguis/client/cursor_area_fwd.hpp>
-#include <fcppt/math/box/object_impl.hpp>
+#include <fcppt/math/box/rect.hpp>
 
 
 #endif

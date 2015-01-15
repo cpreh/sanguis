@@ -2,7 +2,7 @@
 #define SANGUIS_COLLISION_DIM2_FWD_HPP_INCLUDED
 
 #include <sanguis/collision/unit.hpp>
-#include <fcppt/math/dim/static.hpp>
+#include <fcppt/math/dim/static_fwd.hpp>
 
 
 namespace sanguis
