@@ -1,5 +1,6 @@
 #include <sanguis/client/load/resource/make_missing_texture.hpp>
 #include <sge/image/size_type.hpp>
+#include <sge/image/algorithm/uninitialized.hpp>
 #include <sge/image/color/any/object.hpp>
 #include <sge/image/view/wrap.hpp>
 #include <sge/image2d/dim.hpp>
@@ -72,7 +73,8 @@ sanguis::client::load::resource::make_missing_texture(
 						half_dim
 					}
 				),
-				_color1
+				_color1,
+				sge::image::algorithm::uninitialized::yes
 			);
 
 			sge::image2d::algorithm::fill(
@@ -90,7 +92,8 @@ sanguis::client::load::resource::make_missing_texture(
 						half_dim
 					}
 				),
-				_color2
+				_color2,
+				sge::image::algorithm::uninitialized::yes
 			);
 
 			sge::image2d::algorithm::fill(
@@ -108,7 +111,8 @@ sanguis::client::load::resource::make_missing_texture(
 						half_dim
 					}
 				),
-				_color2
+				_color2,
+				sge::image::algorithm::uninitialized::yes
 			);
 
 			sge::image2d::algorithm::fill(
@@ -126,7 +130,8 @@ sanguis::client::load::resource::make_missing_texture(
 						half_dim
 					}
 				),
-				_color1
+				_color1,
+				sge::image::algorithm::uninitialized::yes
 			);
 		}
 	};

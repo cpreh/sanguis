@@ -8,6 +8,7 @@
 #include <sanguis/tools/libmergeimage/aux_/path_vector.hpp>
 #include <sge/image/size_type.hpp>
 #include <sge/image/algorithm/may_overlap.hpp>
+#include <sge/image/algorithm/uninitialized.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/image/view/wrap.hpp>
 #include <sge/image2d/file.hpp>
@@ -75,7 +76,8 @@ sanguis::tools::libmergeimage::aux_::make_image(
 
 			sge::image2d::algorithm::fill(
 				dest_view,
-				sge::image::color::predef::transparent()
+				sge::image::color::predef::transparent(),
+				sge::image::algorithm::uninitialized::yes
 			);
 
 			sge::image2d::rect::vector pos(
@@ -136,7 +138,8 @@ sanguis::tools::libmergeimage::aux_::make_image(
 							_cell_size.get()
 						)
 					),
-					sge::image::algorithm::may_overlap::no
+					sge::image::algorithm::may_overlap::no,
+					sge::image::algorithm::uninitialized::no
 				);
 
 				pos.x() += _cell_size.get().w() + 1;
