@@ -1,14 +1,13 @@
 #ifndef SANGUIS_COLLISION_AUX__WORLD_MAKE_GROUPS_HPP_INCLUDED
 #define SANGUIS_COLLISION_AUX__WORLD_MAKE_GROUPS_HPP_INCLUDED
 
-#include <fcppt/algorithm/enum_array_fold.hpp>
+#include <fcppt/algorithm/array_fold_static.hpp>
 #include <fcppt/algorithm/enum_array_fold_static.hpp>
 #include <fcppt/container/enum_array.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/mpl/size.hpp>
 #include <array>
-#include <cstddef>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
@@ -53,17 +52,19 @@ private:
 	struct make_group
 	{
 		template<
-			std::size_t Index
+			typename Index
 		>
 		ResultGroup
-		operator()() const
+		operator()(
+			Index
+		) const
 		{
 			return
 				boost::mpl::at_c<
 					GroupsStatic<
 						Group
 					>,
-					Index
+					Index::value
 				>::type::value;
 		}
 	};
@@ -81,21 +82,23 @@ private:
 		result_type;
 
 		template<
-			IndexedGroup Group
+			typename Group
 		>
 		result_type
-		operator()() const
+		operator()(
+			Group
+		) const
 		{
 			groups_array<
-				Group
+				Group::value
 			> const array(
 				fcppt::algorithm::array_fold_static<
 					groups_array<
-						Group
+						Group::value
 					>
 				>(
 					make_group<
-						Group
+						Group::value
 					>()
 				)
 			);
