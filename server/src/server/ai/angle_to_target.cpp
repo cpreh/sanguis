@@ -6,7 +6,7 @@
 #include <sanguis/server/entities/with_ai.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/math/vector/distance.hpp>
-#include <fcppt/math/vector/signed_angle_between_cast.hpp>
+#include <fcppt/math/vector/signed_angle_between.hpp>
 
 
 sanguis::server::optional_angle const
@@ -31,9 +31,7 @@ sanguis::server::ai::angle_to_target(
 		:
 			sanguis::server::optional_angle(
 				sanguis::server::angle(
-					fcppt::math::vector::signed_angle_between_cast<
-						sanguis::server::space_unit
-					>(
+					fcppt::math::vector::signed_angle_between(
 						_me.center().get(),
 						_target.get().get()
 					)

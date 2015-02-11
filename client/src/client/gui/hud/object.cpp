@@ -47,6 +47,8 @@
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/pre.hpp>
+#include <fcppt/cast/int_to_float_fun.hpp>
+#include <fcppt/cast/size_fun.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
 #include <fcppt/config/external_end.hpp>
@@ -362,13 +364,15 @@ sanguis::client::gui::hud::object::health_pair(
 		_health_pair
 		?
 			fcppt::strong_typedef_construct_cast<
-				sanguis::gui::fill_level
+				sanguis::gui::fill_level,
+				fcppt::cast::size_fun
 			>(
 				_health_pair->health().get()
 			)
 			/
 			fcppt::strong_typedef_construct_cast<
-				sanguis::gui::fill_level
+				sanguis::gui::fill_level,
+				fcppt::cast::size_fun
 			>(
 				_health_pair->max_health().get()
 			)
@@ -755,7 +759,8 @@ sanguis::client::gui::hud::object::update_exp()
 
 	exp_bar_.value(
 		fcppt::strong_typedef_construct_cast<
-			sanguis::gui::fill_level
+			sanguis::gui::fill_level,
+			fcppt::cast::int_to_float_fun
 		>(
 			exp_.get()
 			-
@@ -763,7 +768,8 @@ sanguis::client::gui::hud::object::update_exp()
 		)
 		/
 		fcppt::strong_typedef_construct_cast<
-			sanguis::gui::fill_level
+			sanguis::gui::fill_level,
+			fcppt::cast::int_to_float_fun
 		>(
 			diff.get()
 		)

@@ -9,6 +9,7 @@
 #include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/assert/pre.hpp>
+#include <fcppt/cast/size_fun.hpp>
 
 
 sanguis::server::ai::behavior::attack_health::attack_health(
@@ -48,7 +49,8 @@ sanguis::server::ai::behavior::attack_health::speed_factor() const
 		speed_factor_
 		+
 		fcppt::strong_typedef_construct_cast<
-			sanguis::server::ai::speed_factor
+			sanguis::server::ai::speed_factor,
+			fcppt::cast::size_fun
 		>(
 			(
 				fcppt::literal<

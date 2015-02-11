@@ -3,7 +3,6 @@
 #include <sanguis/client/health_pair.hpp>
 #include <sanguis/client/optional_health_pair.hpp>
 #include <sanguis/client/draw2d/dim2.hpp>
-#include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
@@ -31,7 +30,7 @@
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/dim/to_vector.hpp>
-#include <fcppt/math/vector/signed_angle_between_cast.hpp>
+#include <fcppt/math/vector/signed_angle_between.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 
 
@@ -101,9 +100,7 @@ sanguis::client::draw2d::entities::player::speed(
 		this->walking()
 	)
 		sanguis::client::draw2d::entities::model::object::orientation(
-			fcppt::math::vector::signed_angle_between_cast<
-				sanguis::client::draw2d::funit
-			>(
+			fcppt::math::vector::signed_angle_between(
 				sanguis::client::draw2d::vector2::null(),
 				_speed.get()
 			),

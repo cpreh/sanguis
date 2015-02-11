@@ -14,6 +14,7 @@
 #include <sanguis/server/weapons/modifiers/random_amount.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
+#include <fcppt/cast/size_fun.hpp>
 
 
 namespace sanguis
@@ -61,7 +62,8 @@ apply(
 			sanguis::server::weapons::modifiers::random_amount(
 				_random_generator,
 				fcppt::strong_typedef_construct_cast<
-					sanguis::server::random::amount
+					sanguis::server::random::amount,
+					fcppt::cast::size_fun
 				>(
 					_potential_modifiers.get().size()
 				)

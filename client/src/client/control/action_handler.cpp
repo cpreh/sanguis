@@ -41,7 +41,6 @@
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/assign/make_container.hpp>
-#include <fcppt/cast/int_to_float_fun.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/clamp.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -281,7 +280,7 @@ sanguis::client::control::action_handler::handle_cursor_action(
 								sanguis::messages::roles::attack_dest{} =
 									fcppt::math::vector::structure_cast<
 										sanguis::messages::types::vector2,
-										fcppt::cast::int_to_float_fun
+										fcppt::cast::size_fun
 									>(
 										_dest
 									)
