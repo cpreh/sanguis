@@ -1,9 +1,9 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_PARAMETERS_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_PARAMETERS_HPP_INCLUDED
 
-#include <sanguis/client/load/context_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/parameters_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_fwd.hpp>
+#include <sanguis/client/load/context_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/nonassignable.hpp>
 

@@ -1,8 +1,9 @@
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/entities/enemies/pretty_name.hpp>
-#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/assert/unreachable.hpp>
+
 
 fcppt::string
 sanguis::server::entities::enemies::pretty_name(

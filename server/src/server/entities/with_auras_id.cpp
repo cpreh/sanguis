@@ -7,8 +7,8 @@
 #include <sanguis/server/entities/with_auras_id.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/environment/object.hpp>
-#include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/maybe_void.hpp>
+#include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>

@@ -6,11 +6,11 @@
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/grid.hpp>
-#include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/opening.hpp>
 #include <sanguis/creator/opening_container.hpp>
 #include <sanguis/creator/opening_container_array.hpp>
 #include <sanguis/creator/opening_type.hpp>
+#include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/rect.hpp>
 #include <sanguis/creator/signed_pos.hpp>
 #include <sanguis/creator/spawn_container.hpp>
@@ -20,9 +20,9 @@
 #include <sanguis/creator/aux_/filled_rect.hpp>
 #include <sanguis/creator/aux_/parameters.hpp>
 #include <sanguis/creator/aux_/place_boss.hpp>
-#include <sanguis/creator/aux_/set_opening_tiles.hpp>
 #include <sanguis/creator/aux_/rect.hpp>
 #include <sanguis/creator/aux_/result.hpp>
+#include <sanguis/creator/aux_/set_opening_tiles.hpp>
 #include <sanguis/creator/aux_/generators/rooms.hpp>
 #include <sanguis/creator/aux_/random/generator.hpp>
 #include <sanguis/creator/aux_/random/uniform_size.hpp>

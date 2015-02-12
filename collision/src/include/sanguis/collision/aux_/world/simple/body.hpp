@@ -10,8 +10,8 @@
 #include <sanguis/collision/aux_/world/simple/body_remove_callback.hpp>
 #include <sanguis/collision/world/body.hpp>
 #include <sanguis/collision/world/body_base_fwd.hpp>
-#include <sanguis/collision/world/body_parameters_fwd.hpp>
 #include <sanguis/collision/world/body_group.hpp>
+#include <sanguis/collision/world/body_parameters_fwd.hpp>
 #include <sanguis/collision/world/position_change_callback.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>

@@ -1,7 +1,7 @@
 #include <sanguis/creator/grid.hpp>
-#include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/opening_container_array.hpp>
 #include <sanguis/creator/opening_type.hpp>
+#include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/aux_/set_opening_tiles.hpp>
 #include <fcppt/make_enum_range.hpp>
 

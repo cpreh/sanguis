@@ -1,5 +1,5 @@
-#include <sanguis/collision/aux_/world/body_group_container.hpp>
 #include <sanguis/collision/aux_/world/body_ghost_group_relation.hpp>
+#include <sanguis/collision/aux_/world/body_group_container.hpp>
 #include <sanguis/collision/aux_/world/body_groups_for_ghost_group.hpp>
 #include <sanguis/collision/aux_/world/make_groups.hpp>
 #include <sanguis/collision/world/body_group.hpp>

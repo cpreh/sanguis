@@ -1,7 +1,7 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/ai/context_fwd.hpp>
-#include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/ai/create_boss.hpp>
+#include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/ai/behavior/attack.hpp>
 #include <sanguis/server/ai/behavior/patrol.hpp>

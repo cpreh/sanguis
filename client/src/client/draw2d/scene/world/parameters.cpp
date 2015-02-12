@@ -1,6 +1,6 @@
-#include <sanguis/client/load/context_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_fwd.hpp>
+#include <sanguis/client/load/context_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 
 

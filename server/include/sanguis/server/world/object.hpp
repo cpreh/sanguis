@@ -44,9 +44,9 @@
 #include <sanguis/server/world/context_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/entity_map.hpp>
-#include <sanguis/server/world/entity_vector_fwd.hpp>
 #include <sanguis/server/world/entity_vector_base.hpp>
 #include <sanguis/server/world/entity_vector_doodad.hpp>
+#include <sanguis/server/world/entity_vector_fwd.hpp>
 #include <sanguis/server/world/insert_pair_container.hpp>
 #include <sanguis/server/world/insert_pair_fwd.hpp>
 #include <sanguis/server/world/object_fwd.hpp>

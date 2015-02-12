@@ -1,5 +1,5 @@
-#include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/enemy_kind.hpp>
+#include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/generate.hpp>
 #include <sanguis/creator/opening_count.hpp>
 #include <sanguis/creator/spawn.hpp>

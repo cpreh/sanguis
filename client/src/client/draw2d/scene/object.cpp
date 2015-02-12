@@ -75,8 +75,8 @@
 #include <sanguis/client/draw2d/sprite/state_choices.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_decl.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
-#include <sanguis/client/draw2d/translate/vector_from_client.hpp>
 #include <sanguis/client/draw2d/translate/scalar_to_client.hpp>
+#include <sanguis/client/draw2d/translate/vector_from_client.hpp>
 #include <sanguis/client/draw2d/translate/vector_to_client.hpp>
 #include <sanguis/client/load/context.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
@@ -114,8 +114,8 @@
 #include <sanguis/messages/roles/pickup_type.hpp>
 #include <sanguis/messages/roles/primary_weapon.hpp>
 #include <sanguis/messages/roles/projectile_type.hpp>
-#include <sanguis/messages/roles/spawn_boss.hpp>
 #include <sanguis/messages/roles/seed.hpp>
+#include <sanguis/messages/roles/spawn_boss.hpp>
 #include <sanguis/messages/roles/speed.hpp>
 #include <sanguis/messages/roles/weapon_status.hpp>
 #include <sanguis/messages/roles/world_id.hpp>

@@ -1,7 +1,7 @@
 #include <sanguis/server/entities/enemies/skills/mother_spider.hpp>
 #include <sanguis/server/entities/enemies/skills/unique_ptr.hpp>
-#include <sanguis/server/entities/enemies/skills/factory/parameters_fwd.hpp>
 #include <sanguis/server/entities/enemies/skills/factory/mother_spider.hpp>
+#include <sanguis/server/entities/enemies/skills/factory/parameters_fwd.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
 

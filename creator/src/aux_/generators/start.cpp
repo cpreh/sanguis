@@ -14,12 +14,12 @@
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/tile.hpp>
+#include <sanguis/creator/aux_/parameters.hpp>
 #include <sanguis/creator/aux_/parameters_fwd.hpp>
 #include <sanguis/creator/aux_/result.hpp>
 #include <sanguis/creator/aux_/generators/start.hpp>
 #include <sanguis/creator/aux_/random/generator.hpp>
 #include <sanguis/creator/aux_/random/uniform_int.hpp>
-#include <sanguis/creator/aux_/parameters.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/enum_array_fold.hpp>
 #include <fcppt/assert/unreachable.hpp>

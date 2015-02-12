@@ -2,9 +2,9 @@
 #include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/timer.hpp>
 #include <sanguis/client/send_callback.hpp>
-#include <sanguis/client/control/attack_dest.hpp>
 #include <sanguis/client/control/action_handler.hpp>
 #include <sanguis/client/control/action_visitor.hpp>
+#include <sanguis/client/control/attack_dest.hpp>
 #include <sanguis/client/control/axis_direction_max.hpp>
 #include <sanguis/client/control/axis_direction_min.hpp>
 #include <sanguis/client/control/cursor_position.hpp>
