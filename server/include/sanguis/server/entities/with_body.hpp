@@ -12,6 +12,7 @@
 #include <sanguis/server/collision/body.hpp>
 #include <sanguis/server/collision/body_fwd.hpp>
 #include <sanguis/server/collision/result_fwd.hpp>
+#include <sanguis/server/entities/optional_transfer_result_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
@@ -80,7 +81,7 @@ public:
 	dim() const;
 protected:
 	// entities::base::on_transfer
-	bool
+	sanguis::server::entities::optional_transfer_result
 	on_transfer(
 		sanguis::server::entities::transfer_parameters const &
 	)

@@ -23,7 +23,10 @@ set(
 	include/sanguis/collision/world/body_base.hpp
 	include/sanguis/collision/world/body_base_fwd.hpp
 	include/sanguis/collision/world/body_collision_callback.hpp
+	include/sanguis/collision/world/body_enter.hpp
 	include/sanguis/collision/world/body_enter_callback.hpp
+	include/sanguis/collision/world/body_enter_container.hpp
+	include/sanguis/collision/world/body_enter_fwd.hpp
 	include/sanguis/collision/world/body_exit_callback.hpp
 	include/sanguis/collision/world/body_fwd.hpp
 	include/sanguis/collision/world/body_group.hpp
@@ -35,6 +38,8 @@ set(
 	include/sanguis/collision/world/created.hpp
 	include/sanguis/collision/world/created_fwd.hpp
 	include/sanguis/collision/world/ghost.hpp
+	include/sanguis/collision/world/ghost_base.hpp
+	include/sanguis/collision/world/ghost_base_fwd.hpp
 	include/sanguis/collision/world/ghost_fwd.hpp
 	include/sanguis/collision/world/ghost_group.hpp
 	include/sanguis/collision/world/ghost_group_fwd.hpp
@@ -44,6 +49,8 @@ set(
 	include/sanguis/collision/world/object.hpp
 	include/sanguis/collision/world/object_fwd.hpp
 	include/sanguis/collision/world/object_unique_ptr.hpp
+	include/sanguis/collision/world/optional_body_enter.hpp
+	include/sanguis/collision/world/optional_body_enter_fwd.hpp
 	include/sanguis/collision/world/parameters.hpp
 	include/sanguis/collision/world/parameters_fwd.hpp
 	include/sanguis/collision/world/position_change_callback.hpp
@@ -91,9 +98,11 @@ set(
 	src/test_move.cpp
 	src/world/body.cpp
 	src/world/body_base.cpp
+	src/world/body_enter.cpp
 	src/world/body_parameters.cpp
 	src/world/create.cpp
 	src/world/ghost.cpp
+	src/world/ghost_base.cpp
 	src/world/ghost_parameters.cpp
 	src/world/object.cpp
 	src/world/parameters.cpp

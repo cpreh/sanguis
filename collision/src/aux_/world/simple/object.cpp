@@ -13,6 +13,7 @@
 #include <sanguis/collision/aux_/world/simple/ghost_unique_ptr.hpp>
 #include <sanguis/collision/aux_/world/simple/grid_position.hpp>
 #include <sanguis/collision/aux_/world/simple/object.hpp>
+#include <sanguis/collision/world/body_enter_container.hpp>
 #include <sanguis/collision/world/body_fwd.hpp>
 #include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters_fwd.hpp>
@@ -22,6 +23,7 @@
 #include <sanguis/collision/world/ghost_parameters_fwd.hpp>
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
 #include <sanguis/collision/world/object.hpp>
+#include <sanguis/collision/world/optional_body_enter.hpp>
 #include <sanguis/collision/world/parameters.hpp>
 #include <sanguis/creator/difference_type.hpp>
 #include <sanguis/creator/pos.hpp>
@@ -31,6 +33,8 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/array_init_move.hpp>
 #include <fcppt/algorithm/array_push_back.hpp>
+#include <fcppt/algorithm/map_concat.hpp>
+#include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/static_downcast.hpp>
@@ -125,7 +129,7 @@ sanguis::collision::aux_::world::simple::object::create_body(
 		);
 }
 
-void
+sanguis::collision::world::body_enter_container
 sanguis::collision::aux_::world::simple::object::activate_body(
 	sanguis::collision::world::body &_body,
 	sanguis::collision::world::created const _created
@@ -143,24 +147,44 @@ sanguis::collision::aux_::world::simple::object::activate_body(
 		body
 	);
 
-	for(
-		sanguis::collision::world::ghost_group const ghost_group
-		:
-		sanguis::collision::aux_::world::ghost_groups_for_body_group(
-			body.collision_group()
-		)
-	)
-		for(
-			auto const ghost
-			:
-			ghost_sets_[
-				ghost_group
-			]
-		)
-			ghost->new_body(
-				body,
-				_created
-			);
+	return
+		fcppt::algorithm::map_concat<
+			sanguis::collision::world::body_enter_container
+		>(
+			sanguis::collision::aux_::world::ghost_groups_for_body_group(
+				body.collision_group()
+			),
+			[
+				_created,
+				this,
+				&body
+			](
+				sanguis::collision::world::ghost_group const _ghost_group
+			)
+			{
+				return
+					fcppt::algorithm::map_optional<
+						sanguis::collision::world::body_enter_container
+					>(
+						ghost_sets_[
+							_ghost_group
+						],
+						[
+							_created,
+							&body
+						](
+							sanguis::collision::aux_::world::simple::ghost *const _ghost
+						)
+						{
+							return
+								_ghost->new_body(
+									body,
+									_created
+								);
+						}
+					);
+			}
+		);
 }
 
 sanguis::collision::world::ghost_unique_ptr

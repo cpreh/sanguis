@@ -4,9 +4,14 @@
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
+#include <sanguis/server/entities/optional_transfer_result.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
+#include <sanguis/server/entities/transfer_result.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/environment/optional_object_ref.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::entities::base::base()
@@ -16,7 +21,7 @@ sanguis::server::entities::base::base()
 {
 }
 
-bool
+sanguis::server::entities::optional_transfer_result
 sanguis::server::entities::base::transfer(
 	sanguis::server::environment::object &_environment,
 	sanguis::server::entities::insert_parameters const &_insert_param,
@@ -32,8 +37,8 @@ sanguis::server::entities::base::transfer(
 			_environment
 		);
 
-	if(
-		!this->on_transfer(
+	sanguis::server::entities::optional_transfer_result result(
+		this->on_transfer(
 			sanguis::server::entities::transfer_parameters(
 				_environment.collision_world(),
 				_grid,
@@ -41,17 +46,21 @@ sanguis::server::entities::base::transfer(
 				_insert_param.angle()
 			)
 		)
-	)
-		return
-			false;
+	);
 
+	// TODO: Make optional_bind work with rvalue refs
 	if(
+		result
+		&&
 		create
 	)
+		// TODO: Return state here as well
 		this->on_create();
 
 	return
-		true;
+		std::move(
+			result
+		);
 }
 
 void
@@ -116,10 +125,14 @@ sanguis::server::entities::base::on_create()
 {
 }
 
-bool
+sanguis::server::entities::optional_transfer_result
 sanguis::server::entities::base::on_transfer(
 	sanguis::server::entities::transfer_parameters const &
 )
 {
-	return true;
+	// TODO: Should we define this function?
+	return
+		sanguis::server::entities::optional_transfer_result(
+			sanguis::server::entities::transfer_result()
+		);
 }

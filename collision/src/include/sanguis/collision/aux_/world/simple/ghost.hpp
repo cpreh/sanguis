@@ -10,8 +10,10 @@
 #include <sanguis/collision/world/body_exit_callback.hpp>
 #include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/collision/world/ghost.hpp>
+#include <sanguis/collision/world/ghost_base_fwd.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_parameters_fwd.hpp>
+#include <sanguis/collision/world/optional_body_enter_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_map>
@@ -71,7 +73,7 @@ public:
 		sanguis::collision::aux_::world::simple::body const &
 	);
 
-	void
+	sanguis::collision::world::optional_body_enter
 	new_body(
 		sanguis::collision::aux_::world::simple::body const &,
 		sanguis::collision::world::created
@@ -93,6 +95,8 @@ private:
 	sanguis::collision::world::ghost_group const collision_group_;
 
 	sanguis::collision::center center_;
+
+	sanguis::collision::world::ghost_base &ghost_base_;
 
 	enum class body_status
 	{

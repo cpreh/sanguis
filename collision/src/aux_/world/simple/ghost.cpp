@@ -4,10 +4,12 @@
 #include <sanguis/collision/aux_/world/simple/collides.hpp>
 #include <sanguis/collision/aux_/world/simple/ghost.hpp>
 #include <sanguis/collision/aux_/world/simple/ghost_remove_callback.hpp>
+#include <sanguis/collision/world/body_enter.hpp>
 #include <sanguis/collision/world/created.hpp>
 #include <sanguis/collision/world/ghost.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_parameters.hpp>
+#include <sanguis/collision/world/optional_body_enter.hpp>
 #include <fcppt/algorithm/map_iteration.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -36,6 +38,9 @@ sanguis::collision::aux_::world::simple::ghost::ghost(
 	),
 	center_(
 		_parameters.center()
+	),
+	ghost_base_(
+		_parameters.ghost_base()
 	),
 	bodies_()
 {
@@ -175,31 +180,36 @@ sanguis::collision::aux_::world::simple::ghost::update_near_body(
 			body_status::normal;
 }
 
-void
+sanguis::collision::world::optional_body_enter
 sanguis::collision::aux_::world::simple::ghost::new_body(
 	sanguis::collision::aux_::world::simple::body const &_body,
 	sanguis::collision::world::created const _created
 )
 {
 	if(
-		sanguis::collision::aux_::world::simple::collides(
+		!sanguis::collision::aux_::world::simple::collides(
 			_body,
 			*this
 		)
 	)
-	{
-		bodies_.insert(
-			std::make_pair(
-				&_body,
-				body_status::normal
-			)
-		);
+		return
+			sanguis::collision::world::optional_body_enter();
 
-		body_enter_callback_(
-			_body.body_base(),
-			_created
+	bodies_.insert(
+		std::make_pair(
+			&_body,
+			body_status::normal
+		)
+	);
+
+	return
+		sanguis::collision::world::optional_body_enter(
+			sanguis::collision::world::body_enter{
+				_body.body_base(),
+				ghost_base_,
+				_created
+			}
 		);
-	}
 }
 
 void

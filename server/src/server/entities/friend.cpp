@@ -31,6 +31,7 @@
 #include <sanguis/server/entities/friend.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/movement_speed_initial.hpp>
+#include <sanguis/server/entities/optional_transfer_result.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
@@ -106,24 +107,22 @@ sanguis::server::entities::friend_::friend_(
 {
 }
 
-bool
+sanguis::server::entities::optional_transfer_result
 sanguis::server::entities::friend_::on_transfer(
 	sanguis::server::entities::transfer_parameters const &_parameters
 )
 {
 	if(
-		friend_type_
-		==
-		sanguis::friend_type::sentry
-		&&
 		sanguis::server::collision::with_world(
 			_parameters.center(),
 			this->dim(),
 			_parameters.grid()
 		)
 	)
-		return false;
+		return
+			sanguis::server::entities::optional_transfer_result();
 
+	// TODO: Why?
 	sanguis::server::entities::with_auras::on_transfer(
 		_parameters
 	);

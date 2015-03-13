@@ -3,6 +3,7 @@
 
 #include <sanguis/collision/duration.hpp>
 #include <sanguis/collision/world/body_fwd.hpp>
+#include <sanguis/collision/world/body_enter_container.hpp>
 #include <sanguis/collision/world/body_parameters_fwd.hpp>
 #include <sanguis/collision/world/body_unique_ptr.hpp>
 #include <sanguis/collision/world/created_fwd.hpp>
@@ -37,7 +38,7 @@ public:
 	) = 0;
 
 	virtual
-	void
+	sanguis::collision::world::body_enter_container
 	activate_body(
 		sanguis::collision::world::body &,
 		sanguis::collision::world::created

@@ -5,6 +5,7 @@
 #include <sanguis/collision/world/body_enter_callback.hpp>
 #include <sanguis/collision/world/body_exit_callback.hpp>
 #include <sanguis/collision/world/created_fwd.hpp>
+#include <sanguis/collision/world/ghost_base.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool_fwd.hpp>
@@ -19,6 +20,8 @@ namespace collision
 {
 
 class ghost_base
+:
+	public sanguis::collision::world::ghost_base
 {
 	FCPPT_NONCOPYABLE(
 		ghost_base
@@ -26,15 +29,9 @@ class ghost_base
 protected:
 	ghost_base();
 
-	virtual
-	~ghost_base() = 0;
-
-	virtual
-	boost::logic::tribool const
-	can_collide_with(
-		sanguis::collision::world::body_base const &
-	) const = 0;
-
+	~ghost_base()
+	override;
+public:
 	sanguis::collision::world::body_enter_callback
 	body_enter_callback();
 

@@ -8,6 +8,7 @@
 #include <sanguis/server/vector.hpp>
 #include <sanguis/server/damage/modified_array.hpp>
 #include <sanguis/server/damage/unit.hpp>
+#include <sanguis/server/entities/optional_transfer_result_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_health_fwd.hpp>
 #include <sanguis/server/entities/projectiles/aoe_projectile.hpp>
@@ -45,7 +46,7 @@ public:
 	~grenade()
 	override;
 private:
-	bool
+	sanguis::server::entities::optional_transfer_result
 	on_transfer(
 		sanguis::server::entities::transfer_parameters const &
 	)

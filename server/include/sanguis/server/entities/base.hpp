@@ -7,6 +7,7 @@
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
+#include <sanguis/server/entities/optional_transfer_result_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/environment/optional_object_ref.hpp>
@@ -29,7 +30,7 @@ protected:
 	base();
 public:
 	// general world functions
-	bool
+	sanguis::server::entities::optional_transfer_result
 	transfer(
 		sanguis::server::environment::object &,
 		sanguis::server::entities::insert_parameters const &,
@@ -108,7 +109,7 @@ private:
 	on_create();
 
 	virtual
-	bool
+	sanguis::server::entities::optional_transfer_result
 	on_transfer(
 		sanguis::server::entities::transfer_parameters const &
 	);

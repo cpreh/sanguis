@@ -2,10 +2,12 @@
 #include <sanguis/server/model_size.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/optional_result.hpp>
+#include <sanguis/server/collision/result.hpp>
 #include <sanguis/server/collision/with_world_move.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/movement_speed_initial.hpp>
+#include <sanguis/server/entities/optional_transfer_result.hpp>
 #include <sanguis/server/entities/speed_to_abs.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_body.hpp>
@@ -14,6 +16,7 @@
 #include <sanguis/server/entities/ifaces/with_velocity.hpp>
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
@@ -75,7 +78,7 @@ sanguis::server::entities::with_velocity::update()
 		);
 }
 
-bool
+sanguis::server::entities::optional_transfer_result
 sanguis::server::entities::with_velocity::on_transfer(
 	sanguis::server::entities::transfer_parameters const &_parameters
 )
@@ -100,20 +103,23 @@ sanguis::server::entities::with_velocity::world_collision(
 	sanguis::duration const _duration
 )
 {
-	sanguis::server::collision::optional_result const result(
+	fcppt::maybe_void(
 		sanguis::server::collision::with_world_move(
 			*this,
 			_grid,
 			_duration
+		),
+		[
+			this
+		](
+			sanguis::server::collision::result const &_result
 		)
+		{
+			this->on_world_collision(
+				_result
+			);
+		}
 	);
-
-	if(
-		result
-	)
-		this->on_world_collision(
-			*result
-		);
 }
 
 sanguis::server::entities::property::changeable &

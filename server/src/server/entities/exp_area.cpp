@@ -35,6 +35,7 @@ sanguis::server::entities::exp_area::exp_area(
 	this->add_ghost(
 		sanguis::server::collision::ghost{
 			sanguis::collision::world::ghost_group::target_player,
+			*this,
 			this->body_enter_callback(),
 			this->body_exit_callback(),
 			sanguis::server::radius(

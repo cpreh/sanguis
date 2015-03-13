@@ -119,6 +119,8 @@ set(
 	include/sanguis/server/collision/position_callback.hpp
 	include/sanguis/server/collision/result.hpp
 	include/sanguis/server/collision/result_fwd.hpp
+	include/sanguis/server/collision/transfer_result.hpp
+	include/sanguis/server/collision/transfer_result_fwd.hpp
 	include/sanguis/server/collision/with_world.hpp
 	include/sanguis/server/collision/with_world_move.hpp
 	include/sanguis/server/console.hpp
@@ -278,6 +280,8 @@ set(
 	include/sanguis/server/entities/optional_base_ref_fwd.hpp
 	include/sanguis/server/entities/optional_player_ref.hpp
 	include/sanguis/server/entities/optional_player_ref_fwd.hpp
+	include/sanguis/server/entities/optional_transfer_result.hpp
+	include/sanguis/server/entities/optional_transfer_result_fwd.hpp
 	include/sanguis/server/entities/optional_with_ai_ref.hpp
 	include/sanguis/server/entities/optional_with_ai_ref_fwd.hpp
 	include/sanguis/server/entities/optional_with_body_ref.hpp
@@ -349,6 +353,8 @@ set(
 	include/sanguis/server/entities/speed_to_abs.hpp
 	include/sanguis/server/entities/transfer_parameters.hpp
 	include/sanguis/server/entities/transfer_parameters_fwd.hpp
+	include/sanguis/server/entities/transfer_result.hpp
+	include/sanguis/server/entities/transfer_result_fwd.hpp
 	include/sanguis/server/entities/unique_ptr.hpp
 	include/sanguis/server/entities/with_ai.hpp
 	include/sanguis/server/entities/with_ai_fwd.hpp
@@ -776,6 +782,7 @@ set(
 	src/server/collision/ghost.cpp
 	src/server/collision/ghost_base.cpp
 	src/server/collision/result.cpp
+	src/server/collision/transfer_result.cpp
 	src/server/collision/with_world.cpp
 	src/server/collision/with_world_move.cpp
 	src/server/console.cpp
@@ -895,6 +902,7 @@ set(
 	src/server/entities/spawns/spawn.cpp
 	src/server/entities/speed_to_abs.cpp
 	src/server/entities/transfer_parameters.cpp
+	src/server/entities/transfer_result.cpp
 	src/server/entities/with_ai.cpp
 	src/server/entities/with_auras.cpp
 	src/server/entities/with_auras_id.cpp

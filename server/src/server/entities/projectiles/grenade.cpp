@@ -11,6 +11,7 @@
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/optional_base_ref.hpp>
+#include <sanguis/server/entities/optional_transfer_result.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/entities/with_health_fwd.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
@@ -25,6 +26,7 @@
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <chrono>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -77,29 +79,35 @@ sanguis::server::entities::projectiles::grenade::~grenade()
 {
 }
 
-bool
+sanguis::server::entities::optional_transfer_result
 sanguis::server::entities::projectiles::grenade::on_transfer(
 	sanguis::server::entities::transfer_parameters const &_param
 )
 {
-	if(
-		!sanguis::server::entities::with_velocity::on_transfer(
+	// TODO: Use optional_bind
+	sanguis::server::entities::optional_transfer_result result(
+		sanguis::server::entities::with_velocity::on_transfer(
 			_param
-		)
-	)
-		return false;
-
-	this->movement_speed().current(
-		std::min(
-			this->movement_speed().max(),
-			sanguis::server::collision::distance_pos_pos(
-				_param.center().get(),
-				dest_
-			)
 		)
 	);
 
-	return true;
+	if(
+		result
+	)
+		this->movement_speed().current(
+			std::min(
+				this->movement_speed().max(),
+				sanguis::server::collision::distance_pos_pos(
+					_param.center().get(),
+					dest_
+				)
+			)
+		);
+
+	return
+		std::move(
+			result
+		);
 }
 
 void

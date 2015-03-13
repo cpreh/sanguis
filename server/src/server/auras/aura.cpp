@@ -22,6 +22,7 @@ sanguis::server::auras::aura::create_ghost()
 	return
 		sanguis::server::collision::ghost{
 			collision_group_,
+			*this,
 			this->body_enter_callback(),
 			this->body_exit_callback(),
 			radius_

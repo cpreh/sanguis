@@ -6,8 +6,10 @@
 #include <sanguis/collision/symbol.hpp>
 #include <sanguis/collision/world/body_enter_callback.hpp>
 #include <sanguis/collision/world/body_exit_callback.hpp>
+#include <sanguis/collision/world/ghost_base_fwd.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_parameters_fwd.hpp>
+#include <fcppt/nonassignable.hpp>
 
 
 namespace sanguis
@@ -19,6 +21,9 @@ namespace world
 
 class ghost_parameters
 {
+	FCPPT_NONASSIGNABLE(
+		ghost_parameters
+	);
 public:
 	SANGUIS_COLLISION_SYMBOL
 	ghost_parameters(
@@ -26,7 +31,8 @@ public:
 		sanguis::collision::radius,
 		sanguis::collision::world::body_enter_callback const &,
 		sanguis::collision::world::body_exit_callback const &,
-		sanguis::collision::world::ghost_group
+		sanguis::collision::world::ghost_group,
+		sanguis::collision::world::ghost_base &
 	);
 
 	sanguis::collision::center const
@@ -43,16 +49,21 @@ public:
 
 	sanguis::collision::world::ghost_group
 	collision_group() const;
+
+	sanguis::collision::world::ghost_base &
+	ghost_base() const;
 private:
-	sanguis::collision::center center_;
+	sanguis::collision::center const center_;
 
-	sanguis::collision::radius radius_;
+	sanguis::collision::radius const radius_;
 
-	sanguis::collision::world::body_enter_callback body_enter_callback_;
+	sanguis::collision::world::body_enter_callback const body_enter_callback_;
 
-	sanguis::collision::world::body_exit_callback body_exit_callback_;
+	sanguis::collision::world::body_exit_callback const body_exit_callback_;
 
-	sanguis::collision::world::ghost_group collision_group_;
+	sanguis::collision::world::ghost_group const collision_group_;
+
+	sanguis::collision::world::ghost_base &ghost_base_;
 };
 
 }

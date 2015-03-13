@@ -9,6 +9,7 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/movement_speed_fwd.hpp>
 #include <sanguis/server/entities/movement_speed_initial_fwd.hpp>
+#include <sanguis/server/entities/optional_transfer_result_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_velocity_fwd.hpp>
@@ -44,12 +45,11 @@ protected:
 		sanguis::server::direction
 	);
 
-	virtual
 	void
 	update()
 	override;
 
-	bool
+	sanguis::server::entities::optional_transfer_result
 	on_transfer(
 		sanguis::server::entities::transfer_parameters const &
 	)

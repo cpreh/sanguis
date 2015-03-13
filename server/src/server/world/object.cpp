@@ -88,12 +88,14 @@
 #include <sanguis/server/source_world_id.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/body_collision.hpp>
+#include <sanguis/server/collision/ghost_base.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/doodad.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/is_type.hpp>
 #include <sanguis/server/entities/optional_base_ref.hpp>
+#include <sanguis/server/entities/optional_transfer_result.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/with_id.hpp>
@@ -129,6 +131,7 @@
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/cast/size.hpp>
+#include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/warning.hpp>
@@ -387,12 +390,17 @@ sanguis::server::world::object::insert_with_id(
 		*ret.first->second
 	);
 
-	if(
-		!result.transfer(
+	sanguis::server::entities::optional_transfer_result const transfer_result(
+		result.transfer(
 			this->environment(),
 			_insert_parameters,
 			grid_
 		)
+	);
+
+	// TODO: Use fcppt::maybe and move the player logic into a function
+	if(
+		!transfer_result
 	)
 	{
 		FCPPT_LOG_WARNING(
@@ -407,6 +415,22 @@ sanguis::server::world::object::insert_with_id(
 
 		return
 			sanguis::server::entities::optional_base_ref();
+	}
+	else
+	{
+		for(
+			sanguis::collision::world::body_enter const &body_enter
+			:
+			transfer_result->collision_result().body_enter()
+		)
+			fcppt::cast::static_downcast<
+				sanguis::server::collision::ghost_base &
+			>(
+				body_enter.ghost()
+			).body_enter_callback()(
+				body_enter.body(),
+				body_enter.created()
+			);
 	}
 
 	fcppt::maybe_void(

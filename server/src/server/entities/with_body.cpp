@@ -7,10 +7,13 @@
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/body.hpp>
 #include <sanguis/server/collision/position_callback.hpp>
+#include <sanguis/server/collision/transfer_result.hpp>
 #include <sanguis/server/collision/result.hpp>
 #include <sanguis/server/entities/convert_model_size.hpp>
+#include <sanguis/server/entities/optional_transfer_result.hpp>
 #include <sanguis/server/entities/radius.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
+#include <sanguis/server/entities/transfer_result.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
@@ -24,6 +27,7 @@
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
 #include <functional>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -123,7 +127,7 @@ sanguis::server::entities::with_body::dim() const
 		dim_;
 }
 
-bool
+sanguis::server::entities::optional_transfer_result
 sanguis::server::entities::with_body::on_transfer(
 	sanguis::server::entities::transfer_parameters const &_parameters
 )
@@ -136,16 +140,28 @@ sanguis::server::entities::with_body::on_transfer(
 		_parameters.angle()
 	);
 
-	collision_body_.transfer(
-		_parameters.world(),
-		_parameters.center(),
-		this->initial_speed(),
-		this->collision_group()
+	sanguis::server::collision::transfer_result transfer_result(
+		collision_body_.transfer(
+			_parameters.world(),
+			_parameters.center(),
+			this->initial_speed(),
+			this->collision_group()
+		)
+	);
+
+	// TODO: Use optional_bind
+	// TODO: Combine these
+	sanguis::server::entities::with_ghosts::on_transfer(
+		_parameters
 	);
 
 	return
-		sanguis::server::entities::with_ghosts::on_transfer(
-			_parameters
+		sanguis::server::entities::optional_transfer_result(
+			sanguis::server::entities::transfer_result(
+				std::move(
+					transfer_result
+				)
+			)
 		);
 }
 

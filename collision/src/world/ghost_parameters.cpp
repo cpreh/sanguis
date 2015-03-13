@@ -2,6 +2,7 @@
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/world/body_enter_callback.hpp>
 #include <sanguis/collision/world/body_exit_callback.hpp>
+#include <sanguis/collision/world/ghost_base_fwd.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_parameters.hpp>
 
@@ -11,7 +12,8 @@ sanguis::collision::world::ghost_parameters::ghost_parameters(
 	sanguis::collision::radius const _radius,
 	sanguis::collision::world::body_enter_callback const &_body_enter_callback,
 	sanguis::collision::world::body_exit_callback const &_body_exit_callback,
-	sanguis::collision::world::ghost_group const _collision_group
+	sanguis::collision::world::ghost_group const _collision_group,
+	sanguis::collision::world::ghost_base &_ghost_base
 )
 :
 	center_(
@@ -28,6 +30,9 @@ sanguis::collision::world::ghost_parameters::ghost_parameters(
 	),
 	collision_group_(
 		_collision_group
+	),
+	ghost_base_(
+		_ghost_base
 	)
 {
 }
@@ -65,4 +70,11 @@ sanguis::collision::world::ghost_parameters::collision_group() const
 {
 	return
 		collision_group_;
+}
+
+sanguis::collision::world::ghost_base &
+sanguis::collision::world::ghost_parameters::ghost_base() const
+{
+	return
+		ghost_base_;
 }

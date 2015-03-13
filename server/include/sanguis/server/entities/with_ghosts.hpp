@@ -5,6 +5,7 @@
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/collision/ghost.hpp>
 #include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/optional_transfer_result_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -38,7 +39,7 @@ protected:
 	);
 
 	virtual
-	bool
+	sanguis::server::entities::optional_transfer_result
 	on_transfer(
 		sanguis::server::entities::transfer_parameters const &
 	)

@@ -2,6 +2,7 @@
 #include <sanguis/collision/world/body_enter_callback.hpp>
 #include <sanguis/collision/world/body_exit_callback.hpp>
 #include <sanguis/collision/world/created.hpp>
+#include <sanguis/collision/world/ghost_base.hpp>
 #include <sanguis/server/collision/ghost_base.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
@@ -9,6 +10,8 @@
 
 
 sanguis::server::collision::ghost_base::ghost_base()
+:
+	sanguis::collision::world::ghost_base()
 {
 }
 

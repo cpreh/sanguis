@@ -5,8 +5,10 @@
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
+#include <sanguis/server/entities/optional_transfer_result.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
+#include <sanguis/server/entities/transfer_result.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/enemies/create.hpp>
 #include <sanguis/server/entities/enemies/special_chance.hpp>
@@ -79,7 +81,7 @@ sanguis::server::entities::spawns::spawn::angle() const
 		*angle_;
 }
 
-bool
+sanguis::server::entities::optional_transfer_result
 sanguis::server::entities::spawns::spawn::on_transfer(
 	sanguis::server::entities::transfer_parameters const &_parameters
 )
@@ -90,7 +92,10 @@ sanguis::server::entities::spawns::spawn::on_transfer(
 	angle_ =
 		_parameters.angle();
 
-	return true;
+	return
+		sanguis::server::entities::optional_transfer_result(
+			sanguis::server::entities::transfer_result()
+		);
 }
 
 void

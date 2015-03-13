@@ -10,6 +10,7 @@
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/body_fwd.hpp>
 #include <sanguis/server/collision/position_callback.hpp>
+#include <sanguis/server/collision/transfer_result_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -53,7 +54,7 @@ public:
 	sanguis::server::radius const
 	radius() const;
 
-	void
+	sanguis::server::collision::transfer_result
 	transfer(
 		sanguis::collision::world::object &,
 		sanguis::server::center,

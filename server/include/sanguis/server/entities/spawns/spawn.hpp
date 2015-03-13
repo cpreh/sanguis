@@ -7,6 +7,7 @@
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/optional_transfer_result_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
@@ -59,7 +60,7 @@ private:
 	angle() const
 	override;
 
-	bool
+	sanguis::server::entities::optional_transfer_result
 	on_transfer(
 		sanguis::server::entities::transfer_parameters const &
 	)

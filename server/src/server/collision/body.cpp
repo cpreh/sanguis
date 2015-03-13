@@ -11,6 +11,7 @@
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/body.hpp>
 #include <sanguis/server/collision/position_callback.hpp>
+#include <sanguis/server/collision/transfer_result.hpp>
 #include <fcppt/assert/pre.hpp>
 
 
@@ -102,7 +103,7 @@ sanguis::server::collision::body::radius() const
 		radius_;
 }
 
-void
+sanguis::server::collision::transfer_result
 sanguis::server::collision::body::transfer(
 	sanguis::collision::world::object &_world,
 	sanguis::server::center const _center,
@@ -147,10 +148,13 @@ sanguis::server::collision::body::transfer(
 			)
 		);
 
-	_world.activate_body(
-		*body_,
-		created
-	);
+	return
+		sanguis::server::collision::transfer_result(
+			_world.activate_body(
+				*body_,
+				created
+			)
+		);
 }
 
 void

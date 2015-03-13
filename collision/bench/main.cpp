@@ -14,6 +14,7 @@
 #include <sanguis/collision/world/create.hpp>
 #include <sanguis/collision/world/created.hpp>
 #include <sanguis/collision/world/ghost.hpp>
+#include <sanguis/collision/world/ghost_base.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_parameters.hpp>
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
@@ -196,6 +197,36 @@ main()
 		)
 	);
 
+	class ghost_base
+	:
+		public sanguis::collision::world::ghost_base
+	{
+		FCPPT_NONCOPYABLE(
+			ghost_base
+		);
+	public:
+		ghost_base()
+		{
+		}
+
+		~ghost_base()
+		override
+		{
+		}
+	private:
+		boost::logic::tribool const
+		can_collide_with(
+			sanguis::collision::world::body_base const &
+		) const
+		override
+		{
+			return
+				boost::logic::indeterminate;
+		}
+	};
+
+	ghost_base fake_ghost_base;
+
 	ghost_container const ghosts(
 		fcppt::algorithm::map<
 			ghost_container
@@ -204,7 +235,8 @@ main()
 				1000
 			),
 			[
-				&world
+				&world,
+				&fake_ghost_base
 			](
 				int
 			)
@@ -236,7 +268,8 @@ main()
 								{
 								}
 							),
-							sanguis::collision::world::ghost_group::player_sight
+							sanguis::collision::world::ghost_group::player_sight,
+							fake_ghost_base
 						)
 					);
 			}

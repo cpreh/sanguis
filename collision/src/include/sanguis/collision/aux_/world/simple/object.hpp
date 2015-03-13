@@ -6,6 +6,7 @@
 #include <sanguis/collision/aux_/world/simple/body_list_grid.hpp>
 #include <sanguis/collision/aux_/world/simple/ghost_fwd.hpp>
 #include <sanguis/collision/world/body_collision_callback.hpp>
+#include <sanguis/collision/world/body_enter_container.hpp>
 #include <sanguis/collision/world/body_fwd.hpp>
 #include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters_fwd.hpp>
@@ -57,7 +58,7 @@ private:
 	)
 	override;
 
-	void
+	sanguis::collision::world::body_enter_container
 	activate_body(
 		sanguis::collision::world::body &,
 		sanguis::collision::world::created

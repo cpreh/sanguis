@@ -3,6 +3,7 @@
 
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/optional_transfer_result_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_decl.hpp>
@@ -33,7 +34,7 @@ public:
 	~center_simple()
 	override = 0;
 protected:
-	bool
+	sanguis::server::entities::optional_transfer_result
 	on_transfer(
 		sanguis::server::entities::transfer_parameters const &
 	)

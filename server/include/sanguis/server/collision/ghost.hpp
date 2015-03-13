@@ -3,6 +3,7 @@
 
 #include <sanguis/collision/world/body_enter_callback.hpp>
 #include <sanguis/collision/world/body_exit_callback.hpp>
+#include <sanguis/collision/world/ghost_base_fwd.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
@@ -10,6 +11,7 @@
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/collision/ghost_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/reference_wrapper_decl.hpp>
 
 
 namespace sanguis
@@ -27,6 +29,7 @@ class ghost
 public:
 	ghost(
 		sanguis::collision::world::ghost_group,
+		sanguis::collision::world::ghost_base &,
 		sanguis::collision::world::body_enter_callback const &,
 		sanguis::collision::world::body_exit_callback const &,
 		sanguis::server::radius
@@ -58,6 +61,14 @@ public:
 	);
 private:
 	sanguis::collision::world::ghost_group collision_group_;
+
+	typedef
+	fcppt::reference_wrapper<
+		sanguis::collision::world::ghost_base
+	>
+	ghost_ref;
+
+	ghost_ref ghost_base_;
 
 	sanguis::collision::world::body_enter_callback body_enter_callback_;
 
