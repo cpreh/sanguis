@@ -11,6 +11,7 @@
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/body.hpp>
 #include <sanguis/server/collision/position_callback.hpp>
+#include <sanguis/server/collision/remove_result.hpp>
 #include <sanguis/server/collision/transfer_result.hpp>
 #include <fcppt/assert/pre.hpp>
 
@@ -111,11 +112,10 @@ sanguis::server::collision::body::transfer(
 	sanguis::collision::world::body_group const _collision_group
 )
 {
+	// FIXME: This is wrong
 	sanguis::collision::world::created const created{
 		!body_
 	};
-
-	this->destroy();
 
 	body_ =
 		_world.create_body(
@@ -157,8 +157,21 @@ sanguis::server::collision::body::transfer(
 		);
 }
 
-void
-sanguis::server::collision::body::destroy()
+sanguis::server::collision::remove_result
+sanguis::server::collision::body::remove(
+	sanguis::collision::world::object &_world
+)
 {
+	sanguis::server::collision::remove_result result(
+		_world.deactivate_body(
+			*body_
+		)
+	);
+
 	body_.reset();
+
+	return
+		std::move(
+			result
+		);
 }

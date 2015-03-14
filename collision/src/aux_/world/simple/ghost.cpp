@@ -5,11 +5,13 @@
 #include <sanguis/collision/aux_/world/simple/ghost.hpp>
 #include <sanguis/collision/aux_/world/simple/ghost_remove_callback.hpp>
 #include <sanguis/collision/world/body_enter.hpp>
+#include <sanguis/collision/world/body_exit.hpp>
 #include <sanguis/collision/world/created.hpp>
 #include <sanguis/collision/world/ghost.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_parameters.hpp>
 #include <sanguis/collision/world/optional_body_enter.hpp>
+#include <sanguis/collision/world/optional_body_exit.hpp>
 #include <fcppt/algorithm/map_iteration.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -129,7 +131,8 @@ sanguis::collision::aux_::world::simple::ghost::post_update_bodies()
 					true;
 			}
 
-			return false;
+			return
+				false;
 		}
 	);
 }
@@ -212,11 +215,12 @@ sanguis::collision::aux_::world::simple::ghost::new_body(
 		);
 }
 
-void
+sanguis::collision::world::optional_body_exit
 sanguis::collision::aux_::world::simple::ghost::remove_body(
 	sanguis::collision::aux_::world::simple::body const &_body
 )
 {
+	// TODO: How to improve this?
 	body_map::iterator const it(
 		bodies_.find(
 			&_body
@@ -224,15 +228,22 @@ sanguis::collision::aux_::world::simple::ghost::remove_body(
 	);
 
 	if(
-		it != bodies_.end()
+		it
+		==
+		bodies_.end()
 	)
-	{
-		bodies_.erase(
-			it
-		);
+		return
+			sanguis::collision::world::optional_body_exit();
 
-		body_exit_callback_(
-			_body.body_base()
+	bodies_.erase(
+		it
+	);
+
+	return
+		sanguis::collision::world::optional_body_exit(
+			sanguis::collision::world::body_exit(
+				_body.body_base(),
+				ghost_base_
+			)
 		);
-	}
 }

@@ -59,7 +59,9 @@ sanguis::server::collision::ghost::transfer(
 	sanguis::server::center const _center
 )
 {
-	this->destroy();
+	FCPPT_ASSERT_PRE(
+		!impl_
+	);
 
 	impl_ =
 		_world.create_ghost(

@@ -73,7 +73,7 @@ sanguis::server::entities::destructible::update()
 }
 
 void
-sanguis::server::entities::destructible::remove()
+sanguis::server::entities::destructible::remove_from_game()
 {
 	if(
 		this->environment()

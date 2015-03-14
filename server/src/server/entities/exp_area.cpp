@@ -50,7 +50,7 @@ sanguis::server::entities::exp_area::~exp_area()
 }
 
 void
-sanguis::server::entities::exp_area::remove()
+sanguis::server::entities::exp_area::remove_from_game()
 {
 	fcppt::algorithm::map_iteration_second(
 		player_links_,

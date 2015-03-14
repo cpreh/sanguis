@@ -124,6 +124,11 @@ private:
 		sanguis::server::entities::insert_parameters const &
 	);
 
+	void
+	player_insertion(
+		sanguis::server::entities::base const &
+	);
+
 	template<
 		typename Entity
 	>

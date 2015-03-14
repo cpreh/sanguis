@@ -8,6 +8,7 @@
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
 #include <sanguis/server/entities/optional_transfer_result_fwd.hpp>
+#include <sanguis/server/entities/remove_from_world_result_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/environment/optional_object_ref.hpp>
@@ -29,7 +30,9 @@ class base
 protected:
 	base();
 public:
-	// general world functions
+	/**
+	\brief Called when an entity is inserted into a world
+	*/
 	sanguis::server::entities::optional_transfer_result
 	transfer(
 		sanguis::server::environment::object &,
@@ -59,28 +62,14 @@ public:
 	*/
 	virtual
 	void
-	remove();
+	remove_from_game();
 
 	/**
-	\brief Called before the entity is deleted
-
-	Some cleanup operations still need the entity in tact (and able to
-	process virtual functions).
+	\brief Called before an entity is removed from a world
 	*/
 	virtual
-	void
-	destroy();
-
-	/**
-	\brief Called before an entity is transferred to another world
-
-	This is different from remove or destroy because the entity is still
-	alive but might need to invoke some callbacks by resetting its
-	collision body.
-	*/
-	virtual
-	void
-	reset_body();
+	sanguis::server::entities::remove_from_world_result
+	remove_from_world();
 
 	// environment query function
 	sanguis::server::environment::optional_object_ref const

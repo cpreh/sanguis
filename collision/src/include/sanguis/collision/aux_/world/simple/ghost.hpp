@@ -14,6 +14,7 @@
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_parameters_fwd.hpp>
 #include <sanguis/collision/world/optional_body_enter_fwd.hpp>
+#include <sanguis/collision/world/optional_body_exit_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_map>
@@ -79,7 +80,7 @@ public:
 		sanguis::collision::world::created
 	);
 
-	void
+	sanguis::collision::world::optional_body_exit
 	remove_body(
 		sanguis::collision::aux_::world::simple::body const &
 	);

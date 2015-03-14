@@ -25,12 +25,14 @@ sanguis::server::world::entity_vector<
 	Type
 >::~entity_vector()
 {
+	// FIXME
+/*
 	for(
 		auto &entity
 		:
 		impl_
 	)
-		entity->destroy();
+		entity->remove_from_world();*/
 }
 
 template<
@@ -105,7 +107,8 @@ sanguis::server::world::entity_vector<
 	iterator const _it
 )
 {
-	(*_it)->destroy();
+	// FIXME
+	//(*_it)->remove_from_world();
 
 	return
 		impl_.erase(

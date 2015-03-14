@@ -107,6 +107,8 @@ set(
 	include/sanguis/server/closest_entity.hpp
 	include/sanguis/server/collision/body.hpp
 	include/sanguis/server/collision/body_collision.hpp
+	include/sanguis/server/collision/body_enter.hpp
+	include/sanguis/server/collision/body_exit.hpp
 	include/sanguis/server/collision/body_fwd.hpp
 	include/sanguis/server/collision/distance_entity_entity.hpp
 	include/sanguis/server/collision/distance_entity_pos.hpp
@@ -117,6 +119,8 @@ set(
 	include/sanguis/server/collision/optional_result.hpp
 	include/sanguis/server/collision/optional_result_fwd.hpp
 	include/sanguis/server/collision/position_callback.hpp
+	include/sanguis/server/collision/remove_result.hpp
+	include/sanguis/server/collision/remove_result_fwd.hpp
 	include/sanguis/server/collision/result.hpp
 	include/sanguis/server/collision/result_fwd.hpp
 	include/sanguis/server/collision/transfer_result.hpp
@@ -184,6 +188,7 @@ set(
 	include/sanguis/server/entities/base_fwd.hpp
 	include/sanguis/server/entities/center_ghost.hpp
 	include/sanguis/server/entities/center_simple.hpp
+	include/sanguis/server/entities/combine_remove_from_world.hpp
 	include/sanguis/server/entities/convert_model_size.hpp
 	include/sanguis/server/entities/destructible.hpp
 	include/sanguis/server/entities/doodad.hpp
@@ -340,6 +345,8 @@ set(
 	include/sanguis/server/entities/property/subtract.hpp
 	include/sanguis/server/entities/property/value.hpp
 	include/sanguis/server/entities/radius.hpp
+	include/sanguis/server/entities/remove_from_world_result.hpp
+	include/sanguis/server/entities/remove_from_world_result_fwd.hpp
 	include/sanguis/server/entities/same_object.hpp
 	include/sanguis/server/entities/spawn_owner.hpp
 	include/sanguis/server/entities/spawn_owner_fwd.hpp
@@ -776,11 +783,14 @@ set(
 	src/server/cheat/weapon_type.cpp
 	src/server/collision/body.cpp
 	src/server/collision/body_collision.cpp
+	src/server/collision/body_enter.cpp
+	src/server/collision/body_exit.cpp
 	src/server/collision/distance_entity_entity.cpp
 	src/server/collision/distance_entity_pos.cpp
 	src/server/collision/distance_pos_pos.cpp
 	src/server/collision/ghost.cpp
 	src/server/collision/ghost_base.cpp
+	src/server/collision/remove_result.cpp
 	src/server/collision/result.cpp
 	src/server/collision/transfer_result.cpp
 	src/server/collision/with_world.cpp
@@ -806,6 +816,7 @@ set(
 	src/server/entities/base.cpp
 	src/server/entities/center_ghost.cpp
 	src/server/entities/center_simple.cpp
+	src/server/entities/combine_remove_from_world.cpp
 	src/server/entities/convert_model_size.cpp
 	src/server/entities/destructible.cpp
 	src/server/entities/doodad.cpp
@@ -898,6 +909,7 @@ set(
 	src/server/entities/property/linear_decrease_op.cpp
 	src/server/entities/property/subtract.cpp
 	src/server/entities/radius.cpp
+	src/server/entities/remove_from_world_result.cpp
 	src/server/entities/spawns/limited.cpp
 	src/server/entities/spawns/spawn.cpp
 	src/server/entities/speed_to_abs.cpp

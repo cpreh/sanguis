@@ -5,6 +5,7 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/optional_transfer_result.hpp>
+#include <sanguis/server/entities/remove_from_world_result.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/entities/transfer_result.hpp>
 #include <sanguis/server/environment/object.hpp>
@@ -88,18 +89,16 @@ sanguis::server::entities::base::tick(
 }
 
 void
-sanguis::server::entities::base::remove()
+sanguis::server::entities::base::remove_from_game()
 {
 }
 
-void
-sanguis::server::entities::base::destroy()
+sanguis::server::entities::remove_from_world_result
+sanguis::server::entities::base::remove_from_world()
 {
-}
-
-void
-sanguis::server::entities::base::reset_body()
-{
+	// TODO: Should we define this?
+	return
+		sanguis::server::entities::remove_from_world_result();
 }
 
 sanguis::server::environment::optional_object_ref const

@@ -96,9 +96,9 @@ sanguis::server::entities::enemies::special::update()
 }
 
 void
-sanguis::server::entities::enemies::special::remove()
+sanguis::server::entities::enemies::special::remove_from_game()
 {
-	sanguis::server::entities::enemies::enemy::remove();
+	sanguis::server::entities::enemies::enemy::remove_from_game();
 
 	for(
 		sanguis::server::entities::enemies::skills::unique_ptr const &skill

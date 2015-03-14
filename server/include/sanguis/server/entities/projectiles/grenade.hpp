@@ -63,7 +63,7 @@ private:
 	override;
 
 	void
-	remove()
+	remove_from_game()
 	override;
 
 	sanguis::diff_timer slowdown_timer_;

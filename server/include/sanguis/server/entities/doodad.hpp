@@ -50,10 +50,6 @@ public:
 	void
 	update()
 	override;
-
-	void
-	destroy()
-	override;
 private:
 	sanguis::collision::world::body_group
 	collision_group() const

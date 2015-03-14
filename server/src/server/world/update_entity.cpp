@@ -69,7 +69,7 @@ sanguis::server::world::update_entity::impl(
 		_entity->dead()
 	)
 	{
-		_entity->remove();
+		_entity->remove_from_game();
 
 		return
 			true;

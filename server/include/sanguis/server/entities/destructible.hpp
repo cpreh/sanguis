@@ -54,7 +54,7 @@ private:
 	override;
 
 	void
-	remove()
+	remove_from_game()
 	override;
 
 	sanguis::server::team

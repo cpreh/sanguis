@@ -15,12 +15,14 @@ sanguis::server::world::entity_map::entity_map()
 
 sanguis::server::world::entity_map::~entity_map()
 {
+	// FIXME: Do we want this here?
+	/*
 	for(
 		auto &element
 		:
 		impl_
 	)
-		element.second->destroy();
+		element.second->remove_from_world();*/
 }
 
 sanguis::server::world::entity_map::insert_return_type const
@@ -81,7 +83,8 @@ sanguis::server::world::entity_map::erase(
 	iterator const _it
 )
 {
-	_it->second->destroy();
+	// FIXME
+	//_it->second->remove_from_world();
 
 	impl_.erase(
 		_it

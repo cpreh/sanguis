@@ -7,6 +7,7 @@
 #include <sanguis/collision/aux_/world/simple/ghost_fwd.hpp>
 #include <sanguis/collision/world/body_collision_callback.hpp>
 #include <sanguis/collision/world/body_enter_container.hpp>
+#include <sanguis/collision/world/body_exit_container.hpp>
 #include <sanguis/collision/world/body_fwd.hpp>
 #include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters_fwd.hpp>
@@ -19,6 +20,8 @@
 #include <sanguis/collision/world/parameters_fwd.hpp>
 #include <sanguis/creator/dim.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_wrapper_std_hash.hpp>
 #include <fcppt/container/enum_array_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_set>
@@ -65,6 +68,12 @@ private:
 	)
 	override;
 
+	sanguis::collision::world::body_exit_container
+	deactivate_body(
+		sanguis::collision::world::body &
+	)
+	override;
+
 	sanguis::collision::world::ghost_unique_ptr
 	create_ghost(
 		sanguis::collision::world::ghost_parameters const &
@@ -93,8 +102,14 @@ private:
 	);
 
 	typedef
+	fcppt::reference_wrapper<
+		sanguis::collision::aux_::world::simple::body
+	>
+	body_reference;
+
+	typedef
 	std::unordered_set<
-		sanguis::collision::aux_::world::simple::body *
+		body_reference
 	>
 	body_set;
 
@@ -106,8 +121,14 @@ private:
 	body_set_array;
 
 	typedef
+	fcppt::reference_wrapper<
+		sanguis::collision::aux_::world::simple::ghost
+	>
+	ghost_reference;
+
+	typedef
 	std::unordered_set<
-		sanguis::collision::aux_::world::simple::ghost *
+		ghost_reference
 	>
 	ghost_set;
 

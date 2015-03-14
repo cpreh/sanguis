@@ -42,9 +42,9 @@ sanguis::server::entities::enemies::boss::on_create()
 }
 
 void
-sanguis::server::entities::enemies::boss::remove()
+sanguis::server::entities::enemies::boss::remove_from_game()
 {
-	sanguis::server::entities::enemies::enemy::remove();
+	sanguis::server::entities::enemies::enemy::remove_from_game();
 
 	this->environment()->remove_portal_blocker();
 }

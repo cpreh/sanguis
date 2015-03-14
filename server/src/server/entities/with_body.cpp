@@ -9,9 +9,11 @@
 #include <sanguis/server/collision/position_callback.hpp>
 #include <sanguis/server/collision/transfer_result.hpp>
 #include <sanguis/server/collision/result.hpp>
+#include <sanguis/server/entities/combine_remove_from_world.hpp>
 #include <sanguis/server/entities/convert_model_size.hpp>
 #include <sanguis/server/entities/optional_transfer_result.hpp>
 #include <sanguis/server/entities/radius.hpp>
+#include <sanguis/server/entities/remove_from_world_result.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/entities/transfer_result.hpp>
 #include <sanguis/server/entities/with_body.hpp>
@@ -127,13 +129,34 @@ sanguis::server::entities::with_body::dim() const
 		dim_;
 }
 
+sanguis::server::entities::remove_from_world_result
+sanguis::server::entities::with_body::remove_from_world()
+{
+	// Make sure all links are gone before the body is destroyed
+	this->reset_links();
+
+	sanguis::server::entities::remove_from_world_result ghost_result(
+		sanguis::server::entities::with_ghosts::remove_from_world()
+	);
+
+	return
+		sanguis::server::entities::combine_remove_from_world(
+			std::move(
+				ghost_result
+			),
+			sanguis::server::entities::remove_from_world_result(
+				collision_body_.remove(
+					this->environment()->collision_world()
+				)
+			)
+		);
+}
+
 sanguis::server::entities::optional_transfer_result
 sanguis::server::entities::with_body::on_transfer(
 	sanguis::server::entities::transfer_parameters const &_parameters
 )
 {
-	this->reset_body();
-
 	net_angle_.reset();
 
 	this->angle(
@@ -189,15 +212,6 @@ sanguis::server::entities::with_body::on_world_collision(
 	this->body_speed(
 		_result.speed()
 	);
-}
-
-void
-sanguis::server::entities::with_body::destroy()
-{
-	// Make sure all links are gone before the body is destroyed
-	this->reset_links();
-
-	this->reset_body();
 }
 
 void
@@ -330,14 +344,4 @@ sanguis::server::entities::with_body::on_speed_change(
 	sanguis::server::speed
 )
 {
-}
-
-void
-sanguis::server::entities::with_body::reset_body()
-{
-	// Ghosts might invoke callbacks to their own body, so destroy them
-	// first
-	sanguis::server::entities::with_ghosts::destroy();
-
-	collision_body_.destroy();
 }

@@ -72,7 +72,7 @@ protected:
 	override;
 
 	void
-	remove()
+	remove_from_game()
 	override;
 private:
 	sanguis::messages::server::unique_ptr

@@ -3,6 +3,7 @@
 #include <sanguis/server/collision/ghost.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/optional_transfer_result.hpp>
+#include <sanguis/server/entities/remove_from_world_result.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/entities/transfer_result.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
@@ -70,15 +71,19 @@ sanguis::server::entities::with_ghosts::on_transfer(
 		);
 }
 
-void
-sanguis::server::entities::with_ghosts::destroy()
+sanguis::server::entities::remove_from_world_result
+sanguis::server::entities::with_ghosts::remove_from_world()
 {
+	// FIXME: Remove ghosts properly
 	for(
 		auto &ghost
 		:
 		ghosts_
 	)
 		ghost.destroy();
+
+	return
+		sanguis::server::entities::remove_from_world_result();
 }
 
 void

@@ -48,7 +48,7 @@ private:
 	override;
 
 	void
-	remove()
+	remove_from_game()
 	override;
 
 	sanguis::server::damage::unit const damage_;

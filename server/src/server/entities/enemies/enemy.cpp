@@ -158,7 +158,7 @@ sanguis::server::entities::enemies::enemy::update()
 }
 
 void
-sanguis::server::entities::enemies::enemy::remove()
+sanguis::server::entities::enemies::enemy::remove_from_game()
 {
 	fcppt::maybe_void(
 		spawn_owner_.get().get(),

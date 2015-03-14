@@ -4,6 +4,7 @@
 #include <sanguis/collision/duration.hpp>
 #include <sanguis/collision/world/body_fwd.hpp>
 #include <sanguis/collision/world/body_enter_container.hpp>
+#include <sanguis/collision/world/body_exit_container.hpp>
 #include <sanguis/collision/world/body_parameters_fwd.hpp>
 #include <sanguis/collision/world/body_unique_ptr.hpp>
 #include <sanguis/collision/world/created_fwd.hpp>
@@ -42,6 +43,12 @@ public:
 	activate_body(
 		sanguis::collision::world::body &,
 		sanguis::collision::world::created
+	) = 0;
+
+	virtual
+	sanguis::collision::world::body_exit_container
+	deactivate_body(
+		sanguis::collision::world::body &
 	) = 0;
 
 	virtual

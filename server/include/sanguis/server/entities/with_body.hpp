@@ -13,6 +13,7 @@
 #include <sanguis/server/collision/body_fwd.hpp>
 #include <sanguis/server/collision/result_fwd.hpp>
 #include <sanguis/server/entities/optional_transfer_result_fwd.hpp>
+#include <sanguis/server/entities/remove_from_world_result_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
@@ -79,6 +80,10 @@ public:
 
 	sanguis::server::dim const
 	dim() const;
+
+	sanguis::server::entities::remove_from_world_result
+	remove_from_world()
+	override;
 protected:
 	// entities::base::on_transfer
 	sanguis::server::entities::optional_transfer_result
@@ -95,10 +100,6 @@ protected:
 
 	void
 	update()
-	override;
-
-	void
-	destroy()
 	override;
 
 	void
@@ -158,10 +159,6 @@ private:
 	on_speed_change(
 		sanguis::server::speed
 	);
-
-	void
-	reset_body()
-	override;
 
 	sanguis::server::dim const dim_;
 

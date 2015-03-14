@@ -134,7 +134,7 @@ sanguis::server::entities::projectiles::grenade::update()
 }
 
 void
-sanguis::server::entities::projectiles::grenade::remove()
+sanguis::server::entities::projectiles::grenade::remove_from_game()
 {
 	this->environment()->insert(
 		fcppt::make_unique_ptr<

@@ -10,6 +10,7 @@
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/body_fwd.hpp>
 #include <sanguis/server/collision/position_callback.hpp>
+#include <sanguis/server/collision/remove_result_fwd.hpp>
 #include <sanguis/server/collision/transfer_result_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -62,8 +63,10 @@ public:
 		sanguis::collision::world::body_group
 	);
 
-	void
-	destroy();
+	sanguis::server::collision::remove_result
+	remove(
+		sanguis::collision::world::object &
+	);
 private:
 	sanguis::server::radius const radius_;
 

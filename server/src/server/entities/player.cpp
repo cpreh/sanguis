@@ -412,7 +412,7 @@ sanguis::server::entities::player::team() const
 }
 
 void
-sanguis::server::entities::player::remove()
+sanguis::server::entities::player::remove_from_game()
 {
 	this->environment()->remove_player(
 		this->player_id()

@@ -67,12 +67,6 @@ sanguis::server::entities::doodad::update()
 	sanguis::server::entities::with_body::update();
 }
 
-void
-sanguis::server::entities::doodad::destroy()
-{
-	sanguis::server::entities::with_body::destroy();
-}
-
 sanguis::collision::world::body_group
 sanguis::server::entities::doodad::collision_group() const
 {

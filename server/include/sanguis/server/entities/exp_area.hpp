@@ -42,7 +42,7 @@ public:
 	override;
 private:
 	void
-	remove()
+	remove_from_game()
 	override;
 
 	bool
