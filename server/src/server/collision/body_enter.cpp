@@ -19,7 +19,7 @@ sanguis::server::collision::body_enter(
 			sanguis::server::collision::ghost_base &
 		>(
 			body_enter.ghost()
-		).body_enter_callback()(
+		).body_enter(
 			body_enter.body(),
 			body_enter.created()
 		);

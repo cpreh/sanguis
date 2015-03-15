@@ -56,14 +56,14 @@ private:
 	override;
 
 	void
-	body_enter(
+	on_body_enter(
 		sanguis::collision::world::body_base &,
 		sanguis::collision::world::created
 	)
 	override;
 
 	void
-	body_exit(
+	on_body_exit(
 		sanguis::collision::world::body_base &
 	)
 	override;

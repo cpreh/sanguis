@@ -1,6 +1,4 @@
 #include <sanguis/collision/world/body_base_fwd.hpp>
-#include <sanguis/collision/world/body_enter_callback.hpp>
-#include <sanguis/collision/world/body_exit_callback.hpp>
 #include <sanguis/collision/world/created.hpp>
 #include <sanguis/collision/world/ghost_base.hpp>
 #include <sanguis/server/collision/ghost_base.hpp>
@@ -19,51 +17,34 @@ sanguis::server::collision::ghost_base::~ghost_base()
 {
 }
 
-sanguis::collision::world::body_enter_callback
-sanguis::server::collision::ghost_base::body_enter_callback()
+void
+sanguis::server::collision::ghost_base::body_enter(
+	sanguis::collision::world::body_base &_body,
+	sanguis::collision::world::created const _created
+)
 {
-	return
-		sanguis::collision::world::body_enter_callback{
-			[
-				this
-			](
-				sanguis::collision::world::body_base &_body,
-				sanguis::collision::world::created const _created
-			)
-			{
-				if(
-					this->can_collide_with(
-						_body
-					)
-				)
-					this->body_enter(
-						_body,
-						_created
-					);
-			}
-		};
-
+	if(
+		this->can_collide_with(
+			_body
+		)
+	)
+		this->on_body_enter(
+			_body,
+			_created
+		);
 }
 
-sanguis::collision::world::body_exit_callback
-sanguis::server::collision::ghost_base::body_exit_callback()
+void
+sanguis::server::collision::ghost_base::body_exit(
+	sanguis::collision::world::body_base &_body
+)
 {
-	return
-		sanguis::collision::world::body_exit_callback{
-			[
-				this
-			](
-				sanguis::collision::world::body_base &_body
-			)
-			{
-				if(
-					this->can_collide_with(
-						_body
-					)
-				)
-					this->body_exit(
-						_body
-					);
-			}
-		};
+	if(
+		this->can_collide_with(
+			_body
+		)
+	)
+		this->on_body_exit(
+			_body
+		);
 }

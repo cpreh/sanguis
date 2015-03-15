@@ -19,7 +19,7 @@ sanguis::server::collision::body_exit(
 			sanguis::server::collision::ghost_base &
 		>(
 			body_exit.ghost()
-		).body_exit_callback()(
+		).body_exit(
 			body_exit.body()
 		);
 }

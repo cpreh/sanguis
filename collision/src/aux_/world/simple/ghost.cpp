@@ -29,12 +29,6 @@ sanguis::collision::aux_::world::simple::ghost::ghost(
 	radius_(
 		_parameters.radius()
 	),
-	body_enter_callback_(
-		_parameters.body_enter_callback()
-	),
-	body_exit_callback_(
-		_parameters.body_exit_callback()
-	),
 	collision_group_(
 		_parameters.collision_group()
 	),
@@ -50,6 +44,8 @@ sanguis::collision::aux_::world::simple::ghost::ghost(
 
 sanguis::collision::aux_::world::simple::ghost::~ghost()
 {
+	// TODO:
+/*
 	for(
 		auto &body
 		:
@@ -57,7 +53,7 @@ sanguis::collision::aux_::world::simple::ghost::~ghost()
 	)
 		body_exit_callback_(
 			body.first->body_base()
-		);
+		);*/
 
 	ghost_remove_callback_(
 		*this
@@ -123,9 +119,11 @@ sanguis::collision::aux_::world::simple::ghost::post_update_bodies()
 				body_status::marked_for_deletion
 			)
 			{
+				// TODO!
+				/*
 				body_exit_callback_(
 					_element.first->body_base()
-				);
+				);*/
 
 				return
 					true;
@@ -161,7 +159,9 @@ sanguis::collision::aux_::world::simple::ghost::update_near_body(
 	);
 
 	if(
-		it == bodies_.end()
+		it
+		==
+		bodies_.end()
 	)
 	{
 		bodies_.insert(
@@ -171,12 +171,14 @@ sanguis::collision::aux_::world::simple::ghost::update_near_body(
 			)
 		);
 
+		// TODO
+		/*
 		body_enter_callback_(
 			_body.body_base(),
 			sanguis::collision::world::created{
 				false
 			}
-		);
+		);*/
 	}
 	else
 		it->second =

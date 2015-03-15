@@ -2,8 +2,6 @@
 #define SANGUIS_SERVER_COLLISION_GHOST_BASE_HPP_INCLUDED
 
 #include <sanguis/collision/world/body_base_fwd.hpp>
-#include <sanguis/collision/world/body_enter_callback.hpp>
-#include <sanguis/collision/world/body_exit_callback.hpp>
 #include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/collision/world/ghost_base.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -32,24 +30,35 @@ protected:
 	~ghost_base()
 	override;
 public:
-	sanguis::collision::world::body_enter_callback
-	body_enter_callback();
+	void
+	body_enter(
+		sanguis::collision::world::body_base &,
+		sanguis::collision::world::created
+	);
 
-	sanguis::collision::world::body_exit_callback
-	body_exit_callback();
+	void
+	body_exit(
+		sanguis::collision::world::body_base &
+	);
 private:
 	virtual
 	void
-	body_enter(
+	on_body_enter(
 		sanguis::collision::world::body_base &,
 		sanguis::collision::world::created
 	) = 0;
 
 	virtual
 	void
-	body_exit(
+	on_body_exit(
 		sanguis::collision::world::body_base &
 	) = 0;
+
+	virtual
+	boost::logic::tribool const
+	can_collide_with(
+		sanguis::collision::world::body_base const &
+	) const = 0;
 };
 
 }

@@ -21,10 +21,8 @@ sanguis::server::auras::aura::create_ghost()
 {
 	return
 		sanguis::server::collision::ghost{
-			collision_group_,
 			*this,
-			this->body_enter_callback(),
-			this->body_exit_callback(),
+			collision_group_,
 			radius_
 		};
 }
@@ -54,7 +52,7 @@ sanguis::server::auras::aura::can_collide_with(
 }
 
 void
-sanguis::server::auras::aura::body_enter(
+sanguis::server::auras::aura::on_body_enter(
 	sanguis::collision::world::body_base &_base,
 	sanguis::collision::world::created const _created
 )
@@ -70,7 +68,7 @@ sanguis::server::auras::aura::body_enter(
 }
 
 void
-sanguis::server::auras::aura::body_exit(
+sanguis::server::auras::aura::on_body_exit(
 	sanguis::collision::world::body_base &_base
 )
 {

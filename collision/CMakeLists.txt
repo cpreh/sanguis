@@ -24,11 +24,9 @@ set(
 	include/sanguis/collision/world/body_base_fwd.hpp
 	include/sanguis/collision/world/body_collision_callback.hpp
 	include/sanguis/collision/world/body_enter.hpp
-	include/sanguis/collision/world/body_enter_callback.hpp
 	include/sanguis/collision/world/body_enter_container.hpp
 	include/sanguis/collision/world/body_enter_fwd.hpp
 	include/sanguis/collision/world/body_exit.hpp
-	include/sanguis/collision/world/body_exit_callback.hpp
 	include/sanguis/collision/world/body_exit_container.hpp
 	include/sanguis/collision/world/body_exit_fwd.hpp
 	include/sanguis/collision/world/body_fwd.hpp

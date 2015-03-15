@@ -1,8 +1,6 @@
 #ifndef SANGUIS_SERVER_COLLISION_GHOST_HPP_INCLUDED
 #define SANGUIS_SERVER_COLLISION_GHOST_HPP_INCLUDED
 
-#include <sanguis/collision/world/body_enter_callback.hpp>
-#include <sanguis/collision/world/body_exit_callback.hpp>
 #include <sanguis/collision/world/ghost_base_fwd.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
@@ -28,10 +26,8 @@ class ghost
 	);
 public:
 	ghost(
-		sanguis::collision::world::ghost_group,
 		sanguis::collision::world::ghost_base &,
-		sanguis::collision::world::body_enter_callback const &,
-		sanguis::collision::world::body_exit_callback const &,
+		sanguis::collision::world::ghost_group,
 		sanguis::server::radius
 	);
 
@@ -60,19 +56,15 @@ public:
 		sanguis::server::center
 	);
 private:
-	sanguis::collision::world::ghost_group collision_group_;
-
 	typedef
 	fcppt::reference_wrapper<
 		sanguis::collision::world::ghost_base
 	>
-	ghost_ref;
+	ghost_base_ref;
 
-	ghost_ref ghost_base_;
+	ghost_base_ref ghost_base_;
 
-	sanguis::collision::world::body_enter_callback body_enter_callback_;
-
-	sanguis::collision::world::body_exit_callback body_exit_callback_;
+	sanguis::collision::world::ghost_group collision_group_;
 
 	sanguis::server::radius radius_;
 

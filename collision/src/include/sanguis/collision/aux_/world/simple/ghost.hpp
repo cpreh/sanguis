@@ -6,8 +6,6 @@
 #include <sanguis/collision/aux_/world/simple/body_fwd.hpp>
 #include <sanguis/collision/aux_/world/simple/ghost_fwd.hpp>
 #include <sanguis/collision/aux_/world/simple/ghost_remove_callback.hpp>
-#include <sanguis/collision/world/body_enter_callback.hpp>
-#include <sanguis/collision/world/body_exit_callback.hpp>
 #include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/collision/world/ghost.hpp>
 #include <sanguis/collision/world/ghost_base_fwd.hpp>
@@ -88,10 +86,6 @@ private:
 	sanguis::collision::aux_::world::simple::ghost_remove_callback const ghost_remove_callback_;
 
 	sanguis::collision::radius const radius_;
-
-	sanguis::collision::world::body_enter_callback const body_enter_callback_;
-
-	sanguis::collision::world::body_exit_callback const body_exit_callback_;
 
 	sanguis::collision::world::ghost_group const collision_group_;
 

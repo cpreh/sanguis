@@ -2,13 +2,9 @@
 #define SANGUIS_COLLISION_WORLD_GHOST_BASE_HPP_INCLUDED
 
 #include <sanguis/collision/symbol.hpp>
-#include <sanguis/collision/world/body_base_fwd.hpp>
 #include <sanguis/collision/world/ghost_base_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/symbol/class.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <boost/logic/tribool_fwd.hpp>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -30,12 +26,6 @@ public:
 	SANGUIS_COLLISION_SYMBOL
 	virtual
 	~ghost_base() = 0;
-
-	virtual
-	boost::logic::tribool const
-	can_collide_with(
-		sanguis::collision::world::body_base const &
-	) const = 0;
 };
 
 }

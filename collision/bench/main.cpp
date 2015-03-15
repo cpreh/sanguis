@@ -6,8 +6,6 @@
 #include <sanguis/collision/world/body.hpp>
 #include <sanguis/collision/world/body_base.hpp>
 #include <sanguis/collision/world/body_collision_callback.hpp>
-#include <sanguis/collision/world/body_enter_callback.hpp>
-#include <sanguis/collision/world/body_exit_callback.hpp>
 #include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters.hpp>
 #include <sanguis/collision/world/body_unique_ptr.hpp>
@@ -213,16 +211,6 @@ main()
 		override
 		{
 		}
-	private:
-		boost::logic::tribool const
-		can_collide_with(
-			sanguis::collision::world::body_base const &
-		) const
-		override
-		{
-			return
-				boost::logic::indeterminate;
-		}
 	};
 
 	ghost_base fake_ghost_base;
@@ -253,21 +241,6 @@ main()
 							sanguis::collision::radius{
 								2000.f
 							},
-							sanguis::collision::world::body_enter_callback(
-								[](
-									sanguis::collision::world::body_base &,
-									sanguis::collision::world::created
-								)
-								{
-								}
-							),
-							sanguis::collision::world::body_exit_callback(
-								[](
-									sanguis::collision::world::body_base &
-								)
-								{
-								}
-							),
 							sanguis::collision::world::ghost_group::player_sight,
 							fake_ghost_base
 						)
