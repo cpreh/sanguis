@@ -427,7 +427,7 @@ sanguis::server::world::object::insert_with_id(
 			)
 			{
 				sanguis::server::collision::body_enter(
-					_transfer_result.collision_result().body_enter()
+					_transfer_result.body_enter()
 				);
 
 				this->player_insertion(
@@ -957,7 +957,7 @@ sanguis::server::world::object::request_transfer(
 			)
 			{
 				sanguis::server::collision::body_exit(
-					cur_entity.remove_from_world().collision_result().body_exit()
+					cur_entity.remove_from_world().body_exit()
 				);
 
 				sanguis::server::entities::unique_ptr entity_ptr(

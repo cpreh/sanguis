@@ -7,9 +7,9 @@
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/body.hpp>
 #include <sanguis/server/collision/position_callback.hpp>
-#include <sanguis/server/collision/transfer_result.hpp>
 #include <sanguis/server/collision/result.hpp>
 #include <sanguis/server/entities/combine_remove_from_world.hpp>
+#include <sanguis/server/entities/combine_transfer.hpp>
 #include <sanguis/server/entities/convert_model_size.hpp>
 #include <sanguis/server/entities/optional_transfer_result.hpp>
 #include <sanguis/server/entities/radius.hpp>
@@ -25,6 +25,7 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/maybe_void.hpp>
+#include <fcppt/assert/error.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
@@ -135,15 +136,9 @@ sanguis::server::entities::with_body::remove_from_world()
 	// Make sure all links are gone before the body is destroyed
 	this->reset_links();
 
-	sanguis::server::entities::remove_from_world_result ghost_result(
-		sanguis::server::entities::with_ghosts::remove_from_world()
-	);
-
 	return
 		sanguis::server::entities::combine_remove_from_world(
-			std::move(
-				ghost_result
-			),
+			sanguis::server::entities::with_ghosts::remove_from_world(),
 			sanguis::server::entities::remove_from_world_result(
 				collision_body_.remove(
 					this->environment()->collision_world()
@@ -159,30 +154,30 @@ sanguis::server::entities::with_body::on_transfer(
 {
 	net_angle_.reset();
 
-	this->angle(
-		_parameters.angle()
-	);
-
-	sanguis::server::collision::transfer_result transfer_result(
-		collision_body_.transfer(
-			_parameters.world(),
-			_parameters.center(),
-			this->initial_speed(),
-			this->collision_group()
+	// TODO: Use optional_bind
+	sanguis::server::entities::optional_transfer_result ghost_result(
+		sanguis::server::entities::with_ghosts::on_transfer(
+			_parameters
 		)
 	);
 
-	// TODO: Use optional_bind
-	// TODO: Combine these
-	sanguis::server::entities::with_ghosts::on_transfer(
-		_parameters
+	FCPPT_ASSERT_ERROR(
+		ghost_result
 	);
 
 	return
 		sanguis::server::entities::optional_transfer_result(
-			sanguis::server::entities::transfer_result(
+			sanguis::server::entities::combine_transfer(
+				sanguis::server::entities::transfer_result(
+					collision_body_.transfer(
+						_parameters.world(),
+						_parameters.center(),
+						this->initial_speed(),
+						this->collision_group()
+					)
+				),
 				std::move(
-					transfer_result
+					*ghost_result
 				)
 			)
 		);

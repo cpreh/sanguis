@@ -20,6 +20,7 @@
 #include <sanguis/collision/world/body_parameters_fwd.hpp>
 #include <sanguis/collision/world/body_unique_ptr.hpp>
 #include <sanguis/collision/world/created.hpp>
+#include <sanguis/collision/world/ghost_fwd.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_parameters_fwd.hpp>
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
@@ -36,7 +37,7 @@
 #include <fcppt/reference_wrapper_comparison.hpp>
 #include <fcppt/algorithm/array_init_move.hpp>
 #include <fcppt/algorithm/array_push_back.hpp>
-#include <fcppt/algorithm/map_concat.hpp>
+#include <fcppt/algorithm/map_concat_move.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/float_to_int.hpp>
@@ -148,7 +149,7 @@ sanguis::collision::aux_::world::simple::object::activate_body(
 	);
 
 	return
-		fcppt::algorithm::map_concat<
+		fcppt::algorithm::map_concat_move<
 			sanguis::collision::world::body_enter_container
 		>(
 			sanguis::collision::aux_::world::ghost_groups_for_body_group(
@@ -212,7 +213,7 @@ sanguis::collision::aux_::world::simple::object::deactivate_body(
 	);
 
 	return
-		fcppt::algorithm::map_concat<
+		fcppt::algorithm::map_concat_move<
 			sanguis::collision::world::body_exit_container
 		>(
 			sanguis::collision::aux_::world::ghost_groups_for_body_group(
@@ -253,7 +254,7 @@ sanguis::collision::aux_::world::simple::object::create_ghost(
 	sanguis::collision::world::ghost_parameters const &_parameters
 )
 {
-	sanguis::collision::aux_::world::simple::ghost_unique_ptr result(
+	return
 		fcppt::make_unique_ptr<
 			sanguis::collision::aux_::world::simple::ghost
 		>(
@@ -265,43 +266,130 @@ sanguis::collision::aux_::world::simple::object::create_ghost(
 					std::placeholders::_1
 				)
 			)
+		);
+}
+
+sanguis::collision::world::body_enter_container
+sanguis::collision::aux_::world::simple::object::activate_ghost(
+	sanguis::collision::world::ghost &_ghost
+)
+{
+	sanguis::collision::aux_::world::simple::ghost &ghost(
+		fcppt::cast::static_downcast<
+			sanguis::collision::aux_::world::simple::ghost &
+		>(
+			_ghost
 		)
 	);
 
 	FCPPT_ASSERT_ERROR(
 		ghost_sets_[
-			result->collision_group()
+			ghost.collision_group()
 		].insert(
 			fcppt::make_ref(
-				*result
+				ghost
 			)
 		).second
 	);
 
-	for(
-		sanguis::collision::world::body_group const body_group
-		:
-		sanguis::collision::aux_::world::body_groups_for_ghost_group(
-			result->collision_group()
+	return
+		fcppt::algorithm::map_concat_move<
+			sanguis::collision::world::body_enter_container
+		>(
+			sanguis::collision::aux_::world::body_groups_for_ghost_group(
+				ghost.collision_group()
+			),
+			[
+				this,
+				&ghost
+			](
+				sanguis::collision::world::body_group const _body_group
+			)
+			{
+				return
+					fcppt::algorithm::map_optional<
+						sanguis::collision::world::body_enter_container
+					>(
+						body_sets_[
+							_body_group
+						],
+						[
+							&ghost
+						](
+							body_reference const _body
+						)
+						{
+							return
+								ghost.new_body(
+									_body.get(),
+									sanguis::collision::world::created{
+										false
+									}
+								);
+						}
+					);
+			}
+		);
+}
+
+sanguis::collision::world::body_exit_container
+sanguis::collision::aux_::world::simple::object::deactivate_ghost(
+	sanguis::collision::world::ghost &_ghost
+)
+{
+	sanguis::collision::aux_::world::simple::ghost &ghost(
+		fcppt::cast::static_downcast<
+			sanguis::collision::aux_::world::simple::ghost &
+		>(
+			_ghost
 		)
-	)
-		for(
-			auto const body
-			:
-			body_sets_[
-				body_group
-			]
+	);
+
+	FCPPT_ASSERT_ERROR(
+		ghost_sets_[
+			ghost.collision_group()
+		].erase(
+			fcppt::make_ref(
+				ghost
+			)
 		)
-			result->new_body(
-				body.get(),
-				sanguis::collision::world::created{
-					false
-				}
-			);
+		== 1u
+	);
 
 	return
-		std::move(
-			result
+		fcppt::algorithm::map_concat_move<
+			sanguis::collision::world::body_exit_container
+		>(
+			sanguis::collision::aux_::world::body_groups_for_ghost_group(
+				ghost.collision_group()
+			),
+			[
+				this,
+				&ghost
+			](
+				sanguis::collision::world::body_group const _body_group
+			)
+			{
+				return
+					fcppt::algorithm::map_optional<
+						sanguis::collision::world::body_exit_container
+					>(
+						body_sets_[
+							_body_group
+						],
+						[
+							&ghost
+						](
+							body_reference const _body
+						)
+						{
+							return
+								ghost.remove_body(
+									_body.get()
+								);
+						}
+					);
+			}
 		);
 }
 
@@ -548,6 +636,7 @@ sanguis::collision::aux_::world::simple::object::remove_ghost(
 	sanguis::collision::aux_::world::simple::ghost &_ghost
 )
 {
+	// TODO: Which exception guarantees do we want?
 	FCPPT_ASSERT_ERROR(
 		ghost_sets_[
 			_ghost.collision_group()

@@ -1,5 +1,7 @@
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/radius.hpp>
+#include <sanguis/collision/world/body_enter_container.hpp>
+#include <sanguis/collision/world/body_exit_container.hpp>
 #include <sanguis/collision/world/ghost.hpp>
 #include <sanguis/collision/world/ghost_base_fwd.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
@@ -9,6 +11,9 @@
 #include <sanguis/server/collision/ghost.hpp>
 #include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/assert/pre.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::collision::ghost::ghost(
@@ -43,7 +48,7 @@ sanguis::server::collision::ghost::~ghost()
 {
 }
 
-void
+sanguis::collision::world::body_enter_container
 sanguis::server::collision::ghost::transfer(
 	sanguis::collision::world::object &_world,
 	sanguis::server::center const _center
@@ -66,12 +71,34 @@ sanguis::server::collision::ghost::transfer(
 				ghost_base_.get()
 			)
 		);
+
+	return
+		_world.activate_ghost(
+			*impl_
+		);
 }
 
-void
-sanguis::server::collision::ghost::destroy()
+sanguis::collision::world::body_exit_container
+sanguis::server::collision::ghost::destroy(
+	sanguis::collision::world::object &_world
+)
 {
+	FCPPT_ASSERT_PRE(
+		impl_
+	);
+
+	sanguis::collision::world::body_exit_container result(
+		_world.deactivate_ghost(
+			*impl_
+		)
+	);
+
 	impl_.reset();
+
+	return
+		std::move(
+			result
+		);
 }
 
 void

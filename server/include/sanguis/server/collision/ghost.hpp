@@ -1,6 +1,8 @@
 #ifndef SANGUIS_SERVER_COLLISION_GHOST_HPP_INCLUDED
 #define SANGUIS_SERVER_COLLISION_GHOST_HPP_INCLUDED
 
+#include <sanguis/collision/world/body_enter_container.hpp>
+#include <sanguis/collision/world/body_exit_container.hpp>
 #include <sanguis/collision/world/ghost_base_fwd.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
@@ -42,14 +44,16 @@ public:
 
 	~ghost();
 
-	void
+	sanguis::collision::world::body_enter_container
 	transfer(
 		sanguis::collision::world::object &,
 		sanguis::server::center
 	);
 
-	void
-	destroy();
+	sanguis::collision::world::body_exit_container
+	destroy(
+		sanguis::collision::world::object &
+	);
 
 	void
 	center(

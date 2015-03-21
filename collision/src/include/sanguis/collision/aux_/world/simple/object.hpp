@@ -13,6 +13,7 @@
 #include <sanguis/collision/world/body_parameters_fwd.hpp>
 #include <sanguis/collision/world/body_unique_ptr.hpp>
 #include <sanguis/collision/world/created_fwd.hpp>
+#include <sanguis/collision/world/ghost_fwd.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_parameters_fwd.hpp>
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
@@ -77,6 +78,18 @@ private:
 	sanguis::collision::world::ghost_unique_ptr
 	create_ghost(
 		sanguis::collision::world::ghost_parameters const &
+	)
+	override;
+
+	sanguis::collision::world::body_enter_container
+	activate_ghost(
+		sanguis::collision::world::ghost &
+	)
+	override;
+
+	sanguis::collision::world::body_exit_container
+	deactivate_ghost(
+		sanguis::collision::world::ghost &
 	)
 	override;
 

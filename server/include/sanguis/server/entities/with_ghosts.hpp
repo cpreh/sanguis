@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_ENTITIES_WITH_GHOSTS_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_WITH_GHOSTS_HPP_INCLUDED
 
-#include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/collision/ghost.hpp>
 #include <sanguis/server/entities/base.hpp>
@@ -54,12 +53,6 @@ protected:
 		sanguis::server::center const &
 	);
 private:
-	void
-	insert_ghost(
-		sanguis::server::collision::ghost &,
-		sanguis::collision::world::object &
-	);
-
 	typedef
 	std::vector<
 		sanguis::server::collision::ghost

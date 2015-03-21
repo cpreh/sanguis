@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_REMOVE_FROM_WORLD_RESULT_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_REMOVE_FROM_WORLD_RESULT_HPP_INCLUDED
 
-#include <sanguis/server/collision/remove_result.hpp>
+#include <sanguis/collision/world/body_exit_container.hpp>
 #include <sanguis/server/entities/remove_from_world_result_fwd.hpp>
 
 
@@ -19,16 +19,16 @@ public:
 
 	explicit
 	remove_from_world_result(
-		sanguis::server::collision::remove_result &&
+		sanguis::collision::world::body_exit_container &&
 	);
 
-	sanguis::server::collision::remove_result const &
-	collision_result() const;
+	sanguis::collision::world::body_exit_container const &
+	body_exit() const;
 
-	sanguis::server::collision::remove_result &&
-	release_collision_result();
+	sanguis::collision::world::body_exit_container &&
+	release_body_exit();
 private:
-	sanguis::server::collision::remove_result collision_result_;
+	sanguis::collision::world::body_exit_container body_exit_;
 };
 
 }

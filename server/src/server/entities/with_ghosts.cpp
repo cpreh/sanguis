@@ -1,3 +1,5 @@
+#include <sanguis/collision/world/body_enter_container.hpp>
+#include <sanguis/collision/world/body_exit_container.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/collision/ghost.hpp>
@@ -8,7 +10,9 @@
 #include <sanguis/server/entities/transfer_result.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
 #include <sanguis/server/environment/object.hpp>
-#include <sanguis/server/environment/optional_object_ref.hpp>
+#include <fcppt/text.hpp>
+#include <fcppt/algorithm/map_concat_move.hpp>
+#include <fcppt/assert/pre_message.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -30,60 +34,70 @@ sanguis::server::entities::with_ghosts::add_ghost(
 	sanguis::server::collision::ghost &&_ghost
 )
 {
+	FCPPT_ASSERT_PRE_MESSAGE(
+		!this->environment(),
+		FCPPT_TEXT("Ghosts can only be added before an entity is transferred to a world")
+	);
+
 	ghosts_.push_back(
 		std::move(
 			_ghost
 		)
 	);
-
-	sanguis::server::environment::optional_object_ref const env(
-		this->environment()
-	);
-
-	if(
-		env
-	)
-		this->insert_ghost(
-			ghosts_.back(),
-			env->collision_world()
-		);
 }
 
 sanguis::server::entities::optional_transfer_result
 sanguis::server::entities::with_ghosts::on_transfer(
-	sanguis::server::entities::transfer_parameters const &_params
+	sanguis::server::entities::transfer_parameters const &_parameters
 )
 {
-	for(
-		auto &ghost
-		:
-		ghosts_
-	)
-		this->insert_ghost(
-			ghost,
-			_params.world()
-		);
-
-	// TODO: Return state here
 	return
-		sanguis::server::entities::optional_transfer_result(
-			sanguis::server::entities::transfer_result()
-		);
+		sanguis::server::entities::optional_transfer_result{
+			sanguis::server::entities::transfer_result{
+				fcppt::algorithm::map_concat_move<
+					sanguis::collision::world::body_enter_container
+				>(
+					ghosts_,
+					[
+						&_parameters,
+						this
+					](
+						sanguis::server::collision::ghost &_ghost
+					)
+					{
+						return
+							_ghost.transfer(
+								_parameters.world(),
+								this->center()
+							);
+					}
+				)
+			}
+		};
 }
 
 sanguis::server::entities::remove_from_world_result
 sanguis::server::entities::with_ghosts::remove_from_world()
 {
-	// FIXME: Remove ghosts properly
-	for(
-		auto &ghost
-		:
-		ghosts_
-	)
-		ghost.destroy();
-
 	return
-		sanguis::server::entities::remove_from_world_result();
+		sanguis::server::entities::remove_from_world_result(
+			fcppt::algorithm::map_concat_move<
+				sanguis::collision::world::body_exit_container
+			>(
+				ghosts_,
+				[
+					this
+				](
+					sanguis::server::collision::ghost &_ghost
+				)
+				{
+					return
+						_ghost.destroy(
+							this->environment()->collision_world()
+						);
+				}
+			)
+		);
 }
 
 void
@@ -99,16 +113,4 @@ sanguis::server::entities::with_ghosts::update_center(
 		ghost.center(
 			_center
 		);
-}
-
-void
-sanguis::server::entities::with_ghosts::insert_ghost(
-	sanguis::server::collision::ghost &_ghost,
-	sanguis::collision::world::object &_world
-)
-{
-	_ghost.transfer(
-		_world,
-		this->center()
-	);
 }

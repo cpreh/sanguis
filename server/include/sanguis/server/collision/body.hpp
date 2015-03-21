@@ -2,6 +2,8 @@
 #define SANGUIS_SERVER_COLLISION_BODY_HPP_INCLUDED
 
 #include <sanguis/collision/world/body_base_fwd.hpp>
+#include <sanguis/collision/world/body_enter_container.hpp>
+#include <sanguis/collision/world/body_exit_container.hpp>
 #include <sanguis/collision/world/body_group_fwd.hpp>
 #include <sanguis/collision/world/body_unique_ptr.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
@@ -10,8 +12,6 @@
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/body_fwd.hpp>
 #include <sanguis/server/collision/position_callback.hpp>
-#include <sanguis/server/collision/remove_result_fwd.hpp>
-#include <sanguis/server/collision/transfer_result_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -55,7 +55,7 @@ public:
 	sanguis::server::radius const
 	radius() const;
 
-	sanguis::server::collision::transfer_result
+	sanguis::collision::world::body_enter_container
 	transfer(
 		sanguis::collision::world::object &,
 		sanguis::server::center,
@@ -63,7 +63,7 @@ public:
 		sanguis::collision::world::body_group
 	);
 
-	sanguis::server::collision::remove_result
+	sanguis::collision::world::body_exit_container
 	remove(
 		sanguis::collision::world::object &
 	);

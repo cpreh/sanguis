@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_TRANSFER_RESULT_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_TRANSFER_RESULT_HPP_INCLUDED
 
-#include <sanguis/server/collision/transfer_result.hpp>
+#include <sanguis/collision/world/body_enter_container.hpp>
 #include <sanguis/server/entities/transfer_result_fwd.hpp>
 
 
@@ -19,13 +19,16 @@ public:
 
 	explicit
 	transfer_result(
-		sanguis::server::collision::transfer_result &&
+		sanguis::collision::world::body_enter_container &&
 	);
 
-	sanguis::server::collision::transfer_result const &
-	collision_result() const;
+	sanguis::collision::world::body_enter_container const &
+	body_enter() const;
+
+	sanguis::collision::world::body_enter_container &&
+	release_body_enter();
 private:
-	sanguis::server::collision::transfer_result collision_result_;
+	sanguis::collision::world::body_enter_container body_enter_;
 };
 
 }
