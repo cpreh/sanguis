@@ -586,7 +586,10 @@ sanguis::server::global::context::transfer_entity(
 			),
 			sanguis::server::angle(
 				0.f // TODO!
-			)
+			),
+			sanguis::collision::world::created{
+				false
+			}
 		)
 	);
 }

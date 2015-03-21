@@ -1,3 +1,4 @@
+#include <sanguis/collision/world/created.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/angle.hpp>
@@ -7,6 +8,7 @@
 
 sanguis::server::entities::transfer_parameters::transfer_parameters(
 	sanguis::collision::world::object &_world,
+	sanguis::collision::world::created const _created,
 	sanguis::creator::grid const &_grid,
 	sanguis::server::center const &_center,
 	sanguis::server::angle const _angle
@@ -15,6 +17,9 @@ sanguis::server::entities::transfer_parameters::transfer_parameters(
 	world_(
 		_world
 	),
+	created_{
+		_created
+	},
 	grid_(
 		_grid
 	),
@@ -32,6 +37,13 @@ sanguis::server::entities::transfer_parameters::world() const
 {
 	return
 		world_;
+}
+
+sanguis::collision::world::created const
+sanguis::server::entities::transfer_parameters::created() const
+{
+	return
+		created_;
 }
 
 sanguis::creator::grid const &

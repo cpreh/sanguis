@@ -107,15 +107,15 @@ sanguis::server::collision::body::radius() const
 sanguis::collision::world::body_enter_container
 sanguis::server::collision::body::transfer(
 	sanguis::collision::world::object &_world,
+	sanguis::collision::world::created const _created,
 	sanguis::server::center const _center,
 	sanguis::server::speed const _speed,
 	sanguis::collision::world::body_group const _collision_group
 )
 {
-	// FIXME: This is wrong
-	sanguis::collision::world::created const created{
+	FCPPT_ASSERT_PRE(
 		!body_
-	};
+	);
 
 	body_ =
 		_world.create_body(
@@ -151,7 +151,7 @@ sanguis::server::collision::body::transfer(
 	return
 		_world.activate_body(
 			*body_,
-			created
+			_created
 		);
 }
 
@@ -160,6 +160,10 @@ sanguis::server::collision::body::remove(
 	sanguis::collision::world::object &_world
 )
 {
+	FCPPT_ASSERT_PRE(
+		body_
+	);
+
 	sanguis::collision::world::body_exit_container result(
 		_world.deactivate_body(
 			*body_

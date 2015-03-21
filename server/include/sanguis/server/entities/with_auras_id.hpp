@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_AURAS_ID_HPP_INCLUDED
 
 #include <sanguis/aura_type_vector.hpp>
+#include <sanguis/collision/world/body_enter_container.hpp>
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/auras/unique_ptr.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
@@ -25,7 +26,7 @@ class with_auras_id
 		with_auras_id
 	);
 public:
-	void
+	sanguis::collision::world::body_enter_container
 	add_aura(
 		sanguis::server::auras::unique_ptr &&
 	)

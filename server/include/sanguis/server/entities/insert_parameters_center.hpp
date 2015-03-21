@@ -14,7 +14,7 @@ namespace entities
 
 sanguis::server::entities::insert_parameters const
 insert_parameters_center(
-	sanguis::server::center const &
+	sanguis::server::center
 );
 
 }

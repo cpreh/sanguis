@@ -1,16 +1,16 @@
 #ifndef SANGUIS_SERVER_ENTITIES_WITH_GHOSTS_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_WITH_GHOSTS_HPP_INCLUDED
 
+#include <sanguis/collision/world/body_enter_container.hpp>
+#include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
-#include <sanguis/server/collision/ghost.hpp>
+#include <sanguis/server/collision/ghost_container.hpp>
+#include <sanguis/server/collision/ghost_fwd.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/optional_transfer_result_fwd.hpp>
 #include <sanguis/server/entities/remove_from_world_result_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <vector>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -30,12 +30,22 @@ class with_ghosts
 public:
 	with_ghosts();
 
+	explicit
+	with_ghosts(
+		sanguis::server::collision::ghost_container &&
+	);
+
 	~with_ghosts()
 	override;
 protected:
-	void
+	sanguis::collision::world::body_enter_container
 	add_ghost(
 		sanguis::server::collision::ghost &&
+	);
+
+	void
+	init_ghosts(
+		sanguis::server::collision::ghost_container &&
 	);
 
 	sanguis::server::entities::optional_transfer_result
@@ -53,13 +63,13 @@ protected:
 		sanguis::server::center const &
 	);
 private:
-	typedef
-	std::vector<
-		sanguis::server::collision::ghost
-	>
-	ghost_list;
+	sanguis::collision::world::body_enter_container
+	transfer_ghost(
+		sanguis::server::collision::ghost &,
+		sanguis::collision::world::object &
+	);
 
-	ghost_list ghosts_;
+	sanguis::server::collision::ghost_container ghosts_;
 };
 
 }

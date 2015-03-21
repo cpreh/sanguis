@@ -3,6 +3,7 @@
 #include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/collision/ghost.hpp>
+#include <sanguis/server/collision/ghost_container.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/optional_transfer_result.hpp>
 #include <sanguis/server/entities/remove_from_world_result.hpp>
@@ -12,7 +13,7 @@
 #include <sanguis/server/environment/object.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map_concat_move.hpp>
-#include <fcppt/assert/pre_message.hpp>
+#include <fcppt/assert/pre.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -25,18 +26,30 @@ sanguis::server::entities::with_ghosts::with_ghosts()
 {
 }
 
+sanguis::server::entities::with_ghosts::with_ghosts(
+	sanguis::server::collision::ghost_container &&_ghosts
+)
+:
+	sanguis::server::entities::base(),
+	ghosts_(
+		std::move(
+			_ghosts
+		)
+	)
+{
+}
+
 sanguis::server::entities::with_ghosts::~with_ghosts()
 {
 }
 
-void
+sanguis::collision::world::body_enter_container
 sanguis::server::entities::with_ghosts::add_ghost(
 	sanguis::server::collision::ghost &&_ghost
 )
 {
-	FCPPT_ASSERT_PRE_MESSAGE(
-		!this->environment(),
-		FCPPT_TEXT("Ghosts can only be added before an entity is transferred to a world")
+	FCPPT_ASSERT_PRE(
+		this->environment()
 	);
 
 	ghosts_.push_back(
@@ -44,6 +57,27 @@ sanguis::server::entities::with_ghosts::add_ghost(
 			_ghost
 		)
 	);
+
+	return
+		this->transfer_ghost(
+			ghosts_.back(),
+			this->environment()->collision_world()
+		);
+}
+
+void
+sanguis::server::entities::with_ghosts::init_ghosts(
+	sanguis::server::collision::ghost_container &&_ghosts
+)
+{
+	FCPPT_ASSERT_PRE(
+		ghosts_.empty()
+	);
+
+	ghosts_ =
+		std::move(
+			_ghosts
+		);
 }
 
 sanguis::server::entities::optional_transfer_result
@@ -66,9 +100,9 @@ sanguis::server::entities::with_ghosts::on_transfer(
 					)
 					{
 						return
-							_ghost.transfer(
-								_parameters.world(),
-								this->center()
+							this->transfer_ghost(
+								_ghost,
+								_parameters.world()
 							);
 					}
 				)
@@ -112,5 +146,18 @@ sanguis::server::entities::with_ghosts::update_center(
 	)
 		ghost.center(
 			_center
+		);
+}
+
+sanguis::collision::world::body_enter_container
+sanguis::server::entities::with_ghosts::transfer_ghost(
+	sanguis::server::collision::ghost &_ghost,
+	sanguis::collision::world::object &_world
+)
+{
+	return
+		_ghost.transfer(
+			_world,
+			this->center()
 		);
 }

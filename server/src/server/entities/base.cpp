@@ -25,14 +25,10 @@ sanguis::server::entities::base::base()
 sanguis::server::entities::optional_transfer_result
 sanguis::server::entities::base::transfer(
 	sanguis::server::environment::object &_environment,
-	sanguis::server::entities::insert_parameters const &_insert_param,
+	sanguis::server::entities::insert_parameters const &_insert_parameters,
 	sanguis::creator::grid const &_grid
 )
 {
-	bool const create(
-		!environment_
-	);
-
 	environment_ =
 		sanguis::server::environment::optional_object_ref(
 			_environment
@@ -42,20 +38,19 @@ sanguis::server::entities::base::transfer(
 		this->on_transfer(
 			sanguis::server::entities::transfer_parameters(
 				_environment.collision_world(),
+				_insert_parameters.created(),
 				_grid,
-				_insert_param.center(),
-				_insert_param.angle()
+				_insert_parameters.center(),
+				_insert_parameters.angle()
 			)
 		)
 	);
 
-	// TODO: Make optional_bind work with rvalue refs
 	if(
 		result
 		&&
-		create
+		_insert_parameters.created().get()
 	)
-		// TODO: Return state here as well
 		this->on_create();
 
 	return

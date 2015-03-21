@@ -6,6 +6,7 @@
 #include <sanguis/collision/world/body_exit_container.hpp>
 #include <sanguis/collision/world/body_group_fwd.hpp>
 #include <sanguis/collision/world/body_unique_ptr.hpp>
+#include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/radius.hpp>
@@ -58,6 +59,7 @@ public:
 	sanguis::collision::world::body_enter_container
 	transfer(
 		sanguis::collision::world::object &,
+		sanguis::collision::world::created,
 		sanguis::server::center,
 		sanguis::server::speed,
 		sanguis::collision::world::body_group
