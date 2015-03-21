@@ -6,13 +6,19 @@
 #include <sanguis/collision/aux_/world/simple/ghost_remove_callback.hpp>
 #include <sanguis/collision/world/body_enter.hpp>
 #include <sanguis/collision/world/body_exit.hpp>
+#include <sanguis/collision/world/body_exit_container.hpp>
 #include <sanguis/collision/world/created.hpp>
 #include <sanguis/collision/world/ghost.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_parameters.hpp>
 #include <sanguis/collision/world/optional_body_enter.hpp>
 #include <sanguis/collision/world/optional_body_exit.hpp>
+#include <fcppt/make_cref.hpp>
+#include <fcppt/maybe.hpp>
+#include <fcppt/reference_wrapper_comparison.hpp>
 #include <fcppt/algorithm/map_iteration.hpp>
+#include <fcppt/assert/error.hpp>
+#include <fcppt/container/find_opt.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -44,17 +50,6 @@ sanguis::collision::aux_::world::simple::ghost::ghost(
 
 sanguis::collision::aux_::world::simple::ghost::~ghost()
 {
-	// TODO:
-/*
-	for(
-		auto &body
-		:
-		bodies_
-	)
-		body_exit_callback_(
-			body.first->body_base()
-		);*/
-
 	ghost_remove_callback_(
 		*this
 	);
@@ -102,13 +97,16 @@ sanguis::collision::aux_::world::simple::ghost::pre_update_bodies()
 			body_status::marked_for_deletion;
 }
 
-void
+sanguis::collision::world::body_exit_container
 sanguis::collision::aux_::world::simple::ghost::post_update_bodies()
 {
+	sanguis::collision::world::body_exit_container result;
+
 	fcppt::algorithm::map_iteration(
 		bodies_,
 		[
-			this
+			this,
+			&result
 		](
 			body_map::value_type const &_element
 		)
@@ -119,11 +117,12 @@ sanguis::collision::aux_::world::simple::ghost::post_update_bodies()
 				body_status::marked_for_deletion
 			)
 			{
-				// TODO!
-				/*
-				body_exit_callback_(
-					_element.first->body_base()
-				);*/
+				result.push_back(
+					sanguis::collision::world::body_exit(
+						_element.first.get().body_base(),
+						ghost_base_
+					)
+				);
 
 				return
 					true;
@@ -133,56 +132,70 @@ sanguis::collision::aux_::world::simple::ghost::post_update_bodies()
 				false;
 		}
 	);
+
+	return
+		std::move(
+			result
+		);
 }
 
-void
+sanguis::collision::world::optional_body_enter
 sanguis::collision::aux_::world::simple::ghost::update_near_body(
 	sanguis::collision::aux_::world::simple::body const &_body
 )
 {
-	bool const collides(
+	return
 		sanguis::collision::aux_::world::simple::collides(
 			_body,
 			*this
 		)
-	);
+		?
+			fcppt::maybe(
+				fcppt::container::find_opt(
+					bodies_,
+					fcppt::make_cref(
+						_body
+					)
+				),
+				[
+					this,
+					&_body
+				]
+				{
+					bodies_.insert(
+						std::make_pair(
+							fcppt::make_cref(
+								_body
+							),
+							body_status::normal
+						)
+					);
 
-	if(
-		!collides
-	)
-		return;
+					return
+						sanguis::collision::world::optional_body_enter(
+							sanguis::collision::world::body_enter(
+								_body.body_base(),
+								ghost_base_,
+								sanguis::collision::world::created{
+									false
+								}
+							)
+						);
+				},
+				[](
+					body_status &_status
+				)
+				{
+					_status =
+						body_status::normal;
 
-	body_map::iterator const it(
-		bodies_.find(
-			&_body
-		)
-	);
-
-	if(
-		it
-		==
-		bodies_.end()
-	)
-	{
-		bodies_.insert(
-			std::make_pair(
-				&_body,
-				body_status::normal
+					return
+						sanguis::collision::world::optional_body_enter();
+				}
 			)
-		);
-
-		// TODO
-		/*
-		body_enter_callback_(
-			_body.body_base(),
-			sanguis::collision::world::created{
-				false
-			}
-		);*/
-	}
-	else
-		it->second =
-			body_status::normal;
+		:
+			sanguis::collision::world::optional_body_enter()
+		;
 }
 
 sanguis::collision::world::optional_body_enter
@@ -200,11 +213,15 @@ sanguis::collision::aux_::world::simple::ghost::new_body(
 		return
 			sanguis::collision::world::optional_body_enter();
 
-	bodies_.insert(
-		std::make_pair(
-			&_body,
-			body_status::normal
-		)
+	FCPPT_ASSERT_ERROR(
+		bodies_.insert(
+			std::make_pair(
+				fcppt::make_cref(
+					_body
+				),
+				body_status::normal
+			)
+		).second
 	);
 
 	return
@@ -225,7 +242,9 @@ sanguis::collision::aux_::world::simple::ghost::remove_body(
 	// TODO: How to improve this?
 	body_map::iterator const it(
 		bodies_.find(
-			&_body
+			fcppt::make_cref(
+				_body
+			)
 		)
 	);
 

@@ -6,6 +6,7 @@
 #include <sanguis/collision/aux_/world/simple/body_fwd.hpp>
 #include <sanguis/collision/aux_/world/simple/ghost_fwd.hpp>
 #include <sanguis/collision/aux_/world/simple/ghost_remove_callback.hpp>
+#include <sanguis/collision/world/body_exit_container.hpp>
 #include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/collision/world/ghost.hpp>
 #include <sanguis/collision/world/ghost_base_fwd.hpp>
@@ -14,6 +15,9 @@
 #include <sanguis/collision/world/optional_body_enter_fwd.hpp>
 #include <sanguis/collision/world/optional_body_exit_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_wrapper_std_hash.hpp>
+#include <fcppt/preprocessor/warn_unused_result.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>
@@ -53,35 +57,42 @@ public:
 	override;
 
 	sanguis::collision::center const
-	center() const;
+	center() const
+	FCPPT_PP_WARN_UNUSED_RESULT;
 
 	sanguis::collision::radius const
-	radius() const;
+	radius() const
+	FCPPT_PP_WARN_UNUSED_RESULT;
 
 	sanguis::collision::world::ghost_group
-	collision_group() const;
+	collision_group() const
+	FCPPT_PP_WARN_UNUSED_RESULT;
 
 	void
 	pre_update_bodies();
 
-	void
-	post_update_bodies();
+	sanguis::collision::world::body_exit_container
+	post_update_bodies()
+	FCPPT_PP_WARN_UNUSED_RESULT;
 
-	void
+	sanguis::collision::world::optional_body_enter
 	update_near_body(
 		sanguis::collision::aux_::world::simple::body const &
-	);
+	)
+	FCPPT_PP_WARN_UNUSED_RESULT;
 
 	sanguis::collision::world::optional_body_enter
 	new_body(
 		sanguis::collision::aux_::world::simple::body const &,
 		sanguis::collision::world::created
-	);
+	)
+	FCPPT_PP_WARN_UNUSED_RESULT;
 
 	sanguis::collision::world::optional_body_exit
 	remove_body(
 		sanguis::collision::aux_::world::simple::body const &
-	);
+	)
+	FCPPT_PP_WARN_UNUSED_RESULT;
 private:
 	sanguis::collision::aux_::world::simple::ghost_remove_callback const ghost_remove_callback_;
 
@@ -100,8 +111,14 @@ private:
 	};
 
 	typedef
+	fcppt::reference_wrapper<
+		sanguis::collision::aux_::world::simple::body const
+	>
+	const_body_ref;
+
+	typedef
 	std::unordered_map<
-		sanguis::collision::aux_::world::simple::body const *,
+		const_body_ref,
 		body_status
 	>
 	body_map;
