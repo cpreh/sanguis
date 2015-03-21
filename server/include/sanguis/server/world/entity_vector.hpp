@@ -51,6 +51,9 @@ public:
 		entity_unique_ptr &&
 	);
 
+	void
+	pop_back();
+
 	Type &
 	back();
 

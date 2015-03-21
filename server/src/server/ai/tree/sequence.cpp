@@ -1,6 +1,6 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/server/ai/status.hpp>
-#include <sanguis/server/ai/tree/base.hpp>
+#include <sanguis/server/ai/tree/basic_sequence.hpp>
 #include <sanguis/server/ai/tree/container.hpp>
 #include <sanguis/server/ai/tree/sequence.hpp>
 #include <fcppt/assert/unreachable.hpp>
@@ -14,13 +14,13 @@ sanguis::server::ai::tree::sequence::sequence(
 	sanguis::server::ai::tree::container &&_children
 )
 :
-	children_(
+	sanguis::server::ai::tree::basic_sequence(
 		std::move(
 			_children
 		)
 	),
 	current_{
-		children_.begin()
+		this->get().begin()
 	}
 {
 }
@@ -37,11 +37,11 @@ sanguis::server::ai::tree::sequence::run(
 	if(
 		current_
 		==
-		children_.end()
+		this->get().end()
 	)
 	{
 		current_ =
-			children_.begin();
+			this->get().begin();
 
 		return
 			sanguis::server::ai::status::success;
@@ -55,7 +55,7 @@ sanguis::server::ai::tree::sequence::run(
 	{
 	case sanguis::server::ai::status::failure:
 		current_ =
-			children_.begin();
+			this->get().begin();
 
 		return
 			sanguis::server::ai::status::failure;

@@ -8,6 +8,7 @@
 #include <sanguis/server/entities/with_auras.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/preprocessor/warn_unused_result.hpp>
 
 
 namespace sanguis
@@ -30,7 +31,8 @@ public:
 	add_aura(
 		sanguis::server::auras::unique_ptr &&
 	)
-	override;
+	override
+	FCPPT_PP_WARN_UNUSED_RESULT;
 protected:
 	explicit
 	with_auras_id(

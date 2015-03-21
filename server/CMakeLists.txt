@@ -57,6 +57,7 @@ set(
 	include/sanguis/server/ai/tree/base.hpp
 	include/sanguis/server/ai/tree/base_fwd.hpp
 	include/sanguis/server/ai/tree/base_unique_ptr.hpp
+	include/sanguis/server/ai/tree/basic_sequence.hpp
 	include/sanguis/server/ai/tree/container.hpp
 	include/sanguis/server/ai/tree/leaf.hpp
 	include/sanguis/server/ai/tree/make_leaf.hpp
@@ -760,6 +761,7 @@ set(
 	src/server/ai/rotate_to_target.cpp
 	src/server/ai/stop.cpp
 	src/server/ai/tree/base.cpp
+	src/server/ai/tree/basic_sequence.cpp
 	src/server/ai/tree/leaf.cpp
 	src/server/ai/tree/priority_sequence.cpp
 	src/server/ai/tree/sequence.cpp

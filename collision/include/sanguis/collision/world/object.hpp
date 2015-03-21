@@ -13,6 +13,7 @@
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/preprocessor/warn_unused_result.hpp>
 
 
 namespace sanguis
@@ -37,38 +38,50 @@ public:
 	sanguis::collision::world::body_unique_ptr
 	create_body(
 		sanguis::collision::world::body_parameters const &
-	) = 0;
+	)
+	FCPPT_PP_WARN_UNUSED_RESULT
+	= 0;
 
 	virtual
 	sanguis::collision::world::body_enter_container
 	activate_body(
 		sanguis::collision::world::body &,
 		sanguis::collision::world::created
-	) = 0;
+	)
+	FCPPT_PP_WARN_UNUSED_RESULT
+	= 0;
 
 	virtual
 	sanguis::collision::world::body_exit_container
 	deactivate_body(
 		sanguis::collision::world::body &
-	) = 0;
+	)
+	FCPPT_PP_WARN_UNUSED_RESULT
+	= 0;
 
 	virtual
 	sanguis::collision::world::ghost_unique_ptr
 	create_ghost(
 		sanguis::collision::world::ghost_parameters const &
-	) = 0;
+	)
+	FCPPT_PP_WARN_UNUSED_RESULT
+	= 0;
 
 	virtual
 	sanguis::collision::world::body_enter_container
 	activate_ghost(
 		sanguis::collision::world::ghost &
-	) = 0;
+	)
+	FCPPT_PP_WARN_UNUSED_RESULT
+	= 0;
 
 	virtual
 	sanguis::collision::world::body_exit_container
 	deactivate_ghost(
 		sanguis::collision::world::ghost &
-	) = 0;
+	)
+	FCPPT_PP_WARN_UNUSED_RESULT
+	= 0;
 
 	virtual
 	void

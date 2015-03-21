@@ -10,9 +10,11 @@
 #include <sanguis/server/entities/optional_transfer_result_fwd.hpp>
 #include <sanguis/server/entities/remove_from_world_result_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
+#include <sanguis/server/entities/transfer_result_fwd.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/environment/optional_object_ref.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/preprocessor/warn_unused_result.hpp>
 
 
 namespace sanguis
@@ -38,7 +40,8 @@ public:
 		sanguis::server::environment::object &,
 		sanguis::server::entities::insert_parameters const &,
 		sanguis::creator::grid const &
-	);
+	)
+	FCPPT_PP_WARN_UNUSED_RESULT;
 
 	virtual
 	void
@@ -69,7 +72,8 @@ public:
 	*/
 	virtual
 	sanguis::server::entities::remove_from_world_result
-	remove_from_world();
+	remove_from_world()
+	FCPPT_PP_WARN_UNUSED_RESULT;
 
 	// environment query function
 	sanguis::server::environment::optional_object_ref const
@@ -94,14 +98,16 @@ public:
 	diff_clock() const;
 private:
 	virtual
-	void
-	on_create();
+	sanguis::server::entities::transfer_result
+	on_create()
+	FCPPT_PP_WARN_UNUSED_RESULT;
 
 	virtual
 	sanguis::server::entities::optional_transfer_result
 	on_transfer(
 		sanguis::server::entities::transfer_parameters const &
-	);
+	)
+	FCPPT_PP_WARN_UNUSED_RESULT;
 
 	// TODO: Move this to another class?
 	sanguis::server::environment::optional_object_ref environment_;

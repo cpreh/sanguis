@@ -23,6 +23,7 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/optional_with_body_ref.hpp>
 #include <sanguis/server/entities/same_object.hpp>
+#include <sanguis/server/entities/transfer_result.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_links.hpp>
@@ -54,6 +55,9 @@ sanguis::server::ai::behavior::attack::attack(
 	sanguis::server::ai::behavior::base(
 		_context
 	),
+	sight_range_(
+		_sight_range
+	),
 	potential_targets_(),
 	target_(),
 	health_connection_{
@@ -66,35 +70,43 @@ sanguis::server::ai::behavior::attack::attack(
 		)
 	}
 {
-	this->me().add_aura(
-		fcppt::make_unique_ptr<
-			sanguis::server::auras::target
-		>(
-			sanguis::server::radius(
-				_sight_range.get()
-			),
-			this->me().team(),
-			sanguis::server::auras::target_kind::enemy,
-			sanguis::server::add_target_callback(
-				std::bind(
-					&sanguis::server::ai::behavior::attack::target_enters,
-					this,
-					std::placeholders::_1
-				)
-			),
-			sanguis::server::remove_target_callback(
-				std::bind(
-					&sanguis::server::ai::behavior::attack::target_leaves,
-					this,
-					std::placeholders::_1
-				)
-			)
-		)
-	);
 }
 
 sanguis::server::ai::behavior::attack::~attack()
 {
+}
+
+sanguis::server::entities::transfer_result
+sanguis::server::ai::behavior::attack::transfer()
+{
+	return
+		sanguis::server::entities::transfer_result(
+			this->me().add_aura(
+				fcppt::make_unique_ptr<
+					sanguis::server::auras::target
+				>(
+					sanguis::server::radius(
+						sight_range_.get()
+					),
+					this->me().team(),
+					sanguis::server::auras::target_kind::enemy,
+					sanguis::server::add_target_callback(
+						std::bind(
+							&sanguis::server::ai::behavior::attack::target_enters,
+							this,
+							std::placeholders::_1
+						)
+					),
+					sanguis::server::remove_target_callback(
+						std::bind(
+							&sanguis::server::ai::behavior::attack::target_leaves,
+							this,
+							std::placeholders::_1
+						)
+					)
+				)
+			)
+		);
 }
 
 bool

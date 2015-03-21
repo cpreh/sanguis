@@ -5,6 +5,7 @@
 #include <sanguis/server/ai/status_fwd.hpp>
 #include <sanguis/server/ai/behavior/base_unique_ptr.hpp>
 #include <sanguis/server/ai/tree/base.hpp>
+#include <sanguis/server/entities/transfer_result_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -33,6 +34,10 @@ public:
 	~leaf()
 	override;
 private:
+	sanguis::server::entities::transfer_result
+	transfer()
+	override;
+
 	sanguis::server::ai::status
 	run(
 		sanguis::duration

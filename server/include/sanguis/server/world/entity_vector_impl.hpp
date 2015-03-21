@@ -55,6 +55,17 @@ sanguis::server::world::entity_vector<
 template<
 	typename Type
 >
+void
+sanguis::server::world::entity_vector<
+	Type
+>::pop_back()
+{
+	impl_.pop_back();
+}
+
+template<
+	typename Type
+>
 Type &
 sanguis::server::world::entity_vector<
 	Type

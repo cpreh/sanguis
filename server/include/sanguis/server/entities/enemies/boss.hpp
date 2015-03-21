@@ -3,6 +3,7 @@
 
 #include <sanguis/enemy_kind_fwd.hpp>
 #include <sanguis/messages/types/string.hpp>
+#include <sanguis/server/entities/transfer_result_fwd.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
 #include <sanguis/server/entities/enemies/parameters_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -33,7 +34,7 @@ public:
 	~boss()
 	override;
 private:
-	void
+	sanguis::server::entities::transfer_result
 	on_create()
 	override;
 

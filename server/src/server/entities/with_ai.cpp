@@ -3,6 +3,7 @@
 #include <sanguis/server/ai/update_interval.hpp>
 #include <sanguis/server/ai/tree/base.hpp>
 #include <sanguis/server/auras/container.hpp>
+#include <sanguis/server/entities/transfer_result.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_auras_id.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
@@ -93,13 +94,16 @@ sanguis::server::entities::with_ai::update()
 	}
 }
 
-void
+sanguis::server::entities::transfer_result
 sanguis::server::entities::with_ai::on_create()
 {
 	ai_ =
 		create_ai_(
 			ai_context_
 		);
+
+	return
+		ai_->transfer();
 }
 
 sanguis::server::ai::create_function const &

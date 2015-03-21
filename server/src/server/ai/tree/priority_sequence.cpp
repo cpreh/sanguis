@@ -1,6 +1,6 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/server/ai/status.hpp>
-#include <sanguis/server/ai/tree/base.hpp>
+#include <sanguis/server/ai/tree/basic_sequence.hpp>
 #include <sanguis/server/ai/tree/container.hpp>
 #include <sanguis/server/ai/tree/priority_sequence.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -12,7 +12,7 @@ sanguis::server::ai::tree::priority_sequence::priority_sequence(
 	sanguis::server::ai::tree::container &&_children
 )
 :
-	children_(
+	sanguis::server::ai::tree::basic_sequence(
 		std::move(
 			_children
 		)
@@ -32,7 +32,7 @@ sanguis::server::ai::tree::priority_sequence::run(
 	for(
 		auto const &child
 		:
-		children_
+		this->get()
 	)
 	{
 		switch(

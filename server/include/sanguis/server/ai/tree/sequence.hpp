@@ -3,7 +3,7 @@
 
 #include <sanguis/duration.hpp>
 #include <sanguis/server/ai/status_fwd.hpp>
-#include <sanguis/server/ai/tree/base.hpp>
+#include <sanguis/server/ai/tree/basic_sequence.hpp>
 #include <sanguis/server/ai/tree/container.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -19,7 +19,7 @@ namespace tree
 
 class sequence
 :
-	public sanguis::server::ai::tree::base
+	public sanguis::server::ai::tree::basic_sequence
 {
 	FCPPT_NONCOPYABLE(
 		sequence
@@ -38,8 +38,6 @@ private:
 		sanguis::duration
 	)
 	override;
-
-	sanguis::server::ai::tree::container children_;
 
 	sanguis::server::ai::tree::container::iterator current_;
 };

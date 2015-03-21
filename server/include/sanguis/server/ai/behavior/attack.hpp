@@ -4,12 +4,13 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/server/ai/context_fwd.hpp>
 #include <sanguis/server/ai/entity_set.hpp>
-#include <sanguis/server/ai/sight_range_fwd.hpp>
+#include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/ai/speed_factor_fwd.hpp>
 #include <sanguis/server/ai/status_fwd.hpp>
 #include <sanguis/server/ai/behavior/base.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/optional_with_body_ref_fwd.hpp>
+#include <sanguis/server/entities/transfer_result_fwd.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
 #include <sanguis/server/entities/property/change_event_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -39,6 +40,10 @@ public:
 	);
 
 	~attack()
+	override;
+
+	sanguis::server::entities::transfer_result
+	transfer()
 	override;
 
 	bool
@@ -72,6 +77,8 @@ private:
 	virtual
 	sanguis::server::ai::speed_factor const
 	speed_factor() const;
+
+	sanguis::server::ai::sight_range const sight_range_;
 
 	sanguis::server::ai::entity_set potential_targets_;
 

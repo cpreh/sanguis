@@ -1,5 +1,6 @@
 #include <sanguis/server/ai/context.hpp>
 #include <sanguis/server/ai/behavior/base.hpp>
+#include <sanguis/server/entities/transfer_result.hpp>
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 
 
@@ -15,6 +16,13 @@ sanguis::server::ai::behavior::base::base(
 
 sanguis::server::ai::behavior::base::~base()
 {
+}
+
+sanguis::server::entities::transfer_result
+sanguis::server::ai::behavior::base::transfer()
+{
+	return
+		sanguis::server::entities::transfer_result();
 }
 
 sanguis::server::ai::context &

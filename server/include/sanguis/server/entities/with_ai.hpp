@@ -6,6 +6,7 @@
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/ai/tree/base_unique_ptr.hpp>
 #include <sanguis/server/auras/container.hpp>
+#include <sanguis/server/entities/transfer_result_fwd.hpp>
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 #include <sanguis/server/entities/with_auras_id.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
@@ -55,7 +56,7 @@ protected:
 	update()
 	override;
 
-	void
+	sanguis::server::entities::transfer_result
 	on_create()
 	override;
 public:

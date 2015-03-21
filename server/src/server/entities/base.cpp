@@ -3,6 +3,7 @@
 #include <sanguis/update_diff_clock.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/combine_transfer.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/optional_transfer_result.hpp>
 #include <sanguis/server/entities/remove_from_world_result.hpp>
@@ -46,12 +47,21 @@ sanguis::server::entities::base::transfer(
 		)
 	);
 
+	// TODO: Use maybe_move?
 	if(
 		result
 		&&
 		_insert_parameters.created().get()
 	)
-		this->on_create();
+		return
+			sanguis::server::entities::optional_transfer_result(
+				sanguis::server::entities::combine_transfer(
+					std::move(
+						*result
+					),
+					this->on_create()
+				)
+			);
 
 	return
 		std::move(
@@ -114,9 +124,12 @@ sanguis::server::entities::base::diff_clock() const
 		diff_clock_;
 }
 
-void
+sanguis::server::entities::transfer_result
 sanguis::server::entities::base::on_create()
 {
+	// TODO: Should we define this?
+	return
+		sanguis::server::entities::transfer_result();
 }
 
 sanguis::server::entities::optional_transfer_result

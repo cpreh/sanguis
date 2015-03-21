@@ -531,18 +531,45 @@ sanguis::server::world::object::insert_base(
 		_container.back()
 	);
 
-	ref.transfer(
-		this->environment(),
-		_insert_parameters,
-		grid_
-	);
+	typedef
+	fcppt::optional<
+		Entity &
+	>
+	result_type;
 
 	return
-		fcppt::optional<
-			Entity &
-		>{
-			ref
-		};
+		fcppt::maybe(
+			ref.transfer(
+				this->environment(),
+				_insert_parameters,
+				grid_
+			),
+			[
+				&_container
+			]
+			{
+				// TODO: How can we make this exception-safe and simpler?
+				_container.pop_back();
+
+				return
+					result_type();
+			},
+			[
+				&ref
+			](
+				sanguis::server::entities::transfer_result const &_transfer_result
+			)
+			{
+				sanguis::server::collision::body_enter(
+					_transfer_result.body_enter()
+				);
+
+				return
+					result_type(
+						ref
+					);
+			}
+		);
 }
 
 void

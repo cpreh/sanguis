@@ -6,6 +6,7 @@
 #include <sanguis/server/ai/behavior/base_unique_ptr.hpp>
 #include <sanguis/server/ai/tree/base.hpp>
 #include <sanguis/server/ai/tree/leaf.hpp>
+#include <sanguis/server/entities/transfer_result.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -29,6 +30,13 @@ sanguis::server::ai::tree::leaf::leaf(
 
 sanguis::server::ai::tree::leaf::~leaf()
 {
+}
+
+sanguis::server::entities::transfer_result
+sanguis::server::ai::tree::leaf::transfer()
+{
+	return
+		behavior_->transfer();
 }
 
 sanguis::server::ai::status

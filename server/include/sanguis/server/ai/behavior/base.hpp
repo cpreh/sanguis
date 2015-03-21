@@ -5,6 +5,7 @@
 #include <sanguis/server/ai/context_fwd.hpp>
 #include <sanguis/server/ai/status_fwd.hpp>
 #include <sanguis/server/ai/behavior/base_fwd.hpp>
+#include <sanguis/server/entities/transfer_result_fwd.hpp>
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -41,6 +42,10 @@ public:
 	update(
 		sanguis::duration
 	) = 0;
+
+	virtual
+	sanguis::server::entities::transfer_result
+	transfer();
 
 	sanguis::server::ai::context &
 	context();

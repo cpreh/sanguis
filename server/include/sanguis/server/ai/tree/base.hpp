@@ -4,6 +4,7 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/server/ai/status_fwd.hpp>
 #include <sanguis/server/ai/tree/base_fwd.hpp>
+#include <sanguis/server/entities/transfer_result_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -26,6 +27,10 @@ protected:
 public:
 	virtual
 	~base() = 0;
+
+	virtual
+	sanguis::server::entities::transfer_result
+	transfer() = 0;
 
 	virtual
 	sanguis::server::ai::status
