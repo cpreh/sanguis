@@ -10,9 +10,11 @@
 #include <sanguis/collision/aux_/world/simple/collides.hpp>
 #include <sanguis/collision/aux_/world/simple/ghost.hpp>
 #include <sanguis/collision/aux_/world/simple/ghost_remove_callback.hpp>
+#include <sanguis/collision/aux_/world/simple/ghost_result.hpp>
 #include <sanguis/collision/aux_/world/simple/ghost_unique_ptr.hpp>
 #include <sanguis/collision/aux_/world/simple/grid_position.hpp>
 #include <sanguis/collision/aux_/world/simple/object.hpp>
+#include <sanguis/collision/world/body_collision_container.hpp>
 #include <sanguis/collision/world/body_enter_container.hpp>
 #include <sanguis/collision/world/body_exit_container.hpp>
 #include <sanguis/collision/world/body_fwd.hpp>
@@ -27,6 +29,7 @@
 #include <sanguis/collision/world/object.hpp>
 #include <sanguis/collision/world/optional_body_enter.hpp>
 #include <sanguis/collision/world/parameters.hpp>
+#include <sanguis/collision/world/update_result.hpp>
 #include <sanguis/creator/difference_type.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/signed_pos.hpp>
@@ -34,7 +37,9 @@
 #include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/reference_wrapper_comparison.hpp>
+#include <fcppt/algorithm/append.hpp>
 #include <fcppt/algorithm/array_init_move.hpp>
 #include <fcppt/algorithm/array_push_back.hpp>
 #include <fcppt/algorithm/map_concat_move.hpp>
@@ -62,9 +67,6 @@ sanguis::collision::aux_::world::simple::object::object(
 )
 :
 	sanguis::collision::world::object(),
-	body_collision_callback_(
-		_parameters.body_collision_callback()
-	),
 	grid_size_{
 		_parameters.grid_size()
 	},
@@ -393,8 +395,29 @@ sanguis::collision::aux_::world::simple::object::deactivate_ghost(
 		);
 }
 
-void
+sanguis::collision::world::update_result
 sanguis::collision::aux_::world::simple::object::update(
+	sanguis::collision::duration const _duration
+)
+{
+	this->move_bodies(
+		_duration
+	);
+
+	sanguis::collision::aux_::world::simple::ghost_result ghost_result(
+		this->update_ghosts()
+	);
+
+	return
+		sanguis::collision::world::update_result(
+			ghost_result.release_body_enter(),
+			ghost_result.release_body_exit(),
+			this->body_collisions()
+		);
+}
+
+void
+sanguis::collision::aux_::world::simple::object::move_bodies(
 	sanguis::collision::duration const _duration
 )
 {
@@ -423,6 +446,12 @@ sanguis::collision::aux_::world::simple::object::update(
 				body.get()
 			);
 		}
+}
+
+sanguis::collision::world::body_collision_container
+sanguis::collision::aux_::world::simple::object::body_collisions() const
+{
+	sanguis::collision::world::body_collision_container result;
 
 	for(
 		auto const body_group
@@ -491,13 +520,28 @@ sanguis::collision::aux_::world::simple::object::update(
 								body2
 							)
 						)
-							body_collision_callback_(
-								body1.get().body_base(),
-								body2.body_base()
+							result.push_back(
+								sanguis::collision::world::body_collision{
+									body1.get().body_base(),
+									body2.body_base()
+								}
 							);
 			}
 		}
 	}
+
+	return
+		std::move(
+			result
+		);
+}
+
+sanguis::collision::aux_::world::simple::ghost_result
+sanguis::collision::aux_::world::simple::object::update_ghosts()
+{
+	sanguis::collision::world::body_enter_container body_enter;
+
+	sanguis::collision::world::body_exit_container body_exit;
 
 	for(
 		auto const ghost_group
@@ -586,14 +630,39 @@ sanguis::collision::aux_::world::simple::object::update(
 						:
 						grid_entry.value()
 					)
-						ghost.get().update_near_body(
-							body
+						fcppt::maybe_void(
+							ghost.get().update_near_body(
+								body
+							),
+							[
+								&body_enter
+							](
+								sanguis::collision::world::body_enter const _enter
+							)
+							{
+								body_enter.push_back(
+									_enter
+								);
+							}
 						);
 			}
 
-			ghost.get().post_update_bodies();
+			fcppt::algorithm::append(
+				body_exit,
+				ghost.get().post_update_bodies()
+			);
 		}
 	}
+
+	return
+		sanguis::collision::aux_::world::simple::ghost_result(
+			std::move(
+				body_enter
+			),
+			std::move(
+				body_exit
+			)
+		);
 }
 
 void

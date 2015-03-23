@@ -12,6 +12,7 @@
 #include <sanguis/collision/world/ghost_parameters_fwd.hpp>
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
+#include <sanguis/collision/world/update_result_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/preprocessor/warn_unused_result.hpp>
 
@@ -84,10 +85,12 @@ public:
 	= 0;
 
 	virtual
-	void
+	sanguis::collision::world::update_result
 	update(
 		sanguis::collision::duration
-	) = 0;
+	)
+	FCPPT_PP_WARN_UNUSED_RESULT
+	= 0;
 };
 
 }

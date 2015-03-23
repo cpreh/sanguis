@@ -11,11 +11,11 @@
 #include <sanguis/weapon_status.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/world_name.hpp>
-#include <sanguis/collision/world/body_collision_callback.hpp>
 #include <sanguis/collision/world/create.hpp>
 #include <sanguis/collision/world/created.hpp>
 #include <sanguis/collision/world/object.hpp>
 #include <sanguis/collision/world/parameters.hpp>
+#include <sanguis/collision/world/update_result.hpp>
 #include <sanguis/creator/destructible.hpp>
 #include <sanguis/creator/destructible_container.hpp>
 #include <sanguis/creator/opening.hpp>
@@ -139,7 +139,6 @@
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <functional>
 #include <memory>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -187,13 +186,6 @@ sanguis::server::world::object::object(
 	collision_world_(
 		sanguis::collision::world::create(
 			sanguis::collision::world::parameters(
-				sanguis::collision::world::body_collision_callback(
-					std::bind(
-						&sanguis::server::collision::body_collision,
-						std::placeholders::_1,
-						std::placeholders::_2
-					)
-				),
 				grid_.size()
 			)
 		)
@@ -246,8 +238,22 @@ sanguis::server::world::object::update(
 			_elapsed_time
 		);
 
-	collision_world_->update(
-		_elapsed_time
+	sanguis::collision::world::update_result const collision_result(
+		collision_world_->update(
+			_elapsed_time
+		)
+	);
+
+	sanguis::server::collision::body_collision(
+		collision_result.body_collision()
+	);
+
+	sanguis::server::collision::body_enter(
+		collision_result.body_enter()
+	);
+
+	sanguis::server::collision::body_exit(
+		collision_result.body_exit()
 	);
 
 	sanguis::server::world::update_entity const update_entity{

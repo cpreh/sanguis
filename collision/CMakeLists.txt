@@ -22,7 +22,9 @@ set(
 	include/sanguis/collision/world/body.hpp
 	include/sanguis/collision/world/body_base.hpp
 	include/sanguis/collision/world/body_base_fwd.hpp
-	include/sanguis/collision/world/body_collision_callback.hpp
+	include/sanguis/collision/world/body_collision.hpp
+	include/sanguis/collision/world/body_collision_container.hpp
+	include/sanguis/collision/world/body_collision_fwd.hpp
 	include/sanguis/collision/world/body_enter.hpp
 	include/sanguis/collision/world/body_enter_container.hpp
 	include/sanguis/collision/world/body_enter_fwd.hpp
@@ -57,6 +59,8 @@ set(
 	include/sanguis/collision/world/parameters.hpp
 	include/sanguis/collision/world/parameters_fwd.hpp
 	include/sanguis/collision/world/position_change_callback.hpp
+	include/sanguis/collision/world/update_result.hpp
+	include/sanguis/collision/world/update_result_fwd.hpp
 	src/aux_/adjust_speed.cpp
 	src/aux_/intersection.cpp
 	src/aux_/line_line_intersect.cpp
@@ -101,6 +105,7 @@ set(
 	src/test_move.cpp
 	src/world/body.cpp
 	src/world/body_base.cpp
+	src/world/body_collision.cpp
 	src/world/body_enter.cpp
 	src/world/body_exit.cpp
 	src/world/body_parameters.cpp
@@ -110,12 +115,14 @@ set(
 	src/world/ghost_parameters.cpp
 	src/world/object.cpp
 	src/world/parameters.cpp
+	src/world/update_result.cpp
 )
 
 set(
 	SANGUIS_COLLISION_SIMPLE_FILES
 	src/aux_/world/simple/body.cpp
 	src/aux_/world/simple/ghost.cpp
+	src/aux_/world/simple/ghost_result.cpp
 	src/aux_/world/simple/grid_position.cpp
 	src/aux_/world/simple/object.cpp
 	src/include/sanguis/collision/aux_/world/simple/body.hpp
@@ -131,6 +138,8 @@ set(
 	src/include/sanguis/collision/aux_/world/simple/ghost.hpp
 	src/include/sanguis/collision/aux_/world/simple/ghost_fwd.hpp
 	src/include/sanguis/collision/aux_/world/simple/ghost_remove_callback.hpp
+	src/include/sanguis/collision/aux_/world/simple/ghost_result.hpp
+	src/include/sanguis/collision/aux_/world/simple/ghost_result_fwd.hpp
 	src/include/sanguis/collision/aux_/world/simple/ghost_unique_ptr.hpp
 	src/include/sanguis/collision/aux_/world/simple/grid_position.hpp
 	src/include/sanguis/collision/aux_/world/simple/object.hpp

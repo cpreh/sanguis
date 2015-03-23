@@ -5,7 +5,8 @@
 #include <sanguis/collision/aux_/world/simple/body.hpp>
 #include <sanguis/collision/aux_/world/simple/body_list_grid.hpp>
 #include <sanguis/collision/aux_/world/simple/ghost_fwd.hpp>
-#include <sanguis/collision/world/body_collision_callback.hpp>
+#include <sanguis/collision/aux_/world/simple/ghost_result_fwd.hpp>
+#include <sanguis/collision/world/body_collision_container.hpp>
 #include <sanguis/collision/world/body_enter_container.hpp>
 #include <sanguis/collision/world/body_exit_container.hpp>
 #include <sanguis/collision/world/body_fwd.hpp>
@@ -19,6 +20,7 @@
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
 #include <sanguis/collision/world/object.hpp>
 #include <sanguis/collision/world/parameters_fwd.hpp>
+#include <sanguis/collision/world/update_result_fwd.hpp>
 #include <sanguis/creator/dim.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/reference_wrapper_impl.hpp>
@@ -93,11 +95,22 @@ private:
 	)
 	override;
 
-	void
+	sanguis::collision::world::update_result
 	update(
 		sanguis::collision::duration
 	)
 	override;
+
+	void
+	move_bodies(
+		sanguis::collision::duration
+	);
+
+	sanguis::collision::world::body_collision_container
+	body_collisions() const;
+
+	sanguis::collision::aux_::world::simple::ghost_result
+	update_ghosts();
 
 	void
 	remove_body(
@@ -158,8 +171,6 @@ private:
 		sanguis::collision::aux_::world::simple::body_list_grid
 	>
 	body_list_grid_array;
-
-	sanguis::collision::world::body_collision_callback const body_collision_callback_;
 
 	sanguis::creator::dim const grid_size_;
 

@@ -5,7 +5,6 @@
 #include <sanguis/collision/vector2.hpp>
 #include <sanguis/collision/world/body.hpp>
 #include <sanguis/collision/world/body_base.hpp>
-#include <sanguis/collision/world/body_collision_callback.hpp>
 #include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters.hpp>
 #include <sanguis/collision/world/body_unique_ptr.hpp>
@@ -20,6 +19,7 @@
 #include <sanguis/collision/world/object_unique_ptr.hpp>
 #include <sanguis/collision/world/parameters.hpp>
 #include <sanguis/collision/world/position_change_callback.hpp>
+#include <sanguis/collision/world/update_result.hpp>
 #include <sanguis/creator/dim.hpp>
 #include <fcppt/make_int_range_count.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -38,14 +38,6 @@ main()
 	sanguis::collision::world::object_unique_ptr const world{
 		sanguis::collision::world::create(
 			sanguis::collision::world::parameters{
-				sanguis::collision::world::body_collision_callback{
-					[](
-						sanguis::collision::world::body_base &,
-						sanguis::collision::world::body_base &
-					)
-					{
-					}
-				},
 				fcppt::math::dim::fill<
 					sanguis::creator::dim
 				>(
@@ -263,9 +255,11 @@ main()
 			&world
 		]
 		{
-			world->update(
-				sanguis::collision::duration(
-					0.06f
+			sanguis::collision::world::update_result const result(
+				world->update(
+					sanguis::collision::duration(
+						0.06f
+					)
 				)
 			);
 		}
