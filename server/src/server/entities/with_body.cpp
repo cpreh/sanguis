@@ -145,8 +145,9 @@ sanguis::server::entities::with_body::on_transfer(
 {
 	net_angle_.reset();
 
-	angle_ =
-		_parameters.angle();
+	this->angle(
+		_parameters.angle()
+	);
 
 	// TODO: Use optional_bind
 	sanguis::server::entities::optional_transfer_result ghost_result(
