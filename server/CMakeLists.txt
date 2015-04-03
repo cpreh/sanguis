@@ -694,12 +694,6 @@ set(
 	include/sanguis/server/world/context_fwd.hpp
 	include/sanguis/server/world/difficulty.hpp
 	include/sanguis/server/world/difficulty_fwd.hpp
-	include/sanguis/server/world/entity_map.hpp
-	include/sanguis/server/world/entity_vector.hpp
-	include/sanguis/server/world/entity_vector_base.hpp
-	include/sanguis/server/world/entity_vector_doodad.hpp
-	include/sanguis/server/world/entity_vector_fwd.hpp
-	include/sanguis/server/world/entity_vector_impl.hpp
 	include/sanguis/server/world/generate.hpp
 	include/sanguis/server/world/generate_destructibles.hpp
 	include/sanguis/server/world/generate_single_spawns.hpp
@@ -1044,9 +1038,6 @@ set(
 	src/server/world/center_in_grid_pos.cpp
 	src/server/world/center_to_grid_pos.cpp
 	src/server/world/context.cpp
-	src/server/world/entity_map.cpp
-	src/server/world/entity_vector_base.cpp
-	src/server/world/entity_vector_doodad.cpp
 	src/server/world/generate.cpp
 	src/server/world/generate_destructibles.cpp
 	src/server/world/generate_single_spawns.cpp

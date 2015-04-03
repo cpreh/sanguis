@@ -109,7 +109,6 @@
 #include <sanguis/server/world/center_in_grid_pos.hpp>
 #include <sanguis/server/world/context.hpp>
 #include <sanguis/server/world/difficulty.hpp>
-#include <sanguis/server/world/entity_map.hpp>
 #include <sanguis/server/world/generate_destructibles.hpp>
 #include <sanguis/server/world/generate_spawns.hpp>
 #include <sanguis/server/world/grid_pos_to_center.hpp>
@@ -141,6 +140,7 @@
 #include <fcppt/config/external_begin.hpp>
 #include <memory>
 #include <utility>
+#include <vector>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -378,15 +378,17 @@ sanguis::server::world::object::insert_with_id(
 	);
 
 	typedef std::pair<
-		sanguis::server::world::entity_map::iterator,
+		entity_map::iterator,
 		bool
 	> return_type;
 
 	return_type const ret(
 		entities_.insert(
-			id,
-			std::move(
-				cur_entity
+			std::make_pair(
+				id,
+				std::move(
+					cur_entity
+				)
 			)
 		)
 	);
@@ -517,8 +519,10 @@ fcppt::optional<
 	Entity &
 > const
 sanguis::server::world::object::insert_base(
-	sanguis::server::world::entity_vector<
-		Entity
+	std::vector<
+		std::unique_ptr<
+			Entity
+		>
 	> &_container,
 	std::unique_ptr<
 		Entity
@@ -534,7 +538,7 @@ sanguis::server::world::object::insert_base(
 	);
 
 	Entity &ref(
-		_container.back()
+		*_container.back()
 	);
 
 	typedef
@@ -927,7 +931,7 @@ sanguis::server::world::object::request_transfer(
 	sanguis::entity_id const _entity_id
 )
 {
-	sanguis::server::world::entity_map::iterator const it(
+	entity_map::iterator const it(
 		entities_.find(
 			_entity_id
 		)
@@ -993,10 +997,15 @@ sanguis::server::world::object::request_transfer(
 					cur_entity.remove_from_world().body_exit()
 				);
 
+				// TODO: Make a function for this!
 				sanguis::server::entities::unique_ptr entity_ptr(
-					entities_.release(
-						it
+					std::move(
+						it->second
 					)
+				);
+
+				entities_.erase(
+					it
 				);
 
 				global_context_.transfer_entity(

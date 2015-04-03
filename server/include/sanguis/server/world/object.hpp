@@ -33,6 +33,7 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/speed_fwd.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
+#include <sanguis/server/entities/doodad_unique_ptr.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
 #include <sanguis/server/entities/optional_base_ref_fwd.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
@@ -43,10 +44,6 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/world/context_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
-#include <sanguis/server/world/entity_map.hpp>
-#include <sanguis/server/world/entity_vector_base.hpp>
-#include <sanguis/server/world/entity_vector_doodad.hpp>
-#include <sanguis/server/world/entity_vector_fwd.hpp>
 #include <sanguis/server/world/insert_pair_container.hpp>
 #include <sanguis/server/world/insert_pair_fwd.hpp>
 #include <sanguis/server/world/object_fwd.hpp>
@@ -56,7 +53,9 @@
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <map>
 #include <memory>
+#include <vector>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -136,8 +135,10 @@ private:
 		Entity &
 	> const
 	insert_base(
-		sanguis::server::world::entity_vector<
-			Entity
+		std::vector<
+			std::unique_ptr<
+				Entity
+			>
 		> &,
 		std::unique_ptr<
 			Entity
@@ -367,11 +368,30 @@ private:
 
 	sanguis::server::world::sight_range_map sight_ranges_;
 
-	sanguis::server::world::entity_map entities_;
+	typedef
+	std::map<
+		sanguis::entity_id,
+		sanguis::server::entities::with_id_unique_ptr
+	>
+	entity_map;
 
-	sanguis::server::world::entity_vector_base server_entities_;
+	entity_map entities_;
 
-	sanguis::server::world::entity_vector_doodad portal_blockers_;
+	typedef
+	std::vector<
+		sanguis::server::entities::unique_ptr
+	>
+	base_container;
+
+	base_container server_entities_;
+
+	typedef
+	std::vector<
+		sanguis::server::entities::doodad_unique_ptr
+	>
+	doodad_container;
+
+	doodad_container portal_blockers_;
 
 	unsigned portal_block_count_;
 
