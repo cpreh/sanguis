@@ -39,10 +39,10 @@ update_impl collision \
 	include \
 	-n \
 	src \
-	src/include/sanguis/collision/aux_ \
-	src/aux_ \
-	src/include/sanguis/collision/aux_/world \
-	src/aux_/world \
+	src/include/sanguis/collision/impl \
+	src/impl \
+	src/include/sanguis/collision/impl/world \
+	src/impl/world \
 	-r \
 	src/world
 
@@ -51,8 +51,8 @@ pushd collision >> /dev/null
 update_cmake \
 	CMakeLists.txt \
 	SANGUIS_COLLISION_SIMPLE_FILES \
-	src/include/sanguis/collision/aux_/world/simple \
-	src/aux_/world/simple
+	src/include/sanguis/collision/impl/world/simple \
+	src/impl/world/simple
 
 
 popd >> /dev/null

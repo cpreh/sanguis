@@ -1,4 +1,4 @@
-#include <sanguis/gui/aux_/fill_rect.hpp>
+#include <sanguis/gui/impl/fill_rect.hpp>
 #include <sanguis/gui/background/base.hpp>
 #include <sanguis/gui/background/colored.hpp>
 #include <sanguis/gui/main_area/base_fwd.hpp>

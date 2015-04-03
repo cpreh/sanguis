@@ -1,5 +1,5 @@
 #include <sanguis/gui/optional_needed_width.hpp>
-#include <sanguis/gui/aux_/relayout_ancestor.hpp>
+#include <sanguis/gui/impl/relayout_ancestor.hpp>
 #include <sanguis/gui/renderer/base.hpp>
 #include <sanguis/gui/style/base.hpp>
 #include <sanguis/gui/widget/base.hpp>
@@ -93,7 +93,7 @@ sanguis::gui::widget::text::value(
 		)
 	);
 
-	sanguis::gui::aux_::relayout_ancestor(
+	sanguis::gui::impl::relayout_ancestor(
 		*this
 	);
 }

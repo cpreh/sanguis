@@ -4,7 +4,7 @@
 #include <sanguis/gui/text_callback.hpp>
 #include <sanguis/gui/text_color.hpp>
 #include <sanguis/gui/text_function.hpp>
-#include <sanguis/gui/aux_/fill_rect.hpp>
+#include <sanguis/gui/impl/fill_rect.hpp>
 #include <sanguis/gui/renderer/base.hpp>
 #include <sanguis/gui/style/base.hpp>
 #include <sanguis/gui/widget/base.hpp>

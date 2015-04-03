@@ -15,7 +15,7 @@
 #include <sanguis/tools/libmergeimage/saved_image.hpp>
 #include <sanguis/tools/libmergeimage/saved_image_vector.hpp>
 #include <sanguis/tools/libmergeimage/to_model.hpp>
-#include <sanguis/tools/libmergeimage/aux_/tree_depth.hpp>
+#include <sanguis/tools/libmergeimage/impl/tree_depth.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -59,7 +59,7 @@ sanguis::tools::libmergeimage::to_model(
 			FCPPT_ASSERT_ERROR(
 				path.size()
 				==
-				sanguis::tools::libmergeimage::aux_::tree_depth::value
+				sanguis::tools::libmergeimage::impl::tree_depth::value
 			);
 
 			sanguis::model::animation_index const range(

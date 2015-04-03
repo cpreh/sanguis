@@ -5,10 +5,10 @@
 #include <sanguis/creator/spawn.hpp>
 #include <sanguis/creator/top_parameters.hpp>
 #include <sanguis/creator/top_result.hpp>
-#include <sanguis/creator/aux_/generator_map.hpp>
-#include <sanguis/creator/aux_/parameters.hpp>
-#include <sanguis/creator/aux_/result.hpp>
-#include <sanguis/creator/aux_/random/generator.hpp>
+#include <sanguis/creator/impl/generator_map.hpp>
+#include <sanguis/creator/impl/parameters.hpp>
+#include <sanguis/creator/impl/result.hpp>
+#include <sanguis/creator/impl/random/generator.hpp>
 #include <fcppt/make_enum_range.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/contains_if.hpp>
@@ -22,13 +22,13 @@ sanguis::creator::generate(
 	sanguis::creator::top_parameters const &_parameters
 )
 {
-	sanguis::creator::aux_::random::generator gen(
+	sanguis::creator::impl::random::generator gen(
 		_parameters.seed()
 	);
 
-	sanguis::creator::aux_::result const result(
+	sanguis::creator::impl::result const result(
 		fcppt::container::find_exn(
-			sanguis::creator::aux_::generator_map(),
+			sanguis::creator::impl::generator_map(),
 			_parameters.name(),
 			[
 				&_parameters
@@ -44,7 +44,7 @@ sanguis::creator::generate(
 					);
 			}
 		)(
-			sanguis::creator::aux_::parameters(
+			sanguis::creator::impl::parameters(
 				gen,
 				_parameters.spawn_boss(),
 				_parameters.opening_count_array()

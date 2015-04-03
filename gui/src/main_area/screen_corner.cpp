@@ -1,9 +1,9 @@
 #include <sanguis/gui/context_fwd.hpp>
 #include <sanguis/gui/gravity.hpp>
-#include <sanguis/gui/aux_/gravity_east.hpp>
-#include <sanguis/gui/aux_/gravity_south.hpp>
-#include <sanguis/gui/aux_/make_container_pair.hpp>
-#include <sanguis/gui/aux_/swap_pair.hpp>
+#include <sanguis/gui/impl/gravity_east.hpp>
+#include <sanguis/gui/impl/gravity_south.hpp>
+#include <sanguis/gui/impl/make_container_pair.hpp>
+#include <sanguis/gui/impl/swap_pair.hpp>
 #include <sanguis/gui/main_area/base.hpp>
 #include <sanguis/gui/main_area/screen_corner.hpp>
 #include <sanguis/gui/widget/base_fwd.hpp>
@@ -38,7 +38,7 @@ sanguis::gui::main_area::screen_corner::screen_corner(
 	),
 	horizontal_container_(
 		_gui_context,
-		sanguis::gui::aux_::make_container_pair(
+		sanguis::gui::impl::make_container_pair(
 			sanguis::gui::widget::reference_alignment_pair{
 				sanguis::gui::widget::reference(
 					minimum_size_
@@ -51,8 +51,8 @@ sanguis::gui::main_area::screen_corner::screen_corner(
 				),
 				sge::rucksack::alignment::center
 			},
-			sanguis::gui::aux_::swap_pair{
-				sanguis::gui::aux_::gravity_east(
+			sanguis::gui::impl::swap_pair{
+				sanguis::gui::impl::gravity_east(
 					_gravity
 				)
 			}
@@ -61,7 +61,7 @@ sanguis::gui::main_area::screen_corner::screen_corner(
 	),
 	vertical_container_(
 		_gui_context,
-		sanguis::gui::aux_::make_container_pair(
+		sanguis::gui::impl::make_container_pair(
 			sanguis::gui::widget::reference_alignment_pair{
 				sanguis::gui::widget::reference(
 					horizontal_container_
@@ -74,8 +74,8 @@ sanguis::gui::main_area::screen_corner::screen_corner(
 				),
 				sge::rucksack::alignment::center
 			},
-			sanguis::gui::aux_::swap_pair{
-				sanguis::gui::aux_::gravity_south(
+			sanguis::gui::impl::swap_pair{
+				sanguis::gui::impl::gravity_south(
 					_gravity
 				)
 			}

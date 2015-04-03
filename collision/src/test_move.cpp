@@ -7,13 +7,13 @@
 #include <sanguis/collision/test_move.hpp>
 #include <sanguis/collision/unit.hpp>
 #include <sanguis/collision/vector2.hpp>
-#include <sanguis/collision/aux_/adjust_speed.hpp>
-#include <sanguis/collision/aux_/dir.hpp>
-#include <sanguis/collision/aux_/is_null.hpp>
-#include <sanguis/collision/aux_/line_segment.hpp>
-#include <sanguis/collision/aux_/make_spiral_range.hpp>
-#include <sanguis/collision/aux_/pos.hpp>
-#include <sanguis/collision/aux_/rect.hpp>
+#include <sanguis/collision/impl/adjust_speed.hpp>
+#include <sanguis/collision/impl/dir.hpp>
+#include <sanguis/collision/impl/is_null.hpp>
+#include <sanguis/collision/impl/line_segment.hpp>
+#include <sanguis/collision/impl/make_spiral_range.hpp>
+#include <sanguis/collision/impl/pos.hpp>
+#include <sanguis/collision/impl/rect.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/creator/grid_spiral_range.hpp>
 #include <sanguis/creator/pos.hpp>
@@ -43,11 +43,11 @@ sanguis::collision::test_move(
 )
 {
 	if(
-		sanguis::collision::aux_::is_null(
+		sanguis::collision::impl::is_null(
 			_speed.get().x()
 		)
 		&&
-		sanguis::collision::aux_::is_null(
+		sanguis::collision::impl::is_null(
 			_speed.get().y()
 		)
 	)
@@ -65,7 +65,7 @@ sanguis::collision::test_move(
 	for(
 		sanguis::creator::signed_pos const entry
 		:
-		sanguis::collision::aux_::make_spiral_range(
+		sanguis::collision::impl::make_spiral_range(
 			sanguis::collision::center(
 				_center.get()
 				+
@@ -115,7 +115,7 @@ sanguis::collision::test_move(
 			_time.count()
 		);
 
-		sanguis::collision::aux_::rect const rect(
+		sanguis::collision::impl::rect const rect(
 			new_center.get()
 			-
 			_size
@@ -135,16 +135,16 @@ sanguis::collision::test_move(
 			)
 		);
 
-		sanguis::collision::aux_::rect const entry_rect(
+		sanguis::collision::impl::rect const entry_rect(
 			fcppt::math::vector::structure_cast<
-				sanguis::collision::aux_::rect::vector,
+				sanguis::collision::impl::rect::vector,
 				fcppt::cast::int_to_float_fun
 			>(
 				tile_rect.pos()
 			)
 			+
 			fcppt::math::vector::structure_cast<
-				sanguis::collision::aux_::rect::vector,
+				sanguis::collision::impl::rect::vector,
 				fcppt::cast::int_to_float_fun
 			>(
 				cur_pos
@@ -152,7 +152,7 @@ sanguis::collision::test_move(
 				sanguis::creator::tile_size::value
 			),
 			fcppt::math::dim::structure_cast<
-				sanguis::collision::aux_::rect::dim,
+				sanguis::collision::impl::rect::dim,
 				fcppt::cast::int_to_float_fun
 			>(
 				tile_rect.size()
@@ -168,12 +168,12 @@ sanguis::collision::test_move(
 			continue;
 
 		new_speed =
-			sanguis::collision::aux_::adjust_speed(
-				sanguis::collision::aux_::line_segment(
-					sanguis::collision::aux_::pos(
+			sanguis::collision::impl::adjust_speed(
+				sanguis::collision::impl::line_segment(
+					sanguis::collision::impl::pos(
 						_center.get()
 					),
-					sanguis::collision::aux_::dir(
+					sanguis::collision::impl::dir(
 						new_center.get()
 						-
 						_center.get()

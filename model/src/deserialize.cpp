@@ -1,7 +1,7 @@
 #include <sanguis/model/deserialize.hpp>
 #include <sanguis/model/exception.hpp>
 #include <sanguis/model/object.hpp>
-#include <sanguis/model/aux_/deserialize/object.hpp>
+#include <sanguis/model/impl/deserialize/object.hpp>
 #include <sge/parse/json/parse_file_exn.hpp>
 #include <sge/parse/json/start.hpp>
 #include <fcppt/exception.hpp>
@@ -19,7 +19,7 @@ sanguis::model::deserialize(
 try
 {
 	return
-		sanguis::model::aux_::deserialize::object(
+		sanguis::model::impl::deserialize::object(
 			sge::parse::json::parse_file_exn(
 				_path
 			).object()

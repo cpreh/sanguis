@@ -60,45 +60,45 @@ set(
 	include/sanguis/collision/world/parameters_fwd.hpp
 	include/sanguis/collision/world/update_result.hpp
 	include/sanguis/collision/world/update_result_fwd.hpp
-	src/aux_/adjust_speed.cpp
-	src/aux_/intersection.cpp
-	src/aux_/line_line_intersect.cpp
-	src/aux_/line_segment.cpp
-	src/aux_/make_range.cpp
-	src/aux_/make_spiral_range.cpp
-	src/aux_/rect_line_intersection.cpp
-	src/aux_/world/body_groups_for_body_group.cpp
-	src/aux_/world/body_groups_for_ghost_group.cpp
-	src/aux_/world/ghost_groups_for_body_group.cpp
-	src/include/sanguis/collision/aux_/adjust_speed.hpp
-	src/include/sanguis/collision/aux_/cross2.hpp
-	src/include/sanguis/collision/aux_/dir.hpp
-	src/include/sanguis/collision/aux_/dir_fwd.hpp
-	src/include/sanguis/collision/aux_/intersection.hpp
-	src/include/sanguis/collision/aux_/intersection_fwd.hpp
-	src/include/sanguis/collision/aux_/is_null.hpp
-	src/include/sanguis/collision/aux_/line_line_intersect.hpp
-	src/include/sanguis/collision/aux_/line_segment.hpp
-	src/include/sanguis/collision/aux_/line_segment_fwd.hpp
-	src/include/sanguis/collision/aux_/make_range.hpp
-	src/include/sanguis/collision/aux_/make_spiral_range.hpp
-	src/include/sanguis/collision/aux_/optional_intersection.hpp
-	src/include/sanguis/collision/aux_/optional_intersection_fwd.hpp
-	src/include/sanguis/collision/aux_/pos.hpp
-	src/include/sanguis/collision/aux_/pos_fwd.hpp
-	src/include/sanguis/collision/aux_/rect.hpp
-	src/include/sanguis/collision/aux_/rect_fwd.hpp
-	src/include/sanguis/collision/aux_/rect_line_intersection.hpp
-	src/include/sanguis/collision/aux_/world/body_ghost_group_pair.hpp
-	src/include/sanguis/collision/aux_/world/body_ghost_group_relation.hpp
-	src/include/sanguis/collision/aux_/world/body_group_container.hpp
-	src/include/sanguis/collision/aux_/world/body_group_pair.hpp
-	src/include/sanguis/collision/aux_/world/body_group_relation.hpp
-	src/include/sanguis/collision/aux_/world/body_groups_for_body_group.hpp
-	src/include/sanguis/collision/aux_/world/body_groups_for_ghost_group.hpp
-	src/include/sanguis/collision/aux_/world/ghost_group_container.hpp
-	src/include/sanguis/collision/aux_/world/ghost_groups_for_body_group.hpp
-	src/include/sanguis/collision/aux_/world/make_groups.hpp
+	src/impl/adjust_speed.cpp
+	src/impl/intersection.cpp
+	src/impl/line_line_intersect.cpp
+	src/impl/line_segment.cpp
+	src/impl/make_range.cpp
+	src/impl/make_spiral_range.cpp
+	src/impl/rect_line_intersection.cpp
+	src/impl/world/body_groups_for_body_group.cpp
+	src/impl/world/body_groups_for_ghost_group.cpp
+	src/impl/world/ghost_groups_for_body_group.cpp
+	src/include/sanguis/collision/impl/adjust_speed.hpp
+	src/include/sanguis/collision/impl/cross2.hpp
+	src/include/sanguis/collision/impl/dir.hpp
+	src/include/sanguis/collision/impl/dir_fwd.hpp
+	src/include/sanguis/collision/impl/intersection.hpp
+	src/include/sanguis/collision/impl/intersection_fwd.hpp
+	src/include/sanguis/collision/impl/is_null.hpp
+	src/include/sanguis/collision/impl/line_line_intersect.hpp
+	src/include/sanguis/collision/impl/line_segment.hpp
+	src/include/sanguis/collision/impl/line_segment_fwd.hpp
+	src/include/sanguis/collision/impl/make_range.hpp
+	src/include/sanguis/collision/impl/make_spiral_range.hpp
+	src/include/sanguis/collision/impl/optional_intersection.hpp
+	src/include/sanguis/collision/impl/optional_intersection_fwd.hpp
+	src/include/sanguis/collision/impl/pos.hpp
+	src/include/sanguis/collision/impl/pos_fwd.hpp
+	src/include/sanguis/collision/impl/rect.hpp
+	src/include/sanguis/collision/impl/rect_fwd.hpp
+	src/include/sanguis/collision/impl/rect_line_intersection.hpp
+	src/include/sanguis/collision/impl/world/body_ghost_group_pair.hpp
+	src/include/sanguis/collision/impl/world/body_ghost_group_relation.hpp
+	src/include/sanguis/collision/impl/world/body_group_container.hpp
+	src/include/sanguis/collision/impl/world/body_group_pair.hpp
+	src/include/sanguis/collision/impl/world/body_group_relation.hpp
+	src/include/sanguis/collision/impl/world/body_groups_for_body_group.hpp
+	src/include/sanguis/collision/impl/world/body_groups_for_ghost_group.hpp
+	src/include/sanguis/collision/impl/world/ghost_group_container.hpp
+	src/include/sanguis/collision/impl/world/ghost_groups_for_body_group.hpp
+	src/include/sanguis/collision/impl/world/make_groups.hpp
 	src/result.cpp
 	src/test.cpp
 	src/test_move.cpp
@@ -119,29 +119,29 @@ set(
 
 set(
 	SANGUIS_COLLISION_SIMPLE_FILES
-	src/aux_/world/simple/body.cpp
-	src/aux_/world/simple/ghost.cpp
-	src/aux_/world/simple/ghost_result.cpp
-	src/aux_/world/simple/grid_position.cpp
-	src/aux_/world/simple/object.cpp
-	src/include/sanguis/collision/aux_/world/simple/body.hpp
-	src/include/sanguis/collision/aux_/world/simple/body_base_hook.hpp
-	src/include/sanguis/collision/aux_/world/simple/body_fwd.hpp
-	src/include/sanguis/collision/aux_/world/simple/body_list.hpp
-	src/include/sanguis/collision/aux_/world/simple/body_list_grid.hpp
-	src/include/sanguis/collision/aux_/world/simple/body_list_grid_fwd.hpp
-	src/include/sanguis/collision/aux_/world/simple/body_move_callback.hpp
-	src/include/sanguis/collision/aux_/world/simple/body_remove_callback.hpp
-	src/include/sanguis/collision/aux_/world/simple/body_unique_ptr.hpp
-	src/include/sanguis/collision/aux_/world/simple/collides.hpp
-	src/include/sanguis/collision/aux_/world/simple/ghost.hpp
-	src/include/sanguis/collision/aux_/world/simple/ghost_fwd.hpp
-	src/include/sanguis/collision/aux_/world/simple/ghost_remove_callback.hpp
-	src/include/sanguis/collision/aux_/world/simple/ghost_result.hpp
-	src/include/sanguis/collision/aux_/world/simple/ghost_result_fwd.hpp
-	src/include/sanguis/collision/aux_/world/simple/ghost_unique_ptr.hpp
-	src/include/sanguis/collision/aux_/world/simple/grid_position.hpp
-	src/include/sanguis/collision/aux_/world/simple/object.hpp
+	src/impl/world/simple/body.cpp
+	src/impl/world/simple/ghost.cpp
+	src/impl/world/simple/ghost_result.cpp
+	src/impl/world/simple/grid_position.cpp
+	src/impl/world/simple/object.cpp
+	src/include/sanguis/collision/impl/world/simple/body.hpp
+	src/include/sanguis/collision/impl/world/simple/body_base_hook.hpp
+	src/include/sanguis/collision/impl/world/simple/body_fwd.hpp
+	src/include/sanguis/collision/impl/world/simple/body_list.hpp
+	src/include/sanguis/collision/impl/world/simple/body_list_grid.hpp
+	src/include/sanguis/collision/impl/world/simple/body_list_grid_fwd.hpp
+	src/include/sanguis/collision/impl/world/simple/body_move_callback.hpp
+	src/include/sanguis/collision/impl/world/simple/body_remove_callback.hpp
+	src/include/sanguis/collision/impl/world/simple/body_unique_ptr.hpp
+	src/include/sanguis/collision/impl/world/simple/collides.hpp
+	src/include/sanguis/collision/impl/world/simple/ghost.hpp
+	src/include/sanguis/collision/impl/world/simple/ghost_fwd.hpp
+	src/include/sanguis/collision/impl/world/simple/ghost_remove_callback.hpp
+	src/include/sanguis/collision/impl/world/simple/ghost_result.hpp
+	src/include/sanguis/collision/impl/world/simple/ghost_result_fwd.hpp
+	src/include/sanguis/collision/impl/world/simple/ghost_unique_ptr.hpp
+	src/include/sanguis/collision/impl/world/simple/grid_position.hpp
+	src/include/sanguis/collision/impl/world/simple/object.hpp
 )
 
 set(

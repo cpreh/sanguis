@@ -21,38 +21,38 @@ set(
 	include/sanguis/tools/libmergeimage/saved_image_fwd.hpp
 	include/sanguis/tools/libmergeimage/saved_image_vector.hpp
 	include/sanguis/tools/libmergeimage/to_model.hpp
-	src/aux_/best_size.cpp
-	src/aux_/calc_cell_size.cpp
-	src/aux_/cells_in_dim.cpp
-	src/aux_/convert_path.cpp
-	src/aux_/fold_paths.cpp
-	src/aux_/gather_paths.cpp
-	src/aux_/log.cpp
-	src/aux_/make_image.cpp
-	src/aux_/make_maximum_count.cpp
-	src/aux_/merge_paths.cpp
-	src/aux_/pow2.cpp
 	src/exception.cpp
 	src/image.cpp
-	src/include/sanguis/tools/libmergeimage/aux_/best_size.hpp
-	src/include/sanguis/tools/libmergeimage/aux_/calc_cell_size.hpp
-	src/include/sanguis/tools/libmergeimage/aux_/cell_size.hpp
-	src/include/sanguis/tools/libmergeimage/aux_/cell_size_fwd.hpp
-	src/include/sanguis/tools/libmergeimage/aux_/cells_in_dim.hpp
-	src/include/sanguis/tools/libmergeimage/aux_/convert_path.hpp
-	src/include/sanguis/tools/libmergeimage/aux_/count_maximum.hpp
-	src/include/sanguis/tools/libmergeimage/aux_/count_maximum_fwd.hpp
-	src/include/sanguis/tools/libmergeimage/aux_/fold_paths.hpp
-	src/include/sanguis/tools/libmergeimage/aux_/gather_paths.hpp
-	src/include/sanguis/tools/libmergeimage/aux_/log.hpp
-	src/include/sanguis/tools/libmergeimage/aux_/make_image.hpp
-	src/include/sanguis/tools/libmergeimage/aux_/make_maximum_count.hpp
-	src/include/sanguis/tools/libmergeimage/aux_/max_exponent.hpp
-	src/include/sanguis/tools/libmergeimage/aux_/merge_paths.hpp
-	src/include/sanguis/tools/libmergeimage/aux_/path_vector.hpp
-	src/include/sanguis/tools/libmergeimage/aux_/path_vector_vector.hpp
-	src/include/sanguis/tools/libmergeimage/aux_/pow2.hpp
-	src/include/sanguis/tools/libmergeimage/aux_/tree_depth.hpp
+	src/impl/best_size.cpp
+	src/impl/calc_cell_size.cpp
+	src/impl/cells_in_dim.cpp
+	src/impl/convert_path.cpp
+	src/impl/fold_paths.cpp
+	src/impl/gather_paths.cpp
+	src/impl/log.cpp
+	src/impl/make_image.cpp
+	src/impl/make_maximum_count.cpp
+	src/impl/merge_paths.cpp
+	src/impl/pow2.cpp
+	src/include/sanguis/tools/libmergeimage/impl/best_size.hpp
+	src/include/sanguis/tools/libmergeimage/impl/calc_cell_size.hpp
+	src/include/sanguis/tools/libmergeimage/impl/cell_size.hpp
+	src/include/sanguis/tools/libmergeimage/impl/cell_size_fwd.hpp
+	src/include/sanguis/tools/libmergeimage/impl/cells_in_dim.hpp
+	src/include/sanguis/tools/libmergeimage/impl/convert_path.hpp
+	src/include/sanguis/tools/libmergeimage/impl/count_maximum.hpp
+	src/include/sanguis/tools/libmergeimage/impl/count_maximum_fwd.hpp
+	src/include/sanguis/tools/libmergeimage/impl/fold_paths.hpp
+	src/include/sanguis/tools/libmergeimage/impl/gather_paths.hpp
+	src/include/sanguis/tools/libmergeimage/impl/log.hpp
+	src/include/sanguis/tools/libmergeimage/impl/make_image.hpp
+	src/include/sanguis/tools/libmergeimage/impl/make_maximum_count.hpp
+	src/include/sanguis/tools/libmergeimage/impl/max_exponent.hpp
+	src/include/sanguis/tools/libmergeimage/impl/merge_paths.hpp
+	src/include/sanguis/tools/libmergeimage/impl/path_vector.hpp
+	src/include/sanguis/tools/libmergeimage/impl/path_vector_vector.hpp
+	src/include/sanguis/tools/libmergeimage/impl/pow2.hpp
+	src/include/sanguis/tools/libmergeimage/impl/tree_depth.hpp
 	src/log_location.cpp
 	src/merge_images.cpp
 	src/merge_result.cpp

@@ -50,62 +50,62 @@ set(
 	include/sanguis/model/weapon_category_name_fwd.hpp
 	src/animation.cpp
 	src/animation_range.cpp
-	src/aux_/deserialize/animation.cpp
-	src/aux_/deserialize/animation_delay.cpp
-	src/aux_/deserialize/animation_map.cpp
-	src/aux_/deserialize/animation_range.cpp
-	src/aux_/deserialize/animation_sound.cpp
-	src/aux_/deserialize/cell_size.cpp
-	src/aux_/deserialize/image_name.cpp
-	src/aux_/deserialize/object.cpp
-	src/aux_/deserialize/part.cpp
-	src/aux_/deserialize/part_map.cpp
-	src/aux_/deserialize/weapon_category.cpp
-	src/aux_/deserialize/weapon_category_map.cpp
-	src/aux_/serialize/animation.cpp
-	src/aux_/serialize/animation_delay.cpp
-	src/aux_/serialize/animation_map.cpp
-	src/aux_/serialize/animation_range.cpp
-	src/aux_/serialize/animation_sound.cpp
-	src/aux_/serialize/cell_size.cpp
-	src/aux_/serialize/image_name.cpp
-	src/aux_/serialize/object.cpp
-	src/aux_/serialize/part.cpp
-	src/aux_/serialize/part_map.cpp
-	src/aux_/serialize/weapon_category.cpp
-	src/aux_/serialize/weapon_category_map.cpp
 	src/cell_area_from_index.cpp
 	src/cell_size_from_file.cpp
 	src/deserialize.cpp
 	src/exception.cpp
-	src/include/sanguis/model/aux_/animation_range_vector.hpp
-	src/include/sanguis/model/aux_/animation_range_vector_fwd.hpp
-	src/include/sanguis/model/aux_/deserialize/animation.hpp
-	src/include/sanguis/model/aux_/deserialize/animation_delay.hpp
-	src/include/sanguis/model/aux_/deserialize/animation_map.hpp
-	src/include/sanguis/model/aux_/deserialize/animation_range.hpp
-	src/include/sanguis/model/aux_/deserialize/animation_sound.hpp
-	src/include/sanguis/model/aux_/deserialize/cell_size.hpp
-	src/include/sanguis/model/aux_/deserialize/image_name.hpp
-	src/include/sanguis/model/aux_/deserialize/map.hpp
-	src/include/sanguis/model/aux_/deserialize/object.hpp
-	src/include/sanguis/model/aux_/deserialize/part.hpp
-	src/include/sanguis/model/aux_/deserialize/part_map.hpp
-	src/include/sanguis/model/aux_/deserialize/weapon_category.hpp
-	src/include/sanguis/model/aux_/deserialize/weapon_category_map.hpp
-	src/include/sanguis/model/aux_/serialize/animation.hpp
-	src/include/sanguis/model/aux_/serialize/animation_delay.hpp
-	src/include/sanguis/model/aux_/serialize/animation_map.hpp
-	src/include/sanguis/model/aux_/serialize/animation_range.hpp
-	src/include/sanguis/model/aux_/serialize/animation_sound.hpp
-	src/include/sanguis/model/aux_/serialize/cell_size.hpp
-	src/include/sanguis/model/aux_/serialize/image_name.hpp
-	src/include/sanguis/model/aux_/serialize/map.hpp
-	src/include/sanguis/model/aux_/serialize/object.hpp
-	src/include/sanguis/model/aux_/serialize/part.hpp
-	src/include/sanguis/model/aux_/serialize/part_map.hpp
-	src/include/sanguis/model/aux_/serialize/weapon_category.hpp
-	src/include/sanguis/model/aux_/serialize/weapon_category_map.hpp
+	src/impl/deserialize/animation.cpp
+	src/impl/deserialize/animation_delay.cpp
+	src/impl/deserialize/animation_map.cpp
+	src/impl/deserialize/animation_range.cpp
+	src/impl/deserialize/animation_sound.cpp
+	src/impl/deserialize/cell_size.cpp
+	src/impl/deserialize/image_name.cpp
+	src/impl/deserialize/object.cpp
+	src/impl/deserialize/part.cpp
+	src/impl/deserialize/part_map.cpp
+	src/impl/deserialize/weapon_category.cpp
+	src/impl/deserialize/weapon_category_map.cpp
+	src/impl/serialize/animation.cpp
+	src/impl/serialize/animation_delay.cpp
+	src/impl/serialize/animation_map.cpp
+	src/impl/serialize/animation_range.cpp
+	src/impl/serialize/animation_sound.cpp
+	src/impl/serialize/cell_size.cpp
+	src/impl/serialize/image_name.cpp
+	src/impl/serialize/object.cpp
+	src/impl/serialize/part.cpp
+	src/impl/serialize/part_map.cpp
+	src/impl/serialize/weapon_category.cpp
+	src/impl/serialize/weapon_category_map.cpp
+	src/include/sanguis/model/impl/animation_range_vector.hpp
+	src/include/sanguis/model/impl/animation_range_vector_fwd.hpp
+	src/include/sanguis/model/impl/deserialize/animation.hpp
+	src/include/sanguis/model/impl/deserialize/animation_delay.hpp
+	src/include/sanguis/model/impl/deserialize/animation_map.hpp
+	src/include/sanguis/model/impl/deserialize/animation_range.hpp
+	src/include/sanguis/model/impl/deserialize/animation_sound.hpp
+	src/include/sanguis/model/impl/deserialize/cell_size.hpp
+	src/include/sanguis/model/impl/deserialize/image_name.hpp
+	src/include/sanguis/model/impl/deserialize/map.hpp
+	src/include/sanguis/model/impl/deserialize/object.hpp
+	src/include/sanguis/model/impl/deserialize/part.hpp
+	src/include/sanguis/model/impl/deserialize/part_map.hpp
+	src/include/sanguis/model/impl/deserialize/weapon_category.hpp
+	src/include/sanguis/model/impl/deserialize/weapon_category_map.hpp
+	src/include/sanguis/model/impl/serialize/animation.hpp
+	src/include/sanguis/model/impl/serialize/animation_delay.hpp
+	src/include/sanguis/model/impl/serialize/animation_map.hpp
+	src/include/sanguis/model/impl/serialize/animation_range.hpp
+	src/include/sanguis/model/impl/serialize/animation_sound.hpp
+	src/include/sanguis/model/impl/serialize/cell_size.hpp
+	src/include/sanguis/model/impl/serialize/image_name.hpp
+	src/include/sanguis/model/impl/serialize/map.hpp
+	src/include/sanguis/model/impl/serialize/object.hpp
+	src/include/sanguis/model/impl/serialize/part.hpp
+	src/include/sanguis/model/impl/serialize/part_map.hpp
+	src/include/sanguis/model/impl/serialize/weapon_category.hpp
+	src/include/sanguis/model/impl/serialize/weapon_category_map.hpp
 	src/make_cell_areas.cpp
 	src/object.cpp
 	src/part.cpp

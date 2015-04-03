@@ -2,7 +2,7 @@
 #include <sanguis/gui/draw.hpp>
 #include <sanguis/gui/duration.hpp>
 #include <sanguis/gui/master.hpp>
-#include <sanguis/gui/aux_/renderer/scoped.hpp>
+#include <sanguis/gui/impl/renderer/scoped.hpp>
 #include <sanguis/gui/main_area/base.hpp>
 #include <sanguis/gui/renderer/base_fwd.hpp>
 #include <sanguis/gui/widget/base.hpp>
@@ -111,7 +111,7 @@ sanguis::gui::master::draw_with_states(
 	sanguis::gui::background::base &_background
 )
 {
-	sanguis::gui::aux_::renderer::scoped renderer(
+	sanguis::gui::impl::renderer::scoped renderer(
 		_renderer,
 		_context
 	);

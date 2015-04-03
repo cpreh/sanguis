@@ -3,14 +3,14 @@
 #include <sanguis/tools/libmergeimage/image_vector.hpp>
 #include <sanguis/tools/libmergeimage/merge_images.hpp>
 #include <sanguis/tools/libmergeimage/merge_result.hpp>
-#include <sanguis/tools/libmergeimage/aux_/calc_cell_size.hpp>
-#include <sanguis/tools/libmergeimage/aux_/cell_size.hpp>
-#include <sanguis/tools/libmergeimage/aux_/gather_paths.hpp>
-#include <sanguis/tools/libmergeimage/aux_/make_image.hpp>
-#include <sanguis/tools/libmergeimage/aux_/make_maximum_count.hpp>
-#include <sanguis/tools/libmergeimage/aux_/merge_paths.hpp>
-#include <sanguis/tools/libmergeimage/aux_/path_vector.hpp>
-#include <sanguis/tools/libmergeimage/aux_/path_vector_vector.hpp>
+#include <sanguis/tools/libmergeimage/impl/calc_cell_size.hpp>
+#include <sanguis/tools/libmergeimage/impl/cell_size.hpp>
+#include <sanguis/tools/libmergeimage/impl/gather_paths.hpp>
+#include <sanguis/tools/libmergeimage/impl/make_image.hpp>
+#include <sanguis/tools/libmergeimage/impl/make_maximum_count.hpp>
+#include <sanguis/tools/libmergeimage/impl/merge_paths.hpp>
+#include <sanguis/tools/libmergeimage/impl/path_vector.hpp>
+#include <sanguis/tools/libmergeimage/impl/path_vector_vector.hpp>
 #include <sge/image2d/system_fwd.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map.hpp>
@@ -28,8 +28,8 @@ sanguis::tools::libmergeimage::merge_images(
 	boost::filesystem::path const &_base_path
 )
 {
-	sanguis::tools::libmergeimage::aux_::path_vector_vector const gathered_paths(
-		sanguis::tools::libmergeimage::aux_::gather_paths(
+	sanguis::tools::libmergeimage::impl::path_vector_vector const gathered_paths(
+		sanguis::tools::libmergeimage::impl::gather_paths(
 			_base_path
 		)
 	);
@@ -46,18 +46,18 @@ sanguis::tools::libmergeimage::merge_images(
 				)
 			);
 
-	sanguis::tools::libmergeimage::aux_::cell_size const cell_size(
-		sanguis::tools::libmergeimage::aux_::calc_cell_size(
+	sanguis::tools::libmergeimage::impl::cell_size const cell_size(
+		sanguis::tools::libmergeimage::impl::calc_cell_size(
 			_image_system,
 			_base_path,
 			gathered_paths
 		)
 	);
 
-	sanguis::tools::libmergeimage::aux_::path_vector_vector const merged_paths(
-		sanguis::tools::libmergeimage::aux_::merge_paths(
+	sanguis::tools::libmergeimage::impl::path_vector_vector const merged_paths(
+		sanguis::tools::libmergeimage::impl::merge_paths(
 			gathered_paths,
-			sanguis::tools::libmergeimage::aux_::make_maximum_count(
+			sanguis::tools::libmergeimage::impl::make_maximum_count(
 				cell_size
 			)
 		)
@@ -82,11 +82,11 @@ sanguis::tools::libmergeimage::merge_images(
 					&_base_path,
 					&_image_system
 				](
-					sanguis::tools::libmergeimage::aux_::path_vector const &_paths
+					sanguis::tools::libmergeimage::impl::path_vector const &_paths
 				)
 				{
 					return
-						sanguis::tools::libmergeimage::aux_::make_image(
+						sanguis::tools::libmergeimage::impl::make_image(
 							_image_system,
 							_base_path,
 							cell_size,

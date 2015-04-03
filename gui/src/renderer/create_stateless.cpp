@@ -1,4 +1,4 @@
-#include <sanguis/gui/aux_/renderer/stateless.hpp>
+#include <sanguis/gui/impl/renderer/stateless.hpp>
 #include <sanguis/gui/renderer/base_unique_ptr.hpp>
 #include <sanguis/gui/renderer/create_stateless.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
@@ -12,7 +12,7 @@ sanguis::gui::renderer::create_stateless(
 {
 	return
 		fcppt::make_unique_ptr<
-			sanguis::gui::aux_::renderer::stateless
+			sanguis::gui::impl::renderer::stateless
 		>(
 			_renderer
 		);

@@ -1,4 +1,4 @@
-#include <sanguis/gui/aux_/draw_image.hpp>
+#include <sanguis/gui/impl/draw_image.hpp>
 #include <sanguis/gui/renderer/base.hpp>
 #include <sanguis/gui/style/base.hpp>
 #include <sanguis/gui/widget/base.hpp>

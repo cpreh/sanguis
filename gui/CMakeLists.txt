@@ -109,47 +109,47 @@ set(
 	include/sanguis/gui/widget/unique_ptr_tree_fwd.hpp
 	include/sanguis/gui/widget/unique_ptr_tree_vector.hpp
 	include/sanguis/gui/widget/unique_ptr_vector.hpp
-	src/aux_/draw_image.cpp
-	src/aux_/draw_image_repeat.cpp
-	src/aux_/fill_rect.cpp
-	src/aux_/gravity_east.cpp
-	src/aux_/gravity_south.cpp
-	src/aux_/make_container_pair.cpp
-	src/aux_/relayout_ancestor.cpp
-	src/aux_/renderer/scoped.cpp
-	src/aux_/renderer/stateless.cpp
-	src/aux_/shrink_rect.cpp
-	src/aux_/style/background_color.cpp
-	src/aux_/style/border_color.cpp
-	src/aux_/style/simple.cpp
-	src/aux_/style/text_color.cpp
 	src/background/base.cpp
 	src/background/colored.cpp
 	src/background/none.cpp
 	src/context.cpp
 	src/create_texture.cpp
 	src/draw.cpp
-	src/include/sanguis/gui/aux_/draw_image.hpp
-	src/include/sanguis/gui/aux_/draw_image_repeat.hpp
-	src/include/sanguis/gui/aux_/draw_sprite.hpp
-	src/include/sanguis/gui/aux_/fill_rect.hpp
-	src/include/sanguis/gui/aux_/gravity_east.hpp
-	src/include/sanguis/gui/aux_/gravity_south.hpp
-	src/include/sanguis/gui/aux_/image_sprite_choices.hpp
-	src/include/sanguis/gui/aux_/make_container_pair.hpp
-	src/include/sanguis/gui/aux_/relayout_ancestor.hpp
-	src/include/sanguis/gui/aux_/renderer/scoped.hpp
-	src/include/sanguis/gui/aux_/renderer/stateless.hpp
-	src/include/sanguis/gui/aux_/shrink_rect.hpp
-	src/include/sanguis/gui/aux_/sprite_type_choices.hpp
-	src/include/sanguis/gui/aux_/style/background_color.hpp
-	src/include/sanguis/gui/aux_/style/border_color.hpp
-	src/include/sanguis/gui/aux_/style/inner_border.hpp
-	src/include/sanguis/gui/aux_/style/outer_border.hpp
-	src/include/sanguis/gui/aux_/style/simple.hpp
-	src/include/sanguis/gui/aux_/style/spacing.hpp
-	src/include/sanguis/gui/aux_/style/text_color.hpp
-	src/include/sanguis/gui/aux_/swap_pair.hpp
+	src/impl/draw_image.cpp
+	src/impl/draw_image_repeat.cpp
+	src/impl/fill_rect.cpp
+	src/impl/gravity_east.cpp
+	src/impl/gravity_south.cpp
+	src/impl/make_container_pair.cpp
+	src/impl/relayout_ancestor.cpp
+	src/impl/renderer/scoped.cpp
+	src/impl/renderer/stateless.cpp
+	src/impl/shrink_rect.cpp
+	src/impl/style/background_color.cpp
+	src/impl/style/border_color.cpp
+	src/impl/style/simple.cpp
+	src/impl/style/text_color.cpp
+	src/include/sanguis/gui/impl/draw_image.hpp
+	src/include/sanguis/gui/impl/draw_image_repeat.hpp
+	src/include/sanguis/gui/impl/draw_sprite.hpp
+	src/include/sanguis/gui/impl/fill_rect.hpp
+	src/include/sanguis/gui/impl/gravity_east.hpp
+	src/include/sanguis/gui/impl/gravity_south.hpp
+	src/include/sanguis/gui/impl/image_sprite_choices.hpp
+	src/include/sanguis/gui/impl/make_container_pair.hpp
+	src/include/sanguis/gui/impl/relayout_ancestor.hpp
+	src/include/sanguis/gui/impl/renderer/scoped.hpp
+	src/include/sanguis/gui/impl/renderer/stateless.hpp
+	src/include/sanguis/gui/impl/shrink_rect.hpp
+	src/include/sanguis/gui/impl/sprite_type_choices.hpp
+	src/include/sanguis/gui/impl/style/background_color.hpp
+	src/include/sanguis/gui/impl/style/border_color.hpp
+	src/include/sanguis/gui/impl/style/inner_border.hpp
+	src/include/sanguis/gui/impl/style/outer_border.hpp
+	src/include/sanguis/gui/impl/style/simple.hpp
+	src/include/sanguis/gui/impl/style/spacing.hpp
+	src/include/sanguis/gui/impl/style/text_color.hpp
+	src/include/sanguis/gui/impl/swap_pair.hpp
 	src/main_area/base.cpp
 	src/main_area/fixed_position.cpp
 	src/main_area/screen_corner.cpp
