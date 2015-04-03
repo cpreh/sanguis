@@ -1,7 +1,9 @@
 #include <sanguis/duration.hpp>
+#include <sanguis/server/collision/body_exit.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/doodad.hpp>
 #include <sanguis/server/entities/doodad_unique_ptr.hpp>
+#include <sanguis/server/entities/remove_from_world_result.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
@@ -70,6 +72,11 @@ sanguis::server::world::update_entity::impl(
 	)
 	{
 		_entity->remove_from_game();
+
+		// TODO: Move this out of here
+		sanguis::server::collision::body_exit(
+			_entity->remove_from_world().body_exit()
+		);
 
 		return
 			true;

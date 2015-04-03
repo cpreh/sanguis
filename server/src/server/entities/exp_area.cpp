@@ -3,6 +3,7 @@
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/collision/ghost.hpp>
+#include <sanguis/server/collision/ghost_container.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/center_ghost.hpp>
@@ -12,6 +13,7 @@
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
 #include <fcppt/algorithm/map_iteration_second.hpp>
+#include <fcppt/assign/make_container.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/cast/static_downcast_ptr.hpp>
@@ -32,14 +34,19 @@ sanguis::server::entities::exp_area::exp_area(
 	),
 	player_links_()
 {
-	this->add_ghost(
-		sanguis::server::collision::ghost{
-			*this,
-			sanguis::collision::world::ghost_group::target_player,
-			sanguis::server::radius(
-				2000.f // TODO
-			)
-		}
+	// TODO: Direct initialization?
+	this->init_ghosts(
+		fcppt::assign::make_container<
+			sanguis::server::collision::ghost_container
+		>(
+			sanguis::server::collision::ghost{
+				*this,
+				sanguis::collision::world::ghost_group::target_player,
+				sanguis::server::radius(
+					2000.f // TODO
+				)
+			}
+		)
 	);
 }
 
