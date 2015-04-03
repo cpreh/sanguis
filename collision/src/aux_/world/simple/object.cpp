@@ -670,13 +670,34 @@ sanguis::collision::aux_::world::simple::object::remove_body(
 	sanguis::collision::aux_::world::simple::body &_body
 )
 {
-	body_sets_[
-		_body.collision_group()
-	].erase(
-		fcppt::make_ref(
-			_body
+	if(
+		body_sets_[
+			_body.collision_group()
+		].erase(
+			fcppt::make_ref(
+				_body
+			)
 		)
-	);
+		>
+		0
+	)
+		for(
+			sanguis::collision::world::ghost_group const ghost_group
+			:
+			sanguis::collision::aux_::world::ghost_groups_for_body_group(
+				_body.collision_group()
+			)
+		)
+			for(
+				ghost_reference const ghost
+				:
+				ghost_sets_[
+					ghost_group
+				]
+			)
+				ghost.get().body_destroyed(
+					_body
+				);
 }
 
 void

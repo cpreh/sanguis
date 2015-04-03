@@ -93,6 +93,11 @@ public:
 		sanguis::collision::aux_::world::simple::body const &
 	)
 	FCPPT_PP_WARN_UNUSED_RESULT;
+
+	void
+	body_destroyed(
+		sanguis::collision::aux_::world::simple::body const &
+	);
 private:
 	sanguis::collision::aux_::world::simple::ghost_remove_callback const ghost_remove_callback_;
 

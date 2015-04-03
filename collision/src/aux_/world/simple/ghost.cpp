@@ -268,3 +268,15 @@ sanguis::collision::aux_::world::simple::ghost::remove_body(
 			)
 		);
 }
+
+void
+sanguis::collision::aux_::world::simple::ghost::body_destroyed(
+	sanguis::collision::aux_::world::simple::body const &_body
+)
+{
+	bodies_.erase(
+		fcppt::make_cref(
+			_body
+		)
+	);
+}
