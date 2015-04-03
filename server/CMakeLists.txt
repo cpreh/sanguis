@@ -120,7 +120,6 @@ set(
 	include/sanguis/server/collision/ghost_fwd.hpp
 	include/sanguis/server/collision/optional_result.hpp
 	include/sanguis/server/collision/optional_result_fwd.hpp
-	include/sanguis/server/collision/position_callback.hpp
 	include/sanguis/server/collision/result.hpp
 	include/sanguis/server/collision/result_fwd.hpp
 	include/sanguis/server/collision/with_world.hpp

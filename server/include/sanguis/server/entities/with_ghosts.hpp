@@ -2,7 +2,6 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_GHOSTS_HPP_INCLUDED
 
 #include <sanguis/collision/world/body_enter_container.hpp>
-#include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/collision/ghost_container.hpp>
 #include <sanguis/server/collision/ghost_fwd.hpp>
@@ -59,16 +58,10 @@ protected:
 	override;
 
 	void
-	update_center(
-		sanguis::server::center const &
+	update_ghost_center(
+		sanguis::server::center
 	);
 private:
-	sanguis::collision::world::body_enter_container
-	transfer_ghost(
-		sanguis::server::collision::ghost &,
-		sanguis::collision::world::object &
-	);
-
 	sanguis::server::collision::ghost_container ghosts_;
 };
 

@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_WITH_BODY_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_WITH_BODY_HPP_INCLUDED
 
+#include <sanguis/collision/center_fwd.hpp>
 #include <sanguis/collision/world/body_base.hpp>
 #include <sanguis/collision/world/body_group_fwd.hpp>
 #include <sanguis/server/angle.hpp>
@@ -144,9 +145,10 @@ private:
 	initial_speed() const;
 
 	void
-	position_change(
-		sanguis::server::center
-	);
+	center_changed(
+		sanguis::collision::center
+	)
+	override;
 
 	virtual
 	void

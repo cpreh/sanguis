@@ -58,7 +58,6 @@ set(
 	include/sanguis/collision/world/optional_body_exit_fwd.hpp
 	include/sanguis/collision/world/parameters.hpp
 	include/sanguis/collision/world/parameters_fwd.hpp
-	include/sanguis/collision/world/position_change_callback.hpp
 	include/sanguis/collision/world/update_result.hpp
 	include/sanguis/collision/world/update_result_fwd.hpp
 	src/aux_/adjust_speed.cpp

@@ -4,10 +4,9 @@
 #include <sanguis/collision/aux_/world/simple/body.hpp>
 #include <sanguis/collision/aux_/world/simple/body_remove_callback.hpp>
 #include <sanguis/collision/world/body.hpp>
-#include <sanguis/collision/world/body_base_fwd.hpp>
+#include <sanguis/collision/world/body_base.hpp>
 #include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters.hpp>
-#include <sanguis/collision/world/position_change_callback.hpp>
 
 
 sanguis::collision::aux_::world::simple::body::body(
@@ -22,9 +21,6 @@ sanguis::collision::aux_::world::simple::body::body(
 	),
 	body_move_callback_(
 		_body_move_callback
-	),
-	position_change_callback_(
-		_parameters.position_change_callback()
 	),
 	radius_(
 		_parameters.radius()
@@ -56,8 +52,9 @@ sanguis::collision::aux_::world::simple::body::center(
 	sanguis::collision::center const _center
 )
 {
-	center_ =
-		_center;
+	this->move(
+		_center
+	);
 
 	body_move_callback_.get()(
 		*this
@@ -72,8 +69,8 @@ sanguis::collision::aux_::world::simple::body::move(
 	center_ =
 		_center;
 
-	position_change_callback_(
-		this->center()
+	body_base_.center_changed(
+		_center
 	);
 }
 

@@ -1,6 +1,5 @@
 #include <sanguis/collision/world/body_enter_container.hpp>
 #include <sanguis/collision/world/body_exit_container.hpp>
-#include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/collision/ghost.hpp>
 #include <sanguis/server/collision/ghost_container.hpp>
@@ -59,9 +58,9 @@ sanguis::server::entities::with_ghosts::add_ghost(
 	);
 
 	return
-		this->transfer_ghost(
-			ghosts_.back(),
-			this->environment()->collision_world()
+		ghosts_.back().transfer(
+			this->environment()->collision_world(),
+			this->center()
 		);
 }
 
@@ -100,9 +99,9 @@ sanguis::server::entities::with_ghosts::on_transfer(
 					)
 					{
 						return
-							this->transfer_ghost(
-								_ghost,
-								_parameters.world()
+							_ghost.transfer(
+								_parameters.world(),
+								_parameters.center()
 							);
 					}
 				)
@@ -135,8 +134,8 @@ sanguis::server::entities::with_ghosts::remove_from_world()
 }
 
 void
-sanguis::server::entities::with_ghosts::update_center(
-	sanguis::server::center const &_center
+sanguis::server::entities::with_ghosts::update_ghost_center(
+	sanguis::server::center const _center
 )
 {
 	for(
@@ -146,18 +145,5 @@ sanguis::server::entities::with_ghosts::update_center(
 	)
 		ghost.center(
 			_center
-		);
-}
-
-sanguis::collision::world::body_enter_container
-sanguis::server::entities::with_ghosts::transfer_ghost(
-	sanguis::server::collision::ghost &_ghost,
-	sanguis::collision::world::object &_world
-)
-{
-	return
-		_ghost.transfer(
-			_world,
-			this->center()
 		);
 }

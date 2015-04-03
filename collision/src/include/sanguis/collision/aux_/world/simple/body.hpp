@@ -12,7 +12,6 @@
 #include <sanguis/collision/world/body_base_fwd.hpp>
 #include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters_fwd.hpp>
-#include <sanguis/collision/world/position_change_callback.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -89,8 +88,6 @@ private:
 	sanguis::collision::aux_::world::simple::body_remove_callback const body_remove_callback_;
 
 	sanguis::collision::aux_::world::simple::body_move_callback const body_move_callback_;
-
-	sanguis::collision::world::position_change_callback const position_change_callback_;
 
 	sanguis::collision::radius const radius_;
 

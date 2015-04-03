@@ -124,6 +124,7 @@ sanguis::server::global::generate_worlds(
 		)
 	);
 
+/*
 	sanguis::world_id const num_worlds(
 		10u
 	);
@@ -274,7 +275,7 @@ sanguis::server::global::generate_worlds(
 			).has_value()
 		);
 	}
-
+*/
 	return
 		sanguis::server::global::world_map(
 			std::move(

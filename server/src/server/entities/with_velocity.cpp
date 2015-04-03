@@ -150,7 +150,8 @@ sanguis::server::entities::with_velocity::direction(
 	sanguis::server::direction const _direction
 )
 {
-	direction_ = _direction;
+	direction_ =
+		_direction;
 
 	this->desired_speed_change();
 }

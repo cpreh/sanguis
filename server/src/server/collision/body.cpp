@@ -7,19 +7,16 @@
 #include <sanguis/collision/world/body_parameters.hpp>
 #include <sanguis/collision/world/created.hpp>
 #include <sanguis/collision/world/object.hpp>
-#include <sanguis/collision/world/position_change_callback.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/body.hpp>
-#include <sanguis/server/collision/position_callback.hpp>
 #include <fcppt/assert/pre.hpp>
 
 
 sanguis::server::collision::body::body(
 	sanguis::server::radius const _radius,
-	sanguis::collision::world::body_base &_body_base,
-	sanguis::server::collision::position_callback const &_position_callback
+	sanguis::collision::world::body_base &_body_base
 )
 :
 	radius_(
@@ -27,9 +24,6 @@ sanguis::server::collision::body::body(
 	),
 	body_base_(
 		_body_base
-	),
-	position_callback_(
-		_position_callback
 	),
 	body_()
 {
@@ -128,20 +122,6 @@ sanguis::server::collision::body::transfer(
 				),
 				sanguis::collision::radius(
 					radius_.get()
-				),
-				sanguis::collision::world::position_change_callback(
-					[
-						this
-					](
-						sanguis::collision::center const _new_center
-					)
-					{
-						position_callback_(
-							sanguis::server::center(
-								_new_center.get()
-							)
-						);
-					}
 				),
 				_collision_group,
 				body_base_

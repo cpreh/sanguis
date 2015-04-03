@@ -45,7 +45,7 @@ sanguis::server::entities::with_auras::with_auras(
 		fcppt::algorithm::map<
 			sanguis::server::collision::ghost_container
 		>(
-			_auras,
+			auras_,
 			[](
 				sanguis::server::auras::unique_ptr const &_aura
 			)

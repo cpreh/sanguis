@@ -432,12 +432,12 @@ sanguis::server::world::object::insert_with_id(
 				sanguis::server::entities::transfer_result const &_transfer_result
 			)
 			{
-				sanguis::server::collision::body_enter(
-					_transfer_result.body_enter()
-				);
-
 				this->player_insertion(
 					result
+				);
+
+				sanguis::server::collision::body_enter(
+					_transfer_result.body_enter()
 				);
 
 				return
@@ -1150,9 +1150,6 @@ sanguis::server::world::object::remove_sight_range(
 				sight_it
 			);
 	}
-
-	// If an entity has been removed we have to tell the client that it is
-	// dead instead
 
 	if(
 		_target.dead()

@@ -670,34 +670,13 @@ sanguis::collision::aux_::world::simple::object::remove_body(
 	sanguis::collision::aux_::world::simple::body &_body
 )
 {
-	FCPPT_ASSERT_ERROR(
-		body_sets_[
-			_body.collision_group()
-		].erase(
-			fcppt::make_ref(
-				_body
-			)
+	body_sets_[
+		_body.collision_group()
+	].erase(
+		fcppt::make_ref(
+			_body
 		)
-		== 1u
 	);
-
-	for(
-		sanguis::collision::world::ghost_group const ghost_group
-		:
-		sanguis::collision::aux_::world::ghost_groups_for_body_group(
-			_body.collision_group()
-		)
-	)
-		for(
-			auto const ghost
-			:
-			ghost_sets_[
-				ghost_group
-			]
-		)
-			ghost.get().remove_body(
-				_body
-			);
 }
 
 void
@@ -705,16 +684,12 @@ sanguis::collision::aux_::world::simple::object::remove_ghost(
 	sanguis::collision::aux_::world::simple::ghost &_ghost
 )
 {
-	// TODO: Which exception guarantees do we want?
-	FCPPT_ASSERT_ERROR(
-		ghost_sets_[
-			_ghost.collision_group()
-		].erase(
-			fcppt::make_ref(
-				_ghost
-			)
+	ghost_sets_[
+		_ghost.collision_group()
+	].erase(
+		fcppt::make_ref(
+			_ghost
 		)
-		== 1u
 	);
 }
 

@@ -12,7 +12,6 @@
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/body_fwd.hpp>
-#include <sanguis/server/collision/position_callback.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -31,8 +30,7 @@ class body
 public:
 	body(
 		sanguis::server::radius,
-		sanguis::collision::world::body_base &,
-		sanguis::server::collision::position_callback const &
+		sanguis::collision::world::body_base &
 	);
 
 	~body();
@@ -73,8 +71,6 @@ private:
 	sanguis::server::radius const radius_;
 
 	sanguis::collision::world::body_base &body_base_;
-
-	sanguis::server::collision::position_callback const position_callback_;
 
 	sanguis::collision::world::body_unique_ptr body_;
 };

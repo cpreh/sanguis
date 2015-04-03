@@ -18,7 +18,6 @@
 #include <sanguis/collision/world/object.hpp>
 #include <sanguis/collision/world/object_unique_ptr.hpp>
 #include <sanguis/collision/world/parameters.hpp>
-#include <sanguis/collision/world/position_change_callback.hpp>
 #include <sanguis/collision/world/update_result.hpp>
 #include <sanguis/creator/dim.hpp>
 #include <fcppt/make_int_range_count.hpp>
@@ -136,13 +135,6 @@ main()
 									sanguis::collision::radius{
 										50.f
 									},
-									sanguis::collision::world::position_change_callback{
-										[](
-											sanguis::collision::center
-										)
-										{
-										}
-									},
 									_group,
 									fake_body_base
 								}
@@ -248,6 +240,15 @@ main()
 	activate_bodies(
 		players
 	);
+
+	for(
+		auto const &ghost
+		:
+		ghosts
+	)
+		world->activate_ghost(
+			*ghost
+		);
 
 	fcppt::algorithm::repeat(
 		100,

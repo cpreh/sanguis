@@ -1,3 +1,4 @@
+#include <sanguis/collision/center.hpp>
 #include <sanguis/collision/world/body_base.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
@@ -6,7 +7,6 @@
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/body.hpp>
-#include <sanguis/server/collision/position_callback.hpp>
 #include <sanguis/server/collision/result.hpp>
 #include <sanguis/server/entities/combine_remove_from_world.hpp>
 #include <sanguis/server/entities/combine_transfer.hpp>
@@ -29,7 +29,6 @@
 #include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
-#include <functional>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -59,15 +58,7 @@ sanguis::server::entities::with_body::with_body(
 		sanguis::server::entities::radius(
 			dim_
 		),
-		*this,
-		sanguis::server::collision::position_callback(
-			std::bind(
-				&sanguis::server::entities::with_body::position_change,
-				this,
-				std::placeholders::_1
-			)
-		)
-		// TODO: Put the collision groups here!
+		*this
 	),
 	net_angle_(
 		this->diff_clock()
@@ -305,6 +296,24 @@ sanguis::server::entities::with_body::collision_with_body(
 {
 }
 
+void
+sanguis::server::entities::with_body::center_changed(
+	sanguis::collision::center const _center
+)
+{
+	sanguis::server::center const server_center(
+		_center.get()
+	);
+
+	this->update_ghost_center(
+		server_center
+	);
+
+	this->on_position_change(
+		server_center
+	);
+}
+
 sanguis::server::speed const
 sanguis::server::entities::with_body::initial_speed() const
 {
@@ -312,20 +321,6 @@ sanguis::server::entities::with_body::initial_speed() const
 		sanguis::server::speed(
 			sanguis::server::speed::value_type::null()
 		);
-}
-
-void
-sanguis::server::entities::with_body::position_change(
-	sanguis::server::center const _center
-)
-{
-	this->sanguis::server::entities::with_ghosts::update_center(
-		_center
-	);
-
-	this->on_position_change(
-		_center
-	);
 }
 
 void
