@@ -3,16 +3,15 @@
 
 #include <sanguis/buff_type_vector.hpp>
 #include <sanguis/server/buffs/buff_fwd.hpp>
-#include <sanguis/server/buffs/comparator.hpp>
+#include <sanguis/server/buffs/stack.hpp>
 #include <sanguis/server/buffs/unique_ptr.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_buffs_fwd.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <set>
-#include <typeindex>
 #include <unordered_map>
+#include <typeindex>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -55,16 +54,9 @@ protected:
 	buff_types() const;
 private:
 	typedef
-	std::multiset<
-		sanguis::server::buffs::unique_ptr,
-		sanguis::server::buffs::comparator
-	>
-	buff_set;
-
-	typedef
 	std::unordered_map<
 		std::type_index,
-		buff_set
+		sanguis::server::buffs::stack
 	>
 	buff_map;
 

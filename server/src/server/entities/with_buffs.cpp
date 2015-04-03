@@ -1,12 +1,16 @@
 #include <sanguis/buff_type.hpp>
 #include <sanguis/buff_type_vector.hpp>
 #include <sanguis/server/buffs/buff.hpp>
+#include <sanguis/server/buffs/stack.hpp>
 #include <sanguis/server/buffs/unique_ptr.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <fcppt/algorithm/map.hpp>
 #include <fcppt/assert/error.hpp>
+#include <fcppt/container/get_or_insert_result.hpp>
+#include <fcppt/container/get_or_insert_with_result.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <typeindex>
@@ -19,64 +23,42 @@ sanguis::server::entities::with_buffs::add_buff(
 	sanguis::server::buffs::unique_ptr &&_buff
 )
 {
-	// TODO: Clean this up
-	std::type_index const index(
-		typeid(
-			*_buff
+	typedef
+	fcppt::container::get_or_insert_result<
+		sanguis::server::buffs::stack &
+	>
+	result_type;
+
+	sanguis::server::buffs::buff const &cur_buff(
+		*_buff
+	);
+
+	result_type const result(
+		fcppt::container::get_or_insert_with_result(
+			buffs_,
+			std::type_index{
+				typeid(
+					cur_buff
+				)
+			},
+			[](
+				std::type_index
+			)
+			{
+				return
+					sanguis::server::buffs::stack();
+			}
 		)
 	);
 
-	buff_map::iterator const it(
-		buffs_.find(
-			index
-		)
+	sanguis::server::buffs::stack &set(
+		result.element()
 	);
 
 	if(
-		it == buffs_.end()
+		!result.inserted()
 	)
-	{
-		typedef
-		std::pair<
-			buff_map::iterator,
-			bool
-		>
-		insert_result;
-
-		insert_result const result(
-			buffs_.insert(
-				std::make_pair(
-					index,
-					buff_set()
-				)
-			)
-		);
-
-		_buff->add();
-
-		this->environment()->add_buff(
-			this->id(),
-			_buff->type()
-		);
-
-		result.first->second.insert(
-			std::move(
-				_buff
-			)
-		);
-
-		return;
-	}
-
-	buff_set &set(
-		it->second
-	);
-
-	FCPPT_ASSERT_ERROR(
-		!set.empty()
-	);
-
-	(*set.begin())->remove();
+		set.highest_buff().remove();
 
 	set.insert(
 		std::move(
@@ -84,7 +66,15 @@ sanguis::server::entities::with_buffs::add_buff(
 		)
 	);
 
-	(*set.begin())->add();
+	set.highest_buff().add();
+
+	if(
+		result.inserted()
+	)
+		this->environment()->add_buff(
+			this->id(),
+			cur_buff.type()
+		);
 }
 
 void
@@ -109,44 +99,20 @@ sanguis::server::entities::with_buffs::remove_buff(
 	);
 
 	FCPPT_ASSERT_ERROR(
-		it != buffs_.end()
+		it
+		!=
+		buffs_.end()
 	);
 
-	buff_set &set(
+	sanguis::server::buffs::stack &set(
 		it->second
 	);
 
-	(*set.begin())->remove();
+	set.highest_buff().remove();
 
-	{
-		buff_set::iterator const set_it(
-			std::find_if(
-				set.begin(),
-				set.end(),
-				[
-					&_buff
-				](
-					sanguis::server::buffs::unique_ptr const &_element
-				)
-				{
-					return
-						_element.get()
-						==
-						&_buff;
-				}
-			)
-		);
-
-		FCPPT_ASSERT_ERROR(
-			set_it
-			!=
-			set.end()
-		);
-
-		set.erase(
-			set_it
-		);
-	}
+	set.erase(
+		_buff
+	);
 
 	if(
 		set.empty()
@@ -162,7 +128,7 @@ sanguis::server::entities::with_buffs::remove_buff(
 		);
 	}
 	else
-		(*set.begin())->add();
+		set.highest_buff().add();
 }
 
 sanguis::server::entities::with_buffs::with_buffs()
@@ -180,32 +146,28 @@ sanguis::server::entities::with_buffs::~with_buffs()
 sanguis::buff_type_vector
 sanguis::server::entities::with_buffs::buff_types() const
 {
-	sanguis::buff_type_vector ret;
-
-	ret.reserve(
-		buffs_.size()
-	);
-
-	for(
-		auto const &buff
-		:
-		buffs_
-	)
-		ret.push_back(
-			(*buff.second.begin())->type()
-		);
-
 	return
-		ret;
+		fcppt::algorithm::map<
+			sanguis::buff_type_vector
+		>(
+			buffs_,
+			[](
+				buff_map::value_type const &_buffs
+			)
+			{
+				return
+					_buffs.second.highest_buff().type();
+			}
+		);
 }
 
 void
 sanguis::server::entities::with_buffs::update()
 {
 	for(
-		auto &elem
+		buff_map::value_type &elem
 		:
 		buffs_
 	)
-		(*elem.second.begin())->update();
+		elem.second.highest_buff().update();
 }

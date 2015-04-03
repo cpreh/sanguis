@@ -100,6 +100,8 @@ set(
 	include/sanguis/server/buffs/slow.hpp
 	include/sanguis/server/buffs/slow_create.hpp
 	include/sanguis/server/buffs/slow_factor.hpp
+	include/sanguis/server/buffs/stack.hpp
+	include/sanguis/server/buffs/stack_fwd.hpp
 	include/sanguis/server/buffs/unique_ptr.hpp
 	include/sanguis/server/center.hpp
 	include/sanguis/server/center_fwd.hpp
@@ -772,6 +774,7 @@ set(
 	src/server/buffs/comparator.cpp
 	src/server/buffs/provider.cpp
 	src/server/buffs/slow.cpp
+	src/server/buffs/stack.cpp
 	src/server/cheat/process.cpp
 	src/server/cheat/weapon_type.cpp
 	src/server/collision/body.cpp
