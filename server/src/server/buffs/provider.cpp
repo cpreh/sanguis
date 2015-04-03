@@ -19,9 +19,6 @@ sanguis::server::buffs::provider::provider()
 
 sanguis::server::buffs::provider::~provider()
 {
-	FCPPT_ASSERT_ERROR(
-		buffs_.empty()
-	);
 }
 
 void
