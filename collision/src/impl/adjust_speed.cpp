@@ -5,10 +5,12 @@
 #include <sanguis/collision/impl/adjust_speed.hpp>
 #include <sanguis/collision/impl/is_null.hpp>
 #include <sanguis/collision/impl/line_segment.hpp>
-#include <sanguis/collision/impl/optional_intersection.hpp>
+#include <sanguis/collision/impl/intersection.hpp>
 #include <sanguis/collision/impl/rect.hpp>
 #include <sanguis/collision/impl/rect_line_intersection.hpp>
+#include <fcppt/const.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/maybe.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/math/box/expand.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
@@ -23,71 +25,75 @@ sanguis::collision::impl::adjust_speed(
 	sanguis::collision::speed const _old_speed
 )
 {
-	sanguis::collision::impl::optional_intersection const intersection(
-		sanguis::collision::impl::rect_line_intersection(
-			fcppt::math::box::expand(
-				_obstacle,
-				fcppt::math::dim::to_vector(
-					_entity_size
-					/
+	return
+		fcppt::maybe(
+			sanguis::collision::impl::rect_line_intersection(
+				fcppt::math::box::expand(
+					_obstacle,
+					fcppt::math::dim::to_vector(
+						_entity_size
+						/
+						fcppt::literal<
+							sanguis::collision::unit
+						>(
+							2
+						)
+					)
+				),
+				_movement
+			),
+			fcppt::const_(
+				_old_speed
+			),
+			[
+				_old_speed
+			](
+				sanguis::collision::impl::intersection const _intersection
+			)
+			{
+				bool const vertical(
+					sanguis::collision::impl::is_null(
+						_intersection.dir().get().x()
+					)
+				);
+
+				bool const horizontal(
+					sanguis::collision::impl::is_null(
+						_intersection.dir().get().y()
+					)
+				);
+
+				FCPPT_ASSERT_ERROR(
+					vertical
+					!=
+					horizontal
+				);
+
+				sanguis::collision::unit const zero(
 					fcppt::literal<
 						sanguis::collision::unit
 					>(
-						2
+						0
 					)
-				)
-			),
-			_movement
-		)
-	);
+				);
 
-	if(
-		!intersection
-	)
-		return
-			_old_speed;
-
-	bool const vertical(
-		sanguis::collision::impl::is_null(
-			intersection->dir().get().x()
-		)
-	);
-
-	bool const horizontal(
-		sanguis::collision::impl::is_null(
-			intersection->dir().get().y()
-		)
-	);
-
-	FCPPT_ASSERT_ERROR(
-		vertical
-		!=
-		horizontal
-	);
-
-	sanguis::collision::unit const zero(
-		fcppt::literal<
-			sanguis::collision::unit
-		>(
-			0
-		)
-	);
-
-	return
-		vertical
-		?
-			sanguis::collision::speed(
-				sanguis::collision::vector2(
-					zero,
-					_old_speed.get().y()
-				)
-			)
-		:
-			sanguis::collision::speed(
-				sanguis::collision::vector2(
-					_old_speed.get().x(),
-					zero
-				)
-			)
-		;
+				return
+					vertical
+					?
+						sanguis::collision::speed(
+							sanguis::collision::vector2(
+								zero,
+								_old_speed.get().y()
+							)
+						)
+					:
+						sanguis::collision::speed(
+							sanguis::collision::vector2(
+								_old_speed.get().x(),
+								zero
+							)
+						)
+					;
+			}
+		);
 }

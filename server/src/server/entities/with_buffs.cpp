@@ -9,6 +9,7 @@
 #include <sanguis/server/environment/object.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/assert/error.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/get_or_insert_result.hpp>
 #include <fcppt/container/get_or_insert_with_result.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -71,7 +72,9 @@ sanguis::server::entities::with_buffs::add_buff(
 	if(
 		result.inserted()
 	)
-		this->environment()->add_buff(
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			this->environment()
+		).add_buff(
 			this->id(),
 			cur_buff.type()
 		);
@@ -92,6 +95,7 @@ sanguis::server::entities::with_buffs::remove_buff(
 		)
 	);
 
+	// TODO: Use find_opt_iterator
 	buff_map::iterator const it(
 		buffs_.find(
 			index
@@ -118,7 +122,9 @@ sanguis::server::entities::with_buffs::remove_buff(
 		set.empty()
 	)
 	{
-		this->environment()->remove_buff(
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			this->environment()
+		).remove_buff(
 			this->id(),
 			buff_type
 		);

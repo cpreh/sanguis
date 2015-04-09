@@ -5,7 +5,7 @@
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/entities/transfer_result.hpp>
 #include <fcppt/optional_impl.hpp>
-#include <fcppt/assert/pre.hpp>
+#include <fcppt/assert/optional_error.hpp>
 
 
 sanguis::server::entities::center_simple::center_simple()
@@ -17,12 +17,10 @@ sanguis::server::entities::center_simple::center_simple()
 sanguis::server::center const
 sanguis::server::entities::center_simple::center() const
 {
-	FCPPT_ASSERT_PRE(
-		center_
-	);
-
 	return
-		*center_;
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			center_
+		);
 }
 
 sanguis::server::entities::center_simple::~center_simple()

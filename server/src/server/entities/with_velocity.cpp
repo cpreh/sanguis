@@ -17,6 +17,7 @@
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <fcppt/maybe_void.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
@@ -61,10 +62,16 @@ sanguis::server::entities::with_velocity::update()
 {
 	sanguis::server::entities::with_body::update();
 
+	sanguis::server::environment::object &environment(
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			this->environment()
+		)
+	);
+
 	if(
 		net_center_.update()
 	)
-		this->environment()->center_changed(
+		environment.center_changed(
 			this->id(),
 			this->center()
 		);
@@ -72,7 +79,7 @@ sanguis::server::entities::with_velocity::update()
 	if(
 		net_speed_.update()
 	)
-		this->environment()->speed_changed(
+		environment.speed_changed(
 			this->id(),
 			this->speed()
 		);

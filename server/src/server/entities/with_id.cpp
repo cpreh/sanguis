@@ -2,7 +2,7 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/environment/object.hpp>
-#include <sanguis/server/environment/optional_object_ref.hpp>
+#include <fcppt/maybe_void.hpp>
 
 
 sanguis::server::entities::with_id::with_id(
@@ -30,14 +30,17 @@ sanguis::server::entities::with_id::id() const
 void
 sanguis::server::entities::with_id::transfer_from_world()
 {
-	sanguis::server::environment::optional_object_ref const env(
-		this->environment()
+	fcppt::maybe_void(
+		this->environment(),
+		[
+			this
+		](
+			sanguis::server::environment::object &_environment
+		)
+		{
+			_environment.request_transfer(
+				this->id()
+			);
+		}
 	);
-
-	if(
-		env
-	)
-		env->request_transfer(
-			this->id()
-		);
 }

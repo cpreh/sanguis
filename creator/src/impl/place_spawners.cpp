@@ -15,12 +15,12 @@
 #include <sanguis/creator/impl/closest_empty.hpp>
 #include <sanguis/creator/impl/enemy_type_container.hpp>
 #include <sanguis/creator/impl/log.hpp>
-#include <sanguis/creator/impl/optional_pos.hpp>
 #include <sanguis/creator/impl/place_boss.hpp>
 #include <sanguis/creator/impl/place_spawners.hpp>
 #include <sanguis/creator/impl/random/generator.hpp>
 #include <sanguis/creator/impl/random/uniform_int_wrapper_impl.hpp>
 #include <sanguis/creator/impl/random/uniform_pos.hpp>
+#include <fcppt/optional_to_exception.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/fold.hpp>
 #include <fcppt/assert/error_message.hpp>
@@ -85,21 +85,22 @@ sanguis::creator::impl::place_spawners(
 		_spawner_count
 	)
 	{
-		sanguis::creator::impl::optional_pos const
-		candidate{
-			sanguis::creator::impl::closest_empty(
-				_grid,
-				random_pos()
+		sanguis::creator::pos const candidate{
+			fcppt::optional_to_exception(
+				sanguis::creator::impl::closest_empty(
+					_grid,
+					random_pos()
+				),
+				[]{
+					return
+						sanguis::creator::exception{
+							FCPPT_TEXT(
+								"Could not find a free tile anywhere!"
+							)
+						};
+				}
 			)
 		};
-
-		FCPPT_ASSERT_ERROR_MESSAGE(
-			candidate,
-			FCPPT_TEXT(
-				"Could not find a free tile anywhere!"
-			)
-		);
-
 
 		if(
 			// TODO: Use any_of for ranges
@@ -121,7 +122,7 @@ sanguis::creator::impl::place_spawners(
 						||
 						sanguis::creator::tile_is_visible(
 							_grid,
-							*candidate,
+							candidate,
 							_cur.get()
 						);
 				}
@@ -130,14 +131,14 @@ sanguis::creator::impl::place_spawners(
 		{
 			_grid
 			[
-				*candidate
+				candidate
 			] =
 				_spawner_tile;
 
 			spawners.push_back(
 				sanguis::creator::spawn{
 					sanguis::creator::spawn_pos{
-						*candidate
+						candidate
 					},
 					_enemy_types[
 						random_monster(

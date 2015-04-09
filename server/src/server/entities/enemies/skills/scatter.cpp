@@ -19,9 +19,9 @@
 #include <sanguis/server/entities/projectiles/scatter_create.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
-#include <sanguis/server/environment/optional_object_ref.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/repeat.hpp>
 
@@ -61,77 +61,79 @@ sanguis::server::entities::enemies::skills::scatter::update(
 	)
 		return;
 
-	sanguis::server::environment::optional_object_ref const env(
-		_entity.environment()
-	);
-
-	if(
-		!env
-	)
-		return;
-
-	fcppt::algorithm::repeat(
-		// TODO
-		5,
+	fcppt::maybe_void(
+		_entity.environment(),
 		[
 			this,
-			&_entity,
-			env
-		]
+			&_entity
+		](
+			sanguis::server::environment::object &_environment
+		)
 		{
-			sanguis::server::damage::modified_array const damage_modifiers(
-				sanguis::server::entities::modify_damages(
-					_entity,
-					sanguis::server::damage::explosive()
-				)
-			);
-
-			sanguis::server::environment::insert_no_result(
-				*_entity.environment(),
-				fcppt::make_unique_ptr<
-					sanguis::server::entities::projectiles::scatter
-				>(
-					random_generator_,
-					env->load_context(),
-					_entity.team(),
-					sanguis::server::direction(
-						_entity.angle().get()
-					),
-					sanguis::server::entities::projectiles::scatter_create(
-						[
-							damage_modifiers
-						](
-							sanguis::server::environment::object &_env,
-							sanguis::server::team const _team,
-							sanguis::server::angle const _angle
+			fcppt::algorithm::repeat(
+				// TODO
+				5,
+				[
+					this,
+					&_entity,
+					&_environment
+				]
+				{
+					sanguis::server::damage::modified_array const damage_modifiers(
+						sanguis::server::entities::modify_damages(
+							_entity,
+							sanguis::server::damage::explosive()
 						)
-						{
-							return
-								fcppt::make_unique_ptr<
-									sanguis::server::entities::projectiles::rocket
-								>(
-									_env.load_context(),
-									_team,
-									// TODO
-									sanguis::server::damage::unit(
-										10.f
-									),
-									damage_modifiers,
-									// TODO
-									sanguis::server::aoe(
-										100.f
-									),
-									sanguis::server::direction(
-										_angle.get()
-									)
-								);
-						}
-					)
-				),
-				sanguis::server::entities::insert_parameters(
-					_entity.center(),
-					_entity.angle()
-				)
+					);
+
+					sanguis::server::environment::insert_no_result(
+						_environment,
+						fcppt::make_unique_ptr<
+							sanguis::server::entities::projectiles::scatter
+						>(
+							random_generator_,
+							_environment.load_context(),
+							_entity.team(),
+							sanguis::server::direction(
+								_entity.angle().get()
+							),
+							sanguis::server::entities::projectiles::scatter_create(
+								[
+									damage_modifiers
+								](
+									sanguis::server::environment::object &_env,
+									sanguis::server::team const _team,
+									sanguis::server::angle const _angle
+								)
+								{
+									return
+										fcppt::make_unique_ptr<
+											sanguis::server::entities::projectiles::rocket
+										>(
+											_env.load_context(),
+											_team,
+											// TODO
+											sanguis::server::damage::unit(
+												10.f
+											),
+											damage_modifiers,
+											// TODO
+											sanguis::server::aoe(
+												100.f
+											),
+											sanguis::server::direction(
+												_angle.get()
+											)
+										);
+								}
+							)
+						),
+						sanguis::server::entities::insert_parameters(
+							_entity.center(),
+							_entity.angle()
+						)
+					);
+				}
 			);
 		}
 	);

@@ -8,10 +8,11 @@
 #include <sanguis/server/ai/speed_factor.hpp>
 #include <sanguis/server/ai/stop.hpp>
 #include <sanguis/server/ai/target.hpp>
-#include <sanguis/server/ai/pathing/optional_target.hpp>
 #include <sanguis/server/ai/pathing/positions_are_close.hpp>
+#include <sanguis/server/ai/pathing/target.hpp>
 #include <sanguis/server/world/center_to_grid_pos.hpp>
 #include <sanguis/server/world/grid_pos_to_center.hpp>
+#include <fcppt/maybe.hpp>
 
 
 void
@@ -52,42 +53,49 @@ sanguis::server::ai::go_to_target(
 		return;
 	}
 
-	sanguis::server::ai::pathing::optional_target const grid_target{
-		_context.continue_path()
-	};
-
-	if(
-		grid_target
-	)
-	{
-		sanguis::server::ai::rotate_and_move_to_target(
-			_context.me(),
-			sanguis::server::ai::target{
-				sanguis::server::world::grid_pos_to_center(
-					grid_target->get()
-				)
-			},
-			_speed_factor
-		);
-
-		return;
-	}
-
 	sanguis::creator::pos const target_grid_pos{
 		sanguis::server::world::center_to_grid_pos(
 			_target.get()
 		)
 	};
 
-	if(
-		!grid_target
-		||
-		!sanguis::server::ai::pathing::positions_are_close(
-			grid_target->get(),
+	fcppt::maybe(
+		_context.continue_path(),
+		[
+			&_context,
 			target_grid_pos
+		]{
+			_context.path_find(
+				target_grid_pos
+			);
+		},
+		[
+			&_context,
+			_speed_factor,
+			target_grid_pos
+		](
+			sanguis::server::ai::pathing::target const _grid_target
 		)
-	)
-		_context.path_find(
-			target_grid_pos
-		);
+		{
+			if(
+				!sanguis::server::ai::pathing::positions_are_close(
+					_grid_target.get(),
+					target_grid_pos
+				)
+			)
+				_context.path_find(
+					target_grid_pos
+				);
+			else
+				sanguis::server::ai::rotate_and_move_to_target(
+					_context.me(),
+					sanguis::server::ai::target{
+						sanguis::server::world::grid_pos_to_center(
+							_grid_target.get()
+						)
+					},
+					_speed_factor
+				);
+		}
+	);
 }

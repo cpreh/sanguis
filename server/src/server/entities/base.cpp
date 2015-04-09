@@ -11,6 +11,7 @@
 #include <sanguis/server/entities/transfer_result.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/environment/optional_object_ref.hpp>
+#include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -35,37 +36,39 @@ sanguis::server::entities::base::transfer(
 			_environment
 		);
 
-	sanguis::server::entities::optional_transfer_result result(
-		this->on_transfer(
-			sanguis::server::entities::transfer_parameters(
-				_environment.collision_world(),
-				_insert_parameters.created(),
-				_grid,
-				_insert_parameters.center(),
-				_insert_parameters.angle()
-			)
-		)
-	);
-
-	// TODO: Use maybe_move?
-	if(
-		result
-		&&
-		_insert_parameters.created().get()
-	)
-		return
-			sanguis::server::entities::optional_transfer_result(
-				sanguis::server::entities::combine_transfer(
-					std::move(
-						*result
-					),
-					this->on_create()
-				)
-			);
-
 	return
-		std::move(
-			result
+		fcppt::optional_bind_construct(
+			this->on_transfer(
+				sanguis::server::entities::transfer_parameters(
+					_environment.collision_world(),
+					_insert_parameters.created(),
+					_grid,
+					_insert_parameters.center(),
+					_insert_parameters.angle()
+				)
+			),
+			[
+				&_insert_parameters,
+				this
+			](
+				sanguis::server::entities::transfer_result &&_result
+			)
+			{
+				return
+					_insert_parameters.created().get()
+					?
+						sanguis::server::entities::combine_transfer(
+							std::move(
+								_result
+							),
+							this->on_create()
+						)
+					:
+						std::move(
+							_result
+						)
+					;
+			}
 		);
 }
 

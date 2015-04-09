@@ -4,10 +4,12 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_perks.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
+#include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/perks/create.hpp>
 #include <sanguis/server/perks/perk.hpp>
 #include <sanguis/server/perks/unique_ptr.hpp>
 #include <fcppt/from_optional.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/find_opt.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -67,6 +69,12 @@ sanguis::server::entities::with_perks::~with_perks()
 void
 sanguis::server::entities::with_perks::update()
 {
+	sanguis::server::environment::object &environment(
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			this->environment()
+		)
+	);
+
 	for(
 		auto const &perk
 		:
@@ -74,6 +82,6 @@ sanguis::server::entities::with_perks::update()
 	)
 		perk.second->update(
 			*this,
-			*this->environment()
+			environment
 		);
 }

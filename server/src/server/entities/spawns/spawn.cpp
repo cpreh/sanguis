@@ -18,7 +18,7 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <fcppt/algorithm/repeat.hpp>
-#include <fcppt/assert/pre.hpp>
+#include <fcppt/assert/optional_error.hpp>
 
 
 void
@@ -62,23 +62,19 @@ sanguis::server::entities::spawns::spawn::spawn(
 sanguis::server::center const
 sanguis::server::entities::spawns::spawn::center() const
 {
-	FCPPT_ASSERT_PRE(
-		center_
-	);
-
 	return
-		*center_;
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			center_
+		);
 }
 
 sanguis::server::angle const
 sanguis::server::entities::spawns::spawn::angle() const
 {
-	FCPPT_ASSERT_PRE(
-		angle_
-	);
-
 	return
-		*angle_;
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			angle_
+		);
 }
 
 sanguis::server::entities::optional_transfer_result
@@ -112,13 +108,19 @@ sanguis::server::entities::spawns::spawn::update()
 				this
 			]()
 			{
-				this->environment()->insert(
+				sanguis::server::environment::object &environment(
+					FCPPT_ASSERT_OPTIONAL_ERROR(
+						this->environment()
+					)
+				);
+
+				environment.insert(
 					sanguis::server::entities::enemies::create(
 						random_generator_,
 						enemy_type_,
 						enemy_kind_,
 						difficulty_,
-						this->environment()->load_context(),
+						environment.load_context(),
 						sanguis::server::entities::spawn_owner(
 							this->link()
 						),

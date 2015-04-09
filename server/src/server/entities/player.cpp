@@ -74,13 +74,15 @@
 #include <sanguis/server/weapons/default_irs.hpp>
 #include <sanguis/server/weapons/optional_unique_ptr.hpp>
 #include <sanguis/server/weapons/player_start_weapon.hpp>
+#include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/assert/error.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/atan2.hpp>
@@ -228,7 +230,9 @@ sanguis::server::entities::player::add_exp(
 			+ _exp.get()
 		);
 
-	this->environment()->exp_changed(
+	FCPPT_ASSERT_OPTIONAL_ERROR(
+		this->environment()
+	).exp_changed(
 		this->player_id(),
 		exp_
 	);
@@ -257,7 +261,9 @@ sanguis::server::entities::player::add_exp(
 
 	level_ = new_level;
 
-	this->environment()->level_changed(
+	FCPPT_ASSERT_OPTIONAL_ERROR(
+		this->environment()
+	).level_changed(
 		this->player_id(),
 		level_
 	);
@@ -323,13 +329,7 @@ sanguis::server::entities::player::drop_or_pickup_weapon(
 		)
 	);
 
-	typedef
-	fcppt::optional<
-		sanguis::server::entities::pickups::weapon &
-	>
-	result_type;
-
-	result_type const closest_pickup(
+	fcppt::maybe_void(
 		sanguis::server::closest_entity(
 			*this,
 			weapon_pickups_,
@@ -347,33 +347,51 @@ sanguis::server::entities::player::drop_or_pickup_weapon(
 					_is_primary
 					;
 			}
+		),
+		[
+			this
+		](
+			sanguis::server::entities::pickups::weapon &_pickup
 		)
+		{
+			this->pickup_weapon(
+				_pickup.obtain()
+			);
+		}
 	);
 
-	if(
-		closest_pickup
-	)
-		this->pickup_weapon(
-			closest_pickup->obtain()
-		);
-
-	if(
-		dropped
-	)
-		this->environment()->insert(
-			fcppt::make_unique_ptr<
-				sanguis::server::entities::pickups::weapon
-			>(
-				this->environment()->load_context(),
-				this->team(),
-				std::move(
-					*dropped
+	fcppt::maybe_void(
+		std::move(
+			dropped
+		),
+		[
+			this
+		](
+			sanguis::server::weapons::unique_ptr &&_dropped
+		)
+		{
+			sanguis::server::environment::object &environment(
+				FCPPT_ASSERT_OPTIONAL_ERROR(
+					this->environment()
 				)
-			),
-			sanguis::server::entities::insert_parameters_center(
-				this->center()
-			)
-		);
+			);
+
+			environment.insert(
+				fcppt::make_unique_ptr<
+					sanguis::server::entities::pickups::weapon
+				>(
+					environment.load_context(),
+					this->team(),
+					std::move(
+						_dropped
+					)
+				),
+				sanguis::server::entities::insert_parameters_center(
+					this->center()
+				)
+			);
+		}
+	);
 }
 
 sanguis::server::perks::tree::container const &
@@ -414,7 +432,9 @@ sanguis::server::entities::player::team() const
 void
 sanguis::server::entities::player::remove_from_game()
 {
-	this->environment()->remove_player(
+	FCPPT_ASSERT_OPTIONAL_ERROR(
+		this->environment()
+	).remove_player(
 		this->player_id()
 	);
 }
@@ -466,7 +486,9 @@ sanguis::server::entities::player::add_sight_range(
 	sanguis::collision::world::created const _created
 )
 {
-	this->environment()->add_sight_range(
+	FCPPT_ASSERT_OPTIONAL_ERROR(
+		this->environment()
+	).add_sight_range(
 		this->player_id(),
 		_entity,
 		_created
@@ -478,7 +500,9 @@ sanguis::server::entities::player::remove_sight_range(
 	sanguis::server::entities::with_id const &_entity
 )
 {
-	this->environment()->remove_sight_range(
+	FCPPT_ASSERT_OPTIONAL_ERROR(
+		this->environment()
+	).remove_sight_range(
 		this->player_id(),
 		_entity
 	);
@@ -602,7 +626,9 @@ sanguis::server::entities::player::on_new_weapon(
 	sanguis::server::weapons::weapon const &_weapon
 )
 {
-	this->environment()->got_weapon(
+	FCPPT_ASSERT_OPTIONAL_ERROR(
+		this->environment()
+	).got_weapon(
 		this->player_id(),
 		_weapon.description()
 	);
@@ -613,7 +639,9 @@ sanguis::server::entities::player::on_drop_weapon(
 	sanguis::is_primary_weapon const _is_primary
 )
 {
-	this->environment()->remove_weapon(
+	FCPPT_ASSERT_OPTIONAL_ERROR(
+		this->environment()
+	).remove_weapon(
 		this->player_id(),
 		_is_primary
 	);
@@ -625,7 +653,9 @@ sanguis::server::entities::player::on_magazine_remaining(
 	sanguis::magazine_remaining const _magazine_remaining
 )
 {
-	this->environment()->magazine_remaining(
+	FCPPT_ASSERT_OPTIONAL_ERROR(
+		this->environment()
+	).magazine_remaining(
 		this->player_id(),
 		_is_primary,
 		_magazine_remaining
@@ -638,7 +668,9 @@ sanguis::server::entities::player::on_reload_time(
 	sanguis::duration const _reload_time
 )
 {
-	this->environment()->reload_time(
+	FCPPT_ASSERT_OPTIONAL_ERROR(
+		this->environment()
+	).reload_time(
 		this->player_id(),
 		_is_primary,
 		_reload_time

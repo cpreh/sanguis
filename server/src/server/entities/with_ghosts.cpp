@@ -12,6 +12,7 @@
 #include <sanguis/server/environment/object.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map_concat_move.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -47,10 +48,6 @@ sanguis::server::entities::with_ghosts::add_ghost(
 	sanguis::server::collision::ghost &&_ghost
 )
 {
-	FCPPT_ASSERT_PRE(
-		this->environment()
-	);
-
 	ghosts_.push_back(
 		std::move(
 			_ghost
@@ -59,7 +56,9 @@ sanguis::server::entities::with_ghosts::add_ghost(
 
 	return
 		ghosts_.back().transfer(
-			this->environment()->collision_world(),
+			FCPPT_ASSERT_OPTIONAL_ERROR(
+				this->environment()
+			).collision_world(),
 			this->center()
 		);
 }
@@ -112,6 +111,12 @@ sanguis::server::entities::with_ghosts::on_transfer(
 sanguis::server::entities::remove_from_world_result
 sanguis::server::entities::with_ghosts::remove_from_world()
 {
+	sanguis::server::environment::object &environment(
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			this->environment()
+		)
+	);
+
 	return
 		sanguis::server::entities::remove_from_world_result(
 			fcppt::algorithm::map_concat_move<
@@ -119,14 +124,15 @@ sanguis::server::entities::with_ghosts::remove_from_world()
 			>(
 				ghosts_,
 				[
-					this
+					this,
+					&environment
 				](
 					sanguis::server::collision::ghost &_ghost
 				)
 				{
 					return
 						_ghost.destroy(
-							this->environment()->collision_world()
+							environment.collision_world()
 						);
 				}
 			)

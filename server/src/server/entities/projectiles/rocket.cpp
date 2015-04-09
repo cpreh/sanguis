@@ -15,6 +15,7 @@
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/assert/optional_error.hpp>
 
 
 sanguis::server::entities::projectiles::rocket::rocket(
@@ -66,7 +67,9 @@ void
 sanguis::server::entities::projectiles::rocket::remove_from_game()
 {
 	sanguis::server::environment::insert_no_result(
-		*this->environment(),
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			this->environment()
+		),
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::projectiles::aoe_damage
 		>(

@@ -23,6 +23,7 @@
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <fcppt/maybe_void.hpp>
 
 
 sanguis::server::entities::destructible::destructible(
@@ -75,16 +76,23 @@ sanguis::server::entities::destructible::update()
 void
 sanguis::server::entities::destructible::remove_from_game()
 {
-	if(
-		this->environment()
-	)
-		this->environment()->pickup_chance(
-			sanguis::server::pickup_probability(
-				0.1f
-			),
-			difficulty_,
-			this->center()
-		);
+	fcppt::maybe_void(
+		this->environment(),
+		[
+			this
+		](
+			sanguis::server::environment::object &_environment
+		)
+		{
+			_environment.pickup_chance(
+				sanguis::server::pickup_probability(
+					0.1f
+				),
+				difficulty_,
+				this->center()
+			);
+		}
+	);
 }
 
 sanguis::server::team

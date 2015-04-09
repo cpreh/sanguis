@@ -49,6 +49,7 @@
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/maybe_void.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -179,8 +180,14 @@ sanguis::server::entities::enemies::enemy::remove_from_game()
 		}
 	);
 
+	sanguis::server::environment::object &environment(
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			this->environment()
+		)
+	);
+
 	sanguis::server::environment::insert_no_result(
-		*this->environment(),
+		environment,
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::exp_area
 		>(
@@ -191,7 +198,7 @@ sanguis::server::entities::enemies::enemy::remove_from_game()
 		)
 	);
 
-	this->environment()->pickup_chance(
+	environment.pickup_chance(
 		pickup_probability_,
 		difficulty_,
 		this->center()

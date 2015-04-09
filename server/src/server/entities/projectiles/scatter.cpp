@@ -16,6 +16,7 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/environment/optional_object_ref.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/random/distribution/basic_impl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real_impl.hpp>
@@ -95,30 +96,31 @@ sanguis::server::entities::projectiles::scatter::update()
 	)
 		return;
 
-	sanguis::server::angle const random_angle(
-		angle_rng_()
-	);
-
-	sanguis::server::environment::optional_object_ref const env(
-		this->environment()
-	);
-
-	if(
-		!env
-	)
-		return;
-
-	sanguis::server::environment::insert_no_result(
-		*env,
-		create_(
-			*env,
-			this->team(),
-			random_angle
-		),
-		sanguis::server::entities::insert_parameters(
-			this->center(),
-			random_angle
+	fcppt::maybe_void(
+		this->environment(),
+		[
+			this
+		](
+			sanguis::server::environment::object &_environment
 		)
+		{
+			sanguis::server::angle const random_angle(
+				angle_rng_()
+			);
+
+			sanguis::server::environment::insert_no_result(
+				_environment,
+				create_(
+					_environment,
+					this->team(),
+					random_angle
+				),
+				sanguis::server::entities::insert_parameters(
+					this->center(),
+					random_angle
+				)
+			);
+		}
 	);
 }
 

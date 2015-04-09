@@ -25,6 +25,7 @@
 #include <fcppt/maybe.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/assert/error.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -162,7 +163,9 @@ sanguis::server::ai::behavior::follow_friend::target_enters(
 	);
 
 	target_ =
-		this->first_target()->link();
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			this->first_target()
+		).link();
 }
 
 void

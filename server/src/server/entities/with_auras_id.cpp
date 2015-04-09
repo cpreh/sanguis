@@ -10,7 +10,7 @@
 #include <sanguis/server/environment/object.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
-#include <fcppt/assert/pre.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -21,10 +21,6 @@ sanguis::server::entities::with_auras_id::add_aura(
 	sanguis::server::auras::unique_ptr &&_aura
 )
 {
-	FCPPT_ASSERT_PRE(
-		this->environment()
-	);
-
 	fcppt::maybe_void(
 		_aura->type(),
 		[
@@ -33,7 +29,9 @@ sanguis::server::entities::with_auras_id::add_aura(
 			sanguis::aura_type const _aura_type
 		)
 		{
-			this->environment()->add_aura(
+			FCPPT_ASSERT_OPTIONAL_ERROR(
+				this->environment()
+			).add_aura(
 				this->id(),
 				_aura_type
 			);

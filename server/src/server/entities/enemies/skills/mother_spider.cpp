@@ -17,7 +17,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/repeat.hpp>
-#include <fcppt/assert/pre.hpp>
+#include <fcppt/assert/optional_error.hpp>
 
 
 sanguis::server::entities::enemies::skills::mother_spider::mother_spider()
@@ -33,28 +33,34 @@ sanguis::server::entities::enemies::skills::mother_spider::on_die(
 	sanguis::server::entities::enemies::enemy const &_enemy
 )
 {
-	FCPPT_ASSERT_PRE(
-		_enemy.primary_weapon()
+	sanguis::server::weapons::weapon const &primary_weapon(
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			_enemy.primary_weapon()
+		)
 	);
 
-	FCPPT_ASSERT_PRE(
-		_enemy.environment()
+	sanguis::server::environment::object &environment(
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			_enemy.environment()
+		)
 	);
 
 	// TODO: Make copies of enemies smaller
 	fcppt::algorithm::repeat(
 		1u,
 		[
-			&_enemy
+			&_enemy,
+			&primary_weapon,
+			&environment
 		]
 		{
-			_enemy.environment()->insert(
+			environment.insert(
 				fcppt::make_unique_ptr<
 					sanguis::server::entities::enemies::normal
 				>(
 					sanguis::server::entities::enemies::parameters{
 						_enemy.enemy_type(),
-						_enemy.environment()->load_context(),
+						environment.load_context(),
 						_enemy.armor(),
 						// TODO: This parameter should probably be of type max_health
 						sanguis::server::health{
@@ -66,7 +72,7 @@ sanguis::server::entities::enemies::skills::mother_spider::on_die(
 						},
 						_enemy.max_movement_speed(),
 						_enemy.create_ai(),
-						_enemy.primary_weapon()->clone(),
+						primary_weapon.clone(),
 						sanguis::server::pickup_probability{
 							0.f
 						},

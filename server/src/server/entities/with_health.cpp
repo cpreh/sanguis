@@ -20,6 +20,7 @@
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_enum_range.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
 #include <functional>
@@ -179,7 +180,9 @@ sanguis::server::entities::with_health::update()
 	if(
 		net_health_.update()
 	)
-		this->environment()->health_changed(
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			this->environment()
+		).health_changed(
 			this->id(),
 			this->current_health()
 		);
@@ -203,7 +206,9 @@ sanguis::server::entities::with_health::health_change()
 void
 sanguis::server::entities::with_health::max_health_change()
 {
-	this->environment()->max_health_changed(
+	FCPPT_ASSERT_OPTIONAL_ERROR(
+		this->environment()
+	).max_health_changed(
 		this->id(),
 		this->max_health()
 	);

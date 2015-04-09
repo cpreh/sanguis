@@ -26,18 +26,19 @@
 #include <sanguis/server/weapons/optional_unique_ptr.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/algorithm/array_init_move.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/pre.hpp>
-#include <fcppt/variant/get.hpp>
+#include <fcppt/variant/get_exn.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::entities::with_weapon::with_weapon(
-	sanguis::server::weapons::optional_unique_ptr &&_start_weapon,
+	sanguis::server::weapons::optional_unique_ptr &&_opt_start_weapon,
 	sanguis::server::weapons::ias const _ias,
 	sanguis::server::weapons::irs const _irs
 )
@@ -72,14 +73,21 @@ sanguis::server::entities::with_weapon::with_weapon(
 		)
 	}
 {
-	if(
-		_start_weapon
-	)
-		this->pickup_weapon(
-			std::move(
-				*_start_weapon
-			)
-		);
+	fcppt::maybe_void(
+		_opt_start_weapon,
+		[
+			this
+		](
+			sanguis::server::weapons::unique_ptr &&_start_weapon
+		)
+		{
+			this->pickup_weapon(
+				std::move(
+					_start_weapon
+				)
+			);
+		}
+	);
 }
 
 sanguis::server::entities::with_weapon::~with_weapon()
@@ -122,18 +130,20 @@ sanguis::optional_primary_weapon_type const
 sanguis::server::entities::with_weapon::primary_weapon_type() const
 {
 	return
-		this->primary_weapon()
-		?
-			sanguis::optional_primary_weapon_type(
-				fcppt::variant::get<
-					sanguis::primary_weapon_type
-				>(
-					this->primary_weapon()->type()
-				)
+		fcppt::optional_bind_construct(
+			this->primary_weapon(),
+			[](
+				sanguis::server::weapons::weapon const &_primary_weapon
 			)
-		:
-			sanguis::optional_primary_weapon_type()
-		;
+			{
+				return
+					fcppt::variant::get_exn<
+						sanguis::primary_weapon_type
+					>(
+						_primary_weapon.type()
+					);
+			}
+		);
 }
 
 void

@@ -9,6 +9,7 @@
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/world/center_to_grid_pos.hpp>
+#include <fcppt/assert/optional_error.hpp>
 
 
 sanguis::server::ai::context::context(
@@ -91,7 +92,9 @@ sanguis::creator::grid const &
 sanguis::server::ai::context::grid() const
 {
 	return
-		this->me().environment()->grid();
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			this->me().environment()
+		).grid();
 }
 
 sanguis::server::entities::with_ai &

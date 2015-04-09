@@ -28,7 +28,7 @@
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
-#include <fcppt/assert/pre.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -70,10 +70,12 @@ sanguis::server::entities::pickups::weapon::~weapon()
 sanguis::server::weapons::unique_ptr
 sanguis::server::entities::pickups::weapon::obtain()
 {
-	// TODO: Should we make a function for this?
+	// TODO: Return an optional_unique_ptr here?
 	sanguis::server::weapons::unique_ptr result(
 		std::move(
-			*weapon_
+			FCPPT_ASSERT_OPTIONAL_ERROR(
+				weapon_
+			)
 		)
 	);
 
@@ -163,10 +165,8 @@ sanguis::server::entities::pickups::weapon::add_message(
 sanguis::server::weapons::weapon &
 sanguis::server::entities::pickups::weapon::get() const
 {
-	FCPPT_ASSERT_PRE(
-		weapon_
-	);
-
 	return
-		**weapon_;
+		*FCPPT_ASSERT_OPTIONAL_ERROR(
+			weapon_
+		);
 }

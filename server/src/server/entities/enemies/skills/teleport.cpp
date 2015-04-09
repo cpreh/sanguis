@@ -6,8 +6,9 @@
 #include <sanguis/server/entities/enemies/skills/cooldown.hpp>
 #include <sanguis/server/entities/enemies/skills/skill.hpp>
 #include <sanguis/server/entities/enemies/skills/teleport.hpp>
-#include <sanguis/server/weapons/optional_target.hpp>
+#include <sanguis/server/weapons/target.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/text.hpp>
 
 
@@ -42,18 +43,21 @@ sanguis::server::entities::enemies::skills::teleport::update(
 	)
 		return;
 
-	sanguis::server::weapons::optional_target const target(
-		_entity.target()
+	fcppt::maybe_void(
+		_entity.target(),
+		[
+			&_entity
+		](
+			sanguis::server::weapons::target const _target
+		)
+		{
+			_entity.center(
+				sanguis::server::center(
+					_target.get()
+				)
+			);
+		}
 	);
-
-	if(
-		target
-	)
-		_entity.center(
-			sanguis::server::center(
-				target->get()
-			)
-		);
 }
 
 sanguis::server::entities::enemies::attribute

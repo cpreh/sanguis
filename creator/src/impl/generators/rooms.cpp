@@ -339,7 +339,7 @@ sanguis::creator::impl::generators::rooms(
 
 		fcppt::optional<
 			::signed_rect
-		> neighbor;
+		> opt_neighbor;
 
 		for (
 			auto const &other
@@ -356,7 +356,7 @@ sanguis::creator::impl::generators::rooms(
 			// so it's next to it
 			if (e != ::edge::none)
 			{
-				neighbor = other;
+				opt_neighbor = other;
 				clipped_edge = e;
 			}
 
@@ -370,8 +370,12 @@ sanguis::creator::impl::generators::rooms(
 				break;
 		}
 
-		if (!wellformed || !neighbor)
+		if (!wellformed || !opt_neighbor)
 			continue;
+
+		::signed_rect const neighbor(
+			opt_neighbor.get_unsafe()
+		);
 
 		switch (clipped_edge)
 		{
@@ -381,7 +385,7 @@ sanguis::creator::impl::generators::rooms(
 				int_type xmin{
 					std::max(
 						rect.left(),
-						neighbor->left()
+						neighbor.left()
 					) +
 					1
 				};
@@ -389,7 +393,7 @@ sanguis::creator::impl::generators::rooms(
 				int_type xmax{
 					std::min(
 						rect.right(),
-						neighbor->right()
+						neighbor.right()
 					) -
 					2
 				};
@@ -421,7 +425,7 @@ sanguis::creator::impl::generators::rooms(
 				int_type const ymin{
 					std::max(
 						rect.top(),
-						neighbor->top()
+						neighbor.top()
 					) +
 					1
 				};
@@ -429,7 +433,7 @@ sanguis::creator::impl::generators::rooms(
 				int_type const ymax{
 					std::min(
 						rect.bottom(),
-						neighbor->bottom()
+						neighbor.bottom()
 					) -
 					2
 				};

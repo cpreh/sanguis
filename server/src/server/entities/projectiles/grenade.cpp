@@ -23,6 +23,7 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <chrono>
@@ -136,7 +137,9 @@ sanguis::server::entities::projectiles::grenade::update()
 void
 sanguis::server::entities::projectiles::grenade::remove_from_game()
 {
-	this->environment()->insert(
+	FCPPT_ASSERT_OPTIONAL_ERROR(
+		this->environment()
+	).insert(
 		fcppt::make_unique_ptr<
 			sanguis::server::entities::projectiles::aoe_damage
 		>(

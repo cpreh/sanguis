@@ -2,6 +2,7 @@
 #define SANGUIS_MODEL_IMPL_DESERIALIZE_MAP_HPP_INCLUDED
 
 #include <sge/parse/json/find_member_exn.hpp>
+#include <sge/parse/json/get_exn.hpp>
 #include <sge/parse/json/member.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/string.hpp>
@@ -58,9 +59,11 @@ map(
 							_member.first
 						),
 						_deserialize_inner(
-							_member.second.get<
+							sge::parse::json::get_exn<
 								sge::parse::json::object
-							>()
+							>(
+								_member.second
+							)
 						)
 					);
 			}
