@@ -70,9 +70,16 @@ sanguis::server::weapons::states::idle::react(
 )
 {
 	return
-		this->transit<
-			sanguis::server::weapons::states::reloading
-		>();
+		this->context<
+			sanguis::server::weapons::weapon
+		>().reload_time().has_value()
+		?
+			this->transit<
+				sanguis::server::weapons::states::reloading
+			>()
+		:
+			this->discard_event()
+		;
 }
 
 boost::statechart::result
