@@ -164,13 +164,19 @@ private:
 	) const;
 
 	sanguis::server::entities::with_weapon::optional_weapon_ref const
-	is_primary_to_optional_weapon(
+	get_weapon(
 		sanguis::is_primary_weapon
 	) const;
 
-	sanguis::server::weapons::optional_unique_ptr &
-	is_primary_to_weapon_unique_ptr(
+	sanguis::server::weapons::optional_unique_ptr
+	move_weapon(
 		sanguis::is_primary_weapon
+	);
+
+	sanguis::server::weapons::weapon &
+	set_weapon(
+		sanguis::is_primary_weapon,
+		sanguis::server::weapons::unique_ptr &&
 	);
 
 	void
