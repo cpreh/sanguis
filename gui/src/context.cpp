@@ -2,6 +2,7 @@
 #include <sanguis/gui/focus_change.hpp>
 #include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/optional_ref.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/assert/error.hpp>
 
 
@@ -14,7 +15,7 @@ sanguis::gui::context::context()
 sanguis::gui::context::~context()
 {
 	FCPPT_ASSERT_ERROR(
-		!focus_
+		!focus_.has_value()
 	);
 }
 
@@ -23,12 +24,17 @@ sanguis::gui::context::focus(
 	sanguis::gui::widget::base &_widget
 )
 {
-	if(
-		focus_
-	)
-		focus_->on_focus_changed(
-			sanguis::gui::focus_change::lost
-		);
+	fcppt::maybe_void(
+		focus_,
+		[](
+			sanguis::gui::widget::base &_focus
+		)
+		{
+			_focus.on_focus_changed(
+				sanguis::gui::focus_change::lost
+			);
+		}
+	);
 
 	focus_ =
 		sanguis::gui::widget::optional_ref(
@@ -45,15 +51,24 @@ sanguis::gui::context::destroy(
 	sanguis::gui::widget::base const &_widget
 )
 {
-	if(
-		focus_
-		&&
-		&*focus_
-		==
-		&_widget
-	)
-		focus_ =
-			sanguis::gui::widget::optional_ref();
+	fcppt::maybe_void(
+		focus_,
+		[
+			&_widget,
+			this
+		](
+			sanguis::gui::widget::base const &_focus
+		)
+		{
+			if(
+				&_focus
+				==
+				&_widget
+			)
+				focus_ =
+					sanguis::gui::widget::optional_ref();
+		}
+	);
 }
 
 sanguis::gui::widget::optional_ref const

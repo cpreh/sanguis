@@ -40,12 +40,15 @@
 #include <sge/rucksack/axis.hpp>
 #include <sge/rucksack/dim.hpp>
 #include <sge/viewport/manager_fwd.hpp>
+#include <fcppt/const.hpp>
 #include <fcppt/insert_to_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/maybe.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
-#include <fcppt/assert/error.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/cast/int_to_float_fun.hpp>
 #include <fcppt/cast/size_fun.hpp>
@@ -348,38 +351,43 @@ sanguis::client::gui::hud::object::~object()
 
 void
 sanguis::client::gui::hud::object::health_pair(
-	sanguis::client::optional_health_pair const &_health_pair
+	sanguis::client::optional_health_pair const &_opt_health_pair
 )
 {
-	if(
-		_health_pair
-	)
-		FCPPT_ASSERT_PRE(
-			sanguis::client::max_health_valid(
-				_health_pair->max_health()
-			)
-		);
-
 	health_bar_.value(
-		_health_pair
-		?
-			fcppt::strong_typedef_construct_cast<
-				sanguis::gui::fill_level,
-				fcppt::cast::size_fun
-			>(
-				_health_pair->health().get()
+		fcppt::maybe(
+			_opt_health_pair,
+			fcppt::const_(
+				sanguis::gui::fill_level(
+					0.f
+				)
+			),
+			[](
+				sanguis::client::health_pair const &_health_pair
 			)
-			/
-			fcppt::strong_typedef_construct_cast<
-				sanguis::gui::fill_level,
-				fcppt::cast::size_fun
-			>(
-				_health_pair->max_health().get()
-			)
-		:
-			sanguis::gui::fill_level(
-				0.f
-			)
+			{
+				FCPPT_ASSERT_PRE(
+					sanguis::client::max_health_valid(
+						_health_pair.max_health()
+					)
+				);
+
+				return
+					fcppt::strong_typedef_construct_cast<
+						sanguis::gui::fill_level,
+						fcppt::cast::size_fun
+					>(
+						_health_pair.health().get()
+					)
+					/
+					fcppt::strong_typedef_construct_cast<
+						sanguis::gui::fill_level,
+						fcppt::cast::size_fun
+					>(
+						_health_pair.max_health().get()
+					);
+			}
+		)
 	);
 }
 
@@ -463,7 +471,8 @@ sanguis::client::gui::hud::object::remove_weapon(
 		]{
 			this->weapon_widget(
 				_is_primary
-			).reset();
+			) =
+				optional_weapon_widget_unique_ptr();
 		}
 	);
 }
@@ -615,18 +624,12 @@ sanguis::client::gui::hud::object::weapon_widget_checked(
 	sanguis::is_primary_weapon const _is_primary
 )
 {
-	optional_weapon_widget_unique_ptr &res(
-		this->weapon_widget(
-			_is_primary
-		)
-	);
-
-	FCPPT_ASSERT_ERROR(
-		res
-	);
-
 	return
-		**res;
+		*FCPPT_ASSERT_OPTIONAL_ERROR(
+			this->weapon_widget(
+				_is_primary
+			)
+		);
 }
 
 template<
@@ -720,15 +723,22 @@ sanguis::client::gui::hud::object::foreach_weapon(
 		[
 			&_function
 		](
-			optional_weapon_widget_unique_ptr const &_ptr
+			optional_weapon_widget_unique_ptr const &_widget
 		)
 		{
-			if(
-				_ptr
-			)
-				_function(
-					**_ptr
-				);
+			fcppt::maybe_void(
+				_widget,
+				[
+					&_function
+				](
+					weapon_widget_unique_ptr const &_ptr
+				)
+				{
+					_function(
+						*_ptr
+					);
+				}
+			);
 		}
 	);
 

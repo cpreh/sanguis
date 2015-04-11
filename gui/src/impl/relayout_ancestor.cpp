@@ -13,11 +13,12 @@ sanguis::gui::impl::relayout_ancestor(
 		_widget.layout()
 	);
 
+	// TODO: Do this differently!
 	while(
-		layout->parent()
+		layout.get_unsafe().parent().has_value()
 	)
 		layout =
-			layout->parent();
+			layout.get_unsafe().parent();
 
-	layout->relayout();
+	layout.get_unsafe().relayout();
 }

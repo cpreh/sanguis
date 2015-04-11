@@ -2,14 +2,17 @@
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/weapons/attack.hpp>
 #include <sanguis/server/weapons/attack_result.hpp>
-#include <sanguis/server/weapons/optional_target.hpp>
+#include <sanguis/server/weapons/target.hpp>
 #include <sanguis/server/weapons/random_angle.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <sanguis/server/weapons/attributes/accuracy.hpp>
 #include <sanguis/server/weapons/events/poll.hpp>
 #include <sanguis/server/weapons/events/reload.hpp>
 #include <sanguis/server/weapons/events/stop.hpp>
 #include <sanguis/server/weapons/states/backswing.hpp>
 #include <sanguis/server/weapons/states/castpoint.hpp>
+#include <fcppt/maybe.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -70,67 +73,92 @@ sanguis::server::weapons::states::castpoint::react(
 		>().owner()
 	);
 
-	sanguis::server::weapons::optional_target const target(
-		owner.target()
-	);
-
-	// TODO: Is this ok?
-	if(
-		!target
-		||
-		!attack_time_.expired()
-	)
-		return
-			this->discard_event();
-
-	switch(
-		this->context<
-			sanguis::server::weapons::weapon
-		>().do_attack(
-			sanguis::server::weapons::attack(
-				this->context<
-					sanguis::server::weapons::weapon
-				>().accuracy()
-				?
-					sanguis::server::weapons::random_angle(
-						this->context<
-							sanguis::server::weapons::weapon
-						>().random_generator(),
-						this->context<
-							sanguis::server::weapons::weapon
-						>().accuracy()->value(),
-						owner.angle()
-					)
-				:
-					owner.angle()
-				,
-				*owner.environment(),
-				*target
-			)
-		)
-	)
-	{
-	case sanguis::server::weapons::attack_result::success:
-		this->context<
-			sanguis::server::weapons::weapon
-		>().use_magazine_item();
-
-		break;
-	case sanguis::server::weapons::attack_result::failure:
-		break;
-	}
-
-	if(
-		cancelled_
-	)
-		this->post_event(
-			sanguis::server::weapons::events::stop()
-		);
-
 	return
-		this->transit<
-			sanguis::server::weapons::states::backswing
-		>();
+		fcppt::maybe(
+			owner.target(),
+			[
+				this
+			]{
+				return
+					this->discard_event();
+			},
+			[
+				&owner,
+				this
+			](
+				sanguis::server::weapons::target const _target
+			)
+			{
+				// TODO: Is this ok?
+				if(
+					!attack_time_.expired()
+				)
+					return
+						this->discard_event();
+
+				switch(
+					this->context<
+						sanguis::server::weapons::weapon
+					>().do_attack(
+						sanguis::server::weapons::attack(
+							fcppt::maybe(
+								this->context<
+									sanguis::server::weapons::weapon
+								>().accuracy(),
+								[
+									&owner
+								]{
+									return
+										owner.angle();
+								},
+								[
+									&owner,
+									this
+								](
+									sanguis::server::weapons::attributes::accuracy const _accuracy
+								)
+								{
+									return
+										sanguis::server::weapons::random_angle(
+											this->context<
+												sanguis::server::weapons::weapon
+											>().random_generator(),
+											_accuracy.value(),
+											owner.angle()
+										);
+								}
+							),
+							FCPPT_ASSERT_OPTIONAL_ERROR(
+								owner.environment()
+							),
+							_target
+						)
+					)
+				)
+				{
+				case sanguis::server::weapons::attack_result::success:
+					this->context<
+						sanguis::server::weapons::weapon
+					>().use_magazine_item();
+
+					break;
+				case sanguis::server::weapons::attack_result::failure:
+					break;
+				}
+
+				if(
+					cancelled_
+				)
+					this->post_event(
+						sanguis::server::weapons::events::stop()
+					);
+
+				return
+					this->transit<
+						sanguis::server::weapons::states::backswing
+					>();
+			}
+		);
 }
 
 boost::statechart::result

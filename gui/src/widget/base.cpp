@@ -9,6 +9,7 @@
 #include <sge/rucksack/vector.hpp>
 #include <sge/rucksack/widget/base.hpp>
 #include <sge/rucksack/widget/optional_ref.hpp>
+#include <fcppt/maybe_void.hpp>
 
 
 sanguis::gui::widget::base::base()
@@ -22,12 +23,19 @@ sanguis::gui::widget::base::base()
 
 sanguis::gui::widget::base::~base()
 {
-	if(
-		parent_
-	)
-		parent_->unregister(
-			*this
-		);
+	fcppt::maybe_void(
+		parent_,
+		[
+			this
+		](
+			sanguis::gui::widget::base &_parent
+		)
+		{
+			_parent.unregister(
+				*this
+			);
+		}
+	);
 }
 
 void
@@ -80,27 +88,34 @@ sanguis::gui::widget::base::on_tab(
 
 void
 sanguis::gui::widget::base::parent(
-	sanguis::gui::widget::optional_ref const _parent
+	sanguis::gui::widget::optional_ref const _new_parent
 )
 {
 	if(
-		parent_
+		parent_.has_value()
 	)
 		this->layout().parent(
 			sge::rucksack::widget::optional_ref()
 		);
 
 	parent_ =
-		_parent;
+		_new_parent;
 
-	if(
-		_parent
-	)
-		this->layout().parent(
-			sge::rucksack::widget::optional_ref(
-				_parent->layout()
-			)
-		);
+	fcppt::maybe_void(
+		_new_parent,
+		[
+			this
+		](
+			sanguis::gui::widget::base &_parent
+		)
+		{
+			this->layout().parent(
+				sge::rucksack::widget::optional_ref(
+					_parent.layout()
+				)
+			);
+		}
+	);
 }
 
 void

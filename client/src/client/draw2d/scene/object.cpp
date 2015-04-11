@@ -37,7 +37,7 @@
 #include <sanguis/client/draw2d/entities/own.hpp>
 #include <sanguis/client/draw2d/entities/own_unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
-#include <sanguis/client/draw2d/entities/hover/optional_info.hpp>
+#include <sanguis/client/draw2d/entities/hover/info.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_auras.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_buffs.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_center.hpp>
@@ -162,7 +162,6 @@
 #include <sge/renderer/target/onscreen.hpp>
 #include <sge/renderer/target/viewport.hpp>
 #include <sge/sprite/matrix.hpp>
-#include <sge/sprite/optional_matrix.hpp>
 #include <sge/sprite/projection_matrix.hpp>
 #include <sge/sprite/state/default_options.hpp>
 #include <sge/sprite/state/scoped.hpp>
@@ -174,6 +173,7 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/maybe_multi.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/optional_bind.hpp>
 #include <fcppt/optional_bind_construct.hpp>
@@ -457,128 +457,141 @@ sanguis::client::draw2d::scene::object::draw(
 	sge::renderer::context::ffp &_render_context
 )
 {
-	sge::sprite::optional_matrix const projection_matrix(
-		sge::sprite::projection_matrix(
-			this->viewport()
+	fcppt::maybe_multi(
+		[
+			&_render_context
+		]{
+			_render_context.clear(
+				sge::renderer::clear::parameters()
+				.back_buffer(
+					sge::image::color::predef::black()
+				)
+			);
+		},
+		[
+			&_render_context,
+			this
+		](
+			sge::sprite::matrix const &_projection_matrix,
+			sanguis::client::draw2d::translation const _translation
 		)
-	);
+		{
+			sge::renderer::state::ffp::transform::object_unique_ptr const projection_state(
+				renderer_.create_transform_state(
+					sge::renderer::state::ffp::transform::parameters(
+						_projection_matrix
+					)
+				)
+			);
 
-	if(
-		!projection_matrix
-		||
-		!translation_
-		||
-		!player_center_
-	)
-	{
-		_render_context.clear(
-			sge::renderer::clear::parameters()
-			.back_buffer(
-				sge::image::color::predef::black()
-			)
-		);
+			sge::renderer::state::ffp::transform::scoped const scoped_projection(
+				_render_context,
+				sge::renderer::state::ffp::transform::mode::projection,
+				*projection_state
+			);
 
-		return;
-	}
+			sge::sprite::state::scoped<
+				sanguis::client::draw2d::sprite::state_choices
+			> const scoped_state(
+				renderer_,
+				_render_context,
+				sge::sprite::state::default_options<
+					sanguis::client::draw2d::sprite::state_choices
+				>(),
+				sprite_states_
+			);
 
-	sge::renderer::state::ffp::transform::object_unique_ptr const projection_state(
-		renderer_.create_transform_state(
-			sge::renderer::state::ffp::transform::parameters(
-				*projection_matrix
-			)
-		)
-	);
+			background_->render(
+				_render_context,
+				_translation
+			);
 
-	sge::renderer::state::ffp::transform::scoped const scoped_projection(
-		_render_context,
-		sge::renderer::state::ffp::transform::mode::projection,
-		*projection_state
-	);
-
-	sge::sprite::state::scoped<
-		sanguis::client::draw2d::sprite::state_choices
-	> const scoped_state(
-		renderer_,
-		_render_context,
-		sge::sprite::state::default_options<
-			sanguis::client::draw2d::sprite::state_choices
-		>(),
-		sprite_states_
-	);
-
-	background_->render(
-		_render_context,
-		*translation_
-	);
-
-	sge::renderer::state::ffp::transform::object_unique_ptr const transform_state(
-		renderer_.create_transform_state(
-			sge::renderer::state::ffp::transform::parameters(
-				fcppt::math::matrix::translation(
-					fcppt::math::vector::construct(
-						fcppt::math::vector::structure_cast<
-							sanguis::client::draw2d::vector2,
-							fcppt::cast::int_to_float_fun
-						>(
-							translation_->get()
-						),
-						fcppt::literal<
-							sanguis::client::draw2d::funit
-						>(
-							0
+			sge::renderer::state::ffp::transform::object_unique_ptr const transform_state(
+				renderer_.create_transform_state(
+					sge::renderer::state::ffp::transform::parameters(
+						fcppt::math::matrix::translation(
+							fcppt::math::vector::construct(
+								fcppt::math::vector::structure_cast<
+									sanguis::client::draw2d::vector2,
+									fcppt::cast::int_to_float_fun
+								>(
+									_translation.get()
+								),
+								fcppt::literal<
+									sanguis::client::draw2d::funit
+								>(
+									0
+								)
+							)
 						)
 					)
 				)
-			)
-		)
-	);
-
-	sge::renderer::state::ffp::transform::scoped const scoped_transform(
-		_render_context,
-		sge::renderer::state::ffp::transform::mode::world,
-		*transform_state
-	);
-
-	world_->draw(
-		_render_context,
-		*translation_
-	);
-
-	for(
-		auto const index
-		:
-		fcppt::make_enum_range<
-			sanguis::client::draw2d::z_ordering
-		>()
-	)
-	{
-		normal_system_.render(
-			_render_context,
-			index
-		);
-
-		world_->draw_after(
-			sanguis::client::draw2d::scene::world::render_parameters{
-				_render_context,
-				*player_center_,
-				*translation_,
-				index
-			}
-		);
-	}
-
-	fcppt::maybe_void(
-		hover_,
-		[
-			&_render_context
-		](
-			sanguis::client::draw2d::scene::hover::base_unique_ptr const &_hover
-		)
-		{
-			_hover->draw(
-				_render_context
 			);
-		}
+
+			sge::renderer::state::ffp::transform::scoped const scoped_transform(
+				_render_context,
+				sge::renderer::state::ffp::transform::mode::world,
+				*transform_state
+			);
+
+			world_->draw(
+				_render_context,
+				_translation
+			);
+
+			fcppt::maybe_void(
+				player_center_,
+				[
+					&_render_context,
+					_translation,
+					this
+				](
+					sanguis::client::draw2d::player_center const _player_center
+				)
+				{
+					for(
+						auto const index
+						:
+						fcppt::make_enum_range<
+							sanguis::client::draw2d::z_ordering
+						>()
+					)
+					{
+						normal_system_.render(
+							_render_context,
+							index
+						);
+
+						world_->draw_after(
+							sanguis::client::draw2d::scene::world::render_parameters{
+								_render_context,
+								_player_center,
+								_translation,
+								index
+							}
+						);
+					}
+				}
+			);
+
+			fcppt::maybe_void(
+				hover_,
+				[
+					&_render_context
+				](
+					sanguis::client::draw2d::scene::hover::base_unique_ptr const &_hover
+				)
+				{
+					_hover->draw(
+						_render_context
+					);
+				}
+			);
+		},
+		sge::sprite::projection_matrix(
+			this->viewport()
+		),
+		translation_
 	);
 }
 
@@ -726,29 +739,33 @@ sanguis::client::draw2d::scene::object::hover_display(
 	)
 		return;
 
-	sanguis::client::draw2d::entities::hover::optional_info const info(
-		_entity.hover()
+	fcppt::maybe_void(
+		_entity.hover(),
+		[
+			&_entity,
+			this
+		](
+			sanguis::client::draw2d::entities::hover::info const &_info
+		)
+		{
+			hover_ =
+				optional_hover_unique_ptr{
+					sanguis::client::draw2d::scene::hover::create(
+						sanguis::client::draw2d::scene::hover::parameters(
+							gui_style_,
+							*gui_renderer_,
+							renderer_,
+							font_,
+							hud_resources_,
+							player_weapons_,
+							_entity.center(),
+							_entity.radius()
+						),
+						_info
+					)
+				};
+		}
 	);
-
-	if(
-		!info
-	)
-		return;
-
-	hover_ =
-		sanguis::client::draw2d::scene::hover::create(
-			sanguis::client::draw2d::scene::hover::parameters(
-				gui_style_,
-				*gui_renderer_,
-				renderer_,
-				font_,
-				hud_resources_,
-				player_weapons_,
-				_entity.center(),
-				_entity.radius()
-			),
-			*info
-		);
 }
 
 void
@@ -811,18 +828,22 @@ sanguis::client::draw2d::scene::object::player_center(
 void
 sanguis::client::draw2d::scene::object::update_translation()
 {
-	if(
-		!player_center_
-	)
-		translation_.reset();
-	else
-		translation_ =
-			sanguis::client::draw2d::optional_translation(
-				sanguis::client::draw2d::scene::translation(
-					*player_center_,
-					this->screen_size()
-				)
-			);
+	translation_ =
+		fcppt::optional_bind_construct(
+			player_center_,
+			[
+				this
+			](
+				sanguis::client::draw2d::player_center const _player_center
+			)
+			{
+				return
+					sanguis::client::draw2d::scene::translation(
+						_player_center,
+						this->screen_size()
+					);
+			}
+		);
 }
 
 void

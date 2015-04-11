@@ -11,6 +11,7 @@
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/optional_impl.hpp>
 
@@ -81,17 +82,31 @@ sanguis::client::draw2d::scene::hover::name_and_health::draw(
 	sge::renderer::context::ffp &_render_context
 )
 {
-	if(
-		healthbar_
-	)
-		(*healthbar_)->draw(
-			_render_context
-		);
+	fcppt::maybe_void(
+		healthbar_,
+		[
+			&_render_context
+		](
+			healthbar_unique_ptr const &_healthbar
+		)
+		{
+			_healthbar->draw(
+				_render_context
+			);
+		}
+	);
 
-	if(
-		name_
-	)
-		name_->draw(
-			_render_context
-		);
+	fcppt::maybe_void(
+		name_,
+		[
+			&_render_context
+		](
+			sanguis::client::draw2d::scene::hover::name &_name
+		)
+		{
+			_name.draw(
+				_render_context
+			);
+		}
+	);
 }

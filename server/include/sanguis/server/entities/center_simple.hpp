@@ -40,9 +40,11 @@ protected:
 	)
 	override;
 private:
-	typedef fcppt::optional<
+	typedef
+	fcppt::optional<
 		sanguis::server::center
-	> optional_center;
+	>
+	optional_center;
 
 	optional_center center_;
 };

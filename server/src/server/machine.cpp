@@ -26,14 +26,15 @@
 #include <alda/net/parameters.hpp>
 #include <alda/net/port.hpp>
 #include <alda/net/buffer/circular_receive/object_fwd.hpp>
-#include <alda/net/buffer/circular_send/optional_ref.hpp>
+#include <alda/net/buffer/circular_send/object_fwd.hpp>
 #include <alda/net/server/connection_id_container.hpp>
 #include <sge/timer/difference_fractional.hpp>
 #include <sge/timer/elapsed_and_reset.hpp>
 #include <fcppt/exception.hpp>
+#include <fcppt/maybe.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assert/error.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
@@ -159,19 +160,13 @@ sanguis::server::machine::send_to_all(
 		connections
 	)
 	{
-		alda::net::buffer::circular_send::optional_ref const buffer{
-			net_.send_buffer(
-				id
-			)
-		};
-
-		FCPPT_ASSERT_ERROR(
-			buffer
-		);
-
 		if(
 			!sanguis::net::append_to_circular_buffer(
-				*buffer,
+				FCPPT_ASSERT_OPTIONAL_ERROR(
+					net_.send_buffer(
+						id
+					)
+				),
 				temp_buffer_
 			)
 		)
@@ -219,20 +214,14 @@ sanguis::server::machine::process_overflow()
 				queue_pair.first
 			);
 
-			alda::net::buffer::circular_send::optional_ref const buffer(
-				net_.send_buffer(
-					net_id
-				)
-			);
-
-			FCPPT_ASSERT_ERROR(
-				buffer
-			);
-
 			if(
 				sanguis::server::net::serialize_to_circular_buffer(
 					*message,
-					*buffer
+					FCPPT_ASSERT_OPTIONAL_ERROR(
+						net_.send_buffer(
+							net_id
+						)
+					)
 				)
 			)
 				queue.pop();
@@ -262,44 +251,48 @@ sanguis::server::machine::send_unicast(
 		)
 	);
 
-	alda::net::buffer::circular_send::optional_ref const buffer(
+	fcppt::maybe(
 		net_.send_buffer(
 			net_id
+		),
+		[
+			net_id
+		]{
+			FCPPT_LOG_INFO(
+				::logger,
+				fcppt::log::_
+					<< FCPPT_TEXT("Client ")
+					<< net_id
+					<< FCPPT_TEXT(" is gone.")
+			);
+		},
+		[
+			&_message,
+			this,
+			net_id
+		](
+			alda::net::buffer::circular_send::object &_buffer
 		)
-	);
+		{
+			if(
+				!sanguis::server::net::serialize_to_circular_buffer(
+					_message,
+					_buffer
+				)
+			)
+			{
+				this->add_overflow_message(
+					net_id,
+					_message
+				);
 
-	if(
-		!buffer
-	)
-	{
-		FCPPT_LOG_INFO(
-			::logger,
-			fcppt::log::_
-				<< FCPPT_TEXT("Client ")
-				<< net_id
-				<< FCPPT_TEXT(" is gone.")
-		);
+				return;
+			}
 
-		return;
-	}
-
-	if(
-		!sanguis::server::net::serialize_to_circular_buffer(
-			_message,
-			*buffer
-		)
-	)
-	{
-		this->add_overflow_message(
-			net_id,
-			_message
-		);
-
-		return;
-	}
-
-	net_.queue_send(
-		net_id
+			net_.queue_send(
+				net_id
+			);
+		}
 	);
 }
 

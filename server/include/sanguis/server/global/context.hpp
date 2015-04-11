@@ -25,6 +25,7 @@
 #include <sanguis/server/global/world_map.hpp>
 #include <sanguis/server/world/context.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/reference_wrapper_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <memory>
 #include <unordered_map>
@@ -191,9 +192,15 @@ private:
 	sanguis::server::console &console_;
 
 	typedef
+	fcppt::reference_wrapper<
+		sanguis::server::entities::player
+	>
+	player_ref;
+
+	typedef
 	std::unordered_map<
 		sanguis::server::player_id,
-		sanguis::server::entities::player *
+		player_ref
 	>
 	player_map;
 

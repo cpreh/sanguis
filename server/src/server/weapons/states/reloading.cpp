@@ -11,6 +11,7 @@
 #include <sanguis/server/weapons/states/idle.hpp>
 #include <sanguis/server/weapons/states/reloading.hpp>
 #include <sge/timer/remaining.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -34,9 +35,11 @@ sanguis::server::weapons::states::reloading::reloading(
 			this->context<
 				sanguis::server::weapons::weapon
 			>().diff_clock(),
-			this->context<
-				sanguis::server::weapons::weapon
-			>().reload_time()->get()
+			FCPPT_ASSERT_OPTIONAL_ERROR(
+				this->context<
+					sanguis::server::weapons::weapon
+				>().reload_time()
+			).get()
 			/
 			this->context<
 				sanguis::server::weapons::weapon

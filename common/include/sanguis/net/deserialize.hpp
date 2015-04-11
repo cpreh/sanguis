@@ -16,6 +16,7 @@
 #include <alda/net/buffer/circular_receive/source.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/throw.hpp>
 #include <fcppt/assert/throw_message.hpp>
 #include <fcppt/cast/size.hpp>
@@ -90,11 +91,13 @@ deserialize(
 	);
 
 	sanguis::net::message_header const message_size(
-		*fcppt::io::read<
-			sanguis::net::message_header
-		>(
-			stream,
-			alda::endianness()
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			fcppt::io::read<
+				sanguis::net::message_header
+			>(
+				stream,
+				alda::endianness()
+			)
 		)
 	);
 
@@ -106,7 +109,9 @@ deserialize(
 				stream.gcount()
 			)
 		)
-		== sanguis::net::message_header_size::value,
+		==
+		sanguis::net::message_header_size::value
+		,
 		sanguis::exception
 	);
 

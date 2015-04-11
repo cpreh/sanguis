@@ -1,4 +1,5 @@
 #include <sanguis/weapon_attribute.hpp>
+#include <sanguis/weapon_attribute_value.hpp>
 #include <sanguis/client/draw2d/scene/hover/weapon_attribute.hpp>
 #include <sanguis/client/draw2d/scene/hover/weapon_attribute_diff.hpp>
 #include <sanguis/client/gui/default_text_color.hpp>
@@ -20,6 +21,7 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
+#include <fcppt/maybe.hpp>
 
 
 sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
@@ -65,29 +67,47 @@ sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 		_gui_style,
 		_renderer,
 		_font,
-		_attribute_diff.get()
-		?
-			sanguis::client::gui::hud::weapon_attribute_diff_to_string(
-				*_attribute_diff.get()
+		fcppt::maybe(
+			_attribute_diff.get(),
+			[]{
+				return
+					sge::font::string();
+			},
+			[](
+				sanguis::weapon_attribute_value const _diff
 			)
-		:
-			sge::font::string()
-		,
-		_attribute_diff.get()
-		?
-			*_attribute_diff.get()
-			>
-			0
-			?
-				sanguis::gui::text_color(
-					sge::image::color::predef::lightblue()
-				)
-			:
-				sanguis::gui::text_color(
-					sge::image::color::predef::red()
-				)
-		:
-			sanguis::client::gui::default_text_color()
+			{
+				return
+					sanguis::client::gui::hud::weapon_attribute_diff_to_string(
+						_diff
+					);
+			}
+		),
+		fcppt::maybe(
+			_attribute_diff.get(),
+			[]{
+				return
+					sanguis::client::gui::default_text_color();
+			},
+			[](
+				sanguis::weapon_attribute_value const _diff
+			)
+			{
+				return
+					_diff
+					>
+					0
+					?
+						sanguis::gui::text_color(
+							sge::image::color::predef::lightblue()
+						)
+					:
+						sanguis::gui::text_color(
+							sge::image::color::predef::red()
+						)
+					;
+			}
+		)
 	},
 	container_{
 		_gui_context,

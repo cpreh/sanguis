@@ -69,7 +69,7 @@ sanguis::server::entities::with_perks::~with_perks()
 void
 sanguis::server::entities::with_perks::update()
 {
-	sanguis::server::environment::object &environment(
+	sanguis::server::environment::object &cur_environment(
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			this->environment()
 		)
@@ -82,6 +82,6 @@ sanguis::server::entities::with_perks::update()
 	)
 		perk.second->update(
 			*this,
-			environment
+			cur_environment
 		);
 }

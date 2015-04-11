@@ -36,7 +36,7 @@
 #include <fcppt/maybe.hpp>
 #include <fcppt/algorithm/join.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/assert/pre.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -98,7 +98,7 @@ sanguis::server::weapons::weapon::owner(
 )
 {
 	if(
-		_owner
+		_owner.has_value()
 	)
 	{
 		owner_ =
@@ -312,12 +312,10 @@ sanguis::server::weapons::weapon::random_generator() const
 sanguis::server::entities::with_weapon &
 sanguis::server::weapons::weapon::owner() const
 {
-	FCPPT_ASSERT_PRE(
-		owner_
-	);
-
 	return
-		*owner_;
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			owner_
+		);
 }
 
 sanguis::server::weapons::parameters

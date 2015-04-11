@@ -1,4 +1,5 @@
 #include <sanguis/model/animation.hpp>
+#include <sanguis/model/image_name.hpp>
 #include <sanguis/model/object.hpp>
 #include <sanguis/model/optional_image_name.hpp>
 #include <sanguis/model/part.hpp>
@@ -6,6 +7,8 @@
 #include <sanguis/tools/animations/image_file_map.hpp>
 #include <sanguis/tools/animations/load_image_files.hpp>
 #include <sanguis/tools/animations/qtutil/from_fcppt_string.hpp>
+#include <fcppt/maybe_void.hpp>
+#include <fcppt/container/find_opt.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
@@ -26,50 +29,51 @@ sanguis::tools::animations::load_image_files(
 			&_path,
 			&result
 		](
-			sanguis::model::optional_image_name const &_name
+			sanguis::model::optional_image_name const &_opt_name
 		)
 		{
-			if(
-				!_name
-			)
-				return;
-
-			auto const it(
-				result.find(
-					*_name
+			fcppt::maybe_void(
+				_opt_name,
+				[
+					&_path,
+					&result
+				](
+					sanguis::model::image_name const &_name
 				)
-			);
-
-			if(
-				it
-				!=
-				result.end()
-			)
-				return;
-
-			QImage image(
-				sanguis::tools::animations::qtutil::from_fcppt_string(
-					fcppt::filesystem::path_to_string(
-						_path
-						/
-						_name->get()
+				{
+					if(
+						fcppt::container::find_opt(
+							result,
+							_name
+						).has_value()
 					)
-				)
-			);
+						return;
 
-			// TODO
-			if(
-				image.isNull()
-			)
-				return;
+					QImage image(
+						sanguis::tools::animations::qtutil::from_fcppt_string(
+							fcppt::filesystem::path_to_string(
+								_path
+								/
+								_name.get()
+							)
+						)
+					);
 
-			result.insert(
-				std::make_pair(
-					*_name,
-					std::move(
-						image
+					// TODO
+					if(
+						image.isNull()
 					)
-				)
+						return;
+
+					result.insert(
+						std::make_pair(
+							_name,
+							std::move(
+								image
+							)
+						)
+					);
+				}
 			);
 		}
 	);

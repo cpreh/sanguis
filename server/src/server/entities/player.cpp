@@ -370,17 +370,17 @@ sanguis::server::entities::player::drop_or_pickup_weapon(
 			sanguis::server::weapons::unique_ptr &&_dropped
 		)
 		{
-			sanguis::server::environment::object &environment(
+			sanguis::server::environment::object &cur_environment(
 				FCPPT_ASSERT_OPTIONAL_ERROR(
 					this->environment()
 				)
 			);
 
-			environment.insert(
+			cur_environment.insert(
 				fcppt::make_unique_ptr<
 					sanguis::server::entities::pickups::weapon
 				>(
-					environment.load_context(),
+					cur_environment.load_context(),
 					this->team(),
 					std::move(
 						_dropped

@@ -23,6 +23,7 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
@@ -82,32 +83,37 @@ sanguis::server::entities::projectiles::grenade::~grenade()
 
 sanguis::server::entities::optional_transfer_result
 sanguis::server::entities::projectiles::grenade::on_transfer(
-	sanguis::server::entities::transfer_parameters const &_param
+	sanguis::server::entities::transfer_parameters const &_parameters
 )
 {
-	// TODO: Use optional_bind
-	sanguis::server::entities::optional_transfer_result result(
-		sanguis::server::entities::with_velocity::on_transfer(
-			_param
-		)
-	);
-
-	if(
-		result
-	)
-		this->movement_speed().current(
-			std::min(
-				this->movement_speed().max(),
-				sanguis::server::collision::distance_pos_pos(
-					_param.center().get(),
-					dest_
-				)
-			)
-		);
-
 	return
-		std::move(
-			result
+		fcppt::optional_bind_construct(
+			sanguis::server::entities::with_velocity::on_transfer(
+				_parameters
+			),
+			[
+				&_parameters,
+				this
+			](
+				sanguis::server::entities::transfer_result &&_result
+			)
+			{
+				// TODO: Can we put this somewhere else?
+				this->movement_speed().current(
+					std::min(
+						this->movement_speed().max(),
+						sanguis::server::collision::distance_pos_pos(
+							_parameters.center().get(),
+							dest_
+						)
+					)
+				);
+
+				return
+					std::move(
+						_result
+					);
+			}
 		);
 }
 

@@ -24,6 +24,7 @@
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -130,20 +131,21 @@ sanguis::client::gui::menu::resolution_chooser::widget()
 void
 sanguis::client::gui::menu::resolution_chooser::on_apply()
 {
-	sanguis::gui::optional_index const index(
-		choices_.index()
-	);
-
-	if(
-		!index
-	)
-		return;
-
-	renderer_.display_mode(
-		sge::renderer::display_mode::optional_object(
-			display_modes_[
-				index->get()
-			]
+	fcppt::maybe_void(
+		choices_.index(),
+		[
+			this
+		](
+			sanguis::gui::index const _index
 		)
+		{
+			renderer_.display_mode(
+				sge::renderer::display_mode::optional_object(
+					display_modes_[
+						_index.get()
+					]
+				)
+			);
+		}
 	);
 }

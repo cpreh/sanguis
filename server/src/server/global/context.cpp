@@ -39,11 +39,11 @@
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/global/context.hpp>
+#include <sanguis/server/global/dest_world_pair.hpp>
 #include <sanguis/server/global/generate_worlds.hpp>
 #include <sanguis/server/global/load_context.hpp>
 #include <sanguis/server/global/next_id_callback.hpp>
 #include <sanguis/server/global/source_world_pair.hpp>
-#include <sanguis/server/global/world_connection_map.hpp>
 #include <sanguis/server/weapons/optional_target.hpp>
 #include <sanguis/server/weapons/target.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
@@ -52,10 +52,16 @@
 #include <sanguis/server/world/map.hpp>
 #include <sanguis/server/world/object.hpp>
 #include <sanguis/server/world/parameters.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/maybe.hpp>
+#include <fcppt/maybe_void.hpp>
+#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_to_exception.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assert/error.hpp>
+#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/container/find_opt.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/info.hpp>
@@ -173,7 +179,9 @@ sanguis::server::global::context::insert_player(
 	players_.insert(
 		std::make_pair(
 			_player_id,
-			player_ptr.get()
+			fcppt::make_ref(
+				*player_ptr
+			)
 		)
 	);
 
@@ -190,13 +198,7 @@ sanguis::server::global::context::insert_player(
 		return;
 	}
 
-	typedef
-	fcppt::optional<
-		sanguis::server::entities::player const &
-	>
-	const_optional_player_ref;
-
-	const_optional_player_ref const player_ref(
+	fcppt::maybe(
 		sanguis::server::entities::insert_with_result(
 			cur_world,
 			std::move(
@@ -214,39 +216,47 @@ sanguis::server::global::context::insert_player(
 					0.f
 				)
 			)
+		),
+		[]{
+			FCPPT_LOG_ERROR(
+				logger,
+				fcppt::log::_
+					<< FCPPT_TEXT("Unable to insert a player!")
+			);
+		},
+		[
+			&cur_world,
+			this
+		](
+			sanguis::server::entities::player const &_player
 		)
-	);
+		{
+			fcppt::maybe_void(
+				_player.primary_weapon(),
+				[
+					&cur_world,
+					&_player
+				](
+					sanguis::server::weapons::weapon const &_weapon
+				)
+				{
+					cur_world.got_weapon(
+						_player.player_id(),
+						_weapon.description()
+					);
+				}
+			);
 
-	if(
-		!player_ref.has_value()
-	)
-	{
-		FCPPT_LOG_ERROR(
-			logger,
-			fcppt::log::_
-				<< FCPPT_TEXT("Unable to insert a player!")
-		);
+			cur_world.level_changed(
+				_player.player_id(),
+				_player.level()
+			);
 
-		// TODO: What do we do here?
-		return;
-	}
-
-	if(
-		player_ref->primary_weapon()
-	)
-		cur_world.got_weapon(
-			player_ref->player_id(),
-			player_ref->primary_weapon()->description()
-		);
-
-	cur_world.level_changed(
-		_player_id,
-		player_ref->level()
-	);
-
-	sanguis::server::send_available_perks(
-		*player_ref,
-		send_unicast_
+			sanguis::server::send_available_perks(
+				_player,
+				send_unicast_
+			);
+		}
 	);
 }
 
@@ -256,28 +266,28 @@ sanguis::server::global::context::player_disconnect(
 )
 {
 	// Disconnecting clients may already be dead
-	sanguis::server::entities::optional_player_ref const player(
+	fcppt::maybe(
 		this->player_opt(
 			_player_id
+		),
+		[
+			_player_id
+		]{
+			FCPPT_LOG_INFO(
+				logger,
+				fcppt::log::_
+					<< FCPPT_TEXT("Player ")
+					<< _player_id
+					<< FCPPT_TEXT(" is already dead.")
+			);
+		},
+		[](
+			sanguis::server::entities::player &_player
 		)
+		{
+			_player.kill();
+		}
 	);
-
-	if(
-		!player
-	)
-	{
-		FCPPT_LOG_INFO(
-			logger,
-			fcppt::log::_
-				<< FCPPT_TEXT("Player ")
-				<< _player_id
-				<< FCPPT_TEXT(" is already dead.")
-		);
-
-		return;
-	}
-
-	player->kill();
 }
 
 void
@@ -560,29 +570,24 @@ sanguis::server::global::context::transfer_entity(
 	sanguis::server::entities::unique_ptr &&_entity
 )
 {
-	sanguis::server::global::world_connection_map const &connections(
-		worlds_.connections()
-	);
-
-	auto const it(
-		connections.find(
-			_source
+	sanguis::server::global::dest_world_pair const &dest(
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			fcppt::container::find_opt(
+				worlds_.connections(),
+				_source
+			)
 		)
 	);
 
-	FCPPT_ASSERT_ERROR(
-		it != connections.end()
-	);
-
 	this->world(
-		it->second.first.get()
+		dest.first.get()
 	).insert(
 		std::move(
 			_entity
 		),
 		sanguis::server::entities::insert_parameters(
 			sanguis::server::world::grid_pos_to_center(
-				it->second.second.get()
+				dest.second.get()
 			),
 			sanguis::server::angle(
 				0.f // TODO!
@@ -599,22 +604,13 @@ sanguis::server::global::context::world(
 	sanguis::world_id const _world_id
 )
 {
-	sanguis::server::world::map const &worlds(
-		worlds_.worlds()
-	);
-
-	auto const it(
-		worlds.find(
-			_world_id
-		)
-	);
-
-	FCPPT_ASSERT_PRE(
-		it != worlds.end()
-	);
-
 	return
-		*it->second;
+		*FCPPT_ASSERT_OPTIONAL_ERROR(
+			fcppt::container::find_opt(
+				worlds_.worlds(),
+				_world_id
+			)
+		);
 }
 
 sanguis::server::entities::player &
@@ -622,19 +618,16 @@ sanguis::server::global::context::player_exn(
 	sanguis::server::player_id const _player_id
 )
 {
-	sanguis::server::entities::optional_player_ref const player(
-		this->player_opt(
-			_player_id
-		)
-	);
-
-	FCPPT_ASSERT_THROW(
-		player.has_value(),
-		sanguis::server::unknown_player_exception
-	);
-
 	return
-		*player;
+		fcppt::optional_to_exception(
+			this->player_opt(
+				_player_id
+			),
+			[]{
+				return
+					sanguis::server::unknown_player_exception{};
+			}
+		);
 }
 
 sanguis::server::entities::optional_player_ref const
@@ -642,19 +635,19 @@ sanguis::server::global::context::player_opt(
 	sanguis::server::player_id const _player_id
 )
 {
-	auto const it(
-		players_.find(
-			_player_id
-		)
-	);
-
 	return
-		it != players_.end()
-		?
-			sanguis::server::entities::optional_player_ref(
-				*it->second
+		fcppt::optional_bind_construct(
+			fcppt::container::find_opt(
+				players_,
+				_player_id
+			),
+			[](
+				player_ref const _ref
 			)
-		:
-			sanguis::server::entities::optional_player_ref()
-		;
+			-> sanguis::server::entities::player &
+			{
+				return
+					_ref.get();
+			}
+		);
 }

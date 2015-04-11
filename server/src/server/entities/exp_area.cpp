@@ -66,7 +66,7 @@ sanguis::server::entities::exp_area::remove_from_game()
 		)
 		{
 			return
-				!_link.get();
+				!_link.get().has_value();
 		}
 	);
 

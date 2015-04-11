@@ -315,12 +315,12 @@ sanguis::gui::widget::container::on_tab(
 		);
 
 		if(
-			!result
+			!result.has_value()
 		)
 			continue;
 
 		if(
-			!_focus.get()
+			!_focus.get().has_value()
 		)
 			return
 				result;

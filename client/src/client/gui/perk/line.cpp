@@ -22,6 +22,7 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -122,10 +123,12 @@ sanguis::client::gui::perk::line::on_click()
 	)
 		text_.value(
 			sanguis::client::gui::perk::make_description(
-				*sanguis::client::perk::find_info_const(
-					perk_type_,
-					state_.perks()
-				).value()
+				FCPPT_ASSERT_OPTIONAL_ERROR(
+					sanguis::client::perk::find_info_const(
+						perk_type_,
+						state_.perks()
+					).value()
+				)
 			)
 		);
 }

@@ -32,7 +32,7 @@ sanguis::client::load::model::make_sound(
 				};
 
 				if(
-					!result
+					!result.has_value()
 				)
 					FCPPT_LOG_ERROR(
 						sanguis::client::load::log(),

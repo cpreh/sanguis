@@ -111,7 +111,7 @@ sanguis::server::entities::with_ghosts::on_transfer(
 sanguis::server::entities::remove_from_world_result
 sanguis::server::entities::with_ghosts::remove_from_world()
 {
-	sanguis::server::environment::object &environment(
+	sanguis::server::environment::object &cur_environment(
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			this->environment()
 		)
@@ -125,14 +125,14 @@ sanguis::server::entities::with_ghosts::remove_from_world()
 				ghosts_,
 				[
 					this,
-					&environment
+					&cur_environment
 				](
 					sanguis::server::collision::ghost &_ghost
 				)
 				{
 					return
 						_ghost.destroy(
-							environment.collision_world()
+							cur_environment.collision_world()
 						);
 				}
 			)

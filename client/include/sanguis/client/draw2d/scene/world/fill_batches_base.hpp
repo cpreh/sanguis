@@ -12,7 +12,8 @@
 #include <sanguis/client/draw2d/scene/world/sprite/parameters.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/vector.hpp>
 #include <sanguis/creator/tile_grid.hpp>
-#include <sge/texture/const_optional_part_ref.hpp>
+#include <sge/texture/part_fwd.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/container/grid/make_pos_crange_start_end.hpp>
 #include <fcppt/math/dim/fill.hpp>
@@ -71,51 +72,54 @@ fill_batches_base(
 			_upper_bound.get()
 		)
 	)
-	{
-		sge::texture::const_optional_part_ref const texture(
+		fcppt::maybe_void(
 			_get_texture(
 				source_element.pos()
+			),
+			[
+				&_sprites,
+				&_transform,
+				_is_background,
+				&source_element,
+				tile_dim
+			](
+				sge::texture::part const &_texture
 			)
-		);
-
-		if(
-			!texture
-		)
-			continue;
-
-		_sprites.push_back(
-			sanguis::client::draw2d::scene::world::sprite::object(
-				sanguis::client::draw2d::scene::world::sprite::parameters()
-				.pos(
-					_transform(
-						fcppt::math::vector::structure_cast<
-							sanguis::client::draw2d::scene::world::sprite::vector,
-							fcppt::cast::size_fun
-						>(
-							fcppt::math::vector::to_signed(
-								source_element.pos()
+			{
+				_sprites.push_back(
+					sanguis::client::draw2d::scene::world::sprite::object(
+						sanguis::client::draw2d::scene::world::sprite::parameters()
+						.pos(
+							_transform(
+								fcppt::math::vector::structure_cast<
+									sanguis::client::draw2d::scene::world::sprite::vector,
+									fcppt::cast::size_fun
+								>(
+									fcppt::math::vector::to_signed(
+										source_element.pos()
+									)
+								)
+								*
+								tile_dim
 							)
 						)
-						*
-						tile_dim
+						.size(
+							tile_dim
+						)
+						.texture(
+							sanguis::client::draw2d::scene::world::sprite::object::texture_type{
+								_texture
+							}
+						)
+						. template set<
+							sanguis::client::draw2d::scene::world::sprite::is_background_role
+						>(
+							_is_background.get()
+						)
 					)
-				)
-				.size(
-					tile_dim
-				)
-				.texture(
-					sanguis::client::draw2d::scene::world::sprite::object::texture_type{
-						texture
-					}
-				)
-				. template set<
-					sanguis::client::draw2d::scene::world::sprite::is_background_role
-				>(
-					_is_background.get()
-				)
-			)
+				);
+			}
 		);
-	}
 
 	return
 		std::move(

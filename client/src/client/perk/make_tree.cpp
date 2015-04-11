@@ -24,7 +24,7 @@
 #include <fcppt/maybe.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/find_if_exn.hpp>
-#include <fcppt/assert/pre.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/tree/pre_order.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -121,11 +121,15 @@ sanguis::client::perk::make_tree(
 		{
 			return
 				sanguis::client::perk::to_category(
-					_left->perk_type()
+					FCPPT_ASSERT_OPTIONAL_ERROR(
+						_left
+					).perk_type()
 				)
 				<
 				sanguis::client::perk::to_category(
-					_right->perk_type()
+					FCPPT_ASSERT_OPTIONAL_ERROR(
+						_right
+					).perk_type()
 				);
 		}
 	);

@@ -3,6 +3,7 @@
 #include <sanguis/optional_primary_weapon_type.hpp>
 #include <sanguis/weapon_status.hpp>
 #include <sanguis/client/health.hpp>
+#include <sanguis/client/health_pair.hpp>
 #include <sanguis/client/health_valid.hpp>
 #include <sanguis/client/max_health.hpp>
 #include <sanguis/client/optional_health_pair.hpp>
@@ -27,6 +28,8 @@
 #include <sanguis/client/load/model/collection.hpp>
 #include <sanguis/client/load/model/object.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/maybe_void.hpp>
+#include <fcppt/optional_bind.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/assert/unreachable_message.hpp>
@@ -73,17 +76,25 @@ sanguis::client::draw2d::entities::model::object::object(
 		sanguis::weapon_status::nothing
 	),
 	health_pair_{
-		_parameters.health_pair()
-		&&
-		sanguis::client::health_valid(
-			_parameters.health_pair()->health()
-		)
-		?
-			sanguis::client::optional_health_pair{
-				_parameters.health_pair()
+		fcppt::optional_bind(
+			_parameters.health_pair(),
+			[](
+				sanguis::client::health_pair const &_health_pair
+			)
+			{
+				return
+					sanguis::client::health_valid(
+						_health_pair.health()
+					)
+					?
+						sanguis::client::optional_health_pair{
+							_health_pair
+						}
+					:
+						sanguis::client::optional_health_pair{}
+					;
 			}
-		:
-			sanguis::client::optional_health_pair{}
+		)
 	},
 	decay_time_(),
 	decay_option_(
@@ -232,7 +243,8 @@ sanguis::client::draw2d::entities::model::object::on_die()
 				)
 		);
 
-	health_pair_.reset();
+	health_pair_ =
+		sanguis::client::optional_health_pair();
 
 	this->change_animation();
 
@@ -298,14 +310,22 @@ sanguis::client::draw2d::entities::model::object::health(
 			_health
 		)
 	)
-		health_pair_.reset();
+		health_pair_ =
+			sanguis::client::optional_health_pair();
 
-	if(
-		health_pair_
-	)
-		health_pair_->health(
+	fcppt::maybe_void(
+		health_pair_,
+		[
 			_health
-		);
+		](
+			sanguis::client::health_pair &_health_pair
+		)
+		{
+			_health_pair.health(
+				_health
+			);
+		}
+	);
 }
 
 void
@@ -313,12 +333,19 @@ sanguis::client::draw2d::entities::model::object::max_health(
 	sanguis::client::max_health const _max_health
 )
 {
-	if(
-		health_pair_
-	)
-		health_pair_->max_health(
+	fcppt::maybe_void(
+		health_pair_,
+		[
 			_max_health
-		);
+		](
+			sanguis::client::health_pair &_health_pair
+		)
+		{
+			_health_pair.max_health(
+				_max_health
+			);
+		}
+	);
 }
 
 sanguis::client::optional_health_pair const

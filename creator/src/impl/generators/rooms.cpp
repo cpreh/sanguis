@@ -337,9 +337,13 @@ sanguis::creator::impl::generators::rooms(
 			::edge::none};
 
 
+		typedef
 		fcppt::optional<
 			::signed_rect
-		> opt_neighbor;
+		>
+		optional_signed_rect;
+
+		optional_signed_rect opt_neighbor;
 
 		for (
 			auto const &other
@@ -356,7 +360,11 @@ sanguis::creator::impl::generators::rooms(
 			// so it's next to it
 			if (e != ::edge::none)
 			{
-				opt_neighbor = other;
+				opt_neighbor =
+					optional_signed_rect(
+						other
+					);
+
 				clipped_edge = e;
 			}
 
@@ -370,7 +378,7 @@ sanguis::creator::impl::generators::rooms(
 				break;
 		}
 
-		if (!wellformed || !opt_neighbor)
+		if (!wellformed || !opt_neighbor.has_value())
 			continue;
 
 		::signed_rect const neighbor(

@@ -10,9 +10,9 @@
 #include <sanguis/client/draw2d/entities/enemy_spawn_particle.hpp>
 #include <sanguis/client/draw2d/entities/load_parameters.hpp>
 #include <sanguis/client/draw2d/entities/name.hpp>
-#include <sanguis/client/draw2d/entities/optional_own_unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/own.hpp>
+#include <sanguis/client/draw2d/entities/own_unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/with_auras_model_parameters.hpp>
 #include <sanguis/client/draw2d/entities/with_buffs_auras_model.hpp>
 #include <sanguis/client/draw2d/entities/with_buffs_auras_model_parameters.hpp>
@@ -28,6 +28,7 @@
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/load/model/enemy_path.hpp>
 #include <sge/image/color/any/convert.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -99,24 +100,26 @@ sanguis::client::draw2d::entities::enemy::on_create(
 	sanguis::client::draw2d::entities::create_parameters const &_create_parameters
 )
 {
-	sanguis::client::draw2d::entities::optional_own_unique_ptr spawn_particle(
+	fcppt::maybe_void(
 		sanguis::client::draw2d::entities::enemy_spawn_particle(
 			_create_parameters.load_parameters(),
 			enemy_type_,
 			this->center(),
 			_create_parameters.background_tile()
+		),
+		[
+			&_create_parameters
+		](
+			sanguis::client::draw2d::entities::own_unique_ptr &&_spawn_particle
 		)
+		{
+			_create_parameters.insert_own_callback()(
+				std::move(
+					_spawn_particle
+				)
+			);
+		}
 	);
-
-	// TODO: Can we use maybe_void?
-	if(
-		spawn_particle
-	)
-		_create_parameters.insert_own_callback()(
-			std::move(
-				*spawn_particle
-			)
-		);
 }
 
 sanguis::client::draw2d::entities::hover::optional_info

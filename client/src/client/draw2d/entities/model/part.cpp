@@ -21,6 +21,7 @@
 #include <sanguis/client/load/resource/animation/series.hpp>
 #include <sge/audio/buffer.hpp>
 #include <sge/audio/sound/base.hpp>
+#include <sge/audio/sound/base_unique_ptr.hpp>
 #include <sge/audio/sound/do_pause.hpp>
 #include <sge/audio/sound/nonpositional_parameters.hpp>
 #include <sge/audio/sound/pause_or_resume.hpp>
@@ -28,6 +29,7 @@
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/optional_comparison.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/cast/size_fun.hpp>
@@ -37,6 +39,7 @@
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -90,15 +93,22 @@ sanguis::client::draw2d::entities::model::part::pause(
 	bool const _value
 )
 {
-	if(
-		sound_
-	)
-		sge::audio::sound::pause_or_resume(
-			*sound_,
-			sge::audio::sound::do_pause(
-				_value
-			)
-		);
+	fcppt::maybe_void(
+		sound_,
+		[
+			_value
+		](
+			sge::audio::sound::base_unique_ptr const &_sound
+		)
+		{
+			sge::audio::sound::pause_or_resume(
+				*_sound,
+				sge::audio::sound::do_pause(
+					_value
+				)
+			);
+		}
+	);
 }
 
 bool
@@ -113,7 +123,8 @@ sanguis::client::draw2d::entities::model::part::try_animation(
 			_atype
 		)
 	)
-		return true;
+		return
+			true;
 
 	if(
 		!load_part_[
@@ -122,7 +133,8 @@ sanguis::client::draw2d::entities::model::part::try_animation(
 			_atype
 		)
 	)
-		return false;
+		return
+			false;
 
 	this->load_animation(
 		_atype
@@ -133,7 +145,8 @@ sanguis::client::draw2d::entities::model::part::try_animation(
 			_atype
 		);
 
-	return true;
+	return
+		true;
 }
 
 void
@@ -152,48 +165,66 @@ sanguis::client::draw2d::entities::model::part::weapon(
 void
 sanguis::client::draw2d::entities::model::part::update()
 {
-	if(
-		animation_
-	)
-		animation_ended_ =
-			animation_->process()
-			||
-			animation_ended_;
-
-	if(
-		sound_
-	)
-		sound_->update();
-
-	if(
-		!desired_orientation_
-	)
-		return;
-
-	if(
-		fcppt::math::diff(
-			this->orientation(),
-			*desired_orientation_
+	fcppt::maybe_void(
+		animation_,
+		[
+			this
+		](
+			scoped_texture_animation const &_animation
 		)
-		<
-		fcppt::literal<
-			sanguis::client::draw2d::sprite::rotation
-		>(
-			0.001
-		)
-	)
-		return;
+		{
+			animation_ended_ =
+				_animation->process()
+				||
+				animation_ended_;
+		}
+	);
 
-	this->update_orientation(
-		sanguis::client::draw2d::entities::model::orientation(
-			sge::timer::elapsed_fractional_and_reset<
-				sanguis::client::draw2d::funit
-			>(
-				rotation_timer_
-			),
-			this->orientation(),
-			*desired_orientation_
+	fcppt::maybe_void(
+		sound_,
+		[](
+			sge::audio::sound::base_unique_ptr const &_sound
 		)
+		{
+			_sound->update();
+		}
+	);
+
+	fcppt::maybe_void(
+		desired_orientation_,
+		[
+			this
+		](
+			sanguis::client::draw2d::sprite::rotation const _rotation
+		)
+		{
+
+			if(
+				fcppt::math::diff(
+					this->orientation(),
+					_rotation
+				)
+				<
+				fcppt::literal<
+					sanguis::client::draw2d::sprite::rotation
+				>(
+					0.001
+				)
+			)
+				return;
+
+			this->update_orientation(
+				sanguis::client::draw2d::entities::model::orientation(
+					sge::timer::elapsed_fractional_and_reset<
+						sanguis::client::draw2d::funit
+					>(
+						rotation_timer_
+					),
+					this->orientation(),
+					_rotation
+				)
+			);
+		}
 	);
 }
 
@@ -208,13 +239,16 @@ sanguis::client::draw2d::entities::model::part::orientation(
 		);
 
 	if(
-		!desired_orientation_
+		!desired_orientation_.has_value()
 	)
 		this->update_orientation(
 			_rot
 		);
 
-	desired_orientation_ = _rot;
+	desired_orientation_ =
+		optional_rotation(
+			_rot
+		);
 }
 
 bool
@@ -262,13 +296,15 @@ sanguis::client::draw2d::entities::model::part::load_animation(
 	);
 
 	animation_ =
-		fcppt::make_unique_ptr<
-			sanguis::client::draw2d::sprite::normal::texture_animation
-		>(
-			series,
-			loop_method,
-			ref_,
-			diff_clock_
+		optional_scoped_texture_animation(
+			fcppt::make_unique_ptr<
+				sanguis::client::draw2d::sprite::normal::texture_animation
+			>(
+				series,
+				loop_method,
+				ref_,
+				diff_clock_
+			)
 		);
 
 	ref_.size(
@@ -282,40 +318,53 @@ sanguis::client::draw2d::entities::model::part::load_animation(
 		)
 	);
 
-	sound_.reset();
+	sound_ =
+		optional_sound();
 
-	if(
-		!animation.sound()
-	)
-		return;
-
-	switch(
-		loop_method
-	)
-	{
-	case sanguis::client::draw2d::sprite::animation::loop_method::stop_at_end:
-		sound_manager_.add(
-			animation.sound()->create_nonpositional(
-				sge::audio::sound::nonpositional_parameters()
-			)
-		);
-
-		break;
-	case sanguis::client::draw2d::sprite::animation::loop_method::repeat:
-		sound_ =
-			animation.sound()->create_nonpositional(
-				sge::audio::sound::nonpositional_parameters()
-			);
-
-		if(
-			sound_
+	fcppt::maybe_void(
+		animation.sound(),
+		[
+			loop_method,
+			this
+		](
+			sge::audio::buffer &_buffer
 		)
-			sound_->play(
-				sge::audio::sound::repeat::loop
-			);
+		{
+			switch(
+				loop_method
+			)
+			{
+			case sanguis::client::draw2d::sprite::animation::loop_method::stop_at_end:
+				sound_manager_.add(
+					_buffer.create_nonpositional(
+						sge::audio::sound::nonpositional_parameters()
+					)
+				);
 
-		break;
-	}
+				break;
+			case sanguis::client::draw2d::sprite::animation::loop_method::repeat:
+				{
+					sge::audio::sound::base_unique_ptr new_sound(
+						_buffer.create_nonpositional(
+							sge::audio::sound::nonpositional_parameters()
+						)
+					);
+
+					new_sound->play(
+						sge::audio::sound::repeat::loop
+					);
+
+					sound_ =
+						optional_sound(
+							std::move(
+								new_sound
+							)
+						);
+				}
+				break;
+			}
+		}
+	);
 }
 
 void

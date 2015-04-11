@@ -34,9 +34,10 @@
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <sge/viewport/manager_fwd.hpp>
+#include <fcppt/const.hpp>
 #include <fcppt/extract_from_string.hpp>
 #include <fcppt/extract_from_string_exn.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/maybe.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/to_std_string.hpp>
 #include <fcppt/signal/auto_connection.hpp>
@@ -529,27 +530,30 @@ sanguis::client::gui::menu::object::handle_text_changed()
 	unsigned long
 	port_type;
 
-	typedef
-	fcppt::optional<
-		port_type
-	>
-	optional_port;
-
-	optional_port const opt_port(
-		fcppt::extract_from_string<
-			port_type
-		>(
-			port_edit_.text()
-		)
-	);
-
 	connect_button_.enable(
-		opt_port
-		&&
-		!hostname_edit_.text().empty()
-		&&
-		(*opt_port > 0)
-		&& (*opt_port < 65535)
+		fcppt::maybe(
+			fcppt::extract_from_string<
+				port_type
+			>(
+				port_edit_.text()
+			),
+			fcppt::const_(
+				false
+			),
+			[
+				this
+			](
+				port_type const _port
+			)
+			{
+				return
+					!hostname_edit_.text().empty()
+					&&
+					_port > 0
+					&&
+					_port < 65535;
+			}
+		)
 	);
 }
 

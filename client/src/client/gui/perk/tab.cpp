@@ -19,6 +19,7 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/map.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/tree/map.hpp>
 
 
@@ -70,7 +71,9 @@ sanguis::client::gui::perk::tab::tab(
 									_context,
 									_style,
 									_state,
-									*_info
+									FCPPT_ASSERT_OPTIONAL_ERROR(
+										_info
+									)
 								);
 						}
 					);
@@ -109,7 +112,10 @@ sanguis::client::gui::perk::tab::tab(
 		sge::font::from_fcppt_string(
 			sanguis::client::perk::category_to_string(
 				sanguis::client::perk::to_category(
-					_range.begin()->value()->perk_type()
+					// TODO: This is unsafe!
+					FCPPT_ASSERT_OPTIONAL_ERROR(
+						_range.begin()->value()
+					).perk_type()
 				)
 			)
 		)

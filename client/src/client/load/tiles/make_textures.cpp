@@ -6,7 +6,7 @@
 #include <sanguis/model/dim.hpp>
 #include <sanguis/model/image_size.hpp>
 #include <sge/parse/json/array.hpp>
-#include <sge/parse/json/get.hpp>
+#include <sge/parse/json/get_exn.hpp>
 #include <sge/parse/json/int_type.hpp>
 #include <sge/parse/json/value.hpp>
 #include <sge/renderer/lock_rect.hpp>
@@ -32,7 +32,7 @@ sanguis::client::load::tiles::make_textures(
 		fcppt::algorithm::map<
 			sanguis::client::load::tiles::texture_container
 		>(
-			sge::parse::json::get<
+			sge::parse::json::get_exn<
 				sge::parse::json::array const
 			>(
 				_value
@@ -74,7 +74,7 @@ sanguis::client::load::tiles::make_textures(
 									sanguis::model::animation_index
 								>(
 									fcppt::cast::to_unsigned(
-										sge::parse::json::get<
+										sge::parse::json::get_exn<
 											sge::parse::json::int_type
 										>(
 											_element

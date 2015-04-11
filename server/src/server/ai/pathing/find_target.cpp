@@ -111,7 +111,7 @@ sanguis::server::ai::pathing::find_target(
 				!fcppt::container::find_opt(
 					predecessors,
 					pos
-				)
+				).has_value()
 				&&
 				!sanguis::creator::tile_is_solid(
 					_grid[

@@ -7,6 +7,7 @@
 #include <sge/image/color/any/convert.hpp>
 #include <sge/image/color/any/object.hpp>
 #include <fcppt/optional_impl.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/pre.hpp>
 
 
@@ -27,11 +28,13 @@ sanguis::client::draw2d::entities::buffs::slow::apply(
 )
 {
 	FCPPT_ASSERT_PRE(
-		!previous_color_
+		!previous_color_.has_value()
 	);
 
 	previous_color_ =
-		_model.color();
+		optional_color(
+			_model.color()
+		);
 
 	_model.color(
 		sge::image::color::any::convert<
@@ -47,13 +50,12 @@ sanguis::client::draw2d::entities::buffs::slow::remove(
 	sanguis::client::draw2d::entities::model::object &_model
 )
 {
-	FCPPT_ASSERT_PRE(
-		previous_color_
-	);
-
 	_model.color(
-		*previous_color_
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			previous_color_
+		)
 	);
 
-	previous_color_.reset();
+	previous_color_ =
+		optional_color();
 }

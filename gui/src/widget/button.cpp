@@ -1,5 +1,6 @@
 #include <sanguis/gui/click_callback.hpp>
 #include <sanguis/gui/get_focus.hpp>
+#include <sanguis/gui/needed_width.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/renderer/base.hpp>
 #include <sanguis/gui/style/base.hpp>
@@ -29,6 +30,7 @@
 #include <sge/rucksack/vector.hpp>
 #include <sge/rucksack/widget/base_fwd.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/maybe.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -42,7 +44,7 @@ sanguis::gui::widget::button::button(
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sge::font::string const &_text,
-	sanguis::gui::optional_needed_width const _needed_width
+	sanguis::gui::optional_needed_width const _opt_needed_width
 )
 :
 	sanguis::gui::widget::base(),
@@ -67,12 +69,21 @@ sanguis::gui::widget::button::button(
 		sge::rucksack::axis_policy2{
 			sge::rucksack::axis_policy{
 				sge::rucksack::preferred_size{
-					(
-						_needed_width
-						?
-							_needed_width->get()
-						:
-							static_text_.logical_size().w()
+					fcppt::maybe(
+						_opt_needed_width,
+						[
+							this
+						]{
+							return
+								static_text_.logical_size().w();
+						},
+						[](
+							sanguis::gui::needed_width const _needed_width
+						)
+						{
+							return
+								_needed_width.get();
+						}
 					)
 					+
 					_style.button_spacing().w()

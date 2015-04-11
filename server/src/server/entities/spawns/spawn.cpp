@@ -83,10 +83,14 @@ sanguis::server::entities::spawns::spawn::on_transfer(
 )
 {
 	center_ =
-		_parameters.center();
+		optional_center(
+			_parameters.center()
+		);
 
 	angle_ =
-		_parameters.angle();
+		optional_angle(
+			_parameters.angle()
+		);
 
 	return
 		sanguis::server::entities::optional_transfer_result(
@@ -108,19 +112,19 @@ sanguis::server::entities::spawns::spawn::update()
 				this
 			]()
 			{
-				sanguis::server::environment::object &environment(
+				sanguis::server::environment::object &cur_environment(
 					FCPPT_ASSERT_OPTIONAL_ERROR(
 						this->environment()
 					)
 				);
 
-				environment.insert(
+				cur_environment.insert(
 					sanguis::server::entities::enemies::create(
 						random_generator_,
 						enemy_type_,
 						enemy_kind_,
 						difficulty_,
-						environment.load_context(),
+						cur_environment.load_context(),
 						sanguis::server::entities::spawn_owner(
 							this->link()
 						),

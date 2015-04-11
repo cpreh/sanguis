@@ -7,7 +7,6 @@
 #include <sanguis/client/draw2d/collide_parameters.hpp>
 #include <sanguis/client/draw2d/dim2.hpp>
 #include <sanguis/client/draw2d/optional_player_center.hpp>
-#include <sanguis/client/draw2d/optional_speed.hpp>
 #include <sanguis/client/draw2d/player_center.hpp>
 #include <sanguis/client/draw2d/player_center_callback.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
@@ -16,6 +15,7 @@
 #include <sanguis/client/draw2d/entities/player.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/cast/int_to_float_fun.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 
@@ -100,7 +100,7 @@ sanguis::client::draw2d::entities::own_player::speed(
 void
 sanguis::client::draw2d::entities::own_player::update()
 {
-	sanguis::client::draw2d::optional_speed const new_speed(
+	fcppt::maybe_void(
 		collide_(
 			sanguis::client::draw2d::collide_parameters(
 				this->movement_duration(),
@@ -113,15 +113,18 @@ sanguis::client::draw2d::entities::own_player::update()
 					this->bounding_dim()
 				)
 			)
+		),
+		[
+			this
+		](
+			sanguis::client::draw2d::speed const _new_speed
 		)
+		{
+			sanguis::client::draw2d::entities::player::speed(
+				_new_speed
+			);
+		}
 	);
-
-	if(
-		new_speed
-	)
-		sanguis::client::draw2d::entities::player::speed(
-			*new_speed
-		);
 
 	sanguis::client::draw2d::entities::player::update();
 

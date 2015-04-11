@@ -3,6 +3,8 @@
 #include <sanguis/client/perk/info.hpp>
 #include <sanguis/client/perk/optional_info.hpp>
 #include <sanguis/client/perk/tree.hpp>
+#include <fcppt/const.hpp>
+#include <fcppt/maybe.hpp>
 
 
 sanguis::client::perk::compare::compare(
@@ -21,7 +23,21 @@ sanguis::client::perk::compare::operator()(
 ) const
 {
 	return
-		_tree.value().has_value()
-		&&
-		_tree.value()->perk_type() == type_;
+		fcppt::maybe(
+			_tree.value(),
+			fcppt::const_(
+				false
+			),
+			[
+				this
+			](
+				sanguis::client::perk::info const &_info
+			)
+			{
+				return
+					_info.perk_type()
+					==
+					type_;
+			}
+		);
 }

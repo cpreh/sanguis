@@ -6,7 +6,9 @@
 #include <sanguis/client/perk/info.hpp>
 #include <sanguis/client/perk/remaining_levels.hpp>
 #include <sanguis/client/perk/tree.hpp>
-#include <fcppt/assert/pre.hpp>
+#include <fcppt/const.hpp>
+#include <fcppt/maybe.hpp>
+#include <fcppt/assert/optional_error.hpp>
 
 
 sanguis::client::perk::choosable_state
@@ -24,16 +26,16 @@ sanguis::client::perk::choosable(
 		)
 	);
 
-	FCPPT_ASSERT_PRE(
-		node.value().has_value()
-	);
-
 	sanguis::client::perk::info const &info(
-		*node.value()
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			node.value()
+		)
 	);
 
-	FCPPT_ASSERT_PRE(
-		node.has_parent()
+	sanguis::client::perk::tree const &parent_node(
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			node.parent()
+		)
 	);
 
 	if(
@@ -45,11 +47,23 @@ sanguis::client::perk::choosable(
 			sanguis::client::perk::choosable_state::max_level;
 
 	if(
-		node.parent().has_value()
-		&&
-		node.parent()->value()->level()
-		<
-		info.required_parent_level().get()
+		fcppt::maybe(
+			parent_node.value(),
+			fcppt::const_(
+				false
+			),
+			[
+				&info
+			](
+				sanguis::client::perk::info const &_parent_info
+			)
+			{
+				return
+					_parent_info.level()
+					<
+					info.required_parent_level().get();
+			}
+		)
 	)
 		return
 			sanguis::client::perk::choosable_state::parent_level;

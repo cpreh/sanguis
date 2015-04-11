@@ -228,7 +228,7 @@ sanguis::gui::master::handle_key(
 				sanguis::gui::widget::optional_focus(
 					context_.focus()
 				)
-			)
+			).has_value()
 		)
 			this->try_focus(
 				sanguis::gui::widget::optional_focus(

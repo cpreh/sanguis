@@ -1,4 +1,5 @@
 #include <sanguis/model/animation.hpp>
+#include <sanguis/model/animation_delay.hpp>
 #include <sanguis/model/animation_name.hpp>
 #include <sanguis/model/animation_sound.hpp>
 #include <sanguis/model/deserialize.hpp>
@@ -9,7 +10,6 @@
 #include <sanguis/model/part_name.hpp>
 #include <sanguis/model/serialize.hpp>
 #include <sanguis/model/weapon_category_name.hpp>
-#include <sanguis/tools/animations/const_optional_image_file_ref.hpp>
 #include <sanguis/tools/animations/delay_to_int.hpp>
 #include <sanguis/tools/animations/find_image_file.hpp>
 #include <sanguis/tools/animations/int_to_delay.hpp>
@@ -29,10 +29,15 @@
 #include <sanguis/tools/libmergeimage/save_images.hpp>
 #include <sanguis/tools/libmergeimage/saved_image_vector.hpp>
 #include <sanguis/tools/libmergeimage/to_model.hpp>
+#include <fcppt/const.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/maybe.hpp>
+#include <fcppt/maybe_multi.hpp>
+#include <fcppt/maybe_void.hpp>
+#include <fcppt/maybe_void_multi.hpp>
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/optional_impl.hpp>
-#include <fcppt/assert/error.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/truncation_check.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
@@ -40,6 +45,7 @@
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <QFileDialog>
+#include <QImage>
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QObject>
@@ -98,7 +104,7 @@ sanguis::tools::animations::main_window::~main_window()
 void
 sanguis::tools::animations::main_window::actionJSON()
 {
-	sanguis::tools::animations::main_window::optional_path const chosen_json_file{
+	fcppt::maybe_void(
 		sanguis::tools::animations::qtutil::string_to_optional<
 			boost::filesystem::path
 		>(
@@ -108,16 +114,17 @@ sanguis::tools::animations::main_window::actionJSON()
 				QString(),
 				tr("JSON files (*.json)")
 			)
+		),
+		[
+			this
+		](
+			boost::filesystem::path const &_chosen_json_file
 		)
-	};
-
-	if(
-		!chosen_json_file
-	)
-		return;
-
-	this->open_json(
-		*chosen_json_file
+		{
+			this->open_json(
+				_chosen_json_file
+			);
+		}
 	);
 }
 
@@ -125,7 +132,7 @@ void
 sanguis::tools::animations::main_window::actionResourcePath()
 try
 {
-	sanguis::tools::animations::main_window::optional_path const resource_directory{
+	fcppt::maybe_void(
 		sanguis::tools::animations::qtutil::string_to_optional<
 			boost::filesystem::path
 		>(
@@ -133,101 +140,118 @@ try
 				this,
 				tr("Open the resource directory")
 			)
+		),
+		[
+			this
+		](
+			boost::filesystem::path const &_resource_directory
 		)
-	};
-
-	if(
-		!resource_directory
-	)
-		return;
-
-	sanguis::tools::libmergeimage::merge_result merged_result(
-		sanguis::tools::libmergeimage::merge_images(
-			sge_systems_.image_system(),
-			*resource_directory
-		)
-	);
-
-	if(
-		!loaded_model_
-	)
-	{
-		this->message_box(
-			QMessageBox::Icon::Warning,
-			QString(
-				tr("No output path")
-			),
-			QString(
-				tr("You don't have an output path yet. Please choose one.")
+		{
+			if(
+				!loaded_model_.has_value()
 			)
-		);
-	}
+			{
+				this->message_box(
+					QMessageBox::Icon::Warning,
+					QString(
+						tr("No output path")
+					),
+					QString(
+						tr("You don't have an output path yet. Please choose one.")
+					)
+				);
+			}
 
-	sanguis::tools::animations::main_window::optional_path const save_path(
-		loaded_model_
-		?
-			this->resource_path()
-		:
-			sanguis::tools::animations::qtutil::string_to_optional<
-				boost::filesystem::path
-			>(
-				QFileDialog::getExistingDirectory(
-					this,
-					tr("Select a directory to save the merged images to")
+			fcppt::maybe_void(
+				loaded_model_.has_value()
+				?
+					this->resource_path()
+				:
+					sanguis::tools::animations::qtutil::string_to_optional<
+						boost::filesystem::path
+					>(
+						QFileDialog::getExistingDirectory(
+							this,
+							tr("Select a directory to save the merged images to")
+						)
+					)
+				,
+				[
+					&_resource_directory,
+					this
+				](
+					boost::filesystem::path const &_save_path
 				)
-			)
-	);
+				{
+					sanguis::tools::libmergeimage::merge_result merged_result(
+						sanguis::tools::libmergeimage::merge_images(
+							sge_systems_.image_system(),
+							_resource_directory
+						)
+					);
 
-	if(
-		!save_path
-	)
-		return;
+					boost::filesystem::path const json_file(
+						_save_path
+						/
+						(
+							fcppt::filesystem::stem(
+								_save_path
+							)
+							+
+							FCPPT_TEXT(".json")
+						)
+					);
 
-	boost::filesystem::path const json_file(
-		*save_path
-		/
-		(
-			fcppt::filesystem::stem(
-				*save_path
-			)
-			+
-			FCPPT_TEXT(".json")
-		)
-	);
+					sanguis::tools::libmergeimage::saved_image_vector const saved_images(
+						sanguis::tools::libmergeimage::save_images(
+							sge_systems_.image_system(),
+							_save_path,
+							merged_result.images()
+						)
+					);
 
-	sanguis::tools::libmergeimage::saved_image_vector const saved_images(
-		sanguis::tools::libmergeimage::save_images(
-			sge_systems_.image_system(),
-			*save_path,
-			merged_result.images()
-		)
-	);
+					sanguis::model::object converted_model(
+						sanguis::tools::libmergeimage::to_model(
+							merged_result.cell_size(),
+							saved_images
+						)
+					);
 
-	sanguis::model::object converted_model(
-		sanguis::tools::libmergeimage::to_model(
-			merged_result.cell_size(),
-			saved_images
-		)
-	);
+					sanguis::model::serialize(
+						json_file,
+						fcppt::maybe(
+							loaded_model_,
+							[
+								&converted_model
+							]{
+								return
+									std::move(
+										converted_model
+									);
+							},
+							[
+								&converted_model
+							](
+								sanguis::tools::animations::path_model_pair const &_loaded_model
+							)
+							{
+								return
+									sanguis::tools::animations::merge_models(
+										_loaded_model.model(),
+										std::move(
+											converted_model
+										)
+									);
+							}
+						)
+					);
 
-	sanguis::model::serialize(
-		json_file,
-		loaded_model_
-		?
-			sanguis::tools::animations::merge_models(
-				loaded_model_->model(),
-				std::move(
-					converted_model
-				)
-			)
-		:
-			std::move(
-				converted_model
-			)
-	);
-
-	this->open_json(
-		json_file
+					this->open_json(
+						json_file
+					);
+				}
+			);
+		}
 	);
 }
 catch(
@@ -262,34 +286,37 @@ catch(
 void
 sanguis::tools::animations::main_window::actionSave()
 {
-	if(
-		!loaded_model_
-	)
-		return;
-
-	try
-	{
-		sanguis::model::serialize(
-			loaded_model_->path(),
-			loaded_model_->model()
-		);
-	}
-	catch(
-		sanguis::model::exception const &_error
-	)
-	{
-		this->message_box(
-			QMessageBox::Icon::Critical,
-			QString(
-				tr("Error saving JSON")
-			),
-			sanguis::tools::animations::qtutil::from_fcppt_string(
-				_error.string()
+	fcppt::maybe_void(
+		loaded_model_,
+		[
+			this
+		](
+			sanguis::tools::animations::path_model_pair const &_loaded_model
+		)
+		{
+			try
+			{
+				sanguis::model::serialize(
+					_loaded_model.path(),
+					_loaded_model.model()
+				);
+			}
+			catch(
+				sanguis::model::exception const &_error
 			)
-		);
-
-		return;
-	}
+			{
+				this->message_box(
+					QMessageBox::Icon::Critical,
+					QString(
+						tr("Error saving JSON")
+					),
+					sanguis::tools::animations::qtutil::from_fcppt_string(
+						_error.string()
+					)
+				);
+			}
+		}
+	);
 }
 
 void
@@ -301,16 +328,33 @@ sanguis::tools::animations::main_window::actionQuit()
 void
 sanguis::tools::animations::main_window::actionSound()
 {
-	sanguis::tools::animations::optional_animation_ref const animation(
-		this->current_animation()
-	);
+	fcppt::maybe_void_multi(
+		[
+			this
+		](
+			sanguis::model::animation &_animation,
+			boost::filesystem::path const &_chosen_sound_file
+		)
+		{
+			sanguis::model::animation_sound const animation_sound{
+				fcppt::filesystem::path_to_string(
+					_chosen_sound_file.filename()
+				)
+			};
 
-	if(
-		!animation
-	)
-		return;
+			_animation.animation_sound(
+				sanguis::model::optional_animation_sound(
+					animation_sound
+				)
+			);
 
-	sanguis::tools::animations::main_window::optional_path const chosen_sound_file{
+			this->ui_->soundEdit->setText(
+				sanguis::tools::animations::qtutil::from_fcppt_string(
+					animation_sound.get()
+				)
+			);
+		},
+		this->current_animation(),
 		sanguis::tools::animations::qtutil::string_to_optional<
 			boost::filesystem::path
 		>(
@@ -320,108 +364,80 @@ sanguis::tools::animations::main_window::actionSound()
 				QString()
 			)
 		)
-	};
-
-	if(
-		!chosen_sound_file
-	)
-		return;
-
-	sanguis::model::animation_sound const animation_sound{
-		fcppt::filesystem::path_to_string(
-			chosen_sound_file->filename()
-		)
-	};
-
-	animation->animation_sound(
-		sanguis::model::optional_animation_sound(
-			animation_sound
-		)
-	);
-
-	this->ui_->soundEdit->setText(
-		sanguis::tools::animations::qtutil::from_fcppt_string(
-			animation_sound.get()
-		)
 	);
 }
 
 void
 sanguis::tools::animations::main_window::selectedPartChanged()
 {
-	sanguis::tools::animations::main_window::optional_part_name const part(
+	fcppt::maybe_void_multi(
+		[
+			this
+		](
+			sanguis::tools::animations::path_model_pair &_loaded_model,
+			sanguis::model::part_name const &_part
+		)
+		{
+			ui_->weaponComboBox->clear();
+
+			for(
+				auto const &weapon_category
+				:
+				_loaded_model.model().part(
+					_part
+				).weapon_categories()
+			)
+				ui_->weaponComboBox->insertItem(
+					0,
+					sanguis::tools::animations::qtutil::from_fcppt_string(
+						weapon_category.first.get()
+					)
+				);
+		},
+		loaded_model_,
 		this->selected_part()
 	);
-
-	if(
-		!loaded_model_
-		||
-		!part
-	)
-		return;
-
-	ui_->weaponComboBox->clear();
-
-	for(
-		auto const &weapon_category
-		:
-		loaded_model_->model().part(
-			*part
-		).weapon_categories()
-	)
-		ui_->weaponComboBox->insertItem(
-			0,
-			sanguis::tools::animations::qtutil::from_fcppt_string(
-				weapon_category.first.get()
-			)
-		);
 }
 
 void
 sanguis::tools::animations::main_window::selectedWeaponChanged()
 {
-	sanguis::tools::animations::main_window::optional_part_name const part(
-		this->selected_part()
-	);
+	fcppt::maybe_void_multi(
+		[
+			this
+		](
+			sanguis::tools::animations::path_model_pair &_loaded_model,
+			sanguis::model::part_name const &_part,
+			sanguis::model::weapon_category_name const &_weapon_category
+		)
+		{
+			ui_->animationComboBox->clear();
 
-	sanguis::tools::animations::main_window::optional_weapon_category_name const weapon_category(
+			for(
+				auto const &animation
+				:
+				_loaded_model.model().part(
+					_part
+				).weapon_category(
+					_weapon_category
+				).animations()
+			)
+				ui_->animationComboBox->insertItem(
+					0,
+					sanguis::tools::animations::qtutil::from_fcppt_string(
+						animation.first.get()
+					)
+				);
+		},
+		loaded_model_,
+		this->selected_part(),
 		this->selected_weapon_category()
 	);
-
-	if(
-		!loaded_model_
-		||
-		!part
-		||
-		!weapon_category
-	)
-		return;
-
-	ui_->animationComboBox->clear();
-
-	for(
-		auto const &animation
-		:
-		loaded_model_->model().part(
-			*part
-		).weapon_category(
-			*weapon_category
-		).animations()
-	)
-		ui_->animationComboBox->insertItem(
-			0,
-			sanguis::tools::animations::qtutil::from_fcppt_string(
-				animation.first.get()
-			)
-		);
 }
 
 void
 sanguis::tools::animations::main_window::selectedAnimationChanged()
 {
-	sanguis::tools::animations::optional_animation_ref const animation(
-		this->current_animation()
-	);
 
 	bool const animation_was_playing(
 		frame_timer_.isActive()
@@ -429,62 +445,100 @@ sanguis::tools::animations::main_window::selectedAnimationChanged()
 
 	this->resetFrames();
 
-	if(
-		!animation
-	)
-		return;
-
-	ui_->delaySpinBox->setValue(
-		animation->animation_delay()
-		?
-			fcppt::cast::truncation_check<
-				int
-			>(
-				animation->animation_delay()->get().count()
-			)
-		:
-			0
-	);
-
-	ui_->soundEdit->setText(
-		animation->animation_sound()
-		?
-			sanguis::tools::animations::qtutil::from_fcppt_string(
-				animation->animation_sound()->get()
-			)
-		:
-			QString()
-	);
-
-	sanguis::tools::animations::const_optional_image_file_ref const file(
-		sanguis::tools::animations::find_image_file(
-			image_files_,
-			loaded_model_->model(),
-			*this->selected_part(),
-			*this->selected_weapon_category(),
-			*this->selected_animation()
+	fcppt::maybe_void(
+		this->current_animation(),
+		[
+			animation_was_playing,
+			this
+		](
+			sanguis::model::animation &_animation
 		)
+		{
+			ui_->delaySpinBox->setValue(
+				fcppt::maybe(
+					_animation.animation_delay(),
+					fcppt::const_(
+						0
+					),
+					[
+						&_animation
+					](
+						sanguis::model::animation_delay const _delay
+					)
+					{
+						return
+							fcppt::cast::truncation_check<
+								int
+							>(
+								_delay.get().count()
+							);
+					}
+				)
+			);
+
+			ui_->soundEdit->setText(
+				fcppt::maybe(
+					_animation.animation_sound(),
+					[]{
+						return
+							QString();
+					},
+					[](
+						sanguis::model::animation_sound const &_sound
+					)
+					{
+						return
+							sanguis::tools::animations::qtutil::from_fcppt_string(
+								_sound.get()
+							);
+					}
+				)
+			);
+
+			frames_.clear();
+
+			fcppt::maybe_void(
+				sanguis::tools::animations::find_image_file(
+					image_files_,
+					FCPPT_ASSERT_OPTIONAL_ERROR(
+						loaded_model_
+					).model(),
+					FCPPT_ASSERT_OPTIONAL_ERROR(
+						this->selected_part()
+					),
+					FCPPT_ASSERT_OPTIONAL_ERROR(
+						this->selected_weapon_category()
+					),
+					FCPPT_ASSERT_OPTIONAL_ERROR(
+						this->selected_animation()
+					)
+				),
+				[
+					&_animation,
+					animation_was_playing,
+					this
+				](
+					QImage const &_file
+				)
+				{
+					frames_ =
+						sanguis::tools::animations::make_frames(
+							_file,
+							*ui_->scrollAreaWidgetContents,
+							FCPPT_ASSERT_OPTIONAL_ERROR(
+								loaded_model_
+							).model(),
+							_animation
+						);
+
+					if(
+						animation_was_playing
+					)
+						this->playFrames();
+				}
+			);
+		}
 	);
-
-	frames_.clear();
-
-	if(
-		!file
-	)
-		return;
-
-	frames_ =
-		sanguis::tools::animations::make_frames(
-			*file,
-			*ui_->scrollAreaWidgetContents,
-			loaded_model_->model(),
-			*animation
-		);
-
-	if(
-		animation_was_playing
-	)
-		this->playFrames();
 }
 
 void
@@ -492,18 +546,24 @@ sanguis::tools::animations::main_window::globalDelayChanged(
 	int const _value
 )
 {
-	if(
-		!loaded_model_
-	)
-		return;
-
-	loaded_model_->model().animation_delay(
-		sanguis::tools::animations::int_to_delay(
-			_value
+	fcppt::maybe_void(
+		loaded_model_,
+		[
+			_value,
+			this
+		](
+			sanguis::tools::animations::path_model_pair &_loaded_model
 		)
-	);
+		{
+			_loaded_model.model().animation_delay(
+				sanguis::tools::animations::int_to_delay(
+					_value
+				)
+			);
 
-	this->update_frame_timer();
+			this->update_frame_timer();
+		}
+	);
 }
 
 void
@@ -511,22 +571,24 @@ sanguis::tools::animations::main_window::delayChanged(
 	int const _value
 )
 {
-	sanguis::tools::animations::optional_animation_ref const animation(
-		this->current_animation()
-	);
-
-	if(
-		!animation
-	)
-		return;
-
-	animation->animation_delay(
-		sanguis::tools::animations::int_to_delay(
-			_value
+	fcppt::maybe_void(
+		this->current_animation(),
+		[
+			_value,
+			this
+		](
+			sanguis::model::animation &_animation
 		)
-	);
+		{
+			_animation.animation_delay(
+				sanguis::tools::animations::int_to_delay(
+					_value
+				)
+			);
 
-	this->update_frame_timer();
+			this->update_frame_timer();
+		}
+	);
 }
 
 void
@@ -534,27 +596,29 @@ sanguis::tools::animations::main_window::soundChanged(
 	QString const &_name
 )
 {
-	sanguis::tools::animations::optional_animation_ref const animation(
-		this->current_animation()
-	);
-
-	if(
-		!animation
-	)
-		return;
-
-	animation->animation_sound(
-		sanguis::tools::animations::qtutil::string_to_optional<
-			sanguis::model::animation_sound
-		>(
-			_name
+	fcppt::maybe_void(
+		this->current_animation(),
+		[
+			&_name
+		](
+			sanguis::model::animation &_animation
 		)
+		{
+			_animation.animation_sound(
+				sanguis::tools::animations::qtutil::string_to_optional<
+					sanguis::model::animation_sound
+				>(
+					_name
+				)
+			);
+		}
 	);
 }
 
 void
 sanguis::tools::animations::main_window::updateFrame()
 {
+	// TODO: cyclic_iterator?
 	if(
 		frame_iterator_
 		==
@@ -591,35 +655,37 @@ sanguis::tools::animations::main_window::updateFrame()
 void
 sanguis::tools::animations::main_window::playFrames()
 {
-	sanguis::model::optional_animation_delay const delay(
-		this->current_animation_delay()
-	);
-
-	if(
-		!delay
-	)
-	{
-		this->message_box(
-			QMessageBox::Icon::Critical,
-			QString(
-				tr("No animation delay")
-			),
-			QString(
-				tr("No animation delay specified. Can't play the animation.")
-			)
-		);
-
-		return;
-	}
-
-	frame_timer_.start(
-		sanguis::tools::animations::delay_to_int(
-			*delay
+	fcppt::maybe(
+		this->current_animation_delay(),
+		[
+			this
+		]{
+			this->message_box(
+				QMessageBox::Icon::Critical,
+				QString(
+					tr("No animation delay")
+				),
+				QString(
+					tr("No animation delay specified. Can't play the animation.")
+				)
+			);
+		},
+		[
+			this
+		](
+			sanguis::model::animation_delay const _delay
 		)
-	);
+		{
+			frame_timer_.start(
+				sanguis::tools::animations::delay_to_int(
+					_delay
+				)
+			);
 
-	frame_iterator_ =
-		frames_.begin();
+			frame_iterator_ =
+				frames_.begin();
+		}
+	);
 }
 
 void
@@ -642,39 +708,36 @@ sanguis::tools::animations::main_window::resetFrames()
 sanguis::tools::animations::optional_animation_ref const
 sanguis::tools::animations::main_window::current_animation()
 {
-	sanguis::tools::animations::main_window::optional_part_name const part(
-		this->selected_part()
-	);
-
-	sanguis::tools::animations::main_window::optional_weapon_category_name const weapon_category(
-		this->selected_weapon_category()
-	);
-
-	sanguis::tools::animations::main_window::optional_animation_name const animation(
-		this->selected_animation()
-	);
-
+	// TODO: optional_bind_construct_multi?
 	return
-		loaded_model_
-		&&
-		part
-		&&
-		weapon_category
-		&&
-		animation
-		?
-			sanguis::tools::animations::optional_animation_ref(
-				loaded_model_->model().part(
-					*part
-				).weapon_category(
-					*weapon_category
-				).animation(
-					*animation
-				)
+		fcppt::maybe_multi(
+			[]{
+				return
+					sanguis::tools::animations::optional_animation_ref();
+			},
+			[](
+				sanguis::tools::animations::path_model_pair &_loaded_model,
+				sanguis::model::part_name const &_part,
+				sanguis::model::weapon_category_name const &_weapon_category,
+				sanguis::model::animation_name const &_animation
 			)
-		:
-			sanguis::tools::animations::optional_animation_ref()
-		;
+			{
+				return
+					sanguis::tools::animations::optional_animation_ref(
+						_loaded_model.model().part(
+							_part
+						).weapon_category(
+							_weapon_category
+						).animation(
+							_animation
+						)
+					);
+			},
+			loaded_model_,
+			this->selected_part(),
+			this->selected_weapon_category(),
+			this->selected_animation()
+		);
 }
 
 void
@@ -682,7 +745,8 @@ sanguis::tools::animations::main_window::open_json(
 	boost::filesystem::path const &_path
 )
 {
-	loaded_model_.reset();
+	loaded_model_=
+		optional_path_model_pair();
 
 	ui_->partComboBox->clear();
 
@@ -691,10 +755,12 @@ sanguis::tools::animations::main_window::open_json(
 	try
 	{
 		loaded_model_ =
-			sanguis::tools::animations::path_model_pair(
-				_path,
-				sanguis::model::deserialize(
-					_path
+			optional_path_model_pair(
+				sanguis::tools::animations::path_model_pair(
+					_path,
+					sanguis::model::deserialize(
+						_path
+					)
 				)
 			);
 	}
@@ -715,24 +781,30 @@ sanguis::tools::animations::main_window::open_json(
 		return;
 	}
 
-	FCPPT_ASSERT_ERROR(
-		loaded_model_.has_value()
-	);
 
 	ui_->resourcePathEdit->setText(
 		sanguis::tools::animations::qtutil::from_fcppt_string(
 			fcppt::filesystem::path_to_string(
-				*this->resource_path()
+				FCPPT_ASSERT_OPTIONAL_ERROR(
+					this->resource_path()
+				)
 			)
 		)
+	);
+
+	// TODO: Do this differently!
+	sanguis::tools::animations::path_model_pair &loaded_model(
+		loaded_model_.get_unsafe()
 	);
 
 	try
 	{
 		image_files_ =
 			sanguis::tools::animations::load_image_files(
-				*this->resource_path(),
-				loaded_model_->model()
+				FCPPT_ASSERT_OPTIONAL_ERROR(
+					this->resource_path()
+				),
+				loaded_model.model()
 			);
 	}
 	catch(
@@ -753,7 +825,7 @@ sanguis::tools::animations::main_window::open_json(
 	for(
 		auto const &part
 		:
-		loaded_model_->model().parts()
+		loaded_model.model().parts()
 	)
 		ui_->partComboBox->insertItem(
 			0,
@@ -763,15 +835,23 @@ sanguis::tools::animations::main_window::open_json(
 		);
 
 	ui_->globalDelaySpinBox->setValue(
-		loaded_model_->model().animation_delay()
-		?
-			fcppt::cast::truncation_check<
-				int
-			>(
-				loaded_model_->model().animation_delay()->get().count()
+		fcppt::maybe(
+			loaded_model.model().animation_delay(),
+			fcppt::const_(
+				0
+			),
+			[](
+				sanguis::model::animation_delay const _delay
 			)
-		:
-			0
+			{
+				return
+					fcppt::cast::truncation_check<
+						int
+					>(
+						_delay.get().count()
+					);
+			}
+		)
 	);
 }
 
@@ -829,42 +909,51 @@ sanguis::tools::animations::main_window::resource_path()
 void
 sanguis::tools::animations::main_window::update_frame_timer()
 {
-	sanguis::model::optional_animation_delay const delay(
-		this->current_animation_delay()
+	fcppt::maybe(
+		this->current_animation_delay(),
+		[
+			this
+		]{
+			this->resetFrames();
+		},
+		[
+			this
+		](
+			sanguis::model::animation_delay const _delay
+		)
+		{
+			frame_timer_.setInterval(
+				sanguis::tools::animations::delay_to_int(
+					_delay
+				)
+			);
+		}
 	);
-
-	if(
-		!delay
-	)
-		this->resetFrames();
-	else
-		frame_timer_.setInterval(
-			sanguis::tools::animations::delay_to_int(
-				*delay
-			)
-		);
 }
 
 sanguis::model::optional_animation_delay const
 sanguis::tools::animations::main_window::current_animation_delay()
 {
-	sanguis::tools::animations::optional_animation_ref const animation(
-		this->current_animation()
-	);
-
-	if(
-		!animation
-	)
-		return
-			sanguis::model::optional_animation_delay();
-
 	return
-		animation->animation_delay()
-		?
-			animation->animation_delay()
-		:
-			loaded_model_->model().animation_delay()
-		;
+		fcppt::optional_bind(
+			this->current_animation(),
+			[
+				this
+			](
+				sanguis::model::animation const &_animation
+			)
+			{
+				return
+					_animation.animation_delay().has_value()
+					?
+						_animation.animation_delay()
+					:
+						FCPPT_ASSERT_OPTIONAL_ERROR(
+							loaded_model_
+						).model().animation_delay()
+					;
+			}
+		);
 }
 
 void

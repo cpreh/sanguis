@@ -62,7 +62,7 @@ sanguis::server::entities::with_velocity::update()
 {
 	sanguis::server::entities::with_body::update();
 
-	sanguis::server::environment::object &environment(
+	sanguis::server::environment::object &cur_environment(
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			this->environment()
 		)
@@ -71,7 +71,7 @@ sanguis::server::entities::with_velocity::update()
 	if(
 		net_center_.update()
 	)
-		environment.center_changed(
+		cur_environment.center_changed(
 			this->id(),
 			this->center()
 		);
@@ -79,7 +79,7 @@ sanguis::server::entities::with_velocity::update()
 	if(
 		net_speed_.update()
 	)
-		environment.speed_changed(
+		cur_environment.speed_changed(
 			this->id(),
 			this->speed()
 		);

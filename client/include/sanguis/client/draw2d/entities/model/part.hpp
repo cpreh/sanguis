@@ -96,9 +96,11 @@ private:
 
 	sanguis::diff_timer rotation_timer_;
 
-	typedef fcppt::optional<
+	typedef
+	fcppt::optional<
 		sanguis::client::draw2d::sprite::rotation
-	> optional_rotation;
+	>
+	optional_rotation;
 
 	optional_rotation desired_orientation_;
 
@@ -110,15 +112,29 @@ private:
 
 	sanguis::optional_primary_weapon_type weapon_;
 
-	typedef std::unique_ptr<
+	typedef
+	std::unique_ptr<
 		sanguis::client::draw2d::sprite::normal::texture_animation
-	> scoped_texture_animation;
+	>
+	scoped_texture_animation;
 
-	scoped_texture_animation animation_;
+	typedef
+	fcppt::optional<
+		scoped_texture_animation
+	>
+	optional_scoped_texture_animation;
+
+	optional_scoped_texture_animation animation_;
 
 	bool animation_ended_;
 
-	sge::audio::sound::base_unique_ptr sound_;
+	typedef
+	fcppt::optional<
+		sge::audio::sound::base_unique_ptr
+	>
+	optional_sound;
+
+	optional_sound sound_;
 };
 
 }

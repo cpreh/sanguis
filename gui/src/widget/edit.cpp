@@ -17,7 +17,7 @@
 #include <sge/font/flags_field.hpp>
 #include <sge/font/metrics.hpp>
 #include <sge/font/object.hpp>
-#include <sge/font/optional_index.hpp>
+#include <sge/font/index.hpp>
 #include <sge/font/rect.hpp>
 #include <sge/font/string.hpp>
 #include <sge/font/text.hpp>
@@ -44,6 +44,7 @@
 #include <sge/timer/reset_when_expired.hpp>
 #include <sge/timer/clocks/delta_impl.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/maybe.hpp>
 #include <fcppt/string_conv_locale.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/size_fun.hpp>
@@ -225,7 +226,7 @@ sanguis::gui::widget::edit::on_click(
 	sge::rucksack::vector const _pos
 )
 {
-	sge::font::optional_index const index(
+	fcppt::maybe(
 		static_text_.text().pos_to_index(
 			fcppt::math::vector::structure_cast<
 				sge::font::vector,
@@ -235,31 +236,37 @@ sanguis::gui::widget::edit::on_click(
 			)
 			-
 			static_text_.pos()
+		),
+		[
+			_pos,
+			this
+		]{
+			if(
+				_pos.x()
+				>=
+				static_text_.rect().w()
+				+
+				static_text_.pos().x()
+			)
+				position_
+					= text_.size();
+		},
+		[
+			this
+		](
+			sge::font::index const _index
 		)
+		{
+			FCPPT_ASSERT_ERROR(
+				_index
+				<=
+				text_.size()
+			);
+
+			position_ =
+				_index;
+		}
 	);
-
-	if(
-		index
-	)
-	{
-		FCPPT_ASSERT_ERROR(
-			*index
-			<=
-			text_.size()
-		);
-
-		position_ =
-			*index;
-	}
-	else if(
-		_pos.x()
-		>=
-		static_text_.rect().w()
-		+
-		static_text_.pos().x()
-	)
-		position_
-			= text_.size();
 
 	return
 		sanguis::gui::get_focus(

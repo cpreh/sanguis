@@ -1,7 +1,6 @@
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/control/actions/nullary.hpp>
 #include <sanguis/client/control/actions/nullary_type.hpp>
-#include <sanguis/client/control/actions/variant.hpp>
 #include <sanguis/client/events/action.hpp>
 #include <sanguis/client/events/message.hpp>
 #include <sanguis/client/events/net_error.hpp>
@@ -13,7 +12,9 @@
 #include <sanguis/client/states/ingame_menu.hpp>
 #include <sanguis/client/states/perk_chooser.hpp>
 #include <sanguis/client/states/running.hpp>
-#include <fcppt/variant/holds_type.hpp>
+#include <fcppt/maybe.hpp>
+#include <fcppt/assert/unreachable.hpp>
+#include <fcppt/variant/to_optional.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/result.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -43,47 +44,57 @@ sanguis::client::states::ingame::react(
 	sanguis::client::events::action const &_event
 )
 {
-	sanguis::client::control::actions::variant const action(
-		_event.value().get()
-	);
-
-	if(
-		fcppt::variant::holds_type<
-			sanguis::client::control::actions::nullary
-		>(
-			action
-		)
-	)
-	{
-		switch(
-			action.get<
-				sanguis::client::control::actions::nullary
-			>().type()
-		)
-		{
-		case sanguis::client::control::actions::nullary_type::console:
-			return
-				this->transit<
-					sanguis::client::states::console
-				>();
-		case sanguis::client::control::actions::nullary_type::perk_menu:
-			return
-				this->transit<
-					sanguis::client::states::perk_chooser
-				>();
-		case sanguis::client::control::actions::nullary_type::escape:
-			this->context<
-				sanguis::client::machine
-			>().quit();
-
-			return
-				this->discard_event();
-			//return transit<states::ingame_menu>();
-		default:
-			break;
-		}
-	}
-
 	return
-		this->forward_event();
+		fcppt::maybe(
+			fcppt::variant::to_optional<
+				sanguis::client::control::actions::nullary
+			>(
+				_event.value().get()
+			),
+			[
+				this
+			]{
+				return
+					this->forward_event();
+			},
+			[
+				this
+			](
+				sanguis::client::control::actions::nullary const &_nullary
+			)
+			{
+				switch(
+					_nullary.type()
+				)
+				{
+				case sanguis::client::control::actions::nullary_type::console:
+					return
+						this->transit<
+							sanguis::client::states::console
+						>();
+				case sanguis::client::control::actions::nullary_type::perk_menu:
+					return
+						this->transit<
+							sanguis::client::states::perk_chooser
+						>();
+				case sanguis::client::control::actions::nullary_type::escape:
+					this->context<
+						sanguis::client::machine
+					>().quit();
+
+					//return transit<states::ingame_menu>();
+					return
+						this->discard_event();
+				case sanguis::client::control::actions::nullary_type::change_world:
+				case sanguis::client::control::actions::nullary_type::drop_primary_weapon:
+				case sanguis::client::control::actions::nullary_type::drop_secondary_weapon:
+				case sanguis::client::control::actions::nullary_type::reload_primary_weapon:
+				case sanguis::client::control::actions::nullary_type::reload_secondary_weapon:
+					return
+						this->forward_event();
+				}
+
+				FCPPT_ASSERT_UNREACHABLE;
+			}
+		);
 }

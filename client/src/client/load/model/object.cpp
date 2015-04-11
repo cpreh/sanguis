@@ -112,17 +112,19 @@ sanguis::client::load::model::object::random_part(
 ) const
 {
 	if(
-		!random_part_
+		!random_part_.has_value()
 	)
 		random_part_ =
-			part_rand(
-				_random_generator,
-				part_map_distribution(
-					part_map_distribution::param_type::min(
-						0u
-					),
-					part_map_distribution::param_type::max(
-						this->parts().size() - 1u
+			optional_part_rand(
+				part_rand(
+					_random_generator,
+					part_map_distribution(
+						part_map_distribution::param_type::min(
+							0u
+						),
+						part_map_distribution::param_type::max(
+							this->parts().size() - 1u
+						)
 					)
 				)
 			);
@@ -132,7 +134,8 @@ sanguis::client::load::model::object::random_part(
 			this->parts().begin(),
 			fcppt::cast::to_signed(
 				(
-					*random_part_
+					// TODO:
+					random_part_.get_unsafe()
 				)()
 			)
 		)->second;

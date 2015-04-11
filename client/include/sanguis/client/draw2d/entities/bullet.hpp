@@ -38,9 +38,13 @@ private:
 	update()
 	override;
 
+	typedef
 	fcppt::optional<
 		sanguis::client::draw2d::sprite::center
-	> origin_;
+	>
+	optional_center;
+
+	optional_center origin_;
 };
 
 }

@@ -79,7 +79,8 @@ sanguis::server::entities::pickups::weapon::obtain()
 		)
 	);
 
-	weapon_.reset();
+	weapon_ =
+		sanguis::server::weapons::optional_unique_ptr();
 
 	return
 		std::move(
@@ -98,7 +99,7 @@ bool
 sanguis::server::entities::pickups::weapon::dead() const
 {
 	return
-		!weapon_;
+		!weapon_.has_value();
 }
 
 sanguis::server::team

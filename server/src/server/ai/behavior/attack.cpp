@@ -113,7 +113,7 @@ bool
 sanguis::server::ai::behavior::attack::start()
 {
 	return
-		target_.get()
+		target_.get().has_value()
 		||
 		fcppt::maybe(
 			this->closest_visible_target(),
@@ -282,7 +282,7 @@ sanguis::server::ai::behavior::attack::health_changed(
 )
 {
 	if(
-		target_.get()
+		target_.get().has_value()
 		||
 		_event.diff().get()
 		>=

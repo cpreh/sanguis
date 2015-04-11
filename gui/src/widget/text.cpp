@@ -1,3 +1,4 @@
+#include <sanguis/gui/needed_width.hpp>
 #include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/impl/relayout_ancestor.hpp>
 #include <sanguis/gui/renderer/base.hpp>
@@ -26,6 +27,7 @@
 #include <sge/rucksack/rect.hpp>
 #include <sge/rucksack/widget/base_fwd.hpp>
 #include <sge/rucksack/widget/dummy.hpp>
+#include <fcppt/maybe.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -172,17 +174,26 @@ sanguis::gui::widget::text::horizontal_policy() const
 	return
 		sge::rucksack::axis_policy{
 			sge::rucksack::preferred_size{
-				(
-					needed_width_
-					?
-						needed_width_->get()
-					:
-						font_.create_text(
-							value_,
-							sge::font::text_parameters(
-								sge::font::align_h::left()
-							)
-						)->logical_size().w()
+				fcppt::maybe(
+					needed_width_,
+					[
+						this
+					]{
+						return
+							font_.create_text(
+								value_,
+								sge::font::text_parameters(
+									sge::font::align_h::left()
+								)
+							)->logical_size().w();
+					},
+					[](
+						sanguis::gui::needed_width const _needed_width
+					)
+					{
+						return
+							_needed_width.get();
+					}
 				)
 				+
 				style_.text_spacing().w()

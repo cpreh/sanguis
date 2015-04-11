@@ -4,6 +4,7 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/server/net/value_decl.hpp>
 #include <sge/timer/interval.hpp>
+#include <fcppt/maybe.hpp>
 #include <fcppt/optional_impl.hpp>
 
 
@@ -86,38 +87,44 @@ sanguis::server::net::basic_value<
 	Type const _value
 )
 {
-	if(
-		!old_
-	)
-	{
-		old_ =
-			_value;
-
-		this->restart_timer();
-
-		return;
-	}
-
-	if(
-		!timer_.active()
-	)
-		this->restart_timer();
-
-	timer_.interval(
-		sge::timer::interval<
-			sanguis::duration
-		>(
-			timer_
+	fcppt::maybe(
+		old_,
+		[
+			this
+		]{
+			this->restart_timer();
+		},
+		[
+			_value,
+			this
+		](
+			Type const _old
 		)
-		-
-		Policy::difference(
-			*old_,
-			_value
-		)
+		{
+			if(
+				!timer_.active()
+			)
+				this->restart_timer();
+
+			timer_.interval(
+				sge::timer::interval<
+					sanguis::duration
+				>(
+					timer_
+				)
+				-
+				Policy::difference(
+					_old,
+					_value
+				)
+			);
+		}
 	);
 
 	old_ =
-		_value;
+		optional_type{
+			_value
+		};
 }
 
 template<
@@ -132,7 +139,8 @@ sanguis::server::net::basic_value<
 	Clock
 >::reset()
 {
-	old_.reset();
+	old_ =
+		optional_type();
 
 	timer_.active(
 		false

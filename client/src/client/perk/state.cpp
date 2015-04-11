@@ -15,7 +15,9 @@
 #include <sanguis/client/perk/state.hpp>
 #include <sanguis/client/perk/tree.hpp>
 #include <sanguis/client/perk/tree_unique_ptr.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>
@@ -60,8 +62,10 @@ sanguis::client::perk::state::perks(
 )
 {
 	perks_ =
-		std::move(
-			_perks
+		optional_tree_unique_ptr(
+			std::move(
+				_perks
+			)
 		);
 
 	remaining_levels_ =
@@ -107,7 +111,8 @@ sanguis::client::perk::state::choose_perk(
 		!=
 		sanguis::client::perk::choosable_state::ok
 	)
-		return false;
+		return
+			false;
 
 	FCPPT_ASSERT_PRE(
 		remaining_levels_.get()
@@ -119,10 +124,12 @@ sanguis::client::perk::state::choose_perk(
 
 	--remaining_levels_;
 
-	sanguis::client::perk::find_info(
-		_type,
-		*perks_
-	).value()->increment_level();
+	FCPPT_ASSERT_OPTIONAL_ERROR(
+		sanguis::client::perk::find_info(
+			_type,
+			this->perks_impl()
+		).value()
+	).increment_level();
 
 	send_callback_(
 		_type
@@ -130,18 +137,17 @@ sanguis::client::perk::state::choose_perk(
 
 	level_signal_();
 
-	return true;
+	return
+		true;
 }
 
 sanguis::client::perk::tree const &
 sanguis::client::perk::state::perks() const
 {
-	FCPPT_ASSERT_PRE(
-		perks_
-	);
-
 	return
-		*perks_;
+		*FCPPT_ASSERT_OPTIONAL_ERROR(
+			perks_
+		);
 }
 
 sanguis::client::player_level const
@@ -164,10 +170,12 @@ sanguis::client::perk::state::perk_level(
 ) const
 {
 	return
-		sanguis::client::perk::find_info_const(
-			_perk_type,
-			*perks_
-		).value()->level();
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			sanguis::client::perk::find_info_const(
+				_perk_type,
+				this->perks()
+			).value()
+		).level();
 }
 
 sanguis::client::perk::choosable_state
@@ -203,5 +211,14 @@ sanguis::client::perk::state::register_perks_change(
 	return
 		change_signal_.connect(
 			_callback
+		);
+}
+
+sanguis::client::perk::tree &
+sanguis::client::perk::state::perks_impl()
+{
+	return
+		*FCPPT_ASSERT_OPTIONAL_ERROR(
+			perks_
 		);
 }

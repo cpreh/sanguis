@@ -17,6 +17,7 @@
 #include <sge/sprite/center.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/optional_impl.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/float_to_int_fun.hpp>
 #include <fcppt/cast/int_to_float.hpp>
@@ -73,10 +74,14 @@ sanguis::client::draw2d::entities::bullet::~bullet()
 void
 sanguis::client::draw2d::entities::bullet::update()
 {
+	// TODO: Set this somewhere else!
 	if(
-		!origin_
+		!origin_.has_value()
 	)
-		origin_ = this->center();
+		origin_ =
+			optional_center(
+				this->center()
+			);
 
 	sanguis::client::draw2d::entities::model::object::update();
 
@@ -94,7 +99,11 @@ sanguis::client::draw2d::entities::bullet::update()
 					sanguis::client::draw2d::funit
 				>(
 					(
-						*origin_ - this->center()
+						FCPPT_ASSERT_OPTIONAL_ERROR(
+							origin_
+						)
+						-
+						this->center()
 					).get()
 				),
 				max_tail_length

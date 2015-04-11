@@ -87,7 +87,7 @@ sanguis::client::load::model::global_parameters::new_image(
 ) const
 {
 	return
-		_image
+		_image.has_value()
 		?
 			sanguis::client::load::model::global_parameters(
 				this->path(),

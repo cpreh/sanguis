@@ -18,6 +18,8 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
+#include <fcppt/maybe.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/optional_bind.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/object_impl.hpp>
@@ -32,7 +34,7 @@ sanguis::gui::widget::choices::choices(
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sanguis::gui::string_container const &_strings,
-	sanguis::gui::optional_index const _index
+	sanguis::gui::optional_index const _opt_index
 )
 :
 	sanguis::gui::widget::box_container(
@@ -54,14 +56,24 @@ sanguis::gui::widget::choices::choices(
 		_style,
 		_renderer,
 		_font,
-		_index
-		?
-			_strings[
-				_index->get()
-			]
-		:
-			sge::font::string()
-		,
+		fcppt::maybe(
+			_opt_index,
+			[]{
+				return
+					sge::font::string();
+			},
+			[
+				&_strings
+			](
+				sanguis::gui::index const _index
+			)
+			{
+				return
+					_strings[
+						_index.get()
+					];
+			}
+		),
 		_style.text_color(),
 		sanguis::gui::optional_needed_width(
 			sanguis::gui::needed_width_from_strings(
@@ -78,7 +90,7 @@ sanguis::gui::widget::choices::choices(
 		sanguis::gui::optional_needed_width()
 	),
 	index_{
-		_index
+		_opt_index
 	},
 	left_connection_{
 		left_button_.click(
@@ -220,18 +232,23 @@ sanguis::gui::widget::choices::update_index(
 			_func
 		);
 
-	if(
-		!index_
-	)
-		return;
+	fcppt::maybe_void(
+		index_,
+		[
+			this
+		](
+			sanguis::gui::index const _index
+		)
+		{
+			middle_text_.value(
+				strings_[
+					_index.get()
+				]
+			);
 
-	middle_text_.value(
-		strings_[
-			index_->get()
-		]
-	);
-
-	index_changed_(
-		*index_
+			index_changed_(
+				_index
+			);
+		}
 	);
 }

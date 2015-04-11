@@ -22,6 +22,7 @@ enum class nullary_type
 	escape,
 	perk_menu,
 	reload_primary_weapon,
+	// TODO: This is not needed anymore
 	reload_secondary_weapon
 };
 

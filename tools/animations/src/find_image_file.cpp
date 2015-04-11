@@ -1,5 +1,6 @@
 #include <sanguis/model/animation.hpp>
 #include <sanguis/model/animation_name.hpp>
+#include <sanguis/model/image_name.hpp>
 #include <sanguis/model/object.hpp>
 #include <sanguis/model/optional_image_name.hpp>
 #include <sanguis/model/part.hpp>
@@ -9,6 +10,11 @@
 #include <sanguis/tools/animations/const_optional_image_file_ref.hpp>
 #include <sanguis/tools/animations/find_image_file.hpp>
 #include <sanguis/tools/animations/image_file_map.hpp>
+#include <fcppt/maybe_void.hpp>
+#include <fcppt/container/find_opt.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <QImage>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::tools::animations::const_optional_image_file_ref const
@@ -27,29 +33,37 @@ sanguis::tools::animations::find_image_file(
 			&result,
 			&_image_files
 		](
-			sanguis::model::optional_image_name const &_image_name
+			sanguis::model::optional_image_name const &_opt_image_name
 		)
 		{
-			if(
-				!_image_name
-			)
-				return;
-
-			auto const it(
-				_image_files.find(
-					*_image_name
+			fcppt::maybe_void(
+				_opt_image_name,
+				[
+					&result,
+					&_image_files
+				](
+					sanguis::model::image_name const &_image_name
 				)
-			);
-
-			if(
-				it
-				!=
-				_image_files.end()
-			)
-				result =
-					sanguis::tools::animations::const_optional_image_file_ref(
-						it->second
+				{
+					fcppt::maybe_void(
+						fcppt::container::find_opt(
+							_image_files,
+							_image_name
+						),
+						[
+							&result
+						](
+							QImage const &_image
+						)
+						{
+							result =
+								sanguis::tools::animations::const_optional_image_file_ref(
+									_image
+								);
+						}
 					);
+				}
+			);
 		}
 	);
 

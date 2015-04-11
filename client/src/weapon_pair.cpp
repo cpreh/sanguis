@@ -22,7 +22,9 @@ sanguis::client::weapon_pair::add(
 			_description.weapon_type()
 		)
 	) =
-		_description;
+		sanguis::optional_weapon_description(
+			_description
+		);
 }
 
 void
@@ -32,7 +34,8 @@ sanguis::client::weapon_pair::remove(
 {
 	this->get(
 		_is_primary
-	).reset();
+	) =
+		sanguis::optional_weapon_description();
 }
 
 sanguis::optional_weapon_description const &
