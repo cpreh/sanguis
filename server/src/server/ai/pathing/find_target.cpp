@@ -61,7 +61,9 @@ sanguis::server::ai::pathing::find_target(
 		);
 
 		if(
-			cur == _target.get()
+			cur
+			==
+			_target.get()
 		)
 		{
 			sanguis::server::ai::pathing::trail result{

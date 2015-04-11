@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_AI_CONTEXT_HPP_INCLUDED
 
 #include <sanguis/creator/grid_fwd.hpp>
+#include <sanguis/creator/optional_pos_fwd.hpp>
 #include <sanguis/creator/pos_fwd.hpp>
 #include <sanguis/server/ai/context_fwd.hpp>
 #include <sanguis/server/ai/pathing/optional_target_fwd.hpp>
@@ -37,6 +38,9 @@ public:
 
 	void
 	clear_path();
+
+	sanguis::creator::optional_pos const
+	destination() const;
 
 	sanguis::server::ai::pathing::optional_target const
 	continue_path();

@@ -7,7 +7,7 @@
 #include <sanguis/server/ai/speed_factor.hpp>
 #include <sanguis/server/ai/target.hpp>
 #include <sanguis/server/entities/with_ai_fwd.hpp>
-#include <fcppt/maybe.hpp>
+#include <fcppt/maybe_void.hpp>
 
 
 void
@@ -17,23 +17,15 @@ sanguis::server::ai::rotate_and_move_to_target(
 	sanguis::server::ai::speed_factor const _speed_factor
 )
 {
-	fcppt::maybe(
+	sanguis::server::optional_angle const angle(
 		sanguis::server::ai::angle_to_target(
 			_me,
 			_target
-		),
-		[
-			&_me,
-			_target,
-			_speed_factor
-		]{
-			sanguis::server::ai::move_to_target(
-				_me,
-				sanguis::server::optional_angle(),
-				_target,
-				_speed_factor
-			);
-		},
+		)
+	);
+
+	fcppt::maybe_void(
+		angle,
 		[
 			&_me
 		](
@@ -45,5 +37,12 @@ sanguis::server::ai::rotate_and_move_to_target(
 				_angle_to_target
 			);
 		}
+	);
+
+	sanguis::server::ai::move_to_target(
+		_me,
+		angle,
+		_target,
+		_speed_factor
 	);
 }

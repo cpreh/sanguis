@@ -1,3 +1,4 @@
+#include <sanguis/creator/optional_pos.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/server/ai/context.hpp>
 #include <sanguis/server/ai/pathing/can_walk_diagonally.hpp>
@@ -55,9 +56,25 @@ sanguis::server::ai::context::clear_path()
 	trail_.clear();
 }
 
+sanguis::creator::optional_pos const
+sanguis::server::ai::context::destination() const
+{
+	// TODO: maybe_front
+	return
+		trail_.empty()
+		?
+			sanguis::creator::optional_pos()
+		:
+			sanguis::creator::optional_pos(
+				trail_.front()
+			)
+		;
+}
+
 sanguis::server::ai::pathing::optional_target const
 sanguis::server::ai::context::continue_path()
 {
+	// TODO: maybe_back
 	if(
 		trail_.empty()
 	)
