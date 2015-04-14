@@ -2,8 +2,8 @@
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/weapons/attack.hpp>
 #include <sanguis/server/weapons/attack_result.hpp>
-#include <sanguis/server/weapons/target.hpp>
 #include <sanguis/server/weapons/random_angle.hpp>
+#include <sanguis/server/weapons/target.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/attributes/accuracy.hpp>
 #include <sanguis/server/weapons/events/poll.hpp>

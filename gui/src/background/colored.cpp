@@ -1,6 +1,6 @@
-#include <sanguis/gui/impl/fill_rect.hpp>
 #include <sanguis/gui/background/base.hpp>
 #include <sanguis/gui/background/colored.hpp>
+#include <sanguis/gui/impl/fill_rect.hpp>
 #include <sanguis/gui/main_area/base_fwd.hpp>
 #include <sanguis/gui/renderer/base.hpp>
 #include <sge/image/color/predef.hpp>

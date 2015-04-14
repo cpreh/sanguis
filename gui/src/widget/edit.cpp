@@ -15,9 +15,9 @@
 #include <sge/font/dim.hpp>
 #include <sge/font/flags.hpp>
 #include <sge/font/flags_field.hpp>
+#include <sge/font/index.hpp>
 #include <sge/font/metrics.hpp>
 #include <sge/font/object.hpp>
-#include <sge/font/index.hpp>
 #include <sge/font/rect.hpp>
 #include <sge/font/string.hpp>
 #include <sge/font/text.hpp>

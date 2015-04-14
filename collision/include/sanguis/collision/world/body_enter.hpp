@@ -2,8 +2,8 @@
 #define SANGUIS_COLLISION_WORLD_BODY_ENTER_HPP_INCLUDED
 
 #include <sanguis/collision/symbol.hpp>
-#include <sanguis/collision/world/body_enter_fwd.hpp>
 #include <sanguis/collision/world/body_base_fwd.hpp>
+#include <sanguis/collision/world/body_enter_fwd.hpp>
 #include <sanguis/collision/world/created.hpp>
 #include <sanguis/collision/world/ghost_base_fwd.hpp>
 #include <fcppt/reference_wrapper_impl.hpp>

@@ -2,9 +2,9 @@
 #define SANGUIS_COLLISION_WORLD_OBJECT_HPP_INCLUDED
 
 #include <sanguis/collision/duration.hpp>
-#include <sanguis/collision/world/body_fwd.hpp>
 #include <sanguis/collision/world/body_enter_container.hpp>
 #include <sanguis/collision/world/body_exit_container.hpp>
+#include <sanguis/collision/world/body_fwd.hpp>
 #include <sanguis/collision/world/body_parameters_fwd.hpp>
 #include <sanguis/collision/world/body_unique_ptr.hpp>
 #include <sanguis/collision/world/created_fwd.hpp>

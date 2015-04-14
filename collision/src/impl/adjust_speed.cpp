@@ -3,9 +3,9 @@
 #include <sanguis/collision/unit.hpp>
 #include <sanguis/collision/vector2.hpp>
 #include <sanguis/collision/impl/adjust_speed.hpp>
+#include <sanguis/collision/impl/intersection.hpp>
 #include <sanguis/collision/impl/is_null.hpp>
 #include <sanguis/collision/impl/line_segment.hpp>
-#include <sanguis/collision/impl/intersection.hpp>
 #include <sanguis/collision/impl/rect.hpp>
 #include <sanguis/collision/impl/rect_line_intersection.hpp>
 #include <fcppt/const.hpp>
