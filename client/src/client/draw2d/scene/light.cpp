@@ -4,9 +4,9 @@
 #include <sanguis/client/draw2d/scene/light_texture_coordinates.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
+#include <sanguis/client/draw2d/sprite/unit.hpp>
 #include <sanguis/client/draw2d/sprite/client/category.hpp>
 #include <sanguis/client/draw2d/sprite/client/object.hpp>
-#include <sanguis/client/draw2d/sprite/client/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_decl.hpp>
 #include <sanguis/client/load/context.hpp>
 #include <sanguis/client/load/resource/context.hpp>
@@ -20,14 +20,22 @@
 #include <sge/renderer/state/core/sampler/address/mode.hpp>
 #include <sge/renderer/state/core/sampler/address/mode_all.hpp>
 #include <sge/renderer/state/core/sampler/filter/point.hpp>
+#include <sge/renderer/target/viewport.hpp>
 #include <sge/renderer/texture/stage.hpp>
-#include <sge/sprite/center.hpp>
 #include <sge/sprite/intrusive/connection.hpp>
+#include <sge/sprite/roles/connection.hpp>
+#include <sge/sprite/roles/pos.hpp>
+#include <sge/sprite/roles/size.hpp>
+#include <sge/sprite/roles/texture0.hpp>
+#include <sge/sprite/roles/texture_coordinates0.hpp>
 #include <sge/viewport/manager.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/size_fun.hpp>
+#include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/dim/to_signed.hpp>
+#include <fcppt/math/vector/dim.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -51,16 +59,13 @@ sanguis::client::draw2d::scene::light::light(
 		)
 	),
 	sprite_(
-		sanguis::client::draw2d::sprite::client::parameters()
-		.connection(
+		sge::sprite::roles::connection{} =
 			client_system_.connection(
 				sanguis::client::draw2d::sprite::client::category::light
-			)
-		)
-		.pos(
-			sanguis::client::draw2d::sprite::point::null()
-		)
-		.size(
+			),
+		sge::sprite::roles::pos{} =
+			sanguis::client::draw2d::sprite::point::null(),
+		sge::sprite::roles::size{} =
 			fcppt::math::dim::structure_cast<
 				sanguis::client::draw2d::sprite::dim,
 				fcppt::cast::size_fun
@@ -70,19 +75,16 @@ sanguis::client::draw2d::scene::light::light(
 						client_system_.renderer()
 					)
 				)
-			)
-		)
-		.texture(
+			),
+		sge::sprite::roles::texture0{} =
 			sanguis::client::draw2d::sprite::client::object::texture_type{
 				texture_
-			}
-		)
-		.texture_coordinates(
+			},
+		sge::sprite::roles::texture_coordinates0{} =
 			sanguis::client::draw2d::scene::light_texture_coordinates(
 				client_system_.renderer(),
 				texture_
 			)
-		)
 	),
 	sampler_state_{
 		_client_system.renderer().create_sampler_state(
@@ -115,9 +117,17 @@ sanguis::client::draw2d::scene::light::draw(
 	sanguis::client::draw2d::player_center const _player_center
 )
 {
-	sge::sprite::center(
-		sprite_,
+	// TODO: Should we simplify this?
+	sprite_.pos(
 		_player_center.get().get()
+		-
+		sprite_.size()
+		/
+		fcppt::literal<
+			sanguis::client::draw2d::sprite::unit
+		>(
+			2
+		)
 	);
 
 	sge::renderer::state::core::sampler::scoped_single const sampler_state{

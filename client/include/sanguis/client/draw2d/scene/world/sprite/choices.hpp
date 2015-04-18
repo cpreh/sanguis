@@ -6,6 +6,7 @@
 #include <sanguis/client/draw2d/scene/world/sprite/type_choices.hpp>
 #include <sge/sprite/config/choices.hpp>
 #include <sge/sprite/config/normal_size.hpp>
+#include <sge/sprite/config/pos.hpp>
 #include <sge/sprite/config/texture_level_count.hpp>
 #include <sge/sprite/config/with_texture.hpp>
 

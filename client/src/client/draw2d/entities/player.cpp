@@ -30,6 +30,7 @@
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/dim/to_vector.hpp>
+#include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/signed_angle_between.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 
@@ -163,20 +164,27 @@ sanguis::client::draw2d::entities::player::update()
 		)
 	);
 
+	// TODO: Simplify this?
 	this->at(
 		top
-	).pos(
-		sge::sprite::center(
-			this->at(
-				top
-			)
-		)
+	).center(
+		this->at(
+			top
+		).center()
 		-
 		fcppt::math::vector::structure_cast<
 			sanguis::client::draw2d::sprite::point,
 			fcppt::cast::float_to_int_fun
 		>(
 			new_rotation
+		)
+		+
+		this->bounding_dim()
+		/
+		fcppt::literal<
+			sanguis::client::draw2d::sprite::unit
+		>(
+			2
 		)
 	);
 }

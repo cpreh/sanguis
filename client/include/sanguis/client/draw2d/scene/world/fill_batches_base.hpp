@@ -9,9 +9,11 @@
 #include <sanguis/client/draw2d/scene/world/sprite/dim.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/is_background_role.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/object.hpp>
-#include <sanguis/client/draw2d/scene/world/sprite/parameters.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/vector.hpp>
 #include <sanguis/creator/tile_grid.hpp>
+#include <sge/sprite/roles/pos.hpp>
+#include <sge/sprite/roles/size.hpp>
+#include <sge/sprite/roles/texture0.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/cast/size_fun.hpp>
@@ -88,8 +90,7 @@ fill_batches_base(
 			{
 				_sprites.push_back(
 					sanguis::client::draw2d::scene::world::sprite::object(
-						sanguis::client::draw2d::scene::world::sprite::parameters()
-						.pos(
+						sge::sprite::roles::pos{} =
 							_transform(
 								fcppt::math::vector::structure_cast<
 									sanguis::client::draw2d::scene::world::sprite::vector,
@@ -101,21 +102,15 @@ fill_batches_base(
 								)
 								*
 								tile_dim
-							)
-						)
-						.size(
-							tile_dim
-						)
-						.texture(
+							),
+						sge::sprite::roles::size{} =
+							tile_dim,
+						sge::sprite::roles::texture0{} =
 							sanguis::client::draw2d::scene::world::sprite::object::texture_type{
 								_texture
-							}
-						)
-						. template set<
-							sanguis::client::draw2d::scene::world::sprite::is_background_role
-						>(
+							},
+						sanguis::client::draw2d::scene::world::sprite::is_background_role{} =
 							_is_background.get()
-						)
 					)
 				);
 			}

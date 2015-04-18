@@ -14,7 +14,6 @@
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sanguis/client/draw2d/sprite/normal/white.hpp>
 #include <sanguis/load/model/path_fwd.hpp>
-#include <sge/sprite/center.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
@@ -154,10 +153,9 @@ sanguis::client::draw2d::entities::bullet::update()
 			)
 	);
 
-	sge::sprite::center(
-		this->at(
-			tail
-		),
+	this->at(
+		tail
+	).center(
 		fcppt::math::vector::structure_cast<
 			sanguis::client::draw2d::sprite::point,
 			fcppt::cast::float_to_int_fun

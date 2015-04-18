@@ -5,11 +5,13 @@
 #include <sanguis/client/draw2d/entities/buffs/burn.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/draw2d/sprite/float_unit.hpp>
+#include <sanguis/client/draw2d/sprite/size_or_texture_size.hpp>
 #include <sanguis/client/draw2d/sprite/unit.hpp>
 #include <sanguis/client/draw2d/sprite/animation/loop_method.hpp>
+#include <sanguis/client/draw2d/sprite/normal/no_rotation.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
-#include <sanguis/client/draw2d/sprite/normal/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
+#include <sanguis/client/draw2d/sprite/normal/white.hpp>
 #include <sanguis/client/load/animation_type.hpp>
 #include <sanguis/client/load/model/animation.hpp>
 #include <sanguis/client/load/model/collection.hpp>
@@ -17,10 +19,13 @@
 #include <sanguis/client/load/model/part.hpp>
 #include <sanguis/client/load/model/weapon_category.hpp>
 #include <sanguis/load/model/path.hpp>
-#include <sge/image/color/predef.hpp>
-#include <sge/image/color/any/object.hpp>
-#include <sge/sprite/center.hpp>
 #include <sge/sprite/intrusive/connection.hpp>
+#include <sge/sprite/roles/center.hpp>
+#include <sge/sprite/roles/color.hpp>
+#include <sge/sprite/roles/connection.hpp>
+#include <sge/sprite/roles/rotation.hpp>
+#include <sge/sprite/roles/size_or_texture_size.hpp>
+#include <sge/sprite/roles/texture0.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
@@ -38,37 +43,28 @@ sanguis::client::draw2d::entities::buffs::burn::burn(
 :
 	sanguis::client::draw2d::entities::buffs::base(),
 	sprite_(
-		sanguis::client::draw2d::sprite::normal::parameters()
-		.connection(
+		sge::sprite::roles::connection{} =
 			_normal_system.connection(
 				sanguis::client::draw2d::z_ordering::flare
-			)
-		)
-		.center(
-			_model.center().get()
-		)
-		.rotation(
-			fcppt::literal<
-				sanguis::client::draw2d::sprite::float_unit
-			>(
-				0
-			)
-		)
-		.size(
-			_model.master().size()
-			/
-			fcppt::literal<
-				sanguis::client::draw2d::sprite::unit
-			>(
-				2
-			)
-		)
-		.texture(
-			sanguis::client::draw2d::sprite::normal::object::texture_type{}
-		)
-		.any_color(
-			sge::image::color::predef::white()
-		)
+			),
+		sge::sprite::roles::center{} =
+			_model.center().get(),
+		sge::sprite::roles::rotation{} =
+			sanguis::client::draw2d::sprite::normal::no_rotation(),
+		sge::sprite::roles::size_or_texture_size{} =
+			sanguis::client::draw2d::sprite::size_or_texture_size{
+				_model.master().size()
+				/
+				fcppt::literal<
+					sanguis::client::draw2d::sprite::unit
+				>(
+					2
+				)
+			},
+		sge::sprite::roles::texture0{} =
+			sanguis::client::draw2d::sprite::normal::object::texture_type{},
+		sge::sprite::roles::color{} =
+			sanguis::client::draw2d::sprite::normal::white()
 	),
 	animation_(
 		_model_collection[
@@ -102,8 +98,7 @@ sanguis::client::draw2d::entities::buffs::burn::update(
 	sanguis::client::draw2d::entities::model::object const &_model
 )
 {
-	sge::sprite::center(
-		sprite_,
+	sprite_.center(
 		_model.center().get()
 	);
 

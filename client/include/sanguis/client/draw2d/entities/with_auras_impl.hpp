@@ -9,19 +9,22 @@
 #include <sanguis/client/draw2d/entities/with_auras_parameters_decl.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_auras.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
-#include <sanguis/client/draw2d/sprite/normal/color_format.hpp>
+#include <sanguis/client/draw2d/sprite/size_or_texture_size.hpp>
+#include <sanguis/client/draw2d/sprite/normal/no_rotation.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
-#include <sanguis/client/draw2d/sprite/normal/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
+#include <sanguis/client/draw2d/sprite/normal/white.hpp>
 #include <sanguis/client/load/auras/context.hpp>
-#include <sge/image/color/predef.hpp>
-#include <sge/image/color/any/convert.hpp>
-#include <sge/image/color/any/object.hpp>
-#include <sge/sprite/center.hpp>
 #include <sge/sprite/intrusive/connection.hpp>
+#include <sge/sprite/roles/center.hpp>
+#include <sge/sprite/roles/color.hpp>
+#include <sge/sprite/roles/connection.hpp>
+#include <sge/sprite/roles/rotation.hpp>
+#include <sge/sprite/roles/size_or_texture_size.hpp>
+#include <sge/sprite/roles/texture0.hpp>
+#include <sge/sprite/types/texture_size.hpp>
 #include <sge/timer/elapsed_fractional.hpp>
 #include <sge/timer/reset_when_expired.hpp>
-#include <fcppt/literal.hpp>
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -92,8 +95,7 @@ sanguis::client::draw2d::entities::with_auras<
 		sprites_
 	)
 	{
-		sge::sprite::center(
-			sprite.second,
+		sprite.second.center(
 			this->center().get()
 		);
 
@@ -144,37 +146,26 @@ sanguis::client::draw2d::entities::with_auras<
 		std::make_pair(
 			_aura,
 			sanguis::client::draw2d::sprite::normal::object(
-				sanguis::client::draw2d::sprite::normal::parameters()
-				.connection(
+				sge::sprite::roles::connection{} =
 					normal_system_.connection(
 						sanguis::client::draw2d::z_ordering::aura
-					)
-				)
-				.center(
-					this->center().get()
-				)
-				.rotation(
-					fcppt::literal<
-						sanguis::client::draw2d::sprite::rotation
-					>(
-						0
-					)
-				)
-				.color(
-					sge::image::color::any::convert<
-						sanguis::client::draw2d::sprite::normal::color_format
-					>(
-						sge::image::color::predef::white()
-					)
-				)
-				.texture(
+					),
+				sge::sprite::roles::center{} =
+					this->center().get(),
+				sge::sprite::roles::rotation{} =
+					sanguis::client::draw2d::sprite::normal::no_rotation(),
+				sge::sprite::roles::color{} =
+					sanguis::client::draw2d::sprite::normal::white(),
+				sge::sprite::roles::texture0{} =
 					sanguis::client::draw2d::sprite::normal::object::texture_type{
 						aura_load_context_.texture(
 							_aura
 						)
+					},
+				sge::sprite::roles::size_or_texture_size{} =
+					sanguis::client::draw2d::sprite::size_or_texture_size{
+						sge::sprite::types::texture_size{}
 					}
-				)
-				.texture_size()
 			)
 		)
 	);

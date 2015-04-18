@@ -7,6 +7,7 @@
 #include <sge/sprite/config/custom_center.hpp>
 #include <sge/sprite/config/intrusive.hpp>
 #include <sge/sprite/config/normal_size.hpp>
+#include <sge/sprite/config/pos.hpp>
 #include <sge/sprite/config/texture_level_count.hpp>
 #include <sge/sprite/config/with_color.hpp>
 #include <sge/sprite/config/with_rotation.hpp>

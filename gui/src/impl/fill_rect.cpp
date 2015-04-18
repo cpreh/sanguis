@@ -7,10 +7,16 @@
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/rect.hpp>
-#include <sge/sprite/parameters.hpp>
+#include <sge/sprite/object.hpp>
 #include <sge/sprite/config/choices.hpp>
 #include <sge/sprite/config/normal_size.hpp>
+#include <sge/sprite/config/pos.hpp>
+#include <sge/sprite/config/pos_option.hpp>
+#include <sge/sprite/config/texture_size_option.hpp>
 #include <sge/sprite/config/with_color.hpp>
+#include <sge/sprite/roles/color.hpp>
+#include <sge/sprite/roles/pos.hpp>
+#include <sge/sprite/roles/size.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -38,7 +44,12 @@ sanguis::gui::impl::fill_rect(
 	typedef
 	sge::sprite::config::choices<
 		sanguis::gui::impl::sprite_type_choices,
-		sge::sprite::config::normal_size,
+		sge::sprite::config::pos<
+			sge::sprite::config::pos_option::pos
+		>,
+		sge::sprite::config::normal_size<
+			sge::sprite::config::texture_size_option::never
+		>,
 		boost::mpl::vector1<
 			sge::sprite::config::with_color<
 				color_format
@@ -47,28 +58,22 @@ sanguis::gui::impl::fill_rect(
 	>
 	choices;
 
-	typedef
-	sge::sprite::parameters<
-		choices
-	>
-	parameters;
-
 	sanguis::gui::impl::draw_sprite(
 		_renderer,
 		_context,
-		parameters()
-		.pos(
-			_rect.pos()
-		)
-		.size(
-			_rect.size()
-		)
-		.color(
-			sge::image::color::any::convert<
-				color_format
-			>(
-				_color
-			)
+		sge::sprite::object<
+			choices
+		>(
+			sge::sprite::roles::pos{} =
+				_rect.pos(),
+			sge::sprite::roles::size{} =
+				_rect.size(),
+			sge::sprite::roles::color{} =
+				sge::image::color::any::convert<
+					color_format
+				>(
+					_color
+				)
 		)
 	);
 }

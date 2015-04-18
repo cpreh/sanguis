@@ -6,7 +6,6 @@
 #include <sge/console/gfx/object.hpp>
 #include <sge/console/gfx/output_line_limit.hpp>
 #include <sge/console/gfx/sprite_object.hpp>
-#include <sge/console/gfx/sprite_parameters.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
@@ -15,6 +14,9 @@
 #include <sge/renderer/device/ffp.hpp>
 #include <sge/renderer/target/onscreen.hpp>
 #include <sge/renderer/target/viewport.hpp>
+#include <sge/sprite/roles/pos_or_center.hpp>
+#include <sge/sprite/roles/size_or_texture_size.hpp>
+#include <sge/sprite/roles/texture0.hpp>
 #include <sge/texture/part_raw_ref.hpp>
 #include <sge/viewport/manager.hpp>
 #include <fcppt/literal.hpp>
@@ -54,24 +56,26 @@ sanguis::client::console::gfx::gfx(
 		_font_object,
 		_keyboard,
 		sge::console::gfx::sprite_object(
-			sge::console::gfx::sprite_parameters()
-			.texture(
+			sge::sprite::roles::texture0{} =
 				sge::console::gfx::sprite_object::texture_type{
 					_textures.load(
 						sanguis::client::load::resource::texture_identifier(
 							FCPPT_TEXT("console_background")
 						)
 					)
+				},
+			sge::sprite::roles::pos_or_center{} =
+				sge::console::gfx::sprite_object::pos_or_center_type{
+					sge::console::gfx::sprite_object::pos_type{
+						sge::console::gfx::sprite_object::vector::null()
+					}
+				},
+			sge::sprite::roles::size_or_texture_size{} =
+				sge::console::gfx::sprite_object::size_or_texture_size_type{
+					::make_sprite_dim(
+						_renderer.onscreen_target().viewport()
+					)
 				}
-			)
-			.pos(
-				sge::console::gfx::sprite_object::vector::null()
-			)
-			.size(
-				::make_sprite_dim(
-					_renderer.onscreen_target().viewport()
-				)
-			)
 		),
 		_history_size
 	),

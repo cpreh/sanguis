@@ -4,8 +4,11 @@
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/vector.hpp>
-#include <sge/sprite/parameters.hpp>
+#include <sge/sprite/object.hpp>
 #include <sge/sprite/config/texture_coordinates.hpp>
+#include <sge/sprite/config/texture_size_option.hpp>
+#include <sge/sprite/roles/pos.hpp>
+#include <sge/sprite/roles/texture0.hpp>
 #include <sge/texture/const_optional_part_ref.hpp>
 #include <sge/texture/part_fwd.hpp>
 
@@ -18,26 +21,21 @@ sanguis::gui::impl::draw_image(
 	sge::rucksack::vector const _pos
 )
 {
-	typedef
-	sge::sprite::parameters<
-		sanguis::gui::impl::image_sprite_choices<
-			sge::sprite::config::texture_coordinates::automatic
-		>
-	>
-	parameters;
-
 	sanguis::gui::impl::draw_sprite(
 		_renderer,
 		_context,
-		parameters()
-		.pos(
-			_pos
+		sge::sprite::object<
+			sanguis::gui::impl::image_sprite_choices<
+				sge::sprite::config::texture_coordinates::automatic,
+				sge::sprite::config::texture_size_option::always
+			>
+		>(
+			sge::sprite::roles::pos{} =
+				_pos,
+			sge::sprite::roles::texture0{} =
+				sge::texture::const_optional_part_ref(
+					_texture
+				)
 		)
-		.texture(
-			sge::texture::const_optional_part_ref(
-				_texture
-			)
-		)
-		.texture_size()
 	);
 }

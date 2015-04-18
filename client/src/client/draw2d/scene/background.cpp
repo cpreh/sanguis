@@ -6,14 +6,19 @@
 #include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/client/draw2d/sprite/client/category.hpp>
 #include <sanguis/client/draw2d/sprite/client/object.hpp>
-#include <sanguis/client/draw2d/sprite/client/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_decl.hpp>
 #include <sanguis/client/load/context.hpp>
 #include <sanguis/client/load/resource/context.hpp>
 #include <sanguis/client/load/resource/texture_identifier.hpp>
 #include <sanguis/client/load/resource/textures.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
+#include <sge/renderer/target/viewport.hpp>
 #include <sge/sprite/intrusive/connection.hpp>
+#include <sge/sprite/roles/connection.hpp>
+#include <sge/sprite/roles/pos.hpp>
+#include <sge/sprite/roles/size.hpp>
+#include <sge/sprite/roles/texture0.hpp>
+#include <sge/sprite/roles/texture_coordinates0.hpp>
 #include <sge/viewport/manager.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/size_fun.hpp>
@@ -42,16 +47,13 @@ sanguis::client::draw2d::scene::background::background(
 		)
 	),
 	sprite_(
-		sanguis::client::draw2d::sprite::client::parameters()
-		.connection(
+		sge::sprite::roles::connection{} =
 			client_system_.connection(
 				sanguis::client::draw2d::sprite::client::category::background
-			)
-		)
-		.pos(
-			sanguis::client::draw2d::sprite::point::null()
-		)
-		.size(
+			),
+		sge::sprite::roles::pos{} =
+			sanguis::client::draw2d::sprite::point::null(),
+		sge::sprite::roles::size{} =
 			fcppt::math::dim::structure_cast<
 				sanguis::client::draw2d::sprite::dim,
 				fcppt::cast::size_fun
@@ -61,14 +63,12 @@ sanguis::client::draw2d::scene::background::background(
 						client_system_.renderer()
 					)
 				)
-			)
-		)
-		.texture(
+			),
+		sge::sprite::roles::texture0{} =
 			sanguis::client::draw2d::sprite::client::object::texture_type{
 				texture_
-			}
-		)
-		.texture_coordinates(
+			},
+		sge::sprite::roles::texture_coordinates0{} =
 			sanguis::client::draw2d::scene::background_texture_coordinates(
 				sanguis::client::draw2d::translation(
 					sanguis::client::draw2d::translation::value_type::null()
@@ -76,7 +76,6 @@ sanguis::client::draw2d::scene::background::background(
 				client_system_.renderer(),
 				texture_
 			)
-		)
 	),
 	viewport_connection_(
 		_viewport_manager.manage_callback(

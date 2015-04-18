@@ -5,9 +5,12 @@
 #include <sanguis/client/draw2d/scene/world/sprite/type_choices_fwd.hpp>
 #include <sge/sprite/config/choices_fwd.hpp>
 #include <sge/sprite/config/normal_size_fwd.hpp>
+#include <sge/sprite/config/pos_fwd.hpp>
+#include <sge/sprite/config/pos_option.hpp>
 #include <sge/sprite/config/texture_coordinates.hpp>
 #include <sge/sprite/config/texture_level_count_fwd.hpp>
 #include <sge/sprite/config/texture_ownership.hpp>
+#include <sge/sprite/config/texture_size_option.hpp>
 #include <sge/sprite/config/with_texture_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
@@ -27,9 +30,15 @@ namespace world
 namespace sprite
 {
 
-typedef sge::sprite::config::choices<
+typedef
+sge::sprite::config::choices<
 	sanguis::client::draw2d::scene::world::sprite::type_choices,
-	sge::sprite::config::normal_size,
+	sge::sprite::config::pos<
+		sge::sprite::config::pos_option::pos
+	>,
+	sge::sprite::config::normal_size<
+		sge::sprite::config::texture_size_option::never
+	>,
 	boost::mpl::vector2<
 		sge::sprite::config::with_texture<
 			sge::sprite::config::texture_level_count<
@@ -40,7 +49,8 @@ typedef sge::sprite::config::choices<
 		>,
 		sanguis::client::draw2d::scene::world::sprite::is_background
 	>
-> choices;
+>
+choices;
 
 }
 }

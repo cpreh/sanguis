@@ -5,8 +5,13 @@
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/rect.hpp>
-#include <sge/sprite/parameters.hpp>
+#include <sge/sprite/object.hpp>
 #include <sge/sprite/config/texture_coordinates.hpp>
+#include <sge/sprite/config/texture_size_option.hpp>
+#include <sge/sprite/roles/pos.hpp>
+#include <sge/sprite/roles/repetition.hpp>
+#include <sge/sprite/roles/texture0.hpp>
+#include <sge/sprite/roles/size.hpp>
 #include <sge/sprite/types/repetition.hpp>
 #include <sge/texture/const_optional_part_ref.hpp>
 #include <sge/texture/part_fwd.hpp>
@@ -25,14 +30,6 @@ sanguis::gui::impl::draw_image_repeat(
 )
 {
 	typedef
-	sge::sprite::parameters<
-		sanguis::gui::impl::image_sprite_choices<
-			sge::sprite::config::texture_coordinates::repetition
-		>
-	>
-	parameters;
-
-	typedef
 	sge::sprite::types::repetition<
 		sanguis::gui::impl::sprite_type_choices
 	>
@@ -41,36 +38,38 @@ sanguis::gui::impl::draw_image_repeat(
 	sanguis::gui::impl::draw_sprite(
 		_renderer,
 		_context,
-		parameters()
-		.pos(
-			_rect.pos()
-		)
-		.texture(
-			sge::texture::const_optional_part_ref(
-				_texture
-			)
-		)
-		.repetition(
-			fcppt::math::vector::structure_cast<
-				repetition_type,
-				fcppt::cast::int_to_float_fun
-			>(
-				fcppt::math::dim::to_vector(
-					_rect.size()
+		sge::sprite::object<
+			sanguis::gui::impl::image_sprite_choices<
+				sge::sprite::config::texture_coordinates::repetition,
+				sge::sprite::config::texture_size_option::never
+			>
+		>(
+			sge::sprite::roles::pos{} =
+				_rect.pos(),
+			sge::sprite::roles::texture0{} =
+				sge::texture::const_optional_part_ref(
+					_texture
+				),
+			sge::sprite::roles::repetition{} =
+				fcppt::math::vector::structure_cast<
+					repetition_type,
+					fcppt::cast::int_to_float_fun
+				>(
+					fcppt::math::dim::to_vector(
+						_rect.size()
+					)
 				)
-			)
-			/
-			fcppt::math::vector::structure_cast<
-				repetition_type,
-				fcppt::cast::int_to_float_fun
-			>(
-				fcppt::math::dim::to_vector(
-					_texture.size()
-				)
-			)
-		)
-		.size(
-			_rect.size()
+				/
+				fcppt::math::vector::structure_cast<
+					repetition_type,
+					fcppt::cast::int_to_float_fun
+				>(
+					fcppt::math::dim::to_vector(
+						_texture.size()
+					)
+				),
+			sge::sprite::roles::size{} =
+				_rect.size()
 		)
 	);
 }

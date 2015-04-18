@@ -274,8 +274,6 @@ set(
 	include/sanguis/client/draw2d/scene/world/sprite/is_background_role.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/object.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/object_fwd.hpp
-	include/sanguis/client/draw2d/scene/world/sprite/parameters.hpp
-	include/sanguis/client/draw2d/scene/world/sprite/parameters_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/range.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/range_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/state.hpp
@@ -318,8 +316,6 @@ set(
 	include/sanguis/client/draw2d/sprite/client/object.hpp
 	include/sanguis/client/draw2d/sprite/client/object_decl.hpp
 	include/sanguis/client/draw2d/sprite/client/object_fwd.hpp
-	include/sanguis/client/draw2d/sprite/client/parameters.hpp
-	include/sanguis/client/draw2d/sprite/client/parameters_fwd.hpp
 	include/sanguis/client/draw2d/sprite/client/system_decl.hpp
 	include/sanguis/client/draw2d/sprite/client/system_fwd.hpp
 	include/sanguis/client/draw2d/sprite/client/texture_coordinates.hpp
@@ -332,8 +328,6 @@ set(
 	include/sanguis/client/draw2d/sprite/colored/object.hpp
 	include/sanguis/client/draw2d/sprite/colored/object_decl.hpp
 	include/sanguis/client/draw2d/sprite/colored/object_fwd.hpp
-	include/sanguis/client/draw2d/sprite/colored/parameters.hpp
-	include/sanguis/client/draw2d/sprite/colored/parameters_fwd.hpp
 	include/sanguis/client/draw2d/sprite/dim.hpp
 	include/sanguis/client/draw2d/sprite/dim_fwd.hpp
 	include/sanguis/client/draw2d/sprite/float_unit.hpp
@@ -344,11 +338,10 @@ set(
 	include/sanguis/client/draw2d/sprite/normal/color.hpp
 	include/sanguis/client/draw2d/sprite/normal/color_format.hpp
 	include/sanguis/client/draw2d/sprite/normal/color_fwd.hpp
+	include/sanguis/client/draw2d/sprite/normal/no_rotation.hpp
 	include/sanguis/client/draw2d/sprite/normal/object.hpp
 	include/sanguis/client/draw2d/sprite/normal/object_decl.hpp
 	include/sanguis/client/draw2d/sprite/normal/object_fwd.hpp
-	include/sanguis/client/draw2d/sprite/normal/parameters.hpp
-	include/sanguis/client/draw2d/sprite/normal/parameters_fwd.hpp
 	include/sanguis/client/draw2d/sprite/normal/system_decl.hpp
 	include/sanguis/client/draw2d/sprite/normal/system_fwd.hpp
 	include/sanguis/client/draw2d/sprite/normal/texture_animation_decl.hpp
@@ -359,6 +352,8 @@ set(
 	include/sanguis/client/draw2d/sprite/point.hpp
 	include/sanguis/client/draw2d/sprite/point_fwd.hpp
 	include/sanguis/client/draw2d/sprite/rotation.hpp
+	include/sanguis/client/draw2d/sprite/size_or_texture_size.hpp
+	include/sanguis/client/draw2d/sprite/size_or_texture_size_fwd.hpp
 	include/sanguis/client/draw2d/sprite/state.hpp
 	include/sanguis/client/draw2d/sprite/state_choices.hpp
 	include/sanguis/client/draw2d/sprite/state_choices_fwd.hpp
@@ -765,6 +760,7 @@ set(
 	src/client/draw2d/speed_is_null.cpp
 	src/client/draw2d/sprite/client/system.cpp
 	src/client/draw2d/sprite/index.cpp
+	src/client/draw2d/sprite/normal/no_rotation.cpp
 	src/client/draw2d/sprite/normal/system.cpp
 	src/client/draw2d/sprite/normal/texture_animation.cpp
 	src/client/draw2d/sprite/normal/white.cpp

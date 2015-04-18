@@ -4,6 +4,7 @@
 #include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
+#include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/base.hpp>
 #include <sanguis/client/draw2d/entities/container.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
@@ -13,16 +14,24 @@
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/index.hpp>
+#include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
+#include <sanguis/client/draw2d/sprite/size_or_texture_size.hpp>
 #include <sanguis/client/draw2d/sprite/normal/color.hpp>
+#include <sanguis/client/draw2d/sprite/normal/no_rotation.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
-#include <sanguis/client/draw2d/sprite/normal/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
 #include <sge/image/color/any/object.hpp>
-#include <sge/sprite/center.hpp>
 #include <sge/sprite/intrusive/connection.hpp>
+#include <sge/sprite/roles/center.hpp>
+#include <sge/sprite/roles/color.hpp>
+#include <sge/sprite/roles/connection.hpp>
+#include <sge/sprite/roles/rotation.hpp>
+#include <sge/sprite/roles/texture0.hpp>
+#include <sge/sprite/roles/size_or_texture_size.hpp>
 #include <sge/timer/elapsed.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
+#include <fcppt/algorithm/map.hpp>
 #include <fcppt/cast/float_to_int_fun.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/cast/int_to_float_fun.hpp>
@@ -53,7 +62,41 @@ sanguis::client::draw2d::entities::container::container(
 	center_(
 		sanguis::client::draw2d::center::value_type::null()
 	),
-	sprites_(),
+	sprites_(
+		fcppt::algorithm::map<
+			sanguis::client::draw2d::entities::container::sprite_vector
+		>(
+			_orders,
+			[
+				&_normal_system,
+				_dim,
+				_color
+			](
+				sanguis::client::draw2d::z_ordering const _order
+			)
+			{
+				return
+					sanguis::client::draw2d::sprite::normal::object(
+						sge::sprite::roles::connection{} =
+							_normal_system.connection(
+								_order
+							),
+						sge::sprite::roles::size_or_texture_size{} =
+							sanguis::client::draw2d::sprite::size_or_texture_size{
+								_dim
+							},
+						sge::sprite::roles::color{} =
+							_color,
+						sge::sprite::roles::texture0{} =
+							sanguis::client::draw2d::sprite::normal::object::texture_type{},
+						sge::sprite::roles::rotation{} =
+							sanguis::client::draw2d::sprite::normal::no_rotation(),
+						sge::sprite::roles::center{} =
+							sanguis::client::draw2d::sprite::point::null()
+					);
+			}
+		)
+	),
 	move_timer_(
 		sanguis::diff_timer::parameters(
 			_diff_clock,
@@ -63,31 +106,6 @@ sanguis::client::draw2d::entities::container::container(
 		)
 	)
 {
-	sprites_.reserve(
-		_orders.size()
-	);
-
-	for(
-		auto const &order
-		:
-		_orders
-	)
-		sprites_.push_back(
-			object(
-				sanguis::client::draw2d::sprite::normal::parameters()
-				.connection(
-					_normal_system.connection(
-						order
-					)
-				)
-				.size(
-					_dim
-				)
-				.color(
-					_color
-				)
-			)
-		);
 }
 
 sanguis::client::draw2d::entities::container::~container()
@@ -99,9 +117,7 @@ sanguis::client::draw2d::entities::container::center() const
 {
 	return
 		sanguis::client::draw2d::sprite::center(
-			sge::sprite::center(
-				this->master()
-			)
+			this->master().center()
 		);
 }
 
@@ -128,9 +144,7 @@ sanguis::client::draw2d::entities::container::cursor_collision(
 		fcppt::math::vector::distance<
 			sanguis::client::draw2d::funit
 		>(
-			sge::sprite::center(
-				this->master()
-			),
+			this->master().center(),
 			_cursor.get()
 		)
 		<
@@ -347,8 +361,7 @@ sanguis::client::draw2d::entities::container::update_center(
 		:
 		sprites_
 	)
-		sge::sprite::center(
-			sprite,
+		sprite.center(
 			_center.get()
 		);
 }

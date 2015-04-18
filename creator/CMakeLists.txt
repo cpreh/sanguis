@@ -47,6 +47,8 @@ set(
 	include/sanguis/creator/opening_type_fwd.hpp
 	include/sanguis/creator/optional_background_tile.hpp
 	include/sanguis/creator/optional_background_tile_fwd.hpp
+	include/sanguis/creator/optional_pos.hpp
+	include/sanguis/creator/optional_pos_fwd.hpp
 	include/sanguis/creator/pos.hpp
 	include/sanguis/creator/pos_fwd.hpp
 	include/sanguis/creator/rect.hpp

@@ -4,7 +4,6 @@
 #include <sge/renderer/context/ffp.hpp>
 #include <sge/renderer/device/ffp.hpp>
 #include <sge/sprite/object.hpp>
-#include <sge/sprite/parameters.hpp>
 #include <sge/sprite/buffers/option.hpp>
 #include <sge/sprite/buffers/single.hpp>
 #include <sge/sprite/buffers/with_declaration.hpp>
@@ -28,9 +27,9 @@ void
 draw_sprite(
 	sge::renderer::device::ffp &_renderer,
 	sge::renderer::context::ffp &_context,
-	sge::sprite::parameters<
+	sge::sprite::object<
 		Choices
-	> const &_parameters
+	> const &_sprite
 )
 {
 	typedef
@@ -67,17 +66,9 @@ draw_sprite(
 		sge::sprite::buffers::option::static_
 	);
 
-	typedef
-	sge::sprite::object<
-		Choices
-	>
-	sprite;
-
 	sge::sprite::process::one(
 		_context,
-		sprite(
-			_parameters
-		),
+		_sprite,
 		buffers,
 		state
 	);

@@ -38,8 +38,8 @@ class system
 
 	typedef
 	typename
-	collection::connection_type
-	connection_type;
+	collection::connection_ref
+	connection_ref;
 public:
 	system(
 		sge::renderer::device::core &,
@@ -49,7 +49,7 @@ public:
 
 	~system();
 
-	connection_type &
+	connection_ref const
 	connection(
 		Category
 	);

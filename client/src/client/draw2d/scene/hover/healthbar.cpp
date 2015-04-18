@@ -7,7 +7,6 @@
 #include <sanguis/client/draw2d/sprite/colored/color.hpp>
 #include <sanguis/client/draw2d/sprite/colored/color_format.hpp>
 #include <sanguis/client/draw2d/sprite/colored/object.hpp>
-#include <sanguis/client/draw2d/sprite/colored/parameters.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/image/color/rgba8.hpp>
 #include <sge/image/color/any/convert.hpp>
@@ -25,6 +24,9 @@
 #include <sge/sprite/render/parameters_impl.hpp>
 #include <sge/sprite/render/range_impl.hpp>
 #include <sge/sprite/render/range_with_options.hpp>
+#include <sge/sprite/roles/color.hpp>
+#include <sge/sprite/roles/pos.hpp>
+#include <sge/sprite/roles/size.hpp>
 #include <sge/sprite/state/default_options.hpp>
 #include <sge/sprite/state/object_impl.hpp>
 #include <sge/sprite/state/parameters_impl.hpp>
@@ -78,29 +80,24 @@ sanguis::client::draw2d::scene::hover::healthbar::healthbar(
 					sanguis::client::draw2d::sprite::colored::object
 				>{
 					sanguis::client::draw2d::sprite::colored::object{
-						sanguis::client::draw2d::sprite::colored::parameters()
-						.pos(
+						sge::sprite::roles::pos{} =
 							_center.get()
 							-
-							_radius.get()
-						)
-						.size(
+							_radius.get(),
+						sge::sprite::roles::size{} =
 							sanguis::client::draw2d::sprite::dim(
 								_radius.get() * 2,
 								bar_height
-							)
-						)
-						.color(
+							),
+						sge::sprite::roles::color{} =
 							sge::image::color::any::convert<
 								sanguis::client::draw2d::sprite::colored::color_format
 							>(
 								sge::image::color::predef::black()
 							)
-						)
 					},
 					sanguis::client::draw2d::sprite::colored::object{
-						sanguis::client::draw2d::sprite::colored::parameters()
-						.pos(
+						sge::sprite::roles::pos{} =
 							_center.get()
 							-
 							_radius.get()
@@ -109,9 +106,8 @@ sanguis::client::draw2d::scene::hover::healthbar::healthbar(
 								sanguis::client::draw2d::sprite::dim
 							>(
 								border_size
-							)
-						)
-						.size(
+							),
+						sge::sprite::roles::size{} =
 							sanguis::client::draw2d::sprite::dim{
 								fcppt::cast::float_to_int<
 									sanguis::client::draw2d::sprite::unit
@@ -137,9 +133,8 @@ sanguis::client::draw2d::scene::hover::healthbar::healthbar(
 								2
 								*
 								border_size
-							}
-						)
-						.color(
+							},
+						sge::sprite::roles::color{} =
 							sanguis::client::draw2d::sprite::colored::color(
 								(sge::image::color::init::red() %=
 									std::min(
@@ -190,7 +185,6 @@ sanguis::client::draw2d::scene::hover::healthbar::healthbar(
 									1.0
 								)
 							)
-						)
 					}
 				}
 			),
