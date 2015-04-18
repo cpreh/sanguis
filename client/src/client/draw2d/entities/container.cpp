@@ -27,8 +27,8 @@
 #include <sge/sprite/roles/color.hpp>
 #include <sge/sprite/roles/connection.hpp>
 #include <sge/sprite/roles/rotation.hpp>
-#include <sge/sprite/roles/texture0.hpp>
 #include <sge/sprite/roles/size_or_texture_size.hpp>
+#include <sge/sprite/roles/texture0.hpp>
 #include <sge/timer/elapsed.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
 #include <fcppt/algorithm/map.hpp>

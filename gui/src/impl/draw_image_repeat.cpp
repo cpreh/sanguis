@@ -10,8 +10,8 @@
 #include <sge/sprite/config/texture_size_option.hpp>
 #include <sge/sprite/roles/pos.hpp>
 #include <sge/sprite/roles/repetition.hpp>
-#include <sge/sprite/roles/texture0.hpp>
 #include <sge/sprite/roles/size.hpp>
+#include <sge/sprite/roles/texture0.hpp>
 #include <sge/sprite/types/repetition.hpp>
 #include <sge/texture/const_optional_part_ref.hpp>
 #include <sge/texture/part_fwd.hpp>
