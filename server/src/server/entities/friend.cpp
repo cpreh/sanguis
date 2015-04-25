@@ -17,10 +17,9 @@
 #include <sanguis/messages/server/add_friend.hpp>
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
-#include <sanguis/server/dim.hpp>
 #include <sanguis/server/health.hpp>
-#include <sanguis/server/model_size.hpp>
 #include <sanguis/server/player_id.hpp>
+#include <sanguis/server/radius.hpp>
 #include <sanguis/server/regeneration.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/ai/create_function.hpp>
@@ -115,7 +114,7 @@ sanguis::server::entities::friend_::on_transfer(
 	if(
 		sanguis::server::collision::with_world(
 			_parameters.center(),
-			this->dim(),
+			this->radius(),
 			_parameters.grid()
 		)
 	)
@@ -148,7 +147,8 @@ sanguis::server::entities::friend_::update()
 sanguis::server::team
 sanguis::server::entities::friend_::team() const
 {
-	return sanguis::server::team::players;
+	return
+		sanguis::server::team::players;
 }
 
 sanguis::messages::server::unique_ptr

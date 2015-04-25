@@ -4,7 +4,7 @@
 #include <sanguis/creator/spawn_pos.hpp>
 #include <sanguis/creator/spawn_type.hpp>
 #include <sanguis/load/model/enemy_path.hpp>
-#include <sanguis/server/model_size.hpp>
+#include <sanguis/server/radius.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>

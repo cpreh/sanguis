@@ -2,7 +2,7 @@
 #define SANGUIS_COLLISION_TEST_HPP_INCLUDED
 
 #include <sanguis/collision/center_fwd.hpp>
-#include <sanguis/collision/dim2_fwd.hpp>
+#include <sanguis/collision/radius_fwd.hpp>
 #include <sanguis/collision/symbol.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 
@@ -16,7 +16,7 @@ SANGUIS_COLLISION_SYMBOL
 bool
 test(
 	sanguis::collision::center,
-	sanguis::collision::dim2,
+	sanguis::collision::radius,
 	sanguis::creator::grid const &
 );
 

@@ -2,7 +2,7 @@
 #define SANGUIS_COLLISION_IMPL_MAKE_RANGE_HPP_INCLUDED
 
 #include <sanguis/collision/center_fwd.hpp>
-#include <sanguis/collision/dim2_fwd.hpp>
+#include <sanguis/collision/radius_fwd.hpp>
 #include <sanguis/creator/grid_crange_fwd.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 
@@ -18,7 +18,7 @@ sanguis::creator::grid_crange const
 make_range(
 	sanguis::creator::grid const &,
 	sanguis::collision::center,
-	sanguis::collision::dim2
+	sanguis::collision::radius
 );
 
 }

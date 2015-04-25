@@ -1,10 +1,9 @@
 #ifndef SANGUIS_SERVER_ENTITIES_WITH_VELOCITY_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_WITH_VELOCITY_HPP_INCLUDED
 
-#include <sanguis/duration.hpp>
-#include <sanguis/creator/grid_fwd.hpp>
+#include <sanguis/collision/speed_fwd.hpp>
 #include <sanguis/server/direction.hpp>
-#include <sanguis/server/model_size_fwd.hpp>
+#include <sanguis/server/radius_fwd.hpp>
 #include <sanguis/server/speed_fwd.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/movement_speed_fwd.hpp>
@@ -16,7 +15,6 @@
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/entities/ifaces/with_velocity.hpp>
 #include <sanguis/server/entities/property/changeable.hpp>
-#include <sanguis/server/net/center.hpp>
 #include <sanguis/server/net/speed.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
@@ -40,7 +38,7 @@ class with_velocity
 	);
 protected:
 	with_velocity(
-		sanguis::server::model_size,
+		sanguis::server::radius,
 		sanguis::server::entities::movement_speed_initial,
 		sanguis::server::direction
 	);
@@ -56,13 +54,6 @@ protected:
 	override;
 public:
 	~with_velocity()
-	override;
-
-	void
-	world_collision(
-		sanguis::creator::grid const &,
-		sanguis::duration
-	)
 	override;
 
 	sanguis::server::entities::property::changeable &
@@ -87,14 +78,8 @@ private:
 	desired_speed_change();
 
 	void
-	on_position_change(
-		sanguis::server::center
-	)
-	override;
-
-	void
-	on_speed_change(
-		sanguis::server::speed
+	speed_changed(
+		sanguis::collision::speed
 	)
 	override;
 
@@ -108,8 +93,6 @@ private:
 	sanguis::server::entities::property::changeable movement_speed_;
 
 	sanguis::server::direction direction_;
-
-	sanguis::server::net::center net_center_;
 
 	sanguis::server::net::speed net_speed_;
 

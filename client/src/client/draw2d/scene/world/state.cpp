@@ -21,9 +21,8 @@
 #include <sanguis/client/draw2d/sprite/unit.hpp>
 #include <sanguis/client/load/tiles/context_fwd.hpp>
 #include <sanguis/collision/center.hpp>
-#include <sanguis/collision/dim2.hpp>
+#include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/result.hpp>
-#include <sanguis/collision/scale.hpp>
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/test_move.hpp>
 #include <sanguis/collision/unit.hpp>
@@ -55,7 +54,6 @@
 #include <fcppt/container/grid/in_range.hpp>
 #include <fcppt/container/grid/make_pos_crange_start_end.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
-#include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/dim/to_vector.hpp>
 #include <fcppt/math/vector/ceil_div_signed.hpp>
 #include <fcppt/math/vector/dim.hpp>
@@ -217,14 +215,9 @@ sanguis::client::draw2d::scene::world::state::test_collision(
 				sanguis::collision::center(
 					_parameters.center().get()
 				),
-				fcppt::math::dim::structure_cast<
-					sanguis::collision::dim2,
-					fcppt::cast::size_fun
-				>(
-					_parameters.size()
-				)
-				/
-				sanguis::collision::scale(),
+				sanguis::collision::radius(
+					_parameters.radius().get()
+				),
 				sanguis::collision::speed(
 					_parameters.speed().get()
 				),

@@ -4,7 +4,7 @@
 #include <sanguis/entity_id.hpp>
 #include <sanguis/load/model/path_fwd.hpp>
 #include <sanguis/server/load_fwd.hpp>
-#include <sanguis/server/model_size_fwd.hpp>
+#include <sanguis/server/radius_fwd.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/global/next_id_callback.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -33,7 +33,7 @@ public:
 	~load_context()
 	override;
 private:
-	sanguis::server::model_size const
+	sanguis::server::radius const
 	model_size(
 		sanguis::load::model::path const &
 	) const

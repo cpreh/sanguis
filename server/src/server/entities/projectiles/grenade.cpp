@@ -2,7 +2,6 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/server/aoe.hpp>
-#include <sanguis/server/dim.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/vector.hpp>

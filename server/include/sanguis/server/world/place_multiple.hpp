@@ -3,7 +3,7 @@
 
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/creator/pos_fwd.hpp>
-#include <sanguis/server/model_size_fwd.hpp>
+#include <sanguis/server/radius_fwd.hpp>
 #include <sanguis/server/world/insert_pair_container.hpp>
 #include <sanguis/server/world/place_callback.hpp>
 
@@ -20,7 +20,7 @@ place_multiple(
 	sanguis::random_generator &,
 	sanguis::server::world::place_callback const &,
 	sanguis::creator::pos,
-	sanguis::server::model_size
+	sanguis::server::radius
 );
 
 }

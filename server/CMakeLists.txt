@@ -120,12 +120,7 @@ set(
 	include/sanguis/server/collision/ghost_base.hpp
 	include/sanguis/server/collision/ghost_container.hpp
 	include/sanguis/server/collision/ghost_fwd.hpp
-	include/sanguis/server/collision/optional_result.hpp
-	include/sanguis/server/collision/optional_result_fwd.hpp
-	include/sanguis/server/collision/result.hpp
-	include/sanguis/server/collision/result_fwd.hpp
 	include/sanguis/server/collision/with_world.hpp
-	include/sanguis/server/collision/with_world_move.hpp
 	include/sanguis/server/console.hpp
 	include/sanguis/server/console_command_pair.hpp
 	include/sanguis/server/console_command_pair_fwd.hpp
@@ -175,8 +170,6 @@ set(
 	include/sanguis/server/damage/wrapper.hpp
 	include/sanguis/server/damage/wrapper_fwd.hpp
 	include/sanguis/server/dest_world_id.hpp
-	include/sanguis/server/dim.hpp
-	include/sanguis/server/dim_fwd.hpp
 	include/sanguis/server/direction.hpp
 	include/sanguis/server/direction_fwd.hpp
 	include/sanguis/server/dispatch.hpp
@@ -189,7 +182,6 @@ set(
 	include/sanguis/server/entities/center_simple.hpp
 	include/sanguis/server/entities/combine_remove_from_world.hpp
 	include/sanguis/server/entities/combine_transfer.hpp
-	include/sanguis/server/entities/convert_model_size.hpp
 	include/sanguis/server/entities/destructible.hpp
 	include/sanguis/server/entities/doodad.hpp
 	include/sanguis/server/entities/doodad_fwd.hpp
@@ -344,7 +336,6 @@ set(
 	include/sanguis/server/entities/property/linear_fwd.hpp
 	include/sanguis/server/entities/property/subtract.hpp
 	include/sanguis/server/entities/property/value.hpp
-	include/sanguis/server/entities/radius.hpp
 	include/sanguis/server/entities/remove_from_world_result.hpp
 	include/sanguis/server/entities/remove_from_world_result_fwd.hpp
 	include/sanguis/server/entities/same_object.hpp
@@ -426,8 +417,6 @@ set(
 	include/sanguis/server/make_send_callback.hpp
 	include/sanguis/server/make_unicast_callback.hpp
 	include/sanguis/server/message_functor.hpp
-	include/sanguis/server/model_size.hpp
-	include/sanguis/server/model_size_fwd.hpp
 	include/sanguis/server/net/angle.hpp
 	include/sanguis/server/net/angle_fwd.hpp
 	include/sanguis/server/net/angle_policy.hpp
@@ -786,9 +775,7 @@ set(
 	src/server/collision/distance_pos_pos.cpp
 	src/server/collision/ghost.cpp
 	src/server/collision/ghost_base.cpp
-	src/server/collision/result.cpp
 	src/server/collision/with_world.cpp
-	src/server/collision/with_world_move.cpp
 	src/server/console.cpp
 	src/server/create.cpp
 	src/server/create_player.cpp
@@ -812,7 +799,6 @@ set(
 	src/server/entities/center_simple.cpp
 	src/server/entities/combine_remove_from_world.cpp
 	src/server/entities/combine_transfer.cpp
-	src/server/entities/convert_model_size.cpp
 	src/server/entities/destructible.cpp
 	src/server/entities/doodad.cpp
 	src/server/entities/enemies/attribute.cpp
@@ -903,7 +889,6 @@ set(
 	src/server/entities/property/linear_decrease.cpp
 	src/server/entities/property/linear_decrease_op.cpp
 	src/server/entities/property/subtract.cpp
-	src/server/entities/radius.cpp
 	src/server/entities/remove_from_world_result.cpp
 	src/server/entities/spawns/limited.cpp
 	src/server/entities/spawns/spawn.cpp

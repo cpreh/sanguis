@@ -186,7 +186,7 @@ sanguis::server::world::object::object(
 	collision_world_(
 		sanguis::collision::world::create(
 			sanguis::collision::world::parameters(
-				grid_.size()
+				grid_
 			)
 		)
 	),
@@ -227,16 +227,6 @@ sanguis::server::world::object::update(
 		sight_ranges_.empty()
 	)
 		return;
-
-	for(
-		auto &cur_entity
-		:
-		entities_
-	)
-		cur_entity.second->world_collision(
-			grid_,
-			_elapsed_time
-		);
 
 	sanguis::collision::world::update_result const collision_result(
 		collision_world_->update(

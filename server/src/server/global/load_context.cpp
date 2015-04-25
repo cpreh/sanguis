@@ -2,7 +2,7 @@
 #include <sanguis/load/model/path_fwd.hpp>
 #include <sanguis/model/cell_size.hpp>
 #include <sanguis/server/load.hpp>
-#include <sanguis/server/model_size.hpp>
+#include <sanguis/server/radius.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/global/load_context.hpp>
 #include <sanguis/server/global/next_id_callback.hpp>
@@ -29,21 +29,14 @@ sanguis::server::global::load_context::~load_context()
 {
 }
 
-sanguis::server::model_size const
+sanguis::server::radius const
 sanguis::server::global::load_context::model_size(
 	sanguis::load::model::path const &_model_path
 ) const
 {
 	return
-		sanguis::server::model_size(
-			fcppt::math::dim::structure_cast<
-				sanguis::server::model_size::value_type,
-				fcppt::cast::int_to_float_fun
-			>(
-				model_context_.model_dim(
-					_model_path
-				).get()
-			)
+		model_context_.model_dim(
+			_model_path
 		);
 }
 

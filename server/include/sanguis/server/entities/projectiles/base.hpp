@@ -6,7 +6,6 @@
 #include <sanguis/load/model/path_fwd.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/team.hpp>
-#include <sanguis/server/collision/result_fwd.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/with_health_fwd.hpp>
 #include <sanguis/server/entities/with_id.hpp>
@@ -65,9 +64,7 @@ private:
 	override;
 
 	void
-	on_world_collision(
-		sanguis::server::collision::result const &
-	)
+	world_collision()
 	override;
 
 	virtual

@@ -5,7 +5,7 @@
 #include <sanguis/client/player_health_callback.hpp>
 #include <sanguis/client/draw2d/collide_callback.hpp>
 #include <sanguis/client/draw2d/collide_parameters.hpp>
-#include <sanguis/client/draw2d/dim2.hpp>
+#include <sanguis/client/draw2d/fradius.hpp>
 #include <sanguis/client/draw2d/optional_player_center.hpp>
 #include <sanguis/client/draw2d/player_center.hpp>
 #include <sanguis/client/draw2d/player_center_callback.hpp>
@@ -15,9 +15,13 @@
 #include <sanguis/client/draw2d/entities/player.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
+#include <sanguis/load/model/radius.hpp>
+#include <sanguis/model/cell_size.hpp>
+#include <sanguis/model/dim.hpp>
 #include <fcppt/maybe_void.hpp>
-#include <fcppt/cast/int_to_float_fun.hpp>
+#include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/math/dim/to_unsigned.hpp>
 
 
 sanguis::client::draw2d::entities::own_player::own_player(
@@ -106,11 +110,19 @@ sanguis::client::draw2d::entities::own_player::update()
 				this->movement_duration(),
 				this->float_center(),
 				this->speed(),
-				fcppt::math::dim::structure_cast<
-					sanguis::client::draw2d::dim2,
-					fcppt::cast::int_to_float_fun
-				>(
-					this->bounding_dim()
+				sanguis::client::draw2d::fradius(
+					sanguis::load::model::radius(
+						sanguis::model::cell_size(
+							fcppt::math::dim::structure_cast<
+								sanguis::model::dim,
+								fcppt::cast::size_fun
+							>(
+								fcppt::math::dim::to_unsigned(
+									this->bounding_dim()
+								)
+							)
+						)
+					).get()
 				)
 			)
 		),

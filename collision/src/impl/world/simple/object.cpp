@@ -1,5 +1,7 @@
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/duration.hpp>
+#include <sanguis/collision/optional_result.hpp>
+#include <sanguis/collision/test_move.hpp>
 #include <sanguis/collision/impl/world/body_groups_for_body_group.hpp>
 #include <sanguis/collision/impl/world/body_groups_for_ghost_group.hpp>
 #include <sanguis/collision/impl/world/ghost_groups_for_body_group.hpp>
@@ -31,6 +33,7 @@
 #include <sanguis/collision/world/parameters.hpp>
 #include <sanguis/collision/world/update_result.hpp>
 #include <sanguis/creator/difference_type.hpp>
+#include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/signed_pos.hpp>
 #include <fcppt/literal.hpp>
@@ -53,7 +56,6 @@
 #include <fcppt/container/grid/in_range.hpp>
 #include <fcppt/container/grid/make_pos_range_start_end.hpp>
 #include <fcppt/container/grid/moore_neighbors.hpp>
-#include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstddef>
@@ -67,8 +69,8 @@ sanguis::collision::impl::world::simple::object::object(
 )
 :
 	sanguis::collision::world::object(),
-	grid_size_{
-		_parameters.grid_size()
+	grid_{
+		_parameters.grid()
 	},
 	body_sets_(),
 	ghost_sets_(),
@@ -82,7 +84,7 @@ sanguis::collision::impl::world::simple::object::object(
 			{
 				return
 					sanguis::collision::impl::world::simple::body_list_grid(
-						_parameters.grid_size()
+						_parameters.grid().size()
 					);
 			}
 		)
@@ -427,23 +429,28 @@ sanguis::collision::impl::world::simple::object::move_bodies(
 		body_sets_
 	)
 		for(
-			auto body
+			auto body_ref
 			:
 			body_list
 		)
 		{
-			body.get().move(
-				sanguis::collision::center(
-					body.get().center().get()
-					+
-					body.get().speed().get()
-					*
-					_duration.count()
-				)
+			sanguis::collision::impl::world::simple::body &body(
+				body_ref.get()
+			);
+
+			body.move(
+				sanguis::collision::test_move(
+					body.center(),
+					body.radius(),
+					body.speed(),
+					_duration,
+					grid_
+				),
+				_duration
 			);
 
 			this->move_body(
-				body.get()
+				body
 			);
 		}
 }
@@ -494,7 +501,7 @@ sanguis::collision::impl::world::simple::object::body_collisions() const
 			{
 				if(
 					!fcppt::container::grid::in_range_dim(
-						grid_size_,
+						grid_.size(),
 						grid_pos2
 					)
 				)

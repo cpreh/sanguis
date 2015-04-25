@@ -20,6 +20,8 @@
 #include <sanguis/collision/world/parameters.hpp>
 #include <sanguis/collision/world/update_result.hpp>
 #include <sanguis/creator/dim.hpp>
+#include <sanguis/creator/grid.hpp>
+#include <sanguis/creator/tile.hpp>
 #include <fcppt/make_int_range_count.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/algorithm/map.hpp>
@@ -34,14 +36,19 @@
 int
 main()
 {
+	sanguis::creator::grid const grid(
+		fcppt::math::dim::fill<
+			sanguis::creator::dim
+		>(
+			100u
+		),
+		sanguis::creator::tile::nothing
+	);
+
 	sanguis::collision::world::object_unique_ptr const world{
 		sanguis::collision::world::create(
 			sanguis::collision::world::parameters{
-				fcppt::math::dim::fill<
-					sanguis::creator::dim
-				>(
-					100u
-				)
+				grid
 			}
 		)
 	};
@@ -89,6 +96,28 @@ main()
 		collision(
 			sanguis::collision::world::body_base &
 		)
+		override
+		{
+		}
+
+		void
+		center_changed(
+			sanguis::collision::center
+		)
+		override
+		{
+		}
+
+		void
+		speed_changed(
+			sanguis::collision::speed
+		)
+		override
+		{
+		}
+
+		void
+		world_collision()
 		override
 		{
 		}

@@ -2,21 +2,17 @@
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile_size.hpp>
 #include <sanguis/server/angle.hpp>
-#include <sanguis/server/model_size.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/vector.hpp>
 #include <sanguis/server/entities/base.hpp>
-#include <sanguis/server/entities/convert_model_size.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
-#include <sanguis/server/entities/radius.hpp>
 #include <sanguis/server/world/grid_pos_to_center.hpp>
 #include <sanguis/server/world/insert_pair.hpp>
 #include <sanguis/server/world/insert_pair_container.hpp>
 #include <sanguis/server/world/place_callback.hpp>
 #include <sanguis/server/world/place_multiple.hpp>
 #include <fcppt/algorithm/repeat.hpp>
-#include <fcppt/assert/error.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
@@ -36,16 +32,9 @@ sanguis::server::world::place_multiple(
 	sanguis::random_generator &_random_generator,
 	sanguis::server::world::place_callback const &_place,
 	sanguis::creator::pos const _pos,
-	sanguis::server::model_size const _model_size
+	sanguis::server::radius const _radius
 )
 {
-	sanguis::server::radius const radius(
-		sanguis::server::entities::radius(
-			sanguis::server::entities::convert_model_size(
-				_model_size)
-		)
-	);
-
 	sanguis::server::center const center(
 		sanguis::server::world::grid_pos_to_center(
 			_pos
@@ -77,12 +66,14 @@ sanguis::server::world::place_multiple(
 	sanguis::server::space_unit const space(
 		tile_size_half
 		-
-		radius.get()
+		_radius.get()
 	);
 
-	FCPPT_ASSERT_ERROR(
-		space > 0.f
-	);
+	if(
+		space <= 0.f
+	)
+		return
+			sanguis::server::world::insert_pair_container();
 
 	auto random_coordinate(
 		fcppt::random::make_variate(
@@ -125,7 +116,7 @@ sanguis::server::world::place_multiple(
 	sanguis::server::space_unit const num_fits(
 		tile_size_half
 		/
-		radius.get()
+		_radius.get()
 	);
 
 

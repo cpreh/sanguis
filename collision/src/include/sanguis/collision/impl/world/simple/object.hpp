@@ -21,7 +21,7 @@
 #include <sanguis/collision/world/object.hpp>
 #include <sanguis/collision/world/parameters_fwd.hpp>
 #include <sanguis/collision/world/update_result_fwd.hpp>
-#include <sanguis/creator/dim.hpp>
+#include <sanguis/creator/grid_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/reference_wrapper_std_hash.hpp>
@@ -172,7 +172,7 @@ private:
 	>
 	body_list_grid_array;
 
-	sanguis::creator::dim const grid_size_;
+	sanguis::creator::grid const &grid_;
 
 	body_set_array body_sets_;
 

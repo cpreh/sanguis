@@ -12,6 +12,7 @@
 #include <sanguis/server/health_fwd.hpp>
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/player_id_fwd.hpp>
+#include <sanguis/server/radius.hpp>
 #include <sanguis/server/regeneration.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/damage/armor_array_fwd.hpp>

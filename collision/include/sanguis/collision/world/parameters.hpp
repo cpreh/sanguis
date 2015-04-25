@@ -3,7 +3,8 @@
 
 #include <sanguis/collision/symbol.hpp>
 #include <sanguis/collision/world/parameters_fwd.hpp>
-#include <sanguis/creator/dim.hpp>
+#include <sanguis/creator/grid_fwd.hpp>
+#include <fcppt/nonassignable.hpp>
 
 
 namespace sanguis
@@ -15,17 +16,20 @@ namespace world
 
 class parameters
 {
+	FCPPT_NONASSIGNABLE(
+		parameters
+	);
 public:
 	SANGUIS_COLLISION_SYMBOL
 	explicit
 	parameters(
-		sanguis::creator::dim
+		sanguis::creator::grid const &
 	);
 
-	sanguis::creator::dim
-	grid_size() const;
+	sanguis::creator::grid const &
+	grid() const;
 private:
-	sanguis::creator::dim grid_size_;
+	sanguis::creator::grid const &grid_;
 };
 
 }

@@ -4,7 +4,7 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/client/draw2d/center.hpp>
 #include <sanguis/client/draw2d/collide_parameters_fwd.hpp>
-#include <sanguis/client/draw2d/dim2.hpp>
+#include <sanguis/client/draw2d/fradius.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
 
 
@@ -25,7 +25,7 @@ public:
 		sanguis::duration,
 		sanguis::client::draw2d::center,
 		sanguis::client::draw2d::speed,
-		sanguis::client::draw2d::dim2
+		sanguis::client::draw2d::fradius
 	);
 
 	sanguis::duration const
@@ -37,8 +37,8 @@ public:
 	sanguis::client::draw2d::speed const
 	speed() const;
 
-	sanguis::client::draw2d::dim2 const
-	size() const;
+	sanguis::client::draw2d::fradius const
+	radius() const;
 private:
 	sanguis::duration const duration_;
 
@@ -46,7 +46,7 @@ private:
 
 	sanguis::client::draw2d::speed const speed_;
 
-	sanguis::client::draw2d::dim2 const size_;
+	sanguis::client::draw2d::fradius const radius_;
 };
 
 }

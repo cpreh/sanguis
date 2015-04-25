@@ -73,14 +73,6 @@ sanguis::server::entities::base::transfer(
 }
 
 void
-sanguis::server::entities::base::world_collision(
-	sanguis::creator::grid const &,
-	sanguis::duration
-)
-{
-}
-
-void
 sanguis::server::entities::base::update()
 {
 }

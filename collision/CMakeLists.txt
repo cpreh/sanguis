@@ -2,8 +2,6 @@ set(
 	SANGUIS_COLLISION_FILES
 	include/sanguis/collision/center.hpp
 	include/sanguis/collision/center_fwd.hpp
-	include/sanguis/collision/dim2.hpp
-	include/sanguis/collision/dim2_fwd.hpp
 	include/sanguis/collision/duration.hpp
 	include/sanguis/collision/optional_result.hpp
 	include/sanguis/collision/optional_result_fwd.hpp
@@ -11,7 +9,6 @@ set(
 	include/sanguis/collision/radius_fwd.hpp
 	include/sanguis/collision/result.hpp
 	include/sanguis/collision/result_fwd.hpp
-	include/sanguis/collision/scale.hpp
 	include/sanguis/collision/speed.hpp
 	include/sanguis/collision/speed_fwd.hpp
 	include/sanguis/collision/test.hpp

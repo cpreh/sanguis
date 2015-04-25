@@ -2,6 +2,7 @@
 #define SANGUIS_COLLISION_WORLD_BODY_BASE_HPP_INCLUDED
 
 #include <sanguis/collision/center_fwd.hpp>
+#include <sanguis/collision/speed_fwd.hpp>
 #include <sanguis/collision/symbol.hpp>
 #include <sanguis/collision/world/body_base_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -35,7 +36,13 @@ public:
 	void
 	center_changed(
 		sanguis::collision::center
-	);
+	) = 0;
+
+	virtual
+	void
+	speed_changed(
+		sanguis::collision::speed
+	) = 0;
 
 	virtual
 	boost::logic::tribool const
@@ -48,6 +55,10 @@ public:
 	collision(
 		sanguis::collision::world::body_base &
 	) = 0;
+
+	virtual
+	void
+	world_collision() = 0;
 };
 
 }

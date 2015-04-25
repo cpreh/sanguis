@@ -1,5 +1,7 @@
 #include <sanguis/collision/center.hpp>
+#include <sanguis/collision/optional_result.hpp>
 #include <sanguis/collision/radius.hpp>
+#include <sanguis/collision/result.hpp>
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/impl/world/simple/body.hpp>
 #include <sanguis/collision/impl/world/simple/body_remove_callback.hpp>
@@ -7,6 +9,8 @@
 #include <sanguis/collision/world/body_base.hpp>
 #include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters.hpp>
+#include <fcppt/maybe_void.hpp>
+#include <fcppt/math/vector/arithmetic.hpp>
 
 
 sanguis::collision::impl::world::simple::body::body(
@@ -52,9 +56,8 @@ sanguis::collision::impl::world::simple::body::center(
 	sanguis::collision::center const _center
 )
 {
-	this->move(
-		_center
-	);
+	center_ =
+		_center;
 
 	body_move_callback_.get()(
 		*this
@@ -63,14 +66,43 @@ sanguis::collision::impl::world::simple::body::center(
 
 void
 sanguis::collision::impl::world::simple::body::move(
-	sanguis::collision::center const _center
+	sanguis::collision::optional_result const &_opt_collision,
+	sanguis::collision::duration const _duration
 )
 {
+	fcppt::maybe_void(
+		_opt_collision,
+		[
+			this
+		](
+			sanguis::collision::result const &_collision
+		)
+		{
+			center_ =
+				_collision.center();
+
+			speed_ =
+				_collision.speed();
+
+			body_base_.speed_changed(
+				speed_
+			);
+
+			body_base_.world_collision();
+		}
+	);
+
 	center_ =
-		_center;
+		sanguis::collision::center(
+			center_.get()
+			+
+			speed_.get()
+			*
+			_duration.count()
+		);
 
 	body_base_.center_changed(
-		_center
+		center_
 	);
 }
 

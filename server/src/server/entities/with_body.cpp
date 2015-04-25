@@ -1,18 +1,15 @@
 #include <sanguis/collision/center.hpp>
+#include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/world/body_base.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
-#include <sanguis/server/dim.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/body.hpp>
-#include <sanguis/server/collision/result.hpp>
 #include <sanguis/server/entities/combine_remove_from_world.hpp>
 #include <sanguis/server/entities/combine_transfer.hpp>
-#include <sanguis/server/entities/convert_model_size.hpp>
 #include <sanguis/server/entities/optional_transfer_result.hpp>
-#include <sanguis/server/entities/radius.hpp>
 #include <sanguis/server/entities/remove_from_world_result.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/entities/transfer_result.hpp>
@@ -35,7 +32,7 @@
 
 
 sanguis::server::entities::with_body::with_body(
-	sanguis::server::model_size const _model_size
+	sanguis::server::radius const _radius
 )
 :
 	sanguis::server::entities::with_ghosts(),
@@ -43,11 +40,6 @@ sanguis::server::entities::with_body::with_body(
 	sanguis::server::entities::ifaces::with_id(),
 	sanguis::server::entities::ifaces::with_links(),
 	sanguis::collision::world::body_base(),
-	dim_(
-		sanguis::server::entities::convert_model_size(
-			_model_size
-		)
-	),
 	angle_(
 		fcppt::literal<
 			sanguis::server::space_unit
@@ -56,10 +48,11 @@ sanguis::server::entities::with_body::with_body(
 		)
 	),
 	collision_body_(
-		sanguis::server::entities::radius(
-			dim_
-		),
+		_radius,
 		*this
+	),
+	net_center_(
+		this->diff_clock()
 	),
 	net_angle_(
 		this->diff_clock()
@@ -115,13 +108,6 @@ sanguis::server::entities::with_body::radius() const
 		collision_body_.radius();
 }
 
-sanguis::server::dim const
-sanguis::server::entities::with_body::dim() const
-{
-	return
-		dim_;
-}
-
 sanguis::server::entities::remove_from_world_result
 sanguis::server::entities::with_body::remove_from_world()
 {
@@ -147,6 +133,8 @@ sanguis::server::entities::with_body::on_transfer(
 )
 {
 	net_angle_.reset();
+
+	net_center_.reset();
 
 	this->angle(
 		_parameters.angle()
@@ -186,29 +174,27 @@ sanguis::server::entities::with_body::on_transfer(
 void
 sanguis::server::entities::with_body::update()
 {
+	sanguis::server::environment::object &cur_environment(
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			this->environment()
+		)
+	);
+
 	if(
 		net_angle_.update()
 	)
-		FCPPT_ASSERT_OPTIONAL_ERROR(
-			this->environment()
-		).angle_changed(
+		cur_environment.angle_changed(
 			this->id(),
 			this->angle()
 		);
-}
 
-void
-sanguis::server::entities::with_body::on_world_collision(
-	sanguis::server::collision::result const &_result
-)
-{
-	this->center(
-		_result.center()
-	);
-
-	this->body_speed(
-		_result.speed()
-	);
+	if(
+		net_center_.update()
+	)
+		cur_environment.center_changed(
+			this->id(),
+			this->center()
+		);
 }
 
 void
@@ -217,10 +203,6 @@ sanguis::server::entities::with_body::body_speed(
 )
 {
 	collision_body_.speed(
-		_speed
-	);
-
-	this->on_speed_change(
 		_speed
 	);
 }
@@ -319,9 +301,21 @@ sanguis::server::entities::with_body::center_changed(
 		server_center
 	);
 
-	this->on_position_change(
+	net_center_.set(
 		server_center
 	);
+}
+
+void
+sanguis::server::entities::with_body::speed_changed(
+	sanguis::collision::speed
+)
+{
+}
+
+void
+sanguis::server::entities::with_body::world_collision()
+{
 }
 
 sanguis::server::speed const
@@ -331,18 +325,4 @@ sanguis::server::entities::with_body::initial_speed() const
 		sanguis::server::speed(
 			sanguis::server::speed::value_type::null()
 		);
-}
-
-void
-sanguis::server::entities::with_body::on_position_change(
-	sanguis::server::center
-)
-{
-}
-
-void
-sanguis::server::entities::with_body::on_speed_change(
-	sanguis::server::speed
-)
-{
 }

@@ -51,6 +51,7 @@ set(
 	include/sanguis/load/model/pickup_path.hpp
 	include/sanguis/load/model/player_path.hpp
 	include/sanguis/load/model/projectile_path.hpp
+	include/sanguis/load/model/radius.hpp
 	include/sanguis/load/model/weapon_pickup_path.hpp
 	include/sanguis/load/pickup_name.hpp
 	include/sanguis/load/projectile_name.hpp
@@ -483,6 +484,7 @@ set(
 	src/load/model/pickup_path.cpp
 	src/load/model/player_path.cpp
 	src/load/model/projectile_path.cpp
+	src/load/model/radius.cpp
 	src/load/model/weapon_pickup_path.cpp
 	src/load/pickup_name.cpp
 	src/load/projectile_name.cpp
@@ -571,7 +573,9 @@ sanguis_add_library(
 	common
 	"${SANGUIS_COMMON_FILES}"
 	DEPS
+		${sanguis_collision_TARGET}
 		${sanguis_creator_TARGET}
+		${sanguis_model_TARGET}
 		${sgecharconv_TARGET}
 		${alda_TARGET}
 		${fcppt_filesystem_TARGET}

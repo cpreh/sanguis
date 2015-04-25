@@ -1,9 +1,7 @@
+#include <sanguis/collision/speed.hpp>
 #include <sanguis/server/direction.hpp>
-#include <sanguis/server/model_size.hpp>
+#include <sanguis/server/radius.hpp>
 #include <sanguis/server/speed.hpp>
-#include <sanguis/server/collision/optional_result.hpp>
-#include <sanguis/server/collision/result.hpp>
-#include <sanguis/server/collision/with_world_move.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/movement_speed_initial.hpp>
@@ -16,7 +14,6 @@
 #include <sanguis/server/entities/ifaces/with_velocity.hpp>
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <sanguis/server/environment/object.hpp>
-#include <fcppt/maybe_void.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -24,7 +21,7 @@
 
 
 sanguis::server::entities::with_velocity::with_velocity(
-	sanguis::server::model_size const _model_size,
+	sanguis::server::radius const _radius,
 	sanguis::server::entities::movement_speed_initial const _movement_speed,
 	sanguis::server::direction const _direction
 )
@@ -32,16 +29,13 @@ sanguis::server::entities::with_velocity::with_velocity(
 	sanguis::server::entities::ifaces::with_id(),
 	sanguis::server::entities::ifaces::with_velocity(),
 	sanguis::server::entities::with_body(
-		_model_size
+		_radius
 	),
 	movement_speed_(
 		_movement_speed.get()
 	),
 	direction_(
 		_direction
-	),
-	net_center_(
-		this->diff_clock()
 	),
 	net_speed_(
 		this->diff_clock()
@@ -69,14 +63,6 @@ sanguis::server::entities::with_velocity::update()
 	);
 
 	if(
-		net_center_.update()
-	)
-		cur_environment.center_changed(
-			this->id(),
-			this->center()
-		);
-
-	if(
 		net_speed_.update()
 	)
 		cur_environment.speed_changed(
@@ -90,8 +76,6 @@ sanguis::server::entities::with_velocity::on_transfer(
 	sanguis::server::entities::transfer_parameters const &_parameters
 )
 {
-	net_center_.reset();
-
 	net_speed_.reset();
 
 	return
@@ -102,31 +86,6 @@ sanguis::server::entities::with_velocity::on_transfer(
 
 sanguis::server::entities::with_velocity::~with_velocity()
 {
-}
-
-void
-sanguis::server::entities::with_velocity::world_collision(
-	sanguis::creator::grid const &_grid,
-	sanguis::duration const _duration
-)
-{
-	fcppt::maybe_void(
-		sanguis::server::collision::with_world_move(
-			*this,
-			_grid,
-			_duration
-		),
-		[
-			this
-		](
-			sanguis::server::collision::result const &_result
-		)
-		{
-			this->on_world_collision(
-				_result
-			);
-		}
-	);
 }
 
 sanguis::server::entities::property::changeable &
@@ -173,28 +132,28 @@ sanguis::server::entities::with_velocity::speed() const
 void
 sanguis::server::entities::with_velocity::desired_speed_change()
 {
-	this->body_speed(
+	sanguis::server::speed const cur_speed(
 		this->desired_speed()
 	);
-}
 
-void
-sanguis::server::entities::with_velocity::on_position_change(
-	sanguis::server::center const _center
-)
-{
-	net_center_.set(
-		_center
+	this->body_speed(
+		cur_speed
+	);
+
+	net_speed_.set(
+		cur_speed
 	);
 }
 
 void
-sanguis::server::entities::with_velocity::on_speed_change(
-	sanguis::server::speed const _speed
+sanguis::server::entities::with_velocity::speed_changed(
+	sanguis::collision::speed const _speed
 )
 {
 	net_speed_.set(
-		_speed
+		sanguis::server::speed(
+			_speed.get()
+		)
 	);
 }
 

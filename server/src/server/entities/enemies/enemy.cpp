@@ -19,7 +19,6 @@
 #include <sanguis/messages/server/add_enemy.hpp>
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
-#include <sanguis/server/dim.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>

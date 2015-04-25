@@ -1,6 +1,5 @@
 #include <sanguis/duration_second.hpp>
 #include <sanguis/projectile_type.hpp>
-#include <sanguis/server/dim.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/damage/unit.hpp>

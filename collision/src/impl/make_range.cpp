@@ -1,5 +1,5 @@
 #include <sanguis/collision/center.hpp>
-#include <sanguis/collision/dim2.hpp>
+#include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/impl/make_range.hpp>
 #include <sanguis/creator/difference_type.hpp>
 #include <sanguis/creator/grid.hpp>
@@ -23,7 +23,7 @@ sanguis::creator::grid_crange const
 sanguis::collision::impl::make_range(
 	sanguis::creator::grid const &_grid,
 	sanguis::collision::center const _center,
-	sanguis::collision::dim2 const _size
+	sanguis::collision::radius const _radius
 )
 {
 	sanguis::creator::difference_type const tile_size(
@@ -40,7 +40,7 @@ sanguis::collision::impl::make_range(
 			>(
 				_center.get()
 				-
-				_size
+				_radius.get()
 			)
 			/
 			tile_size,
@@ -57,7 +57,7 @@ sanguis::collision::impl::make_range(
 				>(
 					_center.get()
 					+
-					_size
+					_radius.get()
 				),
 				tile_size
 			),

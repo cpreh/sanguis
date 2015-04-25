@@ -1,9 +1,11 @@
 #include <sanguis/load/model/make_path.hpp>
 #include <sanguis/load/model/path.hpp>
 #include <sanguis/load/model/path_to_json_file.hpp>
+#include <sanguis/load/model/radius.hpp>
 #include <sanguis/model/cell_size.hpp>
 #include <sanguis/model/cell_size_from_file.hpp>
 #include <sanguis/server/load.hpp>
+#include <sanguis/server/radius.hpp>
 #include <fcppt/container/get_or_insert.hpp>
 
 
@@ -17,7 +19,7 @@ sanguis::server::load::~load()
 {
 }
 
-sanguis::model::cell_size const
+sanguis::server::radius const
 sanguis::server::load::model_dim(
 	sanguis::load::model::path const &_model_path
 ) const
@@ -31,13 +33,17 @@ sanguis::server::load::model_dim(
 			)
 			{
 				return
-					sanguis::model::cell_size_from_file(
-						sanguis::load::model::path_to_json_file(
-							sanguis::load::model::make_path(
-								_path
+					sanguis::server::radius{
+						sanguis::load::model::radius(
+							sanguis::model::cell_size_from_file(
+								sanguis::load::model::path_to_json_file(
+									sanguis::load::model::make_path(
+										_path
+									)
+								)
 							)
-						)
-					);
+						).get()
+					};
 			}
 		);
 }

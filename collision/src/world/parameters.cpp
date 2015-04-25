@@ -1,20 +1,20 @@
 #include <sanguis/collision/world/parameters.hpp>
-#include <sanguis/creator/dim.hpp>
+#include <sanguis/creator/grid_fwd.hpp>
 
 
 sanguis::collision::world::parameters::parameters(
-	sanguis::creator::dim const _grid_size
+	sanguis::creator::grid const &_grid
 )
 :
-	grid_size_(
-		_grid_size
+	grid_(
+		_grid
 	)
 {
 }
 
-sanguis::creator::dim
-sanguis::collision::world::parameters::grid_size() const
+sanguis::creator::grid const &
+sanguis::collision::world::parameters::grid() const
 {
 	return
-		grid_size_;
+		grid_;
 }

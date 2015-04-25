@@ -2,17 +2,15 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_BODY_HPP_INCLUDED
 
 #include <sanguis/collision/center_fwd.hpp>
+#include <sanguis/collision/speed_fwd.hpp>
 #include <sanguis/collision/world/body_base.hpp>
 #include <sanguis/collision/world/body_group_fwd.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center_fwd.hpp>
-#include <sanguis/server/dim.hpp>
-#include <sanguis/server/model_size_fwd.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/speed_fwd.hpp>
 #include <sanguis/server/collision/body.hpp>
 #include <sanguis/server/collision/body_fwd.hpp>
-#include <sanguis/server/collision/result_fwd.hpp>
 #include <sanguis/server/entities/optional_transfer_result_fwd.hpp>
 #include <sanguis/server/entities/remove_from_world_result_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
@@ -22,6 +20,7 @@
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/entities/ifaces/with_links.hpp>
 #include <sanguis/server/net/angle.hpp>
+#include <sanguis/server/net/center.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool_fwd.hpp>
@@ -49,7 +48,7 @@ class with_body
 public:
 	explicit
 	with_body(
-		sanguis::server::model_size
+		sanguis::server::radius
 	);
 
 	~with_body()
@@ -79,9 +78,6 @@ public:
 	sanguis::server::radius const
 	radius() const;
 
-	sanguis::server::dim const
-	dim() const;
-
 	sanguis::server::entities::remove_from_world_result
 	remove_from_world()
 	override;
@@ -92,12 +88,6 @@ protected:
 		sanguis::server::entities::transfer_parameters const &
 	)
 	override;
-
-	virtual
-	void
-	on_world_collision(
-		sanguis::server::collision::result const &
-	);
 
 	void
 	update()
@@ -150,23 +140,21 @@ private:
 	)
 	override;
 
-	virtual
 	void
-	on_position_change(
-		sanguis::server::center
-	);
+	speed_changed(
+		sanguis::collision::speed
+	)
+	override;
 
-	virtual
 	void
-	on_speed_change(
-		sanguis::server::speed
-	);
-
-	sanguis::server::dim const dim_;
+	world_collision()
+	override;
 
 	sanguis::server::angle angle_;
 
 	sanguis::server::collision::body collision_body_;
+
+	sanguis::server::net::center net_center_;
 
 	sanguis::server::net::angle net_angle_;
 };

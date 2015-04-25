@@ -3,7 +3,7 @@
 
 #include <sanguis/entity_id.hpp>
 #include <sanguis/load/model/path_fwd.hpp>
-#include <sanguis/server/model_size_fwd.hpp>
+#include <sanguis/server/radius_fwd.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -24,7 +24,7 @@ protected:
 	load_context();
 public:
 	virtual
-	sanguis::server::model_size const
+	sanguis::server::radius const
 	model_size(
 		sanguis::load::model::path const &
 	) const = 0;

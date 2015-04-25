@@ -3,7 +3,7 @@
 
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
-#include <sanguis/server/dim_fwd.hpp>
+#include <sanguis/server/radius_fwd.hpp>
 
 
 namespace sanguis
@@ -16,7 +16,7 @@ namespace collision
 bool
 with_world(
 	sanguis::server::center,
-	sanguis::server::dim,
+	sanguis::server::radius,
 	sanguis::creator::grid const &
 );
 

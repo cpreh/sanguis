@@ -1,4 +1,4 @@
-#include <sanguis/collision/dim2.hpp>
+#include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/unit.hpp>
 #include <sanguis/collision/vector2.hpp>
@@ -14,13 +14,13 @@
 #include <fcppt/assert/error.hpp>
 #include <fcppt/math/box/expand.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
-#include <fcppt/math/dim/to_vector.hpp>
+#include <fcppt/math/vector/fill.hpp>
 
 
 sanguis::collision::speed const
 sanguis::collision::impl::adjust_speed(
 	sanguis::collision::impl::line_segment const _movement,
-	sanguis::collision::dim2 const _entity_size,
+	sanguis::collision::radius const _radius,
 	sanguis::collision::impl::rect const _obstacle,
 	sanguis::collision::speed const _old_speed
 )
@@ -30,14 +30,10 @@ sanguis::collision::impl::adjust_speed(
 			sanguis::collision::impl::rect_line_intersection(
 				fcppt::math::box::expand(
 					_obstacle,
-					fcppt::math::dim::to_vector(
-						_entity_size
-						/
-						fcppt::literal<
-							sanguis::collision::unit
-						>(
-							2
-						)
+					fcppt::math::vector::fill<
+						sanguis::collision::impl::rect::vector
+					>(
+						_radius.get()
 					)
 				),
 				_movement

@@ -45,13 +45,6 @@ public:
 
 	virtual
 	void
-	world_collision(
-		sanguis::creator::grid const &,
-		sanguis::duration
-	);
-
-	virtual
-	void
 	update();
 
 	virtual

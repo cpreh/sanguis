@@ -2,6 +2,8 @@
 #define SANGUIS_COLLISION_IMPL_WORLD_SIMPLE_BODY_HPP_INCLUDED
 
 #include <sanguis/collision/center.hpp>
+#include <sanguis/collision/duration.hpp>
+#include <sanguis/collision/optional_result_fwd.hpp>
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/impl/world/simple/body_base_hook.hpp>
@@ -59,7 +61,8 @@ public:
 
 	void
 	move(
-		sanguis::collision::center
+		sanguis::collision::optional_result const &,
+		sanguis::collision::duration
 	);
 
 	sanguis::collision::center const

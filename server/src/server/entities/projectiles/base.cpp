@@ -2,10 +2,9 @@
 #include <sanguis/load/model/path.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/direction.hpp>
-#include <sanguis/server/model_size.hpp>
 #include <sanguis/server/player_id.hpp>
+#include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
-#include <sanguis/server/collision/result_fwd.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/movement_speed_initial.hpp>
 #include <sanguis/server/entities/with_body.hpp>
@@ -87,15 +86,9 @@ sanguis::server::entities::projectiles::base::dead() const
 }
 
 void
-sanguis::server::entities::projectiles::base::on_world_collision(
-	sanguis::server::collision::result const &_result
-)
+sanguis::server::entities::projectiles::base::world_collision()
 {
 	this->expire();
-
-	sanguis::server::entities::with_body::on_world_collision(
-		_result
-	);
 }
 
 boost::logic::tribool const

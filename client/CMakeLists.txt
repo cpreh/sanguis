@@ -186,6 +186,8 @@ set(
 	include/sanguis/client/draw2d/factory/player.hpp
 	include/sanguis/client/draw2d/factory/projectile.hpp
 	include/sanguis/client/draw2d/factory/weapon_pickup.hpp
+	include/sanguis/client/draw2d/fradius.hpp
+	include/sanguis/client/draw2d/fradius_fwd.hpp
 	include/sanguis/client/draw2d/funit.hpp
 	include/sanguis/client/draw2d/insert_own_callback.hpp
 	include/sanguis/client/draw2d/log.hpp

@@ -32,6 +32,7 @@
 #include <sanguis/server/weapons/events/shoot.hpp>
 #include <sanguis/server/weapons/events/stop.hpp>
 #include <sanguis/server/weapons/states/idle.hpp>
+#include <fcppt/const.hpp>
 #include <fcppt/from_optional.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/algorithm/join.hpp>
@@ -205,11 +206,9 @@ sanguis::server::weapons::weapon::owner_target_in_range() const
 	return
 		fcppt::maybe(
 			this->owner().target(),
-			[]
-			{
-				return
-					false;
-			},
+			fcppt::const_(
+				false
+			),
 			[
 				this
 			](
