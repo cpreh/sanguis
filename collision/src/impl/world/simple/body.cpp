@@ -3,13 +3,19 @@
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/result.hpp>
 #include <sanguis/collision/speed.hpp>
+#include <sanguis/collision/unit.hpp>
+#include <sanguis/collision/impl/log.hpp>
 #include <sanguis/collision/impl/world/simple/body.hpp>
 #include <sanguis/collision/impl/world/simple/body_remove_callback.hpp>
 #include <sanguis/collision/world/body.hpp>
 #include <sanguis/collision/world/body_base.hpp>
 #include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters.hpp>
+#include <sanguis/creator/tile_size.hpp>
 #include <fcppt/maybe_void.hpp>
+#include <fcppt/cast/int_to_float.hpp>
+#include <fcppt/log/_.hpp>
+#include <fcppt/log/warning.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 
 
@@ -42,6 +48,24 @@ sanguis::collision::impl::world::simple::body::body(
 		_parameters.speed()
 	)
 {
+	if(
+		radius_.get()
+		>=
+		fcppt::cast::int_to_float<
+			sanguis::collision::unit
+		>(
+			sanguis::creator::tile_size::value
+			/
+			2
+		)
+	)
+		FCPPT_LOG_WARNING(
+			sanguis::collision::impl::log(),
+			fcppt::log::_
+				<< FCPPT_TEXT("Body with radius ")
+				<< radius_
+				<< FCPPT_TEXT(" won't fit into a single tile.")
+		);
 }
 
 sanguis::collision::impl::world::simple::body::~body()

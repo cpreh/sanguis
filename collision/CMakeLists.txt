@@ -3,6 +3,7 @@ set(
 	include/sanguis/collision/center.hpp
 	include/sanguis/collision/center_fwd.hpp
 	include/sanguis/collision/duration.hpp
+	include/sanguis/collision/log_location.hpp
 	include/sanguis/collision/optional_result.hpp
 	include/sanguis/collision/optional_result_fwd.hpp
 	include/sanguis/collision/radius.hpp
@@ -61,6 +62,7 @@ set(
 	src/impl/intersection.cpp
 	src/impl/line_line_intersect.cpp
 	src/impl/line_segment.cpp
+	src/impl/log.cpp
 	src/impl/make_range.cpp
 	src/impl/make_spiral_range.cpp
 	src/impl/rect_line_intersection.cpp
@@ -77,6 +79,7 @@ set(
 	src/include/sanguis/collision/impl/line_line_intersect.hpp
 	src/include/sanguis/collision/impl/line_segment.hpp
 	src/include/sanguis/collision/impl/line_segment_fwd.hpp
+	src/include/sanguis/collision/impl/log.hpp
 	src/include/sanguis/collision/impl/make_range.hpp
 	src/include/sanguis/collision/impl/make_spiral_range.hpp
 	src/include/sanguis/collision/impl/optional_intersection.hpp
@@ -96,6 +99,7 @@ set(
 	src/include/sanguis/collision/impl/world/ghost_group_container.hpp
 	src/include/sanguis/collision/impl/world/ghost_groups_for_body_group.hpp
 	src/include/sanguis/collision/impl/world/make_groups.hpp
+	src/log_location.cpp
 	src/result.cpp
 	src/test.cpp
 	src/test_move.cpp
@@ -158,6 +162,8 @@ sanguis_add_library(
 	"${SANGUIS_COLLISION_FILES}"
 	DEPS
 		${SANGUIS_COLLISION_LINK_TARGETS}
+		${sanguis_core_TARGET}
+		${fcppt_log_TARGET}
 	INCLUDES
 		"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
 	COMPILE_DEFINITIONS
