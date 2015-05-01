@@ -193,8 +193,7 @@ sanguis::collision::test_move(
 		?
 			sanguis::collision::optional_result(
 				sanguis::collision::result(
-					new_speed,
-					_center
+					new_speed
 				)
 			)
 		:

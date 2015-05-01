@@ -102,14 +102,8 @@ sanguis::collision::impl::world::simple::body::move(
 			sanguis::collision::result const &_collision
 		)
 		{
-			center_ =
-				_collision.center();
-
-			speed_ =
-				_collision.speed();
-
-			body_base_.speed_changed(
-				speed_
+			this->apply_collision(
+				_collision
 			);
 
 			body_base_.world_collision();
@@ -127,6 +121,16 @@ sanguis::collision::impl::world::simple::body::move(
 
 	body_base_.center_changed(
 		center_
+	);
+}
+
+void
+sanguis::collision::impl::world::simple::body::push(
+	sanguis::collision::result const &_collision
+)
+{
+	this->apply_collision(
+		_collision
 	);
 }
 
@@ -172,4 +176,17 @@ sanguis::collision::impl::world::simple::body::body_base() const
 {
 	return
 		body_base_;
+}
+
+void
+sanguis::collision::impl::world::simple::body::apply_collision(
+	sanguis::collision::result const &_collision
+)
+{
+	speed_ =
+		_collision.speed();
+
+	body_base_.speed_changed(
+		speed_
+	);
 }

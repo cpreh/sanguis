@@ -1,6 +1,7 @@
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/duration.hpp>
 #include <sanguis/collision/optional_result.hpp>
+#include <sanguis/collision/result.hpp>
 #include <sanguis/collision/test_move.hpp>
 #include <sanguis/collision/impl/world/body_groups_for_body_group.hpp>
 #include <sanguis/collision/impl/world/body_groups_for_ghost_group.hpp>
@@ -10,12 +11,14 @@
 #include <sanguis/collision/impl/world/simple/body_remove_callback.hpp>
 #include <sanguis/collision/impl/world/simple/body_unique_ptr.hpp>
 #include <sanguis/collision/impl/world/simple/collides.hpp>
+#include <sanguis/collision/impl/world/simple/for_all_body_neighbors.hpp>
 #include <sanguis/collision/impl/world/simple/ghost.hpp>
 #include <sanguis/collision/impl/world/simple/ghost_remove_callback.hpp>
 #include <sanguis/collision/impl/world/simple/ghost_result.hpp>
 #include <sanguis/collision/impl/world/simple/ghost_unique_ptr.hpp>
 #include <sanguis/collision/impl/world/simple/grid_position.hpp>
 #include <sanguis/collision/impl/world/simple/object.hpp>
+#include <sanguis/collision/impl/world/simple/push_near.hpp>
 #include <sanguis/collision/world/body_collision_container.hpp>
 #include <sanguis/collision/world/body_enter_container.hpp>
 #include <sanguis/collision/world/body_exit_container.hpp>
@@ -44,7 +47,6 @@
 #include <fcppt/reference_wrapper_comparison.hpp>
 #include <fcppt/algorithm/append.hpp>
 #include <fcppt/algorithm/array_init_move.hpp>
-#include <fcppt/algorithm/array_push_back.hpp>
 #include <fcppt/algorithm/map_concat_move.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/assert/error.hpp>
@@ -55,7 +57,6 @@
 #include <fcppt/container/grid/clamp_signed_pos.hpp>
 #include <fcppt/container/grid/in_range.hpp>
 #include <fcppt/container/grid/make_pos_range_start_end.hpp>
-#include <fcppt/container/grid/moore_neighbors.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstddef>
@@ -424,25 +425,70 @@ sanguis::collision::impl::world::simple::object::move_bodies(
 )
 {
 	for(
-		auto &body_list
+		body_set const &body_list
 		:
 		body_sets_
 	)
 		for(
-			auto body_ref
+			body_reference const body_ref
 			:
 			body_list
 		)
 		{
-			sanguis::collision::impl::world::simple::body &body(
+			sanguis::collision::impl::world::simple::body &body1(
 				body_ref.get()
 			);
 
-			body.move(
+			if(
+				body1.collision_group()
+				==
+				sanguis::collision::world::body_group::enemy
+			)
+				sanguis::collision::impl::world::simple::for_all_body_neighbors(
+					sanguis::collision::impl::world::simple::grid_position(
+						body1.center()
+					),
+					grid_.size(),
+					[
+						&body1,
+						this
+					](
+						sanguis::creator::pos const _pos2
+					)
+					{
+						for(
+							auto const &body2
+							:
+							body_list_grids_[
+								body1.collision_group()
+							][
+								_pos2
+							]
+						)
+							fcppt::maybe_void(
+								sanguis::collision::impl::world::simple::push_near(
+									body1,
+									body2
+								),
+								[
+									&body1
+								](
+									sanguis::collision::result const &_result
+								)
+								{
+									body1.push(
+										_result
+									);
+								}
+							);
+					}
+				);
+
+			body1.move(
 				sanguis::collision::test_move(
-					body.center(),
-					body.radius(),
-					body.speed(),
+					body1.center(),
+					body1.radius(),
+					body1.speed(),
 					_duration,
 					grid_
 				),
@@ -450,7 +496,7 @@ sanguis::collision::impl::world::simple::object::move_bodies(
 			);
 
 			this->move_body(
-				body
+				body1
 			);
 		}
 }
@@ -475,66 +521,54 @@ sanguis::collision::impl::world::simple::object::body_collisions() const
 		);
 
 		for(
-			auto const body1
+			body_reference const body1
 			:
 			body_sets_[
 				body_group
 			]
 		)
-		{
-			sanguis::creator::pos const body1_pos(
+			sanguis::collision::impl::world::simple::for_all_body_neighbors(
 				sanguis::collision::impl::world::simple::grid_position(
 					body1.get().center()
+				),
+				grid_.size(),
+				[
+					body1,
+					&paired_groups,
+					&result,
+					this
+				](
+					sanguis::creator::pos const _grid_pos2
 				)
-			);
-
-			for(
-				auto const grid_pos2
-				:
-				fcppt::algorithm::array_push_back(
-					fcppt::container::grid::moore_neighbors(
-						body1_pos
-					),
-					body1_pos
-				)
-			)
-			{
-				if(
-					!fcppt::container::grid::in_range_dim(
-						grid_.size(),
-						grid_pos2
-					)
-				)
-					continue;
-
-				for(
-					sanguis::collision::world::body_group const group2
-					:
-					paired_groups
-				)
+				{
 					for(
-						auto const &body2
+						sanguis::collision::world::body_group const group2
 						:
-						body_list_grids_[
-							group2
-						][
-							grid_pos2
-						]
+						paired_groups
 					)
-						if(
-							sanguis::collision::impl::world::simple::collides(
-								body1.get(),
-								body2
-							)
+						for(
+							auto const &body2
+							:
+							body_list_grids_[
+								group2
+							][
+								_grid_pos2
+							]
 						)
-							result.push_back(
-								sanguis::collision::world::body_collision{
-									body1.get().body_base(),
-									body2.body_base()
-								}
-							);
-			}
-		}
+							if(
+								sanguis::collision::impl::world::simple::collides(
+									body1.get(),
+									body2
+								)
+							)
+								result.push_back(
+									sanguis::collision::world::body_collision{
+										body1.get().body_base(),
+										body2.body_base()
+									}
+								);
+				}
+			);
 	}
 
 	return

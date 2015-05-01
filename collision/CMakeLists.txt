@@ -125,6 +125,7 @@ set(
 	src/impl/world/simple/ghost_result.cpp
 	src/impl/world/simple/grid_position.cpp
 	src/impl/world/simple/object.cpp
+	src/impl/world/simple/push_near.cpp
 	src/include/sanguis/collision/impl/world/simple/body.hpp
 	src/include/sanguis/collision/impl/world/simple/body_base_hook.hpp
 	src/include/sanguis/collision/impl/world/simple/body_fwd.hpp
@@ -135,6 +136,7 @@ set(
 	src/include/sanguis/collision/impl/world/simple/body_remove_callback.hpp
 	src/include/sanguis/collision/impl/world/simple/body_unique_ptr.hpp
 	src/include/sanguis/collision/impl/world/simple/collides.hpp
+	src/include/sanguis/collision/impl/world/simple/for_all_body_neighbors.hpp
 	src/include/sanguis/collision/impl/world/simple/ghost.hpp
 	src/include/sanguis/collision/impl/world/simple/ghost_fwd.hpp
 	src/include/sanguis/collision/impl/world/simple/ghost_remove_callback.hpp
@@ -143,6 +145,7 @@ set(
 	src/include/sanguis/collision/impl/world/simple/ghost_unique_ptr.hpp
 	src/include/sanguis/collision/impl/world/simple/grid_position.hpp
 	src/include/sanguis/collision/impl/world/simple/object.hpp
+	src/include/sanguis/collision/impl/world/simple/push_near.hpp
 )
 
 set(
