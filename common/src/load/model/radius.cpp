@@ -53,7 +53,7 @@ sanguis::load::model::radius(
 			fcppt::literal<
 				sanguis::collision::unit
 			>(
-				0.7f
+				0.4f
 			)
 		);
 }
