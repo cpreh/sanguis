@@ -4,7 +4,6 @@
 #include <sanguis/client/draw2d/sprite/type_choices_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/normal/color_format.hpp>
 #include <sge/sprite/config/choices_fwd.hpp>
-#include <sge/sprite/config/custom_center_fwd.hpp>
 #include <sge/sprite/config/intrusive_fwd.hpp>
 #include <sge/sprite/config/normal_size_fwd.hpp>
 #include <sge/sprite/config/pos_fwd.hpp>
@@ -42,11 +41,7 @@ sge::sprite::config::choices<
 		sge::sprite::config::texture_size_option::maybe
 	>,
 	boost::mpl::vector4<
-		sge::sprite::config::with_rotation<
-			sge::sprite::config::custom_center<
-				false
-			>
-		>,
+		sge::sprite::config::with_rotation,
 		sge::sprite::config::with_texture<
 			sge::sprite::config::texture_level_count<
 				1u
