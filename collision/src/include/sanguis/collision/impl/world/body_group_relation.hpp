@@ -24,6 +24,10 @@ boost::mpl::map<
 		sanguis::collision::world::body_group::projectile_player
 	>,
 	sanguis::collision::impl::world::body_group_pair<
+		sanguis::collision::world::body_group::destructible,
+		sanguis::collision::world::body_group::projectile_player
+	>,
+	sanguis::collision::impl::world::body_group_pair<
 		sanguis::collision::world::body_group::pickup,
 		sanguis::collision::world::body_group::player
 	>,

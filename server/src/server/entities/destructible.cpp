@@ -107,7 +107,7 @@ sanguis::collision::world::body_group
 sanguis::server::entities::destructible::collision_group() const
 {
 	return
-		sanguis::collision::world::body_group::enemy;
+		sanguis::collision::world::body_group::destructible;
 }
 
 sanguis::messages::server::unique_ptr
