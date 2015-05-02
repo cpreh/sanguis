@@ -67,6 +67,10 @@ boost::mpl::map<
 	sanguis::collision::impl::world::body_ghost_group_pair<
 		sanguis::collision::world::body_group::enemy,
 		sanguis::collision::world::ghost_group::target_enemy
+	>,
+	sanguis::collision::impl::world::body_ghost_group_pair<
+		sanguis::collision::world::body_group::destructible,
+		sanguis::collision::world::ghost_group::target_enemy
 	>
 >
 body_ghost_group_relation;
