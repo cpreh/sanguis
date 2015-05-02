@@ -2,6 +2,7 @@
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/weapons/attack.hpp>
 #include <sanguis/server/weapons/attack_result.hpp>
+#include <sanguis/server/weapons/log.hpp>
 #include <sanguis/server/weapons/random_angle.hpp>
 #include <sanguis/server/weapons/target.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
@@ -13,6 +14,8 @@
 #include <sanguis/server/weapons/states/castpoint.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/assert/optional_error.hpp>
+#include <fcppt/log/_.hpp>
+#include <fcppt/log/verbose.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -54,6 +57,13 @@ sanguis::server::weapons::states::castpoint::castpoint(
 	>().weapon_status(
 		sanguis::weapon_status::attacking
 	);
+
+	FCPPT_LOG_VERBOSE(
+		sanguis::server::weapons::log(),
+		fcppt::log::_
+			<< FCPPT_TEXT("castpoint: ")
+			<< this
+	);
 }
 
 FCPPT_PP_POP_WARNING
@@ -67,6 +77,12 @@ sanguis::server::weapons::states::castpoint::react(
 	sanguis::server::weapons::events::poll const &
 )
 {
+	if(
+		!attack_time_.expired()
+	)
+		return
+			this->discard_event();
+
 	sanguis::server::entities::with_weapon &owner(
 		this->context<
 			sanguis::server::weapons::weapon
@@ -79,8 +95,14 @@ sanguis::server::weapons::states::castpoint::react(
 			[
 				this
 			]{
+				this->post_event(
+					sanguis::server::weapons::events::stop()
+				);
+
 				return
-					this->discard_event();
+					this->transit<
+						sanguis::server::weapons::states::backswing
+					>();
 			},
 			[
 				&owner,
@@ -89,13 +111,6 @@ sanguis::server::weapons::states::castpoint::react(
 				sanguis::server::weapons::target const _target
 			)
 			{
-				// TODO: Is this ok?
-				if(
-					!attack_time_.expired()
-				)
-					return
-						this->discard_event();
-
 				switch(
 					this->context<
 						sanguis::server::weapons::weapon

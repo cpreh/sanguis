@@ -4,6 +4,7 @@
 #include <sanguis/magazine_extra.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/magazine_size.hpp>
+#include <sanguis/magazine_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/reload_time.hpp>
 #include <sanguis/update_diff_clock.hpp>
@@ -35,6 +36,8 @@
 #include <fcppt/const.hpp>
 #include <fcppt/from_optional.hpp>
 #include <fcppt/maybe.hpp>
+#include <fcppt/maybe_void.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/algorithm/join.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/optional_error.hpp>
@@ -64,7 +67,13 @@ sanguis::server::weapons::weapon::weapon(
 		_parameters.range()
 	},
 	magazine_used_{
-		0u
+		_parameters.magazine_size().has_value()
+		?
+			optional_magazine_used(
+				0u
+			)
+		:
+			optional_magazine_used()
 	},
 	magazine_size_{
 		_parameters.magazine_size()
@@ -358,23 +367,43 @@ sanguis::server::weapons::weapon::reload_time(
 void
 sanguis::server::weapons::weapon::reset_magazine()
 {
-	magazine_used_ =
-		0u;
+	fcppt::maybe_void(
+		magazine_used_,
+		[
+			this
+		](
+			sanguis::magazine_type &_used
+		)
+		{
+			_used =
+				0u;
 
-	this->update_magazine_remaining();
+			this->update_magazine_remaining();
+		}
+	);
 }
 
 void
 sanguis::server::weapons::weapon::use_magazine_item()
 {
-	++magazine_used_;
+	fcppt::maybe_void(
+		magazine_used_,
+		[
+			this
+		](
+			sanguis::magazine_type &_magazine_used
+		)
+		{
+			++_magazine_used;
 
-	this->update_magazine_remaining();
+			this->update_magazine_remaining();
 
-	FCPPT_ASSERT_ERROR(
-		magazine_used_
-		<=
-		this->magazine_size().value().get()
+			FCPPT_ASSERT_ERROR(
+				_magazine_used
+				<=
+				this->magazine_size().value().get()
+			);
+		}
 	);
 }
 
@@ -382,9 +411,11 @@ bool
 sanguis::server::weapons::weapon::magazine_empty() const
 {
 	return
-		magazine_used_
+		this->magazine_remaining()
 		==
-		this->magazine_size().value().get();
+		sanguis::magazine_remaining{
+			0u
+		};
 }
 
 sanguis::server::weapons::attributes::optional_accuracy const
@@ -419,10 +450,26 @@ sanguis::magazine_remaining const
 sanguis::server::weapons::weapon::magazine_remaining() const
 {
 	return
-		sanguis::magazine_remaining(
-			this->magazine_size().value().get()
-			-
-			magazine_used_
+		fcppt::maybe(
+			magazine_used_,
+			fcppt::const_(
+				sanguis::magazine_remaining{
+					1u
+				}
+			),
+			[
+				this
+			](
+				sanguis::magazine_type const _used
+			)
+			{
+				return
+					sanguis::magazine_remaining(
+						this->magazine_size().value().get()
+						-
+						_used
+					);
+			}
 		);
 }
 

@@ -1,6 +1,7 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/weapon_status.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
+#include <sanguis/server/weapons/log.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/events/poll.hpp>
 #include <sanguis/server/weapons/events/reload.hpp>
@@ -10,6 +11,8 @@
 #include <sanguis/server/weapons/states/castpoint.hpp>
 #include <sanguis/server/weapons/states/idle.hpp>
 #include <sanguis/server/weapons/states/reloading.hpp>
+#include <fcppt/log/_.hpp>
+#include <fcppt/log/verbose.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -46,6 +49,12 @@ sanguis::server::weapons::states::backswing::backswing(
 		)
 	)
 {
+	FCPPT_LOG_VERBOSE(
+		sanguis::server::weapons::log(),
+		fcppt::log::_
+			<< FCPPT_TEXT("backswing: ")
+			<< this
+	);
 }
 
 FCPPT_PP_POP_WARNING
@@ -119,7 +128,8 @@ sanguis::server::weapons::states::backswing::react(
 	sanguis::server::weapons::events::stop const &
 )
 {
-	cancelled_ = true;
+	cancelled_ =
+		true;
 
 	return
 		this->discard_event();

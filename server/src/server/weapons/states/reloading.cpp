@@ -2,6 +2,7 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/weapon_status.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
+#include <sanguis/server/weapons/log.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/events/poll.hpp>
 #include <sanguis/server/weapons/events/reload.hpp>
@@ -12,6 +13,8 @@
 #include <sanguis/server/weapons/states/reloading.hpp>
 #include <sge/timer/remaining.hpp>
 #include <fcppt/assert/optional_error.hpp>
+#include <fcppt/log/_.hpp>
+#include <fcppt/log/verbose.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -64,6 +67,13 @@ sanguis::server::weapons::states::reloading::reloading(
 		>(
 			reload_time_
 		)
+	);
+
+	FCPPT_LOG_VERBOSE(
+		sanguis::server::weapons::log(),
+		fcppt::log::_
+			<< FCPPT_TEXT("reloading: ")
+			<< this
 	);
 }
 

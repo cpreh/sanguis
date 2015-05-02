@@ -266,7 +266,6 @@ sanguis::server::entities::with_weapon::in_range(
 					_weapon.owner_target_in_range();
 			}
 		);
-
 }
 
 void
