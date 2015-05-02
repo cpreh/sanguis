@@ -30,6 +30,15 @@ public:
 		sanguis::duration const &
 	);
 
+	decay_time(
+		decay_time &&
+	);
+
+	decay_time &
+	operator=(
+		decay_time &&
+	);
+
 	~decay_time();
 
 	bool

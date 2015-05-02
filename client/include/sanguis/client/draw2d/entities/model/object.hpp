@@ -12,14 +12,16 @@
 #include <sanguis/client/draw2d/entities/ifaces/with_health.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_weapon.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
-#include <sanguis/client/draw2d/entities/model/decay_time_fwd.hpp>
+#include <sanguis/client/draw2d/entities/model/decay_time.hpp>
 #include <sanguis/client/draw2d/entities/model/object_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/part_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/index_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/load/animation_type_fwd.hpp>
+#include <sanguis/client/load/model/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/optional_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <memory>
 #include <vector>
@@ -130,6 +132,11 @@ protected:
 	sanguis::client::optional_health_pair const
 	health_pair() const;
 private:
+	object(
+		sanguis::client::draw2d::entities::model::parameters const &,
+		sanguis::client::load::model::object const &
+	);
+
 	// with_weapon overrides
 	void
 	weapon(
@@ -169,17 +176,26 @@ private:
 
 	sanguis::client::optional_health_pair health_pair_;
 
-	std::unique_ptr<
+	typedef
+	fcppt::optional<
 		sanguis::client::draw2d::entities::model::decay_time
-	> decay_time_;
+	>
+	optional_decay_time;
+
+	optional_decay_time decay_time_;
 
 	sanguis::client::draw2d::entities::model::decay_option const decay_option_;
 
+	// TODO: Make parts movable?
+	typedef
+	std::unique_ptr<
+		sanguis::client::draw2d::entities::model::part
+	>
+	part_unique_ptr;
+
 	typedef
 	std::vector<
-		std::unique_ptr<
-			sanguis::client::draw2d::entities::model::part
-		>
+		part_unique_ptr
 	>
 	part_vector;
 

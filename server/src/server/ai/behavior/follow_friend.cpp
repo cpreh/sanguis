@@ -18,6 +18,7 @@
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_links.hpp>
+#include <fcppt/const.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/make_ref.hpp>
@@ -92,11 +93,9 @@ sanguis::server::ai::behavior::follow_friend::start()
 		// TODO: Create a function for this
 		fcppt::maybe(
 			this->first_target(),
-			[]
-			{
-				return
-					false;
-			},
+			fcppt::const_(
+				false
+			),
 			[
 				this
 			](

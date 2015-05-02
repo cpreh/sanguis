@@ -4,10 +4,9 @@
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/collision/distance_entity_entity.hpp>
 #include <sanguis/server/entities/base.hpp>
+#include <fcppt/const.hpp>
+#include <fcppt/maybe.hpp>
 #include <fcppt/optional_impl.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <limits>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -15,7 +14,6 @@ namespace sanguis
 namespace server
 {
 
-// TODO: Use optionals!
 template<
 	typename Container,
 	typename Predicate
@@ -39,11 +37,13 @@ closest_entity(
 
 	result_type ret;
 
-	sanguis::server::space_unit distance(
-		std::numeric_limits<
-			sanguis::server::space_unit
-		>::max()
-	);
+	typedef
+	fcppt::optional<
+		sanguis::server::space_unit
+	>
+	optional_space_unit;
+
+	optional_space_unit distance;
 
 	for(
 		auto const entity
@@ -63,13 +63,29 @@ closest_entity(
 				entity.get()
 			)
 			&&
-			new_distance
-			<
-			distance
+			fcppt::maybe(
+				distance,
+				fcppt::const_(
+					true
+				),
+				[
+					new_distance
+				](
+					sanguis::server::space_unit const _old_distance
+				)
+				{
+					return
+						new_distance
+						<
+						_old_distance;
+				}
+			)
 		)
 		{
 			distance =
-				new_distance;
+				optional_space_unit(
+					new_distance
+				);
 
 			ret =
 				result_type(

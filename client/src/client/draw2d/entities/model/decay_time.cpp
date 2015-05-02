@@ -18,6 +18,17 @@ sanguis::client::draw2d::entities::model::decay_time::decay_time(
 {
 }
 
+sanguis::client::draw2d::entities::model::decay_time::decay_time(
+	decay_time &&
+)
+= default;
+
+sanguis::client::draw2d::entities::model::decay_time &
+sanguis::client::draw2d::entities::model::decay_time::operator=(
+	decay_time &&
+)
+= default;
+
 sanguis::client::draw2d::entities::model::decay_time::~decay_time()
 {
 }
