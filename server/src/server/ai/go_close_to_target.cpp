@@ -12,40 +12,41 @@
 #include <fcppt/literal.hpp>
 
 
-void
+bool
 sanguis::server::ai::go_close_to_target(
 	sanguis::server::ai::context &_context,
 	sanguis::server::ai::target const _target,
 	sanguis::server::ai::speed_factor const _speed_factor
 )
 {
-	sanguis::server::ai::go_to_target(
-		_context,
-		sanguis::server::ai::in_range{
-			sanguis::server::collision::distance_entity_pos(
-				_context.me(),
-				_target.get().get()
-			)
-			<
-			// TODO: What should we use here
-			fcppt::literal<
-				sanguis::server::space_unit
-			>(
-				100
-			)
-		},
-		sanguis::server::ai::is_visible{
-			sanguis::creator::tile_is_visible(
-				_context.grid(),
-				sanguis::server::world::center_to_grid_pos(
-					_context.me().center()
-				),
-				sanguis::server::world::center_to_grid_pos(
-					_target.get()
+	return
+		sanguis::server::ai::go_to_target(
+			_context,
+			sanguis::server::ai::in_range{
+				sanguis::server::collision::distance_entity_pos(
+					_context.me(),
+					_target.get().get()
 				)
-			)
-		},
-		_target,
-		_speed_factor
-	);
+				<
+				// TODO: What should we use here
+				fcppt::literal<
+					sanguis::server::space_unit
+				>(
+					100
+				)
+			},
+			sanguis::server::ai::is_visible{
+				sanguis::creator::tile_is_visible(
+					_context.grid(),
+					sanguis::server::world::center_to_grid_pos(
+						_context.me().center()
+					),
+					sanguis::server::world::center_to_grid_pos(
+						_target.get()
+					)
+				)
+			},
+			_target,
+			_speed_factor
+		);
 }

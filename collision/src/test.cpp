@@ -5,6 +5,8 @@
 #include <sanguis/creator/grid_crange.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/creator/tile_is_solid.hpp>
+#include <fcppt/algorithm/contains_if.hpp>
+#include <fcppt/container/grid/pos_reference_impl.hpp>
 
 
 bool
@@ -14,24 +16,23 @@ sanguis::collision::test(
 	sanguis::creator::grid const &_grid
 )
 {
-	// TODO: Use contains_if
-	for(
-		auto const &entry
-		:
-		sanguis::collision::impl::make_range(
-			_grid,
-			_center,
-			_radius
-		)
-	)
-		if(
-			sanguis::creator::tile_is_solid(
-				entry.value()
-			)
-		)
-			return
-				true;
-
 	return
-		false;
+		fcppt::algorithm::contains_if(
+			sanguis::collision::impl::make_range(
+				_grid,
+				_center,
+				_radius
+			),
+			[](
+				fcppt::container::grid::pos_reference<
+					sanguis::creator::grid const
+				> const _entry
+			)
+			{
+				return
+					sanguis::creator::tile_is_solid(
+						_entry.value()
+					);
+			}
+		);
 }

@@ -34,6 +34,7 @@
 #include <sanguis/server/weapons/target.hpp>
 #include <sanguis/server/world/center_to_grid_pos.hpp>
 #include <sanguis/server/world/grid_pos_to_center.hpp>
+#include <fcppt/const.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/make_ref.hpp>
@@ -117,10 +118,9 @@ sanguis::server::ai::behavior::attack::start()
 		||
 		fcppt::maybe(
 			this->closest_visible_target(),
-			[]{
-				return
-					false;
-			},
+			fcppt::const_(
+				false
+			),
 			[
 				this
 			](
@@ -209,18 +209,21 @@ sanguis::server::ai::behavior::attack::update(
 					weapon_to_use
 				);
 
-				sanguis::server::ai::go_to_target(
-					this->context(),
-					in_range,
-					is_visible,
-					sanguis::server::ai::target{
-						_target.center()
-					},
-					this->speed_factor()
-				);
-
 				return
-					sanguis::server::ai::status::running;
+					sanguis::server::ai::go_to_target(
+						this->context(),
+						in_range,
+						is_visible,
+						sanguis::server::ai::target{
+							_target.center()
+						},
+						this->speed_factor()
+					)
+					?
+						sanguis::server::ai::status::running
+					:
+						sanguis::server::ai::status::failure
+					;
 			}
 		);
 }

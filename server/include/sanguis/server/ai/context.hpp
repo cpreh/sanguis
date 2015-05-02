@@ -6,9 +6,10 @@
 #include <sanguis/creator/pos_fwd.hpp>
 #include <sanguis/server/ai/context_fwd.hpp>
 #include <sanguis/server/ai/pathing/optional_target_fwd.hpp>
-#include <sanguis/server/ai/pathing/trail.hpp>
+#include <sanguis/server/ai/pathing/optional_trail.hpp>
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/preprocessor/warn_unused_result.hpp>
 
 
 namespace sanguis
@@ -34,7 +35,8 @@ public:
 	bool
 	path_find(
 		sanguis::creator::pos
-	);
+	)
+	FCPPT_PP_WARN_UNUSED_RESULT;
 
 	void
 	clear_path();
@@ -56,7 +58,7 @@ public:
 private:
 	sanguis::server::entities::with_ai &me_;
 
-	sanguis::server::ai::pathing::trail trail_;
+	sanguis::server::ai::pathing::optional_trail trail_;
 };
 
 }

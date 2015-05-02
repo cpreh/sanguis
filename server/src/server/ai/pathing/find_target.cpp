@@ -2,6 +2,7 @@
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile_is_solid.hpp>
 #include <sanguis/server/ai/pathing/find_target.hpp>
+#include <sanguis/server/ai/pathing/optional_trail.hpp>
 #include <sanguis/server/ai/pathing/start.hpp>
 #include <sanguis/server/ai/pathing/target.hpp>
 #include <sanguis/server/ai/pathing/trail.hpp>
@@ -17,7 +18,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::server::ai::pathing::trail
+sanguis::server::ai::pathing::optional_trail
 sanguis::server::ai::pathing::find_target(
 	sanguis::creator::grid const &_grid,
 	sanguis::server::ai::pathing::start const _start,
@@ -87,18 +88,18 @@ sanguis::server::ai::pathing::find_target(
 					]
 				);
 
-			// Pop the start node.
-			// TODO: Find a better way to express this in the loop above
-			result.pop_back();
-
 			return
-				result;
+				sanguis::server::ai::pathing::optional_trail{
+					std::move(
+						result
+					)
+				};
 		}
 
 		positions.pop();
 
 		for(
-			auto const &pos
+			sanguis::creator::pos const pos
 			:
 			fcppt::container::grid::neumann_neighbors(
 				cur
@@ -136,5 +137,5 @@ sanguis::server::ai::pathing::find_target(
 	}
 
 	return
-		sanguis::server::ai::pathing::trail();
+		sanguis::server::ai::pathing::optional_trail{};
 }

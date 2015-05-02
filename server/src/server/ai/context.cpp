@@ -4,13 +4,16 @@
 #include <sanguis/server/ai/pathing/can_walk_diagonally.hpp>
 #include <sanguis/server/ai/pathing/find_target.hpp>
 #include <sanguis/server/ai/pathing/optional_target.hpp>
+#include <sanguis/server/ai/pathing/optional_trail.hpp>
 #include <sanguis/server/ai/pathing/start.hpp>
 #include <sanguis/server/ai/pathing/target.hpp>
 #include <sanguis/server/ai/pathing/trail.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/world/center_to_grid_pos.hpp>
+#include <fcppt/optional_bind.hpp>
 #include <fcppt/assert/optional_error.hpp>
+#include <fcppt/container/maybe_front.hpp>
 
 
 sanguis::server::ai::context::context(
@@ -47,62 +50,79 @@ sanguis::server::ai::context::path_find(
 		);
 
 	return
-		!trail_.empty();
+		trail_.has_value();
 }
 
 void
 sanguis::server::ai::context::clear_path()
 {
-	trail_.clear();
+	trail_ =
+		sanguis::server::ai::pathing::optional_trail();
 }
 
 sanguis::creator::optional_pos const
 sanguis::server::ai::context::destination() const
 {
-	// TODO: maybe_front
 	return
-		trail_.empty()
-		?
-			sanguis::creator::optional_pos()
-		:
-			sanguis::creator::optional_pos(
-				trail_.front()
+		fcppt::optional_bind(
+			trail_,
+			[](
+				sanguis::server::ai::pathing::trail const &_trail
 			)
-		;
+			{
+				return
+					sanguis::creator::optional_pos{
+						fcppt::container::maybe_front(
+							_trail
+						)
+					};
+			}
+		);
 }
 
 sanguis::server::ai::pathing::optional_target const
 sanguis::server::ai::context::continue_path()
 {
-	// TODO: maybe_back
-	if(
-		trail_.empty()
-	)
-		return
-			sanguis::server::ai::pathing::optional_target();
-
-	sanguis::creator::pos const next_position(
-		trail_.back()
-	);
-
-	// TODO: Return the next position after pop_back
-	if(
-		sanguis::server::ai::pathing::can_walk_diagonally(
-			this->grid(),
-			sanguis::server::world::center_to_grid_pos(
-				me_.center()
-			),
-			next_position
-		)
-	)
-		trail_.pop_back();
-
 	return
-		sanguis::server::ai::pathing::optional_target{
-			sanguis::server::ai::pathing::target(
-				next_position
+		fcppt::optional_bind(
+			trail_,
+			[
+				this
+			](
+				sanguis::server::ai::pathing::trail &_trail
 			)
-		};
+			{
+				// TODO: maybe_back
+				if(
+					_trail.empty()
+				)
+					return
+						sanguis::server::ai::pathing::optional_target();
+
+				sanguis::creator::pos const next_position(
+					_trail.back()
+				);
+
+				// TODO: Return the next position after pop_back
+				if(
+					sanguis::server::ai::pathing::can_walk_diagonally(
+						this->grid(),
+						sanguis::server::world::center_to_grid_pos(
+							me_.center()
+						),
+						next_position
+					)
+				)
+					_trail.pop_back();
+
+				return
+					sanguis::server::ai::pathing::optional_target{
+						sanguis::server::ai::pathing::target(
+							next_position
+						)
+					};
+			}
+		);
 }
 
 sanguis::creator::grid const &

@@ -57,21 +57,23 @@ sanguis::server::ai::behavior::follow_owner::update(
 				sanguis::server::entities::with_links const &_spawn_owner
 			)
 			{
-
-				sanguis::server::ai::go_close_to_target(
-					this->context(),
-					sanguis::server::ai::target{
-						_spawn_owner.center()
-					},
-					fcppt::literal<
-						sanguis::server::ai::speed_factor
-					>(
-						1
-					)
-				);
-
 				return
-					sanguis::server::ai::status::running;
+					sanguis::server::ai::go_close_to_target(
+						this->context(),
+						sanguis::server::ai::target{
+							_spawn_owner.center()
+						},
+						fcppt::literal<
+							sanguis::server::ai::speed_factor
+						>(
+							1
+						)
+					)
+					?
+						sanguis::server::ai::status::running
+					:
+						sanguis::server::ai::status::failure
+					;
 			}
 		);
 }

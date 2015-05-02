@@ -36,6 +36,8 @@ set(
 	include/sanguis/server/ai/pathing/find_target.hpp
 	include/sanguis/server/ai/pathing/optional_target.hpp
 	include/sanguis/server/ai/pathing/optional_target_fwd.hpp
+	include/sanguis/server/ai/pathing/optional_trail.hpp
+	include/sanguis/server/ai/pathing/optional_trail_fwd.hpp
 	include/sanguis/server/ai/pathing/positions_are_close.hpp
 	include/sanguis/server/ai/pathing/start.hpp
 	include/sanguis/server/ai/pathing/start_fwd.hpp
