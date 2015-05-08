@@ -1,0 +1,49 @@
+set(
+	SANGUIS_TILES_FILES
+	include/sanguis/tiles/direction.hpp
+	include/sanguis/tiles/direction_fwd.hpp
+	include/sanguis/tiles/element_map.hpp
+	include/sanguis/tiles/enable_if_tile.hpp
+	include/sanguis/tiles/is_tile.hpp
+	include/sanguis/tiles/orientation.hpp
+	include/sanguis/tiles/orientation_fwd.hpp
+	include/sanguis/tiles/pair.hpp
+	include/sanguis/tiles/pair_fwd.hpp
+	include/sanguis/tiles/set.hpp
+	include/sanguis/tiles/set_fwd.hpp
+	include/sanguis/tiles/view_container.hpp
+	src/impl/background_tile_name.cpp
+	src/impl/category.cpp
+	src/impl/decode_name.cpp
+	src/impl/make_element_map.cpp
+	src/impl/make_views.cpp
+	src/impl/name.cpp
+	src/impl/tile_name.cpp
+	src/include/sanguis/tiles/impl/background_tile_name.hpp
+	src/include/sanguis/tiles/impl/category.hpp
+	src/include/sanguis/tiles/impl/decode_name.hpp
+	src/include/sanguis/tiles/impl/instantiate_tile.hpp
+	src/include/sanguis/tiles/impl/make_element_map.hpp
+	src/include/sanguis/tiles/impl/make_views.hpp
+	src/include/sanguis/tiles/impl/name.hpp
+	src/include/sanguis/tiles/impl/optional_orientation.hpp
+	src/include/sanguis/tiles/impl/optional_orientation_fwd.hpp
+	src/include/sanguis/tiles/impl/tile_name.hpp
+	src/pair.cpp
+	src/set.cpp
+)
+
+#TODO: Put model code into another library
+sanguis_add_library(
+	tiles
+	"${SANGUIS_TILES_FILES}"
+	DEPS
+		${sanguis_common_TARGET}
+		${sanguis_creator_TARGET}
+		${sanguis_model_TARGET}
+		${sgeimage2d_TARGET}
+		${sgeparsejson_TARGET}
+		${fcppt_core_TARGET}
+	INCLUDES
+		"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
+)

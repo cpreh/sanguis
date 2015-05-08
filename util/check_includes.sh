@@ -28,6 +28,10 @@ check_includes model/src/include
 
 check_includes server/include
 
+check_includes tiles/include
+
+check_includes tiles/src/include
+
 check_includes tools/animations/include
 
 check_includes tools/libmergeimage/include

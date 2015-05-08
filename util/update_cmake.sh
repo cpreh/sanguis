@@ -69,6 +69,8 @@ update_sublibrary model
 
 update_sublibrary server
 
+update_sublibrary tiles
+
 update_impl tools/animations \
 	src \
 	include \

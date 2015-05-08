@@ -73,8 +73,7 @@ sanguis::client::load::tiles::set::set(
 					element_map();
 			},
 			[
-				&_path,
-				&_textures
+				&_path
 			](
 				sge::texture::part const &_texture
 			)
@@ -89,8 +88,7 @@ sanguis::client::load::tiles::set::set(
 							FCPPT_TEXT("mapping.json")
 						).object().members,
 						[
-							&_texture,
-							&_textures
+							&_texture
 						](
 							sge::parse::json::member const &_member
 						)
@@ -102,7 +100,6 @@ sanguis::client::load::tiles::set::set(
 									),
 									[
 										&_texture,
-										&_textures,
 										&_member
 									](
 										sanguis::client::load::tiles::orientation const &_orientation

@@ -438,6 +438,10 @@ if(
 	add_subdirectory(
 		main
 	)
+
+	add_subdirectory(
+		tiles
+	)
 endif()
 
 if(
