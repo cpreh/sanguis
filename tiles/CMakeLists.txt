@@ -5,6 +5,10 @@ set(
 	include/sanguis/tiles/element_map.hpp
 	include/sanguis/tiles/enable_if_tile.hpp
 	include/sanguis/tiles/is_tile.hpp
+	include/sanguis/tiles/make_neighbors.hpp
+	include/sanguis/tiles/make_orientation.hpp
+	include/sanguis/tiles/neighbors.hpp
+	include/sanguis/tiles/neighbors_fwd.hpp
 	include/sanguis/tiles/orientation.hpp
 	include/sanguis/tiles/orientation_fwd.hpp
 	include/sanguis/tiles/pair.hpp
@@ -22,6 +26,7 @@ set(
 	src/include/sanguis/tiles/impl/background_tile_name.hpp
 	src/include/sanguis/tiles/impl/category.hpp
 	src/include/sanguis/tiles/impl/decode_name.hpp
+	src/include/sanguis/tiles/impl/filter_connecting.hpp
 	src/include/sanguis/tiles/impl/instantiate_tile.hpp
 	src/include/sanguis/tiles/impl/make_element_map.hpp
 	src/include/sanguis/tiles/impl/make_views.hpp
@@ -29,6 +34,8 @@ set(
 	src/include/sanguis/tiles/impl/optional_orientation.hpp
 	src/include/sanguis/tiles/impl/optional_orientation_fwd.hpp
 	src/include/sanguis/tiles/impl/tile_name.hpp
+	src/make_neighbors.cpp
+	src/make_orientation.cpp
 	src/pair.cpp
 	src/set.cpp
 )

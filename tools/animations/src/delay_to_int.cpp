@@ -5,6 +5,7 @@
 #include <chrono>
 #include <fcppt/config/external_end.hpp>
 
+
 int
 sanguis::tools::animations::delay_to_int(
 	sanguis::model::animation_delay const &_delay

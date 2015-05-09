@@ -22,12 +22,14 @@ sanguis::creator::tile_is_solid(
 	case sanguis::creator::tile::grave3:
 	case sanguis::creator::tile::grave4:
 	case sanguis::creator::tile::grave5:
-		return false;
+		return
+			false;
 	case sanguis::creator::tile::space_door_closed_h:
 	case sanguis::creator::tile::space_door_closed_v:
 	case sanguis::creator::tile::hedge:
 	case sanguis::creator::tile::concrete_wall:
-		return true;
+		return
+			true;
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;
