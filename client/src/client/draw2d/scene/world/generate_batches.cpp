@@ -102,7 +102,6 @@ sanguis::client::draw2d::scene::world::generate_batches(
 		)
 	);
 
-	// TODO: This should be a config option
 	for(
 		auto const &result_element
 		:
@@ -187,8 +186,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 			sanguis::client::draw2d::scene::world::batch(
 				sge::sprite::geometry::sort_and_update(
 					sge::sprite::geometry::make_random_access_range(
-						sprites.begin(),
-						sprites.end()
+						sprites
 					),
 					sanguis::client::draw2d::scene::world::sprite::compare(),
 					_sprite_buffers

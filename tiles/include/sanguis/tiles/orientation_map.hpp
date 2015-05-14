@@ -1,5 +1,5 @@
-#ifndef SANGUIS_TILES_ELEMENT_MAP_HPP_INCLUDED
-#define SANGUIS_TILES_ELEMENT_MAP_HPP_INCLUDED
+#ifndef SANGUIS_TILES_ORIENTATION_MAP_HPP_INCLUDED
+#define SANGUIS_TILES_ORIENTATION_MAP_HPP_INCLUDED
 
 #include <sanguis/tiles/orientation.hpp>
 #include <sanguis/tiles/view_container.hpp>
@@ -19,7 +19,7 @@ std::unordered_map<
 	sanguis::tiles::orientation,
 	sanguis::tiles::view_container
 >
-element_map;
+orientation_map;
 
 }
 }

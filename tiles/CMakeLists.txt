@@ -1,42 +1,90 @@
 set(
 	SANGUIS_TILES_FILES
+	include/sanguis/tiles/cell.hpp
+	include/sanguis/tiles/cell_container.hpp
+	include/sanguis/tiles/cell_fwd.hpp
+	include/sanguis/tiles/collection.hpp
+	include/sanguis/tiles/collection_fwd.hpp
+	include/sanguis/tiles/content.hpp
+	include/sanguis/tiles/content_fwd.hpp
 	include/sanguis/tiles/direction.hpp
 	include/sanguis/tiles/direction_fwd.hpp
-	include/sanguis/tiles/element_map.hpp
+	include/sanguis/tiles/draw.hpp
 	include/sanguis/tiles/enable_if_tile.hpp
+	include/sanguis/tiles/error.hpp
+	include/sanguis/tiles/error_fwd.hpp
 	include/sanguis/tiles/is_tile.hpp
-	include/sanguis/tiles/make_neighbors.hpp
-	include/sanguis/tiles/make_orientation.hpp
-	include/sanguis/tiles/neighbors.hpp
-	include/sanguis/tiles/neighbors_fwd.hpp
+	include/sanguis/tiles/log_location.hpp
+	include/sanguis/tiles/lower_bound.hpp
+	include/sanguis/tiles/lower_bound_fwd.hpp
 	include/sanguis/tiles/orientation.hpp
 	include/sanguis/tiles/orientation_fwd.hpp
+	include/sanguis/tiles/orientation_map.hpp
 	include/sanguis/tiles/pair.hpp
+	include/sanguis/tiles/pair_comparison.hpp
 	include/sanguis/tiles/pair_fwd.hpp
+	include/sanguis/tiles/pair_std_hash.hpp
+	include/sanguis/tiles/pos.hpp
+	include/sanguis/tiles/pos_fwd.hpp
 	include/sanguis/tiles/set.hpp
 	include/sanguis/tiles/set_fwd.hpp
+	include/sanguis/tiles/unit.hpp
+	include/sanguis/tiles/upper_bound.hpp
+	include/sanguis/tiles/upper_bound_fwd.hpp
 	include/sanguis/tiles/view_container.hpp
+	include/sanguis/tiles/view_container_ref.hpp
+	include/sanguis/tiles/view_container_ref_fwd.hpp
+	src/cell.cpp
+	src/collection.cpp
+	src/draw.cpp
 	src/impl/background_tile_name.cpp
 	src/impl/category.cpp
 	src/impl/decode_name.cpp
-	src/impl/make_element_map.cpp
+	src/impl/log.cpp
+	src/impl/make_neighbors.cpp
+	src/impl/make_orientation.cpp
+	src/impl/make_orientation_map.cpp
+	src/impl/make_pair.cpp
 	src/impl/make_views.cpp
-	src/impl/name.cpp
+	src/impl/neighbors_to_string.cpp
 	src/impl/tile_name.cpp
+	src/impl/to_string.cpp
 	src/include/sanguis/tiles/impl/background_tile_name.hpp
 	src/include/sanguis/tiles/impl/category.hpp
+	src/include/sanguis/tiles/impl/connecting_images.hpp
 	src/include/sanguis/tiles/impl/decode_name.hpp
+	src/include/sanguis/tiles/impl/draw_base.hpp
+	src/include/sanguis/tiles/impl/draw_connecting.hpp
+	src/include/sanguis/tiles/impl/draw_non_connecting.hpp
 	src/include/sanguis/tiles/impl/filter_connecting.hpp
+	src/include/sanguis/tiles/impl/filter_non_connecting.hpp
+	src/include/sanguis/tiles/impl/images_base.hpp
 	src/include/sanguis/tiles/impl/instantiate_tile.hpp
-	src/include/sanguis/tiles/impl/make_element_map.hpp
+	src/include/sanguis/tiles/impl/log.hpp
+	src/include/sanguis/tiles/impl/make_neighbors.hpp
+	src/include/sanguis/tiles/impl/make_orientation.hpp
+	src/include/sanguis/tiles/impl/make_orientation_map.hpp
+	src/include/sanguis/tiles/impl/make_pair.hpp
 	src/include/sanguis/tiles/impl/make_views.hpp
-	src/include/sanguis/tiles/impl/name.hpp
+	src/include/sanguis/tiles/impl/neighbors.hpp
+	src/include/sanguis/tiles/impl/neighbors_fwd.hpp
+	src/include/sanguis/tiles/impl/neighbors_to_string.hpp
+	src/include/sanguis/tiles/impl/non_connecting_images.hpp
+	src/include/sanguis/tiles/impl/optional_content.hpp
+	src/include/sanguis/tiles/impl/optional_content_fwd.hpp
 	src/include/sanguis/tiles/impl/optional_orientation.hpp
 	src/include/sanguis/tiles/impl/optional_orientation_fwd.hpp
+	src/include/sanguis/tiles/impl/optional_pair.hpp
+	src/include/sanguis/tiles/impl/optional_pair_fwd.hpp
+	src/include/sanguis/tiles/impl/replace_connecting.hpp
+	src/include/sanguis/tiles/impl/shift.hpp
+	src/include/sanguis/tiles/impl/shift_fwd.hpp
 	src/include/sanguis/tiles/impl/tile_name.hpp
-	src/make_neighbors.cpp
-	src/make_orientation.cpp
+	src/include/sanguis/tiles/impl/to_string.hpp
+	src/log_location.cpp
 	src/pair.cpp
+	src/pair_comparison.cpp
+	src/pair_std_hash.cpp
 	src/set.cpp
 )
 
@@ -46,11 +94,13 @@ sanguis_add_library(
 	"${SANGUIS_TILES_FILES}"
 	DEPS
 		${sanguis_common_TARGET}
+		${sanguis_core_TARGET}
 		${sanguis_creator_TARGET}
 		${sanguis_model_TARGET}
 		${sgeimage2d_TARGET}
 		${sgeparsejson_TARGET}
 		${fcppt_core_TARGET}
+		${fcppt_log_TARGET}
 	INCLUDES
 		"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
 )

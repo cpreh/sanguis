@@ -1,9 +1,9 @@
 #include <sanguis/tiles/direction.hpp>
 #include <sanguis/tiles/enable_if_tile.hpp>
-#include <sanguis/tiles/make_orientation.hpp>
-#include <sanguis/tiles/neighbors.hpp>
 #include <sanguis/tiles/pair.hpp>
 #include <sanguis/tiles/impl/instantiate_tile.hpp>
+#include <sanguis/tiles/impl/make_orientation.hpp>
+#include <sanguis/tiles/impl/neighbors.hpp>
 #include <fcppt/make_enum_range.hpp>
 #include <fcppt/assert/error.hpp>
 
@@ -15,11 +15,11 @@ sanguis::tiles::enable_if_tile<
 	Tile,
 	sanguis::tiles::orientation
 > const
-sanguis::tiles::make_orientation(
+sanguis::tiles::impl::make_orientation(
 	sanguis::tiles::pair<
 		Tile
 	> const &_pair,
-	sanguis::tiles::neighbors<
+	sanguis::tiles::impl::neighbors<
 		Tile
 	> const &_neighbors
 )
@@ -73,11 +73,11 @@ sanguis::tiles::enable_if_tile< \
 	tile_type, \
 	sanguis::tiles::orientation \
 > const \
-sanguis::tiles::make_orientation(\
+sanguis::tiles::impl::make_orientation(\
 	sanguis::tiles::pair<\
 		tile_type\
 	> const &,\
-	sanguis::tiles::neighbors<\
+	sanguis::tiles::impl::neighbors<\
 		tile_type\
 	> const & \
 )

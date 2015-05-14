@@ -1,7 +1,7 @@
-#include <sanguis/tiles/element_map.hpp>
 #include <sanguis/tiles/orientation.hpp>
+#include <sanguis/tiles/orientation_map.hpp>
 #include <sanguis/tiles/impl/decode_name.hpp>
-#include <sanguis/tiles/impl/make_element_map.hpp>
+#include <sanguis/tiles/impl/make_orientation_map.hpp>
 #include <sanguis/tiles/impl/make_views.hpp>
 #include <sge/image2d/view/const_object_fwd.hpp>
 #include <sge/parse/json/member.hpp>
@@ -15,15 +15,15 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::tiles::element_map
-sanguis::tiles::impl::make_element_map(
+sanguis::tiles::orientation_map
+sanguis::tiles::impl::make_orientation_map(
 	sge::image2d::view::const_object const &_view,
 	boost::filesystem::path const &_path
 )
 {
 	return
 		fcppt::algorithm::map_optional<
-			sanguis::tiles::element_map
+			sanguis::tiles::orientation_map
 		>(
 			sge::parse::json::parse_file_exn(
 				_path

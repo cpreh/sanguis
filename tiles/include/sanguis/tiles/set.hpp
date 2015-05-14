@@ -1,7 +1,7 @@
 #ifndef SANGUIS_TILES_SET_HPP_INCLUDED
 #define SANGUIS_TILES_SET_HPP_INCLUDED
 
-#include <sanguis/tiles/element_map.hpp>
+#include <sanguis/tiles/orientation_map.hpp>
 #include <sanguis/tiles/is_tile.hpp>
 #include <sanguis/tiles/pair_fwd.hpp>
 #include <sanguis/tiles/set_fwd.hpp>
@@ -58,8 +58,8 @@ public:
 	~set();
 
 	SANGUIS_TILES_SYMBOL
-	sanguis::tiles::element_map const &
-	elements() const;
+	sanguis::tiles::orientation_map const &
+	orientations() const;
 private:
 	set(
 		sge::image2d::system &,
@@ -68,7 +68,7 @@ private:
 
 	sge::image2d::optional_file_unique_ptr file_;
 
-	sanguis::tiles::element_map elements_;
+	sanguis::tiles::orientation_map orientations_;
 };
 
 }

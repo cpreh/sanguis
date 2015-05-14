@@ -1,10 +1,10 @@
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile_grid.hpp>
 #include <sanguis/tiles/enable_if_tile.hpp>
-#include <sanguis/tiles/neighbors.hpp>
-#include <sanguis/tiles/make_neighbors.hpp>
-#include <sanguis/tiles/impl/filter_connecting.hpp>
 #include <sanguis/tiles/impl/instantiate_tile.hpp>
+#include <sanguis/tiles/impl/make_neighbors.hpp>
+#include <sanguis/tiles/impl/neighbors.hpp>
+#include <sanguis/tiles/impl/replace_connecting.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/container/grid/in_range.hpp>
 
@@ -14,11 +14,11 @@ template<
 >
 sanguis::tiles::enable_if_tile<
 	Tile,
-	sanguis::tiles::neighbors<
+	sanguis::tiles::impl::neighbors<
 		Tile
 	>
 >
-sanguis::tiles::make_neighbors(
+sanguis::tiles::impl::make_neighbors(
 	sanguis::creator::tile_grid<
 		Tile
 	> const &_grid,
@@ -42,7 +42,7 @@ sanguis::tiles::make_neighbors(
 			);
 
 			return
-				sanguis::tiles::impl::filter_connecting(
+				sanguis::tiles::impl::replace_connecting(
 					_grid[
 						_npos
 					]
@@ -51,7 +51,7 @@ sanguis::tiles::make_neighbors(
 	);
 
 	typedef
-	sanguis::tiles::neighbors<
+	sanguis::tiles::impl::neighbors<
 		Tile
 	>
 	result_type;
@@ -94,11 +94,11 @@ sanguis::tiles::make_neighbors(
 template \
 sanguis::tiles::enable_if_tile<\
 	tile_type,\
-	sanguis::tiles::neighbors<\
+	sanguis::tiles::impl::neighbors<\
 		tile_type \
 	> \
 > \
-sanguis::tiles::make_neighbors(\
+sanguis::tiles::impl::make_neighbors(\
 	sanguis::creator::tile_grid< \
 		tile_type \
 	> const &, \

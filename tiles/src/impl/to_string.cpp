@@ -3,7 +3,7 @@
 #include <sanguis/tiles/enable_if_tile.hpp>
 #include <sanguis/tiles/impl/background_tile_name.hpp>
 #include <sanguis/tiles/impl/instantiate_tile.hpp>
-#include <sanguis/tiles/impl/name.hpp>
+#include <sanguis/tiles/impl/to_string.hpp>
 #include <sanguis/tiles/impl/tile_name.hpp>
 #include <fcppt/string.hpp>
 
@@ -42,7 +42,7 @@ sanguis::tiles::enable_if_tile<
 	Tile,
 	fcppt::string
 >
-sanguis::tiles::impl::name(
+sanguis::tiles::impl::to_string(
 	Tile const _tile
 )
 {
@@ -52,7 +52,7 @@ sanguis::tiles::impl::name(
 		);
 }
 
-#define SANGUIS_TILES_INSTANTIATE_NAME(\
+#define SANGUIS_TILES_INSTANTIATE_TO_STRING(\
 	tile_type\
 )\
 template \
@@ -60,10 +60,10 @@ sanguis::tiles::enable_if_tile< \
 	tile_type, \
 	fcppt::string \
 > \
-sanguis::tiles::impl::name(\
+sanguis::tiles::impl::to_string(\
 	tile_type \
 )
 
 SANGUIS_TILES_IMPL_INSTANTIATE_TILE(
-	SANGUIS_TILES_INSTANTIATE_NAME
+	SANGUIS_TILES_INSTANTIATE_TO_STRING
 );

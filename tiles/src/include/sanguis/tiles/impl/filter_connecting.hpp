@@ -1,9 +1,9 @@
 #ifndef SANGUIS_TILES_IMPL_FILTER_CONNECTING_HPP_INCLUDED
 #define SANGUIS_TILES_IMPL_FILTER_CONNECTING_HPP_INCLUDED
 
+#include <sanguis/tiles/pair.hpp>
 #include <sanguis/creator/background_tile.hpp>
 #include <sanguis/creator/tile.hpp>
-#include <sanguis/creator/tile_connects.hpp>
 
 
 namespace sanguis
@@ -14,30 +14,33 @@ namespace impl
 {
 
 inline
-sanguis::creator::tile
+bool
 filter_connecting(
-	sanguis::creator::tile const _tile
+	sanguis::tiles::pair<
+		sanguis::creator::tile
+	> const _pair
 )
 {
 	return
-		sanguis::creator::tile_connects(
-			_tile
-		)
-		?
-			_tile
-		:
-			sanguis::creator::tile::nothing
-		;
+		_pair.first()
+		==
+		sanguis::creator::tile::nothing
+		&&
+		_pair.second()
+		==
+		sanguis::creator::tile::nothing;
 }
 
 inline
-sanguis::creator::background_tile
+bool
 filter_connecting(
-	sanguis::creator::background_tile const _tile
+	sanguis::tiles::pair<
+		sanguis::creator::background_tile
+	>
 )
 {
 	return
-		_tile;
+		false;
 }
 
 }

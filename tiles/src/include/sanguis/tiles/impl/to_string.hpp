@@ -1,5 +1,5 @@
-#ifndef SANGUIS_TILES_IMPL_NAME_HPP_INCLUDED
-#define SANGUIS_TILES_IMPL_NAME_HPP_INCLUDED
+#ifndef SANGUIS_TILES_IMPL_TO_STRING_HPP_INCLUDED
+#define SANGUIS_TILES_IMPL_TO_STRING_HPP_INCLUDED
 
 #include <sanguis/tiles/enable_if_tile.hpp>
 #include <fcppt/string.hpp>
@@ -19,7 +19,7 @@ sanguis::tiles::enable_if_tile<
 	Tile,
 	fcppt::string
 >
-name(
+to_string(
 	Tile
 );
 

@@ -1,11 +1,11 @@
 #include <sanguis/media_path.hpp>
-#include <sanguis/tiles/element_map.hpp>
+#include <sanguis/tiles/orientation_map.hpp>
 #include <sanguis/tiles/pair.hpp>
 #include <sanguis/tiles/set.hpp>
 #include <sanguis/tiles/impl/category.hpp>
 #include <sanguis/tiles/impl/instantiate_tile.hpp>
-#include <sanguis/tiles/impl/make_element_map.hpp>
-#include <sanguis/tiles/impl/name.hpp>
+#include <sanguis/tiles/impl/make_orientation_map.hpp>
+#include <sanguis/tiles/impl/to_string.hpp>
 #include <sge/image2d/file.hpp>
 #include <sge/image2d/system.hpp>
 #include <fcppt/maybe.hpp>
@@ -39,13 +39,13 @@ sanguis::tiles::set<
 		>()
 		/
 		(
-			sanguis::tiles::impl::name(
+			sanguis::tiles::impl::to_string(
 				_pair.first()
 			)
 			+
 			FCPPT_TEXT('_')
 			+
-			sanguis::tiles::impl::name(
+			sanguis::tiles::impl::to_string(
 				_pair.second()
 			)
 		)
@@ -88,13 +88,13 @@ sanguis::tiles::set<
 template<
 	typename Tile
 >
-sanguis::tiles::element_map const &
+sanguis::tiles::orientation_map const &
 sanguis::tiles::set<
 	Tile
->::elements() const
+>::orientations() const
 {
 	return
-		elements_;
+		orientations_;
 }
 
 template<
@@ -114,12 +114,12 @@ sanguis::tiles::set<
 			FCPPT_TEXT("texture.png")
 		)
 	),
-	elements_(
+	orientations_(
 		fcppt::maybe(
 			file_,
 			[]{
 				return
-					element_map();
+					sanguis::tiles::orientation_map();
 			},
 			[
 				&_path
@@ -128,7 +128,7 @@ sanguis::tiles::set<
 			)
 			{
 				return
-					sanguis::tiles::impl::make_element_map(
+					sanguis::tiles::impl::make_orientation_map(
 						_file->view(),
 						_path
 					);
