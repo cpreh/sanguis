@@ -3,7 +3,6 @@
 #include <sanguis/timer.hpp>
 #include <sanguis/client/send_callback.hpp>
 #include <sanguis/client/control/action_handler.hpp>
-#include <sanguis/client/control/action_visitor.hpp>
 #include <sanguis/client/control/attack_dest.hpp>
 #include <sanguis/client/control/axis_direction_max.hpp>
 #include <sanguis/client/control/axis_direction_min.hpp>
@@ -46,7 +45,7 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/auto_connection_container.hpp>
-#include <fcppt/variant/apply_unary.hpp>
+#include <fcppt/variant/match.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
 #include <functional>
@@ -203,11 +202,28 @@ sanguis::client::control::action_handler::handle_action(
 	sanguis::client::control::actions::any const &_action
 )
 {
-	fcppt::variant::apply_unary(
-		sanguis::client::control::action_visitor(
-			*this
+	fcppt::variant::match(
+		_action.get(),
+		std::bind(
+			&sanguis::client::control::action_handler::handle_binary_action,
+			this,
+			std::placeholders::_1
 		),
-		_action.get()
+		std::bind(
+			&sanguis::client::control::action_handler::handle_cursor_action,
+			this,
+			std::placeholders::_1
+		),
+		std::bind(
+			&sanguis::client::control::action_handler::handle_nullary_action,
+			this,
+			std::placeholders::_1
+		),
+		std::bind(
+			&sanguis::client::control::action_handler::handle_scale_action,
+			this,
+			std::placeholders::_1
+		)
 	);
 }
 

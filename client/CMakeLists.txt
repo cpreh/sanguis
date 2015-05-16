@@ -24,7 +24,6 @@ set(
 	include/sanguis/client/console/object_fwd.hpp
 	include/sanguis/client/control/action_handler.hpp
 	include/sanguis/client/control/action_handler_fwd.hpp
-	include/sanguis/client/control/action_visitor.hpp
 	include/sanguis/client/control/actions/any.hpp
 	include/sanguis/client/control/actions/any_fwd.hpp
 	include/sanguis/client/control/actions/binary.hpp
@@ -410,7 +409,6 @@ set(
 	include/sanguis/client/gui/hud/weapon_details.hpp
 	include/sanguis/client/gui/hud/weapon_details_fwd.hpp
 	include/sanguis/client/gui/hud/weapon_name.hpp
-	include/sanguis/client/gui/hud/weapon_name_visitor.hpp
 	include/sanguis/client/gui/hud/weapon_tooltip.hpp
 	include/sanguis/client/gui/hud/weapon_tooltip_fwd.hpp
 	include/sanguis/client/gui/hud/weapon_tooltip_unique_ptr.hpp
@@ -656,7 +654,6 @@ set(
 	src/client/console/gfx.cpp
 	src/client/console/object.cpp
 	src/client/control/action_handler.cpp
-	src/client/control/action_visitor.cpp
 	src/client/control/actions/any.cpp
 	src/client/control/actions/binary.cpp
 	src/client/control/actions/cursor.cpp
@@ -787,7 +784,6 @@ set(
 	src/client/gui/hud/weapon_attribute_value_to_string.cpp
 	src/client/gui/hud/weapon_details.cpp
 	src/client/gui/hud/weapon_name.cpp
-	src/client/gui/hud/weapon_name_visitor.cpp
 	src/client/gui/hud/weapon_tooltip.cpp
 	src/client/gui/hud/weapon_widget.cpp
 	src/client/gui/menu/callbacks/object.cpp

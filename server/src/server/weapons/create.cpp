@@ -1,3 +1,5 @@
+#include <sanguis/primary_weapon_type.hpp>
+#include <sanguis/secondary_weapon_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
@@ -5,8 +7,9 @@
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/factory/parameters.hpp>
-#include <sanguis/server/weapons/factory/visitor.hpp>
-#include <fcppt/variant/apply_unary.hpp>
+#include <sanguis/server/weapons/factory/primary.hpp>
+#include <sanguis/server/weapons/factory/secondary.hpp>
+#include <fcppt/variant/match.hpp>
 
 
 sanguis::server::weapons::unique_ptr
@@ -16,15 +19,38 @@ sanguis::server::weapons::create(
 	sanguis::server::entities::enemies::difficulty const _difficulty
 )
 {
+	sanguis::server::weapons::factory::parameters const parameters(
+		_random_generator,
+		_type,
+		_difficulty
+	);
+
 	return
-		fcppt::variant::apply_unary(
-			sanguis::server::weapons::factory::visitor(
-				sanguis::server::weapons::factory::parameters(
-					_random_generator,
-					_type,
-					_difficulty
-				)
-			),
-			_type
+		fcppt::variant::match(
+			_type,
+			[
+				&parameters
+			](
+				sanguis::primary_weapon_type const _primary
+			)
+			{
+				return
+					sanguis::server::weapons::factory::primary(
+						_primary,
+						parameters
+					);
+			},
+			[
+				&parameters
+			](
+				sanguis::secondary_weapon_type const _secondary
+			)
+			{
+				return
+					sanguis::server::weapons::factory::secondary(
+						_secondary,
+						parameters
+					);
+			}
 		);
 }

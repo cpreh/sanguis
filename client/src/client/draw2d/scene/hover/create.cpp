@@ -7,8 +7,7 @@
 #include <sanguis/client/draw2d/scene/hover/parameters.hpp>
 #include <sanguis/client/draw2d/scene/hover/weapon.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/nonassignable.hpp>
-#include <fcppt/variant/apply_unary.hpp>
+#include <fcppt/variant/match.hpp>
 
 
 sanguis::client::draw2d::scene::hover::base_unique_ptr
@@ -17,72 +16,49 @@ sanguis::client::draw2d::scene::hover::create(
 	sanguis::client::draw2d::entities::hover::info const &_info
 )
 {
-	class visitor
-	{
-		FCPPT_NONASSIGNABLE(
-			visitor
-		);
-	public:
-		explicit
-		visitor(
-			sanguis::client::draw2d::scene::hover::parameters const &_nparameters
-		)
-		:
-			parameters_(
-				_nparameters
-			)
-		{
-		}
-
-		typedef
-		sanguis::client::draw2d::scene::hover::base_unique_ptr
-		result_type;
-
-		result_type
-		operator()(
-			sanguis::client::draw2d::entities::hover::name_and_health const &_name_and_health
-		) const
-		{
-			return
-				fcppt::make_unique_ptr<
-					sanguis::client::draw2d::scene::hover::name_and_health
-				>(
-					parameters_.renderer(),
-					parameters_.font(),
-					parameters_.center(),
-					parameters_.radius(),
-					_name_and_health
-				);
-		}
-
-		result_type
-		operator()(
-			sanguis::client::draw2d::entities::hover::weapon const &_weapon
-		) const
-		{
-			return
-				fcppt::make_unique_ptr<
-					sanguis::client::draw2d::scene::hover::weapon
-				>(
-					parameters_.gui_style(),
-					parameters_.gui_renderer(),
-					parameters_.renderer(),
-					parameters_.font(),
-					parameters_.center(),
-					parameters_.load_context(),
-					parameters_.player_weapons(),
-					_weapon
-				);
-		}
-	private:
-		sanguis::client::draw2d::scene::hover::parameters const &parameters_;
-	};
-
 	return
-		fcppt::variant::apply_unary(
-			visitor(
-				_parameters
-			),
-			_info.get()
+		fcppt::variant::match(
+			_info.get(),
+			[
+				&_parameters
+			](
+				sanguis::client::draw2d::entities::hover::name_and_health const &_name_and_health
+			)
+			{
+				return
+					sanguis::client::draw2d::scene::hover::base_unique_ptr{
+						fcppt::make_unique_ptr<
+							sanguis::client::draw2d::scene::hover::name_and_health
+						>(
+							_parameters.renderer(),
+							_parameters.font(),
+							_parameters.center(),
+							_parameters.radius(),
+							_name_and_health
+						)
+					};
+			},
+			[
+				&_parameters
+			](
+				sanguis::client::draw2d::entities::hover::weapon const &_weapon
+			)
+			{
+				return
+					sanguis::client::draw2d::scene::hover::base_unique_ptr{
+						fcppt::make_unique_ptr<
+							sanguis::client::draw2d::scene::hover::weapon
+						>(
+							_parameters.gui_style(),
+							_parameters.gui_renderer(),
+							_parameters.renderer(),
+							_parameters.font(),
+							_parameters.center(),
+							_parameters.load_context(),
+							_parameters.player_weapons(),
+							_weapon
+						)
+					};
+			}
 		);
 }

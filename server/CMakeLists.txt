@@ -603,7 +603,6 @@ set(
 	include/sanguis/server/weapons/factory/sentry.hpp
 	include/sanguis/server/weapons/factory/shotgun.hpp
 	include/sanguis/server/weapons/factory/spider.hpp
-	include/sanguis/server/weapons/factory/visitor.hpp
 	include/sanguis/server/weapons/grenade.hpp
 	include/sanguis/server/weapons/grenade_parameters.hpp
 	include/sanguis/server/weapons/grenade_parameters_fwd.hpp
@@ -994,7 +993,6 @@ set(
 	src/server/weapons/factory/sentry.cpp
 	src/server/weapons/factory/shotgun.cpp
 	src/server/weapons/factory/spider.cpp
-	src/server/weapons/factory/visitor.cpp
 	src/server/weapons/grenade.cpp
 	src/server/weapons/grenade_parameters.cpp
 	src/server/weapons/insert_to_attack_result.cpp

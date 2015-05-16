@@ -14,7 +14,6 @@
 #include <sanguis/tiles/draw.hpp>
 #include <sanguis/tiles/error.hpp>
 #include <sanguis/tiles/lower_bound.hpp>
-#include <sanguis/tiles/pos.hpp>
 #include <sanguis/tiles/upper_bound.hpp>
 #include <sanguis/tiles/view_container_ref.hpp>
 #include <sge/image/algorithm/may_overlap.hpp>
@@ -39,7 +38,6 @@
 #include <fcppt/exception.hpp>
 #include <fcppt/extract_from_string_exn.hpp>
 #include <fcppt/from_std_string.hpp>
-#include <fcppt/nonassignable.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/enum_array_fold.hpp>
 #include <fcppt/assert/optional_error.hpp>
@@ -51,7 +49,7 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/vector/to_unsigned.hpp>
 #include <fcppt/random/generator/seed_from_chrono.hpp>
-#include <fcppt/variant/apply_unary.hpp>
+#include <fcppt/variant/match.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/mpl/vector/vector10.hpp>
@@ -184,92 +182,57 @@ try
 		)
 	};
 
-	class draw_visitor
-	{
-		FCPPT_NONASSIGNABLE(
-			draw_visitor
-		);
-	public:
-		draw_visitor(
-			store_type &_store,
-			sanguis::tiles::pos const _pos
-		)
-		:
-			store_(
-				_store
-			),
-			pos_(
-				_pos
-			)
-		{
-		}
-
-		typedef
-		void
-		result_type;
-
-		result_type
-		operator()(
-			sanguis::tiles::error const _error
-		) const
-		{
-			// TODO
-		}
-
-		result_type
-		operator()(
-			sanguis::tiles::view_container_ref const &_container
-		) const
-		{
-			sge::image2d::view::const_object const source_view(
-				FCPPT_ASSERT_OPTIONAL_ERROR(
-					fcppt::container::maybe_front(
-						_container.get()
-					)
-				)
-			);
-
-			sge::image2d::algorithm::copy(
-				source_view,
-				sge::image2d::view::checked_sub(
-					sge::image2d::view::object{
-						store_.wrapped_view()
-					},
-					sge::image2d::rect{
-						fcppt::math::vector::structure_cast<
-							sge::image2d::rect::vector,
-							fcppt::cast::size_fun
-						>(
-							fcppt::math::vector::to_unsigned(
-								pos_
-							)
-						),
-						sge::image2d::view::size(
-							source_view
-						)
-					}
-				),
-				sge::image::algorithm::may_overlap::no,
-				sge::image::algorithm::uninitialized::no
-			);
-		}
-	private:
-		store_type &store_;
-
-		sanguis::tiles::pos const pos_;
-	};
-
 	for(
 		sanguis::tiles::cell const &cell
 		:
 		cells
 	)
-		fcppt::variant::apply_unary(
-			draw_visitor{
-				store,
-				cell.pos()
+		fcppt::variant::match(
+			cell.content(),
+			[
+				&store,
+				&cell
+			](
+				sanguis::tiles::view_container_ref const &_container
+			)
+			{
+				sge::image2d::view::const_object const source_view(
+					FCPPT_ASSERT_OPTIONAL_ERROR(
+						fcppt::container::maybe_front(
+							_container.get()
+						)
+					)
+				);
+
+				sge::image2d::algorithm::copy(
+					source_view,
+					sge::image2d::view::checked_sub(
+						sge::image2d::view::object{
+							store.wrapped_view()
+						},
+						sge::image2d::rect{
+							fcppt::math::vector::structure_cast<
+								sge::image2d::rect::vector,
+								fcppt::cast::size_fun
+							>(
+								fcppt::math::vector::to_unsigned(
+									cell.pos()
+								)
+							),
+							sge::image2d::view::size(
+								source_view
+							)
+						}
+					),
+					sge::image::algorithm::may_overlap::no,
+					sge::image::algorithm::uninitialized::no
+				);
 			},
-			cell.content()
+			[](
+				sanguis::tiles::error const _error
+			)
+			{
+			}
 		);
 
 	sge::image2d::save_from_view(
