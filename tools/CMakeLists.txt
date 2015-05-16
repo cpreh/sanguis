@@ -87,6 +87,10 @@ add_subdirectory(
 	animations
 )
 
-add_subdirectory(
-	drawlevel
+if(
+	ENABLE_CLIENT
 )
+	add_subdirectory(
+		drawlevel
+	)
+endif()

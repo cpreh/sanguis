@@ -24,7 +24,7 @@
 #include <sge/image/color/init/red.hpp>
 #include <sge/image2d/rect.hpp>
 #include <sge/image2d/save_from_view.hpp>
-#include <sge/image2d/algorithm/copy.hpp>
+#include <sge/image2d/algorithm/copy_and_convert.hpp>
 #include <sge/image2d/store/srgba8.hpp>
 #include <sge/image2d/view/checked_sub.hpp>
 #include <sge/image2d/view/const_object.hpp>
@@ -204,7 +204,7 @@ try
 					)
 				);
 
-				sge::image2d::algorithm::copy(
+				sge::image2d::algorithm::copy_and_convert(
 					source_view,
 					sge::image2d::view::checked_sub(
 						sge::image2d::view::object{
