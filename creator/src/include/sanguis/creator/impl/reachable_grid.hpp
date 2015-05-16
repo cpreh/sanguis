@@ -1,9 +1,8 @@
 #ifndef SANGUIS_CREATOR_IMPL_REACHABLE_GRID_HPP_INCLUDED
 #define SANGUIS_CREATOR_IMPL_REACHABLE_GRID_HPP_INCLUDED
 
+#include <sanguis/creator/tile_grid.hpp>
 #include <sanguis/creator/impl/reachable.hpp>
-#include <fcppt/container/grid/object.hpp>
-
 
 namespace sanguis
 {
@@ -13,9 +12,8 @@ namespace impl
 {
 
 typedef
-fcppt::container::grid::object<
-	sanguis::creator::impl::reachable,
-	2
+sanguis::creator::tile_grid<
+	sanguis::creator::impl::reachable
 >
 reachable_grid;
 

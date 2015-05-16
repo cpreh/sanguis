@@ -14,6 +14,12 @@
 #include <sanguis/creator/impl/place_spawners.hpp>
 #include <sanguis/creator/impl/result.hpp>
 #include <sanguis/creator/impl/generators/maze.hpp>
+#include <sanguis/creator/impl/reachable.hpp>
+#include <sanguis/creator/impl/reachable_grid.hpp>
+#include <sanguis/creator/impl/filled_rect.hpp>
+#include <sanguis/creator/pos.hpp>
+#include <sanguis/creator/rect.hpp>
+#include <sanguis/creator/impl/maze_to_tile_grid.hpp>
 
 
 sanguis::creator::impl::result
@@ -21,20 +27,50 @@ sanguis::creator::impl::generators::maze(
 	sanguis::creator::impl::parameters const &_parameters
 )
 {
-	sanguis::creator::grid::dim const maze_dim{
-		15,
-		15
+	sanguis::creator::impl::reachable_grid initial_maze{
+		sanguis::creator::impl::reachable_grid::dim(
+			15,
+			15
+		),
+		sanguis::creator::impl::reachable(false)
 	};
+
+	sanguis::creator::impl::filled_rect(
+		sanguis::creator::rect{
+			sanguis::creator::rect::vector{
+				1,
+				1
+			},
+			sanguis::creator::rect::dim{
+				5,
+				5
+			}
+		},
+		[
+			&initial_maze
+		](
+			sanguis::creator::pos const &_p
+		){
+			initial_maze[
+				_p
+			] =
+				sanguis::creator::impl::reachable(true);
+		}
+	);
+
+	sanguis::creator::impl::generate_maze(
+		initial_maze,
+		_parameters.randgen()
+	);
 
 	sanguis::creator::grid
 	grid{
-		sanguis::creator::impl::generate_maze(
-			maze_dim,
+		sanguis::creator::impl::maze_to_tile_grid(
+			initial_maze,
 			1u,
 			2u,
 			sanguis::creator::tile::nothing,
-			sanguis::creator::tile::concrete_wall,
-			_parameters.randgen()
+			sanguis::creator::tile::concrete_wall
 		)
 	};
 

@@ -7,6 +7,9 @@
 #include <sanguis/creator/impl/optional_pos.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/container/grid/in_range.hpp>
+#include <fcppt/container/grid/object_fwd.hpp>
+#include <fcppt/from_optional.hpp>
+#include <fcppt/optional.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <fcppt/config/external_end.hpp>
@@ -20,23 +23,48 @@ namespace impl
 {
 
 template<
-	typename Attribute
+	typename Attribute,
+	typename Value
 >
 sanguis::creator::impl::optional_pos const
 find_closest(
-	sanguis::creator::grid const &_grid,
+	fcppt::container::grid::object<
+		Value,
+		2u
+	> const &_grid,
 	sanguis::creator::pos const _pos,
 	Attribute const _attribute,
-	sanguis::creator::pos::value_type _max_radius
+	fcppt::optional<
+		sanguis::creator::pos::value_type
+	> _max_radius
 )
 {
-	_max_radius =
-		std::min(
+	auto const w = _grid.size().w();
+	auto const h = _grid.size().h();
+	auto const x0 = _pos.x();
+	auto const y0 = _pos.y();
+
+	auto const max_radius =
+		fcppt::from_optional(
 			_max_radius,
-			std::max(
-				_grid.size().w() / 2,
-				_grid.size().h() / 2
-			)
+			[w,h,x0,y0]
+			{
+				return
+				// at most we have to go the
+				// manhattan distance to the farthest corner:
+				std::max(
+					{
+					// top left or
+					x0 + y0,
+					// top right or
+					w - x0 + y0,
+					// bottom left or
+					x0 + h - y0,
+					// bottom right
+					w - x0 + h - y0
+					}
+				);
+			}
 		);
 
 	// TODO: unsigned?
@@ -49,7 +77,7 @@ find_closest(
 	while(
 		radius
 		<=
-		_max_radius
+		max_radius
 	)
 	{
 		switch(
@@ -114,10 +142,7 @@ find_closest(
 
 		if(
 			_attribute(
-				_grid
-				[
 					pos
-				]
 			)
 		)
 		{

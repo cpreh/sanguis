@@ -6,6 +6,8 @@
 #include <sanguis/creator/opening_container_array.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/tile.hpp>
+#include <sanguis/creator/pos.hpp>
+#include <sanguis/creator/impl/maze_to_tile_grid.hpp>
 #include <sanguis/creator/impl/enemy_type_container.hpp>
 #include <sanguis/creator/impl/generate_maze.hpp>
 #include <sanguis/creator/impl/parameters.hpp>
@@ -15,10 +17,13 @@
 #include <sanguis/creator/impl/generators/graveyard.hpp>
 #include <sanguis/creator/impl/random/generator.hpp>
 #include <sanguis/creator/impl/random/uniform_int.hpp>
+#include <sanguis/creator/impl/reachable.hpp>
+#include <sanguis/creator/impl/reachable_grid.hpp>
 #include <fcppt/container/grid/make_pos_range.hpp>
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/distribution/transform/enum.hpp>
+#include <fcppt/container/grid/make_pos_range_start_end.hpp>
 
 
 sanguis::creator::impl::result
@@ -26,20 +31,28 @@ sanguis::creator::impl::generators::graveyard(
 	sanguis::creator::impl::parameters const &_parameters
 )
 {
-	sanguis::creator::grid::dim const maze_dim{
-		9,
-		9
+	sanguis::creator::impl::reachable_grid
+	initial_maze{
+		sanguis::creator::grid::dim{
+			9,
+			9
+		},
+		sanguis::creator::impl::reachable(false)
 	};
+
+	sanguis::creator::impl::generate_maze(
+		initial_maze,
+		_parameters.randgen()
+	);
 
 	sanguis::creator::grid
 	grid{
-		sanguis::creator::impl::generate_maze(
-			maze_dim,
+		sanguis::creator::impl::maze_to_tile_grid(
+			initial_maze,
 			1u,
 			5u,
 			sanguis::creator::tile::nothing,
-			sanguis::creator::tile::hedge,
-			_parameters.randgen()
+			sanguis::creator::tile::hedge
 		)
 	};
 

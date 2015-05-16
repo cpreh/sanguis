@@ -9,8 +9,10 @@ namespace
 {
 
 sanguis::creator::impl::normal_generator_vector_type const generators{
+	/*
 	sanguis::creator::impl::graveyard_name(),
 	sanguis::creator::impl::maze_name(),
+	*/
 	sanguis::creator::impl::rooms_name()
 };
 
