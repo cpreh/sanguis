@@ -5,10 +5,12 @@
 #include <sanguis/creator/destructible_pos.hpp>
 #include <sanguis/creator/destructible_type.hpp>
 #include <sanguis/creator/dim.hpp>
+#include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/opening.hpp>
 #include <sanguis/creator/opening_container.hpp>
 #include <sanguis/creator/opening_container_array.hpp>
+#include <sanguis/creator/opening_count.hpp>
 #include <sanguis/creator/opening_type.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/seed.hpp>
@@ -24,6 +26,10 @@
 #include <fcppt/algorithm/enum_array_fold.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/container/grid/make_pos_range_start_end.hpp>
+#include <fcppt/math/dim/arithmetic.hpp>
+#include <fcppt/math/dim/fill.hpp>
+#include <fcppt/math/dim/to_vector.hpp>
+#include <fcppt/math/vector/fill.hpp>
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 
@@ -33,9 +39,34 @@ sanguis::creator::impl::generators::start(
 	sanguis::creator::impl::parameters const &_parameters
 )
 {
+	if(
+		_parameters.opening_count_array()[
+			sanguis::creator::opening_type::entry
+		]
+		>
+		sanguis::creator::opening_count{
+			1u
+		}
+		||
+		_parameters.opening_count_array()[
+			sanguis::creator::opening_type::exit
+		]
+		>
+		sanguis::creator::opening_count{
+			1u
+		}
+	)
+		throw
+			sanguis::creator::exception{
+				FCPPT_TEXT("The start level can only deal with 0 or 1 opening each.")
+			};
+
 	sanguis::creator::dim const grid_size{
-		10,
-		10
+		fcppt::math::dim::fill<
+			sanguis::creator::dim
+		>(
+			10
+		)
 	};
 
 	sanguis::creator::grid grid{
@@ -43,19 +74,33 @@ sanguis::creator::impl::generators::start(
 		sanguis::creator::tile::concrete_wall
 	};
 
+	sanguis::creator::pos const start_pos(
+		fcppt::math::vector::fill<
+			sanguis::creator::pos
+		>(
+			1u
+		)
+	);
+
+	sanguis::creator::pos const end_pos(
+		fcppt::math::dim::to_vector(
+			grid_size
+			-
+			fcppt::math::dim::fill<
+				sanguis::creator::dim
+			>(
+				1u
+			)
+		)
+	);
+
 	for(
 		auto const pos
 		:
 		fcppt::container::grid::make_pos_range_start_end(
 			grid,
-			sanguis::creator::pos(
-				1,
-				1
-			),
-			sanguis::creator::pos(
-				grid_size.w() - 1u,
-				grid_size.h() - 1u
-			)
+			start_pos,
+			end_pos
 		)
 	)
 		pos.value() =
@@ -113,14 +158,8 @@ sanguis::creator::impl::generators::start(
 		:
 		fcppt::container::grid::make_pos_range_start_end(
 			bg_grid,
-			sanguis::creator::pos(
-				1,
-				1
-			),
-			sanguis::creator::pos(
-				grid_size.w() - 1u,
-				grid_size.h() - 1u
-			)
+			start_pos,
+			end_pos
 		)
 	)
 		pos.value() =
@@ -143,12 +182,25 @@ sanguis::creator::impl::generators::start(
 				sanguis::creator::opening_container_array
 			>(
 				[
+					&_parameters,
 					start_portal,
 					exit_portal
 				](
 					sanguis::creator::opening_type const _opening_type
 				)
 				{
+					if(
+						_parameters.opening_count_array()[
+							_opening_type
+						]
+						==
+						sanguis::creator::opening_count{
+							0u
+						}
+					)
+						return
+							sanguis::creator::opening_container{};
+
 					switch(
 						_opening_type
 					)

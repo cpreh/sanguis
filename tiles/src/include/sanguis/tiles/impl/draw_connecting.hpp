@@ -47,6 +47,7 @@ draw_connecting(
 			_lower_bound,
 			_upper_bound,
 			sanguis::tiles::impl::shift(
+				-
 				fcppt::math::vector::fill<
 					sanguis::tiles::pos
 				>(

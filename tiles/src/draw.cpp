@@ -75,6 +75,13 @@ sanguis::tiles::draw(
 		fcppt::algorithm::join_move(
 			sanguis::tiles::impl::draw_connecting(
 				_collection,
+				sanguis::tiles::error::missing_background,
+				_background,
+				connecting_lower_bound,
+				upper_bound
+			),
+			sanguis::tiles::impl::draw_connecting(
+				_collection,
 				sanguis::tiles::error::missing_foreground,
 				_foreground,
 				connecting_lower_bound,
@@ -85,13 +92,6 @@ sanguis::tiles::draw(
 				sanguis::tiles::error::missing_object,
 				_foreground,
 				lower_bound,
-				upper_bound
-			),
-			sanguis::tiles::impl::draw_connecting(
-				_collection,
-				sanguis::tiles::error::missing_background,
-				_background,
-				connecting_lower_bound,
 				upper_bound
 			)
 		);

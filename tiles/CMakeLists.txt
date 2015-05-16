@@ -40,6 +40,7 @@ set(
 	src/impl/background_tile_name.cpp
 	src/impl/category.cpp
 	src/impl/decode_name.cpp
+	src/impl/load_file.cpp
 	src/impl/log.cpp
 	src/impl/make_neighbors.cpp
 	src/impl/make_orientation.cpp
@@ -60,6 +61,7 @@ set(
 	src/include/sanguis/tiles/impl/filter_non_connecting.hpp
 	src/include/sanguis/tiles/impl/images_base.hpp
 	src/include/sanguis/tiles/impl/instantiate_tile.hpp
+	src/include/sanguis/tiles/impl/load_file.hpp
 	src/include/sanguis/tiles/impl/log.hpp
 	src/include/sanguis/tiles/impl/make_neighbors.hpp
 	src/include/sanguis/tiles/impl/make_orientation.hpp

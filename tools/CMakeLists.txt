@@ -86,3 +86,7 @@ add_subdirectory(
 add_subdirectory(
 	animations
 )
+
+add_subdirectory(
+	drawlevel
+)

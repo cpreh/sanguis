@@ -84,3 +84,6 @@ update_sublibrary tools/libmergeimage
 
 update_impl tools/mergeimage \
 	src
+
+update_impl tools/drawlevel \
+	src

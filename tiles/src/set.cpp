@@ -4,10 +4,11 @@
 #include <sanguis/tiles/set.hpp>
 #include <sanguis/tiles/impl/category.hpp>
 #include <sanguis/tiles/impl/instantiate_tile.hpp>
+#include <sanguis/tiles/impl/load_file.hpp>
 #include <sanguis/tiles/impl/make_orientation_map.hpp>
 #include <sanguis/tiles/impl/to_string.hpp>
 #include <sge/image2d/file.hpp>
-#include <sge/image2d/system.hpp>
+#include <sge/image2d/system_fwd.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -108,7 +109,8 @@ sanguis::tiles::set<
 )
 :
 	file_(
-		_image_system.load(
+		sanguis::tiles::impl::load_file(
+			_image_system,
 			_path
 			/
 			FCPPT_TEXT("texture.png")
