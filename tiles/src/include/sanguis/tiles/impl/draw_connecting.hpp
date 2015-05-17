@@ -12,7 +12,6 @@
 #include <sanguis/tiles/upper_bound.hpp>
 #include <sanguis/tiles/impl/connecting_images.hpp>
 #include <sanguis/tiles/impl/draw_base.hpp>
-#include <sanguis/tiles/impl/optional_content.hpp>
 #include <sanguis/tiles/impl/shift.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/cast/size.hpp>
@@ -73,7 +72,6 @@ draw_connecting(
 			](
 				sanguis::creator::pos const _pos
 			)
-			-> sanguis::tiles::impl::optional_content
 			{
 				return
 					sanguis::tiles::impl::connecting_images(

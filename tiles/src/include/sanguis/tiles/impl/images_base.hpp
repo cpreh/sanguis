@@ -1,15 +1,16 @@
 #ifndef SANGUIS_TILES_IMPL_IMAGES_BASE_HPP_INCLUDED
 #define SANGUIS_TILES_IMPL_IMAGES_BASE_HPP_INCLUDED
 
+#include <sanguis/tiles/area_container.hpp>
 #include <sanguis/tiles/collection.hpp>
 #include <sanguis/tiles/content.hpp>
 #include <sanguis/tiles/error.hpp>
 #include <sanguis/tiles/orientation.hpp>
 #include <sanguis/tiles/pair.hpp>
 #include <sanguis/tiles/set.hpp>
-#include <sanguis/tiles/view_container.hpp>
+#include <sanguis/tiles/impl/content_path.hpp>
 #include <sanguis/tiles/impl/log.hpp>
-#include <sanguis/tiles/impl/optional_content.hpp>
+#include <sanguis/tiles/impl/optional_content_path.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/string.hpp>
@@ -32,7 +33,7 @@ namespace impl
 template<
 	typename Tile
 >
-sanguis::tiles::impl::optional_content
+sanguis::tiles::impl::optional_content_path
 images_base(
 	sanguis::tiles::collection &_collection,
 	sanguis::tiles::error const _error_code,
@@ -45,28 +46,41 @@ images_base(
 	> const &_error_message
 )
 {
+	sanguis::tiles::set<
+		Tile
+	> const &cur_set(
+		_collection.set(
+			_pair
+		)
+	);
+
 	return
 		fcppt::maybe(
 			fcppt::container::find_opt(
-				_collection.set(
-					_pair
-				).orientations(),
+				cur_set.orientations(),
 				_orientation
 			),
 			[
+				&cur_set,
 				_error_code
 			]{
 				return
-					sanguis::tiles::impl::optional_content(
-						sanguis::tiles::content(
-							_error_code
+					sanguis::tiles::impl::optional_content_path(
+						sanguis::tiles::impl::content_path(
+							sanguis::tiles::content(
+								_error_code
+							),
+							fcppt::make_cref(
+								cur_set.path()
+							)
 						)
 					);
 			},
 			[
+				&cur_set,
 				&_error_message
 			](
-				sanguis::tiles::view_container const &_images
+				sanguis::tiles::area_container const &_images
 			)
 			{
 				if(
@@ -83,14 +97,19 @@ images_base(
 					);
 
 					return
-						sanguis::tiles::impl::optional_content();
+						sanguis::tiles::impl::optional_content_path();
 				}
 
 				return
-					sanguis::tiles::impl::optional_content(
-						sanguis::tiles::content(
+					sanguis::tiles::impl::optional_content_path(
+						sanguis::tiles::impl::content_path(
+							sanguis::tiles::content(
+								fcppt::make_cref(
+									_images
+								)
+							),
 							fcppt::make_cref(
-								_images
+								cur_set.path()
 							)
 						)
 					);

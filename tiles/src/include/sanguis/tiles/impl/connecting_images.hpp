@@ -14,7 +14,7 @@
 #include <sanguis/tiles/impl/make_orientation.hpp>
 #include <sanguis/tiles/impl/neighbors.hpp>
 #include <sanguis/tiles/impl/neighbors_to_string.hpp>
-#include <sanguis/tiles/impl/optional_content.hpp>
+#include <sanguis/tiles/impl/optional_content_path.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>
@@ -31,7 +31,7 @@ namespace impl
 template<
 	typename Tile
 >
-sanguis::tiles::impl::optional_content
+sanguis::tiles::impl::optional_content_path
 connecting_images(
 	sanguis::tiles::collection &_collection,
 	sanguis::tiles::error const _error_code,
@@ -73,7 +73,7 @@ connecting_images(
 				);
 
 				return
-					sanguis::tiles::impl::optional_content();
+					sanguis::tiles::impl::optional_content_path();
 			},
 			[
 				_error_code,
@@ -90,7 +90,7 @@ connecting_images(
 						_pair
 					)
 					?
-						sanguis::tiles::impl::optional_content{}
+						sanguis::tiles::impl::optional_content_path{}
 					:
 						sanguis::tiles::impl::images_base(
 							_collection,

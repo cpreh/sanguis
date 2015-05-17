@@ -1,9 +1,9 @@
 #include <sanguis/tiles/orientation.hpp>
 #include <sanguis/tiles/orientation_map.hpp>
 #include <sanguis/tiles/impl/decode_name.hpp>
+#include <sanguis/tiles/impl/make_areas.hpp>
 #include <sanguis/tiles/impl/make_orientation_map.hpp>
-#include <sanguis/tiles/impl/make_views.hpp>
-#include <sge/image2d/view/const_object_fwd.hpp>
+#include <sge/image2d/dim.hpp>
 #include <sge/parse/json/member.hpp>
 #include <sge/parse/json/parse_file_exn.hpp>
 #include <fcppt/optional_bind_construct.hpp>
@@ -17,8 +17,8 @@
 
 sanguis::tiles::orientation_map
 sanguis::tiles::impl::make_orientation_map(
-	sge::image2d::view::const_object const &_view,
-	boost::filesystem::path const &_path
+	boost::filesystem::path const &_path,
+	sge::image2d::dim const _size
 )
 {
 	return
@@ -31,7 +31,7 @@ sanguis::tiles::impl::make_orientation_map(
 				FCPPT_TEXT("mapping.json")
 			).object().members,
 			[
-				&_view
+				_size
 			](
 				sge::parse::json::member const &_member
 			)
@@ -42,7 +42,7 @@ sanguis::tiles::impl::make_orientation_map(
 							_member.first
 						),
 						[
-							&_view,
+							_size,
 							&_member
 						](
 							sanguis::tiles::orientation const &_orientation
@@ -51,8 +51,8 @@ sanguis::tiles::impl::make_orientation_map(
 							return
 								std::make_pair(
 									_orientation,
-									sanguis::tiles::impl::make_views(
-										_view,
+									sanguis::tiles::impl::make_areas(
+										_size,
 										_member.second
 									)
 								);

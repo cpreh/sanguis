@@ -5,11 +5,11 @@
 #include <sanguis/creator/tile_grid.hpp>
 #include <sanguis/tiles/cell.hpp>
 #include <sanguis/tiles/cell_container.hpp>
-#include <sanguis/tiles/content.hpp>
 #include <sanguis/tiles/lower_bound.hpp>
 #include <sanguis/tiles/pos.hpp>
 #include <sanguis/tiles/upper_bound.hpp>
-#include <sanguis/tiles/impl/optional_content.hpp>
+#include <sanguis/tiles/impl/content_path.hpp>
+#include <sanguis/tiles/impl/optional_content_path.hpp>
 #include <sanguis/tiles/impl/shift.hpp>
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
@@ -46,7 +46,7 @@ draw_base(
 	sanguis::tiles::upper_bound const _upper_bound,
 	sanguis::tiles::impl::shift const _shift,
 	std::function<
-		sanguis::tiles::impl::optional_content (
+		sanguis::tiles::impl::optional_content_path (
 			sanguis::creator::pos
 		)
 	> const _get_content
@@ -97,7 +97,7 @@ draw_base(
 							&_element,
 							_shift
 						](
-							sanguis::tiles::content const &_content
+							sanguis::tiles::impl::content_path const &_content_path
 						)
 						{
 							return
@@ -115,7 +115,8 @@ draw_base(
 									+
 									_shift.get()
 									,
-									_content
+									_content_path.content(),
+									_content_path.path()
 								);
 						}
 					);

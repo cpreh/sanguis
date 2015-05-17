@@ -1,5 +1,8 @@
 set(
 	SANGUIS_TILES_FILES
+	include/sanguis/tiles/area_container.hpp
+	include/sanguis/tiles/area_container_ref.hpp
+	include/sanguis/tiles/area_container_ref_fwd.hpp
 	include/sanguis/tiles/cell.hpp
 	include/sanguis/tiles/cell_container.hpp
 	include/sanguis/tiles/cell_fwd.hpp
@@ -24,6 +27,8 @@ set(
 	include/sanguis/tiles/pair_comparison.hpp
 	include/sanguis/tiles/pair_fwd.hpp
 	include/sanguis/tiles/pair_std_hash.hpp
+	include/sanguis/tiles/path_reference.hpp
+	include/sanguis/tiles/path_reference_fwd.hpp
 	include/sanguis/tiles/pos.hpp
 	include/sanguis/tiles/pos_fwd.hpp
 	include/sanguis/tiles/set.hpp
@@ -31,28 +36,28 @@ set(
 	include/sanguis/tiles/unit.hpp
 	include/sanguis/tiles/upper_bound.hpp
 	include/sanguis/tiles/upper_bound_fwd.hpp
-	include/sanguis/tiles/view_container.hpp
-	include/sanguis/tiles/view_container_ref.hpp
-	include/sanguis/tiles/view_container_ref_fwd.hpp
 	src/cell.cpp
 	src/collection.cpp
 	src/draw.cpp
 	src/impl/background_tile_name.cpp
 	src/impl/category.cpp
+	src/impl/content_path.cpp
 	src/impl/decode_name.cpp
 	src/impl/load_file.cpp
 	src/impl/log.cpp
+	src/impl/make_areas.cpp
 	src/impl/make_neighbors.cpp
 	src/impl/make_orientation.cpp
 	src/impl/make_orientation_map.cpp
 	src/impl/make_pair.cpp
-	src/impl/make_views.cpp
 	src/impl/neighbors_to_string.cpp
 	src/impl/tile_name.cpp
 	src/impl/to_string.cpp
 	src/include/sanguis/tiles/impl/background_tile_name.hpp
 	src/include/sanguis/tiles/impl/category.hpp
 	src/include/sanguis/tiles/impl/connecting_images.hpp
+	src/include/sanguis/tiles/impl/content_path.hpp
+	src/include/sanguis/tiles/impl/content_path_fwd.hpp
 	src/include/sanguis/tiles/impl/decode_name.hpp
 	src/include/sanguis/tiles/impl/draw_base.hpp
 	src/include/sanguis/tiles/impl/draw_connecting.hpp
@@ -63,17 +68,17 @@ set(
 	src/include/sanguis/tiles/impl/instantiate_tile.hpp
 	src/include/sanguis/tiles/impl/load_file.hpp
 	src/include/sanguis/tiles/impl/log.hpp
+	src/include/sanguis/tiles/impl/make_areas.hpp
 	src/include/sanguis/tiles/impl/make_neighbors.hpp
 	src/include/sanguis/tiles/impl/make_orientation.hpp
 	src/include/sanguis/tiles/impl/make_orientation_map.hpp
 	src/include/sanguis/tiles/impl/make_pair.hpp
-	src/include/sanguis/tiles/impl/make_views.hpp
 	src/include/sanguis/tiles/impl/neighbors.hpp
 	src/include/sanguis/tiles/impl/neighbors_fwd.hpp
 	src/include/sanguis/tiles/impl/neighbors_to_string.hpp
 	src/include/sanguis/tiles/impl/non_connecting_images.hpp
-	src/include/sanguis/tiles/impl/optional_content.hpp
-	src/include/sanguis/tiles/impl/optional_content_fwd.hpp
+	src/include/sanguis/tiles/impl/optional_content_path.hpp
+	src/include/sanguis/tiles/impl/optional_content_path_fwd.hpp
 	src/include/sanguis/tiles/impl/optional_orientation.hpp
 	src/include/sanguis/tiles/impl/optional_orientation_fwd.hpp
 	src/include/sanguis/tiles/impl/optional_pair.hpp

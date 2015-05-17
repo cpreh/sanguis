@@ -9,7 +9,7 @@
 #include <sanguis/tiles/pair.hpp>
 #include <sanguis/tiles/impl/filter_non_connecting.hpp>
 #include <sanguis/tiles/impl/images_base.hpp>
-#include <sanguis/tiles/impl/optional_content.hpp>
+#include <sanguis/tiles/impl/optional_content_path.hpp>
 #include <sanguis/tiles/impl/to_string.hpp>
 
 
@@ -23,7 +23,7 @@ namespace impl
 template<
 	typename Tile
 >
-sanguis::tiles::impl::optional_content
+sanguis::tiles::impl::optional_content_path
 non_connecting_images(
 	sanguis::tiles::collection &_collection,
 	sanguis::tiles::error const _error_code,
@@ -44,7 +44,7 @@ non_connecting_images(
 			tile
 		)
 		?
-			sanguis::tiles::impl::optional_content{}
+			sanguis::tiles::impl::optional_content_path{}
 		:
 			sanguis::tiles::impl::images_base(
 				_collection,

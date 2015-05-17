@@ -9,6 +9,8 @@
 #include <sanguis/tiles/impl/to_string.hpp>
 #include <sge/image2d/file.hpp>
 #include <sge/image2d/system_fwd.hpp>
+#include <sge/image2d/view/const_object.hpp>
+#include <sge/image2d/view/size.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -101,6 +103,18 @@ sanguis::tiles::set<
 template<
 	typename Tile
 >
+boost::filesystem::path const &
+sanguis::tiles::set<
+	Tile
+>::path() const
+{
+	return
+		path_;
+}
+
+template<
+	typename Tile
+>
 sanguis::tiles::set<
 	Tile
 >::set(
@@ -108,17 +122,17 @@ sanguis::tiles::set<
 	boost::filesystem::path const &_path
 )
 :
-	file_(
-		sanguis::tiles::impl::load_file(
-			_image_system,
-			_path
-			/
-			FCPPT_TEXT("texture.png")
-		)
+	path_(
+		_path
+		/
+		FCPPT_TEXT("texture.png")
 	),
 	orientations_(
 		fcppt::maybe(
-			file_,
+			sanguis::tiles::impl::load_file(
+				_image_system,
+				path_
+			),
 			[]{
 				return
 					sanguis::tiles::orientation_map();
@@ -126,13 +140,19 @@ sanguis::tiles::set<
 			[
 				&_path
 			](
-				sge::image2d::file_unique_ptr const &_file
+				sge::image2d::file_unique_ptr &&_file
 			)
 			{
 				return
 					sanguis::tiles::impl::make_orientation_map(
-						_file->view(),
-						_path
+						_path,
+						// TODO: Change sge so that we
+						// can query the size without
+						// actually loading the whole
+						// file
+						sge::image2d::view::size(
+							_file->view()
+						)
 					);
 			}
 		)

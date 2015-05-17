@@ -8,6 +8,7 @@
 #include <sanguis/creator/tile_size.hpp>
 #include <sanguis/creator/top_parameters.hpp>
 #include <sanguis/creator/top_result.hpp>
+#include <sanguis/tiles/area_container_ref.hpp>
 #include <sanguis/tiles/cell.hpp>
 #include <sanguis/tiles/cell_container.hpp>
 #include <sanguis/tiles/collection.hpp>
@@ -15,15 +16,17 @@
 #include <sanguis/tiles/error.hpp>
 #include <sanguis/tiles/lower_bound.hpp>
 #include <sanguis/tiles/upper_bound.hpp>
-#include <sanguis/tiles/view_container_ref.hpp>
 #include <sge/image/algorithm/may_overlap.hpp>
 #include <sge/image/algorithm/uninitialized.hpp>
 #include <sge/image/color/init/alpha.hpp>
 #include <sge/image/color/init/blue.hpp>
 #include <sge/image/color/init/green.hpp>
 #include <sge/image/color/init/red.hpp>
+#include <sge/image2d/file.hpp>
+#include <sge/image2d/file_unique_ptr.hpp>
 #include <sge/image2d/rect.hpp>
 #include <sge/image2d/save_from_view.hpp>
+#include <sge/image2d/system.hpp>
 #include <sge/image2d/algorithm/copy_and_convert.hpp>
 #include <sge/image2d/store/srgba8.hpp>
 #include <sge/image2d/view/checked_sub.hpp>
@@ -42,6 +45,7 @@
 #include <fcppt/algorithm/enum_array_fold.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/size_fun.hpp>
+#include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/container/maybe_front.hpp>
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
@@ -56,6 +60,7 @@
 #include <cstdlib>
 #include <exception>
 #include <iostream>
+#include <map>
 #include <string>
 #include <fcppt/config/external_end.hpp>
 
@@ -182,6 +187,15 @@ try
 		)
 	};
 
+	typedef
+	std::map<
+		boost::filesystem::path,
+		sge::image2d::file_unique_ptr
+	>
+	path_file_map;
+
+	path_file_map files;
+
 	for(
 		sanguis::tiles::cell const &cell
 		:
@@ -191,15 +205,36 @@ try
 			cell.content(),
 			[
 				&store,
-				&cell
+				&cell,
+				&files,
+				&sys
 			](
-				sanguis::tiles::view_container_ref const &_container
+				sanguis::tiles::area_container_ref const &_container
 			)
 			{
 				sge::image2d::view::const_object const source_view(
-					FCPPT_ASSERT_OPTIONAL_ERROR(
-						fcppt::container::maybe_front(
-							_container.get()
+					sge::image2d::view::checked_sub(
+						fcppt::container::get_or_insert(
+							files,
+							cell.path().get(),
+							[
+								&sys
+							](
+								boost::filesystem::path const &_path
+							)
+							{
+								return
+									FCPPT_ASSERT_OPTIONAL_ERROR(
+										sys.image_system().load(
+											_path
+										)
+									);
+							}
+						)->view(),
+						FCPPT_ASSERT_OPTIONAL_ERROR(
+							fcppt::container::maybe_front(
+								_container.get()
+							)
 						)
 					)
 				);
