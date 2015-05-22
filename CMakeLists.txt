@@ -432,15 +432,15 @@ if(
 	)
 
 	add_subdirectory(
+		tiles
+	)
+
+	add_subdirectory(
 		client
 	)
 
 	add_subdirectory(
 		main
-	)
-
-	add_subdirectory(
-		tiles
 	)
 endif()
 
