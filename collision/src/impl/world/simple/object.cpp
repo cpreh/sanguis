@@ -572,9 +572,7 @@ sanguis::collision::impl::world::simple::object::body_collisions() const
 	}
 
 	return
-		std::move(
-			result
-		);
+		result;
 }
 
 sanguis::collision::impl::world::simple::ghost_result

@@ -13,7 +13,6 @@
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
-#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -109,9 +108,7 @@ draw(
 	);
 
 	return
-		std::move(
-			result
-		);
+		result;
 }
 
 }

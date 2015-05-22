@@ -114,7 +114,5 @@ sanguis::tools::animations::load_image_files(
 	}
 
 	return
-		std::move(
-			result
-		);
+		result;
 }

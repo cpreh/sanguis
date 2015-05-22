@@ -22,9 +22,6 @@
 #include <fcppt/random/distribution/make_basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real.hpp>
 #include <fcppt/random/distribution/transform/strong_typedef.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <utility>
-#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::world::insert_pair_container
@@ -160,7 +157,5 @@ sanguis::server::world::place_multiple(
 	);
 
 	return
-		std::move(
-			result
-		);
+		result;
 }

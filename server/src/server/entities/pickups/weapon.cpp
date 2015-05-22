@@ -83,9 +83,7 @@ sanguis::server::entities::pickups::weapon::obtain()
 		sanguis::server::weapons::optional_unique_ptr();
 
 	return
-		std::move(
-			result
-		);
+		result;
 }
 
 sanguis::weapon_type const

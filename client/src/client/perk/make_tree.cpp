@@ -26,9 +26,6 @@
 #include <fcppt/algorithm/find_if_exn.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/tree/pre_order.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <utility>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace
@@ -135,9 +132,7 @@ sanguis::client::perk::make_tree(
 	);
 
 	return
-		std::move(
-			ret
-		);
+		ret;
 }
 
 namespace

@@ -9,9 +9,6 @@
 #include <sge/font/object_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <utility>
-#include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::gui::perk::tab_unique_ptr_vector
@@ -57,7 +54,5 @@ sanguis::client::gui::perk::make_tabs(
 		);
 
 	return
-		std::move(
-			result
-		);
+		result;
 }

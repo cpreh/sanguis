@@ -26,7 +26,6 @@
 #include <boost/iostreams/stream_buffer.hpp>
 #include <ios>
 #include <istream>
-#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -182,9 +181,7 @@ deserialize(
 	);
 
 	return
-		std::move(
-			ret
-		);
+		ret;
 }
 
 }

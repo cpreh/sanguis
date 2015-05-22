@@ -153,7 +153,5 @@ sanguis::server::collision::body::remove(
 	body_.reset();
 
 	return
-		std::move(
-			result
-		);
+		result;
 }

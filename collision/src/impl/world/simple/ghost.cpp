@@ -134,9 +134,7 @@ sanguis::collision::impl::world::simple::ghost::post_update_bodies()
 	);
 
 	return
-		std::move(
-			result
-		);
+		result;
 }
 
 sanguis::collision::world::optional_body_enter

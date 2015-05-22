@@ -11,9 +11,6 @@
 #include <sanguis/server/collision/ghost.hpp>
 #include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/assert/pre.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <utility>
-#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::collision::ghost::ghost(
@@ -96,9 +93,7 @@ sanguis::server::collision::ghost::destroy(
 	impl_.reset();
 
 	return
-		std::move(
-			result
-		);
+		result;
 }
 
 void

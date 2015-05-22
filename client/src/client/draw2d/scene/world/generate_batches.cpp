@@ -26,9 +26,6 @@
 #include <fcppt/math/map.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/fill.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <utility>
-#include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::draw2d::scene::world::batch_grid
@@ -141,7 +138,5 @@ sanguis::client::draw2d::scene::world::generate_batches(
 	}
 
 	return
-		std::move(
-			ret
-		);
+		ret;
 }

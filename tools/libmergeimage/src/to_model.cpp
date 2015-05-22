@@ -18,9 +18,6 @@
 #include <sanguis/tools/libmergeimage/impl/tree_depth.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/size.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <utility>
-#include <fcppt/config/external_end.hpp>
 
 
 sanguis::model::object
@@ -109,7 +106,5 @@ sanguis::tools::libmergeimage::to_model(
 	}
 
 	return
-		std::move(
-			result
-		);
+		result;
 }
