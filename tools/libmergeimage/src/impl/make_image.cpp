@@ -24,6 +24,7 @@
 #include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
+#include <fcppt/math/dim/comparison.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/dim/output.hpp>
 #include <fcppt/config/external_begin.hpp>

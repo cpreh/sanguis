@@ -21,6 +21,7 @@
 #include <fcppt/cast/size.hpp>
 #include <fcppt/container/grid/clamp_pos.hpp>
 #include <fcppt/container/grid/make_pos_range.hpp>
+#include <fcppt/math/dim/comparison.hpp>
 #include <fcppt/math/ceil_div.hpp>
 #include <fcppt/math/map.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
