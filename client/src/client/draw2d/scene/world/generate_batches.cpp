@@ -3,31 +3,29 @@
 #include <sanguis/client/draw2d/scene/world/batch.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_grid.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_size.hpp>
-#include <sanguis/client/draw2d/scene/world/fill_batches.hpp>
-#include <sanguis/client/draw2d/scene/world/fill_non_connecting_batches.hpp>
 #include <sanguis/client/draw2d/scene/world/generate_batches.hpp>
-#include <sanguis/client/draw2d/scene/world/is_background.hpp>
-#include <sanguis/client/draw2d/scene/world/lower_bound.hpp>
-#include <sanguis/client/draw2d/scene/world/upper_bound.hpp>
+#include <sanguis/client/draw2d/scene/world/make_sprite.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/buffers.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/compare.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/container.hpp>
-#include <sanguis/client/load/tiles/context_fwd.hpp>
+#include <sanguis/client/load/tiles/context.hpp>
 #include <sanguis/creator/background_grid.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/pos.hpp>
+#include <sanguis/tiles/cell.hpp>
+#include <sanguis/tiles/draw.hpp>
+#include <sanguis/tiles/lower_bound.hpp>
+#include <sanguis/tiles/upper_bound.hpp>
 #include <sge/sprite/geometry/make_random_access_range.hpp>
 #include <sge/sprite/geometry/sort_and_update.hpp>
+#include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/cast/size.hpp>
-#include <fcppt/container/grid/clamp_pos.hpp>
 #include <fcppt/container/grid/make_pos_range.hpp>
 #include <fcppt/math/dim/comparison.hpp>
 #include <fcppt/math/ceil_div.hpp>
 #include <fcppt/math/map.hpp>
-#include <fcppt/math/dim/arithmetic.hpp>
-#include <fcppt/math/dim/fill.hpp>
-#include <fcppt/math/dim/to_vector.hpp>
-#include <fcppt/math/vector/dim.hpp>
+#include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/fill.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -43,22 +41,6 @@ sanguis::client::draw2d::scene::world::generate_batches(
 	sanguis::client::draw2d::scene::world::sprite::buffers &_sprite_buffers
 )
 {
-	sanguis::creator::grid::dim const min_size{
-		fcppt::math::dim::fill<
-			sanguis::creator::grid::dim
-		>(
-			1u
-		)
-	};
-
-	if(
-		_grid.size()
-		<=
-		min_size
-	)
-		return
-			sanguis::client::draw2d::scene::world::batch_grid();
-
 	sanguis::client::draw2d::scene::world::batch_grid ret(
 		fcppt::math::map<
 			sanguis::creator::grid::dim
@@ -81,25 +63,11 @@ sanguis::client::draw2d::scene::world::generate_batches(
 		)
 	);
 
-	sanguis::client::draw2d::scene::world::sprite::container sprites;
-
-	sanguis::creator::grid::dim const batch_dim(
-		fcppt::math::dim::fill<
-			sanguis::creator::grid::dim
+	sanguis::creator::pos const batch_dim_pos(
+		fcppt::math::vector::fill<
+			sanguis::creator::pos
 		>(
 			sanguis::client::draw2d::scene::world::batch_size::value
-		)
-	);
-
-	sprites.reserve(
-		batch_dim.content()
-		*
-		2u
-	);
-
-	sanguis::creator::pos const batch_dim_pos(
-		fcppt::math::dim::to_vector(
-			batch_dim
 		)
 	);
 
@@ -111,77 +79,54 @@ sanguis::client::draw2d::scene::world::generate_batches(
 		)
 	)
 	{
-		sanguis::client::draw2d::scene::world::lower_bound const lower_bound(
-			fcppt::container::grid::clamp_pos(
-				result_element.pos()
-				*
-				batch_dim_pos
-				+
-				min_size,
-				_grid.size()
+		sanguis::tiles::lower_bound const lower_bound(
+			result_element.pos()
+			*
+			batch_dim_pos
+		);
+
+		sanguis::tiles::upper_bound const upper_bound(
+			lower_bound.get()
+			+
+			batch_dim_pos
+			+
+			// TODO: Why?
+			fcppt::math::vector::fill<
+				sanguis::creator::pos
+			>(
+				1u
 			)
 		);
 
-		sanguis::client::draw2d::scene::world::upper_bound const upper_bound(
-			fcppt::container::grid::clamp_pos(
-				lower_bound.get()
-				+
-				batch_dim_pos,
-				_grid.size()
+		sanguis::client::draw2d::scene::world::sprite::container sprites(
+			fcppt::algorithm::map_optional<
+				sanguis::client::draw2d::scene::world::sprite::container
+			>(
+				sanguis::tiles::draw(
+					_grid,
+					_background_grid,
+					_tiles.collection(),
+					lower_bound,
+					upper_bound
+				),
+				[
+					&_random_generator,
+					_debug,
+					&_tiles
+				](
+					sanguis::tiles::cell const &_cell
+				)
+				{
+					return
+						sanguis::client::draw2d::scene::world::make_sprite(
+							_random_generator,
+							_debug,
+							_tiles,
+							_cell
+						);
+				}
 			)
 		);
-
-		sprites =
-			sanguis::client::draw2d::scene::world::fill_batches(
-				_random_generator,
-				std::move(
-					sprites
-				),
-				_debug,
-				_tiles,
-				_grid,
-				lower_bound,
-				upper_bound,
-				sanguis::client::draw2d::scene::world::is_background(
-					false
-				)
-			);
-
-		sprites =
-			sanguis::client::draw2d::scene::world::fill_non_connecting_batches(
-				_random_generator,
-				std::move(
-					sprites
-				),
-				_debug,
-				_tiles,
-				_grid,
-				sanguis::client::draw2d::scene::world::lower_bound(
-					fcppt::container::grid::clamp_pos(
-						result_element.pos()
-						*
-						batch_dim_pos,
-						_grid.size()
-					)
-				),
-				upper_bound
-			);
-
-		sprites =
-			sanguis::client::draw2d::scene::world::fill_batches(
-				_random_generator,
-				std::move(
-					sprites
-				),
-				_debug,
-				_tiles,
-				_background_grid,
-				lower_bound,
-				upper_bound,
-				sanguis::client::draw2d::scene::world::is_background(
-					true
-				)
-			);
 
 		result_element.value() =
 			sanguis::client::draw2d::scene::world::batch(
@@ -193,8 +138,6 @@ sanguis::client::draw2d::scene::world::generate_batches(
 					_sprite_buffers
 				)
 			);
-
-		sprites.clear();
 	}
 
 	return

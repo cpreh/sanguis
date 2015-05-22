@@ -242,18 +242,10 @@ set(
 	include/sanguis/client/draw2d/scene/world/batch_size.hpp
 	include/sanguis/client/draw2d/scene/world/center_to_grid_pos.hpp
 	include/sanguis/client/draw2d/scene/world/create.hpp
-	include/sanguis/client/draw2d/scene/world/fill_batches.hpp
-	include/sanguis/client/draw2d/scene/world/fill_batches_base.hpp
-	include/sanguis/client/draw2d/scene/world/fill_non_connecting_batches.hpp
-	include/sanguis/client/draw2d/scene/world/filter_connecting_tiles.hpp
-	include/sanguis/client/draw2d/scene/world/filter_tile_pair.hpp
 	include/sanguis/client/draw2d/scene/world/generate_batches.hpp
 	include/sanguis/client/draw2d/scene/world/graveyard.hpp
-	include/sanguis/client/draw2d/scene/world/is_background.hpp
-	include/sanguis/client/draw2d/scene/world/log_tile_error.hpp
-	include/sanguis/client/draw2d/scene/world/lower_bound.hpp
-	include/sanguis/client/draw2d/scene/world/make_tile_neighbors.hpp
-	include/sanguis/client/draw2d/scene/world/make_tile_pair.hpp
+	include/sanguis/client/draw2d/scene/world/make_sprite.hpp
+	include/sanguis/client/draw2d/scene/world/make_texture.hpp
 	include/sanguis/client/draw2d/scene/world/missing_tile_texture.hpp
 	include/sanguis/client/draw2d/scene/world/none.hpp
 	include/sanguis/client/draw2d/scene/world/object.hpp
@@ -275,6 +267,8 @@ set(
 	include/sanguis/client/draw2d/scene/world/sprite/is_background_role.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/object.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/object_fwd.hpp
+	include/sanguis/client/draw2d/scene/world/sprite/optional_object.hpp
+	include/sanguis/client/draw2d/scene/world/sprite/optional_object_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/range.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/range_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/state.hpp
@@ -288,15 +282,7 @@ set(
 	include/sanguis/client/draw2d/scene/world/sprite/vector_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/state.hpp
 	include/sanguis/client/draw2d/scene/world/state_fwd.hpp
-	include/sanguis/client/draw2d/scene/world/tile_neighbors.hpp
-	include/sanguis/client/draw2d/scene/world/tile_neighbors_fwd.hpp
-	include/sanguis/client/draw2d/scene/world/tile_neighbors_to_string.hpp
-	include/sanguis/client/draw2d/scene/world/tile_orientation.hpp
 	include/sanguis/client/draw2d/scene/world/tile_size.hpp
-	include/sanguis/client/draw2d/scene/world/to_non_connecting_tile_texture.hpp
-	include/sanguis/client/draw2d/scene/world/to_tile_texture.hpp
-	include/sanguis/client/draw2d/scene/world/to_tile_texture_base.hpp
-	include/sanguis/client/draw2d/scene/world/upper_bound.hpp
 	include/sanguis/client/draw2d/speed.hpp
 	include/sanguis/client/draw2d/speed_fwd.hpp
 	include/sanguis/client/draw2d/speed_is_null.hpp
@@ -524,35 +510,12 @@ set(
 	include/sanguis/client/load/resource/textures.hpp
 	include/sanguis/client/load/resource/textures_fwd.hpp
 	include/sanguis/client/load/skip_directories.hpp
-	include/sanguis/client/load/tiles/background_tile_pair.hpp
-	include/sanguis/client/load/tiles/background_tile_pair_fwd.hpp
-	include/sanguis/client/load/tiles/background_to_name.hpp
-	include/sanguis/client/load/tiles/category.hpp
-	include/sanguis/client/load/tiles/const_optional_texture_container_ref.hpp
-	include/sanguis/client/load/tiles/const_optional_texture_container_ref_fwd.hpp
 	include/sanguis/client/load/tiles/context.hpp
 	include/sanguis/client/load/tiles/context_fwd.hpp
-	include/sanguis/client/load/tiles/decode_name.hpp
-	include/sanguis/client/load/tiles/direction.hpp
-	include/sanguis/client/load/tiles/direction_fwd.hpp
 	include/sanguis/client/load/tiles/make_textures.hpp
-	include/sanguis/client/load/tiles/name.hpp
-	include/sanguis/client/load/tiles/optional_orientation.hpp
-	include/sanguis/client/load/tiles/optional_orientation_fwd.hpp
-	include/sanguis/client/load/tiles/optional_pair.hpp
-	include/sanguis/client/load/tiles/optional_pair_fwd.hpp
-	include/sanguis/client/load/tiles/orientation.hpp
-	include/sanguis/client/load/tiles/orientation_fwd.hpp
-	include/sanguis/client/load/tiles/pair.hpp
-	include/sanguis/client/load/tiles/pair_fwd.hpp
 	include/sanguis/client/load/tiles/set.hpp
 	include/sanguis/client/load/tiles/set_fwd.hpp
-	include/sanguis/client/load/tiles/sort_pair.hpp
 	include/sanguis/client/load/tiles/texture_container.hpp
-	include/sanguis/client/load/tiles/tile_pair.hpp
-	include/sanguis/client/load/tiles/tile_pair_fwd.hpp
-	include/sanguis/client/load/tiles/to_name.hpp
-	include/sanguis/client/load/tiles/to_name_any.hpp
 	include/sanguis/client/log.hpp
 	include/sanguis/client/log_location.hpp
 	include/sanguis/client/machine.hpp
@@ -746,16 +709,16 @@ set(
 	src/client/draw2d/scene/world/batch.cpp
 	src/client/draw2d/scene/world/center_to_grid_pos.cpp
 	src/client/draw2d/scene/world/create.cpp
-	src/client/draw2d/scene/world/fill_non_connecting_batches.cpp
 	src/client/draw2d/scene/world/generate_batches.cpp
 	src/client/draw2d/scene/world/graveyard.cpp
+	src/client/draw2d/scene/world/make_sprite.cpp
+	src/client/draw2d/scene/world/make_texture.cpp
 	src/client/draw2d/scene/world/missing_tile_texture.cpp
 	src/client/draw2d/scene/world/none.cpp
 	src/client/draw2d/scene/world/object.cpp
 	src/client/draw2d/scene/world/parameters.cpp
 	src/client/draw2d/scene/world/render_parameters.cpp
 	src/client/draw2d/scene/world/state.cpp
-	src/client/draw2d/scene/world/to_non_connecting_tile_texture.cpp
 	src/client/draw2d/speed_is_null.cpp
 	src/client/draw2d/sprite/client/system.cpp
 	src/client/draw2d/sprite/index.cpp
@@ -842,13 +805,9 @@ set(
 	src/client/load/resource/sounds.cpp
 	src/client/load/resource/textures.cpp
 	src/client/load/skip_directories.cpp
-	src/client/load/tiles/background_to_name.cpp
 	src/client/load/tiles/context.cpp
-	src/client/load/tiles/decode_name.cpp
 	src/client/load/tiles/make_textures.cpp
 	src/client/load/tiles/set.cpp
-	src/client/load/tiles/to_name.cpp
-	src/client/load/tiles/to_name_any.cpp
 	src/client/log.cpp
 	src/client/log_location.cpp
 	src/client/machine.cpp
@@ -902,6 +861,7 @@ sanguis_add_library(
 		${sanguis_gui_TARGET}
 		${sanguis_model_TARGET}
 		${sanguis_server_TARGET}
+		${sanguis_tiles_TARGET}
 		${sgeaudio_TARGET}
 		${sgecharconv_TARGET}
 		${sgeconfig_TARGET}

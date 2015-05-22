@@ -9,6 +9,7 @@
 #include <sanguis/tiles/pos.hpp>
 #include <sanguis/tiles/upper_bound.hpp>
 #include <sanguis/tiles/impl/content_path.hpp>
+#include <sanguis/tiles/impl/is_background.hpp>
 #include <sanguis/tiles/impl/optional_content_path.hpp>
 #include <sanguis/tiles/impl/shift.hpp>
 #include <fcppt/optional_bind_construct.hpp>
@@ -115,8 +116,13 @@ draw_base(
 									+
 									_shift.get()
 									,
-									_content_path.content(),
+									_content_path.content()
+									,
 									_content_path.path()
+									,
+									sanguis::tiles::impl::is_background<
+										Tile
+									>()
 								);
 						}
 					);

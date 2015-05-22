@@ -1,88 +1,57 @@
 #include <sanguis/client/load/tiles/make_textures.hpp>
 #include <sanguis/client/load/tiles/texture_container.hpp>
-#include <sanguis/model/animation_index.hpp>
-#include <sanguis/model/cell_area_from_index.hpp>
-#include <sanguis/model/cell_size.hpp>
-#include <sanguis/model/dim.hpp>
-#include <sanguis/model/image_size.hpp>
-#include <sge/parse/json/array.hpp>
-#include <sge/parse/json/get_exn.hpp>
-#include <sge/parse/json/int_type.hpp>
-#include <sge/parse/json/value.hpp>
+#include <sanguis/tiles/area_container.hpp>
+#include <sge/image2d/rect.hpp>
 #include <sge/renderer/lock_rect.hpp>
 #include <sge/texture/part.hpp>
 #include <sge/texture/part_raw_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/map.hpp>
-#include <fcppt/cast/size.hpp>
+#include <fcppt/assert/pre.hpp>
 #include <fcppt/cast/size_fun.hpp>
-#include <fcppt/cast/to_unsigned.hpp>
+#include <fcppt/math/box/contains.hpp>
 #include <fcppt/math/box/structure_cast.hpp>
-#include <fcppt/math/dim/fill.hpp>
-#include <fcppt/math/dim/structure_cast.hpp>
 
 
 sanguis::client::load::tiles::texture_container
 sanguis::client::load::tiles::make_textures(
 	sge::texture::part const &_part,
-	sge::parse::json::value const &_value
+	sanguis::tiles::area_container const &_areas
 )
 {
 	return
 		fcppt::algorithm::map<
 			sanguis::client::load::tiles::texture_container
 		>(
-			sge::parse::json::get_exn<
-				sge::parse::json::array const
-			>(
-				_value
-			).elements,
+			_areas,
 			[
 				&_part
 			](
-				sge::parse::json::value const &_element
+				sge::image2d::rect const _rect
 			)
 			{
+				sge::renderer::lock_rect const rect(
+					fcppt::math::box::structure_cast<
+						sge::renderer::lock_rect,
+						fcppt::cast::size_fun
+					>(
+						_rect
+					)
+				);
+
+				FCPPT_ASSERT_PRE(
+					fcppt::math::box::contains(
+						_part.area(),
+						rect
+					)
+				);
+
 				return
 					fcppt::make_unique_ptr<
 						sge::texture::part_raw_ref
 					>(
 						_part.texture(),
-						fcppt::math::box::structure_cast<
-							sge::renderer::lock_rect,
-							fcppt::cast::size_fun
-						>(
-							// TODO: Put this function somewhere else
-							sanguis::model::cell_area_from_index(
-								sanguis::model::image_size(
-									fcppt::math::dim::structure_cast<
-										sanguis::model::dim,
-										fcppt::cast::size_fun
-									>(
-										_part.size()
-									)
-								),
-								sanguis::model::cell_size(
-									fcppt::math::dim::fill<
-										sanguis::model::dim
-									>(
-										// TODO: Read this from the json file
-										96ul
-									)
-								),
-								fcppt::cast::size<
-									sanguis::model::animation_index
-								>(
-									fcppt::cast::to_unsigned(
-										sge::parse::json::get_exn<
-											sge::parse::json::int_type
-										>(
-											_element
-										)
-									)
-								)
-							)
-						)
+						rect
 					);
 			}
 		);

@@ -128,6 +128,13 @@ sanguis::client::load::resource::textures::make_missing_texture(
 		);
 }
 
+sge::image2d::system &
+sanguis::client::load::resource::textures::image_system() const
+{
+	return
+		image_loader_;
+}
+
 sanguis::client::load::resource::textures::textures(
 	sge::renderer::device::core &_renderer,
 	sge::image2d::system &_image_loader

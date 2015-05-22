@@ -16,6 +16,8 @@ set(
 	include/sanguis/tiles/enable_if_tile.hpp
 	include/sanguis/tiles/error.hpp
 	include/sanguis/tiles/error_fwd.hpp
+	include/sanguis/tiles/is_background.hpp
+	include/sanguis/tiles/is_background_fwd.hpp
 	include/sanguis/tiles/is_tile.hpp
 	include/sanguis/tiles/log_location.hpp
 	include/sanguis/tiles/lower_bound.hpp
@@ -43,6 +45,7 @@ set(
 	src/impl/category.cpp
 	src/impl/content_path.cpp
 	src/impl/decode_name.cpp
+	src/impl/is_background.cpp
 	src/impl/load_file.cpp
 	src/impl/log.cpp
 	src/impl/make_areas.cpp
@@ -66,6 +69,7 @@ set(
 	src/include/sanguis/tiles/impl/filter_non_connecting.hpp
 	src/include/sanguis/tiles/impl/images_base.hpp
 	src/include/sanguis/tiles/impl/instantiate_tile.hpp
+	src/include/sanguis/tiles/impl/is_background.hpp
 	src/include/sanguis/tiles/impl/load_file.hpp
 	src/include/sanguis/tiles/impl/log.hpp
 	src/include/sanguis/tiles/impl/make_areas.hpp

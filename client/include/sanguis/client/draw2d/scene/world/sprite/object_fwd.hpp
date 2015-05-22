@@ -18,9 +18,11 @@ namespace world
 namespace sprite
 {
 
-typedef sge::sprite::object<
+typedef
+sge::sprite::object<
 	sanguis::client::draw2d::scene::world::sprite::choices
-> object;
+>
+object;
 
 }
 }

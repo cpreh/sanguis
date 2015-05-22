@@ -2,19 +2,16 @@
 #define SANGUIS_CLIENT_LOAD_TILES_CONTEXT_HPP_INCLUDED
 
 #include <sanguis/client/load/resource/textures_fwd.hpp>
-#include <sanguis/client/load/tiles/background_tile_pair_fwd.hpp>
-#include <sanguis/client/load/tiles/category.hpp>
 #include <sanguis/client/load/tiles/context_fwd.hpp>
-#include <sanguis/client/load/tiles/pair.hpp>
 #include <sanguis/client/load/tiles/set_fwd.hpp>
-#include <sanguis/client/load/tiles/tile_pair_fwd.hpp>
-#include <sanguis/creator/background_tile_fwd.hpp>
-#include <sanguis/creator/tile_fwd.hpp>
+#include <sanguis/client/load/tiles/texture_container.hpp>
+#include <sanguis/tiles/area_container_ref_fwd.hpp>
+#include <sanguis/tiles/collection.hpp>
 #include <sge/texture/const_part_unique_ptr.hpp>
 #include <sge/texture/part_fwd.hpp>
-#include <fcppt/homogenous_pair_comparison.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/filesystem/path.hpp>
 #include <map>
 #include <fcppt/config/external_end.hpp>
 
@@ -41,15 +38,14 @@ public:
 
 	~context();
 
-	sanguis::client::load::tiles::set const &
+	sanguis::client::load::tiles::texture_container const &
 	set(
-		sanguis::client::load::tiles::tile_pair
+		boost::filesystem::path const &,
+		sanguis::tiles::area_container_ref const &
 	);
 
-	sanguis::client::load::tiles::set const &
-	set(
-		sanguis::client::load::tiles::background_tile_pair
-	);
+	sanguis::tiles::collection &
+	collection();
 
 	sge::texture::part const &
 	missing_texture() const;
@@ -60,49 +56,18 @@ public:
 	sge::texture::part const &
 	missing_object_texture() const;
 private:
-	template<
-		typename Map,
-		typename ToName
-	>
-	sanguis::client::load::tiles::set const &
-	any_set(
-		Map &,
-		typename Map::key_type,
-		ToName,
-		sanguis::client::load::tiles::category const &
-	);
-
-	template<
-		typename TileType
-	>
-	// TODO: unordered_map
-	using
-	map_type
-	=
+	typedef
 	std::map<
-		sanguis::client::load::tiles::pair<
-			TileType
-		>,
+		boost::filesystem::path,
 		sanguis::client::load::tiles::set
-	>;
-
-	typedef
-	map_type<
-		sanguis::creator::tile
 	>
-	set_map;
+	map_type;
 
-	typedef
-	map_type<
-		sanguis::creator::background_tile
-	>
-	background_set_map;
+	sanguis::tiles::collection collection_;
 
 	sanguis::client::load::resource::textures const &textures_;
 
-	set_map sets_;
-
-	background_set_map background_sets_;
+	map_type sets_;
 
 	sge::texture::const_part_unique_ptr const missing_texture_;
 

@@ -3,6 +3,7 @@
 
 #include <sanguis/tiles/cell_fwd.hpp>
 #include <sanguis/tiles/content.hpp>
+#include <sanguis/tiles/is_background.hpp>
 #include <sanguis/tiles/path_reference.hpp>
 #include <sanguis/tiles/pos.hpp>
 #include <sanguis/tiles/symbol.hpp>
@@ -19,7 +20,8 @@ public:
 	cell(
 		sanguis::tiles::pos,
 		sanguis::tiles::content const &,
-		sanguis::tiles::path_reference
+		sanguis::tiles::path_reference,
+		sanguis::tiles::is_background
 	);
 
 	SANGUIS_TILES_SYMBOL
@@ -33,12 +35,18 @@ public:
 	SANGUIS_TILES_SYMBOL
 	sanguis::tiles::path_reference const
 	path() const;
+
+	SANGUIS_TILES_SYMBOL
+	sanguis::tiles::is_background const
+	is_background() const;
 private:
 	sanguis::tiles::pos pos_;
 
 	sanguis::tiles::content content_;
 
 	sanguis::tiles::path_reference path_;
+
+	sanguis::tiles::is_background is_background_;
 };
 
 }

@@ -57,6 +57,10 @@ public:
 		sge::image::color::any::object const &
 	) const;
 
+	// TODO: Remove this
+	sge::image2d::system &
+	image_system() const;
+
 	textures(
 		sge::renderer::device::core &,
 		sge::image2d::system &

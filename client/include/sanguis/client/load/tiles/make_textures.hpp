@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_LOAD_TILES_MAKE_TEXTURES_HPP_INCLUDED
 
 #include <sanguis/client/load/tiles/texture_container.hpp>
-#include <sge/parse/json/value_fwd.hpp>
+#include <sanguis/tiles/area_container.hpp>
 #include <sge/texture/part_fwd.hpp>
 
 
@@ -18,7 +18,7 @@ namespace tiles
 sanguis::client::load::tiles::texture_container
 make_textures(
 	sge::texture::part const &,
-	sge::parse::json::value const &
+	sanguis::tiles::area_container const &
 );
 
 }
