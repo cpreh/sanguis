@@ -7,10 +7,9 @@
 #include <sanguis/server/random/equal_function.hpp>
 #include <sanguis/server/random/less_function.hpp>
 #include <fcppt/algorithm/repeat.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/size.hpp>
-#include <fcppt/random/distribution/make_basic.hpp>
-#include <fcppt/random/distribution/parameters/make_uniform_indices.hpp>
-#include <fcppt/random/distribution/parameters/uniform_int.hpp>
+#include <fcppt/random/wrapper/make_uniform_container.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <fcppt/config/external_end.hpp>
@@ -49,8 +48,8 @@ draw(
 )
 {
 	auto container_distribution(
-		fcppt::random::distribution::make_basic(
-			fcppt::random::distribution::parameters::make_uniform_indices(
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			fcppt::random::wrapper::make_uniform_container(
 				_source
 			)
 		)
@@ -74,7 +73,6 @@ draw(
 		result.capacity(),
 		[
 			&_create_function,
-			&_source,
 			&_random_generator,
 			&container_distribution,
 			&result
@@ -82,11 +80,9 @@ draw(
 		{
 			result.push_back(
 				_create_function.get()(
-					_source[
-						container_distribution(
-							_random_generator
-						)
-					]
+					container_distribution(
+						_random_generator
+					)
 				)
 			);
 		}

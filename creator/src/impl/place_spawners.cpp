@@ -24,11 +24,11 @@
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/fold.hpp>
 #include <fcppt/assert/error_message.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>
-#include <fcppt/random/distribution/make_basic.hpp>
-#include <fcppt/random/distribution/parameters/make_uniform_indices_advanced.hpp>
+#include <fcppt/random/wrapper/make_uniform_container_advanced.hpp>
 
 
 sanguis::creator::spawn_container
@@ -49,8 +49,8 @@ sanguis::creator::impl::place_spawners(
 	};
 
 	auto random_monster(
-		fcppt::random::distribution::make_basic(
-			fcppt::random::distribution::parameters::make_uniform_indices_advanced<
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			fcppt::random::wrapper::make_uniform_container_advanced<
 				sanguis::creator::impl::random::uniform_int_wrapper
 			>(
 				_enemy_types
@@ -140,11 +140,9 @@ sanguis::creator::impl::place_spawners(
 					sanguis::creator::spawn_pos{
 						candidate
 					},
-					_enemy_types[
-						random_monster(
-							_generator
-						)
-					],
+					random_monster(
+						_generator
+					),
 					sanguis::creator::spawn_type::spawner,
 					sanguis::creator::enemy_kind::normal
 				}

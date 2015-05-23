@@ -29,6 +29,7 @@
 #include <sanguis/creator/impl/random/uniform_size_variate.hpp>
 #include <fcppt/optional.hpp>
 #include <fcppt/algorithm/enum_array_fold.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/cast/to_unsigned_fun.hpp>
@@ -42,8 +43,7 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
-#include <fcppt/random/distribution/make_basic.hpp>
-#include <fcppt/random/distribution/parameters/make_uniform_indices_advanced.hpp>
+#include <fcppt/random/wrapper/make_uniform_container_advanced.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <vector>
@@ -689,8 +689,8 @@ sanguis::creator::impl::generators::rooms(
 	};
 
 	auto random_monster(
-		fcppt::random::distribution::make_basic(
-			fcppt::random::distribution::parameters::make_uniform_indices_advanced<
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			fcppt::random::wrapper::make_uniform_container_advanced<
 				sanguis::creator::impl::random::uniform_int_wrapper
 			>(
 				enemy_types
@@ -722,11 +722,9 @@ sanguis::creator::impl::generators::rooms(
 					sanguis::creator::spawn_pos{
 						_pos
 					},
-					enemy_types[
-						random_monster(
-							_parameters.randgen()
-						)
-					],
+					random_monster(
+						_parameters.randgen()
+					),
 					sanguis::creator::spawn_type::single,
 					sanguis::creator::enemy_kind::normal
 				}
@@ -755,11 +753,9 @@ sanguis::creator::impl::generators::rooms(
 					)
 				)
 			},
-			enemy_types[
-				random_monster(
-					_parameters.randgen()
-				)
-			],
+			random_monster(
+				_parameters.randgen()
+			),
 			sanguis::creator::spawn_type::single,
 			sanguis::creator::enemy_kind::normal
 		}
