@@ -242,6 +242,7 @@ set(
 	include/sanguis/client/draw2d/scene/world/batch_size.hpp
 	include/sanguis/client/draw2d/scene/world/center_to_grid_pos.hpp
 	include/sanguis/client/draw2d/scene/world/create.hpp
+	include/sanguis/client/draw2d/scene/world/error_texture.hpp
 	include/sanguis/client/draw2d/scene/world/generate_batches.hpp
 	include/sanguis/client/draw2d/scene/world/graveyard.hpp
 	include/sanguis/client/draw2d/scene/world/make_sprite.hpp
@@ -709,6 +710,7 @@ set(
 	src/client/draw2d/scene/world/batch.cpp
 	src/client/draw2d/scene/world/center_to_grid_pos.cpp
 	src/client/draw2d/scene/world/create.cpp
+	src/client/draw2d/scene/world/error_texture.cpp
 	src/client/draw2d/scene/world/generate_batches.cpp
 	src/client/draw2d/scene/world/graveyard.cpp
 	src/client/draw2d/scene/world/make_sprite.cpp
