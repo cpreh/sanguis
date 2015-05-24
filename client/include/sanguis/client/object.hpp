@@ -21,10 +21,11 @@
 #include <sge/timer/absolute_decl.hpp>
 #include <awl/main/exit_code.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/optional_decl.hpp>
 #include <fcppt/scoped_state_machine.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/variables_map.hpp>
-#include <memory>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -74,9 +75,11 @@ private:
 
 	sanguis::io_service io_service_;
 
-	typedef std::unique_ptr<
+	typedef
+	fcppt::unique_ptr<
 		sanguis::client::systems
-	> systems_unique_ptr;
+	>
+	systems_unique_ptr;
 
 	systems_unique_ptr const sys_;
 
@@ -106,13 +109,25 @@ private:
 
 	frame_timer frame_timer_;
 
-	std::unique_ptr<
+	typedef
+	fcppt::unique_ptr<
 		sanguis::client::server
-	> server_;
+	>
+	server_unique_ptr;
 
-	typedef fcppt::scoped_state_machine<
+	typedef
+	fcppt::optional<
+		server_unique_ptr
+	>
+	optional_server_unique_ptr;
+
+	optional_server_unique_ptr server_;
+
+	typedef
+	fcppt::scoped_state_machine<
 		sanguis::client::machine
-	> scoped_machine;
+	>
+	scoped_machine;
 
 	scoped_machine scoped_machine_;
 };

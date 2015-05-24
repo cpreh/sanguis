@@ -17,8 +17,9 @@
 #include <sge/rucksack/scalar.hpp>
 #include <sge/rucksack/widget/dummy.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/algorithm/map_concat_move.hpp>
 #include <fcppt/cast/size.hpp>
@@ -122,26 +123,30 @@ sanguis::gui::widget::tree::tree(
 							};
 
 							return
-								fcppt::make_unique_ptr<
-									indented_widget
+								fcppt::unique_ptr_to_base<
+									sanguis::gui::widget::base
 								>(
-									fcppt::cast::size<
-										sge::rucksack::scalar
+									fcppt::make_unique_ptr_fcppt<
+										indented_widget
 									>(
-										fcppt::cast::to_signed(
-											fcppt::container::tree::level(
-												_widget
+										fcppt::cast::size<
+											sge::rucksack::scalar
+										>(
+											fcppt::cast::to_signed(
+												fcppt::container::tree::level(
+													_widget
+												)
 											)
 										)
+										*
+										fcppt::literal<
+											sge::rucksack::scalar
+										>(
+											20
+										),
+										_context,
+										_widget.value().get()
 									)
-									*
-									fcppt::literal<
-										sge::rucksack::scalar
-									>(
-										20
-									),
-									_context,
-									_widget.value().get()
 								);
 						}
 					);

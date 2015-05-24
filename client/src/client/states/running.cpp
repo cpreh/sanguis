@@ -70,7 +70,7 @@
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/input/cursor/activatable_fwd.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
@@ -94,7 +94,7 @@ sanguis::client::states::running::running(
 		>().resources().resources().textures()
 	),
 	console_(
-		fcppt::make_unique_ptr<
+		fcppt::make_unique_ptr_fcppt<
 			sanguis::client::console::object
 		>(
 			this->context<
@@ -108,12 +108,12 @@ sanguis::client::states::running::running(
 		)
 	),
 	sound_manager_(
-		fcppt::make_unique_ptr<
+		fcppt::make_unique_ptr_fcppt<
 			sanguis::client::sound_manager
 		>()
 	),
 	hud_(
-		fcppt::make_unique_ptr<
+		fcppt::make_unique_ptr_fcppt<
 			sanguis::client::gui::hud::object
 		>(
 			hud_resources_,
@@ -159,7 +159,7 @@ sanguis::client::states::running::running(
 			sanguis::client::player_health_callback(
 				std::bind(
 					&sanguis::client::gui::hud::object::health_pair,
-					hud_.get(),
+					hud_.get_pointer(),
 					std::placeholders::_1
 				)
 			),
@@ -174,7 +174,7 @@ sanguis::client::states::running::running(
 		)
 	),
 	input_translator_(
-		fcppt::make_unique_ptr<
+		fcppt::make_unique_ptr_fcppt<
 			sanguis::client::control::input_translator
 		>(
 			this->context<

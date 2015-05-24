@@ -16,6 +16,7 @@
 #include <sanguis/server/weapons/spider.hpp>
 #include <sanguis/server/weapons/spider_parameters.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
+#include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/factory/parameters.hpp>
 #include <sanguis/server/weapons/factory/spider.hpp>
 #include <sanguis/server/weapons/modifiers/apply.hpp>
@@ -23,7 +24,8 @@
 #include <sanguis/server/weapons/modifiers/health.hpp>
 #include <sanguis/server/weapons/modifiers/make_guaranteed.hpp>
 #include <sanguis/server/weapons/modifiers/make_potential.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 
 
 sanguis::server::weapons::unique_ptr
@@ -40,81 +42,89 @@ sanguis::server::weapons::factory::spider(
 	);
 
 	return
-		fcppt::make_unique_ptr<
-			sanguis::server::weapons::spider
+		fcppt::unique_ptr_to_base<
+			sanguis::server::weapons::weapon
 		>(
-			random_generator,
-			sanguis::server::weapons::spawn_weapon(
-				[
-					&random_generator,
-					difficulty
-				]
-				()
-				{
-					return
-						fcppt::make_unique_ptr<
-							sanguis::server::weapons::melee
-						>(
-							random_generator,
-							sanguis::server::weapons::modifiers::apply(
-								random_generator,
-								difficulty,
-								sanguis::server::weapons::modifiers::make_guaranteed<
-									sanguis::server::weapons::melee_parameters
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::server::weapons::spider
+			>(
+				random_generator,
+				sanguis::server::weapons::spawn_weapon(
+					[
+						&random_generator,
+						difficulty
+					]
+					()
+					{
+						return
+							fcppt::unique_ptr_to_base<
+								sanguis::server::weapons::weapon
+							>(
+								fcppt::make_unique_ptr_fcppt<
+									sanguis::server::weapons::melee
 								>(
-									sanguis::server::weapons::modifiers::damage{}
-								),
-								sanguis::server::weapons::modifiers::make_potential<
-									sanguis::server::weapons::melee_parameters
-								>(),
-								sanguis::server::weapons::melee_parameters(
-									sanguis::server::weapons::range(
-										100.f
-									),
-									sanguis::server::weapons::backswing_time(
-										sanguis::duration_second(
-											0.3f
+									random_generator,
+									sanguis::server::weapons::modifiers::apply(
+										random_generator,
+										difficulty,
+										sanguis::server::weapons::modifiers::make_guaranteed<
+											sanguis::server::weapons::melee_parameters
+										>(
+											sanguis::server::weapons::modifiers::damage{}
+										),
+										sanguis::server::weapons::modifiers::make_potential<
+											sanguis::server::weapons::melee_parameters
+										>(),
+										sanguis::server::weapons::melee_parameters(
+											sanguis::server::weapons::range(
+												100.f
+											),
+											sanguis::server::weapons::backswing_time(
+												sanguis::duration_second(
+													0.3f
+												)
+											),
+											sanguis::server::weapons::damage{
+												3.f
+											},
+											sanguis::server::damage::make_array({
+												sanguis::server::damage::normal =
+													sanguis::server::damage::full
+											})
 										)
-									),
-									sanguis::server::weapons::damage{
-										3.f
-									},
-									sanguis::server::damage::make_array({
-										sanguis::server::damage::normal =
-											sanguis::server::damage::full
-									})
+									)
 								)
-							)
-						);
-				}
-			),
-			sanguis::server::weapons::modifiers::apply(
-				_parameters.random_generator(),
-				_parameters.difficulty(),
-				sanguis::server::weapons::modifiers::make_guaranteed<
-					sanguis::server::weapons::spider_parameters
-				>(),
-				sanguis::server::weapons::modifiers::make_potential<
-					sanguis::server::weapons::spider_parameters
-				>(
-					sanguis::server::weapons::modifiers::health{}
+							);
+					}
 				),
-				sanguis::server::weapons::spider_parameters(
-					sanguis::server::health(
-						100.f
+				sanguis::server::weapons::modifiers::apply(
+					_parameters.random_generator(),
+					_parameters.difficulty(),
+					sanguis::server::weapons::modifiers::make_guaranteed<
+						sanguis::server::weapons::spider_parameters
+					>(),
+					sanguis::server::weapons::modifiers::make_potential<
+						sanguis::server::weapons::spider_parameters
+					>(
+						sanguis::server::weapons::modifiers::health{}
 					),
-					sanguis::server::weapons::backswing_time(
-						sanguis::duration_second(
-							3.f
+					sanguis::server::weapons::spider_parameters(
+						sanguis::server::health(
+							100.f
+						),
+						sanguis::server::weapons::backswing_time(
+							sanguis::duration_second(
+								3.f
+							)
+						),
+						sanguis::server::weapons::cast_point(
+							sanguis::duration_second(
+								0.1f
+							)
+						),
+						sanguis::server::weapons::range(
+							1000.f
 						)
-					),
-					sanguis::server::weapons::cast_point(
-						sanguis::duration_second(
-							0.1f
-						)
-					),
-					sanguis::server::weapons::range(
-						1000.f
 					)
 				)
 			)

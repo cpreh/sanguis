@@ -11,6 +11,7 @@
 #include <sanguis/server/weapons/shotgun_parameters.hpp>
 #include <sanguis/server/weapons/spread_radius.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
+#include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/factory/parameters.hpp>
 #include <sanguis/server/weapons/factory/shotgun.hpp>
 #include <sanguis/server/weapons/modifiers/accuracy.hpp>
@@ -20,7 +21,8 @@
 #include <sanguis/server/weapons/modifiers/make_guaranteed.hpp>
 #include <sanguis/server/weapons/modifiers/make_potential.hpp>
 #include <sanguis/server/weapons/modifiers/spread_radius.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 
 
 sanguis::server::weapons::unique_ptr
@@ -29,59 +31,63 @@ sanguis::server::weapons::factory::shotgun(
 )
 {
 	return
-		fcppt::make_unique_ptr<
-			sanguis::server::weapons::shotgun
+		fcppt::unique_ptr_to_base<
+			sanguis::server::weapons::weapon
 		>(
-			_parameters.random_generator(),
-			_parameters.weapon_type(),
-			sanguis::server::weapons::modifiers::apply(
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::server::weapons::shotgun
+			>(
 				_parameters.random_generator(),
-				_parameters.difficulty(),
-				sanguis::server::weapons::modifiers::make_guaranteed<
-					sanguis::server::weapons::shotgun_parameters
-				>(
-					sanguis::server::weapons::modifiers::damage{}
-				),
-				sanguis::server::weapons::modifiers::make_potential<
-					sanguis::server::weapons::shotgun_parameters
-				>(
-					sanguis::server::weapons::modifiers::accuracy{},
-					sanguis::server::weapons::modifiers::spread_radius{},
-					sanguis::server::weapons::modifiers::magazine_size{}
-				),
-				sanguis::server::weapons::shotgun_parameters(
-					sanguis::server::weapons::accuracy(
-						0.9f
+				_parameters.weapon_type(),
+				sanguis::server::weapons::modifiers::apply(
+					_parameters.random_generator(),
+					_parameters.difficulty(),
+					sanguis::server::weapons::modifiers::make_guaranteed<
+						sanguis::server::weapons::shotgun_parameters
+					>(
+						sanguis::server::weapons::modifiers::damage{}
 					),
-					sanguis::server::weapons::backswing_time(
-						sanguis::duration_second(
-							0.5f
+					sanguis::server::weapons::modifiers::make_potential<
+						sanguis::server::weapons::shotgun_parameters
+					>(
+						sanguis::server::weapons::modifiers::accuracy{},
+						sanguis::server::weapons::modifiers::spread_radius{},
+						sanguis::server::weapons::modifiers::magazine_size{}
+					),
+					sanguis::server::weapons::shotgun_parameters(
+						sanguis::server::weapons::accuracy(
+							0.9f
+						),
+						sanguis::server::weapons::backswing_time(
+							sanguis::duration_second(
+								0.5f
+							)
+						),
+						sanguis::server::weapons::cast_point(
+							sanguis::duration_second(
+								0.5f
+							)
+						),
+						sanguis::server::weapons::spread_radius(
+							0.2f
+						),
+						sanguis::server::weapons::shells(
+							10u
+						),
+						sanguis::server::weapons::damage(
+							2.5f
+						),
+						sanguis::server::weapons::magazine_size(
+							8u
+						),
+						sanguis::server::weapons::reload_time(
+							sanguis::duration_second(
+								3.f
+							)
+						),
+						sanguis::server::weapons::range(
+							1000.f
 						)
-					),
-					sanguis::server::weapons::cast_point(
-						sanguis::duration_second(
-							0.5f
-						)
-					),
-					sanguis::server::weapons::spread_radius(
-						0.2f
-					),
-					sanguis::server::weapons::shells(
-						10u
-					),
-					sanguis::server::weapons::damage(
-						2.5f
-					),
-					sanguis::server::weapons::magazine_size(
-						8u
-					),
-					sanguis::server::weapons::reload_time(
-						sanguis::duration_second(
-							3.f
-						)
-					),
-					sanguis::server::weapons::range(
-						1000.f
 					)
 				)
 			)

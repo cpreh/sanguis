@@ -35,7 +35,7 @@
 #include <sge/systems/window.hpp>
 #include <sge/viewport/fill_on_resize.hpp>
 #include <sge/window/title.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/variables_map.hpp>
@@ -48,7 +48,7 @@ sanguis::client::create_systems(
 )
 {
 	return
-		fcppt::make_unique_ptr<
+		fcppt::make_unique_ptr_fcppt<
 			sanguis::client::systems
 		>(
 			sge::systems::make_list

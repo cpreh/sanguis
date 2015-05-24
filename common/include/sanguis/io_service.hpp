@@ -7,9 +7,7 @@
 #include <sanguis/common/symbol.hpp>
 #include <alda/net/io_service_wrapper_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <memory>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 
 
 namespace sanguis
@@ -46,7 +44,7 @@ public:
 	impl() const;
 private:
 	typedef
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		sanguis::io_service_impl
 	>
 	impl_unique_ptr;

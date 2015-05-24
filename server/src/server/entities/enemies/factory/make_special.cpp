@@ -1,5 +1,6 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/health.hpp>
+#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/attribute_container.hpp>
 #include <sanguis/server/entities/enemies/is_unique.hpp>
@@ -17,7 +18,8 @@
 #include <sanguis/server/random/min.hpp>
 #include <sanguis/server/random/split.hpp>
 #include <sanguis/server/random/split_array.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -86,20 +88,24 @@ sanguis::server::entities::enemies::factory::make_special(
 	);
 
 	return
-		fcppt::make_unique_ptr<
-			sanguis::server::entities::enemies::special
+		fcppt::unique_ptr_to_base<
+			sanguis::server::entities::base
 		>(
-			_random_generator,
-			std::move(
-				_parameters
-			),
-			modifier_result,
-			sanguis::server::entities::enemies::factory::make_skills(
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::server::entities::enemies::special
+			>(
 				_random_generator,
-				amounts[
-					1
-				]
-			),
-			_is_unique
+				std::move(
+					_parameters
+				),
+				modifier_result,
+				sanguis::server::entities::enemies::factory::make_skills(
+					_random_generator,
+					amounts[
+						1
+					]
+				),
+				_is_unique
+			)
 		);
 }

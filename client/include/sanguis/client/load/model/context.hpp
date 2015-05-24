@@ -5,9 +5,7 @@
 #include <sanguis/client/load/model/collection_fwd.hpp>
 #include <sanguis/client/load/resource/context_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <memory>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 
 
 namespace sanguis
@@ -37,7 +35,7 @@ private:
 
 	~context();
 
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		sanguis::client::load::model::collection
 	> const collection_;
 };

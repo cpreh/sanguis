@@ -28,7 +28,9 @@
 #include <sanguis/server/weapons/melee.hpp>
 #include <sanguis/server/weapons/melee_parameters.hpp>
 #include <sanguis/server/weapons/range.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <sanguis/server/weapons/weapon.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cmath>
 #include <functional>
@@ -61,31 +63,35 @@ sanguis::server::entities::enemies::factory::reaper(
 				1000.f
 			)
 		),
-		fcppt::make_unique_ptr<
-			sanguis::server::weapons::melee
+		fcppt::unique_ptr_to_base<
+			sanguis::server::weapons::weapon
 		>(
-			_parameters.random_generator(),
-			sanguis::server::weapons::melee_parameters{
-				sanguis::server::weapons::range(
-					75.f
-				),
-				sanguis::server::weapons::backswing_time(
-					sanguis::duration_second(
-						2.f
-					)
-				),
-				sanguis::server::weapons::damage(
-					5.f
-					*
-					std::sqrt(
-						_parameters.difficulty().get()
-					)
-				),
-				sanguis::server::damage::make_array({
-					sanguis::server::damage::normal =
-						sanguis::server::damage::full
-				})
-			}
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::server::weapons::melee
+			>(
+				_parameters.random_generator(),
+				sanguis::server::weapons::melee_parameters{
+					sanguis::server::weapons::range(
+						75.f
+					),
+					sanguis::server::weapons::backswing_time(
+						sanguis::duration_second(
+							2.f
+						)
+					),
+					sanguis::server::weapons::damage(
+						5.f
+						*
+						std::sqrt(
+							_parameters.difficulty().get()
+						)
+					),
+					sanguis::server::damage::make_array({
+						sanguis::server::damage::normal =
+							sanguis::server::damage::full
+					})
+				}
+			)
 		),
 		sanguis::server::pickup_probability(
 			0.f
@@ -105,24 +111,28 @@ sanguis::server::entities::enemies::factory::reaper(
 	);
 
 	return
-		fcppt::make_unique_ptr<
-			sanguis::server::entities::enemies::special
+		fcppt::unique_ptr_to_base<
+			sanguis::server::entities::base
 		>(
-			_parameters.random_generator(),
-			std::move(
-				enemy_parameters
-			),
-			sanguis::server::entities::enemies::attribute_container{
-				sanguis::server::entities::enemies::modifiers::regenerating(
-					enemy_parameters,
-					modifiers_parameters
-				)
-			},
-			sanguis::server::entities::enemies::skills::factory::container{
-				sanguis::server::entities::enemies::skills::factory::scatter
-			},
-			sanguis::server::entities::enemies::is_unique{
-				true
-			}
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::server::entities::enemies::special
+			>(
+				_parameters.random_generator(),
+				std::move(
+					enemy_parameters
+				),
+				sanguis::server::entities::enemies::attribute_container{
+					sanguis::server::entities::enemies::modifiers::regenerating(
+						enemy_parameters,
+						modifiers_parameters
+					)
+				},
+				sanguis::server::entities::enemies::skills::factory::container{
+					sanguis::server::entities::enemies::skills::factory::scatter
+				},
+				sanguis::server::entities::enemies::is_unique{
+					true
+				}
+			)
 		);
 }

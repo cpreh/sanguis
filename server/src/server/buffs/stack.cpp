@@ -60,7 +60,7 @@ sanguis::server::buffs::stack::erase(
 			)
 			{
 				return
-					_element.get()
+					_element.get_pointer()
 					==
 					&_buff;
 			}

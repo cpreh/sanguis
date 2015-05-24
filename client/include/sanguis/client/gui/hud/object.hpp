@@ -38,6 +38,7 @@
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_decl.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <memory>
 #include <fcppt/config/external_end.hpp>
@@ -144,7 +145,7 @@ public:
 	);
 private:
 	typedef
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		sanguis::client::gui::hud::weapon_widget
 	>
 	weapon_widget_unique_ptr;
@@ -261,7 +262,7 @@ private:
 	sanguis::gui::background::none gui_background_;
 
 	typedef
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		sanguis::client::gui::hud::weapon_details
 	>
 	weapon_details_unique_ptr;

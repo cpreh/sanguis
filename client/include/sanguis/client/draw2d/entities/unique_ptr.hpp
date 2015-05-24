@@ -2,9 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_UNIQUE_PTR_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/entities/base_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <memory>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 
 
 namespace sanguis
@@ -16,9 +14,11 @@ namespace draw2d
 namespace entities
 {
 
-typedef std::unique_ptr<
+typedef
+fcppt::unique_ptr<
 	sanguis::client::draw2d::entities::base
-> unique_ptr;
+>
+unique_ptr;
 
 }
 }

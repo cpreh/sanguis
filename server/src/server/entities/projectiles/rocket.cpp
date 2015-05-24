@@ -5,6 +5,7 @@
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/damage/modified_array.hpp>
 #include <sanguis/server/damage/unit.hpp>
+#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/with_health_fwd.hpp>
@@ -14,7 +15,8 @@
 #include <sanguis/server/entities/projectiles/rocket.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/load_context.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/optional_error.hpp>
 
 
@@ -70,13 +72,17 @@ sanguis::server::entities::projectiles::rocket::remove_from_game()
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			this->environment()
 		),
-		fcppt::make_unique_ptr<
-			sanguis::server::entities::projectiles::aoe_damage
+		fcppt::unique_ptr_to_base<
+			sanguis::server::entities::base
 		>(
-			this->team(),
-			this->aoe(),
-			damage_,
-			damage_modifiers_
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::server::entities::projectiles::aoe_damage
+			>(
+				this->team(),
+				this->aoe(),
+				damage_,
+				damage_modifiers_
+			)
 		),
 		sanguis::server::entities::insert_parameters_center(
 			this->center()

@@ -5,13 +5,19 @@
 #include <sanguis/collision/world/body_exit_container.hpp>
 #include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters.hpp>
+#include <sanguis/collision/world/body_unique_ptr.hpp>
 #include <sanguis/collision/world/created.hpp>
 #include <sanguis/collision/world/object.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/body.hpp>
+#include <fcppt/optional_impl.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/pre.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::collision::body::body(
@@ -38,11 +44,9 @@ sanguis::server::collision::body::center(
 	sanguis::server::center const _center
 )
 {
-	FCPPT_ASSERT_PRE(
+	FCPPT_ASSERT_OPTIONAL_ERROR(
 		body_
-	);
-
-	body_->center(
+	)->center(
 		sanguis::collision::center(
 			_center.get()
 		)
@@ -52,13 +56,11 @@ sanguis::server::collision::body::center(
 sanguis::server::center const
 sanguis::server::collision::body::center() const
 {
-	FCPPT_ASSERT_PRE(
-		body_
-	);
-
 	return
 		sanguis::server::center(
-			body_->center().get()
+			FCPPT_ASSERT_OPTIONAL_ERROR(
+				body_
+			)->center().get()
 		);
 }
 
@@ -67,11 +69,9 @@ sanguis::server::collision::body::speed(
 	sanguis::server::speed const _speed
 )
 {
-	FCPPT_ASSERT_PRE(
+	FCPPT_ASSERT_OPTIONAL_ERROR(
 		body_
-	);
-
-	body_->speed(
+	)->speed(
 		sanguis::collision::speed(
 			_speed.get()
 		)
@@ -81,13 +81,11 @@ sanguis::server::collision::body::speed(
 sanguis::server::speed const
 sanguis::server::collision::body::speed() const
 {
-	FCPPT_ASSERT_PRE(
-		body_
-	);
-
 	return
 		sanguis::server::speed(
-			body_->speed().get()
+			FCPPT_ASSERT_OPTIONAL_ERROR(
+				body_
+			)->speed().get()
 		);
 }
 
@@ -108,10 +106,11 @@ sanguis::server::collision::body::transfer(
 )
 {
 	FCPPT_ASSERT_PRE(
-		!body_
+		!body_.has_value()
 	);
 
-	body_ =
+	// TODO: Improve this
+	sanguis::collision::world::body_unique_ptr new_body(
 		_world.create_body(
 			sanguis::collision::world::body_parameters(
 				sanguis::collision::center(
@@ -126,11 +125,23 @@ sanguis::server::collision::body::transfer(
 				_collision_group,
 				body_base_
 			)
+		)
+	);
+
+	sanguis::collision::world::body &body_ref(
+		*new_body
+	);
+
+	body_ =
+		optional_body_unique_ptr(
+			std::move(
+				new_body
+			)
 		);
 
 	return
 		_world.activate_body(
-			*body_,
+			body_ref,
 			_created
 		);
 }
@@ -140,17 +151,16 @@ sanguis::server::collision::body::remove(
 	sanguis::collision::world::object &_world
 )
 {
-	FCPPT_ASSERT_PRE(
-		body_
-	);
-
 	sanguis::collision::world::body_exit_container result(
 		_world.deactivate_body(
-			*body_
+			*FCPPT_ASSERT_OPTIONAL_ERROR(
+				body_
+			)
 		)
 	);
 
-	body_.reset();
+	body_ =
+		optional_body_unique_ptr();
 
 	return
 		result;

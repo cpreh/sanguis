@@ -1,14 +1,16 @@
 #ifndef SANGUIS_SERVER_BUFFS_SLOW_CREATE_HPP_INCLUDED
 #define SANGUIS_SERVER_BUFFS_SLOW_CREATE_HPP_INCLUDED
 
+#include <sanguis/server/buffs/buff.hpp>
 #include <sanguis/server/buffs/create_callback.hpp>
 #include <sanguis/server/buffs/slow.hpp>
 #include <sanguis/server/buffs/slow_factor.hpp>
 #include <sanguis/server/buffs/unique_ptr.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <type_traits>
@@ -59,14 +61,16 @@ slow_create(
 					)
 					{
 						return
-							sanguis::server::buffs::unique_ptr{
-								fcppt::make_unique_ptr<
+							fcppt::unique_ptr_to_base<
+								sanguis::server::buffs::buff
+							>(
+								fcppt::make_unique_ptr_fcppt<
 									Buff
 								>(
 									_with_velocity,
 									_factor
 								)
-							};
+							);
 					}
 				);
 		};

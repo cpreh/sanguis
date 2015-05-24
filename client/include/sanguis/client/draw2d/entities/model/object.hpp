@@ -22,8 +22,8 @@
 #include <sanguis/client/load/model/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_decl.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <memory>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
@@ -188,7 +188,7 @@ private:
 
 	// TODO: Make parts movable?
 	typedef
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		sanguis::client::draw2d::entities::model::part
 	>
 	part_unique_ptr;

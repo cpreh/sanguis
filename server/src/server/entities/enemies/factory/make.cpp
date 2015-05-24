@@ -6,6 +6,7 @@
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/damage/armor_array.hpp>
+#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/is_unique.hpp>
@@ -17,7 +18,8 @@
 #include <sanguis/server/entities/enemies/factory/parameters.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real.hpp>
@@ -100,11 +102,15 @@ sanguis::server::entities::enemies::factory::make(
 						}
 					)
 				:
-					fcppt::make_unique_ptr<
-						sanguis::server::entities::enemies::normal
+					fcppt::unique_ptr_to_base<
+						sanguis::server::entities::base
 					>(
-						std::move(
-							parameters
+						fcppt::make_unique_ptr_fcppt<
+							sanguis::server::entities::enemies::normal
+						>(
+							std::move(
+								parameters
+							)
 						)
 					)
 				;

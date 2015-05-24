@@ -52,9 +52,9 @@
 #include <sanguis/server/world/sight_range_map.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_fwd.hpp>
+#include <fcppt/unique_ptr_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <map>
-#include <memory>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
@@ -136,11 +136,11 @@ private:
 	> const
 	insert_base(
 		std::vector<
-			std::unique_ptr<
+			fcppt::unique_ptr<
 				Entity
 			>
 		> &,
-		std::unique_ptr<
+		fcppt::unique_ptr<
 			Entity
 		> &&,
 		sanguis::server::entities::insert_parameters const &

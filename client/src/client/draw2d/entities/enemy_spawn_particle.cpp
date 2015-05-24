@@ -10,9 +10,10 @@
 #include <sanguis/creator/background_tile.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/creator/optional_background_tile.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/optional_bind.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
 
@@ -49,16 +50,20 @@ sanguis::client::draw2d::entities::enemy_spawn_particle(
 						return
 							// TODO: Put this into a class
 							sanguis::client::draw2d::entities::optional_own_unique_ptr(
-								fcppt::make_unique_ptr<
-									sanguis::client::draw2d::entities::particle
+								fcppt::unique_ptr_to_base<
+									sanguis::client::draw2d::entities::own
 								>(
-									_load_parameters,
-									sanguis::client::draw2d::entities::particle_name{
-										FCPPT_TEXT("dirt_pile")
-									},
-									sanguis::client::draw2d::z_ordering::ground,
-									_center,
-									sanguis::client::draw2d::sprite::optional_dim()
+									fcppt::make_unique_ptr_fcppt<
+										sanguis::client::draw2d::entities::particle
+									>(
+										_load_parameters,
+										sanguis::client::draw2d::entities::particle_name{
+											FCPPT_TEXT("dirt_pile")
+										},
+										sanguis::client::draw2d::z_ordering::ground,
+										_center,
+										sanguis::client::draw2d::sprite::optional_dim()
+									)
 								)
 							);
 					case sanguis::creator::background_tile::space:

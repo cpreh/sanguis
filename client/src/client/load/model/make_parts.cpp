@@ -8,7 +8,7 @@
 #include <sanguis/model/deserialize.hpp>
 #include <sanguis/model/object.hpp>
 #include <sanguis/model/part_map.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
@@ -55,7 +55,7 @@ sanguis::client::load::model::make_parts(
 					return
 						std::make_pair(
 							_part_pair.first.get(),
-							fcppt::make_unique_ptr<
+							fcppt::make_unique_ptr_fcppt<
 								sanguis::client::load::model::part
 							>(
 								_part_pair.second,

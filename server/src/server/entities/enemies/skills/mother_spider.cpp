@@ -4,6 +4,7 @@
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
+#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>
 #include <sanguis/server/entities/enemies/attribute.hpp>
@@ -14,7 +15,8 @@
 #include <sanguis/server/entities/enemies/skills/skill.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/repeat.hpp>
 #include <fcppt/assert/optional_error.hpp>
@@ -55,38 +57,42 @@ sanguis::server::entities::enemies::skills::mother_spider::on_die(
 		]
 		{
 			environment.insert(
-				fcppt::make_unique_ptr<
-					sanguis::server::entities::enemies::normal
+				fcppt::unique_ptr_to_base<
+					sanguis::server::entities::base
 				>(
-					sanguis::server::entities::enemies::parameters{
-						_enemy.enemy_type(),
-						environment.load_context(),
-						_enemy.armor(),
-						// TODO: This parameter should probably be of type max_health
-						sanguis::server::health{
-							_enemy.max_health().get()
+					fcppt::make_unique_ptr_fcppt<
+						sanguis::server::entities::enemies::normal
+					>(
+						sanguis::server::entities::enemies::parameters{
+							_enemy.enemy_type(),
+							environment.load_context(),
+							_enemy.armor(),
+							// TODO: This parameter should probably be of type max_health
+							sanguis::server::health{
+								_enemy.max_health().get()
+							}
+							/
+							sanguis::server::health{
+								4.f
+							},
+							_enemy.max_movement_speed(),
+							_enemy.create_ai(),
+							primary_weapon.clone(),
+							sanguis::server::pickup_probability{
+								0.f
+							},
+							_enemy.exp()
+							/
+							sanguis::server::exp{
+								4.f
+							},
+							_enemy.difficulty(),
+							sanguis::server::entities::spawn_owner(
+								sanguis::server::entities::auto_weak_link{}
+							),
+							sanguis::server::auras::container{}
 						}
-						/
-						sanguis::server::health{
-							4.f
-						},
-						_enemy.max_movement_speed(),
-						_enemy.create_ai(),
-						primary_weapon.clone(),
-						sanguis::server::pickup_probability{
-							0.f
-						},
-						_enemy.exp()
-						/
-						sanguis::server::exp{
-							4.f
-						},
-						_enemy.difficulty(),
-						sanguis::server::entities::spawn_owner(
-							sanguis::server::entities::auto_weak_link{}
-						),
-						sanguis::server::auras::container{}
-					}
+					)
 				),
 				sanguis::server::entities::insert_parameters_center(
 					_enemy.center()

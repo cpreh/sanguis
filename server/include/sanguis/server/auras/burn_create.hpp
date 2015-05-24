@@ -4,6 +4,7 @@
 #include <sanguis/aura_type.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
+#include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/buff.hpp>
 #include <sanguis/server/auras/influence.hpp>
 #include <sanguis/server/auras/unique_ptr.hpp>
@@ -12,6 +13,8 @@
 #include <sanguis/server/damage/fire.hpp>
 #include <sanguis/server/damage/full.hpp>
 #include <sanguis/server/damage/make_array.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 
 
 namespace sanguis
@@ -33,22 +36,26 @@ burn_create(
 )
 {
 	return
-		fcppt::make_unique_ptr<
-			sanguis::server::auras::buff
+		fcppt::unique_ptr_to_base<
+			sanguis::server::auras::aura
 		>(
-			_radius,
-			_team,
-			sanguis::aura_type::burn,
-			sanguis::server::auras::influence::debuff,
-			sanguis::server::buffs::burn_create<
-				Buff
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::server::auras::buff
 			>(
-				_interval,
-				_damage,
-				sanguis::server::damage::make_array({
-					sanguis::server::damage::fire =
-						sanguis::server::damage::full
-				})
+				_radius,
+				_team,
+				sanguis::aura_type::burn,
+				sanguis::server::auras::influence::debuff,
+				sanguis::server::buffs::burn_create<
+					Buff
+				>(
+					_interval,
+					_damage,
+					sanguis::server::damage::make_array({
+						sanguis::server::damage::fire =
+							sanguis::server::damage::full
+					})
+				)
 			)
 		);
 }

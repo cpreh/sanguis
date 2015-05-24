@@ -3,6 +3,7 @@
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/damage/explosive.hpp>
+#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/modify_damages.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
@@ -24,7 +25,8 @@
 #include <sanguis/server/weapons/attributes/make_damage.hpp>
 #include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
 #include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 
 
 sanguis::server::weapons::rocket_launcher::rocket_launcher(
@@ -90,12 +92,16 @@ sanguis::server::weapons::unique_ptr
 sanguis::server::weapons::rocket_launcher::clone() const
 {
 	return
-		fcppt::make_unique_ptr<
-			sanguis::server::weapons::rocket_launcher
+		fcppt::unique_ptr_to_base<
+			sanguis::server::weapons::weapon
 		>(
-			this->parameters(),
-			damage_,
-			aoe_
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::server::weapons::rocket_launcher
+			>(
+				this->parameters(),
+				damage_,
+				aoe_
+			)
 		);
 }
 
@@ -106,19 +112,23 @@ sanguis::server::weapons::rocket_launcher::do_attack(
 {
 	sanguis::server::environment::insert_no_result(
 		_attack.environment(),
-		fcppt::make_unique_ptr<
-			sanguis::server::entities::projectiles::rocket
+		fcppt::unique_ptr_to_base<
+			sanguis::server::entities::base
 		>(
-			_attack.environment().load_context(),
-			this->owner().team(),
-			damage_.value(),
-			sanguis::server::entities::modify_damages(
-				this->owner(),
-				sanguis::server::damage::explosive()
-			),
-			aoe_.value(),
-			sanguis::server::direction(
-				_attack.angle().get()
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::server::entities::projectiles::rocket
+			>(
+				_attack.environment().load_context(),
+				this->owner().team(),
+				damage_.value(),
+				sanguis::server::entities::modify_damages(
+					this->owner(),
+					sanguis::server::damage::explosive()
+				),
+				aoe_.value(),
+				sanguis::server::direction(
+					_attack.angle().get()
+				)
 			)
 		),
 		sanguis::server::entities::insert_parameters(

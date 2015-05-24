@@ -4,12 +4,12 @@
 #include <sanguis/model/cell_area_fwd.hpp>
 #include <sanguis/tools/animations/frame_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <QImage>
 #include <QLabel>
 #include <QPixmap>
 #include <QWidget>
-#include <memory>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -50,7 +50,7 @@ public:
 	pixmap() const;
 private:
 	typedef
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		QLabel
 	>
 	label_unique_ptr;

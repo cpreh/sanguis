@@ -30,7 +30,7 @@
 #include <sanguis/server/states/unpaused.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <fcppt/exception.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
@@ -78,7 +78,7 @@ sanguis::server::states::running::running(
 		)
 	),
 	global_context_(
-		fcppt::make_unique_ptr<
+		fcppt::make_unique_ptr_fcppt<
 			sanguis::server::global::context
 		>(
 			sanguis::server::make_unicast_callback(

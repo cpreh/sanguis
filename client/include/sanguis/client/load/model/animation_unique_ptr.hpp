@@ -2,9 +2,7 @@
 #define SANGUIS_CLIENT_LOAD_MODEL_ANIMATION_UNIQUE_PTR_HPP_INCLUDED
 
 #include <sanguis/client/load/model/animation_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <memory>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 
 
 namespace sanguis
@@ -17,7 +15,7 @@ namespace model
 {
 
 typedef
-std::unique_ptr<
+fcppt::unique_ptr<
 	sanguis::client::load::model::animation
 >
 animation_unique_ptr;

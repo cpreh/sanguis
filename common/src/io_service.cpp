@@ -2,13 +2,13 @@
 #include <sanguis/io_service_callback.hpp>
 #include <sanguis/io_service_impl.hpp>
 #include <alda/net/io_service_wrapper.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 
 
 sanguis::io_service::io_service()
 :
 	impl_(
-		fcppt::make_unique_ptr<
+		fcppt::make_unique_ptr_fcppt<
 			sanguis::io_service_impl
 		>()
 	)
@@ -44,5 +44,6 @@ sanguis::io_service::stop()
 alda::net::io_service_wrapper const &
 sanguis::io_service::impl() const
 {
-	return impl_->get();
+	return
+		impl_->get();
 }

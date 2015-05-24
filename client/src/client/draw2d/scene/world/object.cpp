@@ -14,8 +14,11 @@
 #include <sanguis/creator/pos.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
-#include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/assert/pre.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/maybe_void.hpp>
+#include <fcppt/optional_impl.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
@@ -64,12 +67,19 @@ sanguis::client::draw2d::scene::world::object::update(
 	sanguis::client::slowed_duration const _slowed_duration
 )
 {
-	if(
-		state_
-	)
-		state_->update(
+	fcppt::maybe_void(
+		state_,
+		[
 			_slowed_duration
-		);
+		](
+			state_unique_ptr const &_state
+		)
+		{
+			_state->update(
+				_slowed_duration
+			);
+		}
+	);
 }
 
 void
@@ -78,13 +88,21 @@ sanguis::client::draw2d::scene::world::object::draw(
 	sanguis::client::draw2d::translation const _translation
 )
 {
-	if(
-		state_
-	)
-		state_->draw(
-			_render_context,
+	fcppt::maybe_void(
+		state_,
+		[
+			&_render_context,
 			_translation
-		);
+		](
+			state_unique_ptr const &_state
+		)
+		{
+			_state->draw(
+				_render_context,
+				_translation
+			);
+		}
+	);
 }
 
 void
@@ -92,12 +110,19 @@ sanguis::client::draw2d::scene::world::object::draw_after(
 	sanguis::client::draw2d::scene::world::render_parameters const &_render_parameters
 )
 {
-	if(
-		state_
-	)
-		state_->draw_after(
-			_render_parameters
-		);
+	fcppt::maybe_void(
+		state_,
+		[
+			&_render_parameters
+		](
+			state_unique_ptr const &_state
+		)
+		{
+			_state->draw_after(
+				_render_parameters
+			);
+		}
+	);
 }
 
 void
@@ -106,15 +131,17 @@ sanguis::client::draw2d::scene::world::object::change(
 )
 {
 	state_ =
-		fcppt::make_unique_ptr<
-			sanguis::client::draw2d::scene::world::state
-		>(
-			random_generator_,
-			renderer_,
-			tiles_context_,
-			debug_,
-			_parameters,
-			parameters_
+		optional_state_unique_ptr(
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::client::draw2d::scene::world::state
+			>(
+				random_generator_,
+				renderer_,
+				tiles_context_,
+				debug_,
+				_parameters,
+				parameters_
+			)
 		);
 }
 
@@ -130,12 +157,10 @@ sanguis::client::draw2d::scene::world::object::background_tile(
 	sanguis::creator::pos const _pos
 ) const
 {
-	FCPPT_ASSERT_PRE(
-		state_
-	);
-
 	return
-		state_->background_tile(
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			state_
+		)->background_tile(
 			_pos
 		);
 }
@@ -145,12 +170,10 @@ sanguis::client::draw2d::scene::world::object::test_collision(
 	sanguis::client::draw2d::collide_parameters const &_parameters
 ) const
 {
-	FCPPT_ASSERT_PRE(
-		state_
-	);
-
 	return
-		state_->test_collision(
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			state_
+		)->test_collision(
 			_parameters
 		);
 }

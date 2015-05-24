@@ -24,7 +24,8 @@
 #include <sanguis/server/weapons/attributes/make_damage.hpp>
 #include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
 #include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 
 
 sanguis::server::weapons::melee::melee(
@@ -85,12 +86,16 @@ sanguis::server::weapons::unique_ptr
 sanguis::server::weapons::melee::clone() const
 {
 	return
-		fcppt::make_unique_ptr<
-			sanguis::server::weapons::melee
+		fcppt::unique_ptr_to_base<
+			sanguis::server::weapons::weapon
 		>(
-			this->parameters(),
-			damage_,
-			damage_values_
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::server::weapons::melee
+			>(
+				this->parameters(),
+				damage_,
+				damage_values_
+			)
 		);
 }
 
@@ -101,14 +106,18 @@ sanguis::server::weapons::melee::do_attack(
 {
 	sanguis::server::environment::insert_no_result(
 		_attack.environment(),
-		fcppt::make_unique_ptr<
-			sanguis::server::entities::projectiles::melee
+		fcppt::unique_ptr_to_base<
+			sanguis::server::entities::base
 		>(
-			this->owner().team(),
-			damage_.value(),
-			sanguis::server::entities::modify_damages(
-				this->owner(),
-				damage_values_
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::server::entities::projectiles::melee
+			>(
+				this->owner().team(),
+				damage_.value(),
+				sanguis::server::entities::modify_damages(
+					this->owner(),
+					damage_values_
+				)
 			)
 		),
 		sanguis::server::entities::insert_parameters_center(

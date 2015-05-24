@@ -8,6 +8,7 @@
 #include <sanguis/server/unicast_callback.hpp>
 #include <sanguis/server/cheat/process.hpp>
 #include <sanguis/server/cheat/weapon_type.hpp>
+#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
@@ -17,8 +18,9 @@
 #include <sanguis/server/weapons/monster_spawner.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_enum_range.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/maybe_void.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
 
@@ -62,15 +64,23 @@ sanguis::server::cheat::process(
 				return;
 			case sanguis::cheat_type::monster_spawner:
 				_environment.insert(
-					fcppt::make_unique_ptr<
-						sanguis::server::entities::pickups::weapon
+					fcppt::unique_ptr_to_base<
+						sanguis::server::entities::base
 					>(
-						_environment.load_context(),
-						sanguis::server::team::players,
-						fcppt::make_unique_ptr<
-							sanguis::server::weapons::monster_spawner
+						fcppt::make_unique_ptr_fcppt<
+							sanguis::server::entities::pickups::weapon
 						>(
-							_random_generator
+							_environment.load_context(),
+							sanguis::server::team::players,
+							fcppt::unique_ptr_to_base<
+								sanguis::server::weapons::weapon
+							>(
+								fcppt::make_unique_ptr_fcppt<
+									sanguis::server::weapons::monster_spawner
+								>(
+									_random_generator
+								)
+							)
 						)
 					),
 					sanguis::server::entities::insert_parameters_center(
@@ -85,18 +95,22 @@ sanguis::server::cheat::process(
 			case sanguis::cheat_type::shotgun:
 			case sanguis::cheat_type::rocket_launcher:
 				_environment.insert(
-					fcppt::make_unique_ptr<
-						sanguis::server::entities::pickups::weapon
+					fcppt::unique_ptr_to_base<
+						sanguis::server::entities::base
 					>(
-						_environment.load_context(),
-						sanguis::server::team::players,
-						sanguis::server::weapons::create(
-							_random_generator,
-							sanguis::server::cheat::weapon_type(
-								_cheat_type
-							),
-							sanguis::server::entities::enemies::difficulty(
-								100.f
+						fcppt::make_unique_ptr_fcppt<
+							sanguis::server::entities::pickups::weapon
+						>(
+							_environment.load_context(),
+							sanguis::server::team::players,
+							sanguis::server::weapons::create(
+								_random_generator,
+								sanguis::server::cheat::weapon_type(
+									_cheat_type
+								),
+								sanguis::server::entities::enemies::difficulty(
+									100.f
+								)
 							)
 						)
 					),

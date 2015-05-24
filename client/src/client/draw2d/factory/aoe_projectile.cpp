@@ -2,11 +2,13 @@
 #include <sanguis/client/draw2d/aoe.hpp>
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
 #include <sanguis/client/draw2d/entities/aoe_bullet.hpp>
+#include <sanguis/client/draw2d/entities/base.hpp>
 #include <sanguis/client/draw2d/entities/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/factory/aoe_projectile.hpp>
 #include <sanguis/load/model/aoe_projectile_path.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 
 
 sanguis::client::draw2d::entities::unique_ptr
@@ -18,8 +20,10 @@ sanguis::client::draw2d::factory::aoe_projectile(
 )
 {
 	return
-		sanguis::client::draw2d::entities::unique_ptr(
-			fcppt::make_unique_ptr<
+		fcppt::unique_ptr_to_base<
+			sanguis::client::draw2d::entities::base
+		>(
+			fcppt::make_unique_ptr_fcppt<
 				sanguis::client::draw2d::entities::aoe_bullet
 			>(
 				_parameters,

@@ -2,9 +2,7 @@
 #define SANGUIS_SERVER_PERKS_UNIQUE_PTR_HPP_INCLUDED
 
 #include <sanguis/server/perks/perk_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <memory>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 
 
 namespace sanguis
@@ -14,9 +12,11 @@ namespace server
 namespace perks
 {
 
-typedef std::unique_ptr<
+typedef
+fcppt::unique_ptr<
 	sanguis::server::perks::perk
-> unique_ptr;
+>
+unique_ptr;
 
 }
 }

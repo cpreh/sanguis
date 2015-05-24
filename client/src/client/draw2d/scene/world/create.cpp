@@ -1,12 +1,14 @@
 #include <sanguis/client/draw2d/log.hpp>
+#include <sanguis/client/draw2d/scene/world/base.hpp>
 #include <sanguis/client/draw2d/scene/world/base_unique_ptr.hpp>
 #include <sanguis/client/draw2d/scene/world/create.hpp>
 #include <sanguis/client/draw2d/scene/world/graveyard.hpp>
 #include <sanguis/client/draw2d/scene/world/none.hpp>
 #include <sanguis/client/draw2d/scene/world/parameters.hpp>
 #include <sanguis/creator/name.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>
 
@@ -23,12 +25,16 @@ sanguis::client::draw2d::scene::world::create(
 		FCPPT_TEXT("graveyard")
 	)
 		return
-			fcppt::make_unique_ptr<
-				sanguis::client::draw2d::scene::world::graveyard
+			fcppt::unique_ptr_to_base<
+				sanguis::client::draw2d::scene::world::base
 			>(
-				_parameters.load_context(),
-				_parameters.client_system(),
-				_parameters.viewport_manager()
+				fcppt::make_unique_ptr_fcppt<
+					sanguis::client::draw2d::scene::world::graveyard
+				>(
+					_parameters.load_context(),
+					_parameters.client_system(),
+					_parameters.viewport_manager()
+				)
 			);
 	if(
 		_name.get()
@@ -36,9 +42,13 @@ sanguis::client::draw2d::scene::world::create(
 		FCPPT_TEXT("start_area")
 	)
 		return
-			fcppt::make_unique_ptr<
-				sanguis::client::draw2d::scene::world::none
-			>();
+			fcppt::unique_ptr_to_base<
+				sanguis::client::draw2d::scene::world::base
+			>(
+				fcppt::make_unique_ptr_fcppt<
+					sanguis::client::draw2d::scene::world::none
+				>()
+			);
 
 	FCPPT_LOG_ERROR(
 		sanguis::client::draw2d::log(),
@@ -49,7 +59,11 @@ sanguis::client::draw2d::scene::world::create(
 	);
 
 	return
-		fcppt::make_unique_ptr<
-			sanguis::client::draw2d::scene::world::none
-		>();
+		fcppt::unique_ptr_to_base<
+			sanguis::client::draw2d::scene::world::base
+		>(
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::client::draw2d::scene::world::none
+			>()
+		);
 }

@@ -20,9 +20,8 @@
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <memory>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/optional_decl.hpp>
+#include <fcppt/unique_ptr_decl.hpp>
 
 
 namespace sanguis
@@ -99,13 +98,18 @@ private:
 	sanguis::client::draw::debug const debug_;
 
 	typedef
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		sanguis::client::draw2d::scene::world::state
 	>
 	state_unique_ptr;
 
-	state_unique_ptr state_;
+	typedef
+	fcppt::optional<
+		state_unique_ptr
+	>
+	optional_state_unique_ptr;
 
+	optional_state_unique_ptr state_;
 };
 
 }

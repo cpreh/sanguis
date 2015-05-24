@@ -9,9 +9,7 @@
 #include <sge/image2d/system_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <memory>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 
 
 namespace sanguis
@@ -46,11 +44,11 @@ private:
 
 	~context();
 
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		sanguis::client::load::resource::textures
 	> const textures_;
 
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		sanguis::client::load::resource::sounds
 	> const sounds_;
 };

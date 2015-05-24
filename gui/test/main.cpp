@@ -13,6 +13,7 @@
 #include <sanguis/gui/style/base.hpp>
 #include <sanguis/gui/style/base_unique_ptr.hpp>
 #include <sanguis/gui/style/create.hpp>
+#include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/button.hpp>
 #include <sanguis/gui/widget/choices.hpp>
@@ -93,7 +94,8 @@
 #include <awl/main/exit_success.hpp>
 #include <awl/main/function_context_fwd.hpp>
 #include <fcppt/exception.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/container/tree/map.hpp>
@@ -244,42 +246,54 @@ try
 		{
 			return
 				sanguis::gui::widget::unique_ptr_tree(
-					fcppt::make_unique_ptr<
-						sanguis::gui::widget::text
+					fcppt::unique_ptr_to_base<
+						sanguis::gui::widget::base
 					>(
-						*style,
-						sys.renderer_device_ffp(),
-						*font,
-						_label,
-						sanguis::gui::text_color(
-							sge::image::color::predef::black()
-						),
-						sanguis::gui::optional_needed_width()
+						fcppt::make_unique_ptr_fcppt<
+							sanguis::gui::widget::text
+						>(
+							*style,
+							sys.renderer_device_ffp(),
+							*font,
+							_label,
+							sanguis::gui::text_color(
+								sge::image::color::predef::black()
+							),
+							sanguis::gui::optional_needed_width()
+						)
 					),
 					fcppt::assign::make_container<
 						sanguis::gui::widget::unique_ptr_tree::child_list
 					>(
 						sanguis::gui::widget::unique_ptr_tree(
-							fcppt::make_unique_ptr<
-								sanguis::gui::widget::button
+							fcppt::unique_ptr_to_base<
+								sanguis::gui::widget::base
 							>(
-								*style,
-								sys.renderer_device_ffp(),
-								*font,
-								SGE_FONT_LIT("Child 1"),
-								sanguis::gui::optional_needed_width()
+								fcppt::make_unique_ptr_fcppt<
+									sanguis::gui::widget::button
+								>(
+									*style,
+									sys.renderer_device_ffp(),
+									*font,
+									SGE_FONT_LIT("Child 1"),
+									sanguis::gui::optional_needed_width()
+								)
 							)
 						)
 					)(
 						sanguis::gui::widget::unique_ptr_tree(
-							fcppt::make_unique_ptr<
-								sanguis::gui::widget::button
+							fcppt::unique_ptr_to_base<
+								sanguis::gui::widget::base
 							>(
-								*style,
-								sys.renderer_device_ffp(),
-								*font,
-								SGE_FONT_LIT("Child 2 asdljasdljasdklasdjklasdjlkasdjaskldjjasdkljasdklasdjlk"),
-								sanguis::gui::optional_needed_width()
+								fcppt::make_unique_ptr_fcppt<
+									sanguis::gui::widget::button
+								>(
+									*style,
+									sys.renderer_device_ffp(),
+									*font,
+									SGE_FONT_LIT("Child 2 asdljasdljasdklasdjklasdjlkasdjaskldjjasdkljasdklasdjlk"),
+									sanguis::gui::optional_needed_width()
+								)
 							)
 						)
 					)
@@ -296,7 +310,7 @@ try
 		)
 		{
 			return
-				fcppt::make_unique_ptr<
+				fcppt::make_unique_ptr_fcppt<
 					sanguis::gui::widget::tree
 				>(
 					context,

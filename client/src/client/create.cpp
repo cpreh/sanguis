@@ -1,7 +1,9 @@
 #include <sanguis/client/create.hpp>
 #include <sanguis/client/object.hpp>
+#include <sanguis/client/object_base.hpp>
 #include <sanguis/client/object_base_unique_ptr.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/variables_map.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -13,9 +15,13 @@ sanguis::client::create(
 )
 {
 	return
-		fcppt::make_unique_ptr<
-			sanguis::client::object
+		fcppt::unique_ptr_to_base<
+			sanguis::client::object_base
 		>(
-			_vm
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::client::object
+			>(
+				_vm
+			)
 		);
 }

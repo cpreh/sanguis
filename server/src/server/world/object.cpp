@@ -126,6 +126,8 @@
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/enum_array_fold.hpp>
 #include <fcppt/algorithm/map_iteration_second.hpp>
 #include <fcppt/algorithm/sequence_iteration.hpp>
@@ -138,7 +140,6 @@
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <memory>
 #include <utility>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
@@ -355,11 +356,12 @@ sanguis::server::world::object::insert_with_id(
 	sanguis::server::entities::insert_parameters const &_insert_parameters
 )
 {
+	// TODO: Fix this!
 	sanguis::server::entities::with_id_unique_ptr cur_entity(
 		&dynamic_cast<
 			sanguis::server::entities::with_id &
 		>(
-			*_entity.release()
+			*_entity.release_ownership()
 		)
 	);
 
@@ -510,11 +512,11 @@ fcppt::optional<
 > const
 sanguis::server::world::object::insert_base(
 	std::vector<
-		std::unique_ptr<
+		fcppt::unique_ptr<
 			Entity
 		>
 	> &_container,
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		Entity
 	> &&_entity,
 	sanguis::server::entities::insert_parameters const &_insert_parameters
@@ -989,8 +991,12 @@ sanguis::server::world::object::request_transfer(
 
 				// TODO: Make a function for this!
 				sanguis::server::entities::unique_ptr entity_ptr(
-					std::move(
-						it->second
+					fcppt::unique_ptr_to_base<
+						sanguis::server::entities::base
+					>(
+						std::move(
+							it->second
+						)
 					)
 				);
 

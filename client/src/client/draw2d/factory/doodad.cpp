@@ -1,6 +1,7 @@
 #include <sanguis/doodad_type.hpp>
 #include <sanguis/client/optional_health_pair.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
+#include <sanguis/client/draw2d/entities/base.hpp>
 #include <sanguis/client/draw2d/entities/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
@@ -10,7 +11,8 @@
 #include <sanguis/client/draw2d/factory/doodad.hpp>
 #include <sanguis/client/draw2d/sprite/normal/white.hpp>
 #include <sanguis/load/model/doodad_path.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 
 
 sanguis::client::draw2d::entities::unique_ptr
@@ -20,20 +22,24 @@ sanguis::client::draw2d::factory::doodad(
 )
 {
 	return
-		fcppt::make_unique_ptr<
-			sanguis::client::draw2d::entities::model::object
+		fcppt::unique_ptr_to_base<
+			sanguis::client::draw2d::entities::base
 		>(
-			sanguis::client::draw2d::entities::model::parameters(
-				_parameters,
-				sanguis::load::model::doodad_path(
-					_doodad_type
-				),
-				sanguis::client::draw2d::entities::order_vector{
-					sanguis::client::draw2d::z_ordering::ground
-				},
-				sanguis::client::optional_health_pair(),
-				sanguis::client::draw2d::entities::model::decay_option::immediate,
-				sanguis::client::draw2d::sprite::normal::white()
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::client::draw2d::entities::model::object
+			>(
+				sanguis::client::draw2d::entities::model::parameters(
+					_parameters,
+					sanguis::load::model::doodad_path(
+						_doodad_type
+					),
+					sanguis::client::draw2d::entities::order_vector{
+						sanguis::client::draw2d::z_ordering::ground
+					},
+					sanguis::client::optional_health_pair(),
+					sanguis::client::draw2d::entities::model::decay_option::immediate,
+					sanguis::client::draw2d::sprite::normal::white()
+				)
 			)
 		);
 }

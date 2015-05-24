@@ -2,9 +2,7 @@
 #define SANGUIS_COLLISION_WORLD_OBJECT_UNIQUE_PTR_HPP_INCLUDED
 
 #include <sanguis/collision/world/object_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <memory>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 
 
 namespace sanguis
@@ -15,7 +13,7 @@ namespace world
 {
 
 typedef
-std::unique_ptr<
+fcppt::unique_ptr<
 	sanguis::collision::world::object
 >
 object_unique_ptr;

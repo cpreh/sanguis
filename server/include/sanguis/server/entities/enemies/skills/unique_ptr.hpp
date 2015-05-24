@@ -2,9 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_ENEMIES_SKILLS_UNIQUE_PTR_HPP_INCLUDED
 
 #include <sanguis/server/entities/enemies/skills/skill_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <memory>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 
 
 namespace sanguis
@@ -19,7 +17,7 @@ namespace skills
 {
 
 typedef
-std::unique_ptr<
+fcppt::unique_ptr<
 	sanguis::server::entities::enemies::skills::skill
 >
 unique_ptr;

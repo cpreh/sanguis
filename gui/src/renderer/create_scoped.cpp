@@ -1,9 +1,11 @@
 #include <sanguis/gui/impl/renderer/scoped.hpp>
+#include <sanguis/gui/renderer/base.hpp>
 #include <sanguis/gui/renderer/base_unique_ptr.hpp>
 #include <sanguis/gui/renderer/create_scoped.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 
 
 sanguis::gui::renderer::base_unique_ptr
@@ -13,10 +15,14 @@ sanguis::gui::renderer::create_scoped(
 )
 {
 	return
-		fcppt::make_unique_ptr<
-			sanguis::gui::impl::renderer::scoped
+		fcppt::unique_ptr_to_base<
+			sanguis::gui::renderer::base
 		>(
-			_renderer,
-			_context
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::gui::impl::renderer::scoped
+			>(
+				_renderer,
+				_context
+			)
 		);
 }

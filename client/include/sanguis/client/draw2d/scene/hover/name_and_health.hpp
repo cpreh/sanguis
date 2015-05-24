@@ -12,9 +12,7 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_decl.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <memory>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 
 
 namespace sanguis
@@ -60,7 +58,7 @@ private:
 	optional_name;
 
 	typedef
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		sanguis::client::draw2d::scene::hover::healthbar
 	>
 	healthbar_unique_ptr;

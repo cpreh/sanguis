@@ -13,7 +13,9 @@
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <sanguis/server/weapons/weapon.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 
 
 sanguis::server::weapons::unique_ptr
@@ -22,40 +24,44 @@ sanguis::server::weapons::player_start_weapon(
 )
 {
 	return
-		fcppt::make_unique_ptr<
-			sanguis::server::weapons::pistol
+		fcppt::unique_ptr_to_base<
+			sanguis::server::weapons::weapon
 		>(
-			_random_generator,
-			sanguis::weapon_type(
-				sanguis::primary_weapon_type::pistol
-			),
-			sanguis::server::weapons::pistol_parameters(
-				sanguis::server::weapons::accuracy(
-					0.8f
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::server::weapons::pistol
+			>(
+				_random_generator,
+				sanguis::weapon_type(
+					sanguis::primary_weapon_type::pistol
 				),
-				sanguis::server::weapons::backswing_time(
-					sanguis::duration_second(
-						0.3f
+				sanguis::server::weapons::pistol_parameters(
+					sanguis::server::weapons::accuracy(
+						0.8f
+					),
+					sanguis::server::weapons::backswing_time(
+						sanguis::duration_second(
+							0.3f
+						)
+					),
+					sanguis::server::weapons::damage(
+						5.f
+					),
+					sanguis::server::weapons::cast_point(
+						sanguis::duration_second(
+							0.2f
+						)
+					),
+					sanguis::server::weapons::magazine_size(
+						18u
+					),
+					sanguis::server::weapons::reload_time(
+						sanguis::duration_second(
+							2.f
+						)
+					),
+					sanguis::server::weapons::range(
+						1000.f
 					)
-				),
-				sanguis::server::weapons::damage(
-					5.f
-				),
-				sanguis::server::weapons::cast_point(
-					sanguis::duration_second(
-						0.2f
-					)
-				),
-				sanguis::server::weapons::magazine_size(
-					18u
-				),
-				sanguis::server::weapons::reload_time(
-					sanguis::duration_second(
-						2.f
-					)
-				),
-				sanguis::server::weapons::range(
-					1000.f
 				)
 			)
 		);

@@ -20,7 +20,7 @@
 #include <sanguis/messages/roles/required_perk_parent_level.hpp>
 #include <sanguis/messages/roles/required_perk_player_level.hpp>
 #include <sanguis/messages/server/types/perk_tree_node_vector.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/find_if_exn.hpp>
@@ -49,7 +49,7 @@ sanguis::client::perk::make_tree(
 	// the perks
 
 	sanguis::client::perk::tree_unique_ptr ret(
-		fcppt::make_unique_ptr<
+		fcppt::make_unique_ptr_fcppt<
 			sanguis::client::perk::tree
 		>(
 			sanguis::client::perk::optional_info()

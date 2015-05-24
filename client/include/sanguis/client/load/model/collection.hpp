@@ -6,9 +6,9 @@
 #include <sanguis/client/load/resource/context_fwd.hpp>
 #include <sanguis/load/model/path.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <map>
-#include <memory>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -42,7 +42,7 @@ private:
 	sanguis::client::load::resource::context const &resources_;
 
 	typedef
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		sanguis::client::load::model::object
 	>
 	model_unique_ptr;

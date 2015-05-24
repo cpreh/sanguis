@@ -14,7 +14,7 @@
 #include <sge/rucksack/axis.hpp>
 #include <sge/rucksack/dim.hpp>
 #include <sge/rucksack/vector.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
@@ -66,7 +66,7 @@ sanguis::client::gui::hud::weapon_details::weapon_details(
 						)
 						{
 							return
-								fcppt::make_unique_ptr<
+								fcppt::make_unique_ptr_fcppt<
 									sanguis::client::gui::hud::weapon_tooltip
 								>(
 									_gui_context,

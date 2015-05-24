@@ -24,7 +24,9 @@
 #include <sanguis/server/weapons/pistol_parameters.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <sanguis/server/weapons/weapon.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cmath>
 #include <fcppt/config/external_end.hpp>
@@ -55,40 +57,44 @@ sanguis::server::entities::enemies::factory::zombie00(
 					1000.f
 				)
 			),
-			fcppt::make_unique_ptr<
-				sanguis::server::weapons::pistol
+			fcppt::unique_ptr_to_base<
+				sanguis::server::weapons::weapon
 			>(
-				_parameters.random_generator(),
-				sanguis::weapon_type(
-					sanguis::primary_weapon_type::pistol
-				),
-				sanguis::server::weapons::pistol_parameters(
-					sanguis::server::weapons::accuracy(
-						0.9f
+				fcppt::make_unique_ptr_fcppt<
+					sanguis::server::weapons::pistol
+				>(
+					_parameters.random_generator(),
+					sanguis::weapon_type(
+						sanguis::primary_weapon_type::pistol
 					),
-					sanguis::server::weapons::backswing_time(
-						sanguis::duration_second(
-							1.f
+					sanguis::server::weapons::pistol_parameters(
+						sanguis::server::weapons::accuracy(
+							0.9f
+						),
+						sanguis::server::weapons::backswing_time(
+							sanguis::duration_second(
+								1.f
+							)
+						),
+						sanguis::server::weapons::damage(
+							10.f
+						),
+						sanguis::server::weapons::cast_point(
+							sanguis::duration_second(
+								0
+							)
+						),
+						sanguis::server::weapons::magazine_size(
+							5u
+						),
+						sanguis::server::weapons::reload_time(
+							sanguis::duration_second(
+								5.f
+							)
+						),
+						sanguis::server::weapons::range(
+							1000.f
 						)
-					),
-					sanguis::server::weapons::damage(
-						10.f
-					),
-					sanguis::server::weapons::cast_point(
-						sanguis::duration_second(
-							0
-						)
-					),
-					sanguis::server::weapons::magazine_size(
-						5u
-					),
-					sanguis::server::weapons::reload_time(
-						sanguis::duration_second(
-							5.f
-						)
-					),
-					sanguis::server::weapons::range(
-						1000.f
 					)
 				)
 			),

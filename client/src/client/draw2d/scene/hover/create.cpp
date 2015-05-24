@@ -1,12 +1,14 @@
 #include <sanguis/client/draw2d/entities/hover/info.hpp>
 #include <sanguis/client/draw2d/entities/hover/name_and_health_fwd.hpp>
 #include <sanguis/client/draw2d/entities/hover/weapon_fwd.hpp>
+#include <sanguis/client/draw2d/scene/hover/base.hpp>
 #include <sanguis/client/draw2d/scene/hover/base_unique_ptr.hpp>
 #include <sanguis/client/draw2d/scene/hover/create.hpp>
 #include <sanguis/client/draw2d/scene/hover/name_and_health.hpp>
 #include <sanguis/client/draw2d/scene/hover/parameters.hpp>
 #include <sanguis/client/draw2d/scene/hover/weapon.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/variant/match.hpp>
 
 
@@ -26,8 +28,10 @@ sanguis::client::draw2d::scene::hover::create(
 			)
 			{
 				return
-					sanguis::client::draw2d::scene::hover::base_unique_ptr{
-						fcppt::make_unique_ptr<
+					fcppt::unique_ptr_to_base<
+						sanguis::client::draw2d::scene::hover::base
+					>(
+						fcppt::make_unique_ptr_fcppt<
 							sanguis::client::draw2d::scene::hover::name_and_health
 						>(
 							_parameters.renderer(),
@@ -36,7 +40,7 @@ sanguis::client::draw2d::scene::hover::create(
 							_parameters.radius(),
 							_name_and_health
 						)
-					};
+					);
 			},
 			[
 				&_parameters
@@ -45,8 +49,10 @@ sanguis::client::draw2d::scene::hover::create(
 			)
 			{
 				return
-					sanguis::client::draw2d::scene::hover::base_unique_ptr{
-						fcppt::make_unique_ptr<
+					fcppt::unique_ptr_to_base<
+						sanguis::client::draw2d::scene::hover::base
+					>(
+						fcppt::make_unique_ptr_fcppt<
 							sanguis::client::draw2d::scene::hover::weapon
 						>(
 							_parameters.gui_style(),
@@ -58,7 +64,7 @@ sanguis::client::draw2d::scene::hover::create(
 							_parameters.player_weapons(),
 							_weapon
 						)
-					};
+					);
 			}
 		);
 }

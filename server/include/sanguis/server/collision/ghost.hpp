@@ -11,6 +11,7 @@
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/collision/ghost_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/optional_decl.hpp>
 #include <fcppt/reference_wrapper_decl.hpp>
 
 
@@ -72,7 +73,13 @@ private:
 
 	sanguis::server::radius radius_;
 
-	sanguis::collision::world::ghost_unique_ptr impl_;
+	typedef
+	fcppt::optional<
+		sanguis::collision::world::ghost_unique_ptr
+	>
+	optional_ghost_unique_ptr;
+
+	optional_ghost_unique_ptr impl_;
 };
 
 }

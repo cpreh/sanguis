@@ -12,6 +12,7 @@
 #include <sanguis/tools/animations/path_model_pair.hpp>
 #include <sanguis/tools/animations/sge_systems_fwd.hpp>
 #include <fcppt/optional_decl.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/config/clang_version_at_least.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -22,7 +23,6 @@
 #include <QMessageBox>
 #include <QString>
 #include <QTimer>
-#include <memory>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
@@ -165,7 +165,7 @@ private:
 
 	sanguis::tools::animations::sge_systems const &sge_systems_;
 
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		Ui::MainWindow
 	> const ui_;
 

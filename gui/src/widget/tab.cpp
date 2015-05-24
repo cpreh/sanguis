@@ -2,6 +2,7 @@
 #include <sanguis/gui/optional_needed_width.hpp>
 #include <sanguis/gui/impl/relayout_ancestor.hpp>
 #include <sanguis/gui/style/base_fwd.hpp>
+#include <sanguis/gui/widget/base.hpp>
 #include <sanguis/gui/widget/box_container.hpp>
 #include <sanguis/gui/widget/button.hpp>
 #include <sanguis/gui/widget/reference.hpp>
@@ -17,8 +18,9 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
@@ -108,15 +110,19 @@ sanguis::gui::widget::tab::tab(
 				};
 
 				return
-					fcppt::make_unique_ptr<
-						gui_button
+					fcppt::unique_ptr_to_base<
+						sanguis::gui::widget::base
 					>(
-						_style,
-						_renderer,
-						_font,
-						_pair.name(),
-						_pair.reference(),
-						*this
+						fcppt::make_unique_ptr_fcppt<
+							gui_button
+						>(
+							_style,
+							_renderer,
+							_font,
+							_pair.name(),
+							_pair.reference(),
+							*this
+						)
 					);
 			}
 		)

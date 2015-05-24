@@ -11,7 +11,8 @@
 #include <sanguis/server/ai/tree/priority_sequence.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_literal_strong_typedef.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assign/make_container.hpp>
 
 
@@ -39,26 +40,30 @@ sanguis::server::ai::create_attack_health(
 			);
 
 			return
-				fcppt::make_unique_ptr<
-					sanguis::server::ai::tree::priority_sequence
+				fcppt::unique_ptr_to_base<
+					sanguis::server::ai::tree::base
 				>(
-					fcppt::assign::make_container<
-						sanguis::server::ai::tree::container
+					fcppt::make_unique_ptr_fcppt<
+						sanguis::server::ai::tree::priority_sequence
 					>(
-						sanguis::server::ai::tree::make_leaf<
-							sanguis::server::ai::behavior::attack_health
+						fcppt::assign::make_container<
+							sanguis::server::ai::tree::container
 						>(
-							_context,
-							_sight_range,
-							speed_factor
-						)
-					)(
-						sanguis::server::ai::tree::make_leaf<
-							sanguis::server::ai::behavior::wander
-						>(
-							_context,
-							_random_generator,
-							speed_factor
+							sanguis::server::ai::tree::make_leaf<
+								sanguis::server::ai::behavior::attack_health
+							>(
+								_context,
+								_sight_range,
+								speed_factor
+							)
+						)(
+							sanguis::server::ai::tree::make_leaf<
+								sanguis::server::ai::behavior::wander
+							>(
+								_context,
+								_random_generator,
+								speed_factor
+							)
 						)
 					)
 				);

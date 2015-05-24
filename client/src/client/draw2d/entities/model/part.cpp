@@ -28,7 +28,7 @@
 #include <sge/audio/sound/repeat.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/optional_comparison.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -297,7 +297,7 @@ sanguis::client::draw2d::entities::model::part::load_animation(
 
 	animation_ =
 		optional_scoped_texture_animation(
-			fcppt::make_unique_ptr<
+			fcppt::make_unique_ptr_fcppt<
 				sanguis::client::draw2d::sprite::normal::texture_animation
 			>(
 				series,

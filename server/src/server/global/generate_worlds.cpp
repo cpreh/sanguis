@@ -186,9 +186,9 @@ sanguis::server::global::generate_worlds(
 		);
 
 		sanguis::creator::opening const current_opening(
-			worlds[
+			worlds.at(
 				world_id
-			]->openings()[
+			)->openings()[
 				sanguis::creator::opening_type::entry
 			].at(
 				0u
@@ -196,9 +196,9 @@ sanguis::server::global::generate_worlds(
 		);
 
 		sanguis::creator::opening const previous_opening(
-			worlds[
+			worlds.at(
 				previous_id
-			]->openings()[
+			)->openings()[
 				sanguis::creator::opening_type::exit
 			].at(
 				0u

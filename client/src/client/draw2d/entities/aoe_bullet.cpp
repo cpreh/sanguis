@@ -6,12 +6,14 @@
 #include <sanguis/client/draw2d/entities/explosion.hpp>
 #include <sanguis/client/draw2d/entities/load_parameters.hpp>
 #include <sanguis/client/draw2d/entities/order_vector.hpp>
+#include <sanguis/client/draw2d/entities/own.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/normal/white.hpp>
 #include <sanguis/load/model/path_fwd.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 
 
 sanguis::client::draw2d::entities::aoe_bullet::aoe_bullet(
@@ -53,12 +55,16 @@ void
 sanguis::client::draw2d::entities::aoe_bullet::on_die()
 {
 	insert_(
-		fcppt::make_unique_ptr<
-			sanguis::client::draw2d::entities::explosion
+		fcppt::unique_ptr_to_base<
+			sanguis::client::draw2d::entities::own
 		>(
-			load_parameters_,
-			this->center(),
-			aoe_
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::client::draw2d::entities::explosion
+			>(
+				load_parameters_,
+				this->center(),
+				aoe_
+			)
 		)
 	);
 

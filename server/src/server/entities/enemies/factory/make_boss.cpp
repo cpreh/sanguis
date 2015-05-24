@@ -5,7 +5,8 @@
 #include <sanguis/server/entities/enemies/boss.hpp>
 #include <sanguis/server/entities/enemies/parameters.hpp>
 #include <sanguis/server/entities/enemies/factory/make_boss.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -18,16 +19,20 @@ sanguis::server::entities::enemies::factory::make_boss(
 )
 {
 	return
-		fcppt::make_unique_ptr<
-			sanguis::server::entities::enemies::boss
+		fcppt::unique_ptr_to_base<
+			sanguis::server::entities::base
 		>(
-			std::move(
-				_parameters
-				.ai(
-					sanguis::server::ai::create_boss(
-						_random_generator,
-						sanguis::server::ai::sight_range(
-							1000.f
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::server::entities::enemies::boss
+			>(
+				std::move(
+					_parameters
+					.ai(
+						sanguis::server::ai::create_boss(
+							_random_generator,
+							sanguis::server::ai::sight_range(
+								1000.f
+							)
 						)
 					)
 				)

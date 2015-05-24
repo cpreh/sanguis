@@ -17,9 +17,7 @@
 #include <sanguis/server/weapons/irs.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <memory>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/optional_decl.hpp>
 
 
 namespace sanguis
@@ -69,7 +67,13 @@ private:
 
 	sanguis::server::ai::context ai_context_;
 
-	sanguis::server::ai::tree::base_unique_ptr ai_;
+	typedef
+	fcppt::optional<
+		sanguis::server::ai::tree::base_unique_ptr
+	>
+	optional_ai_unique_ptr;
+
+	optional_ai_unique_ptr ai_;
 };
 
 }

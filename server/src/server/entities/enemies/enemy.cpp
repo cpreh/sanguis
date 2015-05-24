@@ -26,6 +26,7 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/container.hpp>
+#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/exp_area.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
@@ -46,8 +47,9 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/maybe_void.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -187,10 +189,14 @@ sanguis::server::entities::enemies::enemy::remove_from_game()
 
 	sanguis::server::environment::insert_no_result(
 		cur_environment,
-		fcppt::make_unique_ptr<
-			sanguis::server::entities::exp_area
+		fcppt::unique_ptr_to_base<
+			sanguis::server::entities::base
 		>(
-			exp_
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::server::entities::exp_area
+			>(
+				exp_
+			)
 		),
 		sanguis::server::entities::insert_parameters_center(
 			this->center()

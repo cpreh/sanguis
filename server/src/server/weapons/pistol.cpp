@@ -24,7 +24,8 @@
 #include <sanguis/server/weapons/attributes/make_damage.hpp>
 #include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
 #include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 
 
 sanguis::server::weapons::pistol::pistol(
@@ -79,11 +80,15 @@ sanguis::server::weapons::unique_ptr
 sanguis::server::weapons::pistol::clone() const
 {
 	return
-		fcppt::make_unique_ptr<
-			sanguis::server::weapons::pistol
+		fcppt::unique_ptr_to_base<
+			sanguis::server::weapons::weapon
 		>(
-			this->parameters(),
-			damage_
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::server::weapons::pistol
+			>(
+				this->parameters(),
+				damage_
+			)
 		);
 }
 
@@ -94,21 +99,25 @@ sanguis::server::weapons::pistol::do_attack(
 {
 	sanguis::server::environment::insert_no_result(
 		_attack.environment(),
-		fcppt::make_unique_ptr<
-			sanguis::server::entities::projectiles::simple_bullet
+		fcppt::unique_ptr_to_base<
+			sanguis::server::entities::base
 		>(
-			_attack.environment().load_context(),
-			this->owner().team(),
-			damage_.value(),
-			sanguis::server::entities::modify_damages(
-				this->owner(),
-				sanguis::server::damage::make_array({
-					sanguis::server::damage::piercing =
-						sanguis::server::damage::full
-				})
-			),
-			sanguis::server::direction(
-				_attack.angle().get()
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::server::entities::projectiles::simple_bullet
+			>(
+				_attack.environment().load_context(),
+				this->owner().team(),
+				damage_.value(),
+				sanguis::server::entities::modify_damages(
+					this->owner(),
+					sanguis::server::damage::make_array({
+						sanguis::server::damage::piercing =
+							sanguis::server::damage::full
+					})
+				),
+				sanguis::server::direction(
+					_attack.angle().get()
+				)
 			)
 		),
 		sanguis::server::entities::insert_parameters(

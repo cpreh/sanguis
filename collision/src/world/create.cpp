@@ -2,7 +2,8 @@
 #include <sanguis/collision/world/create.hpp>
 #include <sanguis/collision/world/object_unique_ptr.hpp>
 #include <sanguis/collision/world/parameters_fwd.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 
 
 sanguis::collision::world::object_unique_ptr
@@ -11,9 +12,13 @@ sanguis::collision::world::create(
 )
 {
 	return
-		fcppt::make_unique_ptr<
-			sanguis::collision::impl::world::simple::object
+		fcppt::unique_ptr_to_base<
+			sanguis::collision::world::object
 		>(
-			_parameters
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::collision::impl::world::simple::object
+			>(
+				_parameters
+			)
 		);
 }

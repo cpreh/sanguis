@@ -9,9 +9,9 @@
 #include <sanguis/server/damage/make_array.hpp>
 #include <sanguis/server/damage/piercing.hpp>
 #include <sanguis/server/damage/unit.hpp>
+#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/modify_damages.hpp>
-#include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/with_perks.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/projectiles/rocket.hpp>
@@ -23,7 +23,8 @@
 #include <sanguis/server/perks/perk.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/repeat.hpp>
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/random/distribution/basic_impl.hpp>
@@ -134,8 +135,10 @@ sanguis::server::perks::choleric::update(
 				_env,
 				spawn_bullets
 				?
-					sanguis::server::entities::unique_ptr(
-						fcppt::make_unique_ptr<
+					fcppt::unique_ptr_to_base<
+						sanguis::server::entities::base
+					>(
+						fcppt::make_unique_ptr_fcppt<
 							sanguis::server::entities::projectiles::simple_bullet
 						>(
 							_env.load_context(),
@@ -154,8 +157,10 @@ sanguis::server::perks::choleric::update(
 						)
 					)
 				:
-					sanguis::server::entities::unique_ptr(
-						fcppt::make_unique_ptr<
+					fcppt::unique_ptr_to_base<
+						sanguis::server::entities::base
+					>(
+						fcppt::make_unique_ptr_fcppt<
 							sanguis::server::entities::projectiles::rocket
 						>(
 							_env.load_context(),

@@ -34,12 +34,12 @@
 #include <sanguis/messages/server/unpause_fwd.hpp>
 #include <sge/input/cursor/activatable_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/statechart/result.hpp>
 #include <boost/statechart/state.hpp>
-#include <memory>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -212,21 +212,21 @@ private:
 
 	sanguis::client::load::hud::context hud_resources_;
 
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		sanguis::client::console::object
 	> const console_;
 
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		sanguis::client::sound_manager
 	> const sound_manager_;
 
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		sanguis::client::gui::hud::object
 	> const hud_;
 
 	sanguis::client::draw::base_unique_ptr const drawer_;
 
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		sanguis::client::control::input_translator
 	> const input_translator_;
 

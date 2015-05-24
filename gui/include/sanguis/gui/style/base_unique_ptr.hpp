@@ -2,9 +2,7 @@
 #define SANGUIS_GUI_STYLE_BASE_UNIQUE_PTR_HPP_INCLUDED
 
 #include <sanguis/gui/style/base_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <memory>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 
 
 namespace sanguis
@@ -15,7 +13,7 @@ namespace style
 {
 
 typedef
-std::unique_ptr<
+fcppt::unique_ptr<
 	sanguis::gui::style::base
 >
 base_unique_ptr;

@@ -30,7 +30,7 @@
 #include <sanguis/tools/libmergeimage/saved_image_vector.hpp>
 #include <sanguis/tools/libmergeimage/to_model.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/maybe_multi.hpp>
 #include <fcppt/maybe_void.hpp>
@@ -69,7 +69,7 @@ sanguis::tools::animations::main_window::main_window(
 		_sge_systems
 	),
 	ui_(
-		fcppt::make_unique_ptr<
+		fcppt::make_unique_ptr_fcppt<
 			Ui::MainWindow
 		>()
 	),

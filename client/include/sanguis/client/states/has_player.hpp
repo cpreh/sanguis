@@ -14,12 +14,12 @@
 #include <sanguis/messages/server/level_up_fwd.hpp>
 #include <sanguis/messages/server/remove_id_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/statechart/result.hpp>
 #include <boost/statechart/state.hpp>
-#include <memory>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -104,11 +104,11 @@ private:
 		sanguis::perk_type
 	);
 
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		sanguis::client::control::action_handler
 	> const action_handler_;
 
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		sanguis::client::perk::state
 	> const perk_state_;
 };

@@ -17,6 +17,7 @@
 #include <sanguis/server/ai/target.hpp>
 #include <sanguis/server/ai/behavior/attack.hpp>
 #include <sanguis/server/ai/behavior/base.hpp>
+#include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/target.hpp>
 #include <sanguis/server/auras/target_kind.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
@@ -38,9 +39,10 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/maybe_void.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -83,26 +85,30 @@ sanguis::server::ai::behavior::attack::transfer()
 	return
 		sanguis::server::entities::transfer_result(
 			this->me().add_aura(
-				fcppt::make_unique_ptr<
-					sanguis::server::auras::target
+				fcppt::unique_ptr_to_base<
+					sanguis::server::auras::aura
 				>(
-					sanguis::server::radius(
-						sight_range_.get()
-					),
-					this->me().team(),
-					sanguis::server::auras::target_kind::enemy,
-					sanguis::server::add_target_callback(
-						std::bind(
-							&sanguis::server::ai::behavior::attack::target_enters,
-							this,
-							std::placeholders::_1
-						)
-					),
-					sanguis::server::remove_target_callback(
-						std::bind(
-							&sanguis::server::ai::behavior::attack::target_leaves,
-							this,
-							std::placeholders::_1
+					fcppt::make_unique_ptr_fcppt<
+						sanguis::server::auras::target
+					>(
+						sanguis::server::radius(
+							sight_range_.get()
+						),
+						this->me().team(),
+						sanguis::server::auras::target_kind::enemy,
+						sanguis::server::add_target_callback(
+							std::bind(
+								&sanguis::server::ai::behavior::attack::target_enters,
+								this,
+								std::placeholders::_1
+							)
+						),
+						sanguis::server::remove_target_callback(
+							std::bind(
+								&sanguis::server::ai::behavior::attack::target_leaves,
+								this,
+								std::placeholders::_1
+							)
 						)
 					)
 				)

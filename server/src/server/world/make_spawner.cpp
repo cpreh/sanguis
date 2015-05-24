@@ -13,7 +13,8 @@
 #include <sanguis/server/world/grid_pos_to_center.hpp>
 #include <sanguis/server/world/insert_pair.hpp>
 #include <sanguis/server/world/make_spawner.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 
 
 sanguis::server::world::insert_pair
@@ -27,27 +28,31 @@ sanguis::server::world::make_spawner(
 {
 	return
 		sanguis::server::world::insert_pair(
-			fcppt::make_unique_ptr<
-				sanguis::server::entities::spawns::limited
+			fcppt::unique_ptr_to_base<
+				sanguis::server::entities::base
 			>(
-				_random_generator,
-				_enemy_type,
-				_enemy_kind,
-				_difficulty,
-				// TODO!
-				sanguis::server::entities::spawns::count_per_wave(
-					1u
-				),
-				sanguis::server::entities::spawns::interval(
-					sanguis::duration_second(
-						1.f
+				fcppt::make_unique_ptr_fcppt<
+					sanguis::server::entities::spawns::limited
+				>(
+					_random_generator,
+					_enemy_type,
+					_enemy_kind,
+					_difficulty,
+					// TODO!
+					sanguis::server::entities::spawns::count_per_wave(
+						1u
+					),
+					sanguis::server::entities::spawns::interval(
+						sanguis::duration_second(
+							1.f
+						)
+					),
+					sanguis::server::entities::spawns::limit(
+						1u
+					),
+					sanguis::server::entities::spawns::total_count(
+						5u
 					)
-				),
-				sanguis::server::entities::spawns::limit(
-					1u
-				),
-				sanguis::server::entities::spawns::total_count(
-					5u
 				)
 			),
 			sanguis::server::entities::insert_parameters_center(

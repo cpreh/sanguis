@@ -11,7 +11,8 @@
 #include <sanguis/server/perks/perk.hpp>
 #include <sanguis/server/perks/piercing_damage.hpp>
 #include <sanguis/server/perks/unique_ptr.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
 
@@ -28,42 +29,70 @@ sanguis::server::perks::create(
 	{
 	case sanguis::perk_type::choleric:
 		return
-			fcppt::make_unique_ptr<
-				sanguis::server::perks::choleric
+			fcppt::unique_ptr_to_base<
+				sanguis::server::perks::perk
 			>(
-				_diff_clock,
-				_random_generator
+				fcppt::make_unique_ptr_fcppt<
+					sanguis::server::perks::choleric
+				>(
+					_diff_clock,
+					_random_generator
+				)
 			);
 	case sanguis::perk_type::health:
 		return
-			fcppt::make_unique_ptr<
-				sanguis::server::perks::health
-			>();
+			fcppt::unique_ptr_to_base<
+				sanguis::server::perks::perk
+			>(
+				fcppt::make_unique_ptr_fcppt<
+					sanguis::server::perks::health
+				>()
+			);
 	case sanguis::perk_type::fire_damage:
 		return
-			fcppt::make_unique_ptr<
-				sanguis::server::perks::fire_damage
-			>();
+			fcppt::unique_ptr_to_base<
+				sanguis::server::perks::perk
+			>(
+				fcppt::make_unique_ptr_fcppt<
+					sanguis::server::perks::fire_damage
+				>()
+			);
 	case sanguis::perk_type::piercing_damage:
 		return
-			fcppt::make_unique_ptr<
-				sanguis::server::perks::piercing_damage
-			>();
+			fcppt::unique_ptr_to_base<
+				sanguis::server::perks::perk
+			>(
+				fcppt::make_unique_ptr_fcppt<
+					sanguis::server::perks::piercing_damage
+				>()
+			);
 	case sanguis::perk_type::ias:
 		return
-			fcppt::make_unique_ptr<
-				sanguis::server::perks::ias
-			>();
+			fcppt::unique_ptr_to_base<
+				sanguis::server::perks::perk
+			>(
+				fcppt::make_unique_ptr_fcppt<
+					sanguis::server::perks::ias
+				>()
+			);
 	case sanguis::perk_type::ims:
 		return
-			fcppt::make_unique_ptr<
-				sanguis::server::perks::ims
-			>();
+			fcppt::unique_ptr_to_base<
+				sanguis::server::perks::perk
+			>(
+				fcppt::make_unique_ptr_fcppt<
+					sanguis::server::perks::ims
+				>()
+			);
 	case sanguis::perk_type::irs:
 		return
-			fcppt::make_unique_ptr<
-				sanguis::server::perks::irs
-			>();
+			fcppt::unique_ptr_to_base<
+				sanguis::server::perks::perk
+			>(
+				fcppt::make_unique_ptr_fcppt<
+					sanguis::server::perks::irs
+				>()
+			);
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;

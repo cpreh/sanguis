@@ -38,8 +38,12 @@
 #include <awl/main/exit_success.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/maybe.hpp>
+#include <fcppt/maybe_void.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/fatal.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -99,8 +103,14 @@ sanguis::client::object::object(
 		sys_->audio_player()
 	),
 	gui_style_(
-		fcppt::make_unique_ptr<client::gui::style::simple>(
-			resources_.resources().textures()
+		fcppt::unique_ptr_to_base<
+			sanguis::gui::style::base
+		>(
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::client::gui::style::simple
+			>(
+				resources_.resources().textures()
+			)
 		)
 	),
 	console_(
@@ -232,14 +242,22 @@ sanguis::client::object::loop_handler()
 		)
 	);
 
-	if(
-		server_
-		&&
-		!server_->running()
-	)
-		sys_->window_system().quit(
-			awl::main::exit_failure()
-		);
+	fcppt::maybe_void(
+		server_,
+		[
+			this
+		](
+			server_unique_ptr const &_server
+		)
+		{
+			if(
+				!_server->running()
+			)
+				sys_->window_system().quit(
+					awl::main::exit_failure()
+				);
+		}
+	);
 
 	if(
 		!machine_.process(
@@ -267,12 +285,13 @@ sanguis::client::object::create_server(
 )
 {
 	if(
-		server_
+		server_.has_value()
 	)
 	{
 		this->quit_server();
 
-		server_.reset();
+		server_ =
+			optional_server_unique_ptr();
 	}
 	else
 		// The server and the client both do logging and this ensures
@@ -282,26 +301,41 @@ sanguis::client::object::create_server(
 		);
 
 	server_ =
-		fcppt::make_unique_ptr<
-			sanguis::client::server
-		>(
-			_port
+		optional_server_unique_ptr(
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::client::server
+			>(
+				_port
+			)
 		);
 }
 
 awl::main::exit_code const
 sanguis::client::object::quit_server()
 {
-	if(
-		server_
-	)
-		server_->quit();
+	fcppt::maybe_void(
+		server_,
+		[](
+			server_unique_ptr const &_server
+		)
+		{
+			_server->quit();
+		}
+	);
 
 	return
-		server_
-		?
-			server_->run()
-		:
-			awl::main::exit_success()
-		;
+		fcppt::maybe(
+			server_,
+			[]{
+				return
+					awl::main::exit_success();
+			},
+			[](
+				server_unique_ptr const &_server
+			)
+			{
+				return
+					_server->run();
+			}
+		);
 }

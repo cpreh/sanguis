@@ -2,9 +2,7 @@
 #define SANGUIS_GUI_RENDERER_BASE_UNIQUE_PTR_HPP_INCLUDED
 
 #include <sanguis/gui/renderer/base_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <memory>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 
 
 namespace sanguis
@@ -15,7 +13,7 @@ namespace renderer
 {
 
 typedef
-std::unique_ptr<
+fcppt::unique_ptr<
 	sanguis::gui::renderer::base
 >
 base_unique_ptr;

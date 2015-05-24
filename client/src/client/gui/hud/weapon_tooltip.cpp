@@ -18,7 +18,7 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/algorithm/join.hpp>
 #include <fcppt/algorithm/map.hpp>
 
@@ -54,7 +54,7 @@ sanguis::client::gui::hud::weapon_tooltip::weapon_tooltip(
 			)
 			{
 				return
-					fcppt::make_unique_ptr<
+					fcppt::make_unique_ptr_fcppt<
 						sanguis::gui::widget::static_text
 					>(
 						_gui_style,

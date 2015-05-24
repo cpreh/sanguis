@@ -15,8 +15,8 @@
 #include <sanguis/server/weapons/optional_unique_ptr.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
-#include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/assert/pre.hpp>
+#include <fcppt/optional_impl.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -73,10 +73,6 @@ sanguis::server::entities::with_ai::~with_ai()
 void
 sanguis::server::entities::with_ai::update()
 {
-	FCPPT_ASSERT_PRE(
-		ai_
-	);
-
 	sanguis::server::entities::with_weapon::update();
 
 	if(
@@ -84,7 +80,9 @@ sanguis::server::entities::with_ai::update()
 	)
 	{
 		// TODO: Make this easier in sge
-		ai_->run(
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			ai_
+		)->run(
 			update_timer_.now()
 			-
 			update_timer_.last_time()
@@ -97,13 +95,26 @@ sanguis::server::entities::with_ai::update()
 sanguis::server::entities::transfer_result
 sanguis::server::entities::with_ai::on_create()
 {
-	ai_ =
+	// TODO: Improve this!
+	sanguis::server::ai::tree::base_unique_ptr new_ai(
 		create_ai_(
 			ai_context_
+		)
+	);
+
+	sanguis::server::ai::tree::base &ai_ref(
+		*new_ai
+	);
+
+	ai_ =
+		optional_ai_unique_ptr(
+			std::move(
+				new_ai
+			)
 		);
 
 	return
-		ai_->transfer();
+		ai_ref.transfer();
 }
 
 sanguis::server::ai::create_function const &

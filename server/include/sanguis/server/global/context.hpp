@@ -26,8 +26,8 @@
 #include <sanguis/server/world/context.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/reference_wrapper_decl.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <memory>
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>
 
@@ -182,7 +182,7 @@ private:
 	sanguis::server::unicast_callback const send_unicast_;
 
 	typedef
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		sanguis::server::environment::load_context
 	>
 	load_context_unique_ptr;

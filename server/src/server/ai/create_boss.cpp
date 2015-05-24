@@ -6,10 +6,12 @@
 #include <sanguis/server/ai/behavior/attack.hpp>
 #include <sanguis/server/ai/behavior/patrol.hpp>
 #include <sanguis/server/ai/behavior/stay.hpp>
+#include <sanguis/server/ai/tree/base.hpp>
 #include <sanguis/server/ai/tree/container.hpp>
 #include <sanguis/server/ai/tree/make_leaf.hpp>
 #include <sanguis/server/ai/tree/priority_sequence.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assign/make_container.hpp>
 
 
@@ -28,30 +30,34 @@ sanguis::server::ai::create_boss(
 		)
 		{
 			return
-				fcppt::make_unique_ptr<
-					sanguis::server::ai::tree::priority_sequence
+				fcppt::unique_ptr_to_base<
+					sanguis::server::ai::tree::base
 				>(
-					fcppt::assign::make_container<
-						sanguis::server::ai::tree::container
+					fcppt::make_unique_ptr_fcppt<
+						sanguis::server::ai::tree::priority_sequence
 					>(
-						sanguis::server::ai::tree::make_leaf<
-							sanguis::server::ai::behavior::stay
+						fcppt::assign::make_container<
+							sanguis::server::ai::tree::container
 						>(
-							_context
-						)
-					)(
-						sanguis::server::ai::tree::make_leaf<
-							sanguis::server::ai::behavior::attack
-						>(
-							_context,
-							_sight_range
-						)
-					)(
-						sanguis::server::ai::tree::make_leaf<
-							sanguis::server::ai::behavior::patrol
-						>(
-							_context,
-							_random_generator
+							sanguis::server::ai::tree::make_leaf<
+								sanguis::server::ai::behavior::stay
+							>(
+								_context
+							)
+						)(
+							sanguis::server::ai::tree::make_leaf<
+								sanguis::server::ai::behavior::attack
+							>(
+								_context,
+								_sight_range
+							)
+						)(
+							sanguis::server::ai::tree::make_leaf<
+								sanguis::server::ai::behavior::patrol
+							>(
+								_context,
+								_random_generator
+							)
 						)
 					)
 				);

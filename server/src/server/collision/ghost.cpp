@@ -6,10 +6,13 @@
 #include <sanguis/collision/world/ghost_base_fwd.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_parameters.hpp>
+#include <sanguis/collision/world/ghost_unique_ptr.hpp>
 #include <sanguis/collision/world/object.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/collision/ghost.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/pre.hpp>
 
 
@@ -52,10 +55,11 @@ sanguis::server::collision::ghost::transfer(
 )
 {
 	FCPPT_ASSERT_PRE(
-		!impl_
+		!impl_.has_value()
 	);
 
-	impl_ =
+	// TODO: Improve this
+	sanguis::collision::world::ghost_unique_ptr new_ghost(
 		_world.create_ghost(
 			sanguis::collision::world::ghost_parameters(
 				sanguis::collision::center(
@@ -67,11 +71,23 @@ sanguis::server::collision::ghost::transfer(
 				collision_group_,
 				ghost_base_.get()
 			)
+		)
+	);
+
+	sanguis::collision::world::ghost &ghost_ref(
+		*new_ghost
+	);
+
+	impl_ =
+		optional_ghost_unique_ptr(
+			std::move(
+				new_ghost
+			)
 		);
 
 	return
 		_world.activate_ghost(
-			*impl_
+			ghost_ref
 		);
 }
 
@@ -80,17 +96,16 @@ sanguis::server::collision::ghost::destroy(
 	sanguis::collision::world::object &_world
 )
 {
-	FCPPT_ASSERT_PRE(
-		impl_
-	);
-
 	sanguis::collision::world::body_exit_container result(
 		_world.deactivate_ghost(
-			*impl_
+			*FCPPT_ASSERT_OPTIONAL_ERROR(
+				impl_
+			)
 		)
 	);
 
-	impl_.reset();
+	impl_ =
+		optional_ghost_unique_ptr();
 
 	return
 		result;
@@ -101,11 +116,9 @@ sanguis::server::collision::ghost::center(
 	sanguis::server::center const _center
 )
 {
-	FCPPT_ASSERT_PRE(
+	FCPPT_ASSERT_OPTIONAL_ERROR(
 		impl_
-	);
-
-	impl_->center(
+	)->center(
 		sanguis::collision::center(
 			_center.get()
 		)

@@ -9,6 +9,7 @@
 #include <sanguis/server/damage/full.hpp>
 #include <sanguis/server/damage/make_array.hpp>
 #include <sanguis/server/damage/piercing.hpp>
+#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/modify_damages.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
@@ -31,8 +32,9 @@
 #include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
 #include <sanguis/server/weapons/attributes/spread_radius.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/repeat.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/distribution/parameters/normal.hpp>
@@ -104,13 +106,17 @@ sanguis::server::weapons::unique_ptr
 sanguis::server::weapons::shotgun::clone() const
 {
 	return
-		fcppt::make_unique_ptr<
-			sanguis::server::weapons::shotgun
+		fcppt::unique_ptr_to_base<
+			sanguis::server::weapons::weapon
 		>(
-			this->parameters(),
-			spread_radius_,
-			shells_,
-			damage_
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::server::weapons::shotgun
+			>(
+				this->parameters(),
+				spread_radius_,
+				shells_,
+				damage_
+			)
 		);
 }
 
@@ -153,21 +159,25 @@ sanguis::server::weapons::shotgun::do_attack(
 
 			sanguis::server::environment::insert_no_result(
 				_attack.environment(),
-				fcppt::make_unique_ptr<
-					sanguis::server::entities::projectiles::simple_bullet
+				fcppt::unique_ptr_to_base<
+					sanguis::server::entities::base
 				>(
-					_attack.environment().load_context(),
-					this->owner().team(),
-					damage_.value(),
-					sanguis::server::entities::modify_damages(
-						this->owner(),
-						sanguis::server::damage::make_array({
-							sanguis::server::damage::piercing =
-								sanguis::server::damage::full
-						})
-					),
-					sanguis::server::direction(
-						angle.get()
+					fcppt::make_unique_ptr_fcppt<
+						sanguis::server::entities::projectiles::simple_bullet
+					>(
+						_attack.environment().load_context(),
+						this->owner().team(),
+						damage_.value(),
+						sanguis::server::entities::modify_damages(
+							this->owner(),
+							sanguis::server::damage::make_array({
+								sanguis::server::damage::piercing =
+									sanguis::server::damage::full
+							})
+						),
+						sanguis::server::direction(
+							angle.get()
+						)
 					)
 				),
 				sanguis::server::entities::insert_parameters(

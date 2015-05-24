@@ -14,12 +14,12 @@
 #include <sanguis/server/global/context_fwd.hpp>
 #include <sanguis/server/states/unpaused_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/statechart/result.hpp>
 #include <boost/statechart/state.hpp>
-#include <memory>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -98,7 +98,7 @@ public:
 private:
 	sanguis::server::console console_;
 
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		sanguis::server::global::context
 	> const global_context_;
 };

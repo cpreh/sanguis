@@ -23,7 +23,7 @@
 #include <sge/rucksack/axis.hpp>
 #include <sge/viewport/manager.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -71,7 +71,7 @@ sanguis::client::gui::perk::chooser::chooser(
 		sanguis::gui::optional_needed_width()
 	),
 	gui_state_(
-		fcppt::make_unique_ptr<
+		fcppt::make_unique_ptr_fcppt<
 			sanguis::client::gui::perk::state
 		>(
 			_renderer,
@@ -168,7 +168,7 @@ sanguis::client::gui::perk::chooser::perks()
 	main_container_.pop_back();
 
 	gui_state_ =
-		fcppt::make_unique_ptr<
+		fcppt::make_unique_ptr_fcppt<
 			sanguis::client::gui::perk::state
 		>(
 			renderer_,

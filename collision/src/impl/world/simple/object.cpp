@@ -22,12 +22,12 @@
 #include <sanguis/collision/world/body_collision_container.hpp>
 #include <sanguis/collision/world/body_enter_container.hpp>
 #include <sanguis/collision/world/body_exit_container.hpp>
-#include <sanguis/collision/world/body_fwd.hpp>
+#include <sanguis/collision/world/body.hpp>
 #include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters_fwd.hpp>
 #include <sanguis/collision/world/body_unique_ptr.hpp>
 #include <sanguis/collision/world/created.hpp>
-#include <sanguis/collision/world/ghost_fwd.hpp>
+#include <sanguis/collision/world/ghost.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_parameters_fwd.hpp>
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
@@ -42,9 +42,10 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/reference_wrapper_comparison.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/append.hpp>
 #include <fcppt/algorithm/array_init_move.hpp>
 #include <fcppt/algorithm/map_concat_move.hpp>
@@ -103,22 +104,26 @@ sanguis::collision::impl::world::simple::object::create_body(
 )
 {
 	return
-		fcppt::make_unique_ptr<
-			sanguis::collision::impl::world::simple::body
+		fcppt::unique_ptr_to_base<
+			sanguis::collision::world::body
 		>(
-			_parameters,
-			sanguis::collision::impl::world::simple::body_remove_callback(
-				std::bind(
-					&sanguis::collision::impl::world::simple::object::remove_body,
-					this,
-					std::placeholders::_1
-				)
-			),
-			sanguis::collision::impl::world::simple::body_move_callback(
-				std::bind(
-					&sanguis::collision::impl::world::simple::object::move_body,
-					this,
-					std::placeholders::_1
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::collision::impl::world::simple::body
+			>(
+				_parameters,
+				sanguis::collision::impl::world::simple::body_remove_callback(
+					std::bind(
+						&sanguis::collision::impl::world::simple::object::remove_body,
+						this,
+						std::placeholders::_1
+					)
+				),
+				sanguis::collision::impl::world::simple::body_move_callback(
+					std::bind(
+						&sanguis::collision::impl::world::simple::object::move_body,
+						this,
+						std::placeholders::_1
+					)
 				)
 			)
 		);
@@ -260,15 +265,19 @@ sanguis::collision::impl::world::simple::object::create_ghost(
 )
 {
 	return
-		fcppt::make_unique_ptr<
-			sanguis::collision::impl::world::simple::ghost
+		fcppt::unique_ptr_to_base<
+			sanguis::collision::world::ghost
 		>(
-			_parameters,
-			sanguis::collision::impl::world::simple::ghost_remove_callback(
-				std::bind(
-					&sanguis::collision::impl::world::simple::object::remove_ghost,
-					this,
-					std::placeholders::_1
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::collision::impl::world::simple::ghost
+			>(
+				_parameters,
+				sanguis::collision::impl::world::simple::ghost_remove_callback(
+					std::bind(
+						&sanguis::collision::impl::world::simple::object::remove_ghost,
+						this,
+						std::placeholders::_1
+					)
 				)
 			)
 		);

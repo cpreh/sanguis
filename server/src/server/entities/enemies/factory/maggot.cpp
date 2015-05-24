@@ -21,7 +21,9 @@
 #include <sanguis/server/weapons/melee.hpp>
 #include <sanguis/server/weapons/melee_parameters.hpp>
 #include <sanguis/server/weapons/range.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <sanguis/server/weapons/weapon.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cmath>
 #include <fcppt/config/external_end.hpp>
@@ -52,31 +54,35 @@ sanguis::server::entities::enemies::factory::maggot(
 					1000.f
 				)
 			),
-			fcppt::make_unique_ptr<
-				sanguis::server::weapons::melee
+			fcppt::unique_ptr_to_base<
+				sanguis::server::weapons::weapon
 			>(
-				_parameters.random_generator(),
-				sanguis::server::weapons::melee_parameters{
-					sanguis::server::weapons::range(
-						75.f
-					),
-					sanguis::server::weapons::backswing_time(
-						sanguis::duration_second(
-							1.f
-						)
-					),
-					sanguis::server::weapons::damage(
-						3.0f
-						*
-						std::sqrt(
-							_parameters.difficulty().get()
-						)
-					),
-					sanguis::server::damage::make_array({
-						sanguis::server::damage::normal =
-							sanguis::server::damage::full
-					})
-				}
+				fcppt::make_unique_ptr_fcppt<
+					sanguis::server::weapons::melee
+				>(
+					_parameters.random_generator(),
+					sanguis::server::weapons::melee_parameters{
+						sanguis::server::weapons::range(
+							75.f
+						),
+						sanguis::server::weapons::backswing_time(
+							sanguis::duration_second(
+								1.f
+							)
+						),
+						sanguis::server::weapons::damage(
+							3.0f
+							*
+							std::sqrt(
+								_parameters.difficulty().get()
+							)
+						),
+						sanguis::server::damage::make_array({
+							sanguis::server::damage::normal =
+								sanguis::server::damage::full
+						})
+					}
+				)
 			),
 			sanguis::server::pickup_probability(
 				0.1f

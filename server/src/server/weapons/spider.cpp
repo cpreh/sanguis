@@ -8,6 +8,7 @@
 #include <sanguis/server/ai/create_friend.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
+#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/friend.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
@@ -23,9 +24,11 @@
 #include <sanguis/server/weapons/spider.hpp>
 #include <sanguis/server/weapons/spider_parameters.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
+#include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/attributes/health.hpp>
 #include <sanguis/server/weapons/attributes/make_health.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 
 
 sanguis::server::weapons::spider::spider(
@@ -77,11 +80,15 @@ sanguis::server::weapons::unique_ptr
 sanguis::server::weapons::spider::clone() const
 {
 	return
-		fcppt::make_unique_ptr<
-			sanguis::server::weapons::spider
+		fcppt::unique_ptr_to_base<
+			sanguis::server::weapons::weapon
 		>(
-			this->spawn_parameters(),
-			health_
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::server::weapons::spider
+			>(
+				this->spawn_parameters(),
+				health_
+			)
 		);
 }
 
@@ -93,29 +100,33 @@ sanguis::server::weapons::spider::do_spawn(
 {
 	return
 		_attack.environment().insert(
-			fcppt::make_unique_ptr<
-				sanguis::server::entities::friend_
+			fcppt::unique_ptr_to_base<
+				sanguis::server::entities::base
 			>(
-				sanguis::friend_type::spider,
-				_attack.environment().load_context(),
-				sanguis::server::damage::no_armor(),
-				health_.value(),
-				sanguis::server::entities::movement_speed(
-					100.f
-				),
-				sanguis::server::ai::create_friend(
-					sanguis::server::ai::sight_range(
-						1000.f
+				fcppt::make_unique_ptr_fcppt<
+					sanguis::server::entities::friend_
+				>(
+					sanguis::friend_type::spider,
+					_attack.environment().load_context(),
+					sanguis::server::damage::no_armor(),
+					health_.value(),
+					sanguis::server::entities::movement_speed(
+						100.f
 					),
-					sanguis::server::entities::spawn_owner(
-						dynamic_cast<
-							sanguis::server::entities::ifaces::with_links &
-						>(
-							this->owner()
-						).link()
-					)
-				),
-				_spawn_weapon.get()()
+					sanguis::server::ai::create_friend(
+						sanguis::server::ai::sight_range(
+							1000.f
+						),
+						sanguis::server::entities::spawn_owner(
+							dynamic_cast<
+								sanguis::server::entities::ifaces::with_links &
+							>(
+								this->owner()
+							).link()
+						)
+					),
+					_spawn_weapon.get()()
+				)
 			),
 			sanguis::server::entities::insert_parameters(
 				sanguis::server::center(

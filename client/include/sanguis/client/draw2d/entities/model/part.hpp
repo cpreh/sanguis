@@ -14,9 +14,7 @@
 #include <sge/audio/sound/base_unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_decl.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <memory>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 
 
 namespace sanguis
@@ -113,7 +111,7 @@ private:
 	sanguis::optional_primary_weapon_type weapon_;
 
 	typedef
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		sanguis::client::draw2d::sprite::normal::texture_animation
 	>
 	scoped_texture_animation;

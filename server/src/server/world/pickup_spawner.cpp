@@ -5,6 +5,7 @@
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/team.hpp>
+#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
@@ -18,8 +19,9 @@
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/world/pickup_spawner.hpp>
 #include <fcppt/make_literal_strong_typedef.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/strong_typedef_assignment.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/random/distribution/basic_impl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -165,16 +167,20 @@ sanguis::server::world::pickup_spawner::spawn_health(
 )
 {
 	this->spawn_entity(
-		fcppt::make_unique_ptr<
-			sanguis::server::entities::pickups::health
+		fcppt::unique_ptr_to_base<
+			sanguis::server::entities::base
 		>(
-			env_.load_context(),
-			sanguis::server::team::players,
-			sanguis::server::health(
-				10.f
-				*
-				std::sqrt(
-					_difficulty.get()
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::server::entities::pickups::health
+			>(
+				env_.load_context(),
+				sanguis::server::team::players,
+				sanguis::server::health(
+					10.f
+					*
+					std::sqrt(
+						_difficulty.get()
+					)
 				)
 			)
 		),
@@ -190,15 +196,19 @@ sanguis::server::world::pickup_spawner::spawn_weapon(
 )
 {
 	this->spawn_entity(
-		fcppt::make_unique_ptr<
-			sanguis::server::entities::pickups::weapon
+		fcppt::unique_ptr_to_base<
+			sanguis::server::entities::base
 		>(
-			env_.load_context(),
-			sanguis::server::team::players,
-			sanguis::server::weapons::create(
-				random_generator_,
-				_weapon_type,
-				_difficulty
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::server::entities::pickups::weapon
+			>(
+				env_.load_context(),
+				sanguis::server::team::players,
+				sanguis::server::weapons::create(
+					random_generator_,
+					_weapon_type,
+					_difficulty
+				)
 			)
 		),
 		_center

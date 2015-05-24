@@ -11,8 +11,8 @@
 #include <sge/font/object_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <memory>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
@@ -48,7 +48,7 @@ private:
 	sanguis::gui::widget::static_text name_text_;
 
 	typedef
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		sanguis::gui::widget::static_text
 	>
 	text_unique_ptr;

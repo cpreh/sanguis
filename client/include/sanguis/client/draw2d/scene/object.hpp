@@ -74,11 +74,11 @@
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_decl.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <list>
 #include <map>
-#include <memory>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -384,7 +384,7 @@ private:
 
 	sanguis::client::draw2d::sprite::client::system client_system_;
 
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		sanguis::client::draw2d::scene::world::object
 	> const world_;
 
@@ -413,7 +413,7 @@ private:
 
 	own_entity_list own_entities_;
 
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		sanguis::client::draw2d::scene::background
 	> const background_;
 

@@ -20,10 +20,8 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <memory>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -85,7 +83,7 @@ private:
 	sanguis::gui::widget::text top_text_;
 
 	typedef
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		sanguis::client::gui::perk::state
 	>
 	state_unique_ptr;

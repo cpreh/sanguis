@@ -2,7 +2,7 @@
 #include <sanguis/tools/animations/frame.hpp>
 #include <sanguis/tools/animations/qtutil/sub_image.hpp>
 #include <sanguis/tools/animations/qtutil/to_rect.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <QFrame>
 #include <QImage>
@@ -31,7 +31,7 @@ sanguis::tools::animations::frame::frame(
 		)
 	),
 	label_(
-		fcppt::make_unique_ptr<
+		fcppt::make_unique_ptr_fcppt<
 			QLabel
 		>(
 			&_parent
@@ -39,7 +39,7 @@ sanguis::tools::animations::frame::frame(
 	)
 {
 	_parent.layout()->addWidget(
-		label_.get()
+		label_.get_pointer()
 	);
 
 	label_->setFrameShape(

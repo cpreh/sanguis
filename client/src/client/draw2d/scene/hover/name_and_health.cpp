@@ -10,7 +10,7 @@
 #include <sge/font/object_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -36,7 +36,7 @@ sanguis::client::draw2d::scene::hover::name_and_health::name_and_health(
 			)
 			{
 				return
-					fcppt::make_unique_ptr<
+					fcppt::make_unique_ptr_fcppt<
 						sanguis::client::draw2d::scene::hover::healthbar
 					>(
 						_renderer,

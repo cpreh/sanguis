@@ -2,9 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_ENEMIES_UNIQUE_PTR_HPP_INCLUDED
 
 #include <sanguis/server/entities/enemies/enemy_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <memory>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 
 
 namespace sanguis
@@ -17,7 +15,7 @@ namespace enemies
 {
 
 typedef
-std::unique_ptr<
+fcppt::unique_ptr<
 	sanguis::server::entities::enemies::enemy
 >
 unique_ptr;

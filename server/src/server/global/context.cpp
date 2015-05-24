@@ -38,6 +38,7 @@
 #include <sanguis/server/entities/optional_player_ref.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/global/context.hpp>
 #include <sanguis/server/global/dest_world_pair.hpp>
 #include <sanguis/server/global/generate_worlds.hpp>
@@ -53,13 +54,14 @@
 #include <sanguis/server/world/object.hpp>
 #include <sanguis/server/world/parameters.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/optional_to_exception.hpp>
 #include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/find_opt.hpp>
 #include <fcppt/log/_.hpp>
@@ -111,14 +113,18 @@ sanguis::server::global::context::context(
 		_send_unicast
 	),
 	load_context_(
-		fcppt::make_unique_ptr<
-			sanguis::server::global::load_context
+		fcppt::unique_ptr_to_base<
+			sanguis::server::environment::load_context
 		>(
-			_model_context,
-			sanguis::server::global::next_id_callback(
-				std::bind(
-					&sanguis::server::global::context::next_id,
-					this
+			fcppt::make_unique_ptr_fcppt<
+				sanguis::server::global::load_context
+			>(
+				_model_context,
+				sanguis::server::global::next_id_callback(
+					std::bind(
+						&sanguis::server::global::context::next_id,
+						this
+					)
 				)
 			)
 		)

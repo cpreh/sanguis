@@ -17,7 +17,7 @@
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/tree/map.hpp>
@@ -63,7 +63,7 @@ sanguis::client::gui::perk::tab::tab(
 						)
 						{
 							return
-								fcppt::make_unique_ptr<
+								fcppt::make_unique_ptr_fcppt<
 									sanguis::client::gui::perk::line
 								>(
 									_renderer,

@@ -33,7 +33,7 @@
 #include <sanguis/messages/server/remove_id.hpp>
 #include <alda/serialization/load/optional.hpp>
 #include <alda/serialization/load/static_size.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
@@ -52,7 +52,7 @@ sanguis::client::states::has_player::has_player(
 		_ctx
 	),
 	action_handler_(
-		fcppt::make_unique_ptr<
+		fcppt::make_unique_ptr_fcppt<
 			sanguis::client::control::action_handler
 		>(
 			sanguis::client::make_send_callback(
@@ -69,7 +69,7 @@ sanguis::client::states::has_player::has_player(
 		)
 	),
 	perk_state_(
-		fcppt::make_unique_ptr<
+		fcppt::make_unique_ptr_fcppt<
 			sanguis::client::perk::state
 		>(
 			std::bind(

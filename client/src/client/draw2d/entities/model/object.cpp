@@ -31,7 +31,7 @@
 #include <sanguis/client/load/model/part_map.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/make_int_range_count.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/optional_bind.hpp>
@@ -361,7 +361,7 @@ sanguis::client::draw2d::entities::model::object::object(
 			)
 			{
 				return
-					fcppt::make_unique_ptr<
+					fcppt::make_unique_ptr_fcppt<
 						sanguis::client::draw2d::entities::model::part
 					>(
 						diff_clock_,

@@ -42,7 +42,7 @@
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/insert_to_string.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/optional_bind_construct.hpp>
@@ -444,7 +444,7 @@ sanguis::client::gui::hud::object::add_weapon(
 				)
 			) =
 				optional_weapon_widget_unique_ptr(
-					fcppt::make_unique_ptr<
+					fcppt::make_unique_ptr_fcppt<
 						sanguis::client::gui::hud::weapon_widget
 					>(
 						reload_clock_,
@@ -816,7 +816,7 @@ sanguis::client::gui::hud::object::create_details()
 	);
 
 	weapon_details_unique_ptr new_details(
-		fcppt::make_unique_ptr<
+		fcppt::make_unique_ptr_fcppt<
 			sanguis::client::gui::hud::weapon_details
 		>(
 			gui_context_,

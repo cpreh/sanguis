@@ -3,7 +3,7 @@
 #include <sanguis/server/timer_callback.hpp>
 #include <sanguis/server/timer_duration.hpp>
 #include <sanguis/server/timer_impl.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 
 
 sanguis::server::timer::timer(
@@ -13,7 +13,7 @@ sanguis::server::timer::timer(
 )
 :
 	impl_(
-		fcppt::make_unique_ptr<
+		fcppt::make_unique_ptr_fcppt<
 			sanguis::server::timer_impl
 		>(
 			_io_service,

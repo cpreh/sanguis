@@ -41,10 +41,12 @@
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/team.hpp>
+#include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/auras/update_sight.hpp>
 #include <sanguis/server/auras/weapon_pickup_candidates.hpp>
 #include <sanguis/server/damage/armor_array_fwd.hpp>
+#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/movement_speed_initial.hpp>
@@ -78,8 +80,9 @@
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/maybe_void.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assign/make_container.hpp>
@@ -120,46 +123,54 @@ sanguis::server::entities::player::player(
 		fcppt::assign::make_container<
 			sanguis::server::auras::container
 		>(
-			fcppt::make_unique_ptr<
-				sanguis::server::auras::update_sight
+			fcppt::unique_ptr_to_base<
+				sanguis::server::auras::aura
 			>(
-				sanguis::server::radius(
-					2000.f
-				),
-				sanguis::server::add_sight_callback(
-					std::bind(
-						&sanguis::server::entities::player::add_sight_range,
-						this,
-						std::placeholders::_1,
-						std::placeholders::_2
-					)
-				),
-				sanguis::server::remove_sight_callback(
-					std::bind(
-						&sanguis::server::entities::player::remove_sight_range,
-						this,
-						std::placeholders::_1
+				fcppt::make_unique_ptr_fcppt<
+					sanguis::server::auras::update_sight
+				>(
+					sanguis::server::radius(
+						2000.f
+					),
+					sanguis::server::add_sight_callback(
+						std::bind(
+							&sanguis::server::entities::player::add_sight_range,
+							this,
+							std::placeholders::_1,
+							std::placeholders::_2
+						)
+					),
+					sanguis::server::remove_sight_callback(
+						std::bind(
+							&sanguis::server::entities::player::remove_sight_range,
+							this,
+							std::placeholders::_1
+						)
 					)
 				)
 			)
 		)(
-			fcppt::make_unique_ptr<
-				sanguis::server::auras::weapon_pickup_candidates
+			fcppt::unique_ptr_to_base<
+				sanguis::server::auras::aura
 			>(
-				// with_velocity needs to be initialized first!
-				this->radius(),
-				sanguis::server::add_weapon_pickup_callback(
-					std::bind(
-						&sanguis::server::entities::player::weapon_pickup_add_candidate,
-						this,
-						std::placeholders::_1
-					)
-				),
-				sanguis::server::remove_weapon_pickup_callback(
-					std::bind(
-						&sanguis::server::entities::player::weapon_pickup_remove_candidate,
-						this,
-						std::placeholders::_1
+				fcppt::make_unique_ptr_fcppt<
+					sanguis::server::auras::weapon_pickup_candidates
+				>(
+					// with_velocity needs to be initialized first!
+					this->radius(),
+					sanguis::server::add_weapon_pickup_callback(
+						std::bind(
+							&sanguis::server::entities::player::weapon_pickup_add_candidate,
+							this,
+							std::placeholders::_1
+						)
+					),
+					sanguis::server::remove_weapon_pickup_callback(
+						std::bind(
+							&sanguis::server::entities::player::weapon_pickup_remove_candidate,
+							this,
+							std::placeholders::_1
+						)
 					)
 				)
 			)
@@ -376,13 +387,17 @@ sanguis::server::entities::player::drop_or_pickup_weapon(
 			);
 
 			cur_environment.insert(
-				fcppt::make_unique_ptr<
-					sanguis::server::entities::pickups::weapon
+				fcppt::unique_ptr_to_base<
+					sanguis::server::entities::base
 				>(
-					cur_environment.load_context(),
-					this->team(),
-					std::move(
-						_dropped
+					fcppt::make_unique_ptr_fcppt<
+						sanguis::server::entities::pickups::weapon
+					>(
+						cur_environment.load_context(),
+						this->team(),
+						std::move(
+							_dropped
+						)
 					)
 				),
 				sanguis::server::entities::insert_parameters_center(
