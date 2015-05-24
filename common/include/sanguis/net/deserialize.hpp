@@ -15,6 +15,7 @@
 #include <alda/net/buffer/circular_receive/object.hpp>
 #include <alda/net/buffer/circular_receive/source.hpp>
 #include <fcppt/format.hpp>
+#include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/throw.hpp>
@@ -26,6 +27,7 @@
 #include <boost/iostreams/stream_buffer.hpp>
 #include <ios>
 #include <istream>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -37,8 +39,10 @@ namespace net
 template<
 	typename AldaType
 >
-alda::message::base_unique_ptr<
-	AldaType
+fcppt::optional<
+	alda::message::base_unique_ptr<
+		AldaType
+	>
 >
 deserialize(
 	alda::net::buffer::circular_receive::object &_data,
@@ -50,6 +54,12 @@ deserialize(
 	typedef
 	alda::message::base_unique_ptr<
 		AldaType
+	>
+	unique_ptr;
+
+	typedef
+	fcppt::optional<
+		unique_ptr
 	>
 	result_type;
 
@@ -143,7 +153,7 @@ deserialize(
 		return
 			result_type();
 
-	result_type ret(
+	unique_ptr ret(
 		_deserialize_message(
 			stream
 		)
@@ -181,7 +191,11 @@ deserialize(
 	);
 
 	return
-		ret;
+		result_type(
+			std::move(
+				ret
+			)
+		);
 }
 
 }

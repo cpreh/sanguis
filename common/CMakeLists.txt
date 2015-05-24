@@ -163,6 +163,8 @@ set(
 	include/sanguis/messages/client/info.hpp
 	include/sanguis/messages/client/info_fwd.hpp
 	include/sanguis/messages/client/instantiate_message.hpp
+	include/sanguis/messages/client/optional_unique_ptr.hpp
+	include/sanguis/messages/client/optional_unique_ptr_fwd.hpp
 	include/sanguis/messages/client/pause.hpp
 	include/sanguis/messages/client/pause_fwd.hpp
 	include/sanguis/messages/client/reload.hpp
@@ -312,6 +314,8 @@ set(
 	include/sanguis/messages/server/max_health_fwd.hpp
 	include/sanguis/messages/server/move.hpp
 	include/sanguis/messages/server/move_fwd.hpp
+	include/sanguis/messages/server/optional_unique_ptr.hpp
+	include/sanguis/messages/server/optional_unique_ptr_fwd.hpp
 	include/sanguis/messages/server/parts/add_actor.hpp
 	include/sanguis/messages/server/parts/add_actor_fwd.hpp
 	include/sanguis/messages/server/parts/add_elements_base.hpp

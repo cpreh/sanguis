@@ -30,6 +30,7 @@
 #include <alda/net/server/connection_id_container.hpp>
 #include <sge/timer/difference_fractional.hpp>
 #include <sge/timer/elapsed_and_reset.hpp>
+#include <fcppt/const.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/string.hpp>
@@ -375,42 +376,48 @@ sanguis::server::machine::data_callback(
 )
 try
 {
-	for(
-		;;
-	)
-	{
-		sanguis::messages::client::unique_ptr message(
-			sanguis::net::server::deserialize(
+	while(
+		fcppt::maybe(
+			sanguis::server::net::deserialize(
 				_data
+			),
+			fcppt::const_(
+				false
+			),
+			[
+				this,
+				_id
+			](
+				sanguis::messages::client::unique_ptr &&_message
 			)
-		);
-
-		if(
-			!message.get()
-		)
-			return;
-
-		try
-		{
-			this->process_message(
-				_id,
-				std::move(
-					message
+			{
+				try
+				{
+					this->process_message(
+						_id,
+						std::move(
+							_message
+						)
+					);
+				}
+				catch(
+					sanguis::server::unknown_player_exception const &_error
 				)
-			);
-		}
-		catch(
-			sanguis::server::unknown_player_exception const &_error
+				{
+					FCPPT_LOG_DEBUG(
+						::logger,
+						fcppt::log::_
+							<< FCPPT_TEXT("Client currently has no player ")
+							<< _error.string()
+					);
+				}
+
+				return
+					true;
+			}
 		)
-		{
-			FCPPT_LOG_DEBUG(
-				::logger,
-				fcppt::log::_
-					<< FCPPT_TEXT("Client currently has no player ")
-					<< _error.string()
-			);
-		}
-	}
+	)
+		;
 }
 catch(
 	fcppt::exception const &_error

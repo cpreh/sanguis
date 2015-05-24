@@ -35,7 +35,9 @@
 #include <sge/viewport/manager_fwd.hpp>
 #include <sge/window/system.hpp>
 #include <awl/main/exit_success.hpp>
+#include <fcppt/const.hpp>
 #include <fcppt/from_std_string.hpp>
+#include <fcppt/maybe.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>
@@ -407,27 +409,32 @@ sanguis::client::machine::data_callback(
 	alda::net::buffer::circular_receive::object &_data
 )
 {
-	for(
-		;;
-	)
-	{
-		sanguis::messages::server::unique_ptr ret(
+	while(
+		fcppt::maybe(
 			sanguis::client::net::deserialize(
 				_data
+			),
+			fcppt::const_(
+				false
+			),
+			[
+				this
+			](
+				sanguis::messages::server::unique_ptr &&_message
 			)
-		);
+			{
+				this->process_event(
+					sanguis::client::events::message(
+						std::move(
+							_message
+						)
+					)
+				);
 
-		if(
-			!ret.get()
+				return
+					true;
+			}
 		)
-			return;
-
-		this->process_event(
-			sanguis::client::events::message(
-				std::move(
-					ret
-				)
-			)
-		);
-	}
+	)
+		;
 }
