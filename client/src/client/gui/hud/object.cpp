@@ -54,6 +54,7 @@
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -598,7 +599,7 @@ sanguis::client::gui::hud::object::details(
 	)
 		this->create_details();
 	else if(
-		weapon_details_
+		weapon_details_.has_value()
 	)
 		this->destroy_details();
 
@@ -700,7 +701,7 @@ sanguis::client::gui::hud::object::update_weapon_widgets(
 	);
 
 	if(
-		weapon_details_
+		weapon_details_.has_value()
 	)
 	{
 		this->destroy_details();
@@ -811,10 +812,10 @@ sanguis::client::gui::hud::object::create_details()
 	);
 
 	FCPPT_ASSERT_PRE(
-		!weapon_details_
+		!weapon_details_.has_value()
 	);
 
-	weapon_details_ =
+	weapon_details_unique_ptr new_details(
 		fcppt::make_unique_ptr<
 			sanguis::client::gui::hud::weapon_details
 		>(
@@ -829,26 +830,35 @@ sanguis::client::gui::hud::object::create_details()
 			maybe_description(
 				secondary_weapon_
 			)
-		);
+		)
+	);
 
 	main_widget_.push_back(
 		sanguis::gui::widget::reference_alignment_pair{
 			sanguis::gui::widget::reference{
-				weapon_details_->widget()
+				new_details->widget()
 			},
 			sge::rucksack::alignment::left_or_top
 		}
 	);
+
+	weapon_details_ =
+		optional_weapon_details_unique_ptr(
+			std::move(
+				new_details
+			)
+		);
 }
 
 void
 sanguis::client::gui::hud::object::destroy_details()
 {
 	FCPPT_ASSERT_PRE(
-		weapon_details_
+		weapon_details_.has_value()
 	);
 
 	main_widget_.pop_back();
 
-	weapon_details_.reset();
+	weapon_details_ =
+		optional_weapon_details_unique_ptr();
 }

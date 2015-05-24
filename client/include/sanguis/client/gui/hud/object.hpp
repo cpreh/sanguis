@@ -266,7 +266,13 @@ private:
 	>
 	weapon_details_unique_ptr;
 
-	weapon_details_unique_ptr weapon_details_;
+	typedef
+	fcppt::optional<
+		weapon_details_unique_ptr
+	>
+	optional_weapon_details_unique_ptr;
+
+	optional_weapon_details_unique_ptr weapon_details_;
 
 	bool paused_;
 };
