@@ -1,6 +1,6 @@
 #include <sanguis/primary_weapon_type.hpp>
-#include <sanguis/secondary_weapon_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/secondary_weapon_type.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/weapons/create.hpp>

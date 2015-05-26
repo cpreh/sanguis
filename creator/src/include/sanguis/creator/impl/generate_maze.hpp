@@ -1,9 +1,10 @@
 #ifndef SANGUIS_CREATOR_IMPL_GENERATE_MAZE_HPP_INCLUDED
 #define SANGUIS_CREATOR_IMPL_GENERATE_MAZE_HPP_INCLUDED
 
-#include <sanguis/creator/impl/random/generator_fwd.hpp>
-#include <sanguis/creator/impl/reachable_grid.hpp>
 #include <sanguis/creator/impl/maze_result.hpp>
+#include <sanguis/creator/impl/reachable_grid.hpp>
+#include <sanguis/creator/impl/random/generator_fwd.hpp>
+
 
 namespace sanguis
 {

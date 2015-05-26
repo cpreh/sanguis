@@ -1,8 +1,8 @@
 #ifndef SANGUIS_COLLISION_IMPL_WORLD_SIMPLE_FOR_ALL_BODY_NEIGHBORS_HPP_INCLUDED
 #define SANGUIS_COLLISION_IMPL_WORLD_SIMPLE_FOR_ALL_BODY_NEIGHBORS_HPP_INCLUDED
 
-#include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/dim.hpp>
+#include <sanguis/creator/pos.hpp>
 #include <fcppt/algorithm/array_push_back.hpp>
 #include <fcppt/container/grid/in_range_dim.hpp>
 #include <fcppt/container/grid/moore_neighbors.hpp>

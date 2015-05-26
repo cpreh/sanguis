@@ -4,22 +4,22 @@
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/opening_container_array.hpp>
+#include <sanguis/creator/pos.hpp>
+#include <sanguis/creator/rect.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/impl/enemy_type_container.hpp>
+#include <sanguis/creator/impl/filled_rect.hpp>
 #include <sanguis/creator/impl/generate_maze.hpp>
+#include <sanguis/creator/impl/maze_to_tile_grid.hpp>
 #include <sanguis/creator/impl/parameters.hpp>
 #include <sanguis/creator/impl/place_destructibles.hpp>
 #include <sanguis/creator/impl/place_openings.hpp>
 #include <sanguis/creator/impl/place_spawners.hpp>
-#include <sanguis/creator/impl/result.hpp>
-#include <sanguis/creator/impl/generators/maze.hpp>
 #include <sanguis/creator/impl/reachable.hpp>
 #include <sanguis/creator/impl/reachable_grid.hpp>
-#include <sanguis/creator/impl/filled_rect.hpp>
-#include <sanguis/creator/pos.hpp>
-#include <sanguis/creator/rect.hpp>
-#include <sanguis/creator/impl/maze_to_tile_grid.hpp>
+#include <sanguis/creator/impl/result.hpp>
+#include <sanguis/creator/impl/generators/maze.hpp>
 
 
 sanguis::creator::impl::result

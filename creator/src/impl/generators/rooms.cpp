@@ -1,79 +1,72 @@
 #include <sanguis/creator/background_grid.hpp>
 #include <sanguis/creator/background_tile.hpp>
 #include <sanguis/creator/destructible_container.hpp>
-#include <sanguis/creator/difference_type.hpp>
 #include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/enemy_type.hpp>
-#include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/opening.hpp>
 #include <sanguis/creator/opening_container.hpp>
 #include <sanguis/creator/opening_container_array.hpp>
-#include <sanguis/creator/opening_type.hpp>
 #include <sanguis/creator/opening_count.hpp>
+#include <sanguis/creator/opening_type.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/rect.hpp>
 #include <sanguis/creator/signed_pos.hpp>
+#include <sanguis/creator/signed_rect.hpp>
+#include <sanguis/creator/spawn.hpp>
 #include <sanguis/creator/spawn_container.hpp>
+#include <sanguis/creator/spawn_pos.hpp>
+#include <sanguis/creator/spawn_type.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/tile_grid.hpp>
 #include <sanguis/creator/tile_is_solid.hpp>
-#include <sanguis/creator/impl/generate_maze.hpp>
 #include <sanguis/creator/impl/enemy_type_container.hpp>
 #include <sanguis/creator/impl/filled_rect.hpp>
+#include <sanguis/creator/impl/generate_maze.hpp>
+#include <sanguis/creator/impl/maze_to_tile_grid.hpp>
 #include <sanguis/creator/impl/parameters.hpp>
 #include <sanguis/creator/impl/place_boss.hpp>
+#include <sanguis/creator/impl/reachable.hpp>
+#include <sanguis/creator/impl/reachable_grid.hpp>
 #include <sanguis/creator/impl/rect.hpp>
+#include <sanguis/creator/impl/region_grid.hpp>
+#include <sanguis/creator/impl/region_id.hpp>
 #include <sanguis/creator/impl/result.hpp>
-#include <sanguis/creator/signed_rect.hpp>
 #include <sanguis/creator/impl/set_opening_tiles.hpp>
 #include <sanguis/creator/impl/generators/rooms.hpp>
 #include <sanguis/creator/impl/random/generator.hpp>
-#include <sanguis/creator/impl/random/uniform_pos.hpp>
-#include <sanguis/creator/impl/random/uniform_size.hpp>
-#include <sanguis/creator/impl/random/uniform_size_variate.hpp>
-#include <sanguis/creator/spawn.hpp>
-#include <sanguis/creator/spawn_pos.hpp>
-#include <sanguis/creator/spawn_type.hpp>
-#include <sanguis/creator/impl/maze_to_tile_grid.hpp>
-#include <sanguis/creator/impl/reachable.hpp>
-#include <sanguis/creator/impl/reachable_grid.hpp>
-#include <sanguis/creator/impl/region_id.hpp>
-#include <sanguis/creator/impl/region_grid.hpp>
 #include <sanguis/creator/impl/random/uniform_int.hpp>
-#include <fcppt/container/grid/at_optional.hpp>
-#include <fcppt/container/grid/make_pos_range_start_end.hpp>
+#include <sanguis/creator/impl/random/uniform_pos.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/optional.hpp>
 #include <fcppt/algorithm/enum_array_fold.hpp>
-#include <fcppt/algorithm/map_concat.hpp>
-#include <fcppt/container/grid/fill.hpp>
-#include <fcppt/container/grid/neumann_neighbors.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/unreachable.hpp>
-#include <fcppt/container/grid/in_range.hpp>
 #include <fcppt/cast/size_fun.hpp>
-#include <fcppt/cast/to_unsigned_fun.hpp>
 #include <fcppt/cast/to_signed_fun.hpp>
-#include <fcppt/math/dim/arithmetic.hpp>
+#include <fcppt/cast/to_unsigned_fun.hpp>
+#include <fcppt/container/grid/at_optional.hpp>
+#include <fcppt/container/grid/fill.hpp>
+#include <fcppt/container/grid/in_range.hpp>
+#include <fcppt/container/grid/make_pos_range.hpp>
+#include <fcppt/container/grid/make_pos_range_start_end.hpp>
+#include <fcppt/container/grid/neumann_neighbors.hpp>
 #include <fcppt/math/box/center.hpp>
-#include <fcppt/math/box/contains_point.hpp>
-#include <fcppt/math/box/object.hpp>
-#include <fcppt/math/box/output.hpp>
-#include <fcppt/math/box/rect.hpp>
 #include <fcppt/math/box/intersects.hpp>
+#include <fcppt/math/box/object.hpp>
+#include <fcppt/math/box/rect.hpp>
 #include <fcppt/math/box/structure_cast.hpp>
+#include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/fill.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
-#include <fcppt/container/grid/make_pos_range.hpp>
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/wrapper/make_uniform_container_advanced.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <iostream>
 #include <algorithm>
-#include <set>
+#include <iostream>
 #include <map>
+#include <set>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
@@ -145,7 +138,7 @@ namespace
 			region_id,
 			unsigned
 		> counts;
-		
+
 		for (
 			auto const &n
 			:
@@ -238,7 +231,7 @@ sanguis::creator::impl::generators::rooms(
 
 	// TODO new algorithm
 	// 1. generate a bunch of non-overlapping rooms on maze-compatible coords
-	
+
 	// TODO variable room sizes
 	auto const room_size =
 		sanguis::creator::grid::dim{
@@ -467,7 +460,7 @@ sanguis::creator::impl::generators::rooms(
 			}
 		);
 	}
-	
+
 	using uniform_int =
 		fcppt::random::distribution::basic<
 			sanguis::creator::impl::random::uniform_int<

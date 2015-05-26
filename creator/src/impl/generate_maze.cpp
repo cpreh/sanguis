@@ -1,35 +1,36 @@
-#include <sanguis/creator/grid_fwd.hpp>
-#include <sanguis/creator/tile_fwd.hpp>
 #include <sanguis/creator/dim.hpp>
 #include <sanguis/creator/grid.hpp>
+#include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/creator/pos_fwd.hpp>
+#include <sanguis/creator/tile_fwd.hpp>
 #include <sanguis/creator/impl/find_closest.hpp>
 #include <sanguis/creator/impl/find_opposing_cell.hpp>
 #include <sanguis/creator/impl/generate_maze.hpp>
+#include <sanguis/creator/impl/maze_result.hpp>
 #include <sanguis/creator/impl/optional_pos.hpp>
-#include <sanguis/creator/impl/random/generator.hpp>
-#include <sanguis/creator/impl/random/uniform_pos.hpp>
 #include <sanguis/creator/impl/reachable.hpp>
 #include <sanguis/creator/impl/reachable_grid.hpp>
+#include <sanguis/creator/impl/region_grid.hpp>
+#include <sanguis/creator/impl/region_id.hpp>
+#include <sanguis/creator/impl/random/generator.hpp>
+#include <sanguis/creator/impl/random/uniform_pos.hpp>
 #include <sanguis/creator/impl/random/uniform_size.hpp>
 #include <sanguis/creator/impl/random/uniform_size_variate.hpp>
-#include <sanguis/creator/impl/region_id.hpp>
-#include <sanguis/creator/impl/region_grid.hpp>
-#include <sanguis/creator/impl/maze_result.hpp>
 #include <fcppt/maybe_void.hpp>
-#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/optional.hpp>
 #include <fcppt/algorithm/append.hpp>
 #include <fcppt/algorithm/remove.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/grid/make_pos_crange.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/dim.hpp>
-#include <fcppt/optional.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <limits>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
+
 
 // this is a maze generator that follows the algorithm described at
 // http://en.wikipedia.org/w/index.php?title=Maze_generation_algorithm&oldid=550777074#Randomized_Prim.27s_algorithm

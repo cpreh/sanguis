@@ -5,11 +5,11 @@
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/impl/optional_pos.hpp>
+#include <fcppt/from_optional.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/optional.hpp>
 #include <fcppt/container/grid/in_range.hpp>
 #include <fcppt/container/grid/object_fwd.hpp>
-#include <fcppt/from_optional.hpp>
-#include <fcppt/optional.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <fcppt/config/external_end.hpp>

@@ -95,8 +95,8 @@
 #include <awl/main/function_context_fwd.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/make_unique_ptr_fcppt.hpp>
-#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/container/tree/map.hpp>
 #include <fcppt/signal/scoped_connection.hpp>

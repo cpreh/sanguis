@@ -19,10 +19,10 @@
 #include <sanguis/collision/impl/world/simple/grid_position.hpp>
 #include <sanguis/collision/impl/world/simple/object.hpp>
 #include <sanguis/collision/impl/world/simple/push_near.hpp>
+#include <sanguis/collision/world/body.hpp>
 #include <sanguis/collision/world/body_collision_container.hpp>
 #include <sanguis/collision/world/body_enter_container.hpp>
 #include <sanguis/collision/world/body_exit_container.hpp>
-#include <sanguis/collision/world/body.hpp>
 #include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters_fwd.hpp>
 #include <sanguis/collision/world/body_unique_ptr.hpp>

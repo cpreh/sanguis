@@ -1,16 +1,17 @@
 #ifndef SANGUIS_CREATOR_IMPL_MAZE_TO_TILE_GRID_HPP_INCLUDED
 #define SANGUIS_CREATOR_IMPL_MAZE_TO_TILE_GRID_HPP_INCLUDED
 
-#include <sanguis/creator/impl/reachable_grid.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/tile_grid.hpp>
+#include <sanguis/creator/impl/maze_to_tile_grid.hpp>
 #include <sanguis/creator/impl/reachable.hpp>
 #include <sanguis/creator/impl/reachable_grid.hpp>
-#include <sanguis/creator/impl/maze_to_tile_grid.hpp>
+#include <sanguis/creator/impl/reachable_grid.hpp>
 #include <fcppt/container/grid/make_pos_crange.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/dim.hpp>
+
 
 namespace sanguis
 {

@@ -16,8 +16,8 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_unique_ptr_fcppt.hpp>
-#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/repeat.hpp>
 #include <fcppt/assert/optional_error.hpp>
 

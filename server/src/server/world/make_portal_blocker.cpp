@@ -1,5 +1,4 @@
 #include <sanguis/server/entities/doodad.hpp>
-#include <sanguis/server/entities/doodad.hpp>
 #include <sanguis/server/entities/doodad_unique_ptr.hpp>
 #include <sanguis/server/entities/portal_blocker.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
