@@ -162,7 +162,6 @@ namespace
 			);
 
 		// if cell doesn't have exactly two adjacent walls
-		// or isn't adjacent to zero region
 		if (
 				counts[
 					::wall_region
@@ -176,16 +175,16 @@ namespace
 		auto from =
 			counts.upper_bound(::wall_region);
 
+		auto const to =
+			std::next(from);
+
 		// interior wall, no possible connector
 		if (
-			from
+			to
 			==
 			std::end(counts)
 		)
 			return nothing;
-
-		auto const to =
-			std::next(from);
 
 		auto const from_region = from->first;
 		auto const to_region = to->first;
@@ -214,8 +213,8 @@ sanguis::creator::impl::generators::rooms(
 {
 	// actual size of the level will be 2x+1 this
 	sanguis::creator::grid::dim const size{
-		21,
-		21
+		51u,
+		51u
 	};
 
 	sanguis::creator::impl::reachable_grid
@@ -232,10 +231,8 @@ sanguis::creator::impl::generators::rooms(
 	// TODO new algorithm
 	// 1. generate a bunch of non-overlapping rooms on maze-compatible coords
 
-	// TODO variable room sizes
-	auto const room_size =
-		sanguis::creator::grid::dim{
-			5u,
+	auto const max_room_size =
+		sanguis::creator::grid::size_type{
 			5u
 		};
 
@@ -244,12 +241,46 @@ sanguis::creator::impl::generators::rooms(
 			_parameters.randgen(),
 			size
 			-
-			room_size
+			(2 * max_room_size + 1)
+		};
+
+	using uniform_size =
+		fcppt::random::distribution::basic<
+			sanguis::creator::impl::random::uniform_int<
+				sanguis::creator::grid::size_type
+			>
+		>;
+
+	auto random_size(
+		fcppt::random::make_variate(
+			_parameters.randgen(),
+			uniform_size{
+				uniform_size::param_type::min{
+					1u
+				},
+				uniform_size::param_type::max{
+					max_room_size
+				},
+			}
+		)
+	);
+
+	auto random_room_dim =
+		[&]()
+		{
+			auto const w =
+				random_size();
+			auto const h =
+				random_size();
+			return sanguis::creator::dim{
+				2 * w + 1,
+				2 * h + 1
+			};
 		};
 
 	for (
 		::int_type i = 0;
-		i < 50; // FIXME: magic number
+		i < 450; // FIXME: magic number
 		++i
 	)
 	{
@@ -261,7 +292,7 @@ sanguis::creator::impl::generators::rooms(
 			>(
 				sanguis::creator::rect{
 					(wrong / 2u) * 2u + 1u,
-					room_size
+					random_room_dim()
 				}
 			);
 
@@ -361,8 +392,6 @@ sanguis::creator::impl::generators::rooms(
 		std::cerr << std::endl;
 	};
 
-	output_grid();
-
 	auto cur_region =
 		region_id{
 			tmp_result.next_id
@@ -394,6 +423,8 @@ sanguis::creator::impl::generators::rooms(
 
 		++cur_region;
 	}
+
+	output_grid();
 
 	// placing connectors...
 
@@ -431,7 +462,7 @@ sanguis::creator::impl::generators::rooms(
 			sanguis::creator::pos{1u,1u},
 			sanguis::creator::pos{
 				sanguis::creator::pos{0u,0u} +
-				(region_grid.size() - region_grid::dim{2u,2u})
+				(region_grid.size() - region_grid::dim{1u,1u})
 			}
 		)
 	)
@@ -559,6 +590,9 @@ sanguis::creator::impl::generators::rooms(
 		] =
 			sanguis::creator::impl::reachable{true};
 	}
+
+	output_grid();
+
 
 	// 5. remove dead ends by iteratively deleting (setting to wall) corridor tiles that have 3 wall neighbors
 	while (
@@ -737,40 +771,6 @@ sanguis::creator::impl::generators::rooms(
 	);
 
 	// TODO more sensible spawner placement
-	/*
-	sanguis::creator::impl::filled_rect(
-		fcppt::math::box::structure_cast<
-			sanguis::creator::rect,
-			fcppt::cast::to_unsigned_fun
-		>(
-			rects.back()
-		),
-		[&]
-		(sanguis::creator::pos const _pos)
-		{
-			if (
-				sanguis::creator::tile_is_solid(
-					grid[
-						_pos
-					]
-				)
-			)
-				return;
-			spawners.push_back(
-				sanguis::creator::spawn{
-					sanguis::creator::spawn_pos{
-						_pos
-					},
-					random_monster(
-						_parameters.randgen()
-					),
-					sanguis::creator::spawn_type::single,
-					sanguis::creator::enemy_kind::normal
-				}
-			);
-		}
-	);
-	*/
 
 	spawners.push_back(
 		sanguis::creator::spawn{
