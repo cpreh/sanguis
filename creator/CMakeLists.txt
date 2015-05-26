@@ -102,7 +102,6 @@ set(
 	src/impl/log.cpp
 	src/impl/maze_name.cpp
 	src/impl/normal_generator_vector.cpp
-	src/impl/overlap.cpp
 	src/impl/parameters.cpp
 	src/impl/perimeter_to_coords.cpp
 	src/impl/place_boss.cpp
@@ -132,12 +131,12 @@ set(
 	src/include/sanguis/creator/impl/graveyard_name.hpp
 	src/include/sanguis/creator/impl/log.hpp
 	src/include/sanguis/creator/impl/maze_name.hpp
+	src/include/sanguis/creator/impl/maze_result.hpp
 	src/include/sanguis/creator/impl/maze_to_tile_grid.hpp
 	src/include/sanguis/creator/impl/normal_generator_vector.hpp
 	src/include/sanguis/creator/impl/normal_generator_vector_type.hpp
 	src/include/sanguis/creator/impl/optional_pos.hpp
 	src/include/sanguis/creator/impl/optional_pos_fwd.hpp
-	src/include/sanguis/creator/impl/overlap.hpp
 	src/include/sanguis/creator/impl/parameters.hpp
 	src/include/sanguis/creator/impl/parameters_fwd.hpp
 	src/include/sanguis/creator/impl/perimeter_to_coords.hpp
@@ -168,7 +167,6 @@ set(
 	src/include/sanguis/creator/impl/reachable.hpp
 	src/include/sanguis/creator/impl/reachable_grid.hpp
 	src/include/sanguis/creator/impl/rect.hpp
-	src/include/sanguis/creator/impl/region_container.hpp
 	src/include/sanguis/creator/impl/region_grid.hpp
 	src/include/sanguis/creator/impl/region_id.hpp
 	src/include/sanguis/creator/impl/result.hpp

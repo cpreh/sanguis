@@ -18,7 +18,6 @@
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/tile_grid.hpp>
 #include <sanguis/creator/tile_is_solid.hpp>
-#include <sanguis/creator/impl/overlap.hpp>
 #include <sanguis/creator/impl/generate_maze.hpp>
 #include <sanguis/creator/impl/enemy_type_container.hpp>
 #include <sanguis/creator/impl/filled_rect.hpp>
@@ -62,6 +61,7 @@
 #include <fcppt/math/box/object.hpp>
 #include <fcppt/math/box/output.hpp>
 #include <fcppt/math/box/rect.hpp>
+#include <fcppt/math/box/intersects.hpp>
 #include <fcppt/math/box/structure_cast.hpp>
 #include <fcppt/math/vector/fill.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -281,7 +281,7 @@ sanguis::creator::impl::generators::rooms(
 			rects
 		)
 			if (
-				sanguis::creator::impl::overlap(
+				fcppt::math::box::intersects(
 					rect,
 					other
 				)
