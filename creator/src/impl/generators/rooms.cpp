@@ -680,7 +680,7 @@ sanguis::creator::impl::generators::rooms(
 	);
 
 	sanguis::creator::opening_container_array const
-	openings;/*(
+	openings(
 		fcppt::algorithm::enum_array_fold<
 			sanguis::creator::opening_container_array
 		>(
@@ -692,6 +692,9 @@ sanguis::creator::impl::generators::rooms(
 				sanguis::creator::opening_type const _type
 			)
 			{
+				return
+					sanguis::creator::opening_container();
+			/*
 				switch(
 					_type
 				)
@@ -732,10 +735,10 @@ sanguis::creator::impl::generators::rooms(
 									)
 								}
 							};
-				}
+				}*/
 			}
 		)
-	); */
+	);
 
 	sanguis::creator::impl::set_opening_tiles(
 		grid,
