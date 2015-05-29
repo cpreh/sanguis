@@ -11,7 +11,7 @@
 #include <sanguis/server/entities/with_ghosts.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/algorithm/map_concat_move.hpp>
+#include <fcppt/algorithm/map_concat.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -86,7 +86,7 @@ sanguis::server::entities::with_ghosts::on_transfer(
 	return
 		sanguis::server::entities::optional_transfer_result{
 			sanguis::server::entities::transfer_result{
-				fcppt::algorithm::map_concat_move<
+				fcppt::algorithm::map_concat<
 					sanguis::collision::world::body_enter_container
 				>(
 					ghosts_,
@@ -119,7 +119,7 @@ sanguis::server::entities::with_ghosts::remove_from_world()
 
 	return
 		sanguis::server::entities::remove_from_world_result(
-			fcppt::algorithm::map_concat_move<
+			fcppt::algorithm::map_concat<
 				sanguis::collision::world::body_exit_container
 			>(
 				ghosts_,

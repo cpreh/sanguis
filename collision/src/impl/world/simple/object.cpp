@@ -48,7 +48,7 @@
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/append.hpp>
 #include <fcppt/algorithm/array_init_move.hpp>
-#include <fcppt/algorithm/map_concat_move.hpp>
+#include <fcppt/algorithm/map_concat.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/float_to_int.hpp>
@@ -159,7 +159,7 @@ sanguis::collision::impl::world::simple::object::activate_body(
 	);
 
 	return
-		fcppt::algorithm::map_concat_move<
+		fcppt::algorithm::map_concat<
 			sanguis::collision::world::body_enter_container
 		>(
 			sanguis::collision::impl::world::ghost_groups_for_body_group(
@@ -223,7 +223,7 @@ sanguis::collision::impl::world::simple::object::deactivate_body(
 	);
 
 	return
-		fcppt::algorithm::map_concat_move<
+		fcppt::algorithm::map_concat<
 			sanguis::collision::world::body_exit_container
 		>(
 			sanguis::collision::impl::world::ghost_groups_for_body_group(
@@ -307,7 +307,7 @@ sanguis::collision::impl::world::simple::object::activate_ghost(
 	);
 
 	return
-		fcppt::algorithm::map_concat_move<
+		fcppt::algorithm::map_concat<
 			sanguis::collision::world::body_enter_container
 		>(
 			sanguis::collision::impl::world::body_groups_for_ghost_group(
@@ -371,7 +371,7 @@ sanguis::collision::impl::world::simple::object::deactivate_ghost(
 	);
 
 	return
-		fcppt::algorithm::map_concat_move<
+		fcppt::algorithm::map_concat<
 			sanguis::collision::world::body_exit_container
 		>(
 			sanguis::collision::impl::world::body_groups_for_ghost_group(

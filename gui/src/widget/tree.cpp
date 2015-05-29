@@ -21,7 +21,7 @@
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/map.hpp>
-#include <fcppt/algorithm/map_concat_move.hpp>
+#include <fcppt/algorithm/map_concat.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/container/tree/level.hpp>
@@ -39,7 +39,7 @@ sanguis::gui::widget::tree::tree(
 		sge::rucksack::axis::y
 	),
 	boxes_(
-		fcppt::algorithm::map_concat_move<
+		fcppt::algorithm::map_concat<
 			sanguis::gui::widget::unique_ptr_vector
 		>(
 			_widgets,

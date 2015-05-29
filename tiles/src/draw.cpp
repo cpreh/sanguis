@@ -8,7 +8,7 @@
 #include <sanguis/tiles/upper_bound.hpp>
 #include <sanguis/tiles/impl/draw_connecting.hpp>
 #include <sanguis/tiles/impl/draw_non_connecting.hpp>
-#include <fcppt/algorithm/join_move.hpp>
+#include <fcppt/algorithm/join.hpp>
 #include <fcppt/container/grid/clamp_pos.hpp>
 #include <fcppt/math/dim/comparison.hpp>
 #include <fcppt/math/dim/fill.hpp>
@@ -72,7 +72,7 @@ sanguis::tiles::draw(
 	);
 
 	return
-		fcppt::algorithm::join_move(
+		fcppt::algorithm::join(
 			sanguis::tiles::impl::draw_connecting(
 				_collection,
 				sanguis::tiles::error::missing_background,
