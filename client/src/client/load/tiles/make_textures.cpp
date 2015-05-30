@@ -5,7 +5,9 @@
 #include <sge/renderer/lock_rect.hpp>
 #include <sge/texture/part.hpp>
 #include <sge/texture/part_raw_ref.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/unique_ptr_to_const.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/cast/size_fun.hpp>
@@ -47,11 +49,17 @@ sanguis::client::load::tiles::make_textures(
 				);
 
 				return
-					fcppt::make_unique_ptr<
-						sge::texture::part_raw_ref
-					>(
-						_part.texture(),
-						rect
+					fcppt::unique_ptr_to_const(
+						fcppt::unique_ptr_to_base<
+							sge::texture::part
+						>(
+							fcppt::make_unique_ptr_fcppt<
+								sge::texture::part_raw_ref
+							>(
+								_part.texture(),
+								rect
+							)
+						)
 					);
 			}
 		);

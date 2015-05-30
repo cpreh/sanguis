@@ -13,7 +13,9 @@
 #include <sge/renderer/lock_rect.hpp>
 #include <sge/texture/part.hpp>
 #include <sge/texture/part_raw_ref.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/unique_ptr_to_const.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
@@ -74,24 +76,30 @@ sanguis::client::load::model::make_series(
 					return
 						sanguis::client::load::resource::animation::entity(
 							delay,
-							fcppt::make_unique_ptr<
-								sge::texture::part_raw_ref
-							>(
-								_texture.texture(),
-								sge::renderer::lock_rect(
-									fcppt::math::vector::structure_cast<
-										sge::renderer::lock_rect::vector,
-										fcppt::cast::size_fun
+							fcppt::unique_ptr_to_const(
+								fcppt::unique_ptr_to_base<
+									sge::texture::part
+								>(
+									fcppt::make_unique_ptr_fcppt<
+										sge::texture::part_raw_ref
 									>(
-										_cell_area.pos()
-									)
-									+
-									area.pos(),
-									fcppt::math::dim::structure_cast<
-										sge::renderer::lock_rect::dim,
-										fcppt::cast::size_fun
-									>(
-										_cell_area.size()
+										_texture.texture(),
+										sge::renderer::lock_rect(
+											fcppt::math::vector::structure_cast<
+												sge::renderer::lock_rect::vector,
+												fcppt::cast::size_fun
+											>(
+												_cell_area.pos()
+											)
+											+
+											area.pos(),
+											fcppt::math::dim::structure_cast<
+												sge::renderer::lock_rect::dim,
+												fcppt::cast::size_fun
+											>(
+												_cell_area.size()
+											)
+										)
 									)
 								)
 							)

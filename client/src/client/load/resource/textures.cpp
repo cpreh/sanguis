@@ -18,11 +18,14 @@
 #include <sge/renderer/texture/mipmap/off.hpp>
 #include <sge/texture/const_optional_part_ref.hpp>
 #include <sge/texture/const_part_unique_ptr.hpp>
+#include <sge/texture/part.hpp>
 #include <sge/texture/part_raw_ptr.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/unique_ptr_to_const.hpp>
 #include <fcppt/container/find_exn.hpp>
 #include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
@@ -204,16 +207,22 @@ sanguis::client::load::resource::textures::do_load_inner(
 ) const
 {
 	return
-		fcppt::make_unique_ptr<
-			sge::texture::part_raw_ptr
-		>(
-			sge::renderer::texture::create_planar_from_path(
-				_path,
-				renderer_,
-				image_loader_,
-				sge::renderer::texture::mipmap::off(),
-				sge::renderer::resource_flags_field::null(),
-				sge::renderer::texture::emulate_srgb::yes
+		fcppt::unique_ptr_to_const(
+			fcppt::unique_ptr_to_base<
+				sge::texture::part
+			>(
+				fcppt::make_unique_ptr_fcppt<
+					sge::texture::part_raw_ptr
+				>(
+					sge::renderer::texture::create_planar_from_path(
+						_path,
+						renderer_,
+						image_loader_,
+						sge::renderer::texture::mipmap::off(),
+						sge::renderer::resource_flags_field::null(),
+						sge::renderer::texture::emulate_srgb::yes
+					)
+				)
 			)
 		);
 }
