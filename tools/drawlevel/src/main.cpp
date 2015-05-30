@@ -14,8 +14,8 @@
 #include <sanguis/tiles/collection.hpp>
 #include <sanguis/tiles/draw.hpp>
 #include <sanguis/tiles/error.hpp>
-#include <sanguis/tiles/error_images.hpp>
 #include <sanguis/tiles/error_image_array.hpp>
+#include <sanguis/tiles/error_images.hpp>
 #include <sanguis/tiles/lower_bound.hpp>
 #include <sanguis/tiles/upper_bound.hpp>
 #include <sge/image/algorithm/may_overlap.hpp>
