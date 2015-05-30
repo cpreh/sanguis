@@ -13,7 +13,8 @@ enum class error
 {
 	missing_foreground,
 	missing_background,
-	missing_object
+	missing_object,
+	fcppt_maximum = missing_object
 };
 
 }

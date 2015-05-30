@@ -1,0 +1,133 @@
+#include <sanguis/creator/tile_size.hpp>
+#include <sanguis/tiles/impl/error_image.hpp>
+#include <sanguis/tiles/impl/error_image_color_pair.hpp>
+#include <sge/image/size_type.hpp>
+#include <sge/image/algorithm/uninitialized.hpp>
+#include <sge/image/view/wrap.hpp>
+#include <sge/image2d/dim.hpp>
+#include <sge/image2d/rect.hpp>
+#include <sge/image2d/vector.hpp>
+#include <sge/image2d/algorithm/fill.hpp>
+#include <sge/image2d/store/object.hpp>
+#include <sge/image2d/store/srgba8.hpp>
+#include <sge/image2d/view/object.hpp>
+#include <sge/image2d/view/sub.hpp>
+#include <fcppt/literal.hpp>
+#include <fcppt/math/dim/arithmetic.hpp>
+#include <fcppt/math/dim/fill.hpp>
+
+
+sge::image2d::store::object
+sanguis::tiles::impl::error_image(
+	sanguis::tiles::impl::error_image_color_pair const _colors
+)
+{
+	sge::image2d::dim const dim{
+		fcppt::math::dim::fill<
+			sge::image2d::dim
+		>(
+			sanguis::creator::tile_size::value
+		)
+	};
+
+	typedef
+	sge::image2d::store::srgba8
+	store_type;
+
+	return
+		sge::image2d::store::object{
+			store_type{
+				dim,
+				[
+					dim,
+					&_colors
+				](
+					store_type::view_type const &_view
+				)
+				{
+					sge::image2d::dim const half_dim{
+						dim
+						/
+						fcppt::literal<
+							sge::image::size_type
+						>(
+							2
+						)
+					};
+
+					sge::image2d::algorithm::fill(
+						sge::image2d::view::sub(
+							sge::image2d::view::object(
+								sge::image::view::wrap(
+									_view
+								)
+							),
+							sge::image2d::rect{
+								sge::image2d::vector::null(),
+								half_dim
+							}
+						),
+						_colors.first,
+						sge::image::algorithm::uninitialized::yes
+					);
+
+					sge::image2d::algorithm::fill(
+						sge::image2d::view::sub(
+							sge::image2d::view::object(
+								sge::image::view::wrap(
+									_view
+								)
+							),
+							sge::image2d::rect{
+								sge::image2d::vector{
+									0,
+									half_dim.h()
+								},
+								half_dim
+							}
+						),
+						_colors.second,
+						sge::image::algorithm::uninitialized::yes
+					);
+
+					sge::image2d::algorithm::fill(
+						sge::image2d::view::sub(
+							sge::image2d::view::object(
+								sge::image::view::wrap(
+									_view
+								)
+							),
+							sge::image2d::rect{
+								sge::image2d::vector{
+									half_dim.w(),
+									0
+								},
+								half_dim
+							}
+						),
+						_colors.second,
+						sge::image::algorithm::uninitialized::yes
+					);
+
+					sge::image2d::algorithm::fill(
+						sge::image2d::view::sub(
+							sge::image2d::view::object(
+								sge::image::view::wrap(
+									_view
+								)
+							),
+							sge::image2d::rect{
+								sge::image2d::vector{
+									half_dim.w(),
+									half_dim.h()
+								},
+								half_dim
+							}
+						),
+						_colors.first,
+						sge::image::algorithm::uninitialized::yes
+					);
+				}
+			}
+		};
+}

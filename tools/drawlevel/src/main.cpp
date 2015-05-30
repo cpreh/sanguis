@@ -14,6 +14,8 @@
 #include <sanguis/tiles/collection.hpp>
 #include <sanguis/tiles/draw.hpp>
 #include <sanguis/tiles/error.hpp>
+#include <sanguis/tiles/error_images.hpp>
+#include <sanguis/tiles/error_image_array.hpp>
 #include <sanguis/tiles/lower_bound.hpp>
 #include <sanguis/tiles/upper_bound.hpp>
 #include <sge/image/algorithm/may_overlap.hpp>
@@ -27,8 +29,10 @@
 #include <sge/image2d/rect.hpp>
 #include <sge/image2d/save_from_view.hpp>
 #include <sge/image2d/system.hpp>
+#include <sge/image2d/vector.hpp>
 #include <sge/image2d/algorithm/copy_and_convert.hpp>
 #include <sge/image2d/store/srgba8.hpp>
+#include <sge/image2d/store/view.hpp>
 #include <sge/image2d/view/checked_sub.hpp>
 #include <sge/image2d/view/const_object.hpp>
 #include <sge/image2d/view/object.hpp>
@@ -196,18 +200,35 @@ try
 
 	path_file_map files;
 
+	sanguis::tiles::error_image_array const error_images(
+		sanguis::tiles::error_images()
+	);
+
 	for(
 		sanguis::tiles::cell const &cell
 		:
 		cells
 	)
+	{
+		sge::image2d::vector const dest_pos(
+			fcppt::math::vector::structure_cast<
+				sge::image2d::rect::vector,
+				fcppt::cast::size_fun
+			>(
+				fcppt::math::vector::to_unsigned(
+					cell.pos()
+				)
+			)
+		);
+
 		fcppt::variant::match(
 			cell.content(),
 			[
 				&store,
 				&cell,
 				&files,
-				&sys
+				&sys,
+				dest_pos
 			](
 				sanguis::tiles::area_container_ref const &_container
 			)
@@ -246,14 +267,7 @@ try
 							store.wrapped_view()
 						},
 						sge::image2d::rect{
-							fcppt::math::vector::structure_cast<
-								sge::image2d::rect::vector,
-								fcppt::cast::size_fun
-							>(
-								fcppt::math::vector::to_unsigned(
-									cell.pos()
-								)
-							),
+							dest_pos,
 							sge::image2d::view::size(
 								source_view
 							)
@@ -263,12 +277,41 @@ try
 					sge::image::algorithm::uninitialized::no
 				);
 			},
-			[](
+			[
+				&store,
+				&error_images,
+				dest_pos
+			](
 				sanguis::tiles::error const _error
 			)
 			{
+				sge::image2d::view::const_object const source_view(
+					sge::image2d::store::view(
+						error_images[
+							_error
+						]
+					)
+				);
+
+				sge::image2d::algorithm::copy_and_convert(
+					source_view,
+					sge::image2d::view::checked_sub(
+						sge::image2d::view::object{
+							store.wrapped_view()
+						},
+						sge::image2d::rect{
+							dest_pos,
+							sge::image2d::view::size(
+								source_view
+							)
+						}
+					),
+					sge::image::algorithm::may_overlap::no,
+					sge::image::algorithm::uninitialized::no
+				);
 			}
 		);
+	}
 
 	sge::image2d::save_from_view(
 		sys.image_system(),
