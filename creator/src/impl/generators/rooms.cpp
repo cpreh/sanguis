@@ -1,6 +1,7 @@
 #include <sanguis/creator/background_grid.hpp>
 #include <sanguis/creator/background_tile.hpp>
 #include <sanguis/creator/destructible_container.hpp>
+#include <sanguis/creator/dim.hpp>
 #include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/creator/grid.hpp>
@@ -26,6 +27,7 @@
 #include <sanguis/creator/impl/maze_to_tile_grid.hpp>
 #include <sanguis/creator/impl/parameters.hpp>
 #include <sanguis/creator/impl/place_boss.hpp>
+#include <sanguis/creator/impl/place_openings.hpp>
 #include <sanguis/creator/impl/reachable.hpp>
 #include <sanguis/creator/impl/reachable_grid.hpp>
 #include <sanguis/creator/impl/rect.hpp>
@@ -126,6 +128,12 @@ namespace
 				p
 			)
 			||
+			(
+				p.x() % 2
+				==
+				p.y() % 2
+			)
+			||
 			grid[
 				p
 			]
@@ -213,8 +221,8 @@ sanguis::creator::impl::generators::rooms(
 {
 	// actual size of the level will be 2x+1 this
 	sanguis::creator::grid::dim const size{
-		51u,
-		51u
+		41u,
+		41u
 	};
 
 	sanguis::creator::impl::reachable_grid
@@ -228,12 +236,11 @@ sanguis::creator::impl::generators::rooms(
 	>
 	rects;
 
-	// TODO new algorithm
 	// 1. generate a bunch of non-overlapping rooms on maze-compatible coords
 
 	auto const max_room_size =
 		sanguis::creator::grid::size_type{
-			5u
+			3u
 		};
 
 	auto rand_pos =
@@ -561,6 +568,7 @@ sanguis::creator::impl::generators::rooms(
 		}
 
 	// TODO: add more edges than strictly necessary
+	// for now, the level has no cycles
 	for (
 		auto const &edge
 		:
@@ -646,10 +654,9 @@ sanguis::creator::impl::generators::rooms(
 
 	sanguis::creator::grid grid{
 		sanguis::creator::impl::maze_to_tile_grid(
-			//std::move(raw_grid),
 			raw_grid,
-			1,
-			2,
+			1, // scale factor walls
+			1, // scale factor space
 			sanguis::creator::tile::nothing,
 			sanguis::creator::tile::concrete_wall
 		)
@@ -657,7 +664,7 @@ sanguis::creator::impl::generators::rooms(
 
 	sanguis::creator::background_grid bg_grid{
 		grid.size(),
-		sanguis::creator::background_tile::grass
+		sanguis::creator::background_tile::asphalt
 	};
 
 	auto const
@@ -679,64 +686,15 @@ sanguis::creator::impl::generators::rooms(
 		}
 	);
 
+	// TODO better algorithm for this:
+	// place openings in rooms around the edge, try to keep entries and
+	// exits away from each other
 	sanguis::creator::opening_container_array const
 	openings(
-		fcppt::algorithm::enum_array_fold<
-			sanguis::creator::opening_container_array
-		>(
-			[
-				&_parameters,
-				&rect_center_pos,
-				&rects
-			](
-				sanguis::creator::opening_type const _type
-			)
-			{
-				return
-					sanguis::creator::opening_container();
-			/*
-				switch(
-					_type
-				)
-				{
-				case sanguis::creator::opening_type::entry:
-					if(
-						_parameters.opening_count_array()[
-							sanguis::creator::opening_type::entry
-						]
-						>
-						sanguis::creator::opening_count{
-							0u
-						}
-					)
-						return
-							sanguis::creator::opening_container{
-								sanguis::creator::opening{
-									rect_center_pos(
-										rects.front()
-									)
-								}
-							};
-				case sanguis::creator::opening_type::exit:
-					if(
-						_parameters.opening_count_array()[
-							sanguis::creator::opening_type::exit
-						]
-						>
-						sanguis::creator::opening_count{
-							0u
-						}
-					)
-						return
-							sanguis::creator::opening_container{
-								sanguis::creator::opening{
-									rect_center_pos(
-										rects.back()
-									)
-								}
-							};
-				}*/
-			}
+		sanguis::creator::impl::place_openings(
+			grid,
+			_parameters.randgen(),
+			_parameters.opening_count_array()
 		)
 	);
 
