@@ -50,8 +50,8 @@
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/cast/to_signed.hpp>
+#include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/clamp_signed_pos.hpp>
-#include <fcppt/container/grid/in_range.hpp>
 #include <fcppt/container/grid/make_pos_crange_start_end.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/to_vector.hpp>
@@ -242,18 +242,12 @@ sanguis::client::draw2d::scene::world::state::background_tile(
 ) const
 {
 	return
-		fcppt::container::grid::in_range(
-			background_grid_,
-			_pos
-		)
-		?
-			sanguis::creator::optional_background_tile{
-				background_grid_[
-					_pos
-				]
-			}
-		:
-			sanguis::creator::optional_background_tile{};
+		sanguis::creator::optional_background_tile(
+			fcppt::container::grid::at_optional(
+				background_grid_,
+				_pos
+			)
+		);
 }
 
 sanguis::client::draw2d::scene::world::state::state(

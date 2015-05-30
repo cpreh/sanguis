@@ -55,8 +55,8 @@
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/cast/to_signed_fun.hpp>
 #include <fcppt/container/enum_array_impl.hpp>
+#include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/clamp_signed_pos.hpp>
-#include <fcppt/container/grid/in_range.hpp>
 #include <fcppt/container/grid/make_pos_range_start_end.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -769,27 +769,24 @@ sanguis::collision::impl::world::simple::object::move_body(
 {
 	_body.unlink();
 
-	sanguis::creator::pos const insert_pos(
-		sanguis::collision::impl::world::simple::grid_position(
-			_body.center()
+	fcppt::maybe_void(
+		fcppt::container::grid::at_optional(
+			body_list_grids_[
+				_body.collision_group()
+			],
+			sanguis::collision::impl::world::simple::grid_position(
+				_body.center()
+			)
+		),
+		[
+			&_body
+		](
+			sanguis::collision::impl::world::simple::body_list &_bodies
 		)
+		{
+			_bodies.push_back(
+				_body
+			);
+		}
 	);
-
-	sanguis::collision::impl::world::simple::body_list_grid &grid(
-		body_list_grids_[
-			_body.collision_group()
-		]
-	);
-
-	if(
-		fcppt::container::grid::in_range(
-			grid,
-			insert_pos
-		)
-	)
-		grid[
-			insert_pos
-		].push_back(
-			_body
-		);
 }

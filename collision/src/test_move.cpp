@@ -21,9 +21,10 @@
 #include <sanguis/creator/tile_is_solid.hpp>
 #include <sanguis/creator/tile_rect.hpp>
 #include <sanguis/creator/tile_size.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/cast/int_to_float_fun.hpp>
 #include <fcppt/cast/to_unsigned_fun.hpp>
-#include <fcppt/container/grid/in_range.hpp>
+#include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/math/box/expand.hpp>
 #include <fcppt/math/box/intersects.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
@@ -87,105 +88,110 @@ sanguis::collision::test_move(
 			)
 		);
 
-		if(
-			!fcppt::container::grid::in_range(
+		fcppt::maybe_void(
+			fcppt::container::grid::at_optional(
 				_grid,
 				cur_pos
-			)
-		)
-			continue;
-
-		sanguis::creator::tile const cur_tile(
-			_grid[
-				cur_pos
-			]
-		);
-
-		if(
-			!sanguis::creator::tile_is_solid(
-				cur_tile
-			)
-		)
-			continue;
-
-		sanguis::collision::center const new_center(
-			_center.get()
-			+
-			new_speed.get()
-			*
-			_time.count()
-		);
-
-		sanguis::collision::impl::rect const rect(
-			fcppt::math::box::expand(
-				sanguis::collision::impl::rect(
-					new_center.get(),
-					sanguis::collision::impl::rect::dim::null()
-				),
-				fcppt::math::vector::fill<
-					sanguis::collision::impl::rect::vector
-				>(
-					_radius.get()
-				)
-			)
-		);
-
-		sanguis::creator::rect const tile_rect(
-			sanguis::creator::tile_rect(
-				cur_tile
-			)
-		);
-
-		sanguis::collision::impl::rect const entry_rect(
-			fcppt::math::vector::structure_cast<
-				sanguis::collision::impl::rect::vector,
-				fcppt::cast::int_to_float_fun
-			>(
-				tile_rect.pos()
-			)
-			+
-			fcppt::math::vector::structure_cast<
-				sanguis::collision::impl::rect::vector,
-				fcppt::cast::int_to_float_fun
-			>(
-				cur_pos
-				*
-				sanguis::creator::tile_size::value
 			),
-			fcppt::math::dim::structure_cast<
-				sanguis::collision::impl::rect::dim,
-				fcppt::cast::int_to_float_fun
-			>(
-				tile_rect.size()
-			)
-		);
-
-		if(
-			!fcppt::math::box::intersects(
-				rect,
-				entry_rect
-			)
-		)
-			continue;
-
-		new_speed =
-			sanguis::collision::impl::adjust_speed(
-				sanguis::collision::impl::line_segment(
-					sanguis::collision::impl::pos(
-						_center.get()
-					),
-					sanguis::collision::impl::dir(
-						new_center.get()
-						-
-						_center.get()
-					)
-				),
+			[
+				_center,
 				_radius,
-				entry_rect,
-				new_speed
-			);
+				_time,
+				cur_pos,
+				&changed,
+				&new_speed
+			](
+				sanguis::creator::tile const _cur_tile
+			)
+			{
+				if(
+					!sanguis::creator::tile_is_solid(
+						_cur_tile
+					)
+				)
+					return;
 
-		changed = true;
+				sanguis::collision::center const new_center(
+					_center.get()
+					+
+					new_speed.get()
+					*
+					_time.count()
+				);
+
+				sanguis::collision::impl::rect const rect(
+					fcppt::math::box::expand(
+						sanguis::collision::impl::rect(
+							new_center.get(),
+							sanguis::collision::impl::rect::dim::null()
+						),
+						fcppt::math::vector::fill<
+							sanguis::collision::impl::rect::vector
+						>(
+							_radius.get()
+						)
+					)
+				);
+
+				sanguis::creator::rect const tile_rect(
+					sanguis::creator::tile_rect(
+						_cur_tile
+					)
+				);
+
+				sanguis::collision::impl::rect const entry_rect(
+					fcppt::math::vector::structure_cast<
+						sanguis::collision::impl::rect::vector,
+						fcppt::cast::int_to_float_fun
+					>(
+						tile_rect.pos()
+					)
+					+
+					fcppt::math::vector::structure_cast<
+						sanguis::collision::impl::rect::vector,
+						fcppt::cast::int_to_float_fun
+					>(
+						cur_pos
+						*
+						sanguis::creator::tile_size::value
+					),
+					fcppt::math::dim::structure_cast<
+						sanguis::collision::impl::rect::dim,
+						fcppt::cast::int_to_float_fun
+					>(
+						tile_rect.size()
+					)
+				);
+
+				if(
+					!fcppt::math::box::intersects(
+						rect,
+						entry_rect
+					)
+				)
+					return;
+
+				new_speed =
+					sanguis::collision::impl::adjust_speed(
+						sanguis::collision::impl::line_segment(
+							sanguis::collision::impl::pos(
+								_center.get()
+							),
+							sanguis::collision::impl::dir(
+								new_center.get()
+								-
+								_center.get()
+							)
+						),
+						_radius,
+						entry_rect,
+						new_speed
+					);
+
+				changed =
+					true;
+			}
+		);
 	}
 
 	return

@@ -5,8 +5,8 @@
 #include <sanguis/tiles/impl/make_neighbors.hpp>
 #include <sanguis/tiles/impl/neighbors.hpp>
 #include <sanguis/tiles/impl/replace_non_connecting.hpp>
-#include <fcppt/assert/pre.hpp>
-#include <fcppt/container/grid/in_range.hpp>
+#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/container/grid/at_optional.hpp>
 
 
 template<
@@ -33,19 +33,14 @@ sanguis::tiles::impl::make_neighbors(
 		)
 		-> Tile
 		{
-			// TODO: Remove this once everything works
-			FCPPT_ASSERT_PRE(
-				fcppt::container::grid::in_range(
-					_grid,
-					_npos
-				)
-			);
-
 			return
 				sanguis::tiles::impl::replace_non_connecting(
-					_grid[
-						_npos
-					]
+					FCPPT_ASSERT_OPTIONAL_ERROR(
+						fcppt::container::grid::at_optional(
+							_grid,
+							_npos
+						)
+					)
 				);
 		}
 	);
