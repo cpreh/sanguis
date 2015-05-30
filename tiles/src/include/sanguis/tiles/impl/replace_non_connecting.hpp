@@ -1,5 +1,5 @@
-#ifndef SANGUIS_TILES_IMPL_REPLACE_CONNECTING_HPP_INCLUDED
-#define SANGUIS_TILES_IMPL_REPLACE_CONNECTING_HPP_INCLUDED
+#ifndef SANGUIS_TILES_IMPL_REPLACE_NON_CONNECTING_HPP_INCLUDED
+#define SANGUIS_TILES_IMPL_REPLACE_NON_CONNECTING_HPP_INCLUDED
 
 #include <sanguis/creator/background_tile.hpp>
 #include <sanguis/creator/tile.hpp>
@@ -15,7 +15,7 @@ namespace impl
 
 inline
 sanguis::creator::tile
-replace_connecting(
+replace_non_connecting(
 	sanguis::creator::tile const _tile
 )
 {
@@ -32,7 +32,7 @@ replace_connecting(
 
 inline
 sanguis::creator::background_tile
-replace_connecting(
+replace_non_connecting(
 	sanguis::creator::background_tile const _tile
 )
 {

@@ -97,7 +97,7 @@ set(
 	src/include/sanguis/tiles/impl/optional_orientation_fwd.hpp
 	src/include/sanguis/tiles/impl/optional_pair.hpp
 	src/include/sanguis/tiles/impl/optional_pair_fwd.hpp
-	src/include/sanguis/tiles/impl/replace_connecting.hpp
+	src/include/sanguis/tiles/impl/replace_non_connecting.hpp
 	src/include/sanguis/tiles/impl/shift.hpp
 	src/include/sanguis/tiles/impl/shift_fwd.hpp
 	src/include/sanguis/tiles/impl/tile_name.hpp

@@ -4,7 +4,7 @@
 #include <sanguis/tiles/impl/instantiate_tile.hpp>
 #include <sanguis/tiles/impl/make_neighbors.hpp>
 #include <sanguis/tiles/impl/neighbors.hpp>
-#include <sanguis/tiles/impl/replace_connecting.hpp>
+#include <sanguis/tiles/impl/replace_non_connecting.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/container/grid/in_range.hpp>
 
@@ -42,7 +42,7 @@ sanguis::tiles::impl::make_neighbors(
 			);
 
 			return
-				sanguis::tiles::impl::replace_connecting(
+				sanguis::tiles::impl::replace_non_connecting(
 					_grid[
 						_npos
 					]

@@ -3,6 +3,7 @@
 
 #include <sanguis/creator/background_tile.hpp>
 #include <sanguis/creator/tile.hpp>
+#include <sanguis/creator/tile_connects.hpp>
 
 
 namespace sanguis
@@ -21,7 +22,11 @@ filter_non_connecting(
 	return
 		_tile
 		==
-		sanguis::creator::tile::nothing;
+		sanguis::creator::tile::nothing
+		||
+		sanguis::creator::tile_connects(
+			_tile
+		);
 }
 
 inline
