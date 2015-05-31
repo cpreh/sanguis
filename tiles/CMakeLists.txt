@@ -16,9 +16,7 @@ set(
 	include/sanguis/tiles/enable_if_tile.hpp
 	include/sanguis/tiles/error.hpp
 	include/sanguis/tiles/error_fwd.hpp
-	include/sanguis/tiles/error_image_array.hpp
-	include/sanguis/tiles/error_image_array_fwd.hpp
-	include/sanguis/tiles/error_images.hpp
+	include/sanguis/tiles/error_image.hpp
 	include/sanguis/tiles/is_background.hpp
 	include/sanguis/tiles/is_background_fwd.hpp
 	include/sanguis/tiles/is_tile.hpp
@@ -44,12 +42,11 @@ set(
 	src/cell.cpp
 	src/collection.cpp
 	src/draw.cpp
-	src/error_images.cpp
+	src/error_image.cpp
 	src/impl/background_tile_name.cpp
 	src/impl/category.cpp
 	src/impl/content_path.cpp
 	src/impl/decode_name.cpp
-	src/impl/error_image.cpp
 	src/impl/error_image_colors.cpp
 	src/impl/is_background.cpp
 	src/impl/load_file.cpp
@@ -71,7 +68,6 @@ set(
 	src/include/sanguis/tiles/impl/draw_base.hpp
 	src/include/sanguis/tiles/impl/draw_connecting.hpp
 	src/include/sanguis/tiles/impl/draw_non_connecting.hpp
-	src/include/sanguis/tiles/impl/error_image.hpp
 	src/include/sanguis/tiles/impl/error_image_color_pair.hpp
 	src/include/sanguis/tiles/impl/error_image_color_pair_fwd.hpp
 	src/include/sanguis/tiles/impl/error_image_colors.hpp

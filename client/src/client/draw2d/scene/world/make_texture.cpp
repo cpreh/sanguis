@@ -1,6 +1,5 @@
 #include <sanguis/random_generator.hpp>
 #include <sanguis/client/draw/debug.hpp>
-#include <sanguis/client/draw2d/scene/world/error_texture.hpp>
 #include <sanguis/client/draw2d/scene/world/make_texture.hpp>
 #include <sanguis/client/load/tiles/context.hpp>
 #include <sanguis/tiles/area_container_ref.hpp>
@@ -68,8 +67,7 @@ sanguis::client::draw2d::scene::world::make_texture(
 					_debug.get()
 					?
 						sge::texture::const_optional_part_ref(
-							sanguis::client::draw2d::scene::world::error_texture(
-								_context,
+							_context.missing_texture(
 								_error
 							)
 						)

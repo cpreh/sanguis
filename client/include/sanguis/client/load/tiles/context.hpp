@@ -7,9 +7,11 @@
 #include <sanguis/client/load/tiles/texture_container.hpp>
 #include <sanguis/tiles/area_container_ref_fwd.hpp>
 #include <sanguis/tiles/collection.hpp>
+#include <sanguis/tiles/error.hpp>
 #include <sge/texture/const_part_unique_ptr.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/container/enum_array_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <map>
@@ -48,13 +50,9 @@ public:
 	collection();
 
 	sge::texture::part const &
-	missing_texture() const;
-
-	sge::texture::part const &
-	missing_background_texture() const;
-
-	sge::texture::part const &
-	missing_object_texture() const;
+	missing_texture(
+		sanguis::tiles::error
+	) const;
 private:
 	typedef
 	std::map<
@@ -69,11 +67,14 @@ private:
 
 	map_type sets_;
 
-	sge::texture::const_part_unique_ptr const missing_texture_;
+	typedef
+	fcppt::container::enum_array<
+		sanguis::tiles::error,
+		sge::texture::const_part_unique_ptr
+	>
+	missing_texture_array;
 
-	sge::texture::const_part_unique_ptr const missing_background_texture_;
-
-	sge::texture::const_part_unique_ptr const missing_object_texture_;
+	missing_texture_array const missing_textures_;
 };
 
 }

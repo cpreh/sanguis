@@ -1,3 +1,4 @@
+#include <sanguis/client/load/resource/texture_from_view.hpp>
 #include <sanguis/client/load/resource/textures.hpp>
 #include <sanguis/client/load/tiles/context.hpp>
 #include <sanguis/client/load/tiles/set.hpp>
@@ -5,8 +6,13 @@
 #include <sanguis/creator/tile_size.hpp>
 #include <sanguis/tiles/area_container_ref_fwd.hpp>
 #include <sanguis/tiles/collection.hpp>
-#include <sge/image/color/predef.hpp>
+#include <sanguis/tiles/error.hpp>
+#include <sanguis/tiles/error_image.hpp>
+#include <sge/image2d/store/view.hpp>
+#include <sge/image2d/view/const_object.hpp>
 #include <sge/texture/part.hpp>
+#include <fcppt/algorithm/enum_array_fold.hpp>
+#include <fcppt/container/enum_array_impl.hpp>
 #include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
@@ -24,25 +30,26 @@ sanguis::client::load::tiles::context::context(
 		_textures
 	),
 	sets_(),
-	missing_texture_(
-		_textures.make_missing_texture(
-			sanguis::creator::tile_size::value,
-			sge::image::color::predef::black(),
-			sge::image::color::predef::magenta()
-		)
-	),
-	missing_background_texture_(
-		_textures.make_missing_texture(
-			sanguis::creator::tile_size::value,
-			sge::image::color::predef::white(),
-			sge::image::color::predef::green()
-		)
-	),
-	missing_object_texture_(
-		_textures.make_missing_texture(
-			sanguis::creator::tile_size::value,
-			sge::image::color::predef::white(),
-			sge::image::color::predef::blue()
+	missing_textures_(
+		fcppt::algorithm::enum_array_fold<
+			missing_texture_array
+		>(
+			[
+				&_textures
+			](
+				sanguis::tiles::error const _error
+			)
+			{
+				return
+					sanguis::client::load::resource::texture_from_view(
+						_textures.renderer(),
+						sge::image2d::store::view(
+							sanguis::tiles::error_image(
+								_error
+							)
+						)
+					);
+			}
 		)
 	)
 {
@@ -87,22 +94,12 @@ sanguis::client::load::tiles::context::collection()
 }
 
 sge::texture::part const &
-sanguis::client::load::tiles::context::missing_texture() const
+sanguis::client::load::tiles::context::missing_texture(
+	sanguis::tiles::error const _error
+) const
 {
 	return
-		*missing_texture_;
-}
-
-sge::texture::part const &
-sanguis::client::load::tiles::context::missing_background_texture() const
-{
-	return
-		*missing_background_texture_;
-}
-
-sge::texture::part const &
-sanguis::client::load::tiles::context::missing_object_texture() const
-{
-	return
-		*missing_object_texture_;
+		*missing_textures_[
+			_error
+		];
 }

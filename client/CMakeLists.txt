@@ -242,12 +242,10 @@ set(
 	include/sanguis/client/draw2d/scene/world/batch_size.hpp
 	include/sanguis/client/draw2d/scene/world/center_to_grid_pos.hpp
 	include/sanguis/client/draw2d/scene/world/create.hpp
-	include/sanguis/client/draw2d/scene/world/error_texture.hpp
 	include/sanguis/client/draw2d/scene/world/generate_batches.hpp
 	include/sanguis/client/draw2d/scene/world/graveyard.hpp
 	include/sanguis/client/draw2d/scene/world/make_sprite.hpp
 	include/sanguis/client/draw2d/scene/world/make_texture.hpp
-	include/sanguis/client/draw2d/scene/world/missing_tile_texture.hpp
 	include/sanguis/client/draw2d/scene/world/none.hpp
 	include/sanguis/client/draw2d/scene/world/object.hpp
 	include/sanguis/client/draw2d/scene/world/object_fwd.hpp
@@ -506,6 +504,7 @@ set(
 	include/sanguis/client/load/resource/search_texture_names.hpp
 	include/sanguis/client/load/resource/sounds.hpp
 	include/sanguis/client/load/resource/sounds_fwd.hpp
+	include/sanguis/client/load/resource/texture_from_view.hpp
 	include/sanguis/client/load/resource/texture_identifier.hpp
 	include/sanguis/client/load/resource/texture_name_map.hpp
 	include/sanguis/client/load/resource/textures.hpp
@@ -710,12 +709,10 @@ set(
 	src/client/draw2d/scene/world/batch.cpp
 	src/client/draw2d/scene/world/center_to_grid_pos.cpp
 	src/client/draw2d/scene/world/create.cpp
-	src/client/draw2d/scene/world/error_texture.cpp
 	src/client/draw2d/scene/world/generate_batches.cpp
 	src/client/draw2d/scene/world/graveyard.cpp
 	src/client/draw2d/scene/world/make_sprite.cpp
 	src/client/draw2d/scene/world/make_texture.cpp
-	src/client/draw2d/scene/world/missing_tile_texture.cpp
 	src/client/draw2d/scene/world/none.cpp
 	src/client/draw2d/scene/world/object.cpp
 	src/client/draw2d/scene/world/parameters.cpp
@@ -805,6 +802,7 @@ set(
 	src/client/load/resource/parse_texture_file.cpp
 	src/client/load/resource/search_texture_names.cpp
 	src/client/load/resource/sounds.cpp
+	src/client/load/resource/texture_from_view.cpp
 	src/client/load/resource/textures.cpp
 	src/client/load/skip_directories.cpp
 	src/client/load/tiles/context.cpp

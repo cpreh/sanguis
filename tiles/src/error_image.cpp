@@ -1,6 +1,7 @@
 #include <sanguis/creator/tile_size.hpp>
-#include <sanguis/tiles/impl/error_image.hpp>
+#include <sanguis/tiles/error_image.hpp>
 #include <sanguis/tiles/impl/error_image_color_pair.hpp>
+#include <sanguis/tiles/impl/error_image_colors.hpp>
 #include <sge/image/size_type.hpp>
 #include <sge/image/algorithm/uninitialized.hpp>
 #include <sge/image/view/wrap.hpp>
@@ -18,10 +19,16 @@
 
 
 sge::image2d::store::object
-sanguis::tiles::impl::error_image(
-	sanguis::tiles::impl::error_image_color_pair const _colors
+sanguis::tiles::error_image(
+	sanguis::tiles::error const _error
 )
 {
+	sanguis::tiles::impl::error_image_color_pair const colors(
+		sanguis::tiles::impl::error_image_colors(
+			_error
+		)
+	);
+
 	sge::image2d::dim const dim{
 		fcppt::math::dim::fill<
 			sge::image2d::dim
@@ -40,7 +47,7 @@ sanguis::tiles::impl::error_image(
 				dim,
 				[
 					dim,
-					&_colors
+					&colors
 				](
 					store_type::view_type const &_view
 				)
@@ -67,7 +74,7 @@ sanguis::tiles::impl::error_image(
 								half_dim
 							}
 						),
-						_colors.first,
+						colors.first,
 						sge::image::algorithm::uninitialized::yes
 					);
 
@@ -86,7 +93,7 @@ sanguis::tiles::impl::error_image(
 								half_dim
 							}
 						),
-						_colors.second,
+						colors.second,
 						sge::image::algorithm::uninitialized::yes
 					);
 
@@ -105,7 +112,7 @@ sanguis::tiles::impl::error_image(
 								half_dim
 							}
 						),
-						_colors.second,
+						colors.second,
 						sge::image::algorithm::uninitialized::yes
 					);
 
@@ -124,7 +131,7 @@ sanguis::tiles::impl::error_image(
 								half_dim
 							}
 						),
-						_colors.first,
+						colors.first,
 						sge::image::algorithm::uninitialized::yes
 					);
 				}

@@ -14,8 +14,7 @@
 #include <sanguis/tiles/collection.hpp>
 #include <sanguis/tiles/draw.hpp>
 #include <sanguis/tiles/error.hpp>
-#include <sanguis/tiles/error_image_array.hpp>
-#include <sanguis/tiles/error_images.hpp>
+#include <sanguis/tiles/error_image.hpp>
 #include <sanguis/tiles/lower_bound.hpp>
 #include <sanguis/tiles/upper_bound.hpp>
 #include <sge/image/algorithm/may_overlap.hpp>
@@ -49,6 +48,7 @@
 #include <fcppt/algorithm/enum_array_fold.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/size_fun.hpp>
+#include <fcppt/container/enum_array.hpp>
 #include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/container/maybe_front.hpp>
 #include <fcppt/io/cerr.hpp>
@@ -200,8 +200,27 @@ try
 
 	path_file_map files;
 
-	sanguis::tiles::error_image_array const error_images(
-		sanguis::tiles::error_images()
+	typedef
+	fcppt::container::enum_array<
+		sanguis::tiles::error,
+		sge::image2d::store::object
+	>
+	error_image_array;
+
+	error_image_array const error_images(
+		fcppt::algorithm::enum_array_fold<
+			error_image_array
+		>(
+			[](
+				sanguis::tiles::error const _error
+			)
+			{
+				return
+					sanguis::tiles::error_image(
+						_error
+					);
+			}
+		)
 	);
 
 	for(

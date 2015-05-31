@@ -50,16 +50,13 @@ public:
 	sge::texture::part const &
 	missing_texture() const;
 
-	sge::texture::const_part_unique_ptr
-	make_missing_texture(
-		sge::image::size_type,
-		sge::image::color::any::object const &,
-		sge::image::color::any::object const &
-	) const;
-
 	// TODO: Remove this
 	sge::image2d::system &
 	image_system() const;
+
+	// TODO: Remove this
+	sge::renderer::device::core &
+	renderer() const;
 
 	textures(
 		sge::renderer::device::core &,

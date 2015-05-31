@@ -115,27 +115,18 @@ sanguis::client::load::resource::textures::missing_texture() const
 		*missing_texture_;
 }
 
-sge::texture::const_part_unique_ptr
-sanguis::client::load::resource::textures::make_missing_texture(
-	sge::image::size_type const _size,
-	sge::image::color::any::object const &_color1,
-	sge::image::color::any::object const &_color2
-) const
-{
-	return
-		sanguis::client::load::resource::make_missing_texture(
-			renderer_,
-			_size,
-			_color1,
-			_color2
-		);
-}
-
 sge::image2d::system &
 sanguis::client::load::resource::textures::image_system() const
 {
 	return
 		image_loader_;
+}
+
+sge::renderer::device::core &
+sanguis::client::load::resource::textures::renderer() const
+{
+	return
+		renderer_;
 }
 
 sanguis::client::load::resource::textures::textures(
@@ -155,7 +146,8 @@ sanguis::client::load::resource::textures::textures(
 	textures_(),
 	unnamed_textures_(),
 	missing_texture_(
-		this->make_missing_texture(
+		sanguis::client::load::resource::make_missing_texture(
+			renderer_,
 			fcppt::literal<
 				sge::image::size_type
 			>(

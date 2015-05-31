@@ -1,4 +1,5 @@
 #include <sanguis/client/load/resource/make_missing_texture.hpp>
+#include <sanguis/client/load/resource/texture_from_view.hpp>
 #include <sge/image/size_type.hpp>
 #include <sge/image/algorithm/uninitialized.hpp>
 #include <sge/image/color/any/object.hpp>
@@ -11,19 +12,10 @@
 #include <sge/image2d/view/const_object.hpp>
 #include <sge/image2d/view/object.hpp>
 #include <sge/image2d/view/sub.hpp>
-#include <sge/renderer/resource_flags_field.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
-#include <sge/renderer/texture/create_planar_from_view.hpp>
-#include <sge/renderer/texture/emulate_srgb.hpp>
-#include <sge/renderer/texture/planar.hpp>
-#include <sge/renderer/texture/mipmap/off.hpp>
 #include <sge/texture/const_part_unique_ptr.hpp>
 #include <sge/texture/part.hpp>
-#include <sge/texture/part_raw_ptr.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
-#include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/unique_ptr_to_const.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/fill.hpp>
 
@@ -140,23 +132,10 @@ sanguis::client::load::resource::make_missing_texture(
 	};
 
 	return
-		fcppt::unique_ptr_to_const(
-			fcppt::unique_ptr_to_base<
-				sge::texture::part
-			>(
-				fcppt::make_unique_ptr_fcppt<
-					sge::texture::part_raw_ptr
-				>(
-					sge::renderer::texture::create_planar_from_view(
-						_renderer,
-						sge::image2d::view::const_object(
-							store.const_wrapped_view()
-						),
-						sge::renderer::texture::mipmap::off(),
-						sge::renderer::resource_flags_field::null(),
-						sge::renderer::texture::emulate_srgb::no
-					)
-				)
+		sanguis::client::load::resource::texture_from_view(
+			_renderer,
+			sge::image2d::view::const_object(
+				store.const_wrapped_view()
 			)
 		);
 }
