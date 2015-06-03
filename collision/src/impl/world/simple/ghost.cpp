@@ -16,9 +16,11 @@
 #include <fcppt/make_cref.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/reference_wrapper_comparison.hpp>
+#include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/algorithm/map_iteration.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/container/find_opt.hpp>
+#include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -237,33 +239,30 @@ sanguis::collision::impl::world::simple::ghost::remove_body(
 	sanguis::collision::impl::world::simple::body const &_body
 )
 {
-	// TODO: How to improve this?
-	body_map::iterator const it(
-		bodies_.find(
-			fcppt::make_cref(
-				_body
-			)
-		)
-	);
-
-	if(
-		it
-		==
-		bodies_.end()
-	)
-		return
-			sanguis::collision::world::optional_body_exit();
-
-	bodies_.erase(
-		it
-	);
-
 	return
-		sanguis::collision::world::optional_body_exit(
-			sanguis::collision::world::body_exit(
-				_body.body_base(),
-				ghost_base_
-			)
+		fcppt::optional_bind_construct(
+			fcppt::container::find_opt_iterator(
+				bodies_,
+				fcppt::make_cref(
+					_body
+				)
+			),
+			[
+				this,
+				&_body
+			](
+				sanguis::collision::impl::world::simple::ghost::body_map::iterator const _it
+			){
+				bodies_.erase(
+					_it
+				);
+
+				return
+					sanguis::collision::world::body_exit(
+						_body.body_base(),
+						ghost_base_
+					);
+			}
 		);
 }
 

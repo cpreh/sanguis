@@ -10,6 +10,7 @@
 #include <sanguis/collision/world/object.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/collision/ghost.hpp>
+#include <fcppt/optional_assign.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
@@ -58,36 +59,27 @@ sanguis::server::collision::ghost::transfer(
 		!impl_.has_value()
 	);
 
-	// TODO: Improve this
-	sanguis::collision::world::ghost_unique_ptr new_ghost(
-		_world.create_ghost(
-			sanguis::collision::world::ghost_parameters(
-				sanguis::collision::center(
-					_center.get()
-				),
-				sanguis::collision::radius(
-					radius_.get()
-				),
-				collision_group_,
-				ghost_base_.get()
+	sanguis::collision::world::ghost_unique_ptr const &new_ghost(
+		fcppt::optional_assign(
+			impl_,
+			_world.create_ghost(
+				sanguis::collision::world::ghost_parameters(
+					sanguis::collision::center(
+						_center.get()
+					),
+					sanguis::collision::radius(
+						radius_.get()
+					),
+					collision_group_,
+					ghost_base_.get()
+				)
 			)
 		)
 	);
 
-	sanguis::collision::world::ghost &ghost_ref(
-		*new_ghost
-	);
-
-	impl_ =
-		optional_ghost_unique_ptr(
-			std::move(
-				new_ghost
-			)
-		);
-
 	return
 		_world.activate_ghost(
-			ghost_ref
+			*new_ghost
 		);
 }
 

@@ -12,12 +12,10 @@
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/body.hpp>
+#include <fcppt/optional_assign.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/pre.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <utility>
-#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::collision::body::body(
@@ -109,39 +107,30 @@ sanguis::server::collision::body::transfer(
 		!body_.has_value()
 	);
 
-	// TODO: Improve this
-	sanguis::collision::world::body_unique_ptr new_body(
-		_world.create_body(
-			sanguis::collision::world::body_parameters(
-				sanguis::collision::center(
-					_center.get()
-				),
-				sanguis::collision::speed(
-					_speed.get()
-				),
-				sanguis::collision::radius(
-					radius_.get()
-				),
-				_collision_group,
-				body_base_
+	sanguis::collision::world::body_unique_ptr const &new_body(
+		fcppt::optional_assign(
+			body_,
+			_world.create_body(
+				sanguis::collision::world::body_parameters(
+					sanguis::collision::center(
+						_center.get()
+					),
+					sanguis::collision::speed(
+						_speed.get()
+					),
+					sanguis::collision::radius(
+						radius_.get()
+					),
+					_collision_group,
+					body_base_
+				)
 			)
 		)
 	);
 
-	sanguis::collision::world::body &body_ref(
-		*new_body
-	);
-
-	body_ =
-		optional_body_unique_ptr(
-			std::move(
-				new_body
-			)
-		);
-
 	return
 		_world.activate_body(
-			body_ref,
+			*new_body,
 			_created
 		);
 }
