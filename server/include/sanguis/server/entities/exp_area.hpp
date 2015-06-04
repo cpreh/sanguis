@@ -8,6 +8,7 @@
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/center_ghost.hpp>
 #include <sanguis/server/entities/player_fwd.hpp>
+#include <sanguis/server/entities/simple.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -26,6 +27,7 @@ namespace entities
 class exp_area
 :
 	public virtual sanguis::server::entities::with_ghosts,
+	public sanguis::server::entities::simple,
 	private sanguis::server::collision::ghost_base,
 	private sanguis::server::entities::center_ghost
 {

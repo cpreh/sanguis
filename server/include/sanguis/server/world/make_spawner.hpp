@@ -6,7 +6,7 @@
 #include <sanguis/creator/enemy_type_fwd.hpp>
 #include <sanguis/creator/spawn_pos_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
-#include <sanguis/server/world/insert_pair.hpp>
+#include <sanguis/server/world/insert_simple_pair.hpp>
 
 
 namespace sanguis
@@ -16,7 +16,7 @@ namespace server
 namespace world
 {
 
-sanguis::server::world::insert_pair
+sanguis::server::world::insert_simple_pair
 make_spawner(
 	sanguis::creator::enemy_type,
 	sanguis::creator::enemy_kind,

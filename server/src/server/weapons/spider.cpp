@@ -8,12 +8,12 @@
 #include <sanguis/server/ai/create_friend.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/friend.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/optional_base_ref.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>
+#include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/ifaces/with_links.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/attack.hpp>
@@ -101,7 +101,7 @@ sanguis::server::weapons::spider::do_spawn(
 	return
 		_attack.environment().insert(
 			fcppt::unique_ptr_to_base<
-				sanguis::server::entities::base
+				sanguis::server::entities::with_id
 			>(
 				fcppt::make_unique_ptr_fcppt<
 					sanguis::server::entities::friend_

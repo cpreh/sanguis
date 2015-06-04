@@ -7,9 +7,9 @@
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>
+#include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/enemies/create.hpp>
 #include <sanguis/server/entities/enemies/special_chance.hpp>
 #include <sanguis/server/environment/object.hpp>

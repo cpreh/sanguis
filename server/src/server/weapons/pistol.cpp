@@ -4,9 +4,9 @@
 #include <sanguis/server/damage/full.hpp>
 #include <sanguis/server/damage/make_array.hpp>
 #include <sanguis/server/damage/piercing.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/modify_damages.hpp>
+#include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/projectiles/simple_bullet.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
@@ -100,7 +100,7 @@ sanguis::server::weapons::pistol::do_attack(
 	sanguis::server::environment::insert_no_result(
 		_attack.environment(),
 		fcppt::unique_ptr_to_base<
-			sanguis::server::entities::base
+			sanguis::server::entities::with_id
 		>(
 			fcppt::make_unique_ptr_fcppt<
 				sanguis::server::entities::projectiles::simple_bullet

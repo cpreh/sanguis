@@ -10,9 +10,9 @@
 #include <sanguis/server/damage/make_array.hpp>
 #include <sanguis/server/damage/no_armor.hpp>
 #include <sanguis/server/damage/normal.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
-#include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/entities/with_id.hpp>
+#include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/attribute_container.hpp>
 #include <sanguis/server/entities/enemies/is_unique.hpp>
 #include <sanguis/server/entities/enemies/parameters.hpp>
@@ -38,7 +38,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::server::entities::unique_ptr
+sanguis::server::entities::with_id_unique_ptr
 sanguis::server::entities::enemies::factory::reaper(
 	sanguis::server::entities::enemies::factory::parameters const &_parameters
 )
@@ -112,7 +112,7 @@ sanguis::server::entities::enemies::factory::reaper(
 
 	return
 		fcppt::unique_ptr_to_base<
-			sanguis::server::entities::base
+			sanguis::server::entities::with_id
 		>(
 			fcppt::make_unique_ptr_fcppt<
 				sanguis::server::entities::enemies::special

@@ -6,6 +6,7 @@
 #include <sanguis/server/damage/modified_array_fwd.hpp>
 #include <sanguis/server/damage/unit_fwd.hpp>
 #include <sanguis/server/entities/center_ghost.hpp>
+#include <sanguis/server/entities/simple.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -22,6 +23,7 @@ namespace projectiles
 class aoe_damage
 :
 	public sanguis::server::entities::with_auras,
+	public sanguis::server::entities::simple,
 	private sanguis::server::entities::center_ghost
 {
 	FCPPT_NONCOPYABLE(

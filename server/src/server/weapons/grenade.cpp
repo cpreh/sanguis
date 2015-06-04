@@ -6,9 +6,9 @@
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/damage/explosive.hpp>
 #include <sanguis/server/damage/unit.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/modify_damages.hpp>
+#include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/projectiles/grenade.hpp>
 #include <sanguis/server/environment/object.hpp>
@@ -115,7 +115,7 @@ sanguis::server::weapons::grenade::do_attack(
 		sanguis::server::weapons::insert_to_attack_result(
 			_attack.environment().insert(
 				fcppt::unique_ptr_to_base<
-					sanguis::server::entities::base
+					sanguis::server::entities::with_id
 				>(
 					fcppt::make_unique_ptr_fcppt<
 						sanguis::server::entities::projectiles::grenade

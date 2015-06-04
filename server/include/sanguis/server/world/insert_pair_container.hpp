@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_WORLD_INSERT_PAIR_CONTAINER_HPP_INCLUDED
 #define SANGUIS_SERVER_WORLD_INSERT_PAIR_CONTAINER_HPP_INCLUDED
 
-#include <sanguis/server/world/insert_pair.hpp>
+#include <sanguis/server/world/insert_pair_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
@@ -14,11 +14,17 @@ namespace server
 namespace world
 {
 
-typedef
-std::vector<
-	sanguis::server::world::insert_pair
+template<
+	typename Type
 >
-insert_pair_container;
+using
+insert_pair_container
+=
+std::vector<
+	sanguis::server::world::insert_pair<
+		Type
+	>
+>;
 
 }
 }

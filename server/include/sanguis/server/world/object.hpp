@@ -36,7 +36,7 @@
 #include <sanguis/server/entities/doodad_unique_ptr.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
 #include <sanguis/server/entities/optional_base_ref_fwd.hpp>
-#include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/entities/simple_unique_ptr.hpp>
 #include <sanguis/server/entities/with_id_fwd.hpp>
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
@@ -44,8 +44,9 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/world/context_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
-#include <sanguis/server/world/insert_pair_container.hpp>
-#include <sanguis/server/world/insert_pair_fwd.hpp>
+#include <sanguis/server/world/insert_simple_pair_fwd.hpp>
+#include <sanguis/server/world/insert_with_id_pair_container.hpp>
+#include <sanguis/server/world/insert_with_id_pair_fwd.hpp>
 #include <sanguis/server/world/object_fwd.hpp>
 #include <sanguis/server/world/parameters_fwd.hpp>
 #include <sanguis/server/world/pickup_spawner.hpp>
@@ -93,19 +94,31 @@ public:
 
 	sanguis::server::entities::optional_base_ref const
 	insert(
-		sanguis::server::entities::unique_ptr &&,
+		sanguis::server::entities::simple_unique_ptr &&,
 		sanguis::server::entities::insert_parameters const &
 	)
 	override;
 
 	sanguis::server::entities::optional_base_ref const
 	insert(
-		sanguis::server::world::insert_pair &&
+		sanguis::server::entities::with_id_unique_ptr &&,
+		sanguis::server::entities::insert_parameters const &
+	)
+	override;
+
+	sanguis::server::entities::optional_base_ref const
+	insert(
+		sanguis::server::world::insert_with_id_pair &&
 	);
 
 	void
 	insert(
-		sanguis::server::world::insert_pair_container &&
+		sanguis::server::world::insert_with_id_pair_container &&
+	);
+
+	sanguis::server::entities::optional_base_ref const
+	insert(
+		sanguis::server::world::insert_simple_pair &&
 	);
 
 	sanguis::server::environment::object &
@@ -117,12 +130,6 @@ public:
 	sanguis::world_id const
 	world_id() const;
 private:
-	sanguis::server::entities::optional_base_ref const
-	insert_with_id(
-		sanguis::server::entities::unique_ptr &&,
-		sanguis::server::entities::insert_parameters const &
-	);
-
 	void
 	player_insertion(
 		sanguis::server::entities::base const &
@@ -379,7 +386,7 @@ private:
 
 	typedef
 	std::vector<
-		sanguis::server::entities::unique_ptr
+		sanguis::server::entities::simple_unique_ptr
 	>
 	base_container;
 

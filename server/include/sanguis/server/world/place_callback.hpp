@@ -1,7 +1,7 @@
 #ifndef SANGUIS_SERVER_WORLD_PLACE_CALLBACK_HPP_INCLUDED
 #define SANGUIS_SERVER_WORLD_PLACE_CALLBACK_HPP_INCLUDED
 
-#include <sanguis/server/entities/unique_ptr.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
@@ -14,11 +14,17 @@ namespace server
 namespace world
 {
 
-typedef
-std::function<
-	sanguis::server::entities::unique_ptr ()
+template<
+	typename Type
 >
-place_callback;
+using
+place_callback
+=
+std::function<
+	fcppt::unique_ptr<
+		Type
+	> ()
+>;
 
 }
 }

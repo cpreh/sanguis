@@ -4,15 +4,16 @@
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>
+#include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/enemies/attribute.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
 #include <sanguis/server/entities/enemies/normal.hpp>
 #include <sanguis/server/entities/enemies/parameters.hpp>
 #include <sanguis/server/entities/enemies/skills/mother_spider.hpp>
 #include <sanguis/server/entities/enemies/skills/skill.hpp>
+#include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_unique_ptr_fcppt.hpp>
@@ -56,9 +57,10 @@ sanguis::server::entities::enemies::skills::mother_spider::on_die(
 			&environment
 		]
 		{
-			environment.insert(
+			sanguis::server::environment::insert_no_result(
+				environment,
 				fcppt::unique_ptr_to_base<
-					sanguis::server::entities::base
+					sanguis::server::entities::with_id
 				>(
 					fcppt::make_unique_ptr_fcppt<
 						sanguis::server::entities::enemies::normal

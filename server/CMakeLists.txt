@@ -341,6 +341,9 @@ set(
 	include/sanguis/server/entities/remove_from_world_result.hpp
 	include/sanguis/server/entities/remove_from_world_result_fwd.hpp
 	include/sanguis/server/entities/same_object.hpp
+	include/sanguis/server/entities/simple.hpp
+	include/sanguis/server/entities/simple_fwd.hpp
+	include/sanguis/server/entities/simple_unique_ptr.hpp
 	include/sanguis/server/entities/spawn_owner.hpp
 	include/sanguis/server/entities/spawn_owner_fwd.hpp
 	include/sanguis/server/entities/spawns/count_per_wave.hpp
@@ -689,11 +692,16 @@ set(
 	include/sanguis/server/world/generate.hpp
 	include/sanguis/server/world/generate_destructibles.hpp
 	include/sanguis/server/world/generate_single_spawns.hpp
-	include/sanguis/server/world/generate_spawns.hpp
 	include/sanguis/server/world/grid_pos_to_center.hpp
-	include/sanguis/server/world/insert_pair.hpp
 	include/sanguis/server/world/insert_pair_container.hpp
+	include/sanguis/server/world/insert_pair_decl.hpp
 	include/sanguis/server/world/insert_pair_fwd.hpp
+	include/sanguis/server/world/insert_pair_impl.hpp
+	include/sanguis/server/world/insert_simple_pair.hpp
+	include/sanguis/server/world/insert_simple_pair_fwd.hpp
+	include/sanguis/server/world/insert_with_id_pair.hpp
+	include/sanguis/server/world/insert_with_id_pair_container.hpp
+	include/sanguis/server/world/insert_with_id_pair_fwd.hpp
 	include/sanguis/server/world/make_destructible.hpp
 	include/sanguis/server/world/make_portal_blocker.hpp
 	include/sanguis/server/world/make_spawner.hpp
@@ -706,6 +714,8 @@ set(
 	include/sanguis/server/world/pickup_spawner.hpp
 	include/sanguis/server/world/place_callback.hpp
 	include/sanguis/server/world/place_multiple.hpp
+	include/sanguis/server/world/place_simple_callback.hpp
+	include/sanguis/server/world/place_with_id_callback.hpp
 	include/sanguis/server/world/random.hpp
 	include/sanguis/server/world/random_generator_name.hpp
 	include/sanguis/server/world/random_seed.hpp
@@ -891,6 +901,7 @@ set(
 	src/server/entities/property/linear_decrease_op.cpp
 	src/server/entities/property/subtract.cpp
 	src/server/entities/remove_from_world_result.cpp
+	src/server/entities/simple.cpp
 	src/server/entities/spawns/limited.cpp
 	src/server/entities/spawns/spawn.cpp
 	src/server/entities/speed_to_abs.cpp
@@ -1029,9 +1040,9 @@ set(
 	src/server/world/generate.cpp
 	src/server/world/generate_destructibles.cpp
 	src/server/world/generate_single_spawns.cpp
-	src/server/world/generate_spawns.cpp
 	src/server/world/grid_pos_to_center.cpp
-	src/server/world/insert_pair.cpp
+	src/server/world/insert_simple_pair.cpp
+	src/server/world/insert_with_id_pair.cpp
 	src/server/world/make_destructible.cpp
 	src/server/world/make_portal_blocker.cpp
 	src/server/world/make_spawner.cpp

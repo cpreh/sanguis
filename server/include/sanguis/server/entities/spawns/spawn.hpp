@@ -8,6 +8,7 @@
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/optional_transfer_result_fwd.hpp>
+#include <sanguis/server/entities/simple.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
@@ -28,8 +29,8 @@ namespace spawns
 
 class spawn
 :
-	public virtual sanguis::server::entities::base,
 	public virtual sanguis::server::entities::ifaces::with_angle,
+	public sanguis::server::entities::simple,
 	public sanguis::server::entities::with_links
 {
 	FCPPT_NONCOPYABLE(

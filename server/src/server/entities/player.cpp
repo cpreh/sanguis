@@ -46,7 +46,6 @@
 #include <sanguis/server/auras/update_sight.hpp>
 #include <sanguis/server/auras/weapon_pickup_candidates.hpp>
 #include <sanguis/server/damage/armor_array_fwd.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/movement_speed_initial.hpp>
@@ -388,7 +387,7 @@ sanguis::server::entities::player::drop_or_pickup_weapon(
 
 			cur_environment.insert(
 				fcppt::unique_ptr_to_base<
-					sanguis::server::entities::base
+					sanguis::server::entities::with_id
 				>(
 					fcppt::make_unique_ptr_fcppt<
 						sanguis::server::entities::pickups::weapon

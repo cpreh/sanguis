@@ -15,9 +15,9 @@
 #include <sanguis/server/damage/no_armor.hpp>
 #include <sanguis/server/damage/normal.hpp>
 #include <sanguis/server/damage/unit.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
-#include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/entities/with_id.hpp>
+#include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/factory/make.hpp>
 #include <sanguis/server/entities/enemies/factory/parameters.hpp>
 #include <sanguis/server/entities/enemies/factory/skeleton.hpp>
@@ -34,7 +34,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::server::entities::unique_ptr
+sanguis::server::entities::with_id_unique_ptr
 sanguis::server::entities::enemies::factory::skeleton(
 	sanguis::server::entities::enemies::factory::parameters const &_parameters
 )

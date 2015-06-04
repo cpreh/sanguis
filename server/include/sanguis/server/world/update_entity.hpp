@@ -3,7 +3,7 @@
 
 #include <sanguis/duration.hpp>
 #include <sanguis/server/entities/doodad_unique_ptr.hpp>
-#include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/entities/simple_unique_ptr.hpp>
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <fcppt/nonassignable.hpp>
 
@@ -28,7 +28,7 @@ public:
 
 	bool
 	operator()(
-		sanguis::server::entities::unique_ptr const &
+		sanguis::server::entities::simple_unique_ptr const &
 	) const;
 
 	bool

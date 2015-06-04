@@ -8,7 +8,7 @@
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/damage/armor_array.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
-#include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/factory/parameters_fwd.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 
@@ -24,7 +24,7 @@ namespace enemies
 namespace factory
 {
 
-sanguis::server::entities::unique_ptr
+sanguis::server::entities::with_id_unique_ptr
 make(
 	sanguis::server::entities::enemies::factory::parameters const &,
 	sanguis::server::damage::armor_array const &,

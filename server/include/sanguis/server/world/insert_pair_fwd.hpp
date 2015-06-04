@@ -9,6 +9,9 @@ namespace server
 namespace world
 {
 
+template<
+	typename Type
+>
 class insert_pair;
 
 }

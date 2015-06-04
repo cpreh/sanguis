@@ -23,13 +23,15 @@
 #include <sanguis/server/speed_fwd.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
 #include <sanguis/server/entities/optional_base_ref_fwd.hpp>
-#include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/entities/simple_unique_ptr.hpp>
 #include <sanguis/server/entities/with_id_fwd.hpp>
+#include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/preprocessor/warn_unused_result.hpp>
 
 
 namespace sanguis
@@ -50,9 +52,20 @@ public:
 	virtual
 	sanguis::server::entities::optional_base_ref const
 	insert(
-		sanguis::server::entities::unique_ptr &&,
+		sanguis::server::entities::with_id_unique_ptr &&,
 		sanguis::server::entities::insert_parameters const &
-	) = 0;
+	)
+	FCPPT_PP_WARN_UNUSED_RESULT
+	= 0;
+
+	virtual
+	sanguis::server::entities::optional_base_ref const
+	insert(
+		sanguis::server::entities::simple_unique_ptr &&,
+		sanguis::server::entities::insert_parameters const &
+	)
+	FCPPT_PP_WARN_UNUSED_RESULT
+	= 0;
 
 	virtual
 	void

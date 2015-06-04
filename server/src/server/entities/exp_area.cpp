@@ -3,6 +3,7 @@
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/collision/ghost.hpp>
+#include <sanguis/server/collision/ghost_base.hpp>
 #include <sanguis/server/collision/ghost_container.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/base.hpp>
@@ -10,6 +11,7 @@
 #include <sanguis/server/entities/exp_area.hpp>
 #include <sanguis/server/entities/is_type.hpp>
 #include <sanguis/server/entities/player.hpp>
+#include <sanguis/server/entities/simple.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
 #include <fcppt/algorithm/map_iteration_second.hpp>
@@ -29,6 +31,8 @@ sanguis::server::entities::exp_area::exp_area(
 )
 :
 	sanguis::server::entities::with_ghosts(),
+	sanguis::server::entities::simple(),
+	sanguis::server::collision::ghost_base(),
 	sanguis::server::entities::center_ghost(),
 	exp_(
 		_exp

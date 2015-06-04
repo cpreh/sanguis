@@ -5,7 +5,7 @@
 #include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/pickup_probability.hpp>
-#include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/random/distributor_decl.hpp>
@@ -60,7 +60,7 @@ private:
 
 	void
 	spawn_entity(
-		sanguis::server::entities::unique_ptr &&,
+		sanguis::server::entities::with_id_unique_ptr &&,
 		sanguis::server::center
 	);
 

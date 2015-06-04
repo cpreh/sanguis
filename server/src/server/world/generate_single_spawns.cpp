@@ -6,19 +6,19 @@
 #include <sanguis/load/model/enemy_path.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>
+#include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/enemies/create.hpp>
 #include <sanguis/server/entities/enemies/special_chance.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/generate_single_spawns.hpp>
 #include <sanguis/server/world/insert_pair_container.hpp>
-#include <sanguis/server/world/place_callback.hpp>
 #include <sanguis/server/world/place_multiple.hpp>
+#include <sanguis/server/world/place_with_id_callback.hpp>
 
 
-sanguis::server::world::insert_pair_container
+sanguis::server::world::insert_with_id_pair_container
 sanguis::server::world::generate_single_spawns(
 	sanguis::creator::enemy_type const _enemy_type,
 	sanguis::creator::enemy_kind const _enemy_kind,
@@ -31,7 +31,7 @@ sanguis::server::world::generate_single_spawns(
 	return
 		sanguis::server::world::place_multiple(
 			_random_generator,
-			sanguis::server::world::place_callback(
+			sanguis::server::world::place_with_id_callback(
 				[
 					&_random_generator,
 					_enemy_type,

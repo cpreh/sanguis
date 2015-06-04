@@ -18,7 +18,7 @@
 #include <sanguis/server/vector_fwd.hpp>
 #include <sanguis/server/entities/optional_player_ref_fwd.hpp>
 #include <sanguis/server/entities/player_fwd.hpp>
-#include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/global/context_fwd.hpp>
 #include <sanguis/server/global/source_world_pair.hpp>
@@ -156,7 +156,7 @@ private:
 	void
 	transfer_entity(
 		sanguis::server::global::source_world_pair,
-		sanguis::server::entities::unique_ptr &&
+		sanguis::server::entities::with_id_unique_ptr &&
 	)
 	override;
 

@@ -37,7 +37,8 @@
 #include <sanguis/server/entities/insert_with_result.hpp>
 #include <sanguis/server/entities/optional_player_ref.hpp>
 #include <sanguis/server/entities/player.hpp>
-#include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/entities/with_id.hpp>
+#include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/global/context.hpp>
 #include <sanguis/server/global/dest_world_pair.hpp>
@@ -205,7 +206,9 @@ sanguis::server::global::context::insert_player(
 	}
 
 	fcppt::maybe(
-		sanguis::server::entities::insert_with_result(
+		sanguis::server::entities::insert_with_result<
+			sanguis::server::entities::with_id
+		>(
 			cur_world,
 			std::move(
 				player_ptr
@@ -573,10 +576,10 @@ sanguis::server::global::context::request_transfer(
 void
 sanguis::server::global::context::transfer_entity(
 	sanguis::server::global::source_world_pair const _source,
-	sanguis::server::entities::unique_ptr &&_entity
+	sanguis::server::entities::with_id_unique_ptr &&_entity
 )
 {
-	sanguis::server::global::dest_world_pair const &dest(
+	sanguis::server::global::dest_world_pair const dest(
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			fcppt::container::find_opt(
 				worlds_.connections(),

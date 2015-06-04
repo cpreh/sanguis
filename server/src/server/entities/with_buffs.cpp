@@ -8,10 +8,10 @@
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <fcppt/algorithm/map.hpp>
-#include <fcppt/assert/error.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/get_or_insert_result.hpp>
 #include <fcppt/container/get_or_insert_with_result.hpp>
+#include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <typeindex>
@@ -95,17 +95,13 @@ sanguis::server::entities::with_buffs::remove_buff(
 		)
 	);
 
-	// TODO: Use find_opt_iterator
 	buff_map::iterator const it(
-		buffs_.find(
-			index
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			fcppt::container::find_opt_iterator(
+				buffs_,
+				index
+			)
 		)
-	);
-
-	FCPPT_ASSERT_ERROR(
-		it
-		!=
-		buffs_.end()
 	);
 
 	sanguis::server::buffs::stack &set(

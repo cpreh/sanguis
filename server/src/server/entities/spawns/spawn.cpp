@@ -7,14 +7,17 @@
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/optional_transfer_result.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>
+#include <sanguis/server/entities/simple.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/entities/transfer_result.hpp>
+#include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/enemies/create.hpp>
 #include <sanguis/server/entities/enemies/special_chance.hpp>
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/spawns/size_type.hpp>
 #include <sanguis/server/entities/spawns/spawn.hpp>
+#include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <fcppt/algorithm/repeat.hpp>
@@ -39,8 +42,8 @@ sanguis::server::entities::spawns::spawn::spawn(
 	sanguis::server::world::difficulty const _difficulty
 )
 :
-	sanguis::server::entities::base(),
 	sanguis::server::entities::ifaces::with_angle(),
+	sanguis::server::entities::simple(),
 	sanguis::server::entities::with_links(),
 	random_generator_(
 		_random_generator
@@ -118,7 +121,8 @@ sanguis::server::entities::spawns::spawn::update()
 					)
 				);
 
-				cur_environment.insert(
+				sanguis::server::environment::insert_no_result(
+					cur_environment,
 					sanguis::server::entities::enemies::create(
 						random_generator_,
 						enemy_type_,

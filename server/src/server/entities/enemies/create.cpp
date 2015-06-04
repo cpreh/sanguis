@@ -1,8 +1,9 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/enemy_type.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/spawn_owner_fwd.hpp>
+#include <sanguis/server/entities/with_id.hpp>
+#include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/base_difficulty.hpp>
 #include <sanguis/server/entities/enemies/create.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
@@ -23,7 +24,7 @@
 #include <fcppt/cast/int_to_float.hpp>
 
 
-sanguis::server::entities::unique_ptr
+sanguis::server::entities::with_id_unique_ptr
 sanguis::server::entities::enemies::create(
 	sanguis::random_generator &_random_generator,
 	sanguis::creator::enemy_type const _enemy_type,

@@ -8,10 +8,9 @@
 #include <sanguis/server/collision/distance_pos_pos.hpp>
 #include <sanguis/server/damage/modified_array.hpp>
 #include <sanguis/server/damage/unit.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
-#include <sanguis/server/entities/optional_base_ref.hpp>
 #include <sanguis/server/entities/optional_transfer_result.hpp>
+#include <sanguis/server/entities/simple.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/entities/with_health_fwd.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
@@ -19,8 +18,8 @@
 #include <sanguis/server/entities/projectiles/aoe_projectile.hpp>
 #include <sanguis/server/entities/projectiles/grenade.hpp>
 #include <sanguis/server/entities/projectiles/life_time.hpp>
+#include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
-#include <sanguis/server/environment/object.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/optional_bind_construct.hpp>
@@ -144,11 +143,12 @@ sanguis::server::entities::projectiles::grenade::update()
 void
 sanguis::server::entities::projectiles::grenade::remove_from_game()
 {
-	FCPPT_ASSERT_OPTIONAL_ERROR(
-		this->environment()
-	).insert(
+	sanguis::server::environment::insert_no_result(
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			this->environment()
+		),
 		fcppt::unique_ptr_to_base<
-			sanguis::server::entities::base
+			sanguis::server::entities::simple
 		>(
 			fcppt::make_unique_ptr_fcppt<
 				sanguis::server::entities::projectiles::aoe_damage

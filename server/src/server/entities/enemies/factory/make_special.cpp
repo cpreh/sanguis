@@ -1,7 +1,7 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/health.hpp>
-#include <sanguis/server/entities/base.hpp>
-#include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/entities/with_id.hpp>
+#include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/attribute_container.hpp>
 #include <sanguis/server/entities/enemies/is_unique.hpp>
 #include <sanguis/server/entities/enemies/parameters.hpp>
@@ -25,7 +25,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::server::entities::unique_ptr
+sanguis::server::entities::with_id_unique_ptr
 sanguis::server::entities::enemies::factory::make_special(
 	sanguis::random_generator &_random_generator,
 	sanguis::server::entities::enemies::parameters &&_parameters,
@@ -89,7 +89,7 @@ sanguis::server::entities::enemies::factory::make_special(
 
 	return
 		fcppt::unique_ptr_to_base<
-			sanguis::server::entities::base
+			sanguis::server::entities::with_id
 		>(
 			fcppt::make_unique_ptr_fcppt<
 				sanguis::server::entities::enemies::special

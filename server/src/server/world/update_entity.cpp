@@ -1,10 +1,10 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/server/collision/body_exit.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/doodad.hpp>
 #include <sanguis/server/entities/doodad_unique_ptr.hpp>
+#include <sanguis/server/entities/simple.hpp>
+#include <sanguis/server/entities/simple_unique_ptr.hpp>
 #include <sanguis/server/entities/remove_from_world_result.hpp>
-#include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/world/update_entity.hpp>
@@ -22,7 +22,7 @@ sanguis::server::world::update_entity::update_entity(
 
 bool
 sanguis::server::world::update_entity::operator()(
-	sanguis::server::entities::unique_ptr const &_entity
+	sanguis::server::entities::simple_unique_ptr const &_entity
 ) const
 {
 	return

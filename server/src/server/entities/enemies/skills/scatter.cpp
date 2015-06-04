@@ -7,9 +7,9 @@
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/damage/explosive.hpp>
 #include <sanguis/server/damage/unit.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/modify_damages.hpp>
+#include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/enemies/attribute.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
 #include <sanguis/server/entities/enemies/skills/cooldown.hpp>
@@ -91,7 +91,7 @@ sanguis::server::entities::enemies::skills::scatter::update(
 					sanguis::server::environment::insert_no_result(
 						_environment,
 						fcppt::unique_ptr_to_base<
-							sanguis::server::entities::base
+							sanguis::server::entities::with_id
 						>(
 							fcppt::make_unique_ptr_fcppt<
 								sanguis::server::entities::projectiles::scatter
@@ -113,7 +113,7 @@ sanguis::server::entities::enemies::skills::scatter::update(
 									{
 										return
 											fcppt::unique_ptr_to_base<
-												sanguis::server::entities::base
+												sanguis::server::entities::with_id
 											>(
 												fcppt::make_unique_ptr_fcppt<
 													sanguis::server::entities::projectiles::rocket

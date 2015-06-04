@@ -9,9 +9,9 @@
 #include <sanguis/server/damage/make_array.hpp>
 #include <sanguis/server/damage/piercing.hpp>
 #include <sanguis/server/damage/unit.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/modify_damages.hpp>
+#include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_perks.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/projectiles/rocket.hpp>
@@ -136,7 +136,7 @@ sanguis::server::perks::choleric::update(
 				spawn_bullets
 				?
 					fcppt::unique_ptr_to_base<
-						sanguis::server::entities::base
+						sanguis::server::entities::with_id
 					>(
 						fcppt::make_unique_ptr_fcppt<
 							sanguis::server::entities::projectiles::simple_bullet
@@ -158,7 +158,7 @@ sanguis::server::perks::choleric::update(
 					)
 				:
 					fcppt::unique_ptr_to_base<
-						sanguis::server::entities::base
+						sanguis::server::entities::with_id
 					>(
 						fcppt::make_unique_ptr_fcppt<
 							sanguis::server::entities::projectiles::rocket

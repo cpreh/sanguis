@@ -3,7 +3,7 @@
 
 #include <sanguis/server/angle_fwd.hpp>
 #include <sanguis/server/team_fwd.hpp>
-#include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -21,7 +21,7 @@ namespace projectiles
 
 typedef
 std::function<
-	sanguis::server::entities::unique_ptr(
+	sanguis::server::entities::with_id_unique_ptr(
 		sanguis::server::environment::object &,
 		sanguis::server::team,
 		sanguis::server::angle

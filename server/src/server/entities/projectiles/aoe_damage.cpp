@@ -7,6 +7,7 @@
 #include <sanguis/server/damage/modified_array_fwd.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/center_ghost.hpp>
+#include <sanguis/server/entities/simple.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
 #include <sanguis/server/entities/projectiles/aoe_damage.hpp>
 #include <fcppt/make_unique_ptr_fcppt.hpp>
@@ -40,6 +41,7 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 			)
 		).move_container()
 	),
+	sanguis::server::entities::simple(),
 	sanguis::server::entities::center_ghost()
 {
 }

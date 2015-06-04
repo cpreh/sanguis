@@ -23,6 +23,7 @@
 #include <sanguis/creator/opening_type.hpp>
 #include <sanguis/creator/spawn.hpp>
 #include <sanguis/creator/spawn_container.hpp>
+#include <sanguis/creator/spawn_type.hpp>
 #include <sanguis/creator/top_result.hpp>
 #include <sanguis/messages/convert/to_magazine_size.hpp>
 #include <sanguis/messages/convert/to_weapon_attribute_vector.hpp>
@@ -94,12 +95,12 @@
 #include <sanguis/server/entities/doodad.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
-#include <sanguis/server/entities/is_type.hpp>
 #include <sanguis/server/entities/optional_base_ref.hpp>
 #include <sanguis/server/entities/optional_transfer_result.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/remove_from_world_result.hpp>
-#include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/entities/simple.hpp>
+#include <sanguis/server/entities/simple_unique_ptr.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
@@ -110,11 +111,13 @@
 #include <sanguis/server/world/context.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/generate_destructibles.hpp>
-#include <sanguis/server/world/generate_spawns.hpp>
+#include <sanguis/server/world/generate_single_spawns.hpp>
 #include <sanguis/server/world/grid_pos_to_center.hpp>
-#include <sanguis/server/world/insert_pair.hpp>
-#include <sanguis/server/world/insert_pair_container.hpp>
+#include <sanguis/server/world/insert_simple_pair.hpp>
+#include <sanguis/server/world/insert_with_id_pair.hpp>
+#include <sanguis/server/world/insert_with_id_pair_container.hpp>
 #include <sanguis/server/world/make_portal_blocker.hpp>
+#include <sanguis/server/world/make_spawner.hpp>
 #include <sanguis/server/world/object.hpp>
 #include <sanguis/server/world/parameters.hpp>
 #include <sanguis/server/world/sight_range.hpp>
@@ -124,6 +127,7 @@
 #include <fcppt/make_enum_range.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/maybe_void.hpp>
+#include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
@@ -132,10 +136,12 @@
 #include <fcppt/algorithm/map_iteration_second.hpp>
 #include <fcppt/algorithm/sequence_iteration.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/assert/pre.hpp>
+#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
+#include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
@@ -269,38 +275,113 @@ sanguis::server::world::object::update(
 
 sanguis::server::entities::optional_base_ref const
 sanguis::server::world::object::insert(
-	sanguis::server::entities::unique_ptr &&_entity,
+	sanguis::server::entities::simple_unique_ptr &&_entity,
 	sanguis::server::entities::insert_parameters const &_insert_parameters
 )
 {
 	return
-		// TODO: Use try_dynamic
-		sanguis::server::entities::is_type<
-			sanguis::server::entities::with_id
-		>(
-			*_entity
-		)
-		?
-			this->insert_with_id(
-				std::move(
-					_entity
-				),
-				_insert_parameters
-			)
-		:
+		fcppt::optional_bind_construct(
 			this->insert_base(
 				server_entities_,
 				std::move(
 					_entity
 				),
 				_insert_parameters
+			),
+			[](
+				sanguis::server::entities::simple &_simple
 			)
-		;
+			-> sanguis::server::entities::base &
+			{
+				return
+					_simple;
+			}
+		);
 }
 
 sanguis::server::entities::optional_base_ref const
 sanguis::server::world::object::insert(
-	sanguis::server::world::insert_pair &&_pair
+	sanguis::server::entities::with_id_unique_ptr &&_entity,
+	sanguis::server::entities::insert_parameters const &_insert_parameters
+)
+{
+	return
+		fcppt::maybe(
+			_entity->transfer(
+				this->environment(),
+				_insert_parameters,
+				grid_
+			),
+			[
+				this
+			]
+			{
+				FCPPT_LOG_WARNING(
+					sanguis::server::log(),
+					fcppt::log::_
+						<< FCPPT_TEXT("Failed to spawn entity because its spawnpoint is obstructed")
+				);
+
+				return
+					sanguis::server::entities::optional_base_ref();
+			},
+			[
+				this,
+				&_entity
+			](
+				sanguis::server::entities::transfer_result const &_transfer_result
+			)
+			{
+				sanguis::entity_id const id(
+					_entity->id()
+				);
+
+				typedef
+				std::pair<
+					entity_map::iterator,
+					bool
+				>
+				return_type;
+
+				return_type const ret(
+					entities_.insert(
+						std::make_pair(
+							id,
+							std::move(
+								_entity
+							)
+						)
+					)
+				);
+
+				FCPPT_ASSERT_ERROR(
+					ret.second
+				);
+
+
+				sanguis::server::entities::base &result(
+					*ret.first->second
+				);
+
+				this->player_insertion(
+					result
+				);
+
+				sanguis::server::collision::body_enter(
+					_transfer_result.body_enter()
+				);
+
+				return
+					sanguis::server::entities::optional_base_ref(
+						result
+					);
+			}
+		);
+}
+
+sanguis::server::entities::optional_base_ref const
+sanguis::server::world::object::insert(
+	sanguis::server::world::insert_with_id_pair &&_pair
 )
 {
 	return
@@ -314,11 +395,11 @@ sanguis::server::world::object::insert(
 
 void
 sanguis::server::world::object::insert(
-	sanguis::server::world::insert_pair_container &&_pairs
+	sanguis::server::world::insert_with_id_pair_container &&_pairs
 )
 {
 	for(
-		sanguis::server::world::insert_pair &element
+		sanguis::server::world::insert_with_id_pair &element
 		:
 		_pairs
 	)
@@ -326,6 +407,20 @@ sanguis::server::world::object::insert(
 			std::move(
 				element
 			)
+		);
+}
+
+sanguis::server::entities::optional_base_ref const
+sanguis::server::world::object::insert(
+	sanguis::server::world::insert_simple_pair &&_pair
+)
+{
+	return
+		this->insert(
+			std::move(
+				_pair.entity()
+			),
+			_pair.insert_parameters()
 		);
 }
 
@@ -350,103 +445,12 @@ sanguis::server::world::object::world_id() const
 		id_;
 }
 
-sanguis::server::entities::optional_base_ref const
-sanguis::server::world::object::insert_with_id(
-	sanguis::server::entities::unique_ptr &&_entity,
-	sanguis::server::entities::insert_parameters const &_insert_parameters
-)
-{
-	// TODO: Fix this!
-	sanguis::server::entities::with_id_unique_ptr cur_entity(
-		&dynamic_cast<
-			sanguis::server::entities::with_id &
-		>(
-			*_entity.release_ownership()
-		)
-	);
-
-	sanguis::entity_id const id(
-		cur_entity->id()
-	);
-
-	typedef std::pair<
-		entity_map::iterator,
-		bool
-	> return_type;
-
-	return_type const ret(
-		entities_.insert(
-			std::make_pair(
-				id,
-				std::move(
-					cur_entity
-				)
-			)
-		)
-	);
-
-	FCPPT_ASSERT_ERROR(
-		ret.second
-	);
-
-	sanguis::server::entities::base &result(
-		*ret.first->second
-	);
-
-	return
-		fcppt::maybe(
-			result.transfer(
-				this->environment(),
-				_insert_parameters,
-				grid_
-			),
-			[
-				this,
-				ret
-			]
-			{
-				FCPPT_LOG_WARNING(
-					sanguis::server::log(),
-					fcppt::log::_
-						<< FCPPT_TEXT("Failed to spawn entity because its spawnpoint is obstructed")
-				);
-
-				// TODO: Can we insert the entity after?
-				entities_.erase(
-					ret.first
-				);
-
-				return
-					sanguis::server::entities::optional_base_ref();
-			},
-			[
-				this,
-				&result
-			](
-				sanguis::server::entities::transfer_result const &_transfer_result
-			)
-			{
-				this->player_insertion(
-					result
-				);
-
-				sanguis::server::collision::body_enter(
-					_transfer_result.body_enter()
-				);
-
-				return
-					sanguis::server::entities::optional_base_ref(
-						result
-					);
-			}
-		);
-}
-
 void
 sanguis::server::world::object::player_insertion(
 	sanguis::server::entities::base const &_result
 )
 {
+	// TODO: Put this into the class hierarchy instead
 	fcppt::maybe_void(
 		fcppt::cast::try_dynamic<
 			sanguis::server::entities::player const &
@@ -523,53 +527,33 @@ sanguis::server::world::object::insert_base(
 )
 {
 	// These are only very simple entities that don't need special treatment
-	_container.push_back(
-		std::move(
-			_entity
-		)
-	);
-
-	Entity &ref(
-		*_container.back()
-	);
-
-	typedef
-	fcppt::optional<
-		Entity &
-	>
-	result_type;
-
 	return
-		fcppt::maybe(
-			ref.transfer(
+		fcppt::optional_bind_construct(
+			_entity->transfer(
 				this->environment(),
 				_insert_parameters,
 				grid_
 			),
 			[
-				&_container
-			]
-			{
-				// TODO: How can we make this exception-safe and simpler?
-				_container.pop_back();
-
-				return
-					result_type();
-			},
-			[
-				&ref
+				&_container,
+				&_entity
 			](
 				sanguis::server::entities::transfer_result const &_transfer_result
 			)
+			-> Entity &
 			{
+				_container.push_back(
+					std::move(
+						_entity
+					)
+				);
+
 				sanguis::server::collision::body_enter(
 					_transfer_result.body_enter()
 				);
 
 				return
-					result_type(
-						ref
-					);
+					*_container.back();
 			}
 		);
 }
@@ -924,15 +908,12 @@ sanguis::server::world::object::request_transfer(
 )
 {
 	entity_map::iterator const it(
-		entities_.find(
-			_entity_id
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			fcppt::container::find_opt_iterator(
+				entities_,
+				_entity_id
+			)
 		)
-	);
-
-	FCPPT_ASSERT_ERROR(
-		it
-		!=
-		entities_.end()
 	);
 
 	sanguis::server::entities::base &cur_entity(
@@ -990,9 +971,9 @@ sanguis::server::world::object::request_transfer(
 				);
 
 				// TODO: Make a function for this!
-				sanguis::server::entities::unique_ptr entity_ptr(
+				sanguis::server::entities::with_id_unique_ptr entity_ptr(
 					fcppt::unique_ptr_to_base<
-						sanguis::server::entities::base
+						sanguis::server::entities::with_id
 					>(
 						std::move(
 							it->second
@@ -1131,15 +1112,12 @@ sanguis::server::world::object::remove_sight_range(
 {
 	{
 		sanguis::server::world::sight_range_map::iterator const sight_it(
-			sight_ranges_.find(
-				_player_id
+			FCPPT_ASSERT_OPTIONAL_ERROR(
+				fcppt::container::find_opt_iterator(
+					sight_ranges_,
+					_player_id
+				)
 			)
-		);
-
-		FCPPT_ASSERT_PRE(
-			sight_it
-			!=
-			sight_ranges_.end()
 		);
 
 		sight_it->second.remove(
@@ -1235,14 +1213,38 @@ sanguis::server::world::object::insert_spawns(
 		:
 		_spawns
 	)
-		this->insert(
-			sanguis::server::world::generate_spawns(
-				spawn,
-				_random_generator,
-				this->load_context(),
-				difficulty_
-			)
-		);
+	{
+		switch(
+			spawn.spawn_type()
+		)
+		{
+		case sanguis::creator::spawn_type::single:
+			this->insert(
+				sanguis::server::world::generate_single_spawns(
+					spawn.enemy_type(),
+					spawn.enemy_kind(),
+					spawn.pos(),
+					_random_generator,
+					this->load_context(),
+					difficulty_
+				)
+			);
+			continue;
+		case sanguis::creator::spawn_type::spawner:
+			this->insert(
+				sanguis::server::world::make_spawner(
+					spawn.enemy_type(),
+					spawn.enemy_kind(),
+					spawn.pos(),
+					_random_generator,
+					difficulty_
+				)
+			);
+			continue;
+		}
+
+		FCPPT_ASSERT_UNREACHABLE;
+	}
 }
 
 void

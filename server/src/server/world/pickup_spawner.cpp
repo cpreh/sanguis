@@ -5,10 +5,10 @@
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/team.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
-#include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/entities/with_id.hpp>
+#include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/entities/pickups/health.hpp>
 #include <sanguis/server/entities/pickups/weapon.hpp>
@@ -168,7 +168,7 @@ sanguis::server::world::pickup_spawner::spawn_health(
 {
 	this->spawn_entity(
 		fcppt::unique_ptr_to_base<
-			sanguis::server::entities::base
+			sanguis::server::entities::with_id
 		>(
 			fcppt::make_unique_ptr_fcppt<
 				sanguis::server::entities::pickups::health
@@ -197,7 +197,7 @@ sanguis::server::world::pickup_spawner::spawn_weapon(
 {
 	this->spawn_entity(
 		fcppt::unique_ptr_to_base<
-			sanguis::server::entities::base
+			sanguis::server::entities::with_id
 		>(
 			fcppt::make_unique_ptr_fcppt<
 				sanguis::server::entities::pickups::weapon
@@ -217,7 +217,7 @@ sanguis::server::world::pickup_spawner::spawn_weapon(
 
 void
 sanguis::server::world::pickup_spawner::spawn_entity(
-	sanguis::server::entities::unique_ptr &&_entity,
+	sanguis::server::entities::with_id_unique_ptr &&_entity,
 	sanguis::server::center const _center
 )
 {

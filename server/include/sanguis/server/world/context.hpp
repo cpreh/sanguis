@@ -4,7 +4,7 @@
 #include <sanguis/world_id.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
 #include <sanguis/server/player_id.hpp>
-#include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/global/source_world_pair.hpp>
 #include <sanguis/server/world/context_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -35,7 +35,7 @@ public:
 	void
 	transfer_entity(
 		sanguis::server::global::source_world_pair,
-		sanguis::server::entities::unique_ptr &&
+		sanguis::server::entities::with_id_unique_ptr &&
 	) = 0;
 
 	virtual

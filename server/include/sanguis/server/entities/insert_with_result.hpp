@@ -20,6 +20,7 @@ namespace entities
 {
 
 template<
+	typename Base,
 	typename Entity,
 	typename Object
 >
@@ -40,7 +41,7 @@ insert_with_result(
 		>(
 			_object.insert(
 				fcppt::unique_ptr_to_base<
-					sanguis::server::entities::base
+					Base
 				>(
 					std::move(
 						_entity

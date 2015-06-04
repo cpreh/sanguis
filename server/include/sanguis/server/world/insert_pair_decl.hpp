@@ -1,9 +1,9 @@
-#ifndef SANGUIS_SERVER_WORLD_INSERT_PAIR_HPP_INCLUDED
-#define SANGUIS_SERVER_WORLD_INSERT_PAIR_HPP_INCLUDED
+#ifndef SANGUIS_SERVER_WORLD_INSERT_PAIR_DECL_HPP_INCLUDED
+#define SANGUIS_SERVER_WORLD_INSERT_PAIR_DECL_HPP_INCLUDED
 
 #include <sanguis/server/entities/insert_parameters.hpp>
-#include <sanguis/server/entities/unique_ptr.hpp>
 #include <sanguis/server/world/insert_pair_fwd.hpp>
+#include <fcppt/unique_ptr_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -14,14 +14,23 @@ namespace server
 namespace world
 {
 
+template<
+	typename Type
+>
 class insert_pair
 {
 	FCPPT_NONCOPYABLE(
 		insert_pair
 	);
 public:
+	typedef
+	fcppt::unique_ptr<
+		Type
+	>
+	unique_ptr;
+
 	insert_pair(
-		sanguis::server::entities::unique_ptr &&,
+		unique_ptr &&,
 		sanguis::server::entities::insert_parameters const &
 	);
 
@@ -36,13 +45,13 @@ public:
 
 	~insert_pair();
 
-	sanguis::server::entities::unique_ptr &
+	unique_ptr &
 	entity();
 
 	sanguis::server::entities::insert_parameters const &
 	insert_parameters() const;
 private:
-	sanguis::server::entities::unique_ptr entity_;
+	unique_ptr entity_;
 
 	sanguis::server::entities::insert_parameters insert_parameters_;
 };

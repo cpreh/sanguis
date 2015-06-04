@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_WORLD_MAKE_DESTRUCTIBLE_HPP_INCLUDED
 
 #include <sanguis/creator/destructible_type_fwd.hpp>
-#include <sanguis/server/entities/unique_ptr.hpp>
+#include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 
@@ -14,7 +14,7 @@ namespace server
 namespace world
 {
 
-sanguis::server::entities::unique_ptr
+sanguis::server::entities::with_id_unique_ptr
 make_destructible(
 	sanguis::creator::destructible_type,
 	sanguis::server::environment::load_context &,

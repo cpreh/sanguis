@@ -8,11 +8,12 @@
 #include <sanguis/server/unicast_callback.hpp>
 #include <sanguis/server/cheat/process.hpp>
 #include <sanguis/server/cheat/weapon_type.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/player.hpp>
+#include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/entities/pickups/weapon.hpp>
+#include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/create.hpp>
 #include <sanguis/server/weapons/monster_spawner.hpp>
@@ -63,9 +64,10 @@ sanguis::server::cheat::process(
 				_player.kill();
 				return;
 			case sanguis::cheat_type::monster_spawner:
-				_environment.insert(
+				sanguis::server::environment::insert_no_result(
+					_environment,
 					fcppt::unique_ptr_to_base<
-						sanguis::server::entities::base
+						sanguis::server::entities::with_id
 					>(
 						fcppt::make_unique_ptr_fcppt<
 							sanguis::server::entities::pickups::weapon
@@ -94,9 +96,10 @@ sanguis::server::cheat::process(
 			case sanguis::cheat_type::grenade:
 			case sanguis::cheat_type::shotgun:
 			case sanguis::cheat_type::rocket_launcher:
-				_environment.insert(
+				sanguis::server::environment::insert_no_result(
+					_environment,
 					fcppt::unique_ptr_to_base<
-						sanguis::server::entities::base
+						sanguis::server::entities::with_id
 					>(
 						fcppt::make_unique_ptr_fcppt<
 							sanguis::server::entities::pickups::weapon

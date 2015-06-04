@@ -26,11 +26,11 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/auras/container.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/exp_area.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/movement_speed_initial.hpp>
+#include <sanguis/server/entities/simple.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
 #include <sanguis/server/entities/with_health.hpp>
@@ -190,7 +190,7 @@ sanguis::server::entities::enemies::enemy::remove_from_game()
 	sanguis::server::environment::insert_no_result(
 		cur_environment,
 		fcppt::unique_ptr_to_base<
-			sanguis::server::entities::base
+			sanguis::server::entities::simple
 		>(
 			fcppt::make_unique_ptr_fcppt<
 				sanguis::server::entities::exp_area
