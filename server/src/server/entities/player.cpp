@@ -62,6 +62,7 @@
 #include <sanguis/server/entities/pickups/weapon.hpp>
 #include <sanguis/server/entities/property/current_to_max.hpp>
 #include <sanguis/server/entities/property/initial_zero.hpp>
+#include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/perks/perk.hpp>
@@ -385,7 +386,8 @@ sanguis::server::entities::player::drop_or_pickup_weapon(
 				)
 			);
 
-			cur_environment.insert(
+			sanguis::server::environment::insert_no_result(
+				cur_environment,
 				fcppt::unique_ptr_to_base<
 					sanguis::server::entities::with_id
 				>(
