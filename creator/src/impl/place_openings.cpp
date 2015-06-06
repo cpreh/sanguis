@@ -5,14 +5,13 @@
 #include <sanguis/creator/opening_count.hpp>
 #include <sanguis/creator/opening_count_array.hpp>
 #include <sanguis/creator/opening_type.hpp>
-#include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/impl/closest_empty.hpp>
 #include <sanguis/creator/impl/place_openings.hpp>
 #include <sanguis/creator/impl/set_opening_tiles.hpp>
 #include <sanguis/creator/impl/random/uniform_pos.hpp>
 #include <fcppt/make_int_range_count.hpp>
 #include <fcppt/make_literal_strong_typedef.hpp>
-#include <fcppt/maybe.hpp>
+#include <fcppt/optional_to_exception.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/enum_array_fold.hpp>
 #include <fcppt/algorithm/map.hpp>
@@ -60,30 +59,20 @@ sanguis::creator::impl::place_openings(
 						)
 						{
 							return
-								fcppt::maybe(
-									sanguis::creator::impl::closest_empty(
-										_grid,
-										random_pos()
-									),
-									[]()
-									->
-									sanguis::creator::opening
-									{
-										throw
-											sanguis::creator::exception{
-												FCPPT_TEXT("Unable to find a free tile for an opening.")
-											};
-									},
-									[](
-										sanguis::creator::pos const _pos
+								sanguis::creator::opening{
+									fcppt::optional_to_exception(
+										sanguis::creator::impl::closest_empty(
+											_grid,
+											random_pos()
+										),
+										[]{
+											return
+												sanguis::creator::exception{
+													FCPPT_TEXT("Unable to find a free tile for an opening.")
+												};
+										}
 									)
-									{
-										return
-											sanguis::creator::opening{
-												_pos
-											};
-									}
-								);
+								};
 						}
 					);
 			}
