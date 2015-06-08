@@ -6,10 +6,11 @@
 #include <sanguis/server/random/create_function.hpp>
 #include <sanguis/server/random/equal_function.hpp>
 #include <sanguis/server/random/less_function.hpp>
+#include <fcppt/maybe.hpp>
 #include <fcppt/algorithm/repeat.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/random/wrapper/make_uniform_container.hpp>
+#include <fcppt/random/wrapper/uniform_container.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <fcppt/config/external_end.hpp>
@@ -47,64 +48,80 @@ draw(
 	> const &_equal_function
 )
 {
-	auto container_distribution(
-		FCPPT_ASSERT_OPTIONAL_ERROR(
+	return
+		fcppt::maybe(
 			fcppt::random::wrapper::make_uniform_container(
 				_source
-			)
-		)
-	);
-
-	Result result;
-
-	result.reserve(
-		std::min(
-			fcppt::cast::size<
-				typename
-				Source::size_type
-			>(
-				_draws.get()
 			),
-			_source.size()
-		)
-	);
+			[]{
+				return
+					Result();
+			},
+			[
+				&_random_generator,
+				&_less_function,
+				&_create_function,
+				&_equal_function,
+				&_source,
+				&_draws
+			](
+				fcppt::random::wrapper::uniform_container<
+					Source const
+				> _container_distribution
+			)
+			{
+				Result result;
 
-	fcppt::algorithm::repeat(
-		result.capacity(),
-		[
-			&_create_function,
-			&_random_generator,
-			&container_distribution,
-			&result
-		]()
-		{
-			result.push_back(
-				_create_function.get()(
-					container_distribution(
-						_random_generator
+				result.reserve(
+					std::min(
+						fcppt::cast::size<
+							typename
+							Source::size_type
+						>(
+							_draws.get()
+						),
+						_source.size()
 					)
-				)
-			);
-		}
-	);
+				);
 
-	std::sort(
-		result.begin(),
-		result.end(),
-		_less_function.get()
-	);
+				fcppt::algorithm::repeat(
+					result.capacity(),
+					[
+						&_create_function,
+						&_random_generator,
+						&_container_distribution,
+						&result
+					]()
+					{
+						result.push_back(
+							_create_function.get()(
+								_container_distribution(
+									_random_generator
+								)
+							)
+						);
+					}
+				);
 
-	result.erase(
-		std::unique(
-			result.begin(),
-			result.end(),
-			_equal_function.get()
-		),
-		result.end()
-	);
+				std::sort(
+					result.begin(),
+					result.end(),
+					_less_function.get()
+				);
 
-	return
-		result;
+				result.erase(
+					std::unique(
+						result.begin(),
+						result.end(),
+						_equal_function.get()
+					),
+					result.end()
+				);
+
+				return
+					result;
+			}
+		);
 }
 
 }

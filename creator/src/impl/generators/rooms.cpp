@@ -795,10 +795,10 @@ sanguis::creator::impl::generators::rooms(
 			sanguis::creator::opening_type,
 			::signed_rect
 		>
-		{{
+		{{{
 			entrance_room,
 			exit_room
-		}};
+		}}};
 
 	auto const opening_counts =
 		_parameters.opening_count_array();
