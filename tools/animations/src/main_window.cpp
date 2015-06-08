@@ -23,13 +23,13 @@
 #include <sanguis/tools/animations/qtutil/flow_layout.hpp>
 #include <sanguis/tools/animations/qtutil/from_fcppt_string.hpp>
 #include <sanguis/tools/animations/qtutil/string_to_optional.hpp>
-#include <sanguis/tools/libmergeimage/exception.hpp>
 #include <sanguis/tools/libmergeimage/merge_images.hpp>
 #include <sanguis/tools/libmergeimage/merge_result.hpp>
 #include <sanguis/tools/libmergeimage/save_images.hpp>
 #include <sanguis/tools/libmergeimage/saved_image_vector.hpp>
 #include <sanguis/tools/libmergeimage/to_model.hpp>
 #include <fcppt/const.hpp>
+#include <fcppt/exception.hpp>
 #include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/maybe_multi.hpp>
@@ -255,7 +255,7 @@ try
 	);
 }
 catch(
-	sanguis::tools::libmergeimage::exception const &_error
+	fcppt::exception const &_error
 )
 {
 	this->message_box(
