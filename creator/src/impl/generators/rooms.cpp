@@ -105,12 +105,6 @@ namespace
 			-1
 		};
 
-	auto const
-	zero =
-		region_id{
-			0
-		};
-
 	auto
 	border_distance =
 	[](
@@ -288,8 +282,8 @@ sanguis::creator::impl::generators::rooms(
 {
 	// actual size of the level will be 2x+1 this
 	sanguis::creator::grid::dim const size{
-		21u,
-		21u
+		31u,
+		31u
 	};
 
 	sanguis::creator::impl::reachable_grid
@@ -354,7 +348,7 @@ sanguis::creator::impl::generators::rooms(
 
 	for (
 		::int_type i = 0;
-		i < 450; // FIXME: magic number
+		i < 100; // FIXME: magic number
 		++i
 	)
 	{
@@ -438,7 +432,7 @@ sanguis::creator::impl::generators::rooms(
 
 	auto region_grid = tmp_result.grid;
 
-#if 0
+#if 1
 	auto output_grid = [&raw_grid,&rects](
 	){
 		for ( unsigned y = 0; y < raw_grid.size().h(); ++y)
@@ -499,7 +493,7 @@ sanguis::creator::impl::generators::rooms(
 		++cur_region;
 	}
 
-	// output_grid();
+	output_grid();
 
 	// placing connectors...
 
@@ -637,6 +631,7 @@ sanguis::creator::impl::generators::rooms(
 
 	// TODO: add more edges than strictly necessary
 	// for now, the level has no cycles
+	// depending on how many remaining edges there are
 	for (
 		auto const &edge
 		:
@@ -667,7 +662,7 @@ sanguis::creator::impl::generators::rooms(
 			sanguis::creator::impl::reachable{true};
 	}
 
-	// output_grid();
+	output_grid();
 
 
 	// 5. remove dead ends by iteratively deleting (setting to wall) corridor tiles that have 3 wall neighbors
@@ -718,7 +713,7 @@ sanguis::creator::impl::generators::rooms(
 		}()
 	);
 
-	// output_grid();
+	output_grid();
 
 	sanguis::creator::grid grid{
 		sanguis::creator::impl::maze_to_tile_grid(
@@ -755,8 +750,8 @@ sanguis::creator::impl::generators::rooms(
 	);
 
 	std::sort(
-		std::begin(rects),
-		std::end(rects),
+		rects.begin(),
+		rects.end(),
 		[&size](
 			::signed_rect const _a,
 			::signed_rect const _b
@@ -772,10 +767,12 @@ sanguis::creator::impl::generators::rooms(
 	auto const
 	exit_room =
 	*std::max_element(
-		std::begin(rects),
-		std::end(rects),
-		rect_distance
+		rects.begin(),
+		rects.end(),
+		[&entrance_room](::signed_rect const _a, ::signed_rect const _b){return rect_distance(_a, entrance_room) < rect_distance(_b, entrance_room);}
 	);
+
+	std::cerr << entrance_room << " : " << exit_room << "\n";
 
 	FCPPT_ASSERT_ERROR(
 		_parameters.opening_count_array()[
@@ -882,35 +879,25 @@ sanguis::creator::impl::generators::rooms(
 		)
 	);
 
-	// TODO more sensible spawner placement
-	spawners.push_back(
-		sanguis::creator::spawn{
-			sanguis::creator::spawn_pos{
-				fcppt::math::vector::structure_cast<
-					sanguis::creator::pos,
-					fcppt::cast::to_unsigned_fun
-				>(
-					fcppt::math::vector::structure_cast<
-						sanguis::creator::signed_pos,
-						fcppt::cast::size_fun
-					>(
-						rects.front().pos()
-						+
-						fcppt::math::vector::fill<
-							sanguis::creator::signed_pos
-						>(
-							1
+	{
+		auto start = rects.begin();
+		++start;
+		for (auto room = start, end = rects.end(); room != end; ++room)
+			spawners.push_back(
+				sanguis::creator::spawn{
+					sanguis::creator::spawn_pos{
+						rect_center_pos(
+							*room
 						)
-					)
-				)
-			},
-			random_monster(
-				_parameters.randgen()
-			),
-			sanguis::creator::spawn_type::single,
-			sanguis::creator::enemy_kind::normal
-		}
-	);
+					},
+					random_monster(
+						_parameters.randgen()
+					),
+					sanguis::creator::spawn_type::single,
+					sanguis::creator::enemy_kind::normal
+				}
+			);
+	}
 
 	return
 		sanguis::creator::impl::result(
