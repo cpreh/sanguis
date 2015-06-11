@@ -13,6 +13,10 @@
 						},
 						"none":{
 							"range":[0,11]
+						},
+						"deploying":{
+							"range":[0,1],
+							"sound":"rocket_firing.ogg"
 						}
 					}
 				}

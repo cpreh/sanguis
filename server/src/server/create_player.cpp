@@ -68,7 +68,7 @@ sanguis::server::create_player(
 			),
 			sanguis::server::damage::no_armor(),
 			sanguis::server::entities::movement_speed(
-				200.f
+				240.f
 			),
 			_name,
 			_player_id

@@ -1,5 +1,5 @@
 {
-	"cell_dimensions":[10,2],
+	"cell_dimensions":[16,16],
 	"delay":40,
 	"texture":"bullet.png",
 	"parts":{
@@ -8,14 +8,14 @@
 				"none":{
 					"animations":{
 						"walking":{
-							"range":[0,1]
+							"range":[0,4]
 						},
 						"none":{
 							"range":[0,1]
 						},
 						"deploying":{
-							"range":[0,1],
-							"sound":"shoot/shoot2.ogg"
+							"sound":"shoot/shoot2.ogg",
+							"range":[0,1]
 						}
 					}
 				}
@@ -26,7 +26,7 @@
 				"none":{
 					"animations":{
 						"none":{
-							"range":[1,2]
+							"range":[4,5]
 						}
 					}
 				}

@@ -10,13 +10,13 @@
 							"range":[0,1]
 						},
 						"deploying":{
-							"range":[2,28]
+							"range":[1,35]
 						},
 						"dying":{
-							"range":[29,37]
+							"range":[45,50]
 						},
 						"none":{
-							"range":[29,30]
+							"range":[50,51]
 						}
 					}
 				}
@@ -31,13 +31,13 @@
 							"range":[0,1]
 						},
 						"deploying":{
-							"range":[2,28]
+							"range":[1,35]
 						},
 						"dying":{
-							"range":[29,37]
+							"range":[45,50]
 						},
 						"none":{
-							"range":[29,30]
+							"range":[50,51]
 						}
 					}
 				}

@@ -36,11 +36,11 @@ sanguis::server::weapons::player_start_weapon(
 				),
 				sanguis::server::weapons::pistol_parameters(
 					sanguis::server::weapons::accuracy(
-						0.8f
+						0.93f
 					),
 					sanguis::server::weapons::backswing_time(
 						sanguis::duration_second(
-							0.3f
+							1.0f / 8
 						)
 					),
 					sanguis::server::weapons::damage(
@@ -48,15 +48,15 @@ sanguis::server::weapons::player_start_weapon(
 					),
 					sanguis::server::weapons::cast_point(
 						sanguis::duration_second(
-							0.2f
+							0.0f
 						)
 					),
 					sanguis::server::weapons::magazine_size(
-						18u
+						12u
 					),
 					sanguis::server::weapons::reload_time(
 						sanguis::duration_second(
-							2.f
+							3.5f
 						)
 					),
 					sanguis::server::weapons::range(

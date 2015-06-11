@@ -23,12 +23,12 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 		sanguis::projectile_type::bullet,
 		_team,
 		sanguis::server::entities::movement_speed(
-			500.f
+			800.f
 		),
 		_load_context,
 		sanguis::server::entities::projectiles::life_time(
 			sanguis::duration_second(
-				10.f
+				3.f
 			)
 		),
 		_direction
