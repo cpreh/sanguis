@@ -19,6 +19,7 @@ enum class z_ordering
 	aura,
 	model_generic,
 	player_lower,
+	bullet_tail,
 	bullet,
 	player_upper,
 	flare,

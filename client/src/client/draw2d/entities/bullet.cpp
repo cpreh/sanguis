@@ -46,7 +46,7 @@ sanguis::client::draw2d::entities::bullet::bullet(
 			_path,
 			sanguis::client::draw2d::entities::order_vector{
 				sanguis::client::draw2d::z_ordering::bullet,
-				sanguis::client::draw2d::z_ordering::bullet
+				sanguis::client::draw2d::z_ordering::bullet_tail
 			},
 			sanguis::client::optional_health_pair(),
 			sanguis::client::draw2d::entities::model::decay_option::immediate,
@@ -89,7 +89,7 @@ sanguis::client::draw2d::entities::bullet::update()
 			fcppt::literal<
 				sanguis::client::draw2d::funit
 			>(
-				160
+				240
 			)
 		),
 		tail_length(
