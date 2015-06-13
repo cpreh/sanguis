@@ -112,7 +112,7 @@ sanguis::client::draw2d::scene::camera::update(
 								fcppt::literal<
 									sanguis::client::draw2d::funit
 								>(
-									3.f
+									10.f
 								)
 								*
 								_duration.get().count();
