@@ -14,7 +14,6 @@
 #include <sanguis/server/entities/optional_base_ref.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>
 #include <sanguis/server/entities/with_id.hpp>
-#include <sanguis/server/entities/ifaces/with_links.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/attack.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
@@ -118,11 +117,7 @@ sanguis::server::weapons::spider::do_spawn(
 							1000.f
 						),
 						sanguis::server::entities::spawn_owner(
-							dynamic_cast<
-								sanguis::server::entities::ifaces::with_links &
-							>(
-								this->owner()
-							).link()
+							this->owner().link()
 						)
 					),
 					_spawn_weapon.get()()

@@ -12,6 +12,7 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
+#include <sanguis/server/entities/ifaces/with_links.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/property/always_max.hpp>
 #include <sanguis/server/weapons/const_optional_ref_fwd.hpp>
@@ -35,6 +36,7 @@ class with_weapon
 	public virtual sanguis::server::entities::base,
 	public virtual sanguis::server::entities::ifaces::with_angle,
 	public virtual sanguis::server::entities::ifaces::with_id,
+	public virtual sanguis::server::entities::ifaces::with_links,
 	public virtual sanguis::server::entities::ifaces::with_team
 {
 	FCPPT_NONCOPYABLE(

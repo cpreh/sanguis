@@ -358,7 +358,6 @@ sanguis::server::world::object::insert(
 					ret.second
 				);
 
-
 				sanguis::server::entities::base &result(
 					*ret.first->second
 				);
@@ -970,7 +969,6 @@ sanguis::server::world::object::request_transfer(
 					cur_entity.remove_from_world().body_exit()
 				);
 
-				// TODO: Make a function for this!
 				sanguis::server::entities::with_id_unique_ptr entity_ptr(
 					fcppt::unique_ptr_to_base<
 						sanguis::server::entities::with_id
