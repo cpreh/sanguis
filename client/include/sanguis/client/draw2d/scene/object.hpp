@@ -3,6 +3,7 @@
 
 #include <sanguis/diff_clock.hpp>
 #include <sanguis/entity_id.hpp>
+#include <sanguis/optional_entity_id.hpp>
 #include <sanguis/random_generator.hpp>
 #include <sanguis/client/cursor_fwd.hpp>
 #include <sanguis/client/player_health_callback.hpp>
@@ -17,15 +18,14 @@
 #include <sanguis/client/draw/base.hpp>
 #include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
-#include <sanguis/client/draw2d/optional_player_center.hpp>
-#include <sanguis/client/draw2d/optional_translation.hpp>
-#include <sanguis/client/draw2d/player_center_callback.hpp>
+#include <sanguis/client/draw2d/optional_player_center_fwd.hpp>
 #include <sanguis/client/draw2d/entities/base_fwd.hpp>
 #include <sanguis/client/draw2d/entities/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/own_fwd.hpp>
 #include <sanguis/client/draw2d/entities/own_unique_ptr.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/scene/background_fwd.hpp>
+#include <sanguis/client/draw2d/scene/camera_fwd.hpp>
 #include <sanguis/client/draw2d/scene/configure_entity_fwd.hpp>
 #include <sanguis/client/draw2d/scene/object_fwd.hpp>
 #include <sanguis/client/draw2d/scene/hover/base_unique_ptr.hpp>
@@ -75,7 +75,6 @@
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_decl.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
-#include <fcppt/signal/scoped_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <list>
 #include <map>
@@ -177,15 +176,10 @@ private:
 	sanguis::client::draw2d::entities::base &
 	entity(
 		sanguis::entity_id
-	);
+	) const;
 
-	void
-	player_center(
-		sanguis::client::draw2d::optional_player_center
-	);
-
-	void
-	update_translation();
+	sanguis::client::draw2d::optional_player_center const
+	player_center() const;
 
 	void
 	change_world(
@@ -390,9 +384,11 @@ private:
 
 	bool paused_;
 
-	sanguis::client::draw2d::optional_player_center player_center_;
+	sanguis::optional_entity_id player_id_;
 
-	sanguis::client::draw2d::optional_translation translation_;
+	fcppt::unique_ptr<
+		sanguis::client::draw2d::scene::camera
+	> const camera_;
 
 	sanguis::client::weapon_pair player_weapons_;
 
@@ -424,8 +420,6 @@ private:
 	optional_hover_unique_ptr;
 
 	optional_hover_unique_ptr hover_;
-
-	fcppt::signal::scoped_connection const viewport_connection_;
 };
 
 }

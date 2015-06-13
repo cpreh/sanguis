@@ -6,7 +6,6 @@
 #include <sanguis/client/health_pair_fwd.hpp>
 #include <sanguis/client/player_health_callback.hpp>
 #include <sanguis/client/draw2d/collide_callback.hpp>
-#include <sanguis/client/draw2d/player_center_callback.hpp>
 #include <sanguis/client/draw2d/entities/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
@@ -25,7 +24,6 @@ sanguis::client::draw2d::entities::unique_ptr
 own_player(
 	sanguis::client::load::auras::context &,
 	sanguis::client::draw2d::entities::load_parameters const &,
-	sanguis::client::draw2d::player_center_callback const &,
 	sanguis::client::draw2d::collide_callback const &,
 	sanguis::client::player_health_callback const &,
 	sanguis::aura_type_vector const &,

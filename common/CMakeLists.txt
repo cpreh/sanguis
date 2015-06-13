@@ -410,6 +410,8 @@ set(
 	include/sanguis/net/stream_exceptions.hpp
 	include/sanguis/optional_aura_type.hpp
 	include/sanguis/optional_aura_type_fwd.hpp
+	include/sanguis/optional_entity_id.hpp
+	include/sanguis/optional_entity_id_fwd.hpp
 	include/sanguis/optional_perk_type.hpp
 	include/sanguis/optional_perk_type_fwd.hpp
 	include/sanguis/optional_primary_weapon_type.hpp

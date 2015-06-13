@@ -198,7 +198,6 @@ set(
 	include/sanguis/client/draw2d/optional_translation.hpp
 	include/sanguis/client/draw2d/optional_translation_fwd.hpp
 	include/sanguis/client/draw2d/player_center.hpp
-	include/sanguis/client/draw2d/player_center_callback.hpp
 	include/sanguis/client/draw2d/player_center_fwd.hpp
 	include/sanguis/client/draw2d/radius.hpp
 	include/sanguis/client/draw2d/radius_fwd.hpp
@@ -206,6 +205,8 @@ set(
 	include/sanguis/client/draw2d/scene/background_dim.hpp
 	include/sanguis/client/draw2d/scene/background_fwd.hpp
 	include/sanguis/client/draw2d/scene/background_texture_coordinates.hpp
+	include/sanguis/client/draw2d/scene/camera.hpp
+	include/sanguis/client/draw2d/scene/camera_fwd.hpp
 	include/sanguis/client/draw2d/scene/configure_entity.hpp
 	include/sanguis/client/draw2d/scene/configure_entity_fwd.hpp
 	include/sanguis/client/draw2d/scene/health_pair.hpp
@@ -232,6 +233,7 @@ set(
 	include/sanguis/client/draw2d/scene/object.hpp
 	include/sanguis/client/draw2d/scene/object_fwd.hpp
 	include/sanguis/client/draw2d/scene/translation.hpp
+	include/sanguis/client/draw2d/scene/translation_matrix.hpp
 	include/sanguis/client/draw2d/scene/world/base.hpp
 	include/sanguis/client/draw2d/scene/world/base_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/base_unique_ptr.hpp
@@ -692,6 +694,7 @@ set(
 	src/client/draw2d/scene/background.cpp
 	src/client/draw2d/scene/background_dim.cpp
 	src/client/draw2d/scene/background_texture_coordinates.cpp
+	src/client/draw2d/scene/camera.cpp
 	src/client/draw2d/scene/hover/base.cpp
 	src/client/draw2d/scene/hover/compare_weapons.cpp
 	src/client/draw2d/scene/hover/create.cpp
@@ -705,6 +708,7 @@ set(
 	src/client/draw2d/scene/light_texture_coordinates.cpp
 	src/client/draw2d/scene/object.cpp
 	src/client/draw2d/scene/translation.cpp
+	src/client/draw2d/scene/translation_matrix.cpp
 	src/client/draw2d/scene/world/base.cpp
 	src/client/draw2d/scene/world/batch.cpp
 	src/client/draw2d/scene/world/center_to_grid_pos.cpp

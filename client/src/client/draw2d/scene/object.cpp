@@ -1,5 +1,6 @@
 #include <sanguis/entity_id.hpp>
 #include <sanguis/exception.hpp>
+#include <sanguis/optional_entity_id.hpp>
 #include <sanguis/random_generator.hpp>
 #include <sanguis/random_seed.hpp>
 #include <sanguis/update_diff_clock.hpp>
@@ -19,16 +20,12 @@
 #include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/aoe.hpp>
 #include <sanguis/client/draw2d/center.hpp>
-#include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
 #include <sanguis/client/draw2d/log.hpp>
 #include <sanguis/client/draw2d/optional_player_center.hpp>
 #include <sanguis/client/draw2d/optional_translation.hpp>
 #include <sanguis/client/draw2d/player_center.hpp>
-#include <sanguis/client/draw2d/player_center_callback.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
-#include <sanguis/client/draw2d/translation.hpp>
-#include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/base.hpp>
 #include <sanguis/client/draw2d/entities/create_parameters.hpp>
@@ -56,11 +53,11 @@
 #include <sanguis/client/draw2d/factory/projectile.hpp>
 #include <sanguis/client/draw2d/factory/weapon_pickup.hpp>
 #include <sanguis/client/draw2d/scene/background.hpp>
-#include <sanguis/client/draw2d/scene/background_dim.hpp>
+#include <sanguis/client/draw2d/scene/camera.hpp>
 #include <sanguis/client/draw2d/scene/configure_entity.hpp>
 #include <sanguis/client/draw2d/scene/health_pair.hpp>
 #include <sanguis/client/draw2d/scene/object.hpp>
-#include <sanguis/client/draw2d/scene/translation.hpp>
+#include <sanguis/client/draw2d/scene/translation_matrix.hpp>
 #include <sanguis/client/draw2d/scene/hover/base.hpp>
 #include <sanguis/client/draw2d/scene/hover/base_unique_ptr.hpp>
 #include <sanguis/client/draw2d/scene/hover/create.hpp>
@@ -165,18 +162,18 @@
 #include <sge/sprite/projection_matrix.hpp>
 #include <sge/sprite/state/default_options.hpp>
 #include <sge/sprite/state/scoped.hpp>
-#include <sge/viewport/manager.hpp>
+#include <sge/viewport/manager_fwd.hpp>
 #include <majutsu/get.hpp>
 #include <majutsu/is_role.hpp>
 #include <majutsu/unwrap_role.hpp>
 #include <fcppt/format.hpp>
-#include <fcppt/literal.hpp>
 #include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/maybe_multi.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/optional_bind.hpp>
 #include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_comparison.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/type_name_from_info.hpp>
@@ -185,14 +182,9 @@
 #include <fcppt/algorithm/sequence_iteration.hpp>
 #include <fcppt/cast/dynamic.hpp>
 #include <fcppt/cast/float_to_int_fun.hpp>
-#include <fcppt/cast/int_to_float_fun.hpp>
 #include <fcppt/container/find_exn.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/warning.hpp>
-#include <fcppt/math/matrix/arithmetic.hpp>
-#include <fcppt/math/matrix/translation.hpp>
-#include <fcppt/math/vector/arithmetic.hpp>
-#include <fcppt/math/vector/construct.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/mpl/for_each.hpp>
 #include <fcppt/signal/auto_connection.hpp>
@@ -286,11 +278,17 @@ sanguis::client::draw2d::scene::object::object(
 			_debug
 		)
 	),
-	paused_(
+	paused_{
 		false
+	},
+	player_id_(),
+	camera_(
+		fcppt::make_unique_ptr_fcppt<
+			sanguis::client::draw2d::scene::camera
+		>(
+			_renderer
+		)
 	),
-	player_center_(),
-	translation_(),
 	player_weapons_(),
 	entities_(),
 	own_entities_(),
@@ -303,15 +301,7 @@ sanguis::client::draw2d::scene::object::object(
 			_viewport_manager
 		)
 	),
-	hover_(),
-	viewport_connection_(
-		_viewport_manager.manage_callback(
-			std::bind(
-				&sanguis::client::draw2d::scene::object::update_translation,
-				this
-			)
-		)
-	)
+	hover_()
 {
 }
 
@@ -385,6 +375,11 @@ sanguis::client::draw2d::scene::object::update(
 			_delta
 		);
 	}
+
+	camera_->update(
+		_delta,
+		this->player_center()
+	);
 
 	sanguis::client::control::optional_attack_dest const attack_dest{
 		fcppt::optional_bind(
@@ -509,20 +504,8 @@ sanguis::client::draw2d::scene::object::draw(
 			sge::renderer::state::ffp::transform::object_unique_ptr const transform_state(
 				renderer_.create_transform_state(
 					sge::renderer::state::ffp::transform::parameters(
-						fcppt::math::matrix::translation(
-							fcppt::math::vector::construct(
-								fcppt::math::vector::structure_cast<
-									sanguis::client::draw2d::vector2,
-									fcppt::cast::int_to_float_fun
-								>(
-									_translation.get()
-								),
-								fcppt::literal<
-									sanguis::client::draw2d::funit
-								>(
-									0
-								)
-							)
+						sanguis::client::draw2d::scene::translation_matrix(
+							_translation
 						)
 					)
 				)
@@ -540,7 +523,7 @@ sanguis::client::draw2d::scene::object::draw(
 			);
 
 			fcppt::maybe_void(
-				player_center_,
+				this->player_center(),
 				[
 					&_render_context,
 					_translation,
@@ -589,9 +572,9 @@ sanguis::client::draw2d::scene::object::draw(
 			);
 		},
 		sge::sprite::projection_matrix(
-			this->viewport()
+			renderer_.onscreen_target().viewport()
 		),
-		translation_
+		camera_->translation()
 	);
 }
 
@@ -638,29 +621,8 @@ sanguis::client::draw2d::scene::object::translate_attack_dest(
 ) const
 {
 	return
-		fcppt::optional_bind_construct(
-			translation_,
-			[
-				_cursor_position
-			](
-				sanguis::client::draw2d::translation const _translation
-			)
-			{
-				return
-					sanguis::client::control::attack_dest{
-						sanguis::client::draw2d::translate::vector_from_client(
-							fcppt::math::vector::structure_cast<
-								sanguis::client::draw2d::vector2,
-								fcppt::cast::int_to_float_fun
-							>(
-								-
-								_translation.get()
-								+
-								_cursor_position
-							)
-						)
-					};
-			}
+		camera_->translate_attack_dest(
+			_cursor_position
 		);
 }
 
@@ -786,12 +748,22 @@ sanguis::client::draw2d::scene::object::remove(
 				% _id
 			).str()
 		);
+
+	if(
+		sanguis::optional_entity_id(
+			_id
+		)
+		==
+		player_id_
+	)
+		player_id_ =
+			sanguis::optional_entity_id();
 }
 
 sanguis::client::draw2d::entities::base &
 sanguis::client::draw2d::scene::object::entity(
 	sanguis::entity_id const _id
-)
+) const
 {
 	return
 		*fcppt::container::find_exn(
@@ -814,34 +786,24 @@ sanguis::client::draw2d::scene::object::entity(
 		);
 }
 
-void
-sanguis::client::draw2d::scene::object::player_center(
-	sanguis::client::draw2d::optional_player_center const _player_center
-)
+sanguis::client::draw2d::optional_player_center const
+sanguis::client::draw2d::scene::object::player_center() const
 {
-	player_center_
-		= _player_center;
-
-	this->update_translation();
-}
-
-void
-sanguis::client::draw2d::scene::object::update_translation()
-{
-	translation_ =
+	return
 		fcppt::optional_bind_construct(
-			player_center_,
+			player_id_,
 			[
 				this
 			](
-				sanguis::client::draw2d::player_center const _player_center
+				sanguis::entity_id const _player_id
 			)
 			{
 				return
-					sanguis::client::draw2d::scene::translation(
-						_player_center,
-						this->screen_size()
-					);
+					sanguis::client::draw2d::player_center{
+						this->entity(
+							_player_id
+						).center()
+					};
 			}
 		);
 }
@@ -867,22 +829,6 @@ sanguis::client::draw2d::scene::object::change_world(
 	world_->change(
 		_parameters
 	);
-}
-
-sge::renderer::screen_size const
-sanguis::client::draw2d::scene::object::screen_size() const
-{
-	return
-		sanguis::client::draw2d::scene::background_dim(
-			renderer_
-		);
-}
-
-sge::renderer::target::viewport const
-sanguis::client::draw2d::scene::object::viewport() const
-{
-	return
-		renderer_.onscreen_target().viewport();
 }
 
 sanguis::client::draw2d::entities::load_parameters const
@@ -1078,13 +1024,6 @@ sanguis::client::draw2d::scene::object::operator()(
 		sanguis::client::draw2d::factory::own_player(
 			aura_resources_,
 			this->load_parameters(),
-			sanguis::client::draw2d::player_center_callback(
-				std::bind(
-					&sanguis::client::draw2d::scene::object::player_center,
-					this,
-					std::placeholders::_1
-				)
-			),
 			world_->collide_callback(),
 			player_health_callback_,
 			_message.get<
@@ -1099,6 +1038,13 @@ sanguis::client::draw2d::scene::object::operator()(
 		),
 		_message
 	);
+
+	player_id_ =
+		sanguis::optional_entity_id(
+			_message.get<
+				sanguis::messages::roles::entity_id
+			>()
+		);
 }
 
 sanguis::client::draw2d::scene::object::result_type
