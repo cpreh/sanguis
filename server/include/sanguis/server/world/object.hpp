@@ -17,10 +17,7 @@
 #include <sanguis/collision/world/object_unique_ptr.hpp>
 #include <sanguis/creator/destructible_container.hpp>
 #include <sanguis/creator/grid.hpp>
-#include <sanguis/creator/name.hpp>
 #include <sanguis/creator/opening_container_array.hpp>
-#include <sanguis/creator/seed.hpp>
-#include <sanguis/creator/spawn_boss.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/top_result_fwd.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
@@ -30,7 +27,7 @@
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/level.hpp>
 #include <sanguis/server/pickup_probability.hpp>
-#include <sanguis/server/player_id.hpp>
+#include <sanguis/server/player_id_fwd.hpp>
 #include <sanguis/server/speed_fwd.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/doodad_unique_ptr.hpp>
@@ -44,6 +41,7 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/world/context_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
+#include <sanguis/server/world/info.hpp>
 #include <sanguis/server/world/insert_simple_pair_fwd.hpp>
 #include <sanguis/server/world/insert_with_id_pair_container.hpp>
 #include <sanguis/server/world/insert_with_id_pair_fwd.hpp>
@@ -132,8 +130,9 @@ public:
 private:
 	void
 	player_insertion(
-		sanguis::server::entities::base const &
-	);
+		sanguis::server::player_id
+	)
+	override;
 
 	template<
 		typename Entity
@@ -351,21 +350,11 @@ private:
 		sanguis::random_generator &
 	);
 
-	sanguis::world_id const id_;
-
-	sanguis::creator::seed const seed_;
+	sanguis::server::world::info const info_;
 
 	sanguis::server::world::difficulty const difficulty_;
 
-	sanguis::world_name const name_;
-
-	sanguis::creator::name const generator_name_;
-
-	sanguis::creator::spawn_boss const spawn_boss_;
-
 	sanguis::creator::grid const grid_;
-
-	sanguis::creator::opening_container_array const openings_;
 
 	sanguis::server::world::context &global_context_;
 

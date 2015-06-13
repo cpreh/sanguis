@@ -265,6 +265,7 @@ set(
 	include/sanguis/server/entities/ifaces/with_team.hpp
 	include/sanguis/server/entities/ifaces/with_velocity.hpp
 	include/sanguis/server/entities/ifaces/with_weapon.hpp
+	include/sanguis/server/entities/ifaces/with_weapon_fwd.hpp
 	include/sanguis/server/entities/insert_parameters.hpp
 	include/sanguis/server/entities/insert_parameters_center.hpp
 	include/sanguis/server/entities/insert_parameters_fwd.hpp
@@ -694,6 +695,8 @@ set(
 	include/sanguis/server/world/generate_destructibles.hpp
 	include/sanguis/server/world/generate_single_spawns.hpp
 	include/sanguis/server/world/grid_pos_to_center.hpp
+	include/sanguis/server/world/info.hpp
+	include/sanguis/server/world/info_fwd.hpp
 	include/sanguis/server/world/insert_pair_container.hpp
 	include/sanguis/server/world/insert_pair_decl.hpp
 	include/sanguis/server/world/insert_pair_fwd.hpp
@@ -1043,6 +1046,7 @@ set(
 	src/server/world/generate_destructibles.cpp
 	src/server/world/generate_single_spawns.cpp
 	src/server/world/grid_pos_to_center.cpp
+	src/server/world/info.cpp
 	src/server/world/insert_simple_pair.cpp
 	src/server/world/insert_with_id_pair.cpp
 	src/server/world/make_destructible.cpp

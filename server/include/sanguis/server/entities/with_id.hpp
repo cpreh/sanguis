@@ -39,6 +39,10 @@ public:
 	id() const
 	override;
 
+	virtual
+	void
+	transfer_to_world();
+
 	void
 	transfer_from_world();
 

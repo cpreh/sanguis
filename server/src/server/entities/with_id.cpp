@@ -28,6 +28,11 @@ sanguis::server::entities::with_id::id() const
 }
 
 void
+sanguis::server::entities::with_id::transfer_to_world()
+{
+}
+
+void
 sanguis::server::entities::with_id::transfer_from_world()
 {
 	fcppt::maybe_void(

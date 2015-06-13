@@ -323,7 +323,8 @@ sanguis::server::entities::player::change_speed(
 	sanguis::server::speed const _speed
 )
 {
-	desired_speed_ = _speed;
+	desired_speed_ =
+		_speed;
 
 	this->update_speed();
 }
@@ -442,6 +443,16 @@ sanguis::server::entities::player::team() const
 {
 	return
 		sanguis::server::team::players;
+}
+
+void
+sanguis::server::entities::player::transfer_to_world()
+{
+	FCPPT_ASSERT_OPTIONAL_ERROR(
+		this->environment()
+	).player_insertion(
+		this->player_id()
+	);
 }
 
 void

@@ -97,7 +97,6 @@
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/optional_base_ref.hpp>
 #include <sanguis/server/entities/optional_transfer_result.hpp>
-#include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/remove_from_world_result.hpp>
 #include <sanguis/server/entities/simple.hpp>
 #include <sanguis/server/entities/simple_unique_ptr.hpp>
@@ -126,7 +125,6 @@
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/make_enum_range.hpp>
 #include <fcppt/maybe.hpp>
-#include <fcppt/maybe_void.hpp>
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
@@ -140,7 +138,6 @@
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/cast/size.hpp>
-#include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/warning.hpp>
@@ -160,29 +157,19 @@ sanguis::server::world::object::object(
 )
 :
 	sanguis::server::environment::object(),
-	id_(
-		_id
-	),
-	seed_(
-		_generated_world.seed()
+	info_(
+		_id,
+		_name,
+		_generated_world.seed(),
+		_generated_world.name(),
+		_generated_world.spawn_boss(),
+		_generated_world.openings()
 	),
 	difficulty_(
 		_difficulty
 	),
-	name_(
-		_name
-	),
-	generator_name_(
-		_generated_world.name()
-	),
-	spawn_boss_{
-		_generated_world.spawn_boss()
-	},
 	grid_(
 		_generated_world.grid()
-	),
-	openings_(
-		_generated_world.openings()
 	),
 	global_context_(
 		_parameters.context()
@@ -358,13 +345,11 @@ sanguis::server::world::object::insert(
 					ret.second
 				);
 
-				sanguis::server::entities::base &result(
+				sanguis::server::entities::with_id &result(
 					*ret.first->second
 				);
 
-				this->player_insertion(
-					result
-				);
+				result.transfer_to_world();
 
 				sanguis::server::collision::body_enter(
 					_transfer_result.body_enter()
@@ -434,76 +419,61 @@ sanguis::creator::opening_container_array const &
 sanguis::server::world::object::openings() const
 {
 	return
-		openings_;
+		info_.openings();
 }
 
 sanguis::world_id const
 sanguis::server::world::object::world_id() const
 {
 	return
-		id_;
+		info_.world_id();
 }
 
 void
 sanguis::server::world::object::player_insertion(
-	sanguis::server::entities::base const &_result
+	sanguis::server::player_id const _player_id
 )
 {
-	// TODO: Put this into the class hierarchy instead
-	fcppt::maybe_void(
-		fcppt::cast::try_dynamic<
-			sanguis::server::entities::player const &
-		>(
-			_result
-		),
-		[
-			this
-		](
-			sanguis::server::entities::player const &_player
+	this->send_player_specific(
+		_player_id,
+		sanguis::messages::server::create(
+			sanguis::messages::server::change_world(
+				sanguis::messages::roles::world_id{} =
+					this->world_id(),
+				sanguis::messages::roles::seed{} =
+					info_.seed(),
+				sanguis::messages::roles::generator_name{} =
+					sge::charconv::fcppt_string_to_utf8(
+						info_.generator_name().get()
+					),
+				sanguis::messages::roles::opening_count{} =
+					fcppt::algorithm::enum_array_fold<
+						sanguis::messages::types::opening_count_array
+					>(
+						[
+							this
+						](
+							sanguis::creator::opening_type const _opening_type
+						)
+						{
+							return
+								fcppt::cast::size<
+									sanguis::messages::types::size
+								>(
+									info_.openings()[
+										_opening_type
+									].size()
+								);
+						}
+					),
+				sanguis::messages::roles::world_name{} =
+					sge::charconv::fcppt_string_to_utf8(
+						info_.world_name().get()
+					),
+				sanguis::messages::roles::spawn_boss{} =
+					info_.spawn_boss().get()
+			)
 		)
-		{
-			this->send_player_specific(
-				_player.player_id(),
-				sanguis::messages::server::create(
-					sanguis::messages::server::change_world(
-						sanguis::messages::roles::world_id{} =
-							id_,
-						sanguis::messages::roles::seed{} =
-							seed_,
-						sanguis::messages::roles::generator_name{} =
-							sge::charconv::fcppt_string_to_utf8(
-								generator_name_.get()
-							),
-						sanguis::messages::roles::opening_count{} =
-							fcppt::algorithm::enum_array_fold<
-								sanguis::messages::types::opening_count_array
-							>(
-								[
-									this
-								](
-									sanguis::creator::opening_type const _opening_type
-								)
-								{
-									return
-										fcppt::cast::size<
-											sanguis::messages::types::size
-										>(
-											openings_[
-												_opening_type
-											].size()
-										);
-								}
-							),
-						sanguis::messages::roles::world_name{} =
-							sge::charconv::fcppt_string_to_utf8(
-								name_.get()
-							),
-						sanguis::messages::roles::spawn_boss{} =
-							spawn_boss_.get()
-					)
-				)
-			);
-		}
 	);
 }
 
@@ -941,14 +911,14 @@ sanguis::server::world::object::request_transfer(
 		for(
 			sanguis::creator::opening const opening
 			:
-			openings_[
+			info_.openings()[
 				opening_type
 			]
 		)
 		{
 			sanguis::server::global::source_world_pair const source_pair{
 				sanguis::server::source_world_id(
-					id_
+					this->world_id()
 				),
 				opening
 			};
@@ -1008,7 +978,7 @@ sanguis::server::world::object::add_portal_blocker()
 		for(
 			auto const &portal
 			:
-			openings_[
+			info_.openings()[
 				sanguis::creator::opening_type::exit
 			]
 		)

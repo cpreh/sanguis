@@ -225,6 +225,12 @@ public:
 	remove_portal_blocker() = 0;
 
 	virtual
+	void
+	player_insertion(
+		sanguis::server::player_id
+	) = 0;
+
+	virtual
 	sanguis::server::world::difficulty const
 	difficulty() const = 0;
 

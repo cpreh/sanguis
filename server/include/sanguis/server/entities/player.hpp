@@ -122,6 +122,10 @@ public:
 	override;
 private:
 	void
+	transfer_to_world()
+	override;
+
+	void
 	remove_from_game()
 	override;
 
