@@ -6,6 +6,7 @@
 #include <sanguis/client/control/optional_attack_dest_fwd.hpp>
 #include <sanguis/client/draw2d/optional_player_center_fwd.hpp>
 #include <sanguis/client/draw2d/optional_translation.hpp>
+#include <sanguis/client/draw2d/optional_vector2.hpp>
 #include <sanguis/client/draw2d/scene/camera_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -39,6 +40,9 @@ public:
 		sanguis::client::draw2d::optional_player_center
 	);
 
+	void
+	reset_translation();
+
 	sanguis::client::draw2d::optional_translation const
 	translation() const;
 
@@ -47,9 +51,11 @@ public:
 		sanguis::client::control::cursor_position
 	);
 private:
-	sanguis::client::draw2d::optional_translation translation_;
-
 	sge::renderer::device::core &renderer_;
+
+	sanguis::client::draw2d::optional_translation desired_translation_;
+
+	sanguis::client::draw2d::optional_vector2 translation_;
 };
 
 }

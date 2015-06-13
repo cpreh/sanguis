@@ -1150,6 +1150,8 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::change_world const &_message
 )
 {
+	camera_->reset_translation();
+
 	this->change_world(
 		sanguis::client::world_parameters(
 			_message.get<
