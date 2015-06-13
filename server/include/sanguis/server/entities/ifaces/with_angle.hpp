@@ -27,6 +27,12 @@ public:
 	angle() const = 0;
 
 	virtual
+	void
+	angle(
+		sanguis::server::angle
+	) = 0;
+
+	virtual
 	~with_angle() = 0;
 };
 

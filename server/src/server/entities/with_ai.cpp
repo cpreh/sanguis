@@ -7,9 +7,11 @@
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_auras_id.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
+#include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/ifaces/with_health.hpp>
 #include <sanguis/server/entities/ifaces/with_links.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
+#include <sanguis/server/entities/ifaces/with_velocity.hpp>
 #include <sanguis/server/weapons/ias.hpp>
 #include <sanguis/server/weapons/irs.hpp>
 #include <sanguis/server/weapons/optional_unique_ptr.hpp>
@@ -30,9 +32,11 @@ sanguis::server::entities::with_ai::with_ai(
 	sanguis::server::weapons::irs const _irs
 )
 :
+	sanguis::server::entities::ifaces::with_angle(),
 	sanguis::server::entities::ifaces::with_health(),
 	sanguis::server::entities::ifaces::with_links(),
 	sanguis::server::entities::ifaces::with_team(),
+	sanguis::server::entities::ifaces::with_velocity(),
 	sanguis::server::entities::with_auras_id(
 		std::move(
 			_auras

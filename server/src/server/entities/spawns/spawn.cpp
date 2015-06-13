@@ -80,6 +80,17 @@ sanguis::server::entities::spawns::spawn::angle() const
 		);
 }
 
+void
+sanguis::server::entities::spawns::spawn::angle(
+	sanguis::server::angle const _angle
+)
+{
+	angle_ =
+		optional_angle(
+			_angle
+		);
+}
+
 sanguis::server::entities::optional_transfer_result
 sanguis::server::entities::spawns::spawn::on_transfer(
 	sanguis::server::entities::transfer_parameters const &_parameters

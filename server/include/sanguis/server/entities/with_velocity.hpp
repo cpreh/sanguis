@@ -73,7 +73,8 @@ public:
 	void
 	direction(
 		sanguis::server::direction
-	);
+	)
+	override;
 private:
 	void
 	desired_speed_change();

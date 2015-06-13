@@ -10,9 +10,11 @@
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 #include <sanguis/server/entities/with_auras_id.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
+#include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/ifaces/with_health.hpp>
 #include <sanguis/server/entities/ifaces/with_links.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
+#include <sanguis/server/entities/ifaces/with_velocity.hpp>
 #include <sanguis/server/weapons/ias.hpp>
 #include <sanguis/server/weapons/irs.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
@@ -29,9 +31,11 @@ namespace entities
 
 class with_ai
 :
+	public virtual sanguis::server::entities::ifaces::with_angle,
 	public virtual sanguis::server::entities::ifaces::with_health,
 	public virtual sanguis::server::entities::ifaces::with_links,
 	public virtual sanguis::server::entities::ifaces::with_team,
+	public virtual sanguis::server::entities::ifaces::with_velocity,
 	public sanguis::server::entities::with_auras_id,
 	public sanguis::server::entities::with_weapon
 {

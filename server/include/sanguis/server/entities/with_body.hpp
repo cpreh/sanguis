@@ -73,7 +73,8 @@ public:
 	void
 	angle(
 		sanguis::server::angle
-	);
+	)
+	override;
 
 	sanguis::server::radius const
 	radius() const;

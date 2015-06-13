@@ -61,6 +61,12 @@ private:
 	angle() const
 	override;
 
+	void
+	angle(
+		sanguis::server::angle
+	)
+	override;
+
 	sanguis::server::entities::optional_transfer_result
 	on_transfer(
 		sanguis::server::entities::transfer_parameters const &
