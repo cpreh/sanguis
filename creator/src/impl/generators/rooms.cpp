@@ -58,6 +58,7 @@
 #include <fcppt/container/grid/neumann_neighbors.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
+#include <fcppt/log/level.hpp>
 #include <fcppt/math/box/center.hpp>
 #include <fcppt/math/box/intersects.hpp>
 #include <fcppt/math/box/object.hpp>
@@ -85,194 +86,196 @@
 
 namespace
 {
-	using signed_rect =
-		sanguis::creator::signed_rect;
 
-	using pos_type =
-		sanguis::creator::signed_pos;
+using signed_rect =
+	sanguis::creator::signed_rect;
 
-	using int_type =
-		pos_type::value_type;
+using pos_type =
+	sanguis::creator::signed_pos;
 
-	using region_grid =
-		sanguis::creator::impl::region_grid;
+using int_type =
+	pos_type::value_type;
 
-	using sanguis::creator::impl::region_id;
+using region_grid =
+	sanguis::creator::impl::region_grid;
 
-	auto const
-	wall_region =
-		region_id{
-			-1
-		};
+using sanguis::creator::impl::region_id;
 
-	auto
-	border_distance =
-	[](
-		signed_rect const _rect,
-		sanguis::creator::dim const _size
-	)
-	{
-		auto const
-		level =
-			::signed_rect(::signed_rect::vector{0,0},
-				fcppt::math::dim::structure_cast<
-					::signed_rect::dim,
-					fcppt::cast::size_fun
-				>(_size));
-
-		using ret_type =
-		signed_rect::value_type;
-
-		return
-		fcppt::algorithm::fold(
-			// they should all have negative distances, so this abs()es
-			-
-			fcppt::math::box::distance(
-				_rect,
-				level
-			),
-			std::numeric_limits<ret_type>::max(),
-			[](ret_type _l, ret_type _r){return std::min(_l, _r);}
-		);
+auto const
+wall_region =
+	region_id{
+		-1
 	};
 
-	auto
-	rect_distance =
-	[](
-		signed_rect a,
-		signed_rect b
-	)
-	{
-		using ret_type =
-		signed_rect::value_type;
+auto
+border_distance =
+[](
+	signed_rect const _rect,
+	sanguis::creator::dim const _size
+)
+{
+	auto const
+	level =
+		::signed_rect(::signed_rect::vector{0,0},
+			fcppt::math::dim::structure_cast<
+				::signed_rect::dim,
+				fcppt::cast::size_fun
+			>(_size));
 
-		return
-		fcppt::algorithm::fold(
-			fcppt::math::box::distance(
-				a,
-				b
+	using ret_type =
+	signed_rect::value_type;
+
+	return
+	fcppt::algorithm::fold(
+		// they should all have negative distances, so this abs()es
+		-
+		fcppt::math::box::distance(
+			_rect,
+			level
+		),
+		std::numeric_limits<ret_type>::max(),
+		[](ret_type _l, ret_type _r){return std::min(_l, _r);}
+	);
+};
+
+auto
+rect_distance =
+[](
+	signed_rect a,
+	signed_rect b
+)
+{
+	using ret_type =
+	signed_rect::value_type;
+
+	return
+	fcppt::algorithm::fold(
+		fcppt::math::box::distance(
+			a,
+			b
+		),
+		ret_type{0},
+		[](ret_type const _l, ret_type const _r){
+			return
+				std::max(ret_type{0},_l)
+				+
+				std::max(ret_type{0},_r);
+		}
+	);
+};
+
+using connector =
+	std::pair<
+		region_id,
+		region_id
+	>;
+
+using optional_connector =
+	fcppt::optional<
+		connector
+	>;
+
+optional_connector
+is_possible_connector(
+	region_grid grid,
+	sanguis::creator::pos p
+)
+{
+	auto const nothing =
+		optional_connector{};
+
+	if (
+		!
+		fcppt::container::grid::in_range(
+			grid,
+			p
+		)
+		||
+		(
+			p.x() % 2
+			==
+			p.y() % 2
+		)
+		||
+		grid[
+			p
+		]
+		!=
+		::wall_region
+	)
+		return nothing;
+
+	std::map<
+		region_id,
+		unsigned
+	> counts;
+
+	for (
+		auto const &n
+		:
+		fcppt::container::grid::neumann_neighbors(
+			p
+		)
+	)
+		fcppt::maybe_void(
+			fcppt::container::grid::at_optional(
+				grid,
+				n
 			),
-			ret_type{0},
-			[](ret_type const _l, ret_type const _r){
-				return
-					std::max(ret_type{0},_l)
-					+
-					std::max(ret_type{0},_r);
+			[&counts](
+				sanguis::creator::impl::region_id _id
+			)
+			{
+				counts[
+					_id
+				]++;
 			}
 		);
-	};
 
-	using connector =
-		std::pair<
-			region_id,
-			region_id
-		>;
-
-	using optional_connector =
-		fcppt::optional<
-			connector
-		>;
-
-	optional_connector
-	is_possible_connector(
-		region_grid grid,
-		sanguis::creator::pos p
+	// if cell doesn't have exactly two adjacent walls
+	if (
+			counts[
+				::wall_region
+			] !=
+			2u
 	)
-	{
-		auto const nothing =
-			optional_connector{};
+		// then we have no result
+		return nothing;
 
-		if (
-			!
-			fcppt::container::grid::in_range(
-				grid,
-				p
+	// otherwise determine the first non-wall region
+	auto from =
+		counts.upper_bound(::wall_region);
+
+	auto const to =
+		std::next(from);
+
+	// interior wall, no possible connector
+	if (
+		to
+		==
+		std::end(counts)
+	)
+		return nothing;
+
+	auto const from_region = from->first;
+	auto const to_region = to->first;
+
+	// must be an exterior wall, return a possible connector
+	return
+		optional_connector{
+			from_region < to_region ?
+			std::make_pair(
+				from_region,
+				to_region
 			)
-			||
-			(
-				p.x() % 2
-				==
-				p.y() % 2
-			)
-			||
-			grid[
-				p
-			]
-			!=
-			::wall_region
-		)
-			return nothing;
-
-		std::map<
-			region_id,
-			unsigned
-		> counts;
-
-		for (
-			auto const &n
 			:
-			fcppt::container::grid::neumann_neighbors(
-				p
+			std::make_pair(
+				to_region,
+				from_region
 			)
-		)
-			fcppt::maybe_void(
-				fcppt::container::grid::at_optional(
-					grid,
-					n
-				),
-				[&counts](
-					sanguis::creator::impl::region_id _id
-				)
-				{
-					counts[
-						_id
-					]++;
-				}
-			);
+		};
+}
 
-		// if cell doesn't have exactly two adjacent walls
-		if (
-				counts[
-					::wall_region
-				] !=
-				2u
-		)
-			// then we have no result
-			return nothing;
-
-		// otherwise determine the first non-wall region
-		auto from =
-			counts.upper_bound(::wall_region);
-
-		auto const to =
-			std::next(from);
-
-		// interior wall, no possible connector
-		if (
-			to
-			==
-			std::end(counts)
-		)
-			return nothing;
-
-		auto const from_region = from->first;
-		auto const to_region = to->first;
-
-		// must be an exterior wall, return a possible connector
-		return
-			optional_connector{
-				from_region < to_region ?
-				std::make_pair(
-					from_region,
-					to_region
-				)
-				:
-				std::make_pair(
-					to_region,
-					from_region
-				)
-			};
-	}
 }
 
 sanguis::creator::impl::result
@@ -432,9 +435,11 @@ sanguis::creator::impl::generators::rooms(
 
 	auto region_grid = tmp_result.grid;
 
-#if 1
 	auto output_grid = [&raw_grid,&rects](
 	){
+		if (!sanguis::creator::impl::log().activated(fcppt::log::level::debug))
+			return;
+
 		for ( unsigned y = 0; y < raw_grid.size().h(); ++y)
 		{
 			for ( unsigned x = 0; x < raw_grid.size().w(); ++x)
@@ -459,7 +464,6 @@ sanguis::creator::impl::generators::rooms(
 		}
 		std::cerr << std::endl;
 	};
-#endif
 
 	auto cur_region =
 		region_id{
@@ -772,7 +776,14 @@ sanguis::creator::impl::generators::rooms(
 		[&entrance_room](::signed_rect const _a, ::signed_rect const _b){return rect_distance(_a, entrance_room) < rect_distance(_b, entrance_room);}
 	);
 
-	std::cerr << entrance_room << " : " << exit_room << "\n";
+	FCPPT_LOG_DEBUG(
+		sanguis::creator::impl::log(),
+		fcppt::log::_
+		<< entrance_room
+		<< FCPPT_TEXT(" : ")
+		<< exit_room
+		<< FCPPT_TEXT("\n")
+	);
 
 	FCPPT_ASSERT_ERROR(
 		_parameters.opening_count_array()[
