@@ -3,7 +3,7 @@
 
 #include <sanguis/server/damage/array_fwd.hpp>
 #include <sanguis/server/damage/modified_array.hpp>
-#include <sanguis/server/entities/with_weapon_fwd.hpp>
+#include <sanguis/server/entities/ifaces/with_weapon_fwd.hpp>
 
 
 namespace sanguis
@@ -15,7 +15,7 @@ namespace entities
 
 sanguis::server::damage::modified_array const
 modify_damages(
-	sanguis::server::entities::with_weapon const &,
+	sanguis::server::entities::ifaces::with_weapon const &,
 	sanguis::server::damage::array const &
 );
 

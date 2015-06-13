@@ -5,6 +5,9 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_perks_fwd.hpp>
+#include <sanguis/server/entities/ifaces/with_health.hpp>
+#include <sanguis/server/entities/ifaces/with_velocity.hpp>
+#include <sanguis/server/entities/ifaces/with_weapon.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/perks/unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -23,6 +26,9 @@ namespace entities
 class with_perks
 :
 	public virtual sanguis::server::entities::base,
+	public virtual sanguis::server::entities::ifaces::with_health,
+	public virtual sanguis::server::entities::ifaces::with_velocity,
+	public virtual sanguis::server::entities::ifaces::with_weapon,
 	public virtual sanguis::server::entities::ifaces::with_team
 {
 	FCPPT_NONCOPYABLE(

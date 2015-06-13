@@ -264,6 +264,7 @@ set(
 	include/sanguis/server/entities/ifaces/with_links_fwd.hpp
 	include/sanguis/server/entities/ifaces/with_team.hpp
 	include/sanguis/server/entities/ifaces/with_velocity.hpp
+	include/sanguis/server/entities/ifaces/with_weapon.hpp
 	include/sanguis/server/entities/insert_parameters.hpp
 	include/sanguis/server/entities/insert_parameters_center.hpp
 	include/sanguis/server/entities/insert_parameters_fwd.hpp
@@ -866,6 +867,7 @@ set(
 	src/server/entities/ifaces/with_links.cpp
 	src/server/entities/ifaces/with_team.cpp
 	src/server/entities/ifaces/with_velocity.cpp
+	src/server/entities/ifaces/with_weapon.cpp
 	src/server/entities/insert_parameters.cpp
 	src/server/entities/insert_parameters_center.cpp
 	src/server/entities/modify_damages.cpp

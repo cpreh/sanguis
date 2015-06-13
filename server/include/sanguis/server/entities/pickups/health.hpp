@@ -35,7 +35,7 @@ public:
 	~health()
 	override;
 private:
-	void
+	bool
 	do_pickup(
 		sanguis::server::entities::base &receiver
 	)

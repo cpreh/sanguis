@@ -57,7 +57,8 @@ public:
 	override;
 
 	sanguis::server::entities::property::changeable &
-	movement_speed();
+	movement_speed()
+	override;
 
 	sanguis::server::entities::movement_speed const
 	max_movement_speed() const;

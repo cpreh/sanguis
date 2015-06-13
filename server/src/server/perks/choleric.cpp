@@ -13,7 +13,6 @@
 #include <sanguis/server/entities/modify_damages.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_perks.hpp>
-#include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/projectiles/rocket.hpp>
 #include <sanguis/server/entities/projectiles/simple_bullet.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
@@ -91,14 +90,6 @@ sanguis::server::perks::choleric::update(
 		this->level() < rocket_level
 	);
 
-	sanguis::server::entities::with_weapon const &with_weapon(
-		dynamic_cast<
-			sanguis::server::entities::with_weapon const &
-		>(
-			_entity
-		)
-	);
-
 	fcppt::algorithm::repeat(
 		spawn_bullets
 		?
@@ -122,7 +113,6 @@ sanguis::server::perks::choleric::update(
 			this,
 			&_env,
 			&_entity,
-			&with_weapon,
 			spawn_bullets
 		]
 		()
@@ -147,7 +137,7 @@ sanguis::server::perks::choleric::update(
 								10.f
 							),
 							sanguis::server::entities::modify_damages(
-								with_weapon,
+								_entity,
 								sanguis::server::damage::make_array({
 									sanguis::server::damage::piercing =
 										sanguis::server::damage::full
@@ -169,7 +159,7 @@ sanguis::server::perks::choleric::update(
 								15.f
 							),
 							sanguis::server::entities::modify_damages(
-								with_weapon,
+								_entity,
 								sanguis::server::damage::explosive()
 							),
 							sanguis::server::aoe(

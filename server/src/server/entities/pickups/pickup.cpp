@@ -22,6 +22,7 @@
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/pickups/pickup.hpp>
 #include <sanguis/server/environment/load_context.hpp>
+#include <fcppt/const.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -95,10 +96,9 @@ sanguis::server::entities::pickups::pickup::can_collide_with_body(
 			>(
 				_body
 			),
-			[]{
-				return
-					false;
-			},
+			fcppt::const_(
+				false
+			),
 			[
 				this
 			](
@@ -125,13 +125,14 @@ sanguis::server::entities::pickups::pickup::collision_with_body(
 	)
 		return;
 
-	life_timer_.expired(
-		true
-	);
-
-	this->do_pickup(
-		_body
-	);
+	if(
+		this->do_pickup(
+			_body
+		)
+	)
+		life_timer_.expired(
+			true
+		);
 }
 
 sanguis::collision::world::body_group

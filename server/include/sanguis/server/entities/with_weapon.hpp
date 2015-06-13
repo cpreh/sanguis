@@ -13,6 +13,7 @@
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/entities/ifaces/with_links.hpp>
+#include <sanguis/server/entities/ifaces/with_weapon.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/property/always_max.hpp>
 #include <sanguis/server/weapons/const_optional_ref_fwd.hpp>
@@ -37,6 +38,7 @@ class with_weapon
 	public virtual sanguis::server::entities::ifaces::with_angle,
 	public virtual sanguis::server::entities::ifaces::with_id,
 	public virtual sanguis::server::entities::ifaces::with_links,
+	public virtual sanguis::server::entities::ifaces::with_weapon,
 	public virtual sanguis::server::entities::ifaces::with_team
 {
 	FCPPT_NONCOPYABLE(
@@ -100,20 +102,24 @@ public:
 	);
 
 	sanguis::server::entities::property::always_max &
-	attack_speed();
+	attack_speed()
+	override;
 
 	sanguis::server::entities::property::always_max &
-	reload_speed();
+	reload_speed()
+	override;
 
 	sanguis::server::entities::property::always_max &
 	extra_damage(
 		sanguis::server::damage::type
-	);
+	)
+	override;
 
 	sanguis::server::damage::unit const
 	extra_damage_value(
 		sanguis::server::damage::type
-	) const;
+	) const
+	override;
 
 	sanguis::server::weapons::ias const
 	ias() const;

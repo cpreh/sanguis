@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_IFACES_WITH_VELOCITY_HPP_INCLUDED
 
 #include <sanguis/server/speed_fwd.hpp>
+#include <sanguis/server/entities/property/changeable_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -25,6 +26,10 @@ public:
 	virtual
 	sanguis::server::speed const
 	speed() const = 0;
+
+	virtual
+	sanguis::server::entities::property::changeable &
+	movement_speed() = 0;
 
 	virtual
 	~with_velocity() = 0;

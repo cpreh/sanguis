@@ -197,6 +197,8 @@ set(
 	include/sanguis/client/draw2d/optional_speed_fwd.hpp
 	include/sanguis/client/draw2d/optional_translation.hpp
 	include/sanguis/client/draw2d/optional_translation_fwd.hpp
+	include/sanguis/client/draw2d/optional_vector2.hpp
+	include/sanguis/client/draw2d/optional_vector2_fwd.hpp
 	include/sanguis/client/draw2d/player_center.hpp
 	include/sanguis/client/draw2d/player_center_fwd.hpp
 	include/sanguis/client/draw2d/radius.hpp

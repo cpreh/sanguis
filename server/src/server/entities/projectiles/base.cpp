@@ -5,6 +5,7 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
+#include <sanguis/server/entities/is_type.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/movement_speed_initial.hpp>
 #include <sanguis/server/entities/with_body.hpp>
@@ -99,10 +100,10 @@ sanguis::server::entities::projectiles::base::can_collide_with_body(
 	return
 		!_other.dead()
 		&&
-		dynamic_cast<
-			sanguis::server::entities::with_health const *
+		sanguis::server::entities::is_type<
+			sanguis::server::entities::with_health
 		>(
-			&_other
+			_other
 		);
 }
 
