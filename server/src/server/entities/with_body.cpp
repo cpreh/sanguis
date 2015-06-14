@@ -18,6 +18,7 @@
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/entities/ifaces/with_links.hpp>
+#include <sanguis/server/entities/ifaces/with_radius.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/maybe.hpp>
@@ -39,6 +40,7 @@ sanguis::server::entities::with_body::with_body(
 	sanguis::server::entities::ifaces::with_angle(),
 	sanguis::server::entities::ifaces::with_id(),
 	sanguis::server::entities::ifaces::with_links(),
+	sanguis::server::entities::ifaces::with_radius(),
 	sanguis::collision::world::body_base(),
 	angle_(
 		fcppt::literal<

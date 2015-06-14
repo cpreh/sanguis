@@ -18,6 +18,7 @@ bool
 can_walk_diagonally(
 	sanguis::creator::grid const &,
 	sanguis::creator::pos,
+	sanguis::creator::pos,
 	sanguis::creator::pos
 );
 

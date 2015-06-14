@@ -10,6 +10,7 @@
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/ifaces/with_health.hpp>
 #include <sanguis/server/entities/ifaces/with_links.hpp>
+#include <sanguis/server/entities/ifaces/with_radius.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/ifaces/with_velocity.hpp>
 #include <sanguis/server/weapons/ias.hpp>
@@ -35,6 +36,7 @@ sanguis::server::entities::with_ai::with_ai(
 	sanguis::server::entities::ifaces::with_angle(),
 	sanguis::server::entities::ifaces::with_health(),
 	sanguis::server::entities::ifaces::with_links(),
+	sanguis::server::entities::ifaces::with_radius(),
 	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::ifaces::with_velocity(),
 	sanguis::server::entities::with_auras_id(

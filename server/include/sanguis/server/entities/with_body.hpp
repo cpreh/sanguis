@@ -19,6 +19,7 @@
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/entities/ifaces/with_links.hpp>
+#include <sanguis/server/entities/ifaces/with_radius.hpp>
 #include <sanguis/server/net/angle.hpp>
 #include <sanguis/server/net/center.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -40,6 +41,7 @@ class with_body
 	public virtual sanguis::server::entities::ifaces::with_angle,
 	public virtual sanguis::server::entities::ifaces::with_id,
 	public virtual sanguis::server::entities::ifaces::with_links,
+	public virtual sanguis::server::entities::ifaces::with_radius,
 	public sanguis::collision::world::body_base
 {
 	FCPPT_NONCOPYABLE(
@@ -77,7 +79,8 @@ public:
 	override;
 
 	sanguis::server::radius const
-	radius() const;
+	radius() const
+	override;
 
 	sanguis::server::entities::remove_from_world_result
 	remove_from_world()

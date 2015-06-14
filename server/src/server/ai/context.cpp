@@ -1,17 +1,19 @@
 #include <sanguis/creator/optional_pos.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/server/ai/context.hpp>
-#include <sanguis/server/ai/pathing/can_walk_diagonally.hpp>
 #include <sanguis/server/ai/pathing/find_target.hpp>
 #include <sanguis/server/ai/pathing/optional_target.hpp>
 #include <sanguis/server/ai/pathing/optional_trail.hpp>
+#include <sanguis/server/ai/pathing/simplify.hpp>
 #include <sanguis/server/ai/pathing/start.hpp>
 #include <sanguis/server/ai/pathing/target.hpp>
 #include <sanguis/server/ai/pathing/trail.hpp>
+#include <sanguis/server/ai/pathing/update_trail.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/world/center_to_grid_pos.hpp>
 #include <fcppt/optional_bind.hpp>
+#include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/maybe_front.hpp>
 
@@ -37,16 +39,30 @@ sanguis::server::ai::context::path_find(
 )
 {
 	trail_ =
-		sanguis::server::ai::pathing::find_target(
-			this->grid(),
-			sanguis::server::ai::pathing::start(
-				sanguis::server::world::center_to_grid_pos(
-					me_.center()
+		fcppt::optional_bind_construct(
+			sanguis::server::ai::pathing::find_target(
+				this->grid(),
+				sanguis::server::ai::pathing::start(
+					sanguis::server::world::center_to_grid_pos(
+						this->me().center()
+					)
+				),
+				sanguis::server::ai::pathing::target(
+					_pos
 				)
 			),
-			sanguis::server::ai::pathing::target(
-				_pos
+			[
+				this
+			](
+				sanguis::server::ai::pathing::trail const &_trail
 			)
+			{
+				return
+					sanguis::server::ai::pathing::simplify(
+						_trail,
+						this->grid()
+					);
+			}
 		);
 
 	return
@@ -92,35 +108,12 @@ sanguis::server::ai::context::continue_path()
 				sanguis::server::ai::pathing::trail &_trail
 			)
 			{
-				// TODO: maybe_back
-				if(
-					_trail.empty()
-				)
-					return
-						sanguis::server::ai::pathing::optional_target();
-
-				sanguis::creator::pos const next_position(
-					_trail.back()
-				);
-
-				// TODO: Return the next position after pop_back
-				if(
-					sanguis::server::ai::pathing::can_walk_diagonally(
-						this->grid(),
-						sanguis::server::world::center_to_grid_pos(
-							me_.center()
-						),
-						next_position
-					)
-				)
-					_trail.pop_back();
-
 				return
-					sanguis::server::ai::pathing::optional_target{
-						sanguis::server::ai::pathing::target(
-							next_position
-						)
-					};
+					sanguis::server::ai::pathing::update_trail(
+						_trail,
+						this->grid(),
+						this->me()
+					);
 			}
 		);
 }

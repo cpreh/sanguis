@@ -39,11 +39,14 @@ set(
 	include/sanguis/server/ai/pathing/optional_trail.hpp
 	include/sanguis/server/ai/pathing/optional_trail_fwd.hpp
 	include/sanguis/server/ai/pathing/positions_are_close.hpp
+	include/sanguis/server/ai/pathing/simplify.hpp
 	include/sanguis/server/ai/pathing/start.hpp
 	include/sanguis/server/ai/pathing/start_fwd.hpp
 	include/sanguis/server/ai/pathing/target.hpp
 	include/sanguis/server/ai/pathing/target_fwd.hpp
+	include/sanguis/server/ai/pathing/tile_reached.hpp
 	include/sanguis/server/ai/pathing/trail.hpp
+	include/sanguis/server/ai/pathing/update_trail.hpp
 	include/sanguis/server/ai/rotate_and_move_to_target.hpp
 	include/sanguis/server/ai/rotate_to.hpp
 	include/sanguis/server/ai/rotate_to_target.hpp
@@ -262,6 +265,7 @@ set(
 	include/sanguis/server/entities/ifaces/with_id.hpp
 	include/sanguis/server/entities/ifaces/with_links.hpp
 	include/sanguis/server/entities/ifaces/with_links_fwd.hpp
+	include/sanguis/server/entities/ifaces/with_radius.hpp
 	include/sanguis/server/entities/ifaces/with_team.hpp
 	include/sanguis/server/entities/ifaces/with_velocity.hpp
 	include/sanguis/server/entities/ifaces/with_weapon.hpp
@@ -755,6 +759,9 @@ set(
 	src/server/ai/pathing/can_walk_diagonally.cpp
 	src/server/ai/pathing/find_target.cpp
 	src/server/ai/pathing/positions_are_close.cpp
+	src/server/ai/pathing/simplify.cpp
+	src/server/ai/pathing/tile_reached.cpp
+	src/server/ai/pathing/update_trail.cpp
 	src/server/ai/rotate_and_move_to_target.cpp
 	src/server/ai/rotate_to.cpp
 	src/server/ai/rotate_to_target.cpp
@@ -868,6 +875,7 @@ set(
 	src/server/entities/ifaces/with_health.cpp
 	src/server/entities/ifaces/with_id.cpp
 	src/server/entities/ifaces/with_links.cpp
+	src/server/entities/ifaces/with_radius.cpp
 	src/server/entities/ifaces/with_team.cpp
 	src/server/entities/ifaces/with_velocity.cpp
 	src/server/entities/ifaces/with_weapon.cpp
