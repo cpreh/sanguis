@@ -37,6 +37,7 @@
 #include <fcppt/optional_bind.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/algorithm/all_of.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/assert/unreachable_message.hpp>
@@ -521,25 +522,19 @@ sanguis::client::draw2d::entities::model::object::animation() const
 bool
 sanguis::client::draw2d::entities::model::object::animations_ended() const
 {
-	if(
+	return
 		this->animation()
 		!=
 		sanguis::client::load::animation_type::dying
-	)
-		return
-			true;
-
-	// TODO: all_of?
-	for(
-		auto const &cur_part
-		:
-		parts_
-	)
-		if(
-			!cur_part->ended()
-		)
-			return
-				false;
-	return
-		true;
+		||
+		fcppt::algorithm::all_of(
+			parts_,
+			[](
+				part_unique_ptr const &_part
+			)
+			{
+				return
+					_part->ended();
+			}
+		);
 }
