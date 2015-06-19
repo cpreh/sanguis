@@ -56,7 +56,7 @@ sanguis::server::weapons::factory::pistol(
 						),
 						sanguis::server::weapons::backswing_time(
 							sanguis::duration_second(
-								1.f / 5
+								0.2f
 							)
 						),
 						sanguis::server::weapons::damage(
