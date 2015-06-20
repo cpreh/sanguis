@@ -8,7 +8,6 @@
 #include <sanguis/messages/server/parts/add_with_health.hpp>
 #include <sanguis/messages/server/parts/add_with_weapon.hpp>
 #include <sanguis/messages/server/parts/speed.hpp>
-#include <majutsu/composite.hpp>
 
 
 #endif

@@ -14,6 +14,7 @@ namespace client
 template<
 	typename T
 >
+inline
 sanguis::messages::client::concrete<
 	T
 >

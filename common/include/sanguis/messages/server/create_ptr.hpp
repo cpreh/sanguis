@@ -16,6 +16,7 @@ namespace server
 template<
 	typename T
 >
+inline
 sanguis::messages::server::unique_ptr
 create_ptr(
 	T const &_value

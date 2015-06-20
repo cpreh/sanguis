@@ -5,10 +5,9 @@
 #include <sanguis/messages/adapted_types/enum.hpp>
 #include <sanguis/messages/server/add_projectile_fwd.hpp>
 #include <sanguis/messages/server/parts/add_elements_base.hpp>
+#include <sanguis/messages/server/parts/entity_message.hpp>
 #include <sanguis/messages/server/parts/speed.hpp>
-#include <sanguis/messages/server/types/bind_entity_message.hpp>
 #include <alda/message/make_class.hpp>
-#include <majutsu/composite.hpp>
 #include <majutsu/role.hpp>
 
 

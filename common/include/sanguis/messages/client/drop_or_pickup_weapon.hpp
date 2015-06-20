@@ -5,7 +5,6 @@
 #include <sanguis/messages/client/drop_or_pickup_weapon_fwd.hpp>
 #include <sanguis/messages/client/types/make_message_id.hpp>
 #include <alda/message/make_class.hpp>
-#include <majutsu/composite.hpp>
 #include <majutsu/role.hpp>
 
 

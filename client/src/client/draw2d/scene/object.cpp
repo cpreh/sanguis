@@ -164,8 +164,8 @@
 #include <sge/sprite/state/scoped.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <majutsu/get.hpp>
-#include <majutsu/is_role.hpp>
-#include <majutsu/unwrap_role.hpp>
+#include <majutsu/init_types.hpp>
+#include <majutsu/unwrap_role_tpl.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_unique_ptr_fcppt.hpp>
@@ -189,7 +189,6 @@
 #include <fcppt/mpl/for_each.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/filter_view.hpp>
 #include <boost/mpl/placeholders.hpp>
 #include <boost/mpl/transform_view.hpp>
 #include <boost/mpl/vector/vector30.hpp>
@@ -1448,13 +1447,10 @@ sanguis::client::draw2d::scene::object::configure_new_object(
 
 	fcppt::mpl::for_each<
 		boost::mpl::transform_view<
-			boost::mpl::filter_view<
-				typename Message::memory_type::types,
-				majutsu::is_role<
-					boost::mpl::_1
-				>
+			majutsu::init_types<
+				Message
 			>,
-			majutsu::unwrap_role<
+			majutsu::unwrap_role_tpl<
 				boost::mpl::_1
 			>
 		>

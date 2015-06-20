@@ -3,7 +3,6 @@
 
 #include <sanguis/messages/adapted_types/buff_type_vector.hpp>
 #include <sanguis/messages/server/parts/add_with_buffs_fwd.hpp>
-#include <majutsu/composite.hpp>
 #include <majutsu/role.hpp>
 
 

@@ -3,9 +3,7 @@
 
 #include <sanguis/client/draw2d/scene/world/sprite/is_background_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/is_background_role.hpp>
-#include <majutsu/composite.hpp>
 #include <majutsu/role.hpp>
-#include <majutsu/simple.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -31,16 +29,14 @@ struct is_background
 	>
 	struct apply
 	{
-		typedef majutsu::composite<
-			boost::mpl::vector1<
-				majutsu::role<
-					majutsu::simple<
-						bool
-					>,
-					sanguis::client::draw2d::scene::world::sprite::is_background_role
-				>
+		typedef
+		boost::mpl::vector1<
+			majutsu::role<
+				bool,
+				sanguis::client::draw2d::scene::world::sprite::is_background_role
 			>
-		> type;
+		>
+		type;
 	};
 };
 

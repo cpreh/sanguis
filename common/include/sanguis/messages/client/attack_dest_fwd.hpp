@@ -6,7 +6,6 @@
 #include <sanguis/messages/client/types/message.hpp>
 #include <sanguis/messages/roles/attack_dest.hpp>
 #include <alda/message/make_class_fwd.hpp>
-#include <majutsu/composite_fwd.hpp>
 #include <majutsu/role_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
@@ -22,15 +21,13 @@ namespace client
 
 typedef
 alda::message::make_class<
-	majutsu::composite<
-		boost::mpl::vector2<
-			sanguis::messages::client::types::make_message_id<
-				sanguis::messages::client::types::message::attack_dest
-			>,
-			majutsu::role<
-				sanguis::messages::adapted_types::vector2,
-				sanguis::messages::roles::attack_dest
-			>
+	boost::mpl::vector2<
+		sanguis::messages::client::types::make_message_id<
+			sanguis::messages::client::types::message::attack_dest
+		>,
+		majutsu::role<
+			sanguis::messages::adapted_types::vector2,
+			sanguis::messages::roles::attack_dest
 		>
 	>
 >

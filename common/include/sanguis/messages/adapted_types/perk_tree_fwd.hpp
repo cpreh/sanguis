@@ -3,8 +3,8 @@
 
 #include <sanguis/messages/server/types/perk_tree_node_fwd.hpp>
 #include <sanguis/messages/server/types/perk_tree_node_vector.hpp>
-#include <alda/bindings/class_fwd.hpp>
 #include <alda/bindings/dynamic_len_fwd.hpp>
+#include <alda/bindings/record_fwd.hpp>
 
 
 namespace sanguis
@@ -17,7 +17,7 @@ namespace adapted_types
 typedef
 alda::bindings::dynamic_len<
 	sanguis::messages::server::types::perk_tree_node_vector,
-	alda::bindings::class_<
+	alda::bindings::record<
 		sanguis::messages::server::types::perk_tree_node
 	>
 >

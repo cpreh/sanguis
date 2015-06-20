@@ -2,10 +2,9 @@
 #define SANGUIS_MESSAGES_SERVER_ADD_OWN_PLAYER_FWD_HPP_INCLUDED
 
 #include <sanguis/messages/server/parts/add_player_fwd.hpp>
-#include <sanguis/messages/server/types/bind_entity_message_fwd.hpp>
+#include <sanguis/messages/server/parts/entity_message_fwd.hpp>
 #include <sanguis/messages/server/types/message.hpp>
 #include <alda/message/make_class_fwd.hpp>
-#include <majutsu/composite_fwd.hpp>
 #include <majutsu/role_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
@@ -21,13 +20,11 @@ namespace server
 
 typedef
 alda::message::make_class<
-	majutsu::composite<
-		boost::mpl::vector2<
-			sanguis::messages::server::types::bind_entity_message<
-				sanguis::messages::server::types::message::add_own_player
-			>,
-			sanguis::messages::server::parts::add_player
-		>
+	boost::mpl::vector2<
+		sanguis::messages::server::parts::entity_message<
+			sanguis::messages::server::types::message::add_own_player
+		>,
+		sanguis::messages::server::parts::add_player
 	>
 >
 add_own_player;

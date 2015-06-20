@@ -3,7 +3,6 @@
 
 #include <sanguis/messages/adapted_types/vector2.hpp>
 #include <sanguis/messages/server/parts/speed_fwd.hpp>
-#include <majutsu/composite.hpp>
 #include <majutsu/role.hpp>
 
 

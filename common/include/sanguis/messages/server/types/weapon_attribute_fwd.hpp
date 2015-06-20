@@ -8,7 +8,6 @@
 #include <sanguis/messages/roles/weapon_attribute_extra.hpp>
 #include <sanguis/messages/roles/weapon_attribute_type.hpp>
 #include <alda/message/make_class_fwd.hpp>
-#include <majutsu/composite_fwd.hpp>
 #include <majutsu/role_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
@@ -26,20 +25,18 @@ namespace types
 
 typedef
 alda::message::make_class<
-	majutsu::composite<
-		boost::mpl::vector3<
-			majutsu::role<
-				sanguis::messages::adapted_types::weapon_attribute_type,
-				sanguis::messages::roles::weapon_attribute_type
-			>,
-			majutsu::role<
-				sanguis::messages::adapted_types::weapon_attribute_value,
-				sanguis::messages::roles::weapon_attribute_base
-			>,
-			majutsu::role<
-				sanguis::messages::adapted_types::optional_weapon_attribute_value,
-				sanguis::messages::roles::weapon_attribute_extra
-			>
+	boost::mpl::vector3<
+		majutsu::role<
+			sanguis::messages::adapted_types::weapon_attribute_type,
+			sanguis::messages::roles::weapon_attribute_type
+		>,
+		majutsu::role<
+			sanguis::messages::adapted_types::weapon_attribute_value,
+			sanguis::messages::roles::weapon_attribute_base
+		>,
+		majutsu::role<
+			sanguis::messages::adapted_types::optional_weapon_attribute_value,
+			sanguis::messages::roles::weapon_attribute_extra
 		>
 	>
 >

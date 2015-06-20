@@ -362,8 +362,6 @@ set(
 	include/sanguis/messages/server/speed_fwd.hpp
 	include/sanguis/messages/server/types/alda_type.hpp
 	include/sanguis/messages/server/types/alda_type_fwd.hpp
-	include/sanguis/messages/server/types/bind_entity_message.hpp
-	include/sanguis/messages/server/types/bind_entity_message_fwd.hpp
 	include/sanguis/messages/server/types/make_message_id.hpp
 	include/sanguis/messages/server/types/make_message_id_fwd.hpp
 	include/sanguis/messages/server/types/message.hpp

@@ -7,7 +7,6 @@
 #include <sanguis/messages/server/types/perk_tree_node_fwd.hpp>
 #include <alda/bindings/optional.hpp>
 #include <alda/message/make_class.hpp>
-#include <majutsu/composite.hpp>
 #include <majutsu/role.hpp>
 
 

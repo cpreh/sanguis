@@ -15,7 +15,6 @@
 #include <sanguis/messages/server/types/make_message_id_fwd.hpp>
 #include <sanguis/messages/server/types/message.hpp>
 #include <alda/message/make_class_fwd.hpp>
-#include <majutsu/composite_fwd.hpp>
 #include <majutsu/role_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
@@ -31,35 +30,33 @@ namespace server
 
 typedef
 alda::message::make_class<
-	majutsu::composite<
-		boost::mpl::vector7<
-			sanguis::messages::server::types::make_message_id<
-				sanguis::messages::server::types::message::change_world
-			>,
-			majutsu::role<
-				sanguis::messages::adapted_types::world_id,
-				sanguis::messages::roles::world_id
-			>,
-			majutsu::role<
-				sanguis::messages::adapted_types::seed,
-				sanguis::messages::roles::seed
-			>,
-			majutsu::role<
-				sanguis::messages::adapted_types::string,
-				sanguis::messages::roles::generator_name
-			>,
-			majutsu::role<
-				sanguis::messages::adapted_types::opening_count_array,
-				sanguis::messages::roles::opening_count
-			>,
-			majutsu::role<
-				sanguis::messages::adapted_types::string,
-				sanguis::messages::roles::world_name
-			>,
-			majutsu::role<
-				sanguis::messages::adapted_types::bool_,
-				sanguis::messages::roles::spawn_boss
-			>
+	boost::mpl::vector7<
+		sanguis::messages::server::types::make_message_id<
+			sanguis::messages::server::types::message::change_world
+		>,
+		majutsu::role<
+			sanguis::messages::adapted_types::world_id,
+			sanguis::messages::roles::world_id
+		>,
+		majutsu::role<
+			sanguis::messages::adapted_types::seed,
+			sanguis::messages::roles::seed
+		>,
+		majutsu::role<
+			sanguis::messages::adapted_types::string,
+			sanguis::messages::roles::generator_name
+		>,
+		majutsu::role<
+			sanguis::messages::adapted_types::opening_count_array,
+			sanguis::messages::roles::opening_count
+		>,
+		majutsu::role<
+			sanguis::messages::adapted_types::string,
+			sanguis::messages::roles::world_name
+		>,
+		majutsu::role<
+			sanguis::messages::adapted_types::bool_,
+			sanguis::messages::roles::spawn_boss
 		>
 	>
 >

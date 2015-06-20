@@ -14,6 +14,7 @@ namespace server
 template<
 	typename T
 >
+inline
 sanguis::messages::server::concrete<
 	T
 >
