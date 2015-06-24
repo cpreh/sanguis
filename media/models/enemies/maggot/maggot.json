@@ -8,8 +8,7 @@
 				"none":{
 					"animations":{
 						"attacking":{
-							"range":[0,21],
-							"sound":"hit/hit.ogg"
+							"range":[0,21]
 						},
 						"dying":{
 							"range":[21,32]

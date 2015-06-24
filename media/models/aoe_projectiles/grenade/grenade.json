@@ -14,8 +14,7 @@
 							"range":[0,1]
 						},
 						"dying":{
-							"range":[0,1],
-							"sound":"explosion.ogg"
+							"range":[0,1]
 						}
 					}
 				}

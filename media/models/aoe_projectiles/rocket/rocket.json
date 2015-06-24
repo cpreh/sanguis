@@ -8,15 +8,13 @@
 				"none":{
 					"animations":{
 						"dying":{
-							"range":[0,1],
-							"sound":"explosion.ogg"
+							"range":[0,1]
 						},
 						"none":{
 							"range":[0,11]
 						},
 						"deploying":{
-							"range":[0,1],
-							"sound":"rocket_firing.ogg"
+							"range":[0,1]
 						}
 					}
 				}

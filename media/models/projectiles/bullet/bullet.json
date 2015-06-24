@@ -14,7 +14,6 @@
 							"range":[0,1]
 						},
 						"deploying":{
-							"sound":"shoot/shoot2.ogg",
 							"range":[0,1]
 						}
 					}
