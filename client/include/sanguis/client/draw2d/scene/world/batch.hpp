@@ -26,7 +26,7 @@ public:
 
 	explicit
 	batch(
-		sanguis::client::draw2d::scene::world::sprite::range const &
+		sanguis::client::draw2d::scene::world::sprite::range &&
 	);
 
 	void

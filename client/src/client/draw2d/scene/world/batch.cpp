@@ -8,6 +8,9 @@
 #include <sge/sprite/render/range_with_options.hpp>
 #include <sge/sprite/state/options.hpp>
 #include <sge/sprite/state/vertex_options.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::draw2d::scene::world::batch::batch()
@@ -17,11 +20,13 @@ sanguis::client::draw2d::scene::world::batch::batch()
 }
 
 sanguis::client::draw2d::scene::world::batch::batch(
-	sanguis::client::draw2d::scene::world::sprite::range const &_range
+	sanguis::client::draw2d::scene::world::sprite::range &&_range
 )
 :
 	range_(
-		_range
+		std::move(
+			_range
+		)
 	)
 {
 }
