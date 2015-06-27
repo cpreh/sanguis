@@ -21,6 +21,7 @@
 #include <sge/font/string.hpp>
 #include <fcppt/insert_to_string.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 

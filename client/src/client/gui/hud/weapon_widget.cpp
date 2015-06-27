@@ -29,6 +29,7 @@
 #include <sge/rucksack/dim.hpp>
 #include <sge/timer/elapsed_fractional.hpp>
 #include <fcppt/insert_to_string.hpp>
+#include <fcppt/strong_typedef_output.hpp>
 
 
 sanguis::client::gui::hud::weapon_widget::weapon_widget(

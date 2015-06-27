@@ -175,6 +175,7 @@
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/optional_comparison.hpp>
 #include <fcppt/optional_impl.hpp>
+#include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/type_name_from_info.hpp>
 #include <fcppt/algorithm/enum_array_fold.hpp>

@@ -21,8 +21,6 @@ set(
 	include/sanguis/tiles/is_background_fwd.hpp
 	include/sanguis/tiles/is_tile.hpp
 	include/sanguis/tiles/log_location.hpp
-	include/sanguis/tiles/lower_bound.hpp
-	include/sanguis/tiles/lower_bound_fwd.hpp
 	include/sanguis/tiles/orientation.hpp
 	include/sanguis/tiles/orientation_fwd.hpp
 	include/sanguis/tiles/orientation_map.hpp
@@ -37,8 +35,6 @@ set(
 	include/sanguis/tiles/set.hpp
 	include/sanguis/tiles/set_fwd.hpp
 	include/sanguis/tiles/unit.hpp
-	include/sanguis/tiles/upper_bound.hpp
-	include/sanguis/tiles/upper_bound_fwd.hpp
 	src/cell.cpp
 	src/collection.cpp
 	src/draw.cpp

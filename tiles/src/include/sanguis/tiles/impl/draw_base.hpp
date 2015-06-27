@@ -1,20 +1,20 @@
 #ifndef SANGUIS_TILES_IMPL_DRAW_BASE_HPP_INCLUDED
 #define SANGUIS_TILES_IMPL_DRAW_BASE_HPP_INCLUDED
 
+#include <sanguis/creator/min.hpp>
 #include <sanguis/creator/pos.hpp>
+#include <sanguis/creator/sup.hpp>
 #include <sanguis/creator/tile_grid.hpp>
 #include <sanguis/tiles/cell.hpp>
 #include <sanguis/tiles/cell_container.hpp>
-#include <sanguis/tiles/lower_bound.hpp>
 #include <sanguis/tiles/pos.hpp>
-#include <sanguis/tiles/upper_bound.hpp>
 #include <sanguis/tiles/impl/content_path.hpp>
 #include <sanguis/tiles/impl/is_background.hpp>
 #include <sanguis/tiles/impl/optional_content_path.hpp>
 #include <sanguis/tiles/impl/shift.hpp>
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
-#include <fcppt/container/grid/make_pos_crange_start_end.hpp>
+#include <fcppt/container/grid/make_pos_ref_crange_start_end.hpp>
 #include <fcppt/container/grid/pos_reference_impl.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/fill.hpp>
@@ -43,8 +43,8 @@ draw_base(
 	sanguis::creator::tile_grid<
 		Tile
 	> const &_grid,
-	sanguis::tiles::lower_bound const _lower_bound,
-	sanguis::tiles::upper_bound const _upper_bound,
+	sanguis::creator::min const _min,
+	sanguis::creator::sup const _sup,
 	sanguis::tiles::impl::shift const _shift,
 	std::function<
 		sanguis::tiles::impl::optional_content_path (
@@ -71,10 +71,10 @@ draw_base(
 		fcppt::algorithm::map_optional<
 			sanguis::tiles::cell_container
 		>(
-			fcppt::container::grid::make_pos_crange_start_end(
+			fcppt::container::grid::make_pos_ref_crange_start_end(
 				_grid,
-				_lower_bound.get(),
-				_upper_bound.get()
+				_min,
+				_sup
 			),
 			[
 				tile_dim,

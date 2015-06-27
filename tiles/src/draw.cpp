@@ -1,11 +1,11 @@
 #include <sanguis/creator/background_grid.hpp>
 #include <sanguis/creator/grid.hpp>
+#include <sanguis/creator/min.hpp>
+#include <sanguis/creator/sup.hpp>
 #include <sanguis/tiles/cell_container.hpp>
 #include <sanguis/tiles/collection_fwd.hpp>
 #include <sanguis/tiles/draw.hpp>
 #include <sanguis/tiles/error.hpp>
-#include <sanguis/tiles/lower_bound.hpp>
-#include <sanguis/tiles/upper_bound.hpp>
 #include <sanguis/tiles/impl/draw_connecting.hpp>
 #include <sanguis/tiles/impl/draw_non_connecting.hpp>
 #include <fcppt/algorithm/join.hpp>
@@ -20,8 +20,8 @@ sanguis::tiles::draw(
 	sanguis::creator::grid const &_foreground,
 	sanguis::creator::background_grid const &_background,
 	sanguis::tiles::collection &_collection,
-	sanguis::tiles::lower_bound const _lower_bound,
-	sanguis::tiles::upper_bound const _upper_bound
+	sanguis::creator::min const _min,
+	sanguis::creator::sup const _sup
 )
 {
 	FCPPT_ASSERT_PRE(
@@ -46,16 +46,16 @@ sanguis::tiles::draw(
 		return
 			sanguis::tiles::cell_container();
 
-	sanguis::tiles::lower_bound const lower_bound(
+	sanguis::creator::min const lower_bound(
 		fcppt::container::grid::clamp_pos(
-			_lower_bound.get(),
+			_min.get(),
 			_foreground.size()
 		)
 	);
 
-	sanguis::tiles::lower_bound const connecting_lower_bound(
+	sanguis::creator::min const connecting_lower_bound(
 		fcppt::container::grid::clamp_pos(
-			_lower_bound.get()
+			_min.get()
 			+
 			min_size
 			,
@@ -63,9 +63,9 @@ sanguis::tiles::draw(
 		)
 	);
 
-	sanguis::tiles::upper_bound const upper_bound(
+	sanguis::creator::sup const upper_bound(
 		fcppt::container::grid::clamp_pos(
-			_upper_bound.get()
+			_sup.get()
 			,
 			_foreground.size()
 		)

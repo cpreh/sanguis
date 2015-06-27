@@ -7,7 +7,7 @@
 #include <sanguis/creator/impl/place_destructibles.hpp>
 #include <sanguis/creator/impl/random/generator.hpp>
 #include <sanguis/creator/impl/random/uniform_int.hpp>
-#include <fcppt/container/grid/make_pos_crange.hpp>
+#include <fcppt/container/grid/make_pos_ref_crange.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
 #include <fcppt/math/clamp.hpp>
 #include <fcppt/random/make_variate.hpp>
@@ -80,7 +80,7 @@ sanguis::creator::impl::place_destructibles(
 	for(
 		auto const &entry
 		:
-		fcppt::container::grid::make_pos_crange(
+		fcppt::container::grid::make_pos_ref_crange(
 			_grid
 		)
 	)

@@ -13,6 +13,7 @@
 #include <sanguis/collision/world/body_parameters.hpp>
 #include <sanguis/creator/tile_size.hpp>
 #include <fcppt/maybe_void.hpp>
+#include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/warning.hpp>

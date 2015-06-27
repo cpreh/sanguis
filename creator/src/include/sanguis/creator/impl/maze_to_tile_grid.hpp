@@ -8,7 +8,7 @@
 #include <sanguis/creator/impl/reachable.hpp>
 #include <sanguis/creator/impl/reachable_grid.hpp>
 #include <sanguis/creator/impl/reachable_grid.hpp>
-#include <fcppt/container/grid/make_pos_crange.hpp>
+#include <fcppt/container/grid/make_pos_ref_crange.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/dim.hpp>
 
@@ -98,7 +98,7 @@ maze_to_tile_grid(
 
 	for(
 		auto cell :
-		fcppt::container::grid::make_pos_crange(
+		fcppt::container::grid::make_pos_ref_crange(
 			_maze)
 	)
 	{

@@ -14,7 +14,8 @@ typedef
 fcppt::container::grid::pos<
 	sanguis::creator::size_type,
 	2u
-> pos;
+>
+pos;
 
 }
 }

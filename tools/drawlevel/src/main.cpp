@@ -1,10 +1,13 @@
 #include <sanguis/creator/generate.hpp>
+#include <sanguis/creator/min.hpp>
 #include <sanguis/creator/name.hpp>
 #include <sanguis/creator/opening_count.hpp>
 #include <sanguis/creator/opening_count_array.hpp>
 #include <sanguis/creator/opening_type.hpp>
+#include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/spawn_boss.hpp>
+#include <sanguis/creator/sup.hpp>
 #include <sanguis/creator/tile_size.hpp>
 #include <sanguis/creator/top_parameters.hpp>
 #include <sanguis/creator/top_result.hpp>
@@ -15,8 +18,6 @@
 #include <sanguis/tiles/draw.hpp>
 #include <sanguis/tiles/error.hpp>
 #include <sanguis/tiles/error_image.hpp>
-#include <sanguis/tiles/lower_bound.hpp>
-#include <sanguis/tiles/upper_bound.hpp>
 #include <sge/image/algorithm/may_overlap.hpp>
 #include <sge/image/algorithm/uninitialized.hpp>
 #include <sge/image/color/init/alpha.hpp>
@@ -163,10 +164,10 @@ try
 			result.grid(),
 			result.background_grid(),
 			tile_collection,
-			sanguis::tiles::lower_bound{
-				sanguis::tiles::lower_bound::value_type::null()
+			sanguis::creator::min{
+				sanguis::creator::pos::null()
 			},
-			sanguis::tiles::upper_bound{
+			sanguis::creator::sup{
 				fcppt::math::dim::to_vector(
 					result.grid().size()
 				)

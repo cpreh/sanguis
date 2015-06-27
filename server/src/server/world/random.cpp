@@ -12,6 +12,7 @@
 #include <sanguis/server/world/random_generator_name.hpp>
 #include <sanguis/server/world/random_seed.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
+#include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 
 

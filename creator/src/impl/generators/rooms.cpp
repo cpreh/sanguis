@@ -25,6 +25,7 @@
 #include <sanguis/creator/impl/log.hpp>
 #include <sanguis/creator/impl/filled_rect.hpp>
 #include <sanguis/creator/impl/generate_maze.hpp>
+#include <sanguis/creator/impl/interior_range.hpp>
 #include <sanguis/creator/impl/maze_to_tile_grid.hpp>
 #include <sanguis/creator/impl/parameters.hpp>
 #include <sanguis/creator/impl/place_boss.hpp>
@@ -53,8 +54,7 @@
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/fill.hpp>
 #include <fcppt/container/grid/in_range.hpp>
-#include <fcppt/container/grid/make_pos_range.hpp>
-#include <fcppt/container/grid/make_pos_range_start_end.hpp>
+#include <fcppt/container/grid/make_pos_ref_range.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
@@ -64,8 +64,6 @@
 #include <fcppt/math/box/object.hpp>
 #include <fcppt/math/box/rect.hpp>
 #include <fcppt/math/box/structure_cast.hpp>
-#include <fcppt/math/dim/arithmetic.hpp>
-#include <fcppt/math/vector/fill.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
@@ -527,16 +525,11 @@ sanguis::creator::impl::generators::rooms(
 	for (
 		auto const &p
 		:
-		fcppt::container::grid::make_pos_range_start_end(
-			region_grid,
-			// no possible connector tiles can be on the
-			// edge of the map, so only look for them in the
-			// interior
-			sanguis::creator::pos{1u,1u},
-			sanguis::creator::pos{
-				sanguis::creator::pos{0u,0u} +
-				(region_grid.size() - region_grid::dim{1u,1u})
-			}
+		// no possible connector tiles can be on the
+		// edge of the map, so only look for them in the
+		// interior
+		sanguis::creator::impl::interior_range(
+			region_grid
 		)
 	)
 	{
@@ -683,7 +676,7 @@ sanguis::creator::impl::generators::rooms(
 			for (
 				auto const &p
 				:
-				fcppt::container::grid::make_pos_range(
+				fcppt::container::grid::make_pos_ref_range(
 					region_grid
 				)
 			)
@@ -698,7 +691,7 @@ sanguis::creator::impl::generators::rooms(
 			for (
 				auto const p
 				:
-				fcppt::container::grid::make_pos_range(
+				fcppt::container::grid::make_pos_ref_range(
 					raw_grid
 				)
 			)

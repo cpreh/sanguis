@@ -34,6 +34,7 @@
 #include <fcppt/exception.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/log/_.hpp>

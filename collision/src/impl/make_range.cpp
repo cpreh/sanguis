@@ -4,13 +4,14 @@
 #include <sanguis/creator/difference_type.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/grid_crange.hpp>
-#include <sanguis/creator/pos.hpp>
+#include <sanguis/creator/min.hpp>
 #include <sanguis/creator/signed_pos.hpp>
+#include <sanguis/creator/sup.hpp>
 #include <sanguis/creator/tile_size.hpp>
 #include <fcppt/cast/float_to_int_fun.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/container/grid/clamp_signed_pos.hpp>
-#include <fcppt/container/grid/make_pos_crange_start_end.hpp>
+#include <fcppt/container/grid/make_pos_ref_crange_start_end.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -32,7 +33,7 @@ sanguis::collision::impl::make_range(
 		)
 	);
 
-	sanguis::creator::pos const lower(
+	sanguis::creator::min const lower(
 		fcppt::container::grid::clamp_signed_pos(
 			fcppt::math::vector::structure_cast<
 				sanguis::creator::signed_pos,
@@ -48,7 +49,7 @@ sanguis::collision::impl::make_range(
 		)
 	);
 
-	sanguis::creator::pos const upper(
+	sanguis::creator::sup const upper(
 		fcppt::container::grid::clamp_signed_pos(
 			fcppt::math::vector::ceil_div_signed(
 				fcppt::math::vector::structure_cast<
@@ -66,7 +67,7 @@ sanguis::collision::impl::make_range(
 	);
 
 	return
-		fcppt::container::grid::make_pos_crange_start_end(
+		fcppt::container::grid::make_pos_ref_crange_start_end(
 			_grid,
 			lower,
 			upper

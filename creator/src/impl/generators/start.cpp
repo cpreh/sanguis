@@ -16,6 +16,7 @@
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/tile.hpp>
+#include <sanguis/creator/impl/interior_range.hpp>
 #include <sanguis/creator/impl/parameters.hpp>
 #include <sanguis/creator/impl/parameters_fwd.hpp>
 #include <sanguis/creator/impl/result.hpp>
@@ -25,11 +26,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/enum_array_fold.hpp>
 #include <fcppt/assert/unreachable.hpp>
-#include <fcppt/container/grid/make_pos_range_start_end.hpp>
-#include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/fill.hpp>
-#include <fcppt/math/dim/to_vector.hpp>
-#include <fcppt/math/vector/fill.hpp>
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 
@@ -74,33 +71,11 @@ sanguis::creator::impl::generators::start(
 		sanguis::creator::tile::concrete_wall
 	};
 
-	sanguis::creator::pos const start_pos(
-		fcppt::math::vector::fill<
-			sanguis::creator::pos
-		>(
-			1u
-		)
-	);
-
-	sanguis::creator::pos const end_pos(
-		fcppt::math::dim::to_vector(
-			grid_size
-			-
-			fcppt::math::dim::fill<
-				sanguis::creator::dim
-			>(
-				1u
-			)
-		)
-	);
-
 	for(
 		auto const pos
 		:
-		fcppt::container::grid::make_pos_range_start_end(
-			grid,
-			start_pos,
-			end_pos
+		sanguis::creator::impl::interior_range(
+			grid
 		)
 	)
 		pos.value() =
@@ -156,10 +131,8 @@ sanguis::creator::impl::generators::start(
 	for(
 		auto const pos
 		:
-		fcppt::container::grid::make_pos_range_start_end(
-			bg_grid,
-			start_pos,
-			end_pos
+		sanguis::creator::impl::interior_range(
+			bg_grid
 		)
 	)
 		pos.value() =

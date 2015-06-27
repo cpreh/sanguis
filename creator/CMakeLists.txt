@@ -32,6 +32,8 @@ set(
 	include/sanguis/creator/grid_spiral_range.hpp
 	include/sanguis/creator/grid_spiral_range_fwd.hpp
 	include/sanguis/creator/log_location.hpp
+	include/sanguis/creator/min.hpp
+	include/sanguis/creator/min_fwd.hpp
 	include/sanguis/creator/name.hpp
 	include/sanguis/creator/name_fwd.hpp
 	include/sanguis/creator/opening.hpp
@@ -71,6 +73,8 @@ set(
 	include/sanguis/creator/spawn_type.hpp
 	include/sanguis/creator/spawn_type_fwd.hpp
 	include/sanguis/creator/start_name.hpp
+	include/sanguis/creator/sup.hpp
+	include/sanguis/creator/sup_fwd.hpp
 	include/sanguis/creator/tile.hpp
 	include/sanguis/creator/tile_connects.hpp
 	include/sanguis/creator/tile_fwd.hpp
@@ -129,6 +133,7 @@ set(
 	src/include/sanguis/creator/impl/generators/rooms.hpp
 	src/include/sanguis/creator/impl/generators/start.hpp
 	src/include/sanguis/creator/impl/graveyard_name.hpp
+	src/include/sanguis/creator/impl/interior_range.hpp
 	src/include/sanguis/creator/impl/log.hpp
 	src/include/sanguis/creator/impl/maze_name.hpp
 	src/include/sanguis/creator/impl/maze_result.hpp

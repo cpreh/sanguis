@@ -1,15 +1,15 @@
 #ifndef SANGUIS_TILES_IMPL_DRAW_CONNECTING_HPP_INCLUDED
 #define SANGUIS_TILES_IMPL_DRAW_CONNECTING_HPP_INCLUDED
 
+#include <sanguis/creator/min.hpp>
 #include <sanguis/creator/pos.hpp>
+#include <sanguis/creator/sup.hpp>
 #include <sanguis/creator/tile_size.hpp>
 #include <sanguis/tiles/cell_container.hpp>
 #include <sanguis/tiles/collection_fwd.hpp>
 #include <sanguis/tiles/error.hpp>
-#include <sanguis/tiles/lower_bound.hpp>
 #include <sanguis/tiles/pos.hpp>
 #include <sanguis/tiles/unit.hpp>
-#include <sanguis/tiles/upper_bound.hpp>
 #include <sanguis/tiles/impl/connecting_images.hpp>
 #include <sanguis/tiles/impl/draw_base.hpp>
 #include <sanguis/tiles/impl/shift.hpp>
@@ -36,15 +36,15 @@ draw_connecting(
 	sanguis::creator::tile_grid<
 		Tile
 	> const &_grid,
-	sanguis::tiles::lower_bound const _lower_bound,
-	sanguis::tiles::upper_bound const _upper_bound
+	sanguis::creator::min const _min,
+	sanguis::creator::sup const _sup
 )
 {
 	return
 		sanguis::tiles::impl::draw_base(
 			_grid,
-			_lower_bound,
-			_upper_bound,
+			_min,
+			_sup,
 			sanguis::tiles::impl::shift(
 				-
 				fcppt::math::vector::fill<

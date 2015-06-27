@@ -15,6 +15,7 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
 

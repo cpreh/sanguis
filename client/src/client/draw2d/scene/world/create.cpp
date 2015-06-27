@@ -7,6 +7,7 @@
 #include <sanguis/client/draw2d/scene/world/parameters.hpp>
 #include <sanguis/creator/name.hpp>
 #include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/log/_.hpp>

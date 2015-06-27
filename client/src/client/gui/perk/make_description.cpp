@@ -4,6 +4,7 @@
 #include <sge/font/lit.hpp>
 #include <sge/font/string.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
+#include <fcppt/strong_typedef_output.hpp>
 
 
 sge::font::string

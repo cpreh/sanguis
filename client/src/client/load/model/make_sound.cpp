@@ -5,6 +5,7 @@
 #include <sanguis/model/animation_sound.hpp>
 #include <sanguis/model/optional_animation_sound.hpp>
 #include <fcppt/optional_bind.hpp>
+#include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>

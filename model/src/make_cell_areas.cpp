@@ -9,6 +9,7 @@
 #include <sanguis/model/make_cell_areas.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
 #include <fcppt/make_int_range.hpp>
+#include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/math/box/contains.hpp>
