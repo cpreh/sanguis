@@ -52,8 +52,8 @@
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/clamp_signed_pos.hpp>
 #include <fcppt/container/grid/make_pos_ref_crange_start_end.hpp>
-#include <fcppt/container/grid/min_from_object.hpp>
-#include <fcppt/container/grid/sup_from_object.hpp>
+#include <fcppt/container/grid/min_from_pos.hpp>
+#include <fcppt/container/grid/sup_from_pos.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/to_vector.hpp>
 #include <fcppt/math/vector/ceil_div_signed.hpp>
@@ -128,8 +128,8 @@ sanguis::client::draw2d::scene::world::state::draw(
 			)
 		);
 
-	fcppt::container::grid::min_from_object<
-		sanguis::client::draw2d::scene::world::batch_grid
+	fcppt::container::grid::min_from_pos<
+		sanguis::client::draw2d::scene::world::batch_grid::pos
 	> const lower(
 		fcppt::container::grid::clamp_signed_pos(
 			(
@@ -149,8 +149,8 @@ sanguis::client::draw2d::scene::world::state::draw(
 		)
 	);
 
-	fcppt::container::grid::sup_from_object<
-		sanguis::client::draw2d::scene::world::batch_grid
+	fcppt::container::grid::sup_from_pos<
+		sanguis::client::draw2d::scene::world::batch_grid::pos
 	> const upper(
 		fcppt::container::grid::clamp_signed_pos(
 			fcppt::math::vector::ceil_div_signed(

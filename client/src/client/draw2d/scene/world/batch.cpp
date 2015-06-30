@@ -13,12 +13,6 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::client::draw2d::scene::world::batch::batch()
-:
-	range_()
-{
-}
-
 sanguis::client::draw2d::scene::world::batch::batch(
 	sanguis::client::draw2d::scene::world::sprite::range &&_range
 )

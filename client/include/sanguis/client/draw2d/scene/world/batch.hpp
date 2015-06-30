@@ -22,8 +22,6 @@ namespace world
 class batch
 {
 public:
-	batch();
-
 	explicit
 	batch(
 		sanguis::client::draw2d::scene::world::sprite::range &&

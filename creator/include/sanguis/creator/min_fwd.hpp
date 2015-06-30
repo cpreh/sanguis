@@ -1,8 +1,8 @@
 #ifndef SANGUIS_CREATOR_MIN_FWD_HPP_INCLUDED
 #define SANGUIS_CREATOR_MIN_FWD_HPP_INCLUDED
 
-#include <sanguis/creator/size_type.hpp>
-#include <fcppt/container/grid/min_fwd.hpp>
+#include <sanguis/creator/pos.hpp>
+#include <fcppt/container/grid/min_from_pos_fwd.hpp>
 
 
 namespace sanguis
@@ -11,9 +11,8 @@ namespace creator
 {
 
 typedef
-fcppt::container::grid::min<
-	sanguis::creator::size_type,
-	2u
+fcppt::container::grid::min_from_pos<
+	sanguis::creator::pos
 >
 min;
 
