@@ -9,10 +9,10 @@
 #include <sanguis/client/perk/state_fwd.hpp>
 #include <sanguis/client/perk/to_category.hpp>
 #include <sanguis/client/perk/tree.hpp>
-#include <sanguis/gui/context_fwd.hpp>
-#include <sanguis/gui/style/base_fwd.hpp>
-#include <sanguis/gui/widget/reference.hpp>
-#include <sanguis/gui/widget/reference_tree_vector.hpp>
+#include <sge/gui/context_fwd.hpp>
+#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/widget/reference.hpp>
+#include <sge/gui/widget/reference_tree_vector.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
@@ -26,8 +26,8 @@
 sanguis::client::gui::perk::tab::tab(
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
-	sanguis::gui::context &_context,
-	sanguis::gui::style::base const &_style,
+	sge::gui::context &_context,
+	sge::gui::style::base const &_style,
 	sanguis::client::perk::state &_state,
 	sanguis::client::perk::const_tree_range const &_range
 )
@@ -83,7 +83,7 @@ sanguis::client::gui::perk::tab::tab(
 	tree_(
 		_context,
 		fcppt::algorithm::map<
-			sanguis::gui::widget::reference_tree_vector
+			sge::gui::widget::reference_tree_vector
 		>(
 			tree_widgets_,
 			[](
@@ -92,7 +92,7 @@ sanguis::client::gui::perk::tab::tab(
 			{
 				return
 					fcppt::container::tree::map<
-						sanguis::gui::widget::reference_tree
+						sge::gui::widget::reference_tree
 					>(
 						_tree,
 						[](
@@ -100,7 +100,7 @@ sanguis::client::gui::perk::tab::tab(
 						)
 						{
 							return
-								sanguis::gui::widget::reference(
+								sge::gui::widget::reference(
 									_line->widget()
 								);
 						}
@@ -127,7 +127,7 @@ sanguis::client::gui::perk::tab::~tab()
 {
 }
 
-sanguis::gui::widget::tree &
+sge::gui::widget::tree &
 sanguis::client::gui::perk::tab::widget()
 {
 	return

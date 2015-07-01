@@ -5,12 +5,12 @@
 #include <sanguis/client/gui/perk/line_fwd.hpp>
 #include <sanguis/client/perk/info_fwd.hpp>
 #include <sanguis/client/perk/state_fwd.hpp>
-#include <sanguis/gui/context_fwd.hpp>
-#include <sanguis/gui/text_color_fwd.hpp>
-#include <sanguis/gui/style/base_fwd.hpp>
-#include <sanguis/gui/widget/box_container.hpp>
-#include <sanguis/gui/widget/button.hpp>
-#include <sanguis/gui/widget/text.hpp>
+#include <sge/gui/context_fwd.hpp>
+#include <sge/gui/text_color_fwd.hpp>
+#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/widget/box_container.hpp>
+#include <sge/gui/widget/button.hpp>
+#include <sge/gui/widget/text.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -35,15 +35,15 @@ public:
 	line(
 		sge::renderer::device::ffp &,
 		sge::font::object &,
-		sanguis::gui::context &,
-		sanguis::gui::style::base const &,
+		sge::gui::context &,
+		sge::gui::style::base const &,
 		sanguis::client::perk::state &,
 		sanguis::client::perk::info const &
 	);
 
 	~line();
 
-	sanguis::gui::widget::box_container &
+	sge::gui::widget::box_container &
 	widget();
 private:
 	void
@@ -52,18 +52,18 @@ private:
 	void
 	on_level_change();
 
-	sanguis::gui::text_color
+	sge::gui::text_color
 	text_color() const;
 
 	sanguis::perk_type const perk_type_;
 
 	sanguis::client::perk::state &state_;
 
-	sanguis::gui::widget::button button_;
+	sge::gui::widget::button button_;
 
-	sanguis::gui::widget::text text_;
+	sge::gui::widget::text text_;
 
-	sanguis::gui::widget::box_container box_;
+	sge::gui::widget::box_container box_;
 
 	fcppt::signal::scoped_connection const click_connection_;
 

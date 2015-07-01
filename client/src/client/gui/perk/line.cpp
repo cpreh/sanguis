@@ -7,16 +7,16 @@
 #include <sanguis/client/perk/state.hpp>
 #include <sanguis/client/perk/to_string.hpp>
 #include <sanguis/client/perk/tree.hpp>
-#include <sanguis/gui/context_fwd.hpp>
-#include <sanguis/gui/optional_needed_width.hpp>
-#include <sanguis/gui/text_color.hpp>
-#include <sanguis/gui/style/base_fwd.hpp>
-#include <sanguis/gui/widget/box_container.hpp>
-#include <sanguis/gui/widget/button.hpp>
-#include <sanguis/gui/widget/reference.hpp>
-#include <sanguis/gui/widget/reference_alignment_pair.hpp>
-#include <sanguis/gui/widget/reference_alignment_vector.hpp>
-#include <sanguis/gui/widget/text.hpp>
+#include <sge/gui/context_fwd.hpp>
+#include <sge/gui/optional_needed_width.hpp>
+#include <sge/gui/text_color.hpp>
+#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/widget/box_container.hpp>
+#include <sge/gui/widget/button.hpp>
+#include <sge/gui/widget/reference.hpp>
+#include <sge/gui/widget/reference_alignment_pair.hpp>
+#include <sge/gui/widget/reference_alignment_vector.hpp>
+#include <sge/gui/widget/text.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
@@ -32,8 +32,8 @@
 sanguis::client::gui::perk::line::line(
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
-	sanguis::gui::context &_context,
-	sanguis::gui::style::base const &_style,
+	sge::gui::context &_context,
+	sge::gui::style::base const &_style,
 	sanguis::client::perk::state &_state,
 	sanguis::client::perk::info const &_info
 )
@@ -53,7 +53,7 @@ sanguis::client::gui::perk::line::line(
 				_info.perk_type()
 			)
 		),
-		sanguis::gui::optional_needed_width()
+		sge::gui::optional_needed_width()
 	),
 	text_(
 		_style,
@@ -63,19 +63,19 @@ sanguis::client::gui::perk::line::line(
 			_info
 		),
 		this->text_color(),
-		sanguis::gui::optional_needed_width()
+		sge::gui::optional_needed_width()
 	),
 	box_(
 		_context,
-		sanguis::gui::widget::reference_alignment_vector{
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+		sge::gui::widget::reference_alignment_vector{
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					button_
 				),
 				sge::rucksack::alignment::center
 			),
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					text_
 				),
 				sge::rucksack::alignment::center
@@ -106,7 +106,7 @@ sanguis::client::gui::perk::line::~line()
 {
 }
 
-sanguis::gui::widget::box_container &
+sge::gui::widget::box_container &
 sanguis::client::gui::perk::line::widget()
 {
 	return
@@ -141,7 +141,7 @@ sanguis::client::gui::perk::line::on_level_change()
 	);
 }
 
-sanguis::gui::text_color
+sge::gui::text_color
 sanguis::client::gui::perk::line::text_color() const
 {
 	return

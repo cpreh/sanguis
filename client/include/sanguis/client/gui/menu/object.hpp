@@ -5,17 +5,17 @@
 #include <sanguis/client/config/settings/object_fwd.hpp>
 #include <sanguis/client/gui/menu/resolution_chooser.hpp>
 #include <sanguis/client/gui/menu/callbacks/object.hpp>
-#include <sanguis/gui/context.hpp>
-#include <sanguis/gui/master.hpp>
-#include <sanguis/gui/background/colored.hpp>
-#include <sanguis/gui/main_area/viewport_adaptor.hpp>
-#include <sanguis/gui/style/base_fwd.hpp>
-#include <sanguis/gui/widget/box_container.hpp>
-#include <sanguis/gui/widget/button.hpp>
-#include <sanguis/gui/widget/edit.hpp>
-#include <sanguis/gui/widget/frame.hpp>
-#include <sanguis/gui/widget/static_text.hpp>
-#include <sanguis/gui/widget/text.hpp>
+#include <sge/gui/context.hpp>
+#include <sge/gui/master.hpp>
+#include <sge/gui/background/colored.hpp>
+#include <sge/gui/main_area/viewport_adaptor.hpp>
+#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/widget/box_container.hpp>
+#include <sge/gui/widget/button.hpp>
+#include <sge/gui/widget/edit.hpp>
+#include <sge/gui/widget/frame.hpp>
+#include <sge/gui/widget/static_text.hpp>
+#include <sge/gui/widget/text.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
@@ -54,7 +54,7 @@ public:
 		sge::input::keyboard::device &,
 		sanguis::client::config::settings::object &,
 		sanguis::client::gui::menu::callbacks::object const &,
-		sanguis::gui::style::base const &
+		sge::gui::style::base const &
 	);
 
 	~object();
@@ -90,49 +90,49 @@ private:
 
 	sge::renderer::device::ffp &renderer_;
 
-	sanguis::gui::context gui_context_;
+	sge::gui::context gui_context_;
 
 	sanguis::client::gui::menu::callbacks::object const callbacks_;
 
-		sanguis::gui::widget::button quickstart_button_;
+		sge::gui::widget::button quickstart_button_;
 
 		sanguis::client::gui::menu::resolution_chooser resolution_chooser_;
 
-			sanguis::gui::widget::static_text player_name_label_;
+			sge::gui::widget::static_text player_name_label_;
 
-			sanguis::gui::widget::edit player_name_edit_;
+			sge::gui::widget::edit player_name_edit_;
 
-		sanguis::gui::widget::box_container player_name_line_;
+		sge::gui::widget::box_container player_name_line_;
 
-					sanguis::gui::widget::static_text hostname_label_;
+					sge::gui::widget::static_text hostname_label_;
 
-					sanguis::gui::widget::edit hostname_edit_;
+					sge::gui::widget::edit hostname_edit_;
 
-				sanguis::gui::widget::box_container hostname_line_;
+				sge::gui::widget::box_container hostname_line_;
 
-					sanguis::gui::widget::static_text port_label_;
+					sge::gui::widget::static_text port_label_;
 
-					sanguis::gui::widget::edit port_edit_;
+					sge::gui::widget::edit port_edit_;
 
-				sanguis::gui::widget::box_container port_line_;
+				sge::gui::widget::box_container port_line_;
 
-				sanguis::gui::widget::text connect_text_;
+				sge::gui::widget::text connect_text_;
 
-				sanguis::gui::widget::button connect_button_;
+				sge::gui::widget::button connect_button_;
 
-			sanguis::gui::widget::box_container connect_box_;
+			sge::gui::widget::box_container connect_box_;
 
-		sanguis::gui::widget::frame connect_frame_;
+		sge::gui::widget::frame connect_frame_;
 
-		sanguis::gui::widget::button quit_button_;
+		sge::gui::widget::button quit_button_;
 
-	sanguis::gui::widget::box_container main_container_;
+	sge::gui::widget::box_container main_container_;
 
-	sanguis::gui::main_area::viewport_adaptor gui_area_;
+	sge::gui::main_area::viewport_adaptor gui_area_;
 
-	sanguis::gui::master gui_master_;
+	sge::gui::master gui_master_;
 
-	sanguis::gui::background::colored gui_background_;
+	sge::gui::background::colored gui_background_;
 
 	bool connect_running_;
 

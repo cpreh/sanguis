@@ -85,9 +85,9 @@
 #include <sanguis/creator/opening_type.hpp>
 #include <sanguis/creator/spawn_boss.hpp>
 #include <sanguis/creator/top_parameters.hpp>
-#include <sanguis/gui/renderer/base.hpp>
-#include <sanguis/gui/renderer/create_stateless.hpp>
-#include <sanguis/gui/style/base_fwd.hpp>
+#include <sge/gui/renderer/base.hpp>
+#include <sge/gui/renderer/create_stateless.hpp>
+#include <sge/gui/style/base_fwd.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/aoe.hpp>
 #include <sanguis/messages/roles/aoe_projectile_type.hpp>
@@ -203,7 +203,7 @@ sanguis::client::draw2d::scene::object::object(
 	sanguis::client::load::context const &_resources,
 	sanguis::client::load::hud::context &_hud_resources,
 	sanguis::client::sound_manager &_sound_manager,
-	sanguis::gui::style::base const &_gui_style,
+	sge::gui::style::base const &_gui_style,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sge::viewport::manager &_viewport_manager,
@@ -242,7 +242,7 @@ sanguis::client::draw2d::scene::object::object(
 		_cursor
 	),
 	gui_renderer_(
-		sanguis::gui::renderer::create_stateless(
+		sge::gui::renderer::create_stateless(
 			_renderer
 		)
 	),

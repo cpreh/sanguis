@@ -8,12 +8,12 @@
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/client/gui/hud/weapon_widget_fwd.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
-#include <sanguis/gui/context_fwd.hpp>
-#include <sanguis/gui/style/base_fwd.hpp>
-#include <sanguis/gui/widget/bar.hpp>
-#include <sanguis/gui/widget/box_container.hpp>
-#include <sanguis/gui/widget/image.hpp>
-#include <sanguis/gui/widget/text.hpp>
+#include <sge/gui/context_fwd.hpp>
+#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/widget/bar.hpp>
+#include <sge/gui/widget/box_container.hpp>
+#include <sge/gui/widget/image.hpp>
+#include <sge/gui/widget/text.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
@@ -38,8 +38,8 @@ public:
 	weapon_widget(
 		sanguis::diff_clock const &,
 		sanguis::client::load::hud::context &,
-		sanguis::gui::context &,
-		sanguis::gui::style::base const &,
+		sge::gui::context &,
+		sge::gui::style::base const &,
 		sge::renderer::device::ffp &,
 		sge::font::object &,
 		sanguis::weapon_description const &
@@ -60,7 +60,7 @@ public:
 	void
 	update();
 
-	sanguis::gui::widget::box_container &
+	sge::gui::widget::box_container &
 	widget();
 
 	sanguis::weapon_description const &
@@ -75,13 +75,13 @@ private:
 
 	sanguis::diff_timer reload_time_;
 
-	sanguis::gui::widget::image image_;
+	sge::gui::widget::image image_;
 
-	sanguis::gui::widget::text text_;
+	sge::gui::widget::text text_;
 
-	sanguis::gui::widget::bar cooldown_bar_;
+	sge::gui::widget::bar cooldown_bar_;
 
-	sanguis::gui::widget::box_container container_;
+	sge::gui::widget::box_container container_;
 };
 
 }

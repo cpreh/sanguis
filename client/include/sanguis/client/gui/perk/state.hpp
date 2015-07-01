@@ -4,9 +4,9 @@
 #include <sanguis/client/gui/perk/state_fwd.hpp>
 #include <sanguis/client/gui/perk/tab_unique_ptr_vector.hpp>
 #include <sanguis/client/perk/state_fwd.hpp>
-#include <sanguis/gui/context_fwd.hpp>
-#include <sanguis/gui/style/base_fwd.hpp>
-#include <sanguis/gui/widget/tab.hpp>
+#include <sge/gui/context_fwd.hpp>
+#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/widget/tab.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -30,19 +30,19 @@ public:
 	state(
 		sge::renderer::device::ffp &,
 		sge::font::object &,
-		sanguis::gui::context &,
-		sanguis::gui::style::base const &,
+		sge::gui::context &,
+		sge::gui::style::base const &,
 		sanguis::client::perk::state &
 	);
 
 	~state();
 
-	sanguis::gui::widget::tab &
+	sge::gui::widget::tab &
 	widget();
 private:
 	sanguis::client::gui::perk::tab_unique_ptr_vector tabs_;
 
-	sanguis::gui::widget::tab main_tab_;
+	sge::gui::widget::tab main_tab_;
 };
 
 }

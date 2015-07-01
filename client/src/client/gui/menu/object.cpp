@@ -3,13 +3,13 @@
 #include <sanguis/client/gui/default_text_color.hpp>
 #include <sanguis/client/gui/to_duration.hpp>
 #include <sanguis/client/gui/menu/object.hpp>
-#include <sanguis/gui/needed_width_from_strings.hpp>
-#include <sanguis/gui/optional_needed_width.hpp>
-#include <sanguis/gui/string_container.hpp>
-#include <sanguis/gui/style/base_fwd.hpp>
-#include <sanguis/gui/widget/reference.hpp>
-#include <sanguis/gui/widget/reference_alignment_pair.hpp>
-#include <sanguis/gui/widget/reference_alignment_vector.hpp>
+#include <sge/gui/needed_width_from_strings.hpp>
+#include <sge/gui/optional_needed_width.hpp>
+#include <sge/gui/string_container.hpp>
+#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/widget/reference.hpp>
+#include <sge/gui/widget/reference_alignment_pair.hpp>
+#include <sge/gui/widget/reference_alignment_vector.hpp>
 #include <alda/net/host.hpp>
 #include <alda/net/port.hpp>
 #include <sge/font/from_fcppt_string.hpp>
@@ -90,7 +90,7 @@ sanguis::client::gui::menu::object::object(
 	sge::input::keyboard::device &_keyboard,
 	sanguis::client::config::settings::object &_settings,
 	sanguis::client::gui::menu::callbacks::object const &_callbacks,
-	sanguis::gui::style::base const &_gui_style
+	sge::gui::style::base const &_gui_style
 )
 :
 	settings_(
@@ -108,7 +108,7 @@ sanguis::client::gui::menu::object::object(
 		_renderer,
 		_font,
 		SGE_FONT_LIT("Quickstart"),
-		sanguis::gui::optional_needed_width()
+		sge::gui::optional_needed_width()
 	),
 	resolution_chooser_(
 		gui_context_,
@@ -142,15 +142,15 @@ sanguis::client::gui::menu::object::object(
 	),
 	player_name_line_(
 		gui_context_,
-		sanguis::gui::widget::reference_alignment_vector{
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+		sge::gui::widget::reference_alignment_vector{
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					player_name_label_
 				),
 				sge::rucksack::alignment::center
 			),
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					player_name_edit_
 				),
 				sge::rucksack::alignment::center
@@ -182,15 +182,15 @@ sanguis::client::gui::menu::object::object(
 	),
 	hostname_line_(
 		gui_context_,
-		sanguis::gui::widget::reference_alignment_vector{
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+		sge::gui::widget::reference_alignment_vector{
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					hostname_label_
 				),
 				sge::rucksack::alignment::center
 			),
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					hostname_edit_
 				),
 				sge::rucksack::alignment::center
@@ -222,15 +222,15 @@ sanguis::client::gui::menu::object::object(
 	),
 	port_line_(
 		gui_context_,
-		sanguis::gui::widget::reference_alignment_vector{
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+		sge::gui::widget::reference_alignment_vector{
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					port_label_
 				),
 				sge::rucksack::alignment::center
 			),
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					port_edit_
 				),
 				sge::rucksack::alignment::center
@@ -244,17 +244,17 @@ sanguis::client::gui::menu::object::object(
 		_font,
 		SGE_FONT_LIT(""),
 		sanguis::client::gui::default_text_color(),
-		sanguis::gui::optional_needed_width()
+		sge::gui::optional_needed_width()
 	),
 	connect_button_(
 		_gui_style,
 		_renderer,
 		_font,
 		connect_text,
-		sanguis::gui::optional_needed_width(
-			sanguis::gui::needed_width_from_strings(
+		sge::gui::optional_needed_width(
+			sge::gui::needed_width_from_strings(
 				_font,
-				sanguis::gui::string_container{
+				sge::gui::string_container{
 					connect_text,
 					cancel_text
 				}
@@ -263,27 +263,27 @@ sanguis::client::gui::menu::object::object(
 	),
 	connect_box_(
 		gui_context_,
-		sanguis::gui::widget::reference_alignment_vector{
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+		sge::gui::widget::reference_alignment_vector{
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					hostname_line_
 				),
 				sge::rucksack::alignment::center
 			),
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					port_line_
 				),
 				sge::rucksack::alignment::center
 			),
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					connect_text_
 				),
 				sge::rucksack::alignment::center
 			),
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					connect_button_
 				),
 				sge::rucksack::alignment::center
@@ -300,37 +300,37 @@ sanguis::client::gui::menu::object::object(
 		_renderer,
 		_font,
 		SGE_FONT_LIT("Quit"),
-		sanguis::gui::optional_needed_width()
+		sge::gui::optional_needed_width()
 	),
 	main_container_(
 		gui_context_,
-		sanguis::gui::widget::reference_alignment_vector{
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+		sge::gui::widget::reference_alignment_vector{
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					quickstart_button_
 				),
 				sge::rucksack::alignment::center
 			),
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					resolution_chooser_.widget()
 				),
 				sge::rucksack::alignment::center
 			),
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					player_name_line_
 				),
 				sge::rucksack::alignment::center
 			),
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					connect_frame_
 				),
 				sge::rucksack::alignment::center
 			),
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					quit_button_
 				),
 				sge::rucksack::alignment::center

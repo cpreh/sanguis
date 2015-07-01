@@ -1,17 +1,17 @@
 #include <sanguis/client/gui/menu/resolution_chooser.hpp>
-#include <sanguis/gui/context_fwd.hpp>
-#include <sanguis/gui/index.hpp>
-#include <sanguis/gui/optional_index.hpp>
-#include <sanguis/gui/optional_needed_width.hpp>
-#include <sanguis/gui/string_container.hpp>
-#include <sanguis/gui/style/base_fwd.hpp>
-#include <sanguis/gui/widget/base_fwd.hpp>
-#include <sanguis/gui/widget/box_container.hpp>
-#include <sanguis/gui/widget/button.hpp>
-#include <sanguis/gui/widget/choices.hpp>
-#include <sanguis/gui/widget/reference.hpp>
-#include <sanguis/gui/widget/reference_alignment_pair.hpp>
-#include <sanguis/gui/widget/reference_alignment_vector.hpp>
+#include <sge/gui/context_fwd.hpp>
+#include <sge/gui/index.hpp>
+#include <sge/gui/optional_index.hpp>
+#include <sge/gui/optional_needed_width.hpp>
+#include <sge/gui/string_container.hpp>
+#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/widget/base_fwd.hpp>
+#include <sge/gui/widget/box_container.hpp>
+#include <sge/gui/widget/button.hpp>
+#include <sge/gui/widget/choices.hpp>
+#include <sge/gui/widget/reference.hpp>
+#include <sge/gui/widget/reference_alignment_pair.hpp>
+#include <sge/gui/widget/reference_alignment_vector.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/object_fwd.hpp>
@@ -32,8 +32,8 @@
 
 
 sanguis::client::gui::menu::resolution_chooser::resolution_chooser(
-	sanguis::gui::context &_context,
-	sanguis::gui::style::base const &_style,
+	sge::gui::context &_context,
+	sge::gui::style::base const &_style,
 	sge::font::object &_font,
 	sge::renderer::system const &_system,
 	sge::renderer::device::ffp &_renderer,
@@ -55,7 +55,7 @@ sanguis::client::gui::menu::resolution_chooser::resolution_chooser(
 		_font,
 		// TODO: Add window mode
 		fcppt::algorithm::map<
-			sanguis::gui::string_container
+			sge::gui::string_container
 		>(
 			display_modes_,
 			[](
@@ -72,11 +72,11 @@ sanguis::client::gui::menu::resolution_chooser::resolution_chooser(
 		),
 		display_modes_.empty()
 		?
-			sanguis::gui::optional_index()
+			sge::gui::optional_index()
 		:
-			sanguis::gui::optional_index(
+			sge::gui::optional_index(
 				// TODO
-				sanguis::gui::index(
+				sge::gui::index(
 					0u
 				)
 			)
@@ -86,19 +86,19 @@ sanguis::client::gui::menu::resolution_chooser::resolution_chooser(
 		_renderer,
 		_font,
 		SGE_FONT_LIT("Apply"),
-		sanguis::gui::optional_needed_width()
+		sge::gui::optional_needed_width()
 	),
 	widget_(
 		_context,
-		sanguis::gui::widget::reference_alignment_vector{
-			sanguis::gui::widget::reference_alignment_pair{
-				sanguis::gui::widget::reference{
+		sge::gui::widget::reference_alignment_vector{
+			sge::gui::widget::reference_alignment_pair{
+				sge::gui::widget::reference{
 					choices_
 				},
 				sge::rucksack::alignment::center
 			},
-			sanguis::gui::widget::reference_alignment_pair{
-				sanguis::gui::widget::reference{
+			sge::gui::widget::reference_alignment_pair{
+				sge::gui::widget::reference{
 					apply_button_
 				},
 				sge::rucksack::alignment::center
@@ -121,7 +121,7 @@ sanguis::client::gui::menu::resolution_chooser::~resolution_chooser()
 {
 }
 
-sanguis::gui::widget::base &
+sge::gui::widget::base &
 sanguis::client::gui::menu::resolution_chooser::widget()
 {
 	return
@@ -136,7 +136,7 @@ sanguis::client::gui::menu::resolution_chooser::on_apply()
 		[
 			this
 		](
-			sanguis::gui::index const _index
+			sge::gui::index const _index
 		)
 		{
 			renderer_.display_mode(

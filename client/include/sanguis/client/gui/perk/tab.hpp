@@ -5,9 +5,9 @@
 #include <sanguis/client/gui/perk/tab_fwd.hpp>
 #include <sanguis/client/perk/const_tree_range_fwd.hpp>
 #include <sanguis/client/perk/state_fwd.hpp>
-#include <sanguis/gui/context_fwd.hpp>
-#include <sanguis/gui/style/base_fwd.hpp>
-#include <sanguis/gui/widget/tree.hpp>
+#include <sge/gui/context_fwd.hpp>
+#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/widget/tree.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
@@ -32,15 +32,15 @@ public:
 	tab(
 		sge::renderer::device::ffp &,
 		sge::font::object &,
-		sanguis::gui::context &,
-		sanguis::gui::style::base const &,
+		sge::gui::context &,
+		sge::gui::style::base const &,
 		sanguis::client::perk::state &,
 		sanguis::client::perk::const_tree_range const &
 	);
 
 	~tab();
 
-	sanguis::gui::widget::tree &
+	sge::gui::widget::tree &
 	widget();
 
 	sge::font::string const &
@@ -48,7 +48,7 @@ public:
 private:
 	sanguis::client::gui::perk::line_unique_ptr_tree_vector tree_widgets_;
 
-	sanguis::gui::widget::tree tree_;
+	sge::gui::widget::tree tree_;
 
 	sge::font::string const name_;
 };

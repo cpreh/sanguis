@@ -7,11 +7,11 @@
 #include <sanguis/client/gui/style/text_color.hpp>
 #include <sanguis/client/load/resource/texture_identifier.hpp>
 #include <sanguis/client/load/resource/textures.hpp>
-#include <sanguis/gui/fill_color.hpp>
-#include <sanguis/gui/fill_level.hpp>
-#include <sanguis/gui/text_color.hpp>
-#include <sanguis/gui/renderer/base.hpp>
-#include <sanguis/gui/style/base.hpp>
+#include <sge/gui/fill_color.hpp>
+#include <sge/gui/fill_level.hpp>
+#include <sge/gui/text_color.hpp>
+#include <sge/gui/renderer/base.hpp>
+#include <sge/gui/style/base.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <sge/rucksack/dim.hpp>
@@ -34,7 +34,7 @@ sanguis::client::gui::style::simple::simple(
 	sanguis::client::load::resource::textures const &_textures
 )
 :
-	sanguis::gui::style::base(),
+	sge::gui::style::base(),
 	textures_(
 		_textures)
 {
@@ -53,7 +53,7 @@ sanguis::client::gui::style::simple::button_spacing() const
 
 void
 sanguis::client::gui::style::simple::draw_button(
-	sanguis::gui::renderer::base &_renderer,
+	sge::gui::renderer::base &_renderer,
 	sge::renderer::context::ffp &_context,
 	sge::rucksack::rect const _area
 ) const
@@ -68,12 +68,12 @@ sanguis::client::gui::style::simple::draw_button(
 
 void
 sanguis::client::gui::style::simple::draw_bar(
-	sanguis::gui::renderer::base &_renderer,
+	sge::gui::renderer::base &_renderer,
 	sge::renderer::context::ffp &_context,
 	sge::rucksack::rect const _area,
 	sge::rucksack::axis const _axis,
-	sanguis::gui::fill_level const _fill_level,
-	sanguis::gui::fill_color const &_fill_color
+	sge::gui::fill_level const _fill_level,
+	sge::gui::fill_color const &_fill_color
 ) const
 {
 	sge::rucksack::rect const inner_rect(
@@ -97,7 +97,7 @@ sanguis::client::gui::style::simple::draw_bar(
 			sge::rucksack::scalar
 		>(
 			fcppt::cast::int_to_float<
-				sanguis::gui::fill_level::value_type
+				sge::gui::fill_level::value_type
 			>(
 				inner_rect.size()[
 					// TODO: Make a function in rucksack for this
@@ -165,7 +165,7 @@ sanguis::client::gui::style::simple::frame_padding() const
 
 void
 sanguis::client::gui::style::simple::draw_frame(
-	sanguis::gui::renderer::base &_renderer,
+	sge::gui::renderer::base &_renderer,
 	sge::renderer::context::ffp &_context,
 	sge::rucksack::rect const _area,
 	sge::rucksack::padding const _padding
@@ -264,7 +264,7 @@ sanguis::client::gui::style::simple::edit_spacing() const
 
 void
 sanguis::client::gui::style::simple::draw_edit(
-	sanguis::gui::renderer::base &_renderer,
+	sge::gui::renderer::base &_renderer,
 	sge::renderer::context::ffp &_context,
 	sge::rucksack::rect const _area
 ) const
@@ -313,7 +313,7 @@ sanguis::client::gui::style::simple::text_spacing() const
 
 void
 sanguis::client::gui::style::simple::draw_image(
-	sanguis::gui::renderer::base &,
+	sge::gui::renderer::base &,
 	sge::renderer::context::ffp &,
 	sge::rucksack::rect
 ) const
@@ -322,18 +322,18 @@ sanguis::client::gui::style::simple::draw_image(
 
 void
 sanguis::client::gui::style::simple::draw_text(
-	sanguis::gui::renderer::base &,
+	sge::gui::renderer::base &,
 	sge::renderer::context::ffp &,
 	sge::rucksack::rect
 ) const
 {
 }
 
-sanguis::gui::text_color
+sge::gui::text_color
 sanguis::client::gui::style::simple::text_color() const
 {
 	return
-		sanguis::gui::text_color(
+		sge::gui::text_color(
 			sanguis::client::gui::style::text_color()
 		);
 }
@@ -351,7 +351,7 @@ sanguis::client::gui::style::simple::spacing() const
 
 void
 sanguis::client::gui::style::simple::draw_transparent_frame(
-	sanguis::gui::renderer::base &_renderer,
+	sge::gui::renderer::base &_renderer,
 	sge::renderer::context::ffp &_context,
 	sge::rucksack::rect const _area
 ) const

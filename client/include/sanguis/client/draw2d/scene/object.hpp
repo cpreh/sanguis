@@ -37,8 +37,8 @@
 #include <sanguis/client/load/auras/context.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
 #include <sanguis/client/load/model/collection_fwd.hpp>
-#include <sanguis/gui/renderer/base_unique_ptr.hpp>
-#include <sanguis/gui/style/base_fwd.hpp>
+#include <sge/gui/renderer/base_unique_ptr.hpp>
+#include <sge/gui/style/base_fwd.hpp>
 #include <sanguis/messages/server/add_aoe_projectile_fwd.hpp>
 #include <sanguis/messages/server/add_aura_fwd.hpp>
 #include <sanguis/messages/server/add_buff_fwd.hpp>
@@ -102,7 +102,7 @@ public:
 		sanguis::client::load::context const &,
 		sanguis::client::load::hud::context &,
 		sanguis::client::sound_manager &,
-		sanguis::gui::style::base const &,
+		sge::gui::style::base const &,
 		sge::renderer::device::ffp &,
 		sge::font::object &,
 		sge::viewport::manager &,
@@ -360,7 +360,7 @@ private:
 
 	sanguis::client::load::auras::context aura_resources_;
 
-	sanguis::gui::style::base const &gui_style_;
+	sge::gui::style::base const &gui_style_;
 
 	sge::renderer::device::ffp &renderer_;
 
@@ -368,7 +368,7 @@ private:
 
 	sanguis::client::cursor &cursor_;
 
-	sanguis::gui::renderer::base_unique_ptr const gui_renderer_;
+	sge::gui::renderer::base_unique_ptr const gui_renderer_;
 
 	sanguis::client::player_health_callback const player_health_callback_;
 

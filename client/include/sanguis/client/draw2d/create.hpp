@@ -8,7 +8,7 @@
 #include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/load/context_fwd.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
-#include <sanguis/gui/style/base_fwd.hpp>
+#include <sge/gui/style/base_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
@@ -26,7 +26,7 @@ create(
 	sanguis::client::load::context const &,
 	sanguis::client::load::hud::context &,
 	sanguis::client::sound_manager &,
-	sanguis::gui::style::base const &,
+	sge::gui::style::base const &,
 	sge::renderer::device::ffp &,
 	sge::font::object &,
 	sge::viewport::manager &,

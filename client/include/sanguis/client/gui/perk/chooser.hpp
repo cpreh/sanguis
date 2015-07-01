@@ -5,13 +5,13 @@
 #include <sanguis/client/gui/perk/chooser_fwd.hpp>
 #include <sanguis/client/gui/perk/state_fwd.hpp>
 #include <sanguis/client/perk/state_fwd.hpp>
-#include <sanguis/gui/context.hpp>
-#include <sanguis/gui/master.hpp>
-#include <sanguis/gui/background/colored.hpp>
-#include <sanguis/gui/main_area/screen_corner.hpp>
-#include <sanguis/gui/style/base_fwd.hpp>
-#include <sanguis/gui/widget/box_container.hpp>
-#include <sanguis/gui/widget/text.hpp>
+#include <sge/gui/context.hpp>
+#include <sge/gui/master.hpp>
+#include <sge/gui/background/colored.hpp>
+#include <sge/gui/main_area/screen_corner.hpp>
+#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/widget/box_container.hpp>
+#include <sge/gui/widget/text.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
@@ -41,7 +41,7 @@ class chooser
 public:
 	chooser(
 		sanguis::client::perk::state &,
-		sanguis::gui::style::base const &,
+		sge::gui::style::base const &,
 		sge::renderer::device::ffp &,
 		sge::viewport::manager &,
 		sge::font::object &,
@@ -72,15 +72,15 @@ private:
 
 	sanguis::client::perk::state &state_;
 
-	sanguis::gui::style::base const &style_;
+	sge::gui::style::base const &style_;
 
 	sge::renderer::device::ffp &renderer_;
 
 	sge::font::object &font_;
 
-	sanguis::gui::context gui_context_;
+	sge::gui::context gui_context_;
 
-	sanguis::gui::widget::text top_text_;
+	sge::gui::widget::text top_text_;
 
 	typedef
 	fcppt::unique_ptr<
@@ -90,13 +90,13 @@ private:
 
 	state_unique_ptr gui_state_;
 
-	sanguis::gui::widget::box_container main_container_;
+	sge::gui::widget::box_container main_container_;
 
-	sanguis::gui::main_area::screen_corner gui_area_;
+	sge::gui::main_area::screen_corner gui_area_;
 
-	sanguis::gui::master gui_master_;
+	sge::gui::master gui_master_;
 
-	sanguis::gui::background::colored gui_background_;
+	sge::gui::background::colored gui_background_;
 
 	fcppt::signal::scoped_connection const
 		perk_connection_,

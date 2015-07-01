@@ -2,11 +2,11 @@
 #define SANGUIS_CLIENT_GUI_STYLE_SIMPLE_HPP_INCLUDED
 
 #include <sanguis/client/load/resource/textures_fwd.hpp>
-#include <sanguis/gui/fill_color_fwd.hpp>
-#include <sanguis/gui/fill_level_fwd.hpp>
-#include <sanguis/gui/text_color_fwd.hpp>
-#include <sanguis/gui/renderer/base_fwd.hpp>
-#include <sanguis/gui/style/base.hpp>
+#include <sge/gui/fill_color_fwd.hpp>
+#include <sge/gui/fill_level_fwd.hpp>
+#include <sge/gui/text_color_fwd.hpp>
+#include <sge/gui/renderer/base_fwd.hpp>
+#include <sge/gui/style/base.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/rucksack/axis_fwd.hpp>
 #include <sge/rucksack/dim_fwd.hpp>
@@ -26,7 +26,7 @@ namespace style
 
 class simple
 :
-	public sanguis::gui::style::base
+	public sge::gui::style::base
 {
 	FCPPT_NONCOPYABLE(
 		simple
@@ -46,7 +46,7 @@ private:
 
 	void
 	draw_button(
-		sanguis::gui::renderer::base &,
+		sge::gui::renderer::base &,
 		sge::renderer::context::ffp &,
 		sge::rucksack::rect
 	) const
@@ -54,12 +54,12 @@ private:
 
 	void
 	draw_bar(
-		sanguis::gui::renderer::base &,
+		sge::gui::renderer::base &,
 		sge::renderer::context::ffp &,
 		sge::rucksack::rect,
 		sge::rucksack::axis,
-		sanguis::gui::fill_level,
-		sanguis::gui::fill_color const &
+		sge::gui::fill_level,
+		sge::gui::fill_color const &
 	) const
 	override;
 
@@ -69,7 +69,7 @@ private:
 
 	void
 	draw_frame(
-		sanguis::gui::renderer::base &,
+		sge::gui::renderer::base &,
 		sge::renderer::context::ffp &,
 		sge::rucksack::rect,
 		sge::rucksack::padding
@@ -82,7 +82,7 @@ private:
 
 	void
 	draw_edit(
-		sanguis::gui::renderer::base &,
+		sge::gui::renderer::base &,
 		sge::renderer::context::ffp &,
 		sge::rucksack::rect
 	) const
@@ -94,7 +94,7 @@ private:
 
 	void
 	draw_image(
-		sanguis::gui::renderer::base &,
+		sge::gui::renderer::base &,
 		sge::renderer::context::ffp &,
 		sge::rucksack::rect
 	) const
@@ -106,7 +106,7 @@ private:
 
 	void
 	draw_text(
-		sanguis::gui::renderer::base &,
+		sge::gui::renderer::base &,
 		sge::renderer::context::ffp &,
 		sge::rucksack::rect
 	) const
@@ -114,12 +114,12 @@ private:
 
 	void
 	draw_transparent_frame(
-		sanguis::gui::renderer::base &,
+		sge::gui::renderer::base &,
 		sge::renderer::context::ffp &,
 		sge::rucksack::rect
 	) const;
 
-	sanguis::gui::text_color
+	sge::gui::text_color
 	text_color() const
 	override;
 

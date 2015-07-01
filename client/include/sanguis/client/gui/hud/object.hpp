@@ -17,17 +17,17 @@
 #include <sanguis/client/gui/hud/weapon_details_fwd.hpp>
 #include <sanguis/client/gui/hud/weapon_widget.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
-#include <sanguis/gui/context.hpp>
-#include <sanguis/gui/master.hpp>
-#include <sanguis/gui/background/none.hpp>
-#include <sanguis/gui/main_area/screen_corner.hpp>
-#include <sanguis/gui/style/base_fwd.hpp>
-#include <sanguis/gui/widget/bar.hpp>
-#include <sanguis/gui/widget/box_container.hpp>
-#include <sanguis/gui/widget/expander.hpp>
-#include <sanguis/gui/widget/frame.hpp>
-#include <sanguis/gui/widget/preferred_size.hpp>
-#include <sanguis/gui/widget/text.hpp>
+#include <sge/gui/context.hpp>
+#include <sge/gui/master.hpp>
+#include <sge/gui/background/none.hpp>
+#include <sge/gui/main_area/screen_corner.hpp>
+#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/widget/bar.hpp>
+#include <sge/gui/widget/box_container.hpp>
+#include <sge/gui/widget/expander.hpp>
+#include <sge/gui/widget/frame.hpp>
+#include <sge/gui/widget/preferred_size.hpp>
+#include <sge/gui/widget/text.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
@@ -61,7 +61,7 @@ class object
 public:
 	object(
 		sanguis::client::load::hud::context &,
-		sanguis::gui::style::base const &,
+		sge::gui::style::base const &,
 		sge::font::object &,
 		sge::renderer::device::ffp &,
 		sge::viewport::manager &,
@@ -195,7 +195,7 @@ private:
 
 	sanguis::client::load::hud::context &resources_;
 
-	sanguis::gui::style::base const &gui_style_;
+	sge::gui::style::base const &gui_style_;
 
 	sge::font::object &font_;
 
@@ -209,57 +209,57 @@ private:
 
 	sge::timer::frames_counter frames_counter_;
 
-	sanguis::gui::context gui_context_;
+	sge::gui::context gui_context_;
 
-				sanguis::gui::widget::text world_name_text_;
+				sge::gui::widget::text world_name_text_;
 
-					sanguis::gui::widget::text player_name_text_;
+					sge::gui::widget::text player_name_text_;
 
-					sanguis::gui::widget::expander name_level_gap_;
+					sge::gui::widget::expander name_level_gap_;
 
-					sanguis::gui::widget::text level_text_;
+					sge::gui::widget::text level_text_;
 
-				sanguis::gui::widget::box_container text_container_;
+				sge::gui::widget::box_container text_container_;
 
-				sanguis::gui::widget::bar exp_bar_;
+				sge::gui::widget::bar exp_bar_;
 
-				sanguis::gui::widget::bar health_bar_;
+				sge::gui::widget::bar health_bar_;
 
-			sanguis::gui::widget::box_container middle_container_;
+			sge::gui::widget::box_container middle_container_;
 
-		sanguis::gui::widget::frame middle_frame_;
+		sge::gui::widget::frame middle_frame_;
 
-					sanguis::gui::widget::preferred_size primary_dummy_widget_h_;
+					sge::gui::widget::preferred_size primary_dummy_widget_h_;
 
 					optional_weapon_widget_unique_ptr primary_weapon_;
 
-				sanguis::gui::widget::box_container primary_weapon_container_inner_;
+				sge::gui::widget::box_container primary_weapon_container_inner_;
 
-				sanguis::gui::widget::preferred_size primary_dummy_widget_w_;
+				sge::gui::widget::preferred_size primary_dummy_widget_w_;
 
-			sanguis::gui::widget::box_container primary_weapon_container_;
+			sge::gui::widget::box_container primary_weapon_container_;
 
-		sanguis::gui::widget::frame primary_weapon_frame_;
+		sge::gui::widget::frame primary_weapon_frame_;
 
-					sanguis::gui::widget::preferred_size secondary_dummy_widget_h_;
+					sge::gui::widget::preferred_size secondary_dummy_widget_h_;
 
 					optional_weapon_widget_unique_ptr secondary_weapon_;
 
-				sanguis::gui::widget::box_container secondary_weapon_container_inner_;
+				sge::gui::widget::box_container secondary_weapon_container_inner_;
 
-				sanguis::gui::widget::preferred_size secondary_dummy_widget_w_;
+				sge::gui::widget::preferred_size secondary_dummy_widget_w_;
 
-			sanguis::gui::widget::box_container secondary_weapon_container_;
+			sge::gui::widget::box_container secondary_weapon_container_;
 
-		sanguis::gui::widget::frame secondary_weapon_frame_;
+		sge::gui::widget::frame secondary_weapon_frame_;
 
-	sanguis::gui::widget::box_container main_widget_;
+	sge::gui::widget::box_container main_widget_;
 
-	sanguis::gui::main_area::screen_corner gui_area_;
+	sge::gui::main_area::screen_corner gui_area_;
 
-	sanguis::gui::master gui_master_;
+	sge::gui::master gui_master_;
 
-	sanguis::gui::background::none gui_background_;
+	sge::gui::background::none gui_background_;
 
 	typedef
 	fcppt::unique_ptr<

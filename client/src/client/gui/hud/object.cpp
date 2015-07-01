@@ -18,15 +18,15 @@
 #include <sanguis/client/gui/hud/weapon_details.hpp>
 #include <sanguis/client/gui/hud/weapon_widget.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
-#include <sanguis/gui/fill_color.hpp>
-#include <sanguis/gui/fill_level.hpp>
-#include <sanguis/gui/gravity.hpp>
-#include <sanguis/gui/optional_needed_width.hpp>
-#include <sanguis/gui/style/base_fwd.hpp>
-#include <sanguis/gui/widget/bar.hpp>
-#include <sanguis/gui/widget/reference.hpp>
-#include <sanguis/gui/widget/reference_alignment_pair.hpp>
-#include <sanguis/gui/widget/reference_alignment_vector.hpp>
+#include <sge/gui/fill_color.hpp>
+#include <sge/gui/fill_level.hpp>
+#include <sge/gui/gravity.hpp>
+#include <sge/gui/optional_needed_width.hpp>
+#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/widget/bar.hpp>
+#include <sge/gui/widget/reference.hpp>
+#include <sge/gui/widget/reference_alignment_pair.hpp>
+#include <sge/gui/widget/reference_alignment_vector.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/object_fwd.hpp>
@@ -61,7 +61,7 @@
 
 sanguis::client::gui::hud::object::object(
 	sanguis::client::load::hud::context &_resources,
-	sanguis::gui::style::base const &_gui_style,
+	sge::gui::style::base const &_gui_style,
 	sge::font::object &_font,
 	sge::renderer::device::ffp &_renderer,
 	sge::viewport::manager &_viewport_manager,
@@ -99,7 +99,7 @@ sanguis::client::gui::hud::object::object(
 		_font,
 		sge::font::string(),
 		sanguis::client::gui::default_text_color(),
-		sanguis::gui::optional_needed_width()
+		sge::gui::optional_needed_width()
 	),
 	player_name_text_(
 		_gui_style,
@@ -107,7 +107,7 @@ sanguis::client::gui::hud::object::object(
 		_font,
 		sge::font::string(),
 		sanguis::client::gui::default_text_color(),
-		sanguis::gui::optional_needed_width()
+		sge::gui::optional_needed_width()
 	),
 	name_level_gap_(
 		sge::rucksack::axis::x
@@ -118,25 +118,25 @@ sanguis::client::gui::hud::object::object(
 		_font,
 		sge::font::string(),
 		sanguis::client::gui::default_text_color(),
-		sanguis::gui::optional_needed_width()
+		sge::gui::optional_needed_width()
 	),
 	text_container_(
 		gui_context_,
-		sanguis::gui::widget::reference_alignment_vector{
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+		sge::gui::widget::reference_alignment_vector{
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					player_name_text_
 				),
 				sge::rucksack::alignment::left_or_top
 			),
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					name_level_gap_
 				),
 				sge::rucksack::alignment::left_or_top
 			),
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					level_text_
 				),
 				sge::rucksack::alignment::left_or_top
@@ -151,10 +151,10 @@ sanguis::client::gui::hud::object::object(
 			10
 		),
 		sge::rucksack::axis::x,
-		sanguis::gui::fill_color(
+		sge::gui::fill_color(
 			sge::image::color::predef::forestgreen()
 		),
-		sanguis::gui::fill_level(
+		sge::gui::fill_level(
 			0.f
 		)
 	),
@@ -165,36 +165,36 @@ sanguis::client::gui::hud::object::object(
 			20
 		),
 		sge::rucksack::axis::x,
-		sanguis::gui::fill_color(
+		sge::gui::fill_color(
 			sge::image::color::predef::red()
 		),
-		sanguis::gui::fill_level(
+		sge::gui::fill_level(
 			1.f
 		)
 	),
 	middle_container_(
 		gui_context_,
-		sanguis::gui::widget::reference_alignment_vector{
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+		sge::gui::widget::reference_alignment_vector{
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					world_name_text_
 				),
 				sge::rucksack::alignment::center
 			),
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					text_container_
 				),
 				sge::rucksack::alignment::center
 			),
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					health_bar_
 				),
 				sge::rucksack::alignment::center
 			),
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					exp_bar_
 				),
 				sge::rucksack::alignment::center
@@ -215,9 +215,9 @@ sanguis::client::gui::hud::object::object(
 	primary_weapon_(),
 	primary_weapon_container_inner_(
 		gui_context_,
-		sanguis::gui::widget::reference_alignment_vector{
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+		sge::gui::widget::reference_alignment_vector{
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					primary_dummy_widget_h_
 				),
 				sge::rucksack::alignment::center
@@ -233,15 +233,15 @@ sanguis::client::gui::hud::object::object(
 	),
 	primary_weapon_container_(
 		gui_context_,
-		sanguis::gui::widget::reference_alignment_vector{
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+		sge::gui::widget::reference_alignment_vector{
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					primary_dummy_widget_w_
 				),
 				sge::rucksack::alignment::center
 			),
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					primary_weapon_container_inner_
 				),
 				sge::rucksack::alignment::center
@@ -262,9 +262,9 @@ sanguis::client::gui::hud::object::object(
 	secondary_weapon_(),
 	secondary_weapon_container_inner_(
 		gui_context_,
-		sanguis::gui::widget::reference_alignment_vector{
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+		sge::gui::widget::reference_alignment_vector{
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					secondary_dummy_widget_h_
 				),
 				sge::rucksack::alignment::center
@@ -280,15 +280,15 @@ sanguis::client::gui::hud::object::object(
 	),
 	secondary_weapon_container_(
 		gui_context_,
-		sanguis::gui::widget::reference_alignment_vector{
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+		sge::gui::widget::reference_alignment_vector{
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					secondary_dummy_widget_w_
 				),
 				sge::rucksack::alignment::center
 			),
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					secondary_weapon_container_inner_
 				),
 				sge::rucksack::alignment::center
@@ -302,21 +302,21 @@ sanguis::client::gui::hud::object::object(
 	),
 	main_widget_(
 		gui_context_,
-		sanguis::gui::widget::reference_alignment_vector{
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+		sge::gui::widget::reference_alignment_vector{
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					primary_weapon_frame_
 				),
 				sge::rucksack::alignment::left_or_top
 			),
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					middle_frame_
 				),
 				sge::rucksack::alignment::center
 			),
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					secondary_weapon_frame_
 				),
 				sge::rucksack::alignment::left_or_top
@@ -329,7 +329,7 @@ sanguis::client::gui::hud::object::object(
 		_viewport_manager,
 		gui_context_,
 		main_widget_,
-		sanguis::gui::gravity::north_west
+		sge::gui::gravity::north_west
 	),
 	gui_master_(
 		_keyboard,
@@ -360,7 +360,7 @@ sanguis::client::gui::hud::object::health_pair(
 		fcppt::maybe(
 			_opt_health_pair,
 			fcppt::const_(
-				sanguis::gui::fill_level(
+				sge::gui::fill_level(
 					0.f
 				)
 			),
@@ -376,14 +376,14 @@ sanguis::client::gui::hud::object::health_pair(
 
 				return
 					fcppt::strong_typedef_construct_cast<
-						sanguis::gui::fill_level,
+						sge::gui::fill_level,
 						fcppt::cast::size_fun
 					>(
 						_health_pair.health().get()
 					)
 					/
 					fcppt::strong_typedef_construct_cast<
-						sanguis::gui::fill_level,
+						sge::gui::fill_level,
 						fcppt::cast::size_fun
 					>(
 						_health_pair.max_health().get()
@@ -644,8 +644,8 @@ sanguis::client::gui::hud::object::update_weapon_widgets(
 {
 	primary_weapon_container_inner_.clear();
 	primary_weapon_container_inner_.push_back(
-		sanguis::gui::widget::reference_alignment_pair{
-			sanguis::gui::widget::reference{
+		sge::gui::widget::reference_alignment_pair{
+			sge::gui::widget::reference{
 				primary_dummy_widget_h_
 			},
 			sge::rucksack::alignment::center
@@ -653,8 +653,8 @@ sanguis::client::gui::hud::object::update_weapon_widgets(
 	);
 	secondary_weapon_container_inner_.clear();
 	secondary_weapon_container_inner_.push_back(
-		sanguis::gui::widget::reference_alignment_pair{
-			sanguis::gui::widget::reference{
+		sge::gui::widget::reference_alignment_pair{
+			sge::gui::widget::reference{
 				secondary_dummy_widget_h_
 			},
 			sge::rucksack::alignment::center
@@ -678,8 +678,8 @@ sanguis::client::gui::hud::object::update_weapon_widgets(
 			{
 				primary_weapon_container_inner_.clear();
 				primary_weapon_container_inner_.push_back(
-					sanguis::gui::widget::reference_alignment_pair{
-						sanguis::gui::widget::reference{
+					sge::gui::widget::reference_alignment_pair{
+						sge::gui::widget::reference{
 							_widget.widget()
 						},
 						sge::rucksack::alignment::center
@@ -690,8 +690,8 @@ sanguis::client::gui::hud::object::update_weapon_widgets(
 			{
 				secondary_weapon_container_inner_.clear();
 				secondary_weapon_container_inner_.push_back(
-					sanguis::gui::widget::reference_alignment_pair{
-						sanguis::gui::widget::reference{
+					sge::gui::widget::reference_alignment_pair{
+						sge::gui::widget::reference{
 							_widget.widget()
 						},
 						sge::rucksack::alignment::center
@@ -771,7 +771,7 @@ sanguis::client::gui::hud::object::update_exp()
 
 	exp_bar_.value(
 		fcppt::strong_typedef_construct_cast<
-			sanguis::gui::fill_level,
+			sge::gui::fill_level,
 			fcppt::cast::int_to_float_fun
 		>(
 			exp_.get()
@@ -780,7 +780,7 @@ sanguis::client::gui::hud::object::update_exp()
 		)
 		/
 		fcppt::strong_typedef_construct_cast<
-			sanguis::gui::fill_level,
+			sge::gui::fill_level,
 			fcppt::cast::int_to_float_fun
 		>(
 			diff.get()
@@ -835,8 +835,8 @@ sanguis::client::gui::hud::object::create_details()
 	);
 
 	main_widget_.push_back(
-		sanguis::gui::widget::reference_alignment_pair{
-			sanguis::gui::widget::reference{
+		sge::gui::widget::reference_alignment_pair{
+			sge::gui::widget::reference{
 				new_details->widget()
 			},
 			sge::rucksack::alignment::left_or_top

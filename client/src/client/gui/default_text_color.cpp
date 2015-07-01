@@ -1,5 +1,5 @@
 #include <sanguis/client/gui/default_text_color.hpp>
-#include <sanguis/gui/text_color.hpp>
+#include <sge/gui/text_color.hpp>
 #include <sge/image/color/rgba8.hpp>
 #include <sge/image/color/any/object.hpp>
 #include <sge/image/color/init/alpha.hpp>
@@ -9,7 +9,7 @@
 #include <fcppt/literal.hpp>
 
 
-sanguis::gui::text_color
+sge::gui::text_color
 sanguis::client::gui::default_text_color()
 {
 	typedef
@@ -17,7 +17,7 @@ sanguis::client::gui::default_text_color()
 	channel_type;
 
 	return
-		sanguis::gui::text_color{
+		sge::gui::text_color{
 			sge::image::color::any::object{
 				sge::image::color::rgba8(
 					(sge::image::color::init::red() = fcppt::literal<channel_type>(0))

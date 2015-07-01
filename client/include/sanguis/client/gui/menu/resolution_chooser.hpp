@@ -1,12 +1,12 @@
 #ifndef SANGUIS_CLIENT_GUI_MENU_RESOLUTION_CHOOSER_HPP_INCLUDED
 #define SANGUIS_CLIENT_GUI_MENU_RESOLUTION_CHOOSER_HPP_INCLUDED
 
-#include <sanguis/gui/context_fwd.hpp>
-#include <sanguis/gui/style/base_fwd.hpp>
-#include <sanguis/gui/widget/base_fwd.hpp>
-#include <sanguis/gui/widget/box_container.hpp>
-#include <sanguis/gui/widget/button.hpp>
-#include <sanguis/gui/widget/choices.hpp>
+#include <sge/gui/context_fwd.hpp>
+#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/widget/base_fwd.hpp>
+#include <sge/gui/widget/box_container.hpp>
+#include <sge/gui/widget/button.hpp>
+#include <sge/gui/widget/choices.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/renderer/system_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
@@ -32,8 +32,8 @@ class resolution_chooser
 	);
 public:
 	resolution_chooser(
-		sanguis::gui::context &,
-		sanguis::gui::style::base const &,
+		sge::gui::context &,
+		sge::gui::style::base const &,
 		sge::font::object &,
 		sge::renderer::system const &,
 		sge::renderer::device::ffp &,
@@ -42,7 +42,7 @@ public:
 
 	~resolution_chooser();
 
-	sanguis::gui::widget::base &
+	sge::gui::widget::base &
 	widget();
 private:
 	void
@@ -52,11 +52,11 @@ private:
 
 	sge::renderer::device::ffp &renderer_;
 
-		sanguis::gui::widget::choices choices_;
+		sge::gui::widget::choices choices_;
 
-		sanguis::gui::widget::button apply_button_;
+		sge::gui::widget::button apply_button_;
 
-	sanguis::gui::widget::box_container widget_;
+	sge::gui::widget::box_container widget_;
 
 	fcppt::signal::scoped_connection const apply_connection_;
 };

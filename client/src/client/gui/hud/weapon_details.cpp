@@ -3,12 +3,12 @@
 #include <sanguis/client/gui/hud/weapon_tooltip.hpp>
 #include <sanguis/client/gui/hud/weapon_tooltip_unique_ptr.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
-#include <sanguis/gui/context_fwd.hpp>
-#include <sanguis/gui/style/base_fwd.hpp>
-#include <sanguis/gui/widget/base_fwd.hpp>
-#include <sanguis/gui/widget/reference.hpp>
-#include <sanguis/gui/widget/reference_alignment_pair.hpp>
-#include <sanguis/gui/widget/reference_alignment_vector.hpp>
+#include <sge/gui/context_fwd.hpp>
+#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/widget/base_fwd.hpp>
+#include <sge/gui/widget/reference.hpp>
+#include <sge/gui/widget/reference_alignment_pair.hpp>
+#include <sge/gui/widget/reference_alignment_vector.hpp>
 #include <sge/renderer/device/ffp.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
@@ -24,9 +24,9 @@
 
 
 sanguis::client::gui::hud::weapon_details::weapon_details(
-	sanguis::gui::context &_gui_context,
+	sge::gui::context &_gui_context,
 	sanguis::client::load::hud::context &_resources,
-	sanguis::gui::style::base const &_gui_style,
+	sge::gui::style::base const &_gui_style,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sanguis::optional_weapon_description const &_weapon1,
@@ -83,7 +83,7 @@ sanguis::client::gui::hud::weapon_details::weapon_details(
 	container_(
 		_gui_context,
 		fcppt::algorithm::map<
-			sanguis::gui::widget::reference_alignment_vector
+			sge::gui::widget::reference_alignment_vector
 		>(
 			tooltips_,
 			[](
@@ -91,8 +91,8 @@ sanguis::client::gui::hud::weapon_details::weapon_details(
 			)
 			{
 				return
-					sanguis::gui::widget::reference_alignment_pair(
-						sanguis::gui::widget::reference(
+					sge::gui::widget::reference_alignment_pair(
+						sge::gui::widget::reference(
 							_tooltip->widget()
 						),
 						sge::rucksack::alignment::left_or_top
@@ -108,7 +108,7 @@ sanguis::client::gui::hud::weapon_details::~weapon_details()
 {
 }
 
-sanguis::gui::widget::base &
+sge::gui::widget::base &
 sanguis::client::gui::hud::weapon_details::widget()
 {
 	return

@@ -4,12 +4,12 @@
 #include <sanguis/client/gui/perk/chooser.hpp>
 #include <sanguis/client/gui/perk/state.hpp>
 #include <sanguis/client/perk/state.hpp>
-#include <sanguis/gui/gravity.hpp>
-#include <sanguis/gui/optional_needed_width.hpp>
-#include <sanguis/gui/style/base_fwd.hpp>
-#include <sanguis/gui/widget/reference.hpp>
-#include <sanguis/gui/widget/reference_alignment_pair.hpp>
-#include <sanguis/gui/widget/reference_alignment_vector.hpp>
+#include <sge/gui/gravity.hpp>
+#include <sge/gui/optional_needed_width.hpp>
+#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/widget/reference.hpp>
+#include <sge/gui/widget/reference_alignment_pair.hpp>
+#include <sge/gui/widget/reference_alignment_vector.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/object_fwd.hpp>
@@ -42,7 +42,7 @@ sge::rucksack::alignment const state_alignment(
 
 sanguis::client::gui::perk::chooser::chooser(
 	sanguis::client::perk::state &_state,
-	sanguis::gui::style::base const &_style,
+	sge::gui::style::base const &_style,
 	sge::renderer::device::ffp &_renderer,
 	sge::viewport::manager &_viewport_manager,
 	sge::font::object &_font,
@@ -69,7 +69,7 @@ sanguis::client::gui::perk::chooser::chooser(
 		_font,
 		this->make_top_text(),
 		sanguis::client::gui::default_text_color(),
-		sanguis::gui::optional_needed_width()
+		sge::gui::optional_needed_width()
 	),
 	gui_state_(
 		fcppt::make_unique_ptr_fcppt<
@@ -84,15 +84,15 @@ sanguis::client::gui::perk::chooser::chooser(
 	),
 	main_container_(
 		gui_context_,
-		sanguis::gui::widget::reference_alignment_vector{
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+		sge::gui::widget::reference_alignment_vector{
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					top_text_
 				),
 				sge::rucksack::alignment::left_or_top
 			),
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					gui_state_->widget()
 				),
 				state_alignment
@@ -105,7 +105,7 @@ sanguis::client::gui::perk::chooser::chooser(
 		_viewport_manager,
 		gui_context_,
 		main_container_,
-		sanguis::gui::gravity::north_east
+		sge::gui::gravity::north_east
 	),
 	gui_master_(
 		_keyboard,
@@ -180,8 +180,8 @@ sanguis::client::gui::perk::chooser::perks()
 		);
 
 	main_container_.push_back(
-		sanguis::gui::widget::reference_alignment_pair(
-			sanguis::gui::widget::reference(
+		sge::gui::widget::reference_alignment_pair(
+			sge::gui::widget::reference(
 				gui_state_->widget()
 			),
 			state_alignment

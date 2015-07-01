@@ -8,17 +8,17 @@
 #include <sanguis/client/gui/hud/weapon_widget.hpp>
 #include <sanguis/client/gui/style/text_color.hpp>
 #include <sanguis/client/load/hud/context.hpp>
-#include <sanguis/gui/context_fwd.hpp>
-#include <sanguis/gui/fill_color.hpp>
-#include <sanguis/gui/fill_level.hpp>
-#include <sanguis/gui/optional_needed_width.hpp>
-#include <sanguis/gui/text_color.hpp>
-#include <sanguis/gui/style/base_fwd.hpp>
-#include <sanguis/gui/widget/box_container.hpp>
-#include <sanguis/gui/widget/image.hpp>
-#include <sanguis/gui/widget/reference.hpp>
-#include <sanguis/gui/widget/reference_alignment_pair.hpp>
-#include <sanguis/gui/widget/reference_alignment_vector.hpp>
+#include <sge/gui/context_fwd.hpp>
+#include <sge/gui/fill_color.hpp>
+#include <sge/gui/fill_level.hpp>
+#include <sge/gui/optional_needed_width.hpp>
+#include <sge/gui/text_color.hpp>
+#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/widget/box_container.hpp>
+#include <sge/gui/widget/image.hpp>
+#include <sge/gui/widget/reference.hpp>
+#include <sge/gui/widget/reference_alignment_pair.hpp>
+#include <sge/gui/widget/reference_alignment_vector.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
@@ -35,8 +35,8 @@
 sanguis::client::gui::hud::weapon_widget::weapon_widget(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::client::load::hud::context &_resources,
-	sanguis::gui::context &_gui_context,
-	sanguis::gui::style::base const &_gui_style,
+	sge::gui::context &_gui_context,
+	sge::gui::style::base const &_gui_style,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sanguis::weapon_description const &_description
@@ -71,7 +71,7 @@ sanguis::client::gui::hud::weapon_widget::weapon_widget(
 			_description.magazine_remaining()
 		),
 		sanguis::client::gui::default_text_color(),
-		sanguis::gui::optional_needed_width()
+		sge::gui::optional_needed_width()
 	),
 	cooldown_bar_{
 		_gui_style,
@@ -80,30 +80,30 @@ sanguis::client::gui::hud::weapon_widget::weapon_widget(
 			50 // TODO: Should this be expanding?
 		},
 		sge::rucksack::axis::y,
-		sanguis::gui::fill_color{
+		sge::gui::fill_color{
 			sanguis::client::gui::style::text_color()
 		},
-		sanguis::gui::fill_level{
+		sge::gui::fill_level{
 			1.f
 		}
 	},
 	container_(
 		_gui_context,
-		sanguis::gui::widget::reference_alignment_vector{
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+		sge::gui::widget::reference_alignment_vector{
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					image_
 				),
 				sge::rucksack::alignment::center
 			),
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					text_
 				),
 				sge::rucksack::alignment::center
 			),
-			sanguis::gui::widget::reference_alignment_pair(
-				sanguis::gui::widget::reference(
+			sge::gui::widget::reference_alignment_pair(
+				sge::gui::widget::reference(
 					cooldown_bar_
 				),
 				sge::rucksack::alignment::center
@@ -146,9 +146,9 @@ void
 sanguis::client::gui::hud::weapon_widget::update()
 {
 	cooldown_bar_.value(
-		sanguis::gui::fill_level(
+		sge::gui::fill_level(
 			sge::timer::elapsed_fractional<
-				sanguis::gui::fill_level::value_type
+				sge::gui::fill_level::value_type
 			>(
 				reload_time_
 			)
@@ -156,7 +156,7 @@ sanguis::client::gui::hud::weapon_widget::update()
 	);
 }
 
-sanguis::gui::widget::box_container &
+sge::gui::widget::box_container &
 sanguis::client::gui::hud::weapon_widget::widget()
 {
 	return

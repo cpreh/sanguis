@@ -8,11 +8,11 @@
 #include <sanguis/client/draw2d/scene/hover/weapon_attribute_unique_ptr.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/load/hud/context.hpp>
-#include <sanguis/gui/draw.hpp>
-#include <sanguis/gui/style/base_fwd.hpp>
-#include <sanguis/gui/widget/reference.hpp>
-#include <sanguis/gui/widget/reference_alignment_pair.hpp>
-#include <sanguis/gui/widget/reference_alignment_vector.hpp>
+#include <sge/gui/draw.hpp>
+#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/widget/reference.hpp>
+#include <sge/gui/widget/reference_alignment_pair.hpp>
+#include <sge/gui/widget/reference_alignment_vector.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
@@ -24,8 +24,8 @@
 
 
 sanguis::client::draw2d::scene::hover::weapon::weapon(
-	sanguis::gui::style::base const &_gui_style,
-	sanguis::gui::renderer::base &_gui_renderer,
+	sge::gui::style::base const &_gui_style,
+	sge::gui::renderer::base &_gui_renderer,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sanguis::client::draw2d::sprite::center const _center,
@@ -81,16 +81,16 @@ sanguis::client::draw2d::scene::hover::weapon::weapon(
 	container_(
 		gui_context_,
 		fcppt::algorithm::join(
-			sanguis::gui::widget::reference_alignment_vector{
-				sanguis::gui::widget::reference_alignment_pair{
-					sanguis::gui::widget::reference{
+			sge::gui::widget::reference_alignment_vector{
+				sge::gui::widget::reference_alignment_pair{
+					sge::gui::widget::reference{
 						image_
 					},
 					sge::rucksack::alignment::center
 				}
 			},
 			fcppt::algorithm::map<
-				sanguis::gui::widget::reference_alignment_vector
+				sge::gui::widget::reference_alignment_vector
 			>(
 				weapon_attributes_,
 				[](
@@ -98,8 +98,8 @@ sanguis::client::draw2d::scene::hover::weapon::weapon(
 				)
 				{
 					return
-						sanguis::gui::widget::reference_alignment_pair{
-							sanguis::gui::widget::reference{
+						sge::gui::widget::reference_alignment_pair{
+							sge::gui::widget::reference{
 								_attribute->widget()
 							},
 							sge::rucksack::alignment::left_or_top
@@ -128,7 +128,7 @@ sanguis::client::draw2d::scene::hover::weapon::draw(
 	sge::renderer::context::ffp &_render_context
 )
 {
-	sanguis::gui::draw(
+	sge::gui::draw(
 		gui_renderer_,
 		_render_context,
 		gui_background_,

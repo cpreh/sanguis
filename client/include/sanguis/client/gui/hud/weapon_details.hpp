@@ -5,10 +5,10 @@
 #include <sanguis/client/gui/hud/weapon_details_fwd.hpp>
 #include <sanguis/client/gui/hud/weapon_tooltip_unique_ptr.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
-#include <sanguis/gui/context_fwd.hpp>
-#include <sanguis/gui/style/base_fwd.hpp>
-#include <sanguis/gui/widget/base_fwd.hpp>
-#include <sanguis/gui/widget/box_container.hpp>
+#include <sge/gui/context_fwd.hpp>
+#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/widget/base_fwd.hpp>
+#include <sge/gui/widget/box_container.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -33,9 +33,9 @@ class weapon_details
 	);
 public:
 	weapon_details(
-		sanguis::gui::context &,
+		sge::gui::context &,
 		sanguis::client::load::hud::context &,
-		sanguis::gui::style::base const &,
+		sge::gui::style::base const &,
 		sge::renderer::device::ffp &,
 		sge::font::object &,
 		sanguis::optional_weapon_description const &,
@@ -44,7 +44,7 @@ public:
 
 	~weapon_details();
 
-	sanguis::gui::widget::base &
+	sge::gui::widget::base &
 	widget();
 private:
 	typedef
@@ -55,7 +55,7 @@ private:
 
 	tooltip_vector tooltips_;
 
-	sanguis::gui::widget::box_container container_;
+	sge::gui::widget::box_container container_;
 };
 
 }

@@ -864,7 +864,6 @@ sanguis_add_library(
 		${sanguis_common_TARGET}
 		${sanguis_core_TARGET}
 		${sanguis_creator_TARGET}
-		${sanguis_gui_TARGET}
 		${sanguis_model_TARGET}
 		${sanguis_server_TARGET}
 		${sanguis_tiles_TARGET}
@@ -876,6 +875,7 @@ sanguis_add_library(
 		${sgecore_TARGET}
 		${sgefont_TARGET}
 		${sgefontdraw_TARGET}
+		${sgegui_TARGET}
 		${sgeimage2d_TARGET}
 		${sgeimagecolor_TARGET}
 		${sgeinput_TARGET}

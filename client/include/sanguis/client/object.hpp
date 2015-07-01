@@ -12,7 +12,7 @@
 #include <sanguis/client/config/settings/saver.hpp>
 #include <sanguis/client/console/gfx.hpp>
 #include <sanguis/client/load/context.hpp>
-#include <sanguis/gui/style/base_unique_ptr.hpp>
+#include <sge/gui/style/base_unique_ptr.hpp>
 #include <alda/net/port.hpp>
 #include <sge/console/object.hpp>
 #include <sge/font/added_unique_ptr.hpp>
@@ -91,7 +91,7 @@ private:
 
 	sanguis::client::load::context resources_;
 
-	sanguis::gui::style::base_unique_ptr const gui_style_;
+	sge::gui::style::base_unique_ptr const gui_style_;
 
 	sge::console::object console_;
 

@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_GUI_HUD_WEAPON_ATTRIBUTE_COLOR_HPP_INCLUDED
 
 #include <sanguis/weapon_attribute_type_fwd.hpp>
-#include <sanguis/gui/text_color.hpp>
+#include <sge/gui/text_color.hpp>
 
 
 namespace sanguis
@@ -14,7 +14,7 @@ namespace gui
 namespace hud
 {
 
-sanguis::gui::text_color
+sge::gui::text_color
 weapon_attribute_color(
 	sanguis::weapon_attribute_type
 );

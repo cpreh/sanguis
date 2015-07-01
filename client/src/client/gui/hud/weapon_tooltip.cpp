@@ -5,14 +5,14 @@
 #include <sanguis/client/gui/hud/weapon_attribute_text.hpp>
 #include <sanguis/client/gui/hud/weapon_name.hpp>
 #include <sanguis/client/gui/hud/weapon_tooltip.hpp>
-#include <sanguis/gui/context_fwd.hpp>
-#include <sanguis/gui/style/base_fwd.hpp>
-#include <sanguis/gui/widget/base.hpp>
-#include <sanguis/gui/widget/box_container.hpp>
-#include <sanguis/gui/widget/reference.hpp>
-#include <sanguis/gui/widget/reference_alignment_pair.hpp>
-#include <sanguis/gui/widget/reference_alignment_vector.hpp>
-#include <sanguis/gui/widget/static_text.hpp>
+#include <sge/gui/context_fwd.hpp>
+#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/widget/base.hpp>
+#include <sge/gui/widget/box_container.hpp>
+#include <sge/gui/widget/reference.hpp>
+#include <sge/gui/widget/reference_alignment_pair.hpp>
+#include <sge/gui/widget/reference_alignment_vector.hpp>
+#include <sge/gui/widget/static_text.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
@@ -24,8 +24,8 @@
 
 
 sanguis::client::gui::hud::weapon_tooltip::weapon_tooltip(
-	sanguis::gui::context &_gui_context,
-	sanguis::gui::style::base const &_gui_style,
+	sge::gui::context &_gui_context,
+	sge::gui::style::base const &_gui_style,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sanguis::weapon_description const &_description
@@ -55,7 +55,7 @@ sanguis::client::gui::hud::weapon_tooltip::weapon_tooltip(
 			{
 				return
 					fcppt::make_unique_ptr_fcppt<
-						sanguis::gui::widget::static_text
+						sge::gui::widget::static_text
 					>(
 						_gui_style,
 						_renderer,
@@ -79,16 +79,16 @@ sanguis::client::gui::hud::weapon_tooltip::weapon_tooltip(
 	container_(
 		_gui_context,
 		fcppt::algorithm::join(
-			sanguis::gui::widget::reference_alignment_vector{
-				sanguis::gui::widget::reference_alignment_pair(
-					sanguis::gui::widget::reference(
+			sge::gui::widget::reference_alignment_vector{
+				sge::gui::widget::reference_alignment_pair(
+					sge::gui::widget::reference(
 						name_text_
 					),
 					sge::rucksack::alignment::left_or_top
 				)
 			},
 			fcppt::algorithm::map<
-				sanguis::gui::widget::reference_alignment_vector
+				sge::gui::widget::reference_alignment_vector
 			>(
 				attribute_texts_,
 				[](
@@ -96,8 +96,8 @@ sanguis::client::gui::hud::weapon_tooltip::weapon_tooltip(
 				)
 				{
 					return
-						sanguis::gui::widget::reference_alignment_pair(
-							sanguis::gui::widget::reference(
+						sge::gui::widget::reference_alignment_pair(
+							sge::gui::widget::reference(
 								*_text
 							),
 							sge::rucksack::alignment::left_or_top
@@ -114,7 +114,7 @@ sanguis::client::gui::hud::weapon_tooltip::~weapon_tooltip()
 {
 }
 
-sanguis::gui::widget::base &
+sge::gui::widget::base &
 sanguis::client::gui::hud::weapon_tooltip::widget()
 {
 	return

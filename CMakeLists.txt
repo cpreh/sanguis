@@ -73,6 +73,7 @@ if(
 		audio
 		consolegfx
 		fontdraw
+		gui
 		imagecolor
 		image2d
 		input
@@ -427,10 +428,6 @@ add_subdirectory(
 if(
 	ENABLE_CLIENT
 )
-	add_subdirectory(
-		gui
-	)
-
 	add_subdirectory(
 		tiles
 	)

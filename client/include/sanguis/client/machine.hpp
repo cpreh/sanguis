@@ -9,7 +9,7 @@
 #include <sanguis/client/config/settings/object_fwd.hpp>
 #include <sanguis/client/load/context_fwd.hpp>
 #include <sanguis/client/states/menu_fwd.hpp>
-#include <sanguis/gui/style/base_fwd.hpp>
+#include <sge/gui/style/base_fwd.hpp>
 #include <sanguis/messages/client/base_fwd.hpp>
 #include <alda/net/host.hpp>
 #include <alda/net/port.hpp>
@@ -55,7 +55,7 @@ public:
 		boost::program_options::variables_map const &,
 		sanguis::client::server_callback const &,
 		sanguis::client::load::context const &,
-		sanguis::gui::style::base const &,
+		sge::gui::style::base const &,
 		sge::window::system &,
 		sge::font::object &,
 		sge::console::gfx::object &,
@@ -108,7 +108,7 @@ public:
 	boost::program_options::variables_map const &
 	options() const;
 
-	sanguis::gui::style::base const &
+	sge::gui::style::base const &
 	gui_style() const;
 
 	sge::renderer::system const &
@@ -164,7 +164,7 @@ private:
 
 	sanguis::client::load::context const &resources_;
 
-	sanguis::gui::style::base const &gui_style_;
+	sge::gui::style::base const &gui_style_;
 
 	sge::input::keyboard::device &keyboard_;
 

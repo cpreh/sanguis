@@ -17,7 +17,7 @@
 #include <sanguis/client/events/tick.hpp>
 #include <sanguis/client/gui/style/simple.hpp>
 #include <sanguis/client/states/menu.hpp>
-#include <sanguis/gui/style/base.hpp>
+#include <sge/gui/style/base.hpp>
 #include <alda/net/port.hpp>
 #include <sge/audio/player.hpp>
 #include <sge/config/media_path.hpp>
@@ -104,7 +104,7 @@ sanguis::client::object::object(
 	),
 	gui_style_(
 		fcppt::unique_ptr_to_base<
-			sanguis::gui::style::base
+			sge::gui::style::base
 		>(
 			fcppt::make_unique_ptr_fcppt<
 				sanguis::client::gui::style::simple

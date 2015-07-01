@@ -8,7 +8,7 @@
 #include <sanguis/client/draw2d/scene/object.hpp>
 #include <sanguis/client/load/context_fwd.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
-#include <sanguis/gui/style/base_fwd.hpp>
+#include <sge/gui/style/base_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
@@ -21,7 +21,7 @@ sanguis::client::draw2d::create(
 	sanguis::client::load::context const &_load_context,
 	sanguis::client::load::hud::context &_hud_context,
 	sanguis::client::sound_manager &_sound_manager,
-	sanguis::gui::style::base const &_gui_style,
+	sge::gui::style::base const &_gui_style,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sge::viewport::manager &_viewport_manager,

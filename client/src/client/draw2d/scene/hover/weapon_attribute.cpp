@@ -7,13 +7,13 @@
 #include <sanguis/client/gui/hud/weapon_attribute_diff_to_string.hpp>
 #include <sanguis/client/gui/hud/weapon_attribute_name.hpp>
 #include <sanguis/client/gui/hud/weapon_attribute_text.hpp>
-#include <sanguis/gui/context_fwd.hpp>
-#include <sanguis/gui/text_color.hpp>
-#include <sanguis/gui/style/base_fwd.hpp>
-#include <sanguis/gui/widget/base_fwd.hpp>
-#include <sanguis/gui/widget/reference.hpp>
-#include <sanguis/gui/widget/reference_alignment_pair.hpp>
-#include <sanguis/gui/widget/reference_alignment_vector.hpp>
+#include <sge/gui/context_fwd.hpp>
+#include <sge/gui/text_color.hpp>
+#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/widget/base_fwd.hpp>
+#include <sge/gui/widget/reference.hpp>
+#include <sge/gui/widget/reference_alignment_pair.hpp>
+#include <sge/gui/widget/reference_alignment_vector.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
@@ -25,8 +25,8 @@
 
 
 sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
-	sanguis::gui::context &_gui_context,
-	sanguis::gui::style::base const &_gui_style,
+	sge::gui::context &_gui_context,
+	sge::gui::style::base const &_gui_style,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sanguis::weapon_attribute const &_attribute,
@@ -42,7 +42,7 @@ sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 		)
 		+
 		SGE_FONT_LIT(": "),
-		sanguis::gui::text_color(
+		sge::gui::text_color(
 			sanguis::client::gui::hud::weapon_attribute_color(
 				_attribute.type()
 			)
@@ -98,11 +98,11 @@ sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 					>
 					0
 					?
-						sanguis::gui::text_color(
+						sge::gui::text_color(
 							sge::image::color::predef::lightblue()
 						)
 					:
-						sanguis::gui::text_color(
+						sge::gui::text_color(
 							sge::image::color::predef::red()
 						)
 					;
@@ -111,33 +111,33 @@ sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 	},
 	container_{
 		_gui_context,
-		sanguis::gui::widget::reference_alignment_vector{
-			sanguis::gui::widget::reference_alignment_pair{
-				sanguis::gui::widget::reference{
+		sge::gui::widget::reference_alignment_vector{
+			sge::gui::widget::reference_alignment_pair{
+				sge::gui::widget::reference{
 					name_
 				},
 				sge::rucksack::alignment::center
 			},
-			sanguis::gui::widget::reference_alignment_pair{
-				sanguis::gui::widget::reference{
+			sge::gui::widget::reference_alignment_pair{
+				sge::gui::widget::reference{
 					expander1_
 				},
 				sge::rucksack::alignment::center
 			},
-			sanguis::gui::widget::reference_alignment_pair{
-				sanguis::gui::widget::reference{
+			sge::gui::widget::reference_alignment_pair{
+				sge::gui::widget::reference{
 					value_
 				},
 				sge::rucksack::alignment::center
 			},
-			sanguis::gui::widget::reference_alignment_pair{
-				sanguis::gui::widget::reference{
+			sge::gui::widget::reference_alignment_pair{
+				sge::gui::widget::reference{
 					expander2_
 				},
 				sge::rucksack::alignment::center
 			},
-			sanguis::gui::widget::reference_alignment_pair{
-				sanguis::gui::widget::reference{
+			sge::gui::widget::reference_alignment_pair{
+				sge::gui::widget::reference{
 					diff_
 				},
 				sge::rucksack::alignment::center
@@ -152,7 +152,7 @@ sanguis::client::draw2d::scene::hover::weapon_attribute::~weapon_attribute()
 {
 }
 
-sanguis::gui::widget::base &
+sge::gui::widget::base &
 sanguis::client::draw2d::scene::hover::weapon_attribute::widget()
 {
 	return
