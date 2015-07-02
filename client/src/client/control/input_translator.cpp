@@ -105,8 +105,9 @@ sanguis::client::control::input_translator::key_callback(
 	sge::input::keyboard::key_event const &_event
 )
 {
+	// FIXME: Don't hardcode key_codes
 	switch(
-		_event.key_code()
+		_event.key().code()
 	)
 	{
 	case sge::input::keyboard::key_code::a:
@@ -227,10 +228,10 @@ sanguis::client::control::input_translator::direction_event(
 		sanguis::client::control::actions::any(
 			sanguis::client::control::actions::scale(
 				::key_scale_type(
-					_event.key_code()
+					_event.key().code()
 				),
 				::key_scale_value(
-					_event.key_code(),
+					_event.key().code(),
 					_event.pressed()
 				)
 			)
