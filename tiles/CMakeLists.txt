@@ -53,6 +53,7 @@ set(
 	src/impl/make_orientation_map.cpp
 	src/impl/make_pair.cpp
 	src/impl/neighbors_to_string.cpp
+	src/impl/orientation_to_string.cpp
 	src/impl/tile_name.cpp
 	src/impl/to_string.cpp
 	src/include/sanguis/tiles/impl/background_tile_name.hpp
@@ -89,6 +90,7 @@ set(
 	src/include/sanguis/tiles/impl/optional_orientation_fwd.hpp
 	src/include/sanguis/tiles/impl/optional_pair.hpp
 	src/include/sanguis/tiles/impl/optional_pair_fwd.hpp
+	src/include/sanguis/tiles/impl/orientation_to_string.hpp
 	src/include/sanguis/tiles/impl/replace_non_connecting.hpp
 	src/include/sanguis/tiles/impl/shift.hpp
 	src/include/sanguis/tiles/impl/shift_fwd.hpp

@@ -11,12 +11,15 @@
 #include <sanguis/tiles/impl/content_path.hpp>
 #include <sanguis/tiles/impl/log.hpp>
 #include <sanguis/tiles/impl/optional_content_path.hpp>
+#include <sanguis/tiles/impl/orientation_to_string.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/find_opt.hpp>
+#include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/log/_.hpp>
+#include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -62,8 +65,32 @@ images_base(
 			),
 			[
 				&cur_set,
-				_error_code
+				&_error_message,
+				_error_code,
+				_orientation
 			]{
+
+				FCPPT_LOG_DEBUG(
+					sanguis::tiles::impl::log(),
+					fcppt::log::_
+						<<
+						FCPPT_TEXT("Orientation ")
+						<<
+						sanguis::tiles::impl::orientation_to_string(
+							_orientation
+						)
+						<<
+						FCPPT_TEXT(" not found in ")
+						<<
+						fcppt::filesystem::path_to_string(
+							cur_set.path()
+						)
+						<<
+						FCPPT_TEXT(" from ")
+						<<
+						_error_message()
+				);
+
 				return
 					sanguis::tiles::impl::optional_content_path(
 						sanguis::tiles::impl::content_path(
@@ -92,6 +119,12 @@ images_base(
 						fcppt::log::_
 							<<
 							FCPPT_TEXT("Zero textures in ")
+							<<
+							fcppt::filesystem::path_to_string(
+								cur_set.path()
+							)
+							<<
+							FCPPT_TEXT(" from ")
 							<<
 							_error_message()
 					);
