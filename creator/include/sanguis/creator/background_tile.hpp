@@ -11,11 +11,11 @@ namespace creator
 
 enum class background_tile
 {
-	nothing,
 	asphalt,
 	dirt,
 	grass,
-	fcppt_maximum = grass
+	nothing,
+	fcppt_maximum = nothing
 };
 
 }
