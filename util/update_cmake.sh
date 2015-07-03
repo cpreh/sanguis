@@ -63,8 +63,6 @@ update_sublibrary core
 
 update_sublibrary creator
 
-update_sublibrary gui
-
 update_sublibrary model
 
 update_sublibrary server
