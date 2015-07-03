@@ -55,7 +55,8 @@ maze_to_tile_grid(
 	dim_type const result_size(
 		real_size
 		*
-		_spacing +
+		_spacing
+		+
 		(
 			real_size
 			+
@@ -64,6 +65,12 @@ maze_to_tile_grid(
 				1u)
 		)
 		* _wall_thickness
+		+
+		// leave a gap around the edge
+		dim_type(
+			2u,
+			2u
+		)
 	);
 
 	auto const coordinate_transform =
@@ -94,7 +101,9 @@ maze_to_tile_grid(
 
 	grid_type result{
 		dim_type(
-			result_size)};
+			result_size),
+		sanguis::creator::tile::nothing
+	};
 
 	for(
 		auto cell :
@@ -103,8 +112,9 @@ maze_to_tile_grid(
 	)
 	{
 		typename grid_type::pos const start(
-			coordinate_transform(cell.pos().x()),
-			coordinate_transform(cell.pos().y()));
+			// leave one space for the edge
+			coordinate_transform(cell.pos().x()+1u),
+			coordinate_transform(cell.pos().y()+1u));
 
 		dim_type const cell_size(
 			wall_or_space(cell.pos().x()),

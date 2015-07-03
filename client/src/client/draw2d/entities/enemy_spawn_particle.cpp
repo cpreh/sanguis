@@ -66,8 +66,7 @@ sanguis::client::draw2d::entities::enemy_spawn_particle(
 									)
 								)
 							);
-					case sanguis::creator::background_tile::space:
-					case sanguis::creator::background_tile::space_floor:
+					case sanguis::creator::background_tile::nothing:
 					case sanguis::creator::background_tile::asphalt:
 						return
 							sanguis::client::draw2d::entities::optional_own_unique_ptr();

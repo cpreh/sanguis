@@ -724,8 +724,28 @@ sanguis::creator::impl::generators::rooms(
 
 	sanguis::creator::background_grid bg_grid{
 		grid.size(),
-		sanguis::creator::background_tile::asphalt
+		sanguis::creator::background_tile::nothing
 	};
+
+	sanguis::creator::impl::filled_rect(
+		sanguis::creator::rect{
+			sanguis::creator::rect::vector{1u,1u},
+			sanguis::creator::rect::dim{grid.size() - 2u}
+		},
+		[
+			&bg_grid
+		]
+		(
+			sanguis::creator::pos const _pos
+		)
+		{
+			bg_grid[
+				_pos
+			]
+			=
+			sanguis::creator::background_tile::asphalt;
+		}
+	);
 
 	auto const
 	rect_center_pos(

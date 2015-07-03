@@ -13,12 +13,9 @@ sanguis::tiles::impl::background_tile_name(
 		_tile
 	)
 	{
-	case sanguis::creator::background_tile::space:
+	case sanguis::creator::background_tile::nothing:
 		return
-			FCPPT_TEXT("space");
-	case sanguis::creator::background_tile::space_floor:
-		return
-			FCPPT_TEXT("space_floor");
+			FCPPT_TEXT("nothing");
 	case sanguis::creator::background_tile::asphalt:
 		return
 			FCPPT_TEXT("asphalt");

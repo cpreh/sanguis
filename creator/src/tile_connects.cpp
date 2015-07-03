@@ -14,10 +14,6 @@ sanguis::creator::tile_connects(
 	{
 	case sanguis::creator::tile::nothing:
 	case sanguis::creator::tile::stairs:
-	case sanguis::creator::tile::space_door_closed_v:
-	case sanguis::creator::tile::space_door_open_v:
-	case sanguis::creator::tile::space_door_closed_h:
-	case sanguis::creator::tile::space_door_open_h:
 	case sanguis::creator::tile::spawner:
 	case sanguis::creator::tile::grave1:
 	case sanguis::creator::tile::grave2:
