@@ -10,6 +10,7 @@
 #include <sge/font/unit.hpp>
 #include <sge/font/vector.hpp>
 #include <sge/font/align_h/left.hpp>
+#include <sge/font/align_h/variant.hpp>
 #include <sge/font/draw/set_matrices.hpp>
 #include <sge/font/draw/set_states.hpp>
 #include <sge/font/draw/static_text.hpp>
@@ -36,7 +37,9 @@ sanguis::client::draw2d::scene::hover::name::name(
 			_name.text()
 		),
 		sge::font::text_parameters(
-			sge::font::align_h::left()
+			sge::font::align_h::variant(
+				sge::font::align_h::left()
+			)
 		),
 		sge::font::vector(
 			_center.get().x(),

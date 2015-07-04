@@ -33,6 +33,7 @@
 #include <sge/systems/original_window.hpp>
 #include <sge/systems/renderer.hpp>
 #include <sge/systems/window.hpp>
+#include <sge/systems/window_source.hpp>
 #include <sge/viewport/fill_on_resize.hpp>
 #include <sge/window/title.hpp>
 #include <fcppt/make_unique_ptr_fcppt.hpp>
@@ -75,12 +76,14 @@ sanguis::client::create_systems(
 			)
 			(
 				sge::systems::window(
-					sge::systems::original_window(
-						sge::window::title(
-							sanguis::app_name()
+					sge::systems::window_source(
+						sge::systems::original_window(
+							sge::window::title(
+								sanguis::app_name()
+							)
 						)
+						.hide_cursor()
 					)
-					.hide_cursor()
 				)
 			)
 			(

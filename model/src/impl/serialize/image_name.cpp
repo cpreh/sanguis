@@ -2,6 +2,7 @@
 #include <sanguis/model/impl/serialize/image_name.hpp>
 #include <sge/parse/json/member.hpp>
 #include <sge/parse/json/optional_member.hpp>
+#include <sge/parse/json/value.hpp>
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/text.hpp>
 
@@ -21,7 +22,9 @@ sanguis::model::impl::serialize::image_name(
 				return
 					sge::parse::json::member(
 						FCPPT_TEXT("texture"),
-						_name.get()
+						sge::parse::json::value(
+							_name.get()
+						)
 					);
 			}
 		);

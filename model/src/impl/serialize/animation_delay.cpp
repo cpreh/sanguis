@@ -2,6 +2,7 @@
 #include <sanguis/model/impl/serialize/animation_delay.hpp>
 #include <sge/parse/json/member.hpp>
 #include <sge/parse/json/optional_member.hpp>
+#include <sge/parse/json/value.hpp>
 #include <sge/parse/json/convert/from_int.hpp>
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/text.hpp>
@@ -22,8 +23,10 @@ sanguis::model::impl::serialize::animation_delay(
 				return
 					sge::parse::json::member(
 						FCPPT_TEXT("delay"),
-						sge::parse::json::convert::from_int(
-							_delay.get().count()
+						sge::parse::json::value(
+							sge::parse::json::convert::from_int(
+								_delay.get().count()
+							)
 						)
 					);
 			}

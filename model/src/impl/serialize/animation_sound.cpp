@@ -2,6 +2,7 @@
 #include <sanguis/model/impl/serialize/animation_sound.hpp>
 #include <sge/parse/json/member.hpp>
 #include <sge/parse/json/optional_member.hpp>
+#include <sge/parse/json/value.hpp>
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/text.hpp>
 
@@ -21,7 +22,9 @@ sanguis::model::impl::serialize::animation_sound(
 				return
 					sge::parse::json::member(
 						FCPPT_TEXT("sound"),
-						_sound.get()
+						sge::parse::json::value(
+							_sound.get()
+						)
 					);
 			}
 		);

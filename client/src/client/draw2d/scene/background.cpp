@@ -4,6 +4,7 @@
 #include <sanguis/client/draw2d/scene/background_texture_coordinates.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
+#include <sanguis/client/draw2d/sprite/unit.hpp>
 #include <sanguis/client/draw2d/sprite/client/category.hpp>
 #include <sanguis/client/draw2d/sprite/client/object.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_decl.hpp>
@@ -20,6 +21,7 @@
 #include <sge/sprite/roles/texture0.hpp>
 #include <sge/sprite/roles/texture_coordinates0.hpp>
 #include <sge/viewport/manager.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
@@ -101,7 +103,15 @@ sanguis::client::draw2d::scene::background::render(
 {
 	sprite_.texture_coordinates(
 		sanguis::client::draw2d::scene::background_texture_coordinates(
-			sanguis::client::draw2d::translation{_translation.get() / 2},
+			sanguis::client::draw2d::translation{
+				_translation.get()
+				/
+				fcppt::literal<
+					sanguis::client::draw2d::unit
+				>(
+					2
+				)
+			},
 			client_system_.renderer(),
 			texture_
 		)

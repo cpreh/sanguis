@@ -13,6 +13,7 @@
 #include <sanguis/client/control/actions/nullary_type.hpp>
 #include <sanguis/client/control/actions/scale.hpp>
 #include <sanguis/client/control/actions/scale_type.hpp>
+#include <sanguis/client/control/actions/variant.hpp>
 #include <sge/input/cursor/activatable.hpp>
 #include <sge/input/cursor/button_event.hpp>
 #include <sge/input/cursor/move_event.hpp>
@@ -172,21 +173,23 @@ sanguis::client::control::input_translator::move_callback(
 {
 	callback_(
 		sanguis::client::control::actions::any(
-			sanguis::client::control::actions::cursor(
-				fcppt::optional_bind_construct(
-					_event.position(),
-					[](
-						sge::input::cursor::position const _position
+			sanguis::client::control::actions::variant(
+				sanguis::client::control::actions::cursor(
+					fcppt::optional_bind_construct(
+						_event.position(),
+						[](
+							sge::input::cursor::position const _position
+						)
+						{
+							return
+								fcppt::math::vector::structure_cast<
+									sanguis::client::control::cursor_position,
+									fcppt::cast::size_fun
+								>(
+									_position
+								);
+						}
 					)
-					{
-						return
-							fcppt::math::vector::structure_cast<
-								sanguis::client::control::cursor_position,
-								fcppt::cast::size_fun
-							>(
-								_position
-							);
-					}
 				)
 			)
 		)
@@ -226,13 +229,15 @@ sanguis::client::control::input_translator::direction_event(
 {
 	callback_(
 		sanguis::client::control::actions::any(
-			sanguis::client::control::actions::scale(
-				::key_scale_type(
-					_event.key().code()
-				),
-				::key_scale_value(
-					_event.key().code(),
-					_event.pressed()
+			sanguis::client::control::actions::variant(
+				sanguis::client::control::actions::scale(
+					::key_scale_type(
+						_event.key().code()
+					),
+					::key_scale_value(
+						_event.key().code(),
+						_event.pressed()
+					)
 				)
 			)
 		)
@@ -252,8 +257,10 @@ sanguis::client::control::input_translator::nullary_event(
 
 	callback_(
 		sanguis::client::control::actions::any(
-			sanguis::client::control::actions::nullary(
-				_action
+			sanguis::client::control::actions::variant(
+				sanguis::client::control::actions::nullary(
+					_action
+				)
 			)
 		)
 	);
@@ -267,9 +274,11 @@ sanguis::client::control::input_translator::binary_event(
 {
 	callback_(
 		sanguis::client::control::actions::any(
-			sanguis::client::control::actions::binary(
-				_action,
-				_pressed
+			sanguis::client::control::actions::variant(
+				sanguis::client::control::actions::binary(
+					_action,
+					_pressed
+				)
 			)
 		)
 	);

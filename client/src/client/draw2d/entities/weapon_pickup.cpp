@@ -6,6 +6,7 @@
 #include <sanguis/client/draw2d/entities/weapon_pickup.hpp>
 #include <sanguis/client/draw2d/entities/hover/info.hpp>
 #include <sanguis/client/draw2d/entities/hover/optional_info.hpp>
+#include <sanguis/client/draw2d/entities/hover/variant.hpp>
 #include <sanguis/client/draw2d/entities/hover/weapon.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
@@ -49,8 +50,10 @@ sanguis::client::draw2d::entities::weapon_pickup::hover() const
 	return
 		sanguis::client::draw2d::entities::hover::optional_info(
 			sanguis::client::draw2d::entities::hover::info(
-				sanguis::client::draw2d::entities::hover::weapon(
-					weapon_description_
+				sanguis::client::draw2d::entities::hover::variant(
+					sanguis::client::draw2d::entities::hover::weapon(
+						weapon_description_
+					)
 				)
 			)
 		);

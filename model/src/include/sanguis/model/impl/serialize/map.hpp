@@ -5,6 +5,7 @@
 #include <sge/parse/json/member_map.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/string.hpp>
+#include <sge/parse/json/value.hpp>
 #include <fcppt/algorithm/map.hpp>
 
 
@@ -34,25 +35,29 @@ map(
 	return
 		sge::parse::json::member(
 			_name,
-			sge::parse::json::object(
-				fcppt::algorithm::map<
-					sge::parse::json::member_map
-				>(
-					_map,
-					[
-						_serialize_inner
-					](
-						typename Map::value_type const &_pair
+			sge::parse::json::value(
+				sge::parse::json::object(
+					fcppt::algorithm::map<
+						sge::parse::json::member_map
+					>(
+						_map,
+						[
+							_serialize_inner
+						](
+							typename Map::value_type const &_pair
+						)
+						{
+							return
+								sge::parse::json::member(
+									_pair.first.get(),
+									sge::parse::json::value(
+										_serialize_inner(
+											_pair.second
+										)
+									)
+								);
+						}
 					)
-					{
-						return
-							sge::parse::json::member(
-								_pair.first.get(),
-								_serialize_inner(
-									_pair.second
-								)
-							);
-					}
 				)
 			)
 		);

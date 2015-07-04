@@ -2,6 +2,7 @@
 #include <sanguis/model/object_fwd.hpp>
 #include <sanguis/model/serialize.hpp>
 #include <sanguis/model/impl/serialize/object.hpp>
+#include <sge/parse/json/array_or_object.hpp>
 #include <sge/parse/json/start.hpp>
 #include <sge/parse/json/output/to_file.hpp>
 #include <fcppt/exception.hpp>
@@ -22,8 +23,10 @@ try
 	sge::parse::json::output::to_file(
 		_path,
 		sge::parse::json::start(
-			sanguis::model::impl::serialize::object(
-				_model
+			sge::parse::json::array_or_object(
+				sanguis::model::impl::serialize::object(
+					_model
+				)
 			)
 		)
 	);

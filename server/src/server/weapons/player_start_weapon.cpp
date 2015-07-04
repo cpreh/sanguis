@@ -1,4 +1,5 @@
 #include <sanguis/primary_weapon_type.hpp>
+#include <sanguis/weapon_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/weapons/create.hpp>
@@ -15,7 +16,9 @@ sanguis::server::weapons::player_start_weapon(
 	return
 		sanguis::server::weapons::create(
 			_random_generator,
-			sanguis::primary_weapon_type::pistol,
+			sanguis::weapon_type{
+				sanguis::primary_weapon_type::pistol
+			},
 			sanguis::server::entities::enemies::difficulty{
 				1.f
 			}

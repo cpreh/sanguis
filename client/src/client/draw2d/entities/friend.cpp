@@ -11,6 +11,7 @@
 #include <sanguis/client/draw2d/entities/hover/name_and_health.hpp>
 #include <sanguis/client/draw2d/entities/hover/optional_info.hpp>
 #include <sanguis/client/draw2d/entities/hover/optional_name.hpp>
+#include <sanguis/client/draw2d/entities/hover/variant.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/normal/white.hpp>
@@ -67,9 +68,11 @@ sanguis::client::draw2d::entities::friend_::hover() const
 	return
 		sanguis::client::draw2d::entities::hover::optional_info(
 			sanguis::client::draw2d::entities::hover::info(
-				sanguis::client::draw2d::entities::hover::name_and_health(
-					sanguis::client::draw2d::entities::hover::optional_name(),
-					this->health_pair()
+				sanguis::client::draw2d::entities::hover::variant(
+					sanguis::client::draw2d::entities::hover::name_and_health(
+						sanguis::client::draw2d::entities::hover::optional_name(),
+						this->health_pair()
+					)
 				)
 			)
 		);
