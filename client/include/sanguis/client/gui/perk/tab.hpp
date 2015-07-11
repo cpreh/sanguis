@@ -5,11 +5,11 @@
 #include <sanguis/client/gui/perk/tab_fwd.hpp>
 #include <sanguis/client/perk/const_tree_range_fwd.hpp>
 #include <sanguis/client/perk/state_fwd.hpp>
+#include <sge/font/object_fwd.hpp>
+#include <sge/font/string.hpp>
 #include <sge/gui/context_fwd.hpp>
 #include <sge/gui/style/base_fwd.hpp>
 #include <sge/gui/widget/tree.hpp>
-#include <sge/font/object_fwd.hpp>
-#include <sge/font/string.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 

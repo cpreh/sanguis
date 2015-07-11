@@ -13,8 +13,8 @@
 #include <sanguis/server/entities/friend.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
-#include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/optional_base_ref.hpp>
+#include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/attack.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>

@@ -25,9 +25,9 @@
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/attributes/aoe.hpp>
 #include <sanguis/server/weapons/attributes/damage.hpp>
+#include <sanguis/server/weapons/attributes/magazine_size.hpp>
 #include <sanguis/server/weapons/attributes/make_aoe.hpp>
 #include <sanguis/server/weapons/attributes/make_damage.hpp>
-#include <sanguis/server/weapons/attributes/magazine_size.hpp>
 #include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
 #include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
 #include <fcppt/make_unique_ptr_fcppt.hpp>

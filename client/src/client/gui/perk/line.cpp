@@ -7,6 +7,8 @@
 #include <sanguis/client/perk/state.hpp>
 #include <sanguis/client/perk/to_string.hpp>
 #include <sanguis/client/perk/tree.hpp>
+#include <sge/font/from_fcppt_string.hpp>
+#include <sge/font/object_fwd.hpp>
 #include <sge/gui/context_fwd.hpp>
 #include <sge/gui/optional_needed_width.hpp>
 #include <sge/gui/text_color.hpp>
@@ -17,8 +19,6 @@
 #include <sge/gui/widget/reference_alignment_pair.hpp>
 #include <sge/gui/widget/reference_alignment_vector.hpp>
 #include <sge/gui/widget/text.hpp>
-#include <sge/font/from_fcppt_string.hpp>
-#include <sge/font/object_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>

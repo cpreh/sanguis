@@ -22,10 +22,10 @@
 #include <sanguis/creator/tile_grid.hpp>
 #include <sanguis/creator/tile_is_solid.hpp>
 #include <sanguis/creator/impl/enemy_type_container.hpp>
-#include <sanguis/creator/impl/log.hpp>
 #include <sanguis/creator/impl/filled_rect.hpp>
 #include <sanguis/creator/impl/generate_maze.hpp>
 #include <sanguis/creator/impl/interior_range.hpp>
+#include <sanguis/creator/impl/log.hpp>
 #include <sanguis/creator/impl/maze_to_tile_grid.hpp>
 #include <sanguis/creator/impl/parameters.hpp>
 #include <sanguis/creator/impl/place_boss.hpp>
@@ -43,8 +43,9 @@
 #include <sanguis/creator/impl/random/uniform_pos.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/optional.hpp>
-#include <fcppt/algorithm/map.hpp>
 #include <fcppt/algorithm/enum_array_fold.hpp>
+#include <fcppt/algorithm/fold.hpp>
+#include <fcppt/algorithm/map.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/size_fun.hpp>
@@ -60,22 +61,21 @@
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/level.hpp>
 #include <fcppt/math/box/center.hpp>
+#include <fcppt/math/box/distance.hpp>
 #include <fcppt/math/box/intersects.hpp>
 #include <fcppt/math/box/object.hpp>
+#include <fcppt/math/box/output.hpp>
 #include <fcppt/math/box/rect.hpp>
 #include <fcppt/math/box/structure_cast.hpp>
+#include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/wrapper/make_uniform_container_advanced.hpp>
-#include <fcppt/algorithm/fold.hpp>
-#include <fcppt/math/box/distance.hpp>
-#include <fcppt/math/box/output.hpp>
-#include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
-#include <iostream>
 #include <functional>
+#include <iostream>
 #include <map>
 #include <set>
 #include <vector>
@@ -853,7 +853,7 @@ sanguis::creator::impl::generators::rooms(
 					:
 						sanguis::creator::opening_container{}
 					;
-					
+
 			}
 		);
 

@@ -8,12 +8,12 @@
 #include <sanguis/client/draw2d/scene/hover/weapon_attribute_unique_ptr.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/load/hud/context.hpp>
+#include <sge/font/object_fwd.hpp>
 #include <sge/gui/draw.hpp>
 #include <sge/gui/style/base_fwd.hpp>
 #include <sge/gui/widget/reference.hpp>
 #include <sge/gui/widget/reference_alignment_pair.hpp>
 #include <sge/gui/widget/reference_alignment_vector.hpp>
-#include <sge/font/object_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/alignment.hpp>

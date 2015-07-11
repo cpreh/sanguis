@@ -4,9 +4,9 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_perks.hpp>
 #include <sanguis/server/entities/ifaces/with_health.hpp>
+#include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/ifaces/with_velocity.hpp>
 #include <sanguis/server/entities/ifaces/with_weapon.hpp>
-#include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/perks/create.hpp>
 #include <sanguis/server/perks/perk.hpp>

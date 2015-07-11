@@ -5,6 +5,8 @@
 #include <sanguis/client/gui/perk/chooser_fwd.hpp>
 #include <sanguis/client/gui/perk/state_fwd.hpp>
 #include <sanguis/client/perk/state_fwd.hpp>
+#include <sge/font/object_fwd.hpp>
+#include <sge/font/string.hpp>
 #include <sge/gui/context.hpp>
 #include <sge/gui/master.hpp>
 #include <sge/gui/background/colored.hpp>
@@ -12,8 +14,6 @@
 #include <sge/gui/style/base_fwd.hpp>
 #include <sge/gui/widget/box_container.hpp>
 #include <sge/gui/widget/text.hpp>
-#include <sge/font/object_fwd.hpp>
-#include <sge/font/string.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>

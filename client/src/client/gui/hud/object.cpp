@@ -18,6 +18,10 @@
 #include <sanguis/client/gui/hud/weapon_details.hpp>
 #include <sanguis/client/gui/hud/weapon_widget.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
+#include <sge/font/from_fcppt_string.hpp>
+#include <sge/font/lit.hpp>
+#include <sge/font/object_fwd.hpp>
+#include <sge/font/string.hpp>
 #include <sge/gui/fill_color.hpp>
 #include <sge/gui/fill_level.hpp>
 #include <sge/gui/gravity.hpp>
@@ -27,10 +31,6 @@
 #include <sge/gui/widget/reference.hpp>
 #include <sge/gui/widget/reference_alignment_pair.hpp>
 #include <sge/gui/widget/reference_alignment_vector.hpp>
-#include <sge/font/from_fcppt_string.hpp>
-#include <sge/font/lit.hpp>
-#include <sge/font/object_fwd.hpp>
-#include <sge/font/string.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>

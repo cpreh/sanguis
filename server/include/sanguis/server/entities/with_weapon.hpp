@@ -13,8 +13,8 @@
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/entities/ifaces/with_links.hpp>
-#include <sanguis/server/entities/ifaces/with_weapon.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
+#include <sanguis/server/entities/ifaces/with_weapon.hpp>
 #include <sanguis/server/entities/property/always_max.hpp>
 #include <sanguis/server/weapons/const_optional_ref_fwd.hpp>
 #include <sanguis/server/weapons/ias.hpp>

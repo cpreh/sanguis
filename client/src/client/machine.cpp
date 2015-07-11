@@ -12,7 +12,6 @@
 #include <sanguis/client/load/context_fwd.hpp>
 #include <sanguis/client/net/deserialize.hpp>
 #include <sanguis/client/net/serialize_to_circular_buffer.hpp>
-#include <sge/gui/style/base_fwd.hpp>
 #include <sanguis/messages/client/base.hpp>
 #include <sanguis/messages/server/base.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
@@ -24,6 +23,7 @@
 #include <alda/net/buffer/circular_receive/object_fwd.hpp>
 #include <sge/console/gfx/object.hpp>
 #include <sge/font/object_fwd.hpp>
+#include <sge/gui/style/base_fwd.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/system_fwd.hpp>

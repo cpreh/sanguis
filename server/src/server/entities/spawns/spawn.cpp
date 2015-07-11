@@ -6,8 +6,8 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/entities/optional_transfer_result.hpp>
-#include <sanguis/server/entities/spawn_owner.hpp>
 #include <sanguis/server/entities/simple.hpp>
+#include <sanguis/server/entities/spawn_owner.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/entities/transfer_result.hpp>
 #include <sanguis/server/entities/with_id.hpp>

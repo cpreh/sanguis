@@ -4,10 +4,10 @@
 #include <sanguis/client/gui/perk/state_fwd.hpp>
 #include <sanguis/client/gui/perk/tab_unique_ptr_vector.hpp>
 #include <sanguis/client/perk/state_fwd.hpp>
+#include <sge/font/object_fwd.hpp>
 #include <sge/gui/context_fwd.hpp>
 #include <sge/gui/style/base_fwd.hpp>
 #include <sge/gui/widget/tab.hpp>
-#include <sge/font/object_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 

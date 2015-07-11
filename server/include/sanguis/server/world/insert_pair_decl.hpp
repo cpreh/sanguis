@@ -3,8 +3,8 @@
 
 #include <sanguis/server/entities/insert_parameters.hpp>
 #include <sanguis/server/world/insert_pair_fwd.hpp>
-#include <fcppt/unique_ptr_decl.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/unique_ptr_decl.hpp>
 
 
 namespace sanguis

@@ -9,9 +9,9 @@
 #include <sanguis/server/environment/object.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/assert/optional_error.hpp>
+#include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/container/get_or_insert_result.hpp>
 #include <fcppt/container/get_or_insert_with_result.hpp>
-#include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <typeindex>

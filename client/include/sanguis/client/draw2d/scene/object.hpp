@@ -37,8 +37,6 @@
 #include <sanguis/client/load/auras/context.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
 #include <sanguis/client/load/model/collection_fwd.hpp>
-#include <sge/gui/renderer/base_unique_ptr.hpp>
-#include <sge/gui/style/base_fwd.hpp>
 #include <sanguis/messages/server/add_aoe_projectile_fwd.hpp>
 #include <sanguis/messages/server/add_aura_fwd.hpp>
 #include <sanguis/messages/server/add_buff_fwd.hpp>
@@ -67,6 +65,8 @@
 #include <sanguis/messages/server/weapon_status_fwd.hpp>
 #include <alda/call/friend_dispatcher.hpp>
 #include <sge/font/object_fwd.hpp>
+#include <sge/gui/renderer/base_unique_ptr.hpp>
+#include <sge/gui/style/base_fwd.hpp>
 #include <sge/renderer/screen_size_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>

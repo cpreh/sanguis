@@ -9,7 +9,6 @@
 #include <sanguis/client/config/settings/object_fwd.hpp>
 #include <sanguis/client/load/context_fwd.hpp>
 #include <sanguis/client/states/menu_fwd.hpp>
-#include <sge/gui/style/base_fwd.hpp>
 #include <sanguis/messages/client/base_fwd.hpp>
 #include <alda/net/host.hpp>
 #include <alda/net/port.hpp>
@@ -17,6 +16,7 @@
 #include <alda/net/client/object.hpp>
 #include <sge/console/gfx/object_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
+#include <sge/gui/style/base_fwd.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/system_fwd.hpp>

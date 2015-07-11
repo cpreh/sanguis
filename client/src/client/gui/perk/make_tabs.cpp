@@ -4,9 +4,9 @@
 #include <sanguis/client/perk/category_equal_range.hpp>
 #include <sanguis/client/perk/state.hpp>
 #include <sanguis/client/perk/tree.hpp>
+#include <sge/font/object_fwd.hpp>
 #include <sge/gui/context_fwd.hpp>
 #include <sge/gui/style/base_fwd.hpp>
-#include <sge/font/object_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <fcppt/make_unique_ptr_fcppt.hpp>
 

@@ -17,6 +17,7 @@
 #include <sanguis/client/gui/hud/weapon_details_fwd.hpp>
 #include <sanguis/client/gui/hud/weapon_widget.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
+#include <sge/font/object_fwd.hpp>
 #include <sge/gui/context.hpp>
 #include <sge/gui/master.hpp>
 #include <sge/gui/background/none.hpp>
@@ -28,7 +29,6 @@
 #include <sge/gui/widget/frame.hpp>
 #include <sge/gui/widget/preferred_size.hpp>
 #include <sge/gui/widget/text.hpp>
-#include <sge/font/object_fwd.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>

@@ -1,8 +1,8 @@
 #ifndef SANGUIS_SERVER_ENTITIES_IFACES_WITH_WEAPON_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_IFACES_WITH_WEAPON_HPP_INCLUDED
 
-#include <sanguis/server/damage/unit_fwd.hpp>
 #include <sanguis/server/damage/type_fwd.hpp>
+#include <sanguis/server/damage/unit_fwd.hpp>
 #include <sanguis/server/entities/ifaces/with_weapon_fwd.hpp>
 #include <sanguis/server/entities/property/always_max_fwd.hpp>
 #include <fcppt/noncopyable.hpp>

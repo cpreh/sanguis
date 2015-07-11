@@ -6,9 +6,9 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_perks_fwd.hpp>
 #include <sanguis/server/entities/ifaces/with_health.hpp>
+#include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/ifaces/with_velocity.hpp>
 #include <sanguis/server/entities/ifaces/with_weapon.hpp>
-#include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/perks/unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>

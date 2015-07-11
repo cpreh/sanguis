@@ -85,9 +85,6 @@
 #include <sanguis/creator/opening_type.hpp>
 #include <sanguis/creator/spawn_boss.hpp>
 #include <sanguis/creator/top_parameters.hpp>
-#include <sge/gui/renderer/base.hpp>
-#include <sge/gui/renderer/create_stateless.hpp>
-#include <sge/gui/style/base_fwd.hpp>
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/aoe.hpp>
 #include <sanguis/messages/roles/aoe_projectile_type.hpp>
@@ -147,6 +144,9 @@
 #include <alda/serialization/load/static_size.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <sge/font/object_fwd.hpp>
+#include <sge/gui/renderer/base.hpp>
+#include <sge/gui/renderer/create_stateless.hpp>
+#include <sge/gui/style/base_fwd.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/renderer/clear/parameters.hpp>
 #include <sge/renderer/context/ffp.hpp>

@@ -3,13 +3,6 @@
 #include <sanguis/client/gui/default_text_color.hpp>
 #include <sanguis/client/gui/to_duration.hpp>
 #include <sanguis/client/gui/menu/object.hpp>
-#include <sge/gui/needed_width_from_strings.hpp>
-#include <sge/gui/optional_needed_width.hpp>
-#include <sge/gui/string_container.hpp>
-#include <sge/gui/style/base_fwd.hpp>
-#include <sge/gui/widget/reference.hpp>
-#include <sge/gui/widget/reference_alignment_pair.hpp>
-#include <sge/gui/widget/reference_alignment_vector.hpp>
 #include <alda/net/host.hpp>
 #include <alda/net/port.hpp>
 #include <sge/font/from_fcppt_string.hpp>
@@ -17,6 +10,13 @@
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
 #include <sge/font/to_fcppt_string.hpp>
+#include <sge/gui/needed_width_from_strings.hpp>
+#include <sge/gui/optional_needed_width.hpp>
+#include <sge/gui/string_container.hpp>
+#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/widget/reference.hpp>
+#include <sge/gui/widget/reference_alignment_pair.hpp>
+#include <sge/gui/widget/reference_alignment_vector.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>

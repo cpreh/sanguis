@@ -12,11 +12,11 @@
 #include <sanguis/client/config/settings/saver.hpp>
 #include <sanguis/client/console/gfx.hpp>
 #include <sanguis/client/load/context.hpp>
-#include <sge/gui/style/base_unique_ptr.hpp>
 #include <alda/net/port.hpp>
 #include <sge/console/object.hpp>
 #include <sge/font/added_unique_ptr.hpp>
 #include <sge/font/object_unique_ptr.hpp>
+#include <sge/gui/style/base_unique_ptr.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <sge/timer/absolute_decl.hpp>
 #include <awl/main/exit_code.hpp>

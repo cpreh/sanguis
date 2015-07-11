@@ -17,7 +17,6 @@
 #include <sanguis/client/events/tick.hpp>
 #include <sanguis/client/gui/style/simple.hpp>
 #include <sanguis/client/states/menu.hpp>
-#include <sge/gui/style/base.hpp>
 #include <alda/net/port.hpp>
 #include <sge/audio/player.hpp>
 #include <sge/config/media_path.hpp>
@@ -26,6 +25,7 @@
 #include <sge/font/object.hpp>
 #include <sge/font/parameters.hpp>
 #include <sge/font/system.hpp>
+#include <sge/gui/style/base.hpp>
 #include <sge/renderer/device/core.hpp>
 #include <sge/renderer/display_mode/desired_fps.hpp>
 #include <sge/renderer/display_mode/optional_object.hpp>

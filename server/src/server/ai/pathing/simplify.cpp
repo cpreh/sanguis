@@ -1,12 +1,12 @@
 #include <sanguis/creator/grid_fwd.hpp>
-#include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/optional_pos.hpp>
+#include <sanguis/creator/pos.hpp>
 #include <sanguis/server/ai/pathing/can_walk_diagonally.hpp>
 #include <sanguis/server/ai/pathing/simplify.hpp>
 #include <sanguis/server/ai/pathing/trail.hpp>
+#include <fcppt/make_int_range_count.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/maybe_multi.hpp>
-#include <fcppt/make_int_range_count.hpp>
 #include <fcppt/algorithm/join.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/container/at_optional.hpp>

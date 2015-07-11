@@ -1,13 +1,13 @@
 #ifndef SANGUIS_CLIENT_GUI_MENU_RESOLUTION_CHOOSER_HPP_INCLUDED
 #define SANGUIS_CLIENT_GUI_MENU_RESOLUTION_CHOOSER_HPP_INCLUDED
 
+#include <sge/font/object_fwd.hpp>
 #include <sge/gui/context_fwd.hpp>
 #include <sge/gui/style/base_fwd.hpp>
 #include <sge/gui/widget/base_fwd.hpp>
 #include <sge/gui/widget/box_container.hpp>
 #include <sge/gui/widget/button.hpp>
 #include <sge/gui/widget/choices.hpp>
-#include <sge/font/object_fwd.hpp>
 #include <sge/renderer/system_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/renderer/device/index_fwd.hpp>

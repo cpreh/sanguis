@@ -8,8 +8,8 @@
 #include <sanguis/client/draw2d/scene/object.hpp>
 #include <sanguis/client/load/context_fwd.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
-#include <sge/gui/style/base_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
+#include <sge/gui/style/base_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/make_unique_ptr_fcppt.hpp>

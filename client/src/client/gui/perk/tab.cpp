@@ -9,13 +9,13 @@
 #include <sanguis/client/perk/state_fwd.hpp>
 #include <sanguis/client/perk/to_category.hpp>
 #include <sanguis/client/perk/tree.hpp>
+#include <sge/font/from_fcppt_string.hpp>
+#include <sge/font/object_fwd.hpp>
+#include <sge/font/string.hpp>
 #include <sge/gui/context_fwd.hpp>
 #include <sge/gui/style/base_fwd.hpp>
 #include <sge/gui/widget/reference.hpp>
 #include <sge/gui/widget/reference_tree_vector.hpp>
-#include <sge/font/from_fcppt_string.hpp>
-#include <sge/font/object_fwd.hpp>
-#include <sge/font/string.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/algorithm/map.hpp>

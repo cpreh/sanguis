@@ -7,6 +7,9 @@
 #include <sanguis/client/gui/hud/weapon_attribute_diff_to_string.hpp>
 #include <sanguis/client/gui/hud/weapon_attribute_name.hpp>
 #include <sanguis/client/gui/hud/weapon_attribute_text.hpp>
+#include <sge/font/lit.hpp>
+#include <sge/font/object_fwd.hpp>
+#include <sge/font/string.hpp>
 #include <sge/gui/context_fwd.hpp>
 #include <sge/gui/text_color.hpp>
 #include <sge/gui/style/base_fwd.hpp>
@@ -14,9 +17,6 @@
 #include <sge/gui/widget/reference.hpp>
 #include <sge/gui/widget/reference_alignment_pair.hpp>
 #include <sge/gui/widget/reference_alignment_vector.hpp>
-#include <sge/font/lit.hpp>
-#include <sge/font/object_fwd.hpp>
-#include <sge/font/string.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/alignment.hpp>

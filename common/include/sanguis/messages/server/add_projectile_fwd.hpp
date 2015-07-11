@@ -5,8 +5,8 @@
 #include <sanguis/messages/adapted_types/enum_fwd.hpp>
 #include <sanguis/messages/roles/projectile_type.hpp>
 #include <sanguis/messages/server/parts/add_elements_base_fwd.hpp>
-#include <sanguis/messages/server/parts/speed_fwd.hpp>
 #include <sanguis/messages/server/parts/entity_message_fwd.hpp>
+#include <sanguis/messages/server/parts/speed_fwd.hpp>
 #include <sanguis/messages/server/types/message.hpp>
 #include <alda/message/make_class_fwd.hpp>
 #include <majutsu/role_fwd.hpp>

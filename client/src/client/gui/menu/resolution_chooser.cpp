@@ -1,4 +1,7 @@
 #include <sanguis/client/gui/menu/resolution_chooser.hpp>
+#include <sge/font/from_fcppt_string.hpp>
+#include <sge/font/lit.hpp>
+#include <sge/font/object_fwd.hpp>
 #include <sge/gui/context_fwd.hpp>
 #include <sge/gui/index.hpp>
 #include <sge/gui/optional_index.hpp>
@@ -12,9 +15,6 @@
 #include <sge/gui/widget/reference.hpp>
 #include <sge/gui/widget/reference_alignment_pair.hpp>
 #include <sge/gui/widget/reference_alignment_vector.hpp>
-#include <sge/font/from_fcppt_string.hpp>
-#include <sge/font/lit.hpp>
-#include <sge/font/object_fwd.hpp>
 #include <sge/renderer/system.hpp>
 #include <sge/renderer/device/ffp.hpp>
 #include <sge/renderer/device/index.hpp>

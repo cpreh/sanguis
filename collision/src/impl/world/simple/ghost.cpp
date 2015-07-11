@@ -15,8 +15,8 @@
 #include <sanguis/collision/world/optional_body_exit.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/maybe.hpp>
-#include <fcppt/reference_wrapper_comparison.hpp>
 #include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/reference_wrapper_comparison.hpp>
 #include <fcppt/algorithm/map_iteration.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/container/find_opt.hpp>
