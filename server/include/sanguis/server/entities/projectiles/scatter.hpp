@@ -14,7 +14,7 @@
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/random/distribution/basic_decl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real_decl.hpp>
-#include <fcppt/random/distribution/transform/strong_typedef.hpp>
+#include <fcppt/type_iso/strong_typedef.hpp>
 
 
 namespace sanguis

@@ -3,7 +3,7 @@
 #include <sanguis/server/world/random_seed.hpp>
 #include <fcppt/random/distribution/basic_impl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int_impl.hpp>
-#include <fcppt/random/distribution/transform/strong_typedef.hpp>
+#include <fcppt/type_iso/strong_typedef.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <limits>
 #include <fcppt/config/external_end.hpp>

@@ -15,6 +15,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/enum_array_fold.hpp>
 #include <fcppt/algorithm/map.hpp>
+#include <fcppt/type_iso/strong_typedef.hpp>
 
 
 sanguis::creator::opening_container_array

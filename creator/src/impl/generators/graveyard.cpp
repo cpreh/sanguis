@@ -23,7 +23,7 @@
 #include <fcppt/container/grid/make_pos_ref_range.hpp>
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
-#include <fcppt/random/distribution/transform/enum.hpp>
+#include <fcppt/type_iso/enum.hpp>
 
 
 sanguis::creator::impl::result

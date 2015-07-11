@@ -22,7 +22,7 @@
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real.hpp>
-#include <fcppt/random/distribution/transform/strong_typedef.hpp>
+#include <fcppt/type_iso/strong_typedef.hpp>
 
 
 sanguis::server::world::insert_with_id_pair_container

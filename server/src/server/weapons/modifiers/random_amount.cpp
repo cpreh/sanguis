@@ -4,7 +4,7 @@
 #include <sanguis/server/weapons/modifiers/random_amount.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
-#include <fcppt/random/distribution/transform/strong_typedef.hpp>
+#include <fcppt/type_iso/strong_typedef.hpp>
 
 
 sanguis::server::random::amount const
