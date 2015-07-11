@@ -7,6 +7,7 @@
 #include <sanguis/collision/impl/world/body_groups_for_ghost_group.hpp>
 #include <sanguis/collision/impl/world/ghost_groups_for_body_group.hpp>
 #include <sanguis/collision/impl/world/simple/body.hpp>
+#include <sanguis/collision/impl/world/simple/body_list.hpp>
 #include <sanguis/collision/impl/world/simple/body_list_grid.hpp>
 #include <sanguis/collision/impl/world/simple/body_remove_callback.hpp>
 #include <sanguis/collision/impl/world/simple/body_unique_ptr.hpp>
@@ -88,7 +89,13 @@ sanguis::collision::impl::world::simple::object::object(
 			{
 				return
 					sanguis::collision::impl::world::simple::body_list_grid(
-						_parameters.grid().size()
+						_parameters.grid().size(),
+						[](
+							sanguis::collision::impl::world::simple::body_list_grid::pos
+						){
+							return
+								sanguis::collision::impl::world::simple::body_list();
+						}
 					);
 			}
 		)
