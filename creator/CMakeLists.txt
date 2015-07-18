@@ -96,6 +96,7 @@ set(
 	src/generate.cpp
 	src/generator_count.cpp
 	src/generator_index.cpp
+	src/impl/blit.cpp
 	src/impl/closest_empty.cpp
 	src/impl/find_opposing_cell.cpp
 	src/impl/find_reachable.cpp
@@ -121,6 +122,7 @@ set(
 	src/impl/result.cpp
 	src/impl/rooms_name.cpp
 	src/impl/set_opening_tiles.cpp
+	src/include/sanguis/creator/impl/blit.hpp
 	src/include/sanguis/creator/impl/closest_empty.hpp
 	src/include/sanguis/creator/impl/enemy_type_container.hpp
 	src/include/sanguis/creator/impl/filled_rect.hpp
