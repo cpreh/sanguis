@@ -38,10 +38,8 @@
 #include <sanguis/collision/world/update_result.hpp>
 #include <sanguis/creator/difference_type.hpp>
 #include <sanguis/creator/grid.hpp>
-#include <sanguis/creator/min.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/signed_pos.hpp>
-#include <sanguis/creator/sup.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_ref.hpp>
@@ -59,7 +57,8 @@
 #include <fcppt/cast/to_signed_fun.hpp>
 #include <fcppt/container/enum_array_impl.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
-#include <fcppt/container/grid/clamp_signed_pos.hpp>
+#include <fcppt/container/grid/clamped_min.hpp>
+#include <fcppt/container/grid/clamped_sup_signed.hpp>
 #include <fcppt/container/grid/make_pos_ref_range_start_end.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -662,28 +661,23 @@ sanguis::collision::impl::world::simple::object::update_ghosts()
 					:
 					fcppt::container::grid::make_pos_ref_range_start_end(
 						grid,
-						sanguis::creator::min{
-							fcppt::container::grid::clamp_signed_pos(
-								signed_pos
-								-
-								rounded_radius,
-								grid.size()
-							)
-						},
-						sanguis::creator::sup{
-							fcppt::container::grid::clamp_signed_pos(
-								signed_pos
-								+
-								rounded_radius
-								+
-								fcppt::literal<
-									sanguis::creator::difference_type
-								>(
-									1
-								),
-								grid.size()
-							)
-						}
+						fcppt::container::grid::clamped_min(
+							signed_pos
+							-
+							rounded_radius
+						),
+						fcppt::container::grid::clamped_sup_signed(
+							signed_pos
+							+
+							rounded_radius
+							+
+							fcppt::literal<
+								sanguis::creator::difference_type
+							>(
+								1
+							),
+							grid.size()
+						)
 					)
 				)
 					for(

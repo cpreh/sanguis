@@ -1,7 +1,9 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/creator/grid.hpp>
+#include <sanguis/creator/min.hpp>
 #include <sanguis/creator/pos.hpp>
+#include <sanguis/creator/sup.hpp>
 #include <sanguis/server/ai/context.hpp>
 #include <sanguis/server/ai/go_to_grid_pos.hpp>
 #include <sanguis/server/ai/make_path.hpp>
@@ -10,6 +12,9 @@
 #include <sanguis/server/ai/behavior/base.hpp>
 #include <sanguis/server/ai/behavior/wander.hpp>
 #include <sanguis/server/random/grid_pos.hpp>
+#include <fcppt/const.hpp>
+#include <fcppt/maybe.hpp>
+#include <fcppt/math/dim/to_vector.hpp>
 
 
 sanguis::server::ai::behavior::wander::wander(
@@ -38,13 +43,33 @@ bool
 sanguis::server::ai::behavior::wander::start()
 {
 	return
-		sanguis::server::ai::make_path(
-			this->context(),
+		fcppt::maybe(
 			sanguis::server::random::grid_pos(
 				random_generator_,
-				sanguis::creator::pos::null(),
-				this->context().grid().size()
+				sanguis::creator::min{
+					sanguis::creator::pos::null()
+				},
+				sanguis::creator::sup{
+					fcppt::math::dim::to_vector(
+						this->context().grid().size()
+					)
+				}
+			),
+			fcppt::const_(
+				false
+			),
+			[
+				this
+			](
+				sanguis::creator::pos const _pos
 			)
+			{
+				return
+					sanguis::server::ai::make_path(
+						this->context(),
+						_pos
+					);
+			}
 		);
 }
 

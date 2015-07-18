@@ -9,7 +9,7 @@
 #include <sanguis/tiles/impl/draw_connecting.hpp>
 #include <sanguis/tiles/impl/draw_non_connecting.hpp>
 #include <fcppt/algorithm/join.hpp>
-#include <fcppt/container/grid/clamp_pos.hpp>
+#include <fcppt/container/grid/clamped_sup.hpp>
 #include <fcppt/math/dim/comparison.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/vector/dim.hpp>
@@ -47,26 +47,18 @@ sanguis::tiles::draw(
 			sanguis::tiles::cell_container();
 
 	sanguis::creator::min const lower_bound(
-		fcppt::container::grid::clamp_pos(
-			_min.get(),
-			_foreground.size()
-		)
+		_min
 	);
 
 	sanguis::creator::min const connecting_lower_bound(
-		fcppt::container::grid::clamp_pos(
-			_min.get()
-			+
-			min_size
-			,
-			_foreground.size()
-		)
+		_min.get()
+		+
+		min_size
 	);
 
 	sanguis::creator::sup const upper_bound(
-		fcppt::container::grid::clamp_pos(
-			_sup.get()
-			,
+		fcppt::container::grid::clamped_sup(
+			_sup.get(),
 			_foreground.size()
 		)
 	);

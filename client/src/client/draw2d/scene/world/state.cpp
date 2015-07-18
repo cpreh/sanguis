@@ -50,7 +50,8 @@
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
-#include <fcppt/container/grid/clamp_signed_pos.hpp>
+#include <fcppt/container/grid/clamped_min.hpp>
+#include <fcppt/container/grid/clamped_sup_signed.hpp>
 #include <fcppt/container/grid/make_pos_ref_crange_start_end.hpp>
 #include <fcppt/container/grid/min_from_pos.hpp>
 #include <fcppt/container/grid/sup_from_pos.hpp>
@@ -131,7 +132,7 @@ sanguis::client::draw2d::scene::world::state::draw(
 	fcppt::container::grid::min_from_pos<
 		sanguis::client::draw2d::scene::world::batch_grid::pos
 	> const lower(
-		fcppt::container::grid::clamp_signed_pos(
+		fcppt::container::grid::clamped_min(
 			(
 				int_translation
 				-
@@ -144,15 +145,14 @@ sanguis::client::draw2d::scene::world::state::draw(
 				)
 			)
 			/
-			batch_size_trans,
-			batches_.size()
+			batch_size_trans
 		)
 	);
 
 	fcppt::container::grid::sup_from_pos<
 		sanguis::client::draw2d::scene::world::batch_grid::pos
 	> const upper(
-		fcppt::container::grid::clamp_signed_pos(
+		fcppt::container::grid::clamped_sup_signed(
 			fcppt::math::vector::ceil_div_signed(
 				int_translation
 				+

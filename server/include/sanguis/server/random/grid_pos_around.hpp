@@ -3,7 +3,8 @@
 
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/creator/dim_fwd.hpp>
-#include <sanguis/creator/pos.hpp>
+#include <sanguis/creator/optional_pos.hpp>
+#include <sanguis/creator/pos_fwd.hpp>
 #include <sanguis/server/random/grid_distance.hpp>
 
 
@@ -14,7 +15,7 @@ namespace server
 namespace random
 {
 
-sanguis::creator::pos const
+sanguis::creator::optional_pos const
 grid_pos_around(
 	sanguis::random_generator &,
 	sanguis::creator::dim,

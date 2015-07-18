@@ -1,6 +1,7 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/creator/grid.hpp>
+#include <sanguis/creator/pos.hpp>
 #include <sanguis/server/ai/context.hpp>
 #include <sanguis/server/ai/go_to_grid_pos.hpp>
 #include <sanguis/server/ai/make_path.hpp>
@@ -13,7 +14,9 @@
 #include <sanguis/server/random/grid_pos_around.hpp>
 #include <sanguis/server/world/center_to_grid_pos.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/const.hpp>
 #include <fcppt/make_literal_strong_typedef.hpp>
+#include <fcppt/maybe.hpp>
 
 
 sanguis::server::ai::behavior::patrol::patrol(
@@ -43,8 +46,7 @@ bool
 sanguis::server::ai::behavior::patrol::start()
 {
 	return
-		sanguis::server::ai::make_path(
-			this->context(),
+		fcppt::maybe(
 			sanguis::server::random::grid_pos_around(
 				random_generator_,
 				this->context().grid().size(),
@@ -52,7 +54,22 @@ sanguis::server::ai::behavior::patrol::start()
 				sanguis::server::random::grid_distance{
 					5u
 				}
+			),
+			fcppt::const_(
+				false
+			),
+			[
+				this
+			](
+				sanguis::creator::pos const _pos
 			)
+			{
+				return
+					sanguis::server::ai::make_path(
+						this->context(),
+						_pos
+					);
+			}
 		);
 }
 
