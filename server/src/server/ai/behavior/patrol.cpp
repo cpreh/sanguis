@@ -13,8 +13,8 @@
 #include <sanguis/server/random/grid_distance.hpp>
 #include <sanguis/server/random/grid_pos_around.hpp>
 #include <sanguis/server/world/center_to_grid_pos.hpp>
-#include <fcppt/literal.hpp>
 #include <fcppt/const.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/maybe.hpp>
 
