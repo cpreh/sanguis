@@ -1,6 +1,6 @@
+#include <sanguis/creator/instantiate_tile.hpp>
 #include <sanguis/tiles/pair.hpp>
 #include <sanguis/tiles/pair_std_hash.hpp>
-#include <sanguis/tiles/impl/instantiate_tile.hpp>
 #include <fcppt/cast/enum_to_underlying.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/functional/hash/hash.hpp>
@@ -68,6 +68,6 @@ std::hash<\
 	>\
 >
 
-SANGUIS_TILES_IMPL_INSTANTIATE_TILE(
+SANGUIS_CREATOR_INSTANTIATE_TILE(
 	SANGUIS_TILES_INSTANTIATE_TILE_STD_HASH
 );

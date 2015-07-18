@@ -2,9 +2,9 @@
 #define SANGUIS_TILES_COLLECTION_HPP_INCLUDED
 
 #include <sanguis/creator/background_tile.hpp>
+#include <sanguis/creator/enable_if_tile.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/tiles/collection_fwd.hpp>
-#include <sanguis/tiles/enable_if_tile.hpp>
 #include <sanguis/tiles/pair.hpp>
 #include <sanguis/tiles/pair_comparison.hpp>
 #include <sanguis/tiles/pair_std_hash.hpp>
@@ -42,7 +42,7 @@ public:
 	template<
 		typename Tile
 	>
-	sanguis::tiles::enable_if_tile<
+	sanguis::creator::enable_if_tile<
 		Tile,
 		sanguis::tiles::set<
 			Tile

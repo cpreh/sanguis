@@ -1,7 +1,7 @@
 #ifndef SANGUIS_TILES_PAIR_HPP_INCLUDED
 #define SANGUIS_TILES_PAIR_HPP_INCLUDED
 
-#include <sanguis/tiles/is_tile.hpp>
+#include <sanguis/creator/is_tile.hpp>
 #include <sanguis/tiles/pair_fwd.hpp>
 #include <sanguis/tiles/symbol.hpp>
 #include <fcppt/homogenous_pair_impl.hpp>
@@ -19,7 +19,7 @@ class pair
 {
 public:
 	static_assert(
-		sanguis::tiles::is_tile<
+		sanguis::creator::is_tile<
 			Tile
 		>::value,
 		"Tile must be a tile type"

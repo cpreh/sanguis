@@ -1,8 +1,8 @@
-#include <sanguis/tiles/enable_if_tile.hpp>
+#include <sanguis/creator/enable_if_tile.hpp>
+#include <sanguis/creator/instantiate_tile.hpp>
 #include <sanguis/tiles/collection.hpp>
 #include <sanguis/tiles/pair.hpp>
 #include <sanguis/tiles/set.hpp>
-#include <sanguis/tiles/impl/instantiate_tile.hpp>
 #include <sge/image2d/system_fwd.hpp>
 #include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -28,7 +28,7 @@ sanguis::tiles::collection::~collection()
 template<
 	typename Tile
 >
-sanguis::tiles::enable_if_tile<
+sanguis::creator::enable_if_tile<
 	Tile,
 	sanguis::tiles::set<
 		Tile
@@ -73,7 +73,7 @@ sanguis::tiles::collection::set(
 	tile_type\
 )\
 template \
-sanguis::tiles::enable_if_tile<\
+sanguis::creator::enable_if_tile<\
 	tile_type,\
 	sanguis::tiles::set<\
 		tile_type\
@@ -85,6 +85,6 @@ sanguis::tiles::collection::set(\
 	>\
 )
 
-SANGUIS_TILES_IMPL_INSTANTIATE_TILE(
+SANGUIS_CREATOR_INSTANTIATE_TILE(
 	SANGUIS_TILES_INSTANTIATE_COLLECTION_SET
 );

@@ -1,13 +1,13 @@
-#include <sanguis/tiles/enable_if_tile.hpp>
+#include <sanguis/creator/enable_if_tile.hpp>
+#include <sanguis/creator/instantiate_tile.hpp>
 #include <sanguis/tiles/pair_comparison.hpp>
 #include <sanguis/tiles/pair.hpp>
-#include <sanguis/tiles/impl/instantiate_tile.hpp>
 
 
 template<
 	typename Tile
 >
-sanguis::tiles::enable_if_tile<
+sanguis::creator::enable_if_tile<
 	Tile,
 	bool
 >
@@ -35,7 +35,7 @@ sanguis::tiles::operator==(
 	tile_type\
 )\
 template \
-sanguis::tiles::enable_if_tile<\
+sanguis::creator::enable_if_tile<\
 	tile_type,\
 	bool\
 >\
@@ -48,6 +48,6 @@ sanguis::tiles::operator==(\
 	>\
 )
 
-SANGUIS_TILES_IMPL_INSTANTIATE_TILE(
+SANGUIS_CREATOR_INSTANTIATE_TILE(
 	SANGUIS_TILES_INSTANTIATE_TILE_EQUAL
 );

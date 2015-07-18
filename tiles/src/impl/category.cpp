@@ -1,8 +1,8 @@
 #include <sanguis/creator/background_tile.hpp>
+#include <sanguis/creator/enable_if_tile.hpp>
+#include <sanguis/creator/instantiate_tile.hpp>
 #include <sanguis/creator/tile.hpp>
-#include <sanguis/tiles/enable_if_tile.hpp>
 #include <sanguis/tiles/impl/category.hpp>
-#include <sanguis/tiles/impl/instantiate_tile.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 
@@ -48,7 +48,7 @@ struct category_any<
 template<
 	typename Tile
 >
-sanguis::tiles::enable_if_tile<
+sanguis::creator::enable_if_tile<
 	Tile,
 	fcppt::string
 >
@@ -64,7 +64,7 @@ sanguis::tiles::impl::category()
 	tile_type\
 )\
 template \
-sanguis::tiles::enable_if_tile< \
+sanguis::creator::enable_if_tile< \
 	tile_type, \
 	fcppt::string \
 > \
@@ -72,6 +72,6 @@ sanguis::tiles::impl::category<\
 	tile_type \
 >()
 
-SANGUIS_TILES_IMPL_INSTANTIATE_TILE(
+SANGUIS_CREATOR_INSTANTIATE_TILE(
 	SANGUIS_TILES_INSTANTIATE_CATEGORY
 );

@@ -1,5 +1,5 @@
-#include <sanguis/tiles/enable_if_tile.hpp>
-#include <sanguis/tiles/impl/instantiate_tile.hpp>
+#include <sanguis/creator/enable_if_tile.hpp>
+#include <sanguis/creator/instantiate_tile.hpp>
 #include <sanguis/tiles/impl/make_pair.hpp>
 #include <sanguis/tiles/impl/neighbors.hpp>
 #include <sanguis/tiles/impl/optional_pair.hpp>
@@ -13,7 +13,7 @@
 template<
 	typename Tile
 >
-sanguis::tiles::enable_if_tile<
+sanguis::creator::enable_if_tile<
 	Tile,
 	sanguis::tiles::impl::optional_pair<
 		Tile
@@ -76,7 +76,7 @@ sanguis::tiles::impl::make_pair(
 	tile_type\
 )\
 template \
-sanguis::tiles::enable_if_tile<\
+sanguis::creator::enable_if_tile<\
 	tile_type,\
 	sanguis::tiles::impl::optional_pair<\
 		tile_type\
@@ -88,6 +88,6 @@ sanguis::tiles::impl::make_pair(\
 	>\
 )
 
-SANGUIS_TILES_IMPL_INSTANTIATE_TILE(
+SANGUIS_CREATOR_INSTANTIATE_TILE(
 	SANGUIS_TILES_INSTANTIATE_MAKE_PAIR
 );

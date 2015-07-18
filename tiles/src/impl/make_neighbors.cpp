@@ -1,7 +1,7 @@
+#include <sanguis/creator/enable_if_tile.hpp>
+#include <sanguis/creator/instantiate_tile.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile_grid.hpp>
-#include <sanguis/tiles/enable_if_tile.hpp>
-#include <sanguis/tiles/impl/instantiate_tile.hpp>
 #include <sanguis/tiles/impl/make_neighbors.hpp>
 #include <sanguis/tiles/impl/neighbors.hpp>
 #include <sanguis/tiles/impl/replace_non_connecting.hpp>
@@ -12,7 +12,7 @@
 template<
 	typename Tile
 >
-sanguis::tiles::enable_if_tile<
+sanguis::creator::enable_if_tile<
 	Tile,
 	sanguis::tiles::impl::neighbors<
 		Tile
@@ -87,7 +87,7 @@ sanguis::tiles::impl::make_neighbors(
 	tile_type\
 )\
 template \
-sanguis::tiles::enable_if_tile<\
+sanguis::creator::enable_if_tile<\
 	tile_type,\
 	sanguis::tiles::impl::neighbors<\
 		tile_type \
@@ -100,6 +100,6 @@ sanguis::tiles::impl::make_neighbors(\
 	sanguis::creator::pos \
 )
 
-SANGUIS_TILES_IMPL_INSTANTIATE_TILE(
+SANGUIS_CREATOR_INSTANTIATE_TILE(
 	SANGUIS_TILES_INSTANTIATE_MAKE_NEIGHBORS
 );

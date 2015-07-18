@@ -1,9 +1,9 @@
 #include <sanguis/media_path.hpp>
+#include <sanguis/creator/instantiate_tile.hpp>
 #include <sanguis/tiles/orientation_map.hpp>
 #include <sanguis/tiles/pair.hpp>
 #include <sanguis/tiles/set.hpp>
 #include <sanguis/tiles/impl/category.hpp>
-#include <sanguis/tiles/impl/instantiate_tile.hpp>
 #include <sanguis/tiles/impl/load_file.hpp>
 #include <sanguis/tiles/impl/make_orientation_map.hpp>
 #include <sanguis/tiles/impl/to_string.hpp>
@@ -169,6 +169,6 @@ sanguis::tiles::set<\
 	tile_type \
 >
 
-SANGUIS_TILES_IMPL_INSTANTIATE_TILE(
+SANGUIS_CREATOR_INSTANTIATE_TILE(
 	SANGUIS_TILES_INSTANTIATE_SET
 );

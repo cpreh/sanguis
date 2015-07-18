@@ -1,7 +1,7 @@
-#ifndef SANGUIS_TILES_ENABLE_IF_TILE_HPP_INCLUDED
-#define SANGUIS_TILES_ENABLE_IF_TILE_HPP_INCLUDED
+#ifndef SANGUIS_CREATOR_ENABLE_IF_TILE_HPP_INCLUDED
+#define SANGUIS_CREATOR_ENABLE_IF_TILE_HPP_INCLUDED
 
-#include <sanguis/tiles/is_tile.hpp>
+#include <sanguis/creator/is_tile.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/utility/enable_if.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -9,7 +9,7 @@
 
 namespace sanguis
 {
-namespace tiles
+namespace creator
 {
 
 template<
@@ -21,7 +21,7 @@ enable_if_tile
 =
 typename
 boost::enable_if<
-	sanguis::tiles::is_tile<
+	sanguis::creator::is_tile<
 		Tile
 	>,
 	Result

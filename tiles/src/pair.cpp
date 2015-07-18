@@ -1,5 +1,5 @@
+#include <sanguis/creator/instantiate_tile.hpp>
 #include <sanguis/tiles/pair.hpp>
-#include <sanguis/tiles/impl/instantiate_tile.hpp>
 
 
 template<
@@ -63,6 +63,6 @@ sanguis::tiles::pair<\
 	tile_type \
 >
 
-SANGUIS_TILES_IMPL_INSTANTIATE_TILE(
+SANGUIS_CREATOR_INSTANTIATE_TILE(
 	SANGUIS_TILES_INSTANTIATE_TILE
 );

@@ -1,7 +1,7 @@
+#include <sanguis/creator/enable_if_tile.hpp>
+#include <sanguis/creator/instantiate_tile.hpp>
 #include <sanguis/tiles/direction.hpp>
-#include <sanguis/tiles/enable_if_tile.hpp>
 #include <sanguis/tiles/pair.hpp>
-#include <sanguis/tiles/impl/instantiate_tile.hpp>
 #include <sanguis/tiles/impl/make_orientation.hpp>
 #include <sanguis/tiles/impl/neighbors.hpp>
 #include <fcppt/make_enum_range.hpp>
@@ -11,7 +11,7 @@
 template<
 	typename Tile
 >
-sanguis::tiles::enable_if_tile<
+sanguis::creator::enable_if_tile<
 	Tile,
 	sanguis::tiles::orientation
 > const
@@ -69,7 +69,7 @@ sanguis::tiles::impl::make_orientation(
 	tile_type\
 )\
 template \
-sanguis::tiles::enable_if_tile< \
+sanguis::creator::enable_if_tile< \
 	tile_type, \
 	sanguis::tiles::orientation \
 > const \
@@ -82,6 +82,6 @@ sanguis::tiles::impl::make_orientation(\
 	> const & \
 )
 
-SANGUIS_TILES_IMPL_INSTANTIATE_TILE(
+SANGUIS_CREATOR_INSTANTIATE_TILE(
 	SANGUIS_TILES_INSTANTIATE_MAKE_ORIENTATION
 );

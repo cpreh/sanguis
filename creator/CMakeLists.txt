@@ -16,6 +16,7 @@ set(
 	include/sanguis/creator/difference_type.hpp
 	include/sanguis/creator/dim.hpp
 	include/sanguis/creator/dim_fwd.hpp
+	include/sanguis/creator/enable_if_tile.hpp
 	include/sanguis/creator/enemy_kind.hpp
 	include/sanguis/creator/enemy_kind_fwd.hpp
 	include/sanguis/creator/enemy_type.hpp
@@ -31,6 +32,8 @@ set(
 	include/sanguis/creator/grid_fwd.hpp
 	include/sanguis/creator/grid_spiral_range.hpp
 	include/sanguis/creator/grid_spiral_range_fwd.hpp
+	include/sanguis/creator/instantiate_tile.hpp
+	include/sanguis/creator/is_tile.hpp
 	include/sanguis/creator/log_location.hpp
 	include/sanguis/creator/min.hpp
 	include/sanguis/creator/min_fwd.hpp

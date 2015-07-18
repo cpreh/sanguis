@@ -1,7 +1,7 @@
 #ifndef SANGUIS_TILES_PAIR_STD_HASH_HPP_INCLUDED
 #define SANGUIS_TILES_PAIR_STD_HASH_HPP_INCLUDED
 
-#include <sanguis/tiles/is_tile.hpp>
+#include <sanguis/creator/is_tile.hpp>
 #include <sanguis/tiles/pair_fwd.hpp>
 #if defined(FCPPT_CONFIG_CLANG_COMPILER)
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
@@ -32,7 +32,7 @@ struct hash<
 >
 {
 	static_assert(
-		sanguis::tiles::is_tile<
+		sanguis::creator::is_tile<
 			Tile
 		>::value,
 		"Tile must be a tile type"

@@ -13,13 +13,11 @@ set(
 	include/sanguis/tiles/direction.hpp
 	include/sanguis/tiles/direction_fwd.hpp
 	include/sanguis/tiles/draw.hpp
-	include/sanguis/tiles/enable_if_tile.hpp
 	include/sanguis/tiles/error.hpp
 	include/sanguis/tiles/error_fwd.hpp
 	include/sanguis/tiles/error_image.hpp
 	include/sanguis/tiles/is_background.hpp
 	include/sanguis/tiles/is_background_fwd.hpp
-	include/sanguis/tiles/is_tile.hpp
 	include/sanguis/tiles/log_location.hpp
 	include/sanguis/tiles/orientation.hpp
 	include/sanguis/tiles/orientation_fwd.hpp
@@ -71,7 +69,6 @@ set(
 	src/include/sanguis/tiles/impl/filter_connecting.hpp
 	src/include/sanguis/tiles/impl/filter_non_connecting.hpp
 	src/include/sanguis/tiles/impl/images_base.hpp
-	src/include/sanguis/tiles/impl/instantiate_tile.hpp
 	src/include/sanguis/tiles/impl/is_background.hpp
 	src/include/sanguis/tiles/impl/load_file.hpp
 	src/include/sanguis/tiles/impl/log.hpp

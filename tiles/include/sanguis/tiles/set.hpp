@@ -1,8 +1,8 @@
 #ifndef SANGUIS_TILES_SET_HPP_INCLUDED
 #define SANGUIS_TILES_SET_HPP_INCLUDED
 
+#include <sanguis/creator/is_tile.hpp>
 #include <sanguis/tiles/orientation_map.hpp>
-#include <sanguis/tiles/is_tile.hpp>
 #include <sanguis/tiles/pair_fwd.hpp>
 #include <sanguis/tiles/set_fwd.hpp>
 #include <sanguis/tiles/symbol.hpp>
@@ -28,7 +28,7 @@ class set
 	);
 
 	static_assert(
-		sanguis::tiles::is_tile<
+		sanguis::creator::is_tile<
 			Tile
 		>::value,
 		"Tile must be a tile type"

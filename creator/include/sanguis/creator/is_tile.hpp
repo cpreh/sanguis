@@ -1,5 +1,5 @@
-#ifndef SANGUIS_TILES_IS_TILE_HPP_INCLUDED
-#define SANGUIS_TILES_IS_TILE_HPP_INCLUDED
+#ifndef SANGUIS_CREATOR_IS_TILE_HPP_INCLUDED
+#define SANGUIS_CREATOR_IS_TILE_HPP_INCLUDED
 
 #include <sanguis/creator/background_tile_fwd.hpp>
 #include <sanguis/creator/tile_fwd.hpp>
@@ -13,7 +13,7 @@
 
 namespace sanguis
 {
-namespace tiles
+namespace creator
 {
 
 FCPPT_PP_PUSH_WARNING
