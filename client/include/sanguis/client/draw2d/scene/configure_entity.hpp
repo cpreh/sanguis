@@ -15,7 +15,9 @@
 #include <sanguis/messages/server/rotate.hpp>
 #include <sanguis/messages/server/speed.hpp>
 #include <sanguis/messages/server/weapon_status.hpp>
+#include <majutsu/get.hpp>
 #include <fcppt/nonassignable.hpp>
+#include <fcppt/tag.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/mpl/has_key.hpp>
@@ -98,7 +100,11 @@ public:
 		>,
 		result_type
 	>::type
-	operator()() const
+	operator()(
+		fcppt::tag<
+			Role
+		>
+	) const
 	{
 		dispatcher_(
 			typename boost::mpl::at<
@@ -108,9 +114,11 @@ public:
 				sanguis::messages::roles::entity_id{} =
 					id_,
 				Role{} =
-					message_. template get<
+					majutsu::get<
 						Role
-					>()
+					>(
+						message_
+					)
 			)
 		);
 	}
@@ -125,7 +133,11 @@ public:
 		>,
 		result_type
 	>::type
-	operator()() const
+	operator()(
+		fcppt::tag<
+			Role
+		>
+	) const
 	{
 	}
 private:
