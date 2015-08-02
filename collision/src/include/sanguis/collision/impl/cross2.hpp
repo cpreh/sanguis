@@ -2,7 +2,7 @@
 #define SANGUIS_COLLISION_IMPL_CROSS2_HPP_INCLUDED
 
 #include <sanguis/collision/unit.hpp>
-#include <sanguis/collision/vector2.hpp>
+#include <fcppt/math/vector/static.hpp>
 
 
 namespace sanguis
@@ -15,8 +15,14 @@ namespace impl
 inline
 sanguis::collision::unit
 cross2(
-	sanguis::collision::vector2 const _a,
-	sanguis::collision::vector2 const _b
+	fcppt::math::vector::static_<
+		sanguis::collision::unit,
+		2
+	> const _a,
+	fcppt::math::vector::static_<
+		sanguis::collision::unit,
+		2
+	> const _b
 )
 {
 	return

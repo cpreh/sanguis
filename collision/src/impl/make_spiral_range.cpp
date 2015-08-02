@@ -5,6 +5,7 @@
 #include <sanguis/creator/grid_spiral_range.hpp>
 #include <sanguis/creator/signed_pos.hpp>
 #include <sanguis/creator/tile_size.hpp>
+#include <fcppt/boost_units_value.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/float_to_int_fun.hpp>
@@ -12,6 +13,7 @@
 #include <fcppt/math/ceil_div_signed.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/map.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 
 
@@ -33,7 +35,10 @@ sanguis::collision::impl::make_spiral_range(
 				sanguis::creator::signed_pos,
 				fcppt::cast::float_to_int_fun
 			>(
-				_center.get()
+				fcppt::math::vector::map(
+					_center.get(),
+					fcppt::boost_units_value{}
+				)
 			)
 			/
 			tile_size,
@@ -47,7 +52,7 @@ sanguis::collision::impl::make_spiral_range(
 				fcppt::cast::float_to_int<
 					sanguis::creator::difference_type
 				>(
-					_radius.get()
+					_radius.get().value()
 				),
 				tile_size
 			)

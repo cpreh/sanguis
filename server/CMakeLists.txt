@@ -121,10 +121,16 @@ set(
 	include/sanguis/server/collision/distance_entity_entity.hpp
 	include/sanguis/server/collision/distance_entity_pos.hpp
 	include/sanguis/server/collision/distance_pos_pos.hpp
+	include/sanguis/server/collision/from_center.hpp
+	include/sanguis/server/collision/from_radius.hpp
+	include/sanguis/server/collision/from_speed.hpp
 	include/sanguis/server/collision/ghost.hpp
 	include/sanguis/server/collision/ghost_base.hpp
 	include/sanguis/server/collision/ghost_container.hpp
 	include/sanguis/server/collision/ghost_fwd.hpp
+	include/sanguis/server/collision/to_center.hpp
+	include/sanguis/server/collision/to_radius.hpp
+	include/sanguis/server/collision/to_speed.hpp
 	include/sanguis/server/collision/with_world.hpp
 	include/sanguis/server/console.hpp
 	include/sanguis/server/console_command_pair.hpp
@@ -795,8 +801,14 @@ set(
 	src/server/collision/distance_entity_entity.cpp
 	src/server/collision/distance_entity_pos.cpp
 	src/server/collision/distance_pos_pos.cpp
+	src/server/collision/from_center.cpp
+	src/server/collision/from_radius.cpp
+	src/server/collision/from_speed.cpp
 	src/server/collision/ghost.cpp
 	src/server/collision/ghost_base.cpp
+	src/server/collision/to_center.cpp
+	src/server/collision/to_radius.cpp
+	src/server/collision/to_speed.cpp
 	src/server/collision/with_world.cpp
 	src/server/console.cpp
 	src/server/create.cpp

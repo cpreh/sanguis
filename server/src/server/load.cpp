@@ -6,6 +6,7 @@
 #include <sanguis/model/cell_size_from_file.hpp>
 #include <sanguis/server/load.hpp>
 #include <sanguis/server/radius.hpp>
+#include <sanguis/server/collision/from_radius.hpp>
 #include <fcppt/container/get_or_insert.hpp>
 
 
@@ -33,7 +34,7 @@ sanguis::server::load::model_dim(
 			)
 			{
 				return
-					sanguis::server::radius{
+					sanguis::server::collision::from_radius(
 						sanguis::load::model::radius(
 							sanguis::model::cell_size_from_file(
 								sanguis::load::model::path_to_json_file(
@@ -42,8 +43,8 @@ sanguis::server::load::model_dim(
 									)
 								)
 							)
-						).get()
-					};
+						)
+					);
 			}
 		);
 }

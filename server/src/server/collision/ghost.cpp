@@ -1,5 +1,3 @@
-#include <sanguis/collision/center.hpp>
-#include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/world/body_enter_container.hpp>
 #include <sanguis/collision/world/body_exit_container.hpp>
 #include <sanguis/collision/world/ghost.hpp>
@@ -10,6 +8,8 @@
 #include <sanguis/collision/world/object.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/collision/ghost.hpp>
+#include <sanguis/server/collision/to_center.hpp>
+#include <sanguis/server/collision/to_radius.hpp>
 #include <fcppt/optional_assign.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/reference_wrapper_impl.hpp>
@@ -64,11 +64,11 @@ sanguis::server::collision::ghost::transfer(
 			impl_,
 			_world.create_ghost(
 				sanguis::collision::world::ghost_parameters(
-					sanguis::collision::center(
-						_center.get()
+					sanguis::server::collision::to_center(
+						_center
 					),
-					sanguis::collision::radius(
-						radius_.get()
+					sanguis::server::collision::to_radius(
+						radius_
 					),
 					collision_group_,
 					ghost_base_.get()
@@ -111,8 +111,8 @@ sanguis::server::collision::ghost::center(
 	FCPPT_ASSERT_OPTIONAL_ERROR(
 		impl_
 	)->center(
-		sanguis::collision::center(
-			_center.get()
+		sanguis::server::collision::to_center(
+			_center
 		)
 	);
 }

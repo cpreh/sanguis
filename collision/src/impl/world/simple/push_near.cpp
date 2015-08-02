@@ -1,15 +1,20 @@
+#include <sanguis/collision/length2.hpp>
 #include <sanguis/collision/optional_result.hpp>
 #include <sanguis/collision/result.hpp>
-#include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/unit.hpp>
-#include <sanguis/collision/vector2.hpp>
+#include <sanguis/collision/impl/is_null.hpp>
 #include <sanguis/collision/impl/world/simple/body.hpp>
 #include <sanguis/collision/impl/world/simple/collides.hpp>
 #include <sanguis/collision/impl/world/simple/push_near.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/boost_units_value.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/length.hpp>
+#include <fcppt/math/vector/map.hpp>
 #include <fcppt/math/vector/normalize.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/units/systems/si/velocity.hpp>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::collision::optional_result const
@@ -31,42 +36,44 @@ sanguis::collision::impl::world::simple::push_near(
 		return
 			sanguis::collision::optional_result();
 
-	sanguis::collision::vector2 const diff(
+	sanguis::collision::length2 const diff(
 		_body1.center().get()
 		-
 		_body2.center().get()
 	);
 
-	if(
-		fcppt::math::vector::length(
-			diff
-		)
-		<=
-		fcppt::literal<
-			sanguis::collision::unit
-		>(
-			0.01f
-		)
-	)
-		return
-			sanguis::collision::optional_result();
-
 	return
-		sanguis::collision::optional_result(
-			sanguis::collision::result(
-				sanguis::collision::speed{
+		sanguis::collision::impl::is_null(
+			fcppt::math::vector::length(
+				fcppt::math::vector::map(
+					diff,
+					fcppt::boost_units_value{}
+				)
+			)
+		)
+		?
+			sanguis::collision::optional_result()
+		:
+			sanguis::collision::optional_result(
+				sanguis::collision::result(
 					fcppt::math::vector::normalize(
-						diff
+						fcppt::math::vector::map(
+							diff,
+							fcppt::boost_units_value{}
+						)
 					)
 					*
-					fcppt::literal<
-						sanguis::collision::unit
-					>(
-						// TODO
-						10
+					(
+						fcppt::literal<
+							sanguis::collision::unit
+						>(
+							// TODO
+							10
+						)
+						*
+						boost::units::si::meter_per_second
 					)
-				}
+				)
 			)
-		);
-
+		;
 }

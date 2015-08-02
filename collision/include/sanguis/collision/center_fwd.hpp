@@ -1,7 +1,7 @@
 #ifndef SANGUIS_COLLISION_CENTER_FWD_HPP_INCLUDED
 #define SANGUIS_COLLISION_CENTER_FWD_HPP_INCLUDED
 
-#include <sanguis/collision/vector2_fwd.hpp>
+#include <sanguis/collision/length2_fwd.hpp>
 #include <fcppt/make_strong_typedef.hpp>
 
 
@@ -11,7 +11,7 @@ namespace collision
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
-	sanguis::collision::vector2,
+	sanguis::collision::length2,
 	center
 );
 

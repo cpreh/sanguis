@@ -5,6 +5,7 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/units/systems/si/length.hpp>
 #include <cmath>
 #include <fcppt/config/external_end.hpp>
 
@@ -55,5 +56,7 @@ sanguis::load::model::radius(
 			>(
 				0.4f
 			)
+			*
+			boost::units::si::meter
 		);
 }

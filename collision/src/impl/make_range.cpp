@@ -8,6 +8,7 @@
 #include <sanguis/creator/signed_pos.hpp>
 #include <sanguis/creator/sup.hpp>
 #include <sanguis/creator/tile_size.hpp>
+#include <fcppt/boost_units_value.hpp>
 #include <fcppt/cast/float_to_int_fun.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/container/grid/clamped_min.hpp>
@@ -18,6 +19,7 @@
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/ceil_div_signed.hpp>
 #include <fcppt/math/vector/dim.hpp>
+#include <fcppt/math/vector/map.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 
 
@@ -40,9 +42,13 @@ sanguis::collision::impl::make_range(
 				sanguis::creator::signed_pos,
 				fcppt::cast::float_to_int_fun
 			>(
-				_center.get()
-				-
-				_radius.get()
+				fcppt::math::vector::map(
+					_center.get()
+					-
+					_radius.get()
+					,
+					fcppt::boost_units_value{}
+				)
 			)
 			/
 			tile_size
@@ -56,9 +62,13 @@ sanguis::collision::impl::make_range(
 					sanguis::creator::signed_pos,
 					fcppt::cast::float_to_int_fun
 				>(
-					_center.get()
-					+
-					_radius.get()
+					fcppt::math::vector::map(
+						_center.get()
+						+
+						_radius.get()
+						,
+						fcppt::boost_units_value{}
+					)
 				),
 				tile_size
 			),

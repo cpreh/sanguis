@@ -639,7 +639,7 @@ sanguis::collision::impl::world::simple::object::update_ghosts()
 					sanguis::creator::difference_type
 				>(
 					std::ceil(
-						ghost.get().radius().get()
+						ghost.get().radius().get().value()
 					)
 				)
 			);

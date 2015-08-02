@@ -112,7 +112,7 @@ sanguis::client::draw2d::entities::own_player::update()
 								)
 							)
 						)
-					).get()
+					).get().value()
 				)
 			)
 		),

@@ -1,9 +1,9 @@
-#include <sanguis/collision/center.hpp>
-#include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/test.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/radius.hpp>
+#include <sanguis/server/collision/to_center.hpp>
+#include <sanguis/server/collision/to_radius.hpp>
 #include <sanguis/server/collision/with_world.hpp>
 
 
@@ -16,11 +16,11 @@ sanguis::server::collision::with_world(
 {
 	return
 		sanguis::collision::test(
-			sanguis::collision::center(
-				_center.get()
+			sanguis::server::collision::to_center(
+				_center
 			),
-			sanguis::collision::radius(
-				_radius.get()
+			sanguis::server::collision::to_radius(
+				_radius
 			),
 			_grid
 		);

@@ -3,8 +3,10 @@
 
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/radius.hpp>
+#include <fcppt/boost_units_value.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/length.hpp>
+#include <fcppt/math/vector/map.hpp>
 
 
 namespace sanguis
@@ -30,15 +32,22 @@ collides(
 )
 {
 	return
+		// TODO: Can we do this on boost::units directly?
 		fcppt::math::vector::length(
-			_left.center().get()
-			-
-			_right.center().get()
+			fcppt::math::vector::map(
+				_left.center().get()
+				-
+				_right.center().get()
+				,
+				fcppt::boost_units_value{}
+			)
 		)
 		<=
-		_left.radius().get()
-		+
-		_right.radius().get()
+		(
+			_left.radius().get()
+			+
+			_right.radius().get()
+		).value()
 		;
 }
 

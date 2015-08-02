@@ -3,6 +3,10 @@ set(
 	include/sanguis/collision/center.hpp
 	include/sanguis/collision/center_fwd.hpp
 	include/sanguis/collision/duration.hpp
+	include/sanguis/collision/length.hpp
+	include/sanguis/collision/length2.hpp
+	include/sanguis/collision/length2_fwd.hpp
+	include/sanguis/collision/length_fwd.hpp
 	include/sanguis/collision/log_location.hpp
 	include/sanguis/collision/optional_result.hpp
 	include/sanguis/collision/optional_result_fwd.hpp
@@ -15,8 +19,8 @@ set(
 	include/sanguis/collision/test.hpp
 	include/sanguis/collision/test_move.hpp
 	include/sanguis/collision/unit.hpp
-	include/sanguis/collision/vector2.hpp
-	include/sanguis/collision/vector2_fwd.hpp
+	include/sanguis/collision/velocity.hpp
+	include/sanguis/collision/velocity_fwd.hpp
 	include/sanguis/collision/world/body.hpp
 	include/sanguis/collision/world/body_base.hpp
 	include/sanguis/collision/world/body_base_fwd.hpp
@@ -73,6 +77,8 @@ set(
 	src/include/sanguis/collision/impl/cross2.hpp
 	src/include/sanguis/collision/impl/dir.hpp
 	src/include/sanguis/collision/impl/dir_fwd.hpp
+	src/include/sanguis/collision/impl/duration_to_time.hpp
+	src/include/sanguis/collision/impl/grid_to_meter.hpp
 	src/include/sanguis/collision/impl/intersection.hpp
 	src/include/sanguis/collision/impl/intersection_fwd.hpp
 	src/include/sanguis/collision/impl/is_null.hpp
@@ -89,6 +95,8 @@ set(
 	src/include/sanguis/collision/impl/rect.hpp
 	src/include/sanguis/collision/impl/rect_fwd.hpp
 	src/include/sanguis/collision/impl/rect_line_intersection.hpp
+	src/include/sanguis/collision/impl/time.hpp
+	src/include/sanguis/collision/impl/time_fwd.hpp
 	src/include/sanguis/collision/impl/world/body_ghost_group_pair.hpp
 	src/include/sanguis/collision/impl/world/body_ghost_group_relation.hpp
 	src/include/sanguis/collision/impl/world/body_group_container.hpp

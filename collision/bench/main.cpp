@@ -1,8 +1,9 @@
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/duration.hpp>
+#include <sanguis/collision/length2.hpp>
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/speed.hpp>
-#include <sanguis/collision/vector2.hpp>
+#include <sanguis/collision/unit.hpp>
 #include <sanguis/collision/world/body.hpp>
 #include <sanguis/collision/world/body_base.hpp>
 #include <sanguis/collision/world/body_group.hpp>
@@ -22,13 +23,17 @@
 #include <sanguis/creator/dim.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/tile.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/make_int_range_count.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/algorithm/repeat.hpp>
 #include <fcppt/math/dim/fill.hpp>
+#include <fcppt/math/vector/fill.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
+#include <boost/units/systems/si/length.hpp>
+#include <boost/units/systems/si/velocity.hpp>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
@@ -153,16 +158,37 @@ main()
 							world->create_body(
 								sanguis::collision::world::body_parameters{
 									sanguis::collision::center{
-										sanguis::collision::vector2{
-											10.f,
-											10.f
-										}
+										fcppt::math::vector::fill<
+											sanguis::collision::length2
+										>(
+											fcppt::literal<
+												sanguis::collision::unit
+											>(
+												10
+											)
+											*
+											boost::units::si::meter
+										)
 									},
-									sanguis::collision::speed{
-										sanguis::collision::vector2::null()
-									},
+									fcppt::math::vector::fill<
+										sanguis::collision::speed
+									>(
+										fcppt::literal<
+											sanguis::collision::unit
+										>(
+											0
+										)
+										*
+										boost::units::si::meter_per_second
+									),
 									sanguis::collision::radius{
-										50.f
+										fcppt::literal<
+											sanguis::collision::unit
+										>(
+											50
+										)
+										*
+										boost::units::si::meter
 									},
 									_group,
 									fake_body_base
@@ -246,13 +272,26 @@ main()
 					world->create_ghost(
 						sanguis::collision::world::ghost_parameters(
 							sanguis::collision::center{
-								sanguis::collision::vector2{
-									10.f,
-									10.f
-								}
+								fcppt::math::vector::fill<
+									sanguis::collision::length2
+								>(
+									fcppt::literal<
+										sanguis::collision::unit
+									>(
+										10
+									)
+									*
+									boost::units::si::meter
+								)
 							},
 							sanguis::collision::radius{
-								2000.f
+								fcppt::literal<
+									sanguis::collision::unit
+								>(
+									2000
+								)
+								*
+								boost::units::si::meter
 							},
 							sanguis::collision::world::ghost_group::player_sight,
 							fake_ghost_base

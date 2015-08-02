@@ -23,7 +23,6 @@
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/result.hpp>
-#include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/test_move.hpp>
 #include <sanguis/collision/unit.hpp>
 #include <sanguis/creator/difference_type.hpp>
@@ -43,6 +42,7 @@
 #include <sge/sprite/state/default_options.hpp>
 #include <sge/sprite/state/object_impl.hpp>
 #include <sge/sprite/state/parameters.hpp>
+#include <fcppt/boost_units_value.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
@@ -59,8 +59,13 @@
 #include <fcppt/math/dim/to_vector.hpp>
 #include <fcppt/math/vector/ceil_div_signed.hpp>
 #include <fcppt/math/vector/dim.hpp>
+#include <fcppt/math/vector/map.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/vector/to_signed.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/units/systems/si/length.hpp>
+#include <boost/units/systems/si/velocity.hpp>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::draw2d::scene::world::state::state(
@@ -213,14 +218,36 @@ sanguis::client::draw2d::scene::world::state::test_collision(
 	return
 		fcppt::optional_bind_construct(
 			sanguis::collision::test_move(
-				sanguis::collision::center(
-					_parameters.center().get()
-				),
+				sanguis::collision::center{
+					fcppt::math::vector::map(
+						_parameters.center().get(),
+						[](
+							sanguis::client::draw2d::funit const _val
+						)
+						{
+							return
+								_val
+								*
+								boost::units::si::meter;
+						}
+					)
+				},
 				sanguis::collision::radius(
 					_parameters.radius().get()
+					*
+					boost::units::si::meter
 				),
-				sanguis::collision::speed(
-					_parameters.speed().get()
+				fcppt::math::vector::map(
+					_parameters.speed().get(),
+					[](
+						sanguis::client::draw2d::funit const _val
+					)
+					{
+						return
+							_val
+							*
+							boost::units::si::meter_per_second;
+					}
 				),
 				_parameters.duration(),
 				grid_
@@ -231,7 +258,10 @@ sanguis::client::draw2d::scene::world::state::test_collision(
 			{
 				return
 					sanguis::client::draw2d::speed(
-						_result.speed().get()
+						fcppt::math::vector::map(
+							_result.speed(),
+							fcppt::boost_units_value{}
+						)
 					);
 			}
 		);

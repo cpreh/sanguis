@@ -1,5 +1,3 @@
-#include <sanguis/collision/center.hpp>
-#include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/world/body.hpp>
 #include <sanguis/collision/world/body_enter_container.hpp>
 #include <sanguis/collision/world/body_exit_container.hpp>
@@ -12,6 +10,11 @@
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/body.hpp>
+#include <sanguis/server/collision/from_center.hpp>
+#include <sanguis/server/collision/from_speed.hpp>
+#include <sanguis/server/collision/to_center.hpp>
+#include <sanguis/server/collision/to_radius.hpp>
+#include <sanguis/server/collision/to_speed.hpp>
 #include <fcppt/optional_assign.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
@@ -45,8 +48,8 @@ sanguis::server::collision::body::center(
 	FCPPT_ASSERT_OPTIONAL_ERROR(
 		body_
 	)->center(
-		sanguis::collision::center(
-			_center.get()
+		sanguis::server::collision::to_center(
+			_center
 		)
 	);
 }
@@ -55,10 +58,10 @@ sanguis::server::center const
 sanguis::server::collision::body::center() const
 {
 	return
-		sanguis::server::center(
+		sanguis::server::collision::from_center(
 			FCPPT_ASSERT_OPTIONAL_ERROR(
 				body_
-			)->center().get()
+			)->center()
 		);
 }
 
@@ -70,8 +73,8 @@ sanguis::server::collision::body::speed(
 	FCPPT_ASSERT_OPTIONAL_ERROR(
 		body_
 	)->speed(
-		sanguis::collision::speed(
-			_speed.get()
+		sanguis::server::collision::to_speed(
+			_speed
 		)
 	);
 }
@@ -80,10 +83,10 @@ sanguis::server::speed const
 sanguis::server::collision::body::speed() const
 {
 	return
-		sanguis::server::speed(
+		sanguis::server::collision::from_speed(
 			FCPPT_ASSERT_OPTIONAL_ERROR(
 				body_
-			)->speed().get()
+			)->speed()
 		);
 }
 
@@ -112,14 +115,14 @@ sanguis::server::collision::body::transfer(
 			body_,
 			_world.create_body(
 				sanguis::collision::world::body_parameters(
-					sanguis::collision::center(
-						_center.get()
+					sanguis::server::collision::to_center(
+						_center
 					),
-					sanguis::collision::speed(
-						_speed.get()
+					sanguis::server::collision::to_speed(
+						_speed
 					),
-					sanguis::collision::radius(
-						radius_.get()
+					sanguis::server::collision::to_radius(
+						radius_
 					),
 					_collision_group,
 					body_base_

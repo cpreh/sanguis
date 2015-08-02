@@ -2,6 +2,7 @@
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/speed.hpp>
+#include <sanguis/server/collision/from_speed.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/movement_speed_initial.hpp>
@@ -151,8 +152,8 @@ sanguis::server::entities::with_velocity::speed_changed(
 )
 {
 	net_speed_.set(
-		sanguis::server::speed(
-			_speed.get()
+		sanguis::server::collision::from_speed(
+			_speed
 		)
 	);
 }

@@ -7,6 +7,7 @@
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/body.hpp>
+#include <sanguis/server/collision/from_center.hpp>
 #include <sanguis/server/entities/combine_remove_from_world.hpp>
 #include <sanguis/server/entities/combine_transfer.hpp>
 #include <sanguis/server/entities/optional_transfer_result.hpp>
@@ -296,7 +297,9 @@ sanguis::server::entities::with_body::center_changed(
 )
 {
 	sanguis::server::center const server_center(
-		_center.get()
+		sanguis::server::collision::from_center(
+			_center
+		)
 	);
 
 	this->update_ghost_center(

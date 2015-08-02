@@ -5,9 +5,10 @@
 #include <sanguis/collision/result.hpp>
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/test_move.hpp>
-#include <sanguis/collision/vector2.hpp>
 #include <sanguis/collision/impl/adjust_speed.hpp>
 #include <sanguis/collision/impl/dir.hpp>
+#include <sanguis/collision/impl/duration_to_time.hpp>
+#include <sanguis/collision/impl/grid_to_meter.hpp>
 #include <sanguis/collision/impl/is_null.hpp>
 #include <sanguis/collision/impl/line_segment.hpp>
 #include <sanguis/collision/impl/make_spiral_range.hpp>
@@ -22,15 +23,16 @@
 #include <sanguis/creator/tile_rect.hpp>
 #include <sanguis/creator/tile_size.hpp>
 #include <fcppt/maybe_void.hpp>
-#include <fcppt/cast/int_to_float_fun.hpp>
+#include <fcppt/make_literal_boost_units.hpp>
 #include <fcppt/cast/to_unsigned_fun.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/math/box/expand.hpp>
 #include <fcppt/math/box/intersects.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
-#include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/math/dim/map.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/fill.hpp>
+#include <fcppt/math/vector/map.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 
 
@@ -46,11 +48,11 @@ sanguis::collision::test_move(
 
 	if(
 		sanguis::collision::impl::is_null(
-			_speed.get().x()
+			_speed.x().value()
 		)
 		&&
 		sanguis::collision::impl::is_null(
-			_speed.get().y()
+			_speed.y().value()
 		)
 	)
 		return
@@ -60,8 +62,15 @@ sanguis::collision::test_move(
 		_speed
 	);
 
+	// TODO: Use an algorithm for this
 	bool changed(
 		false
+	);
+
+	auto const elapsed_time(
+		sanguis::collision::impl::duration_to_time(
+			_time
+		)
 	);
 
 	for(
@@ -71,9 +80,9 @@ sanguis::collision::test_move(
 			sanguis::collision::center(
 				_center.get()
 				+
-				_speed.get()
+				_speed
 				*
-				_time.count()
+				elapsed_time
 			),
 			_radius
 		)
@@ -98,6 +107,7 @@ sanguis::collision::test_move(
 				_radius,
 				_time,
 				cur_pos,
+				elapsed_time,
 				&changed,
 				&new_speed
 			](
@@ -114,9 +124,9 @@ sanguis::collision::test_move(
 				sanguis::collision::center const new_center(
 					_center.get()
 					+
-					new_speed.get()
+					new_speed
 					*
-					_time.count()
+					elapsed_time
 				);
 
 				sanguis::collision::impl::rect const rect(
@@ -140,26 +150,21 @@ sanguis::collision::test_move(
 				);
 
 				sanguis::collision::impl::rect const entry_rect(
-					fcppt::math::vector::structure_cast<
-						sanguis::collision::impl::rect::vector,
-						fcppt::cast::int_to_float_fun
-					>(
-						tile_rect.pos()
+					fcppt::math::vector::map(
+						tile_rect.pos(),
+						&sanguis::collision::impl::grid_to_meter
 					)
 					+
-					fcppt::math::vector::structure_cast<
-						sanguis::collision::impl::rect::vector,
-						fcppt::cast::int_to_float_fun
-					>(
+					fcppt::math::vector::map(
 						cur_pos
 						*
 						sanguis::creator::tile_size::value
+						,
+						&sanguis::collision::impl::grid_to_meter
 					),
-					fcppt::math::dim::structure_cast<
-						sanguis::collision::impl::rect::dim,
-						fcppt::cast::int_to_float_fun
-					>(
-						tile_rect.size()
+					fcppt::math::dim::map(
+						tile_rect.size(),
+						&sanguis::collision::impl::grid_to_meter
 					)
 				);
 
