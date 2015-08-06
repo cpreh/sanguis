@@ -2,6 +2,8 @@
 #define SANGUIS_COLLISION_WORLD_BODY_HPP_INCLUDED
 
 #include <sanguis/collision/center_fwd.hpp>
+#include <sanguis/collision/mass_fwd.hpp>
+#include <sanguis/collision/radius_fwd.hpp>
 #include <sanguis/collision/speed_fwd.hpp>
 #include <sanguis/collision/world/body_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -44,6 +46,14 @@ public:
 	virtual
 	sanguis::collision::speed const
 	speed() const = 0;
+
+	virtual
+	sanguis::collision::radius const
+	radius() const = 0;
+
+	virtual
+	sanguis::collision::mass const
+	mass() const = 0;
 };
 
 }

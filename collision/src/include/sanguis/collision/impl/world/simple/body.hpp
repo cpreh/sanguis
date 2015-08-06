@@ -3,6 +3,7 @@
 
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/duration.hpp>
+#include <sanguis/collision/mass.hpp>
 #include <sanguis/collision/optional_result_fwd.hpp>
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/result_fwd.hpp>
@@ -86,7 +87,12 @@ public:
 	override;
 
 	sanguis::collision::radius const
-	radius() const;
+	radius() const
+	override;
+
+	sanguis::collision::mass const
+	mass() const
+	override;
 
 	sanguis::collision::world::body_group
 	collision_group() const;
@@ -95,15 +101,15 @@ public:
 	body_base() const;
 private:
 	void
-	apply_collision(
-		sanguis::collision::result const &
-	);
+	speed_changed();
 
 	sanguis::collision::impl::world::simple::body_remove_callback const body_remove_callback_;
 
 	sanguis::collision::impl::world::simple::body_move_callback const body_move_callback_;
 
 	sanguis::collision::radius const radius_;
+
+	sanguis::collision::mass const mass_;
 
 	sanguis::collision::world::body_group const collision_group_;
 

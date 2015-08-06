@@ -8,12 +8,18 @@ set(
 	include/sanguis/collision/length2_fwd.hpp
 	include/sanguis/collision/length_fwd.hpp
 	include/sanguis/collision/log_location.hpp
+	include/sanguis/collision/mass.hpp
+	include/sanguis/collision/mass_fwd.hpp
 	include/sanguis/collision/optional_result.hpp
 	include/sanguis/collision/optional_result_fwd.hpp
+	include/sanguis/collision/optional_result_pair.hpp
+	include/sanguis/collision/optional_result_pair_fwd.hpp
 	include/sanguis/collision/radius.hpp
 	include/sanguis/collision/radius_fwd.hpp
 	include/sanguis/collision/result.hpp
 	include/sanguis/collision/result_fwd.hpp
+	include/sanguis/collision/result_pair.hpp
+	include/sanguis/collision/result_pair_fwd.hpp
 	include/sanguis/collision/speed.hpp
 	include/sanguis/collision/speed_fwd.hpp
 	include/sanguis/collision/test.hpp
@@ -24,6 +30,7 @@ set(
 	include/sanguis/collision/world/body.hpp
 	include/sanguis/collision/world/body_base.hpp
 	include/sanguis/collision/world/body_base_fwd.hpp
+	include/sanguis/collision/world/body_body.hpp
 	include/sanguis/collision/world/body_collision.hpp
 	include/sanguis/collision/world/body_collision_container.hpp
 	include/sanguis/collision/world/body_collision_fwd.hpp
@@ -88,6 +95,7 @@ set(
 	src/include/sanguis/collision/impl/log.hpp
 	src/include/sanguis/collision/impl/make_range.hpp
 	src/include/sanguis/collision/impl/make_spiral_range.hpp
+	src/include/sanguis/collision/impl/normalize_opt.hpp
 	src/include/sanguis/collision/impl/optional_intersection.hpp
 	src/include/sanguis/collision/impl/optional_intersection_fwd.hpp
 	src/include/sanguis/collision/impl/pos.hpp
@@ -104,6 +112,7 @@ set(
 	src/include/sanguis/collision/impl/world/body_group_relation.hpp
 	src/include/sanguis/collision/impl/world/body_groups_for_body_group.hpp
 	src/include/sanguis/collision/impl/world/body_groups_for_ghost_group.hpp
+	src/include/sanguis/collision/impl/world/collides.hpp
 	src/include/sanguis/collision/impl/world/ghost_group_container.hpp
 	src/include/sanguis/collision/impl/world/ghost_groups_for_body_group.hpp
 	src/include/sanguis/collision/impl/world/make_groups.hpp
@@ -113,6 +122,7 @@ set(
 	src/test_move.cpp
 	src/world/body.cpp
 	src/world/body_base.cpp
+	src/world/body_body.cpp
 	src/world/body_collision.cpp
 	src/world/body_enter.cpp
 	src/world/body_exit.cpp
@@ -133,7 +143,6 @@ set(
 	src/impl/world/simple/ghost_result.cpp
 	src/impl/world/simple/grid_position.cpp
 	src/impl/world/simple/object.cpp
-	src/impl/world/simple/push_near.cpp
 	src/include/sanguis/collision/impl/world/simple/body.hpp
 	src/include/sanguis/collision/impl/world/simple/body_base_hook.hpp
 	src/include/sanguis/collision/impl/world/simple/body_fwd.hpp
@@ -143,7 +152,6 @@ set(
 	src/include/sanguis/collision/impl/world/simple/body_move_callback.hpp
 	src/include/sanguis/collision/impl/world/simple/body_remove_callback.hpp
 	src/include/sanguis/collision/impl/world/simple/body_unique_ptr.hpp
-	src/include/sanguis/collision/impl/world/simple/collides.hpp
 	src/include/sanguis/collision/impl/world/simple/for_all_body_neighbors.hpp
 	src/include/sanguis/collision/impl/world/simple/ghost.hpp
 	src/include/sanguis/collision/impl/world/simple/ghost_fwd.hpp
@@ -153,7 +161,6 @@ set(
 	src/include/sanguis/collision/impl/world/simple/ghost_unique_ptr.hpp
 	src/include/sanguis/collision/impl/world/simple/grid_position.hpp
 	src/include/sanguis/collision/impl/world/simple/object.hpp
-	src/include/sanguis/collision/impl/world/simple/push_near.hpp
 )
 
 set(

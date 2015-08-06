@@ -10,6 +10,7 @@ sanguis::collision::world::body_parameters::body_parameters(
 	sanguis::collision::center const _center,
 	sanguis::collision::speed const _speed,
 	sanguis::collision::radius const _radius,
+	sanguis::collision::mass const _mass,
 	sanguis::collision::world::body_group const _collision_group,
 	sanguis::collision::world::body_base &_body_base
 )
@@ -22,6 +23,9 @@ sanguis::collision::world::body_parameters::body_parameters(
 	),
 	radius_(
 		_radius
+	),
+	mass_(
+		_mass
 	),
 	collision_group_(
 		_collision_group
@@ -51,6 +55,13 @@ sanguis::collision::world::body_parameters::radius() const
 {
 	return
 		radius_;
+}
+
+sanguis::collision::mass const
+sanguis::collision::world::body_parameters::mass() const
+{
+	return
+		mass_;
 }
 
 sanguis::collision::world::body_group

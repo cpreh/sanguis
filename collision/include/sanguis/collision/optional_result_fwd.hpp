@@ -13,7 +13,8 @@ namespace collision
 typedef
 fcppt::optional<
 	sanguis::collision::result
-> optional_result;
+>
+optional_result;
 
 }
 }

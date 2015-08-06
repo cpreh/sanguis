@@ -1,10 +1,12 @@
 #include <sanguis/collision/center.hpp>
+#include <sanguis/collision/mass.hpp>
 #include <sanguis/collision/optional_result.hpp>
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/result.hpp>
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/impl/duration_to_time.hpp>
 #include <sanguis/collision/impl/grid_to_meter.hpp>
+#include <sanguis/collision/impl/is_null.hpp>
 #include <sanguis/collision/impl/log.hpp>
 #include <sanguis/collision/impl/world/simple/body.hpp>
 #include <sanguis/collision/impl/world/simple/body_remove_callback.hpp>
@@ -17,6 +19,7 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/strong_typedef_output.hpp>
+#include <fcppt/assert/pre.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -40,6 +43,9 @@ sanguis::collision::impl::world::simple::body::body(
 	),
 	radius_(
 		_parameters.radius()
+	),
+	mass_(
+		_parameters.mass()
 	),
 	collision_group_(
 		_parameters.collision_group()
@@ -74,6 +80,12 @@ sanguis::collision::impl::world::simple::body::body(
 				<< radius_
 				<< FCPPT_TEXT(" won't fit into a single tile.")
 		);
+
+	FCPPT_ASSERT_PRE(
+		!sanguis::collision::impl::is_null(
+			_parameters.mass().value()
+		)
+	);
 }
 
 sanguis::collision::impl::world::simple::body::~body()
@@ -110,9 +122,11 @@ sanguis::collision::impl::world::simple::body::move(
 			sanguis::collision::result const &_collision
 		)
 		{
-			this->apply_collision(
-				_collision
-			);
+
+			speed_ =
+				_collision.speed();
+
+			this->speed_changed();
 
 			body_base_.world_collision();
 		}
@@ -139,9 +153,10 @@ sanguis::collision::impl::world::simple::body::push(
 	sanguis::collision::result const &_collision
 )
 {
-	this->apply_collision(
-		_collision
-	);
+	speed_ +=
+		_collision.speed();
+
+	this->speed_changed();
 }
 
 sanguis::collision::center const
@@ -174,6 +189,13 @@ sanguis::collision::impl::world::simple::body::radius() const
 		radius_;
 }
 
+sanguis::collision::mass const
+sanguis::collision::impl::world::simple::body::mass() const
+{
+	return
+		mass_;
+}
+
 sanguis::collision::world::body_group
 sanguis::collision::impl::world::simple::body::collision_group() const
 {
@@ -189,13 +211,8 @@ sanguis::collision::impl::world::simple::body::body_base() const
 }
 
 void
-sanguis::collision::impl::world::simple::body::apply_collision(
-	sanguis::collision::result const &_collision
-)
+sanguis::collision::impl::world::simple::body::speed_changed()
 {
-	speed_ =
-		_collision.speed();
-
 	body_base_.speed_changed(
 		speed_
 	);

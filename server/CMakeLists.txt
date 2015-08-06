@@ -433,6 +433,8 @@ set(
 	include/sanguis/server/machine_fwd.hpp
 	include/sanguis/server/make_send_callback.hpp
 	include/sanguis/server/make_unicast_callback.hpp
+	include/sanguis/server/mass.hpp
+	include/sanguis/server/mass_fwd.hpp
 	include/sanguis/server/message_functor.hpp
 	include/sanguis/server/net/angle.hpp
 	include/sanguis/server/net/angle_fwd.hpp

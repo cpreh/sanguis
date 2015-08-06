@@ -1,5 +1,5 @@
-#ifndef SANGUIS_COLLISION_IMPL_WORLD_SIMPLE_COLLIDES_HPP_INCLUDED
-#define SANGUIS_COLLISION_IMPL_WORLD_SIMPLE_COLLIDES_HPP_INCLUDED
+#ifndef SANGUIS_COLLISION_IMPL_WORLD_COLLIDES_HPP_INCLUDED
+#define SANGUIS_COLLISION_IMPL_WORLD_COLLIDES_HPP_INCLUDED
 
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/radius.hpp>
@@ -16,8 +16,6 @@ namespace collision
 namespace impl
 {
 namespace world
-{
-namespace simple
 {
 
 template<
@@ -51,7 +49,6 @@ collides(
 		;
 }
 
-}
 }
 }
 }

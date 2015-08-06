@@ -1,7 +1,7 @@
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/radius.hpp>
+#include <sanguis/collision/impl/world/collides.hpp>
 #include <sanguis/collision/impl/world/simple/body.hpp>
-#include <sanguis/collision/impl/world/simple/collides.hpp>
 #include <sanguis/collision/impl/world/simple/ghost.hpp>
 #include <sanguis/collision/impl/world/simple/ghost_remove_callback.hpp>
 #include <sanguis/collision/world/body_enter.hpp>
@@ -145,7 +145,7 @@ sanguis::collision::impl::world::simple::ghost::update_near_body(
 )
 {
 	return
-		sanguis::collision::impl::world::simple::collides(
+		sanguis::collision::impl::world::collides(
 			_body,
 			*this
 		)
@@ -205,7 +205,7 @@ sanguis::collision::impl::world::simple::ghost::new_body(
 )
 {
 	if(
-		!sanguis::collision::impl::world::simple::collides(
+		!sanguis::collision::impl::world::collides(
 			_body,
 			*this
 		)
