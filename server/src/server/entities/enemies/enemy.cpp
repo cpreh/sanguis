@@ -22,6 +22,7 @@
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
+#include <sanguis/server/optional_mass.hpp>
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team.hpp>
@@ -53,6 +54,7 @@
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/units/systems/si/mass.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -87,6 +89,12 @@ sanguis::server::entities::enemies::enemy::enemy(
 			sanguis::load::model::enemy_path(
 				_parameters.enemy_type()
 			)
+		),
+		// TODO
+		sanguis::server::optional_mass(
+			1.f
+			*
+			boost::units::si::kilogram
 		),
 		sanguis::server::entities::movement_speed_initial(
 			sanguis::server::entities::property::initial_zero(

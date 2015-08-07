@@ -10,6 +10,7 @@
 #include <sanguis/messages/server/add_doodad.hpp>
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
+#include <sanguis/server/optional_mass.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/entities/doodad.hpp>
@@ -29,7 +30,8 @@ sanguis::server::entities::doodad::doodad(
 			sanguis::load::model::doodad_path(
 				_doodad_type
 			)
-		)
+		),
+		sanguis::server::optional_mass()
 	),
 	sanguis::server::entities::with_id(
 		_load_context.next_id()

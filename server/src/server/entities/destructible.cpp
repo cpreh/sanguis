@@ -10,6 +10,7 @@
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/health_fwd.hpp>
+#include <sanguis/server/optional_mass.hpp>
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/player_id_fwd.hpp>
 #include <sanguis/server/radius.hpp>
@@ -40,7 +41,8 @@ sanguis::server::entities::destructible::destructible(
 			sanguis::load::model::destructible_path(
 				_type
 			)
-		)
+		),
+		sanguis::server::optional_mass()
 	),
 	sanguis::server::entities::with_id(
 		_load_context.next_id()

@@ -18,6 +18,7 @@
 #include <sanguis/messages/server/add_weapon_pickup.hpp>
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
+#include <sanguis/server/optional_mass.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
@@ -46,7 +47,8 @@ sanguis::server::entities::pickups::weapon::weapon(
 			sanguis::load::model::weapon_pickup_path(
 				_weapon->type()
 			)
-		)
+		),
+		sanguis::server::optional_mass()
 	),
 	sanguis::server::entities::with_id(
 		_load_context.next_id()

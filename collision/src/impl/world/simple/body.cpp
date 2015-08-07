@@ -1,5 +1,6 @@
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/mass.hpp>
+#include <sanguis/collision/optional_mass.hpp>
 #include <sanguis/collision/optional_result.hpp>
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/result.hpp>
@@ -16,7 +17,9 @@
 #include <sanguis/collision/world/body_parameters.hpp>
 #include <sanguis/creator/size_type.hpp>
 #include <sanguis/creator/tile_size.hpp>
+#include <fcppt/const.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/maybe.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/assert/pre.hpp>
@@ -82,8 +85,20 @@ sanguis::collision::impl::world::simple::body::body(
 		);
 
 	FCPPT_ASSERT_PRE(
-		!sanguis::collision::impl::is_null(
-			_parameters.mass().value()
+		fcppt::maybe(
+			_parameters.mass(),
+			fcppt::const_(
+				true
+			),
+			[](
+				sanguis::collision::mass const _mass
+			)
+			{
+				return
+					!sanguis::collision::impl::is_null(
+						_mass.value()
+					);
+			}
 		)
 	);
 }
@@ -189,7 +204,7 @@ sanguis::collision::impl::world::simple::body::radius() const
 		radius_;
 }
 
-sanguis::collision::mass const
+sanguis::collision::optional_mass const
 sanguis::collision::impl::world::simple::body::mass() const
 {
 	return

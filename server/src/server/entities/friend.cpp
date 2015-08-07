@@ -18,6 +18,7 @@
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/health.hpp>
+#include <sanguis/server/optional_mass.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/regeneration.hpp>
@@ -49,6 +50,7 @@
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
+#include <boost/units/systems/si/mass.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -90,6 +92,12 @@ sanguis::server::entities::friend_::friend_(
 			sanguis::load::model::friend_path(
 				_friend_type
 			)
+		),
+		// TODO
+		sanguis::server::optional_mass(
+			1.f
+			*
+			boost::units::si::kilogram
 		),
 		sanguis::server::entities::movement_speed_initial(
 			sanguis::server::entities::property::initial_zero(

@@ -2,7 +2,7 @@
 #define SANGUIS_COLLISION_WORLD_BODY_HPP_INCLUDED
 
 #include <sanguis/collision/center_fwd.hpp>
-#include <sanguis/collision/mass_fwd.hpp>
+#include <sanguis/collision/optional_mass_fwd.hpp>
 #include <sanguis/collision/radius_fwd.hpp>
 #include <sanguis/collision/speed_fwd.hpp>
 #include <sanguis/collision/world/body_fwd.hpp>
@@ -52,7 +52,7 @@ public:
 	radius() const = 0;
 
 	virtual
-	sanguis::collision::mass const
+	sanguis::collision::optional_mass const
 	mass() const = 0;
 };
 

@@ -1,6 +1,7 @@
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/duration.hpp>
 #include <sanguis/collision/length2.hpp>
+#include <sanguis/collision/optional_mass.hpp>
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/unit.hpp>
@@ -33,7 +34,6 @@
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
 #include <boost/units/systems/si/length.hpp>
-#include <boost/units/systems/si/mass.hpp>
 #include <boost/units/systems/si/velocity.hpp>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
@@ -191,13 +191,7 @@ main()
 										*
 										boost::units::si::meter
 									},
-									fcppt::literal<
-										sanguis::collision::unit
-									>(
-										1
-									)
-									*
-									boost::units::si::kilogram,
+									sanguis::collision::optional_mass(),
 									_group,
 									fake_body_base
 								}

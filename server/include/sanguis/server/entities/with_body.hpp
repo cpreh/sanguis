@@ -7,6 +7,7 @@
 #include <sanguis/collision/world/body_group_fwd.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center_fwd.hpp>
+#include <sanguis/server/optional_mass_fwd.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/speed_fwd.hpp>
 #include <sanguis/server/collision/body.hpp>
@@ -48,9 +49,9 @@ class with_body
 		with_body
 	);
 public:
-	explicit
 	with_body(
-		sanguis::server::radius
+		sanguis::server::radius,
+		sanguis::server::optional_mass const &
 	);
 
 	~with_body()

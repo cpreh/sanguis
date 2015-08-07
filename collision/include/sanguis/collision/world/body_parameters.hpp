@@ -2,7 +2,7 @@
 #define SANGUIS_COLLISION_WORLD_BODY_PARAMETERS_HPP_INCLUDED
 
 #include <sanguis/collision/center.hpp>
-#include <sanguis/collision/mass.hpp>
+#include <sanguis/collision/optional_mass.hpp>
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/symbol.hpp>
@@ -30,7 +30,7 @@ public:
 		sanguis::collision::center,
 		sanguis::collision::speed,
 		sanguis::collision::radius,
-		sanguis::collision::mass,
+		sanguis::collision::optional_mass,
 		sanguis::collision::world::body_group,
 		sanguis::collision::world::body_base &
 	);
@@ -44,7 +44,7 @@ public:
 	sanguis::collision::radius const
 	radius() const;
 
-	sanguis::collision::mass const
+	sanguis::collision::optional_mass const
 	mass() const;
 
 	sanguis::collision::world::body_group
@@ -59,7 +59,7 @@ private:
 
 	sanguis::collision::radius const radius_;
 
-	sanguis::collision::mass const mass_;
+	sanguis::collision::optional_mass const mass_;
 
 	sanguis::collision::world::body_group const collision_group_;
 

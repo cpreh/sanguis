@@ -10,6 +10,8 @@ set(
 	include/sanguis/collision/log_location.hpp
 	include/sanguis/collision/mass.hpp
 	include/sanguis/collision/mass_fwd.hpp
+	include/sanguis/collision/optional_mass.hpp
+	include/sanguis/collision/optional_mass_fwd.hpp
 	include/sanguis/collision/optional_result.hpp
 	include/sanguis/collision/optional_result_fwd.hpp
 	include/sanguis/collision/optional_result_pair.hpp

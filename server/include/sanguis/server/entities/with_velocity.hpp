@@ -3,6 +3,7 @@
 
 #include <sanguis/collision/speed_fwd.hpp>
 #include <sanguis/server/direction.hpp>
+#include <sanguis/server/optional_mass_fwd.hpp>
 #include <sanguis/server/radius_fwd.hpp>
 #include <sanguis/server/speed_fwd.hpp>
 #include <sanguis/server/entities/base.hpp>
@@ -39,6 +40,7 @@ class with_velocity
 protected:
 	with_velocity(
 		sanguis::server::radius,
+		sanguis::server::optional_mass const &,
 		sanguis::server::entities::movement_speed_initial,
 		sanguis::server::direction
 	);

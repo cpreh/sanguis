@@ -1,4 +1,5 @@
 #include <sanguis/collision/center.hpp>
+#include <sanguis/collision/optional_mass.hpp>
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/world/body_base_fwd.hpp>
@@ -10,7 +11,7 @@ sanguis::collision::world::body_parameters::body_parameters(
 	sanguis::collision::center const _center,
 	sanguis::collision::speed const _speed,
 	sanguis::collision::radius const _radius,
-	sanguis::collision::mass const _mass,
+	sanguis::collision::optional_mass const _mass,
 	sanguis::collision::world::body_group const _collision_group,
 	sanguis::collision::world::body_base &_body_base
 )
@@ -57,7 +58,7 @@ sanguis::collision::world::body_parameters::radius() const
 		radius_;
 }
 
-sanguis::collision::mass const
+sanguis::collision::optional_mass const
 sanguis::collision::world::body_parameters::mass() const
 {
 	return

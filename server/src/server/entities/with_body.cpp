@@ -3,7 +3,7 @@
 #include <sanguis/collision/world/body_base.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
-#include <sanguis/server/mass.hpp>
+#include <sanguis/server/optional_mass.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/speed.hpp>
@@ -35,7 +35,8 @@
 
 
 sanguis::server::entities::with_body::with_body(
-	sanguis::server::radius const _radius
+	sanguis::server::radius const _radius,
+	sanguis::server::optional_mass const &_mass
 )
 :
 	sanguis::server::entities::with_ghosts(),
@@ -53,10 +54,7 @@ sanguis::server::entities::with_body::with_body(
 	),
 	collision_body_(
 		_radius,
-		// FIXME
-		sanguis::server::mass{
-			1.f
-		},
+		_mass,
 		*this
 	),
 	net_center_(

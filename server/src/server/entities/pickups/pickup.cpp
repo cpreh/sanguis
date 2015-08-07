@@ -12,6 +12,7 @@
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/center.hpp>
+#include <sanguis/server/optional_mass.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
@@ -47,7 +48,8 @@ sanguis::server::entities::pickups::pickup::pickup(
 			sanguis::load::model::pickup_path(
 				_pickup_type
 			)
-		)
+		),
+		sanguis::server::optional_mass()
 	),
 	sanguis::server::entities::with_id(
 		_load_context.next_id()

@@ -1,5 +1,6 @@
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/server/direction.hpp>
+#include <sanguis/server/optional_mass_fwd.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/from_speed.hpp>
@@ -23,6 +24,7 @@
 
 sanguis::server::entities::with_velocity::with_velocity(
 	sanguis::server::radius const _radius,
+	sanguis::server::optional_mass const &_mass,
 	sanguis::server::entities::movement_speed_initial const _movement_speed,
 	sanguis::server::direction const _direction
 )
@@ -30,7 +32,8 @@ sanguis::server::entities::with_velocity::with_velocity(
 	sanguis::server::entities::ifaces::with_id(),
 	sanguis::server::entities::ifaces::with_velocity(),
 	sanguis::server::entities::with_body(
-		_radius
+		_radius,
+		_mass
 	),
 	movement_speed_(
 		_movement_speed.get()

@@ -9,7 +9,7 @@
 #include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/server/center.hpp>
-#include <sanguis/server/mass.hpp>
+#include <sanguis/server/optional_mass.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/body_fwd.hpp>
@@ -32,7 +32,7 @@ class body
 public:
 	body(
 		sanguis::server::radius,
-		sanguis::server::mass,
+		sanguis::server::optional_mass const &,
 		sanguis::collision::world::body_base &
 	);
 
@@ -73,7 +73,7 @@ public:
 private:
 	sanguis::server::radius const radius_;
 
-	sanguis::server::mass const mass_;
+	sanguis::server::optional_mass const mass_;
 
 	sanguis::collision::world::body_base &body_base_;
 

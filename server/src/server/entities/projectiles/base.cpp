@@ -2,6 +2,7 @@
 #include <sanguis/load/model/path.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/direction.hpp>
+#include <sanguis/server/optional_mass.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
@@ -41,6 +42,7 @@ sanguis::server::entities::projectiles::base::base(
 		_load_context.model_size(
 			_model_path
 		),
+		sanguis::server::optional_mass(),
 		sanguis::server::entities::movement_speed_initial(
 			sanguis::server::entities::property::initial_max(
 				_movement_speed.get()
