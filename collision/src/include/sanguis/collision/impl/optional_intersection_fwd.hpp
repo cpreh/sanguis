@@ -15,7 +15,8 @@ namespace impl
 typedef
 fcppt::optional<
 	sanguis::collision::impl::intersection
-> optional_intersection;
+>
+optional_intersection;
 
 }
 }

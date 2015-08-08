@@ -79,6 +79,7 @@ set(
 	src/impl/make_range.cpp
 	src/impl/make_spiral_range.cpp
 	src/impl/rect_line_intersection.cpp
+	src/impl/test_tile.cpp
 	src/impl/world/body_groups_for_body_group.cpp
 	src/impl/world/body_groups_for_ghost_group.cpp
 	src/impl/world/ghost_groups_for_body_group.cpp
@@ -105,11 +106,14 @@ set(
 	src/include/sanguis/collision/impl/normalize_opt.hpp
 	src/include/sanguis/collision/impl/optional_intersection.hpp
 	src/include/sanguis/collision/impl/optional_intersection_fwd.hpp
+	src/include/sanguis/collision/impl/optional_speed.hpp
+	src/include/sanguis/collision/impl/optional_speed_fwd.hpp
 	src/include/sanguis/collision/impl/pos.hpp
 	src/include/sanguis/collision/impl/pos_fwd.hpp
 	src/include/sanguis/collision/impl/rect.hpp
 	src/include/sanguis/collision/impl/rect_fwd.hpp
 	src/include/sanguis/collision/impl/rect_line_intersection.hpp
+	src/include/sanguis/collision/impl/test_tile.hpp
 	src/include/sanguis/collision/impl/time.hpp
 	src/include/sanguis/collision/impl/time_fwd.hpp
 	src/include/sanguis/collision/impl/world/body_ghost_group_pair.hpp
