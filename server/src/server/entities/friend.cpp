@@ -50,7 +50,6 @@
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
-#include <boost/units/systems/si/mass.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -94,11 +93,7 @@ sanguis::server::entities::friend_::friend_(
 			)
 		),
 		// TODO
-		sanguis::server::optional_mass(
-			1.f
-			*
-			boost::units::si::kilogram
-		),
+		sanguis::server::optional_mass(),
 		sanguis::server::entities::movement_speed_initial(
 			sanguis::server::entities::property::initial_zero(
 				_movement_speed.get()

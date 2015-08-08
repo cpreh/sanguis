@@ -22,6 +22,7 @@
 #include <sanguis/server/direction.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
+#include <sanguis/server/mass.hpp>
 #include <sanguis/server/optional_mass.hpp>
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/player_id.hpp>
@@ -54,7 +55,6 @@
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/units/systems/si/mass.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -90,11 +90,8 @@ sanguis::server::entities::enemies::enemy::enemy(
 				_parameters.enemy_type()
 			)
 		),
-		// TODO
 		sanguis::server::optional_mass(
-			1.f
-			*
-			boost::units::si::kilogram
+			_parameters.mass()
 		),
 		sanguis::server::entities::movement_speed_initial(
 			sanguis::server::entities::property::initial_zero(
@@ -113,6 +110,9 @@ sanguis::server::entities::enemies::enemy::enemy(
 	),
 	exp_(
 		_parameters.exp()
+	),
+	mass_(
+		_parameters.mass()
 	),
 	difficulty_(
 		_parameters.difficulty()
@@ -146,6 +146,13 @@ sanguis::server::entities::enemies::enemy::exp() const
 {
 	return
 		exp_;
+}
+
+sanguis::server::mass const
+sanguis::server::entities::enemies::enemy::mass() const
+{
+	return
+		mass_;
 }
 
 sanguis::server::entities::enemies::difficulty const

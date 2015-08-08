@@ -3,6 +3,7 @@
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
+#include <sanguis/server/mass.hpp>
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/ai/create_simple.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
@@ -28,6 +29,7 @@
 #include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/units/systems/si/mass.hpp>
 #include <cmath>
 #include <fcppt/config/external_end.hpp>
 
@@ -41,6 +43,11 @@ sanguis::server::entities::enemies::factory::zombie00(
 		sanguis::server::entities::enemies::factory::make(
 			_parameters,
 			sanguis::server::damage::no_armor(),
+			sanguis::server::mass{
+				10.f
+				*
+				boost::units::si::kilogram
+			},
 			sanguis::server::health(
 				9.f
 				*

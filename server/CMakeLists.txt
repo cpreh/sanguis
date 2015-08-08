@@ -129,6 +129,7 @@ set(
 	include/sanguis/server/collision/ghost_container.hpp
 	include/sanguis/server/collision/ghost_fwd.hpp
 	include/sanguis/server/collision/to_center.hpp
+	include/sanguis/server/collision/to_mass.hpp
 	include/sanguis/server/collision/to_radius.hpp
 	include/sanguis/server/collision/to_speed.hpp
 	include/sanguis/server/collision/with_world.hpp
@@ -410,6 +411,7 @@ set(
 	include/sanguis/server/events/tick_fwd.hpp
 	include/sanguis/server/exp.hpp
 	include/sanguis/server/exp_for_level.hpp
+	include/sanguis/server/exp_fwd.hpp
 	include/sanguis/server/exp_to_net.hpp
 	include/sanguis/server/global/context.hpp
 	include/sanguis/server/global/context_fwd.hpp
@@ -435,6 +437,8 @@ set(
 	include/sanguis/server/make_unicast_callback.hpp
 	include/sanguis/server/mass.hpp
 	include/sanguis/server/mass_fwd.hpp
+	include/sanguis/server/mass_unit.hpp
+	include/sanguis/server/mass_unit_fwd.hpp
 	include/sanguis/server/message_functor.hpp
 	include/sanguis/server/net/angle.hpp
 	include/sanguis/server/net/angle_fwd.hpp
@@ -505,6 +509,7 @@ set(
 	include/sanguis/server/perks/tree/type_from_container.hpp
 	include/sanguis/server/perks/unique_ptr.hpp
 	include/sanguis/server/pickup_probability.hpp
+	include/sanguis/server/pickup_probability_fwd.hpp
 	include/sanguis/server/player_id.hpp
 	include/sanguis/server/player_id_from_args.hpp
 	include/sanguis/server/player_id_from_net.hpp
@@ -811,6 +816,7 @@ set(
 	src/server/collision/ghost.cpp
 	src/server/collision/ghost_base.cpp
 	src/server/collision/to_center.cpp
+	src/server/collision/to_mass.cpp
 	src/server/collision/to_radius.cpp
 	src/server/collision/to_speed.cpp
 	src/server/collision/with_world.cpp

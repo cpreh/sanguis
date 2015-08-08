@@ -1,6 +1,7 @@
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
+#include <sanguis/server/mass.hpp>
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/regeneration.hpp>
 #include <sanguis/server/ai/create_function.hpp>
@@ -31,6 +32,7 @@ sanguis::server::entities::enemies::parameters::parameters(
 	sanguis::creator::enemy_type const _enemy_type,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::damage::armor_array const &_armor,
+	sanguis::server::mass const _mass,
 	sanguis::server::health const _health,
 	sanguis::server::entities::movement_speed const _movement_speed,
 	sanguis::server::ai::create_function const &_ai_create_function,
@@ -50,6 +52,9 @@ sanguis::server::entities::enemies::parameters::parameters(
 	),
 	armor_(
 		_armor
+	),
+	mass_(
+		_mass
 	),
 	health_(
 		_health
@@ -125,6 +130,13 @@ sanguis::server::entities::enemies::parameters::armor() const
 {
 	return
 		armor_;
+}
+
+sanguis::server::mass const
+sanguis::server::entities::enemies::parameters::mass() const
+{
+	return
+		mass_;
 }
 
 sanguis::server::health const

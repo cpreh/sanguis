@@ -7,6 +7,7 @@
 #include <sanguis/collision/world/created.hpp>
 #include <sanguis/collision/world/object.hpp>
 #include <sanguis/server/center.hpp>
+#include <sanguis/server/mass.hpp>
 #include <sanguis/server/optional_mass.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/speed.hpp>
@@ -14,9 +15,11 @@
 #include <sanguis/server/collision/from_center.hpp>
 #include <sanguis/server/collision/from_speed.hpp>
 #include <sanguis/server/collision/to_center.hpp>
+#include <sanguis/server/collision/to_mass.hpp>
 #include <sanguis/server/collision/to_radius.hpp>
 #include <sanguis/server/collision/to_speed.hpp>
 #include <fcppt/optional_assign.hpp>
+#include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/pre.hpp>
@@ -129,7 +132,18 @@ sanguis::server::collision::body::transfer(
 					sanguis::server::collision::to_radius(
 						radius_
 					),
-					mass_,
+					fcppt::optional_bind_construct(
+						mass_,
+						[](
+							sanguis::server::mass const _mass
+						)
+						{
+							return
+								sanguis::server::collision::to_mass(
+									_mass
+								);
+						}
+					),
 					_collision_group,
 					body_base_
 				)

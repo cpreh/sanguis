@@ -91,7 +91,6 @@
 #include <fcppt/math/vector/atan2.hpp>
 #include <fcppt/math/vector/length_square.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/units/systems/si/mass.hpp>
 #include <functional>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -112,11 +111,7 @@ sanguis::server::entities::player::player(
 		_load_context.model_size(
 			sanguis::load::model::player_path()
 		),
-		sanguis::server::optional_mass(
-			1.f
-			*
-			boost::units::si::kilogram
-		),
+		sanguis::server::optional_mass(),
 		sanguis::server::entities::movement_speed_initial(
 			sanguis::server::entities::property::initial_zero(
 				_speed.get()

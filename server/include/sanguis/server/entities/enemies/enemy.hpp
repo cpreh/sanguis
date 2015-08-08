@@ -8,6 +8,7 @@
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/messages/types/string.hpp>
 #include <sanguis/server/exp.hpp>
+#include <sanguis/server/mass.hpp>
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/team_fwd.hpp>
@@ -64,6 +65,9 @@ public:
 	sanguis::server::exp const
 	exp() const;
 
+	sanguis::server::mass const
+	mass() const;
+
 	sanguis::server::entities::enemies::difficulty const
 	difficulty() const;
 protected:
@@ -99,6 +103,8 @@ private:
 	sanguis::server::pickup_probability const pickup_probability_;
 
 	sanguis::server::exp const exp_;
+
+	sanguis::server::mass const mass_;
 
 	sanguis::server::entities::enemies::difficulty const difficulty_;
 

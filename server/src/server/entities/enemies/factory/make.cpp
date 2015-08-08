@@ -1,11 +1,12 @@
 #include <sanguis/random_generator.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
+#include <sanguis/server/mass.hpp>
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/container.hpp>
-#include <sanguis/server/damage/armor_array.hpp>
+#include <sanguis/server/damage/armor_array_fwd.hpp>
 #include <sanguis/server/entities/movement_speed.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
@@ -32,6 +33,7 @@ sanguis::server::entities::with_id_unique_ptr
 sanguis::server::entities::enemies::factory::make(
 	sanguis::server::entities::enemies::factory::parameters const &_parameters,
 	sanguis::server::damage::armor_array const &_armor,
+	sanguis::server::mass const _mass,
 	sanguis::server::health const _health,
 	sanguis::server::entities::movement_speed const _movement_speed,
 	sanguis::server::ai::create_function const &_ai_create_function,
@@ -45,6 +47,7 @@ sanguis::server::entities::enemies::factory::make(
 		_parameters.enemy_type(),
 		_parameters.load_context(),
 		_armor,
+		_mass,
 		_health,
 		_movement_speed,
 		_ai_create_function,

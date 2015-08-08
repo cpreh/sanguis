@@ -69,6 +69,7 @@ sanguis::server::entities::enemies::skills::mother_spider::on_die(
 							_enemy.enemy_type(),
 							environment.load_context(),
 							_enemy.armor(),
+							_enemy.mass(),
 							// TODO: This parameter should probably be of type max_health
 							sanguis::server::health{
 								_enemy.max_health().get()

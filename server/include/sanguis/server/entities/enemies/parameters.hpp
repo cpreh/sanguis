@@ -4,6 +4,7 @@
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
+#include <sanguis/server/mass.hpp>
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/regeneration.hpp>
 #include <sanguis/server/ai/create_function.hpp>
@@ -42,6 +43,7 @@ public:
 		sanguis::creator::enemy_type,
 		sanguis::server::environment::load_context &,
 		sanguis::server::damage::armor_array const &,
+		sanguis::server::mass,
 		sanguis::server::health,
 		sanguis::server::entities::movement_speed,
 		sanguis::server::ai::create_function const &,
@@ -72,6 +74,9 @@ public:
 
 	sanguis::server::damage::armor_array const &
 	armor() const;
+
+	sanguis::server::mass const
+	mass() const;
 
 	sanguis::server::health const
 	health() const;
@@ -170,6 +175,8 @@ private:
 	sanguis::server::environment::load_context &load_context_;
 
 	sanguis::server::damage::armor_array armor_;
+
+	sanguis::server::mass const mass_;
 
 	sanguis::server::health health_;
 

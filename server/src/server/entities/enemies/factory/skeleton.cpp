@@ -1,6 +1,7 @@
 #include <sanguis/duration_second.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/health.hpp>
+#include <sanguis/server/mass.hpp>
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/ai/create_simple.hpp>
@@ -30,6 +31,7 @@
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/units/systems/si/mass.hpp>
 #include <cmath>
 #include <fcppt/config/external_end.hpp>
 
@@ -48,6 +50,11 @@ sanguis::server::entities::enemies::factory::skeleton(
 		sanguis::server::entities::enemies::factory::make(
 			_parameters,
 			sanguis::server::damage::no_armor(),
+			sanguis::server::mass{
+				20.f
+				*
+				boost::units::si::kilogram
+			},
 			sanguis::server::health(
 				12.f
 				*
