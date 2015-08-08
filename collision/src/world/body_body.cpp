@@ -14,6 +14,7 @@
 #include <fcppt/maybe_multi.hpp>
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/dot.hpp>
 #include <fcppt/math/vector/map.hpp>
 #include <fcppt/math/vector/static.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -75,7 +76,7 @@ sanguis::collision::world::body_body(
 									fcppt::literal<
 										sanguis::collision::unit
 									>(
-										0.7f
+										0.9f
 									)
 								);
 
@@ -93,12 +94,9 @@ sanguis::collision::world::body_body(
 									_body2.speed()
 								);
 
-								fcppt::math::vector::static_<
-									boost::units::quantity<
-										boost::units::si::momentum,
-										sanguis::collision::unit
-									>,
-									2
+								boost::units::quantity<
+									boost::units::si::momentum,
+									sanguis::collision::unit
 								> const impulse(
 									(
 										-(
@@ -107,25 +105,26 @@ sanguis::collision::world::body_body(
 											elasticity
 										)
 										*
-										speed_diff
+										// TODO: Make a dot function that respects boost units
+										fcppt::math::vector::dot(
+											fcppt::math::vector::map(
+												speed_diff,
+												fcppt::boost_units_value{}
+											),
+											_normal
+										)
 										*
-										_normal
+										boost::units::si::meter_per_second
 									)
 									/
 									(
-										_normal
-										*
-										_normal
-										*
-										(
-											one
-											/
-											_mass1
-											+
-											one
-											/
-											_mass2
-										)
+										one
+										/
+										_mass1
+										+
+										one
+										/
+										_mass2
 									)
 								);
 
