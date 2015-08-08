@@ -83,6 +83,9 @@ set(
 	src/impl/world/body_groups_for_ghost_group.cpp
 	src/impl/world/ghost_groups_for_body_group.cpp
 	src/include/sanguis/collision/impl/adjust_speed.hpp
+	src/include/sanguis/collision/impl/circle.hpp
+	src/include/sanguis/collision/impl/circle_fwd.hpp
+	src/include/sanguis/collision/impl/collides.hpp
 	src/include/sanguis/collision/impl/cross2.hpp
 	src/include/sanguis/collision/impl/dir.hpp
 	src/include/sanguis/collision/impl/dir_fwd.hpp
@@ -97,6 +100,8 @@ set(
 	src/include/sanguis/collision/impl/log.hpp
 	src/include/sanguis/collision/impl/make_range.hpp
 	src/include/sanguis/collision/impl/make_spiral_range.hpp
+	src/include/sanguis/collision/impl/move.hpp
+	src/include/sanguis/collision/impl/move_circle.hpp
 	src/include/sanguis/collision/impl/normalize_opt.hpp
 	src/include/sanguis/collision/impl/optional_intersection.hpp
 	src/include/sanguis/collision/impl/optional_intersection_fwd.hpp
@@ -114,9 +119,9 @@ set(
 	src/include/sanguis/collision/impl/world/body_group_relation.hpp
 	src/include/sanguis/collision/impl/world/body_groups_for_body_group.hpp
 	src/include/sanguis/collision/impl/world/body_groups_for_ghost_group.hpp
-	src/include/sanguis/collision/impl/world/collides.hpp
 	src/include/sanguis/collision/impl/world/ghost_group_container.hpp
 	src/include/sanguis/collision/impl/world/ghost_groups_for_body_group.hpp
+	src/include/sanguis/collision/impl/world/make_circle.hpp
 	src/include/sanguis/collision/impl/world/make_groups.hpp
 	src/log_location.cpp
 	src/result.cpp

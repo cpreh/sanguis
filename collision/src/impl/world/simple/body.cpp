@@ -5,10 +5,10 @@
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/result.hpp>
 #include <sanguis/collision/speed.hpp>
-#include <sanguis/collision/impl/duration_to_time.hpp>
 #include <sanguis/collision/impl/grid_to_meter.hpp>
 #include <sanguis/collision/impl/is_null.hpp>
 #include <sanguis/collision/impl/log.hpp>
+#include <sanguis/collision/impl/move.hpp>
 #include <sanguis/collision/impl/world/simple/body.hpp>
 #include <sanguis/collision/impl/world/simple/body_remove_callback.hpp>
 #include <sanguis/collision/world/body.hpp>
@@ -148,14 +148,10 @@ sanguis::collision::impl::world::simple::body::move(
 	);
 
 	center_ =
-		sanguis::collision::center(
-			center_.get()
-			+
-			speed_
-			*
-			sanguis::collision::impl::duration_to_time(
-				_duration
-			)
+		sanguis::collision::impl::move(
+			center_,
+			speed_,
+			_duration
 		);
 
 	body_base_.center_changed(

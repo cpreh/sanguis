@@ -2,10 +2,11 @@
 #include <sanguis/collision/duration.hpp>
 #include <sanguis/collision/result_pair.hpp>
 #include <sanguis/collision/test_move.hpp>
+#include <sanguis/collision/impl/collides.hpp>
 #include <sanguis/collision/impl/world/body_groups_for_body_group.hpp>
 #include <sanguis/collision/impl/world/body_groups_for_ghost_group.hpp>
-#include <sanguis/collision/impl/world/collides.hpp>
 #include <sanguis/collision/impl/world/ghost_groups_for_body_group.hpp>
+#include <sanguis/collision/impl/world/make_circle.hpp>
 #include <sanguis/collision/impl/world/simple/body.hpp>
 #include <sanguis/collision/impl/world/simple/body_list.hpp>
 #include <sanguis/collision/impl/world/simple/body_list_grid.hpp>
@@ -467,7 +468,8 @@ sanguis::collision::impl::world::simple::object::move_bodies(
 					grid_.size(),
 					[
 						&body1,
-						this
+						this,
+						_duration
 					](
 						sanguis::creator::pos const _pos2
 					)
@@ -493,7 +495,8 @@ sanguis::collision::impl::world::simple::object::move_bodies(
 								fcppt::maybe_void(
 									sanguis::collision::world::body_body(
 										body1,
-										body2
+										body2,
+										_duration
 									),
 									[
 										&body1,
@@ -586,9 +589,13 @@ sanguis::collision::impl::world::simple::object::body_collisions() const
 							]
 						)
 							if(
-								sanguis::collision::impl::world::collides(
-									body1.get(),
-									body2
+								sanguis::collision::impl::collides(
+									sanguis::collision::impl::world::make_circle(
+										body1.get()
+									),
+									sanguis::collision::impl::world::make_circle(
+										body2
+									)
 								)
 							)
 								result.push_back(

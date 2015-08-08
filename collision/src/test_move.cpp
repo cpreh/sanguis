@@ -7,11 +7,11 @@
 #include <sanguis/collision/test_move.hpp>
 #include <sanguis/collision/impl/adjust_speed.hpp>
 #include <sanguis/collision/impl/dir.hpp>
-#include <sanguis/collision/impl/duration_to_time.hpp>
 #include <sanguis/collision/impl/grid_to_meter.hpp>
 #include <sanguis/collision/impl/is_null.hpp>
 #include <sanguis/collision/impl/line_segment.hpp>
 #include <sanguis/collision/impl/make_spiral_range.hpp>
+#include <sanguis/collision/impl/move.hpp>
 #include <sanguis/collision/impl/pos.hpp>
 #include <sanguis/collision/impl/rect.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
@@ -67,22 +67,14 @@ sanguis::collision::test_move(
 		false
 	);
 
-	auto const elapsed_time(
-		sanguis::collision::impl::duration_to_time(
-			_time
-		)
-	);
-
 	for(
 		sanguis::creator::signed_pos const entry
 		:
 		sanguis::collision::impl::make_spiral_range(
-			sanguis::collision::center(
-				_center.get()
-				+
-				_speed
-				*
-				elapsed_time
+			sanguis::collision::impl::move(
+				_center,
+				_speed,
+				_time
 			),
 			_radius
 		)
@@ -107,7 +99,6 @@ sanguis::collision::test_move(
 				_radius,
 				_time,
 				cur_pos,
-				elapsed_time,
 				&changed,
 				&new_speed
 			](
@@ -122,11 +113,11 @@ sanguis::collision::test_move(
 					return;
 
 				sanguis::collision::center const new_center(
-					_center.get()
-					+
-					new_speed
-					*
-					elapsed_time
+					sanguis::collision::impl::move(
+						_center,
+						new_speed,
+						_time
+					)
 				);
 
 				sanguis::collision::impl::rect const rect(

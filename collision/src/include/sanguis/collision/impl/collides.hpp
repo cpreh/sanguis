@@ -1,8 +1,7 @@
-#ifndef SANGUIS_COLLISION_IMPL_WORLD_COLLIDES_HPP_INCLUDED
-#define SANGUIS_COLLISION_IMPL_WORLD_COLLIDES_HPP_INCLUDED
+#ifndef SANGUIS_COLLISION_IMPL_COLLIDES_HPP_INCLUDED
+#define SANGUIS_COLLISION_IMPL_COLLIDES_HPP_INCLUDED
 
-#include <sanguis/collision/center.hpp>
-#include <sanguis/collision/radius.hpp>
+#include <sanguis/collision/impl/circle.hpp>
 #include <fcppt/boost_units_value.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/length.hpp>
@@ -15,41 +14,34 @@ namespace collision
 {
 namespace impl
 {
-namespace world
-{
 
-template<
-	typename Type1,
-	typename Type2
->
 inline
 bool
 collides(
-	Type1 const &_left,
-	Type2 const &_right
+	sanguis::collision::impl::circle const _left,
+	sanguis::collision::impl::circle const _right
 )
 {
 	return
 		// TODO: Can we do this on boost::units directly?
 		fcppt::math::vector::length(
 			fcppt::math::vector::map(
-				_left.center().get()
+				_left.origin()
 				-
-				_right.center().get()
+				_right.origin()
 				,
 				fcppt::boost_units_value{}
 			)
 		)
 		<=
 		(
-			_left.radius().get()
+			_left.radius()
 			+
-			_right.radius().get()
+			_right.radius()
 		).value()
 		;
 }
 
-}
 }
 }
 }
