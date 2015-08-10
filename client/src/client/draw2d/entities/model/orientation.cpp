@@ -1,4 +1,5 @@
 #include <sanguis/client/draw2d/funit.hpp>
+#include <sanguis/client/draw2d/entities/model/clamp_orientation.hpp>
 #include <sanguis/client/draw2d/entities/model/desired_orientation.hpp>
 #include <sanguis/client/draw2d/entities/model/orientation.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
@@ -14,34 +15,13 @@
 namespace
 {
 
-sanguis::client::draw2d::funit const twopi(
-	fcppt::math::twopi<
-		sanguis::client::draw2d::funit
-	>()
-);
-
-void
-assert_range(
-	sanguis::client::draw2d::sprite::rotation
-);
-
-}
-
-sanguis::client::draw2d::sprite::rotation
-sanguis::client::draw2d::entities::model::orientation(
+sanguis::client::draw2d::sprite::rotation const
+impl(
 	sanguis::client::draw2d::funit const _delta,
 	sanguis::client::draw2d::sprite::rotation const _orientation,
-	sanguis::client::draw2d::entities::model::desired_orientation const _desired_orientation
+	sanguis::client::draw2d::sprite::rotation const _desired_orientation
 )
 {
-	::assert_range(
-		_orientation
-	);
-
-	::assert_range(
-		_desired_orientation.get()
-	);
-
 	// Explanation: we now have the current orientation ('c') and the target ('t')
 	// angle on a "line":
 	//
@@ -55,19 +35,37 @@ sanguis::client::draw2d::entities::model::orientation(
 	// 't', hence the if test in swap_dist.
 	//
 
+	sanguis::client::draw2d::funit const twopi(
+		fcppt::math::twopi<
+			sanguis::client::draw2d::funit
+		>()
+	);
+
 	sanguis::client::draw2d::funit const
 		// this is the "inner distance" from
 		abs_dist(
 			std::abs(
-				_desired_orientation.get().get() - _orientation.get()
+				_desired_orientation.get()
+				-
+				_orientation.get()
 			)
 		),
 		swap_dist(
-			(_orientation > _desired_orientation.get())
+			_orientation
+			>
+			_desired_orientation
 			?
-				::twopi - _orientation.get() + _desired_orientation.get().get()
+				twopi
+				-
+				_orientation.get()
+				+
+				_desired_orientation.get()
 			:
-				::twopi - _desired_orientation.get().get() + _orientation.get()
+				twopi
+				-
+				_desired_orientation.get()
+				+
+				_orientation.get()
 		),
 		min_dist(
 			std::min(
@@ -110,10 +108,14 @@ sanguis::client::draw2d::entities::model::orientation(
 	// (i) which distance (abs_dist or swap_dist) is smaller
 	// (ii) if the current orientation is greater than the target
 	sanguis::client::draw2d::funit const dir(
-		_orientation > _desired_orientation.get()
+		_orientation
+		>
+		_desired_orientation
 		?
 			(
-				(swap_dist > abs_dist)
+				swap_dist
+				>
+				abs_dist
 				?
 					minus_one
 				:
@@ -121,7 +123,9 @@ sanguis::client::draw2d::entities::model::orientation(
 			)
 		:
 			(
-				(swap_dist > abs_dist)
+				swap_dist
+				>
+				abs_dist
 				?
 					one
 				:
@@ -139,7 +143,8 @@ sanguis::client::draw2d::entities::model::orientation(
 		dir
 		*
 		_delta
-		* turning_speed
+		*
+		turning_speed
 	);
 
 	// This fixes the "epilepsy" bug. Imagine the current orientation being 10,
@@ -148,53 +153,48 @@ sanguis::client::draw2d::entities::model::orientation(
 	// or 20 in the next frame, but maybe 30. If the next frame is slow again,
 	// the orientation is corrected "downwards" to 5 or 10 again, then upwards and
 	// so on, causing epilepsy.
-	if(
+	return
 		dir > null
-	)
-	{
-		if(
-			new_orientation < _desired_orientation.get()
-		)
-			return
-				new_orientation;
-		else
-			return
-				_desired_orientation.get();
-	}
-	else
-	{
-		if(
-			new_orientation > _desired_orientation.get()
-		)
-			return
-				new_orientation;
-		else
-			return
-				_desired_orientation.get();
-	}
+		?
+			(
+				new_orientation
+				<
+				_desired_orientation
+				?
+					new_orientation
+				:
+					_desired_orientation
+			)
+		:
+			(
+				new_orientation
+				>
+				_desired_orientation
+				?
+					new_orientation
+				:
+					_desired_orientation
+			)
+		;
 }
 
-namespace
-{
+}
 
-void
-assert_range(
-	sanguis::client::draw2d::sprite::rotation const _value
+sanguis::client::draw2d::sprite::rotation
+sanguis::client::draw2d::entities::model::orientation(
+	sanguis::client::draw2d::funit const _delta,
+	sanguis::client::draw2d::sprite::rotation const _orientation,
+	sanguis::client::draw2d::entities::model::desired_orientation const _desired_orientation
 )
 {
-	FCPPT_ASSERT_ERROR(
-		_value.get()
-		>=
-		fcppt::literal<
-			sanguis::client::draw2d::funit
-		>(
-			0
-		)
-		&&
-		_value.get()
-		<=
-		::twopi
-	);
-}
-
+	return
+		impl(
+			_delta,
+			sanguis::client::draw2d::entities::model::clamp_orientation(
+				_orientation
+			),
+			sanguis::client::draw2d::entities::model::clamp_orientation(
+				_desired_orientation.get()
+			)
+		);
 }

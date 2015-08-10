@@ -3,7 +3,6 @@
 #include <sanguis/optional_primary_weapon_type.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
-#include <sanguis/client/draw2d/entities/model/clamp_orientation.hpp>
 #include <sanguis/client/draw2d/entities/model/desired_orientation.hpp>
 #include <sanguis/client/draw2d/entities/model/loop_method.hpp>
 #include <sanguis/client/draw2d/entities/model/make_sound.hpp>
@@ -189,9 +188,7 @@ sanguis::client::draw2d::entities::model::part::orientation(
 {
 	desired_orientation_ =
 		sanguis::client::draw2d::entities::model::desired_orientation{
-			sanguis::client::draw2d::entities::model::clamp_orientation(
-				_rot
-			)
+			_rot
 		};
 }
 
