@@ -5,6 +5,8 @@
 #include <sanguis/client/draw2d/entities/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/hover/optional_info_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
+#include <sanguis/client/draw2d/sprite/center_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/rotation_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -27,6 +29,8 @@ class weapon_pickup
 public:
 	weapon_pickup(
 		sanguis::client::draw2d::entities::load_parameters const &,
+		sanguis::client::draw2d::sprite::center,
+		sanguis::client::draw2d::sprite::rotation,
 		sanguis::weapon_description const &
 	);
 

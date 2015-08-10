@@ -4,6 +4,8 @@
 #include <sanguis/pickup_type_fwd.hpp>
 #include <sanguis/client/draw2d/entities/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
+#include <sanguis/client/draw2d/sprite/center_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/rotation_fwd.hpp>
 
 
 namespace sanguis
@@ -18,7 +20,9 @@ namespace factory
 sanguis::client::draw2d::entities::unique_ptr
 pickup(
 	sanguis::client::draw2d::entities::load_parameters const &,
-	sanguis::pickup_type
+	sanguis::pickup_type,
+	sanguis::client::draw2d::sprite::center,
+	sanguis::client::draw2d::sprite::rotation
 );
 
 }

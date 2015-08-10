@@ -1,22 +1,27 @@
+#include <sanguis/optional_primary_weapon_type.hpp>
+#include <sanguis/weapon_status.hpp>
 #include <sanguis/client/optional_health_pair.hpp>
 #include <sanguis/client/draw2d/center.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
+#include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/speed_is_null.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
+#include <sanguis/client/draw2d/z_ordering_vector.hpp>
 #include <sanguis/client/draw2d/entities/bullet.hpp>
 #include <sanguis/client/draw2d/entities/load_parameters_fwd.hpp>
+#include <sanguis/client/draw2d/entities/order_function_from_vector.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
+#include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/index.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
+#include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/draw2d/sprite/unit.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sanguis/client/draw2d/sprite/normal/white.hpp>
 #include <sanguis/load/model/path_fwd.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/optional_impl.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/float_to_int_fun.hpp>
 #include <fcppt/cast/int_to_float.hpp>
@@ -25,35 +30,53 @@
 #include <fcppt/math/vector/length.hpp>
 #include <fcppt/math/vector/normalize.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace
 {
 
-sanguis::client::draw2d::sprite::index const
-	tail(1);
+sanguis::client::draw2d::sprite::index const tail{
+	1u
+};
 
 }
 
 sanguis::client::draw2d::entities::bullet::bullet(
 	sanguis::client::draw2d::entities::load_parameters const &_parameters,
-	sanguis::load::model::path const &_path
+	sanguis::client::draw2d::speed const _speed,
+	sanguis::client::draw2d::sprite::center const _center,
+	sanguis::client::draw2d::sprite::rotation const _rotation,
+	sanguis::load::model::path &&_path
 )
 :
 	sanguis::client::draw2d::entities::model::object(
 		sanguis::client::draw2d::entities::model::parameters(
 			_parameters,
-			_path,
-			sanguis::client::draw2d::entities::order_vector{
-				sanguis::client::draw2d::z_ordering::bullet,
-				sanguis::client::draw2d::z_ordering::bullet_tail
-			},
+			std::move(
+				_path
+			),
+			sanguis::client::draw2d::entities::order_function_from_vector(
+				sanguis::client::draw2d::z_ordering_vector{
+					sanguis::client::draw2d::z_ordering::bullet,
+					sanguis::client::draw2d::z_ordering::bullet_tail
+				}
+			),
 			sanguis::client::optional_health_pair(),
 			sanguis::client::draw2d::entities::model::decay_option::immediate,
+			sanguis::optional_primary_weapon_type(),
+			sanguis::weapon_status::nothing,
+			_speed,
+			_center,
+			_rotation,
 			sanguis::client::draw2d::sprite::normal::white()
 		)
 	),
-	origin_()
+	origin_(
+		_center
+	)
 {
 	this->at(
 		tail
@@ -73,15 +96,6 @@ sanguis::client::draw2d::entities::bullet::~bullet()
 void
 sanguis::client::draw2d::entities::bullet::update()
 {
-	// TODO: Set this somewhere else!
-	if(
-		!origin_.has_value()
-	)
-		origin_ =
-			optional_center(
-				this->center()
-			);
-
 	sanguis::client::draw2d::entities::model::object::update();
 
 	sanguis::client::draw2d::funit const
@@ -98,9 +112,7 @@ sanguis::client::draw2d::entities::bullet::update()
 					sanguis::client::draw2d::funit
 				>(
 					(
-						FCPPT_ASSERT_OPTIONAL_ERROR(
-							origin_
-						)
+						origin_
 						-
 						this->center()
 					).get()

@@ -42,30 +42,6 @@ sanguis::client::draw2d::entities::buffs::burn::burn(
 )
 :
 	sanguis::client::draw2d::entities::buffs::base(),
-	sprite_(
-		sge::sprite::roles::connection{} =
-			_normal_system.connection(
-				sanguis::client::draw2d::z_ordering::flare
-			),
-		sge::sprite::roles::center{} =
-			_model.center().get(),
-		sge::sprite::roles::rotation{} =
-			sanguis::client::draw2d::sprite::normal::no_rotation(),
-		sge::sprite::roles::size_or_texture_size{} =
-			sanguis::client::draw2d::sprite::size_or_texture_size{
-				_model.master().size()
-				/
-				fcppt::literal<
-					sanguis::client::draw2d::sprite::unit
-				>(
-					2
-				)
-			},
-		sge::sprite::roles::texture0{} =
-			sanguis::client::draw2d::sprite::normal::object::texture_type{},
-		sge::sprite::roles::color{} =
-			sanguis::client::draw2d::sprite::normal::white()
-	),
 	animation_(
 		_model_collection[
 			sanguis::load::model::path{
@@ -83,8 +59,31 @@ sanguis::client::draw2d::entities::buffs::burn::burn(
 		]
 		.series(),
 		sanguis::client::draw2d::sprite::animation::loop_method::repeat,
-		sprite_,
 		_diff_clock
+	),
+	sprite_(
+		sge::sprite::roles::connection{} =
+			_normal_system.connection(
+				sanguis::client::draw2d::z_ordering::flare
+			),
+		sge::sprite::roles::center{} =
+			_model.center().get(),
+		sge::sprite::roles::rotation{} =
+			sanguis::client::draw2d::sprite::normal::no_rotation().get(),
+		sge::sprite::roles::size_or_texture_size{} =
+			sanguis::client::draw2d::sprite::size_or_texture_size{
+				_model.master().size()
+				/
+				fcppt::literal<
+					sanguis::client::draw2d::sprite::unit
+				>(
+					2
+				)
+			},
+		sge::sprite::roles::texture0{} =
+			animation_.current_texture(),
+		sge::sprite::roles::color{} =
+			sanguis::client::draw2d::sprite::normal::white()
 	)
 {
 }
@@ -102,5 +101,7 @@ sanguis::client::draw2d::entities::buffs::burn::update(
 		_model.center().get()
 	);
 
-	animation_.process();
+	sprite_.texture(
+		animation_.current_texture()
+	);
 }

@@ -92,6 +92,7 @@ set(
 	include/sanguis/client/draw2d/entities/buffs/slow.hpp
 	include/sanguis/client/draw2d/entities/buffs/unique_ptr.hpp
 	include/sanguis/client/draw2d/entities/bullet.hpp
+	include/sanguis/client/draw2d/entities/constant_order.hpp
 	include/sanguis/client/draw2d/entities/container.hpp
 	include/sanguis/client/draw2d/entities/create_parameters.hpp
 	include/sanguis/client/draw2d/entities/create_parameters_fwd.hpp
@@ -122,17 +123,26 @@ set(
 	include/sanguis/client/draw2d/entities/ifaces/with_speed.hpp
 	include/sanguis/client/draw2d/entities/ifaces/with_visibility.hpp
 	include/sanguis/client/draw2d/entities/ifaces/with_weapon.hpp
+	include/sanguis/client/draw2d/entities/level.hpp
+	include/sanguis/client/draw2d/entities/level_fwd.hpp
+	include/sanguis/client/draw2d/entities/level_vector.hpp
 	include/sanguis/client/draw2d/entities/load_parameters.hpp
 	include/sanguis/client/draw2d/entities/load_parameters_fwd.hpp
+	include/sanguis/client/draw2d/entities/model/animation.hpp
+	include/sanguis/client/draw2d/entities/model/animation_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/clamp_orientation.hpp
 	include/sanguis/client/draw2d/entities/model/decay_option.hpp
 	include/sanguis/client/draw2d/entities/model/decay_option_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/decay_time.hpp
 	include/sanguis/client/draw2d/entities/model/decay_time_fwd.hpp
-	include/sanguis/client/draw2d/entities/model/expand_orders.hpp
+	include/sanguis/client/draw2d/entities/model/desired_orientation.hpp
+	include/sanguis/client/draw2d/entities/model/desired_orientation_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/loop_method.hpp
+	include/sanguis/client/draw2d/entities/model/make_sound.hpp
 	include/sanguis/client/draw2d/entities/model/object.hpp
 	include/sanguis/client/draw2d/entities/model/object_fwd.hpp
+	include/sanguis/client/draw2d/entities/model/optional_sound.hpp
+	include/sanguis/client/draw2d/entities/model/optional_sound_fwd.hpp
 	include/sanguis/client/draw2d/entities/model/orientation.hpp
 	include/sanguis/client/draw2d/entities/model/parameters.hpp
 	include/sanguis/client/draw2d/entities/model/parameters_fwd.hpp
@@ -142,7 +152,8 @@ set(
 	include/sanguis/client/draw2d/entities/name_fwd.hpp
 	include/sanguis/client/draw2d/entities/optional_own_unique_ptr.hpp
 	include/sanguis/client/draw2d/entities/optional_own_unique_ptr_fwd.hpp
-	include/sanguis/client/draw2d/entities/order_vector.hpp
+	include/sanguis/client/draw2d/entities/order_function.hpp
+	include/sanguis/client/draw2d/entities/order_function_from_vector.hpp
 	include/sanguis/client/draw2d/entities/other_player.hpp
 	include/sanguis/client/draw2d/entities/own.hpp
 	include/sanguis/client/draw2d/entities/own_fwd.hpp
@@ -209,9 +220,6 @@ set(
 	include/sanguis/client/draw2d/scene/background_texture_coordinates.hpp
 	include/sanguis/client/draw2d/scene/camera.hpp
 	include/sanguis/client/draw2d/scene/camera_fwd.hpp
-	include/sanguis/client/draw2d/scene/configure_entity.hpp
-	include/sanguis/client/draw2d/scene/configure_entity_fwd.hpp
-	include/sanguis/client/draw2d/scene/health_pair.hpp
 	include/sanguis/client/draw2d/scene/hover/base.hpp
 	include/sanguis/client/draw2d/scene/hover/base_fwd.hpp
 	include/sanguis/client/draw2d/scene/hover/base_unique_ptr.hpp
@@ -291,9 +299,8 @@ set(
 	include/sanguis/client/draw2d/speed_is_null.hpp
 	include/sanguis/client/draw2d/sprite/animation/loop_method.hpp
 	include/sanguis/client/draw2d/sprite/animation/loop_method_fwd.hpp
-	include/sanguis/client/draw2d/sprite/animation/texture_decl.hpp
+	include/sanguis/client/draw2d/sprite/animation/texture.hpp
 	include/sanguis/client/draw2d/sprite/animation/texture_fwd.hpp
-	include/sanguis/client/draw2d/sprite/animation/texture_impl.hpp
 	include/sanguis/client/draw2d/sprite/buffers_decl.hpp
 	include/sanguis/client/draw2d/sprite/buffers_fwd.hpp
 	include/sanguis/client/draw2d/sprite/buffers_impl.hpp
@@ -334,14 +341,13 @@ set(
 	include/sanguis/client/draw2d/sprite/normal/object_fwd.hpp
 	include/sanguis/client/draw2d/sprite/normal/system_decl.hpp
 	include/sanguis/client/draw2d/sprite/normal/system_fwd.hpp
-	include/sanguis/client/draw2d/sprite/normal/texture_animation_decl.hpp
-	include/sanguis/client/draw2d/sprite/normal/texture_animation_fwd.hpp
 	include/sanguis/client/draw2d/sprite/normal/white.hpp
 	include/sanguis/client/draw2d/sprite/optional_dim.hpp
 	include/sanguis/client/draw2d/sprite/optional_dim_fwd.hpp
 	include/sanguis/client/draw2d/sprite/point.hpp
 	include/sanguis/client/draw2d/sprite/point_fwd.hpp
 	include/sanguis/client/draw2d/sprite/rotation.hpp
+	include/sanguis/client/draw2d/sprite/rotation_fwd.hpp
 	include/sanguis/client/draw2d/sprite/size_or_texture_size.hpp
 	include/sanguis/client/draw2d/sprite/size_or_texture_size_fwd.hpp
 	include/sanguis/client/draw2d/sprite/state.hpp
@@ -355,8 +361,12 @@ set(
 	include/sanguis/client/draw2d/sprite/type_choices.hpp
 	include/sanguis/client/draw2d/sprite/type_choices_fwd.hpp
 	include/sanguis/client/draw2d/sprite/unit.hpp
+	include/sanguis/client/draw2d/translate/center.hpp
+	include/sanguis/client/draw2d/translate/health_pair.hpp
+	include/sanguis/client/draw2d/translate/rotation.hpp
 	include/sanguis/client/draw2d/translate/scalar_from_client.hpp
 	include/sanguis/client/draw2d/translate/scalar_to_client.hpp
+	include/sanguis/client/draw2d/translate/speed.hpp
 	include/sanguis/client/draw2d/translate/vector_from_client.hpp
 	include/sanguis/client/draw2d/translate/vector_to_client.hpp
 	include/sanguis/client/draw2d/translation.hpp
@@ -366,6 +376,7 @@ set(
 	include/sanguis/client/draw2d/vector2_fwd.hpp
 	include/sanguis/client/draw2d/z_ordering.hpp
 	include/sanguis/client/draw2d/z_ordering_fwd.hpp
+	include/sanguis/client/draw2d/z_ordering_vector.hpp
 	include/sanguis/client/events/action.hpp
 	include/sanguis/client/events/action_fwd.hpp
 	include/sanguis/client/events/connected.hpp
@@ -462,7 +473,6 @@ set(
 	include/sanguis/client/load/model/animation_fwd.hpp
 	include/sanguis/client/load/model/animation_map.hpp
 	include/sanguis/client/load/model/animation_unique_ptr.hpp
-	include/sanguis/client/load/model/base_animation_not_found.hpp
 	include/sanguis/client/load/model/collection.hpp
 	include/sanguis/client/load/model/collection_fwd.hpp
 	include/sanguis/client/load/model/context.hpp
@@ -491,8 +501,6 @@ set(
 	include/sanguis/client/load/model/weapon_category_map.hpp
 	include/sanguis/client/load/model/weapon_category_unique_ptr.hpp
 	include/sanguis/client/load/next_file.hpp
-	include/sanguis/client/load/optional_animation_type.hpp
-	include/sanguis/client/load/optional_animation_type_fwd.hpp
 	include/sanguis/client/load/primary_weapon_name.hpp
 	include/sanguis/client/load/resource/animation/entity.hpp
 	include/sanguis/client/load/resource/animation/entity_fwd.hpp
@@ -643,6 +651,7 @@ set(
 	src/client/draw2d/entities/buffs/create.cpp
 	src/client/draw2d/entities/buffs/slow.cpp
 	src/client/draw2d/entities/bullet.cpp
+	src/client/draw2d/entities/constant_order.cpp
 	src/client/draw2d/entities/container.cpp
 	src/client/draw2d/entities/create_parameters.cpp
 	src/client/draw2d/entities/enemy.cpp
@@ -661,15 +670,18 @@ set(
 	src/client/draw2d/entities/ifaces/with_speed.cpp
 	src/client/draw2d/entities/ifaces/with_visibility.cpp
 	src/client/draw2d/entities/ifaces/with_weapon.cpp
+	src/client/draw2d/entities/level.cpp
 	src/client/draw2d/entities/load_parameters.cpp
+	src/client/draw2d/entities/model/animation.cpp
 	src/client/draw2d/entities/model/clamp_orientation.cpp
 	src/client/draw2d/entities/model/decay_time.cpp
-	src/client/draw2d/entities/model/expand_orders.cpp
 	src/client/draw2d/entities/model/loop_method.cpp
+	src/client/draw2d/entities/model/make_sound.cpp
 	src/client/draw2d/entities/model/object.cpp
 	src/client/draw2d/entities/model/orientation.cpp
 	src/client/draw2d/entities/model/parameters.cpp
 	src/client/draw2d/entities/model/part.cpp
+	src/client/draw2d/entities/order_function_from_vector.cpp
 	src/client/draw2d/entities/other_player.cpp
 	src/client/draw2d/entities/own.cpp
 	src/client/draw2d/entities/own_player.cpp
@@ -725,11 +737,10 @@ set(
 	src/client/draw2d/scene/world/render_parameters.cpp
 	src/client/draw2d/scene/world/state.cpp
 	src/client/draw2d/speed_is_null.cpp
+	src/client/draw2d/sprite/animation/texture.cpp
 	src/client/draw2d/sprite/client/system.cpp
-	src/client/draw2d/sprite/index.cpp
 	src/client/draw2d/sprite/normal/no_rotation.cpp
 	src/client/draw2d/sprite/normal/system.cpp
-	src/client/draw2d/sprite/normal/texture_animation.cpp
 	src/client/draw2d/sprite/normal/white.cpp
 	src/client/draw2d/translate/scalar_from_client.cpp
 	src/client/draw2d/translate/scalar_to_client.cpp
@@ -782,7 +793,6 @@ set(
 	src/client/load/hud/weapon_type.cpp
 	src/client/load/log.cpp
 	src/client/load/model/animation.cpp
-	src/client/load/model/base_animation_not_found.cpp
 	src/client/load/model/collection.cpp
 	src/client/load/model/context.cpp
 	src/client/load/model/global_parameters.cpp

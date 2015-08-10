@@ -47,16 +47,21 @@ sanguis::client::load::model::part::operator[](
 			]()
 			-> sanguis::client::load::model::weapon_category const &
 			{
+				sanguis::optional_primary_weapon_type const fallback{};
+
 				if(
-					!_type.has_value()
+					_type
+					==
+					fallback
 				)
-					throw sanguis::exception(
-						FCPPT_TEXT("Unarmed weapon model missing in TODO")
-					);
+					throw
+						sanguis::exception{
+							FCPPT_TEXT("Unarmed weapon model missing in TODO")
+						};
 
 				return
 					(*this)[
-						sanguis::optional_primary_weapon_type()
+						fallback
 					];
 			},
 			[](

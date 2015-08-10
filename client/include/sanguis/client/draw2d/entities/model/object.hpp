@@ -22,7 +22,6 @@
 #include <sanguis/client/load/model/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_decl.hpp>
-#include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
@@ -132,9 +131,21 @@ protected:
 	sanguis::client::optional_health_pair const
 	health_pair() const;
 private:
+	typedef
+	std::vector<
+		sanguis::client::draw2d::entities::model::part
+	>
+	part_vector;
+
 	object(
 		sanguis::client::draw2d::entities::model::parameters const &,
 		sanguis::client::load::model::object const &
+	);
+
+	object(
+		sanguis::client::draw2d::entities::model::parameters const &,
+		sanguis::client::load::model::object const &,
+		part_vector &&
 	);
 
 	// with_weapon overrides
@@ -185,19 +196,6 @@ private:
 	optional_decay_time decay_time_;
 
 	sanguis::client::draw2d::entities::model::decay_option const decay_option_;
-
-	// TODO: Make parts movable?
-	typedef
-	fcppt::unique_ptr<
-		sanguis::client::draw2d::entities::model::part
-	>
-	part_unique_ptr;
-
-	typedef
-	std::vector<
-		part_unique_ptr
-	>
-	part_vector;
 
 	part_vector parts_;
 };

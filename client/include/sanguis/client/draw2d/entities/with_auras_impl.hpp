@@ -101,13 +101,13 @@ sanguis::client::draw2d::entities::with_auras<
 
 		sprite.second.rotation(
 			sge::timer::elapsed_fractional<
-				sanguis::client::draw2d::sprite::rotation
+				sanguis::client::draw2d::sprite::rotation::value_type
 			>(
 				rotate_timer_
 			)
 			*
 			fcppt::math::twopi<
-				sanguis::client::draw2d::sprite::rotation
+				sanguis::client::draw2d::sprite::rotation::value_type
 			>()
 		);
 	}
@@ -153,7 +153,7 @@ sanguis::client::draw2d::entities::with_auras<
 				sge::sprite::roles::center{} =
 					this->center().get(),
 				sge::sprite::roles::rotation{} =
-					sanguis::client::draw2d::sprite::normal::no_rotation(),
+					sanguis::client::draw2d::sprite::normal::no_rotation().get(),
 				sge::sprite::roles::color{} =
 					sanguis::client::draw2d::sprite::normal::white(),
 				sge::sprite::roles::texture0{} =

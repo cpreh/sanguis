@@ -1,5 +1,7 @@
 #include <sanguis/aura_type_vector.hpp>
 #include <sanguis/buff_type_vector.hpp>
+#include <sanguis/optional_primary_weapon_type.hpp>
+#include <sanguis/weapon_status.hpp>
 #include <sanguis/client/health_pair.hpp>
 #include <sanguis/client/optional_health_pair.hpp>
 #include <sanguis/client/player_health_callback.hpp>
@@ -11,6 +13,8 @@
 #include <sanguis/client/draw2d/entities/own_player.hpp>
 #include <sanguis/client/draw2d/entities/player.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
+#include <sanguis/client/draw2d/sprite/center.hpp>
+#include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
 #include <sanguis/load/model/radius.hpp>
 #include <sanguis/model/cell_size.hpp>
@@ -26,6 +30,11 @@ sanguis::client::draw2d::entities::own_player::own_player(
 	sanguis::client::draw2d::entities::load_parameters const &_parameters,
 	sanguis::client::draw2d::collide_callback const &_collide,
 	sanguis::client::player_health_callback const &_player_health_callback,
+	sanguis::optional_primary_weapon_type const _primary_weapon,
+	sanguis::weapon_status const _weapon_status,
+	sanguis::client::draw2d::speed const _speed,
+	sanguis::client::draw2d::sprite::center const _center,
+	sanguis::client::draw2d::sprite::rotation const _rotation,
 	sanguis::aura_type_vector const &_auras,
 	sanguis::buff_type_vector const &_buffs,
 	sanguis::client::health_pair const _health_pair
@@ -34,6 +43,11 @@ sanguis::client::draw2d::entities::own_player::own_player(
 	sanguis::client::draw2d::entities::player(
 		_auras_load_context,
 		_parameters,
+		_primary_weapon,
+		_weapon_status,
+		_speed,
+		_center,
+		_rotation,
 		_auras,
 		_buffs,
 		_health_pair

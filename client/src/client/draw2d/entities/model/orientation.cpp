@@ -1,4 +1,5 @@
 #include <sanguis/client/draw2d/funit.hpp>
+#include <sanguis/client/draw2d/entities/model/desired_orientation.hpp>
 #include <sanguis/client/draw2d/entities/model/orientation.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <fcppt/literal.hpp>
@@ -30,7 +31,7 @@ sanguis::client::draw2d::sprite::rotation
 sanguis::client::draw2d::entities::model::orientation(
 	sanguis::client::draw2d::funit const _delta,
 	sanguis::client::draw2d::sprite::rotation const _orientation,
-	sanguis::client::draw2d::sprite::rotation const _desired_orientation
+	sanguis::client::draw2d::entities::model::desired_orientation const _desired_orientation
 )
 {
 	::assert_range(
@@ -38,7 +39,7 @@ sanguis::client::draw2d::entities::model::orientation(
 	);
 
 	::assert_range(
-		_desired_orientation
+		_desired_orientation.get()
 	);
 
 	// Explanation: we now have the current orientation ('c') and the target ('t')
@@ -54,19 +55,19 @@ sanguis::client::draw2d::entities::model::orientation(
 	// 't', hence the if test in swap_dist.
 	//
 
-	funit const
+	sanguis::client::draw2d::funit const
 		// this is the "inner distance" from
 		abs_dist(
 			std::abs(
-				_desired_orientation - _orientation
+				_desired_orientation.get().get() - _orientation.get()
 			)
 		),
 		swap_dist(
-			(_orientation > _desired_orientation)
+			(_orientation > _desired_orientation.get())
 			?
-				::twopi - _orientation + _desired_orientation
+				::twopi - _orientation.get() + _desired_orientation.get().get()
 			:
-				::twopi - _desired_orientation + _orientation
+				::twopi - _desired_orientation.get().get() + _orientation.get()
 		),
 		min_dist(
 			std::min(
@@ -108,8 +109,8 @@ sanguis::client::draw2d::entities::model::orientation(
 	//
 	// (i) which distance (abs_dist or swap_dist) is smaller
 	// (ii) if the current orientation is greater than the target
-	funit const dir(
-		_orientation > _desired_orientation
+	sanguis::client::draw2d::funit const dir(
+		_orientation > _desired_orientation.get()
 		?
 			(
 				(swap_dist > abs_dist)
@@ -128,12 +129,12 @@ sanguis::client::draw2d::entities::model::orientation(
 			)
 	);
 
-	funit const turning_speed(
-		fcppt::math::twopi<funit>()
+	sanguis::client::draw2d::funit const turning_speed(
+		twopi
 	);
 
-	funit const new_orientation(
-		_orientation
+	sanguis::client::draw2d::sprite::rotation const new_orientation(
+		_orientation.get()
 		+
 		dir
 		*
@@ -152,24 +153,24 @@ sanguis::client::draw2d::entities::model::orientation(
 	)
 	{
 		if(
-			new_orientation < _desired_orientation
+			new_orientation < _desired_orientation.get()
 		)
 			return
 				new_orientation;
 		else
 			return
-				_desired_orientation;
+				_desired_orientation.get();
 	}
 	else
 	{
 		if(
-			new_orientation > _desired_orientation
+			new_orientation > _desired_orientation.get()
 		)
 			return
 				new_orientation;
 		else
 			return
-				_desired_orientation;
+				_desired_orientation.get();
 	}
 }
 
@@ -182,14 +183,17 @@ assert_range(
 )
 {
 	FCPPT_ASSERT_ERROR(
-		_value >=
+		_value.get()
+		>=
 		fcppt::literal<
 			sanguis::client::draw2d::funit
 		>(
 			0
 		)
 		&&
-		_value <= ::twopi
+		_value.get()
+		<=
+		::twopi
 	);
 }
 

@@ -1,19 +1,23 @@
 #include <sanguis/aura_type_vector.hpp>
 #include <sanguis/buff_type_vector.hpp>
+#include <sanguis/optional_primary_weapon_type.hpp>
+#include <sanguis/weapon_status.hpp>
 #include <sanguis/client/health_pair.hpp>
 #include <sanguis/client/optional_health_pair.hpp>
 #include <sanguis/client/draw2d/dim2.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
+#include <sanguis/client/draw2d/z_ordering_vector.hpp>
 #include <sanguis/client/draw2d/entities/load_parameters.hpp>
-#include <sanguis/client/draw2d/entities/order_vector.hpp>
+#include <sanguis/client/draw2d/entities/order_function_from_vector.hpp>
 #include <sanguis/client/draw2d/entities/player.hpp>
 #include <sanguis/client/draw2d/entities/with_auras_model_parameters.hpp>
 #include <sanguis/client/draw2d/entities/with_buffs_auras_model.hpp>
 #include <sanguis/client/draw2d/entities/with_buffs_auras_model_parameters.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
+#include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/index.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
@@ -38,17 +42,29 @@
 namespace
 {
 
-sanguis::client::draw2d::sprite::point const
-	player_body_center(24,48);
+sanguis::client::draw2d::sprite::point const player_body_center(
+	24,
+	48
+);
 
-sanguis::client::draw2d::sprite::index const
-	top(1),
-	bottom(0);
+sanguis::client::draw2d::sprite::index const top(
+	1u
+);
+
+sanguis::client::draw2d::sprite::index const bottom(
+	0u
+);
+
 }
 
 sanguis::client::draw2d::entities::player::player(
 	sanguis::client::load::auras::context &_auras_load_context,
 	sanguis::client::draw2d::entities::load_parameters const &_load_parameters,
+	sanguis::optional_primary_weapon_type const _primary_weapon,
+	sanguis::weapon_status const _weapon_status,
+	sanguis::client::draw2d::speed const _speed,
+	sanguis::client::draw2d::sprite::center const _center,
+	sanguis::client::draw2d::sprite::rotation const _rotation,
 	sanguis::aura_type_vector const &_auras,
 	sanguis::buff_type_vector const &_buffs,
 	sanguis::client::health_pair const _health_pair
@@ -68,14 +84,21 @@ sanguis::client::draw2d::entities::player::player(
 				sanguis::client::draw2d::entities::model::parameters(
 					_load_parameters,
 					sanguis::load::model::player_path(),
-					sanguis::client::draw2d::entities::order_vector{
-						sanguis::client::draw2d::z_ordering::player_lower,
-						sanguis::client::draw2d::z_ordering::player_upper
-					},
+					sanguis::client::draw2d::entities::order_function_from_vector(
+						sanguis::client::draw2d::z_ordering_vector{
+							sanguis::client::draw2d::z_ordering::player_lower,
+							sanguis::client::draw2d::z_ordering::player_upper
+						}
+					),
 					sanguis::client::optional_health_pair(
 						_health_pair
 					),
 					sanguis::client::draw2d::entities::model::decay_option::delayed,
+					_primary_weapon,
+					_weapon_status,
+					_speed,
+					_center,
+					_rotation,
 					sanguis::client::draw2d::sprite::normal::white()
 				)
 			)
@@ -101,10 +124,12 @@ sanguis::client::draw2d::entities::player::speed(
 		this->walking()
 	)
 		sanguis::client::draw2d::entities::model::object::orientation(
-			fcppt::math::vector::signed_angle_between(
-				sanguis::client::draw2d::vector2::null(),
-				_speed.get()
-			),
+			sanguis::client::draw2d::sprite::rotation{
+				fcppt::math::vector::signed_angle_between(
+					sanguis::client::draw2d::vector2::null(),
+					_speed.get()
+				)
+			},
 			bottom
 		);
 }
@@ -160,7 +185,7 @@ sanguis::client::draw2d::entities::player::update()
 					)
 				)
 			),
-			sprite_rotation
+			sprite_rotation.get()
 		)
 	);
 

@@ -18,16 +18,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef SANGUIS_CLIENT_DRAW2D_SPRITE_ANIMATION_TEXTURE_DECL_HPP_INCLUDED
-#define SANGUIS_CLIENT_DRAW2D_SPRITE_ANIMATION_TEXTURE_DECL_HPP_INCLUDED
+#ifndef SANGUIS_CLIENT_DRAW2D_SPRITE_ANIMATION_TEXTURE_HPP_INCLUDED
+#define SANGUIS_CLIENT_DRAW2D_SPRITE_ANIMATION_TEXTURE_HPP_INCLUDED
 
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/client/draw2d/sprite/animation/loop_method.hpp>
 #include <sanguis/client/draw2d/sprite/animation/texture_fwd.hpp>
 #include <sanguis/client/load/resource/animation/series.hpp>
-#include <sge/sprite/object_fwd.hpp>
+#include <sge/texture/const_part_ref_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/reference_wrapper_decl.hpp>
 
 
 namespace sanguis
@@ -41,47 +42,44 @@ namespace sprite
 namespace animation
 {
 
-template<
-	typename Choices
->
 class texture
 {
 	FCPPT_NONCOPYABLE(
 		texture
 	);
 public:
-	typedef sge::sprite::object<
-		Choices
-	> object;
-
 	texture(
 		sanguis::client::load::resource::animation::series const &,
 		sanguis::client::draw2d::sprite::animation::loop_method,
-		object &,
 		sanguis::diff_clock const &
 	);
 
+	texture(
+		texture &&
+	);
+
+	texture &
+	operator=(
+		texture &&
+	);
+
+	~texture();
+
+	sge::texture::const_part_ref const
+	current_texture();
+
 	bool
-	process();
-
-	void
-	reset();
-
-	sanguis::client::load::resource::animation::series const &
-	series() const;
+	ended() const;
 private:
-	void
-	handle_end();
+	fcppt::reference_wrapper<
+		sanguis::client::load::resource::animation::series const
+	> series_;
 
-	sanguis::client::load::resource::animation::series const &series_;
-
-	sanguis::client::draw2d::sprite::animation::loop_method action_;
-
-	sanguis::diff_timer cur_timer_;
-
-	object &spr_;
+	sanguis::client::draw2d::sprite::animation::loop_method loop_method_;
 
 	sanguis::client::load::resource::animation::series::const_iterator pos_;
+
+	sanguis::diff_timer cur_timer_;
 };
 
 }

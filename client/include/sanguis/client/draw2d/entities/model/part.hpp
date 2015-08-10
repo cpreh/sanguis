@@ -5,16 +5,16 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
-#include <sanguis/client/draw2d/sprite/rotation.hpp>
+#include <sanguis/client/draw2d/entities/model/animation.hpp>
+#include <sanguis/client/draw2d/entities/model/desired_orientation.hpp>
+#include <sanguis/client/draw2d/entities/model/part_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/rotation_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object_fwd.hpp>
-#include <sanguis/client/draw2d/sprite/normal/texture_animation_fwd.hpp>
 #include <sanguis/client/load/animation_type_fwd.hpp>
-#include <sanguis/client/load/optional_animation_type.hpp>
 #include <sanguis/client/load/model/part_fwd.hpp>
-#include <sge/audio/sound/base_unique_ptr.hpp>
+#include <sge/texture/const_part_ref_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/optional_decl.hpp>
-#include <fcppt/unique_ptr_impl.hpp>
+#include <fcppt/reference_wrapper_decl.hpp>
 
 
 namespace sanguis
@@ -38,7 +38,18 @@ public:
 		sanguis::diff_clock const &,
 		sanguis::client::sound_manager &,
 		sanguis::client::load::model::part const &,
-		sanguis::client::draw2d::sprite::normal::object &
+		sanguis::optional_primary_weapon_type,
+		sanguis::client::draw2d::sprite::rotation,
+		sanguis::client::load::animation_type
+	);
+
+	part(
+		part &&
+	);
+
+	part &
+	operator=(
+		part &&
 	);
 
 	~part();
@@ -48,8 +59,8 @@ public:
 		bool
 	);
 
-	bool
-	try_animation(
+	void
+	animation(
 		sanguis::client::load::animation_type
 	);
 
@@ -59,7 +70,9 @@ public:
 	);
 
 	void
-	update();
+	update(
+		sanguis::client::draw2d::sprite::normal::object &
+	);
 
 	void
 	orientation(
@@ -69,70 +82,33 @@ public:
 	bool
 	ended() const;
 
-	sanguis::client::draw2d::sprite::normal::object &
-	object();
-
-	sanguis::client::draw2d::sprite::normal::object const &
-	object() const;
+	sge::texture::const_part_ref const
+	texture();
 private:
-	void
+	sanguis::client::draw2d::entities::model::animation
 	load_animation(
 		sanguis::client::load::animation_type
 	);
 
-	void
-	update_orientation(
-		sanguis::client::draw2d::sprite::rotation
-	);
+	fcppt::reference_wrapper<
+		sanguis::diff_clock const
+	> diff_clock_;
 
-	sanguis::client::draw2d::sprite::rotation
-	orientation() const;
-
-	sanguis::diff_clock const &diff_clock_;
-
-	sanguis::client::sound_manager &sound_manager_;
+	fcppt::reference_wrapper<
+		sanguis::client::sound_manager
+	> sound_manager_;
 
 	sanguis::diff_timer rotation_timer_;
 
-	typedef
-	fcppt::optional<
-		sanguis::client::draw2d::sprite::rotation
-	>
-	optional_rotation;
+	sanguis::client::draw2d::entities::model::desired_orientation desired_orientation_;
 
-	optional_rotation desired_orientation_;
-
-	sanguis::client::load::model::part const &load_part_;
-
-	sanguis::client::draw2d::sprite::normal::object &ref_;
-
-	sanguis::client::load::optional_animation_type animation_type_;
+	fcppt::reference_wrapper<
+		sanguis::client::load::model::part const
+	> load_part_;
 
 	sanguis::optional_primary_weapon_type weapon_;
 
-	typedef
-	fcppt::unique_ptr<
-		sanguis::client::draw2d::sprite::normal::texture_animation
-	>
-	scoped_texture_animation;
-
-	typedef
-	fcppt::optional<
-		scoped_texture_animation
-	>
-	optional_scoped_texture_animation;
-
-	optional_scoped_texture_animation animation_;
-
-	bool animation_ended_;
-
-	typedef
-	fcppt::optional<
-		sge::audio::sound::base_unique_ptr
-	>
-	optional_sound;
-
-	optional_sound sound_;
+	sanguis::client::draw2d::entities::model::animation animation_;
 };
 
 }

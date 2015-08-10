@@ -25,7 +25,6 @@
 #include <sanguis/client/draw2d/optional_player_center.hpp>
 #include <sanguis/client/draw2d/optional_translation.hpp>
 #include <sanguis/client/draw2d/player_center.hpp>
-#include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/base.hpp>
 #include <sanguis/client/draw2d/entities/create_parameters.hpp>
@@ -54,8 +53,6 @@
 #include <sanguis/client/draw2d/factory/weapon_pickup.hpp>
 #include <sanguis/client/draw2d/scene/background.hpp>
 #include <sanguis/client/draw2d/scene/camera.hpp>
-#include <sanguis/client/draw2d/scene/configure_entity.hpp>
-#include <sanguis/client/draw2d/scene/health_pair.hpp>
 #include <sanguis/client/draw2d/scene/object.hpp>
 #include <sanguis/client/draw2d/scene/translation_matrix.hpp>
 #include <sanguis/client/draw2d/scene/hover/base.hpp>
@@ -67,14 +64,16 @@
 #include <sanguis/client/draw2d/scene/world/parameters.hpp>
 #include <sanguis/client/draw2d/scene/world/render_parameters.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
-#include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/client/draw2d/sprite/state.hpp>
 #include <sanguis/client/draw2d/sprite/state_choices.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_decl.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
+#include <sanguis/client/draw2d/translate/center.hpp>
+#include <sanguis/client/draw2d/translate/health_pair.hpp>
+#include <sanguis/client/draw2d/translate/rotation.hpp>
 #include <sanguis/client/draw2d/translate/scalar_to_client.hpp>
+#include <sanguis/client/draw2d/translate/speed.hpp>
 #include <sanguis/client/draw2d/translate/vector_from_client.hpp>
-#include <sanguis/client/draw2d/translate/vector_to_client.hpp>
 #include <sanguis/client/load/context.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
 #include <sanguis/client/load/model/context.hpp>
@@ -85,14 +84,12 @@
 #include <sanguis/creator/opening_type.hpp>
 #include <sanguis/creator/spawn_boss.hpp>
 #include <sanguis/creator/top_parameters.hpp>
-#include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/aoe.hpp>
 #include <sanguis/messages/roles/aoe_projectile_type.hpp>
 #include <sanguis/messages/roles/aura_type.hpp>
 #include <sanguis/messages/roles/aura_type_container.hpp>
 #include <sanguis/messages/roles/buff_type.hpp>
 #include <sanguis/messages/roles/buff_type_container.hpp>
-#include <sanguis/messages/roles/center.hpp>
 #include <sanguis/messages/roles/created.hpp>
 #include <sanguis/messages/roles/destructible_type.hpp>
 #include <sanguis/messages/roles/doodad_type.hpp>
@@ -110,7 +107,6 @@
 #include <sanguis/messages/roles/projectile_type.hpp>
 #include <sanguis/messages/roles/seed.hpp>
 #include <sanguis/messages/roles/spawn_boss.hpp>
-#include <sanguis/messages/roles/speed.hpp>
 #include <sanguis/messages/roles/weapon_status.hpp>
 #include <sanguis/messages/roles/world_id.hpp>
 #include <sanguis/messages/server/add_aoe_projectile.hpp>
@@ -165,7 +161,6 @@
 #include <sge/viewport/manager_fwd.hpp>
 #include <majutsu/get.hpp>
 #include <majutsu/init_types.hpp>
-#include <majutsu/unwrap_role_tpl.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_unique_ptr_fcppt.hpp>
@@ -187,11 +182,8 @@
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
-#include <fcppt/mpl/for_each.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/placeholders.hpp>
-#include <boost/mpl/transform_view.hpp>
 #include <boost/mpl/vector/vector30.hpp>
 #include <functional>
 #include <typeinfo>
@@ -651,14 +643,15 @@ sanguis::client::draw2d::scene::object::insert(
 	if(
 		!ret.second
 	)
-		throw sanguis::exception(
-			(
-				fcppt::format(
-					FCPPT_TEXT("draw: Tried to insert object with id %1% twice!")
-				)
-				% _id
-			).str()
-		);
+		throw
+			sanguis::exception{
+				(
+					fcppt::format(
+						FCPPT_TEXT("draw: Tried to insert object with id %1% twice!")
+					)
+					% _id
+				).str()
+			};
 
 	return
 		*ret.first->second;
@@ -869,6 +862,15 @@ sanguis::client::draw2d::scene::object::operator()(
 			_message.get<
 				sanguis::messages::roles::aoe_projectile_type
 			>(),
+			sanguis::client::draw2d::translate::speed(
+				_message
+			),
+			sanguis::client::draw2d::translate::center(
+				_message
+			),
+			sanguis::client::draw2d::translate::rotation(
+				_message
+			),
 			sanguis::client::draw2d::aoe(
 				sanguis::client::draw2d::translate::scalar_to_client(
 					_message.get<
@@ -929,6 +931,12 @@ sanguis::client::draw2d::scene::object::operator()(
 	this->configure_new_object(
 		sanguis::client::draw2d::factory::destructible(
 			this->load_parameters(),
+			sanguis::client::draw2d::translate::center(
+				_message
+			),
+			sanguis::client::draw2d::translate::rotation(
+				_message
+			),
 			_message.get<
 				sanguis::messages::roles::destructible_type
 			>()
@@ -945,6 +953,12 @@ sanguis::client::draw2d::scene::object::operator()(
 	this->configure_new_object(
 		sanguis::client::draw2d::factory::doodad(
 			this->load_parameters(),
+			sanguis::client::draw2d::translate::center(
+				_message
+			),
+			sanguis::client::draw2d::translate::rotation(
+				_message
+			),
 			_message.get<
 				sanguis::messages::roles::doodad_type
 			>()
@@ -969,6 +983,21 @@ sanguis::client::draw2d::scene::object::operator()(
 				sanguis::messages::roles::enemy_kind
 			>(),
 			_message.get<
+				sanguis::messages::roles::primary_weapon
+			>(),
+			_message.get<
+				sanguis::messages::roles::weapon_status
+			>(),
+			sanguis::client::draw2d::translate::speed(
+				_message
+			),
+			sanguis::client::draw2d::translate::center(
+				_message
+			),
+			sanguis::client::draw2d::translate::rotation(
+				_message
+			),
+			_message.get<
 				sanguis::messages::roles::aura_type_container
 			>(),
 			_message.get<
@@ -981,7 +1010,7 @@ sanguis::client::draw2d::scene::object::operator()(
 					>()
 				)
 			),
-			sanguis::client::draw2d::scene::health_pair(
+			sanguis::client::draw2d::translate::health_pair(
 				_message
 			)
 		),
@@ -1002,12 +1031,27 @@ sanguis::client::draw2d::scene::object::operator()(
 				sanguis::messages::roles::friend_type
 			>(),
 			_message.get<
+				sanguis::messages::roles::primary_weapon
+			>(),
+			_message.get<
+				sanguis::messages::roles::weapon_status
+			>(),
+			sanguis::client::draw2d::translate::speed(
+				_message
+			),
+			sanguis::client::draw2d::translate::center(
+				_message
+			),
+			sanguis::client::draw2d::translate::rotation(
+				_message
+			),
+			_message.get<
 				sanguis::messages::roles::aura_type_container
 			>(),
 			_message.get<
 				sanguis::messages::roles::buff_type_container
 			>(),
-			sanguis::client::draw2d::scene::health_pair(
+			sanguis::client::draw2d::translate::health_pair(
 				_message
 			)
 		),
@@ -1027,12 +1071,27 @@ sanguis::client::draw2d::scene::object::operator()(
 			world_->collide_callback(),
 			player_health_callback_,
 			_message.get<
+				sanguis::messages::roles::primary_weapon
+			>(),
+			_message.get<
+				sanguis::messages::roles::weapon_status
+			>(),
+			sanguis::client::draw2d::translate::speed(
+				_message
+			),
+			sanguis::client::draw2d::translate::center(
+				_message
+			),
+			sanguis::client::draw2d::translate::rotation(
+				_message
+			),
+			_message.get<
 				sanguis::messages::roles::aura_type_container
 			>(),
 			_message.get<
 				sanguis::messages::roles::buff_type_container
 			>(),
-			sanguis::client::draw2d::scene::health_pair(
+			sanguis::client::draw2d::translate::health_pair(
 				_message
 			)
 		),
@@ -1057,7 +1116,13 @@ sanguis::client::draw2d::scene::object::operator()(
 			this->load_parameters(),
 			_message.get<
 				sanguis::messages::roles::pickup_type
-			>()
+			>(),
+			sanguis::client::draw2d::translate::center(
+				_message
+			),
+			sanguis::client::draw2d::translate::rotation(
+				_message
+			)
 		),
 		_message
 	);
@@ -1073,12 +1138,27 @@ sanguis::client::draw2d::scene::object::operator()(
 			aura_resources_,
 			this->load_parameters(),
 			_message.get<
+				sanguis::messages::roles::primary_weapon
+			>(),
+			_message.get<
+				sanguis::messages::roles::weapon_status
+			>(),
+			sanguis::client::draw2d::translate::speed(
+				_message
+			),
+			sanguis::client::draw2d::translate::center(
+				_message
+			),
+			sanguis::client::draw2d::translate::rotation(
+				_message
+			),
+			_message.get<
 				sanguis::messages::roles::aura_type_container
 			>(),
 			_message.get<
 				sanguis::messages::roles::buff_type_container
 			>(),
-			sanguis::client::draw2d::scene::health_pair(
+			sanguis::client::draw2d::translate::health_pair(
 				_message
 			),
 			sanguis::client::draw2d::entities::name(
@@ -1103,7 +1183,16 @@ sanguis::client::draw2d::scene::object::operator()(
 			this->load_parameters(),
 			_message.get<
 				sanguis::messages::roles::projectile_type
-			>()
+			>(),
+			sanguis::client::draw2d::translate::speed(
+				_message
+			),
+			sanguis::client::draw2d::translate::center(
+				_message
+			),
+			sanguis::client::draw2d::translate::rotation(
+				_message
+			)
 		),
 		_message
 	);
@@ -1117,6 +1206,12 @@ sanguis::client::draw2d::scene::object::operator()(
 	this->configure_new_object(
 		sanguis::client::draw2d::factory::weapon_pickup(
 			this->load_parameters(),
+			sanguis::client::draw2d::translate::center(
+				_message
+			),
+			sanguis::client::draw2d::translate::rotation(
+				_message
+			),
 			sanguis::client::weapon_description_from_message(
 				_message
 			)
@@ -1279,17 +1374,8 @@ sanguis::client::draw2d::scene::object::operator()(
 			>()
 		)
 	).center(
-		sanguis::client::draw2d::sprite::center(
-			fcppt::math::vector::structure_cast<
-				sanguis::client::draw2d::sprite::point,
-				fcppt::cast::float_to_int_fun
-			>(
-				sanguis::client::draw2d::translate::vector_to_client(
-					_message.get<
-						sanguis::messages::roles::center
-					>()
-				)
-			)
+		sanguis::client::draw2d::translate::center(
+			_message
 		)
 	);
 }
@@ -1352,9 +1438,9 @@ sanguis::client::draw2d::scene::object::operator()(
 			>()
 		)
 	).orientation(
-		_message.get<
-			sanguis::messages::roles::angle
-		>()
+		sanguis::client::draw2d::translate::rotation(
+			_message
+		)
 	);
 }
 
@@ -1372,12 +1458,8 @@ sanguis::client::draw2d::scene::object::operator()(
 			>()
 		)
 	).speed(
-		sanguis::client::draw2d::speed(
-			sanguis::client::draw2d::translate::vector_to_client(
-				_message.get<
-					sanguis::messages::roles::speed
-				>()
-			)
+		sanguis::client::draw2d::translate::speed(
+			_message
 		)
 	);
 }
@@ -1429,39 +1511,16 @@ sanguis::client::draw2d::scene::object::configure_new_object(
 	Message const &_message
 )
 {
-	sanguis::entity_id const id(
-		majutsu::get<
-			sanguis::messages::roles::entity_id
-		>(
-			_message
-		)
-	);
-
 	sanguis::client::draw2d::entities::base &inserted(
 		this->insert(
 			std::move(
 				_ptr
 			),
-			id
-		)
-	);
-
-	fcppt::mpl::for_each<
-		boost::mpl::transform_view<
-			majutsu::init_types<
-				Message
-			>,
-			majutsu::unwrap_role_tpl<
-				boost::mpl::_1
-			>
-		>
-	>(
-		sanguis::client::draw2d::scene::configure_entity<
-			Message
-		>(
-			*this,
-			id,
-			_message
+			majutsu::get<
+				sanguis::messages::roles::entity_id
+			>(
+				_message
+			)
 		)
 	);
 

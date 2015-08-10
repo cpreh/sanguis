@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_IFACES_WITH_ORIENTATION_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_IFACES_WITH_ORIENTATION_HPP_INCLUDED
 
-#include <sanguis/client/draw2d/sprite/rotation.hpp>
+#include <sanguis/client/draw2d/sprite/rotation_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 

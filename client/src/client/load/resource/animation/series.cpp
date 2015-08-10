@@ -40,9 +40,10 @@ sanguis::client::load::resource::animation::series::series(
 	if(
 		entities_.empty()
 	)
-		throw sanguis::exception(
-			FCPPT_TEXT("animation::texture series is empty!")
-		);
+		throw
+			sanguis::exception{
+				FCPPT_TEXT("animation::texture series is empty!")
+			};
 }
 
 sanguis::client::load::resource::animation::series::series(

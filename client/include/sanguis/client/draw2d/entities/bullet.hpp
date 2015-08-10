@@ -1,12 +1,13 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_BULLET_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_BULLET_HPP_INCLUDED
 
+#include <sanguis/client/draw2d/speed_fwd.hpp>
 #include <sanguis/client/draw2d/entities/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
+#include <sanguis/client/draw2d/sprite/rotation_fwd.hpp>
 #include <sanguis/load/model/path_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/optional_decl.hpp>
 
 
 namespace sanguis
@@ -28,7 +29,10 @@ class bullet
 public:
 	bullet(
 		sanguis::client::draw2d::entities::load_parameters const &,
-		sanguis::load::model::path const &
+		sanguis::client::draw2d::speed,
+		sanguis::client::draw2d::sprite::center,
+		sanguis::client::draw2d::sprite::rotation,
+		sanguis::load::model::path &&
 	);
 
 	~bullet()
@@ -38,13 +42,7 @@ private:
 	update()
 	override;
 
-	typedef
-	fcppt::optional<
-		sanguis::client::draw2d::sprite::center
-	>
-	optional_center;
-
-	optional_center origin_;
+	sanguis::client::draw2d::sprite::center const origin_;
 };
 
 }

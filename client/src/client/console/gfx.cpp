@@ -1,12 +1,11 @@
 #include <sanguis/client/console/gfx.hpp>
-#include <sanguis/client/load/resource/texture_identifier.hpp>
-#include <sanguis/client/load/resource/textures.hpp>
+#include <sanguis/client/load/resource/textures_fwd.hpp>
 #include <sge/console/object_fwd.hpp>
 #include <sge/console/gfx/font_color.hpp>
 #include <sge/console/gfx/object.hpp>
 #include <sge/console/gfx/output_line_limit.hpp>
-#include <sge/console/gfx/sprite_object.hpp>
 #include <sge/font/object_fwd.hpp>
+#include <sge/font/rect.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/input/keyboard/device_fwd.hpp>
 #include <sge/renderer/pixel_rect.hpp>
@@ -14,10 +13,6 @@
 #include <sge/renderer/device/ffp.hpp>
 #include <sge/renderer/target/onscreen.hpp>
 #include <sge/renderer/target/viewport.hpp>
-#include <sge/sprite/roles/pos_or_center.hpp>
-#include <sge/sprite/roles/size_or_texture_size.hpp>
-#include <sge/sprite/roles/texture0.hpp>
-#include <sge/texture/part_raw_ref.hpp>
 #include <sge/viewport/manager.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/cast/size.hpp>
@@ -30,8 +25,8 @@
 namespace
 {
 
-sge::console::gfx::sprite_object::dim const
-make_sprite_dim(
+sge::font::rect const
+make_console_rect(
 	sge::renderer::target::viewport const &_viewport
 );
 
@@ -47,6 +42,7 @@ sanguis::client::console::gfx::gfx(
 	sanguis::client::load::resource::textures const &_textures
 )
 :
+	// TODO: Add a background again
 	impl_(
 		_console,
 		_renderer,
@@ -55,27 +51,8 @@ sanguis::client::console::gfx::gfx(
 		),
 		_font_object,
 		_keyboard,
-		sge::console::gfx::sprite_object(
-			sge::sprite::roles::texture0{} =
-				sge::console::gfx::sprite_object::texture_type{
-					_textures.load(
-						sanguis::client::load::resource::texture_identifier(
-							FCPPT_TEXT("console_background")
-						)
-					)
-				},
-			sge::sprite::roles::pos_or_center{} =
-				sge::console::gfx::sprite_object::pos_or_center_type{
-					sge::console::gfx::sprite_object::pos_type{
-						sge::console::gfx::sprite_object::vector::null()
-					}
-				},
-			sge::sprite::roles::size_or_texture_size{} =
-				sge::console::gfx::sprite_object::size_or_texture_size_type{
-					::make_sprite_dim(
-						_renderer.onscreen_target().viewport()
-					)
-				}
+		::make_console_rect(
+			_renderer.onscreen_target().viewport()
 		),
 		_history_size
 	),
@@ -107,8 +84,8 @@ sanguis::client::console::gfx::on_resize(
 	sge::renderer::target::viewport const &_viewport
 )
 {
-	impl_.background_sprite().size(
-		::make_sprite_dim(
+	impl_.area(
+		::make_console_rect(
 			_viewport
 		)
 	);
@@ -117,8 +94,8 @@ sanguis::client::console::gfx::on_resize(
 namespace
 {
 
-sge::console::gfx::sprite_object::dim const
-make_sprite_dim(
+sge::font::rect const
+make_console_rect(
 	sge::renderer::target::viewport const &_viewport
 )
 {
@@ -127,24 +104,27 @@ make_sprite_dim(
 	);
 
 	return
-		sge::console::gfx::sprite_object::dim(
-			fcppt::cast::size<
-				sge::console::gfx::sprite_object::dim::value_type
-			>(
-				viewport_dim.w()
-			),
-			fcppt::cast::size<
-				sge::console::gfx::sprite_object::dim::value_type
-			>(
-				viewport_dim.h()
-				/
-				fcppt::literal<
-					sge::renderer::pixel_unit
+		sge::font::rect{
+			sge::font::rect::vector::null(),
+			sge::font::rect::dim{
+				fcppt::cast::size<
+					sge::font::rect::value_type
 				>(
-					2
+					viewport_dim.w()
+				),
+				fcppt::cast::size<
+					sge::font::rect::value_type
+				>(
+					viewport_dim.h()
+					/
+					fcppt::literal<
+						sge::renderer::pixel_unit
+					>(
+						2
+					)
 				)
-			)
-		);
+			}
+		};
 }
 
 }

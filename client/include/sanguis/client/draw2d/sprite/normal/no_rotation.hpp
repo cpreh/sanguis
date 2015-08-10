@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SPRITE_NORMAL_NO_ROTATION_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SPRITE_NORMAL_NO_ROTATION_HPP_INCLUDED
 
-#include <sanguis/client/draw2d/sprite/float_unit.hpp>
+#include <sanguis/client/draw2d/sprite/rotation.hpp>
 
 
 namespace sanguis
@@ -15,7 +15,7 @@ namespace sprite
 namespace normal
 {
 
-sanguis::client::draw2d::sprite::float_unit
+sanguis::client::draw2d::sprite::rotation const
 no_rotation();
 
 }

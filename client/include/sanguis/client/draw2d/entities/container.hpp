@@ -8,7 +8,7 @@
 #include <sanguis/client/draw2d/radius_fwd.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/entities/base.hpp>
-#include <sanguis/client/draw2d/entities/order_vector.hpp>
+#include <sanguis/client/draw2d/entities/level_vector.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_center.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_orientation.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_speed.hpp>
@@ -45,17 +45,24 @@ class container
 		container
 	);
 
-	typedef sanguis::client::draw2d::sprite::normal::object object;
+	typedef
+	sanguis::client::draw2d::sprite::normal::object
+	object;
 
-	typedef std::vector<
+	typedef
+	std::vector<
 		object
-	> sprite_vector;
+	>
+	sprite_vector;
 public:
 	container(
 		sanguis::diff_clock const &,
 		sanguis::client::draw2d::sprite::normal::system &,
-		sanguis::client::draw2d::entities::order_vector const &,
+		sanguis::client::draw2d::entities::level_vector const &,
+		sanguis::client::draw2d::speed,
+		sanguis::client::draw2d::sprite::center,
 		sanguis::client::draw2d::sprite::dim,
+		sanguis::client::draw2d::sprite::rotation,
 		sanguis::client::draw2d::sprite::normal::color
 	);
 
@@ -84,15 +91,6 @@ public:
 	sanguis::client::draw2d::sprite::normal::color const
 	color() const;
 
-	typedef
-	sprite_vector::iterator
-	iterator;
-
-	typedef
-	sprite_vector::const_iterator
-	const_iterator;
-
-	virtual
 	void
 	center(
 		sanguis::client::draw2d::sprite::center const &
@@ -102,7 +100,6 @@ public:
 	sanguis::client::draw2d::center const
 	float_center() const;
 
-	virtual
 	void
 	orientation(
 		sanguis::client::draw2d::sprite::rotation
@@ -113,7 +110,6 @@ public:
 	orientation() const
 	override;
 
-	virtual
 	void
 	speed(
 		sanguis::client::draw2d::speed const &
@@ -143,20 +139,7 @@ public:
 
 	object const &
 	master() const;
-
-	iterator
-	begin();
-
-	iterator
-	end();
-
-	const_iterator
-	begin() const;
-
-	const_iterator
-	end() const;
 protected:
-	virtual
 	void
 	update()
 	override;

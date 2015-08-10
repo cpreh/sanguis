@@ -7,8 +7,8 @@
 #include <sanguis/client/draw2d/entities/particle_name.hpp>
 #include <sanguis/client/draw2d/sprite/center_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/optional_dim_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/animation/texture.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object_decl.hpp>
-#include <sanguis/client/draw2d/sprite/normal/texture_animation_decl.hpp>
 #include <sanguis/client/load/resource/animation/series_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -57,11 +57,9 @@ private:
 	may_be_removed() const
 	override;
 
-	bool ended_;
+	sanguis::client::draw2d::sprite::animation::texture animation_;
 
 	sanguis::client::draw2d::sprite::normal::object sprite_;
-
-	sanguis::client::draw2d::sprite::normal::texture_animation animation_;
 };
 
 }

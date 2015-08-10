@@ -1,4 +1,3 @@
-#include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
 #include <sanguis/weapon_status.hpp>
@@ -11,19 +10,18 @@
 #include <sanguis/client/draw2d/speed_is_null.hpp>
 #include <sanguis/client/draw2d/entities/container.hpp>
 #include <sanguis/client/draw2d/entities/load_parameters.hpp>
-#include <sanguis/client/draw2d/entities/order_vector.hpp>
+#include <sanguis/client/draw2d/entities/level.hpp>
+#include <sanguis/client/draw2d/entities/level_vector.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_health.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_weapon.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_time.hpp>
-#include <sanguis/client/draw2d/entities/model/expand_orders.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>
 #include <sanguis/client/draw2d/entities/model/parameters.hpp>
 #include <sanguis/client/draw2d/entities/model/part.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
 #include <sanguis/client/draw2d/sprite/index.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
-#include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sanguis/client/load/animation_type.hpp>
 #include <sanguis/client/load/model/collection.hpp>
 #include <sanguis/client/load/model/object.hpp>
@@ -31,24 +29,20 @@
 #include <sanguis/client/load/model/part_map.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/make_int_range_count.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/optional_bind.hpp>
 #include <fcppt/optional_impl.hpp>
-#include <fcppt/text.hpp>
+#include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/algorithm/all_of.hpp>
 #include <fcppt/algorithm/map.hpp>
-#include <fcppt/assert/unreachable.hpp>
-#include <fcppt/assert/unreachable_message.hpp>
-#include <fcppt/cast/size.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/dim/to_signed.hpp>
+#include <fcppt/type_iso/strong_typedef.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/range/combine.hpp>
-#include <boost/tuple/tuple.hpp>
-#include <memory>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -75,11 +69,24 @@ sanguis::client::draw2d::entities::model::object::update()
 	sanguis::client::draw2d::entities::container::update();
 
 	for(
-		part_unique_ptr const &cur_part
+		sanguis::client::draw2d::sprite::index const index
 		:
-		parts_
+		fcppt::make_int_range_count(
+			fcppt::strong_typedef_construct_cast<
+				sanguis::client::draw2d::sprite::index,
+				fcppt::cast::size_fun
+			>(
+				parts_.size()
+			)
+		)
 	)
-		cur_part->update();
+		this->part(
+			index
+		).update(
+			this->at(
+				index
+			)
+		);
 }
 
 void
@@ -88,11 +95,11 @@ sanguis::client::draw2d::entities::model::object::orientation(
 )
 {
 	for(
-		part_unique_ptr const &cur_part
+		sanguis::client::draw2d::entities::model::part &cur_part
 		:
 		parts_
 	)
-		cur_part->orientation(
+		cur_part.orientation(
 			_rot
 		);
 }
@@ -103,9 +110,9 @@ sanguis::client::draw2d::entities::model::object::orientation(
 	sanguis::client::draw2d::sprite::index const _index
 )
 {
-	parts_.at(
-		_index.get()
-	)->orientation(
+	this->part(
+		_index
+	).orientation(
 		_rot
 	);
 }
@@ -123,11 +130,11 @@ sanguis::client::draw2d::entities::model::object::pause(
 )
 {
 	for(
-		part_unique_ptr const &cur_part
+		sanguis::client::draw2d::entities::model::part &cur_part
 		:
 		parts_
 	)
-		cur_part->pause(
+		cur_part.pause(
 			_value
 		);
 }
@@ -217,7 +224,7 @@ sanguis::client::draw2d::entities::model::object::part(
 )
 {
 	return
-		*parts_.at(
+		parts_.at(
 			_idx.get()
 		);
 }
@@ -291,13 +298,74 @@ sanguis::client::draw2d::entities::model::object::object(
 	sanguis::client::load::model::object const &_model
 )
 :
+	sanguis::client::draw2d::entities::model::object::object(
+		_parameters,
+		_model,
+		fcppt::algorithm::map<
+			part_vector
+		>(
+			_model,
+			[
+				&_parameters
+			](
+				sanguis::client::load::model::part_map::value_type const &_part
+			)
+			{
+				return
+					sanguis::client::draw2d::entities::model::part{
+						_parameters.load_parameters().diff_clock(),
+						_parameters.load_parameters().sound_manager(),
+						*_part.second,
+						_parameters.primary_weapon_type(),
+						_parameters.rotation(),
+						sanguis::client::load::animation_type::deploying
+					};
+			}
+		)
+	)
+{
+}
+
+sanguis::client::draw2d::entities::model::object::object(
+	sanguis::client::draw2d::entities::model::parameters const &_parameters,
+	sanguis::client::load::model::object const &_model,
+	part_vector &&_parts
+)
+:
 	sanguis::client::draw2d::entities::container(
 		_parameters.load_parameters().diff_clock(),
 		_parameters.load_parameters().normal_system(),
-		sanguis::client::draw2d::entities::model::expand_orders(
-			_parameters.orders(),
-			_model.size()
+		fcppt::algorithm::map<
+			sanguis::client::draw2d::entities::level_vector
+		>(
+			fcppt::make_int_range_count(
+				fcppt::strong_typedef_construct_cast<
+					sanguis::client::draw2d::sprite::index,
+					fcppt::cast::size_fun
+				>(
+					_model.size()
+				)
+			),
+			[
+				&_parameters,
+				&_parts
+			](
+				sanguis::client::draw2d::sprite::index const _index
+			)
+			{
+				return
+					sanguis::client::draw2d::entities::level{
+						_parameters.order_function()(
+							_index
+						),
+						_parts[
+							_index.get()
+						].texture()
+					};
+			}
 		),
+		_parameters.speed(),
+		_parameters.center(),
 		fcppt::math::dim::structure_cast<
 			sanguis::client::draw2d::sprite::dim,
 			fcppt::cast::size_fun
@@ -306,6 +374,7 @@ sanguis::client::draw2d::entities::model::object::object(
 				_model.cell_size().get()
 			)
 		),
+		_parameters.rotation(),
 		_parameters.color()
 	),
 	sanguis::client::draw2d::entities::ifaces::with_health(),
@@ -314,7 +383,7 @@ sanguis::client::draw2d::entities::model::object::object(
 		_parameters.load_parameters().diff_clock()
 	),
 	weapon_status_(
-		sanguis::weapon_status::nothing
+		_parameters.weapon_status()
 	),
 	health_pair_{
 		fcppt::optional_bind(
@@ -342,57 +411,11 @@ sanguis::client::draw2d::entities::model::object::object(
 		_parameters.decay_option()
 	),
 	parts_(
-		fcppt::algorithm::map<
-			part_vector
-		>(
-			boost::range::combine(
-				fcppt::make_int_range_count(
-					_model.size()
-				),
-				_model
-			),
-			[
-				&_parameters,
-				this
-			](
-				boost::tuple<
-					part_vector::size_type,
-					sanguis::client::load::model::part_map::value_type const &
-				> const _arg
-			)
-			{
-				return
-					fcppt::make_unique_ptr_fcppt<
-						sanguis::client::draw2d::entities::model::part
-					>(
-						diff_clock_,
-						_parameters.load_parameters().sound_manager(),
-						*boost::get<
-							1
-						>(
-							_arg
-						).second,
-						this->at(
-							sanguis::client::draw2d::sprite::index(
-								fcppt::cast::size<
-									sanguis::client::draw2d::sprite::index::value_type
-								>(
-									boost::get<
-										0
-									>(
-										_arg
-									)
-								)
-							)
-						)
-					);
-			}
+		std::move(
+			_parts
 		)
 	)
 {
-	this->change_animation(
-		sanguis::client::load::animation_type::deploying
-	);
 }
 
 void
@@ -401,11 +424,11 @@ sanguis::client::draw2d::entities::model::object::weapon(
 )
 {
 	for(
-		part_unique_ptr const &cur_part
+		sanguis::client::draw2d::entities::model::part &cur_part
 		:
 		parts_
 	)
-		cur_part->weapon(
+		cur_part.weapon(
 			_weapon
 		);
 
@@ -437,58 +460,13 @@ sanguis::client::draw2d::entities::model::object::change_animation(
 )
 {
 	for(
-		part_unique_ptr const &cur_part
+		sanguis::client::draw2d::entities::model::part &cur_part
 		:
 		parts_
 	)
-	{
-		sanguis::client::load::animation_type part_anim(
+		cur_part.animation(
 			_anim
 		);
-
-		while(
-			!cur_part->try_animation(
-				part_anim
-			)
-		)
-			part_anim =
-				this->fallback_anim(
-					part_anim
-				);
-	}
-}
-
-sanguis::client::load::animation_type
-sanguis::client::draw2d::entities::model::object::fallback_anim(
-	sanguis::client::load::animation_type const _anim
-) const
-{
-	switch(
-		_anim
-	)
-	{
-	case sanguis::client::load::animation_type::none:
-		FCPPT_ASSERT_UNREACHABLE_MESSAGE(
-			FCPPT_TEXT("None animation not available!")
-		);
-		break;
-	case sanguis::client::load::animation_type::attacking:
-	case sanguis::client::load::animation_type::reloading:
-		return
-			this->walking()
-			?
-				sanguis::client::load::animation_type::walking
-			:
-				sanguis::client::load::animation_type::none
-			;
-	case sanguis::client::load::animation_type::deploying:
-	case sanguis::client::load::animation_type::walking:
-	case sanguis::client::load::animation_type::dying:
-		return
-			sanguis::client::load::animation_type::none;
-	}
-
-	FCPPT_ASSERT_UNREACHABLE;
 }
 
 sanguis::client::load::animation_type
@@ -530,11 +508,11 @@ sanguis::client::draw2d::entities::model::object::animations_ended() const
 		fcppt::algorithm::all_of(
 			parts_,
 			[](
-				part_unique_ptr const &_part
+				sanguis::client::draw2d::entities::model::part const &_part
 			)
 			{
 				return
-					_part->ended();
+					_part.ended();
 			}
 		);
 }

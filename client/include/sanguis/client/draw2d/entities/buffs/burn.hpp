@@ -4,9 +4,9 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/client/draw2d/entities/buffs/base.hpp>
 #include <sanguis/client/draw2d/entities/model/object_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/animation/texture.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object_decl.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
-#include <sanguis/client/draw2d/sprite/normal/texture_animation_decl.hpp>
 #include <sanguis/client/load/model/collection_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -46,9 +46,9 @@ private:
 	)
 	override;
 
-	sanguis::client::draw2d::sprite::normal::object sprite_;
+	sanguis::client::draw2d::sprite::animation::texture animation_;
 
-	sanguis::client::draw2d::sprite::normal::texture_animation animation_;
+	sanguis::client::draw2d::sprite::normal::object sprite_;
 };
 
 }

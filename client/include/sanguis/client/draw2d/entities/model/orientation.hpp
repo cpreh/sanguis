@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_ORIENTATION_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/funit.hpp>
+#include <sanguis/client/draw2d/entities/model/desired_orientation_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 
 
@@ -18,9 +19,10 @@ namespace model
 
 sanguis::client::draw2d::sprite::rotation
 orientation(
+	// TODO: Different type here
 	sanguis::client::draw2d::funit delta,
-	sanguis::client::draw2d::sprite::rotation orientation,
-	sanguis::client::draw2d::sprite::rotation desired_orientation
+	sanguis::client::draw2d::sprite::rotation,
+	sanguis::client::draw2d::entities::model::desired_orientation
 );
 
 }

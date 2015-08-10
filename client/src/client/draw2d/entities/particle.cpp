@@ -32,8 +32,10 @@
 #include <sge/sprite/roles/texture0.hpp>
 #include <sge/sprite/types/texture_size.hpp>
 #include <sge/texture/part.hpp>
+#include <fcppt/const.hpp>
 #include <fcppt/from_optional.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/maybe.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
@@ -87,9 +89,11 @@ sanguis::client::draw2d::entities::particle::particle(
 )
 :
 	sanguis::client::draw2d::entities::own(),
-	ended_{
-		false
-	},
+	animation_(
+		_animation_series,
+		sanguis::client::draw2d::sprite::animation::loop_method::stop_at_end,
+		_load_parameters.diff_clock()
+	),
 	sprite_(
 		sge::sprite::roles::connection{} =
 			_load_parameters.normal_system().connection(
@@ -98,17 +102,15 @@ sanguis::client::draw2d::entities::particle::particle(
 		sge::sprite::roles::center{} =
 			_center.get(),
 		sge::sprite::roles::rotation{} =
-			sanguis::client::draw2d::sprite::normal::no_rotation(),
+			sanguis::client::draw2d::sprite::normal::no_rotation().get(),
 		sge::sprite::roles::size_or_texture_size{} =
 			fcppt::maybe(
 				_opt_size,
-				[]
-				{
-					return
-						sanguis::client::draw2d::sprite::size_or_texture_size{
-							sge::sprite::types::texture_size()
-						};
-				},
+				fcppt::const_(
+					sanguis::client::draw2d::sprite::size_or_texture_size{
+						sge::sprite::types::texture_size()
+					}
+				),
 				[](
 					sanguis::client::draw2d::sprite::dim const _size
 				)
@@ -120,15 +122,9 @@ sanguis::client::draw2d::entities::particle::particle(
 				}
 			),
 		sge::sprite::roles::texture0{} =
-			sanguis::client::draw2d::sprite::normal::object::texture_type{},
+			animation_.current_texture(),
 		sge::sprite::roles::color{} =
 			sanguis::client::draw2d::sprite::normal::white()
-	),
-	animation_(
-		_animation_series,
-		sanguis::client::draw2d::sprite::animation::loop_method::stop_at_end,
-		sprite_,
-		_load_parameters.diff_clock()
 	)
 {
 }
@@ -136,13 +132,14 @@ sanguis::client::draw2d::entities::particle::particle(
 void
 sanguis::client::draw2d::entities::particle::update()
 {
-	ended_ =
-		animation_.process();
+	sprite_.texture(
+		animation_.current_texture()
+	);
 }
 
 bool
 sanguis::client::draw2d::entities::particle::may_be_removed() const
 {
 	return
-		ended_;
+		animation_.ended();
 }

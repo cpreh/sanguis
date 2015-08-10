@@ -26,7 +26,6 @@
 #include <sanguis/client/draw2d/entities/unique_ptr.hpp>
 #include <sanguis/client/draw2d/scene/background_fwd.hpp>
 #include <sanguis/client/draw2d/scene/camera_fwd.hpp>
-#include <sanguis/client/draw2d/scene/configure_entity_fwd.hpp>
 #include <sanguis/client/draw2d/scene/object_fwd.hpp>
 #include <sanguis/client/draw2d/scene/hover/base_unique_ptr.hpp>
 #include <sanguis/client/draw2d/scene/world/object_fwd.hpp>
@@ -333,11 +332,6 @@ private:
 	process_default_msg(
 		sanguis::messages::server::base const &
 	);
-
-	template<
-		typename Message
-	>
-	friend class sanguis::client::draw2d::scene::configure_entity;
 
 	template<
 		typename Message
