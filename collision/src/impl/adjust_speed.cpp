@@ -10,8 +10,8 @@
 #include <sanguis/collision/impl/rect_line_intersection.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/maybe.hpp>
 #include <fcppt/make_literal_boost_units.hpp>
+#include <fcppt/maybe.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/math/box/expand.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>

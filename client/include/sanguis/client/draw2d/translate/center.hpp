@@ -5,9 +5,9 @@
 #include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/client/draw2d/translate/vector_to_client.hpp>
 #include <sanguis/messages/roles/center.hpp>
+#include <majutsu/get.hpp>
 #include <fcppt/cast/float_to_int_fun.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
-#include <majutsu/get.hpp>
 
 
 namespace sanguis

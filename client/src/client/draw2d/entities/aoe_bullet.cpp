@@ -8,8 +8,8 @@
 #include <sanguis/client/draw2d/entities/aoe_bullet.hpp>
 #include <sanguis/client/draw2d/entities/constant_order.hpp>
 #include <sanguis/client/draw2d/entities/explosion.hpp>
-#include <sanguis/client/draw2d/entities/load_parameters.hpp>
 #include <sanguis/client/draw2d/entities/level_vector.hpp>
+#include <sanguis/client/draw2d/entities/load_parameters.hpp>
 #include <sanguis/client/draw2d/entities/own.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_option.hpp>
 #include <sanguis/client/draw2d/entities/model/object.hpp>

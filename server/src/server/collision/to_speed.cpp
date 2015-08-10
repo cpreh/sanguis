@@ -3,7 +3,9 @@
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/to_speed.hpp>
 #include <fcppt/math/vector/map.hpp>
+#include <fcppt/config/external_begin.hpp>
 #include <boost/units/systems/si/velocity.hpp>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::collision::speed const

@@ -1,6 +1,6 @@
 #include <sanguis/optional_primary_weapon_type.hpp>
-#include <sanguis/weapon_status.hpp>
 #include <sanguis/weapon_description.hpp>
+#include <sanguis/weapon_status.hpp>
 #include <sanguis/client/optional_health_pair.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>

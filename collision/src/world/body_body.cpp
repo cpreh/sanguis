@@ -8,11 +8,11 @@
 #include <sanguis/collision/impl/collides.hpp>
 #include <sanguis/collision/impl/move_circle.hpp>
 #include <sanguis/collision/impl/normalize_opt.hpp>
+#include <sanguis/collision/impl/world/make_circle.hpp>
 #include <sanguis/collision/world/body.hpp>
 #include <sanguis/collision/world/body_body.hpp>
-#include <sanguis/collision/impl/world/make_circle.hpp>
-#include <fcppt/literal.hpp>
 #include <fcppt/boost_units_value.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/make_homogenous_pair.hpp>
 #include <fcppt/maybe_multi.hpp>
 #include <fcppt/optional_bind.hpp>

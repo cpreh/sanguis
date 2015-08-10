@@ -21,8 +21,8 @@
 #include <sge/audio/sound/base_unique_ptr.hpp>
 #include <sge/audio/sound/do_pause.hpp>
 #include <sge/audio/sound/pause_or_resume.hpp>
-#include <sge/timer/elapsed_fractional_and_reset.hpp>
 #include <sge/texture/const_part_ref.hpp>
+#include <sge/timer/elapsed_fractional_and_reset.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/optional_bind.hpp>
