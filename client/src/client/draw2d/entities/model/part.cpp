@@ -119,7 +119,13 @@ sanguis::client::draw2d::entities::model::part::animation(
 	sanguis::client::load::animation_type const _animation_type
 )
 {
-	// TODO: Check if we have to change/restart the animation
+	if(
+		animation_.animation_type()
+		==
+		_animation_type
+	)
+		return;
+
 	animation_ =
 		this->load_animation(
 			_animation_type

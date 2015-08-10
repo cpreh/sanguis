@@ -483,15 +483,15 @@ sanguis::client::draw2d::entities::model::object::animation() const
 			?
 				sanguis::client::load::animation_type::reloading
 			:
-				weapon_status_
-				==
-				sanguis::weapon_status::attacking
+				this->walking()
 				?
-					sanguis::client::load::animation_type::attacking
+					sanguis::client::load::animation_type::walking
 				:
-					this->walking()
+					weapon_status_
+					==
+					sanguis::weapon_status::attacking
 					?
-						sanguis::client::load::animation_type::walking
+						sanguis::client::load::animation_type::attacking
 					:
 						sanguis::client::load::animation_type::none
 					;
