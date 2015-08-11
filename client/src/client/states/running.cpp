@@ -493,7 +493,7 @@ sanguis::client::states::running::operator()(
 
 	return
 		sanguis::messages::call::result(
-			this->discard_event()
+			sanguis::messages::call::forward_to_default()
 		);
 }
 

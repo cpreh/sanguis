@@ -164,6 +164,7 @@ set(
 	include/sanguis/client/draw2d/entities/player.hpp
 	include/sanguis/client/draw2d/entities/player_fwd.hpp
 	include/sanguis/client/draw2d/entities/sentry.hpp
+	include/sanguis/client/draw2d/entities/text.hpp
 	include/sanguis/client/draw2d/entities/unique_ptr.hpp
 	include/sanguis/client/draw2d/entities/weapon_pickup.hpp
 	include/sanguis/client/draw2d/entities/with_auras_decl.hpp
@@ -195,7 +196,9 @@ set(
 	include/sanguis/client/draw2d/factory/pickup.hpp
 	include/sanguis/client/draw2d/factory/player.hpp
 	include/sanguis/client/draw2d/factory/projectile.hpp
+	include/sanguis/client/draw2d/factory/text.hpp
 	include/sanguis/client/draw2d/factory/weapon_pickup.hpp
+	include/sanguis/client/draw2d/font_color_format.hpp
 	include/sanguis/client/draw2d/fradius.hpp
 	include/sanguis/client/draw2d/fradius_fwd.hpp
 	include/sanguis/client/draw2d/funit.hpp
@@ -688,6 +691,7 @@ set(
 	src/client/draw2d/entities/particle.cpp
 	src/client/draw2d/entities/player.cpp
 	src/client/draw2d/entities/sentry.cpp
+	src/client/draw2d/entities/text.cpp
 	src/client/draw2d/entities/weapon_pickup.cpp
 	src/client/draw2d/entities/with_auras_model.cpp
 	src/client/draw2d/entities/with_auras_model_parameters.cpp
@@ -702,7 +706,9 @@ set(
 	src/client/draw2d/factory/pickup.cpp
 	src/client/draw2d/factory/player.cpp
 	src/client/draw2d/factory/projectile.cpp
+	src/client/draw2d/factory/text.cpp
 	src/client/draw2d/factory/weapon_pickup.cpp
+	src/client/draw2d/font_color_format.cpp
 	src/client/draw2d/log.cpp
 	src/client/draw2d/log_location.cpp
 	src/client/draw2d/scene/background.cpp

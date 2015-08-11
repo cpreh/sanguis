@@ -54,6 +54,7 @@
 #include <sanguis/messages/server/die_fwd.hpp>
 #include <sanguis/messages/server/give_weapon_fwd.hpp>
 #include <sanguis/messages/server/health_fwd.hpp>
+#include <sanguis/messages/server/level_up_fwd.hpp>
 #include <sanguis/messages/server/max_health_fwd.hpp>
 #include <sanguis/messages/server/move_fwd.hpp>
 #include <sanguis/messages/server/remove_buff_fwd.hpp>
@@ -286,6 +287,11 @@ private:
 	result_type
 	operator()(
 		sanguis::messages::server::health const &
+	);
+
+	result_type
+	operator()(
+		sanguis::messages::server::level_up const &
 	);
 
 	result_type

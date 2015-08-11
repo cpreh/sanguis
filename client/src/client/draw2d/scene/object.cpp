@@ -50,6 +50,7 @@
 #include <sanguis/client/draw2d/factory/pickup.hpp>
 #include <sanguis/client/draw2d/factory/player.hpp>
 #include <sanguis/client/draw2d/factory/projectile.hpp>
+#include <sanguis/client/draw2d/factory/text.hpp>
 #include <sanguis/client/draw2d/factory/weapon_pickup.hpp>
 #include <sanguis/client/draw2d/scene/background.hpp>
 #include <sanguis/client/draw2d/scene/camera.hpp>
@@ -68,6 +69,7 @@
 #include <sanguis/client/draw2d/sprite/state_choices.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_decl.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
+#include <sanguis/client/draw2d/sprite/normal/white.hpp>
 #include <sanguis/client/draw2d/translate/center.hpp>
 #include <sanguis/client/draw2d/translate/health_pair.hpp>
 #include <sanguis/client/draw2d/translate/rotation.hpp>
@@ -127,6 +129,7 @@
 #include <sanguis/messages/server/die.hpp>
 #include <sanguis/messages/server/give_weapon.hpp>
 #include <sanguis/messages/server/health.hpp>
+#include <sanguis/messages/server/level_up.hpp>
 #include <sanguis/messages/server/max_health.hpp>
 #include <sanguis/messages/server/move.hpp>
 #include <sanguis/messages/server/remove.hpp>
@@ -139,6 +142,7 @@
 #include <alda/serialization/load/optional.hpp>
 #include <alda/serialization/load/static_size.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
+#include <sge/font/lit.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/gui/renderer/base.hpp>
 #include <sge/gui/renderer/create_stateless.hpp>
@@ -307,7 +311,7 @@ sanguis::client::draw2d::scene::object::process_message(
 )
 {
 	static sanguis::messages::server::call::object<
-		boost::mpl::vector25<
+		boost::mpl::vector26<
 			sanguis::messages::server::add_aoe_projectile,
 			sanguis::messages::server::add_aura,
 			sanguis::messages::server::add_buff,
@@ -325,6 +329,7 @@ sanguis::client::draw2d::scene::object::process_message(
 			sanguis::messages::server::die,
 			sanguis::messages::server::give_weapon,
 			sanguis::messages::server::health,
+			sanguis::messages::server::level_up,
 			sanguis::messages::server::max_health,
 			sanguis::messages::server::move,
 			sanguis::messages::server::remove,
@@ -1335,6 +1340,33 @@ sanguis::client::draw2d::scene::object::operator()(
 				sanguis::messages::roles::health
 			>()
 		)
+	);
+}
+
+sanguis::client::draw2d::scene::object::result_type
+sanguis::client::draw2d::scene::object::operator()(
+	sanguis::messages::server::level_up const &
+)
+{
+	fcppt::maybe_void(
+		this->player_center(),
+		[
+			this
+		](
+			sanguis::client::draw2d::player_center const _center
+		)
+		{
+			this->insert_own(
+				sanguis::client::draw2d::factory::text(
+					diff_clock_,
+					normal_system_,
+					font_,
+					SGE_FONT_LIT("Level up"),
+					_center.get(),
+					sanguis::client::draw2d::sprite::normal::white()
+				)
+			);
+		}
 	);
 }
 
