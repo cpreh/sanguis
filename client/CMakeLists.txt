@@ -245,6 +245,20 @@ set(
 	include/sanguis/client/draw2d/scene/light_texture_coordinates.hpp
 	include/sanguis/client/draw2d/scene/object.hpp
 	include/sanguis/client/draw2d/scene/object_fwd.hpp
+	include/sanguis/client/draw2d/scene/state/array.hpp
+	include/sanguis/client/draw2d/scene/state/array_fwd.hpp
+	include/sanguis/client/draw2d/scene/state/base.hpp
+	include/sanguis/client/draw2d/scene/state/base_fwd.hpp
+	include/sanguis/client/draw2d/scene/state/base_unique_ptr.hpp
+	include/sanguis/client/draw2d/scene/state/create.hpp
+	include/sanguis/client/draw2d/scene/state/dummy.hpp
+	include/sanguis/client/draw2d/scene/state/optional_scoped_unique_ptr.hpp
+	include/sanguis/client/draw2d/scene/state/optional_scoped_unique_ptr_fwd.hpp
+	include/sanguis/client/draw2d/scene/state/scoped.hpp
+	include/sanguis/client/draw2d/scene/state/scoped_fwd.hpp
+	include/sanguis/client/draw2d/scene/state/scoped_text.hpp
+	include/sanguis/client/draw2d/scene/state/scoped_unique_ptr.hpp
+	include/sanguis/client/draw2d/scene/state/text.hpp
 	include/sanguis/client/draw2d/scene/translation.hpp
 	include/sanguis/client/draw2d/scene/translation_matrix.hpp
 	include/sanguis/client/draw2d/scene/world/base.hpp
@@ -727,6 +741,12 @@ set(
 	src/client/draw2d/scene/light.cpp
 	src/client/draw2d/scene/light_texture_coordinates.cpp
 	src/client/draw2d/scene/object.cpp
+	src/client/draw2d/scene/state/base.cpp
+	src/client/draw2d/scene/state/create.cpp
+	src/client/draw2d/scene/state/dummy.cpp
+	src/client/draw2d/scene/state/scoped.cpp
+	src/client/draw2d/scene/state/scoped_text.cpp
+	src/client/draw2d/scene/state/text.cpp
 	src/client/draw2d/scene/translation.cpp
 	src/client/draw2d/scene/translation_matrix.cpp
 	src/client/draw2d/scene/world/base.cpp

@@ -23,7 +23,8 @@ enum class z_ordering
 	bullet,
 	player_upper,
 	flare,
-	fcppt_maximum = flare
+	text,
+	fcppt_maximum = text
 };
 
 }

@@ -28,6 +28,7 @@
 #include <sanguis/client/draw2d/scene/camera_fwd.hpp>
 #include <sanguis/client/draw2d/scene/object_fwd.hpp>
 #include <sanguis/client/draw2d/scene/hover/base_unique_ptr.hpp>
+#include <sanguis/client/draw2d/scene/state/array.hpp>
 #include <sanguis/client/draw2d/scene/world/object_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/state_decl.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_decl.hpp>
@@ -420,6 +421,8 @@ private:
 	optional_hover_unique_ptr;
 
 	optional_hover_unique_ptr hover_;
+
+	sanguis::client::draw2d::scene::state::array const render_states_;
 };
 
 }

@@ -34,7 +34,7 @@ sanguis::client::draw2d::factory::text(
 				_normal_system,
 				_font,
 				_text,
-				sanguis::client::draw2d::z_ordering::flare,
+				sanguis::client::draw2d::z_ordering::text,
 				_center,
 				_color
 			)

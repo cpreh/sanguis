@@ -60,6 +60,10 @@
 #include <sanguis/client/draw2d/scene/hover/base_unique_ptr.hpp>
 #include <sanguis/client/draw2d/scene/hover/create.hpp>
 #include <sanguis/client/draw2d/scene/hover/parameters.hpp>
+#include <sanguis/client/draw2d/scene/state/base.hpp>
+#include <sanguis/client/draw2d/scene/state/create.hpp>
+#include <sanguis/client/draw2d/scene/state/optional_scoped_unique_ptr.hpp>
+#include <sanguis/client/draw2d/scene/state/scoped.hpp>
 #include <sanguis/client/draw2d/scene/world/center_to_grid_pos.hpp>
 #include <sanguis/client/draw2d/scene/world/object.hpp>
 #include <sanguis/client/draw2d/scene/world/parameters.hpp>
@@ -101,6 +105,7 @@
 #include <sanguis/messages/roles/friend_type.hpp>
 #include <sanguis/messages/roles/health.hpp>
 #include <sanguis/messages/roles/is_primary_weapon.hpp>
+#include <sanguis/messages/roles/level.hpp>
 #include <sanguis/messages/roles/max_health.hpp>
 #include <sanguis/messages/roles/name.hpp>
 #include <sanguis/messages/roles/opening_count.hpp>
@@ -139,6 +144,7 @@
 #include <sanguis/messages/server/speed.hpp>
 #include <sanguis/messages/server/weapon_status.hpp>
 #include <sanguis/messages/server/call/object.hpp>
+#include <sanguis/messages/types/level.hpp>
 #include <alda/serialization/load/optional.hpp>
 #include <alda/serialization/load/static_size.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
@@ -166,6 +172,7 @@
 #include <majutsu/get.hpp>
 #include <majutsu/init_types.hpp>
 #include <fcppt/format.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/maybe_multi.hpp>
@@ -297,7 +304,12 @@ sanguis::client::draw2d::scene::object::object(
 			_viewport_manager
 		)
 	),
-	hover_()
+	hover_(),
+	render_states_(
+		sanguis::client::draw2d::scene::state::create(
+			renderer_
+		)
+	)
 {
 }
 
@@ -537,6 +549,14 @@ sanguis::client::draw2d::scene::object::draw(
 						>()
 					)
 					{
+						sanguis::client::draw2d::scene::state::optional_scoped_unique_ptr const state(
+							render_states_[
+								index
+							]->create_scoped(
+								_render_context
+							)
+						);
+
 						normal_system_.render(
 							_render_context,
 							index
@@ -1345,29 +1365,40 @@ sanguis::client::draw2d::scene::object::operator()(
 
 sanguis::client::draw2d::scene::object::result_type
 sanguis::client::draw2d::scene::object::operator()(
-	sanguis::messages::server::level_up const &
+	sanguis::messages::server::level_up const &_message
 )
 {
-	fcppt::maybe_void(
-		this->player_center(),
-		[
-			this
-		](
-			sanguis::client::draw2d::player_center const _center
+	if(
+		_message.get<
+			sanguis::messages::roles::level
+		>()
+		>
+		fcppt::literal<
+			sanguis::messages::types::level
+		>(
+			0
 		)
-		{
-			this->insert_own(
-				sanguis::client::draw2d::factory::text(
-					diff_clock_,
-					normal_system_,
-					font_,
-					SGE_FONT_LIT("Level up"),
-					_center.get(),
-					sanguis::client::draw2d::sprite::normal::white()
-				)
-			);
-		}
-	);
+	)
+		fcppt::maybe_void(
+			this->player_center(),
+			[
+				this
+			](
+				sanguis::client::draw2d::player_center const _center
+			)
+			{
+				this->insert_own(
+					sanguis::client::draw2d::factory::text(
+						diff_clock_,
+						normal_system_,
+						font_,
+						SGE_FONT_LIT("Level up"),
+						_center.get(),
+						sanguis::client::draw2d::sprite::normal::white()
+					)
+				);
+			}
+		);
 }
 
 sanguis::client::draw2d::scene::object::result_type
