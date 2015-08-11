@@ -2,12 +2,14 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/client/draw2d/font_color_format.hpp>
+#include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/own.hpp>
 #include <sanguis/client/draw2d/entities/text.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/client/draw2d/sprite/size_or_texture_size.hpp>
+#include <sanguis/client/draw2d/sprite/unit.hpp>
 #include <sanguis/client/draw2d/sprite/normal/color.hpp>
 #include <sanguis/client/draw2d/sprite/normal/no_rotation.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
@@ -32,7 +34,10 @@
 #include <sge/sprite/types/texture_size.hpp>
 #include <sge/texture/const_part_ref.hpp>
 #include <sge/texture/part.hpp>
+#include <sge/timer/elapsed_fractional.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/unique_ptr_to_const.hpp>
+#include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -84,7 +89,7 @@ sanguis::client::draw2d::entities::text::text(
 		sanguis::diff_timer::parameters{
 			_diff_clock,
 			sanguis::duration_second(
-				2.f
+				1.f
 			)
 		}
 	),
@@ -124,6 +129,9 @@ sanguis::client::draw2d::entities::text::text(
 			sge::texture::const_part_ref{
 				*texture_
 			}
+	),
+	origin_(
+		sprite_.center()
 	)
 {
 }
@@ -131,7 +139,32 @@ sanguis::client::draw2d::entities::text::text(
 void
 sanguis::client::draw2d::entities::text::update()
 {
-	// TODO: Move sprite upwards
+	sprite_.center(
+		origin_.get()
+		-
+		sanguis::client::draw2d::sprite::point{
+			fcppt::literal<
+				sanguis::client::draw2d::sprite::unit
+			>(
+				0
+			),
+			fcppt::cast::float_to_int<
+				sanguis::client::draw2d::sprite::unit
+			>(
+				sge::timer::elapsed_fractional<
+					sanguis::client::draw2d::funit
+				>(
+					life_time_
+				)
+				*
+				fcppt::literal<
+					sanguis::client::draw2d::funit
+				>(
+					100.f
+				)
+			)
+		}
+	);
 }
 
 bool

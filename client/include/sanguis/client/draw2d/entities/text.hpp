@@ -5,7 +5,7 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/client/draw2d/z_ordering_fwd.hpp>
 #include <sanguis/client/draw2d/entities/own.hpp>
-#include <sanguis/client/draw2d/sprite/center_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/normal/color_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object_decl.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
@@ -68,6 +68,8 @@ private:
 	sge::texture::const_part_unique_ptr const texture_;
 
 	sanguis::client::draw2d::sprite::normal::object sprite_;
+
+	sanguis::client::draw2d::sprite::center const origin_;
 };
 
 }
