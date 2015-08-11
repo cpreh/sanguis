@@ -318,6 +318,7 @@ sanguis::client::draw2d::entities::model::object::object(
 						*_part.second,
 						_parameters.primary_weapon_type(),
 						_parameters.rotation(),
+						// FIXME: This does not work right now
 						sanguis::client::load::animation_type::deploying
 					};
 			}
@@ -416,6 +417,8 @@ sanguis::client::draw2d::entities::model::object::object(
 		)
 	)
 {
+	// TODO: Remove this when deploying actually works
+	this->change_animation();
 }
 
 void
