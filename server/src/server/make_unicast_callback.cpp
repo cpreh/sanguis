@@ -13,10 +13,12 @@ sanguis::server::make_unicast_callback(
 )
 {
 	return
-		std::bind(
-			&sanguis::server::machine::send_unicast,
-			&_machine,
-			std::placeholders::_1,
-			std::placeholders::_2
-		);
+		sanguis::server::unicast_callback{
+			std::bind(
+				&sanguis::server::machine::send_unicast,
+				&_machine,
+				std::placeholders::_1,
+				std::placeholders::_2
+			)
+		};
 }

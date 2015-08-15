@@ -9,21 +9,18 @@
 #include <sanguis/tiles/pair.hpp>
 #include <sanguis/tiles/set.hpp>
 #include <sanguis/tiles/impl/content_path.hpp>
+#include <sanguis/tiles/impl/error_message_function.hpp>
 #include <sanguis/tiles/impl/log.hpp>
 #include <sanguis/tiles/impl/optional_content_path.hpp>
 #include <sanguis/tiles/impl/orientation_to_string.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/maybe.hpp>
-#include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/find_opt.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -44,9 +41,7 @@ images_base(
 		Tile
 	> const _pair,
 	sanguis::tiles::orientation const _orientation,
-	std::function<
-		fcppt::string ()
-	> const &_error_message
+	sanguis::tiles::impl::error_message_function const &_error_message
 )
 {
 	sanguis::tiles::set<

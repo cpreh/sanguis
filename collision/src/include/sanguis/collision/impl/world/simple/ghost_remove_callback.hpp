@@ -2,9 +2,7 @@
 #define SANGUIS_COLLISION_IMPL_WORLD_SIMPLE_GHOST_REMOVE_CALLBACK_HPP_INCLUDED
 
 #include <sanguis/collision/impl/world/simple/ghost_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/function_impl.hpp>
 
 
 namespace sanguis
@@ -19,7 +17,7 @@ namespace simple
 {
 
 typedef
-std::function<
+fcppt::function<
 	void (
 		sanguis::collision::impl::world::simple::ghost &
 	)

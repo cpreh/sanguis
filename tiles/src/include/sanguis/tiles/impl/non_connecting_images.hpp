@@ -7,6 +7,7 @@
 #include <sanguis/tiles/error.hpp>
 #include <sanguis/tiles/orientation.hpp>
 #include <sanguis/tiles/pair.hpp>
+#include <sanguis/tiles/impl/error_message_function.hpp>
 #include <sanguis/tiles/impl/filter_non_connecting.hpp>
 #include <sanguis/tiles/impl/images_base.hpp>
 #include <sanguis/tiles/impl/optional_content_path.hpp>
@@ -56,14 +57,16 @@ non_connecting_images(
 					tile
 				),
 				sanguis::tiles::orientation::null(),
-				[
-					tile
-				]
-				{
-					return
-						sanguis::tiles::impl::to_string(
-							tile
-						);
+				sanguis::tiles::impl::error_message_function{
+					[
+						tile
+					]
+					{
+						return
+							sanguis::tiles::impl::to_string(
+								tile
+							);
+					}
 				}
 			)
 		;

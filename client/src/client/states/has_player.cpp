@@ -1,5 +1,6 @@
 #include <sanguis/perk_type.hpp>
 #include <sanguis/client/dispatch.hpp>
+#include <sanguis/client/dispatch_default_function.hpp>
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/log.hpp>
 #include <sanguis/client/machine.hpp>
@@ -16,6 +17,7 @@
 #include <sanguis/client/events/tick.hpp>
 #include <sanguis/client/perk/make_tree.hpp>
 #include <sanguis/client/perk/remaining_levels.hpp>
+#include <sanguis/client/perk/send_callback.hpp>
 #include <sanguis/client/perk/state.hpp>
 #include <sanguis/client/perk/tree.hpp>
 #include <sanguis/client/states/has_player.hpp>
@@ -72,11 +74,13 @@ sanguis::client::states::has_player::has_player(
 		fcppt::make_unique_ptr_fcppt<
 			sanguis::client::perk::state
 		>(
-			std::bind(
-				&sanguis::client::states::has_player::send_perk_choose,
-				this,
-				std::placeholders::_1
-			)
+			sanguis::client::perk::send_callback{
+				std::bind(
+					&sanguis::client::states::has_player::send_perk_choose,
+					this,
+					std::placeholders::_1
+				)
+			}
 		)
 	)
 {
@@ -118,7 +122,9 @@ sanguis::client::states::has_player::react(
 		>(
 			*this,
 			_event,
-			handle_default_msg
+			sanguis::client::dispatch_default_function{
+				handle_default_msg
+			}
 		);
 }
 

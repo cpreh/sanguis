@@ -1,9 +1,7 @@
 #ifndef SANGUIS_CLIENT_GUI_MENU_CALLBACKS_CANCEL_CONNECT_HPP_INCLUDED
 #define SANGUIS_CLIENT_GUI_MENU_CALLBACKS_CANCEL_CONNECT_HPP_INCLUDED
 
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/function_impl.hpp>
 
 
 namespace sanguis
@@ -17,9 +15,11 @@ namespace menu
 namespace callbacks
 {
 
-typedef std::function<
+typedef
+fcppt::function<
 	void ()
-> cancel_connect;
+>
+cancel_connect;
 
 }
 }

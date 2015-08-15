@@ -3,9 +3,7 @@
 
 #include <alda/net/host.hpp>
 #include <alda/net/port.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/function_impl.hpp>
 
 
 namespace sanguis
@@ -19,12 +17,14 @@ namespace menu
 namespace callbacks
 {
 
-typedef std::function<
+typedef
+fcppt::function<
 	void (
 		alda::net::host const &,
 		alda::net::port const &
 	)
-> connect;
+>
+connect;
 
 }
 }

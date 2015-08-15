@@ -15,6 +15,7 @@
 #include <sanguis/server/net_id_from_player.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/player_id_from_net.hpp>
+#include <sanguis/server/timer_callback.hpp>
 #include <sanguis/server/unknown_player_exception.hpp>
 #include <sanguis/server/events/disconnect.hpp>
 #include <sanguis/server/events/message.hpp>
@@ -99,12 +100,14 @@ sanguis::server::machine::machine(
 	overflow_messages_(),
 	timer_(
 		io_service_,
-		std::bind(
+		sanguis::server::timer_callback{
 			std::bind(
-				&sanguis::server::machine::timer_callback,
-				this
+				std::bind(
+					&sanguis::server::machine::timer_callback,
+					this
+				)
 			)
-		),
+		},
 		desired_frame_time_
 	),
 	disconnect_connection_(

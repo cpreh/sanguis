@@ -8,6 +8,7 @@
 #include <sanguis/server/random/draw.hpp>
 #include <sanguis/server/random/equal_function.hpp>
 #include <sanguis/server/random/less_function.hpp>
+#include <fcppt/function_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
@@ -30,47 +31,68 @@ sanguis::server::entities::enemies::factory::make_skills(
 				sanguis::server::entities::enemies::skills::factory::callback,
 				sanguis::server::entities::enemies::skills::factory::callback
 			>(
-				[](
-					sanguis::server::entities::enemies::skills::factory::callback const &_callback
-				)
-				{
-					return
-						_callback;
+				fcppt::function<
+					sanguis::server::entities::enemies::skills::factory::callback (
+						sanguis::server::entities::enemies::skills::factory::callback const &
+					)
+				>{
+					[](
+						sanguis::server::entities::enemies::skills::factory::callback const &_callback
+					)
+					{
+						return
+							_callback;
+					}
 				}
 			),
 			sanguis::server::random::less_function<
 				sanguis::server::entities::enemies::skills::factory::callback
 			>(
-				[](
-					sanguis::server::entities::enemies::skills::factory::callback const &_skill1,
-					sanguis::server::entities::enemies::skills::factory::callback const &_skill2
-				)
-				{
-					return
-						std::less<
-							sanguis::server::entities::enemies::skills::factory::callback
-						>()(
-							_skill1,
-							_skill2
-						);
+				fcppt::function<
+					bool (
+						sanguis::server::entities::enemies::skills::factory::callback const &,
+						sanguis::server::entities::enemies::skills::factory::callback const &
+					)
+				>{
+					[](
+						sanguis::server::entities::enemies::skills::factory::callback const &_skill1,
+						sanguis::server::entities::enemies::skills::factory::callback const &_skill2
+					)
+					{
+						return
+							std::less<
+								sanguis::server::entities::enemies::skills::factory::callback
+							>()(
+								_skill1,
+								_skill2
+							);
+					}
 				}
 			),
 			sanguis::server::random::equal_function<
 				sanguis::server::entities::enemies::skills::factory::callback
 			>(
-				[](
-					sanguis::server::entities::enemies::skills::factory::callback const &_skill1,
-					sanguis::server::entities::enemies::skills::factory::callback const &_skill2
-				)
-				{
-					return
-						typeid(
-							*_skill1
-						)
-						==
-						typeid(
-							*_skill2
-						);
+
+				fcppt::function<
+					bool (
+						sanguis::server::entities::enemies::skills::factory::callback const &,
+						sanguis::server::entities::enemies::skills::factory::callback const &
+					)
+				>{
+					[](
+						sanguis::server::entities::enemies::skills::factory::callback const &_skill1,
+						sanguis::server::entities::enemies::skills::factory::callback const &_skill2
+					)
+					{
+						return
+							typeid(
+								*_skill1
+							)
+							==
+							typeid(
+								*_skill2
+							);
+					}
 				}
 			)
 		);

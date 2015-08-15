@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_RANDOM_CREATE_FUNCTION_HPP_INCLUDED
 
 #include <sanguis/server/random/create_function_tag.hpp>
+#include <fcppt/function_impl.hpp>
 #include <fcppt/strong_typedef_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -23,7 +24,7 @@ using
 create_function
 =
 fcppt::strong_typedef<
-	std::function<
+	fcppt::function<
 		Result (
 			Arg const &
 		)

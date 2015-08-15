@@ -2,9 +2,7 @@
 #define SANGUIS_CLIENT_PERK_SEND_CALLBACK_HPP_INCLUDED
 
 #include <sanguis/perk_type_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/function_impl.hpp>
 
 
 namespace sanguis
@@ -14,11 +12,13 @@ namespace client
 namespace perk
 {
 
-typedef std::function<
+typedef
+fcppt::function<
 	void (
 		sanguis::perk_type
 	)
-> send_callback;
+>
+send_callback;
 
 }
 }

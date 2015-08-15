@@ -9,8 +9,8 @@
 #include <sanguis/tiles/cell_container.hpp>
 #include <sanguis/tiles/pos.hpp>
 #include <sanguis/tiles/impl/content_path.hpp>
+#include <sanguis/tiles/impl/get_content_function.hpp>
 #include <sanguis/tiles/impl/is_background.hpp>
-#include <sanguis/tiles/impl/optional_content_path.hpp>
 #include <sanguis/tiles/impl/shift.hpp>
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
@@ -23,9 +23,6 @@
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/cast/to_signed.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -46,11 +43,7 @@ draw_base(
 	sanguis::creator::min const _min,
 	sanguis::creator::sup const _sup,
 	sanguis::tiles::impl::shift const _shift,
-	std::function<
-		sanguis::tiles::impl::optional_content_path (
-			sanguis::creator::pos
-		)
-	> const _get_content
+	sanguis::tiles::impl::get_content_function const &_get_content
 )
 {
 	sanguis::tiles::pos const tile_dim(

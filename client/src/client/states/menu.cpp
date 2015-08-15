@@ -1,6 +1,7 @@
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/client/cursor.hpp>
 #include <sanguis/client/dispatch.hpp>
+#include <sanguis/client/dispatch_default_function.hpp>
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/events/action.hpp>
 #include <sanguis/client/events/connected.hpp>
@@ -10,6 +11,11 @@
 #include <sanguis/client/events/overlay.hpp>
 #include <sanguis/client/events/render.hpp>
 #include <sanguis/client/events/tick.hpp>
+#include <sanguis/client/gui/menu/callbacks/cancel_connect.hpp>
+#include <sanguis/client/gui/menu/callbacks/connect.hpp>
+#include <sanguis/client/gui/menu/callbacks/object.hpp>
+#include <sanguis/client/gui/menu/callbacks/quickstart.hpp>
+#include <sanguis/client/gui/menu/callbacks/quit.hpp>
 #include <sanguis/client/states/log_location.hpp>
 #include <sanguis/client/states/menu.hpp>
 #include <sanguis/client/states/waiting_for_player.hpp>
@@ -79,33 +85,41 @@ sanguis::client::states::menu::menu(
 			sanguis::client::machine
 		>().settings(),
 		sanguis::client::gui::menu::callbacks::object(
-			std::bind(
-				&sanguis::client::machine::connect,
-				&this->context<
-					sanguis::client::machine
-				>(),
-				std::placeholders::_1,
-				std::placeholders::_2
-			),
-			std::bind(
-				&sanguis::client::machine::disconnect,
-				&this->context<
-					sanguis::client::machine
-				>()
-			),
-			std::bind(
-				&sanguis::client::machine::quickstart,
-				&this->context<
-					sanguis::client::machine
-				>(),
-				std::placeholders::_1
-			),
-			std::bind(
-				&sanguis::client::machine::quit,
-				&this->context<
-					sanguis::client::machine
-				>()
-			)
+			sanguis::client::gui::menu::callbacks::connect{
+				std::bind(
+					&sanguis::client::machine::connect,
+					&this->context<
+						sanguis::client::machine
+					>(),
+					std::placeholders::_1,
+					std::placeholders::_2
+				)
+			},
+			sanguis::client::gui::menu::callbacks::cancel_connect{
+				std::bind(
+					&sanguis::client::machine::disconnect,
+					&this->context<
+						sanguis::client::machine
+					>()
+				)
+			},
+			sanguis::client::gui::menu::callbacks::quickstart{
+				std::bind(
+					&sanguis::client::machine::quickstart,
+					&this->context<
+						sanguis::client::machine
+					>(),
+					std::placeholders::_1
+				)
+			},
+			sanguis::client::gui::menu::callbacks::quit{
+				std::bind(
+					&sanguis::client::machine::quit,
+					&this->context<
+						sanguis::client::machine
+					>()
+				)
+			}
 		),
 		this->context<
 			sanguis::client::machine
@@ -175,7 +189,9 @@ sanguis::client::states::menu::react(
 		>(
 			*this,
 			_message,
-			handle_default_msg
+			sanguis::client::dispatch_default_function{
+				handle_default_msg
+			}
 		);
 }
 

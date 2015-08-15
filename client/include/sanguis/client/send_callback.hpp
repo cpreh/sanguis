@@ -2,9 +2,7 @@
 #define SANGUIS_CLIENT_SEND_CALLBACK_HPP_INCLUDED
 
 #include <sanguis/messages/client/base_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/function_impl.hpp>
 
 
 namespace sanguis
@@ -12,11 +10,13 @@ namespace sanguis
 namespace client
 {
 
-typedef std::function<
+typedef
+fcppt::function<
 	void(
 		sanguis::messages::client::base const &
 	)
-> send_callback;
+>
+send_callback;
 
 }
 }

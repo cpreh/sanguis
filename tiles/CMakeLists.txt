@@ -66,8 +66,10 @@ set(
 	src/include/sanguis/tiles/impl/error_image_color_pair.hpp
 	src/include/sanguis/tiles/impl/error_image_color_pair_fwd.hpp
 	src/include/sanguis/tiles/impl/error_image_colors.hpp
+	src/include/sanguis/tiles/impl/error_message_function.hpp
 	src/include/sanguis/tiles/impl/filter_connecting.hpp
 	src/include/sanguis/tiles/impl/filter_non_connecting.hpp
+	src/include/sanguis/tiles/impl/get_content_function.hpp
 	src/include/sanguis/tiles/impl/images_base.hpp
 	src/include/sanguis/tiles/impl/is_background.hpp
 	src/include/sanguis/tiles/impl/load_file.hpp

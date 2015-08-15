@@ -3,9 +3,7 @@
 
 #include <sanguis/client/draw2d/collide_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/optional_speed_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/function_impl.hpp>
 
 
 namespace sanguis
@@ -15,11 +13,13 @@ namespace client
 namespace draw2d
 {
 
-typedef std::function<
+typedef
+fcppt::function<
 	sanguis::client::draw2d::optional_speed (
 		sanguis::client::draw2d::collide_parameters const &
 	)
-> collide_callback;
+>
+collide_callback;
 
 }
 }

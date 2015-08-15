@@ -20,6 +20,7 @@
 #include <sanguis/messages/server/pause.hpp>
 #include <sanguis/messages/server/slowdown.hpp>
 #include <sanguis/server/dispatch.hpp>
+#include <sanguis/server/dispatch_default_function.hpp>
 #include <sanguis/server/machine.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/speed.hpp>
@@ -153,7 +154,9 @@ sanguis::server::states::unpaused::react(
 		>(
 			*this,
 			_message,
-			handle_default_msg
+			sanguis::server::dispatch_default_function{
+				handle_default_msg
+			}
 		);
 }
 

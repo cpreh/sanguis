@@ -5,9 +5,7 @@
 #include <sanguis/server/team_fwd.hpp>
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/function_impl.hpp>
 
 
 namespace sanguis
@@ -20,7 +18,7 @@ namespace projectiles
 {
 
 typedef
-std::function<
+fcppt::function<
 	sanguis::server::entities::with_id_unique_ptr(
 		sanguis::server::environment::object &,
 		sanguis::server::team,

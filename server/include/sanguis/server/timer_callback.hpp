@@ -2,9 +2,7 @@
 #define SANGUIS_SERVER_TIMER_CALLBACK_HPP_INCLUDED
 
 #include <sanguis/server/timer_function.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/function_impl.hpp>
 
 
 namespace sanguis
@@ -12,9 +10,11 @@ namespace sanguis
 namespace server
 {
 
-typedef std::function<
+typedef
+fcppt::function<
 	sanguis::server::timer_function
-> timer_callback;
+>
+timer_callback;
 
 }
 }

@@ -7,6 +7,7 @@
 #include <sanguis/messages/server/create.hpp>
 #include <sanguis/messages/server/unpause.hpp>
 #include <sanguis/server/dispatch.hpp>
+#include <sanguis/server/dispatch_default_function.hpp>
 #include <sanguis/server/machine.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/events/disconnect.hpp>
@@ -87,7 +88,9 @@ sanguis::server::states::paused::react(
 		>(
 			*this,
 			_message,
-			handle_default_msg
+			sanguis::server::dispatch_default_function{
+				handle_default_msg
+			}
 		);
 }
 

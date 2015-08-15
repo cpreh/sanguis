@@ -1,4 +1,5 @@
 #include <sanguis/client/dispatch.hpp>
+#include <sanguis/client/dispatch_default_function.hpp>
 #include <sanguis/client/log.hpp>
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/control/actions/nullary.hpp>
@@ -71,7 +72,9 @@ sanguis::client::states::waiting_for_player::react(
 		>(
 			*this,
 			_event,
-			handle_default_msg
+			sanguis::client::dispatch_default_function{
+				handle_default_msg
+			}
 		);
 }
 

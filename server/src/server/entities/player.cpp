@@ -42,6 +42,7 @@
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/team.hpp>
+#include <sanguis/server/update_weapon_pickup_callback.hpp>
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/auras/update_sight.hpp>
@@ -160,20 +161,24 @@ sanguis::server::entities::player::player(
 				>(
 					// with_velocity needs to be initialized first!
 					this->radius(),
-					sanguis::server::add_weapon_pickup_callback(
-						std::bind(
-							&sanguis::server::entities::player::weapon_pickup_add_candidate,
-							this,
-							std::placeholders::_1
-						)
-					),
-					sanguis::server::remove_weapon_pickup_callback(
-						std::bind(
-							&sanguis::server::entities::player::weapon_pickup_remove_candidate,
-							this,
-							std::placeholders::_1
-						)
-					)
+					sanguis::server::add_weapon_pickup_callback{
+						sanguis::server::update_weapon_pickup_callback{
+							std::bind(
+								&sanguis::server::entities::player::weapon_pickup_add_candidate,
+								this,
+								std::placeholders::_1
+							)
+						}
+					},
+					sanguis::server::remove_weapon_pickup_callback{
+						sanguis::server::update_weapon_pickup_callback{
+							std::bind(
+								&sanguis::server::entities::player::weapon_pickup_remove_candidate,
+								this,
+								std::placeholders::_1
+							)
+						}
+					}
 				)
 			)
 		).move_container()

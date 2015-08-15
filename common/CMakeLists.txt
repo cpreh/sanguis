@@ -130,7 +130,6 @@ set(
 	include/sanguis/messages/adapted_types/world_id.hpp
 	include/sanguis/messages/adapted_types/world_id_fwd.hpp
 	include/sanguis/messages/call/dispatch.hpp
-	include/sanguis/messages/call/dispatch_visitor.hpp
 	include/sanguis/messages/call/event_result.hpp
 	include/sanguis/messages/call/event_result_fwd.hpp
 	include/sanguis/messages/call/forward_to_default.hpp

@@ -46,47 +46,49 @@ burn_create(
 	);
 
 	return
-		[
-			_interval,
-			_damage,
-			_damage_values
-		](
-			sanguis::server::entities::base &_entity
-		)
-		{
-			return
-				fcppt::optional_bind_construct(
-					fcppt::cast::try_dynamic<
-						sanguis::server::entities::with_health &
-					>(
-						_entity
-					),
-					[
-						_interval,
-						_damage,
-						_damage_values
-					](
-						sanguis::server::entities::with_health &_with_health
-					)
-					{
-						return
-							fcppt::unique_ptr_to_base<
-								sanguis::server::buffs::buff
-							>(
-								fcppt::make_unique_ptr_fcppt<
-									Buff
+		sanguis::server::buffs::create_callback{
+			[
+				_interval,
+				_damage,
+				_damage_values
+			](
+				sanguis::server::entities::base &_entity
+			)
+			{
+				return
+					fcppt::optional_bind_construct(
+						fcppt::cast::try_dynamic<
+							sanguis::server::entities::with_health &
+						>(
+							_entity
+						),
+						[
+							_interval,
+							_damage,
+							_damage_values
+						](
+							sanguis::server::entities::with_health &_with_health
+						)
+						{
+							return
+								fcppt::unique_ptr_to_base<
+									sanguis::server::buffs::buff
 								>(
-									_with_health,
-									_interval,
-									_damage,
-									// TODO: Auras must know their owner to fix this
-									sanguis::server::damage::unmodified(
-										_damage_values
+									fcppt::make_unique_ptr_fcppt<
+										Buff
+									>(
+										_with_health,
+										_interval,
+										_damage,
+										// TODO: Auras must know their owner to fix this
+										sanguis::server::damage::unmodified(
+											_damage_values
+										)
 									)
-								)
-							);
-					}
-				);
+								);
+						}
+					);
+			}
 		};
 }
 

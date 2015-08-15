@@ -8,6 +8,7 @@
 #include <sanguis/server/random/draw.hpp>
 #include <sanguis/server/random/equal_function.hpp>
 #include <sanguis/server/random/less_function.hpp>
+#include <fcppt/function_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
@@ -30,43 +31,63 @@ sanguis::server::entities::enemies::factory::make_modifiers(
 				sanguis::server::entities::enemies::modifiers::callback,
 				sanguis::server::entities::enemies::modifiers::callback
 			>(
-				[](
-					sanguis::server::entities::enemies::modifiers::callback const &_callback
-				)
-				{
-					return
-						_callback;
+				fcppt::function<
+					sanguis::server::entities::enemies::modifiers::callback (
+						sanguis::server::entities::enemies::modifiers::callback const &
+					)
+				>{
+					[](
+						sanguis::server::entities::enemies::modifiers::callback const &_callback
+					)
+					{
+						return
+							_callback;
+					}
 				}
 			),
 			sanguis::server::random::less_function<
 				sanguis::server::entities::enemies::modifiers::callback
 			>(
-				[](
-					sanguis::server::entities::enemies::modifiers::callback const &_callback1,
-					sanguis::server::entities::enemies::modifiers::callback const &_callback2
-				)
-				{
-					return
-						std::less<
-							sanguis::server::entities::enemies::modifiers::callback
-						>()(
-							_callback1,
-							_callback2
-						);
+				fcppt::function<
+					bool (
+						sanguis::server::entities::enemies::modifiers::callback const &,
+						sanguis::server::entities::enemies::modifiers::callback const &
+					)
+				>{
+					[](
+						sanguis::server::entities::enemies::modifiers::callback const &_callback1,
+						sanguis::server::entities::enemies::modifiers::callback const &_callback2
+					)
+					{
+						return
+							std::less<
+								sanguis::server::entities::enemies::modifiers::callback
+							>()(
+								_callback1,
+								_callback2
+							);
+					}
 				}
 			),
 			sanguis::server::random::equal_function<
 				sanguis::server::entities::enemies::modifiers::callback
 			>(
-				[](
-					sanguis::server::entities::enemies::modifiers::callback const &_callback1,
-					sanguis::server::entities::enemies::modifiers::callback const &_callback2
-				)
-				{
-					return
-						_callback1
-						==
-						_callback2;
+				fcppt::function<
+					bool (
+						sanguis::server::entities::enemies::modifiers::callback const &,
+						sanguis::server::entities::enemies::modifiers::callback const &
+					)
+				>{
+					[](
+						sanguis::server::entities::enemies::modifiers::callback const &_callback1,
+						sanguis::server::entities::enemies::modifiers::callback const &_callback2
+					)
+					{
+						return
+							_callback1
+							==
+							_callback2;
+					}
 				}
 			)
 		);

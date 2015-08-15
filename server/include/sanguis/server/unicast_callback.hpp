@@ -3,9 +3,7 @@
 
 #include <sanguis/messages/server/base_fwd.hpp>
 #include <sanguis/server/player_id.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/function_impl.hpp>
 
 
 namespace sanguis
@@ -13,12 +11,14 @@ namespace sanguis
 namespace server
 {
 
-typedef std::function<
+typedef
+fcppt::function<
 	void (
 		sanguis::server::player_id,
 		sanguis::messages::server::base const &
 	)
-> unicast_callback;
+>
+unicast_callback;
 
 }
 }

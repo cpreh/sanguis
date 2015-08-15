@@ -13,9 +13,11 @@ sanguis::server::make_send_callback(
 )
 {
 	return
-		std::bind(
-			&sanguis::server::machine::send_to_all,
-			&_machine,
-			std::placeholders::_1
-		);
+		sanguis::server::send_callback{
+			std::bind(
+				&sanguis::server::machine::send_to_all,
+				&_machine,
+				std::placeholders::_1
+			)
+		};
 }

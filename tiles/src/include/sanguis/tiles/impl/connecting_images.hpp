@@ -6,6 +6,7 @@
 #include <sanguis/tiles/collection_fwd.hpp>
 #include <sanguis/tiles/error.hpp>
 #include <sanguis/tiles/pair.hpp>
+#include <sanguis/tiles/impl/error_message_function.hpp>
 #include <sanguis/tiles/impl/filter_connecting.hpp>
 #include <sanguis/tiles/impl/images_base.hpp>
 #include <sanguis/tiles/impl/log.hpp>
@@ -100,13 +101,15 @@ connecting_images(
 								_pair,
 								neighbors
 							),
-							[
-								&neighbors
-							]{
-								return
-									sanguis::tiles::impl::neighbors_to_string(
-										neighbors
-									);
+							sanguis::tiles::impl::error_message_function{
+								[
+									&neighbors
+								]{
+									return
+										sanguis::tiles::impl::neighbors_to_string(
+											neighbors
+										);
+								}
 							}
 						)
 					;

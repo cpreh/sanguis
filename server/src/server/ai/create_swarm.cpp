@@ -25,50 +25,52 @@ sanguis::server::ai::create_swarm(
 )
 {
 	return
-		[
-			&_random_generator,
-			_sight_range
-		](
-			sanguis::server::ai::context &_context
-		)
-		{
-			return
-				fcppt::unique_ptr_to_base<
-					sanguis::server::ai::tree::base
-				>(
-					fcppt::make_unique_ptr_fcppt<
-						sanguis::server::ai::tree::priority_sequence
+		sanguis::server::ai::create_function{
+			[
+				&_random_generator,
+				_sight_range
+			](
+				sanguis::server::ai::context &_context
+			)
+			{
+				return
+					fcppt::unique_ptr_to_base<
+						sanguis::server::ai::tree::base
 					>(
-						fcppt::assign::make_container<
-							sanguis::server::ai::tree::container
+						fcppt::make_unique_ptr_fcppt<
+							sanguis::server::ai::tree::priority_sequence
 						>(
-							sanguis::server::ai::tree::make_leaf<
-								sanguis::server::ai::behavior::attack
+							fcppt::assign::make_container<
+								sanguis::server::ai::tree::container
 							>(
-								_context,
-								_sight_range
-							)
-						)(
-							sanguis::server::ai::tree::make_leaf<
-								sanguis::server::ai::behavior::follow_friend
-							>(
-								_context,
-								_sight_range
-							)
-						)(
-							sanguis::server::ai::tree::make_leaf<
-								sanguis::server::ai::behavior::wander
-							>(
-								_context,
-								_random_generator,
-								fcppt::literal<
-									sanguis::server::ai::speed_factor
+								sanguis::server::ai::tree::make_leaf<
+									sanguis::server::ai::behavior::attack
 								>(
-									0.3f
+									_context,
+									_sight_range
+								)
+							)(
+								sanguis::server::ai::tree::make_leaf<
+									sanguis::server::ai::behavior::follow_friend
+								>(
+									_context,
+									_sight_range
+								)
+							)(
+								sanguis::server::ai::tree::make_leaf<
+									sanguis::server::ai::behavior::wander
+								>(
+									_context,
+									_random_generator,
+									fcppt::literal<
+										sanguis::server::ai::speed_factor
+									>(
+										0.3f
+									)
 								)
 							)
 						)
-					)
-				);
+					);
+			}
 		};
 }

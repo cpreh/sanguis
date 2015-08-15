@@ -12,18 +12,20 @@ sanguis::server::ai::create_stationary(
 )
 {
 	return
-		[
-			_sight_range
-		](
-			sanguis::server::ai::context &_context
-		)
-		{
-			return
-				sanguis::server::ai::tree::make_leaf<
-					sanguis::server::ai::behavior::attack
-				>(
-					_context,
-					_sight_range
-				);
+		sanguis::server::ai::create_function{
+			[
+				_sight_range
+			](
+				sanguis::server::ai::context &_context
+			)
+			{
+				return
+					sanguis::server::ai::tree::make_leaf<
+						sanguis::server::ai::behavior::attack
+					>(
+						_context,
+						_sight_range
+					);
+			}
 		};
 }

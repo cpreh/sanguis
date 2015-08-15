@@ -21,38 +21,40 @@ sanguis::server::ai::create_friend(
 )
 {
 	return
-		[
-			_sight_range,
-			&_spawn_owner
-		](
-			sanguis::server::ai::context &_context
-		)
-		{
-			return
-				fcppt::unique_ptr_to_base<
-					sanguis::server::ai::tree::base
-				>(
-					fcppt::make_unique_ptr_fcppt<
-						sanguis::server::ai::tree::priority_sequence
+		sanguis::server::ai::create_function{
+			[
+				_sight_range,
+				&_spawn_owner
+			](
+				sanguis::server::ai::context &_context
+			)
+			{
+				return
+					fcppt::unique_ptr_to_base<
+						sanguis::server::ai::tree::base
 					>(
-						fcppt::assign::make_container<
-							sanguis::server::ai::tree::container
+						fcppt::make_unique_ptr_fcppt<
+							sanguis::server::ai::tree::priority_sequence
 						>(
-							sanguis::server::ai::tree::make_leaf<
-								sanguis::server::ai::behavior::attack
+							fcppt::assign::make_container<
+								sanguis::server::ai::tree::container
 							>(
-								_context,
-								_sight_range
-							)
-						)(
-							sanguis::server::ai::tree::make_leaf<
-								sanguis::server::ai::behavior::follow_owner
-							>(
-								_context,
-								_spawn_owner
+								sanguis::server::ai::tree::make_leaf<
+									sanguis::server::ai::behavior::attack
+								>(
+									_context,
+									_sight_range
+								)
+							)(
+								sanguis::server::ai::tree::make_leaf<
+									sanguis::server::ai::behavior::follow_owner
+								>(
+									_context,
+									_spawn_owner
+								)
 							)
 						)
-					)
-				);
+					);
+			}
 		};
 }

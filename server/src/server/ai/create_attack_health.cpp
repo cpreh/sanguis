@@ -24,48 +24,50 @@ sanguis::server::ai::create_attack_health(
 {
 	// TODO: Maybe create a common factor function for this
 	return
-		[
-			&_random_generator,
-			_sight_range
-		](
-			sanguis::server::ai::context &_context
-		)
-		{
-			auto const speed_factor(
-				fcppt::literal<
-					sanguis::server::ai::speed_factor
-				>(
-					0.3f
-				)
-			);
-
-			return
-				fcppt::unique_ptr_to_base<
-					sanguis::server::ai::tree::base
-				>(
-					fcppt::make_unique_ptr_fcppt<
-						sanguis::server::ai::tree::priority_sequence
+		sanguis::server::ai::create_function{
+			[
+				&_random_generator,
+				_sight_range
+			](
+				sanguis::server::ai::context &_context
+			)
+			{
+				auto const speed_factor(
+					fcppt::literal<
+						sanguis::server::ai::speed_factor
 					>(
-						fcppt::assign::make_container<
-							sanguis::server::ai::tree::container
-						>(
-							sanguis::server::ai::tree::make_leaf<
-								sanguis::server::ai::behavior::attack_health
-							>(
-								_context,
-								_sight_range,
-								speed_factor
-							)
-						)(
-							sanguis::server::ai::tree::make_leaf<
-								sanguis::server::ai::behavior::wander
-							>(
-								_context,
-								_random_generator,
-								speed_factor
-							)
-						)
+						0.3f
 					)
 				);
+
+				return
+					fcppt::unique_ptr_to_base<
+						sanguis::server::ai::tree::base
+					>(
+						fcppt::make_unique_ptr_fcppt<
+							sanguis::server::ai::tree::priority_sequence
+						>(
+							fcppt::assign::make_container<
+								sanguis::server::ai::tree::container
+							>(
+								sanguis::server::ai::tree::make_leaf<
+									sanguis::server::ai::behavior::attack_health
+								>(
+									_context,
+									_sight_range,
+									speed_factor
+								)
+							)(
+								sanguis::server::ai::tree::make_leaf<
+									sanguis::server::ai::behavior::wander
+								>(
+									_context,
+									_random_generator,
+									speed_factor
+								)
+							)
+						)
+					);
+			}
 		};
 }

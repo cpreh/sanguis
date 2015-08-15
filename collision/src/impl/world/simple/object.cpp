@@ -8,6 +8,7 @@
 #include <sanguis/collision/impl/world/ghost_groups_for_body_group.hpp>
 #include <sanguis/collision/impl/world/make_circle.hpp>
 #include <sanguis/collision/impl/world/simple/body.hpp>
+#include <sanguis/collision/impl/world/simple/body_callback.hpp>
 #include <sanguis/collision/impl/world/simple/body_list.hpp>
 #include <sanguis/collision/impl/world/simple/body_list_grid.hpp>
 #include <sanguis/collision/impl/world/simple/body_remove_callback.hpp>
@@ -119,20 +120,24 @@ sanguis::collision::impl::world::simple::object::create_body(
 				sanguis::collision::impl::world::simple::body
 			>(
 				_parameters,
-				sanguis::collision::impl::world::simple::body_remove_callback(
-					std::bind(
-						&sanguis::collision::impl::world::simple::object::remove_body,
-						this,
-						std::placeholders::_1
-					)
-				),
-				sanguis::collision::impl::world::simple::body_move_callback(
-					std::bind(
-						&sanguis::collision::impl::world::simple::object::move_body,
-						this,
-						std::placeholders::_1
-					)
-				)
+				sanguis::collision::impl::world::simple::body_remove_callback{
+					sanguis::collision::impl::world::simple::body_callback{
+						std::bind(
+							&sanguis::collision::impl::world::simple::object::remove_body,
+							this,
+							std::placeholders::_1
+						)
+					}
+				},
+				sanguis::collision::impl::world::simple::body_move_callback{
+					sanguis::collision::impl::world::simple::body_callback{
+						std::bind(
+							&sanguis::collision::impl::world::simple::object::move_body,
+							this,
+							std::placeholders::_1
+						)
+					}
+				}
 			)
 		);
 }

@@ -2,10 +2,8 @@
 #define SANGUIS_SERVER_RANDOM_EQUAL_FUNCTION_HPP_INCLUDED
 
 #include <sanguis/server/random/equal_function_tag.hpp>
+#include <fcppt/function_impl.hpp>
 #include <fcppt/strong_typedef_impl.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -22,7 +20,7 @@ using
 equal_function
 =
 fcppt::strong_typedef<
-	std::function<
+	fcppt::function<
 		bool (
 			Arg const &,
 			Arg const &

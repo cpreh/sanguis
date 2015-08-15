@@ -3,9 +3,7 @@
 
 #include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/server/entities/with_id_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/function_impl.hpp>
 
 
 namespace sanguis
@@ -14,7 +12,7 @@ namespace server
 {
 
 typedef
-std::function<
+fcppt::function<
 	void (
 		sanguis::server::entities::with_id const &,
 		sanguis::collision::world::created

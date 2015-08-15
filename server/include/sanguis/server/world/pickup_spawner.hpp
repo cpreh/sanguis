@@ -9,13 +9,11 @@
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/random/distributor_decl.hpp>
+#include <fcppt/function_impl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/random/distribution/basic_decl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real_decl.hpp>
 #include <fcppt/type_iso/strong_typedef.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -65,7 +63,7 @@ private:
 	);
 
 	typedef
-	std::function<
+	fcppt::function<
 		void (
 			sanguis::server::center,
 			sanguis::server::entities::enemies::difficulty

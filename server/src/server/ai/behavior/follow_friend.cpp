@@ -2,6 +2,7 @@
 #include <sanguis/server/add_target_callback.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/remove_target_callback.hpp>
+#include <sanguis/server/update_target_callback.hpp>
 #include <sanguis/server/ai/context.hpp>
 #include <sanguis/server/ai/go_close_to_target.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
@@ -72,20 +73,24 @@ sanguis::server::ai::behavior::follow_friend::transfer()
 						),
 						this->me().team(),
 						sanguis::server::auras::target_kind::friend_,
-						sanguis::server::add_target_callback(
-							std::bind(
-								&sanguis::server::ai::behavior::follow_friend::target_enters,
-								this,
-								std::placeholders::_1
-							)
-						),
-						sanguis::server::remove_target_callback(
-							std::bind(
-								&sanguis::server::ai::behavior::follow_friend::target_leaves,
-								this,
-								std::placeholders::_1
-							)
-						)
+						sanguis::server::add_target_callback{
+							sanguis::server::update_target_callback{
+								std::bind(
+									&sanguis::server::ai::behavior::follow_friend::target_enters,
+									this,
+									std::placeholders::_1
+								)
+							}
+						},
+						sanguis::server::remove_target_callback{
+							sanguis::server::update_target_callback{
+								std::bind(
+									&sanguis::server::ai::behavior::follow_friend::target_leaves,
+									this,
+									std::placeholders::_1
+								)
+							}
+						}
 					)
 				)
 			)

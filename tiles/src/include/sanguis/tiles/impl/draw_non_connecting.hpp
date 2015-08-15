@@ -9,6 +9,7 @@
 #include <sanguis/tiles/error.hpp>
 #include <sanguis/tiles/pos.hpp>
 #include <sanguis/tiles/impl/draw_base.hpp>
+#include <sanguis/tiles/impl/get_content_function.hpp>
 #include <sanguis/tiles/impl/non_connecting_images.hpp>
 #include <sanguis/tiles/impl/shift.hpp>
 
@@ -42,21 +43,23 @@ draw_non_connecting(
 			sanguis::tiles::impl::shift{
 				sanguis::tiles::pos::null()
 			},
-			[
-				&_collection,
-				&_grid,
-				_error_code
-			](
-				sanguis::creator::pos const _pos
-			)
-			{
-				return
-					sanguis::tiles::impl::non_connecting_images(
-						_collection,
-						_error_code,
-						_grid,
-						_pos
-					);
+			sanguis::tiles::impl::get_content_function{
+				[
+					&_collection,
+					&_grid,
+					_error_code
+				](
+					sanguis::creator::pos const _pos
+				)
+				{
+					return
+						sanguis::tiles::impl::non_connecting_images(
+							_collection,
+							_error_code,
+							_grid,
+							_pos
+						);
+				}
 			}
 		);
 }

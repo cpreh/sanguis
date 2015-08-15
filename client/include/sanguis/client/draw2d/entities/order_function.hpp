@@ -3,9 +3,7 @@
 
 #include <sanguis/client/draw2d/z_ordering_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/index_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/function_impl.hpp>
 
 
 namespace sanguis
@@ -18,7 +16,7 @@ namespace entities
 {
 
 typedef
-std::function<
+fcppt::function<
 	sanguis::client::draw2d::z_ordering (
 		sanguis::client::draw2d::sprite::index
 	)

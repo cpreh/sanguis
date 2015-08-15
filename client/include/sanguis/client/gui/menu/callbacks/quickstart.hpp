@@ -2,9 +2,7 @@
 #define SANGUIS_CLIENT_GUI_MENU_CALLBACKS_QUICKSTART_HPP_INCLUDED
 
 #include <alda/net/port.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <memory>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/function_impl.hpp>
 
 
 namespace sanguis
@@ -18,11 +16,13 @@ namespace menu
 namespace callbacks
 {
 
-typedef std::function<
+typedef
+fcppt::function<
 	void(
 		alda::net::port
 	)
-> quickstart;
+>
+quickstart;
 
 }
 }

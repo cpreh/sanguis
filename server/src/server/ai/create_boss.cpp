@@ -22,44 +22,46 @@ sanguis::server::ai::create_boss(
 )
 {
 	return
-		[
-			_sight_range,
-			&_random_generator
-		](
-			sanguis::server::ai::context &_context
-		)
-		{
-			return
-				fcppt::unique_ptr_to_base<
-					sanguis::server::ai::tree::base
-				>(
-					fcppt::make_unique_ptr_fcppt<
-						sanguis::server::ai::tree::priority_sequence
+		sanguis::server::ai::create_function{
+			[
+				_sight_range,
+				&_random_generator
+			](
+				sanguis::server::ai::context &_context
+			)
+			{
+				return
+					fcppt::unique_ptr_to_base<
+						sanguis::server::ai::tree::base
 					>(
-						fcppt::assign::make_container<
-							sanguis::server::ai::tree::container
+						fcppt::make_unique_ptr_fcppt<
+							sanguis::server::ai::tree::priority_sequence
 						>(
-							sanguis::server::ai::tree::make_leaf<
-								sanguis::server::ai::behavior::stay
+							fcppt::assign::make_container<
+								sanguis::server::ai::tree::container
 							>(
-								_context
-							)
-						)(
-							sanguis::server::ai::tree::make_leaf<
-								sanguis::server::ai::behavior::attack
-							>(
-								_context,
-								_sight_range
-							)
-						)(
-							sanguis::server::ai::tree::make_leaf<
-								sanguis::server::ai::behavior::patrol
-							>(
-								_context,
-								_random_generator
+								sanguis::server::ai::tree::make_leaf<
+									sanguis::server::ai::behavior::stay
+								>(
+									_context
+								)
+							)(
+								sanguis::server::ai::tree::make_leaf<
+									sanguis::server::ai::behavior::attack
+								>(
+									_context,
+									_sight_range
+								)
+							)(
+								sanguis::server::ai::tree::make_leaf<
+									sanguis::server::ai::behavior::patrol
+								>(
+									_context,
+									_random_generator
+								)
 							)
 						)
-					)
-				);
+					);
+			}
 		};
 }

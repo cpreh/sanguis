@@ -1,4 +1,5 @@
 #include <sanguis/duration.hpp>
+#include <sanguis/io_service_callback.hpp>
 #include <sanguis/log_stream.hpp>
 #include <sanguis/media_path.hpp>
 #include <sanguis/client/create_systems.hpp>
@@ -6,6 +7,7 @@
 #include <sanguis/client/object.hpp>
 #include <sanguis/client/object_base.hpp>
 #include <sanguis/client/server.hpp>
+#include <sanguis/client/server_callback.hpp>
 #include <sanguis/client/systems.hpp>
 #include <sanguis/client/args/history_size.hpp>
 #include <sanguis/client/config/settings/file.hpp>
@@ -137,11 +139,13 @@ sanguis::client::object::object(
 	machine_(
 		settings_,
 		_variables_map,
-		std::bind(
-			&sanguis::client::object::create_server,
-			this,
-			std::placeholders::_1
-		),
+		sanguis::client::server_callback{
+			std::bind(
+				&sanguis::client::object::create_server,
+				this,
+				std::placeholders::_1
+			)
+		},
 		resources_,
 		*gui_style_,
 		sys_->window_system(),
@@ -226,10 +230,12 @@ void
 sanguis::client::object::register_handler()
 {
 	io_service_.post(
-		std::bind(
-			&sanguis::client::object::loop_handler,
-			this
-		)
+		sanguis::io_service_callback{
+			std::bind(
+				&sanguis::client::object::loop_handler,
+				this
+			)
+		}
 	);
 }
 

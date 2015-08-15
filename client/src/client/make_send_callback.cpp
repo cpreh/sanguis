@@ -13,9 +13,11 @@ sanguis::client::make_send_callback(
 )
 {
 	return
-		std::bind(
-			&sanguis::client::machine::send,
-			&_machine,
-			std::placeholders::_1
-		);
+		sanguis::client::send_callback{
+			std::bind(
+				&sanguis::client::machine::send,
+				&_machine,
+				std::placeholders::_1
+			)
+		};
 }

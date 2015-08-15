@@ -185,6 +185,7 @@ set(
 	include/sanguis/server/direction.hpp
 	include/sanguis/server/direction_fwd.hpp
 	include/sanguis/server/dispatch.hpp
+	include/sanguis/server/dispatch_default_function.hpp
 	include/sanguis/server/entities/auto_weak_hook.hpp
 	include/sanguis/server/entities/auto_weak_link.hpp
 	include/sanguis/server/entities/auto_weak_link_fwd.hpp
@@ -439,7 +440,7 @@ set(
 	include/sanguis/server/mass_fwd.hpp
 	include/sanguis/server/mass_unit.hpp
 	include/sanguis/server/mass_unit_fwd.hpp
-	include/sanguis/server/message_functor.hpp
+	include/sanguis/server/message_function.hpp
 	include/sanguis/server/net/angle.hpp
 	include/sanguis/server/net/angle_fwd.hpp
 	include/sanguis/server/net/angle_policy.hpp

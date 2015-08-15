@@ -156,6 +156,7 @@ set(
 	src/impl/world/simple/object.cpp
 	src/include/sanguis/collision/impl/world/simple/body.hpp
 	src/include/sanguis/collision/impl/world/simple/body_base_hook.hpp
+	src/include/sanguis/collision/impl/world/simple/body_callback.hpp
 	src/include/sanguis/collision/impl/world/simple/body_fwd.hpp
 	src/include/sanguis/collision/impl/world/simple/body_list.hpp
 	src/include/sanguis/collision/impl/world/simple/body_list_grid.hpp

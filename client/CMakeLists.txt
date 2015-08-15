@@ -70,6 +70,7 @@ set(
 	include/sanguis/client/cursor_area_fwd.hpp
 	include/sanguis/client/cursor_fwd.hpp
 	include/sanguis/client/dispatch.hpp
+	include/sanguis/client/dispatch_default_function.hpp
 	include/sanguis/client/draw/base.hpp
 	include/sanguis/client/draw/base_fwd.hpp
 	include/sanguis/client/draw/base_unique_ptr.hpp
@@ -435,6 +436,7 @@ set(
 	include/sanguis/client/gui/menu/callbacks/cancel_connect.hpp
 	include/sanguis/client/gui/menu/callbacks/connect.hpp
 	include/sanguis/client/gui/menu/callbacks/object.hpp
+	include/sanguis/client/gui/menu/callbacks/object_fwd.hpp
 	include/sanguis/client/gui/menu/callbacks/quickstart.hpp
 	include/sanguis/client/gui/menu/callbacks/quit.hpp
 	include/sanguis/client/gui/menu/callbacks/retry_connect.hpp

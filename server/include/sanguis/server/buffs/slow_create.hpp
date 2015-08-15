@@ -41,38 +41,40 @@ slow_create(
 	);
 
 	return
-		[
-			_factor
-		](
-			sanguis::server::entities::base &_entity
-		)
-		{
-			return
-				fcppt::optional_bind_construct(
-					fcppt::cast::try_dynamic<
-						sanguis::server::entities::with_velocity &
-					>(
-						_entity
-					),
-					[
-						_factor
-					](
-						sanguis::server::entities::with_velocity &_with_velocity
-					)
-					{
-						return
-							fcppt::unique_ptr_to_base<
-								sanguis::server::buffs::buff
-							>(
-								fcppt::make_unique_ptr_fcppt<
-									Buff
+		sanguis::server::buffs::create_callback{
+			[
+				_factor
+			](
+				sanguis::server::entities::base &_entity
+			)
+			{
+				return
+					fcppt::optional_bind_construct(
+						fcppt::cast::try_dynamic<
+							sanguis::server::entities::with_velocity &
+						>(
+							_entity
+						),
+						[
+							_factor
+						](
+							sanguis::server::entities::with_velocity &_with_velocity
+						)
+						{
+							return
+								fcppt::unique_ptr_to_base<
+									sanguis::server::buffs::buff
 								>(
-									_with_velocity,
-									_factor
-								)
-							);
-					}
-				);
+									fcppt::make_unique_ptr_fcppt<
+										Buff
+									>(
+										_with_velocity,
+										_factor
+									)
+								);
+						}
+					);
+			}
 		};
 }
 

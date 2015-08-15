@@ -12,6 +12,7 @@
 #include <sanguis/tiles/unit.hpp>
 #include <sanguis/tiles/impl/connecting_images.hpp>
 #include <sanguis/tiles/impl/draw_base.hpp>
+#include <sanguis/tiles/impl/get_content_function.hpp>
 #include <sanguis/tiles/impl/shift.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/cast/size.hpp>
@@ -65,21 +66,23 @@ draw_connecting(
 					)
 				)
 			),
-			[
-				&_collection,
-				_error_code,
-				&_grid
-			](
-				sanguis::creator::pos const _pos
-			)
-			{
-				return
-					sanguis::tiles::impl::connecting_images(
-						_collection,
-						_error_code,
-						_grid,
-						_pos
-					);
+			sanguis::tiles::impl::get_content_function{
+				[
+					&_collection,
+					_error_code,
+					&_grid
+				](
+					sanguis::creator::pos const _pos
+				)
+				{
+					return
+						sanguis::tiles::impl::connecting_images(
+							_collection,
+							_error_code,
+							_grid,
+							_pos
+						);
+				}
 			}
 		);
 }

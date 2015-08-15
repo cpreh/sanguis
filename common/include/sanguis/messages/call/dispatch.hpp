@@ -1,9 +1,9 @@
 #ifndef SANGUIS_MESSAGES_CALL_DISPATCH_HPP_INCLUDED
 #define SANGUIS_MESSAGES_CALL_DISPATCH_HPP_INCLUDED
 
-#include <sanguis/messages/call/dispatch_visitor.hpp>
+#include <sanguis/messages/call/forward_to_default.hpp>
 #include <sanguis/messages/call/result.hpp>
-#include <fcppt/variant/apply_unary.hpp>
+#include <fcppt/variant/match.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/result.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -48,14 +48,7 @@ dispatch(
 	);
 
 	return
-		fcppt::variant::apply_unary(
-			sanguis::messages::call::dispatch_visitor<
-				Event,
-				HandleDefaultMsg
-			>(
-				_message,
-				_handle_default_msg
-			),
+		fcppt::variant::match(
 			_dispatcher(
 				*_message.get(),
 				_function,
@@ -63,7 +56,26 @@ dispatch(
 				Dispatcher::default_callback{
 					fake_default_msg
 				}
-			).get()
+			).get(),
+			[](
+				boost::statechart::result const _result
+			)
+			{
+				return
+					_result;
+			},
+			[
+				&_handle_default_msg,
+				&_message
+			](
+				sanguis::messages::call::forward_to_default
+			)
+			{
+				return
+					_handle_default_msg(
+						*_message.get()
+					);
+			}
 		);
 }
 

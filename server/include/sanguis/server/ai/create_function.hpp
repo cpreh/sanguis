@@ -3,9 +3,7 @@
 
 #include <sanguis/server/ai/context_fwd.hpp>
 #include <sanguis/server/ai/tree/base_unique_ptr.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/function_impl.hpp>
 
 
 namespace sanguis
@@ -16,7 +14,7 @@ namespace ai
 {
 
 typedef
-std::function<
+fcppt::function<
 	sanguis::server::ai::tree::base_unique_ptr (
 		sanguis::server::ai::context &
 	)

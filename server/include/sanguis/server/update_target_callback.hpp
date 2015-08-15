@@ -2,9 +2,7 @@
 #define SANGUIS_SERVER_UPDATE_TARGET_CALLBACK_HPP_INCLUDED
 
 #include <sanguis/server/entities/with_body_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/function_impl.hpp>
 
 
 namespace sanguis
@@ -12,11 +10,13 @@ namespace sanguis
 namespace server
 {
 
-typedef std::function<
+typedef
+fcppt::function<
 	void (
 		sanguis::server::entities::with_body &
 	)
-> update_target_callback;
+>
+update_target_callback;
 
 }
 }

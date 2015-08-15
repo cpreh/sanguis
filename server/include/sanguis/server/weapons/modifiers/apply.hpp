@@ -12,6 +12,7 @@
 #include <sanguis/server/weapons/modifiers/guaranteed.hpp>
 #include <sanguis/server/weapons/modifiers/potential.hpp>
 #include <sanguis/server/weapons/modifiers/random_amount.hpp>
+#include <fcppt/function_impl.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/cast/size_fun.hpp>
@@ -39,7 +40,7 @@ apply(
 	sanguis::server::weapons::modifiers::potential<
 		Parameters
 	> const &_potential_modifiers,
-	Parameters _parameters
+	Parameters &&_parameters
 )
 {
 	typedef
@@ -72,43 +73,63 @@ apply(
 				callback,
 				callback
 			>(
-				[](
-					callback const &_callback
-				)
-				{
-					return
-						_callback;
+				fcppt::function<
+					callback (
+						callback const  &
+					)
+				>{
+					[](
+						callback const &_callback
+					)
+					{
+						return
+							_callback;
+					}
 				}
 			),
 			sanguis::server::random::less_function<
 				callback
 			>(
-				[](
-					callback const &_callback1,
-					callback const &_callback2
-				)
-				{
-					return
-						std::less<
-							callback
-						>()(
-							_callback1,
-							_callback2
-						);
+				fcppt::function<
+					bool (
+						callback const &,
+						callback const &
+					)
+				>{
+					[](
+						callback const &_callback1,
+						callback const &_callback2
+					)
+					{
+						return
+							std::less<
+								callback
+							>()(
+								_callback1,
+								_callback2
+							);
+					}
 				}
 			),
 			sanguis::server::random::equal_function<
 				callback
 			>(
-				[](
-					callback const &_callback1,
-					callback const &_callback2
-				)
-				{
-					return
-						_callback1
-						==
-						_callback2;
+				fcppt::function<
+					bool (
+						callback const &,
+						callback const &
+					)
+				>{
+					[](
+						callback const &_callback1,
+						callback const &_callback2
+					)
+					{
+						return
+							_callback1
+							==
+							_callback2;
+					}
 				}
 			)
 		)

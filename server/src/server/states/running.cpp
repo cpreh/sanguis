@@ -14,6 +14,7 @@
 #include <sanguis/messages/roles/perk_type.hpp>
 #include <sanguis/messages/roles/player_name.hpp>
 #include <sanguis/server/dispatch.hpp>
+#include <sanguis/server/dispatch_default_function.hpp>
 #include <sanguis/server/machine.hpp>
 #include <sanguis/server/make_send_callback.hpp>
 #include <sanguis/server/make_unicast_callback.hpp>
@@ -137,7 +138,9 @@ sanguis::server::states::running::react(
 		>(
 			*this,
 			_message,
-			handle_default_msg
+			sanguis::server::dispatch_default_function{
+				handle_default_msg
+			}
 		);
 }
 

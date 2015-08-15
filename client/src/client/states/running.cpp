@@ -3,6 +3,7 @@
 #include <sanguis/slowdown.hpp>
 #include <sanguis/world_name.hpp>
 #include <sanguis/client/dispatch.hpp>
+#include <sanguis/client/dispatch_default_function.hpp>
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/exp_for_next_level.hpp>
 #include <sanguis/client/health_pair.hpp>
@@ -20,6 +21,7 @@
 #include <sanguis/client/control/input_translator.hpp>
 #include <sanguis/client/control/optional_cursor_position.hpp>
 #include <sanguis/client/control/actions/any_fwd.hpp>
+#include <sanguis/client/control/actions/callback.hpp>
 #include <sanguis/client/draw/base.hpp>
 #include <sanguis/client/draw2d/create.hpp>
 #include <sanguis/client/events/action.hpp>
@@ -183,11 +185,13 @@ sanguis::client::states::running::running(
 			this->context<
 				sanguis::client::machine
 			>().cursor(),
-			std::bind(
-				&sanguis::client::states::running::handle_player_action,
-				this,
-				std::placeholders::_1
-			)
+			sanguis::client::control::actions::callback{
+				std::bind(
+					&sanguis::client::states::running::handle_player_action,
+					this,
+					std::placeholders::_1
+				)
+			}
 		)
 	),
 	slowdown_{
@@ -295,7 +299,9 @@ sanguis::client::states::running::react(
 		>(
 			*this,
 			_event,
-			handle_default_msg
+			sanguis::client::dispatch_default_function{
+				handle_default_msg
+			}
 		);
 }
 

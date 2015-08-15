@@ -2,10 +2,9 @@
 #define SANGUIS_SERVER_DISPATCH_HPP_INCLUDED
 
 #include <sanguis/messages/call/dispatch.hpp>
-#include <sanguis/messages/client/base_fwd.hpp>
 #include <sanguis/messages/client/call/object.hpp>
-#include <sanguis/server/message_functor.hpp>
-#include <sanguis/server/player_id.hpp>
+#include <sanguis/server/dispatch_default_function.hpp>
+#include <sanguis/server/message_function.hpp>
 #include <sanguis/server/events/message.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/result.hpp>
@@ -26,28 +25,23 @@ boost::statechart::result
 dispatch(
 	State &_state,
 	sanguis::server::events::message const &_message,
-	std::function<
-		boost::statechart::result (
-			sanguis::server::player_id,
-			sanguis::messages::client::base const &
-		)
-	> const _handle_default_msg
+	sanguis::server::dispatch_default_function const &_handle_default_msg
 )
 {
 	typedef
-	sanguis::server::message_functor<
+	sanguis::server::message_function<
 		State
 	>
-	functor_type;
+	function_type;
 
 	static
 	sanguis::messages::client::call::object<
 		MessageTypes,
-		functor_type
+		function_type
 	>
 	dispatcher;
 
-	functor_type functor(
+	function_type function(
 		_state,
 		_message.id()
 	);
@@ -55,7 +49,7 @@ dispatch(
 	return
 		sanguis::messages::call::dispatch(
 			dispatcher,
-			functor,
+			function,
 			_message,
 			std::bind(
 				_handle_default_msg,

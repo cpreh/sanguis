@@ -2,9 +2,7 @@
 #define SANGUIS_CLIENT_PLAYER_HEALTH_CALLBACK_HPP_INCLUDED
 
 #include <sanguis/client/optional_health_pair_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/function_impl.hpp>
 
 
 namespace sanguis
@@ -13,7 +11,7 @@ namespace client
 {
 
 typedef
-std::function<
+fcppt::function<
 	void(
 		sanguis::client::optional_health_pair const &
 	)

@@ -3,6 +3,7 @@
 
 #include <sanguis/client/gui/menu/callbacks/cancel_connect.hpp>
 #include <sanguis/client/gui/menu/callbacks/connect.hpp>
+#include <sanguis/client/gui/menu/callbacks/object_fwd.hpp>
 #include <sanguis/client/gui/menu/callbacks/quickstart.hpp>
 #include <sanguis/client/gui/menu/callbacks/quit.hpp>
 #include <fcppt/nonassignable.hpp>
@@ -19,7 +20,7 @@ namespace menu
 namespace callbacks
 {
 
-struct object
+class object
 {
 	FCPPT_NONASSIGNABLE(
 		object
