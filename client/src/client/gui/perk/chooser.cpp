@@ -3,6 +3,8 @@
 #include <sanguis/client/gui/to_duration.hpp>
 #include <sanguis/client/gui/perk/chooser.hpp>
 #include <sanguis/client/gui/perk/state.hpp>
+#include <sanguis/client/perk/change_callback.hpp>
+#include <sanguis/client/perk/level_callback.hpp>
 #include <sanguis/client/perk/state.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/font/lit.hpp>
@@ -118,18 +120,22 @@ sanguis::client::gui::perk::chooser::chooser(
 	),
 	perk_connection_(
 		_state.register_perks_change(
-			std::bind(
-				&sanguis::client::gui::perk::chooser::perks,
-				this
-			)
+			sanguis::client::perk::change_callback{
+				std::bind(
+					&sanguis::client::gui::perk::chooser::perks,
+					this
+				)
+			}
 		)
 	),
 	level_connection_(
 		_state.register_level_change(
-			std::bind(
-				&sanguis::client::gui::perk::chooser::level,
-				this
-			)
+			sanguis::client::perk::level_callback{
+				std::bind(
+					&sanguis::client::gui::perk::chooser::level,
+					this
+				)
+			}
 		)
 	)
 {

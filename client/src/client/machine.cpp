@@ -21,6 +21,9 @@
 #include <alda/net/parameters.hpp>
 #include <alda/net/port.hpp>
 #include <alda/net/buffer/circular_receive/object_fwd.hpp>
+#include <alda/net/client/connect_callback.hpp>
+#include <alda/net/client/data_callback.hpp>
+#include <alda/net/client/error_callback.hpp>
 #include <sge/console/gfx/object.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/gui/style/base_fwd.hpp>
@@ -108,29 +111,35 @@ sanguis::client::machine::machine(
 	),
 	s_conn_(
 		net_.register_connect(
-			std::bind(
-				&sanguis::client::machine::connect_callback,
-				this
-			)
+			alda::net::client::connect_callback{
+				std::bind(
+					&sanguis::client::machine::connect_callback,
+					this
+				)
+			}
 		)
 	),
 	s_disconn_(
 		net_.register_error(
-			std::bind(
-				&sanguis::client::machine::error_callback,
-				this,
-				std::placeholders::_1,
-				std::placeholders::_2
-			)
+			alda::net::client::error_callback{
+				std::bind(
+					&sanguis::client::machine::error_callback,
+					this,
+					std::placeholders::_1,
+					std::placeholders::_2
+				)
+			}
 		)
 	),
 	s_data_(
 		net_.register_data(
-			std::bind(
-				&sanguis::client::machine::data_callback,
-				this,
-				std::placeholders::_1
-			)
+			alda::net::client::data_callback{
+				std::bind(
+					&sanguis::client::machine::data_callback,
+					this,
+					std::placeholders::_1
+				)
+			}
 		)
 	),
 	window_system_(

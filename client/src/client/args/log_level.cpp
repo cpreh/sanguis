@@ -1,7 +1,7 @@
 #include <sanguis/client/args/log_level.hpp>
+#include <sanguis/client/args/log_level_exn.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/log/level.hpp>
-#include <fcppt/log/level_from_string.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/variables_map.hpp>
 #include <string>
@@ -14,7 +14,7 @@ sanguis::client::args::log_level(
 )
 {
 	return
-		fcppt::log::level_from_string(
+		sanguis::client::args::log_level_exn(
 			fcppt::from_std_string(
 				_vm["log"].as<
 					std::string

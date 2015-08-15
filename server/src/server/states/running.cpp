@@ -39,7 +39,6 @@
 #include <fcppt/log/info.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/warning.hpp>
-#include <fcppt/log/parameters/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <boost/statechart/result.hpp>

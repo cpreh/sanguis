@@ -10,9 +10,11 @@
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
 #include <sge/font/to_fcppt_string.hpp>
+#include <sge/gui/click_callback.hpp>
 #include <sge/gui/needed_width_from_strings.hpp>
 #include <sge/gui/optional_needed_width.hpp>
 #include <sge/gui/string_container.hpp>
+#include <sge/gui/text_callback.hpp>
 #include <sge/gui/style/base_fwd.hpp>
 #include <sge/gui/widget/reference.hpp>
 #include <sge/gui/widget/reference_alignment_pair.hpp>
@@ -357,39 +359,49 @@ sanguis::client::gui::menu::object::object(
 	},
 	quickstart_connection_(
 		quickstart_button_.click(
-			std::bind(
-				&sanguis::client::gui::menu::object::handle_quickstart,
-				this
-			)
+			sge::gui::click_callback{
+				std::bind(
+					&sanguis::client::gui::menu::object::handle_quickstart,
+					this
+				)
+			}
 		)
 	),
 	connect_connection_(
 		connect_button_.click(
-			std::bind(
-				&sanguis::client::gui::menu::object::handle_connect,
-				this
-			)
+			sge::gui::click_callback{
+				std::bind(
+					&sanguis::client::gui::menu::object::handle_connect,
+					this
+				)
+			}
 		)
 	),
 	quit_connection_(
 		quit_button_.click(
-			callbacks_.quit()
+			sge::gui::click_callback{
+				callbacks_.quit()
+			}
 		)
 	),
 	hostname_change_connection_(
 		hostname_edit_.text_change(
-			std::bind(
-				&sanguis::client::gui::menu::object::handle_text_changed,
-				this
-			)
+			sge::gui::text_callback{
+				std::bind(
+					&sanguis::client::gui::menu::object::handle_text_changed,
+					this
+				)
+			}
 		)
 	),
 	port_change_connection_(
 		port_edit_.text_change(
-			std::bind(
-				&sanguis::client::gui::menu::object::handle_text_changed,
-				this
-			)
+			sge::gui::text_callback{
+				std::bind(
+					&sanguis::client::gui::menu::object::handle_text_changed,
+					this
+				)
+			}
 		)
 	)
 {

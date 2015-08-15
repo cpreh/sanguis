@@ -4,6 +4,7 @@ set(
 	include/sanguis/client/args/draw_debug.hpp
 	include/sanguis/client/args/history_size.hpp
 	include/sanguis/client/args/log_level.hpp
+	include/sanguis/client/args/log_level_exn.hpp
 	include/sanguis/client/args/multi_sampling.hpp
 	include/sanguis/client/args/optional_resolution.hpp
 	include/sanguis/client/args/optional_resolution_fwd.hpp
@@ -633,6 +634,7 @@ set(
 	src/client/args/draw_debug.cpp
 	src/client/args/history_size.cpp
 	src/client/args/log_level.cpp
+	src/client/args/log_level_exn.cpp
 	src/client/args/multi_sampling.cpp
 	src/client/args/options.cpp
 	src/client/args/parse.cpp

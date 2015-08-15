@@ -322,7 +322,9 @@ sanguis::client::draw2d::scene::object::process_message(
 	sanguis::messages::server::base const &_message
 )
 {
-	static sanguis::messages::server::call::object<
+	// TODO: Use client::dispatch?
+	typedef
+	sanguis::messages::server::call::object<
 		boost::mpl::vector26<
 			sanguis::messages::server::add_aoe_projectile,
 			sanguis::messages::server::add_aura,
@@ -352,16 +354,22 @@ sanguis::client::draw2d::scene::object::process_message(
 			sanguis::messages::server::weapon_status
 		>,
 		sanguis::client::draw2d::scene::object
-	> dispatcher;
+	>
+	dispatcher_type;
+
+	static
+	dispatcher_type dispatcher;
 
 	dispatcher(
 		_message,
 		*this,
-		std::bind(
-			&sanguis::client::draw2d::scene::object::process_default_msg,
-			this,
-			std::placeholders::_1
-		)
+		dispatcher_type::default_callback{
+			std::bind(
+				&sanguis::client::draw2d::scene::object::process_default_msg,
+				this,
+				std::placeholders::_1
+			)
+		}
 	);
 }
 

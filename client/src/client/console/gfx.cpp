@@ -13,6 +13,7 @@
 #include <sge/renderer/device/ffp.hpp>
 #include <sge/renderer/target/onscreen.hpp>
 #include <sge/renderer/target/viewport.hpp>
+#include <sge/viewport/manage_callback.hpp>
 #include <sge/viewport/manager.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/cast/size.hpp>
@@ -58,11 +59,13 @@ sanguis::client::console::gfx::gfx(
 	),
 	resize_connection_(
 		_viewport_manager.manage_callback(
-			std::bind(
-				&sanguis::client::console::gfx::on_resize,
-				this,
-				std::placeholders::_1
-			)
+			sge::viewport::manage_callback{
+				std::bind(
+					&sanguis::client::console::gfx::on_resize,
+					this,
+					std::placeholders::_1
+				)
+			}
 		)
 	)
 {

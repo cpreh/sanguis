@@ -2,6 +2,7 @@
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/object_fwd.hpp>
+#include <sge/gui/click_callback.hpp>
 #include <sge/gui/context_fwd.hpp>
 #include <sge/gui/index.hpp>
 #include <sge/gui/optional_index.hpp>
@@ -108,10 +109,12 @@ sanguis::client::gui::menu::resolution_chooser::resolution_chooser(
 	),
 	apply_connection_{
 		apply_button_.click(
-			std::bind(
-				&sanguis::client::gui::menu::resolution_chooser::on_apply,
-				this
-			)
+			sge::gui::click_callback{
+				std::bind(
+					&sanguis::client::gui::menu::resolution_chooser::on_apply,
+					this
+				)
+			}
 		)
 	}
 {

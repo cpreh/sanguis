@@ -20,6 +20,7 @@
 #include <sge/sprite/roles/size.hpp>
 #include <sge/sprite/roles/texture0.hpp>
 #include <sge/sprite/roles/texture_coordinates0.hpp>
+#include <sge/viewport/manage_callback.hpp>
 #include <sge/viewport/manager.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
@@ -82,10 +83,12 @@ sanguis::client::draw2d::scene::background::background(
 	),
 	viewport_connection_(
 		_viewport_manager.manage_callback(
-			std::bind(
-				&sanguis::client::draw2d::scene::background::reset_viewport,
-				this
-			)
+			sge::viewport::manage_callback{
+				std::bind(
+					&sanguis::client::draw2d::scene::background::reset_viewport,
+					this
+				)
+			}
 		)
 	)
 {

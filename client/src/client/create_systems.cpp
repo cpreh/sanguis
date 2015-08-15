@@ -35,6 +35,7 @@
 #include <sge/systems/window.hpp>
 #include <sge/systems/window_source.hpp>
 #include <sge/viewport/fill_on_resize.hpp>
+#include <sge/viewport/optional_resize_callback.hpp>
 #include <sge/window/title.hpp>
 #include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/text.hpp>
@@ -102,7 +103,9 @@ sanguis::client::create_systems(
 							_vm
 						)
 					),
-					sge::viewport::fill_on_resize()
+					sge::viewport::optional_resize_callback{
+						sge::viewport::fill_on_resize()
+					}
 				)
 			)
 			(

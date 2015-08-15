@@ -15,11 +15,14 @@
 #include <sanguis/client/control/actions/scale_type.hpp>
 #include <sanguis/client/control/actions/variant.hpp>
 #include <sge/input/cursor/activatable.hpp>
+#include <sge/input/cursor/button_callback.hpp>
 #include <sge/input/cursor/button_event.hpp>
+#include <sge/input/cursor/move_callback.hpp>
 #include <sge/input/cursor/move_event.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/cursor/position.hpp>
 #include <sge/input/keyboard/device.hpp>
+#include <sge/input/keyboard/key_callback.hpp>
 #include <sge/input/keyboard/key_code.hpp>
 #include <sge/input/keyboard/key_event.hpp>
 #include <sge/input/mouse/device.hpp>
@@ -62,29 +65,35 @@ sanguis::client::control::input_translator::input_translator(
 	),
 	key_connection_(
 		_keyboard.key_callback(
-			std::bind(
-				&sanguis::client::control::input_translator::key_callback,
-				this,
-				std::placeholders::_1
-			)
+			sge::input::keyboard::key_callback{
+				std::bind(
+					&sanguis::client::control::input_translator::key_callback,
+					this,
+					std::placeholders::_1
+				)
+			}
 		)
 	),
 	axis_connection_(
 		cursor_.move_callback(
-			std::bind(
-				&sanguis::client::control::input_translator::move_callback,
-				this,
-				std::placeholders::_1
-			)
+			sge::input::cursor::move_callback{
+				std::bind(
+					&sanguis::client::control::input_translator::move_callback,
+					this,
+					std::placeholders::_1
+				)
+			}
 		)
 	),
 	button_connection_(
 		cursor_.button_callback(
-			std::bind(
-				&sanguis::client::control::input_translator::button_callback,
-				this,
-				std::placeholders::_1
-			)
+			sge::input::cursor::button_callback{
+				std::bind(
+					&sanguis::client::control::input_translator::button_callback,
+					this,
+					std::placeholders::_1
+				)
+			}
 		)
 	)
 {

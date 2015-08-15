@@ -69,10 +69,8 @@
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/info.hpp>
-#include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/warning.hpp>
-#include <fcppt/log/parameters/object.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/math/vector/length_square.hpp>

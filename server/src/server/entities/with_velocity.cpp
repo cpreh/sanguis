@@ -14,6 +14,7 @@
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/entities/ifaces/with_velocity.hpp>
+#include <sanguis/server/entities/property/change_callback.hpp>
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <fcppt/assert/optional_error.hpp>
@@ -46,10 +47,12 @@ sanguis::server::entities::with_velocity::with_velocity(
 	),
 	speed_change_(
 		movement_speed_.register_change_callback(
-			std::bind(
-				&sanguis::server::entities::with_velocity::desired_speed_change,
-				this
-			)
+			sanguis::server::entities::property::change_callback{
+				std::bind(
+					&sanguis::server::entities::with_velocity::desired_speed_change,
+					this
+				)
+			}
 		)
 	)
 {

@@ -59,7 +59,10 @@ dispatch(
 			_dispatcher(
 				*_message.get(),
 				_function,
-				fake_default_msg
+				typename
+				Dispatcher::default_callback{
+					fake_default_msg
+				}
 			).get()
 		);
 }

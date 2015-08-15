@@ -28,6 +28,8 @@
 #include <alda/net/buffer/circular_receive/object_fwd.hpp>
 #include <alda/net/buffer/circular_send/object_fwd.hpp>
 #include <alda/net/server/connection_id_container.hpp>
+#include <alda/net/server/data_callback.hpp>
+#include <alda/net/server/disconnect_callback.hpp>
 #include <sge/timer/difference_fractional.hpp>
 #include <sge/timer/elapsed_and_reset.hpp>
 #include <fcppt/const.hpp>
@@ -107,22 +109,26 @@ sanguis::server::machine::machine(
 	),
 	disconnect_connection_(
 		net_.register_disconnect(
-			std::bind(
-				&sanguis::server::machine::disconnect_callback,
-				this,
-				std::placeholders::_1,
-				std::placeholders::_2
-			)
+			alda::net::server::disconnect_callback{
+				std::bind(
+					&sanguis::server::machine::disconnect_callback,
+					this,
+					std::placeholders::_1,
+					std::placeholders::_2
+				)
+			}
 		)
 	),
 	data_connection_(
 		net_.register_data(
-			std::bind(
-				&sanguis::server::machine::data_callback,
-				this,
-				std::placeholders::_1,
-				std::placeholders::_2
-			)
+			alda::net::server::data_callback{
+				std::bind(
+					&sanguis::server::machine::data_callback,
+					this,
+					std::placeholders::_1,
+					std::placeholders::_2
+				)
+			}
 		)
 	)
 {

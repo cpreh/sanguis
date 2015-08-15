@@ -13,6 +13,7 @@
 #include <sanguis/server/entities/ifaces/with_links.hpp>
 #include <sanguis/server/entities/property/add.hpp>
 #include <sanguis/server/entities/property/always_max.hpp>
+#include <sanguis/server/entities/property/change_callback.hpp>
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <sanguis/server/entities/property/initial_max.hpp>
 #include <sanguis/server/entities/property/subtract.hpp>
@@ -143,18 +144,22 @@ sanguis::server::entities::with_health::with_health(
 	),
 	health_change_(
 		health_.register_change_callback(
-			std::bind(
-				&sanguis::server::entities::with_health::health_change,
-				this
-			)
+			sanguis::server::entities::property::change_callback{
+				std::bind(
+					&sanguis::server::entities::with_health::health_change,
+					this
+				)
+			}
 		)
 	),
 	max_health_change_(
 		health_.register_max_change_callback(
-			std::bind(
-				&sanguis::server::entities::with_health::max_health_change,
-				this
-			)
+			sanguis::server::entities::property::change_callback{
+				std::bind(
+					&sanguis::server::entities::with_health::max_health_change,
+					this
+				)
+			}
 		)
 	)
 {

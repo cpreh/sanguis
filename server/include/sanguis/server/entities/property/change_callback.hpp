@@ -2,9 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_PROPERTY_CHANGE_CALLBACK_HPP_INCLUDED
 
 #include <sanguis/server/entities/property/change_function.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/function_impl.hpp>
 
 
 namespace sanguis
@@ -16,9 +14,11 @@ namespace entities
 namespace property
 {
 
-typedef std::function<
+typedef
+fcppt::function<
 	sanguis::server::entities::property::change_function
-> change_callback;
+>
+change_callback;
 
 }
 }

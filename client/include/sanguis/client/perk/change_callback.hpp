@@ -2,9 +2,7 @@
 #define SANGUIS_CLIENT_PERK_CHANGE_CALLBACK_HPP_INCLUDED
 
 #include <sanguis/client/perk/change_function.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/function_impl.hpp>
 
 
 namespace sanguis
@@ -14,9 +12,11 @@ namespace client
 namespace perk
 {
 
-typedef std::function<
+typedef
+fcppt::function<
 	sanguis::client::perk::change_function
-> change_callback;
+>
+change_callback;
 
 }
 }

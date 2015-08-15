@@ -36,98 +36,104 @@ sanguis::client::load::resource::make_missing_texture(
 		)
 	};
 
-	sge::image2d::store::rgba8 const store{
+	typedef
+	sge::image2d::store::rgba8
+	store_type;
+
+	store_type const store{
 		dim,
-		[
-			dim,
-			&_color1,
-			&_color2
-		](
-			sge::image2d::store::rgba8::view_type const &_view
-		)
-		{
-			sge::image2d::dim const half_dim{
-				dim
-				/
-				fcppt::literal<
-					sge::image::size_type
-				>(
-					2
-				)
-			};
+		store_type::init_function{
+			[
+				dim,
+				&_color1,
+				&_color2
+			](
+				sge::image2d::store::rgba8::view_type const &_view
+			)
+			{
+				sge::image2d::dim const half_dim{
+					dim
+					/
+					fcppt::literal<
+						sge::image::size_type
+					>(
+						2
+					)
+				};
 
-			sge::image2d::algorithm::fill(
-				sge::image2d::view::sub(
-					sge::image2d::view::object(
-						sge::image::view::wrap(
-							_view
-						)
+				sge::image2d::algorithm::fill(
+					sge::image2d::view::sub(
+						sge::image2d::view::object(
+							sge::image::view::wrap(
+								_view
+							)
+						),
+						sge::image2d::rect{
+							sge::image2d::vector::null(),
+							half_dim
+						}
 					),
-					sge::image2d::rect{
-						sge::image2d::vector::null(),
-						half_dim
-					}
-				),
-				_color1,
-				sge::image::algorithm::uninitialized::yes
-			);
+					_color1,
+					sge::image::algorithm::uninitialized::yes
+				);
 
-			sge::image2d::algorithm::fill(
-				sge::image2d::view::sub(
-					sge::image2d::view::object(
-						sge::image::view::wrap(
-							_view
-						)
+				sge::image2d::algorithm::fill(
+					sge::image2d::view::sub(
+						sge::image2d::view::object(
+							sge::image::view::wrap(
+								_view
+							)
+						),
+						sge::image2d::rect{
+							sge::image2d::vector{
+								0,
+								half_dim.h()
+							},
+							half_dim
+						}
 					),
-					sge::image2d::rect{
-						sge::image2d::vector{
-							0,
-							half_dim.h()
-						},
-						half_dim
-					}
-				),
-				_color2,
-				sge::image::algorithm::uninitialized::yes
-			);
+					_color2,
+					sge::image::algorithm::uninitialized::yes
+				);
 
-			sge::image2d::algorithm::fill(
-				sge::image2d::view::sub(
-					sge::image2d::view::object(
-						sge::image::view::wrap(
-							_view
-						)
+				sge::image2d::algorithm::fill(
+					sge::image2d::view::sub(
+						sge::image2d::view::object(
+							sge::image::view::wrap(
+								_view
+							)
+						),
+						sge::image2d::rect{
+							sge::image2d::vector{
+								half_dim.w(),
+								0
+							},
+							half_dim
+						}
 					),
-					sge::image2d::rect{
-						sge::image2d::vector{
-							half_dim.w(),
-							0
-						},
-						half_dim
-					}
-				),
-				_color2,
-				sge::image::algorithm::uninitialized::yes
-			);
+					_color2,
+					sge::image::algorithm::uninitialized::yes
+				);
 
-			sge::image2d::algorithm::fill(
-				sge::image2d::view::sub(
-					sge::image2d::view::object(
-						sge::image::view::wrap(
-							_view
-						)
+				sge::image2d::algorithm::fill(
+					sge::image2d::view::sub(
+						sge::image2d::view::object(
+							sge::image::view::wrap(
+								_view
+							)
+						),
+						sge::image2d::rect{
+							sge::image2d::vector{
+								half_dim.w(),
+								half_dim.h()
+							},
+							half_dim
+						}
 					),
-					sge::image2d::rect{
-						sge::image2d::vector{
-							half_dim.w(),
-							half_dim.h()
-						},
-						half_dim
-					}
-				),
-				_color1,
-				sge::image::algorithm::uninitialized::yes
-			);
+					_color1,
+					sge::image::algorithm::uninitialized::yes
+				);
+			}
 		}
 	};
 

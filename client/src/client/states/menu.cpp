@@ -24,9 +24,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
-#include <fcppt/log/location.hpp>
 #include <fcppt/log/object.hpp>
-#include <fcppt/log/parameters/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <boost/statechart/result.hpp>

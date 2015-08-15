@@ -60,98 +60,100 @@ sanguis::tools::libmergeimage::impl::make_image(
 		>(
 			border_sz
 		),
-		[
-			border_sz,
-			_cell_size,
-			&_base_path,
-			&_paths,
-			&_image_system
-		](
-			sanguis::tools::libmergeimage::image_store::view_type const &_view
-		)
-		{
-			sge::image2d::view::object const dest_view(
-				sge::image::view::wrap(
-					_view
-				)
-			);
-
-			sge::image2d::algorithm::fill(
-				dest_view,
-				sge::image::color::predef::transparent(),
-				sge::image::algorithm::uninitialized::yes
-			);
-
-			sge::image2d::rect::vector pos(
-				sge::image2d::rect::vector::null()
-			);
-
-			for(
-				boost::filesystem::path const &suffix_path
-				:
-				_paths
+		sanguis::tools::libmergeimage::image_store::init_function{
+			[
+				border_sz,
+				_cell_size,
+				&_base_path,
+				&_paths,
+				&_image_system
+			](
+				sanguis::tools::libmergeimage::image_store::view_type const &_view
 			)
 			{
-				boost::filesystem::path const cur_path(
-					_base_path
-					/
-					suffix_path
-				);
-
-				sge::image2d::file_unique_ptr const img(
-					sge::image2d::load_exn(
-						_image_system,
-						cur_path
+				sge::image2d::view::object const dest_view(
+					sge::image::view::wrap(
+						_view
 					)
 				);
 
-				if(
-					img->size()
-					!=
-					_cell_size.get()
-				)
-					throw
-						sanguis::tools::libmergeimage::exception(
-							FCPPT_TEXT("File ")
-							+
-							fcppt::filesystem::path_to_string(
-								cur_path
-							)
-							+
-							FCPPT_TEXT(" has dimensions ")
-							+
-							fcppt::insert_to_fcppt_string(
-								img->size()
-							)
-							+
-							FCPPT_TEXT(" but the cell size so far was ")
-							+
-							fcppt::insert_to_fcppt_string(
-								_cell_size
-							)
-						);
-
-				sge::image2d::algorithm::copy_and_convert(
-					img->view(),
-					sge::image2d::view::sub(
-						dest_view,
-						sge::image2d::rect(
-							pos,
-							_cell_size.get()
-						)
-					),
-					sge::image::algorithm::may_overlap::no,
-					sge::image::algorithm::uninitialized::no
+				sge::image2d::algorithm::fill(
+					dest_view,
+					sge::image::color::predef::transparent(),
+					sge::image::algorithm::uninitialized::yes
 				);
 
-				pos.x() += _cell_size.get().w() + 1;
+				sge::image2d::rect::vector pos(
+					sge::image2d::rect::vector::null()
+				);
 
-				if(
-					pos.x() + _cell_size.get().w() + 1 > border_sz
+				for(
+					boost::filesystem::path const &suffix_path
+					:
+					_paths
 				)
 				{
-					pos.x() = 0;
-					pos.y() += _cell_size.get().h() + 1;
+					boost::filesystem::path const cur_path(
+						_base_path
+						/
+						suffix_path
+					);
+
+					sge::image2d::file_unique_ptr const img(
+						sge::image2d::load_exn(
+							_image_system,
+							cur_path
+						)
+					);
+
+					if(
+						img->size()
+						!=
+						_cell_size.get()
+					)
+						throw
+							sanguis::tools::libmergeimage::exception(
+								FCPPT_TEXT("File ")
+								+
+								fcppt::filesystem::path_to_string(
+									cur_path
+								)
+								+
+								FCPPT_TEXT(" has dimensions ")
+								+
+								fcppt::insert_to_fcppt_string(
+									img->size()
+								)
+								+
+								FCPPT_TEXT(" but the cell size so far was ")
+								+
+								fcppt::insert_to_fcppt_string(
+									_cell_size
+								)
+							);
+
+					sge::image2d::algorithm::copy_and_convert(
+						img->view(),
+						sge::image2d::view::sub(
+							dest_view,
+							sge::image2d::rect(
+								pos,
+								_cell_size.get()
+							)
+						),
+						sge::image::algorithm::may_overlap::no,
+						sge::image::algorithm::uninitialized::no
+					);
+
+					pos.x() += _cell_size.get().w() + 1;
+
+					if(
+						pos.x() + _cell_size.get().w() + 1 > border_sz
+					)
+					{
+						pos.x() = 0;
+						pos.y() += _cell_size.get().h() + 1;
+					}
 				}
 			}
 		}

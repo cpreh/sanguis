@@ -32,6 +32,7 @@
 #include <sanguis/messages/roles/is_primary_weapon.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/object.hpp>
+#include <sge/console/callback/function.hpp>
 #include <sge/console/callback/name.hpp>
 #include <sge/console/callback/parameters.hpp>
 #include <sge/console/callback/short_description.hpp>
@@ -514,13 +515,15 @@ sanguis::client::control::action_handler::cheat_connection(
 	return
 		_console.insert(
 			sge::console::callback::parameters(
-				std::bind(
-					&sanguis::client::control::action_handler::send_cheat,
-					this,
-					_cheat,
-					std::placeholders::_1,
-					std::placeholders::_2
-				),
+				sge::console::callback::function{
+					std::bind(
+						&sanguis::client::control::action_handler::send_cheat,
+						this,
+						_cheat,
+						std::placeholders::_1,
+						std::placeholders::_2
+					)
+				},
 				_name
 			)
 			.short_description(

@@ -3,14 +3,14 @@
 
 #include <sanguis/core/symbol.hpp>
 #include <fcppt/log/location_fwd.hpp>
-#include <fcppt/log/parameters/object.hpp>
+#include <fcppt/log/parameters.hpp>
 
 
 namespace sanguis
 {
 
 SANGUIS_CORE_SYMBOL
-fcppt::log::parameters::object
+fcppt::log::parameters
 log_parameters(
 	fcppt::log::location const &
 );

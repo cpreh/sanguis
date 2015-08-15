@@ -4,11 +4,13 @@
 #include <sanguis/client/perk/choosable.hpp>
 #include <sanguis/client/perk/find_info_const.hpp>
 #include <sanguis/client/perk/info.hpp>
+#include <sanguis/client/perk/level_callback.hpp>
 #include <sanguis/client/perk/state.hpp>
 #include <sanguis/client/perk/to_string.hpp>
 #include <sanguis/client/perk/tree.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/font/object_fwd.hpp>
+#include <sge/gui/click_callback.hpp>
 #include <sge/gui/context_fwd.hpp>
 #include <sge/gui/optional_needed_width.hpp>
 #include <sge/gui/text_color.hpp>
@@ -85,18 +87,22 @@ sanguis::client::gui::perk::line::line(
 	),
 	click_connection_(
 		button_.click(
-			std::bind(
-				&sanguis::client::gui::perk::line::on_click,
-				this
-			)
+			sge::gui::click_callback{
+				std::bind(
+					&sanguis::client::gui::perk::line::on_click,
+					this
+				)
+			}
 		)
 	),
 	level_change_connection_(
 		state_.register_level_change(
-			std::bind(
-				&sanguis::client::gui::perk::line::on_level_change,
-				this
-			)
+			sanguis::client::perk::level_callback{
+				std::bind(
+					&sanguis::client::gui::perk::line::on_level_change,
+					this
+				)
+			}
 		)
 	)
 {

@@ -7,6 +7,7 @@
 #include <sanguis/messages/roles/console_command.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/object.hpp>
+#include <sge/console/callback/function.hpp>
 #include <sge/console/callback/name.hpp>
 #include <sge/console/callback/parameters.hpp>
 #include <sge/console/gfx/object.hpp>
@@ -46,11 +47,13 @@ sanguis::client::console::object::register_server_command(
 	server_connections_.push_back(
 		gfx_.console_object().insert(
 			sge::console::callback::parameters(
-				std::bind(
-					&sanguis::client::console::object::server_callback,
-					this,
-					std::placeholders::_1
-				),
+				sge::console::callback::function{
+					std::bind(
+						&sanguis::client::console::object::server_callback,
+						this,
+						std::placeholders::_1
+					)
+				},
 				sge::console::callback::name(
 					sge::font::from_fcppt_string(
 						_name

@@ -28,6 +28,7 @@
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_links.hpp>
+#include <sanguis/server/entities/property/change_callback.hpp>
 #include <sanguis/server/entities/property/change_event.hpp>
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <sanguis/server/entities/property/value.hpp>
@@ -65,11 +66,13 @@ sanguis::server::ai::behavior::attack::attack(
 	target_(),
 	health_connection_{
 		_context.me().health().register_change_callback(
-			std::bind(
-				&sanguis::server::ai::behavior::attack::health_changed,
-				this,
-				std::placeholders::_1
-			)
+			sanguis::server::entities::property::change_callback{
+				std::bind(
+					&sanguis::server::ai::behavior::attack::health_changed,
+					this,
+					std::placeholders::_1
+				)
+			}
 		)
 	}
 {
