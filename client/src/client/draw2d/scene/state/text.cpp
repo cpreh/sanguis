@@ -1,9 +1,9 @@
 #include <sanguis/client/draw2d/font_color_format.hpp>
 #include <sanguis/client/draw2d/scene/state/base.hpp>
-#include <sanguis/client/draw2d/scene/state/text.hpp>
 #include <sanguis/client/draw2d/scene/state/optional_scoped_unique_ptr.hpp>
 #include <sanguis/client/draw2d/scene/state/scoped.hpp>
 #include <sanguis/client/draw2d/scene/state/scoped_text.hpp>
+#include <sanguis/client/draw2d/scene/state/text.hpp>
 #include <sge/font/draw/create_ffp_sampler.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
