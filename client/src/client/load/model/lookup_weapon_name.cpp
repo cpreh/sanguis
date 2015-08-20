@@ -4,50 +4,28 @@
 #include <sanguis/client/load/primary_weapon_name.hpp>
 #include <sanguis/client/load/model/lookup_weapon_name.hpp>
 #include <sanguis/model/weapon_category_name.hpp>
-#include <fcppt/enum_size.hpp>
+#include <fcppt/optional_to_exception.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/algorithm/array_fold.hpp>
-#include <fcppt/algorithm/find_exn.hpp>
-#include <fcppt/cast/int_to_enum.hpp>
-#include <fcppt/cast/size.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <array>
-#include <cstddef>
-#include <iterator>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/algorithm/enum_array_fold.hpp>
+#include <fcppt/algorithm/index_of_enum_array.hpp>
+#include <fcppt/container/enum_array.hpp>
 
 
 namespace
 {
 
-typedef std::array<
-	sanguis::model::weapon_category_name,
-	fcppt::cast::size<
-		std::size_t
-	>(
-		fcppt::enum_size<
-			sanguis::primary_weapon_type
-		>::value
-	)
-> weapon_type_array;
+typedef
+fcppt::container::enum_array<
+	sanguis::primary_weapon_type,
+	sanguis::model::weapon_category_name
+>
+weapon_type_array;
 
 weapon_type_array const weapon_types(
-	fcppt::algorithm::array_fold<
+	fcppt::algorithm::enum_array_fold<
 		weapon_type_array
 	>(
-		[](
-			std::size_t const _index
-		)
-		{
-			return
-				sanguis::client::load::primary_weapon_name(
-					fcppt::cast::int_to_enum<
-						sanguis::primary_weapon_type
-					>(
-						_index
-					)
-				);
-		}
+		&sanguis::client::load::primary_weapon_name
 	)
 );
 
@@ -66,29 +44,23 @@ sanguis::client::load::model::lookup_weapon_name(
 			sanguis::optional_primary_weapon_type()
 		:
 			sanguis::optional_primary_weapon_type(
-				fcppt::cast::int_to_enum<
-					sanguis::primary_weapon_type
-				>(
-					std::distance(
-						weapon_types.begin(),
-						fcppt::algorithm::find_exn(
-							weapon_types.begin(),
-							weapon_types.end(),
-							_name,
-							[
-								&_name
-							]{
-								return
-									sanguis::exception{
-										FCPPT_TEXT("lookup_weapon_name ")
-										+
-										_name.get()
-										+
-										FCPPT_TEXT(" failed!")
-									};
-							}
-						)
-					)
+				fcppt::optional_to_exception(
+					fcppt::algorithm::index_of_enum_array(
+						weapon_types,
+						_name
+					),
+					[
+						&_name
+					]{
+						return
+							sanguis::exception{
+								FCPPT_TEXT("lookup_weapon_name ")
+								+
+								_name.get()
+								+
+								FCPPT_TEXT(" failed!")
+							};
+					}
 				)
 			)
 		;

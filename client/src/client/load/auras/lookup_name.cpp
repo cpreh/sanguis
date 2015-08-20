@@ -2,47 +2,29 @@
 #include <sanguis/exception.hpp>
 #include <sanguis/client/load/aura_name.hpp>
 #include <sanguis/client/load/auras/lookup_name.hpp>
-#include <fcppt/enum_size.hpp>
+#include <fcppt/optional_to_exception.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/algorithm/array_fold.hpp>
-#include <fcppt/algorithm/find_exn.hpp>
-#include <fcppt/cast/int_to_enum.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <array>
-#include <cstddef>
-#include <iterator>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/algorithm/enum_array_fold.hpp>
+#include <fcppt/algorithm/index_of_enum_array.hpp>
+#include <fcppt/container/enum_array.hpp>
 
 
-// TODO: Generalize this code!
 namespace
 {
 
-typedef std::array<
-	fcppt::string,
-	fcppt::enum_size<
-		sanguis::aura_type
-	>::value
-> aura_type_array;
+typedef
+fcppt::container::enum_array<
+	sanguis::aura_type,
+	fcppt::string
+>
+aura_type_array;
 
 aura_type_array const aura_types(
-	fcppt::algorithm::array_fold<
+	fcppt::algorithm::enum_array_fold<
 		aura_type_array
 	>(
-		[](
-			std::size_t const _index
-		)
-		{
-			return
-				sanguis::client::load::aura_name(
-					fcppt::cast::int_to_enum<
-						sanguis::aura_type
-					>(
-						_index
-					)
-				);
-		}
+		&sanguis::client::load::aura_name
 	)
 );
 
@@ -50,33 +32,26 @@ aura_type_array const aura_types(
 
 sanguis::aura_type
 sanguis::client::load::auras::lookup_name(
-	fcppt::string const &_str
+	fcppt::string const &_name
 )
 {
 	return
-		fcppt::cast::int_to_enum<
-			sanguis::aura_type
-		>(
-			std::distance(
-				aura_types.begin(),
-				fcppt::algorithm::find_exn(
-					aura_types.begin(),
-					aura_types.end(),
-					_str,
-					[
-						&_str
-					]{
-						return
-							sanguis::exception{
-								FCPPT_TEXT("auras::lookup_name ")
-								+
-								_str
-								+
-								FCPPT_TEXT(" failed!")
-							};
-					}
-				)
-			)
+		fcppt::optional_to_exception(
+			fcppt::algorithm::index_of_enum_array(
+				aura_types,
+				_name
+			),
+			[
+				&_name
+			]{
+				return
+					sanguis::exception{
+						FCPPT_TEXT("auras::lookup_name ")
+						+
+						_name
+						+
+						FCPPT_TEXT(" failed!")
+					};
+			}
 		);
-
 }
