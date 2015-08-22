@@ -65,7 +65,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/optional_error.hpp>
-#include <fcppt/container/find_opt.hpp>
+#include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/info.hpp>
@@ -580,7 +580,7 @@ sanguis::server::global::context::transfer_entity(
 {
 	sanguis::server::global::dest_world_pair const dest(
 		FCPPT_ASSERT_OPTIONAL_ERROR(
-			fcppt::container::find_opt(
+			fcppt::container::find_opt_mapped(
 				worlds_.connections(),
 				_source
 			)
@@ -614,7 +614,7 @@ sanguis::server::global::context::world(
 {
 	return
 		*FCPPT_ASSERT_OPTIONAL_ERROR(
-			fcppt::container::find_opt(
+			fcppt::container::find_opt_mapped(
 				worlds_.worlds(),
 				_world_id
 			)
@@ -645,7 +645,7 @@ sanguis::server::global::context::player_opt(
 {
 	return
 		fcppt::optional_bind_construct(
-			fcppt::container::find_opt(
+			fcppt::container::find_opt_mapped(
 				players_,
 				_player_id
 			),

@@ -181,6 +181,7 @@
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/optional_comparison.hpp>
 #include <fcppt/optional_impl.hpp>
+#include <fcppt/optional_to_exception.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/type_name_from_info.hpp>
@@ -189,7 +190,7 @@
 #include <fcppt/algorithm/sequence_iteration.hpp>
 #include <fcppt/cast/dynamic.hpp>
 #include <fcppt/cast/float_to_int_fun.hpp>
-#include <fcppt/container/find_exn.hpp>
+#include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -792,9 +793,11 @@ sanguis::client::draw2d::scene::object::entity(
 ) const
 {
 	return
-		*fcppt::container::find_exn(
-			entities_,
-			_id,
+		*fcppt::optional_to_exception(
+			fcppt::container::find_opt_mapped(
+				entities_,
+				_id
+			),
 			[
 				_id
 			]{

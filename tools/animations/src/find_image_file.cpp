@@ -11,7 +11,7 @@
 #include <sanguis/tools/animations/find_image_file.hpp>
 #include <sanguis/tools/animations/image_file_map.hpp>
 #include <fcppt/maybe_void.hpp>
-#include <fcppt/container/find_opt.hpp>
+#include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <QImage>
 #include <fcppt/config/external_end.hpp>
@@ -46,7 +46,7 @@ sanguis::tools::animations::find_image_file(
 				)
 				{
 					fcppt::maybe_void(
-						fcppt::container::find_opt(
+						fcppt::container::find_opt_mapped(
 							_image_files,
 							_image_name
 						),

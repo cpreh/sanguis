@@ -9,7 +9,7 @@
 #include <sanguis/model/part_fwd.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/container/find_opt.hpp>
+#include <fcppt/container/find_opt_mapped.hpp>
 
 
 sanguis::client::load::model::part::part(
@@ -37,7 +37,7 @@ sanguis::client::load::model::part::operator[](
 {
 	return
 		fcppt::maybe(
-			fcppt::container::find_opt(
+			fcppt::container::find_opt_mapped(
 				categories_,
 				_type
 			),

@@ -16,7 +16,7 @@
 #include <fcppt/make_cref.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/container/find_opt.hpp>
+#include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
@@ -54,7 +54,7 @@ images_base(
 
 	return
 		fcppt::maybe(
-			fcppt::container::find_opt(
+			fcppt::container::find_opt_mapped(
 				cur_set.orientations(),
 				_orientation
 			),

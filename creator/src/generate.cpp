@@ -10,10 +10,11 @@
 #include <sanguis/creator/impl/result.hpp>
 #include <sanguis/creator/impl/random/generator.hpp>
 #include <fcppt/make_enum_range.hpp>
+#include <fcppt/optional_to_exception.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/contains_if.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/container/find_exn.hpp>
+#include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/math/dim/comparison.hpp>
 
 
@@ -27,9 +28,11 @@ sanguis::creator::generate(
 	);
 
 	sanguis::creator::impl::result const result(
-		fcppt::container::find_exn(
-			sanguis::creator::impl::generator_map(),
-			_parameters.name(),
+		fcppt::optional_to_exception(
+			fcppt::container::find_opt_mapped(
+				sanguis::creator::impl::generator_map(),
+				_parameters.name()
+			),
 			[
 				&_parameters
 			]

@@ -4,9 +4,10 @@
 #include <sanguis/model/exception.hpp>
 #include <sanguis/model/optional_image_name.hpp>
 #include <sanguis/model/weapon_category.hpp>
+#include <fcppt/optional_to_exception.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/container/find_exn.hpp>
+#include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -69,9 +70,11 @@ sanguis::model::weapon_category::animation(
 )
 {
 	return
-		fcppt::container::find_exn(
-			animations_,
-			_name,
+		fcppt::optional_to_exception(
+			fcppt::container::find_opt_mapped(
+				animations_,
+				_name
+			),
 			[
 				&_name
 			]

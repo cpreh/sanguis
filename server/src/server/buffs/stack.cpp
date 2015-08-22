@@ -1,10 +1,10 @@
 #include <sanguis/server/buffs/buff.hpp>
 #include <sanguis/server/buffs/stack.hpp>
 #include <sanguis/server/buffs/unique_ptr.hpp>
-#include <fcppt/assert/error.hpp>
 #include <fcppt/assert/pre.hpp>
+#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <algorithm>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -47,34 +47,13 @@ sanguis::server::buffs::stack::erase(
 	sanguis::server::buffs::buff const &_buff
 )
 {
-	// TODO: With C++14 we can do a proper lookup here
-	// TODO: Add a find_opt version to fcppt that returns an iterator
-	set::iterator const result(
-		std::find_if(
-			impl_.begin(),
-			impl_.end(),
-			[
-				&_buff
-			](
-				sanguis::server::buffs::unique_ptr const &_element
-			)
-			{
-				return
-					_element.get_pointer()
-					==
-					&_buff;
-			}
-		)
-	);
-
-	FCPPT_ASSERT_ERROR(
-		result
-		!=
-		impl_.end()
-	);
-
 	impl_.erase(
-		result
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			fcppt::container::find_opt_iterator(
+				impl_,
+				_buff
+			)
+		)
 	);
 }
 

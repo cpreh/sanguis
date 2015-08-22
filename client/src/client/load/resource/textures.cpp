@@ -23,10 +23,11 @@
 #include <fcppt/exception.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/optional_to_exception.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/unique_ptr_to_const.hpp>
-#include <fcppt/container/find_exn.hpp>
+#include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/log/_.hpp>
@@ -173,9 +174,11 @@ sanguis::client::load::resource::textures::do_load(
 		this->do_load_inner(
 			sanguis::media_path()
 			/
-			fcppt::container::find_exn(
-				texture_names_,
-				_id,
+			fcppt::optional_to_exception(
+				fcppt::container::find_opt_mapped(
+					texture_names_,
+					_id
+				),
 				[
 					_id
 				]

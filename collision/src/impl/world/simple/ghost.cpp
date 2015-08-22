@@ -20,8 +20,8 @@
 #include <fcppt/reference_wrapper_comparison.hpp>
 #include <fcppt/algorithm/map_iteration.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/container/find_opt.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>
+#include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -156,7 +156,7 @@ sanguis::collision::impl::world::simple::ghost::update_near_body(
 		)
 		?
 			fcppt::maybe(
-				fcppt::container::find_opt(
+				fcppt::container::find_opt_mapped(
 					bodies_,
 					fcppt::make_cref(
 						_body

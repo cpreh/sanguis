@@ -4,8 +4,9 @@
 #include <sanguis/model/weapon_category_fwd.hpp>
 #include <sanguis/model/weapon_category_map.hpp>
 #include <sanguis/model/weapon_category_name.hpp>
+#include <fcppt/optional_to_exception.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/container/find_exn.hpp>
+#include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -53,9 +54,11 @@ sanguis::model::part::weapon_category(
 )
 {
 	return
-		fcppt::container::find_exn(
-			weapon_categories_,
-			_name,
+		fcppt::optional_to_exception(
+			fcppt::container::find_opt_mapped(
+				weapon_categories_,
+				_name
+			),
 			[
 				&_name
 			]
