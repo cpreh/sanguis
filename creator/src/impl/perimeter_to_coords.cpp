@@ -22,20 +22,20 @@ sanguis::creator::impl::perimeter_to_coords(
 
 	if (_t < w2)
 		return sanguis::creator::grid::pos(
-			_t + 1,
-			0);
+			_t + 1u,
+			0u);
 
 	if (_t < w2 + h2)
 		return sanguis::creator::grid::pos(
-			w2 + 1,
-			_t - w2 + 1);
+			w2 + 1u,
+			_t - w2 + 1u);
 
-	if (_t < 2 * w2 + h2)
+	if (_t < 2u * w2 + h2)
 		return sanguis::creator::grid::pos(
 			w2 - (_t - w2 - h2),
-			h2 + 1);
+			h2 + 1u);
 
 	return sanguis::creator::grid::pos(
-		0,
-		h2 - (_t - 2 * w2 - h2));
+		0u,
+		h2 - (_t - 2u * w2 - h2));
 }

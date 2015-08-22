@@ -34,8 +34,8 @@ sanguis::creator::impl::generators::graveyard(
 	sanguis::creator::impl::reachable_grid
 	initial_maze{
 		sanguis::creator::grid::dim{
-			9,
-			9
+			9u,
+			9u
 		},
 		sanguis::creator::impl::reachable(false)
 	};

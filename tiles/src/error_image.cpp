@@ -88,7 +88,7 @@ sanguis::tiles::error_image(
 								),
 								sge::image2d::rect{
 									sge::image2d::vector{
-										0,
+										0u,
 										half_dim.h()
 									},
 									half_dim
@@ -108,7 +108,7 @@ sanguis::tiles::error_image(
 								sge::image2d::rect{
 									sge::image2d::vector{
 										half_dim.w(),
-										0
+										0u
 									},
 									half_dim
 								}

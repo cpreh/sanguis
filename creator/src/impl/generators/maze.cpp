@@ -29,8 +29,8 @@ sanguis::creator::impl::generators::maze(
 {
 	sanguis::creator::impl::reachable_grid initial_maze{
 		sanguis::creator::impl::reachable_grid::dim(
-			15,
-			15
+			15u,
+			15u
 		),
 		sanguis::creator::impl::reachable(false)
 	};
@@ -38,12 +38,12 @@ sanguis::creator::impl::generators::maze(
 	sanguis::creator::impl::filled_rect(
 		sanguis::creator::rect{
 			sanguis::creator::rect::vector{
-				1,
-				1
+				1u,
+				1u
 			},
 			sanguis::creator::rect::dim{
-				5,
-				5
+				5u,
+				5u
 			}
 		},
 		[

@@ -83,10 +83,10 @@ sanguis::creator::impl::generators::start(
 
 	sanguis::creator::opening const start_portal{
 		sanguis::creator::pos{
-			1,
+			1u,
 			grid_size.h()
 			/
-			2
+			2u
 		}
 	};
 
@@ -94,10 +94,10 @@ sanguis::creator::impl::generators::start(
 		sanguis::creator::pos{
 			grid_size.w()
 			-
-			2,
+			2u,
 			grid_size.h()
 			/
-			2
+			2u
 		}
 	};
 
@@ -199,8 +199,8 @@ sanguis::creator::impl::generators::start(
 				sanguis::creator::destructible(
 					sanguis::creator::destructible_pos(
 						sanguis::creator::pos(
-							2,
-							2
+							2u,
+							2u
 						)
 					),
 					sanguis::creator::destructible_type::barrel
