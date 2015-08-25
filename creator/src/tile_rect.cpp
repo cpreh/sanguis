@@ -6,6 +6,7 @@
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/math/dim/fill.hpp>
+#include <fcppt/math/vector/null.hpp>
 
 
 sanguis::creator::rect const
@@ -28,7 +29,9 @@ sanguis::creator::tile_rect(
 	default:
 		return
 			sanguis::creator::rect(
-				sanguis::creator::rect::vector::null(),
+				fcppt::math::vector::null<
+					sanguis::creator::rect::vector
+				>(),
 				fcppt::math::dim::fill<
 					sanguis::creator::rect::dim
 				>(

@@ -16,7 +16,7 @@ sanguis::model::impl::serialize::cell_size(
 			FCPPT_TEXT("cell_dimensions"),
 			sge::parse::json::value(
 				sge::parse::json::convert::from_container(
-					_cell_size.get()
+					_cell_size.get().storage()
 				)
 			)
 		);

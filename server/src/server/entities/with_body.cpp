@@ -28,6 +28,7 @@
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
+#include <fcppt/math/vector/null.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
 #include <utility>
@@ -331,6 +332,8 @@ sanguis::server::entities::with_body::initial_speed() const
 {
 	return
 		sanguis::server::speed(
-			sanguis::server::speed::value_type::null()
+			fcppt::math::vector::null<
+				sanguis::server::speed::value_type
+			>()
 		);
 }

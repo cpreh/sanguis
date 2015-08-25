@@ -16,6 +16,7 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/fill.hpp>
+#include <fcppt/math/vector/null.hpp>
 
 
 sge::image2d::store::object
@@ -71,7 +72,9 @@ sanguis::tiles::error_image(
 									)
 								),
 								sge::image2d::rect{
-									sge::image2d::vector::null(),
+									fcppt::math::vector::null<
+										sge::image2d::vector
+									>(),
 									half_dim
 								}
 							),

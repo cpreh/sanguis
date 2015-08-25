@@ -35,6 +35,7 @@
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/dim/to_vector.hpp>
 #include <fcppt/math/vector/dim.hpp>
+#include <fcppt/math/vector/null.hpp>
 #include <fcppt/math/vector/signed_angle_between.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 
@@ -126,7 +127,9 @@ sanguis::client::draw2d::entities::player::speed(
 		sanguis::client::draw2d::entities::model::object::orientation(
 			sanguis::client::draw2d::sprite::rotation{
 				fcppt::math::vector::signed_angle_between(
-					sanguis::client::draw2d::vector2::null(),
+					fcppt::math::vector::null<
+						sanguis::client::draw2d::vector2
+					>(),
 					_speed.get()
 				)
 			},

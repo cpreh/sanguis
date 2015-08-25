@@ -17,6 +17,7 @@
 #include <sge/viewport/manager.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/cast/size.hpp>
+#include <fcppt/math/vector/null.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -108,7 +109,9 @@ make_console_rect(
 
 	return
 		sge::font::rect{
-			sge::font::rect::vector::null(),
+			fcppt::math::vector::null<
+				sge::font::rect::vector
+			>(),
 			sge::font::rect::dim{
 				fcppt::cast::size<
 					sge::font::rect::value_type

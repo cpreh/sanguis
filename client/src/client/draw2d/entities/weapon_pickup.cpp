@@ -18,6 +18,7 @@
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/draw2d/sprite/normal/white.hpp>
 #include <sanguis/load/model/weapon_pickup_path.hpp>
+#include <fcppt/math/vector/null.hpp>
 
 
 sanguis::client::draw2d::entities::weapon_pickup::weapon_pickup(
@@ -41,7 +42,9 @@ sanguis::client::draw2d::entities::weapon_pickup::weapon_pickup(
 			sanguis::optional_primary_weapon_type{},
 			sanguis::weapon_status::nothing,
 			sanguis::client::draw2d::speed{
-				sanguis::client::draw2d::speed::value_type::null()
+				fcppt::math::vector::null<
+					sanguis::client::draw2d::speed::value_type
+				>()
 			},
 			_center,
 			_rotation,

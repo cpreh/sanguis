@@ -37,6 +37,7 @@
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/dim/to_signed.hpp>
 #include <fcppt/math/vector/dim.hpp>
+#include <fcppt/math/vector/null.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -65,7 +66,9 @@ sanguis::client::draw2d::scene::light::light(
 				sanguis::client::draw2d::sprite::client::category::light
 			),
 		sge::sprite::roles::pos{} =
-			sanguis::client::draw2d::sprite::point::null(),
+			fcppt::math::vector::null<
+				sanguis::client::draw2d::sprite::point
+			>(),
 		sge::sprite::roles::size{} =
 			fcppt::math::dim::structure_cast<
 				sanguis::client::draw2d::sprite::dim,

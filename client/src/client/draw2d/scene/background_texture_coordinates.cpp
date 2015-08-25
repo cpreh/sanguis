@@ -7,6 +7,7 @@
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/dim/to_vector.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/null.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 
 
@@ -35,7 +36,9 @@ sanguis::client::draw2d::scene::background_texture_coordinates(
 	);
 
 	coordinates const base(
-		pos_type::null(),
+		fcppt::math::vector::null<
+			pos_type
+		>(),
 		dim
 		/
 		fcppt::math::vector::structure_cast<

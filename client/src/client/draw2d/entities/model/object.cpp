@@ -40,6 +40,7 @@
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/dim/to_signed.hpp>
+#include <fcppt/math/vector/null.hpp>
 #include <fcppt/type_iso/strong_typedef.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -188,7 +189,9 @@ sanguis::client::draw2d::entities::model::object::on_die()
 
 	this->speed(
 		sanguis::client::draw2d::speed(
-			sanguis::client::draw2d::speed::value_type::null()
+			fcppt::math::vector::null<
+				sanguis::client::draw2d::speed::value_type
+			>()
 		)
 	);
 }

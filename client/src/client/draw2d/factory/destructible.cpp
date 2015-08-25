@@ -18,6 +18,7 @@
 #include <sanguis/load/model/destructible_path.hpp>
 #include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/math/vector/null.hpp>
 
 
 sanguis::client::draw2d::entities::unique_ptr
@@ -48,7 +49,9 @@ sanguis::client::draw2d::factory::destructible(
 					sanguis::optional_primary_weapon_type{},
 					sanguis::weapon_status::nothing,
 					sanguis::client::draw2d::speed{
-						sanguis::client::draw2d::speed::value_type::null()
+						fcppt::math::vector::null<
+							sanguis::client::draw2d::speed::value_type
+						>()
 					},
 					_center,
 					_rotation,

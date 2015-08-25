@@ -126,11 +126,13 @@ border_distance =
 	return
 	fcppt::algorithm::fold(
 		// they should all have negative distances, so this abs()es
-		-
-		fcppt::math::box::distance(
-			_rect,
-			level
-		),
+		(
+			-
+			fcppt::math::box::distance(
+				_rect,
+				level
+			)
+		).storage(),
 		std::numeric_limits<ret_type>::max(),
 		[](ret_type _l, ret_type _r){return std::min(_l, _r);}
 	);
@@ -151,7 +153,7 @@ rect_distance =
 		fcppt::math::box::distance(
 			a,
 			b
-		),
+		).storage(),
 		ret_type{0},
 		[](ret_type const _l, ret_type const _r){
 			return

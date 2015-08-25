@@ -91,6 +91,7 @@
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/atan2.hpp>
 #include <fcppt/math/vector/length_square.hpp>
+#include <fcppt/math/vector/null.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <utility>
@@ -226,7 +227,9 @@ sanguis::server::entities::player::player(
 		sanguis::server::perks::tree::create()
 	),
 	desired_speed_(
-		sanguis::server::speed::value_type::null()
+		fcppt::math::vector::null<
+			sanguis::server::speed::value_type
+		>()
 	),
 	weapon_pickups_()
 {

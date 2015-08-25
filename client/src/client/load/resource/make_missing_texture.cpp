@@ -18,6 +18,7 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/fill.hpp>
+#include <fcppt/math/vector/null.hpp>
 
 
 sge::texture::const_part_unique_ptr
@@ -69,7 +70,9 @@ sanguis::client::load::resource::make_missing_texture(
 							)
 						),
 						sge::image2d::rect{
-							sge::image2d::vector::null(),
+							fcppt::math::vector::null<
+								sge::image2d::vector
+							>(),
 							half_dim
 						}
 					),

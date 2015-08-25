@@ -55,6 +55,7 @@
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/to_vector.hpp>
+#include <fcppt/math/vector/null.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/vector/to_unsigned.hpp>
 #include <fcppt/random/generator/seed_from_chrono.hpp>
@@ -165,7 +166,9 @@ try
 			result.background_grid(),
 			tile_collection,
 			sanguis::creator::min{
-				sanguis::creator::pos::null()
+				fcppt::math::vector::null<
+					sanguis::creator::pos
+				>()
 			},
 			sanguis::creator::sup{
 				fcppt::math::dim::to_vector(

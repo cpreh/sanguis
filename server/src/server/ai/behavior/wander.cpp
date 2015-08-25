@@ -15,6 +15,7 @@
 #include <fcppt/const.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/math/dim/to_vector.hpp>
+#include <fcppt/math/vector/null.hpp>
 
 
 sanguis::server::ai::behavior::wander::wander(
@@ -47,7 +48,9 @@ sanguis::server::ai::behavior::wander::start()
 			sanguis::server::random::grid_pos(
 				random_generator_,
 				sanguis::creator::min{
-					sanguis::creator::pos::null()
+					fcppt::math::vector::null<
+						sanguis::creator::pos
+					>()
 				},
 				sanguis::creator::sup{
 					fcppt::math::dim::to_vector(

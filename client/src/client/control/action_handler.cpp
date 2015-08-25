@@ -43,6 +43,7 @@
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/clamp.hpp>
+#include <fcppt/math/vector/null.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/auto_connection_container.hpp>
@@ -73,7 +74,9 @@ sanguis::client::control::action_handler::action_handler(
 		)
 	),
 	direction_(
-		sanguis::client::control::direction_vector::null()
+		fcppt::math::vector::null<
+			sanguis::client::control::direction_vector
+		>()
 	),
 	cursor_position_(),
 	cheat_connections_(

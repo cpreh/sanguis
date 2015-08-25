@@ -15,6 +15,7 @@
 #include <fcppt/math/box/contains.hpp>
 #include <fcppt/math/box/output.hpp>
 #include <fcppt/math/dim/output.hpp>
+#include <fcppt/math/vector/null.hpp>
 
 
 sanguis::model::cell_area_container
@@ -70,7 +71,9 @@ sanguis::model::make_cell_areas(
 				if(
 					!fcppt::math::box::contains(
 						sanguis::model::cell_area(
-							sanguis::model::cell_area::vector::null(),
+							fcppt::math::vector::null<
+								sanguis::model::cell_area::vector
+							>(),
 							_image_size.get()
 						),
 						cur_area

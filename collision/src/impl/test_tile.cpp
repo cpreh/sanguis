@@ -22,6 +22,7 @@
 #include <fcppt/math/box/intersects.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/map.hpp>
+#include <fcppt/math/dim/null.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/fill.hpp>
 #include <fcppt/math/vector/map.hpp>
@@ -57,7 +58,9 @@ sanguis::collision::impl::test_tile(
 		fcppt::math::box::expand(
 			sanguis::collision::impl::rect(
 				new_center.get(),
-				sanguis::collision::impl::rect::dim::null()
+				fcppt::math::dim::null<
+					sanguis::collision::impl::rect::dim
+				>()
 			),
 			fcppt::math::vector::fill<
 				sanguis::collision::impl::rect::vector

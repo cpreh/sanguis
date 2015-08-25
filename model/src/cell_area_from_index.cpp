@@ -10,6 +10,7 @@
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/vector/dim.hpp>
+#include <fcppt/math/vector/null.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <fcppt/config/external_end.hpp>
@@ -34,7 +35,9 @@ sanguis::model::cell_area_from_index(
 
 		return
 			sanguis::model::cell_area(
-				sanguis::model::cell_area::vector::null(),
+				fcppt::math::vector::null<
+					sanguis::model::cell_area::vector
+				>(),
 				_cell_size.get()
 			);
 	}

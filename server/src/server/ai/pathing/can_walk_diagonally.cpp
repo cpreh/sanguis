@@ -9,6 +9,7 @@
 #include <fcppt/maybe.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
+#include <fcppt/math/dim/contents.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/math/vector/to_dim.hpp>
@@ -63,9 +64,11 @@ sanguis::server::ai::pathing::can_walk_diagonally(
 	);
 
 	if(
-		fcppt::math::vector::to_dim(
-			diff
-		).content()
+		fcppt::math::dim::contents(
+			fcppt::math::vector::to_dim(
+				diff
+			)
+		)
 		==
 		0
 	)

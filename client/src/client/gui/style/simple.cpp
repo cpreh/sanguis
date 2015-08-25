@@ -27,6 +27,7 @@
 #include <fcppt/math/box/shrink.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/fill.hpp>
+#include <fcppt/math/dim/null.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 
 
@@ -64,7 +65,6 @@ sanguis::client::gui::style::simple::draw_button(
 		_area
 	);
 }
-
 
 void
 sanguis::client::gui::style::simple::draw_bar(
@@ -301,14 +301,18 @@ sge::rucksack::dim const
 sanguis::client::gui::style::simple::image_spacing() const
 {
 	return
-		sge::rucksack::dim::null();
+		fcppt::math::dim::null<
+			sge::rucksack::dim
+		>();
 }
 
 sge::rucksack::dim const
 sanguis::client::gui::style::simple::text_spacing() const
 {
 	return
-		sge::rucksack::dim::null();
+		fcppt::math::dim::null<
+			sge::rucksack::dim
+		>();
 }
 
 void

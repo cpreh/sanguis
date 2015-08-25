@@ -4,6 +4,7 @@
 #include <sge/image/size_type.hpp>
 #include <sge/image2d/dim.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
+#include <fcppt/math/dim/contents.hpp>
 #include <fcppt/math/dim/fill.hpp>
 
 
@@ -14,7 +15,7 @@ sanguis::tools::libmergeimage::impl::cells_in_dim(
 )
 {
 	return
-		(
+		fcppt::math::dim::contents(
 			fcppt::math::dim::fill<
 				sge::image2d::dim
 			>(
@@ -26,5 +27,5 @@ sanguis::tools::libmergeimage::impl::cells_in_dim(
 				+
 				1u
 			)
-		).content();
+		);
 }

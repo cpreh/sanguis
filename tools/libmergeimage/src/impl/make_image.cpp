@@ -28,6 +28,7 @@
 #include <fcppt/math/dim/comparison.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/dim/output.hpp>
+#include <fcppt/math/vector/null.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <algorithm>
@@ -84,7 +85,9 @@ sanguis::tools::libmergeimage::impl::make_image(
 				);
 
 				sge::image2d::rect::vector pos(
-					sge::image2d::rect::vector::null()
+					fcppt::math::vector::null<
+						sge::image2d::rect::vector
+					>()
 				);
 
 				for(

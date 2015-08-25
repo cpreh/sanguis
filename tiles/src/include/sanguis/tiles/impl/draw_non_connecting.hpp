@@ -12,6 +12,7 @@
 #include <sanguis/tiles/impl/get_content_function.hpp>
 #include <sanguis/tiles/impl/non_connecting_images.hpp>
 #include <sanguis/tiles/impl/shift.hpp>
+#include <fcppt/math/vector/null.hpp>
 
 
 namespace sanguis
@@ -41,7 +42,9 @@ draw_non_connecting(
 			_min,
 			_sup,
 			sanguis::tiles::impl::shift{
-				sanguis::tiles::pos::null()
+				fcppt::math::vector::null<
+					sanguis::tiles::pos
+				>()
 			},
 			sanguis::tiles::impl::get_content_function{
 				[

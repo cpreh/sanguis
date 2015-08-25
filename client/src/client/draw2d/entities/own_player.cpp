@@ -23,6 +23,7 @@
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/dim/to_unsigned.hpp>
+#include <fcppt/math/vector/null.hpp>
 
 
 sanguis::client::draw2d::entities::own_player::own_player(
@@ -59,7 +60,9 @@ sanguis::client::draw2d::entities::own_player::own_player(
 		_player_health_callback
 	),
 	desired_speed_(
-		sanguis::client::draw2d::speed::value_type::null()
+		fcppt::math::vector::null<
+			sanguis::client::draw2d::speed::value_type
+		>()
 	)
 {
 }

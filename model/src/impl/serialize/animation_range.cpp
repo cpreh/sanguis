@@ -20,7 +20,7 @@ sanguis::model::impl::serialize::animation_range(
 					sanguis::model::impl::animation_range_vector{
 						_range.begin(),
 						_range.end()
-					}
+					}.storage()
 				)
 			)
 		);
