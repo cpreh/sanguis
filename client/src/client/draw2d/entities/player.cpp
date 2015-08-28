@@ -30,12 +30,12 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/cast/float_to_int_fun.hpp>
 #include <fcppt/cast/int_to_float_fun.hpp>
-#include <fcppt/math/point_rotate.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/dim/to_vector.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/null.hpp>
+#include <fcppt/math/vector/point_rotate.hpp>
 #include <fcppt/math/vector/signed_angle_between.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 
@@ -170,7 +170,7 @@ sanguis::client::draw2d::entities::player::update()
 	);
 
 	sanguis::client::draw2d::vector2 const new_rotation(
-		fcppt::math::point_rotate(
+		fcppt::math::vector::point_rotate(
 			body_center,
 			fcppt::math::dim::to_vector(
 				fcppt::math::dim::structure_cast<

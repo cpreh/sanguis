@@ -3,10 +3,11 @@
 
 #include <sanguis/collision/impl/is_null.hpp>
 #include <fcppt/optional_impl.hpp>
-#include <fcppt/math/static_storage.hpp>
+#include <fcppt/math/size_type.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/length.hpp>
 #include <fcppt/math/vector/object.hpp>
+#include <fcppt/math/vector/static.hpp>
 
 
 namespace sanguis
@@ -18,18 +19,14 @@ namespace impl
 
 template<
 	typename T,
-	typename N,
+	fcppt::math::size_type N,
 	typename S
 >
 inline
 fcppt::optional<
-	fcppt::math::vector::object<
+	fcppt::math::vector::static_<
 		T,
-		N,
-		fcppt::math::static_storage<
-			T,
-			N
-		>
+		N
 	>
 >
 normalize_opt(
@@ -42,13 +39,9 @@ normalize_opt(
 {
 	typedef
 	fcppt::optional<
-		fcppt::math::vector::object<
+		fcppt::math::vector::static_<
 			T,
-			N,
-			fcppt::math::static_storage<
-				T,
-				N
-			>
+			N
 		>
 	>
 	result_type;
