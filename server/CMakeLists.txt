@@ -30,6 +30,8 @@ set(
 	include/sanguis/server/ai/idle.hpp
 	include/sanguis/server/ai/in_range.hpp
 	include/sanguis/server/ai/is_visible.hpp
+	include/sanguis/server/ai/log.hpp
+	include/sanguis/server/ai/log_location.hpp
 	include/sanguis/server/ai/make_path.hpp
 	include/sanguis/server/ai/move_to_target.hpp
 	include/sanguis/server/ai/pathing/can_walk_diagonally.hpp
@@ -770,6 +772,8 @@ set(
 	src/server/ai/go_to_grid_pos.cpp
 	src/server/ai/go_to_target.cpp
 	src/server/ai/idle.cpp
+	src/server/ai/log.cpp
+	src/server/ai/log_location.cpp
 	src/server/ai/make_path.cpp
 	src/server/ai/move_to_target.cpp
 	src/server/ai/pathing/can_walk_diagonally.cpp
