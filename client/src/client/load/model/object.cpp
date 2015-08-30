@@ -7,7 +7,6 @@
 #include <sanguis/client/load/resource/context_fwd.hpp>
 #include <sanguis/model/cell_size.hpp>
 #include <sge/core/exception.hpp>
-#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
