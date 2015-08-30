@@ -20,6 +20,7 @@
 #include <sge/rucksack/scalar.hpp>
 #include <sge/rucksack/vector.hpp>
 #include <sge/texture/part_fwd.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/cast/enum_to_int.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/int_to_float.hpp>

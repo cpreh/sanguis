@@ -4,6 +4,7 @@
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/client/load/hud/weapon_type.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/text.hpp>
 
 
 sanguis::optional_weapon_type const
