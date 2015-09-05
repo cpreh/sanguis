@@ -22,8 +22,9 @@
 #include <sanguis/messages/server/types/perk_tree_node_vector.hpp>
 #include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/maybe.hpp>
+#include <fcppt/optional_to_exception.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/algorithm/find_if_exn.hpp>
+#include <fcppt/algorithm/find_if_opt.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/tree/pre_order.hpp>
 
@@ -165,14 +166,17 @@ tree_position(
 			sanguis::client::perk::tree &
 			{
 				return
-					*fcppt::algorithm::find_if_exn(
-						fcppt::container::tree::pre_order<
-							sanguis::client::perk::tree
-						>(
-							_tree
-						),
-						sanguis::client::perk::compare(
-							_parent_type
+					*
+					fcppt::optional_to_exception(
+						fcppt::algorithm::find_if_opt(
+							fcppt::container::tree::pre_order<
+								sanguis::client::perk::tree
+							>(
+								_tree
+							),
+							sanguis::client::perk::compare(
+								_parent_type
+							)
 						),
 						[
 							_parent_type

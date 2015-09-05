@@ -6,8 +6,9 @@
 #include <sanguis/client/perk/compare.hpp>
 #include <sanguis/client/perk/info.hpp>
 #include <sanguis/client/perk/to_string.hpp>
+#include <fcppt/optional_to_exception.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/algorithm/find_if_exn.hpp>
+#include <fcppt/algorithm/find_if_opt.hpp>
 #include <fcppt/container/tree/pre_order.hpp>
 
 
@@ -28,14 +29,17 @@ find_info_any(
 )
 {
 	return
-		*fcppt::algorithm::find_if_exn(
-			fcppt::container::tree::pre_order<
-				Tree
-			>(
-				_tree
-			),
-			sanguis::client::perk::compare(
-				_type
+		*
+		fcppt::optional_to_exception(
+			fcppt::algorithm::find_if_opt(
+				fcppt::container::tree::pre_order<
+					Tree
+				>(
+					_tree
+				),
+				sanguis::client::perk::compare(
+					_type
+				)
 			),
 			[
 				_type
