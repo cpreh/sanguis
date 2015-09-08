@@ -6,7 +6,7 @@
 #include <sanguis/server/entities/modify_damages.hpp>
 #include <sanguis/server/entities/ifaces/with_weapon.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/algorithm/enum_array_fold.hpp>
+#include <fcppt/algorithm/enum_array_fold_static.hpp>
 
 
 sanguis::server::damage::modified_array const
@@ -16,7 +16,7 @@ sanguis::server::entities::modify_damages(
 )
 {
 	return
-		fcppt::algorithm::enum_array_fold<
+		fcppt::algorithm::enum_array_fold_static<
 			sanguis::server::damage::modified_array
 		>(
 			[

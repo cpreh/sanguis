@@ -7,7 +7,7 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/algorithm/enum_array_fold.hpp>
+#include <fcppt/algorithm/enum_array_fold_static.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
 
@@ -17,7 +17,7 @@ sanguis::client::draw2d::scene::state::create(
 )
 {
 	return
-		fcppt::algorithm::enum_array_fold<
+		fcppt::algorithm::enum_array_fold_static<
 			sanguis::client::draw2d::scene::state::array
 		>(
 			[

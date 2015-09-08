@@ -13,7 +13,7 @@
 #include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/optional_to_exception.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/algorithm/enum_array_fold.hpp>
+#include <fcppt/algorithm/enum_array_fold_static.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/type_iso/strong_typedef.hpp>
 
@@ -32,7 +32,7 @@ sanguis::creator::impl::place_openings(
 	};
 
 	auto const result(
-		fcppt::algorithm::enum_array_fold<
+		fcppt::algorithm::enum_array_fold_static<
 			sanguis::creator::opening_container_array
 		>(
 			[

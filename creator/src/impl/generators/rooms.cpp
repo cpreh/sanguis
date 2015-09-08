@@ -43,7 +43,7 @@
 #include <sanguis/creator/impl/random/uniform_pos.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/optional.hpp>
-#include <fcppt/algorithm/enum_array_fold.hpp>
+#include <fcppt/algorithm/enum_array_fold_static.hpp>
 #include <fcppt/algorithm/fold.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/assert/error.hpp>
@@ -828,7 +828,7 @@ sanguis::creator::impl::generators::rooms(
 
 	auto const
 	openings =
-		fcppt::algorithm::enum_array_fold<
+		fcppt::algorithm::enum_array_fold_static<
 			sanguis::creator::opening_container_array
 		>
 		(

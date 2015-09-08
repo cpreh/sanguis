@@ -185,7 +185,7 @@
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/type_name_from_info.hpp>
-#include <fcppt/algorithm/enum_array_fold.hpp>
+#include <fcppt/algorithm/enum_array_fold_static.hpp>
 #include <fcppt/algorithm/map_iteration_second.hpp>
 #include <fcppt/algorithm/sequence_iteration.hpp>
 #include <fcppt/cast/dynamic.hpp>
@@ -1299,7 +1299,7 @@ sanguis::client::draw2d::scene::object::operator()(
 				_message.get<
 					sanguis::messages::roles::seed
 				>(),
-				fcppt::algorithm::enum_array_fold<
+				fcppt::algorithm::enum_array_fold_static<
 					sanguis::creator::opening_count_array
 				>(
 					[

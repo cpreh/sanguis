@@ -3,7 +3,7 @@
 #include <sanguis/server/damage/modified_unit.hpp>
 #include <sanguis/server/damage/type.hpp>
 #include <sanguis/server/damage/unmodified.hpp>
-#include <fcppt/algorithm/enum_array_fold.hpp>
+#include <fcppt/algorithm/enum_array_fold_static.hpp>
 
 
 sanguis::server::damage::modified_array const
@@ -12,7 +12,7 @@ sanguis::server::damage::unmodified(
 )
 {
 	return
-		fcppt::algorithm::enum_array_fold<
+		fcppt::algorithm::enum_array_fold_static<
 			sanguis::server::damage::modified_array
 		>(
 			[

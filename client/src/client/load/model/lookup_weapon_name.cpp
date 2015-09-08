@@ -6,7 +6,7 @@
 #include <sanguis/model/weapon_category_name.hpp>
 #include <fcppt/optional_to_exception.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/algorithm/enum_array_fold.hpp>
+#include <fcppt/algorithm/enum_array_fold_static.hpp>
 #include <fcppt/algorithm/index_of_enum_array.hpp>
 #include <fcppt/container/enum_array.hpp>
 
@@ -22,7 +22,7 @@ fcppt::container::enum_array<
 weapon_type_array;
 
 weapon_type_array const weapon_types(
-	fcppt::algorithm::enum_array_fold<
+	fcppt::algorithm::enum_array_fold_static<
 		weapon_type_array
 	>(
 		&sanguis::client::load::primary_weapon_name

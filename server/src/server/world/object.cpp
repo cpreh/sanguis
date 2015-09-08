@@ -130,7 +130,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/algorithm/enum_array_fold.hpp>
+#include <fcppt/algorithm/enum_array_fold_static.hpp>
 #include <fcppt/algorithm/map_iteration_second.hpp>
 #include <fcppt/algorithm/sequence_iteration.hpp>
 #include <fcppt/assert/error.hpp>
@@ -447,7 +447,7 @@ sanguis::server::world::object::player_insertion(
 						info_.generator_name().get()
 					),
 				sanguis::messages::roles::opening_count{} =
-					fcppt::algorithm::enum_array_fold<
+					fcppt::algorithm::enum_array_fold_static<
 						sanguis::messages::types::opening_count_array
 					>(
 						[

@@ -46,7 +46,7 @@
 #include <fcppt/extract_from_string_exn.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/algorithm/enum_array_fold.hpp>
+#include <fcppt/algorithm/enum_array_fold_static.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/container/enum_array.hpp>
@@ -136,7 +136,7 @@ try
 						sanguis::creator::seed
 					>()
 				,
-				fcppt::algorithm::enum_array_fold<
+				fcppt::algorithm::enum_array_fold_static<
 					sanguis::creator::opening_count_array
 				>(
 					[](
@@ -212,7 +212,7 @@ try
 	error_image_array;
 
 	error_image_array const error_images(
-		fcppt::algorithm::enum_array_fold<
+		fcppt::algorithm::enum_array_fold_static<
 			error_image_array
 		>(
 			[](

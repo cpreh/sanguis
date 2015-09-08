@@ -5,7 +5,7 @@
 #include <fcppt/optional_to_exception.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/algorithm/enum_array_fold.hpp>
+#include <fcppt/algorithm/enum_array_fold_static.hpp>
 #include <fcppt/algorithm/index_of_enum_array.hpp>
 #include <fcppt/container/enum_array.hpp>
 
@@ -21,7 +21,7 @@ fcppt::container::enum_array<
 aura_type_array;
 
 aura_type_array const aura_types(
-	fcppt::algorithm::enum_array_fold<
+	fcppt::algorithm::enum_array_fold_static<
 		aura_type_array
 	>(
 		&sanguis::client::load::aura_name

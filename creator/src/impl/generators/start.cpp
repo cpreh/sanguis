@@ -24,7 +24,7 @@
 #include <sanguis/creator/impl/random/generator.hpp>
 #include <sanguis/creator/impl/random/uniform_int.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/algorithm/enum_array_fold.hpp>
+#include <fcppt/algorithm/enum_array_fold_static.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/random/make_variate.hpp>
@@ -151,7 +151,7 @@ sanguis::creator::impl::generators::start(
 		sanguis::creator::impl::result{
 			grid,
 			bg_grid,
-			fcppt::algorithm::enum_array_fold<
+			fcppt::algorithm::enum_array_fold_static<
 				sanguis::creator::opening_container_array
 			>(
 				[

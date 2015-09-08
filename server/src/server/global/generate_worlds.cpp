@@ -34,7 +34,7 @@
 #include <sanguis/server/world/random_seed.hpp>
 #include <fcppt/make_int_range.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/algorithm/enum_array_fold.hpp>
+#include <fcppt/algorithm/enum_array_fold_static.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -94,7 +94,7 @@ sanguis::server::global::generate_worlds(
 				sanguis::server::world::random_seed(
 					_parameters.random_generator()
 				),
-				fcppt::algorithm::enum_array_fold<
+				fcppt::algorithm::enum_array_fold_static<
 					sanguis::creator::opening_count_array
 				>(
 					[](
@@ -145,7 +145,7 @@ sanguis::server::global::generate_worlds(
 		insert_world(
 			sanguis::server::world::random(
 				_parameters,
-				fcppt::algorithm::enum_array_fold<
+				fcppt::algorithm::enum_array_fold_static<
 					sanguis::creator::opening_count_array
 				>(
 					[](
