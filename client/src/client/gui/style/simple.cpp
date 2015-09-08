@@ -122,10 +122,8 @@ sanguis::client::gui::style::simple::draw_bar(
 			sge::rucksack::axis::y
 			?
 				sge::rucksack::vector(
-					inner_rect.pos().x(),
-					inner_rect.pos().y()
-					+
-					inner_rect.h()
+					inner_rect.left(),
+					inner_rect.bottom()
 					-
 					fill_size
 				)
@@ -139,7 +137,7 @@ sanguis::client::gui::style::simple::draw_bar(
 				?
 					fill_size
 				:
-					inner_rect.w()
+					inner_rect.size().w()
 				,
 				_axis
 				==
@@ -147,7 +145,7 @@ sanguis::client::gui::style::simple::draw_bar(
 				?
 					fill_size
 				:
-					inner_rect.h()
+					inner_rect.size().h()
 			)
 		),
 		_fill_color.get()

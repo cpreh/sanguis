@@ -26,6 +26,13 @@ to_rect(
 	> const &_rect
 )
 {
+	typename
+	fcppt::math::box::rect<
+		T
+	>::dim const size(
+		_rect.size()
+	);
+
 	return
 		QRect(
 			static_cast<
@@ -41,12 +48,12 @@ to_rect(
 			static_cast<
 				int
 			>(
-				_rect.w()
+				size.w()
 			),
 			static_cast<
 				int
 			>(
-				_rect.h()
+				size.h()
 			)
 		);
 }

@@ -13,7 +13,7 @@
 #include <fcppt/make_literal_boost_units.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/math/box/expand.hpp>
+#include <fcppt/math/box/stretch_absolute.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/fill.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -32,7 +32,7 @@ sanguis::collision::impl::adjust_speed(
 	return
 		fcppt::maybe(
 			sanguis::collision::impl::rect_line_intersection(
-				fcppt::math::box::expand(
+				fcppt::math::box::stretch_absolute(
 					_obstacle,
 					fcppt::math::vector::fill<
 						sanguis::collision::impl::rect::vector

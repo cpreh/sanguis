@@ -40,6 +40,10 @@ sanguis::collision::impl::rect_line_intersection(
 	>
 	line_segment_array;
 
+	sanguis::collision::impl::rect::dim const size(
+		_rect.size()
+	);
+
 	line_segment_array const lines{{
 		sanguis::collision::impl::line_segment(
 			sanguis::collision::impl::pos(
@@ -47,7 +51,7 @@ sanguis::collision::impl::rect_line_intersection(
 			),
 			sanguis::collision::impl::dir(
 				sanguis::collision::length2(
-					_rect.w(),
+					size.w(),
 					null
 				)
 			)
@@ -55,16 +59,14 @@ sanguis::collision::impl::rect_line_intersection(
 		sanguis::collision::impl::line_segment(
 			sanguis::collision::impl::pos(
 				sanguis::collision::length2(
-					_rect.pos().x()
+					_rect.left()
 					,
-					_rect.pos().y()
-					+
-					_rect.size().h()
+					_rect.bottom()
 				)
 			),
 			sanguis::collision::impl::dir(
 				sanguis::collision::length2(
-					_rect.w(),
+					size.w(),
 					null
 				)
 			)
@@ -76,24 +78,22 @@ sanguis::collision::impl::rect_line_intersection(
 			sanguis::collision::impl::dir(
 				sanguis::collision::length2(
 					null,
-					_rect.h()
+					size.h()
 				)
 			)
 		),
 		sanguis::collision::impl::line_segment(
 			sanguis::collision::impl::pos(
 				sanguis::collision::length2(
-					_rect.pos().x()
-					+
-					_rect.size().w()
+					_rect.right()
 					,
-					_rect.pos().y()
+					_rect.top()
 				)
 			),
 			sanguis::collision::impl::dir(
 				sanguis::collision::length2(
 					null,
-					_rect.h()
+					size.h()
 				)
 			)
 		)

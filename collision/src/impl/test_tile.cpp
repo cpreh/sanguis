@@ -18,8 +18,8 @@
 #include <sanguis/creator/tile_rect.hpp>
 #include <sanguis/creator/tile_size.hpp>
 #include <fcppt/make_literal_boost_units.hpp>
-#include <fcppt/math/box/expand.hpp>
 #include <fcppt/math/box/intersects.hpp>
+#include <fcppt/math/box/stretch_absolute.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/map.hpp>
 #include <fcppt/math/dim/null.hpp>
@@ -55,7 +55,7 @@ sanguis::collision::impl::test_tile(
 	);
 
 	sanguis::collision::impl::rect const rect(
-		fcppt::math::box::expand(
+		fcppt::math::box::stretch_absolute(
 			sanguis::collision::impl::rect(
 				new_center.get(),
 				fcppt::math::dim::null<
