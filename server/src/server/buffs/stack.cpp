@@ -1,8 +1,8 @@
 #include <sanguis/server/buffs/buff.hpp>
 #include <sanguis/server/buffs/stack.hpp>
 #include <sanguis/server/buffs/unique_ptr.hpp>
-#include <fcppt/assert/pre.hpp>
 #include <fcppt/assert/optional_error.hpp>
+#include <fcppt/assert/pre.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>

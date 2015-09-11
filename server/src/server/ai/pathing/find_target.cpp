@@ -13,10 +13,10 @@
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/container/grid/in_range.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
-#include <fcppt/math/vector/comparison.hpp>
-#include <fcppt/math/vector/std_hash.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/warning.hpp>
+#include <fcppt/math/vector/comparison.hpp>
+#include <fcppt/math/vector/std_hash.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <queue>
 #include <unordered_map>
