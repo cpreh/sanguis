@@ -8,6 +8,7 @@
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/world/update_entity.hpp>
+#include <fcppt/algorithm/update_action.hpp>
 
 
 sanguis::server::world::update_entity::update_entity(
@@ -20,7 +21,7 @@ sanguis::server::world::update_entity::update_entity(
 {
 }
 
-bool
+fcppt::algorithm::update_action
 sanguis::server::world::update_entity::operator()(
 	sanguis::server::entities::simple_unique_ptr const &_entity
 ) const
@@ -31,7 +32,7 @@ sanguis::server::world::update_entity::operator()(
 		);
 }
 
-bool
+fcppt::algorithm::update_action
 sanguis::server::world::update_entity::operator()(
 	sanguis::server::entities::doodad_unique_ptr const &_entity
 ) const
@@ -42,7 +43,7 @@ sanguis::server::world::update_entity::operator()(
 		);
 }
 
-bool
+fcppt::algorithm::update_action
 sanguis::server::world::update_entity::operator()(
 	sanguis::server::entities::with_id_unique_ptr const &_entity
 ) const
@@ -56,7 +57,7 @@ sanguis::server::world::update_entity::operator()(
 template<
 	typename T
 >
-bool
+fcppt::algorithm::update_action
 sanguis::server::world::update_entity::impl(
 	T const &_entity
 ) const
@@ -79,9 +80,9 @@ sanguis::server::world::update_entity::impl(
 		);
 
 		return
-			true;
+			fcppt::algorithm::update_action::remove;
 	}
 
 	return
-		false;
+		fcppt::algorithm::update_action::keep;
 }

@@ -19,6 +19,7 @@
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/reference_wrapper_comparison.hpp>
 #include <fcppt/algorithm/map_iteration.hpp>
+#include <fcppt/algorithm/update_action.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
@@ -128,11 +129,11 @@ sanguis::collision::impl::world::simple::ghost::post_update_bodies()
 				);
 
 				return
-					true;
+					fcppt::algorithm::update_action::remove;
 			}
 
 			return
-				false;
+				fcppt::algorithm::update_action::keep;
 		}
 	);
 

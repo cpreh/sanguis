@@ -15,6 +15,7 @@
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
 #include <fcppt/algorithm/map_iteration_second.hpp>
+#include <fcppt/algorithm/update_action.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/cast/int_to_float.hpp>
@@ -70,7 +71,12 @@ sanguis::server::entities::exp_area::remove_from_game()
 		)
 		{
 			return
-				!_link.get().has_value();
+				_link.get().has_value()
+				?
+					fcppt::algorithm::update_action::keep
+				:
+					fcppt::algorithm::update_action::remove
+				;
 		}
 	);
 

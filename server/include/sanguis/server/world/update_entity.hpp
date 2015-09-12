@@ -6,6 +6,7 @@
 #include <sanguis/server/entities/simple_unique_ptr.hpp>
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <fcppt/nonassignable.hpp>
+#include <fcppt/algorithm/update_action_fwd.hpp>
 
 
 namespace sanguis
@@ -26,17 +27,17 @@ public:
 		sanguis::duration
 	);
 
-	bool
+	fcppt::algorithm::update_action
 	operator()(
 		sanguis::server::entities::simple_unique_ptr const &
 	) const;
 
-	bool
+	fcppt::algorithm::update_action
 	operator()(
 		sanguis::server::entities::doodad_unique_ptr const &
 	) const;
 
-	bool
+	fcppt::algorithm::update_action
 	operator()(
 		sanguis::server::entities::with_id_unique_ptr const &
 	) const;
@@ -44,7 +45,7 @@ private:
 	template<
 		typename T
 	>
-	bool
+	fcppt::algorithm::update_action
 	impl(
 		T const &
 	) const;

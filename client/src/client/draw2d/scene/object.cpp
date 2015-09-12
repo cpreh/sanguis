@@ -188,6 +188,7 @@
 #include <fcppt/algorithm/enum_array_fold_static.hpp>
 #include <fcppt/algorithm/map_iteration_second.hpp>
 #include <fcppt/algorithm/sequence_iteration.hpp>
+#include <fcppt/algorithm/update_action.hpp>
 #include <fcppt/cast/dynamic.hpp>
 #include <fcppt/cast/float_to_int_fun.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
@@ -447,7 +448,12 @@ sanguis::client::draw2d::scene::object::update(
 			);
 
 			return
-				_entity->may_be_removed();
+				_entity->may_be_removed()
+				?
+					fcppt::algorithm::update_action::remove
+				:
+					fcppt::algorithm::update_action::keep
+				;
 		}
 	);
 
@@ -460,7 +466,12 @@ sanguis::client::draw2d::scene::object::update(
 			_entity->update();
 
 			return
-				_entity->may_be_removed();
+				_entity->may_be_removed()
+				?
+					fcppt::algorithm::update_action::remove
+				:
+					fcppt::algorithm::update_action::keep
+				;
 		}
 	);
 }
@@ -851,7 +862,12 @@ sanguis::client::draw2d::scene::object::change_world(
 		)
 		{
 			return
-				_entity->dead();
+				_entity->dead()
+				?
+					fcppt::algorithm::update_action::remove
+				:
+					fcppt::algorithm::update_action::keep
+				;
 		}
 	);
 
