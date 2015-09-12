@@ -15,7 +15,7 @@
 #include <sanguis/server/weapons/modifiers/damage.hpp>
 #include <sanguis/server/weapons/modifiers/make_guaranteed.hpp>
 #include <sanguis/server/weapons/modifiers/make_potential.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
 
@@ -28,7 +28,7 @@ sanguis::server::weapons::factory::grenade(
 		fcppt::unique_ptr_to_base<
 			sanguis::server::weapons::weapon
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::server::weapons::grenade
 			>(
 				_parameters.random_generator(),

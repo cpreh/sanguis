@@ -6,7 +6,7 @@
 #include <sanguis/server/entities/enemies/boss.hpp>
 #include <sanguis/server/entities/enemies/parameters.hpp>
 #include <sanguis/server/entities/enemies/factory/make_boss.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -23,7 +23,7 @@ sanguis::server::entities::enemies::factory::make_boss(
 		fcppt::unique_ptr_to_base<
 			sanguis::server::entities::with_id
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::server::entities::enemies::boss
 			>(
 				std::move(

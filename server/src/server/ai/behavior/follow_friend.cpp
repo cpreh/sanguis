@@ -24,7 +24,7 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -65,7 +65,7 @@ sanguis::server::ai::behavior::follow_friend::transfer()
 				fcppt::unique_ptr_to_base<
 					sanguis::server::auras::aura
 				>(
-					fcppt::make_unique_ptr_fcppt<
+					fcppt::make_unique_ptr<
 						sanguis::server::auras::target
 					>(
 						sanguis::server::radius(

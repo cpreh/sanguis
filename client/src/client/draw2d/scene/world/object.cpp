@@ -14,7 +14,7 @@
 #include <sanguis/creator/pos.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
@@ -132,7 +132,7 @@ sanguis::client::draw2d::scene::world::object::change(
 {
 	state_ =
 		optional_state_unique_ptr(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::client::draw2d::scene::world::state
 			>(
 				random_generator_,

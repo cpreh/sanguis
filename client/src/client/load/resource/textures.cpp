@@ -22,7 +22,7 @@
 #include <sge/texture/part_raw_ptr.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_to_exception.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -206,7 +206,7 @@ sanguis::client::load::resource::textures::do_load_inner(
 			fcppt::unique_ptr_to_base<
 				sge::texture::part
 			>(
-				fcppt::make_unique_ptr_fcppt<
+				fcppt::make_unique_ptr<
 					sge::texture::part_raw_ptr
 				>(
 					sge::renderer::texture::create_planar_from_path(

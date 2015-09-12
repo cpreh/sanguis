@@ -27,7 +27,7 @@
 #include <sanguis/server/weapons/melee.hpp>
 #include <sanguis/server/weapons/melee_parameters.hpp>
 #include <sanguis/server/weapons/range.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -74,7 +74,7 @@ sanguis::server::entities::enemies::factory::ghost(
 			fcppt::unique_ptr_to_base<
 				sanguis::server::weapons::weapon
 			>(
-				fcppt::make_unique_ptr_fcppt<
+				fcppt::make_unique_ptr<
 					sanguis::server::weapons::melee
 				>(
 					_parameters.random_generator(),

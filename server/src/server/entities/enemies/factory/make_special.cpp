@@ -18,7 +18,7 @@
 #include <sanguis/server/random/min.hpp>
 #include <sanguis/server/random/split.hpp>
 #include <sanguis/server/random/split_array.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -91,7 +91,7 @@ sanguis::server::entities::enemies::factory::make_special(
 		fcppt::unique_ptr_to_base<
 			sanguis::server::entities::with_id
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::server::entities::enemies::special
 			>(
 				_random_generator,

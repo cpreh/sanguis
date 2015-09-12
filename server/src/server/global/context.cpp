@@ -55,7 +55,7 @@
 #include <sanguis/server/world/object.hpp>
 #include <sanguis/server/world/parameters.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/optional_bind_construct.hpp>
@@ -116,7 +116,7 @@ sanguis::server::global::context::context(
 		fcppt::unique_ptr_to_base<
 			sanguis::server::environment::load_context
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::server::global::load_context
 			>(
 				_model_context,

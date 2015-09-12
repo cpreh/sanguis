@@ -5,7 +5,7 @@
 #include <sanguis/server/entities/enemies/skills/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/skills/factory/parameters.hpp>
 #include <sanguis/server/entities/enemies/skills/factory/teleport.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cmath>
@@ -21,7 +21,7 @@ sanguis::server::entities::enemies::skills::factory::teleport(
 		fcppt::unique_ptr_to_base<
 			sanguis::server::entities::enemies::skills::skill
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::server::entities::enemies::skills::teleport
 			>(
 				_parameters.diff_clock(),

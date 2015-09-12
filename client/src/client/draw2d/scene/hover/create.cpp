@@ -7,7 +7,7 @@
 #include <sanguis/client/draw2d/scene/hover/name_and_health.hpp>
 #include <sanguis/client/draw2d/scene/hover/parameters.hpp>
 #include <sanguis/client/draw2d/scene/hover/weapon.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/variant/match.hpp>
 
@@ -31,7 +31,7 @@ sanguis::client::draw2d::scene::hover::create(
 					fcppt::unique_ptr_to_base<
 						sanguis::client::draw2d::scene::hover::base
 					>(
-						fcppt::make_unique_ptr_fcppt<
+						fcppt::make_unique_ptr<
 							sanguis::client::draw2d::scene::hover::name_and_health
 						>(
 							_parameters.renderer(),
@@ -52,7 +52,7 @@ sanguis::client::draw2d::scene::hover::create(
 					fcppt::unique_ptr_to_base<
 						sanguis::client::draw2d::scene::hover::base
 					>(
-						fcppt::make_unique_ptr_fcppt<
+						fcppt::make_unique_ptr<
 							sanguis::client::draw2d::scene::hover::weapon
 						>(
 							_parameters.gui_style(),

@@ -19,7 +19,7 @@
 #include <sanguis/server/entities/enemies/factory/parameters.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/random/distribution/basic.hpp>
@@ -108,7 +108,7 @@ sanguis::server::entities::enemies::factory::make(
 					fcppt::unique_ptr_to_base<
 						sanguis::server::entities::with_id
 					>(
-						fcppt::make_unique_ptr_fcppt<
+						fcppt::make_unique_ptr<
 							sanguis::server::entities::enemies::normal
 						>(
 							std::move(

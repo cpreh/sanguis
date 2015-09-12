@@ -5,7 +5,7 @@
 #include <sanguis/server/entities/enemies/skills/unique_ptr.hpp>
 #include <sanguis/server/entities/enemies/skills/factory/parameters.hpp>
 #include <sanguis/server/entities/enemies/skills/factory/scatter.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
 
@@ -18,7 +18,7 @@ sanguis::server::entities::enemies::skills::factory::scatter(
 		fcppt::unique_ptr_to_base<
 			sanguis::server::entities::enemies::skills::skill
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::server::entities::enemies::skills::scatter
 			>(
 				_parameters.diff_clock(),

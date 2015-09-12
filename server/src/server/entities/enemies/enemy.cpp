@@ -49,7 +49,7 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/optional_error.hpp>
@@ -207,7 +207,7 @@ sanguis::server::entities::enemies::enemy::remove_from_game()
 		fcppt::unique_ptr_to_base<
 			sanguis::server::entities::simple
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::server::entities::exp_area
 			>(
 				exp_

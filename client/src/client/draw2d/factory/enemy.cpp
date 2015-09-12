@@ -15,7 +15,7 @@
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
 #include <sanguis/creator/enemy_type.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
 
@@ -40,7 +40,7 @@ sanguis::client::draw2d::factory::enemy(
 		fcppt::unique_ptr_to_base<
 			sanguis::client::draw2d::entities::base
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::client::draw2d::entities::enemy
 			>(
 				_parameters,

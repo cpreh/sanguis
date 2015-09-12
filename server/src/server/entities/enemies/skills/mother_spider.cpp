@@ -16,7 +16,7 @@
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/repeat.hpp>
@@ -62,7 +62,7 @@ sanguis::server::entities::enemies::skills::mother_spider::on_die(
 				fcppt::unique_ptr_to_base<
 					sanguis::server::entities::with_id
 				>(
-					fcppt::make_unique_ptr_fcppt<
+					fcppt::make_unique_ptr<
 						sanguis::server::entities::enemies::normal
 					>(
 						sanguis::server::entities::enemies::parameters{

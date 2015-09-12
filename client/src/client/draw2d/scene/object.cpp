@@ -174,7 +174,7 @@
 #include <fcppt/format.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_enum_range.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/maybe_multi.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/optional_bind.hpp>
@@ -268,7 +268,7 @@ sanguis::client::draw2d::scene::object::object(
 		sprite_states_
 	),
 	world_(
-		fcppt::make_unique_ptr_fcppt<
+		fcppt::make_unique_ptr<
 			sanguis::client::draw2d::scene::world::object
 		>(
 			random_generator_,
@@ -287,7 +287,7 @@ sanguis::client::draw2d::scene::object::object(
 	},
 	player_id_(),
 	camera_(
-		fcppt::make_unique_ptr_fcppt<
+		fcppt::make_unique_ptr<
 			sanguis::client::draw2d::scene::camera
 		>(
 			_renderer
@@ -297,7 +297,7 @@ sanguis::client::draw2d::scene::object::object(
 	entities_(),
 	own_entities_(),
 	background_(
-		fcppt::make_unique_ptr_fcppt<
+		fcppt::make_unique_ptr<
 			sanguis::client::draw2d::scene::background
 		>(
 			_resources,

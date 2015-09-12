@@ -18,7 +18,7 @@
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/draw2d/sprite/normal/white.hpp>
 #include <sanguis/load/model/path_fwd.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -77,7 +77,7 @@ sanguis::client::draw2d::entities::aoe_bullet::on_die()
 		fcppt::unique_ptr_to_base<
 			sanguis::client::draw2d::entities::own
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::client::draw2d::entities::explosion
 			>(
 				load_parameters_,

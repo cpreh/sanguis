@@ -21,7 +21,7 @@
 #include <sanguis/server/weapons/modifiers/make_guaranteed.hpp>
 #include <sanguis/server/weapons/modifiers/make_potential.hpp>
 #include <sanguis/server/weapons/modifiers/spread_radius.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
 
@@ -34,7 +34,7 @@ sanguis::server::weapons::factory::shotgun(
 		fcppt::unique_ptr_to_base<
 			sanguis::server::weapons::weapon
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::server::weapons::shotgun
 			>(
 				_parameters.random_generator(),

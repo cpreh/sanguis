@@ -27,7 +27,7 @@
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/attributes/health.hpp>
 #include <sanguis/server/weapons/attributes/make_health.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
 
@@ -83,7 +83,7 @@ sanguis::server::weapons::sentry::clone() const
 		fcppt::unique_ptr_to_base<
 			sanguis::server::weapons::weapon
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::server::weapons::sentry
 			>(
 				this->spawn_parameters(),
@@ -103,7 +103,7 @@ sanguis::server::weapons::sentry::do_spawn(
 			fcppt::unique_ptr_to_base<
 				sanguis::server::entities::with_id
 			>(
-				fcppt::make_unique_ptr_fcppt<
+				fcppt::make_unique_ptr<
 					sanguis::server::entities::friend_
 				>(
 					sanguis::friend_type::sentry,

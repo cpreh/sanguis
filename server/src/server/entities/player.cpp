@@ -82,7 +82,7 @@
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/error.hpp>
@@ -130,7 +130,7 @@ sanguis::server::entities::player::player(
 			fcppt::unique_ptr_to_base<
 				sanguis::server::auras::aura
 			>(
-				fcppt::make_unique_ptr_fcppt<
+				fcppt::make_unique_ptr<
 					sanguis::server::auras::update_sight
 				>(
 					sanguis::server::radius(
@@ -157,7 +157,7 @@ sanguis::server::entities::player::player(
 			fcppt::unique_ptr_to_base<
 				sanguis::server::auras::aura
 			>(
-				fcppt::make_unique_ptr_fcppt<
+				fcppt::make_unique_ptr<
 					sanguis::server::auras::weapon_pickup_candidates
 				>(
 					// with_velocity needs to be initialized first!
@@ -402,7 +402,7 @@ sanguis::server::entities::player::drop_or_pickup_weapon(
 				fcppt::unique_ptr_to_base<
 					sanguis::server::entities::with_id
 				>(
-					fcppt::make_unique_ptr_fcppt<
+					fcppt::make_unique_ptr<
 						sanguis::server::entities::pickups::weapon
 					>(
 						cur_environment.load_context(),

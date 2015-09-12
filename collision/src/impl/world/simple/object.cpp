@@ -44,7 +44,7 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/reference_wrapper_comparison.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -116,7 +116,7 @@ sanguis::collision::impl::world::simple::object::create_body(
 		fcppt::unique_ptr_to_base<
 			sanguis::collision::world::body
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::collision::impl::world::simple::body
 			>(
 				_parameters,
@@ -281,7 +281,7 @@ sanguis::collision::impl::world::simple::object::create_ghost(
 		fcppt::unique_ptr_to_base<
 			sanguis::collision::world::ghost
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::collision::impl::world::simple::ghost
 			>(
 				_parameters,

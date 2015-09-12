@@ -1,7 +1,7 @@
 #include <sanguis/client/load/model/collection.hpp>
 #include <sanguis/client/load/model/context.hpp>
 #include <sanguis/client/load/resource/context_fwd.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 
 
 sanguis::client::load::model::collection const &
@@ -16,7 +16,7 @@ sanguis::client::load::model::context::context(
 )
 :
 	collection_(
-		fcppt::make_unique_ptr_fcppt<
+		fcppt::make_unique_ptr<
 			sanguis::client::load::model::collection
 		>(
 			_ctx

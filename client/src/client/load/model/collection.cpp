@@ -3,7 +3,7 @@
 #include <sanguis/client/load/resource/context_fwd.hpp>
 #include <sanguis/load/model/make_path.hpp>
 #include <sanguis/load/model/path.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/container/get_or_insert.hpp>
 
 
@@ -23,7 +23,7 @@ sanguis::client::load::model::collection::operator[](
 			)
 			{
 				return
-					fcppt::make_unique_ptr_fcppt<
+					fcppt::make_unique_ptr<
 						sanguis::client::load::model::object
 					>(
 						sanguis::load::model::make_path(

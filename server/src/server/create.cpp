@@ -3,7 +3,7 @@
 #include <sanguis/server/object_base.hpp>
 #include <sanguis/server/object_base_unique_ptr.hpp>
 #include <alda/net/port.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
 
@@ -16,7 +16,7 @@ sanguis::server::create(
 		fcppt::unique_ptr_to_base<
 			sanguis::server::object_base
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::server::object
 			>(
 				_port

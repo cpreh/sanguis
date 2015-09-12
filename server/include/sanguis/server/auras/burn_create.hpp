@@ -13,7 +13,7 @@
 #include <sanguis/server/damage/fire.hpp>
 #include <sanguis/server/damage/full.hpp>
 #include <sanguis/server/damage/make_array.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
 
@@ -39,7 +39,7 @@ burn_create(
 		fcppt::unique_ptr_to_base<
 			sanguis::server::auras::aura
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::server::auras::buff
 			>(
 				_radius,

@@ -12,7 +12,7 @@
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/factory/dual_pistols.hpp>
 #include <sanguis/server/weapons/factory/parameters.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
 
@@ -25,7 +25,7 @@ sanguis::server::weapons::factory::dual_pistols(
 		fcppt::unique_ptr_to_base<
 			sanguis::server::weapons::weapon
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::server::weapons::pistol
 			>(
 				_parameters.random_generator(),

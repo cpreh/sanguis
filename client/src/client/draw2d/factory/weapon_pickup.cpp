@@ -6,7 +6,7 @@
 #include <sanguis/client/draw2d/factory/weapon_pickup.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
 
@@ -22,7 +22,7 @@ sanguis::client::draw2d::factory::weapon_pickup(
 		fcppt::unique_ptr_to_base<
 			sanguis::client::draw2d::entities::base
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::client::draw2d::entities::weapon_pickup
 			>(
 				_parameters,

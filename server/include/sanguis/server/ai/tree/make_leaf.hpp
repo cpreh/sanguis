@@ -5,7 +5,7 @@
 #include <sanguis/server/ai/tree/base.hpp>
 #include <sanguis/server/ai/tree/base_unique_ptr.hpp>
 #include <sanguis/server/ai/tree/leaf.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -34,13 +34,13 @@ make_leaf(
 		fcppt::unique_ptr_to_base<
 			sanguis::server::ai::tree::base
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::server::ai::tree::leaf
 			>(
 				fcppt::unique_ptr_to_base<
 					sanguis::server::ai::behavior::base
 				>(
-					fcppt::make_unique_ptr_fcppt<
+					fcppt::make_unique_ptr<
 						Behavior
 					>(
 						std::forward<

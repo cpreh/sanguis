@@ -19,7 +19,7 @@
 #include <sanguis/server/weapons/monster_spawner.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_enum_range.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/unreachable.hpp>
@@ -69,7 +69,7 @@ sanguis::server::cheat::process(
 					fcppt::unique_ptr_to_base<
 						sanguis::server::entities::with_id
 					>(
-						fcppt::make_unique_ptr_fcppt<
+						fcppt::make_unique_ptr<
 							sanguis::server::entities::pickups::weapon
 						>(
 							_environment.load_context(),
@@ -77,7 +77,7 @@ sanguis::server::cheat::process(
 							fcppt::unique_ptr_to_base<
 								sanguis::server::weapons::weapon
 							>(
-								fcppt::make_unique_ptr_fcppt<
+								fcppt::make_unique_ptr<
 									sanguis::server::weapons::monster_spawner
 								>(
 									_random_generator
@@ -101,7 +101,7 @@ sanguis::server::cheat::process(
 					fcppt::unique_ptr_to_base<
 						sanguis::server::entities::with_id
 					>(
-						fcppt::make_unique_ptr_fcppt<
+						fcppt::make_unique_ptr<
 							sanguis::server::entities::pickups::weapon
 						>(
 							_environment.load_context(),

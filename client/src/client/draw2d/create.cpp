@@ -12,7 +12,7 @@
 #include <sge/gui/style/base_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
 
@@ -34,7 +34,7 @@ sanguis::client::draw2d::create(
 		fcppt::unique_ptr_to_base<
 			sanguis::client::draw::base
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::client::draw2d::scene::object
 			>(
 				_load_context,

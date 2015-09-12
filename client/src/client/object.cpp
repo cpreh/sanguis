@@ -40,7 +40,7 @@
 #include <awl/main/exit_success.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -108,7 +108,7 @@ sanguis::client::object::object(
 		fcppt::unique_ptr_to_base<
 			sge::gui::style::base
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::client::gui::style::simple
 			>(
 				resources_.resources().textures()
@@ -308,7 +308,7 @@ sanguis::client::object::create_server(
 
 	server_ =
 		optional_server_unique_ptr(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::client::server
 			>(
 				_port

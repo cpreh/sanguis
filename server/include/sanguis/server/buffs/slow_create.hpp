@@ -8,7 +8,7 @@
 #include <sanguis/server/buffs/unique_ptr.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
@@ -65,7 +65,7 @@ slow_create(
 								fcppt::unique_ptr_to_base<
 									sanguis::server::buffs::buff
 								>(
-									fcppt::make_unique_ptr_fcppt<
+									fcppt::make_unique_ptr<
 										Buff
 									>(
 										_with_velocity,

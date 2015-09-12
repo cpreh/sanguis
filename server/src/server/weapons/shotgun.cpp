@@ -32,7 +32,7 @@
 #include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
 #include <sanguis/server/weapons/attributes/spread_radius.hpp>
 #include <fcppt/insert_to_fcppt_string.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/repeat.hpp>
@@ -109,7 +109,7 @@ sanguis::server::weapons::shotgun::clone() const
 		fcppt::unique_ptr_to_base<
 			sanguis::server::weapons::weapon
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::server::weapons::shotgun
 			>(
 				this->parameters(),
@@ -162,7 +162,7 @@ sanguis::server::weapons::shotgun::do_attack(
 				fcppt::unique_ptr_to_base<
 					sanguis::server::entities::with_id
 				>(
-					fcppt::make_unique_ptr_fcppt<
+					fcppt::make_unique_ptr<
 						sanguis::server::entities::projectiles::simple_bullet
 					>(
 						_attack.environment().load_context(),

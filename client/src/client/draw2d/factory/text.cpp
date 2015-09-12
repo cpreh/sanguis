@@ -9,7 +9,7 @@
 #include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
 
@@ -27,7 +27,7 @@ sanguis::client::draw2d::factory::text(
 		fcppt::unique_ptr_to_base<
 			sanguis::client::draw2d::entities::own
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::client::draw2d::entities::text
 			>(
 				_diff_clock,

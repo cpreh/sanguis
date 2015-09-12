@@ -10,7 +10,7 @@
 #include <sanguis/server/ai/tree/container.hpp>
 #include <sanguis/server/ai/tree/make_leaf.hpp>
 #include <sanguis/server/ai/tree/priority_sequence.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assign/make_container.hpp>
 
@@ -34,7 +34,7 @@ sanguis::server::ai::create_boss(
 					fcppt::unique_ptr_to_base<
 						sanguis::server::ai::tree::base
 					>(
-						fcppt::make_unique_ptr_fcppt<
+						fcppt::make_unique_ptr<
 							sanguis::server::ai::tree::priority_sequence
 						>(
 							fcppt::assign::make_container<

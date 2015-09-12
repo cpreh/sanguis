@@ -10,7 +10,7 @@
 #include <sanguis/creator/background_tile.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/creator/optional_background_tile.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_bind.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -53,7 +53,7 @@ sanguis::client::draw2d::entities::enemy_spawn_particle(
 								fcppt::unique_ptr_to_base<
 									sanguis::client::draw2d::entities::own
 								>(
-									fcppt::make_unique_ptr_fcppt<
+									fcppt::make_unique_ptr<
 										sanguis::client::draw2d::entities::particle
 									>(
 										_load_parameters,

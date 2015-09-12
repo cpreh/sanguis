@@ -18,7 +18,7 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/join.hpp>
 #include <fcppt/algorithm/map.hpp>
 
@@ -61,7 +61,7 @@ sanguis::client::draw2d::scene::hover::weapon::weapon(
 			)
 			{
 				return
-					fcppt::make_unique_ptr_fcppt<
+					fcppt::make_unique_ptr<
 						sanguis::client::draw2d::scene::hover::weapon_attribute
 					>(
 						gui_context_,

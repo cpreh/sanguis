@@ -5,7 +5,7 @@
 #include <sge/audio/player_fwd.hpp>
 #include <sge/image2d/system_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 
 
 sanguis::client::load::resource::textures const &
@@ -30,7 +30,7 @@ sanguis::client::load::resource::context::context(
 )
 :
 	textures_(
-		fcppt::make_unique_ptr_fcppt<
+		fcppt::make_unique_ptr<
 			sanguis::client::load::resource::textures
 		>(
 			_renderer,
@@ -38,7 +38,7 @@ sanguis::client::load::resource::context::context(
 		)
 	),
 	sounds_(
-		fcppt::make_unique_ptr_fcppt<
+		fcppt::make_unique_ptr<
 			sanguis::client::load::resource::sounds
 		>(
 			_audio_loader,

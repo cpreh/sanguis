@@ -11,7 +11,7 @@
 #include <sanguis/server/perks/perk.hpp>
 #include <sanguis/server/perks/piercing_damage.hpp>
 #include <sanguis/server/perks/unique_ptr.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
@@ -32,7 +32,7 @@ sanguis::server::perks::create(
 			fcppt::unique_ptr_to_base<
 				sanguis::server::perks::perk
 			>(
-				fcppt::make_unique_ptr_fcppt<
+				fcppt::make_unique_ptr<
 					sanguis::server::perks::choleric
 				>(
 					_diff_clock,
@@ -44,7 +44,7 @@ sanguis::server::perks::create(
 			fcppt::unique_ptr_to_base<
 				sanguis::server::perks::perk
 			>(
-				fcppt::make_unique_ptr_fcppt<
+				fcppt::make_unique_ptr<
 					sanguis::server::perks::health
 				>()
 			);
@@ -53,7 +53,7 @@ sanguis::server::perks::create(
 			fcppt::unique_ptr_to_base<
 				sanguis::server::perks::perk
 			>(
-				fcppt::make_unique_ptr_fcppt<
+				fcppt::make_unique_ptr<
 					sanguis::server::perks::fire_damage
 				>()
 			);
@@ -62,7 +62,7 @@ sanguis::server::perks::create(
 			fcppt::unique_ptr_to_base<
 				sanguis::server::perks::perk
 			>(
-				fcppt::make_unique_ptr_fcppt<
+				fcppt::make_unique_ptr<
 					sanguis::server::perks::piercing_damage
 				>()
 			);
@@ -71,7 +71,7 @@ sanguis::server::perks::create(
 			fcppt::unique_ptr_to_base<
 				sanguis::server::perks::perk
 			>(
-				fcppt::make_unique_ptr_fcppt<
+				fcppt::make_unique_ptr<
 					sanguis::server::perks::ias
 				>()
 			);
@@ -80,7 +80,7 @@ sanguis::server::perks::create(
 			fcppt::unique_ptr_to_base<
 				sanguis::server::perks::perk
 			>(
-				fcppt::make_unique_ptr_fcppt<
+				fcppt::make_unique_ptr<
 					sanguis::server::perks::ims
 				>()
 			);
@@ -89,7 +89,7 @@ sanguis::server::perks::create(
 			fcppt::unique_ptr_to_base<
 				sanguis::server::perks::perk
 			>(
-				fcppt::make_unique_ptr_fcppt<
+				fcppt::make_unique_ptr<
 					sanguis::server::perks::irs
 				>()
 			);

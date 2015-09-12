@@ -6,7 +6,7 @@
 #include <sanguis/client/draw2d/scene/world/none.hpp>
 #include <sanguis/client/draw2d/scene/world/parameters.hpp>
 #include <sanguis/creator/name.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -29,7 +29,7 @@ sanguis::client::draw2d::scene::world::create(
 			fcppt::unique_ptr_to_base<
 				sanguis::client::draw2d::scene::world::base
 			>(
-				fcppt::make_unique_ptr_fcppt<
+				fcppt::make_unique_ptr<
 					sanguis::client::draw2d::scene::world::graveyard
 				>(
 					_parameters.load_context(),
@@ -46,7 +46,7 @@ sanguis::client::draw2d::scene::world::create(
 			fcppt::unique_ptr_to_base<
 				sanguis::client::draw2d::scene::world::base
 			>(
-				fcppt::make_unique_ptr_fcppt<
+				fcppt::make_unique_ptr<
 					sanguis::client::draw2d::scene::world::none
 				>()
 			);
@@ -63,7 +63,7 @@ sanguis::client::draw2d::scene::world::create(
 		fcppt::unique_ptr_to_base<
 			sanguis::client::draw2d::scene::world::base
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::client::draw2d::scene::world::none
 			>()
 		);

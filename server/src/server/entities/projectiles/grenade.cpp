@@ -21,7 +21,7 @@
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sge/timer/reset_when_expired.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/optional_error.hpp>
@@ -150,7 +150,7 @@ sanguis::server::entities::projectiles::grenade::remove_from_game()
 		fcppt::unique_ptr_to_base<
 			sanguis::server::entities::simple
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::server::entities::projectiles::aoe_damage
 			>(
 				this->team(),

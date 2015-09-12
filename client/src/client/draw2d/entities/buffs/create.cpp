@@ -8,7 +8,7 @@
 #include <sanguis/client/draw2d/entities/model/object_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
 #include <sanguis/client/load/model/collection_fwd.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
@@ -31,7 +31,7 @@ sanguis::client::draw2d::entities::buffs::create(
 			fcppt::unique_ptr_to_base<
 				sanguis::client::draw2d::entities::buffs::base
 			>(
-				fcppt::make_unique_ptr_fcppt<
+				fcppt::make_unique_ptr<
 					sanguis::client::draw2d::entities::buffs::slow
 				>()
 			);
@@ -40,7 +40,7 @@ sanguis::client::draw2d::entities::buffs::create(
 			fcppt::unique_ptr_to_base<
 				sanguis::client::draw2d::entities::buffs::base
 			>(
-				fcppt::make_unique_ptr_fcppt<
+				fcppt::make_unique_ptr<
 					sanguis::client::draw2d::entities::buffs::burn
 				>(
 					_diff_clock,

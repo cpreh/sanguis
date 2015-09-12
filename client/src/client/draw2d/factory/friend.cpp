@@ -15,7 +15,7 @@
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
@@ -44,7 +44,7 @@ sanguis::client::draw2d::factory::friend_(
 			fcppt::unique_ptr_to_base<
 				sanguis::client::draw2d::entities::base
 			>(
-				fcppt::make_unique_ptr_fcppt<
+				fcppt::make_unique_ptr<
 					sanguis::client::draw2d::entities::friend_
 				>(
 					_parameters,
@@ -68,7 +68,7 @@ sanguis::client::draw2d::factory::friend_(
 			fcppt::unique_ptr_to_base<
 				sanguis::client::draw2d::entities::base
 			>(
-				fcppt::make_unique_ptr_fcppt<
+				fcppt::make_unique_ptr<
 					sanguis::client::draw2d::entities::sentry
 				>(
 					_parameters,

@@ -9,7 +9,7 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/renderer/state/ffp/sampler/object.hpp>
 #include <sge/renderer/state/ffp/sampler/object_unique_ptr.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
@@ -50,7 +50,7 @@ sanguis::client::draw2d::scene::state::text::create_scoped(
 					fcppt::unique_ptr_to_base<
 						sanguis::client::draw2d::scene::state::scoped
 					>(
-						fcppt::make_unique_ptr_fcppt<
+						fcppt::make_unique_ptr<
 							sanguis::client::draw2d::scene::state::scoped_text
 						>(
 							_render_context,

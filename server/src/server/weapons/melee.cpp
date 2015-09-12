@@ -24,7 +24,7 @@
 #include <sanguis/server/weapons/attributes/make_damage.hpp>
 #include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
 #include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
 
@@ -89,7 +89,7 @@ sanguis::server::weapons::melee::clone() const
 		fcppt::unique_ptr_to_base<
 			sanguis::server::weapons::weapon
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::server::weapons::melee
 			>(
 				this->parameters(),
@@ -109,7 +109,7 @@ sanguis::server::weapons::melee::do_attack(
 		fcppt::unique_ptr_to_base<
 			sanguis::server::entities::simple
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::server::entities::projectiles::melee
 			>(
 				this->owner().team(),

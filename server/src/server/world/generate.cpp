@@ -8,7 +8,7 @@
 #include <sanguis/server/world/object.hpp>
 #include <sanguis/server/world/object_unique_ptr.hpp>
 #include <sanguis/server/world/parameters_fwd.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 
 
 sanguis::server::world::object_unique_ptr
@@ -21,7 +21,7 @@ sanguis::server::world::generate(
 )
 {
 	return
-		fcppt::make_unique_ptr_fcppt<
+		fcppt::make_unique_ptr<
 			sanguis::server::world::object
 		>(
 			_parameters,

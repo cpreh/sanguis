@@ -9,7 +9,7 @@
 #include <sanguis/server/auras/unique_ptr.hpp>
 #include <sanguis/server/buffs/slow_create.hpp>
 #include <sanguis/server/buffs/slow_factor.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
 
@@ -34,7 +34,7 @@ slow_create(
 		fcppt::unique_ptr_to_base<
 			sanguis::server::auras::aura
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::server::auras::buff
 			>(
 				_radius,

@@ -25,7 +25,7 @@
 #include <sanguis/server/weapons/attributes/make_damage.hpp>
 #include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
 #include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
 
@@ -95,7 +95,7 @@ sanguis::server::weapons::rocket_launcher::clone() const
 		fcppt::unique_ptr_to_base<
 			sanguis::server::weapons::weapon
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::server::weapons::rocket_launcher
 			>(
 				this->parameters(),
@@ -115,7 +115,7 @@ sanguis::server::weapons::rocket_launcher::do_attack(
 		fcppt::unique_ptr_to_base<
 			sanguis::server::entities::with_id
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::server::entities::projectiles::rocket
 			>(
 				_attack.environment().load_context(),

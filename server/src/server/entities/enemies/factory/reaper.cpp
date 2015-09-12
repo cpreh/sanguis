@@ -30,7 +30,7 @@
 #include <sanguis/server/weapons/melee_parameters.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/units/systems/si/mass.hpp>
@@ -73,7 +73,7 @@ sanguis::server::entities::enemies::factory::reaper(
 		fcppt::unique_ptr_to_base<
 			sanguis::server::weapons::weapon
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::server::weapons::melee
 			>(
 				_parameters.random_generator(),
@@ -121,7 +121,7 @@ sanguis::server::entities::enemies::factory::reaper(
 		fcppt::unique_ptr_to_base<
 			sanguis::server::entities::with_id
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::server::entities::enemies::special
 			>(
 				_parameters.random_generator(),

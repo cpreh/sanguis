@@ -19,7 +19,7 @@
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/world/pickup_spawner.hpp>
 #include <fcppt/make_literal_strong_typedef.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/strong_typedef_assignment.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/random/distribution/basic_impl.hpp>
@@ -170,7 +170,7 @@ sanguis::server::world::pickup_spawner::spawn_health(
 		fcppt::unique_ptr_to_base<
 			sanguis::server::entities::with_id
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::server::entities::pickups::health
 			>(
 				env_.load_context(),
@@ -199,7 +199,7 @@ sanguis::server::world::pickup_spawner::spawn_weapon(
 		fcppt::unique_ptr_to_base<
 			sanguis::server::entities::with_id
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::server::entities::pickups::weapon
 			>(
 				env_.load_context(),

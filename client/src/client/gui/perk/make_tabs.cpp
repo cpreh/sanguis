@@ -8,7 +8,7 @@
 #include <sge/gui/context_fwd.hpp>
 #include <sge/gui/style/base_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 
 
 sanguis::client::gui::perk::tab_unique_ptr_vector
@@ -41,7 +41,7 @@ sanguis::client::gui::perk::make_tabs(
 			)
 	)
 		result.push_back(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::client::gui::perk::tab
 			>(
 				_renderer,

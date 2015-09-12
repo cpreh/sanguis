@@ -13,7 +13,7 @@
 #include <sanguis/server/world/grid_pos_to_center.hpp>
 #include <sanguis/server/world/insert_simple_pair.hpp>
 #include <sanguis/server/world/make_spawner.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
 
@@ -31,7 +31,7 @@ sanguis::server::world::make_spawner(
 			fcppt::unique_ptr_to_base<
 				sanguis::server::entities::simple
 			>(
-				fcppt::make_unique_ptr_fcppt<
+				fcppt::make_unique_ptr<
 					sanguis::server::entities::spawns::limited
 				>(
 					_random_generator,

@@ -5,7 +5,7 @@
 #include <sanguis/client/draw2d/scene/state/dummy.hpp>
 #include <sanguis/client/draw2d/scene/state/text.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/enum_array_fold_static.hpp>
 #include <fcppt/assert/unreachable.hpp>
@@ -44,7 +44,7 @@ sanguis::client::draw2d::scene::state::create(
 						fcppt::unique_ptr_to_base<
 							sanguis::client::draw2d::scene::state::base
 						>(
-							fcppt::make_unique_ptr_fcppt<
+							fcppt::make_unique_ptr<
 								sanguis::client::draw2d::scene::state::dummy
 							>()
 						);
@@ -53,7 +53,7 @@ sanguis::client::draw2d::scene::state::create(
 						fcppt::unique_ptr_to_base<
 							sanguis::client::draw2d::scene::state::base
 						>(
-							fcppt::make_unique_ptr_fcppt<
+							fcppt::make_unique_ptr<
 								sanguis::client::draw2d::scene::state::text
 							>(
 								_renderer

@@ -14,7 +14,7 @@
 #include <sanguis/server/entities/player_unique_ptr.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
@@ -59,7 +59,7 @@ sanguis::server::create_player(
 		);
 
 	return
-		fcppt::make_unique_ptr_fcppt<
+		fcppt::make_unique_ptr<
 			sanguis::server::entities::player
 		>(
 			_random_generator,

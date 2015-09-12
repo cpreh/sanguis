@@ -10,7 +10,7 @@
 #include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/make_destructible.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 
@@ -40,7 +40,7 @@ sanguis::server::world::make_destructible(
 		fcppt::unique_ptr_to_base<
 			sanguis::server::entities::with_id
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				sanguis::server::entities::destructible
 			>(
 				_destructible_type,

@@ -22,7 +22,7 @@
 #include <sanguis/server/perks/perk.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/repeat.hpp>
 #include <fcppt/math/twopi.hpp>
@@ -128,7 +128,7 @@ sanguis::server::perks::choleric::update(
 					fcppt::unique_ptr_to_base<
 						sanguis::server::entities::with_id
 					>(
-						fcppt::make_unique_ptr_fcppt<
+						fcppt::make_unique_ptr<
 							sanguis::server::entities::projectiles::simple_bullet
 						>(
 							_env.load_context(),
@@ -150,7 +150,7 @@ sanguis::server::perks::choleric::update(
 					fcppt::unique_ptr_to_base<
 						sanguis::server::entities::with_id
 					>(
-						fcppt::make_unique_ptr_fcppt<
+						fcppt::make_unique_ptr<
 							sanguis::server::entities::projectiles::rocket
 						>(
 							_env.load_context(),

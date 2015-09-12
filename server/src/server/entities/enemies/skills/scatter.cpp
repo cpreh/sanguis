@@ -21,7 +21,7 @@
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sge/timer/reset_when_expired.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -93,7 +93,7 @@ sanguis::server::entities::enemies::skills::scatter::update(
 						fcppt::unique_ptr_to_base<
 							sanguis::server::entities::with_id
 						>(
-							fcppt::make_unique_ptr_fcppt<
+							fcppt::make_unique_ptr<
 								sanguis::server::entities::projectiles::scatter
 							>(
 								random_generator_,
@@ -115,7 +115,7 @@ sanguis::server::entities::enemies::skills::scatter::update(
 											fcppt::unique_ptr_to_base<
 												sanguis::server::entities::with_id
 											>(
-												fcppt::make_unique_ptr_fcppt<
+												fcppt::make_unique_ptr<
 													sanguis::server::entities::projectiles::rocket
 												>(
 													_env.load_context(),

@@ -5,7 +5,7 @@
 #include <sanguis/client/load/model/weapon_category_map.hpp>
 #include <sanguis/model/part.hpp>
 #include <sanguis/model/weapon_category_map.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -34,7 +34,7 @@ sanguis::client::load::model::make_weapon_categories(
 						sanguis::client::load::model::lookup_weapon_name(
 							_weapon_category_pair.first
 						),
-						fcppt::make_unique_ptr_fcppt<
+						fcppt::make_unique_ptr<
 							sanguis::client::load::model::weapon_category
 						>(
 							_weapon_category_pair.second,
