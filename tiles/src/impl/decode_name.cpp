@@ -12,6 +12,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/fold.hpp>
 #include <fcppt/cast/enum_to_int.hpp>
+#include <fcppt/container/bitfield/operators.hpp>
 
 
 sanguis::tiles::impl::optional_orientation
