@@ -56,7 +56,7 @@ sanguis::client::states::perk_chooser::perk_chooser(
 		>().cursor(),
 		this->context<
 			sanguis::client::machine
-		>().keyboard()
+		>().focus()
 	),
 	hud_details_(
 		this->context<

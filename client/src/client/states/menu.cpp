@@ -80,7 +80,7 @@ sanguis::client::states::menu::menu(
 		>().cursor(),
 		this->context<
 			sanguis::client::machine
-		>().keyboard(),
+		>().focus(),
 		this->context<
 			sanguis::client::machine
 		>().settings(),

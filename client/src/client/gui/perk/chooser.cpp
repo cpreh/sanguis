@@ -17,7 +17,7 @@
 #include <sge/gui/widget/reference_alignment_pair.hpp>
 #include <sge/gui/widget/reference_alignment_vector.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
-#include <sge/input/keyboard/device_fwd.hpp>
+#include <sge/input/focus/object_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp.hpp>
 #include <sge/renderer/target/onscreen.hpp>
@@ -49,7 +49,7 @@ sanguis::client::gui::perk::chooser::chooser(
 	sge::viewport::manager &_viewport_manager,
 	sge::font::object &_font,
 	sge::input::cursor::object &_cursor,
-	sge::input::keyboard::device &_keyboard
+	sge::input::focus::object &_focus
 )
 :
 	state_(
@@ -110,7 +110,7 @@ sanguis::client::gui::perk::chooser::chooser(
 		sge::gui::gravity::north_east
 	),
 	gui_master_(
-		_keyboard,
+		_focus,
 		_cursor,
 		gui_context_,
 		gui_area_

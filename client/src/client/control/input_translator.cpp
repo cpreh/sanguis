@@ -21,10 +21,10 @@
 #include <sge/input/cursor/move_event.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/cursor/position.hpp>
-#include <sge/input/keyboard/device.hpp>
-#include <sge/input/keyboard/key_callback.hpp>
-#include <sge/input/keyboard/key_code.hpp>
-#include <sge/input/keyboard/key_event.hpp>
+#include <sge/input/focus/key_callback.hpp>
+#include <sge/input/focus/key_event.hpp>
+#include <sge/input/focus/object.hpp>
+#include <sge/input/key/code.hpp>
 #include <sge/input/mouse/device.hpp>
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/assert/unreachable.hpp>
@@ -40,19 +40,19 @@ namespace
 
 sanguis::client::control::actions::scale_type
 key_scale_type(
-	sge::input::keyboard::key_code
+	sge::input::key::code
 );
 
 sanguis::client::control::key_scale
 key_scale_value(
-	sge::input::keyboard::key_code,
+	sge::input::key::code,
 	bool pressed
 );
 
 }
 
 sanguis::client::control::input_translator::input_translator(
-	sge::input::keyboard::device &_keyboard,
+	sge::input::focus::object &_focus,
 	sge::input::cursor::object &_cursor,
 	sanguis::client::control::actions::callback const &_callback
 )
@@ -64,8 +64,8 @@ sanguis::client::control::input_translator::input_translator(
 		_callback
 	),
 	key_connection_(
-		_keyboard.key_callback(
-			sge::input::keyboard::key_callback{
+		_focus.key_callback(
+			sge::input::focus::key_callback{
 				std::bind(
 					&sanguis::client::control::input_translator::key_callback,
 					this,
@@ -112,7 +112,7 @@ sanguis::client::control::input_translator::cursor()
 
 void
 sanguis::client::control::input_translator::key_callback(
-	sge::input::keyboard::key_event const &_event
+	sge::input::focus::key_event const &_event
 )
 {
 	// FIXME: Don't hardcode key_codes
@@ -120,51 +120,51 @@ sanguis::client::control::input_translator::key_callback(
 		_event.key().code()
 	)
 	{
-	case sge::input::keyboard::key_code::a:
-	case sge::input::keyboard::key_code::d:
-	case sge::input::keyboard::key_code::w:
-	case sge::input::keyboard::key_code::s:
+	case sge::input::key::code::a:
+	case sge::input::key::code::d:
+	case sge::input::key::code::w:
+	case sge::input::key::code::s:
 		this->direction_event(
 			_event
 		);
 		break;
-	case sge::input::keyboard::key_code::x:
+	case sge::input::key::code::x:
 		this->nullary_event(
 			_event.pressed(),
 			sanguis::client::control::actions::nullary_type::drop_primary_weapon
 		);
 		break;
-	case sge::input::keyboard::key_code::c:
+	case sge::input::key::code::c:
 		this->nullary_event(
 			_event.pressed(),
 			sanguis::client::control::actions::nullary_type::drop_secondary_weapon
 		);
 		break;
-	case sge::input::keyboard::key_code::f1:
+	case sge::input::key::code::f1:
 		this->nullary_event(
 			_event.pressed(),
 			sanguis::client::control::actions::nullary_type::console
 		);
 		break;
-	case sge::input::keyboard::key_code::e:
+	case sge::input::key::code::e:
 		this->nullary_event(
 			_event.pressed(),
 			sanguis::client::control::actions::nullary_type::perk_menu
 		);
 		break;
-	case sge::input::keyboard::key_code::escape:
+	case sge::input::key::code::escape:
 		this->nullary_event(
 			_event.pressed(),
 			sanguis::client::control::actions::nullary_type::escape
 		);
 		break;
-	case sge::input::keyboard::key_code::r:
+	case sge::input::key::code::r:
 		this->nullary_event(
 			_event.pressed(),
 			sanguis::client::control::actions::nullary_type::reload_primary_weapon
 		);
 		break;
-	case sge::input::keyboard::key_code::space:
+	case sge::input::key::code::space:
 		this->nullary_event(
 			_event.pressed(),
 			sanguis::client::control::actions::nullary_type::change_world
@@ -233,7 +233,7 @@ sanguis::client::control::input_translator::button_callback(
 
 void
 sanguis::client::control::input_translator::direction_event(
-	sge::input::keyboard::key_event const &_event
+	sge::input::focus::key_event const &_event
 )
 {
 	callback_(
@@ -298,18 +298,18 @@ namespace
 
 sanguis::client::control::actions::scale_type
 key_scale_type(
-	sge::input::keyboard::key_code const _code
+	sge::input::key::code const _code
 )
 {
 	switch(
 		_code
 	)
 	{
-	case sge::input::keyboard::key_code::a:
-	case sge::input::keyboard::key_code::d:
+	case sge::input::key::code::a:
+	case sge::input::key::code::d:
 		return sanguis::client::control::actions::scale_type::horizontal_move;
-	case sge::input::keyboard::key_code::w:
-	case sge::input::keyboard::key_code::s:
+	case sge::input::key::code::w:
+	case sge::input::key::code::s:
 		return sanguis::client::control::actions::scale_type::vertical_move;
 	default:
 		break;
@@ -320,7 +320,7 @@ key_scale_type(
 
 sanguis::client::control::key_scale
 key_scale_value(
-	sge::input::keyboard::key_code const _code,
+	sge::input::key::code const _code,
 	bool const _pressed
 )
 {
@@ -336,11 +336,11 @@ key_scale_value(
 		_code
 	)
 	{
-	case sge::input::keyboard::key_code::w:
-	case sge::input::keyboard::key_code::a:
+	case sge::input::key::code::w:
+	case sge::input::key::code::a:
 		return -scale;
-	case sge::input::keyboard::key_code::s:
-	case sge::input::keyboard::key_code::d:
+	case sge::input::key::code::s:
+	case sge::input::key::code::d:
 		return scale;
 	default:
 		break;

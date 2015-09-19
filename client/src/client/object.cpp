@@ -124,7 +124,7 @@ sanguis::client::object::object(
 		console_,
 		sys_->renderer_device_ffp(),
 		*font_object_,
-		sys_->keyboard_collector(),
+		sys_->focus_collector(),
 		sys_->viewport_manager(),
 		sanguis::client::args::history_size(
 			_variables_map
@@ -151,7 +151,7 @@ sanguis::client::object::object(
 		sys_->window_system(),
 		*font_object_,
 		console_gfx_.get(),
-		sys_->keyboard_collector(),
+		sys_->focus_collector(),
 		sys_->cursor_demuxer(),
 		sys_->renderer_system(),
 		sys_->renderer_device_ffp(),

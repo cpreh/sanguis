@@ -21,7 +21,7 @@
 #include <sge/gui/widget/reference_alignment_vector.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
-#include <sge/input/keyboard/device_fwd.hpp>
+#include <sge/input/focus/object_fwd.hpp>
 #include <sge/parse/ini/entry_name.hpp>
 #include <sge/parse/ini/get_or_create.hpp>
 #include <sge/parse/ini/section_name.hpp>
@@ -89,7 +89,7 @@ sanguis::client::gui::menu::object::object(
 	sge::viewport::manager &_viewport_manager,
 	sge::font::object &_font,
 	sge::input::cursor::object &_cursor,
-	sge::input::keyboard::device &_keyboard,
+	sge::input::focus::object &_focus,
 	sanguis::client::config::settings::object &_settings,
 	sanguis::client::gui::menu::callbacks::object const &_callbacks,
 	sge::gui::style::base const &_gui_style
@@ -346,7 +346,7 @@ sanguis::client::gui::menu::object::object(
 		main_container_
 	),
 	gui_master_(
-		_keyboard,
+		_focus,
 		_cursor,
 		gui_context_,
 		gui_area_

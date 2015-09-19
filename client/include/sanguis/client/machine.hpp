@@ -18,7 +18,7 @@
 #include <sge/font/object_fwd.hpp>
 #include <sge/gui/style/base_fwd.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
-#include <sge/input/keyboard/device_fwd.hpp>
+#include <sge/input/focus/object_fwd.hpp>
 #include <sge/renderer/system_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/renderer/device/index.hpp>
@@ -59,7 +59,7 @@ public:
 		sge::window::system &,
 		sge::font::object &,
 		sge::console::gfx::object &,
-		sge::input::keyboard::device &,
+		sge::input::focus::object &,
 		sge::input::cursor::object &,
 		sge::renderer::system const &,
 		sge::renderer::device::ffp &,
@@ -120,8 +120,8 @@ public:
 	sge::renderer::device::index const
 	renderer_index() const;
 
-	sge::input::keyboard::device &
-	keyboard() const;
+	sge::input::focus::object &
+	focus() const;
 
 	sge::font::object &
 	font_object() const;
@@ -166,7 +166,7 @@ private:
 
 	sge::gui::style::base const &gui_style_;
 
-	sge::input::keyboard::device &keyboard_;
+	sge::input::focus::object &focus_;
 
 	sge::renderer::system const &renderer_system_;
 

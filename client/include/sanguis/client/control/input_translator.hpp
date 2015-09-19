@@ -10,8 +10,8 @@
 #include <sge/input/cursor/move_event_fwd.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/cursor/position_unit.hpp>
-#include <sge/input/keyboard/device_fwd.hpp>
-#include <sge/input/keyboard/key_event_fwd.hpp>
+#include <sge/input/focus/key_event_fwd.hpp>
+#include <sge/input/focus/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/signal/scoped_connection.hpp>
 
@@ -30,7 +30,7 @@ class input_translator
 	);
 public:
 	input_translator(
-		sge::input::keyboard::device &,
+		sge::input::focus::object &,
 		sge::input::cursor::object &,
 		sanguis::client::control::actions::callback const &
 	);
@@ -42,7 +42,7 @@ public:
 private:
 	void
 	key_callback(
-		sge::input::keyboard::key_event const &
+		sge::input::focus::key_event const &
 	);
 
 	void
@@ -57,7 +57,7 @@ private:
 
 	void
 	direction_event(
-		sge::input::keyboard::key_event const &
+		sge::input::focus::key_event const &
 	);
 
 	void

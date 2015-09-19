@@ -133,7 +133,7 @@ sanguis::client::states::running::running(
 			>().viewport_manager(),
 			this->context<
 				sanguis::client::machine
-			>().keyboard(),
+			>().focus(),
 			this->context<
 				sanguis::client::machine
 			>().cursor()
@@ -181,7 +181,7 @@ sanguis::client::states::running::running(
 		>(
 			this->context<
 				sanguis::client::machine
-			>().keyboard(),
+			>().focus(),
 			this->context<
 				sanguis::client::machine
 			>().cursor(),

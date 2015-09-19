@@ -28,7 +28,7 @@
 #include <sge/font/object_fwd.hpp>
 #include <sge/gui/style/base_fwd.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
-#include <sge/input/keyboard/device_fwd.hpp>
+#include <sge/input/focus/object_fwd.hpp>
 #include <sge/renderer/system_fwd.hpp>
 #include <sge/renderer/context/scoped_ffp.hpp>
 #include <sge/renderer/device/ffp.hpp>
@@ -65,7 +65,7 @@ sanguis::client::machine::machine(
 	sge::window::system &_window_system,
 	sge::font::object &_font_object,
 	sge::console::gfx::object &_console_gfx,
-	sge::input::keyboard::device &_keyboard,
+	sge::input::focus::object &_focus,
 	sge::input::cursor::object &_cursor,
 	sge::renderer::system const &_renderer_system,
 	sge::renderer::device::ffp &_renderer,
@@ -87,8 +87,8 @@ sanguis::client::machine::machine(
 	gui_style_(
 		_gui_style
 	),
-	keyboard_(
-		_keyboard
+	focus_(
+		_focus
 	),
 	renderer_system_(
 		_renderer_system
@@ -335,11 +335,11 @@ sanguis::client::machine::renderer_index() const
 		renderer_index_;
 }
 
-sge::input::keyboard::device &
-sanguis::client::machine::keyboard() const
+sge::input::focus::object &
+sanguis::client::machine::focus() const
 {
 	return
-		keyboard_;
+		focus_;
 }
 
 sge::font::object &

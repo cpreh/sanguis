@@ -2,8 +2,8 @@
 #define SANGUIS_CLIENT_SYSTEMS_FWD_HPP_INCLUDED
 
 #include <sge/systems/cursor_demuxer_fwd.hpp>
+#include <sge/systems/focus_collector_fwd.hpp>
 #include <sge/systems/instance_fwd.hpp>
-#include <sge/systems/keyboard_collector_fwd.hpp>
 #include <sge/systems/renderer_caps.hpp>
 #include <sge/systems/with_audio_loader_fwd.hpp>
 #include <sge/systems/with_audio_player_fwd.hpp>
@@ -22,7 +22,8 @@ namespace sanguis
 namespace client
 {
 
-typedef sge::systems::instance<
+typedef
+sge::systems::instance<
 	boost::mpl::vector7<
 		sge::systems::with_window,
 		sge::systems::with_renderer<
@@ -30,7 +31,7 @@ typedef sge::systems::instance<
 		>,
 		sge::systems::with_input<
 			boost::mpl::vector2<
-				sge::systems::keyboard_collector,
+				sge::systems::focus_collector,
 				sge::systems::cursor_demuxer
 			>
 		>,
@@ -39,7 +40,8 @@ typedef sge::systems::instance<
 		sge::systems::with_audio_loader,
 		sge::systems::with_audio_player
 	>
-> systems;
+>
+systems;
 
 }
 }

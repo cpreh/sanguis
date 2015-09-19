@@ -30,7 +30,7 @@
 #include <sge/gui/widget/preferred_size.hpp>
 #include <sge/gui/widget/text.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
-#include <sge/input/keyboard/device_fwd.hpp>
+#include <sge/input/focus/object_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/rect_fwd.hpp>
@@ -65,7 +65,7 @@ public:
 		sge::font::object &,
 		sge::renderer::device::ffp &,
 		sge::viewport::manager &,
-		sge::input::keyboard::device &,
+		sge::input::focus::object &,
 		sge::input::cursor::object &
 	);
 

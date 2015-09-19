@@ -15,7 +15,7 @@
 #include <sge/gui/widget/box_container.hpp>
 #include <sge/gui/widget/text.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
-#include <sge/input/keyboard/device_fwd.hpp>
+#include <sge/input/focus/object_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
@@ -46,7 +46,7 @@ public:
 		sge::viewport::manager &,
 		sge::font::object &,
 		sge::input::cursor::object &,
-		sge::input::keyboard::device &
+		sge::input::focus::object &
 	);
 
 	~chooser();
