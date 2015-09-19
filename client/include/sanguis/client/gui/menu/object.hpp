@@ -26,7 +26,7 @@
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
-#include <fcppt/signal/scoped_connection.hpp>
+#include <fcppt/signal/auto_connection.hpp>
 
 
 namespace sanguis
@@ -136,7 +136,7 @@ private:
 
 	bool connect_running_;
 
-	fcppt::signal::scoped_connection const
+	fcppt::signal::auto_connection const
 		quickstart_connection_,
 		connect_connection_,
 		quit_connection_,

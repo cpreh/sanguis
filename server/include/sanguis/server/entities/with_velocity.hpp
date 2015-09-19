@@ -18,7 +18,7 @@
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <sanguis/server/net/speed.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/signal/scoped_connection.hpp>
+#include <fcppt/signal/auto_connection.hpp>
 
 
 namespace sanguis
@@ -100,7 +100,7 @@ private:
 
 	sanguis::server::net::speed net_speed_;
 
-	fcppt::signal::scoped_connection const speed_change_;
+	fcppt::signal::auto_connection const speed_change_;
 };
 
 }

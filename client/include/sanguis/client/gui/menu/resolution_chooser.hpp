@@ -13,7 +13,7 @@
 #include <sge/renderer/device/index_fwd.hpp>
 #include <sge/renderer/display_mode/container.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/signal/scoped_connection.hpp>
+#include <fcppt/signal/auto_connection.hpp>
 
 
 namespace sanguis
@@ -58,7 +58,7 @@ private:
 
 	sge::gui::widget::box_container widget_;
 
-	fcppt::signal::scoped_connection const apply_connection_;
+	fcppt::signal::auto_connection const apply_connection_;
 };
 
 }

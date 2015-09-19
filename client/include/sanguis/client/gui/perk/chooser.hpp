@@ -21,7 +21,7 @@
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
-#include <fcppt/signal/scoped_connection.hpp>
+#include <fcppt/signal/auto_connection.hpp>
 
 
 namespace sanguis
@@ -98,7 +98,7 @@ private:
 
 	sge::gui::background::colored gui_background_;
 
-	fcppt::signal::scoped_connection const
+	fcppt::signal::auto_connection const
 		perk_connection_,
 		level_connection_;
 };

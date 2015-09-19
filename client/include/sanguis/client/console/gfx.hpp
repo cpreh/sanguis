@@ -11,7 +11,7 @@
 #include <sge/renderer/target/viewport_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/signal/scoped_connection.hpp>
+#include <fcppt/signal/auto_connection.hpp>
 
 
 namespace sanguis
@@ -49,7 +49,7 @@ private:
 
 	sge::console::gfx::object impl_;
 
-	fcppt::signal::scoped_connection const resize_connection_;
+	fcppt::signal::auto_connection const resize_connection_;
 };
 
 }

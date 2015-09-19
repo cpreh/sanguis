@@ -26,7 +26,7 @@
 #include <sge/window/system_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
-#include <fcppt/signal/scoped_connection.hpp>
+#include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/variables_map.hpp>
 #include <boost/statechart/state_machine.hpp>
@@ -178,7 +178,7 @@ private:
 
 	alda::net::client::object net_;
 
-	fcppt::signal::scoped_connection const
+	fcppt::signal::auto_connection const
 		s_conn_,
 		s_disconn_,
 		s_data_;

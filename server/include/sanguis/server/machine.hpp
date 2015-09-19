@@ -20,7 +20,7 @@
 #include <alda/net/server/object.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
-#include <fcppt/signal/scoped_connection.hpp>
+#include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/state_machine.hpp>
 #include <queue>
@@ -141,7 +141,7 @@ private:
 
 	sanguis::server::timer timer_;
 
-	fcppt::signal::scoped_connection const
+	fcppt::signal::auto_connection const
 		disconnect_connection_,
 		data_connection_;
 };

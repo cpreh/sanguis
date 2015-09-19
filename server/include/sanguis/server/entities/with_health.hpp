@@ -16,7 +16,7 @@
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <sanguis/server/net/health.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/signal/scoped_connection.hpp>
+#include <fcppt/signal/auto_connection.hpp>
 
 
 namespace sanguis
@@ -98,9 +98,9 @@ private:
 
 	sanguis::server::net::health net_health_;
 
-	fcppt::signal::scoped_connection const health_change_;
+	fcppt::signal::auto_connection const health_change_;
 
-	fcppt::signal::scoped_connection const max_health_change_;
+	fcppt::signal::auto_connection const max_health_change_;
 };
 
 }

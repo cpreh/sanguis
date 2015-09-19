@@ -13,7 +13,7 @@
 #include <sge/input/focus/key_event_fwd.hpp>
 #include <sge/input/focus/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/signal/scoped_connection.hpp>
+#include <fcppt/signal/auto_connection.hpp>
 
 
 namespace sanguis
@@ -76,7 +76,7 @@ private:
 
 	sanguis::client::control::actions::callback const callback_;
 
-	fcppt::signal::scoped_connection const
+	fcppt::signal::auto_connection const
 		key_connection_,
 		axis_connection_,
 		button_connection_;
