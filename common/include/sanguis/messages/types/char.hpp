@@ -4,6 +4,7 @@
 #include <sge/charconv/char_type.hpp>
 #include <sge/charconv/encoding.hpp>
 
+
 namespace sanguis
 {
 namespace messages
@@ -11,9 +12,11 @@ namespace messages
 namespace types
 {
 
-typedef sge::charconv::char_type<
+typedef
+sge::charconv::char_type<
 	sge::charconv::encoding::utf8
->::type char_;
+>
+char_;
 
 }
 }
