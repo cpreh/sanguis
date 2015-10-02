@@ -26,9 +26,10 @@
 #include <sge/image/color/init/red.hpp>
 #include <sge/image2d/file.hpp>
 #include <sge/image2d/file_unique_ptr.hpp>
+#include <sge/image2d/load.hpp>
 #include <sge/image2d/rect.hpp>
 #include <sge/image2d/save_from_view.hpp>
-#include <sge/image2d/system.hpp>
+#include <sge/image2d/system_fwd.hpp>
 #include <sge/image2d/vector.hpp>
 #include <sge/image2d/algorithm/copy_and_convert.hpp>
 #include <sge/image2d/store/srgba8.hpp>
@@ -269,7 +270,8 @@ try
 							{
 								return
 									FCPPT_ASSERT_OPTIONAL_ERROR(
-										sys.image_system().load(
+										sge::image2d::load(
+											sys.image_system(),
 											_path
 										)
 									);

@@ -1,7 +1,8 @@
 #include <sanguis/tiles/impl/load_file.hpp>
 #include <sge/image2d/file.hpp>
+#include <sge/image2d/load.hpp>
 #include <sge/image2d/optional_file_unique_ptr.hpp>
-#include <sge/image2d/system.hpp>
+#include <sge/image2d/system_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
@@ -14,16 +15,16 @@ sanguis::tiles::impl::load_file(
 	boost::filesystem::path const &_path
 )
 {
-	if(
-		!boost::filesystem::exists(
+	return
+		boost::filesystem::exists(
 			_path
 		)
-	)
-		return
-			sge::image2d::optional_file_unique_ptr();
-
-	return
-		_system.load(
-			_path
-		);
+		?
+			sge::image2d::load(
+				_system,
+				_path
+			)
+		:
+			sge::image2d::optional_file_unique_ptr()
+		;
 }

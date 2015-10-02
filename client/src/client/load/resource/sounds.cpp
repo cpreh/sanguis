@@ -5,7 +5,9 @@
 #include <sge/audio/buffer_unique_ptr.hpp>
 #include <sge/audio/file.hpp>
 #include <sge/audio/file_unique_ptr.hpp>
-#include <sge/audio/loader.hpp>
+#include <sge/audio/load.hpp>
+#include <sge/audio/loader_fwd.hpp>
+#include <sge/audio/optional_file_unique_ptr.hpp>
 #include <sge/audio/player.hpp>
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/optional_impl.hpp>
@@ -68,7 +70,8 @@ sanguis::client::load::resource::sounds::load_path(
 				-> optional_buffer
 				{
 					sge::audio::optional_file_unique_ptr const opt_file{
-						multi_loader_.load(
+						sge::audio::load(
+							multi_loader_,
 							_npath
 						)
 					};
