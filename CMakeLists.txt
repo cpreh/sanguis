@@ -140,6 +140,7 @@ sge_config_add_custom_path(
 	media
 	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/media
 	${INSTALL_MEDIA_DIR}
+	MEDIA_PATH_INCLUDES
 )
 
 include(
