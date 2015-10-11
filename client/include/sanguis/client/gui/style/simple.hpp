@@ -40,7 +40,7 @@ public:
 	~simple()
 	override;
 private:
-	sge::rucksack::dim const
+	sge::rucksack::dim
 	button_spacing() const
 	override;
 
@@ -63,7 +63,7 @@ private:
 	) const
 	override;
 
-	sge::rucksack::padding const
+	sge::rucksack::padding
 	frame_padding() const
 	override;
 
@@ -76,7 +76,7 @@ private:
 	) const
 	override;
 
-	sge::rucksack::dim const
+	sge::rucksack::dim
 	edit_spacing() const
 	override;
 
@@ -88,7 +88,7 @@ private:
 	) const
 	override;
 
-	sge::rucksack::dim const
+	sge::rucksack::dim
 	image_spacing() const
 	override;
 
@@ -100,7 +100,7 @@ private:
 	) const
 	override;
 
-	sge::rucksack::dim const
+	sge::rucksack::dim
 	text_spacing() const
 	override;
 
@@ -123,7 +123,7 @@ private:
 	text_color() const
 	override;
 
-	sge::rucksack::dim const
+	sge::rucksack::dim
 	spacing() const;
 
 	sanguis::client::load::resource::textures

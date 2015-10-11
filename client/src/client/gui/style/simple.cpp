@@ -46,7 +46,7 @@ sanguis::client::gui::style::simple::~simple()
 {
 }
 
-sge::rucksack::dim const
+sge::rucksack::dim
 sanguis::client::gui::style::simple::button_spacing() const
 {
 	return
@@ -153,7 +153,7 @@ sanguis::client::gui::style::simple::draw_bar(
 
 }
 
-sge::rucksack::padding const
+sge::rucksack::padding
 sanguis::client::gui::style::simple::frame_padding() const
 {
 	return
@@ -254,7 +254,7 @@ sanguis::client::gui::style::simple::draw_frame(
 	*/
 }
 
-sge::rucksack::dim const
+sge::rucksack::dim
 sanguis::client::gui::style::simple::edit_spacing() const
 {
 	return
@@ -296,7 +296,7 @@ sanguis::client::gui::style::simple::draw_edit(
 	);
 }
 
-sge::rucksack::dim const
+sge::rucksack::dim
 sanguis::client::gui::style::simple::image_spacing() const
 {
 	return
@@ -305,7 +305,7 @@ sanguis::client::gui::style::simple::image_spacing() const
 		>();
 }
 
-sge::rucksack::dim const
+sge::rucksack::dim
 sanguis::client::gui::style::simple::text_spacing() const
 {
 	return
@@ -341,7 +341,7 @@ sanguis::client::gui::style::simple::text_color() const
 		);
 }
 
-sge::rucksack::dim const
+sge::rucksack::dim
 sanguis::client::gui::style::simple::spacing() const
 {
 	return
