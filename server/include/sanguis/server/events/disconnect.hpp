@@ -31,7 +31,7 @@ public:
 		alda::net::id
 	);
 
-	alda::net::id const
+	alda::net::id
 	id() const;
 private:
 	alda::net::id const id_;

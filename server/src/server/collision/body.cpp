@@ -62,7 +62,7 @@ sanguis::server::collision::body::center(
 	);
 }
 
-sanguis::server::center const
+sanguis::server::center
 sanguis::server::collision::body::center() const
 {
 	return
@@ -87,7 +87,7 @@ sanguis::server::collision::body::speed(
 	);
 }
 
-sanguis::server::speed const
+sanguis::server::speed
 sanguis::server::collision::body::speed() const
 {
 	return
@@ -98,7 +98,7 @@ sanguis::server::collision::body::speed() const
 		);
 }
 
-sanguis::server::radius const
+sanguis::server::radius
 sanguis::server::collision::body::radius() const
 {
 	return

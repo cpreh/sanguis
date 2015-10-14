@@ -141,21 +141,21 @@ sanguis::server::entities::enemies::enemy::enemy_type() const
 		enemy_type_;
 }
 
-sanguis::server::exp const
+sanguis::server::exp
 sanguis::server::entities::enemies::enemy::exp() const
 {
 	return
 		exp_;
 }
 
-sanguis::server::mass const
+sanguis::server::mass
 sanguis::server::entities::enemies::enemy::mass() const
 {
 	return
 		mass_;
 }
 
-sanguis::server::entities::enemies::difficulty const
+sanguis::server::entities::enemies::difficulty
 sanguis::server::entities::enemies::enemy::difficulty() const
 {
 	return

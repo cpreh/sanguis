@@ -17,14 +17,14 @@ sanguis::client::health_pair::health_pair(
 {
 }
 
-sanguis::client::health const
+sanguis::client::health
 sanguis::client::health_pair::health() const
 {
 	return
 		health_;
 }
 
-sanguis::client::max_health const
+sanguis::client::max_health
 sanguis::client::health_pair::max_health() const
 {
 	return

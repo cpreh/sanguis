@@ -22,7 +22,7 @@ sanguis::server::weapons::attack::attack(
 {
 }
 
-sanguis::server::angle const
+sanguis::server::angle
 sanguis::server::weapons::attack::angle() const
 {
 	return

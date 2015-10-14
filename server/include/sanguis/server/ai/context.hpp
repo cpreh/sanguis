@@ -41,10 +41,10 @@ public:
 	void
 	clear_path();
 
-	sanguis::creator::optional_pos const
+	sanguis::creator::optional_pos
 	destination() const;
 
-	sanguis::server::ai::pathing::optional_target const
+	sanguis::server::ai::pathing::optional_target
 	continue_path();
 
 	sanguis::creator::grid const &

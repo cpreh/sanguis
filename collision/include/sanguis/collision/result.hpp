@@ -20,7 +20,7 @@ public:
 	);
 
 	SANGUIS_COLLISION_SYMBOL
-	sanguis::collision::speed const
+	sanguis::collision::speed
 	speed() const;
 private:
 	sanguis::collision::speed speed_;

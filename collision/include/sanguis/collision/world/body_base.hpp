@@ -45,7 +45,7 @@ public:
 	) = 0;
 
 	virtual
-	boost::logic::tribool const
+	boost::logic::tribool
 	can_collide_with(
 		sanguis::collision::world::body_base const &
 	) const = 0;

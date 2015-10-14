@@ -62,7 +62,7 @@ sanguis::server::entities::enemies::factory::parameters::enemy_kind() const
 		enemy_kind_;
 }
 
-sanguis::server::entities::enemies::difficulty const
+sanguis::server::entities::enemies::difficulty
 sanguis::server::entities::enemies::factory::parameters::difficulty() const
 {
 	return
@@ -83,7 +83,7 @@ sanguis::server::entities::enemies::factory::parameters::spawn_owner() const
 		spawn_owner_;
 }
 
-sanguis::server::entities::enemies::special_chance const
+sanguis::server::entities::enemies::special_chance
 sanguis::server::entities::enemies::factory::parameters::special_chance() const
 {
 	return

@@ -12,7 +12,7 @@ sanguis::server::entities::property::change_event::change_event(
 {
 }
 
-sanguis::server::entities::property::diff const
+sanguis::server::entities::property::diff
 sanguis::server::entities::property::change_event::diff() const
 {
 	return

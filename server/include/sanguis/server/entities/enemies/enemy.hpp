@@ -62,13 +62,13 @@ public:
 	sanguis::creator::enemy_type
 	enemy_type() const;
 
-	sanguis::server::exp const
+	sanguis::server::exp
 	exp() const;
 
-	sanguis::server::mass const
+	sanguis::server::mass
 	mass() const;
 
-	sanguis::server::entities::enemies::difficulty const
+	sanguis::server::entities::enemies::difficulty
 	difficulty() const;
 protected:
 	void

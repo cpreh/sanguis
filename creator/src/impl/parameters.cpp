@@ -29,14 +29,14 @@ sanguis::creator::impl::parameters::randgen() const
 		randgen_;
 }
 
-sanguis::creator::spawn_boss const
+sanguis::creator::spawn_boss
 sanguis::creator::impl::parameters::spawn_boss() const
 {
 	return
 		spawn_boss_;
 }
 
-sanguis::creator::opening_count_array const
+sanguis::creator::opening_count_array const &
 sanguis::creator::impl::parameters::opening_count_array() const
 {
 	return

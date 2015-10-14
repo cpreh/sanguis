@@ -14,7 +14,7 @@ namespace client
 namespace args
 {
 
-sanguis::client::draw::debug const
+sanguis::client::draw::debug
 draw_debug(
 	boost::program_options::variables_map const &
 );

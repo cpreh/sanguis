@@ -27,28 +27,28 @@ sanguis::client::draw2d::collide_parameters::collide_parameters(
 {
 }
 
-sanguis::duration const
+sanguis::duration
 sanguis::client::draw2d::collide_parameters::duration() const
 {
 	return
 		duration_;
 }
 
-sanguis::client::draw2d::center const
+sanguis::client::draw2d::center
 sanguis::client::draw2d::collide_parameters::center() const
 {
 	return
 		center_;
 }
 
-sanguis::client::draw2d::speed const
+sanguis::client::draw2d::speed
 sanguis::client::draw2d::collide_parameters::speed() const
 {
 	return
 		speed_;
 }
 
-sanguis::client::draw2d::fradius const
+sanguis::client::draw2d::fradius
 sanguis::client::draw2d::collide_parameters::radius() const
 {
 	return

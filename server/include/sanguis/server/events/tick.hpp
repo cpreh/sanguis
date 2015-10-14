@@ -35,7 +35,7 @@ public:
 	sanguis::duration const &
 	delta() const;
 
-	sanguis::slowdown const
+	sanguis::slowdown
 	slowdown() const;
 private:
 	sanguis::duration const delta_;

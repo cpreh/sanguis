@@ -29,14 +29,14 @@ sanguis::server::weapons::factory::parameters::random_generator() const
 		random_generator_;
 }
 
-sanguis::weapon_type const
+sanguis::weapon_type
 sanguis::server::weapons::factory::parameters::weapon_type() const
 {
 	return
 		weapon_type_;
 }
 
-sanguis::server::entities::enemies::difficulty const
+sanguis::server::entities::enemies::difficulty
 sanguis::server::weapons::factory::parameters::difficulty() const
 {
 	return

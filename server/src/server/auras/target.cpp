@@ -43,7 +43,7 @@ sanguis::server::auras::target::~target()
 {
 }
 
-sanguis::optional_aura_type const
+sanguis::optional_aura_type
 sanguis::server::auras::target::type() const
 {
 	return

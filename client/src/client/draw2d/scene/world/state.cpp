@@ -210,7 +210,7 @@ sanguis::client::draw2d::scene::world::state::draw_after(
 	);
 }
 
-sanguis::client::draw2d::optional_speed const
+sanguis::client::draw2d::optional_speed
 sanguis::client::draw2d::scene::world::state::test_collision(
 	sanguis::client::draw2d::collide_parameters const &_parameters
 ) const

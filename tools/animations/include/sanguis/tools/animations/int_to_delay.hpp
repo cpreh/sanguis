@@ -11,7 +11,7 @@ namespace tools
 namespace animations
 {
 
-sanguis::model::optional_animation_delay const
+sanguis::model::optional_animation_delay
 int_to_delay(
 	int
 );

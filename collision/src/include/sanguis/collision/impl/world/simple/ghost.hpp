@@ -56,11 +56,11 @@ public:
 	)
 	override;
 
-	sanguis::collision::center const
+	sanguis::collision::center
 	center() const
 	FCPPT_PP_WARN_UNUSED_RESULT;
 
-	sanguis::collision::radius const
+	sanguis::collision::radius
 	radius() const
 	FCPPT_PP_WARN_UNUSED_RESULT;
 

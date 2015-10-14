@@ -652,7 +652,7 @@ sanguis::client::draw2d::scene::object::pause(
 		);
 }
 
-sanguis::client::control::optional_attack_dest const
+sanguis::client::control::optional_attack_dest
 sanguis::client::draw2d::scene::object::translate_attack_dest(
 	sanguis::client::control::cursor_position const _cursor_position
 ) const
@@ -826,7 +826,7 @@ sanguis::client::draw2d::scene::object::entity(
 		);
 }
 
-sanguis::client::draw2d::optional_player_center const
+sanguis::client::draw2d::optional_player_center
 sanguis::client::draw2d::scene::object::player_center() const
 {
 	return
@@ -876,7 +876,7 @@ sanguis::client::draw2d::scene::object::change_world(
 	);
 }
 
-sanguis::client::draw2d::entities::load_parameters const
+sanguis::client::draw2d::entities::load_parameters
 sanguis::client::draw2d::scene::object::load_parameters()
 {
 	return

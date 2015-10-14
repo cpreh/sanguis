@@ -30,13 +30,13 @@ public:
 		sanguis::server::damage::array const &
 	);
 
-	sanguis::server::weapons::backswing_time const
+	sanguis::server::weapons::backswing_time
 	backswing_time() const;
 
-	sanguis::server::weapons::attributes::damage const
+	sanguis::server::weapons::attributes::damage
 	damage() const;
 
-	sanguis::server::weapons::range const
+	sanguis::server::weapons::range
 	range() const;
 
 	sanguis::server::damage::array const &

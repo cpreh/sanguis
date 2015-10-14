@@ -34,16 +34,16 @@ public:
 	sanguis::collision::world::object &
 	world() const;
 
-	sanguis::collision::world::created const
+	sanguis::collision::world::created
 	created() const;
 
 	sanguis::creator::grid const &
 	grid() const;
 
-	sanguis::server::center const
+	sanguis::server::center
 	center() const;
 
-	sanguis::server::angle const
+	sanguis::server::angle
 	angle() const;
 private:
 	sanguis::collision::world::object &world_;

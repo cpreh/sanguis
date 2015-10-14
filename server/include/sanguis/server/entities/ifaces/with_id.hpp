@@ -23,7 +23,7 @@ protected:
 	with_id();
 public:
 	virtual
-	sanguis::entity_id const
+	sanguis::entity_id
 	id() const = 0;
 
 	virtual

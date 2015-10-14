@@ -132,28 +132,28 @@ sanguis::server::entities::enemies::parameters::armor() const
 		armor_;
 }
 
-sanguis::server::mass const
+sanguis::server::mass
 sanguis::server::entities::enemies::parameters::mass() const
 {
 	return
 		mass_;
 }
 
-sanguis::server::health const
+sanguis::server::health
 sanguis::server::entities::enemies::parameters::health() const
 {
 	return
 		health_;
 }
 
-sanguis::server::regeneration const
+sanguis::server::regeneration
 sanguis::server::entities::enemies::parameters::regeneration() const
 {
 	return
 		regeneration_;
 }
 
-sanguis::server::entities::movement_speed const
+sanguis::server::entities::movement_speed
 sanguis::server::entities::enemies::parameters::movement_speed() const
 {
 	return
@@ -174,21 +174,21 @@ sanguis::server::entities::enemies::parameters::weapon()
 		weapon_;
 }
 
-sanguis::server::pickup_probability const
+sanguis::server::pickup_probability
 sanguis::server::entities::enemies::parameters::pickup_probability() const
 {
 	return
 		pickup_probability_;
 }
 
-sanguis::server::exp const
+sanguis::server::exp
 sanguis::server::entities::enemies::parameters::exp() const
 {
 	return
 		exp_;
 }
 
-sanguis::server::entities::enemies::difficulty const
+sanguis::server::entities::enemies::difficulty
 sanguis::server::entities::enemies::parameters::difficulty() const
 {
 	return
@@ -209,14 +209,14 @@ sanguis::server::entities::enemies::parameters::auras()
 		auras_;
 }
 
-sanguis::server::weapons::ias const
+sanguis::server::weapons::ias
 sanguis::server::entities::enemies::parameters::ias() const
 {
 	return
 		ias_;
 }
 
-sanguis::server::weapons::irs const
+sanguis::server::weapons::irs
 sanguis::server::entities::enemies::parameters::irs() const
 {
 	return

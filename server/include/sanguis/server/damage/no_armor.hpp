@@ -11,7 +11,7 @@ namespace server
 namespace damage
 {
 
-sanguis::server::damage::armor_array const
+sanguis::server::damage::armor_array
 no_armor();
 
 }

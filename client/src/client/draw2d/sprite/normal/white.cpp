@@ -5,7 +5,7 @@
 #include <sge/image/color/any/convert.hpp>
 
 
-sanguis::client::draw2d::sprite::normal::color const
+sanguis::client::draw2d::sprite::normal::color
 sanguis::client::draw2d::sprite::normal::white()
 {
 	return

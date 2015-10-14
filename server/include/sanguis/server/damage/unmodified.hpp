@@ -12,7 +12,7 @@ namespace server
 namespace damage
 {
 
-sanguis::server::damage::modified_array const
+sanguis::server::damage::modified_array
 unmodified(
 	sanguis::server::damage::array const &
 );

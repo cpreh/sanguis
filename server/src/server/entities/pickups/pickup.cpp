@@ -86,7 +86,7 @@ sanguis::server::entities::pickups::pickup::team() const
 		team_;
 }
 
-boost::logic::tribool const
+boost::logic::tribool
 sanguis::server::entities::pickups::pickup::can_collide_with_body(
 	sanguis::server::entities::with_body const &_body
 ) const

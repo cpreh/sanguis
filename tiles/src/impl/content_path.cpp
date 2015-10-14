@@ -24,7 +24,7 @@ sanguis::tiles::impl::content_path::content() const
 		content_;
 }
 
-sanguis::tiles::path_reference const
+sanguis::tiles::path_reference
 sanguis::tiles::impl::content_path::path() const
 {
 	return

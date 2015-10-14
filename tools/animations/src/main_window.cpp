@@ -705,7 +705,7 @@ sanguis::tools::animations::main_window::resetFrames()
 	);
 }
 
-sanguis::tools::animations::optional_animation_ref const
+sanguis::tools::animations::optional_animation_ref
 sanguis::tools::animations::main_window::current_animation()
 {
 	// TODO: optional_bind_construct_multi?
@@ -931,7 +931,7 @@ sanguis::tools::animations::main_window::update_frame_timer()
 	);
 }
 
-sanguis::model::optional_animation_delay const
+sanguis::model::optional_animation_delay
 sanguis::tools::animations::main_window::current_animation_delay()
 {
 	return

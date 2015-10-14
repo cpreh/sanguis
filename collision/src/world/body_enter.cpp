@@ -36,7 +36,7 @@ sanguis::collision::world::body_enter::ghost() const
 		ghost_.get();
 }
 
-sanguis::collision::world::created const
+sanguis::collision::world::created
 sanguis::collision::world::body_enter::created() const
 {
 	return

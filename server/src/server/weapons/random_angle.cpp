@@ -8,7 +8,7 @@
 #include <fcppt/random/distribution/parameters/normal.hpp>
 
 
-sanguis::server::angle const
+sanguis::server::angle
 sanguis::server::weapons::random_angle(
 	sanguis::random_generator &_random_generator,
 	sanguis::server::weapons::accuracy const _accuracy,

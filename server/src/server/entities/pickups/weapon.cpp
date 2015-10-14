@@ -88,7 +88,7 @@ sanguis::server::entities::pickups::weapon::obtain()
 		result;
 }
 
-sanguis::weapon_type const
+sanguis::weapon_type
 sanguis::server::entities::pickups::weapon::weapon_type() const
 {
 	return

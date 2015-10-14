@@ -5,7 +5,7 @@
 #include <fcppt/math/vector/map.hpp>
 
 
-sanguis::server::speed const
+sanguis::server::speed
 sanguis::server::collision::from_speed(
 	sanguis::collision::speed const _speed
 )

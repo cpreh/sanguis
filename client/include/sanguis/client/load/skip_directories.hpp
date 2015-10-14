@@ -13,7 +13,7 @@ namespace client
 namespace load
 {
 
-boost::filesystem::directory_iterator const
+boost::filesystem::directory_iterator
 skip_directories(
 	boost::filesystem::directory_iterator
 );

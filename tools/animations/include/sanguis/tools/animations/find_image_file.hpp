@@ -16,7 +16,7 @@ namespace tools
 namespace animations
 {
 
-sanguis::tools::animations::const_optional_image_file_ref const
+sanguis::tools::animations::const_optional_image_file_ref
 find_image_file(
 	sanguis::tools::animations::image_file_map const &,
 	sanguis::model::object const &,

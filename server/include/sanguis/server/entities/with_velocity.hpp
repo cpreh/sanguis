@@ -62,13 +62,13 @@ public:
 	movement_speed()
 	override;
 
-	sanguis::server::entities::movement_speed const
+	sanguis::server::entities::movement_speed
 	max_movement_speed() const;
 
-	sanguis::server::direction const
+	sanguis::server::direction
 	direction() const;
 
-	sanguis::server::speed const
+	sanguis::server::speed
 	speed() const
 	override;
 
@@ -87,10 +87,10 @@ private:
 	)
 	override;
 
-	sanguis::server::speed const
+	sanguis::server::speed
 	desired_speed() const;
 
-	sanguis::server::speed const
+	sanguis::server::speed
 	initial_speed() const
 	override;
 

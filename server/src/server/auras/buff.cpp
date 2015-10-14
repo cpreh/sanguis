@@ -44,7 +44,7 @@ sanguis::server::auras::buff::~buff()
 {
 }
 
-sanguis::optional_aura_type const
+sanguis::optional_aura_type
 sanguis::server::auras::buff::type() const
 {
 	return

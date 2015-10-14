@@ -43,10 +43,10 @@ public:
 	void
 	reset_translation();
 
-	sanguis::client::draw2d::optional_translation const
+	sanguis::client::draw2d::optional_translation
 	translation() const;
 
-	sanguis::client::control::optional_attack_dest const
+	sanguis::client::control::optional_attack_dest
 	translate_attack_dest(
 		sanguis::client::control::cursor_position
 	);

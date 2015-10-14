@@ -9,7 +9,7 @@
 #include <fcppt/math/vector/null.hpp>
 
 
-sanguis::creator::rect const
+sanguis::creator::rect
 sanguis::creator::tile_rect(
 	sanguis::creator::tile const _tile
 )

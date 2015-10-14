@@ -40,13 +40,13 @@ public:
 	>
 	optional_extra;
 
-	Wrapped const
+	Wrapped
 	base() const;
 
-	optional_extra const
+	optional_extra
 	extra() const;
 
-	Wrapped const
+	Wrapped
 	value() const;
 private:
 	Wrapped const base_;

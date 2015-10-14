@@ -28,7 +28,7 @@ public:
 	sanguis::client::draw2d::entities::hover::optional_name const &
 	name() const;
 
-	sanguis::client::optional_health_pair const
+	sanguis::client::optional_health_pair
 	health() const;
 private:
 	sanguis::client::draw2d::entities::hover::optional_name name_;

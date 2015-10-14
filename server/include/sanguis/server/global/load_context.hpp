@@ -33,13 +33,13 @@ public:
 	~load_context()
 	override;
 private:
-	sanguis::server::radius const
+	sanguis::server::radius
 	model_size(
 		sanguis::load::model::path const &
 	) const
 	override;
 
-	sanguis::entity_id const
+	sanguis::entity_id
 	next_id()
 	override;
 

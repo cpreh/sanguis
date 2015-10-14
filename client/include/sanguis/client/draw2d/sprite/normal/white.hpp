@@ -15,7 +15,7 @@ namespace sprite
 namespace normal
 {
 
-sanguis::client::draw2d::sprite::normal::color const
+sanguis::client::draw2d::sprite::normal::color
 white();
 
 }

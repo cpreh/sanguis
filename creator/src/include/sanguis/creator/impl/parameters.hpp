@@ -30,10 +30,10 @@ public:
 	sanguis::creator::impl::random::generator &
 	randgen() const;
 
-	sanguis::creator::spawn_boss const
+	sanguis::creator::spawn_boss
 	spawn_boss() const;
 
-	sanguis::creator::opening_count_array const
+	sanguis::creator::opening_count_array const &
 	opening_count_array() const;
 private:
 	sanguis::creator::impl::random::generator &randgen_;

@@ -18,7 +18,7 @@ namespace libmergeimage
 namespace impl
 {
 
-sanguis::tools::libmergeimage::impl::cell_size const
+sanguis::tools::libmergeimage::impl::cell_size
 calc_cell_size(
 	sge::image2d::system &,
 	boost::filesystem::path const &,

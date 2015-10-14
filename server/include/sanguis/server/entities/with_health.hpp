@@ -54,11 +54,11 @@ public:
 	sanguis::server::entities::property::always_max &
 	regeneration();
 
-	sanguis::server::health const
+	sanguis::server::health
 	current_health() const
 	override;
 
-	sanguis::server::health const
+	sanguis::server::health
 	max_health() const
 	override;
 

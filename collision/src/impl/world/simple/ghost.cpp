@@ -68,14 +68,14 @@ sanguis::collision::impl::world::simple::ghost::center(
 		_center;
 }
 
-sanguis::collision::center const
+sanguis::collision::center
 sanguis::collision::impl::world::simple::ghost::center() const
 {
 	return
 		center_;
 }
 
-sanguis::collision::radius const
+sanguis::collision::radius
 sanguis::collision::impl::world::simple::ghost::radius() const
 {
 	return

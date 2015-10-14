@@ -4,7 +4,7 @@
 #include <sanguis/server/world/center_to_grid_pos.hpp>
 
 
-sanguis::creator::pos const
+sanguis::creator::pos
 sanguis::server::world::center_to_grid_pos(
 	sanguis::server::center const _center
 )

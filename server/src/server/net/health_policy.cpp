@@ -7,7 +7,7 @@
 #include <fcppt/math/diff.hpp>
 
 
-sanguis::duration const
+sanguis::duration
 sanguis::server::net::health_policy::start_duration()
 {
 	return
@@ -16,7 +16,7 @@ sanguis::server::net::health_policy::start_duration()
 		);
 }
 
-sanguis::duration const
+sanguis::duration
 sanguis::server::net::health_policy::difference(
 	sanguis::server::health const _health1,
 	sanguis::server::health const _health2

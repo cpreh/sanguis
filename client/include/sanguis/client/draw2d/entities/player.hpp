@@ -65,7 +65,7 @@ protected:
 	update()
 	override;
 
-	sanguis::client::draw2d::sprite::dim const
+	sanguis::client::draw2d::sprite::dim
 	bounding_dim() const;
 
 	using sanguis::client::draw2d::entities::container::orientation;

@@ -427,21 +427,21 @@ sanguis::server::entities::player::perk_tree() const
 		perk_tree_;
 }
 
-sanguis::server::skill_points const
+sanguis::server::skill_points
 sanguis::server::entities::player::skill_points() const
 {
 	return
 		skill_points_;
 }
 
-sanguis::server::player_id const
+sanguis::server::player_id
 sanguis::server::entities::player::player_id() const
 {
 	return
 		player_id_;
 }
 
-sanguis::server::level const
+sanguis::server::level
 sanguis::server::entities::player::level() const
 {
 	return

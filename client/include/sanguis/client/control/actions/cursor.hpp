@@ -22,7 +22,7 @@ public:
 		sanguis::client::control::optional_cursor_position const &
 	);
 
-	sanguis::client::control::optional_cursor_position const
+	sanguis::client::control::optional_cursor_position
 	position() const;
 private:
 	sanguis::client::control::optional_cursor_position position_;

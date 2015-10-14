@@ -33,7 +33,7 @@ public:
 	);
 
 	SANGUIS_CREATOR_SYMBOL
-	sanguis::creator::seed const
+	sanguis::creator::seed
 	seed() const;
 
 	SANGUIS_CREATOR_SYMBOL
@@ -41,7 +41,7 @@ public:
 	name() const;
 
 	SANGUIS_CREATOR_SYMBOL
-	sanguis::creator::spawn_boss const
+	sanguis::creator::spawn_boss
 	spawn_boss() const;
 
 	SANGUIS_CREATOR_SYMBOL

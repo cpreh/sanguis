@@ -35,7 +35,7 @@ public:
 		sge::renderer::context::ffp &
 	);
 
-	sanguis::client::optional_cursor_area const
+	sanguis::client::optional_cursor_area
 	area() const;
 private:
 	sge::texture::part const &texture_;

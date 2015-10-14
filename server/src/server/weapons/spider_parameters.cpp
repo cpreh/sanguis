@@ -28,28 +28,28 @@ sanguis::server::weapons::spider_parameters::spider_parameters(
 {
 }
 
-sanguis::server::weapons::attributes::health const
+sanguis::server::weapons::attributes::health
 sanguis::server::weapons::spider_parameters::health() const
 {
 	return
 		health_;
 }
 
-sanguis::server::weapons::backswing_time const
+sanguis::server::weapons::backswing_time
 sanguis::server::weapons::spider_parameters::backswing_time() const
 {
 	return
 		backswing_time_;
 }
 
-sanguis::server::weapons::cast_point const
+sanguis::server::weapons::cast_point
 sanguis::server::weapons::spider_parameters::cast_point() const
 {
 	return
 		cast_point_;
 }
 
-sanguis::server::weapons::range const
+sanguis::server::weapons::range
 sanguis::server::weapons::spider_parameters::range() const
 {
 	return

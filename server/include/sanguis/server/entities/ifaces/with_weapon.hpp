@@ -43,7 +43,7 @@ public:
 	) = 0;
 
 	virtual
-	sanguis::server::damage::unit const
+	sanguis::server::damage::unit
 	extra_damage_value(
 		sanguis::server::damage::type
 	) const

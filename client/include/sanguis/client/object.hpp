@@ -50,7 +50,7 @@ public:
 	~object()
 	override;
 private:
-	awl::main::exit_code const
+	awl::main::exit_code
 	run()
 	override;
 
@@ -65,7 +65,7 @@ private:
 		alda::net::port
 	);
 
-	awl::main::exit_code const
+	awl::main::exit_code
 	quit_server();
 
 	// declare the config stuff first, so they are destroyed last

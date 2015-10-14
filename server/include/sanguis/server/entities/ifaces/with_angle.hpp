@@ -23,7 +23,7 @@ protected:
 	with_angle();
 public:
 	virtual
-	sanguis::server::angle const
+	sanguis::server::angle
 	angle() const = 0;
 
 	virtual

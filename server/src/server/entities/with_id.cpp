@@ -20,7 +20,7 @@ sanguis::server::entities::with_id::~with_id()
 {
 }
 
-sanguis::entity_id const
+sanguis::entity_id
 sanguis::server::entities::with_id::id() const
 {
 	return

@@ -7,7 +7,7 @@
 #include <fcppt/text.hpp>
 
 
-sanguis::optional_weapon_type const
+sanguis::optional_weapon_type
 sanguis::client::load::hud::weapon_type(
 	fcppt::string const &_name
 )

@@ -10,7 +10,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::duration const
+sanguis::duration
 sanguis::client::load::model::make_delay(
 	sanguis::model::animation const &_animation,
 	sanguis::model::optional_animation_delay const &_header_delay

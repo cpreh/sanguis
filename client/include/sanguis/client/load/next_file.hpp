@@ -13,7 +13,7 @@ namespace client
 namespace load
 {
 
-boost::filesystem::directory_iterator const
+boost::filesystem::directory_iterator
 next_file(
 	boost::filesystem::directory_iterator
 );

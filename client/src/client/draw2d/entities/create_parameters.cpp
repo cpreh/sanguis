@@ -36,7 +36,7 @@ sanguis::client::draw2d::entities::create_parameters::load_parameters() const
 		load_parameters_;
 }
 
-sanguis::creator::optional_background_tile const
+sanguis::creator::optional_background_tile
 sanguis::client::draw2d::entities::create_parameters::background_tile() const
 {
 	return

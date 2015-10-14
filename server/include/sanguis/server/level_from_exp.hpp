@@ -10,7 +10,7 @@ namespace sanguis
 namespace server
 {
 
-sanguis::server::level const
+sanguis::server::level
 level_from_exp(
 	sanguis::server::exp
 );

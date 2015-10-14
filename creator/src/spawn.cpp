@@ -27,7 +27,7 @@ sanguis::creator::spawn::spawn(
 {
 }
 
-sanguis::creator::spawn_pos const
+sanguis::creator::spawn_pos
 sanguis::creator::spawn::pos() const
 {
 	return

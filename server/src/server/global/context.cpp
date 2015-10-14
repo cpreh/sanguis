@@ -523,7 +523,7 @@ sanguis::server::global::context::has_player(
 		1u;
 }
 
-sanguis::entity_id const
+sanguis::entity_id
 sanguis::server::global::context::next_id()
 {
 	return
@@ -638,7 +638,7 @@ sanguis::server::global::context::player_exn(
 		);
 }
 
-sanguis::server::entities::optional_player_ref const
+sanguis::server::entities::optional_player_ref
 sanguis::server::global::context::player_opt(
 	sanguis::server::player_id const _player_id
 )

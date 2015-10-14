@@ -17,7 +17,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::collision::impl::optional_intersection const
+sanguis::collision::impl::optional_intersection
 sanguis::collision::impl::rect_line_intersection(
 	sanguis::collision::impl::rect const _rect,
 	sanguis::collision::impl::line_segment const _line

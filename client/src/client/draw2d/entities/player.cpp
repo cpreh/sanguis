@@ -217,7 +217,7 @@ sanguis::client::draw2d::entities::player::update()
 	);
 }
 
-sanguis::client::draw2d::sprite::dim const
+sanguis::client::draw2d::sprite::dim
 sanguis::client::draw2d::entities::player::bounding_dim() const
 {
 	return

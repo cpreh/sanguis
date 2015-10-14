@@ -12,7 +12,7 @@ sanguis::collision::result::result(
 {
 }
 
-sanguis::collision::speed const
+sanguis::collision::speed
 sanguis::collision::result::speed() const
 {
 	return

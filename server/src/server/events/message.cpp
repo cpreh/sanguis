@@ -35,7 +35,7 @@ sanguis::server::events::message::get() const
 		message_;
 }
 
-sanguis::server::player_id const
+sanguis::server::player_id
 sanguis::server::events::message::id() const
 {
 	return

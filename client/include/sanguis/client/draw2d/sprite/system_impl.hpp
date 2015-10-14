@@ -61,7 +61,7 @@ typename
 sanguis::client::draw2d::sprite::system<
 	Choices,
 	Category
->::connection_ref const
+>::connection_ref
 sanguis::client::draw2d::sprite::system<
 	Choices,
 	Category

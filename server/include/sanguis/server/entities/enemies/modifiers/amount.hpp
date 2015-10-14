@@ -15,7 +15,7 @@ namespace enemies
 namespace modifiers
 {
 
-sanguis::server::random::amount const
+sanguis::server::random::amount
 amount();
 
 }

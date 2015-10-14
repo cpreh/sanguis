@@ -39,7 +39,7 @@ public:
 	sanguis::random_generator &
 	random_generator() const;
 
-	sanguis::server::entities::enemies::difficulty const
+	sanguis::server::entities::enemies::difficulty
 	difficulty() const;
 private:
 	sanguis::diff_clock const &diff_clock_;

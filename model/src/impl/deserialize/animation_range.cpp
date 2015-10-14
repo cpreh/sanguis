@@ -11,7 +11,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::model::animation_range const
+sanguis::model::animation_range
 sanguis::model::impl::deserialize::animation_range(
 	sge::parse::json::object const &_object
 )

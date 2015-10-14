@@ -14,7 +14,7 @@ namespace entities
 namespace property
 {
 
-sanguis::server::entities::property::initial const
+sanguis::server::entities::property::initial
 initial_max(
 	sanguis::server::entities::property::value
 );

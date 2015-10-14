@@ -12,8 +12,9 @@ sanguis::client::control::actions::cursor::cursor(
 {
 }
 
-sanguis::client::control::optional_cursor_position const
+sanguis::client::control::optional_cursor_position
 sanguis::client::control::actions::cursor::position() const
 {
-	return position_;
+	return
+		position_;
 }

@@ -90,21 +90,21 @@ public:
 		sanguis::duration const &
 	);
 
-	sanguis::server::entities::optional_base_ref const
+	sanguis::server::entities::optional_base_ref
 	insert(
 		sanguis::server::entities::simple_unique_ptr &&,
 		sanguis::server::entities::insert_parameters const &
 	)
 	override;
 
-	sanguis::server::entities::optional_base_ref const
+	sanguis::server::entities::optional_base_ref
 	insert(
 		sanguis::server::entities::with_id_unique_ptr &&,
 		sanguis::server::entities::insert_parameters const &
 	)
 	override;
 
-	sanguis::server::entities::optional_base_ref const
+	sanguis::server::entities::optional_base_ref
 	insert(
 		sanguis::server::world::insert_with_id_pair &&
 	);
@@ -114,7 +114,7 @@ public:
 		sanguis::server::world::insert_with_id_pair_container &&
 	);
 
-	sanguis::server::entities::optional_base_ref const
+	sanguis::server::entities::optional_base_ref
 	insert(
 		sanguis::server::world::insert_simple_pair &&
 	);
@@ -125,7 +125,7 @@ public:
 	sanguis::creator::opening_container_array const &
 	openings() const;
 
-	sanguis::world_id const
+	sanguis::world_id
 	world_id() const;
 private:
 	void
@@ -139,7 +139,7 @@ private:
 	>
 	fcppt::optional<
 		Entity &
-	> const
+	>
 	insert_base(
 		std::vector<
 			fcppt::unique_ptr<
@@ -288,7 +288,7 @@ public:
 	remove_portal_blocker()
 	override;
 
-	sanguis::server::world::difficulty const
+	sanguis::server::world::difficulty
 	difficulty() const
 	override;
 

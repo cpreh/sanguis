@@ -61,22 +61,22 @@ public:
 	sanguis::client::draw2d::entities::model::decay_option
 	decay_option() const;
 
-	sanguis::optional_primary_weapon_type const
+	sanguis::optional_primary_weapon_type
 	primary_weapon_type() const;
 
 	sanguis::weapon_status
 	weapon_status() const;
 
-	sanguis::client::draw2d::speed const
+	sanguis::client::draw2d::speed
 	speed() const;
 
-	sanguis::client::draw2d::sprite::center const
+	sanguis::client::draw2d::sprite::center
 	center() const;
 
 	sanguis::client::draw2d::sprite::rotation
 	rotation() const;
 
-	sanguis::client::draw2d::sprite::normal::color const
+	sanguis::client::draw2d::sprite::normal::color
 	color() const;
 private:
 	sanguis::client::draw2d::entities::load_parameters const &load_parameters_;

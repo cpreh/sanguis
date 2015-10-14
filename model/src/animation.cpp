@@ -49,14 +49,14 @@ sanguis::model::animation::~animation()
 {
 }
 
-sanguis::model::animation_range const
+sanguis::model::animation_range
 sanguis::model::animation::animation_range() const
 {
 	return
 		animation_range_;
 }
 
-sanguis::model::optional_animation_delay const
+sanguis::model::optional_animation_delay
 sanguis::model::animation::animation_delay() const
 {
 	return
@@ -72,7 +72,7 @@ sanguis::model::animation::animation_delay(
 		_animation_delay;
 }
 
-sanguis::model::optional_animation_sound const
+sanguis::model::optional_animation_sound
 sanguis::model::animation::animation_sound() const
 {
 	return

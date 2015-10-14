@@ -14,7 +14,7 @@ namespace weapons
 namespace modifiers
 {
 
-sanguis::server::random::amount const
+sanguis::server::random::amount
 random_amount(
 	sanguis::random_generator &,
 	sanguis::server::random::amount

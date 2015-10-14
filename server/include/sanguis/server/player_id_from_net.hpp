@@ -10,7 +10,7 @@ namespace sanguis
 namespace server
 {
 
-sanguis::server::player_id const
+sanguis::server::player_id
 player_id_from_net(
 	alda::net::id
 );

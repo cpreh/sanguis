@@ -28,12 +28,12 @@ public:
 		sanguis::server::damage::type
 	);
 
-	sanguis::server::damage::meta const
+	sanguis::server::damage::meta
 	operator=(
 		sanguis::server::damage::unit
 	) const;
 
-	sanguis::server::damage::armor_meta const
+	sanguis::server::damage::armor_meta
 	operator=(
 		sanguis::server::damage::armor_unit
 	) const;

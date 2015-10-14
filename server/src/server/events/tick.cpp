@@ -24,7 +24,7 @@ sanguis::server::events::tick::delta() const
 		delta_;
 }
 
-sanguis::slowdown const
+sanguis::slowdown
 sanguis::server::events::tick::slowdown() const
 {
 	return

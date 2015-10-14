@@ -5,7 +5,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sge::console::gfx::output_line_limit const
+sge::console::gfx::output_line_limit
 sanguis::client::args::history_size(
 	boost::program_options::variables_map const &_variables_map
 )

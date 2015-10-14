@@ -45,7 +45,7 @@ struct make_upper_bound<
 	result_type;
 
 	static
-	result_type const
+	result_type
 	execute(
 		T const _value
 	)
@@ -78,7 +78,7 @@ struct make_upper_bound<
 	result_type;
 
 	static
-	result_type const
+	result_type
 	execute(
 		T const _value
 	)

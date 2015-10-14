@@ -31,16 +31,16 @@ public:
 	void
 	choose();
 
-	sanguis::server::perks::tree::required_player_level const
+	sanguis::server::perks::tree::required_player_level
 	required_player_level() const;
 
-	sanguis::server::perks::tree::required_parent_level const
+	sanguis::server::perks::tree::required_parent_level
 	required_parent_level() const;
 
-	sanguis::server::perks::tree::max_level const
+	sanguis::server::perks::tree::max_level
 	max_level() const;
 
-	sanguis::server::level const
+	sanguis::server::level
 	level() const;
 
 	sanguis::perk_type

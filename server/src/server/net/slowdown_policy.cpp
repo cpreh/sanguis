@@ -6,7 +6,7 @@
 #include <fcppt/math/diff.hpp>
 
 
-sanguis::duration const
+sanguis::duration
 sanguis::server::net::slowdown_policy::start_duration()
 {
 	return
@@ -15,7 +15,7 @@ sanguis::server::net::slowdown_policy::start_duration()
 		);
 }
 
-sanguis::duration const
+sanguis::duration
 sanguis::server::net::slowdown_policy::difference(
 	sanguis::slowdown const _slowdown1,
 	sanguis::slowdown const _slowdown2

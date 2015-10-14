@@ -14,7 +14,7 @@ namespace client
 namespace load
 {
 
-boost::filesystem::directory_iterator const
+boost::filesystem::directory_iterator
 first_file(
 	boost::filesystem::path const &
 );

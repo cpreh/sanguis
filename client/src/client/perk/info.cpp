@@ -83,28 +83,28 @@ sanguis::client::perk::info::perk_type() const
 		type_;
 }
 
-sanguis::client::perk::level const
+sanguis::client::perk::level
 sanguis::client::perk::info::level() const
 {
 	return
 		level_;
 }
 
-sanguis::client::perk::required_parent_level const
+sanguis::client::perk::required_parent_level
 sanguis::client::perk::info::required_parent_level() const
 {
 	return
 		required_parent_level_;
 }
 
-sanguis::client::perk::required_player_level const
+sanguis::client::perk::required_player_level
 sanguis::client::perk::info::required_player_level() const
 {
 	return
 		required_player_level_;
 }
 
-sanguis::client::perk::max_level const
+sanguis::client::perk::max_level
 sanguis::client::perk::info::max_level() const
 {
 	return

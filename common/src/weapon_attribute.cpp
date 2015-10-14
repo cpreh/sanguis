@@ -29,14 +29,14 @@ sanguis::weapon_attribute::type() const
 		type_;
 }
 
-sanguis::weapon_attribute_base const
+sanguis::weapon_attribute_base
 sanguis::weapon_attribute::base() const
 {
 	return
 		base_;
 }
 
-sanguis::weapon_attribute_extra const
+sanguis::weapon_attribute_extra
 sanguis::weapon_attribute::extra() const
 {
 	return

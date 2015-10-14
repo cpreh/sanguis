@@ -32,7 +32,7 @@ sanguis::server::ai::behavior::attack_health::~attack_health()
 {
 }
 
-sanguis::server::ai::speed_factor const
+sanguis::server::ai::speed_factor
 sanguis::server::ai::behavior::attack_health::speed_factor() const
 {
 	FCPPT_ASSERT_PRE(

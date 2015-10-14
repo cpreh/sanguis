@@ -32,10 +32,10 @@ public:
 	sanguis::random_generator &
 	random_generator() const;
 
-	sanguis::weapon_type const
+	sanguis::weapon_type
 	weapon_type() const;
 
-	sanguis::server::entities::enemies::difficulty const
+	sanguis::server::entities::enemies::difficulty
 	difficulty() const;
 private:
 	sanguis::random_generator &random_generator_;

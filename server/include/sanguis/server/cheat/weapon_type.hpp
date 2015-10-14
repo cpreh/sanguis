@@ -12,7 +12,7 @@ namespace server
 namespace cheat
 {
 
-sanguis::weapon_type const
+sanguis::weapon_type
 weapon_type(
 	sanguis::cheat_type
 );

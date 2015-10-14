@@ -51,7 +51,7 @@ template<
 sanguis::creator::enable_if_tile<
 	Tile,
 	sanguis::tiles::is_background
-> const
+>
 sanguis::tiles::impl::is_background()
 {
 	return
@@ -69,7 +69,7 @@ template \
 sanguis::creator::enable_if_tile< \
 	tile_type,\
 	sanguis::tiles::is_background\
-> const \
+> \
 sanguis::tiles::impl::is_background<\
 	tile_type\
 >()

@@ -35,7 +35,7 @@ public:
 	sanguis::messages::client::shared_ptr
 	get() const;
 
-	sanguis::server::player_id const
+	sanguis::server::player_id
 	id() const;
 private:
 	sanguis::messages::client::shared_ptr message_;

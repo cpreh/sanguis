@@ -38,11 +38,11 @@ public:
 	dead() const = 0;
 
 	virtual
-	sanguis::client::draw2d::sprite::center const
+	sanguis::client::draw2d::sprite::center
 	center() const = 0;
 
 	virtual
-	sanguis::client::draw2d::radius const
+	sanguis::client::draw2d::radius
 	radius() const = 0;
 
 	virtual

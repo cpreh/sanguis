@@ -33,13 +33,13 @@ public:
 	sanguis::creator::name const &
 	name() const;
 
-	sanguis::creator::seed const
+	sanguis::creator::seed
 	seed() const;
 
-	sanguis::creator::opening_count_array const
+	sanguis::creator::opening_count_array const &
 	opening_count_array() const;
 
-	sanguis::creator::spawn_boss const
+	sanguis::creator::spawn_boss
 	spawn_boss() const;
 private:
 	sanguis::creator::name const name_;

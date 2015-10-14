@@ -17,7 +17,7 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 
 
-sanguis::creator::grid_spiral_range const
+sanguis::creator::grid_spiral_range
 sanguis::collision::impl::make_spiral_range(
 	sanguis::collision::center const _center,
 	sanguis::collision::radius const _radius

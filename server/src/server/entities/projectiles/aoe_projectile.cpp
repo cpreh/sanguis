@@ -56,7 +56,7 @@ sanguis::server::entities::projectiles::aoe_projectile::~aoe_projectile()
 {
 }
 
-sanguis::server::aoe const
+sanguis::server::aoe
 sanguis::server::entities::projectiles::aoe_projectile::aoe() const
 {
 	return

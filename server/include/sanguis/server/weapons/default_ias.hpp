@@ -11,7 +11,7 @@ namespace server
 namespace weapons
 {
 
-sanguis::server::weapons::ias const
+sanguis::server::weapons::ias
 default_ias();
 
 }

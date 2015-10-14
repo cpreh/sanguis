@@ -10,7 +10,7 @@ namespace sanguis
 {
 
 SANGUIS_COMMON_SYMBOL
-sanguis::is_primary_weapon const
+sanguis::is_primary_weapon
 weapon_type_to_is_primary(
 	sanguis::weapon_type const &
 );

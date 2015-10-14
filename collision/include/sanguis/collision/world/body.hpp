@@ -34,7 +34,7 @@ public:
 	) = 0;
 
 	virtual
-	sanguis::collision::center const
+	sanguis::collision::center
 	center() const = 0;
 
 	virtual
@@ -44,15 +44,15 @@ public:
 	) = 0;
 
 	virtual
-	sanguis::collision::speed const
+	sanguis::collision::speed
 	speed() const = 0;
 
 	virtual
-	sanguis::collision::radius const
+	sanguis::collision::radius
 	radius() const = 0;
 
 	virtual
-	sanguis::collision::optional_mass const
+	sanguis::collision::optional_mass
 	mass() const = 0;
 };
 

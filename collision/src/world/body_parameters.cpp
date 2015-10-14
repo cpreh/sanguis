@@ -37,28 +37,28 @@ sanguis::collision::world::body_parameters::body_parameters(
 {
 }
 
-sanguis::collision::center const
+sanguis::collision::center
 sanguis::collision::world::body_parameters::center() const
 {
 	return
 		center_;
 }
 
-sanguis::collision::speed const
+sanguis::collision::speed
 sanguis::collision::world::body_parameters::speed() const
 {
 	return
 		speed_;
 }
 
-sanguis::collision::radius const
+sanguis::collision::radius
 sanguis::collision::world::body_parameters::radius() const
 {
 	return
 		radius_;
 }
 
-sanguis::collision::optional_mass const
+sanguis::collision::optional_mass
 sanguis::collision::world::body_parameters::mass() const
 {
 	return

@@ -68,7 +68,7 @@ private:
 	override;
 
 	virtual
-	boost::logic::tribool const
+	boost::logic::tribool
 	can_collide_with_body(
 		sanguis::server::entities::with_body const &
 	) const

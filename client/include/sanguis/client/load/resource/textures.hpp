@@ -42,7 +42,7 @@ public:
 		boost::filesystem::path const &
 	) const;
 
-	sge::texture::const_optional_part_ref const
+	sge::texture::const_optional_part_ref
 	load_opt(
 		boost::filesystem::path const &
 	) const;

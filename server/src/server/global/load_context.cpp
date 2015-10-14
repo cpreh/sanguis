@@ -29,7 +29,7 @@ sanguis::server::global::load_context::~load_context()
 {
 }
 
-sanguis::server::radius const
+sanguis::server::radius
 sanguis::server::global::load_context::model_size(
 	sanguis::load::model::path const &_model_path
 ) const
@@ -40,7 +40,7 @@ sanguis::server::global::load_context::model_size(
 		);
 }
 
-sanguis::entity_id const
+sanguis::entity_id
 sanguis::server::global::load_context::next_id()
 {
 	return

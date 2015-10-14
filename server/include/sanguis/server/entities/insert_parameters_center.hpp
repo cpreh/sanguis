@@ -12,7 +12,7 @@ namespace server
 namespace entities
 {
 
-sanguis::server::entities::insert_parameters const
+sanguis::server::entities::insert_parameters
 insert_parameters_center(
 	sanguis::server::center
 );

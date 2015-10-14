@@ -16,11 +16,11 @@ namespace net
 struct health_policy
 {
 	static
-	sanguis::duration const
+	sanguis::duration
 	start_duration();
 
 	static
-	sanguis::duration const
+	sanguis::duration
 	difference(
 		sanguis::server::health,
 		sanguis::server::health

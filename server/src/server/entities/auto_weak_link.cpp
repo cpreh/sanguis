@@ -77,7 +77,7 @@ sanguis::server::entities::auto_weak_link::unlink()
 		optional_with_links_ref();
 }
 
-sanguis::server::entities::auto_weak_link::optional_with_links_ref const
+sanguis::server::entities::auto_weak_link::optional_with_links_ref
 sanguis::server::entities::auto_weak_link::get() const
 {
 	return

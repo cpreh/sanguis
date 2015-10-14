@@ -72,7 +72,7 @@ sanguis::client::load::resource::textures::load(
 		);
 }
 
-sge::texture::const_optional_part_ref const
+sge::texture::const_optional_part_ref
 sanguis::client::load::resource::textures::load_opt(
 	boost::filesystem::path const &_path
 ) const

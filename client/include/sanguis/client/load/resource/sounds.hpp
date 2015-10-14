@@ -37,12 +37,12 @@ public:
 
 	~sounds();
 
-	sanguis::client::load::resource::optional_sound const
+	sanguis::client::load::resource::optional_sound
 	load(
 		fcppt::string const &
 	) const;
 
-	sanguis::client::load::resource::optional_sound const
+	sanguis::client::load::resource::optional_sound
 	load_path(
 		boost::filesystem::path const &
 	) const;

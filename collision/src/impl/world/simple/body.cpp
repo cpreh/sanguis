@@ -170,7 +170,7 @@ sanguis::collision::impl::world::simple::body::push(
 	this->speed_changed();
 }
 
-sanguis::collision::center const
+sanguis::collision::center
 sanguis::collision::impl::world::simple::body::center() const
 {
 	return
@@ -186,21 +186,21 @@ sanguis::collision::impl::world::simple::body::speed(
 		_speed;
 }
 
-sanguis::collision::speed const
+sanguis::collision::speed
 sanguis::collision::impl::world::simple::body::speed() const
 {
 	return
 		speed_;
 }
 
-sanguis::collision::radius const
+sanguis::collision::radius
 sanguis::collision::impl::world::simple::body::radius() const
 {
 	return
 		radius_;
 }
 
-sanguis::collision::optional_mass const
+sanguis::collision::optional_mass
 sanguis::collision::impl::world::simple::body::mass() const
 {
 	return

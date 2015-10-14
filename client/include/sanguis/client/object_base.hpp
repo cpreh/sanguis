@@ -25,7 +25,7 @@ public:
 	~object_base() = 0;
 
 	virtual
-	awl::main::exit_code const
+	awl::main::exit_code
 	run() = 0;
 };
 

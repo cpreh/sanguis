@@ -31,10 +31,10 @@ public:
 		sanguis::collision::world::ghost_base &
 	);
 
-	sanguis::collision::center const
+	sanguis::collision::center
 	center() const;
 
-	sanguis::collision::radius const
+	sanguis::collision::radius
 	radius() const;
 
 	sanguis::collision::world::ghost_group

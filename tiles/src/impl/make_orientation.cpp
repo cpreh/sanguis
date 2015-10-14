@@ -14,7 +14,7 @@ template<
 sanguis::creator::enable_if_tile<
 	Tile,
 	sanguis::tiles::orientation
-> const
+>
 sanguis::tiles::impl::make_orientation(
 	sanguis::tiles::pair<
 		Tile
@@ -72,7 +72,7 @@ template \
 sanguis::creator::enable_if_tile< \
 	tile_type, \
 	sanguis::tiles::orientation \
-> const \
+> \
 sanguis::tiles::impl::make_orientation(\
 	sanguis::tiles::pair<\
 		tile_type\

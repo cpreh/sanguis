@@ -7,7 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sge::renderer::pixel_format::optional_multi_samples const
+sge::renderer::pixel_format::optional_multi_samples
 sanguis::client::args::multi_sampling(
 	boost::program_options::variables_map const &_vm
 )

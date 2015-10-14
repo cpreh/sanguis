@@ -14,7 +14,7 @@ namespace client
 namespace args
 {
 
-sge::console::gfx::output_line_limit const
+sge::console::gfx::output_line_limit
 history_size(
 	boost::program_options::variables_map const &
 );

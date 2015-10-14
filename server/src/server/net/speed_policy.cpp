@@ -5,7 +5,7 @@
 #include <fcppt/math/vector/distance.hpp>
 
 
-sanguis::duration const
+sanguis::duration
 sanguis::server::net::speed_policy::start_duration()
 {
 	return
@@ -14,7 +14,7 @@ sanguis::server::net::speed_policy::start_duration()
 		);
 }
 
-sanguis::duration const
+sanguis::duration
 sanguis::server::net::speed_policy::difference(
 	sanguis::server::speed const _speed1,
 	sanguis::server::speed const _speed2

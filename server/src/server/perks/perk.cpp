@@ -32,7 +32,8 @@ sanguis::server::perks::perk::raise_level(
 sanguis::perk_type
 sanguis::server::perks::perk::type() const
 {
-	return type_;
+	return
+		type_;
 }
 
 sanguis::server::perks::perk::~perk()
@@ -52,8 +53,9 @@ sanguis::server::perks::perk::perk(
 {
 }
 
-sanguis::server::level const
+sanguis::server::level
 sanguis::server::perks::perk::level() const
 {
-	return level_;
+	return
+		level_;
 }

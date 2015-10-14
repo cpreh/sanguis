@@ -69,12 +69,12 @@ public:
 	FCPPT_PP_WARN_UNUSED_RESULT;
 
 	// environment query function
-	sanguis::server::environment::optional_object_ref const
+	sanguis::server::environment::optional_object_ref
 	environment() const;
 
 	// position
 	virtual
-	sanguis::server::center const
+	sanguis::server::center
 	center() const = 0;
 
 

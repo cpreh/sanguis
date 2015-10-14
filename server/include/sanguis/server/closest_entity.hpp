@@ -21,7 +21,7 @@ template<
 fcppt::optional<
 	typename
 	Container::value_type::type &
-> const
+>
 closest_entity(
 	sanguis::server::entities::base const &_ref,
 	Container const &_entities,

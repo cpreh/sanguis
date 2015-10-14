@@ -27,7 +27,7 @@ sanguis::tiles::cell::cell(
 {
 }
 
-sanguis::tiles::pos const
+sanguis::tiles::pos
 sanguis::tiles::cell::pos() const
 {
 	return
@@ -41,14 +41,14 @@ sanguis::tiles::cell::content() const
 		content_;
 }
 
-sanguis::tiles::path_reference const
+sanguis::tiles::path_reference
 sanguis::tiles::cell::path() const
 {
 	return
 		path_;
 }
 
-sanguis::tiles::is_background const
+sanguis::tiles::is_background
 sanguis::tiles::cell::is_background() const
 {
 	return

@@ -16,7 +16,7 @@ namespace ai
 namespace pathing
 {
 
-sanguis::server::ai::pathing::optional_target const
+sanguis::server::ai::pathing::optional_target
 update_trail(
 	sanguis::server::ai::pathing::trail &,
 	sanguis::creator::grid const &,

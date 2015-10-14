@@ -12,7 +12,7 @@
 #include <fcppt/math/vector/to_signed.hpp>
 
 
-sanguis::client::draw2d::translation const
+sanguis::client::draw2d::translation
 sanguis::client::draw2d::scene::translation(
 	sanguis::client::draw2d::player_center const _player_center,
 	sge::renderer::screen_size const _screen_size

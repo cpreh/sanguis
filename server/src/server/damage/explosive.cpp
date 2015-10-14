@@ -6,7 +6,7 @@
 #include <sanguis/server/damage/unit.hpp>
 
 
-sanguis::server::damage::array const
+sanguis::server::damage::array
 sanguis::server::damage::explosive()
 {
 	return

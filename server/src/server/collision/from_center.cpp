@@ -5,7 +5,7 @@
 #include <fcppt/math/vector/map.hpp>
 
 
-sanguis::server::center const
+sanguis::server::center
 sanguis::server::collision::from_center(
 	sanguis::collision::center const _center
 )

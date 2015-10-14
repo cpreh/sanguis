@@ -33,19 +33,19 @@ public:
 		sanguis::server::weapons::range
 	);
 
-	sanguis::server::weapons::backswing_time const
+	sanguis::server::weapons::backswing_time
 	backswing_time() const;
 
-	sanguis::server::weapons::attributes::damage const
+	sanguis::server::weapons::attributes::damage
 	damage() const;
 
-	sanguis::server::weapons::attributes::aoe const
+	sanguis::server::weapons::attributes::aoe
 	aoe() const;
 
-	sanguis::server::weapons::cast_point const
+	sanguis::server::weapons::cast_point
 	cast_point() const;
 
-	sanguis::server::weapons::range const
+	sanguis::server::weapons::range
 	range() const;
 
 	void

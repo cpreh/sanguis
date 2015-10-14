@@ -33,19 +33,19 @@ public:
 		sanguis::creator::opening_container_array const &
 	);
 
-	sanguis::world_id const
+	sanguis::world_id
 	world_id() const;
 
 	sanguis::world_name const &
 	world_name() const;
 
-	sanguis::creator::seed const
+	sanguis::creator::seed
 	seed() const;
 
 	sanguis::creator::name const &
 	generator_name() const;
 
-	sanguis::creator::spawn_boss const
+	sanguis::creator::spawn_boss
 	spawn_boss() const;
 
 	sanguis::creator::opening_container_array const &

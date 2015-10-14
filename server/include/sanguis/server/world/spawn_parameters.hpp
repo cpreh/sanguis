@@ -12,7 +12,7 @@ namespace server
 namespace world
 {
 
-sanguis::server::entities::insert_parameters const
+sanguis::server::entities::insert_parameters
 spawn_parameters(
 	sanguis::creator::spawn const &
 );

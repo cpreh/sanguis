@@ -19,7 +19,7 @@ sanguis::server::damage::wrapper::wrapper(
 {
 }
 
-sanguis::server::damage::meta const
+sanguis::server::damage::meta
 sanguis::server::damage::wrapper::operator=(
 	sanguis::server::damage::unit const _unit
 ) const
@@ -34,7 +34,7 @@ FCPPT_PP_DISABLE_GCC_WARNING(-Weffc++)
 FCPPT_PP_POP_WARNING
 }
 
-sanguis::server::damage::armor_meta const
+sanguis::server::damage::armor_meta
 sanguis::server::damage::wrapper::operator=(
 	sanguis::server::damage::armor_unit const _unit
 ) const

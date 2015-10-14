@@ -28,7 +28,7 @@
 #include <fcppt/math/vector/map.hpp>
 
 
-sanguis::collision::impl::optional_speed const
+sanguis::collision::impl::optional_speed
 sanguis::collision::impl::test_tile(
 	sanguis::collision::center const _center,
 	sanguis::collision::radius const _radius,

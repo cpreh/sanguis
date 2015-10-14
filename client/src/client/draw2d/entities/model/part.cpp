@@ -205,7 +205,7 @@ sanguis::client::draw2d::entities::model::part::ended() const
 		animation_.ended();
 }
 
-sge::texture::const_part_ref const
+sge::texture::const_part_ref
 sanguis::client::draw2d::entities::model::part::texture()
 {
 	return

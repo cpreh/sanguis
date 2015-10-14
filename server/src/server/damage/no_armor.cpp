@@ -4,7 +4,7 @@
 #include <fcppt/algorithm/array_init.hpp>
 
 
-sanguis::server::damage::armor_array const
+sanguis::server::damage::armor_array
 sanguis::server::damage::no_armor()
 {
 	return

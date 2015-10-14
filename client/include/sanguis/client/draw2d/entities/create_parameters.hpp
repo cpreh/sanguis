@@ -35,7 +35,7 @@ public:
 	sanguis::client::draw2d::entities::load_parameters const &
 	load_parameters() const;
 
-	sanguis::creator::optional_background_tile const
+	sanguis::creator::optional_background_tile
 	background_tile() const;
 private:
 	sanguis::client::draw2d::insert_own_callback const insert_own_callback_;

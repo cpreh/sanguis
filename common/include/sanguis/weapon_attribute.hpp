@@ -26,11 +26,11 @@ public:
 	type() const;
 
 	SANGUIS_COMMON_SYMBOL
-	sanguis::weapon_attribute_base const
+	sanguis::weapon_attribute_base
 	base() const;
 
 	SANGUIS_COMMON_SYMBOL
-	sanguis::weapon_attribute_extra const
+	sanguis::weapon_attribute_extra
 	extra() const;
 private:
 	sanguis::weapon_attribute_type type_;

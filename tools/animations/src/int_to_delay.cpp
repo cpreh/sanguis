@@ -6,7 +6,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::model::optional_animation_delay const
+sanguis::model::optional_animation_delay
 sanguis::tools::animations::int_to_delay(
 	int const _value
 )

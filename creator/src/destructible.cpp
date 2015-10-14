@@ -17,7 +17,7 @@ sanguis::creator::destructible::destructible(
 {
 }
 
-sanguis::creator::destructible_pos const
+sanguis::creator::destructible_pos
 sanguis::creator::destructible::pos() const
 {
 	return

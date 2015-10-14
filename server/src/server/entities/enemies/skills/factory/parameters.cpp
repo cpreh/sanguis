@@ -36,7 +36,7 @@ sanguis::server::entities::enemies::skills::factory::parameters::random_generato
 		random_generator_;
 }
 
-sanguis::server::entities::enemies::difficulty const
+sanguis::server::entities::enemies::difficulty
 sanguis::server::entities::enemies::skills::factory::parameters::difficulty() const
 {
 	return

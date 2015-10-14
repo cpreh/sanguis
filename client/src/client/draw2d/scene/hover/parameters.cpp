@@ -90,14 +90,14 @@ sanguis::client::draw2d::scene::hover::parameters::player_weapons() const
 		player_weapons_;
 }
 
-sanguis::client::draw2d::sprite::center const
+sanguis::client::draw2d::sprite::center
 sanguis::client::draw2d::scene::hover::parameters::center() const
 {
 	return
 		center_;
 }
 
-sanguis::client::draw2d::radius const
+sanguis::client::draw2d::radius
 sanguis::client::draw2d::scene::hover::parameters::radius() const
 {
 	return

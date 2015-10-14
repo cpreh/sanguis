@@ -24,7 +24,7 @@ sanguis::client::draw2d::entities::hover::name_and_health::name() const
 		name_;
 }
 
-sanguis::client::optional_health_pair const
+sanguis::client::optional_health_pair
 sanguis::client::draw2d::entities::hover::name_and_health::health() const
 {
 	return

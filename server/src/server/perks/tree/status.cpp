@@ -36,38 +36,45 @@ void
 sanguis::server::perks::tree::status::choose()
 {
 	FCPPT_ASSERT_PRE(
-		level_.get() < max_level_.get()
+		level_.get()
+		<
+		max_level_.get()
 	);
 
 	++level_;
 }
 
-sanguis::server::perks::tree::required_player_level const
+sanguis::server::perks::tree::required_player_level
 sanguis::server::perks::tree::status::required_player_level() const
 {
-	return required_player_level_;
+	return
+		required_player_level_;
 }
 
-sanguis::server::perks::tree::required_parent_level const
+sanguis::server::perks::tree::required_parent_level
 sanguis::server::perks::tree::status::required_parent_level() const
 {
-	return required_parent_level_;
+	return
+		required_parent_level_;
 }
 
-sanguis::server::perks::tree::max_level const
+sanguis::server::perks::tree::max_level
 sanguis::server::perks::tree::status::max_level() const
 {
-	return max_level_;
+	return
+		max_level_;
 }
 
-sanguis::server::level const
+sanguis::server::level
 sanguis::server::perks::tree::status::level() const
 {
-	return level_;
+	return
+		level_;
 }
 
 sanguis::perk_type
 sanguis::server::perks::tree::status::type() const
 {
-	return type_;
+	return
+		type_;
 }

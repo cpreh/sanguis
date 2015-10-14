@@ -15,7 +15,7 @@ namespace world
 {
 
 SANGUIS_COLLISION_SYMBOL
-sanguis::collision::optional_result_pair const
+sanguis::collision::optional_result_pair
 body_body(
 	sanguis::collision::world::body const &,
 	sanguis::collision::world::body const &,

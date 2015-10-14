@@ -117,7 +117,7 @@ public:
 	sge::renderer::device::ffp &
 	renderer() const;
 
-	sge::renderer::device::index const
+	sge::renderer::device::index
 	renderer_index() const;
 
 	sge::input::focus::object &

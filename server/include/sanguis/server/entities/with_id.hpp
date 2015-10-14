@@ -35,7 +35,7 @@ public:
 	~with_id()
 	override = 0;
 
-	sanguis::entity_id const
+	sanguis::entity_id
 	id() const
 	override;
 

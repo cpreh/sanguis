@@ -85,7 +85,7 @@ sanguis::server::entities::with_health::regeneration()
 		regeneration_;
 }
 
-sanguis::server::health const
+sanguis::server::health
 sanguis::server::entities::with_health::current_health() const
 {
 	return
@@ -94,7 +94,7 @@ sanguis::server::entities::with_health::current_health() const
 		);
 }
 
-sanguis::server::health const
+sanguis::server::health
 sanguis::server::entities::with_health::max_health() const
 {
 	return

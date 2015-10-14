@@ -2,7 +2,7 @@
 #include <sanguis/server/weapons/ias.hpp>
 
 
-sanguis::server::weapons::ias const
+sanguis::server::weapons::ias
 sanguis::server::weapons::default_ias()
 {
 	return

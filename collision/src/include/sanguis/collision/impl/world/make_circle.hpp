@@ -19,7 +19,7 @@ template<
 	typename Type
 >
 inline
-sanguis::collision::impl::circle const
+sanguis::collision::impl::circle
 make_circle(
 	Type const &_object
 )

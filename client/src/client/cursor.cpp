@@ -76,7 +76,7 @@ sanguis::client::cursor::draw(
 	);
 }
 
-sanguis::client::optional_cursor_area const
+sanguis::client::optional_cursor_area
 sanguis::client::cursor::area() const
 {
 	return

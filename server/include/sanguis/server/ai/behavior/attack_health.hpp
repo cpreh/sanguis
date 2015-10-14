@@ -34,7 +34,7 @@ public:
 	~attack_health()
 	override;
 private:
-	sanguis::server::ai::speed_factor const
+	sanguis::server::ai::speed_factor
 	speed_factor() const
 	override;
 

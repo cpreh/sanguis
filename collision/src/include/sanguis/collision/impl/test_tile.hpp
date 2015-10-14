@@ -17,7 +17,7 @@ namespace collision
 namespace impl
 {
 
-sanguis::collision::impl::optional_speed const
+sanguis::collision::impl::optional_speed
 test_tile(
 	sanguis::collision::center,
 	sanguis::collision::radius,

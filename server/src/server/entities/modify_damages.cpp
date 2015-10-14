@@ -9,7 +9,7 @@
 #include <fcppt/algorithm/enum_array_fold_static.hpp>
 
 
-sanguis::server::damage::modified_array const
+sanguis::server::damage::modified_array
 sanguis::server::entities::modify_damages(
 	sanguis::server::entities::ifaces::with_weapon const &_entity,
 	sanguis::server::damage::array const &_damages

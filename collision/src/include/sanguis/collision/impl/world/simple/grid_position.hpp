@@ -16,7 +16,7 @@ namespace world
 namespace simple
 {
 
-sanguis::creator::pos const
+sanguis::creator::pos
 grid_position(
 	sanguis::collision::center
 );

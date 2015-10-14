@@ -41,7 +41,7 @@ public:
 	~merge_result();
 
 	SANGUIS_TOOLS_LIBMERGEIMAGE_SYMBOL
-	sanguis::model::cell_size const
+	sanguis::model::cell_size
 	cell_size() const;
 
 	SANGUIS_TOOLS_LIBMERGEIMAGE_SYMBOL

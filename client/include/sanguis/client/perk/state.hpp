@@ -61,13 +61,13 @@ public:
 	sanguis::client::perk::tree const &
 	perks() const;
 
-	sanguis::client::player_level const
+	sanguis::client::player_level
 	player_level() const;
 
-	sanguis::client::perk::remaining_levels const
+	sanguis::client::perk::remaining_levels
 	remaining_levels() const;
 
-	sanguis::client::perk::level const
+	sanguis::client::perk::level
 	perk_level(
 		sanguis::perk_type
 	) const;

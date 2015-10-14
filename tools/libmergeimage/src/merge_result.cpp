@@ -35,7 +35,7 @@ sanguis::tools::libmergeimage::merge_result::~merge_result()
 {
 }
 
-sanguis::model::cell_size const
+sanguis::model::cell_size
 sanguis::tools::libmergeimage::merge_result::cell_size() const
 {
 	return

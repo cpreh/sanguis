@@ -64,7 +64,7 @@ public:
 	const_iterator
 	end() const;
 
-	sanguis::model::cell_size const
+	sanguis::model::cell_size
 	cell_size() const;
 private:
 	sanguis::client::load::model::part_map const &

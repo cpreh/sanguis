@@ -21,7 +21,7 @@ namespace translate
 template<
 	typename Message
 >
-sanguis::client::health_pair const
+sanguis::client::health_pair
 health_pair(
 	Message const &_message
 )

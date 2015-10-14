@@ -25,7 +25,7 @@ public:
 	);
 
 	SANGUIS_CREATOR_SYMBOL
-	sanguis::creator::spawn_pos const
+	sanguis::creator::spawn_pos
 	pos() const;
 
 	SANGUIS_CREATOR_SYMBOL

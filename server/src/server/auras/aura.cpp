@@ -42,7 +42,7 @@ sanguis::server::auras::aura::aura(
 {
 }
 
-boost::logic::tribool const
+boost::logic::tribool
 sanguis::server::auras::aura::can_collide_with(
 	sanguis::collision::world::body_base const &
 ) const

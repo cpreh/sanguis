@@ -60,7 +60,7 @@ sanguis::client::server::~server()
 {
 }
 
-awl::main::exit_code const
+awl::main::exit_code
 sanguis::client::server::run()
 {
 	server_thread_.join();

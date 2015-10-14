@@ -24,13 +24,13 @@ class base
 		base
 	);
 public:
-	sanguis::server::entities::property::constant const
+	sanguis::server::entities::property::constant
 	constant() const;
 
-	sanguis::server::entities::property::linear const
+	sanguis::server::entities::property::linear
 	linear() const;
 
-	sanguis::server::entities::property::linear_decrease const
+	sanguis::server::entities::property::linear_decrease
 	linear_decrease() const;
 
 	void

@@ -11,7 +11,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::server::level const
+sanguis::server::level
 sanguis::server::level_from_exp(
 	sanguis::server::exp const _exp
 )

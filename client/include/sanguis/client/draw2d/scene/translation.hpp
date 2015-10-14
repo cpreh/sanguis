@@ -15,7 +15,7 @@ namespace draw2d
 namespace scene
 {
 
-sanguis::client::draw2d::translation const
+sanguis::client::draw2d::translation
 translation(
 	sanguis::client::draw2d::player_center,
 	sge::renderer::screen_size

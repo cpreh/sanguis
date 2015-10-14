@@ -34,35 +34,35 @@ sanguis::server::weapons::grenade_parameters::grenade_parameters(
 {
 }
 
-sanguis::server::weapons::backswing_time const
+sanguis::server::weapons::backswing_time
 sanguis::server::weapons::grenade_parameters::backswing_time() const
 {
 	return
 		backswing_time_;
 }
 
-sanguis::server::weapons::attributes::damage const
+sanguis::server::weapons::attributes::damage
 sanguis::server::weapons::grenade_parameters::damage() const
 {
 	return
 		damage_;
 }
 
-sanguis::server::weapons::attributes::aoe const
+sanguis::server::weapons::attributes::aoe
 sanguis::server::weapons::grenade_parameters::aoe() const
 {
 	return
 		aoe_;
 }
 
-sanguis::server::weapons::cast_point const
+sanguis::server::weapons::cast_point
 sanguis::server::weapons::grenade_parameters::cast_point() const
 {
 	return
 		cast_point_;
 }
 
-sanguis::server::weapons::range const
+sanguis::server::weapons::range
 sanguis::server::weapons::grenade_parameters::range() const
 {
 	return

@@ -108,13 +108,13 @@ public:
 	sanguis::server::perks::tree::container const &
 	perk_tree() const;
 
-	sanguis::server::skill_points const
+	sanguis::server::skill_points
 	skill_points() const;
 
-	sanguis::server::player_id const
+	sanguis::server::player_id
 	player_id() const;
 
-	sanguis::server::level const
+	sanguis::server::level
 	level() const;
 
 	sanguis::server::team

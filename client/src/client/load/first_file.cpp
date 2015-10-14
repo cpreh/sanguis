@@ -6,7 +6,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-boost::filesystem::directory_iterator const
+boost::filesystem::directory_iterator
 sanguis::client::load::first_file(
 	boost::filesystem::path const &_path
 )

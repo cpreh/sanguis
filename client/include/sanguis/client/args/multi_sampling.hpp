@@ -14,7 +14,7 @@ namespace client
 namespace args
 {
 
-sge::renderer::pixel_format::optional_multi_samples const
+sge::renderer::pixel_format::optional_multi_samples
 multi_sampling(
 	boost::program_options::variables_map const &
 );

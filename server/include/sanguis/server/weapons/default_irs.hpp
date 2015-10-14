@@ -11,7 +11,7 @@ namespace server
 namespace weapons
 {
 
-sanguis::server::weapons::irs const
+sanguis::server::weapons::irs
 default_irs();
 
 }

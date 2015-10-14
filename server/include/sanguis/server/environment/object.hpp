@@ -50,7 +50,7 @@ protected:
 	object();
 public:
 	virtual
-	sanguis::server::entities::optional_base_ref const
+	sanguis::server::entities::optional_base_ref
 	insert(
 		sanguis::server::entities::with_id_unique_ptr &&,
 		sanguis::server::entities::insert_parameters const &
@@ -59,7 +59,7 @@ public:
 	= 0;
 
 	virtual
-	sanguis::server::entities::optional_base_ref const
+	sanguis::server::entities::optional_base_ref
 	insert(
 		sanguis::server::entities::simple_unique_ptr &&,
 		sanguis::server::entities::insert_parameters const &
@@ -231,7 +231,7 @@ public:
 	) = 0;
 
 	virtual
-	sanguis::server::world::difficulty const
+	sanguis::server::world::difficulty
 	difficulty() const = 0;
 
 	virtual

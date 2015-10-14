@@ -20,7 +20,7 @@ template<
 	typename Message
 >
 inline
-sanguis::client::draw2d::speed const
+sanguis::client::draw2d::speed
 speed(
 	Message const &_message
 )

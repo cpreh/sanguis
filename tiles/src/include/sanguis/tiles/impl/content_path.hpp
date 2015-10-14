@@ -24,7 +24,7 @@ public:
 	sanguis::tiles::content const &
 	content() const;
 
-	sanguis::tiles::path_reference const
+	sanguis::tiles::path_reference
 	path() const;
 private:
 	sanguis::tiles::content content_;

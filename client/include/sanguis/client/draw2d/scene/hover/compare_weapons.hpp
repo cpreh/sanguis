@@ -18,7 +18,7 @@ namespace scene
 namespace hover
 {
 
-sanguis::client::draw2d::scene::hover::weapon_attribute_diff const
+sanguis::client::draw2d::scene::hover::weapon_attribute_diff
 compare_weapons(
 	sanguis::weapon_type,
 	sanguis::weapon_attribute const &,

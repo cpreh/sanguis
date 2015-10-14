@@ -18,7 +18,7 @@ template<
 sanguis::creator::enable_if_tile<
 	Tile,
 	sanguis::tiles::is_background
-> const
+>
 is_background();
 
 }

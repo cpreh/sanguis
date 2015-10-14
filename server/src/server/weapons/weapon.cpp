@@ -177,7 +177,7 @@ sanguis::server::weapons::weapon::type() const
 		type_;
 }
 
-sanguis::server::weapons::attributes::magazine_size const
+sanguis::server::weapons::attributes::magazine_size
 sanguis::server::weapons::weapon::magazine_size() const
 {
 	return
@@ -418,35 +418,35 @@ sanguis::server::weapons::weapon::magazine_empty() const
 		};
 }
 
-sanguis::server::weapons::attributes::optional_accuracy const
+sanguis::server::weapons::attributes::optional_accuracy
 sanguis::server::weapons::weapon::accuracy() const
 {
 	return
 		accuracy_;
 }
 
-sanguis::server::weapons::cast_point const
+sanguis::server::weapons::cast_point
 sanguis::server::weapons::weapon::cast_point() const
 {
 	return
 		cast_point_;
 }
 
-sanguis::server::weapons::backswing_time const
+sanguis::server::weapons::backswing_time
 sanguis::server::weapons::weapon::backswing_time() const
 {
 	return
 		backswing_time_;
 }
 
-sanguis::server::weapons::optional_reload_time const
+sanguis::server::weapons::optional_reload_time
 sanguis::server::weapons::weapon::reload_time() const
 {
 	return
 		reload_time_;
 }
 
-sanguis::magazine_remaining const
+sanguis::magazine_remaining
 sanguis::server::weapons::weapon::magazine_remaining() const
 {
 	return

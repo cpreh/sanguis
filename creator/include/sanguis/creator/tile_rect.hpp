@@ -12,7 +12,7 @@ namespace creator
 {
 
 SANGUIS_CREATOR_SYMBOL
-sanguis::creator::rect const
+sanguis::creator::rect
 tile_rect(
 	sanguis::creator::tile
 );

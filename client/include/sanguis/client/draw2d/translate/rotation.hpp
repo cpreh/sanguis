@@ -19,7 +19,7 @@ template<
 	typename Message
 >
 inline
-sanguis::client::draw2d::sprite::rotation const
+sanguis::client::draw2d::sprite::rotation
 rotation(
 	Message const &_message
 )

@@ -12,7 +12,7 @@ namespace server
 namespace world
 {
 
-sanguis::creator::seed const
+sanguis::creator::seed
 random_seed(
 	sanguis::random_generator &
 );

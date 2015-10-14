@@ -14,7 +14,7 @@ namespace model
 {
 
 SANGUIS_COMMON_SYMBOL
-sanguis::collision::radius const
+sanguis::collision::radius
 radius(
 	sanguis::model::cell_size
 );

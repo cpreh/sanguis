@@ -14,7 +14,7 @@ namespace impl
 namespace deserialize
 {
 
-sanguis::model::optional_animation_delay const
+sanguis::model::optional_animation_delay
 animation_delay(
 	sge::parse::json::object const &
 );

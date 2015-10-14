@@ -27,14 +27,14 @@ sanguis::collision::world::ghost_parameters::ghost_parameters(
 {
 }
 
-sanguis::collision::center const
+sanguis::collision::center
 sanguis::collision::world::ghost_parameters::center() const
 {
 	return
 		center_;
 }
 
-sanguis::collision::radius const
+sanguis::collision::radius
 sanguis::collision::world::ghost_parameters::radius() const
 {
 	return

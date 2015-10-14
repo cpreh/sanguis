@@ -10,7 +10,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::creator::impl::optional_pos const
+sanguis::creator::impl::optional_pos
 sanguis::creator::impl::closest_empty(
 	sanguis::creator::grid const &_grid,
 	sanguis::creator::pos const _pos

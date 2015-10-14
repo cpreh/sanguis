@@ -5,7 +5,7 @@
 #include <fcppt/variant/holds_type.hpp>
 
 
-sanguis::is_primary_weapon const
+sanguis::is_primary_weapon
 sanguis::weapon_type_to_is_primary(
 	sanguis::weapon_type const &_weapon_type
 )

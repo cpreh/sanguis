@@ -29,7 +29,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::collision::optional_result_pair const
+sanguis::collision::optional_result_pair
 sanguis::collision::world::body_body(
 	sanguis::collision::world::body const &_body1,
 	sanguis::collision::world::body const &_body2,

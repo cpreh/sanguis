@@ -12,7 +12,7 @@ namespace client
 namespace perk
 {
 
-sanguis::client::perk::const_tree_range const
+sanguis::client::perk::const_tree_range
 category_equal_range(
 	sanguis::client::perk::tree::const_iterator,
 	sanguis::client::perk::tree::const_iterator

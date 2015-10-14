@@ -91,7 +91,7 @@ sanguis::server::weapons::spider::clone() const
 		);
 }
 
-sanguis::server::entities::optional_base_ref const
+sanguis::server::entities::optional_base_ref
 sanguis::server::weapons::spider::do_spawn(
 	sanguis::server::weapons::attack const &_attack,
 	sanguis::server::weapons::spawn_weapon const &_spawn_weapon

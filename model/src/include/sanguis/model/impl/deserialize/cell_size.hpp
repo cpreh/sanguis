@@ -14,7 +14,7 @@ namespace impl
 namespace deserialize
 {
 
-sanguis::model::cell_size const
+sanguis::model::cell_size
 cell_size(
 	sge::parse::json::object const &
 );

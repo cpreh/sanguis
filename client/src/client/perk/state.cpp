@@ -150,21 +150,21 @@ sanguis::client::perk::state::perks() const
 		);
 }
 
-sanguis::client::player_level const
+sanguis::client::player_level
 sanguis::client::perk::state::player_level() const
 {
 	return
 		current_level_;
 }
 
-sanguis::client::perk::remaining_levels const
+sanguis::client::perk::remaining_levels
 sanguis::client::perk::state::remaining_levels() const
 {
 	return
 		remaining_levels_;
 }
 
-sanguis::client::perk::level const
+sanguis::client::perk::level
 sanguis::client::perk::state::perk_level(
 	sanguis::perk_type const _perk_type
 ) const

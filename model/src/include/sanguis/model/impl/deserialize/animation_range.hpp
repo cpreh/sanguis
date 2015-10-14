@@ -14,7 +14,7 @@ namespace impl
 namespace deserialize
 {
 
-sanguis::model::animation_range const
+sanguis::model::animation_range
 animation_range(
 	sge::parse::json::object const &
 );

@@ -38,16 +38,16 @@ public:
 	sanguis::perk_type
 	perk_type() const;
 
-	sanguis::client::perk::level const
+	sanguis::client::perk::level
 	level() const;
 
-	sanguis::client::perk::required_parent_level const
+	sanguis::client::perk::required_parent_level
 	required_parent_level() const;
 
-	sanguis::client::perk::required_player_level const
+	sanguis::client::perk::required_player_level
 	required_player_level() const;
 
-	sanguis::client::perk::max_level const
+	sanguis::client::perk::max_level
 	max_level() const;
 private:
 	sanguis::perk_type type_;

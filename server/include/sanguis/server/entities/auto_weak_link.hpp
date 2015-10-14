@@ -51,7 +51,7 @@ public:
 	void
 	unlink();
 
-	optional_with_links_ref const
+	optional_with_links_ref
 	get() const;
 
 	bool

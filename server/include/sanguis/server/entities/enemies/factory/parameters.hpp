@@ -48,7 +48,7 @@ public:
 	sanguis::creator::enemy_kind
 	enemy_kind() const;
 
-	sanguis::server::entities::enemies::difficulty const
+	sanguis::server::entities::enemies::difficulty
 	difficulty() const;
 
 	sanguis::server::environment::load_context &
@@ -57,7 +57,7 @@ public:
 	sanguis::server::entities::spawn_owner const &
 	spawn_owner() const;
 
-	sanguis::server::entities::enemies::special_chance const
+	sanguis::server::entities::enemies::special_chance
 	special_chance() const;
 private:
 	sanguis::random_generator &random_generator_;

@@ -43,7 +43,7 @@ public:
 		sanguis::server::center
 	);
 
-	sanguis::server::center const
+	sanguis::server::center
 	center() const;
 
 	void
@@ -51,10 +51,10 @@ public:
 		sanguis::server::speed
 	);
 
-	sanguis::server::speed const
+	sanguis::server::speed
 	speed() const;
 
-	sanguis::server::radius const
+	sanguis::server::radius
 	radius() const;
 
 	sanguis::collision::world::body_enter_container

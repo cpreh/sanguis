@@ -102,7 +102,7 @@ sanguis::server::entities::with_velocity::movement_speed()
 		movement_speed_;
 }
 
-sanguis::server::entities::movement_speed const
+sanguis::server::entities::movement_speed
 sanguis::server::entities::with_velocity::max_movement_speed() const
 {
 	return
@@ -111,7 +111,7 @@ sanguis::server::entities::with_velocity::max_movement_speed() const
 		};
 }
 
-sanguis::server::direction const
+sanguis::server::direction
 sanguis::server::entities::with_velocity::direction() const
 {
 	return
@@ -129,7 +129,7 @@ sanguis::server::entities::with_velocity::direction(
 	this->desired_speed_change();
 }
 
-sanguis::server::speed const
+sanguis::server::speed
 sanguis::server::entities::with_velocity::speed() const
 {
 	return
@@ -164,7 +164,7 @@ sanguis::server::entities::with_velocity::speed_changed(
 	);
 }
 
-sanguis::server::speed const
+sanguis::server::speed
 sanguis::server::entities::with_velocity::desired_speed() const
 {
 	return
@@ -174,7 +174,7 @@ sanguis::server::entities::with_velocity::desired_speed() const
 		);
 }
 
-sanguis::server::speed const
+sanguis::server::speed
 sanguis::server::entities::with_velocity::initial_speed() const
 {
 	return

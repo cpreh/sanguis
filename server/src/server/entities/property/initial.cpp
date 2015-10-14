@@ -19,11 +19,13 @@ sanguis::server::entities::property::initial::initial(
 sanguis::server::entities::property::value
 sanguis::server::entities::property::initial::get_base() const
 {
-	return base_;
+	return
+		base_;
 }
 
 sanguis::server::entities::property::value
 sanguis::server::entities::property::initial::get_current() const
 {
-	return current_;
+	return
+		current_;
 }

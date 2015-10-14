@@ -328,7 +328,7 @@ sanguis::client::machine::renderer() const
 		renderer_;
 }
 
-sge::renderer::device::index const
+sge::renderer::device::index
 sanguis::client::machine::renderer_index() const
 {
 	return

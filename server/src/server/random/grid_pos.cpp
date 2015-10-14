@@ -11,7 +11,7 @@
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
 
 
-sanguis::creator::optional_pos const
+sanguis::creator::optional_pos
 sanguis::server::random::grid_pos(
 	sanguis::random_generator &_random_generator,
 	sanguis::creator::min const _min,

@@ -18,7 +18,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::client::draw2d::scene::hover::weapon_attribute_diff const
+sanguis::client::draw2d::scene::hover::weapon_attribute_diff
 sanguis::client::draw2d::scene::hover::compare_weapons(
 	sanguis::weapon_type const _type,
 	sanguis::weapon_attribute const &_attribute,

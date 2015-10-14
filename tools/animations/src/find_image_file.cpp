@@ -17,7 +17,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::tools::animations::const_optional_image_file_ref const
+sanguis::tools::animations::const_optional_image_file_ref
 sanguis::tools::animations::find_image_file(
 	sanguis::tools::animations::image_file_map const &_image_files,
 	sanguis::model::object const &_model,

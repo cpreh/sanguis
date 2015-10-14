@@ -14,7 +14,7 @@ namespace collision
 namespace impl
 {
 
-sanguis::creator::grid_crange const
+sanguis::creator::grid_crange
 make_range(
 	sanguis::creator::grid const &,
 	sanguis::collision::center,

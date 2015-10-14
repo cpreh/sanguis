@@ -14,7 +14,7 @@ sanguis::server::entities::center_simple::center_simple()
 {
 }
 
-sanguis::server::center const
+sanguis::server::center
 sanguis::server::entities::center_simple::center() const
 {
 	return

@@ -20,7 +20,7 @@ sanguis::server::load::~load()
 {
 }
 
-sanguis::server::radius const
+sanguis::server::radius
 sanguis::server::load::model_dim(
 	sanguis::load::model::path const &_model_path
 ) const

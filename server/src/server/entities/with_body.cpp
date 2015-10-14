@@ -71,14 +71,14 @@ sanguis::server::entities::with_body::~with_body()
 {
 }
 
-sanguis::server::center const
+sanguis::server::center
 sanguis::server::entities::with_body::center() const
 {
 	return
 		collision_body_.center();
 }
 
-sanguis::server::angle const
+sanguis::server::angle
 sanguis::server::entities::with_body::angle() const
 {
 	return
@@ -108,7 +108,7 @@ sanguis::server::entities::with_body::angle(
 	);
 }
 
-sanguis::server::radius const
+sanguis::server::radius
 sanguis::server::entities::with_body::radius() const
 {
 	return
@@ -214,14 +214,14 @@ sanguis::server::entities::with_body::body_speed(
 	);
 }
 
-sanguis::server::speed const
+sanguis::server::speed
 sanguis::server::entities::with_body::body_speed() const
 {
 	return
 		collision_body_.speed();
 }
 
-boost::logic::tribool const
+boost::logic::tribool
 sanguis::server::entities::with_body::can_collide_with(
 	sanguis::collision::world::body_base const &_body_base
 ) const
@@ -279,7 +279,7 @@ sanguis::server::entities::with_body::collision(
 	);
 }
 
-boost::logic::tribool const
+boost::logic::tribool
 sanguis::server::entities::with_body::can_collide_with_body(
 	sanguis::server::entities::with_body const &
 ) const
@@ -327,7 +327,7 @@ sanguis::server::entities::with_body::world_collision()
 {
 }
 
-sanguis::server::speed const
+sanguis::server::speed
 sanguis::server::entities::with_body::initial_speed() const
 {
 	return

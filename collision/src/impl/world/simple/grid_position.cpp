@@ -11,7 +11,7 @@
 #include <fcppt/math/vector/to_unsigned.hpp>
 
 
-sanguis::creator::pos const
+sanguis::creator::pos
 sanguis::collision::impl::world::simple::grid_position(
 	sanguis::collision::center const _center
 )

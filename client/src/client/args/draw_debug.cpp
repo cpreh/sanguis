@@ -5,7 +5,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::client::draw::debug const
+sanguis::client::draw::debug
 sanguis::client::args::draw_debug(
 	boost::program_options::variables_map const &_vm
 )

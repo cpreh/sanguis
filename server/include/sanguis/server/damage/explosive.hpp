@@ -11,7 +11,7 @@ namespace server
 namespace damage
 {
 
-sanguis::server::damage::array const
+sanguis::server::damage::array
 explosive();
 
 }

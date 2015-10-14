@@ -3,7 +3,7 @@
 #include <sanguis/server/entities/property/value.hpp>
 
 
-sanguis::server::entities::property::initial const
+sanguis::server::entities::property::initial
 sanguis::server::entities::property::initial_max(
 	sanguis::server::entities::property::value  const _base
 )

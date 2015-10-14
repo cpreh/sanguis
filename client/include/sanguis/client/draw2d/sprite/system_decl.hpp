@@ -49,7 +49,7 @@ public:
 
 	~system();
 
-	connection_ref const
+	connection_ref
 	connection(
 		Category
 	);

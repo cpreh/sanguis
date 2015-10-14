@@ -11,7 +11,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::model::optional_animation_delay const
+sanguis::model::optional_animation_delay
 sanguis::model::impl::deserialize::animation_delay(
 	sge::parse::json::object const &_object
 )

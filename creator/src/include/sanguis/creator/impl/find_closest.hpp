@@ -26,7 +26,7 @@ template<
 	typename Attribute,
 	typename Value
 >
-sanguis::creator::impl::optional_pos const
+sanguis::creator::impl::optional_pos
 find_closest(
 	fcppt::container::grid::object<
 		Value,

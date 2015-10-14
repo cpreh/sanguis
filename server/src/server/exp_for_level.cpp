@@ -5,7 +5,7 @@
 #include <fcppt/cast/int_to_float.hpp>
 
 
-sanguis::server::exp const
+sanguis::server::exp
 sanguis::server::exp_for_level(
 	sanguis::server::level const _level
 )

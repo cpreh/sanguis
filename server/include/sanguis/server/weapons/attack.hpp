@@ -27,7 +27,7 @@ public:
 		sanguis::server::weapons::target
 	);
 
-	sanguis::server::angle const
+	sanguis::server::angle
 	angle() const;
 
 	sanguis::server::environment::object &

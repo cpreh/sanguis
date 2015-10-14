@@ -7,7 +7,7 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 
 
-sanguis::messages::types::vector2 const
+sanguis::messages::types::vector2
 sanguis::client::draw2d::translate::vector_from_client(
 	sanguis::client::draw2d::vector2 const &_vector
 )

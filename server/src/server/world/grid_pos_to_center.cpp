@@ -11,7 +11,7 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 
 
-sanguis::server::center const
+sanguis::server::center
 sanguis::server::world::grid_pos_to_center(
 	sanguis::creator::pos const _pos
 )

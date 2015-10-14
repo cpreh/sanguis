@@ -15,7 +15,7 @@ namespace server
 namespace random
 {
 
-sanguis::creator::optional_pos const
+sanguis::creator::optional_pos
 grid_pos_around(
 	sanguis::random_generator &,
 	sanguis::creator::dim,

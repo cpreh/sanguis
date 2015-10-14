@@ -7,7 +7,7 @@
 #include <fcppt/math/vector/distance.hpp>
 
 
-sanguis::duration const
+sanguis::duration
 sanguis::server::net::center_policy::start_duration()
 {
 	return
@@ -16,7 +16,7 @@ sanguis::server::net::center_policy::start_duration()
 		);
 }
 
-sanguis::duration const
+sanguis::duration
 sanguis::server::net::center_policy::difference(
 	sanguis::server::center const _center1,
 	sanguis::server::center const _center2

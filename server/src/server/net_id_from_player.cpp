@@ -3,7 +3,7 @@
 #include <alda/net/id.hpp>
 
 
-alda::net::id const
+alda::net::id
 sanguis::server::net_id_from_player(
 	sanguis::server::player_id const _id
 )

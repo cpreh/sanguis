@@ -51,7 +51,7 @@ sanguis::model::object::~object()
 {
 }
 
-sanguis::model::optional_animation_delay const
+sanguis::model::optional_animation_delay
 sanguis::model::object::animation_delay() const
 {
 	return
@@ -132,7 +132,7 @@ sanguis::model::object::parts() const
 		parts_;
 }
 
-sanguis::model::cell_size const
+sanguis::model::cell_size
 sanguis::model::object::cell_size() const
 {
 	return

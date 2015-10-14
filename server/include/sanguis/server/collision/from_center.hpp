@@ -12,7 +12,7 @@ namespace server
 namespace collision
 {
 
-sanguis::server::center const
+sanguis::server::center
 from_center(
 	sanguis::collision::center
 );

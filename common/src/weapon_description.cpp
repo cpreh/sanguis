@@ -44,28 +44,28 @@ sanguis::weapon_description::weapon_type() const
 		weapon_type_;
 }
 
-sanguis::magazine_size const
+sanguis::magazine_size
 sanguis::weapon_description::magazine_size() const
 {
 	return
 		magazine_size_;
 }
 
-sanguis::magazine_extra const
+sanguis::magazine_extra
 sanguis::weapon_description::magazine_extra() const
 {
 	return
 		magazine_extra_;
 }
 
-sanguis::magazine_remaining const
+sanguis::magazine_remaining
 sanguis::weapon_description::magazine_remaining() const
 {
 	return
 		magazine_remaining_;
 }
 
-sanguis::reload_time const
+sanguis::reload_time
 sanguis::weapon_description::reload_time() const
 {
 	return

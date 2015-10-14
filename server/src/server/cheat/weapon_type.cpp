@@ -6,7 +6,7 @@
 #include <fcppt/assert/unreachable.hpp>
 
 
-sanguis::weapon_type const
+sanguis::weapon_type
 sanguis::server::cheat::weapon_type(
 	sanguis::cheat_type const _cheat_type
 )

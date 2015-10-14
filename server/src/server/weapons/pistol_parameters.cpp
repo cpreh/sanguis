@@ -45,49 +45,49 @@ sanguis::server::weapons::pistol_parameters::pistol_parameters(
 {
 }
 
-sanguis::server::weapons::attributes::accuracy const
+sanguis::server::weapons::attributes::accuracy
 sanguis::server::weapons::pistol_parameters::accuracy() const
 {
 	return
 		accuracy_;
 }
 
-sanguis::server::weapons::backswing_time const
+sanguis::server::weapons::backswing_time
 sanguis::server::weapons::pistol_parameters::backswing_time() const
 {
 	return
 		backswing_time_;
 }
 
-sanguis::server::weapons::attributes::damage const
+sanguis::server::weapons::attributes::damage
 sanguis::server::weapons::pistol_parameters::damage() const
 {
 	return
 		damage_;
 }
 
-sanguis::server::weapons::cast_point const
+sanguis::server::weapons::cast_point
 sanguis::server::weapons::pistol_parameters::cast_point() const
 {
 	return
 		cast_point_;
 }
 
-sanguis::server::weapons::attributes::magazine_size const
+sanguis::server::weapons::attributes::magazine_size
 sanguis::server::weapons::pistol_parameters::magazine_size() const
 {
 	return
 		magazine_size_;
 }
 
-sanguis::server::weapons::reload_time const
+sanguis::server::weapons::reload_time
 sanguis::server::weapons::pistol_parameters::reload_time() const
 {
 	return
 		reload_time_;
 }
 
-sanguis::server::weapons::range const
+sanguis::server::weapons::range
 sanguis::server::weapons::pistol_parameters::range() const
 {
 	return

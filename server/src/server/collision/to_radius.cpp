@@ -6,7 +6,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::collision::radius const
+sanguis::collision::radius
 sanguis::server::collision::to_radius(
 	sanguis::server::radius const _radius
 )

@@ -14,7 +14,7 @@ namespace collision
 namespace impl
 {
 
-sanguis::collision::speed const
+sanguis::collision::speed
 adjust_speed(
 	sanguis::collision::impl::line_segment movement,
 	sanguis::collision::radius entity_radius,

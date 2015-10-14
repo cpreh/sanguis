@@ -32,19 +32,19 @@ public:
 	weapon_type() const;
 
 	SANGUIS_COMMON_SYMBOL
-	sanguis::magazine_size const
+	sanguis::magazine_size
 	magazine_size() const;
 
 	SANGUIS_COMMON_SYMBOL
-	sanguis::magazine_extra const
+	sanguis::magazine_extra
 	magazine_extra() const;
 
 	SANGUIS_COMMON_SYMBOL
-	sanguis::magazine_remaining const
+	sanguis::magazine_remaining
 	magazine_remaining() const;
 
 	SANGUIS_COMMON_SYMBOL
-	sanguis::reload_time const
+	sanguis::reload_time
 	reload_time() const;
 
 	SANGUIS_COMMON_SYMBOL

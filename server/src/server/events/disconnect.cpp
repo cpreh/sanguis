@@ -12,7 +12,7 @@ sanguis::server::events::disconnect::disconnect(
 {
 }
 
-alda::net::id const
+alda::net::id
 sanguis::server::events::disconnect::id() const
 {
 	return

@@ -15,7 +15,7 @@ namespace config
 namespace settings
 {
 
-boost::filesystem::path const
+boost::filesystem::path
 file();
 
 }

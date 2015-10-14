@@ -10,7 +10,7 @@
 #include <fcppt/container/maybe_back.hpp>
 
 
-sanguis::server::ai::pathing::optional_target const
+sanguis::server::ai::pathing::optional_target
 sanguis::server::ai::pathing::update_trail(
 	sanguis::server::ai::pathing::trail &_trail,
 	sanguis::creator::grid const &_grid,

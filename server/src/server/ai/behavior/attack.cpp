@@ -362,7 +362,7 @@ sanguis::server::ai::behavior::attack::closest_visible_target() const
 		);
 }
 
-sanguis::server::ai::speed_factor const
+sanguis::server::ai::speed_factor
 sanguis::server::ai::behavior::attack::speed_factor() const
 {
 	return

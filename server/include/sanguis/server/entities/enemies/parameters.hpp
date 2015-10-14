@@ -75,16 +75,16 @@ public:
 	sanguis::server::damage::armor_array const &
 	armor() const;
 
-	sanguis::server::mass const
+	sanguis::server::mass
 	mass() const;
 
-	sanguis::server::health const
+	sanguis::server::health
 	health() const;
 
-	sanguis::server::regeneration const
+	sanguis::server::regeneration
 	regeneration() const;
 
-	sanguis::server::entities::movement_speed const
+	sanguis::server::entities::movement_speed
 	movement_speed() const;
 
 	sanguis::server::ai::create_function const &
@@ -93,13 +93,13 @@ public:
 	sanguis::server::weapons::unique_ptr &
 	weapon();
 
-	sanguis::server::pickup_probability const
+	sanguis::server::pickup_probability
 	pickup_probability() const;
 
-	sanguis::server::exp const
+	sanguis::server::exp
 	exp() const;
 
-	sanguis::server::entities::enemies::difficulty const
+	sanguis::server::entities::enemies::difficulty
 	difficulty() const;
 
 	sanguis::server::entities::spawn_owner const &
@@ -108,10 +108,10 @@ public:
 	sanguis::server::auras::container &
 	auras();
 
-	sanguis::server::weapons::ias const
+	sanguis::server::weapons::ias
 	ias() const;
 
-	sanguis::server::weapons::irs const
+	sanguis::server::weapons::irs
 	irs() const;
 
 	sanguis::server::entities::enemies::parameters &

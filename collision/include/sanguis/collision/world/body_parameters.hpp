@@ -35,16 +35,16 @@ public:
 		sanguis::collision::world::body_base &
 	);
 
-	sanguis::collision::center const
+	sanguis::collision::center
 	center() const;
 
-	sanguis::collision::speed const
+	sanguis::collision::speed
 	speed() const;
 
-	sanguis::collision::radius const
+	sanguis::collision::radius
 	radius() const;
 
-	sanguis::collision::optional_mass const
+	sanguis::collision::optional_mass
 	mass() const;
 
 	sanguis::collision::world::body_group

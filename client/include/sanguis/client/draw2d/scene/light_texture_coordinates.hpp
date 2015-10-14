@@ -15,7 +15,7 @@ namespace draw2d
 namespace scene
 {
 
-sanguis::client::draw2d::sprite::client::texture_coordinates const
+sanguis::client::draw2d::sprite::client::texture_coordinates
 light_texture_coordinates(
 	sge::renderer::device::core &,
 	sge::texture::part const &

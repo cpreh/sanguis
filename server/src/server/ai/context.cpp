@@ -76,7 +76,7 @@ sanguis::server::ai::context::clear_path()
 		sanguis::server::ai::pathing::optional_trail();
 }
 
-sanguis::creator::optional_pos const
+sanguis::creator::optional_pos
 sanguis::server::ai::context::destination() const
 {
 	return
@@ -96,7 +96,7 @@ sanguis::server::ai::context::destination() const
 		);
 }
 
-sanguis::server::ai::pathing::optional_target const
+sanguis::server::ai::pathing::optional_target
 sanguis::server::ai::context::continue_path()
 {
 	return

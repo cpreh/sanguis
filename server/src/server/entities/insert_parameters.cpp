@@ -37,21 +37,21 @@ sanguis::server::entities::insert_parameters::insert_parameters(
 {
 }
 
-sanguis::server::center const
+sanguis::server::center
 sanguis::server::entities::insert_parameters::center() const
 {
 	return
 		center_;
 }
 
-sanguis::server::angle const
+sanguis::server::angle
 sanguis::server::entities::insert_parameters::angle() const
 {
 	return
 		angle_;
 }
 
-sanguis::collision::world::created const
+sanguis::collision::world::created
 sanguis::server::entities::insert_parameters::created() const
 {
 	return

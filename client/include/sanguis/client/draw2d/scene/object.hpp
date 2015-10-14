@@ -146,7 +146,7 @@ private:
 	)
 	override;
 
-	sanguis::client::control::optional_attack_dest const
+	sanguis::client::control::optional_attack_dest
 	translate_attack_dest(
 		sanguis::client::control::cursor_position
 	) const
@@ -179,7 +179,7 @@ private:
 		sanguis::entity_id
 	) const;
 
-	sanguis::client::draw2d::optional_player_center const
+	sanguis::client::draw2d::optional_player_center
 	player_center() const;
 
 	void
@@ -187,13 +187,13 @@ private:
 		sanguis::client::world_parameters const &
 	);
 
-	sge::renderer::screen_size const
+	sge::renderer::screen_size
 	screen_size() const;
 
-	sge::renderer::target::viewport const
+	sge::renderer::target::viewport
 	viewport() const;
 
-	sanguis::client::draw2d::entities::load_parameters const
+	sanguis::client::draw2d::entities::load_parameters
 	load_parameters();
 
 	sanguis::client::draw2d::insert_own_callback

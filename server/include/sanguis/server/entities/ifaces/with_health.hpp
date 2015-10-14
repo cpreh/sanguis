@@ -31,11 +31,11 @@ public:
 	health() = 0;
 
 	virtual
-	sanguis::server::health const
+	sanguis::server::health
 	current_health() const = 0;
 
 	virtual
-	sanguis::server::health const
+	sanguis::server::health
 	max_health() const = 0;
 
 	virtual

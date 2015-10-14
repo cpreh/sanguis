@@ -31,7 +31,7 @@ public:
 	void
 	quit();
 
-	awl::main::exit_code const
+	awl::main::exit_code
 	run();
 
 	bool

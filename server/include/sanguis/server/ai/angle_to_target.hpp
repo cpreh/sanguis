@@ -13,7 +13,7 @@ namespace server
 namespace ai
 {
 
-sanguis::server::optional_angle const
+sanguis::server::optional_angle
 angle_to_target(
 	sanguis::server::entities::with_ai &,
 	sanguis::server::ai::target

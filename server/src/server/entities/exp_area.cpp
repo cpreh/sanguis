@@ -111,7 +111,7 @@ sanguis::server::entities::exp_area::dead() const
 		true;
 }
 
-boost::logic::tribool const
+boost::logic::tribool
 sanguis::server::entities::exp_area::can_collide_with(
 	sanguis::collision::world::body_base const &_base
 ) const

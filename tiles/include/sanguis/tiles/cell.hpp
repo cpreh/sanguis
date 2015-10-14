@@ -25,7 +25,7 @@ public:
 	);
 
 	SANGUIS_TILES_SYMBOL
-	sanguis::tiles::pos const
+	sanguis::tiles::pos
 	pos() const;
 
 	SANGUIS_TILES_SYMBOL
@@ -33,11 +33,11 @@ public:
 	content() const;
 
 	SANGUIS_TILES_SYMBOL
-	sanguis::tiles::path_reference const
+	sanguis::tiles::path_reference
 	path() const;
 
 	SANGUIS_TILES_SYMBOL
-	sanguis::tiles::is_background const
+	sanguis::tiles::is_background
 	is_background() const;
 private:
 	sanguis::tiles::pos pos_;

@@ -23,7 +23,7 @@ protected:
 	with_radius();
 public:
 	virtual
-	sanguis::server::radius const
+	sanguis::server::radius
 	radius() const = 0;
 
 	virtual

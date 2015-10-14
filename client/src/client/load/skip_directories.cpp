@@ -4,7 +4,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-boost::filesystem::directory_iterator const
+boost::filesystem::directory_iterator
 sanguis::client::load::skip_directories(
 	boost::filesystem::directory_iterator _it
 )

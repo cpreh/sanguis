@@ -47,7 +47,7 @@ sanguis::creator::top_result::top_result(
 {
 }
 
-sanguis::creator::seed const
+sanguis::creator::seed
 sanguis::creator::top_result::seed() const
 {
 	return
@@ -61,7 +61,7 @@ sanguis::creator::top_result::name() const
 		name_;
 }
 
-sanguis::creator::spawn_boss const
+sanguis::creator::spawn_boss
 sanguis::creator::top_result::spawn_boss() const
 {
 	return

@@ -37,7 +37,7 @@ sanguis::server::world::info::info(
 {
 }
 
-sanguis::world_id const
+sanguis::world_id
 sanguis::server::world::info::world_id() const
 {
 	return
@@ -51,7 +51,7 @@ sanguis::server::world::info::world_name() const
 		world_name_;
 }
 
-sanguis::creator::seed const
+sanguis::creator::seed
 sanguis::server::world::info::seed() const
 {
 	return
@@ -65,7 +65,7 @@ sanguis::server::world::info::generator_name() const
 		generator_name_;
 }
 
-sanguis::creator::spawn_boss const
+sanguis::creator::spawn_boss
 sanguis::server::world::info::spawn_boss() const
 {
 	return

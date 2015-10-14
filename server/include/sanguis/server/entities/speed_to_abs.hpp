@@ -13,7 +13,7 @@ namespace server
 namespace entities
 {
 
-sanguis::server::speed const
+sanguis::server::speed
 speed_to_abs(
 	sanguis::server::direction,
 	sanguis::server::entities::property::value

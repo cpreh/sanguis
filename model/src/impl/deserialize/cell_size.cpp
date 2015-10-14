@@ -7,7 +7,7 @@
 #include <fcppt/text.hpp>
 
 
-sanguis::model::cell_size const
+sanguis::model::cell_size
 sanguis::model::impl::deserialize::cell_size(
 	sge::parse::json::object const &_object
 )

@@ -14,7 +14,7 @@ namespace load
 namespace hud
 {
 
-sanguis::optional_weapon_type const
+sanguis::optional_weapon_type
 weapon_type(
 	fcppt::string const &
 );

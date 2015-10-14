@@ -260,7 +260,7 @@ sanguis::server::world::object::update(
 	);
 }
 
-sanguis::server::entities::optional_base_ref const
+sanguis::server::entities::optional_base_ref
 sanguis::server::world::object::insert(
 	sanguis::server::entities::simple_unique_ptr &&_entity,
 	sanguis::server::entities::insert_parameters const &_insert_parameters
@@ -286,7 +286,7 @@ sanguis::server::world::object::insert(
 		);
 }
 
-sanguis::server::entities::optional_base_ref const
+sanguis::server::entities::optional_base_ref
 sanguis::server::world::object::insert(
 	sanguis::server::entities::with_id_unique_ptr &&_entity,
 	sanguis::server::entities::insert_parameters const &_insert_parameters
@@ -363,7 +363,7 @@ sanguis::server::world::object::insert(
 		);
 }
 
-sanguis::server::entities::optional_base_ref const
+sanguis::server::entities::optional_base_ref
 sanguis::server::world::object::insert(
 	sanguis::server::world::insert_with_id_pair &&_pair
 )
@@ -394,7 +394,7 @@ sanguis::server::world::object::insert(
 		);
 }
 
-sanguis::server::entities::optional_base_ref const
+sanguis::server::entities::optional_base_ref
 sanguis::server::world::object::insert(
 	sanguis::server::world::insert_simple_pair &&_pair
 )
@@ -422,7 +422,7 @@ sanguis::server::world::object::openings() const
 		info_.openings();
 }
 
-sanguis::world_id const
+sanguis::world_id
 sanguis::server::world::object::world_id() const
 {
 	return
@@ -482,7 +482,7 @@ template<
 >
 fcppt::optional<
 	Entity &
-> const
+>
 sanguis::server::world::object::insert_base(
 	std::vector<
 		fcppt::unique_ptr<
@@ -1022,7 +1022,7 @@ sanguis::server::world::object::remove_portal_blocker()
 			portal_blocker->kill();
 }
 
-sanguis::server::world::difficulty const
+sanguis::server::world::difficulty
 sanguis::server::world::object::difficulty() const
 {
 	return

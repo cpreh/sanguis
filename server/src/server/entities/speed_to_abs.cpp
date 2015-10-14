@@ -9,7 +9,7 @@
 #include <fcppt/math/vector/static.hpp>
 
 
-sanguis::server::speed const
+sanguis::server::speed
 sanguis::server::entities::speed_to_abs(
 	sanguis::server::direction const _direction,
 	sanguis::server::entities::property::value const _speed

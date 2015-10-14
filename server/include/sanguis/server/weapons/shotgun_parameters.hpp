@@ -42,31 +42,31 @@ public:
 		sanguis::server::weapons::range
 	);
 
-	sanguis::server::weapons::attributes::accuracy const
+	sanguis::server::weapons::attributes::accuracy
 	accuracy() const;
 
-	sanguis::server::weapons::backswing_time const
+	sanguis::server::weapons::backswing_time
 	backswing_time() const;
 
-	sanguis::server::weapons::cast_point const
+	sanguis::server::weapons::cast_point
 	cast_point() const;
 
-	sanguis::server::weapons::attributes::spread_radius const
+	sanguis::server::weapons::attributes::spread_radius
 	spread_radius() const;
 
-	sanguis::server::weapons::shells const
+	sanguis::server::weapons::shells
 	shells() const;
 
-	sanguis::server::weapons::attributes::damage const
+	sanguis::server::weapons::attributes::damage
 	damage() const;
 
-	sanguis::server::weapons::attributes::magazine_size const
+	sanguis::server::weapons::attributes::magazine_size
 	magazine_size() const;
 
-	sanguis::server::weapons::reload_time const
+	sanguis::server::weapons::reload_time
 	reload_time() const;
 
-	sanguis::server::weapons::range const
+	sanguis::server::weapons::range
 	range() const;
 
 	void

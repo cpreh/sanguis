@@ -10,7 +10,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::collision::radius const
+sanguis::collision::radius
 sanguis::load::model::radius(
 	sanguis::model::cell_size const _cell_size
 )

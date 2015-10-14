@@ -8,7 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::collision::center const
+sanguis::collision::center
 sanguis::server::collision::to_center(
 	sanguis::server::center const _center
 )

@@ -106,7 +106,7 @@ public Q_SLOTS:
 	void
 	resetFrames();
 private:
-	sanguis::tools::animations::optional_animation_ref const
+	sanguis::tools::animations::optional_animation_ref
 	current_animation();
 
 	void
@@ -153,7 +153,7 @@ private:
 	void
 	update_frame_timer();
 
-	sanguis::model::optional_animation_delay const
+	sanguis::model::optional_animation_delay
 	current_animation_delay();
 
 	void

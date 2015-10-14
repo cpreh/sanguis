@@ -14,7 +14,7 @@ namespace model
 {
 
 SANGUIS_MODEL_SYMBOL
-sanguis::model::cell_area const
+sanguis::model::cell_area
 cell_area_from_index(
 	sanguis::model::image_size,
 	sanguis::model::cell_size,

@@ -14,7 +14,7 @@ namespace draw2d
 namespace translate
 {
 
-sanguis::messages::types::vector2 const
+sanguis::messages::types::vector2
 vector_from_client(
 	sanguis::client::draw2d::vector2 const &
 );

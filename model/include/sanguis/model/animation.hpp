@@ -51,11 +51,11 @@ public:
 	~animation();
 
 	SANGUIS_MODEL_SYMBOL
-	sanguis::model::animation_range const
+	sanguis::model::animation_range
 	animation_range() const;
 
 	SANGUIS_MODEL_SYMBOL
-	sanguis::model::optional_animation_delay const
+	sanguis::model::optional_animation_delay
 	animation_delay() const;
 
 	SANGUIS_MODEL_SYMBOL
@@ -65,7 +65,7 @@ public:
 	);
 
 	SANGUIS_MODEL_SYMBOL
-	sanguis::model::optional_animation_sound const
+	sanguis::model::optional_animation_sound
 	animation_sound() const;
 
 	SANGUIS_MODEL_SYMBOL

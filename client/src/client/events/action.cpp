@@ -12,8 +12,9 @@ sanguis::client::events::action::action(
 {
 }
 
-sanguis::client::control::actions::any const
+sanguis::client::control::actions::any const &
 sanguis::client::events::action::value() const
 {
-	return value_;
+	return
+		value_;
 }

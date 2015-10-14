@@ -89,7 +89,7 @@ public:
 	sanguis::weapon_type
 	type() const;
 
-	sanguis::server::weapons::attributes::magazine_size const
+	sanguis::server::weapons::attributes::magazine_size
 	magazine_size() const;
 
 	bool
@@ -157,19 +157,19 @@ private:
 	bool
 	magazine_empty() const;
 
-	sanguis::server::weapons::attributes::optional_accuracy const
+	sanguis::server::weapons::attributes::optional_accuracy
 	accuracy() const;
 
-	sanguis::server::weapons::cast_point const
+	sanguis::server::weapons::cast_point
 	cast_point() const;
 
-	sanguis::server::weapons::backswing_time const
+	sanguis::server::weapons::backswing_time
 	backswing_time() const;
 
-	sanguis::server::weapons::optional_reload_time const
+	sanguis::server::weapons::optional_reload_time
 	reload_time() const;
 
-	sanguis::magazine_remaining const
+	sanguis::magazine_remaining
 	magazine_remaining() const;
 
 	void

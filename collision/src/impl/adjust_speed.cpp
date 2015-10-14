@@ -21,7 +21,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::collision::speed const
+sanguis::collision::speed
 sanguis::collision::impl::adjust_speed(
 	sanguis::collision::impl::line_segment const _movement,
 	sanguis::collision::radius const _radius,

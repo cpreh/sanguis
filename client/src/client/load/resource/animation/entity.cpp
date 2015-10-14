@@ -58,7 +58,7 @@ sanguis::client::load::resource::animation::entity::~entity()
 {
 }
 
-sanguis::duration const
+sanguis::duration
 sanguis::client::load::resource::animation::entity::delay() const
 {
 	return
@@ -72,7 +72,7 @@ sanguis::client::load::resource::animation::entity::texture() const
 		*texture_;
 }
 
-sge::renderer::dim2 const
+sge::renderer::dim2
 sanguis::client::load::resource::animation::entity::dim() const
 {
 	return

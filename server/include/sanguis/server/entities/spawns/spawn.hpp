@@ -53,11 +53,11 @@ protected:
 		sanguis::server::world::difficulty
 	);
 private:
-	sanguis::server::center const
+	sanguis::server::center
 	center() const
 	override;
 
-	sanguis::server::angle const
+	sanguis::server::angle
 	angle() const
 	override;
 

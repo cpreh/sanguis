@@ -39,7 +39,7 @@ sanguis::server::entities::transfer_parameters::world() const
 		world_;
 }
 
-sanguis::collision::world::created const
+sanguis::collision::world::created
 sanguis::server::entities::transfer_parameters::created() const
 {
 	return
@@ -53,14 +53,14 @@ sanguis::server::entities::transfer_parameters::grid() const
 		grid_;
 }
 
-sanguis::server::center const
+sanguis::server::center
 sanguis::server::entities::transfer_parameters::center() const
 {
 	return
 		center_;
 }
 
-sanguis::server::angle const
+sanguis::server::angle
 sanguis::server::entities::transfer_parameters::angle() const
 {
 	return

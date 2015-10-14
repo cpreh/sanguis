@@ -101,7 +101,7 @@ sanguis::server::entities::base::remove_from_world()
 		sanguis::server::entities::remove_from_world_result();
 }
 
-sanguis::server::environment::optional_object_ref const
+sanguis::server::environment::optional_object_ref
 sanguis::server::entities::base::environment() const
 {
 	return

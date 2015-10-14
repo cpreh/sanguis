@@ -16,11 +16,11 @@ namespace net
 struct slowdown_policy
 {
 	static
-	sanguis::duration const
+	sanguis::duration
 	start_duration();
 
 	static
-	sanguis::duration const
+	sanguis::duration
 	difference(
 		sanguis::slowdown,
 		sanguis::slowdown

@@ -47,7 +47,7 @@ private:
 	clone() const
 	override;
 
-	sanguis::server::entities::optional_base_ref const
+	sanguis::server::entities::optional_base_ref
 	do_spawn(
 		sanguis::server::weapons::attack const &,
 		sanguis::server::weapons::spawn_weapon const &

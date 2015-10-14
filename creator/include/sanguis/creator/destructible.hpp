@@ -21,7 +21,7 @@ public:
 	);
 
 	SANGUIS_CREATOR_SYMBOL
-	sanguis::creator::destructible_pos const
+	sanguis::creator::destructible_pos
 	pos() const;
 
 	SANGUIS_CREATOR_SYMBOL

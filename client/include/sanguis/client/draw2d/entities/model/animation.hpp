@@ -46,7 +46,7 @@ public:
 	sanguis::client::load::animation_type
 	animation_type() const;
 
-	sge::texture::const_part_ref const
+	sge::texture::const_part_ref
 	current_texture();
 
 	sanguis::client::draw2d::entities::model::optional_sound const &

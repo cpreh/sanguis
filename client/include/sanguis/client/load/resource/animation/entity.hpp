@@ -42,13 +42,13 @@ public:
 
 	~entity();
 
-	sanguis::duration const
+	sanguis::duration
 	delay() const;
 
 	sge::texture::part const &
 	texture() const;
 
-	sge::renderer::dim2 const
+	sge::renderer::dim2
 	dim() const;
 private:
 	sanguis::duration delay_;

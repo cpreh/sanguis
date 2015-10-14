@@ -51,7 +51,7 @@ public:
 	sanguis::server::weapons::unique_ptr
 	obtain();
 
-	sanguis::weapon_type const
+	sanguis::weapon_type
 	weapon_type() const;
 private:
 	bool

@@ -35,7 +35,7 @@ public:
 	~update_sight()
 	override;
 private:
-	sanguis::optional_aura_type const
+	sanguis::optional_aura_type
 	type() const
 	override;
 

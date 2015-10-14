@@ -26,7 +26,7 @@ public:
 	sanguis::client::draw2d::z_ordering
 	z_ordering() const;
 
-	sge::texture::const_part_ref const
+	sge::texture::const_part_ref
 	texture() const;
 private:
 	sanguis::client::draw2d::z_ordering z_ordering_;

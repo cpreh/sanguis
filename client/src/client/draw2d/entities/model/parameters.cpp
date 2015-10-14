@@ -104,7 +104,7 @@ sanguis::client::draw2d::entities::model::parameters::decay_option() const
 		decay_option_;
 }
 
-sanguis::optional_primary_weapon_type const
+sanguis::optional_primary_weapon_type
 sanguis::client::draw2d::entities::model::parameters::primary_weapon_type() const
 {
 	return
@@ -118,14 +118,14 @@ sanguis::client::draw2d::entities::model::parameters::weapon_status() const
 		weapon_status_;
 }
 
-sanguis::client::draw2d::speed const
+sanguis::client::draw2d::speed
 sanguis::client::draw2d::entities::model::parameters::speed() const
 {
 	return
 		speed_;
 }
 
-sanguis::client::draw2d::sprite::center const
+sanguis::client::draw2d::sprite::center
 sanguis::client::draw2d::entities::model::parameters::center() const
 {
 	return
@@ -139,7 +139,7 @@ sanguis::client::draw2d::entities::model::parameters::rotation() const
 		rotation_;
 }
 
-sanguis::client::draw2d::sprite::normal::color const
+sanguis::client::draw2d::sprite::normal::color
 sanguis::client::draw2d::entities::model::parameters::color() const
 {
 	return

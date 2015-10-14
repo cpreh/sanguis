@@ -43,7 +43,7 @@ sanguis::server::auras::aoe_damage::~aoe_damage()
 {
 }
 
-sanguis::optional_aura_type const
+sanguis::optional_aura_type
 sanguis::server::auras::aoe_damage::type() const
 {
 	return

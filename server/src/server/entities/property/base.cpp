@@ -9,21 +9,21 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::server::entities::property::constant const
+sanguis::server::entities::property::constant
 sanguis::server::entities::property::base::constant() const
 {
 	return
 		constant_;
 }
 
-sanguis::server::entities::property::linear const
+sanguis::server::entities::property::linear
 sanguis::server::entities::property::base::linear() const
 {
 	return
 		linear_;
 }
 
-sanguis::server::entities::property::linear_decrease const
+sanguis::server::entities::property::linear_decrease
 sanguis::server::entities::property::base::linear_decrease() const
 {
 	return

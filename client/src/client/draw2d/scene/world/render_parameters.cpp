@@ -34,14 +34,14 @@ sanguis::client::draw2d::scene::world::render_parameters::render_context() const
 		render_context_;
 }
 
-sanguis::client::draw2d::player_center const
+sanguis::client::draw2d::player_center
 sanguis::client::draw2d::scene::world::render_parameters::player_center() const
 {
 	return
 		player_center_;
 }
 
-sanguis::client::draw2d::translation const
+sanguis::client::draw2d::translation
 sanguis::client::draw2d::scene::world::render_parameters::translation() const
 {
 	return

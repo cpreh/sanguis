@@ -172,7 +172,7 @@ sanguis::client::object::~object()
 {
 }
 
-awl::main::exit_code const
+awl::main::exit_code
 sanguis::client::object::run()
 {
 	this->register_handler();
@@ -316,7 +316,7 @@ sanguis::client::object::create_server(
 		);
 }
 
-awl::main::exit_code const
+awl::main::exit_code
 sanguis::client::object::quit_server()
 {
 	fcppt::maybe_void(

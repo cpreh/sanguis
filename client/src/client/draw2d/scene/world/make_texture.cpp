@@ -14,7 +14,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sge::texture::const_optional_part_ref const
+sge::texture::const_optional_part_ref
 sanguis::client::draw2d::scene::world::make_texture(
 	sanguis::random_generator &_random_generator,
 	sanguis::client::draw::debug const _debug,

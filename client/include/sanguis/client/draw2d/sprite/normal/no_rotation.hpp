@@ -15,7 +15,7 @@ namespace sprite
 namespace normal
 {
 
-sanguis::client::draw2d::sprite::rotation const
+sanguis::client::draw2d::sprite::rotation
 no_rotation();
 
 }

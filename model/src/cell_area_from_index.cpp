@@ -16,7 +16,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::model::cell_area const
+sanguis::model::cell_area
 sanguis::model::cell_area_from_index(
 	sanguis::model::image_size const _image_size,
 	sanguis::model::cell_size const _cell_size,

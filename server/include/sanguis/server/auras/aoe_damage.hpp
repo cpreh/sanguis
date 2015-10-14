@@ -39,7 +39,7 @@ public:
 	~aoe_damage()
 	override;
 private:
-	sanguis::optional_aura_type const
+	sanguis::optional_aura_type
 	type() const
 	override;
 

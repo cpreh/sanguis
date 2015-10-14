@@ -12,7 +12,7 @@ namespace server
 namespace collision
 {
 
-sanguis::collision::speed const
+sanguis::collision::speed
 to_speed(
 	sanguis::server::speed
 );

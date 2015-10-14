@@ -24,13 +24,13 @@ protected:
 	load_context();
 public:
 	virtual
-	sanguis::server::radius const
+	sanguis::server::radius
 	model_size(
 		sanguis::load::model::path const &
 	) const = 0;
 
 	virtual
-	sanguis::entity_id const
+	sanguis::entity_id
 	next_id() = 0;
 
 	virtual

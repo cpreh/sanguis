@@ -10,7 +10,7 @@ namespace sanguis
 {
 
 SANGUIS_COMMON_SYMBOL
-sanguis::duration const
+sanguis::duration
 duration_second(
 	sanguis::time_unit
 );

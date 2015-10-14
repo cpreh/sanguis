@@ -19,10 +19,10 @@ public:
 		sanguis::client::max_health
 	);
 
-	sanguis::client::health const
+	sanguis::client::health
 	health() const;
 
-	sanguis::client::max_health const
+	sanguis::client::max_health
 	max_health() const;
 
 	void

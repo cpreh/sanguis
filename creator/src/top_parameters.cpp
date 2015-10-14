@@ -34,21 +34,21 @@ sanguis::creator::top_parameters::name() const
 		name_;
 }
 
-sanguis::creator::seed const
+sanguis::creator::seed
 sanguis::creator::top_parameters::seed() const
 {
 	return
 		seed_;
 }
 
-sanguis::creator::opening_count_array const
+sanguis::creator::opening_count_array const &
 sanguis::creator::top_parameters::opening_count_array() const
 {
 	return
 		opening_count_array_;
 }
 
-sanguis::creator::spawn_boss const
+sanguis::creator::spawn_boss
 sanguis::creator::top_parameters::spawn_boss() const
 {
 	return

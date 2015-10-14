@@ -45,7 +45,7 @@ protected:
 	~aoe_projectile()
 	override;
 
-	sanguis::server::aoe const
+	sanguis::server::aoe
 	aoe() const;
 private:
 	sanguis::messages::server::unique_ptr

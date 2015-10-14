@@ -7,7 +7,7 @@
 #include <fcppt/type_iso/strong_typedef.hpp>
 
 
-sanguis::server::random::amount const
+sanguis::server::random::amount
 sanguis::server::weapons::modifiers::random_amount(
 	sanguis::random_generator &_random_generator,
 	sanguis::server::random::amount const _max

@@ -6,7 +6,7 @@
 #include <fcppt/algorithm/enum_array_fold_static.hpp>
 
 
-sanguis::server::damage::modified_array const
+sanguis::server::damage::modified_array
 sanguis::server::damage::unmodified(
 	sanguis::server::damage::array const &_damages
 )

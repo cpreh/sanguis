@@ -72,7 +72,7 @@ public:
 		sanguis::collision::result const &
 	);
 
-	sanguis::collision::center const
+	sanguis::collision::center
 	center() const
 	override;
 
@@ -82,15 +82,15 @@ public:
 	)
 	override;
 
-	sanguis::collision::speed const
+	sanguis::collision::speed
 	speed() const
 	override;
 
-	sanguis::collision::radius const
+	sanguis::collision::radius
 	radius() const
 	override;
 
-	sanguis::collision::optional_mass const
+	sanguis::collision::optional_mass
 	mass() const
 	override;
 

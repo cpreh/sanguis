@@ -15,7 +15,7 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 
 
-sanguis::creator::optional_pos const
+sanguis::creator::optional_pos
 sanguis::server::random::grid_pos_around(
 	sanguis::random_generator &_random_generator,
 	sanguis::creator::dim const _size,

@@ -14,7 +14,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::tools::libmergeimage::impl::cell_size const
+sanguis::tools::libmergeimage::impl::cell_size
 sanguis::tools::libmergeimage::impl::calc_cell_size(
 	sge::image2d::system &_image_system,
 	boost::filesystem::path const &_base_path,

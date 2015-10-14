@@ -69,11 +69,11 @@ public:
 	~container()
 	override;
 
-	sanguis::client::draw2d::sprite::center const
+	sanguis::client::draw2d::sprite::center
 	center() const
 	override;
 
-	sanguis::client::draw2d::radius const
+	sanguis::client::draw2d::radius
 	radius() const
 	override;
 
@@ -88,7 +88,7 @@ public:
 		sanguis::client::draw2d::sprite::normal::color const &
 	);
 
-	sanguis::client::draw2d::sprite::normal::color const
+	sanguis::client::draw2d::sprite::normal::color
 	color() const;
 
 	void
@@ -97,7 +97,7 @@ public:
 	)
 	override;
 
-	sanguis::client::draw2d::center const
+	sanguis::client::draw2d::center
 	float_center() const;
 
 	void
@@ -116,11 +116,11 @@ public:
 	)
 	override;
 
-	sanguis::client::draw2d::speed const
+	sanguis::client::draw2d::speed
 	speed() const
 	override;
 
-	sanguis::duration const
+	sanguis::duration
 	movement_duration() const;
 
 	// own functions

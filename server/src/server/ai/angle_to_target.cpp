@@ -9,7 +9,7 @@
 #include <fcppt/math/vector/signed_angle_between.hpp>
 
 
-sanguis::server::optional_angle const
+sanguis::server::optional_angle
 sanguis::server::ai::angle_to_target(
 	sanguis::server::entities::with_ai &_me,
 	sanguis::server::ai::target const _target

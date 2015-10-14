@@ -71,7 +71,7 @@ sanguis::client::draw2d::sprite::animation::texture::~texture()
 {
 }
 
-sge::texture::const_part_ref const
+sge::texture::const_part_ref
 sanguis::client::draw2d::sprite::animation::texture::current_texture()
 {
 	auto const handle_end(

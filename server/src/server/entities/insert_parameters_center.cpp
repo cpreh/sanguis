@@ -4,7 +4,7 @@
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 
 
-sanguis::server::entities::insert_parameters const
+sanguis::server::entities::insert_parameters
 sanguis::server::entities::insert_parameters_center(
 	sanguis::server::center const _center
 )

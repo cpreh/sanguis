@@ -132,7 +132,7 @@ sanguis::client::draw2d::scene::camera::reset_translation()
 		sanguis::client::draw2d::optional_vector2();
 }
 
-sanguis::client::draw2d::optional_translation const
+sanguis::client::draw2d::optional_translation
 sanguis::client::draw2d::scene::camera::translation() const
 {
 	return
@@ -155,7 +155,7 @@ sanguis::client::draw2d::scene::camera::translation() const
 		);
 }
 
-sanguis::client::control::optional_attack_dest const
+sanguis::client::control::optional_attack_dest
 sanguis::client::draw2d::scene::camera::translate_attack_dest(
 	sanguis::client::control::cursor_position const _cursor_position
 )

@@ -62,7 +62,7 @@ sanguis::server::entities::spawns::spawn::spawn(
 {
 }
 
-sanguis::server::center const
+sanguis::server::center
 sanguis::server::entities::spawns::spawn::center() const
 {
 	return
@@ -71,7 +71,7 @@ sanguis::server::entities::spawns::spawn::center() const
 		);
 }
 
-sanguis::server::angle const
+sanguis::server::angle
 sanguis::server::entities::spawns::spawn::angle() const
 {
 	return

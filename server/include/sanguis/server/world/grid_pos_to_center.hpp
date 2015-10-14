@@ -12,7 +12,7 @@ namespace server
 namespace world
 {
 
-sanguis::server::center const
+sanguis::server::center
 grid_pos_to_center(
 	sanguis::creator::pos
 );

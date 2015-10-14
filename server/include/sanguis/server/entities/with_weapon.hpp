@@ -64,7 +64,7 @@ protected:
 	)
 	override;
 
-	sanguis::optional_primary_weapon_type const
+	sanguis::optional_primary_weapon_type
 	primary_weapon_type() const;
 public:
 	void
@@ -82,7 +82,7 @@ public:
 		sanguis::server::weapons::optional_target
 	);
 
-	sanguis::server::weapons::optional_target const
+	sanguis::server::weapons::optional_target
 	target() const;
 
 	bool
@@ -115,22 +115,22 @@ public:
 	)
 	override;
 
-	sanguis::server::damage::unit const
+	sanguis::server::damage::unit
 	extra_damage_value(
 		sanguis::server::damage::type
 	) const
 	override;
 
-	sanguis::server::weapons::ias const
+	sanguis::server::weapons::ias
 	ias() const;
 
-	sanguis::server::weapons::irs const
+	sanguis::server::weapons::irs
 	irs() const;
 
-	sanguis::server::weapons::const_optional_ref const
+	sanguis::server::weapons::const_optional_ref
 	primary_weapon() const;
 
-	sanguis::server::weapons::const_optional_ref const
+	sanguis::server::weapons::const_optional_ref
 	secondary_weapon() const;
 
 	void
@@ -160,18 +160,18 @@ private:
 	>
 	optional_weapon_ref;
 
-	sanguis::server::entities::with_weapon::optional_weapon_ref const
+	sanguis::server::entities::with_weapon::optional_weapon_ref
 	primary_weapon_ref() const;
 
-	sanguis::server::entities::with_weapon::optional_weapon_ref const
+	sanguis::server::entities::with_weapon::optional_weapon_ref
 	secondary_weapon_ref() const;
 
-	sanguis::server::entities::with_weapon::optional_weapon_ref const
+	sanguis::server::entities::with_weapon::optional_weapon_ref
 	weapon_ref(
 		sanguis::server::weapons::optional_unique_ptr const &
 	) const;
 
-	sanguis::server::entities::with_weapon::optional_weapon_ref const
+	sanguis::server::entities::with_weapon::optional_weapon_ref
 	get_weapon(
 		sanguis::is_primary_weapon
 	) const;

@@ -26,7 +26,7 @@ class center_simple
 protected:
 	center_simple();
 public:
-	sanguis::server::center const
+	sanguis::server::center
 	center() const
 	override
 	final;

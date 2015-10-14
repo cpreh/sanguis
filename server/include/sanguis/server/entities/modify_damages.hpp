@@ -13,7 +13,7 @@ namespace server
 namespace entities
 {
 
-sanguis::server::damage::modified_array const
+sanguis::server::damage::modified_array
 modify_damages(
 	sanguis::server::entities::ifaces::with_weapon const &,
 	sanguis::server::damage::array const &

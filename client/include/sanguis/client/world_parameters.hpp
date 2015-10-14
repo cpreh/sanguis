@@ -23,7 +23,7 @@ public:
 		sanguis::creator::top_parameters const &
 	);
 
-	sanguis::world_id const
+	sanguis::world_id
 	world_id() const;
 
 	sanguis::creator::top_parameters const &

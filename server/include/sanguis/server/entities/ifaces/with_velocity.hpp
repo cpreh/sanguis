@@ -25,7 +25,7 @@ protected:
 	with_velocity();
 public:
 	virtual
-	sanguis::server::speed const
+	sanguis::server::speed
 	speed() const = 0;
 
 	virtual

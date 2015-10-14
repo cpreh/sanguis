@@ -34,7 +34,7 @@ public:
 	ghost() const;
 
 	SANGUIS_COLLISION_SYMBOL
-	sanguis::collision::world::created const
+	sanguis::collision::world::created
 	created() const;
 private:
 	typedef

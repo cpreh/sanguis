@@ -22,7 +22,7 @@ namespace scene
 namespace world
 {
 
-sge::texture::const_optional_part_ref const
+sge::texture::const_optional_part_ref
 make_texture(
 	sanguis::random_generator &,
 	sanguis::client::draw::debug,

@@ -4,7 +4,7 @@
 #include <fcppt/make_literal_strong_typedef.hpp>
 
 
-sanguis::client::draw2d::sprite::rotation const
+sanguis::client::draw2d::sprite::rotation
 sanguis::client::draw2d::sprite::normal::no_rotation()
 {
 	return

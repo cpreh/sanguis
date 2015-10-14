@@ -28,21 +28,21 @@ sanguis::server::weapons::melee_parameters::melee_parameters(
 {
 }
 
-sanguis::server::weapons::backswing_time const
+sanguis::server::weapons::backswing_time
 sanguis::server::weapons::melee_parameters::backswing_time() const
 {
 	return
 		backswing_time_;
 }
 
-sanguis::server::weapons::attributes::damage const
+sanguis::server::weapons::attributes::damage
 sanguis::server::weapons::melee_parameters::damage() const
 {
 	return
 		damage_;
 }
 
-sanguis::server::weapons::range const
+sanguis::server::weapons::range
 sanguis::server::weapons::melee_parameters::range() const
 {
 	return

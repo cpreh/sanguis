@@ -128,7 +128,7 @@ protected:
 	)
 	override;
 
-	sanguis::client::optional_health_pair const
+	sanguis::client::optional_health_pair
 	health_pair() const;
 private:
 	typedef

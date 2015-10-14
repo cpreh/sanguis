@@ -59,10 +59,10 @@ public:
 	sanguis::client::weapon_pair const &
 	player_weapons() const;
 
-	sanguis::client::draw2d::sprite::center const
+	sanguis::client::draw2d::sprite::center
 	center() const;
 
-	sanguis::client::draw2d::radius const
+	sanguis::client::draw2d::radius
 	radius() const;
 private:
 	sge::gui::style::base const &gui_style_;

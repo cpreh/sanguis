@@ -14,7 +14,7 @@ namespace draw2d
 namespace scene
 {
 
-sge::renderer::screen_size const
+sge::renderer::screen_size
 background_dim(
 	sge::renderer::device::core &
 );

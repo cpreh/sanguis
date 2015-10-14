@@ -94,7 +94,7 @@ sanguis::server::entities::projectiles::base::world_collision()
 	this->expire();
 }
 
-boost::logic::tribool const
+boost::logic::tribool
 sanguis::server::entities::projectiles::base::can_collide_with_body(
 	sanguis::server::entities::with_body const &_other
 ) const

@@ -11,7 +11,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sge::renderer::display_mode::optional_object const
+sge::renderer::display_mode::optional_object
 sanguis::client::args::display_mode(
 	boost::program_options::variables_map const &_vm
 )

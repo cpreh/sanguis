@@ -7,7 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::client::args::optional_resolution const
+sanguis::client::args::optional_resolution
 sanguis::client::args::resolution(
 	boost::program_options::variables_map const &_vm
 )

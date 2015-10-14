@@ -25,7 +25,7 @@ public:
 
 	~load();
 
-	sanguis::server::radius const
+	sanguis::server::radius
 	model_dim(
 		sanguis::load::model::path const &
 	) const;

@@ -6,7 +6,7 @@
 #include <fcppt/extract_from_string_exn.hpp>
 
 
-sanguis::server::player_id const
+sanguis::server::player_id
 sanguis::server::player_id_from_args(
 	sge::console::arg_list const &_args
 )

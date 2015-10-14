@@ -58,12 +58,12 @@ public:
 	override;
 
 	// entities::base overridden functions
-	sanguis::server::center const
+	sanguis::server::center
 	center() const
 	override;
 
 	// ifaces::with_angle overridden functions
-	sanguis::server::angle const
+	sanguis::server::angle
 	angle() const
 	override;
 
@@ -79,7 +79,7 @@ public:
 	)
 	override;
 
-	sanguis::server::radius const
+	sanguis::server::radius
 	radius() const
 	override;
 
@@ -103,11 +103,11 @@ protected:
 		sanguis::server::speed
 	);
 
-	sanguis::server::speed const
+	sanguis::server::speed
 	body_speed() const;
 private:
 	// collision::body_base
-	boost::logic::tribool const
+	boost::logic::tribool
 	can_collide_with(
 		sanguis::collision::world::body_base const &
 	) const
@@ -120,7 +120,7 @@ private:
 	override;
 
 	virtual
-	boost::logic::tribool const
+	boost::logic::tribool
 	can_collide_with_body(
 		sanguis::server::entities::with_body const &
 	) const;
@@ -136,7 +136,7 @@ private:
 	collision_group() const = 0;
 
 	virtual
-	sanguis::server::speed const
+	sanguis::server::speed
 	initial_speed() const;
 
 	void

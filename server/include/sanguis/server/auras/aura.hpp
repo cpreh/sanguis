@@ -37,7 +37,7 @@ public:
 	create_ghost();
 
 	virtual
-	sanguis::optional_aura_type const
+	sanguis::optional_aura_type
 	type() const = 0;
 protected:
 	aura(
@@ -45,7 +45,7 @@ protected:
 		sanguis::collision::world::ghost_group
 	);
 private:
-	boost::logic::tribool const
+	boost::logic::tribool
 	can_collide_with(
 		sanguis::collision::world::body_base const &
 	) const

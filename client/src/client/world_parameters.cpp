@@ -17,7 +17,7 @@ sanguis::client::world_parameters::world_parameters(
 {
 }
 
-sanguis::world_id const
+sanguis::world_id
 sanguis::client::world_parameters::world_id() const
 {
 	return

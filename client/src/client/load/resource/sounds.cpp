@@ -37,7 +37,7 @@ sanguis::client::load::resource::sounds::~sounds()
 {
 }
 
-sanguis::client::load::resource::optional_sound const
+sanguis::client::load::resource::optional_sound
 sanguis::client::load::resource::sounds::load(
 	fcppt::string const &_name
 ) const
@@ -52,7 +52,7 @@ sanguis::client::load::resource::sounds::load(
 		);
 }
 
-sanguis::client::load::resource::optional_sound const
+sanguis::client::load::resource::optional_sound
 sanguis::client::load::resource::sounds::load_path(
 	boost::filesystem::path const &_path
 ) const

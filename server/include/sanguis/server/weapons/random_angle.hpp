@@ -13,7 +13,7 @@ namespace server
 namespace weapons
 {
 
-sanguis::server::angle const
+sanguis::server::angle
 random_angle(
 	sanguis::random_generator &,
 	sanguis::server::weapons::accuracy,

@@ -9,7 +9,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::client::perk::const_tree_range const
+sanguis::client::perk::const_tree_range
 sanguis::client::perk::category_equal_range(
 	sanguis::client::perk::tree::const_iterator const _begin,
 	sanguis::client::perk::tree::const_iterator const _end

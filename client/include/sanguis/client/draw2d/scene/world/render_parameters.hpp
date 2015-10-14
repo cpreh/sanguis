@@ -36,10 +36,10 @@ public:
 	sge::renderer::context::core &
 	render_context() const;
 
-	sanguis::client::draw2d::player_center const
+	sanguis::client::draw2d::player_center
 	player_center() const;
 
-	sanguis::client::draw2d::translation const
+	sanguis::client::draw2d::translation
 	translation() const;
 
 	sanguis::client::draw2d::z_ordering

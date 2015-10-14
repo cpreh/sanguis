@@ -53,7 +53,7 @@ sanguis::client::draw2d::entities::model::animation::animation_type() const
 		animation_type_;
 }
 
-sge::texture::const_part_ref const
+sge::texture::const_part_ref
 sanguis::client::draw2d::entities::model::animation::current_texture()
 {
 	return

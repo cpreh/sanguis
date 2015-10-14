@@ -31,7 +31,7 @@ public:
 		sanguis::client::control::actions::any const &
 	);
 
-	sanguis::client::control::actions::any const
+	sanguis::client::control::actions::any const &
 	value() const;
 private:
 	sanguis::client::control::actions::any const value_;

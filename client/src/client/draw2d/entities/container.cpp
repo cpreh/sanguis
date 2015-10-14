@@ -126,7 +126,7 @@ sanguis::client::draw2d::entities::container::~container()
 {
 }
 
-sanguis::client::draw2d::sprite::center const
+sanguis::client::draw2d::sprite::center
 sanguis::client::draw2d::entities::container::center() const
 {
 	return
@@ -135,7 +135,7 @@ sanguis::client::draw2d::entities::container::center() const
 		);
 }
 
-sanguis::client::draw2d::radius const
+sanguis::client::draw2d::radius
 sanguis::client::draw2d::entities::container::radius() const
 {
 	return
@@ -184,7 +184,7 @@ sanguis::client::draw2d::entities::container::color(
 		);
 }
 
-sanguis::client::draw2d::sprite::normal::color const
+sanguis::client::draw2d::sprite::normal::color
 sanguis::client::draw2d::entities::container::color() const
 {
 	return
@@ -211,7 +211,7 @@ sanguis::client::draw2d::entities::container::center(
 	);
 }
 
-sanguis::client::draw2d::center const
+sanguis::client::draw2d::center
 sanguis::client::draw2d::entities::container::float_center() const
 {
 	return
@@ -251,14 +251,14 @@ sanguis::client::draw2d::entities::container::speed(
 		_speed;
 }
 
-sanguis::client::draw2d::speed const
+sanguis::client::draw2d::speed
 sanguis::client::draw2d::entities::container::speed() const
 {
 	return
 		speed_;
 }
 
-sanguis::duration const
+sanguis::duration
 sanguis::client::draw2d::entities::container::movement_duration() const
 {
 	return

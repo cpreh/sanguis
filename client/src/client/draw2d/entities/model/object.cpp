@@ -289,7 +289,7 @@ sanguis::client::draw2d::entities::model::object::max_health(
 	);
 }
 
-sanguis::client::optional_health_pair const
+sanguis::client::optional_health_pair
 sanguis::client::draw2d::entities::model::object::health_pair() const
 {
 	return

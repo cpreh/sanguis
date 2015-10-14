@@ -19,7 +19,7 @@ template<
 	typename Unit
 >
 inline
-sanguis::creator::pos const
+sanguis::creator::pos
 center_to_grid_pos(
 	fcppt::math::vector::static_<
 		Unit,

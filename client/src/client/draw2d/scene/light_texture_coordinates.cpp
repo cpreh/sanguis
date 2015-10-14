@@ -12,7 +12,7 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 
 
-sanguis::client::draw2d::sprite::client::texture_coordinates const
+sanguis::client::draw2d::sprite::client::texture_coordinates
 sanguis::client::draw2d::scene::light_texture_coordinates(
 	sge::renderer::device::core &_renderer,
 	sge::texture::part const &_texture

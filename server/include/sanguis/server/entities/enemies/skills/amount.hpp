@@ -15,7 +15,7 @@ namespace enemies
 namespace skills
 {
 
-sanguis::server::random::amount const
+sanguis::server::random::amount
 amount();
 
 }

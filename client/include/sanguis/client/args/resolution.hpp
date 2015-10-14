@@ -14,7 +14,7 @@ namespace client
 namespace args
 {
 
-sanguis::client::args::optional_resolution const
+sanguis::client::args::optional_resolution
 resolution(
 	boost::program_options::variables_map const &
 );

@@ -31,7 +31,7 @@ weapon_type_array const weapon_types(
 
 }
 
-sanguis::optional_primary_weapon_type const
+sanguis::optional_primary_weapon_type
 sanguis::client::load::model::lookup_weapon_name(
 	sanguis::model::weapon_category_name const &_name
 )

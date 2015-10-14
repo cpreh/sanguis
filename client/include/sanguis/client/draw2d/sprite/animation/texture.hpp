@@ -65,7 +65,7 @@ public:
 
 	~texture();
 
-	sge::texture::const_part_ref const
+	sge::texture::const_part_ref
 	current_texture();
 
 	bool

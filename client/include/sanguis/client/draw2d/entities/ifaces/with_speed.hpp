@@ -34,7 +34,7 @@ public:
 	) = 0;
 
 	virtual
-	sanguis::client::draw2d::speed const
+	sanguis::client::draw2d::speed
 	speed() const = 0;
 };
 

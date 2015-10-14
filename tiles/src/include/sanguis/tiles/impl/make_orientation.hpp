@@ -20,7 +20,7 @@ template<
 sanguis::creator::enable_if_tile<
 	Tile,
 	sanguis::tiles::orientation
-> const
+>
 make_orientation(
 	sanguis::tiles::pair<
 		Tile

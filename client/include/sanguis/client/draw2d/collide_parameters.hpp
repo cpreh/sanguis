@@ -28,16 +28,16 @@ public:
 		sanguis::client::draw2d::fradius
 	);
 
-	sanguis::duration const
+	sanguis::duration
 	duration() const;
 
-	sanguis::client::draw2d::center const
+	sanguis::client::draw2d::center
 	center() const;
 
-	sanguis::client::draw2d::speed const
+	sanguis::client::draw2d::speed
 	speed() const;
 
-	sanguis::client::draw2d::fradius const
+	sanguis::client::draw2d::fradius
 	radius() const;
 private:
 	sanguis::duration const duration_;

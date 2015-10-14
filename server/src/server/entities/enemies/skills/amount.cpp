@@ -5,7 +5,7 @@
 #include <fcppt/cast/size_fun.hpp>
 
 
-sanguis::server::random::amount const
+sanguis::server::random::amount
 sanguis::server::entities::enemies::skills::amount()
 {
 	return

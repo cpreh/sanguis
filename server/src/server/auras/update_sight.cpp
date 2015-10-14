@@ -35,7 +35,7 @@ sanguis::server::auras::update_sight::~update_sight()
 {
 }
 
-sanguis::optional_aura_type const
+sanguis::optional_aura_type
 sanguis::server::auras::update_sight::type() const
 {
 	return

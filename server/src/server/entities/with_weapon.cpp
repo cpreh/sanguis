@@ -133,7 +133,7 @@ sanguis::server::entities::with_weapon::tick(
 	);
 }
 
-sanguis::optional_primary_weapon_type const
+sanguis::optional_primary_weapon_type
 sanguis::server::entities::with_weapon::primary_weapon_type() const
 {
 	return
@@ -242,7 +242,7 @@ sanguis::server::entities::with_weapon::target(
 		_target;
 }
 
-sanguis::server::weapons::optional_target const
+sanguis::server::weapons::optional_target
 sanguis::server::entities::with_weapon::target() const
 {
 	return
@@ -344,7 +344,7 @@ sanguis::server::entities::with_weapon::extra_damage(
 		];
 }
 
-sanguis::server::damage::unit const
+sanguis::server::damage::unit
 sanguis::server::entities::with_weapon::extra_damage_value(
 	sanguis::server::damage::type const _damage_type
 ) const
@@ -357,7 +357,7 @@ sanguis::server::entities::with_weapon::extra_damage_value(
 		);
 }
 
-sanguis::server::weapons::ias const
+sanguis::server::weapons::ias
 sanguis::server::entities::with_weapon::ias() const
 {
 	return
@@ -366,7 +366,7 @@ sanguis::server::entities::with_weapon::ias() const
 		);
 }
 
-sanguis::server::weapons::irs const
+sanguis::server::weapons::irs
 sanguis::server::entities::with_weapon::irs() const
 {
 	return
@@ -375,7 +375,7 @@ sanguis::server::entities::with_weapon::irs() const
 		);
 }
 
-sanguis::server::weapons::const_optional_ref const
+sanguis::server::weapons::const_optional_ref
 sanguis::server::entities::with_weapon::primary_weapon() const
 {
 	return
@@ -386,7 +386,7 @@ sanguis::server::entities::with_weapon::primary_weapon() const
 		);
 }
 
-sanguis::server::weapons::const_optional_ref const
+sanguis::server::weapons::const_optional_ref
 sanguis::server::entities::with_weapon::secondary_weapon() const
 {
 	return
@@ -463,7 +463,7 @@ sanguis::server::entities::with_weapon::weapon_status() const
 		weapon_status_;
 }
 
-sanguis::server::entities::with_weapon::optional_weapon_ref const
+sanguis::server::entities::with_weapon::optional_weapon_ref
 sanguis::server::entities::with_weapon::primary_weapon_ref() const
 {
 	return
@@ -472,7 +472,7 @@ sanguis::server::entities::with_weapon::primary_weapon_ref() const
 		);
 }
 
-sanguis::server::entities::with_weapon::optional_weapon_ref const
+sanguis::server::entities::with_weapon::optional_weapon_ref
 sanguis::server::entities::with_weapon::secondary_weapon_ref() const
 {
 	return
@@ -481,7 +481,7 @@ sanguis::server::entities::with_weapon::secondary_weapon_ref() const
 		);
 }
 
-sanguis::server::entities::with_weapon::optional_weapon_ref const
+sanguis::server::entities::with_weapon::optional_weapon_ref
 sanguis::server::entities::with_weapon::weapon_ref(
 	sanguis::server::weapons::optional_unique_ptr const &_weapon
 ) const
@@ -500,7 +500,7 @@ sanguis::server::entities::with_weapon::weapon_ref(
 		);
 }
 
-sanguis::server::entities::with_weapon::optional_weapon_ref const
+sanguis::server::entities::with_weapon::optional_weapon_ref
 sanguis::server::entities::with_weapon::get_weapon(
 	sanguis::is_primary_weapon const _is_primary
 ) const

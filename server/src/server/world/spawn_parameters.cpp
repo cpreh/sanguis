@@ -5,7 +5,7 @@
 #include <sanguis/server/world/spawn_parameters.hpp>
 
 
-sanguis::server::entities::insert_parameters const
+sanguis::server::entities::insert_parameters
 sanguis::server::world::spawn_parameters(
 	sanguis::creator::spawn const &_spawn
 )

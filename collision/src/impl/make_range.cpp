@@ -23,7 +23,7 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 
 
-sanguis::creator::grid_crange const
+sanguis::creator::grid_crange
 sanguis::collision::impl::make_range(
 	sanguis::creator::grid const &_grid,
 	sanguis::collision::center const _center,

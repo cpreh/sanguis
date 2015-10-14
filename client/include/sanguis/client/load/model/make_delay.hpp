@@ -15,7 +15,7 @@ namespace load
 namespace model
 {
 
-sanguis::duration const
+sanguis::duration
 make_delay(
 	sanguis::model::animation const &,
 	sanguis::model::optional_animation_delay const &

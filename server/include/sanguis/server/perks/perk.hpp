@@ -45,7 +45,7 @@ protected:
 		sanguis::perk_type
 	);
 
-	sanguis::server::level const
+	sanguis::server::level
 	level() const;
 private:
 	virtual

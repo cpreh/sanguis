@@ -129,7 +129,7 @@ public:
 		sanguis::server::player_id
 	) const;
 private:
-	sanguis::entity_id const
+	sanguis::entity_id
 	next_id();
 
 	// callbacks for world
@@ -170,7 +170,7 @@ private:
 		sanguis::server::player_id
 	);
 
-	sanguis::server::entities::optional_player_ref const
+	sanguis::server::entities::optional_player_ref
 	player_opt(
 		sanguis::server::player_id
 	);

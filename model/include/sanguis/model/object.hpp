@@ -46,7 +46,7 @@ public:
 	~object();
 
 	SANGUIS_MODEL_SYMBOL
-	sanguis::model::optional_animation_delay const
+	sanguis::model::optional_animation_delay
 	animation_delay() const;
 
 	SANGUIS_MODEL_SYMBOL
@@ -82,7 +82,7 @@ public:
 	parts() const;
 
 	SANGUIS_MODEL_SYMBOL
-	sanguis::model::cell_size const
+	sanguis::model::cell_size
 	cell_size() const;
 
 	SANGUIS_MODEL_SYMBOL

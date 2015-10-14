@@ -7,7 +7,7 @@
 #include <fcppt/math/diff.hpp>
 
 
-sanguis::duration const
+sanguis::duration
 sanguis::server::net::angle_policy::start_duration()
 {
 	return
@@ -16,7 +16,7 @@ sanguis::server::net::angle_policy::start_duration()
 		);
 }
 
-sanguis::duration const
+sanguis::duration
 sanguis::server::net::angle_policy::difference(
 	sanguis::server::angle const _angle1,
 	sanguis::server::angle const _angle2

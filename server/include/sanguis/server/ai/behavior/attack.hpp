@@ -75,7 +75,7 @@ private:
 	closest_visible_target() const;
 
 	virtual
-	sanguis::server::ai::speed_factor const
+	sanguis::server::ai::speed_factor
 	speed_factor() const;
 
 	sanguis::server::ai::sight_range const sight_range_;

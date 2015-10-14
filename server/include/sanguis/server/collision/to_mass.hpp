@@ -12,7 +12,7 @@ namespace server
 namespace collision
 {
 
-sanguis::collision::mass const
+sanguis::collision::mass
 to_mass(
 	sanguis::server::mass
 );

@@ -3,7 +3,7 @@
 #include <sanguis/time_unit.hpp>
 
 
-sanguis::duration const
+sanguis::duration
 sanguis::duration_second(
 	sanguis::time_unit const _time
 )

@@ -13,7 +13,7 @@ namespace collision
 namespace impl
 {
 
-sanguis::collision::impl::optional_intersection const
+sanguis::collision::impl::optional_intersection
 rect_line_intersection(
 	sanguis::collision::impl::rect,
 	sanguis::collision::impl::line_segment

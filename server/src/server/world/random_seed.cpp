@@ -9,7 +9,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::creator::seed const
+sanguis::creator::seed
 sanguis::server::world::random_seed(
 	sanguis::random_generator &_generator
 )

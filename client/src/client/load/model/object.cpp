@@ -161,7 +161,7 @@ sanguis::client::load::model::object::end() const
 		this->parts().end();
 }
 
-sanguis::model::cell_size const
+sanguis::model::cell_size
 sanguis::client::load::model::object::cell_size() const
 {
 	return

@@ -12,7 +12,7 @@ namespace server
 namespace collision
 {
 
-sanguis::server::radius const
+sanguis::server::radius
 from_radius(
 	sanguis::collision::radius
 );

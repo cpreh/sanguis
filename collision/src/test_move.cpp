@@ -25,7 +25,7 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 
 
-sanguis::collision::optional_result const
+sanguis::collision::optional_result
 sanguis::collision::test_move(
 	sanguis::collision::center const _center,
 	sanguis::collision::radius const _radius,

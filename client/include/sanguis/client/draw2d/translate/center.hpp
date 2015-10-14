@@ -23,7 +23,7 @@ template<
 	typename Message
 >
 inline
-sanguis::client::draw2d::sprite::center const
+sanguis::client::draw2d::sprite::center
 center(
 	Message const &_message
 )

@@ -5,7 +5,7 @@
 #include <sge/renderer/target/viewport_size.hpp>
 
 
-sge::renderer::screen_size const
+sge::renderer::screen_size
 sanguis::client::draw2d::scene::background_dim(
 	sge::renderer::device::core &_device
 )

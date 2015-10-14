@@ -2,7 +2,7 @@
 #include <sanguis/server/weapons/irs.hpp>
 
 
-sanguis::server::weapons::irs const
+sanguis::server::weapons::irs
 sanguis::server::weapons::default_irs()
 {
 	return

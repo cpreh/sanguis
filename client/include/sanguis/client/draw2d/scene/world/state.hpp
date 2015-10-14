@@ -71,7 +71,7 @@ public:
 		sanguis::client::draw2d::scene::world::render_parameters const &
 	);
 
-	sanguis::client::draw2d::optional_speed const
+	sanguis::client::draw2d::optional_speed
 	test_collision(
 		sanguis::client::draw2d::collide_parameters const &
 	) const;

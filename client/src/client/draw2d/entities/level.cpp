@@ -24,7 +24,7 @@ sanguis::client::draw2d::entities::level::z_ordering() const
 		z_ordering_;
 }
 
-sge::texture::const_part_ref const
+sge::texture::const_part_ref
 sanguis::client::draw2d::entities::level::texture() const
 {
 	return

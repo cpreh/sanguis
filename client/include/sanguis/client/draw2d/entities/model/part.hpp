@@ -82,7 +82,7 @@ public:
 	bool
 	ended() const;
 
-	sge::texture::const_part_ref const
+	sge::texture::const_part_ref
 	texture();
 private:
 	sanguis::client::draw2d::entities::model::animation

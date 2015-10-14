@@ -8,7 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-sanguis::collision::speed const
+sanguis::collision::speed
 sanguis::server::collision::to_speed(
 	sanguis::server::speed const _speed
 )
