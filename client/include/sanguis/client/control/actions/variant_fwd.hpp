@@ -5,10 +5,7 @@
 #include <sanguis/client/control/actions/cursor_fwd.hpp>
 #include <sanguis/client/control/actions/nullary_fwd.hpp>
 #include <sanguis/client/control/actions/scale_fwd.hpp>
-#include <fcppt/variant/object_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/vector/vector10.hpp>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/variant/variadic_fwd.hpp>
 
 
 namespace sanguis
@@ -20,14 +17,14 @@ namespace control
 namespace actions
 {
 
-typedef fcppt::variant::object<
-	boost::mpl::vector4<
-		sanguis::client::control::actions::binary,
-		sanguis::client::control::actions::cursor,
-		sanguis::client::control::actions::nullary,
-		sanguis::client::control::actions::scale
-	>
-> variant;
+typedef
+fcppt::variant::variadic<
+	sanguis::client::control::actions::binary,
+	sanguis::client::control::actions::cursor,
+	sanguis::client::control::actions::nullary,
+	sanguis::client::control::actions::scale
+>
+variant;
 
 }
 }

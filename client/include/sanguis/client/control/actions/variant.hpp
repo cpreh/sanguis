@@ -6,7 +6,7 @@
 #include <sanguis/client/control/actions/nullary.hpp>
 #include <sanguis/client/control/actions/scale.hpp>
 #include <sanguis/client/control/actions/variant_fwd.hpp>
-#include <fcppt/variant/object_impl.hpp>
+#include <fcppt/variant/variadic.hpp>
 
 
 #endif

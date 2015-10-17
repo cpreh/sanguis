@@ -3,10 +3,7 @@
 
 #include <sanguis/tiles/error_fwd.hpp>
 #include <sanguis/tiles/area_container_ref_fwd.hpp>
-#include <fcppt/variant/object_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/vector/vector10.hpp>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/variant/variadic_fwd.hpp>
 
 
 namespace sanguis
@@ -15,11 +12,9 @@ namespace tiles
 {
 
 typedef
-fcppt::variant::object<
-	boost::mpl::vector2<
-		sanguis::tiles::area_container_ref,
-		sanguis::tiles::error
-	>
+fcppt::variant::variadic<
+	sanguis::tiles::area_container_ref,
+	sanguis::tiles::error
 >
 content;
 

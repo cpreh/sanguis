@@ -4,7 +4,7 @@
 #include <sanguis/tiles/area_container_ref.hpp>
 #include <sanguis/tiles/content_fwd.hpp>
 #include <sanguis/tiles/error.hpp>
-#include <fcppt/variant/object_impl.hpp>
+#include <fcppt/variant/variadic.hpp>
 
 
 #endif
