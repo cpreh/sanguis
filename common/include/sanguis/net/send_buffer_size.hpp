@@ -11,7 +11,7 @@ namespace net
 {
 
 SANGUIS_COMMON_SYMBOL
-alda::net::buffer::max_send_size const
+alda::net::buffer::max_send_size
 send_buffer_size();
 
 }

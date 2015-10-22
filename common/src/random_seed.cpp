@@ -3,7 +3,7 @@
 #include <fcppt/random/generator/seed_from_chrono.hpp>
 
 
-sanguis::random_generator::seed const
+sanguis::random_generator::seed
 sanguis::random_seed()
 {
 	return

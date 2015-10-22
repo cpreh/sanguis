@@ -2,7 +2,7 @@
 #include <alda/net/buffer/max_send_size.hpp>
 
 
-alda::net::buffer::max_send_size const
+alda::net::buffer::max_send_size
 sanguis::net::send_buffer_size()
 {
 	return

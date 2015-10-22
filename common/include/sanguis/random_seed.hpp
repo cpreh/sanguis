@@ -9,7 +9,7 @@ namespace sanguis
 {
 
 SANGUIS_COMMON_SYMBOL
-sanguis::random_generator::seed const
+sanguis::random_generator::seed
 random_seed();
 
 }

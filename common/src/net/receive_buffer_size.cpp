@@ -2,7 +2,7 @@
 #include <alda/net/buffer/max_receive_size.hpp>
 
 
-alda::net::buffer::max_receive_size const
+alda::net::buffer::max_receive_size
 sanguis::net::receive_buffer_size()
 {
 	return
