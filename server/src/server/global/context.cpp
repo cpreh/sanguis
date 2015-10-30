@@ -58,6 +58,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/maybe_void.hpp>
+#include <fcppt/optional_bind.hpp>
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/optional_to_exception.hpp>
 #include <fcppt/reference_wrapper_impl.hpp>
@@ -65,6 +66,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/optional_error.hpp>
+#include <fcppt/container/at_optional.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>
@@ -191,39 +193,39 @@ sanguis::server::global::context::insert_player(
 		)
 	);
 
-	if(
-		cur_world.openings().empty()
-	)
-	{
-		FCPPT_LOG_ERROR(
-			logger,
-			fcppt::log::_
-				<< FCPPT_TEXT("A world has no openings, so can't insert the player!")
-		);
-
-		return;
-	}
-
 	fcppt::maybe(
-		sanguis::server::entities::insert_with_result<
-			sanguis::server::entities::with_id
-		>(
-			cur_world,
-			std::move(
-				player_ptr
+		fcppt::optional_bind(
+			fcppt::container::at_optional(
+				cur_world.openings()[
+					sanguis::creator::opening_type::entry
+				],
+				0u
 			),
-			sanguis::server::entities::insert_parameters(
-				sanguis::server::world::grid_pos_to_center(
-					cur_world.openings()[
-						sanguis::creator::opening_type::entry
-					].at(
-						0
-					).get()
-				),
-				sanguis::server::angle(
-					0.f
-				)
+			[
+				&cur_world,
+				&player_ptr
+			](
+				sanguis::creator::opening const _opening
 			)
+			{
+				return
+					sanguis::server::entities::insert_with_result<
+						sanguis::server::entities::with_id
+					>(
+						cur_world,
+						std::move(
+							player_ptr
+						),
+						sanguis::server::entities::insert_parameters(
+							sanguis::server::world::grid_pos_to_center(
+								_opening.get()
+							),
+							sanguis::server::angle(
+								0.f
+							)
+						)
+					);
+			}
 		),
 		[]{
 			FCPPT_LOG_ERROR(
