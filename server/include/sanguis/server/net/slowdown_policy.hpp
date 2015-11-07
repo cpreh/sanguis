@@ -2,7 +2,6 @@
 #define SANGUIS_SERVER_NET_SLOWDOWN_POLICY_HPP_INCLUDED
 
 #include <sanguis/clock.hpp>
-#include <sanguis/duration.hpp>
 #include <sanguis/slowdown_fwd.hpp>
 #include <sanguis/server/net/slowdown_policy_fwd.hpp>
 
@@ -21,7 +20,7 @@ struct slowdown_policy
 	start_duration();
 
 	static
-	sanguis::duration
+	sanguis::clock::duration
 	difference(
 		sanguis::slowdown,
 		sanguis::slowdown

@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_NET_BASIC_VALUE_IMPL_HPP_INCLUDED
 #define SANGUIS_SERVER_NET_BASIC_VALUE_IMPL_HPP_INCLUDED
 
-#include <sanguis/duration.hpp>
 #include <sanguis/server/net/value_decl.hpp>
 #include <sge/timer/interval.hpp>
 #include <fcppt/maybe.hpp>
@@ -108,7 +107,8 @@ sanguis::server::net::basic_value<
 
 			timer_.interval(
 				sge::timer::interval<
-					sanguis::duration
+					typename
+					Clock::duration
 				>(
 					timer_
 				)

@@ -1,9 +1,6 @@
 #include <sanguis/clock.hpp>
-#include <sanguis/duration.hpp>
-#include <sanguis/duration_second.hpp>
 #include <sanguis/slowdown.hpp>
 #include <sanguis/server/net/slowdown_policy.hpp>
-#include <fcppt/literal.hpp>
 #include <fcppt/math/diff.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
@@ -19,7 +16,7 @@ sanguis::server::net::slowdown_policy::start_duration()
 		);
 }
 
-sanguis::duration
+sanguis::clock::duration
 sanguis::server::net::slowdown_policy::difference(
 	sanguis::slowdown const _slowdown1,
 	sanguis::slowdown const _slowdown2
@@ -27,15 +24,15 @@ sanguis::server::net::slowdown_policy::difference(
 {
 	// TODO: What do we want to use here?
 	return
-		sanguis::duration_second(
+		std::chrono::duration_cast<
+			sanguis::clock::duration
+		>(
 			fcppt::math::diff(
 				_slowdown1.get(),
 				_slowdown2.get()
 			)
 			*
-			fcppt::literal<
-				sanguis::slowdown::value_type
-			>(
+			std::chrono::seconds(
 				5
 			)
 		);
