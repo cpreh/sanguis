@@ -20,16 +20,22 @@ sanguis::model::serialize(
 )
 try
 {
-	sge::parse::json::output::to_file(
-		_path,
-		sge::parse::json::start(
-			sge::parse::json::array_or_object(
-				sanguis::model::impl::serialize::object(
-					_model
+	if(
+		!sge::parse::json::output::to_file(
+			_path,
+			sge::parse::json::start(
+				sge::parse::json::array_or_object(
+					sanguis::model::impl::serialize::object(
+						_model
+					)
 				)
 			)
 		)
-	);
+	)
+		throw
+			sanguis::model::exception{
+				FCPPT_TEXT("Failure")
+			};
 }
 catch(
 	fcppt::exception const &_error
