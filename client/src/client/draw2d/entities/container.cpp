@@ -262,9 +262,7 @@ sanguis::duration
 sanguis::client::draw2d::entities::container::movement_duration() const
 {
 	return
-		sge::timer::elapsed<
-			sanguis::duration
-		>(
+		sge::timer::elapsed(
 			move_timer_
 		);
 }

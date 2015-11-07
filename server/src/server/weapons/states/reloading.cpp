@@ -1,5 +1,4 @@
 #include <sanguis/diff_timer.hpp>
-#include <sanguis/duration.hpp>
 #include <sanguis/weapon_status.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/weapons/log.hpp>
@@ -62,9 +61,7 @@ sanguis::server::weapons::states::reloading::reloading(
 	this->context<
 		sanguis::server::weapons::weapon
 	>().reload_time(
-		sge::timer::remaining<
-			sanguis::duration
-		>(
+		sge::timer::remaining(
 			reload_time_
 		)
 	);

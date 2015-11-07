@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_NET_BASIC_VALUE_IMPL_HPP_INCLUDED
 
 #include <sanguis/server/net/value_decl.hpp>
-#include <sge/timer/interval.hpp>
+#include <sge/timer/basic_impl.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/optional_impl.hpp>
 
@@ -106,12 +106,7 @@ sanguis::server::net::basic_value<
 				this->restart_timer();
 
 			timer_.interval(
-				sge::timer::interval<
-					typename
-					Clock::duration
-				>(
-					timer_
-				)
+				timer_.interval()
 				-
 				Policy::difference(
 					_old,

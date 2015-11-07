@@ -50,6 +50,7 @@
 #include <fcppt/log/fatal.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/variables_map.hpp>
+#include <chrono>
 #include <exception>
 #include <functional>
 #include <ostream>
@@ -267,10 +268,12 @@ sanguis::client::object::loop_handler()
 
 	if(
 		!machine_.process(
-			sge::timer::difference_and_reset<
+			std::chrono::duration_cast<
 				sanguis::duration
 			>(
-				frame_timer_
+				sge::timer::difference_and_reset(
+					frame_timer_
+				)
 			)
 		)
 	)

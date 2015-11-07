@@ -501,10 +501,12 @@ sanguis::server::machine::timer_callback()
 
 	this->process_event(
 		sanguis::server::events::tick(
-			sge::timer::elapsed_and_reset<
+			std::chrono::duration_cast<
 				sanguis::duration
 			>(
-				frame_timer_
+				sge::timer::elapsed_and_reset(
+					frame_timer_
+				)
 			),
 			slowdown
 		)
