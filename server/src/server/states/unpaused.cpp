@@ -32,7 +32,6 @@
 #include <sanguis/server/states/paused.hpp>
 #include <sanguis/server/states/running.hpp>
 #include <sanguis/server/states/unpaused.hpp>
-#include <fcppt/cast_to_enum.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
