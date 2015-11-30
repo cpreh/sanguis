@@ -13,6 +13,7 @@
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/draw2d/sprite/normal/color.hpp>
 #include <sanguis/load/model/path.hpp>
+#include <fcppt/nonassignable.hpp>
 
 
 namespace sanguis
