@@ -44,7 +44,9 @@ sanguis::creator::impl::find_reachable(
 		[
 			pos
 		] =
-			true;
+			sanguis::creator::impl::reachable{
+				true
+			};
 
 		for(
 			auto const &n :
