@@ -5,7 +5,7 @@
 #include <sanguis/model/animation_name.hpp>
 #include <fcppt/optional_to_exception.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/algorithm/enum_array_fold_static.hpp>
+#include <fcppt/algorithm/enum_array_init.hpp>
 #include <fcppt/algorithm/index_of_enum_array.hpp>
 #include <fcppt/container/enum_array.hpp>
 
@@ -21,7 +21,7 @@ fcppt::container::enum_array<
 animation_type_array;
 
 animation_type_array const animation_types(
-	fcppt::algorithm::enum_array_fold_static<
+	fcppt::algorithm::enum_array_init<
 		animation_type_array
 	>(
 		&sanguis::client::load::animation_name

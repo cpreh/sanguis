@@ -1,8 +1,8 @@
 #ifndef SANGUIS_COLLISION_IMPL_WORLD_MAKE_GROUPS_HPP_INCLUDED
 #define SANGUIS_COLLISION_IMPL_WORLD_MAKE_GROUPS_HPP_INCLUDED
 
-#include <fcppt/algorithm/array_fold_static.hpp>
-#include <fcppt/algorithm/enum_array_fold_static.hpp>
+#include <fcppt/algorithm/array_init.hpp>
+#include <fcppt/algorithm/enum_array_init.hpp>
 #include <fcppt/container/enum_array.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/at.hpp>
@@ -92,7 +92,7 @@ private:
 			groups_array<
 				Group::value
 			> const array(
-				fcppt::algorithm::array_fold_static<
+				fcppt::algorithm::array_init<
 					groups_array<
 						Group::value
 					>
@@ -123,7 +123,7 @@ public:
 	make()
 	{
 		return
-			fcppt::algorithm::enum_array_fold_static<
+			fcppt::algorithm::enum_array_init<
 				group_container_array
 			>(
 				make_container()
