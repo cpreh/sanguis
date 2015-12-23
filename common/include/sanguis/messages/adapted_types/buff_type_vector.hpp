@@ -3,7 +3,7 @@
 
 #include <sanguis/messages/adapted_types/buff_type.hpp>
 #include <sanguis/messages/adapted_types/buff_type_vector_fwd.hpp>
-#include <alda/bindings/dynamic_len.hpp>
+#include <sanguis/messages/adapted_types/dynamic_len.hpp>
 
 
 #endif

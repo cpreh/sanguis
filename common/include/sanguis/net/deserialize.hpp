@@ -7,9 +7,9 @@
 #include <sanguis/net/message_header_size.hpp>
 #include <sanguis/net/message_size.hpp>
 #include <sanguis/net/stream_exceptions.hpp>
-#include <alda/endianness.hpp>
 #include <alda/message/base_decl.hpp>
 #include <alda/message/base_unique_ptr.hpp>
+#include <alda/serialization/endianness.hpp>
 #include <alda/net/size_type.hpp>
 #include <alda/net/value_type.hpp>
 #include <alda/net/buffer/circular_receive/object.hpp>
@@ -105,7 +105,7 @@ deserialize(
 				sanguis::net::message_header
 			>(
 				stream,
-				alda::endianness()
+				alda::serialization::endianness()
 			)
 		)
 	);

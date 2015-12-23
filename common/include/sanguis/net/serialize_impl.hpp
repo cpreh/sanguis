@@ -3,9 +3,9 @@
 
 #include <sanguis/net/message_header.hpp>
 #include <sanguis/net/serialize_message_function.hpp>
-#include <alda/endianness.hpp>
 #include <alda/message/base_decl.hpp>
 #include <alda/net/value_type.hpp>
+#include <alda/serialization/endianness.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/cast/truncation_check.hpp>
 #include <fcppt/io/write.hpp>
@@ -59,7 +59,7 @@ serialize_impl(
 	fcppt::io::write(
 		stream,
 		header,
-		alda::endianness()
+		alda::serialization::endianness()
 	);
 
 	_serialize_message(

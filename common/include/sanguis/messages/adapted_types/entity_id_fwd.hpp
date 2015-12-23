@@ -3,8 +3,8 @@
 
 #include <sanguis/entity_id_fwd.hpp>
 #include <sanguis/entity_id_type.hpp>
+#include <sanguis/messages/adapted_types/unsigned_fwd.hpp>
 #include <alda/bindings/strong_typedef_decl.hpp>
-#include <alda/bindings/unsigned_fwd.hpp>
 
 
 namespace sanguis
@@ -14,12 +14,14 @@ namespace messages
 namespace adapted_types
 {
 
-typedef alda::bindings::strong_typedef<
+typedef
+alda::bindings::strong_typedef<
 	sanguis::entity_id,
-	alda::bindings::unsigned_<
+	sanguis::messages::adapted_types::unsigned_<
 		sanguis::entity_id_type
 	>
-> entity_id;
+>
+entity_id;
 
 }
 }

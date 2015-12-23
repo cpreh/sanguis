@@ -3,7 +3,7 @@
 
 #include <sanguis/buff_type_vector.hpp>
 #include <sanguis/messages/adapted_types/buff_type_fwd.hpp>
-#include <alda/bindings/dynamic_len_decl.hpp>
+#include <sanguis/messages/adapted_types/dynamic_len_fwd.hpp>
 
 
 namespace sanguis
@@ -14,7 +14,7 @@ namespace adapted_types
 {
 
 typedef
-alda::bindings::dynamic_len<
+sanguis::messages::adapted_types::dynamic_len<
 	sanguis::buff_type_vector,
 	sanguis::messages::adapted_types::buff_type
 >

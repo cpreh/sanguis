@@ -3,6 +3,7 @@
 
 #include <sanguis/messages/adapted_types/enum_fwd.hpp>
 #include <alda/bindings/enum.hpp>
+#include <alda/bindings/unsigned.hpp>
 
 
 #endif

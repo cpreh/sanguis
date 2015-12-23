@@ -3,8 +3,8 @@
 
 #include <sanguis/world_id_fwd.hpp>
 #include <sanguis/world_id_type.hpp>
+#include <sanguis/messages/adapted_types/unsigned_fwd.hpp>
 #include <alda/bindings/strong_typedef_decl.hpp>
-#include <alda/bindings/unsigned_decl.hpp>
 
 
 namespace sanguis
@@ -17,7 +17,7 @@ namespace adapted_types
 typedef
 alda::bindings::strong_typedef<
 	sanguis::world_id,
-	alda::bindings::unsigned_<
+	sanguis::messages::adapted_types::unsigned_<
 		sanguis::world_id_type
 	>
 >

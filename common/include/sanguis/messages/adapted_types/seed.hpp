@@ -3,8 +3,8 @@
 
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/messages/adapted_types/seed_fwd.hpp>
+#include <sanguis/messages/adapted_types/unsigned.hpp>
 #include <alda/bindings/strong_typedef.hpp>
-#include <alda/bindings/unsigned.hpp>
 
 
 #endif

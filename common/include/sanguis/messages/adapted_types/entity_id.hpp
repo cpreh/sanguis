@@ -3,8 +3,8 @@
 
 #include <sanguis/entity_id.hpp>
 #include <sanguis/messages/adapted_types/entity_id_fwd.hpp>
+#include <sanguis/messages/adapted_types/unsigned.hpp>
 #include <alda/bindings/strong_typedef.hpp>
-#include <alda/bindings/unsigned.hpp>
 
 
 #endif

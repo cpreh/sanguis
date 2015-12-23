@@ -79,14 +79,20 @@ set(
 	include/sanguis/messages/adapted_types/doodad_type_fwd.hpp
 	include/sanguis/messages/adapted_types/duration.hpp
 	include/sanguis/messages/adapted_types/duration_fwd.hpp
+	include/sanguis/messages/adapted_types/dynamic_len.hpp
+	include/sanguis/messages/adapted_types/dynamic_len_fwd.hpp
 	include/sanguis/messages/adapted_types/entity_id.hpp
 	include/sanguis/messages/adapted_types/entity_id_fwd.hpp
 	include/sanguis/messages/adapted_types/enum.hpp
 	include/sanguis/messages/adapted_types/enum_fwd.hpp
 	include/sanguis/messages/adapted_types/exp.hpp
 	include/sanguis/messages/adapted_types/exp_fwd.hpp
+	include/sanguis/messages/adapted_types/fundamental.hpp
+	include/sanguis/messages/adapted_types/fundamental_fwd.hpp
 	include/sanguis/messages/adapted_types/is_primary_weapon.hpp
 	include/sanguis/messages/adapted_types/is_primary_weapon_fwd.hpp
+	include/sanguis/messages/adapted_types/length.hpp
+	include/sanguis/messages/adapted_types/length_fwd.hpp
 	include/sanguis/messages/adapted_types/level.hpp
 	include/sanguis/messages/adapted_types/level_fwd.hpp
 	include/sanguis/messages/adapted_types/magazine_size.hpp
@@ -115,6 +121,8 @@ set(
 	include/sanguis/messages/adapted_types/string_vector_fwd.hpp
 	include/sanguis/messages/adapted_types/time_unit.hpp
 	include/sanguis/messages/adapted_types/time_unit_fwd.hpp
+	include/sanguis/messages/adapted_types/unsigned.hpp
+	include/sanguis/messages/adapted_types/unsigned_fwd.hpp
 	include/sanguis/messages/adapted_types/vector2.hpp
 	include/sanguis/messages/adapted_types/vector2_fwd.hpp
 	include/sanguis/messages/adapted_types/weapon_attribute_type.hpp
@@ -377,8 +385,10 @@ set(
 	include/sanguis/messages/server/weapon_status.hpp
 	include/sanguis/messages/server/weapon_status_fwd.hpp
 	include/sanguis/messages/types/char.hpp
+	include/sanguis/messages/types/endianness.hpp
 	include/sanguis/messages/types/enum.hpp
 	include/sanguis/messages/types/exp.hpp
+	include/sanguis/messages/types/length.hpp
 	include/sanguis/messages/types/level.hpp
 	include/sanguis/messages/types/magazine_size.hpp
 	include/sanguis/messages/types/message_type.hpp

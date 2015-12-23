@@ -3,8 +3,8 @@
 
 #include <sanguis/creator/seed_fwd.hpp>
 #include <sanguis/creator/seed_type.hpp>
+#include <sanguis/messages/adapted_types/unsigned_fwd.hpp>
 #include <alda/bindings/strong_typedef_decl.hpp>
-#include <alda/bindings/unsigned_decl.hpp>
 
 
 namespace sanguis
@@ -17,7 +17,7 @@ namespace adapted_types
 typedef
 alda::bindings::strong_typedef<
 	sanguis::creator::seed,
-	alda::bindings::unsigned_<
+	sanguis::messages::adapted_types::unsigned_<
 		sanguis::creator::seed_type
 	>
 >
