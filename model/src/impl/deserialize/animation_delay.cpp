@@ -4,7 +4,7 @@
 #include <sge/parse/json/find_member.hpp>
 #include <sge/parse/json/int_type.hpp>
 #include <sge/parse/json/object.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
@@ -17,7 +17,7 @@ sanguis::model::impl::deserialize::animation_delay(
 )
 {
 	return
-		fcppt::optional_bind_construct(
+		fcppt::optional_map(
 			sge::parse::json::find_member<
 				sge::parse::json::int_type
 			>(

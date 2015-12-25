@@ -18,7 +18,7 @@
 #include <fcppt/from_optional.hpp>
 #include <fcppt/optional_alternative.hpp>
 #include <fcppt/optional_bind.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/algorithm/fold.hpp>
 #include <fcppt/cast/to_unsigned_fun.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
@@ -123,7 +123,7 @@ sanguis::collision::test_move(
 	);
 
 	return
-		fcppt::optional_bind_construct(
+		fcppt::optional_map(
 			result,
 			[](
 				sanguis::collision::speed const _result_speed

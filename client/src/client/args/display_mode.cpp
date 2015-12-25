@@ -5,7 +5,7 @@
 #include <sge/renderer/display_mode/optional_dimensions.hpp>
 #include <sge/renderer/display_mode/optional_object.hpp>
 #include <sge/renderer/display_mode/optional_refresh_rate.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/variables_map.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -17,7 +17,7 @@ sanguis::client::args::display_mode(
 )
 {
 	return
-		fcppt::optional_bind_construct(
+		fcppt::optional_map(
 			sanguis::client::args::resolution(
 				_vm
 			),

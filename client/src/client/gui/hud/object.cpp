@@ -45,7 +45,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/maybe_void.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/strong_typedef_output.hpp>
@@ -798,7 +798,7 @@ sanguis::client::gui::hud::object::create_details()
 		-> sanguis::optional_weapon_description
 		{
 			return
-				fcppt::optional_bind_construct(
+				fcppt::optional_map(
 					_widget,
 					[](
 						weapon_widget_unique_ptr const &_ptr

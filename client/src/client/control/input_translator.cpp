@@ -26,7 +26,7 @@
 #include <sge/input/focus/object.hpp>
 #include <sge/input/key/code.hpp>
 #include <sge/input/mouse/device.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -184,7 +184,7 @@ sanguis::client::control::input_translator::move_callback(
 		sanguis::client::control::actions::any(
 			sanguis::client::control::actions::variant(
 				sanguis::client::control::actions::cursor(
-					fcppt::optional_bind_construct(
+					fcppt::optional_map(
 						_event.position(),
 						[](
 							sge::input::cursor::position const _position

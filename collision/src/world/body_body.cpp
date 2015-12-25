@@ -16,7 +16,7 @@
 #include <fcppt/make_homogenous_pair.hpp>
 #include <fcppt/maybe_multi.hpp>
 #include <fcppt/optional_bind.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/dot.hpp>
@@ -205,7 +205,7 @@ sanguis::collision::world::body_body(
 						)
 						{
 							return
-								fcppt::optional_bind_construct(
+								fcppt::optional_map(
 									make_impulse(
 										_normal,
 										_mass1,

@@ -11,7 +11,7 @@
 #include <sanguis/server/entities/transfer_result.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/environment/optional_object_ref.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -37,7 +37,7 @@ sanguis::server::entities::base::transfer(
 		);
 
 	return
-		fcppt::optional_bind_construct(
+		fcppt::optional_map(
 			this->on_transfer(
 				sanguis::server::entities::transfer_parameters(
 					_environment.collision_world(),

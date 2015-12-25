@@ -30,7 +30,7 @@
 #include <fcppt/const.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/maybe_void.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/algorithm/array_init_move.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/optional_error.hpp>
@@ -137,7 +137,7 @@ sanguis::optional_primary_weapon_type
 sanguis::server::entities::with_weapon::primary_weapon_type() const
 {
 	return
-		fcppt::optional_bind_construct(
+		fcppt::optional_map(
 			this->primary_weapon(),
 			[](
 				sanguis::server::weapons::weapon const &_primary_weapon
@@ -202,7 +202,7 @@ sanguis::server::entities::with_weapon::drop_weapon(
 )
 {
 	return
-		fcppt::optional_bind_construct(
+		fcppt::optional_map(
 			this->move_weapon(
 				_is_primary
 			),
@@ -487,7 +487,7 @@ sanguis::server::entities::with_weapon::weapon_ref(
 ) const
 {
 	return
-		fcppt::optional_bind_construct(
+		fcppt::optional_map(
 			_weapon,
 			[](
 				sanguis::server::weapons::unique_ptr const &_ptr

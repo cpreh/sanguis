@@ -35,7 +35,7 @@
 #include <fcppt/maybe_multi.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/maybe_void_multi.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/size.hpp>
@@ -708,7 +708,7 @@ sanguis::tools::animations::main_window::resetFrames()
 sanguis::tools::animations::optional_animation_ref
 sanguis::tools::animations::main_window::current_animation()
 {
-	// TODO: optional_bind_construct_multi?
+	// TODO: optional_map_multi?
 	return
 		fcppt::maybe_multi(
 			[]{
@@ -892,7 +892,7 @@ sanguis::tools::animations::main_window::optional_path
 sanguis::tools::animations::main_window::resource_path()
 {
 	return
-		fcppt::optional_bind_construct(
+		fcppt::optional_map(
 			loaded_model_,
 			[](
 				sanguis::tools::animations::path_model_pair const &_model

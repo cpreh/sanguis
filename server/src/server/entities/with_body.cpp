@@ -25,7 +25,7 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/maybe_void.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/math/vector/null.hpp>
@@ -148,7 +148,7 @@ sanguis::server::entities::with_body::on_transfer(
 	);
 
 	return
-		fcppt::optional_bind_construct(
+		fcppt::optional_map(
 			sanguis::server::entities::with_ghosts::on_transfer(
 				_parameters
 			),

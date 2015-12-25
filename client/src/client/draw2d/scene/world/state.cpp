@@ -44,7 +44,7 @@
 #include <sge/sprite/state/parameters.hpp>
 #include <fcppt/boost_units_value.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/cast/size_fun.hpp>
@@ -216,7 +216,7 @@ sanguis::client::draw2d::scene::world::state::test_collision(
 ) const
 {
 	return
-		fcppt::optional_bind_construct(
+		fcppt::optional_map(
 			sanguis::collision::test_move(
 				sanguis::collision::center{
 					fcppt::math::vector::map(

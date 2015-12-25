@@ -6,7 +6,7 @@
 #include <fcppt/enum_size.hpp>
 #include <fcppt/make_enum_range.hpp>
 #include <fcppt/optional_bind.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
@@ -87,7 +87,7 @@ sanguis::tiles::impl::decode_name(
 								);
 
 								return
-									fcppt::optional_bind_construct(
+									fcppt::optional_map(
 										char_to_bool(
 											_name[
 												fcppt::cast::enum_to_int<

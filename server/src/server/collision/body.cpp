@@ -19,7 +19,7 @@
 #include <sanguis/server/collision/to_radius.hpp>
 #include <sanguis/server/collision/to_speed.hpp>
 #include <fcppt/optional_assign.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/pre.hpp>
@@ -132,7 +132,7 @@ sanguis::server::collision::body::transfer(
 					sanguis::server::collision::to_radius(
 						radius_
 					),
-					fcppt::optional_bind_construct(
+					fcppt::optional_map(
 						mass_,
 						[](
 							sanguis::server::mass const _mass

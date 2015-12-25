@@ -6,7 +6,7 @@
 #include <sanguis/server/ai/pathing/update_trail.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <fcppt/optional_bind.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/container/maybe_back.hpp>
 
 
@@ -18,7 +18,7 @@ sanguis::server::ai::pathing::update_trail(
 )
 {
 	return
-		fcppt::optional_bind_construct(
+		fcppt::optional_map(
 			fcppt::optional_bind(
 				fcppt::container::maybe_back(
 					_trail

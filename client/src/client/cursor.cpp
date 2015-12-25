@@ -10,7 +10,7 @@
 #include <sge/systems/cursor_hotspot.hpp>
 #include <sge/texture/part.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
@@ -80,7 +80,7 @@ sanguis::client::optional_cursor_area
 sanguis::client::cursor::area() const
 {
 	return
-		fcppt::optional_bind_construct(
+		fcppt::optional_map(
 			input_cursor_.position(),
 			[
 				this

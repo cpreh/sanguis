@@ -59,7 +59,7 @@
 #include <fcppt/maybe.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/optional_bind.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/optional_to_exception.hpp>
 #include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/strong_typedef_output.hpp>
@@ -646,7 +646,7 @@ sanguis::server::global::context::player_opt(
 )
 {
 	return
-		fcppt::optional_bind_construct(
+		fcppt::optional_map(
 			fcppt::container::find_opt_mapped(
 				players_,
 				_player_id

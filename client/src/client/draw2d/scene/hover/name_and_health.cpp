@@ -12,7 +12,7 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/maybe_void.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/optional_impl.hpp>
 
 
@@ -25,7 +25,7 @@ sanguis::client::draw2d::scene::hover::name_and_health::name_and_health(
 )
 :
 	healthbar_(
-		fcppt::optional_bind_construct(
+		fcppt::optional_map(
 			_name_and_health.health(),
 			[
 				&_renderer,
@@ -48,7 +48,7 @@ sanguis::client::draw2d::scene::hover::name_and_health::name_and_health(
 		)
 	),
 	name_(
-		fcppt::optional_bind_construct(
+		fcppt::optional_map(
 			_name_and_health.name(),
 			[
 				&_renderer,

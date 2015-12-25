@@ -12,7 +12,7 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_health.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -56,7 +56,7 @@ burn_create(
 			)
 			{
 				return
-					fcppt::optional_bind_construct(
+					fcppt::optional_map(
 						fcppt::cast::try_dynamic<
 							sanguis::server::entities::with_health &
 						>(

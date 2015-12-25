@@ -16,7 +16,7 @@
 #include <sge/renderer/device/core_fwd.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/maybe.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/cast/float_to_int_fun.hpp>
 #include <fcppt/cast/int_to_float_fun.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -46,7 +46,7 @@ sanguis::client::draw2d::scene::camera::update(
 )
 {
 	desired_translation_ =
-		fcppt::optional_bind_construct(
+		fcppt::optional_map(
 			_opt_player_center,
 			[
 				this
@@ -65,7 +65,7 @@ sanguis::client::draw2d::scene::camera::update(
 		);
 
 	translation_ =
-		fcppt::optional_bind_construct(
+		fcppt::optional_map(
 			desired_translation_,
 			[
 				this,
@@ -136,7 +136,7 @@ sanguis::client::draw2d::optional_translation
 sanguis::client::draw2d::scene::camera::translation() const
 {
 	return
-		fcppt::optional_bind_construct(
+		fcppt::optional_map(
 			translation_,
 			[](
 				sanguis::client::draw2d::vector2 const _translation
@@ -161,7 +161,7 @@ sanguis::client::draw2d::scene::camera::translate_attack_dest(
 )
 {
 	return
-		fcppt::optional_bind_construct(
+		fcppt::optional_map(
 			this->translation(),
 			[
 				_cursor_position

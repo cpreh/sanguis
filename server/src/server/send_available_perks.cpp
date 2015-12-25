@@ -15,7 +15,7 @@
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/perks/tree/object.hpp>
 #include <sanguis/server/perks/tree/status.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/algorithm/map_concat.hpp>
 #include <fcppt/container/tree/pre_order.hpp>
@@ -66,7 +66,7 @@ sanguis::server::send_available_perks(
 									sanguis::messages::roles::max_perk_level{} =
 										info.max_level().get(),
 									sanguis::messages::roles::perk_parent{} =
-										fcppt::optional_bind_construct(
+										fcppt::optional_map(
 											_inner.parent(),
 											[](
 												sanguis::server::perks::tree::object const &_node

@@ -6,7 +6,7 @@
 #include <sanguis/weapon_attribute_extra.hpp>
 #include <sanguis/weapon_attribute_type.hpp>
 #include <sanguis/server/weapons/attributes/basic_impl.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 
 
 namespace sanguis
@@ -36,7 +36,7 @@ make(
 				_attribute.base().get()
 			),
 			sanguis::weapon_attribute_extra(
-				fcppt::optional_bind_construct(
+				fcppt::optional_map(
 					_attribute.extra(),
 					[](
 						Attribute const _extra

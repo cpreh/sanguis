@@ -178,7 +178,7 @@
 #include <fcppt/maybe_multi.hpp>
 #include <fcppt/maybe_void.hpp>
 #include <fcppt/optional_bind.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/optional_comparison.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/optional_to_exception.hpp>
@@ -830,7 +830,7 @@ sanguis::client::draw2d::optional_player_center
 sanguis::client::draw2d::scene::object::player_center() const
 {
 	return
-		fcppt::optional_bind_construct(
+		fcppt::optional_map(
 			player_id_,
 			[
 				this

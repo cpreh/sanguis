@@ -15,7 +15,7 @@
 #include <sge/rucksack/dim.hpp>
 #include <sge/rucksack/vector.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -54,7 +54,7 @@ sanguis::client::gui::hud::weapon_details::weapon_details(
 			)
 			{
 				return
-					fcppt::optional_bind_construct(
+					fcppt::optional_map(
 						_desc,
 						[
 							&_gui_context,

@@ -16,7 +16,7 @@
 #include <sanguis/collision/world/optional_body_exit.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/maybe.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/reference_wrapper_comparison.hpp>
 #include <fcppt/algorithm/map_iteration.hpp>
 #include <fcppt/algorithm/update_action.hpp>
@@ -250,7 +250,7 @@ sanguis::collision::impl::world::simple::ghost::remove_body(
 )
 {
 	return
-		fcppt::optional_bind_construct(
+		fcppt::optional_map(
 			fcppt::container::find_opt_iterator(
 				bodies_,
 				fcppt::make_cref(

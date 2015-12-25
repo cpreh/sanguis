@@ -4,7 +4,7 @@
 #include <sge/parse/json/find_member.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/string.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/text.hpp>
 
 
@@ -14,7 +14,7 @@ sanguis::model::impl::deserialize::image_name(
 )
 {
 	return
-		fcppt::optional_bind_construct(
+		fcppt::optional_map(
 			sge::parse::json::find_member<
 				sge::parse::json::string
 			>(

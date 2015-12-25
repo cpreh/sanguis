@@ -13,7 +13,7 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/world/center_to_grid_pos.hpp>
 #include <fcppt/optional_bind.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/maybe_front.hpp>
 
@@ -39,7 +39,7 @@ sanguis::server::ai::context::path_find(
 )
 {
 	trail_ =
-		fcppt::optional_bind_construct(
+		fcppt::optional_map(
 			sanguis::server::ai::pathing::find_target(
 				this->grid(),
 				sanguis::server::ai::pathing::start(

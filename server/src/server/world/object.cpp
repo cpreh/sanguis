@@ -125,7 +125,7 @@
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/make_enum_range.hpp>
 #include <fcppt/maybe.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
@@ -267,7 +267,7 @@ sanguis::server::world::object::insert(
 )
 {
 	return
-		fcppt::optional_bind_construct(
+		fcppt::optional_map(
 			this->insert_base(
 				server_entities_,
 				std::move(
@@ -497,7 +497,7 @@ sanguis::server::world::object::insert_base(
 {
 	// These are only very simple entities that don't need special treatment
 	return
-		fcppt::optional_bind_construct(
+		fcppt::optional_map(
 			_entity->transfer(
 				this->environment(),
 				_insert_parameters,

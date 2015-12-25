@@ -9,11 +9,11 @@
 #include <sanguis/net/stream_exceptions.hpp>
 #include <alda/message/base_decl.hpp>
 #include <alda/message/base_unique_ptr.hpp>
-#include <alda/serialization/endianness.hpp>
 #include <alda/net/size_type.hpp>
 #include <alda/net/value_type.hpp>
 #include <alda/net/buffer/circular_receive/object.hpp>
 #include <alda/net/buffer/circular_receive/source.hpp>
+#include <alda/serialization/endianness.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>

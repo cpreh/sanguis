@@ -4,7 +4,7 @@
 #include <sge/parse/json/optional_member.hpp>
 #include <sge/parse/json/value.hpp>
 #include <sge/parse/json/convert/from_int.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/text.hpp>
 
 
@@ -14,7 +14,7 @@ sanguis::model::impl::serialize::animation_delay(
 )
 {
 	return
-		fcppt::optional_bind_construct(
+		fcppt::optional_map(
 			_opt_delay,
 			[](
 				sanguis::model::animation_delay const &_delay

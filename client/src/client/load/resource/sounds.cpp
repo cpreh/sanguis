@@ -9,7 +9,7 @@
 #include <sge/audio/loader_fwd.hpp>
 #include <sge/audio/optional_file_unique_ptr.hpp>
 #include <sge/audio/player.hpp>
-#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/optional_map.hpp>
 #include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/get_or_insert.hpp>
@@ -58,7 +58,7 @@ sanguis::client::load::resource::sounds::load_path(
 ) const
 {
 	return
-		fcppt::optional_bind_construct(
+		fcppt::optional_map(
 			fcppt::container::get_or_insert(
 				buffers_,
 				_path,
@@ -77,7 +77,7 @@ sanguis::client::load::resource::sounds::load_path(
 					};
 
 					return
-						fcppt::optional_bind_construct(
+						fcppt::optional_map(
 							opt_file,
 							[
 								this
