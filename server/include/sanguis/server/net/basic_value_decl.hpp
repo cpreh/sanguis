@@ -4,7 +4,7 @@
 #include <sanguis/server/net/basic_value_fwd.hpp>
 #include <sge/timer/basic_decl.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/optional_decl.hpp>
+#include <fcppt/optional/object_decl.hpp>
 
 
 namespace sanguis
@@ -55,7 +55,7 @@ private:
 	timer timer_;
 
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		Type
 	>
 	optional_type;

@@ -12,8 +12,8 @@
 #include <sanguis/client/states/ingame_menu.hpp>
 #include <sanguis/client/states/perk_chooser.hpp>
 #include <sanguis/client/states/running.hpp>
-#include <fcppt/maybe.hpp>
 #include <fcppt/assert/unreachable.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/variant/to_optional.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/result.hpp>
@@ -45,7 +45,7 @@ sanguis::client::states::ingame::react(
 )
 {
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			fcppt::variant::to_optional<
 				sanguis::client::control::actions::nullary
 			>(

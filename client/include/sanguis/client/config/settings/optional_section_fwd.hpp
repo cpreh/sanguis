@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_CONFIG_SETTINGS_OPTIONAL_SECTION_FWD_HPP_INCLUDED
 
 #include <sge/parse/ini/section_fwd.hpp>
-#include <fcppt/optional_fwd.hpp>
+#include <fcppt/optional/object_fwd.hpp>
 
 
 namespace sanguis
@@ -14,7 +14,7 @@ namespace config
 namespace settings
 {
 
-typedef fcppt::optional<
+typedef fcppt::optional::object<
 	sge::parse::ini::section
 > optional_section;
 

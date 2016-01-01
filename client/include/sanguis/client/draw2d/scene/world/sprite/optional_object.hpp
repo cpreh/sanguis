@@ -3,7 +3,7 @@
 
 #include <sanguis/client/draw2d/scene/world/sprite/object.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/optional_object_fwd.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 #endif

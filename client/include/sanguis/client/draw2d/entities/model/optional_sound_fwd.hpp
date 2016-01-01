@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_OPTIONAL_SOUND_FWD_HPP_INCLUDED
 
 #include <sge/audio/sound/base_unique_ptr.hpp>
-#include <fcppt/optional_fwd.hpp>
+#include <fcppt/optional/object_fwd.hpp>
 
 
 namespace sanguis
@@ -17,7 +17,7 @@ namespace model
 {
 
 typedef
-fcppt::optional<
+fcppt::optional::object<
 	sge::audio::sound::base_unique_ptr
 >
 optional_sound;

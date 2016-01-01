@@ -45,7 +45,6 @@
 #include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/maybe_void.hpp>
 #include <fcppt/reference_wrapper_comparison.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/append.hpp>
@@ -62,6 +61,7 @@
 #include <fcppt/container/grid/clamped_sup_signed.hpp>
 #include <fcppt/container/grid/make_pos_ref_range_start_end.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstddef>
 #include <functional>
@@ -497,7 +497,7 @@ sanguis::collision::impl::world::simple::object::move_bodies(
 									&body2
 								)
 							)
-								fcppt::maybe_void(
+								fcppt::optional::maybe_void(
 									sanguis::collision::world::body_body(
 										body1,
 										body2,
@@ -710,7 +710,7 @@ sanguis::collision::impl::world::simple::object::update_ghosts()
 						:
 						grid_entry.value()
 					)
-						fcppt::maybe_void(
+						fcppt::optional::maybe_void(
 							ghost.get().update_near_body(
 								body
 							),
@@ -801,7 +801,7 @@ sanguis::collision::impl::world::simple::object::move_body(
 {
 	_body.unlink();
 
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		fcppt::container::grid::at_optional(
 			body_list_grids_[
 				_body.collision_group()

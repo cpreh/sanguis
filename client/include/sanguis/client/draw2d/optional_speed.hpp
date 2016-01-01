@@ -3,7 +3,7 @@
 
 #include <sanguis/client/draw2d/optional_speed_fwd.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 #endif

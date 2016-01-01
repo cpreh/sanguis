@@ -2,7 +2,7 @@
 #define SANGUIS_TILES_IMPL_OPTIONAL_ORIENTATION_FWD_HPP_INCLUDED
 
 #include <sanguis/tiles/orientation_fwd.hpp>
-#include <fcppt/optional_fwd.hpp>
+#include <fcppt/optional/object_fwd.hpp>
 
 
 namespace sanguis
@@ -13,7 +13,7 @@ namespace impl
 {
 
 typedef
-fcppt::optional<
+fcppt::optional::object<
 	sanguis::tiles::orientation
 >
 optional_orientation;

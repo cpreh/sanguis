@@ -3,7 +3,7 @@
 
 #include <sanguis/entity_id.hpp>
 #include <sanguis/optional_entity_id_fwd.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 #endif

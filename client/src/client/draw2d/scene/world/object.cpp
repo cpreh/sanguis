@@ -15,10 +15,10 @@
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/maybe_void.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
+#include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/optional/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
@@ -67,7 +67,7 @@ sanguis::client::draw2d::scene::world::object::update(
 	sanguis::client::slowed_duration const _slowed_duration
 )
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		state_,
 		[
 			_slowed_duration
@@ -88,7 +88,7 @@ sanguis::client::draw2d::scene::world::object::draw(
 	sanguis::client::draw2d::translation const _translation
 )
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		state_,
 		[
 			&_render_context,
@@ -110,7 +110,7 @@ sanguis::client::draw2d::scene::world::object::draw_after(
 	sanguis::client::draw2d::scene::world::render_parameters const &_render_parameters
 )
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		state_,
 		[
 			&_render_parameters

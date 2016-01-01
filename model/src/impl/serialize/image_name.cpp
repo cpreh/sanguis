@@ -3,8 +3,8 @@
 #include <sge/parse/json/member.hpp>
 #include <sge/parse/json/optional_member.hpp>
 #include <sge/parse/json/value.hpp>
-#include <fcppt/optional_map.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/optional/map.hpp>
 
 
 sge::parse::json::optional_member
@@ -13,7 +13,7 @@ sanguis::model::impl::serialize::image_name(
 )
 {
 	return
-		fcppt::optional_map(
+		fcppt::optional::map(
 			_opt_name,
 			[](
 				sanguis::model::image_name const &_name

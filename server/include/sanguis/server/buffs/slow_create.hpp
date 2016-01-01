@@ -9,9 +9,9 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/optional_map.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
+#include <fcppt/optional/map.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <type_traits>
 #include <fcppt/config/external_end.hpp>
@@ -49,7 +49,7 @@ slow_create(
 			)
 			{
 				return
-					fcppt::optional_map(
+					fcppt::optional::map(
 						fcppt::cast::try_dynamic<
 							sanguis::server::entities::with_velocity &
 						>(

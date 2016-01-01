@@ -56,11 +56,6 @@
 #include <sanguis/server/world/parameters.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/maybe.hpp>
-#include <fcppt/maybe_void.hpp>
-#include <fcppt/optional_bind.hpp>
-#include <fcppt/optional_map.hpp>
-#include <fcppt/optional_to_exception.hpp>
 #include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
@@ -77,6 +72,11 @@
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/math/vector/length_square.hpp>
 #include <fcppt/math/vector/signed_angle_between.hpp>
+#include <fcppt/optional/bind.hpp>
+#include <fcppt/optional/map.hpp>
+#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <utility>
@@ -193,8 +193,8 @@ sanguis::server::global::context::insert_player(
 		)
 	);
 
-	fcppt::maybe(
-		fcppt::optional_bind(
+	fcppt::optional::maybe(
+		fcppt::optional::bind(
 			fcppt::container::at_optional(
 				cur_world.openings()[
 					sanguis::creator::opening_type::entry
@@ -241,7 +241,7 @@ sanguis::server::global::context::insert_player(
 			sanguis::server::entities::player const &_player
 		)
 		{
-			fcppt::maybe_void(
+			fcppt::optional::maybe_void(
 				_player.primary_weapon(),
 				[
 					&cur_world,
@@ -276,7 +276,7 @@ sanguis::server::global::context::player_disconnect(
 )
 {
 	// Disconnecting clients may already be dead
-	fcppt::maybe(
+	fcppt::optional::maybe(
 		this->player_opt(
 			_player_id
 		),
@@ -629,7 +629,7 @@ sanguis::server::global::context::player_exn(
 )
 {
 	return
-		fcppt::optional_to_exception(
+		fcppt::optional::to_exception(
 			this->player_opt(
 				_player_id
 			),
@@ -646,7 +646,7 @@ sanguis::server::global::context::player_opt(
 )
 {
 	return
-		fcppt::optional_map(
+		fcppt::optional::map(
 			fcppt::container::find_opt_mapped(
 				players_,
 				_player_id

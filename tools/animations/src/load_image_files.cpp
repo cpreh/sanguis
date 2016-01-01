@@ -7,9 +7,9 @@
 #include <sanguis/tools/animations/image_file_map.hpp>
 #include <sanguis/tools/animations/load_image_files.hpp>
 #include <sanguis/tools/animations/qtutil/from_fcppt_string.hpp>
-#include <fcppt/maybe_void.hpp>
 #include <fcppt/container/find_opt.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <utility>
@@ -32,7 +32,7 @@ sanguis::tools::animations::load_image_files(
 			sanguis::model::optional_image_name const &_opt_name
 		)
 		{
-			fcppt::maybe_void(
+			fcppt::optional::maybe_void(
 				_opt_name,
 				[
 					&_path,

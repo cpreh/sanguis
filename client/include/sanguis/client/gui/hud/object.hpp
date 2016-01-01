@@ -37,8 +37,8 @@
 #include <sge/timer/frames_counter.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/optional_decl.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
+#include <fcppt/optional/object_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <memory>
 #include <fcppt/config/external_end.hpp>
@@ -151,7 +151,7 @@ private:
 	weapon_widget_unique_ptr;
 
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		weapon_widget_unique_ptr
 	>
 	optional_weapon_widget_unique_ptr;
@@ -268,7 +268,7 @@ private:
 	weapon_details_unique_ptr;
 
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		weapon_details_unique_ptr
 	>
 	optional_weapon_details_unique_ptr;

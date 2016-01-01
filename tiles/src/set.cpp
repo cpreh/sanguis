@@ -11,7 +11,7 @@
 #include <sge/image2d/system_fwd.hpp>
 #include <sge/image2d/view/const_object.hpp>
 #include <sge/image2d/view/size.hpp>
-#include <fcppt/maybe.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
@@ -128,7 +128,7 @@ sanguis::tiles::set<
 		FCPPT_TEXT("texture.png")
 	),
 	orientations_(
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			sanguis::tiles::impl::load_file(
 				_image_system,
 				path_

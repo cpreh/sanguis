@@ -5,11 +5,11 @@
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/impl/optional_pos.hpp>
-#include <fcppt/from_optional.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/optional.hpp>
 #include <fcppt/container/grid/in_range.hpp>
 #include <fcppt/container/grid/object_fwd.hpp>
+#include <fcppt/optional/from.hpp>
+#include <fcppt/optional/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <fcppt/config/external_end.hpp>
@@ -34,7 +34,7 @@ find_closest(
 	> const &_grid,
 	sanguis::creator::pos const _pos,
 	Attribute const _attribute,
-	fcppt::optional<
+	fcppt::optional::object<
 		sanguis::creator::pos::value_type
 	> _max_radius
 )
@@ -45,7 +45,7 @@ find_closest(
 	auto const y0 = _pos.y();
 
 	auto const max_radius =
-		fcppt::from_optional(
+		fcppt::optional::from(
 			_max_radius,
 			[w,h,x0,y0]
 			{

@@ -31,17 +31,17 @@
 #include <fcppt/const.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/maybe.hpp>
-#include <fcppt/maybe_multi.hpp>
-#include <fcppt/maybe_void.hpp>
-#include <fcppt/maybe_void_multi.hpp>
-#include <fcppt/optional_map.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/truncation_check.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/filesystem/stem.hpp>
+#include <fcppt/optional/map.hpp>
+#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/maybe_multi.hpp>
+#include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/optional/maybe_void_multi.hpp>
+#include <fcppt/optional/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <QFileDialog>
@@ -104,7 +104,7 @@ sanguis::tools::animations::main_window::~main_window()
 void
 sanguis::tools::animations::main_window::actionJSON()
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		sanguis::tools::animations::qtutil::string_to_optional<
 			boost::filesystem::path
 		>(
@@ -132,7 +132,7 @@ void
 sanguis::tools::animations::main_window::actionResourcePath()
 try
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		sanguis::tools::animations::qtutil::string_to_optional<
 			boost::filesystem::path
 		>(
@@ -162,7 +162,7 @@ try
 				);
 			}
 
-			fcppt::maybe_void(
+			fcppt::optional::maybe_void(
 				loaded_model_.has_value()
 				?
 					this->resource_path()
@@ -219,7 +219,7 @@ try
 
 					sanguis::model::serialize(
 						json_file,
-						fcppt::maybe(
+						fcppt::optional::maybe(
 							loaded_model_,
 							[
 								&converted_model
@@ -286,7 +286,7 @@ catch(
 void
 sanguis::tools::animations::main_window::actionSave()
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		loaded_model_,
 		[
 			this
@@ -328,7 +328,7 @@ sanguis::tools::animations::main_window::actionQuit()
 void
 sanguis::tools::animations::main_window::actionSound()
 {
-	fcppt::maybe_void_multi(
+	fcppt::optional::maybe_void_multi(
 		[
 			this
 		](
@@ -370,7 +370,7 @@ sanguis::tools::animations::main_window::actionSound()
 void
 sanguis::tools::animations::main_window::selectedPartChanged()
 {
-	fcppt::maybe_void_multi(
+	fcppt::optional::maybe_void_multi(
 		[
 			this
 		](
@@ -402,7 +402,7 @@ sanguis::tools::animations::main_window::selectedPartChanged()
 void
 sanguis::tools::animations::main_window::selectedWeaponChanged()
 {
-	fcppt::maybe_void_multi(
+	fcppt::optional::maybe_void_multi(
 		[
 			this
 		](
@@ -445,7 +445,7 @@ sanguis::tools::animations::main_window::selectedAnimationChanged()
 
 	this->resetFrames();
 
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		this->current_animation(),
 		[
 			animation_was_playing,
@@ -455,7 +455,7 @@ sanguis::tools::animations::main_window::selectedAnimationChanged()
 		)
 		{
 			ui_->delaySpinBox->setValue(
-				fcppt::maybe(
+				fcppt::optional::maybe(
 					_animation.animation_delay(),
 					fcppt::const_(
 						0
@@ -477,7 +477,7 @@ sanguis::tools::animations::main_window::selectedAnimationChanged()
 			);
 
 			ui_->soundEdit->setText(
-				fcppt::maybe(
+				fcppt::optional::maybe(
 					_animation.animation_sound(),
 					[]{
 						return
@@ -497,7 +497,7 @@ sanguis::tools::animations::main_window::selectedAnimationChanged()
 
 			frames_.clear();
 
-			fcppt::maybe_void(
+			fcppt::optional::maybe_void(
 				sanguis::tools::animations::find_image_file(
 					image_files_,
 					FCPPT_ASSERT_OPTIONAL_ERROR(
@@ -546,7 +546,7 @@ sanguis::tools::animations::main_window::globalDelayChanged(
 	int const _value
 )
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		loaded_model_,
 		[
 			_value,
@@ -571,7 +571,7 @@ sanguis::tools::animations::main_window::delayChanged(
 	int const _value
 )
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		this->current_animation(),
 		[
 			_value,
@@ -596,7 +596,7 @@ sanguis::tools::animations::main_window::soundChanged(
 	QString const &_name
 )
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		this->current_animation(),
 		[
 			&_name
@@ -655,7 +655,7 @@ sanguis::tools::animations::main_window::updateFrame()
 void
 sanguis::tools::animations::main_window::playFrames()
 {
-	fcppt::maybe(
+	fcppt::optional::maybe(
 		this->current_animation_delay(),
 		[
 			this
@@ -710,7 +710,7 @@ sanguis::tools::animations::main_window::current_animation()
 {
 	// TODO: optional_map_multi?
 	return
-		fcppt::maybe_multi(
+		fcppt::optional::maybe_multi(
 			[]{
 				return
 					sanguis::tools::animations::optional_animation_ref();
@@ -835,7 +835,7 @@ sanguis::tools::animations::main_window::open_json(
 		);
 
 	ui_->globalDelaySpinBox->setValue(
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			loaded_model.model().animation_delay(),
 			fcppt::const_(
 				0
@@ -892,7 +892,7 @@ sanguis::tools::animations::main_window::optional_path
 sanguis::tools::animations::main_window::resource_path()
 {
 	return
-		fcppt::optional_map(
+		fcppt::optional::map(
 			loaded_model_,
 			[](
 				sanguis::tools::animations::path_model_pair const &_model
@@ -909,7 +909,7 @@ sanguis::tools::animations::main_window::resource_path()
 void
 sanguis::tools::animations::main_window::update_frame_timer()
 {
-	fcppt::maybe(
+	fcppt::optional::maybe(
 		this->current_animation_delay(),
 		[
 			this
@@ -935,7 +935,7 @@ sanguis::model::optional_animation_delay
 sanguis::tools::animations::main_window::current_animation_delay()
 {
 	return
-		fcppt::optional_bind(
+		fcppt::optional::bind(
 			this->current_animation(),
 			[
 				this

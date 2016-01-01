@@ -21,7 +21,7 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
-#include <fcppt/maybe.hpp>
+#include <fcppt/optional/maybe.hpp>
 
 
 sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
@@ -67,7 +67,7 @@ sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 		_gui_style,
 		_renderer,
 		_font,
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			_attribute_diff.get(),
 			[]{
 				return
@@ -83,7 +83,7 @@ sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 					);
 			}
 		),
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			_attribute_diff.get(),
 			[]{
 				return

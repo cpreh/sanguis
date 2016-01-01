@@ -7,8 +7,8 @@
 #include <sanguis/client/perk/remaining_levels.hpp>
 #include <sanguis/client/perk/tree.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/maybe.hpp>
 #include <fcppt/assert/optional_error.hpp>
+#include <fcppt/optional/maybe.hpp>
 
 
 sanguis::client::perk::choosable_state
@@ -47,7 +47,7 @@ sanguis::client::perk::choosable(
 			sanguis::client::perk::choosable_state::max_level;
 
 	if(
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			parent_node.value(),
 			fcppt::const_(
 				false

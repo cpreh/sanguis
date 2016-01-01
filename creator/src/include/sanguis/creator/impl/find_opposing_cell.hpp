@@ -4,7 +4,7 @@
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/creator/pos_fwd.hpp>
 #include <sanguis/creator/impl/reachable_grid.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 namespace sanguis
@@ -14,7 +14,7 @@ namespace creator
 namespace impl
 {
 
-fcppt::optional<
+fcppt::optional::object<
 	sanguis::creator::pos
 >
 find_opposing_cell(

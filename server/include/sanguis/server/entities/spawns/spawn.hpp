@@ -15,7 +15,7 @@
 #include <sanguis/server/entities/spawns/size_type.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/optional_decl.hpp>
+#include <fcppt/optional/object_decl.hpp>
 
 
 namespace sanguis
@@ -88,13 +88,13 @@ private:
 	) = 0;
 
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		sanguis::server::center
 	>
 	optional_center;
 
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		sanguis::server::angle
 	>
 	optional_angle;

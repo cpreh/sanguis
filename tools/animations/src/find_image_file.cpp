@@ -10,8 +10,8 @@
 #include <sanguis/tools/animations/const_optional_image_file_ref.hpp>
 #include <sanguis/tools/animations/find_image_file.hpp>
 #include <sanguis/tools/animations/image_file_map.hpp>
-#include <fcppt/maybe_void.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <QImage>
 #include <fcppt/config/external_end.hpp>
@@ -36,7 +36,7 @@ sanguis::tools::animations::find_image_file(
 			sanguis::model::optional_image_name const &_opt_image_name
 		)
 		{
-			fcppt::maybe_void(
+			fcppt::optional::maybe_void(
 				_opt_image_name,
 				[
 					&result,
@@ -45,7 +45,7 @@ sanguis::tools::animations::find_image_file(
 					sanguis::model::image_name const &_image_name
 				)
 				{
-					fcppt::maybe_void(
+					fcppt::optional::maybe_void(
 						fcppt::container::find_opt_mapped(
 							_image_files,
 							_image_name

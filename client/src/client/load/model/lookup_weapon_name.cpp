@@ -4,11 +4,11 @@
 #include <sanguis/client/load/primary_weapon_name.hpp>
 #include <sanguis/client/load/model/lookup_weapon_name.hpp>
 #include <sanguis/model/weapon_category_name.hpp>
-#include <fcppt/optional_to_exception.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/enum_array_init.hpp>
 #include <fcppt/algorithm/index_of_enum_array.hpp>
 #include <fcppt/container/enum_array.hpp>
+#include <fcppt/optional/to_exception.hpp>
 
 
 namespace
@@ -44,7 +44,7 @@ sanguis::client::load::model::lookup_weapon_name(
 			sanguis::optional_primary_weapon_type()
 		:
 			sanguis::optional_primary_weapon_type(
-				fcppt::optional_to_exception(
+				fcppt::optional::to_exception(
 					fcppt::algorithm::index_of_enum_array(
 						weapon_types,
 						_name

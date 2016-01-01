@@ -20,7 +20,6 @@
 #include <sanguis/creator/impl/random/generator.hpp>
 #include <sanguis/creator/impl/random/uniform_int_wrapper_impl.hpp>
 #include <sanguis/creator/impl/random/uniform_pos.hpp>
-#include <fcppt/optional_to_exception.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/fold.hpp>
 #include <fcppt/assert/error_message.hpp>
@@ -28,6 +27,7 @@
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/random/wrapper/make_uniform_container_advanced.hpp>
 
 
@@ -86,7 +86,7 @@ sanguis::creator::impl::place_spawners(
 	)
 	{
 		sanguis::creator::pos const candidate{
-			fcppt::optional_to_exception(
+			fcppt::optional::to_exception(
 				sanguis::creator::impl::closest_empty(
 					_grid,
 					random_pos()

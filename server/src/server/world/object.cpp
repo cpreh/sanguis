@@ -124,9 +124,6 @@
 #include <sanguis/server/world/update_entity.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/make_enum_range.hpp>
-#include <fcppt/maybe.hpp>
-#include <fcppt/optional_map.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -142,6 +139,9 @@
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/optional/map.hpp>
+#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <vector>
@@ -267,7 +267,7 @@ sanguis::server::world::object::insert(
 )
 {
 	return
-		fcppt::optional_map(
+		fcppt::optional::map(
 			this->insert_base(
 				server_entities_,
 				std::move(
@@ -293,7 +293,7 @@ sanguis::server::world::object::insert(
 )
 {
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			_entity->transfer(
 				this->environment(),
 				_insert_parameters,
@@ -480,7 +480,7 @@ sanguis::server::world::object::player_insertion(
 template<
 	typename Entity
 >
-fcppt::optional<
+fcppt::optional::object<
 	Entity &
 >
 sanguis::server::world::object::insert_base(
@@ -497,7 +497,7 @@ sanguis::server::world::object::insert_base(
 {
 	// These are only very simple entities that don't need special treatment
 	return
-		fcppt::optional_map(
+		fcppt::optional::map(
 			_entity->transfer(
 				this->environment(),
 				_insert_parameters,

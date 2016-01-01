@@ -3,8 +3,8 @@
 #include <sanguis/client/load/model/make_delay.hpp>
 #include <sanguis/model/animation.hpp>
 #include <sanguis/model/optional_animation_delay.hpp>
-#include <fcppt/optional_to_exception.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
 #include <fcppt/config/external_end.hpp>
@@ -20,7 +20,7 @@ sanguis::client::load::model::make_delay(
 		std::chrono::duration_cast<
 			sanguis::duration
 		>(
-			fcppt::optional_to_exception(
+			fcppt::optional::to_exception(
 				_animation.animation_delay().has_value()
 				?
 					_animation.animation_delay()

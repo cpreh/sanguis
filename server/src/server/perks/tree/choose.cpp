@@ -5,8 +5,8 @@
 #include <sanguis/server/perks/tree/find_node.hpp>
 #include <sanguis/server/perks/tree/object.hpp>
 #include <sanguis/server/perks/tree/status.hpp>
-#include <fcppt/optional_to_exception.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/optional/to_exception.hpp>
 
 
 void
@@ -15,7 +15,7 @@ sanguis::server::perks::tree::choose(
 	sanguis::perk_type const _perk_type
 )
 {
-	fcppt::optional_to_exception(
+	fcppt::optional::to_exception(
 		sanguis::server::perks::tree::find_node(
 			_tree,
 			_perk_type

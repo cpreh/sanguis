@@ -3,7 +3,7 @@
 
 #include <sanguis/server/ai/pathing/optional_target_fwd.hpp>
 #include <sanguis/server/ai/pathing/target.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 #endif

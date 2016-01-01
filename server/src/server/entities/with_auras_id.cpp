@@ -8,9 +8,9 @@
 #include <sanguis/server/entities/with_auras_id.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/environment/object.hpp>
-#include <fcppt/maybe_void.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/assert/optional_error.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -21,7 +21,7 @@ sanguis::server::entities::with_auras_id::add_aura(
 	sanguis::server::auras::unique_ptr &&_aura
 )
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		_aura->type(),
 		[
 			this

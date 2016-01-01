@@ -15,14 +15,14 @@
 #include <sanguis/collision/world/optional_body_enter.hpp>
 #include <sanguis/collision/world/optional_body_exit.hpp>
 #include <fcppt/make_cref.hpp>
-#include <fcppt/maybe.hpp>
-#include <fcppt/optional_map.hpp>
 #include <fcppt/reference_wrapper_comparison.hpp>
 #include <fcppt/algorithm/map_iteration.hpp>
 #include <fcppt/algorithm/update_action.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
+#include <fcppt/optional/map.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -156,7 +156,7 @@ sanguis::collision::impl::world::simple::ghost::update_near_body(
 			)
 		)
 		?
-			fcppt::maybe(
+			fcppt::optional::maybe(
 				fcppt::container::find_opt_mapped(
 					bodies_,
 					fcppt::make_cref(
@@ -250,7 +250,7 @@ sanguis::collision::impl::world::simple::ghost::remove_body(
 )
 {
 	return
-		fcppt::optional_map(
+		fcppt::optional::map(
 			fcppt::container::find_opt_iterator(
 				bodies_,
 				fcppt::make_cref(

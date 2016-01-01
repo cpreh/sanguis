@@ -41,13 +41,13 @@
 #include <fcppt/exception.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/maybe.hpp>
-#include <fcppt/maybe_void.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/fatal.hpp>
+#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/optional/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/variables_map.hpp>
 #include <chrono>
@@ -249,7 +249,7 @@ sanguis::client::object::loop_handler()
 		)
 	);
 
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		server_,
 		[
 			this
@@ -322,7 +322,7 @@ sanguis::client::object::create_server(
 awl::main::exit_code
 sanguis::client::object::quit_server()
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		server_,
 		[](
 			server_unique_ptr const &_server
@@ -333,7 +333,7 @@ sanguis::client::object::quit_server()
 	);
 
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			server_,
 			[]{
 				return

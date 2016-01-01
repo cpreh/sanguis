@@ -12,7 +12,7 @@
 #include <sanguis/server/buffs/unique_ptr.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
-#include <fcppt/maybe_void.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 
 
 sanguis::server::auras::buff::buff(
@@ -59,7 +59,7 @@ sanguis::server::auras::buff::enter(
 	sanguis::collision::world::created
 )
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		create_callback_(
 			_entity
 		),

@@ -3,7 +3,7 @@
 
 #include <sanguis/server/entities/auto_weak_hook.hpp>
 #include <sanguis/server/entities/with_links_fwd.hpp>
-#include <fcppt/optional_decl.hpp>
+#include <fcppt/optional/object_decl.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -25,7 +25,7 @@ class auto_weak_link
 {
 public:
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		sanguis::server::entities::with_links &
 	>
 	optional_with_links_ref;

@@ -3,8 +3,8 @@
 
 #include <sanguis/server/net/value_decl.hpp>
 #include <sge/timer/basic_impl.hpp>
-#include <fcppt/maybe.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 template<
@@ -86,7 +86,7 @@ sanguis::server::net::basic_value<
 	Type const _value
 )
 {
-	fcppt::maybe(
+	fcppt::optional::maybe(
 		old_,
 		[
 			this

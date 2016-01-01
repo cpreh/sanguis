@@ -3,10 +3,10 @@
 
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
-#include <fcppt/dynamic_optional_cast.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/optional/dynamic_cast.hpp>
+#include <fcppt/optional/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -24,7 +24,7 @@ template<
 	typename Entity,
 	typename Object
 >
-fcppt::optional<
+fcppt::optional::object<
 	Entity &
 >
 insert_with_result(
@@ -36,7 +36,7 @@ insert_with_result(
 )
 {
 	return
-		fcppt::dynamic_optional_cast<
+		fcppt::optional::dynamic_cast_<
 			Entity
 		>(
 			_object.insert(

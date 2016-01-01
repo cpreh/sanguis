@@ -40,12 +40,12 @@
 #include <awl/main/exit_success.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/from_std_string.hpp>
-#include <fcppt/maybe.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/variables_map.hpp>
@@ -419,7 +419,7 @@ sanguis::client::machine::data_callback(
 )
 {
 	while(
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			sanguis::client::net::deserialize(
 				_data
 			),

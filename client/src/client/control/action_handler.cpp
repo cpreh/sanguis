@@ -38,13 +38,13 @@
 #include <sge/console/callback/short_description.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/timer/reset_when_expired.hpp>
-#include <fcppt/maybe_void.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/clamp.hpp>
 #include <fcppt/math/vector/null.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/auto_connection_container.hpp>
 #include <fcppt/variant/match.hpp>
@@ -276,7 +276,7 @@ sanguis::client::control::action_handler::handle_cursor_action(
 	)
 		return;
 
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		cursor_position_,
 		[
 			this
@@ -284,7 +284,7 @@ sanguis::client::control::action_handler::handle_cursor_action(
 			sanguis::client::control::cursor_position const _pos
 		)
 		{
-			fcppt::maybe_void(
+			fcppt::optional::maybe_void(
 				environment_.translate_attack_dest(
 					_pos
 				),

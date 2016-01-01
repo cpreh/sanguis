@@ -33,10 +33,10 @@
 #include <sge/sprite/types/texture_size.hpp>
 #include <sge/texture/part.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/from_optional.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/maybe.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/optional/from.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -104,7 +104,7 @@ sanguis::client::draw2d::entities::particle::particle(
 		sge::sprite::roles::rotation{} =
 			sanguis::client::draw2d::sprite::normal::no_rotation().get(),
 		sge::sprite::roles::size_or_texture_size{} =
-			fcppt::maybe(
+			fcppt::optional::maybe(
 				_opt_size,
 				fcppt::const_(
 					sanguis::client::draw2d::sprite::size_or_texture_size{

@@ -2,7 +2,7 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/environment/object.hpp>
-#include <fcppt/maybe_void.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 
 
 sanguis::server::entities::with_id::with_id(
@@ -35,7 +35,7 @@ sanguis::server::entities::with_id::transfer_to_world()
 void
 sanguis::server::entities::with_id::transfer_from_world()
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		this->environment(),
 		[
 			this

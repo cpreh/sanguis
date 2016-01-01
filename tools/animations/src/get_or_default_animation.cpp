@@ -8,9 +8,9 @@
 #include <sanguis/model/part_name.hpp>
 #include <sanguis/model/weapon_category_name.hpp>
 #include <sanguis/tools/animations/get_or_default_animation.hpp>
-#include <fcppt/from_optional.hpp>
-#include <fcppt/optional_bind.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
+#include <fcppt/optional/bind.hpp>
+#include <fcppt/optional/from.hpp>
 
 
 sanguis::model::animation
@@ -22,8 +22,8 @@ sanguis::tools::animations::get_or_default_animation(
 )
 {
 	return
-		fcppt::from_optional(
-			fcppt::optional_bind(
+		fcppt::optional::from(
+			fcppt::optional::bind(
 				fcppt::container::find_opt_mapped(
 					_model.parts(),
 					_part_name
@@ -36,7 +36,7 @@ sanguis::tools::animations::get_or_default_animation(
 				)
 				{
 					return
-						fcppt::optional_bind(
+						fcppt::optional::bind(
 							fcppt::container::find_opt_mapped(
 								_part.weapon_categories(),
 								_weapon_category_name

@@ -3,7 +3,7 @@
 
 #include <sanguis/collision/world/body_exit.hpp>
 #include <sanguis/collision/world/optional_body_exit_fwd.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 #endif

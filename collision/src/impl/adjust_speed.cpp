@@ -11,11 +11,11 @@
 #include <fcppt/const.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_literal_boost_units.hpp>
-#include <fcppt/maybe.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/math/box/stretch_absolute.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/fill.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/units/systems/si/velocity.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -30,7 +30,7 @@ sanguis::collision::impl::adjust_speed(
 )
 {
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			sanguis::collision::impl::rect_line_intersection(
 				fcppt::math::box::stretch_absolute(
 					_obstacle,

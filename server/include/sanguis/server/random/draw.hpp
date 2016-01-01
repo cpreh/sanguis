@@ -6,9 +6,9 @@
 #include <sanguis/server/random/create_function.hpp>
 #include <sanguis/server/random/equal_function.hpp>
 #include <sanguis/server/random/less_function.hpp>
-#include <fcppt/maybe.hpp>
 #include <fcppt/algorithm/repeat.hpp>
 #include <fcppt/cast/size.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/random/wrapper/make_uniform_container.hpp>
 #include <fcppt/random/wrapper/uniform_container.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -49,7 +49,7 @@ draw(
 )
 {
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			fcppt::random::wrapper::make_uniform_container(
 				_source
 			),

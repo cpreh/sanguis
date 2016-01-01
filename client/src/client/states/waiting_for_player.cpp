@@ -16,11 +16,11 @@
 #include <sanguis/messages/call/result.hpp>
 #include <sanguis/messages/server/add_own_player.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
-#include <fcppt/maybe_void.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/variant/to_optional.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
@@ -83,7 +83,7 @@ sanguis::client::states::waiting_for_player::react(
 	sanguis::client::events::action const &_event
 )
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		fcppt::variant::to_optional<
 			sanguis::client::control::actions::nullary
 		>(

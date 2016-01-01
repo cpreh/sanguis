@@ -4,8 +4,8 @@
 #include <sanguis/client/load/hud/weapon_icon_map.hpp>
 #include <sanguis/client/load/resource/textures.hpp>
 #include <sge/texture/part_fwd.hpp>
-#include <fcppt/maybe.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
+#include <fcppt/optional/maybe.hpp>
 
 
 sanguis::client::load::hud::context::context(
@@ -33,7 +33,7 @@ sanguis::client::load::hud::context::weapon_icon(
 )
 {
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			fcppt::container::find_opt_mapped(
 				weapon_icons_,
 				_weapon_type

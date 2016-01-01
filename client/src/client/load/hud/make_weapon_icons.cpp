@@ -7,8 +7,6 @@
 #include <sanguis/client/load/hud/weapon_type.hpp>
 #include <sanguis/client/load/resource/textures.hpp>
 #include <fcppt/make_cref.hpp>
-#include <fcppt/maybe.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/assert/error.hpp>
@@ -16,6 +14,8 @@
 #include <fcppt/filesystem/stem.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/warning.hpp>
+#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
@@ -52,13 +52,13 @@ sanguis::client::load::hud::make_weapon_icons(
 			)
 			{
 				typedef
-				fcppt::optional<
+				fcppt::optional::object<
 					sanguis::client::load::hud::weapon_icon_map::value_type
 				>
 				result_type;
 
 				return
-					fcppt::maybe(
+					fcppt::optional::maybe(
 						sanguis::client::load::hud::weapon_type(
 							fcppt::filesystem::stem(
 								_path

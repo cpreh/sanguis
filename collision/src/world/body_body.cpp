@@ -14,14 +14,14 @@
 #include <fcppt/boost_units_value.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_homogenous_pair.hpp>
-#include <fcppt/maybe_multi.hpp>
-#include <fcppt/optional_bind.hpp>
-#include <fcppt/optional_map.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/dot.hpp>
 #include <fcppt/math/vector/map.hpp>
 #include <fcppt/math/vector/static.hpp>
+#include <fcppt/optional/bind.hpp>
+#include <fcppt/optional/map.hpp>
+#include <fcppt/optional/maybe_multi.hpp>
+#include <fcppt/optional/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/units/quantity.hpp>
 #include <boost/units/systems/si/momentum.hpp>
@@ -44,7 +44,7 @@ sanguis::collision::world::body_body(
 	impulse_type;
 
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		impulse_type
 	>
 	optional_impulse;
@@ -169,7 +169,7 @@ sanguis::collision::world::body_body(
 	);
 
 	return
-		fcppt::maybe_multi(
+		fcppt::optional::maybe_multi(
 			[]{
 				return
 					sanguis::collision::optional_result_pair{};
@@ -184,7 +184,7 @@ sanguis::collision::world::body_body(
 			)
 			{
 				return
-					fcppt::optional_bind(
+					fcppt::optional::bind(
 						sanguis::collision::impl::normalize_opt(
 							fcppt::math::vector::map(
 								_body1.center().get()
@@ -205,7 +205,7 @@ sanguis::collision::world::body_body(
 						)
 						{
 							return
-								fcppt::optional_map(
+								fcppt::optional::map(
 									make_impulse(
 										_normal,
 										_mass1,

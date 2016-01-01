@@ -2,7 +2,7 @@
 #define SANGUIS_OPTIONAL_WEAPON_ATTRIBUTE_VALUE_HPP_INCLUDED
 
 #include <sanguis/optional_weapon_attribute_value_fwd.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 #endif

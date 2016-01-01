@@ -13,7 +13,7 @@
 #include <sanguis/server/world/center_to_grid_pos.hpp>
 #include <sanguis/server/world/grid_pos_to_center.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/maybe.hpp>
+#include <fcppt/optional/maybe.hpp>
 
 
 bool
@@ -62,7 +62,7 @@ sanguis::server::ai::go_to_target(
 	};
 
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			_context.destination(),
 			fcppt::const_(
 				false
@@ -85,7 +85,7 @@ sanguis::server::ai::go_to_target(
 				target_grid_pos
 			)
 		:
-			fcppt::maybe(
+			fcppt::optional::maybe(
 				_context.continue_path(),
 				[
 					&_context,

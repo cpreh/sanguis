@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_WEAPONS_OPTIONAL_TARGET_FWD_HPP_INCLUDED
 
 #include <sanguis/server/weapons/target_fwd.hpp>
-#include <fcppt/optional_fwd.hpp>
+#include <fcppt/optional/object_fwd.hpp>
 
 
 namespace sanguis
@@ -13,7 +13,7 @@ namespace weapons
 {
 
 typedef
-fcppt::optional<
+fcppt::optional::object<
 	sanguis::server::weapons::target
 >
 optional_target;

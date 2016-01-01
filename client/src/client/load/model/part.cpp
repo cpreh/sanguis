@@ -7,9 +7,9 @@
 #include <sanguis/client/load/model/weapon_category_map.hpp>
 #include <sanguis/client/load/model/weapon_category_unique_ptr.hpp>
 #include <sanguis/model/part_fwd.hpp>
-#include <fcppt/maybe.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
+#include <fcppt/optional/maybe.hpp>
 
 
 sanguis::client::load::model::part::part(
@@ -36,7 +36,7 @@ sanguis::client::load::model::part::operator[](
 ) const
 {
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			fcppt::container::find_opt_mapped(
 				categories_,
 				_type

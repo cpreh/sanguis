@@ -4,7 +4,7 @@
 #include <sanguis/server/ai/rotate_to_target.hpp>
 #include <sanguis/server/ai/target.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
-#include <fcppt/maybe_void.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 
 
 void
@@ -13,7 +13,7 @@ sanguis::server::ai::rotate_to_target(
 	sanguis::server::ai::target const _target
 )
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		sanguis::server::ai::angle_to_target(
 			_me,
 			_target

@@ -5,13 +5,13 @@
 #include <sanguis/creator/tile_is_solid.hpp>
 #include <sanguis/creator/tile_is_visible.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/maybe.hpp>
 #include <fcppt/cast/to_signed_fun.hpp>
 #include <fcppt/cast/to_unsigned_fun.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/math/bresenham.hpp>
 #include <fcppt/math/bresenham_thick.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/optional/maybe.hpp>
 
 
 bool
@@ -42,7 +42,7 @@ sanguis::creator::tile_is_visible(
 			)
 			{
 				return
-					fcppt::maybe(
+					fcppt::optional::maybe(
 						fcppt::container::grid::at_optional(
 							_grid,
 							fcppt::math::vector::structure_cast<

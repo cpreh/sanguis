@@ -2,7 +2,7 @@
 #define SANGUIS_TILES_IMPL_OPTIONAL_PAIR_FWD_HPP_INCLUDED
 
 #include <sanguis/tiles/pair_fwd.hpp>
-#include <fcppt/optional_fwd.hpp>
+#include <fcppt/optional/object_fwd.hpp>
 
 
 namespace sanguis
@@ -18,7 +18,7 @@ template<
 using
 optional_pair
 =
-fcppt::optional<
+fcppt::optional::object<
 	sanguis::tiles::pair<
 		Tile
 	>

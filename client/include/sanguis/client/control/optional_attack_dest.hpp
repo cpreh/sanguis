@@ -3,7 +3,7 @@
 
 #include <sanguis/client/control/attack_dest.hpp>
 #include <sanguis/client/control/optional_attack_dest_fwd.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 #endif

@@ -20,8 +20,8 @@
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/optional_decl.hpp>
 #include <fcppt/unique_ptr_decl.hpp>
+#include <fcppt/optional/object_decl.hpp>
 
 
 namespace sanguis
@@ -104,7 +104,7 @@ private:
 	state_unique_ptr;
 
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		state_unique_ptr
 	>
 	optional_state_unique_ptr;

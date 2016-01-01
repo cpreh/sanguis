@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_OPTIONAL_SPEED_FWD_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/speed_fwd.hpp>
-#include <fcppt/optional_fwd.hpp>
+#include <fcppt/optional/object_fwd.hpp>
 
 
 namespace sanguis
@@ -13,7 +13,7 @@ namespace draw2d
 {
 
 typedef
-fcppt::optional<
+fcppt::optional::object<
 	sanguis::client::draw2d::speed
 >
 optional_speed;

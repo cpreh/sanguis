@@ -34,13 +34,13 @@
 #include <sanguis/server/weapons/events/stop.hpp>
 #include <sanguis/server/weapons/states/idle.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/from_optional.hpp>
-#include <fcppt/maybe.hpp>
-#include <fcppt/maybe_void.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/algorithm/join.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/optional_error.hpp>
+#include <fcppt/optional/from.hpp>
+#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/optional/object_impl.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -181,7 +181,7 @@ sanguis::server::weapons::attributes::magazine_size
 sanguis::server::weapons::weapon::magazine_size() const
 {
 	return
-		fcppt::from_optional(
+		fcppt::optional::from(
 			magazine_size_,
 			[]
 			{
@@ -213,7 +213,7 @@ bool
 sanguis::server::weapons::weapon::owner_target_in_range() const
 {
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			this->owner().target(),
 			fcppt::const_(
 				false
@@ -242,7 +242,7 @@ sanguis::server::weapons::weapon::description() const
 				this->magazine_size().base().get()
 			},
 			sanguis::magazine_extra{
-				fcppt::from_optional(
+				fcppt::optional::from(
 					this->magazine_size().extra(),
 					[]
 					{
@@ -254,7 +254,7 @@ sanguis::server::weapons::weapon::description() const
 				).get()
 			},
 			this->magazine_remaining(),
-			fcppt::from_optional(
+			fcppt::optional::from(
 				this->reload_time(),
 				[]
 				{
@@ -267,7 +267,7 @@ sanguis::server::weapons::weapon::description() const
 				}
 			),
 			// TODO: Make composing this more sane!
-			fcppt::maybe(
+			fcppt::optional::maybe(
 				accuracy_,
 				[
 					this
@@ -367,7 +367,7 @@ sanguis::server::weapons::weapon::reload_time(
 void
 sanguis::server::weapons::weapon::reset_magazine()
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		magazine_used_,
 		[
 			this
@@ -386,7 +386,7 @@ sanguis::server::weapons::weapon::reset_magazine()
 void
 sanguis::server::weapons::weapon::use_magazine_item()
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		magazine_used_,
 		[
 			this
@@ -450,7 +450,7 @@ sanguis::magazine_remaining
 sanguis::server::weapons::weapon::magazine_remaining() const
 {
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			magazine_used_,
 			fcppt::const_(
 				sanguis::magazine_remaining{

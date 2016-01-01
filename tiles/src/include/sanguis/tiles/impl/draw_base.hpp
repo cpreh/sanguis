@@ -12,7 +12,7 @@
 #include <sanguis/tiles/impl/get_content_function.hpp>
 #include <sanguis/tiles/impl/is_background.hpp>
 #include <sanguis/tiles/impl/shift.hpp>
-#include <fcppt/optional_map.hpp>
+#include <fcppt/optional/map.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/container/grid/make_pos_ref_crange_start_end.hpp>
 #include <fcppt/container/grid/pos_reference_impl.hpp>
@@ -82,7 +82,7 @@ draw_base(
 			)
 			{
 				return
-					fcppt::optional_map(
+					fcppt::optional::map(
 						_get_content(
 							_element.pos()
 						),

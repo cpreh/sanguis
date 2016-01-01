@@ -50,10 +50,10 @@
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/maybe_void.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/static_downcast.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -177,7 +177,7 @@ sanguis::server::entities::enemies::enemy::update()
 void
 sanguis::server::entities::enemies::enemy::remove_from_game()
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		spawn_owner_.get().get(),
 		[
 			this

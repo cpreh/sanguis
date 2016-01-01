@@ -6,10 +6,10 @@
 #include <sanguis/client/perk/compare.hpp>
 #include <sanguis/client/perk/info.hpp>
 #include <sanguis/client/perk/to_string.hpp>
-#include <fcppt/optional_to_exception.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/find_if_opt.hpp>
 #include <fcppt/container/tree/pre_order.hpp>
+#include <fcppt/optional/to_exception.hpp>
 
 
 namespace sanguis
@@ -30,7 +30,7 @@ find_info_any(
 {
 	return
 		*
-		fcppt::optional_to_exception(
+		fcppt::optional::to_exception(
 			fcppt::algorithm::find_if_opt(
 				fcppt::container::tree::pre_order<
 					Tree

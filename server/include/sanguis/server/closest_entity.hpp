@@ -5,8 +5,8 @@
 #include <sanguis/server/collision/distance_entity_entity.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/maybe.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 namespace sanguis
@@ -18,7 +18,7 @@ template<
 	typename Container,
 	typename Predicate
 >
-fcppt::optional<
+fcppt::optional::object<
 	typename
 	Container::value_type::type &
 >
@@ -29,7 +29,7 @@ closest_entity(
 )
 {
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		typename
 		Container::value_type::type &
 	>
@@ -38,7 +38,7 @@ closest_entity(
 	result_type ret;
 
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		sanguis::server::space_unit
 	>
 	optional_space_unit;
@@ -63,7 +63,7 @@ closest_entity(
 				entity.get()
 			)
 			&&
-			fcppt::maybe(
+			fcppt::optional::maybe(
 				distance,
 				fcppt::const_(
 					true

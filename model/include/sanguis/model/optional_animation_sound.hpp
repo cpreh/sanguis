@@ -3,7 +3,7 @@
 
 #include <sanguis/model/animation_sound.hpp>
 #include <sanguis/model/optional_animation_sound_fwd.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 #endif

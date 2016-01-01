@@ -11,10 +11,10 @@
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/creator/optional_background_tile.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/optional_bind.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/unreachable.hpp>
+#include <fcppt/optional/bind.hpp>
 
 
 sanguis::client::draw2d::entities::optional_own_unique_ptr
@@ -32,7 +32,7 @@ sanguis::client::draw2d::entities::enemy_spawn_particle(
 	case sanguis::creator::enemy_type::zombie00:
 	case sanguis::creator::enemy_type::zombie01:
 		return
-			fcppt::optional_bind(
+			fcppt::optional::bind(
 				_background_tile,
 				[
 					&_load_parameters,

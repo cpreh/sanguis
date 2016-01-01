@@ -35,7 +35,6 @@
 #include <sge/timer/elapsed_and_reset.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/exception.hpp>
-#include <fcppt/maybe.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
@@ -46,6 +45,7 @@
 #include <fcppt/log/info.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/verbose.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
@@ -262,7 +262,7 @@ sanguis::server::machine::send_unicast(
 		)
 	);
 
-	fcppt::maybe(
+	fcppt::optional::maybe(
 		net_.send_buffer(
 			net_id
 		),
@@ -387,7 +387,7 @@ sanguis::server::machine::data_callback(
 try
 {
 	while(
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			sanguis::server::net::deserialize(
 				_data
 			),

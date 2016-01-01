@@ -2,7 +2,7 @@
 #define SANGUIS_MESSAGES_SERVER_OPTIONAL_UNIQUE_PTR_FWD_HPP_INCLUDED
 
 #include <sanguis/messages/server/unique_ptr.hpp>
-#include <fcppt/optional_fwd.hpp>
+#include <fcppt/optional/object_fwd.hpp>
 
 
 namespace sanguis
@@ -13,7 +13,7 @@ namespace server
 {
 
 typedef
-fcppt::optional<
+fcppt::optional::object<
 	sanguis::messages::server::unique_ptr
 >
 optional_unique_ptr;

@@ -83,7 +83,6 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/maybe_void.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/optional_error.hpp>
@@ -92,6 +91,7 @@
 #include <fcppt/math/vector/atan2.hpp>
 #include <fcppt/math/vector/length_square.hpp>
 #include <fcppt/math/vector/null.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <utility>
@@ -350,7 +350,7 @@ sanguis::server::entities::player::drop_or_pickup_weapon(
 		)
 	);
 
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		sanguis::server::closest_entity(
 			*this,
 			weapon_pickups_,
@@ -381,7 +381,7 @@ sanguis::server::entities::player::drop_or_pickup_weapon(
 		}
 	);
 
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		std::move(
 			dropped
 		),

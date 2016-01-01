@@ -31,7 +31,7 @@
 #include <sanguis/server/weapons/states/idle_fwd.hpp>
 #include <sanguis/server/weapons/states/reloading_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/optional_decl.hpp>
+#include <fcppt/optional/object_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/state_machine.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -186,7 +186,7 @@ private:
 	sanguis::server::weapons::range const range_;
 
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		sanguis::magazine_type
 	>
 	optional_magazine_used;

@@ -3,8 +3,8 @@
 
 #include <sanguis/perk_type.hpp>
 #include <sanguis/server/perks/tree/type_from_container.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/container/tree/pre_order.hpp>
+#include <fcppt/optional/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <fcppt/config/external_end.hpp>
@@ -22,7 +22,7 @@ namespace tree
 template<
 	typename Container
 >
-fcppt::optional<
+fcppt::optional::object<
 	sanguis::server::perks::tree::type_from_container<
 		Container
 	> &
@@ -39,7 +39,7 @@ find_node(
 	tree_type;
 
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		tree_type &
 	>
 	result_type;

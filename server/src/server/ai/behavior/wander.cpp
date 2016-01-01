@@ -13,9 +13,9 @@
 #include <sanguis/server/ai/behavior/wander.hpp>
 #include <sanguis/server/random/grid_pos.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/maybe.hpp>
 #include <fcppt/math/dim/to_vector.hpp>
 #include <fcppt/math/vector/null.hpp>
+#include <fcppt/optional/maybe.hpp>
 
 
 sanguis::server::ai::behavior::wander::wander(
@@ -44,7 +44,7 @@ bool
 sanguis::server::ai::behavior::wander::start()
 {
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			sanguis::server::random::grid_pos(
 				random_generator_,
 				sanguis::creator::min{

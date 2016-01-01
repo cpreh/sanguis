@@ -30,10 +30,6 @@
 #include <fcppt/const.hpp>
 #include <fcppt/make_int_range_count.hpp>
 #include <fcppt/make_literal_strong_typedef.hpp>
-#include <fcppt/maybe.hpp>
-#include <fcppt/maybe_void.hpp>
-#include <fcppt/optional_bind.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/algorithm/all_of.hpp>
 #include <fcppt/algorithm/map.hpp>
@@ -41,6 +37,10 @@
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/dim/to_signed.hpp>
 #include <fcppt/math/vector/null.hpp>
+#include <fcppt/optional/bind.hpp>
+#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/optional/object_impl.hpp>
 #include <fcppt/type_iso/strong_typedef.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -146,7 +146,7 @@ sanguis::client::draw2d::entities::model::object::is_decayed() const
 	return
 		this->animations_ended()
 		&&
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			decay_time_,
 			fcppt::const_(
 				false
@@ -254,7 +254,7 @@ sanguis::client::draw2d::entities::model::object::health(
 		health_pair_ =
 			sanguis::client::optional_health_pair();
 
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		health_pair_,
 		[
 			_health
@@ -274,7 +274,7 @@ sanguis::client::draw2d::entities::model::object::max_health(
 	sanguis::client::max_health const _max_health
 )
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		health_pair_,
 		[
 			_max_health
@@ -390,7 +390,7 @@ sanguis::client::draw2d::entities::model::object::object(
 		_parameters.weapon_status()
 	),
 	health_pair_{
-		fcppt::optional_bind(
+		fcppt::optional::bind(
 			_parameters.health_pair(),
 			[](
 				sanguis::client::health_pair const &_health_pair

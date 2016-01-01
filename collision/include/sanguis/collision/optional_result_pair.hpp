@@ -3,7 +3,7 @@
 
 #include <sanguis/collision/optional_result_pair_fwd.hpp>
 #include <sanguis/collision/result_pair.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 #endif

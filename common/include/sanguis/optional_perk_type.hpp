@@ -3,7 +3,7 @@
 
 #include <sanguis/optional_perk_type_fwd.hpp>
 #include <sanguis/perk_type.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 #endif

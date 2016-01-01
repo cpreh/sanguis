@@ -4,8 +4,8 @@
 #include <sanguis/server/entities/optional_transfer_result.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/entities/transfer_result.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 sanguis::server::entities::center_simple::center_simple()

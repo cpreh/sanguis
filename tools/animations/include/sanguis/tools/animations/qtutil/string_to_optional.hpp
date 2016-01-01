@@ -2,7 +2,7 @@
 #define SANGUIS_TOOLS_ANIMATIONS_QTUTIL_STRING_TO_OPTIONAL_HPP_INCLUDED
 
 #include <sanguis/tools/animations/qtutil/to_fcppt_string.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <QString>
 #include <fcppt/config/external_end.hpp>
@@ -20,7 +20,7 @@ namespace qtutil
 template<
 	typename Result
 >
-fcppt::optional<
+fcppt::optional::object<
 	Result
 >
 string_to_optional(
@@ -28,7 +28,7 @@ string_to_optional(
 )
 {
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		Result
 	>
 	result_type;

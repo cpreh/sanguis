@@ -21,9 +21,9 @@
 #include <sge/timer/absolute_decl.hpp>
 #include <awl/main/exit_code.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/optional_decl.hpp>
 #include <fcppt/scoped_state_machine.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
+#include <fcppt/optional/object_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/variables_map.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -116,7 +116,7 @@ private:
 	server_unique_ptr;
 
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		server_unique_ptr
 	>
 	optional_server_unique_ptr;

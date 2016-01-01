@@ -6,7 +6,7 @@
 #include <sanguis/server/entities/optional_transfer_result_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/optional_decl.hpp>
+#include <fcppt/optional/object_decl.hpp>
 
 
 namespace sanguis
@@ -41,7 +41,7 @@ protected:
 	override;
 private:
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		sanguis::server::center
 	>
 	optional_center;

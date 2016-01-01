@@ -11,7 +11,7 @@
 #include <sanguis/server/entities/with_links.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_literal_strong_typedef.hpp>
-#include <fcppt/maybe.hpp>
+#include <fcppt/optional/maybe.hpp>
 
 
 sanguis::server::ai::behavior::follow_owner::follow_owner(
@@ -45,7 +45,7 @@ sanguis::server::ai::behavior::follow_owner::update(
 )
 {
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			spawn_owner_.get().get(),
 			[]{
 				return

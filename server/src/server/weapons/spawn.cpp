@@ -25,9 +25,9 @@
 #include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
 #include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
 #include <sanguis/server/world/center_to_grid_pos.hpp>
-#include <fcppt/maybe.hpp>
-#include <fcppt/maybe_void.hpp>
 #include <fcppt/algorithm/join.hpp>
+#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 
 
 sanguis::server::weapons::spawn::spawn(
@@ -117,7 +117,7 @@ sanguis::server::weapons::spawn::do_attack(
 		?
 			sanguis::server::weapons::attack_result::failure
 		:
-			fcppt::maybe(
+			fcppt::optional::maybe(
 				this->do_spawn(
 					_attack,
 					spawn_weapon_
@@ -167,7 +167,7 @@ sanguis::server::weapons::spawn::owner_lost()
 void
 sanguis::server::weapons::spawn::kill_spawned()
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		spawned_.get(),
 		[](
 			sanguis::server::entities::with_links &_spawned

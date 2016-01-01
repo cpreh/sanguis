@@ -3,7 +3,7 @@
 
 #include <sanguis/collision/impl/intersection.hpp>
 #include <sanguis/collision/impl/optional_intersection_fwd.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 #endif

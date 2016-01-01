@@ -7,8 +7,8 @@
 #include <sge/audio/loader_fwd.hpp>
 #include <sge/audio/player_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/optional_decl.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/optional/object_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <map>
@@ -48,7 +48,7 @@ public:
 	) const;
 private:
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		sge::audio::buffer_unique_ptr
 	>
 	optional_buffer;

@@ -18,11 +18,11 @@
 #include <sanguis/server/collision/to_mass.hpp>
 #include <sanguis/server/collision/to_radius.hpp>
 #include <sanguis/server/collision/to_speed.hpp>
-#include <fcppt/optional_assign.hpp>
-#include <fcppt/optional_map.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/pre.hpp>
+#include <fcppt/optional/assign.hpp>
+#include <fcppt/optional/map.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 sanguis::server::collision::body::body(
@@ -119,7 +119,7 @@ sanguis::server::collision::body::transfer(
 	);
 
 	sanguis::collision::world::body_unique_ptr const &new_body(
-		fcppt::optional_assign(
+		fcppt::optional::assign(
 			body_,
 			_world.create_body(
 				sanguis::collision::world::body_parameters(
@@ -132,7 +132,7 @@ sanguis::server::collision::body::transfer(
 					sanguis::server::collision::to_radius(
 						radius_
 					),
-					fcppt::optional_map(
+					fcppt::optional::map(
 						mass_,
 						[](
 							sanguis::server::mass const _mass

@@ -6,9 +6,9 @@
 #include <sge/image/color/predef.hpp>
 #include <sge/image/color/any/convert.hpp>
 #include <sge/image/color/any/object.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/pre.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 sanguis::client::draw2d::entities::buffs::slow::slow()

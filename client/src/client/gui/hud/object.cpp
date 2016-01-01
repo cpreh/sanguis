@@ -43,16 +43,16 @@
 #include <fcppt/const.hpp>
 #include <fcppt/insert_to_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/maybe.hpp>
-#include <fcppt/maybe_void.hpp>
-#include <fcppt/optional_map.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/cast/int_to_float_fun.hpp>
 #include <fcppt/cast/size_fun.hpp>
+#include <fcppt/optional/map.hpp>
+#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/optional/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
 #include <utility>
@@ -357,7 +357,7 @@ sanguis::client::gui::hud::object::health_pair(
 )
 {
 	health_bar_.value(
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			_opt_health_pair,
 			fcppt::const_(
 				sge::gui::fill_level(
@@ -728,7 +728,7 @@ sanguis::client::gui::hud::object::foreach_weapon(
 			optional_weapon_widget_unique_ptr const &_widget
 		)
 		{
-			fcppt::maybe_void(
+			fcppt::optional::maybe_void(
 				_widget,
 				[
 					&_function
@@ -798,7 +798,7 @@ sanguis::client::gui::hud::object::create_details()
 		-> sanguis::optional_weapon_description
 		{
 			return
-				fcppt::optional_map(
+				fcppt::optional::map(
 					_widget,
 					[](
 						weapon_widget_unique_ptr const &_ptr

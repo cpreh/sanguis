@@ -28,12 +28,12 @@
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/maybe.hpp>
-#include <fcppt/maybe_void.hpp>
-#include <fcppt/optional_map.hpp>
 #include <fcppt/algorithm/array_init_move.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/optional_error.hpp>
+#include <fcppt/optional/map.hpp>
+#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/variant/get_exn.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -78,7 +78,7 @@ sanguis::server::entities::with_weapon::with_weapon(
 		)
 	}
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		std::move(
 			_opt_start_weapon
 		),
@@ -137,7 +137,7 @@ sanguis::optional_primary_weapon_type
 sanguis::server::entities::with_weapon::primary_weapon_type() const
 {
 	return
-		fcppt::optional_map(
+		fcppt::optional::map(
 			this->primary_weapon(),
 			[](
 				sanguis::server::weapons::weapon const &_primary_weapon
@@ -202,7 +202,7 @@ sanguis::server::entities::with_weapon::drop_weapon(
 )
 {
 	return
-		fcppt::optional_map(
+		fcppt::optional::map(
 			this->move_weapon(
 				_is_primary
 			),
@@ -255,7 +255,7 @@ sanguis::server::entities::with_weapon::in_range(
 ) const
 {
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			this->get_weapon(
 				_is_primary
 			),
@@ -278,7 +278,7 @@ sanguis::server::entities::with_weapon::use_weapon(
 	sanguis::is_primary_weapon const _is_primary
 )
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		this->get_weapon(
 			_is_primary
 		),
@@ -306,7 +306,7 @@ sanguis::server::entities::with_weapon::reload(
 	sanguis::is_primary_weapon const _is_primary
 )
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		this->get_weapon(
 			_is_primary
 		),
@@ -487,7 +487,7 @@ sanguis::server::entities::with_weapon::weapon_ref(
 ) const
 {
 	return
-		fcppt::optional_map(
+		fcppt::optional::map(
 			_weapon,
 			[](
 				sanguis::server::weapons::unique_ptr const &_ptr
@@ -568,7 +568,7 @@ sanguis::server::entities::with_weapon::update_weapon(
 	sanguis::server::entities::with_weapon::optional_weapon_ref const &_opt_weapon
 )
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		_opt_weapon,
 		[](
 			sanguis::server::weapons::weapon &_weapon
@@ -585,7 +585,7 @@ sanguis::server::entities::with_weapon::tick_weapon(
 	sanguis::server::entities::with_weapon::optional_weapon_ref const &_opt_weapon
 )
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		_opt_weapon,
 		[
 			_duration
@@ -605,7 +605,7 @@ sanguis::server::entities::with_weapon::weapon_changed(
 	sanguis::is_primary_weapon const _is_primary
 )
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		this->environment(),
 		[
 			_is_primary,

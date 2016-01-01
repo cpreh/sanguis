@@ -8,8 +8,8 @@
 #include <sanguis/server/entities/property/add.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/maybe.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
+#include <fcppt/optional/maybe.hpp>
 
 
 sanguis::server::entities::pickups::health::health(
@@ -39,7 +39,7 @@ sanguis::server::entities::pickups::health::do_pickup(
 )
 {
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			fcppt::cast::try_dynamic<
 				sanguis::server::entities::with_health &
 			>(

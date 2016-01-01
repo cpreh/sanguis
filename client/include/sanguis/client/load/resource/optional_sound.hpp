@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_LOAD_RESOURCE_OPTIONAL_SOUND_HPP_INCLUDED
 
 #include <sanguis/client/load/resource/optional_sound_fwd.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 #endif

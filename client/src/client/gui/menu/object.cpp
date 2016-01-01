@@ -39,9 +39,9 @@
 #include <fcppt/const.hpp>
 #include <fcppt/extract_from_string.hpp>
 #include <fcppt/extract_from_string_exn.hpp>
-#include <fcppt/maybe.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/to_std_string.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -543,7 +543,7 @@ sanguis::client::gui::menu::object::handle_text_changed()
 	port_type;
 
 	connect_button_.enable(
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			fcppt::extract_from_string<
 				port_type
 			>(

@@ -16,8 +16,6 @@
 #include <sanguis/creator/impl/random/uniform_pos.hpp>
 #include <sanguis/creator/impl/random/uniform_size.hpp>
 #include <sanguis/creator/impl/random/uniform_size_variate.hpp>
-#include <fcppt/maybe_void.hpp>
-#include <fcppt/optional.hpp>
 #include <fcppt/algorithm/append.hpp>
 #include <fcppt/algorithm/remove.hpp>
 #include <fcppt/assert/optional_error.hpp>
@@ -25,6 +23,8 @@
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/dim.hpp>
+#include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/optional/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <limits>
 #include <vector>
@@ -112,7 +112,7 @@ sanguis::creator::impl::generate_maze(
 						==
 							1;
 			},
-			fcppt::optional<
+			fcppt::optional::object<
 				sanguis::creator::pos::value_type
 			>{}
 		);
@@ -169,7 +169,7 @@ sanguis::creator::impl::generate_maze(
 				)
 			};
 
-			fcppt::maybe_void(
+			fcppt::optional::maybe_void(
 				opposing_cell,
 				[
 					&

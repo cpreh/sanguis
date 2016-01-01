@@ -4,11 +4,11 @@
 #include <sanguis/client/load/resource/sounds.hpp>
 #include <sanguis/model/animation_sound.hpp>
 #include <sanguis/model/optional_animation_sound.hpp>
-#include <fcppt/optional_bind.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>
+#include <fcppt/optional/bind.hpp>
 
 
 sanguis::client::load::resource::optional_sound
@@ -18,7 +18,7 @@ sanguis::client::load::model::make_sound(
 )
 {
 	return
-		fcppt::optional_bind(
+		fcppt::optional::bind(
 			_opt_sound,
 			[
 				&_sounds

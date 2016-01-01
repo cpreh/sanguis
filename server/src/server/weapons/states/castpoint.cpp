@@ -12,10 +12,10 @@
 #include <sanguis/server/weapons/events/stop.hpp>
 #include <sanguis/server/weapons/states/backswing.hpp>
 #include <sanguis/server/weapons/states/castpoint.hpp>
-#include <fcppt/maybe.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/verbose.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -90,7 +90,7 @@ sanguis::server::weapons::states::castpoint::react(
 	);
 
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			owner.target(),
 			[
 				this
@@ -116,7 +116,7 @@ sanguis::server::weapons::states::castpoint::react(
 						sanguis::server::weapons::weapon
 					>().do_attack(
 						sanguis::server::weapons::attack(
-							fcppt::maybe(
+							fcppt::optional::maybe(
 								this->context<
 									sanguis::server::weapons::weapon
 								>().accuracy(),

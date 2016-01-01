@@ -50,8 +50,8 @@
 #include <sanguis/server/world/pickup_spawner.hpp>
 #include <sanguis/server/world/sight_range_map.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/optional_fwd.hpp>
 #include <fcppt/unique_ptr_fwd.hpp>
+#include <fcppt/optional/object_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <map>
 #include <vector>
@@ -137,7 +137,7 @@ private:
 	template<
 		typename Entity
 	>
-	fcppt::optional<
+	fcppt::optional::object<
 		Entity &
 	>
 	insert_base(

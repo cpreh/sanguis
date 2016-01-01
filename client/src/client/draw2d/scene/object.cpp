@@ -175,13 +175,6 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/maybe_multi.hpp>
-#include <fcppt/maybe_void.hpp>
-#include <fcppt/optional_bind.hpp>
-#include <fcppt/optional_map.hpp>
-#include <fcppt/optional_comparison.hpp>
-#include <fcppt/optional_impl.hpp>
-#include <fcppt/optional_to_exception.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/type_name_from_info.hpp>
@@ -195,6 +188,13 @@
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/optional/bind.hpp>
+#include <fcppt/optional/comparison.hpp>
+#include <fcppt/optional/map.hpp>
+#include <fcppt/optional/maybe_multi.hpp>
+#include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/optional/object_impl.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector30.hpp>
@@ -401,7 +401,7 @@ sanguis::client::draw2d::scene::object::update(
 	);
 
 	sanguis::client::control::optional_attack_dest const attack_dest{
-		fcppt::optional_bind(
+		fcppt::optional::bind(
 			_cursor_position,
 			[
 				this
@@ -431,7 +431,7 @@ sanguis::client::draw2d::scene::object::update(
 		{
 			_entity->update();
 
-			fcppt::maybe_void(
+			fcppt::optional::maybe_void(
 				attack_dest,
 				[
 					this,
@@ -481,7 +481,7 @@ sanguis::client::draw2d::scene::object::draw(
 	sge::renderer::context::ffp &_render_context
 )
 {
-	fcppt::maybe_multi(
+	fcppt::optional::maybe_multi(
 		[
 			&_render_context
 		]{
@@ -551,7 +551,7 @@ sanguis::client::draw2d::scene::object::draw(
 				_translation
 			);
 
-			fcppt::maybe_void(
+			fcppt::optional::maybe_void(
 				this->player_center(),
 				[
 					&_render_context,
@@ -594,7 +594,7 @@ sanguis::client::draw2d::scene::object::draw(
 				}
 			);
 
-			fcppt::maybe_void(
+			fcppt::optional::maybe_void(
 				hover_,
 				[
 					&_render_context
@@ -739,7 +739,7 @@ sanguis::client::draw2d::scene::object::hover_display(
 	)
 		return;
 
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		_entity.hover(),
 		[
 			&_entity,
@@ -804,7 +804,7 @@ sanguis::client::draw2d::scene::object::entity(
 ) const
 {
 	return
-		*fcppt::optional_to_exception(
+		*fcppt::optional::to_exception(
 			fcppt::container::find_opt_mapped(
 				entities_,
 				_id
@@ -830,7 +830,7 @@ sanguis::client::draw2d::optional_player_center
 sanguis::client::draw2d::scene::object::player_center() const
 {
 	return
-		fcppt::optional_map(
+		fcppt::optional::map(
 			player_id_,
 			[
 				this
@@ -1406,7 +1406,7 @@ sanguis::client::draw2d::scene::object::operator()(
 			0
 		)
 	)
-		fcppt::maybe_void(
+		fcppt::optional::maybe_void(
 			this->player_center(),
 			[
 				this

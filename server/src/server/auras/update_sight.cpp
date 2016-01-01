@@ -8,8 +8,8 @@
 #include <sanguis/server/auras/update_sight.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_id.hpp>
-#include <fcppt/maybe_void.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 
 
 sanguis::server::auras::update_sight::update_sight(
@@ -48,7 +48,7 @@ sanguis::server::auras::update_sight::enter(
 	sanguis::collision::world::created const _created
 )
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		fcppt::cast::try_dynamic<
 			sanguis::server::entities::with_id const &
 		>(
@@ -74,7 +74,7 @@ sanguis::server::auras::update_sight::leave(
 	sanguis::server::entities::with_body &_entity
 )
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		fcppt::cast::try_dynamic<
 			sanguis::server::entities::with_id const &
 		>(

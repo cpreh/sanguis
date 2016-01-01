@@ -5,9 +5,9 @@
 #include <sanguis/server/ai/pathing/tile_reached.hpp>
 #include <sanguis/server/ai/pathing/update_trail.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
-#include <fcppt/optional_bind.hpp>
-#include <fcppt/optional_map.hpp>
 #include <fcppt/container/maybe_back.hpp>
+#include <fcppt/optional/bind.hpp>
+#include <fcppt/optional/map.hpp>
 
 
 sanguis::server::ai::pathing::optional_target
@@ -18,8 +18,8 @@ sanguis::server::ai::pathing::update_trail(
 )
 {
 	return
-		fcppt::optional_map(
-			fcppt::optional_bind(
+		fcppt::optional::map(
+			fcppt::optional::bind(
 				fcppt::container::maybe_back(
 					_trail
 				),

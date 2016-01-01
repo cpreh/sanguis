@@ -6,7 +6,7 @@
 #include <sge/image2d/dim.hpp>
 #include <sge/parse/json/member.hpp>
 #include <sge/parse/json/parse_file_exn.hpp>
-#include <fcppt/optional_map.hpp>
+#include <fcppt/optional/map.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -37,7 +37,7 @@ sanguis::tiles::impl::make_orientation_map(
 			)
 			{
 				return
-					fcppt::optional_map(
+					fcppt::optional::map(
 						sanguis::tiles::impl::decode_name(
 							_member.first
 						),

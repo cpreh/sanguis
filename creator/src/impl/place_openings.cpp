@@ -11,10 +11,10 @@
 #include <sanguis/creator/impl/random/uniform_pos.hpp>
 #include <fcppt/make_int_range_count.hpp>
 #include <fcppt/make_literal_strong_typedef.hpp>
-#include <fcppt/optional_to_exception.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/enum_array_init.hpp>
 #include <fcppt/algorithm/map.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/type_iso/strong_typedef.hpp>
 
 
@@ -61,7 +61,7 @@ sanguis::creator::impl::place_openings(
 						{
 							return
 								sanguis::creator::opening{
-									fcppt::optional_to_exception(
+									fcppt::optional::to_exception(
 										sanguis::creator::impl::closest_empty(
 											_grid,
 											random_pos()

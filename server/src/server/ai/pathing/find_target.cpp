@@ -7,7 +7,6 @@
 #include <sanguis/server/ai/pathing/start.hpp>
 #include <sanguis/server/ai/pathing/target.hpp>
 #include <sanguis/server/ai/pathing/trail.hpp>
-#include <fcppt/maybe.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/find_opt.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
@@ -17,6 +16,7 @@
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/math/vector/std_hash.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <queue>
 #include <unordered_map>
@@ -90,7 +90,7 @@ sanguis::server::ai::pathing::find_target(
 				result.back()
 			)
 				if(
-					fcppt::maybe(
+					fcppt::optional::maybe(
 						fcppt::container::find_opt_mapped(
 							predecessors,
 							trail_pos

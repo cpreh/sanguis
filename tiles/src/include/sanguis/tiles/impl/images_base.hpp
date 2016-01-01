@@ -14,7 +14,7 @@
 #include <sanguis/tiles/impl/optional_content_path.hpp>
 #include <sanguis/tiles/impl/orientation_to_string.hpp>
 #include <fcppt/make_cref.hpp>
-#include <fcppt/maybe.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
@@ -53,7 +53,7 @@ images_base(
 	);
 
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			fcppt::container::find_opt_mapped(
 				cur_set.orientations(),
 				_orientation

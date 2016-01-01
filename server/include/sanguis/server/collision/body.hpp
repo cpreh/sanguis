@@ -14,7 +14,7 @@
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/collision/body_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/optional_decl.hpp>
+#include <fcppt/optional/object_decl.hpp>
 
 
 namespace sanguis
@@ -78,7 +78,7 @@ private:
 	sanguis::collision::world::body_base &body_base_;
 
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		sanguis::collision::world::body_unique_ptr
 	>
 	optional_body_unique_ptr;

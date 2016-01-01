@@ -3,7 +3,7 @@
 
 #include <sanguis/client/draw2d/optional_vector2_fwd.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 #endif

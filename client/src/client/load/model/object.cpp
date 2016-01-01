@@ -7,7 +7,6 @@
 #include <sanguis/client/load/resource/context_fwd.hpp>
 #include <sanguis/model/cell_size.hpp>
 #include <sge/core/exception.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/to_signed.hpp>
@@ -15,6 +14,7 @@
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
+#include <fcppt/optional/object_impl.hpp>
 #include <fcppt/random/variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>

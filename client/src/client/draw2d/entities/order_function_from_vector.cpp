@@ -2,10 +2,10 @@
 #include <sanguis/client/draw2d/entities/order_function.hpp>
 #include <sanguis/client/draw2d/entities/order_function_from_vector.hpp>
 #include <sanguis/client/draw2d/sprite/index.hpp>
-#include <fcppt/from_optional.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/at_optional.hpp>
 #include <fcppt/container/maybe_back.hpp>
+#include <fcppt/optional/from.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -32,7 +32,7 @@ sanguis::client::draw2d::entities::order_function_from_vector(
 			)
 			{
 				return
-					fcppt::from_optional(
+					fcppt::optional::from(
 						fcppt::container::at_optional(
 							orders,
 							_index.get()

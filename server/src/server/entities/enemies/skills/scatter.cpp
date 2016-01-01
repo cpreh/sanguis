@@ -22,10 +22,10 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/maybe_void.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/repeat.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 
 
 sanguis::server::entities::enemies::skills::scatter::scatter(
@@ -63,7 +63,7 @@ sanguis::server::entities::enemies::skills::scatter::update(
 	)
 		return;
 
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		_entity.environment(),
 		[
 			this,

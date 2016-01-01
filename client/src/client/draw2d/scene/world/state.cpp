@@ -44,7 +44,6 @@
 #include <sge/sprite/state/parameters.hpp>
 #include <fcppt/boost_units_value.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/optional_map.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/cast/size_fun.hpp>
@@ -62,6 +61,7 @@
 #include <fcppt/math/vector/map.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/vector/to_signed.hpp>
+#include <fcppt/optional/map.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/units/systems/si/length.hpp>
 #include <boost/units/systems/si/velocity.hpp>
@@ -216,7 +216,7 @@ sanguis::client::draw2d::scene::world::state::test_collision(
 ) const
 {
 	return
-		fcppt::optional_map(
+		fcppt::optional::map(
 			sanguis::collision::test_move(
 				sanguis::collision::center{
 					fcppt::math::vector::map(

@@ -9,9 +9,9 @@
 #include <sanguis/client/draw2d/scene/hover/compare_weapons.hpp>
 #include <sanguis/client/draw2d/scene/hover/weapon_attribute_diff.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/optional_bind.hpp>
-#include <fcppt/optional_deref.hpp>
 #include <fcppt/algorithm/find_if_opt.hpp>
+#include <fcppt/optional/bind.hpp>
+#include <fcppt/optional/deref.hpp>
 #include <fcppt/variant/not_equal.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cmath>
@@ -27,7 +27,7 @@ sanguis::client::draw2d::scene::hover::compare_weapons(
 {
 	return
 		sanguis::client::draw2d::scene::hover::weapon_attribute_diff{
-			fcppt::optional_bind(
+			fcppt::optional::bind(
 				_player_weapons.get(
 					sanguis::weapon_type_to_is_primary(
 						_type
@@ -47,8 +47,8 @@ sanguis::client::draw2d::scene::hover::compare_weapons(
 						?
 							sanguis::optional_weapon_attribute_value()
 						:
-							fcppt::optional_bind(
-								fcppt::optional_deref(
+							fcppt::optional::bind(
+								fcppt::optional::deref(
 									fcppt::algorithm::find_if_opt(
 										_desc.attributes(),
 										[

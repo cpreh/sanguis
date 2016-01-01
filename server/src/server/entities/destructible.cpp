@@ -25,7 +25,7 @@
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/environment/object.hpp>
-#include <fcppt/maybe_void.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 
 
 sanguis::server::entities::destructible::destructible(
@@ -79,7 +79,7 @@ sanguis::server::entities::destructible::update()
 void
 sanguis::server::entities::destructible::remove_from_game()
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		this->environment(),
 		[
 			this

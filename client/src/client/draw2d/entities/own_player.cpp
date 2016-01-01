@@ -19,11 +19,11 @@
 #include <sanguis/load/model/radius.hpp>
 #include <sanguis/model/cell_size.hpp>
 #include <sanguis/model/dim.hpp>
-#include <fcppt/maybe_void.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/dim/to_unsigned.hpp>
 #include <fcppt/math/vector/null.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 
 
 sanguis::client::draw2d::entities::own_player::own_player(
@@ -111,7 +111,7 @@ sanguis::client::draw2d::entities::own_player::speed(
 void
 sanguis::client::draw2d::entities::own_player::update()
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		collide_(
 			sanguis::client::draw2d::collide_parameters(
 				this->movement_duration(),

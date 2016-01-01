@@ -23,12 +23,12 @@
 #include <sanguis/server/entities/ifaces/with_radius.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/maybe.hpp>
-#include <fcppt/maybe_void.hpp>
-#include <fcppt/optional_map.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/math/vector/null.hpp>
+#include <fcppt/optional/map.hpp>
+#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
 #include <utility>
@@ -148,7 +148,7 @@ sanguis::server::entities::with_body::on_transfer(
 	);
 
 	return
-		fcppt::optional_map(
+		fcppt::optional::map(
 			sanguis::server::entities::with_ghosts::on_transfer(
 				_parameters
 			),
@@ -227,7 +227,7 @@ sanguis::server::entities::with_body::can_collide_with(
 ) const
 {
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			fcppt::cast::try_dynamic<
 				sanguis::server::entities::with_body const &
 			>(
@@ -260,7 +260,7 @@ sanguis::server::entities::with_body::collision(
 	sanguis::collision::world::body_base &_body_base
 )
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		fcppt::cast::try_dynamic<
 			sanguis::server::entities::with_body &
 		>(

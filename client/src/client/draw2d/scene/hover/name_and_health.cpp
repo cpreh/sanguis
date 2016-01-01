@@ -11,9 +11,9 @@
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/maybe_void.hpp>
-#include <fcppt/optional_map.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional/map.hpp>
+#include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 sanguis::client::draw2d::scene::hover::name_and_health::name_and_health(
@@ -25,7 +25,7 @@ sanguis::client::draw2d::scene::hover::name_and_health::name_and_health(
 )
 :
 	healthbar_(
-		fcppt::optional_map(
+		fcppt::optional::map(
 			_name_and_health.health(),
 			[
 				&_renderer,
@@ -48,7 +48,7 @@ sanguis::client::draw2d::scene::hover::name_and_health::name_and_health(
 		)
 	),
 	name_(
-		fcppt::optional_map(
+		fcppt::optional::map(
 			_name_and_health.name(),
 			[
 				&_renderer,
@@ -82,7 +82,7 @@ sanguis::client::draw2d::scene::hover::name_and_health::draw(
 	sge::renderer::context::ffp &_render_context
 )
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		healthbar_,
 		[
 			&_render_context
@@ -96,7 +96,7 @@ sanguis::client::draw2d::scene::hover::name_and_health::draw(
 		}
 	);
 
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		name_,
 		[
 			&_render_context

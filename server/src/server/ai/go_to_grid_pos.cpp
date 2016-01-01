@@ -7,7 +7,7 @@
 #include <sanguis/server/ai/target.hpp>
 #include <sanguis/server/ai/pathing/target.hpp>
 #include <sanguis/server/world/grid_pos_to_center.hpp>
-#include <fcppt/maybe.hpp>
+#include <fcppt/optional/maybe.hpp>
 
 
 sanguis::server::ai::status
@@ -17,7 +17,7 @@ sanguis::server::ai::go_to_grid_pos(
 )
 {
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			_context.continue_path(),
 			[
 				&_context

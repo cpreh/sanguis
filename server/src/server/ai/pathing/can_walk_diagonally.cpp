@@ -6,7 +6,6 @@
 #include <sanguis/server/ai/pathing/can_walk_diagonally.hpp>
 #include <sanguis/server/ai/pathing/positions_are_close.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/maybe.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/math/dim/contents.hpp>
@@ -15,6 +14,7 @@
 #include <fcppt/math/vector/to_dim.hpp>
 #include <fcppt/math/vector/to_signed.hpp>
 #include <fcppt/math/vector/to_unsigned.hpp>
+#include <fcppt/optional/maybe.hpp>
 
 
 bool
@@ -100,7 +100,7 @@ sanguis::server::ai::pathing::can_walk_diagonally(
 	);
 
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			fcppt::container::grid::at_optional(
 				_grid,
 				fcppt::math::vector::to_unsigned(

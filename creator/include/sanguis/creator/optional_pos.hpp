@@ -3,7 +3,7 @@
 
 #include <sanguis/creator/optional_pos_fwd.hpp>
 #include <sanguis/creator/pos.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 #endif

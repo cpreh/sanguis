@@ -15,7 +15,6 @@
 #include <alda/net/buffer/circular_receive/source.hpp>
 #include <alda/serialization/endianness.hpp>
 #include <fcppt/format.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/throw.hpp>
@@ -23,6 +22,7 @@
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/io/read.hpp>
+#include <fcppt/optional/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/iostreams/stream_buffer.hpp>
 #include <ios>
@@ -39,7 +39,7 @@ namespace net
 template<
 	typename AldaType
 >
-fcppt::optional<
+fcppt::optional::object<
 	alda::message::base_unique_ptr<
 		AldaType
 	>
@@ -58,7 +58,7 @@ deserialize(
 	unique_ptr;
 
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		unique_ptr
 	>
 	result_type;

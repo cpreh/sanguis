@@ -41,8 +41,6 @@
 #include <sanguis/creator/impl/random/generator.hpp>
 #include <sanguis/creator/impl/random/uniform_int.hpp>
 #include <sanguis/creator/impl/random/uniform_pos.hpp>
-#include <fcppt/maybe_void.hpp>
-#include <fcppt/optional.hpp>
 #include <fcppt/algorithm/enum_array_init.hpp>
 #include <fcppt/algorithm/fold.hpp>
 #include <fcppt/algorithm/map.hpp>
@@ -69,6 +67,8 @@
 #include <fcppt/math/box/structure_cast.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/optional/object.hpp>
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/wrapper/make_uniform_container_advanced.hpp>
@@ -171,7 +171,7 @@ using connector =
 	>;
 
 using optional_connector =
-	fcppt::optional<
+	fcppt::optional::object<
 		connector
 	>;
 
@@ -217,7 +217,7 @@ is_possible_connector(
 			p
 		)
 	)
-		fcppt::maybe_void(
+		fcppt::optional::maybe_void(
 			fcppt::container::grid::at_optional(
 				grid,
 				n
@@ -535,7 +535,7 @@ sanguis::creator::impl::generators::rooms(
 		)
 	)
 	{
-		fcppt::maybe_void(
+		fcppt::optional::maybe_void(
 			// find out if it's a connector candidate...
 			is_possible_connector(
 				region_grid,

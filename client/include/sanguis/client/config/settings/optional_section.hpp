@@ -3,7 +3,7 @@
 
 #include <sanguis/client/config/settings/optional_section_fwd.hpp>
 #include <sge/parse/ini/section.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 #endif

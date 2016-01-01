@@ -20,9 +20,9 @@
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/maybe_void.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/unreachable.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 
 
 void
@@ -33,7 +33,7 @@ sanguis::server::cheat::process(
 	sanguis::server::unicast_callback const &_unicast_callback
 )
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		_player.environment(),
 		[
 			&_random_generator,

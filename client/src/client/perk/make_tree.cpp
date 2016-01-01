@@ -21,12 +21,12 @@
 #include <sanguis/messages/roles/required_perk_player_level.hpp>
 #include <sanguis/messages/server/types/perk_tree_node_vector.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/maybe.hpp>
-#include <fcppt/optional_to_exception.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/find_if_opt.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/tree/pre_order.hpp>
+#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/to_exception.hpp>
 
 
 namespace
@@ -146,7 +146,7 @@ tree_position(
 )
 {
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			_parent_enum,
 			[
 				&_tree
@@ -167,7 +167,7 @@ tree_position(
 			{
 				return
 					*
-					fcppt::optional_to_exception(
+					fcppt::optional::to_exception(
 						fcppt::algorithm::find_if_opt(
 							fcppt::container::tree::pre_order<
 								sanguis::client::perk::tree

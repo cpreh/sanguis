@@ -19,13 +19,13 @@
 #include <sanguis/creator/tile_size.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/maybe.hpp>
-#include <fcppt/maybe_void.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/units/io.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -85,7 +85,7 @@ sanguis::collision::impl::world::simple::body::body(
 		);
 
 	FCPPT_ASSERT_PRE(
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			_parameters.mass(),
 			fcppt::const_(
 				true
@@ -129,7 +129,7 @@ sanguis::collision::impl::world::simple::body::move(
 	sanguis::collision::duration const _duration
 )
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		_opt_collision,
 		[
 			this

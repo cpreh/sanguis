@@ -11,8 +11,8 @@
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/optional_decl.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
+#include <fcppt/optional/object_decl.hpp>
 
 
 namespace sanguis
@@ -52,7 +52,7 @@ private:
 	override;
 
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		sanguis::client::draw2d::scene::hover::name
 	>
 	optional_name;
@@ -64,7 +64,7 @@ private:
 	healthbar_unique_ptr;
 
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		healthbar_unique_ptr
 	>
 	optional_healthbar;

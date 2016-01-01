@@ -15,12 +15,12 @@
 #include <sanguis/client/draw2d/translate/vector_from_client.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/maybe.hpp>
-#include <fcppt/optional_map.hpp>
 #include <fcppt/cast/float_to_int_fun.hpp>
 #include <fcppt/cast/int_to_float_fun.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/optional/map.hpp>
+#include <fcppt/optional/maybe.hpp>
 
 
 sanguis::client::draw2d::scene::camera::camera(
@@ -46,7 +46,7 @@ sanguis::client::draw2d::scene::camera::update(
 )
 {
 	desired_translation_ =
-		fcppt::optional_map(
+		fcppt::optional::map(
 			_opt_player_center,
 			[
 				this
@@ -65,7 +65,7 @@ sanguis::client::draw2d::scene::camera::update(
 		);
 
 	translation_ =
-		fcppt::optional_map(
+		fcppt::optional::map(
 			desired_translation_,
 			[
 				this,
@@ -75,7 +75,7 @@ sanguis::client::draw2d::scene::camera::update(
 			)
 			{
 				return
-					fcppt::maybe(
+					fcppt::optional::maybe(
 						translation_,
 						[
 							_desired_translation
@@ -136,7 +136,7 @@ sanguis::client::draw2d::optional_translation
 sanguis::client::draw2d::scene::camera::translation() const
 {
 	return
-		fcppt::optional_map(
+		fcppt::optional::map(
 			translation_,
 			[](
 				sanguis::client::draw2d::vector2 const _translation
@@ -161,7 +161,7 @@ sanguis::client::draw2d::scene::camera::translate_attack_dest(
 )
 {
 	return
-		fcppt::optional_map(
+		fcppt::optional::map(
 			this->translation(),
 			[
 				_cursor_position

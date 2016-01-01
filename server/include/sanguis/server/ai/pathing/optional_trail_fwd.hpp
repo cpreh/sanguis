@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_AI_PATHING_OPTIONAL_TRAIL_FWD_HPP_INCLUDED
 
 #include <sanguis/server/ai/pathing/trail.hpp>
-#include <fcppt/optional_fwd.hpp>
+#include <fcppt/optional/object_fwd.hpp>
 
 
 namespace sanguis
@@ -15,7 +15,7 @@ namespace pathing
 {
 
 typedef
-fcppt::optional<
+fcppt::optional::object<
 	sanguis::server::ai::pathing::trail
 >
 optional_trail;

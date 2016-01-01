@@ -10,8 +10,8 @@
 #include <sge/renderer/state/ffp/sampler/object.hpp>
 #include <sge/renderer/state/ffp/sampler/object_unique_ptr.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/optional_map.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/optional/map.hpp>
 
 
 sanguis::client::draw2d::scene::state::text::text(
@@ -38,7 +38,7 @@ sanguis::client::draw2d::scene::state::text::create_scoped(
 ) const
 {
 	return
-		fcppt::optional_map(
+		fcppt::optional::map(
 			sampler_,
 			[
 				&_render_context

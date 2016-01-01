@@ -3,7 +3,7 @@
 
 #include <sanguis/server/weapons/attributes/basic_fwd.hpp>
 #include <fcppt/nonassignable.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 namespace sanguis
@@ -35,7 +35,7 @@ public:
 	);
 
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		Wrapped
 	>
 	optional_extra;

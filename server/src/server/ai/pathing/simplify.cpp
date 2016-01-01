@@ -5,12 +5,12 @@
 #include <sanguis/server/ai/pathing/simplify.hpp>
 #include <sanguis/server/ai/pathing/trail.hpp>
 #include <fcppt/make_int_range_count.hpp>
-#include <fcppt/maybe.hpp>
-#include <fcppt/maybe_multi.hpp>
 #include <fcppt/algorithm/join.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/container/at_optional.hpp>
 #include <fcppt/container/maybe_front.hpp>
+#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/maybe_multi.hpp>
 
 
 sanguis::server::ai::pathing::trail
@@ -20,7 +20,7 @@ sanguis::server::ai::pathing::simplify(
 )
 {
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			fcppt::container::maybe_front(
 				_trail
 			),
@@ -74,7 +74,7 @@ sanguis::server::ai::pathing::simplify(
 								);
 
 								return
-									fcppt::maybe_multi(
+									fcppt::optional::maybe_multi(
 										[]{
 											// In this case, next1 is set to the node the entity is on.
 											return

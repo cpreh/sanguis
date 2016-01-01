@@ -22,9 +22,9 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/optional_map.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/optional_error.hpp>
+#include <fcppt/optional/map.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <chrono>
@@ -87,7 +87,7 @@ sanguis::server::entities::projectiles::grenade::on_transfer(
 )
 {
 	return
-		fcppt::optional_map(
+		fcppt::optional::map(
 			sanguis::server::entities::with_velocity::on_transfer(
 				_parameters
 			),

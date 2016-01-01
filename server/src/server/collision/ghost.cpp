@@ -10,11 +10,11 @@
 #include <sanguis/server/collision/ghost.hpp>
 #include <sanguis/server/collision/to_center.hpp>
 #include <sanguis/server/collision/to_radius.hpp>
-#include <fcppt/optional_assign.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/pre.hpp>
+#include <fcppt/optional/assign.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 sanguis::server::collision::ghost::ghost(
@@ -60,7 +60,7 @@ sanguis::server::collision::ghost::transfer(
 	);
 
 	sanguis::collision::world::ghost_unique_ptr const &new_ghost(
-		fcppt::optional_assign(
+		fcppt::optional::assign(
 			impl_,
 			_world.create_ghost(
 				sanguis::collision::world::ghost_parameters(

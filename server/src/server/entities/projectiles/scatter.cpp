@@ -16,8 +16,8 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/environment/optional_object_ref.hpp>
 #include <sge/timer/reset_when_expired.hpp>
-#include <fcppt/maybe_void.hpp>
 #include <fcppt/math/twopi.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/random/distribution/basic_impl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real_impl.hpp>
 
@@ -96,7 +96,7 @@ sanguis::server::entities::projectiles::scatter::update()
 	)
 		return;
 
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		this->environment(),
 		[
 			this

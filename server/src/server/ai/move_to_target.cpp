@@ -11,7 +11,7 @@
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/maybe.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <fcppt/config/external_end.hpp>
@@ -30,7 +30,7 @@ sanguis::server::ai::move_to_target(
 	);
 
 	speed.current(
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			_opt_angle,
 			fcppt::const_(
 				fcppt::literal<

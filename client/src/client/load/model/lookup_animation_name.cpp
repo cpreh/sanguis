@@ -3,11 +3,11 @@
 #include <sanguis/client/load/animation_type.hpp>
 #include <sanguis/client/load/model/lookup_animation_name.hpp>
 #include <sanguis/model/animation_name.hpp>
-#include <fcppt/optional_to_exception.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/enum_array_init.hpp>
 #include <fcppt/algorithm/index_of_enum_array.hpp>
 #include <fcppt/container/enum_array.hpp>
+#include <fcppt/optional/to_exception.hpp>
 
 
 namespace
@@ -36,7 +36,7 @@ sanguis::client::load::model::lookup_animation_name(
 )
 {
 	return
-		fcppt::optional_to_exception(
+		fcppt::optional::to_exception(
 			fcppt::algorithm::index_of_enum_array(
 				animation_types,
 				_name

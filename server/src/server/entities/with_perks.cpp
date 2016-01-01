@@ -11,9 +11,9 @@
 #include <sanguis/server/perks/create.hpp>
 #include <sanguis/server/perks/perk.hpp>
 #include <sanguis/server/perks/unique_ptr.hpp>
-#include <fcppt/from_optional.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
+#include <fcppt/optional/from.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -24,7 +24,7 @@ sanguis::server::entities::with_perks::add_perk(
 	sanguis::perk_type const _type
 )
 {
-	fcppt::from_optional(
+	fcppt::optional::from(
 		fcppt::container::find_opt_mapped(
 			perks_,
 			_type

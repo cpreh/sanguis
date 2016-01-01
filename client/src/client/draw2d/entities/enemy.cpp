@@ -34,7 +34,7 @@
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/load/model/enemy_path.hpp>
 #include <sge/image/color/any/convert.hpp>
-#include <fcppt/maybe_void.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -116,7 +116,7 @@ sanguis::client::draw2d::entities::enemy::on_create(
 	sanguis::client::draw2d::entities::create_parameters const &_create_parameters
 )
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		sanguis::client::draw2d::entities::enemy_spawn_particle(
 			_create_parameters.load_parameters(),
 			enemy_type_,

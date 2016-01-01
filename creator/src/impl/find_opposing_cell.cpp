@@ -2,13 +2,13 @@
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/impl/find_opposing_cell.hpp>
-#include <fcppt/optional_impl.hpp>
 #include <fcppt/algorithm/contains.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/container/grid/neumann_neighbor_array.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/comparison.hpp>
+#include <fcppt/optional/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <iterator>
@@ -19,7 +19,7 @@
 // Finds an empty neighboring cell in the grid that isn't
 // already part of the maze. There should at most be one
 // such cell.
-fcppt::optional<
+fcppt::optional::object<
 	sanguis::creator::pos
 >
 sanguis::creator::impl::find_opposing_cell
@@ -38,7 +38,7 @@ sanguis::creator::impl::find_opposing_cell
 		||
 		cell.y() == 0
 	)
-		return fcppt::optional<
+		return fcppt::optional::object<
 			sanguis::creator::pos
 		>();
 
@@ -78,11 +78,11 @@ sanguis::creator::impl::find_opposing_cell
 				==
 				sanguis::creator::impl::reachable(true)
 				?
-					fcppt::optional<
+					fcppt::optional::object<
 						sanguis::creator::pos
 					>()
 				:
-					fcppt::optional<
+					fcppt::optional::object<
 						sanguis::creator::pos
 					>(
 						opposite

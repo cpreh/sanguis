@@ -6,9 +6,9 @@
 #include <sanguis/model/part_fwd.hpp>
 #include <sanguis/model/part_map.hpp>
 #include <sanguis/model/part_name.hpp>
-#include <fcppt/optional_to_exception.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -73,7 +73,7 @@ sanguis::model::object::part(
 )
 {
 	return
-		fcppt::optional_to_exception(
+		fcppt::optional::to_exception(
 			fcppt::container::find_opt_mapped(
 				parts_,
 				_name

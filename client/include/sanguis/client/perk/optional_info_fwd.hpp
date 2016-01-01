@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_PERK_OPTIONAL_INFO_FWD_HPP_INCLUDED
 
 #include <sanguis/client/perk/info_fwd.hpp>
-#include <fcppt/optional_fwd.hpp>
+#include <fcppt/optional/object_fwd.hpp>
 
 
 namespace sanguis
@@ -13,7 +13,7 @@ namespace perk
 {
 
 typedef
-fcppt::optional<
+fcppt::optional::object<
 	sanguis::client::perk::info
 >
 optional_info;

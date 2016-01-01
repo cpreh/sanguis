@@ -5,7 +5,7 @@
 #include <sanguis/client/gui/hud/weapon_attribute_value_to_string.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/string.hpp>
-#include <fcppt/maybe_void.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 
 
 sge::font::string
@@ -19,7 +19,7 @@ sanguis::client::gui::hud::weapon_attribute_text(
 		)
 	);
 
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		_attribute.extra().get(),
 		[
 			&result

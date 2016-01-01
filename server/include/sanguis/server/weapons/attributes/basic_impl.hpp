@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_WEAPONS_ATTRIBUTES_BASIC_IMPL_HPP_INCLUDED
 
 #include <sanguis/server/weapons/attributes/basic_decl.hpp>
-#include <fcppt/maybe.hpp>
+#include <fcppt/optional/maybe.hpp>
 
 
 template<
@@ -73,7 +73,7 @@ sanguis::server::weapons::attributes::basic<
 >::value() const
 {
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			this->extra(),
 			[
 				this

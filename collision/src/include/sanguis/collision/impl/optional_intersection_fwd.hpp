@@ -2,7 +2,7 @@
 #define SANGUIS_COLLISION_IMPL_OPTIONAL_INTERSECTION_FWD_HPP_INCLUDED
 
 #include <sanguis/collision/impl/intersection_fwd.hpp>
-#include <fcppt/optional_fwd.hpp>
+#include <fcppt/optional/object_fwd.hpp>
 
 
 namespace sanguis
@@ -13,7 +13,7 @@ namespace impl
 {
 
 typedef
-fcppt::optional<
+fcppt::optional::object<
 	sanguis::collision::impl::intersection
 >
 optional_intersection;

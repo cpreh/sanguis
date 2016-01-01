@@ -21,7 +21,7 @@
 #include <sanguis/client/load/animation_type_fwd.hpp>
 #include <sanguis/client/load/model/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/optional_decl.hpp>
+#include <fcppt/optional/object_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
@@ -188,7 +188,7 @@ private:
 	sanguis::client::optional_health_pair health_pair_;
 
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		sanguis::client::draw2d::entities::model::decay_time
 	>
 	optional_decay_time;

@@ -3,7 +3,7 @@
 
 #include <sanguis/optional_weapon_type_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 #endif

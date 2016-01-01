@@ -11,8 +11,8 @@
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/collision/ghost_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/optional_decl.hpp>
 #include <fcppt/reference_wrapper_decl.hpp>
+#include <fcppt/optional/object_decl.hpp>
 
 
 namespace sanguis
@@ -74,7 +74,7 @@ private:
 	sanguis::server::radius radius_;
 
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		sanguis::collision::world::ghost_unique_ptr
 	>
 	optional_ghost_unique_ptr;

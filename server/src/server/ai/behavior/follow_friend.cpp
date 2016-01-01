@@ -25,12 +25,12 @@
 #include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/maybe.hpp>
-#include <fcppt/maybe_void.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/pre.hpp>
+#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
@@ -102,7 +102,7 @@ sanguis::server::ai::behavior::follow_friend::start()
 {
 	return
 		// TODO: Create a function for this
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			this->first_target(),
 			fcppt::const_(
 				false
@@ -128,7 +128,7 @@ sanguis::server::ai::behavior::follow_friend::update(
 )
 {
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			target_.get(),
 			[]{
 				return
@@ -197,7 +197,7 @@ sanguis::server::ai::behavior::follow_friend::target_leaves(
 	);
 
 	// TODO: Create a function for this!
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		target_.get(),
 		[
 			&_with_body,

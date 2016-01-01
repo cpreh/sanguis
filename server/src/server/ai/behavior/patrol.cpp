@@ -16,7 +16,7 @@
 #include <fcppt/const.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_literal_strong_typedef.hpp>
-#include <fcppt/maybe.hpp>
+#include <fcppt/optional/maybe.hpp>
 
 
 sanguis::server::ai::behavior::patrol::patrol(
@@ -46,7 +46,7 @@ bool
 sanguis::server::ai::behavior::patrol::start()
 {
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			sanguis::server::random::grid_pos_around(
 				random_generator_,
 				this->context().grid().size(),

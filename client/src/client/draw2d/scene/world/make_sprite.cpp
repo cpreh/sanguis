@@ -14,10 +14,10 @@
 #include <sge/sprite/roles/size.hpp>
 #include <sge/sprite/roles/texture0.hpp>
 #include <sge/texture/part_fwd.hpp>
-#include <fcppt/optional_map.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/optional/map.hpp>
 
 
 sanguis::client::draw2d::scene::world::sprite::optional_object
@@ -29,7 +29,7 @@ sanguis::client::draw2d::scene::world::make_sprite(
 )
 {
 	return
-		fcppt::optional_map(
+		fcppt::optional::map(
 			sanguis::client::draw2d::scene::world::make_texture(
 				_random_generator,
 				_debug,

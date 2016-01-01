@@ -155,7 +155,7 @@ public:
 	weapon_status() const;
 private:
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		sanguis::server::weapons::weapon &
 	>
 	optional_weapon_ref;

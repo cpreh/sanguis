@@ -6,9 +6,9 @@
 #include <sanguis/client/load/model/make_animations.hpp>
 #include <sanguis/client/load/model/weapon_category.hpp>
 #include <sanguis/model/weapon_category_fwd.hpp>
-#include <fcppt/maybe.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
+#include <fcppt/optional/maybe.hpp>
 
 
 sanguis::client::load::model::weapon_category::weapon_category(
@@ -35,7 +35,7 @@ sanguis::client::load::model::weapon_category::operator[](
 ) const
 {
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			fcppt::container::find_opt_mapped(
 				animations_,
 				_anim

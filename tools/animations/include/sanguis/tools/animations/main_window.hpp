@@ -11,9 +11,9 @@
 #include <sanguis/tools/animations/optional_animation_ref_fwd.hpp>
 #include <sanguis/tools/animations/path_model_pair.hpp>
 #include <sanguis/tools/animations/sge_systems_fwd.hpp>
-#include <fcppt/optional_decl.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/config/clang_version_at_least.hpp>
+#include <fcppt/optional/object_decl.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -115,19 +115,19 @@ private:
 	);
 
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		sanguis::model::part_name
 	>
 	optional_part_name;
 
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		sanguis::model::weapon_category_name
 	>
 	optional_weapon_category_name;
 
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		sanguis::model::animation_name
 	>
 	optional_animation_name;
@@ -142,7 +142,7 @@ private:
 	selected_animation() const;
 
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		boost::filesystem::path
 	>
 	optional_path;
@@ -170,7 +170,7 @@ private:
 	> const ui_;
 
 	typedef
-	fcppt::optional<
+	fcppt::optional::object<
 		sanguis::tools::animations::path_model_pair
 	>
 	optional_path_model_pair;

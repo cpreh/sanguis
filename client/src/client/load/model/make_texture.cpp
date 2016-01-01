@@ -3,9 +3,9 @@
 #include <sanguis/client/load/model/make_texture.hpp>
 #include <sanguis/client/load/resource/textures.hpp>
 #include <sge/texture/part_fwd.hpp>
-#include <fcppt/optional_to_exception.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
+#include <fcppt/optional/to_exception.hpp>
 
 
 sge::texture::part const &
@@ -17,7 +17,7 @@ sanguis::client::load::model::make_texture(
 		_parameters.textures().load(
 			_parameters.path()
 			/
-			fcppt::optional_to_exception(
+			fcppt::optional::to_exception(
 				_parameters.image(),
 				[
 					&_parameters

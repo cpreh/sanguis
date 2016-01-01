@@ -24,12 +24,12 @@
 #include <sge/texture/const_part_ref.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/maybe_void.hpp>
-#include <fcppt/optional_bind.hpp>
 #include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/diff.hpp>
 #include <fcppt/math/vector/dim.hpp>
+#include <fcppt/optional/bind.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
 #include <utility>
@@ -96,7 +96,7 @@ sanguis::client::draw2d::entities::model::part::pause(
 	bool const _value
 )
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		animation_.sound(),
 		[
 			_value
@@ -150,7 +150,7 @@ sanguis::client::draw2d::entities::model::part::update(
 		animation_.current_texture()
 	);
 
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		animation_.sound(),
 		[](
 			sge::audio::sound::base_unique_ptr const &_sound
@@ -239,7 +239,7 @@ sanguis::client::draw2d::entities::model::part::load_animation(
 				diff_clock_.get()
 			},
 			_animation_type,
-			fcppt::optional_bind(
+			fcppt::optional::bind(
 				animation.sound(),
 				[
 					this,

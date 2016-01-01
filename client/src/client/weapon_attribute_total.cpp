@@ -2,7 +2,7 @@
 #include <sanguis/weapon_attribute_extra.hpp>
 #include <sanguis/weapon_attribute_value.hpp>
 #include <sanguis/client/weapon_attribute_total.hpp>
-#include <fcppt/maybe.hpp>
+#include <fcppt/optional/maybe.hpp>
 
 
 sanguis::weapon_attribute_value
@@ -12,7 +12,7 @@ sanguis::client::weapon_attribute_total(
 )
 {
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			_opt_extra.get(),
 			[
 				_base

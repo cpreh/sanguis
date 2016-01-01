@@ -16,7 +16,7 @@
 #include <sanguis/tiles/impl/neighbors.hpp>
 #include <sanguis/tiles/impl/neighbors_to_string.hpp>
 #include <sanguis/tiles/impl/optional_content_path.hpp>
-#include <fcppt/maybe.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>
@@ -52,7 +52,7 @@ connecting_images(
 	);
 
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			sanguis::tiles::impl::make_pair(
 				neighbors
 			),

@@ -4,7 +4,7 @@
 #include <sanguis/client/perk/optional_info.hpp>
 #include <sanguis/client/perk/tree.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/maybe.hpp>
+#include <fcppt/optional/maybe.hpp>
 
 
 sanguis::client::perk::compare::compare(
@@ -23,7 +23,7 @@ sanguis::client::perk::compare::operator()(
 ) const
 {
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			_tree.value(),
 			fcppt::const_(
 				false

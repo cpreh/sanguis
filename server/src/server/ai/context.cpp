@@ -12,10 +12,10 @@
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/world/center_to_grid_pos.hpp>
-#include <fcppt/optional_bind.hpp>
-#include <fcppt/optional_map.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/maybe_front.hpp>
+#include <fcppt/optional/bind.hpp>
+#include <fcppt/optional/map.hpp>
 
 
 sanguis::server::ai::context::context(
@@ -39,7 +39,7 @@ sanguis::server::ai::context::path_find(
 )
 {
 	trail_ =
-		fcppt::optional_map(
+		fcppt::optional::map(
 			sanguis::server::ai::pathing::find_target(
 				this->grid(),
 				sanguis::server::ai::pathing::start(
@@ -80,7 +80,7 @@ sanguis::creator::optional_pos
 sanguis::server::ai::context::destination() const
 {
 	return
-		fcppt::optional_bind(
+		fcppt::optional::bind(
 			trail_,
 			[](
 				sanguis::server::ai::pathing::trail const &_trail
@@ -100,7 +100,7 @@ sanguis::server::ai::pathing::optional_target
 sanguis::server::ai::context::continue_path()
 {
 	return
-		fcppt::optional_bind(
+		fcppt::optional::bind(
 			trail_,
 			[
 				this

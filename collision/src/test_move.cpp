@@ -15,14 +15,14 @@
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/signed_pos.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/from_optional.hpp>
-#include <fcppt/optional_alternative.hpp>
-#include <fcppt/optional_bind.hpp>
-#include <fcppt/optional_map.hpp>
 #include <fcppt/algorithm/fold.hpp>
 #include <fcppt/cast/to_unsigned_fun.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/optional/alternative.hpp>
+#include <fcppt/optional/bind.hpp>
+#include <fcppt/optional/from.hpp>
+#include <fcppt/optional/map.hpp>
 
 
 sanguis::collision::optional_result
@@ -78,7 +78,7 @@ sanguis::collision::test_move(
 				);
 
 				sanguis::collision::speed const speed(
-					fcppt::from_optional(
+					fcppt::optional::from(
 						_cur_speed,
 						fcppt::const_(
 							_start_speed
@@ -87,8 +87,8 @@ sanguis::collision::test_move(
 				);
 
 				return
-					fcppt::optional_alternative(
-						fcppt::optional_bind(
+					fcppt::optional::alternative(
+						fcppt::optional::bind(
 							fcppt::container::grid::at_optional(
 								_grid,
 								cur_pos
@@ -123,7 +123,7 @@ sanguis::collision::test_move(
 	);
 
 	return
-		fcppt::optional_map(
+		fcppt::optional::map(
 			result,
 			[](
 				sanguis::collision::speed const _result_speed

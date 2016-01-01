@@ -5,9 +5,9 @@
 #include <fcppt/char_type.hpp>
 #include <fcppt/enum_size.hpp>
 #include <fcppt/make_enum_range.hpp>
-#include <fcppt/optional_bind.hpp>
-#include <fcppt/optional_map.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional/bind.hpp>
+#include <fcppt/optional/map.hpp>
+#include <fcppt/optional/object_impl.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/fold.hpp>
@@ -44,7 +44,7 @@ sanguis::tiles::impl::decode_name(
 				)
 				{
 					return
-						fcppt::optional_bind(
+						fcppt::optional::bind(
 							_state,
 							[
 								_dir,
@@ -54,7 +54,7 @@ sanguis::tiles::impl::decode_name(
 							)
 							{
 								typedef
-								fcppt::optional<
+								fcppt::optional::object<
 									bool
 								>
 								optional_bool;
@@ -87,7 +87,7 @@ sanguis::tiles::impl::decode_name(
 								);
 
 								return
-									fcppt::optional_map(
+									fcppt::optional::map(
 										char_to_bool(
 											_name[
 												fcppt::cast::enum_to_int<

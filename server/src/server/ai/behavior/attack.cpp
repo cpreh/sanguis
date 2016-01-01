@@ -42,10 +42,10 @@
 #include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/maybe.hpp>
-#include <fcppt/maybe_void.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/error.hpp>
+#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -130,7 +130,7 @@ sanguis::server::ai::behavior::attack::start()
 	return
 		target_.get().has_value()
 		||
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			this->closest_visible_target(),
 			fcppt::const_(
 				false
@@ -155,7 +155,7 @@ sanguis::server::ai::behavior::attack::update(
 	sanguis::duration
 )
 {
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		this->closest_visible_target(),
 		[
 			this
@@ -169,7 +169,7 @@ sanguis::server::ai::behavior::attack::update(
 	);
 
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			target_.get(),
 			[]{
 				return
@@ -272,7 +272,7 @@ sanguis::server::ai::behavior::attack::target_leaves(
 		1u
 	);
 
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		target_.get(),
 		[
 			&_with_body,
@@ -311,7 +311,7 @@ sanguis::server::ai::behavior::attack::health_changed(
 	)
 		return;
 
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		sanguis::server::closest_entity(
 			this->me(),
 			potential_targets_,

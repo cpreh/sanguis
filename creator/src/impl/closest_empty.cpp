@@ -4,7 +4,7 @@
 #include <sanguis/creator/impl/closest_empty.hpp>
 #include <sanguis/creator/impl/find_closest.hpp>
 #include <sanguis/creator/impl/optional_pos.hpp>
-#include <fcppt/optional.hpp>
+#include <fcppt/optional/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <fcppt/config/external_end.hpp>
@@ -28,7 +28,7 @@ sanguis::creator::impl::closest_empty(
 					==
 					sanguis::creator::tile::nothing;
 			},
-			fcppt::optional<
+			fcppt::optional::object<
 				sanguis::creator::pos::value_type
 			>{}
 		);

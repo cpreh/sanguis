@@ -3,7 +3,7 @@
 
 #include <sanguis/tiles/impl/content_path.hpp>
 #include <sanguis/tiles/impl/optional_content_path_fwd.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 #endif
