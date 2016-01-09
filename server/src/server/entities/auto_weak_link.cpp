@@ -1,10 +1,12 @@
 #include <sanguis/server/entities/auto_weak_hook.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/with_links.hpp>
+#include <fcppt/make_ref.hpp>
+#include <fcppt/reference_wrapper_comparison.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
+#include <fcppt/optional/comparison.hpp>
 #include <fcppt/optional/maybe_void.hpp>
-#include <fcppt/optional/object_impl.hpp>
-#include <fcppt/optional/ref_compare.hpp>
 
 
 sanguis::server::entities::auto_weak_link::auto_weak_link()
@@ -18,7 +20,9 @@ sanguis::server::entities::auto_weak_link::auto_weak_link(
 )
 :
 	ref_(
-		_ref
+		fcppt::make_ref(
+			_ref
+		)
 	)
 {
 	this->add_me();
@@ -99,10 +103,9 @@ sanguis::server::entities::auto_weak_link::operator==(
 		==
 		_link.is_linked()
 		&&
-		fcppt::optional::ref_compare(
-			ref_,
-			_link.ref_
-		);
+		ref_
+		==
+		_link.ref_;
 }
 
 sanguis::server::entities::with_links &
@@ -111,7 +114,7 @@ sanguis::server::entities::auto_weak_link::checked_ref() const
 	return
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			this->get()
-		);
+		).get();
 }
 
 void
@@ -122,10 +125,12 @@ sanguis::server::entities::auto_weak_link::add_me()
 		[
 			this
 		](
-			sanguis::server::entities::with_links &_ref
+			fcppt::reference_wrapper<
+				sanguis::server::entities::with_links
+			> const _ref
 		)
 		{
-			_ref.insert_link(
+			_ref.get().insert_link(
 				*this
 			);
 		}

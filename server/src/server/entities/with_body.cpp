@@ -23,6 +23,7 @@
 #include <sanguis/server/entities/ifaces/with_radius.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/math/vector/null.hpp>
@@ -128,7 +129,7 @@ sanguis::server::entities::with_body::remove_from_world()
 				collision_body_.remove(
 					FCPPT_ASSERT_OPTIONAL_ERROR(
 						this->environment()
-					).collision_world()
+					).get().collision_world()
 				)
 			)
 		);
@@ -184,7 +185,7 @@ sanguis::server::entities::with_body::update()
 	sanguis::server::environment::object &cur_environment(
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			this->environment()
-		)
+		).get()
 	);
 
 	if(
@@ -229,7 +230,7 @@ sanguis::server::entities::with_body::can_collide_with(
 	return
 		fcppt::optional::maybe(
 			fcppt::cast::try_dynamic<
-				sanguis::server::entities::with_body const &
+				sanguis::server::entities::with_body const
 			>(
 				_body_base
 			),
@@ -242,13 +243,15 @@ sanguis::server::entities::with_body::can_collide_with(
 			[
 				this
 			](
-				sanguis::server::entities::with_body const &_entity
+				fcppt::reference_wrapper<
+					sanguis::server::entities::with_body const
+				> const _entity
 			)
 			{
 				return
 					boost::logic::tribool{
 						this->can_collide_with_body(
-							_entity
+							_entity.get()
 						)
 					};
 			}
@@ -262,18 +265,20 @@ sanguis::server::entities::with_body::collision(
 {
 	fcppt::optional::maybe_void(
 		fcppt::cast::try_dynamic<
-			sanguis::server::entities::with_body &
+			sanguis::server::entities::with_body
 		>(
 			_body_base
 		),
 		[
 			this
 		](
-			sanguis::server::entities::with_body &_entity
+			fcppt::reference_wrapper<
+				sanguis::server::entities::with_body
+			> const _entity
 		)
 		{
 			this->collision_with_body(
-				_entity
+				_entity.get()
 			);
 		}
 	);

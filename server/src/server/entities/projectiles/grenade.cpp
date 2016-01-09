@@ -146,7 +146,7 @@ sanguis::server::entities::projectiles::grenade::remove_from_game()
 	sanguis::server::environment::insert_no_result(
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			this->environment()
-		),
+		).get(),
 		fcppt::unique_ptr_to_base<
 			sanguis::server::entities::simple
 		>(

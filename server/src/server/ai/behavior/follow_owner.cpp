@@ -11,6 +11,7 @@
 #include <sanguis/server/entities/with_links.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_literal_strong_typedef.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/optional/maybe.hpp>
 
 
@@ -54,14 +55,16 @@ sanguis::server::ai::behavior::follow_owner::update(
 			[
 				this
 			](
-				sanguis::server::entities::with_links const &_spawn_owner
+				fcppt::reference_wrapper<
+					sanguis::server::entities::with_links
+				> const _spawn_owner
 			)
 			{
 				return
 					sanguis::server::ai::go_close_to_target(
 						this->context(),
 						sanguis::server::ai::target{
-							_spawn_owner.center()
+							_spawn_owner.get().center()
 						},
 						fcppt::literal<
 							sanguis::server::ai::speed_factor

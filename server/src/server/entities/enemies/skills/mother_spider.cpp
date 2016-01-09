@@ -39,13 +39,13 @@ sanguis::server::entities::enemies::skills::mother_spider::on_die(
 	sanguis::server::weapons::weapon const &primary_weapon(
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			_enemy.primary_weapon()
-		)
+		).get()
 	);
 
 	sanguis::server::environment::object &environment(
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			_enemy.environment()
-		)
+		).get()
 	);
 
 	// TODO: Make copies of enemies smaller

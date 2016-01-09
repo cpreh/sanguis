@@ -89,7 +89,7 @@ sanguis::model::object::part(
 						_name.get()
 					};
 			}
-		);
+		).get();
 }
 
 sanguis::model::part const &

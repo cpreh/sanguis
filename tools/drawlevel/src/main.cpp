@@ -281,7 +281,7 @@ try
 							fcppt::container::maybe_front(
 								_container.get()
 							)
-						)
+						).get()
 					)
 				);
 

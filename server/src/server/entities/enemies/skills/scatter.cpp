@@ -22,6 +22,7 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/repeat.hpp>
@@ -69,7 +70,9 @@ sanguis::server::entities::enemies::skills::scatter::update(
 			this,
 			&_entity
 		](
-			sanguis::server::environment::object &_environment
+			fcppt::reference_wrapper<
+				sanguis::server::environment::object
+			> const _environment
 		)
 		{
 			fcppt::algorithm::repeat(
@@ -78,7 +81,7 @@ sanguis::server::entities::enemies::skills::scatter::update(
 				[
 					this,
 					&_entity,
-					&_environment
+					_environment
 				]
 				{
 					sanguis::server::damage::modified_array const damage_modifiers(
@@ -89,7 +92,7 @@ sanguis::server::entities::enemies::skills::scatter::update(
 					);
 
 					sanguis::server::environment::insert_no_result(
-						_environment,
+						_environment.get(),
 						fcppt::unique_ptr_to_base<
 							sanguis::server::entities::with_id
 						>(
@@ -97,7 +100,7 @@ sanguis::server::entities::enemies::skills::scatter::update(
 								sanguis::server::entities::projectiles::scatter
 							>(
 								random_generator_,
-								_environment.load_context(),
+								_environment.get().load_context(),
 								_entity.team(),
 								sanguis::server::direction(
 									_entity.angle().get()

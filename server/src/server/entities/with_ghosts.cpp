@@ -58,7 +58,7 @@ sanguis::server::entities::with_ghosts::add_ghost(
 		ghosts_.back().transfer(
 			FCPPT_ASSERT_OPTIONAL_ERROR(
 				this->environment()
-			).collision_world(),
+			).get().collision_world(),
 			this->center()
 		);
 }
@@ -114,7 +114,7 @@ sanguis::server::entities::with_ghosts::remove_from_world()
 	sanguis::server::environment::object &cur_environment(
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			this->environment()
-		)
+		).get()
 	);
 
 	return

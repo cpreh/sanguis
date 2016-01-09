@@ -4,8 +4,10 @@
 #include <sanguis/client/load/hud/weapon_icon_map.hpp>
 #include <sanguis/client/load/resource/textures.hpp>
 #include <sge/texture/part_fwd.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
-#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/copy_value.hpp>
+#include <fcppt/optional/from.hpp>
 
 
 sanguis::client::load::hud::context::context(
@@ -33,26 +35,21 @@ sanguis::client::load::hud::context::weapon_icon(
 )
 {
 	return
-		fcppt::optional::maybe(
-			fcppt::container::find_opt_mapped(
-				weapon_icons_,
-				_weapon_type
+		fcppt::optional::from(
+			fcppt::optional::copy_value(
+				fcppt::container::find_opt_mapped(
+					weapon_icons_,
+					_weapon_type
+				)
 			),
 			[
 				this
 			]()
-			-> sge::texture::part const &
 			{
 				return
-					missing_texture_;
-			},
-			[](
-				sanguis::client::load::hud::weapon_icon_map::mapped_type const &_ref
-			)
-			-> sge::texture::part const &
-			{
-				return
-					_ref.get();
+					fcppt::make_cref(
+						missing_texture_
+					);
 			}
-		);
+		).get();
 }

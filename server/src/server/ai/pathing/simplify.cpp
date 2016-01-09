@@ -9,6 +9,7 @@
 #include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/container/at_optional.hpp>
 #include <fcppt/container/maybe_front.hpp>
+#include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_multi.hpp>
 
@@ -21,8 +22,10 @@ sanguis::server::ai::pathing::simplify(
 {
 	return
 		fcppt::optional::maybe(
-			fcppt::container::maybe_front(
-				_trail
+			fcppt::optional::copy_value(
+				fcppt::container::maybe_front(
+					_trail
+				)
 			),
 			[]{
 				return
@@ -56,20 +59,24 @@ sanguis::server::ai::pathing::simplify(
 							)
 							{
 								sanguis::creator::optional_pos const next1(
-									fcppt::container::at_optional(
-										_trail,
-										_index
-										+
-										1u
+									fcppt::optional::copy_value(
+										fcppt::container::at_optional(
+											_trail,
+											_index
+											+
+											1u
+										)
 									)
 								);
 
 								sanguis::creator::optional_pos const next2(
-									fcppt::container::at_optional(
-										_trail,
-										_index
-										+
-										2u
+									fcppt::optional::copy_value(
+										fcppt::container::at_optional(
+											_trail,
+											_index
+											+
+											2u
+										)
 									)
 								);
 

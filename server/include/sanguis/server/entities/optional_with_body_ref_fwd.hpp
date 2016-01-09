@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_OPTIONAL_WITH_BODY_REF_FWD_HPP_INCLUDED
 
 #include <sanguis/server/entities/with_body_fwd.hpp>
-#include <fcppt/optional/object_fwd.hpp>
+#include <fcppt/optional/reference_fwd.hpp>
 
 
 namespace sanguis
@@ -13,8 +13,8 @@ namespace entities
 {
 
 typedef
-fcppt::optional::object<
-	sanguis::server::entities::with_body &
+fcppt::optional::reference<
+	sanguis::server::entities::with_body
 >
 optional_with_body_ref;
 

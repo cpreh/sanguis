@@ -8,6 +8,7 @@
 #include <sanguis/server/entities/property/add.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <fcppt/const.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/optional/maybe.hpp>
 
@@ -41,7 +42,7 @@ sanguis::server::entities::pickups::health::do_pickup(
 	return
 		fcppt::optional::maybe(
 			fcppt::cast::try_dynamic<
-				sanguis::server::entities::with_health &
+				sanguis::server::entities::with_health
 			>(
 				_receiver
 			),
@@ -51,11 +52,13 @@ sanguis::server::entities::pickups::health::do_pickup(
 			[
 				this
 			](
-				sanguis::server::entities::with_health &_with_health
+				fcppt::reference_wrapper<
+					sanguis::server::entities::with_health
+				> const _with_health
 			)
 			{
 				sanguis::server::entities::property::add(
-					_with_health.health(),
+					_with_health.get().health(),
 					amount_.get()
 				);
 

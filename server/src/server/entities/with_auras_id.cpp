@@ -31,7 +31,7 @@ sanguis::server::entities::with_auras_id::add_aura(
 		{
 			FCPPT_ASSERT_OPTIONAL_ERROR(
 				this->environment()
-			).add_aura(
+			).get().add_aura(
 				this->id(),
 				_aura_type
 			);

@@ -20,6 +20,7 @@
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/optional/maybe_void.hpp>
@@ -41,7 +42,9 @@ sanguis::server::cheat::process(
 			_cheat_type,
 			&_unicast_callback
 		](
-			sanguis::server::environment::object &_environment
+			fcppt::reference_wrapper<
+				sanguis::server::environment::object
+			> const _environment
 		)
 		{
 			switch(
@@ -65,14 +68,14 @@ sanguis::server::cheat::process(
 				return;
 			case sanguis::cheat_type::monster_spawner:
 				sanguis::server::environment::insert_no_result(
-					_environment,
+					_environment.get(),
 					fcppt::unique_ptr_to_base<
 						sanguis::server::entities::with_id
 					>(
 						fcppt::make_unique_ptr<
 							sanguis::server::entities::pickups::weapon
 						>(
-							_environment.load_context(),
+							_environment.get().load_context(),
 							sanguis::server::team::players,
 							fcppt::unique_ptr_to_base<
 								sanguis::server::weapons::weapon
@@ -97,14 +100,14 @@ sanguis::server::cheat::process(
 			case sanguis::cheat_type::shotgun:
 			case sanguis::cheat_type::rocket_launcher:
 				sanguis::server::environment::insert_no_result(
-					_environment,
+					_environment.get(),
 					fcppt::unique_ptr_to_base<
 						sanguis::server::entities::with_id
 					>(
 						fcppt::make_unique_ptr<
 							sanguis::server::entities::pickups::weapon
 						>(
-							_environment.load_context(),
+							_environment.get().load_context(),
 							sanguis::server::team::players,
 							sanguis::server::weapons::create(
 								_random_generator,

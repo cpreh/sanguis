@@ -11,6 +11,7 @@
 #include <sge/audio/player.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/get_or_insert.hpp>
+#include <fcppt/optional/deref.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -58,7 +59,7 @@ sanguis::client::load::resource::sounds::load_path(
 ) const
 {
 	return
-		fcppt::optional::map(
+		fcppt::optional::deref(
 			fcppt::container::get_or_insert(
 				buffers_,
 				_path,
@@ -67,7 +68,7 @@ sanguis::client::load::resource::sounds::load_path(
 				](
 					boost::filesystem::path const &_npath
 				)
-				-> optional_buffer
+				-> sanguis::client::load::resource::sounds::optional_buffer
 				{
 					sge::audio::optional_file_unique_ptr const opt_file{
 						sge::audio::load(
@@ -93,14 +94,6 @@ sanguis::client::load::resource::sounds::load_path(
 							}
 						);
 				}
-			),
-			[](
-				sge::audio::buffer_unique_ptr const &_buffer
 			)
-			-> sge::audio::buffer &
-			{
-				return
-					*_buffer;
-			}
 		);
 }

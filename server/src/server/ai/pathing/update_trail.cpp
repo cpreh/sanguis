@@ -7,6 +7,7 @@
 #include <sanguis/server/entities/with_ai.hpp>
 #include <fcppt/container/maybe_back.hpp>
 #include <fcppt/optional/bind.hpp>
+#include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/map.hpp>
 
 
@@ -20,8 +21,10 @@ sanguis::server::ai::pathing::update_trail(
 	return
 		fcppt::optional::map(
 			fcppt::optional::bind(
-				fcppt::container::maybe_back(
-					_trail
+				fcppt::optional::copy_value(
+					fcppt::container::maybe_back(
+						_trail
+					)
 				),
 				[
 					&_trail,
@@ -41,7 +44,7 @@ sanguis::server::ai::pathing::update_trail(
 						_trail.pop_back();
 
 						return
-							sanguis::creator::optional_pos(
+							fcppt::optional::copy_value(
 								fcppt::container::maybe_back(
 									_trail
 								)

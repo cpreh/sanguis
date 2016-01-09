@@ -35,7 +35,7 @@ sanguis::client::perk::choosable(
 	sanguis::client::perk::tree const &parent_node(
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			node.parent()
-		)
+		).get()
 	);
 
 	if(

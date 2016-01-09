@@ -73,6 +73,7 @@
 #include <fcppt/math/vector/length_square.hpp>
 #include <fcppt/math/vector/signed_angle_between.hpp>
 #include <fcppt/optional/bind.hpp>
+#include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
@@ -195,11 +196,13 @@ sanguis::server::global::context::insert_player(
 
 	fcppt::optional::maybe(
 		fcppt::optional::bind(
-			fcppt::container::at_optional(
-				cur_world.openings()[
-					sanguis::creator::opening_type::entry
-				],
-				0u
+			fcppt::optional::copy_value(
+				fcppt::container::at_optional(
+					cur_world.openings()[
+						sanguis::creator::opening_type::entry
+					],
+					0u
+				)
 			),
 			[
 				&cur_world,
@@ -238,32 +241,36 @@ sanguis::server::global::context::insert_player(
 			&cur_world,
 			this
 		](
-			sanguis::server::entities::player const &_player
+			fcppt::reference_wrapper<
+				sanguis::server::entities::player
+			> const _player
 		)
 		{
 			fcppt::optional::maybe_void(
-				_player.primary_weapon(),
+				_player.get().primary_weapon(),
 				[
 					&cur_world,
-					&_player
+					_player
 				](
-					sanguis::server::weapons::weapon const &_weapon
+					fcppt::reference_wrapper<
+						sanguis::server::weapons::weapon const
+					> const _weapon
 				)
 				{
 					cur_world.got_weapon(
-						_player.player_id(),
-						_weapon.description()
+						_player.get().player_id(),
+						_weapon.get().description()
 					);
 				}
 			);
 
 			cur_world.level_changed(
-				_player.player_id(),
-				_player.level()
+				_player.get().player_id(),
+				_player.get().level()
 			);
 
 			sanguis::server::send_available_perks(
-				_player,
+				_player.get(),
 				send_unicast_
 			);
 		}
@@ -292,10 +299,12 @@ sanguis::server::global::context::player_disconnect(
 			);
 		},
 		[](
-			sanguis::server::entities::player &_player
+			fcppt::reference_wrapper<
+				sanguis::server::entities::player
+			> const _player
 		)
 		{
-			_player.kill();
+			_player.get().kill();
 		}
 	);
 }
@@ -586,7 +595,7 @@ sanguis::server::global::context::transfer_entity(
 				worlds_.connections(),
 				_source
 			)
-		)
+		).get()
 	);
 
 	this->world(
@@ -620,7 +629,7 @@ sanguis::server::global::context::world(
 				worlds_.worlds(),
 				_world_id
 			)
-		);
+		).get();
 }
 
 sanguis::server::entities::player &
@@ -637,7 +646,7 @@ sanguis::server::global::context::player_exn(
 				return
 					sanguis::server::unknown_player_exception{};
 			}
-		);
+		).get();
 }
 
 sanguis::server::entities::optional_player_ref
@@ -652,9 +661,10 @@ sanguis::server::global::context::player_opt(
 				_player_id
 			),
 			[](
-				player_ref const _ref
+				fcppt::reference_wrapper<
+					player_ref
+				> const _ref
 			)
-			-> sanguis::server::entities::player &
 			{
 				return
 					_ref.get();

@@ -11,6 +11,7 @@
 #include <sanguis/server/perks/create.hpp>
 #include <sanguis/server/perks/perk.hpp>
 #include <sanguis/server/perks/unique_ptr.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/optional/from.hpp>
@@ -33,21 +34,22 @@ sanguis::server::entities::with_perks::add_perk(
 			this,
 			_type
 		]()
-		-> sanguis::server::perks::unique_ptr &
 		{
 			return
-				perks_.insert(
-					std::make_pair(
-						_type,
-						sanguis::server::perks::create(
-							this->diff_clock(),
-							random_generator_,
-							_type
+				fcppt::make_ref(
+					perks_.insert(
+						std::make_pair(
+							_type,
+							sanguis::server::perks::create(
+								this->diff_clock(),
+								random_generator_,
+								_type
+							)
 						)
-					)
-				).first->second;
+					).first->second
+				);
 		}
-	)->raise_level(
+	).get()->raise_level(
 		*this
 	);
 }
@@ -78,7 +80,7 @@ sanguis::server::entities::with_perks::update()
 	sanguis::server::environment::object &cur_environment(
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			this->environment()
-		)
+		).get()
 	);
 
 	for(

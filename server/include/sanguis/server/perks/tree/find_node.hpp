@@ -3,8 +3,9 @@
 
 #include <sanguis/perk_type.hpp>
 #include <sanguis/server/perks/tree/type_from_container.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/container/tree/pre_order.hpp>
-#include <fcppt/optional/object_impl.hpp>
+#include <fcppt/optional/reference.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <fcppt/config/external_end.hpp>
@@ -22,10 +23,10 @@ namespace tree
 template<
 	typename Container
 >
-fcppt::optional::object<
+fcppt::optional::reference<
 	sanguis::server::perks::tree::type_from_container<
 		Container
-	> &
+	>
 >
 find_node(
 	Container &_container,
@@ -39,8 +40,8 @@ find_node(
 	tree_type;
 
 	typedef
-	fcppt::optional::object<
-		tree_type &
+	fcppt::optional::reference<
+		tree_type
 	>
 	result_type;
 
@@ -60,6 +61,7 @@ find_node(
 			element
 		);
 
+		// TODO: find_by?
 		typename
 		traversal::iterator const it(
 			std::find_if(
@@ -86,7 +88,9 @@ find_node(
 		)
 			return
 				result_type(
-					*it
+					fcppt::make_ref(
+						*it
+					)
 				);
 	}
 

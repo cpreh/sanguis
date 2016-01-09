@@ -14,6 +14,7 @@
 #include <fcppt/math/vector/to_dim.hpp>
 #include <fcppt/math/vector/to_signed.hpp>
 #include <fcppt/math/vector/to_unsigned.hpp>
+#include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/maybe.hpp>
 
 
@@ -101,10 +102,12 @@ sanguis::server::ai::pathing::can_walk_diagonally(
 
 	return
 		fcppt::optional::maybe(
-			fcppt::container::grid::at_optional(
-				_grid,
-				fcppt::math::vector::to_unsigned(
-					spos4
+			fcppt::optional::copy_value(
+				fcppt::container::grid::at_optional(
+					_grid,
+					fcppt::math::vector::to_unsigned(
+						spos4
+					)
 				)
 			),
 			fcppt::const_(

@@ -51,7 +51,7 @@
 #include <sanguis/server/world/sight_range_map.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/unique_ptr_fwd.hpp>
-#include <fcppt/optional/object_fwd.hpp>
+#include <fcppt/optional/reference_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <map>
 #include <vector>
@@ -137,8 +137,8 @@ private:
 	template<
 		typename Entity
 	>
-	fcppt::optional::object<
-		Entity &
+	fcppt::optional::reference<
+		Entity
 	>
 	insert_base(
 		std::vector<

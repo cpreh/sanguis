@@ -30,7 +30,9 @@
 #include <sanguis/tools/libmergeimage/to_model.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/exception.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/truncation_check.hpp>
@@ -332,7 +334,9 @@ sanguis::tools::animations::main_window::actionSound()
 		[
 			this
 		](
-			sanguis::model::animation &_animation,
+			fcppt::reference_wrapper<
+				sanguis::model::animation
+			> const _animation,
 			boost::filesystem::path const &_chosen_sound_file
 		)
 		{
@@ -342,7 +346,7 @@ sanguis::tools::animations::main_window::actionSound()
 				)
 			};
 
-			_animation.animation_sound(
+			_animation.get().animation_sound(
 				sanguis::model::optional_animation_sound(
 					animation_sound
 				)
@@ -451,18 +455,18 @@ sanguis::tools::animations::main_window::selectedAnimationChanged()
 			animation_was_playing,
 			this
 		](
-			sanguis::model::animation &_animation
+			fcppt::reference_wrapper<
+				sanguis::model::animation
+			> const _animation
 		)
 		{
 			ui_->delaySpinBox->setValue(
 				fcppt::optional::maybe(
-					_animation.animation_delay(),
+					_animation.get().animation_delay(),
 					fcppt::const_(
 						0
 					),
-					[
-						&_animation
-					](
+					[](
 						sanguis::model::animation_delay const _delay
 					)
 					{
@@ -478,7 +482,7 @@ sanguis::tools::animations::main_window::selectedAnimationChanged()
 
 			ui_->soundEdit->setText(
 				fcppt::optional::maybe(
-					_animation.animation_sound(),
+					_animation.get().animation_sound(),
 					[]{
 						return
 							QString();
@@ -514,21 +518,23 @@ sanguis::tools::animations::main_window::selectedAnimationChanged()
 					)
 				),
 				[
-					&_animation,
+					_animation,
 					animation_was_playing,
 					this
 				](
-					QImage const &_file
+					fcppt::reference_wrapper<
+						QImage const
+					> const _file
 				)
 				{
 					frames_ =
 						sanguis::tools::animations::make_frames(
-							_file,
+							_file.get(),
 							*ui_->scrollAreaWidgetContents,
 							FCPPT_ASSERT_OPTIONAL_ERROR(
 								loaded_model_
 							).model(),
-							_animation
+							_animation.get()
 						);
 
 					if(
@@ -577,10 +583,12 @@ sanguis::tools::animations::main_window::delayChanged(
 			_value,
 			this
 		](
-			sanguis::model::animation &_animation
+			fcppt::reference_wrapper<
+				sanguis::model::animation
+			> const _animation
 		)
 		{
-			_animation.animation_delay(
+			_animation.get().animation_delay(
 				sanguis::tools::animations::int_to_delay(
 					_value
 				)
@@ -601,10 +609,12 @@ sanguis::tools::animations::main_window::soundChanged(
 		[
 			&_name
 		](
-			sanguis::model::animation &_animation
+			fcppt::reference_wrapper<
+				sanguis::model::animation
+			> const _animation
 		)
 		{
-			_animation.animation_sound(
+			_animation.get().animation_sound(
 				sanguis::tools::animations::qtutil::string_to_optional<
 					sanguis::model::animation_sound
 				>(
@@ -724,12 +734,14 @@ sanguis::tools::animations::main_window::current_animation()
 			{
 				return
 					sanguis::tools::animations::optional_animation_ref(
-						_loaded_model.model().part(
-							_part
-						).weapon_category(
-							_weapon_category
-						).animation(
-							_animation
+						fcppt::make_ref(
+							_loaded_model.model().part(
+								_part
+							).weapon_category(
+								_weapon_category
+							).animation(
+								_animation
+							)
 						)
 					);
 			},
@@ -940,13 +952,15 @@ sanguis::tools::animations::main_window::current_animation_delay()
 			[
 				this
 			](
-				sanguis::model::animation const &_animation
+				fcppt::reference_wrapper<
+					sanguis::model::animation
+				> const _animation
 			)
 			{
 				return
-					_animation.animation_delay().has_value()
+					_animation.get().animation_delay().has_value()
 					?
-						_animation.animation_delay()
+						_animation.get().animation_delay()
 					:
 						FCPPT_ASSERT_OPTIONAL_ERROR(
 							loaded_model_

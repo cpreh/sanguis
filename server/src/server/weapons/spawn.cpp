@@ -25,6 +25,7 @@
 #include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
 #include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
 #include <sanguis/server/world/center_to_grid_pos.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/algorithm/join.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
@@ -129,7 +130,9 @@ sanguis::server::weapons::spawn::do_attack(
 				[
 					this
 				](
-					sanguis::server::entities::base &_inserted
+					fcppt::reference_wrapper<
+						sanguis::server::entities::base
+					> const _inserted
 				)
 				{
 					this->kill_spawned();
@@ -138,7 +141,7 @@ sanguis::server::weapons::spawn::do_attack(
 						dynamic_cast<
 							sanguis::server::entities::ifaces::with_links &
 						>(
-							_inserted
+							_inserted.get()
 						).link();
 
 					return
@@ -170,13 +173,15 @@ sanguis::server::weapons::spawn::kill_spawned()
 	fcppt::optional::maybe_void(
 		spawned_.get(),
 		[](
-			sanguis::server::entities::with_links &_spawned
+			fcppt::reference_wrapper<
+				sanguis::server::entities::with_links
+			> const _spawned
 		)
 		{
 			dynamic_cast<
 				sanguis::server::entities::ifaces::with_health &
 			>(
-				_spawned
+				_spawned.get()
 			).kill();
 		}
 	);

@@ -6,6 +6,8 @@
 #include <sanguis/client/load/model/make_animations.hpp>
 #include <sanguis/client/load/model/weapon_category.hpp>
 #include <sanguis/model/weapon_category_fwd.hpp>
+#include <fcppt/make_cref.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -44,7 +46,6 @@ sanguis::client::load::model::weapon_category::operator[](
 				this,
 				_anim
 			]()
-			-> sanguis::client::load::model::animation const &
 			{
 				sanguis::client::load::animation_type const fallback(
 					sanguis::client::load::animation_type::none
@@ -61,17 +62,22 @@ sanguis::client::load::model::weapon_category::operator[](
 						};
 
 				return
-					(*this)[
-						fallback
-					];
+					fcppt::make_cref(
+						(*this)[
+							fallback
+						]
+					);
 			},
 			[](
-				sanguis::client::load::model::animation_unique_ptr const &_animation
+				fcppt::reference_wrapper<
+					sanguis::client::load::model::animation_unique_ptr const
+				> const _animation
 			)
-			-> sanguis::client::load::model::animation const &
 			{
 				return
-					*_animation;
+					fcppt::make_cref(
+						*_animation.get()
+					);
 			}
-		);
+		).get();
 }

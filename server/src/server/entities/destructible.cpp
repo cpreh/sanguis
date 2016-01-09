@@ -25,6 +25,7 @@
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 
 
@@ -84,10 +85,12 @@ sanguis::server::entities::destructible::remove_from_game()
 		[
 			this
 		](
-			sanguis::server::environment::object &_environment
+			fcppt::reference_wrapper<
+				sanguis::server::environment::object
+			> const _environment
 		)
 		{
-			_environment.pickup_chance(
+			_environment.get().pickup_chance(
 				sanguis::server::pickup_probability(
 					0.1f
 				),

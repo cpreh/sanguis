@@ -61,6 +61,7 @@
 #include <fcppt/math/vector/map.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/vector/to_signed.hpp>
+#include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/units/systems/si/length.hpp>
@@ -273,7 +274,7 @@ sanguis::client::draw2d::scene::world::state::background_tile(
 ) const
 {
 	return
-		sanguis::creator::optional_background_tile(
+		fcppt::optional::copy_value(
 			fcppt::container::grid::at_optional(
 				background_grid_,
 				_pos

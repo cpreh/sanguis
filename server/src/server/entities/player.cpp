@@ -83,6 +83,7 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/optional_error.hpp>
@@ -252,7 +253,7 @@ sanguis::server::entities::player::add_exp(
 
 	FCPPT_ASSERT_OPTIONAL_ERROR(
 		this->environment()
-	).exp_changed(
+	).get().exp_changed(
 		this->player_id(),
 		exp_
 	);
@@ -283,7 +284,7 @@ sanguis::server::entities::player::add_exp(
 
 	FCPPT_ASSERT_OPTIONAL_ERROR(
 		this->environment()
-	).level_changed(
+	).get().level_changed(
 		this->player_id(),
 		level_
 	);
@@ -372,11 +373,13 @@ sanguis::server::entities::player::drop_or_pickup_weapon(
 		[
 			this
 		](
-			sanguis::server::entities::pickups::weapon &_pickup
+			fcppt::reference_wrapper<
+				sanguis::server::entities::pickups::weapon
+			> const _pickup
 		)
 		{
 			this->pickup_weapon(
-				_pickup.obtain()
+				_pickup.get().obtain()
 			);
 		}
 	);
@@ -394,7 +397,7 @@ sanguis::server::entities::player::drop_or_pickup_weapon(
 			sanguis::server::environment::object &cur_environment(
 				FCPPT_ASSERT_OPTIONAL_ERROR(
 					this->environment()
-				)
+				).get()
 			);
 
 			sanguis::server::environment::insert_no_result(
@@ -460,7 +463,7 @@ sanguis::server::entities::player::transfer_to_world()
 {
 	FCPPT_ASSERT_OPTIONAL_ERROR(
 		this->environment()
-	).player_insertion(
+	).get().player_insertion(
 		this->player_id()
 	);
 }
@@ -470,7 +473,7 @@ sanguis::server::entities::player::remove_from_game()
 {
 	FCPPT_ASSERT_OPTIONAL_ERROR(
 		this->environment()
-	).remove_player(
+	).get().remove_player(
 		this->player_id()
 	);
 }
@@ -524,7 +527,7 @@ sanguis::server::entities::player::add_sight_range(
 {
 	FCPPT_ASSERT_OPTIONAL_ERROR(
 		this->environment()
-	).add_sight_range(
+	).get().add_sight_range(
 		this->player_id(),
 		_entity,
 		_created
@@ -538,7 +541,7 @@ sanguis::server::entities::player::remove_sight_range(
 {
 	FCPPT_ASSERT_OPTIONAL_ERROR(
 		this->environment()
-	).remove_sight_range(
+	).get().remove_sight_range(
 		this->player_id(),
 		_entity
 	);
@@ -664,7 +667,7 @@ sanguis::server::entities::player::on_new_weapon(
 {
 	FCPPT_ASSERT_OPTIONAL_ERROR(
 		this->environment()
-	).got_weapon(
+	).get().got_weapon(
 		this->player_id(),
 		_weapon.description()
 	);
@@ -677,7 +680,7 @@ sanguis::server::entities::player::on_drop_weapon(
 {
 	FCPPT_ASSERT_OPTIONAL_ERROR(
 		this->environment()
-	).remove_weapon(
+	).get().remove_weapon(
 		this->player_id(),
 		_is_primary
 	);
@@ -691,7 +694,7 @@ sanguis::server::entities::player::on_magazine_remaining(
 {
 	FCPPT_ASSERT_OPTIONAL_ERROR(
 		this->environment()
-	).magazine_remaining(
+	).get().magazine_remaining(
 		this->player_id(),
 		_is_primary,
 		_magazine_remaining
@@ -706,7 +709,7 @@ sanguis::server::entities::player::on_reload_time(
 {
 	FCPPT_ASSERT_OPTIONAL_ERROR(
 		this->environment()
-	).reload_time(
+	).get().reload_time(
 		this->player_id(),
 		_is_primary,
 		_reload_time

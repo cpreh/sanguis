@@ -16,6 +16,7 @@
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/math/vector/std_hash.hpp>
+#include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <queue>
@@ -91,9 +92,11 @@ sanguis::server::ai::pathing::find_target(
 			)
 				if(
 					fcppt::optional::maybe(
-						fcppt::container::find_opt_mapped(
-							predecessors,
-							trail_pos
+						fcppt::optional::copy_value(
+							fcppt::container::find_opt_mapped(
+								predecessors,
+								trail_pos
+							)
 						),
 						[]{
 							FCPPT_LOG_WARNING(

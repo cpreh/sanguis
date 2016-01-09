@@ -245,12 +245,14 @@ sanguis::client::draw2d::entities::model::part::load_animation(
 					this,
 					loop_method
 				](
-					sge::audio::buffer &_buffer
+					fcppt::reference_wrapper<
+						sge::audio::buffer
+					> const _buffer
 				)
 				{
 					return
 						sanguis::client::draw2d::entities::model::make_sound(
-							_buffer,
+							_buffer.get(),
 							sound_manager_.get(),
 							loop_method
 						);

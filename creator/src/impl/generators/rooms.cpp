@@ -67,6 +67,7 @@
 #include <fcppt/math/box/structure_cast.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object.hpp>
 #include <fcppt/random/make_variate.hpp>
@@ -218,12 +219,14 @@ is_possible_connector(
 		)
 	)
 		fcppt::optional::maybe_void(
-			fcppt::container::grid::at_optional(
-				grid,
-				n
+			fcppt::optional::copy_value(
+				fcppt::container::grid::at_optional(
+					grid,
+					n
+				)
 			),
 			[&counts](
-				sanguis::creator::impl::region_id _id
+				sanguis::creator::impl::region_id const _id
 			)
 			{
 				counts[

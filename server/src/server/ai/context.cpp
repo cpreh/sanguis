@@ -15,6 +15,7 @@
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/maybe_front.hpp>
 #include <fcppt/optional/bind.hpp>
+#include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/map.hpp>
 
 
@@ -88,8 +89,10 @@ sanguis::server::ai::context::destination() const
 			{
 				return
 					sanguis::creator::optional_pos{
-						fcppt::container::maybe_front(
-							_trail
+						fcppt::optional::copy_value(
+							fcppt::container::maybe_front(
+								_trail
+							)
 						)
 					};
 			}
@@ -124,7 +127,7 @@ sanguis::server::ai::context::grid() const
 	return
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			this->me().environment()
-		).grid();
+		).get().grid();
 }
 
 sanguis::server::entities::with_ai &

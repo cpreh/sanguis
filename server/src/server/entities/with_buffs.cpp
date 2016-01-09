@@ -74,7 +74,7 @@ sanguis::server::entities::with_buffs::add_buff(
 	)
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			this->environment()
-		).add_buff(
+		).get().add_buff(
 			this->id(),
 			cur_buff.type()
 		);
@@ -120,7 +120,7 @@ sanguis::server::entities::with_buffs::remove_buff(
 	{
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			this->environment()
-		).remove_buff(
+		).get().remove_buff(
 			this->id(),
 			buff_type
 		);

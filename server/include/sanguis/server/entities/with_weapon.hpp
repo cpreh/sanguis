@@ -23,6 +23,7 @@
 #include <sanguis/server/weapons/optional_unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/optional/reference_fwd.hpp>
 
 
 namespace sanguis
@@ -155,8 +156,8 @@ public:
 	weapon_status() const;
 private:
 	typedef
-	fcppt::optional::object<
-		sanguis::server::weapons::weapon &
+	fcppt::optional::reference<
+		sanguis::server::weapons::weapon
 	>
 	optional_weapon_ref;
 

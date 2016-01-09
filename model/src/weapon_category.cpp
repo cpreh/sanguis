@@ -86,7 +86,7 @@ sanguis::model::weapon_category::animation(
 						_name.get()
 					};
 			}
-		);
+		).get();
 }
 
 sanguis::model::animation const &

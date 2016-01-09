@@ -129,7 +129,7 @@ sanguis::server::entities::spawns::spawn::update()
 				sanguis::server::environment::object &cur_environment(
 					FCPPT_ASSERT_OPTIONAL_ERROR(
 						this->environment()
-					)
+					).get()
 				);
 
 				sanguis::server::environment::insert_no_result(

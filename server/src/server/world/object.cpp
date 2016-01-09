@@ -124,6 +124,9 @@
 #include <sanguis/server/world/update_entity.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/make_enum_range.hpp>
+#include <fcppt/make_ref.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_wrapper_to_base.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -141,7 +144,7 @@
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe.hpp>
-#include <fcppt/optional/object_impl.hpp>
+#include <fcppt/optional/reference.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <vector>
@@ -276,12 +279,17 @@ sanguis::server::world::object::insert(
 				_insert_parameters
 			),
 			[](
-				sanguis::server::entities::simple &_simple
+				fcppt::reference_wrapper<
+					sanguis::server::entities::simple
+				> const _simple
 			)
-			-> sanguis::server::entities::base &
 			{
 				return
-					_simple;
+					fcppt::reference_wrapper_to_base<
+						sanguis::server::entities::base
+					>(
+						_simple
+					);
 			}
 		);
 }
@@ -357,7 +365,13 @@ sanguis::server::world::object::insert(
 
 				return
 					sanguis::server::entities::optional_base_ref(
-						result
+						fcppt::reference_wrapper_to_base<
+							sanguis::server::entities::base
+						>(
+							fcppt::make_ref(
+								result
+							)
+						)
 					);
 			}
 		);
@@ -480,8 +494,8 @@ sanguis::server::world::object::player_insertion(
 template<
 	typename Entity
 >
-fcppt::optional::object<
-	Entity &
+fcppt::optional::reference<
+	Entity
 >
 sanguis::server::world::object::insert_base(
 	std::vector<
@@ -509,7 +523,6 @@ sanguis::server::world::object::insert_base(
 			](
 				sanguis::server::entities::transfer_result const &_transfer_result
 			)
-			-> Entity &
 			{
 				_container.push_back(
 					std::move(
@@ -522,7 +535,9 @@ sanguis::server::world::object::insert_base(
 				);
 
 				return
-					*_container.back();
+					fcppt::make_ref(
+						*_container.back()
+					);
 			}
 		);
 }

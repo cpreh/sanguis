@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_LOAD_RESOURCE_OPTIONAL_SOUND_FWD_HPP_INCLUDED
 
 #include <sge/audio/buffer_fwd.hpp>
-#include <fcppt/optional/object_fwd.hpp>
+#include <fcppt/optional/reference_fwd.hpp>
 
 
 namespace sanguis
@@ -15,8 +15,8 @@ namespace resource
 {
 
 typedef
-fcppt::optional::object<
-	sge::audio::buffer &
+fcppt::optional::reference<
+	sge::audio::buffer
 >
 optional_sound;
 

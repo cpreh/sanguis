@@ -10,6 +10,7 @@
 #include <sanguis/tools/animations/const_optional_image_file_ref.hpp>
 #include <sanguis/tools/animations/find_image_file.hpp>
 #include <sanguis/tools/animations/image_file_map.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -53,7 +54,9 @@ sanguis::tools::animations::find_image_file(
 						[
 							&result
 						](
-							QImage const &_image
+							fcppt::reference_wrapper<
+								QImage const
+							> const _image
 						)
 						{
 							result =

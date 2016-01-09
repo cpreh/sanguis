@@ -4,6 +4,7 @@
 #include <sge/parse/json/find_member.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/string.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/optional/map.hpp>
 
@@ -22,12 +23,14 @@ sanguis::model::impl::deserialize::image_name(
 				FCPPT_TEXT("texture")
 			),
 			[](
-				sge::parse::json::string const &_texture_file
+				fcppt::reference_wrapper<
+					sge::parse::json::string const
+				> const _texture_file
 			)
 			{
 				return
 					sanguis::model::image_name(
-						_texture_file
+						_texture_file.get()
 					);
 			}
 		);

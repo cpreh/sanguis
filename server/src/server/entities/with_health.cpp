@@ -187,7 +187,7 @@ sanguis::server::entities::with_health::update()
 	)
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			this->environment()
-		).health_changed(
+		).get().health_changed(
 			this->id(),
 			this->current_health()
 		);
@@ -213,7 +213,7 @@ sanguis::server::entities::with_health::max_health_change()
 {
 	FCPPT_ASSERT_OPTIONAL_ERROR(
 		this->environment()
-	).max_health_changed(
+	).get().max_health_changed(
 		this->id(),
 		this->max_health()
 	);

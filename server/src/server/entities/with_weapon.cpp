@@ -28,12 +28,17 @@
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/const.hpp>
+#include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/algorithm/array_init_move.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/optional_error.hpp>
+#include <fcppt/optional/deref.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/optional/reference.hpp>
 #include <fcppt/variant/get_exn.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -140,14 +145,16 @@ sanguis::server::entities::with_weapon::primary_weapon_type() const
 		fcppt::optional::map(
 			this->primary_weapon(),
 			[](
-				sanguis::server::weapons::weapon const &_primary_weapon
+				fcppt::reference_wrapper<
+					sanguis::server::weapons::weapon const
+				> const _primary_weapon
 			)
 			{
 				return
 					fcppt::variant::get_exn<
 						sanguis::primary_weapon_type
 					>(
-						_primary_weapon.type()
+						_primary_weapon.get().type()
 					);
 			}
 		);
@@ -182,7 +189,9 @@ sanguis::server::entities::with_weapon::pickup_weapon(
 
 	ref.owner(
 		sanguis::server::entities::optional_with_weapon_ref(
-			*this
+			fcppt::make_ref(
+				*this
+			)
 		)
 	);
 
@@ -263,11 +272,13 @@ sanguis::server::entities::with_weapon::in_range(
 				false
 			),
 			[](
-				sanguis::server::weapons::weapon const &_weapon
+				fcppt::reference_wrapper<
+					sanguis::server::weapons::weapon
+				> const _weapon
 			)
 			{
 				return
-					_weapon.owner_target_in_range();
+					_weapon.get().owner_target_in_range();
 			}
 		);
 }
@@ -286,17 +297,19 @@ sanguis::server::entities::with_weapon::use_weapon(
 			_use,
 			this
 		](
-			sanguis::server::weapons::weapon &_weapon
+			fcppt::reference_wrapper<
+				sanguis::server::weapons::weapon
+			> const _weapon
 		)
 		{
 			if(
 				!_use
 			)
-				_weapon.stop();
+				_weapon.get().stop();
 			else if(
 				target_.has_value()
 			)
-				_weapon.attack();
+				_weapon.get().attack();
 		}
 	);
 }
@@ -311,10 +324,12 @@ sanguis::server::entities::with_weapon::reload(
 			_is_primary
 		),
 		[](
-			sanguis::server::weapons::weapon &_weapon
+			fcppt::reference_wrapper<
+				sanguis::server::weapons::weapon
+			> const _weapon
 		)
 		{
-			_weapon.reload();
+			_weapon.get().reload();
 		}
 	);
 }
@@ -379,10 +394,22 @@ sanguis::server::weapons::const_optional_ref
 sanguis::server::entities::with_weapon::primary_weapon() const
 {
 	return
-		sanguis::server::weapons::const_optional_ref(
+		// TODO: Make a function for this!
+		fcppt::optional::map(
 			this->weapon_ref(
 				primary_weapon_
+			),
+			[](
+				fcppt::reference_wrapper<
+					sanguis::server::weapons::weapon
+				> const _weapon
 			)
+			{
+				return
+					fcppt::make_cref(
+						_weapon.get()
+					);
+			}
 		);
 }
 
@@ -390,10 +417,21 @@ sanguis::server::weapons::const_optional_ref
 sanguis::server::entities::with_weapon::secondary_weapon() const
 {
 	return
-		sanguis::server::weapons::const_optional_ref(
+		fcppt::optional::map(
 			this->weapon_ref(
 				secondary_weapon_
+			),
+			[](
+				fcppt::reference_wrapper<
+					sanguis::server::weapons::weapon
+				> const _weapon
 			)
+			{
+				return
+					fcppt::make_cref(
+						_weapon.get()
+					);
+			}
 		);
 }
 
@@ -422,7 +460,7 @@ sanguis::server::entities::with_weapon::weapon_status(
 
 	FCPPT_ASSERT_OPTIONAL_ERROR(
 		this->environment()
-	).weapon_status_changed(
+	).get().weapon_status_changed(
 		this->id(),
 		_weapon_status
 	);
@@ -487,16 +525,8 @@ sanguis::server::entities::with_weapon::weapon_ref(
 ) const
 {
 	return
-		fcppt::optional::map(
-			_weapon,
-			[](
-				sanguis::server::weapons::unique_ptr const &_ptr
-			)
-			-> sanguis::server::weapons::weapon &
-			{
-				return
-					*_ptr;
-			}
+		fcppt::optional::deref(
+			_weapon
 		);
 }
 
@@ -571,10 +601,12 @@ sanguis::server::entities::with_weapon::update_weapon(
 	fcppt::optional::maybe_void(
 		_opt_weapon,
 		[](
-			sanguis::server::weapons::weapon &_weapon
+			fcppt::reference_wrapper<
+				sanguis::server::weapons::weapon
+			> const _weapon
 		)
 		{
-			_weapon.update();
+			_weapon.get().update();
 		}
 	);
 }
@@ -590,10 +622,12 @@ sanguis::server::entities::with_weapon::tick_weapon(
 		[
 			_duration
 		](
-			sanguis::server::weapons::weapon &_weapon
+			fcppt::reference_wrapper<
+				sanguis::server::weapons::weapon
+			> const _weapon
 		)
 		{
-			_weapon.tick(
+			_weapon.get().tick(
 				_duration
 			);
 		}
@@ -611,13 +645,15 @@ sanguis::server::entities::with_weapon::weapon_changed(
 			_is_primary,
 			this
 		](
-			sanguis::server::environment::object &_environment
+			fcppt::reference_wrapper<
+				sanguis::server::environment::object
+			> const _environment
 		)
 		{
 			if(
 				_is_primary.get()
 			)
-				_environment.weapon_changed(
+				_environment.get().weapon_changed(
 					this->id(),
 					this->primary_weapon_type()
 				);

@@ -16,6 +16,7 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/environment/optional_object_ref.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/random/distribution/basic_impl.hpp>
@@ -101,7 +102,9 @@ sanguis::server::entities::projectiles::scatter::update()
 		[
 			this
 		](
-			sanguis::server::environment::object &_environment
+			fcppt::reference_wrapper<
+				sanguis::server::environment::object
+			> const _environment
 		)
 		{
 			sanguis::server::angle const random_angle(
@@ -109,9 +112,9 @@ sanguis::server::entities::projectiles::scatter::update()
 			);
 
 			sanguis::server::environment::insert_no_result(
-				_environment,
+				_environment.get(),
 				create_(
-					_environment,
+					_environment.get(),
 					this->team(),
 					random_angle
 				),

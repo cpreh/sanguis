@@ -70,7 +70,7 @@ sanguis::model::part::weapon_category(
 						_name.get()
 					};
 			}
-		);
+		).get();
 }
 
 sanguis::model::weapon_category const &

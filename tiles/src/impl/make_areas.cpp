@@ -7,6 +7,7 @@
 #include <sanguis/tiles/impl/make_areas.hpp>
 #include <sge/image2d/dim.hpp>
 #include <sge/image2d/rect.hpp>
+#include <sge/parse/json/array.hpp>
 #include <sge/parse/json/get_exn.hpp>
 #include <sge/parse/json/int_type.hpp>
 #include <sge/parse/json/value_fwd.hpp>

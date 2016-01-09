@@ -11,6 +11,7 @@
 #include <sanguis/server/entities/transfer_result.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/environment/optional_object_ref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -33,7 +34,9 @@ sanguis::server::entities::base::transfer(
 {
 	environment_ =
 		sanguis::server::environment::optional_object_ref(
-			_environment
+			fcppt::make_ref(
+				_environment
+			)
 		);
 
 	return

@@ -11,6 +11,7 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/algorithm/find_if_opt.hpp>
 #include <fcppt/optional/bind.hpp>
+#include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/deref.hpp>
 #include <fcppt/variant/not_equal.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -48,20 +49,22 @@ sanguis::client::draw2d::scene::hover::compare_weapons(
 							sanguis::optional_weapon_attribute_value()
 						:
 							fcppt::optional::bind(
-								fcppt::optional::deref(
-									fcppt::algorithm::find_if_opt(
-										_desc.attributes(),
-										[
-											&_attribute
-										](
-											sanguis::weapon_attribute const &_comp
+								fcppt::optional::copy_value(
+									fcppt::optional::deref(
+										fcppt::algorithm::find_if_opt(
+											_desc.attributes(),
+											[
+												&_attribute
+											](
+												sanguis::weapon_attribute const &_comp
+											)
+											{
+												return
+													_comp.type()
+													==
+													_attribute.type();
+											}
 										)
-										{
-											return
-												_comp.type()
-												==
-												_attribute.type();
-										}
 									)
 								),
 								[

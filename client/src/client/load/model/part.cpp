@@ -7,6 +7,8 @@
 #include <sanguis/client/load/model/weapon_category_map.hpp>
 #include <sanguis/client/load/model/weapon_category_unique_ptr.hpp>
 #include <sanguis/model/part_fwd.hpp>
+#include <fcppt/make_cref.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -45,7 +47,6 @@ sanguis::client::load::model::part::operator[](
 				_type,
 				this
 			]()
-			-> sanguis::client::load::model::weapon_category const &
 			{
 				sanguis::optional_primary_weapon_type const fallback{};
 
@@ -60,17 +61,22 @@ sanguis::client::load::model::part::operator[](
 						};
 
 				return
-					(*this)[
-						fallback
-					];
+					fcppt::make_cref(
+						(*this)[
+							fallback
+						]
+					);
 			},
 			[](
-				sanguis::client::load::model::weapon_category_unique_ptr const &_found
+				fcppt::reference_wrapper<
+					sanguis::client::load::model::weapon_category_unique_ptr const
+				> const _found
 			)
-			-> sanguis::client::load::model::weapon_category const &
 			{
 				return
-					*_found;
+					fcppt::make_cref(
+						*_found.get()
+					);
 			}
-		);
+		).get();
 }

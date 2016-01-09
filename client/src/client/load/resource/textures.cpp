@@ -22,6 +22,7 @@
 #include <sge/texture/part_raw_ptr.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -81,8 +82,10 @@ try
 	// TODO: This should be the other way around (exception from optional)
 	return
 		sge::texture::const_optional_part_ref{
-			this->load(
-				_path
+			fcppt::make_cref(
+				this->load(
+					_path
+				)
 			)
 		};
 }
@@ -192,7 +195,7 @@ sanguis::client::load::resource::textures::do_load(
 							FCPPT_TEXT("\" found")
 						};
 				}
-			)
+			).get()
 		);
 }
 

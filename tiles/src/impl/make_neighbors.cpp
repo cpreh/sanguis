@@ -40,7 +40,7 @@ sanguis::tiles::impl::make_neighbors(
 							_grid,
 							_npos
 						)
-					)
+					).get()
 				);
 		}
 	);

@@ -6,6 +6,7 @@
 #include <sanguis/tiles/content.hpp>
 #include <sanguis/tiles/error.hpp>
 #include <sge/texture/const_optional_part_ref.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/random/wrapper/make_uniform_container.hpp>
 #include <fcppt/variant/match.hpp>
@@ -51,8 +52,10 @@ sanguis::client::draw2d::scene::world::make_texture(
 
 				return
 					sge::texture::const_optional_part_ref(
-						*random_part(
-							_random_generator
+						fcppt::make_cref(
+							*random_part(
+								_random_generator
+							)
 						)
 					);
 			},
@@ -67,8 +70,10 @@ sanguis::client::draw2d::scene::world::make_texture(
 					_debug.get()
 					?
 						sge::texture::const_optional_part_ref(
-							_context.missing_texture(
-								_error
+							fcppt::make_cref(
+								_context.missing_texture(
+									_error
+								)
 							)
 						)
 					:

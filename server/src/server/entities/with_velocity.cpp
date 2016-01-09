@@ -66,7 +66,7 @@ sanguis::server::entities::with_velocity::update()
 	sanguis::server::environment::object &cur_environment(
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			this->environment()
-		)
+		).get()
 	);
 
 	if(

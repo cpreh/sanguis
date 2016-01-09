@@ -25,6 +25,7 @@
 #include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/optional_error.hpp>
@@ -110,11 +111,13 @@ sanguis::server::ai::behavior::follow_friend::start()
 			[
 				this
 			](
-				sanguis::server::entities::with_body &_target
+				fcppt::reference_wrapper<
+					sanguis::server::entities::with_body
+				> const _target
 			)
 			{
 				target_ =
-					_target.link();
+					_target.get().link();
 
 				return
 					true;
@@ -137,14 +140,16 @@ sanguis::server::ai::behavior::follow_friend::update(
 			[
 				this
 			](
-				sanguis::server::entities::with_links const &_target
+				fcppt::reference_wrapper<
+					sanguis::server::entities::with_links
+				> const _target
 			)
 			{
 				return
 					sanguis::server::ai::go_close_to_target(
 						this->context(),
 						sanguis::server::ai::target{
-							_target.center()
+							_target.get().center()
 						},
 						fcppt::literal<
 							sanguis::server::ai::speed_factor
@@ -178,7 +183,7 @@ sanguis::server::ai::behavior::follow_friend::target_enters(
 	target_ =
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			this->first_target()
-		).link();
+		).get().link();
 }
 
 void
@@ -203,12 +208,14 @@ sanguis::server::ai::behavior::follow_friend::target_leaves(
 			&_with_body,
 			this
 		](
-			sanguis::server::entities::with_links const &_target
+			fcppt::reference_wrapper<
+				sanguis::server::entities::with_links
+			> const _target
 		)
 		{
 			if(
 				sanguis::server::entities::same_object(
-					_target,
+					_target.get(),
 					_with_body
 				)
 			)
@@ -222,12 +229,15 @@ sanguis::server::entities::optional_with_body_ref
 sanguis::server::ai::behavior::follow_friend::first_target() const
 {
 	return
+		// TODO:
 		potential_targets_.empty()
 		?
 			sanguis::server::entities::optional_with_body_ref{}
 		:
 			sanguis::server::entities::optional_with_body_ref{
-				potential_targets_.begin()->get()
+				fcppt::make_ref(
+					potential_targets_.begin()->get()
+				)
 			}
 		;
 }

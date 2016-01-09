@@ -8,8 +8,10 @@
 #include <sanguis/model/part_name.hpp>
 #include <sanguis/model/weapon_category_name.hpp>
 #include <sanguis/tools/animations/get_or_default_animation.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/optional/bind.hpp>
+#include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/from.hpp>
 
 
@@ -32,27 +34,33 @@ sanguis::tools::animations::get_or_default_animation(
 					&_weapon_category_name,
 					&_animation_name
 				](
-					sanguis::model::part const &_part
+					fcppt::reference_wrapper<
+						sanguis::model::part const
+					> const _part
 				)
 				{
 					return
-						fcppt::optional::bind(
-							fcppt::container::find_opt_mapped(
-								_part.weapon_categories(),
-								_weapon_category_name
-							),
-							[
-								&_animation_name
-							](
-								sanguis::model::weapon_category const &_weapon_category
+						fcppt::optional::copy_value(
+							fcppt::optional::bind(
+								fcppt::container::find_opt_mapped(
+									_part.get().weapon_categories(),
+									_weapon_category_name
+								),
+								[
+									&_animation_name
+								](
+									fcppt::reference_wrapper<
+										sanguis::model::weapon_category const
+									> const _weapon_category
+								)
+								{
+									return
+										fcppt::container::find_opt_mapped(
+											_weapon_category.get().animations(),
+											_animation_name
+										);
+								}
 							)
-							{
-								return
-									fcppt::container::find_opt_mapped(
-										_weapon_category.animations(),
-										_animation_name
-									);
-							}
 						);
 				}
 			),

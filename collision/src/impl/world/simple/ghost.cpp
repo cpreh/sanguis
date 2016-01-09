@@ -16,6 +16,7 @@
 #include <sanguis/collision/world/optional_body_exit.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/reference_wrapper_comparison.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/algorithm/map_iteration.hpp>
 #include <fcppt/algorithm/update_action.hpp>
 #include <fcppt/assert/error.hpp>
@@ -189,10 +190,12 @@ sanguis::collision::impl::world::simple::ghost::update_near_body(
 						);
 				},
 				[](
-					body_status &_status
+					fcppt::reference_wrapper<
+						body_status
+					> const _status
 				)
 				{
-					_status =
+					_status.get() =
 						body_status::normal;
 
 					return

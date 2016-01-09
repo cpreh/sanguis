@@ -26,5 +26,5 @@ sanguis::server::perks::tree::choose(
 					FCPPT_TEXT("Perk not found in the tree!")
 				};
 		}
-	).value().choose();
+	).get().value().choose();
 }

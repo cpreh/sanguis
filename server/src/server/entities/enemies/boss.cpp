@@ -40,7 +40,7 @@ sanguis::server::entities::enemies::boss::on_create()
 {
 	FCPPT_ASSERT_OPTIONAL_ERROR(
 		this->environment()
-	).add_portal_blocker();
+	).get().add_portal_blocker();
 
 	return
 		sanguis::server::entities::with_ai::on_create();
@@ -53,7 +53,7 @@ sanguis::server::entities::enemies::boss::remove_from_game()
 
 	FCPPT_ASSERT_OPTIONAL_ERROR(
 		this->environment()
-	).remove_portal_blocker();
+	).get().remove_portal_blocker();
 }
 
 sanguis::messages::types::string const &

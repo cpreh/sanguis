@@ -90,7 +90,7 @@ sanguis::server::entities::exp_area::remove_from_game()
 		>(
 			FCPPT_ASSERT_OPTIONAL_ERROR(
 				player_link.second.get()
-			)
+			).get()
 		).add_exp(
 			sanguis::server::exp(
 				exp_.get()

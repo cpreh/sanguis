@@ -12,6 +12,7 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_health.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/optional/map.hpp>
@@ -58,7 +59,7 @@ burn_create(
 				return
 					fcppt::optional::map(
 						fcppt::cast::try_dynamic<
-							sanguis::server::entities::with_health &
+							sanguis::server::entities::with_health
 						>(
 							_entity
 						),
@@ -67,7 +68,9 @@ burn_create(
 							_damage,
 							_damage_values
 						](
-							sanguis::server::entities::with_health &_with_health
+							fcppt::reference_wrapper<
+								sanguis::server::entities::with_health
+							> const _with_health
 						)
 						{
 							return
@@ -77,7 +80,7 @@ burn_create(
 									fcppt::make_unique_ptr<
 										Buff
 									>(
-										_with_health,
+										_with_health.get(),
 										_interval,
 										_damage,
 										// TODO: Auras must know their owner to fix this

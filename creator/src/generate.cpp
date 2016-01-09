@@ -46,7 +46,7 @@ sanguis::creator::generate(
 						FCPPT_TEXT(" not found!")
 					);
 			}
-		)(
+		).get()(
 			sanguis::creator::impl::parameters(
 				gen,
 				_parameters.spawn_boss(),

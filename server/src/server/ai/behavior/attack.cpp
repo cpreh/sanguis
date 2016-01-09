@@ -22,7 +22,6 @@
 #include <sanguis/server/auras/target.hpp>
 #include <sanguis/server/auras/target_kind.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/optional_with_body_ref.hpp>
 #include <sanguis/server/entities/same_object.hpp>
 #include <sanguis/server/entities/transfer_result.hpp>
@@ -42,6 +41,7 @@
 #include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -138,11 +138,13 @@ sanguis::server::ai::behavior::attack::start()
 			[
 				this
 			](
-				sanguis::server::entities::with_body &_target
+				fcppt::reference_wrapper<
+					sanguis::server::entities::with_body
+				> const _target
 			)
 			{
 				target_ =
-					_target.link();
+					_target.get().link();
 
 				return
 					true;
@@ -160,11 +162,13 @@ sanguis::server::ai::behavior::attack::update(
 		[
 			this
 		](
-			sanguis::server::entities::with_body &_closer_target
+			fcppt::reference_wrapper<
+				sanguis::server::entities::with_body
+			> const _closer_target
 		)
 		{
 			target_ =
-				_closer_target.link();
+				_closer_target.get().link();
 		}
 	);
 
@@ -178,14 +182,16 @@ sanguis::server::ai::behavior::attack::update(
 			[
 				this
 			](
-				sanguis::server::entities::with_links const &_target
+				fcppt::reference_wrapper<
+					sanguis::server::entities::with_links
+				> const _target
 			)
 			{
 				sanguis::server::ai::is_visible const is_visible{
 					sanguis::creator::tile_is_visible(
 						this->context().grid(),
 						sanguis::server::world::center_to_grid_pos(
-							_target.center()
+							_target.get().center()
 						),
 						sanguis::server::world::center_to_grid_pos(
 							this->me().center()
@@ -198,7 +204,7 @@ sanguis::server::ai::behavior::attack::update(
 					?
 						sanguis::server::weapons::optional_target(
 							sanguis::server::weapons::target(
-								_target.center().get()
+								_target.get().center().get()
 							)
 						)
 					:
@@ -229,7 +235,7 @@ sanguis::server::ai::behavior::attack::update(
 						in_range,
 						is_visible,
 						sanguis::server::ai::target{
-							_target.center()
+							_target.get().center()
 						},
 						this->speed_factor()
 					)
@@ -278,12 +284,14 @@ sanguis::server::ai::behavior::attack::target_leaves(
 			&_with_body,
 			this
 		](
-			sanguis::server::entities::base const &_target
+			fcppt::reference_wrapper<
+				sanguis::server::entities::with_links
+			> const _target
 		)
 		{
 			if(
 				sanguis::server::entities::same_object(
-					_target,
+					_target.get(),
 					_with_body
 				)
 			)
@@ -326,11 +334,13 @@ sanguis::server::ai::behavior::attack::health_changed(
 		[
 			this
 		](
-			sanguis::server::entities::with_body &_result
+			fcppt::reference_wrapper<
+				sanguis::server::entities::with_body
+			> const _result
 		)
 		{
 			target_ =
-				_result.link();
+				_result.get().link();
 		}
 	);
 }

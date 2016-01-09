@@ -35,6 +35,7 @@
 #include <sge/timer/elapsed_and_reset.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/exception.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
@@ -177,7 +178,7 @@ sanguis::server::machine::send_to_all(
 					net_.send_buffer(
 						id
 					)
-				),
+				).get(),
 				temp_buffer_
 			)
 		)
@@ -232,7 +233,7 @@ sanguis::server::machine::process_overflow()
 						net_.send_buffer(
 							net_id
 						)
-					)
+					).get()
 				)
 			)
 				queue.pop();
@@ -282,13 +283,15 @@ sanguis::server::machine::send_unicast(
 			this,
 			net_id
 		](
-			alda::net::buffer::circular_send::object &_buffer
+			fcppt::reference_wrapper<
+				alda::net::buffer::circular_send::object
+			> const _buffer
 		)
 		{
 			if(
 				!sanguis::server::net::serialize_to_circular_buffer(
 					_message,
-					_buffer
+					_buffer.get()
 				)
 			)
 			{

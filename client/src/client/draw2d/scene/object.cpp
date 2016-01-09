@@ -823,7 +823,7 @@ sanguis::client::draw2d::scene::object::entity(
 						.str()
 					};
 			}
-		);
+		).get();
 }
 
 sanguis::client::draw2d::optional_player_center

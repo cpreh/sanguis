@@ -323,7 +323,7 @@ sanguis::server::weapons::weapon::owner() const
 	return
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			owner_
-		);
+		).get();
 }
 
 sanguis::server::weapons::parameters

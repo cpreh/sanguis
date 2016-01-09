@@ -50,6 +50,7 @@
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/static_downcast.hpp>
@@ -182,13 +183,15 @@ sanguis::server::entities::enemies::enemy::remove_from_game()
 		[
 			this
 		](
-			sanguis::server::entities::with_links &_spawn_owner
+			fcppt::reference_wrapper<
+				sanguis::server::entities::with_links
+			> const _spawn_owner
 		)
 		{
 			fcppt::cast::static_downcast<
 				sanguis::server::entities::spawns::spawn &
 			>(
-				_spawn_owner
+				_spawn_owner.get()
 			)
 			.unregister(
 				*this
@@ -199,7 +202,7 @@ sanguis::server::entities::enemies::enemy::remove_from_game()
 	sanguis::server::environment::object &cur_environment(
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			this->environment()
-		)
+		).get()
 	);
 
 	sanguis::server::environment::insert_no_result(

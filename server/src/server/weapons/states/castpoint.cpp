@@ -145,7 +145,7 @@ sanguis::server::weapons::states::castpoint::react(
 							),
 							FCPPT_ASSERT_OPTIONAL_ERROR(
 								owner.environment()
-							),
+							).get(),
 							_target
 						)
 					)

@@ -14,6 +14,7 @@
 #include <sge/sprite/roles/size.hpp>
 #include <sge/sprite/roles/texture0.hpp>
 #include <sge/texture/part_fwd.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -40,7 +41,9 @@ sanguis::client::draw2d::scene::world::make_sprite(
 			[
 				&_cell
 			](
-				sge::texture::part const &_texture
+				fcppt::reference_wrapper<
+					sge::texture::part const
+				> const _texture
 			)
 			{
 				return
@@ -61,7 +64,7 @@ sanguis::client::draw2d::scene::world::make_sprite(
 							),
 						sge::sprite::roles::texture0{} =
 							sanguis::client::draw2d::scene::world::sprite::object::texture_type{
-								_texture
+								_texture.get()
 							},
 						sanguis::client::draw2d::scene::world::sprite::is_background_role{} =
 							_cell.is_background().get()

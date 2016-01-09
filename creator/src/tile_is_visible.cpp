@@ -11,6 +11,7 @@
 #include <fcppt/math/bresenham.hpp>
 #include <fcppt/math/bresenham_thick.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/maybe.hpp>
 
 
@@ -43,13 +44,15 @@ sanguis::creator::tile_is_visible(
 			{
 				return
 					fcppt::optional::maybe(
-						fcppt::container::grid::at_optional(
-							_grid,
-							fcppt::math::vector::structure_cast<
-								sanguis::creator::pos,
-								fcppt::cast::to_unsigned_fun
-							>(
-								_elem
+						fcppt::optional::copy_value(
+							fcppt::container::grid::at_optional(
+								_grid,
+								fcppt::math::vector::structure_cast<
+									sanguis::creator::pos,
+									fcppt::cast::to_unsigned_fun
+								>(
+									_elem
+								)
 							)
 						),
 						fcppt::const_(

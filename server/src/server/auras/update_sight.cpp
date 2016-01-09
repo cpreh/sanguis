@@ -8,6 +8,7 @@
 #include <sanguis/server/auras/update_sight.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_id.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 
@@ -50,7 +51,7 @@ sanguis::server::auras::update_sight::enter(
 {
 	fcppt::optional::maybe_void(
 		fcppt::cast::try_dynamic<
-			sanguis::server::entities::with_id const &
+			sanguis::server::entities::with_id const
 		>(
 			_entity
 		),
@@ -58,11 +59,13 @@ sanguis::server::auras::update_sight::enter(
 			this,
 			_created
 		](
-			sanguis::server::entities::with_id const &_with_id
+			fcppt::reference_wrapper<
+				sanguis::server::entities::with_id const
+			> const _with_id
 		)
 		{
 			add_(
-				_with_id,
+				_with_id.get(),
 				_created
 			);
 		}
@@ -76,18 +79,20 @@ sanguis::server::auras::update_sight::leave(
 {
 	fcppt::optional::maybe_void(
 		fcppt::cast::try_dynamic<
-			sanguis::server::entities::with_id const &
+			sanguis::server::entities::with_id const
 		>(
 			_entity
 		),
 		[
 			this
 		](
-			sanguis::server::entities::with_id const &_with_id
+			fcppt::reference_wrapper<
+				sanguis::server::entities::with_id const
+			> const _with_id
 		)
 		{
 			remove_(
-				_with_id
+				_with_id.get()
 			);
 		}
 	);

@@ -7,6 +7,7 @@
 #include <fcppt/const.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/object_impl.hpp>
+#include <fcppt/optional/reference.hpp>
 
 
 namespace sanguis
@@ -18,9 +19,9 @@ template<
 	typename Container,
 	typename Predicate
 >
-fcppt::optional::object<
+fcppt::optional::reference<
 	typename
-	Container::value_type::type &
+	Container::value_type::type
 >
 closest_entity(
 	sanguis::server::entities::base const &_ref,
@@ -29,9 +30,9 @@ closest_entity(
 )
 {
 	typedef
-	fcppt::optional::object<
+	fcppt::optional::reference<
 		typename
-		Container::value_type::type &
+		Container::value_type::type
 	>
 	result_type;
 
@@ -89,7 +90,7 @@ closest_entity(
 
 			ret =
 				result_type(
-					entity.get()
+					entity
 				);
 		}
 	}

@@ -21,6 +21,7 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/optional/alternative.hpp>
 #include <fcppt/optional/bind.hpp>
+#include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/from.hpp>
 #include <fcppt/optional/map.hpp>
 
@@ -89,9 +90,11 @@ sanguis::collision::test_move(
 				return
 					fcppt::optional::alternative(
 						fcppt::optional::bind(
-							fcppt::container::grid::at_optional(
-								_grid,
-								cur_pos
+							fcppt::optional::copy_value(
+								fcppt::container::grid::at_optional(
+									_grid,
+									cur_pos
+								)
 							),
 							[
 								_center,

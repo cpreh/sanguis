@@ -6,7 +6,7 @@
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/optional/dynamic_cast.hpp>
-#include <fcppt/optional/object_impl.hpp>
+#include <fcppt/optional/reference.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -24,8 +24,8 @@ template<
 	typename Entity,
 	typename Object
 >
-fcppt::optional::object<
-	Entity &
+fcppt::optional::reference<
+	Entity
 >
 insert_with_result(
 	Object &_object,

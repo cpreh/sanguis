@@ -5,6 +5,7 @@
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/at_optional.hpp>
 #include <fcppt/container/maybe_back.hpp>
+#include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/from.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -33,9 +34,11 @@ sanguis::client::draw2d::entities::order_function_from_vector(
 			{
 				return
 					fcppt::optional::from(
-						fcppt::container::at_optional(
-							orders,
-							_index.get()
+						fcppt::optional::copy_value(
+							fcppt::container::at_optional(
+								orders,
+								_index.get()
+							)
 						),
 						[
 							orders
@@ -46,7 +49,7 @@ sanguis::client::draw2d::entities::order_function_from_vector(
 									fcppt::container::maybe_back(
 										orders
 									)
-								);
+								).get();
 						}
 					);
 			}

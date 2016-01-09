@@ -6,6 +6,7 @@
 #include <sanguis/server/perks/tree/find_node.hpp>
 #include <sanguis/server/perks/tree/object.hpp>
 #include <sanguis/server/perks/tree/status.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/warning.hpp>
@@ -38,12 +39,14 @@ sanguis::server::perks::tree::choosable(
 			[
 				_player_level
 			](
-				sanguis::server::perks::tree::object const &_node
+				fcppt::reference_wrapper<
+					sanguis::server::perks::tree::object const
+				> const _node
 			)
 			{
 				{
 					sanguis::server::perks::tree::status const &current(
-						_node.value()
+						_node.get().value()
 					);
 
 					if(
@@ -64,18 +67,18 @@ sanguis::server::perks::tree::choosable(
 					sanguis::server::perks::tree::object::const_optional_ref pos(
 						_node
 					);
-					pos.get_unsafe().has_parent();
-					pos = pos.get_unsafe().parent()
+					pos.get_unsafe().get().has_parent();
+					pos = pos.get_unsafe().get().parent()
 				)
 				{
 					sanguis::server::perks::tree::status const &cur_status(
-						pos.get_unsafe().value()
+						pos.get_unsafe().get().value()
 					);
 
 					if(
 						cur_status.required_parent_level().get()
 						>
-						pos.get_unsafe().parent().get_unsafe().value().level().get()
+						pos.get_unsafe().get().parent().get_unsafe().get().value().level().get()
 					)
 						return
 							false;
