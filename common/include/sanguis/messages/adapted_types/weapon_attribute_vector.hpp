@@ -4,7 +4,6 @@
 #include <sanguis/messages/adapted_types/dynamic_len.hpp>
 #include <sanguis/messages/adapted_types/weapon_attribute_vector_fwd.hpp>
 #include <sanguis/messages/server/types/weapon_attribute.hpp>
-#include <alda/bindings/record.hpp>
 
 
 #endif
