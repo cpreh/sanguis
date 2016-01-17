@@ -2,8 +2,8 @@
 #include <sanguis/server/entities/auto_weak_link.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/reference_wrapper_comparison.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_comparison.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/optional/comparison.hpp>
 #include <fcppt/optional/maybe_void.hpp>
@@ -125,7 +125,7 @@ sanguis::server::entities::auto_weak_link::add_me()
 		[
 			this
 		](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				sanguis::server::entities::with_links
 			> const _ref
 		)

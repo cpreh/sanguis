@@ -6,7 +6,7 @@
 #include <sanguis/server/perks/tree/find_node.hpp>
 #include <sanguis/server/perks/tree/object.hpp>
 #include <sanguis/server/perks/tree/status.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/warning.hpp>
@@ -39,7 +39,7 @@ sanguis::server::perks::tree::choosable(
 			[
 				_player_level
 			](
-				fcppt::reference_wrapper<
+				fcppt::reference<
 					sanguis::server::perks::tree::object const
 				> const _node
 			)

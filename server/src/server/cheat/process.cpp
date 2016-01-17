@@ -20,7 +20,7 @@
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/optional/maybe_void.hpp>
@@ -42,7 +42,7 @@ sanguis::server::cheat::process(
 			_cheat_type,
 			&_unicast_callback
 		](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				sanguis::server::environment::object
 			> const _environment
 		)

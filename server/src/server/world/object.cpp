@@ -125,8 +125,8 @@
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
-#include <fcppt/reference_wrapper_to_base.hpp>
+#include <fcppt/reference_impl.hpp>
+#include <fcppt/reference_to_base.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -279,13 +279,13 @@ sanguis::server::world::object::insert(
 				_insert_parameters
 			),
 			[](
-				fcppt::reference_wrapper<
+				fcppt::reference<
 					sanguis::server::entities::simple
 				> const _simple
 			)
 			{
 				return
-					fcppt::reference_wrapper_to_base<
+					fcppt::reference_to_base<
 						sanguis::server::entities::base
 					>(
 						_simple
@@ -365,7 +365,7 @@ sanguis::server::world::object::insert(
 
 				return
 					sanguis::server::entities::optional_base_ref(
-						fcppt::reference_wrapper_to_base<
+						fcppt::reference_to_base<
 							sanguis::server::entities::base
 						>(
 							fcppt::make_ref(

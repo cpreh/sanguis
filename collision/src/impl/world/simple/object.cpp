@@ -45,8 +45,8 @@
 #include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/reference_wrapper_comparison.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_comparison.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/append.hpp>
 #include <fcppt/algorithm/array_init_move.hpp>
@@ -814,7 +814,7 @@ sanguis::collision::impl::world::simple::object::move_body(
 		[
 			&_body
 		](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				sanguis::collision::impl::world::simple::body_list
 			> const _bodies
 		)

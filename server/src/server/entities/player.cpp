@@ -83,7 +83,7 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/optional_error.hpp>
@@ -373,7 +373,7 @@ sanguis::server::entities::player::drop_or_pickup_weapon(
 		[
 			this
 		](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				sanguis::server::entities::pickups::weapon
 			> const _pickup
 		)

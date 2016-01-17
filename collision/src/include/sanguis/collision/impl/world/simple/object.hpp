@@ -23,8 +23,8 @@
 #include <sanguis/collision/world/update_result_fwd.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
-#include <fcppt/reference_wrapper_std_hash.hpp>
+#include <fcppt/reference_impl.hpp>
+#include <fcppt/reference_std_hash.hpp>
 #include <fcppt/container/enum_array_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_set>
@@ -128,7 +128,7 @@ private:
 	);
 
 	typedef
-	fcppt::reference_wrapper<
+	fcppt::reference<
 		sanguis::collision::impl::world::simple::body
 	>
 	body_reference;
@@ -147,7 +147,7 @@ private:
 	body_set_array;
 
 	typedef
-	fcppt::reference_wrapper<
+	fcppt::reference<
 		sanguis::collision::impl::world::simple::ghost
 	>
 	ghost_reference;

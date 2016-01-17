@@ -56,7 +56,7 @@
 #include <sanguis/server/world/parameters.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -241,7 +241,7 @@ sanguis::server::global::context::insert_player(
 			&cur_world,
 			this
 		](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				sanguis::server::entities::player
 			> const _player
 		)
@@ -252,7 +252,7 @@ sanguis::server::global::context::insert_player(
 					&cur_world,
 					_player
 				](
-					fcppt::reference_wrapper<
+					fcppt::reference<
 						sanguis::server::weapons::weapon const
 					> const _weapon
 				)
@@ -299,7 +299,7 @@ sanguis::server::global::context::player_disconnect(
 			);
 		},
 		[](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				sanguis::server::entities::player
 			> const _player
 		)
@@ -661,7 +661,7 @@ sanguis::server::global::context::player_opt(
 				_player_id
 			),
 			[](
-				fcppt::reference_wrapper<
+				fcppt::reference<
 					player_ref
 				> const _ref
 			)

@@ -32,7 +32,7 @@
 #include <fcppt/exception.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/truncation_check.hpp>
@@ -334,7 +334,7 @@ sanguis::tools::animations::main_window::actionSound()
 		[
 			this
 		](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				sanguis::model::animation
 			> const _animation,
 			boost::filesystem::path const &_chosen_sound_file
@@ -455,7 +455,7 @@ sanguis::tools::animations::main_window::selectedAnimationChanged()
 			animation_was_playing,
 			this
 		](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				sanguis::model::animation
 			> const _animation
 		)
@@ -522,7 +522,7 @@ sanguis::tools::animations::main_window::selectedAnimationChanged()
 					animation_was_playing,
 					this
 				](
-					fcppt::reference_wrapper<
+					fcppt::reference<
 						QImage const
 					> const _file
 				)
@@ -583,7 +583,7 @@ sanguis::tools::animations::main_window::delayChanged(
 			_value,
 			this
 		](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				sanguis::model::animation
 			> const _animation
 		)
@@ -609,7 +609,7 @@ sanguis::tools::animations::main_window::soundChanged(
 		[
 			&_name
 		](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				sanguis::model::animation
 			> const _animation
 		)
@@ -952,7 +952,7 @@ sanguis::tools::animations::main_window::current_animation_delay()
 			[
 				this
 			](
-				fcppt::reference_wrapper<
+				fcppt::reference<
 					sanguis::model::animation
 				> const _animation
 			)

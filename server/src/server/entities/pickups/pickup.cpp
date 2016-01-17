@@ -24,7 +24,7 @@
 #include <sanguis/server/entities/pickups/pickup.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -105,7 +105,7 @@ sanguis::server::entities::pickups::pickup::can_collide_with_body(
 			[
 				this
 			](
-				fcppt::reference_wrapper<
+				fcppt::reference<
 					sanguis::server::entities::player const
 				> const _player
 			)

@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <sanguis/client/load/resource/animation/series.hpp>
 #include <sge/texture/const_part_ref_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/reference_wrapper_decl.hpp>
+#include <fcppt/reference_decl.hpp>
 
 
 namespace sanguis
@@ -71,7 +71,7 @@ public:
 	bool
 	ended() const;
 private:
-	fcppt::reference_wrapper<
+	fcppt::reference<
 		sanguis::client::load::resource::animation::series const
 	> series_;
 

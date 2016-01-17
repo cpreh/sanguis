@@ -5,8 +5,8 @@
 #include <sanguis/server/buffs/unique_ptr.hpp>
 #include <sanguis/server/entities/with_buffs_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/reference_wrapper_decl.hpp>
-#include <fcppt/reference_wrapper_std_hash.hpp>
+#include <fcppt/reference_decl.hpp>
+#include <fcppt/reference_std_hash.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>
@@ -41,13 +41,13 @@ public:
 	);
 private:
 	typedef
-	fcppt::reference_wrapper<
+	fcppt::reference<
 		sanguis::server::buffs::buff
 	>
 	buff_reference;
 
 	typedef
-	fcppt::reference_wrapper<
+	fcppt::reference<
 		sanguis::server::entities::with_buffs
 	>
 	with_buffs_reference;

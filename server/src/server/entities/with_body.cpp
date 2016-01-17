@@ -23,7 +23,7 @@
 #include <sanguis/server/entities/ifaces/with_radius.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/math/vector/null.hpp>
@@ -243,7 +243,7 @@ sanguis::server::entities::with_body::can_collide_with(
 			[
 				this
 			](
-				fcppt::reference_wrapper<
+				fcppt::reference<
 					sanguis::server::entities::with_body const
 				> const _entity
 			)
@@ -272,7 +272,7 @@ sanguis::server::entities::with_body::collision(
 		[
 			this
 		](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				sanguis::server::entities::with_body
 			> const _entity
 		)

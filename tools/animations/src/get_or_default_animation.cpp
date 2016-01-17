@@ -8,7 +8,7 @@
 #include <sanguis/model/part_name.hpp>
 #include <sanguis/model/weapon_category_name.hpp>
 #include <sanguis/tools/animations/get_or_default_animation.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/optional/bind.hpp>
 #include <fcppt/optional/copy_value.hpp>
@@ -34,7 +34,7 @@ sanguis::tools::animations::get_or_default_animation(
 					&_weapon_category_name,
 					&_animation_name
 				](
-					fcppt::reference_wrapper<
+					fcppt::reference<
 						sanguis::model::part const
 					> const _part
 				)
@@ -49,7 +49,7 @@ sanguis::tools::animations::get_or_default_animation(
 								[
 									&_animation_name
 								](
-									fcppt::reference_wrapper<
+									fcppt::reference<
 										sanguis::model::weapon_category const
 									> const _weapon_category
 								)

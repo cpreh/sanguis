@@ -3,7 +3,7 @@
 
 #include <sanguis/weapon_type.hpp>
 #include <sge/texture/part_fwd.hpp>
-#include <fcppt/reference_wrapper.hpp>
+#include <fcppt/reference.hpp>
 #include <fcppt/variant/less.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <map>
@@ -22,7 +22,7 @@ namespace hud
 typedef
 std::map<
 	sanguis::weapon_type,
-	fcppt::reference_wrapper<
+	fcppt::reference<
 		sge::texture::part const
 	>
 >

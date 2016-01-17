@@ -7,7 +7,7 @@
 #include <sanguis/client/load/model/weapon_category.hpp>
 #include <sanguis/model/weapon_category_fwd.hpp>
 #include <fcppt/make_cref.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -69,7 +69,7 @@ sanguis::client::load::model::weapon_category::operator[](
 					);
 			},
 			[](
-				fcppt::reference_wrapper<
+				fcppt::reference<
 					sanguis::client::load::model::animation_unique_ptr const
 				> const _animation
 			)

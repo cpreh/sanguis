@@ -16,7 +16,7 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/environment/optional_object_ref.hpp>
 #include <sge/timer/reset_when_expired.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/random/distribution/basic_impl.hpp>
@@ -102,7 +102,7 @@ sanguis::server::entities::projectiles::scatter::update()
 		[
 			this
 		](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				sanguis::server::environment::object
 			> const _environment
 		)

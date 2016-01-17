@@ -35,7 +35,7 @@
 #include <sge/timer/elapsed_and_reset.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/exception.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
@@ -283,7 +283,7 @@ sanguis::server::machine::send_unicast(
 			this,
 			net_id
 		](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				alda::net::buffer::circular_send::object
 			> const _buffer
 		)

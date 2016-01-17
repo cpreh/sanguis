@@ -41,7 +41,7 @@
 #include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -138,7 +138,7 @@ sanguis::server::ai::behavior::attack::start()
 			[
 				this
 			](
-				fcppt::reference_wrapper<
+				fcppt::reference<
 					sanguis::server::entities::with_body
 				> const _target
 			)
@@ -162,7 +162,7 @@ sanguis::server::ai::behavior::attack::update(
 		[
 			this
 		](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				sanguis::server::entities::with_body
 			> const _closer_target
 		)
@@ -182,7 +182,7 @@ sanguis::server::ai::behavior::attack::update(
 			[
 				this
 			](
-				fcppt::reference_wrapper<
+				fcppt::reference<
 					sanguis::server::entities::with_links
 				> const _target
 			)
@@ -284,7 +284,7 @@ sanguis::server::ai::behavior::attack::target_leaves(
 			&_with_body,
 			this
 		](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				sanguis::server::entities::with_links
 			> const _target
 		)
@@ -334,7 +334,7 @@ sanguis::server::ai::behavior::attack::health_changed(
 		[
 			this
 		](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				sanguis::server::entities::with_body
 			> const _result
 		)

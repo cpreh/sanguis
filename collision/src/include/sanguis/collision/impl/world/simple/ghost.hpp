@@ -15,8 +15,8 @@
 #include <sanguis/collision/world/optional_body_enter_fwd.hpp>
 #include <sanguis/collision/world/optional_body_exit_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
-#include <fcppt/reference_wrapper_std_hash.hpp>
+#include <fcppt/reference_impl.hpp>
+#include <fcppt/reference_std_hash.hpp>
 #include <fcppt/preprocessor/warn_unused_result.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_map>
@@ -116,7 +116,7 @@ private:
 	};
 
 	typedef
-	fcppt::reference_wrapper<
+	fcppt::reference<
 		sanguis::collision::impl::world::simple::body const
 	>
 	const_body_ref;

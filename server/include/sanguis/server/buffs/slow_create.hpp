@@ -9,7 +9,7 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/optional/map.hpp>
@@ -59,7 +59,7 @@ slow_create(
 						[
 							_factor
 						](
-							fcppt::reference_wrapper<
+							fcppt::reference<
 								sanguis::server::entities::with_velocity
 							> const _with_velocity
 						)

@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_PICKUPS_WEAPON_REF_HPP_INCLUDED
 
 #include <sanguis/server/entities/pickups/weapon_fwd.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 
 
 namespace sanguis
@@ -15,7 +15,7 @@ namespace pickups
 {
 
 typedef
-fcppt::reference_wrapper<
+fcppt::reference<
 	sanguis::server::entities::pickups::weapon
 >
 weapon_ref;

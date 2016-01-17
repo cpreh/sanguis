@@ -11,7 +11,7 @@
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/collision/ghost_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/reference_wrapper_decl.hpp>
+#include <fcppt/reference_decl.hpp>
 #include <fcppt/optional/object_decl.hpp>
 
 
@@ -62,7 +62,7 @@ public:
 	);
 private:
 	typedef
-	fcppt::reference_wrapper<
+	fcppt::reference<
 		sanguis::collision::world::ghost_base
 	>
 	ghost_base_ref;

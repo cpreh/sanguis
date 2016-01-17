@@ -6,7 +6,7 @@
 #include <sanguis/client/load/resource/textures_fwd.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/reference_wrapper_decl.hpp>
+#include <fcppt/reference_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <map>
 #include <fcppt/config/external_end.hpp>
@@ -43,7 +43,7 @@ private:
 	typedef
 	std::map<
 		sanguis::aura_type,
-		fcppt::reference_wrapper<
+		fcppt::reference<
 			sge::texture::part const
 		>
 	>

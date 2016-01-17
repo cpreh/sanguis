@@ -22,7 +22,7 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/repeat.hpp>
@@ -70,7 +70,7 @@ sanguis::server::entities::enemies::skills::scatter::update(
 			this,
 			&_entity
 		](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				sanguis::server::environment::object
 			> const _environment
 		)

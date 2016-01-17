@@ -3,7 +3,7 @@
 
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 
 
 namespace sanguis
@@ -25,7 +25,7 @@ void
 (*)(
 	sanguis::random_generator &,
 	sanguis::server::entities::enemies::difficulty,
-	fcppt::reference_wrapper<
+	fcppt::reference<
 		Parameters
 	>
 );

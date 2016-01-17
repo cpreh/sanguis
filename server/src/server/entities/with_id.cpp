@@ -2,7 +2,7 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/environment/object.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 
 
@@ -41,7 +41,7 @@ sanguis::server::entities::with_id::transfer_from_world()
 		[
 			this
 		](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				sanguis::server::environment::object
 			> const _environment
 		)

@@ -5,7 +5,7 @@
 #include <sanguis/client/load/resource/textures.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <fcppt/make_cref.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/filesystem/stem.hpp>

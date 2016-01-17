@@ -24,7 +24,7 @@
 #include <sge/texture/const_part_ref.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/diff.hpp>
 #include <fcppt/math/vector/dim.hpp>
@@ -245,7 +245,7 @@ sanguis::client::draw2d::entities::model::part::load_animation(
 					this,
 					loop_method
 				](
-					fcppt::reference_wrapper<
+					fcppt::reference<
 						sge::audio::buffer
 					> const _buffer
 				)

@@ -30,7 +30,7 @@
 #include <fcppt/const.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/algorithm/array_init_move.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/optional_error.hpp>
@@ -145,7 +145,7 @@ sanguis::server::entities::with_weapon::primary_weapon_type() const
 		fcppt::optional::map(
 			this->primary_weapon(),
 			[](
-				fcppt::reference_wrapper<
+				fcppt::reference<
 					sanguis::server::weapons::weapon const
 				> const _primary_weapon
 			)
@@ -272,7 +272,7 @@ sanguis::server::entities::with_weapon::in_range(
 				false
 			),
 			[](
-				fcppt::reference_wrapper<
+				fcppt::reference<
 					sanguis::server::weapons::weapon
 				> const _weapon
 			)
@@ -297,7 +297,7 @@ sanguis::server::entities::with_weapon::use_weapon(
 			_use,
 			this
 		](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				sanguis::server::weapons::weapon
 			> const _weapon
 		)
@@ -324,7 +324,7 @@ sanguis::server::entities::with_weapon::reload(
 			_is_primary
 		),
 		[](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				sanguis::server::weapons::weapon
 			> const _weapon
 		)
@@ -400,7 +400,7 @@ sanguis::server::entities::with_weapon::primary_weapon() const
 				primary_weapon_
 			),
 			[](
-				fcppt::reference_wrapper<
+				fcppt::reference<
 					sanguis::server::weapons::weapon
 				> const _weapon
 			)
@@ -422,7 +422,7 @@ sanguis::server::entities::with_weapon::secondary_weapon() const
 				secondary_weapon_
 			),
 			[](
-				fcppt::reference_wrapper<
+				fcppt::reference<
 					sanguis::server::weapons::weapon
 				> const _weapon
 			)
@@ -601,7 +601,7 @@ sanguis::server::entities::with_weapon::update_weapon(
 	fcppt::optional::maybe_void(
 		_opt_weapon,
 		[](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				sanguis::server::weapons::weapon
 			> const _weapon
 		)
@@ -622,7 +622,7 @@ sanguis::server::entities::with_weapon::tick_weapon(
 		[
 			_duration
 		](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				sanguis::server::weapons::weapon
 			> const _weapon
 		)
@@ -645,7 +645,7 @@ sanguis::server::entities::with_weapon::weapon_changed(
 			_is_primary,
 			this
 		](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				sanguis::server::environment::object
 			> const _environment
 		)

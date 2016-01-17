@@ -7,8 +7,8 @@
 #include <sanguis/tiles/area_container_ref.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/reference_wrapper_comparison.hpp>
-#include <fcppt/reference_wrapper_decl.hpp>
+#include <fcppt/reference_comparison.hpp>
+#include <fcppt/reference_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <map>
@@ -53,7 +53,7 @@ public:
 		sanguis::tiles::area_container_ref
 	);
 private:
-	fcppt::reference_wrapper<
+	fcppt::reference<
 		sge::texture::part const
 	> texture_;
 

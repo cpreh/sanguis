@@ -33,8 +33,8 @@
 #include <sanguis/server/perks/tree/container.hpp>
 #include <sanguis/server/weapons/weapon_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/reference_wrapper_comparison.hpp>
-#include <fcppt/reference_wrapper_std_hash.hpp>
+#include <fcppt/reference_comparison.hpp>
+#include <fcppt/reference_std_hash.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <set>
 #include <fcppt/config/external_end.hpp>

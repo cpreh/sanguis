@@ -2,8 +2,8 @@
 #define SANGUIS_SERVER_AI_ENTITY_SET_HPP_INCLUDED
 
 #include <sanguis/server/entities/with_body_ref.hpp>
-#include <fcppt/reference_wrapper_comparison.hpp>
-#include <fcppt/reference_wrapper_std_hash.hpp>
+#include <fcppt/reference_comparison.hpp>
+#include <fcppt/reference_std_hash.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_set>
 #include <fcppt/config/external_end.hpp>

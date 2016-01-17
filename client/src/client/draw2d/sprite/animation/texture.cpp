@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <sanguis/client/load/resource/animation/series.hpp>
 #include <sge/texture/const_part_ref.hpp>
 #include <fcppt/make_cref.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <iterator>

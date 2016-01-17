@@ -5,7 +5,7 @@
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/weapons/spread_radius.hpp>
 #include <sanguis/server/weapons/modifiers/random_increase.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <cmath>
@@ -31,7 +31,7 @@ struct spread_radius
 	make(
 		sanguis::random_generator &_random_generator,
 		sanguis::server::entities::enemies::difficulty const _difficulty,
-		fcppt::reference_wrapper<
+		fcppt::reference<
 			Parameters
 		> const _parameters
 	)

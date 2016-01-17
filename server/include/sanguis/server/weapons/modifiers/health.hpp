@@ -5,7 +5,7 @@
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/weapons/modifiers/random_increase.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 
 
 namespace sanguis
@@ -27,7 +27,7 @@ struct health
 	make(
 		sanguis::random_generator &_random_generator,
 		sanguis::server::entities::enemies::difficulty const _difficulty,
-		fcppt::reference_wrapper<
+		fcppt::reference<
 			Parameters
 		> const _parameters
 	)

@@ -8,7 +8,7 @@
 #include <sanguis/server/auras/update_sight.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_id.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 
@@ -59,7 +59,7 @@ sanguis::server::auras::update_sight::enter(
 			this,
 			_created
 		](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				sanguis::server::entities::with_id const
 			> const _with_id
 		)
@@ -86,7 +86,7 @@ sanguis::server::auras::update_sight::leave(
 		[
 			this
 		](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				sanguis::server::entities::with_id const
 			> const _with_id
 		)

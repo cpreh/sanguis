@@ -4,7 +4,7 @@
 #include <sanguis/collision/symbol.hpp>
 #include <sanguis/collision/world/body_base_fwd.hpp>
 #include <sanguis/collision/world/body_collision_fwd.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 
 
 namespace sanguis
@@ -31,7 +31,7 @@ public:
 	body2() const;
 private:
 	typedef
-	fcppt::reference_wrapper<
+	fcppt::reference<
 		sanguis::collision::world::body_base
 	>
 	body_ref;

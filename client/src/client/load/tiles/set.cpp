@@ -4,7 +4,7 @@
 #include <sanguis/client/load/tiles/texture_container.hpp>
 #include <sanguis/tiles/area_container_ref.hpp>
 #include <sge/texture/part.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>

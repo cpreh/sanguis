@@ -4,7 +4,7 @@
 #include <sge/parse/json/find_member.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/string.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/optional/map.hpp>
 
@@ -23,7 +23,7 @@ sanguis::model::impl::deserialize::animation_sound(
 				FCPPT_TEXT("sound")
 			),
 			[](
-				fcppt::reference_wrapper<
+				fcppt::reference<
 					sge::parse::json::string const
 				> const &_value
 			)

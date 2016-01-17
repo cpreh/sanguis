@@ -12,7 +12,7 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_health.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/optional/map.hpp>
@@ -68,7 +68,7 @@ burn_create(
 							_damage,
 							_damage_values
 						](
-							fcppt::reference_wrapper<
+							fcppt::reference<
 								sanguis::server::entities::with_health
 							> const _with_health
 						)

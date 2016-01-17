@@ -10,7 +10,7 @@
 #include <sanguis/server/collision/ghost.hpp>
 #include <sanguis/server/collision/to_center.hpp>
 #include <sanguis/server/collision/to_radius.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/optional/assign.hpp>

@@ -3,8 +3,8 @@
 #include <sanguis/server/buffs/unique_ptr.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/reference_wrapper_comparison.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_comparison.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>

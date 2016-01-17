@@ -5,7 +5,7 @@
 #include <sanguis/collision/world/body_base_fwd.hpp>
 #include <sanguis/collision/world/body_exit_fwd.hpp>
 #include <sanguis/collision/world/ghost_base_fwd.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 
 
 namespace sanguis
@@ -32,7 +32,7 @@ public:
 	ghost() const;
 private:
 	typedef
-	fcppt::reference_wrapper<
+	fcppt::reference<
 		sanguis::collision::world::body_base
 	>
 	body_ref;
@@ -40,7 +40,7 @@ private:
 	body_ref body_;
 
 	typedef
-	fcppt::reference_wrapper<
+	fcppt::reference<
 		sanguis::collision::world::ghost_base
 	>
 	ghost_ref;

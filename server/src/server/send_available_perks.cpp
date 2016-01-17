@@ -15,7 +15,7 @@
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/perks/tree/object.hpp>
 #include <sanguis/server/perks/tree/status.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/algorithm/map_concat.hpp>
 #include <fcppt/container/tree/pre_order.hpp>
@@ -70,7 +70,7 @@ sanguis::server::send_available_perks(
 										fcppt::optional::map(
 											_inner.parent(),
 											[](
-												fcppt::reference_wrapper<
+												fcppt::reference<
 													sanguis::server::perks::tree::object const
 												> const _node
 											)

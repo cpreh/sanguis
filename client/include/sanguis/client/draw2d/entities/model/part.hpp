@@ -14,7 +14,7 @@
 #include <sanguis/client/load/model/part_fwd.hpp>
 #include <sge/texture/const_part_ref_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/reference_wrapper_decl.hpp>
+#include <fcppt/reference_decl.hpp>
 
 
 namespace sanguis
@@ -90,11 +90,11 @@ private:
 		sanguis::client::load::animation_type
 	);
 
-	fcppt::reference_wrapper<
+	fcppt::reference<
 		sanguis::diff_clock const
 	> diff_clock_;
 
-	fcppt::reference_wrapper<
+	fcppt::reference<
 		sanguis::client::sound_manager
 	> sound_manager_;
 
@@ -102,7 +102,7 @@ private:
 
 	sanguis::client::draw2d::entities::model::desired_orientation desired_orientation_;
 
-	fcppt::reference_wrapper<
+	fcppt::reference<
 		sanguis::client::load::model::part const
 	> load_part_;
 

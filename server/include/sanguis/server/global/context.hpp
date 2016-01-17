@@ -25,7 +25,7 @@
 #include <sanguis/server/global/world_map.hpp>
 #include <sanguis/server/world/context.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/reference_wrapper_decl.hpp>
+#include <fcppt/reference_decl.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_map>
@@ -192,7 +192,7 @@ private:
 	sanguis::server::console &console_;
 
 	typedef
-	fcppt::reference_wrapper<
+	fcppt::reference<
 		sanguis::server::entities::player
 	>
 	player_ref;

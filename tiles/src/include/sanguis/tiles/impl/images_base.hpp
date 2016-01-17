@@ -15,7 +15,7 @@
 #include <sanguis/tiles/impl/orientation_to_string.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/optional/maybe.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
@@ -103,7 +103,7 @@ images_base(
 				&cur_set,
 				&_error_message
 			](
-				fcppt::reference_wrapper<
+				fcppt::reference<
 					sanguis::tiles::area_container const
 				> const _images
 			)

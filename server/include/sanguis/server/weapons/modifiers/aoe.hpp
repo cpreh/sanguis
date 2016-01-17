@@ -6,7 +6,7 @@
 #include <sanguis/server/weapons/aoe.hpp>
 #include <sanguis/server/weapons/modifiers/random_increase.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <fcppt/config/external_end.hpp>
@@ -31,7 +31,7 @@ struct aoe
 	make(
 		sanguis::random_generator &_random_generator,
 		sanguis::server::entities::enemies::difficulty const _difficulty,
-		fcppt::reference_wrapper<
+		fcppt::reference<
 			Parameters
 		> const _parameters
 	)
