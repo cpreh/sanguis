@@ -4,6 +4,7 @@
 #include <sanguis/net/message_header.hpp>
 #include <sanguis/net/serialize_message_function.hpp>
 #include <alda/message/base_decl.hpp>
+#include <alda/raw/buffer.hpp>
 #include <alda/net/value_type.hpp>
 #include <alda/serialization/endianness.hpp>
 #include <fcppt/assert/pre.hpp>
@@ -48,7 +49,10 @@ serialize_impl(
 		fcppt::cast::truncation_check<
 			sanguis::net::message_header
 		>(
-			_message.size()
+			// FIXME: Use alda's serialization
+			_message.to_buffer().size()
+			+
+			1u // message type
 		)
 	);
 

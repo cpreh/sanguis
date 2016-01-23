@@ -3,7 +3,7 @@
 
 #include <sanguis/messages/server/types/make_message_id_fwd.hpp>
 #include <sanguis/messages/server/types/message.hpp>
-#include <alda/message/make_class_fwd.hpp>
+#include <alda/message/record_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -17,12 +17,11 @@ namespace server
 {
 
 typedef
-alda::message::make_class<
-	boost::mpl::vector1<
-		sanguis::messages::server::types::make_message_id<
-			sanguis::messages::server::types::message::pause
-		>
-	>
+alda::message::record<
+	sanguis::messages::server::types::make_message_id<
+		sanguis::messages::server::types::message::pause
+	>,
+	boost::mpl::vector0<>
 >
 pause;
 

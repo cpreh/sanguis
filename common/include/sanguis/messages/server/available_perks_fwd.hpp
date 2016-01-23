@@ -7,7 +7,7 @@
 #include <sanguis/messages/roles/remaining_perk_levels.hpp>
 #include <sanguis/messages/server/types/make_message_id_fwd.hpp>
 #include <sanguis/messages/server/types/message.hpp>
-#include <alda/message/make_class_fwd.hpp>
+#include <alda/message/record_fwd.hpp>
 #include <majutsu/role_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
@@ -22,11 +22,11 @@ namespace server
 {
 
 typedef
-alda::message::make_class<
-	boost::mpl::vector3<
-		sanguis::messages::server::types::make_message_id<
-			sanguis::messages::server::types::message::available_perks
-		>,
+alda::message::record<
+	sanguis::messages::server::types::make_message_id<
+		sanguis::messages::server::types::message::available_perks
+	>,
+	boost::mpl::vector2<
 		majutsu::role<
 			sanguis::messages::adapted_types::perk_tree,
 			sanguis::messages::roles::perk_tree

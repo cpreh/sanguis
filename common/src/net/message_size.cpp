@@ -10,5 +10,6 @@ sanguis::net::message_size(
 {
 	return
 		_body_size
-		+ sanguis::net::message_header_size::value;
+		+
+		sanguis::net::message_header_size::value;
 }

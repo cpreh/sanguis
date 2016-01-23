@@ -3,7 +3,10 @@
 
 #include <sanguis/messages/client/types/make_message_id_fwd.hpp>
 #include <sanguis/messages/client/types/message.hpp>
-#include <alda/message/make_class_fwd.hpp>
+#include <alda/message/record_fwd.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/mpl/vector/vector10.hpp>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -14,10 +17,11 @@ namespace client
 {
 
 typedef
-alda::message::make_class<
+alda::message::record<
 	sanguis::messages::client::types::make_message_id<
 		sanguis::messages::client::types::message::change_world
-	>
+	>,
+	boost::mpl::vector0<>
 >
 change_world;
 

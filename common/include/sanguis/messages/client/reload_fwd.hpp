@@ -5,7 +5,7 @@
 #include <sanguis/messages/client/types/make_message_id_fwd.hpp>
 #include <sanguis/messages/client/types/message.hpp>
 #include <sanguis/messages/roles/is_primary_weapon.hpp>
-#include <alda/message/make_class_fwd.hpp>
+#include <alda/message/record_fwd.hpp>
 #include <majutsu/role_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
@@ -20,11 +20,11 @@ namespace client
 {
 
 typedef
-alda::message::make_class<
-	boost::mpl::vector2<
-		sanguis::messages::client::types::make_message_id<
-			sanguis::messages::client::types::message::reload
-		>,
+alda::message::record<
+	sanguis::messages::client::types::make_message_id<
+		sanguis::messages::client::types::message::reload
+	>,
+	boost::mpl::vector1<
 		majutsu::role<
 			sanguis::messages::adapted_types::is_primary_weapon,
 			sanguis::messages::roles::is_primary_weapon

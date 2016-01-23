@@ -5,7 +5,7 @@
 #include <sanguis/messages/adapted_types/weapon_attribute_type.hpp>
 #include <sanguis/messages/adapted_types/weapon_attribute_value.hpp>
 #include <sanguis/messages/server/types/weapon_attribute_fwd.hpp>
-#include <alda/message/make_class.hpp>
+#include <alda/raw/record_variadic.hpp>
 #include <majutsu/role.hpp>
 
 

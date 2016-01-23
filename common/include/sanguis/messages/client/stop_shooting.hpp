@@ -4,7 +4,7 @@
 #include <sanguis/messages/adapted_types/is_primary_weapon.hpp>
 #include <sanguis/messages/client/stop_shooting_fwd.hpp>
 #include <sanguis/messages/client/types/make_message_id.hpp>
-#include <alda/message/make_class.hpp>
+#include <alda/message/record.hpp>
 #include <majutsu/role.hpp>
 
 

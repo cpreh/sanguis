@@ -34,6 +34,8 @@ serialize_to_circular_buffer(
 	> const &_serialize_message
 )
 {
+	// FIXME: Use alda's serialization
+/*
 	FCPPT_ASSERT_PRE_MESSAGE(
 		_buffer.get().capacity()
 		>=
@@ -46,7 +48,7 @@ serialize_to_circular_buffer(
 			)
 			% _message.size()
 		).str()
-	);
+	);*/
 
 	typedef
 	boost::iostreams::stream_buffer<

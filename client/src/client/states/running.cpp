@@ -65,8 +65,6 @@
 #include <sanguis/messages/server/remove_weapon.hpp>
 #include <sanguis/messages/server/slowdown.hpp>
 #include <sanguis/messages/server/unpause.hpp>
-#include <alda/serialization/load/optional.hpp>
-#include <alda/serialization/load/static_size.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <sge/console/object.hpp>
 #include <sge/font/from_fcppt_string.hpp>

@@ -7,7 +7,7 @@
 #include <sanguis/messages/roles/level.hpp>
 #include <sanguis/messages/server/types/make_message_id_fwd.hpp>
 #include <sanguis/messages/server/types/message.hpp>
-#include <alda/message/make_class_fwd.hpp>
+#include <alda/message/record_fwd.hpp>
 #include <majutsu/role_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
@@ -22,11 +22,11 @@ namespace server
 {
 
 typedef
-alda::message::make_class<
-	boost::mpl::vector3<
-		sanguis::messages::server::types::make_message_id<
-			sanguis::messages::server::types::message::level_up
-		>,
+alda::message::record<
+	sanguis::messages::server::types::make_message_id<
+		sanguis::messages::server::types::message::level_up
+	>,
+	boost::mpl::vector2<
 		majutsu::role<
 			sanguis::messages::adapted_types::level,
 			sanguis::messages::roles::level

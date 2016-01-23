@@ -3,7 +3,7 @@
 
 #include <sanguis/messages/client/unpause_fwd.hpp>
 #include <sanguis/messages/client/types/make_message_id.hpp>
-#include <alda/message/make_class.hpp>
+#include <alda/message/record.hpp>
 
 
 #endif

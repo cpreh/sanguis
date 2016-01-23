@@ -33,8 +33,6 @@
 #include <sanguis/messages/server/available_perks.hpp>
 #include <sanguis/messages/server/level_up.hpp>
 #include <sanguis/messages/server/remove_id.hpp>
-#include <alda/serialization/load/optional.hpp>
-#include <alda/serialization/load/static_size.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>

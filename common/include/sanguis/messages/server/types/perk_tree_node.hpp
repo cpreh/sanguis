@@ -6,7 +6,7 @@
 #include <sanguis/messages/adapted_types/level.hpp>
 #include <sanguis/messages/server/types/perk_tree_node_fwd.hpp>
 #include <alda/bindings/optional.hpp>
-#include <alda/message/make_class.hpp>
+#include <alda/raw/record_variadic.hpp>
 #include <majutsu/role.hpp>
 
 

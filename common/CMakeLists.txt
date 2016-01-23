@@ -337,8 +337,8 @@ set(
 	include/sanguis/messages/server/parts/add_with_health_fwd.hpp
 	include/sanguis/messages/server/parts/add_with_weapon.hpp
 	include/sanguis/messages/server/parts/add_with_weapon_fwd.hpp
-	include/sanguis/messages/server/parts/entity_message.hpp
-	include/sanguis/messages/server/parts/entity_message_fwd.hpp
+	include/sanguis/messages/server/parts/entity_id.hpp
+	include/sanguis/messages/server/parts/entity_id_fwd.hpp
 	include/sanguis/messages/server/parts/speed.hpp
 	include/sanguis/messages/server/parts/speed_fwd.hpp
 	include/sanguis/messages/server/parts/weapon_description.hpp

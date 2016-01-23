@@ -159,10 +159,12 @@ deserialize(
 		)
 	);
 
+	// FIXME
+	/*
 	FCPPT_ASSERT_THROW(
 		ret->size() == message_size,
 		sanguis::exception
-	);
+	);*/
 
 	alda::net::size_type const bytes_read(
 		fcppt::cast::size<
@@ -178,13 +180,14 @@ deserialize(
 		)
 	);
 
+/*
 	FCPPT_ASSERT_THROW(
 		bytes_read
 		==
 		sanguis::net::message_header_size::value
 		+ ret->size(),
 		sanguis::exception
-	);
+	);*/
 
 	_data.erase(
 		bytes_read

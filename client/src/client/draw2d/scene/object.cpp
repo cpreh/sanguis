@@ -145,8 +145,6 @@
 #include <sanguis/messages/server/weapon_status.hpp>
 #include <sanguis/messages/server/call/object.hpp>
 #include <sanguis/messages/types/level.hpp>
-#include <alda/serialization/load/optional.hpp>
-#include <alda/serialization/load/static_size.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/object_fwd.hpp>
@@ -170,7 +168,6 @@
 #include <sge/sprite/state/scoped.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <majutsu/get.hpp>
-#include <majutsu/init_types.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_enum_range.hpp>

@@ -5,8 +5,9 @@
 #include <sanguis/messages/adapted_types/enum.hpp>
 #include <sanguis/messages/server/add_pickup_fwd.hpp>
 #include <sanguis/messages/server/parts/add_elements_base.hpp>
-#include <sanguis/messages/server/parts/entity_message.hpp>
-#include <alda/message/make_class.hpp>
+#include <sanguis/messages/server/parts/entity_id.hpp>
+#include <sanguis/messages/server/types/make_message_id.hpp>
+#include <alda/message/record.hpp>
 #include <majutsu/role.hpp>
 
 
