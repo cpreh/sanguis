@@ -1,5 +1,4 @@
 #include <sanguis/messages/server/base_fwd.hpp>
-#include <sanguis/messages/server/serialization/serialize.hpp>
 #include <sanguis/net/data_buffer_fwd.hpp>
 #include <sanguis/net/serialize_to_data_buffer.hpp>
 #include <sanguis/server/net/serialize_to_data_buffer.hpp>
@@ -14,7 +13,6 @@ sanguis::server::net::serialize_to_data_buffer(
 	return
 		sanguis::net::serialize_to_data_buffer(
 			_message,
-			_buffer,
-			&sanguis::messages::server::serialization::serialize
+			_buffer
 		);
 }

@@ -3,7 +3,6 @@
 
 #include <sanguis/net/data_buffer.hpp>
 #include <sanguis/net/serialize_impl.hpp>
-#include <sanguis/net/serialize_message_function.hpp>
 #include <alda/message/base_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/iostreams/stream_buffer.hpp>
@@ -24,10 +23,7 @@ serialize_to_data_buffer(
 	alda::message::base<
 		AldaType
 	> const &_message,
-	sanguis::net::data_buffer &_buffer,
-	sanguis::net::serialize_message_function<
-		AldaType
-	> const &_serialize_message
+	sanguis::net::data_buffer &_buffer
 )
 {
 	typedef boost::iostreams::back_insert_device<
@@ -45,8 +41,7 @@ serialize_to_data_buffer(
 	return
 		sanguis::net::serialize_impl(
 			_message,
-			stream,
-			_serialize_message
+			stream
 		);
 }
 

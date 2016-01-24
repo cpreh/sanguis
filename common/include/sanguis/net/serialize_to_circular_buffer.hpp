@@ -3,7 +3,6 @@
 
 #include <sanguis/net/message_size.hpp>
 #include <sanguis/net/serialize_impl.hpp>
-#include <sanguis/net/serialize_message_function.hpp>
 #include <alda/message/base_decl.hpp>
 #include <alda/net/buffer/circular_send/object.hpp>
 #include <alda/net/buffer/circular_send/sink.hpp>
@@ -28,14 +27,9 @@ serialize_to_circular_buffer(
 	alda::message::base<
 		AldaType
 	> const &_message,
-	alda::net::buffer::circular_send::object &_buffer,
-	sanguis::net::serialize_message_function<
-		AldaType
-	> const &_serialize_message
+	alda::net::buffer::circular_send::object &_buffer
 )
 {
-	// FIXME: Use alda's serialization
-/*
 	FCPPT_ASSERT_PRE_MESSAGE(
 		_buffer.get().capacity()
 		>=
@@ -48,7 +42,7 @@ serialize_to_circular_buffer(
 			)
 			% _message.size()
 		).str()
-	);*/
+	);
 
 	typedef
 	boost::iostreams::stream_buffer<
@@ -63,8 +57,7 @@ serialize_to_circular_buffer(
 	return
 		sanguis::net::serialize_impl(
 			_message,
-			stream,
-			_serialize_message
+			stream
 		);
 }
 

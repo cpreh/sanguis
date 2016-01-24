@@ -180,7 +180,6 @@ set(
 	include/sanguis/messages/client/serialization/deserialize.hpp
 	include/sanguis/messages/client/serialization/global_context.hpp
 	include/sanguis/messages/client/serialization/instantiate_message.hpp
-	include/sanguis/messages/client/serialization/serialize.hpp
 	include/sanguis/messages/client/shared_ptr.hpp
 	include/sanguis/messages/client/start_shooting.hpp
 	include/sanguis/messages/client/start_shooting_fwd.hpp
@@ -361,7 +360,6 @@ set(
 	include/sanguis/messages/server/serialization/deserialize.hpp
 	include/sanguis/messages/server/serialization/global_context.hpp
 	include/sanguis/messages/server/serialization/instantiate_message.hpp
-	include/sanguis/messages/server/serialization/serialize.hpp
 	include/sanguis/messages/server/shared_ptr.hpp
 	include/sanguis/messages/server/slowdown.hpp
 	include/sanguis/messages/server/slowdown_fwd.hpp
@@ -411,7 +409,6 @@ set(
 	include/sanguis/net/receive_buffer_size.hpp
 	include/sanguis/net/send_buffer_size.hpp
 	include/sanguis/net/serialize_impl.hpp
-	include/sanguis/net/serialize_message_function.hpp
 	include/sanguis/net/serialize_to_circular_buffer.hpp
 	include/sanguis/net/serialize_to_data_buffer.hpp
 	include/sanguis/net/stream_exceptions.hpp
@@ -519,7 +516,6 @@ set(
 	src/messages/client/serialization/deserialize.cpp
 	src/messages/client/serialization/details.cpp
 	src/messages/client/serialization/global_context.cpp
-	src/messages/client/serialization/serialize.cpp
 	src/messages/client/start_shooting.cpp
 	src/messages/client/stop_shooting.cpp
 	src/messages/client/unpause.cpp
@@ -566,7 +562,6 @@ set(
 	src/messages/server/serialization/deserialize.cpp
 	src/messages/server/serialization/details.cpp
 	src/messages/server/serialization/global_context.cpp
-	src/messages/server/serialization/serialize.cpp
 	src/messages/server/slowdown.cpp
 	src/messages/server/speed.cpp
 	src/messages/server/unpause.cpp
