@@ -2,8 +2,9 @@
 #define SANGUIS_NET_SERIALIZE_TO_DATA_BUFFER_HPP_INCLUDED
 
 #include <sanguis/net/data_buffer.hpp>
-#include <sanguis/net/serialize_impl.hpp>
+#include <sanguis/net/message_header.hpp>
 #include <alda/message/base_fwd.hpp>
+#include <alda/serialization/length/serialize.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/iostreams/stream_buffer.hpp>
 #include <boost/iostreams/device/back_inserter.hpp>
@@ -18,7 +19,7 @@ namespace net
 template<
 	typename AldaType
 >
-bool
+void
 serialize_to_data_buffer(
 	alda::message::base<
 		AldaType
@@ -26,23 +27,28 @@ serialize_to_data_buffer(
 	sanguis::net::data_buffer &_buffer
 )
 {
-	typedef boost::iostreams::back_insert_device<
+	typedef
+	boost::iostreams::back_insert_device<
 		sanguis::net::data_buffer
-	> sink;
+	>
+	sink;
 
-	typedef boost::iostreams::stream_buffer<
+	boost::iostreams::stream_buffer<
 		sink
-	> stream_buf;
-
-	stream_buf stream(
+	> stream_buf(
 		_buffer
 	);
 
-	return
-		sanguis::net::serialize_impl(
-			_message,
-			stream
-		);
+	alda::serialization::ostream stream(
+		&stream_buf
+	);
+
+	alda::serialization::length::serialize<
+		sanguis::net::message_header
+	>(
+		stream,
+		_message
+	);
 }
 
 }

@@ -177,7 +177,6 @@ set(
 	include/sanguis/messages/client/reload.hpp
 	include/sanguis/messages/client/reload_fwd.hpp
 	include/sanguis/messages/client/serialization/context_fwd.hpp
-	include/sanguis/messages/client/serialization/deserialize.hpp
 	include/sanguis/messages/client/serialization/global_context.hpp
 	include/sanguis/messages/client/serialization/instantiate_message.hpp
 	include/sanguis/messages/client/shared_ptr.hpp
@@ -357,7 +356,6 @@ set(
 	include/sanguis/messages/server/rotate.hpp
 	include/sanguis/messages/server/rotate_fwd.hpp
 	include/sanguis/messages/server/serialization/context_fwd.hpp
-	include/sanguis/messages/server/serialization/deserialize.hpp
 	include/sanguis/messages/server/serialization/global_context.hpp
 	include/sanguis/messages/server/serialization/instantiate_message.hpp
 	include/sanguis/messages/server/shared_ptr.hpp
@@ -402,16 +400,11 @@ set(
 	include/sanguis/net/data_buffer.hpp
 	include/sanguis/net/data_buffer_fwd.hpp
 	include/sanguis/net/deserialize.hpp
-	include/sanguis/net/deserialize_message_function.hpp
 	include/sanguis/net/message_header.hpp
-	include/sanguis/net/message_header_size.hpp
-	include/sanguis/net/message_size.hpp
 	include/sanguis/net/receive_buffer_size.hpp
 	include/sanguis/net/send_buffer_size.hpp
-	include/sanguis/net/serialize_impl.hpp
 	include/sanguis/net/serialize_to_circular_buffer.hpp
 	include/sanguis/net/serialize_to_data_buffer.hpp
-	include/sanguis/net/stream_exceptions.hpp
 	include/sanguis/optional_aura_type.hpp
 	include/sanguis/optional_aura_type_fwd.hpp
 	include/sanguis/optional_entity_id.hpp
@@ -513,7 +506,6 @@ set(
 	src/messages/client/pause.cpp
 	src/messages/client/reload.cpp
 	src/messages/client/serialization/context.cpp
-	src/messages/client/serialization/deserialize.cpp
 	src/messages/client/serialization/details.cpp
 	src/messages/client/serialization/global_context.cpp
 	src/messages/client/start_shooting.cpp
@@ -559,7 +551,6 @@ set(
 	src/messages/server/remove_weapon.cpp
 	src/messages/server/rotate.cpp
 	src/messages/server/serialization/context.cpp
-	src/messages/server/serialization/deserialize.cpp
 	src/messages/server/serialization/details.cpp
 	src/messages/server/serialization/global_context.cpp
 	src/messages/server/slowdown.cpp
@@ -567,7 +558,6 @@ set(
 	src/messages/server/unpause.cpp
 	src/messages/server/weapon_status.cpp
 	src/net/append_to_circular_buffer.cpp
-	src/net/message_size.cpp
 	src/net/receive_buffer_size.cpp
 	src/net/send_buffer_size.cpp
 	src/random_seed.cpp

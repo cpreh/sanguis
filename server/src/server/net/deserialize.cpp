@@ -1,6 +1,6 @@
 #include <sanguis/messages/client/base.hpp>
 #include <sanguis/messages/client/optional_unique_ptr.hpp>
-#include <sanguis/messages/client/serialization/deserialize.hpp>
+#include <sanguis/messages/client/serialization/global_context.hpp>
 #include <sanguis/net/deserialize.hpp>
 #include <sanguis/server/net/deserialize.hpp>
 #include <alda/net/buffer/circular_receive/object_fwd.hpp>
@@ -13,7 +13,7 @@ sanguis::server::net::deserialize(
 {
 	return
 		sanguis::net::deserialize(
-			_buffer,
-			&sanguis::messages::client::serialization::deserialize
+			sanguis::messages::client::serialization::global_context(),
+			_buffer
 		);
 }

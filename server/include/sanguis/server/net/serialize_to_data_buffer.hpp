@@ -12,7 +12,7 @@ namespace server
 namespace net
 {
 
-bool
+void
 serialize_to_data_buffer(
 	sanguis::messages::server::base const &,
 	sanguis::net::data_buffer &

@@ -1,17 +1,10 @@
 #ifndef SANGUIS_NET_SERIALIZE_TO_CIRCULAR_BUFFER_HPP_INCLUDED
 #define SANGUIS_NET_SERIALIZE_TO_CIRCULAR_BUFFER_HPP_INCLUDED
 
-#include <sanguis/net/message_size.hpp>
-#include <sanguis/net/serialize_impl.hpp>
-#include <alda/message/base_decl.hpp>
-#include <alda/net/buffer/circular_send/object.hpp>
-#include <alda/net/buffer/circular_send/sink.hpp>
-#include <fcppt/format.hpp>
-#include <fcppt/text.hpp>
-#include <fcppt/assert/pre_message.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <boost/iostreams/stream_buffer.hpp>
-#include <fcppt/config/external_end.hpp>
+#include <sanguis/net/message_header.hpp>
+#include <alda/message/base_fwd.hpp>
+#include <alda/net/buffer/circular_send/object_fwd.hpp>
+#include <alda/net/buffer/circular_send/put_message.hpp>
 
 
 namespace sanguis
@@ -22,6 +15,7 @@ namespace net
 template<
 	typename AldaType
 >
+inline
 bool
 serialize_to_circular_buffer(
 	alda::message::base<
@@ -30,34 +24,12 @@ serialize_to_circular_buffer(
 	alda::net::buffer::circular_send::object &_buffer
 )
 {
-	FCPPT_ASSERT_PRE_MESSAGE(
-		_buffer.get().capacity()
-		>=
-		sanguis::net::message_size(
-			_message.size()
-		),
-		(
-			fcppt::format(
-				FCPPT_TEXT("Send message size %1% is too big for the buffer!")
-			)
-			% _message.size()
-		).str()
-	);
-
-	typedef
-	boost::iostreams::stream_buffer<
-		alda::net::buffer::circular_send::sink
-	>
-	stream_buf;
-
-	stream_buf stream(
-		_buffer
-	);
-
 	return
-		sanguis::net::serialize_impl(
+		alda::net::buffer::circular_send::put_message<
+			sanguis::net::message_header
+		>(
 			_message,
-			stream
+			_buffer
 		);
 }
 
