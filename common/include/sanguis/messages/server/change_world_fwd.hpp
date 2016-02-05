@@ -12,7 +12,7 @@
 #include <sanguis/messages/roles/spawn_boss.hpp>
 #include <sanguis/messages/roles/world_id.hpp>
 #include <sanguis/messages/roles/world_name.hpp>
-#include <sanguis/messages/server/types/make_message_id_fwd.hpp>
+#include <sanguis/messages/server/types/make_message_id.hpp>
 #include <sanguis/messages/server/types/message.hpp>
 #include <alda/message/record_fwd.hpp>
 #include <majutsu/role_fwd.hpp>

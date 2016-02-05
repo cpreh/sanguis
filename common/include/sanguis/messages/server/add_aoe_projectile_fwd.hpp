@@ -9,7 +9,7 @@
 #include <sanguis/messages/server/parts/add_elements_base_fwd.hpp>
 #include <sanguis/messages/server/parts/entity_id_fwd.hpp>
 #include <sanguis/messages/server/parts/speed_fwd.hpp>
-#include <sanguis/messages/server/types/make_message_id_fwd.hpp>
+#include <sanguis/messages/server/types/make_message_id.hpp>
 #include <sanguis/messages/server/types/message.hpp>
 #include <alda/message/record_fwd.hpp>
 #include <majutsu/role_fwd.hpp>

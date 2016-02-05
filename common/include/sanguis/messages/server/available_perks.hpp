@@ -4,7 +4,6 @@
 #include <sanguis/messages/adapted_types/level.hpp>
 #include <sanguis/messages/adapted_types/perk_tree.hpp>
 #include <sanguis/messages/server/available_perks_fwd.hpp>
-#include <sanguis/messages/server/types/make_message_id.hpp>
 #include <alda/message/record.hpp>
 #include <majutsu/role.hpp>
 

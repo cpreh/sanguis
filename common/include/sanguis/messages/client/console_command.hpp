@@ -3,7 +3,6 @@
 
 #include <sanguis/messages/adapted_types/string_vector.hpp>
 #include <sanguis/messages/client/console_command_fwd.hpp>
-#include <sanguis/messages/client/types/make_message_id.hpp>
 #include <alda/message/record.hpp>
 #include <majutsu/role.hpp>
 

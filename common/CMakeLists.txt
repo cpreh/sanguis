@@ -187,7 +187,6 @@ set(
 	include/sanguis/messages/client/types/alda_type.hpp
 	include/sanguis/messages/client/types/alda_type_fwd.hpp
 	include/sanguis/messages/client/types/make_message_id.hpp
-	include/sanguis/messages/client/types/make_message_id_fwd.hpp
 	include/sanguis/messages/client/types/message.hpp
 	include/sanguis/messages/client/types/message_fwd.hpp
 	include/sanguis/messages/client/unique_ptr.hpp
@@ -366,7 +365,6 @@ set(
 	include/sanguis/messages/server/types/alda_type.hpp
 	include/sanguis/messages/server/types/alda_type_fwd.hpp
 	include/sanguis/messages/server/types/make_message_id.hpp
-	include/sanguis/messages/server/types/make_message_id_fwd.hpp
 	include/sanguis/messages/server/types/message.hpp
 	include/sanguis/messages/server/types/message_fwd.hpp
 	include/sanguis/messages/server/types/perk_tree_node.hpp

@@ -5,7 +5,7 @@
 #include <sanguis/messages/adapted_types/perk_tree_fwd.hpp>
 #include <sanguis/messages/roles/perk_tree.hpp>
 #include <sanguis/messages/roles/remaining_perk_levels.hpp>
-#include <sanguis/messages/server/types/make_message_id_fwd.hpp>
+#include <sanguis/messages/server/types/make_message_id.hpp>
 #include <sanguis/messages/server/types/message.hpp>
 #include <alda/message/record_fwd.hpp>
 #include <majutsu/role_fwd.hpp>

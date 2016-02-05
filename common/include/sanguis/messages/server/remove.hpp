@@ -3,7 +3,6 @@
 
 #include <sanguis/messages/server/remove_fwd.hpp>
 #include <sanguis/messages/server/parts/entity_id.hpp>
-#include <sanguis/messages/server/types/make_message_id.hpp>
 #include <alda/message/record.hpp>
 
 
