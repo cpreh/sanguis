@@ -44,7 +44,7 @@
 #include <sge/systems/make_list.hpp>
 #include <sge/systems/with_image2d.hpp>
 #include <fcppt/exception.hpp>
-#include <fcppt/extract_from_string_exn.hpp>
+#include <fcppt/extract_from_string.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/enum_array_init.hpp>
@@ -60,6 +60,7 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/vector/to_unsigned.hpp>
 #include <fcppt/random/generator/seed_from_chrono.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/variant/match.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
@@ -124,11 +125,19 @@ try
 				4
 				?
 					sanguis::creator::seed{
-						fcppt::extract_from_string_exn<
-							sanguis::creator::seed::value_type
-						>(
-							std::string{
-								argv[3]
+						fcppt::optional::to_exception(
+							fcppt::extract_from_string<
+								sanguis::creator::seed::value_type
+							>(
+								std::string{
+									argv[3]
+								}
+							),
+							[]{
+								return
+									fcppt::exception{
+										FCPPT_TEXT("Seed is not an integer")
+									};
 							}
 						)
 					}

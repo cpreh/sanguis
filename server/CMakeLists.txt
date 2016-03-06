@@ -514,7 +514,6 @@ set(
 	include/sanguis/server/pickup_probability.hpp
 	include/sanguis/server/pickup_probability_fwd.hpp
 	include/sanguis/server/player_id.hpp
-	include/sanguis/server/player_id_from_args.hpp
 	include/sanguis/server/player_id_from_net.hpp
 	include/sanguis/server/player_id_fwd.hpp
 	include/sanguis/server/radius.hpp
@@ -1008,7 +1007,6 @@ set(
 	src/server/perks/tree/choose.cpp
 	src/server/perks/tree/create.cpp
 	src/server/perks/tree/status.cpp
-	src/server/player_id_from_args.cpp
 	src/server/player_id_from_net.cpp
 	src/server/random/grid_pos.cpp
 	src/server/random/grid_pos_around.cpp

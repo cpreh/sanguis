@@ -1,4 +1,5 @@
 #include <sanguis/duration.hpp>
+#include <sanguis/exception.hpp>
 #include <sanguis/client/config/settings/object.hpp>
 #include <sanguis/client/gui/default_text_color.hpp>
 #include <sanguis/client/gui/to_duration.hpp>
@@ -38,10 +39,11 @@
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/extract_from_string.hpp>
-#include <fcppt/extract_from_string_exn.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/to_std_string.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -519,17 +521,25 @@ sanguis::client::gui::menu::object::handle_quickstart()
 
 	callbacks_.quickstart()(
 		alda::net::port(
-			fcppt::extract_from_string_exn<
-				alda::net::port::value_type
-			>(
-				sge::parse::ini::get_or_create(
-					settings_.sections(),
-					config_section,
-					config_quickstart_port_key,
-					sge::parse::ini::value(
-						FCPPT_TEXT("31337")
-					)
-				).get()
+			fcppt::optional::to_exception(
+				fcppt::extract_from_string<
+					alda::net::port::value_type
+				>(
+					sge::parse::ini::get_or_create(
+						settings_.sections(),
+						config_section,
+						config_quickstart_port_key,
+						sge::parse::ini::value(
+							FCPPT_TEXT("31337")
+						)
+					).get()
+				),
+				[]{
+					return
+						sanguis::exception{
+							FCPPT_TEXT("Invalid port in ini file")
+						};
+				}
 			)
 		)
 	);
@@ -585,10 +595,12 @@ sanguis::client::gui::menu::object::handle_connect()
 				)
 			),
 			alda::net::port(
-				fcppt::extract_from_string_exn<
-					alda::net::port::value_type
-				>(
-					port_edit_.text()
+				FCPPT_ASSERT_OPTIONAL_ERROR(
+					fcppt::extract_from_string<
+						alda::net::port::value_type
+					>(
+						port_edit_.text()
+					)
 				)
 			)
 		);
