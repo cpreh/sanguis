@@ -5,7 +5,7 @@
 #include <alda/message/base_decl.hpp>
 #include <alda/message/base_unique_ptr.hpp>
 #include <alda/net/buffer/circular_receive/extract_message.hpp>
-#include <alda/net/buffer/circular_receive/object_fwd.hpp>
+#include <alda/net/buffer/circular_receive/streambuf_fwd.hpp>
 #include <alda/serialization/context_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
@@ -28,7 +28,7 @@ deserialize(
 	alda::serialization::context<
 		AldaType
 	> const &_context,
-	alda::net::buffer::circular_receive::object &_data
+	alda::net::buffer::circular_receive::streambuf &_data
 )
 {
 	return

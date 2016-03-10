@@ -12,7 +12,7 @@
 #include <sanguis/messages/client/base_fwd.hpp>
 #include <alda/net/host.hpp>
 #include <alda/net/port.hpp>
-#include <alda/net/buffer/circular_receive/object_fwd.hpp>
+#include <alda/net/buffer/circular_receive/streambuf_fwd.hpp>
 #include <alda/net/client/object.hpp>
 #include <sge/console/gfx/object_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
@@ -155,7 +155,7 @@ private:
 
 	void
 	data_callback(
-		alda::net::buffer::circular_receive::object &
+		alda::net::buffer::circular_receive::streambuf &
 	);
 
 	sanguis::client::config::settings::object &settings_;

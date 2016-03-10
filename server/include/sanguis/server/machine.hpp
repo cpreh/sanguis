@@ -16,7 +16,7 @@
 #include <sanguis/server/states/running_fwd.hpp>
 #include <alda/net/id.hpp>
 #include <alda/net/port.hpp>
-#include <alda/net/buffer/circular_receive/object_fwd.hpp>
+#include <alda/net/buffer/circular_receive/streambuf_fwd.hpp>
 #include <alda/net/server/object.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
@@ -93,7 +93,7 @@ private:
 	void
 	data_callback(
 		alda::net::id,
-		alda::net::buffer::circular_receive::object &
+		alda::net::buffer::circular_receive::streambuf &
 	);
 
 	void

@@ -20,7 +20,7 @@
 #include <alda/net/host.hpp>
 #include <alda/net/parameters.hpp>
 #include <alda/net/port.hpp>
-#include <alda/net/buffer/circular_receive/object_fwd.hpp>
+#include <alda/net/buffer/circular_receive/streambuf_fwd.hpp>
 #include <alda/net/client/connect_callback.hpp>
 #include <alda/net/client/data_callback.hpp>
 #include <alda/net/client/error_callback.hpp>
@@ -415,7 +415,7 @@ sanguis::client::machine::error_callback(
 
 void
 sanguis::client::machine::data_callback(
-	alda::net::buffer::circular_receive::object &_data
+	alda::net::buffer::circular_receive::streambuf &_data
 )
 {
 	while(

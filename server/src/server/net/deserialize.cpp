@@ -3,12 +3,12 @@
 #include <sanguis/messages/client/serialization/global_context.hpp>
 #include <sanguis/net/deserialize.hpp>
 #include <sanguis/server/net/deserialize.hpp>
-#include <alda/net/buffer/circular_receive/object_fwd.hpp>
+#include <alda/net/buffer/circular_receive/streambuf_fwd.hpp>
 
 
 sanguis::messages::client::optional_unique_ptr
 sanguis::server::net::deserialize(
-	alda::net::buffer::circular_receive::object &_buffer
+	alda::net::buffer::circular_receive::streambuf &_buffer
 )
 {
 	return
