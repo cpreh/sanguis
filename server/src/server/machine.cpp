@@ -27,7 +27,7 @@
 #include <alda/net/parameters.hpp>
 #include <alda/net/port.hpp>
 #include <alda/net/buffer/circular_receive/streambuf_fwd.hpp>
-#include <alda/net/buffer/circular_send/object_fwd.hpp>
+#include <alda/net/buffer/circular_send/streambuf_fwd.hpp>
 #include <alda/net/server/connection_id_container.hpp>
 #include <alda/net/server/data_callback.hpp>
 #include <alda/net/server/disconnect_callback.hpp>
@@ -284,7 +284,7 @@ sanguis::server::machine::send_unicast(
 			net_id
 		](
 			fcppt::reference<
-				alda::net::buffer::circular_send::object
+				alda::net::buffer::circular_send::streambuf
 			> const _buffer
 		)
 		{

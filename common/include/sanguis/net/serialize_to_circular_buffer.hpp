@@ -3,8 +3,8 @@
 
 #include <sanguis/net/message_header.hpp>
 #include <alda/message/base_fwd.hpp>
-#include <alda/net/buffer/circular_send/object_fwd.hpp>
 #include <alda/net/buffer/circular_send/put_message.hpp>
+#include <alda/net/buffer/circular_send/streambuf_fwd.hpp>
 
 
 namespace sanguis
@@ -21,7 +21,7 @@ serialize_to_circular_buffer(
 	alda::message::base<
 		AldaType
 	> const &_message,
-	alda::net::buffer::circular_send::object &_buffer
+	alda::net::buffer::circular_send::streambuf &_buffer
 )
 {
 	return

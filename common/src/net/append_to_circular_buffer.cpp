@@ -1,12 +1,14 @@
 #include <sanguis/net/append_to_circular_buffer.hpp>
 #include <sanguis/net/data_buffer.hpp>
-#include <alda/net/buffer/circular_send/object.hpp>
-#include <fcppt/algorithm/append.hpp>
+#include <alda/net/buffer/circular_send/streambuf.hpp>
+#include <alda/serialization/ostream.hpp>
+#include <fcppt/cast/size.hpp>
+#include <fcppt/cast/to_signed.hpp>
 
 
 bool
 sanguis::net::append_to_circular_buffer(
-	alda::net::buffer::circular_send::object &_dest,
+	alda::net::buffer::circular_send::streambuf &_dest,
 	sanguis::net::data_buffer const &_src
 )
 {
@@ -15,12 +17,24 @@ sanguis::net::append_to_circular_buffer(
 		<
 		_src.size()
 	)
-		return false;
+		return
+			false;
 
-	fcppt::algorithm::append(
-		_dest.get(),
-		_src
+	alda::serialization::ostream stream(
+		&_dest
 	);
 
-	return true;
+	stream.write(
+		_src.data(),
+		fcppt::cast::size<
+			std::streamsize
+		>(
+			fcppt::cast::to_signed(
+				_src.size()
+			)
+		)
+	);
+
+	return
+		true;
 }
