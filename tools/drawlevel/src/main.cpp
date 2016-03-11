@@ -59,8 +59,8 @@
 #include <fcppt/math/vector/null.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/vector/to_unsigned.hpp>
-#include <fcppt/random/generator/seed_from_chrono.hpp>
 #include <fcppt/optional/to_exception.hpp>
+#include <fcppt/random/generator/seed_from_chrono.hpp>
 #include <fcppt/variant/match.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
