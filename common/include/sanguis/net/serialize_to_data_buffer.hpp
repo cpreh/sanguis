@@ -1,14 +1,11 @@
 #ifndef SANGUIS_NET_SERIALIZE_TO_DATA_BUFFER_HPP_INCLUDED
 #define SANGUIS_NET_SERIALIZE_TO_DATA_BUFFER_HPP_INCLUDED
 
-#include <sanguis/net/data_buffer.hpp>
+#include <sanguis/net/data_buffer_fwd.hpp>
+#include <sanguis/net/data_streambuf.hpp>
 #include <sanguis/net/message_header.hpp>
 #include <alda/message/base_fwd.hpp>
 #include <alda/serialization/length/serialize.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <boost/iostreams/stream_buffer.hpp>
-#include <boost/iostreams/device/back_inserter.hpp>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -27,15 +24,7 @@ serialize_to_data_buffer(
 	sanguis::net::data_buffer &_buffer
 )
 {
-	typedef
-	boost::iostreams::back_insert_device<
-		sanguis::net::data_buffer
-	>
-	sink;
-
-	boost::iostreams::stream_buffer<
-		sink
-	> stream_buf(
+	sanguis::net::data_streambuf stream_buf(
 		_buffer
 	);
 

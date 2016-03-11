@@ -397,6 +397,8 @@ set(
 	include/sanguis/net/append_to_circular_buffer.hpp
 	include/sanguis/net/data_buffer.hpp
 	include/sanguis/net/data_buffer_fwd.hpp
+	include/sanguis/net/data_streambuf.hpp
+	include/sanguis/net/data_streambuf_fwd.hpp
 	include/sanguis/net/deserialize.hpp
 	include/sanguis/net/message_header.hpp
 	include/sanguis/net/receive_buffer_size.hpp
@@ -556,6 +558,7 @@ set(
 	src/messages/server/unpause.cpp
 	src/messages/server/weapon_status.cpp
 	src/net/append_to_circular_buffer.cpp
+	src/net/data_streambuf.cpp
 	src/net/receive_buffer_size.cpp
 	src/net/send_buffer_size.cpp
 	src/random_seed.cpp

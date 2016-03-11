@@ -28,7 +28,6 @@ option(
 find_package(
 	Boost 1.47.0 REQUIRED COMPONENTS
 	filesystem
-	iostreams
 	program_options
 	system
 )
