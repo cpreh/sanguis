@@ -48,15 +48,13 @@ sanguis::server::ai::create_swarm(
 								>(
 									_context,
 									_sight_range
-								)
-							)(
+								),
 								sanguis::server::ai::tree::make_leaf<
 									sanguis::server::ai::behavior::follow_friend
 								>(
 									_context,
 									_sight_range
-								)
-							)(
+								),
 								sanguis::server::ai::tree::make_leaf<
 									sanguis::server::ai::behavior::wander
 								>(

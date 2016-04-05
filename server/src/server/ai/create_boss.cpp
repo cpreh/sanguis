@@ -44,15 +44,13 @@ sanguis::server::ai::create_boss(
 									sanguis::server::ai::behavior::stay
 								>(
 									_context
-								)
-							)(
+								),
 								sanguis::server::ai::tree::make_leaf<
 									sanguis::server::ai::behavior::attack
 								>(
 									_context,
 									_sight_range
-								)
-							)(
+								),
 								sanguis::server::ai::tree::make_leaf<
 									sanguis::server::ai::behavior::patrol
 								>(

@@ -44,8 +44,7 @@ sanguis::server::ai::create_friend(
 								>(
 									_context,
 									_sight_range
-								)
-							)(
+								),
 								sanguis::server::ai::tree::make_leaf<
 									sanguis::server::ai::behavior::follow_owner
 								>(

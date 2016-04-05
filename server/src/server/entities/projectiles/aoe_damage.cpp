@@ -39,7 +39,7 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 					_damage_values
 				)
 			)
-		).move_container()
+		)
 	),
 	sanguis::server::entities::simple(),
 	sanguis::server::entities::center_ghost()

@@ -153,8 +153,7 @@ sanguis::server::entities::player::player(
 						)
 					)
 				)
-			)
-		)(
+			),
 			fcppt::unique_ptr_to_base<
 				sanguis::server::auras::aura
 			>(
@@ -183,7 +182,7 @@ sanguis::server::entities::player::player(
 					}
 				)
 			)
-		).move_container()
+		)
 	),
 	sanguis::server::entities::with_buffs(),
 	sanguis::server::entities::with_id(

@@ -29,8 +29,7 @@ sanguis::server::perks::tree::create()
 						10u
 					)
 				)
-			)
-		)(
+			),
 			sanguis::server::perks::tree::object(
 				sanguis::server::perks::tree::status(
 					sanguis::perk_type::ias,
@@ -44,8 +43,7 @@ sanguis::server::perks::tree::create()
 						8U
 					)
 				)
-			)
-		)(
+			),
 			sanguis::server::perks::tree::object(
 				sanguis::server::perks::tree::status(
 					sanguis::perk_type::ims,
@@ -59,8 +57,7 @@ sanguis::server::perks::tree::create()
 						7u
 					)
 				)
-			)
-		)(
+			),
 			sanguis::server::perks::tree::object(
 				sanguis::server::perks::tree::status(
 					sanguis::perk_type::irs,
@@ -74,8 +71,7 @@ sanguis::server::perks::tree::create()
 						4u
 					)
 				)
-			)
-		)(
+			),
 			sanguis::server::perks::tree::object(
 				sanguis::server::perks::tree::status(
 					sanguis::perk_type::health,
@@ -89,8 +85,7 @@ sanguis::server::perks::tree::create()
 						10u
 					)
 				)
-			)
-		)(
+			),
 			sanguis::server::perks::tree::object(
 				sanguis::server::perks::tree::status(
 					sanguis::perk_type::fire_damage,
@@ -104,8 +99,7 @@ sanguis::server::perks::tree::create()
 						10u
 					)
 				)
-			)
-		)(
+			),
 			sanguis::server::perks::tree::object(
 				sanguis::server::perks::tree::status(
 					sanguis::perk_type::piercing_damage,
@@ -120,6 +114,5 @@ sanguis::server::perks::tree::create()
 					)
 				)
 			)
-		)
-		.move_container();
+		);
 }

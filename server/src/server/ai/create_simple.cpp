@@ -47,8 +47,7 @@ sanguis::server::ai::create_simple(
 								>(
 									_context,
 									_sight_range
-								)
-							)(
+								),
 								sanguis::server::ai::tree::make_leaf<
 									sanguis::server::ai::behavior::wander
 								>(

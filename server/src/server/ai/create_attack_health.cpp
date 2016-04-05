@@ -56,8 +56,7 @@ sanguis::server::ai::create_attack_health(
 									_context,
 									_sight_range,
 									speed_factor
-								)
-							)(
+								),
 								sanguis::server::ai::tree::make_leaf<
 									sanguis::server::ai::behavior::wander
 								>(

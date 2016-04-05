@@ -126,6 +126,6 @@ sanguis::server::entities::enemies::factory::skeleton(
 						)
 					)
 				)
-			).move_container()
+			)
 		);
 }

@@ -92,8 +92,7 @@ sanguis::client::control::action_handler::action_handler(
 				sge::console::callback::short_description(
 					SGE_FONT_LIT("Get a lot of exp")
 				)
-			)
-		)(
+			),
 			this->cheat_connection(
 				_console,
 				sanguis::cheat_type::heal,
@@ -103,8 +102,7 @@ sanguis::client::control::action_handler::action_handler(
 				sge::console::callback::short_description(
 					SGE_FONT_LIT("Completely heal the player")
 				)
-			)
-		)(
+			),
 			this->cheat_connection(
 				_console,
 				sanguis::cheat_type::kill,
@@ -114,8 +112,7 @@ sanguis::client::control::action_handler::action_handler(
 				sge::console::callback::short_description(
 					SGE_FONT_LIT("Commit suicide")
 				)
-			)
-		)(
+			),
 			this->cheat_connection(
 				_console,
 				sanguis::cheat_type::spider,
@@ -125,8 +122,7 @@ sanguis::client::control::action_handler::action_handler(
 				sge::console::callback::short_description(
 					SGE_FONT_LIT("Spawn a spider weapon")
 				)
-			)
-		)(
+			),
 			this->cheat_connection(
 				_console,
 				sanguis::cheat_type::monster_spawner,
@@ -136,8 +132,7 @@ sanguis::client::control::action_handler::action_handler(
 				sge::console::callback::short_description(
 					SGE_FONT_LIT("Spawn a monster creating weapon")
 				)
-			)
-		)(
+			),
 			this->cheat_connection(
 				_console,
 				sanguis::cheat_type::perks,
@@ -147,8 +142,7 @@ sanguis::client::control::action_handler::action_handler(
 				sge::console::callback::short_description(
 					SGE_FONT_LIT("Get all perks")
 				)
-			)
-		)(
+			),
 			this->cheat_connection(
 				_console,
 				sanguis::cheat_type::sentry,
@@ -158,8 +152,7 @@ sanguis::client::control::action_handler::action_handler(
 				sge::console::callback::short_description(
 					SGE_FONT_LIT("Spawn a sentry")
 				)
-			)
-		)(
+			),
 			this->cheat_connection(
 				_console,
 				sanguis::cheat_type::grenade,
@@ -169,8 +162,7 @@ sanguis::client::control::action_handler::action_handler(
 				sge::console::callback::short_description(
 					SGE_FONT_LIT("Spawn a grenade")
 				)
-			)
-		)(
+			),
 			this->cheat_connection(
 				_console,
 				sanguis::cheat_type::shotgun,
@@ -180,8 +172,7 @@ sanguis::client::control::action_handler::action_handler(
 				sge::console::callback::short_description(
 					SGE_FONT_LIT("Spawn a shotgun")
 				)
-			)
-		)(
+			),
 			this->cheat_connection(
 				_console,
 				sanguis::cheat_type::rocket_launcher,

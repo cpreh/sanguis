@@ -117,6 +117,6 @@ sanguis::server::entities::enemies::factory::ghost(
 						0.1f
 					)
 				)
-			).move_container()
+			)
 		);
 }
