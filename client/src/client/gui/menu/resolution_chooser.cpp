@@ -16,9 +16,7 @@
 #include <sge/gui/widget/reference.hpp>
 #include <sge/gui/widget/reference_alignment_pair.hpp>
 #include <sge/gui/widget/reference_alignment_vector.hpp>
-#include <sge/renderer/system.hpp>
 #include <sge/renderer/device/ffp.hpp>
-#include <sge/renderer/device/index.hpp>
 #include <sge/renderer/display_mode/object_fwd.hpp>
 #include <sge/renderer/display_mode/optional_object.hpp>
 #include <sge/renderer/display_mode/output.hpp>
@@ -36,15 +34,11 @@ sanguis::client::gui::menu::resolution_chooser::resolution_chooser(
 	sge::gui::context &_context,
 	sge::gui::style::base const &_style,
 	sge::font::object &_font,
-	sge::renderer::system const &_system,
-	sge::renderer::device::ffp &_renderer,
-	sge::renderer::device::index const _index
+	sge::renderer::device::ffp &_renderer
 )
 :
 	display_modes_(
-		_system.display_modes(
-			_index
-		)
+		_renderer.display_modes()
 	),
 	renderer_(
 		_renderer

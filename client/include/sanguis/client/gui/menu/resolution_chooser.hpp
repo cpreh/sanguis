@@ -8,9 +8,7 @@
 #include <sge/gui/widget/box_container.hpp>
 #include <sge/gui/widget/button.hpp>
 #include <sge/gui/widget/choices.hpp>
-#include <sge/renderer/system_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
-#include <sge/renderer/device/index_fwd.hpp>
 #include <sge/renderer/display_mode/container.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/signal/auto_connection.hpp>
@@ -35,9 +33,7 @@ public:
 		sge::gui::context &,
 		sge::gui::style::base const &,
 		sge::font::object &,
-		sge::renderer::system const &,
-		sge::renderer::device::ffp &,
-		sge::renderer::device::index
+		sge::renderer::device::ffp &
 	);
 
 	~resolution_chooser();

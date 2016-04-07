@@ -19,9 +19,7 @@
 #include <sge/gui/style/base_fwd.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/focus/object_fwd.hpp>
-#include <sge/renderer/system_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
-#include <sge/renderer/device/index.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <sge/window/system_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -61,9 +59,7 @@ public:
 		sge::console::gfx::object &,
 		sge::input::focus::object &,
 		sge::input::cursor::object &,
-		sge::renderer::system const &,
 		sge::renderer::device::ffp &,
-		sge::renderer::device::index,
 		sanguis::io_service &,
 		sge::viewport::manager &,
 		sanguis::client::cursor &
@@ -111,14 +107,8 @@ public:
 	sge::gui::style::base const &
 	gui_style() const;
 
-	sge::renderer::system const &
-	renderer_system() const;
-
 	sge::renderer::device::ffp &
 	renderer() const;
-
-	sge::renderer::device::index
-	renderer_index() const;
 
 	sge::input::focus::object &
 	focus() const;
@@ -168,11 +158,7 @@ private:
 
 	sge::input::focus::object &focus_;
 
-	sge::renderer::system const &renderer_system_;
-
 	sge::renderer::device::ffp &renderer_;
-
-	sge::renderer::device::index const renderer_index_;
 
 	sge::viewport::manager &viewport_manager_;
 

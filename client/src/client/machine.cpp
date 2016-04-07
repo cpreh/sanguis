@@ -29,10 +29,8 @@
 #include <sge/gui/style/base_fwd.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/focus/object_fwd.hpp>
-#include <sge/renderer/system_fwd.hpp>
 #include <sge/renderer/context/scoped_ffp.hpp>
 #include <sge/renderer/device/ffp.hpp>
-#include <sge/renderer/device/index.hpp>
 #include <sge/renderer/target/onscreen.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/viewport/manager_fwd.hpp>
@@ -67,9 +65,7 @@ sanguis::client::machine::machine(
 	sge::console::gfx::object &_console_gfx,
 	sge::input::focus::object &_focus,
 	sge::input::cursor::object &_cursor,
-	sge::renderer::system const &_renderer_system,
 	sge::renderer::device::ffp &_renderer,
-	sge::renderer::device::index const _renderer_index,
 	sanguis::io_service &_io_service,
 	sge::viewport::manager &_viewport_manager,
 	sanguis::client::cursor &_cursor_gfx
@@ -90,14 +86,8 @@ sanguis::client::machine::machine(
 	focus_(
 		_focus
 	),
-	renderer_system_(
-		_renderer_system
-	),
 	renderer_(
 		_renderer
-	),
-	renderer_index_(
-		_renderer_index
 	),
 	viewport_manager_(
 		_viewport_manager
@@ -314,25 +304,11 @@ sanguis::client::machine::gui_style() const
 		gui_style_;
 }
 
-sge::renderer::system const &
-sanguis::client::machine::renderer_system() const
-{
-	return
-		renderer_system_;
-}
-
 sge::renderer::device::ffp &
 sanguis::client::machine::renderer() const
 {
 	return
 		renderer_;
-}
-
-sge::renderer::device::index
-sanguis::client::machine::renderer_index() const
-{
-	return
-		renderer_index_;
 }
 
 sge::input::focus::object &

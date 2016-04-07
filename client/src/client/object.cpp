@@ -154,9 +154,7 @@ sanguis::client::object::object(
 		console_gfx_.get(),
 		sys_->focus_collector(),
 		sys_->cursor_demuxer(),
-		sys_->renderer_system(),
 		sys_->renderer_device_ffp(),
-		sys_->renderer_device_index(),
 		io_service_,
 		sys_->viewport_manager(),
 		cursor_

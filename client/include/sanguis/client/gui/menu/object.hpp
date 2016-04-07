@@ -19,10 +19,8 @@
 #include <sge/gui/widget/text.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/focus/object_fwd.hpp>
-#include <sge/renderer/system_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
-#include <sge/renderer/device/index_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
@@ -45,9 +43,7 @@ class object
 	);
 public:
 	object(
-		sge::renderer::system const &,
 		sge::renderer::device::ffp &,
-		sge::renderer::device::index,
 		sge::viewport::manager &,
 		sge::font::object &,
 		sge::input::cursor::object &,
