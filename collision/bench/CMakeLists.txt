@@ -9,16 +9,16 @@ fcppt_utils_append_source_dir_and_make_groups(
 )
 
 add_executable(
-	collision_bench_main
+	sanguis_collision_bench_main
 	${SANGUIS_COLLISION_BENCH_MAIN_FILES_ABS}
 )
 
 fcppt_utils_set_target_compiler_flags(
-	collision_bench_main
+	sanguis_collision_bench_main
 )
 
 target_include_directories(
-	collision_bench_main
+	sanguis_collision_bench_main
 	PRIVATE
 	${Boost_INCLUDE_DIRS}
 	${fcppt_INCLUDE_DIRS}
@@ -26,7 +26,7 @@ target_include_directories(
 )
 
 target_link_libraries(
-	collision_bench_main
+	sanguis_collision_bench_main
 	PRIVATE
 	${sanguis_collision_TARGET}
 )
