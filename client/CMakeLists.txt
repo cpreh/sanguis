@@ -482,7 +482,6 @@ set(
 	include/sanguis/client/load/auras/lookup_name.hpp
 	include/sanguis/client/load/context.hpp
 	include/sanguis/client/load/context_fwd.hpp
-	include/sanguis/client/load/first_file.hpp
 	include/sanguis/client/load/hud/context.hpp
 	include/sanguis/client/load/hud/context_fwd.hpp
 	include/sanguis/client/load/hud/make_weapon_icons.hpp
@@ -520,7 +519,6 @@ set(
 	include/sanguis/client/load/model/weapon_category_fwd.hpp
 	include/sanguis/client/load/model/weapon_category_map.hpp
 	include/sanguis/client/load/model/weapon_category_unique_ptr.hpp
-	include/sanguis/client/load/next_file.hpp
 	include/sanguis/client/load/primary_weapon_name.hpp
 	include/sanguis/client/load/resource/animation/entity.hpp
 	include/sanguis/client/load/resource/animation/entity_fwd.hpp
@@ -541,7 +539,6 @@ set(
 	include/sanguis/client/load/resource/texture_name_map.hpp
 	include/sanguis/client/load/resource/textures.hpp
 	include/sanguis/client/load/resource/textures_fwd.hpp
-	include/sanguis/client/load/skip_directories.hpp
 	include/sanguis/client/load/tiles/context.hpp
 	include/sanguis/client/load/tiles/context_fwd.hpp
 	include/sanguis/client/load/tiles/make_textures.hpp
@@ -817,7 +814,6 @@ set(
 	src/client/load/auras/context.cpp
 	src/client/load/auras/lookup_name.cpp
 	src/client/load/context.cpp
-	src/client/load/first_file.cpp
 	src/client/load/hud/context.cpp
 	src/client/load/hud/make_weapon_icons.cpp
 	src/client/load/hud/weapon_type.cpp
@@ -839,7 +835,6 @@ set(
 	src/client/load/model/part.cpp
 	src/client/load/model/part_result.cpp
 	src/client/load/model/weapon_category.cpp
-	src/client/load/next_file.cpp
 	src/client/load/primary_weapon_name.cpp
 	src/client/load/resource/animation/entity.cpp
 	src/client/load/resource/animation/series.cpp
@@ -850,7 +845,6 @@ set(
 	src/client/load/resource/sounds.cpp
 	src/client/load/resource/texture_from_view.cpp
 	src/client/load/resource/textures.cpp
-	src/client/load/skip_directories.cpp
 	src/client/load/tiles/context.cpp
 	src/client/load/tiles/make_textures.cpp
 	src/client/load/tiles/set.cpp
