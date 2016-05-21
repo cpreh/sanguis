@@ -25,7 +25,7 @@
 #include <sanguis/server/environment/load_context.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/reference_impl.hpp>
-#include <fcppt/cast/try_dynamic.hpp>
+#include <fcppt/cast/dynamic.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
@@ -94,7 +94,7 @@ sanguis::server::entities::pickups::pickup::can_collide_with_body(
 {
 	return
 		fcppt::optional::maybe(
-			fcppt::cast::try_dynamic<
+			fcppt::cast::dynamic<
 				sanguis::server::entities::player const
 			>(
 				_body

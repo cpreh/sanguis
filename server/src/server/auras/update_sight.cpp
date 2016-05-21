@@ -9,7 +9,7 @@
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <fcppt/reference_impl.hpp>
-#include <fcppt/cast/try_dynamic.hpp>
+#include <fcppt/cast/dynamic_cross.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 
 
@@ -50,7 +50,7 @@ sanguis::server::auras::update_sight::enter(
 )
 {
 	fcppt::optional::maybe_void(
-		fcppt::cast::try_dynamic<
+		fcppt::cast::dynamic_cross<
 			sanguis::server::entities::with_id const
 		>(
 			_entity
@@ -78,7 +78,7 @@ sanguis::server::auras::update_sight::leave(
 )
 {
 	fcppt::optional::maybe_void(
-		fcppt::cast::try_dynamic<
+		fcppt::cast::dynamic_cross<
 			sanguis::server::entities::with_id const
 		>(
 			_entity

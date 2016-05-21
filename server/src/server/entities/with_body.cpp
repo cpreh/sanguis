@@ -25,7 +25,7 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
-#include <fcppt/cast/try_dynamic.hpp>
+#include <fcppt/cast/dynamic.hpp>
 #include <fcppt/math/vector/null.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -229,7 +229,7 @@ sanguis::server::entities::with_body::can_collide_with(
 {
 	return
 		fcppt::optional::maybe(
-			fcppt::cast::try_dynamic<
+			fcppt::cast::dynamic<
 				sanguis::server::entities::with_body const
 			>(
 				_body_base
@@ -264,7 +264,7 @@ sanguis::server::entities::with_body::collision(
 )
 {
 	fcppt::optional::maybe_void(
-		fcppt::cast::try_dynamic<
+		fcppt::cast::dynamic<
 			sanguis::server::entities::with_body
 		>(
 			_body_base

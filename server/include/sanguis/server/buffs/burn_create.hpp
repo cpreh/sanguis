@@ -14,7 +14,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/cast/try_dynamic.hpp>
+#include <fcppt/cast/dynamic.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <type_traits>
@@ -58,7 +58,7 @@ burn_create(
 			{
 				return
 					fcppt::optional::map(
-						fcppt::cast::try_dynamic<
+						fcppt::cast::dynamic<
 							sanguis::server::entities::with_health
 						>(
 							_entity

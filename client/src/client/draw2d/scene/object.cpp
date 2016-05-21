@@ -179,7 +179,7 @@
 #include <fcppt/algorithm/map_iteration_second.hpp>
 #include <fcppt/algorithm/sequence_iteration.hpp>
 #include <fcppt/algorithm/update_action.hpp>
-#include <fcppt/cast/dynamic.hpp>
+#include <fcppt/cast/dynamic_cross_exn.hpp>
 #include <fcppt/cast/float_to_int_fun.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/log/_.hpp>
@@ -937,7 +937,7 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::add_aura const &_message
 )
 {
-	fcppt::cast::dynamic<
+	fcppt::cast::dynamic_cross_exn<
 		sanguis::client::draw2d::entities::ifaces::with_auras &
 	>(
 		this->entity(
@@ -957,7 +957,7 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::add_buff const &_message
 )
 {
-	fcppt::cast::dynamic<
+	fcppt::cast::dynamic_cross_exn<
 		sanguis::client::draw2d::entities::ifaces::with_buffs &
 	>(
 		this->entity(
@@ -1274,7 +1274,7 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::change_weapon const &_message
 )
 {
-	fcppt::cast::dynamic<
+	fcppt::cast::dynamic_cross_exn<
 		sanguis::client::draw2d::entities::ifaces::with_weapon &
 	>(
 		this->entity(
@@ -1370,7 +1370,7 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::health const &_message
 )
 {
-	fcppt::cast::dynamic<
+	fcppt::cast::dynamic_cross_exn<
 		sanguis::client::draw2d::entities::ifaces::with_health &
 	>(
 		this->entity(
@@ -1430,7 +1430,7 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::max_health const &_message
 )
 {
-	fcppt::cast::dynamic<
+	fcppt::cast::dynamic_cross_exn<
 		sanguis::client::draw2d::entities::ifaces::with_health &
 	>(
 		this->entity(
@@ -1452,7 +1452,7 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::move const &_message
 )
 {
-	fcppt::cast::dynamic<
+	fcppt::cast::dynamic_cross_exn<
 		sanguis::client::draw2d::entities::ifaces::with_center &
 	>(
 		this->entity(
@@ -1484,7 +1484,7 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::remove_buff const &_message
 )
 {
-	fcppt::cast::dynamic<
+	fcppt::cast::dynamic_cross_exn<
 		sanguis::client::draw2d::entities::ifaces::with_buffs &
 	>(
 		this->entity(
@@ -1516,7 +1516,7 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::rotate const &_message
 )
 {
-	fcppt::cast::dynamic<
+	fcppt::cast::dynamic_cross_exn<
 		sanguis::client::draw2d::entities::ifaces::with_orientation &
 	>(
 		this->entity(
@@ -1536,7 +1536,7 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::speed const &_message
 )
 {
-	fcppt::cast::dynamic<
+	fcppt::cast::dynamic_cross_exn<
 		sanguis::client::draw2d::entities::ifaces::with_speed &
 	>(
 		this->entity(
@@ -1556,7 +1556,7 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::weapon_status const &_message
 )
 {
-	fcppt::cast::dynamic<
+	fcppt::cast::dynamic_cross_exn<
 		sanguis::client::draw2d::entities::ifaces::with_weapon &
 	>(
 		this->entity(
