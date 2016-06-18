@@ -175,12 +175,6 @@ set(
 	src/include/sanguis/collision/impl/world/simple/object.hpp
 )
 
-set(
-	SANGUIS_COLLISION_LINK_TARGETS
-	${fcppt_core_TARGET}
-	${sanguis_creator_TARGET}
-)
-
 list(
 	APPEND
 	SANGUIS_COLLISION_FILES
@@ -191,9 +185,12 @@ sanguis_add_library(
 	collision
 	"${SANGUIS_COLLISION_FILES}"
 	DEPS
-		${SANGUIS_COLLISION_LINK_TARGETS}
+		${sanguis_creator_TARGET}
 		${sanguis_core_TARGET}
+		${fcppt_core_TARGET}
 		${fcppt_log_TARGET}
+	TRANSITIVE_DEPS
+		fcppt_core_interface
 	INCLUDES
 		"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
 	COMPILE_DEFINITIONS

@@ -46,6 +46,11 @@ find_package(
 	fcppt REQUIRED
 )
 
+# TODO: Find a way to get rid of this
+find_package(
+	majutsu REQUIRED
+)
+
 set(
 	SGE_COMPONENTS
 	charconv
@@ -227,6 +232,7 @@ function(
 	set(
 		MULTI_ARGS
 		"DEPS"
+		"TRANSITIVE_DEPS"
 		"INCLUDES"
 		"COMPILE_FLAGS"
 		"COMPILE_DEFINITIONS"
@@ -250,6 +256,8 @@ function(
 		"${LIBNAME}"
 		PRIVATE
 		${_DEPS}
+		INTERFACE
+		${_TRANSITIVE_DEPS}
 	)
 
 	target_compile_definitions(
@@ -288,6 +296,7 @@ function(
 	set(
 		MULTI_ARGS
 		"DEPS"
+		"TRANSITIVE_DEPS"
 		"INCLUDES"
 		"COMPILE_FLAGS"
 		"COMPILE_DEFINITIONS"
@@ -331,6 +340,8 @@ function(
 			"${FILES}"
 			DEPS
 				${_DEPS}
+			TRANSITIVE_DEPS
+				${_TRANSITIVE_DEPS}
 			COMPILE_DEFINITIONS
 				${_COMPILE_DEFINITIONS}
 			COMPILE_FLAGS
@@ -361,6 +372,8 @@ function(
 			"${FILES}"
 			DEPS
 				${_DEPS}
+			TRANSITIVE_DEPS
+				${_TRANSITIVE_DEPS}
 			COMPILE_DEFINITIONS
 				${_COMPILE_DEFINITIONS}
 			COMPILE_FLAGS

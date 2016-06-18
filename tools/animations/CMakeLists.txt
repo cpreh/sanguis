@@ -65,8 +65,6 @@ set(
 sanguis_add_tool(
 	animations
 	"${SANGUIS_TOOLS_ANIMATIONS_FILES}"
-	INCLUDE_DIRS
-		${fcppt_INCLUDE_DIRS}
 	LINK_LIBS
 		${sanguis_model_TARGET}
 		${sanguis_tools_libmergeimage_TARGET}

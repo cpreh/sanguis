@@ -6,8 +6,6 @@ set(
 sanguis_add_tool(
 	drawlevel
 	"${SANGUIS_TOOLS_DRAWLEVEL_FILES}"
-	INCLUDE_DIRS
-		${fcppt_INCLUDE_DIRS}
 	LINK_LIBS
 		${sanguis_creator_TARGET}
 		${sanguis_tiles_TARGET}

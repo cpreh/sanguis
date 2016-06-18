@@ -6,8 +6,6 @@ set(
 sanguis_add_tool(
 	mergeimage
 	"${SANGUIS_TOOLS_MERGEIMAGE_FILES}"
-	INCLUDE_DIRS
-		${fcppt_INCLUDE_DIRS}
 	LINK_LIBS
 		${sanguis_tools_libmergeimage_TARGET}
 		${sanguis_model_TARGET}
