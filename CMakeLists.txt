@@ -51,6 +51,10 @@ find_package(
 	majutsu REQUIRED
 )
 
+find_package(
+	mizuiro REQUIRED
+)
+
 set(
 	SGE_COMPONENTS
 	charconv
