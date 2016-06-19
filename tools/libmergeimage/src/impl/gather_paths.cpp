@@ -2,6 +2,7 @@
 #include <sanguis/tools/libmergeimage/impl/path_vector.hpp>
 #include <sanguis/tools/libmergeimage/impl/path_vector_vector.hpp>
 #include <sanguis/tools/libmergeimage/impl/tree_depth.hpp>
+#include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/filesystem/strip_prefix.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/operations.hpp>
@@ -26,7 +27,9 @@ sanguis::tools::libmergeimage::impl::gather_paths(
 	)
 	{
 		if(
-			it.level()
+			fcppt::cast::to_unsigned(
+				it.level()
+			)
 			==
 			sanguis::tools::libmergeimage::impl::tree_depth::value - 1
 			&&
