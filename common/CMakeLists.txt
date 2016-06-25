@@ -576,6 +576,7 @@ sanguis_add_library(
 		${sanguis_creator_TARGET}
 		${sanguis_model_TARGET}
 		${sgecharconv_TARGET}
+		sgetimer_interface
 		${alda_TARGET}
 		${fcppt_filesystem_TARGET}
 		${fcppt_core_TARGET}
