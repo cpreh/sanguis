@@ -1,6 +1,6 @@
 #include <sanguis/exception.hpp>
-#include <sanguis/media_path.hpp>
 #include <sanguis/log_parameters.hpp>
+#include <sanguis/media_path.hpp>
 #include <sanguis/client/load/log_location.hpp>
 #include <sanguis/client/load/resource/make_missing_texture.hpp>
 #include <sanguis/client/load/resource/search_texture_names.hpp>

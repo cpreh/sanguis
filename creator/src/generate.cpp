@@ -7,8 +7,8 @@
 #include <sanguis/creator/spawn.hpp>
 #include <sanguis/creator/top_parameters.hpp>
 #include <sanguis/creator/top_result.hpp>
-#include <sanguis/creator/impl/log_name.hpp>
 #include <sanguis/creator/impl/generator_map.hpp>
+#include <sanguis/creator/impl/log_name.hpp>
 #include <sanguis/creator/impl/parameters.hpp>
 #include <sanguis/creator/impl/result.hpp>
 #include <sanguis/creator/impl/random/generator.hpp>

@@ -1,5 +1,5 @@
-#include <sanguis/perk_type.hpp>
 #include <sanguis/log_parameters.hpp>
+#include <sanguis/perk_type.hpp>
 #include <sanguis/client/dispatch.hpp>
 #include <sanguis/client/dispatch_default_function.hpp>
 #include <sanguis/client/level.hpp>
@@ -38,8 +38,8 @@
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/context_fwd.hpp>
-#include <fcppt/log/name.hpp>
 #include <fcppt/log/debug.hpp>
+#include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>

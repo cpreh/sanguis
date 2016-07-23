@@ -4,8 +4,8 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
-#include <sanguis/server/weapons/common_parameters.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
+#include <sanguis/server/weapons/common_parameters.hpp>
 #include <sanguis/server/weapons/log_fwd.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/parameters_fwd.hpp>

@@ -52,8 +52,8 @@
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/fill.hpp>
 #include <fcppt/container/grid/in_range.hpp>
-#include <fcppt/container/grid/map.hpp>
 #include <fcppt/container/grid/make_pos_ref_range.hpp>
+#include <fcppt/container/grid/map.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
 #include <fcppt/container/grid/output.hpp>
 #include <fcppt/log/_.hpp>

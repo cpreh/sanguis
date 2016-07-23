@@ -14,8 +14,8 @@
 #include <sanguis/client/draw2d/scene/world/batch_grid.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_size.hpp>
 #include <sanguis/client/draw2d/scene/world/create.hpp>
-#include <sanguis/client/draw2d/scene/world/log_location.hpp>
 #include <sanguis/client/draw2d/scene/world/generate_batches.hpp>
+#include <sanguis/client/draw2d/scene/world/log_location.hpp>
 #include <sanguis/client/draw2d/scene/world/parameters_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/render_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/state.hpp>
