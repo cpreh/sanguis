@@ -13,6 +13,7 @@
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/spawns/size_type.hpp>
+#include <sanguis/server/weapons/common_parameters.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional/object_decl.hpp>
@@ -48,6 +49,7 @@ public:
 protected:
 	spawn(
 		sanguis::random_generator &,
+		sanguis::server::weapons::common_parameters const &,
 		sanguis::creator::enemy_type,
 		sanguis::creator::enemy_kind,
 		sanguis::server::world::difficulty
@@ -100,6 +102,8 @@ private:
 	optional_angle;
 
 	sanguis::random_generator &random_generator_;
+
+	sanguis::server::weapons::common_parameters const weapons_parameters_;
 
 	sanguis::creator::enemy_type const enemy_type_;
 

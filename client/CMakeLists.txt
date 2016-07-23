@@ -13,6 +13,7 @@ set(
 	include/sanguis/client/args/resolution.hpp
 	include/sanguis/client/args/sge_log_level.hpp
 	include/sanguis/client/config/homedir.hpp
+	include/sanguis/client/config/log_location.hpp
 	include/sanguis/client/config/settings/file.hpp
 	include/sanguis/client/config/settings/object.hpp
 	include/sanguis/client/config/settings/object_fwd.hpp
@@ -205,7 +206,6 @@ set(
 	include/sanguis/client/draw2d/fradius_fwd.hpp
 	include/sanguis/client/draw2d/funit.hpp
 	include/sanguis/client/draw2d/insert_own_callback.hpp
-	include/sanguis/client/draw2d/log.hpp
 	include/sanguis/client/draw2d/log_location.hpp
 	include/sanguis/client/draw2d/optional_player_center.hpp
 	include/sanguis/client/draw2d/optional_player_center_fwd.hpp
@@ -245,6 +245,7 @@ set(
 	include/sanguis/client/draw2d/scene/light.hpp
 	include/sanguis/client/draw2d/scene/light_fwd.hpp
 	include/sanguis/client/draw2d/scene/light_texture_coordinates.hpp
+	include/sanguis/client/draw2d/scene/log_name.hpp
 	include/sanguis/client/draw2d/scene/object.hpp
 	include/sanguis/client/draw2d/scene/object_fwd.hpp
 	include/sanguis/client/draw2d/scene/state/array.hpp
@@ -275,6 +276,7 @@ set(
 	include/sanguis/client/draw2d/scene/world/create.hpp
 	include/sanguis/client/draw2d/scene/world/generate_batches.hpp
 	include/sanguis/client/draw2d/scene/world/graveyard.hpp
+	include/sanguis/client/draw2d/scene/world/log_location.hpp
 	include/sanguis/client/draw2d/scene/world/make_sprite.hpp
 	include/sanguis/client/draw2d/scene/world/make_texture.hpp
 	include/sanguis/client/draw2d/scene/world/none.hpp
@@ -487,7 +489,7 @@ set(
 	include/sanguis/client/load/hud/make_weapon_icons.hpp
 	include/sanguis/client/load/hud/weapon_icon_map.hpp
 	include/sanguis/client/load/hud/weapon_type.hpp
-	include/sanguis/client/load/log.hpp
+	include/sanguis/client/load/log_location.hpp
 	include/sanguis/client/load/model/animation.hpp
 	include/sanguis/client/load/model/animation_fwd.hpp
 	include/sanguis/client/load/model/animation_map.hpp
@@ -545,7 +547,6 @@ set(
 	include/sanguis/client/load/tiles/set.hpp
 	include/sanguis/client/load/tiles/set_fwd.hpp
 	include/sanguis/client/load/tiles/texture_container.hpp
-	include/sanguis/client/log.hpp
 	include/sanguis/client/log_location.hpp
 	include/sanguis/client/machine.hpp
 	include/sanguis/client/machine_fwd.hpp
@@ -640,6 +641,7 @@ set(
 	src/client/args/resolution.cpp
 	src/client/args/sge_log_level.cpp
 	src/client/config/homedir.cpp
+	src/client/config/log_location.cpp
 	src/client/config/settings/file.cpp
 	src/client/config/settings/object.cpp
 	src/client/config/settings/saver.cpp
@@ -724,7 +726,6 @@ set(
 	src/client/draw2d/factory/text.cpp
 	src/client/draw2d/factory/weapon_pickup.cpp
 	src/client/draw2d/font_color_format.cpp
-	src/client/draw2d/log.cpp
 	src/client/draw2d/log_location.cpp
 	src/client/draw2d/scene/background.cpp
 	src/client/draw2d/scene/background_dim.cpp
@@ -741,6 +742,7 @@ set(
 	src/client/draw2d/scene/hover/weapon_attribute.cpp
 	src/client/draw2d/scene/light.cpp
 	src/client/draw2d/scene/light_texture_coordinates.cpp
+	src/client/draw2d/scene/log_name.cpp
 	src/client/draw2d/scene/object.cpp
 	src/client/draw2d/scene/state/base.cpp
 	src/client/draw2d/scene/state/create.cpp
@@ -756,6 +758,7 @@ set(
 	src/client/draw2d/scene/world/create.cpp
 	src/client/draw2d/scene/world/generate_batches.cpp
 	src/client/draw2d/scene/world/graveyard.cpp
+	src/client/draw2d/scene/world/log_location.cpp
 	src/client/draw2d/scene/world/make_sprite.cpp
 	src/client/draw2d/scene/world/make_texture.cpp
 	src/client/draw2d/scene/world/none.cpp
@@ -817,7 +820,7 @@ set(
 	src/client/load/hud/context.cpp
 	src/client/load/hud/make_weapon_icons.cpp
 	src/client/load/hud/weapon_type.cpp
-	src/client/load/log.cpp
+	src/client/load/log_location.cpp
 	src/client/load/model/animation.cpp
 	src/client/load/model/collection.cpp
 	src/client/load/model/context.cpp
@@ -848,7 +851,6 @@ set(
 	src/client/load/tiles/context.cpp
 	src/client/load/tiles/make_textures.cpp
 	src/client/load/tiles/set.cpp
-	src/client/log.cpp
 	src/client/log_location.cpp
 	src/client/machine.cpp
 	src/client/make_send_callback.cpp

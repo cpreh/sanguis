@@ -25,6 +25,8 @@
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/object.hpp>
 
 
 namespace sanguis
@@ -45,6 +47,7 @@ class state
 	);
 public:
 	state(
+		fcppt::log::context &,
 		sanguis::random_generator &,
 		sge::renderer::device::core &,
 		sanguis::client::load::tiles::context &,
@@ -82,6 +85,7 @@ public:
 	) const;
 private:
 	state(
+		fcppt::log::context &,
 		sanguis::random_generator &,
 		sge::renderer::device::core &,
 		sanguis::client::load::tiles::context &,
@@ -90,6 +94,8 @@ private:
 		sanguis::creator::name const &,
 		sanguis::client::draw2d::scene::world::parameters const &
 	);
+
+	fcppt::log::object log_;
 
 	sge::renderer::device::core &renderer_;
 

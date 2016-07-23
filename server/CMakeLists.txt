@@ -30,8 +30,6 @@ set(
 	include/sanguis/server/ai/idle.hpp
 	include/sanguis/server/ai/in_range.hpp
 	include/sanguis/server/ai/is_visible.hpp
-	include/sanguis/server/ai/log.hpp
-	include/sanguis/server/ai/log_location.hpp
 	include/sanguis/server/ai/make_path.hpp
 	include/sanguis/server/ai/move_to_target.hpp
 	include/sanguis/server/ai/pathing/can_walk_diagonally.hpp
@@ -432,7 +430,6 @@ set(
 	include/sanguis/server/level_from_exp.hpp
 	include/sanguis/server/load.hpp
 	include/sanguis/server/load_fwd.hpp
-	include/sanguis/server/log.hpp
 	include/sanguis/server/log_location.hpp
 	include/sanguis/server/machine.hpp
 	include/sanguis/server/machine_fwd.hpp
@@ -603,6 +600,8 @@ set(
 	include/sanguis/server/weapons/attributes/spread_radius_fwd.hpp
 	include/sanguis/server/weapons/backswing_time.hpp
 	include/sanguis/server/weapons/cast_point.hpp
+	include/sanguis/server/weapons/common_parameters.hpp
+	include/sanguis/server/weapons/common_parameters_fwd.hpp
 	include/sanguis/server/weapons/const_optional_ref.hpp
 	include/sanguis/server/weapons/const_optional_ref_fwd.hpp
 	include/sanguis/server/weapons/create.hpp
@@ -636,7 +635,7 @@ set(
 	include/sanguis/server/weapons/insert_to_attack_result.hpp
 	include/sanguis/server/weapons/irs.hpp
 	include/sanguis/server/weapons/log.hpp
-	include/sanguis/server/weapons/log_location.hpp
+	include/sanguis/server/weapons/log_fwd.hpp
 	include/sanguis/server/weapons/magazine_size.hpp
 	include/sanguis/server/weapons/melee.hpp
 	include/sanguis/server/weapons/melee_parameters.hpp
@@ -771,8 +770,6 @@ set(
 	src/server/ai/go_to_grid_pos.cpp
 	src/server/ai/go_to_target.cpp
 	src/server/ai/idle.cpp
-	src/server/ai/log.cpp
-	src/server/ai/log_location.cpp
 	src/server/ai/make_path.cpp
 	src/server/ai/move_to_target.cpp
 	src/server/ai/pathing/can_walk_diagonally.cpp
@@ -972,7 +969,6 @@ set(
 	src/server/global/world_map.cpp
 	src/server/level_from_exp.cpp
 	src/server/load.cpp
-	src/server/log.cpp
 	src/server/log_location.cpp
 	src/server/machine.cpp
 	src/server/make_send_callback.cpp
@@ -1029,6 +1025,7 @@ set(
 	src/server/weapons/attributes/make_damage.cpp
 	src/server/weapons/attributes/make_health.cpp
 	src/server/weapons/attributes/spread_radius.cpp
+	src/server/weapons/common_parameters.cpp
 	src/server/weapons/create.cpp
 	src/server/weapons/default_ias.cpp
 	src/server/weapons/default_irs.cpp
@@ -1046,7 +1043,6 @@ set(
 	src/server/weapons/grenade_parameters.cpp
 	src/server/weapons/insert_to_attack_result.cpp
 	src/server/weapons/log.cpp
-	src/server/weapons/log_location.cpp
 	src/server/weapons/melee.cpp
 	src/server/weapons/melee_parameters.cpp
 	src/server/weapons/modifiers/random_amount.cpp
@@ -1140,6 +1136,7 @@ target_link_libraries(
 	${sanguis_server_TARGET}
 	${alda_TARGET}
 	${fcppt_core_TARGET}
+	${fcppt_log_TARGET}
 )
 
 install(

@@ -35,6 +35,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
+#include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -43,27 +44,30 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace
-{
-
-fcppt::log::object logger(
-	sanguis::log_parameters(
-		sanguis::server::states::log_location()
-		/
-		FCPPT_TEXT("unpaused")
-	)
-);
-
-}
-
-sanguis::server::states::unpaused::unpaused()
+sanguis::server::states::unpaused::unpaused(
+	my_context _ctx
+)
 :
+	my_base(
+		_ctx
+	),
+	log_{
+		this->context<
+			sanguis::server::machine
+		>().log_context(),
+		sanguis::server::states::log_location(),
+		sanguis::log_parameters(
+			fcppt::log::name{
+				FCPPT_TEXT("unpaused")
+			}
+		)
+	},
 	slowdown_{
 		sanguis::clock()
 	}
 {
 	FCPPT_LOG_DEBUG(
-		logger,
+		log_,
 		fcppt::log::_
 			<< FCPPT_TEXT("create")
 	);
@@ -72,7 +76,7 @@ sanguis::server::states::unpaused::unpaused()
 sanguis::server::states::unpaused::~unpaused()
 {
 	FCPPT_LOG_DEBUG(
-		logger,
+		log_,
 		fcppt::log::_
 			<< FCPPT_TEXT("destroy")
 	);
@@ -346,7 +350,7 @@ sanguis::server::states::unpaused::operator()(
 )
 {
 	FCPPT_LOG_WARNING(
-		::logger,
+		log_,
 		fcppt::log::_
 			<< FCPPT_TEXT("received superfluous unpause!")
 	);

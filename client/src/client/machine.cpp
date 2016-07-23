@@ -1,7 +1,8 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/io_service.hpp>
+#include <sanguis/log_parameters.hpp>
 #include <sanguis/client/cursor_fwd.hpp>
-#include <sanguis/client/log.hpp>
+#include <sanguis/client/log_location.hpp>
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/config/settings/object_fwd.hpp>
 #include <sanguis/client/events/connected.hpp>
@@ -41,8 +42,10 @@
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>
+#include <fcppt/log/context_fwd.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
+#include <fcppt/log/name.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -55,6 +58,7 @@
 
 
 sanguis::client::machine::machine(
+	fcppt::log::context &_log_context,
 	sanguis::client::config::settings::object &_settings,
 	boost::program_options::variables_map const &_options,
 	sanguis::client::server_callback const &_server_callback,
@@ -71,6 +75,18 @@ sanguis::client::machine::machine(
 	sanguis::client::cursor &_cursor_gfx
 )
 :
+	log_context_{
+		_log_context
+	},
+	log_{
+		_log_context,
+		sanguis::client::log_location(),
+		sanguis::log_parameters(
+			fcppt::log::name{
+				FCPPT_TEXT("machine")
+			}
+		)
+	},
 	settings_(
 		_settings
 	),
@@ -94,6 +110,7 @@ sanguis::client::machine::machine(
 	),
 	net_(
 		alda::net::parameters(
+			_log_context,
 			_io_service.impl(),
 			sanguis::net::send_buffer_size(),
 			sanguis::net::receive_buffer_size()
@@ -163,9 +180,9 @@ sanguis::client::machine::quickstart(
 )
 {
 	FCPPT_LOG_DEBUG(
-		sanguis::client::log(),
+		log_,
 		fcppt::log::_
-			<< FCPPT_TEXT("machine::quickstart()")
+			<< FCPPT_TEXT("quickstart()")
 	);
 
 	try
@@ -227,7 +244,7 @@ sanguis::client::machine::send(
 	)
 	{
 		FCPPT_LOG_ERROR(
-			sanguis::client::log(),
+			log_,
 			fcppt::log::_
 				<< FCPPT_TEXT("Not enough space left in the send_buffer")
 		);
@@ -273,7 +290,7 @@ void
 sanguis::client::machine::quit()
 {
 	FCPPT_LOG_DEBUG(
-		sanguis::client::log(),
+		log_,
 		fcppt::log::_
 			<< FCPPT_TEXT("Exiting the client!")
 	);
@@ -365,6 +382,13 @@ sanguis::client::machine::cursor_gfx() const
 {
 	return
 		cursor_gfx_;
+}
+
+fcppt::log::context &
+sanguis::client::machine::log_context() const
+{
+	return
+		log_context_;
 }
 
 void

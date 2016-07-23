@@ -5,6 +5,7 @@
 #include <sanguis/creator/enemy_kind_fwd.hpp>
 #include <sanguis/creator/enemy_type_fwd.hpp>
 #include <sanguis/creator/spawn_pos_fwd.hpp>
+#include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/insert_simple_pair.hpp>
 
@@ -21,6 +22,7 @@ make_spawner(
 	sanguis::creator::enemy_type,
 	sanguis::creator::enemy_kind,
 	sanguis::creator::spawn_pos,
+	sanguis::server::weapons::common_parameters const &,
 	sanguis::random_generator &,
 	sanguis::server::world::difficulty
 );

@@ -10,16 +10,19 @@
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/optional/maybe.hpp>
 
 
 sanguis::client::load::model::weapon_category::weapon_category(
+	fcppt::log::object &_log,
 	sanguis::model::weapon_category const &_weapon_category,
 	sanguis::client::load::model::global_parameters const &_param
 )
 :
 	animations_(
 		sanguis::client::load::model::make_animations(
+			_log,
 			_weapon_category,
 			_param
 		)

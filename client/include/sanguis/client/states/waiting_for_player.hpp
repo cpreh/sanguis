@@ -7,6 +7,7 @@
 #include <sanguis/messages/call/result_fwd.hpp>
 #include <sanguis/messages/server/add_own_player_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
 #include <boost/statechart/custom_reaction.hpp>
@@ -68,6 +69,8 @@ public:
 	operator()(
 		sanguis::messages::server::add_own_player const &
 	);
+private:
+	fcppt::log::object log_;
 };
 
 }

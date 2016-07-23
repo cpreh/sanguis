@@ -1,11 +1,11 @@
 #ifndef SANGUIS_SERVER_WEAPONS_PISTOL_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_PISTOL_HPP_INCLUDED
 
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/server/weapons/attack_fwd.hpp>
 #include <sanguis/server/weapons/attack_result_fwd.hpp>
+#include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/weapons/parameters_fwd.hpp>
 #include <sanguis/server/weapons/pistol_parameters_fwd.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
@@ -30,7 +30,7 @@ class pistol
 	);
 public:
 	pistol(
-		sanguis::random_generator &,
+		sanguis::server::weapons::common_parameters const &,
 		sanguis::weapon_type,
 		sanguis::server::weapons::pistol_parameters const &
 	);

@@ -12,6 +12,7 @@
 #include <sanguis/tiles/impl/images_base.hpp>
 #include <sanguis/tiles/impl/optional_content_path.hpp>
 #include <sanguis/tiles/impl/to_string.hpp>
+#include <fcppt/log/object_fwd.hpp>
 
 
 namespace sanguis
@@ -26,6 +27,7 @@ template<
 >
 sanguis::tiles::impl::optional_content_path
 non_connecting_images(
+	fcppt::log::object &_log,
 	sanguis::tiles::collection &_collection,
 	sanguis::tiles::error const _error_code,
 	sanguis::creator::tile_grid<
@@ -48,6 +50,7 @@ non_connecting_images(
 			sanguis::tiles::impl::optional_content_path{}
 		:
 			sanguis::tiles::impl::images_base(
+				_log,
 				_collection,
 				_error_code,
 				sanguis::tiles::pair<

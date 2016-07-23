@@ -14,6 +14,7 @@
 #include <sanguis/server/weapons/attack.hpp>
 #include <sanguis/server/weapons/attack_result.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
+#include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/parameters.hpp>
 #include <sanguis/server/weapons/pistol.hpp>
@@ -29,14 +30,14 @@
 
 
 sanguis::server::weapons::pistol::pistol(
-	sanguis::random_generator &_random_generator,
+	sanguis::server::weapons::common_parameters const &_common_parameters,
 	sanguis::weapon_type const _weapon_type,
 	sanguis::server::weapons::pistol_parameters const &_parameters
 )
 :
 	sanguis::server::weapons::weapon(
 		sanguis::server::weapons::parameters{
-			_random_generator,
+			_common_parameters,
 			_weapon_type,
 			sanguis::server::weapons::attributes::optional_accuracy(
 				_parameters.accuracy()

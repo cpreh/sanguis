@@ -17,6 +17,7 @@
 #include <sanguis/server/weapons/attack_result.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
+#include <sanguis/server/weapons/common_parameters.hpp>
 #include <sanguis/server/weapons/insert_to_attack_result.hpp>
 #include <sanguis/server/weapons/monster_spawner.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
@@ -33,12 +34,13 @@
 
 
 sanguis::server::weapons::monster_spawner::monster_spawner(
-	sanguis::random_generator &_random_generator
+	sanguis::server::weapons::common_parameters const &_common_parameters
 )
 :
 	sanguis::server::weapons::weapon(
 		sanguis::server::weapons::parameters{
-			_random_generator, sanguis::weapon_type(
+			_common_parameters,
+			sanguis::weapon_type(
 				sanguis::primary_weapon_type::pistol
 			),
 			sanguis::server::weapons::attributes::optional_accuracy(),
@@ -58,7 +60,10 @@ sanguis::server::weapons::monster_spawner::monster_spawner(
 			),
 			sanguis::server::weapons::optional_reload_time()
 		}
-	)
+	),
+	common_parameters_{
+		_common_parameters
+	}
 {
 }
 
@@ -72,6 +77,9 @@ sanguis::server::weapons::monster_spawner::monster_spawner(
 :
 	sanguis::server::weapons::weapon{
 		_parameters
+	},
+	common_parameters_{
+		_parameters.common_parameters()
 	}
 {
 }
@@ -101,6 +109,7 @@ sanguis::server::weapons::monster_spawner::do_attack(
 			_attack.environment().insert(
 				sanguis::server::entities::enemies::create(
 					this->random_generator(),
+					common_parameters_,
 					fcppt::random::distribution::make_basic(
 						fcppt::random::distribution::parameters::make_uniform_enum<
 							sanguis::creator::enemy_type

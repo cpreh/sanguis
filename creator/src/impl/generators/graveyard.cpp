@@ -169,6 +169,7 @@ sanguis::creator::impl::generators::graveyard(
 	sanguis::creator::spawn_container const
 	spawners{
 		sanguis::creator::impl::place_spawners(
+			_parameters.log(),
 			grid,
 			openings,
 			10u,

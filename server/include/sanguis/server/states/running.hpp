@@ -15,6 +15,7 @@
 #include <sanguis/server/states/unpaused_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
+#include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
 #include <boost/statechart/custom_reaction.hpp>
@@ -32,24 +33,27 @@ namespace states
 
 class running
 :
-	public boost::statechart::state<
-		sanguis::server::states::running,
-		sanguis::server::machine,
-		sanguis::server::states::unpaused
->
+	public
+		boost::statechart::state<
+			sanguis::server::states::running,
+			sanguis::server::machine,
+			sanguis::server::states::unpaused
+		>
 {
 	FCPPT_NONCOPYABLE(
 		running
 	);
 public:
-	typedef boost::mpl::list2<
+	typedef
+	boost::mpl::list2<
 		boost::statechart::custom_reaction<
 			sanguis::server::events::message
 		>,
 		boost::statechart::custom_reaction<
 			sanguis::server::events::disconnect
 		>
-	> reactions;
+	>
+	reactions;
 
 	explicit
 	running(
@@ -96,6 +100,8 @@ public:
 	sanguis::server::global::context &
 	global_context();
 private:
+	fcppt::log::object log_;
+
 	sanguis::server::console console_;
 
 	fcppt::unique_ptr<

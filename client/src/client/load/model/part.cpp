@@ -11,16 +11,19 @@
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/optional/maybe.hpp>
 
 
 sanguis::client::load::model::part::part(
+	fcppt::log::object &_log,
 	sanguis::model::part const &_part,
 	sanguis::client::load::model::global_parameters const &_param
 )
 :
 	categories_(
 		sanguis::client::load::model::make_weapon_categories(
+			_log,
 			_part,
 			_param
 		)

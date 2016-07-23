@@ -11,6 +11,7 @@
 #include <sanguis/server/entities/enemies/create.hpp>
 #include <sanguis/server/entities/enemies/special_chance.hpp>
 #include <sanguis/server/environment/load_context.hpp>
+#include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/generate_single_spawns.hpp>
 #include <sanguis/server/world/insert_pair_container.hpp>
@@ -23,6 +24,7 @@ sanguis::server::world::generate_single_spawns(
 	sanguis::creator::enemy_type const _enemy_type,
 	sanguis::creator::enemy_kind const _enemy_kind,
 	sanguis::creator::spawn_pos const _pos,
+	sanguis::server::weapons::common_parameters const &_weapons_parameters,
 	sanguis::random_generator &_random_generator,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::world::difficulty const _difficulty
@@ -34,6 +36,7 @@ sanguis::server::world::generate_single_spawns(
 			sanguis::server::world::place_with_id_callback(
 				[
 					&_random_generator,
+					&_weapons_parameters,
 					_enemy_type,
 					_enemy_kind,
 					_difficulty,
@@ -42,6 +45,7 @@ sanguis::server::world::generate_single_spawns(
 					return
 						sanguis::server::entities::enemies::create(
 							_random_generator,
+							_weapons_parameters,
 							_enemy_type,
 							_enemy_kind,
 							_difficulty,

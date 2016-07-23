@@ -6,6 +6,7 @@
 #include <sanguis/server/weapons/accuracy.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
+#include <sanguis/server/weapons/common_parameters.hpp>
 #include <sanguis/server/weapons/create_function.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
@@ -37,6 +38,10 @@ sanguis::server::weapons::factory::sentry(
 		_parameters.random_generator()
 	);
 
+	sanguis::server::weapons::common_parameters const common_parameters{
+		_parameters.common_parameters()
+	};
+
 	sanguis::server::entities::enemies::difficulty const difficulty(
 		_parameters.difficulty()
 	);
@@ -44,6 +49,7 @@ sanguis::server::weapons::factory::sentry(
 	sanguis::server::weapons::create_function const spawn_weapon{
 		[
 			&random_generator,
+			common_parameters,
 			difficulty
 		]
 		{
@@ -54,7 +60,7 @@ sanguis::server::weapons::factory::sentry(
 					fcppt::make_unique_ptr<
 						sanguis::server::weapons::pistol
 					>(
-						random_generator,
+						common_parameters,
 						sanguis::weapon_type(
 							sanguis::primary_weapon_type::pistol
 						),
@@ -111,7 +117,7 @@ sanguis::server::weapons::factory::sentry(
 			fcppt::make_unique_ptr<
 				sanguis::server::weapons::sentry
 			>(
-				random_generator,
+				_parameters.common_parameters(),
 				sanguis::server::weapons::spawn_weapon(
 					spawn_weapon
 				),

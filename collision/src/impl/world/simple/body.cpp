@@ -7,7 +7,6 @@
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/impl/grid_to_meter.hpp>
 #include <sanguis/collision/impl/is_null.hpp>
-#include <sanguis/collision/impl/log.hpp>
 #include <sanguis/collision/impl/move.hpp>
 #include <sanguis/collision/impl/world/simple/body.hpp>
 #include <sanguis/collision/impl/world/simple/body_remove_callback.hpp>
@@ -77,7 +76,7 @@ sanguis::collision::impl::world::simple::body::body(
 		)
 	)
 		FCPPT_LOG_WARNING(
-			sanguis::collision::impl::log(),
+			_parameters.log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("Body with radius ")
 				<< radius_

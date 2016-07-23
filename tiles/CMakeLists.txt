@@ -18,6 +18,8 @@ set(
 	include/sanguis/tiles/error_image.hpp
 	include/sanguis/tiles/is_background.hpp
 	include/sanguis/tiles/is_background_fwd.hpp
+	include/sanguis/tiles/log.hpp
+	include/sanguis/tiles/log_fwd.hpp
 	include/sanguis/tiles/log_location.hpp
 	include/sanguis/tiles/orientation.hpp
 	include/sanguis/tiles/orientation_fwd.hpp
@@ -44,7 +46,7 @@ set(
 	src/impl/error_image_colors.cpp
 	src/impl/is_background.cpp
 	src/impl/load_file.cpp
-	src/impl/log.cpp
+	src/impl/log_name.cpp
 	src/impl/make_areas.cpp
 	src/impl/make_neighbors.cpp
 	src/impl/make_orientation.cpp
@@ -73,7 +75,7 @@ set(
 	src/include/sanguis/tiles/impl/images_base.hpp
 	src/include/sanguis/tiles/impl/is_background.hpp
 	src/include/sanguis/tiles/impl/load_file.hpp
-	src/include/sanguis/tiles/impl/log.hpp
+	src/include/sanguis/tiles/impl/log_name.hpp
 	src/include/sanguis/tiles/impl/make_areas.hpp
 	src/include/sanguis/tiles/impl/make_neighbors.hpp
 	src/include/sanguis/tiles/impl/make_orientation.hpp
@@ -95,6 +97,7 @@ set(
 	src/include/sanguis/tiles/impl/shift_fwd.hpp
 	src/include/sanguis/tiles/impl/tile_name.hpp
 	src/include/sanguis/tiles/impl/to_string.hpp
+	src/log.cpp
 	src/log_location.cpp
 	src/pair.cpp
 	src/pair_comparison.cpp

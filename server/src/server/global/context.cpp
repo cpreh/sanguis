@@ -46,6 +46,7 @@
 #include <sanguis/server/global/load_context.hpp>
 #include <sanguis/server/global/next_id_callback.hpp>
 #include <sanguis/server/global/source_world_pair.hpp>
+#include <sanguis/server/weapons/common_parameters.hpp>
 #include <sanguis/server/weapons/optional_target.hpp>
 #include <sanguis/server/weapons/target.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
@@ -63,9 +64,11 @@
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/at_optional.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
+#include <fcppt/log/context_fwd.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/info.hpp>
+#include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -84,28 +87,30 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace
-{
-
-fcppt::log::object logger(
-	sanguis::log_parameters(
-		sanguis::server::log_location()
-		/
-		FCPPT_TEXT("global")
-		/
-		FCPPT_TEXT("context")
-	)
-);
-
-}
-
 sanguis::server::global::context::context(
+	fcppt::log::context &_log_context,
 	sanguis::server::unicast_callback const &_send_unicast,
 	sanguis::server::load const &_model_context,
 	sanguis::server::console &_console
 )
 :
 	sanguis::server::world::context(),
+	log_{
+		_log_context,
+		sanguis::server::log_location()
+		/
+		fcppt::log::name{
+			FCPPT_TEXT("global")
+		},
+		sanguis::log_parameters(
+			fcppt::log::name{
+				FCPPT_TEXT("context")
+			}
+		)
+	},
+	weapons_log_{
+		_log_context,
+	},
 	random_generator_(
 		sanguis::random_seed()
 	),
@@ -139,7 +144,9 @@ sanguis::server::global::context::context(
 	worlds_(
 		sanguis::server::global::generate_worlds(
 			sanguis::server::world::parameters(
+				_log_context,
 				random_generator_,
+				this->weapon_parameters(),
 				*this,
 				*load_context_
 			)
@@ -170,6 +177,7 @@ sanguis::server::global::context::insert_player(
 	sanguis::server::entities::player_unique_ptr player_ptr(
 		sanguis::server::create_player(
 			random_generator_,
+			this->weapon_parameters(),
 			*load_context_,
 			_name,
 			send_unicast_,
@@ -230,9 +238,11 @@ sanguis::server::global::context::insert_player(
 					);
 			}
 		),
-		[]{
+		[
+			this
+		]{
 			FCPPT_LOG_ERROR(
-				logger,
+				log_,
 				fcppt::log::_
 					<< FCPPT_TEXT("Unable to insert a player!")
 			);
@@ -288,10 +298,11 @@ sanguis::server::global::context::player_disconnect(
 			_player_id
 		),
 		[
+			this,
 			_player_id
 		]{
 			FCPPT_LOG_INFO(
-				logger,
+				log_,
 				fcppt::log::_
 					<< FCPPT_TEXT("Player ")
 					<< _player_id
@@ -453,11 +464,11 @@ sanguis::server::global::context::player_cheat(
 )
 {
 	sanguis::server::cheat::process(
-		random_generator_,
 		this->player_exn(
 			_player_id
 		),
 		_cheat,
+		this->weapon_parameters(),
 		send_unicast_
 	);
 }
@@ -481,7 +492,7 @@ sanguis::server::global::context::player_choose_perk(
 	)
 	{
 		FCPPT_LOG_WARNING(
-			::logger,
+			log_,
 			fcppt::log::_
 				<< FCPPT_TEXT("Player with id ")
 				<< _player_id
@@ -616,6 +627,16 @@ sanguis::server::global::context::transfer_entity(
 			}
 		)
 	);
+}
+
+sanguis::server::weapons::common_parameters
+sanguis::server::global::context::weapon_parameters()
+{
+	return
+		sanguis::server::weapons::common_parameters{
+			weapons_log_,
+			random_generator_
+		};
 }
 
 sanguis::server::world::object &

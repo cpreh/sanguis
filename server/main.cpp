@@ -5,6 +5,10 @@
 #include <fcppt/exception.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/io/cerr.hpp>
+#include <fcppt/log/context.hpp>
+#include <fcppt/log/enabled_levels.hpp>
+#include <fcppt/log/level.hpp>
+#include <fcppt/log/setting.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstdlib>
 #include <exception>
@@ -20,8 +24,17 @@ main(
 try
 {
 	// TODO: Use arguments
+	fcppt::log::context log_context{
+		fcppt::log::setting{
+			fcppt::log::enabled_levels(
+				fcppt::log::level::info
+			)
+		}
+	};
+
 	sanguis::server::object_base_unique_ptr const server(
 		sanguis::server::create(
+			log_context,
 			// TODO
 			alda::net::port(
 				31337u

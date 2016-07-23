@@ -1,3 +1,4 @@
+#include <sanguis/collision/log_fwd.hpp>
 #include <sanguis/collision/world/body.hpp>
 #include <sanguis/collision/world/body_enter_container.hpp>
 #include <sanguis/collision/world/body_exit_container.hpp>
@@ -107,6 +108,7 @@ sanguis::server::collision::body::radius() const
 
 sanguis::collision::world::body_enter_container
 sanguis::server::collision::body::transfer(
+	sanguis::collision::log const &_log,
 	sanguis::collision::world::object &_world,
 	sanguis::collision::world::created const _created,
 	sanguis::server::center const _center,
@@ -123,6 +125,7 @@ sanguis::server::collision::body::transfer(
 			body_,
 			_world.create_body(
 				sanguis::collision::world::body_parameters(
+					_log,
 					sanguis::server::collision::to_center(
 						_center
 					),

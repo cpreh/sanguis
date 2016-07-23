@@ -1,6 +1,5 @@
 #include <sanguis/perk_type.hpp>
 #include <sanguis/client/level.hpp>
-#include <sanguis/client/log.hpp>
 #include <sanguis/client/player_level.hpp>
 #include <sanguis/client/perk/change_callback.hpp>
 #include <sanguis/client/perk/choosable.hpp>
@@ -15,11 +14,8 @@
 #include <sanguis/client/perk/state.hpp>
 #include <sanguis/client/perk/tree.hpp>
 #include <sanguis/client/perk/tree_unique_ptr.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/pre.hpp>
-#include <fcppt/log/_.hpp>
-#include <fcppt/log/error.hpp>
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/object_impl.hpp>

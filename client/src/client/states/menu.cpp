@@ -30,6 +30,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
+#include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
@@ -39,19 +40,6 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace
-{
-
-fcppt::log::object logger(
-	sanguis::log_parameters(
-		sanguis::client::states::log_location()
-		/
-		FCPPT_TEXT("menu")
-	)
-);
-
-}
-
 sanguis::client::states::menu::menu(
 	my_context _ctx
 )
@@ -59,6 +47,17 @@ sanguis::client::states::menu::menu(
 	my_base(
 		_ctx
 	),
+	log_{
+		this->context<
+			sanguis::client::machine
+		>().log_context(),
+		sanguis::client::states::log_location(),
+		sanguis::log_parameters(
+			fcppt::log::name{
+				FCPPT_TEXT("menu")
+			}
+		)
+	},
 	menu_(
 		this->context<
 			sanguis::client::machine
@@ -195,7 +194,7 @@ sanguis::client::states::menu::react(
 )
 {
 	FCPPT_LOG_DEBUG(
-		::logger,
+		log_,
 		fcppt::log::_
 			<< FCPPT_TEXT("Connected, sending client info")
 	);
@@ -238,7 +237,7 @@ sanguis::client::states::menu::operator()(
 )
 {
 	FCPPT_LOG_DEBUG(
-		::logger,
+		log_,
 		fcppt::log::_
 			<< FCPPT_TEXT("Received connected message")
 	);

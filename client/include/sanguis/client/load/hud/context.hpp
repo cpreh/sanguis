@@ -7,6 +7,8 @@
 #include <sanguis/client/load/resource/textures_fwd.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/object.hpp>
 
 
 namespace sanguis
@@ -24,8 +26,8 @@ class context
 		context
 	);
 public:
-	explicit
 	context(
+		fcppt::log::context &,
 		sanguis::client::load::resource::textures const &
 	);
 
@@ -36,6 +38,8 @@ public:
 		sanguis::weapon_type
 	);
 private:
+	fcppt::log::object log_;
+
 	sanguis::client::load::hud::weapon_icon_map const weapon_icons_;
 
 	sge::texture::part const &missing_texture_;

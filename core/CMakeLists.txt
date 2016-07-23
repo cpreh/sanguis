@@ -3,14 +3,12 @@ set(
 	include/sanguis/app_name.hpp
 	include/sanguis/company_name.hpp
 	include/sanguis/config_app_name.hpp
-	include/sanguis/log_context.hpp
 	include/sanguis/log_location.hpp
 	include/sanguis/log_parameters.hpp
 	include/sanguis/log_stream.hpp
 	src/app_name.cpp
 	src/company_name.cpp
 	src/config_app_name.cpp
-	src/log_context.cpp
 	src/log_location.cpp
 	src/log_parameters.cpp
 	src/log_stream.cpp

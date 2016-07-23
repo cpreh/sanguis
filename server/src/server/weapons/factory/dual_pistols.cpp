@@ -28,7 +28,7 @@ sanguis::server::weapons::factory::dual_pistols(
 			fcppt::make_unique_ptr<
 				sanguis::server::weapons::pistol
 			>(
-				_parameters.random_generator(),
+				_parameters.common_parameters(),
 				_parameters.weapon_type(),
 				sanguis::server::weapons::pistol_parameters(
 					sanguis::server::weapons::accuracy(

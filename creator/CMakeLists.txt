@@ -107,7 +107,7 @@ set(
 	src/impl/generators/rooms.cpp
 	src/impl/generators/start.cpp
 	src/impl/graveyard_name.cpp
-	src/impl/log.cpp
+	src/impl/log_name.cpp
 	src/impl/maze_name.cpp
 	src/impl/normal_generator_vector.cpp
 	src/impl/parameters.cpp
@@ -139,7 +139,7 @@ set(
 	src/include/sanguis/creator/impl/generators/start.hpp
 	src/include/sanguis/creator/impl/graveyard_name.hpp
 	src/include/sanguis/creator/impl/interior_range.hpp
-	src/include/sanguis/creator/impl/log.hpp
+	src/include/sanguis/creator/impl/log_name.hpp
 	src/include/sanguis/creator/impl/maze_name.hpp
 	src/include/sanguis/creator/impl/maze_result.hpp
 	src/include/sanguis/creator/impl/maze_to_tile_grid.hpp

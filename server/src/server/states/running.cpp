@@ -38,6 +38,7 @@
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/info.hpp>
+#include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -46,19 +47,6 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace
-{
-
-fcppt::log::object logger(
-	sanguis::log_parameters(
-		sanguis::server::states::log_location()
-		/
-		FCPPT_TEXT("running")
-	)
-);
-
-}
-
 sanguis::server::states::running::running(
 	my_context _ctx
 )
@@ -66,6 +54,17 @@ sanguis::server::states::running::running(
 	my_base(
 		_ctx
 	),
+	log_{
+		this->context<
+			sanguis::server::machine
+		>().log_context(),
+		sanguis::server::states::log_location(),
+		sanguis::log_parameters(
+			fcppt::log::name{
+				FCPPT_TEXT("running")
+			}
+		)
+	},
 	console_(
 		sanguis::server::make_send_callback(
 			this->context<
@@ -82,6 +81,9 @@ sanguis::server::states::running::running(
 		fcppt::make_unique_ptr<
 			sanguis::server::global::context
 		>(
+			this->context<
+				sanguis::server::machine
+			>().log_context(),
 			sanguis::server::make_unicast_callback(
 				this->context<
 					sanguis::server::machine
@@ -95,7 +97,7 @@ sanguis::server::states::running::running(
 	)
 {
 	FCPPT_LOG_DEBUG(
-		::logger,
+		log_,
 		fcppt::log::_
 			<< FCPPT_TEXT("constructor, listening")
 	);
@@ -150,7 +152,7 @@ sanguis::server::states::running::react(
 )
 {
 	FCPPT_LOG_INFO(
-		::logger,
+		log_,
 		fcppt::log::_
 			<< FCPPT_TEXT("Client with id ")
 			<< _message.id()
@@ -180,7 +182,7 @@ sanguis::server::states::running::operator()(
 	)
 	{
 		FCPPT_LOG_WARNING(
-			::logger,
+			log_,
 			fcppt::log::_
 				<< FCPPT_TEXT("Got multiple client infos")
 		);
@@ -192,7 +194,7 @@ sanguis::server::states::running::operator()(
 	}
 
 	FCPPT_LOG_DEBUG(
-		::logger,
+		log_,
 		fcppt::log::_
 			<< FCPPT_TEXT("client sent info")
 	)
@@ -231,6 +233,7 @@ sanguis::server::states::running::operator()(
 		)
 	);
 
+	// TODO: maybe_front
 	if(
 		command.empty()
 	)
@@ -240,7 +243,7 @@ sanguis::server::states::running::operator()(
 			);
 
 	FCPPT_LOG_DEBUG(
-		::logger,
+		log_,
 		fcppt::log::_
 			<< FCPPT_TEXT("Received console command: ")
 			<< command[0]
@@ -260,7 +263,7 @@ sanguis::server::states::running::operator()(
 	)
 	{
 		FCPPT_LOG_ERROR(
-			::logger,
+			log_,
 			fcppt::log::_
 				<< _error.string()
 		);

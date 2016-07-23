@@ -9,6 +9,7 @@
 #include <sanguis/server/entities/spawns/limit.hpp>
 #include <sanguis/server/entities/spawns/limited.hpp>
 #include <sanguis/server/entities/spawns/total_count.hpp>
+#include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/grid_pos_to_center.hpp>
 #include <sanguis/server/world/insert_simple_pair.hpp>
@@ -22,6 +23,7 @@ sanguis::server::world::make_spawner(
 	sanguis::creator::enemy_type const _enemy_type,
 	sanguis::creator::enemy_kind const _enemy_kind,
 	sanguis::creator::spawn_pos const _pos,
+	sanguis::server::weapons::common_parameters const &_weapon_parameters,
 	sanguis::random_generator &_random_generator,
 	sanguis::server::world::difficulty const _difficulty
 )
@@ -35,6 +37,7 @@ sanguis::server::world::make_spawner(
 					sanguis::server::entities::spawns::limited
 				>(
 					_random_generator,
+					_weapon_parameters,
 					_enemy_type,
 					_enemy_kind,
 					_difficulty,

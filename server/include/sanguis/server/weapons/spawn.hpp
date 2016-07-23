@@ -1,7 +1,6 @@
 #ifndef SANGUIS_SERVER_WEAPONS_SPAWN_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_SPAWN_HPP_INCLUDED
 
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/weapon_type_fwd.hpp>
 #include <sanguis/server/entities/auto_weak_link.hpp>
@@ -10,6 +9,7 @@
 #include <sanguis/server/weapons/attack_result_fwd.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
+#include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/spawn_parameters_fwd.hpp>
@@ -34,7 +34,7 @@ class spawn
 	);
 public:
 	spawn(
-		sanguis::random_generator &,
+		sanguis::server::weapons::common_parameters const &,
 		sanguis::weapon_type,
 		sanguis::server::weapons::spawn_weapon const &,
 		sanguis::server::weapons::range,

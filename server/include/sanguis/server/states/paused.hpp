@@ -9,11 +9,12 @@
 #include <sanguis/server/events/message_fwd.hpp>
 #include <sanguis/server/states/running.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/statechart/result.hpp>
-#include <boost/statechart/simple_state.hpp>
+#include <boost/statechart/state.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -26,22 +27,28 @@ namespace states
 
 class paused
 :
-	public boost::statechart::simple_state<
-		sanguis::server::states::paused,
-		sanguis::server::states::running
-	>
+	public
+		boost::statechart::state<
+			sanguis::server::states::paused,
+			sanguis::server::states::running
+		>
 {
 	FCPPT_NONCOPYABLE(
 		paused
 	);
 public:
-	typedef boost::mpl::list1<
+	typedef
+	boost::mpl::list1<
 		boost::statechart::custom_reaction<
 			sanguis::server::events::message
 		>
-	> reactions;
+	>
+	reactions;
 
-	paused();
+	explicit
+	paused(
+		my_context
+	);
 
 	~paused()
 	override;
@@ -72,6 +79,8 @@ public:
 private:
 	boost::statechart::result
 	unpause_impl();
+
+	fcppt::log::object log_;
 };
 
 }

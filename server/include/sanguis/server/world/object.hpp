@@ -13,6 +13,7 @@
 #include <sanguis/weapon_status_fwd.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/world_name.hpp>
+#include <sanguis/collision/log.hpp>
 #include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/collision/world/object_unique_ptr.hpp>
 #include <sanguis/creator/destructible_container.hpp>
@@ -39,6 +40,7 @@
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/world/context_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <sanguis/server/world/info.hpp>
@@ -51,6 +53,7 @@
 #include <sanguis/server/world/sight_range_map.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/unique_ptr_fwd.hpp>
+#include <fcppt/log/object.hpp>
 #include <fcppt/optional/reference_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <map>
@@ -68,7 +71,7 @@ namespace world
 class object
 :
 	private
-	sanguis::server::environment::object
+		sanguis::server::environment::object
 {
 	FCPPT_NONCOPYABLE(
 		object
@@ -292,6 +295,10 @@ public:
 	difficulty() const
 	override;
 
+	sanguis::collision::log const &
+	collision_log() const
+	override;
+
 	sanguis::collision::world::object &
 	collision_world() const
 	override;
@@ -341,7 +348,8 @@ private:
 	void
 	insert_spawns(
 		sanguis::creator::spawn_container const &,
-		sanguis::random_generator &
+		sanguis::random_generator &,
+		sanguis::server::weapons::common_parameters const &
 	);
 
 	void
@@ -349,6 +357,8 @@ private:
 		sanguis::creator::destructible_container const &,
 		sanguis::random_generator &
 	);
+
+	fcppt::log::object log_;
 
 	sanguis::server::world::info const info_;
 
@@ -359,6 +369,8 @@ private:
 	sanguis::server::world::context &global_context_;
 
 	sanguis::server::environment::load_context &load_context_;
+
+	sanguis::collision::log const collision_log_;
 
 	sanguis::collision::world::object_unique_ptr const collision_world_;
 

@@ -18,6 +18,7 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/attack.hpp>
 #include <sanguis/server/weapons/attack_result.hpp>
+#include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/parameters.hpp>
 #include <sanguis/server/weapons/shells.hpp>
@@ -41,14 +42,14 @@
 
 
 sanguis::server::weapons::shotgun::shotgun(
-	sanguis::random_generator &_random_generator,
+	sanguis::server::weapons::common_parameters const &_common_parameters,
 	sanguis::weapon_type const _weapon_type,
 	sanguis::server::weapons::shotgun_parameters const &_parameters
 )
 :
 	sanguis::server::weapons::weapon(
 		sanguis::server::weapons::parameters{
-			_random_generator,
+			_common_parameters,
 			_weapon_type,
 			sanguis::server::weapons::attributes::optional_accuracy(
 				_parameters.accuracy()

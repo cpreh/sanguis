@@ -4,6 +4,7 @@
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
+#include <sanguis/server/weapons/common_parameters.hpp>
 #include <sanguis/server/weapons/factory/parameters_fwd.hpp>
 #include <fcppt/nonassignable.hpp>
 
@@ -24,10 +25,13 @@ class parameters
 	);
 public:
 	parameters(
-		sanguis::random_generator &,
+		sanguis::server::weapons::common_parameters const &,
 		sanguis::weapon_type,
 		sanguis::server::entities::enemies::difficulty
 	);
+
+	sanguis::server::weapons::common_parameters const &
+	common_parameters() const;
 
 	sanguis::random_generator &
 	random_generator() const;
@@ -38,7 +42,7 @@ public:
 	sanguis::server::entities::enemies::difficulty
 	difficulty() const;
 private:
-	sanguis::random_generator &random_generator_;
+	sanguis::server::weapons::common_parameters const common_parameters_;
 
 	sanguis::weapon_type const weapon_type_;
 

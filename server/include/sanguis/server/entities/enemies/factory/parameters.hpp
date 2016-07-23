@@ -9,6 +9,7 @@
 #include <sanguis/server/entities/enemies/special_chance.hpp>
 #include <sanguis/server/entities/enemies/factory/parameters_fwd.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
+#include <sanguis/server/weapons/common_parameters.hpp>
 #include <fcppt/nonassignable.hpp>
 
 
@@ -31,6 +32,7 @@ class parameters
 public:
 	parameters(
 		sanguis::random_generator &,
+		sanguis::server::weapons::common_parameters const &,
 		sanguis::creator::enemy_type,
 		sanguis::creator::enemy_kind,
 		sanguis::server::entities::enemies::difficulty,
@@ -41,6 +43,9 @@ public:
 
 	sanguis::random_generator &
 	random_generator() const;
+
+	sanguis::server::weapons::common_parameters const &
+	weapon_parameters() const;
 
 	sanguis::creator::enemy_type
 	enemy_type() const;
@@ -61,6 +66,8 @@ public:
 	special_chance() const;
 private:
 	sanguis::random_generator &random_generator_;
+
+	sanguis::server::weapons::common_parameters const weapon_parameters_;
 
 	sanguis::creator::enemy_type const enemy_type_;
 

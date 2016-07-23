@@ -76,7 +76,7 @@ sanguis::server::entities::enemies::factory::reaper(
 			fcppt::make_unique_ptr<
 				sanguis::server::weapons::melee
 			>(
-				_parameters.random_generator(),
+				_parameters.weapon_parameters(),
 				sanguis::server::weapons::melee_parameters{
 					sanguis::server::weapons::range(
 						75.f

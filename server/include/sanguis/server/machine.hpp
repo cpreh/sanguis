@@ -20,6 +20,8 @@
 #include <alda/net/server/object.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/object.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/state_machine.hpp>
@@ -45,6 +47,7 @@ struct machine
 	);
 public:
 	machine(
+		fcppt::log::context &,
 		alda::net::port,
 		sanguis::io_service &
 	);
@@ -71,6 +74,9 @@ public:
 
 	sanguis::server::load const &
 	resources() const;
+
+	fcppt::log::context &
+	log_context() const;
 private:
 	void
 	process_message(
@@ -109,6 +115,10 @@ private:
 
 	void
 	timer_callback();
+
+	fcppt::log::context &log_context_;
+
+	fcppt::log::object log_;
 
 	sanguis::server::load resources_;
 

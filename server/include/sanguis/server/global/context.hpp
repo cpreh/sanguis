@@ -23,10 +23,14 @@
 #include <sanguis/server/global/context_fwd.hpp>
 #include <sanguis/server/global/source_world_pair.hpp>
 #include <sanguis/server/global/world_map.hpp>
+#include <sanguis/server/weapons/common_parameters_fwd.hpp>
+#include <sanguis/server/weapons/log.hpp>
 #include <sanguis/server/world/context.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/reference_decl.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
+#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>
@@ -48,6 +52,7 @@ class context
 	);
 public:
 	context(
+		fcppt::log::context &,
 		sanguis::server::unicast_callback const &,
 		sanguis::server::load const &,
 		sanguis::server::console &
@@ -160,6 +165,9 @@ private:
 	)
 	override;
 
+	sanguis::server::weapons::common_parameters
+	weapon_parameters();
+
 	sanguis::server::world::object &
 	world(
 		sanguis::world_id
@@ -174,6 +182,10 @@ private:
 	player_opt(
 		sanguis::server::player_id
 	);
+
+	fcppt::log::object log_;
+
+	sanguis::server::weapons::log const weapons_log_;
 
 	sanguis::random_generator random_generator_;
 

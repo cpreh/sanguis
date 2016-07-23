@@ -9,6 +9,7 @@
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/impl/enemy_type_container.hpp>
 #include <sanguis/creator/impl/random/generator_fwd.hpp>
+#include <fcppt/log/object_fwd.hpp>
 
 
 namespace sanguis
@@ -20,6 +21,7 @@ namespace impl
 
 sanguis::creator::spawn_container
 place_spawners(
+	fcppt::log::object &,
 	sanguis::creator::grid &,
 	sanguis::creator::opening_container_array const &,
 	sanguis::creator::count,

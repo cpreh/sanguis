@@ -1,15 +1,12 @@
 #include <sanguis/perk_type.hpp>
 #include <sanguis/server/level.hpp>
-#include <sanguis/server/log.hpp>
 #include <sanguis/server/perks/tree/choosable.hpp>
 #include <sanguis/server/perks/tree/container.hpp>
 #include <sanguis/server/perks/tree/find_node.hpp>
 #include <sanguis/server/perks/tree/object.hpp>
 #include <sanguis/server/perks/tree/status.hpp>
+#include <fcppt/const.hpp>
 #include <fcppt/reference_impl.hpp>
-#include <fcppt/text.hpp>
-#include <fcppt/log/_.hpp>
-#include <fcppt/log/warning.hpp>
 #include <fcppt/optional/maybe.hpp>
 
 
@@ -26,16 +23,9 @@ sanguis::server::perks::tree::choosable(
 				_tree,
 				_perk
 			),
-			[]{
-				FCPPT_LOG_WARNING(
-					sanguis::server::log(),
-					fcppt::log::_
-						<< FCPPT_TEXT("Perk not found in tree")
-				);
-
-				return
-					false;
-			},
+			fcppt::const_(
+				false
+			),
 			[
 				_player_level
 			](

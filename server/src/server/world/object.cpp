@@ -4,6 +4,7 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
 #include <sanguis/is_primary_weapon.hpp>
+#include <sanguis/log_parameters.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
 #include <sanguis/timer.hpp>
@@ -11,6 +12,7 @@
 #include <sanguis/weapon_status.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/world_name.hpp>
+#include <sanguis/collision/log.hpp>
 #include <sanguis/collision/world/create.hpp>
 #include <sanguis/collision/world/created.hpp>
 #include <sanguis/collision/world/object.hpp>
@@ -83,7 +85,7 @@
 #include <sanguis/server/exp_to_net.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/level.hpp>
-#include <sanguis/server/log.hpp>
+#include <sanguis/server/log_location.hpp>
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/source_world_id.hpp>
@@ -106,6 +108,7 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/global/source_world_pair.hpp>
+#include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/world/center_in_grid_pos.hpp>
 #include <sanguis/server/world/context.hpp>
 #include <sanguis/server/world/difficulty.hpp>
@@ -140,6 +143,7 @@
 #include <fcppt/cast/size.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/log/_.hpp>
+#include <fcppt/log/name.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/optional/map.hpp>
@@ -160,6 +164,16 @@ sanguis::server::world::object::object(
 )
 :
 	sanguis::server::environment::object(),
+	log_{
+		// TODO: Add world name?
+		_parameters.log_context(),
+		sanguis::server::log_location(),
+		sanguis::log_parameters(
+			fcppt::log::name{
+				FCPPT_TEXT("world")
+			}
+		)
+	},
 	info_(
 		_id,
 		_name,
@@ -180,6 +194,10 @@ sanguis::server::world::object::object(
 	load_context_(
 		_parameters.load_context()
 	),
+	collision_log_{
+		// TODO: Add world name?
+		_parameters.log_context()
+	},
 	collision_world_(
 		sanguis::collision::world::create(
 			sanguis::collision::world::parameters(
@@ -196,12 +214,14 @@ sanguis::server::world::object::object(
 	},
 	pickup_spawner_(
 		_parameters.random_generator(),
+		_parameters.weapon_parameters(),
 		this->environment()
 	)
 {
 	this->insert_spawns(
 		_generated_world.spawns(),
-		_parameters.random_generator()
+		_parameters.random_generator(),
+		_parameters.weapon_parameters()
 	);
 
 	this->insert_destructibles(
@@ -312,7 +332,7 @@ sanguis::server::world::object::insert(
 			]
 			{
 				FCPPT_LOG_WARNING(
-					sanguis::server::log(),
+					log_,
 					fcppt::log::_
 						<< FCPPT_TEXT("Failed to spawn entity because its spawnpoint is obstructed")
 				);
@@ -1044,6 +1064,13 @@ sanguis::server::world::object::difficulty() const
 		difficulty_;
 }
 
+sanguis::collision::log const &
+sanguis::server::world::object::collision_log() const
+{
+	return
+		collision_log_;
+}
+
 sanguis::collision::world::object &
 sanguis::server::world::object::collision_world() const
 {
@@ -1188,7 +1215,8 @@ sanguis::server::world::object::send_player_specific(
 void
 sanguis::server::world::object::insert_spawns(
 	sanguis::creator::spawn_container const &_spawns,
-	sanguis::random_generator &_random_generator
+	sanguis::random_generator &_random_generator,
+	sanguis::server::weapons::common_parameters const &_weapon_parameters
 )
 {
 	for(
@@ -1207,6 +1235,7 @@ sanguis::server::world::object::insert_spawns(
 					spawn.enemy_type(),
 					spawn.enemy_kind(),
 					spawn.pos(),
+					_weapon_parameters,
 					_random_generator,
 					this->load_context(),
 					difficulty_
@@ -1219,6 +1248,7 @@ sanguis::server::world::object::insert_spawns(
 					spawn.enemy_type(),
 					spawn.enemy_kind(),
 					spawn.pos(),
+					_weapon_parameters,
 					_random_generator,
 					difficulty_
 				)

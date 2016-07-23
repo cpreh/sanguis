@@ -5,10 +5,12 @@
 #include <alda/net/port.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/log/context_fwd.hpp>
 
 
 sanguis::server::object_base_unique_ptr
 sanguis::server::create(
+	fcppt::log::context &_log_context,
 	alda::net::port const _port
 )
 {
@@ -19,6 +21,7 @@ sanguis::server::create(
 			fcppt::make_unique_ptr<
 				sanguis::server::object
 			>(
+				_log_context,
 				_port
 			)
 		);

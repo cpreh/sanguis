@@ -8,6 +8,7 @@
 #include <sanguis/client/load/model/weapon_category_map.hpp>
 #include <sanguis/model/part_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/log/object_fwd.hpp>
 
 
 namespace sanguis
@@ -26,6 +27,7 @@ class part
 	);
 public:
 	part(
+		fcppt::log::object &,
 		sanguis::model::part const &,
 		sanguis::client::load::model::global_parameters const &
 	);

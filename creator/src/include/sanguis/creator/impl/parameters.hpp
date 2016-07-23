@@ -6,6 +6,7 @@
 #include <sanguis/creator/impl/parameters_fwd.hpp>
 #include <sanguis/creator/impl/random/generator_fwd.hpp>
 #include <fcppt/nonassignable.hpp>
+#include <fcppt/log/object_fwd.hpp>
 
 
 namespace sanguis
@@ -22,10 +23,14 @@ class parameters
 	);
 public:
 	parameters(
+		fcppt::log::object &,
 		sanguis::creator::impl::random::generator &,
 		sanguis::creator::spawn_boss,
 		sanguis::creator::opening_count_array
 	);
+
+	fcppt::log::object &
+	log() const;
 
 	sanguis::creator::impl::random::generator &
 	randgen() const;
@@ -36,6 +41,8 @@ public:
 	sanguis::creator::opening_count_array const &
 	opening_count_array() const;
 private:
+	fcppt::log::object &log_;
+
 	sanguis::creator::impl::random::generator &randgen_;
 
 	sanguis::creator::spawn_boss const spawn_boss_;

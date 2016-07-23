@@ -1,6 +1,5 @@
 #include <sanguis/duration_second.hpp>
 #include <sanguis/friend_type.hpp>
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/secondary_weapon_type.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/weapon_type.hpp>
@@ -17,6 +16,7 @@
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/attack.hpp>
+#include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/weapons/reload_time.hpp>
 #include <sanguis/server/weapons/sentry.hpp>
 #include <sanguis/server/weapons/sentry_parameters.hpp>
@@ -32,13 +32,13 @@
 
 
 sanguis::server::weapons::sentry::sentry(
-	sanguis::random_generator &_random_generator,
+	sanguis::server::weapons::common_parameters const &_common_parameters,
 	sanguis::server::weapons::spawn_weapon const &_spawn_weapon,
 	sanguis::server::weapons::sentry_parameters const &_parameters
 )
 :
 	sanguis::server::weapons::spawn{
-		_random_generator,
+		_common_parameters,
 		sanguis::weapon_type{
 			sanguis::secondary_weapon_type::sentry
 		},

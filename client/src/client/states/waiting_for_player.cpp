@@ -1,6 +1,6 @@
+#include <sanguis/log_parameters.hpp>
 #include <sanguis/client/dispatch.hpp>
 #include <sanguis/client/dispatch_default_function.hpp>
-#include <sanguis/client/log.hpp>
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/control/actions/nullary.hpp>
 #include <sanguis/client/control/actions/nullary_type.hpp>
@@ -12,6 +12,7 @@
 #include <sanguis/client/events/tick.hpp>
 #include <sanguis/client/states/has_player.hpp>
 #include <sanguis/client/states/ingame.hpp>
+#include <sanguis/client/states/log_location.hpp>
 #include <sanguis/client/states/waiting_for_player.hpp>
 #include <sanguis/messages/call/result.hpp>
 #include <sanguis/messages/server/add_own_player.hpp>
@@ -20,6 +21,8 @@
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
+#include <fcppt/log/name.hpp>
+#include <fcppt/log/object.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/variant/to_optional.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -34,10 +37,21 @@ sanguis::client::states::waiting_for_player::waiting_for_player(
 :
 	my_base(
 		_ctx
-	)
+	),
+	log_{
+		this->context<
+			sanguis::client::machine
+		>().log_context(),
+		sanguis::client::states::log_location(),
+		sanguis::log_parameters(
+			fcppt::log::name{
+				FCPPT_TEXT("waiting_for_player")
+			}
+		)
+	}
 {
 	FCPPT_LOG_DEBUG(
-		sanguis::client::log(),
+		log_,
 		fcppt::log::_
 			<< FCPPT_TEXT("Entering waiting_for_player")
 	);

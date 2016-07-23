@@ -1,3 +1,4 @@
+#include <sanguis/log_parameters.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/player_name.hpp>
 #include <sanguis/slowdown.hpp>
@@ -8,7 +9,6 @@
 #include <sanguis/client/exp_for_next_level.hpp>
 #include <sanguis/client/health_pair.hpp>
 #include <sanguis/client/level.hpp>
-#include <sanguis/client/log.hpp>
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/make_send_callback.hpp>
 #include <sanguis/client/player_health_callback.hpp>
@@ -35,6 +35,7 @@
 #include <sanguis/client/gui/hud/object.hpp>
 #include <sanguis/client/load/context.hpp>
 #include <sanguis/client/load/resource/context.hpp>
+#include <sanguis/client/states/log_location.hpp>
 #include <sanguis/client/states/menu.hpp>
 #include <sanguis/client/states/running.hpp>
 #include <sanguis/messages/call/forward_to_default.hpp>
@@ -71,9 +72,12 @@
 #include <sge/input/cursor/activatable_fwd.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
+#include <fcppt/log/name.hpp>
+#include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <boost/statechart/result.hpp>
@@ -88,7 +92,21 @@ sanguis::client::states::running::running(
 	my_base(
 		_ctx
 	),
+	log_{
+		this->context<
+			sanguis::client::machine
+		>().log_context(),
+		sanguis::client::states::log_location(),
+		sanguis::log_parameters(
+			fcppt::log::name{
+				FCPPT_TEXT("running")
+			}
+		)
+	},
 	hud_resources_(
+		this->context<
+			sanguis::client::machine
+		>().log_context(),
 		this->context<
 			sanguis::client::machine
 		>().resources().resources().textures()
@@ -139,6 +157,9 @@ sanguis::client::states::running::running(
 	),
 	drawer_(
 		sanguis::client::draw2d::create(
+			this->context<
+				sanguis::client::machine
+			>().log_context(),
 			this->context<
 				sanguis::client::machine
 			>().resources(),
@@ -336,7 +357,7 @@ sanguis::client::states::running::operator()(
 		);
 
 	FCPPT_LOG_DEBUG(
-		sanguis::client::log(),
+		log_,
 		fcppt::log::_
 			<< FCPPT_TEXT("Got a new console command: \"")
 			<< name

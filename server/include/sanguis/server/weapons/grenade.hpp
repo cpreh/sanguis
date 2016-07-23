@@ -1,10 +1,10 @@
 #ifndef SANGUIS_SERVER_WEAPONS_GRENADE_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_GRENADE_HPP_INCLUDED
 
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/server/weapons/attack_fwd.hpp>
 #include <sanguis/server/weapons/attack_result_fwd.hpp>
+#include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/weapons/grenade_parameters_fwd.hpp>
 #include <sanguis/server/weapons/parameters_fwd.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
@@ -30,7 +30,7 @@ class grenade
 	);
 public:
 	grenade(
-		sanguis::random_generator &,
+		sanguis::server::weapons::common_parameters const &,
 		sanguis::server::weapons::grenade_parameters const &
 	);
 

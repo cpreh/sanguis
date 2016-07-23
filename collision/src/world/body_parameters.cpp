@@ -1,13 +1,16 @@
 #include <sanguis/collision/center.hpp>
+#include <sanguis/collision/log.hpp>
 #include <sanguis/collision/optional_mass.hpp>
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/world/body_base_fwd.hpp>
 #include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters.hpp>
+#include <fcppt/log/object_fwd.hpp>
 
 
 sanguis::collision::world::body_parameters::body_parameters(
+	sanguis::collision::log const &_log,
 	sanguis::collision::center const _center,
 	sanguis::collision::speed const _speed,
 	sanguis::collision::radius const _radius,
@@ -16,6 +19,9 @@ sanguis::collision::world::body_parameters::body_parameters(
 	sanguis::collision::world::body_base &_body_base
 )
 :
+	log_{
+		_log.body_log()
+	},
 	center_(
 		_center
 	),
@@ -35,6 +41,13 @@ sanguis::collision::world::body_parameters::body_parameters(
 		_body_base
 	)
 {
+}
+
+fcppt::log::object &
+sanguis::collision::world::body_parameters::log() const
+{
+	return
+		log_;
 }
 
 sanguis::collision::center

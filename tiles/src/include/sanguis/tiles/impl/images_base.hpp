@@ -10,7 +10,6 @@
 #include <sanguis/tiles/set.hpp>
 #include <sanguis/tiles/impl/content_path.hpp>
 #include <sanguis/tiles/impl/error_message_function.hpp>
-#include <sanguis/tiles/impl/log.hpp>
 #include <sanguis/tiles/impl/optional_content_path.hpp>
 #include <sanguis/tiles/impl/orientation_to_string.hpp>
 #include <fcppt/make_cref.hpp>
@@ -22,6 +21,7 @@
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
+#include <fcppt/log/object_fwd.hpp>
 
 
 namespace sanguis
@@ -36,6 +36,7 @@ template<
 >
 sanguis::tiles::impl::optional_content_path
 images_base(
+	fcppt::log::object &_log,
 	sanguis::tiles::collection &_collection,
 	sanguis::tiles::error const _error_code,
 	sanguis::tiles::pair<
@@ -61,13 +62,14 @@ images_base(
 			),
 			[
 				&cur_set,
+				&_log,
 				&_error_message,
 				_error_code,
 				_orientation
 			]{
 
 				FCPPT_LOG_DEBUG(
-					sanguis::tiles::impl::log(),
+					_log,
 					fcppt::log::_
 						<<
 						FCPPT_TEXT("Orientation ")
@@ -100,6 +102,7 @@ images_base(
 					);
 			},
 			[
+				&_log,
 				&cur_set,
 				&_error_message
 			](
@@ -113,7 +116,7 @@ images_base(
 				)
 				{
 					FCPPT_LOG_ERROR(
-						sanguis::tiles::impl::log(),
+						_log,
 						fcppt::log::_
 							<<
 							FCPPT_TEXT("Zero textures in ")

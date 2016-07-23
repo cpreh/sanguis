@@ -2,6 +2,7 @@
 #include <sanguis/client/load/model/context.hpp>
 #include <sanguis/client/load/resource/context_fwd.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/log/context_fwd.hpp>
 
 
 sanguis::client::load::model::collection const &
@@ -12,14 +13,16 @@ sanguis::client::load::model::context::operator()() const
 }
 
 sanguis::client::load::model::context::context(
-	sanguis::client::load::resource::context const &_ctx
+	fcppt::log::context &_log_context,
+	sanguis::client::load::resource::context const &_context
 )
 :
 	collection_(
 		fcppt::make_unique_ptr<
 			sanguis::client::load::model::collection
 		>(
-			_ctx
+			_log_context,
+			_context
 		)
 	)
 {

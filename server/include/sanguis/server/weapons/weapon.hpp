@@ -17,6 +17,7 @@
 #include <sanguis/server/weapons/attack_result_fwd.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
+#include <sanguis/server/weapons/log_fwd.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/parameters_fwd.hpp>
 #include <sanguis/server/weapons/range.hpp>
@@ -127,6 +128,9 @@ protected:
 	sanguis::random_generator &
 	random_generator() const;
 
+	sanguis::server::weapons::log const &
+	log() const;
+
 	sanguis::server::entities::with_weapon &
 	owner() const;
 
@@ -178,6 +182,8 @@ private:
 	sanguis::diff_clock diff_clock_;
 
 	sanguis::random_generator &random_generator_;
+
+	sanguis::server::weapons::log const &log_;
 
 	sanguis::weapon_type const type_;
 

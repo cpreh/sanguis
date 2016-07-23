@@ -4,6 +4,7 @@
 #include <sanguis/client/load/resource/optional_sound.hpp>
 #include <sanguis/client/load/resource/sounds_fwd.hpp>
 #include <sanguis/model/optional_animation_sound_fwd.hpp>
+#include <fcppt/log/object_fwd.hpp>
 
 
 namespace sanguis
@@ -17,6 +18,7 @@ namespace model
 
 sanguis::client::load::resource::optional_sound
 make_sound(
+	fcppt::log::object &,
 	sanguis::model::optional_animation_sound const &,
 	sanguis::client::load::resource::sounds const &
 );

@@ -2,6 +2,7 @@
 #define SANGUIS_COLLISION_WORLD_BODY_PARAMETERS_HPP_INCLUDED
 
 #include <sanguis/collision/center.hpp>
+#include <sanguis/collision/log_fwd.hpp>
 #include <sanguis/collision/optional_mass.hpp>
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/speed.hpp>
@@ -10,6 +11,7 @@
 #include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters_fwd.hpp>
 #include <fcppt/nonassignable.hpp>
+#include <fcppt/log/object_fwd.hpp>
 
 
 namespace sanguis
@@ -27,6 +29,7 @@ class body_parameters
 public:
 	SANGUIS_COLLISION_SYMBOL
 	body_parameters(
+		sanguis::collision::log const &,
 		sanguis::collision::center,
 		sanguis::collision::speed,
 		sanguis::collision::radius,
@@ -34,6 +37,9 @@ public:
 		sanguis::collision::world::body_group,
 		sanguis::collision::world::body_base &
 	);
+
+	fcppt::log::object &
+	log() const;
 
 	sanguis::collision::center
 	center() const;
@@ -53,6 +59,8 @@ public:
 	sanguis::collision::world::body_base &
 	body_base() const;
 private:
+	fcppt::log::object &log_;
+
 	sanguis::collision::center const center_;
 
 	sanguis::collision::speed const speed_;

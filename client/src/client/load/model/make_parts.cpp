@@ -10,6 +10,7 @@
 #include <sanguis/model/part_map.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/map.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <utility>
@@ -18,6 +19,7 @@
 
 sanguis::client::load::model::part_result
 sanguis::client::load::model::make_parts(
+	fcppt::log::object &_log,
 	boost::filesystem::path const &_path,
 	sanguis::client::load::resource::context const &_context
 )
@@ -47,6 +49,7 @@ sanguis::client::load::model::make_parts(
 			>(
 				loaded_object.parts(),
 				[
+					&_log,
 					&parameters
 				](
 					sanguis::model::part_map::value_type const &_part_pair
@@ -58,6 +61,7 @@ sanguis::client::load::model::make_parts(
 							fcppt::make_unique_ptr<
 								sanguis::client::load::model::part
 							>(
+								_log,
 								_part_pair.second,
 								parameters.new_image(
 									_part_pair.second.image_name()

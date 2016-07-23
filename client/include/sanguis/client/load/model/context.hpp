@@ -6,6 +6,7 @@
 #include <sanguis/client/load/resource/context_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
+#include <fcppt/log/context_fwd.hpp>
 
 
 namespace sanguis
@@ -28,8 +29,8 @@ public:
 private:
 	friend class sanguis::client::load::context;
 
-	explicit
 	context(
+		fcppt::log::context &,
 		sanguis::client::load::resource::context const &
 	);
 

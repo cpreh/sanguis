@@ -16,11 +16,12 @@
 #include <sanguis/server/events/tick_fwd.hpp>
 #include <sanguis/server/net/slowdown.hpp>
 #include <sanguis/server/states/running.hpp>
+#include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
 #include <boost/statechart/custom_reaction.hpp>
 #include <boost/statechart/result.hpp>
-#include <boost/statechart/simple_state.hpp>
+#include <boost/statechart/state.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -33,25 +34,31 @@ namespace states
 
 class unpaused
 :
-	public boost::statechart::simple_state<
-		sanguis::server::states::unpaused,
-		sanguis::server::states::running
-	>
+	public
+		boost::statechart::state<
+			sanguis::server::states::unpaused,
+			sanguis::server::states::running
+		>
 {
 	FCPPT_NONCOPYABLE(
 		unpaused
 	);
 public:
-	typedef boost::mpl::list2<
+	typedef
+	boost::mpl::list2<
 		boost::statechart::custom_reaction<
 			sanguis::server::events::tick
 		>,
 		boost::statechart::custom_reaction<
 			sanguis::server::events::message
 		>
-	> reactions;
+	>
+	reactions;
 
-	unpaused();
+	explicit
+	unpaused(
+		my_context
+	);
 
 	~unpaused()
 	override;
@@ -120,6 +127,8 @@ public:
 		sanguis::messages::client::pause const &
 	);
 private:
+	fcppt::log::object log_;
+
 	sanguis::server::net::slowdown slowdown_;
 };
 

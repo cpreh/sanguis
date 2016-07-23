@@ -1,4 +1,3 @@
-#include <sanguis/client/draw2d/log.hpp>
 #include <sanguis/client/draw2d/scene/world/base.hpp>
 #include <sanguis/client/draw2d/scene/world/base_unique_ptr.hpp>
 #include <sanguis/client/draw2d/scene/world/create.hpp>
@@ -12,10 +11,12 @@
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>
+#include <fcppt/log/object_fwd.hpp>
 
 
 sanguis::client::draw2d::scene::world::base_unique_ptr
 sanguis::client::draw2d::scene::world::create(
+	fcppt::log::object &_log,
 	sanguis::creator::name const &_name,
 	sanguis::client::draw2d::scene::world::parameters const &_parameters
 )
@@ -52,7 +53,7 @@ sanguis::client::draw2d::scene::world::create(
 			);
 
 	FCPPT_LOG_ERROR(
-		sanguis::client::draw2d::log(),
+		_log,
 		fcppt::log::_
 			<< FCPPT_TEXT("World ")
 			<< _name

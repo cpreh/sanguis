@@ -1,6 +1,5 @@
 #include <sanguis/cheat_type.hpp>
 #include <sanguis/perk_type.hpp>
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/send_available_perks.hpp>
@@ -15,6 +14,7 @@
 #include <sanguis/server/entities/pickups/weapon.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/weapons/create.hpp>
 #include <sanguis/server/weapons/monster_spawner.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
@@ -28,16 +28,16 @@
 
 void
 sanguis::server::cheat::process(
-	sanguis::random_generator &_random_generator,
 	sanguis::server::entities::player &_player,
 	sanguis::cheat_type const _cheat_type,
+	sanguis::server::weapons::common_parameters const &_weapon_parameters,
 	sanguis::server::unicast_callback const &_unicast_callback
 )
 {
 	fcppt::optional::maybe_void(
 		_player.environment(),
 		[
-			&_random_generator,
+			&_weapon_parameters,
 			&_player,
 			_cheat_type,
 			&_unicast_callback
@@ -83,7 +83,7 @@ sanguis::server::cheat::process(
 								fcppt::make_unique_ptr<
 									sanguis::server::weapons::monster_spawner
 								>(
-									_random_generator
+									_weapon_parameters
 								)
 							)
 						)
@@ -110,7 +110,7 @@ sanguis::server::cheat::process(
 							_environment.get().load_context(),
 							sanguis::server::team::players,
 							sanguis::server::weapons::create(
-								_random_generator,
+								_weapon_parameters,
 								sanguis::server::cheat::weapon_type(
 									_cheat_type
 								),

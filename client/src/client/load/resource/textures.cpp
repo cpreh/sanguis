@@ -1,6 +1,7 @@
 #include <sanguis/exception.hpp>
 #include <sanguis/media_path.hpp>
-#include <sanguis/client/load/log.hpp>
+#include <sanguis/log_parameters.hpp>
+#include <sanguis/client/load/log_location.hpp>
 #include <sanguis/client/load/resource/make_missing_texture.hpp>
 #include <sanguis/client/load/resource/search_texture_names.hpp>
 #include <sanguis/client/load/resource/texture_identifier.hpp>
@@ -31,7 +32,10 @@
 #include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/log/_.hpp>
+#include <fcppt/log/context_fwd.hpp>
 #include <fcppt/log/error.hpp>
+#include <fcppt/log/name.hpp>
+#include <fcppt/log/object.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
@@ -94,7 +98,7 @@ catch(
 )
 {
 	FCPPT_LOG_ERROR(
-		sanguis::client::load::log(),
+		log_,
 		fcppt::log::_
 			<<
 			FCPPT_TEXT("Failed to load ")
@@ -134,10 +138,20 @@ sanguis::client::load::resource::textures::renderer() const
 }
 
 sanguis::client::load::resource::textures::textures(
+	fcppt::log::context &_log_context,
 	sge::renderer::device::core &_renderer,
 	sge::image2d::system &_image_loader
 )
 :
+	log_{
+		_log_context,
+		sanguis::client::load::log_location(),
+		sanguis::log_parameters(
+			fcppt::log::name{
+				FCPPT_TEXT("textures")
+			}
+		)
+	},
 	renderer_(
 		_renderer
 	),
@@ -145,7 +159,9 @@ sanguis::client::load::resource::textures::textures(
 		_image_loader
 	),
 	texture_names_(
-		sanguis::client::load::resource::search_texture_names()
+		sanguis::client::load::resource::search_texture_names(
+			log_
+		)
 	),
 	textures_(),
 	unnamed_textures_(),

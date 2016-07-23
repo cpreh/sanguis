@@ -4,6 +4,8 @@
 #include <sanguis/client/config/settings/object_fwd.hpp>
 #include <sge/parse/ini/start.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -24,8 +26,8 @@ class object
 		object
 	);
 public:
-	explicit
 	object(
+		fcppt::log::context &,
 		boost::filesystem::path const &
 	);
 
@@ -39,7 +41,12 @@ public:
 
 	void
 	save() const;
+
+	fcppt::log::object &
+	log() const;
 private:
+	mutable fcppt::log::object log_;
+
 	boost::filesystem::path const path_;
 
 	sge::parse::ini::start start_;

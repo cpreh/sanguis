@@ -5,6 +5,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/fold.hpp>
 #include <fcppt/filesystem/extension.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
@@ -14,7 +15,9 @@
 
 
 sanguis::client::load::resource::texture_name_map
-sanguis::client::load::resource::search_texture_names()
+sanguis::client::load::resource::search_texture_names(
+	fcppt::log::object &_log
+)
 {
 	return
 		fcppt::algorithm::fold(
@@ -25,7 +28,9 @@ sanguis::client::load::resource::search_texture_names()
 				boost::filesystem::directory_iterator()
 			),
 			sanguis::client::load::resource::texture_name_map(),
-			[](
+			[
+				&_log
+			](
 				boost::filesystem::path const &_path,
 				sanguis::client::load::resource::texture_name_map &&_result
 			)
@@ -42,6 +47,7 @@ sanguis::client::load::resource::search_texture_names()
 					FCPPT_TEXT(".tex")
 					?
 						sanguis::client::load::resource::parse_texture_file(
+							_log,
 							_path,
 							std::move(
 								_result

@@ -23,6 +23,8 @@
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_state_machine.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
+#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/object.hpp>
 #include <fcppt/optional/object_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/variables_map.hpp>
@@ -42,8 +44,8 @@ class object
 		object
 	);
 public:
-	explicit
 	object(
+		fcppt::log::context &,
 		boost::program_options::variables_map const &
 	);
 
@@ -67,6 +69,10 @@ private:
 
 	awl::main::exit_code
 	quit_server();
+
+	fcppt::log::context &log_context_;
+
+	fcppt::log::object log_;
 
 	// declare the config stuff first, so they are destroyed last
 	sanguis::client::config::settings::object settings_;

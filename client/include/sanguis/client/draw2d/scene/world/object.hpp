@@ -21,6 +21,7 @@
 #include <sge/renderer/device/core_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/unique_ptr_decl.hpp>
+#include <fcppt/log/context_fwd.hpp>
 #include <fcppt/optional/object_decl.hpp>
 
 
@@ -42,6 +43,7 @@ class object
 	);
 public:
 	object(
+		fcppt::log::context &,
 		sanguis::random_generator &,
 		sge::renderer::device::core &,
 		sanguis::client::load::resource::textures const &,
@@ -84,6 +86,8 @@ private:
 	test_collision(
 		sanguis::client::draw2d::collide_parameters const &
 	) const;
+
+	fcppt::log::context &log_context_;
 
 	sge::renderer::device::core &renderer_;
 

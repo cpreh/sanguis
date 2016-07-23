@@ -39,6 +39,7 @@
 #include <sge/window/title.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/log/context_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/variables_map.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -46,6 +47,7 @@
 
 sanguis::client::systems_unique_ptr
 sanguis::client::create_systems(
+	fcppt::log::context &_log_context,
 	boost::program_options::variables_map const &_vm
 )
 {
@@ -72,6 +74,9 @@ sanguis::client::create_systems(
 							sanguis::company_name(),
 							sge::config::own_app_name()
 						)
+					)
+					.log_context(
+						_log_context
 					)
 				)
 			)

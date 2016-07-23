@@ -1,10 +1,10 @@
 #ifndef SANGUIS_SERVER_WEAPONS_SPIDER_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_SPIDER_HPP_INCLUDED
 
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/server/entities/optional_base_ref_fwd.hpp>
 #include <sanguis/server/weapons/attack_fwd.hpp>
+#include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/weapons/spawn.hpp>
 #include <sanguis/server/weapons/spawn_parameters_fwd.hpp>
 #include <sanguis/server/weapons/spawn_weapon.hpp>
@@ -30,7 +30,7 @@ class spider
 	);
 public:
 	spider(
-		sanguis::random_generator &,
+		sanguis::server::weapons::common_parameters const &,
 		sanguis::server::weapons::spawn_weapon const &,
 		sanguis::server::weapons::spider_parameters const &
 	);

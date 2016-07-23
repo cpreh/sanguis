@@ -3,15 +3,20 @@
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/spawn_boss.hpp>
 #include <sanguis/creator/top_parameters.hpp>
+#include <fcppt/log/context_fwd.hpp>
 
 
 sanguis::creator::top_parameters::top_parameters(
+	fcppt::log::context &_log_context,
 	sanguis::creator::name const &_name,
 	sanguis::creator::seed const _seed,
 	sanguis::creator::opening_count_array const _opening_count_array,
 	sanguis::creator::spawn_boss const _spawn_boss
 )
 :
+	log_context_{
+		_log_context
+	},
 	name_(
 		_name
 	),
@@ -25,6 +30,13 @@ sanguis::creator::top_parameters::top_parameters(
 		_spawn_boss
 	}
 {
+}
+
+fcppt::log::context &
+sanguis::creator::top_parameters::log_context() const
+{
+	return
+		log_context_;
 }
 
 sanguis::creator::name const &

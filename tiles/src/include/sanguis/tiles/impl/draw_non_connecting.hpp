@@ -12,6 +12,7 @@
 #include <sanguis/tiles/impl/get_content_function.hpp>
 #include <sanguis/tiles/impl/non_connecting_images.hpp>
 #include <sanguis/tiles/impl/shift.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/math/vector/null.hpp>
 
 
@@ -27,6 +28,7 @@ template<
 >
 sanguis::tiles::cell_container
 draw_non_connecting(
+	fcppt::log::object &_log,
 	sanguis::tiles::collection &_collection,
 	sanguis::tiles::error const _error_code,
 	sanguis::creator::tile_grid<
@@ -48,6 +50,7 @@ draw_non_connecting(
 			},
 			sanguis::tiles::impl::get_content_function{
 				[
+					&_log,
 					&_collection,
 					&_grid,
 					_error_code
@@ -57,6 +60,7 @@ draw_non_connecting(
 				{
 					return
 						sanguis::tiles::impl::non_connecting_images(
+							_log,
 							_collection,
 							_error_code,
 							_grid,

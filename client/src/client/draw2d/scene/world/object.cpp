@@ -17,6 +17,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
+#include <fcppt/log/context_fwd.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -25,6 +26,7 @@
 
 
 sanguis::client::draw2d::scene::world::object::object(
+	fcppt::log::context &_log_context,
 	sanguis::random_generator &_random_generator,
 	sge::renderer::device::core &_renderer,
 	sanguis::client::load::resource::textures const &_textures,
@@ -32,6 +34,9 @@ sanguis::client::draw2d::scene::world::object::object(
 	sanguis::client::draw::debug const _debug
 )
 :
+	log_context_{
+		_log_context
+	},
 	renderer_(
 		_renderer
 	),
@@ -135,6 +140,7 @@ sanguis::client::draw2d::scene::world::object::change(
 			fcppt::make_unique_ptr<
 				sanguis::client::draw2d::scene::world::state
 			>(
+				log_context_,
 				random_generator_,
 				renderer_,
 				tiles_context_,

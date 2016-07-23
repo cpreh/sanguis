@@ -1,9 +1,10 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/io_service_callback.hpp>
+#include <sanguis/log_parameters.hpp>
 #include <sanguis/log_stream.hpp>
 #include <sanguis/media_path.hpp>
 #include <sanguis/client/create_systems.hpp>
-#include <sanguis/client/log.hpp>
+#include <sanguis/client/log_location.hpp>
 #include <sanguis/client/object.hpp>
 #include <sanguis/client/object_base.hpp>
 #include <sanguis/client/server.hpp>
@@ -44,7 +45,10 @@
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/log/_.hpp>
+#include <fcppt/log/context_fwd.hpp>
 #include <fcppt/log/fatal.hpp>
+#include <fcppt/log/name.hpp>
+#include <fcppt/log/object.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object_impl.hpp>
@@ -58,12 +62,26 @@
 
 
 sanguis::client::object::object(
+	fcppt::log::context &_log_context,
 	boost::program_options::variables_map const &_variables_map
 )
 :
 	sanguis::client::object_base(),
+	log_context_{
+		_log_context
+	},
+	log_{
+		_log_context,
+		sanguis::client::log_location(),
+		sanguis::log_parameters(
+			fcppt::log::name{
+				FCPPT_TEXT("object")
+			}
+		)
+	},
 	settings_(
-		client::config::settings::file()
+		_log_context,
+		sanguis::client::config::settings::file()
 	),
 	saver_(
 		settings_
@@ -71,6 +89,7 @@ sanguis::client::object::object(
 	io_service_(),
 	sys_(
 		sanguis::client::create_systems(
+			_log_context,
 			_variables_map
 		)
 	),
@@ -100,6 +119,7 @@ sanguis::client::object::object(
 		)
 	),
 	resources_(
+		_log_context,
 		sys_->image_system(),
 		sys_->renderer_device_core(),
 		sys_->audio_loader(),
@@ -138,6 +158,7 @@ sanguis::client::object::object(
 		resources_.resources().textures()
 	},
 	machine_(
+		_log_context,
 		settings_,
 		_variables_map,
 		sanguis::client::server_callback{
@@ -185,7 +206,7 @@ sanguis::client::object::run()
 	)
 	{
 		FCPPT_LOG_FATAL(
-			sanguis::client::log(),
+			log_,
 			fcppt::log::_
 				<< FCPPT_TEXT("Client error: ")
 				<< _exception.string()
@@ -200,7 +221,7 @@ sanguis::client::object::run()
 	)
 	{
 		FCPPT_LOG_FATAL(
-			sanguis::client::log(),
+			log_,
 			fcppt::log::_
 				<< FCPPT_TEXT("Client error: ")
 				<< _exception.what()
@@ -312,6 +333,7 @@ sanguis::client::object::create_server(
 			fcppt::make_unique_ptr<
 				sanguis::client::server
 			>(
+				log_context_,
 				_port
 			)
 		);

@@ -1,7 +1,6 @@
 #include <sanguis/media_path.hpp>
 #include <sanguis/optional_weapon_type.hpp>
 #include <sanguis/weapon_type.hpp>
-#include <sanguis/client/load/log.hpp>
 #include <sanguis/client/load/hud/make_weapon_icons.hpp>
 #include <sanguis/client/load/hud/weapon_icon_map.hpp>
 #include <sanguis/client/load/hud/weapon_type.hpp>
@@ -13,6 +12,7 @@
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/filesystem/stem.hpp>
 #include <fcppt/log/_.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/object_impl.hpp>
@@ -26,6 +26,7 @@
 
 sanguis::client::load::hud::weapon_icon_map
 sanguis::client::load::hud::make_weapon_icons(
+	fcppt::log::object &_log,
 	sanguis::client::load::resource::textures const &_textures
 )
 {
@@ -46,6 +47,7 @@ sanguis::client::load::hud::make_weapon_icons(
 				boost::filesystem::directory_iterator()
 			),
 			[
+				&_log,
 				&_textures
 			](
 				boost::filesystem::path const &_path
@@ -65,11 +67,12 @@ sanguis::client::load::hud::make_weapon_icons(
 							)
 						),
 						[
+							&_log,
 							&_path
 						]
 						{
 							FCPPT_LOG_WARNING(
-								sanguis::client::load::log(),
+								_log,
 								fcppt::log::_
 									<<
 									FCPPT_TEXT("Hud weapon icon ")

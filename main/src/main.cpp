@@ -1,6 +1,5 @@
 #include <sanguis/app_name.hpp>
 #include <sanguis/company_name.hpp>
-#include <sanguis/log_context.hpp>
 #include <sanguis/log_location.hpp>
 #include <sanguis/main.hpp>
 #include <sanguis/client/create.hpp>
@@ -22,8 +21,10 @@
 #include <fcppt/exception.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/io/clog.hpp>
-#include <fcppt/log/activate_levels_recursive.hpp>
+#include <fcppt/log/context.hpp>
+#include <fcppt/log/enabled_levels.hpp>
 #include <fcppt/log/level.hpp>
+#include <fcppt/log/setting.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/options_description.hpp>
 #include <boost/program_options/variables_map.hpp>
@@ -80,16 +81,19 @@ try
 		)
 	);
 
-	fcppt::log::activate_levels_recursive(
-		sanguis::log_context(),
-		sanguis::log_location(),
-		sanguis::client::args::log_level(
-			vm
-		)
-	);
+	fcppt::log::context log_context{
+		fcppt::log::setting{
+			fcppt::log::enabled_levels(
+				sanguis::client::args::log_level(
+					vm
+				)
+			)
+		}
+	};
 
 	sanguis::client::object_base_unique_ptr const client(
 		sanguis::client::create(
+			log_context,
 			vm
 		)
 	);

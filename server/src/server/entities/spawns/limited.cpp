@@ -10,6 +10,7 @@
 #include <sanguis/server/entities/spawns/size_type.hpp>
 #include <sanguis/server/entities/spawns/spawn.hpp>
 #include <sanguis/server/entities/spawns/total_count.hpp>
+#include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/assert/pre.hpp>
@@ -20,6 +21,7 @@
 
 sanguis::server::entities::spawns::limited::limited(
 	sanguis::random_generator &_random_generator,
+	sanguis::server::weapons::common_parameters const &_weapons_parameters,
 	sanguis::creator::enemy_type const _enemy_type,
 	sanguis::creator::enemy_kind const _enemy_kind,
 	sanguis::server::world::difficulty const _difficulty,
@@ -31,6 +33,7 @@ sanguis::server::entities::spawns::limited::limited(
 :
 	sanguis::server::entities::spawns::spawn(
 		_random_generator,
+		_weapons_parameters,
 		_enemy_type,
 		_enemy_kind,
 		_difficulty

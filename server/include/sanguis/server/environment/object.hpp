@@ -10,6 +10,7 @@
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/weapon_status_fwd.hpp>
+#include <sanguis/collision/log_fwd.hpp>
 #include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
@@ -233,6 +234,10 @@ public:
 	virtual
 	sanguis::server::world::difficulty
 	difficulty() const = 0;
+
+	virtual
+	sanguis::collision::log const &
+	collision_log() const = 0;
 
 	virtual
 	sanguis::collision::world::object &

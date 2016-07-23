@@ -14,7 +14,6 @@
 #include <sanguis/creator/tile_is_visible.hpp>
 #include <sanguis/creator/impl/closest_empty.hpp>
 #include <sanguis/creator/impl/enemy_type_container.hpp>
-#include <sanguis/creator/impl/log.hpp>
 #include <sanguis/creator/impl/place_boss.hpp>
 #include <sanguis/creator/impl/place_spawners.hpp>
 #include <sanguis/creator/impl/random/generator.hpp>
@@ -27,12 +26,14 @@
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/random/wrapper/make_uniform_container_advanced.hpp>
 
 
 sanguis::creator::spawn_container
 sanguis::creator::impl::place_spawners(
+	fcppt::log::object &_log,
 	sanguis::creator::grid &_grid,
 	sanguis::creator::opening_container_array const &_openings,
 	sanguis::creator::count const _spawner_count,
@@ -158,7 +159,7 @@ sanguis::creator::impl::place_spawners(
 		)
 		{
 			FCPPT_LOG_ERROR(
-				sanguis::creator::impl::log(),
+				_log,
 				fcppt::log::_
 					<< FCPPT_TEXT("gave up on placing ")
 					<< (_spawner_count - current_spawners)

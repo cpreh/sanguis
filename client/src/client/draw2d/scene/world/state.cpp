@@ -1,3 +1,4 @@
+#include <sanguis/log_parameters.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/client/slowed_duration.hpp>
 #include <sanguis/client/world_parameters.hpp>
@@ -13,6 +14,7 @@
 #include <sanguis/client/draw2d/scene/world/batch_grid.hpp>
 #include <sanguis/client/draw2d/scene/world/batch_size.hpp>
 #include <sanguis/client/draw2d/scene/world/create.hpp>
+#include <sanguis/client/draw2d/scene/world/log_location.hpp>
 #include <sanguis/client/draw2d/scene/world/generate_batches.hpp>
 #include <sanguis/client/draw2d/scene/world/parameters_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/render_parameters_fwd.hpp>
@@ -45,6 +47,7 @@
 #include <fcppt/boost_units_value.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/cast/to_signed.hpp>
@@ -54,6 +57,8 @@
 #include <fcppt/container/grid/make_pos_ref_crange_start_end.hpp>
 #include <fcppt/container/grid/min_from_pos.hpp>
 #include <fcppt/container/grid/sup_from_pos.hpp>
+#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/name.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/to_vector.hpp>
 #include <fcppt/math/vector/ceil_div_signed.hpp>
@@ -70,6 +75,7 @@
 
 
 sanguis::client::draw2d::scene::world::state::state(
+	fcppt::log::context &_log_context,
 	sanguis::random_generator &_random_generator,
 	sge::renderer::device::core &_renderer,
 	sanguis::client::load::tiles::context &_tiles,
@@ -79,6 +85,7 @@ sanguis::client::draw2d::scene::world::state::state(
 )
 :
 	sanguis::client::draw2d::scene::world::state::state(
+		_log_context,
 		_random_generator,
 		_renderer,
 		_tiles,
@@ -283,6 +290,7 @@ sanguis::client::draw2d::scene::world::state::background_tile(
 }
 
 sanguis::client::draw2d::scene::world::state::state(
+	fcppt::log::context &_log_context,
 	sanguis::random_generator &_random_generator,
 	sge::renderer::device::core &_renderer,
 	sanguis::client::load::tiles::context &_tiles,
@@ -292,6 +300,16 @@ sanguis::client::draw2d::scene::world::state::state(
 	sanguis::client::draw2d::scene::world::parameters const &_parameters
 )
 :
+	log_{
+		_log_context,
+		sanguis::client::draw2d::scene::world::log_location(),
+		// TODO: Add world name?
+		sanguis::log_parameters(
+			fcppt::log::name{
+				FCPPT_TEXT("state")
+			}
+		)
+	},
 	renderer_(
 		_renderer
 	),
@@ -311,6 +329,7 @@ sanguis::client::draw2d::scene::world::state::state(
 	},
 	batches_(
 		sanguis::client::draw2d::scene::world::generate_batches(
+			_log_context,
 			_random_generator,
 			_debug,
 			grid_,
@@ -321,6 +340,7 @@ sanguis::client::draw2d::scene::world::state::state(
 	),
 	effects_{
 		sanguis::client::draw2d::scene::world::create(
+			log_,
 			_name,
 			_parameters
 		)

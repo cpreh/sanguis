@@ -2,6 +2,8 @@
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
+#include <sanguis/server/weapons/common_parameters.hpp>
+#include <sanguis/server/weapons/log_fwd.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/parameters.hpp>
 #include <sanguis/server/weapons/range.hpp>
@@ -10,7 +12,7 @@
 
 
 sanguis::server::weapons::parameters::parameters(
-	sanguis::random_generator &_random_generator,
+	sanguis::server::weapons::common_parameters const &_common_parameters,
 	sanguis::weapon_type const _weapon_type,
 	sanguis::server::weapons::attributes::optional_accuracy const _accuracy,
 	sanguis::server::weapons::range const _range,
@@ -20,9 +22,9 @@ sanguis::server::weapons::parameters::parameters(
 	sanguis::server::weapons::optional_reload_time const _reload_time
 )
 :
-	random_generator_(
-		_random_generator
-	),
+	common_parameters_{
+		_common_parameters
+	},
 	weapon_type_{
 		_weapon_type
 	},
@@ -47,11 +49,25 @@ sanguis::server::weapons::parameters::parameters(
 {
 }
 
+sanguis::server::weapons::common_parameters const &
+sanguis::server::weapons::parameters::common_parameters() const
+{
+	return
+		common_parameters_;
+}
+
+sanguis::server::weapons::log const &
+sanguis::server::weapons::parameters::log() const
+{
+	return
+		this->common_parameters().log();
+}
+
 sanguis::random_generator &
 sanguis::server::weapons::parameters::random_generator() const
 {
 	return
-		random_generator_;
+		this->common_parameters().random_generator();
 }
 
 sanguis::weapon_type

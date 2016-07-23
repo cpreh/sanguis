@@ -43,6 +43,7 @@ sanguis::server::entities::base::transfer(
 		fcppt::optional::map(
 			this->on_transfer(
 				sanguis::server::entities::transfer_parameters(
+					_environment.collision_log(),
 					_environment.collision_world(),
 					_insert_parameters.created(),
 					_grid,

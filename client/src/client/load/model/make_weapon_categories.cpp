@@ -7,6 +7,7 @@
 #include <sanguis/model/weapon_category_map.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/map.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -14,6 +15,7 @@
 
 sanguis::client::load::model::weapon_category_map
 sanguis::client::load::model::make_weapon_categories(
+	fcppt::log::object &_log,
 	sanguis::model::part const &_part,
 	sanguis::client::load::model::global_parameters const &_parameters
 )
@@ -24,6 +26,7 @@ sanguis::client::load::model::make_weapon_categories(
 		>(
 			_part.weapon_categories(),
 			[
+				&_log,
 				&_parameters
 			](
 				sanguis::model::weapon_category_map::value_type const &_weapon_category_pair
@@ -37,6 +40,7 @@ sanguis::client::load::model::make_weapon_categories(
 						fcppt::make_unique_ptr<
 							sanguis::client::load::model::weapon_category
 						>(
+							_log,
 							_weapon_category_pair.second,
 							_parameters.new_image(
 								_weapon_category_pair.second.image_name()

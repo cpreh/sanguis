@@ -17,6 +17,7 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_signed.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/math/vector/fill.hpp>
 
 
@@ -32,6 +33,7 @@ template<
 >
 sanguis::tiles::cell_container
 draw_connecting(
+	fcppt::log::object &_log,
 	sanguis::tiles::collection &_collection,
 	sanguis::tiles::error const _error_code,
 	sanguis::creator::tile_grid<
@@ -68,6 +70,7 @@ draw_connecting(
 			),
 			sanguis::tiles::impl::get_content_function{
 				[
+					&_log,
 					&_collection,
 					_error_code,
 					&_grid
@@ -77,6 +80,7 @@ draw_connecting(
 				{
 					return
 						sanguis::tiles::impl::connecting_images(
+							_log,
 							_collection,
 							_error_code,
 							_grid,

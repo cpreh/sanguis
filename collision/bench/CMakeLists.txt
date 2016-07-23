@@ -28,4 +28,5 @@ target_link_libraries(
 	sanguis_collision_bench_main
 	PRIVATE
 	${sanguis_collision_TARGET}
+	${fcppt_log_TARGET}
 )

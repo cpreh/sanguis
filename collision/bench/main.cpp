@@ -1,6 +1,7 @@
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/duration.hpp>
 #include <sanguis/collision/length2.hpp>
+#include <sanguis/collision/log.hpp>
 #include <sanguis/collision/optional_mass.hpp>
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/speed.hpp>
@@ -29,6 +30,10 @@
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/algorithm/repeat.hpp>
+#include <fcppt/log/context.hpp>
+#include <fcppt/log/enabled_levels.hpp>
+#include <fcppt/log/level.hpp>
+#include <fcppt/log/setting.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/vector/fill.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -129,10 +134,23 @@ main()
 		}
 	};
 
+	fcppt::log::context log_context{
+		fcppt::log::setting{
+			fcppt::log::enabled_levels(
+				fcppt::log::level::error
+			)
+		}
+	};
+
+	sanguis::collision::log const log{
+		log_context
+	};
+
 	body_base fake_body_base;
 
 	auto const make_bodies(
 		[
+			&log,
 			&world,
 			&fake_body_base
 		](
@@ -148,6 +166,7 @@ main()
 						_count
 					),
 					[
+						&log,
 						&world,
 						&fake_body_base,
 						_group
@@ -158,6 +177,7 @@ main()
 						return
 							world->create_body(
 								sanguis::collision::world::body_parameters{
+									log,
 									sanguis::collision::center{
 										fcppt::math::vector::fill<
 											sanguis::collision::length2

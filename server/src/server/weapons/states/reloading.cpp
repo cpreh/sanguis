@@ -67,7 +67,9 @@ sanguis::server::weapons::states::reloading::reloading(
 	);
 
 	FCPPT_LOG_VERBOSE(
-		sanguis::server::weapons::log(),
+		this->context<
+			sanguis::server::weapons::weapon
+		>().log().main_log(),
 		fcppt::log::_
 			<< FCPPT_TEXT("reloading: ")
 			<< this

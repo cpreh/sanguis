@@ -73,6 +73,7 @@
 #include <sanguis/server/perks/tree/container.hpp>
 #include <sanguis/server/perks/tree/create.hpp>
 #include <sanguis/server/perks/tree/status.hpp>
+#include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/weapons/default_ias.hpp>
 #include <sanguis/server/weapons/default_irs.hpp>
 #include <sanguis/server/weapons/optional_unique_ptr.hpp>
@@ -101,6 +102,7 @@
 
 sanguis::server::entities::player::player(
 	sanguis::random_generator &_random_generator,
+	sanguis::server::weapons::common_parameters const &_weapon_parameters,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::health const _health,
 	sanguis::server::damage::armor_array const &_armor,
@@ -202,7 +204,7 @@ sanguis::server::entities::player::player(
 	sanguis::server::entities::with_weapon(
 		sanguis::server::weapons::optional_unique_ptr(
 			sanguis::server::weapons::player_start_weapon(
-				_random_generator
+				_weapon_parameters
 			)
 		),
 		sanguis::server::weapons::default_ias(),

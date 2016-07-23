@@ -39,6 +39,7 @@ sanguis::server::world::random(
 			),
 			_difficulty,
 			sanguis::creator::top_parameters{
+				_parameters.log_context(),
 				sanguis::server::world::random_generator_name(
 					_parameters.random_generator()
 				),

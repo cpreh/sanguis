@@ -4,6 +4,7 @@
 #include <sanguis/client/load/model/global_parameters_fwd.hpp>
 #include <sanguis/client/load/model/weapon_category_map.hpp>
 #include <sanguis/model/part_fwd.hpp>
+#include <fcppt/log/object_fwd.hpp>
 
 
 namespace sanguis
@@ -17,6 +18,7 @@ namespace model
 
 sanguis::client::load::model::weapon_category_map
 make_weapon_categories(
+	fcppt::log::object &,
 	sanguis::model::part const &,
 	sanguis::client::load::model::global_parameters const &
 );

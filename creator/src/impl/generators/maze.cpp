@@ -86,6 +86,7 @@ sanguis::creator::impl::generators::maze(
 	sanguis::creator::spawn_container const
 	spawners{
 		sanguis::creator::impl::place_spawners(
+			_parameters.log(),
 			grid,
 			openings,
 			20u,

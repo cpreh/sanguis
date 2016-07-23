@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_LOAD_RESOURCE_PARSE_TEXTURE_FILE_HPP_INCLUDED
 
 #include <sanguis/client/load/resource/texture_name_map.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -18,6 +19,7 @@ namespace resource
 
 sanguis::client::load::resource::texture_name_map
 parse_texture_file(
+	fcppt::log::object &,
 	boost::filesystem::path const &,
 	sanguis::client::load::resource::texture_name_map &&
 );

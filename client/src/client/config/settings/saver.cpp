@@ -1,4 +1,3 @@
-#include <sanguis/client/log.hpp>
 #include <sanguis/client/config/settings/object.hpp>
 #include <sanguis/client/config/settings/saver.hpp>
 #include <fcppt/exception.hpp>
@@ -28,7 +27,7 @@ sanguis::client::config::settings::saver::~saver()
 	)
 	{
 		FCPPT_LOG_FATAL(
-			sanguis::client::log(),
+			object_.log(),
 			fcppt::log::_
 				<< FCPPT_TEXT("Saving your settings failed: ")
 				<< _error.string()

@@ -90,6 +90,7 @@ sanguis::server::global::generate_worlds(
 			),
 			difficulty,
 			sanguis::creator::top_parameters(
+				_parameters.log_context(),
 				sanguis::creator::start_name(),
 				sanguis::server::world::random_seed(
 					_parameters.random_generator()
@@ -239,6 +240,7 @@ sanguis::server::global::generate_worlds(
 		);
 	}
 
+	// TODO: Move this out of here
 	{
 		sanguis::server::world::object &last_world(
 			*worlds.at(
@@ -250,6 +252,7 @@ sanguis::server::global::generate_worlds(
 			last_world.insert(
 				sanguis::server::entities::enemies::create(
 					_parameters.random_generator(),
+					_parameters.weapon_parameters(),
 					sanguis::creator::enemy_type::reaper,
 					sanguis::creator::enemy_kind::unique,
 					last_world.difficulty(),

@@ -25,7 +25,6 @@
 #include <sanguis/creator/impl/filled_rect.hpp>
 #include <sanguis/creator/impl/generate_maze.hpp>
 #include <sanguis/creator/impl/interior_range.hpp>
-#include <sanguis/creator/impl/log.hpp>
 #include <sanguis/creator/impl/maze_to_tile_grid.hpp>
 #include <sanguis/creator/impl/parameters.hpp>
 #include <sanguis/creator/impl/place_boss.hpp>
@@ -53,8 +52,10 @@
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/fill.hpp>
 #include <fcppt/container/grid/in_range.hpp>
+#include <fcppt/container/grid/map.hpp>
 #include <fcppt/container/grid/make_pos_ref_range.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
+#include <fcppt/container/grid/output.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/level.hpp>
@@ -76,7 +77,6 @@
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <functional>
-#include <iostream>
 #include <map>
 #include <set>
 #include <vector>
@@ -438,34 +438,28 @@ sanguis::creator::impl::generators::rooms(
 
 	auto region_grid = tmp_result.grid;
 
-	auto output_grid = [&raw_grid,&rects](
+	auto output_grid = [&raw_grid,&log = _parameters.log()](
 	){
-		if (!sanguis::creator::impl::log().activated(fcppt::log::level::debug))
-			return;
-
-		for ( unsigned y = 0; y < raw_grid.size().h(); ++y)
-		{
-			for ( unsigned x = 0; x < raw_grid.size().w(); ++x)
-			{
-				auto const pos =
-					sanguis::creator::pos{x,y};
-				std::cerr <<
-					(
-						raw_grid[
-							pos
-						]
-						==
-						sanguis::creator::impl::reachable(true)
-						?
-						'.'
-						:
-						'@'
+		FCPPT_LOG_DEBUG(
+			log,
+			fcppt::log::_
+				<<
+				fcppt::container::grid::map(
+					raw_grid,
+					[](
+						sanguis::creator::impl::reachable const _reachable
 					)
-				;
-			}
-			std::cerr << std::endl;
-		}
-		std::cerr << std::endl;
+					{
+						return
+							_reachable.get()
+							?
+								'.'
+							:
+								'@'
+							;
+					}
+				)
+		);
 	};
 
 	auto cur_region =
@@ -795,7 +789,7 @@ sanguis::creator::impl::generators::rooms(
 	);
 
 	FCPPT_LOG_DEBUG(
-		sanguis::creator::impl::log(),
+		_parameters.log(),
 		fcppt::log::_
 		<< entrance_room
 		<< FCPPT_TEXT(" : ")
@@ -863,7 +857,7 @@ sanguis::creator::impl::generators::rooms(
 		);
 
 	FCPPT_LOG_DEBUG(
-		sanguis::creator::impl::log(),
+		_parameters.log(),
 		fcppt::log::_
 		 << openings[
 				sanguis::creator::opening_type::entry

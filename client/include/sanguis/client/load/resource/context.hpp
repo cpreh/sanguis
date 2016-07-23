@@ -10,6 +10,7 @@
 #include <sge/renderer/device/core_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
+#include <fcppt/log/context_fwd.hpp>
 
 
 namespace sanguis
@@ -36,6 +37,7 @@ private:
 	friend class sanguis::client::load::context;
 
 	context(
+		fcppt::log::context &,
 		sge::renderer::device::core &,
 		sge::image2d::system &,
 		sge::audio::loader &,

@@ -34,7 +34,7 @@ sanguis::server::weapons::factory::pistol(
 			fcppt::make_unique_ptr<
 				sanguis::server::weapons::pistol
 			>(
-				_parameters.random_generator(),
+				_parameters.common_parameters(),
 				_parameters.weapon_type(),
 				sanguis::server::weapons::modifiers::apply(
 					_parameters.random_generator(),

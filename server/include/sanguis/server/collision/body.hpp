@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_COLLISION_BODY_HPP_INCLUDED
 #define SANGUIS_SERVER_COLLISION_BODY_HPP_INCLUDED
 
+#include <sanguis/collision/log_fwd.hpp>
 #include <sanguis/collision/world/body_base_fwd.hpp>
 #include <sanguis/collision/world/body_enter_container.hpp>
 #include <sanguis/collision/world/body_exit_container.hpp>
@@ -59,6 +60,7 @@ public:
 
 	sanguis::collision::world::body_enter_container
 	transfer(
+		sanguis::collision::log const &,
 		sanguis::collision::world::object &,
 		sanguis::collision::world::created,
 		sanguis::server::center,

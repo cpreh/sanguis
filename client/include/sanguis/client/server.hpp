@@ -6,6 +6,8 @@
 #include <alda/net/port.hpp>
 #include <awl/main/exit_code.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <mutex>
 #include <thread>
@@ -23,8 +25,8 @@ class server
 		server
 	);
 public:
-	explicit
 	server(
+		fcppt::log::context &,
 		alda::net::port
 	);
 
@@ -44,6 +46,8 @@ private:
 
 	void
 	reset_running();
+
+	fcppt::log::object log_;
 
 	bool running_;
 

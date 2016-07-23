@@ -19,6 +19,7 @@
 #include <sanguis/server/entities/enemies/factory/zombie00.hpp>
 #include <sanguis/server/entities/enemies/factory/zombie01.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
+#include <sanguis/server/weapons/parameters_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/cast/int_to_float.hpp>
@@ -27,6 +28,7 @@
 sanguis::server::entities::with_id_unique_ptr
 sanguis::server::entities::enemies::create(
 	sanguis::random_generator &_random_generator,
+	sanguis::server::weapons::common_parameters const &_weapons_parameters,
 	sanguis::creator::enemy_type const _enemy_type,
 	sanguis::creator::enemy_kind const _enemy_kind,
 	sanguis::server::world::difficulty const _difficulty,
@@ -37,6 +39,7 @@ sanguis::server::entities::enemies::create(
 {
 	sanguis::server::entities::enemies::factory::parameters const parameters{
 		_random_generator,
+		_weapons_parameters,
 		_enemy_type,
 		_enemy_kind,
 		sanguis::server::entities::enemies::difficulty(

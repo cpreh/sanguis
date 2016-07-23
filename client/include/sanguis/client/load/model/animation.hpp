@@ -8,6 +8,7 @@
 #include <sanguis/model/animation_fwd.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/log/object_fwd.hpp>
 
 
 namespace sanguis
@@ -26,6 +27,7 @@ class animation
 	);
 public:
 	animation(
+		fcppt::log::object &,
 		sanguis::model::animation const &,
 		sanguis::client::load::model::global_parameters const &
 	);

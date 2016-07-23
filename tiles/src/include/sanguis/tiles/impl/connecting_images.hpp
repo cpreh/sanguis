@@ -9,7 +9,6 @@
 #include <sanguis/tiles/impl/error_message_function.hpp>
 #include <sanguis/tiles/impl/filter_connecting.hpp>
 #include <sanguis/tiles/impl/images_base.hpp>
-#include <sanguis/tiles/impl/log.hpp>
 #include <sanguis/tiles/impl/make_neighbors.hpp>
 #include <sanguis/tiles/impl/make_pair.hpp>
 #include <sanguis/tiles/impl/make_orientation.hpp>
@@ -20,6 +19,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>
+#include <fcppt/log/object_fwd.hpp>
 
 
 namespace sanguis
@@ -34,6 +34,7 @@ template<
 >
 sanguis::tiles::impl::optional_content_path
 connecting_images(
+	fcppt::log::object &_log,
 	sanguis::tiles::collection &_collection,
 	sanguis::tiles::error const _error_code,
 	sanguis::creator::tile_grid<
@@ -57,11 +58,12 @@ connecting_images(
 				neighbors
 			),
 			[
+				&_log,
 				&neighbors
 			]
 			{
 				FCPPT_LOG_ERROR(
-					sanguis::tiles::impl::log(),
+					_log,
 					fcppt::log::_
 						<<
 						FCPPT_TEXT("Tile combination ")
@@ -78,6 +80,7 @@ connecting_images(
 			},
 			[
 				_error_code,
+				&_log,
 				&_collection,
 				&neighbors
 			](
@@ -94,6 +97,7 @@ connecting_images(
 						sanguis::tiles::impl::optional_content_path{}
 					:
 						sanguis::tiles::impl::images_base(
+							_log,
 							_collection,
 							_error_code,
 							_pair,

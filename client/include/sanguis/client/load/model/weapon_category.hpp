@@ -8,6 +8,7 @@
 #include <sanguis/client/load/model/weapon_category_fwd.hpp>
 #include <sanguis/model/weapon_category_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/log/object_fwd.hpp>
 
 
 namespace sanguis
@@ -26,12 +27,14 @@ class weapon_category
 	);
 public:
 	weapon_category(
+		fcppt::log::object &,
 		sanguis::model::weapon_category const &,
 		sanguis::client::load::model::global_parameters const &
 	);
 
 	~weapon_category();
 
+	// TODO: optionals
 	sanguis::client::load::model::animation const &
 	operator[](
 		sanguis::client::load::animation_type

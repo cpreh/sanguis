@@ -41,9 +41,11 @@
 #include <fcppt/text.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/log/_.hpp>
+#include <fcppt/log/context_fwd.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/info.hpp>
+#include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/verbose.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -55,24 +57,24 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace
-{
-
-fcppt::log::object logger(
-	sanguis::log_parameters(
-		sanguis::server::log_location()
-		/
-		FCPPT_TEXT("machine")
-	)
-);
-
-}
-
 sanguis::server::machine::machine(
+	fcppt::log::context &_log_context,
 	alda::net::port const _port,
 	sanguis::io_service &_io_service
 )
 :
+	log_context_{
+		_log_context
+	},
+	log_{
+		_log_context,
+		sanguis::server::log_location(),
+		sanguis::log_parameters(
+			fcppt::log::name{
+				FCPPT_TEXT("machine")
+			}
+		)
+	},
 	resources_(),
 	port_(
 		_port
@@ -82,6 +84,7 @@ sanguis::server::machine::machine(
 	),
 	net_(
 		alda::net::parameters(
+			_log_context,
 			io_service_.impl(),
 			sanguis::net::send_buffer_size(),
 			sanguis::net::receive_buffer_size()
@@ -268,10 +271,11 @@ sanguis::server::machine::send_unicast(
 			net_id
 		),
 		[
+			this,
 			net_id
 		]{
 			FCPPT_LOG_INFO(
-				::logger,
+				log_,
 				fcppt::log::_
 					<< FCPPT_TEXT("Client ")
 					<< net_id
@@ -317,6 +321,13 @@ sanguis::server::machine::resources() const
 		resources_;
 }
 
+fcppt::log::context &
+sanguis::server::machine::log_context() const
+{
+	return
+		log_context_;
+}
+
 void
 sanguis::server::machine::process_message(
 	alda::net::id const _id,
@@ -324,7 +335,7 @@ sanguis::server::machine::process_message(
 )
 {
 	FCPPT_LOG_VERBOSE(
-		::logger,
+		log_,
 		fcppt::log::_
 			<< FCPPT_TEXT("process_message")
 	);
@@ -354,7 +365,7 @@ sanguis::server::machine::add_overflow_message(
 	);
 
 	FCPPT_LOG_DEBUG(
-		::logger,
+		log_,
 		fcppt::log::_
 			<< FCPPT_TEXT("Client ")
 			<< _id
@@ -369,7 +380,7 @@ sanguis::server::machine::disconnect_callback(
 )
 {
 	FCPPT_LOG_INFO(
-		::logger,
+		log_,
 		fcppt::log::_
 			<< FCPPT_TEXT("Client ")
 			<< _id
@@ -418,7 +429,7 @@ try
 				)
 				{
 					FCPPT_LOG_DEBUG(
-						::logger,
+						log_,
 						fcppt::log::_
 							<< FCPPT_TEXT("Client currently has no player ")
 							<< _error.string()
@@ -474,7 +485,7 @@ sanguis::server::machine::data_error(
 )
 {
 	FCPPT_LOG_ERROR(
-		::logger,
+		log_,
 		fcppt::log::_
 			<< FCPPT_TEXT("Error while processing message from client ")
 			<< _id

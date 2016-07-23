@@ -70,7 +70,7 @@ sanguis::server::entities::enemies::factory::zombie00(
 				fcppt::make_unique_ptr<
 					sanguis::server::weapons::pistol
 				>(
-					_parameters.random_generator(),
+					_parameters.weapon_parameters(),
 					sanguis::weapon_type(
 						sanguis::primary_weapon_type::pistol
 					),

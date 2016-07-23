@@ -15,6 +15,7 @@
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/random/distributor_impl.hpp>
+#include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/weapons/create.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/world/pickup_spawner.hpp>
@@ -33,12 +34,16 @@
 
 sanguis::server::world::pickup_spawner::pickup_spawner(
 	sanguis::random_generator &_random_generator,
+	sanguis::server::weapons::common_parameters const &_weapon_parameters,
 	sanguis::server::environment::object &_env
 )
 :
 	random_generator_(
 		_random_generator
 	),
+	weapon_parameters_{
+		_weapon_parameters
+	},
 	env_(
 		_env
 	),
@@ -205,7 +210,7 @@ sanguis::server::world::pickup_spawner::spawn_weapon(
 				env_.load_context(),
 				sanguis::server::team::players,
 				sanguis::server::weapons::create(
-					random_generator_,
+					weapon_parameters_,
 					_weapon_type,
 					_difficulty
 				)

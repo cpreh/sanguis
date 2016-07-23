@@ -1,6 +1,5 @@
 #include <sanguis/exception.hpp>
 #include <sanguis/random_generator.hpp>
-#include <sanguis/client/load/log.hpp>
 #include <sanguis/client/load/model/make_parts.hpp>
 #include <sanguis/client/load/model/object.hpp>
 #include <sanguis/client/load/model/part.hpp>
@@ -14,6 +13,7 @@
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/random/variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
@@ -25,6 +25,7 @@
 
 
 sanguis::client::load::model::object::object(
+	fcppt::log::object &_log,
 	boost::filesystem::path const &_path,
 	sanguis::client::load::resource::context const &_context
 )
@@ -35,6 +36,7 @@ try
 	),
 	part_result_(
 		sanguis::client::load::model::make_parts(
+			_log,
 			_path,
 			_context
 		)
@@ -42,10 +44,12 @@ try
 	random_part_()
 {
 	FCPPT_LOG_DEBUG(
-		sanguis::client::load::log(),
+		_log,
 		fcppt::log::_
-			<< FCPPT_TEXT("Entering ")
-			<< fcppt::filesystem::path_to_string(
+			<<
+			FCPPT_TEXT("Entering ")
+			<<
+			fcppt::filesystem::path_to_string(
 				_path
 			)
 	);
@@ -55,15 +59,20 @@ catch(
 )
 {
 	FCPPT_LOG_ERROR(
-		sanguis::client::load::log(),
+		_log,
 		fcppt::log::_
-			<< FCPPT_TEXT("model \"")
-			<< fcppt::filesystem::path_to_string(
+			<<
+			FCPPT_TEXT("model \"")
+			<<
+			fcppt::filesystem::path_to_string(
 				_path
 			)
-			<< FCPPT_TEXT("\": \"")
-			<< _error.string()
-			<< FCPPT_TEXT('"')
+			<<
+			FCPPT_TEXT("\": \"")
+			<<
+			_error.string()
+			<<
+			FCPPT_TEXT('"')
 	);
 
 	throw;
@@ -78,6 +87,7 @@ sanguis::client::load::model::object::operator[](
 	fcppt::string const &_name
 ) const
 {
+	// TODO: optionals
 	sanguis::client::load::model::part_map::const_iterator const it(
 		this->parts().find(
 			_name

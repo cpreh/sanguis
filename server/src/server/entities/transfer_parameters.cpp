@@ -1,3 +1,4 @@
+#include <sanguis/collision/log_fwd.hpp>
 #include <sanguis/collision/world/created.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
@@ -7,6 +8,7 @@
 
 
 sanguis::server::entities::transfer_parameters::transfer_parameters(
+	sanguis::collision::log const &_log,
 	sanguis::collision::world::object &_world,
 	sanguis::collision::world::created const _created,
 	sanguis::creator::grid const &_grid,
@@ -14,6 +16,9 @@ sanguis::server::entities::transfer_parameters::transfer_parameters(
 	sanguis::server::angle const _angle
 )
 :
+	log_{
+		_log
+	},
 	world_(
 		_world
 	),
@@ -30,6 +35,13 @@ sanguis::server::entities::transfer_parameters::transfer_parameters(
 		_angle
 	)
 {
+}
+
+sanguis::collision::log const &
+sanguis::server::entities::transfer_parameters::log() const
+{
+	return
+		log_;
 }
 
 sanguis::collision::world::object &

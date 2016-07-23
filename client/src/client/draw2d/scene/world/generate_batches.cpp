@@ -16,10 +16,12 @@
 #include <sanguis/creator/sup.hpp>
 #include <sanguis/tiles/cell.hpp>
 #include <sanguis/tiles/draw.hpp>
+#include <sanguis/tiles/log.hpp>
 #include <sge/sprite/geometry/make_random_access_range.hpp>
 #include <sge/sprite/geometry/sort_and_update.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/cast/size.hpp>
+#include <fcppt/log/context_fwd.hpp>
 #include <fcppt/math/ceil_div.hpp>
 #include <fcppt/math/map.hpp>
 #include <fcppt/math/dim/comparison.hpp>
@@ -29,6 +31,7 @@
 
 sanguis::client::draw2d::scene::world::batch_grid
 sanguis::client::draw2d::scene::world::generate_batches(
+	fcppt::log::context &_log_context,
 	sanguis::random_generator &_random_generator,
 	sanguis::client::draw::debug const _debug,
 	sanguis::creator::grid const &_grid,
@@ -37,6 +40,10 @@ sanguis::client::draw2d::scene::world::generate_batches(
 	sanguis::client::draw2d::scene::world::sprite::buffers &_sprite_buffers
 )
 {
+	sanguis::tiles::log const tiles_log{
+		_log_context
+	};
+
 	sanguis::creator::pos const batch_dim_pos(
 		fcppt::math::vector::fill<
 			sanguis::creator::pos
@@ -73,7 +80,8 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				&_background_grid,
 				&_tiles,
 				&_sprite_buffers,
-				batch_dim_pos
+				batch_dim_pos,
+				&tiles_log
 			](
 				sanguis::creator::pos const _pos
 			)
@@ -102,6 +110,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 						sanguis::client::draw2d::scene::world::sprite::container
 					>(
 						sanguis::tiles::draw(
+							tiles_log,
 							_grid,
 							_background_grid,
 							_tiles.collection(),

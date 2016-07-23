@@ -6,9 +6,11 @@
 #include <sanguis/client/load/resource/optional_sound.hpp>
 #include <sanguis/client/load/resource/animation/series.hpp>
 #include <sanguis/model/animation.hpp>
+#include <fcppt/log/object_fwd.hpp>
 
 
 sanguis::client::load::model::animation::animation(
+	fcppt::log::object &_log,
 	sanguis::model::animation const &_animation,
 	sanguis::client::load::model::global_parameters const &_parameters
 )
@@ -27,6 +29,7 @@ sanguis::client::load::model::animation::animation(
 	),
 	sound_(
 		sanguis::client::load::model::make_sound(
+			_log,
 			_animation.animation_sound(),
 			_parameters.sounds()
 		)

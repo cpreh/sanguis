@@ -1,12 +1,35 @@
 #include <sanguis/log_parameters.hpp>
+#include <sanguis/server/log_location.hpp>
 #include <sanguis/server/weapons/log.hpp>
-#include <sanguis/server/weapons/log_location.hpp>
-#include <fcppt/log/define_object.hpp>
+#include <fcppt/text.hpp>
+#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/name.hpp>
+#include <fcppt/log/object.hpp>
 
 
-FCPPT_LOG_DEFINE_OBJECT(
-	sanguis::server::weapons::log,
-	sanguis::log_parameters(
-		sanguis::server::weapons::log_location()
-	)
+sanguis::server::weapons::log::log(
+	fcppt::log::context &_log_context
 )
+:
+	main_log_{
+		_log_context,
+		sanguis::server::log_location(),
+		sanguis::log_parameters(
+			fcppt::log::name{
+				FCPPT_TEXT("weapons")
+			}
+		)
+	}
+{
+}
+
+sanguis::server::weapons::log::~log()
+{
+}
+
+fcppt::log::object &
+sanguis::server::weapons::log::main_log() const
+{
+	return
+		main_log_;
+}

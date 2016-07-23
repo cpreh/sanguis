@@ -35,6 +35,7 @@
 #include <sge/input/cursor/activatable_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
+#include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
 #include <boost/statechart/custom_reaction.hpp>
@@ -209,6 +210,8 @@ private:
 	do_pause(
 		bool
 	);
+
+	fcppt::log::object log_;
 
 	sanguis::client::load::hud::context hud_resources_;
 

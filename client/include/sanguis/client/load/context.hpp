@@ -8,6 +8,7 @@
 #include <sge/image2d/system_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/log/context_fwd.hpp>
 
 
 namespace sanguis
@@ -24,6 +25,7 @@ class context
 	);
 public:
 	context(
+		fcppt::log::context &,
 		sge::image2d::system &,
 		sge::renderer::device::core &,
 		sge::audio::loader &,

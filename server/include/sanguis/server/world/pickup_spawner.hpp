@@ -9,6 +9,7 @@
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/random/distributor_decl.hpp>
+#include <sanguis/server/weapons/common_parameters.hpp>
 #include <fcppt/function_impl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/random/distribution/basic_decl.hpp>
@@ -31,6 +32,7 @@ class pickup_spawner
 public:
 	pickup_spawner(
 		sanguis::random_generator &,
+		sanguis::server::weapons::common_parameters const &,
 		sanguis::server::environment::object &
 	);
 
@@ -77,6 +79,8 @@ private:
 	);
 
 	sanguis::random_generator &random_generator_;
+
+	sanguis::server::weapons::common_parameters const weapon_parameters_;
 
 	sanguis::server::environment::object &env_;
 

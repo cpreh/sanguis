@@ -6,6 +6,7 @@
 #include <sanguis/tiles/collection_fwd.hpp>
 #include <sanguis/tiles/draw.hpp>
 #include <sanguis/tiles/error.hpp>
+#include <sanguis/tiles/log.hpp>
 #include <sanguis/tiles/impl/draw_connecting.hpp>
 #include <sanguis/tiles/impl/draw_non_connecting.hpp>
 #include <fcppt/algorithm/join.hpp>
@@ -17,6 +18,7 @@
 
 sanguis::tiles::cell_container
 sanguis::tiles::draw(
+	sanguis::tiles::log const &_log,
 	sanguis::creator::grid const &_foreground,
 	sanguis::creator::background_grid const &_background,
 	sanguis::tiles::collection &_collection,
@@ -66,6 +68,7 @@ sanguis::tiles::draw(
 	return
 		fcppt::algorithm::join(
 			sanguis::tiles::impl::draw_connecting(
+				_log.main_log(),
 				_collection,
 				sanguis::tiles::error::missing_background,
 				_background,
@@ -73,6 +76,7 @@ sanguis::tiles::draw(
 				upper_bound
 			),
 			sanguis::tiles::impl::draw_connecting(
+				_log.main_log(),
 				_collection,
 				sanguis::tiles::error::missing_foreground,
 				_foreground,
@@ -80,6 +84,7 @@ sanguis::tiles::draw(
 				upper_bound
 			),
 			sanguis::tiles::impl::draw_non_connecting(
+				_log.main_log(),
 				_collection,
 				sanguis::tiles::error::missing_object,
 				_foreground,

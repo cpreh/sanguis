@@ -1,26 +1,22 @@
-#include <sanguis/log_context.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/log_stream.hpp>
-#include <fcppt/log/level.hpp>
-#include <fcppt/log/location_fwd.hpp>
+#include <fcppt/log/default_level_streams.hpp>
+#include <fcppt/log/name_fwd.hpp>
 #include <fcppt/log/parameters.hpp>
+#include <fcppt/log/format/optional_function.hpp>
 
 
 fcppt::log::parameters
 sanguis::log_parameters(
-	fcppt::log::location const &_location
+	fcppt::log::name const &_name
 )
 {
 	return
-		fcppt::log::parameters(
-			sanguis::log_stream(),
-			fcppt::log::level::warning
-		)
-		.context_location(
-			sanguis::log_context(),
-			_location
-		)
-		.enabled(
-			true
-		);
+		fcppt::log::parameters{
+			_name,
+			fcppt::log::default_level_streams(
+				sanguis::log_stream()
+			),
+			fcppt::log::format::optional_function()
+		};
 }

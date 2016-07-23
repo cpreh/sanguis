@@ -9,6 +9,7 @@
 #include <alda/net/port.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_state_machine.hpp>
+#include <fcppt/log/context_fwd.hpp>
 
 
 namespace sanguis
@@ -18,15 +19,16 @@ namespace server
 
 class object
 :
-	public sanguis::server::object_base
+	public
+		sanguis::server::object_base
 {
 	FCPPT_NONCOPYABLE(
 		object
 	);
 public:
 	SANGUIS_SERVER_SYMBOL
-	explicit
 	object(
+		fcppt::log::context &,
 		alda::net::port
 	);
 

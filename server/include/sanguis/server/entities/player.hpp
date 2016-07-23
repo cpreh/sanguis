@@ -31,6 +31,7 @@
 #include <sanguis/server/entities/pickups/weapon_ref.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/perks/tree/container.hpp>
+#include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/weapons/weapon_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/reference_comparison.hpp>
@@ -65,6 +66,7 @@ class player
 public:
 	player(
 		sanguis::random_generator &,
+		sanguis::server::weapons::common_parameters const &,
 		sanguis::server::environment::load_context &,
 		sanguis::server::health,
 		sanguis::server::damage::armor_array const &,

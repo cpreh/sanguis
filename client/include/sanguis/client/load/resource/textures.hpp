@@ -11,6 +11,8 @@
 #include <sge/texture/const_part_unique_ptr.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <map>
@@ -59,6 +61,7 @@ public:
 	renderer() const;
 
 	textures(
+		fcppt::log::context &,
 		sge::renderer::device::core &,
 		sge::image2d::system &
 	);
@@ -84,6 +87,8 @@ private:
 		boost::filesystem::path,
 		sge::texture::const_part_unique_ptr
 	> unnamed_texture_map;
+
+	mutable fcppt::log::object log_;
 
 	sge::renderer::device::core &renderer_;
 

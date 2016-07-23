@@ -7,7 +7,6 @@ set(
 	include/sanguis/tools/libmergeimage/image_store.hpp
 	include/sanguis/tools/libmergeimage/image_store_fwd.hpp
 	include/sanguis/tools/libmergeimage/image_vector.hpp
-	include/sanguis/tools/libmergeimage/log_location.hpp
 	include/sanguis/tools/libmergeimage/merge_images.hpp
 	include/sanguis/tools/libmergeimage/merge_result.hpp
 	include/sanguis/tools/libmergeimage/merge_result_fwd.hpp
@@ -29,7 +28,6 @@ set(
 	src/impl/convert_path.cpp
 	src/impl/fold_paths.cpp
 	src/impl/gather_paths.cpp
-	src/impl/log.cpp
 	src/impl/make_image.cpp
 	src/impl/make_maximum_count.cpp
 	src/impl/merge_paths.cpp
@@ -44,7 +42,6 @@ set(
 	src/include/sanguis/tools/libmergeimage/impl/count_maximum_fwd.hpp
 	src/include/sanguis/tools/libmergeimage/impl/fold_paths.hpp
 	src/include/sanguis/tools/libmergeimage/impl/gather_paths.hpp
-	src/include/sanguis/tools/libmergeimage/impl/log.hpp
 	src/include/sanguis/tools/libmergeimage/impl/make_image.hpp
 	src/include/sanguis/tools/libmergeimage/impl/make_maximum_count.hpp
 	src/include/sanguis/tools/libmergeimage/impl/max_exponent.hpp
@@ -53,7 +50,6 @@ set(
 	src/include/sanguis/tools/libmergeimage/impl/path_vector_vector.hpp
 	src/include/sanguis/tools/libmergeimage/impl/pow2.hpp
 	src/include/sanguis/tools/libmergeimage/impl/tree_depth.hpp
-	src/log_location.cpp
 	src/merge_images.cpp
 	src/merge_result.cpp
 	src/path_count_pair.cpp
@@ -74,7 +70,6 @@ sanguis_add_library(
 		${sgeimage2d_TARGET}
 		${fcppt_core_TARGET}
 		${fcppt_filesystem_TARGET}
-		${fcppt_log_TARGET}
 		${Boost_FILESYSTEM_LIBRARIES}
 	INCLUDES
 		"${CMAKE_CURRENT_SOURCE_DIR}/src/include"

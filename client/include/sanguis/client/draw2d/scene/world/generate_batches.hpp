@@ -8,6 +8,7 @@
 #include <sanguis/client/load/tiles/context_fwd.hpp>
 #include <sanguis/creator/background_grid_fwd.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
+#include <fcppt/log/context_fwd.hpp>
 
 
 namespace sanguis
@@ -23,6 +24,7 @@ namespace world
 
 sanguis::client::draw2d::scene::world::batch_grid
 generate_batches(
+	fcppt::log::context &,
 	sanguis::random_generator &,
 	sanguis::client::draw::debug,
 	sanguis::creator::grid const &,

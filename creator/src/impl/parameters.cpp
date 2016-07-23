@@ -2,14 +2,19 @@
 #include <sanguis/creator/spawn_boss.hpp>
 #include <sanguis/creator/impl/parameters.hpp>
 #include <sanguis/creator/impl/random/generator_fwd.hpp>
+#include <fcppt/log/object_fwd.hpp>
 
 
 sanguis::creator::impl::parameters::parameters(
+	fcppt::log::object &_log,
 	sanguis::creator::impl::random::generator &_randgen,
 	sanguis::creator::spawn_boss const _spawn_boss,
 	sanguis::creator::opening_count_array const _opening_count_array
 )
 :
+	log_{
+		_log
+	},
 	randgen_(
 		_randgen
 	),
@@ -20,6 +25,13 @@ sanguis::creator::impl::parameters::parameters(
 		_opening_count_array
 	)
 {
+}
+
+fcppt::log::object &
+sanguis::creator::impl::parameters::log() const
+{
+	return
+		log_;
 }
 
 sanguis::creator::impl::random::generator &

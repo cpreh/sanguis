@@ -1,8 +1,8 @@
 #include <sanguis/perk_type.hpp>
+#include <sanguis/log_parameters.hpp>
 #include <sanguis/client/dispatch.hpp>
 #include <sanguis/client/dispatch_default_function.hpp>
 #include <sanguis/client/level.hpp>
-#include <sanguis/client/log.hpp>
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/make_send_callback.hpp>
 #include <sanguis/client/player_level.hpp>
@@ -21,6 +21,7 @@
 #include <sanguis/client/perk/state.hpp>
 #include <sanguis/client/perk/tree.hpp>
 #include <sanguis/client/states/has_player.hpp>
+#include <sanguis/client/states/log_location.hpp>
 #include <sanguis/client/states/running.hpp>
 #include <sanguis/messages/call/result.hpp>
 #include <sanguis/messages/client/choose_perk.hpp>
@@ -36,7 +37,10 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>
+#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/name.hpp>
 #include <fcppt/log/debug.hpp>
+#include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <boost/statechart/result.hpp>
@@ -51,6 +55,17 @@ sanguis::client::states::has_player::has_player(
 	my_base(
 		_ctx
 	),
+	log_{
+		this->context<
+			sanguis::client::machine
+		>().log_context(),
+		sanguis::client::states::log_location(),
+		sanguis::log_parameters(
+			fcppt::log::name{
+				FCPPT_TEXT("has_player")
+			}
+		)
+	},
 	action_handler_(
 		fcppt::make_unique_ptr<
 			sanguis::client::control::action_handler
@@ -83,7 +98,7 @@ sanguis::client::states::has_player::has_player(
 	)
 {
 	FCPPT_LOG_DEBUG(
-		sanguis::client::log(),
+		log_,
 		fcppt::log::_
 			<< FCPPT_TEXT("Entering has_player")
 	);

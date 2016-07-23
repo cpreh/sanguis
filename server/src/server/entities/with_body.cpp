@@ -164,6 +164,7 @@ sanguis::server::entities::with_body::on_transfer(
 					sanguis::server::entities::combine_transfer(
 						sanguis::server::entities::transfer_result(
 							collision_body_.transfer(
+								_parameters.log(),
 								_parameters.world(),
 								_parameters.created(),
 								_parameters.center(),

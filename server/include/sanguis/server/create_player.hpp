@@ -8,6 +8,7 @@
 #include <sanguis/server/unicast_callback.hpp>
 #include <sanguis/server/entities/player_unique_ptr.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
+#include <sanguis/server/weapons/common_parameters_fwd.hpp>
 
 
 namespace sanguis
@@ -18,6 +19,7 @@ namespace server
 sanguis::server::entities::player_unique_ptr
 create_player(
 	sanguis::random_generator &,
+	sanguis::server::weapons::common_parameters const &,
 	sanguis::server::environment::load_context &,
 	sanguis::player_name const &,
 	sanguis::server::unicast_callback const &,

@@ -1,5 +1,6 @@
 #include <sanguis/entity_id.hpp>
 #include <sanguis/exception.hpp>
+#include <sanguis/log_parameters.hpp>
 #include <sanguis/optional_entity_id.hpp>
 #include <sanguis/random_generator.hpp>
 #include <sanguis/random_seed.hpp>
@@ -21,7 +22,7 @@
 #include <sanguis/client/draw2d/aoe.hpp>
 #include <sanguis/client/draw2d/center.hpp>
 #include <sanguis/client/draw2d/insert_own_callback.hpp>
-#include <sanguis/client/draw2d/log.hpp>
+#include <sanguis/client/draw2d/log_location.hpp>
 #include <sanguis/client/draw2d/optional_player_center.hpp>
 #include <sanguis/client/draw2d/optional_translation.hpp>
 #include <sanguis/client/draw2d/player_center.hpp>
@@ -54,6 +55,7 @@
 #include <sanguis/client/draw2d/factory/weapon_pickup.hpp>
 #include <sanguis/client/draw2d/scene/background.hpp>
 #include <sanguis/client/draw2d/scene/camera.hpp>
+#include <sanguis/client/draw2d/scene/log_name.hpp>
 #include <sanguis/client/draw2d/scene/object.hpp>
 #include <sanguis/client/draw2d/scene/translation_matrix.hpp>
 #include <sanguis/client/draw2d/scene/hover/base.hpp>
@@ -183,6 +185,7 @@
 #include <fcppt/cast/float_to_int_fun.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/log/_.hpp>
+#include <fcppt/log/context_fwd.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/optional/bind.hpp>
@@ -202,6 +205,7 @@
 
 
 sanguis::client::draw2d::scene::object::object(
+	fcppt::log::context &_log_context,
 	sanguis::client::load::context const &_resources,
 	sanguis::client::load::hud::context &_hud_resources,
 	sanguis::client::sound_manager &_sound_manager,
@@ -215,6 +219,16 @@ sanguis::client::draw2d::scene::object::object(
 )
 :
 	sanguis::client::draw::base(),
+	log_context_{
+		_log_context
+	},
+	log_{
+		_log_context,
+		sanguis::client::draw2d::log_location(),
+		sanguis::log_parameters(
+			sanguis::client::draw2d::scene::log_name()
+		)
+	},
 	diff_clock_(),
 	random_generator_(
 		sanguis::random_seed()
@@ -269,6 +283,7 @@ sanguis::client::draw2d::scene::object::object(
 		fcppt::make_unique_ptr<
 			sanguis::client::draw2d::scene::world::object
 		>(
+			_log_context,
 			random_generator_,
 			renderer_,
 			_resources.resources().textures(),
@@ -1302,6 +1317,7 @@ sanguis::client::draw2d::scene::object::operator()(
 				sanguis::messages::roles::world_id
 			>(),
 			sanguis::creator::top_parameters(
+				log_context_,
 				sanguis::creator::name(
 					sge::charconv::utf8_string_to_fcppt(
 						_message.get<
@@ -1577,7 +1593,7 @@ sanguis::client::draw2d::scene::object::process_default_msg(
 )
 {
 	FCPPT_LOG_WARNING(
-		sanguis::client::draw2d::log(),
+		log_,
 		fcppt::log::_
 			<< FCPPT_TEXT("Invalid message event in dispatcher: ")
 			<< fcppt::type_name_from_info(

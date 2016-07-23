@@ -1,4 +1,3 @@
-#include <sanguis/client/load/log.hpp>
 #include <sanguis/client/load/model/make_sound.hpp>
 #include <sanguis/client/load/resource/optional_sound.hpp>
 #include <sanguis/client/load/resource/sounds.hpp>
@@ -8,11 +7,13 @@
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/optional/bind.hpp>
 
 
 sanguis::client::load::resource::optional_sound
 sanguis::client::load::model::make_sound(
+	fcppt::log::object &_log,
 	sanguis::model::optional_animation_sound const &_opt_sound,
 	sanguis::client::load::resource::sounds const &_sounds
 )
@@ -21,6 +22,7 @@ sanguis::client::load::model::make_sound(
 		fcppt::optional::bind(
 			_opt_sound,
 			[
+				&_log,
 				&_sounds
 			](
 				sanguis::model::animation_sound const &_sound
@@ -36,7 +38,7 @@ sanguis::client::load::model::make_sound(
 					!result.has_value()
 				)
 					FCPPT_LOG_ERROR(
-						sanguis::client::load::log(),
+						_log,
 						fcppt::log::_
 							<< FCPPT_TEXT("Unable to load sound ")
 							<< _sound

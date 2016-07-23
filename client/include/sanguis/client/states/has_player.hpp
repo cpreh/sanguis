@@ -15,6 +15,7 @@
 #include <sanguis/messages/server/remove_id_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
+#include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
 #include <boost/statechart/custom_reaction.hpp>
@@ -103,6 +104,8 @@ private:
 	send_perk_choose(
 		sanguis::perk_type
 	);
+
+	fcppt::log::object log_;
 
 	fcppt::unique_ptr<
 		sanguis::client::control::action_handler

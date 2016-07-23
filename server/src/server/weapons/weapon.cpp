@@ -17,6 +17,8 @@
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
+#include <sanguis/server/weapons/common_parameters.hpp>
+#include <sanguis/server/weapons/log_fwd.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/parameters.hpp>
@@ -57,6 +59,9 @@ sanguis::server::weapons::weapon::weapon(
 	random_generator_(
 		_parameters.random_generator()
 	),
+	log_{
+		_parameters.log()
+	},
 	type_{
 		_parameters.weapon_type()
 	},
@@ -317,6 +322,13 @@ sanguis::server::weapons::weapon::random_generator() const
 		random_generator_;
 }
 
+sanguis::server::weapons::log const &
+sanguis::server::weapons::weapon::log() const
+{
+	return
+		log_;
+}
+
 sanguis::server::entities::with_weapon &
 sanguis::server::weapons::weapon::owner() const
 {
@@ -331,7 +343,10 @@ sanguis::server::weapons::weapon::parameters() const
 {
 	return
 		sanguis::server::weapons::parameters{
-			this->random_generator(),
+			sanguis::server::weapons::common_parameters{
+				this->log(),
+				this->random_generator()
+			},
 			this->type(),
 			this->accuracy(),
 			range_,

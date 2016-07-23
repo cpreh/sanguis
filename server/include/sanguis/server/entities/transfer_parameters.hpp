@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_ENTITIES_TRANSFER_PARAMETERS_HPP_INCLUDED
 #define SANGUIS_SERVER_ENTITIES_TRANSFER_PARAMETERS_HPP_INCLUDED
 
+#include <sanguis/collision/log_fwd.hpp>
 #include <sanguis/collision/world/created.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
@@ -24,12 +25,16 @@ class transfer_parameters
 	);
 public:
 	transfer_parameters(
+		sanguis::collision::log const &,
 		sanguis::collision::world::object &,
 		sanguis::collision::world::created,
 		sanguis::creator::grid const &,
 		sanguis::server::center const &,
 		sanguis::server::angle
 	);
+
+	sanguis::collision::log const &
+	log() const;
 
 	sanguis::collision::world::object &
 	world() const;
@@ -46,6 +51,8 @@ public:
 	sanguis::server::angle
 	angle() const;
 private:
+	sanguis::collision::log const &log_;
+
 	sanguis::collision::world::object &world_;
 
 	sanguis::collision::world::created const created_;

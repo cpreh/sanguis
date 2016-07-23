@@ -10,6 +10,7 @@
 #include <sanguis/model/cell_size.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/optional/object_decl.hpp>
 #include <fcppt/random/variate_decl.hpp>
 #include <fcppt/random/distribution/basic_decl.hpp>
@@ -39,6 +40,7 @@ public:
 	typedef sanguis::client::load::model::part_map::size_type size_type;
 
 	object(
+		fcppt::log::object &,
 		boost::filesystem::path const &,
 		sanguis::client::load::resource::context const &
 	);

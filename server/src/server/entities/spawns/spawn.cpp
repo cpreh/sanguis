@@ -19,6 +19,7 @@
 #include <sanguis/server/entities/spawns/spawn.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <fcppt/algorithm/repeat.hpp>
 #include <fcppt/assert/optional_error.hpp>
@@ -37,6 +38,7 @@ sanguis::server::entities::spawns::spawn::~spawn()
 
 sanguis::server::entities::spawns::spawn::spawn(
 	sanguis::random_generator &_random_generator,
+	sanguis::server::weapons::common_parameters const &_weapons_parameters,
 	sanguis::creator::enemy_type const _enemy_type,
 	sanguis::creator::enemy_kind const _enemy_kind,
 	sanguis::server::world::difficulty const _difficulty
@@ -48,6 +50,9 @@ sanguis::server::entities::spawns::spawn::spawn(
 	random_generator_(
 		_random_generator
 	),
+	weapons_parameters_{
+		_weapons_parameters
+	},
 	enemy_type_{
 		_enemy_type
 	},
@@ -136,6 +141,7 @@ sanguis::server::entities::spawns::spawn::update()
 					cur_environment,
 					sanguis::server::entities::enemies::create(
 						random_generator_,
+						weapons_parameters_,
 						enemy_type_,
 						enemy_kind_,
 						difficulty_,

@@ -31,7 +31,7 @@ sanguis::server::weapons::factory::grenade(
 			fcppt::make_unique_ptr<
 				sanguis::server::weapons::grenade
 			>(
-				_parameters.random_generator(),
+				_parameters.common_parameters(),
 				sanguis::server::weapons::modifiers::apply(
 					_parameters.random_generator(),
 					_parameters.difficulty(),

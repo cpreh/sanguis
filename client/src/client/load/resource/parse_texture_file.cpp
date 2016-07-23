@@ -1,5 +1,4 @@
 #include <sanguis/exception.hpp>
-#include <sanguis/client/load/log.hpp>
 #include <sanguis/client/load/resource/parse_texture_file.hpp>
 #include <sanguis/client/load/resource/texture_identifier.hpp>
 #include <sanguis/client/load/resource/texture_name_map.hpp>
@@ -8,6 +7,7 @@
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/io/ifstream.hpp>
 #include <fcppt/log/_.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/algorithm/string/trim.hpp>
@@ -19,6 +19,7 @@
 
 sanguis::client::load::resource::texture_name_map
 sanguis::client::load::resource::parse_texture_file(
+	fcppt::log::object &_log,
 	boost::filesystem::path const &_path,
 	sanguis::client::load::resource::texture_name_map &&_result
 )
@@ -70,7 +71,7 @@ sanguis::client::load::resource::parse_texture_file(
 		)
 		{
 			FCPPT_LOG_WARNING(
-				sanguis::client::load::log(),
+				_log,
 				fcppt::log::_
 					<< FCPPT_TEXT("Error in .id file \")")
 					<< fcppt::filesystem::path_to_string(

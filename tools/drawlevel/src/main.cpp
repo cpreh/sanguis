@@ -18,6 +18,7 @@
 #include <sanguis/tiles/draw.hpp>
 #include <sanguis/tiles/error.hpp>
 #include <sanguis/tiles/error_image.hpp>
+#include <sanguis/tiles/log.hpp>
 #include <sge/image/algorithm/may_overlap.hpp>
 #include <sge/image/algorithm/uninitialized.hpp>
 #include <sge/image/color/init/alpha.hpp>
@@ -115,6 +116,7 @@ try
 	sanguis::creator::top_result const result{
 		sanguis::creator::generate(
 			sanguis::creator::top_parameters{
+				sys.log_context(),
 				sanguis::creator::name{
 					fcppt::from_std_string(
 						argv[1]
@@ -170,8 +172,13 @@ try
 		sys.image_system()
 	};
 
+	sanguis::tiles::log const tiles_log{
+		sys.log_context()
+	};
+
 	sanguis::tiles::cell_container const cells{
 		sanguis::tiles::draw(
+			tiles_log,
 			result.grid(),
 			result.background_grid(),
 			tile_collection,

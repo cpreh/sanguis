@@ -1,4 +1,3 @@
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/creator/tile_is_visible.hpp>
@@ -13,6 +12,7 @@
 #include <sanguis/server/weapons/attack_result.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
+#include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/weapons/magazine_size.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/parameters.hpp>
@@ -32,7 +32,7 @@
 
 
 sanguis::server::weapons::spawn::spawn(
-	sanguis::random_generator &_random_generator,
+	sanguis::server::weapons::common_parameters const &_common_parameters,
 	sanguis::weapon_type const _weapon_type,
 	sanguis::server::weapons::spawn_weapon const &_spawn_weapon,
 	sanguis::server::weapons::range const _range,
@@ -44,7 +44,7 @@ sanguis::server::weapons::spawn::spawn(
 	sanguis::server::weapons::spawn{
 		sanguis::server::weapons::spawn_parameters{
 			sanguis::server::weapons::parameters{
-				_random_generator,
+				_common_parameters,
 				_weapon_type,
 				sanguis::server::weapons::attributes::optional_accuracy(),
 				_range,

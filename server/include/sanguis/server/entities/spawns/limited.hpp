@@ -12,6 +12,7 @@
 #include <sanguis/server/entities/spawns/size_type.hpp>
 #include <sanguis/server/entities/spawns/spawn.hpp>
 #include <sanguis/server/entities/spawns/total_count.hpp>
+#include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -35,6 +36,7 @@ class limited
 public:
 	limited(
 		sanguis::random_generator &,
+		sanguis::server::weapons::common_parameters const &,
 		sanguis::creator::enemy_type,
 		sanguis::creator::enemy_kind,
 		sanguis::server::world::difficulty,

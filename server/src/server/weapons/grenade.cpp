@@ -1,5 +1,4 @@
 #include <sanguis/duration_second.hpp>
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/secondary_weapon_type.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/weapon_type.hpp>
@@ -14,6 +13,7 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/attack.hpp>
 #include <sanguis/server/weapons/attack_result.hpp>
+#include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/weapons/grenade.hpp>
 #include <sanguis/server/weapons/grenade_parameters.hpp>
 #include <sanguis/server/weapons/insert_to_attack_result.hpp>
@@ -35,13 +35,13 @@
 
 
 sanguis::server::weapons::grenade::grenade(
-	sanguis::random_generator &_random_generator,
+	sanguis::server::weapons::common_parameters const &_common_parameters,
 	sanguis::server::weapons::grenade_parameters const &_parameters
 )
 :
 	sanguis::server::weapons::weapon(
 		sanguis::server::weapons::parameters{
-			_random_generator,
+			_common_parameters,
 			sanguis::weapon_type(
 				sanguis::secondary_weapon_type::grenade
 			),

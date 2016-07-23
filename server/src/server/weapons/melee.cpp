@@ -1,6 +1,5 @@
 #include <sanguis/duration_second.hpp>
 #include <sanguis/primary_weapon_type.hpp>
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/center.hpp>
@@ -14,6 +13,7 @@
 #include <sanguis/server/weapons/attack.hpp>
 #include <sanguis/server/weapons/attack_result.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
+#include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/weapons/melee.hpp>
 #include <sanguis/server/weapons/melee_parameters.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
@@ -29,13 +29,13 @@
 
 
 sanguis::server::weapons::melee::melee(
-	sanguis::random_generator &_random_generator,
+	sanguis::server::weapons::common_parameters const &_common_parameters,
 	sanguis::server::weapons::melee_parameters const &_parameters
 )
 :
 	sanguis::server::weapons::weapon(
 		sanguis::server::weapons::parameters{
-			_random_generator,
+			_common_parameters,
 			sanguis::weapon_type(
 				sanguis::primary_weapon_type::melee
 			),

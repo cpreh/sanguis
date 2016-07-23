@@ -8,6 +8,7 @@
 #include <sanguis/server/weapons/accuracy.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
+#include <sanguis/server/weapons/common_parameters.hpp>
 #include <sanguis/server/weapons/create_function.hpp>
 #include <sanguis/server/weapons/damage.hpp>
 #include <sanguis/server/weapons/melee.hpp>
@@ -38,6 +39,10 @@ sanguis::server::weapons::factory::spider(
 		_parameters.random_generator()
 	);
 
+	sanguis::server::weapons::common_parameters const common_parameters{
+		_parameters.common_parameters()
+	};
+
 	sanguis::server::entities::enemies::difficulty const difficulty(
 		_parameters.difficulty()
 	);
@@ -45,6 +50,7 @@ sanguis::server::weapons::factory::spider(
 	sanguis::server::weapons::create_function const spawn_weapon{
 		[
 			&random_generator,
+			common_parameters,
 			difficulty
 		]
 		{
@@ -55,7 +61,7 @@ sanguis::server::weapons::factory::spider(
 					fcppt::make_unique_ptr<
 						sanguis::server::weapons::melee
 					>(
-						random_generator,
+						common_parameters,
 						sanguis::server::weapons::modifiers::apply(
 							random_generator,
 							difficulty,
@@ -97,7 +103,7 @@ sanguis::server::weapons::factory::spider(
 			fcppt::make_unique_ptr<
 				sanguis::server::weapons::spider
 			>(
-				random_generator,
+				common_parameters,
 				sanguis::server::weapons::spawn_weapon(
 					spawn_weapon
 				),

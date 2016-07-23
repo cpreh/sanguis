@@ -12,6 +12,7 @@
 #include <sanguis/messages/call/result_fwd.hpp>
 #include <sanguis/messages/server/connected_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
 #include <boost/statechart/custom_reaction.hpp>
@@ -98,6 +99,8 @@ public:
 		sanguis::messages::server::connected const &
 	);
 private:
+	fcppt::log::object log_;
+
 	sanguis::client::gui::menu::object menu_;
 };
 

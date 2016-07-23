@@ -24,6 +24,8 @@
 #include <sge/window/system_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/object.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/variables_map.hpp>
@@ -49,6 +51,7 @@ class machine
 	);
 public:
 	machine(
+		fcppt::log::context &,
 		sanguis::client::config::settings::object &,
 		boost::program_options::variables_map const &,
 		sanguis::client::server_callback const &,
@@ -133,6 +136,9 @@ public:
 
 	sanguis::client::cursor &
 	cursor_gfx() const;
+
+	fcppt::log::context &
+	log_context() const;
 private:
 	void
 	connect_callback();
@@ -147,6 +153,10 @@ private:
 	data_callback(
 		alda::net::buffer::circular_receive::streambuf &
 	);
+
+	fcppt::log::context &log_context_;
+
+	fcppt::log::object log_;
 
 	sanguis::client::config::settings::object &settings_;
 

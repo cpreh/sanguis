@@ -1,23 +1,18 @@
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile_is_solid.hpp>
-#include <sanguis/server/ai/log.hpp>
 #include <sanguis/server/ai/pathing/find_target.hpp>
 #include <sanguis/server/ai/pathing/optional_trail.hpp>
 #include <sanguis/server/ai/pathing/start.hpp>
 #include <sanguis/server/ai/pathing/target.hpp>
 #include <sanguis/server/ai/pathing/trail.hpp>
-#include <fcppt/text.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/find_opt.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/container/grid/in_range.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
-#include <fcppt/log/_.hpp>
-#include <fcppt/log/warning.hpp>
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/math/vector/std_hash.hpp>
-#include <fcppt/optional/copy_value.hpp>
-#include <fcppt/optional/maybe.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <queue>
 #include <unordered_map>
@@ -90,41 +85,14 @@ sanguis::server::ai::pathing::find_target(
 				=
 				result.back()
 			)
-				if(
-					fcppt::optional::maybe(
-						fcppt::optional::copy_value(
-							fcppt::container::find_opt_mapped(
-								predecessors,
-								trail_pos
-							)
-						),
-						[]{
-							FCPPT_LOG_WARNING(
-								sanguis::server::ai::log(),
-								fcppt::log::_
-									<< FCPPT_TEXT("Something went wrong in pathing::find_target")
-							);
-
-							return
-								true;
-						},
-						[
-							&result
-						](
-							sanguis::creator::pos const _pred
+				result.push_back(
+					FCPPT_ASSERT_OPTIONAL_ERROR(
+						fcppt::container::find_opt_mapped(
+							predecessors,
+							trail_pos
 						)
-						{
-							result.push_back(
-								_pred
-							);
-
-							return
-								false;
-						}
-					)
-				)
-					return
-						sanguis::server::ai::pathing::optional_trail();
+					).get()
+				);
 
 			return
 				sanguis::server::ai::pathing::optional_trail{

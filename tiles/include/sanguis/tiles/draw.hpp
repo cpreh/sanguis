@@ -7,6 +7,7 @@
 #include <sanguis/creator/sup_fwd.hpp>
 #include <sanguis/tiles/cell_container.hpp>
 #include <sanguis/tiles/collection_fwd.hpp>
+#include <sanguis/tiles/log_fwd.hpp>
 #include <sanguis/tiles/symbol.hpp>
 
 
@@ -18,6 +19,7 @@ namespace tiles
 SANGUIS_TILES_SYMBOL
 sanguis::tiles::cell_container
 draw(
+	sanguis::tiles::log const &,
 	sanguis::creator::grid const &,
 	sanguis::creator::background_grid const &,
 	sanguis::tiles::collection &,

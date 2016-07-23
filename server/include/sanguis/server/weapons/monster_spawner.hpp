@@ -1,10 +1,10 @@
 #ifndef SANGUIS_SERVER_WEAPONS_MONSTER_SPAWNER_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_MONSTER_SPAWNER_HPP_INCLUDED
 
-#include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/server/weapons/attack_fwd.hpp>
 #include <sanguis/server/weapons/attack_result_fwd.hpp>
+#include <sanguis/server/weapons/common_parameters.hpp>
 #include <sanguis/server/weapons/parameters_fwd.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
@@ -28,7 +28,7 @@ class monster_spawner
 public:
 	explicit
 	monster_spawner(
-		sanguis::random_generator &
+		sanguis::server::weapons::common_parameters const &
 	);
 
 	~monster_spawner()
@@ -52,6 +52,8 @@ private:
 	sanguis::weapon_attribute_vector
 	attributes() const
 	override;
+
+	sanguis::server::weapons::common_parameters const common_parameters_;
 };
 
 }

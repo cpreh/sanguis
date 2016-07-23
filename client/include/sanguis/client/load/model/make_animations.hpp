@@ -4,6 +4,7 @@
 #include <sanguis/client/load/model/animation_map.hpp>
 #include <sanguis/client/load/model/global_parameters_fwd.hpp>
 #include <sanguis/model/weapon_category_fwd.hpp>
+#include <fcppt/log/object_fwd.hpp>
 
 
 namespace sanguis
@@ -17,6 +18,7 @@ namespace model
 
 sanguis::client::load::model::animation_map
 make_animations(
+	fcppt::log::object &,
 	sanguis::model::weapon_category const &,
 	sanguis::client::load::model::global_parameters const &
 );

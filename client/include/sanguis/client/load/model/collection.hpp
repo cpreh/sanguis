@@ -7,6 +7,8 @@
 #include <sanguis/load/model/path.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
+#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <map>
 #include <fcppt/config/external_end.hpp>
@@ -32,13 +34,15 @@ public:
 		sanguis::load::model::path const &
 	) const;
 
-	explicit
 	collection(
+		fcppt::log::context &,
 		sanguis::client::load::resource::context const &
 	);
 
 	~collection();
 private:
+	mutable fcppt::log::object log_;
+
 	sanguis::client::load::resource::context const &resources_;
 
 	typedef
