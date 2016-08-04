@@ -1,13 +1,10 @@
 #include <sanguis/app_name.hpp>
-#include <sanguis/company_name.hpp>
 #include <sanguis/client/create_systems.hpp>
 #include <sanguis/client/systems.hpp>
 #include <sanguis/client/systems_unique_ptr.hpp>
 #include <sanguis/client/args/display_mode.hpp>
 #include <sanguis/client/args/multi_sampling.hpp>
 #include <sanguis/client/args/sge_log_level.hpp>
-#include <sge/config/log_path.hpp>
-#include <sge/config/own_app_name.hpp>
 #include <sge/log/location.hpp>
 #include <sge/log/option.hpp>
 #include <sge/log/option_container.hpp>
@@ -68,12 +65,6 @@ sanguis::client::create_systems(
 								)
 							}
 						}
-					)
-					.redirect(
-						sge::config::log_path(
-							sanguis::company_name(),
-							sge::config::own_app_name()
-						)
 					)
 					.log_context(
 						_log_context

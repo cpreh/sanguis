@@ -1,3 +1,4 @@
+#include <sanguis/log_level_streams.hpp>
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/duration.hpp>
 #include <sanguis/collision/length2.hpp>
@@ -139,7 +140,8 @@ main()
 			fcppt::log::enabled_levels(
 				fcppt::log::level::error
 			)
-		}
+		},
+		sanguis::log_level_streams()
 	};
 
 	sanguis::collision::log const log{

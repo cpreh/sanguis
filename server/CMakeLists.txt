@@ -1133,6 +1133,7 @@ fcppt_utils_set_target_compiler_flags(
 target_link_libraries(
 	${SERVER_NAME}
 	PRIVATE
+	${sanguis_core_TARGET}
 	${sanguis_server_TARGET}
 	${alda_TARGET}
 	${fcppt_core_TARGET}

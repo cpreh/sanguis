@@ -1,5 +1,6 @@
 #include <sanguis/app_name.hpp>
 #include <sanguis/company_name.hpp>
+#include <sanguis/log_level_streams.hpp>
 #include <sanguis/log_location.hpp>
 #include <sanguis/main.hpp>
 #include <sanguis/client/create.hpp>
@@ -71,6 +72,7 @@ try
 			awl::main::exit_success();
 	}
 
+	// FIXME: Include all log streams
 	awl::main::scoped_output const output(
 		fcppt::io::clog(),
 		sge::config::log_path(
@@ -88,7 +90,8 @@ try
 					vm
 				)
 			)
-		}
+		},
+		sanguis::log_level_streams()
 	};
 
 	sanguis::client::object_base_unique_ptr const client(

@@ -1,7 +1,7 @@
 #include <sanguis/duration.hpp>
+#include <sanguis/log_level_streams.hpp>
 #include <sanguis/io_service_callback.hpp>
 #include <sanguis/log_parameters.hpp>
-#include <sanguis/log_stream.hpp>
 #include <sanguis/media_path.hpp>
 #include <sanguis/client/create_systems.hpp>
 #include <sanguis/client/log_location.hpp>
@@ -47,6 +47,7 @@
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/context_fwd.hpp>
 #include <fcppt/log/fatal.hpp>
+#include <fcppt/log/level_stream.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -322,11 +323,18 @@ sanguis::client::object::create_server(
 			optional_server_unique_ptr();
 	}
 	else
+	{
 		// The server and the client both do logging and this ensures
 		// that it's thread-safe
-		sanguis::log_stream().sync_with_stdio(
-			true
-		);
+		for(
+			fcppt::log::level_stream &element
+			:
+			sanguis::log_level_streams()
+		)
+			element.get().sync_with_stdio(
+				true
+			);
+	}
 
 	server_ =
 		optional_server_unique_ptr(

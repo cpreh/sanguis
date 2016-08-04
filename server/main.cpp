@@ -1,3 +1,4 @@
+#include <sanguis/log_level_streams.hpp>
 #include <sanguis/server/create.hpp>
 #include <sanguis/server/object_base.hpp>
 #include <sanguis/server/object_base_unique_ptr.hpp>
@@ -29,7 +30,8 @@ try
 			fcppt::log::enabled_levels(
 				fcppt::log::level::info
 			)
-		}
+		},
+		sanguis::log_level_streams()
 	};
 
 	sanguis::server::object_base_unique_ptr const server(

@@ -9,6 +9,7 @@
 namespace sanguis
 {
 
+// TODO: Remove this
 SANGUIS_CORE_SYMBOL
 fcppt::log::parameters
 log_parameters(
