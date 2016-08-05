@@ -4,7 +4,6 @@
 #include <sanguis/optional_weapon_description_fwd.hpp>
 #include <sanguis/client/gui/hud/weapon_details_fwd.hpp>
 #include <sanguis/client/gui/hud/weapon_tooltip_unique_ptr.hpp>
-#include <sanguis/client/load/hud/context_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/gui/context_fwd.hpp>
 #include <sge/gui/style/base_fwd.hpp>
@@ -34,7 +33,6 @@ class weapon_details
 public:
 	weapon_details(
 		sge::gui::context &,
-		sanguis::client::load::hud::context &,
 		sge::gui::style::base const &,
 		sge::renderer::device::ffp &,
 		sge::font::object &,

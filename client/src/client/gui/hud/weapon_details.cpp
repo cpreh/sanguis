@@ -2,7 +2,6 @@
 #include <sanguis/client/gui/hud/weapon_details.hpp>
 #include <sanguis/client/gui/hud/weapon_tooltip.hpp>
 #include <sanguis/client/gui/hud/weapon_tooltip_unique_ptr.hpp>
-#include <sanguis/client/load/hud/context_fwd.hpp>
 #include <sge/gui/context_fwd.hpp>
 #include <sge/gui/style/base_fwd.hpp>
 #include <sge/gui/widget/base_fwd.hpp>
@@ -25,7 +24,6 @@
 
 sanguis::client::gui::hud::weapon_details::weapon_details(
 	sge::gui::context &_gui_context,
-	sanguis::client::load::hud::context &_resources,
 	sge::gui::style::base const &_gui_style,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,

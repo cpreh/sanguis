@@ -821,7 +821,6 @@ sanguis::client::gui::hud::object::create_details()
 			sanguis::client::gui::hud::weapon_details
 		>(
 			gui_context_,
-			resources_,
 			gui_style_,
 			renderer_,
 			font_,
