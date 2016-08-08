@@ -1,7 +1,6 @@
 #ifndef SANGUIS_CLIENT_CONSOLE_GFX_HPP_INCLUDED
 #define SANGUIS_CLIENT_CONSOLE_GFX_HPP_INCLUDED
 
-#include <sanguis/client/load/resource/textures_fwd.hpp>
 #include <sge/console/object_fwd.hpp>
 #include <sge/console/gfx/object.hpp>
 #include <sge/console/gfx/output_line_limit_fwd.hpp>
@@ -33,8 +32,7 @@ public:
 		sge::font::object &,
 		sge::input::focus::object &,
 		sge::viewport::manager &,
-		sge::console::gfx::output_line_limit,
-		sanguis::client::load::resource::textures const &
+		sge::console::gfx::output_line_limit
 	);
 
 	~gfx();

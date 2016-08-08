@@ -150,8 +150,7 @@ sanguis::client::object::object(
 		sys_->viewport_manager(),
 		sanguis::client::args::history_size(
 			_variables_map
-		),
-		resources_.resources().textures()
+		)
 	),
 	cursor_{
 		sys_->renderer_device_ffp(),

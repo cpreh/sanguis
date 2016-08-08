@@ -1,5 +1,4 @@
 #include <sanguis/client/console/gfx.hpp>
-#include <sanguis/client/load/resource/textures_fwd.hpp>
 #include <sge/console/object_fwd.hpp>
 #include <sge/console/gfx/font_color.hpp>
 #include <sge/console/gfx/object.hpp>
@@ -40,8 +39,7 @@ sanguis::client::console::gfx::gfx(
 	sge::font::object &_font_object,
 	sge::input::focus::object &_focus,
 	sge::viewport::manager &_viewport_manager,
-	sge::console::gfx::output_line_limit const _history_size,
-	sanguis::client::load::resource::textures const &_textures
+	sge::console::gfx::output_line_limit const _history_size
 )
 :
 	// TODO: Add a background again
