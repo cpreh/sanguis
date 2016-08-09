@@ -11,6 +11,9 @@
 #include <sanguis/server/entities/simple.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/reference_comparison.hpp>
+#include <fcppt/reference_impl.hpp>
+#include <fcppt/reference_std_hash.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool_fwd.hpp>
 #include <unordered_map>
@@ -74,7 +77,9 @@ private:
 
 	typedef
 	std::unordered_map<
-		sanguis::server::entities::player *,
+		fcppt::reference<
+			sanguis::server::entities::player
+		>,
 		sanguis::server::entities::auto_weak_link
 	> weak_link_map;
 

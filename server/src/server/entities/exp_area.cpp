@@ -14,13 +14,13 @@
 #include <sanguis/server/entities/simple.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/algorithm/map_iteration_second.hpp>
 #include <fcppt/algorithm/update_action.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/cast/static_downcast.hpp>
-#include <fcppt/cast/static_downcast_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
 #include <utility>
@@ -140,7 +140,9 @@ sanguis::server::entities::exp_area::on_body_enter(
 
 	player_links_.insert(
 		std::make_pair(
-			&entity,
+			fcppt::make_ref(
+				entity
+			),
 			entity.link()
 		)
 	);
@@ -152,10 +154,12 @@ sanguis::server::entities::exp_area::on_body_exit(
 )
 {
 	player_links_.erase(
-		fcppt::cast::static_downcast_ptr<
-			sanguis::server::entities::player *
-		>(
-			&_base
+		fcppt::make_ref(
+			fcppt::cast::static_downcast<
+				sanguis::server::entities::player &
+			>(
+				_base
+			)
 		)
 	);
 }
