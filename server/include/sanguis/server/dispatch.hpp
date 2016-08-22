@@ -8,7 +8,6 @@
 #include <sanguis/server/events/message.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/result.hpp>
-#include <functional>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -51,11 +50,19 @@ dispatch(
 			dispatcher,
 			function,
 			_message,
-			std::bind(
-				_handle_default_msg,
-				_message.id(),
-				std::placeholders::_1
+			[
+				&_message,
+				&_handle_default_msg
+			](
+				auto const &_inner_message
 			)
+			{
+				return
+					_handle_default_msg(
+						_message.id(),
+						_inner_message
+					);
+			}
 		);
 }
 
