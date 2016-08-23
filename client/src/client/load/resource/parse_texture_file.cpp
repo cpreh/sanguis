@@ -12,7 +12,7 @@
 #include <fcppt/config/external_begin.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/filesystem/path.hpp>
-#include <iosfwd>
+#include <ios>
 #include <string>
 #include <fcppt/config/external_end.hpp>
 

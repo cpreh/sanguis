@@ -6,7 +6,7 @@
 #include <sanguis/net/data_streambuf_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <iosfwd>
+#include <ios>
 #include <streambuf>
 #include <fcppt/config/external_end.hpp>
 
