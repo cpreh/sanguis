@@ -31,6 +31,7 @@
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/algorithm/repeat.hpp>
+#include <fcppt/cast/to_void.hpp>
 #include <fcppt/log/context.hpp>
 #include <fcppt/log/enabled_levels.hpp>
 #include <fcppt/log/level.hpp>
@@ -235,11 +236,13 @@ main()
 				:
 				_bodies
 			)
-				world->activate_body(
-					*body,
-					sanguis::collision::world::created{
-						true
-					}
+				fcppt::cast::to_void(
+					world->activate_body(
+						*body,
+						sanguis::collision::world::created{
+							true
+						}
+					)
 				);
 		}
 	);
@@ -338,8 +341,10 @@ main()
 		:
 		ghosts
 	)
-		world->activate_ghost(
-			*ghost
+		fcppt::cast::to_void(
+			world->activate_ghost(
+				*ghost
+			)
 		);
 
 	fcppt::algorithm::repeat(
