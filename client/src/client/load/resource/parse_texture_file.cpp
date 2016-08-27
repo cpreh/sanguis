@@ -4,8 +4,8 @@
 #include <sanguis/client/load/resource/texture_name_map.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/filesystem/ifstream.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
-#include <fcppt/io/ifstream.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/log/warning.hpp>
@@ -25,7 +25,7 @@ sanguis::client::load::resource::parse_texture_file(
 )
 {
 	// TODO: Write a proper parser for this
-	fcppt::io::ifstream file(
+	fcppt::filesystem::ifstream file(
 		_path
 	);
 
