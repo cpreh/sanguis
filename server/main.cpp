@@ -7,9 +7,8 @@
 #include <fcppt/text.hpp>
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/log/context.hpp>
-#include <fcppt/log/enabled_levels.hpp>
 #include <fcppt/log/level.hpp>
-#include <fcppt/log/setting.hpp>
+#include <fcppt/log/optional_level.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstdlib>
 #include <exception>
@@ -26,10 +25,8 @@ try
 {
 	// TODO: Use arguments
 	fcppt::log::context log_context{
-		fcppt::log::setting{
-			fcppt::log::enabled_levels(
-				fcppt::log::level::info
-			)
+		fcppt::log::optional_level{
+			fcppt::log::level::info
 		},
 		sanguis::log_level_streams()
 	};

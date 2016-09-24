@@ -23,9 +23,8 @@
 #include <fcppt/text.hpp>
 #include <fcppt/io/clog.hpp>
 #include <fcppt/log/context.hpp>
-#include <fcppt/log/enabled_levels.hpp>
 #include <fcppt/log/level.hpp>
-#include <fcppt/log/setting.hpp>
+#include <fcppt/log/optional_level.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/program_options/options_description.hpp>
 #include <boost/program_options/variables_map.hpp>
@@ -84,11 +83,9 @@ try
 	);
 
 	fcppt::log::context log_context{
-		fcppt::log::setting{
-			fcppt::log::enabled_levels(
-				sanguis::client::args::log_level(
-					vm
-				)
+		fcppt::log::optional_level{
+			sanguis::client::args::log_level(
+				vm
 			)
 		},
 		sanguis::log_level_streams()

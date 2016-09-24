@@ -33,9 +33,8 @@
 #include <fcppt/algorithm/repeat.hpp>
 #include <fcppt/cast/to_void.hpp>
 #include <fcppt/log/context.hpp>
-#include <fcppt/log/enabled_levels.hpp>
 #include <fcppt/log/level.hpp>
-#include <fcppt/log/setting.hpp>
+#include <fcppt/log/optional_level.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/vector/fill.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -137,10 +136,8 @@ main()
 	};
 
 	fcppt::log::context log_context{
-		fcppt::log::setting{
-			fcppt::log::enabled_levels(
-				fcppt::log::level::error
-			)
+		fcppt::log::optional_level{
+			fcppt::log::level::error
 		},
 		sanguis::log_level_streams()
 	};
