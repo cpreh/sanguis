@@ -76,6 +76,8 @@ sanguis_add_tool(
 		${Boost_FILESYSTEM_LIBRARIES}
 	IS_GUI
 		TRUE
+	INCLUDE_DIRS
+		${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
 qt5_use_modules(

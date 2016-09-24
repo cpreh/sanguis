@@ -13,6 +13,7 @@
 #include <sanguis/tools/animations/sge_systems_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/config/clang_version_at_least.hpp>
+#include <fcppt/config/compiler.hpp>
 #include <fcppt/optional/object_decl.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -42,6 +43,9 @@ namespace animations
 FCPPT_PP_PUSH_WARNING
 #if FCPPT_CONFIG_CLANG_VERSION_AT_LEAST(3, 6)
 FCPPT_PP_DISABLE_GCC_WARNING(-Winconsistent-missing-override)
+#endif
+#if defined(FCPPT_CONFIG_GNU_GCC_COMPILER)
+FCPPT_PP_DISABLE_GCC_WARNING(-Wsuggest-override)
 #endif
 
 class main_window

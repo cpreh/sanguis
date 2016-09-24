@@ -101,12 +101,12 @@ QLayoutItem *sanguis::tools::animations::qtutil::FlowLayout::takeAt(int index)
     if (index >= 0 && index < itemList.size())
         return itemList.takeAt(index);
     else
-        return 0;
+        return nullptr;
 }
 
 Qt::Orientations sanguis::tools::animations::qtutil::FlowLayout::expandingDirections() const
 {
-    return 0;
+    return nullptr;
 }
 
 bool sanguis::tools::animations::qtutil::FlowLayout::hasHeightForWidth() const
@@ -185,7 +185,7 @@ int sanguis::tools::animations::qtutil::FlowLayout::smartSpacing(QStyle::PixelMe
         return -1;
     } else if (cur_parent->isWidgetType()) {
         QWidget *pw = static_cast<QWidget *>(cur_parent);
-        return pw->style()->pixelMetric(pm, 0, pw);
+        return pw->style()->pixelMetric(pm, nullptr, pw);
     } else {
         return static_cast<QLayout *>(cur_parent)->spacing();
     }

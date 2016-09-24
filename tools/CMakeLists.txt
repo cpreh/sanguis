@@ -53,7 +53,6 @@ function(
 	target_include_directories(
 		${FULL_NAME}
 		PRIVATE
-		${CMAKE_CURRENT_SOURCE_DIR}/include
 		${CMAKE_CURRENT_BINARY_DIR}
 		${_INCLUDE_DIRS}
 	)
