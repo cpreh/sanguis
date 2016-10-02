@@ -6,7 +6,7 @@
 #include <sanguis/messages/adapted_types/weapon_attribute_vector.hpp>
 #include <sanguis/messages/adapted_types/weapon_type.hpp>
 #include <sanguis/messages/server/parts/weapon_description_fwd.hpp>
-#include <majutsu/role.hpp>
+#include <fcppt/record/element.hpp>
 
 
 #endif

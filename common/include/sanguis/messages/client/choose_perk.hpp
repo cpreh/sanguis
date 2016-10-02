@@ -5,7 +5,7 @@
 #include <sanguis/messages/adapted_types/enum.hpp>
 #include <sanguis/messages/client/choose_perk_fwd.hpp>
 #include <alda/message/record.hpp>
-#include <majutsu/role.hpp>
+#include <fcppt/record/element.hpp>
 
 
 #endif

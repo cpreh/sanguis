@@ -4,7 +4,7 @@
 #include <sanguis/messages/adapted_types/is_primary_weapon.hpp>
 #include <sanguis/messages/client/reload_fwd.hpp>
 #include <alda/message/record.hpp>
-#include <majutsu/role.hpp>
+#include <fcppt/record/element.hpp>
 
 
 #endif

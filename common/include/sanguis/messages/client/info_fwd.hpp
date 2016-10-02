@@ -6,7 +6,7 @@
 #include <sanguis/messages/client/types/message.hpp>
 #include <sanguis/messages/roles/player_name.hpp>
 #include <alda/message/record_fwd.hpp>
-#include <majutsu/role_fwd.hpp>
+#include <fcppt/record/element_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -25,9 +25,9 @@ alda::message::record<
 		sanguis::messages::client::types::message::info
 	>,
 	boost::mpl::vector1<
-		majutsu::role<
-			sanguis::messages::adapted_types::string,
-			sanguis::messages::roles::player_name
+		fcppt::record::element<
+			sanguis::messages::roles::player_name,
+			sanguis::messages::adapted_types::string
 		>
 	>
 >

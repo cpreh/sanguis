@@ -4,7 +4,7 @@
 #include <sanguis/messages/adapted_types/vector2.hpp>
 #include <sanguis/messages/client/direction_fwd.hpp>
 #include <alda/message/record.hpp>
-#include <majutsu/role.hpp>
+#include <fcppt/record/element.hpp>
 
 
 #endif

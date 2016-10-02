@@ -3,7 +3,7 @@
 
 #include <sanguis/messages/adapted_types/buff_type_vector_fwd.hpp>
 #include <sanguis/messages/roles/buff_type_container.hpp>
-#include <majutsu/role_fwd.hpp>
+#include <fcppt/record/element_fwd.hpp>
 
 
 namespace sanguis
@@ -16,9 +16,9 @@ namespace parts
 {
 
 typedef
-majutsu::role<
-	sanguis::messages::adapted_types::buff_type_vector,
-	sanguis::messages::roles::buff_type_container
+fcppt::record::element<
+	sanguis::messages::roles::buff_type_container,
+	sanguis::messages::adapted_types::buff_type_vector
 >
 add_with_buffs;
 

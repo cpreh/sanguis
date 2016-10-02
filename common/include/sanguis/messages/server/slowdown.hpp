@@ -4,7 +4,7 @@
 #include <sanguis/messages/adapted_types/space_unit.hpp>
 #include <sanguis/messages/server/slowdown_fwd.hpp>
 #include <alda/message/record.hpp>
-#include <majutsu/role.hpp>
+#include <fcppt/record/element.hpp>
 
 
 #endif

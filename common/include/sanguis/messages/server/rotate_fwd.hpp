@@ -7,7 +7,7 @@
 #include <sanguis/messages/server/types/make_message_id.hpp>
 #include <sanguis/messages/server/types/message.hpp>
 #include <alda/message/record_fwd.hpp>
-#include <majutsu/role_fwd.hpp>
+#include <fcppt/record/element_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -27,9 +27,9 @@ alda::message::record<
 	>,
 	boost::mpl::vector2<
 		sanguis::messages::server::parts::entity_id,
-		majutsu::role<
-			sanguis::messages::adapted_types::space_unit,
-			sanguis::messages::roles::angle
+		fcppt::record::element<
+			sanguis::messages::roles::angle,
+			sanguis::messages::adapted_types::space_unit
 		>
 	>
 >

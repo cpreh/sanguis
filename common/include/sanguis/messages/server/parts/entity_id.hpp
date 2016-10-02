@@ -3,7 +3,7 @@
 
 #include <sanguis/messages/adapted_types/entity_id.hpp>
 #include <sanguis/messages/server/parts/entity_id_fwd.hpp>
-#include <majutsu/role.hpp>
+#include <fcppt/record/element.hpp>
 
 
 #endif

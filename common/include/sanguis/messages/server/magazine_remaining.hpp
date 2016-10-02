@@ -5,7 +5,7 @@
 #include <sanguis/messages/adapted_types/magazine_size.hpp>
 #include <sanguis/messages/server/magazine_remaining_fwd.hpp>
 #include <alda/message/record.hpp>
-#include <majutsu/role.hpp>
+#include <fcppt/record/element.hpp>
 
 
 #endif

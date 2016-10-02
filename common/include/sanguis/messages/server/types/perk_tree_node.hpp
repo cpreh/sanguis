@@ -7,7 +7,7 @@
 #include <sanguis/messages/server/types/perk_tree_node_fwd.hpp>
 #include <alda/bindings/optional.hpp>
 #include <alda/raw/record_variadic.hpp>
-#include <majutsu/role.hpp>
+#include <fcppt/record/element.hpp>
 
 
 #endif

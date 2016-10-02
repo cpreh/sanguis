@@ -5,7 +5,7 @@
 #include <sanguis/messages/adapted_types/perk_tree.hpp>
 #include <sanguis/messages/server/available_perks_fwd.hpp>
 #include <alda/message/record.hpp>
-#include <majutsu/role.hpp>
+#include <fcppt/record/element.hpp>
 
 
 #endif

@@ -8,7 +8,7 @@
 #include <sanguis/messages/adapted_types/world_id.hpp>
 #include <sanguis/messages/server/change_world_fwd.hpp>
 #include <alda/message/record.hpp>
-#include <majutsu/role.hpp>
+#include <fcppt/record/element.hpp>
 
 
 #endif

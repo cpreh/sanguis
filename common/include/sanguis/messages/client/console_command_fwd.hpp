@@ -6,7 +6,7 @@
 #include <sanguis/messages/client/types/message.hpp>
 #include <sanguis/messages/roles/console_command.hpp>
 #include <alda/message/record_fwd.hpp>
-#include <majutsu/role_fwd.hpp>
+#include <fcppt/record/element_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -25,9 +25,9 @@ alda::message::record<
 		sanguis::messages::client::types::message::console_command
 	>,
 	boost::mpl::vector1<
-		majutsu::role<
-			sanguis::messages::adapted_types::string_vector,
-			sanguis::messages::roles::console_command
+		fcppt::record::element<
+			sanguis::messages::roles::console_command,
+			sanguis::messages::adapted_types::string_vector
 		>
 	>
 >

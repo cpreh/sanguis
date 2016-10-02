@@ -7,7 +7,7 @@
 #include <sanguis/messages/server/parts/add_actor.hpp>
 #include <sanguis/messages/server/parts/entity_id.hpp>
 #include <alda/message/record.hpp>
-#include <majutsu/role.hpp>
+#include <fcppt/record/element.hpp>
 
 
 #endif

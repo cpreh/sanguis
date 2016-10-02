@@ -8,7 +8,7 @@
 #include <sanguis/messages/server/types/make_message_id.hpp>
 #include <sanguis/messages/server/types/message.hpp>
 #include <alda/message/record_fwd.hpp>
-#include <majutsu/role_fwd.hpp>
+#include <fcppt/record/element_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -27,13 +27,13 @@ alda::message::record<
 		sanguis::messages::server::types::message::level_up
 	>,
 	boost::mpl::vector2<
-		majutsu::role<
-			sanguis::messages::adapted_types::level,
-			sanguis::messages::roles::level
+		fcppt::record::element<
+			sanguis::messages::roles::level,
+			sanguis::messages::adapted_types::level
 		>,
-		majutsu::role<
-			sanguis::messages::adapted_types::exp,
-			sanguis::messages::roles::exp_for_next_level
+		fcppt::record::element<
+			sanguis::messages::roles::exp_for_next_level,
+			sanguis::messages::adapted_types::exp
 		>
 	>
 >

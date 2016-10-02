@@ -46,11 +46,6 @@ find_package(
 	fcppt REQUIRED
 )
 
-# TODO: Find a way to get rid of this
-find_package(
-	majutsu REQUIRED
-)
-
 find_package(
 	mizuiro REQUIRED
 )

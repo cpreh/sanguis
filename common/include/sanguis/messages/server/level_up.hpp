@@ -5,7 +5,7 @@
 #include <sanguis/messages/adapted_types/level.hpp>
 #include <sanguis/messages/server/level_up_fwd.hpp>
 #include <alda/message/record.hpp>
-#include <majutsu/role.hpp>
+#include <fcppt/record/element.hpp>
 
 
 #endif

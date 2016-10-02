@@ -7,7 +7,7 @@
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/center.hpp>
 #include <sanguis/messages/roles/created.hpp>
-#include <majutsu/role_fwd.hpp>
+#include <fcppt/record/element_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -24,17 +24,17 @@ namespace parts
 
 typedef
 boost::mpl::vector3<
-	majutsu::role<
-		sanguis::messages::adapted_types::vector2,
-		sanguis::messages::roles::center
+	fcppt::record::element<
+		sanguis::messages::roles::center,
+		sanguis::messages::adapted_types::vector2
 	>,
-	majutsu::role<
-		sanguis::messages::adapted_types::space_unit,
-		sanguis::messages::roles::angle
+	fcppt::record::element<
+		sanguis::messages::roles::angle,
+		sanguis::messages::adapted_types::space_unit
 	>,
-	majutsu::role<
-		sanguis::messages::adapted_types::bool_,
-		sanguis::messages::roles::created
+	fcppt::record::element<
+		sanguis::messages::roles::created,
+		sanguis::messages::adapted_types::bool_
 	>
 >
 add_elements_base;

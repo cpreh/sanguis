@@ -3,7 +3,7 @@
 
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/messages/roles/angle.hpp>
-#include <majutsu/get.hpp>
+#include <alda/message/get.hpp>
 
 
 namespace sanguis
@@ -26,7 +26,7 @@ rotation(
 {
 	return
 		sanguis::client::draw2d::sprite::rotation{
-			majutsu::get<
+			alda::message::get<
 				sanguis::messages::roles::angle
 			>(
 				_message

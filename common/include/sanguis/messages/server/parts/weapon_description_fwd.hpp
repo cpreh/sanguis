@@ -11,7 +11,7 @@
 #include <sanguis/messages/roles/reload_time.hpp>
 #include <sanguis/messages/roles/weapon_attribute_container.hpp>
 #include <sanguis/messages/roles/weapon_type.hpp>
-#include <majutsu/role_fwd.hpp>
+#include <fcppt/record/element_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -28,29 +28,29 @@ namespace parts
 
 typedef
 boost::mpl::vector6<
-	majutsu::role<
-		sanguis::messages::adapted_types::weapon_type,
-		sanguis::messages::roles::weapon_type
+	fcppt::record::element<
+		sanguis::messages::roles::weapon_type,
+		sanguis::messages::adapted_types::weapon_type
 	>,
-	majutsu::role<
-		sanguis::messages::adapted_types::magazine_size,
-		sanguis::messages::roles::magazine_base_size
+	fcppt::record::element<
+		sanguis::messages::roles::magazine_base_size,
+		sanguis::messages::adapted_types::magazine_size
 	>,
-	majutsu::role<
-		sanguis::messages::adapted_types::magazine_size,
-		sanguis::messages::roles::magazine_extra_size
+	fcppt::record::element<
+		sanguis::messages::roles::magazine_extra_size,
+		sanguis::messages::adapted_types::magazine_size
 	>,
-	majutsu::role<
-		sanguis::messages::adapted_types::magazine_size,
-		sanguis::messages::roles::magazine_remaining
+	fcppt::record::element<
+		sanguis::messages::roles::magazine_remaining,
+		sanguis::messages::adapted_types::magazine_size
 	>,
-	majutsu::role<
-		sanguis::messages::adapted_types::duration,
-		sanguis::messages::roles::reload_time
+	fcppt::record::element<
+		sanguis::messages::roles::reload_time,
+		sanguis::messages::adapted_types::duration
 	>,
-	majutsu::role<
-		sanguis::messages::adapted_types::weapon_attribute_vector,
-		sanguis::messages::roles::weapon_attribute_container
+	fcppt::record::element<
+		sanguis::messages::roles::weapon_attribute_container,
+		sanguis::messages::adapted_types::weapon_attribute_vector
 	>
 >
 weapon_description;

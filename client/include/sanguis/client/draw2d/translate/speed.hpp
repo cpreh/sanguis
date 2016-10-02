@@ -4,7 +4,7 @@
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/translate/vector_to_client.hpp>
 #include <sanguis/messages/roles/speed.hpp>
-#include <majutsu/get.hpp>
+#include <alda/message/get.hpp>
 
 
 namespace sanguis
@@ -28,7 +28,7 @@ speed(
 	return
 		sanguis::client::draw2d::speed(
 			sanguis::client::draw2d::translate::vector_to_client(
-				majutsu::get<
+				alda::message::get<
 					sanguis::messages::roles::speed
 				>(
 					_message

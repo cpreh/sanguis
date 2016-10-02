@@ -13,7 +13,7 @@
 #include <sanguis/messages/roles/reload_time.hpp>
 #include <sanguis/messages/roles/weapon_attribute_container.hpp>
 #include <sanguis/messages/roles/weapon_type.hpp>
-#include <majutsu/get.hpp>
+#include <alda/message/get.hpp>
 
 
 namespace sanguis
@@ -31,41 +31,41 @@ weapon_description_from_message(
 {
 	return
 		sanguis::weapon_description(
-			majutsu::get<
+			alda::message::get<
 				sanguis::messages::roles::weapon_type
 			>(
 				_message
 			),
 			sanguis::magazine_size(
-				majutsu::get<
+				alda::message::get<
 					sanguis::messages::roles::magazine_base_size
 				>(
 					_message
 				)
 			),
 			sanguis::magazine_extra(
-				majutsu::get<
+				alda::message::get<
 					sanguis::messages::roles::magazine_extra_size
 				>(
 					_message
 				)
 			),
 			sanguis::magazine_remaining(
-				majutsu::get<
+				alda::message::get<
 					sanguis::messages::roles::magazine_remaining
 				>(
 					_message
 				)
 			),
 			sanguis::reload_time(
-				majutsu::get<
+				alda::message::get<
 					sanguis::messages::roles::reload_time
 				>(
 					_message
 				)
 			),
 			sanguis::messages::convert::from_weapon_attribute_vector(
-				majutsu::get<
+				alda::message::get<
 					sanguis::messages::roles::weapon_attribute_container
 				>(
 					_message

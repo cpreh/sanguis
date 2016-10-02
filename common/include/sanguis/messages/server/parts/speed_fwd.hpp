@@ -3,7 +3,7 @@
 
 #include <sanguis/messages/adapted_types/vector2_fwd.hpp>
 #include <sanguis/messages/roles/speed.hpp>
-#include <majutsu/role_fwd.hpp>
+#include <fcppt/record/element_fwd.hpp>
 
 
 namespace sanguis
@@ -16,9 +16,9 @@ namespace parts
 {
 
 typedef
-majutsu::role<
-	sanguis::messages::adapted_types::vector2,
-	sanguis::messages::roles::speed
+fcppt::record::element<
+	sanguis::messages::roles::speed,
+	sanguis::messages::adapted_types::vector2
 >
 speed;
 

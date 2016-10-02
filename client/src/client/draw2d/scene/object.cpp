@@ -169,7 +169,7 @@
 #include <sge/sprite/state/default_options.hpp>
 #include <sge/sprite/state/scoped.hpp>
 #include <sge/viewport/manager_fwd.hpp>
-#include <majutsu/get.hpp>
+#include <alda/message/get.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_enum_range.hpp>
@@ -1619,7 +1619,7 @@ sanguis::client::draw2d::scene::object::configure_new_object(
 			std::move(
 				_ptr
 			),
-			majutsu::get<
+			alda::message::get<
 				sanguis::messages::roles::entity_id
 			>(
 				_message
@@ -1628,7 +1628,7 @@ sanguis::client::draw2d::scene::object::configure_new_object(
 	);
 
 	if(
-		majutsu::get<
+		alda::message::get<
 			sanguis::messages::roles::created
 		>(
 			_message

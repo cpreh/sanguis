@@ -6,7 +6,7 @@
 #include <sanguis/messages/client/types/message.hpp>
 #include <sanguis/messages/roles/is_primary_weapon.hpp>
 #include <alda/message/record_fwd.hpp>
-#include <majutsu/role_fwd.hpp>
+#include <fcppt/record/element_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -25,9 +25,9 @@ alda::message::record<
 		sanguis::messages::client::types::message::stop_shooting
 	>,
 	boost::mpl::vector1<
-		majutsu::role<
-			sanguis::messages::adapted_types::is_primary_weapon,
-			sanguis::messages::roles::is_primary_weapon
+		fcppt::record::element<
+			sanguis::messages::roles::is_primary_weapon,
+			sanguis::messages::adapted_types::is_primary_weapon
 		>
 	>
 >

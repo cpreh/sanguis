@@ -7,7 +7,7 @@
 #include <sanguis/messages/client/types/message.hpp>
 #include <sanguis/messages/roles/perk_type.hpp>
 #include <alda/message/record_fwd.hpp>
-#include <majutsu/role_fwd.hpp>
+#include <fcppt/record/element_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -26,11 +26,11 @@ alda::message::record<
 		sanguis::messages::client::types::message::choose_perk
 	>,
 	boost::mpl::vector1<
-		majutsu::role<
+		fcppt::record::element<
+			sanguis::messages::roles::perk_type,
 			sanguis::messages::adapted_types::enum_<
 				sanguis::perk_type
-			>,
-			sanguis::messages::roles::perk_type
+			>
 		>
 	>
 >

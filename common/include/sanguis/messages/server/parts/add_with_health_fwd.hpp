@@ -4,7 +4,7 @@
 #include <sanguis/messages/adapted_types/space_unit_fwd.hpp>
 #include <sanguis/messages/roles/health.hpp>
 #include <sanguis/messages/roles/max_health.hpp>
-#include <majutsu/role_fwd.hpp>
+#include <fcppt/record/element_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -21,13 +21,13 @@ namespace parts
 
 typedef
 boost::mpl::vector2<
-	majutsu::role<
-		sanguis::messages::adapted_types::space_unit,
-		sanguis::messages::roles::health
+	fcppt::record::element<
+		sanguis::messages::roles::health,
+		sanguis::messages::adapted_types::space_unit
 	>,
-	majutsu::role<
-		sanguis::messages::adapted_types::space_unit,
-		sanguis::messages::roles::max_health
+	fcppt::record::element<
+		sanguis::messages::roles::max_health,
+		sanguis::messages::adapted_types::space_unit
 	>
 >
 add_with_health;

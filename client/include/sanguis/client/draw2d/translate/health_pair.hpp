@@ -6,7 +6,7 @@
 #include <sanguis/client/max_health.hpp>
 #include <sanguis/messages/roles/health.hpp>
 #include <sanguis/messages/roles/max_health.hpp>
-#include <majutsu/get.hpp>
+#include <alda/message/get.hpp>
 
 
 namespace sanguis
@@ -29,14 +29,14 @@ health_pair(
 	return
 		sanguis::client::health_pair(
 			sanguis::client::health(
-				majutsu::get<
+				alda::message::get<
 					sanguis::messages::roles::health
 				>(
 					_message
 				)
 			),
 			sanguis::client::max_health(
-				majutsu::get<
+				alda::message::get<
 					sanguis::messages::roles::max_health
 				>(
 					_message

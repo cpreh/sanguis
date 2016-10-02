@@ -8,7 +8,7 @@
 #include <sanguis/messages/roles/weapon_attribute_extra.hpp>
 #include <sanguis/messages/roles/weapon_attribute_type.hpp>
 #include <alda/raw/record_variadic_fwd.hpp>
-#include <majutsu/role_fwd.hpp>
+#include <fcppt/record/element_fwd.hpp>
 
 
 namespace sanguis
@@ -22,17 +22,17 @@ namespace types
 
 typedef
 alda::raw::record_variadic<
-	majutsu::role<
-		sanguis::messages::adapted_types::weapon_attribute_type,
-		sanguis::messages::roles::weapon_attribute_type
+	fcppt::record::element<
+		sanguis::messages::roles::weapon_attribute_type,
+		sanguis::messages::adapted_types::weapon_attribute_type
 	>,
-	majutsu::role<
-		sanguis::messages::adapted_types::weapon_attribute_value,
-		sanguis::messages::roles::weapon_attribute_base
+	fcppt::record::element<
+		sanguis::messages::roles::weapon_attribute_base,
+		sanguis::messages::adapted_types::weapon_attribute_value
 	>,
-	majutsu::role<
-		sanguis::messages::adapted_types::optional_weapon_attribute_value,
-		sanguis::messages::roles::weapon_attribute_extra
+	fcppt::record::element<
+		sanguis::messages::roles::weapon_attribute_extra,
+		sanguis::messages::adapted_types::optional_weapon_attribute_value
 	>
 >
 weapon_attribute;

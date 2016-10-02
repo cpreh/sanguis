@@ -12,7 +12,7 @@
 #include <sanguis/messages/roles/required_perk_player_level.hpp>
 #include <alda/bindings/optional_fwd.hpp>
 #include <alda/raw/record_variadic_fwd.hpp>
-#include <majutsu/role_fwd.hpp>
+#include <fcppt/record/element_fwd.hpp>
 
 
 namespace sanguis
@@ -26,36 +26,36 @@ namespace types
 
 typedef
 alda::raw::record_variadic<
-	majutsu::role<
+	fcppt::record::element<
+		sanguis::messages::roles::perk_label,
 		sanguis::messages::adapted_types::enum_<
 			sanguis::perk_type
-		>,
-		sanguis::messages::roles::perk_label
+		>
 	>,
-	majutsu::role<
-		sanguis::messages::adapted_types::level,
-		sanguis::messages::roles::perk_level
+	fcppt::record::element<
+		sanguis::messages::roles::perk_level,
+		sanguis::messages::adapted_types::level
 	>,
-	majutsu::role<
-		sanguis::messages::adapted_types::level,
-		sanguis::messages::roles::required_perk_player_level
+	fcppt::record::element<
+		sanguis::messages::roles::required_perk_player_level,
+		sanguis::messages::adapted_types::level
 	>,
-	majutsu::role<
-		sanguis::messages::adapted_types::level,
-		sanguis::messages::roles::required_perk_parent_level
+	fcppt::record::element<
+		sanguis::messages::roles::required_perk_parent_level,
+		sanguis::messages::adapted_types::level
 	>,
-	majutsu::role<
-		sanguis::messages::adapted_types::level,
-		sanguis::messages::roles::max_perk_level
+	fcppt::record::element<
+		sanguis::messages::roles::max_perk_level,
+		sanguis::messages::adapted_types::level
 	>,
-	majutsu::role<
+	fcppt::record::element<
+		sanguis::messages::roles::perk_parent,
 		alda::bindings::optional<
 			sanguis::perk_type,
 			sanguis::messages::adapted_types::enum_<
 				sanguis::perk_type
 			>
-		>,
-		sanguis::messages::roles::perk_parent
+		>
 	>
 >
 perk_tree_node;

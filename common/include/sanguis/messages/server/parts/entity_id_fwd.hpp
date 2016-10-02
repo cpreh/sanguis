@@ -3,7 +3,7 @@
 
 #include <sanguis/messages/adapted_types/entity_id_fwd.hpp>
 #include <sanguis/messages/roles/entity_id.hpp>
-#include <majutsu/role_fwd.hpp>
+#include <fcppt/record/element_fwd.hpp>
 
 
 namespace sanguis
@@ -18,9 +18,9 @@ namespace parts
 using
 entity_id
 =
-majutsu::role<
-	sanguis::messages::adapted_types::entity_id,
-	sanguis::messages::roles::entity_id
+fcppt::record::element<
+	sanguis::messages::roles::entity_id,
+	sanguis::messages::adapted_types::entity_id
 >;
 
 }
