@@ -1,6 +1,6 @@
 #include <sanguis/duration.hpp>
-#include <sanguis/log_level_streams.hpp>
 #include <sanguis/io_service_callback.hpp>
+#include <sanguis/log_level_streams.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/media_path.hpp>
 #include <sanguis/client/create_systems.hpp>
