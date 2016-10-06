@@ -28,6 +28,7 @@
 #include <sanguis/messages/client/stop_shooting.hpp>
 #include <sanguis/messages/roles/attack_dest.hpp>
 #include <sanguis/messages/roles/direction.hpp>
+#include <alda/message/init_record.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/object.hpp>
 #include <sge/console/callback/function.hpp>
@@ -36,7 +37,6 @@
 #include <sge/console/callback/short_description.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/timer/reset_when_expired.hpp>
-#include <alda/message/init_record.hpp>
 #include <fcppt/unit.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/assign/make_container.hpp>

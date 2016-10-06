@@ -25,8 +25,8 @@
 #include <sanguis/messages/roles/player_name.hpp>
 #include <sanguis/messages/server/base.hpp>
 #include <sanguis/messages/server/connected.hpp>
-#include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <alda/message/init_record.hpp>
+#include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>

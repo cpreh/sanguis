@@ -5,6 +5,7 @@
 #include <sanguis/messages/client/create.hpp>
 #include <sanguis/messages/convert/to_string_vector.hpp>
 #include <sanguis/messages/roles/console_command.hpp>
+#include <alda/message/init_record.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/object.hpp>
 #include <sge/console/callback/function.hpp>
@@ -13,7 +14,6 @@
 #include <sge/console/gfx/object.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <alda/message/init_record.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>

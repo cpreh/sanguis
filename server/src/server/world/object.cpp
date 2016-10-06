@@ -124,8 +124,8 @@
 #include <sanguis/server/world/sight_range.hpp>
 #include <sanguis/server/world/sight_range_map.hpp>
 #include <sanguis/server/world/update_entity.hpp>
-#include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <alda/message/init_record.hpp>
+#include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/reference_impl.hpp>

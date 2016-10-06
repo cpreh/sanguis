@@ -80,8 +80,8 @@
 #include <sanguis/server/weapons/player_start_weapon.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
-#include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <alda/message/init_record.hpp>
+#include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>

@@ -13,8 +13,8 @@
 #include <sanguis/server/entities/player_unique_ptr.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/weapons/common_parameters_fwd.hpp>
-#include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <alda/message/init_record.hpp>
+#include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
 
