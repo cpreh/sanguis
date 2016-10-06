@@ -55,12 +55,14 @@
 #include <sanguis/server/world/map.hpp>
 #include <sanguis/server/world/object.hpp>
 #include <sanguis/server/world/parameters.hpp>
+#include <alda/message/init_record.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/unit.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/at_optional.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
@@ -170,7 +172,9 @@ sanguis::server::global::context::insert_player(
 	this->send_to_player(
 		_player_id,
 		sanguis::messages::server::create(
-			sanguis::messages::server::connected()
+			sanguis::messages::server::connected(
+				fcppt::unit{}
+			)
 		)
 	);
 
@@ -367,7 +371,9 @@ sanguis::server::global::context::player_target(
 	this->send_to_player(
 		_player_id,
 		sanguis::messages::server::create(
-			sanguis::messages::server::rotate(
+			alda::message::init_record<
+				sanguis::messages::server::rotate
+			>(
 				sanguis::messages::roles::entity_id{} =
 					player_ref.id(),
 				sanguis::messages::roles::angle{} =
@@ -447,7 +453,9 @@ sanguis::server::global::context::player_speed(
 	this->send_to_player(
 		_player_id,
 		sanguis::messages::server::create(
-			sanguis::messages::server::speed(
+			alda::message::init_record<
+				sanguis::messages::server::speed
+			>(
 				sanguis::messages::roles::entity_id{} =
 					player_ref.id(),
 				sanguis::messages::roles::speed{} =
@@ -572,7 +580,9 @@ sanguis::server::global::context::remove_player(
 	this->send_to_player(
 		_id,
 		sanguis::messages::server::create(
-			sanguis::messages::server::remove_id()
+			sanguis::messages::server::remove_id(
+				fcppt::unit{}
+			)
 		)
 	);
 

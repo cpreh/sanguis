@@ -129,8 +129,6 @@ set(
 	include/sanguis/messages/adapted_types/weapon_attribute_type_fwd.hpp
 	include/sanguis/messages/adapted_types/weapon_attribute_value.hpp
 	include/sanguis/messages/adapted_types/weapon_attribute_value_fwd.hpp
-	include/sanguis/messages/adapted_types/weapon_attribute_vector.hpp
-	include/sanguis/messages/adapted_types/weapon_attribute_vector_fwd.hpp
 	include/sanguis/messages/adapted_types/weapon_status.hpp
 	include/sanguis/messages/adapted_types/weapon_status_fwd.hpp
 	include/sanguis/messages/adapted_types/weapon_type.hpp
@@ -206,7 +204,6 @@ set(
 	include/sanguis/messages/roles/buff_type.hpp
 	include/sanguis/messages/roles/buff_type_container.hpp
 	include/sanguis/messages/roles/center.hpp
-	include/sanguis/messages/roles/cheat_type.hpp
 	include/sanguis/messages/roles/command_description.hpp
 	include/sanguis/messages/roles/command_name.hpp
 	include/sanguis/messages/roles/console_command.hpp
@@ -219,7 +216,6 @@ set(
 	include/sanguis/messages/roles/enemy_type.hpp
 	include/sanguis/messages/roles/entity_id.hpp
 	include/sanguis/messages/roles/exp_for_next_level.hpp
-	include/sanguis/messages/roles/experience.hpp
 	include/sanguis/messages/roles/friend_type.hpp
 	include/sanguis/messages/roles/generator_name.hpp
 	include/sanguis/messages/roles/health.hpp
@@ -236,7 +232,6 @@ set(
 	include/sanguis/messages/roles/perk_level.hpp
 	include/sanguis/messages/roles/perk_parent.hpp
 	include/sanguis/messages/roles/perk_tree.hpp
-	include/sanguis/messages/roles/perk_type.hpp
 	include/sanguis/messages/roles/pickup_type.hpp
 	include/sanguis/messages/roles/player_name.hpp
 	include/sanguis/messages/roles/primary_weapon.hpp
@@ -257,6 +252,12 @@ set(
 	include/sanguis/messages/roles/weapon_type.hpp
 	include/sanguis/messages/roles/world_id.hpp
 	include/sanguis/messages/roles/world_name.hpp
+	include/sanguis/messages/server/adapted_types/perk_tree_node.hpp
+	include/sanguis/messages/server/adapted_types/perk_tree_node_fwd.hpp
+	include/sanguis/messages/server/adapted_types/weapon_attribute.hpp
+	include/sanguis/messages/server/adapted_types/weapon_attribute_fwd.hpp
+	include/sanguis/messages/server/adapted_types/weapon_attribute_vector.hpp
+	include/sanguis/messages/server/adapted_types/weapon_attribute_vector_fwd.hpp
 	include/sanguis/messages/server/add_aoe_projectile.hpp
 	include/sanguis/messages/server/add_aoe_projectile_fwd.hpp
 	include/sanguis/messages/server/add_aura.hpp

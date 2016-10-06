@@ -4,8 +4,7 @@
 #include <sanguis/perk_type.hpp>
 #include <sanguis/messages/adapted_types/enum.hpp>
 #include <sanguis/messages/client/choose_perk_fwd.hpp>
-#include <alda/message/record.hpp>
-#include <fcppt/record/element.hpp>
+#include <alda/message/object.hpp>
 
 
 #endif

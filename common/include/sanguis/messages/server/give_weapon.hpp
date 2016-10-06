@@ -3,7 +3,8 @@
 
 #include <sanguis/messages/server/give_weapon_fwd.hpp>
 #include <sanguis/messages/server/parts/weapon_description.hpp>
-#include <alda/message/record.hpp>
+#include <alda/bindings/record.hpp>
+#include <alda/message/object.hpp>
 
 
 #endif

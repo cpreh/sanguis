@@ -3,8 +3,7 @@
 
 #include <sanguis/messages/adapted_types/exp.hpp>
 #include <sanguis/messages/server/experience_fwd.hpp>
-#include <alda/message/record.hpp>
-#include <fcppt/record/element.hpp>
+#include <alda/message/object.hpp>
 
 
 #endif

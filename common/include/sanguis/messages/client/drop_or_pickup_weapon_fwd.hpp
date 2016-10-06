@@ -4,12 +4,7 @@
 #include <sanguis/messages/adapted_types/is_primary_weapon_fwd.hpp>
 #include <sanguis/messages/client/types/make_message_id.hpp>
 #include <sanguis/messages/client/types/message.hpp>
-#include <sanguis/messages/roles/is_primary_weapon.hpp>
-#include <alda/message/record_fwd.hpp>
-#include <fcppt/record/element_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/vector/vector10.hpp>
-#include <fcppt/config/external_end.hpp>
+#include <alda/message/object_fwd.hpp>
 
 
 namespace sanguis
@@ -20,16 +15,11 @@ namespace client
 {
 
 typedef
-alda::message::record<
+alda::message::object<
 	sanguis::messages::client::types::make_message_id<
 		sanguis::messages::client::types::message::drop_or_pickup_weapon
 	>,
-	boost::mpl::vector1<
-		fcppt::record::element<
-			sanguis::messages::roles::is_primary_weapon,
-			sanguis::messages::adapted_types::is_primary_weapon
-		>
-	>
+	sanguis::messages::adapted_types::is_primary_weapon
 >
 drop_or_pickup_weapon;
 

@@ -35,7 +35,6 @@
 #include <sanguis/messages/roles/center.hpp>
 #include <sanguis/messages/roles/entity_id.hpp>
 #include <sanguis/messages/roles/exp_for_next_level.hpp>
-#include <sanguis/messages/roles/experience.hpp>
 #include <sanguis/messages/roles/generator_name.hpp>
 #include <sanguis/messages/roles/health.hpp>
 #include <sanguis/messages/roles/is_primary_weapon.hpp>
@@ -126,6 +125,7 @@
 #include <sanguis/server/world/sight_range_map.hpp>
 #include <sanguis/server/world/update_entity.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
+#include <alda/message/init_record.hpp>
 #include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/reference_impl.hpp>
@@ -471,7 +471,9 @@ sanguis::server::world::object::player_insertion(
 	this->send_player_specific(
 		_player_id,
 		sanguis::messages::server::create(
-			sanguis::messages::server::change_world(
+			alda::message::init_record<
+				sanguis::messages::server::change_world
+			>(
 				sanguis::messages::roles::world_id{} =
 					this->world_id(),
 				sanguis::messages::roles::seed{} =
@@ -571,7 +573,9 @@ sanguis::server::world::object::add_aura(
 	this->send_entity_specific(
 		_id,
 		sanguis::messages::server::create(
-			sanguis::messages::server::add_aura(
+			alda::message::init_record<
+				sanguis::messages::server::add_aura
+			>(
 				sanguis::messages::roles::entity_id{} =
 					_id,
 				sanguis::messages::roles::aura_type{} =
@@ -590,7 +594,9 @@ sanguis::server::world::object::add_buff(
 	this->send_entity_specific(
 		_id,
 		sanguis::messages::server::create(
-			sanguis::messages::server::add_buff(
+			alda::message::init_record<
+				sanguis::messages::server::add_buff
+			>(
 				sanguis::messages::roles::entity_id{} =
 					_id,
 				sanguis::messages::roles::buff_type{} =
@@ -609,7 +615,9 @@ sanguis::server::world::object::remove_buff(
 	this->send_entity_specific(
 		_id,
 		sanguis::messages::server::create(
-			sanguis::messages::server::remove_buff(
+			alda::message::init_record<
+				sanguis::messages::server::remove_buff
+			>(
 				sanguis::messages::roles::entity_id{} =
 					_id,
 				sanguis::messages::roles::buff_type{} =
@@ -628,7 +636,9 @@ sanguis::server::world::object::weapon_changed(
 	this->send_entity_specific(
 		_id,
 		sanguis::messages::server::create(
-			sanguis::messages::server::change_weapon(
+			alda::message::init_record<
+				sanguis::messages::server::change_weapon
+			>(
 				sanguis::messages::roles::entity_id{} =
 					_id,
 				sanguis::messages::roles::primary_weapon{} =
@@ -647,7 +657,9 @@ sanguis::server::world::object::got_weapon(
 	this->send_player_specific(
 		_player_id,
 		sanguis::messages::server::create(
-			sanguis::messages::server::give_weapon(
+			alda::message::init_record<
+				sanguis::messages::server::give_weapon
+			>(
 				sanguis::messages::roles::weapon_type{} =
 					_description.weapon_type(),
 				sanguis::messages::roles::magazine_base_size{} =
@@ -682,10 +694,9 @@ sanguis::server::world::object::remove_weapon(
 	this->send_player_specific(
 		_player_id,
 		sanguis::messages::server::create(
-			sanguis::messages::server::remove_weapon(
-				sanguis::messages::roles::is_primary_weapon{} =
-					_is_primary
-			)
+			sanguis::messages::server::remove_weapon{
+				_is_primary
+			}
 		)
 	);
 }
@@ -700,7 +711,9 @@ sanguis::server::world::object::magazine_remaining(
 	this->send_player_specific(
 		_player_id,
 		sanguis::messages::server::create(
-			sanguis::messages::server::magazine_remaining(
+			alda::message::init_record<
+				sanguis::messages::server::magazine_remaining
+			>(
 				sanguis::messages::roles::is_primary_weapon{} =
 					_is_primary,
 				sanguis::messages::roles::magazine_remaining{} =
@@ -722,7 +735,9 @@ sanguis::server::world::object::reload_time(
 	this->send_player_specific(
 		_player_id,
 		sanguis::messages::server::create(
-			sanguis::messages::server::reload(
+			alda::message::init_record<
+				sanguis::messages::server::reload
+			>(
 				sanguis::messages::roles::is_primary_weapon{} =
 					_is_primary,
 				sanguis::messages::roles::reload_time{} =
@@ -741,7 +756,9 @@ sanguis::server::world::object::angle_changed(
 	this->send_entity_specific(
 		_entity_id,
 		sanguis::messages::server::create(
-			sanguis::messages::server::rotate(
+			alda::message::init_record<
+				sanguis::messages::server::rotate
+			>(
 				sanguis::messages::roles::entity_id{} =
 					_entity_id,
 				sanguis::messages::roles::angle{} =
@@ -760,7 +777,9 @@ sanguis::server::world::object::center_changed(
 	this->send_entity_specific(
 		_entity_id,
 		sanguis::messages::server::create(
-			sanguis::messages::server::move(
+			alda::message::init_record<
+				sanguis::messages::server::move
+			>(
 				sanguis::messages::roles::entity_id{} =
 					_entity_id,
 				sanguis::messages::roles::center{} =
@@ -779,7 +798,9 @@ sanguis::server::world::object::speed_changed(
 	this->send_entity_specific(
 		_entity_id,
 		sanguis::messages::server::create(
-			sanguis::messages::server::speed(
+			alda::message::init_record<
+				sanguis::messages::server::speed
+			>(
 				sanguis::messages::roles::entity_id{} =
 					_entity_id,
 				sanguis::messages::roles::speed{} =
@@ -798,7 +819,9 @@ sanguis::server::world::object::weapon_status_changed(
 	this->send_entity_specific(
 		_id,
 		sanguis::messages::server::create(
-			sanguis::messages::server::weapon_status(
+			alda::message::init_record<
+				sanguis::messages::server::weapon_status
+			>(
 				sanguis::messages::roles::entity_id{} =
 					_id,
 				sanguis::messages::roles::weapon_status{} =
@@ -817,7 +840,9 @@ sanguis::server::world::object::health_changed(
 	this->send_entity_specific(
 		_id,
 		sanguis::messages::server::create(
-			sanguis::messages::server::health(
+			alda::message::init_record<
+				sanguis::messages::server::health
+			>(
 				sanguis::messages::roles::entity_id{} =
 					_id,
 				sanguis::messages::roles::health{} =
@@ -836,7 +861,9 @@ sanguis::server::world::object::max_health_changed(
 	this->send_entity_specific(
 		_id,
 		sanguis::messages::server::create(
-			sanguis::messages::server::max_health(
+			alda::message::init_record<
+				sanguis::messages::server::max_health
+			>(
 				sanguis::messages::roles::entity_id{} =
 					_id,
 				sanguis::messages::roles::max_health{} =
@@ -855,12 +882,11 @@ sanguis::server::world::object::exp_changed(
 	this->send_player_specific(
 		_player_id,
 		sanguis::messages::server::create(
-			sanguis::messages::server::experience(
-				sanguis::messages::roles::experience{} =
-					sanguis::server::exp_to_net(
-						_exp
-					)
-			)
+			sanguis::messages::server::experience{
+				sanguis::server::exp_to_net(
+					_exp
+				)
+			}
 		)
 	);
 }
@@ -874,7 +900,9 @@ sanguis::server::world::object::level_changed(
 	this->send_player_specific(
 		_player_id,
 		sanguis::messages::server::create(
-			sanguis::messages::server::level_up(
+			alda::message::init_record<
+				sanguis::messages::server::level_up
+			>(
 				sanguis::messages::roles::level{} =
 					_level.get(),
 				sanguis::messages::roles::exp_for_next_level{} =
@@ -1150,7 +1178,9 @@ sanguis::server::world::object::remove_sight_range(
 		this->send_player_specific(
 			_player_id,
 			sanguis::messages::server::create(
-				sanguis::messages::server::die(
+				alda::message::init_record<
+					sanguis::messages::server::die
+				>(
 					sanguis::messages::roles::entity_id{} =
 						_target.id()
 				)
@@ -1160,7 +1190,9 @@ sanguis::server::world::object::remove_sight_range(
 		this->send_player_specific(
 			_player_id,
 			sanguis::messages::server::create(
-				sanguis::messages::server::remove(
+				alda::message::init_record<
+					sanguis::messages::server::remove
+				>(
 					sanguis::messages::roles::entity_id{} =
 						_target.id()
 				)

@@ -21,6 +21,7 @@
 #include <sanguis/server/entities/projectiles/base.hpp>
 #include <sanguis/server/entities/projectiles/life_time.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
+#include <alda/message/init_record.hpp>
 
 
 sanguis::server::entities::projectiles::aoe_projectile::aoe_projectile(
@@ -71,7 +72,9 @@ sanguis::server::entities::projectiles::aoe_projectile::add_message(
 {
 	return
 		sanguis::messages::server::create_ptr(
-			sanguis::messages::server::add_aoe_projectile(
+			alda::message::init_record<
+				sanguis::messages::server::add_aoe_projectile
+			>(
 				sanguis::messages::roles::entity_id{} =
 					this->id(),
 				sanguis::messages::roles::center{} =

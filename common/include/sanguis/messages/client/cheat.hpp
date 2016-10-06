@@ -4,8 +4,7 @@
 #include <sanguis/cheat_type.hpp>
 #include <sanguis/messages/adapted_types/enum.hpp>
 #include <sanguis/messages/client/cheat_fwd.hpp>
-#include <alda/message/record.hpp>
-#include <fcppt/record/element.hpp>
+#include <alda/message/object.hpp>
 
 
 #endif

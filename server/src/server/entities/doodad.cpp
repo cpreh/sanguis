@@ -18,6 +18,7 @@
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/environment/load_context.hpp>
+#include <alda/message/init_record.hpp>
 
 
 sanguis::server::entities::doodad::doodad(
@@ -85,7 +86,9 @@ sanguis::server::entities::doodad::add_message(
 {
 	return
 		sanguis::messages::server::create_ptr(
-			sanguis::messages::server::add_doodad(
+			alda::message::init_record<
+				sanguis::messages::server::add_doodad
+			>(
 				sanguis::messages::roles::entity_id{} =
 					this->id(),
 				sanguis::messages::roles::center{} =

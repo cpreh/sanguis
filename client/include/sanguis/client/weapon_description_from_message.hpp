@@ -13,7 +13,8 @@
 #include <sanguis/messages/roles/reload_time.hpp>
 #include <sanguis/messages/roles/weapon_attribute_container.hpp>
 #include <sanguis/messages/roles/weapon_type.hpp>
-#include <alda/message/get.hpp>
+#include <alda/message/object.hpp>
+#include <fcppt/record/get.hpp>
 
 
 namespace sanguis
@@ -22,53 +23,57 @@ namespace client
 {
 
 template<
-	typename Message
+	typename Id,
+	typename Type
 >
 sanguis::weapon_description
 weapon_description_from_message(
-	Message const &_message
+	alda::message::object<
+		Id,
+		Type
+	> const &_message
 )
 {
 	return
 		sanguis::weapon_description(
-			alda::message::get<
+			fcppt::record::get<
 				sanguis::messages::roles::weapon_type
 			>(
-				_message
+				_message.get()
 			),
 			sanguis::magazine_size(
-				alda::message::get<
+				fcppt::record::get<
 					sanguis::messages::roles::magazine_base_size
 				>(
-					_message
+					_message.get()
 				)
 			),
 			sanguis::magazine_extra(
-				alda::message::get<
+				fcppt::record::get<
 					sanguis::messages::roles::magazine_extra_size
 				>(
-					_message
+					_message.get()
 				)
 			),
 			sanguis::magazine_remaining(
-				alda::message::get<
+				fcppt::record::get<
 					sanguis::messages::roles::magazine_remaining
 				>(
-					_message
+					_message.get()
 				)
 			),
 			sanguis::reload_time(
-				alda::message::get<
+				fcppt::record::get<
 					sanguis::messages::roles::reload_time
 				>(
-					_message
+					_message.get()
 				)
 			),
 			sanguis::messages::convert::from_weapon_attribute_vector(
-				alda::message::get<
+				fcppt::record::get<
 					sanguis::messages::roles::weapon_attribute_container
 				>(
-					_message
+					_message.get()
 				)
 			)
 		);

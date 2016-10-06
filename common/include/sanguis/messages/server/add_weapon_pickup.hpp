@@ -5,7 +5,8 @@
 #include <sanguis/messages/server/parts/add_elements_base.hpp>
 #include <sanguis/messages/server/parts/entity_id.hpp>
 #include <sanguis/messages/server/parts/weapon_description.hpp>
-#include <alda/message/record.hpp>
+#include <alda/bindings/record.hpp>
+#include <alda/message/object.hpp>
 
 
 #endif

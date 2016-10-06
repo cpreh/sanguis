@@ -10,6 +10,7 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/send_callback.hpp>
 #include <sanguis/server/unicast_callback.hpp>
+#include <alda/message/init_record.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/prefix.hpp>
@@ -59,7 +60,9 @@ sanguis::server::console::insert(
 {
 	send_(
 		sanguis::messages::server::create(
-			sanguis::messages::server::add_console_command(
+			alda::message::init_record<
+				sanguis::messages::server::add_console_command
+			>(
 				sanguis::messages::roles::command_name{} =
 					sge::charconv::fcppt_string_to_utf8(
 						_command
@@ -126,7 +129,9 @@ sanguis::server::console::print_line(
 	unicast_(
 		_id,
 		sanguis::messages::server::create(
-			sanguis::messages::server::console_print(
+			alda::message::init_record<
+				sanguis::messages::server::console_print
+			>(
 				sanguis::messages::roles::console_message{} =
 					sge::charconv::fcppt_string_to_utf8(
 						_line

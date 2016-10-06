@@ -29,6 +29,7 @@
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <alda/message/init_record.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -128,7 +129,9 @@ sanguis::server::entities::pickups::weapon::add_message(
 
 	return
 		sanguis::messages::server::create_ptr(
-			sanguis::messages::server::add_weapon_pickup(
+			alda::message::init_record<
+				sanguis::messages::server::add_weapon_pickup
+			>(
 				sanguis::messages::roles::entity_id{} =
 					this->id(),
 				sanguis::messages::roles::center{} =

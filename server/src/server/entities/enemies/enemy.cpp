@@ -49,6 +49,7 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <alda/message/init_record.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -236,7 +237,9 @@ sanguis::server::entities::enemies::enemy::add_message(
 {
 	return
 		sanguis::messages::server::create_ptr(
-			sanguis::messages::server::add_enemy(
+			alda::message::init_record<
+				sanguis::messages::server::add_enemy
+			>(
 				sanguis::messages::roles::entity_id{} =
 					this->id(),
 				sanguis::messages::roles::center{} =

@@ -3,8 +3,7 @@
 
 #include <sanguis/messages/adapted_types/is_primary_weapon.hpp>
 #include <sanguis/messages/server/remove_weapon_fwd.hpp>
-#include <alda/message/record.hpp>
-#include <fcppt/record/element.hpp>
+#include <alda/message/object.hpp>
 
 
 #endif

@@ -25,6 +25,7 @@
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <alda/message/init_record.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 
@@ -123,7 +124,9 @@ sanguis::server::entities::destructible::add_message(
 {
 	return
 		sanguis::messages::server::create_ptr(
-			sanguis::messages::server::add_destructible(
+			alda::message::init_record<
+				sanguis::messages::server::add_destructible
+			>(
 				sanguis::messages::roles::entity_id{} =
 					this->id(),
 				sanguis::messages::roles::center{} =

@@ -4,7 +4,8 @@
 #include <sanguis/messages/adapted_types/space_unit.hpp>
 #include <sanguis/messages/server/rotate_fwd.hpp>
 #include <sanguis/messages/server/parts/entity_id.hpp>
-#include <alda/message/record.hpp>
+#include <alda/bindings/record_variadic.hpp>
+#include <alda/message/object.hpp>
 #include <fcppt/record/element.hpp>
 
 

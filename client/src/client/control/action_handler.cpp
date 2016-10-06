@@ -27,9 +27,7 @@
 #include <sanguis/messages/client/start_shooting.hpp>
 #include <sanguis/messages/client/stop_shooting.hpp>
 #include <sanguis/messages/roles/attack_dest.hpp>
-#include <sanguis/messages/roles/cheat_type.hpp>
 #include <sanguis/messages/roles/direction.hpp>
-#include <sanguis/messages/roles/is_primary_weapon.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/object.hpp>
 #include <sge/console/callback/function.hpp>
@@ -38,6 +36,8 @@
 #include <sge/console/callback/short_description.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <alda/message/init_record.hpp>
+#include <fcppt/unit.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/cast/size_fun.hpp>
@@ -287,7 +287,9 @@ sanguis::client::control::action_handler::handle_cursor_action(
 				{
 					send_(
 						sanguis::messages::client::create(
-							sanguis::messages::client::attack_dest(
+							alda::message::init_record<
+								sanguis::messages::client::attack_dest
+							>(
 								sanguis::messages::roles::attack_dest{} =
 									fcppt::math::vector::structure_cast<
 										sanguis::messages::types::vector2,
@@ -316,7 +318,9 @@ sanguis::client::control::action_handler::handle_nullary_action(
 	case sanguis::client::control::actions::nullary_type::change_world:
 		send_(
 			sanguis::messages::client::create(
-				sanguis::messages::client::change_world()
+				sanguis::messages::client::change_world(
+					fcppt::unit{}
+				)
 			)
 		);
 		return;
@@ -410,7 +414,9 @@ sanguis::client::control::action_handler::update_direction(
 
 	send_(
 		sanguis::messages::client::create(
-			sanguis::messages::client::direction(
+			alda::message::init_record<
+				sanguis::messages::client::direction
+			>(
 				sanguis::messages::roles::direction{} =
 					fcppt::math::vector::structure_cast<
 						sanguis::messages::types::vector2,
@@ -434,19 +440,17 @@ sanguis::client::control::action_handler::handle_shooting(
 	)
 		send_(
 			sanguis::messages::client::create(
-				sanguis::messages::client::start_shooting(
-					sanguis::messages::roles::is_primary_weapon{} =
-						_is_primary
-				)
+				sanguis::messages::client::start_shooting{
+					_is_primary
+				}
 			)
 		);
 	else
 		send_(
 			sanguis::messages::client::create(
-				sanguis::messages::client::stop_shooting(
-					sanguis::messages::roles::is_primary_weapon{} =
-						_is_primary
-				)
+				sanguis::messages::client::stop_shooting{
+					_is_primary
+				}
 			)
 		);
 }
@@ -458,10 +462,9 @@ sanguis::client::control::action_handler::handle_drop(
 {
 	send_(
 		sanguis::messages::client::create(
-			sanguis::messages::client::drop_or_pickup_weapon(
-				sanguis::messages::roles::is_primary_weapon{} =
-					_is_primary
-			)
+			sanguis::messages::client::drop_or_pickup_weapon{
+				_is_primary
+			}
 		)
 	);
 }
@@ -473,10 +476,9 @@ sanguis::client::control::action_handler::handle_reload(
 {
 	send_(
 		sanguis::messages::client::create(
-			sanguis::messages::client::reload(
-				sanguis::messages::roles::is_primary_weapon{} =
-					_is_primary
-			)
+			sanguis::messages::client::reload{
+				_is_primary
+			}
 		)
 	);
 }
@@ -490,10 +492,9 @@ sanguis::client::control::action_handler::send_cheat(
 {
 	send_(
 		sanguis::messages::client::create(
-			sanguis::messages::client::cheat(
-				sanguis::messages::roles::cheat_type{} =
-					_cheat
-			)
+			sanguis::messages::client::cheat{
+				_cheat
+			}
 		)
 	);
 }

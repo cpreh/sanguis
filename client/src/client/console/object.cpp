@@ -13,6 +13,7 @@
 #include <sge/console/gfx/object.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
+#include <alda/message/init_record.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -113,7 +114,9 @@ sanguis::client::console::object::server_callback(
 {
 	send_(
 		sanguis::messages::client::create(
-			sanguis::messages::client::console_command(
+			alda::message::init_record<
+				sanguis::messages::client::console_command
+			>(
 				sanguis::messages::roles::console_command{} =
 					sanguis::messages::convert::to_string_vector(
 						sanguis::client::from_console_arg_list(

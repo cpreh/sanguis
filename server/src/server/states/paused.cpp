@@ -19,6 +19,7 @@
 #include <sanguis/server/states/running.hpp>
 #include <sanguis/server/states/unpaused.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/unit.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/name.hpp>
@@ -152,7 +153,9 @@ sanguis::server::states::paused::unpause_impl()
 		sanguis::server::machine
 	>().send_to_all(
 		sanguis::messages::server::create(
-			sanguis::messages::server::unpause()
+			sanguis::messages::server::unpause(
+				fcppt::unit{}
+			)
 		)
 	);
 

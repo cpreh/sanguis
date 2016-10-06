@@ -5,9 +5,10 @@
 #include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/client/draw2d/translate/vector_to_client.hpp>
 #include <sanguis/messages/roles/center.hpp>
-#include <alda/message/get.hpp>
+#include <alda/message/object.hpp>
 #include <fcppt/cast/float_to_int_fun.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/record/get.hpp>
 
 
 namespace sanguis
@@ -20,12 +21,16 @@ namespace translate
 {
 
 template<
-	typename Message
+	typename Id,
+	typename Type
 >
 inline
 sanguis::client::draw2d::sprite::center
 center(
-	Message const &_message
+	alda::message::object<
+		Id,
+		Type
+	> const &_message
 )
 {
 	return
@@ -35,10 +40,10 @@ center(
 				fcppt::cast::float_to_int_fun
 			>(
 				sanguis::client::draw2d::translate::vector_to_client(
-					alda::message::get<
+					fcppt::record::get<
 						sanguis::messages::roles::center
 					>(
-						_message
+						_message.get()
 					)
 				)
 			)

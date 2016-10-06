@@ -3,10 +3,8 @@
 
 #include <sanguis/messages/client/types/make_message_id.hpp>
 #include <sanguis/messages/client/types/message.hpp>
-#include <alda/message/record_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/vector/vector10.hpp>
-#include <fcppt/config/external_end.hpp>
+#include <alda/bindings/unit_fwd.hpp>
+#include <alda/message/object_fwd.hpp>
 
 
 namespace sanguis
@@ -17,11 +15,11 @@ namespace client
 {
 
 typedef
-alda::message::record<
+alda::message::object<
 	sanguis::messages::client::types::make_message_id<
 		sanguis::messages::client::types::message::unpause
 	>,
-	boost::mpl::vector0<>
+	alda::bindings::unit
 >
 unpause;
 

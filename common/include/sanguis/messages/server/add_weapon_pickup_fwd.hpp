@@ -6,7 +6,8 @@
 #include <sanguis/messages/server/parts/weapon_description_fwd.hpp>
 #include <sanguis/messages/server/types/make_message_id.hpp>
 #include <sanguis/messages/server/types/message.hpp>
-#include <alda/message/record_fwd.hpp>
+#include <alda/bindings/record_fwd.hpp>
+#include <alda/message/object_fwd.hpp>
 #include <fcppt/mpl/flatten.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
@@ -21,15 +22,17 @@ namespace server
 {
 
 typedef
-alda::message::record<
+alda::message::object<
 	sanguis::messages::server::types::make_message_id<
 		sanguis::messages::server::types::message::add_weapon_pickup
 	>,
-	fcppt::mpl::flatten<
-		boost::mpl::vector3<
-			sanguis::messages::server::parts::entity_id,
-			sanguis::messages::server::parts::add_elements_base,
-			sanguis::messages::server::parts::weapon_description
+	alda::bindings::record<
+		fcppt::mpl::flatten<
+			boost::mpl::vector3<
+				sanguis::messages::server::parts::entity_id,
+				sanguis::messages::server::parts::add_elements_base,
+				sanguis::messages::server::parts::weapon_description
+			>
 		>
 	>
 >

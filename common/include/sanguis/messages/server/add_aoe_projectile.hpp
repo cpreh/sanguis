@@ -8,7 +8,8 @@
 #include <sanguis/messages/server/parts/add_elements_base.hpp>
 #include <sanguis/messages/server/parts/entity_id.hpp>
 #include <sanguis/messages/server/parts/speed.hpp>
-#include <alda/message/record.hpp>
+#include <alda/bindings/record.hpp>
+#include <alda/message/object.hpp>
 #include <fcppt/record/element.hpp>
 
 

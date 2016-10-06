@@ -8,7 +8,8 @@
 #include <sanguis/messages/server/add_enemy_fwd.hpp>
 #include <sanguis/messages/server/parts/add_actor.hpp>
 #include <sanguis/messages/server/parts/entity_id.hpp>
-#include <alda/message/record.hpp>
+#include <alda/bindings/record.hpp>
+#include <alda/message/object.hpp>
 #include <fcppt/record/element.hpp>
 
 

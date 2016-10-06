@@ -3,7 +3,8 @@
 
 #include <sanguis/messages/adapted_types/string.hpp>
 #include <sanguis/messages/server/console_print_fwd.hpp>
-#include <alda/message/record.hpp>
+#include <alda/bindings/record_variadic.hpp>
+#include <alda/message/object.hpp>
 #include <fcppt/record/element.hpp>
 
 

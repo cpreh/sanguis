@@ -14,6 +14,7 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
+#include <alda/message/init_record.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
 
@@ -36,7 +37,9 @@ sanguis::server::create_player(
 		_send_to_player(
 			_player_id,
 			sanguis::messages::server::create(
-				sanguis::messages::server::add_console_command(
+				alda::message::init_record<
+					sanguis::messages::server::add_console_command
+				>(
 					sanguis::messages::roles::command_name{} =
 						sge::charconv::fcppt_string_to_utf8(
 							command.first

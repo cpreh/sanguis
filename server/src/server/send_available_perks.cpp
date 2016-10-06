@@ -15,6 +15,7 @@
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/perks/tree/object.hpp>
 #include <sanguis/server/perks/tree/status.hpp>
+#include <alda/message/init_record.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/algorithm/map_concat.hpp>
@@ -89,7 +90,9 @@ sanguis::server::send_available_perks(
 	_send(
 		_player.player_id(),
 		sanguis::messages::server::create(
-			sanguis::messages::server::available_perks(
+			alda::message::init_record<
+				sanguis::messages::server::available_perks
+			>(
 				sanguis::messages::roles::perk_tree{} =
 					nodes,
 				sanguis::messages::roles::remaining_perk_levels{} =

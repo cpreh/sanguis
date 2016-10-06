@@ -29,7 +29,6 @@
 #include <sanguis/messages/roles/level.hpp>
 #include <sanguis/messages/roles/name.hpp>
 #include <sanguis/messages/roles/perk_tree.hpp>
-#include <sanguis/messages/roles/perk_type.hpp>
 #include <sanguis/messages/roles/remaining_perk_levels.hpp>
 #include <sanguis/messages/server/available_perks.hpp>
 #include <sanguis/messages/server/level_up.hpp>
@@ -41,6 +40,7 @@
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
+#include <fcppt/record/get.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <boost/statechart/result.hpp>
@@ -177,15 +177,19 @@ sanguis::client::states::has_player::operator()(
 {
 	perk_state_->perks(
 		sanguis::client::perk::make_tree(
-			_message.get<
+			fcppt::record::get<
 				sanguis::messages::roles::perk_tree
-			>()
+			>(
+				_message.get()
+			)
 		),
 		sanguis::client::perk::remaining_levels(
 			sanguis::client::level(
-				_message.get<
+				fcppt::record::get<
 					sanguis::messages::roles::remaining_perk_levels
-				>()
+				>(
+					_message.get()
+				)
 			)
 		)
 	);
@@ -204,9 +208,11 @@ sanguis::client::states::has_player::operator()(
 	perk_state_->player_level(
 		sanguis::client::player_level(
 			sanguis::client::level(
-				_message.get<
+				fcppt::record::get<
 					sanguis::messages::roles::level
-				>()
+				>(
+					_message.get()
+				)
 			)
 		)
 	);
@@ -244,10 +250,9 @@ sanguis::client::states::has_player::send_perk_choose(
 		sanguis::client::machine
 	>().send(
 		sanguis::messages::client::create(
-			sanguis::messages::client::choose_perk(
-				sanguis::messages::roles::perk_type{} =
-					_type
-			)
+			sanguis::messages::client::choose_perk{
+				_type
+			}
 		)
 	);
 }

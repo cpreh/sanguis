@@ -4,7 +4,8 @@
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/translate/vector_to_client.hpp>
 #include <sanguis/messages/roles/speed.hpp>
-#include <alda/message/get.hpp>
+#include <alda/message/object.hpp>
+#include <fcppt/record/get.hpp>
 
 
 namespace sanguis
@@ -17,21 +18,25 @@ namespace translate
 {
 
 template<
-	typename Message
+	typename Id,
+	typename Type
 >
 inline
 sanguis::client::draw2d::speed
 speed(
-	Message const &_message
+	alda::message::object<
+		Id,
+		Type
+	> const &_message
 )
 {
 	return
 		sanguis::client::draw2d::speed(
 			sanguis::client::draw2d::translate::vector_to_client(
-				alda::message::get<
+				fcppt::record::get<
 					sanguis::messages::roles::speed
 				>(
-					_message
+					_message.get()
 				)
 			)
 		);

@@ -4,7 +4,8 @@
 #include <sanguis/messages/adapted_types/exp.hpp>
 #include <sanguis/messages/adapted_types/level.hpp>
 #include <sanguis/messages/server/level_up_fwd.hpp>
-#include <alda/message/record.hpp>
+#include <alda/bindings/record_variadic.hpp>
+#include <alda/message/object.hpp>
 #include <fcppt/record/element.hpp>
 
 

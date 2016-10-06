@@ -44,7 +44,6 @@
 #include <sanguis/messages/roles/command_name.hpp>
 #include <sanguis/messages/roles/console_message.hpp>
 #include <sanguis/messages/roles/exp_for_next_level.hpp>
-#include <sanguis/messages/roles/experience.hpp>
 #include <sanguis/messages/roles/is_primary_weapon.hpp>
 #include <sanguis/messages/roles/level.hpp>
 #include <sanguis/messages/roles/magazine_remaining.hpp>
@@ -78,6 +77,7 @@
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
+#include <fcppt/record/get.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <boost/statechart/result.hpp>
@@ -343,16 +343,20 @@ sanguis::client::states::running::operator()(
 	fcppt::string const
 		name(
 			sge::charconv::utf8_string_to_fcppt(
-				_message.get<
+				fcppt::record::get<
 					sanguis::messages::roles::command_name
-				>()
+				>(
+					_message.get()
+				)
 			)
 		),
 		description(
 			sge::charconv::utf8_string_to_fcppt(
-				_message.get<
+				fcppt::record::get<
 					sanguis::messages::roles::command_description
-				>()
+				>(
+					_message.get()
+				)
 			)
 		);
 
@@ -385,9 +389,11 @@ sanguis::client::states::running::operator()(
 	hud_->player_name(
 		sanguis::player_name(
 			sge::charconv::utf8_string_to_fcppt(
-				_message.get<
+				fcppt::record::get<
 					sanguis::messages::roles::name
-				>()
+				>(
+					_message.get()
+				)
 			)
 		)
 	);
@@ -406,9 +412,11 @@ sanguis::client::states::running::operator()(
 	hud_->world_name(
 		sanguis::world_name(
 			sge::charconv::utf8_string_to_fcppt(
-				_message.get<
+				fcppt::record::get<
 					sanguis::messages::roles::world_name
-				>()
+				>(
+					_message.get()
+				)
 			)
 		)
 	);
@@ -427,9 +435,11 @@ sanguis::client::states::running::operator()(
 	console_->sge_console().emit_message(
 		sge::font::from_fcppt_string(
 			sge::charconv::utf8_string_to_fcppt(
-				_message.get<
+				fcppt::record::get<
 					sanguis::messages::roles::console_message
-				>()
+				>(
+					_message.get()
+				)
 			)
 		)
 	);
@@ -447,9 +457,7 @@ sanguis::client::states::running::operator()(
 {
 	hud_->experience(
 		sanguis::client::exp(
-			_message.get<
-				sanguis::messages::roles::experience
-			>()
+			_message.get()
 		)
 	);
 
@@ -482,13 +490,17 @@ sanguis::client::states::running::operator()(
 )
 {
 	hud_->magazine_remaining(
-		_message.get<
+		fcppt::record::get<
 			sanguis::messages::roles::is_primary_weapon
-		>(),
+		>(
+			_message.get()
+		),
 		sanguis::magazine_remaining(
-			_message.get<
+			fcppt::record::get<
 				sanguis::messages::roles::magazine_remaining
-			>()
+			>(
+				_message.get()
+			)
 		)
 	);
 
@@ -505,14 +517,18 @@ sanguis::client::states::running::operator()(
 {
 	hud_->level(
 		sanguis::client::level(
-			_message.get<
+			fcppt::record::get<
 				sanguis::messages::roles::level
-			>()
+			>(
+				_message.get()
+			)
 		),
 		sanguis::client::exp_for_next_level(
-			_message.get<
+			fcppt::record::get<
 				sanguis::messages::roles::exp_for_next_level
-			>()
+			>(
+				_message.get()
+			)
 		)
 	);
 
@@ -543,12 +559,16 @@ sanguis::client::states::running::operator()(
 )
 {
 	hud_->reload_time(
-		_message.get<
+		fcppt::record::get<
 			sanguis::messages::roles::is_primary_weapon
-		>(),
-		_message.get<
+		>(
+			_message.get()
+		),
+		fcppt::record::get<
 			sanguis::messages::roles::reload_time
-		>()
+		>(
+			_message.get()
+		)
 	);
 
 	return
@@ -563,9 +583,7 @@ sanguis::client::states::running::operator()(
 )
 {
 	hud_->remove_weapon(
-		_message.get<
-			sanguis::messages::roles::is_primary_weapon
-		>()
+		_message.get()
 	);
 
 	return
@@ -581,9 +599,11 @@ sanguis::client::states::running::operator()(
 {
 	slowdown_ =
 		sanguis::slowdown{
-			_message.get<
+			fcppt::record::get<
 				sanguis::messages::roles::slowdown
-			>()
+			>(
+				_message.get()
+			)
 		};
 
 	FCPPT_ASSERT_ERROR(

@@ -6,7 +6,8 @@
 #include <sanguis/client/max_health.hpp>
 #include <sanguis/messages/roles/health.hpp>
 #include <sanguis/messages/roles/max_health.hpp>
-#include <alda/message/get.hpp>
+#include <alda/message/object.hpp>
+#include <fcppt/record/get.hpp>
 
 
 namespace sanguis
@@ -19,27 +20,31 @@ namespace translate
 {
 
 template<
-	typename Message
+	typename Id,
+	typename Type
 >
 sanguis::client::health_pair
 health_pair(
-	Message const &_message
+	alda::message::object<
+		Id,
+		Type
+	> const &_message
 )
 {
 	return
 		sanguis::client::health_pair(
 			sanguis::client::health(
-				alda::message::get<
+				fcppt::record::get<
 					sanguis::messages::roles::health
 				>(
-					_message
+					_message.get()
 				)
 			),
 			sanguis::client::max_health(
-				alda::message::get<
+				fcppt::record::get<
 					sanguis::messages::roles::max_health
 				>(
-					_message
+					_message.get()
 				)
 			)
 		);

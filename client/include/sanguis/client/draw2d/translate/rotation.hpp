@@ -3,7 +3,8 @@
 
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/messages/roles/angle.hpp>
-#include <alda/message/get.hpp>
+#include <alda/message/object.hpp>
+#include <fcppt/record/get.hpp>
 
 
 namespace sanguis
@@ -16,20 +17,24 @@ namespace translate
 {
 
 template<
-	typename Message
+	typename Id,
+	typename Type
 >
 inline
 sanguis::client::draw2d::sprite::rotation
 rotation(
-	Message const &_message
+	alda::message::object<
+		Id,
+		Type
+	> const &_message
 )
 {
 	return
 		sanguis::client::draw2d::sprite::rotation{
-			alda::message::get<
+			fcppt::record::get<
 				sanguis::messages::roles::angle
 			>(
-				_message
+				_message.get()
 			)
 		};
 }

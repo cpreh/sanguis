@@ -81,6 +81,7 @@
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
+#include <alda/message/init_record.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -630,7 +631,9 @@ sanguis::server::entities::player::add_message_impl(
 {
 	return
 		sanguis::messages::server::create_ptr(
-			Message(
+			alda::message::init_record<
+				Message
+			>(
 				sanguis::messages::roles::entity_id{} =
 					this->id(),
 				sanguis::messages::roles::center{} =

@@ -26,6 +26,7 @@
 #include <sanguis/messages/server/base.hpp>
 #include <sanguis/messages/server/connected.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
+#include <alda/message/init_record.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>
@@ -203,7 +204,9 @@ sanguis::client::states::menu::react(
 		sanguis::client::machine
 	>().send(
 		sanguis::messages::client::create(
-			sanguis::messages::client::info(
+			alda::message::init_record<
+				sanguis::messages::client::info
+			>(
 				sanguis::messages::roles::player_name{} =
 					sge::charconv::fcppt_string_to_utf8(
 						menu_.player_name()

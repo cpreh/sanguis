@@ -3,7 +3,6 @@
 
 #include <sanguis/messages/adapted_types/duration_fwd.hpp>
 #include <sanguis/messages/adapted_types/magazine_size_fwd.hpp>
-#include <sanguis/messages/adapted_types/weapon_attribute_vector_fwd.hpp>
 #include <sanguis/messages/adapted_types/weapon_type_fwd.hpp>
 #include <sanguis/messages/roles/magazine_base_size.hpp>
 #include <sanguis/messages/roles/magazine_extra_size.hpp>
@@ -11,6 +10,7 @@
 #include <sanguis/messages/roles/reload_time.hpp>
 #include <sanguis/messages/roles/weapon_attribute_container.hpp>
 #include <sanguis/messages/roles/weapon_type.hpp>
+#include <sanguis/messages/server/adapted_types/weapon_attribute_vector_fwd.hpp>
 #include <fcppt/record/element_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
@@ -50,7 +50,7 @@ boost::mpl::vector6<
 	>,
 	fcppt::record::element<
 		sanguis::messages::roles::weapon_attribute_container,
-		sanguis::messages::adapted_types::weapon_attribute_vector
+		sanguis::messages::server::adapted_types::weapon_attribute_vector
 	>
 >
 weapon_description;

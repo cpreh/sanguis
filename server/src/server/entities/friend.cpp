@@ -48,6 +48,7 @@
 #include <sanguis/server/weapons/default_irs.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <alda/message/init_record.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
 #include <utility>
@@ -162,7 +163,9 @@ sanguis::server::entities::friend_::add_message(
 {
 	return
 		sanguis::messages::server::create_ptr(
-			sanguis::messages::server::add_friend(
+			alda::message::init_record<
+				sanguis::messages::server::add_friend
+			>(
 				sanguis::messages::roles::entity_id{} =
 					this->id(),
 				sanguis::messages::roles::center{} =

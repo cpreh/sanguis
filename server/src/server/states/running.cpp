@@ -9,9 +9,7 @@
 #include <sanguis/messages/client/console_command.hpp>
 #include <sanguis/messages/client/info.hpp>
 #include <sanguis/messages/convert/from_string_vector.hpp>
-#include <sanguis/messages/roles/cheat_type.hpp>
 #include <sanguis/messages/roles/console_command.hpp>
-#include <sanguis/messages/roles/perk_type.hpp>
 #include <sanguis/messages/roles/player_name.hpp>
 #include <sanguis/server/dispatch.hpp>
 #include <sanguis/server/dispatch_default_function.hpp>
@@ -41,6 +39,7 @@
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/warning.hpp>
+#include <fcppt/record/get.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <boost/statechart/result.hpp>
@@ -206,9 +205,11 @@ sanguis::server::states::running::operator()(
 		_id,
 		sanguis::player_name(
 			sge::charconv::utf8_string_to_fcppt(
-				_message.get<
+				fcppt::record::get<
 					sanguis::messages::roles::player_name
-				>()
+				>(
+					_message.get()
+				)
 			)
 		)
 	);
@@ -227,9 +228,11 @@ sanguis::server::states::running::operator()(
 {
 	sanguis::string_vector const command(
 		sanguis::messages::convert::from_string_vector(
-			_message.get<
+			fcppt::record::get<
 				sanguis::messages::roles::console_command
-			>()
+			>(
+				_message.get()
+			)
 		)
 	);
 
@@ -283,9 +286,7 @@ sanguis::server::states::running::operator()(
 {
 	global_context_->player_cheat(
 		_id,
-		_message.get<
-			sanguis::messages::roles::cheat_type
-		>()
+		_message.get()
 	);
 
 	return
@@ -302,9 +303,7 @@ sanguis::server::states::running::operator()(
 {
 	global_context_->player_choose_perk(
 		_id,
-		_message.get<
-			sanguis::messages::roles::perk_type
-		>()
+		_message.get()
 	);
 
 	return

@@ -2,14 +2,9 @@
 #define SANGUIS_MESSAGES_SERVER_REMOVE_WEAPON_FWD_HPP_INCLUDED
 
 #include <sanguis/messages/adapted_types/is_primary_weapon_fwd.hpp>
-#include <sanguis/messages/roles/is_primary_weapon.hpp>
 #include <sanguis/messages/server/types/make_message_id.hpp>
 #include <sanguis/messages/server/types/message.hpp>
-#include <alda/message/record_fwd.hpp>
-#include <fcppt/record/element_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/vector/vector10.hpp>
-#include <fcppt/config/external_end.hpp>
+#include <alda/message/object_fwd.hpp>
 
 
 namespace sanguis
@@ -20,16 +15,11 @@ namespace server
 {
 
 typedef
-alda::message::record<
+alda::message::object<
 	sanguis::messages::server::types::make_message_id<
 		sanguis::messages::server::types::message::remove_weapon
 	>,
-	boost::mpl::vector1<
-		fcppt::record::element<
-			sanguis::messages::roles::is_primary_weapon,
-			sanguis::messages::adapted_types::is_primary_weapon
-		>
-	>
+	sanguis::messages::adapted_types::is_primary_weapon
 >
 remove_weapon;
 

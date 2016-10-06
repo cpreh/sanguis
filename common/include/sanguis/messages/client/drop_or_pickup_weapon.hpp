@@ -3,8 +3,7 @@
 
 #include <sanguis/messages/adapted_types/is_primary_weapon.hpp>
 #include <sanguis/messages/client/drop_or_pickup_weapon_fwd.hpp>
-#include <alda/message/record.hpp>
-#include <fcppt/record/element.hpp>
+#include <alda/message/object.hpp>
 
 
 #endif

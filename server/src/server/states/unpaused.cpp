@@ -14,7 +14,6 @@
 #include <sanguis/messages/client/unpause.hpp>
 #include <sanguis/messages/roles/attack_dest.hpp>
 #include <sanguis/messages/roles/direction.hpp>
-#include <sanguis/messages/roles/is_primary_weapon.hpp>
 #include <sanguis/messages/roles/slowdown.hpp>
 #include <sanguis/messages/server/create.hpp>
 #include <sanguis/messages/server/pause.hpp>
@@ -32,12 +31,15 @@
 #include <sanguis/server/states/paused.hpp>
 #include <sanguis/server/states/running.hpp>
 #include <sanguis/server/states/unpaused.hpp>
+#include <alda/message/init_record.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/unit.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/warning.hpp>
+#include <fcppt/record/get.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
 #include <boost/statechart/result.hpp>
@@ -112,10 +114,12 @@ sanguis::server::states::unpaused::react(
 			sanguis::server::machine
 		>().send_to_all(
 			sanguis::messages::server::create(
-				sanguis::messages::server::slowdown{
+				alda::message::init_record<
+					sanguis::messages::server::slowdown
+				>(
 					sanguis::messages::roles::slowdown{} =
 						_event.slowdown().get()
-				}
+				)
 			)
 		);
 
@@ -173,9 +177,11 @@ sanguis::server::states::unpaused::operator()(
 		sanguis::server::states::running
 	>().global_context().player_target(
 		_id,
-		_message.get<
+		fcppt::record::get<
 			sanguis::messages::roles::attack_dest
-		>()
+		>(
+			_message.get()
+		)
 	);
 
 	return
@@ -213,9 +219,11 @@ sanguis::server::states::unpaused::operator()(
 	>().global_context().player_speed(
 		_id,
 		sanguis::server::speed(
-			_message.get<
+			fcppt::record::get<
 				sanguis::messages::roles::direction
-			>()
+			>(
+				_message.get()
+			)
 		)
 	);
 
@@ -235,9 +243,7 @@ sanguis::server::states::unpaused::operator()(
 		sanguis::server::states::running
 	>().global_context().player_drop_or_pickup_weapon(
 		_id,
-		_message.get<
-			sanguis::messages::roles::is_primary_weapon
-		>()
+		_message.get()
 	);
 
 	return
@@ -266,7 +272,9 @@ sanguis::server::states::unpaused::operator()(
 		sanguis::server::machine
 	>().send_to_all(
 		sanguis::messages::server::create(
-			sanguis::messages::server::pause()
+			sanguis::messages::server::pause{
+				fcppt::unit{}
+			}
 		)
 	);
 
@@ -288,9 +296,7 @@ sanguis::server::states::unpaused::operator()(
 		sanguis::server::states::running
 	>().global_context().player_reload(
 		_id,
-		_message.get<
-			sanguis::messages::roles::is_primary_weapon
-		>()
+		_message.get()
 	);
 
 	return
@@ -310,9 +316,7 @@ sanguis::server::states::unpaused::operator()(
 	>().global_context().player_change_shooting(
 		_id,
 		true,
-		_message.get<
-			sanguis::messages::roles::is_primary_weapon
-		>()
+		_message.get()
 	);
 
 	return
@@ -332,9 +336,7 @@ sanguis::server::states::unpaused::operator()(
 	>().global_context().player_change_shooting(
 		_id,
 		false,
-		_message.get<
-			sanguis::messages::roles::is_primary_weapon
-		>()
+		_message.get()
 	);
 
 	return

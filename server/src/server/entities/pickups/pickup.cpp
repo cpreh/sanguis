@@ -23,6 +23,7 @@
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/pickups/pickup.hpp>
 #include <sanguis/server/environment/load_context.hpp>
+#include <alda/message/init_record.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/cast/dynamic.hpp>
@@ -155,7 +156,9 @@ sanguis::server::entities::pickups::pickup::add_message(
 {
 	return
 		sanguis::messages::server::create_ptr(
-			sanguis::messages::server::add_pickup(
+			alda::message::init_record<
+				sanguis::messages::server::add_pickup
+			>(
 				sanguis::messages::roles::entity_id{} =
 					this->id(),
 				sanguis::messages::roles::center{} =
