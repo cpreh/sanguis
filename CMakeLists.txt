@@ -7,6 +7,13 @@ project(
 	sanguis
 )
 
+set_property(
+	GLOBAL
+	PROPERTY
+	USE_FOLDERS
+	ON
+)
+
 include(
 	FcpptCMakeUtils
 )
@@ -257,6 +264,13 @@ function(
 		${_DEPS}
 		INTERFACE
 		${_TRANSITIVE_DEPS}
+	)
+
+	set_target_properties(
+		"${LIBNAME}"
+		PROPERTIES
+		FOLDER
+		sanguis
 	)
 
 	target_compile_definitions(

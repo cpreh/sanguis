@@ -46,6 +46,13 @@ function(
 		)
 	endif()
 
+	set_target_properties(
+		"${FULL_NAME}"
+		PROPERTIES
+		FOLDER
+		sanguis/tools
+	)
+
 	fcppt_utils_set_target_compiler_flags(
 		${FULL_NAME}
 	)

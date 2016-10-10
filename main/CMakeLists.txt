@@ -22,6 +22,13 @@ fcppt_utils_set_target_compiler_flags(
 	sanguis
 )
 
+set_target_properties(
+	sanguis
+	PROPERTIES
+	FOLDER
+	sanguis
+)
+
 target_link_libraries(
 	sanguis
 	PRIVATE

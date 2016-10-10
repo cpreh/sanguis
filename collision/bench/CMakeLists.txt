@@ -17,6 +17,13 @@ fcppt_utils_set_target_compiler_flags(
 	sanguis_collision_bench_main
 )
 
+set_target_properties(
+	sanguis_collision_bench_main
+	PROPERTIES
+	FOLDER
+	sanguis
+)
+
 target_include_directories(
 	sanguis_collision_bench_main
 	PRIVATE

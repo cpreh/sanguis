@@ -1140,6 +1140,13 @@ target_link_libraries(
 	${fcppt_log_TARGET}
 )
 
+set_target_properties(
+	${SERVER_NAME}
+	PROPERTIES
+	FOLDER
+	sanguis
+)
+
 install(
 	TARGETS
 	${SERVER_NAME}
