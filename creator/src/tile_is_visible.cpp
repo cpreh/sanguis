@@ -4,12 +4,11 @@
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/tile_is_solid.hpp>
 #include <sanguis/creator/tile_is_visible.hpp>
+#include <sge/bresenham/thick.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/cast/to_signed_fun.hpp>
 #include <fcppt/cast/to_unsigned_fun.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
-#include <fcppt/math/bresenham.hpp>
-#include <fcppt/math/bresenham_thick.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -23,7 +22,7 @@ sanguis::creator::tile_is_visible(
 )
 {
 	return
-		fcppt::math::bresenham_thick(
+		sge::bresenham::thick(
 			fcppt::math::vector::structure_cast<
 				sanguis::creator::signed_pos,
 				fcppt::cast::to_signed_fun

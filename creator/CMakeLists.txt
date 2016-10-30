@@ -204,6 +204,7 @@ sanguis_add_library(
 		${sgecore_TARGET}
 		${sgeparse_TARGET}
 		${sgeparsejson_TARGET}
+		sgebresenham_interface
 	INCLUDES
 		"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
 )
