@@ -573,9 +573,9 @@ sanguis_add_library(
 	common
 	"${SANGUIS_COMMON_FILES}"
 	DEPS
-		${sanguis_collision_TARGET}
-		${sanguis_creator_TARGET}
-		${sanguis_model_TARGET}
+		sanguis_collision_interface
+		sanguis_creator_interface
+		sanguis_model_interface
 		${sgecharconv_TARGET}
 		sgetimer_interface
 		${alda_TARGET}

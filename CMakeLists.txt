@@ -252,53 +252,86 @@ function(
 		${ARGN}
 	)
 
-	add_library(
-		"${LIBNAME}"
-		"${VARIANT}"
-		${FILES}
+	if(
+		${VARIANT}
+		STREQUAL
+		INTERFACE
 	)
+		add_library(
+			${LIBNAME}
+			${VARIANT}
+		)
+	else()
+		add_library(
+			"${LIBNAME}"
+			"${VARIANT}"
+			${FILES}
+		)
+
+		target_link_libraries(
+			"${LIBNAME}"
+			PRIVATE
+			${_DEPS}
+		)
+
+	endif()
 
 	target_link_libraries(
 		"${LIBNAME}"
-		PRIVATE
-		${_DEPS}
 		INTERFACE
 		${_TRANSITIVE_DEPS}
 	)
 
-	set_target_properties(
-		"${LIBNAME}"
-		PROPERTIES
-		FOLDER
-		sanguis
-	)
-
-	target_compile_definitions(
-		"${LIBNAME}"
-		PRIVATE
-		${_COMPILE_DEFINITIONS}
+	set(
+		PUBLIC_INCLUDES
+		"${CMAKE_CURRENT_SOURCE_DIR}/include"
 	)
 
 	target_include_directories(
 		"${LIBNAME}"
-		PUBLIC
-		"${CMAKE_CURRENT_SOURCE_DIR}/include"
-		PRIVATE
-		${_INCLUDES}
+		INTERFACE
+		${PUBLIC_INCLUDES}
 	)
 
-	fcppt_utils_set_target_compiler_flags(
-		"${LIBNAME}"
-		ADDITIONAL_FLAGS
-		${_COMPILE_FLAGS}
+	if(
+		NOT
+		${VARIANT}
+		STREQUAL
+		INTERFACE
 	)
+		set_target_properties(
+			"${LIBNAME}"
+			PROPERTIES
+			FOLDER
+			sanguis
+		)
 
-	install(
-		TARGETS
-		"${LIBNAME}"
-		DESTINATION
-		"${INSTALL_LIBRARY_DIR}"
-	)
+		target_include_directories(
+			"${LIBNAME}"
+			PRIVATE
+			${PUBLIC_INCLUDES}
+			${_INCLUDES}
+		)
+
+		target_compile_definitions(
+			"${LIBNAME}"
+			PRIVATE
+			${_COMPILE_DEFINITIONS}
+		)
+
+		fcppt_utils_set_target_compiler_flags(
+			"${LIBNAME}"
+			ADDITIONAL_FLAGS
+			${_COMPILE_FLAGS}
+		)
+
+		install(
+			TARGETS
+			"${LIBNAME}"
+			DESTINATION
+			"${INSTALL_LIBRARY_DIR}"
+		)
+	endif()
 endfunction()
 
 function(
@@ -337,6 +370,20 @@ function(
 
 	fcppt_utils_add_source_groups(
 		"${FILES}"
+	)
+
+	sanguis_add_library_base(
+		${FULL_NAME}_interface
+		"INTERFACE"
+		"${FILES}"
+		TRANSITIVE_DEPS
+			${_TRANSITIVE_DEPS}
+	)
+
+	target_compile_definitions(
+		${FULL_NAME}_interface
+		INTERFACE
+		${_COMPILE_DEFINITIONS_SHARED_PUBLIC}
 	)
 
 	if(
