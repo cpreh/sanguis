@@ -74,13 +74,9 @@ sanguis_add_tool(
 		${fcppt_core_TARGET}
 		${fcppt_filesystem_TARGET}
 		${Boost_FILESYSTEM_LIBRARIES}
+		Qt5::Widgets
 	IS_GUI
 		TRUE
 	INCLUDE_DIRS
 		${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-
-qt5_use_modules(
-	sanguis_tools_animations
-	Widgets
 )
