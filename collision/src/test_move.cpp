@@ -117,9 +117,11 @@ sanguis::collision::test_move(
 									);
 							}
 						),
-						sanguis::collision::impl::optional_speed{
-							_cur_speed
-						}
+						fcppt::const_(
+							sanguis::collision::impl::optional_speed{
+								_cur_speed
+							}
+						)
 					);
 			}
 		)
