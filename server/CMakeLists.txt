@@ -73,6 +73,16 @@ set(
 	include/sanguis/server/angle_fwd.hpp
 	include/sanguis/server/aoe.hpp
 	include/sanguis/server/aoe_fwd.hpp
+	include/sanguis/server/args/create_parser.hpp
+	include/sanguis/server/args/elements/log_level.hpp
+	include/sanguis/server/args/elements/log_level_fwd.hpp
+	include/sanguis/server/args/elements/port.hpp
+	include/sanguis/server/args/elements/port_fwd.hpp
+	include/sanguis/server/args/labels/log_level.hpp
+	include/sanguis/server/args/labels/port.hpp
+	include/sanguis/server/args/parser_unique_ptr.hpp
+	include/sanguis/server/args/result.hpp
+	include/sanguis/server/args/result_fwd.hpp
 	include/sanguis/server/auras/aoe_damage.hpp
 	include/sanguis/server/auras/aura.hpp
 	include/sanguis/server/auras/aura_fwd.hpp
@@ -788,6 +798,7 @@ set(
 	src/server/ai/tree/priority_sequence.cpp
 	src/server/ai/tree/sequence.cpp
 	src/server/ai/update_interval.cpp
+	src/server/args/create_parser.cpp
 	src/server/auras/aoe_damage.cpp
 	src/server/auras/aura.cpp
 	src/server/auras/buff.cpp
@@ -1111,6 +1122,7 @@ sanguis_add_library(
 		${fcppt_core_TARGET}
 		${fcppt_filesystem_TARGET}
 		${fcppt_log_TARGET}
+		${fcppt_options_TARGET}
 		${Boost_FILESYSTEM_LIBRARIES}
 		${ASIO_LIBS}
 )
@@ -1138,6 +1150,7 @@ target_link_libraries(
 	${alda_TARGET}
 	${fcppt_core_TARGET}
 	${fcppt_log_TARGET}
+	${fcppt_options_TARGET}
 )
 
 set_target_properties(

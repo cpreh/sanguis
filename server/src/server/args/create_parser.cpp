@@ -1,0 +1,78 @@
+#include <sanguis/server/args/create_parser.hpp>
+#include <sanguis/server/args/parser_unique_ptr.hpp>
+#include <sanguis/server/args/result.hpp>
+#include <alda/net/port.hpp>
+#include <fcppt/strong_typedef_input.hpp>
+#include <fcppt/strong_typedef_output.hpp>
+#include <fcppt/log/level.hpp>
+#include <fcppt/log/level_input.hpp>
+#include <fcppt/log/level_output.hpp>
+#include <fcppt/optional/make.hpp>
+#include <fcppt/options/apply.hpp>
+#include <fcppt/options/help_text.hpp>
+#include <fcppt/options/long_name.hpp>
+#include <fcppt/options/make_base.hpp>
+#include <fcppt/options/option.hpp>
+#include <fcppt/options/optional_help_text.hpp>
+#include <fcppt/options/optional_short_name.hpp>
+
+
+sanguis::server::args::parser_unique_ptr
+sanguis::server::args::create_parser()
+{
+	typedef
+	fcppt::options::option<
+		sanguis::server::args::labels::port,
+		alda::net::port
+	>
+	port_parser;
+
+	typedef
+	fcppt::options::option<
+		sanguis::server::args::labels::log_level,
+		fcppt::log::level
+	>
+	log_level_parser;
+
+	return
+		fcppt::options::make_base<
+			sanguis::server::args::result
+		>(
+			fcppt::options::apply(
+				port_parser{
+					fcppt::options::optional_short_name{},
+					fcppt::options::long_name{
+						FCPPT_TEXT("port")
+					},
+					port_parser::optional_default_value{
+						fcppt::optional::make(
+							alda::net::port{
+								31337u
+							}
+						)
+					},
+					fcppt::options::optional_help_text{
+						fcppt::options::help_text{
+							FCPPT_TEXT("The port the server listens on")
+						}
+					}
+				},
+				log_level_parser{
+					fcppt::options::optional_short_name{},
+					fcppt::options::long_name{
+						FCPPT_TEXT("server-log-level")
+					},
+					log_level_parser::optional_default_value{
+						fcppt::optional::make(
+							fcppt::log::level::info
+						)
+					},
+					fcppt::options::optional_help_text{
+						fcppt::options::help_text{
+							FCPPT_TEXT("The log level used by the server")
+						}
+					}
+				}
+			)
+		);
+}
