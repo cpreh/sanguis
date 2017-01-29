@@ -15,7 +15,7 @@
 #include <sanguis/client/slowed_duration.hpp>
 #include <sanguis/client/sound_manager.hpp>
 #include <sanguis/client/weapon_description_from_message.hpp>
-#include <sanguis/client/args/draw_debug.hpp>
+#include <sanguis/client/args/labels/draw_debug.hpp>
 #include <sanguis/client/console/object.hpp>
 #include <sanguis/client/control/environment.hpp>
 #include <sanguis/client/control/input_translator.hpp>
@@ -187,7 +187,9 @@ sanguis::client::states::running::running(
 			this->context<
 				sanguis::client::machine
 			>().cursor_gfx(),
-			sanguis::client::args::draw_debug(
+			fcppt::record::get<
+				sanguis::client::args::labels::draw_debug
+			>(
 				this->context<
 					sanguis::client::machine
 				>().options()

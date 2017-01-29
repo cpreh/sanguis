@@ -3,10 +3,8 @@
 
 #include <sanguis/client/object_base_unique_ptr.hpp>
 #include <sanguis/client/symbol.hpp>
+#include <sanguis/client/args/result_fwd.hpp>
 #include <fcppt/log/context_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <boost/program_options/variables_map.hpp>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -18,7 +16,7 @@ SANGUIS_CLIENT_SYMBOL
 sanguis::client::object_base_unique_ptr
 create(
 	fcppt::log::context &,
-	boost::program_options::variables_map const &
+	sanguis::client::args::result const &
 );
 
 }

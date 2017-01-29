@@ -1,35 +1,30 @@
-#include <sanguis/app_name.hpp>
-#include <sanguis/company_name.hpp>
-#include <sanguis/log_level_streams.hpp>
-#include <sanguis/log_location.hpp>
 #include <sanguis/main.hpp>
-#include <sanguis/client/create.hpp>
-#include <sanguis/client/object_base.hpp>
-#include <sanguis/client/object_base_unique_ptr.hpp>
-#include <sanguis/client/args/log_level.hpp>
-#include <sanguis/client/args/options.hpp>
-#include <sanguis/client/args/parse.hpp>
-#include <sge/config/app_name.hpp>
-#include <sge/config/log_path.hpp>
+#include <sanguis/client/start.hpp>
+#include <sanguis/client/args/create_parser.hpp>
+#include <sanguis/client/args/result.hpp>
 #include <awl/show_error.hpp>
 #include <awl/show_error_narrow.hpp>
-#include <awl/show_message_narrow.hpp>
+#include <awl/show_message.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/exit_failure.hpp>
 #include <awl/main/exit_success.hpp>
 #include <awl/main/function_context.hpp>
-#include <awl/main/scoped_output.hpp>
+#include <fcppt/args_from_second.hpp>
 #include <fcppt/exception.hpp>
+#include <fcppt/insert_to_fcppt_string.hpp>
+#include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/io/clog.hpp>
-#include <fcppt/log/context.hpp>
-#include <fcppt/log/level.hpp>
-#include <fcppt/log/optional_level.hpp>
+#include <fcppt/either/match.hpp>
+#include <fcppt/options/base.hpp>
+#include <fcppt/options/default_help_switch.hpp>
+#include <fcppt/options/error.hpp>
+#include <fcppt/options/help_text.hpp>
+#include <fcppt/options/parse_help.hpp>
+#include <fcppt/options/result.hpp>
+#include <fcppt/variant/match.hpp>
+#include <fcppt/variant/output.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/program_options/options_description.hpp>
-#include <boost/program_options/variables_map.hpp>
 #include <exception>
-#include <sstream>
 #include <string>
 #include <fcppt/config/external_end.hpp>
 
@@ -40,66 +35,61 @@ sanguis::main(
 )
 try
 {
-	boost::program_options::options_description desc(
-		sanguis::client::args::options()
-	);
-
-	boost::program_options::variables_map const vm(
-		sanguis::client::args::parse(
-			_function_context.argc(),
-			_function_context.argv(),
-			desc
-		)
-	);
-
-	if(
-		vm.count(
-			"help"
-		)
-	)
-	{
-		std::ostringstream out;
-
-		out <<
-			desc;
-
-		awl::show_message_narrow(
-			out.str()
-		);
-
-		return
-			awl::main::exit_success();
-	}
-
-	// FIXME: Include all log streams
-	awl::main::scoped_output const output(
-		fcppt::io::clog(),
-		sge::config::log_path(
-			sanguis::company_name(),
-			sge::config::app_name(
-				sanguis::app_name()
-			)
-		)
-	);
-
-	fcppt::log::context log_context{
-		fcppt::log::optional_level{
-			sanguis::client::args::log_level(
-				vm
-			)
-		},
-		sanguis::log_level_streams()
-	};
-
-	sanguis::client::object_base_unique_ptr const client(
-		sanguis::client::create(
-			log_context,
-			vm
-		)
-	);
-
 	return
-		client->run();
+		fcppt::variant::match(
+			fcppt::options::parse_help(
+				fcppt::options::default_help_switch(),
+				*sanguis::client::args::create_parser(),
+				fcppt::args_from_second(
+					_function_context.argc(),
+					_function_context.argv()
+				)
+			),
+			[](
+				fcppt::options::result<
+					sanguis::client::args::result
+				> const &_result
+			)
+			{
+				return
+					fcppt::either::match(
+						_result,
+						[](
+							fcppt::options::error const &_error
+						)
+						{
+							awl::show_error(
+								fcppt::insert_to_fcppt_string(
+									_error
+								)
+							);
+
+							return
+								awl::main::exit_failure();
+						},
+						[](
+							sanguis::client::args::result const &_args
+						)
+						{
+							return
+								sanguis::client::start(
+									_args
+								);
+						}
+					);
+			},
+			[](
+				fcppt::options::help_text const &_help_text
+			)
+			{
+				awl::show_message(
+					_help_text.get()
+				);
+
+				return
+					awl::main::exit_success();
+			}
+		);
 }
 catch(
 	fcppt::exception const &_error

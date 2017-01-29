@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ARGS_ELEMENTS_PORT_FWD_HPP_INCLUDED
 
 #include <sanguis/server/args/labels/port.hpp>
-#include <alda/net/port.hpp>
+#include <alda/net/port_fwd.hpp>
 #include <fcppt/record/element_fwd.hpp>
 
 

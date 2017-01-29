@@ -4,6 +4,7 @@
 #include <sanguis/client/cursor_fwd.hpp>
 #include <sanguis/client/log_location.hpp>
 #include <sanguis/client/machine.hpp>
+#include <sanguis/client/args/result_fwd.hpp>
 #include <sanguis/client/config/settings/object_fwd.hpp>
 #include <sanguis/client/events/connected.hpp>
 #include <sanguis/client/events/message.hpp>
@@ -49,7 +50,6 @@
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/program_options/variables_map.hpp>
 #include <boost/system/error_code.hpp>
 #include <boost/system/system_error.hpp>
 #include <functional>
@@ -60,7 +60,7 @@
 sanguis::client::machine::machine(
 	fcppt::log::context &_log_context,
 	sanguis::client::config::settings::object &_settings,
-	boost::program_options::variables_map const &_options,
+	sanguis::client::args::result const &_options,
 	sanguis::client::server_callback const &_server_callback,
 	sanguis::client::load::context const &_resources,
 	sge::gui::style::base const &_gui_style,
@@ -307,7 +307,7 @@ sanguis::client::machine::settings()
 		settings_;
 }
 
-boost::program_options::variables_map const &
+sanguis::client::args::result const &
 sanguis::client::machine::options() const
 {
 	return

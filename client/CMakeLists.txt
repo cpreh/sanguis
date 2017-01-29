@@ -1,17 +1,36 @@
 set(
 	SANGUIS_CLIENT_FILES
+	include/sanguis/client/args/create_parser.hpp
 	include/sanguis/client/args/display_mode.hpp
-	include/sanguis/client/args/draw_debug.hpp
-	include/sanguis/client/args/history_size.hpp
-	include/sanguis/client/args/log_level.hpp
-	include/sanguis/client/args/log_level_exn.hpp
-	include/sanguis/client/args/multi_sampling.hpp
+	include/sanguis/client/args/elements/display_height.hpp
+	include/sanguis/client/args/elements/display_height_fwd.hpp
+	include/sanguis/client/args/elements/display_width.hpp
+	include/sanguis/client/args/elements/display_width_fwd.hpp
+	include/sanguis/client/args/elements/draw_debug.hpp
+	include/sanguis/client/args/elements/draw_debug_fwd.hpp
+	include/sanguis/client/args/elements/history_size.hpp
+	include/sanguis/client/args/elements/history_size_fwd.hpp
+	include/sanguis/client/args/elements/log_level.hpp
+	include/sanguis/client/args/elements/log_level_fwd.hpp
+	include/sanguis/client/args/elements/multi_samples.hpp
+	include/sanguis/client/args/elements/multi_samples_fwd.hpp
+	include/sanguis/client/args/elements/sge_log_level.hpp
+	include/sanguis/client/args/elements/sge_log_level_fwd.hpp
+	include/sanguis/client/args/labels/display_height.hpp
+	include/sanguis/client/args/labels/display_width.hpp
+	include/sanguis/client/args/labels/draw_debug.hpp
+	include/sanguis/client/args/labels/history_size.hpp
+	include/sanguis/client/args/labels/log_level.hpp
+	include/sanguis/client/args/labels/multi_samples.hpp
+	include/sanguis/client/args/labels/sge_log_level.hpp
 	include/sanguis/client/args/optional_resolution.hpp
 	include/sanguis/client/args/optional_resolution_fwd.hpp
-	include/sanguis/client/args/options.hpp
-	include/sanguis/client/args/parse.hpp
+	include/sanguis/client/args/optional_screen_unit.hpp
+	include/sanguis/client/args/optional_screen_unit_fwd.hpp
+	include/sanguis/client/args/parser_unique_ptr.hpp
 	include/sanguis/client/args/resolution.hpp
-	include/sanguis/client/args/sge_log_level.hpp
+	include/sanguis/client/args/result.hpp
+	include/sanguis/client/args/result_fwd.hpp
 	include/sanguis/client/config/homedir.hpp
 	include/sanguis/client/config/log_location.hpp
 	include/sanguis/client/config/settings/file.hpp
@@ -609,6 +628,7 @@ set(
 	include/sanguis/client/slowed_duration_fwd.hpp
 	include/sanguis/client/sound_manager.hpp
 	include/sanguis/client/sound_manager_fwd.hpp
+	include/sanguis/client/start.hpp
 	include/sanguis/client/states/console.hpp
 	include/sanguis/client/states/has_player.hpp
 	include/sanguis/client/states/ingame.hpp
@@ -630,16 +650,9 @@ set(
 	include/sanguis/client/weapon_pair_fwd.hpp
 	include/sanguis/client/world_parameters.hpp
 	include/sanguis/client/world_parameters_fwd.hpp
+	src/client/args/create_parser.cpp
 	src/client/args/display_mode.cpp
-	src/client/args/draw_debug.cpp
-	src/client/args/history_size.cpp
-	src/client/args/log_level.cpp
-	src/client/args/log_level_exn.cpp
-	src/client/args/multi_sampling.cpp
-	src/client/args/options.cpp
-	src/client/args/parse.cpp
 	src/client/args/resolution.cpp
-	src/client/args/sge_log_level.cpp
 	src/client/config/homedir.cpp
 	src/client/config/log_location.cpp
 	src/client/config/settings/file.cpp
@@ -874,6 +887,7 @@ set(
 	src/client/scoped_pause.cpp
 	src/client/server.cpp
 	src/client/sound_manager.cpp
+	src/client/start.cpp
 	src/client/states/console.cpp
 	src/client/states/has_player.cpp
 	src/client/states/ingame.cpp
@@ -884,8 +898,8 @@ set(
 	src/client/states/running.cpp
 	src/client/states/waiting_for_player.cpp
 	src/client/weapon_attribute_total.cpp
+	src/client/weapon_pair.cpp
 	src/client/world_parameters.cpp
-	src/weapon_pair.cpp
 )
 
 sanguis_generate_symbol_header(
@@ -931,8 +945,8 @@ sanguis_add_library(
 		${fcppt_core_TARGET}
 		${fcppt_filesystem_TARGET}
 		${fcppt_log_TARGET}
+		${fcppt_options_TARGET}
 		${FcpptThreads_LIBRARIES}
-		${Boost_PROGRAM_OPTIONS_LIBRARIES}
 	COMPILE_FLAGS
 		${FcpptThreads_DEFINITIONS}
 )

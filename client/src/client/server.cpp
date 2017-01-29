@@ -37,6 +37,7 @@ sanguis::client::server::server(
 		true
 	),
 	impl_(
+		// TODO: Add server log options here
 		_log_context,
 		_port
 	),

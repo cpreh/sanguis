@@ -3,8 +3,9 @@
 #include <sanguis/client/systems.hpp>
 #include <sanguis/client/systems_unique_ptr.hpp>
 #include <sanguis/client/args/display_mode.hpp>
-#include <sanguis/client/args/multi_sampling.hpp>
-#include <sanguis/client/args/sge_log_level.hpp>
+#include <sanguis/client/args/result.hpp>
+#include <sanguis/client/args/labels/multi_samples.hpp>
+#include <sanguis/client/args/labels/sge_log_level.hpp>
 #include <sge/log/location.hpp>
 #include <sge/log/option.hpp>
 #include <sge/log/option_container.hpp>
@@ -37,15 +38,13 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/context_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <boost/program_options/variables_map.hpp>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/record/get.hpp>
 
 
 sanguis::client::systems_unique_ptr
 sanguis::client::create_systems(
 	fcppt::log::context &_log_context,
-	boost::program_options::variables_map const &_vm
+	sanguis::client::args::result const &_args
 )
 {
 	return
@@ -60,8 +59,10 @@ sanguis::client::create_systems(
 						sge::log::option_container{
 							sge::log::option{
 								sge::log::location(),
-								sanguis::client::args::sge_log_level(
-									_vm
+								fcppt::record::get<
+									sanguis::client::args::labels::sge_log_level
+								>(
+									_args
 								)
 							}
 						}
@@ -88,15 +89,17 @@ sanguis::client::create_systems(
 					sge::renderer::pixel_format::object(
 						sge::renderer::pixel_format::color::depth32,
 						sge::renderer::pixel_format::depth_stencil::d24s8,
-						sanguis::client::args::multi_sampling(
-							_vm
+						fcppt::record::get<
+							sanguis::client::args::labels::multi_samples
+						>(
+							_args
 						),
 						sge::renderer::pixel_format::srgb::no
 					),
 					sge::renderer::display_mode::parameters(
 						sge::renderer::display_mode::vsync::on,
 						sanguis::client::args::display_mode(
-							_vm
+							_args
 						)
 					),
 					sge::viewport::optional_resize_callback{

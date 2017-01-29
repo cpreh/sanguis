@@ -8,6 +8,7 @@
 #include <sanguis/client/object_base.hpp>
 #include <sanguis/client/server_fwd.hpp>
 #include <sanguis/client/systems_fwd.hpp>
+#include <sanguis/client/args/result_fwd.hpp>
 #include <sanguis/client/config/settings/object.hpp>
 #include <sanguis/client/config/settings/saver.hpp>
 #include <sanguis/client/console/gfx.hpp>
@@ -26,9 +27,6 @@
 #include <fcppt/log/context_fwd.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/optional/object_decl.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <boost/program_options/variables_map.hpp>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -46,7 +44,7 @@ class object
 public:
 	object(
 		fcppt::log::context &,
-		boost::program_options::variables_map const &
+		sanguis::client::args::result const &
 	);
 
 	~object()

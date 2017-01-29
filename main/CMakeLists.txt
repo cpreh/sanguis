@@ -36,9 +36,13 @@ target_link_libraries(
 	${sanguis_core_TARGET}
 	${fcppt_core_TARGET}
 	${fcppt_log_TARGET}
+	${fcppt_options_TARGET}
 	${awl_TARGET}
 	${sgeconfig_TARGET}
-	${Boost_PROGRAM_OPTIONS_LIBRARIES}
+	sanguis_server_interface
+	alda_interface
+	sgeconsolegfx_interface
+	sgerenderer_interface
 )
 
 target_include_directories(

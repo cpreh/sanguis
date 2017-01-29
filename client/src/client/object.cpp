@@ -10,7 +10,8 @@
 #include <sanguis/client/server.hpp>
 #include <sanguis/client/server_callback.hpp>
 #include <sanguis/client/systems.hpp>
-#include <sanguis/client/args/history_size.hpp>
+#include <sanguis/client/args/result.hpp>
+#include <sanguis/client/args/labels/history_size.hpp>
 #include <sanguis/client/config/settings/file.hpp>
 #include <sanguis/client/events/connected.hpp>
 #include <sanguis/client/events/message.hpp>
@@ -53,8 +54,8 @@
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object_impl.hpp>
+#include <fcppt/record/get.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/program_options/variables_map.hpp>
 #include <chrono>
 #include <exception>
 #include <functional>
@@ -64,7 +65,7 @@
 
 sanguis::client::object::object(
 	fcppt::log::context &_log_context,
-	boost::program_options::variables_map const &_variables_map
+	sanguis::client::args::result const &_args
 )
 :
 	sanguis::client::object_base(),
@@ -91,7 +92,7 @@ sanguis::client::object::object(
 	sys_(
 		sanguis::client::create_systems(
 			_log_context,
-			_variables_map
+			_args
 		)
 	),
 	renderer_(
@@ -148,8 +149,10 @@ sanguis::client::object::object(
 		*font_object_,
 		sys_->focus_collector(),
 		sys_->viewport_manager(),
-		sanguis::client::args::history_size(
-			_variables_map
+		fcppt::record::get<
+			sanguis::client::args::labels::history_size
+		>(
+			_args
 		)
 	),
 	cursor_{
@@ -160,7 +163,7 @@ sanguis::client::object::object(
 	machine_(
 		_log_context,
 		settings_,
-		_variables_map,
+		_args,
 		sanguis::client::server_callback{
 			std::bind(
 				&sanguis::client::object::create_server,

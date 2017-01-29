@@ -519,6 +519,7 @@ sanguis::client::gui::menu::object::handle_quickstart()
 				fcppt::extract_from_string<
 					alda::net::port::value_type
 				>(
+					// TODO: Use server port here if it was specified
 					sge::parse::ini::get_or_create(
 						settings_.sections(),
 						config_section,
