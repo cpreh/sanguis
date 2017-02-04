@@ -23,8 +23,8 @@
 #include <fcppt/cast/size.hpp>
 #include <fcppt/log/context_fwd.hpp>
 #include <fcppt/math/ceil_div.hpp>
-#include <fcppt/math/map.hpp>
 #include <fcppt/math/dim/comparison.hpp>
+#include <fcppt/math/dim/map.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/fill.hpp>
 
@@ -54,9 +54,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 
 	return
 		sanguis::client::draw2d::scene::world::batch_grid(
-			fcppt::math::map<
-				sanguis::creator::grid::dim
-			>(
+			fcppt::math::dim::map(
 				_grid.size(),
 				[](
 					sanguis::creator::grid::dim::value_type const _value
