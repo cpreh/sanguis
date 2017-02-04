@@ -35,9 +35,7 @@ sanguis::server::entities::center_ghost::on_transfer(
 			sanguis::server::entities::with_ghosts::on_transfer(
 				_parameters
 			),
-			[
-				&_parameters
-			](
+			[](
 				sanguis::server::entities::transfer_result &&_result1,
 				sanguis::server::entities::transfer_result &&_result2
 			)

@@ -98,8 +98,7 @@ sanguis::server::ai::go_to_target(
 				},
 				[
 					&_context,
-					_speed_factor,
-					target_grid_pos
+					_speed_factor
 				](
 					sanguis::server::ai::pathing::target const _grid_target
 				)

@@ -196,8 +196,6 @@ sanguis::collision::world::body_body(
 						),
 						[
 							make_impulse,
-							&_body1,
-							&_body2,
 							_mass1,
 							_mass2
 						](

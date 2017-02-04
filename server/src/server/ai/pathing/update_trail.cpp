@@ -3,6 +3,7 @@
 #include <sanguis/server/ai/pathing/optional_target.hpp>
 #include <sanguis/server/ai/pathing/target.hpp>
 #include <sanguis/server/ai/pathing/tile_reached.hpp>
+#include <sanguis/server/ai/pathing/trail.hpp>
 #include <sanguis/server/ai/pathing/update_trail.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <fcppt/container/maybe_back.hpp>
@@ -14,7 +15,6 @@
 sanguis::server::ai::pathing::optional_target
 sanguis::server::ai::pathing::update_trail(
 	sanguis::server::ai::pathing::trail &_trail,
-	sanguis::creator::grid const &_grid,
 	sanguis::server::entities::with_ai const &_me
 )
 {
@@ -28,7 +28,6 @@ sanguis::server::ai::pathing::update_trail(
 				),
 				[
 					&_trail,
-					&_grid,
 					&_me
 				](
 					sanguis::creator::pos const _next_position

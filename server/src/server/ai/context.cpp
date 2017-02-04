@@ -114,7 +114,6 @@ sanguis::server::ai::context::continue_path()
 				return
 					sanguis::server::ai::pathing::update_trail(
 						_trail,
-						this->grid(),
 						this->me()
 					);
 			}

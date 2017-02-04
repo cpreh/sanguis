@@ -91,8 +91,7 @@ sanguis::server::entities::with_ghosts::on_transfer(
 				>(
 					ghosts_,
 					[
-						&_parameters,
-						this
+						&_parameters
 					](
 						sanguis::server::collision::ghost &_ghost
 					)
@@ -124,7 +123,6 @@ sanguis::server::entities::with_ghosts::remove_from_world()
 			>(
 				ghosts_,
 				[
-					this,
 					&cur_environment
 				](
 					sanguis::server::collision::ghost &_ghost
