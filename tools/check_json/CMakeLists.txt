@@ -24,5 +24,5 @@ install(
 	TARGETS
 	sanguis_tools_check_json
 	DESTINATION
-	${INSTALL_BINARY_DIR}
+	${CMAKE_INSTALL_BINDIR}
 )

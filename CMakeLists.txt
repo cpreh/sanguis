@@ -7,15 +7,15 @@ project(
 	sanguis
 )
 
+include(
+	GNUInstallDirs
+)
+
 set_property(
 	GLOBAL
 	PROPERTY
 	USE_FOLDERS
 	ON
-)
-
-include(
-	FcpptCMakeUtils
 )
 
 option(
@@ -50,6 +50,10 @@ link_directories(
 
 find_package(
 	fcppt REQUIRED
+)
+
+include(
+	FcpptCMakeUtils
 )
 
 find_package(
@@ -135,20 +139,16 @@ include(
 	SGECustomPath
 )
 
-fcppt_utils_install_data_dir(
-	INSTALL_DATA_DIR
-)
-
 set(
-	INSTALL_MEDIA_DIR
-	${INSTALL_DATA_DIR}/media
+	SANGUIS_INSTALL_MEDIA_DIR
+	${FCPPT_UTILS_INSTALL_DATA_DIR}/media
 )
 
 sge_config_add_custom_path(
 	sanguis
 	media
 	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/media
-	${INSTALL_MEDIA_DIR}
+	${CMAKE_INSTALL_PREFIX}/${SANGUIS_INSTALL_MEDIA_DIR}
 	MEDIA_PATH_INCLUDES
 )
 
@@ -328,7 +328,7 @@ function(
 			TARGETS
 			"${LIBNAME}"
 			DESTINATION
-			"${INSTALL_LIBRARY_DIR}"
+			"${CMAKE_INSTALL_LIBDIR}"
 		)
 	endif()
 endfunction()
@@ -525,5 +525,5 @@ install(
 	DIRECTORY
 	media/
 	DESTINATION
-	${INSTALL_MEDIA_DIR}
+	${SANGUIS_INSTALL_MEDIA_DIR}
 )
