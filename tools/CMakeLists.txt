@@ -66,6 +66,7 @@ function(
 
 	target_link_libraries(
 		${FULL_NAME}
+		PRIVATE
 		${_LINK_LIBS}
 	)
 
