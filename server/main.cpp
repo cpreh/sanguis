@@ -6,8 +6,10 @@
 #include <sanguis/server/args/result.hpp>
 #include <sanguis/server/args/labels/log_level.hpp>
 #include <sanguis/server/args/labels/port.hpp>
+#include <fcppt/args_char.hpp>
 #include <fcppt/args_from_second.hpp>
 #include <fcppt/exception.hpp>
+#include <fcppt/main.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/either/match.hpp>
@@ -21,6 +23,9 @@
 #include <fcppt/options/help_text.hpp>
 #include <fcppt/options/parse_help.hpp>
 #include <fcppt/options/result.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/record/get.hpp>
 #include <fcppt/variant/match.hpp>
 #include <fcppt/variant/output.hpp>
@@ -31,10 +36,13 @@
 #include <fcppt/config/external_end.hpp>
 
 
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_GCC_WARNING(-Wmissing-declarations)
+
 int
-main(
+FCPPT_MAIN(
 	int argc,
-	char **argv
+	fcppt::args_char **argv
 )
 try
 {
@@ -148,3 +156,5 @@ catch(
 	return
 		EXIT_FAILURE;
 }
+
+FCPPT_PP_POP_WARNING

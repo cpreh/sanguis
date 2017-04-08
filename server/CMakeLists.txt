@@ -1151,6 +1151,13 @@ target_link_libraries(
 	${fcppt_core_TARGET}
 	${fcppt_log_TARGET}
 	${fcppt_options_TARGET}
+	${FCPPT_UTILS_MAIN_LINK_LIBS}
+)
+
+target_compile_options(
+	${SERVER_NAME}
+	PRIVATE
+	${FCPPT_UTILS_MAIN_COMPILE_OPTIONS}
 )
 
 set_target_properties(
