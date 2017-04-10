@@ -15,11 +15,14 @@
 #include <sanguis/tiles/impl/neighbors.hpp>
 #include <sanguis/tiles/impl/neighbors_to_string.hpp>
 #include <sanguis/tiles/impl/optional_content_path.hpp>
-#include <fcppt/optional/maybe.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/object_fwd.hpp>
+#include <fcppt/optional/maybe.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 
 
 namespace sanguis
@@ -89,6 +92,8 @@ connecting_images(
 				> const _pair
 			)
 			{
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_GCC_WARNING(-Wattributes)
 				return
 					sanguis::tiles::impl::filter_connecting(
 						_pair
@@ -117,6 +122,7 @@ connecting_images(
 							}
 						)
 					;
+FCPPT_PP_POP_WARNING
 			}
 		);
 }

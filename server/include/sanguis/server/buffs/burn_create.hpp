@@ -16,6 +16,9 @@
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/cast/dynamic.hpp>
 #include <fcppt/optional/map.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <type_traits>
 #include <fcppt/config/external_end.hpp>
@@ -56,6 +59,8 @@ burn_create(
 				sanguis::server::entities::base &_entity
 			)
 			{
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_GCC_WARNING(-Wattributes)
 				return
 					fcppt::optional::map(
 						fcppt::cast::dynamic<
@@ -91,6 +96,7 @@ burn_create(
 								);
 						}
 					);
+FCPPT_PP_POP_WARNING
 			}
 		};
 }

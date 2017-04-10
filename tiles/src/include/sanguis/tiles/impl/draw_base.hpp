@@ -14,15 +14,18 @@
 #include <sanguis/tiles/impl/shift.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
+#include <fcppt/cast/size.hpp>
+#include <fcppt/cast/size_fun.hpp>
+#include <fcppt/cast/to_signed.hpp>
 #include <fcppt/container/grid/make_pos_ref_crange_start_end.hpp>
 #include <fcppt/container/grid/pos_reference_impl.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/fill.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/vector/to_signed.hpp>
-#include <fcppt/cast/size.hpp>
-#include <fcppt/cast/size_fun.hpp>
-#include <fcppt/cast/to_signed.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 
 
 namespace sanguis
@@ -81,6 +84,8 @@ draw_base(
 				> const _element
 			)
 			{
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_GCC_WARNING(-Wattributes)
 				return
 					fcppt::optional::map(
 						_get_content(
@@ -119,6 +124,7 @@ draw_base(
 								);
 						}
 					);
+FCPPT_PP_POP_WARNING
 			}
 		);
 }

@@ -9,6 +9,9 @@
 #include <fcppt/algorithm/repeat.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/optional/maybe.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/random/wrapper/make_uniform_container.hpp>
 #include <fcppt/random/wrapper/uniform_container.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -84,6 +87,8 @@ draw(
 					)
 				);
 
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_GCC_WARNING(-Wattributes)
 				fcppt::algorithm::repeat(
 					result.capacity(),
 					[
@@ -102,6 +107,7 @@ draw(
 						);
 					}
 				);
+FCPPT_PP_POP_WARNING
 
 				std::sort(
 					result.begin(),
