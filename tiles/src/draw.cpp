@@ -10,6 +10,7 @@
 #include <sanguis/tiles/impl/draw_connecting.hpp>
 #include <sanguis/tiles/impl/draw_non_connecting.hpp>
 #include <fcppt/algorithm/join.hpp>
+#include <fcppt/assert/pre.hpp>
 #include <fcppt/container/grid/clamped_sup.hpp>
 #include <fcppt/math/dim/comparison.hpp>
 #include <fcppt/math/dim/fill.hpp>
