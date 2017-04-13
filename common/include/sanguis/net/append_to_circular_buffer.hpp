@@ -2,7 +2,7 @@
 #define SANGUIS_NET_APPEND_TO_CIRCULAR_BUFFER_HPP_INCLUDED
 
 #include <sanguis/common/symbol.hpp>
-#include <sanguis/net/data_buffer_fwd.hpp>
+#include <sanguis/net/data_buffer.hpp>
 #include <alda/net/buffer/circular_send/streambuf_fwd.hpp>
 #include <fcppt/preprocessor/warn_unused_result.hpp>
 

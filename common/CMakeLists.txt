@@ -397,7 +397,6 @@ set(
 	include/sanguis/messages/types/vector2_fwd.hpp
 	include/sanguis/net/append_to_circular_buffer.hpp
 	include/sanguis/net/data_buffer.hpp
-	include/sanguis/net/data_buffer_fwd.hpp
 	include/sanguis/net/data_streambuf.hpp
 	include/sanguis/net/data_streambuf_fwd.hpp
 	include/sanguis/net/deserialize.hpp

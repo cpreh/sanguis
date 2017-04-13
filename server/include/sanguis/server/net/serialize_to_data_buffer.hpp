@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_NET_SERIALIZE_TO_DATA_BUFFER_HPP_INCLUDED
 
 #include <sanguis/messages/server/base_fwd.hpp>
-#include <sanguis/net/data_buffer_fwd.hpp>
+#include <sanguis/net/data_buffer.hpp>
 
 
 namespace sanguis

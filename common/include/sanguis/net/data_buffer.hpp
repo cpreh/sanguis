@@ -1,8 +1,24 @@
 #ifndef SANGUIS_NET_DATA_BUFFER_HPP_INCLUDED
 #define SANGUIS_NET_DATA_BUFFER_HPP_INCLUDED
 
-#include <sanguis/net/data_buffer_fwd.hpp>
-#include <fcppt/container/raw_vector_impl.hpp>
+#include <alda/net/value_type.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <vector>
+#include <fcppt/config/external_end.hpp>
 
+
+namespace sanguis
+{
+namespace net
+{
+
+typedef
+std::vector<
+	alda::net::value_type
+>
+data_buffer;
+
+}
+}
 
 #endif
