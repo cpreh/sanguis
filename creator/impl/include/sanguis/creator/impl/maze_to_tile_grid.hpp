@@ -8,8 +8,11 @@
 #include <sanguis/creator/impl/reachable.hpp>
 #include <sanguis/creator/impl/reachable_grid.hpp>
 #include <sanguis/creator/impl/reachable_grid.hpp>
+#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/make_pos_ref_crange.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
+#include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/vector/dim.hpp>
 
 
@@ -27,26 +30,34 @@ sanguis::creator::tile_grid<
 	Tile
 >
 maze_to_tile_grid(
-	sanguis::creator::impl::reachable_grid _maze,
+	sanguis::creator::impl::reachable_grid const &_maze,
 	unsigned const _wall_thickness,
 	unsigned const _spacing,
 	Tile const _empty,
 	Tile const _wall
 )
 {
-	using grid_type = sanguis::creator::tile_grid<
+	using
+	grid_type
+	=
+	sanguis::creator::tile_grid<
 		Tile
 	>;
 
-	using dim_type = sanguis::creator::impl::reachable_grid::dim;
+	using
+	dim_type
+	=
+	sanguis::creator::impl::reachable_grid::dim;
 
 	dim_type const real_size(
 		(
 			_maze.size()
 			-
-			dim_type(
-				1u,
-				1u)
+			fcppt::math::dim::fill<
+				dim_type
+			>(
+				1u
+			)
 		)
 		/
 		2u
@@ -60,55 +71,67 @@ maze_to_tile_grid(
 		(
 			real_size
 			+
-			dim_type(
-				1u,
-				1u)
+			fcppt::math::dim::fill<
+				dim_type
+			>(
+				1u
+			)
 		)
-		* _wall_thickness
+		*
+		_wall_thickness
 		+
 		// leave a gap around the edge
-		dim_type(
-			2u,
+		fcppt::math::dim::fill<
+			dim_type
+		>(
 			2u
 		)
 	);
 
-	auto const coordinate_transform =
+	auto const coordinate_transform(
 		[
 			_wall_thickness,
 			_spacing
-		](dim_type::value_type a)
+		](
+			dim_type::value_type const _a
+		)
 		{
 			return
-				(a / 2) * _spacing
+				(_a / 2) * _spacing
 				+
-				((a + 1) / 2) * _wall_thickness;
-		};
+				((_a + 1) / 2) * _wall_thickness;
+		}
+	);
 
-	auto const wall_or_space =
+	auto const wall_or_space(
 		[
 			_wall_thickness,
 			_spacing
-		](dim_type::value_type a)
+		](
+			dim_type::value_type const _a
+		)
 		{
 			return
-			a % 2 == 0
-			?
-			_wall_thickness
-			:
-			_spacing;
-		};
+				_a % 2 == 0
+				?
+					_wall_thickness
+				:
+					_spacing
+				;
+		}
+	);
 
 	grid_type result{
-		dim_type(
-			result_size),
+		result_size,
 		sanguis::creator::tile::nothing
 	};
 
 	for(
-		auto cell :
+		auto cell
+		:
 		fcppt::container::grid::make_pos_ref_crange(
-			_maze)
+			_maze
+		)
 	)
 	{
 		typename grid_type::pos const start(
@@ -130,23 +153,23 @@ maze_to_tile_grid(
 				x < cell_size.w();
 				++x
 			)
-				result
-				[
-					start
-					+
-					dim_type(
-						x,
-						y
+				FCPPT_ASSERT_OPTIONAL_ERROR(
+					fcppt::container::grid::at_optional(
+						result,
+						start
+						+
+						dim_type(
+							x,
+							y
+						)
 					)
-				] =
-				(
+				).get() =
 					cell.value() ==
 					sanguis::creator::impl::reachable(true)
 					?
 					_empty
 					:
-					_wall
-				);
+					_wall;
 	}
 
 	return result;

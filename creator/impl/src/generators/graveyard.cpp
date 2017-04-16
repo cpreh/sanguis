@@ -99,6 +99,7 @@ sanguis::creator::impl::generators::graveyard(
 		sanguis::creator::background_tile::grass
 	};
 
+	// TODO: Draw this from a container
 	auto random_dirt_grass(
 		fcppt::random::make_variate(
 			_parameters.randgen(),

@@ -9,11 +9,9 @@ namespace
 {
 
 sanguis::creator::generator_vector const global_generators{
-	/*
-	sanguis::creator::impl::graveyard_name()
-	sanguis::creator::impl::maze_name()
-	*/
-	sanguis::creator::impl::rooms_name()
+	sanguis::creator::impl::graveyard_name()/*,
+	sanguis::creator::impl::maze_name(),
+	sanguis::creator::impl::rooms_name()*/
 };
 
 }
