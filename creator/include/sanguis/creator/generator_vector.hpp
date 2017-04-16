@@ -1,5 +1,5 @@
-#ifndef SANGUIS_CREATOR_IMPL_NORMAL_GENERATOR_VECTOR_TYPE_HPP_INCLUDED
-#define SANGUIS_CREATOR_IMPL_NORMAL_GENERATOR_VECTOR_TYPE_HPP_INCLUDED
+#ifndef SANGUIS_CREATOR_GENERATOR_VECTOR_HPP_INCLUDED
+#define SANGUIS_CREATOR_GENERATOR_VECTOR_HPP_INCLUDED
 
 #include <sanguis/creator/name.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -11,16 +11,13 @@ namespace sanguis
 {
 namespace creator
 {
-namespace impl
-{
 
 typedef
 std::vector<
 	sanguis::creator::name
 >
-normal_generator_vector_type;
+generator_vector;
 
-}
 }
 }
 

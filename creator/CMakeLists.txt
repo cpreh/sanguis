@@ -21,8 +21,6 @@ set(
 	impl/include/sanguis/creator/impl/maze_name.hpp
 	impl/include/sanguis/creator/impl/maze_result.hpp
 	impl/include/sanguis/creator/impl/maze_to_tile_grid.hpp
-	impl/include/sanguis/creator/impl/normal_generator_vector.hpp
-	impl/include/sanguis/creator/impl/normal_generator_vector_type.hpp
 	impl/include/sanguis/creator/impl/optional_pos.hpp
 	impl/include/sanguis/creator/impl/optional_pos_fwd.hpp
 	impl/include/sanguis/creator/impl/parameters.hpp
@@ -74,7 +72,6 @@ set(
 	impl/src/graveyard_name.cpp
 	impl/src/log_name.cpp
 	impl/src/maze_name.cpp
-	impl/src/normal_generator_vector.cpp
 	impl/src/parameters.cpp
 	impl/src/perimeter_to_coords.cpp
 	impl/src/place_boss.cpp
@@ -110,9 +107,8 @@ set(
 	include/sanguis/creator/enemy_type_fwd.hpp
 	include/sanguis/creator/exception.hpp
 	include/sanguis/creator/generate.hpp
-	include/sanguis/creator/generator_count.hpp
-	include/sanguis/creator/generator_count_type.hpp
-	include/sanguis/creator/generator_index.hpp
+	include/sanguis/creator/generator_vector.hpp
+	include/sanguis/creator/generators.hpp
 	include/sanguis/creator/grid.hpp
 	include/sanguis/creator/grid_crange.hpp
 	include/sanguis/creator/grid_crange_fwd.hpp
@@ -181,8 +177,7 @@ set(
 	src/destructible.cpp
 	src/exception.cpp
 	src/generate.cpp
-	src/generator_count.cpp
-	src/generator_index.cpp
+	src/generators.cpp
 	src/log_location.cpp
 	src/spawn.cpp
 	src/start_name.cpp
