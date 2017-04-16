@@ -1,5 +1,92 @@
 set(
 	SANGUIS_CREATOR_FILES
+	impl/include/sanguis/creator/impl/blit.hpp
+	impl/include/sanguis/creator/impl/closest_empty.hpp
+	impl/include/sanguis/creator/impl/enemy_type_container.hpp
+	impl/include/sanguis/creator/impl/filled_rect.hpp
+	impl/include/sanguis/creator/impl/find_closest.hpp
+	impl/include/sanguis/creator/impl/find_opposing_cell.hpp
+	impl/include/sanguis/creator/impl/find_reachable.hpp
+	impl/include/sanguis/creator/impl/generate_maze.hpp
+	impl/include/sanguis/creator/impl/generator_function.hpp
+	impl/include/sanguis/creator/impl/generator_map.hpp
+	impl/include/sanguis/creator/impl/generator_map_type.hpp
+	impl/include/sanguis/creator/impl/generators/graveyard.hpp
+	impl/include/sanguis/creator/impl/generators/maze.hpp
+	impl/include/sanguis/creator/impl/generators/rooms.hpp
+	impl/include/sanguis/creator/impl/generators/start.hpp
+	impl/include/sanguis/creator/impl/graveyard_name.hpp
+	impl/include/sanguis/creator/impl/interior_range.hpp
+	impl/include/sanguis/creator/impl/log_name.hpp
+	impl/include/sanguis/creator/impl/maze_name.hpp
+	impl/include/sanguis/creator/impl/maze_result.hpp
+	impl/include/sanguis/creator/impl/maze_to_tile_grid.hpp
+	impl/include/sanguis/creator/impl/normal_generator_vector.hpp
+	impl/include/sanguis/creator/impl/normal_generator_vector_type.hpp
+	impl/include/sanguis/creator/impl/optional_pos.hpp
+	impl/include/sanguis/creator/impl/optional_pos_fwd.hpp
+	impl/include/sanguis/creator/impl/parameters.hpp
+	impl/include/sanguis/creator/impl/parameters_fwd.hpp
+	impl/include/sanguis/creator/impl/perimeter_to_coords.hpp
+	impl/include/sanguis/creator/impl/place_boss.hpp
+	impl/include/sanguis/creator/impl/place_destructibles.hpp
+	impl/include/sanguis/creator/impl/place_openings.hpp
+	impl/include/sanguis/creator/impl/place_spawners.hpp
+	impl/include/sanguis/creator/impl/random/generator.hpp
+	impl/include/sanguis/creator/impl/random/generator_fwd.hpp
+	impl/include/sanguis/creator/impl/random/uniform_int.hpp
+	impl/include/sanguis/creator/impl/random/uniform_int_decl.hpp
+	impl/include/sanguis/creator/impl/random/uniform_int_distribution_decl.hpp
+	impl/include/sanguis/creator/impl/random/uniform_int_distribution_fwd.hpp
+	impl/include/sanguis/creator/impl/random/uniform_int_distribution_impl.hpp
+	impl/include/sanguis/creator/impl/random/uniform_int_fwd.hpp
+	impl/include/sanguis/creator/impl/random/uniform_int_impl.hpp
+	impl/include/sanguis/creator/impl/random/uniform_int_wrapper_decl.hpp
+	impl/include/sanguis/creator/impl/random/uniform_int_wrapper_fwd.hpp
+	impl/include/sanguis/creator/impl/random/uniform_int_wrapper_impl.hpp
+	impl/include/sanguis/creator/impl/random/uniform_pos.hpp
+	impl/include/sanguis/creator/impl/random/uniform_pos_fwd.hpp
+	impl/include/sanguis/creator/impl/random/uniform_pos_parameters.hpp
+	impl/include/sanguis/creator/impl/random/uniform_size.hpp
+	impl/include/sanguis/creator/impl/random/uniform_size_fwd.hpp
+	impl/include/sanguis/creator/impl/random/uniform_size_variate.hpp
+	impl/include/sanguis/creator/impl/random/uniform_size_variate_fwd.hpp
+	impl/include/sanguis/creator/impl/random/value.hpp
+	impl/include/sanguis/creator/impl/reachable.hpp
+	impl/include/sanguis/creator/impl/reachable_grid.hpp
+	impl/include/sanguis/creator/impl/rect.hpp
+	impl/include/sanguis/creator/impl/region_grid.hpp
+	impl/include/sanguis/creator/impl/region_id.hpp
+	impl/include/sanguis/creator/impl/result.hpp
+	impl/include/sanguis/creator/impl/result_fwd.hpp
+	impl/include/sanguis/creator/impl/rooms_name.hpp
+	impl/include/sanguis/creator/impl/set_opening_tiles.hpp
+	impl/src/blit.cpp
+	impl/src/closest_empty.cpp
+	impl/src/find_opposing_cell.cpp
+	impl/src/find_reachable.cpp
+	impl/src/generate_maze.cpp
+	impl/src/generator_map.cpp
+	impl/src/generators/graveyard.cpp
+	impl/src/generators/maze.cpp
+	impl/src/generators/rooms.cpp
+	impl/src/generators/start.cpp
+	impl/src/graveyard_name.cpp
+	impl/src/log_name.cpp
+	impl/src/maze_name.cpp
+	impl/src/normal_generator_vector.cpp
+	impl/src/parameters.cpp
+	impl/src/perimeter_to_coords.cpp
+	impl/src/place_boss.cpp
+	impl/src/place_destructibles.cpp
+	impl/src/place_openings.cpp
+	impl/src/place_spawners.cpp
+	impl/src/random/generator.cpp
+	impl/src/random/uniform_pos.cpp
+	impl/src/random/uniform_pos_parameters.cpp
+	impl/src/result.cpp
+	impl/src/rooms_name.cpp
+	impl/src/set_opening_tiles.cpp
 	include/sanguis/creator/background_grid.hpp
 	include/sanguis/creator/background_grid_fwd.hpp
 	include/sanguis/creator/background_tile.hpp
@@ -96,93 +183,6 @@ set(
 	src/generate.cpp
 	src/generator_count.cpp
 	src/generator_index.cpp
-	src/impl/blit.cpp
-	src/impl/closest_empty.cpp
-	src/impl/find_opposing_cell.cpp
-	src/impl/find_reachable.cpp
-	src/impl/generate_maze.cpp
-	src/impl/generator_map.cpp
-	src/impl/generators/graveyard.cpp
-	src/impl/generators/maze.cpp
-	src/impl/generators/rooms.cpp
-	src/impl/generators/start.cpp
-	src/impl/graveyard_name.cpp
-	src/impl/log_name.cpp
-	src/impl/maze_name.cpp
-	src/impl/normal_generator_vector.cpp
-	src/impl/parameters.cpp
-	src/impl/perimeter_to_coords.cpp
-	src/impl/place_boss.cpp
-	src/impl/place_destructibles.cpp
-	src/impl/place_openings.cpp
-	src/impl/place_spawners.cpp
-	src/impl/random/generator.cpp
-	src/impl/random/uniform_pos.cpp
-	src/impl/random/uniform_pos_parameters.cpp
-	src/impl/result.cpp
-	src/impl/rooms_name.cpp
-	src/impl/set_opening_tiles.cpp
-	src/include/sanguis/creator/impl/blit.hpp
-	src/include/sanguis/creator/impl/closest_empty.hpp
-	src/include/sanguis/creator/impl/enemy_type_container.hpp
-	src/include/sanguis/creator/impl/filled_rect.hpp
-	src/include/sanguis/creator/impl/find_closest.hpp
-	src/include/sanguis/creator/impl/find_opposing_cell.hpp
-	src/include/sanguis/creator/impl/find_reachable.hpp
-	src/include/sanguis/creator/impl/generate_maze.hpp
-	src/include/sanguis/creator/impl/generator_function.hpp
-	src/include/sanguis/creator/impl/generator_map.hpp
-	src/include/sanguis/creator/impl/generator_map_type.hpp
-	src/include/sanguis/creator/impl/generators/graveyard.hpp
-	src/include/sanguis/creator/impl/generators/maze.hpp
-	src/include/sanguis/creator/impl/generators/rooms.hpp
-	src/include/sanguis/creator/impl/generators/start.hpp
-	src/include/sanguis/creator/impl/graveyard_name.hpp
-	src/include/sanguis/creator/impl/interior_range.hpp
-	src/include/sanguis/creator/impl/log_name.hpp
-	src/include/sanguis/creator/impl/maze_name.hpp
-	src/include/sanguis/creator/impl/maze_result.hpp
-	src/include/sanguis/creator/impl/maze_to_tile_grid.hpp
-	src/include/sanguis/creator/impl/normal_generator_vector.hpp
-	src/include/sanguis/creator/impl/normal_generator_vector_type.hpp
-	src/include/sanguis/creator/impl/optional_pos.hpp
-	src/include/sanguis/creator/impl/optional_pos_fwd.hpp
-	src/include/sanguis/creator/impl/parameters.hpp
-	src/include/sanguis/creator/impl/parameters_fwd.hpp
-	src/include/sanguis/creator/impl/perimeter_to_coords.hpp
-	src/include/sanguis/creator/impl/place_boss.hpp
-	src/include/sanguis/creator/impl/place_destructibles.hpp
-	src/include/sanguis/creator/impl/place_openings.hpp
-	src/include/sanguis/creator/impl/place_spawners.hpp
-	src/include/sanguis/creator/impl/random/generator.hpp
-	src/include/sanguis/creator/impl/random/generator_fwd.hpp
-	src/include/sanguis/creator/impl/random/uniform_int.hpp
-	src/include/sanguis/creator/impl/random/uniform_int_decl.hpp
-	src/include/sanguis/creator/impl/random/uniform_int_distribution_decl.hpp
-	src/include/sanguis/creator/impl/random/uniform_int_distribution_fwd.hpp
-	src/include/sanguis/creator/impl/random/uniform_int_distribution_impl.hpp
-	src/include/sanguis/creator/impl/random/uniform_int_fwd.hpp
-	src/include/sanguis/creator/impl/random/uniform_int_impl.hpp
-	src/include/sanguis/creator/impl/random/uniform_int_wrapper_decl.hpp
-	src/include/sanguis/creator/impl/random/uniform_int_wrapper_fwd.hpp
-	src/include/sanguis/creator/impl/random/uniform_int_wrapper_impl.hpp
-	src/include/sanguis/creator/impl/random/uniform_pos.hpp
-	src/include/sanguis/creator/impl/random/uniform_pos_fwd.hpp
-	src/include/sanguis/creator/impl/random/uniform_pos_parameters.hpp
-	src/include/sanguis/creator/impl/random/uniform_size.hpp
-	src/include/sanguis/creator/impl/random/uniform_size_fwd.hpp
-	src/include/sanguis/creator/impl/random/uniform_size_variate.hpp
-	src/include/sanguis/creator/impl/random/uniform_size_variate_fwd.hpp
-	src/include/sanguis/creator/impl/random/value.hpp
-	src/include/sanguis/creator/impl/reachable.hpp
-	src/include/sanguis/creator/impl/reachable_grid.hpp
-	src/include/sanguis/creator/impl/rect.hpp
-	src/include/sanguis/creator/impl/region_grid.hpp
-	src/include/sanguis/creator/impl/region_id.hpp
-	src/include/sanguis/creator/impl/result.hpp
-	src/include/sanguis/creator/impl/result_fwd.hpp
-	src/include/sanguis/creator/impl/rooms_name.hpp
-	src/include/sanguis/creator/impl/set_opening_tiles.hpp
 	src/log_location.cpp
 	src/spawn.cpp
 	src/start_name.cpp
@@ -197,6 +197,7 @@ set(
 sanguis_add_library(
 	creator
 	"${SANGUIS_CREATOR_FILES}"
+	HAS_IMPL_DIR
 	DEPS
 		${sanguis_core_TARGET}
 		${fcppt_core_TARGET}
@@ -205,6 +206,4 @@ sanguis_add_library(
 		${sgeparse_TARGET}
 		${sgeparsejson_TARGET}
 		sgebresenham_interface
-	INCLUDES
-		"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
 )

@@ -235,6 +235,11 @@ function(
 	FILES
 )
 	set(
+		OPTION_ARGS
+		"HAS_IMPL_DIR"
+	)
+
+	set(
 		MULTI_ARGS
 		"DEPS"
 		"TRANSITIVE_DEPS"
@@ -245,7 +250,7 @@ function(
 
 	cmake_parse_arguments(
 		""
-		""
+		"${OPTION_ARGS}"
 		""
 		"${MULTI_ARGS}"
 		${ARGN}
@@ -312,6 +317,16 @@ function(
 			${_INCLUDES}
 		)
 
+		if(
+			_HAS_IMPL_DIR
+		)
+			target_include_directories(
+				"${LIBNAME}"
+				PRIVATE
+				"${CMAKE_CURRENT_SOURCE_DIR}/impl/include"
+			)
+		endif()
+
 		target_compile_definitions(
 			"${LIBNAME}"
 			PRIVATE
@@ -339,6 +354,11 @@ function(
 	FILES
 )
 	set(
+		OPTION_ARGS
+		"HAS_IMPL_DIR"
+	)
+
+	set(
 		MULTI_ARGS
 		"DEPS"
 		"TRANSITIVE_DEPS"
@@ -352,7 +372,7 @@ function(
 
 	cmake_parse_arguments(
 		""
-		""
+		"${OPTION_ARGS}"
 		""
 		"${MULTI_ARGS}"
 		${ARGN}
@@ -386,6 +406,15 @@ function(
 	)
 
 	if(
+		_HAS_IMPL_DIR
+	)
+		set(
+			HAS_IMPL_DIR
+			HAS_IMPL_DIR
+		)
+	endif()
+
+	if(
 		ENABLE_STATIC
 	)
 		set(
@@ -397,6 +426,7 @@ function(
 			"${FULL_NAME_STATIC}"
 			"STATIC"
 			"${FILES}"
+			${HAS_IMPL_DIR}
 			DEPS
 				${_DEPS}
 			TRANSITIVE_DEPS
@@ -429,6 +459,7 @@ function(
 			"${FULL_NAME}"
 			"SHARED"
 			"${FILES}"
+			${HAS_IMPL_DIR}
 			DEPS
 				${_DEPS}
 			TRANSITIVE_DEPS

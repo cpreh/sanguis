@@ -1,5 +1,57 @@
 set(
 	SANGUIS_MODEL_FILES
+	impl/include/sanguis/model/impl/animation_range_vector.hpp
+	impl/include/sanguis/model/impl/animation_range_vector_fwd.hpp
+	impl/include/sanguis/model/impl/deserialize/animation.hpp
+	impl/include/sanguis/model/impl/deserialize/animation_delay.hpp
+	impl/include/sanguis/model/impl/deserialize/animation_map.hpp
+	impl/include/sanguis/model/impl/deserialize/animation_range.hpp
+	impl/include/sanguis/model/impl/deserialize/animation_sound.hpp
+	impl/include/sanguis/model/impl/deserialize/cell_size.hpp
+	impl/include/sanguis/model/impl/deserialize/image_name.hpp
+	impl/include/sanguis/model/impl/deserialize/map.hpp
+	impl/include/sanguis/model/impl/deserialize/object.hpp
+	impl/include/sanguis/model/impl/deserialize/part.hpp
+	impl/include/sanguis/model/impl/deserialize/part_map.hpp
+	impl/include/sanguis/model/impl/deserialize/weapon_category.hpp
+	impl/include/sanguis/model/impl/deserialize/weapon_category_map.hpp
+	impl/include/sanguis/model/impl/serialize/animation.hpp
+	impl/include/sanguis/model/impl/serialize/animation_delay.hpp
+	impl/include/sanguis/model/impl/serialize/animation_map.hpp
+	impl/include/sanguis/model/impl/serialize/animation_range.hpp
+	impl/include/sanguis/model/impl/serialize/animation_sound.hpp
+	impl/include/sanguis/model/impl/serialize/cell_size.hpp
+	impl/include/sanguis/model/impl/serialize/image_name.hpp
+	impl/include/sanguis/model/impl/serialize/map.hpp
+	impl/include/sanguis/model/impl/serialize/object.hpp
+	impl/include/sanguis/model/impl/serialize/part.hpp
+	impl/include/sanguis/model/impl/serialize/part_map.hpp
+	impl/include/sanguis/model/impl/serialize/weapon_category.hpp
+	impl/include/sanguis/model/impl/serialize/weapon_category_map.hpp
+	impl/src/deserialize/animation.cpp
+	impl/src/deserialize/animation_delay.cpp
+	impl/src/deserialize/animation_map.cpp
+	impl/src/deserialize/animation_range.cpp
+	impl/src/deserialize/animation_sound.cpp
+	impl/src/deserialize/cell_size.cpp
+	impl/src/deserialize/image_name.cpp
+	impl/src/deserialize/object.cpp
+	impl/src/deserialize/part.cpp
+	impl/src/deserialize/part_map.cpp
+	impl/src/deserialize/weapon_category.cpp
+	impl/src/deserialize/weapon_category_map.cpp
+	impl/src/serialize/animation.cpp
+	impl/src/serialize/animation_delay.cpp
+	impl/src/serialize/animation_map.cpp
+	impl/src/serialize/animation_range.cpp
+	impl/src/serialize/animation_sound.cpp
+	impl/src/serialize/cell_size.cpp
+	impl/src/serialize/image_name.cpp
+	impl/src/serialize/object.cpp
+	impl/src/serialize/part.cpp
+	impl/src/serialize/part_map.cpp
+	impl/src/serialize/weapon_category.cpp
+	impl/src/serialize/weapon_category_map.cpp
 	include/sanguis/model/animation.hpp
 	include/sanguis/model/animation_delay.hpp
 	include/sanguis/model/animation_delay_fwd.hpp
@@ -54,58 +106,6 @@ set(
 	src/cell_size_from_file.cpp
 	src/deserialize.cpp
 	src/exception.cpp
-	src/impl/deserialize/animation.cpp
-	src/impl/deserialize/animation_delay.cpp
-	src/impl/deserialize/animation_map.cpp
-	src/impl/deserialize/animation_range.cpp
-	src/impl/deserialize/animation_sound.cpp
-	src/impl/deserialize/cell_size.cpp
-	src/impl/deserialize/image_name.cpp
-	src/impl/deserialize/object.cpp
-	src/impl/deserialize/part.cpp
-	src/impl/deserialize/part_map.cpp
-	src/impl/deserialize/weapon_category.cpp
-	src/impl/deserialize/weapon_category_map.cpp
-	src/impl/serialize/animation.cpp
-	src/impl/serialize/animation_delay.cpp
-	src/impl/serialize/animation_map.cpp
-	src/impl/serialize/animation_range.cpp
-	src/impl/serialize/animation_sound.cpp
-	src/impl/serialize/cell_size.cpp
-	src/impl/serialize/image_name.cpp
-	src/impl/serialize/object.cpp
-	src/impl/serialize/part.cpp
-	src/impl/serialize/part_map.cpp
-	src/impl/serialize/weapon_category.cpp
-	src/impl/serialize/weapon_category_map.cpp
-	src/include/sanguis/model/impl/animation_range_vector.hpp
-	src/include/sanguis/model/impl/animation_range_vector_fwd.hpp
-	src/include/sanguis/model/impl/deserialize/animation.hpp
-	src/include/sanguis/model/impl/deserialize/animation_delay.hpp
-	src/include/sanguis/model/impl/deserialize/animation_map.hpp
-	src/include/sanguis/model/impl/deserialize/animation_range.hpp
-	src/include/sanguis/model/impl/deserialize/animation_sound.hpp
-	src/include/sanguis/model/impl/deserialize/cell_size.hpp
-	src/include/sanguis/model/impl/deserialize/image_name.hpp
-	src/include/sanguis/model/impl/deserialize/map.hpp
-	src/include/sanguis/model/impl/deserialize/object.hpp
-	src/include/sanguis/model/impl/deserialize/part.hpp
-	src/include/sanguis/model/impl/deserialize/part_map.hpp
-	src/include/sanguis/model/impl/deserialize/weapon_category.hpp
-	src/include/sanguis/model/impl/deserialize/weapon_category_map.hpp
-	src/include/sanguis/model/impl/serialize/animation.hpp
-	src/include/sanguis/model/impl/serialize/animation_delay.hpp
-	src/include/sanguis/model/impl/serialize/animation_map.hpp
-	src/include/sanguis/model/impl/serialize/animation_range.hpp
-	src/include/sanguis/model/impl/serialize/animation_sound.hpp
-	src/include/sanguis/model/impl/serialize/cell_size.hpp
-	src/include/sanguis/model/impl/serialize/image_name.hpp
-	src/include/sanguis/model/impl/serialize/map.hpp
-	src/include/sanguis/model/impl/serialize/object.hpp
-	src/include/sanguis/model/impl/serialize/part.hpp
-	src/include/sanguis/model/impl/serialize/part_map.hpp
-	src/include/sanguis/model/impl/serialize/weapon_category.hpp
-	src/include/sanguis/model/impl/serialize/weapon_category_map.hpp
 	src/make_cell_areas.cpp
 	src/object.cpp
 	src/part.cpp
@@ -116,11 +116,10 @@ set(
 sanguis_add_library(
 	model
 	"${SANGUIS_MODEL_FILES}"
+	HAS_IMPL_DIR
 	DEPS
 		${fcppt_core_TARGET}
 		${fcppt_filesystem_TARGET}
 		${sgeparse_TARGET}
 		${sgeparsejson_TARGET}
-	INCLUDES
-		"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
 )

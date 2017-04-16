@@ -35,35 +35,21 @@ update_sublibrary main
 
 update_sublibrary client
 
-update_impl collision \
-	include \
-	-n \
-	src \
-	src/include/sanguis/collision/impl \
-	src/impl \
-	src/include/sanguis/collision/impl/world \
-	src/impl/world \
-	-r \
-	src/world
-
-pushd collision >> /dev/null
-
-update_cmake \
-	CMakeLists.txt \
-	SANGUIS_COLLISION_SIMPLE_FILES \
-	src/include/sanguis/collision/impl/world/simple \
-	src/impl/world/simple
-
-
-popd >> /dev/null
+update_sublibrary \
+	collision \
+	impl
 
 update_sublibrary common
 
 update_sublibrary core
 
-update_sublibrary creator
+update_sublibrary \
+	creator \
+	impl
 
-update_sublibrary model
+update_sublibrary \
+	model \
+	impl
 
 update_sublibrary server
 
