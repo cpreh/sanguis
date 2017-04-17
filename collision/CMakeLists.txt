@@ -182,7 +182,9 @@ sanguis_add_library(
 		${fcppt_core_TARGET}
 		${fcppt_log_TARGET}
 	TRANSITIVE_DEPS
+		sanguis_creator_interface
 		fcppt_core_interface
+		fcppt_log_interface
 )
 
 add_subdirectory(

@@ -1125,6 +1125,11 @@ sanguis_add_library(
 		${fcppt_options_TARGET}
 		${Boost_FILESYSTEM_LIBRARIES}
 		${ASIO_LIBS}
+	TRANSITIVE_DEPS
+		fcppt_core_interface
+		fcppt_log_interface
+		fcppt_options_interface
+		alda_interface
 )
 
 set(
@@ -1147,7 +1152,6 @@ target_link_libraries(
 	PRIVATE
 	${sanguis_core_TARGET}
 	${sanguis_server_TARGET}
-	${alda_TARGET}
 	${fcppt_core_TARGET}
 	${fcppt_log_TARGET}
 	${fcppt_options_TARGET}

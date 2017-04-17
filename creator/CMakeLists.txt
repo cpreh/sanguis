@@ -201,4 +201,7 @@ sanguis_add_library(
 		${sgeparse_TARGET}
 		${sgeparsejson_TARGET}
 		sgebresenham_interface
+	TRANSITIVE_DEPS
+		fcppt_core_interface
+		fcppt_log_interface
 )

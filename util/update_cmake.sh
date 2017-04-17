@@ -53,7 +53,9 @@ update_sublibrary \
 
 update_sublibrary server
 
-update_sublibrary tiles
+update_sublibrary \
+	tiles \
+	impl
 
 update_impl tools/animations \
 	src \

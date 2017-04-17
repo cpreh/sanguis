@@ -35,14 +35,8 @@ target_link_libraries(
 	${sanguis_client_TARGET}
 	${sanguis_core_TARGET}
 	${fcppt_core_TARGET}
-	${fcppt_log_TARGET}
 	${fcppt_options_TARGET}
 	${awl_TARGET}
-	${sgeconfig_TARGET}
-	sanguis_server_interface
-	alda_interface
-	sgeconsolegfx_interface
-	sgerenderer_interface
 )
 
 target_include_directories(

@@ -122,4 +122,6 @@ sanguis_add_library(
 		${fcppt_filesystem_TARGET}
 		${sgeparse_TARGET}
 		${sgeparsejson_TARGET}
+	TRANSITIVE_DEPS
+		fcppt_core_interface
 )

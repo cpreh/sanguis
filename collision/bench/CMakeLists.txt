@@ -28,7 +28,6 @@ target_include_directories(
 	sanguis_collision_bench_main
 	PRIVATE
 	${Boost_INCLUDE_DIRS}
-	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/creator/include
 )
 
 target_link_libraries(

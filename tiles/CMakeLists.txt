@@ -1,5 +1,63 @@
 set(
 	SANGUIS_TILES_FILES
+	impl/include/sanguis/tiles/impl/background_tile_name.hpp
+	impl/include/sanguis/tiles/impl/category.hpp
+	impl/include/sanguis/tiles/impl/connecting_images.hpp
+	impl/include/sanguis/tiles/impl/content_path.hpp
+	impl/include/sanguis/tiles/impl/content_path_fwd.hpp
+	impl/include/sanguis/tiles/impl/decode_name.hpp
+	impl/include/sanguis/tiles/impl/draw_base.hpp
+	impl/include/sanguis/tiles/impl/draw_connecting.hpp
+	impl/include/sanguis/tiles/impl/draw_non_connecting.hpp
+	impl/include/sanguis/tiles/impl/error_image_color_pair.hpp
+	impl/include/sanguis/tiles/impl/error_image_color_pair_fwd.hpp
+	impl/include/sanguis/tiles/impl/error_image_colors.hpp
+	impl/include/sanguis/tiles/impl/error_message_function.hpp
+	impl/include/sanguis/tiles/impl/filter_connecting.hpp
+	impl/include/sanguis/tiles/impl/filter_non_connecting.hpp
+	impl/include/sanguis/tiles/impl/get_content_function.hpp
+	impl/include/sanguis/tiles/impl/images_base.hpp
+	impl/include/sanguis/tiles/impl/is_background.hpp
+	impl/include/sanguis/tiles/impl/load_file.hpp
+	impl/include/sanguis/tiles/impl/log_name.hpp
+	impl/include/sanguis/tiles/impl/make_areas.hpp
+	impl/include/sanguis/tiles/impl/make_neighbors.hpp
+	impl/include/sanguis/tiles/impl/make_orientation.hpp
+	impl/include/sanguis/tiles/impl/make_orientation_map.hpp
+	impl/include/sanguis/tiles/impl/make_pair.hpp
+	impl/include/sanguis/tiles/impl/neighbors.hpp
+	impl/include/sanguis/tiles/impl/neighbors_fwd.hpp
+	impl/include/sanguis/tiles/impl/neighbors_to_string.hpp
+	impl/include/sanguis/tiles/impl/non_connecting_images.hpp
+	impl/include/sanguis/tiles/impl/optional_content_path.hpp
+	impl/include/sanguis/tiles/impl/optional_content_path_fwd.hpp
+	impl/include/sanguis/tiles/impl/optional_orientation.hpp
+	impl/include/sanguis/tiles/impl/optional_orientation_fwd.hpp
+	impl/include/sanguis/tiles/impl/optional_pair.hpp
+	impl/include/sanguis/tiles/impl/optional_pair_fwd.hpp
+	impl/include/sanguis/tiles/impl/orientation_to_string.hpp
+	impl/include/sanguis/tiles/impl/replace_non_connecting.hpp
+	impl/include/sanguis/tiles/impl/shift.hpp
+	impl/include/sanguis/tiles/impl/shift_fwd.hpp
+	impl/include/sanguis/tiles/impl/tile_name.hpp
+	impl/include/sanguis/tiles/impl/to_string.hpp
+	impl/src/background_tile_name.cpp
+	impl/src/category.cpp
+	impl/src/content_path.cpp
+	impl/src/decode_name.cpp
+	impl/src/error_image_colors.cpp
+	impl/src/is_background.cpp
+	impl/src/load_file.cpp
+	impl/src/log_name.cpp
+	impl/src/make_areas.cpp
+	impl/src/make_neighbors.cpp
+	impl/src/make_orientation.cpp
+	impl/src/make_orientation_map.cpp
+	impl/src/make_pair.cpp
+	impl/src/neighbors_to_string.cpp
+	impl/src/orientation_to_string.cpp
+	impl/src/tile_name.cpp
+	impl/src/to_string.cpp
 	include/sanguis/tiles/area_container.hpp
 	include/sanguis/tiles/area_container_ref.hpp
 	include/sanguis/tiles/area_container_ref_fwd.hpp
@@ -39,64 +97,6 @@ set(
 	src/collection.cpp
 	src/draw.cpp
 	src/error_image.cpp
-	src/impl/background_tile_name.cpp
-	src/impl/category.cpp
-	src/impl/content_path.cpp
-	src/impl/decode_name.cpp
-	src/impl/error_image_colors.cpp
-	src/impl/is_background.cpp
-	src/impl/load_file.cpp
-	src/impl/log_name.cpp
-	src/impl/make_areas.cpp
-	src/impl/make_neighbors.cpp
-	src/impl/make_orientation.cpp
-	src/impl/make_orientation_map.cpp
-	src/impl/make_pair.cpp
-	src/impl/neighbors_to_string.cpp
-	src/impl/orientation_to_string.cpp
-	src/impl/tile_name.cpp
-	src/impl/to_string.cpp
-	src/include/sanguis/tiles/impl/background_tile_name.hpp
-	src/include/sanguis/tiles/impl/category.hpp
-	src/include/sanguis/tiles/impl/connecting_images.hpp
-	src/include/sanguis/tiles/impl/content_path.hpp
-	src/include/sanguis/tiles/impl/content_path_fwd.hpp
-	src/include/sanguis/tiles/impl/decode_name.hpp
-	src/include/sanguis/tiles/impl/draw_base.hpp
-	src/include/sanguis/tiles/impl/draw_connecting.hpp
-	src/include/sanguis/tiles/impl/draw_non_connecting.hpp
-	src/include/sanguis/tiles/impl/error_image_color_pair.hpp
-	src/include/sanguis/tiles/impl/error_image_color_pair_fwd.hpp
-	src/include/sanguis/tiles/impl/error_image_colors.hpp
-	src/include/sanguis/tiles/impl/error_message_function.hpp
-	src/include/sanguis/tiles/impl/filter_connecting.hpp
-	src/include/sanguis/tiles/impl/filter_non_connecting.hpp
-	src/include/sanguis/tiles/impl/get_content_function.hpp
-	src/include/sanguis/tiles/impl/images_base.hpp
-	src/include/sanguis/tiles/impl/is_background.hpp
-	src/include/sanguis/tiles/impl/load_file.hpp
-	src/include/sanguis/tiles/impl/log_name.hpp
-	src/include/sanguis/tiles/impl/make_areas.hpp
-	src/include/sanguis/tiles/impl/make_neighbors.hpp
-	src/include/sanguis/tiles/impl/make_orientation.hpp
-	src/include/sanguis/tiles/impl/make_orientation_map.hpp
-	src/include/sanguis/tiles/impl/make_pair.hpp
-	src/include/sanguis/tiles/impl/neighbors.hpp
-	src/include/sanguis/tiles/impl/neighbors_fwd.hpp
-	src/include/sanguis/tiles/impl/neighbors_to_string.hpp
-	src/include/sanguis/tiles/impl/non_connecting_images.hpp
-	src/include/sanguis/tiles/impl/optional_content_path.hpp
-	src/include/sanguis/tiles/impl/optional_content_path_fwd.hpp
-	src/include/sanguis/tiles/impl/optional_orientation.hpp
-	src/include/sanguis/tiles/impl/optional_orientation_fwd.hpp
-	src/include/sanguis/tiles/impl/optional_pair.hpp
-	src/include/sanguis/tiles/impl/optional_pair_fwd.hpp
-	src/include/sanguis/tiles/impl/orientation_to_string.hpp
-	src/include/sanguis/tiles/impl/replace_non_connecting.hpp
-	src/include/sanguis/tiles/impl/shift.hpp
-	src/include/sanguis/tiles/impl/shift_fwd.hpp
-	src/include/sanguis/tiles/impl/tile_name.hpp
-	src/include/sanguis/tiles/impl/to_string.hpp
 	src/log.cpp
 	src/log_location.cpp
 	src/pair.cpp
@@ -105,10 +105,10 @@ set(
 	src/set.cpp
 )
 
-#TODO: Put model code into another library
 sanguis_add_library(
 	tiles
 	"${SANGUIS_TILES_FILES}"
+	HAS_IMPL_DIR
 	DEPS
 		${sanguis_common_TARGET}
 		${sanguis_core_TARGET}
@@ -119,6 +119,9 @@ sanguis_add_library(
 		${sgeparsejson_TARGET}
 		${fcppt_core_TARGET}
 		${fcppt_log_TARGET}
-	INCLUDES
-		"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
+	TRANSITIVE_DEPS
+		sanguis_creator_interface
+		sgeimage2d_interface
+		fcppt_core_interface
+		fcppt_log_interface
 )
