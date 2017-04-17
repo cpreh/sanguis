@@ -1,4 +1,5 @@
 #include <sanguis/creator/generate.hpp>
+#include <sanguis/creator/generators.hpp>
 #include <sanguis/creator/min.hpp>
 #include <sanguis/creator/name.hpp>
 #include <sanguis/creator/opening_count.hpp>
@@ -59,6 +60,7 @@
 #include <fcppt/container/enum_array.hpp>
 #include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/container/maybe_front.hpp>
+#include <fcppt/container/output.hpp>
 #include <fcppt/either/match.hpp>
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/io/cout.hpp>
@@ -529,9 +531,15 @@ try
 					<<
 					_help_text
 					<<
+					FCPPT_TEXT("\n\n")
+					<<
+					FCPPT_TEXT("Available generators are: ")
+					<<
+					fcppt::container::output(
+						sanguis::creator::generators()
+					)
+					<<
 					FCPPT_TEXT('\n');
-
-				// TODO: Print available generator names
 
 				return
 					EXIT_SUCCESS;
