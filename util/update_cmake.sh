@@ -63,13 +63,7 @@ update_impl tools/animations \
 	-e '.*.ui' \
 	ui
 
-update_impl tools/check_json \
-	src
-
 update_sublibrary tools/libmergeimage
 
 update_impl tools/mergeimage \
-	src
-
-update_impl tools/drawlevel \
 	src

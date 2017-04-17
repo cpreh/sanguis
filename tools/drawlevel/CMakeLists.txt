@@ -1,16 +1,15 @@
-set(
-	SANGUIS_TOOLS_DRAWLEVEL_FILES
-	src/main.cpp
-)
-
 sanguis_add_tool(
 	drawlevel
-	"${SANGUIS_TOOLS_DRAWLEVEL_FILES}"
+	src/main.cpp
 	LINK_LIBS
 		${sanguis_creator_TARGET}
 		${sanguis_tiles_TARGET}
 		${sgeimage2d_TARGET}
 		${sgesystems_TARGET}
 		${fcppt_core_TARGET}
+		${fcppt_options_TARGET}
 		${Boost_FILESYSTEM_LIBRARIES}
+		${FCPPT_UTILS_MAIN_LINK_LIBS}
+	COMPILE_OPTIONS
+		${FCPPT_UTILS_MAIN_COMPILE_OPTIONS}
 )

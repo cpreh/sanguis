@@ -44,9 +44,14 @@
 #include <sge/systems/instance.hpp>
 #include <sge/systems/make_list.hpp>
 #include <sge/systems/with_image2d.hpp>
+#include <fcppt/args_char.hpp>
+#include <fcppt/args_from_second.hpp>
 #include <fcppt/exception.hpp>
-#include <fcppt/extract_from_string.hpp>
 #include <fcppt/from_std_string.hpp>
+#include <fcppt/main.hpp>
+#include <fcppt/string.hpp>
+#include <fcppt/strong_typedef_input.hpp>
+#include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/enum_array_init.hpp>
 #include <fcppt/assert/optional_error.hpp>
@@ -54,15 +59,41 @@
 #include <fcppt/container/enum_array.hpp>
 #include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/container/maybe_front.hpp>
+#include <fcppt/either/match.hpp>
 #include <fcppt/io/cerr.hpp>
+#include <fcppt/io/cout.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/to_vector.hpp>
 #include <fcppt/math/vector/null.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/vector/to_unsigned.hpp>
-#include <fcppt/optional/to_exception.hpp>
+#include <fcppt/optional/from.hpp>
+#include <fcppt/options/argument.hpp>
+#include <fcppt/options/apply.hpp>
+#include <fcppt/options/default_help_switch.hpp>
+#include <fcppt/options/error.hpp>
+#include <fcppt/options/help_result.hpp>
+#include <fcppt/options/help_text.hpp>
+#include <fcppt/options/long_name.hpp>
+#include <fcppt/options/make_optional.hpp>
+#include <fcppt/options/no_default_value.hpp>
+#include <fcppt/options/option.hpp>
+#include <fcppt/options/optional_help_text.hpp>
+#include <fcppt/options/optional_short_name.hpp>
+#include <fcppt/options/parse_help.hpp>
+#include <fcppt/options/result.hpp>
+#include <fcppt/options/result_of.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/random/generator/seed_from_chrono.hpp>
+#include <fcppt/record/element.hpp>
+#include <fcppt/record/get.hpp>
+#include <fcppt/record/make_label.hpp>
+#include <fcppt/record/permute.hpp>
+#include <fcppt/record/variadic.hpp>
 #include <fcppt/variant/match.hpp>
+#include <fcppt/variant/output.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/mpl/vector/vector10.hpp>
@@ -70,36 +101,48 @@
 #include <exception>
 #include <iostream>
 #include <map>
-#include <string>
 #include <fcppt/config/external_end.hpp>
 
 
-int
-main(
-	int argc,
-	char **argv
-)
-try
+namespace
 {
-	if(
-		argc
-		<
-		3
-		||
-		argc
+
+FCPPT_RECORD_MAKE_LABEL(
+	generator_name_label
+);
+
+FCPPT_RECORD_MAKE_LABEL(
+	output_path_label
+);
+
+FCPPT_RECORD_MAKE_LABEL(
+	seed_label
+);
+
+typedef
+fcppt::record::variadic<
+	fcppt::record::element<
+		generator_name_label,
+		sanguis::creator::name
+	>,
+	fcppt::record::element<
+		output_path_label,
+		fcppt::string
+	>,
+	fcppt::record::element<
+		seed_label,
+		fcppt::optional::object<
+			sanguis::creator::seed
 		>
-		4
-	)
-	{
-		fcppt::io::cerr()
-			<< FCPPT_TEXT("Usage: ")
-			<< argv[0]
-			<< FCPPT_TEXT(" <level-name> <output-path> [seed]\n");
+	>
+>
+argument_record;
 
-		return
-			EXIT_FAILURE;
-	}
-
+void
+execute_main(
+	argument_record const &_args
+)
+{
 	sge::systems::instance<
 		boost::mpl::vector1<
 			sge::systems::with_image2d
@@ -117,37 +160,24 @@ try
 		sanguis::creator::generate(
 			sanguis::creator::top_parameters{
 				sys.log_context(),
-				sanguis::creator::name{
-					fcppt::from_std_string(
-						argv[1]
-					)
-				},
-				argc
-				==
-				4
-				?
-					sanguis::creator::seed{
-						fcppt::optional::to_exception(
-							fcppt::extract_from_string<
-								sanguis::creator::seed::value_type
-							>(
-								std::string{
-									argv[3]
-								}
-							),
-							[]{
-								return
-									fcppt::exception{
-										FCPPT_TEXT("Seed is not an integer")
-									};
-							}
-						)
+				fcppt::record::get<
+					generator_name_label
+				>(
+					_args
+				),
+				fcppt::optional::from(
+					fcppt::record::get<
+						seed_label
+					>(
+						_args
+					),
+					[]{
+						return
+							fcppt::random::generator::seed_from_chrono<
+								sanguis::creator::seed
+							>();
 					}
-				:
-					fcppt::random::generator::seed_from_chrono<
-						sanguis::creator::seed
-					>()
-				,
+				),
 				fcppt::algorithm::enum_array_init<
 					sanguis::creator::opening_count_array
 				>(
@@ -360,20 +390,163 @@ try
 			store.const_wrapped_view()
 		},
 		boost::filesystem::path(
-			argv[2]
+			fcppt::record::get<
+				output_path_label
+			>(
+				_args
+			)
 		)
 	);
 
+}
+
+}
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_GCC_WARNING(-Wmissing-declarations)
+
+int
+FCPPT_MAIN(
+	int argc,
+	fcppt::args_char **argv
+)
+try
+{
+	auto const parser{
+		fcppt::options::apply(
+			fcppt::options::argument<
+				generator_name_label,
+				sanguis::creator::name
+			>{
+				fcppt::options::long_name{
+					FCPPT_TEXT("generator-name")
+				},
+				fcppt::options::optional_help_text{}
+			},
+			fcppt::options::argument<
+				output_path_label,
+				fcppt::string
+			>{
+				fcppt::options::long_name{
+					FCPPT_TEXT("output-file")
+				},
+				fcppt::options::optional_help_text{
+					fcppt::options::help_text{
+						FCPPT_TEXT("Path to the output file.")
+					}
+				}
+			},
+			fcppt::options::make_optional(
+				fcppt::options::option<
+					seed_label,
+					sanguis::creator::seed
+				>{
+					fcppt::options::optional_short_name{},
+					fcppt::options::long_name{
+						FCPPT_TEXT("seed")
+					},
+					fcppt::options::no_default_value<
+						sanguis::creator::seed
+					>(),
+					fcppt::options::optional_help_text{
+						fcppt::options::help_text{
+							FCPPT_TEXT("The seed to use. If not specified, a random seed is used.")
+						}
+					}
+				}
+			)
+		)
+	};
+
+	typedef
+	fcppt::options::result_of<
+		decltype(
+			parser
+		)
+	>
+	result_type;
+
+	fcppt::options::help_result<
+		result_type
+	> const result{
+		fcppt::options::parse_help(
+			fcppt::options::default_help_switch(),
+			parser,
+			fcppt::args_from_second(
+				argc,
+				argv
+			)
+		)
+	};
+
 	return
-		EXIT_SUCCESS;
+		fcppt::variant::match(
+			result,
+			[](
+				fcppt::options::result<
+					result_type
+				> const &_result
+			)
+			{
+				return
+					fcppt::either::match(
+						_result,
+						[](
+							fcppt::options::error const &_error
+						)
+						{
+							fcppt::io::cerr()
+								<<
+								_error
+								<<
+								FCPPT_TEXT('\n');
+
+							return
+								EXIT_FAILURE;
+						},
+						[](
+							result_type const &_args
+						)
+						{
+							execute_main(
+								fcppt::record::permute<
+									argument_record
+								>(
+									_args
+								)
+							);
+
+							return
+								EXIT_SUCCESS;
+						}
+					);
+			},
+			[](
+				fcppt::options::help_text const &_help_text
+			)
+			{
+				fcppt::io::cout()
+					<<
+					_help_text
+					<<
+					FCPPT_TEXT('\n');
+
+				// TODO: Print available generator names
+
+				return
+					EXIT_SUCCESS;
+			}
+		);
 }
 catch(
 	fcppt::exception const &_exception
 )
 {
 	fcppt::io::cerr()
-		<< _exception.string()
-		<< FCPPT_TEXT('\n');
+		<<
+		_exception.string()
+		<<
+		FCPPT_TEXT('\n');
 
 	return
 		EXIT_FAILURE;
@@ -383,9 +556,13 @@ catch(
 )
 {
 	std::cerr
-		<< _exception.what()
-		<< '\n';
+		<<
+		_exception.what()
+		<<
+		'\n';
 
 	return
 		EXIT_FAILURE;
 }
+
+FCPPT_PP_POP_WARNING
