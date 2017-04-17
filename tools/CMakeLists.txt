@@ -8,7 +8,7 @@ function(
 	TOOL_FILES
 )
 	set(
-		SINGLE_ARGS
+		OPTION_ARGS
 		"IS_GUI"
 	)
 
@@ -20,61 +20,37 @@ function(
 
 	cmake_parse_arguments(
 		""
+		"${OPTION_ARGS}"
 		""
-		"${SINGLE_ARGS}"
 		"${MULTI_ARGS}"
 		${ARGN}
-	)
-
-	set(
-		FULL_NAME
-		sanguis_tools_${TOOL_NAME}
 	)
 
 	if(
 		_IS_GUI
 	)
-		awl_utils_add_portable_executable(
-			"${FULL_NAME}"
-			"sanguis::tools::${TOOL_NAME}::main"
-			${TOOL_FILES}
+		set(
+			MAIN_NAMESPACE
+			MAIN_NAMESPACE
 		)
-	else()
-		add_executable(
-			${FULL_NAME}
-			${TOOL_FILES}
+
+		set(
+			MAIN_NAMESPACE_ARG
+			"sanguis::tools::${TOOL_NAME}::main"
 		)
 	endif()
 
-	set_target_properties(
-		"${FULL_NAME}"
-		PROPERTIES
+	sanguis_add_executable(
+		sanguis_tools_${TOOL_NAME}
+		"${TOOL_FILES}"
+		${MAIN_NAMESPACE}
+			${MAIN_NAMESPACE_ARG}
+		DEPS
+			${_LINK_LIBS}
+		INCLUDE_DIRS
+			${_INCLUDE_DIRS}
 		FOLDER
-		sanguis/tools
-	)
-
-	fcppt_utils_set_target_compiler_flags(
-		${FULL_NAME}
-	)
-
-	target_include_directories(
-		${FULL_NAME}
-		PRIVATE
-		${CMAKE_CURRENT_BINARY_DIR}
-		${_INCLUDE_DIRS}
-	)
-
-	target_link_libraries(
-		${FULL_NAME}
-		PRIVATE
-		${_LINK_LIBS}
-	)
-
-	install(
-		TARGETS
-		${FULL_NAME}
-		DESTINATION
-		${CMAKE_INSTALL_BINDIR}
+			sanguis/tools
 	)
 endfunction()
 

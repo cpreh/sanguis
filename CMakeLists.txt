@@ -495,6 +495,107 @@ function(
 	)
 endfunction()
 
+function(
+	sanguis_add_executable
+	EXENAME
+	FILES
+)
+	set(
+		SINGLE_ARGS
+		"FOLDER"
+		"MAIN_NAMESPACE"
+	)
+
+	set(
+		MULTI_ARGS
+		"DEPS"
+		"COMPILE_OPTIONS"
+		"INCLUDE_DIRS"
+	)
+
+	cmake_parse_arguments(
+		""
+		""
+		"${SINGLE_ARGS}"
+		"${MULTI_ARGS}"
+		${ARGN}
+	)
+
+	fcppt_utils_add_source_groups(
+		"${FILES}"
+	)
+
+	if(
+		"${_MAIN_NAMESPACE}"
+		STREQUAL
+		""
+	)
+		add_executable(
+			${EXENAME}
+			${FILES}
+		)
+	else()
+		awl_utils_add_portable_executable(
+			${EXENAME}
+			${_MAIN_NAMESPACE}
+			${FILES}
+		)
+	endif()
+
+	fcppt_utils_set_target_compiler_flags(
+		${EXENAME}
+	)
+
+	if(
+		"${_FOLDER}"
+		STREQUAL
+		""
+	)
+		set(
+			FOLDER
+			sanguis
+		)
+	else()
+		set(
+			FOLDER
+			${_FOLDER}
+		)
+	endif()
+
+	set_target_properties(
+		${EXENAME}
+		PROPERTIES
+		FOLDER
+		${FOLDER}
+	)
+
+	target_include_directories(
+		${EXENAME}
+		PRIVATE
+		${_INCLUDE_DIRS}
+		${Boost_INCLUDE_DIRS}
+	)
+
+	target_compile_options(
+		${EXENAME}
+		PRIVATE
+		${_COMPILE_OPTIONS}
+	)
+
+	target_link_libraries(
+		${EXENAME}
+		PRIVATE
+		${_DEPS}
+	)
+
+	install(
+		TARGETS
+		${EXENAME}
+		DESTINATION
+		${CMAKE_INSTALL_BINDIR}
+	)
+endfunction()
+
 if(
 	WIN32
 )

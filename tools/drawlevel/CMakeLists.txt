@@ -13,6 +13,4 @@ sanguis_add_tool(
 		${sgesystems_TARGET}
 		${fcppt_core_TARGET}
 		${Boost_FILESYSTEM_LIBRARIES}
-	IS_GUI
-		FALSE
 )

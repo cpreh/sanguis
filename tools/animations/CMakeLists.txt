@@ -65,6 +65,7 @@ set(
 sanguis_add_tool(
 	animations
 	"${SANGUIS_TOOLS_ANIMATIONS_FILES}"
+	IS_GUI
 	LINK_LIBS
 		${sanguis_model_TARGET}
 		${sanguis_tools_libmergeimage_TARGET}
@@ -75,8 +76,7 @@ sanguis_add_tool(
 		${fcppt_filesystem_TARGET}
 		${Boost_FILESYSTEM_LIBRARIES}
 		Qt5::Widgets
-	IS_GUI
-		TRUE
 	INCLUDE_DIRS
 		${CMAKE_CURRENT_SOURCE_DIR}/include
+		${CMAKE_CURRENT_BINARY_DIR}
 )

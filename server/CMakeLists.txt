@@ -1132,48 +1132,16 @@ sanguis_add_library(
 		alda_interface
 )
 
-set(
-	SERVER_NAME
+sanguis_add_executable(
 	sanguis_dedicated_server
-)
-
-add_executable(
-	${SERVER_NAME}
 	main.cpp
-)
-
-fcppt_utils_set_target_compiler_flags(
-	${SERVER_NAME}
-)
-
-# TODO: Clean this up
-target_link_libraries(
-	${SERVER_NAME}
-	PRIVATE
-	${sanguis_core_TARGET}
-	${sanguis_server_TARGET}
-	${fcppt_core_TARGET}
-	${fcppt_log_TARGET}
-	${fcppt_options_TARGET}
-	${FCPPT_UTILS_MAIN_LINK_LIBS}
-)
-
-target_compile_options(
-	${SERVER_NAME}
-	PRIVATE
-	${FCPPT_UTILS_MAIN_COMPILE_OPTIONS}
-)
-
-set_target_properties(
-	${SERVER_NAME}
-	PROPERTIES
-	FOLDER
-	sanguis
-)
-
-install(
-	TARGETS
-	${SERVER_NAME}
-	DESTINATION
-	${CMAKE_INSTALL_BINDIR}
+	DEPS
+		${sanguis_core_TARGET}
+		${sanguis_server_TARGET}
+		${fcppt_core_TARGET}
+		${fcppt_log_TARGET}
+		${fcppt_options_TARGET}
+		${FCPPT_UTILS_MAIN_LINK_LIBS}
+	COMPILE_OPTIONS
+		${FCPPT_UTILS_MAIN_COMPILE_OPTIONS}
 )
