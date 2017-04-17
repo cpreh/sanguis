@@ -1,28 +1,12 @@
-set(
-	SANGUIS_TOOLS_CHECK_JSON_FILES
+sanguis_add_tool(
+	check_json
 	src/main.cpp
-)
-
-add_executable(
-	sanguis_tools_check_json
-	${SANGUIS_TOOLS_CHECK_JSON_FILES}
-)
-
-fcppt_utils_set_target_compiler_flags(
-	sanguis_tools_check_json
-)
-
-target_link_libraries(
-	sanguis_tools_check_json
-	PRIVATE
-	${sanguis_model_TARGET}
-	${fcppt_core_TARGET}
-	${Boost_FILESYSTEM_LIBRARIES}
-)
-
-install(
-	TARGETS
-	sanguis_tools_check_json
-	DESTINATION
-	${CMAKE_INSTALL_BINDIR}
+	LINK_LIBS
+		${sanguis_model_TARGET}
+		${fcppt_core_TARGET}
+		${fcppt_options_TARGET}
+		${Boost_FILESYSTEM_LIBRARIES}
+		${FCPPT_UTILS_MAIN_LINK_LIBS}
+	COMPILE_OPTIONS
+		${FCPPT_UTILS_MAIN_COMPILE_OPTIONS}
 )

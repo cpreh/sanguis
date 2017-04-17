@@ -14,6 +14,7 @@ function(
 
 	set(
 		MULTI_ARGS
+		"COMPILE_OPTIONS"
 		"INCLUDE_DIRS"
 		"LINK_LIBS"
 	)
@@ -47,6 +48,8 @@ function(
 			${MAIN_NAMESPACE_ARG}
 		DEPS
 			${_LINK_LIBS}
+		COMPILE_OPTIONS
+			${_COMPILE_OPTIONS}
 		INCLUDE_DIRS
 			${_INCLUDE_DIRS}
 		FOLDER
