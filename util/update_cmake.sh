@@ -64,6 +64,3 @@ update_impl tools/animations \
 	ui
 
 update_sublibrary tools/libmergeimage
-
-update_impl tools/mergeimage \
-	src
