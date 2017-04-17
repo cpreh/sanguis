@@ -49,6 +49,23 @@ maze_to_tile_grid(
 	=
 	sanguis::creator::impl::reachable_grid::dim;
 
+	// the (always empty) "core" cells in the maze (3x3)
+	// form a pattern of walls (w) and spaces like on the left,
+	// then get connected by more empty cells to form the maze.
+	//
+	// With the added 1-wall border, an nxn grid becomes a (2n+1)x(2n+1) grid.
+	//
+	//  3x3                           7x7
+	//
+	//                              bbbbbbb
+	// o o o    _w_w_      _w___    b_w___b
+	//          wwwww      _www_    b_www_b
+	// o o o => _w_w_  =>  _____ => b_____b
+	//          wwwww      ww_w_    bww_w_b
+	// o o o    _w_w_      ___w_    b___w_b
+	//                              bbbbbbb
+
+	// get the "original maze size"
 	dim_type const real_size(
 		(
 			_maze.size()
@@ -63,6 +80,10 @@ maze_to_tile_grid(
 		2u
 	);
 
+	// empty spaces are scaled with _spacing
+	// walls and connections are scaled with _wall_thickness, 
+	// there are n open spaces separated by (n-1) walls in each dimension
+	// (so there are 4 types of rectangles in the final grid)
 	dim_type const result_size(
 		real_size
 		*
@@ -70,7 +91,7 @@ maze_to_tile_grid(
 		+
 		(
 			real_size
-			+
+			-
 			fcppt::math::dim::fill<
 				dim_type
 			>(
@@ -136,8 +157,8 @@ maze_to_tile_grid(
 	{
 		typename grid_type::pos const start(
 			// leave one space for the edge
-			coordinate_transform(cell.pos().x()+1u),
-			coordinate_transform(cell.pos().y()+1u));
+			coordinate_transform(cell.pos().x()),
+			coordinate_transform(cell.pos().y()));
 
 		dim_type const cell_size(
 			wall_or_space(cell.pos().x()),

@@ -71,7 +71,8 @@ sanguis::creator::impl::generate_maze(
 			0
 		};
 
-	while (true){
+	while (true)
+	{
 		auto tmp_pos = pos{
 			sanguis::creator::impl::random::uniform_pos{
 				_randgen,
