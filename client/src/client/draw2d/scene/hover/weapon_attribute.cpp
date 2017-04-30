@@ -18,6 +18,7 @@
 #include <sge/gui/widget/reference_alignment_pair.hpp>
 #include <sge/gui/widget/reference_alignment_vector.hpp>
 #include <sge/image/color/predef.hpp>
+#include <sge/image/color/any/object.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
@@ -99,11 +100,15 @@ sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 					0
 					?
 						sge::gui::text_color(
-							sge::image::color::predef::lightblue()
+							sge::image::color::any::object{
+								sge::image::color::predef::lightblue()
+							}
 						)
 					:
 						sge::gui::text_color(
-							sge::image::color::predef::red()
+							sge::image::color::any::object{
+								sge::image::color::predef::red()
+							}
 						)
 					;
 			}

@@ -18,6 +18,7 @@
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
 #include <sge/image/color/predef.hpp>
+#include <sge/image/color/any/object.hpp>
 
 
 sanguis::client::draw2d::entities::other_player::other_player(
@@ -48,7 +49,9 @@ sanguis::client::draw2d::entities::other_player::other_player(
 	),
 	name_{
 		_name.get(),
-		sge::image::color::predef::white()
+		sge::image::color::any::object{
+			sge::image::color::predef::white()
+		}
 	}
 {
 }

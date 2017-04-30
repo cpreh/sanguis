@@ -173,8 +173,12 @@ sanguis::client::load::resource::textures::textures(
 			>(
 				64
 			),
-			sge::image::color::predef::magenta(),
-			sge::image::color::predef::black()
+			sge::image::color::any::object{
+				sge::image::color::predef::magenta()
+			},
+			sge::image::color::any::object{
+				sge::image::color::predef::black()
+			}
 		)
 	)
 {

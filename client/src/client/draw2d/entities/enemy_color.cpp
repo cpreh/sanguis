@@ -21,7 +21,9 @@ sanguis::client::draw2d::entities::enemy_color(
 	{
 	case sanguis::enemy_kind::normal:
 		return
-			sge::image::color::predef::white();
+			sge::image::color::any::object{
+				sge::image::color::predef::white()
+			};
 	case sanguis::enemy_kind::champion:
 		return
 			sge::image::color::any::object{
@@ -34,10 +36,14 @@ sanguis::client::draw2d::entities::enemy_color(
 			};
 	case sanguis::enemy_kind::unique:
 		return
-			sge::image::color::predef::gold();
+			sge::image::color::any::object{
+				sge::image::color::predef::gold()
+			};
 	case sanguis::enemy_kind::boss:
 		return
-			sge::image::color::predef::red();
+			sge::image::color::any::object{
+				sge::image::color::predef::red()
+			};
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;

@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_SPRITE_NORMAL_COLOR_FWD_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/sprite/normal/color_format.hpp>
-#include <sge/image/mizuiro_color_fwd.hpp>
+#include <sge/image/pixel/mizuiro_type_fwd.hpp>
 
 
 namespace sanguis
@@ -17,7 +17,7 @@ namespace normal
 {
 
 typedef
-sge::image::mizuiro_color<
+sge::image::pixel::mizuiro_type<
 	sanguis::client::draw2d::sprite::normal::color_format
 >
 color;

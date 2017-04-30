@@ -32,6 +32,7 @@
 #include <sge/gui/widget/reference_alignment_pair.hpp>
 #include <sge/gui/widget/reference_alignment_vector.hpp>
 #include <sge/image/color/predef.hpp>
+#include <sge/image/color/any/object.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/focus/object_fwd.hpp>
 #include <sge/renderer/context/ffp.hpp>
@@ -152,7 +153,9 @@ sanguis::client::gui::hud::object::object(
 		),
 		sge::rucksack::axis::x,
 		sge::gui::fill_color(
-			sge::image::color::predef::forestgreen()
+			sge::image::color::any::object{
+				sge::image::color::predef::forestgreen()
+			}
 		),
 		sge::gui::fill_level(
 			0.f
@@ -166,7 +169,9 @@ sanguis::client::gui::hud::object::object(
 		),
 		sge::rucksack::axis::x,
 		sge::gui::fill_color(
-			sge::image::color::predef::red()
+			sge::image::color::any::object{
+				sge::image::color::predef::red()
+			}
 		),
 		sge::gui::fill_level(
 			1.f

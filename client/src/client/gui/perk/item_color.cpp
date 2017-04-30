@@ -2,6 +2,7 @@
 #include <sanguis/client/perk/choosable_state.hpp>
 #include <sge/gui/text_color.hpp>
 #include <sge/image/color/predef.hpp>
+#include <sge/image/color/any/object.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
 
@@ -17,23 +18,31 @@ sanguis::client::gui::perk::item_color(
 	case sanguis::client::perk::choosable_state::ok:
 		return
 			sge::gui::text_color{
-				sge::image::color::predef::white()
+				sge::image::color::any::object{
+					sge::image::color::predef::white()
+				}
 			};
 	case sanguis::client::perk::choosable_state::parent_level:
 	case sanguis::client::perk::choosable_state::player_level:
 		return
 			sge::gui::text_color{
-				sge::image::color::predef::red()
+				sge::image::color::any::object{
+					sge::image::color::predef::red()
+				}
 			};
 	case sanguis::client::perk::choosable_state::max_level:
 		return
 			sge::gui::text_color{
-				sge::image::color::predef::blue()
+				sge::image::color::any::object{
+					sge::image::color::predef::blue()
+				}
 			};
 	case sanguis::client::perk::choosable_state::level_up:
 		return
 			sge::gui::text_color{
-				sge::image::color::predef::black()
+				sge::image::color::any::object{
+					sge::image::color::predef::black()
+				}
 			};
 	}
 

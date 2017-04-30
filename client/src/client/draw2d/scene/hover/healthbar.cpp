@@ -7,10 +7,9 @@
 #include <sanguis/client/draw2d/sprite/colored/color.hpp>
 #include <sanguis/client/draw2d/sprite/colored/color_format.hpp>
 #include <sanguis/client/draw2d/sprite/colored/object.hpp>
+#include <sge/image/color/convert.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/image/color/rgba8.hpp>
-#include <sge/image/color/any/convert.hpp>
-#include <sge/image/color/any/object.hpp>
 #include <sge/image/color/init/alpha.hpp>
 #include <sge/image/color/init/blue.hpp>
 #include <sge/image/color/init/green.hpp>
@@ -90,7 +89,7 @@ sanguis::client::draw2d::scene::hover::healthbar::healthbar(
 								bar_height
 							),
 						sge::sprite::roles::color{} =
-							sge::image::color::any::convert<
+							sge::image::color::convert<
 								sanguis::client::draw2d::sprite::colored::color_format
 							>(
 								sge::image::color::predef::black()

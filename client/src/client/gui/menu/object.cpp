@@ -21,6 +21,7 @@
 #include <sge/gui/widget/reference_alignment_pair.hpp>
 #include <sge/gui/widget/reference_alignment_vector.hpp>
 #include <sge/image/color/predef.hpp>
+#include <sge/image/color/any/object.hpp>
 #include <sge/input/cursor/object_fwd.hpp>
 #include <sge/input/focus/object_fwd.hpp>
 #include <sge/parse/ini/entry_name.hpp>
@@ -463,7 +464,9 @@ sanguis::client::gui::menu::object::draw(
 	_render_context.clear(
 		sge::renderer::clear::parameters()
 		.back_buffer(
-			sge::image::color::predef::black()
+			sge::image::color::any::object{
+				sge::image::color::predef::black()
+			}
 		)
 	);
 

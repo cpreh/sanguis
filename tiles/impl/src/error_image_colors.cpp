@@ -2,6 +2,7 @@
 #include <sanguis/tiles/impl/error_image_color_pair.hpp>
 #include <sanguis/tiles/impl/error_image_colors.hpp>
 #include <sge/image/color/predef.hpp>
+#include <sge/image/color/any/object.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
 
@@ -17,20 +18,32 @@ sanguis::tiles::impl::error_image_colors(
 	case sanguis::tiles::error::missing_foreground:
 		return
 			sanguis::tiles::impl::error_image_color_pair{
-				sge::image::color::predef::black(),
-				sge::image::color::predef::magenta()
+				sge::image::color::any::object{
+					sge::image::color::predef::black()
+				},
+				sge::image::color::any::object{
+					sge::image::color::predef::magenta()
+				}
 			};
 	case sanguis::tiles::error::missing_background:
 		return
 			sanguis::tiles::impl::error_image_color_pair{
-				sge::image::color::predef::white(),
-				sge::image::color::predef::green()
+				sge::image::color::any::object{
+					sge::image::color::predef::white()
+				},
+				sge::image::color::any::object{
+					sge::image::color::predef::green()
+				}
 			};
 	case sanguis::tiles::error::missing_object:
 		return
 			sanguis::tiles::impl::error_image_color_pair{
-				sge::image::color::predef::white(),
-				sge::image::color::predef::blue()
+				sge::image::color::any::object{
+					sge::image::color::predef::white()
+				},
+				sge::image::color::any::object{
+					sge::image::color::predef::blue()
+				}
 			};
 	}
 

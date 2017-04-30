@@ -10,6 +10,7 @@
 #include <sge/image/algorithm/may_overlap.hpp>
 #include <sge/image/algorithm/uninitialized.hpp>
 #include <sge/image/color/predef.hpp>
+#include <sge/image/color/any/object.hpp>
 #include <sge/image/view/wrap.hpp>
 #include <sge/image2d/file.hpp>
 #include <sge/image2d/file_unique_ptr.hpp>
@@ -80,7 +81,9 @@ sanguis::tools::libmergeimage::impl::make_image(
 
 				sge::image2d::algorithm::fill(
 					dest_view,
-					sge::image::color::predef::transparent(),
+					sge::image::color::any::object{
+						sge::image::color::predef::transparent()
+					},
 					sge::image::algorithm::uninitialized::yes
 				);
 

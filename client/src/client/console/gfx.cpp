@@ -6,6 +6,7 @@
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/rect.hpp>
 #include <sge/image/color/predef.hpp>
+#include <sge/image/color/any/object.hpp>
 #include <sge/input/focus/object_fwd.hpp>
 #include <sge/renderer/pixel_rect.hpp>
 #include <sge/renderer/pixel_unit.hpp>
@@ -47,7 +48,9 @@ sanguis::client::console::gfx::gfx(
 		_console,
 		_renderer,
 		sge::console::gfx::font_color(
-			sge::image::color::predef::white()
+			sge::image::color::any::object{
+				sge::image::color::predef::white()
+			}
 		),
 		_font_object,
 		_focus,

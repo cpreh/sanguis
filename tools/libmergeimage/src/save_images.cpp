@@ -50,7 +50,7 @@ sanguis::tools::libmergeimage::save_images(
 		sge::image2d::save_from_view(
 			_image_system,
 			sge::image2d::view::const_object(
-				image.store().wrapped_view()
+				image.store().const_wrapped_view()
 			),
 			_directory
 			/

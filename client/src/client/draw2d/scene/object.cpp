@@ -153,6 +153,7 @@
 #include <sge/gui/renderer/create_stateless.hpp>
 #include <sge/gui/style/base_fwd.hpp>
 #include <sge/image/color/predef.hpp>
+#include <sge/image/color/any/object.hpp>
 #include <sge/renderer/clear/parameters.hpp>
 #include <sge/renderer/context/ffp.hpp>
 #include <sge/renderer/device/ffp.hpp>
@@ -499,7 +500,9 @@ sanguis::client::draw2d::scene::object::draw(
 			_render_context.clear(
 				sge::renderer::clear::parameters()
 				.back_buffer(
-					sge::image::color::predef::black()
+					sge::image::color::any::object{
+						sge::image::color::predef::black()
+					}
 				)
 			);
 		},
