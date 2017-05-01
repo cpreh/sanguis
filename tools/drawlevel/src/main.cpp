@@ -70,8 +70,8 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/vector/to_unsigned.hpp>
 #include <fcppt/optional/from.hpp>
-#include <fcppt/options/argument.hpp>
 #include <fcppt/options/apply.hpp>
+#include <fcppt/options/argument.hpp>
 #include <fcppt/options/default_help_switch.hpp>
 #include <fcppt/options/error.hpp>
 #include <fcppt/options/help_result.hpp>
