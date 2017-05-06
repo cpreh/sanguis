@@ -331,6 +331,10 @@ sanguis::client::states::running::react(
 	sanguis::client::events::net_error const &_error
 )
 {
+	this->post_event(
+		_error
+	);
+
 	return
 		this->transit<
 			sanguis::client::states::menu
