@@ -69,9 +69,7 @@ sanguis::client::gui::hud::weapon_tooltip::weapon_tooltip(
 						sanguis::client::gui::hud::weapon_attribute_name(
 							_attribute.type()
 						),
-						sanguis::client::gui::hud::weapon_attribute_color(
-							_attribute.type()
-						)
+						sanguis::client::gui::hud::weapon_attribute_color()
 					);
 			}
 		)
