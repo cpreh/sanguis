@@ -5,6 +5,7 @@
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/filesystem/ifstream.hpp>
+#include <fcppt/filesystem/open_exn.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/object_fwd.hpp>
@@ -26,19 +27,14 @@ sanguis::client::load::resource::parse_texture_file(
 {
 	// TODO: Write a proper parser for this
 	fcppt::filesystem::ifstream file(
-		_path
+		fcppt::filesystem::open_exn<
+			fcppt::filesystem::ifstream,
+			sanguis::exception
+		>(
+			_path,
+			std::ios_base::openmode{}
+		)
 	);
-
-	if(
-		!file.is_open()
-	)
-		throw sanguis::exception(
-			FCPPT_TEXT("error opening id file \"")
-			+ fcppt::filesystem::path_to_string(
-				_path
-			)
-			+ FCPPT_TEXT('"')
-		);
 
 	std::streamsize line_num(0);
 
