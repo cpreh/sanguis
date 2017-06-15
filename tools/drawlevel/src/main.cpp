@@ -54,14 +54,14 @@
 #include <fcppt/strong_typedef_input.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/algorithm/enum_array_init.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/size_fun.hpp>
-#include <fcppt/container/enum_array.hpp>
 #include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/container/maybe_front.hpp>
 #include <fcppt/container/output.hpp>
 #include <fcppt/either/match.hpp>
+#include <fcppt/enum/array.hpp>
+#include <fcppt/enum/array_init.hpp>
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/io/cout.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
@@ -180,7 +180,7 @@ execute_main(
 							>();
 					}
 				),
-				fcppt::algorithm::enum_array_init<
+				fcppt::enum_::array_init<
 					sanguis::creator::opening_count_array
 				>(
 					[](
@@ -254,14 +254,14 @@ execute_main(
 	path_file_map files;
 
 	typedef
-	fcppt::container::enum_array<
+	fcppt::enum_::array<
 		sanguis::tiles::error,
 		sge::image2d::store::object
 	>
 	error_image_array;
 
 	error_image_array const error_images(
-		fcppt::algorithm::enum_array_init<
+		fcppt::enum_::array_init<
 			error_image_array
 		>(
 			[](

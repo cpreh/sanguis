@@ -3,7 +3,7 @@
 
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/scene/state/base_unique_ptr.hpp>
-#include <fcppt/container/enum_array_fwd.hpp>
+#include <fcppt/enum/array_fwd.hpp>
 
 
 namespace sanguis
@@ -18,7 +18,7 @@ namespace state
 {
 
 typedef
-fcppt::container::enum_array<
+fcppt::enum_::array<
 	sanguis::client::draw2d::z_ordering,
 	sanguis::client::draw2d::scene::state::base_unique_ptr
 >

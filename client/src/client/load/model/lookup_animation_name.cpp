@@ -4,9 +4,9 @@
 #include <sanguis/client/load/model/lookup_animation_name.hpp>
 #include <sanguis/model/animation_name.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/algorithm/enum_array_init.hpp>
-#include <fcppt/algorithm/index_of_enum_array.hpp>
-#include <fcppt/container/enum_array.hpp>
+#include <fcppt/enum/array.hpp>
+#include <fcppt/enum/array_init.hpp>
+#include <fcppt/enum/index_of_array.hpp>
 #include <fcppt/optional/to_exception.hpp>
 
 
@@ -14,14 +14,14 @@ namespace
 {
 
 typedef
-fcppt::container::enum_array<
+fcppt::enum_::array<
 	sanguis::client::load::animation_type,
 	sanguis::model::animation_name
 >
 animation_type_array;
 
 animation_type_array const animation_types(
-	fcppt::algorithm::enum_array_init<
+	fcppt::enum_::array_init<
 		animation_type_array
 	>(
 		&sanguis::client::load::animation_name
@@ -37,7 +37,7 @@ sanguis::client::load::model::lookup_animation_name(
 {
 	return
 		fcppt::optional::to_exception(
-			fcppt::algorithm::index_of_enum_array(
+			fcppt::enum_::index_of_array(
 				animation_types,
 				_name
 			),

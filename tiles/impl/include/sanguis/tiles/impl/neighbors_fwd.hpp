@@ -2,7 +2,7 @@
 #define SANGUIS_TILES_IMPL_NEIGHBORS_FWD_HPP_INCLUDED
 
 #include <sanguis/tiles/direction_fwd.hpp>
-#include <fcppt/container/enum_array_fwd.hpp>
+#include <fcppt/enum/array_fwd.hpp>
 
 
 namespace sanguis
@@ -18,7 +18,7 @@ template<
 using
 neighbors
 =
-fcppt::container::enum_array<
+fcppt::enum_::array<
 	sanguis::tiles::direction,
 	Tile
 >;

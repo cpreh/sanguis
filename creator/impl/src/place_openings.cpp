@@ -12,8 +12,8 @@
 #include <fcppt/make_int_range_count.hpp>
 #include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/algorithm/enum_array_init.hpp>
 #include <fcppt/algorithm/map.hpp>
+#include <fcppt/enum/array_init.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/type_iso/strong_typedef.hpp>
 
@@ -32,7 +32,7 @@ sanguis::creator::impl::place_openings(
 	};
 
 	auto const result(
-		fcppt::algorithm::enum_array_init<
+		fcppt::enum_::array_init<
 			sanguis::creator::opening_container_array
 		>(
 			[

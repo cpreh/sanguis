@@ -5,9 +5,9 @@
 #include <sanguis/client/load/model/lookup_weapon_name.hpp>
 #include <sanguis/model/weapon_category_name.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/algorithm/enum_array_init.hpp>
-#include <fcppt/algorithm/index_of_enum_array.hpp>
-#include <fcppt/container/enum_array.hpp>
+#include <fcppt/enum/array.hpp>
+#include <fcppt/enum/array_init.hpp>
+#include <fcppt/enum/index_of_array.hpp>
 #include <fcppt/optional/to_exception.hpp>
 
 
@@ -15,14 +15,14 @@ namespace
 {
 
 typedef
-fcppt::container::enum_array<
+fcppt::enum_::array<
 	sanguis::primary_weapon_type,
 	sanguis::model::weapon_category_name
 >
 weapon_type_array;
 
 weapon_type_array const weapon_types(
-	fcppt::algorithm::enum_array_init<
+	fcppt::enum_::array_init<
 		weapon_type_array
 	>(
 		&sanguis::client::load::primary_weapon_name
@@ -45,7 +45,7 @@ sanguis::client::load::model::lookup_weapon_name(
 		:
 			sanguis::optional_primary_weapon_type(
 				fcppt::optional::to_exception(
-					fcppt::algorithm::index_of_enum_array(
+					fcppt::enum_::index_of_array(
 						weapon_types,
 						_name
 					),

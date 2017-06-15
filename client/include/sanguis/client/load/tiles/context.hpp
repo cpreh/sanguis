@@ -11,7 +11,7 @@
 #include <sge/texture/const_part_unique_ptr.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/container/enum_array_decl.hpp>
+#include <fcppt/enum/array_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <map>
@@ -68,7 +68,7 @@ private:
 	map_type sets_;
 
 	typedef
-	fcppt::container::enum_array<
+	fcppt::enum_::array<
 		sanguis::tiles::error,
 		sge::texture::const_part_unique_ptr
 	>

@@ -4,8 +4,8 @@
 #include <sanguis/tiles/pair.hpp>
 #include <sanguis/tiles/impl/make_orientation.hpp>
 #include <sanguis/tiles/impl/neighbors.hpp>
-#include <fcppt/make_enum_range.hpp>
 #include <fcppt/assert/error.hpp>
+#include <fcppt/enum/make_range.hpp>
 
 
 template<
@@ -32,7 +32,7 @@ sanguis::tiles::impl::make_orientation(
 	for(
 		sanguis::tiles::direction const value
 		:
-		fcppt::make_enum_range<
+		fcppt::enum_::make_range<
 			sanguis::tiles::direction
 		>()
 	)

@@ -3,7 +3,7 @@
 #include <sanguis/creator/opening_type.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/impl/set_opening_tiles.hpp>
-#include <fcppt/make_enum_range.hpp>
+#include <fcppt/enum/make_range.hpp>
 
 
 void
@@ -15,7 +15,7 @@ sanguis::creator::impl::set_opening_tiles(
 	for(
 		auto const opening_type
 		:
-		fcppt::make_enum_range<
+		fcppt::enum_::make_range<
 			sanguis::creator::opening_type
 		>()
 	)

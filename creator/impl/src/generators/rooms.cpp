@@ -40,7 +40,6 @@
 #include <sanguis/creator/impl/random/generator.hpp>
 #include <sanguis/creator/impl/random/uniform_int.hpp>
 #include <sanguis/creator/impl/random/uniform_pos.hpp>
-#include <fcppt/algorithm/enum_array_init.hpp>
 #include <fcppt/algorithm/fold.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/assert/error.hpp>
@@ -48,7 +47,6 @@
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/cast/to_signed_fun.hpp>
 #include <fcppt/cast/to_unsigned_fun.hpp>
-#include <fcppt/container/enum_array.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/fill.hpp>
 #include <fcppt/container/grid/in_range.hpp>
@@ -56,6 +54,8 @@
 #include <fcppt/container/grid/map.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
 #include <fcppt/container/grid/output.hpp>
+#include <fcppt/enum/array.hpp>
+#include <fcppt/enum/array_init.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/level.hpp>
@@ -811,7 +811,7 @@ sanguis::creator::impl::generators::rooms(
 
 
 	auto const rooms =
-		fcppt::container::enum_array<
+		fcppt::enum_::array<
 			sanguis::creator::opening_type,
 			::signed_rect
 		>
@@ -825,7 +825,7 @@ sanguis::creator::impl::generators::rooms(
 
 	auto const
 	openings =
-		fcppt::algorithm::enum_array_init<
+		fcppt::enum_::array_init<
 			sanguis::creator::opening_container_array
 		>
 		(

@@ -3,7 +3,7 @@
 
 #include <sanguis/creator/opening_count_fwd.hpp>
 #include <sanguis/creator/opening_type_fwd.hpp>
-#include <fcppt/container/enum_array_fwd.hpp>
+#include <fcppt/enum/array_fwd.hpp>
 
 
 namespace sanguis
@@ -12,7 +12,7 @@ namespace creator
 {
 
 typedef
-fcppt::container::enum_array<
+fcppt::enum_::array<
 	sanguis::creator::opening_type,
 	sanguis::creator::opening_count
 >

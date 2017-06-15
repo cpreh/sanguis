@@ -3,7 +3,7 @@
 
 #include <sanguis/tiles/direction.hpp>
 #include <sanguis/tiles/impl/neighbors_fwd.hpp>
-#include <fcppt/container/enum_array_impl.hpp>
+#include <fcppt/enum/array_impl.hpp>
 
 
 #endif

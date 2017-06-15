@@ -42,7 +42,6 @@
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/signed_pos.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_comparison.hpp>
@@ -56,11 +55,12 @@
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/cast/to_signed_fun.hpp>
-#include <fcppt/container/enum_array_impl.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/clamped_min.hpp>
 #include <fcppt/container/grid/clamped_sup_signed.hpp>
 #include <fcppt/container/grid/make_pos_ref_range_start_end.hpp>
+#include <fcppt/enum/array_impl.hpp>
+#include <fcppt/enum/make_range.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -548,7 +548,7 @@ sanguis::collision::impl::world::simple::object::body_collisions() const
 	for(
 		auto const body_group
 		:
-		fcppt::make_enum_range<
+		fcppt::enum_::make_range<
 			sanguis::collision::world::body_group
 		>()
 	)
@@ -628,7 +628,7 @@ sanguis::collision::impl::world::simple::object::update_ghosts()
 	for(
 		auto const ghost_group
 		:
-		fcppt::make_enum_range<
+		fcppt::enum_::make_range<
 			sanguis::collision::world::ghost_group
 		>()
 	)

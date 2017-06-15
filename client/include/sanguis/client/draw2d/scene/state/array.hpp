@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_SCENE_STATE_ARRAY_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/scene/state/array_fwd.hpp>
-#include <fcppt/container/enum_array_impl.hpp>
+#include <fcppt/enum/array_impl.hpp>
 
 
 #endif

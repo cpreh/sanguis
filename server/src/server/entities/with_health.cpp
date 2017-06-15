@@ -20,8 +20,8 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_enum_range.hpp>
 #include <fcppt/assert/optional_error.hpp>
+#include <fcppt/enum/make_range.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
 #include <functional>
@@ -37,7 +37,7 @@ sanguis::server::entities::with_health::damage(
 	for(
 		auto const index
 		:
-		fcppt::make_enum_range<
+		fcppt::enum_::make_range<
 			sanguis::server::damage::type
 		>()
 	)

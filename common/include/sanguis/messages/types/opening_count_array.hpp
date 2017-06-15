@@ -3,7 +3,7 @@
 
 #include <sanguis/creator/opening_type.hpp>
 #include <sanguis/messages/types/opening_count_array_fwd.hpp>
-#include <fcppt/container/enum_array_impl.hpp>
+#include <fcppt/enum/array_impl.hpp>
 
 
 #endif

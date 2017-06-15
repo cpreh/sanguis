@@ -25,7 +25,7 @@
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/reference_std_hash.hpp>
-#include <fcppt/container/enum_array_decl.hpp>
+#include <fcppt/enum/array_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_set>
 #include <fcppt/config/external_end.hpp>
@@ -140,7 +140,7 @@ private:
 	body_set;
 
 	typedef
-	fcppt::container::enum_array<
+	fcppt::enum_::array<
 		sanguis::collision::world::body_group,
 		body_set
 	>
@@ -159,14 +159,14 @@ private:
 	ghost_set;
 
 	typedef
-	fcppt::container::enum_array<
+	fcppt::enum_::array<
 		sanguis::collision::world::ghost_group,
 		ghost_set
 	>
 	ghost_set_array;
 
 	typedef
-	fcppt::container::enum_array<
+	fcppt::enum_::array<
 		sanguis::collision::world::body_group,
 		sanguis::collision::impl::world::simple::body_list_grid
 	>

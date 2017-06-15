@@ -3,8 +3,6 @@
 #include <sanguis/tiles/impl/decode_name.hpp>
 #include <sanguis/tiles/impl/optional_orientation.hpp>
 #include <fcppt/char_type.hpp>
-#include <fcppt/enum_size.hpp>
-#include <fcppt/make_enum_range.hpp>
 #include <fcppt/optional/bind.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/object_impl.hpp>
@@ -13,6 +11,8 @@
 #include <fcppt/algorithm/fold.hpp>
 #include <fcppt/cast/enum_to_int.hpp>
 #include <fcppt/container/bitfield/operators.hpp>
+#include <fcppt/enum/size.hpp>
+#include <fcppt/enum/make_range.hpp>
 
 
 sanguis::tiles::impl::optional_orientation
@@ -23,14 +23,14 @@ sanguis::tiles::impl::decode_name(
 	return
 		_name.size()
 		!=
-		fcppt::enum_size<
+		fcppt::enum_::size<
 			sanguis::tiles::direction
 		>::value
 		?
 			sanguis::tiles::impl::optional_orientation()
 		:
 			fcppt::algorithm::fold(
-				fcppt::make_enum_range<
+				fcppt::enum_::make_range<
 					sanguis::tiles::direction
 				>(),
 				sanguis::tiles::impl::optional_orientation(

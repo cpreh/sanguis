@@ -12,11 +12,11 @@
 #include <sanguis/creator/impl/parameters.hpp>
 #include <sanguis/creator/impl/result.hpp>
 #include <sanguis/creator/impl/random/generator.hpp>
-#include <fcppt/make_enum_range.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/contains_if.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
+#include <fcppt/enum/make_range.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/math/dim/comparison.hpp>
 #include <fcppt/optional/to_exception.hpp>
@@ -71,7 +71,7 @@ sanguis::creator::generate(
 	for(
 		auto const opening_type
 		:
-		fcppt::make_enum_range<
+		fcppt::enum_::make_range<
 			sanguis::creator::opening_type
 		>()
 	)

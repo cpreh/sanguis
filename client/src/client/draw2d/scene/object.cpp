@@ -171,18 +171,18 @@
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/type_name_from_info.hpp>
-#include <fcppt/algorithm/enum_array_init.hpp>
 #include <fcppt/algorithm/map_iteration_second.hpp>
 #include <fcppt/algorithm/sequence_iteration.hpp>
 #include <fcppt/algorithm/update_action.hpp>
 #include <fcppt/cast/dynamic_cross_exn.hpp>
 #include <fcppt/cast/float_to_int_fun.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
+#include <fcppt/enum/array_init.hpp>
+#include <fcppt/enum/make_range.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/context_fwd.hpp>
 #include <fcppt/log/warning.hpp>
@@ -578,7 +578,7 @@ sanguis::client::draw2d::scene::object::draw(
 					for(
 						auto const index
 						:
-						fcppt::make_enum_range<
+						fcppt::enum_::make_range<
 							sanguis::client::draw2d::z_ordering
 						>()
 					)
@@ -1404,7 +1404,7 @@ sanguis::client::draw2d::scene::object::operator()(
 				>(
 					_message.get()
 				),
-				fcppt::algorithm::enum_array_init<
+				fcppt::enum_::array_init<
 					sanguis::creator::opening_count_array
 				>(
 					[

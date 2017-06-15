@@ -3,7 +3,7 @@
 
 #include <sanguis/server/damage/basic_array_fwd.hpp>
 #include <sanguis/server/damage/type.hpp>
-#include <fcppt/container/enum_array_impl.hpp>
+#include <fcppt/enum/array_impl.hpp>
 
 
 #endif

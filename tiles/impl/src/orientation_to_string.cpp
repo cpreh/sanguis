@@ -1,10 +1,10 @@
 #include <sanguis/tiles/direction.hpp>
 #include <sanguis/tiles/orientation.hpp>
 #include <sanguis/tiles/impl/orientation_to_string.hpp>
-#include <fcppt/make_enum_range.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map.hpp>
+#include <fcppt/enum/make_range.hpp>
 
 
 fcppt::string
@@ -16,7 +16,7 @@ sanguis::tiles::impl::orientation_to_string(
 		fcppt::algorithm::map<
 			fcppt::string
 		>(
-			fcppt::make_enum_range<
+			fcppt::enum_::make_range<
 				sanguis::tiles::direction
 			>(),
 			[

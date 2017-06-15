@@ -2,8 +2,8 @@
 #define SANGUIS_COLLISION_IMPL_WORLD_MAKE_GROUPS_HPP_INCLUDED
 
 #include <fcppt/algorithm/array_init.hpp>
-#include <fcppt/algorithm/enum_array_init.hpp>
-#include <fcppt/container/enum_array.hpp>
+#include <fcppt/enum/array.hpp>
+#include <fcppt/enum/array_init.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/mpl/size.hpp>
@@ -112,7 +112,7 @@ private:
 	};
 public:
 	typedef
-	fcppt::container::enum_array<
+	fcppt::enum_::array<
 		IndexedGroup,
 		result_container
 	>
@@ -123,7 +123,7 @@ public:
 	make()
 	{
 		return
-			fcppt::algorithm::enum_array_init<
+			fcppt::enum_::array_init<
 				group_container_array
 			>(
 				make_container()

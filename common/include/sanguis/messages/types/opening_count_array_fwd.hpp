@@ -3,7 +3,7 @@
 
 #include <sanguis/creator/opening_type_fwd.hpp>
 #include <sanguis/messages/types/size.hpp>
-#include <fcppt/container/enum_array_fwd.hpp>
+#include <fcppt/enum/array_fwd.hpp>
 
 
 namespace sanguis
@@ -14,7 +14,7 @@ namespace types
 {
 
 typedef
-fcppt::container::enum_array<
+fcppt::enum_::array<
 	sanguis::creator::opening_type,
 	sanguis::messages::types::size
 >

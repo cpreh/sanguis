@@ -18,11 +18,11 @@
 #include <sanguis/server/weapons/create.hpp>
 #include <sanguis/server/weapons/monster_spawner.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
-#include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/unreachable.hpp>
+#include <fcppt/enum/make_range.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 
 
@@ -130,7 +130,7 @@ sanguis::server::cheat::process(
 				for(
 					auto perk
 					:
-					fcppt::make_enum_range<
+					fcppt::enum_::make_range<
 						sanguis::perk_type
 					>()
 				)

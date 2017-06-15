@@ -126,14 +126,12 @@
 #include <sanguis/server/world/update_entity.hpp>
 #include <alda/message/init_record.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
-#include <fcppt/make_enum_range.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/reference_to_base.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/algorithm/enum_array_init.hpp>
 #include <fcppt/algorithm/map_iteration_second.hpp>
 #include <fcppt/algorithm/sequence_iteration.hpp>
 #include <fcppt/assert/error.hpp>
@@ -142,6 +140,8 @@
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>
+#include <fcppt/enum/array_init.hpp>
+#include <fcppt/enum/make_range.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/warning.hpp>
@@ -483,7 +483,7 @@ sanguis::server::world::object::player_insertion(
 						info_.generator_name().get()
 					),
 				sanguis::messages::roles::opening_count{} =
-					fcppt::algorithm::enum_array_init<
+					fcppt::enum_::array_init<
 						sanguis::messages::types::opening_count_array
 					>(
 						[
@@ -955,7 +955,7 @@ sanguis::server::world::object::request_transfer(
 	for(
 		auto const opening_type
 		:
-		fcppt::make_enum_range<
+		fcppt::enum_::make_range<
 			sanguis::creator::opening_type
 		>()
 	)

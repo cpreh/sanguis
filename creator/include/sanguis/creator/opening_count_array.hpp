@@ -4,7 +4,7 @@
 #include <sanguis/creator/opening_count.hpp>
 #include <sanguis/creator/opening_count_array_fwd.hpp>
 #include <sanguis/creator/opening_type.hpp>
-#include <fcppt/container/enum_array.hpp>
+#include <fcppt/enum/array.hpp>
 
 
 #endif
