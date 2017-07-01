@@ -40,7 +40,6 @@ for_all_body_neighbors(
 		)
 	)
 	{
-
 		if(
 			fcppt::container::grid::in_range_dim(
 				_size,

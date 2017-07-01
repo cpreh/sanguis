@@ -40,6 +40,7 @@
 #include <sanguis/creator/impl/random/generator.hpp>
 #include <sanguis/creator/impl/random/uniform_int.hpp>
 #include <sanguis/creator/impl/random/uniform_pos.hpp>
+#include <fcppt/reference.hpp>
 #include <fcppt/algorithm/fold.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/assert/error.hpp>
@@ -185,7 +186,8 @@ is_possible_connector(
 	auto const nothing =
 		optional_connector{};
 
-	if (
+	// TODO: optional::map
+	if(
 		!
 		fcppt::container::grid::in_range(
 			grid,
@@ -198,9 +200,9 @@ is_possible_connector(
 			p.y() % 2
 		)
 		||
-		grid[
+		grid.get_unsafe(
 			p
-		]
+		)
 		!=
 		::wall_region
 	)
@@ -414,13 +416,15 @@ sanguis::creator::impl::generators::rooms(
 				sanguis::creator::pos const _pos
 			)
 			{
-				raw_grid[
-					_pos
-				]
-				=
-				sanguis::creator::impl::reachable{
-					true
-				};
+				FCPPT_ASSERT_OPTIONAL_ERROR(
+					fcppt::container::grid::at_optional(
+						raw_grid,
+						_pos
+					)
+				).get() =
+					sanguis::creator::impl::reachable{
+						true
+					};
 			}
 		);
 	}
@@ -481,12 +485,15 @@ sanguis::creator::impl::generators::rooms(
 				cur_region
 			]
 			(
-				sanguis::creator::pos p
+				sanguis::creator::pos const p
 			)
 			{
-				region_grid[
-					p
-				] =
+				FCPPT_ASSERT_OPTIONAL_ERROR(
+					fcppt::container::grid::at_optional(
+						region_grid,
+						p
+					)
+				).get() =
 					cur_region;
 			}
 		);
@@ -652,9 +659,12 @@ sanguis::creator::impl::generators::rooms(
 				_parameters.randgen()
 			);
 
-		raw_grid[
-			passage
-		] =
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			fcppt::container::grid::at_optional(
+				raw_grid,
+				passage
+			)
+		).get() =
 			sanguis::creator::impl::reachable{true};
 	}
 
@@ -679,13 +689,50 @@ sanguis::creator::impl::generators::rooms(
 					region_grid
 				)
 			)
-				for (auto const &n : fcppt::container::grid::neumann_neighbors(p.pos()))
-					if (fcppt::container::grid::in_range(region_grid, n)
-							&&
-							raw_grid[p.pos()]  == sanguis::creator::impl::reachable{true}
-							&&
-							raw_grid[n] == sanguis::creator::impl::reachable{true})
-						region_grid[n]++;
+				for(
+					auto const &n
+					:
+					fcppt::container::grid::neumann_neighbors(
+						p.pos()
+					)
+				)
+					fcppt::optional::maybe_void(
+						fcppt::container::grid::at_optional(
+							region_grid,
+							n
+						),
+						[
+							&raw_grid,
+							p,
+							n
+						](
+							fcppt::reference<
+								sanguis::creator::impl::region_id
+							> const _ref
+						)
+						{
+							if(
+								FCPPT_ASSERT_OPTIONAL_ERROR(
+									fcppt::container::grid::at_optional(
+										raw_grid,
+										p.pos()
+									)
+								).get()
+								==
+								sanguis::creator::impl::reachable{true}
+								&&
+								FCPPT_ASSERT_OPTIONAL_ERROR(
+									fcppt::container::grid::at_optional(
+										raw_grid,
+										n
+									)
+								).get()
+								==
+								sanguis::creator::impl::reachable{true}
+							)
+								++_ref.get();
+						}
+					);
 
 			for (
 				auto const p
@@ -695,9 +742,15 @@ sanguis::creator::impl::generators::rooms(
 				)
 			)
 			{
-				if (
-					region_grid[
-						p.pos()] == region_id{1}
+				if(
+					FCPPT_ASSERT_OPTIONAL_ERROR(
+						fcppt::container::grid::at_optional(
+							region_grid,
+							p.pos()
+						)
+					).get()
+					==
+					region_id{1}
 				)
 				{
 					p.value() = sanguis::creator::impl::reachable{false};
@@ -738,11 +791,13 @@ sanguis::creator::impl::generators::rooms(
 			sanguis::creator::pos const _pos
 		)
 		{
-			bg_grid[
-				_pos
-			]
-			=
-			sanguis::creator::background_tile::asphalt;
+			FCPPT_ASSERT_OPTIONAL_ERROR(
+				fcppt::container::grid::at_optional(
+					bg_grid,
+					_pos
+				)
+			).get() =
+				sanguis::creator::background_tile::asphalt;
 		}
 	);
 

@@ -19,6 +19,7 @@
 #include <fcppt/algorithm/append.hpp>
 #include <fcppt/algorithm/remove.hpp>
 #include <fcppt/assert/optional_error.hpp>
+#include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -54,9 +55,6 @@ sanguis::creator::impl::generate_maze(
 				std::numeric_limits<unsigned>::max()
 		)));
 
-	using std::vector;
-	using sanguis::creator::pos;
-
 	auto res_grid =
 		sanguis::creator::impl::region_grid{
 			_maze.size(),
@@ -73,14 +71,15 @@ sanguis::creator::impl::generate_maze(
 
 	while (true)
 	{
-		auto tmp_pos = pos{
+		sanguis::creator::pos tmp_pos{
 			sanguis::creator::impl::random::uniform_pos{
 				_randgen,
 				size
 			}()
 		};
 
-		auto maybe_starting_pos = find_closest(
+		auto maybe_starting_pos =
+		sanguis::creator::impl::find_closest(
 			_maze,
 			tmp_pos,
 			// potential spaces lie on every other row and column and aren't
@@ -93,25 +92,28 @@ sanguis::creator::impl::generate_maze(
 			)
 			{
 				return
-							_maze[
-								_a
-							]
-						==
-							sanguis::creator::impl::reachable(
-								false
-							)
+					FCPPT_ASSERT_OPTIONAL_ERROR(
+						fcppt::container::grid::at_optional(
+							_maze,
+							_a
+						)
+					).get()
+					==
+					sanguis::creator::impl::reachable(
+						false
+					)
 					&&
-								_a.x()
-							%
-								2
-						==
-							1
+					_a.x()
+						%
+						2
+					==
+					1
 					&&
-								_a.y()
-							%
-								2
-						==
-							1;
+					_a.y()
+						%
+						2
+					==
+					1;
 			},
 			fcppt::optional::object<
 				sanguis::creator::pos::value_type
@@ -121,25 +123,31 @@ sanguis::creator::impl::generate_maze(
 		if (!maybe_starting_pos.has_value())
 			break;
 
-		pos const
+		sanguis::creator::pos const
 		starting_pos =
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			maybe_starting_pos
 		);
 
-		_maze[
-			starting_pos
-		] =
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			fcppt::container::grid::at_optional(
+				_maze,
+				starting_pos
+			)
+		).get() =
 			sanguis::creator::impl::reachable(true);
 
-		res_grid[
-			starting_pos
-		] =
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			fcppt::container::grid::at_optional(
+				res_grid,
+				starting_pos
+			)
+		).get() =
 			cur_region;
 
 		// wall tiles that are to be processed next
-		vector<
-			pos
+		std::vector<
+			sanguis::creator::pos
 		> walls;
 
 		// initially populate the set of walls with the neighbors
@@ -178,22 +186,37 @@ sanguis::creator::impl::generate_maze(
 					pos const _opposing_cell
 				)
 				{
-					_maze[
-						random_wall
-					] =
+					FCPPT_ASSERT_OPTIONAL_ERROR(
+						fcppt::container::grid::at_optional(
+							_maze,
+							random_wall
+						)
+					).get() =
 						sanguis::creator::impl::reachable(true);
 
-					_maze[
-						_opposing_cell
-					] =
+					FCPPT_ASSERT_OPTIONAL_ERROR(
+						fcppt::container::grid::at_optional(
+							_maze,
+							_opposing_cell
+						)
+					).get() =
 						sanguis::creator::impl::reachable(true);
 
-					res_grid[
-						random_wall
-					] = cur_region;
-					res_grid[
-						_opposing_cell
-					] = cur_region;
+					FCPPT_ASSERT_OPTIONAL_ERROR(
+						fcppt::container::grid::at_optional(
+							res_grid,
+							random_wall
+						)
+					).get() =
+						cur_region;
+
+					FCPPT_ASSERT_OPTIONAL_ERROR(
+						fcppt::container::grid::at_optional(
+							res_grid,
+							_opposing_cell
+						)
+					).get() =
+						cur_region;
 
 					// this actually appends some cells that aren't walls,
 					// but they get filtered away the next time, since they

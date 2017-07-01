@@ -24,7 +24,9 @@
 #include <sanguis/creator/impl/random/generator.hpp>
 #include <sanguis/creator/impl/random/uniform_int.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/unreachable.hpp>
+#include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/enum/array_init.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/random/make_variate.hpp>
@@ -142,9 +144,12 @@ sanguis::creator::impl::generators::start(
 			:
 			sanguis::creator::background_tile::grass;
 
-	grid[
-		exit_portal.get()
-	] =
+	FCPPT_ASSERT_OPTIONAL_ERROR(
+		fcppt::container::grid::at_optional(
+			grid,
+			exit_portal.get()
+		)
+	).get() =
 		sanguis::creator::tile::stairs;
 
 	return

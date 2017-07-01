@@ -20,6 +20,8 @@
 #include <sanguis/creator/impl/generators/graveyard.hpp>
 #include <sanguis/creator/impl/random/generator.hpp>
 #include <sanguis/creator/impl/random/uniform_int.hpp>
+#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/make_pos_ref_range.hpp>
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
@@ -158,9 +160,13 @@ sanguis::creator::impl::generators::graveyard(
 			fill_tile_random()
 			== 0
 			&&
-			grid_bg[
-				cell.pos()
-			] ==
+			FCPPT_ASSERT_OPTIONAL_ERROR(
+				fcppt::container::grid::at_optional(
+					grid_bg,
+					cell.pos()
+				)
+			).get()
+			==
 			sanguis::creator::background_tile::grass
 		)
 			cell.value() =

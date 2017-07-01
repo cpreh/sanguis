@@ -480,46 +480,60 @@ sanguis::collision::impl::world::simple::object::move_bodies(
 						sanguis::creator::pos const _pos2
 					)
 					{
-						for(
-							auto &body2
-							:
-							body_list_grids_[
-								body1.collision_group()
-							][
+						fcppt::optional::maybe_void(
+							fcppt::container::grid::at_optional(
+								body_list_grids_[
+									body1.collision_group()
+								],
 								_pos2
-							]
-						)
-							// Only make bodies collide once
-							if(
-								std::less<
-									sanguis::collision::impl::world::simple::body const *
-								>{}(
-									&body1,
-									&body2
-								)
+							),
+							[
+								&body1,
+								_duration
+							](
+								fcppt::reference<
+									sanguis::collision::impl::world::simple::body_list
+								> const _bodies2
 							)
-								fcppt::optional::maybe_void(
-									sanguis::collision::world::body_body(
-										body1,
-										body2,
-										_duration
-									),
-									[
-										&body1,
-										&body2
-									](
-										sanguis::collision::result_pair const &_result
+							{
+								for(
+									auto &body2
+									:
+									_bodies2.get()
+								)
+									// Only make bodies collide once
+									if(
+										std::less<
+											sanguis::collision::impl::world::simple::body const *
+										>{}(
+											&body1,
+											&body2
+										)
 									)
-									{
-										body1.push(
-											_result.first
-										);
+										fcppt::optional::maybe_void(
+											sanguis::collision::world::body_body(
+												body1,
+												body2,
+												_duration
+											),
+											[
+												&body1,
+												&body2
+											](
+												sanguis::collision::result_pair const &_result
+											)
+											{
+												body1.push(
+													_result.first
+												);
 
-										body2.push(
-											_result.second
+												body2.push(
+													_result.second
+												);
+											}
 										);
-									}
-								);
+							}
+						);
 					}
 				);
 
@@ -585,31 +599,45 @@ sanguis::collision::impl::world::simple::object::body_collisions() const
 						:
 						paired_groups
 					)
-						for(
-							auto const &body2
-							:
-							body_list_grids_[
-								group2
-							][
+						fcppt::optional::maybe_void(
+							fcppt::container::grid::at_optional(
+								body_list_grids_[
+									group2
+								],
 								_grid_pos2
-							]
-						)
-							if(
-								sanguis::collision::impl::collides(
-									sanguis::collision::impl::world::make_circle(
-										body1.get()
-									),
-									sanguis::collision::impl::world::make_circle(
-										body2
-									)
-								)
+							),
+							[
+								&body1,
+								&result
+							](
+								fcppt::reference<
+									sanguis::collision::impl::world::simple::body_list const
+								> const _bodies2
 							)
-								result.push_back(
-									sanguis::collision::world::body_collision{
-										body1.get().body_base(),
-										body2.body_base()
-									}
-								);
+							{
+								for(
+									auto const &body2
+									:
+									_bodies2.get()
+								)
+									if(
+										sanguis::collision::impl::collides(
+											sanguis::collision::impl::world::make_circle(
+												body1.get()
+											),
+											sanguis::collision::impl::world::make_circle(
+												body2
+											)
+										)
+									)
+										result.push_back(
+											sanguis::collision::world::body_collision{
+												body1.get().body_base(),
+												body2.body_base()
+											}
+										);
+							}
+						);
 				}
 			);
 	}

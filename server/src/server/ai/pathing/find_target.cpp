@@ -6,13 +6,16 @@
 #include <sanguis/server/ai/pathing/start.hpp>
 #include <sanguis/server/ai/pathing/target.hpp>
 #include <sanguis/server/ai/pathing/trail.hpp>
+#include <fcppt/const.hpp>
+#include <fcppt/reference.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/find_opt.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
-#include <fcppt/container/grid/in_range.hpp>
+#include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/math/vector/std_hash.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <queue>
 #include <unordered_map>
@@ -112,20 +115,30 @@ sanguis::server::ai::pathing::find_target(
 			)
 		)
 			if(
-				fcppt::container::grid::in_range(
-					_grid,
-					pos
-				)
-				&&
 				!fcppt::container::find_opt(
 					predecessors,
 					pos
 				).has_value()
 				&&
-				!sanguis::creator::tile_is_solid(
-					_grid[
+				fcppt::optional::maybe(
+					fcppt::container::grid::at_optional(
+						_grid,
 						pos
-					]
+					),
+					fcppt::const_(
+						false
+					),
+					[](
+						fcppt::reference<
+							sanguis::creator::tile const
+						> const _tile
+					)
+					{
+						return
+							!sanguis::creator::tile_is_solid(
+								_tile.get()
+							);
+					}
 				)
 			)
 			{

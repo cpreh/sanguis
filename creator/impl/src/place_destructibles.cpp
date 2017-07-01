@@ -7,6 +7,8 @@
 #include <sanguis/creator/impl/place_destructibles.hpp>
 #include <sanguis/creator/impl/random/generator.hpp>
 #include <sanguis/creator/impl/random/uniform_int.hpp>
+#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/make_pos_ref_crange.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
 #include <fcppt/math/clamp.hpp>
@@ -65,9 +67,18 @@ sanguis::creator::impl::place_destructibles(
 				fcppt::container::grid::neumann_neighbors(
 					_pos));
 
-			for(auto &n : neighbors)
-				if (
-					_grid[n]
+			for(
+				auto &n
+				:
+				neighbors
+			)
+				if(
+					FCPPT_ASSERT_OPTIONAL_ERROR(
+						fcppt::container::grid::at_optional(
+							_grid,
+							n
+						)
+					).get()
 					==
 					sanguis::creator::tile::concrete_wall
 				)

@@ -3,17 +3,13 @@
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/impl/find_opposing_cell.hpp>
 #include <fcppt/algorithm/contains.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/unreachable.hpp>
-#include <fcppt/container/grid/neumann_neighbor_array.hpp>
+#include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/comparison.hpp>
 #include <fcppt/optional/object_impl.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <algorithm>
-#include <iterator>
-#include <vector>
-#include <fcppt/config/external_end.hpp>
 
 
 // Finds an empty neighboring cell in the grid that isn't
@@ -62,19 +58,23 @@ sanguis::creator::impl::find_opposing_cell
 		);
 
 		if(
-			grid
-			[
-				n
-			]
+			FCPPT_ASSERT_OPTIONAL_ERROR(
+				fcppt::container::grid::at_optional(
+					grid,
+					n
+				)
+			).get()
 			==
 			sanguis::creator::impl::reachable(true)
 		)
 		{
 			return
-				grid
-				[
-					opposite
-				]
+				FCPPT_ASSERT_OPTIONAL_ERROR(
+					fcppt::container::grid::at_optional(
+						grid,
+						opposite
+					)
+				).get()
 				==
 				sanguis::creator::impl::reachable(true)
 				?

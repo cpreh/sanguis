@@ -3,6 +3,8 @@
 #include <sanguis/creator/opening_type.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/impl/set_opening_tiles.hpp>
+#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/enum/make_range.hpp>
 
 
@@ -26,10 +28,12 @@ sanguis::creator::impl::set_opening_tiles(
 				opening_type
 			]
 		)
-			_grid[
-				opening.get()
-			]
-			=
-			// TODO: Different tiles for entry/exit?
-			sanguis::creator::tile::stairs;
+			FCPPT_ASSERT_OPTIONAL_ERROR(
+				fcppt::container::grid::at_optional(
+					_grid,
+					opening.get()
+				)
+			).get() =
+				// TODO: Different tiles for entry/exit?
+				sanguis::creator::tile::stairs;
 }

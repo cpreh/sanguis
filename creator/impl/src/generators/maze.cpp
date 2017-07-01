@@ -20,6 +20,8 @@
 #include <sanguis/creator/impl/reachable_grid.hpp>
 #include <sanguis/creator/impl/result.hpp>
 #include <sanguis/creator/impl/generators/maze.hpp>
+#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/container/grid/at_optional.hpp>
 
 
 sanguis::creator::impl::result
@@ -51,9 +53,12 @@ sanguis::creator::impl::generators::maze(
 		](
 			sanguis::creator::pos const &_p
 		){
-			initial_maze[
-				_p
-			] =
+			FCPPT_ASSERT_OPTIONAL_ERROR(
+				fcppt::container::grid::at_optional(
+					initial_maze,
+					_p
+				)
+			).get() =
 				sanguis::creator::impl::reachable(true);
 		}
 	);

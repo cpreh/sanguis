@@ -24,6 +24,7 @@
 #include <fcppt/assert/error_message.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/pre.hpp>
+#include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/object_fwd.hpp>
@@ -130,10 +131,12 @@ sanguis::creator::impl::place_spawners(
 			)
 		)
 		{
-			_grid
-			[
-				candidate
-			] =
+			FCPPT_ASSERT_OPTIONAL_ERROR(
+				fcppt::container::grid::at_optional(
+					_grid,
+					candidate
+				)
+			).get() =
 				_spawner_tile;
 
 			spawners.push_back(
