@@ -934,6 +934,7 @@ sanguis_add_library(
 		${sgeparseini_TARGET}
 		${sgeparsejson_TARGET}
 		${sgerenderer_TARGET}
+		${sgerucksack_TARGET}
 		${sgesprite_TARGET}
 		${sgesystems_TARGET}
 		${sgetimer_TARGET}

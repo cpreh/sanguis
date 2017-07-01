@@ -31,7 +31,7 @@ sanguis::model::impl::deserialize::animation_range(
 
 	return
 		sanguis::model::animation_range(
-			result[0],
-			result[1]
+			result.x(),
+			result.y()
 		);
 }

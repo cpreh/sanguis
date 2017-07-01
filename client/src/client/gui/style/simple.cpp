@@ -13,6 +13,7 @@
 #include <sge/gui/renderer/base.hpp>
 #include <sge/gui/style/base.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
+#include <sge/rucksack/access_axis.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <sge/rucksack/dim.hpp>
 #include <sge/rucksack/padding.hpp>
@@ -21,10 +22,8 @@
 #include <sge/rucksack/vector.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/cast/enum_to_int.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/int_to_float.hpp>
-#include <fcppt/math/size_type.hpp>
 #include <fcppt/math/box/shrink.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/fill.hpp>
@@ -100,14 +99,10 @@ sanguis::client::gui::style::simple::draw_bar(
 			fcppt::cast::int_to_float<
 				sge::gui::fill_level::value_type
 			>(
-				inner_rect.size()[
-					// TODO: Make a function in rucksack for this
-					fcppt::cast::enum_to_int<
-						fcppt::math::size_type
-					>(
-						_axis
-					)
-				]
+				sge::rucksack::access_axis(
+					inner_rect.size(),
+					_axis
+				)
 			)
 			*
 			_fill_level.get()

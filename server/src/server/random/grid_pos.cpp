@@ -5,8 +5,11 @@
 #include <sanguis/creator/size_type.hpp>
 #include <sanguis/creator/sup.hpp>
 #include <sanguis/server/random/grid_pos.hpp>
+#include <fcppt/use.hpp>
 #include <fcppt/container/grid/min_less_sup.hpp>
 #include <fcppt/container/grid/size_type.hpp>
+#include <fcppt/math/static_size.hpp>
+#include <fcppt/math/vector/at_c.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
 
@@ -40,21 +43,35 @@ sanguis::server::random::grid_pos(
 			_min,
 			_sup
 		](
-			fcppt::container::grid::size_type const _index
+			auto const _index
 		)
 		{
+			FCPPT_USE(
+				_index
+			);
+
+			typedef
+			decltype(
+				_index
+			)
+			index;
+
 			return
 				fcppt::random::distribution::make_basic(
 					random_parameters(
 						random_parameters::min(
-							_min.get()[
-								_index
-							]
+							fcppt::math::vector::at_c<
+								index::value
+							>(
+								_min.get()
+							)
 						),
 						random_parameters::max(
-							_sup.get()[
-								_index
-							]
+							fcppt::math::vector::at_c<
+								index::value
+							>(
+								_sup.get()
+							)
 							-
 							1u
 						)
@@ -65,13 +82,17 @@ sanguis::server::random::grid_pos(
 
 	auto random_x(
 		make_distribution(
-			0
+			fcppt::math::static_size<
+				0
+			>{}
 		)
 	);
 
 	auto random_y(
 		make_distribution(
-			1
+			fcppt::math::static_size<
+				1
+			>{}
 		)
 	);
 
