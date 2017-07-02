@@ -9,7 +9,7 @@
 #include <fcppt/container/grid/min_less_sup.hpp>
 #include <fcppt/container/grid/size_type.hpp>
 #include <fcppt/math/static_size.hpp>
-#include <fcppt/math/vector/at_c.hpp>
+#include <fcppt/math/vector/at.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
 
@@ -60,14 +60,14 @@ sanguis::server::random::grid_pos(
 				fcppt::random::distribution::make_basic(
 					random_parameters(
 						random_parameters::min(
-							fcppt::math::vector::at_c<
+							fcppt::math::vector::at<
 								index::value
 							>(
 								_min.get()
 							)
 						),
 						random_parameters::max(
-							fcppt::math::vector::at_c<
+							fcppt::math::vector::at<
 								index::value
 							>(
 								_sup.get()
