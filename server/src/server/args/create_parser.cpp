@@ -1,6 +1,8 @@
 #include <sanguis/server/args/create_parser.hpp>
 #include <sanguis/server/args/parser_unique_ptr.hpp>
 #include <sanguis/server/args/result.hpp>
+#include <sanguis/server/args/labels/log_level.hpp>
+#include <sanguis/server/args/labels/port.hpp>
 #include <alda/net/port.hpp>
 #include <fcppt/strong_typedef_input.hpp>
 #include <fcppt/strong_typedef_output.hpp>

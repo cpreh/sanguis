@@ -12,11 +12,14 @@
 #include <sanguis/creator/impl/parameters.hpp>
 #include <sanguis/creator/impl/result.hpp>
 #include <sanguis/creator/impl/random/generator.hpp>
+#include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/contains_if.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/enum/make_range.hpp>
+#include <fcppt/log/_.hpp>
+#include <fcppt/log/debug.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/math/dim/comparison.hpp>
 #include <fcppt/optional/to_exception.hpp>
@@ -34,6 +37,20 @@ sanguis::creator::generate(
 			sanguis::creator::impl::log_name()
 		)
 	};
+
+	FCPPT_LOG_DEBUG(
+		log,
+		fcppt::log::_
+			<<
+			FCPPT_TEXT("Generating world \"")
+			<<
+			_parameters.name()
+			<<
+			FCPPT_TEXT("\" with seed ")
+			<<
+			_parameters.seed()
+	);
+
 
 	sanguis::creator::impl::random::generator gen(
 		_parameters.seed()
