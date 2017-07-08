@@ -30,8 +30,11 @@
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/reference.hpp>
+#include <fcppt/string.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/container/maybe_front.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
@@ -39,6 +42,7 @@
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/warning.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/record/get.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
@@ -236,45 +240,63 @@ sanguis::server::states::running::operator()(
 		)
 	);
 
-	// TODO: maybe_front
-	if(
-		command.empty()
-	)
-		return
-			sanguis::messages::call::result(
-				this->discard_event()
-			);
-
-	FCPPT_LOG_DEBUG(
-		log_,
-		fcppt::log::_
-			<< FCPPT_TEXT("Received console command: ")
-			<< command[0]
-	);
-
-	try
-	{
-		console_.eval(
-			_id,
-			sanguis::server::to_console_arg_list(
-				command
-			)
-		);
-	}
-	catch(
-		fcppt::exception const &_error
-	)
-	{
-		FCPPT_LOG_ERROR(
-			log_,
-			fcppt::log::_
-				<< _error.string()
-		);
-	}
-
 	return
-		sanguis::messages::call::result(
-			this->discard_event()
+		fcppt::optional::maybe(
+			fcppt::container::maybe_front(
+				command
+			),
+			[
+				this
+			]{
+				return
+					sanguis::messages::call::result(
+						this->discard_event()
+					);
+			},
+			[
+				this,
+				_id,
+				&command
+			](
+				fcppt::reference<
+					fcppt::string const
+				> const _command_name
+			)
+			{
+				FCPPT_LOG_DEBUG(
+					log_,
+					fcppt::log::_
+						<<
+						FCPPT_TEXT("Received console command: ")
+						<<
+						_command_name.get()
+				);
+
+				try
+				{
+					console_.eval(
+						_id,
+						sanguis::server::to_console_arg_list(
+							command
+						)
+					);
+				}
+				catch(
+					fcppt::exception const &_error
+				)
+				{
+					FCPPT_LOG_ERROR(
+						log_,
+						fcppt::log::_
+							<< _error.string()
+					);
+				}
+
+				return
+					sanguis::messages::call::result(
+						this->discard_event()
+					);
+			}
 		);
 }
 
