@@ -7,8 +7,12 @@
 #include <sanguis/client/start.hpp>
 #include <sanguis/client/args/result.hpp>
 #include <sanguis/client/args/labels/log_level.hpp>
+#include <sanguis/client/args/labels/sge_log_level.hpp>
+#include <sanguis/server/log_location.hpp>
+#include <sanguis/server/args/labels/log_level.hpp>
 #include <sge/config/app_name.hpp>
 #include <sge/config/log_path.hpp>
+#include <sge/log/location.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/scoped_output.hpp>
 #include <fcppt/io/clog.hpp>
@@ -43,6 +47,28 @@ sanguis::client::start(
 		},
 		sanguis::log_level_streams()
 	};
+
+	log_context.set(
+		sanguis::server::log_location(),
+		fcppt::log::optional_level{
+			fcppt::record::get<
+				sanguis::server::args::labels::log_level
+			>(
+				_args
+			)
+		}
+	);
+
+	log_context.set(
+		sge::log::location(),
+		fcppt::log::optional_level{
+			fcppt::record::get<
+				sanguis::client::args::labels::sge_log_level
+			>(
+				_args
+			)
+		}
+	);
 
 	sanguis::client::object_base_unique_ptr const client(
 		sanguis::client::create(
