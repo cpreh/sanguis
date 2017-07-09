@@ -544,81 +544,69 @@ sanguis::client::draw2d::scene::object::draw(
 				_translation
 			);
 
-			sge::renderer::state::ffp::transform::object_unique_ptr const transform_state(
-				renderer_.create_transform_state(
-					sge::renderer::state::ffp::transform::parameters(
-						sanguis::client::draw2d::scene::translation_matrix(
-							_translation
+			{
+				sge::renderer::state::ffp::transform::object_unique_ptr const transform_state(
+					renderer_.create_transform_state(
+						sge::renderer::state::ffp::transform::parameters(
+							sanguis::client::draw2d::scene::translation_matrix(
+								_translation
+							)
 						)
 					)
-				)
-			);
+				);
 
-			sge::renderer::state::ffp::transform::scoped const scoped_transform(
-				_render_context,
-				sge::renderer::state::ffp::transform::mode::world,
-				*transform_state
-			);
+				sge::renderer::state::ffp::transform::scoped const scoped_transform(
+					_render_context,
+					sge::renderer::state::ffp::transform::mode::world,
+					*transform_state
+				);
 
-			world_->draw(
-				_render_context,
-				_translation
-			);
+				world_->draw(
+					_render_context,
+					_translation
+				);
 
-			fcppt::optional::maybe_void(
-				this->player_center(),
-				[
-					&_render_context,
-					_translation,
-					this
-				](
-					sanguis::client::draw2d::player_center const _player_center
+				for(
+					auto const index
+					:
+					fcppt::enum_::make_range<
+						sanguis::client::draw2d::z_ordering
+					>()
 				)
 				{
-					for(
-						auto const index
-						:
-						fcppt::enum_::make_range<
-							sanguis::client::draw2d::z_ordering
-						>()
+					sanguis::client::draw2d::scene::state::optional_scoped_unique_ptr const state(
+						render_states_[
+							index
+						]->create_scoped(
+							_render_context
+						)
+					);
+
+					normal_system_.render(
+						_render_context,
+						index
+					);
+				}
+
+				fcppt::optional::maybe_void(
+					hover_,
+					[
+						&_render_context
+					](
+						sanguis::client::draw2d::scene::hover::base_unique_ptr const &_hover
 					)
 					{
-						sanguis::client::draw2d::scene::state::optional_scoped_unique_ptr const state(
-							render_states_[
-								index
-							]->create_scoped(
-								_render_context
-							)
-						);
-
-						normal_system_.render(
-							_render_context,
-							index
-						);
-
-						world_->draw_after(
-							sanguis::client::draw2d::scene::world::render_parameters{
-								_render_context,
-								_player_center,
-								_translation,
-								index
-							}
+						_hover->draw(
+							_render_context
 						);
 					}
-				}
-			);
+				);
+			}
 
-			fcppt::optional::maybe_void(
-				hover_,
-				[
-					&_render_context
-				](
-					sanguis::client::draw2d::scene::hover::base_unique_ptr const &_hover
-				)
-				{
-					_hover->draw(
-						_render_context
-					);
+			world_->draw_after(
+				sanguis::client::draw2d::scene::world::render_parameters{
+					_render_context,
+					_translation
 				}
 			);
 		},

@@ -39,13 +39,7 @@ sanguis::client::draw2d::scene::world::graveyard::draw_after(
 	sanguis::client::draw2d::scene::world::render_parameters const &_parameters
 )
 {
-	if(
-		_parameters.z_ordering()
-		==
-		sanguis::client::draw2d::z_ordering::player_upper
-	)
-		light_.draw(
-			_parameters.render_context(),
-			_parameters.player_center()
-		);
+	light_.draw(
+		_parameters.render_context()
+	);
 }

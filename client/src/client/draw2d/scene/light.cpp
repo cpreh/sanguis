@@ -1,4 +1,3 @@
-#include <sanguis/client/draw2d/player_center.hpp>
 #include <sanguis/client/draw2d/scene/background_dim.hpp>
 #include <sanguis/client/draw2d/scene/light.hpp>
 #include <sanguis/client/draw2d/scene/light_texture_coordinates.hpp>
@@ -30,10 +29,8 @@
 #include <sge/sprite/roles/texture_coordinates0.hpp>
 #include <sge/viewport/manage_callback.hpp>
 #include <sge/viewport/manager.hpp>
-#include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/size_fun.hpp>
-#include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/dim/to_signed.hpp>
 #include <fcppt/math/vector/dim.hpp>
@@ -119,23 +116,9 @@ sanguis::client::draw2d::scene::light::~light()
 
 void
 sanguis::client::draw2d::scene::light::draw(
-	sge::renderer::context::core &_render_context,
-	sanguis::client::draw2d::player_center const _player_center
+	sge::renderer::context::core &_render_context
 )
 {
-	// TODO: Should we simplify this?
-	sprite_.pos(
-		_player_center.get().get()
-		-
-		sprite_.size()
-		/
-		fcppt::literal<
-			sanguis::client::draw2d::sprite::unit
-		>(
-			2
-		)
-	);
-
 	sge::renderer::state::core::sampler::scoped_single const sampler_state{
 		_render_context,
 		sge::renderer::texture::stage{

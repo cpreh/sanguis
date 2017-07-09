@@ -1,7 +1,6 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_SCENE_LIGHT_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SCENE_LIGHT_HPP_INCLUDED
 
-#include <sanguis/client/draw2d/player_center_fwd.hpp>
 #include <sanguis/client/draw2d/scene/light_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/client/object_decl.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_fwd.hpp>
@@ -39,8 +38,7 @@ public:
 
 	void
 	draw(
-		sge::renderer::context::core &,
-		sanguis::client::draw2d::player_center
+		sge::renderer::context::core &
 	);
 private:
 	void
