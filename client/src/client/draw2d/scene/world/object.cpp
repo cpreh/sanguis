@@ -136,6 +136,9 @@ sanguis::client::draw2d::scene::world::object::change(
 )
 {
 	state_ =
+		optional_state_unique_ptr();
+
+	state_ =
 		optional_state_unique_ptr(
 			fcppt::make_unique_ptr<
 				sanguis::client::draw2d::scene::world::state
