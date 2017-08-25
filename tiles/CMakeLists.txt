@@ -119,9 +119,13 @@ sanguis_add_library(
 		${sgeparsejson_TARGET}
 		${fcppt_core_TARGET}
 		${fcppt_log_TARGET}
+		${Boost_FILESYSTEM_LIBRARIES}
+		${Boost_SYSTEM_LIBRARIES}
 	TRANSITIVE_DEPS
 		sanguis_creator_interface
 		sgeimage2d_interface
 		fcppt_core_interface
 		fcppt_log_interface
+		${Boost_FILESYSTEM_LIBRARIES}
+		${Boost_SYSTEM_LIBRARIES}
 )

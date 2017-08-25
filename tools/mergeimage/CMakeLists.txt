@@ -11,6 +11,7 @@ sanguis_add_tool(
 		${fcppt_filesystem_TARGET}
 		${fcppt_options_TARGET}
 		${Boost_FILESYSTEM_LIBRARIES}
+		${Boost_SYSTEM_LIBRARIES}
 		${FCPPT_UTILS_MAIN_LINK_LIBS}
 	COMPILE_OPTIONS
 		${FCPPT_UTILS_MAIN_COMPILE_OPTIONS}

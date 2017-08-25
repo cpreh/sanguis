@@ -118,10 +118,12 @@ sanguis_add_library(
 	"${SANGUIS_MODEL_FILES}"
 	HAS_IMPL_DIR
 	DEPS
-		${fcppt_core_TARGET}
-		${fcppt_filesystem_TARGET}
 		${sgeparse_TARGET}
 		${sgeparsejson_TARGET}
+		${fcppt_core_TARGET}
+		${fcppt_filesystem_TARGET}
+		${Boost_FILESYSTEM_LIBRARIES}
+		${Boost_SYSTEM_LIBRARIES}
 	TRANSITIVE_DEPS
 		fcppt_core_interface
 )
