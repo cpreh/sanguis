@@ -5,6 +5,7 @@
 #include <sanguis/client/control/actions/nullary.hpp>
 #include <sanguis/client/control/actions/nullary_type.hpp>
 #include <sanguis/client/events/action.hpp>
+#include <sanguis/client/events/input.hpp>
 #include <sanguis/client/events/message.hpp>
 #include <sanguis/client/events/net_error.hpp>
 #include <sanguis/client/events/overlay.hpp>

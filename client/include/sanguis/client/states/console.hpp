@@ -2,8 +2,8 @@
 #define SANGUIS_CLIENT_STATES_CONSOLE_HPP_INCLUDED
 
 #include <sanguis/client/scoped_pause.hpp>
-#include <sanguis/client/console/activation.hpp>
 #include <sanguis/client/events/action_fwd.hpp>
+#include <sanguis/client/events/input_fwd.hpp>
 #include <sanguis/client/events/overlay_fwd.hpp>
 #include <sanguis/client/states/has_player.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -33,14 +33,19 @@ class console
 		console
 	);
 public:
-	typedef boost::mpl::list2<
+	typedef
+	boost::mpl::list3<
 		boost::statechart::custom_reaction<
 			sanguis::client::events::action
 		>,
 		boost::statechart::custom_reaction<
 			sanguis::client::events::overlay
+		>,
+		boost::statechart::custom_reaction<
+			sanguis::client::events::input
 		>
-	> reactions;
+	>
+	reactions;
 
 	explicit
 	console(
@@ -59,10 +64,13 @@ public:
 	react(
 		sanguis::client::events::overlay const &
 	);
+
+	boost::statechart::result
+	react(
+		sanguis::client::events::input const &
+	);
 private:
 	sanguis::client::scoped_pause const pause_;
-
-	sanguis::client::console::activation const console_activation_;
 };
 
 }

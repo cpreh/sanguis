@@ -14,8 +14,7 @@
 #include <sge/gui/style/base_fwd.hpp>
 #include <sge/gui/widget/box_container.hpp>
 #include <sge/gui/widget/text.hpp>
-#include <sge/input/cursor/object_fwd.hpp>
-#include <sge/input/focus/object_fwd.hpp>
+#include <sge/input/event_base_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
@@ -44,9 +43,7 @@ public:
 		sge::gui::style::base const &,
 		sge::renderer::device::ffp &,
 		sge::viewport::manager &,
-		sge::font::object &,
-		sge::input::cursor::object &,
-		sge::input::focus::object &
+		sge::font::object &
 	);
 
 	~chooser();
@@ -59,6 +56,11 @@ public:
 	void
 	draw(
 		sge::renderer::context::ffp &
+	);
+
+	void
+	input(
+		sge::input::event_base const &
 	);
 private:
 	void

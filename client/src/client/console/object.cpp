@@ -11,10 +11,16 @@
 #include <sge/console/callback/function.hpp>
 #include <sge/console/callback/name.hpp>
 #include <sge/console/callback/parameters.hpp>
+#include <sge/console/gfx/input_active.hpp>
 #include <sge/console/gfx/object.hpp>
 #include <sge/font/from_fcppt_string.hpp>
+#include <sge/input/event_base.hpp>
+#include <sge/input/focus/event/base.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/cast/dynamic.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
@@ -71,33 +77,42 @@ sanguis::client::console::object::register_server_command(
 }
 
 void
-sanguis::client::console::object::active(
-	bool const _active
-)
-{
-	gfx_.active(
-		_active
-	);
-}
-
-bool
-sanguis::client::console::object::active() const
-{
-	return
-		gfx_.active();
-}
-
-void
 sanguis::client::console::object::draw(
 	sge::renderer::context::ffp &_context
 )
 {
-	if(
-		this->active()
-	)
-		gfx_.render(
-			_context
-		);
+	gfx_.render(
+		_context,
+		sge::console::gfx::input_active{
+			true
+		}
+	);
+}
+
+void
+sanguis::client::console::object::input_event(
+	sge::input::event_base const &_event
+)
+{
+	fcppt::optional::maybe_void(
+		fcppt::cast::dynamic<
+			sge::input::focus::event::base const
+		>(
+			_event
+		),
+		[
+			this
+		](
+			fcppt::reference<
+				sge::input::focus::event::base const
+			> const _focus_event
+		)
+		{
+			gfx_.focus_event(
+				_focus_event.get()
+			);
+		}
+	);
 }
 
 sge::console::object &

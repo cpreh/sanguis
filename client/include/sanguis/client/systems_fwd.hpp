@@ -1,8 +1,6 @@
 #ifndef SANGUIS_CLIENT_SYSTEMS_FWD_HPP_INCLUDED
 #define SANGUIS_CLIENT_SYSTEMS_FWD_HPP_INCLUDED
 
-#include <sge/systems/cursor_demuxer_fwd.hpp>
-#include <sge/systems/focus_collector_fwd.hpp>
 #include <sge/systems/instance_fwd.hpp>
 #include <sge/systems/renderer_caps.hpp>
 #include <sge/systems/with_audio_loader_fwd.hpp>
@@ -29,12 +27,7 @@ sge::systems::instance<
 		sge::systems::with_renderer<
 			sge::systems::renderer_caps::ffp
 		>,
-		sge::systems::with_input<
-			boost::mpl::vector2<
-				sge::systems::focus_collector,
-				sge::systems::cursor_demuxer
-			>
-		>,
+		sge::systems::with_input,
 		sge::systems::with_image2d,
 		sge::systems::with_font,
 		sge::systems::with_audio_loader,

@@ -3,6 +3,7 @@
 
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/events/connected_fwd.hpp>
+#include <sanguis/client/events/input_fwd.hpp>
 #include <sanguis/client/events/message_fwd.hpp>
 #include <sanguis/client/events/net_error_fwd.hpp>
 #include <sanguis/client/events/render_fwd.hpp>
@@ -39,7 +40,7 @@ class menu
 		menu
 	);
 public:
-	typedef boost::mpl::list5<
+	typedef boost::mpl::list6<
 		boost::statechart::custom_reaction<
 			sanguis::client::events::tick
 		>,
@@ -54,6 +55,9 @@ public:
 		>,
 		boost::statechart::custom_reaction<
 			sanguis::client::events::net_error
+		>,
+		boost::statechart::custom_reaction<
+			sanguis::client::events::input
 		>
 	> reactions;
 
@@ -92,6 +96,11 @@ public:
 	boost::statechart::result
 	react(
 		sanguis::client::events::net_error const &
+	);
+
+	boost::statechart::result
+	react(
+		sanguis::client::events::input const &
 	);
 
 	sanguis::messages::call::result

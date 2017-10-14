@@ -4,6 +4,7 @@
 #include <sanguis/client/control/actions/nullary.hpp>
 #include <sanguis/client/control/actions/nullary_type.hpp>
 #include <sanguis/client/events/action.hpp>
+#include <sanguis/client/events/input.hpp>
 #include <sanguis/client/events/message.hpp>
 #include <sanguis/client/events/net_error.hpp>
 #include <sanguis/client/events/overlay.hpp>
@@ -50,13 +51,7 @@ sanguis::client::states::perk_chooser::perk_chooser(
 		>().viewport_manager(),
 		this->context<
 			sanguis::client::machine
-		>().font_object(),
-		this->context<
-			sanguis::client::machine
-		>().cursor(),
-		this->context<
-			sanguis::client::machine
-		>().focus()
+		>().font_object()
 	),
 	hud_details_(
 		this->context<
@@ -145,6 +140,19 @@ sanguis::client::states::perk_chooser::react(
 {
 	perk_chooser_gui_.process(
 		_event.delta()
+	);
+
+	return
+		this->forward_event();
+}
+
+boost::statechart::result
+sanguis::client::states::perk_chooser::react(
+	sanguis::client::events::input const &_event
+)
+{
+	perk_chooser_gui_.input(
+		_event.get()
 	);
 
 	return

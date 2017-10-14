@@ -2,6 +2,7 @@
 #include <sanguis/client/control/actions/nullary.hpp>
 #include <sanguis/client/control/actions/nullary_type.hpp>
 #include <sanguis/client/events/action.hpp>
+#include <sanguis/client/events/input.hpp>
 #include <sanguis/client/events/message.hpp>
 #include <sanguis/client/events/net_error.hpp>
 #include <sanguis/client/events/overlay.hpp>
@@ -9,7 +10,6 @@
 #include <sanguis/client/events/tick.hpp>
 #include <sanguis/client/states/console.hpp>
 #include <sanguis/client/states/ingame.hpp>
-#include <sanguis/client/states/ingame_menu.hpp>
 #include <sanguis/client/states/perk_chooser.hpp>
 #include <sanguis/client/states/running.hpp>
 #include <fcppt/assert/unreachable.hpp>
@@ -26,11 +26,6 @@ sanguis::client::states::ingame::ingame(
 :
 	my_base(
 		_ctx
-	),
-	scoped_cursor_(
-		this->context<
-			sanguis::client::states::running
-		>().cursor()
 	)
 {
 }

@@ -5,6 +5,7 @@
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/events/action.hpp>
 #include <sanguis/client/events/connected.hpp>
+#include <sanguis/client/events/input.hpp>
 #include <sanguis/client/events/menu.hpp>
 #include <sanguis/client/events/message.hpp>
 #include <sanguis/client/events/net_error.hpp>
@@ -69,12 +70,6 @@ sanguis::client::states::menu::menu(
 		this->context<
 			sanguis::client::machine
 		>().font_object(),
-		this->context<
-			sanguis::client::machine
-		>().cursor(),
-		this->context<
-			sanguis::client::machine
-		>().focus(),
 		this->context<
 			sanguis::client::machine
 		>().settings(),
@@ -228,6 +223,19 @@ sanguis::client::states::menu::react(
 		fcppt::from_std_string(
 			_error.code().message()
 		)
+	);
+
+	return
+		this->discard_event();
+}
+
+boost::statechart::result
+sanguis::client::states::menu::react(
+	sanguis::client::events::input const &_input
+)
+{
+	menu_.input(
+		_input.get()
 	);
 
 	return

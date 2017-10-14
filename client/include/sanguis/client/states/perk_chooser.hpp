@@ -3,6 +3,7 @@
 
 #include <sanguis/client/scoped_pause.hpp>
 #include <sanguis/client/events/action_fwd.hpp>
+#include <sanguis/client/events/input_fwd.hpp>
 #include <sanguis/client/events/overlay_fwd.hpp>
 #include <sanguis/client/events/tick_fwd.hpp>
 #include <sanguis/client/gui/hud/scoped_details.hpp>
@@ -35,7 +36,7 @@ class perk_chooser
 		perk_chooser
 	);
 public:
-	typedef boost::mpl::list3<
+	typedef boost::mpl::list4<
 		boost::statechart::custom_reaction<
 			sanguis::client::events::action
 		>,
@@ -44,6 +45,9 @@ public:
 		>,
 		boost::statechart::custom_reaction<
 			sanguis::client::events::tick
+		>,
+		boost::statechart::custom_reaction<
+			sanguis::client::events::input
 		>
 	> reactions;
 
@@ -68,6 +72,11 @@ public:
 	boost::statechart::result
 	react(
 		sanguis::client::events::tick const &
+	);
+
+	boost::statechart::result
+	react(
+		sanguis::client::events::input const &
 	);
 private:
 	sanguis::client::scoped_pause const pause_;

@@ -26,6 +26,7 @@
 #include <sanguis/client/draw2d/create.hpp>
 #include <sanguis/client/events/action.hpp>
 #include <sanguis/client/events/connected.hpp>
+#include <sanguis/client/events/input.hpp>
 #include <sanguis/client/events/menu.hpp>
 #include <sanguis/client/events/message.hpp>
 #include <sanguis/client/events/net_error.hpp>
@@ -68,7 +69,6 @@
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <sge/console/object.hpp>
 #include <sge/font/from_fcppt_string.hpp>
-#include <sge/input/cursor/activatable_fwd.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
@@ -146,13 +146,7 @@ sanguis::client::states::running::running(
 			>().renderer(),
 			this->context<
 				sanguis::client::machine
-			>().viewport_manager(),
-			this->context<
-				sanguis::client::machine
-			>().focus(),
-			this->context<
-				sanguis::client::machine
-			>().cursor()
+			>().viewport_manager()
 		)
 	),
 	drawer_(
@@ -200,12 +194,6 @@ sanguis::client::states::running::running(
 		fcppt::make_unique_ptr<
 			sanguis::client::control::input_translator
 		>(
-			this->context<
-				sanguis::client::machine
-			>().focus(),
-			this->context<
-				sanguis::client::machine
-			>().cursor(),
 			sanguis::client::control::actions::callback{
 				std::bind(
 					&sanguis::client::states::running::handle_player_action,
@@ -339,6 +327,19 @@ sanguis::client::states::running::react(
 		this->transit<
 			sanguis::client::states::menu
 		>();
+}
+
+boost::statechart::result
+sanguis::client::states::running::react(
+	sanguis::client::events::input const &_input
+)
+{
+	input_translator_->on_event(
+		_input.get()
+	);
+
+	return
+		this->discard_event();
 }
 
 sanguis::messages::call::result
@@ -646,13 +647,6 @@ sanguis::client::states::running::console()
 {
 	return
 		*console_;
-}
-
-sge::input::cursor::activatable &
-sanguis::client::states::running::cursor()
-{
-	return
-		input_translator_->cursor();
 }
 
 sanguis::client::gui::hud::object &

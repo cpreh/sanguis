@@ -9,6 +9,7 @@
 #include <sanguis/client/console/object.hpp>
 #include <sanguis/client/control/action_handler.hpp>
 #include <sanguis/client/events/action.hpp>
+#include <sanguis/client/events/input.hpp>
 #include <sanguis/client/events/menu.hpp>
 #include <sanguis/client/events/message.hpp>
 #include <sanguis/client/events/net_error.hpp>

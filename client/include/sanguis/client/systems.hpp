@@ -2,8 +2,6 @@
 #define SANGUIS_CLIENT_SYSTEMS_HPP_INCLUDED
 
 #include <sanguis/client/systems_fwd.hpp>
-#include <sge/systems/cursor_demuxer.hpp>
-#include <sge/systems/focus_collector.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/systems/with_audio_loader.hpp>
 #include <sge/systems/with_audio_player.hpp>

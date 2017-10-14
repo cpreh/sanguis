@@ -18,11 +18,10 @@
 #include <sge/console/gfx/object_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/gui/style/base_fwd.hpp>
-#include <sge/input/cursor/object_fwd.hpp>
-#include <sge/input/focus/object_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <sge/window/system_fwd.hpp>
+#include <awl/event/base_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/log/context_fwd.hpp>
@@ -60,8 +59,6 @@ public:
 		sge::window::system &,
 		sge::font::object &,
 		sge::console::gfx::object &,
-		sge::input::focus::object &,
-		sge::input::cursor::object &,
 		sge::renderer::device::ffp &,
 		sanguis::io_service &,
 		sge::viewport::manager &,
@@ -96,9 +93,6 @@ public:
 	);
 
 	void
-	draw();
-
-	void
 	quit();
 
 	sanguis::client::config::settings::object &
@@ -113,9 +107,6 @@ public:
 	sge::renderer::device::ffp &
 	renderer() const;
 
-	sge::input::focus::object &
-	focus() const;
-
 	sge::font::object &
 	font_object() const;
 
@@ -124,12 +115,6 @@ public:
 
 	sanguis::client::load::context const &
 	resources() const;
-
-	sge::input::cursor::object &
-	cursor();
-
-	sge::input::cursor::object const &
-	cursor() const;
 
 	sge::viewport::manager &
 	viewport_manager() const;
@@ -140,6 +125,14 @@ public:
 	fcppt::log::context &
 	log_context() const;
 private:
+	void
+	draw();
+
+	void
+	process_sge_event(
+		awl::event::base const &
+	);
+
 	void
 	connect_callback();
 
@@ -166,8 +159,6 @@ private:
 
 	sge::gui::style::base const &gui_style_;
 
-	sge::input::focus::object &focus_;
-
 	sge::renderer::device::ffp &renderer_;
 
 	sge::viewport::manager &viewport_manager_;
@@ -186,8 +177,6 @@ private:
 	sge::console::gfx::object &console_gfx_;
 
 	sanguis::client::server_callback const server_callback_;
-
-	sge::input::cursor::object &cursor_;
 
 	sanguis::client::cursor &cursor_gfx_;
 };

@@ -5,15 +5,11 @@
 #include <sanguis/client/control/actions/binary_type_fwd.hpp>
 #include <sanguis/client/control/actions/callback.hpp>
 #include <sanguis/client/control/actions/nullary_type_fwd.hpp>
-#include <sge/input/cursor/activatable.hpp>
-#include <sge/input/cursor/button_event_fwd.hpp>
-#include <sge/input/cursor/move_event_fwd.hpp>
-#include <sge/input/cursor/object_fwd.hpp>
-#include <sge/input/cursor/position_unit.hpp>
-#include <sge/input/focus/key_event_fwd.hpp>
-#include <sge/input/focus/object_fwd.hpp>
+#include <sge/input/event_base_fwd.hpp>
+#include <sge/input/cursor/event/button_fwd.hpp>
+#include <sge/input/cursor/event/move_fwd.hpp>
+#include <sge/input/focus/event/key_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/signal/auto_connection.hpp>
 
 
 namespace sanguis
@@ -29,35 +25,37 @@ class input_translator
 		input_translator
 	);
 public:
+	// TODO: Translate into events instead of a callback
+	explicit
 	input_translator(
-		sge::input::focus::object &,
-		sge::input::cursor::object &,
 		sanguis::client::control::actions::callback const &
 	);
 
 	~input_translator();
 
-	sge::input::cursor::activatable &
-	cursor();
+	void
+	on_event(
+		sge::input::event_base const &
+	);
 private:
 	void
-	key_callback(
-		sge::input::focus::key_event const &
+	key_event(
+		sge::input::focus::event::key const &
 	);
 
 	void
-	move_callback(
-		sge::input::cursor::move_event const &
+	move_event(
+		sge::input::cursor::event::move const &
 	);
 
 	void
-	button_callback(
-		sge::input::cursor::button_event const &
+	button_event(
+		sge::input::cursor::event::button const &
 	);
 
 	void
 	direction_event(
-		sge::input::focus::key_event const &
+		sge::input::focus::event::key const &
 	);
 
 	void
@@ -72,14 +70,7 @@ private:
 		sanguis::client::control::actions::binary_type
 	);
 
-	sge::input::cursor::activatable cursor_;
-
 	sanguis::client::control::actions::callback const callback_;
-
-	fcppt::signal::auto_connection const
-		key_connection_,
-		axis_connection_,
-		button_connection_;
 };
 
 }

@@ -6,6 +6,7 @@
 #include <sge/console/arg_list.hpp>
 #include <sge/console/object_fwd.hpp>
 #include <sge/console/gfx/object_fwd.hpp>
+#include <sge/input/event_base_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
@@ -39,16 +40,13 @@ public:
 	);
 
 	void
-	active(
-		bool
-	);
-
-	bool
-	active() const;
-
-	void
 	draw(
 		sge::renderer::context::ffp &
+	);
+
+	void
+	input_event(
+		sge::input::event_base const &
 	);
 
 	sge::console::object &

@@ -4,6 +4,7 @@
 #include <sanguis/client/control/actions/nullary.hpp>
 #include <sanguis/client/control/actions/nullary_type.hpp>
 #include <sanguis/client/events/action.hpp>
+#include <sanguis/client/events/input.hpp>
 #include <sanguis/client/events/message.hpp>
 #include <sanguis/client/events/net_error.hpp>
 #include <sanguis/client/events/overlay.hpp>
@@ -34,11 +35,6 @@ sanguis::client::states::console::console(
 				sanguis::client::machine
 			>()
 		)
-	),
-	console_activation_(
-		this->context<
-			sanguis::client::states::running
-		>().console()
 	)
 {
 }
@@ -105,6 +101,21 @@ sanguis::client::states::console::react(
 		sanguis::client::states::running
 	>().console().draw(
 		_event.context()
+	);
+
+	return
+		this->forward_event();
+}
+
+boost::statechart::result
+sanguis::client::states::console::react(
+	sanguis::client::events::input const &_event
+)
+{
+	this->context<
+		sanguis::client::states::running
+	>().console().input_event(
+		_event.get()
 	);
 
 	return

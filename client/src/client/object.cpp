@@ -147,7 +147,6 @@ sanguis::client::object::object(
 		console_,
 		sys_->renderer_device_ffp(),
 		*font_object_,
-		sys_->focus_collector(),
 		sys_->viewport_manager(),
 		fcppt::record::get<
 			sanguis::client::args::labels::history_size
@@ -157,7 +156,7 @@ sanguis::client::object::object(
 	),
 	cursor_{
 		sys_->renderer_device_ffp(),
-		sys_->cursor_demuxer(),
+		sys_->input_processor(),
 		resources_.resources().textures()
 	},
 	machine_(
@@ -176,8 +175,6 @@ sanguis::client::object::object(
 		sys_->window_system(),
 		*font_object_,
 		console_gfx_.get(),
-		sys_->focus_collector(),
-		sys_->cursor_demuxer(),
 		sys_->renderer_device_ffp(),
 		io_service_,
 		sys_->viewport_manager(),
@@ -246,7 +243,9 @@ sanguis::client::object::run()
 		?
 			awl::main::exit_failure()
 		:
-			sys_->window_system().exit_code();
+			// TODO: Return the actual error here
+			awl::main::exit_success()
+		;
 }
 
 void
@@ -304,8 +303,6 @@ sanguis::client::object::loop_handler()
 
 		return;
 	}
-
-	machine_.draw();
 
 	this->register_handler();
 }

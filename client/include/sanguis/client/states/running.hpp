@@ -10,6 +10,7 @@
 #include <sanguis/client/control/optional_cursor_position_fwd.hpp>
 #include <sanguis/client/control/actions/any_fwd.hpp>
 #include <sanguis/client/draw/base_unique_ptr.hpp>
+#include <sanguis/client/events/input_fwd.hpp>
 #include <sanguis/client/events/message_fwd.hpp>
 #include <sanguis/client/events/net_error_fwd.hpp>
 #include <sanguis/client/events/overlay_fwd.hpp>
@@ -32,7 +33,6 @@
 #include <sanguis/messages/server/remove_weapon_fwd.hpp>
 #include <sanguis/messages/server/slowdown_fwd.hpp>
 #include <sanguis/messages/server/unpause_fwd.hpp>
-#include <sge/input/cursor/activatable_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/log/object.hpp>
@@ -63,7 +63,7 @@ class running
 		running
 	);
 public:
-	typedef boost::mpl::list5<
+	typedef boost::mpl::list6<
 		boost::statechart::custom_reaction<
 			sanguis::client::events::tick
 		>,
@@ -78,6 +78,9 @@ public:
 		>,
 		boost::statechart::custom_reaction<
 			sanguis::client::events::net_error
+		>,
+		boost::statechart::custom_reaction<
+			sanguis::client::events::input
 		>
 	> reactions;
 
@@ -112,6 +115,11 @@ public:
 	boost::statechart::result
 	react(
 		sanguis::client::events::net_error const &
+	);
+
+	boost::statechart::result
+	react(
+		sanguis::client::events::input const &
 	);
 
 	typedef
@@ -185,9 +193,6 @@ public:
 
 	sanguis::client::console::object &
 	console();
-
-	sge::input::cursor::activatable &
-	cursor();
 
 	sanguis::client::gui::hud::object &
 	hud_gui();

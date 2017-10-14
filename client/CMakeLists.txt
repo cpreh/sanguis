@@ -39,7 +39,6 @@ set(
 	include/sanguis/client/config/settings/optional_section.hpp
 	include/sanguis/client/config/settings/optional_section_fwd.hpp
 	include/sanguis/client/config/settings/saver.hpp
-	include/sanguis/client/console/activation.hpp
 	include/sanguis/client/console/gfx.hpp
 	include/sanguis/client/console/object.hpp
 	include/sanguis/client/console/object_fwd.hpp
@@ -86,8 +85,6 @@ set(
 	include/sanguis/client/create.hpp
 	include/sanguis/client/create_systems.hpp
 	include/sanguis/client/cursor.hpp
-	include/sanguis/client/cursor_area.hpp
-	include/sanguis/client/cursor_area_fwd.hpp
 	include/sanguis/client/cursor_fwd.hpp
 	include/sanguis/client/dispatch.hpp
 	include/sanguis/client/dispatch_default_function.hpp
@@ -421,6 +418,8 @@ set(
 	include/sanguis/client/events/action_fwd.hpp
 	include/sanguis/client/events/connected.hpp
 	include/sanguis/client/events/connected_fwd.hpp
+	include/sanguis/client/events/input.hpp
+	include/sanguis/client/events/input_fwd.hpp
 	include/sanguis/client/events/menu.hpp
 	include/sanguis/client/events/menu_fwd.hpp
 	include/sanguis/client/events/message.hpp
@@ -578,8 +577,6 @@ set(
 	include/sanguis/client/object_base.hpp
 	include/sanguis/client/object_base_fwd.hpp
 	include/sanguis/client/object_base_unique_ptr.hpp
-	include/sanguis/client/optional_cursor_area.hpp
-	include/sanguis/client/optional_cursor_area_fwd.hpp
 	include/sanguis/client/optional_health_pair.hpp
 	include/sanguis/client/optional_health_pair_fwd.hpp
 	include/sanguis/client/perk/category.hpp
@@ -633,8 +630,6 @@ set(
 	include/sanguis/client/states/has_player.hpp
 	include/sanguis/client/states/ingame.hpp
 	include/sanguis/client/states/ingame_fwd.hpp
-	include/sanguis/client/states/ingame_menu.hpp
-	include/sanguis/client/states/ingame_menu_fwd.hpp
 	include/sanguis/client/states/log_location.hpp
 	include/sanguis/client/states/menu.hpp
 	include/sanguis/client/states/menu_fwd.hpp
@@ -658,7 +653,6 @@ set(
 	src/client/config/settings/file.cpp
 	src/client/config/settings/object.cpp
 	src/client/config/settings/saver.cpp
-	src/client/console/activation.cpp
 	src/client/console/gfx.cpp
 	src/client/console/object.cpp
 	src/client/control/action_handler.cpp
@@ -790,6 +784,7 @@ set(
 	src/client/draw2d/translate/vector_from_client.cpp
 	src/client/draw2d/translate/vector_to_client.cpp
 	src/client/events/action.cpp
+	src/client/events/input.cpp
 	src/client/events/message.cpp
 	src/client/events/net_error.cpp
 	src/client/events/overlay.cpp
@@ -891,7 +886,6 @@ set(
 	src/client/states/console.cpp
 	src/client/states/has_player.cpp
 	src/client/states/ingame.cpp
-	src/client/states/ingame_menu.cpp
 	src/client/states/log_location.cpp
 	src/client/states/menu.cpp
 	src/client/states/perk_chooser.cpp

@@ -29,8 +29,6 @@
 #include <sge/gui/widget/frame.hpp>
 #include <sge/gui/widget/preferred_size.hpp>
 #include <sge/gui/widget/text.hpp>
-#include <sge/input/cursor/object_fwd.hpp>
-#include <sge/input/focus/object_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/rect_fwd.hpp>
@@ -39,9 +37,6 @@
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/optional/object_decl.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <memory>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -64,9 +59,7 @@ public:
 		sge::gui::style::base const &,
 		sge::font::object &,
 		sge::renderer::device::ffp &,
-		sge::viewport::manager &,
-		sge::input::focus::object &,
-		sge::input::cursor::object &
+		sge::viewport::manager &
 	);
 
 	~object();

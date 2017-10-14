@@ -7,6 +7,7 @@
 #include <sanguis/client/args/result_fwd.hpp>
 #include <sanguis/client/config/settings/object_fwd.hpp>
 #include <sanguis/client/events/connected.hpp>
+#include <sanguis/client/events/input.hpp>
 #include <sanguis/client/events/message.hpp>
 #include <sanguis/client/events/net_error.hpp>
 #include <sanguis/client/events/render.hpp>
@@ -29,27 +30,38 @@
 #include <sge/console/gfx/object.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/gui/style/base_fwd.hpp>
-#include <sge/input/cursor/object_fwd.hpp>
-#include <sge/input/focus/object_fwd.hpp>
+#include <sge/input/event_base.hpp>
 #include <sge/renderer/context/scoped_ffp.hpp>
 #include <sge/renderer/device/ffp.hpp>
+#include <sge/renderer/event/render.hpp>
 #include <sge/renderer/target/onscreen.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <sge/window/system.hpp>
+#include <awl/event/base.hpp>
+#include <awl/event/base_unique_ptr.hpp>
+#include <awl/event/container.hpp>
+#include <awl/main/exit_code.hpp>
 #include <awl/main/exit_success.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/from_std_string.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/cast/dynamic_fun.hpp>
+#include <fcppt/either/match.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/context_fwd.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/signal/auto_connection.hpp>
+#include <fcppt/variant/dynamic_cast.hpp>
+#include <fcppt/variant/match.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/mpl/vector/vector10.hpp>
 #include <boost/system/error_code.hpp>
 #include <boost/system/system_error.hpp>
 #include <functional>
@@ -67,8 +79,6 @@ sanguis::client::machine::machine(
 	sge::window::system &_window_system,
 	sge::font::object &_font_object,
 	sge::console::gfx::object &_console_gfx,
-	sge::input::focus::object &_focus,
-	sge::input::cursor::object &_cursor,
 	sge::renderer::device::ffp &_renderer,
 	sanguis::io_service &_io_service,
 	sge::viewport::manager &_viewport_manager,
@@ -98,9 +108,6 @@ sanguis::client::machine::machine(
 	),
 	gui_style_(
 		_gui_style
-	),
-	focus_(
-		_focus
 	),
 	renderer_(
 		_renderer
@@ -160,9 +167,6 @@ sanguis::client::machine::machine(
 	),
 	server_callback_(
 		_server_callback
-	),
-	cursor_(
-		_cursor
 	),
 	cursor_gfx_(
 		_cursor_gfx
@@ -268,22 +272,35 @@ sanguis::client::machine::process(
 	);
 
 	return
-		window_system_.poll();
-}
+		fcppt::either::match(
+			window_system_.poll(),
+			[](
+				// TODO: Return this from client::object
+				awl::main::exit_code const _result
+			)
+			{
+				return
+					false;
+			},
+			[
+				this
+			](
+				awl::event::container const &_events
+			)
+			{
+				for(
+					awl::event::base_unique_ptr const &event
+					:
+					_events
+				)
+					this->process_sge_event(
+						*event
+					);
 
-void
-sanguis::client::machine::draw()
-{
-	sge::renderer::context::scoped_ffp const block(
-		renderer_,
-		renderer_.onscreen_target()
-	);
-
-	this->process_event(
-		sanguis::client::events::render(
-			block.get()
-		)
-	);
+				return
+					true;
+			}
+		);
 }
 
 void
@@ -328,13 +345,6 @@ sanguis::client::machine::renderer() const
 		renderer_;
 }
 
-sge::input::focus::object &
-sanguis::client::machine::focus() const
-{
-	return
-		focus_;
-}
-
 sge::font::object &
 sanguis::client::machine::font_object() const
 {
@@ -356,20 +366,6 @@ sanguis::client::machine::resources() const
 		resources_;
 }
 
-sge::input::cursor::object &
-sanguis::client::machine::cursor()
-{
-	return
-		cursor_;
-}
-
-sge::input::cursor::object const &
-sanguis::client::machine::cursor() const
-{
-	return
-		cursor_;
-}
-
 sge::viewport::manager &
 sanguis::client::machine::viewport_manager() const
 {
@@ -389,6 +385,73 @@ sanguis::client::machine::log_context() const
 {
 	return
 		log_context_;
+}
+
+void
+sanguis::client::machine::draw()
+{
+	sge::renderer::context::scoped_ffp const block(
+		renderer_,
+		renderer_.onscreen_target()
+	);
+
+	this->process_event(
+		sanguis::client::events::render(
+			block.get()
+		)
+	);
+}
+
+void
+sanguis::client::machine::process_sge_event(
+	awl::event::base const &_event
+)
+{
+	fcppt::optional::maybe_void(
+		fcppt::variant::dynamic_cast_<
+			boost::mpl::vector2<
+				sge::renderer::event::render const,
+				sge::input::event_base const
+			>,
+			fcppt::cast::dynamic_fun
+		>(
+			_event
+		),
+		[
+			this
+		](
+			auto const &_variant
+		)
+		{
+			fcppt::variant::match(
+				_variant,
+				[
+					this
+				](
+					fcppt::reference<
+						sge::renderer::event::render const
+					>
+				)
+				{
+					this->draw();
+				},
+				[
+					this
+				](
+					fcppt::reference<
+						sge::input::event_base const
+					> const _input_event
+				)
+				{
+					this->process_event(
+						sanguis::client::events::input(
+							_input_event.get()
+						)
+					);
+				}
+			);
+		}
+	);
 }
 
 void

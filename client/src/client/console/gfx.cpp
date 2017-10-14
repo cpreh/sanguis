@@ -7,7 +7,6 @@
 #include <sge/font/rect.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/image/color/any/object.hpp>
-#include <sge/input/focus/object_fwd.hpp>
 #include <sge/renderer/pixel_rect.hpp>
 #include <sge/renderer/pixel_unit.hpp>
 #include <sge/renderer/device/ffp.hpp>
@@ -38,7 +37,6 @@ sanguis::client::console::gfx::gfx(
 	sge::console::object &_console,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font_object,
-	sge::input::focus::object &_focus,
 	sge::viewport::manager &_viewport_manager,
 	sge::console::gfx::output_line_limit const _history_size
 )
@@ -53,7 +51,6 @@ sanguis::client::console::gfx::gfx(
 			}
 		),
 		_font_object,
-		_focus,
 		::make_console_rect(
 			_renderer.onscreen_target().viewport()
 		),

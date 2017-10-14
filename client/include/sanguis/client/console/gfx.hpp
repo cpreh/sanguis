@@ -5,7 +5,6 @@
 #include <sge/console/gfx/object.hpp>
 #include <sge/console/gfx/output_line_limit_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
-#include <sge/input/focus/object_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/renderer/target/viewport_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
@@ -30,7 +29,6 @@ public:
 		sge::console::object &,
 		sge::renderer::device::ffp &,
 		sge::font::object &,
-		sge::input::focus::object &,
 		sge::viewport::manager &,
 		sge::console::gfx::output_line_limit
 	);

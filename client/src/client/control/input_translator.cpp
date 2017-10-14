@@ -14,24 +14,23 @@
 #include <sanguis/client/control/actions/scale.hpp>
 #include <sanguis/client/control/actions/scale_type.hpp>
 #include <sanguis/client/control/actions/variant.hpp>
-#include <sge/input/cursor/activatable.hpp>
-#include <sge/input/cursor/button_callback.hpp>
-#include <sge/input/cursor/button_event.hpp>
-#include <sge/input/cursor/move_callback.hpp>
-#include <sge/input/cursor/move_event.hpp>
-#include <sge/input/cursor/object_fwd.hpp>
+#include <sge/input/event_base.hpp>
 #include <sge/input/cursor/position.hpp>
-#include <sge/input/focus/key_callback.hpp>
-#include <sge/input/focus/key_event.hpp>
-#include <sge/input/focus/object.hpp>
+#include <sge/input/cursor/event/button.hpp>
+#include <sge/input/cursor/event/move.hpp>
+#include <sge/input/focus/event/key.hpp>
 #include <sge/input/key/code.hpp>
-#include <sge/input/mouse/device.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/assert/unreachable.hpp>
+#include <fcppt/cast/dynamic_fun.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/optional/map.hpp>
+#include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/variant/dynamic_cast.hpp>
+#include <fcppt/variant/match.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <functional>
+#include <boost/mpl/vector/vector10.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -52,49 +51,11 @@ key_scale_value(
 }
 
 sanguis::client::control::input_translator::input_translator(
-	sge::input::focus::object &_focus,
-	sge::input::cursor::object &_cursor,
 	sanguis::client::control::actions::callback const &_callback
 )
 :
-	cursor_(
-		_cursor
-	),
 	callback_(
 		_callback
-	),
-	key_connection_(
-		_focus.key_callback(
-			sge::input::focus::key_callback{
-				std::bind(
-					&sanguis::client::control::input_translator::key_callback,
-					this,
-					std::placeholders::_1
-				)
-			}
-		)
-	),
-	axis_connection_(
-		cursor_.move_callback(
-			sge::input::cursor::move_callback{
-				std::bind(
-					&sanguis::client::control::input_translator::move_callback,
-					this,
-					std::placeholders::_1
-				)
-			}
-		)
-	),
-	button_connection_(
-		cursor_.button_callback(
-			sge::input::cursor::button_callback{
-				std::bind(
-					&sanguis::client::control::input_translator::button_callback,
-					this,
-					std::placeholders::_1
-				)
-			}
-		)
 	)
 {
 }
@@ -103,21 +64,79 @@ sanguis::client::control::input_translator::~input_translator()
 {
 }
 
-sge::input::cursor::activatable &
-sanguis::client::control::input_translator::cursor()
+void
+sanguis::client::control::input_translator::on_event(
+	sge::input::event_base const &_event
+)
 {
-	return
-		cursor_;
+	fcppt::optional::maybe_void(
+		fcppt::variant::dynamic_cast_<
+			boost::mpl::vector3<
+				sge::input::focus::event::key const,
+				sge::input::cursor::event::move const,
+				sge::input::cursor::event::button const
+			>,
+			fcppt::cast::dynamic_fun
+		>(
+			_event
+		),
+		[
+			this
+		](
+			auto const &_variant
+		)
+		{
+			fcppt::variant::match(
+				_variant,
+				[
+					this
+				](
+					fcppt::reference<
+						sge::input::focus::event::key const
+					> const _key_event
+				)
+				{
+					this->key_event(
+						_key_event.get()
+					);
+				},
+				[
+					this
+				](
+					fcppt::reference<
+						sge::input::cursor::event::move const
+					> const _move_event
+				)
+				{
+					this->move_event(
+						_move_event.get()
+					);
+				},
+				[
+					this
+				](
+					fcppt::reference<
+						sge::input::cursor::event::button const
+					> const _button_event
+				)
+				{
+					this->button_event(
+						_button_event.get()
+					);
+				}
+			);
+		}
+	);
 }
 
 void
-sanguis::client::control::input_translator::key_callback(
-	sge::input::focus::key_event const &_event
+sanguis::client::control::input_translator::key_event(
+	sge::input::focus::event::key const &_event
 )
 {
 	// FIXME: Don't hardcode key_codes
 	switch(
-		_event.key().code()
+		_event.get().code()
 	)
 	{
 	case sge::input::key::code::a:
@@ -176,8 +195,8 @@ sanguis::client::control::input_translator::key_callback(
 }
 
 void
-sanguis::client::control::input_translator::move_callback(
-	sge::input::cursor::move_event const &_event
+sanguis::client::control::input_translator::move_event(
+	sge::input::cursor::event::move const &_event
 )
 {
 	callback_(
@@ -206,8 +225,8 @@ sanguis::client::control::input_translator::move_callback(
 }
 
 void
-sanguis::client::control::input_translator::button_callback(
-	sge::input::cursor::button_event const &_event
+sanguis::client::control::input_translator::button_event(
+	sge::input::cursor::event::button const &_event
 )
 {
 	switch(
@@ -233,7 +252,7 @@ sanguis::client::control::input_translator::button_callback(
 
 void
 sanguis::client::control::input_translator::direction_event(
-	sge::input::focus::key_event const &_event
+	sge::input::focus::event::key const &_event
 )
 {
 	callback_(
@@ -241,10 +260,10 @@ sanguis::client::control::input_translator::direction_event(
 			sanguis::client::control::actions::variant(
 				sanguis::client::control::actions::scale(
 					::key_scale_type(
-						_event.key().code()
+						_event.get().code()
 					),
 					::key_scale_value(
-						_event.key().code(),
+						_event.get().code(),
 						_event.pressed()
 					)
 				)

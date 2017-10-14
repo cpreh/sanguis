@@ -33,8 +33,6 @@
 #include <sge/gui/widget/reference_alignment_vector.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/image/color/any/object.hpp>
-#include <sge/input/cursor/object_fwd.hpp>
-#include <sge/input/focus/object_fwd.hpp>
 #include <sge/renderer/context/ffp.hpp>
 #include <sge/renderer/device/ffp.hpp>
 #include <sge/rucksack/alignment.hpp>
@@ -65,9 +63,7 @@ sanguis::client::gui::hud::object::object(
 	sge::gui::style::base const &_gui_style,
 	sge::font::object &_font,
 	sge::renderer::device::ffp &_renderer,
-	sge::viewport::manager &_viewport_manager,
-	sge::input::focus::object &_focus,
-	sge::input::cursor::object &_cursor
+	sge::viewport::manager &_viewport_manager
 )
 :
 	reload_clock_(),
@@ -337,8 +333,6 @@ sanguis::client::gui::hud::object::object(
 		sge::gui::gravity::north_west
 	),
 	gui_master_(
-		_focus,
-		_cursor,
 		gui_context_,
 		gui_area_
 	),

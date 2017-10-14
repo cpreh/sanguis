@@ -22,8 +22,7 @@
 #include <sge/gui/widget/reference_alignment_vector.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/image/color/any/object.hpp>
-#include <sge/input/cursor/object_fwd.hpp>
-#include <sge/input/focus/object_fwd.hpp>
+#include <sge/input/event_base_fwd.hpp>
 #include <sge/parse/ini/entry_name.hpp>
 #include <sge/parse/ini/get_or_create.hpp>
 #include <sge/parse/ini/section_name.hpp>
@@ -87,8 +86,6 @@ sanguis::client::gui::menu::object::object(
 	sge::renderer::device::ffp &_renderer,
 	sge::viewport::manager &_viewport_manager,
 	sge::font::object &_font,
-	sge::input::cursor::object &_cursor,
-	sge::input::focus::object &_focus,
 	sanguis::client::config::settings::object &_settings,
 	sanguis::client::gui::menu::callbacks::object const &_callbacks,
 	sge::gui::style::base const &_gui_style
@@ -343,8 +340,6 @@ sanguis::client::gui::menu::object::object(
 		main_container_
 	),
 	gui_master_(
-		_focus,
-		_cursor,
 		gui_context_,
 		gui_area_
 	),
@@ -494,6 +489,16 @@ sanguis::client::gui::menu::object::connection_error(
 
 	connect_running_ =
 		false;
+}
+
+void
+sanguis::client::gui::menu::object::input(
+	sge::input::event_base const &_event
+)
+{
+	gui_master_.process_event(
+		_event
+	);
 }
 
 fcppt::string

@@ -16,8 +16,7 @@
 #include <sge/gui/widget/reference.hpp>
 #include <sge/gui/widget/reference_alignment_pair.hpp>
 #include <sge/gui/widget/reference_alignment_vector.hpp>
-#include <sge/input/cursor/object_fwd.hpp>
-#include <sge/input/focus/object_fwd.hpp>
+#include <sge/input/event_base_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp.hpp>
 #include <sge/renderer/target/onscreen.hpp>
@@ -47,9 +46,7 @@ sanguis::client::gui::perk::chooser::chooser(
 	sge::gui::style::base const &_style,
 	sge::renderer::device::ffp &_renderer,
 	sge::viewport::manager &_viewport_manager,
-	sge::font::object &_font,
-	sge::input::cursor::object &_cursor,
-	sge::input::focus::object &_focus
+	sge::font::object &_font
 )
 :
 	state_(
@@ -110,8 +107,6 @@ sanguis::client::gui::perk::chooser::chooser(
 		sge::gui::gravity::north_east
 	),
 	gui_master_(
-		_focus,
-		_cursor,
 		gui_context_,
 		gui_area_
 	),
@@ -166,6 +161,16 @@ sanguis::client::gui::perk::chooser::draw(
 		renderer_,
 		_context,
 		gui_background_
+	);
+}
+
+void
+sanguis::client::gui::perk::chooser::input(
+	sge::input::event_base const &_event
+)
+{
+	gui_master_.process_event(
+		_event
 	);
 }
 

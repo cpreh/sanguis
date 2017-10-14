@@ -6,6 +6,7 @@
 #include <sanguis/client/gui/menu/resolution_chooser.hpp>
 #include <sanguis/client/gui/menu/callbacks/object.hpp>
 #include <sge/font/object_fwd.hpp>
+#include <sge/input/event_base_fwd.hpp>
 #include <sge/gui/context.hpp>
 #include <sge/gui/master.hpp>
 #include <sge/gui/background/colored.hpp>
@@ -17,8 +18,6 @@
 #include <sge/gui/widget/frame.hpp>
 #include <sge/gui/widget/static_text.hpp>
 #include <sge/gui/widget/text.hpp>
-#include <sge/input/cursor/object_fwd.hpp>
-#include <sge/input/focus/object_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
@@ -46,8 +45,6 @@ public:
 		sge::renderer::device::ffp &,
 		sge::viewport::manager &,
 		sge::font::object &,
-		sge::input::cursor::object &,
-		sge::input::focus::object &,
 		sanguis::client::config::settings::object &,
 		sanguis::client::gui::menu::callbacks::object const &,
 		sge::gui::style::base const &
@@ -68,6 +65,11 @@ public:
 	void
 	connection_error(
 		fcppt::string const &
+	);
+
+	void
+	input(
+		sge::input::event_base const &
 	);
 
 	fcppt::string

@@ -2,9 +2,8 @@
 #define SANGUIS_CLIENT_CURSOR_HPP_INCLUDED
 
 #include <sanguis/client/cursor_fwd.hpp>
-#include <sanguis/client/optional_cursor_area_fwd.hpp>
 #include <sanguis/client/load/resource/textures_fwd.hpp>
-#include <sge/input/cursor/object_fwd.hpp>
+#include <sge/input/processor_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/systems/custom_cursor.hpp>
 #include <sge/texture/part_fwd.hpp>
@@ -24,7 +23,7 @@ class cursor
 public:
 	cursor(
 		sge::renderer::device::ffp &,
-		sge::input::cursor::object &,
+		sge::input::processor &,
 		sanguis::client::load::resource::textures const &
 	);
 
@@ -34,13 +33,8 @@ public:
 	draw(
 		sge::renderer::context::ffp &
 	);
-
-	sanguis::client::optional_cursor_area
-	area() const;
 private:
 	sge::texture::part const &texture_;
-
-	sge::input::cursor::object &input_cursor_;
 
 	sge::systems::custom_cursor cursor_;
 };
