@@ -20,6 +20,7 @@
 #include <sge/sprite/geometry/make_random_access_range.hpp>
 #include <sge/sprite/geometry/sort_and_update.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/log/context_fwd.hpp>
 #include <fcppt/math/ceil_div.hpp>
@@ -61,12 +62,14 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				)
 				{
 					return
-						fcppt::math::ceil_div(
-							_value,
-							fcppt::cast::size<
-								sanguis::creator::grid::dim::value_type
-							>(
-								sanguis::client::draw2d::scene::world::batch_size::value
+						FCPPT_ASSERT_OPTIONAL_ERROR(
+							fcppt::math::ceil_div(
+								_value,
+								fcppt::cast::size<
+									sanguis::creator::grid::dim::value_type
+								>(
+									sanguis::client::draw2d::scene::world::batch_size::value
+								)
 							)
 						);
 				}

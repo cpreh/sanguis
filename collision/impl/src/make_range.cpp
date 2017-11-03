@@ -9,6 +9,7 @@
 #include <sanguis/creator/sup.hpp>
 #include <sanguis/creator/tile_size.hpp>
 #include <fcppt/boost_units_value.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/float_to_int_fun.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/container/grid/clamped_min.hpp>
@@ -57,20 +58,22 @@ sanguis::collision::impl::make_range(
 
 	sanguis::creator::sup const upper(
 		fcppt::container::grid::clamped_sup_signed(
-			fcppt::math::vector::ceil_div_signed(
-				fcppt::math::vector::structure_cast<
-					sanguis::creator::signed_pos,
-					fcppt::cast::float_to_int_fun
-				>(
-					fcppt::math::vector::map(
-						_center.get()
-						+
-						_radius.get()
-						,
-						fcppt::boost_units_value{}
-					)
-				),
-				tile_size
+			FCPPT_ASSERT_OPTIONAL_ERROR(
+				fcppt::math::vector::ceil_div_signed(
+					fcppt::math::vector::structure_cast<
+						sanguis::creator::signed_pos,
+						fcppt::cast::float_to_int_fun
+					>(
+						fcppt::math::vector::map(
+							_center.get()
+							+
+							_radius.get()
+							,
+							fcppt::boost_units_value{}
+						)
+					),
+					tile_size
+				)
 			),
 			_grid.size()
 		)

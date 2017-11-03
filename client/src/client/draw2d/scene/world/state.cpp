@@ -48,6 +48,7 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/cast/to_signed.hpp>
@@ -166,22 +167,24 @@ sanguis::client::draw2d::scene::world::state::draw(
 		sanguis::client::draw2d::scene::world::batch_grid::pos
 	> const upper(
 		fcppt::container::grid::clamped_sup_signed(
-			fcppt::math::vector::ceil_div_signed(
-				int_translation
-				+
-				fcppt::math::vector::structure_cast<
-					sanguis::creator::signed_pos,
-					fcppt::cast::size_fun
-				>(
-					fcppt::math::vector::to_signed(
-						fcppt::math::dim::to_vector(
-							sanguis::client::draw2d::scene::background_dim(
-								renderer_
+			FCPPT_ASSERT_OPTIONAL_ERROR(
+				fcppt::math::vector::ceil_div_signed(
+					int_translation
+					+
+					fcppt::math::vector::structure_cast<
+						sanguis::creator::signed_pos,
+						fcppt::cast::size_fun
+					>(
+						fcppt::math::vector::to_signed(
+							fcppt::math::dim::to_vector(
+								sanguis::client::draw2d::scene::background_dim(
+									renderer_
+								)
 							)
 						)
-					)
-				),
-				batch_size_trans
+					),
+					batch_size_trans
+				)
 			),
 			batches_.size()
 		)
