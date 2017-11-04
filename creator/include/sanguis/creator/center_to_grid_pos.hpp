@@ -28,14 +28,16 @@ center_to_grid_pos(
 )
 {
 	return
-		fcppt::math::vector::structure_cast<
-			sanguis::creator::pos,
-			fcppt::cast::static_cast_fun
-		>(
-			_center
-		)
-		/
-		sanguis::creator::tile_size::value;
+		(
+			fcppt::math::vector::structure_cast<
+				sanguis::creator::pos,
+				fcppt::cast::static_cast_fun
+			>(
+				_center
+			)
+			/
+			sanguis::creator::tile_size::value
+		).get_unsafe();
 }
 
 }

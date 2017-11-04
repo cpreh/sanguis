@@ -29,13 +29,15 @@ sanguis::client::draw2d::scene::translation(
 			>(
 				fcppt::math::vector::to_signed(
 					fcppt::math::dim::to_vector(
-						_screen_size
-						/
-						fcppt::literal<
-							sge::renderer::screen_unit
-						>(
-							2u
-						)
+						(
+							_screen_size
+							/
+							fcppt::literal<
+								sge::renderer::screen_unit
+							>(
+								2u
+							)
+						).get_unsafe()
 					)
 				)
 			)

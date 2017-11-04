@@ -112,9 +112,6 @@ protected:
 		sanguis::client::draw2d::sprite::index const &
 	);
 
-	bool
-	walking() const;
-
 	// with_health overrides
 	void
 	health(

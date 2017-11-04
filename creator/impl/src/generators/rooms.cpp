@@ -367,7 +367,7 @@ sanguis::creator::impl::generators::rooms(
 				fcppt::cast::to_signed_fun
 			>(
 				sanguis::creator::rect{
-					(wrong / 2u) * 2u + 1u,
+					(wrong / 2u).get_unsafe() * 2u + 1u,
 					random_room_dim()
 				}
 			);

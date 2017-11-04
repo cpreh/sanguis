@@ -232,15 +232,6 @@ sanguis::client::draw2d::entities::model::object::part(
 		);
 }
 
-bool
-sanguis::client::draw2d::entities::model::object::walking() const
-{
-	return
-		!sanguis::client::draw2d::speed_is_null(
-			this->speed()
-		);
-}
-
 void
 sanguis::client::draw2d::entities::model::object::health(
 	sanguis::client::health const _health
@@ -489,7 +480,9 @@ sanguis::client::draw2d::entities::model::object::animation() const
 			?
 				sanguis::client::load::animation_type::reloading
 			:
-				this->walking()
+				!sanguis::client::draw2d::speed_is_null(
+					this->speed()
+				)
 				?
 					sanguis::client::load::animation_type::walking
 				:

@@ -17,16 +17,18 @@ sanguis::server::world::center_in_grid_pos(
 )
 {
 	return
-		fcppt::math::vector::to_unsigned(
-			fcppt::math::vector::structure_cast<
-				sanguis::creator::signed_pos,
-				fcppt::cast::float_to_int_fun
-			>(
-				_center.get()
+		(
+			fcppt::math::vector::to_unsigned(
+				fcppt::math::vector::structure_cast<
+					sanguis::creator::signed_pos,
+					fcppt::cast::float_to_int_fun
+				>(
+					_center.get()
+				)
 			)
-		)
-		/
-		sanguis::creator::tile_size::value
+			/
+			sanguis::creator::tile_size::value
+		).get_unsafe()
 		==
 		_pos;
 }

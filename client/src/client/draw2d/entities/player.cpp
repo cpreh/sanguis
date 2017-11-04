@@ -5,6 +5,7 @@
 #include <sanguis/client/health_pair.hpp>
 #include <sanguis/client/optional_health_pair.hpp>
 #include <sanguis/client/draw2d/dim2.hpp>
+#include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
@@ -33,11 +34,11 @@
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/math/dim/to_vector.hpp>
+#include <fcppt/math/vector/atan2.hpp>
 #include <fcppt/math/vector/dim.hpp>
-#include <fcppt/math/vector/null.hpp>
 #include <fcppt/math/vector/point_rotate.hpp>
-#include <fcppt/math/vector/signed_angle_between.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 
 
 namespace
@@ -121,20 +122,24 @@ sanguis::client::draw2d::entities::player::speed(
 		_speed
 	);
 
-	if(
-		this->walking()
-	)
-		sanguis::client::draw2d::entities::model::object::orientation(
-			sanguis::client::draw2d::sprite::rotation{
-				fcppt::math::vector::signed_angle_between(
-					fcppt::math::vector::null<
-						sanguis::client::draw2d::vector2
-					>(),
-					_speed.get()
-				)
-			},
-			bottom
-		);
+	fcppt::optional::maybe_void(
+		fcppt::math::vector::atan2(
+			_speed.get()
+		),
+		[
+			this
+		](
+			sanguis::client::draw2d::funit const _rotation
+		)
+		{
+			sanguis::client::draw2d::entities::model::object::orientation(
+				sanguis::client::draw2d::sprite::rotation{
+					_rotation
+				},
+				bottom
+			);
+		}
+	);
 }
 
 void
@@ -177,15 +182,17 @@ sanguis::client::draw2d::entities::player::update()
 					sanguis::client::draw2d::dim2,
 					fcppt::cast::int_to_float_fun
 				>(
-					this->at(
-						top
-					).size()
-					/
-					fcppt::literal<
-						sanguis::client::draw2d::sprite::unit
-					>(
-						2
-					)
+					(
+						this->at(
+							top
+						).size()
+						/
+						fcppt::literal<
+							sanguis::client::draw2d::sprite::unit
+						>(
+							2
+						)
+					).get_unsafe()
 				)
 			),
 			sprite_rotation.get()
@@ -207,13 +214,15 @@ sanguis::client::draw2d::entities::player::update()
 			new_rotation
 		)
 		+
-		this->bounding_dim()
-		/
-		fcppt::literal<
-			sanguis::client::draw2d::sprite::unit
-		>(
-			2
-		)
+		(
+			this->bounding_dim()
+			/
+			fcppt::literal<
+				sanguis::client::draw2d::sprite::unit
+			>(
+				2
+			)
+		).get_unsafe()
 	);
 }
 

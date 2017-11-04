@@ -68,20 +68,22 @@ maze_to_tile_grid(
 	// get the "original maze size"
 	dim_type const real_size(
 		(
-			_maze.size()
-			-
-			fcppt::math::dim::fill<
-				dim_type
-			>(
-				1u
+			(
+				_maze.size()
+				-
+				fcppt::math::dim::fill<
+					dim_type
+				>(
+					1u
+				)
 			)
-		)
-		/
-		2u
+			/
+			2u
+		).get_unsafe()
 	);
 
 	// empty spaces are scaled with _spacing
-	// walls and connections are scaled with _wall_thickness, 
+	// walls and connections are scaled with _wall_thickness,
 	// there are n open spaces separated by (n-1) walls in each dimension
 	// (so there are 4 types of rectangles in the final grid)
 	dim_type const result_size(

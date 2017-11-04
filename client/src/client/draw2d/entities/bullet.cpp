@@ -4,7 +4,6 @@
 #include <sanguis/client/draw2d/center.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
-#include <sanguis/client/draw2d/speed_is_null.hpp>
 #include <sanguis/client/draw2d/vector2.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/z_ordering_vector.hpp>
@@ -21,6 +20,7 @@
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sanguis/client/draw2d/sprite/normal/white.hpp>
 #include <sanguis/load/model/path_fwd.hpp>
+#include <fcppt/const.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/float_to_int_fun.hpp>
@@ -30,6 +30,7 @@
 #include <fcppt/math/vector/length.hpp>
 #include <fcppt/math/vector/normalize.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -131,38 +132,48 @@ sanguis::client::draw2d::entities::bullet::update()
 	);
 
 	sanguis::client::draw2d::center const new_center(
-		sanguis::client::draw2d::speed_is_null(
-			this->speed()
-		)
-		?
-			cur_center
-		:
-			sanguis::client::draw2d::center(
-				cur_center.get()
-				-
-				fcppt::math::vector::normalize(
-					this->speed().get()
-				)
-				*
-				fcppt::literal<
-					sanguis::client::draw2d::funit
-				>(
-					0.5
-				)
-				*
-				fcppt::math::vector::length(
-					sanguis::client::draw2d::vector2(
-						tail_length,
-						fcppt::cast::int_to_float<
+		fcppt::optional::maybe(
+			fcppt::math::vector::normalize(
+				this->speed().get()
+			),
+			fcppt::const_(
+				cur_center
+			),
+			[
+				this,
+				tail_length,
+				cur_center
+			](
+				sanguis::client::draw2d::vector2 const _normal
+			)
+			{
+				return
+					sanguis::client::draw2d::center(
+						cur_center.get()
+						-
+						_normal
+						*
+						fcppt::literal<
 							sanguis::client::draw2d::funit
 						>(
-							this->at(
-								tail
-							).size().h()
+							0.5
 						)
-					)
-				)
-			)
+						*
+						fcppt::math::vector::length(
+							sanguis::client::draw2d::vector2(
+								tail_length,
+								fcppt::cast::int_to_float<
+									sanguis::client::draw2d::funit
+								>(
+									this->at(
+										tail
+									).size().h()
+								)
+							)
+						)
+					);
+			}
+		)
 	);
 
 	this->at(

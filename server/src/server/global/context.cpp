@@ -27,6 +27,7 @@
 #include <sanguis/server/log_location.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/send_available_perks.hpp>
+#include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/unicast_callback.hpp>
@@ -75,7 +76,6 @@
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/comparison.hpp>
-#include <fcppt/math/vector/length_square.hpp>
 #include <fcppt/math/vector/signed_angle_between.hpp>
 #include <fcppt/optional/bind.hpp>
 #include <fcppt/optional/copy_value.hpp>
@@ -349,23 +349,23 @@ sanguis::server::global::context::player_target(
 		player_ref.center().get()
 	);
 
-	if(
-		fcppt::math::vector::length_square(
-			player_center
-			-
+	fcppt::optional::maybe_void(
+		fcppt::math::vector::signed_angle_between(
+			player_center,
 			_target
+		),
+		[
+			&player_ref
+		](
+			sanguis::server::space_unit const _angle
 		)
-		< 1.f
-	)
-		return;
-
-	player_ref.angle(
-		sanguis::server::angle(
-			fcppt::math::vector::signed_angle_between(
-				player_center,
-				_target
-			)
-		)
+		{
+			player_ref.angle(
+				sanguis::server::angle(
+					_angle
+				)
+			);
+		}
 	);
 
 	this->send_to_player(

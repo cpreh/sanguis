@@ -57,13 +57,15 @@ sanguis::client::draw2d::scene::hover::name::name(
 	text_.pos(
 		text_.pos()
 		-
-		text_.rect().size()
-		/
-		fcppt::literal<
-			sge::font::unit
-		>(
-			2
-		)
+		(
+			text_.rect().size()
+			/
+			fcppt::literal<
+				sge::font::unit
+			>(
+				2
+			)
+		).get_unsafe()
 	);
 }
 

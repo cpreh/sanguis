@@ -92,8 +92,8 @@
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/atan2.hpp>
-#include <fcppt/math/vector/length_square.hpp>
 #include <fcppt/math/vector/null.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -483,41 +483,39 @@ sanguis::server::entities::player::remove_from_game()
 void
 sanguis::server::entities::player::update_speed()
 {
-	if(
-		fcppt::math::vector::length_square(
+	fcppt::optional::maybe(
+		fcppt::math::vector::atan2(
 			desired_speed_.get()
+		),
+		[
+			this
+		]{
+			this->movement_speed().current(
+				fcppt::literal<
+					sanguis::server::space_unit
+				>(
+					0
+				)
+			);
+		},
+		[
+			this
+		](
+			sanguis::server::space_unit const _dir
 		)
-		<
-		fcppt::literal<
-			sanguis::server::space_unit
-		>(
-			0.001f
-		)
-	)
-	{
-		this->movement_speed().current(
-			fcppt::literal<
-				sanguis::server::space_unit
-			>(
-				0
-			)
-		);
+		{
+			this->direction(
+				sanguis::server::direction(
+					_dir
+				)
+			);
 
-		return;
-	}
-
-	this->direction(
-		sanguis::server::direction(
-			fcppt::math::vector::atan2(
-				desired_speed_.get()
-			)
-		)
-	);
-
-	// TODO: don't set the speed to max!
-	// Allow for controls that are not binary
-	sanguis::server::entities::property::current_to_max(
-		this->movement_speed()
+			// TODO: don't set the speed to max!
+			// Allow for controls that are not binary
+			sanguis::server::entities::property::current_to_max(
+				this->movement_speed()
+			);
+		}
 	);
 }
 

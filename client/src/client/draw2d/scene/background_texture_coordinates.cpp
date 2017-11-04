@@ -3,12 +3,14 @@
 #include <sanguis/client/draw2d/scene/background_texture_coordinates.hpp>
 #include <sanguis/client/draw2d/sprite/client/texture_coordinates.hpp>
 #include <sge/texture/part.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/int_to_float_fun.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/dim/to_vector.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/null.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 sanguis::client::draw2d::sprite::client::texture_coordinates
@@ -35,10 +37,9 @@ sanguis::client::draw2d::scene::background_texture_coordinates(
 		)
 	);
 
-	coordinates const base(
-		fcppt::math::vector::null<
-			pos_type
-		>(),
+	fcppt::optional::object<
+		pos_type
+	> const divided{
 		dim
 		/
 		fcppt::math::vector::structure_cast<
@@ -49,9 +50,20 @@ sanguis::client::draw2d::scene::background_texture_coordinates(
 				_texture.size()
 			)
 		)
+	};
+
+	coordinates const base(
+		fcppt::math::vector::null<
+			pos_type
+		>(),
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			divided
+		)
 	);
 
-	pos_type const rel(
+	fcppt::optional::object<
+		pos_type
+	> const rel_divided{
 		fcppt::math::vector::structure_cast<
 			pos_type,
 			fcppt::cast::size_fun
@@ -60,6 +72,12 @@ sanguis::client::draw2d::scene::background_texture_coordinates(
 		)
 		/
 		dim
+	};
+
+	pos_type const rel(
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			rel_divided
+		)
 		*
 		base.second
 	);

@@ -20,7 +20,7 @@ sanguis::client::draw2d::entities::model::clamp_orientation(
 		fcppt::math::mod(
 			_orientation.get(),
 			twopi
-		)
+		).get_unsafe()
 	};
 
 	return

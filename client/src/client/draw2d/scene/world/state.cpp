@@ -148,18 +148,20 @@ sanguis::client::draw2d::scene::world::state::draw(
 	> const lower(
 		fcppt::container::grid::clamped_min(
 			(
-				int_translation
-				-
-				sanguis::client::draw2d::scene::world::tile_size::value
-				/
-				fcppt::literal<
-					sanguis::client::draw2d::scene::world::sprite::unit
-				>(
-					2
+				(
+					int_translation
+					-
+					sanguis::client::draw2d::scene::world::tile_size::value
+					/
+					fcppt::literal<
+						sanguis::client::draw2d::scene::world::sprite::unit
+					>(
+						2
+					)
 				)
-			)
-			/
-			batch_size_trans
+				/
+				batch_size_trans
+			).get_unsafe()
 		)
 	);
 

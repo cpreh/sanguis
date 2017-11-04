@@ -112,13 +112,15 @@ sanguis::client::draw2d::scene::background::render(
 	sprite_.texture_coordinates(
 		sanguis::client::draw2d::scene::background_texture_coordinates(
 			sanguis::client::draw2d::translation{
-				_translation.get()
-				/
-				fcppt::literal<
-					sanguis::client::draw2d::unit
-				>(
-					2
-				)
+				(
+					_translation.get()
+					/
+					fcppt::literal<
+						sanguis::client::draw2d::unit
+					>(
+						2
+					)
+				).get_unsafe()
 			},
 			client_system_.renderer(),
 			texture_

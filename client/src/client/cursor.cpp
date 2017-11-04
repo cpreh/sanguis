@@ -38,13 +38,15 @@ sanguis::client::cursor::cursor(
 				fcppt::cast::size_fun
 			>(
 				fcppt::math::dim::to_vector(
-					texture_.size()
-					/
-					fcppt::literal<
-						sge::renderer::size_type
-					>(
-						2
-					)
+					(
+						texture_.size()
+						/
+						fcppt::literal<
+							sge::renderer::size_type
+						>(
+							2
+						)
+					).get_unsafe()
 				)
 			)
 		}

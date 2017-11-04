@@ -55,13 +55,15 @@ sanguis::tiles::error_image(
 					)
 					{
 						sge::image2d::dim const half_dim{
-							dim
-							/
-							fcppt::literal<
-								sge::image::size_type
-							>(
-								2
-							)
+							(
+								dim
+								/
+								fcppt::literal<
+									sge::image::size_type
+								>(
+									2
+								)
+							).get_unsafe()
 						};
 
 						sge::image2d::algorithm::fill(

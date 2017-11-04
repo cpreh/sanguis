@@ -16,16 +16,18 @@ sanguis::tools::libmergeimage::impl::cells_in_dim(
 {
 	return
 		fcppt::math::dim::contents(
-			fcppt::math::dim::fill<
-				sge::image2d::dim
-			>(
-				_size
-			)
-			/
 			(
-				_cell_size.get()
-				+
-				1u
-			)
+				fcppt::math::dim::fill<
+					sge::image2d::dim
+				>(
+					_size
+				)
+				/
+				(
+					_cell_size.get()
+					+
+					1u
+				)
+			).get_unsafe()
 		);
 }

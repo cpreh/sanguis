@@ -22,6 +22,7 @@
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/map.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 sanguis::creator::grid_crange
@@ -37,22 +38,30 @@ sanguis::collision::impl::make_range(
 		)
 	);
 
+	fcppt::optional::object<
+		sanguis::creator::signed_pos
+	> const optional_pos{
+		fcppt::math::vector::structure_cast<
+			sanguis::creator::signed_pos,
+			fcppt::cast::float_to_int_fun
+		>(
+			fcppt::math::vector::map(
+				_center.get()
+				-
+				_radius.get()
+				,
+				fcppt::boost_units_value{}
+			)
+		)
+		/
+		tile_size
+	};
+
 	sanguis::creator::min const lower(
 		fcppt::container::grid::clamped_min(
-			fcppt::math::vector::structure_cast<
-				sanguis::creator::signed_pos,
-				fcppt::cast::float_to_int_fun
-			>(
-				fcppt::math::vector::map(
-					_center.get()
-					-
-					_radius.get()
-					,
-					fcppt::boost_units_value{}
-				)
+			FCPPT_ASSERT_OPTIONAL_ERROR(
+				optional_pos
 			)
-			/
-			tile_size
 		)
 	);
 

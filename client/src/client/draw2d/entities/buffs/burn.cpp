@@ -72,13 +72,15 @@ sanguis::client::draw2d::entities::buffs::burn::burn(
 			sanguis::client::draw2d::sprite::normal::no_rotation().get(),
 		sge::sprite::roles::size_or_texture_size{} =
 			sanguis::client::draw2d::sprite::size_or_texture_size{
-				_model.master().size()
-				/
-				fcppt::literal<
-					sanguis::client::draw2d::sprite::unit
-				>(
-					2
-				)
+				(
+					_model.master().size()
+					/
+					fcppt::literal<
+						sanguis::client::draw2d::sprite::unit
+					>(
+						2
+					)
+				).get_unsafe()
 			},
 		sge::sprite::roles::texture0{} =
 			animation_.current_texture(),
