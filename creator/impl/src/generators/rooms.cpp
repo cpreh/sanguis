@@ -67,7 +67,9 @@
 #include <fcppt/math/box/output.hpp>
 #include <fcppt/math/box/rect.hpp>
 #include <fcppt/math/box/structure_cast.hpp>
+#include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/math/vector/fill.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/maybe_void.hpp>
@@ -317,7 +319,11 @@ sanguis::creator::impl::generators::rooms(
 			_parameters.randgen(),
 			size
 			-
-			(2 * max_room_size + 1)
+			fcppt::math::dim::fill<
+				sanguis::creator::grid::dim
+			>(
+				2 * max_room_size + 1
+			)
 		};
 
 	using uniform_size =
@@ -367,7 +373,13 @@ sanguis::creator::impl::generators::rooms(
 				fcppt::cast::to_signed_fun
 			>(
 				sanguis::creator::rect{
-					(wrong / 2u).get_unsafe() * 2u + 1u,
+					(wrong / 2u).get_unsafe() * 2u
+					+
+					fcppt::math::vector::fill<
+						sanguis::creator::pos
+					>(
+						1u
+					),
 					random_room_dim()
 				}
 			);
@@ -781,8 +793,20 @@ sanguis::creator::impl::generators::rooms(
 
 	sanguis::creator::impl::filled_rect(
 		sanguis::creator::rect{
-			sanguis::creator::rect::vector{1u,1u},
-			sanguis::creator::rect::dim{grid.size() - 2u}
+			fcppt::math::vector::fill<
+				sanguis::creator::rect::vector
+			>(
+				1u
+			),
+			sanguis::creator::rect::dim{
+				grid.size()
+				-
+				fcppt::math::dim::fill<
+					sanguis::creator::rect::dim
+				>(
+					2u
+				)
+			}
 		},
 		[
 			&bg_grid

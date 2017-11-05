@@ -61,6 +61,7 @@
 #include <fcppt/container/grid/make_pos_ref_range_start_end.hpp>
 #include <fcppt/enum/array_impl.hpp>
 #include <fcppt/enum/make_range.hpp>
+#include <fcppt/math/vector/fill.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -718,17 +719,25 @@ sanguis::collision::impl::world::simple::object::update_ghosts()
 						fcppt::container::grid::clamped_min(
 							signed_pos
 							-
-							rounded_radius
+							fcppt::math::vector::fill<
+								sanguis::creator::signed_pos
+							>(
+								rounded_radius
+							)
 						),
 						fcppt::container::grid::clamped_sup_signed(
 							signed_pos
 							+
-							rounded_radius
-							+
-							fcppt::literal<
-								sanguis::creator::difference_type
+							fcppt::math::vector::fill<
+								sanguis::creator::signed_pos
 							>(
-								1
+								rounded_radius
+								+
+								fcppt::literal<
+									sanguis::creator::difference_type
+								>(
+									1
+								)
 							),
 							grid.size()
 						)

@@ -26,7 +26,11 @@ sanguis::tools::libmergeimage::impl::cells_in_dim(
 				(
 					_cell_size.get()
 					+
-					1u
+					fcppt::math::dim::fill<
+						sge::image2d::dim
+					>(
+						1u
+					)
 				)
 			).get_unsafe()
 		);

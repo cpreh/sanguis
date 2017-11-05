@@ -29,6 +29,7 @@
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/dim/null.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/fill.hpp>
 
 
 sanguis::client::gui::style::simple::simple(
@@ -280,12 +281,20 @@ sanguis::client::gui::style::simple::draw_edit(
 		sge::rucksack::rect(
 			_area.pos()
 			+
-			sanguis::client::gui::style::outer_border::value,
+			fcppt::math::vector::fill<
+				sge::rucksack::vector
+			>(
+				sanguis::client::gui::style::outer_border::value
+			),
 			_area.size()
 			-
-			2
-			*
-			sanguis::client::gui::style::outer_border::value
+			fcppt::math::dim::fill<
+				sge::rucksack::dim
+			>(
+				2
+				*
+				sanguis::client::gui::style::outer_border::value
+			)
 		),
 		sanguis::client::gui::style::background_color()
 	);

@@ -1,4 +1,5 @@
 #include <sanguis/collision/center.hpp>
+#include <sanguis/collision/length2.hpp>
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/impl/make_range.hpp>
 #include <sanguis/creator/difference_type.hpp>
@@ -20,6 +21,7 @@
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/ceil_div_signed.hpp>
 #include <fcppt/math/vector/dim.hpp>
+#include <fcppt/math/vector/fill.hpp>
 #include <fcppt/math/vector/map.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/optional/object_impl.hpp>
@@ -48,7 +50,11 @@ sanguis::collision::impl::make_range(
 			fcppt::math::vector::map(
 				_center.get()
 				-
-				_radius.get()
+				fcppt::math::vector::fill<
+					sanguis::collision::length2
+				>(
+					_radius.get()
+				)
 				,
 				fcppt::boost_units_value{}
 			)
@@ -76,7 +82,11 @@ sanguis::collision::impl::make_range(
 						fcppt::math::vector::map(
 							_center.get()
 							+
-							_radius.get()
+							fcppt::math::vector::fill<
+								sanguis::collision::length2
+							>(
+								_radius.get()
+							)
 							,
 							fcppt::boost_units_value{}
 						)

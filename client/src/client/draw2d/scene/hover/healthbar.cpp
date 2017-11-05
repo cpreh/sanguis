@@ -3,6 +3,7 @@
 #include <sanguis/client/draw2d/sprite/buffers_impl.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/dim.hpp>
+#include <sanguis/client/draw2d/sprite/point.hpp>
 #include <sanguis/client/draw2d/sprite/unit.hpp>
 #include <sanguis/client/draw2d/sprite/colored/color.hpp>
 #include <sanguis/client/draw2d/sprite/colored/color_format.hpp>
@@ -35,6 +36,7 @@
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/fill.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <initializer_list>
@@ -82,7 +84,11 @@ sanguis::client::draw2d::scene::hover::healthbar::healthbar(
 						sge::sprite::roles::pos{} =
 							_center.get()
 							-
-							_radius.get(),
+							fcppt::math::vector::fill<
+								sanguis::client::draw2d::sprite::point
+							>(
+								_radius.get()
+							),
 						sge::sprite::roles::size{} =
 							sanguis::client::draw2d::sprite::dim(
 								_radius.get() * 2,
@@ -99,7 +105,11 @@ sanguis::client::draw2d::scene::hover::healthbar::healthbar(
 						sge::sprite::roles::pos{} =
 							_center.get()
 							-
-							_radius.get()
+							fcppt::math::vector::fill<
+								sanguis::client::draw2d::sprite::point
+							>(
+								_radius.get()
+							)
 							+
 							fcppt::math::dim::fill<
 								sanguis::client::draw2d::sprite::dim

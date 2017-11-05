@@ -64,6 +64,7 @@
 #include <fcppt/math/dim/to_vector.hpp>
 #include <fcppt/math/vector/ceil_div_signed.hpp>
 #include <fcppt/math/vector/dim.hpp>
+#include <fcppt/math/vector/fill.hpp>
 #include <fcppt/math/vector/map.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/math/vector/to_signed.hpp>
@@ -151,12 +152,16 @@ sanguis::client::draw2d::scene::world::state::draw(
 				(
 					int_translation
 					-
-					sanguis::client::draw2d::scene::world::tile_size::value
-					/
-					fcppt::literal<
-						sanguis::client::draw2d::scene::world::sprite::unit
+					fcppt::math::vector::fill<
+						sanguis::creator::signed_pos
 					>(
-						2
+						sanguis::client::draw2d::scene::world::tile_size::value
+						/
+						fcppt::literal<
+							sanguis::client::draw2d::scene::world::sprite::unit
+						>(
+							2
+						)
 					)
 				)
 				/

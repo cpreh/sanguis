@@ -12,6 +12,7 @@
 #include <fcppt/container/grid/clamped_sup_signed.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
+#include <fcppt/math/vector/fill.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 
 
@@ -32,9 +33,13 @@ sanguis::server::random::grid_pos_around(
 		)
 	);
 
-	auto const signed_distance(
-		fcppt::cast::to_signed(
-			_distance.get()
+	sanguis::creator::signed_pos const signed_distance(
+		fcppt::math::vector::fill<
+			sanguis::creator::signed_pos
+		>(
+			fcppt::cast::to_signed(
+				_distance.get()
+			)
 		)
 	);
 
