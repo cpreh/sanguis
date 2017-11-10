@@ -73,9 +73,7 @@ sanguis::server::entities::enemies::skills::mother_spider::on_die(
 							// TODO: This parameter should probably be of type max_health
 							sanguis::server::health{
 								_enemy.max_health().get()
-							}
-							/
-							sanguis::server::health{
+								/
 								4.f
 							},
 							_enemy.max_movement_speed(),
@@ -84,9 +82,9 @@ sanguis::server::entities::enemies::skills::mother_spider::on_die(
 							sanguis::server::pickup_probability{
 								0.f
 							},
-							_enemy.exp()
-							/
 							sanguis::server::exp{
+								_enemy.exp().get()
+								/
 								4.f
 							},
 							_enemy.difficulty(),

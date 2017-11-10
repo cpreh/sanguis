@@ -9,6 +9,8 @@
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/exp_for_next_level.hpp>
 #include <sanguis/client/level.hpp>
+#include <sanguis/client/health_pair.hpp>
+#include <sanguis/client/health_value.hpp>
 #include <sanguis/client/max_health_valid.hpp>
 #include <sanguis/client/optional_health_pair.hpp>
 #include <sanguis/client/slowed_duration.hpp>
@@ -46,8 +48,10 @@
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/pre.hpp>
-#include <fcppt/cast/int_to_float_fun.hpp>
+#include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/cast/size_fun.hpp>
+#include <fcppt/math/div.hpp>
+#include <fcppt/optional/bind.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
@@ -357,35 +361,40 @@ sanguis::client::gui::hud::object::health_pair(
 {
 	health_bar_.value(
 		fcppt::optional::maybe(
-			_opt_health_pair,
+			fcppt::optional::bind(
+				_opt_health_pair,
+				[](
+					sanguis::client::health_pair const &_health_pair
+				)
+				{
+					FCPPT_ASSERT_PRE(
+						sanguis::client::max_health_valid(
+							_health_pair.max_health()
+						)
+					);
+
+					return
+						fcppt::math::div(
+							_health_pair.health().get(),
+							_health_pair.max_health().get()
+						);
+				}
+			),
 			fcppt::const_(
 				sge::gui::fill_level(
 					0.f
 				)
 			),
 			[](
-				sanguis::client::health_pair const &_health_pair
+				sanguis::client::health_value const _health
 			)
 			{
-				FCPPT_ASSERT_PRE(
-					sanguis::client::max_health_valid(
-						_health_pair.max_health()
-					)
-				);
-
 				return
 					fcppt::strong_typedef_construct_cast<
 						sge::gui::fill_level,
 						fcppt::cast::size_fun
 					>(
-						_health_pair.health().get()
-					)
-					/
-					fcppt::strong_typedef_construct_cast<
-						sge::gui::fill_level,
-						fcppt::cast::size_fun
-					>(
-						_health_pair.max_health().get()
+						_health
 					);
 			}
 		)
@@ -761,29 +770,33 @@ sanguis::client::gui::hud::object::update_exp()
 		previous_exp_level_
 	);
 
-	if(
-		diff.get()
-		==
-		0u
-	)
-		return;
-
-	exp_bar_.value(
-		fcppt::strong_typedef_construct_cast<
-			sge::gui::fill_level,
-			fcppt::cast::int_to_float_fun
-		>(
-			exp_.get()
-			-
-			previous_exp_level_.get()
+	fcppt::optional::maybe_void(
+		fcppt::math::div(
+			fcppt::cast::int_to_float<
+				sge::gui::fill_level::value_type
+			>(
+				exp_.get()
+				-
+				previous_exp_level_.get()
+			),
+			fcppt::cast::int_to_float<
+				sge::gui::fill_level::value_type
+			>(
+				diff.get()
+			)
+		),
+		[
+			this
+		](
+			sge::gui::fill_level::value_type const _level
 		)
-		/
-		fcppt::strong_typedef_construct_cast<
-			sge::gui::fill_level,
-			fcppt::cast::int_to_float_fun
-		>(
-			diff.get()
-		)
+		{
+			exp_bar_.value(
+				sge::gui::fill_level{
+					_level
+				}
+			);
+		}
 	);
 }
 
