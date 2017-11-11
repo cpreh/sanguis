@@ -1,6 +1,6 @@
 #include <sanguis/server/angle.hpp>
-#include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/optional_angle.hpp>
+#include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/ai/angle_to_target.hpp>
 #include <sanguis/server/ai/target.hpp>
 #include <sanguis/server/entities/with_ai.hpp>

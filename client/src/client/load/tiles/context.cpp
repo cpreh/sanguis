@@ -11,9 +11,9 @@
 #include <sge/image2d/store/view.hpp>
 #include <sge/image2d/view/const_object.hpp>
 #include <sge/texture/part.hpp>
+#include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/enum/array_impl.hpp>
 #include <fcppt/enum/array_init.hpp>
-#include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <fcppt/config/external_end.hpp>

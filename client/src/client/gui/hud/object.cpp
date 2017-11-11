@@ -8,9 +8,9 @@
 #include <sanguis/world_name.hpp>
 #include <sanguis/client/exp.hpp>
 #include <sanguis/client/exp_for_next_level.hpp>
-#include <sanguis/client/level.hpp>
 #include <sanguis/client/health_pair.hpp>
 #include <sanguis/client/health_value.hpp>
+#include <sanguis/client/level.hpp>
 #include <sanguis/client/max_health_valid.hpp>
 #include <sanguis/client/optional_health_pair.hpp>
 #include <sanguis/client/slowed_duration.hpp>

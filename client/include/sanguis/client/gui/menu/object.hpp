@@ -6,7 +6,6 @@
 #include <sanguis/client/gui/menu/resolution_chooser.hpp>
 #include <sanguis/client/gui/menu/callbacks/object.hpp>
 #include <sge/font/object_fwd.hpp>
-#include <sge/input/event_base_fwd.hpp>
 #include <sge/gui/context.hpp>
 #include <sge/gui/master.hpp>
 #include <sge/gui/background/colored.hpp>
@@ -18,6 +17,7 @@
 #include <sge/gui/widget/frame.hpp>
 #include <sge/gui/widget/static_text.hpp>
 #include <sge/gui/widget/text.hpp>
+#include <sge/input/event_base_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
