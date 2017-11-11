@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_ENEMIES_SKILLS_COOLDOWN_HPP_INCLUDED
 
 #include <sanguis/duration.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 

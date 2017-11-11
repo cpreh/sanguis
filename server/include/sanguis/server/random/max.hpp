@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_RANDOM_MAX_HPP_INCLUDED
 
 #include <sanguis/server/random/amount.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 

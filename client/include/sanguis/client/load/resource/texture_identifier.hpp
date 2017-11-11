@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_LOAD_RESOURCE_TEXTURE_IDENTIFIER_HPP_INCLUDED
 #define SANGUIS_CLIENT_LOAD_RESOURCE_TEXTURE_IDENTIFIER_HPP_INCLUDED
 
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/strong_typedef.hpp>
 

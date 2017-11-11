@@ -3,6 +3,7 @@
 
 #include <sanguis/server/entities/property/initial_fwd.hpp>
 #include <sanguis/server/entities/property/value.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 

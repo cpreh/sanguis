@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_WEAPONS_CAST_POINT_HPP_INCLUDED
 
 #include <sanguis/duration.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 

@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_PERKS_LEVEL_DIFF_HPP_INCLUDED
 
 #include <sanguis/server/level.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <type_traits>

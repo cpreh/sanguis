@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_RANDOM_GRID_DISTANCE_HPP_INCLUDED
 
 #include <sanguis/creator/size_type.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 

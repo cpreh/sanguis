@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_BUFFS_BUFF_HPP_INCLUDED
 
 #include <sanguis/buff_type_fwd.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/strong_typedef.hpp>
 

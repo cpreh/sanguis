@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_PERK_REQUIRED_PLAYER_LEVEL_HPP_INCLUDED
 
 #include <sanguis/client/player_level.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 

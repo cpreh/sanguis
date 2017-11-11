@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_LEVEL_HPP_INCLUDED
 
 #include <sanguis/messages/types/level.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 

@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_PERK_REMAINING_LEVELS_HPP_INCLUDED
 
 #include <sanguis/client/level.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 

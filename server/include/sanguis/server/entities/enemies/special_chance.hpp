@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_ENEMIES_SPECIAL_CHANCE_HPP_INCLUDED
 
 #include <sanguis/server/space_unit.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 

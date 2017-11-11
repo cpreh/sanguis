@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_PERKS_CHANGE_FACTOR_HPP_INCLUDED
 
 #include <sanguis/server/entities/property/value.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 

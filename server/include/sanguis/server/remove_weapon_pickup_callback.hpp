@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_REMOVE_WEAPON_PICKUP_CALLBACK_HPP_INCLUDED
 
 #include <sanguis/server/update_weapon_pickup_callback.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 

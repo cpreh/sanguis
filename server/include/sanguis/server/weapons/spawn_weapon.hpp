@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_WEAPONS_SPAWN_WEAPON_HPP_INCLUDED
 
 #include <sanguis/server/weapons/create_function.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 

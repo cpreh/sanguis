@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_SPAWNS_COUNT_PER_WAVE_HPP_INCLUDED
 
 #include <sanguis/server/entities/spawns/size_type.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 

@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_WEAPONS_IRS_HPP_INCLUDED
 
 #include <sanguis/time_unit.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 

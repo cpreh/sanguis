@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_ENEMIES_DIFFICULTY_HPP_INCLUDED
 
 #include <sanguis/server/entities/enemies/difficulty_value.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 

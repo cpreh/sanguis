@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_PERKS_TREE_REQUIRED_PARENT_LEVEL_HPP_INCLUDED
 
 #include <sanguis/server/level.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 

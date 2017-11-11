@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ADD_TARGET_CALLBACK_HPP_INCLUDED
 
 #include <sanguis/server/update_target_callback.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 

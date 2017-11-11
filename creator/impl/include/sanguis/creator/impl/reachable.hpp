@@ -3,6 +3,7 @@
 
 #include <fcppt/make_strong_typedef.hpp>
 
+
 namespace sanguis
 {
 namespace creator

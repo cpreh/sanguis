@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_PROPERTY_DIFF_HPP_INCLUDED
 
 #include <sanguis/server/entities/property/value.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 

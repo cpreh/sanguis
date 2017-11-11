@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_AI_IS_VISIBLE_HPP_INCLUDED
 #define SANGUIS_SERVER_AI_IS_VISIBLE_HPP_INCLUDED
 
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 

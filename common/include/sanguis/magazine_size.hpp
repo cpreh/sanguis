@@ -2,6 +2,7 @@
 #define SANGUIS_MAGAZINE_SIZE_HPP_INCLUDED
 
 #include <sanguis/magazine_type.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 
