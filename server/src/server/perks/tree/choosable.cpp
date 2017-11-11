@@ -57,7 +57,7 @@ sanguis::server::perks::tree::choosable(
 					sanguis::server::perks::tree::object::const_optional_ref pos(
 						_node
 					);
-					pos.get_unsafe().get().has_parent();
+					pos.get_unsafe().get().parent().has_value();
 					pos = pos.get_unsafe().get().parent()
 				)
 				{
