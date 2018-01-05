@@ -61,7 +61,7 @@
 #include <fcppt/variant/dynamic_cast.hpp>
 #include <fcppt/variant/match.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/vector/vector10.hpp>
+#include <brigand/sequences/list.hpp>
 #include <boost/system/error_code.hpp>
 #include <boost/system/system_error.hpp>
 #include <functional>
@@ -409,7 +409,7 @@ sanguis::client::machine::process_sge_event(
 {
 	fcppt::optional::maybe_void(
 		fcppt::variant::dynamic_cast_<
-			boost::mpl::vector2<
+			brigand::list<
 				sge::renderer::event::render const,
 				sge::input::event_base const
 			>,

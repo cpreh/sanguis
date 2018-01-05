@@ -11,6 +11,7 @@
 #include <alda/bindings/record_fwd.hpp>
 #include <alda/message/object_fwd.hpp>
 #include <fcppt/mpl/flatten.hpp>
+#include <fcppt/mpl/to_brigand.hpp>
 #include <fcppt/record/element_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
@@ -30,14 +31,16 @@ alda::message::object<
 		sanguis::messages::server::types::message::add_pickup
 	>,
 	alda::bindings::record<
-		fcppt::mpl::flatten<
-			boost::mpl::vector3<
-				sanguis::messages::server::parts::entity_id,
-				sanguis::messages::server::parts::add_elements_base,
-				fcppt::record::element<
-					sanguis::messages::roles::pickup_type,
-					sanguis::messages::adapted_types::enum_<
-						sanguis::pickup_type
+		fcppt::mpl::to_brigand<
+			fcppt::mpl::flatten<
+				boost::mpl::vector3<
+					sanguis::messages::server::parts::entity_id,
+					sanguis::messages::server::parts::add_elements_base,
+					fcppt::record::element<
+						sanguis::messages::roles::pickup_type,
+						sanguis::messages::adapted_types::enum_<
+							sanguis::pickup_type
+						>
 					>
 				>
 			>

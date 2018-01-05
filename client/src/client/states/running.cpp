@@ -79,7 +79,7 @@
 #include <fcppt/log/object.hpp>
 #include <fcppt/record/get.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/vector/vector10.hpp>
+#include <brigand/sequences/list.hpp>
 #include <boost/statechart/result.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
@@ -290,7 +290,7 @@ sanguis::client::states::running::react(
 
 	return
 		sanguis::client::dispatch<
-			boost::mpl::vector13<
+			brigand::list<
 				sanguis::messages::server::add_console_command,
 				sanguis::messages::server::add_own_player,
 				sanguis::messages::server::change_world,

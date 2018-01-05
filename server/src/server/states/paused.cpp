@@ -26,7 +26,7 @@
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/vector/vector10.hpp>
+#include <brigand/sequences/list.hpp>
 #include <boost/statechart/result.hpp>
 #include <fcppt/config/external_end.hpp>
 
@@ -86,7 +86,7 @@ sanguis::server::states::paused::react(
 
 	return
 		sanguis::server::dispatch<
-			boost::mpl::vector3<
+			brigand::list<
 				sanguis::messages::client::info,
 				sanguis::messages::client::pause,
 				sanguis::messages::client::unpause

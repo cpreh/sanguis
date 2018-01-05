@@ -27,7 +27,7 @@
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/variant/to_optional.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/vector/vector10.hpp>
+#include <brigand/sequences/list.hpp>
 #include <boost/statechart/result.hpp>
 #include <fcppt/config/external_end.hpp>
 
@@ -81,7 +81,7 @@ sanguis::client::states::waiting_for_player::react(
 
 	return
 		sanguis::client::dispatch<
-			boost::mpl::vector1<
+			brigand::list<
 				sanguis::messages::server::add_own_player
 			>
 		>(

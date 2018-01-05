@@ -41,7 +41,7 @@
 #include <fcppt/log/warning.hpp>
 #include <fcppt/record/get.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/vector/vector10.hpp>
+#include <brigand/sequences/list.hpp>
 #include <boost/statechart/result.hpp>
 #include <fcppt/config/external_end.hpp>
 
@@ -147,7 +147,7 @@ sanguis::server::states::unpaused::react(
 
 	return
 		sanguis::server::dispatch<
-			boost::mpl::vector9<
+			brigand::list<
 				sanguis::messages::client::attack_dest,
 				sanguis::messages::client::change_world,
 				sanguis::messages::client::direction,

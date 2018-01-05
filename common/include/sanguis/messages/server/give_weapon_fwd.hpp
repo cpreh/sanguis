@@ -6,6 +6,7 @@
 #include <sanguis/messages/server/types/message.hpp>
 #include <alda/bindings/record_fwd.hpp>
 #include <alda/message/object_fwd.hpp>
+#include <fcppt/mpl/to_brigand.hpp>
 
 
 namespace sanguis
@@ -21,7 +22,9 @@ alda::message::object<
 		sanguis::messages::server::types::message::give_weapon
 	>,
 	alda::bindings::record<
-		sanguis::messages::server::parts::weapon_description
+		fcppt::mpl::to_brigand<
+			sanguis::messages::server::parts::weapon_description
+		>
 	>
 >
 give_weapon;

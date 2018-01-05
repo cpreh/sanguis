@@ -8,6 +8,7 @@
 #include <alda/bindings/record_fwd.hpp>
 #include <alda/message/object_fwd.hpp>
 #include <fcppt/mpl/flatten.hpp>
+#include <fcppt/mpl/to_brigand.hpp>
 #include <fcppt/record/element_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/vector/vector10.hpp>
@@ -27,10 +28,12 @@ alda::message::object<
 		sanguis::messages::server::types::message::add_own_player
 	>,
 	alda::bindings::record<
-		fcppt::mpl::flatten<
-			boost::mpl::vector2<
-				sanguis::messages::server::parts::entity_id,
-				sanguis::messages::server::parts::add_player
+		fcppt::mpl::to_brigand<
+			fcppt::mpl::flatten<
+				boost::mpl::vector2<
+					sanguis::messages::server::parts::entity_id,
+					sanguis::messages::server::parts::add_player
+				>
 			>
 		>
 	>

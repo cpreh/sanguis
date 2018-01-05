@@ -4,7 +4,7 @@
 #include <sanguis/primary_weapon_type_fwd.hpp>
 #include <sanguis/secondary_weapon_type_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/vector/vector10.hpp>
+#include <brigand/sequences/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -12,7 +12,7 @@ namespace sanguis
 {
 
 typedef
-boost::mpl::vector2<
+brigand::list<
 	sanguis::primary_weapon_type,
 	sanguis::secondary_weapon_type
 >

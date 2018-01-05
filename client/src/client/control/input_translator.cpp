@@ -30,7 +30,7 @@
 #include <fcppt/variant/dynamic_cast.hpp>
 #include <fcppt/variant/match.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/vector/vector10.hpp>
+#include <brigand/sequences/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -71,7 +71,7 @@ sanguis::client::control::input_translator::on_event(
 {
 	fcppt::optional::maybe_void(
 		fcppt::variant::dynamic_cast_<
-			boost::mpl::vector3<
+			brigand::list<
 				sge::input::focus::event::key const,
 				sge::input::cursor::event::move const,
 				sge::input::cursor::event::button const

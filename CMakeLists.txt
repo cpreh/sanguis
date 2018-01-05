@@ -38,14 +38,6 @@ find_package(
 	system
 )
 
-include_directories(
-	${Boost_INCLUDE_DIRS}
-)
-
-link_directories(
-	${Boost_LIBRARY_DIRS}
-)
-
 # Find FCPPT
 
 find_package(
@@ -54,6 +46,11 @@ find_package(
 
 include(
 	FcpptCMakeUtils
+)
+
+find_package(
+	Brigand
+	REQUIRED
 )
 
 find_package(
@@ -289,6 +286,8 @@ function(
 	set(
 		PUBLIC_INCLUDES
 		"${CMAKE_CURRENT_SOURCE_DIR}/include"
+		${Boost_INCLUDE_DIRS}
+		${BRIGAND_INCLUDE_DIRS}
 	)
 
 	target_include_directories(
@@ -573,6 +572,7 @@ function(
 		${EXENAME}
 		PRIVATE
 		${_INCLUDE_DIRS}
+		${BRIGAND_INCLUDE_DIRS}
 		${Boost_INCLUDE_DIRS}
 	)
 
