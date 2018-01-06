@@ -578,12 +578,14 @@ sanguis_add_library(
 		${sgecharconv_TARGET}
 		sgetimer_interface
 		${alda_TARGET}
+		fcppt_boost_interface
 		${fcppt_filesystem_TARGET}
 		${fcppt_core_TARGET}
 		${Boost_FILESYSTEM_LIBRARIES}
 		${Boost_SYSTEM_LIBRARIES}
 		${ASIO_LIBS}
 	TRANSITIVE_DEPS
+		fcppt_boost_interface
 		${Boost_FILESYSTEM_LIBRARIES}
 		${Boost_SYSTEM_LIBRARIES}
 	COMPILE_DEFINITIONS_SHARED_PUBLIC

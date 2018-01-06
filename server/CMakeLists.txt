@@ -1119,6 +1119,7 @@ sanguis_add_library(
 		${sgefont_TARGET}
 		${sgetimer_TARGET}
 		${alda_TARGET}
+		fcppt_boost_interface
 		${fcppt_core_TARGET}
 		${fcppt_filesystem_TARGET}
 		${fcppt_log_TARGET}

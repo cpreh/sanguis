@@ -179,6 +179,7 @@ sanguis_add_library(
 	DEPS
 		${sanguis_creator_TARGET}
 		${sanguis_core_TARGET}
+		fcppt_boost_interface
 		${fcppt_core_TARGET}
 		${fcppt_log_TARGET}
 	TRANSITIVE_DEPS
