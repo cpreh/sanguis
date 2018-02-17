@@ -331,13 +331,13 @@ sanguis::server::global::context::player_target(
 )
 {
 	// handles rotation as well
-	sanguis::server::entities::player &player_ref(
+	sanguis::server::entities::player &player(
 		this->player_exn(
 			_player_id
 		)
 	);
 
-	player_ref.target(
+	player.target(
 		sanguis::server::weapons::optional_target(
 			sanguis::server::weapons::target(
 				_target
@@ -346,7 +346,7 @@ sanguis::server::global::context::player_target(
 	);
 
 	sanguis::server::vector const player_center(
-		player_ref.center().get()
+		player.center().get()
 	);
 
 	fcppt::optional::maybe_void(
@@ -355,12 +355,12 @@ sanguis::server::global::context::player_target(
 			_target
 		),
 		[
-			&player_ref
+			&player
 		](
 			sanguis::server::space_unit const _angle
 		)
 		{
-			player_ref.angle(
+			player.angle(
 				sanguis::server::angle(
 					_angle
 				)
@@ -375,9 +375,9 @@ sanguis::server::global::context::player_target(
 				sanguis::messages::server::rotate
 			>(
 				sanguis::messages::roles::entity_id{} =
-					player_ref.id(),
+					player.id(),
 				sanguis::messages::roles::angle{} =
-					player_ref.angle().get()
+					player.angle().get()
 			)
 		)
 	);
@@ -440,13 +440,13 @@ sanguis::server::global::context::player_speed(
 	sanguis::server::speed const &_speed
 )
 {
-	sanguis::server::entities::player &player_ref(
+	sanguis::server::entities::player &player(
 		this->player_exn(
 			_player_id
 		)
 	);
 
-	player_ref.change_speed(
+	player.change_speed(
 		_speed
 	);
 
@@ -457,9 +457,9 @@ sanguis::server::global::context::player_speed(
 				sanguis::messages::server::speed
 			>(
 				sanguis::messages::roles::entity_id{} =
-					player_ref.id(),
+					player.id(),
 				sanguis::messages::roles::speed{} =
-					player_ref.speed().get()
+					player.speed().get()
 			)
 		)
 	);
@@ -487,14 +487,14 @@ sanguis::server::global::context::player_choose_perk(
 	sanguis::perk_type const _perk_type
 )
 {
-	sanguis::server::entities::player &player_ref(
+	sanguis::server::entities::player &player(
 		this->player_exn(
 			_player_id
 		)
 	);
 
 	if(
-		!player_ref.perk_choosable(
+		!player.perk_choosable(
 			_perk_type
 		)
 	)
@@ -511,7 +511,7 @@ sanguis::server::global::context::player_choose_perk(
 		return;
 	}
 
-	player_ref.add_perk(
+	player.add_perk(
 		_perk_type
 	);
 }
