@@ -43,8 +43,8 @@
 #include <fcppt/log/object.hpp>
 #include <fcppt/record/get.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <brigand/sequences/list.hpp>
 #include <boost/statechart/result.hpp>
+#include <brigand/sequences/list.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
 

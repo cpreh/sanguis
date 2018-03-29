@@ -35,8 +35,8 @@
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <brigand/sequences/list.hpp>
 #include <boost/statechart/result.hpp>
+#include <brigand/sequences/list.hpp>
 #include <functional>
 #include <ostream>
 #include <fcppt/config/external_end.hpp>

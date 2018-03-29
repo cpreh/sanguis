@@ -61,9 +61,9 @@
 #include <fcppt/variant/dynamic_cast.hpp>
 #include <fcppt/variant/match.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <brigand/sequences/list.hpp>
 #include <boost/system/error_code.hpp>
 #include <boost/system/system_error.hpp>
+#include <brigand/sequences/list.hpp>
 #include <functional>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
