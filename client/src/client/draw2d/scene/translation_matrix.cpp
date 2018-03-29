@@ -6,7 +6,7 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/cast/int_to_float_fun.hpp>
 #include <fcppt/math/matrix/translation.hpp>
-#include <fcppt/math/vector/construct.hpp>
+#include <fcppt/math/vector/push_back.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 
 
@@ -17,7 +17,7 @@ sanguis::client::draw2d::scene::translation_matrix(
 {
 	return
 		fcppt::math::matrix::translation(
-			fcppt::math::vector::construct(
+			fcppt::math::vector::push_back(
 				fcppt::math::vector::structure_cast<
 					sanguis::client::draw2d::vector2,
 					fcppt::cast::int_to_float_fun
