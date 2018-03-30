@@ -44,7 +44,7 @@
 #include <fcppt/variant/output.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
-#include <boost/mpl/vector/vector10.hpp>
+#include <brigand/sequences/list.hpp>
 #include <cstdlib>
 #include <exception>
 #include <iostream>
@@ -81,7 +81,7 @@ execute_main(
 )
 {
 	sge::systems::instance<
-		boost::mpl::vector1<
+		brigand::list<
 			sge::systems::with_image2d
 		>
 	> const sys(

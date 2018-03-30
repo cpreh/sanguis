@@ -1131,6 +1131,8 @@ sanguis_add_library(
 		fcppt_log_interface
 		fcppt_options_interface
 		alda_interface
+	INCLUDES
+		${BRIGAND_INCLUDE_DIRS}
 )
 
 sanguis_add_executable(
