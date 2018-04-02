@@ -13,7 +13,7 @@
 #include <sge/sprite/config/texture_size_option.hpp>
 #include <sge/sprite/config/with_texture_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/vector/vector10.hpp>
+#include <brigand/sequences/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -37,7 +37,7 @@ sge::sprite::config::choices<
 	sge::sprite::config::normal_size<
 		sge::sprite::config::texture_size_option::never
 	>,
-	boost::mpl::vector2<
+	brigand::list<
 		sge::sprite::config::with_texture<
 			sge::sprite::config::texture_level_count<
 				1u

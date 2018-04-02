@@ -5,7 +5,7 @@
 #include <sanguis/client/draw2d/scene/world/sprite/is_background_role.hpp>
 #include <fcppt/record/element.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/vector/vector10.hpp>
+#include <brigand/sequences/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -30,7 +30,7 @@ struct is_background
 	struct apply
 	{
 		typedef
-		boost::mpl::vector1<
+		brigand::list<
 			fcppt::record::element<
 				sanguis::client::draw2d::scene::world::sprite::is_background_role,
 				bool

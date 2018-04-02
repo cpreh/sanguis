@@ -3,7 +3,7 @@
 
 #include <sge/sprite/state/choices_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/vector/vector10.hpp>
+#include <brigand/sequences/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -20,9 +20,11 @@ namespace world
 namespace sprite
 {
 
-typedef sge::sprite::state::choices<
-	boost::mpl::vector0<>
-> state_choices;
+typedef
+sge::sprite::state::choices<
+	brigand::list<>
+>
+state_choices;
 
 }
 }

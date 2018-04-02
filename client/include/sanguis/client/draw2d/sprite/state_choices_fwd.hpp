@@ -5,7 +5,7 @@
 #include <sge/sprite/state/with_blend_fwd.hpp>
 #include <sge/sprite/state/with_rasterizer_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/vector/vector10.hpp>
+#include <brigand/sequences/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -18,12 +18,14 @@ namespace draw2d
 namespace sprite
 {
 
-typedef sge::sprite::state::choices<
-	boost::mpl::vector2<
+typedef
+sge::sprite::state::choices<
+	brigand::list<
 		sge::sprite::state::with_blend,
 		sge::sprite::state::with_rasterizer
 	>
-> state_choices;
+>
+state_choices;
 
 }
 }
