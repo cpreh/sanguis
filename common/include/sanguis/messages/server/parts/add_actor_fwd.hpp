@@ -8,7 +8,7 @@
 #include <sanguis/messages/server/parts/add_with_weapon_fwd.hpp>
 #include <sanguis/messages/server/parts/speed_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/vector/vector10.hpp>
+#include <brigand/sequences/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -22,7 +22,7 @@ namespace parts
 {
 
 typedef
-boost::mpl::vector6<
+brigand::list<
 	sanguis::messages::server::parts::add_elements_base,
 	sanguis::messages::server::parts::speed,
 	sanguis::messages::server::parts::add_with_health,

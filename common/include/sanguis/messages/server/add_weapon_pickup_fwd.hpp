@@ -8,10 +8,9 @@
 #include <sanguis/messages/server/types/message.hpp>
 #include <alda/bindings/record_fwd.hpp>
 #include <alda/message/object_fwd.hpp>
-#include <fcppt/mpl/flatten.hpp>
-#include <fcppt/mpl/to_brigand.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/vector/vector10.hpp>
+#include <brigand/algorithms/flatten.hpp>
+#include <brigand/sequences/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -28,13 +27,11 @@ alda::message::object<
 		sanguis::messages::server::types::message::add_weapon_pickup
 	>,
 	alda::bindings::record<
-		fcppt::mpl::to_brigand<
-			fcppt::mpl::flatten<
-				boost::mpl::vector3<
-					sanguis::messages::server::parts::entity_id,
-					sanguis::messages::server::parts::add_elements_base,
-					sanguis::messages::server::parts::weapon_description
-				>
+		brigand::flatten<
+			brigand::list<
+				sanguis::messages::server::parts::entity_id,
+				sanguis::messages::server::parts::add_elements_base,
+				sanguis::messages::server::parts::weapon_description
 			>
 		>
 	>

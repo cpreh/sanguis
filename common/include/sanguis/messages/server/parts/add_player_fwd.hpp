@@ -6,7 +6,7 @@
 #include <sanguis/messages/server/parts/add_actor_fwd.hpp>
 #include <fcppt/record/element_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/vector/vector10.hpp>
+#include <brigand/sequences/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -20,7 +20,7 @@ namespace parts
 {
 
 typedef
-boost::mpl::vector2<
+brigand::list<
 	sanguis::messages::server::parts::add_actor,
 	fcppt::record::element<
 		sanguis::messages::roles::name,

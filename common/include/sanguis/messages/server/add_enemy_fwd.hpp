@@ -14,11 +14,10 @@
 #include <sanguis/messages/server/types/message.hpp>
 #include <alda/bindings/record_fwd.hpp>
 #include <alda/message/object_fwd.hpp>
-#include <fcppt/mpl/flatten.hpp>
-#include <fcppt/mpl/to_brigand.hpp>
 #include <fcppt/record/element_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/vector/vector10.hpp>
+#include <brigand/algorithms/flatten.hpp>
+#include <brigand/sequences/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -35,27 +34,25 @@ alda::message::object<
 		sanguis::messages::server::types::message::add_enemy
 	>,
 	alda::bindings::record<
-		fcppt::mpl::to_brigand<
-			fcppt::mpl::flatten<
-				boost::mpl::vector5<
-					sanguis::messages::server::parts::entity_id,
-					sanguis::messages::server::parts::add_actor,
-					fcppt::record::element<
-						sanguis::messages::roles::enemy_type,
-						sanguis::messages::adapted_types::enum_<
-							sanguis::creator::enemy_type
-						>
-					>,
-					fcppt::record::element<
-						sanguis::messages::roles::enemy_kind,
-						sanguis::messages::adapted_types::enum_<
-							sanguis::enemy_kind
-						>
-					>,
-					fcppt::record::element<
-						sanguis::messages::roles::name,
-						sanguis::messages::adapted_types::string
+		brigand::flatten<
+			brigand::list<
+				sanguis::messages::server::parts::entity_id,
+				sanguis::messages::server::parts::add_actor,
+				fcppt::record::element<
+					sanguis::messages::roles::enemy_type,
+					sanguis::messages::adapted_types::enum_<
+						sanguis::creator::enemy_type
 					>
+				>,
+				fcppt::record::element<
+					sanguis::messages::roles::enemy_kind,
+					sanguis::messages::adapted_types::enum_<
+						sanguis::enemy_kind
+					>
+				>,
+				fcppt::record::element<
+					sanguis::messages::roles::name,
+					sanguis::messages::adapted_types::string
 				>
 			>
 		>

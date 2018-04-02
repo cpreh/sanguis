@@ -7,7 +7,7 @@
 #include <sanguis/messages/roles/weapon_status.hpp>
 #include <fcppt/record/element_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/vector/vector10.hpp>
+#include <brigand/sequences/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -21,7 +21,7 @@ namespace parts
 {
 
 typedef
-boost::mpl::vector2<
+brigand::list<
 	fcppt::record::element<
 		sanguis::messages::roles::primary_weapon,
 		sanguis::messages::adapted_types::optional_primary_weapon_type
