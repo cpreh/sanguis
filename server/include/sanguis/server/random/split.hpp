@@ -10,7 +10,7 @@
 #include <sanguis/server/random/split_array.hpp>
 #include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/algorithm/repeat.hpp>
-#include <fcppt/container/array_init_const.hpp>
+#include <fcppt/container/array/init_const.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
 #include <fcppt/type_iso/strong_typedef.hpp>
@@ -71,7 +71,7 @@ split(
 	);
 
 	result_type result(
-		fcppt::container::array_init_const<
+		fcppt::container::array::init_const<
 			result_type
 		>(
 			sanguis::server::random::amount(

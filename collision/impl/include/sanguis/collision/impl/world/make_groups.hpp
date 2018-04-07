@@ -1,7 +1,7 @@
 #ifndef SANGUIS_COLLISION_IMPL_WORLD_MAKE_GROUPS_HPP_INCLUDED
 #define SANGUIS_COLLISION_IMPL_WORLD_MAKE_GROUPS_HPP_INCLUDED
 
-#include <fcppt/container/array_init.hpp>
+#include <fcppt/container/array/init.hpp>
 #include <fcppt/enum/array.hpp>
 #include <fcppt/enum/array_init.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -92,7 +92,7 @@ private:
 			groups_array<
 				Group::value
 			> const array(
-				fcppt::container::array_init<
+				fcppt::container::array::init<
 					groups_array<
 						Group::value
 					>

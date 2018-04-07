@@ -4,7 +4,7 @@
 #include <sanguis/server/damage/basic_array.hpp>
 #include <sanguis/server/damage/basic_meta_decl.hpp>
 #include <sanguis/server/damage/basic_meta_list.hpp>
-#include <fcppt/container/array_init_const.hpp>
+#include <fcppt/container/array/init_const.hpp>
 
 
 namespace sanguis
@@ -34,7 +34,7 @@ basic_make_array(
 
 	// TODO: Improve this
 	result_type result{
-		fcppt::container::array_init_const<
+		fcppt::container::array::init_const<
 			typename
 			result_type::internal
 		>(
