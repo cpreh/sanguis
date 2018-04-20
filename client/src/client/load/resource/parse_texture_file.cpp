@@ -15,6 +15,7 @@
 #include <boost/filesystem/path.hpp>
 #include <ios>
 #include <string>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -95,5 +96,7 @@ sanguis::client::load::resource::parse_texture_file(
 	}
 
 	return
-		_result;
+		std::move(
+			_result
+		);
 }
