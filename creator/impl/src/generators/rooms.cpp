@@ -60,6 +60,7 @@
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/level.hpp>
+#include <fcppt/math/to_array.hpp>
 #include <fcppt/math/box/center.hpp>
 #include <fcppt/math/box/distance.hpp>
 #include <fcppt/math/box/intersects.hpp>
@@ -130,13 +131,13 @@ border_distance =
 	return
 	fcppt::algorithm::fold(
 		// they should all have negative distances, so this abs()es
-		(
+		fcppt::math::to_array(
 			-
 			fcppt::math::box::distance(
 				_rect,
 				level
 			)
-		).storage(),
+		),
 		std::numeric_limits<ret_type>::max(),
 		[](ret_type _l, ret_type _r){return std::min(_l, _r);}
 	);
@@ -154,10 +155,12 @@ rect_distance =
 
 	return
 	fcppt::algorithm::fold(
-		fcppt::math::box::distance(
-			a,
-			b
-		).storage(),
+		fcppt::math::to_array(
+			fcppt::math::box::distance(
+				a,
+				b
+			)
+		),
 		ret_type{0},
 		[](ret_type const _l, ret_type const _r){
 			return

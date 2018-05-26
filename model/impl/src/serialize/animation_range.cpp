@@ -5,6 +5,7 @@
 #include <sge/parse/json/value.hpp>
 #include <sge/parse/json/convert/from_container.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/math/to_array.hpp>
 
 
 sge::parse::json::member
@@ -17,10 +18,12 @@ sanguis::model::impl::serialize::animation_range(
 			FCPPT_TEXT("range"),
 			sge::parse::json::value(
 				sge::parse::json::convert::from_container(
-					sanguis::model::impl::animation_range_vector{
-						_range.begin(),
-						_range.end()
-					}.storage()
+					fcppt::math::to_array(
+						sanguis::model::impl::animation_range_vector{
+							_range.begin(),
+							_range.end()
+						}
+					)
 				)
 			)
 		);
