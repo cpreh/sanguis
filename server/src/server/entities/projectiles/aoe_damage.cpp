@@ -12,7 +12,7 @@
 #include <sanguis/server/entities/projectiles/aoe_damage.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/assign/make_container.hpp>
+#include <fcppt/container/make.hpp>
 
 
 sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
@@ -23,7 +23,7 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 )
 :
 	sanguis::server::entities::with_auras(
-		fcppt::assign::make_container<
+		fcppt::container::make<
 			sanguis::server::auras::container
 		>(
 			fcppt::unique_ptr_to_base<

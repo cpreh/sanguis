@@ -29,7 +29,7 @@
 #include <sanguis/server/weapons/range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/assign/make_container.hpp>
+#include <fcppt/container/make.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/units/systems/si/mass.hpp>
 #include <cmath>
@@ -103,7 +103,7 @@ sanguis::server::entities::enemies::factory::skeleton(
 			sanguis::server::exp(
 				100.f
 			),
-			fcppt::assign::make_container<
+			fcppt::container::make<
 				sanguis::server::auras::container
 			>(
 				sanguis::server::auras::burn_create<

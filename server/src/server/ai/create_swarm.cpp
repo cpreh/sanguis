@@ -15,7 +15,7 @@
 #include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/assign/make_container.hpp>
+#include <fcppt/container/make.hpp>
 
 
 sanguis::server::ai::create_function
@@ -40,7 +40,7 @@ sanguis::server::ai::create_swarm(
 						fcppt::make_unique_ptr<
 							sanguis::server::ai::tree::priority_sequence
 						>(
-							fcppt::assign::make_container<
+							fcppt::container::make<
 								sanguis::server::ai::tree::container
 							>(
 								sanguis::server::ai::tree::make_leaf<

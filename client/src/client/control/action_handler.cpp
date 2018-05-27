@@ -39,7 +39,7 @@
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/unit.hpp>
 #include <fcppt/assert/unreachable.hpp>
-#include <fcppt/assign/make_container.hpp>
+#include <fcppt/container/make.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/clamp.hpp>
 #include <fcppt/math/vector/null.hpp>
@@ -80,7 +80,7 @@ sanguis::client::control::action_handler::action_handler(
 	),
 	cursor_position_(),
 	cheat_connections_(
-		fcppt::assign::make_container<
+		fcppt::container::make<
 			fcppt::signal::auto_connection_container
 		>(
 			this->cheat_connection(

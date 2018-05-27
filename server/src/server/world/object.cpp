@@ -137,7 +137,7 @@
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/unreachable.hpp>
-#include <fcppt/assign/make_container.hpp>
+#include <fcppt/container/make.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/enum/array_init.hpp>

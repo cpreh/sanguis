@@ -18,7 +18,7 @@
 #include <fcppt/algorithm/map_iteration_second.hpp>
 #include <fcppt/algorithm/update_action.hpp>
 #include <fcppt/assert/optional_error.hpp>
-#include <fcppt/assign/make_container.hpp>
+#include <fcppt/container/make.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -42,7 +42,7 @@ sanguis::server::entities::exp_area::exp_area(
 {
 	// TODO: Direct initialization?
 	this->init_ghosts(
-		fcppt::assign::make_container<
+		fcppt::container::make<
 			sanguis::server::collision::ghost_container
 		>(
 			sanguis::server::collision::ghost{

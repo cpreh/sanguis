@@ -6,14 +6,14 @@
 #include <sanguis/server/perks/tree/required_parent_level.hpp>
 #include <sanguis/server/perks/tree/required_player_level.hpp>
 #include <sanguis/server/perks/tree/status.hpp>
-#include <fcppt/assign/make_container.hpp>
+#include <fcppt/container/make.hpp>
 
 
 sanguis::server::perks::tree::container
 sanguis::server::perks::tree::create()
 {
 	return
-		fcppt::assign::make_container<
+		fcppt::container::make<
 			sanguis::server::perks::tree::container
 		>(
 			sanguis::server::perks::tree::object(

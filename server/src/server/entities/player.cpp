@@ -89,7 +89,7 @@
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/optional_error.hpp>
-#include <fcppt/assign/make_container.hpp>
+#include <fcppt/container/make.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/atan2.hpp>
 #include <fcppt/math/vector/null.hpp>
@@ -128,7 +128,7 @@ sanguis::server::entities::player::player(
 		)
 	),
 	sanguis::server::entities::with_auras_id(
-		fcppt::assign::make_container<
+		fcppt::container::make<
 			sanguis::server::auras::container
 		>(
 			fcppt::unique_ptr_to_base<
