@@ -20,7 +20,7 @@ class exception
 public:
 	explicit
 	exception(
-		fcppt::string const &
+		fcppt::string &&
 	);
 
 	explicit

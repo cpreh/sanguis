@@ -3,14 +3,19 @@
 #include <fcppt/string.hpp>
 #include <fcppt/assert/information_fwd.hpp>
 #include <fcppt/assert/make_message.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::tools::libmergeimage::exception::exception(
-	fcppt::string const &_text
+	fcppt::string &&_text
 )
 :
 	fcppt::exception(
-		_text
+		std::move(
+			_text
+		)
 	)
 {
 }
