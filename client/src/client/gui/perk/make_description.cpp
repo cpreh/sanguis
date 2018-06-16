@@ -3,7 +3,7 @@
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/string.hpp>
-#include <fcppt/insert_to_fcppt_string.hpp>
+#include <fcppt/output_to_fcppt_string.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 
 
@@ -16,7 +16,7 @@ sanguis::client::gui::perk::make_description(
 		SGE_FONT_LIT('(')
 		+
 		sge::font::from_fcppt_string(
-			fcppt::insert_to_fcppt_string(
+			fcppt::output_to_fcppt_string(
 				_info.level()
 			)
 		)
@@ -24,7 +24,7 @@ sanguis::client::gui::perk::make_description(
 		SGE_FONT_LIT('/')
 		+
 		sge::font::from_fcppt_string(
-			fcppt::insert_to_fcppt_string(
+			fcppt::output_to_fcppt_string(
 				_info.max_level()
 			)
 		)
@@ -32,7 +32,7 @@ sanguis::client::gui::perk::make_description(
 		SGE_FONT_LIT(") (requires player level ")
 		+
 		sge::font::from_fcppt_string(
-			fcppt::insert_to_fcppt_string(
+			fcppt::output_to_fcppt_string(
 				_info.required_player_level()
 			)
 		)
@@ -40,7 +40,7 @@ sanguis::client::gui::perk::make_description(
 		SGE_FONT_LIT(", parent level ")
 		+
 		sge::font::from_fcppt_string(
-			fcppt::insert_to_fcppt_string(
+			fcppt::output_to_fcppt_string(
 				_info.required_parent_level()
 			)
 		)

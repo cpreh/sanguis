@@ -28,7 +28,7 @@
 #include <sge/rucksack/axis.hpp>
 #include <sge/rucksack/dim.hpp>
 #include <sge/timer/elapsed_fractional.hpp>
-#include <fcppt/insert_to_string.hpp>
+#include <fcppt/output_to_string.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 
 
@@ -176,7 +176,7 @@ sanguis::client::gui::hud::weapon_widget::make_text(
 ) const
 {
 	sge::font::string value(
-		fcppt::insert_to_string<
+		fcppt::output_to_string<
 			sge::font::string
 		>(
 			_magazine_remaining
@@ -191,7 +191,7 @@ sanguis::client::gui::hud::weapon_widget::make_text(
 		value +=
 			SGE_FONT_LIT('/')
 			+
-			fcppt::insert_to_string<
+			fcppt::output_to_string<
 				sge::font::string
 			>(
 				description_.magazine_size()
@@ -205,7 +205,7 @@ sanguis::client::gui::hud::weapon_widget::make_text(
 		value +=
 			SGE_FONT_LIT('+')
 			+
-			fcppt::insert_to_string<
+			fcppt::output_to_string<
 				sge::font::string
 			>(
 				description_.magazine_extra()

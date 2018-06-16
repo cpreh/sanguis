@@ -7,7 +7,7 @@
 #include <sge/image2d/save_from_view.hpp>
 #include <sge/image2d/system_fwd.hpp>
 #include <sge/image2d/view/const_object.hpp>
-#include <fcppt/insert_to_fcppt_string.hpp>
+#include <fcppt/output_to_fcppt_string.hpp>
 #include <fcppt/make_int_range_count.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
@@ -40,7 +40,7 @@ sanguis::tools::libmergeimage::save_images(
 		);
 
 		fcppt::string const file_name(
-			fcppt::insert_to_fcppt_string(
+			fcppt::output_to_fcppt_string(
 				index
 			)
 			+

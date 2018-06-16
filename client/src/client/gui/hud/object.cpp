@@ -42,7 +42,7 @@
 #include <sge/rucksack/dim.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/insert_to_string.hpp>
+#include <fcppt/output_to_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/strong_typedef_output.hpp>
@@ -421,7 +421,7 @@ sanguis::client::gui::hud::object::level(
 	level_text_.value(
 		SGE_FONT_LIT("Level: ")
 		+
-		fcppt::insert_to_string<
+		fcppt::output_to_string<
 			sge::font::string
 		>(
 			_level

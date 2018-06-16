@@ -23,7 +23,7 @@
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <sge/viewport/manager.hpp>
-#include <fcppt/insert_to_fcppt_string.hpp>
+#include <fcppt/output_to_fcppt_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
@@ -217,13 +217,13 @@ sanguis::client::gui::perk::chooser::make_top_text() const
 		sge::font::from_fcppt_string(
 			FCPPT_TEXT("Level: ")
 			+
-			fcppt::insert_to_fcppt_string(
+			fcppt::output_to_fcppt_string(
 				state_.player_level()
 			)
 			+
 			FCPPT_TEXT(", Perks to choose: ")
 			+
-			fcppt::insert_to_fcppt_string(
+			fcppt::output_to_fcppt_string(
 				state_.remaining_levels()
 			)
 		);

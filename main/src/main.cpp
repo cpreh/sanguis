@@ -11,7 +11,7 @@
 #include <awl/main/function_context.hpp>
 #include <fcppt/args_from_second.hpp>
 #include <fcppt/exception.hpp>
-#include <fcppt/insert_to_fcppt_string.hpp>
+#include <fcppt/output_to_fcppt_string.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/either/match.hpp>
@@ -59,7 +59,7 @@ try
 						)
 						{
 							awl::show_error(
-								fcppt::insert_to_fcppt_string(
+								fcppt::output_to_fcppt_string(
 									_error
 								)
 							);

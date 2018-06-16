@@ -7,7 +7,7 @@
 #include <sanguis/model/exception.hpp>
 #include <sanguis/model/image_size.hpp>
 #include <sanguis/model/make_cell_areas.hpp>
-#include <fcppt/insert_to_fcppt_string.hpp>
+#include <fcppt/output_to_fcppt_string.hpp>
 #include <fcppt/make_int_range.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
@@ -34,13 +34,13 @@ sanguis::model::make_cell_areas(
 			sanguis::model::exception{
 				FCPPT_TEXT("begin/end invalid: begin = ")
 				+
-				fcppt::insert_to_fcppt_string(
+				fcppt::output_to_fcppt_string(
 					_range.begin()
 				)
 				+
 				FCPPT_TEXT(", end = ")
 				+
-				fcppt::insert_to_fcppt_string(
+				fcppt::output_to_fcppt_string(
 					_range.end()
 				)
 			};
@@ -83,13 +83,13 @@ sanguis::model::make_cell_areas(
 						sanguis::model::exception{
 							FCPPT_TEXT("Rect out of bounds. Image size is ")
 							+
-							fcppt::insert_to_fcppt_string(
+							fcppt::output_to_fcppt_string(
 								_image_size
 							)
 							+
 							FCPPT_TEXT(" but the inner area is ")
 							+
-							fcppt::insert_to_fcppt_string(
+							fcppt::output_to_fcppt_string(
 								cur_area
 							)
 						};

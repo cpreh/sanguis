@@ -22,7 +22,7 @@
 #include <sge/image2d/view/const_object.hpp>
 #include <sge/image2d/view/object.hpp>
 #include <sge/image2d/view/sub.hpp>
-#include <fcppt/insert_to_fcppt_string.hpp>
+#include <fcppt/output_to_fcppt_string.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
@@ -127,13 +127,13 @@ sanguis::tools::libmergeimage::impl::make_image(
 								+
 								FCPPT_TEXT(" has dimensions ")
 								+
-								fcppt::insert_to_fcppt_string(
+								fcppt::output_to_fcppt_string(
 									img->size()
 								)
 								+
 								FCPPT_TEXT(" but the cell size so far was ")
 								+
-								fcppt::insert_to_fcppt_string(
+								fcppt::output_to_fcppt_string(
 									_cell_size
 								)
 							);

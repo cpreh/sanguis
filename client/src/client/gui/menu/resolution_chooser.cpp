@@ -22,7 +22,7 @@
 #include <sge/renderer/display_mode/output.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
-#include <fcppt/insert_to_fcppt_string.hpp>
+#include <fcppt/output_to_fcppt_string.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -59,7 +59,7 @@ sanguis::client::gui::menu::resolution_chooser::resolution_chooser(
 			{
 				return
 					sge::font::from_fcppt_string(
-						fcppt::insert_to_fcppt_string(
+						fcppt::output_to_fcppt_string(
 							_display_mode
 						)
 					);

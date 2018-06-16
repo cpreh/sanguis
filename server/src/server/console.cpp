@@ -20,7 +20,7 @@
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/font/string.hpp>
-#include <fcppt/insert_to_string.hpp>
+#include <fcppt/output_to_string.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
@@ -108,7 +108,7 @@ sanguis::server::console::eval(
 )
 {
 	_args.push_back(
-		fcppt::insert_to_string<
+		fcppt::output_to_string<
 			sge::font::string
 		>(
 			_id
