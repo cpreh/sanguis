@@ -1124,6 +1124,7 @@ sanguis_add_library(
 		${fcppt_filesystem_TARGET}
 		${fcppt_log_TARGET}
 		${fcppt_options_TARGET}
+		${FcpptThreads_LIBRARIES}
 		${Boost_FILESYSTEM_LIBRARIES}
 		${ASIO_LIBS}
 	TRANSITIVE_DEPS
@@ -1133,6 +1134,8 @@ sanguis_add_library(
 		alda_interface
 	INCLUDES
 		${BRIGAND_INCLUDE_DIRS}
+	COMPILE_FLAGS
+		${FcpptThreads_DEFINITIONS}
 )
 
 sanguis_add_executable(

@@ -581,6 +581,7 @@ sanguis_add_library(
 		fcppt_boost_interface
 		${fcppt_filesystem_TARGET}
 		${fcppt_core_TARGET}
+		${FcpptThreads_LIBRARIES}
 		${Boost_FILESYSTEM_LIBRARIES}
 		${Boost_SYSTEM_LIBRARIES}
 		${ASIO_LIBS}
@@ -596,4 +597,6 @@ sanguis_add_library(
 		ALDA_EXTERNAL_STATIC_LINK
 	INCLUDES
 		${MEDIA_PATH_INCLUDES}
+	COMPILE_FLAGS
+		${FcpptThreads_DEFINITIONS}
 )
