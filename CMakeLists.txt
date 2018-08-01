@@ -68,15 +68,13 @@ set(
 	timer
 )
 
+find_package(
+	FcpptThreads REQUIRED
+)
+
 if(
 	ENABLE_CLIENT
 )
-	# Find Threads
-
-	find_package(
-		FcpptThreads REQUIRED
-	)
-
 	list(
 		APPEND
 		SGE_COMPONENTS
