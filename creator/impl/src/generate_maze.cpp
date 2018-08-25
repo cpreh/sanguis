@@ -16,9 +16,9 @@
 #include <sanguis/creator/impl/random/uniform_pos.hpp>
 #include <sanguis/creator/impl/random/uniform_size.hpp>
 #include <sanguis/creator/impl/random/uniform_size_variate.hpp>
-#include <fcppt/algorithm/append.hpp>
 #include <fcppt/algorithm/remove.hpp>
 #include <fcppt/assert/optional_error.hpp>
+#include <fcppt/container/join.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
@@ -28,6 +28,7 @@
 #include <fcppt/optional/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <limits>
+#include <utility>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
@@ -150,15 +151,17 @@ sanguis::creator::impl::generate_maze(
 			sanguis::creator::pos
 		> walls;
 
-		// initially populate the set of walls with the neighbors
-		// of the starting point
-		auto neighbors =
-			fcppt::container::grid::neumann_neighbors(
-				starting_pos);
-
-		fcppt::algorithm::append(
-			walls,
-			neighbors);
+		walls =
+			fcppt::container::join(
+				std::move(
+					walls
+				),
+				// initially populate the set of walls with the neighbors
+				// of the starting point
+				fcppt::container::grid::neumann_neighbors(
+					starting_pos
+				)
+			);
 
 		while(
 			!walls.empty()
@@ -221,12 +224,15 @@ sanguis::creator::impl::generate_maze(
 					// this actually appends some cells that aren't walls,
 					// but they get filtered away the next time, since they
 					// have two empty neighbors
-					fcppt::algorithm::append(
-						walls,
-						fcppt::container::grid::neumann_neighbors(
-							_opposing_cell
-						)
-					);
+					walls =
+						fcppt::container::join(
+							std::move(
+								walls
+							),
+							fcppt::container::grid::neumann_neighbors(
+								_opposing_cell
+							)
+						);
 				}
 			);
 

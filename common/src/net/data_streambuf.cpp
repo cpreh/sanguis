@@ -1,8 +1,8 @@
 #include <sanguis/net/data_buffer.hpp>
 #include <sanguis/net/data_streambuf.hpp>
-#include <fcppt/algorithm/append.hpp>
+#include <fcppt/container/join.hpp>
+#include <fcppt/iterator/make_range.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/range/iterator_range_core.hpp>
 #include <ios>
 #include <streambuf>
 #include <fcppt/config/external_end.hpp>
@@ -29,15 +29,18 @@ sanguis::net::data_streambuf::xsputn(
 	std::streamsize const _size
 )
 {
-	fcppt::algorithm::append(
-		buffer_,
-		boost::make_iterator_range(
-			_dest,
-			_dest
-			+
-			_size
-		)
-	);
+	this->buffer_ =
+		fcppt::container::join(
+			std::move(
+				this->buffer_
+			),
+			fcppt::iterator::make_range(
+				_dest,
+				_dest
+				+
+				_size
+			)
+		);
 
 	return
 		_size;

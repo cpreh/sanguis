@@ -5,7 +5,7 @@
 #include <sanguis/tools/libmergeimage/impl/path_vector.hpp>
 #include <sanguis/tools/libmergeimage/impl/path_vector_vector.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/algorithm/append.hpp>
+#include <fcppt/container/join.hpp>
 
 
 // This algorithm takes a container of path_vectors so that it may
@@ -118,10 +118,13 @@ sanguis::tools::libmergeimage::impl::merge_paths(
 			accum.clear();
 		}
 
-		fcppt::algorithm::append(
-			accum,
-			element
-		);
+		accum =
+			fcppt::container::join(
+				std::move(
+					accum
+				),
+				element
+			);
 	}
 
 	// Left over elements

@@ -47,13 +47,13 @@
 #include <fcppt/reference_comparison.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/algorithm/append.hpp>
 #include <fcppt/algorithm/map_concat.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/cast/to_signed_fun.hpp>
+#include <fcppt/container/join.hpp>
 #include <fcppt/container/array/init_move.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/clamped_min.hpp>
@@ -765,10 +765,13 @@ sanguis::collision::impl::world::simple::object::update_ghosts()
 						);
 			}
 
-			fcppt::algorithm::append(
-				body_exit,
-				ghost.get().post_update_bodies()
-			);
+			body_exit =
+				fcppt::container::join(
+					std::move(
+						body_exit
+					),
+					ghost.get().post_update_bodies()
+				);
 		}
 	}
 
