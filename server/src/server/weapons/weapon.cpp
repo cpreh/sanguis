@@ -36,9 +36,9 @@
 #include <sanguis/server/weapons/events/stop.hpp>
 #include <sanguis/server/weapons/states/idle.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/algorithm/join.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/optional_error.hpp>
+#include <fcppt/container/join.hpp>
 #include <fcppt/optional/from.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
@@ -288,7 +288,7 @@ sanguis::server::weapons::weapon::description() const
 				)
 				{
 					return
-						fcppt::algorithm::join(
+						fcppt::container::join(
 							sanguis::weapon_attribute_vector{
 								sanguis::server::weapons::attributes::make(
 									sanguis::weapon_attribute_type::accuracy,

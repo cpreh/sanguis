@@ -7,7 +7,6 @@
 #include <sge/parse/json/member_map.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/optional_member.hpp>
-#include <fcppt/algorithm/join.hpp>
 #include <fcppt/optional/cat.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <array>

@@ -1,6 +1,6 @@
 #include <sanguis/server/entities/combine_transfer.hpp>
 #include <sanguis/server/entities/transfer_result.hpp>
-#include <fcppt/algorithm/join.hpp>
+#include <fcppt/container/join.hpp>
 
 
 sanguis::server::entities::transfer_result
@@ -11,7 +11,7 @@ sanguis::server::entities::combine_transfer(
 {
 	return
 		sanguis::server::entities::transfer_result(
-			fcppt::algorithm::join(
+			fcppt::container::join(
 				_left.release_body_enter(),
 				_right.release_body_enter()
 			)

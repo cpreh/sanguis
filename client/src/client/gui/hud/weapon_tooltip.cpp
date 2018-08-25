@@ -19,8 +19,8 @@
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/algorithm/join.hpp>
 #include <fcppt/algorithm/map.hpp>
+#include <fcppt/container/join.hpp>
 
 
 sanguis::client::gui::hud::weapon_tooltip::weapon_tooltip(
@@ -76,7 +76,7 @@ sanguis::client::gui::hud::weapon_tooltip::weapon_tooltip(
 	),
 	container_(
 		_gui_context,
-		fcppt::algorithm::join(
+		fcppt::container::join(
 			sge::gui::widget::reference_alignment_vector{
 				sge::gui::widget::reference_alignment_pair(
 					sge::gui::widget::reference(

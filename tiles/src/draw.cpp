@@ -9,8 +9,8 @@
 #include <sanguis/tiles/log.hpp>
 #include <sanguis/tiles/impl/draw_connecting.hpp>
 #include <sanguis/tiles/impl/draw_non_connecting.hpp>
-#include <fcppt/algorithm/join.hpp>
 #include <fcppt/assert/pre.hpp>
+#include <fcppt/container/join.hpp>
 #include <fcppt/container/grid/clamped_sup.hpp>
 #include <fcppt/math/dim/comparison.hpp>
 #include <fcppt/math/dim/fill.hpp>
@@ -67,7 +67,7 @@ sanguis::tiles::draw(
 	);
 
 	return
-		fcppt::algorithm::join(
+		fcppt::container::join(
 			sanguis::tiles::impl::draw_connecting(
 				_log.main_log(),
 				_collection,

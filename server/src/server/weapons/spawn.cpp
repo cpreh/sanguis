@@ -26,7 +26,7 @@
 #include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
 #include <sanguis/server/world/center_to_grid_pos.hpp>
 #include <fcppt/reference_impl.hpp>
-#include <fcppt/algorithm/join.hpp>
+#include <fcppt/container/join.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 
@@ -155,7 +155,7 @@ sanguis::weapon_attribute_vector
 sanguis::server::weapons::spawn::attributes() const
 {
 	return
-		fcppt::algorithm::join(
+		fcppt::container::join(
 			this->extra_attributes(),
 			attributes_
 		);

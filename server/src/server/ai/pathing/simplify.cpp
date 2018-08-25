@@ -5,9 +5,9 @@
 #include <sanguis/server/ai/pathing/simplify.hpp>
 #include <sanguis/server/ai/pathing/trail.hpp>
 #include <fcppt/make_int_range_count.hpp>
-#include <fcppt/algorithm/join.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/container/at_optional.hpp>
+#include <fcppt/container/join.hpp>
 #include <fcppt/container/maybe_front.hpp>
 #include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -39,7 +39,7 @@ sanguis::server::ai::pathing::simplify(
 			)
 			{
 				return
-					fcppt::algorithm::join(
+					fcppt::container::join(
 						sanguis::server::ai::pathing::trail{
 							_start
 						},
