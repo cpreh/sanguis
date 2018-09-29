@@ -1,3 +1,4 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/player_name.hpp>
@@ -66,9 +67,11 @@
 #include <sanguis/messages/server/remove_weapon.hpp>
 #include <sanguis/messages/server/slowdown.hpp>
 #include <sanguis/messages/server/unpause.hpp>
+#include <sge/charconv/convert.hpp>
+#include <sge/charconv/encoding.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <sge/console/object.hpp>
-#include <sge/font/from_fcppt_string.hpp>
+#include <sge/font/from_std_wstring.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
@@ -77,6 +80,7 @@
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/record/get.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/result.hpp>
@@ -349,21 +353,37 @@ sanguis::client::states::running::operator()(
 {
 	fcppt::string const
 		name(
-			sge::charconv::utf8_string_to_fcppt(
-				fcppt::record::get<
-					sanguis::messages::roles::command_name
-				>(
-					_message.get()
-				)
+			fcppt::optional::to_exception(
+				sge::charconv::utf8_string_to_fcppt(
+					fcppt::record::get<
+						sanguis::messages::roles::command_name
+					>(
+						_message.get()
+					)
+				),
+				[]{
+					return
+						sanguis::exception{
+							FCPPT_TEXT("Failed to convert command name!")
+						};
+				}
 			)
 		),
 		description(
-			sge::charconv::utf8_string_to_fcppt(
-				fcppt::record::get<
-					sanguis::messages::roles::command_description
-				>(
-					_message.get()
-				)
+			fcppt::optional::to_exception(
+				sge::charconv::utf8_string_to_fcppt(
+					fcppt::record::get<
+						sanguis::messages::roles::command_description
+					>(
+						_message.get()
+					)
+				),
+				[]{
+					return
+						sanguis::exception{
+							FCPPT_TEXT("Failed to convert command description!")
+						};
+				}
 			)
 		);
 
@@ -395,12 +415,21 @@ sanguis::client::states::running::operator()(
 {
 	hud_->player_name(
 		sanguis::player_name(
-			sge::charconv::utf8_string_to_fcppt(
-				fcppt::record::get<
-					sanguis::messages::roles::name
-				>(
-					_message.get()
-				)
+			// FIXME
+			fcppt::optional::to_exception(
+				sge::charconv::utf8_string_to_fcppt(
+					fcppt::record::get<
+						sanguis::messages::roles::name
+					>(
+						_message.get()
+					)
+				),
+				[]{
+					return
+						sanguis::exception{
+							FCPPT_TEXT("Failed to convert player name!")
+						};
+				}
 			)
 		)
 	);
@@ -418,12 +447,20 @@ sanguis::client::states::running::operator()(
 {
 	hud_->world_name(
 		sanguis::world_name(
-			sge::charconv::utf8_string_to_fcppt(
-				fcppt::record::get<
-					sanguis::messages::roles::world_name
-				>(
-					_message.get()
-				)
+			fcppt::optional::to_exception(
+				sge::charconv::utf8_string_to_fcppt(
+					fcppt::record::get<
+						sanguis::messages::roles::world_name
+					>(
+						_message.get()
+					)
+				),
+				[]{
+					return
+						sanguis::exception{
+							FCPPT_TEXT("Failed to convert world name!")
+						};
+				}
 			)
 		)
 	);
@@ -440,8 +477,11 @@ sanguis::client::states::running::operator()(
 )
 {
 	console_->sge_console().emit_message(
-		sge::font::from_fcppt_string(
-			sge::charconv::utf8_string_to_fcppt(
+		sge::font::from_std_wstring(
+			sge::charconv::convert<
+				sge::charconv::encoding::wchar,
+				sge::charconv::encoding::utf8
+			>(
 				fcppt::record::get<
 					sanguis::messages::roles::console_message
 				>(

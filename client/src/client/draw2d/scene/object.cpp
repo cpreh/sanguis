@@ -170,6 +170,7 @@
 #include <sge/sprite/state/scoped.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/format.hpp>
+#include <fcppt/from_std_string.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/strong_typedef_output.hpp>
@@ -1086,12 +1087,21 @@ sanguis::client::draw2d::scene::object::operator()(
 				_message.get()
 			),
 			sanguis::client::draw2d::entities::name(
-				sge::charconv::utf8_string_to_fcppt(
-					fcppt::record::get<
-						sanguis::messages::roles::name
-					>(
-						_message.get()
-					)
+				// FIXME
+				fcppt::optional::to_exception(
+					sge::charconv::utf8_string_to_fcppt(
+						fcppt::record::get<
+							sanguis::messages::roles::name
+						>(
+							_message.get()
+						)
+					),
+					[]{
+						return
+							sanguis::exception{
+								FCPPT_TEXT("Failed to convert entity name!")
+							};
+					}
 				)
 			),
 			sanguis::client::draw2d::translate::health_pair(
@@ -1276,12 +1286,20 @@ sanguis::client::draw2d::scene::object::operator()(
 				_message
 			),
 			sanguis::client::draw2d::entities::name(
-				sge::charconv::utf8_string_to_fcppt(
-					fcppt::record::get<
-						sanguis::messages::roles::name
-					>(
-						_message.get()
-					)
+				fcppt::optional::to_exception(
+					sge::charconv::utf8_string_to_fcppt(
+						fcppt::record::get<
+							sanguis::messages::roles::name
+						>(
+							_message.get()
+						)
+					),
+					[]{
+						return
+							sanguis::exception{
+								FCPPT_TEXT("Failed to convert entity name!")
+							};
+					}
 				)
 			)
 		),
@@ -1379,12 +1397,20 @@ sanguis::client::draw2d::scene::object::operator()(
 			sanguis::creator::top_parameters(
 				log_context_,
 				sanguis::creator::name(
-					sge::charconv::utf8_string_to_fcppt(
-						fcppt::record::get<
-							sanguis::messages::roles::generator_name
-						>(
-							_message.get()
-						)
+					fcppt::optional::to_exception(
+						sge::charconv::utf8_string_to_fcppt(
+							fcppt::record::get<
+								sanguis::messages::roles::generator_name
+							>(
+								_message.get()
+							)
+						),
+						[]{
+							return
+								sanguis::exception{
+									FCPPT_TEXT("Failed to convert creator name!")
+								};
+						}
 					)
 				),
 				fcppt::record::get<
@@ -1689,10 +1715,14 @@ sanguis::client::draw2d::scene::object::process_default_msg(
 	FCPPT_LOG_WARNING(
 		log_,
 		fcppt::log::_
-			<< FCPPT_TEXT("Invalid message event in dispatcher: ")
-			<< fcppt::type_name_from_info(
-				typeid(
-					_message
+			<<
+			FCPPT_TEXT("Invalid message event in dispatcher: ")
+			<<
+			fcppt::from_std_string(
+				fcppt::type_name_from_info(
+					typeid(
+						_message
+					)
 				)
 			)
 	);

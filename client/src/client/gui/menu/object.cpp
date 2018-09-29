@@ -11,6 +11,7 @@
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
 #include <sge/font/to_fcppt_string.hpp>
+#include <sge/font/to_std_wstring.hpp>
 #include <sge/gui/click_callback.hpp>
 #include <sge/gui/needed_width_from_strings.hpp>
 #include <sge/gui/optional_needed_width.hpp>
@@ -37,10 +38,11 @@
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/extract_from_string.hpp>
+#include <fcppt/narrow.hpp>
+#include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/to_std_string.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -410,15 +412,27 @@ sanguis::client::gui::menu::object::~object()
 			sge::font::string const &_value
 		)
 		{
-			sge::parse::ini::set_or_create(
-				settings_.sections(),
-				config_section,
-				_entry,
-				sge::parse::ini::value(
-					sge::font::to_fcppt_string(
-						_value
-					)
+			// FIXME
+			fcppt::optional::maybe_void(
+				sge::font::to_fcppt_string(
+					_value
+				),
+				[
+					this,
+					&_entry
+				](
+					fcppt::string const &_string
 				)
+				{
+					sge::parse::ini::set_or_create(
+						this->settings_.sections(),
+						config_section,
+						_entry,
+						sge::parse::ini::value(
+							_string
+						)
+					);
+				}
 			);
 		}
 	);
@@ -505,8 +519,17 @@ fcppt::string
 sanguis::client::gui::menu::object::player_name() const
 {
 	return
-		sge::font::to_fcppt_string(
-			player_name_edit_.text()
+		// FIXME
+		fcppt::optional::to_exception(
+			sge::font::to_fcppt_string(
+				player_name_edit_.text()
+			),
+			[]{
+				return
+					fcppt::exception{
+						FCPPT_TEXT("Invalid player name!")
+					};
+			}
 		);
 }
 
@@ -591,19 +614,35 @@ sanguis::client::gui::menu::object::handle_connect()
 	{
 		callbacks_.connect()(
 			alda::net::host(
-				fcppt::to_std_string(
-					sge::font::to_fcppt_string(
-						hostname_edit_.text()
-					)
+				fcppt::optional::to_exception(
+					// FIXME
+					fcppt::narrow(
+						sge::font::to_std_wstring(
+							hostname_edit_.text()
+						)
+					),
+					[]{
+						return
+							sanguis::exception{
+								FCPPT_TEXT("Invalid host name")
+							};
+					}
 				)
 			),
 			alda::net::port(
-				FCPPT_ASSERT_OPTIONAL_ERROR(
+				fcppt::optional::to_exception(
+					// FIXME
 					fcppt::extract_from_string<
 						alda::net::port::value_type
 					>(
 						port_edit_.text()
-					)
+					),
+					[]{
+						return
+							sanguis::exception{
+								FCPPT_TEXT("Invalid port")
+							};
+					}
 				)
 			)
 		);

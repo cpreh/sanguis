@@ -1,3 +1,4 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/player_name.hpp>
 #include <sanguis/string_vector.hpp>
@@ -43,6 +44,7 @@
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/record/get.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/result.hpp>
@@ -208,12 +210,21 @@ sanguis::server::states::running::operator()(
 		),
 		_id,
 		sanguis::player_name(
-			sge::charconv::utf8_string_to_fcppt(
-				fcppt::record::get<
-					sanguis::messages::roles::player_name
-				>(
-					_message.get()
-				)
+			// FIXME
+			fcppt::optional::to_exception(
+				sge::charconv::utf8_string_to_fcppt(
+					fcppt::record::get<
+						sanguis::messages::roles::player_name
+					>(
+						_message.get()
+					)
+				),
+				[]{
+					return
+						sanguis::exception{
+							FCPPT_TEXT("Failed to convert player name!")
+						};
+				}
 			)
 		)
 	);
