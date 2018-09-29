@@ -26,6 +26,7 @@
 #include <sge/config/media_path.hpp>
 #include <sge/console/prefix.hpp>
 #include <sge/font/added.hpp>
+#include <sge/font/lit.hpp>
 #include <sge/font/object.hpp>
 #include <sge/font/parameters.hpp>
 #include <sge/font/system.hpp>
@@ -140,7 +141,7 @@ sanguis::client::object::object(
 	),
 	console_(
 		sge::console::prefix(
-			FCPPT_TEXT('/')
+			SGE_FONT_LIT('/')
 		)
 	),
 	console_gfx_(
