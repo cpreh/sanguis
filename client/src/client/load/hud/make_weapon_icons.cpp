@@ -11,7 +11,7 @@
 #include <fcppt/assert/error.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/filesystem/stem.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -73,7 +73,7 @@ sanguis::client::load::hud::make_weapon_icons(
 						{
 							FCPPT_LOG_WARNING(
 								_log,
-								fcppt::log::_
+								fcppt::log::out
 									<<
 									FCPPT_TEXT("Hud weapon icon ")
 									<<

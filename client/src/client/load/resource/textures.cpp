@@ -31,7 +31,7 @@
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/context_fwd.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/name.hpp>
@@ -99,7 +99,7 @@ catch(
 {
 	FCPPT_LOG_ERROR(
 		log_,
-		fcppt::log::_
+		fcppt::log::out
 			<<
 			FCPPT_TEXT("Failed to load ")
 			<<

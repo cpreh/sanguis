@@ -5,7 +5,7 @@
 #include <sanguis/model/optional_animation_sound.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/optional/bind.hpp>
@@ -39,7 +39,7 @@ sanguis::client::load::model::make_sound(
 				)
 					FCPPT_LOG_ERROR(
 						_log,
-						fcppt::log::_
+						fcppt::log::out
 							<< FCPPT_TEXT("Unable to load sound ")
 							<< _sound
 					);

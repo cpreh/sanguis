@@ -6,7 +6,7 @@
 #include <awl/main/exit_success.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/context_fwd.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/name.hpp>
@@ -98,7 +98,7 @@ sanguis::client::server::mainloop()
 	{
 		FCPPT_LOG_ERROR(
 			log_,
-			fcppt::log::_
+			fcppt::log::out
 				<< FCPPT_TEXT("Error in server thread: ")
 				<< _exception.string()
 		);
@@ -109,7 +109,7 @@ sanguis::client::server::mainloop()
 	{
 		FCPPT_LOG_ERROR(
 			log_,
-			fcppt::log::_
+			fcppt::log::out
 				<< FCPPT_TEXT("Error in server thread: ")
 				<< _exception.what()
 		);

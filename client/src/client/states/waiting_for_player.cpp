@@ -20,7 +20,7 @@
 #include <sanguis/messages/server/base_fwd.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/unreachable.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
@@ -53,7 +53,7 @@ sanguis::client::states::waiting_for_player::waiting_for_player(
 {
 	FCPPT_LOG_DEBUG(
 		log_,
-		fcppt::log::_
+		fcppt::log::out
 			<< FCPPT_TEXT("Entering waiting_for_player")
 	);
 }

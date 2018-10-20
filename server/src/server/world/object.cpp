@@ -142,7 +142,7 @@
 #include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/enum/array_init.hpp>
 #include <fcppt/enum/make_range.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
@@ -333,7 +333,7 @@ sanguis::server::world::object::insert(
 			{
 				FCPPT_LOG_WARNING(
 					log_,
-					fcppt::log::_
+					fcppt::log::out
 						<< FCPPT_TEXT("Failed to spawn entity because its spawnpoint is obstructed")
 				);
 

@@ -13,7 +13,7 @@
 #include <sanguis/server/weapons/states/backswing.hpp>
 #include <sanguis/server/weapons/states/castpoint.hpp>
 #include <fcppt/assert/optional_error.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/verbose.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
@@ -62,7 +62,7 @@ sanguis::server::weapons::states::castpoint::castpoint(
 		this->context<
 			sanguis::server::weapons::weapon
 		>().log().main_log(),
-		fcppt::log::_
+		fcppt::log::out
 			<< FCPPT_TEXT("castpoint: ")
 			<< this
 	);

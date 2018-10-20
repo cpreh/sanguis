@@ -50,7 +50,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/cast/dynamic_fun.hpp>
 #include <fcppt/either/match.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/context_fwd.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
@@ -185,7 +185,7 @@ sanguis::client::machine::quickstart(
 {
 	FCPPT_LOG_DEBUG(
 		log_,
-		fcppt::log::_
+		fcppt::log::out
 			<< FCPPT_TEXT("quickstart()")
 	);
 
@@ -249,7 +249,7 @@ sanguis::client::machine::send(
 	{
 		FCPPT_LOG_ERROR(
 			log_,
-			fcppt::log::_
+			fcppt::log::out
 				<< FCPPT_TEXT("Not enough space left in the send_buffer")
 		);
 		// FIXME: We have to wait for free space here!
@@ -308,7 +308,7 @@ sanguis::client::machine::quit()
 {
 	FCPPT_LOG_DEBUG(
 		log_,
-		fcppt::log::_
+		fcppt::log::out
 			<< FCPPT_TEXT("Exiting the client!")
 	);
 

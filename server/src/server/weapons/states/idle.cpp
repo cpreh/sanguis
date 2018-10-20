@@ -10,7 +10,7 @@
 #include <sanguis/server/weapons/states/idle.hpp>
 #include <sanguis/server/weapons/states/reloading.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/verbose.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/result.hpp>
@@ -35,7 +35,7 @@ sanguis::server::weapons::states::idle::idle(
 		this->context<
 			sanguis::server::weapons::weapon
 		>().log().main_log(),
-		fcppt::log::_
+		fcppt::log::out
 			<< FCPPT_TEXT("idle: ")
 			<< this
 	);

@@ -20,7 +20,7 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/assert/pre.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -77,7 +77,7 @@ sanguis::collision::impl::world::simple::body::body(
 	)
 		FCPPT_LOG_WARNING(
 			_parameters.log(),
-			fcppt::log::_
+			fcppt::log::out
 				<< FCPPT_TEXT("Body with radius ")
 				<< radius_
 				<< FCPPT_TEXT(" won't fit into a single tile.")

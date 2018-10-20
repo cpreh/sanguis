@@ -18,7 +18,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/object_fwd.hpp>
@@ -70,7 +70,7 @@ images_base(
 
 				FCPPT_LOG_DEBUG(
 					_log,
-					fcppt::log::_
+					fcppt::log::out
 						<<
 						FCPPT_TEXT("Orientation ")
 						<<
@@ -117,7 +117,7 @@ images_base(
 				{
 					FCPPT_LOG_ERROR(
 						_log,
-						fcppt::log::_
+						fcppt::log::out
 							<<
 							FCPPT_TEXT("Zero textures in ")
 							<<

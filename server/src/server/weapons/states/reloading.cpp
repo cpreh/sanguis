@@ -12,7 +12,7 @@
 #include <sanguis/server/weapons/states/reloading.hpp>
 #include <sge/timer/remaining.hpp>
 #include <fcppt/assert/optional_error.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/verbose.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -70,7 +70,7 @@ sanguis::server::weapons::states::reloading::reloading(
 		this->context<
 			sanguis::server::weapons::weapon
 		>().log().main_log(),
-		fcppt::log::_
+		fcppt::log::out
 			<< FCPPT_TEXT("reloading: ")
 			<< this
 	);

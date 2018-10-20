@@ -10,7 +10,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/object_fwd.hpp>
@@ -45,7 +45,7 @@ try
 {
 	FCPPT_LOG_DEBUG(
 		_log,
-		fcppt::log::_
+		fcppt::log::out
 			<<
 			FCPPT_TEXT("Entering ")
 			<<
@@ -60,7 +60,7 @@ catch(
 {
 	FCPPT_LOG_ERROR(
 		_log,
-		fcppt::log::_
+		fcppt::log::out
 			<<
 			FCPPT_TEXT("model \"")
 			<<

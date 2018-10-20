@@ -46,7 +46,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/context_fwd.hpp>
 #include <fcppt/log/fatal.hpp>
 #include <fcppt/log/level_stream.hpp>
@@ -208,7 +208,7 @@ sanguis::client::object::run()
 	{
 		FCPPT_LOG_FATAL(
 			log_,
-			fcppt::log::_
+			fcppt::log::out
 				<< FCPPT_TEXT("Client error: ")
 				<< _exception.string()
 		);
@@ -223,7 +223,7 @@ sanguis::client::object::run()
 	{
 		FCPPT_LOG_FATAL(
 			log_,
-			fcppt::log::_
+			fcppt::log::out
 				<< FCPPT_TEXT("Client error: ")
 				<< _exception.what()
 		);

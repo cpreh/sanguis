@@ -10,7 +10,7 @@
 #include <sge/parse/ini/output/to_file.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/context_fwd.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
@@ -42,7 +42,7 @@ sanguis::client::config::settings::object::object(
 {
 	FCPPT_LOG_DEBUG(
 		log_,
-		fcppt::log::_
+		fcppt::log::out
 			<< FCPPT_TEXT("Trying to load settings from ")
 			<< fcppt::filesystem::path_to_string(
 				_path
@@ -65,7 +65,7 @@ sanguis::client::config::settings::object::object(
 
 			FCPPT_LOG_INFO(
 				log_,
-				fcppt::log::_
+				fcppt::log::out
 					<< FCPPT_TEXT("Loading the settings failed!")
 			);
 		}
@@ -76,7 +76,7 @@ sanguis::client::config::settings::object::object(
 	{
 		FCPPT_LOG_INFO(
 			log_,
-			fcppt::log::_
+			fcppt::log::out
 				<< FCPPT_TEXT("Loading the settings failed with: ")
 				<< _error.string()
 		);
@@ -106,7 +106,7 @@ sanguis::client::config::settings::object::save() const
 {
 	FCPPT_LOG_DEBUG(
 		log_,
-		fcppt::log::_
+		fcppt::log::out
 			<< FCPPT_TEXT("Trying to save settings to ")
 			<< fcppt::filesystem::path_to_string(
 				path_
@@ -122,7 +122,7 @@ sanguis::client::config::settings::object::save() const
 	{
 		FCPPT_LOG_ERROR(
 			log_,
-			fcppt::log::_
+			fcppt::log::out
 				<< FCPPT_TEXT("Writing the settings failed!")
 		);
 	}

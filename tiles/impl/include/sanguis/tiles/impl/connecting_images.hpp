@@ -16,7 +16,7 @@
 #include <sanguis/tiles/impl/neighbors_to_string.hpp>
 #include <sanguis/tiles/impl/optional_content_path.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -67,7 +67,7 @@ connecting_images(
 			{
 				FCPPT_LOG_ERROR(
 					_log,
-					fcppt::log::_
+					fcppt::log::out
 						<<
 						FCPPT_TEXT("Tile combination ")
 						<<

@@ -9,7 +9,7 @@
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/object_fwd.hpp>
 
@@ -54,7 +54,7 @@ sanguis::client::draw2d::scene::world::create(
 
 	FCPPT_LOG_ERROR(
 		_log,
-		fcppt::log::_
+		fcppt::log::out
 			<< FCPPT_TEXT("World ")
 			<< _name
 			<< FCPPT_TEXT(" not implemented.")

@@ -25,7 +25,7 @@
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/optional/to_exception.hpp>
@@ -163,7 +163,7 @@ sanguis::creator::impl::place_spawners(
 		{
 			FCPPT_LOG_ERROR(
 				_log,
-				fcppt::log::_
+				fcppt::log::out
 					<< FCPPT_TEXT("gave up on placing ")
 					<< (_spawner_count - current_spawners)
 					<< FCPPT_TEXT(" spawners due to visibility after ")

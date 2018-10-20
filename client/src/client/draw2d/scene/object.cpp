@@ -184,7 +184,7 @@
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/enum/array_init.hpp>
 #include <fcppt/enum/make_range.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/context_fwd.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -1714,7 +1714,7 @@ sanguis::client::draw2d::scene::object::process_default_msg(
 {
 	FCPPT_LOG_WARNING(
 		log_,
-		fcppt::log::_
+		fcppt::log::out
 			<<
 			FCPPT_TEXT("Invalid message event in dispatcher: ")
 			<<

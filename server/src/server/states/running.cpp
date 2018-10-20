@@ -36,7 +36,7 @@
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/maybe_front.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/info.hpp>
@@ -103,7 +103,7 @@ sanguis::server::states::running::running(
 {
 	FCPPT_LOG_DEBUG(
 		log_,
-		fcppt::log::_
+		fcppt::log::out
 			<< FCPPT_TEXT("constructor, listening")
 	);
 
@@ -158,7 +158,7 @@ sanguis::server::states::running::react(
 {
 	FCPPT_LOG_INFO(
 		log_,
-		fcppt::log::_
+		fcppt::log::out
 			<< FCPPT_TEXT("Client with id ")
 			<< _message.id()
 			<< FCPPT_TEXT(" disconnected.")
@@ -188,7 +188,7 @@ sanguis::server::states::running::operator()(
 	{
 		FCPPT_LOG_WARNING(
 			log_,
-			fcppt::log::_
+			fcppt::log::out
 				<< FCPPT_TEXT("Got multiple client infos")
 		);
 
@@ -200,7 +200,7 @@ sanguis::server::states::running::operator()(
 
 	FCPPT_LOG_DEBUG(
 		log_,
-		fcppt::log::_
+		fcppt::log::out
 			<< FCPPT_TEXT("client sent info")
 	)
 
@@ -276,7 +276,7 @@ sanguis::server::states::running::operator()(
 			{
 				FCPPT_LOG_DEBUG(
 					log_,
-					fcppt::log::_
+					fcppt::log::out
 						<<
 						FCPPT_TEXT("Received console command: ")
 						<<
@@ -298,7 +298,7 @@ sanguis::server::states::running::operator()(
 				{
 					FCPPT_LOG_ERROR(
 						log_,
-						fcppt::log::_
+						fcppt::log::out
 							<< _error.string()
 					);
 				}

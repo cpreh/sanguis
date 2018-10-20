@@ -40,7 +40,7 @@
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/optional_error.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/context_fwd.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
@@ -276,7 +276,7 @@ sanguis::server::machine::send_unicast(
 		]{
 			FCPPT_LOG_INFO(
 				log_,
-				fcppt::log::_
+				fcppt::log::out
 					<< FCPPT_TEXT("Client ")
 					<< net_id
 					<< FCPPT_TEXT(" is gone.")
@@ -336,7 +336,7 @@ sanguis::server::machine::process_message(
 {
 	FCPPT_LOG_VERBOSE(
 		log_,
-		fcppt::log::_
+		fcppt::log::out
 			<< FCPPT_TEXT("process_message")
 	);
 
@@ -366,7 +366,7 @@ sanguis::server::machine::add_overflow_message(
 
 	FCPPT_LOG_DEBUG(
 		log_,
-		fcppt::log::_
+		fcppt::log::out
 			<< FCPPT_TEXT("Client ")
 			<< _id
 			<< FCPPT_TEXT(" has no space left!")
@@ -381,7 +381,7 @@ sanguis::server::machine::disconnect_callback(
 {
 	FCPPT_LOG_INFO(
 		log_,
-		fcppt::log::_
+		fcppt::log::out
 			<< FCPPT_TEXT("Client ")
 			<< _id
 			<< FCPPT_TEXT(" disconnected: ")
@@ -430,7 +430,7 @@ try
 				{
 					FCPPT_LOG_DEBUG(
 						log_,
-						fcppt::log::_
+						fcppt::log::out
 							<< FCPPT_TEXT("Client currently has no player ")
 							<< _error.string()
 					);
@@ -486,7 +486,7 @@ sanguis::server::machine::data_error(
 {
 	FCPPT_LOG_ERROR(
 		log_,
-		fcppt::log::_
+		fcppt::log::out
 			<< FCPPT_TEXT("Error while processing message from client ")
 			<< _id
 			<< FCPPT_TEXT(": ")

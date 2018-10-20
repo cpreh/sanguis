@@ -12,7 +12,7 @@
 #include <sanguis/server/weapons/states/idle.hpp>
 #include <sanguis/server/weapons/states/reloading.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/verbose.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -54,7 +54,7 @@ sanguis::server::weapons::states::backswing::backswing(
 		this->context<
 			sanguis::server::weapons::weapon
 		>().log().main_log(),
-		fcppt::log::_
+		fcppt::log::out
 			<< FCPPT_TEXT("backswing: ")
 			<< this
 	);

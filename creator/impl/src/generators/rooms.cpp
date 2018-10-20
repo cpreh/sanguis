@@ -57,7 +57,7 @@
 #include <fcppt/container/grid/output.hpp>
 #include <fcppt/enum/array.hpp>
 #include <fcppt/enum/array_init.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/level.hpp>
 #include <fcppt/math/to_array.hpp>
@@ -461,7 +461,7 @@ sanguis::creator::impl::generators::rooms(
 	){
 		FCPPT_LOG_DEBUG(
 			log,
-			fcppt::log::_
+			fcppt::log::out
 				<<
 				fcppt::container::grid::map(
 					raw_grid,
@@ -872,7 +872,7 @@ sanguis::creator::impl::generators::rooms(
 
 	FCPPT_LOG_DEBUG(
 		_parameters.log(),
-		fcppt::log::_
+		fcppt::log::out
 		<< entrance_room
 		<< FCPPT_TEXT(" : ")
 		<< exit_room
@@ -940,7 +940,7 @@ sanguis::creator::impl::generators::rooms(
 
 	FCPPT_LOG_DEBUG(
 		_parameters.log(),
-		fcppt::log::_
+		fcppt::log::out
 		 << openings[
 				sanguis::creator::opening_type::entry
 			].size()

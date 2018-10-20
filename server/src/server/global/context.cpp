@@ -67,7 +67,7 @@
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/at_optional.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/context_fwd.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/info.hpp>
@@ -247,7 +247,7 @@ sanguis::server::global::context::insert_player(
 		]{
 			FCPPT_LOG_ERROR(
 				log_,
-				fcppt::log::_
+				fcppt::log::out
 					<< FCPPT_TEXT("Unable to insert a player!")
 			);
 		},
@@ -307,7 +307,7 @@ sanguis::server::global::context::player_disconnect(
 		]{
 			FCPPT_LOG_INFO(
 				log_,
-				fcppt::log::_
+				fcppt::log::out
 					<< FCPPT_TEXT("Player ")
 					<< _player_id
 					<< FCPPT_TEXT(" is already dead.")
@@ -501,7 +501,7 @@ sanguis::server::global::context::player_choose_perk(
 	{
 		FCPPT_LOG_WARNING(
 			log_,
-			fcppt::log::_
+			fcppt::log::out
 				<< FCPPT_TEXT("Player with id ")
 				<< _player_id
 				<< FCPPT_TEXT(" tried to take an invalid perk")

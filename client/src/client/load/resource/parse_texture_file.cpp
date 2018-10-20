@@ -7,7 +7,7 @@
 #include <fcppt/filesystem/ifstream.hpp>
 #include <fcppt/filesystem/open_exn.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -69,7 +69,7 @@ sanguis::client::load::resource::parse_texture_file(
 		{
 			FCPPT_LOG_WARNING(
 				_log,
-				fcppt::log::_
+				fcppt::log::out
 					<< FCPPT_TEXT("Error in .id file \")")
 					<< fcppt::filesystem::path_to_string(
 						_path

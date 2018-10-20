@@ -34,7 +34,7 @@
 #include <alda/message/init_record.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unit.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
@@ -70,7 +70,7 @@ sanguis::server::states::unpaused::unpaused(
 {
 	FCPPT_LOG_DEBUG(
 		log_,
-		fcppt::log::_
+		fcppt::log::out
 			<< FCPPT_TEXT("create")
 	);
 }
@@ -79,7 +79,7 @@ sanguis::server::states::unpaused::~unpaused()
 {
 	FCPPT_LOG_DEBUG(
 		log_,
-		fcppt::log::_
+		fcppt::log::out
 			<< FCPPT_TEXT("destroy")
 	);
 }
@@ -353,7 +353,7 @@ sanguis::server::states::unpaused::operator()(
 {
 	FCPPT_LOG_WARNING(
 		log_,
-		fcppt::log::_
+		fcppt::log::out
 			<< FCPPT_TEXT("received superfluous unpause!")
 	);
 

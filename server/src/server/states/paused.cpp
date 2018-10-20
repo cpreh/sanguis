@@ -20,7 +20,7 @@
 #include <sanguis/server/states/unpaused.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unit.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
@@ -52,7 +52,7 @@ sanguis::server::states::paused::paused(
 {
 	FCPPT_LOG_DEBUG(
 		log_,
-		fcppt::log::_
+		fcppt::log::out
 			<< FCPPT_TEXT("create")
 	);
 }
@@ -61,7 +61,7 @@ sanguis::server::states::paused::~paused()
 {
 	FCPPT_LOG_DEBUG(
 		log_,
-		fcppt::log::_
+		fcppt::log::out
 			<< FCPPT_TEXT("destroy")
 	);
 }
@@ -136,7 +136,7 @@ sanguis::server::states::paused::operator()(
 {
 	FCPPT_LOG_WARNING(
 		log_,
-		fcppt::log::_
+		fcppt::log::out
 			<< FCPPT_TEXT("Got superfluous pause")
 	);
 

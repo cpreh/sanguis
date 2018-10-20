@@ -18,7 +18,7 @@
 #include <fcppt/assert/error.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/enum/make_range.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/math/dim/comparison.hpp>
@@ -40,7 +40,7 @@ sanguis::creator::generate(
 
 	FCPPT_LOG_DEBUG(
 		log,
-		fcppt::log::_
+		fcppt::log::out
 			<<
 			FCPPT_TEXT("Generating world \"")
 			<<
