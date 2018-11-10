@@ -20,6 +20,29 @@ class menu
 		sanguis::client::events::menu
 	>
 {
+public:
+	menu();
+
+	menu(
+		menu &&
+	);
+
+	menu(
+		menu const &
+	);
+
+	menu &
+	operator=(
+		menu &&
+	);
+
+	menu &
+	operator=(
+		menu const &
+	);
+
+	~menu()
+	override;
 };
 
 }

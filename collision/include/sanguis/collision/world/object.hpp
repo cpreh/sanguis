@@ -33,7 +33,7 @@ protected:
 	object();
 public:
 	virtual
-	~object() = 0;
+	~object();
 
 	virtual
 	sanguis::collision::world::body_unique_ptr

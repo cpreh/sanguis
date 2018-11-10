@@ -77,4 +77,18 @@ private:
 }
 }
 
+#define SANGUIS_TILES_DECLARE_SET(\
+	tile_type\
+)\
+extern \
+template \
+class \
+sanguis::tiles::set<\
+	tile_type \
+>
+
+SANGUIS_CREATOR_INSTANTIATE_TILE(
+	SANGUIS_TILES_DECLARE_SET
+);
+
 #endif

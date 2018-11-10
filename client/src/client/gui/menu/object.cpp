@@ -44,6 +44,9 @@
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/to_exception.hpp>
+#include <fcppt/preprocessor/disable_clang_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -52,6 +55,10 @@
 
 namespace
 {
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_CLANG_WARNING(-Wglobal-constructors)
+FCPPT_PP_DISABLE_CLANG_WARNING(-Wexit-time-destructors)
 
 sge::parse::ini::section_name const
 config_section(
@@ -81,6 +88,8 @@ sge::font::string const
 cancel_text(
 	SGE_FONT_LIT("Cancel")
 );
+
+FCPPT_PP_POP_WARNING
 
 }
 

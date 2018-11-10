@@ -20,6 +20,29 @@ class connected
 		sanguis::client::events::connected
 	>
 {
+public:
+	connected();
+
+	connected(
+		connected &&
+	);
+
+	connected(
+		connected const &
+	);
+
+	connected &
+	operator=(
+		connected &&
+	);
+
+	connected &
+	operator=(
+		connected const &
+	);
+
+	~connected()
+	override;
 };
 
 }

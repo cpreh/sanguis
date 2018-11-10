@@ -3,7 +3,6 @@
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/collision/ghost.hpp>
 #include <sanguis/server/collision/ghost_container.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/optional_transfer_result.hpp>
 #include <sanguis/server/entities/remove_from_world_result.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
@@ -21,7 +20,6 @@
 
 sanguis::server::entities::with_ghosts::with_ghosts()
 :
-	sanguis::server::entities::base(),
 	ghosts_()
 {
 }
@@ -30,7 +28,6 @@ sanguis::server::entities::with_ghosts::with_ghosts(
 	sanguis::server::collision::ghost_container &&_ghosts
 )
 :
-	sanguis::server::entities::base(),
 	ghosts_(
 		std::move(
 			_ghosts

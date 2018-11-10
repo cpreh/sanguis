@@ -2,7 +2,6 @@
 #define SANGUIS_CLIENT_EVENTS_NET_ERROR_HPP_INCLUDED
 
 #include <sanguis/client/events/net_error_fwd.hpp>
-#include <fcppt/nonassignable.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/event.hpp>
@@ -23,14 +22,32 @@ class net_error
 		sanguis::client::events::net_error
 	>
 {
-	FCPPT_NONASSIGNABLE(
-		net_error
-	);
 public:
 	net_error(
 		fcppt::string const &,
 		boost::system::error_code const &
 	);
+
+	net_error(
+		net_error &&
+	);
+
+	net_error(
+		net_error const &
+	);
+
+	net_error &
+	operator=(
+		net_error &&
+	);
+
+	net_error &
+	operator=(
+		net_error const &
+	);
+
+	~net_error()
+	override;
 
 	fcppt::string const &
 	message() const;
@@ -38,9 +55,9 @@ public:
 	boost::system::error_code const &
 	code() const;
 private:
-	fcppt::string const message_;
+	fcppt::string message_;
 
-	boost::system::error_code const code_;
+	boost::system::error_code code_;
 };
 
 }

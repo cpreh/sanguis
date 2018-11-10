@@ -4,7 +4,6 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/slowdown.hpp>
 #include <sanguis/server/events/tick_fwd.hpp>
-#include <fcppt/nonassignable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/event.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -23,14 +22,32 @@ class tick
 		tick
 	>
 {
-	FCPPT_NONASSIGNABLE(
-		tick
-	);
 public:
 	tick(
 		sanguis::duration const &,
 		sanguis::slowdown
 	);
+
+	tick(
+		tick &&
+	);
+
+	tick(
+		tick const &
+	);
+
+	tick &
+	operator=(
+		tick &&
+	);
+
+	tick &
+	operator=(
+		tick const &
+	);
+
+	~tick()
+	override;
 
 	sanguis::duration const &
 	delta() const;
@@ -38,9 +55,9 @@ public:
 	sanguis::slowdown
 	slowdown() const;
 private:
-	sanguis::duration const delta_;
+	sanguis::duration delta_;
 
-	sanguis::slowdown const slowdown_;
+	sanguis::slowdown slowdown_;
 };
 
 }

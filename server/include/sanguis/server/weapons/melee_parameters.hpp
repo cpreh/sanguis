@@ -7,7 +7,6 @@
 #include <sanguis/server/weapons/melee_parameters_fwd.hpp>
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/attributes/damage.hpp>
-#include <fcppt/nonassignable.hpp>
 
 
 namespace sanguis
@@ -19,9 +18,6 @@ namespace weapons
 
 class melee_parameters
 {
-	FCPPT_NONASSIGNABLE(
-		melee_parameters
-	);
 public:
 	melee_parameters(
 		sanguis::server::weapons::range,
@@ -47,13 +43,13 @@ public:
 		sanguis::server::weapons::damage
 	);
 private:
-	sanguis::server::weapons::range const range_;
+	sanguis::server::weapons::range range_;
 
-	sanguis::server::weapons::backswing_time const backswing_time_;
+	sanguis::server::weapons::backswing_time backswing_time_;
 
 	sanguis::server::weapons::attributes::damage damage_;
 
-	sanguis::server::damage::array const damage_values_;
+	sanguis::server::damage::array damage_values_;
 };
 
 }

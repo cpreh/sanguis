@@ -50,14 +50,14 @@ sanguis::client::load::resource::textures const &
 sanguis::client::load::model::global_parameters::textures() const
 {
 	return
-		textures_;
+		textures_.get();
 }
 
 sanguis::client::load::resource::sounds const &
 sanguis::client::load::model::global_parameters::sounds() const
 {
 	return
-		sounds_;
+		sounds_.get();
 }
 
 sanguis::model::cell_size const &

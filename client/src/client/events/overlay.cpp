@@ -12,9 +12,35 @@ sanguis::client::events::overlay::overlay(
 {
 }
 
+sanguis::client::events::overlay::overlay(
+	overlay &&
+)
+= default;
+
+sanguis::client::events::overlay::overlay(
+	overlay const &
+)
+= default;
+
+sanguis::client::events::overlay &
+sanguis::client::events::overlay::operator=(
+	overlay &&
+)
+= default;
+
+sanguis::client::events::overlay &
+sanguis::client::events::overlay::operator=(
+	overlay const &
+)
+= default;
+
+sanguis::client::events::overlay::~overlay()
+{
+}
+
 sge::renderer::context::ffp &
 sanguis::client::events::overlay::context() const
 {
 	return
-		context_;
+		context_.get();
 }

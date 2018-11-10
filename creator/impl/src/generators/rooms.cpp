@@ -83,6 +83,7 @@
 #include <functional>
 #include <map>
 #include <set>
+#include <utility>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
@@ -104,15 +105,15 @@ using region_grid =
 
 using sanguis::creator::impl::region_id;
 
-auto const
-wall_region =
+constexpr region_id const
+wall_region{
 	region_id{
 		-1
-	};
+	}
+};
 
 auto
-border_distance =
-[](
+border_distance(
 	signed_rect const _rect,
 	sanguis::creator::dim const _size
 )
@@ -141,11 +142,10 @@ border_distance =
 		std::numeric_limits<ret_type>::max(),
 		[](ret_type _l, ret_type _r){return std::min(_l, _r);}
 	);
-};
+}
 
 auto
-rect_distance =
-[](
+rect_distance(
 	signed_rect a,
 	signed_rect b
 )
@@ -169,7 +169,7 @@ rect_distance =
 				std::max(ret_type{0},_r);
 		}
 	);
-};
+}
 
 using connector =
 	std::pair<
@@ -905,8 +905,7 @@ sanguis::creator::impl::generators::rooms(
 	auto const opening_counts =
 		_parameters.opening_count_array();
 
-	auto const
-	openings =
+	auto openings =
 		fcppt::enum_::array_init<
 			sanguis::creator::opening_container_array
 		>
@@ -1006,10 +1005,18 @@ sanguis::creator::impl::generators::rooms(
 
 	return
 		sanguis::creator::impl::result(
-			grid,
-			bg_grid,
-			openings,
-			spawners,
+			std::move(
+				grid
+			),
+			std::move(
+				bg_grid
+			),
+			std::move(
+				openings
+			),
+			std::move(
+				spawners
+			),
 			sanguis::creator::destructible_container{}
 		);
 }

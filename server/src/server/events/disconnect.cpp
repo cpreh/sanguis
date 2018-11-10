@@ -12,6 +12,32 @@ sanguis::server::events::disconnect::disconnect(
 {
 }
 
+sanguis::server::events::disconnect::disconnect(
+	disconnect &&
+)
+= default;
+
+sanguis::server::events::disconnect::disconnect(
+	disconnect const &
+)
+= default;
+
+sanguis::server::events::disconnect &
+sanguis::server::events::disconnect::operator=(
+	disconnect &&
+)
+= default;
+
+sanguis::server::events::disconnect &
+sanguis::server::events::disconnect::operator=(
+	disconnect const &
+)
+= default;
+
+sanguis::server::events::disconnect::~disconnect()
+{
+}
+
 alda::net::id
 sanguis::server::events::disconnect::id() const
 {

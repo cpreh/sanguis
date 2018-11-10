@@ -27,6 +27,27 @@ public:
 	exception(
 		fcppt::assert_::information const &
 	);
+
+	exception(
+		exception &&
+	);
+
+	exception(
+		exception const &
+	);
+
+	exception &
+	operator=(
+		exception &&
+	);
+
+	exception &
+	operator=(
+		exception const &
+	);
+
+	~exception() noexcept
+	override;
 };
 
 }

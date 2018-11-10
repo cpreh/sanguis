@@ -9,6 +9,7 @@
 #include <sanguis/messages/roles/entity_id.hpp>
 #include <sanguis/messages/roles/pickup_type.hpp>
 #include <sanguis/messages/server/add_pickup.hpp>
+#include <sanguis/messages/server/base.hpp>
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/center.hpp>
@@ -20,7 +21,6 @@
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_links.hpp>
-#include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/pickups/pickup.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <alda/message/init_record.hpp>
@@ -44,7 +44,6 @@ sanguis::server::entities::pickups::pickup::pickup(
 	sanguis::server::team const _team
 )
 :
-	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::with_body(
 		_load_context.model_size(
 			sanguis::load::model::pickup_path(

@@ -6,11 +6,7 @@
 #include <sanguis/server/damage/modified_array.hpp>
 #include <sanguis/server/damage/type.hpp>
 #include <sanguis/server/damage/unit.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_health.hpp>
-#include <sanguis/server/entities/ifaces/with_health.hpp>
-#include <sanguis/server/entities/ifaces/with_id.hpp>
-#include <sanguis/server/entities/ifaces/with_links.hpp>
 #include <sanguis/server/entities/property/add.hpp>
 #include <sanguis/server/entities/property/always_max.hpp>
 #include <sanguis/server/entities/property/change_callback.hpp>
@@ -116,10 +112,6 @@ sanguis::server::entities::with_health::with_health(
 	sanguis::server::damage::armor_array const &_armor
 )
 :
-	sanguis::server::entities::base(),
-	sanguis::server::entities::ifaces::with_health(),
-	sanguis::server::entities::ifaces::with_id(),
-	sanguis::server::entities::ifaces::with_links(),
 	armor_(
 		_armor
 	),

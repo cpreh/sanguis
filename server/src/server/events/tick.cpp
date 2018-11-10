@@ -17,6 +17,32 @@ sanguis::server::events::tick::tick(
 {
 }
 
+sanguis::server::events::tick::tick(
+	tick &&
+)
+= default;
+
+sanguis::server::events::tick::tick(
+	tick const &
+)
+= default;
+
+sanguis::server::events::tick &
+sanguis::server::events::tick::operator=(
+	tick &&
+)
+= default;
+
+sanguis::server::events::tick &
+sanguis::server::events::tick::operator=(
+	tick const &
+)
+= default;
+
+sanguis::server::events::tick::~tick()
+{
+}
+
 sanguis::duration const &
 sanguis::server::events::tick::delta() const
 {

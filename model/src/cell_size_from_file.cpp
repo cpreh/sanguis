@@ -5,6 +5,7 @@
 #include <sge/parse/json/parse_file_exn.hpp>
 #include <sge/parse/json/start.hpp>
 #include <fcppt/exception.hpp>
+#include <fcppt/string.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -29,6 +30,8 @@ catch(
 {
 	throw
 		sanguis::model::exception{
-			_error.string()
+			fcppt::string{
+				_error.string()
+			}
 		};
 }

@@ -48,7 +48,7 @@ sanguis::client::draw2d::entities::with_auras_parameters<
 >::diff_clock() const
 {
 	return
-		diff_clock_;
+		diff_clock_.get();
 }
 
 template<
@@ -60,7 +60,7 @@ sanguis::client::draw2d::entities::with_auras_parameters<
 >::aura_load_context() const
 {
 	return
-		aura_load_context_;
+		aura_load_context_.get();
 }
 
 template<
@@ -72,7 +72,7 @@ sanguis::client::draw2d::entities::with_auras_parameters<
 >::normal_system() const
 {
 	return
-		normal_system_;
+		normal_system_.get();
 }
 
 template<

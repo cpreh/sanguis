@@ -6,6 +6,9 @@
 #include <sanguis/server/dispatch_default_function.hpp>
 #include <sanguis/server/message_function.hpp>
 #include <sanguis/server/events/message.hpp>
+#include <fcppt/preprocessor/disable_clang_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/result.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -33,12 +36,17 @@ dispatch(
 	>
 	function_type;
 
+	FCPPT_PP_PUSH_WARNING
+	FCPPT_PP_DISABLE_CLANG_WARNING(-Wexit-time-destructors)
+
 	static
 	sanguis::messages::client::call::object<
 		MessageTypes,
 		function_type
 	>
 	dispatcher;
+
+	FCPPT_PP_POP_WARNING
 
 	function_type function(
 		_state,

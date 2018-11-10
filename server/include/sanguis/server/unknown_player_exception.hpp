@@ -15,6 +15,28 @@ class unknown_player_exception
 {
 public:
 	unknown_player_exception();
+
+	unknown_player_exception(
+		unknown_player_exception &&
+	);
+
+	unknown_player_exception(
+		unknown_player_exception const &
+	);
+
+	unknown_player_exception &
+	operator=(
+		unknown_player_exception &&
+	);
+
+	unknown_player_exception &
+	operator=(
+		unknown_player_exception const &
+	);
+
+	~unknown_player_exception() noexcept
+	override;
+
 };
 
 }

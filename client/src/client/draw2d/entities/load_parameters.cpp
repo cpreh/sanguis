@@ -36,33 +36,33 @@ sanguis::diff_clock const &
 sanguis::client::draw2d::entities::load_parameters::diff_clock() const
 {
 	return
-		diff_clock_;
+		diff_clock_.get();
 }
 
 sanguis::client::sound_manager &
 sanguis::client::draw2d::entities::load_parameters::sound_manager() const
 {
 	return
-		sound_manager_;
+		sound_manager_.get();
 }
 
 sanguis::random_generator &
 sanguis::client::draw2d::entities::load_parameters::random_generator() const
 {
 	return
-		random_generator_;
+		random_generator_.get();
 }
 
 sanguis::client::draw2d::sprite::normal::system &
 sanguis::client::draw2d::entities::load_parameters::normal_system() const
 {
 	return
-		normal_system_;
+		normal_system_.get();
 }
 
 sanguis::client::load::model::collection const &
 sanguis::client::draw2d::entities::load_parameters::collection() const
 {
 	return
-		collection_;
+		collection_.get();
 }

@@ -3,7 +3,6 @@
 
 #include <sanguis/perk_type.hpp>
 #include <sanguis/client/perk/tree.hpp>
-#include <fcppt/nonassignable.hpp>
 
 
 namespace sanguis
@@ -15,9 +14,6 @@ namespace perk
 
 class compare
 {
-	FCPPT_NONASSIGNABLE(
-		compare
-	);
 public:
 	explicit
 	compare(
@@ -29,7 +25,7 @@ public:
 		sanguis::client::perk::tree const &
 	) const;
 private:
-	sanguis::perk_type const type_;
+	sanguis::perk_type type_;
 };
 
 }

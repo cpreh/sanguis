@@ -36,7 +36,7 @@ fcppt::log::context &
 sanguis::creator::top_parameters::log_context() const
 {
 	return
-		log_context_;
+		log_context_.get();
 }
 
 sanguis::creator::name const &

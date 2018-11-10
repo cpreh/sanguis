@@ -3,9 +3,7 @@
 #include <sanguis/server/buffs/buff.hpp>
 #include <sanguis/server/buffs/stack.hpp>
 #include <sanguis/server/buffs/unique_ptr.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
-#include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/assert/optional_error.hpp>
@@ -135,8 +133,6 @@ sanguis::server::entities::with_buffs::remove_buff(
 
 sanguis::server::entities::with_buffs::with_buffs()
 :
-	sanguis::server::entities::base(),
-	sanguis::server::entities::ifaces::with_id(),
 	buffs_()
 {
 }

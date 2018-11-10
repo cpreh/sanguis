@@ -16,10 +16,16 @@
 #include <sanguis/client/draw2d/sprite/index.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
+#include <fcppt/preprocessor/disable_clang_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 
 
 namespace
 {
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_CLANG_WARNING(-Wglobal-constructors)
 
 sanguis::client::draw2d::sprite::index const top{
 	1u
@@ -28,6 +34,8 @@ sanguis::client::draw2d::sprite::index const top{
 sanguis::client::draw2d::sprite::index const bottom{
 	0u
 };
+
+FCPPT_PP_POP_WARNING
 
 }
 

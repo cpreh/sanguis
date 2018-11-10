@@ -5,7 +5,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
-#include <fcppt/nonassignable.hpp>
+#include <fcppt/reference_impl.hpp>
 
 
 namespace sanguis
@@ -22,9 +22,6 @@ template<
 >
 class with_auras_parameters
 {
-	FCPPT_NONASSIGNABLE(
-		with_auras_parameters
-	);
 public:
 	with_auras_parameters(
 		sanguis::diff_clock const &,
@@ -49,15 +46,21 @@ public:
 	Base const &
 	base() const;
 private:
-	sanguis::diff_clock const &diff_clock_;
+	fcppt::reference<
+		sanguis::diff_clock const
+	> diff_clock_;
 
-	sanguis::client::load::auras::context &aura_load_context_;
+	fcppt::reference<
+		sanguis::client::load::auras::context
+	> aura_load_context_;
 
-	sanguis::client::draw2d::sprite::normal::system &normal_system_;
+	fcppt::reference<
+		sanguis::client::draw2d::sprite::normal::system
+	> normal_system_;
 
-	sanguis::aura_type_vector const auras_;
+	sanguis::aura_type_vector auras_;
 
-	Base const base_;
+	Base base_;
 };
 
 }

@@ -12,7 +12,6 @@
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
 #include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
-#include <fcppt/nonassignable.hpp>
 
 
 namespace sanguis
@@ -24,9 +23,6 @@ namespace weapons
 
 class parameters
 {
-	FCPPT_NONASSIGNABLE(
-		parameters
-	);
 public:
 	parameters(
 		sanguis::server::weapons::common_parameters const &,
@@ -69,21 +65,21 @@ public:
 	sanguis::server::weapons::optional_reload_time
 	reload_time() const;
 private:
-	sanguis::server::weapons::common_parameters const common_parameters_;
+	sanguis::server::weapons::common_parameters common_parameters_;
 
-	sanguis::weapon_type const weapon_type_;
+	sanguis::weapon_type weapon_type_;
 
-	sanguis::server::weapons::attributes::optional_accuracy const accuracy_;
+	sanguis::server::weapons::attributes::optional_accuracy accuracy_;
 
-	sanguis::server::weapons::range const range_;
+	sanguis::server::weapons::range range_;
 
-	sanguis::server::weapons::attributes::optional_magazine_size const magazine_size_;
+	sanguis::server::weapons::attributes::optional_magazine_size magazine_size_;
 
-	sanguis::server::weapons::backswing_time const backswing_time_;
+	sanguis::server::weapons::backswing_time backswing_time_;
 
-	sanguis::server::weapons::cast_point const cast_point_;
+	sanguis::server::weapons::cast_point cast_point_;
 
-	sanguis::server::weapons::optional_reload_time const reload_time_;
+	sanguis::server::weapons::optional_reload_time reload_time_;
 };
 
 }

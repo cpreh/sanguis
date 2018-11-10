@@ -39,10 +39,17 @@
 #include <fcppt/math/vector/point_rotate.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/preprocessor/disable_clang_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 
 
 namespace
 {
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_CLANG_WARNING(-Wglobal-constructors)
+FCPPT_PP_DISABLE_CLANG_WARNING(-Wexit-time-destructors)
 
 sanguis::client::draw2d::sprite::point const player_body_center(
 	24,
@@ -56,6 +63,8 @@ sanguis::client::draw2d::sprite::index const top(
 sanguis::client::draw2d::sprite::index const bottom(
 	0u
 );
+
+FCPPT_PP_POP_WARNING
 
 }
 

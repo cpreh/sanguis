@@ -1,6 +1,8 @@
 #include <sanguis/client/net/deserialize.hpp>
 #include <sanguis/messages/server/base.hpp>
 #include <sanguis/messages/server/optional_unique_ptr.hpp>
+#include <sanguis/messages/server/serialization/context.hpp>
+#include <sanguis/messages/server/serialization/details.hpp>
 #include <sanguis/messages/server/serialization/global_context.hpp>
 #include <sanguis/net/deserialize.hpp>
 #include <alda/net/buffer/circular_receive/streambuf_fwd.hpp>

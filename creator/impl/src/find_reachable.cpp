@@ -60,7 +60,7 @@ sanguis::creator::impl::find_reachable(
 			};
 
 		for(
-			auto const n
+			auto const &n
 			:
 			fcppt::container::grid::neumann_neighbors(
 				pos

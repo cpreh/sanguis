@@ -22,6 +22,29 @@ class poll
 		sanguis::server::weapons::events::poll
 	>
 {
+public:
+	poll();
+
+	poll(
+		poll &&
+	);
+
+	poll(
+		poll const &
+	);
+
+	poll &
+	operator=(
+		poll &&
+	);
+
+	poll &
+	operator=(
+		poll const &
+	);
+
+	~poll()
+	override;
 };
 
 }

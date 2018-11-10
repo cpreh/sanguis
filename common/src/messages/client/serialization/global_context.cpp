@@ -1,3 +1,4 @@
+#include <sanguis/messages/client/serialization/context.hpp>
 #include <sanguis/messages/client/serialization/global_context.hpp>
 #include <sanguis/messages/client/types/alda_type.hpp>
 #include <alda/serialization/define_context_function.hpp>

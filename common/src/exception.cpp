@@ -4,16 +4,21 @@
 #include <fcppt/text.hpp>
 #include <fcppt/assert/information_fwd.hpp>
 #include <fcppt/assert/make_message.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::exception::exception(
-	fcppt::string const &_what
+	fcppt::string &&_what
 )
 :
 	fcppt::exception(
 		FCPPT_TEXT("sanguis: ")
 		+
-		_what
+		std::move(
+			_what
+		)
 	)
 {
 }
@@ -27,5 +32,31 @@ sanguis::exception::exception(
 			_info
 		)
 	)
+{
+}
+
+sanguis::exception::exception(
+	exception &&
+)
+= default;
+
+sanguis::exception::exception(
+	exception const &
+)
+= default;
+
+sanguis::exception &
+sanguis::exception::operator=(
+	exception &&
+)
+= default;
+
+sanguis::exception &
+sanguis::exception::operator=(
+	exception const &
+)
+= default;
+
+sanguis::exception::~exception() noexcept
 {
 }

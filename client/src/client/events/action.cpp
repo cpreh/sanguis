@@ -12,6 +12,32 @@ sanguis::client::events::action::action(
 {
 }
 
+sanguis::client::events::action::action(
+	action &&
+)
+= default;
+
+sanguis::client::events::action::action(
+	action const &
+)
+= default;
+
+sanguis::client::events::action &
+sanguis::client::events::action::operator=(
+	action &&
+)
+= default;
+
+sanguis::client::events::action &
+sanguis::client::events::action::operator=(
+	action const &
+)
+= default;
+
+sanguis::client::events::action::~action()
+{
+}
+
 sanguis::client::control::actions::any const &
 sanguis::client::events::action::value() const
 {

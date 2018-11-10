@@ -784,6 +784,7 @@ set(
 	src/client/draw2d/translate/vector_from_client.cpp
 	src/client/draw2d/translate/vector_to_client.cpp
 	src/client/events/action.cpp
+	src/client/events/connected.cpp
 	src/client/events/input.cpp
 	src/client/events/message.cpp
 	src/client/events/net_error.cpp

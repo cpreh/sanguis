@@ -30,7 +30,7 @@ for_all_body_neighbors(
 )
 {
 	for(
-		sanguis::creator::pos const grid_pos2
+		sanguis::creator::pos const &grid_pos2
 		:
 		fcppt::container::array::push_back(
 			fcppt::container::grid::moore_neighbors(

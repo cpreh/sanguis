@@ -6,7 +6,6 @@
 #include <sanguis/client/gui/menu/callbacks/object_fwd.hpp>
 #include <sanguis/client/gui/menu/callbacks/quickstart.hpp>
 #include <sanguis/client/gui/menu/callbacks/quit.hpp>
-#include <fcppt/nonassignable.hpp>
 
 
 namespace sanguis
@@ -22,9 +21,6 @@ namespace callbacks
 
 class object
 {
-	FCPPT_NONASSIGNABLE(
-		object
-	);
 public:
 	object(
 		sanguis::client::gui::menu::callbacks::connect const &,
@@ -45,13 +41,13 @@ public:
 	sanguis::client::gui::menu::callbacks::quit const &
 	quit() const;
 private:
-	sanguis::client::gui::menu::callbacks::connect const connect_;
+	sanguis::client::gui::menu::callbacks::connect connect_;
 
-	sanguis::client::gui::menu::callbacks::cancel_connect const cancel_connect_;
+	sanguis::client::gui::menu::callbacks::cancel_connect cancel_connect_;
 
-	sanguis::client::gui::menu::callbacks::quickstart const quickstart_;
+	sanguis::client::gui::menu::callbacks::quickstart quickstart_;
 
-	sanguis::client::gui::menu::callbacks::quit const quit_;
+	sanguis::client::gui::menu::callbacks::quit quit_;
 };
 
 }

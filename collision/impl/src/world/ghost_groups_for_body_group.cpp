@@ -4,6 +4,9 @@
 #include <sanguis/collision/impl/world/make_groups.hpp>
 #include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
+#include <fcppt/preprocessor/disable_clang_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/fold.hpp>
 #include <boost/mpl/if.hpp>
@@ -48,6 +51,10 @@ boost::mpl::fold<
 	>
 >::type;
 
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_CLANG_WARNING(-Wglobal-constructors)
+FCPPT_PP_DISABLE_CLANG_WARNING(-Wexit-time-destructors)
+
 auto const groups(
 	sanguis::collision::impl::world::make_groups<
 		sanguis::collision::world::body_group,
@@ -55,6 +62,8 @@ auto const groups(
 		body_ghost_groups_static
 	>::make()
 );
+
+FCPPT_PP_POP_WARNING
 
 }
 

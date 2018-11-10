@@ -9,7 +9,6 @@
 #include <sanguis/server/weapons/range.hpp>
 #include <sanguis/server/weapons/attributes/aoe.hpp>
 #include <sanguis/server/weapons/attributes/damage.hpp>
-#include <fcppt/nonassignable.hpp>
 
 
 namespace sanguis
@@ -21,9 +20,6 @@ namespace weapons
 
 class grenade_parameters
 {
-	FCPPT_NONASSIGNABLE(
-		grenade_parameters
-	);
 public:
 	grenade_parameters(
 		sanguis::server::weapons::backswing_time,
@@ -58,15 +54,15 @@ public:
 		sanguis::server::weapons::aoe
 	);
 private:
-	sanguis::server::weapons::backswing_time const backswing_time_;
+	sanguis::server::weapons::backswing_time backswing_time_;
 
 	sanguis::server::weapons::attributes::damage damage_;
 
 	sanguis::server::weapons::attributes::aoe aoe_;
 
-	sanguis::server::weapons::cast_point const cast_point_;
+	sanguis::server::weapons::cast_point cast_point_;
 
-	sanguis::server::weapons::range const range_;
+	sanguis::server::weapons::range range_;
 };
 
 }

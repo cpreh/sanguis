@@ -22,6 +22,29 @@ class reload
 		sanguis::server::weapons::events::reload
 	>
 {
+public:
+	reload();
+
+	reload(
+		reload &&
+	);
+
+	reload(
+		reload const &
+	);
+
+	reload &
+	operator=(
+		reload &&
+	);
+
+	reload &
+	operator=(
+		reload const &
+	);
+
+	~reload()
+	override;
 };
 
 }

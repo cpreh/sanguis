@@ -22,6 +22,29 @@ class shoot
 		sanguis::server::weapons::events::shoot
 	>
 {
+public:
+	shoot();
+
+	shoot(
+		shoot &&
+	);
+
+	shoot(
+		shoot const &
+	);
+
+	shoot &
+	operator=(
+		shoot &&
+	);
+
+	shoot &
+	operator=(
+		shoot const &
+	);
+
+	~shoot()
+	override;
 };
 
 }

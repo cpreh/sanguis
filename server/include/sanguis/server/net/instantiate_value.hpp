@@ -17,5 +17,4 @@ sanguis::server::net::basic_value<\
 	sanguis::diff_clock\
 >
 
-
 #endif

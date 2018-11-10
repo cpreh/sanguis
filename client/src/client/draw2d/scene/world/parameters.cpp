@@ -26,19 +26,19 @@ sanguis::client::load::context const &
 sanguis::client::draw2d::scene::world::parameters::load_context() const
 {
 	return
-		load_context_;
+		load_context_.get();
 }
 
 sanguis::client::draw2d::sprite::client::system &
 sanguis::client::draw2d::scene::world::parameters::client_system() const
 {
 	return
-		client_system_;
+		client_system_.get();
 }
 
 sge::viewport::manager &
 sanguis::client::draw2d::scene::world::parameters::viewport_manager() const
 {
 	return
-		viewport_manager_;
+		viewport_manager_.get();
 }

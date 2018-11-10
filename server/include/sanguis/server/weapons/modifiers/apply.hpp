@@ -16,6 +16,9 @@
 #include <fcppt/make_ref.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/cast/size_fun.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -162,7 +165,9 @@ apply(
 		);
 
 	return
-		_parameters;
+		std::move(
+			_parameters
+		);
 }
 
 }

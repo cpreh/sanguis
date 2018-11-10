@@ -13,7 +13,6 @@
 #include <sanguis/server/entities/with_health.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
-#include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/projectiles/collision_group.hpp>
 #include <sanguis/server/entities/projectiles/life_time.hpp>
 #include <sanguis/server/entities/projectiles/projectile.hpp>
@@ -33,7 +32,6 @@ sanguis::server::entities::projectiles::base::base(
 	sanguis::server::direction const _direction
 )
 :
-	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::with_id(
 		_load_context.next_id()
 	),

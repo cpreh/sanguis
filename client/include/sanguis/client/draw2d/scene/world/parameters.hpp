@@ -5,7 +5,7 @@
 #include <sanguis/client/draw2d/sprite/client/system_fwd.hpp>
 #include <sanguis/client/load/context_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
-#include <fcppt/nonassignable.hpp>
+#include <fcppt/reference_impl.hpp>
 
 
 namespace sanguis
@@ -21,9 +21,6 @@ namespace world
 
 class parameters
 {
-	FCPPT_NONASSIGNABLE(
-		parameters
-	);
 public:
 	parameters(
 		sanguis::client::load::context const &,
@@ -40,11 +37,17 @@ public:
 	sge::viewport::manager &
 	viewport_manager() const;
 private:
-	sanguis::client::load::context const &load_context_;
+	fcppt::reference<
+		sanguis::client::load::context const
+	> load_context_;
 
-	sanguis::client::draw2d::sprite::client::system &client_system_;
+	fcppt::reference<
+		sanguis::client::draw2d::sprite::client::system
+	> client_system_;
 
-	sge::viewport::manager &viewport_manager_;
+	fcppt::reference<
+		sge::viewport::manager
+	> viewport_manager_;
 };
 
 }

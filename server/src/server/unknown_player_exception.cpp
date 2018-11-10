@@ -10,3 +10,29 @@ sanguis::server::unknown_player_exception::unknown_player_exception()
 	)
 {
 }
+
+sanguis::server::unknown_player_exception::unknown_player_exception(
+	unknown_player_exception &&
+)
+= default;
+
+sanguis::server::unknown_player_exception::unknown_player_exception(
+	unknown_player_exception const &
+)
+= default;
+
+sanguis::server::unknown_player_exception &
+sanguis::server::unknown_player_exception::operator=(
+	unknown_player_exception &&
+)
+= default;
+
+sanguis::server::unknown_player_exception &
+sanguis::server::unknown_player_exception::operator=(
+	unknown_player_exception const &
+)
+= default;
+
+sanguis::server::unknown_player_exception::~unknown_player_exception() noexcept
+{
+}

@@ -27,7 +27,7 @@ public:
 	id() const = 0;
 
 	virtual
-	~with_id() = 0;
+	~with_id();
 };
 
 }

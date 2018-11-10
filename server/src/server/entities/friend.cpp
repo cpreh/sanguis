@@ -15,6 +15,7 @@
 #include <sanguis/messages/roles/speed.hpp>
 #include <sanguis/messages/roles/weapon_status.hpp>
 #include <sanguis/messages/server/add_friend.hpp>
+#include <sanguis/messages/server/base.hpp>
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/health.hpp>

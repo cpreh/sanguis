@@ -6,4 +6,11 @@
 #include <sanguis/server/damage/basic_meta_decl.hpp>
 
 
+extern
+template
+class
+sanguis::server::damage::basic_meta<
+	sanguis::server::damage::armor_unit
+>;
+
 #endif

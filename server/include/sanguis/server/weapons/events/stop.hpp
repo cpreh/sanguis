@@ -22,6 +22,29 @@ class stop
 		sanguis::server::weapons::events::stop
 	>
 {
+public:
+	stop();
+
+	stop(
+		stop &&
+	);
+
+	stop(
+		stop const &
+	);
+
+	stop &
+	operator=(
+		stop &&
+	);
+
+	stop &
+	operator=(
+		stop const &
+	);
+
+	~stop()
+	override;
 };
 
 }

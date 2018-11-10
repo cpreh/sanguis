@@ -4,30 +4,43 @@
 #include <sanguis/creator/opening_container_array.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/impl/result.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::creator::impl::result::result(
-	sanguis::creator::grid const &_grid,
-	sanguis::creator::background_grid const &_background_grid,
-	sanguis::creator::opening_container_array const &_openings,
-	sanguis::creator::spawn_container const &_spawns,
-	sanguis::creator::destructible_container const &_destructibles
+	sanguis::creator::grid &&_grid,
+	sanguis::creator::background_grid &&_background_grid,
+	sanguis::creator::opening_container_array &&_openings,
+	sanguis::creator::spawn_container &&_spawns,
+	sanguis::creator::destructible_container &&_destructibles
 )
 :
 	grid_(
-		_grid
+		std::move(
+			_grid
+		)
 	),
 	background_grid_(
-		_background_grid
+		std::move(
+			_background_grid
+		)
 	),
 	openings_(
-		_openings
+		std::move(
+			_openings
+		)
 	),
 	spawns_(
-		_spawns
+		std::move(
+			_spawns
+		)
 	),
 	destructibles_(
-		_destructibles
+		std::move(
+			_destructibles
+		)
 	)
 {
 }

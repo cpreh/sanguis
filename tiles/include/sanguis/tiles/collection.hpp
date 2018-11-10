@@ -3,6 +3,7 @@
 
 #include <sanguis/creator/background_tile.hpp>
 #include <sanguis/creator/enable_if_tile.hpp>
+#include <sanguis/creator/instantiate_tile.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/tiles/collection_fwd.hpp>
 #include <sanguis/tiles/pair.hpp>
@@ -84,5 +85,26 @@ private:
 
 }
 }
+
+#define SANGUIS_TILES_DECLARE_COLLECTION_SET(\
+	tile_type\
+)\
+extern \
+template \
+sanguis::creator::enable_if_tile<\
+	tile_type,\
+	sanguis::tiles::set<\
+		tile_type\
+	> const &\
+> \
+sanguis::tiles::collection::set(\
+	sanguis::tiles::pair<\
+		tile_type \
+	>\
+)
+
+SANGUIS_CREATOR_INSTANTIATE_TILE(
+	SANGUIS_TILES_DECLARE_COLLECTION_SET
+);
 
 #endif

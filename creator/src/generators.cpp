@@ -3,16 +3,25 @@
 #include <sanguis/creator/impl/graveyard_name.hpp>
 #include <sanguis/creator/impl/maze_name.hpp>
 #include <sanguis/creator/impl/rooms_name.hpp>
+#include <fcppt/preprocessor/disable_clang_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 
 
 namespace
 {
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_CLANG_WARNING(-Wglobal-constructors)
+FCPPT_PP_DISABLE_CLANG_WARNING(-Wexit-time-destructors)
 
 sanguis::creator::generator_vector const global_generators{
 	sanguis::creator::impl::graveyard_name(),
 //	sanguis::creator::impl::maze_name(),
 	sanguis::creator::impl::rooms_name()
 };
+
+FCPPT_PP_POP_WARNING
 
 }
 

@@ -14,7 +14,6 @@
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/enemies/create.hpp>
 #include <sanguis/server/entities/enemies/special_chance.hpp>
-#include <sanguis/server/entities/ifaces/with_angle.hpp>
 #include <sanguis/server/entities/spawns/size_type.hpp>
 #include <sanguis/server/entities/spawns/spawn.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
@@ -44,7 +43,6 @@ sanguis::server::entities::spawns::spawn::spawn(
 	sanguis::server::world::difficulty const _difficulty
 )
 :
-	sanguis::server::entities::ifaces::with_angle(),
 	sanguis::server::entities::simple(),
 	sanguis::server::entities::with_links(),
 	random_generator_(

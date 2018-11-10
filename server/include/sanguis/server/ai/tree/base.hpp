@@ -26,7 +26,7 @@ protected:
 	base();
 public:
 	virtual
-	~base() = 0;
+	~base();
 
 	virtual
 	sanguis::server::entities::transfer_result

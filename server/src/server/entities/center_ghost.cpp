@@ -4,7 +4,6 @@
 #include <sanguis/server/entities/optional_transfer_result.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/transfer_result.hpp>
-#include <sanguis/server/entities/with_ghosts.hpp>
 #include <fcppt/optional/combine.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -13,7 +12,6 @@
 
 sanguis::server::entities::center_ghost::center_ghost()
 :
-	sanguis::server::entities::with_ghosts(),
 	sanguis::server::entities::center_simple()
 {
 }

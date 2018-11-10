@@ -27,6 +27,9 @@
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/preprocessor/disable_clang_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/variant/dynamic_cast.hpp>
 #include <fcppt/variant/match.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -134,6 +137,9 @@ sanguis::client::control::input_translator::key_event(
 	sge::input::focus::event::key const &_event
 )
 {
+	FCPPT_PP_PUSH_WARNING
+	FCPPT_PP_DISABLE_CLANG_WARNING(-Wswitch-enum)
+
 	// FIXME: Don't hardcode key_codes
 	switch(
 		_event.get().code()
@@ -192,6 +198,8 @@ sanguis::client::control::input_translator::key_event(
 	default:
 		break;
 	}
+
+	FCPPT_PP_POP_WARNING
 }
 
 void
@@ -229,6 +237,9 @@ sanguis::client::control::input_translator::button_event(
 	sge::input::cursor::event::button const &_event
 )
 {
+	FCPPT_PP_PUSH_WARNING
+	FCPPT_PP_DISABLE_CLANG_WARNING(-Wswitch-enum)
+
 	switch(
 		_event.button_code()
 	)
@@ -248,6 +259,8 @@ sanguis::client::control::input_translator::button_event(
 	default:
 		break;
 	}
+
+	FCPPT_PP_POP_WARNING
 }
 
 void
@@ -320,6 +333,9 @@ key_scale_type(
 	sge::input::key::code const _code
 )
 {
+	FCPPT_PP_PUSH_WARNING
+	FCPPT_PP_DISABLE_CLANG_WARNING(-Wswitch-enum)
+
 	switch(
 		_code
 	)
@@ -333,6 +349,8 @@ key_scale_type(
 	default:
 		break;
 	}
+
+	FCPPT_PP_POP_WARNING
 
 	FCPPT_ASSERT_UNREACHABLE;
 }
@@ -351,6 +369,9 @@ key_scale_value(
 			sanguis::client::control::axis_direction_min()
 	);
 
+	FCPPT_PP_PUSH_WARNING
+	FCPPT_PP_DISABLE_CLANG_WARNING(-Wswitch-enum)
+
 	switch(
 		_code
 	)
@@ -364,6 +385,8 @@ key_scale_value(
 	default:
 		break;
 	}
+
+	FCPPT_PP_POP_WARNING
 
 	FCPPT_ASSERT_UNREACHABLE;
 }

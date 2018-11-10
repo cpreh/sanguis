@@ -3,7 +3,6 @@
 
 #include <sanguis/client/control/actions/any.hpp>
 #include <sanguis/client/events/action_fwd.hpp>
-#include <fcppt/nonassignable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/event.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -22,19 +21,37 @@ class action
 		sanguis::client::events::action
 	>
 {
-	FCPPT_NONASSIGNABLE(
-		action
-	);
 public:
 	explicit
 	action(
 		sanguis::client::control::actions::any const &
 	);
 
+	action(
+		action &&
+	);
+
+	action(
+		action const &
+	);
+
+	action &
+	operator=(
+		action &&
+	);
+
+	action &
+	operator=(
+		action const &
+	);
+
+	~action()
+	override;
+
 	sanguis::client::control::actions::any const &
 	value() const;
 private:
-	sanguis::client::control::actions::any const value_;
+	sanguis::client::control::actions::any value_;
 };
 
 }

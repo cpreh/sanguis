@@ -28,12 +28,33 @@ public:
 		sge::input::event_base const &
 	);
 
+	input(
+		input &&
+	);
+
+	input(
+		input const &
+	);
+
+	input &
+	operator=(
+		input &&
+	);
+
+	input &
+	operator=(
+		input const &
+	);
+
+	~input()
+	override;
+
 	sge::input::event_base const &
 	get() const;
 private:
 	fcppt::reference<
 		sge::input::event_base const
-	> const event_;
+	> event_;
 };
 
 }

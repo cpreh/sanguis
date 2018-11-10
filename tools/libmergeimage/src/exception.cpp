@@ -31,3 +31,29 @@ sanguis::tools::libmergeimage::exception::exception(
 	)
 {
 }
+
+sanguis::tools::libmergeimage::exception::exception(
+	exception &&
+)
+= default;
+
+sanguis::tools::libmergeimage::exception::exception(
+	exception const &
+)
+= default;
+
+sanguis::tools::libmergeimage::exception &
+sanguis::tools::libmergeimage::exception::operator=(
+	exception &&
+)
+= default;
+
+sanguis::tools::libmergeimage::exception &
+sanguis::tools::libmergeimage::exception::operator=(
+	exception const &
+)
+= default;
+
+sanguis::tools::libmergeimage::exception::~exception() noexcept
+{
+}

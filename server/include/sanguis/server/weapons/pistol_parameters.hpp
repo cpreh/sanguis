@@ -12,7 +12,6 @@
 #include <sanguis/server/weapons/attributes/accuracy.hpp>
 #include <sanguis/server/weapons/attributes/damage.hpp>
 #include <sanguis/server/weapons/attributes/magazine_size.hpp>
-#include <fcppt/nonassignable.hpp>
 
 
 namespace sanguis
@@ -24,9 +23,6 @@ namespace weapons
 
 class pistol_parameters
 {
-	FCPPT_NONASSIGNABLE(
-		pistol_parameters
-	);
 public:
 	pistol_parameters(
 		sanguis::server::weapons::accuracy,
@@ -76,17 +72,17 @@ public:
 private:
 	sanguis::server::weapons::attributes::accuracy accuracy_;
 
-	sanguis::server::weapons::backswing_time const backswing_time_;
+	sanguis::server::weapons::backswing_time backswing_time_;
 
 	sanguis::server::weapons::attributes::damage damage_;
 
-	sanguis::server::weapons::cast_point const cast_point_;
+	sanguis::server::weapons::cast_point cast_point_;
 
 	sanguis::server::weapons::attributes::magazine_size magazine_size_;
 
-	sanguis::server::weapons::reload_time const reload_time_;
+	sanguis::server::weapons::reload_time reload_time_;
 
-	sanguis::server::weapons::range const range_;
+	sanguis::server::weapons::range range_;
 };
 
 }

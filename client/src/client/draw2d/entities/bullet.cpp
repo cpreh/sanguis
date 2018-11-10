@@ -31,6 +31,9 @@
 #include <fcppt/math/vector/normalize.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/optional/maybe.hpp>
+#include <fcppt/preprocessor/disable_clang_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -39,9 +42,14 @@
 namespace
 {
 
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_CLANG_WARNING(-Wglobal-constructors)
+
 sanguis::client::draw2d::sprite::index const tail{
 	1u
 };
+
+FCPPT_PP_POP_WARNING
 
 }
 

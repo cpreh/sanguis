@@ -12,8 +12,6 @@
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
-#include <sanguis/server/entities/ifaces/with_id.hpp>
-#include <sanguis/server/entities/ifaces/with_velocity.hpp>
 #include <sanguis/server/entities/property/change_callback.hpp>
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <sanguis/server/environment/object.hpp>
@@ -30,8 +28,6 @@ sanguis::server::entities::with_velocity::with_velocity(
 	sanguis::server::direction const _direction
 )
 :
-	sanguis::server::entities::ifaces::with_id(),
-	sanguis::server::entities::ifaces::with_velocity(),
 	sanguis::server::entities::with_body(
 		_radius,
 		_mass

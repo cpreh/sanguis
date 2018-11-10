@@ -4,7 +4,6 @@
 #include <sanguis/server/weapons/parameters.hpp>
 #include <sanguis/server/weapons/spawn_parameters_fwd.hpp>
 #include <sanguis/server/weapons/spawn_weapon.hpp>
-#include <fcppt/nonassignable.hpp>
 
 
 namespace sanguis
@@ -16,9 +15,6 @@ namespace weapons
 
 class spawn_parameters
 {
-	FCPPT_NONASSIGNABLE(
-		spawn_parameters
-	);
 public:
 	spawn_parameters(
 		sanguis::server::weapons::parameters const &,
@@ -31,9 +27,9 @@ public:
 	sanguis::server::weapons::spawn_weapon const &
 	spawn_weapon() const;
 private:
-	sanguis::server::weapons::parameters const parameters_;
+	sanguis::server::weapons::parameters parameters_;
 
-	sanguis::server::weapons::spawn_weapon const spawn_weapon_;
+	sanguis::server::weapons::spawn_weapon spawn_weapon_;
 };
 
 }

@@ -20,11 +20,33 @@ public:
 	SANGUIS_CREATOR_SYMBOL
 	explicit
 	exception(
-		fcppt::string const &
+		fcppt::string &&
 	);
 
 	SANGUIS_CREATOR_SYMBOL
-	~exception() throw()
+	exception(
+		exception &&
+	);
+
+	SANGUIS_CREATOR_SYMBOL
+	exception(
+		exception const &
+	);
+
+	SANGUIS_CREATOR_SYMBOL
+	exception &
+	operator=(
+		exception &&
+	);
+
+	SANGUIS_CREATOR_SYMBOL
+	exception &
+	operator=(
+		exception const &
+	);
+
+	SANGUIS_CREATOR_SYMBOL
+	~exception() noexcept
 	override;
 };
 

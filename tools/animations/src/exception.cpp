@@ -31,3 +31,29 @@ sanguis::tools::animations::exception::exception(
 	)
 {
 }
+
+sanguis::tools::animations::exception::exception(
+	exception &&
+)
+= default;
+
+sanguis::tools::animations::exception::exception(
+	exception const &
+)
+= default;
+
+sanguis::tools::animations::exception &
+sanguis::tools::animations::exception::operator=(
+	exception &&
+)
+= default;
+
+sanguis::tools::animations::exception &
+sanguis::tools::animations::exception::operator=(
+	exception const &
+)
+= default;
+
+sanguis::tools::animations::exception::~exception() noexcept
+{
+}

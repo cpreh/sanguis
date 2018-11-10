@@ -3,7 +3,6 @@
 
 #include <sanguis/duration.hpp>
 #include <sanguis/client/events/tick_fwd.hpp>
-#include <fcppt/nonassignable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/event.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -22,19 +21,37 @@ class tick
 		sanguis::client::events::tick
 	>
 {
-	FCPPT_NONASSIGNABLE(
-		tick
-	);
 public:
 	explicit
 	tick(
 		sanguis::duration const &
 	);
 
+	tick(
+		tick &&
+	);
+
+	tick(
+		tick const &
+	);
+
+	tick &
+	operator=(
+		tick &&
+	);
+
+	tick &
+	operator=(
+		tick const &
+	);
+
+	~tick()
+	override;
+
 	sanguis::duration const &
 	delta() const;
 private:
-	sanguis::duration const delta_;
+	sanguis::duration delta_;
 };
 
 }

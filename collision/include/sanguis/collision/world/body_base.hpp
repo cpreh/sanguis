@@ -30,7 +30,7 @@ protected:
 public:
 	SANGUIS_COLLISION_SYMBOL
 	virtual
-	~body_base() = 0;
+	~body_base();
 
 	virtual
 	void

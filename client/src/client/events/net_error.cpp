@@ -19,14 +19,42 @@ sanguis::client::events::net_error::net_error(
 {
 }
 
+sanguis::client::events::net_error::net_error(
+	net_error &&
+)
+= default;
+
+sanguis::client::events::net_error::net_error(
+	net_error const &
+)
+= default;
+
+sanguis::client::events::net_error &
+sanguis::client::events::net_error::operator=(
+	net_error &&
+)
+= default;
+
+sanguis::client::events::net_error &
+sanguis::client::events::net_error::operator=(
+	net_error const &
+)
+= default;
+
+sanguis::client::events::net_error::~net_error()
+{
+}
+
 fcppt::string const &
 sanguis::client::events::net_error::message() const
 {
-	return message_;
+	return
+		message_;
 }
 
 boost::system::error_code const &
 sanguis::client::events::net_error::code() const
 {
-	return code_;
+	return
+		code_;
 }

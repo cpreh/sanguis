@@ -3,7 +3,7 @@
 
 #include <sanguis/client/events/overlay_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <fcppt/nonassignable.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/event.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -22,19 +22,39 @@ class overlay
 		sanguis::client::events::overlay
 	>
 {
-	FCPPT_NONASSIGNABLE(
-		overlay
-	);
 public:
 	explicit
 	overlay(
 		sge::renderer::context::ffp &
 	);
 
+	overlay(
+		overlay &&
+	);
+
+	overlay(
+		overlay const &
+	);
+
+	overlay &
+	operator=(
+		overlay &&
+	);
+
+	overlay &
+	operator=(
+		overlay const &
+	);
+
+	~overlay()
+	override;
+
 	sge::renderer::context::ffp &
 	context() const;
 private:
-	sge::renderer::context::ffp &context_;
+	fcppt::reference<
+		sge::renderer::context::ffp
+	> context_;
 };
 
 }

@@ -195,6 +195,9 @@
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/optional/to_exception.hpp>
+#include <fcppt/preprocessor/disable_clang_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/record/get.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -372,8 +375,13 @@ sanguis::client::draw2d::scene::object::process_message(
 	>
 	dispatcher_type;
 
+	FCPPT_PP_PUSH_WARNING
+	FCPPT_PP_DISABLE_CLANG_WARNING(-Wexit-time-destructors)
+
 	static
-	dispatcher_type dispatcher;
+	dispatcher_type dispatcher{};
+
+	FCPPT_PP_POP_WARNING
 
 	dispatcher(
 		_message,

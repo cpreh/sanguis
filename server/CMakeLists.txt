@@ -461,6 +461,7 @@ set(
 	include/sanguis/server/net/center_fwd.hpp
 	include/sanguis/server/net/center_policy.hpp
 	include/sanguis/server/net/center_policy_fwd.hpp
+	include/sanguis/server/net/declare_value.hpp
 	include/sanguis/server/net/deserialize.hpp
 	include/sanguis/server/net/health.hpp
 	include/sanguis/server/net/health_fwd.hpp
@@ -1040,6 +1041,10 @@ set(
 	src/server/weapons/create.cpp
 	src/server/weapons/default_ias.cpp
 	src/server/weapons/default_irs.cpp
+	src/server/weapons/events/poll.cpp
+	src/server/weapons/events/reload.cpp
+	src/server/weapons/events/shoot.cpp
+	src/server/weapons/events/stop.cpp
 	src/server/weapons/factory/dual_pistols.cpp
 	src/server/weapons/factory/grenade.cpp
 	src/server/weapons/factory/parameters.cpp

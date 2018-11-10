@@ -12,7 +12,6 @@
 #include <sanguis/server/weapons/rocket_launcher_parameters_fwd.hpp>
 #include <sanguis/server/weapons/attributes/aoe.hpp>
 #include <sanguis/server/weapons/attributes/damage.hpp>
-#include <fcppt/nonassignable.hpp>
 
 
 namespace sanguis
@@ -24,9 +23,6 @@ namespace weapons
 
 class rocket_launcher_parameters
 {
-	FCPPT_NONASSIGNABLE(
-		rocket_launcher_parameters
-	);
 public:
 	rocket_launcher_parameters(
 		sanguis::server::weapons::damage,
@@ -77,17 +73,17 @@ private:
 
 	sanguis::server::weapons::attributes::aoe aoe_;
 
-	sanguis::server::weapons::accuracy const accuracy_;
+	sanguis::server::weapons::accuracy accuracy_;
 
-	sanguis::server::weapons::backswing_time const backswing_time_;
+	sanguis::server::weapons::backswing_time backswing_time_;
 
-	sanguis::server::weapons::cast_point const cast_point_;
+	sanguis::server::weapons::cast_point cast_point_;
 
-	sanguis::server::weapons::magazine_size const magazine_size_;
+	sanguis::server::weapons::magazine_size magazine_size_;
 
-	sanguis::server::weapons::reload_time const reload_time_;
+	sanguis::server::weapons::reload_time reload_time_;
 
-	sanguis::server::weapons::range const range_;
+	sanguis::server::weapons::range range_;
 };
 
 }

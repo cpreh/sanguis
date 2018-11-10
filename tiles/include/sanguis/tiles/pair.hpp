@@ -1,6 +1,7 @@
 #ifndef SANGUIS_TILES_PAIR_HPP_INCLUDED
 #define SANGUIS_TILES_PAIR_HPP_INCLUDED
 
+#include <sanguis/creator/instantiate_tile.hpp>
 #include <sanguis/creator/is_tile.hpp>
 #include <sanguis/tiles/pair_fwd.hpp>
 #include <sanguis/tiles/symbol.hpp>
@@ -48,5 +49,19 @@ private:
 
 }
 }
+
+#define SANGUIS_TILES_DECLARE_TILE(\
+	tile_type\
+)\
+extern \
+template \
+class \
+sanguis::tiles::pair<\
+	tile_type \
+>
+
+SANGUIS_CREATOR_INSTANTIATE_TILE(
+	SANGUIS_TILES_DECLARE_TILE
+);
 
 #endif

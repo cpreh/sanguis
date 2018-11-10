@@ -6,4 +6,11 @@
 #include <sanguis/server/weapons/attributes/health_fwd.hpp>
 
 
+extern
+template
+class
+sanguis::server::weapons::attributes::basic<
+	sanguis::server::health
+>;
+
 #endif

@@ -25,7 +25,7 @@ protected:
 	with_orientation();
 
 	virtual
-	~with_orientation() = 0;
+	~with_orientation();
 public:
 	virtual
 	void

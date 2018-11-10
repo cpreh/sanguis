@@ -16,6 +16,7 @@
 #include <sanguis/messages/roles/weapon_attribute_container.hpp>
 #include <sanguis/messages/roles/weapon_type.hpp>
 #include <sanguis/messages/server/add_weapon_pickup.hpp>
+#include <sanguis/messages/server/base.hpp>
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/optional_mass.hpp>
@@ -25,6 +26,7 @@
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_links.hpp>
+#include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/pickups/weapon.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>

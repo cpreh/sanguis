@@ -19,6 +19,28 @@ sanguis::client::events::message::message(
 {
 }
 
+sanguis::client::events::message::message(
+	message &&
+)
+= default;
+
+sanguis::client::events::message::message(
+	message const &
+)
+= default;
+
+sanguis::client::events::message &
+sanguis::client::events::message::operator=(
+	message &&
+)
+= default;
+
+sanguis::client::events::message &
+sanguis::client::events::message::operator=(
+	message const &
+)
+= default;
+
 sanguis::client::events::message::~message()
 {
 }

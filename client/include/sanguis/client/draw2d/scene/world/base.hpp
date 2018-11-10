@@ -27,7 +27,7 @@ protected:
 	base();
 public:
 	virtual
-	~base() = 0;
+	~base();
 
 	virtual
 	void

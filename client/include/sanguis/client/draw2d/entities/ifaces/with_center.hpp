@@ -25,7 +25,7 @@ protected:
 	with_center();
 
 	virtual
-	~with_center() = 0;
+	~with_center();
 public:
 	virtual
 	void

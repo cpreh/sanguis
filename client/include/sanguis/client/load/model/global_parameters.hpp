@@ -7,7 +7,7 @@
 #include <sanguis/model/cell_size.hpp>
 #include <sanguis/model/optional_animation_delay.hpp>
 #include <sanguis/model/optional_image_name.hpp>
-#include <fcppt/nonassignable.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -24,9 +24,6 @@ namespace model
 
 class global_parameters
 {
-	FCPPT_NONASSIGNABLE(
-		global_parameters
-	);
 public:
 	global_parameters(
 		boost::filesystem::path const &,
@@ -62,15 +59,19 @@ public:
 private:
 	boost::filesystem::path const path_;
 
-	sanguis::client::load::resource::textures const &textures_;
+	fcppt::reference<
+		sanguis::client::load::resource::textures const
+	> textures_;
 
-	sanguis::client::load::resource::sounds const &sounds_;
+	fcppt::reference<
+		sanguis::client::load::resource::sounds const
+	> sounds_;
 
-	sanguis::model::cell_size const cell_size_;
+	sanguis::model::cell_size cell_size_;
 
-	sanguis::model::optional_animation_delay const delay_;
+	sanguis::model::optional_animation_delay delay_;
 
-	sanguis::model::optional_image_name const image_;
+	sanguis::model::optional_image_name image_;
 };
 
 }

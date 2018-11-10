@@ -161,6 +161,7 @@ set(
 	include/sanguis/messages/client/console_command.hpp
 	include/sanguis/messages/client/console_command_fwd.hpp
 	include/sanguis/messages/client/create.hpp
+	include/sanguis/messages/client/declare_message.hpp
 	include/sanguis/messages/client/direction.hpp
 	include/sanguis/messages/client/direction_fwd.hpp
 	include/sanguis/messages/client/drop_or_pickup_weapon.hpp
@@ -174,7 +175,10 @@ set(
 	include/sanguis/messages/client/pause_fwd.hpp
 	include/sanguis/messages/client/reload.hpp
 	include/sanguis/messages/client/reload_fwd.hpp
+	include/sanguis/messages/client/serialization/context.hpp
 	include/sanguis/messages/client/serialization/context_fwd.hpp
+	include/sanguis/messages/client/serialization/declare_message.hpp
+	include/sanguis/messages/client/serialization/details.hpp
 	include/sanguis/messages/client/serialization/global_context.hpp
 	include/sanguis/messages/client/serialization/instantiate_message.hpp
 	include/sanguis/messages/client/shared_ptr.hpp
@@ -302,6 +306,7 @@ set(
 	include/sanguis/messages/server/console_print_fwd.hpp
 	include/sanguis/messages/server/create.hpp
 	include/sanguis/messages/server/create_ptr.hpp
+	include/sanguis/messages/server/declare_message.hpp
 	include/sanguis/messages/server/die.hpp
 	include/sanguis/messages/server/die_fwd.hpp
 	include/sanguis/messages/server/experience.hpp
@@ -355,7 +360,10 @@ set(
 	include/sanguis/messages/server/remove_weapon_fwd.hpp
 	include/sanguis/messages/server/rotate.hpp
 	include/sanguis/messages/server/rotate_fwd.hpp
+	include/sanguis/messages/server/serialization/context.hpp
 	include/sanguis/messages/server/serialization/context_fwd.hpp
+	include/sanguis/messages/server/serialization/declare_message.hpp
+	include/sanguis/messages/server/serialization/details.hpp
 	include/sanguis/messages/server/serialization/global_context.hpp
 	include/sanguis/messages/server/serialization/instantiate_message.hpp
 	include/sanguis/messages/server/shared_ptr.hpp

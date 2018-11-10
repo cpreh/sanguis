@@ -6,7 +6,6 @@
 #include <sanguis/server/auras/unique_ptr.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
 #include <sanguis/server/entities/with_auras_id.hpp>
-#include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/assert/optional_error.hpp>
@@ -50,7 +49,6 @@ sanguis::server::entities::with_auras_id::with_auras_id(
 	sanguis::server::auras::container &&_auras
 )
 :
-	sanguis::server::entities::ifaces::with_id(),
 	sanguis::server::entities::with_auras(
 		std::move(
 			_auras

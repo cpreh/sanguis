@@ -12,9 +12,35 @@ sanguis::client::events::render::render(
 {
 }
 
+sanguis::client::events::render::render(
+	render &&
+)
+= default;
+
+sanguis::client::events::render::render(
+	render const &
+)
+= default;
+
+sanguis::client::events::render &
+sanguis::client::events::render::operator=(
+	render &&
+)
+= default;
+
+sanguis::client::events::render &
+sanguis::client::events::render::operator=(
+	render const &
+)
+= default;
+
+sanguis::client::events::render::~render()
+{
+}
+
 sge::renderer::context::ffp &
 sanguis::client::events::render::context() const
 {
 	return
-		context_;
+		context_.get();
 }

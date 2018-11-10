@@ -73,7 +73,7 @@ sanguis::client::draw2d::entities::load_parameters const &
 sanguis::client::draw2d::entities::model::parameters::load_parameters() const
 {
 	return
-		load_parameters_;
+		load_parameters_.get();
 }
 
 sanguis::load::model::path const &

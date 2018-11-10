@@ -5,6 +5,7 @@
 #include <sanguis/client/symbol.hpp>
 #include <awl/main/exit_code.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/symbol/class.hpp>
 
 
 namespace sanguis
@@ -12,7 +13,7 @@ namespace sanguis
 namespace client
 {
 
-class object_base
+class FCPPT_SYMBOL_CLASS object_base
 {
 	FCPPT_NONCOPYABLE(
 		object_base
@@ -22,7 +23,7 @@ protected:
 public:
 	SANGUIS_CLIENT_SYMBOL
 	virtual
-	~object_base() = 0;
+	~object_base();
 
 	virtual
 	awl::main::exit_code

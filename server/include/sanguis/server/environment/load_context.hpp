@@ -34,7 +34,7 @@ public:
 	next_id() = 0;
 
 	virtual
-	~load_context() = 0;
+	~load_context();
 };
 
 }

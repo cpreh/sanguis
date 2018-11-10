@@ -25,7 +25,7 @@ protected:
 	body();
 public:
 	virtual
-	~body() = 0;
+	~body();
 
 	virtual
 	void

@@ -22,6 +22,9 @@
 #include <sanguis/creator/impl/generators/maze.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::creator::impl::result
@@ -68,8 +71,7 @@ sanguis::creator::impl::generators::maze(
 		_parameters.randgen()
 	);
 
-	sanguis::creator::grid
-	grid{
+	sanguis::creator::grid grid{
 		sanguis::creator::impl::maze_to_tile_grid(
 			initial_maze,
 			1u,
@@ -79,8 +81,7 @@ sanguis::creator::impl::generators::maze(
 		)
 	};
 
-	sanguis::creator::opening_container_array const
-	openings(
+	sanguis::creator::opening_container_array openings(
 		sanguis::creator::impl::place_openings(
 			grid,
 			_parameters.randgen(),
@@ -88,8 +89,7 @@ sanguis::creator::impl::generators::maze(
 		)
 	);
 
-	sanguis::creator::spawn_container const
-	spawners{
+	sanguis::creator::spawn_container spawners{
 		sanguis::creator::impl::place_spawners(
 			_parameters.log(),
 			grid,
@@ -111,25 +111,34 @@ sanguis::creator::impl::generators::maze(
 		)
 	};
 
-	sanguis::creator::destructible_container const
-	destructibles{
+	sanguis::creator::destructible_container destructibles{
 		sanguis::creator::impl::place_destructibles(
 			grid,
 			_parameters.randgen()
 		)
 	};
 
-	sanguis::creator::background_grid const grid_bg(
+	sanguis::creator::background_grid grid_bg(
 		grid.size(),
 		sanguis::creator::background_tile::asphalt
 	);
 
 	return
 		sanguis::creator::impl::result(
-			grid,
-			grid_bg,
-			openings,
-			spawners,
-			destructibles
+			std::move(
+				grid
+			),
+			std::move(
+				grid_bg
+			),
+			std::move(
+				openings
+			),
+			std::move(
+				spawners
+			),
+			std::move(
+				destructibles
+			)
 		);
 }

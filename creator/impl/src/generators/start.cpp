@@ -31,6 +31,9 @@
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::creator::impl::result
@@ -154,8 +157,12 @@ sanguis::creator::impl::generators::start(
 
 	return
 		sanguis::creator::impl::result{
-			grid,
-			bg_grid,
+			std::move(
+				grid
+			),
+			std::move(
+				bg_grid
+			),
 			fcppt::enum_::array_init<
 				sanguis::creator::opening_container_array
 			>(

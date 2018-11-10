@@ -28,6 +28,24 @@ public:
 		sanguis::messages::server::unique_ptr &&
 	);
 
+	message(
+		message &&
+	);
+
+	message(
+		message const &
+	);
+
+	message &
+	operator=(
+		message &&
+	);
+
+	message &
+	operator=(
+		message const &
+	);
+
 	~message()
 	override;
 

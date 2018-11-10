@@ -3,7 +3,6 @@
 
 #include <sanguis/server/events/disconnect_fwd.hpp>
 #include <alda/net/id.hpp>
-#include <fcppt/nonassignable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/event.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -22,19 +21,37 @@ class disconnect
 		disconnect
 	>
 {
-	FCPPT_NONASSIGNABLE(
-		disconnect
-	);
 public:
 	explicit
 	disconnect(
 		alda::net::id
 	);
 
+	disconnect(
+		disconnect &&
+	);
+
+	disconnect(
+		disconnect const &
+	);
+
+	disconnect &
+	operator=(
+		disconnect &&
+	);
+
+	disconnect &
+	operator=(
+		disconnect const &
+	);
+
+	~disconnect()
+	override;
+
 	alda::net::id
 	id() const;
 private:
-	alda::net::id const id_;
+	alda::net::id id_;
 };
 
 }

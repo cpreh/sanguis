@@ -1,13 +1,9 @@
 #include <sanguis/server/entities/auto_weak_link.hpp>
-#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_links.hpp>
-#include <sanguis/server/entities/ifaces/with_links.hpp>
 
 
 sanguis::server::entities::with_links::with_links()
 :
-	sanguis::server::entities::base(),
-	sanguis::server::entities::ifaces::with_links(),
 	links_()
 {
 }

@@ -26,6 +26,9 @@
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/type_iso/enum.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::creator::impl::result
@@ -47,8 +50,7 @@ sanguis::creator::impl::generators::graveyard(
 		_parameters.randgen()
 	);
 
-	sanguis::creator::grid
-	grid{
+	sanguis::creator::grid grid{
 		sanguis::creator::impl::maze_to_tile_grid(
 			initial_maze,
 			1u,
@@ -58,8 +60,7 @@ sanguis::creator::impl::generators::graveyard(
 		)
 	};
 
-	sanguis::creator::opening_container_array const
-	openings(
+	sanguis::creator::opening_container_array openings(
 		sanguis::creator::impl::place_openings(
 			grid,
 			_parameters.randgen(),
@@ -173,8 +174,7 @@ sanguis::creator::impl::generators::graveyard(
 				random_grave();
 	}
 
-	sanguis::creator::spawn_container const
-	spawners{
+	sanguis::creator::spawn_container spawners{
 		sanguis::creator::impl::place_spawners(
 			_parameters.log(),
 			grid,
@@ -194,10 +194,18 @@ sanguis::creator::impl::generators::graveyard(
 
 	return
 		sanguis::creator::impl::result(
-			grid,
-			grid_bg,
-			openings,
-			spawners,
+			std::move(
+				grid
+			),
+			std::move(
+				grid_bg
+			),
+			std::move(
+				openings
+			),
+			std::move(
+				spawners
+			),
 			sanguis::creator::destructible_container() // TODO
 		);
 }

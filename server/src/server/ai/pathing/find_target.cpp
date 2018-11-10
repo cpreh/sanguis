@@ -108,7 +108,7 @@ sanguis::server::ai::pathing::find_target(
 		positions.pop();
 
 		for(
-			sanguis::creator::pos const pos
+			sanguis::creator::pos const &pos
 			:
 			fcppt::container::grid::neumann_neighbors(
 				cur

@@ -7,7 +7,7 @@
 #include <sanguis/client/draw2d/entities/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
 #include <sanguis/client/load/model/collection_fwd.hpp>
-#include <fcppt/nonassignable.hpp>
+#include <fcppt/reference_impl.hpp>
 
 
 namespace sanguis
@@ -21,9 +21,6 @@ namespace entities
 
 class load_parameters
 {
-	FCPPT_NONASSIGNABLE(
-		load_parameters
-	);
 public:
 	load_parameters(
 		sanguis::diff_clock const &,
@@ -48,15 +45,25 @@ public:
 	sanguis::client::load::model::collection const &
 	collection() const;
 private:
-	sanguis::diff_clock const &diff_clock_;
+	fcppt::reference<
+		sanguis::diff_clock const
+	> diff_clock_;
 
-	sanguis::random_generator &random_generator_;
+	fcppt::reference<
+		sanguis::random_generator
+	> random_generator_;
 
-	sanguis::client::sound_manager &sound_manager_;
+	fcppt::reference<
+		sanguis::client::sound_manager
+	> sound_manager_;
 
-	sanguis::client::draw2d::sprite::normal::system &normal_system_;
+	fcppt::reference<
+		sanguis::client::draw2d::sprite::normal::system
+	> normal_system_;
 
-	sanguis::client::load::model::collection const &collection_;
+	fcppt::reference<
+		sanguis::client::load::model::collection const
+	> collection_;
 };
 
 }

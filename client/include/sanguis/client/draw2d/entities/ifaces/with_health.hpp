@@ -26,7 +26,7 @@ protected:
 	with_health();
 
 	virtual
-	~with_health() = 0;
+	~with_health();
 public:
 	virtual
 	void

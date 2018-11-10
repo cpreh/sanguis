@@ -8,6 +8,9 @@
 #include <sanguis/creator/impl/generators/maze.hpp>
 #include <sanguis/creator/impl/generators/rooms.hpp>
 #include <sanguis/creator/impl/generators/start.hpp>
+#include <fcppt/preprocessor/disable_clang_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -15,6 +18,10 @@
 
 namespace
 {
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_CLANG_WARNING(-Wglobal-constructors)
+FCPPT_PP_DISABLE_CLANG_WARNING(-Wexit-time-destructors)
 
 sanguis::creator::impl::generator_map_type const generators{
 	std::make_pair(
@@ -34,6 +41,8 @@ sanguis::creator::impl::generator_map_type const generators{
 		&sanguis::creator::impl::generators::rooms
 	)
 };
+
+FCPPT_PP_POP_WARNING
 
 }
 

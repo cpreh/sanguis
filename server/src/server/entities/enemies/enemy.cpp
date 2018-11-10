@@ -17,6 +17,7 @@
 #include <sanguis/messages/roles/speed.hpp>
 #include <sanguis/messages/roles/weapon_status.hpp>
 #include <sanguis/messages/server/add_enemy.hpp>
+#include <sanguis/messages/server/base.hpp>
 #include <sanguis/messages/server/create_ptr.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/server/direction.hpp>

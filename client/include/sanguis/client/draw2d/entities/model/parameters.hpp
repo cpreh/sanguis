@@ -13,7 +13,7 @@
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/draw2d/sprite/normal/color.hpp>
 #include <sanguis/load/model/path.hpp>
-#include <fcppt/nonassignable.hpp>
+#include <fcppt/reference_impl.hpp>
 
 
 namespace sanguis
@@ -29,9 +29,6 @@ namespace model
 
 class parameters
 {
-	FCPPT_NONASSIGNABLE(
-		parameters
-	);
 public:
 	parameters(
 		sanguis::client::draw2d::entities::load_parameters const &,
@@ -80,27 +77,29 @@ public:
 	sanguis::client::draw2d::sprite::normal::color
 	color() const;
 private:
-	sanguis::client::draw2d::entities::load_parameters const &load_parameters_;
+	fcppt::reference<
+		sanguis::client::draw2d::entities::load_parameters const
+	> load_parameters_;
 
-	sanguis::load::model::path const path_;
+	sanguis::load::model::path path_;
 
-	sanguis::client::draw2d::entities::order_function const order_function_;
+	sanguis::client::draw2d::entities::order_function order_function_;
 
-	sanguis::client::optional_health_pair const health_pair_;
+	sanguis::client::optional_health_pair health_pair_;
 
-	sanguis::client::draw2d::entities::model::decay_option const decay_option_;
+	sanguis::client::draw2d::entities::model::decay_option decay_option_;
 
-	sanguis::optional_primary_weapon_type const primary_weapon_type_;
+	sanguis::optional_primary_weapon_type primary_weapon_type_;
 
-	sanguis::weapon_status const weapon_status_;
+	sanguis::weapon_status weapon_status_;
 
-	sanguis::client::draw2d::speed const speed_;
+	sanguis::client::draw2d::speed speed_;
 
-	sanguis::client::draw2d::sprite::center const center_;
+	sanguis::client::draw2d::sprite::center center_;
 
-	sanguis::client::draw2d::sprite::rotation const rotation_;
+	sanguis::client::draw2d::sprite::rotation rotation_;
 
-	sanguis::client::draw2d::sprite::normal::color const color_;
+	sanguis::client::draw2d::sprite::normal::color color_;
 };
 
 }

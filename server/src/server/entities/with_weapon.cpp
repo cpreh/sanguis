@@ -13,11 +13,6 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/optional_with_weapon_ref.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
-#include <sanguis/server/entities/ifaces/with_angle.hpp>
-#include <sanguis/server/entities/ifaces/with_id.hpp>
-#include <sanguis/server/entities/ifaces/with_links.hpp>
-#include <sanguis/server/entities/ifaces/with_team.hpp>
-#include <sanguis/server/entities/ifaces/with_weapon.hpp>
 #include <sanguis/server/entities/property/always_max.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/const_optional_ref.hpp>
@@ -51,12 +46,6 @@ sanguis::server::entities::with_weapon::with_weapon(
 	sanguis::server::weapons::irs const _irs
 )
 :
-	sanguis::server::entities::base(),
-	sanguis::server::entities::ifaces::with_angle(),
-	sanguis::server::entities::ifaces::with_id(),
-	sanguis::server::entities::ifaces::with_links(),
-	sanguis::server::entities::ifaces::with_weapon(),
-	sanguis::server::entities::ifaces::with_team(),
 	primary_weapon_(),
 	secondary_weapon_(),
 	target_(),

@@ -29,6 +29,24 @@ public:
 		sanguis::server::player_id
 	);
 
+	message(
+		message &&
+	);
+
+	message(
+		message const &
+	);
+
+	message &
+	operator=(
+		message &&
+	);
+
+	message &
+	operator=(
+		message const &
+	);
+
 	~message()
 	override;
 

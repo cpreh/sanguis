@@ -27,7 +27,7 @@ protected:
 	base();
 public:
 	virtual
-	~base() =0;
+	~base();
 
 	virtual
 	sanguis::client::draw2d::scene::state::optional_scoped_unique_ptr

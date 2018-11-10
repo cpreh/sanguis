@@ -454,7 +454,7 @@ sanguis::collision::impl::world::simple::object::move_bodies(
 		body_sets_
 	)
 		for(
-			body_reference const body_ref
+			body_reference const &body_ref
 			:
 			body_list
 		)
@@ -575,7 +575,7 @@ sanguis::collision::impl::world::simple::object::body_collisions() const
 		);
 
 		for(
-			body_reference const body1
+			body_reference const &body1
 			:
 			body_sets_[
 				body_group
@@ -669,7 +669,7 @@ sanguis::collision::impl::world::simple::object::update_ghosts()
 		);
 
 		for(
-			ghost_reference const ghost
+			ghost_reference const &ghost
 			:
 			ghost_sets_[
 				ghost_group
@@ -810,7 +810,7 @@ sanguis::collision::impl::world::simple::object::remove_body(
 			)
 		)
 			for(
-				ghost_reference const ghost
+				ghost_reference const &ghost
 				:
 				ghost_sets_[
 					ghost_group

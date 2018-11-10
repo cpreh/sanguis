@@ -33,7 +33,6 @@ sanguis::server::entities::with_auras::with_auras(
 	sanguis::server::auras::container &&_auras
 )
 :
-	sanguis::server::entities::with_ghosts(),
 	auras_(
 		std::move(
 			_auras

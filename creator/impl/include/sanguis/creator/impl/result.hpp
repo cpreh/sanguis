@@ -7,7 +7,6 @@
 #include <sanguis/creator/opening_container_array.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/impl/result_fwd.hpp>
-#include <fcppt/nonassignable.hpp>
 
 
 namespace sanguis
@@ -19,16 +18,13 @@ namespace impl
 
 class result
 {
-	FCPPT_NONASSIGNABLE(
-		result
-	);
 public:
 	result(
-		sanguis::creator::grid const &,
-		sanguis::creator::background_grid const &,
-		sanguis::creator::opening_container_array const &,
-		sanguis::creator::spawn_container const &,
-		sanguis::creator::destructible_container const &
+		sanguis::creator::grid &&,
+		sanguis::creator::background_grid &&,
+		sanguis::creator::opening_container_array &&,
+		sanguis::creator::spawn_container &&,
+		sanguis::creator::destructible_container &&
 	);
 
 	sanguis::creator::grid const &
@@ -46,15 +42,15 @@ public:
 	sanguis::creator::destructible_container const &
 	destructibles() const;
 private:
-	sanguis::creator::grid const grid_;
+	sanguis::creator::grid grid_;
 
-	sanguis::creator::background_grid const background_grid_;
+	sanguis::creator::background_grid background_grid_;
 
-	sanguis::creator::opening_container_array const openings_;
+	sanguis::creator::opening_container_array openings_;
 
-	sanguis::creator::spawn_container const spawns_;
+	sanguis::creator::spawn_container spawns_;
 
-	sanguis::creator::destructible_container const destructibles_;
+	sanguis::creator::destructible_container destructibles_;
 };
 
 }

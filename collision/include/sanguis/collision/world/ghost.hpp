@@ -22,7 +22,7 @@ protected:
 	ghost();
 public:
 	virtual
-	~ghost() = 0;
+	~ghost();
 
 	virtual
 	void

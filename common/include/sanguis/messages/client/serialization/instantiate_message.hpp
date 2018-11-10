@@ -3,7 +3,6 @@
 
 #include <sanguis/messages/client/serialization/global_context.hpp>
 #include <sanguis/messages/client/types/alda_type.hpp>
-#include <alda/message/instantiate_concrete.hpp>
 #include <alda/serialization/instantiate_message.hpp>
 #include <alda/serialization/register_message.hpp>
 

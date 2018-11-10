@@ -47,7 +47,7 @@ closest_entity(
 	optional_space_unit distance;
 
 	for(
-		auto const entity
+		auto const &entity
 		:
 		_entities
 	)

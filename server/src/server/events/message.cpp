@@ -24,6 +24,28 @@ sanguis::server::events::message::message(
 {
 }
 
+sanguis::server::events::message::message(
+	message &&
+)
+= default;
+
+sanguis::server::events::message::message(
+	message const &
+)
+= default;
+
+sanguis::server::events::message &
+sanguis::server::events::message::operator=(
+	message &&
+)
+= default;
+
+sanguis::server::events::message &
+sanguis::server::events::message::operator=(
+	message const &
+)
+= default;
+
 sanguis::server::events::message::~message()
 {
 }

@@ -21,12 +21,12 @@ sanguis::server::weapons::log const &
 sanguis::server::weapons::common_parameters::log() const
 {
 	return
-		log_;
+		log_.get();
 }
 
 sanguis::random_generator &
 sanguis::server::weapons::common_parameters::random_generator() const
 {
 	return
-		random_generator_;
+		random_generator_.get();
 }

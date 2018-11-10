@@ -4,7 +4,7 @@
 #include <sanguis/slowdown.hpp>
 #include <sanguis/messages/client/base.hpp>
 #include <sanguis/messages/client/unique_ptr.hpp>
-#include <sanguis/messages/server/base_fwd.hpp>
+#include <sanguis/messages/server/base.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
 #include <sanguis/net/append_to_circular_buffer.hpp>
 #include <sanguis/net/receive_buffer_size.hpp>

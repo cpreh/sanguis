@@ -56,7 +56,7 @@
 #include <sanguis/messages/roles/world_name.hpp>
 #include <sanguis/messages/server/add_aura.hpp>
 #include <sanguis/messages/server/add_buff.hpp>
-#include <sanguis/messages/server/base_fwd.hpp>
+#include <sanguis/messages/server/base.hpp>
 #include <sanguis/messages/server/change_weapon.hpp>
 #include <sanguis/messages/server/change_world.hpp>
 #include <sanguis/messages/server/create.hpp>
@@ -972,7 +972,7 @@ sanguis::server::world::object::request_transfer(
 			continue;
 
 		for(
-			sanguis::creator::opening const opening
+			sanguis::creator::opening const &opening
 			:
 			info_.openings()[
 				opening_type
