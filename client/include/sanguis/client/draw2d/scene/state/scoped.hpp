@@ -25,7 +25,7 @@ protected:
 	scoped();
 public:
 	virtual
-	~scoped() = 0;
+	~scoped();
 };
 
 }

@@ -24,7 +24,7 @@ protected:
 	with_links();
 public:
 	virtual
-	~with_links() = 0;
+	~with_links();
 
 	virtual
 	sanguis::server::entities::auto_weak_link

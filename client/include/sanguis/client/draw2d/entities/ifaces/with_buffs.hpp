@@ -25,7 +25,7 @@ protected:
 	with_buffs();
 
 	virtual
-	~with_buffs() = 0;
+	~with_buffs();
 public:
 	virtual
 	void

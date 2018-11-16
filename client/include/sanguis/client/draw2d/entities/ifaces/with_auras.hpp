@@ -25,7 +25,7 @@ protected:
 	with_auras();
 
 	virtual
-	~with_auras() = 0;
+	~with_auras();
 public:
 	virtual
 	void

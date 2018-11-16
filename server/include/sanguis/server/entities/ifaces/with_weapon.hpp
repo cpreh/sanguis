@@ -26,7 +26,7 @@ protected:
 	with_weapon();
 public:
 	virtual
-	~with_weapon() = 0;
+	~with_weapon();
 
 	virtual
 	sanguis::server::entities::property::always_max &

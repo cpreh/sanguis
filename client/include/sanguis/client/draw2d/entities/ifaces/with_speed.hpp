@@ -25,7 +25,7 @@ protected:
 	with_speed();
 
 	virtual
-	~with_speed() = 0;
+	~with_speed();
 public:
 	virtual
 	void

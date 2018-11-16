@@ -29,7 +29,7 @@ public:
 	) const = 0;
 
 	virtual
-	~environment() = 0;
+	~environment();
 };
 
 }

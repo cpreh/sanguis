@@ -40,7 +40,7 @@ public:
 	= 0;
 
 	virtual
-	~with_velocity() = 0;
+	~with_velocity();
 };
 
 }

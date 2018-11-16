@@ -33,7 +33,7 @@ public:
 	) = 0;
 
 	virtual
-	~with_angle() = 0;
+	~with_angle();
 };
 
 }

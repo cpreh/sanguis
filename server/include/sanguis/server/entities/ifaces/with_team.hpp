@@ -27,7 +27,7 @@ public:
 	team() const = 0;
 
 	virtual
-	~with_team() = 0;
+	~with_team();
 };
 
 }

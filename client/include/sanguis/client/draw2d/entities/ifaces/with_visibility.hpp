@@ -24,7 +24,7 @@ protected:
 	with_visibility();
 
 	virtual
-	~with_visibility() = 0;
+	~with_visibility();
 public:
 	virtual
 	void

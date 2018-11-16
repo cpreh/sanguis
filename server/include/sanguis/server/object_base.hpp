@@ -21,7 +21,7 @@ protected:
 public:
 	SANGUIS_SERVER_SYMBOL
 	virtual
-	~object_base() = 0;
+	~object_base();
 
 	virtual
 	void

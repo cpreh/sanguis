@@ -27,7 +27,7 @@ public:
 	radius() const = 0;
 
 	virtual
-	~with_radius() = 0;
+	~with_radius();
 };
 
 }

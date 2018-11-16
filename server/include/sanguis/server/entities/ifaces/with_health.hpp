@@ -24,7 +24,7 @@ protected:
 	with_health();
 public:
 	virtual
-	~with_health() = 0;
+	~with_health();
 
 	virtual
 	sanguis::server::entities::property::changeable &

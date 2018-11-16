@@ -25,7 +25,7 @@ protected:
 public:
 	SANGUIS_COLLISION_SYMBOL
 	virtual
-	~ghost_base() = 0;
+	~ghost_base();
 };
 
 }
