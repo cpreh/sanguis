@@ -3,7 +3,6 @@
 
 #include <sanguis/messages/server/base_fwd.hpp>
 #include <sanguis/messages/server/types/alda_type.hpp>
-#include <alda/message/base_decl.hpp>
 #include <alda/message/declare_base.hpp>
 #include <fcppt/preprocessor/disable_clang_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
