@@ -2,14 +2,14 @@
 #define SANGUIS_MESSAGES_CLIENT_DIRECTION_HPP_INCLUDED
 
 #include <sanguis/messages/adapted_types/vector2.hpp>
-#include <sanguis/messages/client/direction_fwd.hpp>
 #include <sanguis/messages/client/declare_message.hpp>
+#include <sanguis/messages/client/direction_fwd.hpp>
 #include <alda/bindings/record_variadic.hpp>
 #include <alda/message/object.hpp>
-#include <fcppt/record/element.hpp>
 #include <fcppt/preprocessor/disable_clang_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
+#include <fcppt/record/element.hpp>
 
 
 FCPPT_PP_PUSH_WARNING

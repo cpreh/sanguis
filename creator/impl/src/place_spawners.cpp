@@ -25,9 +25,9 @@
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
-#include <fcppt/log/out.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/object_fwd.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/random/wrapper/make_uniform_container_advanced.hpp>
 

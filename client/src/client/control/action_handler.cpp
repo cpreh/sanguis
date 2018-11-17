@@ -39,8 +39,8 @@
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/unit.hpp>
 #include <fcppt/assert/unreachable.hpp>
-#include <fcppt/container/make.hpp>
 #include <fcppt/cast/size_fun.hpp>
+#include <fcppt/container/make.hpp>
 #include <fcppt/math/clamp.hpp>
 #include <fcppt/math/vector/null.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>

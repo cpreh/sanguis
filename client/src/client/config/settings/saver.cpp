@@ -2,8 +2,8 @@
 #include <sanguis/client/config/settings/saver.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/log/out.hpp>
 #include <fcppt/log/fatal.hpp>
+#include <fcppt/log/out.hpp>
 
 
 sanguis::client::config::settings::saver::saver(

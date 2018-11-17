@@ -57,9 +57,9 @@
 #include <fcppt/container/grid/output.hpp>
 #include <fcppt/enum/array.hpp>
 #include <fcppt/enum/array_init.hpp>
-#include <fcppt/log/out.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/level.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/math/to_array.hpp>
 #include <fcppt/math/box/center.hpp>
 #include <fcppt/math/box/distance.hpp>

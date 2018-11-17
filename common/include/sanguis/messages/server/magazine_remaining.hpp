@@ -3,8 +3,8 @@
 
 #include <sanguis/messages/adapted_types/is_primary_weapon.hpp>
 #include <sanguis/messages/adapted_types/magazine_size.hpp>
-#include <sanguis/messages/server/magazine_remaining_fwd.hpp>
 #include <sanguis/messages/server/declare_message.hpp>
+#include <sanguis/messages/server/magazine_remaining_fwd.hpp>
 #include <alda/bindings/record_variadic.hpp>
 #include <alda/message/object.hpp>
 #include <fcppt/preprocessor/disable_clang_warning.hpp>

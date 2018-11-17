@@ -42,8 +42,8 @@
 #include <sge/rucksack/dim.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/output_to_string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/output_to_string.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/assert/optional_error.hpp>

@@ -6,10 +6,10 @@
 #include <sanguis/messages/client/info_fwd.hpp>
 #include <alda/bindings/record_variadic.hpp>
 #include <alda/message/object.hpp>
-#include <fcppt/record/element.hpp>
 #include <fcppt/preprocessor/disable_clang_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
+#include <fcppt/record/element.hpp>
 
 
 FCPPT_PP_PUSH_WARNING

@@ -6,8 +6,8 @@
 #include <sanguis/messages/adapted_types/seed.hpp>
 #include <sanguis/messages/adapted_types/string.hpp>
 #include <sanguis/messages/adapted_types/world_id.hpp>
-#include <sanguis/messages/server/declare_message.hpp>
 #include <sanguis/messages/server/change_world_fwd.hpp>
+#include <sanguis/messages/server/declare_message.hpp>
 #include <alda/bindings/record_variadic.hpp>
 #include <alda/message/object.hpp>
 #include <fcppt/preprocessor/disable_clang_warning.hpp>

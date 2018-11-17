@@ -20,10 +20,10 @@
 #include <sanguis/server/states/unpaused.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unit.hpp>
-#include <fcppt/log/out.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/result.hpp>
