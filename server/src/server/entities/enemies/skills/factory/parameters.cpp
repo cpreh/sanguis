@@ -26,14 +26,14 @@ sanguis::diff_clock const &
 sanguis::server::entities::enemies::skills::factory::parameters::diff_clock() const
 {
 	return
-		diff_clock_;
+		diff_clock_.get();
 }
 
 sanguis::random_generator &
 sanguis::server::entities::enemies::skills::factory::parameters::random_generator() const
 {
 	return
-		random_generator_;
+		random_generator_.get();
 }
 
 sanguis::server::entities::enemies::difficulty

@@ -3,7 +3,7 @@
 
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/entities/enemies/modifiers/parameters_fwd.hpp>
-#include <fcppt/nonassignable.hpp>
+#include <fcppt/reference_impl.hpp>
 
 
 namespace sanguis
@@ -19,9 +19,6 @@ namespace modifiers
 
 class parameters
 {
-	FCPPT_NONASSIGNABLE(
-		parameters
-	);
 public:
 	explicit
 	parameters(
@@ -31,7 +28,9 @@ public:
 	sanguis::random_generator &
 	random_generator() const;
 private:
-	sanguis::random_generator &random_generator_;
+	fcppt::reference<
+		sanguis::random_generator
+	> random_generator_;
 };
 
 }

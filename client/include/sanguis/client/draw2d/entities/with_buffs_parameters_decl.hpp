@@ -5,7 +5,7 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
 #include <sanguis/client/load/model/collection_fwd.hpp>
-#include <fcppt/nonassignable.hpp>
+#include <fcppt/reference_impl.hpp>
 
 
 namespace sanguis
@@ -22,9 +22,6 @@ template<
 >
 class with_buffs_parameters
 {
-	FCPPT_NONASSIGNABLE(
-		with_buffs_parameters
-	);
 public:
 	with_buffs_parameters(
 		sanguis::diff_clock const &,
@@ -49,11 +46,17 @@ public:
 	Base const &
 	base() const;
 private:
-	sanguis::diff_clock const &diff_clock_;
+	fcppt::reference<
+		sanguis::diff_clock const
+	> diff_clock_;
 
-	sanguis::client::draw2d::sprite::normal::system &normal_system_;
+	fcppt::reference<
+		sanguis::client::draw2d::sprite::normal::system
+	> normal_system_;
 
-	sanguis::client::load::model::collection const &model_collection_;
+	fcppt::reference<
+		sanguis::client::load::model::collection const
+	> model_collection_;
 
 	sanguis::buff_type_vector const buffs_;
 

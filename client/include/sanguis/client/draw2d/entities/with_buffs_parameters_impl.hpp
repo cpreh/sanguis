@@ -48,7 +48,7 @@ sanguis::client::draw2d::entities::with_buffs_parameters<
 >::diff_clock() const
 {
 	return
-		diff_clock_;
+		diff_clock_.get();
 }
 
 template<
@@ -60,7 +60,7 @@ sanguis::client::draw2d::entities::with_buffs_parameters<
 >::normal_system() const
 {
 	return
-		normal_system_;
+		normal_system_.get();
 }
 
 template<
@@ -72,7 +72,7 @@ sanguis::client::draw2d::entities::with_buffs_parameters<
 >::model_collection() const
 {
 	return
-		model_collection_;
+		model_collection_.get();
 }
 
 template<
@@ -91,7 +91,8 @@ template<
 	typename Base
 >
 Base const &
-sanguis::client::draw2d::entities::with_buffs_parameters< Base
+sanguis::client::draw2d::entities::with_buffs_parameters<
+	Base
 >::base() const
 {
 	return

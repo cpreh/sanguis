@@ -6,7 +6,6 @@
 #include <sanguis/client/draw2d/collide_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/fradius.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
-#include <fcppt/nonassignable.hpp>
 
 
 namespace sanguis
@@ -18,9 +17,6 @@ namespace draw2d
 
 class collide_parameters
 {
-	FCPPT_NONASSIGNABLE(
-		collide_parameters
-	);
 public:
 	collide_parameters(
 		sanguis::duration,
@@ -41,13 +37,13 @@ public:
 	sanguis::client::draw2d::fradius
 	radius() const;
 private:
-	sanguis::duration const duration_;
+	sanguis::duration duration_;
 
-	sanguis::client::draw2d::center const center_;
+	sanguis::client::draw2d::center center_;
 
-	sanguis::client::draw2d::speed const speed_;
+	sanguis::client::draw2d::speed speed_;
 
-	sanguis::client::draw2d::fradius const radius_;
+	sanguis::client::draw2d::fradius radius_;
 };
 
 }

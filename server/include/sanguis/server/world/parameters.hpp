@@ -6,7 +6,7 @@
 #include <sanguis/server/weapons/common_parameters.hpp>
 #include <sanguis/server/world/context_fwd.hpp>
 #include <sanguis/server/world/parameters_fwd.hpp>
-#include <fcppt/nonassignable.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/log/context_fwd.hpp>
 
 
@@ -19,9 +19,6 @@ namespace world
 
 class parameters
 {
-	FCPPT_NONASSIGNABLE(
-		parameters
-	);
 public:
 	parameters(
 		fcppt::log::context &,
@@ -46,15 +43,23 @@ public:
 	sanguis::server::environment::load_context &
 	load_context() const;
 private:
-	fcppt::log::context &log_context_;
+	fcppt::reference<
+		fcppt::log::context
+	> log_context_;
 
-	sanguis::random_generator &random_generator_;
+	fcppt::reference<
+		sanguis::random_generator
+	> random_generator_;
 
-	sanguis::server::weapons::common_parameters const weapon_parameters_;
+	sanguis::server::weapons::common_parameters weapon_parameters_;
 
-	sanguis::server::world::context &context_;
+	fcppt::reference<
+		sanguis::server::world::context
+	> context_;
 
-	sanguis::server::environment::load_context &load_context_;
+	fcppt::reference<
+		sanguis::server::environment::load_context
+	> load_context_;
 };
 
 }

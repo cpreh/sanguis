@@ -8,7 +8,7 @@
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
-#include <fcppt/nonassignable.hpp>
+#include <fcppt/reference_impl.hpp>
 
 
 namespace sanguis
@@ -20,9 +20,6 @@ namespace entities
 
 class transfer_parameters
 {
-	FCPPT_NONASSIGNABLE(
-		transfer_parameters
-	);
 public:
 	transfer_parameters(
 		sanguis::collision::log const &,
@@ -51,17 +48,23 @@ public:
 	sanguis::server::angle
 	angle() const;
 private:
-	sanguis::collision::log const &log_;
+	fcppt::reference<
+		sanguis::collision::log const
+	> log_;
 
-	sanguis::collision::world::object &world_;
+	fcppt::reference<
+		sanguis::collision::world::object
+	> world_;
 
-	sanguis::collision::world::created const created_;
+	sanguis::collision::world::created created_;
 
-	sanguis::creator::grid const &grid_;
+	fcppt::reference<
+		sanguis::creator::grid const
+	> grid_;
 
-	sanguis::server::center const center_;
+	sanguis::server::center center_;
 
-	sanguis::server::angle const angle_;
+	sanguis::server::angle angle_;
 };
 
 }

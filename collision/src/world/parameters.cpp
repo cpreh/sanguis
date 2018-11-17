@@ -16,5 +16,5 @@ sanguis::creator::grid const &
 sanguis::collision::world::parameters::grid() const
 {
 	return
-		grid_;
+		grid_.get();
 }

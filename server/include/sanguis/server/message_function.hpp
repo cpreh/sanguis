@@ -3,7 +3,7 @@
 
 #include <sanguis/messages/call/result.hpp>
 #include <sanguis/server/player_id.hpp>
-#include <fcppt/nonassignable.hpp>
+#include <fcppt/reference_impl.hpp>
 
 
 namespace sanguis
@@ -16,9 +16,6 @@ template<
 >
 class message_function
 {
-	FCPPT_NONASSIGNABLE(
-		message_function
-	);
 public:
 	typedef
 	sanguis::messages::call::result
@@ -47,13 +44,15 @@ public:
 	) const
 	{
 		return
-			state_(
+			state_.get()(
 				id_,
 				_message
 			);
 	}
 private:
-	State &state_;
+	fcppt::reference<
+		State
+	> state_;
 
 	sanguis::server::player_id const id_;
 };

@@ -33,7 +33,7 @@ sanguis::server::environment::object &
 sanguis::server::weapons::attack::environment() const
 {
 	return
-		environment_;
+		environment_.get();
 }
 
 sanguis::server::weapons::target const &

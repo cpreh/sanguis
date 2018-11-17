@@ -52,5 +52,5 @@ sanguis::collision::world::ghost_base &
 sanguis::collision::world::ghost_parameters::ghost_base() const
 {
 	return
-		ghost_base_;
+		ghost_base_.get();
 }

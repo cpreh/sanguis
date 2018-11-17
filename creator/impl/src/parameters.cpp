@@ -31,14 +31,14 @@ fcppt::log::object &
 sanguis::creator::impl::parameters::log() const
 {
 	return
-		log_;
+		log_.get();
 }
 
 sanguis::creator::impl::random::generator &
 sanguis::creator::impl::parameters::randgen() const
 {
 	return
-		randgen_;
+		randgen_.get();
 }
 
 sanguis::creator::spawn_boss

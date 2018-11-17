@@ -5,7 +5,6 @@
 #include <sanguis/server/entities/doodad_unique_ptr.hpp>
 #include <sanguis/server/entities/simple_unique_ptr.hpp>
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
-#include <fcppt/nonassignable.hpp>
 #include <fcppt/algorithm/update_action_fwd.hpp>
 
 
@@ -18,9 +17,6 @@ namespace world
 
 class update_entity
 {
-	FCPPT_NONASSIGNABLE(
-		update_entity
-	);
 public:
 	explicit
 	update_entity(
@@ -50,7 +46,7 @@ private:
 		T const &
 	) const;
 
-	sanguis::duration const elapsed_time_;
+	sanguis::duration elapsed_time_;
 };
 
 }

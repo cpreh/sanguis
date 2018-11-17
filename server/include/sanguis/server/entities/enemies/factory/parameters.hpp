@@ -10,7 +10,7 @@
 #include <sanguis/server/entities/enemies/factory/parameters_fwd.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/weapons/common_parameters.hpp>
-#include <fcppt/nonassignable.hpp>
+#include <fcppt/reference_impl.hpp>
 
 
 namespace sanguis
@@ -26,9 +26,6 @@ namespace factory
 
 class parameters
 {
-	FCPPT_NONASSIGNABLE(
-		parameters
-	);
 public:
 	parameters(
 		sanguis::random_generator &,
@@ -65,21 +62,25 @@ public:
 	sanguis::server::entities::enemies::special_chance
 	special_chance() const;
 private:
-	sanguis::random_generator &random_generator_;
+	fcppt::reference<
+		sanguis::random_generator
+	> random_generator_;
 
-	sanguis::server::weapons::common_parameters const weapon_parameters_;
+	sanguis::server::weapons::common_parameters weapon_parameters_;
 
-	sanguis::creator::enemy_type const enemy_type_;
+	sanguis::creator::enemy_type enemy_type_;
 
-	sanguis::creator::enemy_kind const enemy_kind_;
+	sanguis::creator::enemy_kind enemy_kind_;
 
-	sanguis::server::entities::enemies::difficulty const difficulty_;
+	sanguis::server::entities::enemies::difficulty difficulty_;
 
-	sanguis::server::environment::load_context &load_context_;
+	fcppt::reference<
+		sanguis::server::environment::load_context
+	> load_context_;
 
-	sanguis::server::entities::spawn_owner const spawn_owner_;
+	sanguis::server::entities::spawn_owner spawn_owner_;
 
-	sanguis::server::entities::enemies::special_chance const special_chance_;
+	sanguis::server::entities::enemies::special_chance special_chance_;
 };
 
 }

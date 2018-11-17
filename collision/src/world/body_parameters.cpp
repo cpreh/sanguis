@@ -47,7 +47,7 @@ fcppt::log::object &
 sanguis::collision::world::body_parameters::log() const
 {
 	return
-		log_;
+		log_.get();
 }
 
 sanguis::collision::center
@@ -89,5 +89,5 @@ sanguis::collision::world::body_base &
 sanguis::collision::world::body_parameters::body_base() const
 {
 	return
-		body_base_;
+		body_base_.get();
 }

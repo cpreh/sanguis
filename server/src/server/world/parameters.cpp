@@ -36,14 +36,14 @@ fcppt::log::context &
 sanguis::server::world::parameters::log_context() const
 {
 	return
-		log_context_;
+		log_context_.get();
 }
 
 sanguis::random_generator &
 sanguis::server::world::parameters::random_generator() const
 {
 	return
-		random_generator_;
+		random_generator_.get();
 }
 
 sanguis::server::weapons::common_parameters const &
@@ -57,12 +57,12 @@ sanguis::server::world::context &
 sanguis::server::world::parameters::context() const
 {
 	return
-		context_;
+		context_.get();
 }
 
 sanguis::server::environment::load_context &
 sanguis::server::world::parameters::load_context() const
 {
 	return
-		load_context_;
+		load_context_.get();
 }

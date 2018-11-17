@@ -7,7 +7,6 @@
 #include <sge/gui/renderer/base_fwd.hpp>
 #include <sge/gui/style/base_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
-#include <fcppt/nonassignable.hpp>
 
 
 sanguis::client::draw2d::scene::hover::parameters::parameters(
@@ -52,42 +51,42 @@ sge::gui::style::base const &
 sanguis::client::draw2d::scene::hover::parameters::gui_style() const
 {
 	return
-		gui_style_;
+		gui_style_.get();
 }
 
 sge::gui::renderer::base &
 sanguis::client::draw2d::scene::hover::parameters::gui_renderer() const
 {
 	return
-		gui_renderer_;
+		gui_renderer_.get();
 }
 
 sge::renderer::device::ffp &
 sanguis::client::draw2d::scene::hover::parameters::renderer() const
 {
 	return
-		renderer_;
+		renderer_.get();
 }
 
 sge::font::object &
 sanguis::client::draw2d::scene::hover::parameters::font() const
 {
 	return
-		font_;
+		font_.get();
 }
 
 sanguis::client::load::hud::context &
 sanguis::client::draw2d::scene::hover::parameters::load_context() const
 {
 	return
-		load_context_;
+		load_context_.get();
 }
 
 sanguis::client::weapon_pair const &
 sanguis::client::draw2d::scene::hover::parameters::player_weapons() const
 {
 	return
-		player_weapons_;
+		player_weapons_.get();
 }
 
 sanguis::client::draw2d::sprite::center

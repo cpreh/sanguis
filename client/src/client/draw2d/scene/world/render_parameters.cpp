@@ -22,7 +22,7 @@ sge::renderer::context::core &
 sanguis::client::draw2d::scene::world::render_parameters::render_context() const
 {
 	return
-		render_context_;
+		render_context_.get();
 }
 
 sanguis::client::draw2d::translation

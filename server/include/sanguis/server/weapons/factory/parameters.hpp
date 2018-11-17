@@ -6,7 +6,6 @@
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/weapons/common_parameters.hpp>
 #include <sanguis/server/weapons/factory/parameters_fwd.hpp>
-#include <fcppt/nonassignable.hpp>
 
 
 namespace sanguis
@@ -20,9 +19,6 @@ namespace factory
 
 class parameters
 {
-	FCPPT_NONASSIGNABLE(
-		parameters
-	);
 public:
 	parameters(
 		sanguis::server::weapons::common_parameters const &,
@@ -42,11 +38,11 @@ public:
 	sanguis::server::entities::enemies::difficulty
 	difficulty() const;
 private:
-	sanguis::server::weapons::common_parameters const common_parameters_;
+	sanguis::server::weapons::common_parameters common_parameters_;
 
-	sanguis::weapon_type const weapon_type_;
+	sanguis::weapon_type weapon_type_;
 
-	sanguis::server::entities::enemies::difficulty const difficulty_;
+	sanguis::server::entities::enemies::difficulty difficulty_;
 };
 
 }

@@ -41,14 +41,14 @@ sanguis::collision::log const &
 sanguis::server::entities::transfer_parameters::log() const
 {
 	return
-		log_;
+		log_.get();
 }
 
 sanguis::collision::world::object &
 sanguis::server::entities::transfer_parameters::world() const
 {
 	return
-		world_;
+		world_.get();
 }
 
 sanguis::collision::world::created
@@ -62,7 +62,7 @@ sanguis::creator::grid const &
 sanguis::server::entities::transfer_parameters::grid() const
 {
 	return
-		grid_;
+		grid_.get();
 }
 
 sanguis::server::center

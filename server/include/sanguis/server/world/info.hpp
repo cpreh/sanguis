@@ -8,7 +8,6 @@
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/spawn_boss.hpp>
 #include <sanguis/server/world/info_fwd.hpp>
-#include <fcppt/nonassignable.hpp>
 
 
 namespace sanguis
@@ -20,9 +19,6 @@ namespace world
 
 class info
 {
-	FCPPT_NONASSIGNABLE(
-		info
-	);
 public:
 	info(
 		sanguis::world_id,
@@ -51,17 +47,17 @@ public:
 	sanguis::creator::opening_container_array const &
 	openings() const;
 private:
-	sanguis::world_id const world_id_;
+	sanguis::world_id world_id_;
 
-	sanguis::world_name const world_name_;
+	sanguis::world_name world_name_;
 
-	sanguis::creator::seed const seed_;
+	sanguis::creator::seed seed_;
 
-	sanguis::creator::name const generator_name_;
+	sanguis::creator::name generator_name_;
 
-	sanguis::creator::spawn_boss const spawn_boss_;
+	sanguis::creator::spawn_boss spawn_boss_;
 
-	sanguis::creator::opening_container_array const openings_;
+	sanguis::creator::opening_container_array openings_;
 };
 
 }

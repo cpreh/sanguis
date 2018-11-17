@@ -4,7 +4,7 @@
 #include <sanguis/collision/symbol.hpp>
 #include <sanguis/collision/world/parameters_fwd.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
-#include <fcppt/nonassignable.hpp>
+#include <fcppt/reference_impl.hpp>
 
 
 namespace sanguis
@@ -16,9 +16,6 @@ namespace world
 
 class parameters
 {
-	FCPPT_NONASSIGNABLE(
-		parameters
-	);
 public:
 	SANGUIS_COLLISION_SYMBOL
 	explicit
@@ -29,7 +26,9 @@ public:
 	sanguis::creator::grid const &
 	grid() const;
 private:
-	sanguis::creator::grid const &grid_;
+	fcppt::reference<
+		sanguis::creator::grid const
+	> grid_;
 };
 
 }

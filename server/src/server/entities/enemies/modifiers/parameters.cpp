@@ -16,5 +16,5 @@ sanguis::random_generator &
 sanguis::server::entities::enemies::modifiers::parameters::random_generator() const
 {
 	return
-		random_generator_;
+		random_generator_.get();
 }

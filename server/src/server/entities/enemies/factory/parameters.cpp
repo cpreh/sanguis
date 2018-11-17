@@ -50,7 +50,7 @@ sanguis::random_generator &
 sanguis::server::entities::enemies::factory::parameters::random_generator() const
 {
 	return
-		random_generator_;
+		random_generator_.get();
 }
 
 sanguis::server::weapons::common_parameters const &
@@ -85,7 +85,7 @@ sanguis::server::environment::load_context &
 sanguis::server::entities::enemies::factory::parameters::load_context() const
 {
 	return
-		load_context_;
+		load_context_.get();
 }
 
 sanguis::server::entities::spawn_owner const &

@@ -5,7 +5,7 @@
 #include <sanguis/creator/spawn_boss.hpp>
 #include <sanguis/creator/impl/parameters_fwd.hpp>
 #include <sanguis/creator/impl/random/generator_fwd.hpp>
-#include <fcppt/nonassignable.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/log/object_fwd.hpp>
 
 
@@ -18,9 +18,6 @@ namespace impl
 
 class parameters
 {
-	FCPPT_NONASSIGNABLE(
-		parameters
-	);
 public:
 	parameters(
 		fcppt::log::object &,
@@ -41,13 +38,17 @@ public:
 	sanguis::creator::opening_count_array const &
 	opening_count_array() const;
 private:
-	fcppt::log::object &log_;
+	fcppt::reference<
+		fcppt::log::object
+	> log_;
 
-	sanguis::creator::impl::random::generator &randgen_;
+	fcppt::reference<
+		sanguis::creator::impl::random::generator
+	> randgen_;
 
-	sanguis::creator::spawn_boss const spawn_boss_;
+	sanguis::creator::spawn_boss spawn_boss_;
 
-	sanguis::creator::opening_count_array const opening_count_array_;
+	sanguis::creator::opening_count_array opening_count_array_;
 };
 
 }

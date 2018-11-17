@@ -4,7 +4,7 @@
 #include <sanguis/client/draw2d/translation.hpp>
 #include <sanguis/client/draw2d/scene/world/render_parameters_fwd.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
-#include <fcppt/nonassignable.hpp>
+#include <fcppt/reference_impl.hpp>
 
 
 namespace sanguis
@@ -20,9 +20,6 @@ namespace world
 
 class render_parameters
 {
-	FCPPT_NONASSIGNABLE(
-		render_parameters
-	);
 public:
 	render_parameters(
 		sge::renderer::context::core &,
@@ -35,9 +32,11 @@ public:
 	sanguis::client::draw2d::translation
 	translation() const;
 private:
-	sge::renderer::context::core &render_context_;
+	fcppt::reference<
+		sge::renderer::context::core
+	> render_context_;
 
-	sanguis::client::draw2d::translation const translation_;
+	sanguis::client::draw2d::translation translation_;
 };
 
 }

@@ -10,7 +10,7 @@
 #include <sanguis/collision/world/body_base_fwd.hpp>
 #include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters_fwd.hpp>
-#include <fcppt/nonassignable.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/log/object_fwd.hpp>
 
 
@@ -23,9 +23,6 @@ namespace world
 
 class body_parameters
 {
-	FCPPT_NONASSIGNABLE(
-		body_parameters
-	);
 public:
 	SANGUIS_COLLISION_SYMBOL
 	body_parameters(
@@ -59,19 +56,23 @@ public:
 	sanguis::collision::world::body_base &
 	body_base() const;
 private:
-	fcppt::log::object &log_;
+	fcppt::reference<
+		fcppt::log::object
+	> log_;
 
-	sanguis::collision::center const center_;
+	sanguis::collision::center center_;
 
-	sanguis::collision::speed const speed_;
+	sanguis::collision::speed speed_;
 
-	sanguis::collision::radius const radius_;
+	sanguis::collision::radius radius_;
 
-	sanguis::collision::optional_mass const mass_;
+	sanguis::collision::optional_mass mass_;
 
-	sanguis::collision::world::body_group const collision_group_;
+	sanguis::collision::world::body_group collision_group_;
 
-	sanguis::collision::world::body_base &body_base_;
+	fcppt::reference<
+		sanguis::collision::world::body_base
+	> body_base_;
 };
 
 }

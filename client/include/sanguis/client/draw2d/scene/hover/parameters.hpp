@@ -10,7 +10,7 @@
 #include <sge/gui/renderer/base_fwd.hpp>
 #include <sge/gui/style/base_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
-#include <fcppt/nonassignable.hpp>
+#include <fcppt/reference_impl.hpp>
 
 
 namespace sanguis
@@ -26,9 +26,6 @@ namespace hover
 
 class parameters
 {
-	FCPPT_NONASSIGNABLE(
-		parameters
-	);
 public:
 	parameters(
 		sge::gui::style::base const &,
@@ -65,21 +62,33 @@ public:
 	sanguis::client::draw2d::radius
 	radius() const;
 private:
-	sge::gui::style::base const &gui_style_;
+	fcppt::reference<
+		sge::gui::style::base const
+	> gui_style_;
 
-	sge::gui::renderer::base &gui_renderer_;
+	fcppt::reference<
+		sge::gui::renderer::base
+	> gui_renderer_;
 
-	sge::renderer::device::ffp &renderer_;
+	fcppt::reference<
+		sge::renderer::device::ffp
+	> renderer_;
 
-	sge::font::object &font_;
+	fcppt::reference<
+		sge::font::object
+	> font_;
 
-	sanguis::client::load::hud::context &load_context_;
+	fcppt::reference<
+		sanguis::client::load::hud::context
+	> load_context_;
 
-	sanguis::client::weapon_pair const &player_weapons_;
+	fcppt::reference<
+		sanguis::client::weapon_pair const
+	> player_weapons_;
 
-	sanguis::client::draw2d::sprite::center const center_;
+	sanguis::client::draw2d::sprite::center center_;
 
-	sanguis::client::draw2d::radius const radius_;
+	sanguis::client::draw2d::radius radius_;
 };
 
 }
