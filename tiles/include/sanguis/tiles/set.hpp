@@ -1,6 +1,7 @@
 #ifndef SANGUIS_TILES_SET_HPP_INCLUDED
 #define SANGUIS_TILES_SET_HPP_INCLUDED
 
+#include <sanguis/creator/instantiate_tile.hpp>
 #include <sanguis/creator/is_tile.hpp>
 #include <sanguis/tiles/orientation_map.hpp>
 #include <sanguis/tiles/pair_fwd.hpp>
