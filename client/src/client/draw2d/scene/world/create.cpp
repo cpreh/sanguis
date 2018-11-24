@@ -58,7 +58,7 @@ sanguis::client::draw2d::scene::world::create(
 			<< FCPPT_TEXT("World ")
 			<< _name
 			<< FCPPT_TEXT(" not implemented.")
-	);
+	)
 
 	return
 		fcppt::unique_ptr_to_base<

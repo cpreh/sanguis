@@ -49,8 +49,7 @@ sanguis::creator::generate(
 			FCPPT_TEXT("\" with seed ")
 			<<
 			_parameters.seed()
-	);
-
+	)
 
 	sanguis::creator::impl::random::generator gen(
 		_parameters.seed()

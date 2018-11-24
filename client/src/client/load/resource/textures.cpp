@@ -110,7 +110,7 @@ catch(
 			FCPPT_TEXT(": ")
 			<<
 			_error.string()
-	);
+	)
 
 	return
 		sge::texture::const_optional_part_ref();

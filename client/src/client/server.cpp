@@ -101,7 +101,7 @@ sanguis::client::server::mainloop()
 			fcppt::log::out
 				<< FCPPT_TEXT("Error in server thread: ")
 				<< _exception.string()
-		);
+		)
 	}
 	catch(
 		std::exception const &_exception
@@ -112,7 +112,7 @@ sanguis::client::server::mainloop()
 			fcppt::log::out
 				<< FCPPT_TEXT("Error in server thread: ")
 				<< _exception.what()
-		);
+		)
 	}
 
 	this->reset_running();

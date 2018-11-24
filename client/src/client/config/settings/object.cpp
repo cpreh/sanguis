@@ -47,7 +47,7 @@ sanguis::client::config::settings::object::object(
 			<< fcppt::filesystem::path_to_string(
 				_path
 			)
-	);
+	)
 
 	try
 	{
@@ -67,7 +67,7 @@ sanguis::client::config::settings::object::object(
 				log_,
 				fcppt::log::out
 					<< FCPPT_TEXT("Loading the settings failed!")
-			);
+			)
 		}
 	}
 	catch(
@@ -79,7 +79,7 @@ sanguis::client::config::settings::object::object(
 			fcppt::log::out
 				<< FCPPT_TEXT("Loading the settings failed with: ")
 				<< _error.string()
-		);
+		)
 	}
 }
 
@@ -111,7 +111,7 @@ sanguis::client::config::settings::object::save() const
 			<< fcppt::filesystem::path_to_string(
 				path_
 			)
-	);
+	)
 
 	if(
 		!sge::parse::ini::output::to_file(
@@ -124,7 +124,7 @@ sanguis::client::config::settings::object::save() const
 			log_,
 			fcppt::log::out
 				<< FCPPT_TEXT("Writing the settings failed!")
-		);
+		)
 	}
 }
 

@@ -169,7 +169,7 @@ sanguis::creator::impl::place_spawners(
 					<< FCPPT_TEXT(" spawners due to visibility after ")
 					<< iterations
 					<< FCPPT_TEXT(" tries.")
-			);
+			)
 
 			break;
 		}

@@ -187,7 +187,7 @@ sanguis::client::machine::quickstart(
 		log_,
 		fcppt::log::out
 			<< FCPPT_TEXT("quickstart()")
-	);
+	)
 
 	try
 	{
@@ -251,7 +251,7 @@ sanguis::client::machine::send(
 			log_,
 			fcppt::log::out
 				<< FCPPT_TEXT("Not enough space left in the send_buffer")
-		);
+		)
 		// FIXME: We have to wait for free space here!
 		// Any client message except the very first message (which is part of the handshake)
 		// can technically be lost, so leave this for now.
@@ -310,7 +310,7 @@ sanguis::client::machine::quit()
 		log_,
 		fcppt::log::out
 			<< FCPPT_TEXT("Exiting the client!")
-	);
+	)
 
 	window_system_.quit(
 		awl::main::exit_success()

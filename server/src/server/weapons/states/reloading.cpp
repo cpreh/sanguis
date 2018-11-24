@@ -73,7 +73,7 @@ sanguis::server::weapons::states::reloading::reloading(
 		fcppt::log::out
 			<< FCPPT_TEXT("reloading: ")
 			<< this
-	);
+	)
 }
 
 FCPPT_PP_POP_WARNING

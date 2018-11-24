@@ -105,7 +105,7 @@ sanguis::server::states::running::running(
 		log_,
 		fcppt::log::out
 			<< FCPPT_TEXT("constructor, listening")
-	);
+	)
 
 	this->context<
 		sanguis::server::machine
@@ -162,7 +162,7 @@ sanguis::server::states::running::react(
 			<< FCPPT_TEXT("Client with id ")
 			<< _message.id()
 			<< FCPPT_TEXT(" disconnected.")
-	);
+	)
 
 	global_context_->player_disconnect(
 		sanguis::server::player_id_from_net(
@@ -190,7 +190,7 @@ sanguis::server::states::running::operator()(
 			log_,
 			fcppt::log::out
 				<< FCPPT_TEXT("Got multiple client infos")
-		);
+		)
 
 		return
 			sanguis::messages::call::result(
@@ -281,7 +281,7 @@ sanguis::server::states::running::operator()(
 						FCPPT_TEXT("Received console command: ")
 						<<
 						_command_name.get()
-				);
+				)
 
 				try
 				{
@@ -300,7 +300,7 @@ sanguis::server::states::running::operator()(
 						log_,
 						fcppt::log::out
 							<< _error.string()
-					);
+					)
 				}
 
 				return

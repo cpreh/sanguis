@@ -82,7 +82,7 @@ sanguis::client::load::hud::make_weapon_icons(
 									)
 									<<
 									FCPPT_TEXT(" is not recognized.")
-							);
+							)
 
 							return
 								result_type();

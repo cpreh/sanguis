@@ -249,7 +249,7 @@ sanguis::server::global::context::insert_player(
 				log_,
 				fcppt::log::out
 					<< FCPPT_TEXT("Unable to insert a player!")
-			);
+			)
 		},
 		[
 			&cur_world,
@@ -311,7 +311,7 @@ sanguis::server::global::context::player_disconnect(
 					<< FCPPT_TEXT("Player ")
 					<< _player_id
 					<< FCPPT_TEXT(" is already dead.")
-			);
+			)
 		},
 		[](
 			fcppt::reference<
@@ -506,7 +506,7 @@ sanguis::server::global::context::player_choose_perk(
 				<< _player_id
 				<< FCPPT_TEXT(" tried to take an invalid perk")
 				<< FCPPT_TEXT(" or has no skillpoints left!")
-		);
+		)
 
 		return;
 	}

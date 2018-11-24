@@ -57,7 +57,7 @@ sanguis::server::weapons::states::backswing::backswing(
 		fcppt::log::out
 			<< FCPPT_TEXT("backswing: ")
 			<< this
-	);
+	)
 }
 
 FCPPT_PP_POP_WARNING

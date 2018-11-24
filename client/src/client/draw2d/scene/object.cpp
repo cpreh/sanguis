@@ -1733,9 +1733,8 @@ sanguis::client::draw2d::scene::object::process_default_msg(
 					)
 				)
 			)
-	);
+	)
 }
-
 
 template<
 	typename Message

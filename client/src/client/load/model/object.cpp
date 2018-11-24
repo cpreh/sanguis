@@ -52,7 +52,7 @@ try
 			fcppt::filesystem::path_to_string(
 				_path
 			)
-	);
+	)
 }
 catch(
 	sge::core::exception const &_error
@@ -73,7 +73,7 @@ catch(
 			_error.string()
 			<<
 			FCPPT_TEXT('"')
-	);
+	)
 
 	throw;
 }

@@ -65,7 +65,7 @@ sanguis::server::weapons::states::castpoint::castpoint(
 		fcppt::log::out
 			<< FCPPT_TEXT("castpoint: ")
 			<< this
-	);
+	)
 }
 
 FCPPT_PP_POP_WARNING

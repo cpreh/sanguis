@@ -54,7 +54,7 @@ sanguis::server::states::paused::paused(
 		log_,
 		fcppt::log::out
 			<< FCPPT_TEXT("create")
-	);
+	)
 }
 
 sanguis::server::states::paused::~paused()
@@ -63,7 +63,7 @@ sanguis::server::states::paused::~paused()
 		log_,
 		fcppt::log::out
 			<< FCPPT_TEXT("destroy")
-	);
+	)
 }
 
 boost::statechart::result
@@ -138,7 +138,7 @@ sanguis::server::states::paused::operator()(
 		log_,
 		fcppt::log::out
 			<< FCPPT_TEXT("Got superfluous pause")
-	);
+	)
 
 	return
 		sanguis::messages::call::result(

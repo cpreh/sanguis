@@ -31,6 +31,6 @@ sanguis::client::config::settings::saver::~saver()
 			fcppt::log::out
 				<< FCPPT_TEXT("Saving your settings failed: ")
 				<< _error.string()
-		);
+		)
 	}
 }

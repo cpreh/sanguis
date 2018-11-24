@@ -76,7 +76,7 @@ connecting_images(
 						)
 						<<
 						FCPPT_TEXT(" consists of too many tiles.")
-				);
+				)
 
 				return
 					sanguis::tiles::impl::optional_content_path();

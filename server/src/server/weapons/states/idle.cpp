@@ -38,7 +38,7 @@ sanguis::server::weapons::states::idle::idle(
 		fcppt::log::out
 			<< FCPPT_TEXT("idle: ")
 			<< this
-	);
+	)
 }
 
 sanguis::server::weapons::states::idle::~idle()

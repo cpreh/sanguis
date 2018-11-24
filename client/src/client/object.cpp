@@ -211,7 +211,7 @@ sanguis::client::object::run()
 			fcppt::log::out
 				<< FCPPT_TEXT("Client error: ")
 				<< _exception.string()
-		);
+		)
 
 		sys_->window_system().quit(
 			awl::main::exit_failure()
@@ -226,7 +226,7 @@ sanguis::client::object::run()
 			fcppt::log::out
 				<< FCPPT_TEXT("Client error: ")
 				<< _exception.what()
-		);
+		)
 
 		sys_->window_system().quit(
 			awl::main::exit_failure()

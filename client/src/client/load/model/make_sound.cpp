@@ -42,7 +42,7 @@ sanguis::client::load::model::make_sound(
 						fcppt::log::out
 							<< FCPPT_TEXT("Unable to load sound ")
 							<< _sound
-					);
+					)
 
 				return
 					result;

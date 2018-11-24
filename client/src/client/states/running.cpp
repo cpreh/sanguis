@@ -395,7 +395,7 @@ sanguis::client::states::running::operator()(
 			<< FCPPT_TEXT("\", description: \"")
 			<< description
 			<< FCPPT_TEXT('"')
-	);
+	)
 
 	console_->register_server_command(
 		name,

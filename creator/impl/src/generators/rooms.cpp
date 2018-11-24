@@ -478,7 +478,7 @@ sanguis::creator::impl::generators::rooms(
 							;
 					}
 				)
-		);
+		)
 	};
 
 	auto cur_region =
@@ -877,7 +877,7 @@ sanguis::creator::impl::generators::rooms(
 		<< FCPPT_TEXT(" : ")
 		<< exit_room
 		<< FCPPT_TEXT("\n")
-	);
+	)
 
 	FCPPT_ASSERT_ERROR(
 		_parameters.opening_count_array()[
@@ -948,7 +948,7 @@ sanguis::creator::impl::generators::rooms(
 				sanguis::creator::opening_type::exit
 			].size()
 		<< FCPPT_TEXT(" exits")
-	);
+	)
 
 	sanguis::creator::impl::set_opening_tiles(
 		grid,

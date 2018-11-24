@@ -76,7 +76,9 @@ sanguis::client::load::resource::parse_texture_file(
 					)
 					<< FCPPT_TEXT("\" in line ")
 					<< line_num
-					<< FCPPT_TEXT('!'));
+					<< FCPPT_TEXT('!')
+			)
+
 			continue;
 		}
 

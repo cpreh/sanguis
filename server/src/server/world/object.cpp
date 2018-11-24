@@ -335,7 +335,7 @@ sanguis::server::world::object::insert(
 					log_,
 					fcppt::log::out
 						<< FCPPT_TEXT("Failed to spawn entity because its spawnpoint is obstructed")
-				);
+				)
 
 				return
 					sanguis::server::entities::optional_base_ref();

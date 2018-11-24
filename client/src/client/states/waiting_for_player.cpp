@@ -55,7 +55,7 @@ sanguis::client::states::waiting_for_player::waiting_for_player(
 		log_,
 		fcppt::log::out
 			<< FCPPT_TEXT("Entering waiting_for_player")
-	);
+	)
 }
 
 sanguis::client::states::waiting_for_player::~waiting_for_player()

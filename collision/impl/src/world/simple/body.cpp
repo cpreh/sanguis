@@ -81,7 +81,7 @@ sanguis::collision::impl::world::simple::body::body(
 				<< FCPPT_TEXT("Body with radius ")
 				<< radius_
 				<< FCPPT_TEXT(" won't fit into a single tile.")
-		);
+		)
 
 	FCPPT_ASSERT_PRE(
 		fcppt::optional::maybe(

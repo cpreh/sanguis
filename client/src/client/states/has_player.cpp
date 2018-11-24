@@ -102,7 +102,7 @@ sanguis::client::states::has_player::has_player(
 		log_,
 		fcppt::log::out
 			<< FCPPT_TEXT("Entering has_player")
-	);
+	)
 }
 
 sanguis::client::states::has_player::~has_player()

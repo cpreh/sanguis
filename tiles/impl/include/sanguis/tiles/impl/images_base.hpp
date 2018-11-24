@@ -87,7 +87,7 @@ images_base(
 						FCPPT_TEXT(" from ")
 						<<
 						_error_message()
-				);
+				)
 
 				return
 					sanguis::tiles::impl::optional_content_path(
@@ -128,7 +128,7 @@ images_base(
 							FCPPT_TEXT(" from ")
 							<<
 							_error_message()
-					);
+					)
 
 					return
 						sanguis::tiles::impl::optional_content_path();

@@ -72,7 +72,7 @@ sanguis::server::states::unpaused::unpaused(
 		log_,
 		fcppt::log::out
 			<< FCPPT_TEXT("create")
-	);
+	)
 }
 
 sanguis::server::states::unpaused::~unpaused()
@@ -81,7 +81,7 @@ sanguis::server::states::unpaused::~unpaused()
 		log_,
 		fcppt::log::out
 			<< FCPPT_TEXT("destroy")
-	);
+	)
 }
 
 boost::statechart::result
@@ -355,7 +355,7 @@ sanguis::server::states::unpaused::operator()(
 		log_,
 		fcppt::log::out
 			<< FCPPT_TEXT("received superfluous unpause!")
-	);
+	)
 
 	return
 		sanguis::messages::call::result(

@@ -280,7 +280,7 @@ sanguis::server::machine::send_unicast(
 					<< FCPPT_TEXT("Client ")
 					<< net_id
 					<< FCPPT_TEXT(" is gone.")
-			);
+			)
 		},
 		[
 			&_message,
@@ -338,7 +338,7 @@ sanguis::server::machine::process_message(
 		log_,
 		fcppt::log::out
 			<< FCPPT_TEXT("process_message")
-	);
+	)
 
 	this->process_event(
 		sanguis::server::events::message(
@@ -370,7 +370,7 @@ sanguis::server::machine::add_overflow_message(
 			<< FCPPT_TEXT("Client ")
 			<< _id
 			<< FCPPT_TEXT(" has no space left!")
-	);
+	)
 }
 
 void
@@ -386,7 +386,7 @@ sanguis::server::machine::disconnect_callback(
 			<< _id
 			<< FCPPT_TEXT(" disconnected: ")
 			<< _error
-	);
+	)
 
 	this->disconnect_player(
 		_id
@@ -433,7 +433,7 @@ try
 						fcppt::log::out
 							<< FCPPT_TEXT("Client currently has no player ")
 							<< _error.string()
-					);
+					)
 				}
 
 				return
@@ -491,7 +491,7 @@ sanguis::server::machine::data_error(
 			<< _id
 			<< FCPPT_TEXT(": ")
 			<< _error
-	);
+	)
 
 	net_.disconnect(
 		_id
