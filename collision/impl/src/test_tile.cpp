@@ -18,14 +18,18 @@
 #include <sanguis/creator/tile_rect.hpp>
 #include <sanguis/creator/tile_size.hpp>
 #include <fcppt/make_literal_boost_units.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/math/box/intersects.hpp>
 #include <fcppt/math/box/stretch_absolute.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
+#include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/dim/map.hpp>
-#include <fcppt/math/dim/null.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/fill.hpp>
 #include <fcppt/math/vector/map.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <boost/units/systems/si/length.hpp>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::collision::impl::optional_speed
@@ -58,9 +62,17 @@ sanguis::collision::impl::test_tile(
 		fcppt::math::box::stretch_absolute(
 			sanguis::collision::impl::rect(
 				new_center.get(),
-				fcppt::math::dim::null<
+				fcppt::math::dim::fill<
 					sanguis::collision::impl::rect::dim
-				>()
+				>(
+					fcppt::literal<
+						sanguis::collision::unit
+					>(
+						0
+					)
+					*
+					boost::units::si::meter
+				)
 			),
 			fcppt::math::vector::fill<
 				sanguis::collision::impl::rect::vector
