@@ -13,7 +13,7 @@
 #include <fcppt/optional/bind.hpp>
 #include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/deref.hpp>
-#include <fcppt/variant/not_equal.hpp>
+#include <fcppt/variant/comparison.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cmath>
 #include <fcppt/config/external_end.hpp>
