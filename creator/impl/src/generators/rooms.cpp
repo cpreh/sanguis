@@ -188,9 +188,6 @@ is_possible_connector(
 	sanguis::creator::pos p
 )
 {
-	auto const nothing =
-		optional_connector{};
-
 	// TODO: optional::map
 	if(
 		!
@@ -211,7 +208,8 @@ is_possible_connector(
 		!=
 		::wall_region
 	)
-		return nothing;
+		return
+			optional_connector{};
 
 	std::map<
 		region_id,
@@ -250,7 +248,8 @@ is_possible_connector(
 			2u
 	)
 		// then we have no result
-		return nothing;
+		return
+			optional_connector{};
 
 	// otherwise determine the first non-wall region
 	auto from =
@@ -265,7 +264,8 @@ is_possible_connector(
 		==
 		std::end(counts)
 	)
-		return nothing;
+		return
+			optional_connector{};
 
 	auto const from_region = from->first;
 	auto const to_region = to->first;
