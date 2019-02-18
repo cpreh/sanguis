@@ -15,7 +15,6 @@
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/preprocessor/warn_unused_result.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool_fwd.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -74,12 +73,12 @@ private:
 	collision_group() const
 	override;
 
+	[[nodiscard]]
 	virtual
 	bool
 	do_pickup(
 		sanguis::server::entities::base &receiver
 	)
-	FCPPT_PP_WARN_UNUSED_RESULT
 	= 0;
 
 	sanguis::messages::server::unique_ptr

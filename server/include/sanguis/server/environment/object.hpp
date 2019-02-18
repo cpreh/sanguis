@@ -32,7 +32,6 @@
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/preprocessor/warn_unused_result.hpp>
 
 
 namespace sanguis
@@ -50,22 +49,22 @@ class object
 protected:
 	object();
 public:
+	[[nodiscard]]
 	virtual
 	sanguis::server::entities::optional_base_ref
 	insert(
 		sanguis::server::entities::with_id_unique_ptr &&,
 		sanguis::server::entities::insert_parameters const &
 	)
-	FCPPT_PP_WARN_UNUSED_RESULT
 	= 0;
 
+	[[nodiscard]]
 	virtual
 	sanguis::server::entities::optional_base_ref
 	insert(
 		sanguis::server::entities::simple_unique_ptr &&,
 		sanguis::server::entities::insert_parameters const &
 	)
-	FCPPT_PP_WARN_UNUSED_RESULT
 	= 0;
 
 	virtual

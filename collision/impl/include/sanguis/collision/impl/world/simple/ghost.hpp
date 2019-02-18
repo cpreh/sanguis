@@ -17,7 +17,6 @@
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/reference_std_hash.hpp>
-#include <fcppt/preprocessor/warn_unused_result.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>
@@ -56,43 +55,43 @@ public:
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::collision::center
-	center() const
-	FCPPT_PP_WARN_UNUSED_RESULT;
+	center() const;
 
+	[[nodiscard]]
 	sanguis::collision::radius
-	radius() const
-	FCPPT_PP_WARN_UNUSED_RESULT;
+	radius() const;
 
+	[[nodiscard]]
 	sanguis::collision::world::ghost_group
-	collision_group() const
-	FCPPT_PP_WARN_UNUSED_RESULT;
+	collision_group() const;
 
 	void
 	pre_update_bodies();
 
+	[[nodiscard]]
 	sanguis::collision::world::body_exit_container
-	post_update_bodies()
-	FCPPT_PP_WARN_UNUSED_RESULT;
+	post_update_bodies();
 
+	[[nodiscard]]
 	sanguis::collision::world::optional_body_enter
 	update_near_body(
 		sanguis::collision::impl::world::simple::body const &
-	)
-	FCPPT_PP_WARN_UNUSED_RESULT;
+	);
 
+	[[nodiscard]]
 	sanguis::collision::world::optional_body_enter
 	new_body(
 		sanguis::collision::impl::world::simple::body const &,
 		sanguis::collision::world::created
-	)
-	FCPPT_PP_WARN_UNUSED_RESULT;
+	);
 
+	[[nodiscard]]
 	sanguis::collision::world::optional_body_exit
 	remove_body(
 		sanguis::collision::impl::world::simple::body const &
-	)
-	FCPPT_PP_WARN_UNUSED_RESULT;
+	);
 
 	void
 	body_destroyed(

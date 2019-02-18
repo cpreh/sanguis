@@ -8,7 +8,6 @@
 #include <sanguis/server/entities/with_auras.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/preprocessor/warn_unused_result.hpp>
 
 
 namespace sanguis
@@ -27,12 +26,12 @@ class with_auras_id
 		with_auras_id
 	);
 public:
+	[[nodiscard]]
 	sanguis::collision::world::body_enter_container
 	add_aura(
 		sanguis::server::auras::unique_ptr &&
 	)
-	override
-	FCPPT_PP_WARN_UNUSED_RESULT;
+	override;
 protected:
 	explicit
 	with_auras_id(

@@ -9,7 +9,6 @@
 #include <sanguis/server/ai/pathing/optional_trail.hpp>
 #include <sanguis/server/entities/with_ai_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/preprocessor/warn_unused_result.hpp>
 
 
 namespace sanguis
@@ -32,11 +31,11 @@ public:
 
 	~context();
 
+	[[nodiscard]]
 	bool
 	path_find(
 		sanguis::creator::pos
-	)
-	FCPPT_PP_WARN_UNUSED_RESULT;
+	);
 
 	void
 	clear_path();
