@@ -168,11 +168,6 @@ private:
 	secondary_weapon_ref() const;
 
 	sanguis::server::entities::with_weapon::optional_weapon_ref
-	weapon_ref(
-		sanguis::server::weapons::optional_unique_ptr const &
-	) const;
-
-	sanguis::server::entities::with_weapon::optional_weapon_ref
 	get_weapon(
 		sanguis::is_primary_weapon
 	) const;

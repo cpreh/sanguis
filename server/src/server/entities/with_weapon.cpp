@@ -25,6 +25,7 @@
 #include <fcppt/const.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
+#include <fcppt/move_clear.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/optional_error.hpp>
@@ -166,7 +167,6 @@ sanguis::server::entities::with_weapon::pickup_weapon(
 		).has_value()
 	);
 
-
 	sanguis::server::weapons::weapon &ref(
 		this->set_weapon(
 			is_primary,
@@ -183,7 +183,6 @@ sanguis::server::entities::with_weapon::pickup_weapon(
 			)
 		)
 	);
-
 
 	this->on_new_weapon(
 		ref
@@ -385,7 +384,7 @@ sanguis::server::entities::with_weapon::primary_weapon() const
 	return
 		// TODO: Make a function for this!
 		fcppt::optional::map(
-			this->weapon_ref(
+			fcppt::optional::deref(
 				primary_weapon_
 			),
 			[](
@@ -407,7 +406,7 @@ sanguis::server::entities::with_weapon::secondary_weapon() const
 {
 	return
 		fcppt::optional::map(
-			this->weapon_ref(
+			fcppt::optional::deref(
 				secondary_weapon_
 			),
 			[](
@@ -494,7 +493,7 @@ sanguis::server::entities::with_weapon::optional_weapon_ref
 sanguis::server::entities::with_weapon::primary_weapon_ref() const
 {
 	return
-		this->weapon_ref(
+		fcppt::optional::deref(
 			primary_weapon_
 		);
 }
@@ -503,19 +502,8 @@ sanguis::server::entities::with_weapon::optional_weapon_ref
 sanguis::server::entities::with_weapon::secondary_weapon_ref() const
 {
 	return
-		this->weapon_ref(
-			secondary_weapon_
-		);
-}
-
-sanguis::server::entities::with_weapon::optional_weapon_ref
-sanguis::server::entities::with_weapon::weapon_ref(
-	sanguis::server::weapons::optional_unique_ptr const &_weapon
-) const
-{
-	return
 		fcppt::optional::deref(
-			_weapon
+			this->secondary_weapon_
 		);
 }
 
@@ -539,16 +527,13 @@ sanguis::server::entities::with_weapon::move_weapon(
 )
 {
 	return
-		_is_primary.get()
-		?
-			std::move(
+		fcppt::move_clear(
+			_is_primary.get()
+			?
 				primary_weapon_
-			)
-		:
-			std::move(
+			:
 				secondary_weapon_
-			)
-		;
+		);
 }
 
 sanguis::server::weapons::weapon &
