@@ -584,6 +584,7 @@ sanguis_add_library(
 		sanguis_creator_interface
 		sanguis_model_interface
 		${sgecharconv_TARGET}
+		${sgeconfig_TARGET}
 		sgetimer_interface
 		${alda_TARGET}
 		fcppt_boost_interface
