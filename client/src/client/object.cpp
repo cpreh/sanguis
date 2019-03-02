@@ -32,11 +32,9 @@
 #include <sge/font/system.hpp>
 #include <sge/gui/style/base.hpp>
 #include <sge/renderer/device/core.hpp>
-#include <sge/renderer/display_mode/desired_fps.hpp>
 #include <sge/renderer/display_mode/optional_object.hpp>
 #include <sge/timer/absolute_impl.hpp>
 #include <sge/timer/difference_and_reset.hpp>
-#include <sge/timer/scoped_frame_limiter.hpp>
 #include <sge/window/system.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/exit_failure.hpp>
@@ -265,12 +263,6 @@ sanguis::client::object::register_handler()
 void
 sanguis::client::object::loop_handler()
 {
-	sge::timer::scoped_frame_limiter const limiter(
-		sge::renderer::display_mode::desired_fps(
-			renderer_.display_mode()
-		)
-	);
-
 	fcppt::optional::maybe_void(
 		server_,
 		[
