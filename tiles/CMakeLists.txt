@@ -74,6 +74,7 @@ set(
 	include/sanguis/tiles/error.hpp
 	include/sanguis/tiles/error_fwd.hpp
 	include/sanguis/tiles/error_image.hpp
+	include/sanguis/tiles/exception.hpp
 	include/sanguis/tiles/is_background.hpp
 	include/sanguis/tiles/is_background_fwd.hpp
 	include/sanguis/tiles/log.hpp
@@ -97,6 +98,7 @@ set(
 	src/collection.cpp
 	src/draw.cpp
 	src/error_image.cpp
+	src/exception.cpp
 	src/log.cpp
 	src/log_location.cpp
 	src/pair.cpp
@@ -114,6 +116,7 @@ sanguis_add_library(
 		${sanguis_core_TARGET}
 		${sanguis_creator_TARGET}
 		${sanguis_model_TARGET}
+		${sgecharconv_TARGET}
 		${sgeimage2d_TARGET}
 		${sgeimagecolor_TARGET}
 		${sgeparsejson_TARGET}

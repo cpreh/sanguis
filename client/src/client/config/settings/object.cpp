@@ -1,14 +1,13 @@
-#include <sanguis/exception.hpp>
 #include <sanguis/log_parameters.hpp>
 #include <sanguis/client/config/log_location.hpp>
 #include <sanguis/client/config/settings/object.hpp>
-#include <sge/parse/exception.hpp>
-#include <sge/parse/result.hpp>
-#include <sge/parse/result_code.hpp>
 #include <sge/parse/ini/parse_file.hpp>
+#include <sge/parse/ini/section_vector.hpp>
 #include <sge/parse/ini/start.hpp>
 #include <sge/parse/ini/output/to_file.hpp>
+#include <fcppt/from_std_string.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/either/match.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/log/context_fwd.hpp>
 #include <fcppt/log/debug.hpp>
@@ -16,8 +15,12 @@
 #include <fcppt/log/info.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/out.hpp>
+#include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/optional/object_impl.hpp>
+#include <fcppt/parse/error.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -35,52 +38,83 @@ sanguis::client::config::settings::object::object(
 			}
 		)
 	},
-	path_(
+	path_{
 		_path
-	),
-	start_()
-{
-	FCPPT_LOG_DEBUG(
-		log_,
-		fcppt::log::out
-			<< FCPPT_TEXT("Trying to load settings from ")
-			<< fcppt::filesystem::path_to_string(
-				_path
-			)
-	)
-
-	try
-	{
-		// TODO: Direct initialization
-		if(
-			sge::parse::ini::parse_file(
-				path_,
-				start_
-			).result_code()
-			!=
-			sge::parse::result_code::ok
-		)
-		{
-			start_.sections.clear();
-
-			FCPPT_LOG_INFO(
-				log_,
+	},
+	start_{
+		[
+			this
+		]{
+			FCPPT_LOG_DEBUG(
+				this->log_,
 				fcppt::log::out
-					<< FCPPT_TEXT("Loading the settings failed!")
+					<<
+					FCPPT_TEXT("Trying to load settings from ")
+					<<
+					fcppt::filesystem::path_to_string(
+						this->path_
+					)
 			)
-		}
+
+			return
+				fcppt::either::match(
+					sge::parse::ini::parse_file(
+						this->path_
+					),
+					[
+						this
+					](
+						fcppt::optional::object<
+							fcppt::parse::error<
+								char
+							>
+						> const &_error
+					)
+					{
+						fcppt::optional::maybe_void(
+							_error,
+							[
+								this
+							](
+								fcppt::parse::error<
+									char
+								> const &_parse_error
+							)
+							{
+								FCPPT_LOG_INFO(
+									this->log_,
+									fcppt::log::out
+										<<
+										FCPPT_TEXT("Loading the settings failed!")
+										<<
+										fcppt::from_std_string(
+											_parse_error.get()
+										)
+								)
+							}
+						);
+
+						return
+							sge::parse::ini::start{
+								sge::parse::ini::section_vector{}
+							};
+					},
+					// TODO: either::from?
+					[](
+						sge::parse::ini::start &&_start
+					)
+					->
+					sge::parse::ini::start
+					{
+						return
+							std::move(
+								_start
+							);
+					}
+				);
+		}()
 	}
-	catch(
-		sge::parse::exception const &_error
-	)
-	{
-		FCPPT_LOG_INFO(
-			log_,
-			fcppt::log::out
-				<< FCPPT_TEXT("Loading the settings failed with: ")
-				<< _error.string()
-		)
-	}
+{
 }
 
 sanguis::client::config::settings::object::~object()

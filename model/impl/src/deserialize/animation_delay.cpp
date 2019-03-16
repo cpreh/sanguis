@@ -1,10 +1,10 @@
+#include <sge/charconv/utf8_string.hpp>
 #include <sanguis/model/animation_delay.hpp>
 #include <sanguis/model/optional_animation_delay.hpp>
 #include <sanguis/model/impl/deserialize/animation_delay.hpp>
 #include <sge/parse/json/find_member.hpp>
 #include <sge/parse/json/int_type.hpp>
 #include <sge/parse/json/object.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -24,7 +24,9 @@ sanguis::model::impl::deserialize::animation_delay(
 					sge::parse::json::int_type
 				>(
 					_object.members,
-					FCPPT_TEXT("delay")
+					sge::charconv::utf8_string{
+						"delay"
+					}
 				)
 			),
 			[](

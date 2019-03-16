@@ -28,7 +28,6 @@
 #include <sge/parse/ini/get_or_create.hpp>
 #include <sge/parse/ini/section_name.hpp>
 #include <sge/parse/ini/set_or_create.hpp>
-#include <sge/parse/ini/string.hpp>
 #include <sge/parse/ini/value.hpp>
 #include <sge/renderer/clear/parameters.hpp>
 #include <sge/renderer/context/ffp.hpp>
@@ -38,9 +37,12 @@
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/extract_from_string.hpp>
+#include <fcppt/from_std_string.hpp>
 #include <fcppt/narrow.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/to_std_string.hpp>
+#include <fcppt/optional/bind.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/to_exception.hpp>
@@ -50,6 +52,7 @@
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
+#include <string>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -62,21 +65,31 @@ FCPPT_PP_DISABLE_CLANG_WARNING(-Wexit-time-destructors)
 
 sge::parse::ini::section_name const
 config_section(
-	FCPPT_TEXT("gui_menu")
+	std::string{
+		"gui_menu"
+	}
 );
 
 sge::parse::ini::entry_name const
 	config_hostname_key(
-		FCPPT_TEXT("hostname")
+		std::string{
+			"hostname"
+		}
 	),
 	config_port_key(
-		FCPPT_TEXT("port")
+		std::string{
+			"port"
+		}
 	),
 	config_quickstart_port_key(
-		FCPPT_TEXT("quickstartport")
+		std::string{
+			"quickstartport"
+		}
 	),
 	config_player_name_key(
-		FCPPT_TEXT("playername")
+		std::string{
+			"playername"
+		}
 	);
 
 sge::font::string const
@@ -137,14 +150,16 @@ sanguis::client::gui::menu::object::object(
 		_renderer,
 		_font,
 		sge::font::from_fcppt_string(
-			sge::parse::ini::get_or_create(
-				_settings.sections(),
-				config_section,
-				config_player_name_key,
-				sge::parse::ini::value(
-					sge::parse::ini::string()
-				)
-			).get()
+			fcppt::from_std_string(
+				sge::parse::ini::get_or_create(
+					_settings.sections(),
+					config_section,
+					config_player_name_key,
+					sge::parse::ini::value(
+						std::string{}
+					)
+				).get()
+			)
 		)
 	),
 	player_name_line_(
@@ -177,14 +192,16 @@ sanguis::client::gui::menu::object::object(
 		_renderer,
 		_font,
 		sge::font::from_fcppt_string(
-			sge::parse::ini::get_or_create(
-				_settings.sections(),
-				config_section,
-				config_hostname_key,
-				sge::parse::ini::value(
-					sge::parse::ini::string()
-				)
-			).get()
+			fcppt::from_std_string(
+				sge::parse::ini::get_or_create(
+					_settings.sections(),
+					config_section,
+					config_hostname_key,
+					sge::parse::ini::value(
+						std::string{}
+					)
+				).get()
+			)
 		)
 	),
 	hostname_line_(
@@ -217,14 +234,16 @@ sanguis::client::gui::menu::object::object(
 		_renderer,
 		_font,
 		sge::font::from_fcppt_string(
-			sge::parse::ini::get_or_create(
-				_settings.sections(),
-				config_section,
-				config_port_key,
-				sge::parse::ini::value(
-					sge::parse::ini::string()
-				)
-			).get()
+			fcppt::from_std_string(
+				sge::parse::ini::get_or_create(
+					_settings.sections(),
+					config_section,
+					config_port_key,
+					sge::parse::ini::value(
+						std::string{}
+					)
+				).get()
+			)
 		)
 	),
 	port_line_(
@@ -423,14 +442,25 @@ sanguis::client::gui::menu::object::~object()
 		{
 			// FIXME
 			fcppt::optional::maybe_void(
-				sge::font::to_fcppt_string(
-					_value
+				fcppt::optional::bind(
+					sge::font::to_fcppt_string(
+						_value
+					),
+					[](
+						fcppt::string const &_inner
+					)
+					{
+						return
+							fcppt::to_std_string(
+								_inner
+							);
+					}
 				),
 				[
 					this,
 					&_entry
 				](
-					fcppt::string const &_string
+					std::string const &_string
 				)
 				{
 					sge::parse::ini::set_or_create(
@@ -565,7 +595,7 @@ sanguis::client::gui::menu::object::handle_quickstart()
 						config_section,
 						config_quickstart_port_key,
 						sge::parse::ini::value(
-							FCPPT_TEXT("31337")
+							"31337"
 						)
 					).get()
 				),

@@ -943,6 +943,7 @@ sanguis_add_library(
 		${fcppt_filesystem_TARGET}
 		${fcppt_log_TARGET}
 		${fcppt_options_TARGET}
+		fcppt_parse_interface
 		${FcpptThreads_LIBRARIES}
 		${Boost_FILESYSTEM_LIBRARIES}
 		${Boost_SYSTEM_LIBRARIES}

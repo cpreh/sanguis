@@ -118,6 +118,7 @@ sanguis_add_library(
 	"${SANGUIS_MODEL_FILES}"
 	HAS_IMPL_DIR
 	DEPS
+		${sgecharconv_TARGET}
 		${sgeparse_TARGET}
 		${sgeparsejson_TARGET}
 		${fcppt_core_TARGET}

@@ -2,10 +2,12 @@
 #include <sanguis/model/impl/serialize/image_name.hpp>
 #include <sanguis/model/impl/serialize/part.hpp>
 #include <sanguis/model/impl/serialize/weapon_category_map.hpp>
+#include <sge/parse/json/member.hpp>
 #include <sge/parse/json/member_map.hpp>
 #include <sge/parse/json/object.hpp>
-#include <sge/parse/json/optional_member.hpp>
+#include <sge/parse/json/value.hpp>
 #include <fcppt/optional/cat.hpp>
+#include <fcppt/optional/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <array>
 #include <fcppt/config/external_end.hpp>
@@ -22,10 +24,14 @@ sanguis::model::impl::serialize::part(
 				sge::parse::json::member_map
 			>(
 				std::array<
-					sge::parse::json::optional_member,
+					fcppt::optional::object<
+						sge::parse::json::member
+					>,
 					2
 				>{{
-					sge::parse::json::optional_member{
+					fcppt::optional::object<
+						sge::parse::json::member
+					>{
 						sanguis::model::impl::serialize::weapon_category_map(
 							_part.weapon_categories()
 						)

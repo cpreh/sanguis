@@ -1,14 +1,17 @@
+#include <sanguis/tiles/exception.hpp>
 #include <sanguis/tiles/orientation.hpp>
 #include <sanguis/tiles/orientation_map.hpp>
 #include <sanguis/tiles/impl/decode_name.hpp>
 #include <sanguis/tiles/impl/make_areas.hpp>
 #include <sanguis/tiles/impl/make_orientation_map.hpp>
 #include <sge/image2d/dim.hpp>
+#include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <sge/parse/json/member.hpp>
 #include <sge/parse/json/parse_file_exn.hpp>
-#include <fcppt/optional/map.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
+#include <fcppt/optional/map.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <utility>
@@ -39,7 +42,17 @@ sanguis::tiles::impl::make_orientation_map(
 				return
 					fcppt::optional::map(
 						sanguis::tiles::impl::decode_name(
-							_member.first
+							fcppt::optional::to_exception(
+								sge::charconv::utf8_string_to_fcppt(
+									_member.first
+								),
+								[]{
+									return
+										sanguis::tiles::exception{
+											FCPPT_TEXT("Failed to convert tile name")
+										};
+								}
+							)
 						),
 						[
 							_size,
@@ -53,7 +66,7 @@ sanguis::tiles::impl::make_orientation_map(
 									_orientation,
 									sanguis::tiles::impl::make_areas(
 										_size,
-										_member.second
+										_member.second.get()
 									)
 								);
 						}

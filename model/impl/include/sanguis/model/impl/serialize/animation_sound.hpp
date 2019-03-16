@@ -2,7 +2,8 @@
 #define SANGUIS_MODEL_IMPL_SERIALIZE_ANIMATION_SOUND_HPP_INCLUDED
 
 #include <sanguis/model/optional_animation_sound_fwd.hpp>
-#include <sge/parse/json/optional_member.hpp>
+#include <sge/parse/json/member.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 namespace sanguis
@@ -14,7 +15,9 @@ namespace impl
 namespace serialize
 {
 
-sge::parse::json::optional_member
+fcppt::optional::object<
+	sge::parse::json::member
+>
 animation_sound(
 	sanguis::model::optional_animation_sound const &
 );

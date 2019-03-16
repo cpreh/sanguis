@@ -1,11 +1,12 @@
 #ifndef SANGUIS_MODEL_IMPL_SERIALIZE_MAP_HPP_INCLUDED
 #define SANGUIS_MODEL_IMPL_SERIALIZE_MAP_HPP_INCLUDED
 
+#include <sge/charconv/fcppt_string_to_utf8.hpp>
+#include <sge/charconv/utf8_string.hpp>
+#include <sge/parse/json/make_value.hpp>
 #include <sge/parse/json/member.hpp>
 #include <sge/parse/json/member_map.hpp>
 #include <sge/parse/json/object.hpp>
-#include <sge/parse/json/string.hpp>
-#include <sge/parse/json/value.hpp>
 #include <fcppt/algorithm/map.hpp>
 
 
@@ -24,7 +25,7 @@ template<
 sge::parse::json::member
 map(
 	Map const &_map,
-	sge::parse::json::string const &_name,
+	sge::charconv::utf8_string const &_name,
 	sge::parse::json::object (
 		*_serialize_inner
 	)(
@@ -35,7 +36,7 @@ map(
 	return
 		sge::parse::json::member(
 			_name,
-			sge::parse::json::value(
+			sge::parse::json::make_value(
 				sge::parse::json::object(
 					fcppt::algorithm::map<
 						sge::parse::json::member_map
@@ -49,8 +50,10 @@ map(
 						{
 							return
 								sge::parse::json::member(
-									_pair.first.get(),
-									sge::parse::json::value(
+									sge::charconv::fcppt_string_to_utf8(
+										_pair.first.get()
+									),
+									sge::parse::json::make_value(
 										_serialize_inner(
 											_pair.second
 										)
