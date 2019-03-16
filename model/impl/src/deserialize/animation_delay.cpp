@@ -1,7 +1,7 @@
-#include <sge/charconv/utf8_string.hpp>
 #include <sanguis/model/animation_delay.hpp>
 #include <sanguis/model/optional_animation_delay.hpp>
 #include <sanguis/model/impl/deserialize/animation_delay.hpp>
+#include <sge/charconv/utf8_string.hpp>
 #include <sge/parse/json/find_member.hpp>
 #include <sge/parse/json/int_type.hpp>
 #include <sge/parse/json/object.hpp>

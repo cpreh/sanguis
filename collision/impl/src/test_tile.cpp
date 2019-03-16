@@ -17,8 +17,8 @@
 #include <sanguis/creator/tile_is_solid.hpp>
 #include <sanguis/creator/tile_rect.hpp>
 #include <sanguis/creator/tile_size.hpp>
-#include <fcppt/make_literal_boost_units.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_literal_boost_units.hpp>
 #include <fcppt/math/box/intersects.hpp>
 #include <fcppt/math/box/stretch_absolute.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
