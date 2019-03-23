@@ -52,8 +52,7 @@ public:
 		my_context
 	);
 
-	~console()
-	override;
+	~console();
 
 	boost::statechart::result
 	react(

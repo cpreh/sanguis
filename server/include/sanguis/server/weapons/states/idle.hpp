@@ -52,8 +52,7 @@ public:
 		my_context
 	);
 
-	~idle()
-	override;
+	~idle();
 
 	boost::statechart::result
 	react(

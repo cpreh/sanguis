@@ -60,8 +60,7 @@ public:
 		my_context
 	);
 
-	~has_player()
-	override;
+	~has_player();
 
 	boost::statechart::result
 	react(

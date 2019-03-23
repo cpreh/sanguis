@@ -50,8 +50,7 @@ public:
 		my_context
 	);
 
-	~paused()
-	override;
+	~paused();
 
 	// reactions
 	boost::statechart::result

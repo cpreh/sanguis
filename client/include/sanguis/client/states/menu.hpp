@@ -66,8 +66,7 @@ public:
 		my_context
 	);
 
-	~menu()
-	override;
+	~menu();
 
 	typedef
 	sanguis::messages::call::result

@@ -54,8 +54,7 @@ public:
 		my_context
 	);
 
-	~backswing()
-	override;
+	~backswing();
 
 	boost::statechart::result
 	react(

@@ -60,8 +60,7 @@ public:
 		my_context
 	);
 
-	~unpaused()
-	override;
+	~unpaused();
 
 	boost::statechart::result
 	react(

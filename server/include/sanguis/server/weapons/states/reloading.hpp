@@ -53,8 +53,7 @@ public:
 		my_context
 	);
 
-	~reloading()
-	override;
+	~reloading();
 
 	boost::statechart::result
 	react(

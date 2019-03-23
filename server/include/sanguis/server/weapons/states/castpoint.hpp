@@ -49,8 +49,7 @@ public:
 		my_context
 	);
 
-	~castpoint()
-	override;
+	~castpoint();
 
 	boost::statechart::result
 	react(

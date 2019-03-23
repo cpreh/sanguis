@@ -89,8 +89,7 @@ public:
 		my_context
 	);
 
-	~running()
-	override;
+	~running();
 
 	boost::statechart::result
 	react(
