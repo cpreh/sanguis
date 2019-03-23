@@ -14,6 +14,7 @@
 #include <sanguis/client/args/labels/history_size.hpp>
 #include <sanguis/client/config/settings/file.hpp>
 #include <sanguis/client/events/connected.hpp>
+#include <sanguis/client/events/input.hpp>
 #include <sanguis/client/events/message.hpp>
 #include <sanguis/client/events/net_error.hpp>
 #include <sanguis/client/events/overlay.hpp>
