@@ -18,6 +18,7 @@
 #include <sanguis/server/entities/spawns/spawn.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/environment/optional_object_ref.hpp>
 #include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <fcppt/algorithm/repeat.hpp>
@@ -129,9 +130,13 @@ sanguis::server::entities::spawns::spawn::update()
 				this
 			]()
 			{
+				sanguis::server::environment::optional_object_ref const opt_env{
+					this->environment()
+				};
+
 				sanguis::server::environment::object &cur_environment(
 					FCPPT_ASSERT_OPTIONAL_ERROR(
-						this->environment()
+						opt_env
 					).get()
 				);
 

@@ -68,6 +68,7 @@
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/load_context.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/environment/optional_object_ref.hpp>
 #include <sanguis/server/perks/perk.hpp>
 #include <sanguis/server/perks/tree/choosable.hpp>
 #include <sanguis/server/perks/tree/choose.hpp>
@@ -397,9 +398,13 @@ sanguis::server::entities::player::drop_or_pickup_weapon(
 			sanguis::server::weapons::unique_ptr &&_dropped
 		)
 		{
+			sanguis::server::environment::optional_object_ref const opt_env{
+				this->environment()
+			};
+
 			sanguis::server::environment::object &cur_environment(
 				FCPPT_ASSERT_OPTIONAL_ERROR(
-					this->environment()
+					opt_env
 				).get()
 			);
 

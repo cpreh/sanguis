@@ -115,7 +115,7 @@ sanguis::client::states::waiting_for_player::react(
 			)
 			{
 			case sanguis::client::control::actions::nullary_type::escape:
-				context<
+				this->context<
 					sanguis::client::machine
 				>().quit();
 

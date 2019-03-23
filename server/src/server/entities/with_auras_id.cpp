@@ -7,6 +7,7 @@
 #include <sanguis/server/entities/with_auras.hpp>
 #include <sanguis/server/entities/with_auras_id.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/environment/optional_object_ref.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/optional/maybe_void.hpp>
@@ -28,8 +29,12 @@ sanguis::server::entities::with_auras_id::add_aura(
 			sanguis::aura_type const _aura_type
 		)
 		{
-			FCPPT_ASSERT_OPTIONAL_ERROR(
+			sanguis::server::environment::optional_object_ref const opt_env{
 				this->environment()
+			};
+
+			FCPPT_ASSERT_OPTIONAL_ERROR(
+				opt_env
 			).get().add_aura(
 				this->id(),
 				_aura_type
