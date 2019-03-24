@@ -327,6 +327,7 @@ function(
 		target_compile_definitions(
 			"${LIBNAME}"
 			PRIVATE
+			BOOST_ALL_NO_LIB
 			${_COMPILE_DEFINITIONS}
 		)
 
@@ -508,6 +509,7 @@ function(
 		"DEPS"
 		"COMPILE_OPTIONS"
 		"INCLUDE_DIRS"
+		"COMPILE_DEFINITIONS"
 	)
 
 	cmake_parse_arguments(
@@ -578,6 +580,13 @@ function(
 		${EXENAME}
 		PRIVATE
 		${_COMPILE_OPTIONS}
+	)
+
+	target_compile_definitions(
+		${EXENAME}
+		PRIVATE
+		${_COMPILE_DEFINITIONS}
+		BOOST_ALL_NO_LIB
 	)
 
 	target_link_libraries(
