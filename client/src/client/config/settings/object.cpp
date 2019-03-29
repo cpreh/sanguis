@@ -18,11 +18,17 @@
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/parse/error.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::config::settings::object::object(
 	fcppt::log::context &_log_context,
@@ -116,6 +122,8 @@ sanguis::client::config::settings::object::object(
 	}
 {
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::client::config::settings::object::~object()
 {

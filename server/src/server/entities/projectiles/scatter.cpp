@@ -19,9 +19,15 @@
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/random/distribution/basic_impl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real_impl.hpp>
 
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::entities::projectiles::scatter::scatter(
 	sanguis::random_generator &_random_generator,
@@ -80,6 +86,8 @@ sanguis::server::entities::projectiles::scatter::scatter(
 	)
 {
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::server::entities::projectiles::scatter::~scatter()
 {

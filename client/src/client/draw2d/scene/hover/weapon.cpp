@@ -21,7 +21,13 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/container/join.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::draw2d::scene::hover::weapon::weapon(
 	sge::gui::style::base const &_gui_style,
@@ -118,6 +124,8 @@ sanguis::client::draw2d::scene::hover::weapon::weapon(
 	)
 {
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::client::draw2d::scene::hover::weapon::~weapon()
 {

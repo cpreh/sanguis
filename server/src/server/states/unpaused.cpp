@@ -39,12 +39,18 @@
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
 #include <fcppt/log/warning.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/record/get.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/result.hpp>
 #include <brigand/sequences/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::states::unpaused::unpaused(
 	my_context _ctx
@@ -74,6 +80,8 @@ sanguis::server::states::unpaused::unpaused(
 			<< FCPPT_TEXT("create")
 	)
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::server::states::unpaused::~unpaused()
 {

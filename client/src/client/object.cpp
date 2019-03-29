@@ -54,6 +54,9 @@
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object_impl.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/record/get.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
@@ -62,6 +65,9 @@
 #include <ostream>
 #include <fcppt/config/external_end.hpp>
 
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::object::object(
 	fcppt::log::context &_log_context,
@@ -187,6 +193,8 @@ sanguis::client::object::object(
 	)
 {
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::client::object::~object()
 {

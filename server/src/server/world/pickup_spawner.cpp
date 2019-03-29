@@ -23,6 +23,9 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/strong_typedef_assignment.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/random/distribution/basic_impl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -31,6 +34,9 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::world::pickup_spawner::pickup_spawner(
 	sanguis::random_generator &_random_generator,
@@ -136,6 +142,8 @@ sanguis::server::world::pickup_spawner::pickup_spawner(
 	)
 {
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::server::world::pickup_spawner::~pickup_spawner()
 {

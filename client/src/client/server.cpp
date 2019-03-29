@@ -11,6 +11,9 @@
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstdlib>
 #include <exception>
@@ -18,6 +21,9 @@
 #include <mutex>
 #include <fcppt/config/external_end.hpp>
 
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::server::server(
 	fcppt::log::context &_log_context,
@@ -50,6 +56,8 @@ sanguis::client::server::server(
 	)
 {
 }
+
+FCPPT_PP_POP_WARNING
 
 void
 sanguis::client::server::quit()

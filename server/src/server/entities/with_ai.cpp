@@ -14,10 +14,16 @@
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/optional/object_impl.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::entities::with_ai::with_ai(
 	sanguis::server::ai::create_function const &_create_ai,
@@ -59,6 +65,8 @@ sanguis::server::entities::with_ai::with_ai(
 	ai_()
 {
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::server::entities::with_ai::~with_ai()
 {

@@ -25,11 +25,17 @@
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <fcppt/assert/optional_error.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
 
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::gui::perk::line::line(
 	sge::renderer::device::ffp &_renderer,
@@ -107,6 +113,8 @@ sanguis::client::gui::perk::line::line(
 	)
 {
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::client::gui::perk::line::~line()
 {

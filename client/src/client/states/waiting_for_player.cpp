@@ -25,12 +25,18 @@
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
 #include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/variant/to_optional.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/result.hpp>
 #include <brigand/sequences/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::states::waiting_for_player::waiting_for_player(
 	my_context _ctx
@@ -57,6 +63,8 @@ sanguis::client::states::waiting_for_player::waiting_for_player(
 			<< FCPPT_TEXT("Entering waiting_for_player")
 	)
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::client::states::waiting_for_player::~waiting_for_player()
 {

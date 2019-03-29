@@ -54,7 +54,7 @@ private:
 		State
 	> state_;
 
-	sanguis::server::player_id const id_;
+	sanguis::server::player_id id_;
 };
 
 }

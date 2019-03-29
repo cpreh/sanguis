@@ -34,6 +34,9 @@
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/result.hpp>
 #include <brigand/sequences/list.hpp>
@@ -41,6 +44,9 @@
 #include <ostream>
 #include <fcppt/config/external_end.hpp>
 
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::states::menu::menu(
 	my_context _ctx
@@ -116,6 +122,8 @@ sanguis::client::states::menu::menu(
 	)
 {
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::client::states::menu::~menu()
 {

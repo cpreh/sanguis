@@ -30,11 +30,17 @@
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/optional/bind.hpp>
 #include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::draw2d::entities::model::part::part(
 	sanguis::diff_clock const &_diff_clock,
@@ -75,6 +81,8 @@ sanguis::client::draw2d::entities::model::part::part(
 	)
 {
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::client::draw2d::entities::model::part::part(
 	part &&

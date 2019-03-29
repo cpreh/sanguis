@@ -46,11 +46,17 @@
 #include <fcppt/assert/error.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
 
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::ai::behavior::attack::attack(
 	sanguis::server::ai::context &_context,
@@ -78,6 +84,8 @@ sanguis::server::ai::behavior::attack::attack(
 	}
 {
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::server::ai::behavior::attack::~attack()
 {

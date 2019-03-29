@@ -17,6 +17,9 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/math/vector/null.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
@@ -32,6 +35,9 @@ make_console_rect(
 );
 
 }
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::console::gfx::gfx(
 	sge::console::object &_console,
@@ -69,6 +75,8 @@ sanguis::client::console::gfx::gfx(
 	)
 {
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::client::console::gfx::~gfx()
 {

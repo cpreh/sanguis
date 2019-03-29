@@ -4,11 +4,17 @@
 #include <sanguis/server/ai/tree/container.hpp>
 #include <sanguis/server/ai/tree/sequence.hpp>
 #include <fcppt/assert/unreachable.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <iterator>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::ai::tree::sequence::sequence(
 	sanguis::server::ai::tree::container &&_children
@@ -24,6 +30,8 @@ sanguis::server::ai::tree::sequence::sequence(
 	}
 {
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::server::ai::tree::sequence::~sequence()
 {

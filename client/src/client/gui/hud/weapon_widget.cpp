@@ -30,7 +30,13 @@
 #include <sge/timer/elapsed_fractional.hpp>
 #include <fcppt/output_to_string.hpp>
 #include <fcppt/strong_typedef_output.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::gui::hud::weapon_widget::weapon_widget(
 	sanguis::diff_clock const &_diff_clock,
@@ -113,6 +119,8 @@ sanguis::client::gui::hud::weapon_widget::weapon_widget(
 	)
 {
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::client::gui::hud::weapon_widget::~weapon_widget()
 {

@@ -25,12 +25,18 @@
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/optional/map.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <chrono>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::entities::projectiles::grenade::grenade(
 	sanguis::server::environment::load_context &_load_context,
@@ -76,6 +82,8 @@ sanguis::server::entities::projectiles::grenade::grenade(
 	)
 {
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::server::entities::projectiles::grenade::~grenade()
 {

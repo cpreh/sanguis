@@ -58,9 +58,9 @@ private:
 		sanguis::client::load::model::collection const
 	> model_collection_;
 
-	sanguis::buff_type_vector const buffs_;
+	sanguis::buff_type_vector buffs_;
 
-	Base const base_;
+	Base base_;
 };
 
 }

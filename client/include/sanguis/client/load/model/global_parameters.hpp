@@ -57,7 +57,7 @@ public:
 		sanguis::model::optional_image_name const &
 	) const;
 private:
-	boost::filesystem::path const path_;
+	boost::filesystem::path path_;
 
 	fcppt::reference<
 		sanguis::client::load::resource::textures const

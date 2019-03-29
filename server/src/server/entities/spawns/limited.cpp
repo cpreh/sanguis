@@ -14,10 +14,16 @@
 #include <sanguis/server/world/difficulty.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/assert/pre.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <fcppt/config/external_end.hpp>
 
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::entities::spawns::limited::limited(
 	sanguis::random_generator &_random_generator,
@@ -68,6 +74,8 @@ sanguis::server::entities::spawns::limited::limited(
 		_count_per_wave.get() > 0u
 	);
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::server::entities::spawns::limited::~limited()
 {

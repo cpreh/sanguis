@@ -47,6 +47,7 @@
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/preprocessor/disable_clang_warning.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/signal/auto_connection.hpp>
@@ -105,6 +106,9 @@ cancel_text(
 FCPPT_PP_POP_WARNING
 
 }
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::gui::menu::object::object(
 	sge::renderer::device::ffp &_renderer,
@@ -429,6 +433,8 @@ sanguis::client::gui::menu::object::object(
 {
 	this->handle_text_changed();
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::client::gui::menu::object::~object()
 {

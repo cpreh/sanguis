@@ -35,11 +35,17 @@
 #include <fcppt/math/dim/to_signed.hpp>
 #include <fcppt/math/vector/dim.hpp>
 #include <fcppt/math/vector/null.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
 
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::draw2d::scene::light::light(
 	sanguis::client::load::context const &_load_context,
@@ -109,6 +115,8 @@ sanguis::client::draw2d::scene::light::light(
 	)
 {
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::client::draw2d::scene::light::~light()
 {

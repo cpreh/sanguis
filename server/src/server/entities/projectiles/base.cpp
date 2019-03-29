@@ -18,10 +18,16 @@
 #include <sanguis/server/entities/projectiles/projectile.hpp>
 #include <sanguis/server/entities/property/initial_max.hpp>
 #include <sanguis/server/environment/load_context.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::entities::projectiles::base::base(
 	sanguis::server::team const _team,
@@ -59,6 +65,8 @@ sanguis::server::entities::projectiles::base::base(
 	)
 {
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::server::entities::projectiles::base::~base()
 {

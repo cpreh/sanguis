@@ -149,11 +149,17 @@
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/reference.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::world::object::object(
 	sanguis::server::world::parameters const &_parameters,
@@ -229,6 +235,8 @@ sanguis::server::world::object::object(
 		_parameters.random_generator()
 	);
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::server::world::object::~object()
 {

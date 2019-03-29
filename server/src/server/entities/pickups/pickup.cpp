@@ -28,6 +28,9 @@
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/cast/dynamic.hpp>
 #include <fcppt/optional/maybe.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
 #include <chrono>
@@ -37,6 +40,9 @@
 sanguis::server::entities::pickups::pickup::~pickup()
 {
 }
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::entities::pickups::pickup::pickup(
 	sanguis::pickup_type const _pickup_type,
@@ -72,6 +78,8 @@ sanguis::server::entities::pickups::pickup::pickup(
 	)
 {
 }
+
+FCPPT_PP_POP_WARNING
 
 bool
 sanguis::server::entities::pickups::pickup::dead() const

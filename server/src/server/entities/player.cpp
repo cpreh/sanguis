@@ -97,11 +97,17 @@
 #include <fcppt/math/vector/null.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::entities::player::player(
 	sanguis::random_generator &_random_generator,
@@ -239,6 +245,8 @@ sanguis::server::entities::player::player(
 	weapon_pickups_()
 {
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::server::entities::player::~player()
 {

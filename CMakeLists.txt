@@ -223,6 +223,16 @@ include(
 	CMakeParseArguments
 )
 
+if(
+	MSVC
+)
+	# inheritance via dominance warning
+	set(
+		ADDITIONAL_COMPILE_FLAGS
+		"/wd4250"
+	)
+endif()
+
 function(
 	sanguis_add_library_base
 	LIBNAME
@@ -335,6 +345,7 @@ function(
 			"${LIBNAME}"
 			ADDITIONAL_FLAGS
 			${_COMPILE_FLAGS}
+			${ADDITIONAL_COMPILE_FLAGS}
 		)
 
 		install(
@@ -543,6 +554,8 @@ function(
 
 	fcppt_utils_set_target_compiler_flags(
 		${EXENAME}
+		ADDITIONAL_FLAGS
+		${ADDITIONAL_COMPILE_FLAGS}
 	)
 
 	if(

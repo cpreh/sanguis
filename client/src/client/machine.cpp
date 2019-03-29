@@ -57,6 +57,9 @@
 #include <fcppt/log/out.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/variant/dynamic_cast.hpp>
 #include <fcppt/variant/match.hpp>
@@ -68,6 +71,9 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::machine::machine(
 	fcppt::log::context &_log_context,
@@ -173,6 +179,8 @@ sanguis::client::machine::machine(
 	)
 {
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::client::machine::~machine()
 {

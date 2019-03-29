@@ -16,11 +16,17 @@
 #include <sanguis/client/states/perk_chooser.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/optional/maybe.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/variant/to_optional.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/result.hpp>
 #include <fcppt/config/external_end.hpp>
 
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::states::perk_chooser::perk_chooser(
 	my_context _ctx
@@ -60,6 +66,8 @@ sanguis::client::states::perk_chooser::perk_chooser(
 	)
 {
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::client::states::perk_chooser::~perk_chooser()
 {

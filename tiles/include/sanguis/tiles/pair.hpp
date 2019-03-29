@@ -44,7 +44,7 @@ private:
 	>
 	impl_type;
 
-	impl_type const impl_;
+	impl_type impl_;
 };
 
 }

@@ -49,6 +49,9 @@
 #include <fcppt/log/out.hpp>
 #include <fcppt/log/verbose.hpp>
 #include <fcppt/optional/maybe.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
@@ -56,6 +59,9 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::machine::machine(
 	fcppt::log::context &_log_context,
@@ -85,7 +91,7 @@ sanguis::server::machine::machine(
 	net_(
 		alda::net::parameters(
 			_log_context,
-			io_service_.impl(),
+			this->io_service_.impl(),
 			sanguis::net::send_buffer_size(),
 			sanguis::net::receive_buffer_size()
 		)
@@ -97,13 +103,13 @@ sanguis::server::machine::machine(
 	},
 	frame_timer_(
 		sanguis::timer::parameters(
-			desired_frame_time_
+			this->desired_frame_time_
 		)
 	),
 	temp_buffer_(),
 	overflow_messages_(),
 	timer_(
-		io_service_,
+		this->io_service_,
 		sanguis::server::timer_callback{
 			std::bind(
 				std::bind(
@@ -112,10 +118,10 @@ sanguis::server::machine::machine(
 				)
 			)
 		},
-		desired_frame_time_
+		this->desired_frame_time_
 	),
 	disconnect_connection_(
-		net_.register_disconnect(
+		this->net_.register_disconnect(
 			alda::net::server::disconnect_callback{
 				std::bind(
 					&sanguis::server::machine::disconnect_callback,
@@ -127,7 +133,7 @@ sanguis::server::machine::machine(
 		)
 	),
 	data_connection_(
-		net_.register_data(
+		this->net_.register_data(
 			alda::net::server::data_callback{
 				std::bind(
 					&sanguis::server::machine::data_callback,
@@ -140,6 +146,8 @@ sanguis::server::machine::machine(
 	)
 {
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::server::machine::~machine()
 {

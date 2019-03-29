@@ -18,6 +18,9 @@
 #include <fcppt/literal.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/enum/make_range.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
 #include <functional>
@@ -106,6 +109,9 @@ sanguis::server::entities::with_health::armor() const
 		armor_;
 }
 
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
+
 sanguis::server::entities::with_health::with_health(
 	sanguis::server::health const _max_health,
 	sanguis::server::regeneration const _regeneration,
@@ -156,6 +162,8 @@ sanguis::server::entities::with_health::with_health(
 	)
 {
 }
+
+FCPPT_PP_POP_WARNING
 
 sanguis::server::entities::with_health::~with_health()
 {
