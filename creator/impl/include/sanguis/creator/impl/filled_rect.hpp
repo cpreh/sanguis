@@ -1,8 +1,12 @@
 #ifndef SANGUIS_CREATOR_IMPL_FILLED_RECT_HPP_INCLUDED
 #define SANGUIS_CREATOR_IMPL_FILLED_RECT_HPP_INCLUDED
 
-#include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/rect.hpp>
+#include <fcppt/algorithm/loop.hpp>
+#include <fcppt/container/grid/make_min.hpp>
+#include <fcppt/container/grid/make_pos_range_start_end.hpp>
+#include <fcppt/container/grid/make_sup.hpp>
+
 
 namespace sanguis
 {
@@ -11,35 +15,30 @@ namespace creator
 namespace impl
 {
 
-template
-<
+template<
 	typename Callback
 >
 void
-filled_rect
-(
+filled_rect(
 	sanguis::creator::rect const &_rect,
 	Callback const &_callback
 )
 {
-	typedef
-	sanguis::creator::pos::value_type
-	int_type;
-
-	for (int_type y = _rect.top(); y < _rect.bottom(); ++y)
-	{
-		for (int_type x = _rect.left(); x < _rect.right(); ++x)
-		{
-			_callback(
-				sanguis::creator::pos(
-					x,
-					y));
-		}
-	}
+	fcppt::algorithm::loop(
+		fcppt::container::grid::make_pos_range_start_end(
+			fcppt::container::grid::make_min(
+				_rect.pos()
+			),
+			fcppt::container::grid::make_sup(
+				_rect.max()
+			)
+		),
+		_callback
+	);
 }
+
 }
 }
 }
 
 #endif
-
