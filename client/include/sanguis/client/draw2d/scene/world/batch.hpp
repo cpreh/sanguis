@@ -6,6 +6,7 @@
 #include <sanguis/client/draw2d/scene/world/sprite/state_fwd.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/vertex/declaration_fwd.hpp>
+#include <fcppt/noncopyable.hpp>
 
 
 namespace sanguis
@@ -21,11 +22,25 @@ namespace world
 
 class batch
 {
+	FCPPT_NONCOPYABLE(
+		batch
+	);
 public:
 	explicit
 	batch(
 		sanguis::client::draw2d::scene::world::sprite::range &&
 	);
+
+	batch(
+		batch &&
+	);
+
+	batch &
+	operator=(
+		batch &&
+	);
+
+	~batch();
 
 	void
 	draw(

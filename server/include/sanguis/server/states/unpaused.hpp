@@ -17,6 +17,9 @@
 #include <sanguis/server/net/slowdown.hpp>
 #include <sanguis/server/states/running.hpp>
 #include <fcppt/log/object.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
 #include <boost/statechart/custom_reaction.hpp>
@@ -31,6 +34,9 @@ namespace server
 {
 namespace states
 {
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4265)
 
 class unpaused
 :
@@ -130,6 +136,8 @@ private:
 
 	sanguis::server::net::slowdown slowdown_;
 };
+
+FCPPT_PP_POP_WARNING
 
 }
 }

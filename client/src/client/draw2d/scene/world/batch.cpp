@@ -25,6 +25,21 @@ sanguis::client::draw2d::scene::world::batch::batch(
 {
 }
 
+sanguis::client::draw2d::scene::world::batch::batch(
+	batch &&
+)
+= default;
+
+sanguis::client::draw2d::scene::world::batch &
+sanguis::client::draw2d::scene::world::batch::operator=(
+	batch &&
+)
+= default;
+
+sanguis::client::draw2d::scene::world::batch::~batch()
+{
+}
+
 void
 sanguis::client::draw2d::scene::world::batch::draw(
 	sge::renderer::context::core &_render_context,

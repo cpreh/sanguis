@@ -47,7 +47,7 @@ private:
 		sanguis::random_generator
 	> random_generator_;
 
-	sanguis::server::entities::enemies::difficulty const difficulty_;
+	sanguis::server::entities::enemies::difficulty difficulty_;
 };
 
 }

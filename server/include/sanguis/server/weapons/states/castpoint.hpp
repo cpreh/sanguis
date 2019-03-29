@@ -7,6 +7,9 @@
 #include <sanguis/server/weapons/events/stop_fwd.hpp>
 #include <sanguis/server/weapons/states/castpoint_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/list/list10.hpp>
 #include <boost/statechart/custom_reaction.hpp>
@@ -23,6 +26,9 @@ namespace weapons
 {
 namespace states
 {
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4265)
 
 class castpoint
 :
@@ -65,6 +71,8 @@ private:
 
 	bool cancelled_;
 };
+
+FCPPT_PP_POP_WARNING
 
 }
 }
