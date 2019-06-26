@@ -15,7 +15,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-awl::main::exit_code
+awl::main::exit_code const
 sanguis::tools::animations::main(
 	awl::main::function_context const &_function_context
 )

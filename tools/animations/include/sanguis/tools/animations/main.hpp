@@ -12,7 +12,7 @@ namespace tools
 namespace animations
 {
 
-awl::main::exit_code
+awl::main::exit_code const
 main(
 	awl::main::function_context const &
 );
