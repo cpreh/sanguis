@@ -17,8 +17,9 @@
 #include <sge/gui/widget/reference_alignment_pair.hpp>
 #include <sge/gui/widget/reference_alignment_vector.hpp>
 #include <sge/renderer/device/ffp.hpp>
+#include <sge/renderer/display_mode/fullscreen.hpp>
 #include <sge/renderer/display_mode/object_fwd.hpp>
-#include <sge/renderer/display_mode/optional_object.hpp>
+#include <sge/renderer/display_mode/optional_fullscreen.hpp>
 #include <sge/renderer/display_mode/output.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
@@ -144,11 +145,13 @@ sanguis::client::gui::menu::resolution_chooser::on_apply()
 			sge::gui::index const _index
 		)
 		{
-			renderer_.display_mode(
-				sge::renderer::display_mode::optional_object(
-					display_modes_[
-						_index.get()
-					]
+			renderer_.fullscreen(
+				sge::renderer::display_mode::optional_fullscreen(
+					sge::renderer::display_mode::fullscreen{
+						display_modes_[
+							_index.get()
+						]
+					}
 				)
 			);
 		}
