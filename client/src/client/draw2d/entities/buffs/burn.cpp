@@ -30,7 +30,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -45,7 +45,7 @@ sanguis::client::draw2d::entities::buffs::burn::burn(
 	animation_(
 		_model_collection[
 			sanguis::load::model::path{
-				boost::filesystem::path{
+				std::filesystem::path{
 					FCPPT_TEXT("fire")
 				}
 			}

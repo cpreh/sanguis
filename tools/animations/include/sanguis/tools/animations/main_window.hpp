@@ -19,7 +19,7 @@
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QString>
@@ -115,7 +115,7 @@ private:
 
 	void
 	open_json(
-		boost::filesystem::path const &
+		std::filesystem::path const &
 	);
 
 	typedef
@@ -147,7 +147,7 @@ private:
 
 	typedef
 	fcppt::optional::object<
-		boost::filesystem::path
+		std::filesystem::path
 	>
 	optional_path;
 

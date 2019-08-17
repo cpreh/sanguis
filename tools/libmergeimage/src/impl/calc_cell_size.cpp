@@ -10,14 +10,14 @@
 #include <fcppt/text.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
 sanguis::tools::libmergeimage::impl::cell_size
 sanguis::tools::libmergeimage::impl::calc_cell_size(
 	sge::image2d::system &_image_system,
-	boost::filesystem::path const &_base_path,
+	std::filesystem::path const &_base_path,
 	sanguis::tools::libmergeimage::impl::path_vector_vector const &_paths
 )
 try

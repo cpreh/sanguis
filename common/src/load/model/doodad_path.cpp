@@ -4,7 +4,7 @@
 #include <sanguis/load/model/path.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -15,7 +15,7 @@ sanguis::load::model::doodad_path(
 {
 	return
 		sanguis::load::model::path{
-			boost::filesystem::path{
+			std::filesystem::path{
 				FCPPT_TEXT("doodads")
 			}
 			/

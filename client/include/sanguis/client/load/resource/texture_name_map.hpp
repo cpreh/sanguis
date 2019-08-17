@@ -3,7 +3,7 @@
 
 #include <sanguis/client/load/resource/texture_identifier.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>
 
@@ -20,7 +20,7 @@ namespace resource
 typedef
 std::unordered_map<
 	sanguis::client::load::resource::texture_identifier,
-	boost::filesystem::path
+	std::filesystem::path
 >
 texture_name_map;
 

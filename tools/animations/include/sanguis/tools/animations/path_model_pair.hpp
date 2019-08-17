@@ -5,7 +5,7 @@
 #include <sanguis/tools/animations/path_model_pair_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -23,7 +23,7 @@ class path_model_pair
 	);
 public:
 	path_model_pair(
-		boost::filesystem::path const &,
+		std::filesystem::path const &,
 		sanguis::model::object &&
 	);
 
@@ -38,7 +38,7 @@ public:
 
 	~path_model_pair();
 
-	boost::filesystem::path const &
+	std::filesystem::path const &
 	path() const;
 
 	sanguis::model::object &
@@ -47,7 +47,7 @@ public:
 	sanguis::model::object const &
 	model() const;
 private:
-	boost::filesystem::path path_;
+	std::filesystem::path path_;
 
 	sanguis::model::object model_;
 };

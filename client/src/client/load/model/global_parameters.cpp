@@ -5,12 +5,12 @@
 #include <sanguis/model/optional_animation_delay.hpp>
 #include <sanguis/model/optional_image_name.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::load::model::global_parameters::global_parameters(
-	boost::filesystem::path const &_path,
+	std::filesystem::path const &_path,
 	sanguis::client::load::resource::textures const &_textures,
 	sanguis::client::load::resource::sounds const &_sounds,
 	sanguis::model::cell_size const &_cell_size,
@@ -39,7 +39,7 @@ sanguis::client::load::model::global_parameters::global_parameters(
 {
 }
 
-boost::filesystem::path const &
+std::filesystem::path const &
 sanguis::client::load::model::global_parameters::path() const
 {
 	return

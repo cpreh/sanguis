@@ -12,7 +12,7 @@
 #include <fcppt/log/warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/algorithm/string/trim.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <ios>
 #include <string>
 #include <utility>
@@ -22,7 +22,7 @@
 sanguis::client::load::resource::texture_name_map
 sanguis::client::load::resource::parse_texture_file(
 	fcppt::log::object &_log,
-	boost::filesystem::path const &_path,
+	std::filesystem::path const &_path,
 	sanguis::client::load::resource::texture_name_map &&_result
 )
 {
@@ -90,7 +90,7 @@ sanguis::client::load::resource::parse_texture_file(
 				)
 			)
 		] =
-			boost::filesystem::path{
+			std::filesystem::path{
 				line.substr(
 					equal + 1
 				)

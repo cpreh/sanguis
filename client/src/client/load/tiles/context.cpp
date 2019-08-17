@@ -15,7 +15,7 @@
 #include <fcppt/enum/array_impl.hpp>
 #include <fcppt/enum/array_init.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -61,7 +61,7 @@ sanguis::client::load::tiles::context::~context()
 
 sanguis::client::load::tiles::texture_container const &
 sanguis::client::load::tiles::context::set(
-	boost::filesystem::path const &_image_path,
+	std::filesystem::path const &_image_path,
 	sanguis::tiles::area_container_ref const &_areas
 )
 {
@@ -72,7 +72,7 @@ sanguis::client::load::tiles::context::set(
 			[
 				this
 			](
-				boost::filesystem::path const &_path
+				std::filesystem::path const &_path
 			)
 			{
 				return

@@ -18,14 +18,14 @@
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
 sanguis::tools::libmergeimage::merge_result
 sanguis::tools::libmergeimage::merge_images(
 	sge::image2d::system &_image_system,
-	boost::filesystem::path const &_base_path
+	std::filesystem::path const &_base_path
 )
 {
 	sanguis::tools::libmergeimage::impl::path_vector_vector const gathered_paths(

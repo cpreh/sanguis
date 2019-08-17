@@ -27,7 +27,7 @@
 #include <fcppt/variant/match.hpp>
 #include <fcppt/variant/output.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <cstdlib>
 #include <fcppt/config/external_end.hpp>
 
@@ -109,7 +109,7 @@ try
 						)
 						{
 							sanguis::model::deserialize(
-								boost::filesystem::path(
+								std::filesystem::path(
 									fcppt::record::get<
 										path_label
 									>(

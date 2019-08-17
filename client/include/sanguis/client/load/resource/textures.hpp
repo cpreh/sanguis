@@ -14,7 +14,7 @@
 #include <fcppt/log/context_fwd.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <map>
 #include <fcppt/config/external_end.hpp>
 
@@ -41,12 +41,12 @@ public:
 
 	sge::texture::part const &
 	load(
-		boost::filesystem::path const &
+		std::filesystem::path const &
 	) const;
 
 	sge::texture::const_optional_part_ref
 	load_opt(
-		boost::filesystem::path const &
+		std::filesystem::path const &
 	) const;
 
 	sge::texture::part const &
@@ -75,7 +75,7 @@ private:
 
 	sge::texture::const_part_unique_ptr
 	do_load_inner(
-		boost::filesystem::path const &
+		std::filesystem::path const &
 	) const;
 
 	typedef std::map<
@@ -84,7 +84,7 @@ private:
 	> texture_map;
 
 	typedef std::map<
-		boost::filesystem::path,
+		std::filesystem::path,
 		sge::texture::const_part_unique_ptr
 	> unnamed_texture_map;
 

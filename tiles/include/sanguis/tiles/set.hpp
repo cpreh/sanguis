@@ -10,7 +10,7 @@
 #include <sge/image2d/system_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -62,15 +62,15 @@ public:
 	orientations() const;
 
 	SANGUIS_TILES_SYMBOL
-	boost::filesystem::path const &
+	std::filesystem::path const &
 	path() const;
 private:
 	set(
 		sge::image2d::system &,
-		boost::filesystem::path const &
+		std::filesystem::path const &
 	);
 
-	boost::filesystem::path path_;
+	std::filesystem::path path_;
 
 	sanguis::tiles::orientation_map orientations_;
 };

@@ -2,11 +2,11 @@
 #include <sanguis/client/config/settings/file.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
-boost::filesystem::path
+std::filesystem::path
 sanguis::client::config::settings::file()
 {
 	return

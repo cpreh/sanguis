@@ -13,14 +13,14 @@
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
 sanguis::tiles::orientation_map
 sanguis::tiles::impl::make_orientation_map(
-	boost::filesystem::path const &_path,
+	std::filesystem::path const &_path,
 	sge::image2d::dim const _size
 )
 {

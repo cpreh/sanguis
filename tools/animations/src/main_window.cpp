@@ -45,7 +45,7 @@
 #include <fcppt/optional/maybe_void_multi.hpp>
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <QFileDialog>
 #include <QImage>
 #include <QMainWindow>
@@ -108,7 +108,7 @@ sanguis::tools::animations::main_window::actionJSON()
 {
 	fcppt::optional::maybe_void(
 		sanguis::tools::animations::qtutil::string_to_optional<
-			boost::filesystem::path
+			std::filesystem::path
 		>(
 			QFileDialog::getOpenFileName(
 				this,
@@ -120,7 +120,7 @@ sanguis::tools::animations::main_window::actionJSON()
 		[
 			this
 		](
-			boost::filesystem::path const &_chosen_json_file
+			std::filesystem::path const &_chosen_json_file
 		)
 		{
 			this->open_json(
@@ -136,7 +136,7 @@ try
 {
 	fcppt::optional::maybe_void(
 		sanguis::tools::animations::qtutil::string_to_optional<
-			boost::filesystem::path
+			std::filesystem::path
 		>(
 			QFileDialog::getExistingDirectory(
 				this,
@@ -146,7 +146,7 @@ try
 		[
 			this
 		](
-			boost::filesystem::path const &_resource_directory
+			std::filesystem::path const &_resource_directory
 		)
 		{
 			if(
@@ -170,7 +170,7 @@ try
 					this->resource_path()
 				:
 					sanguis::tools::animations::qtutil::string_to_optional<
-						boost::filesystem::path
+						std::filesystem::path
 					>(
 						QFileDialog::getExistingDirectory(
 							this,
@@ -182,7 +182,7 @@ try
 					&_resource_directory,
 					this
 				](
-					boost::filesystem::path const &_save_path
+					std::filesystem::path const &_save_path
 				)
 				{
 					sanguis::tools::libmergeimage::merge_result merged_result(
@@ -192,7 +192,7 @@ try
 						)
 					);
 
-					boost::filesystem::path const json_file(
+					std::filesystem::path const json_file(
 						_save_path
 						/
 						(
@@ -337,7 +337,7 @@ sanguis::tools::animations::main_window::actionSound()
 			fcppt::reference<
 				sanguis::model::animation
 			> const _animation,
-			boost::filesystem::path const &_chosen_sound_file
+			std::filesystem::path const &_chosen_sound_file
 		)
 		{
 			sanguis::model::animation_sound const animation_sound{
@@ -360,7 +360,7 @@ sanguis::tools::animations::main_window::actionSound()
 		},
 		this->current_animation(),
 		sanguis::tools::animations::qtutil::string_to_optional<
-			boost::filesystem::path
+			std::filesystem::path
 		>(
 			QFileDialog::getOpenFileName(
 				this,
@@ -754,7 +754,7 @@ sanguis::tools::animations::main_window::current_animation()
 
 void
 sanguis::tools::animations::main_window::open_json(
-	boost::filesystem::path const &_path
+	std::filesystem::path const &_path
 )
 {
 	loaded_model_=
@@ -911,7 +911,7 @@ sanguis::tools::animations::main_window::resource_path()
 			)
 			{
 				return
-					boost::filesystem::path(
+					std::filesystem::path(
 						_model.path()
 					).remove_filename();
 			}

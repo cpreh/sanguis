@@ -4,7 +4,7 @@
 #include <sge/image2d/optional_file_unique_ptr.hpp>
 #include <sge/image2d/system_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -18,7 +18,7 @@ namespace impl
 sge::image2d::optional_file_unique_ptr
 load_file(
 	sge::image2d::system &,
-	boost::filesystem::path const &
+	std::filesystem::path const &
 );
 
 }

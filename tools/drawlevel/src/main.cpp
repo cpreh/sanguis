@@ -97,7 +97,7 @@
 #include <fcppt/variant/match.hpp>
 #include <fcppt/variant/output.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <brigand/sequences/list.hpp>
 #include <cstdlib>
 #include <exception>
@@ -246,7 +246,7 @@ execute_main(
 
 	typedef
 	std::map<
-		boost::filesystem::path,
+		std::filesystem::path,
 		sge::image2d::file_unique_ptr
 	>
 	path_file_map;
@@ -313,7 +313,7 @@ execute_main(
 							[
 								&sys
 							](
-								boost::filesystem::path const &_path
+								std::filesystem::path const &_path
 							)
 							{
 								return
@@ -391,7 +391,7 @@ execute_main(
 		sge::image2d::view::const_object{
 			store.const_wrapped_view()
 		},
-		boost::filesystem::path(
+		std::filesystem::path(
 			fcppt::record::get<
 				output_path_label
 			>(

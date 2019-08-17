@@ -7,13 +7,13 @@
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::load::tiles::set::set(
 	sanguis::client::load::resource::textures const &_textures,
-	boost::filesystem::path const &_path
+	std::filesystem::path const &_path
 )
 :
 	texture_{

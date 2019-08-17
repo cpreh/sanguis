@@ -12,14 +12,14 @@
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
 sanguis::tools::libmergeimage::saved_image_vector
 sanguis::tools::libmergeimage::save_images(
 	sge::image2d::system &_image_system,
-	boost::filesystem::path const &_directory,
+	std::filesystem::path const &_directory,
 	sanguis::tools::libmergeimage::image_vector const &_images
 )
 {

@@ -70,8 +70,7 @@ sanguis_add_library(
 		${sgeimage2d_TARGET}
 		${fcppt_core_TARGET}
 		${fcppt_filesystem_TARGET}
-		${Boost_FILESYSTEM_LIBRARIES}
-		${Boost_SYSTEM_LIBRARIES}
+		${FCPPT_UTILS_FILESYSTEM_LIBRARIES}
 	INCLUDES
 		"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
 )

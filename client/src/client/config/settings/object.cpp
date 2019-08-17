@@ -22,7 +22,7 @@
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -32,7 +32,7 @@ FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::config::settings::object::object(
 	fcppt::log::context &_log_context,
-	boost::filesystem::path const &_path
+	std::filesystem::path const &_path
 )
 :
 	log_{

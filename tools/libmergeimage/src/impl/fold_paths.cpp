@@ -6,7 +6,7 @@
 #include <sanguis/tools/libmergeimage/impl/tree_depth.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <algorithm>
 #include <iterator>
 #include <fcppt/config/external_end.hpp>
@@ -41,7 +41,7 @@ sanguis::tools::libmergeimage::impl::fold_paths(
 						[
 							_begin
 						](
-							boost::filesystem::path const &_path2
+							std::filesystem::path const &_path2
 						)
 						{
 							return

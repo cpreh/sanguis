@@ -16,7 +16,7 @@
 #include <fcppt/random/distribution/basic_decl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -41,7 +41,7 @@ public:
 
 	object(
 		fcppt::log::object &,
-		boost::filesystem::path const &,
+		std::filesystem::path const &,
 		sanguis::client::load::resource::context const &
 	);
 
@@ -72,7 +72,7 @@ private:
 	sanguis::client::load::model::part_map const &
 	parts() const;
 
-	boost::filesystem::path const path_;
+	std::filesystem::path const path_;
 
 	sanguis::client::load::model::part_result const part_result_;
 

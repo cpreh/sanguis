@@ -31,7 +31,7 @@
 #include <fcppt/math/dim/output.hpp>
 #include <fcppt/math/vector/null.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <algorithm>
 #include <fcppt/config/external_end.hpp>
 
@@ -39,7 +39,7 @@
 sanguis::tools::libmergeimage::image
 sanguis::tools::libmergeimage::impl::make_image(
 	sge::image2d::system &_image_system,
-	boost::filesystem::path const &_base_path,
+	std::filesystem::path const &_base_path,
 	sanguis::tools::libmergeimage::impl::cell_size const _cell_size,
 	sanguis::tools::libmergeimage::impl::path_vector _paths
 )
@@ -94,12 +94,12 @@ sanguis::tools::libmergeimage::impl::make_image(
 				);
 
 				for(
-					boost::filesystem::path const &suffix_path
+					std::filesystem::path const &suffix_path
 					:
 					_paths
 				)
 				{
-					boost::filesystem::path const cur_path(
+					std::filesystem::path const cur_path(
 						_base_path
 						/
 						suffix_path

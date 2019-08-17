@@ -10,7 +10,7 @@
 #include <fcppt/reference_comparison.hpp>
 #include <fcppt/reference_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <map>
 #include <fcppt/config/external_end.hpp>
 
@@ -32,7 +32,7 @@ class set
 public:
 	set(
 		sanguis::client::load::resource::textures const &,
-		boost::filesystem::path const &
+		std::filesystem::path const &
 	);
 
 	set(

@@ -3,13 +3,13 @@
 #include <sanguis/tools/libmergeimage/impl/tree_depth.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
 sanguis::tools::libmergeimage::path
 sanguis::tools::libmergeimage::impl::convert_path(
-	boost::filesystem::path const &_path
+	std::filesystem::path const &_path
 )
 {
 	// TODO: Is there a better way to express this?
@@ -17,7 +17,7 @@ sanguis::tools::libmergeimage::impl::convert_path(
 	sanguis::tools::libmergeimage::path result;
 
 	for(
-		boost::filesystem::path const &elem
+		std::filesystem::path const &elem
 		:
 		_path
 	)

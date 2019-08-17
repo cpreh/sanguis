@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_CONFIG_SETTINGS_FILE_HPP_INCLUDED
 
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -15,7 +15,7 @@ namespace config
 namespace settings
 {
 
-boost::filesystem::path
+std::filesystem::path
 file();
 
 }

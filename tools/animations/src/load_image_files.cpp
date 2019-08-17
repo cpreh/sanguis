@@ -11,14 +11,14 @@
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
 sanguis::tools::animations::image_file_map
 sanguis::tools::animations::load_image_files(
-	boost::filesystem::path const &_path,
+	std::filesystem::path const &_path,
 	sanguis::model::object const &_model
 )
 {

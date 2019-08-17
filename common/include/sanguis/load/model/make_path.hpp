@@ -4,7 +4,7 @@
 #include <sanguis/common/symbol.hpp>
 #include <sanguis/load/model/path_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -16,7 +16,7 @@ namespace model
 {
 
 SANGUIS_COMMON_SYMBOL
-boost::filesystem::path
+std::filesystem::path
 make_path(
 	sanguis::load::model::path const &
 );

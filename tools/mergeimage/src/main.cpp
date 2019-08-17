@@ -43,7 +43,7 @@
 #include <fcppt/variant/match.hpp>
 #include <fcppt/variant/output.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <brigand/sequences/list.hpp>
 #include <cstdlib>
 #include <exception>
@@ -97,7 +97,7 @@ execute_main(
 		sanguis::tools::libmergeimage::merge_images(
 			sys.image_system(),
 			fcppt::filesystem::normalize(
-				boost::filesystem::path(
+				std::filesystem::path(
 					fcppt::record::get<
 						input_path_label
 					>(
@@ -108,9 +108,9 @@ execute_main(
 		)
 	);
 
-	boost::filesystem::path const output_path(
+	std::filesystem::path const output_path(
 		fcppt::filesystem::normalize(
-			boost::filesystem::path(
+			std::filesystem::path(
 				fcppt::record::get<
 					output_file_label
 				>(

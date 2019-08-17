@@ -9,13 +9,13 @@
 #include <fcppt/text.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
 void
 sanguis::model::serialize(
-	boost::filesystem::path const &_path,
+	std::filesystem::path const &_path,
 	sanguis::model::object const &_model
 )
 try

@@ -11,7 +11,7 @@
 #include <fcppt/random/wrapper/make_uniform_container.hpp>
 #include <fcppt/variant/match.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -20,7 +20,7 @@ sanguis::client::draw2d::scene::world::make_texture(
 	sanguis::random_generator &_random_generator,
 	sanguis::client::draw::debug const _debug,
 	sanguis::client::load::tiles::context &_context,
-	boost::filesystem::path const &_path,
+	std::filesystem::path const &_path,
 	sanguis::tiles::content const &_content
 )
 {

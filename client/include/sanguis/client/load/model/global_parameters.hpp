@@ -9,7 +9,7 @@
 #include <sanguis/model/optional_image_name.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -26,7 +26,7 @@ class global_parameters
 {
 public:
 	global_parameters(
-		boost::filesystem::path const &,
+		std::filesystem::path const &,
 		sanguis::client::load::resource::textures const &,
 		sanguis::client::load::resource::sounds const &,
 		sanguis::model::cell_size const &,
@@ -34,7 +34,7 @@ public:
 		sanguis::model::optional_image_name const &
 	);
 
-	boost::filesystem::path const &
+	std::filesystem::path const &
 	path() const;
 
 	sanguis::client::load::resource::textures const &
@@ -57,7 +57,7 @@ public:
 		sanguis::model::optional_image_name const &
 	) const;
 private:
-	boost::filesystem::path path_;
+	std::filesystem::path path_;
 
 	fcppt::reference<
 		sanguis::client::load::resource::textures const

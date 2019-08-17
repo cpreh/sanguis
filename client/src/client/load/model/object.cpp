@@ -19,14 +19,14 @@
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <iterator>
 #include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::load::model::object::object(
 	fcppt::log::object &_log,
-	boost::filesystem::path const &_path,
+	std::filesystem::path const &_path,
 	sanguis::client::load::resource::context const &_context
 )
 try

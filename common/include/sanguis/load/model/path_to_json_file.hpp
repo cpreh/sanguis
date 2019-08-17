@@ -3,7 +3,7 @@
 
 #include <sanguis/common/symbol.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -15,9 +15,9 @@ namespace model
 {
 
 SANGUIS_COMMON_SYMBOL
-boost::filesystem::path
+std::filesystem::path
 path_to_json_file(
-	boost::filesystem::path
+	std::filesystem::path
 );
 
 }

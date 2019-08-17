@@ -5,51 +5,48 @@
 #include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/filesystem/strip_prefix.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/operations.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <boost/range/iterator_range.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
 sanguis::tools::libmergeimage::impl::path_vector_vector
 sanguis::tools::libmergeimage::impl::gather_paths(
-	boost::filesystem::path const &_base_path
+	std::filesystem::path const &_base_path
 )
 {
 	sanguis::tools::libmergeimage::impl::path_vector_vector result;
 
 	for(
-		boost::filesystem::recursive_directory_iterator it(
+		std::filesystem::recursive_directory_iterator it(
 			_base_path
 		);
-		it != boost::filesystem::recursive_directory_iterator();
+		it != std::filesystem::recursive_directory_iterator();
 		++it
 	)
 	{
 		if(
 			fcppt::cast::to_unsigned(
-				it.level()
+				it.depth()
 			)
 			==
 			sanguis::tools::libmergeimage::impl::tree_depth::value - 1
 			&&
-			!it.no_push_pending()
+			it.recursion_pending()
 		)
 		{
-			it.no_push(
-				true
-			);
+			it.disable_recursion_pending();
 
 			sanguis::tools::libmergeimage::impl::path_vector temp;
 
 			for(
-				boost::filesystem::path const &path
+				std::filesystem::path const &path
 				:
 				boost::make_iterator_range(
-					boost::filesystem::directory_iterator(
+					std::filesystem::directory_iterator(
 						*it
 					),
-					boost::filesystem::directory_iterator()
+					std::filesystem::directory_iterator()
 				)
 			)
 				temp.push_back(

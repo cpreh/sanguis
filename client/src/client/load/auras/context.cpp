@@ -9,10 +9,9 @@
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/filesystem/stem.hpp>
+#include <fcppt/iterator/make_range.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/operations.hpp>
-#include <boost/filesystem/path.hpp>
-#include <boost/range/iterator_range.hpp>
+#include <filesystem>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -25,18 +24,18 @@ sanguis::client::load::auras::context::context(
 		fcppt::algorithm::map<
 			texture_map
 		>(
-			boost::make_iterator_range(
-				boost::filesystem::directory_iterator(
+			fcppt::iterator::make_range(
+				std::filesystem::directory_iterator(
 					sanguis::media_path()
 					/
 					FCPPT_TEXT("auras")
 				),
-				boost::filesystem::directory_iterator()
+				std::filesystem::directory_iterator()
 			),
 			[
 				&_resources
 			](
-				boost::filesystem::path const &_path
+				std::filesystem::path const &_path
 			)
 			{
 				return

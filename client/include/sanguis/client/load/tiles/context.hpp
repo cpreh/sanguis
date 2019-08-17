@@ -13,7 +13,7 @@
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/enum/array_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <map>
 #include <fcppt/config/external_end.hpp>
 
@@ -42,7 +42,7 @@ public:
 
 	sanguis::client::load::tiles::texture_container const &
 	set(
-		boost::filesystem::path const &,
+		std::filesystem::path const &,
 		sanguis::tiles::area_container_ref const &
 	);
 
@@ -56,7 +56,7 @@ public:
 private:
 	typedef
 	std::map<
-		boost::filesystem::path,
+		std::filesystem::path,
 		sanguis::client::load::tiles::set
 	>
 	map_type;

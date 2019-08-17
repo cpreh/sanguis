@@ -3,7 +3,7 @@
 
 #include <sanguis/tools/libmergeimage/impl/path_vector_vector.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -18,7 +18,7 @@ namespace impl
 
 sanguis::tools::libmergeimage::impl::path_vector_vector
 gather_paths(
-	boost::filesystem::path const &
+	std::filesystem::path const &
 );
 
 }

@@ -7,8 +7,7 @@
 #include <fcppt/filesystem/extension.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/operations.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <boost/range/iterator_range.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -22,21 +21,21 @@ sanguis::client::load::resource::search_texture_names(
 	return
 		fcppt::algorithm::fold(
 			boost::make_iterator_range(
-				boost::filesystem::directory_iterator(
+				std::filesystem::directory_iterator(
 					sanguis::media_path()
 				),
-				boost::filesystem::directory_iterator()
+				std::filesystem::directory_iterator()
 			),
 			sanguis::client::load::resource::texture_name_map(),
 			[
 				&_log
 			](
-				boost::filesystem::path const &_path,
+				std::filesystem::path const &_path,
 				sanguis::client::load::resource::texture_name_map &&_result
 			)
 			{
 				return
-					boost::filesystem::is_regular_file(
+					std::filesystem::is_regular_file(
 						_path
 					)
 					&&

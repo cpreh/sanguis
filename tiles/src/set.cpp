@@ -14,7 +14,7 @@
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -103,7 +103,7 @@ sanguis::tiles::set<
 template<
 	typename Tile
 >
-boost::filesystem::path const &
+std::filesystem::path const &
 sanguis::tiles::set<
 	Tile
 >::path() const
@@ -119,7 +119,7 @@ sanguis::tiles::set<
 	Tile
 >::set(
 	sge::image2d::system &_image_system,
-	boost::filesystem::path const &_path
+	std::filesystem::path const &_path
 )
 :
 	path_(

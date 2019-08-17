@@ -2,13 +2,13 @@
 #include <fcppt/text.hpp>
 #include <fcppt/filesystem/stem.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
-boost::filesystem::path
+std::filesystem::path
 sanguis::load::model::path_to_json_file(
-	boost::filesystem::path const _path
+	std::filesystem::path const _path
 )
 {
 	return

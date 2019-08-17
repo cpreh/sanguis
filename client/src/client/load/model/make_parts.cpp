@@ -12,7 +12,7 @@
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -20,7 +20,7 @@
 sanguis::client::load::model::part_result
 sanguis::client::load::model::make_parts(
 	fcppt::log::object &_log,
-	boost::filesystem::path const &_path,
+	std::filesystem::path const &_path,
 	sanguis::client::load::resource::context const &_context
 )
 {

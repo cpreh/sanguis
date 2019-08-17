@@ -5,17 +5,16 @@
 #include <fcppt/text.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/operations.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
-boost::filesystem::path
+std::filesystem::path
 sanguis::load::model::make_path(
 	sanguis::load::model::path const &_path
 )
 {
-	boost::filesystem::path const path(
+	std::filesystem::path const path(
 		sanguis::media_path()
 		/
 		FCPPT_TEXT("models")
@@ -24,7 +23,7 @@ sanguis::load::model::make_path(
 	);
 
 	if(
-		!boost::filesystem::exists(
+		!std::filesystem::exists(
 			path
 		)
 	)

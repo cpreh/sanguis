@@ -1130,7 +1130,7 @@ sanguis_add_library(
 		${fcppt_log_TARGET}
 		${fcppt_options_TARGET}
 		${FcpptThreads_LIBRARIES}
-		${Boost_FILESYSTEM_LIBRARIES}
+		${FCPPT_UTILS_FILESYSTEM_LIBRARIES}
 		${ASIO_LIBS}
 	TRANSITIVE_DEPS
 		fcppt_core_interface

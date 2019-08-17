@@ -3,7 +3,7 @@
 
 #include <sanguis/common/symbol.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -11,7 +11,7 @@ namespace sanguis
 {
 
 SANGUIS_COMMON_SYMBOL
-boost::filesystem::path
+std::filesystem::path
 media_path();
 
 }

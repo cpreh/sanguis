@@ -10,7 +10,7 @@
 #include <fcppt/string.hpp>
 #include <fcppt/optional/object_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <map>
 #include <fcppt/config/external_end.hpp>
 
@@ -44,7 +44,7 @@ public:
 
 	sanguis::client::load::resource::optional_sound
 	load_path(
-		boost::filesystem::path const &
+		std::filesystem::path const &
 	) const;
 private:
 	typedef
@@ -55,7 +55,7 @@ private:
 
 	typedef
 	std::map<
-		boost::filesystem::path,
+		std::filesystem::path,
 		optional_buffer
 	>
 	buffer_map;

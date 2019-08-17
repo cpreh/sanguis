@@ -2,13 +2,13 @@
 #include <sanguis/tools/animations/path_model_pair.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
 sanguis::tools::animations::path_model_pair::path_model_pair(
-	boost::filesystem::path const &_path,
+	std::filesystem::path const &_path,
 	sanguis::model::object &&_model
 )
 :
@@ -36,7 +36,7 @@ sanguis::tools::animations::path_model_pair::~path_model_pair()
 {
 }
 
-boost::filesystem::path const &
+std::filesystem::path const &
 sanguis::tools::animations::path_model_pair::path() const
 {
 	return

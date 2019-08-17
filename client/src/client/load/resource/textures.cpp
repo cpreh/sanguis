@@ -38,7 +38,7 @@
 #include <fcppt/log/out.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
 
@@ -62,7 +62,7 @@ sanguis::client::load::resource::textures::load(
 
 sge::texture::part const &
 sanguis::client::load::resource::textures::load(
-	boost::filesystem::path const &_path
+	std::filesystem::path const &_path
 ) const
 {
 	return
@@ -79,7 +79,7 @@ sanguis::client::load::resource::textures::load(
 
 sge::texture::const_optional_part_ref
 sanguis::client::load::resource::textures::load_opt(
-	boost::filesystem::path const &_path
+	std::filesystem::path const &_path
 ) const
 try
 {
@@ -221,7 +221,7 @@ sanguis::client::load::resource::textures::do_load(
 
 sge::texture::const_part_unique_ptr
 sanguis::client::load::resource::textures::do_load_inner(
-	boost::filesystem::path const &_path
+	std::filesystem::path const &_path
 ) const
 {
 	return

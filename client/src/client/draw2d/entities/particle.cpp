@@ -38,7 +38,7 @@
 #include <fcppt/optional/from.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -57,7 +57,7 @@ sanguis::client::draw2d::entities::particle::particle(
 		_size,
 		_load_parameters.collection()[
 			sanguis::load::model::path{
-				boost::filesystem::path{
+				std::filesystem::path{
 					FCPPT_TEXT("particles")
 				}
 				/

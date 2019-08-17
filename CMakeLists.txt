@@ -33,9 +33,7 @@ option(
 # Find Boost
 
 find_package(
-	Boost 1.47.0 REQUIRED COMPONENTS
-	filesystem
-	system
+	Boost REQUIRED
 )
 
 # Find FCPPT

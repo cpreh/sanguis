@@ -123,8 +123,7 @@ sanguis_add_library(
 		${sgeparsejson_TARGET}
 		${fcppt_core_TARGET}
 		${fcppt_filesystem_TARGET}
-		${Boost_FILESYSTEM_LIBRARIES}
-		${Boost_SYSTEM_LIBRARIES}
+		${FCPPT_UTILS_FILESYSTEM_LIBRARIES}
 	TRANSITIVE_DEPS
 		fcppt_core_interface
 )

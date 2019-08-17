@@ -4,7 +4,7 @@
 #include <sanguis/model/object_fwd.hpp>
 #include <sanguis/tools/animations/image_file_map.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -17,7 +17,7 @@ namespace animations
 
 sanguis::tools::animations::image_file_map
 load_image_files(
-	boost::filesystem::path const &,
+	std::filesystem::path const &,
 	sanguis::model::object const &
 );
 

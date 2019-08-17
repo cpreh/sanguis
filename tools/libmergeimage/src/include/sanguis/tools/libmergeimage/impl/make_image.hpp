@@ -6,7 +6,7 @@
 #include <sanguis/tools/libmergeimage/impl/path_vector.hpp>
 #include <sge/image2d/system_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -22,7 +22,7 @@ namespace impl
 sanguis::tools::libmergeimage::image
 make_image(
 	sge::image2d::system &,
-	boost::filesystem::path const &,
+	std::filesystem::path const &,
 	sanguis::tools::libmergeimage::impl::cell_size,
 	sanguis::tools::libmergeimage::impl::path_vector
 );

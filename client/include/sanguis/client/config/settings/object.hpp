@@ -7,7 +7,7 @@
 #include <fcppt/log/context_fwd.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -28,7 +28,7 @@ class object
 public:
 	object(
 		fcppt::log::context &,
-		boost::filesystem::path const &
+		std::filesystem::path const &
 	);
 
 	~object();
@@ -47,7 +47,7 @@ public:
 private:
 	mutable fcppt::log::object log_;
 
-	boost::filesystem::path const path_;
+	std::filesystem::path const path_;
 
 	sge::parse::ini::start start_;
 };

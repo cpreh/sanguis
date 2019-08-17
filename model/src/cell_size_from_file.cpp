@@ -7,13 +7,13 @@
 #include <fcppt/exception.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
 sanguis::model::cell_size
 sanguis::model::cell_size_from_file(
-	boost::filesystem::path const &_path
+	std::filesystem::path const &_path
 )
 try
 {
