@@ -6,8 +6,8 @@
 #include <sanguis/tools/libmergeimage/impl/tree_depth.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <filesystem>
 #include <algorithm>
+#include <filesystem>
 #include <iterator>
 #include <fcppt/config/external_end.hpp>
 

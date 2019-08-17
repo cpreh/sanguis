@@ -45,7 +45,6 @@
 #include <fcppt/optional/maybe_void_multi.hpp>
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <filesystem>
 #include <QFileDialog>
 #include <QImage>
 #include <QMainWindow>
@@ -54,6 +53,7 @@
 #include <QPixmap>
 #include <QString>
 #include <exception>
+#include <filesystem>
 #include <iterator>
 #include <ui_main_window.h>
 #include <utility>

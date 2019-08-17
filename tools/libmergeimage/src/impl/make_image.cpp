@@ -31,8 +31,8 @@
 #include <fcppt/math/dim/output.hpp>
 #include <fcppt/math/vector/null.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <filesystem>
 #include <algorithm>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
