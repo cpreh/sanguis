@@ -6,6 +6,8 @@
 #include <fcppt/reference_comparison.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/assert/error.hpp>
+#include <fcppt/container/find_opt_iterator.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -63,24 +65,27 @@ sanguis::server::buffs::provider::remove(
 	sanguis::server::entities::with_buffs &_entity
 )
 {
-	sanguis::server::buffs::provider::buff_map::iterator const it(
-		buffs_.find(
+	fcppt::optional::maybe_void(
+		fcppt::container::find_opt_iterator(
+			this->buffs_,
 			fcppt::make_ref(
 				_entity
 			)
+		),
+		[
+			this,
+			&_entity
+		](
+			sanguis::server::buffs::provider::buff_map::iterator const _it
 		)
-	);
+		{
+			_entity.remove_buff(
+				_it->second.get()
+			);
 
-	if(
-		it == buffs_.end()
-	)
-		return;
-
-	_entity.remove_buff(
-		it->second.get()
-	);
-
-	buffs_.erase(
-		it
+			this->buffs_.erase(
+				_it
+			);
+		}
 	);
 }
