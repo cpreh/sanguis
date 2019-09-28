@@ -91,6 +91,16 @@ sanguis::client::control::action_handler::action_handler(
 		>(
 			this->cheat_connection(
 				_console,
+				sanguis::cheat_type::auras,
+				sge::console::callback::name(
+					SGE_FONT_LIT("auras")
+				),
+				sge::console::callback::short_description(
+					SGE_FONT_LIT("Get various auras")
+				)
+			),
+			this->cheat_connection(
+				_console,
 				sanguis::cheat_type::exp,
 				sge::console::callback::name(
 					SGE_FONT_LIT("exp")

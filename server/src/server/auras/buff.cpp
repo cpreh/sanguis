@@ -12,6 +12,8 @@
 #include <sanguis/server/buffs/unique_ptr.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
+#include <fcppt/reference_impl.hpp>
+#include <fcppt/cast/dynamic_cross.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 
 
@@ -60,25 +62,37 @@ sanguis::server::auras::buff::enter(
 )
 {
 	fcppt::optional::maybe_void(
-		create_callback_(
+		fcppt::cast::dynamic_cross<
+			sanguis::server::entities::with_buffs
+		>(
 			_entity
 		),
 		[
-			this,
-			&_entity
+			this
 		](
-			sanguis::server::buffs::unique_ptr &&_new_buff
+			fcppt::reference<
+				sanguis::server::entities::with_buffs
+			> const _with_buffs
 		)
 		{
-			provider_.add(
-				dynamic_cast<
-					sanguis::server::entities::with_buffs &
-				>(
-					_entity
+			fcppt::optional::maybe_void(
+				this->create_callback_(
+					_with_buffs.get()
 				),
-				std::move(
-					_new_buff
+				[
+					this,
+					_with_buffs
+				](
+					sanguis::server::buffs::unique_ptr &&_new_buff
 				)
+				{
+					this->provider_.add(
+						_with_buffs.get(),
+						std::move(
+							_new_buff
+						)
+					);
+				}
 			);
 		}
 	);
@@ -89,11 +103,23 @@ sanguis::server::auras::buff::leave(
 	sanguis::server::entities::with_body &_entity
 )
 {
-	provider_.remove(
-		dynamic_cast<
-			sanguis::server::entities::with_buffs &
+	fcppt::optional::maybe_void(
+		fcppt::cast::dynamic_cross<
+			sanguis::server::entities::with_buffs
 		>(
 			_entity
+		),
+		[
+			this
+		](
+			fcppt::reference<
+				sanguis::server::entities::with_buffs
+			> const _with_buffs
 		)
+		{
+			this->provider_.remove(
+				_with_buffs.get()
+			);
+		}
 	);
 }

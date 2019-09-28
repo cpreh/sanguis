@@ -35,6 +35,7 @@
 #include <sge/timer/elapsed_and_reset.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/exception.hpp>
+#include <fcppt/from_std_string.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/strong_typedef_output.hpp>
@@ -55,6 +56,7 @@
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
+#include <exception>
 #include <functional>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -458,6 +460,17 @@ catch(
 	this->data_error(
 		_id,
 		_error.string()
+	);
+}
+catch(
+	std::exception const &_error
+)
+{
+	this->data_error(
+		_id,
+		fcppt::from_std_string(
+			_error.what()
+		)
 	);
 }
 catch(

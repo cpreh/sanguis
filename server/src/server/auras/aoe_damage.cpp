@@ -11,6 +11,7 @@
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_health.hpp>
+#include <fcppt/cast/dynamic_cross_exn.hpp>
 
 
 sanguis::server::auras::aoe_damage::aoe_damage(
@@ -56,7 +57,7 @@ sanguis::server::auras::aoe_damage::enter(
 	sanguis::collision::world::created
 )
 {
-	dynamic_cast<
+	fcppt::cast::dynamic_cross_exn<
 		sanguis::server::entities::with_health &
 	>(
 		_with_body
