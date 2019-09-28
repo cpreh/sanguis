@@ -8,9 +8,12 @@
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/unicast_callback.hpp>
 #include <sanguis/server/auras/burn_create.hpp>
+#include <sanguis/server/auras/slow_create.hpp>
 #include <sanguis/server/buffs/burn.hpp>
 #include <sanguis/server/buffs/burn_interval.hpp>
 #include <sanguis/server/buffs/define_special.hpp>
+#include <sanguis/server/buffs/slow.hpp>
+#include <sanguis/server/buffs/slow_factor.hpp>
 #include <sanguis/server/cheat/process.hpp>
 #include <sanguis/server/cheat/weapon_type.hpp>
 #include <sanguis/server/collision/body_enter.hpp>
@@ -31,6 +34,7 @@
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/unreachable.hpp>
+#include <fcppt/container/join.hpp>
 #include <fcppt/enum/make_range.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 
@@ -46,6 +50,11 @@ sanguis::server::cheat::process(
 	SANGUIS_SERVER_BUFFS_DEFINE_SPECIAL(
 		player_burn,
 		burn
+	);
+
+	SANGUIS_SERVER_BUFFS_DEFINE_SPECIAL(
+		player_slow,
+		slow
 	);
 
 	fcppt::optional::maybe_void(
@@ -67,21 +76,36 @@ sanguis::server::cheat::process(
 			{
 			case sanguis::cheat_type::auras:
 				sanguis::server::collision::body_enter(
-					_player.add_aura(
-						sanguis::server::auras::burn_create<
-							player_burn
-						>(
-							sanguis::server::radius(
-								300.f
-							),
-							sanguis::server::team::players,
-							sanguis::server::buffs::burn_interval(
-								sanguis::duration_second(
-									1.f
+					fcppt::container::join(
+						_player.add_aura(
+							sanguis::server::auras::burn_create<
+								player_burn
+							>(
+								sanguis::server::radius(
+									300.f
+								),
+								sanguis::server::team::players,
+								sanguis::server::buffs::burn_interval(
+									sanguis::duration_second(
+										1.f
+									)
+								),
+								sanguis::server::damage::unit(
+									10.f
 								)
-							),
-							sanguis::server::damage::unit(
-								10.f
+							)
+						),
+						_player.add_aura(
+							sanguis::server::auras::slow_create<
+								player_slow
+							>(
+								sanguis::server::radius(
+									300.f
+								),
+								sanguis::server::team::players,
+								sanguis::server::buffs::slow_factor{
+									0.1f
+								}
 							)
 						)
 					)
