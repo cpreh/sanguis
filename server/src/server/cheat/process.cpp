@@ -21,6 +21,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/enum/make_range.hpp>
 #include <fcppt/optional/maybe_void.hpp>
@@ -111,8 +112,10 @@ sanguis::server::cheat::process(
 							sanguis::server::team::players,
 							sanguis::server::weapons::create(
 								_weapon_parameters,
-								sanguis::server::cheat::weapon_type(
-									_cheat_type
+								FCPPT_ASSERT_OPTIONAL_ERROR(
+									sanguis::server::cheat::weapon_type(
+										_cheat_type
+									)
 								),
 								sanguis::server::entities::enemies::difficulty(
 									100.f
