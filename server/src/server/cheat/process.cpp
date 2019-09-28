@@ -1,12 +1,20 @@
 #include <sanguis/cheat_type.hpp>
+#include <sanguis/duration_second.hpp>
 #include <sanguis/perk_type.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/send_available_perks.hpp>
+#include <sanguis/server/radius.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/unicast_callback.hpp>
+#include <sanguis/server/auras/burn_create.hpp>
+#include <sanguis/server/buffs/burn.hpp>
+#include <sanguis/server/buffs/burn_interval.hpp>
+#include <sanguis/server/buffs/define_special.hpp>
 #include <sanguis/server/cheat/process.hpp>
 #include <sanguis/server/cheat/weapon_type.hpp>
+#include <sanguis/server/collision/body_enter.hpp>
+#include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/insert_parameters_center.hpp>
 #include <sanguis/server/entities/player.hpp>
 #include <sanguis/server/entities/with_id.hpp>
@@ -35,6 +43,11 @@ sanguis::server::cheat::process(
 	sanguis::server::unicast_callback const &_unicast_callback
 )
 {
+	SANGUIS_SERVER_BUFFS_DEFINE_SPECIAL(
+		player_burn,
+		burn
+	);
+
 	fcppt::optional::maybe_void(
 		_player.environment(),
 		[
@@ -52,6 +65,28 @@ sanguis::server::cheat::process(
 				_cheat_type
 			)
 			{
+			case sanguis::cheat_type::auras:
+				sanguis::server::collision::body_enter(
+					_player.add_aura(
+						sanguis::server::auras::burn_create<
+							player_burn
+						>(
+							sanguis::server::radius(
+								300.f
+							),
+							sanguis::server::team::players,
+							sanguis::server::buffs::burn_interval(
+								sanguis::duration_second(
+									1.f
+								)
+							),
+							sanguis::server::damage::unit(
+								10.f
+							)
+						)
+					)
+				);
+				return;
 			case sanguis::cheat_type::exp:
 				_player.add_exp(
 					sanguis::server::exp(

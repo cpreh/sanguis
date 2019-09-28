@@ -16,6 +16,7 @@ sanguis::server::cheat::weapon_type(
 		_cheat_type
 	)
 	{
+	case sanguis::cheat_type::auras:
 	case sanguis::cheat_type::exp:
 	case sanguis::cheat_type::heal:
 	case sanguis::cheat_type::kill:

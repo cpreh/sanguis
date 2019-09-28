@@ -9,6 +9,7 @@ namespace sanguis
 
 enum class cheat_type
 {
+	auras,
 	exp,
 	grenade,
 	heal,
