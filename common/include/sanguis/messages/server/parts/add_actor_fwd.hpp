@@ -8,7 +8,8 @@
 #include <sanguis/messages/server/parts/add_with_weapon_fwd.hpp>
 #include <sanguis/messages/server/parts/speed_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <brigand/sequences/list.hpp>
+#include <metal/list/list.hpp>
+#include <metal/list/join.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -22,13 +23,19 @@ namespace parts
 {
 
 typedef
-brigand::list<
+metal::join<
 	sanguis::messages::server::parts::add_elements_base,
-	sanguis::messages::server::parts::speed,
+	metal::list<
+		sanguis::messages::server::parts::speed
+	>,
 	sanguis::messages::server::parts::add_with_health,
 	sanguis::messages::server::parts::add_with_weapon,
-	sanguis::messages::server::parts::add_with_auras,
-	sanguis::messages::server::parts::add_with_buffs
+	metal::list<
+		sanguis::messages::server::parts::add_with_auras
+	>,
+	metal::list<
+		sanguis::messages::server::parts::add_with_buffs
+	>
 >
 add_actor;
 

@@ -6,7 +6,8 @@
 #include <sanguis/messages/server/parts/add_actor_fwd.hpp>
 #include <fcppt/record/element_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <brigand/sequences/list.hpp>
+#include <metal/list/join.hpp>
+#include <metal/list/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -20,11 +21,13 @@ namespace parts
 {
 
 typedef
-brigand::list<
+metal::join<
 	sanguis::messages::server::parts::add_actor,
-	fcppt::record::element<
-		sanguis::messages::roles::name,
-		sanguis::messages::adapted_types::string
+	metal::list<
+		fcppt::record::element<
+			sanguis::messages::roles::name,
+			sanguis::messages::adapted_types::string
+		>
 	>
 >
 add_player;

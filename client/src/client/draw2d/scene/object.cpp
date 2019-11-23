@@ -201,7 +201,7 @@
 #include <fcppt/record/get.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <brigand/sequences/list.hpp>
+#include <metal/list/list.hpp>
 #include <functional>
 #include <typeinfo>
 #include <utility>
@@ -343,7 +343,7 @@ sanguis::client::draw2d::scene::object::process_message(
 	// TODO: Use client::dispatch?
 	typedef
 	sanguis::messages::server::call::object<
-		brigand::list<
+		metal::list<
 			sanguis::messages::server::add_aoe_projectile,
 			sanguis::messages::server::add_aura,
 			sanguis::messages::server::add_buff,

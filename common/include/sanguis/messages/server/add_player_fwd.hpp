@@ -8,8 +8,8 @@
 #include <alda/bindings/record_fwd.hpp>
 #include <alda/message/object_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <brigand/algorithms/flatten.hpp>
-#include <brigand/sequences/list.hpp>
+#include <metal/list/join.hpp>
+#include <metal/list/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -26,11 +26,11 @@ alda::message::object<
 		sanguis::messages::server::types::message::add_player
 	>,
 	alda::bindings::record<
-		brigand::flatten<
-			brigand::list<
-				sanguis::messages::server::parts::entity_id,
-				sanguis::messages::server::parts::add_player
-			>
+		metal::join<
+			metal::list<
+				sanguis::messages::server::parts::entity_id
+			>,
+			sanguis::messages::server::parts::add_player
 		>
 	>
 >

@@ -5,7 +5,7 @@
 #include <sge/sprite/state/with_blend_fwd.hpp>
 #include <sge/sprite/state/with_rasterizer_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <brigand/sequences/list.hpp>
+#include <metal/list/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -20,7 +20,7 @@ namespace sprite
 
 typedef
 sge::sprite::state::choices<
-	brigand::list<
+	metal::list<
 		sge::sprite::state::with_blend,
 		sge::sprite::state::with_rasterizer
 	>

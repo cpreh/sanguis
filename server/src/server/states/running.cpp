@@ -51,7 +51,7 @@
 #include <fcppt/record/get.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/result.hpp>
-#include <brigand/sequences/list.hpp>
+#include <metal/list/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -144,7 +144,7 @@ sanguis::server::states::running::react(
 
 	return
 		sanguis::server::dispatch<
-			brigand::list<
+			metal::list<
 				sanguis::messages::client::info,
 				sanguis::messages::client::cheat,
 				sanguis::messages::client::choose_perk,

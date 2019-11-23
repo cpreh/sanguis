@@ -66,7 +66,7 @@
 #include <fcppt/config/external_begin.hpp>
 #include <boost/system/error_code.hpp>
 #include <boost/system/system_error.hpp>
-#include <brigand/sequences/list.hpp>
+#include <metal/list/list.hpp>
 #include <functional>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -417,7 +417,7 @@ sanguis::client::machine::process_sge_event(
 {
 	fcppt::optional::maybe_void(
 		fcppt::variant::dynamic_cast_<
-			brigand::list<
+			metal::list<
 				sge::renderer::event::render const,
 				sge::input::event_base const
 			>,

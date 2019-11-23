@@ -9,7 +9,7 @@
 #include <sanguis/messages/roles/created.hpp>
 #include <fcppt/record/element_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <brigand/sequences/list.hpp>
+#include <metal/list/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -23,7 +23,7 @@ namespace parts
 {
 
 typedef
-brigand::list<
+metal::list<
 	fcppt::record::element<
 		sanguis::messages::roles::center,
 		sanguis::messages::adapted_types::vector2

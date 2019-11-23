@@ -47,7 +47,7 @@ include(
 )
 
 find_package(
-	Brigand
+	Metal
 	REQUIRED
 )
 
@@ -293,7 +293,7 @@ function(
 		PUBLIC_INCLUDES
 		"${CMAKE_CURRENT_SOURCE_DIR}/include"
 		${Boost_INCLUDE_DIRS}
-		${BRIGAND_INCLUDE_DIRS}
+		${METAL_INCLUDE_DIRS}
 	)
 
 	target_include_directories(
@@ -583,7 +583,7 @@ function(
 		${EXENAME}
 		PRIVATE
 		${_INCLUDE_DIRS}
-		${BRIGAND_INCLUDE_DIRS}
+		${METAL_INCLUDE_DIRS}
 		${Boost_INCLUDE_DIRS}
 	)
 

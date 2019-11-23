@@ -6,7 +6,7 @@
 #include <sanguis/messages/roles/max_health.hpp>
 #include <fcppt/record/element_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <brigand/sequences/list.hpp>
+#include <metal/list/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -20,7 +20,7 @@ namespace parts
 {
 
 typedef
-brigand::list<
+metal::list<
 	fcppt::record::element<
 		sanguis::messages::roles::health,
 		sanguis::messages::adapted_types::space_unit

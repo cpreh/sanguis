@@ -14,7 +14,7 @@
 #include <sge/sprite/state/object_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <brigand/sequences/list.hpp>
+#include <metal/list/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -67,7 +67,7 @@ private:
 
 	typedef
 	sge::sprite::state::choices<
-		brigand::list<>
+		metal::list<>
 	>
 	state_choices;
 

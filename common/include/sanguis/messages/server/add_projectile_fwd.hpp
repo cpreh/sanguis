@@ -13,8 +13,8 @@
 #include <alda/message/object_fwd.hpp>
 #include <fcppt/record/element_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <brigand/algorithms/flatten.hpp>
-#include <brigand/sequences/list.hpp>
+#include <metal/list/join.hpp>
+#include <metal/list/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -31,10 +31,12 @@ alda::message::object<
 		sanguis::messages::server::types::message::add_projectile
 	>,
 	alda::bindings::record<
-		brigand::flatten<
-			brigand::list<
-				sanguis::messages::server::parts::entity_id,
-				sanguis::messages::server::parts::add_elements_base,
+		metal::join<
+			metal::list<
+				sanguis::messages::server::parts::entity_id
+			>,
+			sanguis::messages::server::parts::add_elements_base,
+			metal::list<
 				sanguis::messages::server::parts::speed,
 				fcppt::record::element<
 					sanguis::messages::roles::projectile_type,

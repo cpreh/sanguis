@@ -4,7 +4,7 @@
 #include <sge/systems/instance_fwd.hpp>
 #include <sge/systems/with_image2d_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <brigand/sequences/list.hpp>
+#include <metal/list/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -17,7 +17,7 @@ namespace animations
 
 typedef
 sge::systems::instance<
-	brigand::list<
+	metal::list<
 		sge::systems::with_image2d
 	>
 >

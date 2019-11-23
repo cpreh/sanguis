@@ -31,7 +31,7 @@
 #include <fcppt/variant/to_optional.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/result.hpp>
-#include <brigand/sequences/list.hpp>
+#include <metal/list/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -89,7 +89,7 @@ sanguis::client::states::waiting_for_player::react(
 
 	return
 		sanguis::client::dispatch<
-			brigand::list<
+			metal::list<
 				sanguis::messages::server::add_own_player
 			>
 		>(

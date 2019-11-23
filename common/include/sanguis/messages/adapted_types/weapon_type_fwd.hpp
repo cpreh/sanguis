@@ -6,7 +6,7 @@
 #include <sanguis/messages/adapted_types/secondary_weapon_type_fwd.hpp>
 #include <alda/bindings/variant_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <brigand/sequences/list.hpp>
+#include <metal/list/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -20,7 +20,7 @@ namespace adapted_types
 typedef
 alda::bindings::variant<
 	sanguis::weapon_types,
-	brigand::list<
+	metal::list<
 		sanguis::messages::adapted_types::primary_weapon_type,
 		sanguis::messages::adapted_types::secondary_weapon_type
 	>

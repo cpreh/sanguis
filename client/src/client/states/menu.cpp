@@ -39,7 +39,7 @@
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/result.hpp>
-#include <brigand/sequences/list.hpp>
+#include <metal/list/list.hpp>
 #include <functional>
 #include <ostream>
 #include <fcppt/config/external_end.hpp>
@@ -180,7 +180,7 @@ sanguis::client::states::menu::react(
 
 	return
 		sanguis::client::dispatch<
-			brigand::list<
+			metal::list<
 				sanguis::messages::server::connected
 			>
 		>(

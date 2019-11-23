@@ -13,7 +13,7 @@
 #include <sanguis/messages/server/adapted_types/weapon_attribute_vector_fwd.hpp>
 #include <fcppt/record/element_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <brigand/sequences/list.hpp>
+#include <metal/list/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -27,7 +27,7 @@ namespace parts
 {
 
 typedef
-brigand::list<
+metal::list<
 	fcppt::record::element<
 		sanguis::messages::roles::weapon_type,
 		sanguis::messages::adapted_types::weapon_type

@@ -10,7 +10,7 @@
 #include <sge/sprite/config/texture_size_option.hpp>
 #include <sge/sprite/config/with_color_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <brigand/sequences/list.hpp>
+#include <metal/list/list.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -34,7 +34,7 @@ sge::sprite::config::choices<
 	sge::sprite::config::normal_size<
 		sge::sprite::config::texture_size_option::never
 	>,
-	brigand::list<
+	metal::list<
 		sge::sprite::config::with_color<
 			sanguis::client::draw2d::sprite::colored::color_format
 		>
