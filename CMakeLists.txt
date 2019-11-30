@@ -286,6 +286,7 @@ function(
 	target_link_libraries(
 		"${LIBNAME}"
 		INTERFACE
+		Metal
 		${_TRANSITIVE_DEPS}
 	)
 
@@ -293,7 +294,6 @@ function(
 		PUBLIC_INCLUDES
 		"${CMAKE_CURRENT_SOURCE_DIR}/include"
 		${Boost_INCLUDE_DIRS}
-		${METAL_INCLUDE_DIRS}
 	)
 
 	target_include_directories(
@@ -583,7 +583,6 @@ function(
 		${EXENAME}
 		PRIVATE
 		${_INCLUDE_DIRS}
-		${METAL_INCLUDE_DIRS}
 		${Boost_INCLUDE_DIRS}
 	)
 
@@ -603,6 +602,7 @@ function(
 	target_link_libraries(
 		${EXENAME}
 		PRIVATE
+		Metal
 		${_DEPS}
 	)
 

@@ -1137,8 +1137,7 @@ sanguis_add_library(
 		fcppt_log_interface
 		fcppt_options_interface
 		alda_interface
-	INCLUDES
-		${METAL_INCLUDE_DIRS}
+		Metal
 	COMPILE_FLAGS
 		${FcpptThreads_DEFINITIONS}
 )
