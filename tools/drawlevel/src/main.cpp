@@ -102,7 +102,6 @@
 #include <filesystem>
 #include <iostream>
 #include <map>
-#include <metal.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -146,9 +145,7 @@ execute_main(
 )
 {
 	sge::systems::instance<
-		metal::list<
-			sge::systems::with_image2d
-		>
+		sge::systems::with_image2d
 	> const sys(
 		sge::systems::make_list
 		(
