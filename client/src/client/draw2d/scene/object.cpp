@@ -201,8 +201,8 @@
 #include <fcppt/record/get.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <metal/list/list.hpp>
 #include <functional>
+#include <metal.hpp>
 #include <typeinfo>
 #include <utility>
 #include <fcppt/config/external_end.hpp>

@@ -3,8 +3,8 @@
 #include <sanguis/perk_type.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/server/exp.hpp>
-#include <sanguis/server/send_available_perks.hpp>
 #include <sanguis/server/radius.hpp>
+#include <sanguis/server/send_available_perks.hpp>
 #include <sanguis/server/team.hpp>
 #include <sanguis/server/unicast_callback.hpp>
 #include <sanguis/server/auras/burn_create.hpp>

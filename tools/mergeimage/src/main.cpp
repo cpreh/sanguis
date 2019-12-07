@@ -43,11 +43,11 @@
 #include <fcppt/variant/match.hpp>
 #include <fcppt/variant/output.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <metal/list/list.hpp>
 #include <cstdlib>
 #include <exception>
 #include <filesystem>
 #include <iostream>
+#include <metal.hpp>
 #include <fcppt/config/external_end.hpp>
 
 

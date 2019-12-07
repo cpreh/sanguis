@@ -8,8 +8,7 @@
 #include <sanguis/messages/server/parts/add_with_weapon_fwd.hpp>
 #include <sanguis/messages/server/parts/speed_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <metal/list/list.hpp>
-#include <metal/list/join.hpp>
+#include <metal.hpp>
 #include <fcppt/config/external_end.hpp>
 
 

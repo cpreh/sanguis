@@ -5,7 +5,7 @@
 #include <sge/sprite/state/with_blend_fwd.hpp>
 #include <sge/sprite/state/with_rasterizer_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <metal/list/list.hpp>
+#include <metal.hpp>
 #include <fcppt/config/external_end.hpp>
 
 

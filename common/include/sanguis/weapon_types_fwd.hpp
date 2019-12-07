@@ -4,7 +4,7 @@
 #include <sanguis/primary_weapon_type_fwd.hpp>
 #include <sanguis/secondary_weapon_type_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <metal/list/list.hpp>
+#include <metal.hpp>
 #include <fcppt/config/external_end.hpp>
 
 

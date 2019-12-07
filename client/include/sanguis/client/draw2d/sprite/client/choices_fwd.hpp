@@ -13,7 +13,7 @@
 #include <sge/sprite/config/texture_size_option.hpp>
 #include <sge/sprite/config/with_texture_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <metal/list/list.hpp>
+#include <metal.hpp>
 #include <fcppt/config/external_end.hpp>
 
 

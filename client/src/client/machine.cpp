@@ -66,8 +66,8 @@
 #include <fcppt/config/external_begin.hpp>
 #include <boost/system/error_code.hpp>
 #include <boost/system/system_error.hpp>
-#include <metal/list/list.hpp>
 #include <functional>
+#include <metal.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
