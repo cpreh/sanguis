@@ -10,7 +10,7 @@
 #include <sanguis/client/args/elements/sge_log_level.hpp>
 #include <sanguis/server/args/result.hpp>
 #include <fcppt/record/disjoint_product.hpp>
-#include <fcppt/record/variadic.hpp>
+#include <fcppt/record/object_impl.hpp>
 
 
 namespace sanguis
@@ -25,7 +25,7 @@ namespace args
 typedef
 fcppt::record::disjoint_product<
 	sanguis::server::args::result,
-	fcppt::record::variadic<
+	fcppt::record::object<
 		sanguis::client::args::elements::display_height,
 		sanguis::client::args::elements::display_width,
 		sanguis::client::args::elements::draw_debug,

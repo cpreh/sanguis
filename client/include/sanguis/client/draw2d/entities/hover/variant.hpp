@@ -4,7 +4,7 @@
 #include <sanguis/client/draw2d/entities/hover/name_and_health.hpp>
 #include <sanguis/client/draw2d/entities/hover/variant_fwd.hpp>
 #include <sanguis/client/draw2d/entities/hover/weapon.hpp>
-#include <fcppt/variant/variadic.hpp>
+#include <fcppt/variant/object_impl.hpp>
 
 
 #endif

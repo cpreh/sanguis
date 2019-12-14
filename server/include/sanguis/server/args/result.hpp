@@ -4,7 +4,7 @@
 #include <sanguis/server/args/result_fwd.hpp>
 #include <sanguis/server/args/elements/log_level.hpp>
 #include <sanguis/server/args/elements/port.hpp>
-#include <fcppt/record/variadic.hpp>
+#include <fcppt/record/object_impl.hpp>
 
 
 #endif

@@ -3,7 +3,7 @@
 
 #include <sanguis/server/args/elements/log_level_fwd.hpp>
 #include <sanguis/server/args/elements/port_fwd.hpp>
-#include <fcppt/record/variadic_fwd.hpp>
+#include <fcppt/record/object_fwd.hpp>
 
 
 namespace sanguis
@@ -14,7 +14,7 @@ namespace args
 {
 
 typedef
-fcppt::record::variadic<
+fcppt::record::object<
 	sanguis::server::args::elements::port,
 	sanguis::server::args::elements::log_level
 >

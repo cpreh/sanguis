@@ -3,7 +3,7 @@
 
 #include <sanguis/client/draw2d/entities/hover/name_and_health_fwd.hpp>
 #include <sanguis/client/draw2d/entities/hover/weapon_fwd.hpp>
-#include <fcppt/variant/variadic_fwd.hpp>
+#include <fcppt/variant/object_fwd.hpp>
 
 
 namespace sanguis
@@ -18,7 +18,7 @@ namespace hover
 {
 
 typedef
-fcppt::variant::variadic<
+fcppt::variant::object<
 	sanguis::client::draw2d::entities::hover::name_and_health,
 	sanguis::client::draw2d::entities::hover::weapon
 >

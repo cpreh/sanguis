@@ -5,7 +5,7 @@
 #include <sanguis/client/control/actions/cursor_fwd.hpp>
 #include <sanguis/client/control/actions/nullary_fwd.hpp>
 #include <sanguis/client/control/actions/scale_fwd.hpp>
-#include <fcppt/variant/variadic_fwd.hpp>
+#include <fcppt/variant/object_fwd.hpp>
 
 
 namespace sanguis
@@ -18,7 +18,7 @@ namespace actions
 {
 
 typedef
-fcppt::variant::variadic<
+fcppt::variant::object<
 	sanguis::client::control::actions::binary,
 	sanguis::client::control::actions::cursor,
 	sanguis::client::control::actions::nullary,

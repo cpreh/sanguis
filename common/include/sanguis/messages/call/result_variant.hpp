@@ -3,7 +3,7 @@
 
 #include <sanguis/messages/call/forward_to_default.hpp>
 #include <sanguis/messages/call/result_variant_fwd.hpp>
-#include <fcppt/variant/variadic.hpp>
+#include <fcppt/variant/object_impl.hpp>
 
 
 #endif
