@@ -5,6 +5,7 @@
 #include <sanguis/server/collision/distance_entity_entity.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <fcppt/const.hpp>
+#include <fcppt/config/compiler.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/optional/reference.hpp>
@@ -33,7 +34,9 @@ closest_entity(
 )
 {
 FCPPT_PP_PUSH_WARNING
+#if defined(FCPPT_CONFIG_GNU_GCC_COMPILER)
 FCPPT_PP_DISABLE_GCC_WARNING(-Wmaybe-uninitialized)
+#endif
 	typedef
 	fcppt::optional::reference<
 		typename
