@@ -8,6 +8,9 @@
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/optional/reference.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 
 
 namespace sanguis
@@ -29,6 +32,8 @@ closest_entity(
 	Predicate const _predicate
 )
 {
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_GCC_WARNING(-Wmaybe-uninitialized)
 	typedef
 	fcppt::optional::reference<
 		typename
@@ -97,6 +102,8 @@ closest_entity(
 
 	return
 		ret;
+
+FCPPT_PP_POP_WARNING
 }
 
 }
