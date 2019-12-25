@@ -78,6 +78,7 @@ if(
 		SGE_COMPONENTS
 		audio
 		consolegfx
+		cursor
 		fontdraw
 		gui
 		imagecolor
