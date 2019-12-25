@@ -3,9 +3,9 @@
 
 #include <sanguis/client/cursor_fwd.hpp>
 #include <sanguis/client/load/resource/textures_fwd.hpp>
+#include <sge/cursor/object.hpp>
 #include <sge/input/processor_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
-#include <sge/systems/custom_cursor.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -36,7 +36,7 @@ public:
 private:
 	sge::texture::part const &texture_;
 
-	sge::systems::custom_cursor cursor_;
+	sge::cursor::object cursor_;
 };
 
 }

@@ -918,6 +918,7 @@ sanguis_add_library(
 		${sgeconsole_TARGET}
 		${sgeconsolegfx_TARGET}
 		${sgecore_TARGET}
+		${sgecursor_TARGET}
 		${sgefont_TARGET}
 		${sgefontdraw_TARGET}
 		${sgegui_TARGET}

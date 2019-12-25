@@ -1,11 +1,11 @@
 #include <sanguis/client/cursor.hpp>
 #include <sanguis/client/load/resource/texture_identifier.hpp>
 #include <sanguis/client/load/resource/textures.hpp>
+#include <sge//cursor/hotspot.hpp>
 #include <sge/input/processor_fwd.hpp>
 #include <sge/renderer/dim2.hpp>
 #include <sge/renderer/size_type.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
-#include <sge/systems/cursor_hotspot.hpp>
 #include <sge/texture/part.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
@@ -32,9 +32,9 @@ sanguis::client::cursor::cursor(
 		_processor,
 		_renderer,
 		texture_,
-		sge::systems::cursor_hotspot{
+		sge::cursor::hotspot{
 			fcppt::math::vector::structure_cast<
-				sge::systems::cursor_hotspot::value_type,
+				sge::cursor::hotspot::value_type,
 				fcppt::cast::size_fun
 			>(
 				fcppt::math::dim::to_vector(
