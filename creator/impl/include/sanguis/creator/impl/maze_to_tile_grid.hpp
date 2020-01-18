@@ -7,7 +7,6 @@
 #include <sanguis/creator/impl/maze_to_tile_grid.hpp>
 #include <sanguis/creator/impl/reachable.hpp>
 #include <sanguis/creator/impl/reachable_grid.hpp>
-#include <sanguis/creator/impl/reachable_grid.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/make_pos_ref_crange.hpp>

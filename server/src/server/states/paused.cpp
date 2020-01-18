@@ -29,8 +29,8 @@
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/statechart/result.hpp>
 #include <metal.hpp>
+#include <boost/statechart/result.hpp>
 #include <fcppt/config/external_end.hpp>
 
 
