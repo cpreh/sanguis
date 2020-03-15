@@ -50,7 +50,7 @@ public:
 
 	fcppt::signal::auto_connection
 	register_change_callback(
-		sanguis::server::entities::property::change_callback const &
+		sanguis::server::entities::property::change_callback &&
 	);
 private:
 	void

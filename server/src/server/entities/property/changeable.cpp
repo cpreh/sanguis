@@ -11,6 +11,7 @@
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <cmath>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -86,23 +87,27 @@ sanguis::server::entities::property::changeable::max() const
 
 fcppt::signal::auto_connection
 sanguis::server::entities::property::changeable::register_change_callback(
-	sanguis::server::entities::property::change_callback const &_callback
+	sanguis::server::entities::property::change_callback &&_callback
 )
 {
 	return
 		change_signal_.connect(
-			_callback
+			std::move(
+				_callback
+			)
 		);
 }
 
 fcppt::signal::auto_connection
 sanguis::server::entities::property::changeable::register_max_change_callback(
-	sanguis::server::entities::property::change_callback const &_callback
+	sanguis::server::entities::property::change_callback &&_callback
 )
 {
 	return
 		max_change_signal_.connect(
-			_callback
+			std::move(
+				_callback
+			)
 		);
 }
 

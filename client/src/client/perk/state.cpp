@@ -190,23 +190,27 @@ sanguis::client::perk::state::choosable(
 
 fcppt::signal::auto_connection
 sanguis::client::perk::state::register_level_change(
-	sanguis::client::perk::level_callback const &_callback
+	sanguis::client::perk::level_callback &&_callback
 )
 {
 	return
 		level_signal_.connect(
-			_callback
+			std::move(
+				_callback
+			)
 		);
 }
 
 fcppt::signal::auto_connection
 sanguis::client::perk::state::register_perks_change(
-	sanguis::client::perk::change_callback const &_callback
+	sanguis::client::perk::change_callback &&_callback
 )
 {
 	return
 		change_signal_.connect(
-			_callback
+			std::move(
+				_callback
+			)
 		);
 }
 

@@ -79,12 +79,12 @@ public:
 
 	fcppt::signal::auto_connection
 	register_level_change(
-		sanguis::client::perk::level_callback const &
+		sanguis::client::perk::level_callback &&
 	);
 
 	fcppt::signal::auto_connection
 	register_perks_change(
-		sanguis::client::perk::change_callback const &
+		sanguis::client::perk::change_callback &&
 	);
 private:
 	sanguis::client::perk::tree &

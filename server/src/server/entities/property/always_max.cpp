@@ -6,6 +6,9 @@
 #include <sanguis/server/entities/property/value.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/object_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::entities::property::always_max::always_max(
@@ -44,12 +47,14 @@ sanguis::server::entities::property::always_max::current() const
 
 fcppt::signal::auto_connection
 sanguis::server::entities::property::always_max::register_change_callback(
-	sanguis::server::entities::property::change_callback const &_callback
+	sanguis::server::entities::property::change_callback &&_callback
 )
 {
 	return
 		change_signal_.connect(
-			_callback
+			std::move(
+				_callback
+			)
 		);
 }
 
