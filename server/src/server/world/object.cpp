@@ -149,6 +149,7 @@
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/reference.hpp>
+#include <fcppt/preprocessor/disable_gnu_gcc_warning.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -345,8 +346,11 @@ sanguis::server::world::object::insert(
 						<< FCPPT_TEXT("Failed to spawn entity because its spawnpoint is obstructed")
 				)
 
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_GNU_GCC_WARNING(-Wmaybe-uninitialized)
 				return
 					sanguis::server::entities::optional_base_ref();
+FCPPT_PP_POP_WARNING
 			},
 			[
 				this,
