@@ -75,6 +75,9 @@
 #include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object.hpp>
+#include <fcppt/preprocessor/disable_gnu_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
 #include <fcppt/random/wrapper/make_uniform_container_advanced.hpp>
@@ -188,6 +191,8 @@ is_possible_connector(
 	sanguis::creator::pos p
 )
 {
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_GNU_GCC_WARNING(-Wmaybe-uninitialized)
 	// TODO: optional::map
 	if(
 		!
@@ -284,6 +289,8 @@ is_possible_connector(
 				from_region
 			)
 		};
+
+FCPPT_PP_POP_WARNING
 }
 
 }
