@@ -31,7 +31,7 @@
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
@@ -138,7 +138,7 @@ sanguis::client::load::resource::textures::renderer() const
 }
 
 sanguis::client::load::resource::textures::textures(
-	fcppt::log::context &_log_context,
+	fcppt::log::context_reference const _log_context,
 	sge::renderer::device::core &_renderer,
 	sge::image2d::system &_image_loader
 )

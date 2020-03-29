@@ -45,7 +45,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/fatal.hpp>
 #include <fcppt/log/level_stream.hpp>
 #include <fcppt/log/name.hpp>
@@ -70,7 +70,7 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::object::object(
-	fcppt::log::context &_log_context,
+	fcppt::log::context_reference const _log_context,
 	sanguis::client::args::result const &_args
 )
 :

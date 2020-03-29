@@ -4,7 +4,7 @@
 #include <sanguis/collision/log_fwd.hpp>
 #include <sanguis/collision/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference_fwd.hpp>
 #include <fcppt/log/object.hpp>
 
 
@@ -22,7 +22,7 @@ public:
 	SANGUIS_COLLISION_SYMBOL
 	explicit
 	log(
-		fcppt::log::context &
+		fcppt::log::context_reference
 	);
 
 	SANGUIS_COLLISION_SYMBOL

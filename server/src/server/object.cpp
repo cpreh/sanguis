@@ -6,11 +6,11 @@
 #include <sanguis/server/states/running.hpp>
 #include <sanguis/server/states/unpaused.hpp>
 #include <alda/net/port.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 
 
 sanguis::server::object::object(
-	fcppt::log::context &_log_context,
+	fcppt::log::context_reference const _log_context,
 	alda::net::port const _port
 )
 :

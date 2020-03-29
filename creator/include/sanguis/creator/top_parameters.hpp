@@ -7,8 +7,7 @@
 #include <sanguis/creator/spawn_boss.hpp>
 #include <sanguis/creator/symbol.hpp>
 #include <sanguis/creator/top_parameters_fwd.hpp>
-#include <fcppt/reference_impl.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 
 
 namespace sanguis
@@ -21,14 +20,14 @@ class top_parameters
 public:
 	SANGUIS_CREATOR_SYMBOL
 	top_parameters(
-		fcppt::log::context &,
+		fcppt::log::context_reference,
 		sanguis::creator::name const &,
 		sanguis::creator::seed,
 		sanguis::creator::opening_count_array,
 		sanguis::creator::spawn_boss
 	);
 
-	fcppt::log::context &
+	fcppt::log::context_reference
 	log_context() const;
 
 	SANGUIS_CREATOR_SYMBOL
@@ -44,9 +43,7 @@ public:
 	sanguis::creator::spawn_boss
 	spawn_boss() const;
 private:
-	fcppt::reference<
-		fcppt::log::context
-	> log_context_;
+	fcppt::log::context_reference log_context_;
 
 	sanguis::creator::name name_;
 

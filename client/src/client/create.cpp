@@ -5,12 +5,12 @@
 #include <sanguis/client/args/result_fwd.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 
 
 sanguis::client::object_base_unique_ptr
 sanguis::client::create(
-	fcppt::log::context &_log_context,
+	fcppt::log::context_reference const _log_context,
 	sanguis::client::args::result const &_args
 )
 {

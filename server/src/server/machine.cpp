@@ -41,7 +41,7 @@
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/optional_error.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/info.hpp>
@@ -66,7 +66,7 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::machine::machine(
-	fcppt::log::context &_log_context,
+	fcppt::log::context_reference const _log_context,
 	alda::net::port const _port,
 	sanguis::io_service &_io_service
 )
@@ -331,7 +331,7 @@ sanguis::server::machine::resources() const
 		resources_;
 }
 
-fcppt::log::context &
+fcppt::log::context_reference
 sanguis::server::machine::log_context() const
 {
 	return

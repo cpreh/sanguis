@@ -4,7 +4,7 @@
 #include <sanguis/tiles/log_fwd.hpp>
 #include <sanguis/tiles/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference_fwd.hpp>
 #include <fcppt/log/object.hpp>
 
 
@@ -22,7 +22,7 @@ public:
 	SANGUIS_TILES_SYMBOL
 	explicit
 	log(
-		fcppt::log::context &
+		fcppt::log::context_reference
 	);
 
 	SANGUIS_TILES_SYMBOL

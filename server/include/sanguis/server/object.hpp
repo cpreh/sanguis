@@ -9,7 +9,7 @@
 #include <alda/net/port.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_state_machine.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference_fwd.hpp>
 
 
 namespace sanguis
@@ -28,7 +28,7 @@ class object
 public:
 	SANGUIS_SERVER_SYMBOL
 	object(
-		fcppt::log::context &,
+		fcppt::log::context_reference,
 		alda::net::port
 	);
 

@@ -10,6 +10,7 @@
 #include <fcppt/args_from_second.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/main.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/either/match.hpp>
@@ -95,7 +96,9 @@ try
 
 							sanguis::server::object_base_unique_ptr const server(
 								sanguis::server::create(
-									log_context,
+									fcppt::make_ref(
+										log_context
+									),
 									fcppt::record::get<
 										sanguis::server::args::labels::port
 									>(

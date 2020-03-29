@@ -28,6 +28,7 @@
 #include <sanguis/creator/tile.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_int_range_count.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/algorithm/repeat.hpp>
@@ -143,7 +144,9 @@ main()
 	};
 
 	sanguis::collision::log const log{
-		log_context
+		fcppt::make_ref(
+			log_context
+		)
 	};
 
 	body_base fake_body_base;

@@ -2,13 +2,13 @@
 #include <sanguis/server/log_location.hpp>
 #include <sanguis/server/weapons/log.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 
 
 sanguis::server::weapons::log::log(
-	fcppt::log::context &_log_context
+	fcppt::log::context_reference const _log_context
 )
 :
 	main_log_{

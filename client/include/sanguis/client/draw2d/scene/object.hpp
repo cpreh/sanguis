@@ -75,7 +75,7 @@
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/optional/object_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -102,7 +102,7 @@ class object
 	);
 public:
 	object(
-		fcppt::log::context &,
+		fcppt::log::context_reference,
 		sanguis::client::load::context const &,
 		sanguis::client::load::hud::context &,
 		sanguis::client::sound_manager &,
@@ -352,7 +352,7 @@ private:
 		Message const &
 	);
 
-	fcppt::log::context &log_context_;
+	fcppt::log::context_reference const log_context_;
 
 	fcppt::log::object log_;
 

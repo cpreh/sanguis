@@ -9,7 +9,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/either/match.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/info.hpp>
@@ -31,7 +31,7 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::config::settings::object::object(
-	fcppt::log::context &_log_context,
+	fcppt::log::context_reference const _log_context,
 	std::filesystem::path const &_path
 )
 :

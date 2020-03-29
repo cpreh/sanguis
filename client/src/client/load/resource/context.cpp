@@ -6,7 +6,7 @@
 #include <sge/image2d/system_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 
 
 sanguis::client::load::resource::textures const &
@@ -24,7 +24,7 @@ sanguis::client::load::resource::context::sounds() const
 }
 
 sanguis::client::load::resource::context::context(
-	fcppt::log::context &_log_context,
+	fcppt::log::context_reference const _log_context,
 	sge::renderer::device::core &_renderer,
 	sge::image2d::system &_image_loader,
 	sge::audio::loader &_audio_loader,

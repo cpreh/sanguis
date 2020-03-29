@@ -37,13 +37,13 @@
 #include <sge/window/title.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 #include <fcppt/record/get.hpp>
 
 
 sanguis::client::systems_unique_ptr
 sanguis::client::create_systems(
-	fcppt::log::context &_log_context,
+	fcppt::log::context_reference const _log_context,
 	sanguis::client::args::result const &_args
 )
 {

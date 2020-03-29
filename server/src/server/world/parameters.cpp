@@ -3,11 +3,11 @@
 #include <sanguis/server/weapons/common_parameters.hpp>
 #include <sanguis/server/world/context_fwd.hpp>
 #include <sanguis/server/world/parameters.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 
 
 sanguis::server::world::parameters::parameters(
-	fcppt::log::context &_log_context,
+	fcppt::log::context_reference const _log_context,
 	sanguis::random_generator &_random_generator,
 	sanguis::server::weapons::common_parameters const &_weapon_parameters,
 	sanguis::server::world::context &_context,
@@ -32,11 +32,11 @@ sanguis::server::world::parameters::parameters(
 {
 }
 
-fcppt::log::context &
+fcppt::log::context_reference
 sanguis::server::world::parameters::log_context() const
 {
 	return
-		log_context_.get();
+		log_context_;
 }
 
 sanguis::random_generator &

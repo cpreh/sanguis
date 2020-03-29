@@ -50,7 +50,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/cast/dynamic_fun.hpp>
 #include <fcppt/either/match.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/name.hpp>
@@ -76,7 +76,7 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::machine::machine(
-	fcppt::log::context &_log_context,
+	fcppt::log::context_reference const _log_context,
 	sanguis::client::config::settings::object &_settings,
 	sanguis::client::args::result const &_options,
 	sanguis::client::server_callback const &_server_callback,
@@ -388,7 +388,7 @@ sanguis::client::machine::cursor_gfx() const
 		cursor_gfx_;
 }
 
-fcppt::log::context &
+fcppt::log::context_reference
 sanguis::client::machine::log_context() const
 {
 	return

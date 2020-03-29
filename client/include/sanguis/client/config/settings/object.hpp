@@ -4,7 +4,7 @@
 #include <sanguis/client/config/settings/object_fwd.hpp>
 #include <sge/parse/ini/start.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference_fwd.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <filesystem>
@@ -27,7 +27,7 @@ class object
 	);
 public:
 	object(
-		fcppt::log::context &,
+		fcppt::log::context_reference,
 		std::filesystem::path const &
 	);
 

@@ -6,11 +6,11 @@
 #include <sge/audio/player_fwd.hpp>
 #include <sge/image2d/system_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 
 
 sanguis::client::load::context::context(
-	fcppt::log::context &_log_context,
+	fcppt::log::context_reference const _log_context,
 	sge::image2d::system &_image_loader,
 	sge::renderer::device::core &_renderer,
 	sge::audio::loader &_audio_loader,

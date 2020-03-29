@@ -12,7 +12,7 @@
 #include <sge/gui/style/base_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference_fwd.hpp>
 
 
 namespace sanguis
@@ -24,7 +24,7 @@ namespace draw2d
 
 sanguis::client::draw::base_unique_ptr
 create(
-	fcppt::log::context &,
+	fcppt::log::context_reference,
 	sanguis::client::load::context const &,
 	sanguis::client::load::hud::context &,
 	sanguis::client::sound_manager &,

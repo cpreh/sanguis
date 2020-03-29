@@ -15,6 +15,7 @@
 #include <sge/log/location.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/scoped_output.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/io/clog.hpp>
 #include <fcppt/log/context.hpp>
 #include <fcppt/log/optional_level.hpp>
@@ -72,7 +73,9 @@ sanguis::client::start(
 
 	sanguis::client::object_base_unique_ptr const client(
 		sanguis::client::create(
-			log_context,
+			fcppt::make_ref(
+				log_context
+			),
 			_args
 		)
 	);

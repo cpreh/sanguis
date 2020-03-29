@@ -24,7 +24,7 @@
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/scoped_state_machine.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/optional/object_decl.hpp>
 
@@ -43,7 +43,7 @@ class object
 	);
 public:
 	object(
-		fcppt::log::context &,
+		fcppt::log::context_reference,
 		sanguis::client::args::result const &
 	);
 
@@ -68,7 +68,7 @@ private:
 	awl::main::exit_code
 	quit_server();
 
-	fcppt::log::context &log_context_;
+	fcppt::log::context_reference const log_context_;
 
 	fcppt::log::object log_;
 

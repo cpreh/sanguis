@@ -2,13 +2,13 @@
 #include <sanguis/collision/log.hpp>
 #include <sanguis/collision/log_location.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 
 
 sanguis::collision::log::log(
-	fcppt::log::context &_log_context
+	fcppt::log::context_reference const _log_context
 )
 :
 	body_log_{

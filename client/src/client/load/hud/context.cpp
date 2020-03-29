@@ -9,14 +9,14 @@
 #include <fcppt/make_cref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/from.hpp>
 
 
 sanguis::client::load::hud::context::context(
-	fcppt::log::context &_log_context,
+	fcppt::log::context_reference const _log_context,
 	sanguis::client::load::resource::textures const &_textures
 )
 :

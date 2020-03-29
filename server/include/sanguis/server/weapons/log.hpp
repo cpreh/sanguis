@@ -3,7 +3,7 @@
 
 #include <sanguis/server/weapons/log_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference_fwd.hpp>
 #include <fcppt/log/object.hpp>
 
 
@@ -22,7 +22,7 @@ class log
 public:
 	explicit
 	log(
-		fcppt::log::context &
+		fcppt::log::context_reference
 	);
 
 	~log();

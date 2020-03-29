@@ -6,7 +6,7 @@
 #include <alda/net/port.hpp>
 #include <awl/main/exit_code.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference_fwd.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <mutex>
@@ -26,7 +26,7 @@ class server
 	);
 public:
 	server(
-		fcppt::log::context &,
+		fcppt::log::context_reference,
 		alda::net::port
 	);
 

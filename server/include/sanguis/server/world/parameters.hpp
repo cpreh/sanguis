@@ -7,7 +7,7 @@
 #include <sanguis/server/world/context_fwd.hpp>
 #include <sanguis/server/world/parameters_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 
 
 namespace sanguis
@@ -21,14 +21,14 @@ class parameters
 {
 public:
 	parameters(
-		fcppt::log::context &,
+		fcppt::log::context_reference,
 		sanguis::random_generator &,
 		sanguis::server::weapons::common_parameters const &,
 		sanguis::server::world::context &,
 		sanguis::server::environment::load_context &
 	);
 
-	fcppt::log::context &
+	fcppt::log::context_reference
 	log_context() const;
 
 	sanguis::random_generator &
@@ -43,9 +43,7 @@ public:
 	sanguis::server::environment::load_context &
 	load_context() const;
 private:
-	fcppt::reference<
-		fcppt::log::context
-	> log_context_;
+	fcppt::log::context_reference log_context_;
 
 	fcppt::reference<
 		sanguis::random_generator

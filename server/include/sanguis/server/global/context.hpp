@@ -29,7 +29,7 @@
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/reference_decl.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference_fwd.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_map>
@@ -52,7 +52,7 @@ class context
 	);
 public:
 	context(
-		fcppt::log::context &,
+		fcppt::log::context_reference,
 		sanguis::server::unicast_callback const &,
 		sanguis::server::load const &,
 		sanguis::server::console &

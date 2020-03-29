@@ -67,7 +67,7 @@
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/at_optional.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/info.hpp>
 #include <fcppt/log/name.hpp>
@@ -96,7 +96,7 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::global::context::context(
-	fcppt::log::context &_log_context,
+	fcppt::log::context_reference const _log_context,
 	sanguis::server::unicast_callback const &_send_unicast,
 	sanguis::server::load const &_model_context,
 	sanguis::server::console &_console

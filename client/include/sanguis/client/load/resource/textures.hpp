@@ -11,7 +11,7 @@
 #include <sge/texture/const_part_unique_ptr.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference_fwd.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <filesystem>
@@ -61,7 +61,7 @@ public:
 	renderer() const;
 
 	textures(
-		fcppt::log::context &,
+		fcppt::log::context_reference,
 		sge::renderer::device::core &,
 		sge::image2d::system &
 	);

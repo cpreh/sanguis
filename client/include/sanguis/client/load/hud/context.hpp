@@ -7,7 +7,7 @@
 #include <sanguis/client/load/resource/textures_fwd.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference_fwd.hpp>
 #include <fcppt/log/object.hpp>
 
 
@@ -27,7 +27,7 @@ class context
 	);
 public:
 	context(
-		fcppt::log::context &,
+		fcppt::log::context_reference,
 		sanguis::client::load::resource::textures const &
 	);
 

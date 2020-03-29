@@ -14,12 +14,12 @@
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 
 
 sanguis::client::draw::base_unique_ptr
 sanguis::client::draw2d::create(
-	fcppt::log::context &_log_context,
+	fcppt::log::context_reference const _log_context,
 	sanguis::client::load::context const &_load_context,
 	sanguis::client::load::hud::context &_hud_context,
 	sanguis::client::sound_manager &_sound_manager,

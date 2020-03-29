@@ -184,7 +184,7 @@
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/enum/array_init.hpp>
 #include <fcppt/enum/make_range.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/out.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -209,7 +209,7 @@
 
 
 sanguis::client::draw2d::scene::object::object(
-	fcppt::log::context &_log_context,
+	fcppt::log::context_reference const _log_context,
 	sanguis::client::load::context const &_resources,
 	sanguis::client::load::hud::context &_hud_resources,
 	sanguis::client::sound_manager &_sound_manager,

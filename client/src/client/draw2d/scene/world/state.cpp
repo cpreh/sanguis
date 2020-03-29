@@ -58,7 +58,7 @@
 #include <fcppt/container/grid/make_pos_ref_crange_start_end.hpp>
 #include <fcppt/container/grid/min_from_pos.hpp>
 #include <fcppt/container/grid/sup_from_pos.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/to_vector.hpp>
@@ -77,7 +77,7 @@
 
 
 sanguis::client::draw2d::scene::world::state::state(
-	fcppt::log::context &_log_context,
+	fcppt::log::context_reference const _log_context,
 	sanguis::random_generator &_random_generator,
 	sge::renderer::device::core &_renderer,
 	sanguis::client::load::tiles::context &_tiles,
@@ -300,7 +300,7 @@ sanguis::client::draw2d::scene::world::state::background_tile(
 }
 
 sanguis::client::draw2d::scene::world::state::state(
-	fcppt::log::context &_log_context,
+	fcppt::log::context_reference const _log_context,
 	sanguis::random_generator &_random_generator,
 	sge::renderer::device::core &_renderer,
 	sanguis::client::load::tiles::context &_tiles,

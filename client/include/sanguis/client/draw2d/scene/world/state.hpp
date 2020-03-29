@@ -25,7 +25,7 @@
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference_fwd.hpp>
 #include <fcppt/log/object.hpp>
 
 
@@ -47,7 +47,7 @@ class state
 	);
 public:
 	state(
-		fcppt::log::context &,
+		fcppt::log::context_reference,
 		sanguis::random_generator &,
 		sge::renderer::device::core &,
 		sanguis::client::load::tiles::context &,
@@ -85,7 +85,7 @@ public:
 	) const;
 private:
 	state(
-		fcppt::log::context &,
+		fcppt::log::context_reference,
 		sanguis::random_generator &,
 		sge::renderer::device::core &,
 		sanguis::client::load::tiles::context &,

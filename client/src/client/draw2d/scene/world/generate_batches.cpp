@@ -22,7 +22,7 @@
 #include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/size.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 #include <fcppt/math/ceil_div.hpp>
 #include <fcppt/math/dim/comparison.hpp>
 #include <fcppt/math/dim/map.hpp>
@@ -32,7 +32,7 @@
 
 sanguis::client::draw2d::scene::world::batch_grid
 sanguis::client::draw2d::scene::world::generate_batches(
-	fcppt::log::context &_log_context,
+	fcppt::log::context_reference const _log_context,
 	sanguis::random_generator &_random_generator,
 	sanguis::client::draw::debug const _debug,
 	sanguis::creator::grid const &_grid,

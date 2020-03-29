@@ -7,7 +7,7 @@
 #include <sanguis/load/model/path.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference_fwd.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <map>
@@ -35,7 +35,7 @@ public:
 	) const;
 
 	collection(
-		fcppt::log::context &,
+		fcppt::log::context_reference,
 		sanguis::client::load::resource::context const &
 	);
 

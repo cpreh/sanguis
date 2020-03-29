@@ -24,7 +24,7 @@
 #include <awl/event/base_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -50,7 +50,7 @@ class machine
 	);
 public:
 	machine(
-		fcppt::log::context &,
+		fcppt::log::context_reference,
 		sanguis::client::config::settings::object &,
 		sanguis::client::args::result const &,
 		sanguis::client::server_callback const &,
@@ -122,7 +122,7 @@ public:
 	sanguis::client::cursor &
 	cursor_gfx() const;
 
-	fcppt::log::context &
+	fcppt::log::context_reference
 	log_context() const;
 private:
 	void
@@ -147,7 +147,7 @@ private:
 		alda::net::buffer::circular_receive::streambuf &
 	);
 
-	fcppt::log::context &log_context_;
+	fcppt::log::context_reference const log_context_;
 
 	fcppt::log::object log_;
 

@@ -3,11 +3,11 @@
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/spawn_boss.hpp>
 #include <sanguis/creator/top_parameters.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 
 
 sanguis::creator::top_parameters::top_parameters(
-	fcppt::log::context &_log_context,
+	fcppt::log::context_reference const _log_context,
 	sanguis::creator::name const &_name,
 	sanguis::creator::seed const _seed,
 	sanguis::creator::opening_count_array const _opening_count_array,
@@ -32,11 +32,11 @@ sanguis::creator::top_parameters::top_parameters(
 {
 }
 
-fcppt::log::context &
+fcppt::log::context_reference
 sanguis::creator::top_parameters::log_context() const
 {
 	return
-		log_context_.get();
+		log_context_;
 }
 
 sanguis::creator::name const &

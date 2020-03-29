@@ -6,7 +6,7 @@
 #include <awl/main/exit_success.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
@@ -26,7 +26,7 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::server::server(
-	fcppt::log::context &_log_context,
+	fcppt::log::context_reference const _log_context,
 	alda::net::port const _port
 )
 :
