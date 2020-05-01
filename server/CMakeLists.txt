@@ -1124,6 +1124,7 @@ sanguis_add_library(
 		${sgefont_TARGET}
 		${sgetimer_TARGET}
 		${alda_TARGET}
+		${alda_net_TARGET}
 		fcppt_boost_interface
 		${fcppt_core_TARGET}
 		${fcppt_filesystem_TARGET}
@@ -1137,6 +1138,7 @@ sanguis_add_library(
 		fcppt_log_interface
 		fcppt_options_interface
 		alda_interface
+		alda_net_interface
 		Metal
 	COMPILE_FLAGS
 		${FcpptThreads_DEFINITIONS}

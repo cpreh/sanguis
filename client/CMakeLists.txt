@@ -938,6 +938,7 @@ sanguis_add_library(
 		${sgeviewport_TARGET}
 		${sgewindow_TARGET}
 		${alda_TARGET}
+		${alda_net_TARGET}
 		${awl_TARGET}
 		fcppt_boost_interface
 		${fcppt_core_TARGET}
@@ -952,6 +953,8 @@ sanguis_add_library(
 		sanguis_server_interface
 		sgeconsolegfx_interface
 		sgerenderer_interface
+		alda_interface
+		alda_net_interface
 		fcppt_core_interface
 		fcppt_log_interface
 		fcppt_options_interface

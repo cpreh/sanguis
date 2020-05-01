@@ -587,6 +587,7 @@ sanguis_add_library(
 		${sgeconfig_TARGET}
 		sgetimer_interface
 		${alda_TARGET}
+		${alda_net_TARGET}
 		fcppt_boost_interface
 		${fcppt_filesystem_TARGET}
 		${fcppt_core_TARGET}
@@ -594,6 +595,8 @@ sanguis_add_library(
 		${FCPPT_UTILS_FILESYSTEM_LIBRARIES}
 		${ASIO_LIBS}
 	TRANSITIVE_DEPS
+		alda_interface
+		alda_net_interface
 		fcppt_boost_interface
 		${FCPPT_UTILS_FILESYSTEM_LIBRARIES}
 	COMPILE_DEFINITIONS_SHARED_PUBLIC
