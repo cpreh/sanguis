@@ -9,6 +9,7 @@
 #include <sge/audio/loader_fwd.hpp>
 #include <sge/audio/optional_file_unique_ptr.hpp>
 #include <sge/audio/player.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/optional/deref.hpp>
@@ -72,7 +73,9 @@ sanguis::client::load::resource::sounds::load_path(
 				{
 					sge::audio::optional_file_unique_ptr const opt_file{
 						sge::audio::load(
-							multi_loader_,
+							fcppt::make_ref(
+								multi_loader_
+							),
 							_npath
 						)
 					};

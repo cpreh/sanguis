@@ -22,6 +22,7 @@
 #include <sge/image2d/view/const_object.hpp>
 #include <sge/image2d/view/object.hpp>
 #include <sge/image2d/view/sub.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/output_to_fcppt_string.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
@@ -107,7 +108,9 @@ sanguis::tools::libmergeimage::impl::make_image(
 
 					sge::image2d::file_unique_ptr const img(
 						sge::image2d::load_exn(
-							_image_system,
+							fcppt::make_ref(
+								_image_system
+							),
 							cur_path
 						)
 					);

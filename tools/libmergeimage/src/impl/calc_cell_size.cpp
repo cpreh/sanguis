@@ -7,6 +7,7 @@
 #include <sge/image2d/file.hpp>
 #include <sge/image2d/load_exn.hpp>
 #include <sge/image2d/system_fwd.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -29,7 +30,9 @@ try
 	return
 		sanguis::tools::libmergeimage::impl::cell_size(
 			sge::image2d::load_exn(
-				_image_system,
+				fcppt::make_ref(
+					_image_system
+				),
 				_base_path
 				/
 				_paths[

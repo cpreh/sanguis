@@ -50,6 +50,7 @@
 #include <fcppt/exception.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/main.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/strong_typedef_input.hpp>
 #include <fcppt/strong_typedef_output.hpp>
@@ -316,7 +317,9 @@ execute_main(
 								return
 									FCPPT_ASSERT_OPTIONAL_ERROR(
 										sge::image2d::load(
-											sys.image_system(),
+											fcppt::make_ref(
+												sys.image_system()
+											),
 											_path
 										)
 									);
