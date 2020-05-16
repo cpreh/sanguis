@@ -8,9 +8,11 @@
 #include <sanguis/tiles/collection.hpp>
 #include <sanguis/tiles/error.hpp>
 #include <sanguis/tiles/error_image.hpp>
+#include <sge/image2d/store/object.hpp>
 #include <sge/image2d/store/view.hpp>
 #include <sge/image2d/view/const_object.hpp>
 #include <sge/texture/part.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/enum/array_impl.hpp>
 #include <fcppt/enum/array_init.hpp>
@@ -40,12 +42,18 @@ sanguis::client::load::tiles::context::context(
 				sanguis::tiles::error const _error
 			)
 			{
+				sge::image2d::store::object const error_image{
+					sanguis::tiles::error_image(
+						_error
+					)
+				};
+
 				return
 					sanguis::client::load::resource::texture_from_view(
 						_textures.renderer(),
 						sge::image2d::store::view(
-							sanguis::tiles::error_image(
-								_error
+							fcppt::make_cref(
+								error_image
 							)
 						)
 					);

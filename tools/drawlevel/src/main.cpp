@@ -50,6 +50,7 @@
 #include <fcppt/exception.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/main.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/strong_typedef_input.hpp>
@@ -360,9 +361,11 @@ execute_main(
 			{
 				sge::image2d::view::const_object const source_view(
 					sge::image2d::store::view(
-						error_images[
-							_error
-						]
+						fcppt::make_cref(
+							error_images[
+								_error
+							]
+						)
 					)
 				);
 
