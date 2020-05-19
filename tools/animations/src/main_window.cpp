@@ -38,9 +38,9 @@
 #include <fcppt/cast/truncation_check.hpp>
 #include <fcppt/filesystem/path_to_string.hpp>
 #include <fcppt/filesystem/stem.hpp>
+#include <fcppt/optional/apply.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe.hpp>
-#include <fcppt/optional/maybe_multi.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/maybe_void_multi.hpp>
 #include <fcppt/optional/object_impl.hpp>
@@ -718,13 +718,8 @@ sanguis::tools::animations::main_window::resetFrames()
 sanguis::tools::animations::optional_animation_ref
 sanguis::tools::animations::main_window::current_animation()
 {
-	// TODO: optional_map_multi?
 	return
-		fcppt::optional::maybe_multi(
-			[]{
-				return
-					sanguis::tools::animations::optional_animation_ref();
-			},
+		fcppt::optional::apply(
 			[](
 				sanguis::tools::animations::path_model_pair &_loaded_model,
 				sanguis::model::part_name const &_part,
@@ -733,15 +728,13 @@ sanguis::tools::animations::main_window::current_animation()
 			)
 			{
 				return
-					sanguis::tools::animations::optional_animation_ref(
-						fcppt::make_ref(
-							_loaded_model.model().part(
-								_part
-							).weapon_category(
-								_weapon_category
-							).animation(
-								_animation
-							)
+					fcppt::make_ref(
+						_loaded_model.model().part(
+							_part
+						).weapon_category(
+							_weapon_category
+						).animation(
+							_animation
 						)
 					);
 			},
