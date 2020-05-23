@@ -34,6 +34,7 @@
 #include <sge/renderer/context/scoped_ffp.hpp>
 #include <sge/renderer/device/ffp.hpp>
 #include <sge/renderer/event/render.hpp>
+#include <sge/renderer/target/base.hpp>
 #include <sge/renderer/target/onscreen.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/viewport/manager_fwd.hpp>
@@ -45,7 +46,9 @@
 #include <awl/main/exit_success.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/from_std_string.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/reference_impl.hpp>
+#include <fcppt/reference_to_base.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/dynamic_fun.hpp>
@@ -399,8 +402,16 @@ void
 sanguis::client::machine::draw()
 {
 	sge::renderer::context::scoped_ffp const block(
-		renderer_,
-		renderer_.onscreen_target()
+		fcppt::make_ref(
+			renderer_
+		),
+		fcppt::reference_to_base<
+			sge::renderer::target::base
+		>(
+			fcppt::make_ref(
+				renderer_.onscreen_target()
+			)
+		)
 	);
 
 	this->process_event(
