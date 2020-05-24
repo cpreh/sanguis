@@ -4,6 +4,7 @@
 #include <sge/renderer/state/ffp/sampler/const_object_ref_vector.hpp>
 #include <sge/renderer/state/ffp/sampler/object_fwd.hpp>
 #include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
 
 
 sanguis::client::draw2d::scene::state::scoped_text::scoped_text(
@@ -13,7 +14,10 @@ sanguis::client::draw2d::scene::state::scoped_text::scoped_text(
 :
 	sanguis::client::draw2d::scene::state::scoped(),
 	state_(
-		_render_context,
+		// TODO
+		fcppt::make_ref(
+			_render_context
+		),
 		sge::renderer::state::ffp::sampler::const_object_ref_vector{
 			fcppt::make_cref(
 				_sampler

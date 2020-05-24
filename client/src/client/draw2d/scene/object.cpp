@@ -172,6 +172,8 @@
 #include <fcppt/format.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
@@ -532,9 +534,14 @@ sanguis::client::draw2d::scene::object::draw(
 			);
 
 			sge::renderer::state::ffp::transform::scoped const scoped_projection(
-				_render_context,
+				// TODO
+				fcppt::make_ref(
+					_render_context
+				),
 				sge::renderer::state::ffp::transform::mode::projection,
-				*projection_state
+				fcppt::make_cref(
+					*projection_state
+				)
 			);
 
 			sge::sprite::state::scoped<
@@ -565,9 +572,13 @@ sanguis::client::draw2d::scene::object::draw(
 				);
 
 				sge::renderer::state::ffp::transform::scoped const scoped_transform(
-					_render_context,
+					fcppt::make_ref(
+						_render_context
+					),
 					sge::renderer::state::ffp::transform::mode::world,
-					*transform_state
+					fcppt::make_cref(
+						*transform_state
+					)
 				);
 
 				world_->draw(

@@ -29,6 +29,8 @@
 #include <sge/sprite/roles/texture_coordinates0.hpp>
 #include <sge/viewport/manage_callback.hpp>
 #include <sge/viewport/manager.hpp>
+#include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
@@ -128,11 +130,16 @@ sanguis::client::draw2d::scene::light::draw(
 )
 {
 	sge::renderer::state::core::sampler::scoped_single const sampler_state{
-		_render_context,
+		// TODO
+		fcppt::make_ref(
+			_render_context
+		),
 		sge::renderer::texture::stage{
 			0u
 		},
-		*sampler_state_
+		fcppt::make_cref(
+			*sampler_state_
+		)
 	};
 
 	client_system_.render(
