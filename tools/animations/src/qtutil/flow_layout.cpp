@@ -106,7 +106,7 @@ QLayoutItem *sanguis::tools::animations::qtutil::FlowLayout::takeAt(int index)
 
 Qt::Orientations sanguis::tools::animations::qtutil::FlowLayout::expandingDirections() const
 {
-    return nullptr;
+    return Qt::Orientations{};
 }
 
 bool sanguis::tools::animations::qtutil::FlowLayout::hasHeightForWidth() const
