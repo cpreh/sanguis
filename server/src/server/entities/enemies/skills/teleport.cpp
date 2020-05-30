@@ -8,6 +8,7 @@
 #include <sanguis/server/entities/enemies/skills/teleport.hpp>
 #include <sanguis/server/weapons/target.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 
@@ -38,7 +39,9 @@ sanguis::server::entities::enemies::skills::teleport::update(
 {
 	if(
 		!sge::timer::reset_when_expired(
-			cooldown_timer_
+			fcppt::make_ref(
+				cooldown_timer_
+			)
 		)
 	)
 		return;

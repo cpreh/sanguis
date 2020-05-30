@@ -22,6 +22,7 @@
 #include <sanguis/server/perks/perk.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/repeat.hpp>
@@ -77,7 +78,9 @@ sanguis::server::perks::choleric::update(
 {
 	if(
 		!sge::timer::reset_when_expired(
-			shoot_timer_
+			fcppt::make_ref(
+				shoot_timer_
+			)
 		)
 	)
 		return;

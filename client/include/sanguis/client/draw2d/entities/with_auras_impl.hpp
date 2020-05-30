@@ -25,6 +25,8 @@
 #include <sge/sprite/types/texture_size.hpp>
 #include <sge/timer/elapsed_fractional.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/make_ref.hpp>
+#include <fcppt/use.hpp>
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -112,8 +114,12 @@ sanguis::client::draw2d::entities::with_auras<
 		);
 	}
 
-	sge::timer::reset_when_expired(
-		rotate_timer_
+	FCPPT_USE(
+		sge::timer::reset_when_expired(
+			fcppt::make_ref(
+				rotate_timer_
+			)
+		)
 	);
 }
 

@@ -11,6 +11,7 @@
 #include <sge/parse/json/get_exn.hpp>
 #include <sge/parse/json/int_type.hpp>
 #include <sge/parse/json/value_fwd.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/recursive_impl.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/cast/size.hpp>
@@ -33,8 +34,10 @@ sanguis::tiles::impl::make_areas(
 			sge::parse::json::get_exn<
 				sge::parse::json::array const
 			>(
-				_value
-			).elements,
+				fcppt::make_cref(
+					_value
+				)
+			).get().elements,
 			[
 				_size
 			](
@@ -73,8 +76,10 @@ sanguis::tiles::impl::make_areas(
 									sge::parse::json::get_exn<
 										sge::parse::json::int_type
 									>(
-										_element.get()
-									)
+										fcppt::make_cref(
+											_element.get()
+										)
+									).get()
 								)
 							)
 						)

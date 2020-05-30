@@ -7,6 +7,7 @@
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/with_health.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 
 
@@ -50,7 +51,9 @@ sanguis::server::buffs::burn::update()
 {
 	if(
 		sge::timer::reset_when_expired(
-			interval_timer_
+			fcppt::make_ref(
+				interval_timer_
+			)
 		)
 	)
 		entity_.damage(

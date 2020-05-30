@@ -13,6 +13,7 @@
 #include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -107,7 +108,9 @@ sanguis::server::entities::spawns::limited::may_spawn()
 {
 	return
 		sge::timer::reset_when_expired(
-			delay_timer_
+			fcppt::make_ref(
+				delay_timer_
+			)
 		)
 		?
 			std::min(

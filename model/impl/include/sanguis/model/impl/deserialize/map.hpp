@@ -8,6 +8,7 @@
 #include <sge/parse/json/get_exn.hpp>
 #include <sge/parse/json/member.hpp>
 #include <sge/parse/json/object.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/optional/to_exception.hpp>
@@ -47,9 +48,11 @@ map(
 			sge::parse::json::find_member_exn<
 				sge::parse::json::object
 			>(
-				_object.members,
+				fcppt::make_cref(
+					_object.members
+				),
 				_name
-			).members,
+			).get().members,
 			[
 				_deserialize_inner
 			](
@@ -76,8 +79,10 @@ map(
 							sge::parse::json::get_exn<
 								sge::parse::json::object
 							>(
-								_member.second.get()
-							)
+								fcppt::make_cref(
+									_member.second.get()
+								)
+							).get()
 						)
 					);
 			}

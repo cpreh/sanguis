@@ -21,6 +21,7 @@
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
@@ -59,7 +60,9 @@ sanguis::server::entities::enemies::skills::scatter::update(
 {
 	if(
 		!sge::timer::reset_when_expired(
-			cooldown_timer_
+			fcppt::make_ref(
+				cooldown_timer_
+			)
 		)
 	)
 		return;

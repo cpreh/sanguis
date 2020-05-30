@@ -5,6 +5,7 @@
 #include <sge/parse/json/find_member.hpp>
 #include <sge/parse/json/int_type.hpp>
 #include <sge/parse/json/object.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -23,7 +24,9 @@ sanguis::model::impl::deserialize::animation_delay(
 				sge::parse::json::find_member<
 					sge::parse::json::int_type
 				>(
-					_object.members,
+					fcppt::make_cref(
+						_object.members
+					),
 					sge::charconv::utf8_string{
 						"delay"
 					}

@@ -16,6 +16,7 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/environment/optional_object_ref.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/math/twopi.hpp>
 #include <fcppt/optional/maybe_void.hpp>
@@ -100,7 +101,9 @@ sanguis::server::entities::projectiles::scatter::update()
 
 	if(
 		!sge::timer::reset_when_expired(
-			shoot_timer_
+			fcppt::make_ref(
+				shoot_timer_
+			)
 		)
 	)
 		return;

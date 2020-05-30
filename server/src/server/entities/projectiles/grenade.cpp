@@ -21,6 +21,7 @@
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/optional_error.hpp>
@@ -137,7 +138,9 @@ sanguis::server::entities::projectiles::grenade::update()
 {
 	if(
 		sge::timer::reset_when_expired(
-			slowdown_timer_
+			fcppt::make_ref(
+				slowdown_timer_
+			)
 		)
 	)
 		this->movement_speed().current(

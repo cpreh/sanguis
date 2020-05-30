@@ -6,6 +6,7 @@
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <sge/parse/json/find_member.hpp>
 #include <sge/parse/json/object.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/optional/map.hpp>
@@ -22,7 +23,9 @@ sanguis::model::impl::deserialize::animation_sound(
 			sge::parse::json::find_member<
 				sge::charconv::utf8_string
 			>(
-				_object.members,
+				fcppt::make_cref(
+					_object.members
+				),
 				"sound"
 			),
 			[](

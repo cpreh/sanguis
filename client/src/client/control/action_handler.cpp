@@ -37,6 +37,7 @@
 #include <sge/console/callback/short_description.hpp>
 #include <sge/font/lit.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/unit.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/cast/size_fun.hpp>
@@ -280,7 +281,9 @@ sanguis::client::control::action_handler::handle_cursor_action(
 
 	if(
 		!sge::timer::reset_when_expired(
-			rotation_timer_
+			fcppt::make_ref(
+				rotation_timer_
+			)
 		)
 	)
 		return;
