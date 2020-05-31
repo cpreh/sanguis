@@ -46,6 +46,8 @@
 #include <sge/sprite/state/parameters.hpp>
 #include <fcppt/boost_units_value.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/optional_error.hpp>
@@ -198,8 +200,12 @@ sanguis::client::draw2d::scene::world::state::draw(
 	);
 
 	sge::renderer::vertex::scoped_declaration const scoped_decl(
-		_render_context,
-		sprite_buffers_.parameters().vertex_declaration()
+		fcppt::make_ref(
+			_render_context
+		),
+		fcppt::make_cref(
+			sprite_buffers_.parameters().vertex_declaration()
+		)
 	);
 
 	for(

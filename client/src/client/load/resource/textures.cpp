@@ -24,6 +24,7 @@
 #include <fcppt/exception.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -234,7 +235,9 @@ sanguis::client::load::resource::textures::do_load_inner(
 				>(
 					sge::renderer::texture::create_planar_from_path(
 						_path,
-						renderer_,
+						fcppt::make_ref(
+							renderer_
+						),
 						image_loader_,
 						sge::renderer::texture::mipmap::off(),
 						sge::renderer::resource_flags_field::null(),

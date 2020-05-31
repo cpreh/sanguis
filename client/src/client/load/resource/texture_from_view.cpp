@@ -9,6 +9,7 @@
 #include <sge/texture/const_part_unique_ptr.hpp>
 #include <sge/texture/part.hpp>
 #include <sge/texture/part_raw_ptr.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/unique_ptr_to_const.hpp>
@@ -29,7 +30,9 @@ sanguis::client::load::resource::texture_from_view(
 					sge::texture::part_raw_ptr
 				>(
 					sge::renderer::texture::create_planar_from_view(
-						_renderer,
+						fcppt::make_ref(
+							_renderer
+						),
 						_view,
 						sge::renderer::texture::mipmap::off(),
 						sge::renderer::resource_flags_field::null(),
