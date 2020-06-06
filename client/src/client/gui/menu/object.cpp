@@ -38,6 +38,7 @@
 #include <fcppt/const.hpp>
 #include <fcppt/extract_from_string.hpp>
 #include <fcppt/from_std_string.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/narrow.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
@@ -156,7 +157,9 @@ sanguis::client::gui::menu::object::object(
 		sge::font::from_fcppt_string(
 			fcppt::from_std_string(
 				sge::parse::ini::get_or_create(
-					_settings.sections(),
+					fcppt::make_ref(
+						_settings.sections()
+					),
 					config_section,
 					config_player_name_key,
 					sge::parse::ini::value(
@@ -198,7 +201,9 @@ sanguis::client::gui::menu::object::object(
 		sge::font::from_fcppt_string(
 			fcppt::from_std_string(
 				sge::parse::ini::get_or_create(
-					_settings.sections(),
+					fcppt::make_ref(
+						_settings.sections()
+					),
 					config_section,
 					config_hostname_key,
 					sge::parse::ini::value(
@@ -240,7 +245,9 @@ sanguis::client::gui::menu::object::object(
 		sge::font::from_fcppt_string(
 			fcppt::from_std_string(
 				sge::parse::ini::get_or_create(
-					_settings.sections(),
+					fcppt::make_ref(
+						_settings.sections()
+					),
 					config_section,
 					config_port_key,
 					sge::parse::ini::value(
@@ -470,7 +477,9 @@ sanguis::client::gui::menu::object::~object()
 				)
 				{
 					sge::parse::ini::set_or_create(
-						this->settings_.sections(),
+						fcppt::make_ref(
+							this->settings_.sections()
+						),
 						config_section,
 						_entry,
 						sge::parse::ini::value(
@@ -597,7 +606,9 @@ sanguis::client::gui::menu::object::handle_quickstart()
 				>(
 					// TODO: Use server port here if it was specified
 					sge::parse::ini::get_or_create(
-						settings_.sections(),
+						fcppt::make_ref(
+							settings_.sections()
+						),
 						config_section,
 						config_quickstart_port_key,
 						sge::parse::ini::value(
