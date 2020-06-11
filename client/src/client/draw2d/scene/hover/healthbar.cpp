@@ -16,6 +16,7 @@
 #include <sge/image/color/init/green.hpp>
 #include <sge/image/color/init/red.hpp>
 #include <sge/renderer/context/ffp.hpp>
+#include <sge/renderer/device/core.hpp>
 #include <sge/renderer/device/ffp.hpp>
 #include <sge/sprite/buffers/option.hpp>
 #include <sge/sprite/compare/nothing.hpp>
@@ -31,6 +32,8 @@
 #include <sge/sprite/state/object_impl.hpp>
 #include <sge/sprite/state/parameters_impl.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_ref.hpp>
+#include <fcppt/reference_to_base.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
@@ -71,7 +74,13 @@ sanguis::client::draw2d::scene::hover::healthbar::healthbar(
 )
 :
 	buffers_{
-		_renderer,
+		fcppt::reference_to_base<
+			sge::renderer::device::core
+		>(
+			fcppt::make_ref(
+				_renderer
+			)
+		),
 		sge::sprite::buffers::option::static_
 	},
 	range_{

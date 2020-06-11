@@ -330,7 +330,9 @@ sanguis::client::draw2d::scene::world::state::state(
 		_renderer
 	),
 	sprite_buffers_(
-		_renderer,
+		fcppt::make_ref(
+			_renderer
+		),
 		sge::sprite::buffers::option::static_
 	),
 	sprite_state_(

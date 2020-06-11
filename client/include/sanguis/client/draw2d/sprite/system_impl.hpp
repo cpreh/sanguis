@@ -17,6 +17,7 @@
 #include <sge/sprite/state/default_options.hpp>
 #include <sge/sprite/state/object_impl.hpp>
 #include <sge/sprite/state/parameters.hpp>
+#include <fcppt/make_ref.hpp>
 
 
 template<
@@ -35,7 +36,9 @@ sanguis::client::draw2d::sprite::system<
 		_state
 	),
 	buffers_(
-		_renderer,
+		fcppt::make_ref(
+			_renderer
+		),
 		sge::sprite::buffers::option::dynamic
 	),
 	collection_()
