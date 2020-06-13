@@ -8,7 +8,6 @@
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
 #include <sge/sprite/buffers/option.hpp>
-#include <sge/sprite/buffers/parameters.hpp>
 #include <sge/sprite/compare/default.hpp>
 #include <sge/sprite/intrusive/ordered/collection_impl.hpp>
 #include <sge/sprite/process/geometry_options.hpp>
@@ -32,6 +31,9 @@ sanguis::client::draw2d::sprite::system<
 	sanguis::client::draw2d::sprite::state &_state
 )
 :
+	renderer_{
+		_renderer
+	},
 	state_(
 		_state
 	),
@@ -122,7 +124,7 @@ sanguis::client::draw2d::sprite::system<
 >::renderer() const
 {
 	return
-		buffers_.parameters().device();
+		renderer_;
 }
 
 #endif

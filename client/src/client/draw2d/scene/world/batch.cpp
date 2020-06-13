@@ -4,7 +4,6 @@
 #include <sanguis/client/draw2d/scene/world/sprite/state_choices.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/renderer/vertex/declaration_fwd.hpp>
-#include <sge/sprite/render/parameters.hpp>
 #include <sge/sprite/render/range_with_options.hpp>
 #include <sge/sprite/state/options.hpp>
 #include <sge/sprite/state/vertex_options.hpp>
@@ -48,12 +47,8 @@ sanguis::client::draw2d::scene::world::batch::draw(
 ) const
 {
 	sge::sprite::render::range_with_options(
-		sge::sprite::render::parameters<
-			sanguis::client::draw2d::scene::world::sprite::state_choices
-		>(
-			_render_context,
-			_vertex_declaration
-		),
+		_render_context,
+		_vertex_declaration,
 		range_,
 		_state,
 		sge::sprite::state::options<

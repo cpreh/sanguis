@@ -155,7 +155,9 @@
 #include <sge/image/color/predef.hpp>
 #include <sge/image/color/any/object.hpp>
 #include <sge/renderer/clear/parameters.hpp>
+#include <sge/renderer/context/core.hpp>
 #include <sge/renderer/context/ffp.hpp>
+#include <sge/renderer/device/core.hpp>
 #include <sge/renderer/device/ffp.hpp>
 #include <sge/renderer/state/ffp/transform/mode.hpp>
 #include <sge/renderer/state/ffp/transform/object.hpp>
@@ -175,6 +177,7 @@
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/reference_to_base.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/type_name_from_info.hpp>
@@ -272,7 +275,13 @@ sanguis::client::draw2d::scene::object::object(
 		_player_health_callback
 	),
 	sprite_states_(
-		renderer_,
+		fcppt::reference_to_base<
+			sge::renderer::device::core
+		>(
+			fcppt::make_ref(
+				renderer_
+			)
+		),
 		sge::sprite::state::parameters<
 			sanguis::client::draw2d::sprite::state_choices
 		>()
@@ -548,7 +557,13 @@ sanguis::client::draw2d::scene::object::draw(
 				sanguis::client::draw2d::sprite::state_choices
 			> const scoped_state(
 				renderer_,
-				_render_context,
+				fcppt::reference_to_base<
+					sge::renderer::context::core
+				>(
+					fcppt::make_ref(
+						_render_context
+					)
+				),
 				sge::sprite::state::default_options<
 					sanguis::client::draw2d::sprite::state_choices
 				>(),

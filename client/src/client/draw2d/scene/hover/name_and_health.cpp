@@ -9,7 +9,7 @@
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/renderer/device/ffp.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe_void.hpp>

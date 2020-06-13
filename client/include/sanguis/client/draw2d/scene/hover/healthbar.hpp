@@ -8,7 +8,7 @@
 #include <sanguis/client/draw2d/sprite/center_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/colored/choices.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/renderer/device/core_fwd.hpp>
 #include <sge/sprite/render/range_decl.hpp>
 #include <sge/sprite/state/choices.hpp>
 #include <sge/sprite/state/object_decl.hpp>
@@ -36,7 +36,7 @@ class healthbar
 	);
 public:
 	healthbar(
-		sge::renderer::device::ffp &,
+		sge::renderer::device::core &,
 		sanguis::client::draw2d::sprite::center,
 		sanguis::client::draw2d::radius,
 		sanguis::client::health_pair

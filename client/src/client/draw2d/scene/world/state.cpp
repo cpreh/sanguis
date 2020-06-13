@@ -204,7 +204,7 @@ sanguis::client::draw2d::scene::world::state::draw(
 			_render_context
 		),
 		fcppt::make_cref(
-			sprite_buffers_.parameters().vertex_declaration()
+			sprite_buffers_.vertex_declaration()
 		)
 	);
 
@@ -219,7 +219,7 @@ sanguis::client::draw2d::scene::world::state::draw(
 	)
 		entry.value().draw(
 			_render_context,
-			sprite_buffers_.parameters().vertex_declaration(),
+			sprite_buffers_.vertex_declaration(),
 			sprite_state_
 		);
 }
@@ -336,7 +336,9 @@ sanguis::client::draw2d::scene::world::state::state(
 		sge::sprite::buffers::option::static_
 	),
 	sprite_state_(
-		renderer_,
+		fcppt::make_ref(
+			renderer_
+		),
 		sanguis::client::draw2d::scene::world::sprite::state::parameters_type()
 	),
 	grid_(

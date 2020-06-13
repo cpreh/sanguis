@@ -69,6 +69,8 @@ private:
 	>
 	sge_buffers;
 
+	sge::renderer::device::core &renderer_;
+
 	sanguis::client::draw2d::sprite::state &state_;
 
 	sge_buffers buffers_;
