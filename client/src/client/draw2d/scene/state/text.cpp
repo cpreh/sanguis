@@ -9,6 +9,7 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/renderer/state/ffp/sampler/object.hpp>
 #include <sge/renderer/state/ffp/sampler/object_unique_ptr.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/optional/map.hpp>
@@ -21,7 +22,9 @@ sanguis::client::draw2d::scene::state::text::text(
 	sanguis::client::draw2d::scene::state::base(),
 	sampler_(
 		sge::font::draw::create_ffp_sampler(
-			_device,
+			fcppt::make_ref(
+				_device
+			),
 			sanguis::client::draw2d::font_color_format()
 		)
 	)

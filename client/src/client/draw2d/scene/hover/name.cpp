@@ -18,6 +18,7 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/renderer/texture/emulate_srgb.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/vector/dim.hpp>
 
@@ -31,8 +32,12 @@ sanguis::client::draw2d::scene::hover::name::name(
 )
 :
 	text_(
-		_renderer,
-		_font,
+		fcppt::make_ref(
+			_renderer
+		),
+		fcppt::make_ref(
+			_font
+		),
 		sge::font::from_fcppt_string(
 			_name.text()
 		),
