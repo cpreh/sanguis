@@ -86,7 +86,10 @@ sanguis::server::console::insert(
 	return
 		object_.insert(
 			sge::console::callback::parameters(
-				_callback,
+				// TODO: Move
+				sge::console::callback::function{
+					_callback
+				},
 				sge::console::callback::name(
 					sge::font::from_fcppt_string(
 						_command

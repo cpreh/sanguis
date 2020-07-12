@@ -36,6 +36,7 @@
 #include <sge/console/callback/parameters.hpp>
 #include <sge/console/callback/short_description.hpp>
 #include <sge/font/lit.hpp>
+#include <sge/font/string.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/unit.hpp>
@@ -540,10 +541,16 @@ sanguis::client::control::action_handler::cheat_connection(
 						std::placeholders::_2
 					)
 				},
-				_name
+				// TODO: Move
+				sge::console::callback::name{
+					_name
+				}
 			)
 			.short_description(
-				_description.get()
+				// TODO: Move
+				sge::font::string{
+					_description.get()
+				}
 			)
 		);
 }

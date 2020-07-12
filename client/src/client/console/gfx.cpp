@@ -15,6 +15,7 @@
 #include <sge/viewport/manage_callback.hpp>
 #include <sge/viewport/manager.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/math/vector/null.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
@@ -49,14 +50,20 @@ sanguis::client::console::gfx::gfx(
 :
 	// TODO: Add a background again
 	impl_(
-		_console,
-		_renderer,
+		fcppt::make_ref(
+			_console
+		),
+		fcppt::make_ref(
+			_renderer
+		),
 		sge::console::gfx::font_color(
 			sge::image::color::any::object{
 				sge::image::color::predef::white()
 			}
 		),
-		_font_object,
+		fcppt::make_ref(
+			_font_object
+		),
 		::make_console_rect(
 			_renderer.onscreen_target().viewport()
 		),
