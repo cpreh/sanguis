@@ -48,7 +48,7 @@ private:
 	draw_button(
 		sge::gui::renderer::base &,
 		sge::renderer::context::ffp &,
-		sge::rucksack::rect
+		sge::rucksack::rect const &
 	) const
 	override;
 
@@ -56,7 +56,7 @@ private:
 	draw_bar(
 		sge::gui::renderer::base &,
 		sge::renderer::context::ffp &,
-		sge::rucksack::rect,
+		sge::rucksack::rect const &,
 		sge::rucksack::axis,
 		sge::gui::fill_level,
 		sge::gui::fill_color const &
@@ -71,7 +71,7 @@ private:
 	draw_frame(
 		sge::gui::renderer::base &,
 		sge::renderer::context::ffp &,
-		sge::rucksack::rect,
+		sge::rucksack::rect const &,
 		sge::rucksack::padding
 	) const
 	override;
@@ -84,7 +84,7 @@ private:
 	draw_edit(
 		sge::gui::renderer::base &,
 		sge::renderer::context::ffp &,
-		sge::rucksack::rect
+		sge::rucksack::rect const &
 	) const
 	override;
 
@@ -96,7 +96,7 @@ private:
 	draw_image(
 		sge::gui::renderer::base &,
 		sge::renderer::context::ffp &,
-		sge::rucksack::rect
+		sge::rucksack::rect const &
 	) const
 	override;
 
@@ -108,7 +108,7 @@ private:
 	draw_text(
 		sge::gui::renderer::base &,
 		sge::renderer::context::ffp &,
-		sge::rucksack::rect
+		sge::rucksack::rect const &
 	) const
 	override;
 
@@ -116,7 +116,7 @@ private:
 	draw_transparent_frame(
 		sge::gui::renderer::base &,
 		sge::renderer::context::ffp &,
-		sge::rucksack::rect
+		sge::rucksack::rect const &
 	) const;
 
 	sge::gui::text_color
@@ -126,8 +126,7 @@ private:
 	sge::rucksack::dim
 	spacing() const;
 
-	sanguis::client::load::resource::textures
-	const &textures_;
+	sanguis::client::load::resource::textures const &textures_;
 };
 
 }

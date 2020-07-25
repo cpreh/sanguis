@@ -11,7 +11,7 @@
 #include <sge/gui/master.hpp>
 #include <sge/gui/background/colored.hpp>
 #include <sge/gui/main_area/screen_corner.hpp>
-#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/style/const_reference.hpp>
 #include <sge/gui/widget/box_container.hpp>
 #include <sge/gui/widget/text.hpp>
 #include <sge/input/event_base_fwd.hpp>
@@ -40,7 +40,7 @@ class chooser
 public:
 	chooser(
 		sanguis::client::perk::state &,
-		sge::gui::style::base const &,
+		sge::gui::style::const_reference,
 		sge::renderer::device::ffp &,
 		sge::viewport::manager &,
 		sge::font::object &
@@ -74,7 +74,7 @@ private:
 
 	sanguis::client::perk::state &state_;
 
-	sge::gui::style::base const &style_;
+	sge::gui::style::const_reference const style_;
 
 	sge::renderer::device::ffp &renderer_;
 

@@ -3,7 +3,9 @@
 
 #include <sanguis/server/net/basic_value_fwd.hpp>
 #include <sge/timer/basic_decl.hpp>
+#include <sge/timer/clocks/parameter_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/reference_fwd.hpp>
 #include <fcppt/optional/object_decl.hpp>
 
 
@@ -27,7 +29,9 @@ class basic_value
 public:
 	explicit
 	basic_value(
-		Clock const &
+		sge::timer::clocks::parameter<
+			Clock
+		>
 	);
 
 	~basic_value();

@@ -12,7 +12,7 @@
 #include <sge/font/string.hpp>
 #include <sge/gui/context_fwd.hpp>
 #include <sge/gui/text_color.hpp>
-#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/style/const_reference.hpp>
 #include <sge/gui/widget/base_fwd.hpp>
 #include <sge/gui/widget/reference.hpp>
 #include <sge/gui/widget/reference_alignment_pair.hpp>
@@ -22,12 +22,13 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/optional/maybe.hpp>
 
 
 sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 	sge::gui::context &_gui_context,
-	sge::gui::style::base const &_gui_style,
+	sge::gui::style::const_reference const _gui_style,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sanguis::weapon_attribute const &_attribute,
@@ -36,8 +37,12 @@ sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 :
 	name_{
 		_gui_style,
-		_renderer,
-		_font,
+		fcppt::make_ref(
+			_renderer
+		),
+		fcppt::make_ref(
+			_font
+		),
 		sanguis::client::gui::hud::weapon_attribute_name(
 			_attribute.type()
 		)
@@ -52,8 +57,12 @@ sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 	},
 	value_{
 		_gui_style,
-		_renderer,
-		_font,
+		fcppt::make_ref(
+			_renderer
+		),
+		fcppt::make_ref(
+			_font
+		),
 		sanguis::client::gui::hud::weapon_attribute_text(
 			_attribute
 		),
@@ -64,8 +73,12 @@ sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 	},
 	diff_{
 		_gui_style,
-		_renderer,
-		_font,
+		fcppt::make_ref(
+			_renderer
+		),
+		fcppt::make_ref(
+			_font
+		),
 		fcppt::optional::maybe(
 			_attribute_diff.get(),
 			[]{
@@ -113,7 +126,9 @@ sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 		)
 	},
 	container_{
-		_gui_context,
+		fcppt::make_ref(
+			_gui_context
+		),
 		sge::gui::widget::reference_alignment_vector{
 			sge::gui::widget::reference_alignment_pair{
 				sge::gui::widget::reference{

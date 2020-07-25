@@ -17,7 +17,7 @@
 #include <alda/net/client/object.hpp>
 #include <sge/console/gfx/object_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
-#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/style/const_reference.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <sge/window/system_fwd.hpp>
@@ -55,7 +55,7 @@ public:
 		sanguis::client::args::result const &,
 		sanguis::client::server_callback const &,
 		sanguis::client::load::context const &,
-		sge::gui::style::base const &,
+		sge::gui::style::const_reference,
 		sge::window::system &,
 		sge::font::object &,
 		sge::console::gfx::object &,
@@ -157,7 +157,7 @@ private:
 
 	sanguis::client::load::context const &resources_;
 
-	sge::gui::style::base const &gui_style_;
+	sge::gui::style::const_reference const gui_style_;
 
 	sge::renderer::device::ffp &renderer_;
 

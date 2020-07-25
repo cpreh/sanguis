@@ -7,6 +7,7 @@
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/with_health.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 
@@ -22,7 +23,9 @@ sanguis::server::buffs::burn::burn(
 	),
 	interval_timer_(
 		sanguis::diff_timer::parameters(
-			_entity.diff_clock(),
+			fcppt::make_cref(
+				_entity.diff_clock()
+			),
 			_interval.get()
 		)
 	),

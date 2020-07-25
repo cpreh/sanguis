@@ -12,7 +12,7 @@
 #include <sge/gui/background/colored.hpp>
 #include <sge/gui/main_area/fixed_position.hpp>
 #include <sge/gui/renderer/base_fwd.hpp>
-#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/style/const_reference.hpp>
 #include <sge/gui/widget/box_container.hpp>
 #include <sge/gui/widget/image.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
@@ -43,7 +43,7 @@ class weapon
 	);
 public:
 	weapon(
-		sge::gui::style::base const &,
+		sge::gui::style::const_reference,
 		sge::gui::renderer::base &,
 		sge::renderer::device::ffp &,
 		sge::font::object &,

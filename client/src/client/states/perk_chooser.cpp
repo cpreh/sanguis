@@ -14,6 +14,7 @@
 #include <sanguis/client/states/has_player.hpp>
 #include <sanguis/client/states/ingame.hpp>
 #include <sanguis/client/states/perk_chooser.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
@@ -46,9 +47,11 @@ sanguis::client::states::perk_chooser::perk_chooser(
 		this->context<
 			sanguis::client::states::has_player
 		>().perk_state(),
-		this->context<
-			sanguis::client::machine
-		>().gui_style(),
+		fcppt::make_cref(
+			this->context<
+				sanguis::client::machine
+			>().gui_style()
+		),
 		this->context<
 			sanguis::client::machine
 		>().renderer(),

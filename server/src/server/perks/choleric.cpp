@@ -22,6 +22,7 @@
 #include <sanguis/server/perks/perk.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -44,7 +45,9 @@ sanguis::server::perks::choleric::choleric(
 	),
 	shoot_timer_(
 		sanguis::diff_timer::parameters(
-			_diff_clock,
+			fcppt::make_cref(
+				_diff_clock
+			),
 			std::chrono::seconds(
 				5
 			)

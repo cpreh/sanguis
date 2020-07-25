@@ -24,6 +24,7 @@
 #include <sge/texture/const_part_ref.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/diff.hpp>
@@ -59,7 +60,9 @@ sanguis::client::draw2d::entities::model::part::part(
 	),
 	rotation_timer_(
 		sanguis::diff_timer::parameters(
-			_diff_clock,
+			fcppt::make_cref(
+				_diff_clock
+			),
 			std::chrono::seconds(
 				1
 			)

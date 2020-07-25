@@ -25,6 +25,7 @@
 #include <sge/sprite/types/texture_size.hpp>
 #include <sge/timer/elapsed_fractional.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/use.hpp>
 #include <fcppt/math/twopi.hpp>
@@ -54,7 +55,9 @@ sanguis::client::draw2d::entities::with_auras<
 	),
 	rotate_timer_(
 		sanguis::diff_timer::parameters(
-			_parameters.diff_clock(),
+			fcppt::make_cref(
+				_parameters.diff_clock()
+			),
 			sanguis::duration_second(
 				16
 			)

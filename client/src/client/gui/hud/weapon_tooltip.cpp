@@ -8,7 +8,7 @@
 #include <sge/font/lit.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/gui/context_fwd.hpp>
-#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/style/const_reference.hpp>
 #include <sge/gui/widget/base.hpp>
 #include <sge/gui/widget/box_container.hpp>
 #include <sge/gui/widget/reference.hpp>
@@ -18,6 +18,7 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/container/join.hpp>
@@ -25,7 +26,7 @@
 
 sanguis::client::gui::hud::weapon_tooltip::weapon_tooltip(
 	sge::gui::context &_gui_context,
-	sge::gui::style::base const &_gui_style,
+	sge::gui::style::const_reference const _gui_style,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sanguis::weapon_description const &_description
@@ -33,8 +34,12 @@ sanguis::client::gui::hud::weapon_tooltip::weapon_tooltip(
 :
 	name_text_(
 		_gui_style,
-		_renderer,
-		_font,
+		fcppt::make_ref(
+			_renderer
+		),
+		fcppt::make_ref(
+			_font
+		),
 		sanguis::client::gui::hud::weapon_name(
 			_description.weapon_type()
 		),
@@ -58,8 +63,12 @@ sanguis::client::gui::hud::weapon_tooltip::weapon_tooltip(
 						sge::gui::widget::static_text
 					>(
 						_gui_style,
-						_renderer,
-						_font,
+						fcppt::make_ref(
+							_renderer
+						),
+						fcppt::make_ref(
+							_font
+						),
 						sanguis::client::gui::hud::weapon_attribute_text(
 							_attribute
 						)
@@ -75,7 +84,9 @@ sanguis::client::gui::hud::weapon_tooltip::weapon_tooltip(
 		)
 	),
 	container_(
-		_gui_context,
+		fcppt::make_ref(
+			_gui_context
+		),
 		fcppt::container::join(
 			sge::gui::widget::reference_alignment_vector{
 				sge::gui::widget::reference_alignment_pair(

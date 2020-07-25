@@ -18,6 +18,7 @@
 #include <sanguis/server/entities/projectiles/projectile.hpp>
 #include <sanguis/server/entities/property/initial_max.hpp>
 #include <sanguis/server/environment/load_context.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -59,7 +60,9 @@ sanguis::server::entities::projectiles::base::base(
 	),
 	life_timer_(
 		sanguis::diff_timer::parameters(
-			this->diff_clock(),
+			fcppt::make_cref(
+				this->diff_clock()
+			),
 			_life_time.get()
 		)
 	)

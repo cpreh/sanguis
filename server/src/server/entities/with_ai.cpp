@@ -12,6 +12,7 @@
 #include <sanguis/server/weapons/optional_unique_ptr.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
@@ -49,7 +50,9 @@ sanguis::server::entities::with_ai::with_ai(
 	),
 	update_timer_(
 		sanguis::diff_timer::parameters(
-			this->diff_clock(),
+			fcppt::make_cref(
+				this->diff_clock()
+			),
 			sanguis::server::ai::update_interval()
 		)
 		.expired(

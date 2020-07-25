@@ -49,7 +49,9 @@ sanguis::client::draw2d::sprite::animation::texture::texture(
 	),
 	cur_timer_(
 		sanguis::diff_timer::parameters(
-			_diff_clock,
+			fcppt::make_cref(
+				_diff_clock
+			),
 			pos_->delay()
 		)
 	)

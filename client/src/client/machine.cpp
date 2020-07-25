@@ -29,7 +29,7 @@
 #include <alda/net/client/error_callback.hpp>
 #include <sge/console/gfx/object.hpp>
 #include <sge/font/object_fwd.hpp>
-#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/style/const_reference.hpp>
 #include <sge/input/event_base.hpp>
 #include <sge/renderer/context/scoped_ffp.hpp>
 #include <sge/renderer/device/ffp.hpp>
@@ -84,7 +84,7 @@ sanguis::client::machine::machine(
 	sanguis::client::args::result const &_options,
 	sanguis::client::server_callback const &_server_callback,
 	sanguis::client::load::context const &_resources,
-	sge::gui::style::base const &_gui_style,
+	sge::gui::style::const_reference const _gui_style,
 	sge::window::system &_window_system,
 	sge::font::object &_font_object,
 	sge::console::gfx::object &_console_gfx,
@@ -346,7 +346,7 @@ sge::gui::style::base const &
 sanguis::client::machine::gui_style() const
 {
 	return
-		gui_style_;
+		gui_style_.get();
 }
 
 sge::renderer::device::ffp &

@@ -17,7 +17,8 @@
 #include <sge/gui/optional_needed_width.hpp>
 #include <sge/gui/string_container.hpp>
 #include <sge/gui/text_callback.hpp>
-#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/main_area/reference.hpp>
+#include <sge/gui/style/const_reference.hpp>
 #include <sge/gui/widget/reference.hpp>
 #include <sge/gui/widget/reference_alignment_pair.hpp>
 #include <sge/gui/widget/reference_alignment_vector.hpp>
@@ -31,6 +32,7 @@
 #include <sge/parse/ini/value.hpp>
 #include <sge/renderer/clear/parameters.hpp>
 #include <sge/renderer/context/ffp.hpp>
+#include <sge/renderer/device/core.hpp>
 #include <sge/renderer/device/ffp.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
@@ -40,6 +42,7 @@
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/narrow.hpp>
+#include <fcppt/reference_to_base.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/to_std_string.hpp>
@@ -117,7 +120,7 @@ sanguis::client::gui::menu::object::object(
 	sge::font::object &_font,
 	sanguis::client::config::settings::object &_settings,
 	sanguis::client::gui::menu::callbacks::object const &_callbacks,
-	sge::gui::style::base const &_gui_style
+	sge::gui::style::const_reference const _gui_style
 )
 :
 	settings_(
@@ -132,28 +135,46 @@ sanguis::client::gui::menu::object::object(
 	),
 	quickstart_button_(
 		_gui_style,
-		_renderer,
-		_font,
+		fcppt::make_ref(
+			_renderer
+		),
+		fcppt::make_ref(
+			_font
+		),
 		SGE_FONT_LIT("Quickstart"),
 		sge::gui::optional_needed_width()
 	),
 	resolution_chooser_(
-		gui_context_,
+		fcppt::make_ref(
+			gui_context_
+		),
 		_gui_style,
-		_font,
-		_renderer
+		fcppt::make_ref(
+			_font
+		),
+		fcppt::make_ref(
+			_renderer
+		)
 	),
 	player_name_label_(
 		_gui_style,
-		_renderer,
-		_font,
+		fcppt::make_ref(
+			_renderer
+		),
+		fcppt::make_ref(
+			_font
+		),
 		SGE_FONT_LIT("Name: "),
 		sanguis::client::gui::default_text_color()
 	),
 	player_name_edit_(
 		_gui_style,
-		_renderer,
-		_font,
+		fcppt::make_ref(
+			_renderer
+		),
+		fcppt::make_ref(
+			_font
+		),
 		sge::font::from_fcppt_string(
 			fcppt::from_std_string(
 				sge::parse::ini::get_or_create(
@@ -170,7 +191,9 @@ sanguis::client::gui::menu::object::object(
 		)
 	),
 	player_name_line_(
-		gui_context_,
+		fcppt::make_ref(
+			gui_context_
+		),
 		sge::gui::widget::reference_alignment_vector{
 			sge::gui::widget::reference_alignment_pair(
 				sge::gui::widget::reference(
@@ -189,15 +212,23 @@ sanguis::client::gui::menu::object::object(
 	),
 	hostname_label_(
 		_gui_style,
-		_renderer,
-		_font,
+		fcppt::make_ref(
+			_renderer
+		),
+		fcppt::make_ref(
+			_font
+		),
 		SGE_FONT_LIT("Hostname: "),
 		sanguis::client::gui::default_text_color()
 	),
 	hostname_edit_(
 		_gui_style,
-		_renderer,
-		_font,
+		fcppt::make_ref(
+			_renderer
+		),
+		fcppt::make_ref(
+			_font
+		),
 		sge::font::from_fcppt_string(
 			fcppt::from_std_string(
 				sge::parse::ini::get_or_create(
@@ -214,7 +245,9 @@ sanguis::client::gui::menu::object::object(
 		)
 	),
 	hostname_line_(
-		gui_context_,
+		fcppt::make_ref(
+			gui_context_
+		),
 		sge::gui::widget::reference_alignment_vector{
 			sge::gui::widget::reference_alignment_pair(
 				sge::gui::widget::reference(
@@ -233,15 +266,23 @@ sanguis::client::gui::menu::object::object(
 	),
 	port_label_(
 		_gui_style,
-		_renderer,
-		_font,
+		fcppt::make_ref(
+			_renderer
+		),
+		fcppt::make_ref(
+			_font
+		),
 		SGE_FONT_LIT("Port: "),
 		sanguis::client::gui::default_text_color()
 	),
 	port_edit_(
 		_gui_style,
-		_renderer,
-		_font,
+		fcppt::make_ref(
+			_renderer
+		),
+		fcppt::make_ref(
+			_font
+		),
 		sge::font::from_fcppt_string(
 			fcppt::from_std_string(
 				sge::parse::ini::get_or_create(
@@ -258,7 +299,9 @@ sanguis::client::gui::menu::object::object(
 		)
 	),
 	port_line_(
-		gui_context_,
+		fcppt::make_ref(
+			gui_context_
+		),
 		sge::gui::widget::reference_alignment_vector{
 			sge::gui::widget::reference_alignment_pair(
 				sge::gui::widget::reference(
@@ -277,16 +320,24 @@ sanguis::client::gui::menu::object::object(
 	),
 	connect_text_(
 		_gui_style,
-		_renderer,
-		_font,
+		fcppt::make_ref(
+			_renderer
+		),
+		fcppt::make_ref(
+			_font
+		),
 		SGE_FONT_LIT(""),
 		sanguis::client::gui::default_text_color(),
 		sge::gui::optional_needed_width()
 	),
 	connect_button_(
 		_gui_style,
-		_renderer,
-		_font,
+		fcppt::make_ref(
+			_renderer
+		),
+		fcppt::make_ref(
+			_font
+		),
 		connect_text,
 		sge::gui::optional_needed_width(
 			sge::gui::needed_width_from_strings(
@@ -299,7 +350,9 @@ sanguis::client::gui::menu::object::object(
 		)
 	),
 	connect_box_(
-		gui_context_,
+		fcppt::make_ref(
+			gui_context_
+		),
 		sge::gui::widget::reference_alignment_vector{
 			sge::gui::widget::reference_alignment_pair(
 				sge::gui::widget::reference(
@@ -330,17 +383,25 @@ sanguis::client::gui::menu::object::object(
 	),
 	connect_frame_(
 		_gui_style,
-		connect_box_
+		sge::gui::widget::reference{
+			connect_box_
+		}
 	),
 	quit_button_(
 		_gui_style,
-		_renderer,
-		_font,
+		fcppt::make_ref(
+			_renderer
+		),
+		fcppt::make_ref(
+			_font
+		),
 		SGE_FONT_LIT("Quit"),
 		sge::gui::optional_needed_width()
 	),
 	main_container_(
-		gui_context_,
+		fcppt::make_ref(
+			gui_context_
+		),
 		sge::gui::widget::reference_alignment_vector{
 			sge::gui::widget::reference_alignment_pair(
 				sge::gui::widget::reference(
@@ -376,16 +437,32 @@ sanguis::client::gui::menu::object::object(
 		sge::rucksack::axis::y
 	),
 	gui_area_(
-		_renderer,
-		_viewport_manager,
-		main_container_
+		fcppt::reference_to_base<
+			sge::renderer::device::core
+		>(
+			fcppt::make_ref(
+				_renderer
+			)
+		),
+		fcppt::make_ref(
+			_viewport_manager
+		),
+		sge::gui::widget::reference{
+			main_container_
+		}
 	),
 	gui_master_(
-		gui_context_,
-		gui_area_
+		fcppt::make_ref(
+			gui_context_
+		),
+		sge::gui::main_area::reference{
+			gui_area_
+		}
 	),
 	gui_background_(
-		gui_area_
+		sge::gui::main_area::reference{
+			gui_area_
+		}
 	),
 	connect_running_{
 		false

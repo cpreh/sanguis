@@ -73,6 +73,7 @@
 #include <sge/console/object.hpp>
 #include <sge/font/from_std_wstring.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
@@ -145,9 +146,11 @@ sanguis::client::states::running::running(
 			sanguis::client::gui::hud::object
 		>(
 			hud_resources_,
-			this->context<
-				sanguis::client::machine
-			>().gui_style(),
+			fcppt::make_cref(
+				this->context<
+					sanguis::client::machine
+				>().gui_style()
+			),
 			this->context<
 				sanguis::client::machine
 			>().font_object(),
@@ -169,9 +172,11 @@ sanguis::client::states::running::running(
 			>().resources(),
 			hud_resources_,
 			*sound_manager_,
-			this->context<
-				sanguis::client::machine
-			>().gui_style(),
+			fcppt::make_cref(
+				this->context<
+					sanguis::client::machine
+				>().gui_style()
+			),
 			this->context<
 				sanguis::client::machine
 			>().renderer(),

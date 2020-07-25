@@ -6,11 +6,12 @@
 #include <sge/font/object_fwd.hpp>
 #include <sge/gui/renderer/base_fwd.hpp>
 #include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/style/const_reference.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 
 
 sanguis::client::draw2d::scene::hover::parameters::parameters(
-	sge::gui::style::base const &_gui_style,
+	sge::gui::style::const_reference const _gui_style,
 	sge::gui::renderer::base &_gui_renderer,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,

@@ -16,6 +16,7 @@
 #include <sanguis/server/environment/object.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/enum/make_range.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
@@ -131,14 +132,18 @@ sanguis::server::entities::with_health::with_health(
 	),
 	regeneration_timer_(
 		sanguis::diff_timer::parameters(
-			this->diff_clock(),
+			fcppt::make_cref(
+				this->diff_clock()
+			),
 			std::chrono::seconds(
 				1
 			)
 		)
 	),
 	net_health_(
-		this->diff_clock()
+		fcppt::make_cref(
+			this->diff_clock()
+		)
 	),
 	health_change_(
 		health_.register_change_callback(

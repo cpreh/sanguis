@@ -7,6 +7,7 @@
 #include <sanguis/client/draw2d/scene/hover/name_and_health.hpp>
 #include <sanguis/client/draw2d/scene/hover/parameters.hpp>
 #include <sanguis/client/draw2d/scene/hover/weapon.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/variant/match.hpp>
@@ -55,7 +56,9 @@ sanguis::client::draw2d::scene::hover::create(
 						fcppt::make_unique_ptr<
 							sanguis::client::draw2d::scene::hover::weapon
 						>(
-							_parameters.gui_style(),
+							fcppt::make_cref(
+								_parameters.gui_style()
+							),
 							_parameters.gui_renderer(),
 							_parameters.renderer(),
 							_parameters.font(),

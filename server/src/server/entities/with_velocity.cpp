@@ -15,6 +15,7 @@
 #include <sanguis/server/entities/property/change_callback.hpp>
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -45,7 +46,9 @@ sanguis::server::entities::with_velocity::with_velocity(
 		_direction
 	),
 	net_speed_(
-		this->diff_clock()
+		fcppt::make_cref(
+			this->diff_clock()
+		)
 	),
 	speed_change_(
 		movement_speed_.register_change_callback(

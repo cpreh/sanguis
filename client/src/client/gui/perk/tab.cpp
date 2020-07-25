@@ -13,10 +13,11 @@
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
 #include <sge/gui/context_fwd.hpp>
-#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/style/const_reference.hpp>
 #include <sge/gui/widget/reference.hpp>
 #include <sge/gui/widget/reference_tree_vector.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/assert/optional_error.hpp>
@@ -27,7 +28,7 @@ sanguis::client::gui::perk::tab::tab(
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sge::gui::context &_context,
-	sge::gui::style::base const &_style,
+	sge::gui::style::const_reference const _style,
 	sanguis::client::perk::state &_state,
 	sanguis::client::perk::const_tree_range const &_range
 )
@@ -81,7 +82,9 @@ sanguis::client::gui::perk::tab::tab(
 		)
 	),
 	tree_(
-		_context,
+		fcppt::make_ref(
+			_context
+		),
 		fcppt::algorithm::map<
 			sge::gui::widget::reference_tree_vector
 		>(

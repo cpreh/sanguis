@@ -10,7 +10,9 @@
 #include <sanguis/client/load/hud/context.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/gui/draw.hpp>
-#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/main_area/base.hpp>
+#include <sge/gui/style/const_reference.hpp>
+#include <sge/gui/widget/base.hpp>
 #include <sge/gui/widget/reference.hpp>
 #include <sge/gui/widget/reference_alignment_pair.hpp>
 #include <sge/gui/widget/reference_alignment_vector.hpp>
@@ -18,7 +20,10 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
+#include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/reference_to_base.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/container/join.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
@@ -30,7 +35,7 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::draw2d::scene::hover::weapon::weapon(
-	sge::gui::style::base const &_gui_style,
+	sge::gui::style::const_reference const _gui_style,
 	sge::gui::renderer::base &_gui_renderer,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
@@ -46,8 +51,10 @@ sanguis::client::draw2d::scene::hover::weapon::weapon(
 	gui_context_(),
 	image_(
 		_gui_style,
-		_hud_resources.weapon_icon(
-			_info.get().weapon_type()
+		fcppt::make_cref(
+			_hud_resources.weapon_icon(
+				_info.get().weapon_type()
+			)
 		)
 	),
 	weapon_attributes_(
@@ -85,7 +92,9 @@ sanguis::client::draw2d::scene::hover::weapon::weapon(
 		)
 	),
 	container_(
-		gui_context_,
+		fcppt::make_ref(
+			gui_context_
+		),
 		fcppt::container::join(
 			sge::gui::widget::reference_alignment_vector{
 				sge::gui::widget::reference_alignment_pair{
@@ -116,11 +125,23 @@ sanguis::client::draw2d::scene::hover::weapon::weapon(
 		sge::rucksack::axis::y
 	),
 	gui_area_(
-		container_,
+		fcppt::reference_to_base<
+			sge::gui::widget::base
+		>(
+			fcppt::make_ref(
+				container_
+			)
+		),
 		_center.get()
 	),
 	gui_background_(
-		gui_area_
+		fcppt::reference_to_base<
+			sge::gui::main_area::base
+		>(
+			fcppt::make_ref(
+				gui_area_
+			)
+		)
 	)
 {
 }

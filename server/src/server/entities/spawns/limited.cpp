@@ -13,6 +13,7 @@
 #include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
@@ -50,7 +51,9 @@ sanguis::server::entities::spawns::limited::limited(
 	),
 	delay_timer_(
 		sanguis::diff_timer::parameters(
-			this->diff_clock(),
+			fcppt::make_cref(
+				this->diff_clock()
+			),
 			_interval.get()
 		)
 	),

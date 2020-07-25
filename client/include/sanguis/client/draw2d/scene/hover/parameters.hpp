@@ -9,6 +9,7 @@
 #include <sge/font/object_fwd.hpp>
 #include <sge/gui/renderer/base_fwd.hpp>
 #include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/style/const_reference.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
@@ -28,7 +29,7 @@ class parameters
 {
 public:
 	parameters(
-		sge::gui::style::base const &,
+		sge::gui::style::const_reference,
 		sge::gui::renderer::base &,
 		sge::renderer::device::ffp &,
 		sge::font::object &,
@@ -62,9 +63,7 @@ public:
 	sanguis::client::draw2d::radius
 	radius() const;
 private:
-	fcppt::reference<
-		sge::gui::style::base const
-	> gui_style_;
+	sge::gui::style::const_reference gui_style_;
 
 	fcppt::reference<
 		sge::gui::renderer::base

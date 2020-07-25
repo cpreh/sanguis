@@ -9,7 +9,7 @@
 #include <sanguis/client/load/context_fwd.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
-#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/style/const_reference.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -23,7 +23,7 @@ sanguis::client::draw2d::create(
 	sanguis::client::load::context const &_load_context,
 	sanguis::client::load::hud::context &_hud_context,
 	sanguis::client::sound_manager &_sound_manager,
-	sge::gui::style::base const &_gui_style,
+	sge::gui::style::const_reference const _gui_style,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sge::viewport::manager &_viewport_manager,

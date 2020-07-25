@@ -28,7 +28,8 @@
 #include <sge/gui/fill_level.hpp>
 #include <sge/gui/gravity.hpp>
 #include <sge/gui/optional_needed_width.hpp>
-#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/main_area/reference.hpp>
+#include <sge/gui/style/const_reference.hpp>
 #include <sge/gui/widget/bar.hpp>
 #include <sge/gui/widget/reference.hpp>
 #include <sge/gui/widget/reference_alignment_pair.hpp>
@@ -36,14 +37,17 @@
 #include <sge/image/color/predef.hpp>
 #include <sge/image/color/any/object.hpp>
 #include <sge/renderer/context/ffp.hpp>
+#include <sge/renderer/device/core.hpp>
 #include <sge/renderer/device/ffp.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <sge/rucksack/dim.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/const.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/output_to_string.hpp>
+#include <fcppt/reference_to_base.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/assert/optional_error.hpp>
@@ -64,7 +68,7 @@
 
 sanguis::client::gui::hud::object::object(
 	sanguis::client::load::hud::context &_resources,
-	sge::gui::style::base const &_gui_style,
+	sge::gui::style::const_reference const _gui_style,
 	sge::font::object &_font,
 	sge::renderer::device::ffp &_renderer,
 	sge::viewport::manager &_viewport_manager
@@ -96,16 +100,24 @@ sanguis::client::gui::hud::object::object(
 	gui_context_(),
 	world_name_text_(
 		_gui_style,
-		_renderer,
-		_font,
+		fcppt::make_ref(
+			_renderer
+		),
+		fcppt::make_ref(
+			_font
+		),
 		sge::font::string(),
 		sanguis::client::gui::default_text_color(),
 		sge::gui::optional_needed_width()
 	),
 	player_name_text_(
 		_gui_style,
-		_renderer,
-		_font,
+		fcppt::make_ref(
+			_renderer
+		),
+		fcppt::make_ref(
+			_font
+		),
 		sge::font::string(),
 		sanguis::client::gui::default_text_color(),
 		sge::gui::optional_needed_width()
@@ -115,14 +127,20 @@ sanguis::client::gui::hud::object::object(
 	),
 	level_text_(
 		_gui_style,
-		_renderer,
-		_font,
+		fcppt::make_ref(
+			_renderer
+		),
+		fcppt::make_ref(
+			_font
+		),
 		sge::font::string(),
 		sanguis::client::gui::default_text_color(),
 		sge::gui::optional_needed_width()
 	),
 	text_container_(
-		gui_context_,
+		fcppt::make_ref(
+			gui_context_
+		),
 		sge::gui::widget::reference_alignment_vector{
 			sge::gui::widget::reference_alignment_pair(
 				sge::gui::widget::reference(
@@ -178,7 +196,9 @@ sanguis::client::gui::hud::object::object(
 		)
 	),
 	middle_container_(
-		gui_context_,
+		fcppt::make_ref(
+			gui_context_
+		),
 		sge::gui::widget::reference_alignment_vector{
 			sge::gui::widget::reference_alignment_pair(
 				sge::gui::widget::reference(
@@ -209,7 +229,9 @@ sanguis::client::gui::hud::object::object(
 	),
 	middle_frame_(
 		_gui_style,
-		middle_container_
+		sge::gui::widget::reference{
+			middle_container_
+		}
 	),
 	primary_dummy_widget_h_(
 		sge::rucksack::dim{
@@ -219,7 +241,9 @@ sanguis::client::gui::hud::object::object(
 	),
 	primary_weapon_(),
 	primary_weapon_container_inner_(
-		gui_context_,
+		fcppt::make_ref(
+			gui_context_
+		),
 		sge::gui::widget::reference_alignment_vector{
 			sge::gui::widget::reference_alignment_pair(
 				sge::gui::widget::reference(
@@ -237,7 +261,9 @@ sanguis::client::gui::hud::object::object(
 		}
 	),
 	primary_weapon_container_(
-		gui_context_,
+		fcppt::make_ref(
+			gui_context_
+		),
 		sge::gui::widget::reference_alignment_vector{
 			sge::gui::widget::reference_alignment_pair(
 				sge::gui::widget::reference(
@@ -256,7 +282,9 @@ sanguis::client::gui::hud::object::object(
 	),
 	primary_weapon_frame_(
 		_gui_style,
-		primary_weapon_container_
+		sge::gui::widget::reference{
+			primary_weapon_container_
+		}
 	),
 	secondary_dummy_widget_h_(
 		sge::rucksack::dim{
@@ -266,7 +294,9 @@ sanguis::client::gui::hud::object::object(
 	),
 	secondary_weapon_(),
 	secondary_weapon_container_inner_(
-		gui_context_,
+		fcppt::make_ref(
+			gui_context_
+		),
 		sge::gui::widget::reference_alignment_vector{
 			sge::gui::widget::reference_alignment_pair(
 				sge::gui::widget::reference(
@@ -284,7 +314,9 @@ sanguis::client::gui::hud::object::object(
 		}
 	),
 	secondary_weapon_container_(
-		gui_context_,
+		fcppt::make_ref(
+			gui_context_
+		),
 		sge::gui::widget::reference_alignment_vector{
 			sge::gui::widget::reference_alignment_pair(
 				sge::gui::widget::reference(
@@ -303,10 +335,14 @@ sanguis::client::gui::hud::object::object(
 	),
 	secondary_weapon_frame_(
 		_gui_style,
-		secondary_weapon_container_
+		sge::gui::widget::reference{
+			secondary_weapon_container_
+		}
 	),
 	main_widget_(
-		gui_context_,
+		fcppt::make_ref(
+			gui_context_
+		),
 		sge::gui::widget::reference_alignment_vector{
 			sge::gui::widget::reference_alignment_pair(
 				sge::gui::widget::reference(
@@ -330,18 +366,36 @@ sanguis::client::gui::hud::object::object(
 		sge::rucksack::axis::x
 	),
 	gui_area_(
-		_renderer,
-		_viewport_manager,
-		gui_context_,
-		main_widget_,
+		fcppt::reference_to_base<
+			sge::renderer::device::core
+		>(
+			fcppt::make_ref(
+				_renderer
+			)
+		),
+		fcppt::make_ref(
+			_viewport_manager
+		),
+		fcppt::make_ref(
+			gui_context_
+		),
+		sge::gui::widget::reference{
+			main_widget_
+		},
 		sge::gui::gravity::north_west
 	),
 	gui_master_(
-		gui_context_,
-		gui_area_
+		fcppt::make_ref(
+			gui_context_
+		),
+		sge::gui::main_area::reference{
+			gui_area_
+		}
 	),
 	gui_background_(
-		gui_area_
+		sge::gui::main_area::reference{
+			gui_area_
+		}
 	),
 	weapon_details_(),
 	paused_{

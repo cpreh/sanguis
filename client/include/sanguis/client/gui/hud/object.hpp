@@ -22,7 +22,7 @@
 #include <sge/gui/master.hpp>
 #include <sge/gui/background/none.hpp>
 #include <sge/gui/main_area/screen_corner.hpp>
-#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/style/const_reference.hpp>
 #include <sge/gui/widget/bar.hpp>
 #include <sge/gui/widget/box_container.hpp>
 #include <sge/gui/widget/expander.hpp>
@@ -56,7 +56,7 @@ class object
 public:
 	object(
 		sanguis::client::load::hud::context &,
-		sge::gui::style::base const &,
+		sge::gui::style::const_reference,
 		sge::font::object &,
 		sge::renderer::device::ffp &,
 		sge::viewport::manager &
@@ -188,7 +188,7 @@ private:
 
 	sanguis::client::load::hud::context &resources_;
 
-	sge::gui::style::base const &gui_style_;
+	sge::gui::style::const_reference const gui_style_;
 
 	sge::font::object &font_;
 

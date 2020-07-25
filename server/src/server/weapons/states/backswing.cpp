@@ -11,6 +11,7 @@
 #include <sanguis/server/weapons/states/castpoint.hpp>
 #include <sanguis/server/weapons/states/idle.hpp>
 #include <sanguis/server/weapons/states/reloading.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/out.hpp>
 #include <fcppt/log/verbose.hpp>
@@ -37,9 +38,11 @@ sanguis::server::weapons::states::backswing::backswing(
 	),
 	cooldown_(
 		sanguis::diff_timer::parameters(
-			this->context<
-				sanguis::server::weapons::weapon
-			>().diff_clock(),
+			fcppt::make_cref(
+				this->context<
+					sanguis::server::weapons::weapon
+				>().diff_clock()
+			),
 			this->context<
 				sanguis::server::weapons::weapon
 			>().backswing_time().get()

@@ -151,7 +151,7 @@
 #include <sge/font/object_fwd.hpp>
 #include <sge/gui/renderer/base.hpp>
 #include <sge/gui/renderer/create_stateless.hpp>
-#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/style/const_reference.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/image/color/any/object.hpp>
 #include <sge/renderer/clear/parameters.hpp>
@@ -218,7 +218,7 @@ sanguis::client::draw2d::scene::object::object(
 	sanguis::client::load::context const &_resources,
 	sanguis::client::load::hud::context &_hud_resources,
 	sanguis::client::sound_manager &_sound_manager,
-	sge::gui::style::base const &_gui_style,
+	sge::gui::style::const_reference const _gui_style,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sge::viewport::manager &_viewport_manager,
@@ -268,7 +268,13 @@ sanguis::client::draw2d::scene::object::object(
 	),
 	gui_renderer_(
 		sge::gui::renderer::create_stateless(
-			_renderer
+			fcppt::reference_to_base<
+				sge::renderer::device::core
+			>(
+				fcppt::make_ref(
+					_renderer
+				)
+			)
 		)
 	),
 	player_health_callback_(

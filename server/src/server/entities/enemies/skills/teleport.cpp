@@ -8,6 +8,7 @@
 #include <sanguis/server/entities/enemies/skills/teleport.hpp>
 #include <sanguis/server/weapons/target.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/optional/maybe_void.hpp>
@@ -21,7 +22,9 @@ sanguis::server::entities::enemies::skills::teleport::teleport(
 	sanguis::server::entities::enemies::skills::skill(),
 	cooldown_timer_(
 		sanguis::diff_timer::parameters(
-			_diff_clock,
+			fcppt::make_cref(
+				_diff_clock
+			),
 			_cooldown.get()
 		)
 	)

@@ -42,6 +42,7 @@
 #include <awl/main/exit_success.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -177,7 +178,9 @@ sanguis::client::object::object(
 			)
 		},
 		resources_,
-		*gui_style_,
+		fcppt::make_cref(
+			*gui_style_
+		),
 		sys_->window_system(),
 		*font_object_,
 		console_gfx_.get(),

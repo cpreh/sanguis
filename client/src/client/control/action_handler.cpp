@@ -31,6 +31,7 @@
 #include <alda/message/init_record.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/object.hpp>
+#include <sge/console/object_ref.hpp>
 #include <sge/console/callback/function.hpp>
 #include <sge/console/callback/name.hpp>
 #include <sge/console/callback/parameters.hpp>
@@ -509,7 +510,7 @@ void
 sanguis::client::control::action_handler::send_cheat(
 	sanguis::cheat_type const _cheat,
 	sge::console::arg_list const &,
-	sge::console::object &
+	sge::console::object_ref
 )
 {
 	send_(

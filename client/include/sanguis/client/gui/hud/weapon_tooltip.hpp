@@ -5,7 +5,7 @@
 #include <sanguis/client/gui/hud/weapon_tooltip_fwd.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/gui/context_fwd.hpp>
-#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/style/const_reference.hpp>
 #include <sge/gui/widget/base_fwd.hpp>
 #include <sge/gui/widget/box_container.hpp>
 #include <sge/gui/widget/static_text.hpp>
@@ -34,7 +34,7 @@ class weapon_tooltip
 public:
 	weapon_tooltip(
 		sge::gui::context &,
-		sge::gui::style::base const &,
+		sge::gui::style::const_reference,
 		sge::renderer::device::ffp &,
 		sge::font::object &,
 		sanguis::weapon_description const &

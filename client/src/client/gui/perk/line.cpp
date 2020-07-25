@@ -14,7 +14,7 @@
 #include <sge/gui/context_fwd.hpp>
 #include <sge/gui/optional_needed_width.hpp>
 #include <sge/gui/text_color.hpp>
-#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/style/const_reference.hpp>
 #include <sge/gui/widget/box_container.hpp>
 #include <sge/gui/widget/button.hpp>
 #include <sge/gui/widget/reference.hpp>
@@ -24,6 +24,7 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -41,7 +42,7 @@ sanguis::client::gui::perk::line::line(
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sge::gui::context &_context,
-	sge::gui::style::base const &_style,
+	sge::gui::style::const_reference const _style,
 	sanguis::client::perk::state &_state,
 	sanguis::client::perk::info const &_info
 )
@@ -54,8 +55,12 @@ sanguis::client::gui::perk::line::line(
 	),
 	button_(
 		_style,
-		_renderer,
-		_font,
+		fcppt::make_ref(
+			_renderer
+		),
+		fcppt::make_ref(
+			_font
+		),
 		sge::font::from_fcppt_string(
 			sanguis::client::perk::to_string(
 				_info.perk_type()
@@ -65,8 +70,12 @@ sanguis::client::gui::perk::line::line(
 	),
 	text_(
 		_style,
-		_renderer,
-		_font,
+		fcppt::make_ref(
+			_renderer
+		),
+		fcppt::make_ref(
+			_font
+		),
 		sanguis::client::gui::perk::make_description(
 			_info
 		),
@@ -74,7 +83,9 @@ sanguis::client::gui::perk::line::line(
 		sge::gui::optional_needed_width()
 	),
 	box_(
-		_context,
+		fcppt::make_ref(
+			_context
+		),
 		sge::gui::widget::reference_alignment_vector{
 			sge::gui::widget::reference_alignment_pair(
 				sge::gui::widget::reference(

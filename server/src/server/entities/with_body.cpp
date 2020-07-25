@@ -18,6 +18,7 @@
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/dynamic.hpp>
@@ -56,10 +57,14 @@ sanguis::server::entities::with_body::with_body(
 		*this
 	),
 	net_center_(
-		this->diff_clock()
+		fcppt::make_cref(
+			this->diff_clock()
+		)
 	),
 	net_angle_(
-		this->diff_clock()
+		fcppt::make_cref(
+			this->diff_clock()
+		)
 	)
 {
 }

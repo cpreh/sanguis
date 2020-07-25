@@ -16,6 +16,7 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/environment/optional_object_ref.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/math/twopi.hpp>
@@ -58,7 +59,9 @@ sanguis::server::entities::projectiles::scatter::scatter(
 	),
 	shoot_timer_(
 		sanguis::diff_timer::parameters(
-			this->diff_clock(),
+			fcppt::make_cref(
+				this->diff_clock()
+			),
 			// TODO
 			sanguis::duration_second(
 				0.5f

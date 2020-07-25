@@ -29,6 +29,7 @@
 #include <alda/message/init_record.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/from_std_string.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/name.hpp>
@@ -116,9 +117,11 @@ sanguis::client::states::menu::menu(
 				)
 			}
 		),
-		this->context<
-			sanguis::client::machine
-		>().gui_style()
+		fcppt::make_cref(
+			this->context<
+				sanguis::client::machine
+			>().gui_style()
+		)
 	)
 {
 }

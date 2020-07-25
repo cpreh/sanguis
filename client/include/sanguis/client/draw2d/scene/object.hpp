@@ -67,7 +67,7 @@
 #include <alda/call/friend_dispatcher.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/gui/renderer/base_unique_ptr.hpp>
-#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/style/const_reference.hpp>
 #include <sge/renderer/screen_size_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
@@ -106,7 +106,7 @@ public:
 		sanguis::client::load::context const &,
 		sanguis::client::load::hud::context &,
 		sanguis::client::sound_manager &,
-		sge::gui::style::base const &,
+		sge::gui::style::const_reference,
 		sge::renderer::device::ffp &,
 		sge::font::object &,
 		sge::viewport::manager &,
@@ -368,7 +368,7 @@ private:
 
 	sanguis::client::load::auras::context aura_resources_;
 
-	sge::gui::style::base const &gui_style_;
+	sge::gui::style::const_reference const gui_style_;
 
 	sge::renderer::device::ffp &renderer_;
 

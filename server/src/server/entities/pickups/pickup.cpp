@@ -25,6 +25,7 @@
 #include <sanguis/server/environment/load_context.hpp>
 #include <alda/message/init_record.hpp>
 #include <fcppt/const.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/cast/dynamic.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -70,7 +71,9 @@ sanguis::server::entities::pickups::pickup::pickup(
 	),
 	life_timer_(
 		sanguis::diff_timer::parameters(
-			this->diff_clock(),
+			fcppt::make_cref(
+				this->diff_clock()
+			),
 			std::chrono::seconds(
 				30
 			)

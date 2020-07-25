@@ -12,19 +12,23 @@
 #include <sge/font/string.hpp>
 #include <sge/gui/gravity.hpp>
 #include <sge/gui/optional_needed_width.hpp>
-#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/main_area/reference.hpp>
+#include <sge/gui/style/const_reference.hpp>
 #include <sge/gui/widget/reference.hpp>
 #include <sge/gui/widget/reference_alignment_pair.hpp>
 #include <sge/gui/widget/reference_alignment_vector.hpp>
 #include <sge/input/event_base_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
+#include <sge/renderer/device/core.hpp>
 #include <sge/renderer/device/ffp.hpp>
 #include <sge/renderer/target/onscreen.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <sge/viewport/manager.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/output_to_fcppt_string.hpp>
+#include <fcppt/reference_to_base.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
@@ -49,7 +53,7 @@ FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::gui::perk::chooser::chooser(
 	sanguis::client::perk::state &_state,
-	sge::gui::style::base const &_style,
+	sge::gui::style::const_reference const _style,
 	sge::renderer::device::ffp &_renderer,
 	sge::viewport::manager &_viewport_manager,
 	sge::font::object &_font
@@ -70,8 +74,12 @@ sanguis::client::gui::perk::chooser::chooser(
 	gui_context_(),
 	top_text_(
 		_style,
-		_renderer,
-		_font,
+		fcppt::make_ref(
+			_renderer
+		),
+		fcppt::make_ref(
+			_font
+		),
 		this->make_top_text(),
 		sanguis::client::gui::default_text_color(),
 		sge::gui::optional_needed_width()
@@ -88,7 +96,9 @@ sanguis::client::gui::perk::chooser::chooser(
 		)
 	),
 	main_container_(
-		gui_context_,
+		fcppt::make_ref(
+			gui_context_
+		),
 		sge::gui::widget::reference_alignment_vector{
 			sge::gui::widget::reference_alignment_pair(
 				sge::gui::widget::reference(
@@ -106,18 +116,36 @@ sanguis::client::gui::perk::chooser::chooser(
 		sge::rucksack::axis::y
 	),
 	gui_area_(
-		_renderer,
-		_viewport_manager,
-		gui_context_,
-		main_container_,
+		fcppt::reference_to_base<
+			sge::renderer::device::core
+		>(
+			fcppt::make_ref(
+				_renderer
+			)
+		),
+		fcppt::make_ref(
+			_viewport_manager
+		),
+		fcppt::make_ref(
+			gui_context_
+		),
+		sge::gui::widget::reference{
+			main_container_
+		},
 		sge::gui::gravity::north_east
 	),
 	gui_master_(
-		gui_context_,
-		gui_area_
+		fcppt::make_ref(
+			gui_context_
+		),
+		sge::gui::main_area::reference{
+			gui_area_
+		}
 	),
 	gui_background_(
-		gui_area_
+		sge::gui::main_area::reference{
+			gui_area_
+		}
 	),
 	perk_connection_(
 		_state.register_perks_change(

@@ -18,6 +18,7 @@
 #include <sanguis/client/control/actions/scale_fwd.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/object_fwd.hpp>
+#include <sge/console/object_ref.hpp>
 #include <sge/console/callback/name.hpp>
 #include <sge/console/callback/short_description.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -103,7 +104,7 @@ private:
 	send_cheat(
 		sanguis::cheat_type,
 		sge::console::arg_list const &,
-		sge::console::object &
+		sge::console::object_ref
 	);
 
 	fcppt::signal::auto_connection

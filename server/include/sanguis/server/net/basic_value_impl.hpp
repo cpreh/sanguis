@@ -3,6 +3,7 @@
 
 #include <sanguis/server/net/value_decl.hpp>
 #include <sge/timer/basic_impl.hpp>
+#include <sge/timer/clocks/parameter.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
@@ -17,7 +18,9 @@ sanguis::server::net::basic_value<
 	Policy,
 	Clock
 >::basic_value(
-	Clock const &_clock
+	sge::timer::clocks::parameter<
+		Clock
+	> _clock
 )
 :
 	timer_(

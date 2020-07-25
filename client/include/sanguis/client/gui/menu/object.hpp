@@ -10,7 +10,7 @@
 #include <sge/gui/master.hpp>
 #include <sge/gui/background/colored.hpp>
 #include <sge/gui/main_area/viewport_adaptor.hpp>
-#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/style/const_reference.hpp>
 #include <sge/gui/widget/box_container.hpp>
 #include <sge/gui/widget/button.hpp>
 #include <sge/gui/widget/edit.hpp>
@@ -47,7 +47,7 @@ public:
 		sge::font::object &,
 		sanguis::client::config::settings::object &,
 		sanguis::client::gui::menu::callbacks::object const &,
-		sge::gui::style::base const &
+		sge::gui::style::const_reference
 	);
 
 	~object();

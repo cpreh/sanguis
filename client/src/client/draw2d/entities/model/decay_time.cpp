@@ -2,6 +2,7 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/client/draw2d/entities/model/decay_time.hpp>
+#include <fcppt/make_cref.hpp>
 
 
 sanguis::client::draw2d::entities::model::decay_time::decay_time(
@@ -11,7 +12,9 @@ sanguis::client::draw2d::entities::model::decay_time::decay_time(
 :
 	timer_(
 		sanguis::diff_timer::parameters(
-			_diff_clock,
+			fcppt::make_cref(
+				_diff_clock
+			),
 			_duration
 		)
 	)

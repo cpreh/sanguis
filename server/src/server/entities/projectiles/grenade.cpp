@@ -21,6 +21,7 @@
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -66,7 +67,9 @@ sanguis::server::entities::projectiles::grenade::grenade(
 	),
 	slowdown_timer_(
 		sanguis::diff_timer::parameters(
-			this->diff_clock(),
+			fcppt::make_cref(
+				this->diff_clock()
+			),
 			std::chrono::milliseconds(
 				100
 			)

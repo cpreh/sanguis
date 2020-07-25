@@ -16,7 +16,7 @@
 #include <sge/gui/fill_level.hpp>
 #include <sge/gui/optional_needed_width.hpp>
 #include <sge/gui/text_color.hpp>
-#include <sge/gui/style/base_fwd.hpp>
+#include <sge/gui/style/const_reference.hpp>
 #include <sge/gui/widget/box_container.hpp>
 #include <sge/gui/widget/image.hpp>
 #include <sge/gui/widget/reference.hpp>
@@ -28,6 +28,8 @@
 #include <sge/rucksack/axis.hpp>
 #include <sge/rucksack/dim.hpp>
 #include <sge/timer/elapsed_fractional.hpp>
+#include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/output_to_string.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
@@ -42,7 +44,7 @@ sanguis::client::gui::hud::weapon_widget::weapon_widget(
 	sanguis::diff_clock const &_diff_clock,
 	sanguis::client::load::hud::context &_resources,
 	sge::gui::context &_gui_context,
-	sge::gui::style::base const &_gui_style,
+	sge::gui::style::const_reference const _gui_style,
 	sge::renderer::device::ffp &_renderer,
 	sge::font::object &_font,
 	sanguis::weapon_description const &_description
@@ -53,7 +55,9 @@ sanguis::client::gui::hud::weapon_widget::weapon_widget(
 	),
 	reload_time_(
 		sanguis::diff_timer::parameters(
-			_diff_clock,
+			fcppt::make_cref(
+				_diff_clock
+			),
 			sanguis::duration_second(
 				// TODO: What should we choose here?
 				1
@@ -65,14 +69,20 @@ sanguis::client::gui::hud::weapon_widget::weapon_widget(
 	),
 	image_(
 		_gui_style,
-		_resources.weapon_icon(
-			_description.weapon_type()
+		fcppt::make_cref(
+			_resources.weapon_icon(
+				_description.weapon_type()
+			)
 		)
 	),
 	text_(
 		_gui_style,
-		_renderer,
-		_font,
+		fcppt::make_ref(
+			_renderer
+		),
+		fcppt::make_ref(
+			_font
+		),
 		this->make_text(
 			_description.magazine_remaining()
 		),
@@ -94,7 +104,9 @@ sanguis::client::gui::hud::weapon_widget::weapon_widget(
 		}
 	},
 	container_(
-		_gui_context,
+		fcppt::make_ref(
+			_gui_context
+		),
 		sge::gui::widget::reference_alignment_vector{
 			sge::gui::widget::reference_alignment_pair(
 				sge::gui::widget::reference(

@@ -36,6 +36,7 @@
 #include <sge/texture/part.hpp>
 #include <sge/timer/elapsed_fractional.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/unique_ptr_to_const.hpp>
 #include <fcppt/cast/float_to_int.hpp>
@@ -88,7 +89,9 @@ sanguis::client::draw2d::entities::text::text(
 	sanguis::client::draw2d::entities::own(),
 	life_time_(
 		sanguis::diff_timer::parameters{
-			_diff_clock,
+			fcppt::make_cref(
+				_diff_clock
+			),
 			sanguis::duration_second(
 				1.f
 			)

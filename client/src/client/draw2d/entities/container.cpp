@@ -31,6 +31,7 @@
 #include <sge/sprite/roles/texture0.hpp>
 #include <sge/timer/elapsed.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/cast/float_to_int_fun.hpp>
@@ -110,7 +111,9 @@ sanguis::client::draw2d::entities::container::container(
 	),
 	move_timer_(
 		sanguis::diff_timer::parameters(
-			_diff_clock,
+			fcppt::make_cref(
+				_diff_clock
+			),
 			std::chrono::seconds(
 				1
 			)

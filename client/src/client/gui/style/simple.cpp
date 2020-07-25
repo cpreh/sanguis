@@ -38,7 +38,8 @@ sanguis::client::gui::style::simple::simple(
 :
 	sge::gui::style::base(),
 	textures_(
-		_textures)
+		_textures
+	)
 {
 }
 
@@ -57,7 +58,7 @@ void
 sanguis::client::gui::style::simple::draw_button(
 	sge::gui::renderer::base &_renderer,
 	sge::renderer::context::ffp &_context,
-	sge::rucksack::rect const _area
+	sge::rucksack::rect const &_area
 ) const
 {
 	draw_transparent_frame(
@@ -71,7 +72,7 @@ void
 sanguis::client::gui::style::simple::draw_bar(
 	sge::gui::renderer::base &_renderer,
 	sge::renderer::context::ffp &_context,
-	sge::rucksack::rect const _area,
+	sge::rucksack::rect const &_area,
 	sge::rucksack::axis const _axis,
 	sge::gui::fill_level const _fill_level,
 	sge::gui::fill_color const &_fill_color
@@ -162,7 +163,7 @@ void
 sanguis::client::gui::style::simple::draw_frame(
 	sge::gui::renderer::base &_renderer,
 	sge::renderer::context::ffp &_context,
-	sge::rucksack::rect const _area,
+	sge::rucksack::rect const &_area,
 	sge::rucksack::padding const _padding
 ) const
 {
@@ -261,7 +262,7 @@ void
 sanguis::client::gui::style::simple::draw_edit(
 	sge::gui::renderer::base &_renderer,
 	sge::renderer::context::ffp &_context,
-	sge::rucksack::rect const _area
+	sge::rucksack::rect const &_area
 ) const
 {
 	draw_transparent_frame(
@@ -322,7 +323,7 @@ void
 sanguis::client::gui::style::simple::draw_image(
 	sge::gui::renderer::base &,
 	sge::renderer::context::ffp &,
-	sge::rucksack::rect
+	sge::rucksack::rect const &
 ) const
 {
 }
@@ -331,7 +332,7 @@ void
 sanguis::client::gui::style::simple::draw_text(
 	sge::gui::renderer::base &,
 	sge::renderer::context::ffp &,
-	sge::rucksack::rect
+	sge::rucksack::rect const &
 ) const
 {
 }
@@ -360,7 +361,7 @@ void
 sanguis::client::gui::style::simple::draw_transparent_frame(
 	sge::gui::renderer::base &_renderer,
 	sge::renderer::context::ffp &_context,
-	sge::rucksack::rect const _area
+	sge::rucksack::rect const &_area
 ) const
 {
 	const sge::rucksack::rect::value_type tilesize{12};

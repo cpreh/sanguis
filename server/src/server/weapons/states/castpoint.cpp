@@ -12,6 +12,7 @@
 #include <sanguis/server/weapons/events/stop.hpp>
 #include <sanguis/server/weapons/states/backswing.hpp>
 #include <sanguis/server/weapons/states/castpoint.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/log/out.hpp>
 #include <fcppt/log/verbose.hpp>
@@ -36,9 +37,11 @@ sanguis::server::weapons::states::castpoint::castpoint(
 	),
 	attack_time_(
 		sanguis::diff_timer::parameters(
-			this->context<
-				sanguis::server::weapons::weapon
-			>().diff_clock(),
+			fcppt::make_cref(
+				this->context<
+					sanguis::server::weapons::weapon
+				>().diff_clock()
+			),
 			this->context<
 				sanguis::server::weapons::weapon
 			>().cast_point().get()
