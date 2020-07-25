@@ -8,6 +8,8 @@
 #include <sge/renderer/device/ffp_fwd.hpp>
 #include <sge/texture/part.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
@@ -29,9 +31,15 @@ sanguis::client::cursor::cursor(
 		)
 	),
 	cursor_{
-		_processor,
-		_renderer,
-		texture_,
+		fcppt::make_cref(
+			_processor
+		),
+		fcppt::make_ref(
+			_renderer
+		),
+		fcppt::make_cref(
+			texture_
+		),
 		sge::cursor::hotspot{
 			fcppt::math::vector::structure_cast<
 				sge::cursor::hotspot::value_type,
