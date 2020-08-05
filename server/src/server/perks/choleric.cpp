@@ -54,7 +54,9 @@ sanguis::server::perks::choleric::choleric(
 		)
 	),
 	rand_(
-		_random_generator,
+		fcppt::make_ref(
+			_random_generator
+		),
 		sanguis::server::perks::choleric::distribution(
 			sanguis::server::perks::choleric::distribution::param_type::min(
 				0.f

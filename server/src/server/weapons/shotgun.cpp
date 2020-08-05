@@ -32,6 +32,7 @@
 #include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
 #include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
 #include <sanguis/server/weapons/attributes/spread_radius.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/output_to_fcppt_string.hpp>
 #include <fcppt/text.hpp>
@@ -135,7 +136,9 @@ sanguis::server::weapons::shotgun::do_attack(
 	sanguis::random_variate<
 		angle_distribution
 	> angle_rng(
-		this->random_generator(),
+		fcppt::make_ref(
+			this->random_generator()
+		),
 		angle_distribution(
 			angle_distribution::param_type::mean(
 				_attack.angle().get()

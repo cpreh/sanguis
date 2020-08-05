@@ -19,6 +19,7 @@
 #include <sanguis/creator/impl/random/generator.hpp>
 #include <sanguis/creator/impl/random/uniform_int_wrapper_impl.hpp>
 #include <sanguis/creator/impl/random/uniform_pos.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/fold.hpp>
 #include <fcppt/assert/error_message.hpp>
@@ -55,7 +56,9 @@ sanguis::creator::impl::place_spawners(
 			fcppt::random::wrapper::make_uniform_container_advanced<
 				sanguis::creator::impl::random::uniform_int_wrapper
 			>(
-				_enemy_types
+				fcppt::make_cref(
+					_enemy_types
+				)
 			)
 		)
 	);

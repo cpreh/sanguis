@@ -4,6 +4,7 @@
 #include <sanguis/creator/impl/random/generator_fwd.hpp>
 #include <sanguis/creator/impl/random/uniform_pos.hpp>
 #include <sanguis/creator/impl/random/uniform_pos_parameters.hpp>
+#include <fcppt/make_ref.hpp>
 
 
 sanguis::creator::impl::random::uniform_pos::uniform_pos(
@@ -12,13 +13,19 @@ sanguis::creator::impl::random::uniform_pos::uniform_pos(
 )
 :
 	random_x_(
-		_generator,
+		// TODO
+		fcppt::make_ref(
+			_generator
+		),
 		sanguis::creator::impl::random::uniform_pos_parameters(
 			_dim.w()
 		)
 	),
 	random_y_(
-		_generator,
+		// TODO
+		fcppt::make_ref(
+			_generator
+		),
 		sanguis::creator::impl::random::uniform_pos_parameters(
 			_dim.h()
 		)

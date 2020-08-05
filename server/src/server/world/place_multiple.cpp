@@ -13,6 +13,7 @@
 #include <sanguis/server/world/place_multiple.hpp>
 #include <sanguis/server/world/place_with_id_callback.hpp>
 #include <fcppt/make_int_range_count.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/int_to_float.hpp>
@@ -75,7 +76,9 @@ sanguis::server::world::place_multiple(
 
 	auto random_coordinate(
 		fcppt::random::make_variate(
-			_random_generator,
+			fcppt::make_ref(
+				_random_generator
+			),
 			fcppt::random::distribution::make_basic(
 				uniform_space_unit(
 					uniform_space_unit::min(
@@ -91,7 +94,9 @@ sanguis::server::world::place_multiple(
 
 	auto random_angle(
 		fcppt::random::make_variate(
-			_random_generator,
+			fcppt::make_ref(
+				_random_generator
+			),
 			fcppt::random::distribution::make_basic(
 				uniform_angle(
 					uniform_angle::min(

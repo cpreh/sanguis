@@ -45,7 +45,9 @@ sanguis::client::draw2d::scene::world::make_texture(
 				auto random_part(
 					FCPPT_ASSERT_OPTIONAL_ERROR(
 						fcppt::random::wrapper::make_uniform_container(
-							textures
+							fcppt::make_cref(
+								textures
+							)
 						)
 					)
 				);

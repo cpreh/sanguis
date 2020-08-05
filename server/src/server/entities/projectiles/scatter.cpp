@@ -72,7 +72,9 @@ sanguis::server::entities::projectiles::scatter::scatter(
 		)
 	),
 	angle_rng_(
-		_random_generator,
+		fcppt::make_ref(
+			_random_generator
+		),
 		angle_distribution::param_type(
 			angle_distribution::param_type::min(
 				sanguis::server::angle(

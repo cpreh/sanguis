@@ -2,6 +2,7 @@
 #include <sanguis/creator/generators.hpp>
 #include <sanguis/creator/name.hpp>
 #include <sanguis/server/world/random_generator_name.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/random/wrapper/make_uniform_container.hpp>
 
@@ -14,7 +15,9 @@ sanguis::server::world::random_generator_name(
 	return
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			fcppt::random::wrapper::make_uniform_container(
-				sanguis::creator::generators()
+				fcppt::make_cref(
+					sanguis::creator::generators()
+				)
 			)
 		)(
 			_generator

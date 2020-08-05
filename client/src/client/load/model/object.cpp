@@ -6,6 +6,7 @@
 #include <sanguis/client/load/resource/context_fwd.hpp>
 #include <sanguis/model/cell_size.hpp>
 #include <sge/core/exception.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/to_signed.hpp>
@@ -126,7 +127,9 @@ sanguis::client::load::model::object::random_part(
 		random_part_ =
 			optional_part_rand(
 				part_rand(
-					_random_generator,
+					fcppt::make_ref(
+						_random_generator
+					),
 					part_map_distribution(
 						part_map_distribution::param_type::min(
 							0u

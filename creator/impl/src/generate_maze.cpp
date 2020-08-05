@@ -16,6 +16,7 @@
 #include <sanguis/creator/impl/random/uniform_pos.hpp>
 #include <sanguis/creator/impl/random/uniform_size.hpp>
 #include <sanguis/creator/impl/random/uniform_size_variate.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/algorithm/remove.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/join.hpp>
@@ -46,7 +47,10 @@ sanguis::creator::impl::generate_maze(
 
 	sanguis::creator::impl::random::uniform_size_variate
 	random_index(
-		_randgen,
+		// TODO
+		fcppt::make_ref(
+			_randgen
+		),
 		sanguis::creator::impl::random::uniform_size(
 			sanguis::creator::impl::random::uniform_size::param_type::min(
 				0u

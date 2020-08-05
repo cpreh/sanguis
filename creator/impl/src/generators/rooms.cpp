@@ -40,6 +40,8 @@
 #include <sanguis/creator/impl/random/generator.hpp>
 #include <sanguis/creator/impl/random/uniform_int.hpp>
 #include <sanguis/creator/impl/random/uniform_pos.hpp>
+#include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/reference.hpp>
 #include <fcppt/algorithm/fold.hpp>
 #include <fcppt/algorithm/map.hpp>
@@ -345,7 +347,9 @@ sanguis::creator::impl::generators::rooms(
 
 	auto random_size(
 		fcppt::random::make_variate(
-			_parameters.randgen(),
+			fcppt::make_ref(
+				_parameters.randgen()
+			),
 			uniform_size{
 				uniform_size::param_type::min{
 					1u
@@ -595,7 +599,9 @@ sanguis::creator::impl::generators::rooms(
 
 	auto random_region(
 		fcppt::random::make_variate(
-			_parameters.randgen(),
+			fcppt::make_ref(
+				_parameters.randgen()
+			),
 			uniform_int{
 				uniform_int::param_type::min{
 					0
@@ -671,7 +677,9 @@ sanguis::creator::impl::generators::rooms(
 				fcppt::random::wrapper::make_uniform_container_advanced<
 					sanguis::creator::impl::random::uniform_int_wrapper
 				>(
-					positions
+					fcppt::make_cref(
+						positions
+					)
 				)
 			)
 		);
@@ -985,7 +993,9 @@ sanguis::creator::impl::generators::rooms(
 			fcppt::random::wrapper::make_uniform_container_advanced<
 				sanguis::creator::impl::random::uniform_int_wrapper
 			>(
-				enemy_types
+				fcppt::make_cref(
+					enemy_types
+				)
 			)
 		)
 	);

@@ -23,6 +23,7 @@
 #include <sanguis/creator/impl/generators/start.hpp>
 #include <sanguis/creator/impl/random/generator.hpp>
 #include <sanguis/creator/impl/random/uniform_int.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/unreachable.hpp>
@@ -121,7 +122,9 @@ sanguis::creator::impl::generators::start(
 
 	auto random_dirt_grass(
 		fcppt::random::make_variate(
-			_parameters.randgen(),
+			fcppt::make_ref(
+				_parameters.randgen()
+			),
 			uniform_int2{
 				uniform_int2::param_type::min{
 					0u

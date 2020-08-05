@@ -6,6 +6,7 @@
 #include <sanguis/server/random/create_function.hpp>
 #include <sanguis/server/random/equal_function.hpp>
 #include <sanguis/server/random/less_function.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/algorithm/repeat.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -54,7 +55,9 @@ draw(
 	return
 		fcppt::optional::maybe(
 			fcppt::random::wrapper::make_uniform_container(
-				_source
+				fcppt::make_cref(
+					_source
+				)
 			),
 			[]{
 				return

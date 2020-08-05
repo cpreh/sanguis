@@ -11,6 +11,7 @@
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/make_pos_ref_crange.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/math/clamp.hpp>
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
@@ -35,7 +36,9 @@ sanguis::creator::impl::place_destructibles(
 
 	auto roll_d8(
 		fcppt::random::make_variate(
-			_generator,
+			fcppt::make_ref(
+				_generator
+			),
 			uniform_int2{
 				uniform_int2::param_type::min{
 					1u

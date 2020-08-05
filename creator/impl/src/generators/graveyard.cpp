@@ -20,6 +20,7 @@
 #include <sanguis/creator/impl/generators/graveyard.hpp>
 #include <sanguis/creator/impl/random/generator.hpp>
 #include <sanguis/creator/impl/random/uniform_int.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/make_pos_ref_range.hpp>
@@ -78,7 +79,9 @@ sanguis::creator::impl::generators::graveyard(
 
 	auto fill_tile_random(
 		fcppt::random::make_variate(
-			_parameters.randgen(),
+			fcppt::make_ref(
+				_parameters.randgen()
+			),
 			uniform_int2{
 				uniform_int2::param_type::min{
 					0u
@@ -105,7 +108,9 @@ sanguis::creator::impl::generators::graveyard(
 	// TODO: Draw this from a container
 	auto random_dirt_grass(
 		fcppt::random::make_variate(
-			_parameters.randgen(),
+			fcppt::make_ref(
+				_parameters.randgen()
+			),
 			uniform_int2{
 				uniform_int2::param_type::min{
 					0u
@@ -133,7 +138,9 @@ sanguis::creator::impl::generators::graveyard(
 
 	auto random_grave(
 		fcppt::random::make_variate(
-			_parameters.randgen(),
+			fcppt::make_ref(
+				_parameters.randgen()
+			),
 			uniform_tile_enum(
 				uniform_tile_enum::param_type::min(
 					sanguis::creator::tile::grave2
