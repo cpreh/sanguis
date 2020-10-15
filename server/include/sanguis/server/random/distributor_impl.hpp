@@ -73,7 +73,10 @@ template<
 sanguis::server::random::distributor<
 	Value,
 	State
->::~distributor()
+>::~distributor<
+	Value,
+	State
+>()
 {
 }
 

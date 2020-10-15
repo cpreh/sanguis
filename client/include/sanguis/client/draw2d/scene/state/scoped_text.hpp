@@ -32,7 +32,8 @@ public:
 		sge::renderer::state::ffp::sampler::object const &
 	);
 
-	~scoped_text();
+	~scoped_text()
+	override;
 private:
 	sge::renderer::state::ffp::sampler::scoped const state_;
 };

@@ -54,7 +54,10 @@ template<
 sanguis::client::draw2d::sprite::system<
 	Choices,
 	Category
->::~system()
+>::~system<
+	Choices,
+	Category
+>()
 {
 }
 

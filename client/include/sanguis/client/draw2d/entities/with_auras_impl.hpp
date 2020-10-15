@@ -80,7 +80,9 @@ template<
 >
 sanguis::client::draw2d::entities::with_auras<
 	Base
->::~with_auras()
+>::~with_auras<
+	Base
+>()
 {
 }
 

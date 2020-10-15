@@ -45,7 +45,11 @@ sanguis::server::net::basic_value<
 	Type,
 	Policy,
 	Clock
->::~basic_value()
+>::~basic_value<
+	Type,
+	Policy,
+	Clock
+>()
 {
 }
 

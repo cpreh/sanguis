@@ -85,7 +85,9 @@ template<
 >
 sanguis::tiles::set<
 	Tile
->::~set()
+>::~set<
+	Tile
+>()
 {
 }
 

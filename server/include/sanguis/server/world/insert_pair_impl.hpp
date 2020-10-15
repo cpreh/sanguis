@@ -56,7 +56,9 @@ template<
 >
 sanguis::server::world::insert_pair<
 	Type
->::~insert_pair()
+>::~insert_pair<
+	Type
+>()
 {
 }
 

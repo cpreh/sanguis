@@ -50,7 +50,9 @@ template<
 >
 sanguis::client::draw2d::entities::with_buffs<
 	Base
->::~with_buffs()
+>::~with_buffs<
+	Base
+>()
 {
 }
 
