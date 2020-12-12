@@ -1,4 +1,3 @@
-#include <sanguis/log_parameters.hpp>
 #include <sanguis/client/load/log_location.hpp>
 #include <sanguis/client/load/model/collection.hpp>
 #include <sanguis/client/load/model/object.hpp>
@@ -11,6 +10,7 @@
 #include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
+#include <fcppt/log/parameters_no_function.hpp>
 
 
 sanguis::client::load::model::object const &
@@ -50,7 +50,7 @@ sanguis::client::load::model::collection::collection(
 	log_{
 		_log_context,
 		sanguis::client::load::log_location(),
-		sanguis::log_parameters(
+		fcppt::log::parameters_no_function(
 			fcppt::log::name{
 				FCPPT_TEXT("model")
 			}

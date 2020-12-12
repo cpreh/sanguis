@@ -1,5 +1,4 @@
 #include <sanguis/log_location.hpp>
-#include <sanguis/log_parameters.hpp>
 #include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/generate.hpp>
@@ -21,6 +20,7 @@
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
+#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/math/dim/comparison.hpp>
 #include <fcppt/optional/to_exception.hpp>
 
@@ -33,7 +33,7 @@ sanguis::creator::generate(
 	fcppt::log::object log{
 		_parameters.log_context(),
 		sanguis::log_location(),
-		sanguis::log_parameters(
+		fcppt::log::parameters_no_function(
 			sanguis::creator::impl::log_name()
 		)
 	};

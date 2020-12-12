@@ -1,6 +1,5 @@
 #include <sanguis/entity_id.hpp>
 #include <sanguis/exception.hpp>
-#include <sanguis/log_parameters.hpp>
 #include <sanguis/optional_entity_id.hpp>
 #include <sanguis/random_generator.hpp>
 #include <sanguis/random_seed.hpp>
@@ -191,6 +190,7 @@
 #include <fcppt/enum/make_range.hpp>
 #include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/out.hpp>
+#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/optional/bind.hpp>
@@ -234,7 +234,7 @@ sanguis::client::draw2d::scene::object::object(
 	log_{
 		_log_context,
 		sanguis::client::draw2d::log_location(),
-		sanguis::log_parameters(
+		fcppt::log::parameters_no_function(
 			sanguis::client::draw2d::scene::log_name()
 		)
 	},

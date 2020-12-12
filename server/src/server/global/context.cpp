@@ -2,7 +2,6 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
 #include <sanguis/is_primary_weapon.hpp>
-#include <sanguis/log_parameters.hpp>
 #include <sanguis/perk_type.hpp>
 #include <sanguis/player_name.hpp>
 #include <sanguis/random_seed.hpp>
@@ -73,6 +72,7 @@
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
+#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/comparison.hpp>
@@ -110,7 +110,7 @@ sanguis::server::global::context::context(
 		fcppt::log::name{
 			FCPPT_TEXT("global")
 		},
-		sanguis::log_parameters(
+		fcppt::log::parameters_no_function(
 			fcppt::log::name{
 				FCPPT_TEXT("context")
 			}

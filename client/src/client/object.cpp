@@ -1,7 +1,6 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/io_service_callback.hpp>
 #include <sanguis/log_level_streams.hpp>
-#include <sanguis/log_parameters.hpp>
 #include <sanguis/media_path.hpp>
 #include <sanguis/client/create_systems.hpp>
 #include <sanguis/client/log_location.hpp>
@@ -52,6 +51,7 @@
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
+#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object_impl.hpp>
@@ -82,7 +82,7 @@ sanguis::client::object::object(
 	log_{
 		_log_context,
 		sanguis::client::log_location(),
-		sanguis::log_parameters(
+		fcppt::log::parameters_no_function(
 			fcppt::log::name{
 				FCPPT_TEXT("object")
 			}

@@ -1,4 +1,3 @@
-#include <sanguis/log_parameters.hpp>
 #include <sanguis/perk_type.hpp>
 #include <sanguis/client/dispatch.hpp>
 #include <sanguis/client/dispatch_default_function.hpp>
@@ -41,6 +40,7 @@
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
+#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -67,7 +67,7 @@ sanguis::client::states::has_player::has_player(
 			sanguis::client::machine
 		>().log_context(),
 		sanguis::client::states::log_location(),
-		sanguis::log_parameters(
+		fcppt::log::parameters_no_function(
 			fcppt::log::name{
 				FCPPT_TEXT("has_player")
 			}

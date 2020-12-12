@@ -1,5 +1,4 @@
 #include <sanguis/exception.hpp>
-#include <sanguis/log_parameters.hpp>
 #include <sanguis/media_path.hpp>
 #include <sanguis/client/load/log_location.hpp>
 #include <sanguis/client/load/resource/make_missing_texture.hpp>
@@ -37,6 +36,7 @@
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
+#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <filesystem>
@@ -147,7 +147,7 @@ sanguis::client::load::resource::textures::textures(
 	log_{
 		_log_context,
 		sanguis::client::load::log_location(),
-		sanguis::log_parameters(
+		fcppt::log::parameters_no_function(
 			fcppt::log::name{
 				FCPPT_TEXT("textures")
 			}

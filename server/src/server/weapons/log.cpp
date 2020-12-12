@@ -1,10 +1,10 @@
-#include <sanguis/log_parameters.hpp>
 #include <sanguis/server/log_location.hpp>
 #include <sanguis/server/weapons/log.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
+#include <fcppt/log/parameters_no_function.hpp>
 
 
 sanguis::server::weapons::log::log(
@@ -14,7 +14,7 @@ sanguis::server::weapons::log::log(
 	main_log_{
 		_log_context,
 		sanguis::server::log_location(),
-		sanguis::log_parameters(
+		fcppt::log::parameters_no_function(
 			fcppt::log::name{
 				FCPPT_TEXT("weapons")
 			}

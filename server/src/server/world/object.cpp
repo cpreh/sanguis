@@ -4,7 +4,6 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/entity_id.hpp>
 #include <sanguis/is_primary_weapon.hpp>
-#include <sanguis/log_parameters.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
 #include <sanguis/timer.hpp>
@@ -144,6 +143,7 @@
 #include <fcppt/enum/make_range.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/out.hpp>
+#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/optional/map.hpp>
@@ -175,7 +175,7 @@ sanguis::server::world::object::object(
 		// TODO: Add world name?
 		_parameters.log_context(),
 		sanguis::server::log_location(),
-		sanguis::log_parameters(
+		fcppt::log::parameters_no_function(
 			fcppt::log::name{
 				FCPPT_TEXT("world")
 			}

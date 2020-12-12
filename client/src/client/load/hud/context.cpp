@@ -1,4 +1,3 @@
-#include <sanguis/log_parameters.hpp>
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/client/load/log_location.hpp>
 #include <sanguis/client/load/hud/context.hpp>
@@ -11,6 +10,7 @@
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/name.hpp>
+#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/from.hpp>
 
@@ -23,7 +23,7 @@ sanguis::client::load::hud::context::context(
 	log_{
 		_log_context,
 		sanguis::client::load::log_location(),
-		sanguis::log_parameters(
+		fcppt::log::parameters_no_function(
 			fcppt::log::name{
 				FCPPT_TEXT("hud")
 			}

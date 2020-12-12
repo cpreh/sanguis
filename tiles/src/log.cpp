@@ -1,9 +1,9 @@
 #include <sanguis/log_location.hpp>
-#include <sanguis/log_parameters.hpp>
 #include <sanguis/tiles/log.hpp>
 #include <sanguis/tiles/impl/log_name.hpp>
 #include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/object.hpp>
+#include <fcppt/log/parameters_no_function.hpp>
 
 
 sanguis::tiles::log::log(
@@ -13,7 +13,7 @@ sanguis::tiles::log::log(
 	main_log_{
 		_log_context,
 		sanguis::log_location(),
-		sanguis::log_parameters(
+		fcppt::log::parameters_no_function(
 			sanguis::tiles::impl::log_name()
 		)
 	}

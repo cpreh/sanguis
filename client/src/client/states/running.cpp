@@ -1,5 +1,4 @@
 #include <sanguis/exception.hpp>
-#include <sanguis/log_parameters.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/player_name.hpp>
 #include <sanguis/slowdown.hpp>
@@ -81,6 +80,7 @@
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
+#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -108,7 +108,7 @@ sanguis::client::states::running::running(
 			sanguis::client::machine
 		>().log_context(),
 		sanguis::client::states::log_location(),
-		sanguis::log_parameters(
+		fcppt::log::parameters_no_function(
 			fcppt::log::name{
 				FCPPT_TEXT("running")
 			}

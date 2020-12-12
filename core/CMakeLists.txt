@@ -5,13 +5,11 @@ set(
 	include/sanguis/config_app_name.hpp
 	include/sanguis/log_level_streams.hpp
 	include/sanguis/log_location.hpp
-	include/sanguis/log_parameters.hpp
 	src/app_name.cpp
 	src/company_name.cpp
 	src/config_app_name.cpp
 	src/log_level_streams.cpp
 	src/log_location.cpp
-	src/log_parameters.cpp
 )
 
 sanguis_add_library(

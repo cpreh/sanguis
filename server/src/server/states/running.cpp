@@ -1,5 +1,4 @@
 #include <sanguis/exception.hpp>
-#include <sanguis/log_parameters.hpp>
 #include <sanguis/player_name.hpp>
 #include <sanguis/string_vector.hpp>
 #include <sanguis/world_id.hpp>
@@ -42,6 +41,7 @@
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
+#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/to_exception.hpp>
@@ -70,7 +70,7 @@ sanguis::server::states::running::running(
 			sanguis::server::machine
 		>().log_context(),
 		sanguis::server::states::log_location(),
-		sanguis::log_parameters(
+		fcppt::log::parameters_no_function(
 			fcppt::log::name{
 				FCPPT_TEXT("running")
 			}

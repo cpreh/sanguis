@@ -1,4 +1,3 @@
-#include <sanguis/log_parameters.hpp>
 #include <sanguis/messages/call/result.hpp>
 #include <sanguis/messages/client/base.hpp>
 #include <sanguis/messages/client/info.hpp>
@@ -24,6 +23,7 @@
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
+#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -49,7 +49,7 @@ sanguis::server::states::paused::paused(
 			sanguis::server::machine
 		>().log_context(),
 		sanguis::server::states::log_location(),
-		sanguis::log_parameters(
+		fcppt::log::parameters_no_function(
 			fcppt::log::name{
 				FCPPT_TEXT("paused")
 			}

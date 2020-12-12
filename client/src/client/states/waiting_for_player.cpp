@@ -1,4 +1,3 @@
-#include <sanguis/log_parameters.hpp>
 #include <sanguis/client/dispatch.hpp>
 #include <sanguis/client/dispatch_default_function.hpp>
 #include <sanguis/client/machine.hpp>
@@ -24,6 +23,7 @@
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
+#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -50,7 +50,7 @@ sanguis::client::states::waiting_for_player::waiting_for_player(
 			sanguis::client::machine
 		>().log_context(),
 		sanguis::client::states::log_location(),
-		sanguis::log_parameters(
+		fcppt::log::parameters_no_function(
 			fcppt::log::name{
 				FCPPT_TEXT("waiting_for_player")
 			}

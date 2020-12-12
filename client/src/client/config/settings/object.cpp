@@ -1,4 +1,3 @@
-#include <sanguis/log_parameters.hpp>
 #include <sanguis/client/config/log_location.hpp>
 #include <sanguis/client/config/settings/object.hpp>
 #include <sge/parse/ini/parse_file.hpp>
@@ -15,6 +14,7 @@
 #include <fcppt/log/info.hpp>
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/out.hpp>
+#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/parse/error.hpp>
@@ -38,7 +38,7 @@ sanguis::client::config::settings::object::object(
 	log_{
 		_log_context,
 		sanguis::client::config::log_location(),
-		sanguis::log_parameters(
+		fcppt::log::parameters_no_function(
 			fcppt::log::name{
 				FCPPT_TEXT("settings")
 			}

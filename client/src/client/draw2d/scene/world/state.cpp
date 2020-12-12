@@ -1,4 +1,3 @@
-#include <sanguis/log_parameters.hpp>
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/client/slowed_duration.hpp>
 #include <sanguis/client/world_parameters.hpp>
@@ -62,6 +61,7 @@
 #include <fcppt/container/grid/sup_from_pos.hpp>
 #include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/name.hpp>
+#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/to_vector.hpp>
 #include <fcppt/math/vector/ceil_div_signed.hpp>
@@ -320,7 +320,7 @@ sanguis::client::draw2d::scene::world::state::state(
 		_log_context,
 		sanguis::client::draw2d::scene::world::log_location(),
 		// TODO: Add world name?
-		sanguis::log_parameters(
+		fcppt::log::parameters_no_function(
 			fcppt::log::name{
 				FCPPT_TEXT("state")
 			}

@@ -1,6 +1,5 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/io_service.hpp>
-#include <sanguis/log_parameters.hpp>
 #include <sanguis/slowdown.hpp>
 #include <sanguis/messages/client/base.hpp>
 #include <sanguis/messages/client/unique_ptr.hpp>
@@ -48,6 +47,7 @@
 #include <fcppt/log/name.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
+#include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/log/verbose.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
@@ -77,7 +77,7 @@ sanguis::server::machine::machine(
 	log_{
 		_log_context,
 		sanguis::server::log_location(),
-		sanguis::log_parameters(
+		fcppt::log::parameters_no_function(
 			fcppt::log::name{
 				FCPPT_TEXT("machine")
 			}
