@@ -15,7 +15,7 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wglobal-constructors)
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wexit-time-destructors)
 
-sanguis::creator::generator_vector const global_generators{
+sanguis::creator::generator_vector const global_generators{ // NOLINT(fuchsia-statically-constructed-objects,cert-err58-cpp)
 	sanguis::creator::impl::graveyard_name(),
 //	sanguis::creator::impl::maze_name(),
 	sanguis::creator::impl::rooms_name()

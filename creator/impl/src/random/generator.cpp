@@ -37,8 +37,7 @@ sanguis::creator::impl::random::generator::generator(
 }
 
 sanguis::creator::impl::random::generator::~generator()
-{
-}
+= default;
 
 sanguis::creator::impl::random::generator::result_type
 sanguis::creator::impl::random::generator::operator()()

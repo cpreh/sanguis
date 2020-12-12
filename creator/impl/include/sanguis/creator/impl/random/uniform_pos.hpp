@@ -6,6 +6,7 @@
 #include <sanguis/creator/impl/random/generator_fwd.hpp>
 #include <sanguis/creator/impl/random/uniform_pos_fwd.hpp>
 #include <sanguis/creator/impl/random/uniform_size_variate.hpp>
+#include <fcppt/reference_fwd.hpp>
 
 
 namespace sanguis
@@ -17,16 +18,17 @@ namespace impl
 namespace random
 {
 
-// TODO: Try to generalize this in fcppt
 class uniform_pos
 {
 public:
-	// TODO: More constructors for different ranges?
 	uniform_pos(
-		sanguis::creator::impl::random::generator &,
-		sanguis::creator::dim
+		fcppt::reference<
+			sanguis::creator::impl::random::generator
+		>,
+		sanguis::creator::dim const &
 	);
 
+	[[nodiscard]]
 	sanguis::creator::pos
 	operator()();
 private:

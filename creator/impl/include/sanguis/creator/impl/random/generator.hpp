@@ -4,7 +4,7 @@
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/impl/random/generator_fwd.hpp>
 #include <sanguis/creator/impl/random/value.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/random/generator/mt19937_decl.hpp>
 
 
@@ -19,7 +19,7 @@ namespace random
 
 class generator
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		generator
 	);
 public:
@@ -30,7 +30,10 @@ public:
 
 	~generator();
 
-	typedef sanguis::creator::impl::random::value result_type;
+	using
+	result_type
+	=
+	sanguis::creator::impl::random::value;
 
 	sanguis::creator::impl::random::generator::result_type
 	operator()();
@@ -43,9 +46,10 @@ public:
 	sanguis::creator::impl::random::generator::result_type
 	max();
 private:
-	typedef
-	fcppt::random::generator::mt19937
-	generator_type;
+	using
+	generator_type
+	=
+	fcppt::random::generator::mt19937;
 
 	generator_type generator_;
 };

@@ -24,18 +24,22 @@ public:
 		sanguis::creator::enemy_kind
 	);
 
+	[[nodiscard]]
 	SANGUIS_CREATOR_SYMBOL
 	sanguis::creator::spawn_pos
 	pos() const;
 
+	[[nodiscard]]
 	SANGUIS_CREATOR_SYMBOL
 	sanguis::creator::enemy_type
 	enemy_type() const;
 
+	[[nodiscard]]
 	SANGUIS_CREATOR_SYMBOL
 	sanguis::creator::spawn_type
 	spawn_type() const;
 
+	[[nodiscard]]
 	SANGUIS_CREATOR_SYMBOL
 	sanguis::creator::enemy_kind
 	enemy_kind() const;

@@ -11,9 +11,10 @@ namespace sanguis
 namespace creator
 {
 
-typedef
-std::uint32_t
-seed_type;
+using
+seed_type
+=
+std::uint32_t;
 
 }
 }

@@ -27,20 +27,25 @@ public:
 		sanguis::creator::destructible_container &&
 	);
 
-	sanguis::creator::grid const &
-	grid() const;
+	[[nodiscard]]
+	sanguis::creator::grid &
+	grid();
 
-	sanguis::creator::background_grid const &
-	background_grid() const;
+	[[nodiscard]]
+	sanguis::creator::background_grid &
+	background_grid();
 
-	sanguis::creator::opening_container_array const &
-	openings() const;
+	[[nodiscard]]
+	sanguis::creator::opening_container_array &
+	openings();
 
-	sanguis::creator::spawn_container const &
-	spawns() const;
+	[[nodiscard]]
+	sanguis::creator::spawn_container &
+	spawns();
 
-	sanguis::creator::destructible_container const &
-	destructibles() const;
+	[[nodiscard]]
+	sanguis::creator::destructible_container &
+	destructibles();
 private:
 	sanguis::creator::grid grid_;
 

@@ -21,11 +21,12 @@ struct uniform_int_wrapper
 	>
 	struct apply
 	{
-		typedef
+		using
+		type
+		=
 		sanguis::creator::impl::random::uniform_int_distribution<
 			Type
-		>
-		type;
+		>;
 	};
 };
 

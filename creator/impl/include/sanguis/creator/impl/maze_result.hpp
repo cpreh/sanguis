@@ -14,7 +14,6 @@ namespace impl
 struct
 maze_result
 {
-
 	sanguis::creator::impl::region_grid
 	grid;
 

@@ -20,6 +20,8 @@
 #include <sanguis/creator/impl/random/uniform_int_wrapper_impl.hpp>
 #include <sanguis/creator/impl/random/uniform_pos.hpp>
 #include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/fold.hpp>
 #include <fcppt/assert/error_message.hpp>
@@ -36,7 +38,9 @@
 sanguis::creator::spawn_container
 sanguis::creator::impl::place_spawners(
 	fcppt::log::object &_log,
-	sanguis::creator::grid &_grid,
+	fcppt::reference<
+		sanguis::creator::grid
+	> const _grid,
 	sanguis::creator::opening_container_array const &_openings,
 	sanguis::creator::count const _spawner_count,
 	sanguis::creator::impl::random::generator &_generator,
@@ -47,8 +51,10 @@ sanguis::creator::impl::place_spawners(
 {
 	sanguis::creator::impl::random::uniform_pos
 	random_pos{
-		_generator,
-		_grid.size()
+		fcppt::make_ref(
+			_generator
+		),
+		_grid->size()
 	};
 
 	auto random_monster(
@@ -63,25 +69,26 @@ sanguis::creator::impl::place_spawners(
 		)
 	);
 
-	sanguis::creator::spawn_container
-	spawners;
+	sanguis::creator::spawn_container spawners{};
 
 	if(
 		_spawn_boss.get()
 	)
+	{
 		spawners.push_back(
 			sanguis::creator::impl::place_boss(
 				_openings
 			)
 		);
+	}
 
 	sanguis::creator::spawn_container::size_type
 	current_spawners{
-		0u
+		0U
 	};
 
 	sanguis::creator::count iterations{
-		0u
+		0U
 	};
 
 	while(
@@ -93,7 +100,7 @@ sanguis::creator::impl::place_spawners(
 		sanguis::creator::pos const candidate{
 			fcppt::optional::to_exception(
 				sanguis::creator::impl::closest_empty(
-					_grid,
+					_grid.get(),
 					random_pos()
 				),
 				[]{
@@ -108,7 +115,7 @@ sanguis::creator::impl::place_spawners(
 		};
 
 		if(
-			// TODO: Use any_of for ranges
+			// TODO(philipp): Use any_of for ranges
 			!fcppt::algorithm::fold(
 				_openings[
 					sanguis::creator::opening_type::entry
@@ -118,7 +125,7 @@ sanguis::creator::impl::place_spawners(
 					&_grid,
 					&candidate
 				](
-					sanguis::creator::opening const _cur,
+					sanguis::creator::opening const &_cur,
 					bool const _value
 				)
 				{
@@ -126,7 +133,7 @@ sanguis::creator::impl::place_spawners(
 						_value
 						||
 						sanguis::creator::tile_is_visible(
-							_grid,
+							_grid.get(),
 							candidate,
 							_cur.get()
 						);
@@ -136,7 +143,7 @@ sanguis::creator::impl::place_spawners(
 		{
 			FCPPT_ASSERT_OPTIONAL_ERROR(
 				fcppt::container::grid::at_optional(
-					_grid,
+					_grid.get(),
 					candidate
 				)
 			).get() =

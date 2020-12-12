@@ -5,6 +5,7 @@
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/opening_container_array.hpp>
 #include <sanguis/creator/pos.hpp>
+#include <sanguis/creator/size_type.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/impl/enemy_type_container.hpp>
@@ -37,25 +38,29 @@ sanguis::creator::impl::generators::graveyard(
 	sanguis::creator::impl::parameters const &_parameters
 )
 {
+	constexpr sanguis::creator::size_type const side_length{9U};
+
 	sanguis::creator::impl::reachable_grid
 	initial_maze{
 		sanguis::creator::grid::dim{
-			9u,
-			9u
+			side_length,
+			side_length
 		},
 		sanguis::creator::impl::reachable(false)
 	};
 
 	sanguis::creator::impl::generate_maze(
-		initial_maze,
+		fcppt::make_ref(
+			initial_maze
+		),
 		_parameters.randgen()
 	);
 
 	sanguis::creator::grid grid{
 		sanguis::creator::impl::maze_to_tile_grid(
 			initial_maze,
-			1u,
-			5u,
+			1U,
+			5U, // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			sanguis::creator::tile::nothing,
 			sanguis::creator::tile::hedge
 		)
@@ -63,19 +68,22 @@ sanguis::creator::impl::generators::graveyard(
 
 	sanguis::creator::opening_container_array openings(
 		sanguis::creator::impl::place_openings(
-			grid,
+			fcppt::make_ref(
+				grid
+			),
 			_parameters.randgen(),
 			_parameters.opening_count_array()
 		)
 	);
 
-	typedef
+	using
+	uniform_int2
+	=
 	fcppt::random::distribution::basic<
 		sanguis::creator::impl::random::uniform_int<
 			unsigned
 		>
-	>
-	uniform_int2;
+	>;
 
 	auto fill_tile_random(
 		fcppt::random::make_variate(
@@ -84,28 +92,29 @@ sanguis::creator::impl::generators::graveyard(
 			),
 			uniform_int2{
 				uniform_int2::param_type::min{
-					0u
+					0U
 				},
 				uniform_int2::param_type::max{
-					10u
+					10U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 				}
 			}
 		)
 	);
 
-	typedef
+	using
+	uniform_tile_enum
+	=
 	fcppt::random::distribution::basic<
 		sanguis::creator::impl::random::uniform_int<
 			sanguis::creator::tile
 		>
-	> uniform_tile_enum;
+	>;
 
 	sanguis::creator::background_grid grid_bg{
 		grid.size(),
 		sanguis::creator::background_tile::grass
 	};
 
-	// TODO: Draw this from a container
 	auto random_dirt_grass(
 		fcppt::random::make_variate(
 			fcppt::make_ref(
@@ -113,10 +122,10 @@ sanguis::creator::impl::generators::graveyard(
 			),
 			uniform_int2{
 				uniform_int2::param_type::min{
-					0u
+					0U
 				},
 				uniform_int2::param_type::max{
-					1u
+					1U
 				}
 			}
 		)
@@ -126,15 +135,20 @@ sanguis::creator::impl::generators::graveyard(
 		auto const pos
 		:
 		sanguis::creator::impl::interior_range(
-			grid_bg
+			fcppt::make_ref(
+				grid_bg
+			)
 		)
 	)
+	{
 		pos.value() =
 			random_dirt_grass()
+			!= 0U
 			?
 			sanguis::creator::background_tile::dirt
 			:
 			sanguis::creator::background_tile::grass;
+	}
 
 	auto random_grave(
 		fcppt::random::make_variate(
@@ -177,16 +191,20 @@ sanguis::creator::impl::generators::graveyard(
 			==
 			sanguis::creator::background_tile::grass
 		)
+		{
 			cell.value() =
 				random_grave();
+		}
 	}
 
 	sanguis::creator::spawn_container spawners{
 		sanguis::creator::impl::place_spawners(
 			_parameters.log(),
-			grid,
+			fcppt::make_ref(
+				grid
+			),
 			openings,
-			10u,
+			10U, // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			_parameters.randgen(),
 			sanguis::creator::impl::enemy_type_container{
 				sanguis::creator::enemy_type::zombie00,
@@ -213,6 +231,6 @@ sanguis::creator::impl::generators::graveyard(
 			std::move(
 				spawners
 			),
-			sanguis::creator::destructible_container() // TODO
+			sanguis::creator::destructible_container()
 		);
 }

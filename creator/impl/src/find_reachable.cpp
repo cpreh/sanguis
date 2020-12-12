@@ -17,7 +17,7 @@
 sanguis::creator::impl::reachable_grid
 sanguis::creator::impl::find_reachable(
 	sanguis::creator::grid const &_grid,
-	sanguis::creator::pos const _start
+	sanguis::creator::pos const &_start
 )
 {
 
@@ -66,6 +66,7 @@ sanguis::creator::impl::find_reachable(
 				pos
 			)
 		)
+		{
 			if(
 				FCPPT_ASSERT_OPTIONAL_ERROR(
 					fcppt::container::grid::at_optional(
@@ -87,9 +88,12 @@ sanguis::creator::impl::find_reachable(
 					).get()
 				)
 			)
+			{
 				queue.push_back(
 					n
 				);
+			}
+		}
 	}
 
 	return

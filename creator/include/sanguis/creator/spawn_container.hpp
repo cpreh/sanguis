@@ -12,11 +12,12 @@ namespace sanguis
 namespace creator
 {
 
-typedef
+using
+spawn_container
+=
 std::vector<
 	sanguis::creator::spawn
->
-spawn_container;
+>;
 
 }
 }

@@ -16,7 +16,7 @@ namespace impl
 sanguis::creator::impl::reachable_grid
 find_reachable(
 	sanguis::creator::grid const &,
-	sanguis::creator::pos const
+	sanguis::creator::pos const &
 );
 
 }

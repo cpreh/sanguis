@@ -12,11 +12,11 @@ namespace creator
 namespace impl
 {
 
-typedef
+using
+generator_function
+=
 sanguis::creator::impl::result
-(
-	*generator_function
-)(
+(*)(
 	sanguis::creator::impl::parameters const &
 );
 

@@ -4,7 +4,7 @@
 #include <sanguis/creator/name.hpp>
 #include <sanguis/creator/impl/generator_function.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <map>
+#include <unordered_map>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -15,12 +15,13 @@ namespace creator
 namespace impl
 {
 
-typedef
-std::map<
+using
+generator_map_type
+=
+std::unordered_map<
 	sanguis::creator::name,
 	sanguis::creator::impl::generator_function
->
-generator_map_type;
+>;
 
 }
 }

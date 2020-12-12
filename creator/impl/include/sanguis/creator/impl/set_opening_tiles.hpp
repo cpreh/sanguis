@@ -3,6 +3,7 @@
 
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/creator/opening_container_array_fwd.hpp>
+#include <fcppt/reference_fwd.hpp>
 
 
 namespace sanguis
@@ -14,13 +15,14 @@ namespace impl
 
 void
 set_opening_tiles(
-	sanguis::creator::grid &,
+	fcppt::reference<
+		sanguis::creator::grid
+	>,
 	sanguis::creator::opening_container_array const &
 );
 
 }
 }
 }
-
 
 #endif

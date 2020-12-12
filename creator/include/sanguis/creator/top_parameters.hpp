@@ -21,25 +21,30 @@ public:
 	SANGUIS_CREATOR_SYMBOL
 	top_parameters(
 		fcppt::log::context_reference,
-		sanguis::creator::name const &,
+		sanguis::creator::name,
 		sanguis::creator::seed,
 		sanguis::creator::opening_count_array,
 		sanguis::creator::spawn_boss
 	);
 
+	[[nodiscard]]
 	fcppt::log::context_reference
 	log_context() const;
 
+	[[nodiscard]]
 	SANGUIS_CREATOR_SYMBOL
 	sanguis::creator::name const &
 	name() const;
 
+	[[nodiscard]]
 	sanguis::creator::seed
 	seed() const;
 
+	[[nodiscard]]
 	sanguis::creator::opening_count_array const &
 	opening_count_array() const;
 
+	[[nodiscard]]
 	sanguis::creator::spawn_boss
 	spawn_boss() const;
 private:

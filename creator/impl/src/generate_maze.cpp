@@ -17,6 +17,7 @@
 #include <sanguis/creator/impl/random/uniform_size.hpp>
 #include <sanguis/creator/impl/random/uniform_size_variate.hpp>
 #include <fcppt/make_ref.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/algorithm/remove.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/join.hpp>
@@ -39,30 +40,30 @@
 
 sanguis::creator::impl::maze_result
 sanguis::creator::impl::generate_maze(
-	sanguis::creator::impl::reachable_grid &_maze,
+	fcppt::reference<
+		sanguis::creator::impl::reachable_grid
+	> const _maze,
 	sanguis::creator::impl::random::generator &_randgen
 )
 {
-	auto size = _maze.size();
+	auto size = _maze.get().size();
 
 	sanguis::creator::impl::random::uniform_size_variate
 	random_index(
-		// TODO
 		fcppt::make_ref(
 			_randgen
 		),
 		sanguis::creator::impl::random::uniform_size(
 			sanguis::creator::impl::random::uniform_size::param_type::min(
-				0u
+				0U
 			),
 			sanguis::creator::impl::random::uniform_size::param_type::max(
-				// TODO: unsigned?
 				std::numeric_limits<unsigned>::max()
 		)));
 
 	auto res_grid =
 		sanguis::creator::impl::region_grid{
-			_maze.size(),
+			size,
 			// walls
 			region_id{
 				-1
@@ -78,14 +79,16 @@ sanguis::creator::impl::generate_maze(
 	{
 		sanguis::creator::pos tmp_pos{
 			sanguis::creator::impl::random::uniform_pos{
-				_randgen,
+				fcppt::make_ref(
+					_randgen
+				),
 				size
 			}()
 		};
 
 		auto maybe_starting_pos =
 		sanguis::creator::impl::find_closest(
-			_maze,
+			_maze.get(),
 			tmp_pos,
 			// potential spaces lie on every other row and column and aren't
 			// carved out yet
@@ -93,13 +96,13 @@ sanguis::creator::impl::generate_maze(
 				&_maze
 			]
 			(
-				pos const _a
+				pos const &_a
 			)
 			{
 				return
 					FCPPT_ASSERT_OPTIONAL_ERROR(
 						fcppt::container::grid::at_optional(
-							_maze,
+							_maze.get(),
 							_a
 						)
 					).get()
@@ -126,7 +129,9 @@ sanguis::creator::impl::generate_maze(
 		);
 
 		if (!maybe_starting_pos.has_value())
+		{
 			break;
+		}
 
 		sanguis::creator::pos const
 		starting_pos =
@@ -136,7 +141,7 @@ sanguis::creator::impl::generate_maze(
 
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			fcppt::container::grid::at_optional(
-				_maze,
+				_maze.get(),
 				starting_pos
 			)
 		).get() =
@@ -180,7 +185,7 @@ sanguis::creator::impl::generate_maze(
 			sanguis::creator::impl::optional_pos const
 			opposing_cell{
 				sanguis::creator::impl::find_opposing_cell(
-					_maze,
+					_maze.get(),
 					random_wall
 				)
 			};
@@ -190,12 +195,12 @@ sanguis::creator::impl::generate_maze(
 				[
 					&
 				](
-					pos const _opposing_cell
+					pos const &_opposing_cell
 				)
 				{
 					FCPPT_ASSERT_OPTIONAL_ERROR(
 						fcppt::container::grid::at_optional(
-							_maze,
+							_maze.get(),
 							random_wall
 						)
 					).get() =
@@ -203,7 +208,7 @@ sanguis::creator::impl::generate_maze(
 
 					FCPPT_ASSERT_OPTIONAL_ERROR(
 						fcppt::container::grid::at_optional(
-							_maze,
+							_maze.get(),
 							_opposing_cell
 						)
 					).get() =

@@ -10,11 +10,12 @@ namespace sanguis
 namespace creator
 {
 
-typedef
+using
+sup
+=
 fcppt::container::grid::sup_from_pos<
 	sanguis::creator::pos
->
-sup;
+>;
 
 }
 }

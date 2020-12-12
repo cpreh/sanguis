@@ -45,36 +45,36 @@ sanguis::creator::impl::result::result(
 {
 }
 
-sanguis::creator::grid const &
-sanguis::creator::impl::result::grid() const
+sanguis::creator::grid &
+sanguis::creator::impl::result::grid()
 {
 	return
 		grid_;
 }
 
-sanguis::creator::background_grid const &
-sanguis::creator::impl::result::background_grid() const
+sanguis::creator::background_grid &
+sanguis::creator::impl::result::background_grid()
 {
 	return
 		background_grid_;
 }
 
-sanguis::creator::opening_container_array const &
-sanguis::creator::impl::result::openings() const
+sanguis::creator::opening_container_array &
+sanguis::creator::impl::result::openings()
 {
 	return
 		openings_;
 }
 
-sanguis::creator::spawn_container const &
-sanguis::creator::impl::result::spawns() const
+sanguis::creator::spawn_container &
+sanguis::creator::impl::result::spawns()
 {
 	return
 		spawns_;
 }
 
-sanguis::creator::destructible_container const &
-sanguis::creator::impl::result::destructibles() const
+sanguis::creator::destructible_container &
+sanguis::creator::impl::result::destructibles()
 {
 	return
 		destructibles_;

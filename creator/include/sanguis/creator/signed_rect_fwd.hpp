@@ -9,10 +9,12 @@ namespace sanguis
 namespace creator
 {
 
-typedef fcppt::math::box::rect<
+using
+signed_rect
+=
+fcppt::math::box::rect<
 	sanguis::creator::difference_type
->
-signed_rect;
+>;
 
 }
 }

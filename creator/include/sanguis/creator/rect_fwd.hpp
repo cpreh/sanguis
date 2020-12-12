@@ -10,11 +10,12 @@ namespace sanguis
 namespace creator
 {
 
-typedef
+using
+rect
+=
 fcppt::math::box::rect<
 	sanguis::creator::size_type
->
-rect;
+>;
 
 }
 }

@@ -12,10 +12,13 @@ namespace sanguis
 namespace creator
 {
 
-typedef std::integral_constant<
+using
+tile_size
+=
+std::integral_constant<
 	sanguis::creator::size_type,
-	96
-> tile_size;
+	96 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+>;
 
 }
 }

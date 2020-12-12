@@ -10,11 +10,12 @@ namespace sanguis
 namespace creator
 {
 
-typedef
+using
+min
+=
 fcppt::container::grid::min_from_pos<
 	sanguis::creator::pos
->
-min;
+>;
 
 }
 }

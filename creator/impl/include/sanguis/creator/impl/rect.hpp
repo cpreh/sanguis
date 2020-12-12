@@ -11,20 +11,19 @@ namespace creator
 namespace impl
 {
 
-template
-<
+template<
 	typename Callback
 >
 void
-rect
-(
+rect(
 	sanguis::creator::rect const &_rect,
 	Callback const &_callback
 )
 {
-	typedef
-	sanguis::creator::pos::value_type
-	int_type;
+	using
+	int_type
+	=
+	sanguis::creator::pos::value_type;
 
 	int_type x0 = _rect.left();
 	int_type y0 = _rect.top();

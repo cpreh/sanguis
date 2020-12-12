@@ -12,7 +12,7 @@
 sanguis::creator::impl::optional_pos
 sanguis::creator::impl::closest_empty(
 	sanguis::creator::grid const &_grid,
-	sanguis::creator::pos const _pos
+	sanguis::creator::pos const &_pos
 )
 {
 	return
@@ -22,7 +22,7 @@ sanguis::creator::impl::closest_empty(
 			[
 				&_grid
 			](
-				sanguis::creator::pos const _p
+				sanguis::creator::pos const &_p
 			){
 				return
 					FCPPT_ASSERT_OPTIONAL_ERROR(

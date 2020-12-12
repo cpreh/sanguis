@@ -14,11 +14,12 @@ namespace creator
 namespace impl
 {
 
-typedef
+using
+enemy_type_container
+=
 std::vector<
 	sanguis::creator::enemy_type
->
-enemy_type_container;
+>;
 
 }
 }

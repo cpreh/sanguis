@@ -7,9 +7,10 @@ namespace sanguis
 namespace creator
 {
 
-typedef
-unsigned
-count;
+using
+count
+=
+unsigned;
 
 }
 }

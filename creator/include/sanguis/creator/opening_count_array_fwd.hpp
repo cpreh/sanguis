@@ -11,12 +11,13 @@ namespace sanguis
 namespace creator
 {
 
-typedef
+using
+opening_count_array
+=
 fcppt::enum_::array<
 	sanguis::creator::opening_type,
 	sanguis::creator::opening_count
->
-opening_count_array;
+>;
 
 }
 }

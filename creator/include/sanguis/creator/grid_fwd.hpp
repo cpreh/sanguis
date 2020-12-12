@@ -10,11 +10,12 @@ namespace sanguis
 namespace creator
 {
 
-typedef
+using
+grid
+=
 sanguis::creator::tile_grid<
 	sanguis::creator::tile
->
-grid;
+>;
 
 }
 }

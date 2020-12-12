@@ -24,6 +24,7 @@ sanguis::creator::exception::exception(
 sanguis::creator::exception::exception(
 	exception &&
 )
+noexcept
 = default;
 
 sanguis::creator::exception::exception(
@@ -35,6 +36,7 @@ sanguis::creator::exception &
 sanguis::creator::exception::operator=(
 	exception &&
 )
+noexcept
 = default;
 
 sanguis::creator::exception &
@@ -43,6 +45,6 @@ sanguis::creator::exception::operator=(
 )
 = default;
 
-sanguis::creator::exception::~exception() noexcept
-{
-}
+sanguis::creator::exception::~exception()
+noexcept
+= default;

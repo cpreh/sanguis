@@ -11,6 +11,8 @@
 #include <sanguis/creator/impl/random/uniform_pos.hpp>
 #include <fcppt/make_int_range_count.hpp>
 #include <fcppt/make_literal_strong_typedef.hpp>
+#include <fcppt/make_ref.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/enum/array_init.hpp>
@@ -20,18 +22,21 @@
 
 sanguis::creator::opening_container_array
 sanguis::creator::impl::place_openings(
-	sanguis::creator::grid &_grid,
+	fcppt::reference<
+		sanguis::creator::grid
+	> const _grid,
 	sanguis::creator::impl::random::generator &_generator,
 	sanguis::creator::opening_count_array const _opening_count_array
 )
 {
-	sanguis::creator::impl::random::uniform_pos
-	random_pos{
-		_generator,
-		_grid.size()
+	sanguis::creator::impl::random::uniform_pos random_pos{
+		fcppt::make_ref(
+			_generator
+		),
+		_grid->size()
 	};
 
-	auto const result(
+	auto result(
 		fcppt::enum_::array_init<
 			sanguis::creator::opening_container_array
 		>(
@@ -63,7 +68,7 @@ sanguis::creator::impl::place_openings(
 								sanguis::creator::opening{
 									fcppt::optional::to_exception(
 										sanguis::creator::impl::closest_empty(
-											_grid,
+											_grid.get(),
 											random_pos()
 										),
 										[]{

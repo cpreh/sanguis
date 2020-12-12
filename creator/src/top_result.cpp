@@ -7,42 +7,57 @@
 #include <sanguis/creator/spawn_boss.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/top_result.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::creator::top_result::top_result(
 	sanguis::creator::seed const _seed,
-	sanguis::creator::name const &_name,
+	sanguis::creator::name &&_name,
 	sanguis::creator::spawn_boss const _spawn_boss,
-	sanguis::creator::grid const &_grid,
-	sanguis::creator::background_grid const &_background_grid,
-	sanguis::creator::opening_container_array const &_openings,
-	sanguis::creator::spawn_container const &_spawns,
-	sanguis::creator::destructible_container const &_destructibles
+	sanguis::creator::grid &&_grid,
+	sanguis::creator::background_grid &&_background_grid,
+	sanguis::creator::opening_container_array &&_openings,
+	sanguis::creator::spawn_container &&_spawns,
+	sanguis::creator::destructible_container &&_destructibles
 )
 :
 	seed_(
 		_seed
 	),
 	name_(
-		_name
+		std::move(
+			_name
+		)
 	),
 	spawn_boss_{
 		_spawn_boss
 	},
 	grid_(
-		_grid
+		std::move(
+			_grid
+		)
 	),
 	background_grid_(
-		_background_grid
+		std::move(
+			_background_grid
+		)
 	),
 	openings_(
-		_openings
+		std::move(
+			_openings
+		)
 	),
 	spawns_(
-		_spawns
+		std::move(
+			_spawns
+		)
 	),
 	destructibles_(
-		_destructibles
+		std::move(
+			_destructibles
+		)
 	)
 {
 }

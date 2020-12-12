@@ -23,7 +23,7 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wglobal-constructors)
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wexit-time-destructors)
 
-sanguis::creator::impl::generator_map_type const generators{
+sanguis::creator::impl::generator_map_type const generators{ // NOLINT(fuchsia-statically-constructed-objects,cert-err58-cpp,fuchsia-default-arguments-calls)
 	std::make_pair(
 		sanguis::creator::start_name(),
 		&sanguis::creator::impl::generators::start

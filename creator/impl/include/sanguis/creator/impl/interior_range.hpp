@@ -4,6 +4,7 @@
 #include <sanguis/creator/dim.hpp>
 #include <sanguis/creator/min.hpp>
 #include <sanguis/creator/sup.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/container/grid/make_pos_ref_range_start_end.hpp>
 #include <fcppt/container/grid/pos_ref_range_impl.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
@@ -26,12 +27,14 @@ fcppt::container::grid::pos_ref_range<
 	Grid
 >
 interior_range(
-	Grid &_grid
+	fcppt::reference<
+		Grid
+	> const _grid
 )
 {
 	return
 		fcppt::container::grid::make_pos_ref_range_start_end(
-			_grid,
+			_grid.get(),
 			sanguis::creator::min{
 				fcppt::math::vector::fill<
 					sanguis::creator::pos
@@ -41,12 +44,12 @@ interior_range(
 			},
 			sanguis::creator::sup{
 				fcppt::math::dim::to_vector(
-					_grid.size()
+					_grid.get().size()
 					-
 					fcppt::math::dim::fill<
 						sanguis::creator::dim
 					>(
-						1u
+						1U
 					)
 				)
 			}

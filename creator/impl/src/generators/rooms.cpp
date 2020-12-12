@@ -14,6 +14,7 @@
 #include <sanguis/creator/rect.hpp>
 #include <sanguis/creator/signed_pos.hpp>
 #include <sanguis/creator/signed_rect.hpp>
+#include <sanguis/creator/size_type.hpp>
 #include <sanguis/creator/spawn.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/spawn_pos.hpp>
@@ -119,8 +120,8 @@ wall_region{
 
 auto
 border_distance(
-	signed_rect const _rect,
-	sanguis::creator::dim const _size
+	signed_rect const &_rect,
+	sanguis::creator::dim const &_size
 )
 {
 	auto const
@@ -151,8 +152,8 @@ border_distance(
 
 auto
 rect_distance(
-	signed_rect a,
-	signed_rect b
+	signed_rect const &a,
+	signed_rect const &b
 )
 {
 	using ret_type =
@@ -195,7 +196,6 @@ is_possible_connector(
 {
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_GNU_GCC_WARNING(-Wmaybe-uninitialized)
-	// TODO: optional::map
 	if(
 		!
 		fcppt::container::grid::in_range(
@@ -215,8 +215,10 @@ FCPPT_PP_DISABLE_GNU_GCC_WARNING(-Wmaybe-uninitialized)
 		!=
 		::wall_region
 	)
+	{
 		return
 			optional_connector{};
+	}
 
 	std::map<
 		region_id,
@@ -230,6 +232,7 @@ FCPPT_PP_DISABLE_GNU_GCC_WARNING(-Wmaybe-uninitialized)
 			p
 		)
 	)
+	{
 		fcppt::optional::maybe_void(
 			fcppt::optional::copy_value(
 				fcppt::container::grid::at_optional(
@@ -246,24 +249,27 @@ FCPPT_PP_DISABLE_GNU_GCC_WARNING(-Wmaybe-uninitialized)
 				]++;
 			}
 		);
+	}
 
 	// if cell doesn't have exactly two adjacent walls
 	if (
 			counts[
 				::wall_region
 			] !=
-			2u
+			2U
 	)
+	{
 		// then we have no result
 		return
 			optional_connector{};
+	}
 
 	// otherwise determine the first non-wall region
 	auto from =
 		counts.upper_bound(::wall_region);
 
 	auto const to =
-		std::next(from);
+		std::next(from); // NOLINT(fuchsia-default-arguments-calls)
 
 	// interior wall, no possible connector
 	if (
@@ -271,8 +277,10 @@ FCPPT_PP_DISABLE_GNU_GCC_WARNING(-Wmaybe-uninitialized)
 		==
 		std::end(counts)
 	)
+	{
 		return
 			optional_connector{};
+	}
 
 	auto const from_region = from->first;
 	auto const to_region = to->first;
@@ -302,10 +310,14 @@ sanguis::creator::impl::generators::rooms(
 	sanguis::creator::impl::parameters const &_parameters
 )
 {
+	constexpr sanguis::creator::size_type const side_length{
+		31U
+	};
+
 	// actual size of the level will be 2x+1 this
 	sanguis::creator::grid::dim const size{
-		31u,
-		31u
+		side_length,
+		side_length
 	};
 
 	sanguis::creator::impl::reachable_grid
@@ -323,12 +335,14 @@ sanguis::creator::impl::generators::rooms(
 
 	auto const max_room_size =
 		sanguis::creator::grid::size_type{
-			4u
+			4U
 		};
 
 	auto rand_pos =
 		sanguis::creator::impl::random::uniform_pos{
-			_parameters.randgen(),
+			fcppt::make_ref(
+				_parameters.randgen()
+			),
 			size
 			-
 			fcppt::math::dim::fill<
@@ -352,7 +366,7 @@ sanguis::creator::impl::generators::rooms(
 			),
 			uniform_size{
 				uniform_size::param_type::min{
-					1u
+					1U
 				},
 				uniform_size::param_type::max{
 					max_room_size
@@ -376,7 +390,7 @@ sanguis::creator::impl::generators::rooms(
 
 	for (
 		::int_type i = 0;
-		i < 100; // FIXME: magic number
+		i < 100;
 		++i
 	)
 	{
@@ -387,18 +401,18 @@ sanguis::creator::impl::generators::rooms(
 				fcppt::cast::to_signed_fun
 			>(
 				sanguis::creator::rect{
-					(wrong / 2u).get_unsafe() * 2u
+					(wrong / 2U).get_unsafe() * 2U
 					+
 					fcppt::math::vector::fill<
 						sanguis::creator::pos
 					>(
-						1u
+						1U
 					),
 					random_room_dim()
 				}
 			);
 
-		// TODO use a find_by here instead
+		// TODO(philipp) use a find_by here instead
 		bool overlaps = false;
 
 		for (
@@ -406,6 +420,7 @@ sanguis::creator::impl::generators::rooms(
 			:
 			rects
 		)
+		{
 			if (
 				fcppt::math::box::intersects(
 					rect,
@@ -416,10 +431,14 @@ sanguis::creator::impl::generators::rooms(
 				overlaps = true;
 				break;
 			}
+		}
 
 		if (!overlaps)
+		{
 			rects.push_back(
-				rect);
+				rect
+			);
+		}
 	}
 
 	for (
@@ -439,7 +458,7 @@ sanguis::creator::impl::generators::rooms(
 				&raw_grid
 			]
 			(
-				sanguis::creator::pos const _pos
+				sanguis::creator::pos const &_pos
 			)
 			{
 				FCPPT_ASSERT_OPTIONAL_ERROR(
@@ -459,7 +478,9 @@ sanguis::creator::impl::generators::rooms(
 	// 3. identify connected regions
 	auto tmp_result =
 		sanguis::creator::impl::generate_maze(
-			raw_grid,
+			fcppt::make_ref(
+				raw_grid
+			),
 			_parameters.randgen()
 		);
 
@@ -511,7 +532,7 @@ sanguis::creator::impl::generators::rooms(
 				cur_region
 			]
 			(
-				sanguis::creator::pos const p
+				sanguis::creator::pos const &p
 			)
 			{
 				FCPPT_ASSERT_OPTIONAL_ERROR(
@@ -561,7 +582,9 @@ sanguis::creator::impl::generators::rooms(
 		// edge of the map, so only look for them in the
 		// interior
 		sanguis::creator::impl::interior_range(
-			region_grid
+			fcppt::make_ref(
+				region_grid
+			)
 		)
 	)
 	{
@@ -616,7 +639,7 @@ sanguis::creator::impl::generators::rooms(
 	// build minimum spanning tree
 	std::set<
 		region_id
-	> verts{
+	> verts{ // NOLINT(fuchsia-default-arguments-calls)
 		random_region()
 	};
 
@@ -625,11 +648,11 @@ sanguis::creator::impl::generators::rooms(
 			region_id,
 			region_id
 		>
-	> remaining_edges;
+	> remaining_edges{}; // NOLINT(fuchsia-default-arguments-calls)
 
 	auto find =
 		[&verts](
-			region_id _v
+			region_id const _v
 		)
 		{
 			return verts.find(_v) != std::end(verts);
@@ -638,6 +661,7 @@ sanguis::creator::impl::generators::rooms(
 	while (
 		verts.size() < cur_region
 	)
+	{
 		for (
 			auto const &edge
 			:
@@ -659,8 +683,9 @@ sanguis::creator::impl::generators::rooms(
 				remaining_edges.insert(edge);
 			}
 		}
+	}
 
-	// TODO: add more edges than strictly necessary
+	// TODO(philipp): add more edges than strictly necessary
 	// for now, the level has no cycles
 	// depending on how many remaining edges there are
 	for (
@@ -709,7 +734,7 @@ sanguis::creator::impl::generators::rooms(
 
 			fcppt::container::grid::fill(
 				region_grid,
-				[](sanguis::creator::pos){return 0;}
+				[](sanguis::creator::pos const &){return 0;}
 			);
 
 			for (
@@ -719,6 +744,7 @@ sanguis::creator::impl::generators::rooms(
 					region_grid
 				)
 			)
+			{
 				for(
 					auto const &n
 					:
@@ -726,6 +752,7 @@ sanguis::creator::impl::generators::rooms(
 						p.pos()
 					)
 				)
+				{
 					fcppt::optional::maybe_void(
 						fcppt::container::grid::at_optional(
 							region_grid,
@@ -760,9 +787,13 @@ sanguis::creator::impl::generators::rooms(
 								==
 								sanguis::creator::impl::reachable{true}
 							)
+							{
 								++_ref.get();
+							}
 						}
 					);
+				}
+			}
 
 			for (
 				auto const p
@@ -790,7 +821,9 @@ sanguis::creator::impl::generators::rooms(
 
 			return ret;
 		}()
-	);
+	)
+	{
+	}
 
 	output_grid();
 
@@ -814,7 +847,7 @@ sanguis::creator::impl::generators::rooms(
 			fcppt::math::vector::fill<
 				sanguis::creator::rect::vector
 			>(
-				1u
+				1U
 			),
 			sanguis::creator::rect::dim{
 				grid.size()
@@ -822,7 +855,7 @@ sanguis::creator::impl::generators::rooms(
 				fcppt::math::dim::fill<
 					sanguis::creator::rect::dim
 				>(
-					2u
+					2U
 				)
 			}
 		},
@@ -830,7 +863,7 @@ sanguis::creator::impl::generators::rooms(
 			&bg_grid
 		]
 		(
-			sanguis::creator::pos const _pos
+			sanguis::creator::pos const &_pos
 		)
 		{
 			FCPPT_ASSERT_OPTIONAL_ERROR(
@@ -847,7 +880,7 @@ sanguis::creator::impl::generators::rooms(
 	rect_center_pos(
 		[]
 		(
-			signed_rect _rect
+			signed_rect const &_rect
 		)
 		{
 			return
@@ -866,8 +899,8 @@ sanguis::creator::impl::generators::rooms(
 		rects.begin(),
 		rects.end(),
 		[&size](
-			::signed_rect const _a,
-			::signed_rect const _b
+			::signed_rect const &_a,
+			::signed_rect const &_b
 		){
 			return border_distance(_a, size) < border_distance(_b, size);
 		}
@@ -882,7 +915,7 @@ sanguis::creator::impl::generators::rooms(
 	*std::max_element(
 		rects.begin(),
 		rects.end(),
-		[&entrance_room](::signed_rect const _a, ::signed_rect const _b){return rect_distance(_a, entrance_room) < rect_distance(_b, entrance_room);}
+		[&entrance_room](::signed_rect const &_a, ::signed_rect const &_b){return rect_distance(_a, entrance_room) < rect_distance(_b, entrance_room);}
 	);
 
 	FCPPT_LOG_DEBUG(
@@ -897,13 +930,13 @@ sanguis::creator::impl::generators::rooms(
 	FCPPT_ASSERT_ERROR(
 		_parameters.opening_count_array()[
 			sanguis::creator::opening_type::entry
-		] <= sanguis::creator::opening_count{1u}
+		] <= sanguis::creator::opening_count{1U}
 	);
 
 	FCPPT_ASSERT_ERROR(
 		_parameters.opening_count_array()[
 			sanguis::creator::opening_type::exit
-		] <= sanguis::creator::opening_count{1u}
+		] <= sanguis::creator::opening_count{1U}
 	);
 
 
@@ -934,7 +967,7 @@ sanguis::creator::impl::generators::rooms(
 			)
 			{
 				return
-					opening_counts[_opening] >= sanguis::creator::opening_count{1u}
+					opening_counts[_opening] >= sanguis::creator::opening_count{1U}
 					?
 						sanguis::creator::opening_container{
 							sanguis::creator::opening{
@@ -966,7 +999,9 @@ sanguis::creator::impl::generators::rooms(
 	)
 
 	sanguis::creator::impl::set_opening_tiles(
-		grid,
+		fcppt::make_ref(
+			grid
+		),
 		openings
 	);
 
@@ -976,10 +1011,12 @@ sanguis::creator::impl::generators::rooms(
 	if(
 		_parameters.spawn_boss().get()
 	)
+	{
 		spawners.push_back(
 			sanguis::creator::impl::place_boss(
 				openings)
 		);
+	}
 
 	sanguis::creator::impl::enemy_type_container const
 	enemy_types{
@@ -1004,6 +1041,7 @@ sanguis::creator::impl::generators::rooms(
 		auto start = rects.begin();
 		++start;
 		for (auto room = start, end = rects.end(); room != end; ++room)
+		{
 			spawners.push_back(
 				sanguis::creator::spawn{
 					sanguis::creator::spawn_pos{
@@ -1018,6 +1056,7 @@ sanguis::creator::impl::generators::rooms(
 					sanguis::creator::enemy_kind::normal
 				}
 			);
+		}
 	}
 
 	return

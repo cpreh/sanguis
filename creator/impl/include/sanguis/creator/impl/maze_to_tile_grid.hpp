@@ -73,11 +73,11 @@ maze_to_tile_grid(
 				fcppt::math::dim::fill<
 					dim_type
 				>(
-					1u
+					1U
 				)
 			)
 			/
-			2u
+			2U
 		).get_unsafe()
 	);
 
@@ -96,7 +96,7 @@ maze_to_tile_grid(
 			fcppt::math::dim::fill<
 				dim_type
 			>(
-				1u
+				1U
 			)
 		)
 		*
@@ -106,7 +106,7 @@ maze_to_tile_grid(
 		fcppt::math::dim::fill<
 			dim_type
 		>(
-			2u
+			2U
 		)
 	);
 
@@ -166,15 +166,17 @@ maze_to_tile_grid(
 			wall_or_space(cell.pos().y()));
 
 		for(
-			dim_type::value_type y = 0u;
+			dim_type::value_type y = 0U;
 			y < cell_size.h();
 			++y
 		)
+		{
 			for(
-				dim_type::value_type x = 0u;
+				dim_type::value_type x = 0U;
 				x < cell_size.w();
 				++x
 			)
+			{
 				FCPPT_ASSERT_OPTIONAL_ERROR(
 					fcppt::container::grid::at_optional(
 						result,
@@ -192,6 +194,8 @@ maze_to_tile_grid(
 					_empty
 					:
 					_wall;
+			}
+		}
 	}
 
 	return result;

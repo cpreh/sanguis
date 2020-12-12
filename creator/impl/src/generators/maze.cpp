@@ -6,6 +6,7 @@
 #include <sanguis/creator/opening_container_array.hpp>
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/rect.hpp>
+#include <sanguis/creator/size_type.hpp>
 #include <sanguis/creator/spawn_container.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <sanguis/creator/impl/enemy_type_container.hpp>
@@ -20,6 +21,7 @@
 #include <sanguis/creator/impl/reachable_grid.hpp>
 #include <sanguis/creator/impl/result.hpp>
 #include <sanguis/creator/impl/generators/maze.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -32,10 +34,14 @@ sanguis::creator::impl::generators::maze(
 	sanguis::creator::impl::parameters const &_parameters
 )
 {
+	constexpr sanguis::creator::size_type const side_length{
+		15U
+	};
+
 	sanguis::creator::impl::reachable_grid initial_maze{
 		sanguis::creator::impl::reachable_grid::dim(
-			15u,
-			15u
+			side_length,
+			side_length
 		),
 		sanguis::creator::impl::reachable(false)
 	};
@@ -43,12 +49,12 @@ sanguis::creator::impl::generators::maze(
 	sanguis::creator::impl::filled_rect(
 		sanguis::creator::rect{
 			sanguis::creator::rect::vector{
-				1u,
-				1u
+				1U,
+				1U
 			},
 			sanguis::creator::rect::dim{
-				5u,
-				5u
+				5U, // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+				5U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			}
 		},
 		[
@@ -67,15 +73,17 @@ sanguis::creator::impl::generators::maze(
 	);
 
 	sanguis::creator::impl::generate_maze(
-		initial_maze,
+		fcppt::make_ref(
+			initial_maze
+		),
 		_parameters.randgen()
 	);
 
 	sanguis::creator::grid grid{
 		sanguis::creator::impl::maze_to_tile_grid(
 			initial_maze,
-			1u,
-			2u,
+			1U,
+			2U,
 			sanguis::creator::tile::nothing,
 			sanguis::creator::tile::concrete_wall
 		)
@@ -83,7 +91,9 @@ sanguis::creator::impl::generators::maze(
 
 	sanguis::creator::opening_container_array openings(
 		sanguis::creator::impl::place_openings(
-			grid,
+			fcppt::make_ref(
+				grid
+			),
 			_parameters.randgen(),
 			_parameters.opening_count_array()
 		)
@@ -92,9 +102,11 @@ sanguis::creator::impl::generators::maze(
 	sanguis::creator::spawn_container spawners{
 		sanguis::creator::impl::place_spawners(
 			_parameters.log(),
-			grid,
+			fcppt::make_ref(
+				grid
+			),
 			openings,
-			20u,
+			20U, // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			_parameters.randgen(),
 			sanguis::creator::impl::enemy_type_container{
 				sanguis::creator::enemy_type::wolf_black,
@@ -107,13 +119,16 @@ sanguis::creator::impl::generators::maze(
 				sanguis::creator::enemy_type::ghost,
 				sanguis::creator::enemy_type::maggot
 			},
-			_parameters.spawn_boss()
+			_parameters.spawn_boss(),
+			sanguis::creator::tile::spawner
 		)
 	};
 
 	sanguis::creator::destructible_container destructibles{
 		sanguis::creator::impl::place_destructibles(
-			grid,
+			fcppt::make_ref(
+				grid
+			),
 			_parameters.randgen()
 		)
 	};

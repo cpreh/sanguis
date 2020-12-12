@@ -17,7 +17,7 @@ tile_grid
 =
 fcppt::container::grid::object<
 	Tile,
-	2u
+	2U
 >;
 
 }

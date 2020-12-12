@@ -3,11 +3,14 @@
 #include <sanguis/creator/impl/parameters.hpp>
 #include <sanguis/creator/impl/random/generator_fwd.hpp>
 #include <fcppt/log/object_fwd.hpp>
+#include <fcppt/reference_impl.hpp>
 
 
 sanguis::creator::impl::parameters::parameters(
-	fcppt::log::object &_log,
-	sanguis::creator::impl::random::generator &_randgen,
+	fcppt::log::object_reference const _log,
+	fcppt::reference<
+		sanguis::creator::impl::random::generator
+	> const _randgen,
 	sanguis::creator::spawn_boss const _spawn_boss,
 	sanguis::creator::opening_count_array const _opening_count_array
 )

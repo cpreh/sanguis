@@ -12,11 +12,12 @@ namespace sanguis
 namespace creator
 {
 
-typedef
-std::make_signed<
+using
+difference_type
+=
+std::make_signed_t<
 	sanguis::creator::size_type
->::type
-difference_type;
+>;
 
 }
 }

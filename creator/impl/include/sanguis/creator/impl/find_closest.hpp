@@ -30,9 +30,9 @@ sanguis::creator::impl::optional_pos
 find_closest(
 	fcppt::container::grid::object<
 		Value,
-		2u
+		2U
 	> const &_grid,
-	sanguis::creator::pos const _pos,
+	sanguis::creator::pos const &_pos,
 	Attribute const _attribute,
 	fcppt::optional::object<
 		sanguis::creator::pos::value_type
@@ -67,7 +67,6 @@ find_closest(
 			}
 		);
 
-	// TODO: unsigned?
 	unsigned leg = 0;
 	unsigned radius = 1;
 	unsigned steps = 0;
@@ -99,6 +98,8 @@ find_closest(
 			case 3:
 				x++;
 				y--;
+			default:
+				break;
 		}
 
 		steps++;
@@ -124,12 +125,7 @@ find_closest(
 			leg = 0;
 		}
 
-		const
-		sanguis::creator::pos
-		pos(
-			x,
-			y
-		);
+		sanguis::creator::pos const pos{x, y};
 
 		if(
 			!
@@ -138,7 +134,9 @@ find_closest(
 				pos
 			)
 		)
+		{
 			continue;
+		}
 
 		if(
 			_attribute(

@@ -38,7 +38,7 @@ sanguis::creator::tile_is_visible(
 			[
 				&_grid
 			](
-				sanguis::creator::signed_pos const _elem
+				sanguis::creator::signed_pos const &_elem
 			)
 			{
 				return

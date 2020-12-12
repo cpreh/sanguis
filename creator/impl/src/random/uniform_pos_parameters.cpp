@@ -18,10 +18,10 @@ sanguis::creator::impl::random::uniform_pos_parameters(
 	return
 		sanguis::creator::impl::random::uniform_size::param_type(
 			sanguis::creator::impl::random::uniform_size::param_type::min(
-				1u
+				1U
 			),
 			sanguis::creator::impl::random::uniform_size::param_type::max(
-				_size - 2u
+				_size - 2U
 			)
 		);
 }

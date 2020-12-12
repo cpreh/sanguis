@@ -64,6 +64,7 @@ sanguis::creator::impl::blit(
 			_source
 		)
 	)
+	{
 		boost::get<
 			0
 		>(
@@ -74,6 +75,7 @@ sanguis::creator::impl::blit(
 			>(
 				element
 			).value();
+	}
 }
 
 #define SANGUIS_CREATOR_INSTANTIATE_BLIT(\

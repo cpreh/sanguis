@@ -15,7 +15,7 @@ namespace impl
 namespace random
 {
 
-typedef std::uint32_t value;
+using value = std::uint32_t;
 
 }
 }

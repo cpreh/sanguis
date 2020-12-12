@@ -10,10 +10,13 @@ namespace sanguis
 namespace creator
 {
 
-typedef fcppt::container::grid::pos<
+using
+signed_pos
+=
+fcppt::container::grid::pos<
 	sanguis::creator::difference_type,
 	2
-> signed_pos;
+>;
 
 }
 }

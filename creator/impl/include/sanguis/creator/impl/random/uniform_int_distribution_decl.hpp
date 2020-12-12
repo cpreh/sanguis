@@ -20,9 +20,10 @@ template<
 class uniform_int_distribution
 {
 public:
-	typedef
-	IntType
-	result_type;
+	using
+	result_type
+	=
+	IntType;
 
 	class param_type
 	{
@@ -32,9 +33,11 @@ public:
 			IntType max
 		);
 
+		[[nodiscard]]
 		IntType
 		min() const;
 
+		[[nodiscard]]
 		IntType
 		max() const;
 	private:
@@ -48,10 +51,11 @@ public:
 		param_type const &
 	);
 
+	[[nodiscard]]
 	result_type
 	operator()(
-		sanguis::creator::impl::random::generator &
-	);
+		sanguis::creator::impl::random::generator & // NOLINT(google-runtime-references)
+	); // NOLINT(google-runtime-references)
 private:
 	IntType min_;
 

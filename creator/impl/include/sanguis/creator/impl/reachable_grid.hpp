@@ -11,11 +11,12 @@ namespace creator
 namespace impl
 {
 
-typedef
+using
+reachable_grid
+=
 sanguis::creator::tile_grid<
 	sanguis::creator::impl::reachable
->
-reachable_grid;
+>;
 
 }
 }

@@ -11,6 +11,8 @@
 #include <sanguis/creator/impl/parameters.hpp>
 #include <sanguis/creator/impl/result.hpp>
 #include <sanguis/creator/impl/random/generator.hpp>
+#include <fcppt/copy.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/contains_if.hpp>
@@ -23,6 +25,9 @@
 #include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/math/dim/comparison.hpp>
 #include <fcppt/optional/to_exception.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::creator::top_result
@@ -55,7 +60,7 @@ sanguis::creator::generate(
 		_parameters.seed()
 	);
 
-	sanguis::creator::impl::result const result(
+	sanguis::creator::impl::result result(
 		fcppt::optional::to_exception(
 			fcppt::container::find_opt_mapped(
 				sanguis::creator::impl::generator_map(),
@@ -76,8 +81,12 @@ sanguis::creator::generate(
 			}
 		).get()(
 			sanguis::creator::impl::parameters(
-				log,
-				gen,
+				fcppt::make_ref(
+					log
+				),
+				fcppt::make_ref(
+					gen
+				),
 				_parameters.spawn_boss(),
 				_parameters.opening_count_array()
 			)
@@ -91,6 +100,7 @@ sanguis::creator::generate(
 			sanguis::creator::opening_type
 		>()
 	)
+	{
 		FCPPT_ASSERT_ERROR(
 			result.openings()[
 				opening_type
@@ -100,6 +110,7 @@ sanguis::creator::generate(
 				opening_type
 			].get()
 		);
+	}
 
 	FCPPT_ASSERT_ERROR(
 		result.grid().size()
@@ -110,6 +121,7 @@ sanguis::creator::generate(
 	if(
 		_parameters.spawn_boss().get()
 	)
+	{
 		FCPPT_ASSERT_ERROR(
 			fcppt::algorithm::contains_if(
 				result.spawns(),
@@ -124,16 +136,29 @@ sanguis::creator::generate(
 				}
 			)
 		);
+	}
 
 	return
 		sanguis::creator::top_result(
 			_parameters.seed(),
-			_parameters.name(),
+			fcppt::copy(
+				_parameters.name()
+			),
 			_parameters.spawn_boss(),
-			result.grid(),
-			result.background_grid(),
-			result.openings(),
-			result.spawns(),
-			result.destructibles()
+			std::move(
+				result.grid()
+			),
+			std::move(
+				result.background_grid()
+			),
+			std::move(
+				result.openings()
+			),
+			std::move(
+				result.spawns()
+			),
+			std::move(
+				result.destructibles()
+			)
 		);
 }

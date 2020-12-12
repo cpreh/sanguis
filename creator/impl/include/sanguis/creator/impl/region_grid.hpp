@@ -11,11 +11,12 @@ namespace creator
 namespace impl
 {
 
-typedef
+using
+region_grid
+=
 sanguis::creator::tile_grid<
 	sanguis::creator::impl::region_id
->
-region_grid;
+>;
 
 }
 }

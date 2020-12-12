@@ -3,17 +3,22 @@
 #include <sanguis/creator/spawn.hpp>
 #include <sanguis/creator/spawn_pos.hpp>
 #include <sanguis/creator/spawn_type.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::creator::spawn::spawn(
-	sanguis::creator::spawn_pos const _pos,
+	sanguis::creator::spawn_pos _pos,
 	sanguis::creator::enemy_type const _enemy_type,
 	sanguis::creator::spawn_type const _spawn_type,
 	sanguis::creator::enemy_kind const _enemy_kind
 )
 :
 	pos_{
-		_pos
+		std::move(
+			_pos
+		)
 	},
 	enemy_type_{
 		_enemy_type

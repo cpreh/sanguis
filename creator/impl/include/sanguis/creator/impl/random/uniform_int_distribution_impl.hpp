@@ -95,22 +95,22 @@ sanguis::creator::impl::random::uniform_int_distribution<
 	sanguis::creator::impl::random::generator &_randgen
 )
 {
-	typedef
-	typename
-	std::make_unsigned<
+	using
+	unsigned_result_type
+	=
+	std::make_unsigned_t<
 		result_type
-	>::type
-	unsigned_result_type;
+	>;
 
-	typedef
-	typename
-	std::common_type<
+	using
+	result_common_type
+	=
+	std::common_type_t<
 		sanguis::creator::impl::random::value,
 		unsigned_result_type
-	>::type
-	result_common_type;
+	>;
 
-	result_common_type const input_range(
+	auto const input_range(
 		static_cast<
 			result_common_type
 		>(
@@ -124,11 +124,11 @@ sanguis::creator::impl::random::uniform_int_distribution<
 		)
 	);
 
-	result_common_type const rng_range(
+	auto const rng_range(
 		static_cast<
 			result_common_type
 		>(
-			_randgen.max()
+			sanguis::creator::impl::random::generator::max()
 		)
 	);
 
@@ -137,6 +137,7 @@ sanguis::creator::impl::random::uniform_int_distribution<
 		==
 		rng_range
 	)
+	{
 		return
 			static_cast<
 				result_type
@@ -145,6 +146,7 @@ sanguis::creator::impl::random::uniform_int_distribution<
 			)
 			+
 			min_;
+	}
 
 	result_common_type const extended_input_range(
 		input_range
@@ -173,8 +175,10 @@ sanguis::creator::impl::random::uniform_int_distribution<
 		>=
 		to_discard
 	)
+	{
 		result =
 			_randgen();
+	}
 
 	return
 		static_cast<

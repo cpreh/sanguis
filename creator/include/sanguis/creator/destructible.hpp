@@ -20,10 +20,12 @@ public:
 		sanguis::creator::destructible_type
 	);
 
+	[[nodiscard]]
 	SANGUIS_CREATOR_SYMBOL
 	sanguis::creator::destructible_pos
 	pos() const;
 
+	[[nodiscard]]
 	SANGUIS_CREATOR_SYMBOL
 	sanguis::creator::destructible_type
 	type() const;

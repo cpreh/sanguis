@@ -7,11 +7,12 @@
 #include <sanguis/creator/impl/place_destructibles.hpp>
 #include <sanguis/creator/impl/random/generator.hpp>
 #include <sanguis/creator/impl/random/uniform_int.hpp>
+#include <fcppt/make_ref.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/make_pos_ref_crange.hpp>
 #include <fcppt/container/grid/neumann_neighbors.hpp>
-#include <fcppt/make_ref.hpp>
 #include <fcppt/math/clamp.hpp>
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/basic.hpp>
@@ -19,20 +20,22 @@
 
 sanguis::creator::destructible_container
 sanguis::creator::impl::place_destructibles(
-	sanguis::creator::grid &_grid,
+	fcppt::reference<
+		sanguis::creator::grid
+	> const _grid,
 	sanguis::creator::impl::random::generator &_generator
 )
 {
-	sanguis::creator::destructible_container
-	result;
+	sanguis::creator::destructible_container result{};
 
-	typedef
+	using
+	uniform_int2
+	=
 	fcppt::random::distribution::basic<
 		sanguis::creator::impl::random::uniform_int<
 			unsigned
 		>
-	>
-	uniform_int2;
+	>;
 
 	auto roll_d8(
 		fcppt::random::make_variate(
@@ -41,10 +44,10 @@ sanguis::creator::impl::place_destructibles(
 			),
 			uniform_int2{
 				uniform_int2::param_type::min{
-					1u
+					1U
 				},
 				uniform_int2::param_type::max{
-					8u
+					8U
 				}
 			}
 		)
@@ -62,9 +65,9 @@ sanguis::creator::impl::place_destructibles(
 
 	auto number_of_wall_neighbors(
 		[&]
-		(sanguis::creator::pos const _pos)
+		(sanguis::creator::pos const &_pos)
 		{
-			unsigned res = 0u;
+			unsigned res = 0U;
 
 			auto neighbors(
 				fcppt::container::grid::neumann_neighbors(
@@ -75,17 +78,21 @@ sanguis::creator::impl::place_destructibles(
 				:
 				neighbors
 			)
+			{
 				if(
 					FCPPT_ASSERT_OPTIONAL_ERROR(
 						fcppt::container::grid::at_optional(
-							_grid,
+							_grid.get(),
 							n
 						)
 					).get()
 					==
 					sanguis::creator::tile::concrete_wall
 				)
+				{
 					res++;
+				}
+			}
 
 			return res;
 		}
@@ -95,9 +102,10 @@ sanguis::creator::impl::place_destructibles(
 		auto const &entry
 		:
 		fcppt::container::grid::make_pos_ref_crange(
-			_grid
+			_grid.get()
 		)
 	)
+	{
 		if
 		(
 			!
@@ -111,6 +119,7 @@ sanguis::creator::impl::place_destructibles(
 				)
 			)
 		)
+		{
 			result.push_back(
 				sanguis::creator::destructible(
 					sanguis::creator::destructible_pos(
@@ -119,6 +128,8 @@ sanguis::creator::impl::place_destructibles(
 					sanguis::creator::destructible_type::barrel
 				)
 			);
+		}
+	}
 
 	return
 		result;

@@ -12,11 +12,12 @@ namespace sanguis
 namespace creator
 {
 
-typedef
+using
+destructible_container
+=
 std::vector<
 	sanguis::creator::destructible
->
-destructible_container;
+>;
 
 }
 }

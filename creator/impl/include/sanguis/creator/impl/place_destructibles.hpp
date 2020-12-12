@@ -4,6 +4,7 @@
 #include <sanguis/creator/destructible_container.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/creator/impl/random/generator_fwd.hpp>
+#include <fcppt/reference_fwd.hpp>
 
 
 namespace sanguis
@@ -13,11 +14,14 @@ namespace creator
 namespace impl
 {
 
+[[nodiscard]]
 sanguis::creator::destructible_container
 place_destructibles(
-	sanguis::creator::grid &,
-	sanguis::creator::impl::random::generator &
-);
+	fcppt::reference<
+		sanguis::creator::grid
+	>,
+	sanguis::creator::impl::random::generator & // NOLINT(google-runtime-references)
+); // NOLINT(google-runtime-references)
 
 }
 }

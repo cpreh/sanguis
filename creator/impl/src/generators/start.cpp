@@ -48,7 +48,7 @@ sanguis::creator::impl::generators::start(
 		]
 		>
 		sanguis::creator::opening_count{
-			1u
+			1U
 		}
 		||
 		_parameters.opening_count_array()[
@@ -56,13 +56,15 @@ sanguis::creator::impl::generators::start(
 		]
 		>
 		sanguis::creator::opening_count{
-			1u
+			1U
 		}
 	)
+	{
 		throw
 			sanguis::creator::exception{
 				FCPPT_TEXT("The start level can only deal with 0 or 1 opening each.")
 			};
+	}
 
 	sanguis::creator::dim const grid_size{
 		fcppt::math::dim::fill<
@@ -81,18 +83,22 @@ sanguis::creator::impl::generators::start(
 		auto const pos
 		:
 		sanguis::creator::impl::interior_range(
-			grid
+			fcppt::make_ref(
+				grid
+			)
 		)
 	)
+	{
 		pos.value() =
 			sanguis::creator::tile::nothing;
+	}
 
 	sanguis::creator::opening const start_portal{
 		sanguis::creator::pos{
-			1u,
+			1U,
 			grid_size.h()
 			/
-			2u
+			2U
 		}
 	};
 
@@ -100,10 +106,10 @@ sanguis::creator::impl::generators::start(
 		sanguis::creator::pos{
 			grid_size.w()
 			-
-			2u,
+			2U,
 			grid_size.h()
 			/
-			2u
+			2U
 		}
 	};
 
@@ -112,13 +118,14 @@ sanguis::creator::impl::generators::start(
 		sanguis::creator::background_tile::dirt
 	};
 
-	typedef
+	using
+	uniform_int2
+	=
 	fcppt::random::distribution::basic<
 		sanguis::creator::impl::random::uniform_int<
 			unsigned
 		>
-	>
-	uniform_int2;
+	>;
 
 	auto random_dirt_grass(
 		fcppt::random::make_variate(
@@ -127,10 +134,10 @@ sanguis::creator::impl::generators::start(
 			),
 			uniform_int2{
 				uniform_int2::param_type::min{
-					0u
+					0U
 				},
 				uniform_int2::param_type::max{
-					1u
+					1U
 				}
 			}
 		)
@@ -140,15 +147,21 @@ sanguis::creator::impl::generators::start(
 		auto const pos
 		:
 		sanguis::creator::impl::interior_range(
-			bg_grid
+			fcppt::make_ref(
+				bg_grid
+			)
 		)
 	)
+	{
 		pos.value() =
 			random_dirt_grass()
+			!=
+			0U
 			?
 			sanguis::creator::background_tile::dirt
 			:
 			sanguis::creator::background_tile::grass;
+	}
 
 	FCPPT_ASSERT_OPTIONAL_ERROR(
 		fcppt::container::grid::at_optional(
@@ -183,11 +196,13 @@ sanguis::creator::impl::generators::start(
 						]
 						==
 						sanguis::creator::opening_count{
-							0u
+							0U
 						}
 					)
+					{
 						return
 							sanguis::creator::opening_container{};
+					}
 
 					switch(
 						_opening_type
@@ -210,12 +225,11 @@ sanguis::creator::impl::generators::start(
 			),
 			sanguis::creator::spawn_container(),
 			sanguis::creator::destructible_container{
-				// TODO: Just for testing
 				sanguis::creator::destructible(
 					sanguis::creator::destructible_pos(
 						sanguis::creator::pos(
-							2u,
-							2u
+							2U,
+							2U
 						)
 					),
 					sanguis::creator::destructible_type::barrel

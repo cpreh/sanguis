@@ -5,6 +5,7 @@
 #include <sanguis/creator/opening_container_array.hpp>
 #include <sanguis/creator/opening_count_array_fwd.hpp>
 #include <sanguis/creator/impl/random/generator_fwd.hpp>
+#include <fcppt/reference_fwd.hpp>
 
 
 namespace sanguis
@@ -14,10 +15,13 @@ namespace creator
 namespace impl
 {
 
+[[nodiscard]]
 sanguis::creator::opening_container_array
 place_openings(
-	sanguis::creator::grid &,
-	sanguis::creator::impl::random::generator &,
+	fcppt::reference<
+		sanguis::creator::grid
+	>,
+	sanguis::creator::impl::random::generator &, // NOLINT(google-runtime-references)
 	sanguis::creator::opening_count_array
 );
 

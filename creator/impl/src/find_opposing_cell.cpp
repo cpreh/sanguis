@@ -20,7 +20,7 @@ fcppt::optional::object<
 >
 sanguis::creator::impl::find_opposing_cell
 (
-	sanguis::creator::impl::reachable_grid &grid,
+	sanguis::creator::impl::reachable_grid const &grid,
 	sanguis::creator::pos const &cell
 )
 {
@@ -34,9 +34,11 @@ sanguis::creator::impl::find_opposing_cell
 		||
 		cell.y() == 0
 	)
+	{
 		return fcppt::optional::object<
 			sanguis::creator::pos
 		>();
+	}
 
 	for(
 		auto const &n
@@ -46,8 +48,7 @@ sanguis::creator::impl::find_opposing_cell
 
 	)
 	{
-		sanguis::creator::pos const
-		opposite(
+		sanguis::creator::pos const opposite(
 			cell
 			-
 			(

@@ -12,11 +12,12 @@ namespace creator
 namespace impl
 {
 
-typedef
+using
+optional_pos
+=
 fcppt::optional::object<
 	sanguis::creator::pos
->
-optional_pos;
+>;
 
 }
 }

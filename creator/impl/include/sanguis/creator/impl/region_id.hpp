@@ -9,9 +9,10 @@ namespace creator
 namespace impl
 {
 
-typedef
-int
-region_id;
+using
+region_id
+=
+int;
 
 }
 }

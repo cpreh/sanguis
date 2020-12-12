@@ -18,7 +18,7 @@ fcppt::optional::object<
 	sanguis::creator::pos
 >
 find_opposing_cell(
-	sanguis::creator::impl::reachable_grid &,
+	sanguis::creator::impl::reachable_grid const &,
 	sanguis::creator::pos const &
 );
 

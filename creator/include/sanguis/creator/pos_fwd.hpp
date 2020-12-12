@@ -10,12 +10,13 @@ namespace sanguis
 namespace creator
 {
 
-typedef
+using
+pos
+=
 fcppt::container::grid::pos<
 	sanguis::creator::size_type,
-	2u
->
-pos;
+	2U
+>;
 
 }
 }

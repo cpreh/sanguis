@@ -15,13 +15,14 @@ namespace impl
 namespace random
 {
 
-typedef
+using
+uniform_size
+=
 fcppt::random::distribution::basic<
 	sanguis::creator::impl::random::uniform_int<
 		sanguis::creator::size_type
 	>
->
-uniform_size;
+>;
 
 }
 }

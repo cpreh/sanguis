@@ -16,7 +16,7 @@ namespace impl
 sanguis::creator::impl::optional_pos
 closest_empty(
 	sanguis::creator::grid const &,
-	sanguis::creator::pos
+	sanguis::creator::pos const &
 );
 
 }

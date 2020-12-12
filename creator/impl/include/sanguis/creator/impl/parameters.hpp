@@ -6,7 +6,7 @@
 #include <sanguis/creator/impl/parameters_fwd.hpp>
 #include <sanguis/creator/impl/random/generator_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
-#include <fcppt/log/object_fwd.hpp>
+#include <fcppt/log/object_reference.hpp>
 
 
 namespace sanguis
@@ -20,27 +20,31 @@ class parameters
 {
 public:
 	parameters(
-		fcppt::log::object &,
-		sanguis::creator::impl::random::generator &,
+		fcppt::log::object_reference,
+		fcppt::reference<
+			sanguis::creator::impl::random::generator
+		>,
 		sanguis::creator::spawn_boss,
 		sanguis::creator::opening_count_array
 	);
 
+	[[nodiscard]]
 	fcppt::log::object &
 	log() const;
 
+	[[nodiscard]]
 	sanguis::creator::impl::random::generator &
 	randgen() const;
 
+	[[nodiscard]]
 	sanguis::creator::spawn_boss
 	spawn_boss() const;
 
+	[[nodiscard]]
 	sanguis::creator::opening_count_array const &
 	opening_count_array() const;
 private:
-	fcppt::reference<
-		fcppt::log::object
-	> log_;
+	fcppt::log::object_reference log_;
 
 	fcppt::reference<
 		sanguis::creator::impl::random::generator
