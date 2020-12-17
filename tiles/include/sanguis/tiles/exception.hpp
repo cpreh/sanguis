@@ -26,7 +26,8 @@ public:
 	SANGUIS_TILES_SYMBOL
 	exception(
 		exception &&
-	);
+	)
+	noexcept;
 
 	SANGUIS_TILES_SYMBOL
 	exception(
@@ -37,7 +38,8 @@ public:
 	exception &
 	operator=(
 		exception &&
-	);
+	)
+	noexcept;
 
 	SANGUIS_TILES_SYMBOL
 	exception &

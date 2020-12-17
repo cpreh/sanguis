@@ -12,11 +12,12 @@ namespace tiles
 namespace impl
 {
 
-typedef
+using
+optional_content_path
+=
 fcppt::optional::object<
 	sanguis::tiles::impl::content_path
->
-optional_content_path;
+>;
 
 }
 }

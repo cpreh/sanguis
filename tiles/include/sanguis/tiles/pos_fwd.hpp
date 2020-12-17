@@ -10,12 +10,13 @@ namespace sanguis
 namespace tiles
 {
 
-typedef
+using
+pos
+=
 fcppt::math::vector::static_<
 	sanguis::tiles::unit,
 	2
->
-pos;
+>;
 
 }
 }

@@ -18,7 +18,7 @@ namespace impl
 sanguis::tiles::orientation_map
 make_orientation_map(
 	std::filesystem::path const &,
-	sge::image2d::dim
+	sge::image2d::dim const &
 );
 
 }

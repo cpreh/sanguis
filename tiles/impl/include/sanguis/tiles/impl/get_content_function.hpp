@@ -13,13 +13,14 @@ namespace tiles
 namespace impl
 {
 
-typedef
+using
+get_content_function
+=
 fcppt::function<
 	sanguis::tiles::impl::optional_content_path (
 		sanguis::creator::pos
 	)
->
-get_content_function;
+>;
 
 }
 }

@@ -12,11 +12,12 @@ namespace sanguis
 namespace tiles
 {
 
-typedef
+using
+cell_container
+=
 std::vector<
 	sanguis::tiles::cell
->
-cell_container;
+>;
 
 }
 }

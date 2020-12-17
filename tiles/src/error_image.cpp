@@ -38,9 +38,10 @@ sanguis::tiles::error_image(
 		)
 	};
 
-	typedef
-	sge::image2d::store::srgba8
-	store_type;
+	using
+	store_type
+	=
+	sge::image2d::store::srgba8;
 
 	return
 		sge::image2d::store::object{

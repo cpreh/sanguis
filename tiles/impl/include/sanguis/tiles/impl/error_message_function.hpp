@@ -12,11 +12,12 @@ namespace tiles
 namespace impl
 {
 
-typedef
+using
+error_message_function
+=
 fcppt::function<
 	fcppt::string ()
->
-error_message_function;
+>;
 
 }
 }

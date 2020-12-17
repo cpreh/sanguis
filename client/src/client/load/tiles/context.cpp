@@ -13,6 +13,7 @@
 #include <sge/image2d/view/const_object.hpp>
 #include <sge/texture/part.hpp>
 #include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/enum/array_impl.hpp>
 #include <fcppt/enum/array_init.hpp>
@@ -26,7 +27,9 @@ sanguis::client::load::tiles::context::context(
 )
 :
 	collection_(
-		_textures.image_system()
+		fcppt::make_ref(
+			_textures.image_system()
+		)
 	),
 	textures_(
 		_textures

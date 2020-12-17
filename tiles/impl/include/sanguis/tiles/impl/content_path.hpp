@@ -21,9 +21,11 @@ public:
 		sanguis::tiles::path_reference
 	);
 
+	[[nodiscard]]
 	sanguis::tiles::content const &
 	content() const;
 
+	[[nodiscard]]
 	sanguis::tiles::path_reference
 	path() const;
 private:

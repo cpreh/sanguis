@@ -3,7 +3,7 @@
 #include <sanguis/tiles/collection.hpp>
 #include <sanguis/tiles/pair.hpp>
 #include <sanguis/tiles/set.hpp>
-#include <sge/image2d/system_fwd.hpp>
+#include <sge/image2d/system_ref.hpp>
 #include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/fusion/include/at_key.hpp>
@@ -11,7 +11,7 @@
 
 
 sanguis::tiles::collection::collection(
-	sge::image2d::system &_image_system
+	sge::image2d::system_ref const _image_system
 )
 :
 	image_system_(
@@ -22,8 +22,7 @@ sanguis::tiles::collection::collection(
 }
 
 sanguis::tiles::collection::~collection()
-{
-}
+= default;
 
 template<
 	typename Tile
@@ -62,7 +61,7 @@ sanguis::tiles::collection::set(
 					sanguis::tiles::set<
 						Tile
 					>(
-						image_system_,
+						image_system_.get(),
 						_key
 					);
 			}

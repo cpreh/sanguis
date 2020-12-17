@@ -3,7 +3,7 @@
 #include <sanguis/creator/min.hpp>
 #include <sanguis/creator/sup.hpp>
 #include <sanguis/tiles/cell_container.hpp>
-#include <sanguis/tiles/collection_fwd.hpp>
+#include <sanguis/tiles/collection_ref.hpp>
 #include <sanguis/tiles/draw.hpp>
 #include <sanguis/tiles/error.hpp>
 #include <sanguis/tiles/log.hpp>
@@ -22,9 +22,9 @@ sanguis::tiles::draw(
 	sanguis::tiles::log const &_log,
 	sanguis::creator::grid const &_foreground,
 	sanguis::creator::background_grid const &_background,
-	sanguis::tiles::collection &_collection,
-	sanguis::creator::min const _min,
-	sanguis::creator::sup const _sup
+	sanguis::tiles::collection_ref const _collection,
+	sanguis::creator::min const &_min,
+	sanguis::creator::sup const &_sup
 )
 {
 	FCPPT_ASSERT_PRE(
@@ -37,7 +37,7 @@ sanguis::tiles::draw(
 		fcppt::math::dim::fill<
 			sanguis::creator::grid::dim
 		>(
-			1u
+			1U
 		)
 	};
 
@@ -46,10 +46,12 @@ sanguis::tiles::draw(
 		<=
 		min_size
 	)
+	{
 		return
 			sanguis::tiles::cell_container();
+	}
 
-	sanguis::creator::min const lower_bound(
+	sanguis::creator::min const &lower_bound(
 		_min
 	);
 

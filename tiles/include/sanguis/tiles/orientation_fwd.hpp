@@ -10,11 +10,12 @@ namespace sanguis
 namespace tiles
 {
 
-typedef
+using
+orientation
+=
 fcppt::container::bitfield::enum_object<
 	sanguis::tiles::direction
->
-orientation;
+>;
 
 }
 }

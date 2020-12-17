@@ -15,12 +15,13 @@ namespace sanguis
 namespace tiles
 {
 
-typedef
+using
+orientation_map
+=
 std::unordered_map<
 	sanguis::tiles::orientation,
 	sanguis::tiles::area_container
->
-orientation_map;
+>;
 
 }
 }

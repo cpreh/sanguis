@@ -6,7 +6,7 @@
 #include <sanguis/creator/sup.hpp>
 #include <sanguis/creator/tile_size.hpp>
 #include <sanguis/tiles/cell_container.hpp>
-#include <sanguis/tiles/collection_fwd.hpp>
+#include <sanguis/tiles/collection_ref.hpp>
 #include <sanguis/tiles/error.hpp>
 #include <sanguis/tiles/pos.hpp>
 #include <sanguis/tiles/unit.hpp>
@@ -33,8 +33,8 @@ template<
 >
 sanguis::tiles::cell_container
 draw_connecting(
-	fcppt::log::object &_log,
-	sanguis::tiles::collection &_collection,
+	fcppt::log::object &_log, // NOLINT(google-runtime-references)
+	sanguis::tiles::collection_ref const _collection,
 	sanguis::tiles::error const _error_code,
 	sanguis::creator::tile_grid<
 		Tile
@@ -71,7 +71,7 @@ draw_connecting(
 			sanguis::tiles::impl::get_content_function{
 				[
 					&_log,
-					&_collection,
+					_collection,
 					_error_code,
 					&_grid
 				](

@@ -66,6 +66,7 @@ set(
 	include/sanguis/tiles/cell_fwd.hpp
 	include/sanguis/tiles/collection.hpp
 	include/sanguis/tiles/collection_fwd.hpp
+	include/sanguis/tiles/collection_ref.hpp
 	include/sanguis/tiles/content.hpp
 	include/sanguis/tiles/content_fwd.hpp
 	include/sanguis/tiles/direction.hpp

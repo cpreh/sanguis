@@ -21,8 +21,7 @@ sanguis::tiles::log::log(
 }
 
 sanguis::tiles::log::~log()
-{
-}
+= default;
 
 fcppt::log::object &
 sanguis::tiles::log::main_log() const

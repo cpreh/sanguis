@@ -28,7 +28,7 @@ sanguis::tiles::impl::make_orientation(
 		sanguis::tiles::orientation::null()
 	};
 
-	// TODO: Check if the tile is _pair.second?
+	// TODO(philipp): Check if the tile is _pair.second?
 	for(
 		sanguis::tiles::direction const value
 		:

@@ -12,11 +12,12 @@ namespace tiles
 namespace impl
 {
 
-typedef
+using
+optional_orientation
+=
 fcppt::optional::object<
 	sanguis::tiles::orientation
->
-optional_orientation;
+>;
 
 }
 }

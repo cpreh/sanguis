@@ -10,7 +10,7 @@ sanguis::tiles::impl::tile_name(
 	sanguis::creator::tile const _tile
 )
 {
-	// TODO: Use a macro here
+	// TODO(philipp): Use a macro here
 	switch(
 		_tile
 	)

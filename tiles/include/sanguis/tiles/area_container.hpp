@@ -12,11 +12,12 @@ namespace sanguis
 namespace tiles
 {
 
-typedef
+using
+area_container
+=
 std::vector<
 	sge::image2d::rect
->
-area_container;
+>;
 
 }
 }

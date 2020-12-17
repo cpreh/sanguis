@@ -12,11 +12,12 @@ namespace sanguis
 namespace tiles
 {
 
-typedef
+using
+path_reference
+=
 fcppt::reference<
 	std::filesystem::path const
->
-path_reference;
+>;
 
 }
 }

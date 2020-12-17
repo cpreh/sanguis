@@ -200,7 +200,9 @@ execute_main(
 	};
 
 	sanguis::tiles::collection tile_collection{
-		sys.image_system()
+		fcppt::make_ref(
+			sys.image_system()
+		)
 	};
 
 	sanguis::tiles::log const tiles_log{
@@ -212,7 +214,9 @@ execute_main(
 			tiles_log,
 			result.grid(),
 			result.background_grid(),
-			tile_collection,
+			fcppt::make_ref(
+				tile_collection
+			),
 			sanguis::creator::min{
 				fcppt::math::vector::null<
 					sanguis::creator::pos

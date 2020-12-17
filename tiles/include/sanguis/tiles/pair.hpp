@@ -32,17 +32,20 @@ public:
 		Tile
 	);
 
+	[[nodiscard]]
 	Tile
 	first() const;
 
+	[[nodiscard]]
 	Tile
 	second() const;
 private:
-	typedef
+	using
+	impl_type
+	=
 	fcppt::homogenous_pair<
 		Tile
-	>
-	impl_type;
+	>;
 
 	impl_type impl_;
 };

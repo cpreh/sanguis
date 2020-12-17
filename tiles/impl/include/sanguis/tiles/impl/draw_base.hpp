@@ -45,11 +45,11 @@ draw_base(
 	> const &_grid,
 	sanguis::creator::min const _min,
 	sanguis::creator::sup const _sup,
-	sanguis::tiles::impl::shift const _shift,
+	sanguis::tiles::impl::shift const &_shift,
 	sanguis::tiles::impl::get_content_function const &_get_content
 )
 {
-	sanguis::tiles::pos const tile_dim(
+	auto const tile_dim(
 		fcppt::math::vector::fill<
 			sanguis::tiles::pos
 		>(

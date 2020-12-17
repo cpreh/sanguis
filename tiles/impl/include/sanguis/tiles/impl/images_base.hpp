@@ -3,6 +3,7 @@
 
 #include <sanguis/tiles/area_container.hpp>
 #include <sanguis/tiles/collection.hpp>
+#include <sanguis/tiles/collection_ref.hpp>
 #include <sanguis/tiles/content.hpp>
 #include <sanguis/tiles/error.hpp>
 #include <sanguis/tiles/orientation.hpp>
@@ -36,8 +37,8 @@ template<
 >
 sanguis::tiles::impl::optional_content_path
 images_base(
-	fcppt::log::object &_log,
-	sanguis::tiles::collection &_collection,
+	fcppt::log::object &_log, // NOLINT(google-runtime-references)
+	sanguis::tiles::collection_ref const _collection,
 	sanguis::tiles::error const _error_code,
 	sanguis::tiles::pair<
 		Tile
@@ -49,7 +50,7 @@ images_base(
 	sanguis::tiles::set<
 		Tile
 	> const &cur_set(
-		_collection.set(
+		_collection.get().set(
 			_pair
 		)
 	);

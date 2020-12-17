@@ -22,7 +22,7 @@ sanguis::tiles::impl::make_neighbors(
 	sanguis::creator::tile_grid<
 		Tile
 	> const &_grid,
-	sanguis::creator::pos const _pos
+	sanguis::creator::pos const &_pos
 )
 {
 	auto const get_tile(
@@ -45,11 +45,12 @@ sanguis::tiles::impl::make_neighbors(
 		}
 	);
 
-	typedef
+	using
+	result_type
+	=
 	sanguis::tiles::impl::neighbors<
 		Tile
-	>
-	result_type;
+	>;
 
 	return
 		result_type{
@@ -97,7 +98,7 @@ sanguis::tiles::impl::make_neighbors(\
 	sanguis::creator::tile_grid< \
 		tile_type \
 	> const &, \
-	sanguis::creator::pos \
+	sanguis::creator::pos const & \
 )
 
 SANGUIS_CREATOR_INSTANTIATE_TILE(

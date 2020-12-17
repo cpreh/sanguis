@@ -11,12 +11,13 @@ namespace sanguis
 namespace tiles
 {
 
-typedef
+using
+content
+=
 fcppt::variant::object<
 	sanguis::tiles::area_container_ref,
 	sanguis::tiles::error
->
-content;
+>;
 
 }
 }

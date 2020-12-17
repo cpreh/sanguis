@@ -24,6 +24,7 @@ sanguis::tiles::exception::exception(
 sanguis::tiles::exception::exception(
 	exception &&
 )
+noexcept
 = default;
 
 sanguis::tiles::exception::exception(
@@ -35,6 +36,7 @@ sanguis::tiles::exception &
 sanguis::tiles::exception::operator=(
 	exception &&
 )
+noexcept
 = default;
 
 sanguis::tiles::exception &
@@ -43,6 +45,6 @@ sanguis::tiles::exception::operator=(
 )
 = default;
 
-sanguis::tiles::exception::~exception() noexcept
-{
-}
+sanguis::tiles::exception::~exception()
+noexcept
+= default;

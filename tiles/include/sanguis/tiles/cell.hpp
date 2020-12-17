@@ -24,18 +24,22 @@ public:
 		sanguis::tiles::is_background
 	);
 
+	[[nodiscard]]
 	SANGUIS_TILES_SYMBOL
 	sanguis::tiles::pos
 	pos() const;
 
+	[[nodiscard]]
 	SANGUIS_TILES_SYMBOL
 	sanguis::tiles::content const &
 	content() const;
 
+	[[nodiscard]]
 	SANGUIS_TILES_SYMBOL
 	sanguis::tiles::path_reference
 	path() const;
 
+	[[nodiscard]]
 	SANGUIS_TILES_SYMBOL
 	sanguis::tiles::is_background
 	is_background() const;

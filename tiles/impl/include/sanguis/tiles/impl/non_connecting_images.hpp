@@ -3,7 +3,7 @@
 
 #include <sanguis/creator/pos.hpp>
 #include <sanguis/creator/tile_grid.hpp>
-#include <sanguis/tiles/collection_fwd.hpp>
+#include <sanguis/tiles/collection_ref.hpp>
 #include <sanguis/tiles/error.hpp>
 #include <sanguis/tiles/orientation.hpp>
 #include <sanguis/tiles/pair.hpp>
@@ -33,8 +33,8 @@ template<
 >
 sanguis::tiles::impl::optional_content_path
 non_connecting_images(
-	fcppt::log::object &_log,
-	sanguis::tiles::collection &_collection,
+	fcppt::log::object &_log, // NOLINT(google-runtime-references)
+	sanguis::tiles::collection_ref const _collection,
 	sanguis::tiles::error const _error_code,
 	sanguis::creator::tile_grid<
 		Tile

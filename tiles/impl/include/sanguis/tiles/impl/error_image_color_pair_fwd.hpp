@@ -12,11 +12,12 @@ namespace tiles
 namespace impl
 {
 
-typedef
+using
+error_image_color_pair
+=
 fcppt::homogenous_pair<
 	sge::image::color::any::object
->
-error_image_color_pair;
+>;
 
 }
 }

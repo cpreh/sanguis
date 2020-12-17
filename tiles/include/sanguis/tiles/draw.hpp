@@ -6,7 +6,7 @@
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/creator/sup_fwd.hpp>
 #include <sanguis/tiles/cell_container.hpp>
-#include <sanguis/tiles/collection_fwd.hpp>
+#include <sanguis/tiles/collection_ref.hpp>
 #include <sanguis/tiles/log_fwd.hpp>
 #include <sanguis/tiles/symbol.hpp>
 
@@ -22,9 +22,9 @@ draw(
 	sanguis::tiles::log const &,
 	sanguis::creator::grid const &,
 	sanguis::creator::background_grid const &,
-	sanguis::tiles::collection &,
-	sanguis::creator::min,
-	sanguis::creator::sup
+	sanguis::tiles::collection_ref,
+	sanguis::creator::min const &,
+	sanguis::creator::sup const &
 );
 
 }

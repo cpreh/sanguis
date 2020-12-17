@@ -65,6 +65,7 @@ sanguis::tiles::set<
 >::set(
 	set &&
 )
+noexcept
 = default;
 
 template<
@@ -78,6 +79,7 @@ sanguis::tiles::set<
 >::operator=(
 	set &&
 )
+noexcept
 = default;
 
 template<
@@ -88,8 +90,7 @@ sanguis::tiles::set<
 >::~set<
 	Tile
 >()
-{
-}
+= default;
 
 template<
 	typename Tile
@@ -151,7 +152,7 @@ sanguis::tiles::set<
 				return
 					sanguis::tiles::impl::make_orientation_map(
 						_path,
-						// TODO: Change sge so that we
+						// TODO(philipp): Change sge so that we
 						// can query the size without
 						// actually loading the whole
 						// file

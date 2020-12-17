@@ -23,7 +23,7 @@
 
 sanguis::tiles::area_container
 sanguis::tiles::impl::make_areas(
-	sge::image2d::dim const _size,
+	sge::image2d::dim const &_size,
 	sge::parse::json::value const &_value
 )
 {
@@ -51,7 +51,7 @@ sanguis::tiles::impl::make_areas(
 						sge::image2d::rect,
 						fcppt::cast::size_fun
 					>(
-						// TODO: Put this function somewhere else
+						// TODO(philipp): Put this function somewhere else
 						sanguis::model::cell_area_from_index(
 							sanguis::model::image_size(
 								fcppt::math::dim::structure_cast<
@@ -65,8 +65,8 @@ sanguis::tiles::impl::make_areas(
 								fcppt::math::dim::fill<
 									sanguis::model::dim
 								>(
-									// TODO: Read this from the json file
-									96ul
+									// TODO(philipp): Read this from the json file
+									96UL // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 								)
 							),
 							fcppt::cast::size<

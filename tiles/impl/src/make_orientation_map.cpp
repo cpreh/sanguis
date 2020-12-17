@@ -21,7 +21,7 @@
 sanguis::tiles::orientation_map
 sanguis::tiles::impl::make_orientation_map(
 	std::filesystem::path const &_path,
-	sge::image2d::dim const _size
+	sge::image2d::dim const &_size
 )
 {
 	return

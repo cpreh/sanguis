@@ -28,7 +28,7 @@ make_neighbors(
 	sanguis::creator::tile_grid<
 		Tile
 	> const &,
-	sanguis::creator::pos
+	sanguis::creator::pos const &
 );
 
 }
@@ -50,7 +50,7 @@ sanguis::tiles::impl::make_neighbors(\
 	sanguis::creator::tile_grid< \
 		tile_type \
 	> const &, \
-	sanguis::creator::pos \
+	sanguis::creator::pos const & \
 )
 
 SANGUIS_CREATOR_INSTANTIATE_TILE(

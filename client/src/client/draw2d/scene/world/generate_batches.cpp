@@ -19,6 +19,7 @@
 #include <sanguis/tiles/log.hpp>
 #include <sge/sprite/geometry/make_random_access_range.hpp>
 #include <sge/sprite/geometry/sort_and_update.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/size.hpp>
@@ -114,7 +115,9 @@ sanguis::client::draw2d::scene::world::generate_batches(
 							tiles_log,
 							_grid,
 							_background_grid,
-							_tiles.collection(),
+							fcppt::make_ref(
+								_tiles.collection()
+							),
 							min,
 							sup
 						),

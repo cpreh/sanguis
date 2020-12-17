@@ -11,8 +11,8 @@
 #include <sanguis/tiles/pair_std_hash.hpp>
 #include <sanguis/tiles/set.hpp>
 #include <sanguis/tiles/symbol.hpp>
-#include <sge/image2d/system_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <sge/image2d/system_ref.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/fusion/container/set.hpp>
 #include <unordered_map>
@@ -27,14 +27,14 @@ namespace tiles
 
 class collection
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		collection
 	);
 public:
 	SANGUIS_TILES_SYMBOL
 	explicit
 	collection(
-		sge::image2d::system &
+		sge::image2d::system_ref
 	);
 
 	SANGUIS_TILES_SYMBOL
@@ -43,6 +43,7 @@ public:
 	template<
 		typename Tile
 	>
+	[[nodiscard]]
 	sanguis::creator::enable_if_tile<
 		Tile,
 		sanguis::tiles::set<
@@ -70,7 +71,7 @@ private:
 		>
 	>;
 
-	sge::image2d::system &image_system_;
+	sge::image2d::system_ref const image_system_;
 
 	boost::fusion::set<
 		tile_map<

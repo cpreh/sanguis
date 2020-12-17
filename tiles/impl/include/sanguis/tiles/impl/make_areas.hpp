@@ -15,7 +15,7 @@ namespace impl
 
 sanguis::tiles::area_container
 make_areas(
-	sge::image2d::dim,
+	sge::image2d::dim const &,
 	sge::parse::json::value const &
 );
 

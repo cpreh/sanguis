@@ -7,9 +7,10 @@ namespace sanguis
 namespace tiles
 {
 
-typedef
-int
-unit;
+using
+unit
+=
+int;
 
 }
 }

@@ -33,16 +33,18 @@ sanguis::tiles::impl::make_pair(
 		)
 	);
 
-	typedef
+	using
+	result_type
+	=
 	sanguis::tiles::impl::optional_pair<
 		Tile
-	>
-	result_type;
+	>;
 
-	typedef
+	using
+	pair_type
+	=
 	typename
-	result_type::value_type
-	pair_type;
+	result_type::value_type;
 
 	switch(
 		boost::size(

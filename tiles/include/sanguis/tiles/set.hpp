@@ -37,7 +37,7 @@ class set
 public:
 	SANGUIS_TILES_SYMBOL
 	set(
-		sge::image2d::system &,
+		sge::image2d::system &, // NOLINT(google-runtime-references)
 		sanguis::tiles::pair<
 			Tile
 		>
@@ -46,27 +46,31 @@ public:
 	SANGUIS_TILES_SYMBOL
 	set(
 		set &&
-	);
+	)
+	noexcept;
 
 	SANGUIS_TILES_SYMBOL
 	set &
 	operator=(
 		set &&
-	);
+	)
+	noexcept;
 
 	SANGUIS_TILES_SYMBOL
 	~set();
 
+	[[nodiscard]]
 	SANGUIS_TILES_SYMBOL
 	sanguis::tiles::orientation_map const &
 	orientations() const;
 
+	[[nodiscard]]
 	SANGUIS_TILES_SYMBOL
 	std::filesystem::path const &
 	path() const;
 private:
 	set(
-		sge::image2d::system &,
+		sge::image2d::system &, // NOLINT(google-runtime-references)
 		std::filesystem::path const &
 	);
 

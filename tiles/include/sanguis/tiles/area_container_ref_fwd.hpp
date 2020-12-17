@@ -10,11 +10,12 @@ namespace sanguis
 namespace tiles
 {
 
-typedef
+using
+area_container_ref
+=
 fcppt::reference<
 	sanguis::tiles::area_container const
->
-area_container_ref;
+>;
 
 }
 }

@@ -53,11 +53,12 @@ sanguis::tiles::impl::decode_name(
 								sanguis::tiles::orientation const _orientation
 							)
 							{
-								typedef
+								using
+								optional_bool
+								=
 								fcppt::optional::object<
 									bool
-								>
-								optional_bool;
+								>;
 
 								auto const char_to_bool(
 									[](
@@ -79,6 +80,8 @@ sanguis::tiles::impl::decode_name(
 												optional_bool(
 													false
 												);
+										default:
+											break;
 										}
 
 										return
