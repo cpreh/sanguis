@@ -10,11 +10,12 @@ namespace sanguis
 namespace model
 {
 
-typedef
+using
+cell_area
+=
 fcppt::math::box::rect<
 	sanguis::model::cell_size_unit
->
-cell_area;
+>;
 
 }
 }

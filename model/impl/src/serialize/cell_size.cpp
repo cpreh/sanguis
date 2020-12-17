@@ -9,7 +9,7 @@
 
 sge::parse::json::member
 sanguis::model::impl::serialize::cell_size(
-	sanguis::model::cell_size const _cell_size
+	sanguis::model::cell_size const &_cell_size
 )
 {
 	return

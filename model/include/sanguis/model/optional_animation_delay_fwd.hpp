@@ -10,11 +10,12 @@ namespace sanguis
 namespace model
 {
 
-typedef
+using
+optional_animation_delay
+=
 fcppt::optional::object<
 	sanguis::model::animation_delay
->
-optional_animation_delay;
+>;
 
 }
 }

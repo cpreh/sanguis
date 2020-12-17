@@ -26,7 +26,8 @@ public:
 	SANGUIS_MODEL_SYMBOL
 	exception(
 		exception &&
-	);
+	)
+	noexcept;
 
 	SANGUIS_MODEL_SYMBOL
 	exception(
@@ -37,7 +38,8 @@ public:
 	exception &
 	operator=(
 		exception &&
-	);
+	)
+	noexcept;
 
 	SANGUIS_MODEL_SYMBOL
 	exception &

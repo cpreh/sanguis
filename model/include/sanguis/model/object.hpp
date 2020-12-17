@@ -28,23 +28,26 @@ public:
 		sanguis::model::cell_size,
 		sanguis::model::optional_animation_delay,
 		sanguis::model::part_map &&,
-		sanguis::model::optional_image_name const &
+		sanguis::model::optional_image_name &&
 	);
 
 	SANGUIS_MODEL_SYMBOL
 	object(
 		object &&
-	);
+	)
+	noexcept;
 
 	SANGUIS_MODEL_SYMBOL
 	object &
 	operator=(
 		object &&
-	);
+	)
+	noexcept;
 
 	SANGUIS_MODEL_SYMBOL
 	~object();
 
+	[[nodiscard]]
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::optional_animation_delay
 	animation_delay() const;
@@ -55,36 +58,43 @@ public:
 		sanguis::model::optional_animation_delay
 	);
 
+	[[nodiscard]]
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::part &
 	part(
 		sanguis::model::part_name const &
 	);
 
+	[[nodiscard]]
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::part const &
 	part(
 		sanguis::model::part_name const &
 	) const;
 
+	[[nodiscard]]
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::part &
 	operator[](
 		sanguis::model::part_name const &
 	);
 
+	[[nodiscard]]
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::part_map &
 	parts();
 
+	[[nodiscard]]
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::part_map const &
 	parts() const;
 
+	[[nodiscard]]
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::cell_size
 	cell_size() const;
 
+	[[nodiscard]]
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::optional_image_name const &
 	image_name() const;

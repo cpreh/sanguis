@@ -28,7 +28,7 @@ sanguis::creator::impl::place_boss(
 					0
 				).get()
 			},
-			sanguis::creator::enemy_type::zombie01, // TODO
+			sanguis::creator::enemy_type::zombie01,
 			sanguis::creator::spawn_type::single,
 			sanguis::creator::enemy_kind::boss
 		};

@@ -20,8 +20,8 @@
 
 sanguis::model::cell_area_container
 sanguis::model::make_cell_areas(
-	sanguis::model::image_size const _image_size,
-	sanguis::model::cell_size const _cell_size,
+	sanguis::model::image_size const &_image_size,
+	sanguis::model::cell_size const &_cell_size,
 	sanguis::model::animation_range const _range
 )
 {
@@ -30,6 +30,7 @@ sanguis::model::make_cell_areas(
 		>=
 		_range.end()
 	)
+	{
 		throw
 			sanguis::model::exception{
 				FCPPT_TEXT("begin/end invalid: begin = ")
@@ -44,6 +45,7 @@ sanguis::model::make_cell_areas(
 					_range.end()
 				)
 			};
+	}
 
 	return
 		fcppt::algorithm::map<
@@ -60,7 +62,7 @@ sanguis::model::make_cell_areas(
 				sanguis::model::animation_index const _index
 			)
 			{
-				sanguis::model::cell_area const cur_area(
+				sanguis::model::cell_area cur_area(
 					sanguis::model::cell_area_from_index(
 						_image_size,
 						_cell_size,
@@ -79,6 +81,7 @@ sanguis::model::make_cell_areas(
 						cur_area
 					)
 				)
+				{
 					throw
 						sanguis::model::exception{
 							FCPPT_TEXT("Rect out of bounds. Image size is ")
@@ -93,6 +96,7 @@ sanguis::model::make_cell_areas(
 								cur_area
 							)
 						};
+				}
 
 				return
 					cur_area;

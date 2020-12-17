@@ -10,11 +10,12 @@ namespace sanguis
 namespace model
 {
 
-typedef
+using
+optional_image_name
+=
 fcppt::optional::object<
 	sanguis::model::image_name
->
-optional_image_name;
+>;
 
 }
 }

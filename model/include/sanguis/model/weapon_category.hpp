@@ -25,29 +25,33 @@ public:
 
 	weapon_category(
 		sanguis::model::animation_map &&,
-		sanguis::model::optional_image_name const &
+		sanguis::model::optional_image_name &&
 	);
 
 	SANGUIS_MODEL_SYMBOL
 	weapon_category(
 		weapon_category &&
-	);
+	)
+	noexcept;
 
 	SANGUIS_MODEL_SYMBOL
 	weapon_category &
 	operator=(
 		weapon_category &&
-	);
+	)
+	noexcept;
 
 	SANGUIS_MODEL_SYMBOL
 	~weapon_category();
 
+	[[nodiscard]]
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::animation &
 	animation(
 		sanguis::model::animation_name const &
 	);
 
+	[[nodiscard]]
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::animation const &
 	animation(
@@ -61,14 +65,17 @@ public:
 		sanguis::model::animation &&
 	);
 
+	[[nodiscard]]
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::animation_map &
 	animations();
 
+	[[nodiscard]]
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::animation_map const &
 	animations() const;
 
+	[[nodiscard]]
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::optional_image_name const &
 	image_name() const;

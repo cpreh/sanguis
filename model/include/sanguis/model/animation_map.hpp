@@ -13,12 +13,13 @@ namespace sanguis
 namespace model
 {
 
-typedef
+using
+animation_map
+=
 std::unordered_map<
 	sanguis::model::animation_name,
 	sanguis::model::animation
->
-animation_map;
+>;
 
 }
 }

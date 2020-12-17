@@ -13,12 +13,13 @@ namespace sanguis
 namespace model
 {
 
-typedef
+using
+part_map
+=
 std::unordered_map<
 	sanguis::model::part_name,
 	sanguis::model::part
->
-part_map;
+>;
 
 }
 }

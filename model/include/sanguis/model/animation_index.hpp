@@ -7,9 +7,10 @@ namespace sanguis
 namespace model
 {
 
-typedef
-unsigned
-animation_index;
+using
+animation_index
+=
+unsigned;
 
 }
 }

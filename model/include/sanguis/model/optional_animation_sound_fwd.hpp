@@ -10,11 +10,12 @@ namespace sanguis
 namespace model
 {
 
-typedef
+using
+optional_animation_sound
+=
 fcppt::optional::object<
 	sanguis::model::animation_sound
->
-optional_animation_sound;
+>;
 
 }
 }

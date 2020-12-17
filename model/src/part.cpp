@@ -21,7 +21,7 @@ sanguis::model::part::part()
 
 sanguis::model::part::part(
 	sanguis::model::weapon_category_map &&_weapon_categories,
-	sanguis::model::optional_image_name const &_image_name
+	sanguis::model::optional_image_name &&_image_name
 )
 :
 	weapon_categories_(
@@ -30,23 +30,28 @@ sanguis::model::part::part(
 		)
 	),
 	image_name_(
-		_image_name
+		std::move(
+			_image_name
+		)
 	)
 {
 }
 
 sanguis::model::part::part(
 	part &&
-) = default;
+)
+noexcept
+= default;
 
 sanguis::model::part &
 sanguis::model::part::operator=(
 	part &&
-) = default;
+)
+noexcept
+= default;
 
 sanguis::model::part::~part()
-{
-}
+= default;
 
 sanguis::model::weapon_category &
 sanguis::model::part::weapon_category(

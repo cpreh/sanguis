@@ -32,10 +32,12 @@ try
 			)
 		)
 	)
+	{
 		throw
 			sanguis::model::exception{
 				FCPPT_TEXT("Failure")
 			};
+	}
 }
 catch(
 	fcppt::exception const &_error

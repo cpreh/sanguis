@@ -42,6 +42,11 @@ find_package(
 	fcppt REQUIRED
 )
 
+set(
+	FCPPT_UTILS_CLANG_TIDY_ADDITIONAL_CHECKS
+	"-fuchsia-default-arguments-calls"
+)
+
 include(
 	FcpptCMakeUtils
 )

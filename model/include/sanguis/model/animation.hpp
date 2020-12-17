@@ -21,8 +21,8 @@ public:
 	animation(
 		sanguis::model::animation_range,
 		sanguis::model::optional_animation_delay,
-		sanguis::model::optional_animation_sound const &,
-		sanguis::model::optional_image_name const &
+		sanguis::model::optional_animation_sound &&,
+		sanguis::model::optional_image_name &&
 	);
 
 	SANGUIS_MODEL_SYMBOL
@@ -33,7 +33,8 @@ public:
 	SANGUIS_MODEL_SYMBOL
 	animation(
 		animation &&
-	);
+	)
+	noexcept;
 
 	SANGUIS_MODEL_SYMBOL
 	animation &
@@ -45,15 +46,18 @@ public:
 	animation &
 	operator=(
 		animation &&
-	);
+	)
+	noexcept;
 
 	SANGUIS_MODEL_SYMBOL
 	~animation();
 
+	[[nodiscard]]
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::animation_range
 	animation_range() const;
 
+	[[nodiscard]]
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::optional_animation_delay
 	animation_delay() const;
@@ -64,6 +68,7 @@ public:
 		sanguis::model::optional_animation_delay
 	);
 
+	[[nodiscard]]
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::optional_animation_sound
 	animation_sound() const;
@@ -74,6 +79,7 @@ public:
 		sanguis::model::optional_animation_sound const &
 	);
 
+	[[nodiscard]]
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::optional_image_name const &
 	image_name() const;

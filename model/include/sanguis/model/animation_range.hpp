@@ -20,10 +20,12 @@ public:
 		sanguis::model::animation_index
 	);
 
+	[[nodiscard]]
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::animation_index
 	begin() const;
 
+	[[nodiscard]]
 	SANGUIS_MODEL_SYMBOL
 	sanguis::model::animation_index
 	end() const;

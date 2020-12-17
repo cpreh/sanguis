@@ -12,11 +12,12 @@ namespace sanguis
 namespace model
 {
 
-typedef
+using
+cell_area_container
+=
 std::vector<
 	sanguis::model::cell_area
->
-cell_area_container;
+>;
 
 }
 }

@@ -18,8 +18,8 @@
 
 sanguis::model::cell_area
 sanguis::model::cell_area_from_index(
-	sanguis::model::image_size const _image_size,
-	sanguis::model::cell_size const _cell_size,
+	sanguis::model::image_size const &_image_size,
+	sanguis::model::cell_size const &_cell_size,
 	sanguis::model::animation_index const _index
 )
 {
@@ -30,7 +30,7 @@ sanguis::model::cell_area_from_index(
 	)
 	{
 		FCPPT_ASSERT_ERROR(
-			_index == 0u
+			_index == 0U
 		);
 
 		return
@@ -48,7 +48,7 @@ sanguis::model::cell_area_from_index(
 		fcppt::math::dim::fill<
 			sanguis::model::dim
 		>(
-			1u
+			1U
 		)
 	);
 
@@ -61,7 +61,7 @@ sanguis::model::cell_area_from_index(
 			fcppt::literal<
 				sanguis::model::cell_size_unit
 			>(
-				1u
+				1U
 			)
 		)
 	);

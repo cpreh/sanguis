@@ -13,12 +13,13 @@ namespace sanguis
 namespace model
 {
 
-typedef
+using
+weapon_category_map
+=
 std::unordered_map<
 	sanguis::model::weapon_category_name,
 	sanguis::model::weapon_category
->
-weapon_category_map;
+>;
 
 }
 }

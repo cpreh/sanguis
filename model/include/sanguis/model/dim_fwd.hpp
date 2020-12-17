@@ -10,12 +10,13 @@ namespace sanguis
 namespace model
 {
 
-typedef
+using
+dim
+=
 fcppt::math::dim::static_<
 	sanguis::model::cell_size_unit,
 	2
->
-dim;
+>;
 
 }
 }

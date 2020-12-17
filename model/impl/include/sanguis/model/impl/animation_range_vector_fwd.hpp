@@ -12,12 +12,13 @@ namespace model
 namespace impl
 {
 
-typedef
+using
+animation_range_vector
+=
 fcppt::math::vector::static_<
 	sanguis::model::animation_index,
 	2
->
-animation_range_vector;
+>;
 
 }
 }

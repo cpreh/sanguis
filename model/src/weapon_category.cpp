@@ -22,7 +22,7 @@ sanguis::model::weapon_category::weapon_category()
 
 sanguis::model::weapon_category::weapon_category(
 	sanguis::model::animation_map &&_animations,
-	sanguis::model::optional_image_name const &_image_name
+	sanguis::model::optional_image_name &&_image_name
 )
 :
 	animations_(
@@ -31,7 +31,9 @@ sanguis::model::weapon_category::weapon_category(
 		)
 	),
 	image_name_(
-		_image_name
+		std::move(
+			_image_name
+		)
 	)
 {
 	if(
@@ -41,28 +43,33 @@ sanguis::model::weapon_category::weapon_category(
 			)
 		)
 		==
-		0u
+		0U
 	)
+	{
 		throw
 			sanguis::model::exception(
 				FCPPT_TEXT("None animation not available!")
 			);
+	}
 }
 
 SANGUIS_MODEL_SYMBOL
 sanguis::model::weapon_category::weapon_category(
 	weapon_category &&
-) = default;
+)
+noexcept
+= default;
 
 SANGUIS_MODEL_SYMBOL
 sanguis::model::weapon_category &
 sanguis::model::weapon_category::operator=(
 	weapon_category &&
-) = default;
+)
+noexcept
+= default;
 
 sanguis::model::weapon_category::~weapon_category()
-{
-}
+= default;
 
 sanguis::model::animation &
 sanguis::model::weapon_category::animation(

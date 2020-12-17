@@ -16,7 +16,7 @@ namespace serialize
 
 sge::parse::json::member
 cell_size(
-	sanguis::model::cell_size
+	sanguis::model::cell_size const &
 );
 
 }
