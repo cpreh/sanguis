@@ -18,11 +18,12 @@ namespace server
 namespace types
 {
 
-typedef
+using
+perk_tree_node
+=
 alda::raw::element_type<
 	sanguis::messages::server::adapted_types::perk_tree_node
->
-perk_tree_node;
+>;
 
 }
 }

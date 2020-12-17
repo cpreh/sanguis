@@ -14,11 +14,12 @@ namespace server
 namespace serialization
 {
 
-typedef
+using
+context
+=
 alda::serialization::context<
 	sanguis::messages::server::types::alda_type
->
-context;
+>;
 
 }
 }

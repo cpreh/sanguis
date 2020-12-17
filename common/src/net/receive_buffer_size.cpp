@@ -7,6 +7,6 @@ sanguis::net::receive_buffer_size()
 {
 	return
 		alda::net::buffer::max_receive_size(
-			128u * 1024u
+			128U * 1024U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		);
 }

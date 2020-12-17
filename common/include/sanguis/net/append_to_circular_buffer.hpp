@@ -15,7 +15,7 @@ namespace net
 SANGUIS_COMMON_SYMBOL
 bool
 append_to_circular_buffer(
-	alda::net::buffer::circular_send::streambuf &,
+	alda::net::buffer::circular_send::streambuf &, // NOLINT(google-runtime-references)
 	sanguis::net::data_buffer const &
 );
 

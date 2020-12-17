@@ -31,7 +31,8 @@ public:
 	SANGUIS_COMMON_SYMBOL
 	exception(
 		exception &&
-	);
+	)
+	noexcept;
 
 	SANGUIS_COMMON_SYMBOL
 	exception(
@@ -42,7 +43,8 @@ public:
 	exception &
 	operator=(
 		exception &&
-	);
+	)
+	noexcept;
 
 	SANGUIS_COMMON_SYMBOL
 	exception &

@@ -11,12 +11,13 @@
 namespace sanguis
 {
 
-typedef
+using
+weapon_types
+=
 metal::list<
 	sanguis::primary_weapon_type,
 	sanguis::secondary_weapon_type
->
-weapon_types;
+>;
 
 }
 

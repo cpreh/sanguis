@@ -20,7 +20,9 @@ namespace server
 namespace adapted_types
 {
 
-typedef
+using
+weapon_attribute
+=
 alda::bindings::record_variadic<
 	fcppt::record::element<
 		sanguis::messages::roles::weapon_attribute_type,
@@ -34,8 +36,7 @@ alda::bindings::record_variadic<
 		sanguis::messages::roles::weapon_attribute_extra,
 		sanguis::messages::adapted_types::optional_weapon_attribute_value
 	>
->
-weapon_attribute;
+>;
 
 }
 }

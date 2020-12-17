@@ -9,9 +9,10 @@
 namespace sanguis
 {
 
-typedef
-std::uint32_t
-entity_id_type;
+using
+entity_id_type
+=
+std::uint32_t;
 
 }
 

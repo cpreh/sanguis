@@ -13,12 +13,13 @@ namespace messages
 namespace adapted_types
 {
 
-typedef
+using
+duration
+=
 alda::bindings::duration<
 	sanguis::messages::adapted_types::time_unit,
 	sanguis::duration::period
->
-duration;
+>;
 
 }
 }

@@ -5,7 +5,10 @@
 namespace sanguis
 {
 
-typedef float time_unit;
+using
+time_unit
+=
+float;
 
 }
 

@@ -14,11 +14,12 @@ namespace client
 namespace types
 {
 
-typedef
+using
+alda_type
+=
 alda::type_enum<
 	sanguis::messages::client::types::message
->
-alda_type;
+>;
 
 }
 }

@@ -12,11 +12,12 @@ namespace messages
 namespace client
 {
 
-typedef
+using
+optional_unique_ptr
+=
 fcppt::optional::object<
 	sanguis::messages::client::unique_ptr
->
-optional_unique_ptr;
+>;
 
 }
 }

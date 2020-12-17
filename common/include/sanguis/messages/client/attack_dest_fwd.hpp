@@ -17,7 +17,9 @@ namespace messages
 namespace client
 {
 
-typedef
+using
+attack_dest
+=
 alda::message::object<
 	sanguis::messages::client::types::make_message_id<
 		sanguis::messages::client::types::message::attack_dest
@@ -28,8 +30,7 @@ alda::message::object<
 			sanguis::messages::adapted_types::vector2
 		>
 	>
->
-attack_dest;
+>;
 
 }
 }

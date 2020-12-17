@@ -7,9 +7,10 @@
 namespace sanguis
 {
 
-typedef
-fcppt::random::generator::mt19937
-random_generator;
+using
+random_generator
+=
+fcppt::random::generator::mt19937;
 
 }
 

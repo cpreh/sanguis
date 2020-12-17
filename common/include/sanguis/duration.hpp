@@ -10,11 +10,12 @@
 namespace sanguis
 {
 
-typedef
+using
+duration
+=
 std::chrono::duration<
 	sanguis::time_unit
->
-duration;
+>;
 
 }
 

@@ -13,12 +13,13 @@ namespace messages
 namespace adapted_types
 {
 
-typedef
+using
+vector2
+=
 alda::bindings::static_<
 	sanguis::messages::types::vector2,
 	sanguis::messages::adapted_types::space_unit
->
-vector2;
+>;
 
 }
 }

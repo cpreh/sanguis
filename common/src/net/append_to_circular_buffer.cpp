@@ -20,8 +20,10 @@ sanguis::net::append_to_circular_buffer(
 		<
 		_src.size()
 	)
+	{
 		return
 			false;
+	}
 
 	alda::serialization::ostream stream(
 		&_dest

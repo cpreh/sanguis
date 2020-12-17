@@ -8,11 +8,12 @@
 namespace sanguis
 {
 
-typedef
+using
+weapon_type
+=
 fcppt::variant::from_list<
 	sanguis::weapon_types
->
-weapon_type;
+>;
 
 }
 

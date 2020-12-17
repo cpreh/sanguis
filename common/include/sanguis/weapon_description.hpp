@@ -24,29 +24,35 @@ public:
 		sanguis::magazine_extra,
 		sanguis::magazine_remaining,
 		sanguis::reload_time,
-		sanguis::weapon_attribute_vector const &
+		sanguis::weapon_attribute_vector &&
 	);
 
+	[[nodiscard]]
 	SANGUIS_COMMON_SYMBOL
 	sanguis::weapon_type const &
 	weapon_type() const;
 
+	[[nodiscard]]
 	SANGUIS_COMMON_SYMBOL
 	sanguis::magazine_size
 	magazine_size() const;
 
+	[[nodiscard]]
 	SANGUIS_COMMON_SYMBOL
 	sanguis::magazine_extra
 	magazine_extra() const;
 
+	[[nodiscard]]
 	SANGUIS_COMMON_SYMBOL
 	sanguis::magazine_remaining
 	magazine_remaining() const;
 
+	[[nodiscard]]
 	SANGUIS_COMMON_SYMBOL
 	sanguis::reload_time
 	reload_time() const;
 
+	[[nodiscard]]
 	SANGUIS_COMMON_SYMBOL
 	sanguis::weapon_attribute_vector const &
 	attributes() const;

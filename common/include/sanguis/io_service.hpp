@@ -6,7 +6,7 @@
 #include <sanguis/io_service_impl_fwd.hpp>
 #include <sanguis/common/symbol.hpp>
 #include <alda/net/io_service_wrapper_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
 
@@ -15,7 +15,7 @@ namespace sanguis
 
 class io_service
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		io_service
 	);
 public:
@@ -39,15 +39,17 @@ public:
 	void
 	stop();
 
+	[[nodiscard]]
 	SANGUIS_COMMON_SYMBOL
 	alda::net::io_service_wrapper const &
 	impl() const;
 private:
-	typedef
+	using
+	impl_unique_ptr
+	=
 	fcppt::unique_ptr<
 		sanguis::io_service_impl
-	>
-	impl_unique_ptr;
+	>;
 
 	impl_unique_ptr const impl_;
 };

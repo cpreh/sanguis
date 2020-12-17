@@ -8,11 +8,12 @@
 namespace sanguis
 {
 
-typedef
+using
+diff_clock
+=
 sge::timer::clocks::delta<
 	sanguis::duration
->
-diff_clock;
+>;
 
 }
 

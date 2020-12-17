@@ -5,7 +5,10 @@
 namespace sanguis
 {
 
-typedef unsigned magazine_type;
+using
+magazine_type
+=
+unsigned;
 
 }
 

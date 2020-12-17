@@ -15,7 +15,9 @@ namespace messages
 namespace server
 {
 
-typedef
+using
+remove
+=
 alda::message::object<
 	sanguis::messages::server::types::make_message_id<
 		sanguis::messages::server::types::message::remove
@@ -23,8 +25,7 @@ alda::message::object<
 	alda::bindings::record_variadic<
 		sanguis::messages::server::parts::entity_id
 	>
->
-remove;
+>;
 
 }
 }

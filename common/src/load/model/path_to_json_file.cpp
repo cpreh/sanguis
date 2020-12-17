@@ -8,7 +8,7 @@
 
 std::filesystem::path
 sanguis::load::model::path_to_json_file(
-	std::filesystem::path const _path
+	std::filesystem::path const &_path
 )
 {
 	return

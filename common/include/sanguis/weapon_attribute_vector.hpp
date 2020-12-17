@@ -10,11 +10,12 @@
 namespace sanguis
 {
 
-typedef
+using
+weapon_attribute_vector
+=
 std::vector<
 	sanguis::weapon_attribute
->
-weapon_attribute_vector;
+>;
 
 }
 

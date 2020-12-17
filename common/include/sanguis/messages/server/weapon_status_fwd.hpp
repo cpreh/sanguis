@@ -18,7 +18,9 @@ namespace messages
 namespace server
 {
 
-typedef
+using
+weapon_status
+=
 alda::message::object<
 	sanguis::messages::server::types::make_message_id<
 		sanguis::messages::server::types::message::weapon_status
@@ -30,8 +32,7 @@ alda::message::object<
 			sanguis::messages::adapted_types::weapon_status
 		>
 	>
->
-weapon_status;
+>;
 
 }
 }

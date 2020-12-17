@@ -12,8 +12,7 @@ sanguis::io_service_impl::io_service_impl()
 }
 
 sanguis::io_service_impl::~io_service_impl()
-{
-}
+= default;
 
 alda::net::io_service_wrapper const &
 sanguis::io_service_impl::get() const

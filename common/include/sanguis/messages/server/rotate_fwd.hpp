@@ -18,7 +18,9 @@ namespace messages
 namespace server
 {
 
-typedef
+using
+rotate
+=
 alda::message::object<
 	sanguis::messages::server::types::make_message_id<
 		sanguis::messages::server::types::message::rotate
@@ -30,8 +32,7 @@ alda::message::object<
 			sanguis::messages::adapted_types::space_unit
 		>
 	>
->
-rotate;
+>;
 
 }
 }

@@ -23,7 +23,9 @@ namespace messages
 namespace server
 {
 
-typedef
+using
+add_friend
+=
 alda::message::object<
 	sanguis::messages::server::types::make_message_id<
 		sanguis::messages::server::types::message::add_friend
@@ -44,8 +46,7 @@ alda::message::object<
 			>
 		>
 	>
->
-add_friend;
+>;
 
 }
 }

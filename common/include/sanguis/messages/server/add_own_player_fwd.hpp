@@ -20,7 +20,9 @@ namespace messages
 namespace server
 {
 
-typedef
+using
+add_own_player
+=
 alda::message::object<
 	sanguis::messages::server::types::make_message_id<
 		sanguis::messages::server::types::message::add_own_player
@@ -33,8 +35,7 @@ alda::message::object<
 			sanguis::messages::server::parts::add_player
 		>
 	>
->
-add_own_player;
+>;
 
 }
 }

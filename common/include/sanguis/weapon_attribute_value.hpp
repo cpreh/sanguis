@@ -5,9 +5,10 @@
 namespace sanguis
 {
 
-typedef
-float
-weapon_attribute_value;
+using
+weapon_attribute_value
+=
+float;
 
 }
 

@@ -10,11 +10,12 @@
 namespace sanguis
 {
 
-typedef
+using
+buff_type_vector
+=
 std::vector<
 	sanguis::buff_type
->
-buff_type_vector;
+>;
 
 }
 

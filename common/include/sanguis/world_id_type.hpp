@@ -9,9 +9,10 @@
 namespace sanguis
 {
 
-typedef
-std::uint32_t
-world_id_type;
+using
+world_id_type
+=
+std::uint32_t;
 
 }
 

@@ -14,14 +14,15 @@ namespace messages
 namespace adapted_types
 {
 
-typedef
+using
+entity_id
+=
 alda::bindings::strong_typedef<
 	sanguis::entity_id,
 	sanguis::messages::adapted_types::unsigned_<
 		sanguis::entity_id_type
 	>
->
-entity_id;
+>;
 
 }
 }

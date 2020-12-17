@@ -14,14 +14,15 @@ namespace messages
 namespace server
 {
 
-typedef
+using
+experience
+=
 alda::message::object<
 	sanguis::messages::server::types::make_message_id<
 		sanguis::messages::server::types::message::experience
 	>,
 	sanguis::messages::adapted_types::exp
->
-experience;
+>;
 
 }
 }

@@ -13,7 +13,10 @@ namespace messages
 namespace types
 {
 
-typedef std::uint8_t message_type;
+using
+message_type
+=
+std::uint8_t;
 
 }
 }

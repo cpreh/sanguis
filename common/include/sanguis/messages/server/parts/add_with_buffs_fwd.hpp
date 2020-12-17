@@ -15,12 +15,13 @@ namespace server
 namespace parts
 {
 
-typedef
+using
+add_with_buffs
+=
 fcppt::record::element<
 	sanguis::messages::roles::buff_type_container,
 	sanguis::messages::adapted_types::buff_type_vector
->
-add_with_buffs;
+>;
 
 }
 }

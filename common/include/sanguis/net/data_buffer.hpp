@@ -12,11 +12,12 @@ namespace sanguis
 namespace net
 {
 
-typedef
+using
+data_buffer
+=
 std::vector<
 	alda::net::value_type
->
-data_buffer;
+>;
 
 }
 }

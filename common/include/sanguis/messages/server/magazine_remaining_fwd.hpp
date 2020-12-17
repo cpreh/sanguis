@@ -19,7 +19,9 @@ namespace messages
 namespace server
 {
 
-typedef
+using
+magazine_remaining
+=
 alda::message::object<
 	sanguis::messages::server::types::make_message_id<
 		sanguis::messages::server::types::message::magazine_remaining
@@ -34,8 +36,7 @@ alda::message::object<
 			sanguis::messages::adapted_types::magazine_size
 		>
 	>
->
-magazine_remaining;
+>;
 
 }
 }

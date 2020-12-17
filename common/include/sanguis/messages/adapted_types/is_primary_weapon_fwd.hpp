@@ -13,12 +13,13 @@ namespace messages
 namespace adapted_types
 {
 
-typedef
+using
+is_primary_weapon
+=
 alda::bindings::strong_typedef<
 	sanguis::is_primary_weapon,
 	sanguis::messages::adapted_types::bool_
->
-is_primary_weapon;
+>;
 
 }
 }

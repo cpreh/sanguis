@@ -13,9 +13,10 @@ namespace messages
 namespace types
 {
 
-typedef
-std::uint16_t
-length;
+using
+length
+=
+std::uint16_t;
 
 }
 }

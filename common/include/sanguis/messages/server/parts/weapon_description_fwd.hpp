@@ -26,7 +26,9 @@ namespace server
 namespace parts
 {
 
-typedef
+using
+weapon_description
+=
 metal::list<
 	fcppt::record::element<
 		sanguis::messages::roles::weapon_type,
@@ -52,8 +54,7 @@ metal::list<
 		sanguis::messages::roles::weapon_attribute_container,
 		sanguis::messages::server::adapted_types::weapon_attribute_vector
 	>
->
-weapon_description;
+>;
 
 }
 }

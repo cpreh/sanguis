@@ -13,12 +13,13 @@ namespace messages
 namespace adapted_types
 {
 
-typedef
+using
+opening_count_array
+=
 alda::bindings::enum_array<
 	sanguis::messages::types::opening_count_array,
 	sanguis::messages::adapted_types::size
->
-opening_count_array;
+>;
 
 }
 }

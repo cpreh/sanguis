@@ -19,7 +19,9 @@ namespace messages
 namespace server
 {
 
-typedef
+using
+level_up
+=
 alda::message::object<
 	sanguis::messages::server::types::make_message_id<
 		sanguis::messages::server::types::message::level_up
@@ -34,8 +36,7 @@ alda::message::object<
 			sanguis::messages::adapted_types::exp
 		>
 	>
->
-level_up;
+>;
 
 }
 }

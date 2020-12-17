@@ -12,11 +12,12 @@ namespace messages
 namespace types
 {
 
-typedef
+using
+char_
+=
 sge::charconv::char_type<
 	sge::charconv::encoding::utf8
->
-char_;
+>;
 
 }
 }

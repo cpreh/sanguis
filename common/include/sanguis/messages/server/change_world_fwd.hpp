@@ -26,7 +26,9 @@ namespace messages
 namespace server
 {
 
-typedef
+using
+change_world
+=
 alda::message::object<
 	sanguis::messages::server::types::make_message_id<
 		sanguis::messages::server::types::message::change_world
@@ -57,8 +59,7 @@ alda::message::object<
 			sanguis::messages::adapted_types::bool_
 		>
 	>
->
-change_world;
+>;
 
 }
 }

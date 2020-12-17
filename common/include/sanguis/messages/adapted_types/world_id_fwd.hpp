@@ -14,14 +14,15 @@ namespace messages
 namespace adapted_types
 {
 
-typedef
+using
+world_id
+=
 alda::bindings::strong_typedef<
 	sanguis::world_id,
 	sanguis::messages::adapted_types::unsigned_<
 		sanguis::world_id_type
 	>
->
-world_id;
+>;
 
 }
 }

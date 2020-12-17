@@ -19,7 +19,9 @@ namespace server
 namespace parts
 {
 
-typedef
+using
+add_with_health
+=
 metal::list<
 	fcppt::record::element<
 		sanguis::messages::roles::health,
@@ -29,8 +31,7 @@ metal::list<
 		sanguis::messages::roles::max_health,
 		sanguis::messages::adapted_types::space_unit
 	>
->
-add_with_health;
+>;
 
 }
 }

@@ -14,14 +14,15 @@ namespace messages
 namespace adapted_types
 {
 
-typedef
+using
+seed
+=
 alda::bindings::strong_typedef<
 	sanguis::creator::seed,
 	sanguis::messages::adapted_types::unsigned_<
 		sanguis::creator::seed_type
 	>
->
-seed;
+>;
 
 }
 }

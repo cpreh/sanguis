@@ -17,15 +17,16 @@ namespace messages
 namespace adapted_types
 {
 
-typedef
+using
+weapon_type
+=
 alda::bindings::variant<
 	sanguis::weapon_types,
 	metal::list<
 		sanguis::messages::adapted_types::primary_weapon_type,
 		sanguis::messages::adapted_types::secondary_weapon_type
 	>
->
-weapon_type;
+>;
 
 }
 }

@@ -18,11 +18,12 @@ namespace server
 namespace types
 {
 
-typedef
+using
+weapon_attribute
+=
 alda::raw::element_type<
 	sanguis::messages::server::adapted_types::weapon_attribute
->
-weapon_attribute;
+>;
 
 }
 }

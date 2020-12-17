@@ -8,11 +8,12 @@
 namespace sanguis
 {
 
-typedef
+using
+optional_weapon_attribute_value
+=
 fcppt::optional::object<
 	sanguis::weapon_attribute_value
->
-optional_weapon_attribute_value;
+>;
 
 }
 

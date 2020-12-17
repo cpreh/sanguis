@@ -21,14 +21,17 @@ public:
 		sanguis::weapon_attribute_extra
 	);
 
+	[[nodiscard]]
 	SANGUIS_COMMON_SYMBOL
 	sanguis::weapon_attribute_type
 	type() const;
 
+	[[nodiscard]]
 	SANGUIS_COMMON_SYMBOL
 	sanguis::weapon_attribute_base
 	base() const;
 
+	[[nodiscard]]
 	SANGUIS_COMMON_SYMBOL
 	sanguis::weapon_attribute_extra
 	extra() const;

@@ -11,9 +11,10 @@ namespace messages
 namespace adapted_types
 {
 
-typedef
-alda::bindings::float_
-weapon_attribute_value;
+using
+weapon_attribute_value
+=
+alda::bindings::float_;
 
 }
 }

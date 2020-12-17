@@ -17,7 +17,7 @@ namespace model
 SANGUIS_COMMON_SYMBOL
 std::filesystem::path
 path_to_json_file(
-	std::filesystem::path
+	std::filesystem::path const &
 );
 
 }

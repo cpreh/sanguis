@@ -15,12 +15,13 @@ namespace messages
 namespace call
 {
 
-typedef
+using
+result_variant
+=
 fcppt::variant::object<
 	boost::statechart::result,
 	sanguis::messages::call::forward_to_default
->
-result_variant;
+>;
 
 }
 }

@@ -18,7 +18,9 @@ namespace messages
 namespace server
 {
 
-typedef
+using
+change_weapon
+=
 alda::message::object<
 	sanguis::messages::server::types::make_message_id<
 		sanguis::messages::server::types::message::change_weapon
@@ -30,8 +32,7 @@ alda::message::object<
 			sanguis::messages::adapted_types::optional_primary_weapon_type
 		>
 	>
->
-change_weapon;
+>;
 
 }
 }

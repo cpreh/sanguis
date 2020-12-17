@@ -14,14 +14,15 @@ namespace messages
 namespace client
 {
 
-typedef
+using
+drop_or_pickup_weapon
+=
 alda::message::object<
 	sanguis::messages::client::types::make_message_id<
 		sanguis::messages::client::types::message::drop_or_pickup_weapon
 	>,
 	sanguis::messages::adapted_types::is_primary_weapon
->
-drop_or_pickup_weapon;
+>;
 
 }
 }

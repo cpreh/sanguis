@@ -19,7 +19,9 @@ namespace messages
 namespace server
 {
 
-typedef
+using
+reload
+=
 alda::message::object<
 	sanguis::messages::server::types::make_message_id<
 		sanguis::messages::server::types::message::reload
@@ -34,8 +36,7 @@ alda::message::object<
 			sanguis::messages::adapted_types::duration
 		>
 	>
->
-reload;
+>;
 
 }
 }

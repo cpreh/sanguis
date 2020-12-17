@@ -11,7 +11,10 @@ namespace messages
 namespace types
 {
 
-typedef sge::charconv::utf8_string string;
+using
+string
+=
+sge::charconv::utf8_string;
 
 }
 }

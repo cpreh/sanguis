@@ -18,7 +18,9 @@ namespace messages
 namespace server
 {
 
-typedef
+using
+add_buff
+=
 alda::message::object<
 	sanguis::messages::server::types::make_message_id<
 		sanguis::messages::server::types::message::add_buff
@@ -30,8 +32,7 @@ alda::message::object<
 			sanguis::messages::adapted_types::buff_type
 		>
 	>
->
-add_buff;
+>;
 
 }
 }

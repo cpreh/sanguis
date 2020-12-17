@@ -23,7 +23,9 @@ namespace messages
 namespace server
 {
 
-typedef
+using
+add_pickup
+=
 alda::message::object<
 	sanguis::messages::server::types::make_message_id<
 		sanguis::messages::server::types::message::add_pickup
@@ -44,8 +46,7 @@ alda::message::object<
 			>
 		>
 	>
->
-add_pickup;
+>;
 
 }
 }

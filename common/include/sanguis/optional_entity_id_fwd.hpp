@@ -8,11 +8,12 @@
 namespace sanguis
 {
 
-typedef
+using
+optional_entity_id
+=
 fcppt::optional::object<
 	sanguis::entity_id
->
-optional_entity_id;
+>;
 
 }
 

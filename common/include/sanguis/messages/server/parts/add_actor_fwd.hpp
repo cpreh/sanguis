@@ -21,7 +21,9 @@ namespace server
 namespace parts
 {
 
-typedef
+using
+add_actor
+=
 metal::join<
 	sanguis::messages::server::parts::add_elements_base,
 	metal::list<
@@ -35,8 +37,7 @@ metal::join<
 	metal::list<
 		sanguis::messages::server::parts::add_with_buffs
 	>
->
-add_actor;
+>;
 
 }
 }

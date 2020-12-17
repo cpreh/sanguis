@@ -1,5 +1,6 @@
 #include <sanguis/net/data_buffer.hpp>
 #include <sanguis/net/data_streambuf.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/container/join.hpp>
 #include <fcppt/iterator/make_range.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -9,7 +10,9 @@
 
 
 sanguis::net::data_streambuf::data_streambuf(
-	sanguis::net::data_buffer &_buffer
+	fcppt::reference<
+		sanguis::net::data_buffer
+	> const _buffer
 )
 :
 	std::streambuf(),
@@ -20,8 +23,7 @@ sanguis::net::data_streambuf::data_streambuf(
 }
 
 sanguis::net::data_streambuf::~data_streambuf()
-{
-}
+= default;
 
 std::streamsize
 sanguis::net::data_streambuf::xsputn(
@@ -29,15 +31,15 @@ sanguis::net::data_streambuf::xsputn(
 	std::streamsize const _size
 )
 {
-	this->buffer_ =
+	this->buffer_.get() =
 		fcppt::container::join(
 			std::move(
-				this->buffer_
+				this->buffer_.get()
 			),
 			fcppt::iterator::make_range(
 				_dest,
 				_dest
-				+
+				+ // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
 				_size
 			)
 		);
@@ -57,11 +59,13 @@ sanguis::net::data_streambuf::overflow(
 			traits_type::eof()
 		)
 	)
-		buffer_.push_back(
+	{
+		buffer_.get().push_back(
 			traits_type::to_char_type(
 				_value
 			)
 		);
+	}
 
 	return
 		0;

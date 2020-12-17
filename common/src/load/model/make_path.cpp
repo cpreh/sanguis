@@ -14,7 +14,7 @@ sanguis::load::model::make_path(
 	sanguis::load::model::path const &_path
 )
 {
-	std::filesystem::path const path(
+	std::filesystem::path path(
 		sanguis::media_path()
 		/
 		FCPPT_TEXT("models")
@@ -27,6 +27,7 @@ sanguis::load::model::make_path(
 			path
 		)
 	)
+	{
 		throw
 			sanguis::exception{
 				FCPPT_TEXT("Model ")
@@ -37,6 +38,7 @@ sanguis::load::model::make_path(
 				+
 				FCPPT_TEXT(" not found!")
 			};
+	}
 
 	return
 		path;

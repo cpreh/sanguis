@@ -8,11 +8,12 @@
 namespace sanguis
 {
 
-typedef
+using
+optional_primary_weapon_type
+=
 fcppt::optional::object<
 	sanguis::primary_weapon_type
->
-optional_primary_weapon_type;
+>;
 
 }
 

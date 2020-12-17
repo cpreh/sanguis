@@ -12,11 +12,12 @@ namespace messages
 namespace server
 {
 
-typedef
+using
+base
+=
 alda::message::base<
 	sanguis::messages::server::types::alda_type
->
-base;
+>;
 
 }
 }

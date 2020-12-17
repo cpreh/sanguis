@@ -5,6 +5,9 @@
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_type.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::weapon_description::weapon_description(
@@ -13,7 +16,7 @@ sanguis::weapon_description::weapon_description(
 	sanguis::magazine_extra const _magazine_extra,
 	sanguis::magazine_remaining const _magazine_remaining,
 	sanguis::reload_time const _reload_time,
-	sanguis::weapon_attribute_vector const &_attributes
+	sanguis::weapon_attribute_vector &&_attributes
 )
 :
 	weapon_type_(
@@ -32,7 +35,9 @@ sanguis::weapon_description::weapon_description(
 		_reload_time
 	),
 	attributes_(
-		_attributes
+		std::move(
+			_attributes
+		)
 	)
 {
 }

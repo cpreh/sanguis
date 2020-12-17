@@ -20,7 +20,9 @@ namespace server
 namespace parts
 {
 
-typedef
+using
+add_with_weapon
+=
 metal::list<
 	fcppt::record::element<
 		sanguis::messages::roles::primary_weapon,
@@ -30,8 +32,7 @@ metal::list<
 		sanguis::messages::roles::weapon_status,
 		sanguis::messages::adapted_types::weapon_status
 	>
->
-add_with_weapon;
+>;
 
 }
 }

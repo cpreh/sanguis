@@ -12,11 +12,12 @@ namespace messages
 namespace adapted_types
 {
 
-typedef
+using
+char_type
+=
 sanguis::messages::adapted_types::fundamental<
 	sanguis::messages::types::char_
->
-char_type;
+>;
 
 }
 }

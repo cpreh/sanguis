@@ -15,12 +15,13 @@ namespace server
 namespace adapted_types
 {
 
-typedef
+using
+weapon_attribute_vector
+=
 sanguis::messages::adapted_types::dynamic_len<
 	sanguis::messages::server::types::weapon_attribute_vector,
 	sanguis::messages::server::adapted_types::weapon_attribute
->
-weapon_attribute_vector;
+>;
 
 }
 }

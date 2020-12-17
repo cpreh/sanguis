@@ -13,12 +13,13 @@ namespace messages
 namespace adapted_types
 {
 
-typedef
+using
+string_vector
+=
 sanguis::messages::adapted_types::dynamic_len<
 	sanguis::messages::types::string_vector,
 	sanguis::messages::adapted_types::string
->
-string_vector;
+>;
 
 }
 }

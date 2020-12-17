@@ -20,7 +20,9 @@ namespace messages
 namespace server
 {
 
-typedef
+using
+add_weapon_pickup
+=
 alda::message::object<
 	sanguis::messages::server::types::make_message_id<
 		sanguis::messages::server::types::message::add_weapon_pickup
@@ -34,8 +36,7 @@ alda::message::object<
 			sanguis::messages::server::parts::weapon_description
 		>
 	>
->
-add_weapon_pickup;
+>;
 
 }
 }

@@ -12,11 +12,12 @@ namespace messages
 namespace adapted_types
 {
 
-typedef
+using
+size
+=
 sanguis::messages::adapted_types::unsigned_<
 	sanguis::messages::types::size
->
-size;
+>;
 
 }
 }

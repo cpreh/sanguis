@@ -11,9 +11,10 @@ namespace messages
 namespace adapted_types
 {
 
-typedef
-alda::bindings::float_
-time_unit;
+using
+time_unit
+=
+alda::bindings::float_;
 
 }
 }

@@ -15,12 +15,13 @@ namespace server
 namespace parts
 {
 
-typedef
+using
+add_with_auras
+=
 fcppt::record::element<
 	sanguis::messages::roles::aura_type_container,
 	sanguis::messages::adapted_types::aura_type_vector
->
-add_with_auras;
+>;
 
 }
 }

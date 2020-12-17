@@ -36,7 +36,7 @@ sanguis::load::weapon_pickup_name(
 						FCPPT_TEXT("rocket_launcher");
 				case sanguis::primary_weapon_type::dual_pistols:
 				case sanguis::primary_weapon_type::melee:
-					// TODO: Add a placeholder texture here
+					// TODO(philipp): Add a placeholder texture here
 					break;
 				}
 

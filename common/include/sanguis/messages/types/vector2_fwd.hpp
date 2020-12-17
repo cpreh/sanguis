@@ -12,10 +12,13 @@ namespace messages
 namespace types
 {
 
-typedef fcppt::math::vector::static_<
+using
+vector2
+=
+fcppt::math::vector::static_<
 	sanguis::messages::types::space_unit,
-	2u
-> vector2;
+	2U
+>;
 
 }
 }

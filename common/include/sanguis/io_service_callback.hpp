@@ -7,11 +7,12 @@
 namespace sanguis
 {
 
-typedef
+using
+io_service_callback
+=
 fcppt::function<
 	void ()
->
-io_service_callback;
+>;
 
 }
 

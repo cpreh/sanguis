@@ -12,7 +12,7 @@
 
 sanguis::collision::radius
 sanguis::load::model::radius(
-	sanguis::model::cell_size const _cell_size
+	sanguis::model::cell_size const &_cell_size
 )
 {
 	auto const quad_half(
@@ -54,7 +54,7 @@ sanguis::load::model::radius(
 			fcppt::literal<
 				sanguis::collision::unit
 			>(
-				0.4f
+				0.4F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			)
 			*
 			boost::units::si::meter

@@ -13,7 +13,10 @@ namespace messages
 namespace types
 {
 
-typedef std::uint8_t enum_;
+using
+enum_
+=
+std::uint8_t;
 
 }
 }

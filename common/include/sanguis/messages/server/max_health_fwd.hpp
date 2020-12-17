@@ -18,7 +18,9 @@ namespace messages
 namespace server
 {
 
-typedef
+using
+max_health
+=
 alda::message::object<
 	sanguis::messages::server::types::make_message_id<
 		sanguis::messages::server::types::message::max_health
@@ -30,8 +32,7 @@ alda::message::object<
 			sanguis::messages::adapted_types::space_unit
 		>
 	>
->
-max_health;
+>;
 
 }
 }

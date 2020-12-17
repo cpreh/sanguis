@@ -13,7 +13,10 @@ namespace messages
 namespace types
 {
 
-typedef std::uint32_t level;
+using
+level
+=
+std::uint32_t;
 
 }
 }

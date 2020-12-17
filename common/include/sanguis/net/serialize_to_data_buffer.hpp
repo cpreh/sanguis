@@ -6,6 +6,7 @@
 #include <sanguis/net/message_header.hpp>
 #include <alda/message/base_fwd.hpp>
 #include <alda/serialization/length/serialize.hpp>
+#include <fcppt/make_ref.hpp>
 
 
 namespace sanguis
@@ -25,7 +26,9 @@ serialize_to_data_buffer(
 )
 {
 	sanguis::net::data_streambuf stream_buf(
-		_buffer
+		fcppt::make_ref(
+			_buffer
+		)
 	);
 
 	alda::serialization::ostream stream(

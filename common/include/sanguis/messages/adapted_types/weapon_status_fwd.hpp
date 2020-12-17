@@ -12,11 +12,12 @@ namespace messages
 namespace adapted_types
 {
 
-typedef
+using
+weapon_status
+=
 sanguis::messages::adapted_types::enum_<
 	sanguis::weapon_status
->
-weapon_status;
+>;
 
 }
 }

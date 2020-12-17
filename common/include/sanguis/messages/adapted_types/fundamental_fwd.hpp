@@ -14,7 +14,7 @@ namespace adapted_types
 template<
 	typename Type
 >
-// TODO: Check if Type has one byte
+// TODO(philipp): Check if Type has one byte
 using
 fundamental
 =

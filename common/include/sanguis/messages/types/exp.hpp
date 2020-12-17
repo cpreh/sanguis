@@ -13,7 +13,10 @@ namespace messages
 namespace types
 {
 
-typedef std::uint32_t exp;
+using
+exp
+=
+std::uint32_t;
 
 }
 }

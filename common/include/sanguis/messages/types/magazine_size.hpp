@@ -13,7 +13,10 @@ namespace messages
 namespace types
 {
 
-typedef std::uint16_t magazine_size;
+using
+magazine_size
+=
+std::uint16_t;
 
 }
 }

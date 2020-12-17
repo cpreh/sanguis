@@ -17,7 +17,9 @@ namespace messages
 namespace client
 {
 
-typedef
+using
+direction
+=
 alda::message::object<
 	sanguis::messages::client::types::make_message_id<
 		sanguis::messages::client::types::message::direction
@@ -28,8 +30,7 @@ alda::message::object<
 			sanguis::messages::adapted_types::vector2
 		>
 	>
->
-direction;
+>;
 
 }
 }

@@ -11,7 +11,10 @@ namespace messages
 namespace adapted_types
 {
 
-typedef alda::bindings::bool_ bool_;
+using
+bool_
+=
+alda::bindings::bool_;
 
 }
 }

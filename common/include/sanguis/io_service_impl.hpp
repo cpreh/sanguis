@@ -3,7 +3,7 @@
 
 #include <sanguis/io_service_impl_fwd.hpp>
 #include <alda/net/io_service_wrapper.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/asio/io_service.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -14,7 +14,7 @@ namespace sanguis
 
 class io_service_impl
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		io_service_impl
 	);
 public:
@@ -22,6 +22,7 @@ public:
 
 	~io_service_impl();
 
+	[[nodiscard]]
 	alda::net::io_service_wrapper const &
 	get() const;
 private:

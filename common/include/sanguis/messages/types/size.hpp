@@ -13,7 +13,10 @@ namespace messages
 namespace types
 {
 
-typedef std::uint32_t size;
+using
+size
+=
+std::uint32_t;
 
 }
 }

@@ -15,7 +15,9 @@ namespace messages
 namespace client
 {
 
-typedef
+using
+choose_perk
+=
 alda::message::object<
 	sanguis::messages::client::types::make_message_id<
 		sanguis::messages::client::types::message::choose_perk
@@ -23,8 +25,7 @@ alda::message::object<
 	sanguis::messages::adapted_types::enum_<
 		sanguis::perk_type
 	>
->
-choose_perk;
+>;
 
 }
 }

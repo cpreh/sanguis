@@ -16,11 +16,12 @@ namespace server
 namespace types
 {
 
-typedef
+using
+weapon_attribute_vector
+=
 std::vector<
 	sanguis::messages::server::types::weapon_attribute
->
-weapon_attribute_vector;
+>;
 
 }
 }

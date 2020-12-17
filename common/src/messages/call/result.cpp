@@ -3,15 +3,18 @@
 #include <sanguis/messages/call/result_variant.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/result.hpp>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
 sanguis::messages::call::result::result(
-	boost::statechart::result const _statechart_result
+	boost::statechart::result _statechart_result
 )
 :
 	variant_(
-		_statechart_result
+		std::move(
+			_statechart_result
+		)
 	)
 {
 }

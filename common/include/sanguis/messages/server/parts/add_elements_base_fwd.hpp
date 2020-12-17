@@ -22,7 +22,9 @@ namespace server
 namespace parts
 {
 
-typedef
+using
+add_elements_base
+=
 metal::list<
 	fcppt::record::element<
 		sanguis::messages::roles::center,
@@ -36,8 +38,7 @@ metal::list<
 		sanguis::messages::roles::created,
 		sanguis::messages::adapted_types::bool_
 	>
->
-add_elements_base;
+>;
 
 }
 }

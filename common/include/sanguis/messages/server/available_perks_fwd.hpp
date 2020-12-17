@@ -19,7 +19,9 @@ namespace messages
 namespace server
 {
 
-typedef
+using
+available_perks
+=
 alda::message::object<
 	sanguis::messages::server::types::make_message_id<
 		sanguis::messages::server::types::message::available_perks
@@ -34,8 +36,7 @@ alda::message::object<
 			sanguis::messages::adapted_types::level
 		>
 	>
->
-available_perks;
+>;
 
 }
 }

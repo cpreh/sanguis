@@ -19,7 +19,9 @@ namespace server
 namespace parts
 {
 
-typedef
+using
+add_player
+=
 metal::join<
 	sanguis::messages::server::parts::add_actor,
 	metal::list<
@@ -28,8 +30,7 @@ metal::join<
 			sanguis::messages::adapted_types::string
 		>
 	>
->
-add_player;
+>;
 
 }
 }

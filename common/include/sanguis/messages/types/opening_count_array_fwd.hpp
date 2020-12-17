@@ -13,12 +13,13 @@ namespace messages
 namespace types
 {
 
-typedef
+using
+opening_count_array
+=
 fcppt::enum_::array<
 	sanguis::creator::opening_type,
 	sanguis::messages::types::size
->
-opening_count_array;
+>;
 
 }
 }

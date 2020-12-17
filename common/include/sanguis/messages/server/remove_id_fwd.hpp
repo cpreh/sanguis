@@ -14,14 +14,15 @@ namespace messages
 namespace server
 {
 
-typedef
+using
+remove_id
+=
 alda::message::object<
 	sanguis::messages::server::types::make_message_id<
 		sanguis::messages::server::types::message::remove_id
 	>,
 	alda::bindings::unit
->
-remove_id;
+>;
 
 }
 }

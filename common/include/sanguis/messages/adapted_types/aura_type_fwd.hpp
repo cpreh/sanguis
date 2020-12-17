@@ -12,11 +12,12 @@ namespace messages
 namespace adapted_types
 {
 
-typedef
+using
+aura_type
+=
 sanguis::messages::adapted_types::enum_<
 	sanguis::aura_type
->
-aura_type;
+>;
 
 }
 }

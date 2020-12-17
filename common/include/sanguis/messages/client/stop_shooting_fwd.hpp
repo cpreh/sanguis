@@ -14,14 +14,15 @@ namespace messages
 namespace client
 {
 
-typedef
+using
+stop_shooting
+=
 alda::message::object<
 	sanguis::messages::client::types::make_message_id<
 		sanguis::messages::client::types::message::stop_shooting
 	>,
 	sanguis::messages::adapted_types::is_primary_weapon
->
-stop_shooting;
+>;
 
 }
 }

@@ -14,14 +14,15 @@ namespace messages
 namespace server
 {
 
-typedef
+using
+pause
+=
 alda::message::object<
 	sanguis::messages::server::types::make_message_id<
 		sanguis::messages::server::types::message::pause
 	>,
 	alda::bindings::unit
->
-pause;
+>;
 
 }
 }

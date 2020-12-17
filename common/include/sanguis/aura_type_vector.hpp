@@ -10,11 +10,12 @@
 namespace sanguis
 {
 
-typedef
+using
+aura_type_vector
+=
 std::vector<
 	sanguis::aura_type
->
-aura_type_vector;
+>;
 
 }
 

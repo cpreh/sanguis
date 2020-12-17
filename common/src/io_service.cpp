@@ -16,11 +16,10 @@ sanguis::io_service::io_service()
 }
 
 sanguis::io_service::~io_service()
-{
-}
+= default;
 
 void
-sanguis::io_service::post(
+sanguis::io_service::post( // NOLINT(readability-make-member-function-const)
 	sanguis::io_service_callback const &_callback
 )
 {
@@ -30,13 +29,13 @@ sanguis::io_service::post(
 }
 
 void
-sanguis::io_service::run()
+sanguis::io_service::run() // NOLINT(readability-make-member-function-const)
 {
 	this->impl().get().run();
 }
 
 void
-sanguis::io_service::stop()
+sanguis::io_service::stop() // NOLINT(readability-make-member-function-const)
 {
 	this->impl().get().stop();
 }

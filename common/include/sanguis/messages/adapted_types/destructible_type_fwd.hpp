@@ -12,11 +12,12 @@ namespace messages
 namespace adapted_types
 {
 
-typedef
+using
+destructible_type
+=
 sanguis::messages::adapted_types::enum_<
 	sanguis::creator::destructible_type
->
-destructible_type;
+>;
 
 }
 }

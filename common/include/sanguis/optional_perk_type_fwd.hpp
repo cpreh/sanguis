@@ -8,11 +8,12 @@
 namespace sanguis
 {
 
-typedef
+using
+optional_perk_type
+=
 fcppt::optional::object<
 	sanguis::perk_type
->
-optional_perk_type;
+>;
 
 }
 

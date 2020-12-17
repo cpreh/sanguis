@@ -14,14 +14,15 @@ namespace messages
 namespace client
 {
 
-typedef
+using
+change_world
+=
 alda::message::object<
 	sanguis::messages::client::types::make_message_id<
 		sanguis::messages::client::types::message::change_world
 	>,
 	alda::bindings::unit
->
-change_world;
+>;
 
 }
 }

@@ -15,7 +15,9 @@ namespace messages
 namespace server
 {
 
-typedef
+using
+give_weapon
+=
 alda::message::object<
 	sanguis::messages::server::types::make_message_id<
 		sanguis::messages::server::types::message::give_weapon
@@ -23,8 +25,7 @@ alda::message::object<
 	alda::bindings::record<
 		sanguis::messages::server::parts::weapon_description
 	>
->
-give_weapon;
+>;
 
 }
 }

@@ -8,11 +8,12 @@
 namespace sanguis
 {
 
-typedef
+using
+optional_aura_type
+=
 fcppt::optional::object<
 	sanguis::aura_type
->
-optional_aura_type;
+>;
 
 }
 

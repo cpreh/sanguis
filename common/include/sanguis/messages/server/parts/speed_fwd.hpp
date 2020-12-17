@@ -15,12 +15,13 @@ namespace server
 namespace parts
 {
 
-typedef
+using
+speed
+=
 fcppt::record::element<
 	sanguis::messages::roles::speed,
 	sanguis::messages::adapted_types::vector2
->
-speed;
+>;
 
 }
 }

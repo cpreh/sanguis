@@ -7,7 +7,10 @@ namespace sanguis
 namespace collision
 {
 
-typedef float unit;
+using
+unit
+=
+float;
 
 }
 }

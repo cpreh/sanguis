@@ -16,11 +16,12 @@ namespace server
 namespace types
 {
 
-typedef
+using
+perk_tree_node_vector
+=
 std::vector<
 	sanguis::messages::server::types::perk_tree_node
->
-perk_tree_node_vector;
+>;
 
 }
 }

@@ -14,14 +14,15 @@ namespace messages
 namespace server
 {
 
-typedef
+using
+remove_weapon
+=
 alda::message::object<
 	sanguis::messages::server::types::make_message_id<
 		sanguis::messages::server::types::message::remove_weapon
 	>,
 	sanguis::messages::adapted_types::is_primary_weapon
->
-remove_weapon;
+>;
 
 }
 }

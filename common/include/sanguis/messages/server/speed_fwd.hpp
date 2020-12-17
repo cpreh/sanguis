@@ -17,7 +17,9 @@ namespace messages
 namespace server
 {
 
-typedef
+using
+speed
+=
 alda::message::object<
 	sanguis::messages::server::types::make_message_id<
 		sanguis::messages::server::types::message::speed
@@ -26,8 +28,7 @@ alda::message::object<
 		sanguis::messages::server::parts::entity_id,
 		sanguis::messages::server::parts::speed
 	>
->
-speed;
+>;
 
 }
 }

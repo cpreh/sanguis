@@ -24,7 +24,9 @@ namespace server
 namespace adapted_types
 {
 
-typedef
+using
+perk_tree_node
+=
 alda::bindings::record_variadic<
 	fcppt::record::element<
 		sanguis::messages::roles::perk_label,
@@ -57,8 +59,7 @@ alda::bindings::record_variadic<
 			>
 		>
 	>
->
-perk_tree_node;
+>;
 
 }
 }

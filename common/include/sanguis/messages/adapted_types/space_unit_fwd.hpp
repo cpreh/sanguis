@@ -11,9 +11,10 @@ namespace messages
 namespace adapted_types
 {
 
-typedef
-alda::bindings::float_
-space_unit;
+using
+space_unit
+=
+alda::bindings::float_;
 
 }
 }

@@ -13,12 +13,13 @@ namespace messages
 namespace adapted_types
 {
 
-typedef
+using
+perk_tree
+=
 sanguis::messages::adapted_types::dynamic_len<
 	sanguis::messages::server::types::perk_tree_node_vector,
 	sanguis::messages::server::adapted_types::perk_tree_node
->
-perk_tree;
+>;
 
 }
 }

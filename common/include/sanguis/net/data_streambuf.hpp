@@ -4,7 +4,8 @@
 #include <sanguis/common/symbol.hpp>
 #include <sanguis/net/data_buffer.hpp>
 #include <sanguis/net/data_streambuf_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <ios>
 #include <streambuf>
@@ -20,20 +21,23 @@ class data_streambuf
 :
 	public std::streambuf
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		data_streambuf
 	);
 public:
 	SANGUIS_COMMON_SYMBOL
 	explicit
 	data_streambuf(
-		sanguis::net::data_buffer &
+		fcppt::reference<
+			sanguis::net::data_buffer
+		>
 	);
 
 	SANGUIS_COMMON_SYMBOL
 	~data_streambuf()
 	override;
 private:
+	[[nodiscard]]
 	std::streamsize
 	xsputn(
 		char_type const *,
@@ -41,13 +45,16 @@ private:
 	)
 	override;
 
+	[[nodiscard]]
 	int_type
 	overflow(
 		int_type
 	)
 	override;
 
-	sanguis::net::data_buffer &buffer_;
+	fcppt::reference<
+		sanguis::net::data_buffer
+	> const buffer_;
 };
 
 }
