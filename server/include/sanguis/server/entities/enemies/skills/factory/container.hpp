@@ -20,11 +20,12 @@ namespace skills
 namespace factory
 {
 
-typedef
+using
+container
+=
 std::vector<
 	sanguis::server::entities::enemies::skills::factory::callback
->
-container;
+>;
 
 }
 }

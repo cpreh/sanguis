@@ -12,11 +12,12 @@ namespace server
 namespace global
 {
 
-typedef
+using
+next_id_callback
+=
 fcppt::function<
 	sanguis::entity_id ()
->
-next_id_callback;
+>;
 
 }
 }

@@ -12,9 +12,12 @@ namespace sanguis
 namespace server
 {
 
-typedef std::vector<
+using
+console_command_vector
+=
+std::vector<
 	sanguis::server::console_command_pair
-> console_command_vector;
+>;
 
 }
 }

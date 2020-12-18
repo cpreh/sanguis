@@ -14,9 +14,12 @@ namespace server
 namespace world
 {
 
-typedef std::unordered_set<
+using
+sight_range_entry_set
+=
+std::unordered_set<
 	sanguis::entity_id
-> sight_range_entry_set;
+>;
 
 }
 }

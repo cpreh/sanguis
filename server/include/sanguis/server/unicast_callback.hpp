@@ -11,14 +11,15 @@ namespace sanguis
 namespace server
 {
 
-typedef
+using
+unicast_callback
+=
 fcppt::function<
 	void (
 		sanguis::server::player_id,
 		sanguis::messages::server::base const &
 	)
->
-unicast_callback;
+>;
 
 }
 }

@@ -37,12 +37,13 @@ struct make_upper_bound<
 	>::type
 >
 {
-	typedef
+	using
+	result_type
+	=
 	typename
 	fcppt::random::distribution::parameters::uniform_real<
 		T
-	>::sup
-	result_type;
+	>::sup;
 
 	static
 	result_type
@@ -70,12 +71,13 @@ struct make_upper_bound<
 	>::type
 >
 {
-	typedef
+	using
+	result_type
+	=
 	typename
 	fcppt::random::distribution::parameters::uniform_int<
 		T
-	>::max
-	result_type;
+	>::max;
 
 	static
 	result_type

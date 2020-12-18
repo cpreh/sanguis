@@ -14,11 +14,12 @@ namespace server
 namespace auras
 {
 
-typedef
+using
+container
+=
 std::vector<
 	sanguis::server::auras::unique_ptr
->
-container;
+>;
 
 }
 }

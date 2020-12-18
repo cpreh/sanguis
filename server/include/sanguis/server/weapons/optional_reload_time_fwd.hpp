@@ -12,11 +12,12 @@ namespace server
 namespace weapons
 {
 
-typedef
+using
+optional_reload_time
+=
 fcppt::optional::object<
 	sanguis::server::weapons::reload_time
->
-optional_reload_time;
+>;
 
 }
 }

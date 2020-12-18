@@ -50,7 +50,9 @@ class unpaused
 		unpaused
 	);
 public:
-	typedef
+	using
+	reactions
+	=
 	boost::mpl::list2<
 		boost::statechart::custom_reaction<
 			sanguis::server::events::tick
@@ -58,8 +60,7 @@ public:
 		boost::statechart::custom_reaction<
 			sanguis::server::events::message
 		>
-	>
-	reactions;
+	>;
 
 	explicit
 	unpaused(

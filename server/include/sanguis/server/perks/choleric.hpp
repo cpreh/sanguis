@@ -54,11 +54,14 @@ private:
 
 	sanguis::diff_timer shoot_timer_;
 
-	typedef fcppt::random::distribution::basic<
+	using
+	distribution
+	=
+	fcppt::random::distribution::basic<
 		fcppt::random::distribution::parameters::uniform_real<
 			sanguis::server::space_unit
 		>
-	> distribution;
+	>;
 
 	sanguis::random_variate<
 		distribution

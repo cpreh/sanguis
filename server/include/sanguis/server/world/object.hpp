@@ -376,28 +376,31 @@ private:
 
 	sanguis::server::world::sight_range_map sight_ranges_;
 
-	typedef
+	using
+	entity_map
+	=
 	std::map<
 		sanguis::entity_id,
 		sanguis::server::entities::with_id_unique_ptr
-	>
-	entity_map;
+	>;
 
 	entity_map entities_;
 
-	typedef
+	using
+	base_container
+	=
 	std::vector<
 		sanguis::server::entities::simple_unique_ptr
-	>
-	base_container;
+	>;
 
 	base_container server_entities_;
 
-	typedef
+	using
+	doodad_container
+	=
 	std::vector<
 		sanguis::server::entities::doodad_unique_ptr
-	>
-	doodad_container;
+	>;
 
 	doodad_container portal_blockers_;
 

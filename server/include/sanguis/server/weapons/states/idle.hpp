@@ -41,7 +41,10 @@ class idle
 		idle
 	);
 public:
-	typedef boost::mpl::list3<
+	using
+	reactions
+	=
+	boost::mpl::list3<
 		boost::statechart::custom_reaction<
 			sanguis::server::weapons::events::shoot
 		>,
@@ -51,7 +54,7 @@ public:
 		boost::statechart::custom_reaction<
 			sanguis::server::weapons::events::poll
 		>
-	> reactions;
+	>;
 
 	explicit
 	idle(

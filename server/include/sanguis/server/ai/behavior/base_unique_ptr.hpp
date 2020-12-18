@@ -14,11 +14,12 @@ namespace ai
 namespace behavior
 {
 
-typedef
+using
+base_unique_ptr
+=
 fcppt::unique_ptr<
 	sanguis::server::ai::behavior::base
->
-base_unique_ptr;
+>;
 
 }
 }

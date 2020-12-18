@@ -16,12 +16,13 @@ namespace server
 namespace global
 {
 
-typedef
+using
+world_connection_map
+=
 std::map<
 	sanguis::server::global::source_world_pair,
 	sanguis::server::global::dest_world_pair
->
-world_connection_map;
+>;
 
 }
 }

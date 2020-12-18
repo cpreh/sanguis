@@ -11,9 +11,10 @@ namespace server
 namespace weapons
 {
 
-typedef
-sanguis::reload_time
-reload_time;
+using
+reload_time
+=
+sanguis::reload_time;
 
 }
 }

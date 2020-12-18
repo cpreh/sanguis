@@ -12,11 +12,12 @@ namespace server
 namespace world
 {
 
-typedef
+using
+place_with_id_callback
+=
 sanguis::server::world::place_callback<
 	sanguis::server::entities::with_id
->
-place_with_id_callback;
+>;
 
 }
 }

@@ -12,11 +12,12 @@ namespace server
 namespace entities
 {
 
-typedef
+using
+doodad_unique_ptr
+=
 fcppt::unique_ptr<
 	sanguis::server::entities::doodad
->
-doodad_unique_ptr;
+>;
 
 }
 }

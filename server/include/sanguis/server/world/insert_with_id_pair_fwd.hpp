@@ -12,11 +12,12 @@ namespace server
 namespace world
 {
 
-typedef
+using
+insert_with_id_pair
+=
 sanguis::server::world::insert_pair<
 	sanguis::server::entities::with_id
->
-insert_with_id_pair;
+>;
 
 }
 }

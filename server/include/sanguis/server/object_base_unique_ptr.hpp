@@ -10,11 +10,12 @@ namespace sanguis
 namespace server
 {
 
-typedef
+using
+object_base_unique_ptr
+=
 fcppt::unique_ptr<
 	sanguis::server::object_base
->
-object_base_unique_ptr;
+>;
 
 }
 }

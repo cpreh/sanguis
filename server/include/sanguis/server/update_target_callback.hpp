@@ -10,13 +10,14 @@ namespace sanguis
 namespace server
 {
 
-typedef
+using
+update_target_callback
+=
 fcppt::function<
 	void (
 		sanguis::server::entities::with_body &
 	)
->
-update_target_callback;
+>;
 
 }
 }

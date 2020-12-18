@@ -15,10 +15,13 @@ namespace server
 namespace world
 {
 
-typedef std::map<
+using
+sight_range_map
+=
+std::map<
 	sanguis::server::player_id,
 	sanguis::server::world::sight_range
-> sight_range_map;
+>;
 
 }
 }

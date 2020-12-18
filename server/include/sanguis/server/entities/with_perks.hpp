@@ -52,12 +52,13 @@ protected:
 	update()
 	override;
 private:
-	typedef
+	using
+	perk_container
+	=
 	std::map<
 		sanguis::perk_type,
 		sanguis::server::perks::unique_ptr
-	>
-	perk_container;
+	>;
 
 	sanguis::random_generator &random_generator_;
 

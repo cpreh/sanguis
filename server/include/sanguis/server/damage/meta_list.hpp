@@ -12,11 +12,12 @@ namespace server
 namespace damage
 {
 
-typedef
+using
+meta_list
+=
 sanguis::server::damage::basic_meta_list<
 	sanguis::server::damage::unit
->
-meta_list;
+>;
 
 }
 }

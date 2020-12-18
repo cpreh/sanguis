@@ -14,11 +14,12 @@ namespace ai
 namespace tree
 {
 
-typedef
+using
+base_unique_ptr
+=
 fcppt::unique_ptr<
 	sanguis::server::ai::tree::base
->
-base_unique_ptr;
+>;
 
 }
 }

@@ -49,11 +49,12 @@ private:
 
 	sanguis::server::machine machine_;
 
-	typedef
+	using
+	scoped_machine
+	=
 	fcppt::scoped_state_machine<
 		sanguis::server::machine
-	>
-	scoped_machine;
+	>;
 
 	scoped_machine scoped_machine_;
 };

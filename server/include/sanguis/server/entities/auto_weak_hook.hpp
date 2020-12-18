@@ -13,11 +13,14 @@ namespace server
 namespace entities
 {
 
-typedef boost::intrusive::list_base_hook<
+using
+auto_weak_hook
+=
+boost::intrusive::list_base_hook<
 	boost::intrusive::link_mode<
 		boost::intrusive::auto_unlink
 	>
-> auto_weak_hook;
+>;
 
 }
 }

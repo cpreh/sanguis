@@ -40,24 +40,27 @@ public:
 		sanguis::server::entities::with_buffs &
 	);
 private:
-	typedef
+	using
+	buff_reference
+	=
 	fcppt::reference<
 		sanguis::server::buffs::buff
-	>
-	buff_reference;
+	>;
 
-	typedef
+	using
+	with_buffs_reference
+	=
 	fcppt::reference<
 		sanguis::server::entities::with_buffs
-	>
-	with_buffs_reference;
+	>;
 
-	typedef
+	using
+	buff_map
+	=
 	std::unordered_map<
 		with_buffs_reference,
 		buff_reference
-	>
-	buff_map;
+	>;
 
 	buff_map buffs_;
 };

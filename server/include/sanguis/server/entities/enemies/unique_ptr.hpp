@@ -14,11 +14,12 @@ namespace entities
 namespace enemies
 {
 
-typedef
+using
+unique_ptr
+=
 fcppt::unique_ptr<
 	sanguis::server::entities::enemies::enemy
->
-unique_ptr;
+>;
 
 }
 }

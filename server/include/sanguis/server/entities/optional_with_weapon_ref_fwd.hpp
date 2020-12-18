@@ -12,11 +12,12 @@ namespace server
 namespace entities
 {
 
-typedef
+using
+optional_with_weapon_ref
+=
 fcppt::optional::reference<
 	sanguis::server::entities::with_weapon
->
-optional_with_weapon_ref;
+>;
 
 }
 }

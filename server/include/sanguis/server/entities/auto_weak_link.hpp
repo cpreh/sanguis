@@ -24,11 +24,12 @@ class auto_weak_link
 	public sanguis::server::entities::auto_weak_hook
 {
 public:
-	typedef
+	using
+	optional_with_links_ref
+	=
 	fcppt::optional::reference<
 		sanguis::server::entities::with_links
-	>
-	optional_with_links_ref;
+	>;
 
 	auto_weak_link();
 

@@ -14,12 +14,15 @@ namespace server
 namespace entities
 {
 
-typedef boost::intrusive::list<
+using
+link_container
+=
+boost::intrusive::list<
 	sanguis::server::entities::auto_weak_link,
 	boost::intrusive::constant_time_size<
 		false
 	>
-> link_container;
+>;
 
 }
 }

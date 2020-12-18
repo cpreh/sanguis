@@ -30,11 +30,12 @@ dispatch(
 	sanguis::server::dispatch_default_function const &_handle_default_msg
 )
 {
-	typedef
+	using
+	function_type
+	=
 	sanguis::server::message_function<
 		State
-	>
-	function_type;
+	>;
 
 	FCPPT_PP_PUSH_WARNING
 	FCPPT_PP_DISABLE_CLANG_WARNING(-Wexit-time-destructors)

@@ -14,11 +14,12 @@ namespace entities
 namespace property
 {
 
-typedef
+using
+change_callback
+=
 fcppt::function<
 	sanguis::server::entities::property::change_function
->
-change_callback;
+>;
 
 }
 }

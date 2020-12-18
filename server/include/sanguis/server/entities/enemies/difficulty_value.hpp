@@ -11,9 +11,10 @@ namespace entities
 namespace enemies
 {
 
-typedef
-float
-difficulty_value;
+using
+difficulty_value
+=
+float;
 
 }
 }

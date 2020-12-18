@@ -30,12 +30,13 @@ public:
 		sanguis::load::model::path const &
 	) const;
 private:
-	typedef
+	using
+	dim_map
+	=
 	std::map<
 		sanguis::load::model::path,
 		sanguis::server::radius
-	>
-	dim_map;
+	>;
 
 	mutable dim_map dims_;
 };

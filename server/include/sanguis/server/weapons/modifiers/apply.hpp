@@ -46,16 +46,18 @@ apply(
 	Parameters &&_parameters
 )
 {
-	typedef
+	using
+	modifier_container
+	=
 	sanguis::server::weapons::modifiers::container<
 		Parameters
-	>
-	modifier_container;
+	>;
 
-	typedef
+	using
+	callback
+	=
 	typename
-	modifier_container::value_type
-	callback;
+	modifier_container::value_type;
 
 	modifier_container const result(
 		sanguis::server::random::draw<

@@ -13,9 +13,10 @@ namespace entities
 namespace property
 {
 
-typedef
-void
-change_function(
+using
+change_function
+=
+void (
 	sanguis::server::entities::property::change_event const &
 );
 

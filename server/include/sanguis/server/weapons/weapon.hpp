@@ -191,11 +191,12 @@ private:
 
 	sanguis::server::weapons::range const range_;
 
-	typedef
+	using
+	optional_magazine_used
+	=
 	fcppt::optional::object<
 		sanguis::magazine_type
-	>
-	optional_magazine_used;
+	>;
 
 	optional_magazine_used magazine_used_;
 

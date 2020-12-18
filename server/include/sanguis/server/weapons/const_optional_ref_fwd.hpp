@@ -12,11 +12,12 @@ namespace server
 namespace weapons
 {
 
-typedef
+using
+const_optional_ref
+=
 fcppt::optional::reference<
 	sanguis::server::weapons::weapon const
->
-const_optional_ref;
+>;
 
 }
 }

@@ -11,9 +11,10 @@ namespace server
 namespace damage
 {
 
-typedef
-sanguis::server::space_unit
-unit_value;
+using
+unit_value
+=
+sanguis::server::space_unit;
 
 }
 }

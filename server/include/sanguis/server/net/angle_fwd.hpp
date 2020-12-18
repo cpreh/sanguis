@@ -13,12 +13,13 @@ namespace server
 namespace net
 {
 
-typedef
+using
+angle
+=
 sanguis::server::net::value<
 	sanguis::server::angle,
 	sanguis::server::net::angle_policy
->
-angle;
+>;
 
 }
 }

@@ -12,11 +12,12 @@ namespace server
 namespace entities
 {
 
-typedef
+using
+optional_transfer_result
+=
 fcppt::optional::object<
 	sanguis::server::entities::transfer_result
->
-optional_transfer_result;
+>;
 
 }
 }

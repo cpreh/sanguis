@@ -37,22 +37,24 @@ FCPPT_PP_PUSH_WARNING
 #if defined(FCPPT_CONFIG_GNU_GCC_COMPILER)
 FCPPT_PP_DISABLE_GCC_WARNING(-Wmaybe-uninitialized)
 #endif
-	typedef
+	using
+	result_type
+	=
 	fcppt::optional::reference<
 		typename
 		Container::value_type::type
-	>
-	result_type;
+	>;
 
-	result_type ret;
+	result_type ret{};
 
-	typedef
+	using
+	optional_space_unit
+	=
 	fcppt::optional::object<
 		sanguis::server::space_unit
-	>
-	optional_space_unit;
+	>;
 
-	optional_space_unit distance;
+	optional_space_unit distance{};
 
 	for(
 		auto const &entity

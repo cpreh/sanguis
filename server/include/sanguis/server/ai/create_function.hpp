@@ -13,13 +13,14 @@ namespace server
 namespace ai
 {
 
-typedef
+using
+create_function
+=
 fcppt::function<
 	sanguis::server::ai::tree::base_unique_ptr (
 		sanguis::server::ai::context &
 	)
->
-create_function;
+>;
 
 }
 }

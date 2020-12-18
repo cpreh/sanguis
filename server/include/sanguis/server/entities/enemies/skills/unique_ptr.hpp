@@ -16,11 +16,12 @@ namespace enemies
 namespace skills
 {
 
-typedef
+using
+unique_ptr
+=
 fcppt::unique_ptr<
 	sanguis::server::entities::enemies::skills::skill
->
-unique_ptr;
+>;
 
 }
 }

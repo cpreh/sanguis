@@ -16,11 +16,12 @@ namespace perks
 namespace tree
 {
 
-typedef
+using
+container
+=
 std::vector<
 	sanguis::server::perks::tree::object
->
-container;
+>;
 
 }
 }

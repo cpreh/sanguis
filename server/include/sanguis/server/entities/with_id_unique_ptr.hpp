@@ -12,11 +12,12 @@ namespace server
 namespace entities
 {
 
-typedef
+using
+with_id_unique_ptr
+=
 fcppt::unique_ptr<
 	sanguis::server::entities::with_id
->
-with_id_unique_ptr;
+>;
 
 }
 }

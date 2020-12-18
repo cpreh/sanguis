@@ -16,11 +16,12 @@ namespace ai
 namespace pathing
 {
 
-typedef
+using
+trail
+=
 std::vector<
 	sanguis::creator::pos
->
-trail;
+>;
 
 }
 }

@@ -50,7 +50,9 @@ class running
 		running
 	);
 public:
-	typedef
+	using
+	reactions
+	=
 	boost::mpl::list2<
 		boost::statechart::custom_reaction<
 			sanguis::server::events::message
@@ -58,8 +60,7 @@ public:
 		boost::statechart::custom_reaction<
 			sanguis::server::events::disconnect
 		>
-	>
-	reactions;
+	>;
 
 	explicit
 	running(

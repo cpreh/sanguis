@@ -26,11 +26,12 @@ basic_make_array(
 	> const &_inits
 )
 {
-	typedef
+	using
+	result_type
+	=
 	sanguis::server::damage::basic_array<
 		Unit
-	>
-	result_type;
+	>;
 
 	// TODO: Improve this
 	result_type result{

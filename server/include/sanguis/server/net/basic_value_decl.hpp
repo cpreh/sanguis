@@ -50,19 +50,21 @@ private:
 	void
 	restart_timer();
 
-	typedef
+	using
+	timer
+	=
 	sge::timer::basic<
 		Clock
-	>
-	timer;
+	>;
 
 	timer timer_;
 
-	typedef
+	using
+	optional_type
+	=
 	fcppt::optional::object<
 		Type
-	>
-	optional_type;
+	>;
 
 	optional_type old_;
 };

@@ -11,7 +11,10 @@ namespace entities
 namespace spawns
 {
 
-typedef unsigned size_type;
+using
+size_type
+=
+unsigned;
 
 }
 }

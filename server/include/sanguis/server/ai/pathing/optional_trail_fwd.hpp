@@ -14,11 +14,12 @@ namespace ai
 namespace pathing
 {
 
-typedef
+using
+optional_trail
+=
 fcppt::optional::object<
 	sanguis::server::ai::pathing::trail
->
-optional_trail;
+>;
 
 }
 }

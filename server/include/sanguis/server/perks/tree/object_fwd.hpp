@@ -14,11 +14,12 @@ namespace perks
 namespace tree
 {
 
-typedef
+using
+object
+=
 fcppt::container::tree::object<
 	sanguis::server::perks::tree::status
->
-object;
+>;
 
 }
 }

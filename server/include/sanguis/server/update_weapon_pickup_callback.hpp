@@ -10,13 +10,14 @@ namespace sanguis
 namespace server
 {
 
-typedef
+using
+update_weapon_pickup_callback
+=
 fcppt::function<
 	void (
 		sanguis::server::entities::pickups::weapon &
 	)
->
-update_weapon_pickup_callback;
+>;
 
 }
 }

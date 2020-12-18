@@ -13,13 +13,14 @@ namespace server
 namespace buffs
 {
 
-typedef
+using
+create_callback
+=
 fcppt::function<
 	sanguis::server::buffs::optional_unique_ptr (
 		sanguis::server::entities::base &
 	)
->
-create_callback;
+>;
 
 }
 }

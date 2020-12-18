@@ -14,11 +14,12 @@ namespace entities
 namespace pickups
 {
 
-typedef
+using
+weapon_ref
+=
 fcppt::reference<
 	sanguis::server::entities::pickups::weapon
->
-weapon_ref;
+>;
 
 }
 }

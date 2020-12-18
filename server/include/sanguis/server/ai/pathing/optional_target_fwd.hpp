@@ -14,11 +14,12 @@ namespace ai
 namespace pathing
 {
 
-typedef
+using
+optional_target
+=
 fcppt::optional::object<
 	sanguis::server::ai::pathing::target
->
-optional_target;
+>;
 
 }
 }

@@ -13,12 +13,13 @@ namespace sanguis
 namespace server
 {
 
-typedef
+using
+mass_unit
+=
 boost::units::quantity<
 	boost::units::si::mass,
 	sanguis::server::space_unit
->
-mass_unit;
+>;
 
 }
 }

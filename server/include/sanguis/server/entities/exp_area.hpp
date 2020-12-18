@@ -75,13 +75,15 @@ private:
 
 	sanguis::server::exp const exp_;
 
-	typedef
+	using
+	weak_link_map
+	=
 	std::unordered_map<
 		fcppt::reference<
 			sanguis::server::entities::player
 		>,
 		sanguis::server::entities::auto_weak_link
-	> weak_link_map;
+	>;
 
 	weak_link_map player_links_;
 };

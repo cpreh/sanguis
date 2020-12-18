@@ -204,11 +204,12 @@ private:
 	collision_group() const
 	override;
 
-	typedef
+	using
+	weapon_pickup_set
+	=
 	std::set<
 		sanguis::server::entities::pickups::weapon_ref
-	>
-	weapon_pickup_set;
+	>;
 
 	sanguis::player_name const name_;
 

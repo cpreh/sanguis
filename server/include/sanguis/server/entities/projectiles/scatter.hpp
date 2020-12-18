@@ -59,19 +59,21 @@ private:
 
 	sanguis::diff_timer shoot_timer_;
 
-	typedef
+	using
+	angle_distribution
+	=
 	fcppt::random::distribution::basic<
 		fcppt::random::distribution::parameters::uniform_real<
 			sanguis::server::angle
 		>
-	>
-	angle_distribution;
+	>;
 
-	typedef
+	using
+	angle_rng
+	=
 	sanguis::random_variate<
 		angle_distribution
-	>
-	angle_rng;
+	>;
 
 	angle_rng angle_rng_;
 };

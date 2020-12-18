@@ -12,11 +12,12 @@ namespace server
 namespace weapons
 {
 
-typedef
+using
+optional_target
+=
 fcppt::optional::object<
 	sanguis::server::weapons::target
->
-optional_target;
+>;
 
 }
 }

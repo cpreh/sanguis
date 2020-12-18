@@ -11,7 +11,10 @@ namespace server
 namespace weapons
 {
 
-typedef sanguis::server::damage::unit damage;
+using
+damage
+=
+sanguis::server::damage::unit;
 
 }
 }

@@ -14,11 +14,12 @@ namespace weapons
 namespace attributes
 {
 
-typedef
+using
+accuracy
+=
 sanguis::server::weapons::attributes::basic<
 	sanguis::server::weapons::accuracy
->
-accuracy;
+>;
 
 }
 }

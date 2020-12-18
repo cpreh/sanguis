@@ -12,11 +12,12 @@ namespace server
 namespace damage
 {
 
-typedef
+using
+array
+=
 sanguis::server::damage::basic_array<
 	sanguis::server::damage::unit
->
-array;
+>;
 
 }
 }

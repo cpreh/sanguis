@@ -64,14 +64,15 @@ private:
 		sanguis::server::center
 	);
 
-	typedef
+	using
+	spawn_function
+	=
 	fcppt::function<
 		void (
 			sanguis::server::center,
 			sanguis::server::entities::enemies::difficulty
 		)
-	>
-	spawn_function;
+	>;
 
 	sanguis::server::world::pickup_spawner::spawn_function
 	make_spawn_weapon(
@@ -84,20 +85,22 @@ private:
 
 	sanguis::server::environment::object &env_;
 
-	typedef
+	using
+	real_distribution
+	=
 	fcppt::random::distribution::basic<
 		fcppt::random::distribution::parameters::uniform_real<
 			sanguis::server::pickup_probability::value_type
 		>
-	>
-	real_distribution;
+	>;
 
-	typedef
+	using
+	distributor
+	=
 	sanguis::server::random::distributor<
 		sanguis::server::pickup_probability,
 		spawn_function
-	>
-	distributor;
+	>;
 
 	distributor distributor_;
 

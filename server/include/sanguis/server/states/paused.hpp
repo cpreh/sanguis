@@ -43,13 +43,14 @@ class paused
 		paused
 	);
 public:
-	typedef
+	using
+	reactions
+	=
 	boost::mpl::list1<
 		boost::statechart::custom_reaction<
 			sanguis::server::events::message
 		>
-	>
-	reactions;
+	>;
 
 	explicit
 	paused(

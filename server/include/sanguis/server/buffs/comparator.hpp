@@ -32,9 +32,10 @@ struct comparator
 		sanguis::server::buffs::unique_ptr const &
 	) const;
 
-	typedef
-	void
-	is_transparent;
+	using
+	is_transparent
+	=
+	void;
 };
 
 }

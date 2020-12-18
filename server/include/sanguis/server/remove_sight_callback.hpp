@@ -10,13 +10,14 @@ namespace sanguis
 namespace server
 {
 
-typedef
+using
+remove_sight_callback
+=
 fcppt::function<
 	void (
 		sanguis::server::entities::with_id const &
 	)
->
-remove_sight_callback;
+>;
 
 }
 }

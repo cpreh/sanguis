@@ -7,9 +7,10 @@ namespace sanguis
 namespace server
 {
 
-typedef
-void
-timer_function();
+using
+timer_function
+=
+void ();
 
 }
 }

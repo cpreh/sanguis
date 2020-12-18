@@ -134,18 +134,20 @@ private:
 
 	sanguis::net::data_buffer temp_buffer_;
 
-	typedef
+	using
+	overflow_message_queue
+	=
 	std::queue<
 		sanguis::messages::server::unique_ptr
-	>
-	overflow_message_queue;
+	>;
 
-	typedef
+	using
+	overflow_message_map
+	=
 	std::unordered_map<
 		alda::net::id,
 		overflow_message_queue
-	>
-	overflow_message_map;
+	>;
 
 	overflow_message_map overflow_messages_;
 

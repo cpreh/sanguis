@@ -30,11 +30,12 @@ public:
 		Wrapped
 	);
 
-	typedef
+	using
+	optional_extra
+	=
 	fcppt::optional::object<
 		Wrapped
-	>
-	optional_extra;
+	>;
 
 	Wrapped
 	base() const;

@@ -14,9 +14,12 @@ namespace entities
 namespace property
 {
 
-typedef fcppt::signal::object<
+using
+change_signal
+=
+fcppt::signal::object<
 	sanguis::server::entities::property::change_function
-> change_signal;
+>;
 
 }
 }

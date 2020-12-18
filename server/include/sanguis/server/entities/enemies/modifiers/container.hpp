@@ -18,11 +18,12 @@ namespace enemies
 namespace modifiers
 {
 
-typedef
+using
+container
+=
 std::vector<
 	sanguis::server::entities::enemies::modifiers::callback
->
-container;
+>;
 
 }
 }

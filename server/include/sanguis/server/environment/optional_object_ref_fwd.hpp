@@ -12,11 +12,12 @@ namespace server
 namespace environment
 {
 
-typedef
+using
+optional_object_ref
+=
 fcppt::optional::reference<
 	sanguis::server::environment::object
->
-optional_object_ref;
+>;
 
 }
 }

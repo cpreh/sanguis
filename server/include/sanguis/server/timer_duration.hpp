@@ -11,9 +11,10 @@ namespace sanguis
 namespace server
 {
 
-typedef
-std::chrono::milliseconds
-timer_duration;
+using
+timer_duration
+=
+std::chrono::milliseconds;
 
 }
 }

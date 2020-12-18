@@ -13,12 +13,13 @@ namespace server
 namespace args
 {
 
-typedef
+using
+result
+=
 fcppt::record::object<
 	sanguis::server::args::elements::port,
 	sanguis::server::args::elements::log_level
->
-result;
+>;
 
 }
 }

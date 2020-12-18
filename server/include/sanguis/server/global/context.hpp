@@ -193,28 +193,31 @@ private:
 
 	sanguis::server::unicast_callback const send_unicast_;
 
-	typedef
+	using
+	load_context_unique_ptr
+	=
 	fcppt::unique_ptr<
 		sanguis::server::environment::load_context
-	>
-	load_context_unique_ptr;
+	>;
 
 	load_context_unique_ptr const load_context_;
 
 	sanguis::server::console &console_;
 
-	typedef
+	using
+	player_ref
+	=
 	fcppt::reference<
 		sanguis::server::entities::player
-	>
-	player_ref;
+	>;
 
-	typedef
+	using
+	player_map
+	=
 	std::unordered_map<
 		sanguis::server::player_id,
 		player_ref
-	>
-	player_map;
+	>;
 
 	player_map players_;
 

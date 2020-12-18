@@ -12,11 +12,12 @@ namespace server
 namespace world
 {
 
-typedef
+using
+place_simple_callback
+=
 sanguis::server::world::place_callback<
 	sanguis::server::entities::simple
->
-place_simple_callback;
+>;
 
 }
 }

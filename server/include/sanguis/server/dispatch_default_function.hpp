@@ -14,14 +14,15 @@ namespace sanguis
 namespace server
 {
 
-typedef
+using
+dispatch_default_function
+=
 fcppt::function<
 	boost::statechart::result (
 		sanguis::server::player_id,
 		sanguis::messages::client::base const &
 	)
->
-dispatch_default_function;
+>;
 
 }
 }

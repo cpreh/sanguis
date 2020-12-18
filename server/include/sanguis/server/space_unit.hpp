@@ -7,7 +7,10 @@ namespace sanguis
 namespace server
 {
 
-typedef float space_unit;
+using
+space_unit
+=
+float;
 
 }
 }

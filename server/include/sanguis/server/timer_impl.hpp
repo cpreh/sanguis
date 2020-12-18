@@ -40,11 +40,12 @@ private:
 
 	sanguis::server::timer_duration const duration_;
 
-	typedef
+	using
+	timer
+	=
 	boost::asio::basic_waitable_timer<
 		std::chrono::steady_clock
-	>
-	timer;
+	>;
 
 	timer deadline_timer_;
 };

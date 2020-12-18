@@ -14,13 +14,14 @@ namespace server
 namespace net
 {
 
-typedef
+using
+slowdown
+=
 sanguis::server::net::basic_value<
 	sanguis::slowdown,
 	sanguis::server::net::slowdown_policy,
 	sanguis::clock
->
-slowdown;
+>;
 
 }
 }

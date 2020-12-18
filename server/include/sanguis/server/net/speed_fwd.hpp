@@ -13,12 +13,13 @@ namespace server
 namespace net
 {
 
-typedef
+using
+speed
+=
 sanguis::server::net::value<
 	sanguis::server::speed,
 	sanguis::server::net::speed_policy
->
-speed;
+>;
 
 }
 }

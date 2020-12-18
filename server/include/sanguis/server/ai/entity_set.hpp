@@ -16,11 +16,12 @@ namespace server
 namespace ai
 {
 
-typedef
+using
+entity_set
+=
 std::unordered_set<
 	sanguis::server::entities::with_body_ref
->
-entity_set;
+>;
 
 }
 }

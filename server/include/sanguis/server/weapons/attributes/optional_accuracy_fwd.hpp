@@ -14,11 +14,12 @@ namespace weapons
 namespace attributes
 {
 
-typedef
+using
+optional_accuracy
+=
 fcppt::optional::object<
 	sanguis::server::weapons::attributes::accuracy
->
-optional_accuracy;
+>;
 
 }
 }

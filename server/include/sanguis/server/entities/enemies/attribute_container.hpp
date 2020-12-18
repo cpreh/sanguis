@@ -16,11 +16,12 @@ namespace entities
 namespace enemies
 {
 
-typedef
+using
+attribute_container
+=
 std::vector<
 	sanguis::server::entities::enemies::attribute
->
-attribute_container;
+>;
 
 }
 }

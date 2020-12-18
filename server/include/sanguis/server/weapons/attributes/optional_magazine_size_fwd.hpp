@@ -14,11 +14,12 @@ namespace weapons
 namespace attributes
 {
 
-typedef
+using
+optional_magazine_size
+=
 fcppt::optional::object<
 	sanguis::server::weapons::attributes::magazine_size
->
-optional_magazine_size;
+>;
 
 }
 }

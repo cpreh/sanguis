@@ -15,12 +15,13 @@ namespace server
 namespace global
 {
 
-typedef
+using
+dest_world_pair
+=
 std::pair<
 	sanguis::server::dest_world_id,
 	sanguis::creator::opening
->
-dest_world_pair;
+>;
 
 }
 }

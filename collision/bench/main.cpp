@@ -30,7 +30,7 @@
 #include <fcppt/make_int_range_count.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/reference_to_base.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/algorithm/repeat.hpp>
@@ -55,7 +55,7 @@ main()
 		fcppt::math::dim::fill<
 			sanguis::creator::dim
 		>(
-			100u
+			100U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		),
 		sanguis::creator::tile::nothing
 	);
@@ -70,35 +70,36 @@ main()
 		)
 	};
 
-	typedef
+	using
+	body_container
+	=
 	std::vector<
 		sanguis::collision::world::body_unique_ptr
-	>
-	body_container;
+	>;
 
-	typedef
+	using
+	ghost_container
+	=
 	std::vector<
 		sanguis::collision::world::ghost_unique_ptr
-	>
-	ghost_container;
+	>;
 
 	class body_base
 	:
 		public sanguis::collision::world::body_base
 	{
-		FCPPT_NONCOPYABLE(
+		FCPPT_NONMOVABLE(
 			body_base
 		);
 	public:
 		body_base()
-		{
-		}
+		= default;
 
 		~body_base()
 		override
-		{
-		}
+		= default;
 	private:
+		[[nodiscard]]
 		boost::logic::tribool
 		can_collide_with(
 			sanguis::collision::world::body_base const &
@@ -192,7 +193,7 @@ main()
 											fcppt::literal<
 												sanguis::collision::unit
 											>(
-												10
+												10 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 											)
 											*
 											boost::units::si::meter
@@ -213,7 +214,7 @@ main()
 										fcppt::literal<
 											sanguis::collision::unit
 										>(
-											50
+											50 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 										)
 										*
 										boost::units::si::meter
@@ -246,6 +247,7 @@ main()
 				:
 				_bodies
 			)
+			{
 				fcppt::cast::to_void(
 					world->activate_body(
 						fcppt::make_ref(
@@ -256,6 +258,7 @@ main()
 						}
 					)
 				);
+			}
 		}
 	);
 
@@ -277,23 +280,21 @@ main()
 	:
 		public sanguis::collision::world::ghost_base
 	{
-		FCPPT_NONCOPYABLE(
+		FCPPT_NONMOVABLE(
 			ghost_base
 		);
 	public:
 		ghost_base()
-		{
-		}
+		= default;
 
 		~ghost_base()
 		override
-		{
-		}
+		= default;
 	};
 
-	ghost_base fake_ghost_base;
+	ghost_base fake_ghost_base{};
 
-	ghost_container const ghosts(
+	auto const ghosts(
 		fcppt::algorithm::map<
 			ghost_container
 		>(
@@ -317,7 +318,7 @@ main()
 									fcppt::literal<
 										sanguis::collision::unit
 									>(
-										10
+										10 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 									)
 									*
 									boost::units::si::meter
@@ -327,7 +328,7 @@ main()
 								fcppt::literal<
 									sanguis::collision::unit
 								>(
-									2000
+									2000 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 								)
 								*
 								boost::units::si::meter
@@ -359,6 +360,7 @@ main()
 		:
 		ghosts
 	)
+	{
 		fcppt::cast::to_void(
 			world->activate_ghost(
 				fcppt::make_ref(
@@ -366,9 +368,10 @@ main()
 				)
 			)
 		);
+	}
 
 	fcppt::algorithm::repeat(
-		100,
+		100, // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		[
 			&world
 		]
@@ -376,7 +379,7 @@ main()
 			sanguis::collision::world::update_result const result(
 				world->update(
 					sanguis::collision::duration(
-						0.06f
+						0.06F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-number // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)s)
 					)
 				)
 			);

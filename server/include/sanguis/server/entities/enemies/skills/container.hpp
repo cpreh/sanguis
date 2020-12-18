@@ -18,11 +18,12 @@ namespace enemies
 namespace skills
 {
 
-typedef
+using
+container
+=
 std::vector<
 	sanguis::server::entities::enemies::skills::unique_ptr
->
-container;
+>;
 
 }
 }

@@ -14,11 +14,12 @@ namespace server
 namespace collision
 {
 
-typedef
+using
+ghost_container
+=
 std::vector<
 	sanguis::server::collision::ghost
->
-ghost_container;
+>;
 
 }
 }

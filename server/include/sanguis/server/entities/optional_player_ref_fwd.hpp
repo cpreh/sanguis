@@ -12,11 +12,12 @@ namespace server
 namespace entities
 {
 
-typedef
+using
+optional_player_ref
+=
 fcppt::optional::reference<
 	sanguis::server::entities::player
->
-optional_player_ref;
+>;
 
 }
 }

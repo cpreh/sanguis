@@ -89,17 +89,19 @@ private:
 		sanguis::server::entities::spawns::size_type
 	) = 0;
 
-	typedef
+	using
+	optional_center
+	=
 	fcppt::optional::object<
 		sanguis::server::center
-	>
-	optional_center;
+	>;
 
-	typedef
+	using
+	optional_angle
+	=
 	fcppt::optional::object<
 		sanguis::server::angle
-	>
-	optional_angle;
+	>;
 
 	sanguis::random_generator &random_generator_;
 

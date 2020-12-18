@@ -79,11 +79,12 @@ private:
 
 	sanguis::collision::world::body_base &body_base_;
 
-	typedef
+	using
+	optional_body_unique_ptr
+	=
 	fcppt::optional::object<
 		sanguis::collision::world::body_unique_ptr
-	>
-	optional_body_unique_ptr;
+	>;
 
 	optional_body_unique_ptr body_;
 };

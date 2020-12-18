@@ -41,28 +41,32 @@ split(
 	> const &_sizes
 )
 {
-	typedef
+	using
+	result_type
+	=
 	sanguis::server::random::split_array<
 		Size
-	>
-	result_type;
+	>;
 
-	typedef
+	using
+	value_type
+	=
 	typename
-	result_type::value_type
-	value_type;
+	result_type::value_type;
 
-	typedef
+	using
+	size_type
+	=
 	typename
-	result_type::size_type
-	size_type;
+	result_type::size_type;
 
-	typedef
+	using
+	distributor_type
+	=
 	sanguis::server::random::distributor<
 		value_type,
 		size_type
-	>
-	distributor_type;
+	>;
 
 	distributor_type dist(
 		sanguis::server::random::map_with_index(
@@ -80,11 +84,12 @@ split(
 		)
 	);
 
-	typedef
+	using
+	size_parameters
+	=
 	fcppt::random::distribution::parameters::uniform_int<
 		sanguis::server::random::amount
-	>
-	size_parameters;
+	>;
 
 	sanguis::server::random::amount const draws(
 		fcppt::random::distribution::make_basic(

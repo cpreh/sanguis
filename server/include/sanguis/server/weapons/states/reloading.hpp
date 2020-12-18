@@ -42,7 +42,10 @@ class reloading
 		reloading
 	);
 public:
-	typedef boost::mpl::list3<
+	using
+	reactions
+	=
+	boost::mpl::list3<
 		boost::statechart::custom_reaction<
 			sanguis::server::weapons::events::poll
 		>,
@@ -52,7 +55,7 @@ public:
 		boost::statechart::custom_reaction<
 			sanguis::server::weapons::events::stop
 		>
-	> reactions;
+	>;
 
 	explicit
 	reloading(

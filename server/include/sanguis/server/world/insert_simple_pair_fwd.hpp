@@ -12,11 +12,12 @@ namespace server
 namespace world
 {
 
-typedef
+using
+insert_simple_pair
+=
 sanguis::server::world::insert_pair<
 	sanguis::server::entities::simple
->
-insert_simple_pair;
+>;
 
 }
 }

@@ -23,11 +23,12 @@ class insert_pair
 		insert_pair
 	);
 public:
-	typedef
+	using
+	unique_ptr
+	=
 	fcppt::unique_ptr<
 		Type
-	>
-	unique_ptr;
+	>;
 
 	insert_pair(
 		unique_ptr &&,

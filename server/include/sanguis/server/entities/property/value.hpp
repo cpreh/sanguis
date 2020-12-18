@@ -11,7 +11,10 @@ namespace entities
 namespace property
 {
 
-typedef float value;
+using
+value
+=
+float;
 
 }
 }

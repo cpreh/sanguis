@@ -10,10 +10,13 @@ namespace sanguis
 namespace server
 {
 
-typedef fcppt::math::vector::static_<
+using
+vector
+=
+fcppt::math::vector::static_<
 	sanguis::server::space_unit,
 	2
-> vector;
+>;
 
 }
 }

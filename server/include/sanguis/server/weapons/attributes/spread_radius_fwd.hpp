@@ -14,11 +14,12 @@ namespace weapons
 namespace attributes
 {
 
-typedef
+using
+spread_radius
+=
 sanguis::server::weapons::attributes::basic<
 	sanguis::server::weapons::spread_radius
->
-spread_radius;
+>;
 
 }
 }

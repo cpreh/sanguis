@@ -13,12 +13,13 @@ namespace server
 namespace net
 {
 
-typedef
+using
+health
+=
 sanguis::server::net::value<
 	sanguis::server::health,
 	sanguis::server::net::health_policy
->
-health;
+>;
 
 }
 }

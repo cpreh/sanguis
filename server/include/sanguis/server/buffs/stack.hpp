@@ -56,12 +56,13 @@ public:
 	sanguis::server::buffs::buff const &
 	highest_buff() const;
 private:
-	typedef
+	using
+	set
+	=
 	std::multiset<
 		sanguis::server::buffs::unique_ptr,
 		sanguis::server::buffs::comparator
-	>
-	set;
+	>;
 
 	set impl_;
 };

@@ -12,11 +12,12 @@ namespace server
 namespace weapons
 {
 
-typedef
+using
+create_function
+=
 fcppt::function<
 	sanguis::server::weapons::unique_ptr ()
->
-create_function;
+>;
 
 }
 }

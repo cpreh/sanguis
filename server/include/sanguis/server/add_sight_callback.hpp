@@ -11,14 +11,15 @@ namespace sanguis
 namespace server
 {
 
-typedef
+using
+add_sight_callback
+=
 fcppt::function<
 	void (
 		sanguis::server::entities::with_id const &,
 		sanguis::collision::world::created
 	)
->
-add_sight_callback;
+>;
 
 }
 }

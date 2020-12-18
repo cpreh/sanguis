@@ -61,11 +61,12 @@ public:
 		sanguis::server::center
 	);
 private:
-	typedef
+	using
+	ghost_base_ref
+	=
 	fcppt::reference<
 		sanguis::collision::world::ghost_base
-	>
-	ghost_base_ref;
+	>;
 
 	ghost_base_ref ghost_base_;
 
@@ -73,11 +74,12 @@ private:
 
 	sanguis::server::radius radius_;
 
-	typedef
+	using
+	optional_ghost_unique_ptr
+	=
 	fcppt::optional::object<
 		sanguis::collision::world::ghost_unique_ptr
-	>
-	optional_ghost_unique_ptr;
+	>;
 
 	optional_ghost_unique_ptr impl_;
 };

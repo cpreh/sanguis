@@ -155,11 +155,12 @@ public:
 	sanguis::weapon_status
 	weapon_status() const;
 private:
-	typedef
+	using
+	optional_weapon_ref
+	=
 	fcppt::optional::reference<
 		sanguis::server::weapons::weapon
-	>
-	optional_weapon_ref;
+	>;
 
 	sanguis::server::entities::with_weapon::optional_weapon_ref
 	primary_weapon_ref() const;
@@ -237,11 +238,12 @@ private:
 		attack_speed_,
 		reload_speed_;
 
-	typedef
+	using
+	extra_damage_array
+	=
 	sanguis::server::damage::basic_array<
 		sanguis::server::entities::property::always_max
-	>
-	extra_damage_array;
+	>;
 
 	extra_damage_array extra_damages_;
 };

@@ -17,9 +17,9 @@ namespace perks
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
-	std::make_signed<
+	std::make_signed_t<
 		sanguis::server::level::value_type
-	>::type,
+	>,
 	level_diff
 );
 

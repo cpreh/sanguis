@@ -15,10 +15,13 @@ namespace server
 namespace world
 {
 
-typedef std::unordered_map<
+using
+map
+=
+std::unordered_map<
 	sanguis::world_id,
 	sanguis::server::world::object_unique_ptr
-> map;
+>;
 
 }
 }

@@ -41,14 +41,17 @@ class castpoint
 		castpoint
 	);
 public:
-	typedef boost::mpl::list2<
+	using
+	reactions
+	=
+	boost::mpl::list2<
 		boost::statechart::custom_reaction<
 			sanguis::server::weapons::events::poll
 		>,
 		boost::statechart::custom_reaction<
 			sanguis::server::weapons::events::stop
 		>
-	> reactions;
+	>;
 
 	explicit
 	castpoint(

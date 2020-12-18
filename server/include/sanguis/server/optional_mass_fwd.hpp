@@ -10,11 +10,12 @@ namespace sanguis
 namespace server
 {
 
-typedef
+using
+optional_mass
+=
 fcppt::optional::object<
 	sanguis::server::mass
->
-optional_mass;
+>;
 
 }
 }

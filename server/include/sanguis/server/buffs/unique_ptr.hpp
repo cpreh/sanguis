@@ -12,11 +12,12 @@ namespace server
 namespace buffs
 {
 
-typedef
+using
+unique_ptr
+=
 fcppt::unique_ptr<
 	sanguis::server::buffs::buff
->
-unique_ptr;
+>;
 
 }
 }

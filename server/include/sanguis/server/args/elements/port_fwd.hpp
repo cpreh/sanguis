@@ -15,12 +15,13 @@ namespace args
 namespace elements
 {
 
-typedef
+using
+port
+=
 fcppt::record::element<
 	sanguis::server::args::labels::port,
 	alda::net::port
->
-port;
+>;
 
 }
 }

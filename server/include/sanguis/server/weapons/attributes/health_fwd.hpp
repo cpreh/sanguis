@@ -14,11 +14,12 @@ namespace weapons
 namespace attributes
 {
 
-typedef
+using
+health
+=
 sanguis::server::weapons::attributes::basic<
 	sanguis::server::health
->
-health;
+>;
 
 }
 }

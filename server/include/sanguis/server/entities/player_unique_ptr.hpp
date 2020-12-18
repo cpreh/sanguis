@@ -12,15 +12,15 @@ namespace server
 namespace entities
 {
 
-typedef
+using
+player_unique_ptr
+=
 fcppt::unique_ptr<
 	sanguis::server::entities::player
->
-player_unique_ptr;
+>;
 
 }
 }
 }
 
 #endif
-

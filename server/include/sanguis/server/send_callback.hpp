@@ -10,13 +10,14 @@ namespace sanguis
 namespace server
 {
 
-typedef
+using
+send_callback
+=
 fcppt::function<
 	void(
 		sanguis::messages::server::base const &
 	)
->
-send_callback;
+>;
 
 }
 }

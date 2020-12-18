@@ -14,11 +14,12 @@ namespace weapons
 namespace attributes
 {
 
-typedef
+using
+magazine_size
+=
 sanguis::server::weapons::attributes::basic<
 	sanguis::server::weapons::magazine_size
->
-magazine_size;
+>;
 
 }
 }

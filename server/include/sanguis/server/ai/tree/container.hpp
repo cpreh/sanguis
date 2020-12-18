@@ -16,11 +16,12 @@ namespace ai
 namespace tree
 {
 
-typedef
+using
+container
+=
 std::vector<
 	sanguis::server::ai::tree::base_unique_ptr
->
-container;
+>;
 
 }
 }

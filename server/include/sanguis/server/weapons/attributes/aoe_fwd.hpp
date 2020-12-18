@@ -14,11 +14,12 @@ namespace weapons
 namespace attributes
 {
 
-typedef
+using
+aoe
+=
 sanguis::server::weapons::attributes::basic<
 	sanguis::server::weapons::aoe
->
-aoe;
+>;
 
 }
 }

@@ -17,15 +17,16 @@ namespace entities
 namespace projectiles
 {
 
-typedef
+using
+scatter_create
+=
 fcppt::function<
 	sanguis::server::entities::with_id_unique_ptr(
 		sanguis::server::environment::object &,
 		sanguis::server::team,
 		sanguis::server::angle
 	)
->
-scatter_create;
+>;
 
 }
 }

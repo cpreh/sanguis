@@ -73,11 +73,12 @@ private:
 
 	sanguis::server::ai::context ai_context_;
 
-	typedef
+	using
+	optional_ai_unique_ptr
+	=
 	fcppt::optional::object<
 		sanguis::server::ai::tree::base_unique_ptr
-	>
-	optional_ai_unique_ptr;
+	>;
 
 	optional_ai_unique_ptr ai_;
 };

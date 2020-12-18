@@ -10,11 +10,12 @@ namespace sanguis
 namespace server
 {
 
-typedef
+using
+timer_callback
+=
 fcppt::function<
 	sanguis::server::timer_function
->
-timer_callback;
+>;
 
 }
 }

@@ -12,11 +12,12 @@ namespace server
 namespace auras
 {
 
-typedef
+using
+unique_ptr
+=
 fcppt::unique_ptr<
 	sanguis::server::auras::aura
->
-unique_ptr;
+>;
 
 }
 }

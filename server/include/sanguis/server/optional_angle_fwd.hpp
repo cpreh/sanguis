@@ -10,11 +10,12 @@ namespace sanguis
 namespace server
 {
 
-typedef
+using
+optional_angle
+=
 fcppt::optional::object<
 	sanguis::server::angle
->
-optional_angle;
+>;
 
 }
 }

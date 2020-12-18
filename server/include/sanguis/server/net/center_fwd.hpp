@@ -13,12 +13,13 @@ namespace server
 namespace net
 {
 
-typedef
+using
+center
+=
 sanguis::server::net::value<
 	sanguis::server::center,
 	sanguis::server::net::center_policy
->
-center;
+>;
 
 }
 }

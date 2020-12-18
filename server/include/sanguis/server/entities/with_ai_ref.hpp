@@ -12,11 +12,12 @@ namespace server
 namespace entities
 {
 
-typedef
+using
+with_ai_ref
+=
 fcppt::reference<
 	sanguis::server::entities::with_ai
->
-with_ai_ref;
+>;
 
 }
 }

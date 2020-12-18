@@ -33,17 +33,19 @@ find_node(
 	sanguis::perk_type const _perk_type
 )
 {
-	typedef
+	using
+	tree_type
+	=
 	sanguis::server::perks::tree::type_from_container<
 		Container
-	>
-	tree_type;
+	>;
 
-	typedef
+	using
+	result_type
+	=
 	fcppt::optional::reference<
 		tree_type
-	>
-	result_type;
+	>;
 
 	for(
 		tree_type &element
@@ -51,11 +53,12 @@ find_node(
 		_container
 	)
 	{
-		typedef
+		using
+		traversal
+		=
 		fcppt::container::tree::pre_order<
 			tree_type
-		>
-		traversal;
+		>;
 
 		traversal trav(
 			element

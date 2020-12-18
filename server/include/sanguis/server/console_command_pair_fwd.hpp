@@ -10,9 +10,12 @@ namespace sanguis
 namespace server
 {
 
-typedef fcppt::homogenous_pair<
+using
+console_command_pair
+=
+fcppt::homogenous_pair<
 	fcppt::string
-> console_command_pair;
+>;
 
 }
 }

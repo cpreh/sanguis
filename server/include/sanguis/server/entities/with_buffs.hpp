@@ -53,12 +53,13 @@ protected:
 	sanguis::buff_type_vector
 	buff_types() const;
 private:
-	typedef
+	using
+	buff_map
+	=
 	std::unordered_map<
 		std::type_index,
 		sanguis::server::buffs::stack
-	>
-	buff_map;
+	>;
 
 	buff_map buffs_;
 };

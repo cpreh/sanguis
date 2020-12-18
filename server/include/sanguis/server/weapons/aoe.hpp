@@ -11,9 +11,10 @@ namespace server
 namespace weapons
 {
 
-typedef
-sanguis::server::aoe
-aoe;
+using
+aoe
+=
+sanguis::server::aoe;
 
 }
 }

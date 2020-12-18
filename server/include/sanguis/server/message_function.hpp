@@ -17,9 +17,10 @@ template<
 class message_function
 {
 public:
-	typedef
-	sanguis::messages::call::result
-	result_type;
+	using
+	result_type
+	=
+	sanguis::messages::call::result;
 
 	message_function(
 		State &_state,

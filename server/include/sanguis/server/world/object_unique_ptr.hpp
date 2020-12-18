@@ -12,11 +12,12 @@ namespace server
 namespace world
 {
 
-typedef
+using
+object_unique_ptr
+=
 fcppt::unique_ptr<
 	sanguis::server::world::object
->
-object_unique_ptr;
+>;
 
 }
 }
