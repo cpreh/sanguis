@@ -98,6 +98,7 @@ find_closest(
 			case 3:
 				x++;
 				y--;
+				break;
 			default:
 				break;
 		}
