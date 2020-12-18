@@ -12,8 +12,8 @@
 
 bool
 sanguis::collision::impl::line_line_intersect(
-	sanguis::collision::impl::line_segment const _line1,
-	sanguis::collision::impl::line_segment const _line2
+	sanguis::collision::impl::line_segment const &_line1,
+	sanguis::collision::impl::line_segment const &_line2
 )
 {
 	sanguis::collision::unit const dot_perp(
@@ -34,8 +34,10 @@ sanguis::collision::impl::line_line_intersect(
 			dot_perp
 		)
 	)
+	{
 		return
 			false;
+	}
 
 	sanguis::collision::length2 const c(
 		_line2.pos().get()
@@ -77,8 +79,10 @@ sanguis::collision::impl::line_line_intersect(
 	if(
 		t < zero || t > one
 	)
+	{
 		return
 			false;
+	}
 
 	sanguis::collision::unit const u(
 		sanguis::collision::impl::cross2(

@@ -36,25 +36,28 @@ sanguis::collision::world::body_body(
 	sanguis::collision::duration const _duration
 )
 {
-	typedef
+	using
+	impulse_type
+	=
 	boost::units::quantity<
 		boost::units::si::momentum,
 		sanguis::collision::unit
-	>
-	impulse_type;
+	>;
 
-	typedef
+	using
+	optional_impulse
+	=
 	fcppt::optional::object<
 		impulse_type
-	>
-	optional_impulse;
+	>;
 
-	typedef
+	using
+	normal_type
+	=
 	fcppt::math::vector::static_<
 		sanguis::collision::unit,
 		2
-	>
-	normal_type;
+	>;
 
 	auto const make_impulse(
 		[
@@ -62,9 +65,9 @@ sanguis::collision::world::body_body(
 			&_body2,
 			_duration
 		](
-			normal_type const _normal,
-			sanguis::collision::mass const _mass1,
-			sanguis::collision::mass const _mass2
+			normal_type const &_normal,
+			sanguis::collision::mass const &_mass1,
+			sanguis::collision::mass const &_mass2
 		)
 		->
 		optional_impulse
@@ -117,7 +120,7 @@ sanguis::collision::world::body_body(
 						fcppt::literal<
 							sanguis::collision::unit
 						>(
-							1.f
+							1.F
 						)
 						*
 						boost::units::si::meter_per_second
@@ -146,7 +149,7 @@ sanguis::collision::world::body_body(
 									elasticity
 								)
 								*
-								// TODO: Make a dot function that respects boost units
+								// TODO(philipp): Make a dot function that respects boost units
 								fcppt::math::vector::dot(
 									fcppt::math::vector::map(
 										_body1.speed()
@@ -179,8 +182,8 @@ sanguis::collision::world::body_body(
 				&_body1,
 				&_body2
 			](
-				sanguis::collision::mass const _mass1,
-				sanguis::collision::mass const _mass2
+				sanguis::collision::mass const &_mass1,
+				sanguis::collision::mass const &_mass2
 			)
 			{
 				return
@@ -199,7 +202,7 @@ sanguis::collision::world::body_body(
 							_mass1,
 							_mass2
 						](
-							normal_type const _normal
+							normal_type const &_normal
 						)
 						{
 							return
@@ -214,7 +217,7 @@ sanguis::collision::world::body_body(
 										_mass2,
 										_normal
 									](
-										impulse_type const _impulse
+										impulse_type const &_impulse
 									)
 									{
 										auto const make_speed(
@@ -222,7 +225,7 @@ sanguis::collision::world::body_body(
 												_impulse,
 												_normal
 											](
-												sanguis::collision::mass const _mass
+												sanguis::collision::mass const &_mass
 											)
 											{
 												return

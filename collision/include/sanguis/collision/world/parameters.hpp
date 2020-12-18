@@ -20,9 +20,12 @@ public:
 	SANGUIS_COLLISION_SYMBOL
 	explicit
 	parameters(
-		sanguis::creator::grid const &
+		fcppt::reference<
+			sanguis::creator::grid const
+		>
 	);
 
+	[[nodiscard]]
 	sanguis::creator::grid const &
 	grid() const;
 private:

@@ -12,11 +12,12 @@ namespace collision
 namespace impl
 {
 
-typedef
+using
+optional_speed
+=
 fcppt::optional::object<
 	sanguis::collision::speed
->
-optional_speed;
+>;
 
 }
 }

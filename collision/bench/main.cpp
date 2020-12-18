@@ -28,8 +28,10 @@
 #include <sanguis/creator/tile.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_int_range_count.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/reference_to_base.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/algorithm/repeat.hpp>
 #include <fcppt/cast/to_void.hpp>
@@ -61,7 +63,9 @@ main()
 	sanguis::collision::world::object_unique_ptr const world{
 		sanguis::collision::world::create(
 			sanguis::collision::world::parameters{
-				grid
+				fcppt::make_cref(
+					grid
+				)
 			}
 		)
 	};
@@ -216,7 +220,13 @@ main()
 									},
 									sanguis::collision::optional_mass(),
 									_group,
-									fake_body_base
+									fcppt::reference_to_base<
+										sanguis::collision::world::body_base
+									>(
+										fcppt::make_ref(
+											fake_body_base
+										)
+									)
 								}
 							);
 					}
@@ -238,7 +248,9 @@ main()
 			)
 				fcppt::cast::to_void(
 					world->activate_body(
-						*body,
+						fcppt::make_ref(
+							*body
+						),
 						sanguis::collision::world::created{
 							true
 						}
@@ -321,7 +333,13 @@ main()
 								boost::units::si::meter
 							},
 							sanguis::collision::world::ghost_group::player_sight,
-							fake_ghost_base
+							fcppt::reference_to_base<
+								sanguis::collision::world::ghost_base
+							>(
+								fcppt::make_ref(
+									fake_ghost_base
+								)
+							)
 						)
 					);
 			}
@@ -343,7 +361,9 @@ main()
 	)
 		fcppt::cast::to_void(
 			world->activate_ghost(
-				*ghost
+				fcppt::make_ref(
+					*ghost
+				)
 			)
 		);
 

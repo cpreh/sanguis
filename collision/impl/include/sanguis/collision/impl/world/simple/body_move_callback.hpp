@@ -1,9 +1,9 @@
 #ifndef SANGUIS_COLLISION_IMPL_WORLD_SIMPLE_BODY_MOVE_CALLBACK_HPP_INCLUDED
 #define SANGUIS_COLLISION_IMPL_WORLD_SIMPLE_BODY_MOVE_CALLBACK_HPP_INCLUDED
 
-#include <sanguis/collision/impl/world/simple/body_callback.hpp>
-#include <fcppt/make_strong_typedef.hpp>
-#include <fcppt/strong_typedef.hpp>
+#include <sanguis/collision/impl/world/simple/body_fwd.hpp>
+#include <fcppt/function_impl.hpp>
+#include <fcppt/reference_fwd.hpp>
 
 
 namespace sanguis
@@ -17,10 +17,16 @@ namespace world
 namespace simple
 {
 
-FCPPT_MAKE_STRONG_TYPEDEF(
-	sanguis::collision::impl::world::simple::body_callback,
-	body_move_callback
-);
+using
+body_move_callback
+=
+fcppt::function<
+	void (
+		fcppt::reference<
+			sanguis::collision::impl::world::simple::body
+		>
+	)
+>;
 
 }
 }

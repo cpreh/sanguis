@@ -14,7 +14,7 @@
 
 sanguis::creator::pos
 sanguis::collision::impl::world::simple::grid_position(
-	sanguis::collision::center const _center
+	sanguis::collision::center const &_center
 )
 {
 	return

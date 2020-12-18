@@ -12,11 +12,12 @@ namespace collision
 namespace impl
 {
 
-typedef
+using
+circle
+=
 fcppt::math::sphere::circle<
 	sanguis::collision::length
->
-circle;
+>;
 
 }
 }

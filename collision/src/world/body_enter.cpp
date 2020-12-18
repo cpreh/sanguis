@@ -5,8 +5,8 @@
 
 
 sanguis::collision::world::body_enter::body_enter(
-	sanguis::collision::world::body_base &_body,
-	sanguis::collision::world::ghost_base &_ghost,
+	body_ref const _body,
+	ghost_ref const _ghost,
 	sanguis::collision::world::created const _created
 )
 :

@@ -15,7 +15,6 @@ namespace collision
 namespace impl
 {
 
-// TODO: Can we make a generic function for this?
 inline
 sanguis::collision::impl::time
 duration_to_time(

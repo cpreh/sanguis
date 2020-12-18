@@ -37,14 +37,15 @@ normalize_opt(
 	> const _vec
 )
 {
-	typedef
+	using
+	result_type
+	=
 	fcppt::optional::object<
 		fcppt::math::vector::static_<
 			T,
 			N
 		>
-	>
-	result_type;
+	>;
 
 	T const length(
 		fcppt::math::vector::length(

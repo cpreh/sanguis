@@ -18,9 +18,9 @@ namespace collision
 SANGUIS_COLLISION_SYMBOL
 sanguis::collision::optional_result
 test_move(
-	sanguis::collision::center,
-	sanguis::collision::radius,
-	sanguis::collision::speed,
+	sanguis::collision::center const &,
+	sanguis::collision::radius const &,
+	sanguis::collision::speed const &,
 	sanguis::collision::duration,
 	sanguis::creator::grid const &
 );

@@ -14,7 +14,7 @@
 #include <sanguis/collision/world/ghost_parameters_fwd.hpp>
 #include <sanguis/collision/world/optional_body_enter_fwd.hpp>
 #include <sanguis/collision/world/optional_body_exit_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/reference_std_hash.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -37,13 +37,13 @@ class ghost
 :
 	public sanguis::collision::world::ghost
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		ghost
 	);
 public:
 	ghost(
 		sanguis::collision::world::ghost_parameters const &,
-		sanguis::collision::impl::world::simple::ghost_remove_callback const &
+		sanguis::collision::impl::world::simple::ghost_remove_callback &&
 	);
 
 	~ghost()
@@ -114,18 +114,20 @@ private:
 		normal
 	};
 
-	typedef
+	using
+	const_body_ref
+	=
 	fcppt::reference<
 		sanguis::collision::impl::world::simple::body const
-	>
-	const_body_ref;
+	>;
 
-	typedef
+	using
+	body_map
+	=
 	std::unordered_map<
 		const_body_ref,
 		body_status
-	>
-	body_map;
+	>;
 
 	body_map bodies_;
 };

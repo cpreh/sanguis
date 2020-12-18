@@ -10,11 +10,12 @@ namespace sanguis
 namespace creator
 {
 
-typedef
+using
+grid_spiral_range
+=
 fcppt::container::grid::spiral_range<
 	sanguis::creator::signed_pos
->
-grid_spiral_range;
+>;
 
 }
 }

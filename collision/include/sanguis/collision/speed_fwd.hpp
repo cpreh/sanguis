@@ -10,12 +10,13 @@ namespace sanguis
 namespace collision
 {
 
-typedef
+using
+speed
+=
 fcppt::math::vector::static_<
 	sanguis::collision::velocity,
 	2
->
-speed;
+>;
 
 }
 }

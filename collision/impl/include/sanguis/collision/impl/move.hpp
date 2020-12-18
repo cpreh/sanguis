@@ -16,10 +16,10 @@ namespace impl
 {
 
 inline
-sanguis::collision::center const
+sanguis::collision::center
 move(
-	sanguis::collision::center const _center,
-	sanguis::collision::speed const _speed,
+	sanguis::collision::center const &_center,
+	sanguis::collision::speed const &_speed,
 	sanguis::collision::duration const _duration
 )
 {

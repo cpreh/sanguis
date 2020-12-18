@@ -12,11 +12,12 @@ namespace collision
 namespace world
 {
 
-typedef
+using
+optional_body_exit
+=
 fcppt::optional::object<
 	sanguis::collision::world::body_exit
->
-optional_body_exit;
+>;
 
 }
 }

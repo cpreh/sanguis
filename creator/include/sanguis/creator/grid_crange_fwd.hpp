@@ -10,11 +10,12 @@ namespace sanguis
 namespace creator
 {
 
-typedef
+using
+grid_crange
+=
 fcppt::container::grid::pos_ref_range<
 	sanguis::creator::grid const
->
-grid_crange;
+>;
 
 }
 }

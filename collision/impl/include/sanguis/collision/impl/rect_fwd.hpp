@@ -12,11 +12,12 @@ namespace collision
 namespace impl
 {
 
-typedef
+using
+rect
+=
 fcppt::math::box::rect<
 	sanguis::collision::length
->
-rect;
+>;
 
 }
 }

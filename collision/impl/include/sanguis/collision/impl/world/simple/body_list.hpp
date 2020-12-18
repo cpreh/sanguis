@@ -18,14 +18,15 @@ namespace world
 namespace simple
 {
 
-typedef
+using
+body_list
+=
 boost::intrusive::list<
 	sanguis::collision::impl::world::simple::body,
 	boost::intrusive::constant_time_size<
 		false
 	>
->
-body_list;
+>;
 
 }
 }

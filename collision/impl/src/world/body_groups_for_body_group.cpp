@@ -20,7 +20,7 @@
 namespace
 {
 
-// TODO: Can we simplify this?
+// TODO(philipp): Can we simplify this?
 template<
 	sanguis::collision::world::body_group Group
 >
@@ -72,6 +72,7 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wglobal-constructors)
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wexit-time-destructors)
 
+// NOLINTNEXTLINE(cert-err58-cpp)
 auto const groups(
 	sanguis::collision::impl::world::make_groups<
 		sanguis::collision::world::body_group,

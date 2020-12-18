@@ -3,8 +3,8 @@
 
 
 sanguis::collision::world::body_collision::body_collision(
-	sanguis::collision::world::body_base &_body1,
-	sanguis::collision::world::body_base &_body2
+	body_ref const _body1,
+	body_ref const _body2
 )
 :
 	body1_(

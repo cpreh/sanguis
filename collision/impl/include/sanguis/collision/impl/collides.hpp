@@ -18,12 +18,12 @@ namespace impl
 inline
 bool
 collides(
-	sanguis::collision::impl::circle const _left,
-	sanguis::collision::impl::circle const _right
+	sanguis::collision::impl::circle const &_left,
+	sanguis::collision::impl::circle const &_right
 )
 {
 	return
-		// TODO: Can we do this on boost::units directly?
+		// TODO(philipp): Can we do this on boost::units directly?
 		fcppt::math::vector::length(
 			fcppt::math::vector::map(
 				_left.origin()

@@ -16,11 +16,12 @@ namespace impl
 namespace world
 {
 
-typedef
+using
+ghost_group_container
+=
 std::vector<
 	sanguis::collision::world::ghost_group
->
-ghost_group_container;
+>;
 
 }
 }

@@ -28,9 +28,9 @@
 
 sanguis::collision::optional_result
 sanguis::collision::test_move(
-	sanguis::collision::center const _center,
-	sanguis::collision::radius const _radius,
-	sanguis::collision::speed const _start_speed,
+	sanguis::collision::center const &_center,
+	sanguis::collision::radius const &_radius,
+	sanguis::collision::speed const &_start_speed,
 	sanguis::collision::duration const _time,
 	sanguis::creator::grid const &_grid
 )
@@ -44,8 +44,10 @@ sanguis::collision::test_move(
 			_start_speed.y().value()
 		)
 	)
+	{
 		return
 			sanguis::collision::optional_result();
+	}
 
 	sanguis::collision::impl::optional_speed const result(
 		fcppt::algorithm::fold(
@@ -65,11 +67,11 @@ sanguis::collision::test_move(
 				_start_speed,
 				&_grid
 			](
-				sanguis::creator::signed_pos const _entry,
-				sanguis::collision::impl::optional_speed const _cur_speed
+				sanguis::creator::signed_pos const &_entry,
+				sanguis::collision::impl::optional_speed const &_cur_speed
 			)
 			{
-				sanguis::creator::pos const cur_pos(
+				auto const cur_pos(
 					fcppt::math::vector::structure_cast<
 						sanguis::creator::pos,
 						fcppt::cast::to_unsigned_fun
@@ -131,7 +133,7 @@ sanguis::collision::test_move(
 		fcppt::optional::map(
 			result,
 			[](
-				sanguis::collision::speed const _result_speed
+				sanguis::collision::speed const &_result_speed
 			)
 			{
 				return

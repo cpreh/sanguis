@@ -17,13 +17,15 @@ class line_segment
 {
 public:
 	line_segment(
-		sanguis::collision::impl::pos const &,
-		sanguis::collision::impl::dir const &
+		sanguis::collision::impl::pos,
+		sanguis::collision::impl::dir
 	);
 
+	[[nodiscard]]
 	sanguis::collision::impl::pos const &
 	pos() const;
 
+	[[nodiscard]]
 	sanguis::collision::impl::dir const &
 	dir() const;
 private:

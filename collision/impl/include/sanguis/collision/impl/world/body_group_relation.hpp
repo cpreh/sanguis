@@ -17,7 +17,9 @@ namespace impl
 namespace world
 {
 
-typedef
+using
+body_group_relation
+=
 boost::mpl::map<
 	sanguis::collision::impl::world::body_group_pair<
 		sanguis::collision::world::body_group::enemy,
@@ -35,8 +37,7 @@ boost::mpl::map<
 		sanguis::collision::world::body_group::player,
 		sanguis::collision::world::body_group::projectile_enemy
 	>
->
-body_group_relation;
+>;
 
 }
 }

@@ -20,12 +20,14 @@ is_null(
 	sanguis::collision::unit const _unit
 )
 {
+	constexpr sanguis::collision::unit const epsilon{0.001F};
+
 	return
 		std::abs(
 			_unit
 		)
 		<
-		0.001f
+		epsilon
 		;
 }
 

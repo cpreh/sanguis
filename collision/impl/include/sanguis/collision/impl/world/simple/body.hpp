@@ -16,7 +16,7 @@
 #include <sanguis/collision/world/body_base_fwd.hpp>
 #include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/preprocessor/disable_gcc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -34,22 +34,21 @@ namespace simple
 {
 
 FCPPT_PP_PUSH_WARNING
-FCPPT_PP_DISABLE_GCC_WARNING(-Weffc++)
 FCPPT_PP_DISABLE_GCC_WARNING(-Wnon-virtual-dtor)
 
-class body
+class body // NOLINT(fuchsia-multiple-inheritance)
 :
 	public sanguis::collision::world::body,
 	public sanguis::collision::impl::world::simple::body_base_hook
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		body
 	);
 public:
 	body(
 		sanguis::collision::world::body_parameters const &,
-		sanguis::collision::impl::world::simple::body_remove_callback const &,
-		sanguis::collision::impl::world::simple::body_move_callback const &
+		sanguis::collision::impl::world::simple::body_remove_callback &&,
+		sanguis::collision::impl::world::simple::body_move_callback &&
 	);
 
 	~body()
@@ -72,6 +71,7 @@ public:
 		sanguis::collision::result const &
 	);
 
+	[[nodiscard]]
 	sanguis::collision::center
 	center() const
 	override;
@@ -82,21 +82,26 @@ public:
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::collision::speed
 	speed() const
 	override;
 
+	[[nodiscard]]
 	sanguis::collision::radius
 	radius() const
 	override;
 
+	[[nodiscard]]
 	sanguis::collision::optional_mass
 	mass() const
 	override;
 
+	[[nodiscard]]
 	sanguis::collision::world::body_group
 	collision_group() const;
 
+	[[nodiscard]]
 	sanguis::collision::world::body_base &
 	body_base() const;
 private:

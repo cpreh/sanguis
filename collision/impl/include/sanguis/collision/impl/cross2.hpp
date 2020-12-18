@@ -18,11 +18,11 @@ cross2(
 	fcppt::math::vector::static_<
 		sanguis::collision::unit,
 		2
-	> const _a,
+	> const &_a,
 	fcppt::math::vector::static_<
 		sanguis::collision::unit,
 		2
-	> const _b
+	> const &_b
 )
 {
 	return

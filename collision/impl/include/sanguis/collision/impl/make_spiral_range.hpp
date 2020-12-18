@@ -15,8 +15,8 @@ namespace impl
 
 sanguis::creator::grid_spiral_range
 make_spiral_range(
-	sanguis::collision::center,
-	sanguis::collision::radius
+	sanguis::collision::center const &,
+	sanguis::collision::radius const &
 );
 
 }

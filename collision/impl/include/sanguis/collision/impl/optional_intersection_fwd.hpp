@@ -12,11 +12,12 @@ namespace collision
 namespace impl
 {
 
-typedef
+using
+optional_intersection
+=
 fcppt::optional::object<
 	sanguis::collision::impl::intersection
->
-optional_intersection;
+>;
 
 }
 }

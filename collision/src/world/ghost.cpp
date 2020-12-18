@@ -2,9 +2,7 @@
 
 
 sanguis::collision::world::ghost::ghost()
-{
-}
+= default;
 
 sanguis::collision::world::ghost::~ghost()
-{
-}
+= default;

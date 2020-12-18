@@ -13,8 +13,8 @@ namespace impl
 
 bool
 line_line_intersect(
-	sanguis::collision::impl::line_segment,
-	sanguis::collision::impl::line_segment
+	sanguis::collision::impl::line_segment const &,
+	sanguis::collision::impl::line_segment const &
 );
 
 }

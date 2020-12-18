@@ -12,11 +12,12 @@ namespace collision
 namespace world
 {
 
-typedef
+using
+body_unique_ptr
+=
 fcppt::unique_ptr<
 	sanguis::collision::world::body
->
-body_unique_ptr;
+>;
 
 }
 }

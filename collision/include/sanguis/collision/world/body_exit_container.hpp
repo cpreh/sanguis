@@ -14,11 +14,12 @@ namespace collision
 namespace world
 {
 
-typedef
+using
+body_exit_container
+=
 std::vector<
 	sanguis::collision::world::body_exit
->
-body_exit_container;
+>;
 
 }
 }

@@ -32,27 +32,36 @@ public:
 		sanguis::collision::radius,
 		sanguis::collision::optional_mass,
 		sanguis::collision::world::body_group,
-		sanguis::collision::world::body_base &
+		fcppt::reference<
+			sanguis::collision::world::body_base
+		>
 	);
 
+	[[nodiscard]]
 	fcppt::log::object &
 	log() const;
 
+	[[nodiscard]]
 	sanguis::collision::center
 	center() const;
 
+	[[nodiscard]]
 	sanguis::collision::speed
 	speed() const;
 
+	[[nodiscard]]
 	sanguis::collision::radius
 	radius() const;
 
+	[[nodiscard]]
 	sanguis::collision::optional_mass
 	mass() const;
 
+	[[nodiscard]]
 	sanguis::collision::world::body_group
 	collision_group() const;
 
+	[[nodiscard]]
 	sanguis::collision::world::body_base &
 	body_base() const;
 private:

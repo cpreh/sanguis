@@ -21,8 +21,8 @@
 
 sanguis::creator::grid_spiral_range
 sanguis::collision::impl::make_spiral_range(
-	sanguis::collision::center const _center,
-	sanguis::collision::radius const _radius
+	sanguis::collision::center const &_center,
+	sanguis::collision::radius const &_radius
 )
 {
 	sanguis::creator::difference_type const tile_size(
@@ -55,7 +55,7 @@ sanguis::collision::impl::make_spiral_range(
 			fcppt::literal<
 				sanguis::creator::difference_type
 			>(
-				4 // TODO: Why?
+				4 // TODO(philipp)
 			)
 			*
 			FCPPT_ASSERT_OPTIONAL_ERROR(

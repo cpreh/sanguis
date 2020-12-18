@@ -22,7 +22,7 @@
 #include <sanguis/collision/world/parameters_fwd.hpp>
 #include <sanguis/collision/world/update_result_fwd.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/reference_std_hash.hpp>
 #include <fcppt/enum/array_decl.hpp>
@@ -46,7 +46,7 @@ class object
 :
 	public sanguis::collision::world::object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		object
 	);
 public:
@@ -58,43 +58,58 @@ public:
 	~object()
 	override;
 private:
+	[[nodiscard]]
 	sanguis::collision::world::body_unique_ptr
 	create_body(
 		sanguis::collision::world::body_parameters const &
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::collision::world::body_enter_container
 	activate_body(
-		sanguis::collision::world::body &,
+		fcppt::reference<
+			sanguis::collision::world::body
+		>,
 		sanguis::collision::world::created
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::collision::world::body_exit_container
 	deactivate_body(
-		sanguis::collision::world::body &
+		fcppt::reference<
+			sanguis::collision::world::body
+		>
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::collision::world::ghost_unique_ptr
 	create_ghost(
 		sanguis::collision::world::ghost_parameters const &
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::collision::world::body_enter_container
 	activate_ghost(
-		sanguis::collision::world::ghost &
+		fcppt::reference<
+			sanguis::collision::world::ghost
+		>
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::collision::world::body_exit_container
 	deactivate_ghost(
-		sanguis::collision::world::ghost &
+		fcppt::reference<
+			sanguis::collision::world::ghost
+		>
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::collision::world::update_result
 	update(
 		sanguis::collision::duration
@@ -106,73 +121,86 @@ private:
 		sanguis::collision::duration
 	);
 
+	[[nodiscard]]
 	sanguis::collision::world::body_collision_container
 	body_collisions() const;
 
+	[[nodiscard]]
 	sanguis::collision::impl::world::simple::ghost_result
 	update_ghosts();
 
 	void
 	remove_body(
-		sanguis::collision::impl::world::simple::body &
-	);
+		sanguis::collision::impl::world::simple::body & // NOLINT(google-runtime-references)
+	); // NOLINT(google-runtime-references)
 
 	void
 	remove_ghost(
-		sanguis::collision::impl::world::simple::ghost &
-	);
+		sanguis::collision::impl::world::simple::ghost & // NOLINT(google-runtime-references)
+	); // NOLINT(google-runtime-references)
 
 	void
 	move_body(
-		sanguis::collision::impl::world::simple::body &
+		fcppt::reference<
+			sanguis::collision::impl::world::simple::body
+		>
 	);
 
-	typedef
+	using
+	body_reference
+	=
 	fcppt::reference<
 		sanguis::collision::impl::world::simple::body
-	>
-	body_reference;
+	>;
 
-	typedef
+	using
+	body_set
+	=
 	std::unordered_set<
 		body_reference
-	>
-	body_set;
+	>;
 
-	typedef
+	using
+	body_set_array
+	=
 	fcppt::enum_::array<
 		sanguis::collision::world::body_group,
 		body_set
-	>
-	body_set_array;
+	>;
 
-	typedef
+	using
+	ghost_reference
+	=
 	fcppt::reference<
 		sanguis::collision::impl::world::simple::ghost
-	>
-	ghost_reference;
+	>;
 
-	typedef
+	using
+	ghost_set
+	=
 	std::unordered_set<
 		ghost_reference
-	>
-	ghost_set;
+	>;
 
-	typedef
+	using
+	ghost_set_array
+	=
 	fcppt::enum_::array<
 		sanguis::collision::world::ghost_group,
 		ghost_set
-	>
-	ghost_set_array;
+	>;
 
-	typedef
+	using
+	body_list_grid_array
+	=
 	fcppt::enum_::array<
 		sanguis::collision::world::body_group,
 		sanguis::collision::impl::world::simple::body_list_grid
-	>
-	body_list_grid_array;
+	>;
 
-	sanguis::creator::grid const &grid_;
+	fcppt::reference<
+		sanguis::creator::grid const
+	> const grid_;
 
 	body_set_array body_sets_;
 

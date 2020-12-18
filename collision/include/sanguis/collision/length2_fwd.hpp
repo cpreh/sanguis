@@ -10,12 +10,13 @@ namespace sanguis
 namespace collision
 {
 
-typedef
+using
+length2
+=
 fcppt::math::vector::static_<
 	sanguis::collision::length,
 	2
->
-length2;
+>;
 
 }
 }

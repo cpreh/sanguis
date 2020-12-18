@@ -12,11 +12,12 @@ namespace collision
 namespace world
 {
 
-typedef
+using
+optional_body_enter
+=
 fcppt::optional::object<
 	sanguis::collision::world::body_enter
->
-optional_body_enter;
+>;
 
 }
 }

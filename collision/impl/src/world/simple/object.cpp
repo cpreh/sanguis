@@ -8,7 +8,6 @@
 #include <sanguis/collision/impl/world/ghost_groups_for_body_group.hpp>
 #include <sanguis/collision/impl/world/make_circle.hpp>
 #include <sanguis/collision/impl/world/simple/body.hpp>
-#include <sanguis/collision/impl/world/simple/body_callback.hpp>
 #include <sanguis/collision/impl/world/simple/body_list.hpp>
 #include <sanguis/collision/impl/world/simple/body_list_grid.hpp>
 #include <sanguis/collision/impl/world/simple/body_remove_callback.hpp>
@@ -93,7 +92,7 @@ sanguis::collision::impl::world::simple::object::object(
 					sanguis::collision::impl::world::simple::body_list_grid(
 						_parameters.grid().size(),
 						[](
-							sanguis::collision::impl::world::simple::body_list_grid::pos
+							sanguis::collision::impl::world::simple::body_list_grid::pos const &
 						){
 							return
 								sanguis::collision::impl::world::simple::body_list();
@@ -106,8 +105,7 @@ sanguis::collision::impl::world::simple::object::object(
 }
 
 sanguis::collision::impl::world::simple::object::~object()
-{
-}
+= default;
 
 sanguis::collision::world::body_unique_ptr
 sanguis::collision::impl::world::simple::object::create_body(
@@ -123,21 +121,29 @@ sanguis::collision::impl::world::simple::object::create_body(
 			>(
 				_parameters,
 				sanguis::collision::impl::world::simple::body_remove_callback{
-					sanguis::collision::impl::world::simple::body_callback{
-						std::bind(
-							&sanguis::collision::impl::world::simple::object::remove_body,
-							this,
-							std::placeholders::_1
-						)
+					[
+						this
+					](
+						sanguis::collision::impl::world::simple::body &_body
+					)
+					{
+						this->remove_body(
+							_body
+						);
 					}
 				},
 				sanguis::collision::impl::world::simple::body_move_callback{
-					sanguis::collision::impl::world::simple::body_callback{
-						std::bind(
-							&sanguis::collision::impl::world::simple::object::move_body,
-							this,
-							std::placeholders::_1
-						)
+					[
+						this
+					](
+						fcppt::reference<
+							sanguis::collision::impl::world::simple::body
+						> const _body
+					)
+					{
+						this->move_body(
+							_body
+						);
 					}
 				}
 			)
@@ -146,7 +152,9 @@ sanguis::collision::impl::world::simple::object::create_body(
 
 sanguis::collision::world::body_enter_container
 sanguis::collision::impl::world::simple::object::activate_body(
-	sanguis::collision::world::body &_body,
+	fcppt::reference<
+		sanguis::collision::world::body
+	> const _body,
 	sanguis::collision::world::created const _created
 )
 {
@@ -154,7 +162,7 @@ sanguis::collision::impl::world::simple::object::activate_body(
 		fcppt::cast::static_downcast<
 			sanguis::collision::impl::world::simple::body &
 		>(
-			_body
+			_body.get()
 		)
 	);
 
@@ -170,7 +178,9 @@ sanguis::collision::impl::world::simple::object::activate_body(
 
 
 	this->move_body(
-		body
+		fcppt::make_ref(
+			body
+		)
 	);
 
 	return
@@ -215,14 +225,16 @@ sanguis::collision::impl::world::simple::object::activate_body(
 
 sanguis::collision::world::body_exit_container
 sanguis::collision::impl::world::simple::object::deactivate_body(
-	sanguis::collision::world::body &_body
+	fcppt::reference<
+		sanguis::collision::world::body
+	> const _body
 )
 {
 	sanguis::collision::impl::world::simple::body &body(
 		fcppt::cast::static_downcast<
 			sanguis::collision::impl::world::simple::body &
 		>(
-			_body
+			_body.get()
 		)
 	);
 
@@ -234,7 +246,7 @@ sanguis::collision::impl::world::simple::object::deactivate_body(
 				body
 			)
 		)
-		== 1u
+		== 1U
 	);
 
 	return
@@ -288,11 +300,16 @@ sanguis::collision::impl::world::simple::object::create_ghost(
 			>(
 				_parameters,
 				sanguis::collision::impl::world::simple::ghost_remove_callback(
-					std::bind(
-						&sanguis::collision::impl::world::simple::object::remove_ghost,
-						this,
-						std::placeholders::_1
+					[
+						this
+					](
+						sanguis::collision::impl::world::simple::ghost &_ghost
 					)
+					{
+						this->remove_ghost(
+							_ghost
+						);
+					}
 				)
 			)
 		);
@@ -300,14 +317,16 @@ sanguis::collision::impl::world::simple::object::create_ghost(
 
 sanguis::collision::world::body_enter_container
 sanguis::collision::impl::world::simple::object::activate_ghost(
-	sanguis::collision::world::ghost &_ghost
+	fcppt::reference<
+		sanguis::collision::world::ghost
+	> const _ghost
 )
 {
 	sanguis::collision::impl::world::simple::ghost &ghost(
 		fcppt::cast::static_downcast<
 			sanguis::collision::impl::world::simple::ghost &
 		>(
-			_ghost
+			_ghost.get()
 		)
 	);
 
@@ -363,14 +382,16 @@ sanguis::collision::impl::world::simple::object::activate_ghost(
 
 sanguis::collision::world::body_exit_container
 sanguis::collision::impl::world::simple::object::deactivate_ghost(
-	sanguis::collision::world::ghost &_ghost
+	fcppt::reference<
+		sanguis::collision::world::ghost
+	> const _ghost
 )
 {
 	sanguis::collision::impl::world::simple::ghost &ghost(
 		fcppt::cast::static_downcast<
 			sanguis::collision::impl::world::simple::ghost &
 		>(
-			_ghost
+			_ghost.get()
 		)
 	);
 
@@ -382,7 +403,7 @@ sanguis::collision::impl::world::simple::object::deactivate_ghost(
 				ghost
 			)
 		)
-		== 1u
+		== 1U
 	);
 
 	return
@@ -453,6 +474,7 @@ sanguis::collision::impl::world::simple::object::move_bodies(
 		:
 		body_sets_
 	)
+	{
 		for(
 			body_reference const &body_ref
 			:
@@ -468,17 +490,18 @@ sanguis::collision::impl::world::simple::object::move_bodies(
 				==
 				sanguis::collision::world::body_group::enemy
 			)
+			{
 				sanguis::collision::impl::world::simple::for_all_body_neighbors(
 					sanguis::collision::impl::world::simple::grid_position(
 						body1.center()
 					),
-					grid_.size(),
+					grid_->size(),
 					[
 						&body1,
 						this,
 						_duration
 					](
-						sanguis::creator::pos const _pos2
+						sanguis::creator::pos const &_pos2
 					)
 					{
 						fcppt::optional::maybe_void(
@@ -502,6 +525,7 @@ sanguis::collision::impl::world::simple::object::move_bodies(
 									:
 									_bodies2.get()
 								)
+								{
 									// Only make bodies collide once
 									if(
 										std::less<
@@ -511,6 +535,7 @@ sanguis::collision::impl::world::simple::object::move_bodies(
 											&body2
 										)
 									)
+									{
 										fcppt::optional::maybe_void(
 											sanguis::collision::world::body_body(
 												body1,
@@ -533,10 +558,13 @@ sanguis::collision::impl::world::simple::object::move_bodies(
 												);
 											}
 										);
+									}
+								}
 							}
 						);
 					}
 				);
+			}
 
 			body1.move(
 				sanguis::collision::test_move(
@@ -544,21 +572,24 @@ sanguis::collision::impl::world::simple::object::move_bodies(
 					body1.radius(),
 					body1.speed(),
 					_duration,
-					grid_
+					grid_.get()
 				),
 				_duration
 			);
 
 			this->move_body(
-				body1
+				fcppt::make_ref(
+					body1
+				)
 			);
 		}
+	}
 }
 
 sanguis::collision::world::body_collision_container
 sanguis::collision::impl::world::simple::object::body_collisions() const
 {
-	sanguis::collision::world::body_collision_container result;
+	sanguis::collision::world::body_collision_container result{};
 
 	for(
 		auto const body_group
@@ -581,18 +612,19 @@ sanguis::collision::impl::world::simple::object::body_collisions() const
 				body_group
 			]
 		)
+		{
 			sanguis::collision::impl::world::simple::for_all_body_neighbors(
 				sanguis::collision::impl::world::simple::grid_position(
 					body1.get().center()
 				),
-				grid_.size(),
+				grid_->size(),
 				[
 					body1,
 					&paired_groups,
 					&result,
 					this
 				](
-					sanguis::creator::pos const _grid_pos2
+					sanguis::creator::pos const &_grid_pos2
 				)
 				{
 					for(
@@ -600,6 +632,7 @@ sanguis::collision::impl::world::simple::object::body_collisions() const
 						:
 						paired_groups
 					)
+					{
 						fcppt::optional::maybe_void(
 							fcppt::container::grid::at_optional(
 								body_list_grids_[
@@ -621,6 +654,7 @@ sanguis::collision::impl::world::simple::object::body_collisions() const
 									:
 									_bodies2.get()
 								)
+								{
 									if(
 										sanguis::collision::impl::collides(
 											sanguis::collision::impl::world::make_circle(
@@ -631,16 +665,25 @@ sanguis::collision::impl::world::simple::object::body_collisions() const
 											)
 										)
 									)
+									{
 										result.push_back(
 											sanguis::collision::world::body_collision{
-												body1.get().body_base(),
-												body2.body_base()
+												fcppt::make_ref(
+													body1.get().body_base()
+												),
+												fcppt::make_ref(
+													body2.body_base()
+												)
 											}
 										);
+									}
+								}
 							}
 						);
+					}
 				}
 			);
+		}
 	}
 
 	return
@@ -743,11 +786,13 @@ sanguis::collision::impl::world::simple::object::update_ghosts()
 						)
 					)
 				)
+				{
 					for(
 						sanguis::collision::impl::world::simple::body const &body
 						:
 						grid_entry.value()
 					)
+					{
 						fcppt::optional::maybe_void(
 							ghost.get().update_near_body(
 								body
@@ -763,6 +808,8 @@ sanguis::collision::impl::world::simple::object::update_ghosts()
 								);
 							}
 						);
+					}
+				}
 			}
 
 			body_exit =
@@ -802,6 +849,7 @@ sanguis::collision::impl::world::simple::object::remove_body(
 		>
 		0
 	)
+	{
 		for(
 			sanguis::collision::world::ghost_group const ghost_group
 			:
@@ -809,6 +857,7 @@ sanguis::collision::impl::world::simple::object::remove_body(
 				_body.collision_group()
 			)
 		)
+		{
 			for(
 				ghost_reference const &ghost
 				:
@@ -816,9 +865,13 @@ sanguis::collision::impl::world::simple::object::remove_body(
 					ghost_group
 				]
 			)
+			{
 				ghost.get().body_destroyed(
 					_body
 				);
+			}
+		}
+	}
 }
 
 void
@@ -837,18 +890,20 @@ sanguis::collision::impl::world::simple::object::remove_ghost(
 
 void
 sanguis::collision::impl::world::simple::object::move_body(
-	sanguis::collision::impl::world::simple::body &_body
+	fcppt::reference<
+		sanguis::collision::impl::world::simple::body
+	> const _body
 )
 {
-	_body.unlink();
+	_body->unlink();
 
 	fcppt::optional::maybe_void(
 		fcppt::container::grid::at_optional(
 			body_list_grids_[
-				_body.collision_group()
+				_body->collision_group()
 			],
 			sanguis::collision::impl::world::simple::grid_position(
-				_body.center()
+				_body->center()
 			)
 		),
 		[
@@ -860,7 +915,7 @@ sanguis::collision::impl::world::simple::object::move_body(
 		)
 		{
 			_bodies.get().push_back(
-				_body
+				_body.get()
 			);
 		}
 	);

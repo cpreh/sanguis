@@ -24,8 +24,7 @@ sanguis::collision::log::log(
 }
 
 sanguis::collision::log::~log()
-{
-}
+= default;
 
 fcppt::log::object &
 sanguis::collision::log::body_log() const

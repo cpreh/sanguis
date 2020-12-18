@@ -17,25 +17,28 @@ namespace world
 class body_collision
 {
 public:
+	using
+	body_ref
+	=
+	fcppt::reference<
+		sanguis::collision::world::body_base
+	>;
+
 	body_collision(
-		sanguis::collision::world::body_base &,
-		sanguis::collision::world::body_base &
+		body_ref,
+		body_ref
 	);
 
+	[[nodiscard]]
 	SANGUIS_COLLISION_SYMBOL
 	sanguis::collision::world::body_base &
 	body1() const;
 
+	[[nodiscard]]
 	SANGUIS_COLLISION_SYMBOL
 	sanguis::collision::world::body_base &
 	body2() const;
 private:
-	typedef
-	fcppt::reference<
-		sanguis::collision::world::body_base
-	>
-	body_ref;
-
 	body_ref body1_;
 
 	body_ref body2_;

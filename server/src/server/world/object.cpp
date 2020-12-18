@@ -125,6 +125,7 @@
 #include <sanguis/server/world/update_entity.hpp>
 #include <alda/message/init_record.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/reference_to_base.hpp>
@@ -208,7 +209,9 @@ sanguis::server::world::object::object(
 	collision_world_(
 		sanguis::collision::world::create(
 			sanguis::collision::world::parameters(
-				grid_
+				fcppt::make_cref(
+					grid_
+				)
 			)
 		)
 	),

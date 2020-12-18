@@ -12,11 +12,12 @@ namespace sanguis
 namespace collision
 {
 
-typedef
+using
+duration
+=
 std::chrono::duration<
 	sanguis::collision::unit
->
-duration;
+>;
 
 }
 }

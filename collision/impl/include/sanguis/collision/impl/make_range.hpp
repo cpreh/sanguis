@@ -17,8 +17,8 @@ namespace impl
 sanguis::creator::grid_crange
 make_range(
 	sanguis::creator::grid const &,
-	sanguis::collision::center,
-	sanguis::collision::radius
+	sanguis::collision::center const &,
+	sanguis::collision::radius const &
 );
 
 }

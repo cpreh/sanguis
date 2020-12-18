@@ -13,12 +13,13 @@ namespace sanguis
 namespace collision
 {
 
-typedef
+using
+mass
+=
 boost::units::quantity<
 	boost::units::si::mass,
 	sanguis::collision::unit
->
-mass;
+>;
 
 }
 }

@@ -15,8 +15,8 @@ namespace collision
 SANGUIS_COLLISION_SYMBOL
 bool
 test(
-	sanguis::collision::center,
-	sanguis::collision::radius,
+	sanguis::collision::center const &,
+	sanguis::collision::radius const &,
 	sanguis::creator::grid const &
 );
 

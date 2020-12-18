@@ -6,7 +6,7 @@
 #include <sanguis/collision/radius_fwd.hpp>
 #include <sanguis/collision/speed_fwd.hpp>
 #include <sanguis/collision/world/body_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -18,7 +18,7 @@ namespace world
 
 class body
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		body
 	);
 protected:
@@ -33,6 +33,7 @@ public:
 		sanguis::collision::center
 	) = 0;
 
+	[[nodiscard]]
 	virtual
 	sanguis::collision::center
 	center() const = 0;
@@ -43,14 +44,17 @@ public:
 		sanguis::collision::speed
 	) = 0;
 
+	[[nodiscard]]
 	virtual
 	sanguis::collision::speed
 	speed() const = 0;
 
+	[[nodiscard]]
 	virtual
 	sanguis::collision::radius
 	radius() const = 0;
 
+	[[nodiscard]]
 	virtual
 	sanguis::collision::optional_mass
 	mass() const = 0;

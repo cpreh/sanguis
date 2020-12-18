@@ -16,13 +16,14 @@ namespace world
 namespace simple
 {
 
-typedef
+using
+ghost_remove_callback
+=
 fcppt::function<
 	void (
 		sanguis::collision::impl::world::simple::ghost &
 	)
->
-ghost_remove_callback;
+>;
 
 }
 }

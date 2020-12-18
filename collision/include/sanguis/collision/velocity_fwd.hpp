@@ -13,12 +13,13 @@ namespace sanguis
 namespace collision
 {
 
-typedef
+using
+velocity
+=
 boost::units::quantity<
 	boost::units::si::velocity,
 	sanguis::collision::unit
->
-velocity;
+>;
 
 }
 }

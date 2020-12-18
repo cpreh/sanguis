@@ -16,11 +16,12 @@ namespace world
 namespace simple
 {
 
-typedef
+using
+body_unique_ptr
+=
 fcppt::unique_ptr<
 	sanguis::collision::impl::world::simple::body
->
-body_unique_ptr;
+>;
 
 }
 }

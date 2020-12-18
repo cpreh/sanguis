@@ -1,9 +1,12 @@
 #include <sanguis/collision/world/parameters.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
+#include <fcppt/reference_impl.hpp>
 
 
 sanguis::collision::world::parameters::parameters(
-	sanguis::creator::grid const &_grid
+	fcppt::reference<
+		sanguis::creator::grid const
+	> const _grid
 )
 :
 	grid_(

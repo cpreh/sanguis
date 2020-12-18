@@ -10,6 +10,7 @@
 #include <sanguis/server/collision/ghost.hpp>
 #include <sanguis/server/collision/to_center.hpp>
 #include <sanguis/server/collision/to_radius.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/pre.hpp>
@@ -71,7 +72,7 @@ sanguis::server::collision::ghost::transfer(
 						radius_
 					),
 					collision_group_,
-					ghost_base_.get()
+					ghost_base_
 				)
 			)
 		)
@@ -79,7 +80,9 @@ sanguis::server::collision::ghost::transfer(
 
 	return
 		_world.activate_ghost(
-			*new_ghost
+			fcppt::make_ref(
+				*new_ghost
+			)
 		);
 }
 
@@ -90,8 +93,10 @@ sanguis::server::collision::ghost::destroy(
 {
 	sanguis::collision::world::body_exit_container result(
 		_world.deactivate_ghost(
-			*FCPPT_ASSERT_OPTIONAL_ERROR(
-				impl_
+			fcppt::make_ref(
+				*FCPPT_ASSERT_OPTIONAL_ERROR(
+					impl_
+				)
 			)
 		)
 	);

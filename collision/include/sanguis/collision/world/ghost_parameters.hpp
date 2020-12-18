@@ -25,18 +25,24 @@ public:
 		sanguis::collision::center,
 		sanguis::collision::radius,
 		sanguis::collision::world::ghost_group,
-		sanguis::collision::world::ghost_base &
+		fcppt::reference<
+			sanguis::collision::world::ghost_base
+		>
 	);
 
+	[[nodiscard]]
 	sanguis::collision::center
 	center() const;
 
+	[[nodiscard]]
 	sanguis::collision::radius
 	radius() const;
 
+	[[nodiscard]]
 	sanguis::collision::world::ghost_group
 	collision_group() const;
 
+	[[nodiscard]]
 	sanguis::collision::world::ghost_base &
 	ghost_base() const;
 private:

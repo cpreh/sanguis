@@ -10,11 +10,12 @@ namespace sanguis
 namespace collision
 {
 
-typedef
+using
+result_pair
+=
 fcppt::homogenous_pair<
 	sanguis::collision::result
->
-result_pair;
+>;
 
 }
 }

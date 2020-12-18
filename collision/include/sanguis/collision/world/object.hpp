@@ -13,7 +13,8 @@
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
 #include <sanguis/collision/world/update_result_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
+#include <fcppt/reference_fwd.hpp>
 
 
 namespace sanguis
@@ -25,7 +26,7 @@ namespace world
 
 class object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		object
 	);
 protected:
@@ -46,7 +47,9 @@ public:
 	virtual
 	sanguis::collision::world::body_enter_container
 	activate_body(
-		sanguis::collision::world::body &,
+		fcppt::reference<
+			sanguis::collision::world::body
+		>,
 		sanguis::collision::world::created
 	)
 	= 0;
@@ -55,7 +58,9 @@ public:
 	virtual
 	sanguis::collision::world::body_exit_container
 	deactivate_body(
-		sanguis::collision::world::body &
+		fcppt::reference<
+			sanguis::collision::world::body
+		>
 	)
 	= 0;
 
@@ -71,7 +76,9 @@ public:
 	virtual
 	sanguis::collision::world::body_enter_container
 	activate_ghost(
-		sanguis::collision::world::ghost &
+		fcppt::reference<
+			sanguis::collision::world::ghost
+		>
 	)
 	= 0;
 
@@ -79,7 +86,9 @@ public:
 	virtual
 	sanguis::collision::world::body_exit_container
 	deactivate_ghost(
-		sanguis::collision::world::ghost &
+		fcppt::reference<
+			sanguis::collision::world::ghost
+		>
 	)
 	= 0;
 

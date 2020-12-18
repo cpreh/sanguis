@@ -23,10 +23,10 @@
 
 sanguis::collision::speed
 sanguis::collision::impl::adjust_speed(
-	sanguis::collision::impl::line_segment const _movement,
-	sanguis::collision::radius const _radius,
-	sanguis::collision::impl::rect const _obstacle,
-	sanguis::collision::speed const _old_speed
+	sanguis::collision::impl::line_segment const &_movement,
+	sanguis::collision::radius const &_radius,
+	sanguis::collision::impl::rect const &_obstacle,
+	sanguis::collision::speed const &_old_speed
 )
 {
 	return
@@ -48,7 +48,7 @@ sanguis::collision::impl::adjust_speed(
 			[
 				_old_speed
 			](
-				sanguis::collision::impl::intersection const _intersection
+				sanguis::collision::impl::intersection const &_intersection
 			)
 			{
 				bool const vertical(

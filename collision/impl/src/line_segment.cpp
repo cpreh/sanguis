@@ -1,18 +1,25 @@
 #include <sanguis/collision/impl/dir.hpp>
 #include <sanguis/collision/impl/line_segment.hpp>
 #include <sanguis/collision/impl/pos.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::collision::impl::line_segment::line_segment(
-	sanguis::collision::impl::pos const &_pos,
-	sanguis::collision::impl::dir const &_dir
+	sanguis::collision::impl::pos _pos,
+	sanguis::collision::impl::dir _dir
 )
 :
 	pos_(
-		_pos
+		std::move(
+			_pos
+		)
 	),
 	dir_(
-		_dir
+		std::move(
+			_dir
+		)
 	)
 {
 }

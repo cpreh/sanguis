@@ -18,7 +18,7 @@ namespace simple
 
 sanguis::creator::pos
 grid_position(
-	sanguis::collision::center
+	sanguis::collision::center const &
 );
 
 }

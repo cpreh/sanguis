@@ -18,6 +18,7 @@
 #include <sanguis/creator/tile_size.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/log/out.hpp>
@@ -27,21 +28,26 @@
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/units/io.hpp>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
 sanguis::collision::impl::world::simple::body::body(
 	sanguis::collision::world::body_parameters const &_parameters,
-	sanguis::collision::impl::world::simple::body_remove_callback const &_body_remove_callback,
-	sanguis::collision::impl::world::simple::body_move_callback const &_body_move_callback
+	sanguis::collision::impl::world::simple::body_remove_callback &&_body_remove_callback,
+	sanguis::collision::impl::world::simple::body_move_callback &&_body_move_callback
 )
 :
 	sanguis::collision::world::body(),
 	body_remove_callback_(
-		_body_remove_callback
+		std::move(
+			_body_remove_callback
+		)
 	),
 	body_move_callback_(
-		_body_move_callback
+		std::move(
+			_body_move_callback
+		)
 	),
 	radius_(
 		_parameters.radius()
@@ -75,6 +81,7 @@ sanguis::collision::impl::world::simple::body::body(
 			)
 		)
 	)
+	{
 		FCPPT_LOG_WARNING(
 			_parameters.log(),
 			fcppt::log::out
@@ -82,6 +89,7 @@ sanguis::collision::impl::world::simple::body::body(
 				<< radius_
 				<< FCPPT_TEXT(" won't fit into a single tile.")
 		)
+	}
 
 	FCPPT_ASSERT_PRE(
 		fcppt::optional::maybe(
@@ -90,7 +98,7 @@ sanguis::collision::impl::world::simple::body::body(
 				true
 			),
 			[](
-				sanguis::collision::mass const _mass
+				sanguis::collision::mass const &_mass
 			)
 			{
 				return
@@ -104,7 +112,7 @@ sanguis::collision::impl::world::simple::body::body(
 
 sanguis::collision::impl::world::simple::body::~body()
 {
-	body_remove_callback_.get()(
+	body_remove_callback_(
 		*this
 	);
 }
@@ -117,8 +125,10 @@ sanguis::collision::impl::world::simple::body::center(
 	center_ =
 		_center;
 
-	body_move_callback_.get()(
-		*this
+	body_move_callback_(
+		fcppt::make_ref(
+			*this
+		)
 	);
 }
 

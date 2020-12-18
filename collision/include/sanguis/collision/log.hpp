@@ -3,7 +3,7 @@
 
 #include <sanguis/collision/log_fwd.hpp>
 #include <sanguis/collision/symbol.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>
 #include <fcppt/log/object.hpp>
 
@@ -15,7 +15,7 @@ namespace collision
 
 class log
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		log
 	);
 public:
@@ -28,6 +28,7 @@ public:
 	SANGUIS_COLLISION_SYMBOL
 	~log();
 
+	[[nodiscard]]
 	fcppt::log::object &
 	body_log() const;
 private:

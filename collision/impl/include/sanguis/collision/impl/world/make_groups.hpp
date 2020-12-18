@@ -69,29 +69,24 @@ private:
 		}
 	};
 
-	typedef
+	using
+	result_container
+	=
 	std::vector<
 		ResultGroup
-	>
-	result_container;
+	>;
 
 	struct make_container
 	{
-		typedef
-		result_container
-		result_type;
-
 		template<
 			typename Group
 		>
-		result_type
+		result_container
 		operator()(
 			Group
 		) const
 		{
-			groups_array<
-				Group::value
-			> const array(
+			auto const array(
 				fcppt::container::array::init<
 					groups_array<
 						Group::value
@@ -111,12 +106,13 @@ private:
 		}
 	};
 public:
-	typedef
+	using
+	group_container_array
+	=
 	fcppt::enum_::array<
 		IndexedGroup,
 		result_container
-	>
-	group_container_array;
+	>;
 
 	static
 	group_container_array

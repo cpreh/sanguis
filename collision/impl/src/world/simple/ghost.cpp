@@ -15,6 +15,7 @@
 #include <sanguis/collision/world/optional_body_enter.hpp>
 #include <sanguis/collision/world/optional_body_exit.hpp>
 #include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/reference_comparison.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/algorithm/map_iteration.hpp>
@@ -31,11 +32,13 @@
 
 sanguis::collision::impl::world::simple::ghost::ghost(
 	sanguis::collision::world::ghost_parameters const &_parameters,
-	sanguis::collision::impl::world::simple::ghost_remove_callback const &_ghost_remove_callback
+	sanguis::collision::impl::world::simple::ghost_remove_callback &&_ghost_remove_callback
 )
 :
 	ghost_remove_callback_(
-		_ghost_remove_callback
+		std::move(
+			_ghost_remove_callback
+		)
 	),
 	radius_(
 		_parameters.radius()
@@ -98,8 +101,10 @@ sanguis::collision::impl::world::simple::ghost::pre_update_bodies()
 		:
 		bodies_
 	)
+	{
 		body.second =
 			body_status::marked_for_deletion;
+	}
 }
 
 sanguis::collision::world::body_exit_container
@@ -124,8 +129,12 @@ sanguis::collision::impl::world::simple::ghost::post_update_bodies()
 			{
 				result.push_back(
 					sanguis::collision::world::body_exit(
-						_element.first.get().body_base(),
-						ghost_base_
+						fcppt::make_ref(
+							_element.first.get().body_base()
+						),
+						fcppt::make_ref(
+							ghost_base_
+						)
 					)
 				);
 
@@ -181,8 +190,12 @@ sanguis::collision::impl::world::simple::ghost::update_near_body(
 					return
 						sanguis::collision::world::optional_body_enter(
 							sanguis::collision::world::body_enter(
-								_body.body_base(),
-								ghost_base_,
+								fcppt::make_ref(
+									_body.body_base()
+								),
+								fcppt::make_ref(
+									ghost_base_
+								),
 								sanguis::collision::world::created{
 									false
 								}
@@ -223,8 +236,10 @@ sanguis::collision::impl::world::simple::ghost::new_body(
 			)
 		)
 	)
+	{
 		return
 			sanguis::collision::world::optional_body_enter();
+	}
 
 	FCPPT_ASSERT_ERROR(
 		bodies_.insert(
@@ -240,8 +255,12 @@ sanguis::collision::impl::world::simple::ghost::new_body(
 	return
 		sanguis::collision::world::optional_body_enter(
 			sanguis::collision::world::body_enter{
-				_body.body_base(),
-				ghost_base_,
+				fcppt::make_ref(
+					_body.body_base()
+				),
+				fcppt::make_ref(
+					ghost_base_
+				),
 				_created
 			}
 		);
@@ -272,8 +291,12 @@ sanguis::collision::impl::world::simple::ghost::remove_body(
 
 				return
 					sanguis::collision::world::body_exit(
-						_body.body_base(),
-						ghost_base_
+						fcppt::make_ref(
+							_body.body_base()
+						),
+						fcppt::make_ref(
+							ghost_base_
+						)
 					);
 			}
 		);

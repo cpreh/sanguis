@@ -16,10 +16,10 @@ namespace impl
 
 sanguis::collision::speed
 adjust_speed(
-	sanguis::collision::impl::line_segment movement,
-	sanguis::collision::radius entity_radius,
-	sanguis::collision::impl::rect obstacle,
-	sanguis::collision::speed old_speed
+	sanguis::collision::impl::line_segment const &movement,
+	sanguis::collision::radius const &entity_radius,
+	sanguis::collision::impl::rect const &obstacle,
+	sanguis::collision::speed const &old_speed
 );
 
 }

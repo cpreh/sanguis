@@ -15,12 +15,13 @@ namespace collision
 namespace impl
 {
 
-typedef
+using
+time
+=
 boost::units::quantity<
 	boost::units::si::time,
 	sanguis::collision::unit
->
-time;
+>;
 
 }
 }

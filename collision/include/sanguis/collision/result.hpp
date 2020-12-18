@@ -19,6 +19,7 @@ public:
 		sanguis::collision::speed
 	);
 
+	[[nodiscard]]
 	SANGUIS_COLLISION_SYMBOL
 	sanguis::collision::speed
 	speed() const;

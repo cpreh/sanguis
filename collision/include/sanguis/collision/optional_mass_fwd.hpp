@@ -10,11 +10,12 @@ namespace sanguis
 namespace collision
 {
 
-typedef
+using
+optional_mass
+=
 fcppt::optional::object<
 	sanguis::collision::mass
->
-optional_mass;
+>;
 
 }
 }

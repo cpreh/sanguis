@@ -24,8 +24,8 @@ template<
 >
 void
 for_all_body_neighbors(
-	sanguis::creator::pos const _pos,
-	sanguis::creator::dim const _size,
+	sanguis::creator::pos const &_pos,
+	sanguis::creator::dim const &_size,
 	Function const &_function
 )
 {
@@ -46,9 +46,11 @@ for_all_body_neighbors(
 				grid_pos2
 			)
 		)
+		{
 			_function(
 				grid_pos2
 			);
+		}
 	}
 }
 

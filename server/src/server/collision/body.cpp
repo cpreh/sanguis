@@ -19,6 +19,7 @@
 #include <sanguis/server/collision/to_mass.hpp>
 #include <sanguis/server/collision/to_radius.hpp>
 #include <sanguis/server/collision/to_speed.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/optional/assign.hpp>
@@ -148,7 +149,9 @@ sanguis::server::collision::body::transfer(
 						}
 					),
 					_collision_group,
-					body_base_
+					fcppt::make_ref(
+						body_base_
+					)
 				)
 			)
 		)
@@ -156,7 +159,9 @@ sanguis::server::collision::body::transfer(
 
 	return
 		_world.activate_body(
-			*new_body,
+			fcppt::make_ref(
+				*new_body
+			),
 			_created
 		);
 }
@@ -168,8 +173,10 @@ sanguis::server::collision::body::remove(
 {
 	sanguis::collision::world::body_exit_container result(
 		_world.deactivate_body(
-			*FCPPT_ASSERT_OPTIONAL_ERROR(
-				body_
+			fcppt::make_ref(
+				*FCPPT_ASSERT_OPTIONAL_ERROR(
+					body_
+				)
 			)
 		)
 	);

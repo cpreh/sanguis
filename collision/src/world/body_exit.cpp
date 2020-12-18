@@ -4,8 +4,8 @@
 
 
 sanguis::collision::world::body_exit::body_exit(
-	sanguis::collision::world::body_base &_body,
-	sanguis::collision::world::ghost_base &_ghost
+	body_ref const _body,
+	ghost_ref const _ghost
 )
 :
 	body_(

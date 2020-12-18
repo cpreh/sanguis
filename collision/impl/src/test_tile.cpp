@@ -34,11 +34,11 @@
 
 sanguis::collision::impl::optional_speed
 sanguis::collision::impl::test_tile(
-	sanguis::collision::center const _center,
-	sanguis::collision::radius const _radius,
+	sanguis::collision::center const &_center,
+	sanguis::collision::radius const &_radius,
 	sanguis::collision::duration const _time,
-	sanguis::collision::speed const _speed,
-	sanguis::creator::pos const _pos,
+	sanguis::collision::speed const &_speed,
+	sanguis::creator::pos const &_pos,
 	sanguis::creator::tile const _tile
 )
 {
@@ -47,8 +47,10 @@ sanguis::collision::impl::test_tile(
 			_tile
 		)
 	)
+	{
 		return
 			sanguis::collision::impl::optional_speed();
+	}
 
 	sanguis::collision::center const new_center(
 		sanguis::collision::impl::move(

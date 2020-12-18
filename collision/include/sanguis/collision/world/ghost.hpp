@@ -3,7 +3,7 @@
 
 #include <sanguis/collision/center_fwd.hpp>
 #include <sanguis/collision/world/ghost_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -15,7 +15,7 @@ namespace world
 
 class ghost
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		ghost
 	);
 protected:

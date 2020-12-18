@@ -6,33 +6,47 @@
 #include <sanguis/collision/world/body_base_fwd.hpp>
 #include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/log/object_fwd.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::collision::world::body_parameters::body_parameters(
 	sanguis::collision::log const &_log,
-	sanguis::collision::center const _center,
-	sanguis::collision::speed const _speed,
-	sanguis::collision::radius const _radius,
-	sanguis::collision::optional_mass const _mass,
+	sanguis::collision::center _center,
+	sanguis::collision::speed _speed,
+	sanguis::collision::radius _radius,
+	sanguis::collision::optional_mass _mass,
 	sanguis::collision::world::body_group const _collision_group,
-	sanguis::collision::world::body_base &_body_base
+	fcppt::reference<
+		sanguis::collision::world::body_base
+	> const _body_base
 )
 :
 	log_{
 		_log.body_log()
 	},
 	center_(
-		_center
+		std::move(
+			_center
+		)
 	),
 	speed_(
-		_speed
+		std::move(
+			_speed
+		)
 	),
 	radius_(
-		_radius
+		std::move(
+			_radius
+		)
 	),
 	mass_(
-		_mass
+		std::move(
+			_mass
+		)
 	),
 	collision_group_(
 		_collision_group

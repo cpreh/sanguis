@@ -1,13 +1,18 @@
 #include <sanguis/collision/impl/dir.hpp>
 #include <sanguis/collision/impl/intersection.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::collision::impl::intersection::intersection(
-	sanguis::collision::impl::dir const &_dir
+	sanguis::collision::impl::dir _dir
 )
 :
 	dir_(
-		_dir
+		std::move(
+			_dir
+		)
 	)
 {
 }

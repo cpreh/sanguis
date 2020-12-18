@@ -19,7 +19,7 @@
 
 sanguis::collision::impl::optional_intersection
 sanguis::collision::impl::rect_line_intersection(
-	sanguis::collision::impl::rect const _rect,
+	sanguis::collision::impl::rect const &_rect,
 	sanguis::collision::impl::line_segment const _line
 )
 {
@@ -33,12 +33,13 @@ sanguis::collision::impl::rect_line_intersection(
 		boost::units::si::meter
 	);
 
-	typedef
+	using
+	line_segment_array
+	=
 	std::array<
 		sanguis::collision::impl::line_segment,
 		4
-	>
-	line_segment_array;
+	>;
 
 	sanguis::collision::impl::rect::dim const size(
 		_rect.size()

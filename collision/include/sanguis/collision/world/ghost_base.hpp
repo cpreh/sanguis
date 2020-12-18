@@ -3,7 +3,7 @@
 
 #include <sanguis/collision/symbol.hpp>
 #include <sanguis/collision/world/ghost_base_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/symbol/class.hpp>
 
 
@@ -16,7 +16,7 @@ namespace world
 
 class FCPPT_SYMBOL_CLASS ghost_base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		ghost_base
 	);
 protected:

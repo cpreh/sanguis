@@ -5,7 +5,7 @@
 #include <sanguis/collision/speed_fwd.hpp>
 #include <sanguis/collision/symbol.hpp>
 #include <sanguis/collision/world/body_base_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/symbol/class.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool_fwd.hpp>
@@ -21,7 +21,7 @@ namespace world
 
 class FCPPT_SYMBOL_CLASS body_base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		body_base
 	);
 protected:
@@ -44,6 +44,7 @@ public:
 		sanguis::collision::speed
 	) = 0;
 
+	[[nodiscard]]
 	virtual
 	boost::logic::tribool
 	can_collide_with(
@@ -53,8 +54,8 @@ public:
 	virtual
 	void
 	collision(
-		sanguis::collision::world::body_base &
-	) = 0;
+		sanguis::collision::world::body_base & // NOLINT(google-runtime-references)
+	) = 0; // NOLINT(google-runtime-references)
 
 	virtual
 	void

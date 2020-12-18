@@ -19,11 +19,11 @@ namespace impl
 
 sanguis::collision::impl::optional_speed
 test_tile(
-	sanguis::collision::center,
-	sanguis::collision::radius,
+	sanguis::collision::center const &,
+	sanguis::collision::radius const &,
 	sanguis::collision::duration,
-	sanguis::collision::speed,
-	sanguis::creator::pos,
+	sanguis::collision::speed const &,
+	sanguis::creator::pos const &,
 	sanguis::creator::tile
 );
 

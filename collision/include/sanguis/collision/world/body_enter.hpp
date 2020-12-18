@@ -19,37 +19,42 @@ namespace world
 class body_enter
 {
 public:
+	using
+	body_ref
+	=
+	fcppt::reference<
+		sanguis::collision::world::body_base
+	>;
+
+	using
+	ghost_ref
+	=
+	fcppt::reference<
+		sanguis::collision::world::ghost_base
+	>;
+
 	body_enter(
-		sanguis::collision::world::body_base &,
-		sanguis::collision::world::ghost_base &,
+		body_ref,
+		ghost_ref,
 		sanguis::collision::world::created
 	);
 
+	[[nodiscard]]
 	SANGUIS_COLLISION_SYMBOL
 	sanguis::collision::world::body_base &
 	body() const;
 
+	[[nodiscard]]
 	SANGUIS_COLLISION_SYMBOL
 	sanguis::collision::world::ghost_base &
 	ghost() const;
 
+	[[nodiscard]]
 	SANGUIS_COLLISION_SYMBOL
 	sanguis::collision::world::created
 	created() const;
 private:
-	typedef
-	fcppt::reference<
-		sanguis::collision::world::body_base
-	>
-	body_ref;
-
 	body_ref body_;
-
-	typedef
-	fcppt::reference<
-		sanguis::collision::world::ghost_base
-	>
-	ghost_ref;
 
 	ghost_ref ghost_;
 

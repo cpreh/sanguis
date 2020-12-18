@@ -17,13 +17,14 @@ namespace world
 namespace simple
 {
 
-typedef
+using
+body_base_hook
+=
 boost::intrusive::list_base_hook<
 	boost::intrusive::link_mode<
 		boost::intrusive::auto_unlink
 	>
->
-body_base_hook;
+>;
 
 }
 }

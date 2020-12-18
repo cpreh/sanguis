@@ -10,11 +10,12 @@ namespace sanguis
 namespace collision
 {
 
-typedef
+using
+optional_result_pair
+=
 fcppt::optional::object<
 	sanguis::collision::result_pair
->
-optional_result_pair;
+>;
 
 }
 }

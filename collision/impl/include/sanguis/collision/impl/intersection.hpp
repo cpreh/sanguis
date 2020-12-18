@@ -17,9 +17,10 @@ class intersection
 public:
 	explicit
 	intersection(
-		sanguis::collision::impl::dir const &
+		sanguis::collision::impl::dir
 	);
 
+	[[nodiscard]]
 	sanguis::collision::impl::dir const &
 	dir() const;
 private:

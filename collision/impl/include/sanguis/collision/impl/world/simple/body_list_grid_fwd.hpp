@@ -16,12 +16,13 @@ namespace world
 namespace simple
 {
 
-typedef
+using
+body_list_grid
+=
 fcppt::container::grid::object<
 	sanguis::collision::impl::world::simple::body_list,
 	2
->
-body_list_grid;
+>;
 
 }
 }

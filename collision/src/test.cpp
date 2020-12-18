@@ -11,8 +11,8 @@
 
 bool
 sanguis::collision::test(
-	sanguis::collision::center const _center,
-	sanguis::collision::radius const _radius,
+	sanguis::collision::center const &_center,
+	sanguis::collision::radius const &_radius,
 	sanguis::creator::grid const &_grid
 )
 {
@@ -26,7 +26,7 @@ sanguis::collision::test(
 			[](
 				fcppt::container::grid::pos_reference<
 					sanguis::creator::grid const
-				> const _entry
+				> const &_entry
 			)
 			{
 				return

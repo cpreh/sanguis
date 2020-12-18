@@ -30,8 +30,8 @@
 sanguis::creator::grid_crange
 sanguis::collision::impl::make_range(
 	sanguis::creator::grid const &_grid,
-	sanguis::collision::center const _center,
-	sanguis::collision::radius const _radius
+	sanguis::collision::center const &_center,
+	sanguis::collision::radius const &_radius
 )
 {
 	sanguis::creator::difference_type const tile_size(

@@ -45,7 +45,6 @@ set(
 	impl/include/sanguis/collision/impl/world/make_groups.hpp
 	impl/include/sanguis/collision/impl/world/simple/body.hpp
 	impl/include/sanguis/collision/impl/world/simple/body_base_hook.hpp
-	impl/include/sanguis/collision/impl/world/simple/body_callback.hpp
 	impl/include/sanguis/collision/impl/world/simple/body_fwd.hpp
 	impl/include/sanguis/collision/impl/world/simple/body_list.hpp
 	impl/include/sanguis/collision/impl/world/simple/body_list_grid.hpp

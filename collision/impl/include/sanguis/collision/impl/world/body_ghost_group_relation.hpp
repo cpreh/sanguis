@@ -18,7 +18,9 @@ namespace impl
 namespace world
 {
 
-typedef
+using
+body_ghost_group_relation
+=
 boost::mpl::map<
 	sanguis::collision::impl::world::body_ghost_group_pair<
 		sanguis::collision::world::body_group::destructible,
@@ -72,8 +74,7 @@ boost::mpl::map<
 		sanguis::collision::world::body_group::destructible,
 		sanguis::collision::world::ghost_group::target_enemy
 	>
->
-body_ghost_group_relation;
+>;
 
 }
 }
