@@ -1,5 +1,5 @@
 #include <sanguis/enemy_kind.hpp>
-#include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/random_generator_ref.hpp>
 #include <sanguis/messages/types/string.hpp>
 #include <sanguis/server/entities/enemies/attribute_container.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
@@ -14,6 +14,8 @@
 #include <sanguis/server/entities/enemies/skills/factory/container.hpp>
 #include <sanguis/server/entities/enemies/skills/factory/parameters.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
+#include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -27,7 +29,7 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::entities::enemies::special::special(
-	sanguis::random_generator &_random_generator,
+	sanguis::random_generator_ref const _random_generator,
 	sanguis::server::entities::enemies::parameters &&_parameters,
 	sanguis::server::entities::enemies::attribute_container const &_attributes,
 	sanguis::server::entities::enemies::skills::factory::container const &_skills,
@@ -37,7 +39,9 @@ sanguis::server::entities::enemies::special::special(
 	sanguis::server::entities::enemies::enemy(
 		std::move(
 			sanguis::server::entities::enemies::finalize_special_parameters(
-				_parameters,
+				fcppt::make_ref(
+					_parameters
+				),
 				_attributes,
 				_skills
 			)
@@ -49,7 +53,7 @@ sanguis::server::entities::enemies::special::special(
 		>(
 			_skills,
 			[
-				&_random_generator,
+				_random_generator,
 				&_parameters,
 				this
 			](
@@ -59,7 +63,9 @@ sanguis::server::entities::enemies::special::special(
 				return
 					_create(
 						sanguis::server::entities::enemies::skills::factory::parameters(
-							this->diff_clock(),
+							fcppt::make_cref(
+								this->diff_clock()
+							),
 							_random_generator,
 							_parameters.difficulty()
 						)
@@ -85,8 +91,7 @@ sanguis::server::entities::enemies::special::special(
 FCPPT_PP_POP_WARNING
 
 sanguis::server::entities::enemies::special::~special()
-{
-}
+= default;
 
 void
 sanguis::server::entities::enemies::special::update()
@@ -98,9 +103,11 @@ sanguis::server::entities::enemies::special::update()
 		:
 		skills_
 	)
+	{
 		skill->update(
 			*this
 		);
+	}
 }
 
 void
@@ -113,9 +120,11 @@ sanguis::server::entities::enemies::special::remove_from_game()
 		:
 		skills_
 	)
+	{
 		skill->on_die(
 			*this
 		);
+	}
 }
 
 sanguis::messages::types::string const &

@@ -16,8 +16,8 @@ namespace ai
 [[nodiscard]]
 bool
 go_close_to_target(
-	sanguis::server::ai::context &,
-	sanguis::server::ai::target,
+	sanguis::server::ai::context &, // NOLINT(google-runtime-references)
+	sanguis::server::ai::target const &,
 	sanguis::server::ai::speed_factor
 );
 

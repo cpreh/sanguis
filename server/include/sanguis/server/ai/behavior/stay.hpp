@@ -3,10 +3,10 @@
 
 #include <sanguis/duration.hpp>
 #include <sanguis/server/center.hpp>
-#include <sanguis/server/ai/context_fwd.hpp>
+#include <sanguis/server/ai/context_ref.hpp>
 #include <sanguis/server/ai/status_fwd.hpp>
 #include <sanguis/server/ai/behavior/base.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -22,22 +22,24 @@ class stay
 :
 	public sanguis::server::ai::behavior::base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		stay
 	);
 public:
 	explicit
 	stay(
-		sanguis::server::ai::context &
+		sanguis::server::ai::context_ref
 	);
 
 	~stay()
 	override;
 
+	[[nodiscard]]
 	bool
 	start()
 	override;
 
+	[[nodiscard]]
 	sanguis::server::ai::status
 	update(
 		sanguis::duration

@@ -1,9 +1,9 @@
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/world/ghost_base_fwd.hpp>
+#include <sanguis/collision/world/ghost_base_ref.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_parameters.hpp>
-#include <fcppt/reference_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -13,9 +13,7 @@ sanguis::collision::world::ghost_parameters::ghost_parameters(
 	sanguis::collision::center _center,
 	sanguis::collision::radius _radius,
 	sanguis::collision::world::ghost_group const _collision_group,
-	fcppt::reference<
-		sanguis::collision::world::ghost_base
-	> const _ghost_base
+	sanguis::collision::world::ghost_base_ref const _ghost_base
 )
 :
 	center_(

@@ -51,6 +51,7 @@
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <alda/message/init_record.hpp>
+#include <fcppt/copy.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -67,7 +68,9 @@ sanguis::server::entities::enemies::enemy::enemy(
 )
 :
 	sanguis::server::entities::with_ai(
-		_parameters.ai_create_function(),
+		fcppt::copy(
+			_parameters.ai_create_function()
+		),
 		std::move(
 			_parameters.weapon()
 		),
@@ -102,7 +105,7 @@ sanguis::server::entities::enemies::enemy::enemy(
 			)
 		),
 		sanguis::server::direction(
-			0.f
+			0.F
 		)
 	),
 	enemy_type_(
@@ -127,8 +130,7 @@ sanguis::server::entities::enemies::enemy::enemy(
 }
 
 sanguis::server::entities::enemies::enemy::~enemy()
-{
-}
+= default;
 
 sanguis::server::team
 sanguis::server::entities::enemies::enemy::team() const

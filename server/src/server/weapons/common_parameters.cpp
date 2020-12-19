@@ -1,11 +1,13 @@
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/random_generator_ref.hpp>
 #include <sanguis/server/weapons/common_parameters.hpp>
+#include <sanguis/server/weapons/log_cref.hpp>
 #include <sanguis/server/weapons/log_fwd.hpp>
 
 
 sanguis::server::weapons::common_parameters::common_parameters(
-	sanguis::server::weapons::log const &_log,
-	sanguis::random_generator &_random_generator
+	sanguis::server::weapons::log_cref const _log,
+	sanguis::random_generator_ref const _random_generator
 )
 :
 	log_{

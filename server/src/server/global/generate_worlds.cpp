@@ -33,6 +33,7 @@
 #include <sanguis/server/world/random.hpp>
 #include <sanguis/server/world/random_seed.hpp>
 #include <fcppt/make_int_range.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/unreachable.hpp>
@@ -251,7 +252,9 @@ sanguis::server::global::generate_worlds(
 		FCPPT_ASSERT_ERROR(
 			last_world.insert(
 				sanguis::server::entities::enemies::create(
-					_parameters.random_generator(),
+					fcppt::make_ref(
+						_parameters.random_generator()
+					),
 					_parameters.weapon_parameters(),
 					sanguis::creator::enemy_type::reaper,
 					sanguis::creator::enemy_kind::unique,

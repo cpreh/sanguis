@@ -26,22 +26,24 @@
 sanguis::server::ai::pathing::optional_trail
 sanguis::server::ai::pathing::find_target(
 	sanguis::creator::grid const &_grid,
-	sanguis::server::ai::pathing::start const _start,
-	sanguis::server::ai::pathing::target const _target
+	sanguis::server::ai::pathing::start const &_start,
+	sanguis::server::ai::pathing::target const &_target
 )
 {
-	typedef
+	using
+	pos_queue
+	=
 	std::queue<
 		sanguis::creator::pos
-	>
-	pos_queue;
+	>;
 
-	typedef
+	using
+	predecessor_map
+	=
 	std::unordered_map<
 		sanguis::creator::pos,
 		sanguis::creator::pos
-	>
-	predecessor_map;
+	>;
 
 	predecessor_map predecessors;
 
@@ -58,7 +60,6 @@ sanguis::server::ai::pathing::find_target(
 		_start.get()
 	);
 
-	// TODO: Find a way to use algorithms here
 	while(
 		!positions.empty()
 	)
@@ -88,6 +89,7 @@ sanguis::server::ai::pathing::find_target(
 				=
 				result.back()
 			)
+			{
 				result.push_back(
 					FCPPT_ASSERT_OPTIONAL_ERROR(
 						fcppt::container::find_opt_mapped(
@@ -96,6 +98,7 @@ sanguis::server::ai::pathing::find_target(
 						)
 					).get()
 				);
+			}
 
 			return
 				sanguis::server::ai::pathing::optional_trail{
@@ -114,6 +117,7 @@ sanguis::server::ai::pathing::find_target(
 				cur
 			)
 		)
+		{
 			if(
 				!fcppt::container::find_opt(
 					predecessors,
@@ -153,6 +157,7 @@ sanguis::server::ai::pathing::find_target(
 					)
 				);
 			}
+		}
 	}
 
 	return

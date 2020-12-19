@@ -13,7 +13,7 @@ sanguis::server::damage::no_armor()
 				sanguis::server::damage::armor_array::internal
 			>(
 				sanguis::server::damage::armor_unit(
-					0.f
+					0.F
 				)
 			)
 		};

@@ -5,6 +5,7 @@
 #include <sanguis/server/entities/enemies/attribute_container.hpp>
 #include <sanguis/server/entities/enemies/parameters_fwd.hpp>
 #include <sanguis/server/entities/enemies/modifiers/container.hpp>
+#include <fcppt/reference_fwd.hpp>
 
 
 namespace sanguis
@@ -20,8 +21,10 @@ namespace modifiers
 
 sanguis::server::entities::enemies::attribute_container
 apply(
-	sanguis::random_generator &,
-	sanguis::server::entities::enemies::parameters &,
+	sanguis::random_generator &, // NOLINT(google-runtime-references)
+	fcppt::reference<
+		sanguis::server::entities::enemies::parameters
+	>,
 	sanguis::server::entities::enemies::modifiers::container const &
 );
 

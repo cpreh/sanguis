@@ -5,7 +5,7 @@
 #include <sanguis/server/entities/optional_transfer_result_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -20,7 +20,7 @@ class center_ghost
 	public sanguis::server::entities::center_simple,
 	public virtual sanguis::server::entities::with_ghosts
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		center_ghost
 	);
 protected:
@@ -29,6 +29,7 @@ public:
 	~center_ghost()
 	override = 0;
 protected:
+	[[nodiscard]]
 	sanguis::server::entities::optional_transfer_result
 	on_transfer(
 		sanguis::server::entities::transfer_parameters const &

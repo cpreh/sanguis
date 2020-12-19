@@ -2,6 +2,7 @@
 #include <sanguis/server/buffs/provider.hpp>
 #include <sanguis/server/buffs/unique_ptr.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
+#include <sanguis/server/entities/with_buffs_ref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/reference_comparison.hpp>
 #include <fcppt/reference_impl.hpp>
@@ -20,28 +21,26 @@ sanguis::server::buffs::provider::provider()
 }
 
 sanguis::server::buffs::provider::~provider()
-{
-}
+= default;
 
 void
 sanguis::server::buffs::provider::add(
-	sanguis::server::entities::with_buffs &_entity,
+	sanguis::server::entities::with_buffs_ref const _entity,
 	sanguis::server::buffs::unique_ptr &&_buff
 )
 {
-	typedef
+	using
+	ret_type
+	=
 	std::pair<
 		sanguis::server::buffs::provider::buff_map::iterator,
 		bool
-	>
-	ret_type;
+	>;
 
 	ret_type const ret(
 		buffs_.insert(
 			std::make_pair(
-				fcppt::make_ref(
-					_entity
-				),
+				_entity,
 				fcppt::make_ref(
 					*_buff
 				)
@@ -53,7 +52,7 @@ sanguis::server::buffs::provider::add(
 		ret.second
 	);
 
-	_entity.add_buff(
+	_entity->add_buff(
 		std::move(
 			_buff
 		)

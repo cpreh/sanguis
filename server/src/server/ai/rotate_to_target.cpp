@@ -10,7 +10,7 @@
 void
 sanguis::server::ai::rotate_to_target(
 	sanguis::server::entities::with_ai &_me,
-	sanguis::server::ai::target const _target
+	sanguis::server::ai::target const &_target
 )
 {
 	fcppt::optional::maybe_void(

@@ -8,7 +8,8 @@
 #include <sanguis/server/remove_weapon_pickup_callback.hpp>
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <sanguis/server/entities/with_body_ref.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -22,34 +23,35 @@ class weapon_pickup_candidates
 :
 	public sanguis::server::auras::aura
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		weapon_pickup_candidates
 	);
 public:
 	weapon_pickup_candidates(
 		sanguis::server::radius,
-		sanguis::server::add_weapon_pickup_callback const &,
-		sanguis::server::remove_weapon_pickup_callback const &
+		sanguis::server::add_weapon_pickup_callback &&,
+		sanguis::server::remove_weapon_pickup_callback &&
 	);
 
 	~weapon_pickup_candidates()
 	override;
 private:
+	[[nodiscard]]
 	sanguis::optional_aura_type
 	type() const
 	override;
 
 	void
 	enter(
-		sanguis::server::entities::with_body &,
+		sanguis::server::entities::with_body_ref,
 		sanguis::collision::world::created
 	)
 	override;
 
 	void
 	leave(
-		sanguis::server::entities::with_body &
-	)
+		sanguis::server::entities::with_body & // NOLINT(google-runtime-references)
+	) // NOLINT(google-runtime-references)
 	override;
 
 	sanguis::server::add_weapon_pickup_callback const add_;

@@ -1,6 +1,6 @@
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/perk_type.hpp>
-#include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/random_generator_ref.hpp>
 #include <sanguis/server/entities/with_perks.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/perks/create.hpp>
@@ -37,7 +37,7 @@ sanguis::server::entities::with_perks::add_perk(
 							_type,
 							sanguis::server::perks::create(
 								this->diff_clock(),
-								random_generator_,
+								random_generator_.get(), // TODO
 								_type
 							)
 						)
@@ -50,7 +50,7 @@ sanguis::server::entities::with_perks::add_perk(
 }
 
 sanguis::server::entities::with_perks::with_perks(
-	sanguis::random_generator &_random_generator
+	sanguis::random_generator_ref const _random_generator
 )
 :
 	random_generator_(

@@ -23,12 +23,12 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 		sanguis::projectile_type::bullet,
 		_team,
 		sanguis::server::entities::movement_speed(
-			800.f
+			800.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		),
 		_load_context,
 		sanguis::server::entities::projectiles::life_time(
 			sanguis::duration_second(
-				3.f
+				3.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			)
 		),
 		_direction
@@ -43,8 +43,7 @@ sanguis::server::entities::projectiles::simple_bullet::simple_bullet(
 }
 
 sanguis::server::entities::projectiles::simple_bullet::~simple_bullet()
-{
-}
+= default;
 
 void
 sanguis::server::entities::projectiles::simple_bullet::do_damage(

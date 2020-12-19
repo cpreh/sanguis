@@ -13,6 +13,7 @@
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
@@ -27,7 +28,7 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::entities::with_ai::with_ai(
-	sanguis::server::ai::create_function const &_create_ai,
+	sanguis::server::ai::create_function &&_create_ai,
 	sanguis::server::weapons::unique_ptr &&_start_weapon,
 	sanguis::server::auras::container &&_auras,
 	sanguis::server::weapons::ias const _ias,
@@ -60,10 +61,14 @@ sanguis::server::entities::with_ai::with_ai(
 		)
 	),
 	create_ai_{
-		_create_ai
+		std::move(
+			_create_ai
+		)
 	},
 	ai_context_(
-		*this
+		fcppt::make_ref(
+			*this
+		)
 	),
 	ai_()
 {
@@ -72,8 +77,7 @@ sanguis::server::entities::with_ai::with_ai(
 FCPPT_PP_POP_WARNING
 
 sanguis::server::entities::with_ai::~with_ai()
-{
-}
+= default;
 
 void
 sanguis::server::entities::with_ai::update()
@@ -84,7 +88,7 @@ sanguis::server::entities::with_ai::update()
 		update_timer_.expired()
 	)
 	{
-		// TODO: Make this easier in sge
+		// TODO(philipp): Make this easier in sge
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			ai_
 		)->run(
@@ -100,10 +104,12 @@ sanguis::server::entities::with_ai::update()
 sanguis::server::entities::transfer_result
 sanguis::server::entities::with_ai::on_create()
 {
-	// TODO: Improve this!
+	// TODO(philipp): Improve this!
 	sanguis::server::ai::tree::base_unique_ptr new_ai(
 		create_ai_(
-			ai_context_
+			fcppt::make_ref(
+				ai_context_
+			)
 		)
 	);
 

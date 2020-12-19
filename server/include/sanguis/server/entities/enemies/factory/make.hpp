@@ -29,10 +29,10 @@ sanguis::server::entities::with_id_unique_ptr
 make(
 	sanguis::server::entities::enemies::factory::parameters const &,
 	sanguis::server::damage::armor_array const &,
-	sanguis::server::mass,
+	sanguis::server::mass const &,
 	sanguis::server::health,
 	sanguis::server::entities::movement_speed,
-	sanguis::server::ai::create_function const &,
+	sanguis::server::ai::create_function &&,
 	sanguis::server::weapons::unique_ptr &&,
 	sanguis::server::pickup_probability,
 	sanguis::server::exp,

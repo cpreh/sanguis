@@ -1,10 +1,11 @@
 #include <sanguis/collision/world/body_base_fwd.hpp>
+#include <sanguis/collision/world/body_base_ref.hpp>
 #include <sanguis/collision/world/body_collision.hpp>
 
 
 sanguis::collision::world::body_collision::body_collision(
-	body_ref const _body1,
-	body_ref const _body2
+	sanguis::collision::world::body_base_ref const _body1,
+	sanguis::collision::world::body_base_ref const _body2
 )
 :
 	body1_(

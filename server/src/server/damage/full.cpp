@@ -8,9 +8,9 @@
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wglobal-constructors)
 
-sanguis::server::damage::unit const
-sanguis::server::damage::full(
-	1.f
+sanguis::server::damage::unit const // NOLINT(fuchsia-statically-constructed-objects)
+sanguis::server::damage::full( // NOLINT(cert-err58-cpp)
+	1.F
 );
 
 FCPPT_PP_POP_WARNING

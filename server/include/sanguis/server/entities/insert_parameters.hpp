@@ -28,12 +28,15 @@ public:
 		sanguis::collision::world::created
 	);
 
+	[[nodiscard]]
 	sanguis::server::center
 	center() const;
 
+	[[nodiscard]]
 	server::angle
 	angle() const;
 
+	[[nodiscard]]
 	sanguis::collision::world::created
 	created() const;
 private:

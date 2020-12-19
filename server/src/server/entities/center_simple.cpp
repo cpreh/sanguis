@@ -24,8 +24,7 @@ sanguis::server::entities::center_simple::center() const
 }
 
 sanguis::server::entities::center_simple::~center_simple()
-{
-}
+= default;
 
 sanguis::server::entities::optional_transfer_result
 sanguis::server::entities::center_simple::on_transfer(

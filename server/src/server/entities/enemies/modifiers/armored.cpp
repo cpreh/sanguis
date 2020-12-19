@@ -6,6 +6,7 @@
 #include <sanguis/server/entities/enemies/parameters.hpp>
 #include <sanguis/server/entities/enemies/modifiers/armored.hpp>
 #include <sanguis/server/entities/enemies/modifiers/parameters.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>
 #include <fcppt/random/distribution/parameters/make_uniform_enum.hpp>
@@ -13,7 +14,9 @@
 
 sanguis::server::entities::enemies::attribute
 sanguis::server::entities::enemies::modifiers::armored(
-	sanguis::server::entities::enemies::parameters &_parameters,
+	fcppt::reference<
+		sanguis::server::entities::enemies::parameters
+	> const _parameters,
 	sanguis::server::entities::enemies::modifiers::parameters const &_modifier_parameters
 )
 {
@@ -31,10 +34,10 @@ sanguis::server::entities::enemies::modifiers::armored(
 		)
 	);
 
-	_parameters.armor_element(
+	_parameters->armor_element(
 		damage_type,
 		sanguis::server::damage::armor_unit(
-			0.9f
+			0.9F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		)
 	);
 

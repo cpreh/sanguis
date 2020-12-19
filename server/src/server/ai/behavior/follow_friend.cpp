@@ -2,8 +2,8 @@
 #include <sanguis/server/add_target_callback.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/remove_target_callback.hpp>
-#include <sanguis/server/update_target_callback.hpp>
 #include <sanguis/server/ai/context.hpp>
+#include <sanguis/server/ai/context_ref.hpp>
 #include <sanguis/server/ai/go_close_to_target.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/ai/speed_factor.hpp>
@@ -19,6 +19,7 @@
 #include <sanguis/server/entities/transfer_result.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_body.hpp>
+#include <sanguis/server/entities/with_body_ref.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/literal.hpp>
@@ -32,13 +33,10 @@
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::ai::behavior::follow_friend::follow_friend(
-	sanguis::server::ai::context &_context,
+	sanguis::server::ai::context_ref const _context,
 	sanguis::server::ai::sight_range const _sight_range
 )
 :
@@ -54,8 +52,7 @@ sanguis::server::ai::behavior::follow_friend::follow_friend(
 }
 
 sanguis::server::ai::behavior::follow_friend::~follow_friend()
-{
-}
+= default;
 
 sanguis::server::entities::transfer_result
 sanguis::server::ai::behavior::follow_friend::transfer()
@@ -75,21 +72,27 @@ sanguis::server::ai::behavior::follow_friend::transfer()
 						this->me().team(),
 						sanguis::server::auras::target_kind::friend_,
 						sanguis::server::add_target_callback{
-							sanguis::server::update_target_callback{
-								std::bind(
-									&sanguis::server::ai::behavior::follow_friend::target_enters,
-									this,
-									std::placeholders::_1
-								)
+							[
+								this
+							](
+								sanguis::server::entities::with_body_ref const _with_body
+							)
+							{
+								this->target_enters(
+									_with_body
+								);
 							}
 						},
 						sanguis::server::remove_target_callback{
-							sanguis::server::update_target_callback{
-								std::bind(
-									&sanguis::server::ai::behavior::follow_friend::target_leaves,
-									this,
-									std::placeholders::_1
-								)
+							[
+								this
+							](
+								sanguis::server::entities::with_body &_with_body
+							)
+							{
+								this->target_leaves(
+									_with_body
+								);
 							}
 						}
 					)
@@ -102,7 +105,6 @@ bool
 sanguis::server::ai::behavior::follow_friend::start()
 {
 	return
-		// TODO: Create a function for this
 		fcppt::optional::maybe(
 			this->first_target(),
 			fcppt::const_(
@@ -168,14 +170,12 @@ sanguis::server::ai::behavior::follow_friend::update(
 
 void
 sanguis::server::ai::behavior::follow_friend::target_enters(
-	sanguis::server::entities::with_body &_with_body
+	sanguis::server::entities::with_body_ref const _with_body
 )
 {
 	FCPPT_ASSERT_ERROR(
 		potential_targets_.insert(
-			fcppt::make_ref(
-				_with_body
-			)
+			_with_body
 		)
 		.second
 	);
@@ -198,10 +198,9 @@ sanguis::server::ai::behavior::follow_friend::target_leaves(
 			)
 		)
 		==
-		1u
+		1U
 	);
 
-	// TODO: Create a function for this!
 	fcppt::optional::maybe_void(
 		target_.get(),
 		[
@@ -219,8 +218,10 @@ sanguis::server::ai::behavior::follow_friend::target_leaves(
 					_with_body
 				)
 			)
+			{
 				target_ =
 					sanguis::server::entities::auto_weak_link();
+			}
 		}
 	);
 }
@@ -229,7 +230,6 @@ sanguis::server::entities::optional_with_body_ref
 sanguis::server::ai::behavior::follow_friend::first_target() const
 {
 	return
-		// TODO:
 		potential_targets_.empty()
 		?
 			sanguis::server::entities::optional_with_body_ref{}

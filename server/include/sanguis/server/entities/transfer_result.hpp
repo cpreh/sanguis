@@ -22,9 +22,11 @@ public:
 		sanguis::collision::world::body_enter_container &&
 	);
 
+	[[nodiscard]]
 	sanguis::collision::world::body_enter_container const &
 	body_enter() const;
 
+	[[nodiscard]]
 	sanguis::collision::world::body_enter_container &&
 	release_body_enter();
 private:

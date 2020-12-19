@@ -16,7 +16,7 @@ namespace enemies
 
 fcppt::string
 pretty_name(
-	sanguis::creator::enemy_type const
+	sanguis::creator::enemy_type
 );
 
 }

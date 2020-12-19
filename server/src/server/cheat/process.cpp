@@ -82,16 +82,16 @@ sanguis::server::cheat::process(
 								player_burn
 							>(
 								sanguis::server::radius(
-									300.f
+									300.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 								),
 								sanguis::server::team::players,
 								sanguis::server::buffs::burn_interval(
 									sanguis::duration_second(
-										1.f
+										1.F
 									)
 								),
 								sanguis::server::damage::unit(
-									10.f
+									10.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 								)
 							)
 						),
@@ -100,11 +100,11 @@ sanguis::server::cheat::process(
 								player_slow
 							>(
 								sanguis::server::radius(
-									300.f
+									300.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 								),
 								sanguis::server::team::players,
 								sanguis::server::buffs::slow_factor{
-									0.1f
+									0.1F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 								}
 							)
 						)
@@ -114,7 +114,7 @@ sanguis::server::cheat::process(
 			case sanguis::cheat_type::exp:
 				_player.add_exp(
 					sanguis::server::exp(
-						100000.f
+						100000.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 					)
 				);
 				return;
@@ -177,7 +177,7 @@ sanguis::server::cheat::process(
 									)
 								),
 								sanguis::server::entities::enemies::difficulty(
-									100.f
+									100.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 								)
 							)
 						)
@@ -196,14 +196,18 @@ sanguis::server::cheat::process(
 						sanguis::perk_type
 					>()
 				)
+				{
 					while(
 						_player.perk_choosable(
 							perk
 						)
 					)
+					{
 						_player.add_perk(
 							perk
 						);
+					}
+				}
 
 				sanguis::server::send_available_perks(
 					_player,

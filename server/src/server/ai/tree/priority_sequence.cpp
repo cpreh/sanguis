@@ -21,8 +21,7 @@ sanguis::server::ai::tree::priority_sequence::priority_sequence(
 }
 
 sanguis::server::ai::tree::priority_sequence::~priority_sequence()
-{
-}
+= default;
 
 sanguis::server::ai::status
 sanguis::server::ai::tree::priority_sequence::run(

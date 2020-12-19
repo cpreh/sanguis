@@ -27,6 +27,7 @@
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
 #include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>
@@ -108,7 +109,9 @@ sanguis::server::weapons::monster_spawner::do_attack(
 		sanguis::server::weapons::insert_to_attack_result(
 			_attack.environment().insert(
 				sanguis::server::entities::enemies::create(
-					this->random_generator(),
+					fcppt::make_ref(
+						this->random_generator()
+					),
 					common_parameters_,
 					fcppt::random::distribution::make_basic(
 						fcppt::random::distribution::parameters::make_uniform_enum<

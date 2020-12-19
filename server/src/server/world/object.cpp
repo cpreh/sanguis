@@ -6,6 +6,7 @@
 #include <sanguis/is_primary_weapon.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
+#include <sanguis/random_generator_ref.hpp>
 #include <sanguis/timer.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_status.hpp>
@@ -230,7 +231,9 @@ sanguis::server::world::object::object(
 {
 	this->insert_spawns(
 		_generated_world.spawns(),
-		_parameters.random_generator(),
+		fcppt::make_ref(
+			_parameters.random_generator()
+		),
 		_parameters.weapon_parameters()
 	);
 
@@ -335,9 +338,13 @@ sanguis::server::world::object::insert(
 	return
 		fcppt::optional::maybe(
 			_entity->transfer(
-				this->environment(),
+				fcppt::make_ref(
+					this->environment()
+				),
 				_insert_parameters,
-				grid_
+				fcppt::make_cref(
+					this->grid_
+				)
 			),
 			[
 				this
@@ -550,9 +557,13 @@ sanguis::server::world::object::insert_base(
 	return
 		fcppt::optional::map(
 			_entity->transfer(
-				this->environment(),
+				fcppt::make_ref(
+					this->environment()
+				),
 				_insert_parameters,
-				grid_
+				fcppt::make_cref(
+					this->grid_
+				)
 			),
 			[
 				&_container,
@@ -1262,7 +1273,7 @@ sanguis::server::world::object::send_player_specific(
 void
 sanguis::server::world::object::insert_spawns(
 	sanguis::creator::spawn_container const &_spawns,
-	sanguis::random_generator &_random_generator,
+	sanguis::random_generator_ref const _random_generator,
 	sanguis::server::weapons::common_parameters const &_weapon_parameters
 )
 {

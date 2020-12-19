@@ -27,12 +27,10 @@ sanguis::server::buffs::buff::update()
 }
 
 sanguis::server::buffs::buff::~buff()
-{
-}
+= default;
 
 sanguis::server::buffs::buff::buff()
-{
-}
+= default;
 
 void
 sanguis::server::buffs::buff::apply(

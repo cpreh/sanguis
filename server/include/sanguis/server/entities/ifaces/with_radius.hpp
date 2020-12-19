@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_IFACES_WITH_RADIUS_HPP_INCLUDED
 
 #include <sanguis/server/radius_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -16,12 +16,13 @@ namespace ifaces
 
 class with_radius
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		with_radius
 	);
 protected:
 	with_radius();
 public:
+	[[nodiscard]]
 	virtual
 	sanguis::server::radius
 	radius() const = 0;

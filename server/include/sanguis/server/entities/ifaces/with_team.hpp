@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_IFACES_WITH_TEAM_HPP_INCLUDED
 
 #include <sanguis/server/team_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -16,12 +16,13 @@ namespace ifaces
 
 class with_team
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		with_team
 	);
 protected:
 	with_team();
 public:
+	[[nodiscard]]
 	virtual
 	sanguis::server::team
 	team() const = 0;

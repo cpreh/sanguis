@@ -1,4 +1,4 @@
-#include <sanguis/server/ai/context_fwd.hpp>
+#include <sanguis/server/ai/context_ref.hpp>
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/ai/create_stationary.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
@@ -16,7 +16,7 @@ sanguis::server::ai::create_stationary(
 			[
 				_sight_range
 			](
-				sanguis::server::ai::context &_context
+				sanguis::server::ai::context_ref const _context
 			)
 			{
 				return

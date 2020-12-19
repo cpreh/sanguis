@@ -26,15 +26,19 @@ public:
 		sanguis::server::damage::array const &
 	);
 
+	[[nodiscard]]
 	sanguis::server::weapons::backswing_time
 	backswing_time() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::attributes::damage
 	damage() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::range
 	range() const;
 
+	[[nodiscard]]
 	sanguis::server::damage::array const &
 	damage_values() const;
 

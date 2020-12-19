@@ -4,7 +4,7 @@
 #include <sanguis/server/direction_fwd.hpp>
 #include <sanguis/server/speed_fwd.hpp>
 #include <sanguis/server/entities/property/changeable_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -18,16 +18,18 @@ namespace ifaces
 
 class with_velocity
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		with_velocity
 	);
 protected:
 	with_velocity();
 public:
+	[[nodiscard]]
 	virtual
 	sanguis::server::speed
 	speed() const = 0;
 
+	[[nodiscard]]
 	virtual
 	sanguis::server::entities::property::changeable &
 	movement_speed() = 0;

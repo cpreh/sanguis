@@ -7,25 +7,28 @@
 #include <sanguis/server/entities/enemies/parameters.hpp>
 #include <sanguis/server/entities/enemies/modifiers/freezing.hpp>
 #include <sanguis/server/entities/enemies/modifiers/parameters_fwd.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
 
 
 sanguis::server::entities::enemies::attribute
 sanguis::server::entities::enemies::modifiers::freezing(
-	sanguis::server::entities::enemies::parameters &_parameters,
+	fcppt::reference<
+		sanguis::server::entities::enemies::parameters
+	> const _parameters,
 	sanguis::server::entities::enemies::modifiers::parameters const &
 )
 {
-	_parameters.add_aura(
+	_parameters->add_aura(
 		sanguis::server::auras::slow_create<
 			sanguis::server::buffs::slow
 		>(
 			sanguis::server::radius(
-				200.f
+				200.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			),
 			sanguis::server::team::monsters,
 			sanguis::server::buffs::slow_factor(
-				0.3f
+				0.3F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			)
 		)
 	);

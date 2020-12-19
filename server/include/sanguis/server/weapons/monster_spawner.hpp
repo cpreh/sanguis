@@ -8,7 +8,7 @@
 #include <sanguis/server/weapons/parameters_fwd.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -22,7 +22,7 @@ class monster_spawner
 :
 	public sanguis::server::weapons::weapon
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		monster_spawner
 	);
 public:
@@ -39,16 +39,19 @@ public:
 		sanguis::server::weapons::parameters const &
 	);
 private:
+	[[nodiscard]]
 	sanguis::server::weapons::unique_ptr
 	clone() const
 	override;
 
+	[[nodiscard]]
 	sanguis::server::weapons::attack_result
 	do_attack(
 		sanguis::server::weapons::attack const &
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::weapon_attribute_vector
 	attributes() const
 	override;

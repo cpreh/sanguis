@@ -77,8 +77,7 @@ sanguis::server::random::distributor<
 	Value,
 	State
 >()
-{
-}
+= default;
 
 template<
 	typename Value,
@@ -102,7 +101,7 @@ sanguis::server::random::distributor<
 		fcppt::literal<
 			Value
 		>(
-			0u
+			0U
 		)
 	);
 
@@ -117,11 +116,13 @@ sanguis::server::random::distributor<
 		if(
 			bound < cur
 		)
+		{
 			return
 				next.second;
+		}
 	}
 
-	// TODO: This should not happen for integers!
+	// TODO(philipp): This should not happen for integers!
 
 	return
 		values_.back().second;

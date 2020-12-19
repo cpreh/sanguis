@@ -65,7 +65,7 @@ public:
 	insert_player(
 		sanguis::world_id,
 		sanguis::server::player_id,
-		sanguis::player_name const &
+		sanguis::player_name &&
 	);
 
 	void

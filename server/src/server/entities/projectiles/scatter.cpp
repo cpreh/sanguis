@@ -1,6 +1,7 @@
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/projectile_type.hpp>
+#include <sanguis/random_generator_ref.hpp>
 #include <sanguis/random_variate_impl.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/direction.hpp>
@@ -26,45 +27,48 @@
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/random/distribution/basic_impl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::entities::projectiles::scatter::scatter(
-	sanguis::random_generator &_random_generator,
+	sanguis::random_generator_ref const _random_generator,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::team const _team,
 	sanguis::server::direction const _direction,
-	sanguis::server::entities::projectiles::scatter_create const &_create
+	sanguis::server::entities::projectiles::scatter_create &&_create
 )
 :
 	sanguis::server::entities::projectiles::projectile(
 		sanguis::projectile_type::bullet,
 		_team,
 		sanguis::server::entities::movement_speed(
-			300.f
+			300.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		),
-		// TODO
 		_load_context,
 		sanguis::server::entities::projectiles::life_time(
 			sanguis::duration_second(
-				10.f
+				10.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			)
 		),
 		_direction
 	),
 	create_(
-		_create
+		std::move(
+			_create
+		)
 	),
 	shoot_timer_(
 		sanguis::diff_timer::parameters(
 			fcppt::make_cref(
 				this->diff_clock()
 			),
-			// TODO
 			sanguis::duration_second(
-				0.5f
+				0.5F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			)
 		)
 		.expired(
@@ -72,13 +76,11 @@ sanguis::server::entities::projectiles::scatter::scatter(
 		)
 	),
 	angle_rng_(
-		fcppt::make_ref(
-			_random_generator
-		),
+		_random_generator,
 		angle_distribution::param_type(
 			angle_distribution::param_type::min(
 				sanguis::server::angle(
-					0.f
+					0.F
 				)
 			),
 			angle_distribution::param_type::sup(
@@ -96,8 +98,7 @@ sanguis::server::entities::projectiles::scatter::scatter(
 FCPPT_PP_POP_WARNING
 
 sanguis::server::entities::projectiles::scatter::~scatter()
-{
-}
+= default;
 
 void
 sanguis::server::entities::projectiles::scatter::update()
@@ -111,7 +112,9 @@ sanguis::server::entities::projectiles::scatter::update()
 			)
 		)
 	)
+	{
 		return;
+	}
 
 	fcppt::optional::maybe_void(
 		this->environment(),

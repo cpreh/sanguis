@@ -7,7 +7,7 @@
 
 sanguis::server::speed
 sanguis::server::collision::from_speed(
-	sanguis::collision::speed const _speed
+	sanguis::collision::speed const &_speed
 )
 {
 	return

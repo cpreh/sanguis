@@ -33,7 +33,7 @@ sanguis::server::random::split_array<
 	Size
 >
 split(
-	sanguis::random_generator &_random_generator,
+	sanguis::random_generator &_random_generator, // NOLINT(google-runtime-references)
 	sanguis::server::random::min const _min,
 	sanguis::server::random::max const _max,
 	sanguis::server::random::split_array<
@@ -74,12 +74,12 @@ split(
 		)
 	);
 
-	result_type result(
+	auto result(
 		fcppt::container::array::init_const<
 			result_type
 		>(
 			sanguis::server::random::amount(
-				0u
+				0U
 			)
 		)
 	);

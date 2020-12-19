@@ -1,6 +1,6 @@
-#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/diff_clock_cref.hpp>
 #include <sanguis/diff_timer.hpp>
-#include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/random_generator_ref.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/direction.hpp>
@@ -21,7 +21,6 @@
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sge/timer/reset_when_expired.hpp>
-#include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
@@ -32,8 +31,8 @@
 
 
 sanguis::server::entities::enemies::skills::scatter::scatter(
-	sanguis::diff_clock const &_diff_clock,
-	sanguis::random_generator &_random_generator,
+	sanguis::diff_clock_cref const _diff_clock,
+	sanguis::random_generator_ref const _random_generator,
 	sanguis::server::entities::enemies::skills::cooldown const _cooldown
 )
 :
@@ -43,9 +42,7 @@ sanguis::server::entities::enemies::skills::scatter::scatter(
 	),
 	cooldown_timer_(
 		sanguis::diff_timer::parameters(
-			fcppt::make_cref(
-				_diff_clock
-			),
+			_diff_clock,
 			_cooldown.get()
 		)
 	)
@@ -53,8 +50,7 @@ sanguis::server::entities::enemies::skills::scatter::scatter(
 }
 
 sanguis::server::entities::enemies::skills::scatter::~scatter()
-{
-}
+= default;
 
 void
 sanguis::server::entities::enemies::skills::scatter::update(
@@ -68,7 +64,9 @@ sanguis::server::entities::enemies::skills::scatter::update(
 			)
 		)
 	)
+	{
 		return;
+	}
 
 	fcppt::optional::maybe_void(
 		_entity.environment(),
@@ -82,8 +80,7 @@ sanguis::server::entities::enemies::skills::scatter::update(
 		)
 		{
 			fcppt::algorithm::repeat(
-				// TODO
-				5,
+				5, // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 				[
 					this,
 					&_entity,
@@ -129,14 +126,12 @@ sanguis::server::entities::enemies::skills::scatter::update(
 												>(
 													_env.load_context(),
 													_team,
-													// TODO
 													sanguis::server::damage::unit(
-														10.f
+														10.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 													),
 													damage_modifiers,
-													// TODO
 													sanguis::server::aoe(
-														100.f
+														100.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 													),
 													sanguis::server::direction(
 														_angle.get()

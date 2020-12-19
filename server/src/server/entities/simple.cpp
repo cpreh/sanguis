@@ -2,9 +2,7 @@
 
 
 sanguis::server::entities::simple::simple()
-{
-}
+= default;
 
 sanguis::server::entities::simple::~simple()
-{
-}
+= default;

@@ -60,9 +60,7 @@ sanguis::server::entities::enemies::factory::make_modifiers(
 					)
 					{
 						return
-							std::less<
-								sanguis::server::entities::enemies::modifiers::callback
-							>()(
+							std::less<>()(
 								_callback1,
 								_callback2
 							);

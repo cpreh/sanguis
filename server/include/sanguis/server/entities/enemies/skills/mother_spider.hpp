@@ -4,7 +4,7 @@
 #include <sanguis/server/entities/enemies/attribute_fwd.hpp>
 #include <sanguis/server/entities/enemies/enemy_fwd.hpp>
 #include <sanguis/server/entities/enemies/skills/skill.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -22,7 +22,7 @@ class mother_spider
 :
 	public sanguis::server::entities::enemies::skills::skill
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		mother_spider
 	);
 public:
@@ -37,6 +37,7 @@ private:
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::server::entities::enemies::attribute
 	attribute() const
 	override;

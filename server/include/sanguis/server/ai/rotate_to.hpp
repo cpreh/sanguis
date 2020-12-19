@@ -14,7 +14,7 @@ namespace ai
 
 void
 rotate_to(
-	sanguis::server::entities::with_ai &,
+	sanguis::server::entities::with_ai &, // NOLINT(google-runtime-references)
 	sanguis::server::angle
 );
 

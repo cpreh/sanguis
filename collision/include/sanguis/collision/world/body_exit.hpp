@@ -3,9 +3,10 @@
 
 #include <sanguis/collision/symbol.hpp>
 #include <sanguis/collision/world/body_base_fwd.hpp>
+#include <sanguis/collision/world/body_base_ref.hpp>
 #include <sanguis/collision/world/body_exit_fwd.hpp>
 #include <sanguis/collision/world/ghost_base_fwd.hpp>
-#include <fcppt/reference_impl.hpp>
+#include <sanguis/collision/world/ghost_base_ref.hpp>
 
 
 namespace sanguis
@@ -18,23 +19,9 @@ namespace world
 class body_exit
 {
 public:
-	using
-	body_ref
-	=
-	fcppt::reference<
-		sanguis::collision::world::body_base
-	>;
-
-	using
-	ghost_ref
-	=
-	fcppt::reference<
-		sanguis::collision::world::ghost_base
-	>;
-
 	body_exit(
-		body_ref,
-		ghost_ref
+		sanguis::collision::world::body_base_ref,
+		sanguis::collision::world::ghost_base_ref
 	);
 
 	[[nodiscard]]
@@ -47,9 +34,9 @@ public:
 	sanguis::collision::world::ghost_base &
 	ghost() const;
 private:
-	body_ref body_;
+	sanguis::collision::world::body_base_ref body_;
 
-	ghost_ref ghost_;
+	sanguis::collision::world::ghost_base_ref ghost_;
 };
 
 }

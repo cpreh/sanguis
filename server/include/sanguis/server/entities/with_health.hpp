@@ -15,7 +15,7 @@
 #include <sanguis/server/entities/property/always_max.hpp>
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <sanguis/server/net/health.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 
 
@@ -33,7 +33,7 @@ class with_health
 	public virtual sanguis::server::entities::ifaces::with_id,
 	public virtual sanguis::server::entities::ifaces::with_links
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		with_health
 	);
 public:
@@ -47,21 +47,26 @@ public:
 	kill()
 	override;
 
+	[[nodiscard]]
 	sanguis::server::entities::property::changeable &
 	health()
 	override;
 
+	[[nodiscard]]
 	sanguis::server::entities::property::always_max &
 	regeneration();
 
+	[[nodiscard]]
 	sanguis::server::health
 	current_health() const
 	override;
 
+	[[nodiscard]]
 	sanguis::server::health
 	max_health() const
 	override;
 
+	[[nodiscard]]
 	sanguis::server::damage::armor_array const &
 	armor() const;
 protected:
@@ -78,6 +83,7 @@ protected:
 	update()
 	override;
 private:
+	[[nodiscard]]
 	bool
 	dead() const
 	override;

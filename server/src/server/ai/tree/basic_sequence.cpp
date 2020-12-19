@@ -24,8 +24,7 @@ sanguis::server::ai::tree::basic_sequence::basic_sequence(
 }
 
 sanguis::server::ai::tree::basic_sequence::~basic_sequence()
-{
-}
+= default;
 
 sanguis::server::entities::transfer_result
 sanguis::server::ai::tree::basic_sequence::transfer()

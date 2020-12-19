@@ -3,6 +3,7 @@
 #include <sanguis/server/entities/enemies/parameters.hpp>
 #include <sanguis/server/entities/enemies/modifiers/health.hpp>
 #include <sanguis/server/entities/enemies/modifiers/parameters_fwd.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cmath>
@@ -11,15 +12,17 @@
 
 sanguis::server::entities::enemies::attribute
 sanguis::server::entities::enemies::modifiers::health(
-	sanguis::server::entities::enemies::parameters &_parameters,
+	fcppt::reference<
+		sanguis::server::entities::enemies::parameters
+	> const _parameters,
 	sanguis::server::entities::enemies::modifiers::parameters const &
 )
 {
-	_parameters.health(
-		_parameters.health()
+	_parameters->health(
+		_parameters->health()
 		*
 		sanguis::server::health(
-			3.f
+			3.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		)
 	);
 

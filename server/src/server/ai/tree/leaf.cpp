@@ -29,8 +29,7 @@ sanguis::server::ai::tree::leaf::leaf(
 }
 
 sanguis::server::ai::tree::leaf::~leaf()
-{
-}
+= default;
 
 sanguis::server::entities::transfer_result
 sanguis::server::ai::tree::leaf::transfer()
@@ -47,14 +46,18 @@ sanguis::server::ai::tree::leaf::run(
 	if(
 		!started_
 	)
+	{
 		started_ =
 			behavior_->start();
+	}
 
 	if(
 		!started_
 	)
+	{
 		return
 			sanguis::server::ai::status::failure;
+	}
 
 	sanguis::server::ai::status const result{
 		behavior_->update(

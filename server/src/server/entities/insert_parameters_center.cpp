@@ -6,15 +6,15 @@
 
 sanguis::server::entities::insert_parameters
 sanguis::server::entities::insert_parameters_center(
-	sanguis::server::center const _center
+	sanguis::server::center const &_center
 )
 {
-	// TODO: This function makes no sense
+	// TODO(philipp): This function makes no sense
 	return
 		sanguis::server::entities::insert_parameters(
 			_center,
 			sanguis::server::angle(
-				0.f
+				0.F
 			)
 		);
 }

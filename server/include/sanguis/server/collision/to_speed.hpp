@@ -14,7 +14,7 @@ namespace collision
 
 sanguis::collision::speed
 to_speed(
-	sanguis::server::speed
+	sanguis::server::speed const &
 );
 
 }

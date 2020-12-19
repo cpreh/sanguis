@@ -1,4 +1,4 @@
-#include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/random_generator_ref.hpp>
 #include <sanguis/server/ai/create_boss.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/entities/with_id.hpp>
@@ -15,7 +15,7 @@
 
 sanguis::server::entities::with_id_unique_ptr
 sanguis::server::entities::enemies::factory::make_boss(
-	sanguis::random_generator &_random_generator,
+	sanguis::random_generator_ref const _random_generator,
 	sanguis::server::entities::enemies::parameters &&_parameters
 )
 {
@@ -32,7 +32,7 @@ sanguis::server::entities::enemies::factory::make_boss(
 						sanguis::server::ai::create_boss(
 							_random_generator,
 							sanguis::server::ai::sight_range(
-								1000.f
+								1000.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 							)
 						)
 					)

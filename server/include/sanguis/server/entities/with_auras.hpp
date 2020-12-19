@@ -6,7 +6,7 @@
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/auras/unique_ptr.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -20,7 +20,7 @@ class with_auras
 :
 	public virtual sanguis::server::entities::with_ghosts
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		with_auras
 	);
 public:
@@ -39,6 +39,7 @@ protected:
 	~with_auras()
 	override;
 
+	[[nodiscard]]
 	sanguis::server::auras::container const &
 	auras() const;
 private:

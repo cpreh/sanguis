@@ -6,17 +6,18 @@
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/magazine_type.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/random_generator_ref.hpp>
 #include <sanguis/weapon_attribute_vector.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/weapon_status_fwd.hpp>
 #include <sanguis/weapon_type.hpp>
-#include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/optional_with_weapon_ref.hpp>
 #include <sanguis/server/entities/with_weapon_fwd.hpp>
 #include <sanguis/server/weapons/attack_fwd.hpp>
 #include <sanguis/server/weapons/attack_result_fwd.hpp>
 #include <sanguis/server/weapons/backswing_time.hpp>
 #include <sanguis/server/weapons/cast_point.hpp>
+#include <sanguis/server/weapons/log_cref.hpp>
 #include <sanguis/server/weapons/log_fwd.hpp>
 #include <sanguis/server/weapons/optional_reload_time.hpp>
 #include <sanguis/server/weapons/parameters_fwd.hpp>
@@ -31,7 +32,7 @@
 #include <sanguis/server/weapons/states/castpoint_fwd.hpp>
 #include <sanguis/server/weapons/states/idle_fwd.hpp>
 #include <sanguis/server/weapons/states/reloading_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/optional/object_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/state_machine.hpp>
@@ -53,7 +54,7 @@ class weapon
 			sanguis::server::weapons::states::idle
 		>
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		weapon
 	);
 protected:
@@ -87,31 +88,39 @@ public:
 		sanguis::duration const &
 	);
 
+	[[nodiscard]]
 	sanguis::weapon_type
 	type() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::attributes::magazine_size
 	magazine_size() const;
 
+	[[nodiscard]]
 	bool
 	in_range(
 		sanguis::server::weapons::target
 	) const;
 
+	[[nodiscard]]
 	bool
 	owner_target_in_range() const;
 
+	[[nodiscard]]
 	sanguis::weapon_description
 	description() const;
 
+	[[nodiscard]]
 	virtual
 	sanguis::weapon_attribute_vector
 	attributes() const = 0;
 
+	[[nodiscard]]
 	virtual
 	sanguis::server::weapons::unique_ptr
 	clone() const = 0;
 protected:
+	[[nodiscard]]
 	virtual
 	sanguis::server::weapons::attack_result
 	do_attack(
@@ -122,18 +131,23 @@ protected:
 	void
 	owner_lost();
 
+	[[nodiscard]]
 	sanguis::diff_clock const &
 	diff_clock() const;
 
+	[[nodiscard]]
 	sanguis::random_generator &
 	random_generator() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::log const &
 	log() const;
 
+	[[nodiscard]]
 	sanguis::server::entities::with_weapon &
 	owner() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::parameters
 	parameters() const;
 private:
@@ -158,21 +172,27 @@ private:
 	void
 	use_magazine_item();
 
+	[[nodiscard]]
 	bool
 	magazine_empty() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::attributes::optional_accuracy
 	accuracy() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::cast_point
 	cast_point() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::backswing_time
 	backswing_time() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::optional_reload_time
 	reload_time() const;
 
+	[[nodiscard]]
 	sanguis::magazine_remaining
 	magazine_remaining() const;
 
@@ -181,9 +201,9 @@ private:
 
 	sanguis::diff_clock diff_clock_;
 
-	sanguis::random_generator &random_generator_;
+	sanguis::random_generator_ref const random_generator_;
 
-	sanguis::server::weapons::log const &log_;
+	sanguis::server::weapons::log_cref const log_;
 
 	sanguis::weapon_type const type_;
 

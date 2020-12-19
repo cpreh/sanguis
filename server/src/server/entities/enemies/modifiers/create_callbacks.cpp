@@ -19,6 +19,7 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wglobal-constructors)
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wexit-time-destructors)
 
+// NOLINTNEXTLINE(fuchsia-statically-constructed-objects,cert-err58-cpp)
 sanguis::server::entities::enemies::modifiers::container const callbacks{
 	&sanguis::server::entities::enemies::modifiers::agile,
 	&sanguis::server::entities::enemies::modifiers::armored,

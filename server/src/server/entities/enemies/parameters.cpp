@@ -32,15 +32,15 @@ sanguis::server::entities::enemies::parameters::parameters(
 	sanguis::creator::enemy_type const _enemy_type,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::damage::armor_array const &_armor,
-	sanguis::server::mass const _mass,
+	sanguis::server::mass _mass,
 	sanguis::server::health const _health,
 	sanguis::server::entities::movement_speed const _movement_speed,
-	sanguis::server::ai::create_function const &_ai_create_function,
+	sanguis::server::ai::create_function &&_ai_create_function,
 	sanguis::server::weapons::unique_ptr &&_weapon,
 	sanguis::server::pickup_probability const _pickup_probability,
 	sanguis::server::exp const _exp,
 	sanguis::server::entities::enemies::difficulty const _difficulty,
-	sanguis::server::entities::spawn_owner const &_spawn_owner,
+	sanguis::server::entities::spawn_owner _spawn_owner,
 	sanguis::server::auras::container &&_auras
 )
 :
@@ -54,7 +54,9 @@ sanguis::server::entities::enemies::parameters::parameters(
 		_armor
 	),
 	mass_(
-		_mass
+		std::move(
+			_mass
+		)
 	),
 	health_(
 		_health
@@ -70,7 +72,9 @@ sanguis::server::entities::enemies::parameters::parameters(
 		_movement_speed
 	),
 	ai_create_function_(
-		_ai_create_function
+		std::move(
+			_ai_create_function
+		)
 	),
 	weapon_(
 		std::move(
@@ -87,7 +91,9 @@ sanguis::server::entities::enemies::parameters::parameters(
 		_difficulty
 	),
 	spawn_owner_(
-		_spawn_owner
+		std::move(
+			_spawn_owner
+		)
 	),
 	auras_(
 		std::move(
@@ -103,14 +109,6 @@ sanguis::server::entities::enemies::parameters::parameters(
 {
 }
 
-sanguis::server::entities::enemies::parameters::parameters(
-	parameters &&
-) = default;
-
-sanguis::server::entities::enemies::parameters::~parameters()
-{
-}
-
 sanguis::creator::enemy_type
 sanguis::server::entities::enemies::parameters::enemy_type() const
 {
@@ -122,7 +120,7 @@ sanguis::server::environment::load_context &
 sanguis::server::entities::enemies::parameters::load_context() const
 {
 	return
-		load_context_;
+		load_context_.get();
 }
 
 sanguis::server::damage::armor_array const &

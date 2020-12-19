@@ -7,8 +7,8 @@
 #include <sanguis/server/buffs/burn_interval.hpp>
 #include <sanguis/server/damage/modified_array.hpp>
 #include <sanguis/server/damage/unit.hpp>
-#include <sanguis/server/entities/with_health_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <sanguis/server/entities/with_health_ref.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -22,12 +22,12 @@ class burn
 :
 	public sanguis::server::buffs::buff
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		burn
 	);
 public:
 	burn(
-		sanguis::server::entities::with_health &,
+		sanguis::server::entities::with_health_ref,
 		sanguis::server::buffs::burn_interval,
 		sanguis::server::damage::unit,
 		sanguis::server::damage::modified_array const &
@@ -36,6 +36,7 @@ public:
 	~burn()
 	override;
 private:
+	[[nodiscard]]
 	sanguis::buff_type
 	type() const
 	override;
@@ -44,13 +45,14 @@ private:
 	update()
 	override;
 
+	[[nodiscard]]
 	bool
 	greater(
 		sanguis::server::buffs::buff const &
 	) const
 	override;
 
-	sanguis::server::entities::with_health &entity_;
+	sanguis::server::entities::with_health_ref const entity_;
 
 	sanguis::diff_timer interval_timer_;
 

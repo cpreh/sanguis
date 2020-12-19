@@ -15,7 +15,7 @@ namespace collision
 
 bool
 with_world(
-	sanguis::server::center,
+	sanguis::server::center const &,
 	sanguis::server::radius,
 	sanguis::creator::grid const &
 );

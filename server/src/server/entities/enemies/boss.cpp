@@ -32,8 +32,7 @@ sanguis::server::entities::enemies::boss::boss(
 }
 
 sanguis::server::entities::enemies::boss::~boss()
-{
-}
+= default;
 
 sanguis::server::entities::transfer_result
 sanguis::server::entities::enemies::boss::on_create()

@@ -29,6 +29,7 @@ public:
 		sanguis::server::entities::property::value
 	);
 
+	[[nodiscard]]
 	sanguis::server::entities::property::value
 	value() const;
 private:

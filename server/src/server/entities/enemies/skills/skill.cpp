@@ -3,12 +3,10 @@
 
 
 sanguis::server::entities::enemies::skills::skill::skill()
-{
-}
+= default;
 
 sanguis::server::entities::enemies::skills::skill::~skill()
-{
-}
+= default;
 
 void
 sanguis::server::entities::enemies::skills::skill::update(

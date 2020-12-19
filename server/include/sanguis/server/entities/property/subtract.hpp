@@ -16,7 +16,7 @@ namespace property
 
 void
 subtract(
-	sanguis::server::entities::property::changeable &,
+	sanguis::server::entities::property::changeable &, // NOLINT(google-runtime-references)
 	sanguis::server::entities::property::value const &
 );
 

@@ -3,6 +3,7 @@
 #include <sanguis/server/entities/enemies/parameters.hpp>
 #include <sanguis/server/entities/enemies/modifiers/parameters_fwd.hpp>
 #include <sanguis/server/entities/enemies/modifiers/regenerating.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cmath>
@@ -11,14 +12,16 @@
 
 sanguis::server::entities::enemies::attribute
 sanguis::server::entities::enemies::modifiers::regenerating(
-	sanguis::server::entities::enemies::parameters &_parameters,
+	fcppt::reference<
+		sanguis::server::entities::enemies::parameters
+	> const _parameters,
 	sanguis::server::entities::enemies::modifiers::parameters const &
 )
 {
-	_parameters.regeneration(
+	_parameters->regeneration(
 		sanguis::server::regeneration(
 			std::sqrt(
-				_parameters.difficulty().get()
+				_parameters->difficulty().get()
 			)
 		)
 	);

@@ -7,6 +7,6 @@ sanguis::server::weapons::default_ias()
 {
 	return
 		sanguis::server::weapons::ias(
-			1.f
+			1.F
 		);
 }

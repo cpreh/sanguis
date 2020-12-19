@@ -16,7 +16,7 @@
 #include <sanguis/server/weapons/optional_unique_ptr.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -35,12 +35,12 @@ class weapon
 	public sanguis::server::entities::with_id,
 	public sanguis::server::entities::with_links
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		weapon
 	);
 public:
 	weapon(
-		sanguis::server::environment::load_context &,
+		sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
 		sanguis::server::team,
 		sanguis::server::weapons::unique_ptr &&
 	);
@@ -48,24 +48,30 @@ public:
 	~weapon()
 	override;
 
+	[[nodiscard]]
 	sanguis::server::weapons::unique_ptr
 	obtain();
 
+	[[nodiscard]]
 	sanguis::weapon_type
 	weapon_type() const;
 private:
+	[[nodiscard]]
 	bool
 	dead() const
 	override;
 
+	[[nodiscard]]
 	sanguis::server::team
 	team() const
 	override;
 
+	[[nodiscard]]
 	sanguis::collision::world::body_group
 	collision_group() const
 	override;
 
+	[[nodiscard]]
 	sanguis::messages::server::unique_ptr
 	add_message(
 		sanguis::server::player_id,
@@ -73,6 +79,7 @@ private:
 	) const
 	override;
 
+	[[nodiscard]]
 	sanguis::server::weapons::weapon &
 	get() const;
 

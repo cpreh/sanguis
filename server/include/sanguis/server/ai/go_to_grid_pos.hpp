@@ -15,7 +15,7 @@ namespace ai
 
 sanguis::server::ai::status
 go_to_grid_pos(
-	sanguis::server::ai::context &,
+	sanguis::server::ai::context &, // NOLINT(google-runtime-references)
 	sanguis::server::ai::speed_factor
 );
 

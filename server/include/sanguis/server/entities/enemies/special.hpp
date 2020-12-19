@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_ENEMIES_SPECIAL_HPP_INCLUDED
 
 #include <sanguis/enemy_kind_fwd.hpp>
-#include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/random_generator_ref.hpp>
 #include <sanguis/messages/types/string.hpp>
 #include <sanguis/server/entities/enemies/attribute_container.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
@@ -10,7 +10,7 @@
 #include <sanguis/server/entities/enemies/parameters_fwd.hpp>
 #include <sanguis/server/entities/enemies/skills/container.hpp>
 #include <sanguis/server/entities/enemies/skills/factory/container.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -26,12 +26,12 @@ class special
 :
 	public sanguis::server::entities::enemies::enemy
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		special
 	);
 public:
 	special(
-		sanguis::random_generator &,
+		sanguis::random_generator_ref,
 		sanguis::server::entities::enemies::parameters &&,
 		sanguis::server::entities::enemies::attribute_container const &,
 		sanguis::server::entities::enemies::skills::factory::container const &,
@@ -49,10 +49,12 @@ private:
 	remove_from_game()
 	override;
 
+	[[nodiscard]]
 	sanguis::messages::types::string const &
 	name() const
 	override;
 
+	[[nodiscard]]
 	sanguis::enemy_kind
 	enemy_kind() const
 	override;

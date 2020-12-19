@@ -22,6 +22,7 @@ public:
 		sanguis::server::entities::property::diff
 	);
 
+	[[nodiscard]]
 	sanguis::server::entities::property::diff
 	diff() const;
 private:

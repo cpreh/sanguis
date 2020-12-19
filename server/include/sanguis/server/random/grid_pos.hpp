@@ -16,7 +16,7 @@ namespace random
 
 sanguis::creator::optional_pos
 grid_pos(
-	sanguis::random_generator &,
+	sanguis::random_generator &, // NOLINT(google-runtime-references)
 	sanguis::creator::min,
 	sanguis::creator::sup
 );

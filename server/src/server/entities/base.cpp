@@ -1,7 +1,7 @@
 #include <sanguis/diff_clock.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/update_diff_clock.hpp>
-#include <sanguis/creator/grid_fwd.hpp>
+#include <sanguis/creator/grid_cref.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/combine_transfer.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
@@ -10,7 +10,9 @@
 #include <sanguis/server/entities/transfer_parameters.hpp>
 #include <sanguis/server/entities/transfer_result.hpp>
 #include <sanguis/server/environment/object.hpp>
+#include <sanguis/server/environment/object_ref.hpp>
 #include <sanguis/server/environment/optional_object_ref.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -27,24 +29,26 @@ sanguis::server::entities::base::base()
 
 sanguis::server::entities::optional_transfer_result
 sanguis::server::entities::base::transfer(
-	sanguis::server::environment::object &_environment,
+	sanguis::server::environment::object_ref const _environment,
 	sanguis::server::entities::insert_parameters const &_insert_parameters,
-	sanguis::creator::grid const &_grid
+	sanguis::creator::grid_cref const _grid
 )
 {
-	environment_ =
+	this->environment_ =
 		sanguis::server::environment::optional_object_ref(
-			fcppt::make_ref(
-				_environment
-			)
+			_environment
 		);
 
 	return
 		fcppt::optional::map(
 			this->on_transfer(
 				sanguis::server::entities::transfer_parameters(
-					_environment.collision_log(),
-					_environment.collision_world(),
+					fcppt::make_cref(
+						_environment->collision_log()
+					),
+					fcppt::make_ref(
+						_environment->collision_world()
+					),
 					_insert_parameters.created(),
 					_grid,
 					_insert_parameters.center(),
@@ -100,7 +104,7 @@ sanguis::server::entities::base::remove_from_game()
 sanguis::server::entities::remove_from_world_result
 sanguis::server::entities::base::remove_from_world()
 {
-	// TODO: Should we define this?
+	// TODO(philipp): Should we define this?
 	return
 		sanguis::server::entities::remove_from_world_result();
 }
@@ -113,8 +117,7 @@ sanguis::server::entities::base::environment() const
 }
 
 sanguis::server::entities::base::~base()
-{
-}
+= default;
 
 sanguis::diff_clock const &
 sanguis::server::entities::base::diff_clock() const
@@ -126,7 +129,7 @@ sanguis::server::entities::base::diff_clock() const
 sanguis::server::entities::transfer_result
 sanguis::server::entities::base::on_create()
 {
-	// TODO: Should we define this?
+	// TODO(philipp): Should we define this?
 	return
 		sanguis::server::entities::transfer_result();
 }
@@ -136,7 +139,7 @@ sanguis::server::entities::base::on_transfer(
 	sanguis::server::entities::transfer_parameters const &
 )
 {
-	// TODO: Should we define this function?
+	// TODO(philipp): Should we define this function?
 	return
 		sanguis::server::entities::optional_transfer_result(
 			sanguis::server::entities::transfer_result()

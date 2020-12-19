@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_IFACES_WITH_ANGLE_HPP_INCLUDED
 
 #include <sanguis/server/angle_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -16,12 +16,13 @@ namespace ifaces
 
 class with_angle
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		with_angle
 	);
 protected:
 	with_angle();
 public:
+	[[nodiscard]]
 	virtual
 	sanguis::server::angle
 	angle() const = 0;

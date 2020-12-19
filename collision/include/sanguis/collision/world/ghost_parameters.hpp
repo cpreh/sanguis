@@ -5,9 +5,9 @@
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/symbol.hpp>
 #include <sanguis/collision/world/ghost_base_fwd.hpp>
+#include <sanguis/collision/world/ghost_base_ref.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_parameters_fwd.hpp>
-#include <fcppt/reference_impl.hpp>
 
 
 namespace sanguis
@@ -25,9 +25,7 @@ public:
 		sanguis::collision::center,
 		sanguis::collision::radius,
 		sanguis::collision::world::ghost_group,
-		fcppt::reference<
-			sanguis::collision::world::ghost_base
-		>
+		sanguis::collision::world::ghost_base_ref
 	);
 
 	[[nodiscard]]
@@ -52,9 +50,7 @@ private:
 
 	sanguis::collision::world::ghost_group collision_group_;
 
-	fcppt::reference<
-		sanguis::collision::world::ghost_base
-	> ghost_base_;
+	sanguis::collision::world::ghost_base_ref ghost_base_;
 };
 
 }

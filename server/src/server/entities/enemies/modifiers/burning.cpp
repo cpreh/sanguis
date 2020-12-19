@@ -9,6 +9,7 @@
 #include <sanguis/server/entities/enemies/parameters.hpp>
 #include <sanguis/server/entities/enemies/modifiers/burning.hpp>
 #include <sanguis/server/entities/enemies/modifiers/parameters_fwd.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cmath>
@@ -17,28 +18,30 @@
 
 sanguis::server::entities::enemies::attribute
 sanguis::server::entities::enemies::modifiers::burning(
-	sanguis::server::entities::enemies::parameters &_parameters,
+	fcppt::reference<
+		sanguis::server::entities::enemies::parameters
+	> const _parameters,
 	sanguis::server::entities::enemies::modifiers::parameters const &
 )
 {
-	_parameters.add_aura(
+	_parameters->add_aura(
 		sanguis::server::auras::burn_create<
 			sanguis::server::buffs::burn
 		>(
 			sanguis::server::radius(
-				400.f
+				400.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			),
 			sanguis::server::team::monsters,
 			sanguis::server::buffs::burn_interval(
 				sanguis::duration_second(
-					1.f
+					1.F
 				)
 			),
 			sanguis::server::damage::unit(
-				1.f
+				1.F
 				*
 				std::sqrt(
-					_parameters.difficulty().get()
+					_parameters->difficulty().get()
 				)
 			)
 		)

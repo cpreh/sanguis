@@ -63,8 +63,7 @@ sanguis::server::entities::with_auras_id::with_auras_id(
 }
 
 sanguis::server::entities::with_auras_id::~with_auras_id()
-{
-}
+= default;
 
 sanguis::aura_type_vector
 sanguis::server::entities::with_auras_id::aura_types() const

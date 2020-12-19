@@ -31,8 +31,7 @@ sanguis::server::entities::pickups::health::health(
 }
 
 sanguis::server::entities::pickups::health::~health()
-{
-}
+= default;
 
 bool
 sanguis::server::entities::pickups::health::do_pickup(

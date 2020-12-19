@@ -16,7 +16,7 @@ namespace tree
 
 void
 choose(
-	sanguis::server::perks::tree::container &,
+	sanguis::server::perks::tree::container &, // NOLINT(google-runtime-references)
 	sanguis::perk_type
 );
 

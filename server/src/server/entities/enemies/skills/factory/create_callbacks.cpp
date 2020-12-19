@@ -14,6 +14,7 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wglobal-constructors)
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wexit-time-destructors)
 
+// NOLINTNEXTLINE(fuchsia-statically-constructed-objects,cert-err58-cpp)
 sanguis::server::entities::enemies::skills::factory::container const callbacks{
 	&sanguis::server::entities::enemies::skills::factory::teleport,
 	&sanguis::server::entities::enemies::skills::factory::mother_spider

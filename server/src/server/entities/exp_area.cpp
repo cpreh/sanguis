@@ -1,5 +1,7 @@
 #include <sanguis/collision/world/body_base_fwd.hpp>
+#include <sanguis/collision/world/body_base_ref.hpp>
 #include <sanguis/collision/world/created.hpp>
+#include <sanguis/collision/world/ghost_base.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/collision/ghost.hpp>
@@ -40,16 +42,22 @@ sanguis::server::entities::exp_area::exp_area(
 	),
 	player_links_()
 {
-	// TODO: Direct initialization?
+	// TODO(philipp): Direct initialization?
 	this->init_ghosts(
 		fcppt::container::make<
 			sanguis::server::collision::ghost_container
 		>(
 			sanguis::server::collision::ghost{
-				*this,
+				fcppt::make_ref(
+					static_cast<
+						sanguis::collision::world::ghost_base &
+					>(
+						*this
+					)
+				),
 				sanguis::collision::world::ghost_group::target_player,
 				sanguis::server::radius(
-					2000.f // TODO
+					2000.F
 				)
 			}
 		)
@@ -57,13 +65,11 @@ sanguis::server::entities::exp_area::exp_area(
 }
 
 sanguis::server::entities::exp_area::~exp_area()
-{
-}
+= default;
 
 void
 sanguis::server::entities::exp_area::remove_from_game()
 {
-	// TODO: Do this differently!
 	fcppt::algorithm::map_iteration_second(
 		player_links_,
 		[](
@@ -85,6 +91,7 @@ sanguis::server::entities::exp_area::remove_from_game()
 		:
 		player_links_
 	)
+	{
 		fcppt::cast::static_downcast<
 			sanguis::server::entities::player &
 		>(
@@ -102,6 +109,7 @@ sanguis::server::entities::exp_area::remove_from_game()
 				)
 			)
 		);
+	}
 }
 
 bool
@@ -126,7 +134,7 @@ sanguis::server::entities::exp_area::can_collide_with(
 
 void
 sanguis::server::entities::exp_area::on_body_enter(
-	sanguis::collision::world::body_base &_base,
+	sanguis::collision::world::body_base_ref const _base,
 	sanguis::collision::world::created
 )
 {
@@ -134,7 +142,7 @@ sanguis::server::entities::exp_area::on_body_enter(
 		fcppt::cast::static_downcast<
 			sanguis::server::entities::player &
 		>(
-			_base
+			_base.get()
 		)
 	);
 

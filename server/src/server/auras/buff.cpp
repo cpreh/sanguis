@@ -10,11 +10,17 @@
 #include <sanguis/server/buffs/buff.hpp>
 #include <sanguis/server/buffs/create_callback.hpp>
 #include <sanguis/server/buffs/unique_ptr.hpp>
+#include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_body.hpp>
+#include <sanguis/server/entities/with_body_ref.hpp>
 #include <sanguis/server/entities/with_buffs.hpp>
 #include <fcppt/reference_impl.hpp>
+#include <fcppt/reference_to_base.hpp>
 #include <fcppt/cast/dynamic_cross.hpp>
 #include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::auras::buff::buff(
@@ -22,7 +28,7 @@ sanguis::server::auras::buff::buff(
 	sanguis::server::team const _team,
 	sanguis::aura_type const _aura_type,
 	sanguis::server::auras::influence const _influence,
-	sanguis::server::buffs::create_callback const &_create_callback
+	sanguis::server::buffs::create_callback &&_create_callback
 )
 :
 	sanguis::server::auras::aura(
@@ -36,15 +42,16 @@ sanguis::server::auras::buff::buff(
 		_aura_type
 	),
 	create_callback_(
-		_create_callback
+		std::move(
+			_create_callback
+		)
 	),
 	provider_()
 {
 }
 
 sanguis::server::auras::buff::~buff()
-{
-}
+= default;
 
 sanguis::optional_aura_type
 sanguis::server::auras::buff::type() const
@@ -57,7 +64,7 @@ sanguis::server::auras::buff::type() const
 
 void
 sanguis::server::auras::buff::enter(
-	sanguis::server::entities::with_body &_entity,
+	sanguis::server::entities::with_body_ref const _entity,
 	sanguis::collision::world::created
 )
 {
@@ -65,7 +72,7 @@ sanguis::server::auras::buff::enter(
 		fcppt::cast::dynamic_cross<
 			sanguis::server::entities::with_buffs
 		>(
-			_entity
+			_entity.get()
 		),
 		[
 			this
@@ -77,7 +84,11 @@ sanguis::server::auras::buff::enter(
 		{
 			fcppt::optional::maybe_void(
 				this->create_callback_(
-					_with_buffs.get()
+					fcppt::reference_to_base<
+						sanguis::server::entities::base
+					>(
+						_with_buffs
+					)
 				),
 				[
 					this,
@@ -87,7 +98,7 @@ sanguis::server::auras::buff::enter(
 				)
 				{
 					this->provider_.add(
-						_with_buffs.get(),
+						_with_buffs,
 						std::move(
 							_new_buff
 						)

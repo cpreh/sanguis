@@ -33,14 +33,14 @@ basic_make_array(
 		Unit
 	>;
 
-	// TODO: Improve this
+	// TODO(philipp): Improve this
 	result_type result{
 		fcppt::container::array::init_const<
 			typename
 			result_type::internal
 		>(
 			Unit(
-				0.f
+				0.F
 			)
 		)
 	};
@@ -50,10 +50,12 @@ basic_make_array(
 		:
 		_inits
 	)
+	{
 		result[
 			element.type()
 		] =
 			element.value();
+	}
 
 	return
 		result;

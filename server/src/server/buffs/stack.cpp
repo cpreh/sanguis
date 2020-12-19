@@ -18,17 +18,18 @@ sanguis::server::buffs::stack::stack()
 sanguis::server::buffs::stack::stack(
 	stack &&
 )
+noexcept
 = default;
 
 sanguis::server::buffs::stack &
 sanguis::server::buffs::stack::operator=(
 	stack &&
 )
+noexcept
 = default;
 
 sanguis::server::buffs::stack::~stack()
-{
-}
+= default;
 
 void
 sanguis::server::buffs::stack::insert(

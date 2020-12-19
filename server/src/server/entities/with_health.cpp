@@ -10,6 +10,7 @@
 #include <sanguis/server/entities/property/add.hpp>
 #include <sanguis/server/entities/property/always_max.hpp>
 #include <sanguis/server/entities/property/change_callback.hpp>
+#include <sanguis/server/entities/property/change_event_fwd.hpp>
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <sanguis/server/entities/property/initial_max.hpp>
 #include <sanguis/server/entities/property/subtract.hpp>
@@ -24,7 +25,6 @@
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
-#include <functional>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -41,6 +41,7 @@ sanguis::server::entities::with_health::damage(
 			sanguis::server::damage::type
 		>()
 	)
+	{
 		sanguis::server::entities::property::subtract(
 			health_,
 			_damage.get()
@@ -61,6 +62,7 @@ sanguis::server::entities::with_health::damage(
 				].get()
 			)
 		);
+	}
 }
 
 void
@@ -148,20 +150,26 @@ sanguis::server::entities::with_health::with_health(
 	health_change_(
 		health_.register_change_callback(
 			sanguis::server::entities::property::change_callback{
-				std::bind(
-					&sanguis::server::entities::with_health::health_change,
+				[
 					this
-				)
+				](
+					sanguis::server::entities::property::change_event const &
+				){
+					this->health_change();
+				}
 			}
 		)
 	),
 	max_health_change_(
 		health_.register_max_change_callback(
 			sanguis::server::entities::property::change_callback{
-				std::bind(
-					&sanguis::server::entities::with_health::max_health_change,
+				[
 					this
-				)
+				](
+					sanguis::server::entities::property::change_event const &
+				){
+					this->max_health_change();
+				}
 			}
 		)
 	)
@@ -171,8 +179,7 @@ sanguis::server::entities::with_health::with_health(
 FCPPT_PP_POP_WARNING
 
 sanguis::server::entities::with_health::~with_health()
-{
-}
+= default;
 
 void
 sanguis::server::entities::with_health::update()
@@ -190,12 +197,14 @@ sanguis::server::entities::with_health::update()
 	if(
 		net_health_.update()
 	)
+	{
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			this->environment()
 		).get().health_changed(
 			this->id(),
 			this->current_health()
 		);
+	}
 }
 
 bool

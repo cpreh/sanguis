@@ -10,7 +10,7 @@
 #include <sge/console/object.hpp>
 #include <sge/console/callback/function.hpp>
 #include <fcppt/homogenous_pair_decl.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/signal/auto_connection_fwd.hpp>
 
@@ -22,21 +22,22 @@ namespace server
 
 class console
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		console
 	);
 public:
 	console(
-		sanguis::server::send_callback const &,
-		sanguis::server::unicast_callback const &
+		sanguis::server::send_callback &&,
+		sanguis::server::unicast_callback &&
 	);
 
 	~console();
 
+	[[nodiscard]]
 	fcppt::signal::auto_connection
 	insert(
 		fcppt::string const &command,
-		sge::console::callback::function const &,
+		sge::console::callback::function &&,
 		fcppt::string const &description
 	);
 
@@ -52,6 +53,7 @@ public:
 		fcppt::string const &
 	);
 
+	[[nodiscard]]
 	sanguis::server::console_command_vector const &
 	known_commands() const;
 private:

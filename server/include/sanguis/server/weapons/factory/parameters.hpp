@@ -26,15 +26,19 @@ public:
 		sanguis::server::entities::enemies::difficulty
 	);
 
+	[[nodiscard]]
 	sanguis::server::weapons::common_parameters const &
 	common_parameters() const;
 
+	[[nodiscard]]
 	sanguis::random_generator &
 	random_generator() const;
 
+	[[nodiscard]]
 	sanguis::weapon_type
 	weapon_type() const;
 
+	[[nodiscard]]
 	sanguis::server::entities::enemies::difficulty
 	difficulty() const;
 private:

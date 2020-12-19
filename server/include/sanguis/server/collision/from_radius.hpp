@@ -14,7 +14,7 @@ namespace collision
 
 sanguis::server::radius
 from_radius(
-	sanguis::collision::radius
+	sanguis::collision::radius const &
 );
 
 }

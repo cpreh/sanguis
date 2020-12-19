@@ -19,6 +19,7 @@
 #include <sanguis/server/entities/enemies/factory/parameters.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/unreachable.hpp>
@@ -33,10 +34,10 @@ sanguis::server::entities::with_id_unique_ptr
 sanguis::server::entities::enemies::factory::make(
 	sanguis::server::entities::enemies::factory::parameters const &_parameters,
 	sanguis::server::damage::armor_array const &_armor,
-	sanguis::server::mass const _mass,
+	sanguis::server::mass const &_mass,
 	sanguis::server::health const _health,
 	sanguis::server::entities::movement_speed const _movement_speed,
-	sanguis::server::ai::create_function const &_ai_create_function,
+	sanguis::server::ai::create_function &&_ai_create_function,
 	sanguis::server::weapons::unique_ptr &&_weapon,
 	sanguis::server::pickup_probability const _pickup_probability,
 	sanguis::server::exp const _exp,
@@ -50,7 +51,9 @@ sanguis::server::entities::enemies::factory::make(
 		_mass,
 		_health,
 		_movement_speed,
-		_ai_create_function,
+		std::move(
+			_ai_create_function
+		),
 		std::move(
 			_weapon
 		),
@@ -69,21 +72,22 @@ sanguis::server::entities::enemies::factory::make(
 	{
 	case sanguis::creator::enemy_kind::normal:
 		{
-			typedef
+			using
+			distribution_type
+			=
 			fcppt::random::distribution::basic<
 				fcppt::random::distribution::parameters::uniform_real<
 					float
 				>
-			>
-			distribution_type;
+			>;
 
 			distribution_type distribution(
 				distribution_type::param_type(
 					distribution_type::param_type::min(
-						0.f
+						0.F
 					),
 					distribution_type::param_type::sup(
-						1.f
+						1.F
 					)
 				)
 			);
@@ -96,7 +100,9 @@ sanguis::server::entities::enemies::factory::make(
 				_parameters.special_chance().get()
 				?
 					sanguis::server::entities::enemies::factory::make_special(
-						_parameters.random_generator(),
+						fcppt::make_ref(
+							_parameters.random_generator()
+						),
 						std::move(
 							parameters
 						),
@@ -121,7 +127,9 @@ sanguis::server::entities::enemies::factory::make(
 	case sanguis::creator::enemy_kind::unique:
 		return
 			sanguis::server::entities::enemies::factory::make_special(
-				_parameters.random_generator(),
+				fcppt::make_ref(
+					_parameters.random_generator()
+				),
 				std::move(
 					parameters
 				),
@@ -132,7 +140,9 @@ sanguis::server::entities::enemies::factory::make(
 	case sanguis::creator::enemy_kind::boss:
 		return
 			sanguis::server::entities::enemies::factory::make_boss(
-				_parameters.random_generator(),
+				fcppt::make_ref(
+					_parameters.random_generator()
+				),
 				std::move(
 					parameters
 				)

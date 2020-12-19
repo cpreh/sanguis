@@ -42,7 +42,7 @@ sanguis::server::args::create_parser()
 					fcppt::options::make_default_value(
 						fcppt::optional::make(
 							alda::net::port{
-								31337u
+								31337U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 							}
 						)
 					),

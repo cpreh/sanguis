@@ -35,19 +35,23 @@ public:
 
 	always_max(
 		always_max &&
-	);
+	)
+	noexcept;
 
 	always_max &
 	operator=(
 		always_max &&
-	);
+	)
+	noexcept;
 
 	~always_max()
 	override;
 
+	[[nodiscard]]
 	sanguis::server::entities::property::value
 	current() const;
 
+	[[nodiscard]]
 	fcppt::signal::auto_connection
 	register_change_callback(
 		sanguis::server::entities::property::change_callback &&

@@ -11,7 +11,8 @@
 #include <sanguis/server/buffs/create_callback.hpp>
 #include <sanguis/server/buffs/provider.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <sanguis/server/entities/with_body_ref.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -25,7 +26,7 @@ class buff
 :
 	public sanguis::server::auras::aura
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		buff
 	);
 public:
@@ -34,27 +35,28 @@ public:
 		sanguis::server::team,
 		sanguis::aura_type,
 		sanguis::server::auras::influence,
-		sanguis::server::buffs::create_callback const &
+		sanguis::server::buffs::create_callback &&
 	);
 
 	~buff()
 	override;
 private:
+	[[nodiscard]]
 	sanguis::optional_aura_type
 	type() const
 	override;
 
 	void
 	enter(
-		sanguis::server::entities::with_body &,
+		sanguis::server::entities::with_body_ref,
 		sanguis::collision::world::created
 	)
 	override;
 
 	void
 	leave(
-		sanguis::server::entities::with_body &
-	)
+		sanguis::server::entities::with_body & // NOLINT(google-runtime-references)
+	) // NOLINT(google-runtime-references)
 	override;
 
 	sanguis::aura_type const aura_type_;

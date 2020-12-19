@@ -1,4 +1,4 @@
-#include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/random_generator_ref.hpp>
 #include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/angle.hpp>
@@ -33,11 +33,10 @@ sanguis::server::entities::spawns::spawn::unregister(
 }
 
 sanguis::server::entities::spawns::spawn::~spawn()
-{
-}
+= default;
 
 sanguis::server::entities::spawns::spawn::spawn(
-	sanguis::random_generator &_random_generator,
+	sanguis::random_generator_ref const _random_generator,
 	sanguis::server::weapons::common_parameters const &_weapons_parameters,
 	sanguis::creator::enemy_type const _enemy_type,
 	sanguis::creator::enemy_kind const _enemy_kind,
@@ -153,7 +152,7 @@ sanguis::server::entities::spawns::spawn::update()
 							this->link()
 						),
 						sanguis::server::entities::enemies::special_chance(
-							0.05f
+							0.05F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 						)
 					),
 					sanguis::server::entities::insert_parameters(

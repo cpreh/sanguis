@@ -1,7 +1,7 @@
 #include <sanguis/collision/world/body_enter_container.hpp>
 #include <sanguis/collision/world/body_exit_container.hpp>
 #include <sanguis/collision/world/ghost.hpp>
-#include <sanguis/collision/world/ghost_base_fwd.hpp>
+#include <sanguis/collision/world/ghost_base_ref.hpp>
 #include <sanguis/collision/world/ghost_group.hpp>
 #include <sanguis/collision/world/ghost_parameters.hpp>
 #include <sanguis/collision/world/ghost_unique_ptr.hpp>
@@ -19,7 +19,7 @@
 
 
 sanguis::server::collision::ghost::ghost(
-	sanguis::collision::world::ghost_base &_ghost_base,
+	sanguis::collision::world::ghost_base_ref const _ghost_base,
 	sanguis::collision::world::ghost_group const _collision_group,
 	sanguis::server::radius const _radius
 )
@@ -39,21 +39,24 @@ sanguis::server::collision::ghost::ghost(
 
 sanguis::server::collision::ghost::ghost(
 	ghost &&
-) = default;
+)
+noexcept
+= default;
 
 sanguis::server::collision::ghost &
 sanguis::server::collision::ghost::operator=(
 	ghost &&
-) = default;
+)
+noexcept
+= default;
 
 sanguis::server::collision::ghost::~ghost()
-{
-}
+= default;
 
 sanguis::collision::world::body_enter_container
 sanguis::server::collision::ghost::transfer(
 	sanguis::collision::world::object &_world,
-	sanguis::server::center const _center
+	sanguis::server::center const &_center
 )
 {
 	FCPPT_ASSERT_PRE(
@@ -110,7 +113,7 @@ sanguis::server::collision::ghost::destroy(
 
 void
 sanguis::server::collision::ghost::center(
-	sanguis::server::center const _center
+	sanguis::server::center const &_center
 )
 {
 	FCPPT_ASSERT_OPTIONAL_ERROR(

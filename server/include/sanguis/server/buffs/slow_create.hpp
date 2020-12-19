@@ -7,6 +7,7 @@
 #include <sanguis/server/buffs/slow_factor.hpp>
 #include <sanguis/server/buffs/unique_ptr.hpp>
 #include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/base_ref.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
@@ -37,10 +38,10 @@ slow_create(
 )
 {
 	static_assert(
-		std::is_base_of<
+		std::is_base_of_v<
 			sanguis::server::buffs::slow,
 			Buff
-		>::value,
+		>,
 		"Buff must derive from buffs::slow"
 	);
 
@@ -49,7 +50,7 @@ slow_create(
 			[
 				_factor
 			](
-				sanguis::server::entities::base &_entity
+				sanguis::server::entities::base_ref const _entity
 			)
 			{
 FCPPT_PP_PUSH_WARNING
@@ -59,7 +60,7 @@ FCPPT_PP_DISABLE_GCC_WARNING(-Wattributes)
 						fcppt::cast::dynamic<
 							sanguis::server::entities::with_velocity
 						>(
-							_entity
+							_entity.get()
 						),
 						[
 							_factor
@@ -76,7 +77,7 @@ FCPPT_PP_DISABLE_GCC_WARNING(-Wattributes)
 									fcppt::make_unique_ptr<
 										Buff
 									>(
-										_with_velocity.get(),
+										_with_velocity,
 										_factor
 									)
 								);

@@ -36,6 +36,8 @@
 #include <sanguis/server/weapons/events/stop.hpp>
 #include <sanguis/server/weapons/states/idle.hpp>
 #include <fcppt/const.hpp>
+#include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/join.hpp>
@@ -319,14 +321,14 @@ sanguis::random_generator &
 sanguis::server::weapons::weapon::random_generator() const
 {
 	return
-		random_generator_;
+		random_generator_.get();
 }
 
 sanguis::server::weapons::log const &
 sanguis::server::weapons::weapon::log() const
 {
 	return
-		log_;
+		log_.get();
 }
 
 sanguis::server::entities::with_weapon &
@@ -344,8 +346,12 @@ sanguis::server::weapons::weapon::parameters() const
 	return
 		sanguis::server::weapons::parameters{
 			sanguis::server::weapons::common_parameters{
-				this->log(),
-				this->random_generator()
+				fcppt::make_cref(
+					this->log()
+				),
+				fcppt::make_ref(
+					this->random_generator()
+				)
 			},
 			this->type(),
 			this->accuracy(),

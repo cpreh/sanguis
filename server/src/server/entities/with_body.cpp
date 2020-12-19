@@ -19,6 +19,7 @@
 #include <sanguis/server/environment/object.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/dynamic.hpp>
@@ -54,7 +55,13 @@ sanguis::server::entities::with_body::with_body(
 	collision_body_(
 		_radius,
 		_mass,
-		*this
+		fcppt::make_ref(
+			static_cast<
+				sanguis::collision::world::body_base &
+			>(
+				*this
+			)
+		)
 	),
 	net_center_(
 		fcppt::make_cref(
@@ -72,8 +79,7 @@ sanguis::server::entities::with_body::with_body(
 FCPPT_PP_POP_WARNING
 
 sanguis::server::entities::with_body::~with_body()
-{
-}
+= default;
 
 sanguis::server::center
 sanguis::server::entities::with_body::center() const
@@ -195,23 +201,27 @@ sanguis::server::entities::with_body::update()
 	if(
 		net_angle_.update()
 	)
+	{
 		cur_environment.angle_changed(
 			this->id(),
 			this->angle()
 		);
+	}
 
 	if(
 		net_center_.update()
 	)
+	{
 		cur_environment.center_changed(
 			this->id(),
 			this->center()
 		);
+	}
 }
 
 void
 sanguis::server::entities::with_body::body_speed(
-	sanguis::server::speed const _speed
+	sanguis::server::speed const &_speed
 )
 {
 	collision_body_.speed(
@@ -326,7 +336,7 @@ sanguis::server::entities::with_body::center_changed(
 
 void
 sanguis::server::entities::with_body::speed_changed(
-	sanguis::collision::speed
+	sanguis::collision::speed const &
 )
 {
 }

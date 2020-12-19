@@ -31,7 +31,7 @@
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -43,7 +43,7 @@ namespace environment
 
 class object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		object
 	);
 protected:
@@ -230,22 +230,27 @@ public:
 		sanguis::server::player_id
 	) = 0;
 
+	[[nodiscard]]
 	virtual
 	sanguis::server::world::difficulty
 	difficulty() const = 0;
 
+	[[nodiscard]]
 	virtual
 	sanguis::collision::log const &
 	collision_log() const = 0;
 
+	[[nodiscard]]
 	virtual
 	sanguis::collision::world::object &
 	collision_world() const = 0;
 
+	[[nodiscard]]
 	virtual
 	sanguis::creator::grid const &
 	grid() const = 0;
 
+	[[nodiscard]]
 	virtual
 	sanguis::server::environment::load_context &
 	load_context() const = 0;

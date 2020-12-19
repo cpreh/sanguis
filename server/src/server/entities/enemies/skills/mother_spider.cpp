@@ -16,6 +16,7 @@
 #include <sanguis/server/environment/insert_no_result.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
+#include <fcppt/copy.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -24,12 +25,10 @@
 
 
 sanguis::server::entities::enemies::skills::mother_spider::mother_spider()
-{
-}
+= default;
 
 sanguis::server::entities::enemies::skills::mother_spider::~mother_spider()
-{
-}
+= default;
 
 void
 sanguis::server::entities::enemies::skills::mother_spider::on_die(
@@ -48,9 +47,9 @@ sanguis::server::entities::enemies::skills::mother_spider::on_die(
 		).get()
 	);
 
-	// TODO: Make copies of enemies smaller
+	// TODO(philipp): Make copies of enemies smaller
 	fcppt::algorithm::repeat(
-		1u,
+		1U,
 		[
 			&_enemy,
 			&primary_weapon,
@@ -70,22 +69,24 @@ sanguis::server::entities::enemies::skills::mother_spider::on_die(
 							environment.load_context(),
 							_enemy.armor(),
 							_enemy.mass(),
-							// TODO: This parameter should probably be of type max_health
+							// TODO(philipp): This parameter should probably be of type max_health
 							sanguis::server::health{
 								_enemy.max_health().get()
 								/
-								4.f
+								4.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 							},
 							_enemy.max_movement_speed(),
-							_enemy.create_ai(),
+							fcppt::copy(
+								_enemy.create_ai()
+							),
 							primary_weapon.clone(),
 							sanguis::server::pickup_probability{
-								0.f
+								0.F
 							},
 							sanguis::server::exp{
 								_enemy.exp().get()
 								/
-								4.f
+								4.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 							},
 							_enemy.difficulty(),
 							sanguis::server::entities::spawn_owner(

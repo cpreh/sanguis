@@ -55,8 +55,7 @@ sanguis::server::entities::projectiles::aoe_projectile::aoe_projectile(
 }
 
 sanguis::server::entities::projectiles::aoe_projectile::~aoe_projectile()
-{
-}
+= default;
 
 sanguis::server::aoe
 sanguis::server::entities::projectiles::aoe_projectile::aoe() const

@@ -7,14 +7,19 @@
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/weapon_pickup_candidates.hpp>
 #include <sanguis/server/entities/with_body.hpp>
+#include <sanguis/server/entities/with_body_ref.hpp>
 #include <sanguis/server/entities/pickups/weapon.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/cast/static_downcast.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::auras::weapon_pickup_candidates::weapon_pickup_candidates(
 	sanguis::server::radius const _radius,
-	sanguis::server::add_weapon_pickup_callback const &_add,
-	sanguis::server::remove_weapon_pickup_callback const &_remove
+	sanguis::server::add_weapon_pickup_callback &&_add,
+	sanguis::server::remove_weapon_pickup_callback &&_remove
 )
 :
 	sanguis::server::auras::aura(
@@ -22,17 +27,20 @@ sanguis::server::auras::weapon_pickup_candidates::weapon_pickup_candidates(
 		sanguis::collision::world::ghost_group::weapon_pickup_sight
 	),
 	add_(
-		_add
+		std::move(
+			_add
+		)
 	),
 	remove_(
-		_remove
+		std::move(
+			_remove
+		)
 	)
 {
 }
 
 sanguis::server::auras::weapon_pickup_candidates::~weapon_pickup_candidates()
-{
-}
+= default;
 
 sanguis::optional_aura_type
 sanguis::server::auras::weapon_pickup_candidates::type() const
@@ -43,15 +51,17 @@ sanguis::server::auras::weapon_pickup_candidates::type() const
 
 void
 sanguis::server::auras::weapon_pickup_candidates::enter(
-	sanguis::server::entities::with_body &_body,
+	sanguis::server::entities::with_body_ref const _body,
 	sanguis::collision::world::created
 )
 {
-	add_.get()(
-		fcppt::cast::static_downcast<
-			sanguis::server::entities::pickups::weapon &
-		>(
-			_body
+	this->add_(
+		fcppt::make_ref(
+			fcppt::cast::static_downcast<
+				sanguis::server::entities::pickups::weapon &
+			>(
+				_body.get()
+			)
 		)
 	);
 }
@@ -61,7 +71,7 @@ sanguis::server::auras::weapon_pickup_candidates::leave(
 	sanguis::server::entities::with_body &_body
 )
 {
-	remove_.get()(
+	this->remove_(
 		fcppt::cast::static_downcast<
 			sanguis::server::entities::pickups::weapon &
 		>(

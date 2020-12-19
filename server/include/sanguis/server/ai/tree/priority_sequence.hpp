@@ -5,7 +5,7 @@
 #include <sanguis/server/ai/status_fwd.hpp>
 #include <sanguis/server/ai/tree/basic_sequence.hpp>
 #include <sanguis/server/ai/tree/container.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -21,7 +21,7 @@ class priority_sequence
 :
 	public sanguis::server::ai::tree::basic_sequence
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		priority_sequence
 	);
 public:
@@ -33,6 +33,7 @@ public:
 	~priority_sequence()
 	override;
 private:
+	[[nodiscard]]
 	sanguis::server::ai::status
 	run(
 		sanguis::duration

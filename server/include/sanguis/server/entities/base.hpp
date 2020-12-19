@@ -3,7 +3,7 @@
 
 #include <sanguis/diff_clock.hpp>
 #include <sanguis/duration.hpp>
-#include <sanguis/creator/grid_fwd.hpp>
+#include <sanguis/creator/grid_cref.hpp>
 #include <sanguis/server/center_fwd.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
@@ -11,9 +11,9 @@
 #include <sanguis/server/entities/remove_from_world_result_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
 #include <sanguis/server/entities/transfer_result_fwd.hpp>
-#include <sanguis/server/environment/object_fwd.hpp>
+#include <sanguis/server/environment/object_ref.hpp>
 #include <sanguis/server/environment/optional_object_ref.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -25,7 +25,7 @@ namespace entities
 
 class base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		base
 	);
 protected:
@@ -37,9 +37,9 @@ public:
 	[[nodiscard]]
 	sanguis::server::entities::optional_transfer_result
 	transfer(
-		sanguis::server::environment::object &,
+		sanguis::server::environment::object_ref,
 		sanguis::server::entities::insert_parameters const &,
-		sanguis::creator::grid const &
+		sanguis::creator::grid_cref
 	);
 
 	virtual
@@ -67,17 +67,17 @@ public:
 	sanguis::server::entities::remove_from_world_result
 	remove_from_world();
 
-	// environment query function
+	[[nodiscard]]
 	sanguis::server::environment::optional_object_ref
 	environment() const;
 
-	// position
+	[[nodiscard]]
 	virtual
 	sanguis::server::center
 	center() const = 0;
 
 
-	// life functions
+	[[nodiscard]]
 	virtual
 	bool
 	dead() const = 0;
@@ -85,7 +85,8 @@ public:
 	virtual
 	~base();
 
-	// TODO: Move this to another class?
+	// TODO(philipp): Move this to another class?
+	[[nodiscard]]
 	sanguis::diff_clock const &
 	diff_clock() const;
 private:
@@ -101,7 +102,7 @@ private:
 		sanguis::server::entities::transfer_parameters const &
 	);
 
-	// TODO: Move this to another class?
+	// TODO(philipp): Move this to another class?
 	sanguis::server::environment::optional_object_ref environment_;
 
 	sanguis::diff_clock diff_clock_;

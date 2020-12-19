@@ -22,7 +22,7 @@
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/entities/enemies/enemy_fwd.hpp>
 #include <sanguis/server/entities/enemies/parameters_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -43,7 +43,7 @@ class enemy
 	public sanguis::server::entities::with_links,
 	public sanguis::server::entities::with_velocity
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		enemy
 	);
 public:
@@ -55,19 +55,24 @@ public:
 	~enemy()
 	override;
 
+	[[nodiscard]]
 	sanguis::server::team
 	team() const
 	override;
 
+	[[nodiscard]]
 	sanguis::creator::enemy_type
 	enemy_type() const;
 
+	[[nodiscard]]
 	sanguis::server::exp
 	exp() const;
 
+	[[nodiscard]]
 	sanguis::server::mass
 	mass() const;
 
+	[[nodiscard]]
 	sanguis::server::entities::enemies::difficulty
 	difficulty() const;
 protected:
@@ -79,6 +84,7 @@ protected:
 	remove_from_game()
 	override;
 private:
+	[[nodiscard]]
 	sanguis::messages::server::unique_ptr
 	add_message(
 		sanguis::server::player_id,
@@ -86,14 +92,17 @@ private:
 	) const
 	override;
 
+	[[nodiscard]]
 	sanguis::collision::world::body_group
 	collision_group() const
 	override;
 
+	[[nodiscard]]
 	virtual
 	sanguis::messages::types::string const &
 	name() const = 0;
 
+	[[nodiscard]]
 	virtual
 	sanguis::enemy_kind
 	enemy_kind() const = 0;

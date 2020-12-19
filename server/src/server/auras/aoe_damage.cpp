@@ -10,6 +10,7 @@
 #include <sanguis/server/damage/modified_array.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/with_body.hpp>
+#include <sanguis/server/entities/with_body_ref.hpp>
 #include <sanguis/server/entities/with_health.hpp>
 #include <fcppt/cast/dynamic_cross_exn.hpp>
 
@@ -41,8 +42,7 @@ sanguis::server::auras::aoe_damage::aoe_damage(
 }
 
 sanguis::server::auras::aoe_damage::~aoe_damage()
-{
-}
+= default;
 
 sanguis::optional_aura_type
 sanguis::server::auras::aoe_damage::type() const
@@ -53,14 +53,14 @@ sanguis::server::auras::aoe_damage::type() const
 
 void
 sanguis::server::auras::aoe_damage::enter(
-	sanguis::server::entities::with_body &_with_body,
+	sanguis::server::entities::with_body_ref const _with_body,
 	sanguis::collision::world::created
 )
 {
 	fcppt::cast::dynamic_cross_exn<
 		sanguis::server::entities::with_health &
 	>(
-		_with_body
+		_with_body.get()
 	).damage(
 		damage_,
 		damage_values_

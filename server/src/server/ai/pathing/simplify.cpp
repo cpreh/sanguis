@@ -35,7 +35,7 @@ sanguis::server::ai::pathing::simplify(
 				&_grid,
 				&_trail
 			](
-				sanguis::creator::pos const _start
+				sanguis::creator::pos const &_start
 			)
 			{
 				return
@@ -49,7 +49,7 @@ sanguis::server::ai::pathing::simplify(
 							fcppt::make_int_range_count(
 								_trail.size()
 								-
-								1u
+								1U
 							),
 							[
 								&_grid,
@@ -64,7 +64,7 @@ sanguis::server::ai::pathing::simplify(
 											_trail,
 											_index
 											+
-											1u
+											1U
 										)
 									)
 								);
@@ -75,7 +75,7 @@ sanguis::server::ai::pathing::simplify(
 											_trail,
 											_index
 											+
-											2u
+											2U
 										)
 									)
 								);
@@ -92,8 +92,8 @@ sanguis::server::ai::pathing::simplify(
 											&_grid,
 											&_trail
 										](
-											sanguis::creator::pos const _next1,
-											sanguis::creator::pos const _next2
+											sanguis::creator::pos const &_next1,
+											sanguis::creator::pos const &_next2
 										)
 										{
 											return

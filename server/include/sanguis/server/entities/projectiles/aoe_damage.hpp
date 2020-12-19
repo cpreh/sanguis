@@ -8,7 +8,7 @@
 #include <sanguis/server/entities/center_ghost.hpp>
 #include <sanguis/server/entities/simple.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -26,7 +26,7 @@ class aoe_damage
 	public sanguis::server::entities::simple,
 	private sanguis::server::entities::center_ghost
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		aoe_damage
 	);
 public:
@@ -40,6 +40,7 @@ public:
 	~aoe_damage()
 	override;
 private:
+	[[nodiscard]]
 	bool
 	dead() const
 	override;

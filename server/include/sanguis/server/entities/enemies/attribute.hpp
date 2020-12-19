@@ -19,9 +19,10 @@ class attribute
 public:
 	explicit
 	attribute(
-		fcppt::string const &
+		fcppt::string &&
 	);
 
+	[[nodiscard]]
 	fcppt::string const &
 	text() const;
 private:

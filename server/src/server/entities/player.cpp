@@ -2,7 +2,7 @@
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/perk_type.hpp>
 #include <sanguis/player_name.hpp>
-#include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/random_generator_ref.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/weapon_type_to_is_primary.hpp>
 #include <sanguis/collision/world/body_group.hpp>
@@ -43,7 +43,6 @@
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/speed.hpp>
 #include <sanguis/server/team.hpp>
-#include <sanguis/server/update_weapon_pickup_callback.hpp>
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/container.hpp>
 #include <sanguis/server/auras/update_sight.hpp>
@@ -63,6 +62,7 @@
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/pickups/weapon.hpp>
+#include <sanguis/server/entities/pickups/weapon_ref.hpp>
 #include <sanguis/server/entities/property/current_to_max.hpp>
 #include <sanguis/server/entities/property/initial_zero.hpp>
 #include <sanguis/server/environment/insert_no_result.hpp>
@@ -101,7 +101,6 @@
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <functional>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -110,13 +109,13 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::entities::player::player(
-	sanguis::random_generator &_random_generator,
+	sanguis::random_generator_ref const _random_generator,
 	sanguis::server::weapons::common_parameters const &_weapon_parameters,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::health const _health,
 	sanguis::server::damage::armor_array const &_armor,
 	sanguis::server::entities::movement_speed const _speed,
-	sanguis::player_name const &_name,
+	sanguis::player_name &&_name,
 	sanguis::server::player_id const _player_id
 )
 :
@@ -132,7 +131,7 @@ sanguis::server::entities::player::player(
 			)
 		),
 		sanguis::server::direction(
-			0.f
+			0.F
 		)
 	),
 	sanguis::server::entities::with_auras_id(
@@ -146,22 +145,33 @@ sanguis::server::entities::player::player(
 					sanguis::server::auras::update_sight
 				>(
 					sanguis::server::radius(
-						2000.f
+						2000.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 					),
 					sanguis::server::add_sight_callback(
-						std::bind(
-							&sanguis::server::entities::player::add_sight_range,
-							this,
-							std::placeholders::_1,
-							std::placeholders::_2
+						[
+							this
+						](
+							sanguis::server::entities::with_id const &_entity,
+							sanguis::collision::world::created const _created
 						)
+						{
+							this->add_sight_range(
+								_entity,
+								_created
+							);
+						}
 					),
 					sanguis::server::remove_sight_callback(
-						std::bind(
-							&sanguis::server::entities::player::remove_sight_range,
-							this,
-							std::placeholders::_1
+						[
+							this
+						](
+							sanguis::server::entities::with_id const &_entity
 						)
+						{
+							this->remove_sight_range(
+								_entity
+							);
+						}
 					)
 				)
 			),
@@ -174,21 +184,27 @@ sanguis::server::entities::player::player(
 					// with_velocity needs to be initialized first!
 					this->radius(),
 					sanguis::server::add_weapon_pickup_callback{
-						sanguis::server::update_weapon_pickup_callback{
-							std::bind(
-								&sanguis::server::entities::player::weapon_pickup_add_candidate,
-								this,
-								std::placeholders::_1
-							)
+						[
+							this
+						](
+							sanguis::server::entities::pickups::weapon_ref const _entity
+						)
+						{
+							this->weapon_pickup_add_candidate(
+								_entity
+							);
 						}
 					},
 					sanguis::server::remove_weapon_pickup_callback{
-						sanguis::server::update_weapon_pickup_callback{
-							std::bind(
-								&sanguis::server::entities::player::weapon_pickup_remove_candidate,
-								this,
-								std::placeholders::_1
-							)
+						[
+							this
+						](
+							sanguis::server::entities::pickups::weapon &_entity
+						)
+						{
+							this->weapon_pickup_remove_candidate(
+								_entity
+							);
 						}
 					}
 				)
@@ -202,7 +218,7 @@ sanguis::server::entities::player::player(
 	sanguis::server::entities::with_health(
 		_health,
 		sanguis::server::regeneration(
-			0.f
+			0.F
 		),
 		_armor
 	),
@@ -220,19 +236,21 @@ sanguis::server::entities::player::player(
 		sanguis::server::weapons::default_irs()
 	),
 	name_(
-		_name
+		std::move(
+			_name
+		)
 	),
 	player_id_(
 		_player_id
 	),
 	exp_(
-		0.f
+		0.F
 	),
 	level_(
-		0u
+		0U
 	),
 	skill_points_(
-		0u
+		0U
 	),
 	perk_tree_(
 		sanguis::server::perks::tree::create()
@@ -249,8 +267,7 @@ sanguis::server::entities::player::player(
 FCPPT_PP_POP_WARNING
 
 sanguis::server::entities::player::~player()
-{
-}
+= default;
 
 void
 sanguis::server::entities::player::add_exp(
@@ -270,20 +287,22 @@ sanguis::server::entities::player::add_exp(
 		exp_
 	);
 
-	sanguis::server::level const
-		old_level(
-			level_
-		),
-		new_level(
-			sanguis::server::level_from_exp(
-				exp_
-			)
-		);
+	sanguis::server::level const old_level{
+		level_
+	};
+
+	sanguis::server::level const new_level{
+		sanguis::server::level_from_exp(
+			exp_
+		)
+	};
 
 	if(
 		new_level == old_level
 	)
+	{
 		return;
+	}
 
 	skill_points_ +=
 		sanguis::server::skill_points(
@@ -315,7 +334,7 @@ sanguis::server::entities::player::perk_choosable(
 ) const
 {
 	return
-		skill_points_.get() > 0u
+		skill_points_.get() > 0U
 		&&
 		sanguis::server::perks::tree::choosable(
 			perk_tree_,
@@ -343,7 +362,7 @@ sanguis::server::entities::player::add_perk(
 
 void
 sanguis::server::entities::player::change_speed(
-	sanguis::server::speed const _speed
+	sanguis::server::speed const &_speed
 )
 {
 	desired_speed_ =
@@ -524,7 +543,7 @@ sanguis::server::entities::player::update_speed()
 				)
 			);
 
-			// TODO: don't set the speed to max!
+			// TODO(philipp): don't set the speed to max!
 			// Allow for controls that are not binary
 			sanguis::server::entities::property::current_to_max(
 				this->movement_speed()
@@ -563,14 +582,12 @@ sanguis::server::entities::player::remove_sight_range(
 
 void
 sanguis::server::entities::player::weapon_pickup_add_candidate(
-	sanguis::server::entities::pickups::weapon &_entity
+	sanguis::server::entities::pickups::weapon_ref const _entity
 )
 {
 	FCPPT_ASSERT_ERROR(
 		weapon_pickups_.insert(
-			fcppt::make_ref(
-				_entity
-			)
+			_entity
 		)
 		.second
 	);
@@ -588,7 +605,7 @@ sanguis::server::entities::player::weapon_pickup_remove_candidate(
 			)
 		)
 		==
-		1u
+		1U
 	);
 }
 

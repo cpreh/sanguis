@@ -53,7 +53,7 @@ sanguis::server::entities::destructible::destructible(
 	sanguis::server::entities::with_health(
 		_health,
 		sanguis::server::regeneration(
-			0.f
+			0.F
 		),
 		_armor
 	),
@@ -68,8 +68,7 @@ sanguis::server::entities::destructible::destructible(
 }
 
 sanguis::server::entities::destructible::~destructible()
-{
-}
+= default;
 
 void
 sanguis::server::entities::destructible::update()
@@ -94,7 +93,7 @@ sanguis::server::entities::destructible::remove_from_game()
 		{
 			_environment.get().pickup_chance(
 				sanguis::server::pickup_probability(
-					0.1f
+					0.1F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 				),
 				difficulty_,
 				this->center()

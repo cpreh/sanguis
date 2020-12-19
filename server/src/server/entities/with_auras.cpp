@@ -39,7 +39,7 @@ sanguis::server::entities::with_auras::with_auras(
 		)
 	)
 {
-	// TODO: Can we initialize this directly?
+	// TODO(philipp): Can we initialize this directly?
 	this->init_ghosts(
 		fcppt::algorithm::map<
 			sanguis::server::collision::ghost_container
@@ -57,8 +57,7 @@ sanguis::server::entities::with_auras::with_auras(
 }
 
 sanguis::server::entities::with_auras::~with_auras()
-{
-}
+= default;
 
 sanguis::server::auras::container const &
 sanguis::server::entities::with_auras::auras() const

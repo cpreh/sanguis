@@ -8,6 +8,7 @@
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/symbol.hpp>
 #include <sanguis/collision/world/body_base_fwd.hpp>
+#include <sanguis/collision/world/body_base_ref.hpp>
 #include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
@@ -32,9 +33,7 @@ public:
 		sanguis::collision::radius,
 		sanguis::collision::optional_mass,
 		sanguis::collision::world::body_group,
-		fcppt::reference<
-			sanguis::collision::world::body_base
-		>
+		sanguis::collision::world::body_base_ref
 	);
 
 	[[nodiscard]]
@@ -79,9 +78,7 @@ private:
 
 	sanguis::collision::world::body_group collision_group_;
 
-	fcppt::reference<
-		sanguis::collision::world::body_base
-	> body_base_;
+	sanguis::collision::world::body_base_ref body_base_;
 };
 
 }

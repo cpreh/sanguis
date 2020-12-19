@@ -24,12 +24,15 @@ class base
 		base
 	);
 public:
+	[[nodiscard]]
 	sanguis::server::entities::property::constant
 	constant() const;
 
+	[[nodiscard]]
 	sanguis::server::entities::property::linear
 	linear() const;
 
+	[[nodiscard]]
 	sanguis::server::entities::property::linear_decrease
 	linear_decrease() const;
 
@@ -55,12 +58,14 @@ protected:
 
 	base(
 		base &&
-	);
+	)
+	noexcept;
 
 	base &
 	operator=(
 		base &&
-	);
+	)
+	noexcept;
 
 	virtual
 	~base();

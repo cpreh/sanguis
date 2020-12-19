@@ -7,7 +7,7 @@
 #include <sanguis/server/auras/unique_ptr.hpp>
 #include <sanguis/server/entities/with_auras.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -22,7 +22,7 @@ class with_auras_id
 	public virtual sanguis::server::entities::ifaces::with_id,
 	public sanguis::server::entities::with_auras
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		with_auras_id
 	);
 public:
@@ -41,6 +41,7 @@ protected:
 	~with_auras_id()
 	override;
 
+	[[nodiscard]]
 	sanguis::aura_type_vector
 	aura_types() const;
 };

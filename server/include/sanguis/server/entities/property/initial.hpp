@@ -34,15 +34,16 @@ public:
 		sanguis::server::entities::property::initial::current
 	);
 
+	[[nodiscard]]
 	sanguis::server::entities::property::value
 	get_base() const;
 
+	[[nodiscard]]
 	sanguis::server::entities::property::value
 	get_current() const;
 private:
-	sanguis::server::entities::property::value
-		base_,
-		current_;
+	sanguis::server::entities::property::value base_;
+	sanguis::server::entities::property::value current_;
 };
 
 }

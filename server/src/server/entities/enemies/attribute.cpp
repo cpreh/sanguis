@@ -1,13 +1,18 @@
 #include <sanguis/server/entities/enemies/attribute.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::entities::enemies::attribute::attribute(
-	fcppt::string const &_text
+	fcppt::string &&_text
 )
 :
 	text_(
-		_text
+		std::move(
+			_text
+		)
 	)
 {
 }

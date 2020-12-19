@@ -16,7 +16,7 @@ namespace property
 
 void
 constant_change(
-	sanguis::server::entities::property::base &,
+	sanguis::server::entities::property::base &, // NOLINT(google-runtime-references)
 	sanguis::server::entities::property::value const &
 );
 

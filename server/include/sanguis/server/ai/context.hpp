@@ -8,7 +8,8 @@
 #include <sanguis/server/ai/pathing/optional_target_fwd.hpp>
 #include <sanguis/server/ai/pathing/optional_trail.hpp>
 #include <sanguis/server/entities/with_ai_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <sanguis/server/entities/with_ai_ref.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -20,13 +21,13 @@ namespace ai
 
 class context
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		context
 	);
 public:
 	explicit
 	context(
-		sanguis::server::entities::with_ai &
+		sanguis::server::entities::with_ai_ref
 	);
 
 	~context();
@@ -34,28 +35,33 @@ public:
 	[[nodiscard]]
 	bool
 	path_find(
-		sanguis::creator::pos
+		sanguis::creator::pos const &
 	);
 
 	void
 	clear_path();
 
+	[[nodiscard]]
 	sanguis::creator::optional_pos
 	destination() const;
 
+	[[nodiscard]]
 	sanguis::server::ai::pathing::optional_target
 	continue_path();
 
+	[[nodiscard]]
 	sanguis::creator::grid const &
 	grid() const;
 
+	[[nodiscard]]
 	sanguis::server::entities::with_ai &
 	me();
 
+	[[nodiscard]]
 	sanguis::server::entities::with_ai const &
 	me() const;
 private:
-	sanguis::server::entities::with_ai &me_;
+	sanguis::server::entities::with_ai_ref const me_;
 
 	sanguis::server::ai::pathing::optional_trail trail_;
 };

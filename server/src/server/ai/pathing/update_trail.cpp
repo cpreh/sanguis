@@ -6,6 +6,7 @@
 #include <sanguis/server/ai/pathing/trail.hpp>
 #include <sanguis/server/ai/pathing/update_trail.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/container/maybe_back.hpp>
 #include <fcppt/optional/bind.hpp>
 #include <fcppt/optional/copy_value.hpp>
@@ -14,7 +15,9 @@
 
 sanguis::server::ai::pathing::optional_target
 sanguis::server::ai::pathing::update_trail(
-	sanguis::server::ai::pathing::trail &_trail,
+	fcppt::reference<
+		sanguis::server::ai::pathing::trail
+	> const _trail,
 	sanguis::server::entities::with_ai const &_me
 )
 {
@@ -23,14 +26,14 @@ sanguis::server::ai::pathing::update_trail(
 			fcppt::optional::bind(
 				fcppt::optional::copy_value(
 					fcppt::container::maybe_back(
-						_trail
+						_trail.get()
 					)
 				),
 				[
 					&_trail,
 					&_me
 				](
-					sanguis::creator::pos const _next_position
+					sanguis::creator::pos const &_next_position
 				)
 				{
 					if(
@@ -40,12 +43,12 @@ sanguis::server::ai::pathing::update_trail(
 						)
 					)
 					{
-						_trail.pop_back();
+						_trail.get().pop_back();
 
 						return
 							fcppt::optional::copy_value(
 								fcppt::container::maybe_back(
-									_trail
+									_trail.get()
 								)
 							);
 					}
@@ -57,7 +60,7 @@ sanguis::server::ai::pathing::update_trail(
 				}
 			),
 			[](
-				sanguis::creator::pos const _pos
+				sanguis::creator::pos const &_pos
 			)
 			{
 				return

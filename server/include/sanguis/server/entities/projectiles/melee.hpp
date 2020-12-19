@@ -5,7 +5,7 @@
 #include <sanguis/server/damage/modified_array_fwd.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/projectiles/aoe_damage.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -21,7 +21,7 @@ class melee
 :
 	public sanguis::server::entities::projectiles::aoe_damage
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		melee
 	);
 public:

@@ -6,6 +6,7 @@
 #include <sanguis/server/states/running.hpp>
 #include <sanguis/server/states/unpaused.hpp>
 #include <alda/net/port.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/log/context_reference.hpp>
 
 
@@ -19,7 +20,9 @@ sanguis::server::object::object(
 	machine_(
 		_log_context,
 		_port,
-		io_service_
+		fcppt::make_ref(
+			io_service_
+		)
 	),
 	scoped_machine_(
 		machine_

@@ -7,7 +7,10 @@
 namespace sanguis
 {
 
-typedef sge::timer::clocks::standard clock;
+using
+clock
+=
+sge::timer::clocks::standard;
 
 }
 

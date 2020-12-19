@@ -22,7 +22,7 @@
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -42,20 +42,24 @@ class friend_
 	public sanguis::server::entities::with_links,
 	public sanguis::server::entities::with_velocity
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		friend_
 	);
 public:
 	friend_(
 		sanguis::friend_type,
-		sanguis::server::environment::load_context &,
+		sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
 		sanguis::server::damage::armor_array const &,
 		sanguis::server::health,
 		sanguis::server::entities::movement_speed,
-		sanguis::server::ai::create_function const &,
+		sanguis::server::ai::create_function &&,
 		sanguis::server::weapons::unique_ptr &&
 	);
+
+	~friend_()
+	override;
 private:
+	[[nodiscard]]
 	sanguis::server::entities::optional_transfer_result
 	on_transfer(
 		sanguis::server::entities::transfer_parameters const &
@@ -66,10 +70,12 @@ private:
 	update()
 	override;
 
+	[[nodiscard]]
 	sanguis::server::team
 	team() const
 	override;
 
+	[[nodiscard]]
 	sanguis::messages::server::unique_ptr
 	add_message(
 		sanguis::server::player_id,
@@ -77,6 +83,7 @@ private:
 	) const
 	override;
 
+	[[nodiscard]]
 	sanguis::collision::world::body_group
 	collision_group() const
 	override;

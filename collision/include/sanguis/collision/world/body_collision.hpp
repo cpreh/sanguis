@@ -3,8 +3,8 @@
 
 #include <sanguis/collision/symbol.hpp>
 #include <sanguis/collision/world/body_base_fwd.hpp>
+#include <sanguis/collision/world/body_base_ref.hpp>
 #include <sanguis/collision/world/body_collision_fwd.hpp>
-#include <fcppt/reference_impl.hpp>
 
 
 namespace sanguis
@@ -17,16 +17,9 @@ namespace world
 class body_collision
 {
 public:
-	using
-	body_ref
-	=
-	fcppt::reference<
-		sanguis::collision::world::body_base
-	>;
-
 	body_collision(
-		body_ref,
-		body_ref
+		sanguis::collision::world::body_base_ref,
+		sanguis::collision::world::body_base_ref
 	);
 
 	[[nodiscard]]
@@ -39,9 +32,9 @@ public:
 	sanguis::collision::world::body_base &
 	body2() const;
 private:
-	body_ref body1_;
+	sanguis::collision::world::body_base_ref body1_;
 
-	body_ref body2_;
+	sanguis::collision::world::body_base_ref body2_;
 };
 
 }

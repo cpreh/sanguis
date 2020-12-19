@@ -37,7 +37,7 @@ map_with_index(
 			Container::size_type
 		>
 	>
-	result;
+	result{};
 
 	result.reserve(
 		_source.size()
@@ -46,11 +46,12 @@ map_with_index(
 	for(
 		typename
 		Container::size_type index(
-			0u
+			0U
 		);
 		index < _source.size();
 		++index
 	)
+	{
 		result.push_back(
 			std::make_pair(
 				_source[
@@ -59,6 +60,7 @@ map_with_index(
 				index
 			)
 		);
+	}
 
 	return
 		result;

@@ -16,5 +16,4 @@ sanguis::server::entities::portal_blocker::portal_blocker(
 }
 
 sanguis::server::entities::portal_blocker::~portal_blocker()
-{
-}
+= default;

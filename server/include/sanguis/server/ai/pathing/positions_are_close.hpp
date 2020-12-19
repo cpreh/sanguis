@@ -15,8 +15,8 @@ namespace pathing
 
 bool
 positions_are_close(
-	sanguis::creator::pos,
-	sanguis::creator::pos
+	sanguis::creator::pos const &,
+	sanguis::creator::pos const &
 );
 
 }

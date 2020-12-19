@@ -33,12 +33,12 @@ sanguis::server::entities::projectiles::rocket::rocket(
 		sanguis::aoe_projectile_type::rocket,
 		_team,
 		sanguis::server::entities::movement_speed(
-			300.f
+			300.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		),
 		_load_context,
 		sanguis::server::entities::projectiles::life_time(
 			sanguis::duration_second(
-				10.f
+				10.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			)
 		),
 		_aoe,
@@ -54,8 +54,7 @@ sanguis::server::entities::projectiles::rocket::rocket(
 }
 
 sanguis::server::entities::projectiles::rocket::~rocket()
-{
-}
+= default;
 
 void
 sanguis::server::entities::projectiles::rocket::do_damage(

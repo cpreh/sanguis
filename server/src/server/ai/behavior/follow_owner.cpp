@@ -1,6 +1,7 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/ai/context.hpp>
+#include <sanguis/server/ai/context_ref.hpp>
 #include <sanguis/server/ai/go_close_to_target.hpp>
 #include <sanguis/server/ai/speed_factor.hpp>
 #include <sanguis/server/ai/status.hpp>
@@ -13,25 +14,29 @@
 #include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/optional/maybe.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::ai::behavior::follow_owner::follow_owner(
-	sanguis::server::ai::context &_context,
-	sanguis::server::entities::spawn_owner const &_spawn_owner
+	sanguis::server::ai::context_ref const _context,
+	sanguis::server::entities::spawn_owner _spawn_owner
 )
 :
 	sanguis::server::ai::behavior::base(
 		_context
 	),
 	spawn_owner_{
-		_spawn_owner
+		std::move(
+			_spawn_owner
+		)
 	}
 {
 }
 
 sanguis::server::ai::behavior::follow_owner::~follow_owner()
-{
-}
+= default;
 
 bool
 sanguis::server::ai::behavior::follow_owner::start()

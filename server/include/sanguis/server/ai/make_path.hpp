@@ -15,8 +15,8 @@ namespace ai
 [[nodiscard]]
 bool
 make_path(
-	sanguis::server::ai::context &,
-	sanguis::creator::pos
+	sanguis::server::ai::context &, // NOLINT(google-runtime-references)
+	sanguis::creator::pos const &
 );
 
 }

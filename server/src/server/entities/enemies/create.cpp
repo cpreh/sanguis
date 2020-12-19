@@ -1,4 +1,4 @@
-#include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/random_generator_ref.hpp>
 #include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/entities/spawn_owner_fwd.hpp>
@@ -19,7 +19,7 @@
 #include <sanguis/server/entities/enemies/factory/zombie00.hpp>
 #include <sanguis/server/entities/enemies/factory/zombie01.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
-#include <sanguis/server/weapons/parameters_fwd.hpp>
+#include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/cast/int_to_float.hpp>
@@ -27,7 +27,7 @@
 
 sanguis::server::entities::with_id_unique_ptr
 sanguis::server::entities::enemies::create(
-	sanguis::random_generator &_random_generator,
+	sanguis::random_generator_ref const _random_generator,
 	sanguis::server::weapons::common_parameters const &_weapons_parameters,
 	sanguis::creator::enemy_type const _enemy_type,
 	sanguis::creator::enemy_kind const _enemy_kind,

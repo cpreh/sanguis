@@ -14,7 +14,7 @@
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/entities/projectiles/life_time.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool_fwd.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -36,7 +36,7 @@ class base
 	public sanguis::server::entities::with_links,
 	public sanguis::server::entities::with_velocity
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		base
 	);
 protected:
@@ -44,7 +44,7 @@ protected:
 		sanguis::server::team,
 		sanguis::server::entities::movement_speed,
 		sanguis::load::model::path const &,
-		sanguis::server::environment::load_context &,
+		sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
 		sanguis::server::entities::projectiles::life_time,
 		sanguis::server::direction
 	);
@@ -55,10 +55,12 @@ protected:
 	void
 	expire();
 
+	[[nodiscard]]
 	sanguis::server::team
 	team() const
 	override;
 private:
+	[[nodiscard]]
 	bool
 	dead() const
 	override;
@@ -67,7 +69,7 @@ private:
 	world_collision()
 	override;
 
-	virtual
+	[[nodiscard]]
 	boost::logic::tribool
 	can_collide_with_body(
 		sanguis::server::entities::with_body const &
@@ -80,6 +82,7 @@ private:
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::collision::world::body_group
 	collision_group() const
 	override;
@@ -87,8 +90,8 @@ private:
 	virtual
 	void
 	do_damage(
-		sanguis::server::entities::with_health &
-	) = 0;
+		sanguis::server::entities::with_health & // NOLINT(google-runtime-references)
+	) = 0; // NOLINT(google-runtime-references)
 
 	sanguis::server::team const team_;
 

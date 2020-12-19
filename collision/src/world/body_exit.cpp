@@ -1,11 +1,13 @@
 #include <sanguis/collision/world/body_base_fwd.hpp>
+#include <sanguis/collision/world/body_base_ref.hpp>
 #include <sanguis/collision/world/body_exit.hpp>
 #include <sanguis/collision/world/ghost_base_fwd.hpp>
+#include <sanguis/collision/world/ghost_base_ref.hpp>
 
 
 sanguis::collision::world::body_exit::body_exit(
-	body_ref const _body,
-	ghost_ref const _ghost
+	sanguis::collision::world::body_base_ref const _body,
+	sanguis::collision::world::ghost_base_ref const _ghost
 )
 :
 	body_(

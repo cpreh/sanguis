@@ -16,11 +16,12 @@ namespace ai
 namespace pathing
 {
 
+[[nodiscard]]
 sanguis::server::ai::pathing::optional_trail
 find_target(
 	sanguis::creator::grid const &,
-	sanguis::server::ai::pathing::start,
-	sanguis::server::ai::pathing::target
+	sanguis::server::ai::pathing::start const &,
+	sanguis::server::ai::pathing::target const &
 );
 
 }

@@ -112,6 +112,7 @@ set(
 	include/sanguis/creator/grid.hpp
 	include/sanguis/creator/grid_crange.hpp
 	include/sanguis/creator/grid_crange_fwd.hpp
+	include/sanguis/creator/grid_cref.hpp
 	include/sanguis/creator/grid_fwd.hpp
 	include/sanguis/creator/grid_spiral_range.hpp
 	include/sanguis/creator/grid_spiral_range_fwd.hpp

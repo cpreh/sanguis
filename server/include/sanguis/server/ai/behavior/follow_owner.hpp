@@ -2,11 +2,11 @@
 #define SANGUIS_SERVER_AI_BEHAVIOR_FOLLOW_OWNER_HPP_INCLUDED
 
 #include <sanguis/duration.hpp>
-#include <sanguis/server/ai/context_fwd.hpp>
+#include <sanguis/server/ai/context_ref.hpp>
 #include <sanguis/server/ai/status_fwd.hpp>
 #include <sanguis/server/ai/behavior/base.hpp>
 #include <sanguis/server/entities/spawn_owner.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -22,22 +22,24 @@ class follow_owner
 :
 	public sanguis::server::ai::behavior::base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		follow_owner
 	);
 public:
 	follow_owner(
-		sanguis::server::ai::context &,
-		sanguis::server::entities::spawn_owner const &
+		sanguis::server::ai::context_ref,
+		sanguis::server::entities::spawn_owner
 	);
 
 	~follow_owner()
 	override;
 
+	[[nodiscard]]
 	bool
 	start()
 	override;
 
+	[[nodiscard]]
 	sanguis::server::ai::status
 	update(
 		sanguis::duration

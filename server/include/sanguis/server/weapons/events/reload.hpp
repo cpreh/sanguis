@@ -27,7 +27,8 @@ public:
 
 	reload(
 		reload &&
-	);
+	)
+	noexcept;
 
 	reload(
 		reload const &
@@ -36,7 +37,8 @@ public:
 	reload &
 	operator=(
 		reload &&
-	);
+	)
+	noexcept;
 
 	reload &
 	operator=(

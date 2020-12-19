@@ -1,4 +1,4 @@
-#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/diff_clock_cref.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/entities/enemies/attribute.hpp>
@@ -8,23 +8,20 @@
 #include <sanguis/server/entities/enemies/skills/teleport.hpp>
 #include <sanguis/server/weapons/target.hpp>
 #include <sge/timer/reset_when_expired.hpp>
-#include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 
 
 sanguis::server::entities::enemies::skills::teleport::teleport(
-	sanguis::diff_clock const &_diff_clock,
+	sanguis::diff_clock_cref const _diff_clock,
 	sanguis::server::entities::enemies::skills::cooldown const _cooldown
 )
 :
 	sanguis::server::entities::enemies::skills::skill(),
 	cooldown_timer_(
 		sanguis::diff_timer::parameters(
-			fcppt::make_cref(
-				_diff_clock
-			),
+			_diff_clock,
 			_cooldown.get()
 		)
 	)
@@ -32,8 +29,7 @@ sanguis::server::entities::enemies::skills::teleport::teleport(
 }
 
 sanguis::server::entities::enemies::skills::teleport::~teleport()
-{
-}
+= default;
 
 void
 sanguis::server::entities::enemies::skills::teleport::update(
@@ -47,14 +43,16 @@ sanguis::server::entities::enemies::skills::teleport::update(
 			)
 		)
 	)
+	{
 		return;
+	}
 
 	fcppt::optional::maybe_void(
 		_entity.target(),
 		[
 			&_entity
 		](
-			sanguis::server::weapons::target const _target
+			sanguis::server::weapons::target const &_target
 		)
 		{
 			_entity.center(

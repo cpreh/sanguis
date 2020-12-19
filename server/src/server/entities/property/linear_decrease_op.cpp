@@ -19,13 +19,17 @@ sanguis::server::entities::property::linear_decrease_op(
 	if(
 		_apply.get()
 	)
+	{
 		old.mul(
 			_value
 		);
+	}
 	else
+	{
 		old.div(
 			_value
 		);
+	}
 
 	_base.linear_decrease(
 		old

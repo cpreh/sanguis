@@ -21,9 +21,9 @@
 bool
 sanguis::server::ai::pathing::can_walk_diagonally(
 	sanguis::creator::grid const &_grid,
-	sanguis::creator::pos const _pos1,
-	sanguis::creator::pos const _pos2,
-	sanguis::creator::pos const _pos3
+	sanguis::creator::pos const &_pos1,
+	sanguis::creator::pos const &_pos2,
+	sanguis::creator::pos const &_pos3
 )
 {
 	FCPPT_ASSERT_PRE(
@@ -73,8 +73,10 @@ sanguis::server::ai::pathing::can_walk_diagonally(
 		==
 		0
 	)
+	{
 		return
 			true;
+	}
 
 	sanguis::creator::signed_pos const spos4(
 		(

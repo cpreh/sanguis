@@ -37,12 +37,15 @@ public:
 		Wrapped
 	>;
 
+	[[nodiscard]]
 	Wrapped
 	base() const;
 
+	[[nodiscard]]
 	optional_extra
 	extra() const;
 
+	[[nodiscard]]
 	Wrapped
 	value() const;
 private:

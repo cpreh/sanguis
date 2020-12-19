@@ -14,7 +14,7 @@ namespace collision
 
 sanguis::collision::center
 to_center(
-	sanguis::server::center
+	sanguis::server::center const &
 );
 
 }

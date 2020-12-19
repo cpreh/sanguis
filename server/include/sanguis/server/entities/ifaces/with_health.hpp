@@ -3,7 +3,7 @@
 
 #include <sanguis/server/health_fwd.hpp>
 #include <sanguis/server/entities/property/changeable_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -17,7 +17,7 @@ namespace ifaces
 
 class with_health
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		with_health
 	);
 protected:
@@ -26,14 +26,17 @@ public:
 	virtual
 	~with_health();
 
+	[[nodiscard]]
 	virtual
 	sanguis::server::entities::property::changeable &
 	health() = 0;
 
+	[[nodiscard]]
 	virtual
 	sanguis::server::health
 	current_health() const = 0;
 
+	[[nodiscard]]
 	virtual
 	sanguis::server::health
 	max_health() const = 0;

@@ -17,8 +17,7 @@ sanguis::server::entities::center_ghost::center_ghost()
 }
 
 sanguis::server::entities::center_ghost::~center_ghost()
-{
-}
+= default;
 
 sanguis::server::entities::optional_transfer_result
 sanguis::server::entities::center_ghost::on_transfer(

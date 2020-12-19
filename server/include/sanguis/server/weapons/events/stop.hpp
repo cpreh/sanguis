@@ -27,7 +27,8 @@ public:
 
 	stop(
 		stop &&
-	);
+	)
+	noexcept;
 
 	stop(
 		stop const &
@@ -36,7 +37,8 @@ public:
 	stop &
 	operator=(
 		stop &&
-	);
+	)
+	noexcept;
 
 	stop &
 	operator=(

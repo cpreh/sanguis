@@ -21,7 +21,7 @@
 #include <sanguis/server/weapons/ias.hpp>
 #include <sanguis/server/weapons/irs.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/reference_impl.hpp>
 
 
 namespace sanguis
@@ -35,82 +35,84 @@ namespace enemies
 
 class parameters
 {
-	FCPPT_NONCOPYABLE(
-		parameters
-	);
 public:
 	parameters(
 		sanguis::creator::enemy_type,
-		sanguis::server::environment::load_context &,
+		sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
 		sanguis::server::damage::armor_array const &,
 		sanguis::server::mass,
 		sanguis::server::health,
 		sanguis::server::entities::movement_speed,
-		sanguis::server::ai::create_function const &,
+		sanguis::server::ai::create_function &&,
 		sanguis::server::weapons::unique_ptr &&,
 		sanguis::server::pickup_probability,
 		sanguis::server::exp,
 		sanguis::server::entities::enemies::difficulty,
-		sanguis::server::entities::spawn_owner const &,
+		sanguis::server::entities::spawn_owner,
 		sanguis::server::auras::container &&
 	);
 
-	parameters(
-		parameters &&
-	);
-
-	parameters &
-	operator=(
-		parameters &&
-	) = delete;
-
-	~parameters();
-
+	[[nodiscard]]
 	sanguis::creator::enemy_type
 	enemy_type() const;
 
+	[[nodiscard]]
 	sanguis::server::environment::load_context &
 	load_context() const;
 
+	[[nodiscard]]
 	sanguis::server::damage::armor_array const &
 	armor() const;
 
+	[[nodiscard]]
 	sanguis::server::mass
 	mass() const;
 
+	[[nodiscard]]
 	sanguis::server::health
 	health() const;
 
+	[[nodiscard]]
 	sanguis::server::regeneration
 	regeneration() const;
 
+	[[nodiscard]]
 	sanguis::server::entities::movement_speed
 	movement_speed() const;
 
+	[[nodiscard]]
 	sanguis::server::ai::create_function const &
 	ai_create_function() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::unique_ptr &
 	weapon();
 
+	[[nodiscard]]
 	sanguis::server::pickup_probability
 	pickup_probability() const;
 
+	[[nodiscard]]
 	sanguis::server::exp
 	exp() const;
 
+	[[nodiscard]]
 	sanguis::server::entities::enemies::difficulty
 	difficulty() const;
 
+	[[nodiscard]]
 	sanguis::server::entities::spawn_owner const &
 	spawn_owner() const;
 
+	[[nodiscard]]
 	sanguis::server::auras::container &
 	auras();
 
+	[[nodiscard]]
 	sanguis::server::weapons::ias
 	ias() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::irs
 	irs() const;
 
@@ -170,13 +172,15 @@ public:
 		sanguis::server::ai::create_function const &
 	);
 private:
-	sanguis::creator::enemy_type const enemy_type_;
+	sanguis::creator::enemy_type enemy_type_;
 
-	sanguis::server::environment::load_context &load_context_;
+	fcppt::reference<
+		sanguis::server::environment::load_context
+	> const load_context_;
 
 	sanguis::server::damage::armor_array armor_;
 
-	sanguis::server::mass const mass_;
+	sanguis::server::mass mass_;
 
 	sanguis::server::health health_;
 
@@ -194,7 +198,7 @@ private:
 
 	sanguis::server::entities::enemies::difficulty difficulty_;
 
-	sanguis::server::entities::spawn_owner const spawn_owner_;
+	sanguis::server::entities::spawn_owner spawn_owner_;
 
 	sanguis::server::auras::container auras_;
 

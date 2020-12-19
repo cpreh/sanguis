@@ -1,18 +1,24 @@
+#include <sanguis/collision/log_cref.hpp>
 #include <sanguis/collision/log_fwd.hpp>
 #include <sanguis/collision/world/created.hpp>
 #include <sanguis/collision/world/object_fwd.hpp>
+#include <sanguis/collision/world/object_ref.hpp>
+#include <sanguis/creator/grid_cref.hpp>
 #include <sanguis/creator/grid_fwd.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/entities/transfer_parameters.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::entities::transfer_parameters::transfer_parameters(
-	sanguis::collision::log const &_log,
-	sanguis::collision::world::object &_world,
+	sanguis::collision::log_cref const _log,
+	sanguis::collision::world::object_ref const _world,
 	sanguis::collision::world::created const _created,
-	sanguis::creator::grid const &_grid,
-	sanguis::server::center const &_center,
+	sanguis::creator::grid_cref const _grid,
+	sanguis::server::center _center,
 	sanguis::server::angle const _angle
 )
 :
@@ -29,7 +35,9 @@ sanguis::server::entities::transfer_parameters::transfer_parameters(
 		_grid
 	),
 	center_(
-		_center
+		std::move(
+			_center
+		)
 	),
 	angle_(
 		_angle

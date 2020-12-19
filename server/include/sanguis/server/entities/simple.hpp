@@ -3,7 +3,7 @@
 
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/simple_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -17,7 +17,7 @@ class simple
 :
 	public virtual sanguis::server::entities::base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		simple
 	);
 protected:

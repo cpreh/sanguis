@@ -8,7 +8,7 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_buffs_fwd.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <typeindex>
 #include <unordered_map>
@@ -27,7 +27,7 @@ class with_buffs
 	public virtual sanguis::server::entities::base,
 	public virtual sanguis::server::entities::ifaces::with_id
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		with_buffs
 	);
 public:
@@ -38,8 +38,8 @@ public:
 
 	void
 	remove_buff(
-		sanguis::server::buffs::buff &
-	);
+		sanguis::server::buffs::buff & // NOLINT(google-runtime-references)
+	); // NOLINT(google-runtime-references)
 protected:
 	with_buffs();
 
@@ -50,6 +50,7 @@ protected:
 	update()
 	override;
 
+	[[nodiscard]]
 	sanguis::buff_type_vector
 	buff_types() const;
 private:

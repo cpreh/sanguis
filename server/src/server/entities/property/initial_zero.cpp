@@ -14,7 +14,7 @@ sanguis::server::entities::property::initial_zero(
 				_base
 			),
 			sanguis::server::entities::property::initial::current(
-				0.f
+				0.F
 			)
 		);
 }

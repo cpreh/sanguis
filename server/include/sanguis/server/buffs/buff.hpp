@@ -3,7 +3,7 @@
 
 #include <sanguis/buff_type_fwd.hpp>
 #include <fcppt/make_strong_typedef.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 
@@ -16,10 +16,11 @@ namespace buffs
 
 class buff
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		buff
 	);
 public:
+	[[nodiscard]]
 	virtual
 	sanguis::buff_type
 	type() const = 0;
@@ -39,6 +40,7 @@ public:
 	virtual
 	~buff() = 0;
 
+	[[nodiscard]]
 	// Only compares other buffs with the same typeid
 	virtual
 	bool

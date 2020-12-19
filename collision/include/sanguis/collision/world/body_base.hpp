@@ -41,7 +41,7 @@ public:
 	virtual
 	void
 	speed_changed(
-		sanguis::collision::speed
+		sanguis::collision::speed const &
 	) = 0;
 
 	[[nodiscard]]

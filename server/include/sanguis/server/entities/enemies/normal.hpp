@@ -5,7 +5,7 @@
 #include <sanguis/messages/types/string.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
 #include <sanguis/server/entities/enemies/parameters_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -21,7 +21,7 @@ class normal
 :
 	public sanguis::server::entities::enemies::enemy
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		normal
 	);
 public:
@@ -33,10 +33,12 @@ public:
 	~normal()
 	override;
 private:
+	[[nodiscard]]
 	sanguis::messages::types::string const &
 	name() const
 	override;
 
+	[[nodiscard]]
 	sanguis::enemy_kind
 	enemy_kind() const
 	override;

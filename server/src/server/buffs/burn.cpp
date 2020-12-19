@@ -6,6 +6,7 @@
 #include <sanguis/server/damage/modified_array.hpp>
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/entities/with_health.hpp>
+#include <sanguis/server/entities/with_health_ref.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
@@ -13,7 +14,7 @@
 
 
 sanguis::server::buffs::burn::burn(
-	sanguis::server::entities::with_health &_entity,
+	sanguis::server::entities::with_health_ref const _entity,
 	sanguis::server::buffs::burn_interval const _interval,
 	sanguis::server::damage::unit const _damage,
 	sanguis::server::damage::modified_array const &_damage_values
@@ -24,7 +25,7 @@ sanguis::server::buffs::burn::burn(
 	interval_timer_(
 		sanguis::diff_timer::parameters(
 			fcppt::make_cref(
-				_entity.diff_clock()
+				_entity->diff_clock()
 			),
 			_interval.get()
 		)
@@ -39,8 +40,7 @@ sanguis::server::buffs::burn::burn(
 }
 
 sanguis::server::buffs::burn::~burn()
-{
-}
+= default;
 
 sanguis::buff_type
 sanguis::server::buffs::burn::type() const
@@ -59,10 +59,12 @@ sanguis::server::buffs::burn::update()
 			)
 		)
 	)
-		entity_.damage(
+	{
+		entity_->damage(
 			damage_,
 			damage_values_
 		);
+	}
 }
 
 bool

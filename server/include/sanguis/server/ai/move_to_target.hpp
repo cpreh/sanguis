@@ -16,9 +16,9 @@ namespace ai
 
 void
 move_to_target(
-	sanguis::server::entities::with_ai &,
+	sanguis::server::entities::with_ai &, // NOLINT(google-runtime-references)
 	sanguis::server::optional_angle,
-	sanguis::server::ai::target,
+	sanguis::server::ai::target const &,
 	sanguis::server::ai::speed_factor
 );
 

@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_PROJECTILES_SCATTER_HPP_INCLUDED
 
 #include <sanguis/diff_timer.hpp>
-#include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/random_generator_ref.hpp>
 #include <sanguis/random_variate_decl.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/direction.hpp>
@@ -11,7 +11,7 @@
 #include <sanguis/server/entities/projectiles/projectile.hpp>
 #include <sanguis/server/entities/projectiles/scatter_create.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/random/distribution/basic_decl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real_decl.hpp>
 #include <fcppt/type_iso/strong_typedef.hpp>
@@ -30,16 +30,16 @@ class scatter
 :
 	public sanguis::server::entities::projectiles::projectile
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		scatter
 	);
 public:
 	scatter(
-		sanguis::random_generator &,
-		sanguis::server::environment::load_context &,
+		sanguis::random_generator_ref,
+		sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
 		sanguis::server::team,
 		sanguis::server::direction,
-		sanguis::server::entities::projectiles::scatter_create const &
+		sanguis::server::entities::projectiles::scatter_create &&
 	);
 
 	~scatter()
@@ -51,8 +51,8 @@ private:
 
 	void
 	do_damage(
-		sanguis::server::entities::with_health &
-	)
+		sanguis::server::entities::with_health & // NOLINT(google-runtime-references)
+	) // NOLINT(google-runtime-references)
 	override;
 
 	sanguis::server::entities::projectiles::scatter_create const create_;

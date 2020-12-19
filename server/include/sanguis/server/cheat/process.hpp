@@ -16,7 +16,7 @@ namespace cheat
 
 void
 process(
-	sanguis::server::entities::player &,
+	sanguis::server::entities::player &, // NOLINT(google-runtime-references)
 	sanguis::cheat_type,
 	sanguis::server::weapons::common_parameters const &,
 	sanguis::server::unicast_callback const &

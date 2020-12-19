@@ -1,12 +1,14 @@
+#include <sanguis/diff_clock_cref.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/random_generator_ref.hpp>
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/entities/enemies/skills/factory/parameters.hpp>
 
 
 sanguis::server::entities::enemies::skills::factory::parameters::parameters(
-	sanguis::diff_clock const &_diff_clock,
-	sanguis::random_generator &_random_generator,
+	sanguis::diff_clock_cref const _diff_clock,
+	sanguis::random_generator_ref const _random_generator,
 	sanguis::server::entities::enemies::difficulty const _difficulty
 )
 :

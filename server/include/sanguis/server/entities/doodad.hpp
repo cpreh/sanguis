@@ -12,7 +12,7 @@
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -28,12 +28,12 @@ class doodad
 	public sanguis::server::entities::with_id,
 	public sanguis::server::entities::with_links
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		doodad
 	);
 protected:
 	doodad(
-		sanguis::server::environment::load_context &,
+		sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
 		sanguis::doodad_type
 	);
 public:
@@ -43,6 +43,7 @@ public:
 	void
 	kill();
 
+	[[nodiscard]]
 	bool
 	dead() const
 	override;
@@ -51,10 +52,12 @@ public:
 	update()
 	override;
 private:
+	[[nodiscard]]
 	sanguis::collision::world::body_group
 	collision_group() const
 	override;
 
+	[[nodiscard]]
 	sanguis::messages::server::unique_ptr
 	add_message(
 		sanguis::server::player_id,

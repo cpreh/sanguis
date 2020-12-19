@@ -4,7 +4,7 @@
 #include <sanguis/load/model/path.hpp>
 #include <sanguis/server/load_fwd.hpp>
 #include <sanguis/server/radius.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <map>
 #include <fcppt/config/external_end.hpp>
@@ -17,7 +17,7 @@ namespace server
 
 class load
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		load
 	);
 public:
@@ -25,6 +25,7 @@ public:
 
 	~load();
 
+	[[nodiscard]]
 	sanguis::server::radius
 	model_dim(
 		sanguis::load::model::path const &

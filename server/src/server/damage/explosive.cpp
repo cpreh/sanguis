@@ -13,11 +13,11 @@ sanguis::server::damage::explosive()
 		sanguis::server::damage::make_array({
 			sanguis::server::damage::piercing =
 				sanguis::server::damage::unit(
-					0.3f
+					0.3F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 				),
 			sanguis::server::damage::fire =
 				sanguis::server::damage::unit(
-					0.7f
+					0.7F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 				)
 		});
 }

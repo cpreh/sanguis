@@ -32,6 +32,7 @@ set(
 	include/sanguis/io_service_fwd.hpp
 	include/sanguis/io_service_impl.hpp
 	include/sanguis/io_service_impl_fwd.hpp
+	include/sanguis/io_service_ref.hpp
 	include/sanguis/is_primary_weapon.hpp
 	include/sanguis/is_primary_weapon_fwd.hpp
 	include/sanguis/load/aoe_projectile_name.hpp
@@ -439,6 +440,7 @@ set(
 	include/sanguis/projectile_type_fwd.hpp
 	include/sanguis/random_generator.hpp
 	include/sanguis/random_generator_fwd.hpp
+	include/sanguis/random_generator_ref.hpp
 	include/sanguis/random_seed.hpp
 	include/sanguis/random_variate.hpp
 	include/sanguis/random_variate_decl.hpp

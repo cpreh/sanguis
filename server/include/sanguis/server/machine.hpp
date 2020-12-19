@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_MACHINE_HPP_INCLUDED
 
 #include <sanguis/duration.hpp>
-#include <sanguis/io_service_fwd.hpp>
+#include <sanguis/io_service_ref.hpp>
 #include <sanguis/timer.hpp>
 #include <sanguis/messages/client/unique_ptr.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
@@ -18,7 +18,7 @@
 #include <alda/net/port.hpp>
 #include <alda/net/buffer/circular_receive/streambuf_fwd.hpp>
 #include <alda/net/server/object.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/object.hpp>
@@ -42,14 +42,14 @@ struct machine
 		sanguis::server::states::running
 	>
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		machine
 	);
 public:
 	machine(
 		fcppt::log::context_reference,
 		alda::net::port,
-		sanguis::io_service &
+		sanguis::io_service_ref
 	);
 
 	~machine()
@@ -69,12 +69,15 @@ public:
 		sanguis::messages::server::base const &
 	);
 
+	[[nodiscard]]
 	bool
 	process_overflow();
 
+	[[nodiscard]]
 	sanguis::server::load const &
 	resources() const;
 
+	[[nodiscard]]
 	fcppt::log::context_reference
 	log_context() const;
 private:
@@ -99,8 +102,8 @@ private:
 	void
 	data_callback(
 		alda::net::id,
-		alda::net::buffer::circular_receive::streambuf &
-	);
+		alda::net::buffer::circular_receive::streambuf & // NOLINT(google-runtime-references)
+	); // NOLINT(google-runtime-references)
 
 	void
 	disconnect_player(
@@ -124,7 +127,7 @@ private:
 
 	alda::net::port const port_;
 
-	sanguis::io_service &io_service_;
+	sanguis::io_service_ref const io_service_;
 
 	alda::net::server::object net_;
 
@@ -153,9 +156,8 @@ private:
 
 	sanguis::server::timer timer_;
 
-	fcppt::signal::auto_connection const
-		disconnect_connection_,
-		data_connection_;
+	fcppt::signal::auto_connection const disconnect_connection_;
+	fcppt::signal::auto_connection const data_connection_;
 };
 
 }

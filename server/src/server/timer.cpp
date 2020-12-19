@@ -1,14 +1,17 @@
-#include <sanguis/io_service_fwd.hpp>
+#include <sanguis/io_service_ref.hpp>
 #include <sanguis/server/timer.hpp>
 #include <sanguis/server/timer_callback.hpp>
 #include <sanguis/server/timer_duration.hpp>
 #include <sanguis/server/timer_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::timer::timer(
-	sanguis::io_service const &_io_service,
-	sanguis::server::timer_callback const &_callback,
+	sanguis::io_service_ref const _io_service,
+	sanguis::server::timer_callback &&_callback,
 	sanguis::server::timer_duration const &_duration
 )
 :
@@ -17,13 +20,16 @@ sanguis::server::timer::timer(
 			sanguis::server::timer_impl
 		>(
 			_io_service,
-			_callback,
-			_duration
+			std::move(
+				_callback
+			),
+			std::move(
+				_duration
+			)
 		)
 	)
 {
 }
 
 sanguis::server::timer::~timer()
-{
-}
+= default;

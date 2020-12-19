@@ -2,12 +2,12 @@
 
 
 sanguis::server::weapons::events::stop::stop()
-{
-}
+= default;
 
 sanguis::server::weapons::events::stop::stop(
 	stop &&
 )
+noexcept
 = default;
 
 sanguis::server::weapons::events::stop::stop(
@@ -19,6 +19,7 @@ sanguis::server::weapons::events::stop &
 sanguis::server::weapons::events::stop::operator=(
 	stop &&
 )
+noexcept
 = default;
 
 sanguis::server::weapons::events::stop &
@@ -28,5 +29,4 @@ sanguis::server::weapons::events::stop::operator=(
 = default;
 
 sanguis::server::weapons::events::stop::~stop()
-{
-}
+= default;

@@ -23,6 +23,7 @@ sanguis::server::entities::enemies::base_difficulty(
 			>(
 				3
 			);
+	// NOLINTNEXTLINE(bugprone-branch-clone)
 	case sanguis::creator::enemy_type::zombie00:
 		return
 			fcppt::literal<
@@ -42,21 +43,21 @@ sanguis::server::entities::enemies::base_difficulty(
 			fcppt::literal<
 				sanguis::server::entities::enemies::difficulty_value
 			>(
-				5
+				5 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			);
 	case sanguis::creator::enemy_type::skeleton:
 		return
 			fcppt::literal<
 				sanguis::server::entities::enemies::difficulty_value
 			>(
-				8
+				8 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			);
 	case sanguis::creator::enemy_type::ghost:
 		return
 			fcppt::literal<
 				sanguis::server::entities::enemies::difficulty_value
 			>(
-				5
+				5 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			);
 	case sanguis::creator::enemy_type::maggot:
 		return
@@ -70,7 +71,7 @@ sanguis::server::entities::enemies::base_difficulty(
 			fcppt::literal<
 				sanguis::server::entities::enemies::difficulty_value
 			>(
-				20
+				20 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			);
 	}
 

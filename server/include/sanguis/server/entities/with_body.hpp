@@ -23,7 +23,7 @@
 #include <sanguis/server/entities/ifaces/with_radius.hpp>
 #include <sanguis/server/net/angle.hpp>
 #include <sanguis/server/net/center.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool_fwd.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -45,7 +45,7 @@ class with_body
 	public virtual sanguis::server::entities::ifaces::with_radius,
 	public sanguis::collision::world::body_base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		with_body
 	);
 public:
@@ -58,11 +58,13 @@ public:
 	override;
 
 	// entities::base overridden functions
+	[[nodiscard]]
 	sanguis::server::center
 	center() const
 	override;
 
 	// ifaces::with_angle overridden functions
+	[[nodiscard]]
 	sanguis::server::angle
 	angle() const
 	override;
@@ -79,15 +81,18 @@ public:
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::server::radius
 	radius() const
 	override;
 
+	[[nodiscard]]
 	sanguis::server::entities::remove_from_world_result
 	remove_from_world()
 	override;
 protected:
 	// entities::base::on_transfer
+	[[nodiscard]]
 	sanguis::server::entities::optional_transfer_result
 	on_transfer(
 		sanguis::server::entities::transfer_parameters const &
@@ -100,13 +105,15 @@ protected:
 
 	void
 	body_speed(
-		sanguis::server::speed
+		sanguis::server::speed const &
 	);
 
+	[[nodiscard]]
 	sanguis::server::speed
 	body_speed() const;
 private:
 	// collision::body_base
+	[[nodiscard]]
 	boost::logic::tribool
 	can_collide_with(
 		sanguis::collision::world::body_base const &
@@ -115,10 +122,11 @@ private:
 
 	void
 	collision(
-		sanguis::collision::world::body_base &
-	)
+		sanguis::collision::world::body_base & // NOLINT(google-runtime-references)
+	) // NOLINT(google-runtime-references)
 	override;
 
+	[[nodiscard]]
 	virtual
 	boost::logic::tribool
 	can_collide_with_body(
@@ -128,13 +136,15 @@ private:
 	virtual
 	void
 	collision_with_body(
-		sanguis::server::entities::with_body &
-	);
+		sanguis::server::entities::with_body & // NOLINT(google-runtime-references)
+	); // NOLINT(google-runtime-references)
 
+	[[nodiscard]]
 	virtual
 	sanguis::collision::world::body_group
 	collision_group() const = 0;
 
+	[[nodiscard]]
 	virtual
 	sanguis::server::speed
 	initial_speed() const;
@@ -147,7 +157,7 @@ private:
 
 	void
 	speed_changed(
-		sanguis::collision::speed
+		sanguis::collision::speed const &
 	)
 	override;
 

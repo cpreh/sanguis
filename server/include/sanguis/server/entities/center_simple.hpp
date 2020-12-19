@@ -5,7 +5,7 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/optional_transfer_result_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/optional/object_decl.hpp>
 
 
@@ -20,20 +20,21 @@ class center_simple
 :
 	public virtual sanguis::server::entities::base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		center_simple
 	);
 protected:
 	center_simple();
 public:
+	[[nodiscard]]
 	sanguis::server::center
 	center() const
-	override
 	final;
 
 	~center_simple()
 	override = 0;
 protected:
+	[[nodiscard]]
 	sanguis::server::entities::optional_transfer_result
 	on_transfer(
 		sanguis::server::entities::transfer_parameters const &

@@ -19,7 +19,7 @@
 #include <sanguis/server/weapons/ias.hpp>
 #include <sanguis/server/weapons/irs.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/optional/object_decl.hpp>
 
 
@@ -41,12 +41,12 @@ class with_ai
 	public sanguis::server::entities::with_auras_id,
 	public sanguis::server::entities::with_weapon
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		with_ai
 	);
 protected:
 	with_ai(
-		sanguis::server::ai::create_function const &,
+		sanguis::server::ai::create_function &&,
 		sanguis::server::weapons::unique_ptr &&,
 		sanguis::server::auras::container &&,
 		sanguis::server::weapons::ias,
@@ -60,10 +60,12 @@ protected:
 	update()
 	override;
 
+	[[nodiscard]]
 	sanguis::server::entities::transfer_result
 	on_create()
 	override;
 public:
+	[[nodiscard]]
 	sanguis::server::ai::create_function const &
 	create_ai() const;
 private:

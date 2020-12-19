@@ -1,5 +1,5 @@
-#include <sanguis/random_generator_fwd.hpp>
-#include <sanguis/server/ai/context_fwd.hpp>
+#include <sanguis/random_generator_ref.hpp>
+#include <sanguis/server/ai/context_ref.hpp>
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/ai/create_simple.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
@@ -19,17 +19,17 @@
 
 sanguis::server::ai::create_function
 sanguis::server::ai::create_simple(
-	sanguis::random_generator &_random_generator,
+	sanguis::random_generator_ref const _random_generator,
 	sanguis::server::ai::sight_range const _sight_range
 )
 {
 	return
 		sanguis::server::ai::create_function{
 			[
-				&_random_generator,
+				_random_generator,
 				_sight_range
 			](
-				sanguis::server::ai::context &_context
+				sanguis::server::ai::context_ref const _context
 			)
 			{
 				return
@@ -56,7 +56,7 @@ sanguis::server::ai::create_simple(
 									fcppt::literal<
 										sanguis::server::ai::speed_factor
 									>(
-										0.3f
+										0.3F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 									)
 								)
 							)

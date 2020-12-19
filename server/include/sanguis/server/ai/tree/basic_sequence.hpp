@@ -4,7 +4,7 @@
 #include <sanguis/server/ai/tree/base.hpp>
 #include <sanguis/server/ai/tree/container.hpp>
 #include <sanguis/server/entities/transfer_result_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -20,7 +20,7 @@ class basic_sequence
 :
 	public sanguis::server::ai::tree::base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		basic_sequence
 	);
 public:
@@ -32,10 +32,12 @@ public:
 	~basic_sequence()
 	override;
 protected:
+	[[nodiscard]]
 	sanguis::server::entities::transfer_result
 	transfer()
 	override;
 
+	[[nodiscard]]
 	sanguis::server::ai::tree::container &
 	get();
 private:

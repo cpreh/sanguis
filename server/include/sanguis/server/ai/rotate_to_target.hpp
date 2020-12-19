@@ -14,8 +14,8 @@ namespace ai
 
 void
 rotate_to_target(
-	sanguis::server::entities::with_ai &,
-	sanguis::server::ai::target
+	sanguis::server::entities::with_ai &, // NOLINT(google-runtime-references)
+	sanguis::server::ai::target const &
 );
 
 }

@@ -42,18 +42,29 @@ sanguis::server::entities::auto_weak_link::auto_weak_link(
 	if(
 		_old.is_linked()
 	)
+	{
 		this->add_me();
+	}
 }
 
 sanguis::server::entities::auto_weak_link::~auto_weak_link()
-{
-}
+= default;
 
 sanguis::server::entities::auto_weak_link &
 sanguis::server::entities::auto_weak_link::operator=(
 	auto_weak_link const &_old
 )
 {
+	if(
+		this
+		==
+		&_old
+	)
+	{
+		return
+			*this;
+	}
+
 	this->unlink();
 
 	sanguis::server::entities::auto_weak_hook::operator=(
@@ -66,7 +77,9 @@ sanguis::server::entities::auto_weak_link::operator=(
 	if(
 		_old.is_linked()
 	)
+	{
 		this->add_me();
+	}
 
 	return
 		*this;

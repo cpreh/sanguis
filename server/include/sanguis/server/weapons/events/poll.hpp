@@ -27,7 +27,8 @@ public:
 
 	poll(
 		poll &&
-	);
+	)
+	noexcept;
 
 	poll(
 		poll const &
@@ -36,7 +37,8 @@ public:
 	poll &
 	operator=(
 		poll &&
-	);
+	)
+	noexcept;
 
 	poll &
 	operator=(

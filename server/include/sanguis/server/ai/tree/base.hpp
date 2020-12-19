@@ -5,7 +5,7 @@
 #include <sanguis/server/ai/status_fwd.hpp>
 #include <sanguis/server/ai/tree/base_fwd.hpp>
 #include <sanguis/server/entities/transfer_result_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -19,7 +19,7 @@ namespace tree
 
 class base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		base
 	);
 protected:
@@ -28,10 +28,12 @@ public:
 	virtual
 	~base();
 
+	[[nodiscard]]
 	virtual
 	sanguis::server::entities::transfer_result
 	transfer() = 0;
 
+	[[nodiscard]]
 	virtual
 	sanguis::server::ai::status
 	run(

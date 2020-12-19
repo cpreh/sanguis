@@ -6,7 +6,7 @@
 #include <sanguis/server/entities/transfer_result_fwd.hpp>
 #include <sanguis/server/entities/enemies/enemy.hpp>
 #include <sanguis/server/entities/enemies/parameters_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -22,7 +22,7 @@ class boss
 :
 	public sanguis::server::entities::enemies::enemy
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		boss
 	);
 public:
@@ -34,6 +34,7 @@ public:
 	~boss()
 	override;
 private:
+	[[nodiscard]]
 	sanguis::server::entities::transfer_result
 	on_create()
 	override;
@@ -42,10 +43,12 @@ private:
 	remove_from_game()
 	override;
 
+	[[nodiscard]]
 	sanguis::messages::types::string const &
 	name() const
 	override;
 
+	[[nodiscard]]
 	sanguis::enemy_kind
 	enemy_kind() const
 	override;

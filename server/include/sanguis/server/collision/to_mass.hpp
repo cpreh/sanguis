@@ -14,7 +14,7 @@ namespace collision
 
 sanguis::collision::mass
 to_mass(
-	sanguis::server::mass
+	sanguis::server::mass const &
 );
 
 }

@@ -27,16 +27,19 @@ sanguis::server::entities::property::always_max::always_max(
 
 sanguis::server::entities::property::always_max::always_max(
 	always_max &&
-) = default;
+)
+noexcept
+= default;
 
 sanguis::server::entities::property::always_max &
 sanguis::server::entities::property::always_max::operator=(
 	always_max &&
-) = default;
+)
+noexcept
+= default;
 
 sanguis::server::entities::property::always_max::~always_max()
-{
-}
+= default;
 
 sanguis::server::entities::property::value
 sanguis::server::entities::property::always_max::current() const

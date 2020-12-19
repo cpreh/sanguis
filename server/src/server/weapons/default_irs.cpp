@@ -7,6 +7,6 @@ sanguis::server::weapons::default_irs()
 {
 	return
 		sanguis::server::weapons::irs(
-			1.f
+			1.F
 		);
 }

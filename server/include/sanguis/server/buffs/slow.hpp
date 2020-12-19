@@ -4,8 +4,8 @@
 #include <sanguis/buff_type_fwd.hpp>
 #include <sanguis/server/buffs/buff.hpp>
 #include <sanguis/server/buffs/slow_factor.hpp>
-#include <sanguis/server/entities/with_velocity_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <sanguis/server/entities/with_velocity_ref.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -19,18 +19,19 @@ class slow
 :
 	public sanguis::server::buffs::buff
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		slow
 	);
 public:
 	slow(
-		sanguis::server::entities::with_velocity &,
+		sanguis::server::entities::with_velocity_ref,
 		sanguis::server::buffs::slow_factor
 	);
 
 	~slow()
 	override;
 private:
+	[[nodiscard]]
 	sanguis::buff_type
 	type() const
 	override;
@@ -41,13 +42,14 @@ private:
 	)
 	override;
 
+	[[nodiscard]]
 	bool
 	greater(
 		sanguis::server::buffs::buff const &
 	) const
 	override;
 
-	sanguis::server::entities::with_velocity &entity_;
+	sanguis::server::entities::with_velocity_ref const entity_;
 
 	sanguis::server::buffs::slow_factor const factor_;
 };

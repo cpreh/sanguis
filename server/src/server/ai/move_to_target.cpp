@@ -21,7 +21,7 @@ void
 sanguis::server::ai::move_to_target(
 	sanguis::server::entities::with_ai &_me,
 	sanguis::server::optional_angle const _opt_angle,
-	sanguis::server::ai::target const _target,
+	sanguis::server::ai::target const &_target,
 	sanguis::server::ai::speed_factor const _speed_factor
 )
 {
@@ -57,14 +57,14 @@ sanguis::server::ai::move_to_target(
 				// Set the movement at most to 1.3 the speed it would
 				// take an entity to reach its target in a single AI
 				// tick.
-				// TODO: The factor should be dependant upon how fast
+				// TODO(philipp): The factor should be dependant upon how fast
 				// the target is moving.
 				return
 					std::min(
 						fcppt::literal<
 							sanguis::server::space_unit
 						>(
-							1.3f
+							1.3F
 						)
 						*
 						sanguis::server::collision::distance_entity_pos(

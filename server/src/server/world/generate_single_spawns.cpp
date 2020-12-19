@@ -1,4 +1,4 @@
-#include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/random_generator_ref.hpp>
 #include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/creator/spawn_pos.hpp>
@@ -25,14 +25,14 @@ sanguis::server::world::generate_single_spawns(
 	sanguis::creator::enemy_kind const _enemy_kind,
 	sanguis::creator::spawn_pos const _pos,
 	sanguis::server::weapons::common_parameters const &_weapons_parameters,
-	sanguis::random_generator &_random_generator,
+	sanguis::random_generator_ref const _random_generator,
 	sanguis::server::environment::load_context &_load_context,
 	sanguis::server::world::difficulty const _difficulty
 )
 {
 	return
 		sanguis::server::world::place_multiple(
-			_random_generator,
+			_random_generator.get(),
 			sanguis::server::world::place_with_id_callback(
 				[
 					&_random_generator,

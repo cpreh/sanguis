@@ -56,6 +56,7 @@
 #include <sanguis/server/world/object.hpp>
 #include <sanguis/server/world/parameters.hpp>
 #include <alda/message/init_record.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
@@ -173,7 +174,7 @@ void
 sanguis::server::global::context::insert_player(
 	sanguis::world_id const _world_id,
 	sanguis::server::player_id const _player_id,
-	sanguis::player_name const &_name
+	sanguis::player_name &&_name
 )
 {
 	// send this before the world gets created
@@ -188,10 +189,14 @@ sanguis::server::global::context::insert_player(
 
 	sanguis::server::entities::player_unique_ptr player_ptr(
 		sanguis::server::create_player(
-			random_generator_,
+			fcppt::make_ref(
+				random_generator_
+			),
 			this->weapon_parameters(),
 			*load_context_,
-			_name,
+			std::move(
+				_name
+			),
 			send_unicast_,
 			_player_id,
 			console_.known_commands()
@@ -652,8 +657,12 @@ sanguis::server::global::context::weapon_parameters()
 {
 	return
 		sanguis::server::weapons::common_parameters{
-			weapons_log_,
-			random_generator_
+			fcppt::make_cref(
+				weapons_log_
+			),
+			fcppt::make_ref(
+				random_generator_
+			)
 		};
 }
 

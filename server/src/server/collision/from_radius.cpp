@@ -5,7 +5,7 @@
 
 sanguis::server::radius
 sanguis::server::collision::from_radius(
-	sanguis::collision::radius const _radius
+	sanguis::collision::radius const &_radius
 )
 {
 	return

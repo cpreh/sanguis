@@ -13,7 +13,7 @@ sanguis::server::ai::update_interval()
 			sanguis::duration
 		>(
 			std::chrono::milliseconds(
-				500
+				500 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			)
 		);
 }

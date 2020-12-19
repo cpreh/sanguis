@@ -72,8 +72,7 @@ sanguis::server::entities::projectiles::base::base(
 FCPPT_PP_POP_WARNING
 
 sanguis::server::entities::projectiles::base::~base()
-{
-}
+= default;
 
 void
 sanguis::server::entities::projectiles::base::expire()
@@ -126,6 +125,7 @@ sanguis::server::entities::projectiles::base::collision_with_body(
 	if(
 		!this->dead()
 	)
+	{
 		this->do_damage(
 			dynamic_cast<
 				sanguis::server::entities::with_health &
@@ -133,6 +133,7 @@ sanguis::server::entities::projectiles::base::collision_with_body(
 				_other
 			)
 		);
+	}
 }
 
 sanguis::collision::world::body_group

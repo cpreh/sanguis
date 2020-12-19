@@ -4,9 +4,6 @@
 #include <sanguis/server/entities/auto_weak_hook.hpp>
 #include <sanguis/server/entities/with_links_fwd.hpp>
 #include <fcppt/optional/reference.hpp>
-#include <fcppt/preprocessor/disable_gcc_warning.hpp>
-#include <fcppt/preprocessor/pop_warning.hpp>
-#include <fcppt/preprocessor/push_warning.hpp>
 
 
 namespace sanguis
@@ -16,9 +13,7 @@ namespace server
 namespace entities
 {
 
-FCPPT_PP_PUSH_WARNING
-FCPPT_PP_DISABLE_GCC_WARNING(-Weffc++)
-
+// NOLINTNEXTLINE(cppcoreguidelines-special-member-functions,hicpp-special-member-functions)
 class auto_weak_link
 :
 	public sanguis::server::entities::auto_weak_hook
@@ -35,8 +30,8 @@ public:
 
 	explicit
 	auto_weak_link(
-		sanguis::server::entities::with_links &ref
-	);
+		sanguis::server::entities::with_links &ref // NOLINT(google-runtime-references)
+	); // NOLINT(google-runtime-references)
 
 	auto_weak_link(
 		auto_weak_link const &
@@ -52,14 +47,17 @@ public:
 	void
 	unlink();
 
+	[[nodiscard]]
 	optional_with_links_ref
 	get() const;
 
+	[[nodiscard]]
 	bool
 	operator==(
 		sanguis::server::entities::auto_weak_link const &
 	) const;
 private:
+	[[nodiscard]]
 	sanguis::server::entities::with_links &
 	checked_ref() const;
 
@@ -68,8 +66,6 @@ private:
 
 	optional_with_links_ref ref_;
 };
-
-FCPPT_PP_POP_WARNING
 
 bool
 operator!=(

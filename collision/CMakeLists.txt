@@ -85,6 +85,7 @@ set(
 	include/sanguis/collision/length2_fwd.hpp
 	include/sanguis/collision/length_fwd.hpp
 	include/sanguis/collision/log.hpp
+	include/sanguis/collision/log_cref.hpp
 	include/sanguis/collision/log_fwd.hpp
 	include/sanguis/collision/log_location.hpp
 	include/sanguis/collision/mass.hpp
@@ -111,6 +112,7 @@ set(
 	include/sanguis/collision/world/body.hpp
 	include/sanguis/collision/world/body_base.hpp
 	include/sanguis/collision/world/body_base_fwd.hpp
+	include/sanguis/collision/world/body_base_ref.hpp
 	include/sanguis/collision/world/body_body.hpp
 	include/sanguis/collision/world/body_collision.hpp
 	include/sanguis/collision/world/body_collision_container.hpp
@@ -133,6 +135,7 @@ set(
 	include/sanguis/collision/world/ghost.hpp
 	include/sanguis/collision/world/ghost_base.hpp
 	include/sanguis/collision/world/ghost_base_fwd.hpp
+	include/sanguis/collision/world/ghost_base_ref.hpp
 	include/sanguis/collision/world/ghost_fwd.hpp
 	include/sanguis/collision/world/ghost_group.hpp
 	include/sanguis/collision/world/ghost_group_fwd.hpp
@@ -141,6 +144,7 @@ set(
 	include/sanguis/collision/world/ghost_unique_ptr.hpp
 	include/sanguis/collision/world/object.hpp
 	include/sanguis/collision/world/object_fwd.hpp
+	include/sanguis/collision/world/object_ref.hpp
 	include/sanguis/collision/world/object_unique_ptr.hpp
 	include/sanguis/collision/world/optional_body_enter.hpp
 	include/sanguis/collision/world/optional_body_enter_fwd.hpp

@@ -23,9 +23,11 @@ public:
 		Unit
 	);
 
+	[[nodiscard]]
 	sanguis::server::damage::type
 	type() const;
 
+	[[nodiscard]]
 	Unit
 	value() const;
 private:

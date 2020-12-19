@@ -16,7 +16,7 @@
 #include <sanguis/server/entities/enemies/difficulty.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -34,13 +34,13 @@ class destructible
 	public sanguis::server::entities::with_links,
 	public virtual sanguis::server::entities::ifaces::with_team
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		destructible
 	);
 public:
 	destructible(
 		sanguis::creator::destructible_type,
-		sanguis::server::environment::load_context &,
+		sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
 		sanguis::server::health,
 		sanguis::server::damage::armor_array const &,
 		sanguis::server::entities::enemies::difficulty
@@ -57,14 +57,17 @@ private:
 	remove_from_game()
 	override;
 
+	[[nodiscard]]
 	sanguis::server::team
 	team() const
 	override;
 
+	[[nodiscard]]
 	sanguis::collision::world::body_group
 	collision_group() const
 	override;
 
+	[[nodiscard]]
 	sanguis::messages::server::unique_ptr
 	add_message(
 		sanguis::server::player_id,

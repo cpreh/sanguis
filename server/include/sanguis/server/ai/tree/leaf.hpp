@@ -6,7 +6,7 @@
 #include <sanguis/server/ai/behavior/base_unique_ptr.hpp>
 #include <sanguis/server/ai/tree/base.hpp>
 #include <sanguis/server/entities/transfer_result_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -22,7 +22,7 @@ class leaf
 :
 	public sanguis::server::ai::tree::base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		leaf
 	);
 public:
@@ -34,10 +34,12 @@ public:
 	~leaf()
 	override;
 private:
+	[[nodiscard]]
 	sanguis::server::entities::transfer_result
 	transfer()
 	override;
 
+	[[nodiscard]]
 	sanguis::server::ai::status
 	run(
 		sanguis::duration

@@ -25,11 +25,14 @@
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/signal/auto_connection.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::console::console(
-	sanguis::server::send_callback const &_send,
-	sanguis::server::unicast_callback const &_unicast
+	sanguis::server::send_callback &&_send,
+	sanguis::server::unicast_callback &&_unicast
 )
 :
 	object_(
@@ -38,23 +41,26 @@ sanguis::server::console::console(
 		)
 	),
 	send_(
-		_send
+		std::move(
+			_send
+		)
 	),
 	unicast_(
-		_unicast
+		std::move(
+			_unicast
+		)
 	),
 	known_commands_()
 {
 }
 
 sanguis::server::console::~console()
-{
-}
+= default;
 
 fcppt::signal::auto_connection
 sanguis::server::console::insert(
 	fcppt::string const &_command,
-	sge::console::callback::function const &_callback,
+	sge::console::callback::function &&_callback,
 	fcppt::string const &_description
 )
 {
@@ -75,7 +81,7 @@ sanguis::server::console::insert(
 		)
 	);
 
-	// TODO: we have to know when a command doesn't exist anymore!
+	// TODO(philipp): we have to know when a command doesn't exist anymore!
 	known_commands_.push_back(
 		sanguis::server::console_command_pair(
 			_command,
@@ -86,10 +92,9 @@ sanguis::server::console::insert(
 	return
 		object_.insert(
 			sge::console::callback::parameters(
-				// TODO: Move
-				sge::console::callback::function{
+				std::move(
 					_callback
-				},
+				),
 				sge::console::callback::name(
 					sge::font::from_fcppt_string(
 						_command
@@ -147,5 +152,6 @@ sanguis::server::console::print_line(
 sanguis::server::console_command_vector const &
 sanguis::server::console::known_commands() const
 {
-	return known_commands_;
+	return
+		known_commands_;
 }

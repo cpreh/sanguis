@@ -6,6 +6,8 @@
 #include <sanguis/server/collision/ghost.hpp>
 #include <sanguis/server/collision/ghost_base.hpp>
 #include <sanguis/server/entities/with_body.hpp>
+#include <sanguis/server/entities/with_body_ref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool.hpp>
@@ -13,15 +15,20 @@
 
 
 sanguis::server::auras::aura::~aura()
-{
-}
+= default;
 
 sanguis::server::collision::ghost
 sanguis::server::auras::aura::create_ghost()
 {
 	return
 		sanguis::server::collision::ghost{
-			*this,
+			fcppt::make_ref(
+				static_cast<
+					sanguis::collision::world::ghost_base &
+				>(
+					*this
+				)
+			),
 			collision_group_,
 			radius_
 		};
@@ -53,15 +60,17 @@ sanguis::server::auras::aura::can_collide_with(
 
 void
 sanguis::server::auras::aura::on_body_enter(
-	sanguis::collision::world::body_base &_base,
+	sanguis::collision::world::body_base_ref const _base,
 	sanguis::collision::world::created const _created
 )
 {
 	this->enter(
-		fcppt::cast::static_downcast<
-			sanguis::server::entities::with_body &
-		>(
-			_base
+		fcppt::make_ref(
+			fcppt::cast::static_downcast<
+				sanguis::server::entities::with_body &
+			>(
+				_base.get()
+			)
 		),
 		_created
 	);

@@ -62,13 +62,15 @@ sanguis::server::entities::friend_::friend_(
 	sanguis::server::damage::armor_array const &_armor,
 	sanguis::server::health const _health,
 	sanguis::server::entities::movement_speed const _movement_speed,
-	sanguis::server::ai::create_function const &_ai,
+	sanguis::server::ai::create_function &&_ai,
 	sanguis::server::weapons::unique_ptr &&_weapon
 )
 :
 	sanguis::server::entities::ifaces::with_team(),
 	sanguis::server::entities::with_ai(
-		_ai,
+		std::move(
+			_ai
+		),
 		std::move(
 			_weapon
 		),
@@ -83,7 +85,7 @@ sanguis::server::entities::friend_::friend_(
 	sanguis::server::entities::with_health(
 		_health,
 		sanguis::server::regeneration(
-			0.f
+			0.F
 		),
 		_armor
 	),
@@ -94,7 +96,6 @@ sanguis::server::entities::friend_::friend_(
 				_friend_type
 			)
 		),
-		// TODO
 		sanguis::server::optional_mass(),
 		sanguis::server::entities::movement_speed_initial(
 			sanguis::server::entities::property::initial_zero(
@@ -102,7 +103,7 @@ sanguis::server::entities::friend_::friend_(
 			)
 		),
 		sanguis::server::direction(
-			0.f
+			0.F
 		)
 	),
 	friend_type_(
@@ -110,6 +111,9 @@ sanguis::server::entities::friend_::friend_(
 	)
 {
 }
+
+sanguis::server::entities::friend_::~friend_()
+= default;
 
 sanguis::server::entities::optional_transfer_result
 sanguis::server::entities::friend_::on_transfer(
@@ -123,10 +127,11 @@ sanguis::server::entities::friend_::on_transfer(
 			_parameters.grid()
 		)
 	)
+	{
 		return
 			sanguis::server::entities::optional_transfer_result();
+	}
 
-	// TODO: Why?
 	sanguis::server::entities::with_auras::on_transfer(
 		_parameters
 	);

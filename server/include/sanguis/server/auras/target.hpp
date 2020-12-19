@@ -10,7 +10,8 @@
 #include <sanguis/server/auras/aura.hpp>
 #include <sanguis/server/auras/target_kind_fwd.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <sanguis/server/entities/with_body_ref.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -24,7 +25,7 @@ class target
 :
 	public sanguis::server::auras::aura
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		target
 	);
 public:
@@ -32,27 +33,28 @@ public:
 		sanguis::server::radius,
 		sanguis::server::team,
 		sanguis::server::auras::target_kind,
-		sanguis::server::add_target_callback const &,
-		sanguis::server::remove_target_callback const &
+		sanguis::server::add_target_callback &&,
+		sanguis::server::remove_target_callback &&
 	);
 
 	~target()
 	override;
 private:
+	[[nodiscard]]
 	sanguis::optional_aura_type
 	type() const
 	override;
 
 	void
 	enter(
-		sanguis::server::entities::with_body &,
+		sanguis::server::entities::with_body_ref,
 		sanguis::collision::world::created
 	)
 	override;
 
 	void
 	leave(
-		sanguis::server::entities::with_body &
+		sanguis::server::entities::with_body & // NOLINT(google-runtime-references)
 	)
 	override;
 

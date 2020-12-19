@@ -15,8 +15,8 @@ namespace property
 
 void
 current_to_max(
-	sanguis::server::entities::property::changeable &
-);
+	sanguis::server::entities::property::changeable & // NOLINT(google-runtime-references)
+); // NOLINT(google-runtime-references)
 
 }
 }
@@ -24,4 +24,3 @@ current_to_max(
 }
 
 #endif
-

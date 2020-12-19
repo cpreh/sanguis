@@ -9,7 +9,7 @@
 #include <sanguis/server/entities/optional_transfer_result_fwd.hpp>
 #include <sanguis/server/entities/remove_from_world_result_fwd.hpp>
 #include <sanguis/server/entities/transfer_parameters_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -23,7 +23,7 @@ class with_ghosts
 :
 	public virtual sanguis::server::entities::base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		with_ghosts
 	);
 public:
@@ -37,6 +37,7 @@ public:
 	~with_ghosts()
 	override;
 protected:
+	[[nodiscard]]
 	sanguis::collision::world::body_enter_container
 	add_ghost(
 		sanguis::server::collision::ghost &&
@@ -47,19 +48,21 @@ protected:
 		sanguis::server::collision::ghost_container &&
 	);
 
+	[[nodiscard]]
 	sanguis::server::entities::optional_transfer_result
 	on_transfer(
 		sanguis::server::entities::transfer_parameters const &
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::server::entities::remove_from_world_result
 	remove_from_world()
 	override;
 
 	void
 	update_ghost_center(
-		sanguis::server::center
+		sanguis::server::center const &
 	);
 private:
 	sanguis::server::collision::ghost_container ghosts_;

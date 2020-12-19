@@ -6,7 +6,7 @@
 #include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/pickups/pickup.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -22,12 +22,12 @@ class health
 :
 	public sanguis::server::entities::pickups::pickup
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		health
 	);
 public:
 	health(
-		sanguis::server::environment::load_context &,
+		sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
 		sanguis::server::team,
 		sanguis::server::health
 	);
@@ -35,10 +35,11 @@ public:
 	~health()
 	override;
 private:
+	[[nodiscard]]
 	bool
 	do_pickup(
-		sanguis::server::entities::base &receiver
-	)
+		sanguis::server::entities::base &receiver // NOLINT(google-runtime-references)
+	) // NOLINT(google-runtime-references)
 	override;
 
 	sanguis::server::health const amount_;

@@ -3,7 +3,7 @@
 
 #include <sanguis/server/object_base_fwd.hpp>
 #include <sanguis/server/symbol.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -13,7 +13,7 @@ namespace server
 
 class object_base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		object_base
 	);
 protected:

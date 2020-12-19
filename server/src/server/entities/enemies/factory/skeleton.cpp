@@ -27,6 +27,7 @@
 #include <sanguis/server/weapons/melee.hpp>
 #include <sanguis/server/weapons/melee_parameters.hpp>
 #include <sanguis/server/weapons/range.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/container/make.hpp>
@@ -51,24 +52,26 @@ sanguis::server::entities::enemies::factory::skeleton(
 			_parameters,
 			sanguis::server::damage::no_armor(),
 			sanguis::server::mass{
-				20.f
+				20.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 				*
 				boost::units::si::kilogram
 			},
 			sanguis::server::health(
-				12.f
+				12.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 				*
 				std::sqrt(
 					_parameters.difficulty().get()
 				)
 			),
 			sanguis::server::entities::movement_speed(
-				50.f
+				50.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			),
 			sanguis::server::ai::create_simple(
-				_parameters.random_generator(),
+				fcppt::make_ref(
+					_parameters.random_generator()
+				),
 				sanguis::server::ai::sight_range(
-					1000.f
+					1000.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 				)
 			),
 			fcppt::unique_ptr_to_base<
@@ -80,15 +83,15 @@ sanguis::server::entities::enemies::factory::skeleton(
 					_parameters.weapon_parameters(),
 					sanguis::server::weapons::melee_parameters{
 						sanguis::server::weapons::range(
-							100.f
+							100.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 						),
 						sanguis::server::weapons::backswing_time(
 							sanguis::duration_second(
-								1.f
+								1.F
 							)
 						),
 						sanguis::server::weapons::damage(
-							10.f
+							10.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 						),
 						sanguis::server::damage::make_array({
 							sanguis::server::damage::normal =
@@ -98,10 +101,10 @@ sanguis::server::entities::enemies::factory::skeleton(
 				)
 			),
 			sanguis::server::pickup_probability(
-				0.75f
+				0.75F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			),
 			sanguis::server::exp(
-				100.f
+				100.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			),
 			fcppt::container::make<
 				sanguis::server::auras::container
@@ -110,16 +113,16 @@ sanguis::server::entities::enemies::factory::skeleton(
 					skeleton_burn
 				>(
 					sanguis::server::radius(
-						300.f
+						300.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 					),
 					sanguis::server::team::monsters,
 					sanguis::server::buffs::burn_interval(
 						sanguis::duration_second(
-							1.f
+							1.F
 						)
 					),
 					sanguis::server::damage::unit(
-						1.f
+						1.F
 						*
 						std::sqrt(
 							_parameters.difficulty().get()

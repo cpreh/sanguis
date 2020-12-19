@@ -12,11 +12,12 @@ namespace messages
 namespace client
 {
 
-typedef
+using
+unique_ptr
+=
 alda::message::base_unique_ptr<
 	sanguis::messages::client::types::alda_type
->
-unique_ptr;
+>;
 
 }
 }

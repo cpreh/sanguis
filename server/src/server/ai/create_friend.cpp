@@ -1,4 +1,4 @@
-#include <sanguis/server/ai/context_fwd.hpp>
+#include <sanguis/server/ai/context_ref.hpp>
 #include <sanguis/server/ai/create_friend.hpp>
 #include <sanguis/server/ai/create_function.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
@@ -24,9 +24,9 @@ sanguis::server::ai::create_friend(
 		sanguis::server::ai::create_function{
 			[
 				_sight_range,
-				&_spawn_owner
+				_spawn_owner
 			](
-				sanguis::server::ai::context &_context
+				sanguis::server::ai::context_ref const _context
 			)
 			{
 				return

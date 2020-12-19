@@ -18,10 +18,10 @@ namespace ai
 [[nodiscard]]
 bool
 go_to_target(
-	sanguis::server::ai::context &,
+	sanguis::server::ai::context &, // NOLINT(google-runtime-references)
 	sanguis::server::ai::in_range,
 	sanguis::server::ai::is_visible,
-	sanguis::server::ai::target,
+	sanguis::server::ai::target const &,
 	sanguis::server::ai::speed_factor
 );
 

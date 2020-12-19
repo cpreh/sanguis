@@ -7,8 +7,8 @@
 #include <sanguis/server/closest_entity.hpp>
 #include <sanguis/server/radius.hpp>
 #include <sanguis/server/remove_target_callback.hpp>
-#include <sanguis/server/update_target_callback.hpp>
 #include <sanguis/server/ai/context.hpp>
+#include <sanguis/server/ai/context_ref.hpp>
 #include <sanguis/server/ai/go_to_target.hpp>
 #include <sanguis/server/ai/in_range.hpp>
 #include <sanguis/server/ai/is_visible.hpp>
@@ -27,6 +27,7 @@
 #include <sanguis/server/entities/transfer_result.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
 #include <sanguis/server/entities/with_body.hpp>
+#include <sanguis/server/entities/with_body_ref.hpp>
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/property/change_callback.hpp>
 #include <sanguis/server/entities/property/change_event.hpp>
@@ -50,16 +51,13 @@
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/signal/auto_connection.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
 
 
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::ai::behavior::attack::attack(
-	sanguis::server::ai::context &_context,
+	sanguis::server::ai::context_ref const _context,
 	sanguis::server::ai::sight_range const _sight_range
 )
 :
@@ -72,13 +70,18 @@ sanguis::server::ai::behavior::attack::attack(
 	potential_targets_(),
 	target_(),
 	health_connection_{
-		_context.me().health().register_change_callback(
+		_context->me().health().register_change_callback(
 			sanguis::server::entities::property::change_callback{
-				std::bind(
-					&sanguis::server::ai::behavior::attack::health_changed,
-					this,
-					std::placeholders::_1
+				[
+					this
+				](
+					sanguis::server::entities::property::change_event const &_event
 				)
+				{
+					this->health_changed(
+						_event
+					);
+				}
 			}
 		)
 	}
@@ -88,8 +91,7 @@ sanguis::server::ai::behavior::attack::attack(
 FCPPT_PP_POP_WARNING
 
 sanguis::server::ai::behavior::attack::~attack()
-{
-}
+= default;
 
 sanguis::server::entities::transfer_result
 sanguis::server::ai::behavior::attack::transfer()
@@ -109,21 +111,27 @@ sanguis::server::ai::behavior::attack::transfer()
 						this->me().team(),
 						sanguis::server::auras::target_kind::enemy,
 						sanguis::server::add_target_callback{
-							sanguis::server::update_target_callback{
-								std::bind(
-									&sanguis::server::ai::behavior::attack::target_enters,
-									this,
-									std::placeholders::_1
-								)
+							[
+								this
+							](
+								sanguis::server::entities::with_body_ref const _with_body
+							)
+							{
+								this->target_enters(
+									_with_body
+								);
 							}
 						},
 						sanguis::server::remove_target_callback{
-							sanguis::server::update_target_callback{
-								std::bind(
-									&sanguis::server::ai::behavior::attack::target_leaves,
-									this,
-									std::placeholders::_1
-								)
+							[
+								this
+							](
+								sanguis::server::entities::with_body &_with_body
+							)
+							{
+								this->target_leaves(
+									_with_body
+								);
 							}
 						}
 					)
@@ -258,14 +266,12 @@ sanguis::server::ai::behavior::attack::update(
 
 void
 sanguis::server::ai::behavior::attack::target_enters(
-	sanguis::server::entities::with_body &_with_body
+	sanguis::server::entities::with_body_ref const _with_body
 )
 {
 	FCPPT_ASSERT_ERROR(
 		potential_targets_.insert(
-			fcppt::make_ref(
-				_with_body
-			)
+			_with_body
 		)
 		.second
 	);
@@ -283,7 +289,7 @@ sanguis::server::ai::behavior::attack::target_leaves(
 			)
 		)
 		==
-		1u
+		1U
 	);
 
 	fcppt::optional::maybe_void(
@@ -303,8 +309,10 @@ sanguis::server::ai::behavior::attack::target_leaves(
 					_with_body
 				)
 			)
+			{
 				target_ =
 					sanguis::server::entities::auto_weak_link();
+			}
 		}
 	);
 }
@@ -325,7 +333,9 @@ sanguis::server::ai::behavior::attack::health_changed(
 			0
 		)
 	)
+	{
 		return;
+	}
 
 	fcppt::optional::maybe_void(
 		sanguis::server::closest_entity(

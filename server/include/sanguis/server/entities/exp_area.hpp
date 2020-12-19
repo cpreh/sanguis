@@ -2,6 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_EXP_AREA_HPP_INCLUDED
 
 #include <sanguis/collision/world/body_base_fwd.hpp>
+#include <sanguis/collision/world/body_base_ref.hpp>
 #include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/server/exp.hpp>
 #include <sanguis/server/collision/ghost_base.hpp>
@@ -10,7 +11,7 @@
 #include <sanguis/server/entities/player_fwd.hpp>
 #include <sanguis/server/entities/simple.hpp>
 #include <sanguis/server/entities/with_ghosts.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/reference_comparison.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/reference_std_hash.hpp>
@@ -34,7 +35,7 @@ class exp_area
 	private sanguis::server::collision::ghost_base,
 	private sanguis::server::entities::center_ghost
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		exp_area
 	);
 public:
@@ -50,10 +51,12 @@ private:
 	remove_from_game()
 	override;
 
+	[[nodiscard]]
 	bool
 	dead() const
 	override;
 
+	[[nodiscard]]
 	boost::logic::tribool
 	can_collide_with(
 		sanguis::collision::world::body_base const &
@@ -62,7 +65,7 @@ private:
 
 	void
 	on_body_enter(
-		sanguis::collision::world::body_base &,
+		sanguis::collision::world::body_base_ref,
 		sanguis::collision::world::created
 	)
 	override;

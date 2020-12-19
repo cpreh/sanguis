@@ -47,8 +47,7 @@ sanguis::server::entities::projectiles::aoe_damage::aoe_damage(
 }
 
 sanguis::server::entities::projectiles::aoe_damage::~aoe_damage()
-{
-}
+= default;
 
 bool
 sanguis::server::entities::projectiles::aoe_damage::dead() const

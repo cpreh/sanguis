@@ -161,7 +161,7 @@ sanguis::server::entities::with_velocity::desired_speed_change()
 
 void
 sanguis::server::entities::with_velocity::speed_changed(
-	sanguis::collision::speed const _speed
+	sanguis::collision::speed const &_speed
 )
 {
 	net_speed_.set(

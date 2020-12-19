@@ -17,7 +17,7 @@
 #include <sanguis/server/entities/ifaces/with_velocity.hpp>
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <sanguis/server/net/speed.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 
 
@@ -34,7 +34,7 @@ class with_velocity
 	public virtual sanguis::server::entities::ifaces::with_velocity,
 	public sanguis::server::entities::with_body
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		with_velocity
 	);
 protected:
@@ -49,6 +49,7 @@ protected:
 	update()
 	override;
 
+	[[nodiscard]]
 	sanguis::server::entities::optional_transfer_result
 	on_transfer(
 		sanguis::server::entities::transfer_parameters const &
@@ -58,16 +59,20 @@ public:
 	~with_velocity()
 	override;
 
+	[[nodiscard]]
 	sanguis::server::entities::property::changeable &
 	movement_speed()
 	override;
 
+	[[nodiscard]]
 	sanguis::server::entities::movement_speed
 	max_movement_speed() const;
 
+	[[nodiscard]]
 	sanguis::server::direction
 	direction() const;
 
+	[[nodiscard]]
 	sanguis::server::speed
 	speed() const
 	override;
@@ -83,13 +88,15 @@ private:
 
 	void
 	speed_changed(
-		sanguis::collision::speed
+		sanguis::collision::speed const &
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::server::speed
 	desired_speed() const;
 
+	[[nodiscard]]
 	sanguis::server::speed
 	initial_speed() const
 	override;

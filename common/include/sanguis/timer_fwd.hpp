@@ -8,11 +8,12 @@
 namespace sanguis
 {
 
-typedef
+using
+timer
+=
 sge::timer::basic<
 	sanguis::clock
->
-timer;
+>;
 
 }
 

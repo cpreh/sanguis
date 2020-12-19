@@ -32,31 +32,31 @@ sanguis::server::weapons::factory::dual_pistols(
 				_parameters.weapon_type(),
 				sanguis::server::weapons::pistol_parameters(
 					sanguis::server::weapons::accuracy(
-						0.75f
+						0.75F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 					),
 					sanguis::server::weapons::backswing_time(
 						sanguis::duration_second(
-							0.13f
+							0.13F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 						)
 					),
 					sanguis::server::weapons::damage(
-						5.f
+						5.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 					),
 					sanguis::server::weapons::cast_point(
 						sanguis::duration_second(
-							0.2f
+							0.2F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 						)
 					),
 					sanguis::server::weapons::magazine_size(
-						36u
+						36U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 					),
 					sanguis::server::weapons::reload_time(
 						sanguis::duration_second(
-							4.f
+							4.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 						)
 					),
 					sanguis::server::weapons::range(
-						1000.f
+						1000.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 					)
 				)
 			)

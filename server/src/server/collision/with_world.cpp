@@ -9,7 +9,7 @@
 
 bool
 sanguis::server::collision::with_world(
-	sanguis::server::center const _center,
+	sanguis::server::center const &_center,
 	sanguis::server::radius const _radius,
 	sanguis::creator::grid const &_grid
 )

@@ -28,12 +28,14 @@ public:
 
 	stack(
 		stack &&
-	);
+	)
+	noexcept;
 
 	stack &
 	operator=(
 		stack &&
-	);
+	)
+	noexcept;
 
 	~stack();
 
@@ -47,12 +49,15 @@ public:
 		sanguis::server::buffs::buff const &
 	);
 
+	[[nodiscard]]
 	bool
 	empty() const;
 
+	[[nodiscard]]
 	sanguis::server::buffs::buff &
 	highest_buff();
 
+	[[nodiscard]]
 	sanguis::server::buffs::buff const &
 	highest_buff() const;
 private:

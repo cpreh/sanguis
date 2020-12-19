@@ -1,4 +1,4 @@
-#include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/random_generator_ref.hpp>
 #include <sanguis/server/health.hpp>
 #include <sanguis/server/entities/with_id.hpp>
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
@@ -18,6 +18,7 @@
 #include <sanguis/server/random/min.hpp>
 #include <sanguis/server/random/split.hpp>
 #include <sanguis/server/random/split_array.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -27,36 +28,37 @@
 
 sanguis::server::entities::with_id_unique_ptr
 sanguis::server::entities::enemies::factory::make_special(
-	sanguis::random_generator &_random_generator,
+	sanguis::random_generator_ref const _random_generator,
 	sanguis::server::entities::enemies::parameters &&_parameters,
 	sanguis::server::entities::enemies::is_unique const _is_unique
 )
 {
-	typedef
+	using
+	split_array
+	=
 	sanguis::server::random::split_array<
 		2
-	>
-	split_array;
+	>;
 
 	split_array const amounts(
 		sanguis::server::random::split(
-			_random_generator,
+			_random_generator.get(),
 			sanguis::server::random::min(
 				sanguis::server::random::amount(
 					_is_unique.get()
 					?
-						3u
+						3U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 					:
-						1u
+						1U
 				)
 			),
 			sanguis::server::random::max(
 				sanguis::server::random::amount(
 					_is_unique.get()
 					?
-						5u
+						5U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 					:
-						2u
+						2U
 				)
 			),
 			split_array{{
@@ -68,10 +70,12 @@ sanguis::server::entities::enemies::factory::make_special(
 
 	sanguis::server::entities::enemies::attribute_container const modifier_result(
 		sanguis::server::entities::enemies::modifiers::apply(
-			_random_generator,
-			_parameters,
+			_random_generator.get(),
+			fcppt::make_ref(
+				_parameters
+			),
 			sanguis::server::entities::enemies::factory::make_modifiers(
-				_random_generator,
+				_random_generator.get(),
 				amounts[
 					0
 				]
@@ -83,7 +87,7 @@ sanguis::server::entities::enemies::factory::make_special(
 		_parameters.health()
 		*
 		sanguis::server::health(
-			5.f
+			5.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		)
 	);
 
@@ -100,7 +104,7 @@ sanguis::server::entities::enemies::factory::make_special(
 				),
 				modifier_result,
 				sanguis::server::entities::enemies::factory::make_skills(
-					_random_generator,
+					_random_generator.get(),
 					amounts[
 						1
 					]

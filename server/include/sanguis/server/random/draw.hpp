@@ -33,7 +33,7 @@ template<
 >
 Result
 draw(
-	sanguis::random_generator &_random_generator,
+	sanguis::random_generator &_random_generator, // NOLINT(google-runtime-references)
 	Source const &_source,
 	sanguis::server::random::amount const _draws,
 	sanguis::server::random::create_function<

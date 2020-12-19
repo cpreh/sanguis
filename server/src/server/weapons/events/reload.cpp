@@ -2,12 +2,12 @@
 
 
 sanguis::server::weapons::events::reload::reload()
-{
-}
+= default;
 
 sanguis::server::weapons::events::reload::reload(
 	reload &&
 )
+noexcept
 = default;
 
 sanguis::server::weapons::events::reload::reload(
@@ -19,6 +19,7 @@ sanguis::server::weapons::events::reload &
 sanguis::server::weapons::events::reload::operator=(
 	reload &&
 )
+noexcept
 = default;
 
 sanguis::server::weapons::events::reload &
@@ -28,5 +29,4 @@ sanguis::server::weapons::events::reload::operator=(
 = default;
 
 sanguis::server::weapons::events::reload::~reload()
-{
-}
+= default;

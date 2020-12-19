@@ -12,8 +12,9 @@
 #include <sanguis/server/entities/optional_with_body_ref_fwd.hpp>
 #include <sanguis/server/entities/transfer_result_fwd.hpp>
 #include <sanguis/server/entities/with_body_fwd.hpp>
+#include <sanguis/server/entities/with_body_ref.hpp>
 #include <sanguis/server/entities/property/change_event_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 
 
@@ -30,26 +31,29 @@ class attack
 :
 	public sanguis::server::ai::behavior::base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		attack
 	);
 public:
 	attack(
-		sanguis::server::ai::context &,
+		sanguis::server::ai::context_ref,
 		sanguis::server::ai::sight_range
 	);
 
 	~attack()
 	override;
 
+	[[nodiscard]]
 	sanguis::server::entities::transfer_result
 	transfer()
 	override;
 
+	[[nodiscard]]
 	bool
 	start()
 	override;
 
+	[[nodiscard]]
 	sanguis::server::ai::status
 	update(
 		sanguis::duration
@@ -58,22 +62,24 @@ public:
 private:
 	void
 	target_enters(
-		sanguis::server::entities::with_body &
+		sanguis::server::entities::with_body_ref
 	);
 
 	void
 	target_leaves(
-		sanguis::server::entities::with_body &
-	);
+		sanguis::server::entities::with_body & // NOLINT(google-runtime-references)
+	); // NOLINT(google-runtime-references)
 
 	void
 	health_changed(
 		sanguis::server::entities::property::change_event const &
 	);
 
+	[[nodiscard]]
 	sanguis::server::entities::optional_with_body_ref
 	closest_visible_target() const;
 
+	[[nodiscard]]
 	virtual
 	sanguis::server::ai::speed_factor
 	speed_factor() const;

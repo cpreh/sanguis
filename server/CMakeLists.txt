@@ -16,6 +16,7 @@ set(
 	include/sanguis/server/ai/behavior/wander.hpp
 	include/sanguis/server/ai/context.hpp
 	include/sanguis/server/ai/context_fwd.hpp
+	include/sanguis/server/ai/context_ref.hpp
 	include/sanguis/server/ai/create_attack_health.hpp
 	include/sanguis/server/ai/create_boss.hpp
 	include/sanguis/server/ai/create_friend.hpp
@@ -201,6 +202,7 @@ set(
 	include/sanguis/server/entities/auto_weak_link_fwd.hpp
 	include/sanguis/server/entities/base.hpp
 	include/sanguis/server/entities/base_fwd.hpp
+	include/sanguis/server/entities/base_ref.hpp
 	include/sanguis/server/entities/center_ghost.hpp
 	include/sanguis/server/entities/center_simple.hpp
 	include/sanguis/server/entities/combine_remove_from_world.hpp
@@ -393,9 +395,11 @@ set(
 	include/sanguis/server/entities/with_body_ref.hpp
 	include/sanguis/server/entities/with_buffs.hpp
 	include/sanguis/server/entities/with_buffs_fwd.hpp
+	include/sanguis/server/entities/with_buffs_ref.hpp
 	include/sanguis/server/entities/with_ghosts.hpp
 	include/sanguis/server/entities/with_health.hpp
 	include/sanguis/server/entities/with_health_fwd.hpp
+	include/sanguis/server/entities/with_health_ref.hpp
 	include/sanguis/server/entities/with_id.hpp
 	include/sanguis/server/entities/with_id_fwd.hpp
 	include/sanguis/server/entities/with_id_unique_ptr.hpp
@@ -405,6 +409,7 @@ set(
 	include/sanguis/server/entities/with_perks_fwd.hpp
 	include/sanguis/server/entities/with_velocity.hpp
 	include/sanguis/server/entities/with_velocity_fwd.hpp
+	include/sanguis/server/entities/with_velocity_ref.hpp
 	include/sanguis/server/entities/with_weapon.hpp
 	include/sanguis/server/entities/with_weapon_fwd.hpp
 	include/sanguis/server/environment/insert_no_result.hpp
@@ -412,6 +417,7 @@ set(
 	include/sanguis/server/environment/load_context_fwd.hpp
 	include/sanguis/server/environment/object.hpp
 	include/sanguis/server/environment/object_fwd.hpp
+	include/sanguis/server/environment/object_ref.hpp
 	include/sanguis/server/environment/optional_object_ref.hpp
 	include/sanguis/server/environment/optional_object_ref_fwd.hpp
 	include/sanguis/server/events/disconnect.hpp
@@ -576,8 +582,6 @@ set(
 	include/sanguis/server/to_console_arg_list.hpp
 	include/sanguis/server/unicast_callback.hpp
 	include/sanguis/server/unknown_player_exception.hpp
-	include/sanguis/server/update_target_callback.hpp
-	include/sanguis/server/update_weapon_pickup_callback.hpp
 	include/sanguis/server/vector.hpp
 	include/sanguis/server/vector_fwd.hpp
 	include/sanguis/server/weapons/accuracy.hpp
@@ -646,6 +650,7 @@ set(
 	include/sanguis/server/weapons/insert_to_attack_result.hpp
 	include/sanguis/server/weapons/irs.hpp
 	include/sanguis/server/weapons/log.hpp
+	include/sanguis/server/weapons/log_cref.hpp
 	include/sanguis/server/weapons/log_fwd.hpp
 	include/sanguis/server/weapons/magazine_size.hpp
 	include/sanguis/server/weapons/melee.hpp

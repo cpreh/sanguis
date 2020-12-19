@@ -11,7 +11,7 @@
 #include <sanguis/server/entities/projectiles/base.hpp>
 #include <sanguis/server/entities/projectiles/life_time.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -27,7 +27,7 @@ class projectile
 :
 	public sanguis::server::entities::projectiles::base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		projectile
 	);
 protected:
@@ -35,7 +35,7 @@ protected:
 		sanguis::projectile_type,
 		sanguis::server::team,
 		sanguis::server::entities::movement_speed,
-		sanguis::server::environment::load_context &,
+		sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
 		sanguis::server::entities::projectiles::life_time,
 		sanguis::server::direction
 	);
@@ -43,6 +43,7 @@ protected:
 	~projectile()
 	override;
 
+	[[nodiscard]]
 	sanguis::messages::server::unique_ptr
 	add_message(
 		sanguis::server::player_id,

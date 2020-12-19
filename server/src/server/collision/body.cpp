@@ -1,5 +1,6 @@
 #include <sanguis/collision/log_fwd.hpp>
 #include <sanguis/collision/world/body.hpp>
+#include <sanguis/collision/world/body_base_ref.hpp>
 #include <sanguis/collision/world/body_enter_container.hpp>
 #include <sanguis/collision/world/body_exit_container.hpp>
 #include <sanguis/collision/world/body_group.hpp>
@@ -25,19 +26,24 @@
 #include <fcppt/optional/assign.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/object_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::collision::body::body(
 	sanguis::server::radius const _radius,
-	sanguis::server::optional_mass const &_mass,
-	sanguis::collision::world::body_base &_body_base
+	sanguis::server::optional_mass _mass,
+	sanguis::collision::world::body_base_ref const _body_base
 )
 :
 	radius_(
 		_radius
 	),
 	mass_(
-		_mass
+		std::move(
+			_mass
+		)
 	),
 	body_base_(
 		_body_base
@@ -47,12 +53,11 @@ sanguis::server::collision::body::body(
 }
 
 sanguis::server::collision::body::~body()
-{
-}
+= default;
 
 void
 sanguis::server::collision::body::center(
-	sanguis::server::center const _center
+	sanguis::server::center const &_center
 )
 {
 	FCPPT_ASSERT_OPTIONAL_ERROR(
@@ -77,7 +82,7 @@ sanguis::server::collision::body::center() const
 
 void
 sanguis::server::collision::body::speed(
-	sanguis::server::speed const _speed
+	sanguis::server::speed const &_speed
 )
 {
 	FCPPT_ASSERT_OPTIONAL_ERROR(
@@ -112,8 +117,8 @@ sanguis::server::collision::body::transfer(
 	sanguis::collision::log const &_log,
 	sanguis::collision::world::object &_world,
 	sanguis::collision::world::created const _created,
-	sanguis::server::center const _center,
-	sanguis::server::speed const _speed,
+	sanguis::server::center const &_center,
+	sanguis::server::speed const &_speed,
 	sanguis::collision::world::body_group const _collision_group
 )
 {
@@ -139,7 +144,7 @@ sanguis::server::collision::body::transfer(
 					fcppt::optional::map(
 						mass_,
 						[](
-							sanguis::server::mass const _mass
+							sanguis::server::mass const &_mass
 						)
 						{
 							return
@@ -149,9 +154,7 @@ sanguis::server::collision::body::transfer(
 						}
 					),
 					_collision_group,
-					fcppt::make_ref(
-						body_base_
-					)
+					body_base_
 				)
 			)
 		)

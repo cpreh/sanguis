@@ -1,11 +1,11 @@
 #ifndef SANGUIS_SERVER_AI_BEHAVIOR_ATTACK_HEALTH_HPP_INCLUDED
 #define SANGUIS_SERVER_AI_BEHAVIOR_ATTACK_HEALTH_HPP_INCLUDED
 
-#include <sanguis/server/ai/context_fwd.hpp>
+#include <sanguis/server/ai/context_ref.hpp>
 #include <sanguis/server/ai/sight_range_fwd.hpp>
 #include <sanguis/server/ai/speed_factor.hpp>
 #include <sanguis/server/ai/behavior/attack.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -21,12 +21,12 @@ class attack_health
 :
 	public sanguis::server::ai::behavior::attack
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		attack_health
 	);
 public:
 	attack_health(
-		sanguis::server::ai::context &,
+		sanguis::server::ai::context_ref,
 		sanguis::server::ai::sight_range,
 		sanguis::server::ai::speed_factor
 	);
@@ -34,6 +34,7 @@ public:
 	~attack_health()
 	override;
 private:
+	[[nodiscard]]
 	sanguis::server::ai::speed_factor
 	speed_factor() const
 	override;

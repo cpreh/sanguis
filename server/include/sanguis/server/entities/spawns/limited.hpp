@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_SPAWNS_LIMITED_HPP_INCLUDED
 
 #include <sanguis/diff_timer.hpp>
-#include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/random_generator_ref.hpp>
 #include <sanguis/creator/enemy_kind_fwd.hpp>
 #include <sanguis/creator/enemy_type_fwd.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
@@ -14,7 +14,7 @@
 #include <sanguis/server/entities/spawns/total_count.hpp>
 #include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/world/difficulty.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -30,12 +30,12 @@ class limited
 :
 	public sanguis::server::entities::spawns::spawn
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		limited
 	);
 public:
 	limited(
-		sanguis::random_generator &,
+		sanguis::random_generator_ref,
 		sanguis::server::weapons::common_parameters const &,
 		sanguis::creator::enemy_type,
 		sanguis::creator::enemy_kind,
@@ -49,16 +49,18 @@ public:
 	~limited()
 	override;
 private:
+	[[nodiscard]]
 	bool
 	dead() const
 	override;
 
 	void
 	unregister(
-		sanguis::server::entities::base &
-	)
+		sanguis::server::entities::base & // NOLINT(google-runtime-references)
+	) // NOLINT(google-runtime-references)
 	override;
 
+	[[nodiscard]]
 	sanguis::server::entities::spawns::size_type
 	may_spawn()
 	override;

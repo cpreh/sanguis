@@ -11,7 +11,7 @@
 sanguis::server::optional_angle
 sanguis::server::ai::angle_to_target(
 	sanguis::server::entities::with_ai &_me,
-	sanguis::server::ai::target const _target
+	sanguis::server::ai::target const &_target
 )
 {
 	return

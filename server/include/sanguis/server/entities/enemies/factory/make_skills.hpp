@@ -19,7 +19,7 @@ namespace factory
 
 sanguis::server::entities::enemies::skills::factory::container
 make_skills(
-	sanguis::random_generator &,
+	sanguis::random_generator &, // NOLINT(google-runtime-references)
 	sanguis::server::random::amount
 );
 

@@ -33,7 +33,7 @@ sanguis::server::ai::go_to_grid_pos(
 				&_context,
 				_speed_factor
 			](
-				sanguis::server::ai::pathing::target const _target
+				sanguis::server::ai::pathing::target const &_target
 			)
 			{
 				sanguis::server::ai::rotate_and_move_to_target(

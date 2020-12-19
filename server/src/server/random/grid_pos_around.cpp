@@ -19,12 +19,12 @@
 sanguis::creator::optional_pos
 sanguis::server::random::grid_pos_around(
 	sanguis::random_generator &_random_generator,
-	sanguis::creator::dim const _size,
-	sanguis::creator::pos const _pos,
+	sanguis::creator::dim const &_size,
+	sanguis::creator::pos const &_pos,
 	sanguis::server::random::grid_distance const _distance
 )
 {
-	sanguis::creator::signed_pos const signed_pos(
+	auto const signed_pos(
 		fcppt::math::vector::structure_cast<
 			sanguis::creator::signed_pos,
 			fcppt::cast::to_signed_fun
@@ -33,7 +33,7 @@ sanguis::server::random::grid_pos_around(
 		)
 	);
 
-	sanguis::creator::signed_pos const signed_distance(
+	auto const signed_distance(
 		fcppt::math::vector::fill<
 			sanguis::creator::signed_pos
 		>(

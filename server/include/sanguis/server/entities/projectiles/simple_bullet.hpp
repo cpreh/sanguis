@@ -8,7 +8,7 @@
 #include <sanguis/server/entities/with_health_fwd.hpp>
 #include <sanguis/server/entities/projectiles/projectile.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -24,12 +24,12 @@ class simple_bullet
 :
 	public sanguis::server::entities::projectiles::projectile
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		simple_bullet
 	);
 public:
 	simple_bullet(
-		sanguis::server::environment::load_context &,
+		sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
 		sanguis::server::team,
 		sanguis::server::damage::unit,
 		sanguis::server::damage::modified_array const &,
@@ -41,8 +41,8 @@ public:
 private:
 	void
 	do_damage(
-		sanguis::server::entities::with_health &
-	)
+		sanguis::server::entities::with_health & // NOLINT(google-runtime-references)
+	) // NOLINT(google-runtime-references)
 	override;
 
 	sanguis::server::damage::unit const damage_;

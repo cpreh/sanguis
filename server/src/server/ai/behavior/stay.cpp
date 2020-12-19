@@ -1,5 +1,6 @@
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/ai/context.hpp>
+#include <sanguis/server/ai/context_ref.hpp>
 #include <sanguis/server/ai/go_to_grid_pos.hpp>
 #include <sanguis/server/ai/make_path.hpp>
 #include <sanguis/server/ai/speed_factor.hpp>
@@ -14,21 +15,20 @@
 
 
 sanguis::server::ai::behavior::stay::stay(
-	sanguis::server::ai::context &_context
+	sanguis::server::ai::context_ref const _context
 )
 :
 	sanguis::server::ai::behavior::base(
 		_context
 	),
 	start_pos_{
-		_context.me().center()
+		_context->me().center()
 	}
 {
 }
 
 sanguis::server::ai::behavior::stay::~stay()
-{
-}
+= default;
 
 bool
 sanguis::server::ai::behavior::stay::start()
@@ -42,8 +42,7 @@ sanguis::server::ai::behavior::stay::start()
 		fcppt::literal<
 			sanguis::server::space_unit
 		>(
-			// TODO
-			500.f
+			500.F
 		)
 		&&
 		sanguis::server::ai::make_path(

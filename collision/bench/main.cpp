@@ -128,7 +128,7 @@ main()
 
 		void
 		speed_changed(
-			sanguis::collision::speed
+			sanguis::collision::speed const &
 		)
 		override
 		{

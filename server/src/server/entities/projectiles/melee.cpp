@@ -15,7 +15,7 @@ sanguis::server::entities::projectiles::melee::melee(
 	sanguis::server::entities::projectiles::aoe_damage(
 		_team,
 		sanguis::server::aoe(
-			1.f
+			1.F
 		),
 		_damage,
 		_damage_modifiers
@@ -24,5 +24,4 @@ sanguis::server::entities::projectiles::melee::melee(
 }
 
 sanguis::server::entities::projectiles::melee::~melee()
-{
-}
+= default;

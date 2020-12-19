@@ -1,5 +1,6 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/io_service.hpp>
+#include <sanguis/io_service_ref.hpp>
 #include <sanguis/slowdown.hpp>
 #include <sanguis/messages/client/base.hpp>
 #include <sanguis/messages/client/unique_ptr.hpp>
@@ -68,7 +69,7 @@ FCPPT_PP_DISABLE_VC_WARNING(4355)
 sanguis::server::machine::machine(
 	fcppt::log::context_reference const _log_context,
 	alda::net::port const _port,
-	sanguis::io_service &_io_service
+	sanguis::io_service_ref const _io_service
 )
 :
 	log_context_{
@@ -93,7 +94,7 @@ sanguis::server::machine::machine(
 	net_(
 		alda::net::parameters(
 			_log_context,
-			this->io_service_.impl(),
+			this->io_service_->impl(),
 			sanguis::net::send_buffer_size(),
 			sanguis::net::receive_buffer_size()
 		)

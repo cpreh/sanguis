@@ -6,7 +6,7 @@
 #include <sanguis/server/entities/link_container.hpp>
 #include <sanguis/server/entities/with_links_fwd.hpp>
 #include <sanguis/server/entities/ifaces/with_links.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -21,7 +21,7 @@ class with_links
 	public virtual sanguis::server::entities::base,
 	public virtual sanguis::server::entities::ifaces::with_links
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		with_links
 	);
 protected:
@@ -30,9 +30,9 @@ public:
 	~with_links()
 	override = 0;
 
+	[[nodiscard]]
 	sanguis::server::entities::auto_weak_link
 	link()
-	override
 	final;
 protected:
 	void
@@ -43,8 +43,8 @@ private:
 
 	void
 	insert_link(
-		sanguis::server::entities::auto_weak_link &
-	);
+		sanguis::server::entities::auto_weak_link & // NOLINT(google-runtime-references)
+	); // NOLINT(google-runtime-references)
 
 	sanguis::server::entities::link_container links_;
 };

@@ -4,6 +4,7 @@
 #include <sanguis/server/entities/enemies/attribute_container.hpp>
 #include <sanguis/server/entities/enemies/parameters_fwd.hpp>
 #include <sanguis/server/entities/enemies/skills/factory/container.hpp>
+#include <fcppt/reference_fwd.hpp>
 
 
 namespace sanguis
@@ -17,7 +18,9 @@ namespace enemies
 
 sanguis::server::entities::enemies::parameters &
 finalize_special_parameters(
-	sanguis::server::entities::enemies::parameters &,
+	fcppt::reference<
+		sanguis::server::entities::enemies::parameters
+	>,
 	sanguis::server::entities::enemies::attribute_container const &,
 	sanguis::server::entities::enemies::skills::factory::container const &
 );

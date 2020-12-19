@@ -7,7 +7,7 @@
 
 sanguis::server::center
 sanguis::server::collision::from_center(
-	sanguis::collision::center const _center
+	sanguis::collision::center const &_center
 )
 {
 	return

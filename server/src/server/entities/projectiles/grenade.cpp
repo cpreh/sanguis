@@ -46,7 +46,7 @@ sanguis::server::entities::projectiles::grenade::grenade(
 	sanguis::server::damage::unit const _damage,
 	sanguis::server::damage::modified_array const &_damage_modifiers,
 	sanguis::server::aoe const _aoe,
-	sanguis::server::vector const &_dest,
+	sanguis::server::vector _dest,
 	sanguis::server::direction const _direction
 )
 :
@@ -54,12 +54,12 @@ sanguis::server::entities::projectiles::grenade::grenade(
 		sanguis::aoe_projectile_type::grenade,
 		_team,
 		sanguis::server::entities::movement_speed(
-			500.f
+			500.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		),
 		_load_context,
 		sanguis::server::entities::projectiles::life_time(
 			sanguis::duration_second(
-				2.f
+				2.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			)
 		),
 		_aoe,
@@ -71,7 +71,7 @@ sanguis::server::entities::projectiles::grenade::grenade(
 				this->diff_clock()
 			),
 			std::chrono::milliseconds(
-				100
+				100 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			)
 		)
 	),
@@ -82,7 +82,9 @@ sanguis::server::entities::projectiles::grenade::grenade(
 		_damage_modifiers
 	),
 	dest_(
-		_dest
+		std::move(
+			_dest
+		)
 	)
 {
 }
@@ -90,8 +92,7 @@ sanguis::server::entities::projectiles::grenade::grenade(
 FCPPT_PP_POP_WARNING
 
 sanguis::server::entities::projectiles::grenade::~grenade()
-{
-}
+= default;
 
 sanguis::server::entities::optional_transfer_result
 sanguis::server::entities::projectiles::grenade::on_transfer(
@@ -110,7 +111,7 @@ sanguis::server::entities::projectiles::grenade::on_transfer(
 				sanguis::server::entities::transfer_result &&_result
 			)
 			{
-				// TODO: Can we put this somewhere else?
+				// TODO(philipp): Can we put this somewhere else?
 				this->movement_speed().current(
 					std::min(
 						this->movement_speed().max(),
@@ -146,10 +147,12 @@ sanguis::server::entities::projectiles::grenade::update()
 			)
 		)
 	)
+	{
 		this->movement_speed().current(
 			this->movement_speed().current()
-			* 0.9f
+			* 0.9F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		);
+	}
 
 	sanguis::server::entities::with_velocity::update();
 }

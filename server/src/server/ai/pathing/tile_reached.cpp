@@ -10,7 +10,7 @@
 bool
 sanguis::server::ai::pathing::tile_reached(
 	sanguis::server::entities::with_ai const &_me,
-	sanguis::creator::pos const _pos
+	sanguis::creator::pos const &_pos
 )
 {
 	return
@@ -26,7 +26,7 @@ sanguis::server::ai::pathing::tile_reached(
 		>(
 			sanguis::creator::tile_size::value
 			/
-			2u
+			2U
 		)
 		-
 		_me.radius().get();

@@ -21,7 +21,7 @@ sanguis::server::ai::go_to_target(
 	sanguis::server::ai::context &_context,
 	sanguis::server::ai::in_range const _in_range,
 	sanguis::server::ai::is_visible const _is_visible,
-	sanguis::server::ai::target const _target,
+	sanguis::server::ai::target const &_target,
 	sanguis::server::ai::speed_factor const _speed_factor
 )
 {
@@ -45,11 +45,13 @@ sanguis::server::ai::go_to_target(
 			_context.clear_path();
 		}
 		else
+		{
 			sanguis::server::ai::rotate_and_move_to_target(
 				_context.me(),
 				_target,
 				_speed_factor
 			);
+		}
 
 		return
 			true;
@@ -70,7 +72,7 @@ sanguis::server::ai::go_to_target(
 			[
 				target_grid_pos
 			](
-				sanguis::creator::pos const _destination
+				sanguis::creator::pos const &_destination
 			)
 			{
 				return
@@ -100,7 +102,7 @@ sanguis::server::ai::go_to_target(
 					&_context,
 					_speed_factor
 				](
-					sanguis::server::ai::pathing::target const _grid_target
+					sanguis::server::ai::pathing::target const &_grid_target
 				)
 				{
 					sanguis::server::ai::rotate_and_move_to_target(

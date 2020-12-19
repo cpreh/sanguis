@@ -4,7 +4,7 @@
 #include <sanguis/server/entities/enemies/attribute_fwd.hpp>
 #include <sanguis/server/entities/enemies/enemy_fwd.hpp>
 #include <sanguis/server/entities/enemies/skills/skill_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -20,7 +20,7 @@ namespace skills
 
 class skill
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		skill
 	);
 protected:
@@ -32,8 +32,8 @@ public:
 	virtual
 	void
 	update(
-		sanguis::server::entities::enemies::enemy &
-	);
+		sanguis::server::entities::enemies::enemy & // NOLINT(google-runtime-references)
+	); // NOLINT(google-runtime-references)
 
 	virtual
 	void
@@ -41,6 +41,7 @@ public:
 		sanguis::server::entities::enemies::enemy const &
 	);
 
+	[[nodiscard]]
 	virtual
 	sanguis::server::entities::enemies::attribute
 	attribute() const = 0;

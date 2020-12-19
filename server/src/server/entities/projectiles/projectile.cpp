@@ -48,8 +48,7 @@ sanguis::server::entities::projectiles::projectile::projectile(
 }
 
 sanguis::server::entities::projectiles::projectile::~projectile()
-{
-}
+= default;
 
 sanguis::messages::server::unique_ptr
 sanguis::server::entities::projectiles::projectile::add_message(

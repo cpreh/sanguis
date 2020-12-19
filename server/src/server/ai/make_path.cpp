@@ -13,7 +13,7 @@
 bool
 sanguis::server::ai::make_path(
 	sanguis::server::ai::context &_context,
-	sanguis::creator::pos const _pos
+	sanguis::creator::pos const &_pos
 )
 {
 	return

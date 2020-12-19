@@ -10,11 +10,11 @@
 
 bool
 sanguis::server::ai::pathing::positions_are_close(
-	sanguis::creator::pos const _pos1,
-	sanguis::creator::pos const _pos2
+	sanguis::creator::pos const &_pos1,
+	sanguis::creator::pos const &_pos2
 )
 {
-	sanguis::creator::signed_pos const spos1(
+	auto const spos1(
 		fcppt::math::vector::structure_cast<
 			sanguis::creator::signed_pos,
 			fcppt::cast::to_signed_fun
@@ -23,7 +23,7 @@ sanguis::server::ai::pathing::positions_are_close(
 		)
 	);
 
-	sanguis::creator::signed_pos const spos2(
+	auto const spos2(
 		fcppt::math::vector::structure_cast<
 			sanguis::creator::signed_pos,
 			fcppt::cast::to_signed_fun

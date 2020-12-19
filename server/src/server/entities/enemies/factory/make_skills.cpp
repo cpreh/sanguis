@@ -60,9 +60,7 @@ sanguis::server::entities::enemies::factory::make_skills(
 					)
 					{
 						return
-							std::less<
-								sanguis::server::entities::enemies::skills::factory::callback
-							>()(
+							std::less<>()(
 								_skill1,
 								_skill2
 							);

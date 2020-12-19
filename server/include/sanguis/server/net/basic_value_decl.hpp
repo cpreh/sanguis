@@ -4,7 +4,7 @@
 #include <sanguis/server/net/basic_value_fwd.hpp>
 #include <sge/timer/basic_decl.hpp>
 #include <sge/timer/clocks/parameter_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/reference_fwd.hpp>
 #include <fcppt/optional/object_decl.hpp>
 
@@ -23,7 +23,7 @@ template<
 >
 class basic_value
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		basic_value
 	);
 public:

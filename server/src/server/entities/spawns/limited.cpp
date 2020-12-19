@@ -1,5 +1,5 @@
 #include <sanguis/diff_timer.hpp>
-#include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/random_generator_ref.hpp>
 #include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/server/entities/base_fwd.hpp>
@@ -28,7 +28,7 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::entities::spawns::limited::limited(
-	sanguis::random_generator &_random_generator,
+	sanguis::random_generator_ref const _random_generator,
 	sanguis::server::weapons::common_parameters const &_weapons_parameters,
 	sanguis::creator::enemy_type const _enemy_type,
 	sanguis::creator::enemy_kind const _enemy_kind,
@@ -58,10 +58,10 @@ sanguis::server::entities::spawns::limited::limited(
 		)
 	),
 	alive_(
-		0u
+		0U
 	),
 	spawned_(
-		0u
+		0U
 	),
 	limit_(
 		_limit
@@ -71,19 +71,18 @@ sanguis::server::entities::spawns::limited::limited(
 	)
 {
 	FCPPT_ASSERT_PRE(
-		_limit.get() > 0u
+		_limit.get() > 0U
 	);
 
 	FCPPT_ASSERT_PRE(
-		_count_per_wave.get() > 0u
+		_count_per_wave.get() > 0U
 	);
 }
 
 FCPPT_PP_POP_WARNING
 
 sanguis::server::entities::spawns::limited::~limited()
-{
-}
+= default;
 
 bool
 sanguis::server::entities::spawns::limited::dead() const
@@ -100,7 +99,7 @@ sanguis::server::entities::spawns::limited::unregister(
 )
 {
 	FCPPT_ASSERT_PRE(
-		alive_ > 0u
+		alive_ > 0U
 	);
 
 	--alive_;
@@ -121,7 +120,7 @@ sanguis::server::entities::spawns::limited::may_spawn()
 				count_per_wave_.get()
 			)
 		:
-			0u
+			0U
 		;
 }
 

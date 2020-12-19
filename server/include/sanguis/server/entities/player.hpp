@@ -6,7 +6,7 @@
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/perk_type_fwd.hpp>
 #include <sanguis/player_name.hpp>
-#include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/random_generator_ref.hpp>
 #include <sanguis/collision/world/body_group_fwd.hpp>
 #include <sanguis/collision/world/created_fwd.hpp>
 #include <sanguis/messages/server/unique_ptr.hpp>
@@ -28,12 +28,13 @@
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/with_weapon.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
+#include <sanguis/server/entities/pickups/weapon_fwd.hpp>
 #include <sanguis/server/entities/pickups/weapon_ref.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
 #include <sanguis/server/perks/tree/container.hpp>
 #include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/weapons/weapon_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/reference_comparison.hpp>
 #include <fcppt/reference_std_hash.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -60,18 +61,18 @@ class player
 	public sanguis::server::entities::with_perks,
 	public sanguis::server::entities::with_weapon
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		player
 	);
 public:
 	player(
-		sanguis::random_generator &,
+		sanguis::random_generator_ref,
 		sanguis::server::weapons::common_parameters const &,
-		sanguis::server::environment::load_context &,
+		sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
 		sanguis::server::health,
 		sanguis::server::damage::armor_array const &,
 		sanguis::server::entities::movement_speed,
-		sanguis::player_name const &,
+		sanguis::player_name &&,
 		sanguis::server::player_id
 	);
 
@@ -79,6 +80,7 @@ public:
 	override;
 
 	// own functions
+	[[nodiscard]]
 	sanguis::player_name const &
 	name() const;
 
@@ -87,6 +89,7 @@ public:
 		sanguis::server::exp
 	);
 
+	[[nodiscard]]
 	bool
 	perk_choosable(
 		sanguis::perk_type
@@ -99,7 +102,7 @@ public:
 
 	void
 	change_speed(
-		sanguis::server::speed
+		sanguis::server::speed const &
 	);
 
 	void
@@ -107,18 +110,23 @@ public:
 		sanguis::is_primary_weapon
 	);
 
+	[[nodiscard]]
 	sanguis::server::perks::tree::container const &
 	perk_tree() const;
 
+	[[nodiscard]]
 	sanguis::server::skill_points
 	skill_points() const;
 
+	[[nodiscard]]
 	sanguis::server::player_id
 	player_id() const;
 
+	[[nodiscard]]
 	sanguis::server::level
 	level() const;
 
+	[[nodiscard]]
 	sanguis::server::team
 	team() const
 	override;
@@ -147,18 +155,19 @@ private:
 
 	void
 	weapon_pickup_add_candidate(
-		sanguis::server::entities::pickups::weapon &
+		sanguis::server::entities::pickups::weapon_ref
 	);
 
 	void
 	weapon_pickup_remove_candidate(
-		sanguis::server::entities::pickups::weapon &
-	);
+		sanguis::server::entities::pickups::weapon & // NOLINT(google-runtime-references)
+	); // NOLINT(google-runtime-references)
 
 	void
 	update()
 	override;
 
+	[[nodiscard]]
 	sanguis::messages::server::unique_ptr
 	add_message(
 		sanguis::server::player_id,
@@ -169,6 +178,7 @@ private:
 	template<
 		typename Message
 	>
+	[[nodiscard]]
 	sanguis::messages::server::unique_ptr
 	add_message_impl(
 		sanguis::collision::world::created
@@ -200,6 +210,7 @@ private:
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::collision::world::body_group
 	collision_group() const
 	override;

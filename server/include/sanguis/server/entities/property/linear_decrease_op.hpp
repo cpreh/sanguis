@@ -17,7 +17,7 @@ namespace property
 
 void
 linear_decrease_op(
-	sanguis::server::entities::property::base &,
+	sanguis::server::entities::property::base &, // NOLINT(google-runtime-references)
 	sanguis::server::entities::property::value,
 	sanguis::server::entities::property::apply
 );

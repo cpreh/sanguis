@@ -78,16 +78,19 @@ sanguis::server::entities::property::base::base(
 
 sanguis::server::entities::property::base::base(
 	base &&
-) = default;
+)
+noexcept
+= default;
 
 sanguis::server::entities::property::base &
 sanguis::server::entities::property::base::operator=(
 	base &&
-) = default;
+)
+noexcept
+= default;
 
 sanguis::server::entities::property::base::~base()
-{
-}
+= default;
 
 void
 sanguis::server::entities::property::base::recalc_max()

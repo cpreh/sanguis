@@ -10,8 +10,10 @@
 #include <sanguis/server/ai/pathing/trail.hpp>
 #include <sanguis/server/ai/pathing/update_trail.hpp>
 #include <sanguis/server/entities/with_ai.hpp>
+#include <sanguis/server/entities/with_ai_ref.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <sanguis/server/world/center_to_grid_pos.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/maybe_front.hpp>
 #include <fcppt/optional/bind.hpp>
@@ -20,7 +22,7 @@
 
 
 sanguis::server::ai::context::context(
-	sanguis::server::entities::with_ai &_me
+	sanguis::server::entities::with_ai_ref const _me
 )
 :
 	me_(
@@ -31,12 +33,11 @@ sanguis::server::ai::context::context(
 }
 
 sanguis::server::ai::context::~context()
-{
-}
+= default;
 
 bool
 sanguis::server::ai::context::path_find(
-	sanguis::creator::pos const _pos
+	sanguis::creator::pos const &_pos
 )
 {
 	trail_ =
@@ -113,7 +114,9 @@ sanguis::server::ai::context::continue_path()
 			{
 				return
 					sanguis::server::ai::pathing::update_trail(
-						_trail,
+						fcppt::make_ref(
+							_trail
+						),
 						this->me()
 					);
 			}
@@ -133,12 +136,12 @@ sanguis::server::entities::with_ai &
 sanguis::server::ai::context::me()
 {
 	return
-		me_;
+		me_.get();
 }
 
 sanguis::server::entities::with_ai const &
 sanguis::server::ai::context::me() const
 {
 	return
-		me_;
+		me_.get();
 }

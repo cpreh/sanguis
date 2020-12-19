@@ -4,9 +4,9 @@
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/speed.hpp>
 #include <sanguis/collision/world/body_base_fwd.hpp>
+#include <sanguis/collision/world/body_base_ref.hpp>
 #include <sanguis/collision/world/body_group.hpp>
 #include <sanguis/collision/world/body_parameters.hpp>
-#include <fcppt/reference_impl.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -20,9 +20,7 @@ sanguis::collision::world::body_parameters::body_parameters(
 	sanguis::collision::radius _radius,
 	sanguis::collision::optional_mass _mass,
 	sanguis::collision::world::body_group const _collision_group,
-	fcppt::reference<
-		sanguis::collision::world::body_base
-	> const _body_base
+	sanguis::collision::world::body_base_ref const _body_base
 )
 :
 	log_{

@@ -23,9 +23,11 @@ sanguis::server::collision::body_collision(
 					_b
 				)
 			)
+			{
 				_a.collision(
 					_b
 				);
+			}
 		}
 	);
 

@@ -34,8 +34,7 @@ sanguis::server::ai::tree::sequence::sequence(
 FCPPT_PP_POP_WARNING
 
 sanguis::server::ai::tree::sequence::~sequence()
-{
-}
+= default;
 
 sanguis::server::ai::status
 sanguis::server::ai::tree::sequence::run(

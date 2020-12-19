@@ -15,28 +15,32 @@ sanguis::server::entities::enemies::make_name(
 	sanguis::creator::enemy_type const _enemy_type
 )
 {
-	fcppt::string result;
+	fcppt::string result{};
 
-	// TODO: Refactor this!
+	// TODO(philipp): Refactor this!
 	for(
 		auto const &attribute
 		:
 		_attributes
 	)
+	{
 		result +=
 			attribute.text()
 			+
 			FCPPT_TEXT(' ');
+	}
 
 	for(
 		auto const &skill
 		:
 		_skills
 	)
+	{
 		result +=
 			skill->attribute().text()
 			+
 			FCPPT_TEXT(' ');
+	}
 
 	return
 		result

@@ -14,7 +14,7 @@
 #include <sanguis/server/entities/with_links.hpp>
 #include <sanguis/server/entities/ifaces/with_team.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/logic/tribool_fwd.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -36,7 +36,7 @@ class pickup
 	public sanguis::server::entities::with_id,
 	public sanguis::server::entities::with_links
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		pickup
 	);
 public:
@@ -45,18 +45,21 @@ public:
 protected:
 	pickup(
 		sanguis::pickup_type,
-		sanguis::server::environment::load_context &,
+		sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
 		sanguis::server::team
 	);
 private:
+	[[nodiscard]]
 	bool
 	dead() const
 	override;
 
+	[[nodiscard]]
 	sanguis::server::team
 	team() const
 	override;
 
+	[[nodiscard]]
 	boost::logic::tribool
 	can_collide_with_body(
 		sanguis::server::entities::with_body const &
@@ -65,10 +68,11 @@ private:
 
 	void
 	collision_with_body(
-		sanguis::server::entities::with_body &
-	)
+		sanguis::server::entities::with_body & // NOLINT(google-runtime-references)
+	) // NOLINT(google-runtime-references)
 	override;
 
+	[[nodiscard]]
 	sanguis::collision::world::body_group
 	collision_group() const
 	override;
@@ -77,10 +81,11 @@ private:
 	virtual
 	bool
 	do_pickup(
-		sanguis::server::entities::base &receiver
-	)
+		sanguis::server::entities::base &receiver // NOLINT(google-runtime-references)
+	) // NOLINT(google-runtime-references)
 	= 0;
 
+	[[nodiscard]]
 	sanguis::messages::server::unique_ptr
 	add_message(
 		sanguis::server::player_id,

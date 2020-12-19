@@ -49,8 +49,7 @@ sanguis::server::entities::doodad::doodad(
 }
 
 sanguis::server::entities::doodad::~doodad()
-{
-}
+= default;
 
 void
 sanguis::server::entities::doodad::kill()
@@ -95,7 +94,7 @@ sanguis::server::entities::doodad::add_message(
 				sanguis::messages::roles::center{} =
 					this->center().get(),
 				sanguis::messages::roles::angle{} =
-					0.f, // TODO: Should center_ghost save the angle?
+					0.F, // TODO(philipp): Should center_ghost save the angle?
 				sanguis::messages::roles::created{} =
 					_created.get(),
 				sanguis::messages::roles::doodad_type{} =

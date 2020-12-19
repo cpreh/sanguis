@@ -39,8 +39,7 @@ sanguis::server::entities::enemies::normal::normal(
 FCPPT_PP_POP_WARNING
 
 sanguis::server::entities::enemies::normal::~normal()
-{
-}
+= default;
 
 sanguis::messages::types::string const &
 sanguis::server::entities::enemies::normal::name() const

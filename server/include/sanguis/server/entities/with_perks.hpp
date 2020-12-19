@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_ENTITIES_WITH_PERKS_HPP_INCLUDED
 
 #include <sanguis/perk_type_fwd.hpp>
-#include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/random_generator_ref.hpp>
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_perks_fwd.hpp>
 #include <sanguis/server/entities/ifaces/with_health.hpp>
@@ -10,7 +10,7 @@
 #include <sanguis/server/entities/ifaces/with_velocity.hpp>
 #include <sanguis/server/entities/ifaces/with_weapon.hpp>
 #include <sanguis/server/perks/unique_ptr.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <map>
 #include <fcppt/config/external_end.hpp>
@@ -31,7 +31,7 @@ class with_perks
 	public virtual sanguis::server::entities::ifaces::with_weapon,
 	public virtual sanguis::server::entities::ifaces::with_team
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		with_perks
 	);
 public:
@@ -42,7 +42,7 @@ public:
 protected:
 	explicit
 	with_perks(
-		sanguis::random_generator &
+		sanguis::random_generator_ref
 	);
 
 	~with_perks()
@@ -60,7 +60,7 @@ private:
 		sanguis::server::perks::unique_ptr
 	>;
 
-	sanguis::random_generator &random_generator_;
+	sanguis::random_generator_ref const random_generator_;
 
 	perk_container perks_;
 };

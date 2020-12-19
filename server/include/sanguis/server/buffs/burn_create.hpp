@@ -10,6 +10,7 @@
 #include <sanguis/server/damage/unit.hpp>
 #include <sanguis/server/damage/unmodified.hpp>
 #include <sanguis/server/entities/base.hpp>
+#include <sanguis/server/entities/base_ref.hpp>
 #include <sanguis/server/entities/with_health.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
@@ -42,10 +43,10 @@ burn_create(
 )
 {
 	static_assert(
-		std::is_base_of<
+		std::is_base_of_v<
 			sanguis::server::buffs::burn,
 			Buff
-		>::value,
+		>,
 		"Buff must derive from buffs::slow"
 	);
 
@@ -56,7 +57,7 @@ burn_create(
 				_damage,
 				_damage_values
 			](
-				sanguis::server::entities::base &_entity
+				sanguis::server::entities::base_ref const _entity
 			)
 			{
 FCPPT_PP_PUSH_WARNING
@@ -66,7 +67,7 @@ FCPPT_PP_DISABLE_GCC_WARNING(-Wattributes)
 						fcppt::cast::dynamic<
 							sanguis::server::entities::with_health
 						>(
-							_entity
+							_entity.get()
 						),
 						[
 							_interval,
@@ -85,10 +86,9 @@ FCPPT_PP_DISABLE_GCC_WARNING(-Wattributes)
 									fcppt::make_unique_ptr<
 										Buff
 									>(
-										_with_health.get(),
+										_with_health,
 										_interval,
 										_damage,
-										// TODO: Auras must know their owner to fix this
 										sanguis::server::damage::unmodified(
 											_damage_values
 										)

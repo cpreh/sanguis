@@ -13,7 +13,7 @@
 #include <sanguis/server/entities/with_health_fwd.hpp>
 #include <sanguis/server/entities/projectiles/aoe_projectile.hpp>
 #include <sanguis/server/environment/load_context_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -29,23 +29,24 @@ class grenade
 :
 	public sanguis::server::entities::projectiles::aoe_projectile
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		grenade
 	);
 public:
 	grenade(
-		sanguis::server::environment::load_context &,
+		sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
 		sanguis::server::team,
 		sanguis::server::damage::unit,
 		sanguis::server::damage::modified_array const &,
 		sanguis::server::aoe,
-		sanguis::server::vector const &dest,
+		sanguis::server::vector dest,
 		sanguis::server::direction
 	);
 
 	~grenade()
 	override;
 private:
+	[[nodiscard]]
 	sanguis::server::entities::optional_transfer_result
 	on_transfer(
 		sanguis::server::entities::transfer_parameters const &

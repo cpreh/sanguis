@@ -13,7 +13,7 @@
 void
 sanguis::server::ai::rotate_and_move_to_target(
 	sanguis::server::entities::with_ai &_me,
-	sanguis::server::ai::target const _target,
+	sanguis::server::ai::target const &_target,
 	sanguis::server::ai::speed_factor const _speed_factor
 )
 {

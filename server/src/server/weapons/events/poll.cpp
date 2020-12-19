@@ -2,12 +2,12 @@
 
 
 sanguis::server::weapons::events::poll::poll()
-{
-}
+= default;
 
 sanguis::server::weapons::events::poll::poll(
 	poll &&
 )
+noexcept
 = default;
 
 sanguis::server::weapons::events::poll::poll(
@@ -19,6 +19,7 @@ sanguis::server::weapons::events::poll &
 sanguis::server::weapons::events::poll::operator=(
 	poll &&
 )
+noexcept
 = default;
 
 sanguis::server::weapons::events::poll &
@@ -28,5 +29,4 @@ sanguis::server::weapons::events::poll::operator=(
 = default;
 
 sanguis::server::weapons::events::poll::~poll()
-{
-}
+= default;

@@ -3,7 +3,7 @@
 
 #include <sanguis/random_generator_fwd.hpp>
 #include <sanguis/server/random/distributor_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/random/distribution/basic_decl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int_decl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real_decl.hpp>
@@ -27,7 +27,7 @@ template<
 >
 class distributor
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		distributor
 	);
 public:
@@ -53,10 +53,11 @@ public:
 
 	~distributor();
 
+	[[nodiscard]]
 	State const &
 	execute(
-		sanguis::random_generator &
-	);
+		sanguis::random_generator & // NOLINT(google-runtime-references)
+	); // NOLINT(google-runtime-references)
 private:
 	using
 	distribution_parameters

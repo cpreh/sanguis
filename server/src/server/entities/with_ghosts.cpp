@@ -37,8 +37,7 @@ sanguis::server::entities::with_ghosts::with_ghosts(
 }
 
 sanguis::server::entities::with_ghosts::~with_ghosts()
-{
-}
+= default;
 
 sanguis::collision::world::body_enter_container
 sanguis::server::entities::with_ghosts::add_ghost(
@@ -136,7 +135,7 @@ sanguis::server::entities::with_ghosts::remove_from_world()
 
 void
 sanguis::server::entities::with_ghosts::update_ghost_center(
-	sanguis::server::center const _center
+	sanguis::server::center const &_center
 )
 {
 	for(
@@ -144,7 +143,9 @@ sanguis::server::entities::with_ghosts::update_ghost_center(
 		:
 		ghosts_
 	)
+	{
 		ghost.center(
 			_center
 		);
+	}
 }

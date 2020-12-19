@@ -3,12 +3,13 @@
 #include <sanguis/server/buffs/slow.hpp>
 #include <sanguis/server/buffs/slow_factor.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
+#include <sanguis/server/entities/with_velocity_ref.hpp>
 #include <sanguis/server/entities/property/linear_decrease_op.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 
 
 sanguis::server::buffs::slow::slow(
-	sanguis::server::entities::with_velocity &_entity,
+	sanguis::server::entities::with_velocity_ref const _entity,
 	sanguis::server::buffs::slow_factor const _factor
 )
 :
@@ -23,8 +24,7 @@ sanguis::server::buffs::slow::slow(
 }
 
 sanguis::server::buffs::slow::~slow()
-{
-}
+= default;
 
 sanguis::buff_type
 sanguis::server::buffs::slow::type() const
@@ -39,7 +39,7 @@ sanguis::server::buffs::slow::apply(
 )
 {
 	sanguis::server::entities::property::linear_decrease_op(
-		entity_.movement_speed(),
+		entity_->movement_speed(),
 		factor_.get(),
 		sanguis::server::entities::property::apply(
 			_added.get()

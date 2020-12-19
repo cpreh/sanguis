@@ -17,7 +17,7 @@ namespace pathing
 bool
 tile_reached(
 	sanguis::server::entities::with_ai const &,
-	sanguis::creator::pos
+	sanguis::creator::pos const &
 );
 
 }

@@ -8,7 +8,7 @@
 #include <sanguis/server/entities/base.hpp>
 #include <sanguis/server/entities/with_id_fwd.hpp>
 #include <sanguis/server/entities/ifaces/with_id.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -23,7 +23,7 @@ class with_id
 	public virtual sanguis::server::entities::base,
 	public virtual sanguis::server::entities::ifaces::with_id
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		with_id
 	);
 protected:
@@ -35,6 +35,7 @@ public:
 	~with_id()
 	override = 0;
 
+	[[nodiscard]]
 	sanguis::entity_id
 	id() const
 	override;
@@ -46,6 +47,7 @@ public:
 	void
 	transfer_from_world();
 
+	[[nodiscard]]
 	virtual
 	sanguis::messages::server::unique_ptr
 	add_message(

@@ -9,6 +9,7 @@
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/random_generator_ref.hpp>
 #include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/weapon_status_fwd.hpp>
 #include <sanguis/world_id.hpp>
@@ -30,7 +31,6 @@
 #include <sanguis/server/pickup_probability.hpp>
 #include <sanguis/server/player_id_fwd.hpp>
 #include <sanguis/server/speed_fwd.hpp>
-#include <sanguis/server/entities/base_fwd.hpp>
 #include <sanguis/server/entities/doodad_unique_ptr.hpp>
 #include <sanguis/server/entities/insert_parameters_fwd.hpp>
 #include <sanguis/server/entities/optional_base_ref_fwd.hpp>
@@ -348,7 +348,7 @@ private:
 	void
 	insert_spawns(
 		sanguis::creator::spawn_container const &,
-		sanguis::random_generator &,
+		sanguis::random_generator_ref,
 		sanguis::server::weapons::common_parameters const &
 	);
 

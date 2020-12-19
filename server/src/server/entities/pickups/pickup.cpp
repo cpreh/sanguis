@@ -39,8 +39,7 @@
 
 
 sanguis::server::entities::pickups::pickup::~pickup()
-{
-}
+= default;
 
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
@@ -75,7 +74,7 @@ sanguis::server::entities::pickups::pickup::pickup(
 				this->diff_clock()
 			),
 			std::chrono::seconds(
-				30
+				30 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			)
 		)
 	)
@@ -139,16 +138,20 @@ sanguis::server::entities::pickups::pickup::collision_with_body(
 	if(
 		this->dead()
 	)
+	{
 		return;
+	}
 
 	if(
 		this->do_pickup(
 			_body
 		)
 	)
+	{
 		life_timer_.expired(
 			true
 		);
+	}
 }
 
 sanguis::collision::world::body_group

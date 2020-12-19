@@ -35,8 +35,7 @@ sanguis::server::entities::property::changeable::changeable(
 }
 
 sanguis::server::entities::property::changeable::~changeable()
-{
-}
+= default;
 
 void
 sanguis::server::entities::property::changeable::current(
@@ -61,14 +60,16 @@ sanguis::server::entities::property::changeable::current(
 		fcppt::literal<
 			sanguis::server::entities::property::value
 		>(
-			0.001
+			0.001 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		)
 	)
+	{
 		change_signal_(
 			sanguis::server::entities::property::change_event(
 				diff
 			)
 		);
+	}
 }
 
 sanguis::server::entities::property::value
@@ -147,6 +148,8 @@ sanguis::server::entities::property::changeable::check_current()
 		>
 		max_
 	)
+	{
 		current_ =
 			max_;
+	}
 }

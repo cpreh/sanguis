@@ -15,6 +15,7 @@ sanguis::server::collision::body_exit(
 		:
 		_body_exit_container
 	)
+	{
 		fcppt::cast::static_downcast<
 			sanguis::server::collision::ghost_base &
 		>(
@@ -22,4 +23,5 @@ sanguis::server::collision::body_exit(
 		).body_exit(
 			body_exit.body()
 		);
+	}
 }

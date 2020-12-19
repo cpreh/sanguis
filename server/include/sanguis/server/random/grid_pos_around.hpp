@@ -17,9 +17,9 @@ namespace random
 
 sanguis::creator::optional_pos
 grid_pos_around(
-	sanguis::random_generator &,
-	sanguis::creator::dim,
-	sanguis::creator::pos,
+	sanguis::random_generator &, // NOLINT(google-runtime-references)
+	sanguis::creator::dim const &,
+	sanguis::creator::pos const &,
 	sanguis::server::random::grid_distance
 );
 

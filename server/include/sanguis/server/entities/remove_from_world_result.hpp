@@ -22,9 +22,11 @@ public:
 		sanguis::collision::world::body_exit_container &&
 	);
 
+	[[nodiscard]]
 	sanguis::collision::world::body_exit_container const &
 	body_exit() const;
 
+	[[nodiscard]]
 	sanguis::collision::world::body_exit_container &&
 	release_body_exit();
 private:

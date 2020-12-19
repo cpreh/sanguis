@@ -69,13 +69,12 @@ sanguis::server::entities::pickups::weapon::weapon(
 }
 
 sanguis::server::entities::pickups::weapon::~weapon()
-{
-}
+= default;
 
 sanguis::server::weapons::unique_ptr
 sanguis::server::entities::pickups::weapon::obtain()
 {
-	// TODO: Return an optional_unique_ptr here?
+	// TODO(philipp): Return an optional_unique_ptr here?
 	sanguis::server::weapons::unique_ptr result(
 		std::move(
 			FCPPT_ASSERT_OPTIONAL_ERROR(
@@ -144,7 +143,7 @@ sanguis::server::entities::pickups::weapon::add_message(
 					_created.get(),
 				sanguis::messages::roles::weapon_type{} =
 					description.weapon_type(),
-				// TODO: Unify this with give_weapon
+				// TODO(philipp): Unify this with give_weapon
 				sanguis::messages::roles::magazine_base_size{} =
 					sanguis::messages::convert::to_magazine_size(
 						description.magazine_size().get()

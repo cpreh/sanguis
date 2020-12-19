@@ -1,5 +1,5 @@
 #include <sanguis/server/space_unit.hpp>
-#include <sanguis/server/ai/context_fwd.hpp>
+#include <sanguis/server/ai/context_ref.hpp>
 #include <sanguis/server/ai/sight_range.hpp>
 #include <sanguis/server/ai/speed_factor.hpp>
 #include <sanguis/server/ai/behavior/attack.hpp>
@@ -14,7 +14,7 @@
 
 
 sanguis::server::ai::behavior::attack_health::attack_health(
-	sanguis::server::ai::context &_context,
+	sanguis::server::ai::context_ref const _context,
 	sanguis::server::ai::sight_range const _sight_range,
 	sanguis::server::ai::speed_factor const _speed_factor
 )
@@ -30,8 +30,7 @@ sanguis::server::ai::behavior::attack_health::attack_health(
 }
 
 sanguis::server::ai::behavior::attack_health::~attack_health()
-{
-}
+= default;
 
 sanguis::server::ai::speed_factor
 sanguis::server::ai::behavior::attack_health::speed_factor() const
@@ -52,7 +51,7 @@ sanguis::server::ai::behavior::attack_health::speed_factor() const
 					fcppt::literal<
 						sanguis::server::space_unit
 					>(
-						1.0f
+						1.0F
 					)
 				),
 				[](
@@ -63,7 +62,7 @@ sanguis::server::ai::behavior::attack_health::speed_factor() const
 						fcppt::literal<
 							sanguis::server::space_unit
 						>(
-							1.0f
+							1.0F
 						)
 						-
 						_ratio;

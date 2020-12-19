@@ -22,7 +22,7 @@
 #include <sanguis/server/weapons/optional_target.hpp>
 #include <sanguis/server/weapons/optional_unique_ptr.hpp>
 #include <sanguis/server/weapons/weapon_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/optional/reference_fwd.hpp>
 
 
@@ -42,7 +42,7 @@ class with_weapon
 	public virtual sanguis::server::entities::ifaces::with_weapon,
 	public virtual sanguis::server::entities::ifaces::with_team
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		with_weapon
 	);
 protected:
@@ -65,6 +65,7 @@ protected:
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::optional_primary_weapon_type
 	primary_weapon_type() const;
 public:
@@ -73,6 +74,7 @@ public:
 		sanguis::server::weapons::unique_ptr &&
 	);
 
+	[[nodiscard]]
 	sanguis::server::weapons::optional_unique_ptr
 	drop_weapon(
 		sanguis::is_primary_weapon
@@ -83,9 +85,11 @@ public:
 		sanguis::server::weapons::optional_target
 	);
 
+	[[nodiscard]]
 	sanguis::server::weapons::optional_target
 	target() const;
 
+	[[nodiscard]]
 	bool
 	in_range(
 		sanguis::is_primary_weapon
@@ -102,35 +106,43 @@ public:
 		sanguis::is_primary_weapon
 	);
 
+	[[nodiscard]]
 	sanguis::server::entities::property::always_max &
 	attack_speed()
 	override;
 
+	[[nodiscard]]
 	sanguis::server::entities::property::always_max &
 	reload_speed()
 	override;
 
+	[[nodiscard]]
 	sanguis::server::entities::property::always_max &
 	extra_damage(
 		sanguis::server::damage::type
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::server::damage::unit
 	extra_damage_value(
 		sanguis::server::damage::type
 	) const
 	override;
 
+	[[nodiscard]]
 	sanguis::server::weapons::ias
 	ias() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::irs
 	irs() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::const_optional_ref
 	primary_weapon() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::const_optional_ref
 	secondary_weapon() const;
 
@@ -152,6 +164,7 @@ public:
 		sanguis::server::weapons::weapon const &
 	);
 
+	[[nodiscard]]
 	sanguis::weapon_status
 	weapon_status() const;
 private:
@@ -162,22 +175,27 @@ private:
 		sanguis::server::weapons::weapon
 	>;
 
+	[[nodiscard]]
 	sanguis::server::entities::with_weapon::optional_weapon_ref
 	primary_weapon_ref() const;
 
+	[[nodiscard]]
 	sanguis::server::entities::with_weapon::optional_weapon_ref
 	secondary_weapon_ref() const;
 
+	[[nodiscard]]
 	sanguis::server::entities::with_weapon::optional_weapon_ref
 	get_weapon(
 		sanguis::is_primary_weapon
 	) const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::optional_unique_ptr
 	move_weapon(
 		sanguis::is_primary_weapon
 	);
 
+	[[nodiscard]]
 	sanguis::server::weapons::weapon &
 	set_weapon(
 		sanguis::is_primary_weapon,
@@ -234,9 +252,9 @@ private:
 
 	sanguis::weapon_status weapon_status_;
 
-	sanguis::server::entities::property::always_max
-		attack_speed_,
-		reload_speed_;
+	sanguis::server::entities::property::always_max attack_speed_;
+
+	sanguis::server::entities::property::always_max reload_speed_;
 
 	using
 	extra_damage_array

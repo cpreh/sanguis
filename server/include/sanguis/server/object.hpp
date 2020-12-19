@@ -7,7 +7,7 @@
 #include <sanguis/server/object_fwd.hpp>
 #include <sanguis/server/symbol.hpp>
 #include <alda/net/port.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/scoped_state_machine.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>
 
@@ -22,7 +22,7 @@ class object
 	public
 		sanguis::server::object_base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		object
 	);
 public:
