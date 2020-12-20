@@ -34,6 +34,7 @@
 #include <fcppt/variant/match.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <metal.hpp>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -54,18 +55,19 @@ key_scale_value(
 }
 
 sanguis::client::control::input_translator::input_translator(
-	sanguis::client::control::actions::callback const &_callback
+	sanguis::client::control::actions::callback &&_callback
 )
 :
 	callback_(
-		_callback
+		std::move(
+			_callback
+		)
 	)
 {
 }
 
 sanguis::client::control::input_translator::~input_translator()
-{
-}
+= default;
 
 void
 sanguis::client::control::input_translator::on_event(
@@ -214,7 +216,7 @@ sanguis::client::control::input_translator::move_event(
 					fcppt::optional::map(
 						_event.position(),
 						[](
-							sge::input::cursor::position const _position
+							sge::input::cursor::position const &_position
 						)
 						{
 							return
@@ -294,7 +296,9 @@ sanguis::client::control::input_translator::nullary_event(
 	if(
 		!_pressed
 	)
+	{
 		return;
+	}
 
 	callback_(
 		sanguis::client::control::actions::any(

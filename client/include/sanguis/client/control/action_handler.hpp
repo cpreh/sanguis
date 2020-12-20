@@ -7,7 +7,7 @@
 #include <sanguis/client/send_callback.hpp>
 #include <sanguis/client/control/action_handler_fwd.hpp>
 #include <sanguis/client/control/direction_vector.hpp>
-#include <sanguis/client/control/environment_fwd.hpp>
+#include <sanguis/client/control/environment_cref.hpp>
 #include <sanguis/client/control/key_scale.hpp>
 #include <sanguis/client/control/optional_cursor_position.hpp>
 #include <sanguis/client/control/scalar.hpp>
@@ -17,11 +17,11 @@
 #include <sanguis/client/control/actions/nullary_fwd.hpp>
 #include <sanguis/client/control/actions/scale_fwd.hpp>
 #include <sge/console/arg_list.hpp>
-#include <sge/console/object_fwd.hpp>
 #include <sge/console/object_ref.hpp>
 #include <sge/console/callback/name.hpp>
 #include <sge/console/callback/short_description.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
+#include <fcppt/reference_fwd.hpp>
 #include <fcppt/signal/auto_connection_container.hpp>
 #include <fcppt/signal/auto_connection_fwd.hpp>
 
@@ -35,14 +35,14 @@ namespace control
 
 class action_handler
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		action_handler
 	);
 public:
 	action_handler(
-		sanguis::client::send_callback const &,
-		sanguis::client::control::environment const &,
-		sge::console::object &
+		sanguis::client::send_callback &&,
+		sanguis::client::control::environment_cref,
+		sge::console::object_ref
 	);
 
 	~action_handler();
@@ -72,12 +72,15 @@ public:
 		sanguis::client::control::actions::scale const &
 	);
 
+	[[nodiscard]]
 	sanguis::client::control::optional_cursor_position const &
 	cursor_position() const;
 private:
 	void
 	update_direction(
-		sanguis::client::control::scalar &,
+		fcppt::reference<
+			sanguis::client::control::scalar
+		>,
 		sanguis::client::control::key_scale
 	);
 
@@ -103,13 +106,13 @@ private:
 	void
 	send_cheat(
 		sanguis::cheat_type,
-		sge::console::arg_list const &,
-		sge::console::object_ref
+		sge::console::arg_list const &
 	);
 
+	[[nodiscard]]
 	fcppt::signal::auto_connection
 	cheat_connection(
-		sge::console::object &,
+		sge::console::object_ref,
 		sanguis::cheat_type,
 		sge::console::callback::name const &,
 		sge::console::callback::short_description const &
@@ -117,7 +120,7 @@ private:
 
 	sanguis::client::send_callback const send_;
 
-	sanguis::client::control::environment const &environment_;
+	sanguis::client::control::environment_cref const environment_;
 
 	sanguis::timer rotation_timer_;
 

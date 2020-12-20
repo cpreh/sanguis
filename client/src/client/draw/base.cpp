@@ -2,9 +2,7 @@
 
 
 sanguis::client::draw::base::base()
-{
-}
+= default;
 
 sanguis::client::draw::base::~base()
-{
-}
+= default;

@@ -39,9 +39,11 @@
 #include <awl/main/exit_code.hpp>
 #include <awl/main/exit_failure.hpp>
 #include <awl/main/exit_success.hpp>
+#include <fcppt/copy.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -93,7 +95,9 @@ sanguis::client::object::object(
 		sanguis::client::config::settings::file()
 	),
 	saver_(
-		settings_
+		fcppt::make_cref(
+			settings_
+		)
 	),
 	io_service_(),
 	sys_(
@@ -129,10 +133,18 @@ sanguis::client::object::object(
 	),
 	resources_(
 		_log_context,
-		sys_->image_system(),
-		sys_->renderer_device_core(),
-		sys_->audio_loader(),
-		sys_->audio_player()
+		fcppt::make_ref(
+			sys_->image_system()
+		),
+		fcppt::make_ref(
+			sys_->renderer_device_core()
+		),
+		fcppt::make_ref(
+			sys_->audio_loader()
+		),
+		fcppt::make_ref(
+			sys_->audio_player()
+		)
 	),
 	gui_style_(
 		fcppt::unique_ptr_to_base<
@@ -151,10 +163,18 @@ sanguis::client::object::object(
 		)
 	),
 	console_gfx_(
-		console_,
-		sys_->renderer_device_ffp(),
-		*font_object_,
-		sys_->viewport_manager(),
+		fcppt::make_ref(
+			console_
+		),
+		fcppt::make_ref(
+			sys_->renderer_device_ffp()
+		),
+		fcppt::make_ref(
+			*font_object_
+		),
+		fcppt::make_ref(
+			sys_->viewport_manager()
+		),
 		fcppt::record::get<
 			sanguis::client::args::labels::history_size
 		>(
@@ -162,14 +182,24 @@ sanguis::client::object::object(
 		)
 	),
 	cursor_{
-		sys_->renderer_device_ffp(),
-		sys_->input_processor(),
-		resources_.resources().textures()
+		fcppt::make_ref(
+			sys_->renderer_device_ffp()
+		),
+		fcppt::make_cref(
+			sys_->input_processor()
+		),
+		fcppt::make_cref(
+			resources_.resources().textures()
+		)
 	},
 	machine_(
 		_log_context,
-		settings_,
-		_args,
+		fcppt::make_ref(
+			settings_
+		),
+		fcppt::copy(
+			_args
+		),
 		sanguis::client::server_callback{
 			std::bind(
 				&sanguis::client::object::create_server,
@@ -177,17 +207,33 @@ sanguis::client::object::object(
 				std::placeholders::_1
 			)
 		},
-		resources_,
+		fcppt::make_cref(
+			resources_
+		),
 		fcppt::make_cref(
 			*gui_style_
 		),
-		sys_->window_system(),
-		*font_object_,
-		console_gfx_.get(),
-		sys_->renderer_device_ffp(),
-		io_service_,
-		sys_->viewport_manager(),
-		cursor_
+		fcppt::make_ref(
+			sys_->window_system()
+		),
+		fcppt::make_ref(
+			*font_object_
+		),
+		fcppt::make_ref(
+			console_gfx_.get()
+		),
+		fcppt::make_ref(
+			sys_->renderer_device_ffp()
+		),
+		fcppt::make_ref(
+			io_service_
+		),
+		fcppt::make_ref(
+			sys_->viewport_manager()
+		),
+		fcppt::make_ref(
+			cursor_
+		)
 	),
 	frame_timer_(),
 	server_(),

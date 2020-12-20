@@ -4,7 +4,7 @@
 #include <sanguis/client/object_base_fwd.hpp>
 #include <sanguis/client/symbol.hpp>
 #include <awl/main/exit_code.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/symbol/class.hpp>
 
 
@@ -15,7 +15,7 @@ namespace client
 
 class FCPPT_SYMBOL_CLASS object_base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		object_base
 	);
 protected:
@@ -25,6 +25,7 @@ public:
 	virtual
 	~object_base();
 
+	[[nodiscard]]
 	virtual
 	awl::main::exit_code
 	run() = 0;

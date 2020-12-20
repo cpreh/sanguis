@@ -4,8 +4,7 @@
 
 
 sanguis::client::draw2d::entities::base::base()
-{
-}
+= default;
 
 void
 sanguis::client::draw2d::entities::base::die()
@@ -36,5 +35,4 @@ sanguis::client::draw2d::entities::base::on_create(
 }
 
 sanguis::client::draw2d::entities::base::~base()
-{
-}
+= default;

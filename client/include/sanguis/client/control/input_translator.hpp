@@ -9,7 +9,7 @@
 #include <sge/input/cursor/event/button_fwd.hpp>
 #include <sge/input/cursor/event/move_fwd.hpp>
 #include <sge/input/focus/event/key_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -21,14 +21,13 @@ namespace control
 
 class input_translator
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		input_translator
 	);
 public:
-	// TODO: Translate into events instead of a callback
 	explicit
 	input_translator(
-		sanguis::client::control::actions::callback const &
+		sanguis::client::control::actions::callback &&
 	);
 
 	~input_translator();

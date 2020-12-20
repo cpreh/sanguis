@@ -22,9 +22,11 @@ public:
 		bool
 	);
 
+	[[nodiscard]]
 	sanguis::client::control::actions::binary_type
 	type() const;
 
+	[[nodiscard]]
 	bool
 	value() const;
 private:

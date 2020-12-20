@@ -3,7 +3,7 @@
 
 #include <sanguis/client/config/settings/object_fwd.hpp>
 #include <sge/parse/ini/start.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -22,26 +22,29 @@ namespace settings
 
 class object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		object
 	);
 public:
 	object(
 		fcppt::log::context_reference,
-		std::filesystem::path const &
+		std::filesystem::path &&
 	);
 
 	~object();
 
+	[[nodiscard]]
 	sge::parse::ini::start &
 	sections();
 
+	[[nodiscard]]
 	sge::parse::ini::start const &
 	sections() const;
 
 	void
 	save() const;
 
+	[[nodiscard]]
 	fcppt::log::object &
 	log() const;
 private:

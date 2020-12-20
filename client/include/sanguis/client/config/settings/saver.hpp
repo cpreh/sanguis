@@ -2,7 +2,8 @@
 #define SANGUIS_CLIENT_CONFIG_SETTINGS_SAVER_HPP_INCLUDED
 
 #include <sanguis/client/config/settings/object_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
+#include <fcppt/reference_impl.hpp>
 
 
 namespace sanguis
@@ -16,18 +17,22 @@ namespace settings
 
 class saver
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		saver
 	);
 public:
 	explicit
 	saver(
-		sanguis::client::config::settings::object const &
+		fcppt::reference<
+			sanguis::client::config::settings::object const
+		>
 	);
 
 	~saver();
 private:
-	sanguis::client::config::settings::object const &object_;
+	fcppt::reference<
+		sanguis::client::config::settings::object const
+	> const object_;
 };
 
 }

@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_STATES_RUNNING_HPP_INCLUDED
 
 #include <sanguis/slowdown.hpp>
+#include <sanguis/state_override.hpp>
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
 #include <sanguis/client/console/object_fwd.hpp>
@@ -98,7 +99,8 @@ public:
 		my_context
 	);
 
-	~running();
+	~running()
+	SANGUIS_STATE_OVERRIDE;
 
 	boost::statechart::result
 	react(

@@ -1,17 +1,20 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/io_service.hpp>
+#include <sanguis/io_service_ref.hpp>
 #include <sanguis/client/cursor_fwd.hpp>
+#include <sanguis/client/cursor_ref.hpp>
 #include <sanguis/client/log_location.hpp>
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/args/result_fwd.hpp>
 #include <sanguis/client/config/settings/object_fwd.hpp>
+#include <sanguis/client/config/settings/object_ref.hpp>
 #include <sanguis/client/events/connected.hpp>
 #include <sanguis/client/events/input.hpp>
 #include <sanguis/client/events/message.hpp>
 #include <sanguis/client/events/net_error.hpp>
 #include <sanguis/client/events/render.hpp>
 #include <sanguis/client/events/tick.hpp>
-#include <sanguis/client/load/context_fwd.hpp>
+#include <sanguis/client/load/context_cref.hpp>
 #include <sanguis/client/net/deserialize.hpp>
 #include <sanguis/client/net/serialize_to_circular_buffer.hpp>
 #include <sanguis/messages/client/base.hpp>
@@ -26,18 +29,22 @@
 #include <alda/net/client/connect_callback.hpp>
 #include <alda/net/client/data_callback.hpp>
 #include <alda/net/client/error_callback.hpp>
-#include <sge/console/gfx/object.hpp>
+#include <sge/console/gfx/object_ref.hpp>
 #include <sge/font/object_fwd.hpp>
+#include <sge/font/object_ref.hpp>
 #include <sge/gui/style/const_reference.hpp>
 #include <sge/input/event_base.hpp>
 #include <sge/renderer/context/scoped_ffp.hpp>
 #include <sge/renderer/device/ffp.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
 #include <sge/renderer/event/render.hpp>
 #include <sge/renderer/target/base.hpp>
 #include <sge/renderer/target/onscreen.hpp>
 #include <sge/systems/instance.hpp>
 #include <sge/viewport/manager_fwd.hpp>
+#include <sge/viewport/manager_ref.hpp>
 #include <sge/window/system.hpp>
+#include <sge/window/system_ref.hpp>
 #include <awl/event/base.hpp>
 #include <awl/event/base_unique_ptr.hpp>
 #include <awl/event/container.hpp>
@@ -80,18 +87,18 @@ FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::machine::machine(
 	fcppt::log::context_reference const _log_context,
-	sanguis::client::config::settings::object &_settings,
-	sanguis::client::args::result const &_options,
-	sanguis::client::server_callback const &_server_callback,
-	sanguis::client::load::context const &_resources,
+	sanguis::client::config::settings::object_ref const _settings,
+	sanguis::client::args::result &&_options,
+	sanguis::client::server_callback &&_server_callback,
+	sanguis::client::load::context_cref const _resources,
 	sge::gui::style::const_reference const _gui_style,
-	sge::window::system &_window_system,
-	sge::font::object &_font_object,
-	sge::console::gfx::object &_console_gfx,
-	sge::renderer::device::ffp &_renderer,
-	sanguis::io_service &_io_service,
-	sge::viewport::manager &_viewport_manager,
-	sanguis::client::cursor &_cursor_gfx
+	sge::window::system_ref const _window_system,
+	sge::font::object_ref const _font_object,
+	sge::console::gfx::object_ref const _console_gfx,
+	sge::renderer::device::ffp_ref const _renderer,
+	sanguis::io_service_ref const _io_service,
+	sge::viewport::manager_ref const _viewport_manager,
+	sanguis::client::cursor_ref const _cursor_gfx
 )
 :
 	log_context_{
@@ -110,7 +117,9 @@ sanguis::client::machine::machine(
 		_settings
 	),
 	options_(
-		_options
+		std::move(
+			_options
+		)
 	),
 	resources_(
 		_resources
@@ -127,7 +136,7 @@ sanguis::client::machine::machine(
 	net_(
 		alda::net::parameters(
 			_log_context,
-			_io_service.impl(),
+			_io_service->impl(),
 			sanguis::net::send_buffer_size(),
 			sanguis::net::receive_buffer_size()
 		)
@@ -175,7 +184,9 @@ sanguis::client::machine::machine(
 		_console_gfx
 	),
 	server_callback_(
-		_server_callback
+		std::move(
+			_server_callback
+		)
 	),
 	cursor_gfx_(
 		_cursor_gfx
@@ -186,8 +197,7 @@ sanguis::client::machine::machine(
 FCPPT_PP_POP_WARNING
 
 sanguis::client::machine::~machine()
-{
-}
+= default;
 
 void
 sanguis::client::machine::quickstart(
@@ -284,7 +294,7 @@ sanguis::client::machine::process(
 
 	return
 		fcppt::either::match(
-			window_system_.poll(),
+			window_system_->poll(),
 			[](
 				// TODO: Return this from client::object
 				awl::main::exit_code const _result
@@ -323,7 +333,7 @@ sanguis::client::machine::quit()
 			<< FCPPT_TEXT("Exiting the client!")
 	)
 
-	window_system_.quit(
+	window_system_->quit(
 		awl::main::exit_success()
 	);
 }
@@ -332,7 +342,7 @@ sanguis::client::config::settings::object &
 sanguis::client::machine::settings()
 {
 	return
-		settings_;
+		settings_.get();
 }
 
 sanguis::client::args::result const &
@@ -353,42 +363,42 @@ sge::renderer::device::ffp &
 sanguis::client::machine::renderer() const
 {
 	return
-		renderer_;
+		renderer_.get();
 }
 
 sge::font::object &
 sanguis::client::machine::font_object() const
 {
 	return
-		font_object_;
+		font_object_.get();
 }
 
 sge::console::gfx::object &
 sanguis::client::machine::console_gfx()
 {
 	return
-		console_gfx_;
+		console_gfx_.get();
 }
 
 sanguis::client::load::context const &
 sanguis::client::machine::resources() const
 {
 	return
-		resources_;
+		resources_.get();
 }
 
 sge::viewport::manager &
 sanguis::client::machine::viewport_manager() const
 {
 	return
-		viewport_manager_;
+		viewport_manager_.get();
 }
 
 sanguis::client::cursor &
 sanguis::client::machine::cursor_gfx() const
 {
 	return
-		cursor_gfx_;
+		cursor_gfx_.get();
 }
 
 fcppt::log::context_reference
@@ -402,14 +412,12 @@ void
 sanguis::client::machine::draw()
 {
 	sge::renderer::context::scoped_ffp const block(
-		fcppt::make_ref(
-			renderer_
-		),
+		renderer_,
 		fcppt::reference_to_base<
 			sge::renderer::target::base
 		>(
 			fcppt::make_ref(
-				renderer_.onscreen_target()
+				renderer_->onscreen_target()
 			)
 		)
 	);

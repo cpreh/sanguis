@@ -19,9 +19,10 @@ class cursor
 public:
 	explicit
 	cursor(
-		sanguis::client::control::optional_cursor_position const &
+		sanguis::client::control::optional_cursor_position
 	);
 
+	[[nodiscard]]
 	sanguis::client::control::optional_cursor_position
 	position() const;
 private:

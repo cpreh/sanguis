@@ -21,13 +21,15 @@ class name
 {
 public:
 	name(
-		fcppt::string const &,
-		sge::image::color::any::object const &
+		fcppt::string &&,
+		sge::image::color::any::object
 	);
 
+	[[nodiscard]]
 	fcppt::string const &
 	text() const;
 
+	[[nodiscard]]
 	sge::image::color::any::object const &
 	color() const;
 private:

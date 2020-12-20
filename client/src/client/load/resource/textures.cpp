@@ -10,8 +10,9 @@
 #include <sge/image/color/any/object.hpp>
 #include <sge/image2d/file.hpp>
 #include <sge/image2d/system.hpp>
+#include <sge/image2d/system_ref.hpp>
 #include <sge/renderer/resource_flags_field.hpp>
-#include <sge/renderer/device/core_fwd.hpp>
+#include <sge/renderer/device/core_ref.hpp>
 #include <sge/renderer/texture/create_planar_from_path.hpp>
 #include <sge/renderer/texture/emulate_srgb.hpp>
 #include <sge/renderer/texture/planar.hpp>
@@ -23,7 +24,6 @@
 #include <fcppt/exception.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_cref.hpp>
-#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -128,20 +128,20 @@ sge::image2d::system &
 sanguis::client::load::resource::textures::image_system() const
 {
 	return
-		image_loader_;
+		image_loader_.get();
 }
 
 sge::renderer::device::core &
 sanguis::client::load::resource::textures::renderer() const
 {
 	return
-		renderer_;
+		renderer_.get();
 }
 
 sanguis::client::load::resource::textures::textures(
 	fcppt::log::context_reference const _log_context,
-	sge::renderer::device::core &_renderer,
-	sge::image2d::system &_image_loader
+	sge::renderer::device::core_ref const _renderer,
+	sge::image2d::system_ref const _image_loader
 )
 :
 	log_{
@@ -168,7 +168,7 @@ sanguis::client::load::resource::textures::textures(
 	unnamed_textures_(),
 	missing_texture_(
 		sanguis::client::load::resource::make_missing_texture(
-			renderer_,
+			renderer_.get(),
 			fcppt::literal<
 				sge::image::size_type
 			>(
@@ -235,10 +235,8 @@ sanguis::client::load::resource::textures::do_load_inner(
 				>(
 					sge::renderer::texture::create_planar_from_path(
 						_path,
-						fcppt::make_ref(
-							renderer_
-						),
-						image_loader_,
+						renderer_,
+						image_loader_.get(),
 						sge::renderer::texture::mipmap::off(),
 						sge::renderer::resource_flags_field::null(),
 						sge::renderer::texture::emulate_srgb::yes

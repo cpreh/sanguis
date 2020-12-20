@@ -73,6 +73,7 @@
 #include <sge/font/from_std_wstring.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
@@ -126,9 +127,11 @@ sanguis::client::states::running::running(
 		fcppt::make_unique_ptr<
 			sanguis::client::console::object
 		>(
-			this->context<
-				sanguis::client::machine
-			>().console_gfx(),
+			fcppt::make_ref(
+				this->context<
+					sanguis::client::machine
+				>().console_gfx()
+			),
 			sanguis::client::make_send_callback(
 				this->context<
 					sanguis::client::machine
@@ -167,25 +170,37 @@ sanguis::client::states::running::running(
 			this->context<
 				sanguis::client::machine
 			>().log_context(),
-			this->context<
-				sanguis::client::machine
-			>().resources(),
-			hud_resources_,
-			*sound_manager_,
+			fcppt::make_cref(
+				this->context<
+					sanguis::client::machine
+				>().resources()
+			),
+			fcppt::make_ref(
+				hud_resources_
+			),
+			fcppt::make_ref(
+				*sound_manager_
+			),
 			fcppt::make_cref(
 				this->context<
 					sanguis::client::machine
 				>().gui_style()
 			),
-			this->context<
-				sanguis::client::machine
-			>().renderer(),
-			this->context<
-				sanguis::client::machine
-			>().font_object(),
-			this->context<
-				sanguis::client::machine
-			>().viewport_manager(),
+			fcppt::make_ref(
+				this->context<
+					sanguis::client::machine
+				>().renderer()
+			),
+			fcppt::make_ref(
+				this->context<
+					sanguis::client::machine
+				>().font_object()
+			),
+			fcppt::make_ref(
+				this->context<
+					sanguis::client::machine
+				>().viewport_manager()
+			),
 			sanguis::client::player_health_callback(
 				std::bind(
 					&sanguis::client::gui::hud::object::health_pair,
@@ -193,9 +208,11 @@ sanguis::client::states::running::running(
 					std::placeholders::_1
 				)
 			),
-			this->context<
-				sanguis::client::machine
-			>().cursor_gfx(),
+			fcppt::make_ref(
+				this->context<
+					sanguis::client::machine
+				>().cursor_gfx()
+			),
 			fcppt::record::get<
 				sanguis::client::args::labels::draw_debug
 			>(

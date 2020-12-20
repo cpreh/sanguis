@@ -21,13 +21,15 @@ class name_and_health
 {
 public:
 	name_and_health(
-		sanguis::client::draw2d::entities::hover::optional_name const &,
+		sanguis::client::draw2d::entities::hover::optional_name &&,
 		sanguis::client::optional_health_pair
 	);
 
+	[[nodiscard]]
 	sanguis::client::draw2d::entities::hover::optional_name const &
 	name() const;
 
+	[[nodiscard]]
 	sanguis::client::optional_health_pair
 	health() const;
 private:

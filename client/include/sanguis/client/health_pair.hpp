@@ -19,9 +19,11 @@ public:
 		sanguis::client::max_health
 	);
 
+	[[nodiscard]]
 	sanguis::client::health
 	health() const;
 
+	[[nodiscard]]
 	sanguis::client::max_health
 	max_health() const;
 

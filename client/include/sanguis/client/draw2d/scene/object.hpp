@@ -5,10 +5,10 @@
 #include <sanguis/entity_id.hpp>
 #include <sanguis/optional_entity_id.hpp>
 #include <sanguis/random_generator.hpp>
-#include <sanguis/client/cursor_fwd.hpp>
+#include <sanguis/client/cursor_ref.hpp>
 #include <sanguis/client/player_health_callback.hpp>
 #include <sanguis/client/slowed_duration_fwd.hpp>
-#include <sanguis/client/sound_manager_fwd.hpp>
+#include <sanguis/client/sound_manager_ref.hpp>
 #include <sanguis/client/weapon_pair.hpp>
 #include <sanguis/client/world_parameters_fwd.hpp>
 #include <sanguis/client/control/attack_dest_fwd.hpp>
@@ -33,9 +33,9 @@
 #include <sanguis/client/draw2d/sprite/state_decl.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_decl.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
-#include <sanguis/client/load/context_fwd.hpp>
+#include <sanguis/client/load/context_cref.hpp>
 #include <sanguis/client/load/auras/context.hpp>
-#include <sanguis/client/load/hud/context_fwd.hpp>
+#include <sanguis/client/load/hud/context_ref.hpp>
 #include <sanguis/client/load/model/collection_fwd.hpp>
 #include <sanguis/messages/server/add_aoe_projectile_fwd.hpp>
 #include <sanguis/messages/server/add_aura_fwd.hpp>
@@ -65,15 +65,15 @@
 #include <sanguis/messages/server/speed_fwd.hpp>
 #include <sanguis/messages/server/weapon_status_fwd.hpp>
 #include <alda/call/friend_dispatcher.hpp>
-#include <sge/font/object_fwd.hpp>
+#include <sge/font/object_ref.hpp>
 #include <sge/gui/renderer/base_unique_ptr.hpp>
 #include <sge/gui/style/const_reference.hpp>
 #include <sge/renderer/screen_size_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
 #include <sge/renderer/target/viewport_fwd.hpp>
-#include <sge/viewport/manager_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <sge/viewport/manager_ref.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/object.hpp>
@@ -97,21 +97,21 @@ class object
 :
 	public sanguis::client::draw::base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		object
 	);
 public:
 	object(
 		fcppt::log::context_reference,
-		sanguis::client::load::context const &,
-		sanguis::client::load::hud::context &,
-		sanguis::client::sound_manager &,
+		sanguis::client::load::context_cref,
+		sanguis::client::load::hud::context_ref,
+		sanguis::client::sound_manager_ref,
 		sge::gui::style::const_reference,
-		sge::renderer::device::ffp &,
-		sge::font::object &,
-		sge::viewport::manager &,
-		sanguis::client::player_health_callback const &,
-		sanguis::client::cursor &,
+		sge::renderer::device::ffp_ref,
+		sge::font::object_ref,
+		sge::viewport::manager_ref,
+		sanguis::client::player_health_callback &&,
+		sanguis::client::cursor_ref,
 		sanguis::client::draw::debug
 	);
 
@@ -151,7 +151,7 @@ private:
 
 	sanguis::client::control::optional_attack_dest
 	translate_attack_dest(
-		sanguis::client::control::cursor_position
+		sanguis::client::control::cursor_position const &
 	) const
 	override;
 
@@ -361,21 +361,21 @@ private:
 
 	sanguis::random_generator random_generator_;
 
-	sanguis::client::sound_manager &sound_manager_;
+	sanguis::client::sound_manager_ref const sound_manager_;
 
 	sanguis::client::load::model::collection const &model_collection_;
 
-	sanguis::client::load::hud::context &hud_resources_;
+	sanguis::client::load::hud::context_ref const hud_resources_;
 
 	sanguis::client::load::auras::context aura_resources_;
 
 	sge::gui::style::const_reference const gui_style_;
 
-	sge::renderer::device::ffp &renderer_;
+	sge::renderer::device::ffp_ref const renderer_;
 
-	sge::font::object &font_;
+	sge::font::object_ref const font_;
 
-	sanguis::client::cursor &cursor_;
+	sanguis::client::cursor_ref const cursor_;
 
 	sge::gui::renderer::base_unique_ptr const gui_renderer_;
 

@@ -5,10 +5,10 @@
 #include <sanguis/client/console/object_fwd.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/object_fwd.hpp>
-#include <sge/console/gfx/object_fwd.hpp>
+#include <sge/console/gfx/object_ref.hpp>
 #include <sge/input/event_base_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/signal/auto_connection_container.hpp>
 
@@ -22,13 +22,13 @@ namespace console
 
 class object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		object
 	);
 public:
 	object(
-		sge::console::gfx::object &,
-		sanguis::client::send_callback const &
+		sge::console::gfx::object_ref,
+		sanguis::client::send_callback &&
 	);
 
 	~object();
@@ -41,14 +41,15 @@ public:
 
 	void
 	draw(
-		sge::renderer::context::ffp &
-	);
+		sge::renderer::context::ffp & // NOLINT(google-runtime-references)
+	); // NOLINT(google-runtime-references)
 
 	void
 	input_event(
 		sge::input::event_base const &
 	);
 
+	[[nodiscard]]
 	sge::console::object &
 	sge_console();
 private:
@@ -57,7 +58,7 @@ private:
 		sge::console::arg_list const &
 	);
 
-	sge::console::gfx::object &gfx_;
+	sge::console::gfx::object_ref const gfx_;
 
 	sanguis::client::send_callback const send_;
 

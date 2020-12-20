@@ -19,6 +19,7 @@
 #include <sanguis/client/load/auras/context_fwd.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/image/color/any/object.hpp>
+#include <fcppt/copy.hpp>
 
 
 sanguis::client::draw2d::entities::other_player::other_player(
@@ -48,7 +49,9 @@ sanguis::client::draw2d::entities::other_player::other_player(
 		_health
 	),
 	name_{
-		_name.get(),
+		fcppt::copy(
+			_name.get()
+		),
 		sge::image::color::any::object{
 			sge::image::color::predef::white()
 		}

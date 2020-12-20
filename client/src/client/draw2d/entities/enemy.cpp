@@ -34,6 +34,7 @@
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/load/model/enemy_path.hpp>
 #include <sge/image/color/any/convert.hpp>
+#include <fcppt/copy.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -99,7 +100,9 @@ sanguis::client::draw2d::entities::enemy::enemy(
 		_enemy_type
 	},
 	name_{
-		_name.get(),
+		fcppt::copy(
+			_name.get()
+		),
 		sanguis::client::draw2d::entities::enemy_color(
 			_enemy_kind
 		)

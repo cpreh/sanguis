@@ -20,7 +20,7 @@ sanguis::client::args::display_mode(
 				_result
 			),
 			[](
-				sge::renderer::screen_size const _size
+				sge::renderer::screen_size const &_size
 			)
 			{
 				return

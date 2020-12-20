@@ -23,9 +23,11 @@ public:
 		sanguis::client::control::key_scale
 	);
 
+	[[nodiscard]]
 	sanguis::client::control::actions::scale_type
 	type() const;
 
+	[[nodiscard]]
 	sanguis::client::control::key_scale
 	get() const;
 private:

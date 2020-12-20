@@ -9,6 +9,7 @@
 #include <sanguis/client/draw2d/sprite/client/object.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_decl.hpp>
 #include <sanguis/client/load/context.hpp>
+#include <sanguis/client/load/context_cref.hpp>
 #include <sanguis/client/load/resource/context.hpp>
 #include <sanguis/client/load/resource/texture_identifier.hpp>
 #include <sanguis/client/load/resource/textures.hpp>
@@ -42,7 +43,7 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::draw2d::scene::background::background(
-	sanguis::client::load::context const &_load_context,
+	sanguis::client::load::context_cref const _load_context,
 	sanguis::client::draw2d::sprite::client::system &_client_system,
 	sge::viewport::manager &_viewport_manager
 )
@@ -51,7 +52,7 @@ sanguis::client::draw2d::scene::background::background(
 		_client_system
 	),
 	texture_(
-		_load_context.resources().textures().load(
+		_load_context->resources().textures().load(
 			sanguis::client::load::resource::texture_identifier(
 				FCPPT_TEXT("background")
 			)

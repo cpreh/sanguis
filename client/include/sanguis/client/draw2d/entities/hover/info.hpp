@@ -21,9 +21,10 @@ class info
 public:
 	explicit
 	info(
-		sanguis::client::draw2d::entities::hover::variant const &
+		sanguis::client::draw2d::entities::hover::variant &&
 	);
 
+	[[nodiscard]]
 	sanguis::client::draw2d::entities::hover::variant const &
 	get() const;
 private:

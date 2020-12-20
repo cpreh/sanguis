@@ -5,7 +5,7 @@
 #include <sanguis/client/draw2d/scene/background_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/client/object_decl.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_fwd.hpp>
-#include <sanguis/client/load/context_fwd.hpp>
+#include <sanguis/client/load/context_cref.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
@@ -29,7 +29,7 @@ class background
 	);
 public:
 	background(
-		sanguis::client::load::context const &,
+		sanguis::client::load::context_cref,
 		sanguis::client::draw2d::sprite::client::system &,
 		sge::viewport::manager &
 	);

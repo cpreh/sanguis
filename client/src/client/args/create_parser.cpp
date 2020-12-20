@@ -134,7 +134,7 @@ sanguis::client::args::create_parser()
 					fcppt::options::make_default_value(
 						fcppt::optional::make(
 							sge::console::gfx::output_line_limit{
-								1000u
+								1000U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 							}
 						)
 					),

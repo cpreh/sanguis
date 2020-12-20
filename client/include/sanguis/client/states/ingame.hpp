@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_STATES_INGAME_HPP_INCLUDED
 #define SANGUIS_CLIENT_STATES_INGAME_HPP_INCLUDED
 
+#include <sanguis/state_override.hpp>
 #include <sanguis/client/events/action_fwd.hpp>
 #include <sanguis/client/states/has_player.hpp>
 #include <sanguis/client/states/ingame_fwd.hpp>
@@ -51,7 +52,8 @@ public:
 		my_context
 	);
 
-	~ingame();
+	~ingame()
+	SANGUIS_STATE_OVERRIDE;
 
 	using
 	result_type

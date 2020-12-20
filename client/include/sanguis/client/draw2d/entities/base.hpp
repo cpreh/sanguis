@@ -6,7 +6,7 @@
 #include <sanguis/client/draw2d/entities/create_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/hover/optional_info_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/center_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -20,7 +20,7 @@ namespace entities
 
 class base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		base
 	);
 protected:
@@ -33,14 +33,17 @@ public:
 	void
 	die();
 
+	[[nodiscard]]
 	virtual
 	bool
 	dead() const = 0;
 
+	[[nodiscard]]
 	virtual
 	sanguis::client::draw2d::sprite::center
 	center() const = 0;
 
+	[[nodiscard]]
 	virtual
 	sanguis::client::draw2d::radius
 	radius() const = 0;
@@ -51,13 +54,16 @@ public:
 		bool
 	) = 0;
 
+	[[nodiscard]]
 	bool
 	may_be_removed() const;
 
+	[[nodiscard]]
 	virtual
 	sanguis::client::draw2d::entities::hover::optional_info
 	hover() const;
 
+	[[nodiscard]]
 	virtual
 	bool
 	cursor_collision(
@@ -73,6 +79,7 @@ public:
 	virtual
 	~base() = 0;
 private:
+	[[nodiscard]]
 	virtual
 	bool
 	is_decayed() const = 0;

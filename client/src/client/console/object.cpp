@@ -8,11 +8,13 @@
 #include <alda/message/init_record.hpp>
 #include <sge/console/arg_list.hpp>
 #include <sge/console/object.hpp>
+#include <sge/console/object_ref.hpp>
 #include <sge/console/callback/function.hpp>
 #include <sge/console/callback/name.hpp>
 #include <sge/console/callback/parameters.hpp>
 #include <sge/console/gfx/input_active.hpp>
 #include <sge/console/gfx/object.hpp>
+#include <sge/console/gfx/object_ref.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/input/event_base.hpp>
 #include <sge/input/focus/event/base.hpp>
@@ -22,28 +24,29 @@
 #include <fcppt/cast/dynamic.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <functional>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::console::object::object(
-	sge::console::gfx::object &_gfx,
-	sanguis::client::send_callback const &_send
+	sge::console::gfx::object_ref const _gfx,
+	sanguis::client::send_callback &&_send
 )
 :
 	gfx_(
 		_gfx
 	),
 	send_(
-		_send
+		std::move(
+			_send
+		)
 	),
 	server_connections_()
 {
 }
 
 sanguis::client::console::object::~object()
-{
-}
+= default;
 
 void
 sanguis::client::console::object::register_server_command(
@@ -52,14 +55,20 @@ sanguis::client::console::object::register_server_command(
 )
 {
 	server_connections_.push_back(
-		gfx_.console_object().insert(
+		gfx_->console_object().insert(
 			sge::console::callback::parameters(
 				sge::console::callback::function{
-					std::bind(
-						&sanguis::client::console::object::server_callback,
-						this,
-						std::placeholders::_1
+					[
+						this
+					](
+						sge::console::arg_list const &_args,
+						sge::console::object_ref
 					)
+					{
+						this->server_callback(
+							_args
+						);
+					}
 				},
 				sge::console::callback::name(
 					sge::font::from_fcppt_string(
@@ -81,7 +90,7 @@ sanguis::client::console::object::draw(
 	sge::renderer::context::ffp &_context
 )
 {
-	gfx_.render(
+	gfx_->render(
 		_context,
 		sge::console::gfx::input_active{
 			true
@@ -108,7 +117,7 @@ sanguis::client::console::object::input_event(
 			> const _focus_event
 		)
 		{
-			gfx_.focus_event(
+			gfx_->focus_event(
 				_focus_event.get()
 			);
 		}
@@ -119,7 +128,7 @@ sge::console::object &
 sanguis::client::console::object::sge_console()
 {
 	return
-		gfx_.console_object();
+		gfx_->console_object();
 }
 
 void

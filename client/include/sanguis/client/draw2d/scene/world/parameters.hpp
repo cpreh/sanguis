@@ -3,6 +3,7 @@
 
 #include <sanguis/client/draw2d/scene/world/parameters_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_fwd.hpp>
+#include <sanguis/client/load/context_cref.hpp>
 #include <sanguis/client/load/context_fwd.hpp>
 #include <sge/viewport/manager_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
@@ -23,7 +24,7 @@ class parameters
 {
 public:
 	parameters(
-		sanguis::client::load::context const &,
+		sanguis::client::load::context_cref,
 		sanguis::client::draw2d::sprite::client::system &,
 		sge::viewport::manager &
 	);
@@ -37,9 +38,7 @@ public:
 	sge::viewport::manager &
 	viewport_manager() const;
 private:
-	fcppt::reference<
-		sanguis::client::load::context const
-	> load_context_;
+	sanguis::client::load::context_cref load_context_;
 
 	fcppt::reference<
 		sanguis::client::draw2d::sprite::client::system

@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_STATES_CONSOLE_HPP_INCLUDED
 #define SANGUIS_CLIENT_STATES_CONSOLE_HPP_INCLUDED
 
+#include <sanguis/state_override.hpp>
 #include <sanguis/client/scoped_pause.hpp>
 #include <sanguis/client/events/action_fwd.hpp>
 #include <sanguis/client/events/input_fwd.hpp>
@@ -59,7 +60,8 @@ public:
 		my_context
 	);
 
-	~console();
+	~console()
+	SANGUIS_STATE_OVERRIDE;
 
 	boost::statechart::result
 	react(

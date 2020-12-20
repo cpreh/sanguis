@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_STATES_MENU_HPP_INCLUDED
 #define SANGUIS_CLIENT_STATES_MENU_HPP_INCLUDED
 
+#include <sanguis/state_override.hpp>
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/events/connected_fwd.hpp>
 #include <sanguis/client/events/input_fwd.hpp>
@@ -12,7 +13,7 @@
 #include <sanguis/client/states/menu_fwd.hpp>
 #include <sanguis/messages/call/result_fwd.hpp>
 #include <sanguis/messages/server/connected_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -42,7 +43,7 @@ class menu
 		sanguis::client::machine
 	>
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		menu
 	);
 public:
@@ -75,7 +76,8 @@ public:
 		my_context
 	);
 
-	~menu();
+	~menu()
+	SANGUIS_STATE_OVERRIDE;
 
 	using
 	result_type

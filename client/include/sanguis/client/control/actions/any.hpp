@@ -19,9 +19,10 @@ class any
 public:
 	explicit
 	any(
-		sanguis::client::control::actions::variant const &
+		sanguis::client::control::actions::variant
 	);
 
+	[[nodiscard]]
 	sanguis::client::control::actions::variant const &
 	get() const;
 private:

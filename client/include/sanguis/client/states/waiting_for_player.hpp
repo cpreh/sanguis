@@ -1,6 +1,7 @@
 #ifndef SANGUIS_CLIENT_STATES_WAITING_FOR_PLAYER_HPP_INCLUDED
 #define SANGUIS_CLIENT_STATES_WAITING_FOR_PLAYER_HPP_INCLUDED
 
+#include <sanguis/state_override.hpp>
 #include <sanguis/client/events/action_fwd.hpp>
 #include <sanguis/client/events/message_fwd.hpp>
 #include <sanguis/client/states/running.hpp>
@@ -57,7 +58,8 @@ public:
 		my_context
 	);
 
-	~waiting_for_player();
+	~waiting_for_player()
+	SANGUIS_STATE_OVERRIDE;
 
 	boost::statechart::result
 	react(

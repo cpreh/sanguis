@@ -6,11 +6,13 @@
 #include <sge/image/size_type.hpp>
 #include <sge/image/color/any/object_fwd.hpp>
 #include <sge/image2d/system_fwd.hpp>
+#include <sge/image2d/system_ref.hpp>
 #include <sge/renderer/device/core_fwd.hpp>
+#include <sge/renderer/device/core_ref.hpp>
 #include <sge/texture/const_optional_part_ref_fwd.hpp>
 #include <sge/texture/const_part_unique_ptr.hpp>
 #include <sge/texture/part_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -30,49 +32,57 @@ namespace resource
 
 class textures
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		textures
 	);
 public:
+	[[nodiscard]]
 	sge::texture::part const &
 	load(
 		sanguis::client::load::resource::texture_identifier const &
 	) const;
 
+	[[nodiscard]]
 	sge::texture::part const &
 	load(
 		std::filesystem::path const &
 	) const;
 
+	[[nodiscard]]
 	sge::texture::const_optional_part_ref
 	load_opt(
 		std::filesystem::path const &
 	) const;
 
+	[[nodiscard]]
 	sge::texture::part const &
 	missing_texture() const;
 
-	// TODO: Remove this
+	// TODO(philipp): Remove this
+	[[nodiscard]]
 	sge::image2d::system &
 	image_system() const;
 
-	// TODO: Remove this
+	// TODO(philipp): Remove this
+	[[nodiscard]]
 	sge::renderer::device::core &
 	renderer() const;
 
 	textures(
 		fcppt::log::context_reference,
-		sge::renderer::device::core &,
-		sge::image2d::system &
+		sge::renderer::device::core_ref,
+		sge::image2d::system_ref
 	);
 
 	~textures();
 private:
+	[[nodiscard]]
 	sge::texture::const_part_unique_ptr
 	do_load(
 		sanguis::client::load::resource::texture_identifier const &
 	) const;
 
+	[[nodiscard]]
 	sge::texture::const_part_unique_ptr
 	do_load_inner(
 		std::filesystem::path const &
@@ -96,9 +106,9 @@ private:
 
 	mutable fcppt::log::object log_;
 
-	sge::renderer::device::core &renderer_;
+	sge::renderer::device::core_ref const renderer_;
 
-	sge::image2d::system &image_loader_;
+	sge::image2d::system_ref const image_loader_;
 
 	mutable sanguis::client::load::resource::texture_name_map texture_names_;
 

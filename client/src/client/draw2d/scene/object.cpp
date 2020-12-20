@@ -5,11 +5,12 @@
 #include <sanguis/random_seed.hpp>
 #include <sanguis/update_diff_clock.hpp>
 #include <sanguis/client/cursor.hpp>
+#include <sanguis/client/cursor_ref.hpp>
 #include <sanguis/client/health.hpp>
 #include <sanguis/client/max_health.hpp>
 #include <sanguis/client/player_health_callback.hpp>
 #include <sanguis/client/slowed_duration.hpp>
-#include <sanguis/client/sound_manager_fwd.hpp>
+#include <sanguis/client/sound_manager_ref.hpp>
 #include <sanguis/client/weapon_description_from_message.hpp>
 #include <sanguis/client/world_parameters.hpp>
 #include <sanguis/client/control/attack_dest.hpp>
@@ -82,7 +83,8 @@
 #include <sanguis/client/draw2d/translate/speed.hpp>
 #include <sanguis/client/draw2d/translate/vector_from_client.hpp>
 #include <sanguis/client/load/context.hpp>
-#include <sanguis/client/load/hud/context_fwd.hpp>
+#include <sanguis/client/load/context_cref.hpp>
+#include <sanguis/client/load/hud/context_ref.hpp>
 #include <sanguis/client/load/model/context.hpp>
 #include <sanguis/client/load/resource/context.hpp>
 #include <sanguis/creator/name.hpp>
@@ -147,7 +149,7 @@
 #include <sanguis/messages/types/level.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <sge/font/lit.hpp>
-#include <sge/font/object_fwd.hpp>
+#include <sge/font/object_ref.hpp>
 #include <sge/gui/renderer/base.hpp>
 #include <sge/gui/renderer/create_stateless.hpp>
 #include <sge/gui/style/const_reference.hpp>
@@ -158,6 +160,7 @@
 #include <sge/renderer/context/ffp.hpp>
 #include <sge/renderer/device/core.hpp>
 #include <sge/renderer/device/ffp.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
 #include <sge/renderer/state/ffp/transform/mode.hpp>
 #include <sge/renderer/state/ffp/transform/object.hpp>
 #include <sge/renderer/state/ffp/transform/object_unique_ptr.hpp>
@@ -169,7 +172,7 @@
 #include <sge/sprite/projection_matrix.hpp>
 #include <sge/sprite/state/default_options.hpp>
 #include <sge/sprite/state/scoped.hpp>
-#include <sge/viewport/manager_fwd.hpp>
+#include <sge/viewport/manager_ref.hpp>
 #include <fcppt/format.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/literal.hpp>
@@ -215,15 +218,15 @@
 
 sanguis::client::draw2d::scene::object::object(
 	fcppt::log::context_reference const _log_context,
-	sanguis::client::load::context const &_resources,
-	sanguis::client::load::hud::context &_hud_resources,
-	sanguis::client::sound_manager &_sound_manager,
+	sanguis::client::load::context_cref const _resources,
+	sanguis::client::load::hud::context_ref const _hud_resources,
+	sanguis::client::sound_manager_ref const _sound_manager,
 	sge::gui::style::const_reference const _gui_style,
-	sge::renderer::device::ffp &_renderer,
-	sge::font::object &_font,
-	sge::viewport::manager &_viewport_manager,
-	sanguis::client::player_health_callback const &_player_health_callback,
-	sanguis::client::cursor &_cursor,
+	sge::renderer::device::ffp_ref const _renderer,
+	sge::font::object_ref const _font,
+	sge::viewport::manager_ref const _viewport_manager,
+	sanguis::client::player_health_callback &&_player_health_callback,
+	sanguis::client::cursor_ref const _cursor,
 	sanguis::client::draw::debug const _debug
 )
 :
@@ -246,13 +249,13 @@ sanguis::client::draw2d::scene::object::object(
 		_sound_manager
 	),
 	model_collection_(
-		_resources.models()()
+		_resources->models()()
 	),
 	hud_resources_(
 		_hud_resources
 	),
 	aura_resources_(
-		_resources.resources().textures()
+		_resources->resources().textures()
 	),
 	gui_style_(
 		_gui_style
@@ -271,33 +274,31 @@ sanguis::client::draw2d::scene::object::object(
 			fcppt::reference_to_base<
 				sge::renderer::device::core
 			>(
-				fcppt::make_ref(
-					_renderer
-				)
+				_renderer
 			)
 		)
 	),
 	player_health_callback_(
-		_player_health_callback
+		std::move(
+			_player_health_callback
+		)
 	),
 	sprite_states_(
 		fcppt::reference_to_base<
 			sge::renderer::device::core
 		>(
-			fcppt::make_ref(
-				renderer_
-			)
+			renderer_
 		),
 		sge::sprite::state::parameters<
 			sanguis::client::draw2d::sprite::state_choices
 		>()
 	),
 	normal_system_(
-		renderer_,
+		renderer_.get(),
 		sprite_states_
 	),
 	client_system_(
-		renderer_,
+		renderer_.get(),
 		sprite_states_
 	),
 	world_(
@@ -306,12 +307,12 @@ sanguis::client::draw2d::scene::object::object(
 		>(
 			_log_context,
 			random_generator_,
-			renderer_,
-			_resources.resources().textures(),
+			renderer_.get(),
+			_resources->resources().textures(),
 			sanguis::client::draw2d::scene::world::parameters{
 				_resources,
 				client_system_,
-				_viewport_manager
+				_viewport_manager.get()
 			},
 			_debug
 		)
@@ -324,7 +325,7 @@ sanguis::client::draw2d::scene::object::object(
 		fcppt::make_unique_ptr<
 			sanguis::client::draw2d::scene::camera
 		>(
-			_renderer
+			_renderer.get()
 		)
 	),
 	player_weapons_(),
@@ -336,13 +337,13 @@ sanguis::client::draw2d::scene::object::object(
 		>(
 			_resources,
 			client_system_,
-			_viewport_manager
+			_viewport_manager.get()
 		)
 	),
 	hover_(),
 	render_states_(
 		sanguis::client::draw2d::scene::state::create(
-			renderer_
+			renderer_.get()
 		)
 	)
 {
@@ -541,7 +542,7 @@ sanguis::client::draw2d::scene::object::draw(
 		)
 		{
 			sge::renderer::state::ffp::transform::object_unique_ptr const projection_state(
-				renderer_.create_transform_state(
+				renderer_->create_transform_state(
 					sge::renderer::state::ffp::transform::parameters(
 						_projection_matrix
 					)
@@ -562,7 +563,7 @@ sanguis::client::draw2d::scene::object::draw(
 			sge::sprite::state::scoped<
 				sanguis::client::draw2d::sprite::state_choices
 			> const scoped_state(
-				renderer_,
+				renderer_.get(),
 				fcppt::reference_to_base<
 					sge::renderer::context::core
 				>(
@@ -583,7 +584,7 @@ sanguis::client::draw2d::scene::object::draw(
 
 			{
 				sge::renderer::state::ffp::transform::object_unique_ptr const transform_state(
-					renderer_.create_transform_state(
+					renderer_->create_transform_state(
 						sge::renderer::state::ffp::transform::parameters(
 							sanguis::client::draw2d::scene::translation_matrix(
 								_translation
@@ -652,7 +653,7 @@ sanguis::client::draw2d::scene::object::draw(
 			);
 		},
 		sge::sprite::projection_matrix(
-			renderer_.onscreen_target().viewport()
+			renderer_->onscreen_target().viewport()
 		),
 		camera_->translation()
 	);
@@ -663,7 +664,7 @@ sanguis::client::draw2d::scene::object::overlay(
 	sge::renderer::context::ffp &_render_context
 )
 {
-	cursor_.draw(
+	cursor_->draw(
 		_render_context
 	);
 }
@@ -697,7 +698,7 @@ sanguis::client::draw2d::scene::object::pause(
 
 sanguis::client::control::optional_attack_dest
 sanguis::client::draw2d::scene::object::translate_attack_dest(
-	sanguis::client::control::cursor_position const _cursor_position
+	sanguis::client::control::cursor_position const &_cursor_position
 ) const
 {
 	return
@@ -797,9 +798,9 @@ sanguis::client::draw2d::scene::object::hover_display(
 						sanguis::client::draw2d::scene::hover::parameters(
 							gui_style_,
 							*gui_renderer_,
-							renderer_,
-							font_,
-							hud_resources_,
+							renderer_.get(),
+							font_.get(),
+							hud_resources_.get(),
 							player_weapons_,
 							_entity.center(),
 							_entity.radius()
@@ -926,7 +927,7 @@ sanguis::client::draw2d::scene::object::load_parameters()
 		sanguis::client::draw2d::entities::load_parameters{
 			diff_clock_,
 			random_generator_,
-			sound_manager_,
+			sound_manager_.get(),
 			normal_system_,
 			model_collection_
 		};
@@ -1573,7 +1574,7 @@ sanguis::client::draw2d::scene::object::operator()(
 					sanguis::client::draw2d::factory::text(
 						diff_clock_,
 						normal_system_,
-						font_,
+						font_.get(),
 						SGE_FONT_LIT("Level up"),
 						_center.get(),
 						sanguis::client::draw2d::sprite::normal::white()

@@ -7,7 +7,7 @@
 #include <sanguis/client/draw/base_fwd.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -21,7 +21,7 @@ class base
 :
 	public sanguis::client::control::environment
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		base
 	);
 protected:
@@ -46,14 +46,14 @@ public:
 	virtual
 	void
 	draw(
-		sge::renderer::context::ffp &
-	) = 0;
+		sge::renderer::context::ffp & // NOLINT(google-runtime-references)
+	) = 0; // NOLINT(google-runtime-references)
 
 	virtual
 	void
 	overlay(
-		sge::renderer::context::ffp &
-	) = 0;
+		sge::renderer::context::ffp & // NOLINT(google-runtime-references)
+	) = 0; // NOLINT(google-runtime-references)
 
 	virtual
 	void

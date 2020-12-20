@@ -36,6 +36,7 @@ set(
 	include/sanguis/client/config/settings/file.hpp
 	include/sanguis/client/config/settings/object.hpp
 	include/sanguis/client/config/settings/object_fwd.hpp
+	include/sanguis/client/config/settings/object_ref.hpp
 	include/sanguis/client/config/settings/optional_section.hpp
 	include/sanguis/client/config/settings/optional_section_fwd.hpp
 	include/sanguis/client/config/settings/saver.hpp
@@ -73,6 +74,7 @@ set(
 	include/sanguis/client/control/direction_vector.hpp
 	include/sanguis/client/control/direction_vector_fwd.hpp
 	include/sanguis/client/control/environment.hpp
+	include/sanguis/client/control/environment_cref.hpp
 	include/sanguis/client/control/environment_fwd.hpp
 	include/sanguis/client/control/input_translator.hpp
 	include/sanguis/client/control/input_translator_fwd.hpp
@@ -86,6 +88,7 @@ set(
 	include/sanguis/client/create_systems.hpp
 	include/sanguis/client/cursor.hpp
 	include/sanguis/client/cursor_fwd.hpp
+	include/sanguis/client/cursor_ref.hpp
 	include/sanguis/client/dispatch.hpp
 	include/sanguis/client/dispatch_default_function.hpp
 	include/sanguis/client/draw/base.hpp
@@ -501,9 +504,11 @@ set(
 	include/sanguis/client/load/auras/context_fwd.hpp
 	include/sanguis/client/load/auras/lookup_name.hpp
 	include/sanguis/client/load/context.hpp
+	include/sanguis/client/load/context_cref.hpp
 	include/sanguis/client/load/context_fwd.hpp
 	include/sanguis/client/load/hud/context.hpp
 	include/sanguis/client/load/hud/context_fwd.hpp
+	include/sanguis/client/load/hud/context_ref.hpp
 	include/sanguis/client/load/hud/make_weapon_icons.hpp
 	include/sanguis/client/load/hud/weapon_icon_map.hpp
 	include/sanguis/client/load/hud/weapon_type.hpp
@@ -558,6 +563,7 @@ set(
 	include/sanguis/client/load/resource/texture_identifier.hpp
 	include/sanguis/client/load/resource/texture_name_map.hpp
 	include/sanguis/client/load/resource/textures.hpp
+	include/sanguis/client/load/resource/textures_cref.hpp
 	include/sanguis/client/load/resource/textures_fwd.hpp
 	include/sanguis/client/load/tiles/context.hpp
 	include/sanguis/client/load/tiles/context_fwd.hpp
@@ -625,6 +631,7 @@ set(
 	include/sanguis/client/slowed_duration_fwd.hpp
 	include/sanguis/client/sound_manager.hpp
 	include/sanguis/client/sound_manager_fwd.hpp
+	include/sanguis/client/sound_manager_ref.hpp
 	include/sanguis/client/start.hpp
 	include/sanguis/client/states/console.hpp
 	include/sanguis/client/states/has_player.hpp

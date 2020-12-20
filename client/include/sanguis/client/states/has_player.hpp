@@ -2,6 +2,7 @@
 #define SANGUIS_CLIENT_STATES_HAS_PLAYER_HPP_INCLUDED
 
 #include <sanguis/perk_type_fwd.hpp>
+#include <sanguis/state_override.hpp>
 #include <sanguis/client/control/action_handler_fwd.hpp>
 #include <sanguis/client/events/action_fwd.hpp>
 #include <sanguis/client/events/message_fwd.hpp>
@@ -69,7 +70,8 @@ public:
 		my_context
 	);
 
-	~has_player();
+	~has_player()
+	SANGUIS_STATE_OVERRIDE;
 
 	boost::statechart::result
 	react(

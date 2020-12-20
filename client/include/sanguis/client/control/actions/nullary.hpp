@@ -22,6 +22,7 @@ public:
 		sanguis::client::control::actions::nullary_type
 	);
 
+	[[nodiscard]]
 	sanguis::client::control::actions::nullary_type
 	type() const;
 private:

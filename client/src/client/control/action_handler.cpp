@@ -9,6 +9,7 @@
 #include <sanguis/client/control/cursor_position.hpp>
 #include <sanguis/client/control/direction_vector.hpp>
 #include <sanguis/client/control/environment.hpp>
+#include <sanguis/client/control/environment_cref.hpp>
 #include <sanguis/client/control/key_scale.hpp>
 #include <sanguis/client/control/optional_cursor_position.hpp>
 #include <sanguis/client/control/scalar.hpp>
@@ -39,7 +40,9 @@
 #include <sge/font/lit.hpp>
 #include <sge/font/string.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/copy.hpp>
 #include <fcppt/make_ref.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/unit.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/cast/size_fun.hpp>
@@ -56,7 +59,7 @@
 #include <fcppt/variant/match.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
-#include <functional>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -64,13 +67,15 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::control::action_handler::action_handler(
-	sanguis::client::send_callback const &_send,
-	sanguis::client::control::environment const &_environment,
-	sge::console::object &_console
+	sanguis::client::send_callback &&_send,
+	sanguis::client::control::environment_cref const _environment,
+	sge::console::object_ref const _console
 )
 :
 	send_(
-		_send
+		std::move(
+			_send
+		)
 	),
 	environment_(
 		_environment
@@ -78,7 +83,7 @@ sanguis::client::control::action_handler::action_handler(
 	rotation_timer_(
 		sanguis::timer::parameters(
 			std::chrono::milliseconds(
-				100
+				100 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			)
 		)
 	),
@@ -210,36 +215,55 @@ sanguis::client::control::action_handler::action_handler(
 FCPPT_PP_POP_WARNING
 
 sanguis::client::control::action_handler::~action_handler()
-{
-}
+= default;
 
 void
 sanguis::client::control::action_handler::handle_action(
-	sanguis::client::control::actions::any const &_action
+	sanguis::client::control::actions::any const &_action_variant
 )
 {
 	fcppt::variant::match(
-		_action.get(),
-		std::bind(
-			&sanguis::client::control::action_handler::handle_binary_action,
-			this,
-			std::placeholders::_1
-		),
-		std::bind(
-			&sanguis::client::control::action_handler::handle_cursor_action,
-			this,
-			std::placeholders::_1
-		),
-		std::bind(
-			&sanguis::client::control::action_handler::handle_nullary_action,
-			this,
-			std::placeholders::_1
-		),
-		std::bind(
-			&sanguis::client::control::action_handler::handle_scale_action,
-			this,
-			std::placeholders::_1
+		_action_variant.get(),
+		[
+			this
+		](
+			sanguis::client::control::actions::binary const &_action
 		)
+		{
+			this->handle_binary_action(
+				_action
+			);
+		},
+		[
+			this
+		](
+			sanguis::client::control::actions::cursor const &_action
+		)
+		{
+			this->handle_cursor_action(
+				_action
+			);
+		},
+		[
+			this
+		](
+			sanguis::client::control::actions::nullary const &_action
+		)
+		{
+			this->handle_nullary_action(
+				_action
+			);
+		},
+		[
+			this
+		](
+			sanguis::client::control::actions::scale const &_action
+		)
+		{
+			this->handle_scale_action(
+				_action
+			);
+		}
 	);
 }
 
@@ -288,24 +312,26 @@ sanguis::client::control::action_handler::handle_cursor_action(
 			)
 		)
 	)
+	{
 		return;
+	}
 
 	fcppt::optional::maybe_void(
 		cursor_position_,
 		[
 			this
 		](
-			sanguis::client::control::cursor_position const _pos
+			sanguis::client::control::cursor_position const &_pos
 		)
 		{
 			fcppt::optional::maybe_void(
-				environment_.translate_attack_dest(
+				environment_->translate_attack_dest(
 					_pos
 				),
 				[
 					this
 				](
-					sanguis::client::control::attack_dest const _dest
+					sanguis::client::control::attack_dest const &_dest
 				)
 				{
 					send_(
@@ -398,14 +424,18 @@ sanguis::client::control::action_handler::handle_scale_action(
 	{
 	case sanguis::client::control::actions::scale_type::horizontal_move:
 		this->update_direction(
-			direction_.x(),
+			fcppt::make_ref(
+				direction_.x()
+			),
 			scale
 		);
 
 		return;
 	case sanguis::client::control::actions::scale_type::vertical_move:
 		this->update_direction(
-			direction_.y(),
+			fcppt::make_ref(
+				direction_.y()
+			),
 			scale
 		);
 
@@ -424,13 +454,15 @@ sanguis::client::control::action_handler::cursor_position() const
 
 void
 sanguis::client::control::action_handler::update_direction(
-	sanguis::client::control::scalar &_result,
+	fcppt::reference<
+		sanguis::client::control::scalar
+	> const _result,
 	sanguis::client::control::key_scale const _scale
 )
 {
-	_result =
+	_result.get() =
 		fcppt::math::clamp(
-			_result + _scale,
+			_result.get() + _scale,
 			sanguis::client::control::axis_direction_min(),
 			sanguis::client::control::axis_direction_max()
 		);
@@ -461,6 +493,7 @@ sanguis::client::control::action_handler::handle_shooting(
 	if(
 		_value
 	)
+	{
 		send_(
 			sanguis::messages::client::create(
 				sanguis::messages::client::start_shooting{
@@ -468,7 +501,9 @@ sanguis::client::control::action_handler::handle_shooting(
 				}
 			)
 		);
+	}
 	else
+	{
 		send_(
 			sanguis::messages::client::create(
 				sanguis::messages::client::stop_shooting{
@@ -476,6 +511,7 @@ sanguis::client::control::action_handler::handle_shooting(
 				}
 			)
 		);
+	}
 }
 
 void
@@ -509,8 +545,7 @@ sanguis::client::control::action_handler::handle_reload(
 void
 sanguis::client::control::action_handler::send_cheat(
 	sanguis::cheat_type const _cheat,
-	sge::console::arg_list const &,
-	sge::console::object_ref
+	sge::console::arg_list const &
 )
 {
 	send_(
@@ -524,34 +559,38 @@ sanguis::client::control::action_handler::send_cheat(
 
 fcppt::signal::auto_connection
 sanguis::client::control::action_handler::cheat_connection(
-	sge::console::object &_console,
+	sge::console::object_ref const _console,
 	sanguis::cheat_type const _cheat,
 	sge::console::callback::name const &_name,
 	sge::console::callback::short_description const &_description
 )
 {
 	return
-		_console.insert(
+		_console->insert(
 			sge::console::callback::parameters(
 				sge::console::callback::function{
-					std::bind(
-						&sanguis::client::control::action_handler::send_cheat,
-						this,
+					[
 						_cheat,
-						std::placeholders::_1,
-						std::placeholders::_2
+						this
+					](
+						sge::console::arg_list const &_args,
+						sge::console::object_ref
 					)
+					{
+						this->send_cheat(
+							_cheat,
+							_args
+						);
+					}
 				},
-				// TODO: Move
-				sge::console::callback::name{
+				fcppt::copy(
 					_name
-				}
+				)
 			)
 			.short_description(
-				// TODO: Move
-				sge::font::string{
+				fcppt::copy(
 					_description.get()
-				}
+				)
 			)
 		);
 }

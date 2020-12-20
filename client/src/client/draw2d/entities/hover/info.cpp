@@ -1,13 +1,18 @@
 #include <sanguis/client/draw2d/entities/hover/info.hpp>
 #include <sanguis/client/draw2d/entities/hover/variant.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::draw2d::entities::hover::info::info(
-	sanguis::client::draw2d::entities::hover::variant const &_impl
+	sanguis::client::draw2d::entities::hover::variant &&_impl
 )
 :
 	impl_{
-		_impl
+		std::move(
+			_impl
+		)
 	}
 {
 }

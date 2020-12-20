@@ -18,10 +18,10 @@
 #include <sge/font/added_unique_ptr.hpp>
 #include <sge/font/object_unique_ptr.hpp>
 #include <sge/gui/style/base_unique_ptr.hpp>
-#include <sge/renderer/device/core_fwd.hpp>
+#include <sge/renderer/device/core_ref.hpp>
 #include <sge/timer/absolute_decl.hpp>
 #include <awl/main/exit_code.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/scoped_state_machine.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/log/context_reference.hpp>
@@ -38,7 +38,7 @@ class object
 :
 	public sanguis::client::object_base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		object
 	);
 public:
@@ -50,6 +50,7 @@ public:
 	~object()
 	override;
 private:
+	[[nodiscard]]
 	awl::main::exit_code
 	run()
 	override;
@@ -65,6 +66,7 @@ private:
 		alda::net::port
 	);
 
+	[[nodiscard]]
 	awl::main::exit_code
 	quit_server();
 
@@ -88,7 +90,7 @@ private:
 
 	systems_unique_ptr const sys_;
 
-	sge::renderer::device::core &renderer_;
+	sge::renderer::device::core_ref const renderer_;
 
 	sge::font::added_unique_ptr const added_font_;
 

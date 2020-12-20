@@ -4,7 +4,7 @@
 #include <sanguis/client/load/context_fwd.hpp>
 #include <sanguis/client/load/model/collection_fwd.hpp>
 #include <sanguis/client/load/resource/context_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>
 
@@ -20,10 +20,11 @@ namespace model
 
 class context
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		context
 	);
 public:
+	[[nodiscard]]
 	sanguis::client::load::model::collection const &
 	operator()() const;
 private:

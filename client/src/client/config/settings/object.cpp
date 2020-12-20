@@ -32,7 +32,7 @@ FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::config::settings::object::object(
 	fcppt::log::context_reference const _log_context,
-	std::filesystem::path const &_path
+	std::filesystem::path &&_path
 )
 :
 	log_{
@@ -45,7 +45,9 @@ sanguis::client::config::settings::object::object(
 		)
 	},
 	path_{
-		_path
+		std::move(
+			_path
+		)
 	},
 	start_{
 		[
@@ -105,7 +107,7 @@ sanguis::client::config::settings::object::object(
 								sge::parse::ini::section_vector{}
 							};
 					},
-					// TODO: either::from?
+					// TODO(philipp): either::from?
 					[](
 						sge::parse::ini::start &&_start
 					)
@@ -126,8 +128,7 @@ sanguis::client::config::settings::object::object(
 FCPPT_PP_POP_WARNING
 
 sanguis::client::config::settings::object::~object()
-{
-}
+= default;
 
 sge::parse::ini::start &
 sanguis::client::config::settings::object::sections()

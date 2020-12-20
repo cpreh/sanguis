@@ -33,6 +33,8 @@
 #include <sanguis/messages/server/available_perks.hpp>
 #include <sanguis/messages/server/level_up.hpp>
 #include <sanguis/messages/server/remove_id.hpp>
+#include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/context_fwd.hpp>
@@ -82,12 +84,16 @@ sanguis::client::states::has_player::has_player(
 					sanguis::client::machine
 				>()
 			),
-			this->context<
-				sanguis::client::states::running
-			>().control_environment(),
-			this->context<
-				sanguis::client::states::running
-			>().console().sge_console()
+			fcppt::make_cref(
+				this->context<
+					sanguis::client::states::running
+				>().control_environment()
+			),
+			fcppt::make_ref(
+				this->context<
+					sanguis::client::states::running
+				>().console().sge_console()
+			)
 		)
 	),
 	perk_state_(

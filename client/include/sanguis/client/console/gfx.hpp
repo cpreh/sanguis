@@ -1,14 +1,14 @@
 #ifndef SANGUIS_CLIENT_CONSOLE_GFX_HPP_INCLUDED
 #define SANGUIS_CLIENT_CONSOLE_GFX_HPP_INCLUDED
 
-#include <sge/console/object_fwd.hpp>
+#include <sge/console/object_ref.hpp>
 #include <sge/console/gfx/object.hpp>
 #include <sge/console/gfx/output_line_limit_fwd.hpp>
-#include <sge/font/object_fwd.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/font/object_ref.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
 #include <sge/renderer/target/viewport_fwd.hpp>
-#include <sge/viewport/manager_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <sge/viewport/manager_ref.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 
 
@@ -21,20 +21,21 @@ namespace console
 
 class gfx
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		gfx
 	);
 public:
 	gfx(
-		sge::console::object &,
-		sge::renderer::device::ffp &,
-		sge::font::object &,
-		sge::viewport::manager &,
+		sge::console::object_ref,
+		sge::renderer::device::ffp_ref,
+		sge::font::object_ref,
+		sge::viewport::manager_ref,
 		sge::console::gfx::output_line_limit
 	);
 
 	~gfx();
 
+	[[nodiscard]]
 	sge::console::gfx::object &
 	get();
 private:
