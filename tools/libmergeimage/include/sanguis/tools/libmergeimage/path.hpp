@@ -14,11 +14,12 @@ namespace tools
 namespace libmergeimage
 {
 
-typedef
+using
+path
+=
 std::vector<
 	fcppt::string
->
-path;
+>;
 
 }
 }

@@ -21,9 +21,9 @@ namespace impl
 
 sanguis::tools::libmergeimage::image
 make_image(
-	sge::image2d::system &,
+	sge::image2d::system &, // NOLINT(google-runtime-references)
 	std::filesystem::path const &,
-	sanguis::tools::libmergeimage::impl::cell_size,
+	sanguis::tools::libmergeimage::impl::cell_size const &,
 	sanguis::tools::libmergeimage::impl::path_vector
 );
 

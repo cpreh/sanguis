@@ -1,5 +1,33 @@
 set(
 	SANGUIS_TOOLS_LIBMERGEIMAGE_FILES
+	impl/include/sanguis/tools/libmergeimage/impl/best_size.hpp
+	impl/include/sanguis/tools/libmergeimage/impl/calc_cell_size.hpp
+	impl/include/sanguis/tools/libmergeimage/impl/cell_size.hpp
+	impl/include/sanguis/tools/libmergeimage/impl/cell_size_fwd.hpp
+	impl/include/sanguis/tools/libmergeimage/impl/cells_in_dim.hpp
+	impl/include/sanguis/tools/libmergeimage/impl/convert_path.hpp
+	impl/include/sanguis/tools/libmergeimage/impl/count_maximum.hpp
+	impl/include/sanguis/tools/libmergeimage/impl/count_maximum_fwd.hpp
+	impl/include/sanguis/tools/libmergeimage/impl/fold_paths.hpp
+	impl/include/sanguis/tools/libmergeimage/impl/gather_paths.hpp
+	impl/include/sanguis/tools/libmergeimage/impl/make_image.hpp
+	impl/include/sanguis/tools/libmergeimage/impl/make_maximum_count.hpp
+	impl/include/sanguis/tools/libmergeimage/impl/max_exponent.hpp
+	impl/include/sanguis/tools/libmergeimage/impl/merge_paths.hpp
+	impl/include/sanguis/tools/libmergeimage/impl/path_vector.hpp
+	impl/include/sanguis/tools/libmergeimage/impl/path_vector_vector.hpp
+	impl/include/sanguis/tools/libmergeimage/impl/pow2.hpp
+	impl/include/sanguis/tools/libmergeimage/impl/tree_depth.hpp
+	impl/src/best_size.cpp
+	impl/src/calc_cell_size.cpp
+	impl/src/cells_in_dim.cpp
+	impl/src/convert_path.cpp
+	impl/src/fold_paths.cpp
+	impl/src/gather_paths.cpp
+	impl/src/make_image.cpp
+	impl/src/make_maximum_count.cpp
+	impl/src/merge_paths.cpp
+	impl/src/pow2.cpp
 	include/sanguis/tools/libmergeimage/count_type.hpp
 	include/sanguis/tools/libmergeimage/exception.hpp
 	include/sanguis/tools/libmergeimage/image.hpp
@@ -22,34 +50,6 @@ set(
 	include/sanguis/tools/libmergeimage/to_model.hpp
 	src/exception.cpp
 	src/image.cpp
-	src/impl/best_size.cpp
-	src/impl/calc_cell_size.cpp
-	src/impl/cells_in_dim.cpp
-	src/impl/convert_path.cpp
-	src/impl/fold_paths.cpp
-	src/impl/gather_paths.cpp
-	src/impl/make_image.cpp
-	src/impl/make_maximum_count.cpp
-	src/impl/merge_paths.cpp
-	src/impl/pow2.cpp
-	src/include/sanguis/tools/libmergeimage/impl/best_size.hpp
-	src/include/sanguis/tools/libmergeimage/impl/calc_cell_size.hpp
-	src/include/sanguis/tools/libmergeimage/impl/cell_size.hpp
-	src/include/sanguis/tools/libmergeimage/impl/cell_size_fwd.hpp
-	src/include/sanguis/tools/libmergeimage/impl/cells_in_dim.hpp
-	src/include/sanguis/tools/libmergeimage/impl/convert_path.hpp
-	src/include/sanguis/tools/libmergeimage/impl/count_maximum.hpp
-	src/include/sanguis/tools/libmergeimage/impl/count_maximum_fwd.hpp
-	src/include/sanguis/tools/libmergeimage/impl/fold_paths.hpp
-	src/include/sanguis/tools/libmergeimage/impl/gather_paths.hpp
-	src/include/sanguis/tools/libmergeimage/impl/make_image.hpp
-	src/include/sanguis/tools/libmergeimage/impl/make_maximum_count.hpp
-	src/include/sanguis/tools/libmergeimage/impl/max_exponent.hpp
-	src/include/sanguis/tools/libmergeimage/impl/merge_paths.hpp
-	src/include/sanguis/tools/libmergeimage/impl/path_vector.hpp
-	src/include/sanguis/tools/libmergeimage/impl/path_vector_vector.hpp
-	src/include/sanguis/tools/libmergeimage/impl/pow2.hpp
-	src/include/sanguis/tools/libmergeimage/impl/tree_depth.hpp
 	src/merge_images.cpp
 	src/merge_result.cpp
 	src/path_count_pair.cpp
@@ -62,6 +62,7 @@ set(
 sanguis_add_library(
 	tools_libmergeimage
 	"${SANGUIS_TOOLS_LIBMERGEIMAGE_FILES}"
+	HAS_IMPL_DIR
 	DEPS
 		${sanguis_core_TARGET}
 		${sanguis_model_TARGET}
@@ -71,6 +72,4 @@ sanguis_add_library(
 		${fcppt_core_TARGET}
 		${fcppt_filesystem_TARGET}
 		${FCPPT_UTILS_FILESYSTEM_LIBRARIES}
-	INCLUDES
-		"${CMAKE_CURRENT_SOURCE_DIR}/src/include"
 )

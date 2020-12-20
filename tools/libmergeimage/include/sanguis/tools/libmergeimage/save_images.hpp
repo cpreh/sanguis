@@ -17,10 +17,11 @@ namespace tools
 namespace libmergeimage
 {
 
+[[nodiscard]]
 SANGUIS_TOOLS_LIBMERGEIMAGE_SYMBOL
 sanguis::tools::libmergeimage::saved_image_vector
 save_images(
-	sge::image2d::system &,
+	sge::image2d::system &, // NOLINT(google-runtime-references)
 	std::filesystem::path const &,
 	sanguis::tools::libmergeimage::image_vector const &
 );

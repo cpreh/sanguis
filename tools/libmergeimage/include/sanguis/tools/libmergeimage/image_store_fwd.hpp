@@ -11,9 +11,10 @@ namespace tools
 namespace libmergeimage
 {
 
-typedef
-sge::image2d::store::rgba8
-image_store;
+using
+image_store
+=
+sge::image2d::store::rgba8;
 
 }
 }

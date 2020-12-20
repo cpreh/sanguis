@@ -13,9 +13,10 @@ namespace tools
 namespace libmergeimage
 {
 
-typedef
-std::size_t
-count_type;
+using
+count_type
+=
+std::size_t;
 
 }
 }

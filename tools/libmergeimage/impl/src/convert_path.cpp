@@ -12,9 +12,7 @@ sanguis::tools::libmergeimage::impl::convert_path(
 	std::filesystem::path const &_path
 )
 {
-	// TODO: Is there a better way to express this?
-
-	sanguis::tools::libmergeimage::path result;
+	sanguis::tools::libmergeimage::path result{};
 
 	for(
 		std::filesystem::path const &elem
@@ -27,7 +25,9 @@ sanguis::tools::libmergeimage::impl::convert_path(
 			==
 			sanguis::tools::libmergeimage::impl::tree_depth::value
 		)
+		{
 			break;
+		}
 
 		result.push_back(
 			fcppt::filesystem::path_to_string(

@@ -17,7 +17,7 @@ namespace libmergeimage
 SANGUIS_TOOLS_LIBMERGEIMAGE_SYMBOL
 sanguis::model::object
 to_model(
-	sanguis::model::cell_size,
+	sanguis::model::cell_size const &,
 	sanguis::tools::libmergeimage::saved_image_vector const &
 );
 

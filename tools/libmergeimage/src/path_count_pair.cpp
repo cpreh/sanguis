@@ -7,20 +7,6 @@
 
 
 sanguis::tools::libmergeimage::path_count_pair::path_count_pair(
-	sanguis::tools::libmergeimage::path const &_path,
-	sanguis::tools::libmergeimage::count_type const _count
-)
-:
-	path_(
-		_path
-	),
-	count_(
-		_count
-	)
-{
-}
-
-sanguis::tools::libmergeimage::path_count_pair::path_count_pair(
 	sanguis::tools::libmergeimage::path &&_path,
 	sanguis::tools::libmergeimage::count_type const _count
 )

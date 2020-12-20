@@ -63,4 +63,6 @@ update_impl tools/animations \
 	-e '.*.ui' \
 	ui
 
-update_sublibrary tools/libmergeimage
+update_sublibrary \
+	tools/libmergeimage \
+	impl

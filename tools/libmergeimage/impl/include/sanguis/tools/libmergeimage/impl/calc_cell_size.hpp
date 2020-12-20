@@ -20,7 +20,7 @@ namespace impl
 
 sanguis::tools::libmergeimage::impl::cell_size
 calc_cell_size(
-	sge::image2d::system &,
+	sge::image2d::system &, // NOLINT(google-runtime-references)
 	std::filesystem::path const &,
 	sanguis::tools::libmergeimage::impl::path_vector_vector const &
 );

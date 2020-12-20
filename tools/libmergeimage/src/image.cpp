@@ -25,33 +25,20 @@ sanguis::tools::libmergeimage::image::image(
 }
 
 sanguis::tools::libmergeimage::image::image(
-	sanguis::tools::libmergeimage::path_count_pair_vector const &_paths,
-	sanguis::tools::libmergeimage::image_store &&_store
-)
-:
-	paths_(
-		_paths
-	),
-	store_(
-		std::move(
-			_store
-		)
-	)
-{
-}
-
-sanguis::tools::libmergeimage::image::image(
 	image &&
-) = default;
+)
+noexcept
+= default;
 
 sanguis::tools::libmergeimage::image &
 sanguis::tools::libmergeimage::image::operator=(
 	image &&
-) = default;
+)
+noexcept
+= default;
 
 sanguis::tools::libmergeimage::image::~image()
-{
-}
+= default;
 
 sanguis::tools::libmergeimage::path_count_pair_vector const &
 sanguis::tools::libmergeimage::image::paths() const

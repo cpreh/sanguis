@@ -17,9 +17,9 @@ sanguis::tools::libmergeimage::impl::fold_paths(
 	sanguis::tools::libmergeimage::impl::path_vector const &_paths
 )
 {
-	sanguis::tools::libmergeimage::path_count_pair_vector result;
+	sanguis::tools::libmergeimage::path_count_pair_vector result{};
 
-	// TODO: Is there a better way to express this?
+	// TODO(philipp): Is there a better way to express this?
 	auto const mismatch(
 		[](
 			sanguis::tools::libmergeimage::impl::path_vector::const_iterator const _begin,
@@ -59,7 +59,7 @@ sanguis::tools::libmergeimage::impl::fold_paths(
 	);
 
 	for(
-		sanguis::tools::libmergeimage::impl::path_vector::const_iterator
+		auto
 			cur(
 				_paths.begin()
 			),
@@ -77,6 +77,7 @@ sanguis::tools::libmergeimage::impl::fold_paths(
 				_paths.end()
 			)
 	)
+	{
 		result.push_back(
 			sanguis::tools::libmergeimage::path_count_pair(
 				sanguis::tools::libmergeimage::impl::convert_path(
@@ -90,6 +91,7 @@ sanguis::tools::libmergeimage::impl::fold_paths(
 				)
 			)
 		);
+	}
 
 	return
 		result;

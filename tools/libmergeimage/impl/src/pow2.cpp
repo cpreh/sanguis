@@ -12,7 +12,7 @@ sanguis::tools::libmergeimage::impl::pow2(
 		fcppt::literal<
 			sge::image::size_type
 		>(
-			1u
+			1U
 		)
 		<<
 		_exp;

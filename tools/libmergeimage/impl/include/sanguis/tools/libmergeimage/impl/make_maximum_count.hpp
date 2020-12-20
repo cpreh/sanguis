@@ -16,7 +16,7 @@ namespace impl
 
 sanguis::tools::libmergeimage::impl::count_maximum
 make_maximum_count(
-	sanguis::tools::libmergeimage::impl::cell_size
+	sanguis::tools::libmergeimage::impl::cell_size const &
 );
 
 }

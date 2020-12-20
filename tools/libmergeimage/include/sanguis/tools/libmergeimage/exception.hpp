@@ -30,7 +30,8 @@ public:
 
 	exception(
 		exception &&
-	);
+	)
+	noexcept;
 
 	exception(
 		exception const &
@@ -39,7 +40,8 @@ public:
 	exception &
 	operator=(
 		exception &&
-	);
+	)
+	noexcept;
 
 	exception &
 	operator=(

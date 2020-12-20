@@ -29,21 +29,25 @@ public:
 	SANGUIS_TOOLS_LIBMERGEIMAGE_SYMBOL
 	merge_result(
 		merge_result &&
-	);
+	)
+	noexcept;
 
 	SANGUIS_TOOLS_LIBMERGEIMAGE_SYMBOL
 	merge_result &
 	operator=(
 		merge_result &&
-	);
+	)
+	noexcept;
 
 	SANGUIS_TOOLS_LIBMERGEIMAGE_SYMBOL
 	~merge_result();
 
+	[[nodiscard]]
 	SANGUIS_TOOLS_LIBMERGEIMAGE_SYMBOL
 	sanguis::model::cell_size
 	cell_size() const;
 
+	[[nodiscard]]
 	SANGUIS_TOOLS_LIBMERGEIMAGE_SYMBOL
 	sanguis::tools::libmergeimage::image_vector const &
 	images() const;

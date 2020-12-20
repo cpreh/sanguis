@@ -41,7 +41,7 @@ sanguis::tools::libmergeimage::image
 sanguis::tools::libmergeimage::impl::make_image(
 	sge::image2d::system &_image_system,
 	std::filesystem::path const &_base_path,
-	sanguis::tools::libmergeimage::impl::cell_size const _cell_size,
+	sanguis::tools::libmergeimage::impl::cell_size const &_cell_size,
 	sanguis::tools::libmergeimage::impl::path_vector _paths
 )
 {
@@ -120,6 +120,7 @@ sanguis::tools::libmergeimage::impl::make_image(
 						!=
 						_cell_size.get()
 					)
+					{
 						throw
 							sanguis::tools::libmergeimage::exception(
 								FCPPT_TEXT("File ")
@@ -140,6 +141,7 @@ sanguis::tools::libmergeimage::impl::make_image(
 									_cell_size
 								)
 							);
+					}
 
 					sge::image2d::algorithm::copy_and_convert(
 						img->view(),

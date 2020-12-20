@@ -49,12 +49,14 @@ sanguis::tools::libmergeimage::impl::gather_paths(
 					std::filesystem::directory_iterator()
 				)
 			)
+			{
 				temp.push_back(
 					fcppt::filesystem::strip_prefix(
 						_base_path,
 						path
 					)
 				);
+			}
 
 			result.push_back(
 				temp

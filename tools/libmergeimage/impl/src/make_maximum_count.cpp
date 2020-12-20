@@ -8,7 +8,7 @@
 
 sanguis::tools::libmergeimage::impl::count_maximum
 sanguis::tools::libmergeimage::impl::make_maximum_count(
-	sanguis::tools::libmergeimage::impl::cell_size const _cell_size
+	sanguis::tools::libmergeimage::impl::cell_size const &_cell_size
 )
 {
 	return

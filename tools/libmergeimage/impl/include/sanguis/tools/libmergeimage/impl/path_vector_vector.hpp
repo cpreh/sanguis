@@ -16,11 +16,12 @@ namespace libmergeimage
 namespace impl
 {
 
-typedef
+using
+path_vector_vector
+=
 std::vector<
 	sanguis::tools::libmergeimage::impl::path_vector
->
-path_vector_vector;
+>;
 
 }
 }

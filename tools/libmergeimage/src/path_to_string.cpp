@@ -9,17 +9,19 @@ sanguis::tools::libmergeimage::path_to_string(
 	sanguis::tools::libmergeimage::path const &_path
 )
 {
-	fcppt::string result;
+	fcppt::string result{};
 
 	for(
 		fcppt::string const &element
 		:
 		_path
 	)
+	{
 		result +=
 			element
 			+
 			FCPPT_TEXT('/');
+	}
 
 	return
 		result;

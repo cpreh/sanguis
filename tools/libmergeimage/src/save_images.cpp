@@ -7,6 +7,7 @@
 #include <sge/image2d/save_from_view.hpp>
 #include <sge/image2d/system_fwd.hpp>
 #include <sge/image2d/view/const_object.hpp>
+#include <fcppt/copy.hpp>
 #include <fcppt/make_int_range_count.hpp>
 #include <fcppt/output_to_fcppt_string.hpp>
 #include <fcppt/string.hpp>
@@ -23,7 +24,7 @@ sanguis::tools::libmergeimage::save_images(
 	sanguis::tools::libmergeimage::image_vector const &_images
 )
 {
-	sanguis::tools::libmergeimage::saved_image_vector result;
+	sanguis::tools::libmergeimage::saved_image_vector result{};
 
 	for(
 		sanguis::tools::libmergeimage::image_vector::size_type const index
@@ -59,7 +60,9 @@ sanguis::tools::libmergeimage::save_images(
 
 		result.push_back(
 			sanguis::tools::libmergeimage::saved_image(
-				image.paths(),
+				fcppt::copy(
+					image.paths()
+				),
 				sanguis::model::image_name(
 					file_name
 				)

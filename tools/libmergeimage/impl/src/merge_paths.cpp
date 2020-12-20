@@ -51,7 +51,7 @@ sanguis::tools::libmergeimage::impl::merge_paths(
 		}
 	);
 
-	// TODO: Use filter here
+	// TODO(philipp): Use filter here
 	for(
 		sanguis::tools::libmergeimage::impl::path_vector const &element
 		:
@@ -65,11 +65,13 @@ sanguis::tools::libmergeimage::impl::merge_paths(
 			>
 			_maximum.get()
 		)
+		{
 			throw
-				// TODO: Better error message
+				// TODO(philipp): Better error message
 				sanguis::tools::libmergeimage::exception(
 					FCPPT_TEXT("Cost of node too high")
 				);
+		}
 		if(
 			cost(
 				element
@@ -77,12 +79,14 @@ sanguis::tools::libmergeimage::impl::merge_paths(
 			>
 			half
 		)
+		{
 			result.push_back(
 				element
 			);
+		}
 	}
 
-	// TODO: Maybe use filter and fold?
+	// TODO(philipp): Maybe use filter and fold?
 
 	for(
 		sanguis::tools::libmergeimage::impl::path_vector const &element
@@ -97,7 +101,9 @@ sanguis::tools::libmergeimage::impl::merge_paths(
 			>
 			half
 		)
+		{
 			continue;
+		}
 
 		if(
 			cost(
@@ -131,9 +137,11 @@ sanguis::tools::libmergeimage::impl::merge_paths(
 	if(
 		!accum.empty()
 	)
+	{
 		result.push_back(
 			accum
 		);
+	}
 
 	return
 		result;

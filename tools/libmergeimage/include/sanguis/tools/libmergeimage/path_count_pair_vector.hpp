@@ -14,11 +14,12 @@ namespace tools
 namespace libmergeimage
 {
 
-typedef
+using
+path_count_pair_vector
+=
 std::vector<
 	sanguis::tools::libmergeimage::path_count_pair
->
-path_count_pair_vector;
+>;
 
 }
 }

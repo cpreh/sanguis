@@ -18,7 +18,7 @@ namespace impl
 sanguis::tools::libmergeimage::count_type
 cells_in_dim(
 	sge::image::size_type,
-	sanguis::tools::libmergeimage::impl::cell_size
+	sanguis::tools::libmergeimage::impl::cell_size const &
 );
 
 }

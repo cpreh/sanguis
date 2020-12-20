@@ -19,14 +19,16 @@ class saved_image
 public:
 	SANGUIS_TOOLS_LIBMERGEIMAGE_SYMBOL
 	saved_image(
-		sanguis::tools::libmergeimage::path_count_pair_vector const &,
-		sanguis::model::image_name const &
+		sanguis::tools::libmergeimage::path_count_pair_vector &&,
+		sanguis::model::image_name &&
 	);
 
+	[[nodiscard]]
 	SANGUIS_TOOLS_LIBMERGEIMAGE_SYMBOL
 	sanguis::tools::libmergeimage::path_count_pair_vector const &
 	paths() const;
 
+	[[nodiscard]]
 	SANGUIS_TOOLS_LIBMERGEIMAGE_SYMBOL
 	sanguis::model::image_name const &
 	image_name() const;

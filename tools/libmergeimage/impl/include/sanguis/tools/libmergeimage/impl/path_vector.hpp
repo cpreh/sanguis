@@ -16,11 +16,12 @@ namespace libmergeimage
 namespace impl
 {
 
-typedef
+using
+path_vector
+=
 std::vector<
 	std::filesystem::path
->
-path_vector;
+>;
 
 }
 }

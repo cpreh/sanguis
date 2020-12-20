@@ -26,29 +26,28 @@ public:
 		sanguis::tools::libmergeimage::image_store &&
 	);
 
-	image(
-		sanguis::tools::libmergeimage::path_count_pair_vector const &,
-		sanguis::tools::libmergeimage::image_store &&
-	);
-
 	SANGUIS_TOOLS_LIBMERGEIMAGE_SYMBOL
 	image(
 		image &&
-	);
+	)
+	noexcept;
 
 	SANGUIS_TOOLS_LIBMERGEIMAGE_SYMBOL
 	image &
 	operator=(
 		image &&
-	);
+	)
+	noexcept;
 
 	SANGUIS_TOOLS_LIBMERGEIMAGE_SYMBOL
 	~image();
 
+	[[nodiscard]]
 	SANGUIS_TOOLS_LIBMERGEIMAGE_SYMBOL
 	sanguis::tools::libmergeimage::path_count_pair_vector const &
 	paths() const;
 
+	[[nodiscard]]
 	SANGUIS_TOOLS_LIBMERGEIMAGE_SYMBOL
 	sanguis::tools::libmergeimage::image_store const &
 	store() const;

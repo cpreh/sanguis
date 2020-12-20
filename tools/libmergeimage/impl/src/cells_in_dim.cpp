@@ -11,7 +11,7 @@
 sanguis::tools::libmergeimage::count_type
 sanguis::tools::libmergeimage::impl::cells_in_dim(
 	sge::image::size_type const _size,
-	sanguis::tools::libmergeimage::impl::cell_size const _cell_size
+	sanguis::tools::libmergeimage::impl::cell_size const &_cell_size
 )
 {
 	return
@@ -29,7 +29,7 @@ sanguis::tools::libmergeimage::impl::cells_in_dim(
 					fcppt::math::dim::fill<
 						sge::image2d::dim
 					>(
-						1u
+						1U
 					)
 				)
 			).get_unsafe()

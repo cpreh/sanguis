@@ -16,12 +16,13 @@ namespace libmergeimage
 namespace impl
 {
 
-typedef
+using
+max_exponent
+=
 std::integral_constant<
 	sge::image::size_type,
-	10u
->
-max_exponent;
+	10U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+>;
 
 }
 }

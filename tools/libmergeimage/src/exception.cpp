@@ -35,6 +35,7 @@ sanguis::tools::libmergeimage::exception::exception(
 sanguis::tools::libmergeimage::exception::exception(
 	exception &&
 )
+noexcept
 = default;
 
 sanguis::tools::libmergeimage::exception::exception(
@@ -46,6 +47,7 @@ sanguis::tools::libmergeimage::exception &
 sanguis::tools::libmergeimage::exception::operator=(
 	exception &&
 )
+noexcept
 = default;
 
 sanguis::tools::libmergeimage::exception &
@@ -54,6 +56,6 @@ sanguis::tools::libmergeimage::exception::operator=(
 )
 = default;
 
-sanguis::tools::libmergeimage::exception::~exception() noexcept
-{
-}
+sanguis::tools::libmergeimage::exception::~exception()
+noexcept
+= default;

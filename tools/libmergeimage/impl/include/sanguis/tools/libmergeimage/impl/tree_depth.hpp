@@ -16,12 +16,13 @@ namespace libmergeimage
 namespace impl
 {
 
-typedef
+using
+tree_depth
+=
 std::integral_constant<
 	sanguis::tools::libmergeimage::count_type,
 	3
->
-tree_depth;
+>;
 
 }
 }

@@ -37,6 +37,7 @@ sanguis::tools::libmergeimage::merge_images(
 	if(
 		gathered_paths.empty()
 	)
+	{
 		throw
 			sanguis::tools::libmergeimage::exception(
 				FCPPT_TEXT("Nothing to do in ")
@@ -45,6 +46,7 @@ sanguis::tools::libmergeimage::merge_images(
 					_base_path
 				)
 			);
+	}
 
 	sanguis::tools::libmergeimage::impl::cell_size const cell_size(
 		sanguis::tools::libmergeimage::impl::calc_cell_size(

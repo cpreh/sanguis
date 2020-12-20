@@ -18,7 +18,7 @@ namespace impl
 sge::image::size_type
 best_size(
 	sanguis::tools::libmergeimage::count_type,
-	sanguis::tools::libmergeimage::impl::cell_size
+	sanguis::tools::libmergeimage::impl::cell_size const &
 );
 
 }

@@ -22,7 +22,7 @@
 
 sanguis::model::object
 sanguis::tools::libmergeimage::to_model(
-	sanguis::model::cell_size const _cell_size,
+	sanguis::model::cell_size const &_cell_size,
 	sanguis::tools::libmergeimage::saved_image_vector const &_images
 )
 {
@@ -40,7 +40,7 @@ sanguis::tools::libmergeimage::to_model(
 	)
 	{
 		sanguis::model::animation_index cell_index(
-			0u
+			0U
 		);
 
 		for(
@@ -59,7 +59,7 @@ sanguis::tools::libmergeimage::to_model(
 				sanguis::tools::libmergeimage::impl::tree_depth::value
 			);
 
-			sanguis::model::animation_index const range(
+			auto const range(
 				fcppt::cast::size<
 					sanguis::model::animation_index
 				>(

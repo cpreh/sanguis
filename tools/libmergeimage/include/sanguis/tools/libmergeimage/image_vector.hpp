@@ -14,11 +14,12 @@ namespace tools
 namespace libmergeimage
 {
 
-typedef
+using
+image_vector
+=
 std::vector<
 	sanguis::tools::libmergeimage::image
->
-image_vector;
+>;
 
 }
 }

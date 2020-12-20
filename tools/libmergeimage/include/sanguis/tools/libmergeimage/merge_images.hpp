@@ -19,7 +19,7 @@ namespace libmergeimage
 SANGUIS_TOOLS_LIBMERGEIMAGE_SYMBOL
 sanguis::tools::libmergeimage::merge_result
 merge_images(
-	sge::image2d::system &,
+	sge::image2d::system &, // NOLINT(google-runtime-references)
 	std::filesystem::path const &
 );
 

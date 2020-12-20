@@ -11,7 +11,7 @@
 sge::image::size_type
 sanguis::tools::libmergeimage::impl::best_size(
 	sanguis::tools::libmergeimage::count_type const _count,
-	sanguis::tools::libmergeimage::impl::cell_size const _cell_size
+	sanguis::tools::libmergeimage::impl::cell_size const &_cell_size
 )
 {
 	for(
@@ -39,8 +39,10 @@ sanguis::tools::libmergeimage::impl::best_size(
 			>=
 			_count
 		)
+		{
 			return
 				size;
+		}
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;

@@ -18,19 +18,16 @@ class path_count_pair
 {
 public:
 	path_count_pair(
-		sanguis::tools::libmergeimage::path const &,
-		sanguis::tools::libmergeimage::count_type
-	);
-
-	path_count_pair(
 		sanguis::tools::libmergeimage::path &&,
 		sanguis::tools::libmergeimage::count_type
 	);
 
+	[[nodiscard]]
 	SANGUIS_TOOLS_LIBMERGEIMAGE_SYMBOL
 	sanguis::tools::libmergeimage::path const &
 	path() const;
 
+	[[nodiscard]]
 	SANGUIS_TOOLS_LIBMERGEIMAGE_SYMBOL
 	sanguis::tools::libmergeimage::count_type
 	count() const;
