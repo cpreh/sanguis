@@ -50,8 +50,7 @@ sanguis::server::net::basic_value<
 	Policy,
 	Clock
 >()
-{
-}
+= default;
 
 template<
 	typename Type,
@@ -68,8 +67,10 @@ sanguis::server::net::basic_value<
 	if(
 		!timer_.expired()
 	)
+	{
 		return
 			false;
+	}
 
 	timer_.active(
 		false
@@ -110,7 +111,9 @@ sanguis::server::net::basic_value<
 			if(
 				!timer_.active()
 			)
+			{
 				this->restart_timer();
+			}
 
 			timer_.interval(
 				timer_.interval()

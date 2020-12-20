@@ -24,8 +24,7 @@ sanguis::server::weapons::log::log(
 }
 
 sanguis::server::weapons::log::~log()
-{
-}
+= default;
 
 fcppt::log::object &
 sanguis::server::weapons::log::main_log() const

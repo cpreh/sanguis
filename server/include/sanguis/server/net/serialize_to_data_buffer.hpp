@@ -15,8 +15,8 @@ namespace net
 void
 serialize_to_data_buffer(
 	sanguis::messages::server::base const &,
-	sanguis::net::data_buffer &
-);
+	sanguis::net::data_buffer & // NOLINT(google-runtime-references)
+); // NOLINT(google-runtime-references)
 
 }
 }

@@ -17,7 +17,7 @@ namespace world
 sanguis::server::entities::with_id_unique_ptr
 make_destructible(
 	sanguis::creator::destructible_type,
-	sanguis::server::environment::load_context &,
+	sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
 	sanguis::server::world::difficulty
 );
 

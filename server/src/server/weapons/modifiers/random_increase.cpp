@@ -15,18 +15,18 @@ sanguis::server::weapons::modifiers::random_increase(
 	sanguis::server::entities::enemies::difficulty const _difficulty
 )
 {
-	// TODO: Different distribution?
-	typedef
+	using
+	parameters
+	=
 	fcppt::random::distribution::parameters::uniform_real<
 		sanguis::server::space_unit
-	>
-	parameters;
+	>;
 
 	auto distribution(
 		fcppt::random::distribution::make_basic(
 			parameters(
 				parameters::min(
-					1.f
+					1.F
 				),
 				parameters::sup(
 					std::sqrt(

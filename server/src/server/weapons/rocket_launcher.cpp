@@ -67,8 +67,7 @@ sanguis::server::weapons::rocket_launcher::rocket_launcher(
 }
 
 sanguis::server::weapons::rocket_launcher::~rocket_launcher()
-{
-}
+= default;
 
 sanguis::server::weapons::rocket_launcher::rocket_launcher(
 	sanguis::server::weapons::parameters const &_parameters,

@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_STATES_UNPAUSED_HPP_INCLUDED
 #define SANGUIS_SERVER_STATES_UNPAUSED_HPP_INCLUDED
 
+#include <sanguis/state_override.hpp>
 #include <sanguis/messages/call/result_fwd.hpp>
 #include <sanguis/messages/client/attack_dest_fwd.hpp>
 #include <sanguis/messages/client/change_world_fwd.hpp>
@@ -46,7 +47,7 @@ class unpaused
 			sanguis::server::states::running
 		>
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		unpaused
 	);
 public:
@@ -67,66 +68,78 @@ public:
 		my_context
 	);
 
-	~unpaused();
+	~unpaused()
+	SANGUIS_STATE_OVERRIDE;
 
+	[[nodiscard]]
 	boost::statechart::result
 	react(
 		sanguis::server::events::tick const &
 	);
 
+	[[nodiscard]]
 	boost::statechart::result
 	react(
 		sanguis::server::events::message const &
 	);
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::client::attack_dest const &
 	);
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::client::change_world const &
 	);
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::client::direction const &
 	);
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::client::drop_or_pickup_weapon const &
 	);
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::client::reload const &
 	);
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::client::start_shooting const &
 	);
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::client::stop_shooting const &
 	);
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::client::unpause const &
 	);
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,

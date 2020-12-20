@@ -2,7 +2,7 @@
 #define SANGUIS_SERVER_WEAPONS_LOG_HPP_INCLUDED
 
 #include <sanguis/server/weapons/log_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>
 #include <fcppt/log/object.hpp>
 
@@ -16,7 +16,7 @@ namespace weapons
 
 class log
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		log
 	);
 public:
@@ -27,6 +27,7 @@ public:
 
 	~log();
 
+	[[nodiscard]]
 	fcppt::log::object &
 	main_log() const;
 private:

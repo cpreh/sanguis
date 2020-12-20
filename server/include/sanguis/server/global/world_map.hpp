@@ -22,18 +22,27 @@ class world_map
 public:
 	world_map(
 		sanguis::server::world::map &&,
-		sanguis::server::global::world_connection_map const &
+		sanguis::server::global::world_connection_map &&
 	);
-
-	~world_map();
 
 	world_map(
 		world_map &&
-	);
+	)
+	noexcept;
 
+	world_map &
+	operator=(
+		world_map &&
+	)
+	noexcept;
+
+	~world_map();
+
+	[[nodiscard]]
 	sanguis::server::world::map const &
 	worlds() const;
 
+	[[nodiscard]]
 	sanguis::server::global::world_connection_map const &
 	connections() const;
 private:

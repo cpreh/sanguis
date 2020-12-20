@@ -2,12 +2,12 @@
 
 
 sanguis::server::weapons::events::shoot::shoot()
-{
-}
+= default;
 
 sanguis::server::weapons::events::shoot::shoot(
 	shoot &&
 )
+noexcept
 = default;
 
 sanguis::server::weapons::events::shoot::shoot(
@@ -19,6 +19,7 @@ sanguis::server::weapons::events::shoot &
 sanguis::server::weapons::events::shoot::operator=(
 	shoot &&
 )
+noexcept
 = default;
 
 sanguis::server::weapons::events::shoot &
@@ -28,5 +29,4 @@ sanguis::server::weapons::events::shoot::operator=(
 = default;
 
 sanguis::server::weapons::events::shoot::~shoot()
-{
-}
+= default;

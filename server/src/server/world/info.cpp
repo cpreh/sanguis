@@ -5,34 +5,43 @@
 #include <sanguis/creator/seed.hpp>
 #include <sanguis/creator/spawn_boss.hpp>
 #include <sanguis/server/world/info.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::world::info::info(
 	sanguis::world_id const _world_id,
-	sanguis::world_name const &_world_name,
+	sanguis::world_name &&_world_name,
 	sanguis::creator::seed const _seed,
-	sanguis::creator::name const &_generator_name,
+	sanguis::creator::name &&_generator_name,
 	sanguis::creator::spawn_boss const _spawn_boss,
-	sanguis::creator::opening_container_array const &_openings
+	sanguis::creator::opening_container_array &&_openings
 )
 :
 	world_id_(
 		_world_id
 	),
 	world_name_(
-		_world_name
+		std::move(
+			_world_name
+		)
 	),
 	seed_(
 		_seed
 	),
 	generator_name_(
-		_generator_name
+		std::move(
+			_generator_name
+		)
 	),
 	spawn_boss_(
 		_spawn_boss
 	),
 	openings_(
-		_openings
+		std::move(
+			_openings
+		)
 	)
 {
 }

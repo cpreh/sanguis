@@ -22,8 +22,8 @@ struct speed_policy
 	static
 	sanguis::duration
 	difference(
-		sanguis::server::speed,
-		sanguis::server::speed
+		sanguis::server::speed const &,
+		sanguis::server::speed const &
 	);
 };
 

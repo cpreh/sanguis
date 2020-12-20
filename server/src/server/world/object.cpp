@@ -126,6 +126,7 @@
 #include <sanguis/server/world/update_entity.hpp>
 #include <alda/message/init_record.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
+#include <fcppt/copy.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/reference_impl.hpp>
@@ -169,14 +170,16 @@ sanguis::server::world::object::object(
 	sanguis::world_id const _id,
 	sanguis::creator::top_result const &_generated_world,
 	sanguis::server::world::difficulty const _difficulty,
-	sanguis::world_name const &_name
+	sanguis::world_name &&_name
 )
 :
 	sanguis::server::environment::object(),
 	log_{
-		// TODO: Add world name?
-		_parameters.log_context(),
+		fcppt::make_ref(
+			_parameters.log_context()
+		),
 		sanguis::server::log_location(),
+		// TODO(philipp): Add world name?
 		fcppt::log::parameters_no_function(
 			fcppt::log::name{
 				FCPPT_TEXT("world")
@@ -185,11 +188,17 @@ sanguis::server::world::object::object(
 	},
 	info_(
 		_id,
-		_name,
+		std::move(
+			_name
+		),
 		_generated_world.seed(),
-		_generated_world.name(),
+		fcppt::copy(
+			_generated_world.name()
+		),
 		_generated_world.spawn_boss(),
-		_generated_world.openings()
+		fcppt::copy(
+			_generated_world.openings()
+		)
 	),
 	difficulty_(
 		_difficulty
@@ -204,8 +213,10 @@ sanguis::server::world::object::object(
 		_parameters.load_context()
 	),
 	collision_log_{
-		// TODO: Add world name?
-		_parameters.log_context()
+		// TODO(philipp): Add world name?
+		fcppt::make_ref(
+			_parameters.log_context()
+		)
 	},
 	collision_world_(
 		sanguis::collision::world::create(
@@ -221,12 +232,16 @@ sanguis::server::world::object::object(
 	server_entities_(),
 	portal_blockers_(),
 	portal_block_count_{
-		0u
+		0U
 	},
 	pickup_spawner_(
-		_parameters.random_generator(),
+		fcppt::make_ref(
+			_parameters.random_generator()
+		),
 		_parameters.weapon_parameters(),
-		this->environment()
+		fcppt::make_ref(
+			this->environment()
+		)
 	)
 {
 	this->insert_spawns(
@@ -246,8 +261,7 @@ sanguis::server::world::object::object(
 FCPPT_PP_POP_WARNING
 
 sanguis::server::world::object::~object()
-{
-}
+= default;
 
 void
 sanguis::server::world::object::update(
@@ -373,12 +387,13 @@ FCPPT_PP_POP_WARNING
 					_entity->id()
 				);
 
-				typedef
+				using
+				return_type
+				=
 				std::pair<
 					entity_map::iterator,
 					bool
-				>
-				return_type;
+				>;
 
 				return_type const ret(
 					entities_.insert(
@@ -937,7 +952,7 @@ sanguis::server::world::object::level_changed(
 							_level
 							+
 							sanguis::server::level(
-								1u
+								1U
 							)
 						)
 					)
@@ -993,9 +1008,11 @@ sanguis::server::world::object::request_transfer(
 			&&
 			portal_block_count_
 			>
-			0u
+			0U
 		)
+		{
 			continue;
+		}
 
 		for(
 			sanguis::creator::opening const &opening
@@ -1061,7 +1078,7 @@ sanguis::server::world::object::add_portal_blocker()
 	if(
 		portal_block_count_
 		==
-		0u
+		0U
 	)
 	{
 		for(
@@ -1071,6 +1088,7 @@ sanguis::server::world::object::add_portal_blocker()
 				sanguis::creator::opening_type::exit
 			]
 		)
+		{
 			this->insert_base(
 				portal_blockers_,
 				sanguis::server::world::make_portal_blocker(
@@ -1082,6 +1100,7 @@ sanguis::server::world::object::add_portal_blocker()
 					)
 				)
 			);
+		}
 	}
 
 	++portal_block_count_;
@@ -1093,7 +1112,7 @@ sanguis::server::world::object::remove_portal_blocker()
 	FCPPT_ASSERT_ERROR(
 		portal_block_count_
 		>
-		0u
+		0U
 	);
 
 	--portal_block_count_;
@@ -1101,14 +1120,18 @@ sanguis::server::world::object::remove_portal_blocker()
 	if(
 		portal_block_count_
 		==
-		0u
+		0U
 	)
+	{
 		for(
 			auto const &portal_blocker
 			:
 			portal_blockers_
 		)
+		{
 			portal_blocker->kill();
+		}
+	}
 }
 
 sanguis::server::world::difficulty
@@ -1193,14 +1216,17 @@ sanguis::server::world::object::remove_sight_range(
 		if(
 			sight_it->second.empty()
 		)
+		{
 			sight_ranges_.erase(
 				sight_it
 			);
+		}
 	}
 
 	if(
 		_target.dead()
 	)
+	{
 		this->send_player_specific(
 			_player_id,
 			sanguis::messages::server::create(
@@ -1212,7 +1238,9 @@ sanguis::server::world::object::remove_sight_range(
 				)
 			)
 		);
+	}
 	else
+	{
 		this->send_player_specific(
 			_player_id,
 			sanguis::messages::server::create(
@@ -1224,6 +1252,7 @@ sanguis::server::world::object::remove_sight_range(
 				)
 			)
 		);
+	}
 }
 
 void
@@ -1247,15 +1276,19 @@ sanguis::server::world::object::send_entity_specific(
 		:
 		sight_ranges_
 	)
+	{
 		if(
 			sight_range.second.contains(
 				_id
 			)
 		)
+		{
 			global_context_.send_to_player(
 				sight_range.first,
 				_msg
 			);
+		}
+	}
 }
 
 void
@@ -1329,6 +1362,7 @@ sanguis::server::world::object::insert_destructibles(
 		:
 		_destructibles
 	)
+	{
 		this->insert(
 			sanguis::server::world::generate_destructibles(
 				_random_generator,
@@ -1337,4 +1371,5 @@ sanguis::server::world::object::insert_destructibles(
 				difficulty_
 			)
 		);
+	}
 }

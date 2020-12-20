@@ -11,6 +11,7 @@
 #include <sanguis/server/world/random.hpp>
 #include <sanguis/server/world/random_generator_name.hpp>
 #include <sanguis/server/world/random_seed.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/output_to_fcppt_string.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
@@ -29,7 +30,6 @@ sanguis::server::world::random(
 		sanguis::server::world::generate(
 			_parameters,
 			_world_id,
-			// TODO!
 			sanguis::world_name(
 				FCPPT_TEXT("World ")
 				+
@@ -39,7 +39,9 @@ sanguis::server::world::random(
 			),
 			_difficulty,
 			sanguis::creator::top_parameters{
-				_parameters.log_context(),
+				fcppt::make_ref(
+					_parameters.log_context()
+				),
 				sanguis::server::world::random_generator_name(
 					_parameters.random_generator()
 				),

@@ -82,8 +82,7 @@ sanguis::server::weapons::states::reloading::reloading(
 FCPPT_PP_POP_WARNING
 
 sanguis::server::weapons::states::reloading::~reloading()
-{
-}
+= default;
 
 boost::statechart::result
 sanguis::server::weapons::states::reloading::react(
@@ -93,8 +92,10 @@ sanguis::server::weapons::states::reloading::react(
 	if(
 		!reload_time_.expired()
 	)
+	{
 		return
 			this->discard_event();
+	}
 
 	this->context<
 		sanguis::server::weapons::weapon

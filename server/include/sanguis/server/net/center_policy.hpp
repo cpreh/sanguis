@@ -22,8 +22,8 @@ struct center_policy
 	static
 	sanguis::duration
 	difference(
-		sanguis::server::center,
-		sanguis::server::center
+		sanguis::server::center const &,
+		sanguis::server::center const &
 	);
 };
 

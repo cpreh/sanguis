@@ -46,6 +46,7 @@
 #include <fcppt/config/external_begin.hpp>
 #include <metal.hpp>
 #include <boost/statechart/result.hpp>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -57,7 +58,9 @@ sanguis::server::states::unpaused::unpaused(
 )
 :
 	my_base(
-		_ctx
+		std::move(
+			_ctx
+		)
 	),
 	log_{
 		this->context<
@@ -106,8 +109,10 @@ sanguis::server::states::unpaused::react(
 			sanguis::server::machine
 		>().process_overflow()
 	)
+	{
 		return
 			this->discard_event();
+	}
 
 	this->context<
 		sanguis::server::states::running
@@ -118,6 +123,7 @@ sanguis::server::states::unpaused::react(
 	if(
 		slowdown_.update()
 	)
+	{
 		this->context<
 			sanguis::server::machine
 		>().send_to_all(
@@ -130,6 +136,7 @@ sanguis::server::states::unpaused::react(
 				)
 			)
 		);
+	}
 
 	return
 		this->discard_event();
@@ -271,10 +278,12 @@ sanguis::server::states::unpaused::operator()(
 			sanguis::server::states::running
 		>().global_context().multiple_players()
 	)
+	{
 		return
 			sanguis::messages::call::result(
 				this->discard_event()
 			);
+	}
 
 	this->context<
 		sanguis::server::machine

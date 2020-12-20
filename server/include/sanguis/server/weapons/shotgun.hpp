@@ -13,7 +13,7 @@
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/attributes/damage.hpp>
 #include <sanguis/server/weapons/attributes/spread_radius.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -27,7 +27,7 @@ class shotgun
 :
 	public sanguis::server::weapons::weapon
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		shotgun
 	);
 public:
@@ -47,16 +47,19 @@ public:
 		sanguis::server::weapons::attributes::damage
 	);
 private:
+	[[nodiscard]]
 	sanguis::server::weapons::unique_ptr
 	clone() const
 	override;
 
+	[[nodiscard]]
 	sanguis::server::weapons::attack_result
 	do_attack(
 		sanguis::server::weapons::attack const &
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::weapon_attribute_vector
 	attributes() const
 	override;

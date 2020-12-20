@@ -17,8 +17,7 @@ sanguis::server::perks::ims::ims()
 }
 
 sanguis::server::perks::ims::~ims()
-{
-}
+= default;
 
 void
 sanguis::server::perks::ims::change(
@@ -30,7 +29,7 @@ sanguis::server::perks::ims::change(
 		&sanguis::server::entities::property::linear_change,
 		_entity.movement_speed(),
 		sanguis::server::perks::change_factor(
-			0.1f
+			0.1F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		),
 		_diff
 	);

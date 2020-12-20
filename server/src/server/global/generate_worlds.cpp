@@ -48,12 +48,12 @@ sanguis::server::global::generate_worlds(
 	sanguis::server::world::parameters const &_parameters
 )
 {
-	sanguis::server::world::map worlds;
+	sanguis::server::world::map worlds{};
 
-	sanguis::server::global::world_connection_map connections;
+	sanguis::server::global::world_connection_map connections{};
 
 	sanguis::server::world::difficulty difficulty(
-		1u
+		1U
 	);
 
 	auto const insert_world(
@@ -84,14 +84,16 @@ sanguis::server::global::generate_worlds(
 		sanguis::server::world::generate(
 			_parameters,
 			sanguis::world_id(
-				0u
+				0U
 			),
 			sanguis::world_name(
 				FCPPT_TEXT("Start Area")
 			),
 			difficulty,
 			sanguis::creator::top_parameters(
-				_parameters.log_context(),
+				fcppt::make_ref(
+					_parameters.log_context()
+				),
 				sanguis::creator::start_name(),
 				sanguis::server::world::random_seed(
 					_parameters.random_generator()
@@ -111,7 +113,7 @@ sanguis::server::global::generate_worlds(
 						case sanguis::creator::opening_type::exit:
 							return
 								sanguis::creator::opening_count{
-									1u
+									1U
 								};
 						}
 
@@ -126,7 +128,7 @@ sanguis::server::global::generate_worlds(
 	);
 
 	sanguis::world_id const num_worlds(
-		10u
+		10U
 	);
 
 	for(
@@ -134,12 +136,12 @@ sanguis::server::global::generate_worlds(
 		:
 		fcppt::make_int_range(
 			sanguis::world_id{
-				1u
+				1U
 			},
 			sanguis::world_id{
 				num_worlds.get()
 				+
-				1u
+				1U
 			}
 		)
 	)
@@ -162,28 +164,27 @@ sanguis::server::global::generate_worlds(
 						case sanguis::creator::opening_type::exit:
 							return
 								sanguis::creator::opening_count{
-									1u
+									1U
 								};
 						}
 
 						FCPPT_ASSERT_UNREACHABLE;
 					}
 				),
-				// TODO
 				sanguis::creator::spawn_boss{
 					world_id
 					==
 					sanguis::world_id{
-						1u
+						1U
 					}
 				},
 				world_id,
-				difficulty++ // TODO: How to scale this?
+				difficulty++
 			)
 		);
 
 		sanguis::world_id const previous_id(
-			world_id.get() - 1u
+			world_id.get() - 1U
 		);
 
 		sanguis::creator::opening const current_opening(
@@ -192,7 +193,7 @@ sanguis::server::global::generate_worlds(
 			)->openings()[
 				sanguis::creator::opening_type::entry
 			].at(
-				0u
+				0U
 			)
 		);
 
@@ -202,7 +203,7 @@ sanguis::server::global::generate_worlds(
 			)->openings()[
 				sanguis::creator::opening_type::exit
 			].at(
-				0u
+				0U
 			)
 		);
 
@@ -241,7 +242,7 @@ sanguis::server::global::generate_worlds(
 		);
 	}
 
-	// TODO: Move this out of here
+	// TODO(philipp): Move this out of here
 	{
 		sanguis::server::world::object &last_world(
 			*worlds.at(
@@ -264,7 +265,7 @@ sanguis::server::global::generate_worlds(
 						sanguis::server::entities::auto_weak_link()
 					),
 					sanguis::server::entities::enemies::special_chance(
-						0.f
+						0.F
 					)
 				),
 				sanguis::server::entities::insert_parameters_center(
@@ -285,6 +286,8 @@ sanguis::server::global::generate_worlds(
 			std::move(
 				worlds
 			),
-			connections
+			std::move(
+				connections
+			)
 		);
 }

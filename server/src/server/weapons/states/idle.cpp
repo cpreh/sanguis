@@ -42,8 +42,7 @@ sanguis::server::weapons::states::idle::idle(
 }
 
 sanguis::server::weapons::states::idle::~idle()
-{
-}
+= default;
 
 boost::statechart::result
 sanguis::server::weapons::states::idle::react(
@@ -105,9 +104,11 @@ sanguis::server::weapons::states::idle::react(
 			sanguis::server::weapons::weapon
 		>().magazine_empty()
 	)
+	{
 		this->post_event(
 			sanguis::server::weapons::events::reload()
 		);
+	}
 
 	return
 		this->discard_event();

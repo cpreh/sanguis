@@ -37,8 +37,7 @@ sanguis::server::perks::perk::type() const
 }
 
 sanguis::server::perks::perk::~perk()
-{
-}
+= default;
 
 sanguis::server::perks::perk::perk(
 	sanguis::perk_type const _type
@@ -48,7 +47,7 @@ sanguis::server::perks::perk::perk(
 		_type
 	),
 	level_(
-		0u
+		0U
 	)
 {
 }

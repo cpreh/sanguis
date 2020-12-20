@@ -14,7 +14,7 @@ namespace world
 
 sanguis::server::center
 grid_pos_to_center(
-	sanguis::creator::pos
+	sanguis::creator::pos const &
 );
 
 }

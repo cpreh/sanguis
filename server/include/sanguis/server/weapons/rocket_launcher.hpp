@@ -12,7 +12,7 @@
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/attributes/aoe.hpp>
 #include <sanguis/server/weapons/attributes/damage.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -26,7 +26,7 @@ class rocket_launcher
 :
 	public sanguis::server::weapons::weapon
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		rocket_launcher
 	);
 public:
@@ -45,16 +45,19 @@ public:
 		sanguis::server::weapons::attributes::aoe
 	);
 private:
+	[[nodiscard]]
 	sanguis::server::weapons::unique_ptr
 	clone() const
 	override;
 
+	[[nodiscard]]
 	sanguis::server::weapons::attack_result
 	do_attack(
 		sanguis::server::weapons::attack const &
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::weapon_attribute_vector
 	attributes() const
 	override;

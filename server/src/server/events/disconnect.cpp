@@ -15,6 +15,7 @@ sanguis::server::events::disconnect::disconnect(
 sanguis::server::events::disconnect::disconnect(
 	disconnect &&
 )
+noexcept
 = default;
 
 sanguis::server::events::disconnect::disconnect(
@@ -26,6 +27,7 @@ sanguis::server::events::disconnect &
 sanguis::server::events::disconnect::operator=(
 	disconnect &&
 )
+noexcept
 = default;
 
 sanguis::server::events::disconnect &
@@ -35,8 +37,7 @@ sanguis::server::events::disconnect::operator=(
 = default;
 
 sanguis::server::events::disconnect::~disconnect()
-{
-}
+= default;
 
 alda::net::id
 sanguis::server::events::disconnect::id() const

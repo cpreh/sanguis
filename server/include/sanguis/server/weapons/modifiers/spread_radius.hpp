@@ -33,7 +33,7 @@ struct spread_radius
 	static
 	void
 	make(
-		sanguis::random_generator &_random_generator,
+		sanguis::random_generator &_random_generator, // NOLINT(google-runtime-references)
 		sanguis::server::entities::enemies::difficulty const _difficulty,
 		fcppt::reference<
 			Parameters
@@ -55,7 +55,7 @@ struct spread_radius
 					),
 					fcppt::const_(
 						sanguis::server::weapons::spread_radius(
-							0.f
+							0.F
 						)
 					),
 					[](
@@ -69,7 +69,7 @@ struct spread_radius
 					}
 				),
 				sanguis::server::weapons::spread_radius(
-					0.f
+					0.F
 				)
 			)
 		);

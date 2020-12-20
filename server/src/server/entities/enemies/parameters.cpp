@@ -109,6 +109,22 @@ sanguis::server::entities::enemies::parameters::parameters(
 {
 }
 
+sanguis::server::entities::enemies::parameters::parameters(
+	parameters &&
+)
+noexcept
+= default;
+
+sanguis::server::entities::enemies::parameters &
+sanguis::server::entities::enemies::parameters::operator=(
+	parameters &&
+)
+noexcept
+= default;
+
+sanguis::server::entities::enemies::parameters::~parameters()
+= default;
+
 sanguis::creator::enemy_type
 sanguis::server::entities::enemies::parameters::enemy_type() const
 {

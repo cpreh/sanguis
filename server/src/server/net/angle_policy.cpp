@@ -12,7 +12,7 @@ sanguis::server::net::angle_policy::start_duration()
 {
 	return
 		sanguis::duration_second(
-			2.f
+			2.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		);
 }
 
@@ -32,7 +32,7 @@ sanguis::server::net::angle_policy::difference(
 			fcppt::literal<
 				sanguis::server::space_unit
 			>(
-				5
+				5 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			)
 		);
 }

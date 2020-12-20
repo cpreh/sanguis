@@ -14,11 +14,14 @@ sanguis::server::world::random_seed(
 	sanguis::random_generator &_generator
 )
 {
-	typedef fcppt::random::distribution::basic<
+	using
+	uniform_seed
+	=
+	fcppt::random::distribution::basic<
 		fcppt::random::distribution::parameters::uniform_int<
 			sanguis::creator::seed
 		>
-	> uniform_seed;
+	>;
 
 	return
 		uniform_seed(

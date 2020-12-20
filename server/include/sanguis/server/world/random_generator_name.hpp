@@ -14,8 +14,8 @@ namespace world
 
 sanguis::creator::name
 random_generator_name(
-	sanguis::random_generator &
-);
+	sanguis::random_generator & // NOLINT(google-runtime-references)
+); // NOLINT(google-runtime-references)
 
 }
 }

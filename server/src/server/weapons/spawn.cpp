@@ -25,16 +25,20 @@
 #include <sanguis/server/weapons/attributes/optional_accuracy.hpp>
 #include <sanguis/server/weapons/attributes/optional_magazine_size.hpp>
 #include <sanguis/server/world/center_to_grid_pos.hpp>
+#include <fcppt/copy.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/container/join.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::weapons::spawn::spawn(
 	sanguis::server::weapons::common_parameters const &_common_parameters,
 	sanguis::weapon_type const _weapon_type,
-	sanguis::server::weapons::spawn_weapon const &_spawn_weapon,
+	sanguis::server::weapons::spawn_weapon &&_spawn_weapon,
 	sanguis::server::weapons::range const _range,
 	sanguis::server::weapons::backswing_time const _backswing_time,
 	sanguis::server::weapons::cast_point const _cast_point,
@@ -51,7 +55,7 @@ sanguis::server::weapons::spawn::spawn(
 				sanguis::server::weapons::attributes::optional_magazine_size{
 					sanguis::server::weapons::attributes::magazine_size{
 						sanguis::server::weapons::magazine_size{
-							1u
+							1U
 						}
 					}
 				},
@@ -61,15 +65,16 @@ sanguis::server::weapons::spawn::spawn(
 					_reload_time
 				}
 			},
-			_spawn_weapon
+			std::move(
+				_spawn_weapon
+			)
 		}
 	}
 {
 }
 
 sanguis::server::weapons::spawn::~spawn()
-{
-}
+= default;
 
 sanguis::server::weapons::spawn::spawn(
 	sanguis::server::weapons::spawn_parameters const &_spawn_parameters
@@ -94,7 +99,9 @@ sanguis::server::weapons::spawn::spawn_parameters() const
 	return
 		sanguis::server::weapons::spawn_parameters{
 			this->parameters(),
-			spawn_weapon_
+			fcppt::copy(
+				spawn_weapon_
+			)
 		};
 }
 

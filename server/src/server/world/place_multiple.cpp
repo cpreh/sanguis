@@ -30,7 +30,7 @@ sanguis::server::world::insert_with_id_pair_container
 sanguis::server::world::place_multiple(
 	sanguis::random_generator &_random_generator,
 	sanguis::server::world::place_with_id_callback const &_place,
-	sanguis::creator::pos const _pos,
+	sanguis::creator::pos const &_pos,
 	sanguis::server::radius const _radius
 )
 {
@@ -40,19 +40,21 @@ sanguis::server::world::place_multiple(
 		)
 	);
 
-	typedef
+	using
+	uniform_space_unit
+	=
 	fcppt::random::distribution::parameters::uniform_real<
 		sanguis::server::space_unit
-	>
-	uniform_space_unit;
+	>;
 
-	typedef
+	using
+	uniform_angle
+	=
 	fcppt::random::distribution::parameters::uniform_real<
 		sanguis::server::angle
-	>
-	uniform_angle;
+	>;
 
-	sanguis::server::space_unit const tile_size_half(
+	auto const tile_size_half(
 		fcppt::cast::int_to_float<
 			sanguis::server::space_unit
 		>(
@@ -69,10 +71,12 @@ sanguis::server::world::place_multiple(
 	);
 
 	if(
-		space <= 0.f
+		space <= 0.F
 	)
+	{
 		return
 			sanguis::server::world::insert_with_id_pair_container();
+	}
 
 	auto random_coordinate(
 		fcppt::random::make_variate(
@@ -101,7 +105,7 @@ sanguis::server::world::place_multiple(
 				uniform_angle(
 					uniform_angle::min(
 						sanguis::server::angle(
-							0.f
+							0.F
 						)
 					),
 					uniform_angle::sup(

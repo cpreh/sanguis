@@ -31,7 +31,8 @@ public:
 
 	message(
 		message &&
-	);
+	)
+	noexcept;
 
 	message(
 		message const &
@@ -40,7 +41,8 @@ public:
 	message &
 	operator=(
 		message &&
-	);
+	)
+	noexcept;
 
 	message &
 	operator=(
@@ -50,9 +52,11 @@ public:
 	~message()
 	override;
 
+	[[nodiscard]]
 	sanguis::messages::client::shared_ptr
 	get() const;
 
+	[[nodiscard]]
 	sanguis::server::player_id
 	id() const;
 private:

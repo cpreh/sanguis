@@ -12,7 +12,7 @@ sanguis::server::net::slowdown_policy::start_duration()
 {
 	return
 		std::chrono::seconds(
-			10
+			10 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		);
 }
 
@@ -22,7 +22,6 @@ sanguis::server::net::slowdown_policy::difference(
 	sanguis::slowdown const _slowdown2
 )
 {
-	// TODO: What do we want to use here?
 	return
 		std::chrono::duration_cast<
 			sanguis::clock::duration
@@ -33,7 +32,7 @@ sanguis::server::net::slowdown_policy::difference(
 			)
 			*
 			std::chrono::seconds(
-				5
+				5 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			)
 		);
 }

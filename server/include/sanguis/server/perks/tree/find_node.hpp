@@ -64,7 +64,7 @@ find_node(
 			element
 		);
 
-		// TODO: find_by?
+		// TODO(philipp): find_by?
 		typename
 		traversal::iterator const it(
 			std::find_if(
@@ -89,12 +89,14 @@ find_node(
 			!=
 			trav.end()
 		)
+		{
 			return
 				result_type(
 					fcppt::make_ref(
 						*it
 					)
 				);
+		}
 	}
 
 	return

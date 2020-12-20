@@ -67,7 +67,7 @@ sanguis::server::entities::with_weapon::with_weapon(
 			{
 				return
 					sanguis::server::entities::property::always_max(
-						0.f
+						0.F
 					);
 			}
 		)
@@ -93,17 +93,16 @@ sanguis::server::entities::with_weapon::with_weapon(
 }
 
 sanguis::server::entities::with_weapon::~with_weapon()
-{
-}
+= default;
 
 void
 sanguis::server::entities::with_weapon::update()
 {
-	this->update_weapon(
+	with_weapon::update_weapon(
 		this->primary_weapon_ref()
 	);
 
-	this->update_weapon(
+	with_weapon::update_weapon(
 		this->secondary_weapon_ref()
 	);
 }
@@ -117,12 +116,12 @@ sanguis::server::entities::with_weapon::tick(
 		_duration
 	);
 
-	this->tick_weapon(
+	with_weapon::tick_weapon(
 		_duration,
 		this->primary_weapon_ref()
 	);
 
-	this->tick_weapon(
+	with_weapon::tick_weapon(
 		_duration,
 		this->secondary_weapon_ref()
 	);
@@ -232,11 +231,13 @@ sanguis::server::entities::with_weapon::drop_weapon(
 
 void
 sanguis::server::entities::with_weapon::target(
-	sanguis::server::weapons::optional_target const _target
+	sanguis::server::weapons::optional_target _target
 )
 {
 	target_ =
-		_target;
+		std::move(
+			_target
+		);
 }
 
 sanguis::server::weapons::optional_target
@@ -293,11 +294,15 @@ sanguis::server::entities::with_weapon::use_weapon(
 			if(
 				!_use
 			)
+			{
 				_weapon.get().stop();
+			}
 			else if(
 				target_.has_value()
 			)
+			{
 				_weapon.get().attack();
+			}
 		}
 	);
 }
@@ -382,7 +387,6 @@ sanguis::server::weapons::const_optional_ref
 sanguis::server::entities::with_weapon::primary_weapon() const
 {
 	return
-		// TODO: Make a function for this!
 		fcppt::optional::map(
 			fcppt::optional::deref(
 				primary_weapon_
@@ -434,14 +438,18 @@ sanguis::server::entities::with_weapon::weapon_status(
 			_weapon.type()
 		).get()
 	)
+	{
 		return;
+	}
 
 	if(
 		weapon_status_
 		==
 		_weapon_status
 	)
+	{
 		return;
+	}
 
 	weapon_status_ =
 		_weapon_status;
@@ -549,19 +557,23 @@ sanguis::server::entities::with_weapon::set_weapon(
 	if(
 		_is_primary.get()
 	)
+	{
 		primary_weapon_ =
 			sanguis::server::weapons::optional_unique_ptr(
 				std::move(
 					_other
 				)
 			);
+	}
 	else
+	{
 		secondary_weapon_ =
 			sanguis::server::weapons::optional_unique_ptr(
 				std::move(
 					_other
 				)
 			);
+	}
 
 	return
 		ref;
@@ -627,10 +639,12 @@ sanguis::server::entities::with_weapon::weapon_changed(
 			if(
 				_is_primary.get()
 			)
+			{
 				_environment.get().weapon_changed(
 					this->id(),
 					this->primary_weapon_type()
 				);
+			}
 		}
 	);
 }

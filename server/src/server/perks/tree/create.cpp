@@ -20,13 +20,13 @@ sanguis::server::perks::tree::create()
 				sanguis::server::perks::tree::status(
 					sanguis::perk_type::choleric,
 					sanguis::server::perks::tree::required_player_level(
-						2u
+						2U
 					),
 					sanguis::server::perks::tree::required_parent_level(
-						0u
+						0U
 					),
 					sanguis::server::perks::tree::max_level(
-						10u
+						10U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 					)
 				)
 			),
@@ -34,13 +34,13 @@ sanguis::server::perks::tree::create()
 				sanguis::server::perks::tree::status(
 					sanguis::perk_type::ias,
 					sanguis::server::perks::tree::required_player_level(
-						0u
+						0U
 					),
 					sanguis::server::perks::tree::required_parent_level(
-						0u
+						0U
 					),
 					sanguis::server::perks::tree::max_level(
-						8U
+						8U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 					)
 				)
 			),
@@ -48,13 +48,13 @@ sanguis::server::perks::tree::create()
 				sanguis::server::perks::tree::status(
 					sanguis::perk_type::ims,
 					sanguis::server::perks::tree::required_player_level(
-						0u
+						0U
 					),
 					sanguis::server::perks::tree::required_parent_level(
-						0u
+						0U
 					),
 					sanguis::server::perks::tree::max_level(
-						7u
+						7U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 					)
 				)
 			),
@@ -62,13 +62,13 @@ sanguis::server::perks::tree::create()
 				sanguis::server::perks::tree::status(
 					sanguis::perk_type::irs,
 					sanguis::server::perks::tree::required_player_level(
-						0u
+						0U
 					),
 					sanguis::server::perks::tree::required_parent_level(
-						0u
+						0U
 					),
 					sanguis::server::perks::tree::max_level(
-						4u
+						4U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 					)
 				)
 			),
@@ -76,13 +76,13 @@ sanguis::server::perks::tree::create()
 				sanguis::server::perks::tree::status(
 					sanguis::perk_type::health,
 					sanguis::server::perks::tree::required_player_level(
-						0u
+						0U
 					),
 					sanguis::server::perks::tree::required_parent_level(
-						0u
+						0U
 					),
 					sanguis::server::perks::tree::max_level(
-						10u
+						10U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 					)
 				)
 			),
@@ -90,13 +90,13 @@ sanguis::server::perks::tree::create()
 				sanguis::server::perks::tree::status(
 					sanguis::perk_type::fire_damage,
 					sanguis::server::perks::tree::required_player_level(
-						0u
+						0U
 					),
 					sanguis::server::perks::tree::required_parent_level(
-						0u
+						0U
 					),
 					sanguis::server::perks::tree::max_level(
-						10u
+						10U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 					)
 				)
 			),
@@ -104,13 +104,13 @@ sanguis::server::perks::tree::create()
 				sanguis::server::perks::tree::status(
 					sanguis::perk_type::piercing_damage,
 					sanguis::server::perks::tree::required_player_level(
-						0u
+						0U
 					),
 					sanguis::server::perks::tree::required_parent_level(
-						0u
+						0U
 					),
 					sanguis::server::perks::tree::max_level(
-						10u
+						10U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 					)
 				)
 			)

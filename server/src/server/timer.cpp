@@ -23,9 +23,7 @@ sanguis::server::timer::timer(
 			std::move(
 				_callback
 			),
-			std::move(
-				_duration
-			)
+			_duration
 		)
 	)
 {

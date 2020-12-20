@@ -29,7 +29,7 @@ sanguis::server::send_available_perks(
 	sanguis::server::unicast_callback const &_send
 )
 {
-	sanguis::messages::server::types::perk_tree_node_vector const nodes(
+	auto const nodes(
 		fcppt::algorithm::map_concat<
 			sanguis::messages::server::types::perk_tree_node_vector
 		>(

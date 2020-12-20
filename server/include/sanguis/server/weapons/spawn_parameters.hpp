@@ -18,12 +18,14 @@ class spawn_parameters
 public:
 	spawn_parameters(
 		sanguis::server::weapons::parameters const &,
-		sanguis::server::weapons::spawn_weapon const &
+		sanguis::server::weapons::spawn_weapon &&
 	);
 
+	[[nodiscard]]
 	sanguis::server::weapons::parameters const &
 	parameters() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::spawn_weapon const &
 	spawn_weapon() const;
 private:

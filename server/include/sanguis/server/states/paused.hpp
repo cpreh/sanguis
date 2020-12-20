@@ -1,6 +1,7 @@
 #ifndef SANGUIS_SERVER_STATES_PAUSED_HPP_INCLUDED
 #define SANGUIS_SERVER_STATES_PAUSED_HPP_INCLUDED
 
+#include <sanguis/state_override.hpp>
 #include <sanguis/messages/call/result_fwd.hpp>
 #include <sanguis/messages/client/info_fwd.hpp>
 #include <sanguis/messages/client/pause_fwd.hpp>
@@ -8,7 +9,7 @@
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/events/message_fwd.hpp>
 #include <sanguis/server/states/running.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -39,7 +40,7 @@ class paused
 			sanguis::server::states::running
 		>
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		paused
 	);
 public:
@@ -57,32 +58,37 @@ public:
 		my_context
 	);
 
-	~paused();
+	~paused()
+	SANGUIS_STATE_OVERRIDE;
 
-	// reactions
+	[[nodiscard]]
 	boost::statechart::result
 	react(
 		sanguis::server::events::message const &
 	);
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::client::info const &
 	);
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::client::unpause const &
 	);
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::server::player_id,
 		sanguis::messages::client::pause const &
 	);
 private:
+	[[nodiscard]]
 	boost::statechart::result
 	unpause_impl();
 

@@ -50,17 +50,16 @@ sanguis::server::weapons::grenade::grenade(
 			sanguis::server::weapons::attributes::optional_magazine_size(
 				sanguis::server::weapons::attributes::magazine_size{
 					sanguis::server::weapons::magazine_size{
-						1u
+						1U
 					}
 				}
 			),
 			_parameters.backswing_time(),
 			_parameters.cast_point(),
-			// TODO: This should be a property
 			sanguis::server::weapons::optional_reload_time(
 				sanguis::server::weapons::reload_time(
 					sanguis::duration_second(
-						10.f
+						10.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 					)
 				)
 			)
@@ -76,8 +75,7 @@ sanguis::server::weapons::grenade::grenade(
 }
 
 sanguis::server::weapons::grenade::~grenade()
-{
-}
+= default;
 
 sanguis::server::weapons::grenade::grenade(
 	sanguis::server::weapons::parameters const &_parameters,

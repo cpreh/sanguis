@@ -17,9 +17,9 @@ namespace world
 
 sanguis::server::world::insert_with_id_pair_container
 place_multiple(
-	sanguis::random_generator &,
+	sanguis::random_generator &, // NOLINT(google-runtime-references)
 	sanguis::server::world::place_with_id_callback const &,
-	sanguis::creator::pos,
+	sanguis::creator::pos const &,
 	sanguis::server::radius
 );
 

@@ -51,7 +51,7 @@
 #include <sanguis/server/world/parameters_fwd.hpp>
 #include <sanguis/server/world/pickup_spawner.hpp>
 #include <sanguis/server/world/sight_range_map.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/unique_ptr_fwd.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/optional/reference_fwd.hpp>
@@ -73,7 +73,7 @@ class object
 	private
 		sanguis::server::environment::object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		object
 	);
 public:
@@ -82,7 +82,7 @@ public:
 		sanguis::world_id,
 		sanguis::creator::top_result const &,
 		sanguis::server::world::difficulty,
-		sanguis::world_name const &
+		sanguis::world_name &&
 	);
 
 	~object()
@@ -93,6 +93,7 @@ public:
 		sanguis::duration const &
 	);
 
+	[[nodiscard]]
 	sanguis::server::entities::optional_base_ref
 	insert(
 		sanguis::server::entities::simple_unique_ptr &&,
@@ -100,6 +101,7 @@ public:
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::server::entities::optional_base_ref
 	insert(
 		sanguis::server::entities::with_id_unique_ptr &&,
@@ -107,6 +109,7 @@ public:
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::server::entities::optional_base_ref
 	insert(
 		sanguis::server::world::insert_with_id_pair &&
@@ -117,17 +120,21 @@ public:
 		sanguis::server::world::insert_with_id_pair_container &&
 	);
 
+	[[nodiscard]]
 	sanguis::server::entities::optional_base_ref
 	insert(
 		sanguis::server::world::insert_simple_pair &&
 	);
 
+	[[nodiscard]]
 	sanguis::server::environment::object &
 	environment();
 
+	[[nodiscard]]
 	sanguis::creator::opening_container_array const &
 	openings() const;
 
+	[[nodiscard]]
 	sanguis::world_id
 	world_id() const;
 private:
@@ -140,6 +147,7 @@ private:
 	template<
 		typename Entity
 	>
+	[[nodiscard]]
 	fcppt::optional::reference<
 		Entity
 	>
@@ -291,22 +299,27 @@ public:
 	remove_portal_blocker()
 	override;
 
+	[[nodiscard]]
 	sanguis::server::world::difficulty
 	difficulty() const
 	override;
 
+	[[nodiscard]]
 	sanguis::collision::log const &
 	collision_log() const
 	override;
 
+	[[nodiscard]]
 	sanguis::collision::world::object &
 	collision_world() const
 	override;
 
+	[[nodiscard]]
 	sanguis::creator::grid const &
 	grid() const
 	override;
 
+	[[nodiscard]]
 	sanguis::server::environment::load_context &
 	load_context() const
 	override;
@@ -355,8 +368,8 @@ private:
 	void
 	insert_destructibles(
 		sanguis::creator::destructible_container const &,
-		sanguis::random_generator &
-	);
+		sanguis::random_generator & // NOLINT(google-runtime-references)
+	); // NOLINT(google-runtime-references)
 
 	fcppt::log::object log_;
 

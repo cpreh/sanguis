@@ -27,7 +27,7 @@ sanguis::server::perks::tree::status::status(
 		_max_level
 	),
 	level_(
-		0u
+		0U
 	)
 {
 }

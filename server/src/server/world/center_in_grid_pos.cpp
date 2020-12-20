@@ -12,8 +12,8 @@
 
 bool
 sanguis::server::world::center_in_grid_pos(
-	sanguis::server::center const _center,
-	sanguis::creator::pos const _pos
+	sanguis::server::center const &_center,
+	sanguis::creator::pos const &_pos
 )
 {
 	return

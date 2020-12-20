@@ -66,8 +66,7 @@ sanguis::server::weapons::states::backswing::backswing(
 FCPPT_PP_POP_WARNING
 
 sanguis::server::weapons::states::backswing::~backswing()
-{
-}
+= default;
 
 boost::statechart::result
 sanguis::server::weapons::states::backswing::react(
@@ -77,18 +76,22 @@ sanguis::server::weapons::states::backswing::react(
 	if(
 		!cooldown_.expired()
 	)
+	{
 		return
 			this->discard_event();
+	}
 
 	if(
 		this->context<
 			sanguis::server::weapons::weapon
 		>().magazine_empty()
 	)
+	{
 		return
 			this->react(
 				sanguis::server::weapons::events::reload()
 			);
+	}
 
 	return
 		cancelled_
@@ -113,15 +116,19 @@ sanguis::server::weapons::states::backswing::react(
 			sanguis::server::weapons::weapon
 		>().reload_time().has_value()
 	)
+	{
 		return
 			this->discard_event();
+	}
 
 	if(
 		!cancelled_
 	)
+	{
 		this->post_event(
 			sanguis::server::weapons::events::shoot()
 		);
+	}
 
 	return
 		this->transit<

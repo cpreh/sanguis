@@ -12,7 +12,7 @@ sanguis::server::net::health_policy::start_duration()
 {
 	return
 		sanguis::duration_second(
-			0.5f
+			0.5F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		);
 }
 
@@ -32,7 +32,7 @@ sanguis::server::net::health_policy::difference(
 			fcppt::literal<
 				sanguis::server::space_unit
 			>(
-				10
+				10 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			)
 		);
 }

@@ -32,23 +32,27 @@ public:
 
 	insert_pair(
 		unique_ptr &&,
-		sanguis::server::entities::insert_parameters const &
+		sanguis::server::entities::insert_parameters &&
 	);
 
 	insert_pair(
 		insert_pair &&
-	);
+	)
+	noexcept;
 
 	insert_pair &
 	operator=(
 		insert_pair &&
-	);
+	)
+	noexcept;
 
 	~insert_pair();
 
+	[[nodiscard]]
 	unique_ptr &
 	entity();
 
+	[[nodiscard]]
 	sanguis::server::entities::insert_parameters const &
 	insert_parameters() const;
 private:

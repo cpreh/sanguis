@@ -33,15 +33,16 @@ sanguis::server::weapons::random_angle(
 		fcppt::literal<
 			sanguis::server::space_unit
 		>(
-			4
+			4 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		)
 	);
 
-	typedef
+	using
+	normal_distribution
+	=
 	fcppt::random::distribution::parameters::normal<
 		sanguis::server::space_unit
-	>
-	normal_distribution;
+	>;
 
 	auto angle_distribution(
 		fcppt::random::distribution::make_basic(

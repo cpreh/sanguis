@@ -18,7 +18,8 @@ public:
 
 	unknown_player_exception(
 		unknown_player_exception &&
-	);
+	)
+	noexcept;
 
 	unknown_player_exception(
 		unknown_player_exception const &
@@ -27,14 +28,16 @@ public:
 	unknown_player_exception &
 	operator=(
 		unknown_player_exception &&
-	);
+	)
+	noexcept;
 
 	unknown_player_exception &
 	operator=(
 		unknown_player_exception const &
 	);
 
-	~unknown_player_exception() noexcept
+	~unknown_player_exception()
+	noexcept
 	override;
 
 };

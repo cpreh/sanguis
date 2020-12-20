@@ -29,7 +29,7 @@ struct accuracy
 	static
 	void
 	make(
-		sanguis::random_generator &_random_generator,
+		sanguis::random_generator &_random_generator, // NOLINT(google-runtime-references)
 		sanguis::server::entities::enemies::difficulty const _difficulty,
 		fcppt::reference<
 			Parameters
@@ -38,9 +38,8 @@ struct accuracy
 	{
 		_parameters.get().extra_accuracy(
 			std::min(
-				// TODO: What to use here?
 				sanguis::server::weapons::accuracy(
-					1.f
+					1.F
 					-
 					std::exp(
 						-std::sqrt(
@@ -50,11 +49,11 @@ struct accuracy
 							)
 						)
 						/
-						100.f
+						100.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 					)
 				),
 				sanguis::server::weapons::accuracy(
-					1.f
+					1.F
 				)
 			)
 		);

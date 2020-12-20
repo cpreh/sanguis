@@ -29,7 +29,8 @@ public:
 
 	disconnect(
 		disconnect &&
-	);
+	)
+	noexcept;
 
 	disconnect(
 		disconnect const &
@@ -38,7 +39,8 @@ public:
 	disconnect &
 	operator=(
 		disconnect &&
-	);
+	)
+	noexcept;
 
 	disconnect &
 	operator=(
@@ -48,6 +50,7 @@ public:
 	~disconnect()
 	override;
 
+	[[nodiscard]]
 	alda::net::id
 	id() const;
 private:

@@ -45,7 +45,7 @@ sanguis::server::weapons::melee::melee(
 			_parameters.backswing_time(),
 			sanguis::server::weapons::cast_point(
 				sanguis::duration_second(
-					0.f
+					0.F
 				)
 			),
 			sanguis::server::weapons::optional_reload_time()
@@ -61,8 +61,7 @@ sanguis::server::weapons::melee::melee(
 }
 
 sanguis::server::weapons::melee::~melee()
-{
-}
+= default;
 
 sanguis::server::weapons::melee::melee(
 	sanguis::server::weapons::parameters const &_parameters,

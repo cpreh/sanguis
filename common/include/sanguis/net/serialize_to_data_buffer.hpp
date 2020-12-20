@@ -22,8 +22,8 @@ serialize_to_data_buffer(
 	alda::message::base<
 		AldaType
 	> const &_message,
-	sanguis::net::data_buffer &_buffer
-)
+	sanguis::net::data_buffer &_buffer // NOLINT(google-runtime-references)
+) // NOLINT(google-runtime-references)
 {
 	sanguis::net::data_streambuf stream_buf(
 		fcppt::make_ref(

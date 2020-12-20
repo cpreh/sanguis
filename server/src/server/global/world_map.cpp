@@ -9,7 +9,7 @@
 
 sanguis::server::global::world_map::world_map(
 	sanguis::server::world::map &&_worlds,
-	sanguis::server::global::world_connection_map const &_connections
+	sanguis::server::global::world_connection_map &&_connections
 )
 :
 	worlds_(
@@ -18,40 +18,39 @@ sanguis::server::global::world_map::world_map(
 		)
 	),
 	connections_(
-		_connections
+		std::move(
+			_connections
+		)
 	)
-{
-}
-
-sanguis::server::global::world_map::~world_map()
 {
 }
 
 sanguis::server::global::world_map::world_map(
-	world_map &&_other
+	world_map &&
 )
-:
-	worlds_(
-		std::move(
-			_other.worlds_
-		)
-	),
-	connections_(
-		std::move(
-			_other.connections_
-		)
-	)
-{
-}
+noexcept
+= default;
+
+sanguis::server::global::world_map &
+sanguis::server::global::world_map::operator=(
+	world_map &&
+)
+noexcept
+= default;
+
+sanguis::server::global::world_map::~world_map()
+= default;
 
 sanguis::server::world::map const &
 sanguis::server::global::world_map::worlds() const
 {
-	return worlds_;
+	return
+		worlds_;
 }
 
 sanguis::server::global::world_connection_map const &
 sanguis::server::global::world_map::connections() const
 {
-	return connections_;
+	return
+		connections_;
 }

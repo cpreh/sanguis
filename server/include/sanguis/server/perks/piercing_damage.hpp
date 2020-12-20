@@ -4,7 +4,7 @@
 #include <sanguis/server/entities/with_perks_fwd.hpp>
 #include <sanguis/server/perks/level_diff.hpp>
 #include <sanguis/server/perks/perk.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -18,7 +18,7 @@ class piercing_damage
 :
 	public sanguis::server::perks::perk
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		piercing_damage
 	);
 public:
@@ -29,7 +29,7 @@ public:
 private:
 	void
 	change(
-		sanguis::server::entities::with_perks &,
+		sanguis::server::entities::with_perks &, // NOLINT(google-runtime-references)
 		sanguis::server::perks::level_diff
 	)
 	override;

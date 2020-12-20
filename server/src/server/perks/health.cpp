@@ -17,8 +17,7 @@ sanguis::server::perks::health::health()
 }
 
 sanguis::server::perks::health::~health()
-{
-}
+= default;
 
 void
 sanguis::server::perks::health::change(
@@ -30,7 +29,7 @@ sanguis::server::perks::health::change(
 		&sanguis::server::entities::property::constant_change,
 		_entity.health(),
 		sanguis::server::perks::change_factor(
-			20.f
+			20.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		),
 		_diff
 	);

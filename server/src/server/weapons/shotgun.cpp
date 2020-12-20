@@ -79,8 +79,7 @@ sanguis::server::weapons::shotgun::shotgun(
 }
 
 sanguis::server::weapons::shotgun::~shotgun()
-{
-}
+= default;
 
 sanguis::server::weapons::shotgun::shotgun(
 	sanguis::server::weapons::parameters const &_parameters,
@@ -127,11 +126,14 @@ sanguis::server::weapons::shotgun::do_attack(
 	sanguis::server::weapons::attack const &_attack
 )
 {
-	typedef fcppt::random::distribution::basic<
+	using
+	angle_distribution
+	=
+	fcppt::random::distribution::basic<
 		fcppt::random::distribution::parameters::normal<
 			sanguis::server::space_unit
 		>
-	> angle_distribution;
+	>;
 
 	sanguis::random_variate<
 		angle_distribution

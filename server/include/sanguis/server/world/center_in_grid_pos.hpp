@@ -14,8 +14,8 @@ namespace world
 
 bool
 center_in_grid_pos(
-	sanguis::server::center,
-	sanguis::creator::pos
+	sanguis::server::center const &,
+	sanguis::creator::pos const &
 );
 
 }

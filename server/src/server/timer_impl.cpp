@@ -5,8 +5,8 @@
 #include <sanguis/server/timer_impl.hpp>
 #include <alda/net/io_service_wrapper.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/system/error_code.hpp>
 #include <chrono>
-#include <functional>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -33,8 +33,7 @@ sanguis::server::timer_impl::timer_impl(
 }
 
 sanguis::server::timer_impl::~timer_impl()
-{
-}
+= default;
 
 void
 sanguis::server::timer_impl::handler()
@@ -56,9 +55,12 @@ sanguis::server::timer_impl::reset()
 	);
 
 	deadline_timer_.async_wait(
-		std::bind(
-			&sanguis::server::timer_impl::handler,
+		[
 			this
-		)
+		](
+			boost::system::error_code const &_error
+		){
+			this->handler();
+		}
 	);
 }

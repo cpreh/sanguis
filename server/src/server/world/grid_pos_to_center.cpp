@@ -13,7 +13,7 @@
 
 sanguis::server::center
 sanguis::server::world::grid_pos_to_center(
-	sanguis::creator::pos const _pos
+	sanguis::creator::pos const &_pos
 )
 {
 	return
@@ -34,7 +34,7 @@ sanguis::server::world::grid_pos_to_center(
 					fcppt::literal<
 						sanguis::creator::size_type
 					>(
-						2u
+						2U
 					)
 				)
 			)

@@ -28,8 +28,8 @@ deserialize(
 	alda::serialization::context<
 		AldaType
 	> const &_context,
-	alda::net::buffer::circular_receive::streambuf &_data
-)
+	alda::net::buffer::circular_receive::streambuf &_data // NOLINT(google-runtime-references)
+) // NOLINT(google-runtime-references)
 {
 	return
 		alda::net::buffer::circular_receive::extract_message<

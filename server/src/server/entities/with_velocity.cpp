@@ -13,6 +13,7 @@
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_velocity.hpp>
 #include <sanguis/server/entities/property/change_callback.hpp>
+#include <sanguis/server/entities/property/change_event_fwd.hpp>
 #include <sanguis/server/entities/property/changeable.hpp>
 #include <sanguis/server/environment/object.hpp>
 #include <fcppt/make_cref.hpp>
@@ -20,9 +21,6 @@
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
 
 
 FCPPT_PP_PUSH_WARNING
@@ -53,10 +51,14 @@ sanguis::server::entities::with_velocity::with_velocity(
 	speed_change_(
 		movement_speed_.register_change_callback(
 			sanguis::server::entities::property::change_callback{
-				std::bind(
-					&sanguis::server::entities::with_velocity::desired_speed_change,
+				[
 					this
+				](
+					sanguis::server::entities::property::change_event const &
 				)
+				{
+					this->desired_speed_change();
+				}
 			}
 		)
 	)
@@ -79,10 +81,12 @@ sanguis::server::entities::with_velocity::update()
 	if(
 		net_speed_.update()
 	)
+	{
 		cur_environment.speed_changed(
 			this->id(),
 			this->speed()
 		);
+	}
 }
 
 sanguis::server::entities::optional_transfer_result
@@ -99,8 +103,7 @@ sanguis::server::entities::with_velocity::on_transfer(
 }
 
 sanguis::server::entities::with_velocity::~with_velocity()
-{
-}
+= default;
 
 sanguis::server::entities::property::changeable &
 sanguis::server::entities::with_velocity::movement_speed()

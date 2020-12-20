@@ -10,8 +10,8 @@
 #include <sanguis/random_generator.hpp>
 #include <sanguis/world_id.hpp>
 #include <sanguis/messages/server/base_fwd.hpp>
-#include <sanguis/server/console_fwd.hpp>
-#include <sanguis/server/load_fwd.hpp>
+#include <sanguis/server/console_ref.hpp>
+#include <sanguis/server/load_cref.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/speed_fwd.hpp>
 #include <sanguis/server/unicast_callback.hpp>
@@ -26,7 +26,7 @@
 #include <sanguis/server/weapons/common_parameters_fwd.hpp>
 #include <sanguis/server/weapons/log.hpp>
 #include <sanguis/server/world/context.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/reference_decl.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>
@@ -47,15 +47,15 @@ class context
 :
 	public sanguis::server::world::context
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		context
 	);
 public:
 	context(
 		fcppt::log::context_reference,
-		sanguis::server::unicast_callback const &,
-		sanguis::server::load const &,
-		sanguis::server::console &
+		sanguis::server::unicast_callback &&,
+		sanguis::server::load_cref,
+		sanguis::server::console_ref
 	);
 
 	~context()
@@ -126,14 +126,17 @@ public:
 		sanguis::duration const &
 	);
 
+	[[nodiscard]]
 	bool
 	multiple_players() const;
 
+	[[nodiscard]]
 	bool
 	has_player(
 		sanguis::server::player_id
 	) const;
 private:
+	[[nodiscard]]
 	sanguis::entity_id
 	next_id();
 
@@ -152,6 +155,7 @@ private:
 	)
 	override;
 
+	[[nodiscard]]
 	bool
 	request_transfer(
 		sanguis::server::global::source_world_pair
@@ -165,19 +169,23 @@ private:
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::server::weapons::common_parameters
 	weapon_parameters();
 
+	[[nodiscard]]
 	sanguis::server::world::object &
 	world(
 		sanguis::world_id
 	);
 
+	[[nodiscard]]
 	sanguis::server::entities::player &
 	player_exn(
 		sanguis::server::player_id
 	);
 
+	[[nodiscard]]
 	sanguis::server::entities::optional_player_ref
 	player_opt(
 		sanguis::server::player_id
@@ -202,7 +210,7 @@ private:
 
 	load_context_unique_ptr const load_context_;
 
-	sanguis::server::console &console_;
+	sanguis::server::console_ref const console_;
 
 	using
 	player_ref

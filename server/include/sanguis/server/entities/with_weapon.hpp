@@ -202,11 +202,13 @@ private:
 		sanguis::server::weapons::unique_ptr &&
 	);
 
+	static
 	void
 	update_weapon(
 		sanguis::server::entities::with_weapon::optional_weapon_ref const &
 	);
 
+	static
 	void
 	tick_weapon(
 		sanguis::duration const &,

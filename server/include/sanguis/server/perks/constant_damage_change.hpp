@@ -16,7 +16,7 @@ namespace perks
 
 void
 constant_damage_change(
-	sanguis::server::entities::with_perks &,
+	sanguis::server::entities::with_perks &, // NOLINT(google-runtime-references)
 	sanguis::server::damage::type,
 	sanguis::server::perks::level_diff,
 	sanguis::server::perks::change_factor

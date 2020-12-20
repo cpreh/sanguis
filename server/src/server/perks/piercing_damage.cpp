@@ -16,8 +16,7 @@ sanguis::server::perks::piercing_damage::piercing_damage()
 }
 
 sanguis::server::perks::piercing_damage::~piercing_damage()
-{
-}
+= default;
 
 void
 sanguis::server::perks::piercing_damage::change(
@@ -30,7 +29,7 @@ sanguis::server::perks::piercing_damage::change(
 		sanguis::server::damage::type::piercing,
 		_diff,
 		sanguis::server::perks::change_factor(
-			0.2f
+			0.2F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		)
 	);
 }

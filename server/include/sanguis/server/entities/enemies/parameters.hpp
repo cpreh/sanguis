@@ -21,6 +21,7 @@
 #include <sanguis/server/weapons/ias.hpp>
 #include <sanguis/server/weapons/irs.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <fcppt/reference_impl.hpp>
 
 
@@ -35,6 +36,9 @@ namespace enemies
 
 class parameters
 {
+	FCPPT_NONCOPYABLE(
+		parameters
+	);
 public:
 	parameters(
 		sanguis::creator::enemy_type,
@@ -51,6 +55,19 @@ public:
 		sanguis::server::entities::spawn_owner,
 		sanguis::server::auras::container &&
 	);
+
+	parameters(
+		parameters &&
+	)
+	noexcept;
+
+	parameters &
+	operator=(
+		parameters &&
+	)
+	noexcept;
+
+	~parameters();
 
 	[[nodiscard]]
 	sanguis::creator::enemy_type
@@ -176,7 +193,7 @@ private:
 
 	fcppt::reference<
 		sanguis::server::environment::load_context
-	> const load_context_;
+	> load_context_;
 
 	sanguis::server::damage::armor_array armor_;
 

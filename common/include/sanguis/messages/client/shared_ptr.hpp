@@ -12,11 +12,12 @@ namespace messages
 namespace client
 {
 
-typedef
+using
+shared_ptr
+=
 fcppt::shared_ptr<
 	sanguis::messages::client::base
->
-shared_ptr;
+>;
 
 }
 }

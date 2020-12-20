@@ -20,7 +20,7 @@ sanguis::server::world::object_unique_ptr
 generate(
 	sanguis::server::world::parameters const &,
 	sanguis::world_id,
-	sanguis::world_name const &,
+	sanguis::world_name &&,
 	sanguis::server::world::difficulty,
 	sanguis::creator::top_parameters const &
 );

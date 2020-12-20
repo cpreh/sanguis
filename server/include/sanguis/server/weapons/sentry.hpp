@@ -11,7 +11,7 @@
 #include <sanguis/server/weapons/spawn_weapon.hpp>
 #include <sanguis/server/weapons/unique_ptr.hpp>
 #include <sanguis/server/weapons/attributes/health.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -25,13 +25,13 @@ class sentry
 :
 	public sanguis::server::weapons::spawn
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		sentry
 	);
 public:
 	sentry(
 		sanguis::server::weapons::common_parameters const &,
-		sanguis::server::weapons::spawn_weapon const &,
+		sanguis::server::weapons::spawn_weapon &&,
 		sanguis::server::weapons::sentry_parameters const &
 	);
 
@@ -43,10 +43,12 @@ public:
 		sanguis::server::weapons::attributes::health
 	);
 private:
+	[[nodiscard]]
 	sanguis::server::weapons::unique_ptr
 	clone() const
 	override;
 
+	[[nodiscard]]
 	sanguis::server::entities::optional_base_ref
 	do_spawn(
 		sanguis::server::weapons::attack const &,
@@ -54,6 +56,7 @@ private:
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::weapon_attribute_vector
 	extra_attributes() const
 	override;

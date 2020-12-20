@@ -16,7 +16,7 @@ sanguis::server::world::insert_pair<
 	Type
 >::insert_pair(
 	unique_ptr &&_entity,
-	sanguis::server::entities::insert_parameters const &_insert_parameters
+	sanguis::server::entities::insert_parameters &&_insert_parameters
 )
 :
 	entity_(
@@ -25,7 +25,9 @@ sanguis::server::world::insert_pair<
 		)
 	),
 	insert_parameters_(
-		_insert_parameters
+		std::move(
+			_insert_parameters
+		)
 	)
 {
 }
@@ -37,7 +39,9 @@ sanguis::server::world::insert_pair<
 	Type
 >::insert_pair(
 	insert_pair &&
-) = default;
+)
+noexcept
+= default;
 
 template<
 	typename Type
@@ -49,7 +53,9 @@ sanguis::server::world::insert_pair<
 	Type
 >::operator=(
 	insert_pair &&
-) = default;
+)
+noexcept
+= default;
 
 template<
 	typename Type
@@ -59,8 +65,7 @@ sanguis::server::world::insert_pair<
 >::~insert_pair<
 	Type
 >()
-{
-}
+= default;
 
 template<
 	typename Type

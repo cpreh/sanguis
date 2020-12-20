@@ -60,8 +60,7 @@ sanguis::server::weapons::pistol::pistol(
 }
 
 sanguis::server::weapons::pistol::~pistol()
-{
-}
+= default;
 
 sanguis::server::weapons::pistol::pistol(
 	sanguis::server::weapons::parameters const &_parameters,

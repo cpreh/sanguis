@@ -23,7 +23,7 @@ sanguis::server::world::insert_with_id_pair_container
 sanguis::server::world::generate_single_spawns(
 	sanguis::creator::enemy_type const _enemy_type,
 	sanguis::creator::enemy_kind const _enemy_kind,
-	sanguis::creator::spawn_pos const _pos,
+	sanguis::creator::spawn_pos const &_pos,
 	sanguis::server::weapons::common_parameters const &_weapons_parameters,
 	sanguis::random_generator_ref const _random_generator,
 	sanguis::server::environment::load_context &_load_context,
@@ -40,7 +40,8 @@ sanguis::server::world::generate_single_spawns(
 					_enemy_type,
 					_enemy_kind,
 					_difficulty,
-					&_load_context]
+					&_load_context
+				]
 				{
 					return
 						sanguis::server::entities::enemies::create(
@@ -54,7 +55,7 @@ sanguis::server::world::generate_single_spawns(
 								sanguis::server::entities::auto_weak_link()
 							),
 							sanguis::server::entities::enemies::special_chance(
-								0.05f
+								0.05F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 							)
 						);
 				}

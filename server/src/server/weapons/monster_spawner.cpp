@@ -46,17 +46,17 @@ sanguis::server::weapons::monster_spawner::monster_spawner(
 			),
 			sanguis::server::weapons::attributes::optional_accuracy(),
 			sanguis::server::weapons::range(
-				1000.f
+				1000.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			),
 			sanguis::server::weapons::attributes::optional_magazine_size(),
 			sanguis::server::weapons::backswing_time(
 				sanguis::duration_second(
-					0.8f
+					0.8F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 				)
 			),
 			sanguis::server::weapons::cast_point(
 				sanguis::duration_second(
-					0.2f
+					0.2F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 				)
 			),
 			sanguis::server::weapons::optional_reload_time()
@@ -69,8 +69,7 @@ sanguis::server::weapons::monster_spawner::monster_spawner(
 }
 
 sanguis::server::weapons::monster_spawner::~monster_spawner()
-{
-}
+= default;
 
 sanguis::server::weapons::monster_spawner::monster_spawner(
 	sanguis::server::weapons::parameters const &_parameters
@@ -127,7 +126,7 @@ sanguis::server::weapons::monster_spawner::do_attack(
 						sanguis::server::entities::auto_weak_link()
 					),
 					sanguis::server::entities::enemies::special_chance(
-						1.f
+						1.F
 					)
 				),
 				sanguis::server::entities::insert_parameters(

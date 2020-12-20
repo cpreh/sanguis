@@ -1,6 +1,6 @@
-#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/diff_clock_cref.hpp>
 #include <sanguis/perk_type.hpp>
-#include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/random_generator_ref.hpp>
 #include <sanguis/server/perks/choleric.hpp>
 #include <sanguis/server/perks/create.hpp>
 #include <sanguis/server/perks/fire_damage.hpp>
@@ -18,8 +18,8 @@
 
 sanguis::server::perks::unique_ptr
 sanguis::server::perks::create(
-	sanguis::diff_clock const &_diff_clock,
-	sanguis::random_generator &_random_generator,
+	sanguis::diff_clock_cref const _diff_clock,
+	sanguis::random_generator_ref const _random_generator,
 	sanguis::perk_type const _type
 )
 {

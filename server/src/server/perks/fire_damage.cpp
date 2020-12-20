@@ -16,8 +16,7 @@ sanguis::server::perks::fire_damage::fire_damage()
 }
 
 sanguis::server::perks::fire_damage::~fire_damage()
-{
-}
+= default;
 
 void
 sanguis::server::perks::fire_damage::change(
@@ -30,7 +29,7 @@ sanguis::server::perks::fire_damage::change(
 		sanguis::server::damage::type::fire,
 		_diff,
 		sanguis::server::perks::change_factor(
-			0.3f
+			0.3F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		)
 	);
 }

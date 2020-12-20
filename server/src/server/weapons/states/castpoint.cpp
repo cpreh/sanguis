@@ -74,8 +74,7 @@ sanguis::server::weapons::states::castpoint::castpoint(
 FCPPT_PP_POP_WARNING
 
 sanguis::server::weapons::states::castpoint::~castpoint()
-{
-}
+= default;
 
 boost::statechart::result
 sanguis::server::weapons::states::castpoint::react(
@@ -85,8 +84,10 @@ sanguis::server::weapons::states::castpoint::react(
 	if(
 		!attack_time_.expired()
 	)
+	{
 		return
 			this->discard_event();
+	}
 
 	sanguis::server::entities::with_weapon &owner(
 		this->context<
@@ -113,7 +114,7 @@ sanguis::server::weapons::states::castpoint::react(
 				&owner,
 				this
 			](
-				sanguis::server::weapons::target const _target
+				sanguis::server::weapons::target const &_target
 			)
 			{
 				switch(
@@ -150,7 +151,7 @@ sanguis::server::weapons::states::castpoint::react(
 							),
 							FCPPT_ASSERT_OPTIONAL_ERROR(
 								owner.environment()
-							).get(),
+							),
 							_target
 						)
 					)
@@ -169,9 +170,11 @@ sanguis::server::weapons::states::castpoint::react(
 				if(
 					cancelled_
 				)
+				{
 					this->post_event(
 						sanguis::server::weapons::events::stop()
 					);
+				}
 
 				return
 					this->transit<

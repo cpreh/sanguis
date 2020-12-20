@@ -35,27 +35,35 @@ public:
 		sanguis::server::weapons::range
 	);
 
+	[[nodiscard]]
 	sanguis::server::weapons::attributes::damage
 	damage() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::attributes::aoe
 	aoe() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::accuracy
 	accuracy() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::backswing_time
 	backswing_time() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::cast_point
 	cast_point() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::magazine_size
 	magazine_size() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::reload_time
 	reload_time() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::range
 	range() const;
 

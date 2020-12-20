@@ -2,9 +2,7 @@
 
 
 sanguis::server::environment::object::object()
-{
-}
+= default;
 
 sanguis::server::environment::object::~object()
-{
-}
+= default;

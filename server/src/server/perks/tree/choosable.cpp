@@ -48,11 +48,13 @@ sanguis::server::perks::tree::choosable(
 						==
 						current.max_level().get()
 					)
+					{
 						return
 							false;
+					}
 				}
 
-				// TODO: Do this differently
+				// TODO(philipp): Do this differently
 				for(
 					sanguis::server::perks::tree::object::const_optional_ref pos(
 						_node
@@ -70,8 +72,10 @@ sanguis::server::perks::tree::choosable(
 						>
 						pos.get_unsafe().get().parent().get_unsafe().get().value().level().get()
 					)
+					{
 						return
 							false;
+					}
 				}
 
 				return

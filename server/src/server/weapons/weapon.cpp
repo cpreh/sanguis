@@ -77,7 +77,7 @@ sanguis::server::weapons::weapon::weapon(
 		_parameters.magazine_size().has_value()
 		?
 			optional_magazine_used(
-				0u
+				0U
 			)
 		:
 			optional_magazine_used()
@@ -99,15 +99,14 @@ sanguis::server::weapons::weapon::weapon(
 	FCPPT_ASSERT_PRE(
 		this->magazine_size().value().get()
 		!=
-		0u
+		0U
 	);
 }
 
 FCPPT_PP_POP_WARNING
 
 sanguis::server::weapons::weapon::~weapon()
-{
-}
+= default;
 
 void
 sanguis::server::weapons::weapon::owner(
@@ -204,7 +203,7 @@ sanguis::server::weapons::weapon::magazine_size() const
 
 bool
 sanguis::server::weapons::weapon::in_range(
-	sanguis::server::weapons::target const _to
+	sanguis::server::weapons::target const &_to
 ) const
 {
 	return
@@ -273,7 +272,6 @@ sanguis::server::weapons::weapon::description() const
 						);
 				}
 			),
-			// TODO: Make composing this more sane!
 			fcppt::optional::maybe(
 				accuracy_,
 				[
@@ -397,7 +395,7 @@ sanguis::server::weapons::weapon::reset_magazine()
 		)
 		{
 			_used =
-				0u;
+				0U;
 
 			this->update_magazine_remaining();
 		}
@@ -435,7 +433,7 @@ sanguis::server::weapons::weapon::magazine_empty() const
 		this->magazine_remaining()
 		==
 		sanguis::magazine_remaining{
-			0u
+			0U
 		};
 }
 
@@ -475,7 +473,7 @@ sanguis::server::weapons::weapon::magazine_remaining() const
 			magazine_used_,
 			fcppt::const_(
 				sanguis::magazine_remaining{
-					1u
+					1U
 				}
 			),
 			[

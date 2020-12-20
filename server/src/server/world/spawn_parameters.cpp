@@ -16,7 +16,7 @@ sanguis::server::world::spawn_parameters(
 				_spawn.pos().get()
 			),
 			sanguis::server::angle(
-				0.f // TODO
+				0.F // TODO(philipp)
 			)
 		);
 }

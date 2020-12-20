@@ -3,6 +3,7 @@
 
 #include <sanguis/server/machine_fwd.hpp>
 #include <sanguis/server/send_callback.hpp>
+#include <fcppt/reference_fwd.hpp>
 
 
 namespace sanguis
@@ -12,7 +13,9 @@ namespace server
 
 sanguis::server::send_callback
 make_send_callback(
-	sanguis::server::machine &
+	fcppt::reference<
+		sanguis::server::machine
+	>
 );
 
 }

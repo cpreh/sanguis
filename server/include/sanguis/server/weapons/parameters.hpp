@@ -35,33 +35,43 @@ public:
 		sanguis::server::weapons::optional_reload_time
 	);
 
+	[[nodiscard]]
 	sanguis::server::weapons::common_parameters const &
 	common_parameters() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::log const &
 	log() const;
 
+	[[nodiscard]]
 	sanguis::random_generator &
 	random_generator() const;
 
+	[[nodiscard]]
 	sanguis::weapon_type
 	weapon_type() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::attributes::optional_accuracy
 	accuracy() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::range
 	range() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::attributes::optional_magazine_size
 	magazine_size() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::backswing_time
 	backswing_time() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::cast_point
 	cast_point() const;
 
+	[[nodiscard]]
 	sanguis::server::weapons::optional_reload_time
 	reload_time() const;
 private:

@@ -20,9 +20,10 @@
 #include <sanguis/messages/server/speed.hpp>
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/console.hpp>
+#include <sanguis/server/console_ref.hpp>
 #include <sanguis/server/create_player.hpp>
 #include <sanguis/server/direction.hpp>
-#include <sanguis/server/load_fwd.hpp>
+#include <sanguis/server/load_cref.hpp>
 #include <sanguis/server/log_location.hpp>
 #include <sanguis/server/player_id.hpp>
 #include <sanguis/server/send_available_perks.hpp>
@@ -60,6 +61,7 @@
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
+#include <fcppt/reference_to_base.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -88,7 +90,6 @@
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <functional>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -98,9 +99,9 @@ FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::server::global::context::context(
 	fcppt::log::context_reference const _log_context,
-	sanguis::server::unicast_callback const &_send_unicast,
-	sanguis::server::load const &_model_context,
-	sanguis::server::console &_console
+	sanguis::server::unicast_callback &&_send_unicast,
+	sanguis::server::load_cref const _model_context,
+	sanguis::server::console_ref const _console
 )
 :
 	sanguis::server::world::context(),
@@ -124,10 +125,12 @@ sanguis::server::global::context::context(
 		sanguis::random_seed()
 	),
 	next_id_(
-		0u
+		0U
 	),
 	send_unicast_(
-		_send_unicast
+		std::move(
+			_send_unicast
+		)
 	),
 	load_context_(
 		fcppt::unique_ptr_to_base<
@@ -138,10 +141,12 @@ sanguis::server::global::context::context(
 			>(
 				_model_context,
 				sanguis::server::global::next_id_callback(
-					std::bind(
-						&sanguis::server::global::context::next_id,
+					[
 						this
-					)
+					]{
+						return
+							this->next_id();
+					}
 				)
 			)
 		)
@@ -154,10 +159,20 @@ sanguis::server::global::context::context(
 		sanguis::server::global::generate_worlds(
 			sanguis::server::world::parameters(
 				_log_context,
-				random_generator_,
+				fcppt::make_ref(
+					random_generator_
+				),
 				this->weapon_parameters(),
-				*this,
-				*load_context_
+				fcppt::reference_to_base<
+					sanguis::server::world::context
+				>(
+					fcppt::make_ref(
+						*this
+					)
+				),
+				fcppt::make_ref(
+					*load_context_
+				)
 			)
 		)
 	)
@@ -167,8 +182,7 @@ sanguis::server::global::context::context(
 FCPPT_PP_POP_WARNING
 
 sanguis::server::global::context::~context()
-{
-}
+= default;
 
 void
 sanguis::server::global::context::insert_player(
@@ -199,7 +213,7 @@ sanguis::server::global::context::insert_player(
 			),
 			send_unicast_,
 			_player_id,
-			console_.known_commands()
+			console_->known_commands()
 		)
 	);
 
@@ -226,14 +240,14 @@ sanguis::server::global::context::insert_player(
 					cur_world.openings()[
 						sanguis::creator::opening_type::entry
 					],
-					0u
+					0U
 				)
 			),
 			[
 				&cur_world,
 				&player_ptr
 			](
-				sanguis::creator::opening const _opening
+				sanguis::creator::opening const &_opening
 			)
 			{
 				return
@@ -249,7 +263,7 @@ sanguis::server::global::context::insert_player(
 								_opening.get()
 							),
 							sanguis::server::angle(
-								0.f
+								0.F
 							)
 						)
 					);
@@ -539,9 +553,11 @@ sanguis::server::global::context::update(
 		:
 		worlds_.worlds()
 	)
+	{
 		cur_world.second->update(
 			_diff
 		);
+	}
 }
 
 bool
@@ -550,7 +566,7 @@ sanguis::server::global::context::multiple_players() const
 	return
 		players_.size()
 		>
-		1u;
+		1U;
 }
 
 bool
@@ -563,7 +579,7 @@ sanguis::server::global::context::has_player(
 			_player_id
 		)
 		==
-		1u;
+		1U;
 }
 
 sanguis::entity_id
@@ -614,7 +630,7 @@ sanguis::server::global::context::request_transfer(
 			_source
 		)
 		!=
-		0u;
+		0U;
 }
 
 void
@@ -643,7 +659,7 @@ sanguis::server::global::context::transfer_entity(
 				dest.second.get()
 			),
 			sanguis::server::angle(
-				0.f // TODO!
+				0.F // TODO(philipp)!
 			),
 			sanguis::collision::world::created{
 				false

@@ -17,8 +17,7 @@ sanguis::server::perks::ias::ias()
 }
 
 sanguis::server::perks::ias::~ias()
-{
-}
+= default;
 
 void
 sanguis::server::perks::ias::change(
@@ -30,7 +29,7 @@ sanguis::server::perks::ias::change(
 		&sanguis::server::entities::property::linear_change,
 		_entity.attack_speed(),
 		sanguis::server::perks::change_factor(
-			0.2f
+			0.2F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		),
 		_diff
 	);

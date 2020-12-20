@@ -29,6 +29,8 @@
 #include <sanguis/server/states/unpaused.hpp>
 #include <sge/charconv/utf8_string_to_fcppt.hpp>
 #include <fcppt/exception.hpp>
+#include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference.hpp>
 #include <fcppt/string.hpp>
@@ -78,14 +80,18 @@ sanguis::server::states::running::running(
 	},
 	console_(
 		sanguis::server::make_send_callback(
-			this->context<
-				sanguis::server::machine
-			>()
+			fcppt::make_ref(
+				this->context<
+					sanguis::server::machine
+				>()
+			)
 		),
 		sanguis::server::make_unicast_callback(
-			this->context<
-				sanguis::server::machine
-			>()
+			fcppt::make_ref(
+				this->context<
+					sanguis::server::machine
+				>()
+			)
 		)
 	),
 	global_context_(
@@ -96,14 +102,20 @@ sanguis::server::states::running::running(
 				sanguis::server::machine
 			>().log_context(),
 			sanguis::server::make_unicast_callback(
+				fcppt::make_ref(
+					this->context<
+						sanguis::server::machine
+					>()
+				)
+			),
+			fcppt::make_cref(
 				this->context<
 					sanguis::server::machine
-				>()
+				>().resources()
 			),
-			this->context<
-				sanguis::server::machine
-			>().resources(),
-			console_
+			fcppt::make_ref(
+				console_
+			)
 		)
 	)
 {
@@ -121,8 +133,7 @@ sanguis::server::states::running::running(
 FCPPT_PP_POP_WARNING
 
 sanguis::server::states::running::~running()
-{
-}
+= default;
 
 boost::statechart::result
 sanguis::server::states::running::react(
@@ -214,7 +225,7 @@ sanguis::server::states::running::operator()(
 
 	global_context_->insert_player(
 		sanguis::world_id(
-			0u // FIXME: which world id?
+			0U // FIXME: which world id?
 		),
 		_id,
 		sanguis::player_name(

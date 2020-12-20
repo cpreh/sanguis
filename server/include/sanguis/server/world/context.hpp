@@ -7,7 +7,7 @@
 #include <sanguis/server/entities/with_id_unique_ptr.hpp>
 #include <sanguis/server/global/source_world_pair.hpp>
 #include <sanguis/server/world/context_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -19,12 +19,13 @@ namespace world
 
 class context
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		context
 	);
 protected:
 	context();
 public:
+	[[nodiscard]]
 	virtual
 	bool
 	request_transfer(

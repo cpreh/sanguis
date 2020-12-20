@@ -29,7 +29,7 @@ struct aoe
 	static
 	void
 	make(
-		sanguis::random_generator &_random_generator,
+		sanguis::random_generator &_random_generator, // NOLINT(google-runtime-references)
 		sanguis::server::entities::enemies::difficulty const _difficulty,
 		fcppt::reference<
 			Parameters
@@ -47,7 +47,7 @@ struct aoe
 					),
 					_parameters.get().aoe().base().get()
 					*
-					5.f
+					5.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 				)
 				-
 				fcppt::literal<

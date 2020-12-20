@@ -35,7 +35,7 @@ template<
 >
 Parameters
 apply(
-	sanguis::random_generator &_random_generator,
+	sanguis::random_generator &_random_generator, // NOLINT(google-runtime-references)
 	sanguis::server::entities::enemies::difficulty const _difficulty,
 	sanguis::server::weapons::modifiers::guaranteed<
 		Parameters
@@ -59,7 +59,7 @@ apply(
 	typename
 	modifier_container::value_type;
 
-	modifier_container const result(
+	auto const result(
 		sanguis::server::random::draw<
 			modifier_container
 		>(
@@ -145,6 +145,7 @@ apply(
 		:
 		_guaranteed_modifiers.get()
 	)
+	{
 		modifier(
 			_random_generator,
 			_difficulty,
@@ -152,12 +153,14 @@ apply(
 				_parameters
 			)
 		);
+	}
 
 	for(
 		auto const &modifier
 		:
 		result
 	)
+	{
 		modifier(
 			_random_generator,
 			_difficulty,
@@ -165,9 +168,12 @@ apply(
 				_parameters
 			)
 		);
+	}
 
 	return
-		std::move(
+		std::forward<
+			Parameters
+		>(
 			_parameters
 		);
 }

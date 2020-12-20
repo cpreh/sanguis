@@ -16,7 +16,7 @@ namespace modifiers
 
 sanguis::server::random::amount
 random_amount(
-	sanguis::random_generator &,
+	sanguis::random_generator &, // NOLINT(google-runtime-references)
 	sanguis::server::random::amount
 );
 

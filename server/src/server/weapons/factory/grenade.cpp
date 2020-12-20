@@ -48,22 +48,22 @@ sanguis::server::weapons::factory::grenade(
 					sanguis::server::weapons::grenade_parameters(
 						sanguis::server::weapons::backswing_time(
 							sanguis::duration_second(
-								0.6f
+								0.6F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 							)
 						),
 						sanguis::server::weapons::damage(
-							20.f
+							20.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 						),
 						sanguis::server::weapons::aoe(
-							180.f
+							180.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 						),
 						sanguis::server::weapons::cast_point(
 							sanguis::duration_second(
-								0.1f
+								0.1F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 							)
 						),
 						sanguis::server::weapons::range(
-							1000.f
+							1000.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 						)
 					)
 				)

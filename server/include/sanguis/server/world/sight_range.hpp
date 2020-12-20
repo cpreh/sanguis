@@ -28,11 +28,13 @@ public:
 		sanguis::entity_id
 	);
 
+	[[nodiscard]]
 	bool
 	contains(
 		sanguis::entity_id
 	) const;
 
+	[[nodiscard]]
 	bool
 	empty() const;
 private:

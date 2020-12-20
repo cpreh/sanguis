@@ -34,7 +34,7 @@ struct magazine_size
 	static
 	void
 	make(
-		sanguis::random_generator &_random_generator,
+		sanguis::random_generator &_random_generator, // NOLINT(google-runtime-references)
 		sanguis::server::entities::enemies::difficulty const _difficulty,
 		fcppt::reference<
 			Parameters
@@ -42,7 +42,6 @@ struct magazine_size
 	)
 	{
 		_parameters.get().extra_magazine_size(
-			// TODO: What to use here?
 			sanguis::server::weapons::magazine_size(
 				std::min(
 					fcppt::cast::to_unsigned(

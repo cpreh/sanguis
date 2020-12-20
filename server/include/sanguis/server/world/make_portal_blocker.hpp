@@ -14,8 +14,8 @@ namespace world
 
 sanguis::server::entities::doodad_unique_ptr
 make_portal_blocker(
-	sanguis::server::environment::load_context &
-);
+	sanguis::server::environment::load_context & // NOLINT(google-runtime-references)
+); // NOLINT(google-runtime-references)
 
 }
 }

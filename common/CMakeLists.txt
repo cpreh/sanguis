@@ -12,6 +12,7 @@ set(
 	include/sanguis/cheat_type_fwd.hpp
 	include/sanguis/clock.hpp
 	include/sanguis/diff_clock.hpp
+	include/sanguis/diff_clock_cref.hpp
 	include/sanguis/diff_clock_fwd.hpp
 	include/sanguis/diff_timer.hpp
 	include/sanguis/diff_timer_fwd.hpp
@@ -451,6 +452,7 @@ set(
 	include/sanguis/secondary_weapon_type_fwd.hpp
 	include/sanguis/slowdown.hpp
 	include/sanguis/slowdown_fwd.hpp
+	include/sanguis/state_override.hpp
 	include/sanguis/string_vector.hpp
 	include/sanguis/time_unit.hpp
 	include/sanguis/timer.hpp

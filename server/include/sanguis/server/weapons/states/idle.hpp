@@ -1,12 +1,13 @@
 #ifndef SANGUIS_SERVER_WEAPONS_STATES_IDLE_HPP_INCLUDED
 #define SANGUIS_SERVER_WEAPONS_STATES_IDLE_HPP_INCLUDED
 
+#include <sanguis/state_override.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/events/poll_fwd.hpp>
 #include <sanguis/server/weapons/events/reload_fwd.hpp>
 #include <sanguis/server/weapons/events/shoot_fwd.hpp>
 #include <sanguis/server/weapons/states/idle_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -37,7 +38,7 @@ class idle
 		sanguis::server::weapons::weapon
 	>
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		idle
 	);
 public:
@@ -61,18 +62,22 @@ public:
 		my_context
 	);
 
-	~idle();
+	~idle()
+	SANGUIS_STATE_OVERRIDE;
 
+	[[nodiscard]]
 	boost::statechart::result
 	react(
 		sanguis::server::weapons::events::shoot const &
 	);
 
+	[[nodiscard]]
 	boost::statechart::result
 	react(
 		sanguis::server::weapons::events::reload const &
 	);
 
+	[[nodiscard]]
 	boost::statechart::result
 	react(
 		sanguis::server::weapons::events::poll const &

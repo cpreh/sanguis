@@ -15,7 +15,7 @@ namespace weapons
 
 sanguis::server::angle
 random_angle(
-	sanguis::random_generator &,
+	sanguis::random_generator &, // NOLINT(google-runtime-references)
 	sanguis::server::weapons::accuracy,
 	sanguis::server::angle
 );

@@ -6,7 +6,7 @@
 
 sanguis::creator::pos
 sanguis::server::world::center_to_grid_pos(
-	sanguis::server::center const _center
+	sanguis::server::center const &_center
 )
 {
 	return

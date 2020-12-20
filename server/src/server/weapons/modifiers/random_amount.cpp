@@ -13,19 +13,19 @@ sanguis::server::weapons::modifiers::random_amount(
 	sanguis::server::random::amount const _max
 )
 {
-	// TODO: Different distribution?
-	typedef
+	using
+	parameters
+	=
 	fcppt::random::distribution::parameters::uniform_int<
 		sanguis::server::random::amount
-	>
-	parameters;
+	>;
 
 	auto distribution(
 		fcppt::random::distribution::make_basic(
 			parameters(
 				parameters::min(
 					sanguis::server::random::amount(
-						0u
+						0U
 					)
 				),
 				parameters::max(

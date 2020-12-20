@@ -27,6 +27,7 @@ sanguis::server::events::message::message(
 sanguis::server::events::message::message(
 	message &&
 )
+noexcept
 = default;
 
 sanguis::server::events::message::message(
@@ -38,6 +39,7 @@ sanguis::server::events::message &
 sanguis::server::events::message::operator=(
 	message &&
 )
+noexcept
 = default;
 
 sanguis::server::events::message &
@@ -47,8 +49,7 @@ sanguis::server::events::message::operator=(
 = default;
 
 sanguis::server::events::message::~message()
-{
-}
+= default;
 
 sanguis::messages::client::shared_ptr
 sanguis::server::events::message::get() const

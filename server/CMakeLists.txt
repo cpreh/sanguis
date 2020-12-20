@@ -149,6 +149,7 @@ set(
 	include/sanguis/server/console_command_pair_fwd.hpp
 	include/sanguis/server/console_command_vector.hpp
 	include/sanguis/server/console_fwd.hpp
+	include/sanguis/server/console_ref.hpp
 	include/sanguis/server/create.hpp
 	include/sanguis/server/create_player.hpp
 	include/sanguis/server/damage/armor_array.hpp
@@ -415,6 +416,7 @@ set(
 	include/sanguis/server/environment/insert_no_result.hpp
 	include/sanguis/server/environment/load_context.hpp
 	include/sanguis/server/environment/load_context_fwd.hpp
+	include/sanguis/server/environment/load_context_ref.hpp
 	include/sanguis/server/environment/object.hpp
 	include/sanguis/server/environment/object_fwd.hpp
 	include/sanguis/server/environment/object_ref.hpp
@@ -445,6 +447,7 @@ set(
 	include/sanguis/server/level.hpp
 	include/sanguis/server/level_from_exp.hpp
 	include/sanguis/server/load.hpp
+	include/sanguis/server/load_cref.hpp
 	include/sanguis/server/load_fwd.hpp
 	include/sanguis/server/log_location.hpp
 	include/sanguis/server/machine.hpp
@@ -725,6 +728,7 @@ set(
 	include/sanguis/server/world/center_to_grid_pos.hpp
 	include/sanguis/server/world/context.hpp
 	include/sanguis/server/world/context_fwd.hpp
+	include/sanguis/server/world/context_ref.hpp
 	include/sanguis/server/world/difficulty.hpp
 	include/sanguis/server/world/difficulty_fwd.hpp
 	include/sanguis/server/world/generate.hpp

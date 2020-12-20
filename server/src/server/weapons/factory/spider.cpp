@@ -75,15 +75,15 @@ sanguis::server::weapons::factory::spider(
 							>(),
 							sanguis::server::weapons::melee_parameters(
 								sanguis::server::weapons::range(
-									100.f
+									100.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 								),
 								sanguis::server::weapons::backswing_time(
 									sanguis::duration_second(
-										0.3f
+										0.3F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 									)
 								),
 								sanguis::server::weapons::damage{
-									3.f
+									3.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 								},
 								sanguis::server::damage::make_array({
 									sanguis::server::damage::normal =
@@ -120,20 +120,20 @@ sanguis::server::weapons::factory::spider(
 					),
 					sanguis::server::weapons::spider_parameters(
 						sanguis::server::health(
-							100.f
+							100.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 						),
 						sanguis::server::weapons::backswing_time(
 							sanguis::duration_second(
-								3.f
+								3.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 							)
 						),
 						sanguis::server::weapons::cast_point(
 							sanguis::duration_second(
-								0.1f
+								0.1F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 							)
 						),
 						sanguis::server::weapons::range(
-							1000.f
+							1000.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 						)
 					)
 				)

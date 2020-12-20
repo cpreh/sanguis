@@ -2,11 +2,12 @@
 #define SANGUIS_SERVER_WEAPONS_STATES_CASTPOINT_HPP_INCLUDED
 
 #include <sanguis/diff_timer.hpp>
+#include <sanguis/state_override.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
 #include <sanguis/server/weapons/events/poll_fwd.hpp>
 #include <sanguis/server/weapons/events/stop_fwd.hpp>
 #include <sanguis/server/weapons/states/castpoint_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -37,7 +38,7 @@ class castpoint
 		sanguis::server::weapons::weapon
 	>
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		castpoint
 	);
 public:
@@ -58,13 +59,16 @@ public:
 		my_context
 	);
 
-	~castpoint();
+	~castpoint()
+	SANGUIS_STATE_OVERRIDE;
 
+	[[nodiscard]]
 	boost::statechart::result
 	react(
 		sanguis::server::weapons::events::poll const &
 	);
 
+	[[nodiscard]]
 	boost::statechart::result
 	react(
 		sanguis::server::weapons::events::stop const &

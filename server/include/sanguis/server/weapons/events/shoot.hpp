@@ -27,7 +27,8 @@ public:
 
 	shoot(
 		shoot &&
-	);
+	)
+	noexcept;
 
 	shoot(
 		shoot const &
@@ -36,7 +37,8 @@ public:
 	shoot &
 	operator=(
 		shoot &&
-	);
+	)
+	noexcept;
 
 	shoot &
 	operator=(

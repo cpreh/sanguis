@@ -23,7 +23,7 @@ sanguis::server::world::insert_simple_pair
 sanguis::server::world::make_spawner(
 	sanguis::creator::enemy_type const _enemy_type,
 	sanguis::creator::enemy_kind const _enemy_kind,
-	sanguis::creator::spawn_pos const _pos,
+	sanguis::creator::spawn_pos const &_pos,
 	sanguis::server::weapons::common_parameters const &_weapon_parameters,
 	sanguis::random_generator_ref const _random_generator,
 	sanguis::server::world::difficulty const _difficulty
@@ -42,20 +42,19 @@ sanguis::server::world::make_spawner(
 					_enemy_type,
 					_enemy_kind,
 					_difficulty,
-					// TODO!
 					sanguis::server::entities::spawns::count_per_wave(
-						1u
+						1U
 					),
 					sanguis::server::entities::spawns::interval(
 						sanguis::duration_second(
-							1.f
+							1.F
 						)
 					),
 					sanguis::server::entities::spawns::limit(
-						1u
+						1U
 					),
 					sanguis::server::entities::spawns::total_count(
-						5u
+						5U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 					)
 				)
 			),

@@ -15,7 +15,7 @@
 #include <sanguis/server/weapons/spawn_parameters_fwd.hpp>
 #include <sanguis/server/weapons/spawn_weapon.hpp>
 #include <sanguis/server/weapons/weapon.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -29,14 +29,14 @@ class spawn
 :
 	public sanguis::server::weapons::weapon
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		spawn
 	);
 public:
 	spawn(
 		sanguis::server::weapons::common_parameters const &,
 		sanguis::weapon_type,
-		sanguis::server::weapons::spawn_weapon const &,
+		sanguis::server::weapons::spawn_weapon &&,
 		sanguis::server::weapons::range,
 		sanguis::server::weapons::backswing_time,
 		sanguis::server::weapons::cast_point,
@@ -51,15 +51,18 @@ protected:
 		sanguis::server::weapons::spawn_parameters const &
 	);
 
+	[[nodiscard]]
 	sanguis::server::weapons::spawn_parameters
 	spawn_parameters() const;
 private:
+	[[nodiscard]]
 	sanguis::server::weapons::attack_result
 	do_attack(
 		sanguis::server::weapons::attack const &
 	)
 	override;
 
+	[[nodiscard]]
 	virtual
 	sanguis::server::entities::optional_base_ref
 	do_spawn(
@@ -67,6 +70,7 @@ private:
 		sanguis::server::weapons::spawn_weapon const &
 	) = 0;
 
+	[[nodiscard]]
 	sanguis::weapon_attribute_vector
 	attributes() const
 	override;
@@ -78,6 +82,7 @@ private:
 	void
 	kill_spawned();
 
+	[[nodiscard]]
 	virtual
 	sanguis::weapon_attribute_vector
 	extra_attributes() const = 0;

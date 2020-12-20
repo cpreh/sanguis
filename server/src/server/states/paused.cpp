@@ -31,6 +31,7 @@
 #include <fcppt/config/external_begin.hpp>
 #include <metal.hpp>
 #include <boost/statechart/result.hpp>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -42,7 +43,9 @@ sanguis::server::states::paused::paused(
 )
 :
 	my_base(
-		_ctx
+		std::move(
+			_ctx
+		)
 	),
 	log_{
 		this->context<

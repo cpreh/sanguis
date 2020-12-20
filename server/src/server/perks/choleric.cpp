@@ -1,5 +1,7 @@
+#include <sanguis/diff_clock_cref.hpp>
 #include <sanguis/perk_type.hpp>
 #include <sanguis/random_generator.hpp>
+#include <sanguis/random_generator_ref.hpp>
 #include <sanguis/random_variate_impl.hpp>
 #include <sanguis/server/aoe.hpp>
 #include <sanguis/server/direction.hpp>
@@ -22,7 +24,6 @@
 #include <sanguis/server/perks/perk.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -36,8 +37,8 @@
 
 
 sanguis::server::perks::choleric::choleric(
-	sanguis::diff_clock const &_diff_clock,
-	sanguis::random_generator &_random_generator
+	sanguis::diff_clock_cref const _diff_clock,
+	sanguis::random_generator_ref const _random_generator
 )
 :
 	sanguis::server::perks::perk(
@@ -45,21 +46,17 @@ sanguis::server::perks::choleric::choleric(
 	),
 	shoot_timer_(
 		sanguis::diff_timer::parameters(
-			fcppt::make_cref(
-				_diff_clock
-			),
+			_diff_clock,
 			std::chrono::seconds(
-				5
+				5 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			)
 		)
 	),
 	rand_(
-		fcppt::make_ref(
-			_random_generator
-		),
+		_random_generator,
 		sanguis::server::perks::choleric::distribution(
 			sanguis::server::perks::choleric::distribution::param_type::min(
-				0.f
+				0.F
 			),
 			sanguis::server::perks::choleric::distribution::param_type::sup(
 				fcppt::math::twopi<
@@ -72,8 +69,7 @@ sanguis::server::perks::choleric::choleric(
 }
 
 sanguis::server::perks::choleric::~choleric()
-{
-}
+= default;
 
 void
 sanguis::server::perks::choleric::update(
@@ -88,10 +84,12 @@ sanguis::server::perks::choleric::update(
 			)
 		)
 	)
+	{
 		return;
+	}
 
 	sanguis::server::level const rocket_level(
-		10u
+		10U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 	);
 
 	bool const spawn_bullets(
@@ -104,7 +102,7 @@ sanguis::server::perks::choleric::update(
 			fcppt::literal<
 				sanguis::server::level::value_type
 			>(
-				3
+				3 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			)
 			+
 			this->level().get()
@@ -142,7 +140,7 @@ sanguis::server::perks::choleric::update(
 							_env.load_context(),
 							_entity.team(),
 							sanguis::server::damage::unit(
-								10.f
+								10.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 							),
 							sanguis::server::entities::modify_damages(
 								_entity,
@@ -164,14 +162,14 @@ sanguis::server::perks::choleric::update(
 							_env.load_context(),
 							_entity.team(),
 							sanguis::server::damage::unit(
-								15.f
+								15.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 							),
 							sanguis::server::entities::modify_damages(
 								_entity,
 								sanguis::server::damage::explosive()
 							),
 							sanguis::server::aoe(
-								90.f
+								90.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 							),
 							direction
 						)

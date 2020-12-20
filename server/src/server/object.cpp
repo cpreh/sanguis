@@ -31,8 +31,7 @@ sanguis::server::object::object(
 }
 
 sanguis::server::object::~object()
-{
-}
+= default;
 
 void
 sanguis::server::object::run()

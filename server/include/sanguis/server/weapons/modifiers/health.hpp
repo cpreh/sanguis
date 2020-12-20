@@ -25,7 +25,7 @@ struct health
 	static
 	void
 	make(
-		sanguis::random_generator &_random_generator,
+		sanguis::random_generator &_random_generator, // NOLINT(google-runtime-references)
 		sanguis::server::entities::enemies::difficulty const _difficulty,
 		fcppt::reference<
 			Parameters

@@ -58,7 +58,6 @@
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
 #include <exception>
-#include <functional>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -114,36 +113,46 @@ sanguis::server::machine::machine(
 	timer_(
 		this->io_service_,
 		sanguis::server::timer_callback{
-			std::bind(
-				std::bind(
-					&sanguis::server::machine::timer_callback,
-					this
-				)
-			)
+			[
+				this
+			]{
+				this->timer_callback();
+			}
 		},
 		this->desired_frame_time_
 	),
 	disconnect_connection_(
 		this->net_.register_disconnect(
 			alda::net::server::disconnect_callback{
-				std::bind(
-					&sanguis::server::machine::disconnect_callback,
-					this,
-					std::placeholders::_1,
-					std::placeholders::_2
+				[
+					this
+				](
+					alda::net::id const _id,
+					fcppt::string const &_string
 				)
+				{
+					this->disconnect_callback(
+						_id,
+						_string
+					);
+				}
 			}
 		)
 	),
 	data_connection_(
 		this->net_.register_data(
 			alda::net::server::data_callback{
-				std::bind(
-					&sanguis::server::machine::data_callback,
-					this,
-					std::placeholders::_1,
-					std::placeholders::_2
-				)
+				[
+					this
+				](
+					alda::net::id const _id,
+					alda::net::buffer::circular_receive::streambuf &_buffer
+				){
+					this->data_callback(
+						_id,
+						_buffer
+					);
+				}
 			}
 		)
 	)
@@ -153,8 +162,7 @@ sanguis::server::machine::machine(
 FCPPT_PP_POP_WARNING
 
 sanguis::server::machine::~machine()
-{
-}
+= default;
 
 void
 sanguis::server::machine::listen()
@@ -250,9 +258,13 @@ sanguis::server::machine::process_overflow()
 					).get()
 				)
 			)
+			{
 				queue.pop();
+			}
 			else
+			{
 				break;
+			}
 		}
 
 		overflow_remaining =
@@ -452,7 +464,8 @@ try
 			}
 		)
 	)
-		;
+	{
+	}
 }
 catch(
 	fcppt::exception const &_error

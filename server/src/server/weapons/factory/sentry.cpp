@@ -77,31 +77,31 @@ sanguis::server::weapons::factory::sentry(
 							>(),
 							sanguis::server::weapons::pistol_parameters(
 								sanguis::server::weapons::accuracy(
-									0.95f
+									0.95F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 								),
 								sanguis::server::weapons::backswing_time(
 									sanguis::duration_second(
-										0.06f
+										0.06F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 									)
 								),
 								sanguis::server::weapons::damage(
-									2.f
+									2.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 								),
 								sanguis::server::weapons::cast_point(
 									sanguis::duration_second(
-										0.2f
+										0.2F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 									)
 								),
 								sanguis::server::weapons::magazine_size(
-									20u
+									20U // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 								),
 								sanguis::server::weapons::reload_time(
 									sanguis::duration_second(
-										5.f
+										5.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 									)
 								),
 								sanguis::server::weapons::range(
-									1000.f
+									1000.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 								)
 							)
 						)
@@ -134,20 +134,20 @@ sanguis::server::weapons::factory::sentry(
 					),
 					sanguis::server::weapons::sentry_parameters(
 						sanguis::server::health(
-							100.f
+							100.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 						),
 						sanguis::server::weapons::backswing_time(
 							sanguis::duration_second(
-								3.f
+								3.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 							)
 						),
 						sanguis::server::weapons::cast_point(
 							sanguis::duration_second(
-								0.1f
+								0.1F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 							)
 						),
 						sanguis::server::weapons::range(
-							1000.f
+							1000.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 						)
 					)
 				)

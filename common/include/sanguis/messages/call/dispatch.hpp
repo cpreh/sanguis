@@ -24,13 +24,13 @@ template<
 >
 boost::statechart::result
 dispatch(
-	Dispatcher &_dispatcher,
-	Function &_function,
+	Dispatcher &_dispatcher, // NOLINT(google-runtime-references)
+	Function &_function, // NOLINT(google-runtime-references)
 	Event const &_message,
 	HandleDefaultMsg const &_handle_default_msg
 )
 {
-	// TODO: Refactor alda's default msg so this isn't necessary
+	// TODO(philipp): Refactor alda's default msg so this isn't necessary
 	auto const fake_default_msg(
 		[
 			_handle_default_msg

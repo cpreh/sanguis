@@ -1,13 +1,17 @@
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/environment/object_fwd.hpp>
+#include <sanguis/server/environment/object_ref.hpp>
 #include <sanguis/server/weapons/attack.hpp>
 #include <sanguis/server/weapons/target.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::weapons::attack::attack(
 	sanguis::server::angle const _angle,
-	sanguis::server::environment::object &_environment,
-	sanguis::server::weapons::target const _target
+	sanguis::server::environment::object_ref const _environment,
+	sanguis::server::weapons::target _target
 )
 :
 	angle_(
@@ -17,7 +21,9 @@ sanguis::server::weapons::attack::attack(
 		_environment
 	),
 	target_(
-		_target
+		std::move(
+			_target
+		)
 	)
 {
 }

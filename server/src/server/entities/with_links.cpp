@@ -9,8 +9,7 @@ sanguis::server::entities::with_links::with_links()
 }
 
 sanguis::server::entities::with_links::~with_links()
-{
-}
+= default;
 
 sanguis::server::entities::auto_weak_link
 sanguis::server::entities::with_links::link()

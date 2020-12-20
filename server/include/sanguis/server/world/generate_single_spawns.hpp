@@ -22,10 +22,10 @@ sanguis::server::world::insert_with_id_pair_container
 generate_single_spawns(
 	sanguis::creator::enemy_type,
 	sanguis::creator::enemy_kind,
-	sanguis::creator::spawn_pos,
+	sanguis::creator::spawn_pos const &,
 	sanguis::server::weapons::common_parameters const &,
 	sanguis::random_generator_ref,
-	sanguis::server::environment::load_context &,
+	sanguis::server::environment::load_context &, // NOLINT(google-runtime-references)
 	sanguis::server::world::difficulty
 );
 

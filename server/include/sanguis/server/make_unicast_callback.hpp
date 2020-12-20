@@ -3,6 +3,7 @@
 
 #include <sanguis/server/machine_fwd.hpp>
 #include <sanguis/server/unicast_callback.hpp>
+#include <fcppt/reference_fwd.hpp>
 
 
 namespace sanguis
@@ -12,7 +13,9 @@ namespace server
 
 sanguis::server::unicast_callback
 make_unicast_callback(
-	sanguis::server::machine &
+	fcppt::reference<
+		sanguis::server::machine
+	>
 );
 
 }

@@ -21,7 +21,7 @@ template<
 void
 change_simple(
 	ChangeFunction const &_change_function,
-	sanguis::server::entities::property::base &_property,
+	sanguis::server::entities::property::base &_property, // NOLINT(google-runtime-references)
 	sanguis::server::perks::change_factor const _factor,
 	sanguis::server::perks::level_diff const _diff
 )

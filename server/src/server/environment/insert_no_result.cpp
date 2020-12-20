@@ -21,7 +21,7 @@ template<
 >
 void
 insert_no_result_impl(
-	sanguis::server::environment::object &_environment,
+	sanguis::server::environment::object &_environment, // NOLINT(google-runtime-references)
 	fcppt::unique_ptr<
 		Entity
 	> &&_entity,

@@ -22,28 +22,34 @@ class info
 public:
 	info(
 		sanguis::world_id,
-		sanguis::world_name const &,
+		sanguis::world_name &&,
 		sanguis::creator::seed,
-		sanguis::creator::name const &,
+		sanguis::creator::name &&,
 		sanguis::creator::spawn_boss,
-		sanguis::creator::opening_container_array const &
+		sanguis::creator::opening_container_array &&
 	);
 
+	[[nodiscard]]
 	sanguis::world_id
 	world_id() const;
 
+	[[nodiscard]]
 	sanguis::world_name const &
 	world_name() const;
 
+	[[nodiscard]]
 	sanguis::creator::seed
 	seed() const;
 
+	[[nodiscard]]
 	sanguis::creator::name const &
 	generator_name() const;
 
+	[[nodiscard]]
 	sanguis::creator::spawn_boss
 	spawn_boss() const;
 
+	[[nodiscard]]
 	sanguis::creator::opening_container_array const &
 	openings() const;
 private:

@@ -74,7 +74,6 @@ sanguis::server::world::update_entity::impl(
 	{
 		_entity->remove_from_game();
 
-		// TODO: Move this out of here
 		sanguis::server::collision::body_exit(
 			_entity->remove_from_world().body_exit()
 		);

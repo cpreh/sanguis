@@ -17,8 +17,7 @@ sanguis::server::load::load()
 }
 
 sanguis::server::load::~load()
-{
-}
+= default;
 
 sanguis::server::radius
 sanguis::server::load::model_dim(

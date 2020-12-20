@@ -17,8 +17,7 @@ sanguis::server::perks::irs::irs()
 }
 
 sanguis::server::perks::irs::~irs()
-{
-}
+= default;
 
 void
 sanguis::server::perks::irs::change(
@@ -30,7 +29,7 @@ sanguis::server::perks::irs::change(
 		&sanguis::server::entities::property::linear_change,
 		_entity.reload_speed(),
 		sanguis::server::perks::change_factor(
-			0.5f
+			0.5F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		),
 		_diff
 	);

@@ -17,8 +17,8 @@
 sanguis::creator::optional_pos
 sanguis::server::random::grid_pos(
 	sanguis::random_generator &_random_generator,
-	sanguis::creator::min const _min,
-	sanguis::creator::sup const _sup
+	sanguis::creator::min const &_min,
+	sanguis::creator::sup const &_sup
 )
 {
 	if(
@@ -27,16 +27,17 @@ sanguis::server::random::grid_pos(
 			_sup
 		)
 	)
+	{
 		return
 			sanguis::creator::optional_pos();
+	}
 
-	typedef
+	using
+	random_parameters
+	=
 	fcppt::random::distribution::parameters::uniform_int<
 		sanguis::creator::size_type
-	>
-	random_parameters;
-
-	// TODO: Generalize this somewhere!
+	>;
 
 	auto const make_distribution(
 		[
@@ -50,11 +51,12 @@ sanguis::server::random::grid_pos(
 				_index
 			);
 
-			typedef
+			using
+			index
+			=
 			decltype(
 				_index
-			)
-			index;
+			);
 
 			return
 				fcppt::random::distribution::make_basic(

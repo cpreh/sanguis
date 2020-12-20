@@ -29,11 +29,14 @@
 #include <sanguis/server/weapons/attributes/make_health.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::weapons::sentry::sentry(
 	sanguis::server::weapons::common_parameters const &_common_parameters,
-	sanguis::server::weapons::spawn_weapon const &_spawn_weapon,
+	sanguis::server::weapons::spawn_weapon &&_spawn_weapon,
 	sanguis::server::weapons::sentry_parameters const &_parameters
 )
 :
@@ -42,13 +45,15 @@ sanguis::server::weapons::sentry::sentry(
 		sanguis::weapon_type{
 			sanguis::secondary_weapon_type::sentry
 		},
-		_spawn_weapon,
+		std::move(
+			_spawn_weapon
+		),
 		_parameters.range(),
 		_parameters.backswing_time(),
 		_parameters.cast_point(),
 		sanguis::server::weapons::reload_time{
 			sanguis::duration_second(
-				60.f
+				60.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			)
 		}
 	},
@@ -59,8 +64,7 @@ sanguis::server::weapons::sentry::sentry(
 }
 
 sanguis::server::weapons::sentry::~sentry()
-{
-}
+= default;
 
 sanguis::server::weapons::sentry::sentry(
 	sanguis::server::weapons::spawn_parameters const &_spawn_parameters,
@@ -111,16 +115,16 @@ sanguis::server::weapons::sentry::do_spawn(
 					sanguis::server::damage::make_armor_array({
 						sanguis::server::damage::fire =
 							sanguis::server::damage::armor_unit(
-								0.9f
+								0.9F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 							)
 					}),
 					health_.value(),
 					sanguis::server::entities::movement_speed(
-						0.f
+						0.F
 					),
 					sanguis::server::ai::create_stationary(
 						sanguis::server::ai::sight_range(
-							1000.f
+							1000.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 						)
 					),
 					_spawn_weapon.get()()

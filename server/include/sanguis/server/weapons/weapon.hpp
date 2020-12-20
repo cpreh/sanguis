@@ -99,7 +99,7 @@ public:
 	[[nodiscard]]
 	bool
 	in_range(
-		sanguis::server::weapons::target
+		sanguis::server::weapons::target const &
 	) const;
 
 	[[nodiscard]]

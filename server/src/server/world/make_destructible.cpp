@@ -32,7 +32,7 @@ sanguis::server::world::make_destructible(
 		fcppt::literal<
 			sanguis::server::entities::enemies::difficulty_value
 		>(
-			5
+			5 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		)
 	);
 
@@ -46,7 +46,7 @@ sanguis::server::world::make_destructible(
 				_destructible_type,
 				_load_context,
 				sanguis::server::health(
-					1.f
+					1.F
 					*
 					difficulty.get()
 				),

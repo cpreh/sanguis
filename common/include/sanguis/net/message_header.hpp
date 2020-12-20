@@ -11,7 +11,10 @@ namespace sanguis
 namespace net
 {
 
-typedef std::uint16_t message_header;
+using
+message_header
+=
+std::uint16_t;
 
 }
 }

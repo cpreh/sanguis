@@ -16,8 +16,7 @@ sanguis::server::entities::with_id::with_id(
 }
 
 sanguis::server::entities::with_id::~with_id()
-{
-}
+= default;
 
 sanguis::entity_id
 sanguis::server::entities::with_id::id() const

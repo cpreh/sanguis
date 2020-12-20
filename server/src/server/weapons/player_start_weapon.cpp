@@ -20,7 +20,7 @@ sanguis::server::weapons::player_start_weapon(
 				sanguis::primary_weapon_type::pistol
 			},
 			sanguis::server::entities::enemies::difficulty{
-				1.f
+				1.F
 			}
 		);
 }

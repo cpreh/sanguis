@@ -12,14 +12,14 @@ sanguis::server::net::center_policy::start_duration()
 {
 	return
 		sanguis::duration_second(
-			0.5f
+			0.5F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		);
 }
 
 sanguis::duration
 sanguis::server::net::center_policy::difference(
-	sanguis::server::center const _center1,
-	sanguis::server::center const _center2
+	sanguis::server::center const &_center1,
+	sanguis::server::center const &_center2
 )
 {
 	return
@@ -32,7 +32,7 @@ sanguis::server::net::center_policy::difference(
 			fcppt::literal<
 				sanguis::server::space_unit
 			>(
-				20
+				20 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			)
 		);
 }

@@ -2,9 +2,7 @@
 
 
 sanguis::server::world::context::context()
-{
-}
+= default;
 
 sanguis::server::world::context::~context()
-{
-}
+= default;
