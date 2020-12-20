@@ -25,7 +25,9 @@ namespace sprite
 namespace colored
 {
 
-typedef
+using
+choices
+=
 sge::sprite::config::choices<
 	sanguis::client::draw2d::sprite::type_choices,
 	sge::sprite::config::pos<
@@ -39,8 +41,7 @@ sge::sprite::config::choices<
 			sanguis::client::draw2d::sprite::colored::color_format
 		>
 	>
->
-choices;
+>;
 
 }
 }

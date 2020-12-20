@@ -15,13 +15,14 @@ namespace draw2d
 namespace entities
 {
 
-typedef
+using
+order_function
+=
 fcppt::function<
 	sanguis::client::draw2d::z_ordering (
 		sanguis::client::draw2d::sprite::index
 	)
->
-order_function;
+>;
 
 }
 }

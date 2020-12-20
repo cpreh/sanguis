@@ -16,9 +16,12 @@ namespace sprite
 namespace normal
 {
 
-typedef sge::sprite::object<
+using
+object
+=
+sge::sprite::object<
 	sanguis::client::draw2d::sprite::normal::choices
-> object;
+>;
 
 }
 }

@@ -15,11 +15,12 @@ namespace menu
 namespace callbacks
 {
 
-typedef
+using
+retry_connect
+=
 fcppt::function<
 	void ()
->
-retry_connect;
+>;
 
 }
 }

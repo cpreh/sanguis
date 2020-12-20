@@ -78,15 +78,21 @@ private:
 		std::filesystem::path const &
 	) const;
 
-	typedef std::map<
+	using
+	texture_map
+	=
+	std::map<
 		sanguis::client::load::resource::texture_identifier,
 		sge::texture::const_part_unique_ptr
-	> texture_map;
+	>;
 
-	typedef std::map<
+	using
+	unnamed_texture_map
+	=
+	std::map<
 		std::filesystem::path,
 		sge::texture::const_part_unique_ptr
-	> unnamed_texture_map;
+	>;
 
 	mutable fcppt::log::object log_;
 

@@ -20,11 +20,12 @@ namespace world
 namespace sprite
 {
 
-typedef
+using
+state_choices
+=
 sge::sprite::state::choices<
 	metal::list<>
->
-state_choices;
+>;
 
 }
 }

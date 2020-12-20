@@ -18,11 +18,12 @@ namespace world
 namespace sprite
 {
 
-typedef
+using
+dim
+=
 sge::sprite::types::dim<
 	sanguis::client::draw2d::scene::world::sprite::type_choices
->
-dim;
+>;
 
 }
 }

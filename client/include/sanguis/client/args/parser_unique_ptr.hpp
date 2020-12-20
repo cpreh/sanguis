@@ -12,11 +12,12 @@ namespace client
 namespace args
 {
 
-typedef
+using
+parser_unique_ptr
+=
 fcppt::options::base_unique_ptr<
 	sanguis::client::args::result
->
-parser_unique_ptr;
+>;
 
 }
 }

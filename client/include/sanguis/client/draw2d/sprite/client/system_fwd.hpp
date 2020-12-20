@@ -17,12 +17,13 @@ namespace sprite
 namespace client
 {
 
-typedef
+using
+system
+=
 sanguis::client::draw2d::sprite::system<
 	sanguis::client::draw2d::sprite::client::choices,
 	sanguis::client::draw2d::sprite::client::category
->
-system;
+>;
 
 }
 }

@@ -18,14 +18,15 @@ namespace draw2d
 namespace sprite
 {
 
-typedef
+using
+state_choices
+=
 sge::sprite::state::choices<
 	metal::list<
 		sge::sprite::state::with_blend,
 		sge::sprite::state::with_rasterizer
 	>
->
-state_choices;
+>;
 
 }
 }

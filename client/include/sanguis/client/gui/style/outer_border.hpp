@@ -15,12 +15,13 @@ namespace gui
 namespace style
 {
 
-typedef
+using
+outer_border
+=
 std::integral_constant<
 	sge::rucksack::scalar,
 	0
->
-outer_border;
+>;
 
 }
 }

@@ -29,14 +29,15 @@ struct is_background
 	>
 	struct apply
 	{
-		typedef
+		using
+		type
+		=
 		metal::list<
 			fcppt::record::element<
 				sanguis::client::draw2d::scene::world::sprite::is_background_role,
 				bool
 			>
-		>
-		type;
+		>;
 	};
 };
 

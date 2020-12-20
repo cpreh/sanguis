@@ -12,11 +12,12 @@ namespace client
 namespace perk
 {
 
-typedef
+using
+level_callback
+=
 fcppt::function<
 	sanguis::client::perk::level_function
->
-level_callback;
+>;
 
 }
 }

@@ -12,11 +12,12 @@ namespace client
 namespace control
 {
 
-typedef
+using
+optional_cursor_position
+=
 fcppt::optional::object<
 	sanguis::client::control::cursor_position
->
-optional_cursor_position;
+>;
 
 }
 }

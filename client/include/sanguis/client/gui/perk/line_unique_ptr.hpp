@@ -14,11 +14,12 @@ namespace gui
 namespace perk
 {
 
-typedef
+using
+line_unique_ptr
+=
 fcppt::unique_ptr<
 	sanguis::client::gui::perk::line
->
-line_unique_ptr;
+>;
 
 }
 }

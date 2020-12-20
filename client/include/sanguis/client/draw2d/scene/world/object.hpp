@@ -101,17 +101,19 @@ private:
 
 	sanguis::client::draw::debug const debug_;
 
-	typedef
+	using
+	state_unique_ptr
+	=
 	fcppt::unique_ptr<
 		sanguis::client::draw2d::scene::world::state
-	>
-	state_unique_ptr;
+	>;
 
-	typedef
+	using
+	optional_state_unique_ptr
+	=
 	fcppt::optional::object<
 		state_unique_ptr
-	>
-	optional_state_unique_ptr;
+	>;
 
 	optional_state_unique_ptr state_;
 };

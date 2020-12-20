@@ -18,11 +18,12 @@ namespace resource
 namespace animation
 {
 
-typedef
+using
+entity_vector
+=
 std::vector<
 	sanguis::client::load::resource::animation::entity
->
-entity_vector;
+>;
 
 }
 }

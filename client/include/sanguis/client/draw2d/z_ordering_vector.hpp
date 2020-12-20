@@ -14,11 +14,12 @@ namespace client
 namespace draw2d
 {
 
-typedef
+using
+z_ordering_vector
+=
 std::vector<
 	sanguis::client::draw2d::z_ordering
->
-z_ordering_vector;
+>;
 
 }
 }

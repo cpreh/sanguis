@@ -20,7 +20,9 @@ namespace scene
 namespace world
 {
 
-typedef
+using
+tile_size
+=
 fcppt::type_traits::integral_cast<
 	sanguis::client::draw2d::scene::world::sprite::unit,
 	fcppt::cast::size_fun,
@@ -29,8 +31,7 @@ fcppt::type_traits::integral_cast<
 		fcppt::cast::to_signed_fun,
 		sanguis::creator::tile_size
 	>
->
-tile_size;
+>;
 
 }
 }

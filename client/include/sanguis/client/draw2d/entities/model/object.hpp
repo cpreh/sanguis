@@ -48,9 +48,10 @@ class object
 		object
 	);
 public:
-	typedef
-	sanguis::client::draw2d::entities::model::parameters
-	parameters_type;
+	using
+	parameters_type
+	=
+	sanguis::client::draw2d::entities::model::parameters;
 
 	explicit
 	object(
@@ -128,11 +129,12 @@ protected:
 	sanguis::client::optional_health_pair
 	health_pair() const;
 private:
-	typedef
+	using
+	part_vector
+	=
 	std::vector<
 		sanguis::client::draw2d::entities::model::part
-	>
-	part_vector;
+	>;
 
 	object(
 		sanguis::client::draw2d::entities::model::parameters const &,
@@ -184,11 +186,12 @@ private:
 
 	sanguis::client::optional_health_pair health_pair_;
 
-	typedef
+	using
+	optional_decay_time
+	=
 	fcppt::optional::object<
 		sanguis::client::draw2d::entities::model::decay_time
-	>
-	optional_decay_time;
+	>;
 
 	optional_decay_time decay_time_;
 

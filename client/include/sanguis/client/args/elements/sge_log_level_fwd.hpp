@@ -15,12 +15,13 @@ namespace args
 namespace elements
 {
 
-typedef
+using
+sge_log_level
+=
 fcppt::record::element<
 	sanguis::client::args::labels::sge_log_level,
 	fcppt::log::level
->
-sge_log_level;
+>;
 
 }
 }

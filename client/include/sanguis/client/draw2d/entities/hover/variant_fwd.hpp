@@ -17,12 +17,13 @@ namespace entities
 namespace hover
 {
 
-typedef
+using
+variant
+=
 fcppt::variant::object<
 	sanguis::client::draw2d::entities::hover::name_and_health,
 	sanguis::client::draw2d::entities::hover::weapon
->
-variant;
+>;
 
 }
 }

@@ -15,12 +15,13 @@ namespace args
 namespace elements
 {
 
-typedef
+using
+multi_samples
+=
 fcppt::record::element<
 	sanguis::client::args::labels::multi_samples,
 	sge::renderer::pixel_format::optional_multi_samples
->
-multi_samples;
+>;
 
 }
 }

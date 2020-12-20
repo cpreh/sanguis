@@ -19,11 +19,14 @@ namespace world
 namespace sprite
 {
 
-typedef sge::sprite::buffers::with_declaration<
+using
+buffers
+=
+sge::sprite::buffers::with_declaration<
 	sge::sprite::buffers::multi<
 		sanguis::client::draw2d::scene::world::sprite::choices
 	>
-> buffers;
+>;
 
 }
 }

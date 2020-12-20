@@ -37,11 +37,14 @@ class ingame
 		ingame
 	);
 public:
-	typedef boost::mpl::list1<
+	using
+	reactions
+	=
+	boost::mpl::list1<
 		boost::statechart::custom_reaction<
 			sanguis::client::events::action
 		>
-	> reactions;
+	>;
 
 	explicit
 	ingame(
@@ -50,7 +53,10 @@ public:
 
 	~ingame();
 
-	typedef boost::statechart::result result_type;
+	using
+	result_type
+	=
+	boost::statechart::result;
 
 	boost::statechart::result
 	react(

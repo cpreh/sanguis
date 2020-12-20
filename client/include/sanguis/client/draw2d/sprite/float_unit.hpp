@@ -13,7 +13,10 @@ namespace draw2d
 namespace sprite
 {
 
-typedef sanguis::client::draw2d::funit float_unit;
+using
+float_unit
+=
+sanguis::client::draw2d::funit;
 
 }
 }

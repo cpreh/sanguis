@@ -17,14 +17,15 @@ namespace menu
 namespace callbacks
 {
 
-typedef
+using
+connect
+=
 fcppt::function<
 	void (
 		alda::net::host const &,
 		alda::net::port const &
 	)
->
-connect;
+>;
 
 }
 }

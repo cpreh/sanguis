@@ -16,11 +16,12 @@ namespace entities
 namespace buffs
 {
 
-typedef
+using
+unique_ptr
+=
 fcppt::unique_ptr<
 	sanguis::client::draw2d::entities::buffs::base
->
-unique_ptr;
+>;
 
 }
 }

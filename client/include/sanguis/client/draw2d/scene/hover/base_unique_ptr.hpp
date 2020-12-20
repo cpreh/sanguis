@@ -16,11 +16,12 @@ namespace scene
 namespace hover
 {
 
-typedef
+using
+base_unique_ptr
+=
 fcppt::unique_ptr<
 	sanguis::client::draw2d::scene::hover::base
->
-base_unique_ptr;
+>;
 
 }
 }

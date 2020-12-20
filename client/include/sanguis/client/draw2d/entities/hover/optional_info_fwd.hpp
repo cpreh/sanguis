@@ -16,11 +16,12 @@ namespace entities
 namespace hover
 {
 
-typedef
+using
+optional_info
+=
 fcppt::optional::object<
 	sanguis::client::draw2d::entities::hover::info
->
-optional_info;
+>;
 
 }
 }

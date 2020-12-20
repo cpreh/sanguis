@@ -15,12 +15,13 @@ namespace args
 namespace elements
 {
 
-typedef
+using
+draw_debug
+=
 fcppt::record::element<
 	sanguis::client::args::labels::draw_debug,
 	sanguis::client::draw::debug
->
-draw_debug;
+>;
 
 }
 }

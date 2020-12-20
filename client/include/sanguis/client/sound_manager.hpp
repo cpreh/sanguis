@@ -37,11 +37,12 @@ public:
 	void
 	update();
 private:
-	typedef
+	using
+	sound_list
+	=
 	std::list<
 		sge::audio::sound::base_unique_ptr
-	>
-	sound_list;
+	>;
 
 	sound_list sounds_;
 };

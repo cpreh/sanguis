@@ -9,7 +9,10 @@ namespace client
 namespace control
 {
 
-typedef float key_scale;
+using
+key_scale
+=
+float;
 
 }
 }

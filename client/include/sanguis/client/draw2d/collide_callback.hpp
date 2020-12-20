@@ -13,13 +13,14 @@ namespace client
 namespace draw2d
 {
 
-typedef
+using
+collide_callback
+=
 fcppt::function<
 	sanguis::client::draw2d::optional_speed (
 		sanguis::client::draw2d::collide_parameters const &
 	)
->
-collide_callback;
+>;
 
 }
 }

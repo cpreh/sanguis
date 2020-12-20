@@ -16,11 +16,12 @@ namespace gui
 namespace perk
 {
 
-typedef
+using
+line_unique_ptr_tree_vector
+=
 std::vector<
 	sanguis::client::gui::perk::line_unique_ptr_tree
->
-line_unique_ptr_tree_vector;
+>;
 
 }
 }

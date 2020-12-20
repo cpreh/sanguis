@@ -14,11 +14,12 @@ namespace gui
 namespace perk
 {
 
-typedef
+using
+tab_unique_ptr
+=
 fcppt::unique_ptr<
 	sanguis::client::gui::perk::tab
->
-tab_unique_ptr;
+>;
 
 }
 }

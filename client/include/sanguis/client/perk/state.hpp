@@ -92,11 +92,12 @@ private:
 
 	sanguis::client::perk::send_callback const send_callback_;
 
-	typedef
+	using
+	optional_tree_unique_ptr
+	=
 	fcppt::optional::object<
 		sanguis::client::perk::tree_unique_ptr
-	>
-	optional_tree_unique_ptr;
+	>;
 
 	optional_tree_unique_ptr perks_;
 

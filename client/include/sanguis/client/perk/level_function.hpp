@@ -9,9 +9,10 @@ namespace client
 namespace perk
 {
 
-typedef
-void
-level_function();
+using
+level_function
+=
+void ();
 
 }
 }

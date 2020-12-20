@@ -35,16 +35,18 @@ class with_buffs
 		with_buffs
 	);
 public:
-	typedef
+	using
+	base_parameters
+	=
 	typename
-	Base::parameters_type
-	base_parameters;
+	Base::parameters_type;
 
-	typedef
+	using
+	parameters_type
+	=
 	sanguis::client::draw2d::entities::with_buffs_parameters<
 		base_parameters
-	>
-	parameters_type;
+	>;
 
 	explicit
 	with_buffs(
@@ -76,12 +78,13 @@ private:
 
 	sanguis::client::load::model::collection const &model_collection_;
 
-	typedef
+	using
+	buff_map
+	=
 	std::map<
 		sanguis::buff_type,
 		sanguis::client::draw2d::entities::buffs::unique_ptr
-	>
-	buff_map;
+	>;
 
 	buff_map buffs_;
 };

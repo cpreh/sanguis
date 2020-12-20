@@ -14,11 +14,12 @@ namespace load
 namespace model
 {
 
-typedef
+using
+weapon_category_unique_ptr
+=
 fcppt::unique_ptr<
 	sanguis::client::load::model::weapon_category
->
-weapon_category_unique_ptr;
+>;
 
 }
 }

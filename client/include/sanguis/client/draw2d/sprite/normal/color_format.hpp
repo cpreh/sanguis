@@ -15,7 +15,10 @@ namespace sprite
 namespace normal
 {
 
-typedef sge::image::color::rgba8_format color_format;
+using
+color_format
+=
+sge::image::color::rgba8_format;
 
 }
 }

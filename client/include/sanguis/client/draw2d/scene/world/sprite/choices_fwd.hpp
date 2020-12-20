@@ -30,7 +30,9 @@ namespace world
 namespace sprite
 {
 
-typedef
+using
+choices
+=
 sge::sprite::config::choices<
 	sanguis::client::draw2d::scene::world::sprite::type_choices,
 	sge::sprite::config::pos<
@@ -42,15 +44,14 @@ sge::sprite::config::choices<
 	metal::list<
 		sge::sprite::config::with_texture<
 			sge::sprite::config::texture_level_count<
-				1u
+				1U
 			>,
 			sge::sprite::config::texture_coordinates::automatic,
 			sge::sprite::config::texture_ownership::reference
 		>,
 		sanguis::client::draw2d::scene::world::sprite::is_background
 	>
->
-choices;
+>;
 
 }
 }

@@ -20,11 +20,12 @@ namespace world
 namespace sprite
 {
 
-typedef
-std::make_signed<
+using
+unit
+=
+std::make_signed_t<
 	sanguis::creator::size_type
->::type
-unit;
+>;
 
 }
 }

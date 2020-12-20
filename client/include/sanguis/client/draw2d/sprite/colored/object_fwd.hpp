@@ -16,9 +16,12 @@ namespace sprite
 namespace colored
 {
 
-typedef sge::sprite::object<
+using
+object
+=
+sge::sprite::object<
 	sanguis::client::draw2d::sprite::colored::choices
-> object;
+>;
 
 }
 }

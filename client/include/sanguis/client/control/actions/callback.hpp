@@ -14,13 +14,14 @@ namespace control
 namespace actions
 {
 
-typedef
+using
+callback
+=
 fcppt::function<
 	void (
 		sanguis::client::control::actions::any const &
 	)
->
-callback;
+>;
 
 }
 }

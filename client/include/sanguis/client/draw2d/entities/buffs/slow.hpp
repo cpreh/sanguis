@@ -44,11 +44,12 @@ private:
 	)
 	override;
 
-	typedef
+	using
+	optional_color
+	=
 	fcppt::optional::object<
 		sanguis::client::draw2d::sprite::normal::color
-	>
-	optional_color;
+	>;
 
 	optional_color previous_color_;
 };

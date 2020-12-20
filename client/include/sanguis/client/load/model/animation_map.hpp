@@ -17,12 +17,13 @@ namespace load
 namespace model
 {
 
-typedef
+using
+animation_map
+=
 std::map<
 	sanguis::client::load::animation_type,
 	sanguis::client::load::model::animation_unique_ptr
->
-animation_map;
+>;
 
 }
 }

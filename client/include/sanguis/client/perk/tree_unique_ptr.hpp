@@ -12,11 +12,12 @@ namespace client
 namespace perk
 {
 
-typedef
+using
+tree_unique_ptr
+=
 fcppt::unique_ptr<
 	sanguis::client::perk::tree
->
-tree_unique_ptr;
+>;
 
 }
 }

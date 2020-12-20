@@ -16,11 +16,12 @@ namespace draw2d
 namespace entities
 {
 
-typedef
+using
+level_vector
+=
 std::vector<
 	sanguis::client::draw2d::entities::level
->
-level_vector;
+>;
 
 }
 }

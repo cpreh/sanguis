@@ -49,7 +49,10 @@ class has_player
 		has_player
 	);
 public:
-	typedef boost::mpl::list3<
+	using
+	reactions
+	=
+	boost::mpl::list3<
 		boost::statechart::custom_reaction<
 			sanguis::client::events::message
 		>,
@@ -59,7 +62,7 @@ public:
 		boost::statechart::custom_reaction<
 			sanguis::client::events::action
 		>
-	> reactions;
+	>;
 
 	explicit
 	has_player(
@@ -83,9 +86,10 @@ public:
 		sanguis::client::events::action const &
 	);
 
-	typedef
-	sanguis::messages::call::result
-	result_type;
+	using
+	result_type
+	=
+	sanguis::messages::call::result;
 
 	sanguis::messages::call::result
 	operator()(

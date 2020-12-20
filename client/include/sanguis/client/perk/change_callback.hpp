@@ -12,11 +12,12 @@ namespace client
 namespace perk
 {
 
-typedef
+using
+change_callback
+=
 fcppt::function<
 	sanguis::client::perk::change_function
->
-change_callback;
+>;
 
 }
 }

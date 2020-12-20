@@ -57,12 +57,13 @@ private:
 		sge::texture::part const
 	> texture_;
 
-	typedef
+	using
+	element_map
+	=
 	std::map<
 		sanguis::tiles::area_container_ref,
 		sanguis::client::load::tiles::texture_container
-	>
-	element_map;
+	>;
 
 	element_map elements_;
 };

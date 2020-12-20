@@ -12,11 +12,12 @@ namespace client
 namespace args
 {
 
-typedef
+using
+optional_resolution
+=
 fcppt::optional::object<
 	sge::renderer::screen_size
->
-optional_resolution;
+>;
 
 }
 }

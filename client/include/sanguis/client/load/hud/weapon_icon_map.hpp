@@ -19,14 +19,15 @@ namespace load
 namespace hud
 {
 
-typedef
+using
+weapon_icon_map
+=
 std::map<
 	sanguis::weapon_type,
 	fcppt::reference<
 		sge::texture::part const
 	>
->
-weapon_icon_map;
+>;
 
 }
 }

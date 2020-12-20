@@ -9,9 +9,10 @@ namespace client
 namespace perk
 {
 
-typedef
-void
-change_function();
+using
+change_function
+=
+void ();
 
 }
 }

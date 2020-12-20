@@ -16,13 +16,14 @@ namespace menu
 namespace callbacks
 {
 
-typedef
+using
+quickstart
+=
 fcppt::function<
 	void(
 		alda::net::port
 	)
->
-quickstart;
+>;
 
 }
 }

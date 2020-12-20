@@ -14,11 +14,12 @@ namespace draw2d
 namespace sprite
 {
 
-typedef
+using
+optional_dim
+=
 fcppt::optional::object<
 	sanguis::client::draw2d::sprite::dim
->
-optional_dim;
+>;
 
 }
 }

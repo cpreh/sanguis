@@ -15,12 +15,13 @@ namespace args
 namespace elements
 {
 
-typedef
+using
+history_size
+=
 fcppt::record::element<
 	sanguis::client::args::labels::history_size,
 	sge::console::gfx::output_line_limit
->
-history_size;
+>;
 
 }
 }

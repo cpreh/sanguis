@@ -42,7 +42,10 @@ class perk_chooser
 		perk_chooser
 	);
 public:
-	typedef boost::mpl::list4<
+	using
+	reactions
+	=
+	boost::mpl::list4<
 		boost::statechart::custom_reaction<
 			sanguis::client::events::action
 		>,
@@ -55,7 +58,7 @@ public:
 		boost::statechart::custom_reaction<
 			sanguis::client::events::input
 		>
-	> reactions;
+	>;
 
 	explicit
 	perk_chooser(

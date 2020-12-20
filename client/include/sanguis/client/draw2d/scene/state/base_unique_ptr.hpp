@@ -16,11 +16,12 @@ namespace scene
 namespace state
 {
 
-typedef
+using
+base_unique_ptr
+=
 fcppt::unique_ptr<
 	sanguis::client::draw2d::scene::state::base
->
-base_unique_ptr;
+>;
 
 }
 }

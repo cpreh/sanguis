@@ -45,15 +45,17 @@ class container
 		container
 	);
 
-	typedef
-	sanguis::client::draw2d::sprite::normal::object
-	object;
+	using
+	object
+	=
+	sanguis::client::draw2d::sprite::normal::object;
 
-	typedef
+	using
+	sprite_vector
+	=
 	std::vector<
 		object
-	>
-	sprite_vector;
+	>;
 public:
 	container(
 		sanguis::diff_clock const &,

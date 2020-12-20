@@ -17,14 +17,15 @@ namespace control
 namespace actions
 {
 
-typedef
+using
+variant
+=
 fcppt::variant::object<
 	sanguis::client::control::actions::binary,
 	sanguis::client::control::actions::cursor,
 	sanguis::client::control::actions::nullary,
 	sanguis::client::control::actions::scale
->
-variant;
+>;
 
 }
 }

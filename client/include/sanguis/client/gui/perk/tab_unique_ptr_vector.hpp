@@ -16,11 +16,12 @@ namespace gui
 namespace perk
 {
 
-typedef
+using
+tab_unique_ptr_vector
+=
 std::vector<
 	sanguis::client::gui::perk::tab_unique_ptr
->
-tab_unique_ptr_vector;
+>;
 
 }
 }

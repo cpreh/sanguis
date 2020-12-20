@@ -105,12 +105,13 @@ sanguis::client::draw2d::entities::with_buffs<
 		}
 	}
 
-	typedef
+	using
+	insert_result
+	=
 	std::pair<
 		buff_map::iterator,
 		bool
-	>
-	insert_result;
+	>;
 
 	insert_result const result(
 		buffs_.insert(

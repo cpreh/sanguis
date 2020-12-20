@@ -14,11 +14,12 @@ namespace load
 namespace model
 {
 
-typedef
+using
+part_unique_ptr
+=
 fcppt::unique_ptr<
 	sanguis::client::load::model::part
->
-part_unique_ptr;
+>;
 
 }
 }

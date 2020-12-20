@@ -16,11 +16,12 @@ namespace scene
 namespace state
 {
 
-typedef
+using
+optional_scoped_unique_ptr
+=
 fcppt::optional::object<
 	sanguis::client::draw2d::scene::state::scoped_unique_ptr
->
-optional_scoped_unique_ptr;
+>;
 
 }
 }

@@ -12,11 +12,12 @@ namespace client
 namespace draw2d
 {
 
-typedef
+using
+optional_vector2
+=
 fcppt::optional::object<
 	sanguis::client::draw2d::vector2
->
-optional_vector2;
+>;
 
 }
 }

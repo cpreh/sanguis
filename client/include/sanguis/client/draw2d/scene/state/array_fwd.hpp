@@ -17,12 +17,13 @@ namespace scene
 namespace state
 {
 
-typedef
+using
+array
+=
 fcppt::enum_::array<
 	sanguis::client::draw2d::z_ordering,
 	sanguis::client::draw2d::scene::state::base_unique_ptr
->
-array;
+>;
 
 }
 }

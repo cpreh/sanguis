@@ -18,10 +18,13 @@ namespace scene
 namespace world
 {
 
-typedef std::integral_constant<
+using
+batch_size
+=
+std::integral_constant<
 	sanguis::creator::size_type,
-	16
-> batch_size;
+	16 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+>;
 
 }
 }

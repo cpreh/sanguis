@@ -39,7 +39,9 @@ class console
 		console
 	);
 public:
-	typedef
+	using
+	reactions
+	=
 	boost::mpl::list3<
 		boost::statechart::custom_reaction<
 			sanguis::client::events::action
@@ -50,8 +52,7 @@ public:
 		boost::statechart::custom_reaction<
 			sanguis::client::events::input
 		>
-	>
-	reactions;
+	>;
 
 	explicit
 	console(

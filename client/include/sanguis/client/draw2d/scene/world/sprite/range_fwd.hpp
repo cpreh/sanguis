@@ -18,11 +18,12 @@ namespace world
 namespace sprite
 {
 
-typedef
+using
+range
+=
 sge::sprite::render::range<
 	sanguis::client::draw2d::scene::world::sprite::choices
->
-range;
+>;
 
 }
 }

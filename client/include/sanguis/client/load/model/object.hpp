@@ -35,9 +35,15 @@ class object
 		object
 	);
 public:
-	typedef sanguis::client::load::model::part_map::const_iterator const_iterator;
+	using
+	const_iterator
+	=
+	sanguis::client::load::model::part_map::const_iterator;
 
-	typedef sanguis::client::load::model::part_map::size_type size_type;
+	using
+	size_type
+	=
+	sanguis::client::load::model::part_map::size_type;
 
 	object(
 		fcppt::log::object &,
@@ -76,22 +82,29 @@ private:
 
 	sanguis::client::load::model::part_result const part_result_;
 
-	typedef fcppt::random::distribution::basic<
+	using
+	part_map_distribution
+	=
+	fcppt::random::distribution::basic<
 		fcppt::random::distribution::parameters::uniform_int<
 			sanguis::client::load::model::part_map::size_type
 		>
-	> part_map_distribution;
+	>;
 
-	typedef fcppt::random::variate<
+	using
+	part_rand
+	=
+	fcppt::random::variate<
 		sanguis::random_generator,
 		part_map_distribution
-	> part_rand;
+	>;
 
-	typedef
+	using
+	optional_part_rand
+	=
 	fcppt::optional::object<
 		part_rand
-	>
-	optional_part_rand;
+	>;
 
 	mutable optional_part_rand random_part_;
 };

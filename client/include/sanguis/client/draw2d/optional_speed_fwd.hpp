@@ -12,11 +12,12 @@ namespace client
 namespace draw2d
 {
 
-typedef
+using
+optional_speed
+=
 fcppt::optional::object<
 	sanguis::client::draw2d::speed
->
-optional_speed;
+>;
 
 }
 }

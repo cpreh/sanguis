@@ -12,10 +12,13 @@ namespace client
 namespace draw2d
 {
 
-typedef fcppt::math::dim::static_<
+using
+dim2
+=
+fcppt::math::dim::static_<
 	sanguis::client::draw2d::funit,
 	2
-> dim2;
+>;
 
 }
 }

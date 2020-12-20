@@ -16,11 +16,12 @@ namespace load
 namespace tiles
 {
 
-typedef
+using
+texture_container
+=
 std::vector<
 	sge::texture::const_part_unique_ptr
->
-texture_container;
+>;
 
 }
 }

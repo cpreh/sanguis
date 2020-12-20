@@ -29,17 +29,19 @@ class system
 		system
 	);
 
-	typedef
+	using
+	collection
+	=
 	sge::sprite::intrusive::ordered::collection<
 		Choices,
 		Category
-	>
-	collection;
+	>;
 
-	typedef
+	using
+	connection_ref
+	=
 	typename
-	collection::connection_ref
-	connection_ref;
+	collection::connection_ref;
 public:
 	system(
 		sge::renderer::device::core &,
@@ -63,11 +65,12 @@ public:
 	sge::renderer::device::core &
 	renderer() const;
 private:
-	typedef
+	using
+	sge_buffers
+	=
 	sanguis::client::draw2d::sprite::buffers<
 		Choices
-	>
-	sge_buffers;
+	>;
 
 	sge::renderer::device::core &renderer_;
 

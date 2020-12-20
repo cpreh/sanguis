@@ -69,7 +69,10 @@ class running
 		running
 	);
 public:
-	typedef boost::mpl::list6<
+	using
+	reactions
+	=
+	boost::mpl::list6<
 		boost::statechart::custom_reaction<
 			sanguis::client::events::tick
 		>,
@@ -88,7 +91,7 @@ public:
 		boost::statechart::custom_reaction<
 			sanguis::client::events::input
 		>
-	> reactions;
+	>;
 
 	explicit
 	running(
@@ -127,9 +130,10 @@ public:
 		sanguis::client::events::input const &
 	);
 
-	typedef
-	sanguis::messages::call::result
-	result_type;
+	using
+	result_type
+	=
+	sanguis::messages::call::result;
 
 	sanguis::messages::call::result
 	operator()(

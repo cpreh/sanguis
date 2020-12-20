@@ -12,13 +12,14 @@ namespace client
 namespace perk
 {
 
-typedef
+using
+send_callback
+=
 fcppt::function<
 	void (
 		sanguis::perk_type
 	)
->
-send_callback;
+>;
 
 }
 }

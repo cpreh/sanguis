@@ -19,12 +19,13 @@ namespace load
 namespace model
 {
 
-typedef
+using
+weapon_category_map
+=
 std::map<
 	sanguis::optional_primary_weapon_type,
 	sanguis::client::load::model::weapon_category_unique_ptr
->
-weapon_category_map;
+>;
 
 }
 }

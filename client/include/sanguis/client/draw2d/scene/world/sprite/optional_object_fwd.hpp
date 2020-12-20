@@ -18,11 +18,12 @@ namespace world
 namespace sprite
 {
 
-typedef
+using
+optional_object
+=
 fcppt::optional::object<
 	sanguis::client::draw2d::scene::world::sprite::object
->
-optional_object;
+>;
 
 }
 }

@@ -17,12 +17,13 @@ namespace load
 namespace resource
 {
 
-typedef
+using
+texture_name_map
+=
 std::unordered_map<
 	sanguis::client::load::resource::texture_identifier,
 	std::filesystem::path
->
-texture_name_map;
+>;
 
 }
 }

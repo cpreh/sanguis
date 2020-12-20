@@ -49,33 +49,37 @@ public:
 		sge::renderer::context::ffp &
 	);
 private:
-	typedef
+	using
+	sge_buffers
+	=
 	sanguis::client::draw2d::sprite::buffers<
 		sanguis::client::draw2d::sprite::colored::choices
-	>
-	sge_buffers;
+	>;
 
 	sge_buffers buffers_;
 
-	typedef
+	using
+	sprite_range
+	=
 	sge::sprite::render::range<
 		sanguis::client::draw2d::sprite::colored::choices
-	>
-	sprite_range;
+	>;
 
 	sprite_range range_;
 
-	typedef
+	using
+	state_choices
+	=
 	sge::sprite::state::choices<
 		metal::list<>
-	>
-	state_choices;
+	>;
 
-	typedef
+	using
+	sge_state
+	=
 	sge::sprite::state::object<
 		state_choices
-	>
-	sge_state;
+	>;
 
 	sge_state state_;
 };

@@ -15,11 +15,12 @@ namespace menu
 namespace callbacks
 {
 
-typedef
+using
+cancel_connect
+=
 fcppt::function<
 	void ()
->
-cancel_connect;
+>;
 
 }
 }

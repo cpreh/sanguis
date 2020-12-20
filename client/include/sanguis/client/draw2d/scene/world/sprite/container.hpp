@@ -20,11 +20,12 @@ namespace world
 namespace sprite
 {
 
-typedef
+using
+container
+=
 std::vector<
 	sanguis::client::draw2d::scene::world::sprite::object
->
-container;
+>;
 
 }
 }

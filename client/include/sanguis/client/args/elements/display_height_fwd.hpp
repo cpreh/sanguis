@@ -15,12 +15,13 @@ namespace args
 namespace elements
 {
 
-typedef
+using
+display_height
+=
 fcppt::record::element<
 	sanguis::client::args::labels::display_height,
 	sanguis::client::args::optional_screen_unit
->
-display_height;
+>;
 
 }
 }

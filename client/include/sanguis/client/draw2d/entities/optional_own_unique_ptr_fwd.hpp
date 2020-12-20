@@ -14,11 +14,12 @@ namespace draw2d
 namespace entities
 {
 
-typedef
+using
+optional_own_unique_ptr
+=
 fcppt::optional::object<
 	sanguis::client::draw2d::entities::own_unique_ptr
->
-optional_own_unique_ptr;
+>;
 
 }
 }

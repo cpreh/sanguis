@@ -9,7 +9,10 @@ namespace client
 namespace control
 {
 
-typedef int cursor_unit; // TODO
+using
+cursor_unit
+=
+int;
 
 }
 }

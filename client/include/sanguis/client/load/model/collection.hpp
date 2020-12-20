@@ -45,18 +45,20 @@ private:
 
 	sanguis::client::load::resource::context const &resources_;
 
-	typedef
+	using
+	model_unique_ptr
+	=
 	fcppt::unique_ptr<
 		sanguis::client::load::model::object
-	>
-	model_unique_ptr;
+	>;
 
-	typedef
+	using
+	model_map
+	=
 	std::map<
 		sanguis::load::model::path,
 		model_unique_ptr
-	>
-	model_map;
+	>;
 
 	mutable model_map models_;
 };

@@ -137,17 +137,19 @@ public:
 		bool
 	);
 private:
-	typedef
+	using
+	weapon_widget_unique_ptr
+	=
 	fcppt::unique_ptr<
 		sanguis::client::gui::hud::weapon_widget
-	>
-	weapon_widget_unique_ptr;
+	>;
 
-	typedef
+	using
+	optional_weapon_widget_unique_ptr
+	=
 	fcppt::optional::object<
 		weapon_widget_unique_ptr
-	>
-	optional_weapon_widget_unique_ptr;
+	>;
 
 	optional_weapon_widget_unique_ptr &
 	weapon_widget(
@@ -254,17 +256,19 @@ private:
 
 	sge::gui::background::none gui_background_;
 
-	typedef
+	using
+	weapon_details_unique_ptr
+	=
 	fcppt::unique_ptr<
 		sanguis::client::gui::hud::weapon_details
-	>
-	weapon_details_unique_ptr;
+	>;
 
-	typedef
+	using
+	optional_weapon_details_unique_ptr
+	=
 	fcppt::optional::object<
 		weapon_details_unique_ptr
-	>
-	optional_weapon_details_unique_ptr;
+	>;
 
 	optional_weapon_details_unique_ptr weapon_details_;
 

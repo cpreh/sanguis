@@ -10,13 +10,14 @@ namespace sanguis
 namespace client
 {
 
-typedef
+using
+server_callback
+=
 fcppt::function<
 	void (
 		alda::net::port
 	)
->
-server_callback;
+>;
 
 }
 }

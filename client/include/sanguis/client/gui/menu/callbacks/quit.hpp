@@ -15,11 +15,12 @@ namespace menu
 namespace callbacks
 {
 
-typedef
+using
+quit
+=
 fcppt::function<
 	void ()
->
-quit;
+>;
 
 }
 }

@@ -14,11 +14,12 @@ namespace draw2d
 namespace sprite
 {
 
-typedef
+using
+size_or_texture_size
+=
 sge::sprite::types::size_or_texture_size<
 	sanguis::client::draw2d::sprite::type_choices
->
-size_or_texture_size;
+>;
 
 }
 }

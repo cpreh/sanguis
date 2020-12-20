@@ -16,11 +16,12 @@ namespace scene
 namespace world
 {
 
-typedef
+using
+base_unique_ptr
+=
 fcppt::unique_ptr<
 	sanguis::client::draw2d::scene::world::base
->
-base_unique_ptr;
+>;
 
 }
 }

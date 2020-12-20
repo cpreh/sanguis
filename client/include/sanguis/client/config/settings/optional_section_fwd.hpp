@@ -14,9 +14,12 @@ namespace config
 namespace settings
 {
 
-typedef fcppt::optional::object<
+using
+optional_section
+=
+fcppt::optional::object<
 	sge::parse::ini::section
-> optional_section;
+>;
 
 }
 }

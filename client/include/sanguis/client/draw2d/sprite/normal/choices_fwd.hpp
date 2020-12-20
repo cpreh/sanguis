@@ -31,7 +31,9 @@ namespace sprite
 namespace normal
 {
 
-typedef
+using
+choices
+=
 sge::sprite::config::choices<
 	sanguis::client::draw2d::sprite::type_choices,
 	sge::sprite::config::pos<
@@ -44,7 +46,7 @@ sge::sprite::config::choices<
 		sge::sprite::config::with_rotation,
 		sge::sprite::config::with_texture<
 			sge::sprite::config::texture_level_count<
-				1u
+				1U
 			>,
 			sge::sprite::config::texture_coordinates::automatic,
 			sge::sprite::config::texture_ownership::reference
@@ -54,8 +56,7 @@ sge::sprite::config::choices<
 		>,
 		sge::sprite::config::intrusive
 	>
->
-choices;
+>;
 
 }
 }

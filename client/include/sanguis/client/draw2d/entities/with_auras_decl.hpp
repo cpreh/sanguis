@@ -36,16 +36,18 @@ class with_auras
 		with_auras
 	);
 public:
-	typedef
+	using
+	base_parameters
+	=
 	typename
-	Base::parameters_type
-	base_parameters;
+	Base::parameters_type;
 
-	typedef
+	using
+	parameters_type
+	=
 	sanguis::client::draw2d::entities::with_auras_parameters<
 		base_parameters
-	>
-	parameters_type;
+	>;
 
 	explicit
 	with_auras(
@@ -75,12 +77,13 @@ private:
 
 	sanguis::diff_timer rotate_timer_;
 
-	typedef
+	using
+	sprite_map
+	=
 	std::map<
 		sanguis::aura_type,
 		sanguis::client::draw2d::sprite::normal::object
-	>
-	sprite_map;
+	>;
 
 	sprite_map sprites_;
 };

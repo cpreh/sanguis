@@ -204,9 +204,10 @@ private:
 
 	ALDA_CALL_FRIEND_DISPATCHER;
 
-	typedef
-	void
-	result_type;
+	using
+	result_type
+	=
+	void;
 
 	result_type
 	operator()(
@@ -400,18 +401,20 @@ private:
 
 	sanguis::client::weapon_pair player_weapons_;
 
-	typedef
+	using
+	entity_map
+	=
 	std::map<
 		sanguis::entity_id,
 		sanguis::client::draw2d::entities::unique_ptr
-	>
-	entity_map;
+	>;
 
-	typedef
+	using
+	own_entity_list
+	=
 	std::list<
 		sanguis::client::draw2d::entities::own_unique_ptr
-	>
-	own_entity_list;
+	>;
 
 	entity_map entities_;
 
@@ -421,11 +424,12 @@ private:
 		sanguis::client::draw2d::scene::background
 	> const background_;
 
-	typedef
+	using
+	optional_hover_unique_ptr
+	=
 	fcppt::optional::object<
 		sanguis::client::draw2d::scene::hover::base_unique_ptr
-	>
-	optional_hover_unique_ptr;
+	>;
 
 	optional_hover_unique_ptr hover_;
 

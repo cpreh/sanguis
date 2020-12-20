@@ -52,9 +52,10 @@ public:
 	bool
 	decrement();
 private:
-	typedef
-	unsigned
-	counter;
+	using
+	counter
+	=
+	unsigned;
 
 	counter counter_;
 };

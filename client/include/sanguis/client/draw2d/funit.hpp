@@ -9,7 +9,10 @@ namespace client
 namespace draw2d
 {
 
-typedef float funit;
+using
+funit
+=
+float;
 
 }
 }

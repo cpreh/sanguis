@@ -17,12 +17,13 @@ namespace load
 namespace model
 {
 
-typedef
+using
+part_map
+=
 std::map<
 	fcppt::string,
 	sanguis::client::load::model::part_unique_ptr
->
-part_map;
+>;
 
 }
 }

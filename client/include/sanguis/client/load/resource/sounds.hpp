@@ -47,18 +47,20 @@ public:
 		std::filesystem::path const &
 	) const;
 private:
-	typedef
+	using
+	optional_buffer
+	=
 	fcppt::optional::object<
 		sge::audio::buffer_unique_ptr
-	>
-	optional_buffer;
+	>;
 
-	typedef
+	using
+	buffer_map
+	=
 	std::map<
 		std::filesystem::path,
 		optional_buffer
-	>
-	buffer_map;
+	>;
 
 	sge::audio::loader &multi_loader_;
 

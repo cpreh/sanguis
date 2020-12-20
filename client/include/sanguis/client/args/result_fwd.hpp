@@ -20,9 +20,9 @@ namespace client
 namespace args
 {
 
-// TODO: Can we fwd declare any of this?
-
-typedef
+using
+result
+=
 fcppt::record::disjoint_product<
 	sanguis::server::args::result,
 	fcppt::record::object<
@@ -34,8 +34,7 @@ fcppt::record::disjoint_product<
 		sanguis::client::args::elements::multi_samples,
 		sanguis::client::args::elements::sge_log_level
 	>
->
-result;
+>;
 
 }
 }

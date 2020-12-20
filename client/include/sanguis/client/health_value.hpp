@@ -7,9 +7,10 @@ namespace sanguis
 namespace client
 {
 
-typedef
-float
-health_value;
+using
+health_value
+=
+float;
 
 }
 }

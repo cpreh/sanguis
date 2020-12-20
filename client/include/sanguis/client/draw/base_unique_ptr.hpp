@@ -12,11 +12,12 @@ namespace client
 namespace draw
 {
 
-typedef
+using
+base_unique_ptr
+=
 fcppt::unique_ptr<
 	sanguis::client::draw::base
->
-base_unique_ptr;
+>;
 
 }
 }

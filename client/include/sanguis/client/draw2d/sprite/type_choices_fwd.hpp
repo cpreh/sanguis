@@ -17,14 +17,17 @@ namespace draw2d
 namespace sprite
 {
 
-typedef sge::sprite::config::type_choices<
+using
+type_choices
+=
+sge::sprite::config::type_choices<
 	sge::sprite::config::unit_type<
 		sanguis::client::draw2d::sprite::unit
 	>,
 	sge::sprite::config::float_type<
 		sanguis::client::draw2d::sprite::float_unit
 	>
-> type_choices;
+>;
 
 }
 }

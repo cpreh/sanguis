@@ -79,11 +79,12 @@ private:
 
 	sanguis::io_service io_service_;
 
-	typedef
+	using
+	systems_unique_ptr
+	=
 	fcppt::unique_ptr<
 		sanguis::client::systems
-	>
-	systems_unique_ptr;
+	>;
 
 	systems_unique_ptr const sys_;
 
@@ -105,33 +106,37 @@ private:
 
 	sanguis::client::machine machine_;
 
-	typedef
+	using
+	frame_timer
+	=
 	sge::timer::absolute<
 		sanguis::clock
-	>
-	frame_timer;
+	>;
 
 	frame_timer frame_timer_;
 
-	typedef
+	using
+	server_unique_ptr
+	=
 	fcppt::unique_ptr<
 		sanguis::client::server
-	>
-	server_unique_ptr;
+	>;
 
-	typedef
+	using
+	optional_server_unique_ptr
+	=
 	fcppt::optional::object<
 		server_unique_ptr
-	>
-	optional_server_unique_ptr;
+	>;
 
 	optional_server_unique_ptr server_;
 
-	typedef
+	using
+	scoped_machine
+	=
 	fcppt::scoped_state_machine<
 		sanguis::client::machine
-	>
-	scoped_machine;
+	>;
 
 	scoped_machine scoped_machine_;
 };

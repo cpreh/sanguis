@@ -9,7 +9,10 @@ namespace client
 namespace draw2d
 {
 
-typedef int unit;
+using
+unit
+=
+int;
 
 }
 }

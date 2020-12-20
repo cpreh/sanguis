@@ -25,7 +25,10 @@ class series
 		series
 	);
 public:
-	typedef sanguis::client::load::resource::animation::entity_vector::const_iterator const_iterator;
+	using
+	const_iterator
+	=
+	sanguis::client::load::resource::animation::entity_vector::const_iterator;
 
 	explicit
 	series(

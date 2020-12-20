@@ -16,11 +16,12 @@ namespace sprite
 namespace colored
 {
 
-typedef
+using
+color
+=
 sge::image::pixel::mizuiro_type<
 	sanguis::client::draw2d::sprite::colored::color_format
->
-color;
+>;
 
 }
 }

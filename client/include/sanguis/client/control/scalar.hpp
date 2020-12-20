@@ -9,7 +9,10 @@ namespace client
 namespace control
 {
 
-typedef float scalar;
+using
+scalar
+=
+float;
 
 }
 }

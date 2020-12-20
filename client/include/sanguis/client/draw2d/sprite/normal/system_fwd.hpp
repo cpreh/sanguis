@@ -17,12 +17,13 @@ namespace sprite
 namespace normal
 {
 
-typedef
+using
+system
+=
 sanguis::client::draw2d::sprite::system<
 	sanguis::client::draw2d::sprite::normal::choices,
 	sanguis::client::draw2d::z_ordering
->
-system;
+>;
 
 }
 }

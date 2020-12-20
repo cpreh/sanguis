@@ -17,7 +17,9 @@ namespace gui
 namespace style
 {
 
-typedef
+using
+spacing
+=
 std::integral_constant<
 	sge::rucksack::scalar,
 	(
@@ -27,8 +29,7 @@ std::integral_constant<
 	)
 	*
 	2
->
-spacing;
+>;
 
 }
 }

@@ -14,11 +14,12 @@ namespace load
 namespace resource
 {
 
-typedef
+using
+optional_sound
+=
 fcppt::optional::reference<
 	sge::audio::buffer
->
-optional_sound;
+>;
 
 }
 }

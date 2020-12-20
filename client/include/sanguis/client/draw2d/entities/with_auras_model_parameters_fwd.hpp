@@ -14,11 +14,12 @@ namespace draw2d
 namespace entities
 {
 
-typedef
+using
+with_auras_model_parameters
+=
 sanguis::client::draw2d::entities::with_auras_parameters<
 	sanguis::client::draw2d::entities::model::parameters
->
-with_auras_model_parameters;
+>;
 
 }
 }

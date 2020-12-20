@@ -16,9 +16,12 @@ namespace sprite
 namespace client
 {
 
-typedef sge::sprite::object<
+using
+object
+=
+sge::sprite::object<
 	sanguis::client::draw2d::sprite::client::choices
-> object;
+>;
 
 }
 }

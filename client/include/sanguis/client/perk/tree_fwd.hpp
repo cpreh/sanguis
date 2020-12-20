@@ -12,11 +12,12 @@ namespace client
 namespace perk
 {
 
-typedef
+using
+tree
+=
 fcppt::container::tree::object<
 	sanguis::client::perk::optional_info
->
-tree;
+>;
 
 }
 }

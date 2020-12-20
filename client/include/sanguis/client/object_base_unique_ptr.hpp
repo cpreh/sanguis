@@ -10,11 +10,12 @@ namespace sanguis
 namespace client
 {
 
-typedef
+using
+object_base_unique_ptr
+=
 fcppt::unique_ptr<
 	sanguis::client::object_base
->
-object_base_unique_ptr;
+>;
 
 }
 }

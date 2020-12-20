@@ -46,7 +46,10 @@ class menu
 		menu
 	);
 public:
-	typedef boost::mpl::list6<
+	using
+	reactions
+	=
+	boost::mpl::list6<
 		boost::statechart::custom_reaction<
 			sanguis::client::events::tick
 		>,
@@ -65,7 +68,7 @@ public:
 		boost::statechart::custom_reaction<
 			sanguis::client::events::input
 		>
-	> reactions;
+	>;
 
 	explicit
 	menu(
@@ -74,9 +77,10 @@ public:
 
 	~menu();
 
-	typedef
-	sanguis::messages::call::result
-	result_type;
+	using
+	result_type
+	=
+	sanguis::messages::call::result;
 
 	boost::statechart::result
 	react(

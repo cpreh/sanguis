@@ -14,11 +14,12 @@ namespace gui
 namespace hud
 {
 
-typedef
+using
+weapon_tooltip_unique_ptr
+=
 fcppt::unique_ptr<
 	sanguis::client::gui::hud::weapon_tooltip
->
-weapon_tooltip_unique_ptr;
+>;
 
 }
 }

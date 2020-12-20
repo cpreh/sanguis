@@ -7,9 +7,10 @@ namespace sanguis
 namespace client
 {
 
-typedef
-unsigned long
-exp_value;
+using
+exp_value
+=
+unsigned long;
 
 }
 }

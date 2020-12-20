@@ -84,11 +84,12 @@ private:
 
 	sge::gui::widget::text top_text_;
 
-	typedef
+	using
+	state_unique_ptr
+	=
 	fcppt::unique_ptr<
 		sanguis::client::gui::perk::state
-	>
-	state_unique_ptr;
+	>;
 
 	state_unique_ptr gui_state_;
 

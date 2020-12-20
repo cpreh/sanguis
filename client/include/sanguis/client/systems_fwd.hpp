@@ -17,7 +17,9 @@ namespace sanguis
 namespace client
 {
 
-typedef
+using
+systems
+=
 sge::systems::instance<
 	sge::systems::with_window,
 	sge::systems::with_renderer<
@@ -28,8 +30,7 @@ sge::systems::instance<
 	sge::systems::with_font,
 	sge::systems::with_audio_loader,
 	sge::systems::with_audio_player
->
-systems;
+>;
 
 }
 }

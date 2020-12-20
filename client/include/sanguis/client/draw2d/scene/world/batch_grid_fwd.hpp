@@ -16,10 +16,13 @@ namespace scene
 namespace world
 {
 
-typedef fcppt::container::grid::object<
+using
+batch_grid
+=
+fcppt::container::grid::object<
 	sanguis::client::draw2d::scene::world::batch,
 	2
-> batch_grid;
+>;
 
 }
 }

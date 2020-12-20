@@ -23,12 +23,13 @@ public:
 		sanguis::client::perk::tree::const_iterator
 	);
 
-	typedef
+	using
+	pair
+	=
 	std::pair<
 		sanguis::client::perk::tree::const_iterator,
 		sanguis::client::perk::tree::const_iterator
-	>
-	pair;
+	>;
 
 	explicit
 	const_tree_range(

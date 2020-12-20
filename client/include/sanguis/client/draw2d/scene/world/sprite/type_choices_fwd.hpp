@@ -20,14 +20,17 @@ namespace world
 namespace sprite
 {
 
-typedef sge::sprite::config::type_choices<
+using
+type_choices
+=
+sge::sprite::config::type_choices<
 	sge::sprite::config::unit_type<
 		sanguis::client::draw2d::scene::world::sprite::unit
 	>,
 	sge::sprite::config::float_type<
 		float // don't care
 	>
-> type_choices;
+>;
 
 }
 }

@@ -12,10 +12,13 @@ namespace client
 namespace control
 {
 
-typedef fcppt::math::vector::static_<
+using
+attack_dest
+=
+fcppt::math::vector::static_<
 	sanguis::client::control::scalar,
 	2
-> attack_dest;
+>;
 
 }
 }

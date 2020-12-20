@@ -13,13 +13,14 @@ namespace client
 namespace draw2d
 {
 
-typedef
+using
+insert_own_callback
+=
 fcppt::function<
 	sanguis::client::draw2d::entities::own &(
 		sanguis::client::draw2d::entities::own_unique_ptr
 	)
->
-insert_own_callback;
+>;
 
 }
 }

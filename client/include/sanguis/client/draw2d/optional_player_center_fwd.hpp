@@ -12,11 +12,12 @@ namespace client
 namespace draw2d
 {
 
-typedef
+using
+optional_player_center
+=
 fcppt::optional::object<
 	sanguis::client::draw2d::player_center
->
-optional_player_center;
+>;
 
 }
 }

@@ -47,17 +47,19 @@ public:
 private:
 	sge::gui::widget::static_text name_text_;
 
-	typedef
+	using
+	text_unique_ptr
+	=
 	fcppt::unique_ptr<
 		sge::gui::widget::static_text
-	>
-	text_unique_ptr;
+	>;
 
-	typedef
+	using
+	text_unique_ptr_vector
+	=
 	std::vector<
 		text_unique_ptr
-	>
-	text_unique_ptr_vector;
+	>;
 
 	text_unique_ptr_vector attribute_texts_;
 

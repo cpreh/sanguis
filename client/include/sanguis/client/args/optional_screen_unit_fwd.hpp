@@ -12,11 +12,12 @@ namespace client
 namespace args
 {
 
-typedef
+using
+optional_screen_unit
+=
 fcppt::optional::object<
 	sge::renderer::screen_unit
->
-optional_screen_unit;
+>;
 
 }
 }

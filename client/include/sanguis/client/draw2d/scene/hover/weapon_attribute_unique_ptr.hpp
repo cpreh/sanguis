@@ -16,11 +16,12 @@ namespace scene
 namespace hover
 {
 
-typedef
+using
+weapon_attribute_unique_ptr
+=
 fcppt::unique_ptr<
 	sanguis::client::draw2d::scene::hover::weapon_attribute
->
-weapon_attribute_unique_ptr;
+>;
 
 }
 }

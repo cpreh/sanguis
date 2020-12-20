@@ -14,9 +14,12 @@ namespace draw2d
 namespace sprite
 {
 
-typedef sge::sprite::state::object<
+using
+state
+=
+sge::sprite::state::object<
 	sanguis::client::draw2d::sprite::state_choices
-> state;
+>;
 
 }
 }

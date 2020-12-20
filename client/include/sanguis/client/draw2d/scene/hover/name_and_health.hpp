@@ -51,23 +51,26 @@ private:
 	)
 	override;
 
-	typedef
+	using
+	optional_name
+	=
 	fcppt::optional::object<
 		sanguis::client::draw2d::scene::hover::name
-	>
-	optional_name;
+	>;
 
-	typedef
+	using
+	healthbar_unique_ptr
+	=
 	fcppt::unique_ptr<
 		sanguis::client::draw2d::scene::hover::healthbar
-	>
-	healthbar_unique_ptr;
+	>;
 
-	typedef
+	using
+	optional_healthbar
+	=
 	fcppt::optional::object<
 		healthbar_unique_ptr
-	>
-	optional_healthbar;
+	>;
 
 	optional_healthbar healthbar_;
 

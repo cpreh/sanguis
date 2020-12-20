@@ -40,14 +40,15 @@ public:
 	);
 private:
 	// TODO: We need a hash for enums
-	typedef
+	using
+	texture_map
+	=
 	std::map<
 		sanguis::aura_type,
 		fcppt::reference<
 			sge::texture::part const
 		>
-	>
-	texture_map;
+	>;
 
 	texture_map const textures_;
 };

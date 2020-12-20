@@ -40,14 +40,17 @@ class waiting_for_player
 		waiting_for_player
 	);
 public:
-	typedef boost::mpl::list2<
+	using
+	reactions
+	=
+	boost::mpl::list2<
 		boost::statechart::custom_reaction<
 			sanguis::client::events::message
 		>,
 		boost::statechart::custom_reaction<
 			sanguis::client::events::action
 		>
-	> reactions;
+	>;
 
 	explicit
 	waiting_for_player(
@@ -66,9 +69,10 @@ public:
 		sanguis::client::events::action const &
 	);
 
-	typedef
-	sanguis::messages::call::result
-	result_type;
+	using
+	result_type
+	=
+	sanguis::messages::call::result;
 
 	sanguis::messages::call::result
 	operator()(

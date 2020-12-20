@@ -16,9 +16,12 @@ namespace sprite
 namespace client
 {
 
-typedef sge::sprite::types::texture_coordinates<
+using
+texture_coordinates
+=
+sge::sprite::types::texture_coordinates<
 	sanguis::client::draw2d::sprite::type_choices
-> texture_coordinates;
+>;
 
 }
 }

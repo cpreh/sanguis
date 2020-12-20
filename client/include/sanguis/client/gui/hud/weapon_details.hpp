@@ -45,11 +45,12 @@ public:
 	sge::gui::widget::base &
 	widget();
 private:
-	typedef
+	using
+	tooltip_vector
+	=
 	std::vector<
 		sanguis::client::gui::hud::weapon_tooltip_unique_ptr
-	>
-	tooltip_vector;
+	>;
 
 	tooltip_vector tooltips_;
 

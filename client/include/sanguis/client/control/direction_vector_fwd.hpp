@@ -12,10 +12,13 @@ namespace client
 namespace control
 {
 
-typedef fcppt::math::vector::static_<
+using
+direction_vector
+=
+fcppt::math::vector::static_<
 	sanguis::client::control::scalar,
 	2
-> direction_vector;
+>;
 
 }
 }

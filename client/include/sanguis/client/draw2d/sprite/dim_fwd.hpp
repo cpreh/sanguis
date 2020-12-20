@@ -14,11 +14,12 @@ namespace draw2d
 namespace sprite
 {
 
-typedef
+using
+dim
+=
 sge::sprite::types::dim<
 	sanguis::client::draw2d::sprite::type_choices
->
-dim;
+>;
 
 }
 }

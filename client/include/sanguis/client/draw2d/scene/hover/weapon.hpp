@@ -68,11 +68,12 @@ private:
 
 	sge::gui::widget::image image_;
 
-	typedef
+	using
+	weapon_attribute_vector
+	=
 	std::vector<
 		sanguis::client::draw2d::scene::hover::weapon_attribute_unique_ptr
-	>
-	weapon_attribute_vector;
+	>;
 
 	weapon_attribute_vector weapon_attributes_;
 

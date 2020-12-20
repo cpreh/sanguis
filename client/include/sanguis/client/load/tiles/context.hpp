@@ -54,12 +54,13 @@ public:
 		sanguis::tiles::error
 	) const;
 private:
-	typedef
+	using
+	map_type
+	=
 	std::map<
 		std::filesystem::path,
 		sanguis::client::load::tiles::set
-	>
-	map_type;
+	>;
 
 	sanguis::tiles::collection collection_;
 
@@ -67,12 +68,13 @@ private:
 
 	map_type sets_;
 
-	typedef
+	using
+	missing_texture_array
+	=
 	fcppt::enum_::array<
 		sanguis::tiles::error,
 		sge::texture::const_part_unique_ptr
-	>
-	missing_texture_array;
+	>;
 
 	missing_texture_array const missing_textures_;
 };

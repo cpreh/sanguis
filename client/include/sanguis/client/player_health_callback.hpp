@@ -10,13 +10,14 @@ namespace sanguis
 namespace client
 {
 
-typedef
+using
+player_health_callback
+=
 fcppt::function<
 	void(
 		sanguis::client::optional_health_pair const &
 	)
->
-player_health_callback;
+>;
 
 }
 }

@@ -12,11 +12,12 @@ namespace client
 namespace control
 {
 
-typedef
+using
+optional_attack_dest
+=
 fcppt::optional::object<
 	sanguis::client::control::attack_dest
->
-optional_attack_dest;
+>;
 
 }
 }

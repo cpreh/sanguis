@@ -14,11 +14,12 @@ namespace load
 namespace model
 {
 
-typedef
+using
+animation_unique_ptr
+=
 fcppt::unique_ptr<
 	sanguis::client::load::model::animation
->
-animation_unique_ptr;
+>;
 
 }
 }

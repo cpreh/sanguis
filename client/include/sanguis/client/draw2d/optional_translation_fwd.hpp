@@ -12,11 +12,12 @@ namespace client
 namespace draw2d
 {
 
-typedef
+using
+optional_translation
+=
 fcppt::optional::object<
 	sanguis::client::draw2d::translation
->
-optional_translation;
+>;
 
 }
 }

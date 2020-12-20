@@ -10,11 +10,12 @@ namespace sanguis
 namespace client
 {
 
-typedef
+using
+optional_health_pair
+=
 fcppt::optional::object<
 	sanguis::client::health_pair
->
-optional_health_pair;
+>;
 
 }
 }

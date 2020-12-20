@@ -16,11 +16,12 @@ namespace entities
 namespace model
 {
 
-typedef
+using
+optional_sound
+=
 fcppt::optional::object<
 	sge::audio::sound::base_unique_ptr
->
-optional_sound;
+>;
 
 }
 }
