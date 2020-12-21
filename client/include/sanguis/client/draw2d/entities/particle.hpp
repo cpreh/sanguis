@@ -9,8 +9,8 @@
 #include <sanguis/client/draw2d/sprite/optional_dim_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/animation/texture.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object_decl.hpp>
-#include <sanguis/client/load/resource/animation/series_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <sanguis/client/load/resource/animation/series_cref.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -26,7 +26,7 @@ class particle
 :
 	public sanguis::client::draw2d::entities::own
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		particle
 	);
 public:
@@ -34,8 +34,8 @@ public:
 		sanguis::client::draw2d::entities::load_parameters const &,
 		sanguis::client::draw2d::entities::particle_name const &,
 		sanguis::client::draw2d::z_ordering,
-		sanguis::client::draw2d::sprite::center,
-		sanguis::client::draw2d::sprite::optional_dim
+		sanguis::client::draw2d::sprite::center const &,
+		sanguis::client::draw2d::sprite::optional_dim const &
 	);
 
 	~particle()
@@ -44,15 +44,16 @@ private:
 	particle(
 		sanguis::client::draw2d::entities::load_parameters const &,
 		sanguis::client::draw2d::z_ordering,
-		sanguis::client::draw2d::sprite::center,
-		sanguis::client::draw2d::sprite::optional_dim,
-		sanguis::client::load::resource::animation::series const &
+		sanguis::client::draw2d::sprite::center const &,
+		sanguis::client::draw2d::sprite::optional_dim const &,
+		sanguis::client::load::resource::animation::series_cref
 	);
 
 	void
 	update()
 	override;
 
+	[[nodiscard]]
 	bool
 	may_be_removed() const
 	override;

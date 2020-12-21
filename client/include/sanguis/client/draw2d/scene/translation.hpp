@@ -17,8 +17,8 @@ namespace scene
 
 sanguis::client::draw2d::translation
 translation(
-	sanguis::client::draw2d::player_center,
-	sge::renderer::screen_size
+	sanguis::client::draw2d::player_center const &,
+	sge::renderer::screen_size const &
 );
 
 }
@@ -27,4 +27,3 @@ translation(
 }
 
 #endif
-

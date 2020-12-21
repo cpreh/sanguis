@@ -23,9 +23,11 @@ public:
 		sge::texture::const_part_ref
 	);
 
+	[[nodiscard]]
 	sanguis::client::draw2d::z_ordering
 	z_ordering() const;
 
+	[[nodiscard]]
 	sge::texture::const_part_ref
 	texture() const;
 private:

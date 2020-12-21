@@ -7,9 +7,9 @@
 #include <sanguis/client/draw2d/entities/with_auras_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/ifaces/with_auras.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
-#include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
-#include <sanguis/client/load/auras/context_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <sanguis/client/draw2d/sprite/normal/system_ref.hpp>
+#include <sanguis/client/load/auras/context_ref.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <map>
 #include <fcppt/config/external_end.hpp>
@@ -32,7 +32,7 @@ class with_auras
 	public sanguis::client::draw2d::entities::ifaces::with_auras,
 	public Base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		with_auras
 	);
 public:
@@ -60,20 +60,20 @@ protected:
 	void
 	update()
 	override;
-private:
+
 	void
 	on_die()
 	override;
-
+private:
 	void
 	add_aura(
 		sanguis::aura_type
 	)
 	override;
 
-	sanguis::client::load::auras::context &aura_load_context_;
+	sanguis::client::load::auras::context_ref const aura_load_context_;
 
-	sanguis::client::draw2d::sprite::normal::system &normal_system_;
+	sanguis::client::draw2d::sprite::normal::system_ref const normal_system_;
 
 	sanguis::diff_timer rotate_timer_;
 

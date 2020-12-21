@@ -34,24 +34,30 @@ public:
 
 	animation(
 		animation &&
-	);
+	)
+	noexcept;
 
 	animation &
 	operator=(
 		animation &&
-	);
+	)
+	noexcept;
 
 	~animation();
 
+	[[nodiscard]]
 	sanguis::client::load::animation_type
 	animation_type() const;
 
+	[[nodiscard]]
 	sge::texture::const_part_ref
 	current_texture();
 
+	[[nodiscard]]
 	sanguis::client::draw2d::entities::model::optional_sound const &
 	sound() const;
 
+	[[nodiscard]]
 	bool
 	ended() const;
 private:

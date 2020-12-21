@@ -19,7 +19,7 @@ namespace resource
 
 sanguis::client::load::resource::texture_name_map
 parse_texture_file(
-	fcppt::log::object &,
+	fcppt::log::object &, // NOLINT(google-runtime-references)
 	std::filesystem::path const &,
 	sanguis::client::load::resource::texture_name_map &&
 );

@@ -1,19 +1,19 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_TEXT_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_TEXT_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/diff_clock_cref.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/client/draw2d/z_ordering_fwd.hpp>
 #include <sanguis/client/draw2d/entities/own.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/normal/color_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object_decl.hpp>
-#include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/normal/system_ref.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
 #include <sge/font/text_unique_ptr.hpp>
 #include <sge/texture/const_part_unique_ptr.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -29,17 +29,17 @@ class text
 :
 	public sanguis::client::draw2d::entities::own
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		text
 	);
 public:
 	text(
-		sanguis::diff_clock const &,
-		sanguis::client::draw2d::sprite::normal::system &,
-		sge::font::object &,
+		sanguis::diff_clock_cref,
+		sanguis::client::draw2d::sprite::normal::system_ref,
+		sge::font::object &, // NOLINT(google-runtime-references)
 		sge::font::string const &,
 		sanguis::client::draw2d::z_ordering,
-		sanguis::client::draw2d::sprite::center,
+		sanguis::client::draw2d::sprite::center const &,
 		sanguis::client::draw2d::sprite::normal::color
 	);
 
@@ -47,11 +47,11 @@ public:
 	override;
 private:
 	text(
-		sanguis::diff_clock const &,
-		sanguis::client::draw2d::sprite::normal::system &,
+		sanguis::diff_clock_cref,
+		sanguis::client::draw2d::sprite::normal::system_ref,
 		sge::font::text_unique_ptr &&,
 		sanguis::client::draw2d::z_ordering,
-		sanguis::client::draw2d::sprite::center,
+		sanguis::client::draw2d::sprite::center const &,
 		sanguis::client::draw2d::sprite::normal::color
 	);
 
@@ -59,6 +59,7 @@ private:
 	update()
 	override;
 
+	[[nodiscard]]
 	bool
 	may_be_removed() const
 	override;

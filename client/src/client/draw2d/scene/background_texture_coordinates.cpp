@@ -15,16 +15,22 @@
 
 sanguis::client::draw2d::sprite::client::texture_coordinates
 sanguis::client::draw2d::scene::background_texture_coordinates(
-	sanguis::client::draw2d::translation const _translation,
+	sanguis::client::draw2d::translation const &_translation,
 	sge::renderer::device::core &_device,
 	sge::texture::part const &_texture
 )
 {
-	typedef sanguis::client::draw2d::sprite::client::texture_coordinates coordinates;
+	using
+	coordinates
+	=
+	sanguis::client::draw2d::sprite::client::texture_coordinates;
 
-	typedef coordinates::value_type pos_type;
+	using
+	pos_type
+	=
+	coordinates::value_type;
 
-	pos_type const dim(
+	auto const dim(
 		fcppt::math::vector::structure_cast<
 			pos_type,
 			fcppt::cast::int_to_float_fun

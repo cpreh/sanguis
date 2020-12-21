@@ -2,12 +2,12 @@
 
 
 sanguis::client::events::connected::connected()
-{
-}
+= default;
 
 sanguis::client::events::connected::connected(
 	connected &&
 )
+noexcept
 = default;
 
 sanguis::client::events::connected::connected(
@@ -19,6 +19,7 @@ sanguis::client::events::connected &
 sanguis::client::events::connected::operator=(
 	connected &&
 )
+noexcept
 = default;
 
 sanguis::client::events::connected &
@@ -28,5 +29,4 @@ sanguis::client::events::connected::operator=(
 = default;
 
 sanguis::client::events::connected::~connected()
-{
-}
+= default;

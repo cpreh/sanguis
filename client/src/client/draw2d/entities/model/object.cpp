@@ -25,11 +25,14 @@
 #include <sanguis/client/load/animation_type.hpp>
 #include <sanguis/client/load/model/collection.hpp>
 #include <sanguis/client/load/model/object.hpp>
+#include <sanguis/client/load/model/object_cref.hpp>
 #include <sanguis/client/load/model/part_fwd.hpp>
 #include <sanguis/client/load/model/part_map.hpp>
 #include <fcppt/const.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/make_int_range_count.hpp>
 #include <fcppt/make_literal_strong_typedef.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/algorithm/all_of.hpp>
 #include <fcppt/algorithm/map.hpp>
@@ -53,16 +56,17 @@ sanguis::client::draw2d::entities::model::object::object(
 :
 	sanguis::client::draw2d::entities::model::object::object(
 		_parameters,
-		_parameters.load_parameters().collection()[
-			_parameters.path()
-		]
+		fcppt::make_cref(
+			_parameters.load_parameters().collection()[
+				_parameters.path()
+			]
+		)
 	)
 {
 }
 
 sanguis::client::draw2d::entities::model::object::~object()
-{
-}
+= default;
 
 void
 sanguis::client::draw2d::entities::model::object::update()
@@ -81,6 +85,7 @@ sanguis::client::draw2d::entities::model::object::update()
 			)
 		)
 	)
+	{
 		this->part(
 			index
 		).update(
@@ -88,6 +93,7 @@ sanguis::client::draw2d::entities::model::object::update()
 				index
 			)
 		);
+	}
 }
 
 void
@@ -100,9 +106,11 @@ sanguis::client::draw2d::entities::model::object::orientation(
 		:
 		parts_
 	)
+	{
 		cur_part.orientation(
 			_rot
 		);
+	}
 }
 
 void
@@ -135,9 +143,11 @@ sanguis::client::draw2d::entities::model::object::pause(
 		:
 		parts_
 	)
+	{
 		cur_part.pause(
 			_value
 		);
+	}
 }
 
 bool
@@ -173,7 +183,7 @@ sanguis::client::draw2d::entities::model::object::on_die()
 				sanguis::client::draw2d::entities::model::decay_option::delayed
 				?
 					sanguis::duration_second(
-						10
+						10 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 					)
 				:
 					sanguis::duration_second(
@@ -218,7 +228,9 @@ sanguis::client::draw2d::entities::model::object::speed(
 			old_speed
 		)
 	)
+	{
 		this->change_animation();
+	}
 }
 
 sanguis::client::draw2d::entities::model::part &
@@ -242,8 +254,10 @@ sanguis::client::draw2d::entities::model::object::health(
 			_health
 		)
 	)
+	{
 		health_pair_ =
 			sanguis::client::optional_health_pair();
+	}
 
 	fcppt::optional::maybe_void(
 		health_pair_,
@@ -289,16 +303,16 @@ sanguis::client::draw2d::entities::model::object::health_pair() const
 
 sanguis::client::draw2d::entities::model::object::object(
 	sanguis::client::draw2d::entities::model::parameters const &_parameters,
-	sanguis::client::load::model::object const &_model
+	sanguis::client::load::model::object_cref const _model
 )
 :
 	sanguis::client::draw2d::entities::model::object::object(
 		_parameters,
-		_model,
+		_model.get(),
 		fcppt::algorithm::map<
 			part_vector
 		>(
-			_model,
+			_model.get(),
 			[
 				&_parameters
 			](
@@ -307,9 +321,15 @@ sanguis::client::draw2d::entities::model::object::object(
 			{
 				return
 					sanguis::client::draw2d::entities::model::part{
-						_parameters.load_parameters().diff_clock(),
-						_parameters.load_parameters().sound_manager(),
-						*_part.second,
+						fcppt::make_cref(
+							_parameters.load_parameters().diff_clock()
+						),
+						fcppt::make_ref(
+							_parameters.load_parameters().sound_manager()
+						),
+						fcppt::make_cref(
+							*_part.second
+						),
 						_parameters.primary_weapon_type(),
 						_parameters.rotation(),
 						// FIXME: This does not work right now
@@ -328,8 +348,12 @@ sanguis::client::draw2d::entities::model::object::object(
 )
 :
 	sanguis::client::draw2d::entities::container(
-		_parameters.load_parameters().diff_clock(),
-		_parameters.load_parameters().normal_system(),
+		fcppt::make_cref(
+			_parameters.load_parameters().diff_clock()
+		),
+		fcppt::make_ref(
+			_parameters.load_parameters().normal_system()
+		),
 		fcppt::algorithm::map<
 			sanguis::client::draw2d::entities::level_vector
 		>(
@@ -411,7 +435,7 @@ sanguis::client::draw2d::entities::model::object::object(
 		)
 	)
 {
-	// TODO: Remove this when deploying actually works
+	// TODO(philipp): Remove this when deploying actually works
 	this->change_animation();
 }
 
@@ -425,9 +449,11 @@ sanguis::client::draw2d::entities::model::object::weapon(
 		:
 		parts_
 	)
+	{
 		cur_part.weapon(
 			_weapon
 		);
+	}
 
 	this->change_animation();
 }
@@ -461,9 +487,11 @@ sanguis::client::draw2d::entities::model::object::change_animation(
 		:
 		parts_
 	)
+	{
 		cur_part.animation(
 			_anim
 		);
+	}
 }
 
 sanguis::client::load::animation_type

@@ -14,24 +14,27 @@
 #include <sanguis/client/draw2d/factory/friend.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
-#include <sanguis/client/load/auras/context_fwd.hpp>
+#include <sanguis/client/load/auras/context_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/unreachable.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::draw2d::entities::unique_ptr
 sanguis::client::draw2d::factory::friend_(
 	sanguis::client::draw2d::entities::load_parameters const &_parameters,
-	sanguis::client::load::auras::context &_aura_load_context,
+	sanguis::client::load::auras::context_ref const _aura_load_context,
 	sanguis::friend_type const _friend_type,
 	sanguis::optional_primary_weapon_type const _primary_weapon_type,
 	sanguis::weapon_status const _weapon_status,
-	sanguis::client::draw2d::speed const _speed,
-	sanguis::client::draw2d::sprite::center const _center,
+	sanguis::client::draw2d::speed const &_speed,
+	sanguis::client::draw2d::sprite::center const &_center,
 	sanguis::client::draw2d::sprite::rotation const _rotation,
-	sanguis::aura_type_vector const &_auras,
-	sanguis::buff_type_vector const &_buffs,
+	sanguis::aura_type_vector &&_auras,
+	sanguis::buff_type_vector &&_buffs,
 	sanguis::client::health_pair const _health_pair
 )
 {
@@ -55,8 +58,12 @@ sanguis::client::draw2d::factory::friend_(
 					_speed,
 					_center,
 					_rotation,
-					_auras,
-					_buffs,
+					std::move(
+						_auras
+					),
+					std::move(
+						_buffs
+					),
 					sanguis::client::draw2d::entities::constant_order(
 						sanguis::client::draw2d::z_ordering::model_generic
 					),
@@ -78,8 +85,12 @@ sanguis::client::draw2d::factory::friend_(
 					_speed,
 					_center,
 					_rotation,
-					_auras,
-					_buffs,
+					std::move(
+						_auras
+					),
+					std::move(
+						_buffs
+					),
 					_health_pair
 				)
 			);

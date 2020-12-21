@@ -1,18 +1,23 @@
 #include <sanguis/world_id.hpp>
 #include <sanguis/client/world_parameters.hpp>
 #include <sanguis/creator/top_parameters.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::world_parameters::world_parameters(
 	sanguis::world_id const _world_id,
-	sanguis::creator::top_parameters const &_top_parameters
+	sanguis::creator::top_parameters &&_top_parameters
 )
 :
 	world_id_(
 		_world_id
 	),
 	top_parameters_(
-		_top_parameters
+		std::move(
+			_top_parameters
+		)
 	)
 {
 }

@@ -28,8 +28,8 @@ sanguis::client::draw2d::entities::enemy_color(
 		return
 			sge::image::color::any::object{
 				sge::image::color::rgba8(
-					(sge::image::color::init::red() %= 0.5)
-					(sge::image::color::init::green() %= 0.5)
+					(sge::image::color::init::red() %= 0.5) // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+					(sge::image::color::init::green() %= 0.5) // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 					(sge::image::color::init::blue() %= 1.)
 					(sge::image::color::init::alpha() %= 1.)
 				)

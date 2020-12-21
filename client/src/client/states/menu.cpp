@@ -26,9 +26,12 @@
 #include <sanguis/messages/server/base.hpp>
 #include <sanguis/messages/server/connected.hpp>
 #include <alda/message/init_record.hpp>
+#include <alda/net/host.hpp>
+#include <alda/net/port.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/name.hpp>
@@ -41,7 +44,6 @@
 #include <fcppt/config/external_begin.hpp>
 #include <metal.hpp>
 #include <boost/statechart/result.hpp>
-#include <functional>
 #include <ostream>
 #include <fcppt/config/external_end.hpp>
 
@@ -68,53 +70,74 @@ sanguis::client::states::menu::menu(
 		)
 	},
 	menu_(
-		this->context<
-			sanguis::client::machine
-		>().renderer(),
-		this->context<
-			sanguis::client::machine
-		>().viewport_manager(),
-		this->context<
-			sanguis::client::machine
-		>().font_object(),
-		this->context<
-			sanguis::client::machine
-		>().settings(),
+		fcppt::make_ref(
+			this->context<
+				sanguis::client::machine
+			>().renderer()
+		),
+		fcppt::make_ref(
+			this->context<
+				sanguis::client::machine
+			>().viewport_manager()
+		),
+		fcppt::make_ref(
+			this->context<
+				sanguis::client::machine
+			>().font_object()
+		),
+		fcppt::make_ref(
+			this->context<
+				sanguis::client::machine
+			>().settings()
+		),
 		sanguis::client::gui::menu::callbacks::object(
 			sanguis::client::gui::menu::callbacks::connect{
-				std::bind(
-					&sanguis::client::machine::connect,
-					&this->context<
-						sanguis::client::machine
-					>(),
-					std::placeholders::_1,
-					std::placeholders::_2
+				[
+					this
+				](
+					alda::net::host const &_host,
+					alda::net::port const _port
 				)
+				{
+					this->context<
+						sanguis::client::machine
+					>().connect(
+						_host,
+						_port
+					);
+				}
 			},
 			sanguis::client::gui::menu::callbacks::cancel_connect{
-				std::bind(
-					&sanguis::client::machine::disconnect,
-					&this->context<
+				[
+					this
+				]{
+					this->context<
 						sanguis::client::machine
-					>()
-				)
+					>().disconnect();
+				}
 			},
 			sanguis::client::gui::menu::callbacks::quickstart{
-				std::bind(
-					&sanguis::client::machine::quickstart,
-					&this->context<
-						sanguis::client::machine
-					>(),
-					std::placeholders::_1
+				[
+					this
+				](
+					alda::net::port const _port
 				)
+				{
+					this->context<
+						sanguis::client::machine
+					>().quickstart(
+						_port
+					);
+				}
 			},
 			sanguis::client::gui::menu::callbacks::quit{
-				std::bind(
-					&sanguis::client::machine::quit,
-					&this->context<
+				[
+					this
+				]{
+					this->context<
 						sanguis::client::machine
-					>()
-				)
+					>().quit();
+				}
 			}
 		),
 		fcppt::make_cref(
@@ -129,8 +152,7 @@ sanguis::client::states::menu::menu(
 FCPPT_PP_POP_WARNING
 
 sanguis::client::states::menu::~menu()
-{
-}
+= default;
 
 boost::statechart::result
 sanguis::client::states::menu::react(

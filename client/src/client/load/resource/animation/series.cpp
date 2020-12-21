@@ -40,24 +40,29 @@ sanguis::client::load::resource::animation::series::series(
 	if(
 		entities_.empty()
 	)
+	{
 		throw
 			sanguis::exception{
 				FCPPT_TEXT("animation::texture series is empty!")
 			};
+	}
 }
 
 sanguis::client::load::resource::animation::series::series(
 	series &&
-) = default;
+)
+noexcept
+= default;
 
 sanguis::client::load::resource::animation::series &
 sanguis::client::load::resource::animation::series::operator=(
 	series &&
-) = default;
+)
+noexcept
+= default;
 
 sanguis::client::load::resource::animation::series::~series()
-{
-}
+= default;
 
 sanguis::client::load::resource::animation::entity_vector const &
 sanguis::client::load::resource::animation::series::entities() const

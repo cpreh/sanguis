@@ -6,12 +6,13 @@
 #include <sanguis/client/perk/info.hpp>
 #include <sanguis/client/perk/level_callback.hpp>
 #include <sanguis/client/perk/state.hpp>
+#include <sanguis/client/perk/state_ref.hpp>
 #include <sanguis/client/perk/to_string.hpp>
 #include <sanguis/client/perk/tree.hpp>
 #include <sge/font/from_fcppt_string.hpp>
-#include <sge/font/object_fwd.hpp>
+#include <sge/font/object_ref.hpp>
 #include <sge/gui/click_callback.hpp>
-#include <sge/gui/context_fwd.hpp>
+#include <sge/gui/context_ref.hpp>
 #include <sge/gui/optional_needed_width.hpp>
 #include <sge/gui/text_color.hpp>
 #include <sge/gui/style/const_reference.hpp>
@@ -21,29 +22,26 @@
 #include <sge/gui/widget/reference_alignment_pair.hpp>
 #include <sge/gui/widget/reference_alignment_vector.hpp>
 #include <sge/gui/widget/text.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
-#include <fcppt/make_ref.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/signal/auto_connection.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
 
 
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::gui::perk::line::line(
-	sge::renderer::device::ffp &_renderer,
-	sge::font::object &_font,
-	sge::gui::context &_context,
+	sge::renderer::device::ffp_ref const _renderer,
+	sge::font::object_ref const _font,
+	sge::gui::context_ref const _context,
 	sge::gui::style::const_reference const _style,
-	sanguis::client::perk::state &_state,
+	sanguis::client::perk::state_ref const _state,
 	sanguis::client::perk::info const &_info
 )
 :
@@ -55,12 +53,8 @@ sanguis::client::gui::perk::line::line(
 	),
 	button_(
 		_style,
-		fcppt::make_ref(
-			_renderer
-		),
-		fcppt::make_ref(
-			_font
-		),
+		_renderer,
+		_font,
 		sge::font::from_fcppt_string(
 			sanguis::client::perk::to_string(
 				_info.perk_type()
@@ -70,12 +64,8 @@ sanguis::client::gui::perk::line::line(
 	),
 	text_(
 		_style,
-		fcppt::make_ref(
-			_renderer
-		),
-		fcppt::make_ref(
-			_font
-		),
+		_renderer,
+		_font,
 		sanguis::client::gui::perk::make_description(
 			_info
 		),
@@ -83,9 +73,7 @@ sanguis::client::gui::perk::line::line(
 		sge::gui::optional_needed_width()
 	),
 	box_(
-		fcppt::make_ref(
-			_context
-		),
+		_context,
 		sge::gui::widget::reference_alignment_vector{
 			sge::gui::widget::reference_alignment_pair(
 				sge::gui::widget::reference(
@@ -105,20 +93,22 @@ sanguis::client::gui::perk::line::line(
 	click_connection_(
 		button_.click(
 			sge::gui::click_callback{
-				std::bind(
-					&sanguis::client::gui::perk::line::on_click,
+				[
 					this
-				)
+				]{
+					this->on_click();
+				}
 			}
 		)
 	),
 	level_change_connection_(
-		state_.register_level_change(
+		state_->register_level_change(
 			sanguis::client::perk::level_callback{
-				std::bind(
-					&sanguis::client::gui::perk::line::on_level_change,
+				[
 					this
-				)
+				]{
+					this->on_level_change();
+				}
 			}
 		)
 	)
@@ -128,8 +118,7 @@ sanguis::client::gui::perk::line::line(
 FCPPT_PP_POP_WARNING
 
 sanguis::client::gui::perk::line::~line()
-{
-}
+= default;
 
 sge::gui::widget::box_container &
 sanguis::client::gui::perk::line::widget()
@@ -142,20 +131,24 @@ void
 sanguis::client::gui::perk::line::on_click()
 {
 	if(
-		state_.choose_perk(
+		state_->choose_perk(
 			perk_type_
 		)
 	)
+	{
 		text_.value(
 			sanguis::client::gui::perk::make_description(
 				FCPPT_ASSERT_OPTIONAL_ERROR(
 					sanguis::client::perk::find_info_const(
 						perk_type_,
-						state_.perks()
+						fcppt::make_cref(
+							state_->perks()
+						)
 					).value()
 				)
 			)
 		);
+	}
 }
 
 void
@@ -173,9 +166,9 @@ sanguis::client::gui::perk::line::text_color() const
 		sanguis::client::gui::perk::item_color(
 			sanguis::client::perk::choosable(
 				perk_type_,
-				state_.perks(),
-				state_.player_level(),
-				state_.remaining_levels()
+				state_->perks(),
+				state_->player_level(),
+				state_->remaining_levels()
 			)
 		);
 }

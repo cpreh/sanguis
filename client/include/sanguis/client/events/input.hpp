@@ -23,14 +23,22 @@ class input
 	>
 {
 public:
+	using
+	event_base_cref
+	=
+	fcppt::reference<
+		sge::input::event_base const
+	>;
+
 	explicit
 	input(
-		sge::input::event_base const &
+		event_base_cref
 	);
 
 	input(
 		input &&
-	);
+	)
+	noexcept;
 
 	input(
 		input const &
@@ -39,7 +47,8 @@ public:
 	input &
 	operator=(
 		input &&
-	);
+	)
+	noexcept;
 
 	input &
 	operator=(
@@ -52,9 +61,7 @@ public:
 	sge::input::event_base const &
 	get() const;
 private:
-	fcppt::reference<
-		sge::input::event_base const
-	> event_;
+	event_base_cref event_;
 };
 
 }

@@ -7,6 +7,7 @@
 #include <sanguis/client/perk/remaining_levels.hpp>
 #include <sanguis/client/perk/tree.hpp>
 #include <fcppt/const.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/optional/maybe.hpp>
 
@@ -22,7 +23,9 @@ sanguis::client::perk::choosable(
 	sanguis::client::perk::tree const &node(
 		sanguis::client::perk::find_info_const(
 			_type,
-			_tree
+			fcppt::make_cref(
+				_tree
+			)
 		)
 	);
 
@@ -43,8 +46,10 @@ sanguis::client::perk::choosable(
 		==
 		info.level()
 	)
+	{
 		return
 			sanguis::client::perk::choosable_state::max_level;
+	}
 
 	if(
 		fcppt::optional::maybe(
@@ -65,24 +70,30 @@ sanguis::client::perk::choosable(
 			}
 		)
 	)
+	{
 		return
 			sanguis::client::perk::choosable_state::parent_level;
+	}
 
 	if(
 		info.required_player_level().get()
 		>
 		_player_level
 	)
+	{
 		return
 			sanguis::client::perk::choosable_state::player_level;
+	}
 
 	if(
 		_remaining_levels.get().get()
 		==
-		0u
+		0U
 	)
+	{
 		return
 			sanguis::client::perk::choosable_state::level_up;
+	}
 
 	return
 		sanguis::client::perk::choosable_state::ok;

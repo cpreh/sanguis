@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_IFACES_WITH_VISIBILITY_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_IFACES_WITH_VISIBILITY_HPP_INCLUDED
 
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -17,7 +17,7 @@ namespace ifaces
 
 class with_visibility
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		with_visibility
 	);
 protected:

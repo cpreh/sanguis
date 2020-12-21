@@ -34,7 +34,7 @@ namespace
 
 sanguis::client::perk::tree &
 tree_position(
-	sanguis::client::perk::tree &,
+	sanguis::client::perk::tree &, // NOLINT(google-runtime-references)
 	sanguis::optional_perk_type
 );
 
@@ -62,6 +62,7 @@ sanguis::client::perk::make_tree(
 		:
 		_list
 	)
+	{
 		::tree_position(
 			*ret,
 			item.get<
@@ -110,6 +111,7 @@ sanguis::client::perk::make_tree(
 				)
 			)
 		);
+	}
 
 	ret->sort(
 		[](

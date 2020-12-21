@@ -15,7 +15,7 @@
 namespace
 {
 
-sanguis::client::draw2d::sprite::rotation const
+sanguis::client::draw2d::sprite::rotation
 impl(
 	sanguis::client::draw2d::funit const _delta,
 	sanguis::client::draw2d::sprite::rotation const _orientation,
@@ -35,67 +35,69 @@ impl(
 	// 't', hence the if test in swap_dist.
 	//
 
-	sanguis::client::draw2d::funit const twopi(
+	auto const twopi(
 		fcppt::math::twopi<
 			sanguis::client::draw2d::funit
 		>()
 	);
 
-	sanguis::client::draw2d::funit const
-		// this is the "inner distance" from
-		abs_dist(
-			std::abs(
-				_desired_orientation.get()
-				-
-				_orientation.get()
-			)
-		),
-		swap_dist(
-			_orientation
-			>
-			_desired_orientation
-			?
-				twopi
-				-
-				_orientation.get()
-				+
-				_desired_orientation.get()
-			:
-				twopi
-				-
-				_desired_orientation.get()
-				+
-				_orientation.get()
-		),
-		min_dist(
-			std::min(
-				swap_dist,
-				abs_dist
-			)
-		);
+	// this is the "inner distance" from
+	sanguis::client::draw2d::funit const abs_dist(
+		std::abs(
+			_desired_orientation.get()
+			-
+			_orientation.get()
+		)
+	);
 
-	sanguis::client::draw2d::funit const
-		null(
-			fcppt::literal<
-				sanguis::client::draw2d::funit
-			>(
-				0
-			)
-		),
-		one(
-			fcppt::literal<
-				sanguis::client::draw2d::funit
-			>(
-				1
-			)
-		),
-		minus_one(
-			fcppt::literal<
-				sanguis::client::draw2d::funit
-			>(
-				-1
-			)
-		);
+	sanguis::client::draw2d::funit const swap_dist(
+		_orientation
+		>
+		_desired_orientation
+		?
+			twopi
+			-
+			_orientation.get()
+			+
+			_desired_orientation.get()
+		:
+			twopi
+			-
+			_desired_orientation.get()
+			+
+			_orientation.get()
+	);
+
+	sanguis::client::draw2d::funit const min_dist(
+		std::min(
+			swap_dist,
+			abs_dist
+		)
+	);
+
+	sanguis::client::draw2d::funit const null(
+		fcppt::literal<
+			sanguis::client::draw2d::funit
+		>(
+			0
+		)
+	);
+
+	sanguis::client::draw2d::funit const one(
+		fcppt::literal<
+			sanguis::client::draw2d::funit
+		>(
+			1
+		)
+	);
+
+	sanguis::client::draw2d::funit const minus_one(
+		fcppt::literal<
+			sanguis::client::draw2d::funit
+		>(
+			-1
+		)
+	);
 
 	FCPPT_ASSERT_ERROR(
 		abs_dist >= null &&

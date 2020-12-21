@@ -1,23 +1,30 @@
-#include <sanguis/client/weapon_pair_fwd.hpp>
+#include <sanguis/client/weapon_pair.hpp>
 #include <sanguis/client/draw2d/radius.hpp>
 #include <sanguis/client/draw2d/scene/hover/parameters.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
+#include <sanguis/client/load/hud/context_ref.hpp>
 #include <sge/font/object_fwd.hpp>
+#include <sge/font/object_ref.hpp>
 #include <sge/gui/renderer/base_fwd.hpp>
+#include <sge/gui/renderer/base_ref.hpp>
 #include <sge/gui/style/base_fwd.hpp>
 #include <sge/gui/style/const_reference.hpp>
 #include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::draw2d::scene::hover::parameters::parameters(
 	sge::gui::style::const_reference const _gui_style,
-	sge::gui::renderer::base &_gui_renderer,
-	sge::renderer::device::ffp &_renderer,
-	sge::font::object &_font,
-	sanguis::client::load::hud::context &_load_context,
-	sanguis::client::weapon_pair const &_player_weapons,
-	sanguis::client::draw2d::sprite::center const _center,
+	sge::gui::renderer::base_ref const _gui_renderer,
+	sge::renderer::device::ffp_ref const _renderer,
+	sge::font::object_ref const _font,
+	sanguis::client::load::hud::context_ref const _load_context,
+	sanguis::client::weapon_pair &&_player_weapons,
+	sanguis::client::draw2d::sprite::center _center,
 	sanguis::client::draw2d::radius const _radius
 )
 :
@@ -37,10 +44,14 @@ sanguis::client::draw2d::scene::hover::parameters::parameters(
 		_load_context
 	),
 	player_weapons_(
-		_player_weapons
+		std::move(
+			_player_weapons
+		)
 	),
 	center_{
-		_center
+		std::move(
+			_center
+		)
 	},
 	radius_{
 		_radius
@@ -87,7 +98,7 @@ sanguis::client::weapon_pair const &
 sanguis::client::draw2d::scene::hover::parameters::player_weapons() const
 {
 	return
-		player_weapons_.get();
+		player_weapons_;
 }
 
 sanguis::client::draw2d::sprite::center

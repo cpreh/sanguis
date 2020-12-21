@@ -3,28 +3,29 @@
 #include <sanguis/client/gui/perk/tab_unique_ptr_vector.hpp>
 #include <sanguis/client/perk/category_equal_range.hpp>
 #include <sanguis/client/perk/state.hpp>
+#include <sanguis/client/perk/state_ref.hpp>
 #include <sanguis/client/perk/tree.hpp>
-#include <sge/font/object_fwd.hpp>
-#include <sge/gui/context_fwd.hpp>
+#include <sge/font/object_ref.hpp>
+#include <sge/gui/context_ref.hpp>
 #include <sge/gui/style/const_reference.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
 
 sanguis::client::gui::perk::tab_unique_ptr_vector
 sanguis::client::gui::perk::make_tabs(
-	sge::renderer::device::ffp &_renderer,
-	sge::font::object &_font,
-	sge::gui::context &_context,
+	sge::renderer::device::ffp_ref const _renderer,
+	sge::font::object_ref const _font,
+	sge::gui::context_ref const _context,
 	sge::gui::style::const_reference const _style,
-	sanguis::client::perk::state &_state
+	sanguis::client::perk::state_ref const _state
 )
 {
 	sanguis::client::perk::tree const &tree(
-		_state.perks()
+		_state->perks()
 	);
 
-	sanguis::client::gui::perk::tab_unique_ptr_vector result;
+	sanguis::client::gui::perk::tab_unique_ptr_vector result{};
 
 	for(
 		sanguis::client::perk::const_tree_range range(
@@ -40,6 +41,7 @@ sanguis::client::gui::perk::make_tabs(
 				tree.end()
 			)
 	)
+	{
 		result.push_back(
 			fcppt::make_unique_ptr<
 				sanguis::client::gui::perk::tab
@@ -52,6 +54,7 @@ sanguis::client::gui::perk::make_tabs(
 				range
 			)
 		);
+	}
 
 	return
 		result;

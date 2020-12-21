@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_SCENE_STATE_SCOPED_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/scene/state/scoped_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -18,7 +18,7 @@ namespace state
 
 class scoped
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		scoped
 	);
 protected:

@@ -7,7 +7,7 @@
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/rotation_fwd.hpp>
 #include <sanguis/load/model/path_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -23,14 +23,14 @@ class bullet
 :
 	public sanguis::client::draw2d::entities::model::object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		bullet
 	);
 public:
 	bullet(
 		sanguis::client::draw2d::entities::load_parameters const &,
-		sanguis::client::draw2d::speed,
-		sanguis::client::draw2d::sprite::center,
+		sanguis::client::draw2d::speed const &,
+		sanguis::client::draw2d::sprite::center const &,
 		sanguis::client::draw2d::sprite::rotation,
 		sanguis::load::model::path &&
 	);

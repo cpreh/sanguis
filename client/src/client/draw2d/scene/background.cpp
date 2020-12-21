@@ -8,6 +8,7 @@
 #include <sanguis/client/draw2d/sprite/client/category.hpp>
 #include <sanguis/client/draw2d/sprite/client/object.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_decl.hpp>
+#include <sanguis/client/draw2d/sprite/client/system_ref.hpp>
 #include <sanguis/client/load/context.hpp>
 #include <sanguis/client/load/context_cref.hpp>
 #include <sanguis/client/load/resource/context.hpp>
@@ -23,6 +24,7 @@
 #include <sge/sprite/roles/texture_coordinates0.hpp>
 #include <sge/viewport/manage_callback.hpp>
 #include <sge/viewport/manager.hpp>
+#include <sge/viewport/manager_ref.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/size_fun.hpp>
@@ -34,9 +36,6 @@
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/signal/auto_connection.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
 
 
 FCPPT_PP_PUSH_WARNING
@@ -44,8 +43,8 @@ FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::draw2d::scene::background::background(
 	sanguis::client::load::context_cref const _load_context,
-	sanguis::client::draw2d::sprite::client::system &_client_system,
-	sge::viewport::manager &_viewport_manager
+	sanguis::client::draw2d::sprite::client::system_ref const _client_system,
+	sge::viewport::manager_ref const _viewport_manager
 )
 :
 	client_system_(
@@ -60,7 +59,7 @@ sanguis::client::draw2d::scene::background::background(
 	),
 	sprite_(
 		sge::sprite::roles::connection{} =
-			client_system_.connection(
+			client_system_->connection(
 				sanguis::client::draw2d::sprite::client::category::background
 			),
 		sge::sprite::roles::pos{} =
@@ -74,7 +73,7 @@ sanguis::client::draw2d::scene::background::background(
 			>(
 				fcppt::math::dim::to_signed(
 					sanguis::client::draw2d::scene::background_dim(
-						client_system_.renderer()
+						client_system_->renderer()
 					)
 				)
 			),
@@ -89,17 +88,21 @@ sanguis::client::draw2d::scene::background::background(
 						sanguis::client::draw2d::translation::value_type
 					>()
 				),
-				client_system_.renderer(),
+				client_system_->renderer(),
 				texture_
 			)
 	),
 	viewport_connection_(
-		_viewport_manager.manage_callback(
+		_viewport_manager->manage_callback(
 			sge::viewport::manage_callback{
-				std::bind(
-					&sanguis::client::draw2d::scene::background::reset_viewport,
+				[
 					this
+				](
+					sge::renderer::target::viewport const &
 				)
+				{
+					this->reset_viewport();
+				}
 			}
 		)
 	)
@@ -109,13 +112,12 @@ sanguis::client::draw2d::scene::background::background(
 FCPPT_PP_POP_WARNING
 
 sanguis::client::draw2d::scene::background::~background()
-{
-}
+= default;
 
 void
 sanguis::client::draw2d::scene::background::render(
 	sge::renderer::context::core &_render_context,
-	sanguis::client::draw2d::translation const _translation
+	sanguis::client::draw2d::translation const &_translation
 )
 {
 	sprite_.texture_coordinates(
@@ -131,12 +133,12 @@ sanguis::client::draw2d::scene::background::render(
 					)
 				).get_unsafe()
 			},
-			client_system_.renderer(),
+			client_system_->renderer(),
 			texture_
 		)
 	);
 
-	client_system_.render(
+	client_system_->render(
 		_render_context,
 		sanguis::client::draw2d::sprite::client::category::background
 	);
@@ -152,7 +154,7 @@ sanguis::client::draw2d::scene::background::reset_viewport()
 		>(
 			fcppt::math::dim::to_signed(
 				sanguis::client::draw2d::scene::background_dim(
-					client_system_.renderer()
+					client_system_->renderer()
 				)
 			)
 		)

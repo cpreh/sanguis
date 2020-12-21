@@ -25,15 +25,19 @@ public:
 		sanguis::client::draw2d::fradius
 	);
 
+	[[nodiscard]]
 	sanguis::duration
 	duration() const;
 
+	[[nodiscard]]
 	sanguis::client::draw2d::center
 	center() const;
 
+	[[nodiscard]]
 	sanguis::client::draw2d::speed
 	speed() const;
 
+	[[nodiscard]]
 	sanguis::client::draw2d::fradius
 	radius() const;
 private:

@@ -12,7 +12,7 @@
 
 sge::renderer::matrix4
 sanguis::client::draw2d::scene::translation_matrix(
-	sanguis::client::draw2d::translation const _translation
+	sanguis::client::draw2d::translation const &_translation
 )
 {
 	return

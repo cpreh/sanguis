@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_CONTAINER_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_CONTAINER_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/diff_clock_cref.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/client/draw2d/center.hpp>
@@ -18,8 +18,8 @@
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/draw2d/sprite/normal/color_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object_decl.hpp>
-#include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <sanguis/client/draw2d/sprite/normal/system_ref.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
@@ -41,7 +41,7 @@ class container
 	public sanguis::client::draw2d::entities::ifaces::with_orientation,
 	public sanguis::client::draw2d::entities::ifaces::with_speed
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		container
 	);
 
@@ -58,12 +58,12 @@ class container
 	>;
 public:
 	container(
-		sanguis::diff_clock const &,
-		sanguis::client::draw2d::sprite::normal::system &,
+		sanguis::diff_clock_cref,
+		sanguis::client::draw2d::sprite::normal::system_ref,
 		sanguis::client::draw2d::entities::level_vector const &,
 		sanguis::client::draw2d::speed,
-		sanguis::client::draw2d::sprite::center,
-		sanguis::client::draw2d::sprite::dim,
+		sanguis::client::draw2d::sprite::center const &,
+		sanguis::client::draw2d::sprite::dim const &,
 		sanguis::client::draw2d::sprite::rotation,
 		sanguis::client::draw2d::sprite::normal::color
 	);
@@ -71,14 +71,17 @@ public:
 	~container()
 	override;
 
+	[[nodiscard]]
 	sanguis::client::draw2d::sprite::center
 	center() const
 	override;
 
+	[[nodiscard]]
 	sanguis::client::draw2d::radius
 	radius() const
 	override;
 
+	[[nodiscard]]
 	bool
 	cursor_collision(
 		sanguis::client::draw2d::sprite::center
@@ -90,6 +93,7 @@ public:
 		sanguis::client::draw2d::sprite::normal::color const &
 	);
 
+	[[nodiscard]]
 	sanguis::client::draw2d::sprite::normal::color
 	color() const;
 
@@ -99,6 +103,7 @@ public:
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::client::draw2d::center
 	float_center() const;
 
@@ -108,6 +113,7 @@ public:
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::client::draw2d::sprite::rotation
 	orientation() const
 	override;
@@ -118,27 +124,33 @@ public:
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::client::draw2d::speed
 	speed() const
 	override;
 
+	[[nodiscard]]
 	sanguis::duration
 	movement_duration() const;
 
 	// own functions
+	[[nodiscard]]
 	object &
 	at(
 		sanguis::client::draw2d::sprite::index const &
 	);
 
+	[[nodiscard]]
 	object const &
 	at(
 		sanguis::client::draw2d::sprite::index const &
 	) const;
 
+	[[nodiscard]]
 	object &
 	master();
 
+	[[nodiscard]]
 	object const &
 	master() const;
 protected:

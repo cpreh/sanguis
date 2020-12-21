@@ -18,8 +18,8 @@ namespace scene
 
 sanguis::client::draw2d::sprite::client::texture_coordinates
 background_texture_coordinates(
-	sanguis::client::draw2d::translation,
-	sge::renderer::device::core &,
+	sanguis::client::draw2d::translation const &,
+	sge::renderer::device::core &, // NOLINT(google-runtime-references)
 	sge::texture::part const &
 );
 

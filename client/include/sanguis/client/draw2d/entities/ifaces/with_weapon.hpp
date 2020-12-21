@@ -3,7 +3,7 @@
 
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
 #include <sanguis/weapon_status_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -19,7 +19,7 @@ namespace ifaces
 
 class with_weapon
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		with_weapon
 	);
 protected:

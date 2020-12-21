@@ -30,11 +30,13 @@
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/draw2d/sprite/normal/color_format.hpp>
-#include <sanguis/client/load/auras/context_fwd.hpp>
+#include <sanguis/client/load/auras/context_ref.hpp>
 #include <sanguis/creator/enemy_type.hpp>
 #include <sanguis/load/model/enemy_path.hpp>
 #include <sge/image/color/any/convert.hpp>
 #include <fcppt/copy.hpp>
+#include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -43,31 +45,45 @@
 
 sanguis::client::draw2d::entities::enemy::enemy(
 	sanguis::client::draw2d::entities::load_parameters const &_load_parameters,
-	sanguis::client::load::auras::context &_aura_resources,
+	sanguis::client::load::auras::context_ref const _aura_resources,
 	sanguis::creator::enemy_type const _enemy_type,
 	sanguis::enemy_kind const _enemy_kind,
 	sanguis::optional_primary_weapon_type const _primary_weapon,
 	sanguis::weapon_status const _weapon_status,
-	sanguis::client::draw2d::speed const _speed,
-	sanguis::client::draw2d::sprite::center const _center,
+	sanguis::client::draw2d::speed const &_speed,
+	sanguis::client::draw2d::sprite::center const &_center,
 	sanguis::client::draw2d::sprite::rotation const _rotation,
-	sanguis::aura_type_vector const &_auras,
-	sanguis::buff_type_vector const &_buffs,
+	sanguis::aura_type_vector &&_auras,
+	sanguis::buff_type_vector &&_buffs,
 	sanguis::client::draw2d::entities::name const &_name,
 	sanguis::client::health_pair const _health_pair
 )
 :
 	sanguis::client::draw2d::entities::with_buffs_auras_model(
 		sanguis::client::draw2d::entities::with_buffs_auras_model_parameters(
-			_load_parameters.diff_clock(),
-			_load_parameters.normal_system(),
-			_load_parameters.collection(),
-			_buffs,
+			fcppt::make_cref(
+				_load_parameters.diff_clock()
+			),
+			fcppt::make_ref(
+				_load_parameters.normal_system()
+			),
+			fcppt::make_cref(
+				_load_parameters.collection()
+			),
+			std::move(
+				_buffs
+			),
 			sanguis::client::draw2d::entities::with_auras_model_parameters(
-				_load_parameters.diff_clock(),
+				fcppt::make_cref(
+					_load_parameters.diff_clock()
+				),
 				_aura_resources,
-				_load_parameters.normal_system(),
-				_auras,
+				fcppt::make_ref(
+					_load_parameters.normal_system()
+				),
+				std::move(
+					_auras
+				),
 				sanguis::client::draw2d::entities::model::parameters(
 					_load_parameters,
 					sanguis::load::model::enemy_path(
@@ -111,8 +127,7 @@ sanguis::client::draw2d::entities::enemy::enemy(
 }
 
 sanguis::client::draw2d::entities::enemy::~enemy()
-{
-}
+= default;
 
 void
 sanguis::client::draw2d::entities::enemy::on_create(

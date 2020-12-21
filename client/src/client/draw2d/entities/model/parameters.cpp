@@ -18,13 +18,13 @@
 sanguis::client::draw2d::entities::model::parameters::parameters(
 	sanguis::client::draw2d::entities::load_parameters const &_load_parameters,
 	sanguis::load::model::path &&_path,
-	sanguis::client::draw2d::entities::order_function const &_order_function,
+	sanguis::client::draw2d::entities::order_function &&_order_function,
 	sanguis::client::optional_health_pair const &_health_pair,
 	sanguis::client::draw2d::entities::model::decay_option const _decay_option,
 	sanguis::optional_primary_weapon_type const _primary_weapon_type,
 	sanguis::weapon_status const _weapon_status,
-	sanguis::client::draw2d::speed const _speed,
-	sanguis::client::draw2d::sprite::center const _center,
+	sanguis::client::draw2d::speed _speed,
+	sanguis::client::draw2d::sprite::center _center,
 	sanguis::client::draw2d::sprite::rotation const _rotation,
 	sanguis::client::draw2d::sprite::normal::color const _color
 )
@@ -55,10 +55,14 @@ sanguis::client::draw2d::entities::model::parameters::parameters(
 		_weapon_status
 	},
 	speed_{
-		_speed
+		std::move(
+			_speed
+		)
 	},
 	center_{
-		_center
+		std::move(
+			_center
+		)
 	},
 	rotation_{
 		_rotation
@@ -73,7 +77,7 @@ sanguis::client::draw2d::entities::load_parameters const &
 sanguis::client::draw2d::entities::model::parameters::load_parameters() const
 {
 	return
-		load_parameters_.get();
+		load_parameters_;
 }
 
 sanguis::load::model::path const &

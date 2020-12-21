@@ -5,7 +5,7 @@
 #include <sanguis/client/draw2d/entities/load_parameters_fwd.hpp>
 #include <sanguis/client/draw2d/entities/particle.hpp>
 #include <sanguis/client/draw2d/sprite/center_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -21,13 +21,13 @@ class explosion
 :
 	public sanguis::client::draw2d::entities::particle
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		explosion
 	);
 public:
 	explosion(
 		sanguis::client::draw2d::entities::load_parameters const &,
-		sanguis::client::draw2d::sprite::center,
+		sanguis::client::draw2d::sprite::center const &,
 		sanguis::client::draw2d::aoe
 	);
 

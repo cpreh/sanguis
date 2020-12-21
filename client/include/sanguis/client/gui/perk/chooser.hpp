@@ -4,8 +4,8 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/client/gui/perk/chooser_fwd.hpp>
 #include <sanguis/client/gui/perk/state_fwd.hpp>
-#include <sanguis/client/perk/state_fwd.hpp>
-#include <sge/font/object_fwd.hpp>
+#include <sanguis/client/perk/state_ref.hpp>
+#include <sge/font/object_ref.hpp>
 #include <sge/font/string.hpp>
 #include <sge/gui/context.hpp>
 #include <sge/gui/master.hpp>
@@ -16,9 +16,9 @@
 #include <sge/gui/widget/text.hpp>
 #include <sge/input/event_base_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
-#include <sge/viewport/manager_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
+#include <sge/viewport/manager_ref.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 
@@ -34,16 +34,16 @@ namespace perk
 
 class chooser
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		chooser
 	);
 public:
 	chooser(
-		sanguis::client::perk::state &,
+		sanguis::client::perk::state_ref,
 		sge::gui::style::const_reference,
-		sge::renderer::device::ffp &,
-		sge::viewport::manager &,
-		sge::font::object &
+		sge::renderer::device::ffp_ref,
+		sge::viewport::manager_ref,
+		sge::font::object_ref
 	);
 
 	~chooser();
@@ -55,8 +55,8 @@ public:
 
 	void
 	draw(
-		sge::renderer::context::ffp &
-	);
+		sge::renderer::context::ffp & // NOLINT(google-runtime-references)
+	); // NOLINT(google-runtime-references)
 
 	void
 	input(
@@ -69,16 +69,17 @@ private:
 	void
 	level();
 
+	[[nodiscard]]
 	sge::font::string
 	make_top_text() const;
 
-	sanguis::client::perk::state &state_;
+	sanguis::client::perk::state_ref const state_;
 
 	sge::gui::style::const_reference const style_;
 
-	sge::renderer::device::ffp &renderer_;
+	sge::renderer::device::ffp_ref const renderer_;
 
-	sge::font::object &font_;
+	sge::font::object_ref const font_;
 
 	sge::gui::context gui_context_;
 
@@ -101,9 +102,8 @@ private:
 
 	sge::gui::background::colored gui_background_;
 
-	fcppt::signal::auto_connection const
-		perk_connection_,
-		level_connection_;
+	fcppt::signal::auto_connection const perk_connection_;
+	fcppt::signal::auto_connection const level_connection_;
 };
 
 }

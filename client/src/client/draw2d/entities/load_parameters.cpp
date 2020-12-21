@@ -1,17 +1,22 @@
+#include <sanguis/diff_clock_cref.hpp>
 #include <sanguis/diff_clock_fwd.hpp>
 #include <sanguis/random_generator_fwd.hpp>
+#include <sanguis/random_generator_ref.hpp>
 #include <sanguis/client/sound_manager_fwd.hpp>
+#include <sanguis/client/sound_manager_ref.hpp>
 #include <sanguis/client/draw2d/entities/load_parameters.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/normal/system_ref.hpp>
+#include <sanguis/client/load/model/collection_cref.hpp>
 #include <sanguis/client/load/model/collection_fwd.hpp>
 
 
 sanguis::client::draw2d::entities::load_parameters::load_parameters(
-	sanguis::diff_clock const &_diff_clock,
-	sanguis::random_generator &_random_generator,
-	sanguis::client::sound_manager &_sound_manager,
-	sanguis::client::draw2d::sprite::normal::system &_normal_system,
-	sanguis::client::load::model::collection const &_collection
+	sanguis::diff_clock_cref const _diff_clock,
+	sanguis::random_generator_ref const _random_generator,
+	sanguis::client::sound_manager_ref const _sound_manager,
+	sanguis::client::draw2d::sprite::normal::system_ref const _normal_system,
+	sanguis::client::load::model::collection_cref const _collection
 )
 :
 	diff_clock_(

@@ -5,6 +5,7 @@
 #include <sanguis/client/load/model/make_animations.hpp>
 #include <sanguis/model/animation_map.hpp>
 #include <sanguis/model/weapon_category.hpp>
+#include <fcppt/copy.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/log/object_fwd.hpp>
@@ -43,7 +44,9 @@ sanguis::client::load::model::make_animations(
 							_log,
 							_animation_pair.second,
 							_parameters.new_image(
-								_animation_pair.second.image_name()
+								fcppt::copy(
+									_animation_pair.second.image_name()
+								)
 							)
 						)
 					);

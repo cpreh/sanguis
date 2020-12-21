@@ -24,12 +24,13 @@ class action
 public:
 	explicit
 	action(
-		sanguis::client::control::actions::any const &
+		sanguis::client::control::actions::any
 	);
 
 	action(
 		action &&
-	);
+	)
+	noexcept;
 
 	action(
 		action const &
@@ -38,7 +39,8 @@ public:
 	action &
 	operator=(
 		action &&
-	);
+	)
+	noexcept;
 
 	action &
 	operator=(
@@ -48,6 +50,7 @@ public:
 	~action()
 	override;
 
+	[[nodiscard]]
 	sanguis::client::control::actions::any const &
 	value() const;
 private:

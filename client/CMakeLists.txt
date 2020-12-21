@@ -307,6 +307,7 @@ set(
 	include/sanguis/client/draw2d/scene/world/render_parameters_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/buffers.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/buffers_fwd.hpp
+	include/sanguis/client/draw2d/scene/world/sprite/buffers_ref.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/choices.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/choices_fwd.hpp
 	include/sanguis/client/draw2d/scene/world/sprite/compare.hpp
@@ -355,6 +356,7 @@ set(
 	include/sanguis/client/draw2d/sprite/client/object_fwd.hpp
 	include/sanguis/client/draw2d/sprite/client/system_decl.hpp
 	include/sanguis/client/draw2d/sprite/client/system_fwd.hpp
+	include/sanguis/client/draw2d/sprite/client/system_ref.hpp
 	include/sanguis/client/draw2d/sprite/client/texture_coordinates.hpp
 	include/sanguis/client/draw2d/sprite/client/texture_coordinates_fwd.hpp
 	include/sanguis/client/draw2d/sprite/colored/choices.hpp
@@ -381,6 +383,7 @@ set(
 	include/sanguis/client/draw2d/sprite/normal/object_fwd.hpp
 	include/sanguis/client/draw2d/sprite/normal/system_decl.hpp
 	include/sanguis/client/draw2d/sprite/normal/system_fwd.hpp
+	include/sanguis/client/draw2d/sprite/normal/system_ref.hpp
 	include/sanguis/client/draw2d/sprite/normal/white.hpp
 	include/sanguis/client/draw2d/sprite/optional_dim.hpp
 	include/sanguis/client/draw2d/sprite/optional_dim_fwd.hpp
@@ -502,6 +505,7 @@ set(
 	include/sanguis/client/load/aura_name.hpp
 	include/sanguis/client/load/auras/context.hpp
 	include/sanguis/client/load/auras/context_fwd.hpp
+	include/sanguis/client/load/auras/context_ref.hpp
 	include/sanguis/client/load/auras/lookup_name.hpp
 	include/sanguis/client/load/context.hpp
 	include/sanguis/client/load/context_cref.hpp
@@ -518,6 +522,7 @@ set(
 	include/sanguis/client/load/model/animation_map.hpp
 	include/sanguis/client/load/model/animation_unique_ptr.hpp
 	include/sanguis/client/load/model/collection.hpp
+	include/sanguis/client/load/model/collection_cref.hpp
 	include/sanguis/client/load/model/collection_fwd.hpp
 	include/sanguis/client/load/model/context.hpp
 	include/sanguis/client/load/model/context_fwd.hpp
@@ -533,8 +538,10 @@ set(
 	include/sanguis/client/load/model/make_texture.hpp
 	include/sanguis/client/load/model/make_weapon_categories.hpp
 	include/sanguis/client/load/model/object.hpp
+	include/sanguis/client/load/model/object_cref.hpp
 	include/sanguis/client/load/model/object_fwd.hpp
 	include/sanguis/client/load/model/part.hpp
+	include/sanguis/client/load/model/part_cref.hpp
 	include/sanguis/client/load/model/part_fwd.hpp
 	include/sanguis/client/load/model/part_map.hpp
 	include/sanguis/client/load/model/part_result.hpp
@@ -549,8 +556,10 @@ set(
 	include/sanguis/client/load/resource/animation/entity_fwd.hpp
 	include/sanguis/client/load/resource/animation/entity_vector.hpp
 	include/sanguis/client/load/resource/animation/series.hpp
+	include/sanguis/client/load/resource/animation/series_cref.hpp
 	include/sanguis/client/load/resource/animation/series_fwd.hpp
 	include/sanguis/client/load/resource/context.hpp
+	include/sanguis/client/load/resource/context_cref.hpp
 	include/sanguis/client/load/resource/context_fwd.hpp
 	include/sanguis/client/load/resource/make_missing_texture.hpp
 	include/sanguis/client/load/resource/optional_sound.hpp
@@ -558,6 +567,7 @@ set(
 	include/sanguis/client/load/resource/parse_texture_file.hpp
 	include/sanguis/client/load/resource/search_texture_names.hpp
 	include/sanguis/client/load/resource/sounds.hpp
+	include/sanguis/client/load/resource/sounds_cref.hpp
 	include/sanguis/client/load/resource/sounds_fwd.hpp
 	include/sanguis/client/load/resource/texture_from_view.hpp
 	include/sanguis/client/load/resource/texture_identifier.hpp
@@ -567,6 +577,7 @@ set(
 	include/sanguis/client/load/resource/textures_fwd.hpp
 	include/sanguis/client/load/tiles/context.hpp
 	include/sanguis/client/load/tiles/context_fwd.hpp
+	include/sanguis/client/load/tiles/context_ref.hpp
 	include/sanguis/client/load/tiles/make_textures.hpp
 	include/sanguis/client/load/tiles/set.hpp
 	include/sanguis/client/load/tiles/set_fwd.hpp
@@ -615,10 +626,13 @@ set(
 	include/sanguis/client/perk/send_callback.hpp
 	include/sanguis/client/perk/state.hpp
 	include/sanguis/client/perk/state_fwd.hpp
+	include/sanguis/client/perk/state_ref.hpp
 	include/sanguis/client/perk/to_category.hpp
 	include/sanguis/client/perk/to_string.hpp
 	include/sanguis/client/perk/tree.hpp
+	include/sanguis/client/perk/tree_cref.hpp
 	include/sanguis/client/perk/tree_fwd.hpp
+	include/sanguis/client/perk/tree_ref.hpp
 	include/sanguis/client/perk/tree_unique_ptr.hpp
 	include/sanguis/client/player_health_callback.hpp
 	include/sanguis/client/player_level.hpp

@@ -3,14 +3,14 @@
 
 #include <sanguis/weapon_description_fwd.hpp>
 #include <sanguis/client/gui/hud/weapon_tooltip_fwd.hpp>
-#include <sge/font/object_fwd.hpp>
-#include <sge/gui/context_fwd.hpp>
+#include <sge/font/object_ref.hpp>
+#include <sge/gui/context_ref.hpp>
 #include <sge/gui/style/const_reference.hpp>
 #include <sge/gui/widget/base_fwd.hpp>
 #include <sge/gui/widget/box_container.hpp>
 #include <sge/gui/widget/static_text.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <vector>
@@ -28,20 +28,21 @@ namespace hud
 
 class weapon_tooltip
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		weapon_tooltip
 	);
 public:
 	weapon_tooltip(
-		sge::gui::context &,
+		sge::gui::context_ref,
 		sge::gui::style::const_reference,
-		sge::renderer::device::ffp &,
-		sge::font::object &,
+		sge::renderer::device::ffp_ref,
+		sge::font::object_ref,
 		sanguis::weapon_description const &
 	);
 
 	~weapon_tooltip();
 
+	[[nodiscard]]
 	sge::gui::widget::base &
 	widget();
 private:

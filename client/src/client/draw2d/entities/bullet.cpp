@@ -45,8 +45,9 @@ namespace
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wglobal-constructors)
 
+// NOLINTNEXTLINE(fuchsia-statically-constructed-objects,cert-err58-cpp)
 sanguis::client::draw2d::sprite::index const tail{
-	1u
+	1U
 };
 
 FCPPT_PP_POP_WARNING
@@ -55,8 +56,8 @@ FCPPT_PP_POP_WARNING
 
 sanguis::client::draw2d::entities::bullet::bullet(
 	sanguis::client::draw2d::entities::load_parameters const &_parameters,
-	sanguis::client::draw2d::speed const _speed,
-	sanguis::client::draw2d::sprite::center const _center,
+	sanguis::client::draw2d::speed const &_speed,
+	sanguis::client::draw2d::sprite::center const &_center,
 	sanguis::client::draw2d::sprite::rotation const _rotation,
 	sanguis::load::model::path &&_path
 )
@@ -95,40 +96,39 @@ sanguis::client::draw2d::entities::bullet::bullet(
 		>(
 			3
 		)
-	); // TODO: which value is best here?
+	);
 }
 
 sanguis::client::draw2d::entities::bullet::~bullet()
-{
-}
+= default;
 
 void
 sanguis::client::draw2d::entities::bullet::update()
 {
 	sanguis::client::draw2d::entities::model::object::update();
 
-	sanguis::client::draw2d::funit const
-		max_tail_length(
-			fcppt::literal<
+	sanguis::client::draw2d::funit const max_tail_length(
+		fcppt::literal<
+			sanguis::client::draw2d::funit
+		>(
+			240 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+		)
+	);
+
+	sanguis::client::draw2d::funit const tail_length(
+		std::min(
+			fcppt::math::vector::length<
 				sanguis::client::draw2d::funit
 			>(
-				240
-			)
-		),
-		tail_length(
-			std::min(
-				fcppt::math::vector::length<
-					sanguis::client::draw2d::funit
-				>(
-					(
-						origin_
-						-
-						this->center()
-					).get()
-				),
-				max_tail_length
-			)
-		);
+				(
+					origin_
+					-
+					this->center()
+				).get()
+			),
+			max_tail_length
+		)
+	);
 
 	sanguis::client::draw2d::center const cur_center(
 		fcppt::math::vector::structure_cast<
@@ -152,7 +152,7 @@ sanguis::client::draw2d::entities::bullet::update()
 				tail_length,
 				cur_center
 			](
-				sanguis::client::draw2d::vector2 const _normal
+				sanguis::client::draw2d::vector2 const &_normal
 			)
 			{
 				return
@@ -164,7 +164,7 @@ sanguis::client::draw2d::entities::bullet::update()
 						fcppt::literal<
 							sanguis::client::draw2d::funit
 						>(
-							0.5
+							0.5 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 						)
 						*
 						fcppt::math::vector::length(

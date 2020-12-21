@@ -30,7 +30,8 @@ public:
 
 	message(
 		message &&
-	);
+	)
+	noexcept;
 
 	message(
 		message const &
@@ -39,7 +40,8 @@ public:
 	message &
 	operator=(
 		message &&
-	);
+	)
+	noexcept;
 
 	message &
 	operator=(
@@ -49,7 +51,8 @@ public:
 	~message()
 	override;
 
-	// TODO: Can we get rid of the shared_ptr here?
+	// TODO(philipp): Can we get rid of the shared_ptr here?
+	[[nodiscard]]
 	sanguis::messages::server::shared_ptr
 	get() const;
 private:

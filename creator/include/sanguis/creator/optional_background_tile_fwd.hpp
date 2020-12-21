@@ -10,11 +10,12 @@ namespace sanguis
 namespace creator
 {
 
-typedef
+using
+optional_background_tile
+=
 fcppt::optional::object<
 	sanguis::creator::background_tile
->
-optional_background_tile;
+>;
 
 }
 }

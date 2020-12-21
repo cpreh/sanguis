@@ -1,4 +1,4 @@
-#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/diff_clock_cref.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/buffs/base.hpp>
@@ -11,10 +11,12 @@
 #include <sanguis/client/draw2d/sprite/normal/no_rotation.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
+#include <sanguis/client/draw2d/sprite/normal/system_ref.hpp>
 #include <sanguis/client/draw2d/sprite/normal/white.hpp>
 #include <sanguis/client/load/animation_type.hpp>
 #include <sanguis/client/load/model/animation.hpp>
 #include <sanguis/client/load/model/collection.hpp>
+#include <sanguis/client/load/model/collection_cref.hpp>
 #include <sanguis/client/load/model/object.hpp>
 #include <sanguis/client/load/model/part.hpp>
 #include <sanguis/client/load/model/weapon_category.hpp>
@@ -27,6 +29,7 @@
 #include <sge/sprite/roles/size_or_texture_size.hpp>
 #include <sge/sprite/roles/texture0.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -35,35 +38,37 @@
 
 
 sanguis::client::draw2d::entities::buffs::burn::burn(
-	sanguis::diff_clock const &_diff_clock,
-	sanguis::client::draw2d::sprite::normal::system &_normal_system,
-	sanguis::client::load::model::collection const &_model_collection,
+	sanguis::diff_clock_cref const _diff_clock,
+	sanguis::client::draw2d::sprite::normal::system_ref const _normal_system,
+	sanguis::client::load::model::collection_cref const _model_collection,
 	sanguis::client::draw2d::entities::model::object const &_model
 )
 :
 	sanguis::client::draw2d::entities::buffs::base(),
 	animation_(
-		_model_collection[
-			sanguis::load::model::path{
-				std::filesystem::path{
-					FCPPT_TEXT("fire")
+		fcppt::make_cref(
+			_model_collection.get()[
+				sanguis::load::model::path{
+					std::filesystem::path{
+						FCPPT_TEXT("fire")
+					}
 				}
-			}
-		][
-			FCPPT_TEXT("default")
-		]
-		[
-			sanguis::optional_primary_weapon_type()
-		][
-			sanguis::client::load::animation_type::none
-		]
-		.series(),
+			][
+				FCPPT_TEXT("default")
+			]
+			[
+				sanguis::optional_primary_weapon_type()
+			][
+				sanguis::client::load::animation_type::none
+			]
+			.series()
+		),
 		sanguis::client::draw2d::sprite::animation::loop_method::repeat,
 		_diff_clock
 	),
 	sprite_(
 		sge::sprite::roles::connection{} =
-			_normal_system.connection(
+			_normal_system->connection(
 				sanguis::client::draw2d::z_ordering::flare
 			),
 		sge::sprite::roles::center{} =
@@ -91,8 +96,7 @@ sanguis::client::draw2d::entities::buffs::burn::burn(
 }
 
 sanguis::client::draw2d::entities::buffs::burn::~burn()
-{
-}
+= default;
 
 void
 sanguis::client::draw2d::entities::buffs::burn::update(

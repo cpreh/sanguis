@@ -16,17 +16,19 @@
 namespace
 {
 
-typedef
+using
+animation_type_array
+=
 fcppt::enum_::array<
 	sanguis::client::load::animation_type,
 	sanguis::model::animation_name
->
-animation_type_array;
+>;
 
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wglobal-constructors)
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wexit-time-destructors)
 
+// NOLINTNEXTLINE(cert-err58-cpp)
 animation_type_array const animation_types(
 	fcppt::enum_::array_init<
 		animation_type_array

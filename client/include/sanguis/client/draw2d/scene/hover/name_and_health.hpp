@@ -7,10 +7,10 @@
 #include <sanguis/client/draw2d/scene/hover/healthbar.hpp>
 #include <sanguis/client/draw2d/scene/hover/name.hpp>
 #include <sanguis/client/draw2d/sprite/center_fwd.hpp>
-#include <sge/font/object_fwd.hpp>
+#include <sge/font/object_ref.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/optional/object_decl.hpp>
 
@@ -30,14 +30,14 @@ class name_and_health
 :
 	public sanguis::client::draw2d::scene::hover::base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		name_and_health
 	);
 public:
 	name_and_health(
-		sge::renderer::device::ffp &,
-		sge::font::object &,
-		sanguis::client::draw2d::sprite::center,
+		sge::renderer::device::ffp_ref,
+		sge::font::object_ref,
+		sanguis::client::draw2d::sprite::center const &,
 		sanguis::client::draw2d::radius,
 		sanguis::client::draw2d::entities::hover::name_and_health const &
 	);
@@ -47,8 +47,8 @@ public:
 private:
 	void
 	draw(
-		sge::renderer::context::ffp &
-	)
+		sge::renderer::context::ffp & // NOLINT(google-runtime-references)
+	) // NOLINT(google-runtime-references)
 	override;
 
 	using

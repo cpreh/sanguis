@@ -4,10 +4,13 @@
 #include <sanguis/client/load/model/part_map.hpp>
 #include <sanguis/client/load/model/part_result.hpp>
 #include <sanguis/client/load/resource/context.hpp>
+#include <sanguis/client/load/resource/context_cref.hpp>
 #include <sanguis/load/model/path_to_json_file.hpp>
 #include <sanguis/model/deserialize.hpp>
 #include <sanguis/model/object.hpp>
 #include <sanguis/model/part_map.hpp>
+#include <fcppt/copy.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/log/object_fwd.hpp>
@@ -21,7 +24,7 @@ sanguis::client::load::model::part_result
 sanguis::client::load::model::make_parts(
 	fcppt::log::object &_log,
 	std::filesystem::path const &_path,
-	sanguis::client::load::resource::context const &_context
+	sanguis::client::load::resource::context_cref const _context
 )
 {
 	sanguis::model::object const loaded_object(
@@ -33,12 +36,20 @@ sanguis::client::load::model::make_parts(
 	);
 
 	sanguis::client::load::model::global_parameters const parameters(
-		_path,
-		_context.textures(),
-		_context.sounds(),
+		fcppt::copy(
+			_path
+		),
+		fcppt::make_cref(
+			_context->textures()
+		),
+		fcppt::make_cref(
+			_context->sounds()
+		),
 		loaded_object.cell_size(),
 		loaded_object.animation_delay(),
-		loaded_object.image_name()
+		fcppt::copy(
+			loaded_object.image_name()
+		)
 	);
 
 	return
@@ -64,7 +75,9 @@ sanguis::client::load::model::make_parts(
 								_log,
 								_part_pair.second,
 								parameters.new_image(
-									_part_pair.second.image_name()
+									fcppt::copy(
+										_part_pair.second.image_name()
+									)
 								)
 							)
 						);

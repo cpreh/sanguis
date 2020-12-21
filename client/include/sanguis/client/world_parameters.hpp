@@ -16,12 +16,14 @@ class world_parameters
 public:
 	world_parameters(
 		sanguis::world_id,
-		sanguis::creator::top_parameters const &
+		sanguis::creator::top_parameters &&
 	);
 
+	[[nodiscard]]
 	sanguis::world_id
 	world_id() const;
 
+	[[nodiscard]]
 	sanguis::creator::top_parameters const &
 	top_parameters() const;
 private:

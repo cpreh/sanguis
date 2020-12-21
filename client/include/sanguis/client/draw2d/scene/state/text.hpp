@@ -3,10 +3,10 @@
 
 #include <sanguis/client/draw2d/scene/state/base.hpp>
 #include <sanguis/client/draw2d/scene/state/optional_scoped_unique_ptr_fwd.hpp>
-#include <sge/renderer/context/ffp_fwd.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/renderer/context/ffp_ref.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
 #include <sge/renderer/state/ffp/sampler/optional_object_unique_ptr.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -24,21 +24,22 @@ class text
 :
 	public sanguis::client::draw2d::scene::state::base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		text
 	);
 public:
 	explicit
 	text(
-		sge::renderer::device::ffp &
+		sge::renderer::device::ffp_ref
 	);
 
 	~text()
 	override;
 
+	[[nodiscard]]
 	sanguis::client::draw2d::scene::state::optional_scoped_unique_ptr
 	create_scoped(
-		sge::renderer::context::ffp &
+		sge::renderer::context::ffp_ref
 	) const
 	override;
 private:

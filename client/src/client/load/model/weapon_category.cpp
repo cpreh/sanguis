@@ -31,8 +31,7 @@ sanguis::client::load::model::weapon_category::weapon_category(
 }
 
 sanguis::client::load::model::weapon_category::~weapon_category()
-{
-}
+= default;
 
 sanguis::client::load::model::animation const &
 sanguis::client::load::model::weapon_category::operator[](
@@ -59,10 +58,12 @@ sanguis::client::load::model::weapon_category::operator[](
 					==
 					fallback
 				)
+				{
 					throw
 						sanguis::exception{
 							FCPPT_TEXT("Default animation missing in TODO")
 						};
+				}
 
 				return
 					fcppt::make_cref(

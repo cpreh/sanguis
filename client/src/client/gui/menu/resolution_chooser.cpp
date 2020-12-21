@@ -30,9 +30,6 @@
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
 
 
 FCPPT_PP_PUSH_WARNING
@@ -56,7 +53,7 @@ sanguis::client::gui::menu::resolution_chooser::resolution_chooser(
 		_style,
 		_renderer,
 		_font,
-		// TODO: Add window mode
+		// TODO(philipp): Add window mode
 		fcppt::algorithm::map<
 			sge::gui::string_container
 		>(
@@ -78,9 +75,9 @@ sanguis::client::gui::menu::resolution_chooser::resolution_chooser(
 			sge::gui::optional_index()
 		:
 			sge::gui::optional_index(
-				// TODO
+				// TODO(philipp)
 				sge::gui::index(
-					0u
+					0U
 				)
 			)
 	),
@@ -112,10 +109,11 @@ sanguis::client::gui::menu::resolution_chooser::resolution_chooser(
 	apply_connection_{
 		apply_button_.click(
 			sge::gui::click_callback{
-				std::bind(
-					&sanguis::client::gui::menu::resolution_chooser::on_apply,
+				[
 					this
-				)
+				]{
+					this->on_apply();
+				}
 			}
 		)
 	}
@@ -125,8 +123,7 @@ sanguis::client::gui::menu::resolution_chooser::resolution_chooser(
 FCPPT_PP_POP_WARNING
 
 sanguis::client::gui::menu::resolution_chooser::~resolution_chooser()
-{
-}
+= default;
 
 sge::gui::widget::base &
 sanguis::client::gui::menu::resolution_chooser::widget()

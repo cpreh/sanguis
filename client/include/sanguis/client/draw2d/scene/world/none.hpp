@@ -4,7 +4,7 @@
 #include <sanguis/client/slowed_duration_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/base.hpp>
 #include <sanguis/client/draw2d/scene/world/render_parameters_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -22,7 +22,7 @@ class none
 :
 	public sanguis::client::draw2d::scene::world::base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		none
 	);
 public:

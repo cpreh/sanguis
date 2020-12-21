@@ -26,8 +26,8 @@ sanguis::client::load::resource::parse_texture_file(
 	sanguis::client::load::resource::texture_name_map &&_result
 )
 {
-	// TODO: Write a proper parser for this
-	fcppt::filesystem::ifstream file(
+	// TODO(philipp): Write a proper parser for this
+	auto file(
 		fcppt::filesystem::open_exn<
 			fcppt::filesystem::ifstream,
 			sanguis::exception
@@ -55,7 +55,9 @@ sanguis::client::load::resource::parse_texture_file(
 		);
 
 		if (line.empty())
+		{
 			continue;
+		}
 
 		fcppt::string::size_type const equal(
 			line.find(

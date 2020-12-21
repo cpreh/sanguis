@@ -19,10 +19,10 @@
 #include <sanguis/client/gui/hud/object.hpp>
 #include <sanguis/client/gui/hud/weapon_details.hpp>
 #include <sanguis/client/gui/hud/weapon_widget.hpp>
-#include <sanguis/client/load/hud/context_fwd.hpp>
+#include <sanguis/client/load/hud/context_ref.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/font/lit.hpp>
-#include <sge/font/object_fwd.hpp>
+#include <sge/font/object_ref.hpp>
 #include <sge/font/string.hpp>
 #include <sge/gui/fill_color.hpp>
 #include <sge/gui/fill_level.hpp>
@@ -39,11 +39,13 @@
 #include <sge/renderer/context/ffp.hpp>
 #include <sge/renderer/device/core.hpp>
 #include <sge/renderer/device/ffp.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <sge/rucksack/dim.hpp>
-#include <sge/viewport/manager_fwd.hpp>
+#include <sge/viewport/manager_ref.hpp>
 #include <fcppt/const.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/output_to_string.hpp>
@@ -67,11 +69,11 @@
 
 
 sanguis::client::gui::hud::object::object(
-	sanguis::client::load::hud::context &_resources,
+	sanguis::client::load::hud::context_ref const _resources,
 	sge::gui::style::const_reference const _gui_style,
-	sge::font::object &_font,
-	sge::renderer::device::ffp &_renderer,
-	sge::viewport::manager &_viewport_manager
+	sge::font::object_ref const _font,
+	sge::renderer::device::ffp_ref const _renderer,
+	sge::viewport::manager_ref const _viewport_manager
 )
 :
 	reload_clock_(),
@@ -88,36 +90,28 @@ sanguis::client::gui::hud::object::object(
 		_renderer
 	),
 	exp_(
-		0u
+		0U
 	),
 	previous_exp_level_(
-		0u
+		0U
 	),
 	exp_for_next_level_(
-		0u
+		0U
 	),
 	frames_counter_(),
 	gui_context_(),
 	world_name_text_(
 		_gui_style,
-		fcppt::make_ref(
-			_renderer
-		),
-		fcppt::make_ref(
-			_font
-		),
+		_renderer,
+		_font,
 		sge::font::string(),
 		sanguis::client::gui::default_text_color(),
 		sge::gui::optional_needed_width()
 	),
 	player_name_text_(
 		_gui_style,
-		fcppt::make_ref(
-			_renderer
-		),
-		fcppt::make_ref(
-			_font
-		),
+		_renderer,
+		_font,
 		sge::font::string(),
 		sanguis::client::gui::default_text_color(),
 		sge::gui::optional_needed_width()
@@ -127,12 +121,8 @@ sanguis::client::gui::hud::object::object(
 	),
 	level_text_(
 		_gui_style,
-		fcppt::make_ref(
-			_renderer
-		),
-		fcppt::make_ref(
-			_font
-		),
+		_renderer,
+		_font,
 		sge::font::string(),
 		sanguis::client::gui::default_text_color(),
 		sge::gui::optional_needed_width()
@@ -166,8 +156,8 @@ sanguis::client::gui::hud::object::object(
 	exp_bar_(
 		_gui_style,
 		sge::rucksack::dim(
-			200,
-			10
+			200, // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+			10 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		),
 		sge::rucksack::axis::x,
 		sge::gui::fill_color(
@@ -176,14 +166,14 @@ sanguis::client::gui::hud::object::object(
 			}
 		),
 		sge::gui::fill_level(
-			0.f
+			0.F
 		)
 	),
 	health_bar_(
 		_gui_style,
 		sge::rucksack::dim(
-			200,
-			20
+			200, // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+			20 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		),
 		sge::rucksack::axis::x,
 		sge::gui::fill_color(
@@ -192,7 +182,7 @@ sanguis::client::gui::hud::object::object(
 			}
 		),
 		sge::gui::fill_level(
-			1.f
+			1.F
 		)
 	),
 	middle_container_(
@@ -236,7 +226,7 @@ sanguis::client::gui::hud::object::object(
 	primary_dummy_widget_h_(
 		sge::rucksack::dim{
 			0,
-			84
+			84 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		}
 	),
 	primary_weapon_(),
@@ -256,7 +246,7 @@ sanguis::client::gui::hud::object::object(
 	),
 	primary_dummy_widget_w_(
 		sge::rucksack::dim{
-			150,
+			150, // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			0
 		}
 	),
@@ -289,7 +279,7 @@ sanguis::client::gui::hud::object::object(
 	secondary_dummy_widget_h_(
 		sge::rucksack::dim{
 			0,
-			84
+			84 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		}
 	),
 	secondary_weapon_(),
@@ -309,7 +299,7 @@ sanguis::client::gui::hud::object::object(
 	),
 	secondary_dummy_widget_w_(
 		sge::rucksack::dim{
-			150,
+			150, // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			0
 		}
 	),
@@ -369,13 +359,9 @@ sanguis::client::gui::hud::object::object(
 		fcppt::reference_to_base<
 			sge::renderer::device::core
 		>(
-			fcppt::make_ref(
-				_renderer
-			)
+			_renderer
 		),
-		fcppt::make_ref(
-			_viewport_manager
-		),
+		_viewport_manager,
 		fcppt::make_ref(
 			gui_context_
 		),
@@ -405,8 +391,7 @@ sanguis::client::gui::hud::object::object(
 }
 
 sanguis::client::gui::hud::object::~object()
-{
-}
+= default;
 
 void
 sanguis::client::gui::hud::object::health_pair(
@@ -436,7 +421,7 @@ sanguis::client::gui::hud::object::health_pair(
 			),
 			fcppt::const_(
 				sge::gui::fill_level(
-					0.f
+					0.F
 				)
 			),
 			[](
@@ -510,9 +495,13 @@ sanguis::client::gui::hud::object::add_weapon(
 					fcppt::make_unique_ptr<
 						sanguis::client::gui::hud::weapon_widget
 					>(
-						reload_clock_,
+						fcppt::make_cref(
+							reload_clock_
+						),
 						resources_,
-						gui_context_,
+						fcppt::make_ref(
+							gui_context_
+						),
 						gui_style_,
 						renderer_,
 						font_,
@@ -620,6 +609,7 @@ sanguis::client::gui::hud::object::update_server(
 	if(
 		!paused_
 	)
+	{
 		reload_clock_.update(
 			std::chrono::duration_cast<
 				sanguis::diff_clock::duration
@@ -627,6 +617,7 @@ sanguis::client::gui::hud::object::update_server(
 				_duration.get()
 			)
 		);
+	}
 }
 
 void
@@ -646,7 +637,7 @@ sanguis::client::gui::hud::object::draw(
 	frames_counter_.update();
 
 	gui_master_.draw_with_states(
-		renderer_,
+		renderer_.get(),
 		_render_context,
 		gui_background_
 	);
@@ -660,11 +651,15 @@ sanguis::client::gui::hud::object::details(
 	if(
 		_show
 	)
+	{
 		this->create_details();
+	}
 	else if(
 		weapon_details_.has_value()
 	)
+	{
 		this->destroy_details();
+	}
 
 	gui_area_.relayout();
 }
@@ -886,7 +881,9 @@ sanguis::client::gui::hud::object::create_details()
 		fcppt::make_unique_ptr<
 			sanguis::client::gui::hud::weapon_details
 		>(
-			gui_context_,
+			fcppt::make_ref(
+				gui_context_
+			),
 			gui_style_,
 			renderer_,
 			font_,

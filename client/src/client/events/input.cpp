@@ -3,7 +3,7 @@
 
 
 sanguis::client::events::input::input(
-	sge::input::event_base const &_event
+	event_base_cref const _event
 )
 :
 	event_{
@@ -15,6 +15,7 @@ sanguis::client::events::input::input(
 sanguis::client::events::input::input(
 	input &&
 )
+noexcept
 = default;
 
 sanguis::client::events::input::input(
@@ -26,6 +27,7 @@ sanguis::client::events::input &
 sanguis::client::events::input::operator=(
 	input &&
 )
+noexcept
 = default;
 
 sanguis::client::events::input &
@@ -35,8 +37,7 @@ sanguis::client::events::input::operator=(
 = default;
 
 sanguis::client::events::input::~input()
-{
-}
+= default;
 
 sge::input::event_base const &
 sanguis::client::events::input::get() const

@@ -6,9 +6,10 @@
 #include <sanguis/client/perk/change_callback.hpp>
 #include <sanguis/client/perk/level_callback.hpp>
 #include <sanguis/client/perk/state.hpp>
+#include <sanguis/client/perk/state_ref.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/font/lit.hpp>
-#include <sge/font/object_fwd.hpp>
+#include <sge/font/object_ref.hpp>
 #include <sge/font/string.hpp>
 #include <sge/gui/gravity.hpp>
 #include <sge/gui/optional_needed_width.hpp>
@@ -21,10 +22,12 @@
 #include <sge/renderer/context/ffp_fwd.hpp>
 #include <sge/renderer/device/core.hpp>
 #include <sge/renderer/device/ffp.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
 #include <sge/renderer/target/onscreen.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <sge/viewport/manager.hpp>
+#include <sge/viewport/manager_ref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/output_to_fcppt_string.hpp>
@@ -34,9 +37,6 @@
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace
@@ -52,11 +52,11 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::gui::perk::chooser::chooser(
-	sanguis::client::perk::state &_state,
+	sanguis::client::perk::state_ref const _state,
 	sge::gui::style::const_reference const _style,
-	sge::renderer::device::ffp &_renderer,
-	sge::viewport::manager &_viewport_manager,
-	sge::font::object &_font
+	sge::renderer::device::ffp_ref const _renderer,
+	sge::viewport::manager_ref const _viewport_manager,
+	sge::font::object_ref const _font
 )
 :
 	state_(
@@ -74,12 +74,8 @@ sanguis::client::gui::perk::chooser::chooser(
 	gui_context_(),
 	top_text_(
 		_style,
-		fcppt::make_ref(
-			_renderer
-		),
-		fcppt::make_ref(
-			_font
-		),
+		_renderer,
+		_font,
 		this->make_top_text(),
 		sanguis::client::gui::default_text_color(),
 		sge::gui::optional_needed_width()
@@ -90,7 +86,9 @@ sanguis::client::gui::perk::chooser::chooser(
 		>(
 			_renderer,
 			_font,
-			gui_context_,
+			fcppt::make_ref(
+				gui_context_
+			),
 			_style,
 			_state
 		)
@@ -119,13 +117,9 @@ sanguis::client::gui::perk::chooser::chooser(
 		fcppt::reference_to_base<
 			sge::renderer::device::core
 		>(
-			fcppt::make_ref(
-				_renderer
-			)
+			_renderer
 		),
-		fcppt::make_ref(
-			_viewport_manager
-		),
+		_viewport_manager,
 		fcppt::make_ref(
 			gui_context_
 		),
@@ -148,22 +142,24 @@ sanguis::client::gui::perk::chooser::chooser(
 		}
 	),
 	perk_connection_(
-		_state.register_perks_change(
+		_state->register_perks_change(
 			sanguis::client::perk::change_callback{
-				std::bind(
-					&sanguis::client::gui::perk::chooser::perks,
+				[
 					this
-				)
+				]{
+					this->perks();
+				}
 			}
 		)
 	),
 	level_connection_(
-		_state.register_level_change(
+		_state->register_level_change(
 			sanguis::client::perk::level_callback{
-				std::bind(
-					&sanguis::client::gui::perk::chooser::level,
+				[
 					this
-				)
+				]{
+					this->level();
+				}
 			}
 		)
 	)
@@ -173,8 +169,7 @@ sanguis::client::gui::perk::chooser::chooser(
 FCPPT_PP_POP_WARNING
 
 sanguis::client::gui::perk::chooser::~chooser()
-{
-}
+= default;
 
 void
 sanguis::client::gui::perk::chooser::process(
@@ -194,7 +189,7 @@ sanguis::client::gui::perk::chooser::draw(
 )
 {
 	gui_master_.draw_with_states(
-		renderer_,
+		renderer_.get(),
 		_context,
 		gui_background_
 	);
@@ -221,7 +216,9 @@ sanguis::client::gui::perk::chooser::perks()
 		>(
 			renderer_,
 			font_,
-			gui_context_,
+			fcppt::make_ref(
+				gui_context_
+			),
 			style_,
 			state_
 		);
@@ -254,13 +251,13 @@ sanguis::client::gui::perk::chooser::make_top_text() const
 			FCPPT_TEXT("Level: ")
 			+
 			fcppt::output_to_fcppt_string(
-				state_.player_level()
+				state_->player_level()
 			)
 			+
 			FCPPT_TEXT(", Perks to choose: ")
 			+
 			fcppt::output_to_fcppt_string(
-				state_.remaining_levels()
+				state_->remaining_levels()
 			)
 		);
 }

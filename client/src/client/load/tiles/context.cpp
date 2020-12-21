@@ -1,5 +1,6 @@
 #include <sanguis/client/load/resource/texture_from_view.hpp>
 #include <sanguis/client/load/resource/textures.hpp>
+#include <sanguis/client/load/resource/textures_cref.hpp>
 #include <sanguis/client/load/tiles/context.hpp>
 #include <sanguis/client/load/tiles/set.hpp>
 #include <sanguis/client/load/tiles/texture_container.hpp>
@@ -23,12 +24,12 @@
 
 
 sanguis::client::load::tiles::context::context(
-	sanguis::client::load::resource::textures const &_textures
+	sanguis::client::load::resource::textures_cref const _textures
 )
 :
 	collection_(
 		fcppt::make_ref(
-			_textures.image_system()
+			_textures->image_system()
 		)
 	),
 	textures_(
@@ -53,7 +54,9 @@ sanguis::client::load::tiles::context::context(
 
 				return
 					sanguis::client::load::resource::texture_from_view(
-						_textures.renderer(),
+						fcppt::make_ref(
+							_textures->renderer()
+						),
 						sge::image2d::store::view(
 							fcppt::make_cref(
 								error_image
@@ -67,8 +70,7 @@ sanguis::client::load::tiles::context::context(
 }
 
 sanguis::client::load::tiles::context::~context()
-{
-}
+= default;
 
 sanguis::client::load::tiles::texture_container const &
 sanguis::client::load::tiles::context::set(

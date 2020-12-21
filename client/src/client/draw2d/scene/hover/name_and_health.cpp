@@ -7,19 +7,22 @@
 #include <sanguis/client/draw2d/scene/hover/name.hpp>
 #include <sanguis/client/draw2d/scene/hover/name_and_health.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
-#include <sge/font/object_fwd.hpp>
+#include <sge/font/object_ref.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
+#include <sge/renderer/device/core.hpp>
 #include <sge/renderer/device/ffp.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/reference_to_base.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
 
 sanguis::client::draw2d::scene::hover::name_and_health::name_and_health(
-	sge::renderer::device::ffp &_renderer,
-	sge::font::object &_font,
-	sanguis::client::draw2d::sprite::center const _center,
+	sge::renderer::device::ffp_ref const _renderer,
+	sge::font::object_ref const _font,
+	sanguis::client::draw2d::sprite::center const &_center,
 	sanguis::client::draw2d::radius const _radius,
 	sanguis::client::draw2d::entities::hover::name_and_health const &_name_and_health
 )
@@ -39,7 +42,11 @@ sanguis::client::draw2d::scene::hover::name_and_health::name_and_health(
 					fcppt::make_unique_ptr<
 						sanguis::client::draw2d::scene::hover::healthbar
 					>(
-						_renderer,
+						fcppt::reference_to_base<
+							sge::renderer::device::core
+						>(
+							_renderer
+						),
 						_center,
 						_radius,
 						_health
@@ -74,8 +81,7 @@ sanguis::client::draw2d::scene::hover::name_and_health::name_and_health(
 }
 
 sanguis::client::draw2d::scene::hover::name_and_health::~name_and_health()
-{
-}
+= default;
 
 void
 sanguis::client::draw2d::scene::hover::name_and_health::draw(

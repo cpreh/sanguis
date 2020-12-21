@@ -27,10 +27,10 @@
 
 sanguis::client::draw2d::entities::aoe_bullet::aoe_bullet(
 	sanguis::client::draw2d::entities::load_parameters const &_load_parameters,
-	sanguis::client::draw2d::insert_own_callback const &_insert,
+	sanguis::client::draw2d::insert_own_callback &&_insert,
 	sanguis::load::model::path &&_path,
-	sanguis::client::draw2d::speed const _speed,
-	sanguis::client::draw2d::sprite::center const _center,
+	sanguis::client::draw2d::speed const &_speed,
+	sanguis::client::draw2d::sprite::center const &_center,
 	sanguis::client::draw2d::sprite::rotation const _rotation,
 	sanguis::client::draw2d::aoe const _aoe
 )
@@ -58,7 +58,9 @@ sanguis::client::draw2d::entities::aoe_bullet::aoe_bullet(
 		_load_parameters
 	},
 	insert_(
-		_insert
+		std::move(
+			_insert
+		)
 	),
 	aoe_(
 		_aoe
@@ -67,8 +69,7 @@ sanguis::client::draw2d::entities::aoe_bullet::aoe_bullet(
 }
 
 sanguis::client::draw2d::entities::aoe_bullet::~aoe_bullet()
-{
-}
+= default;
 
 void
 sanguis::client::draw2d::entities::aoe_bullet::on_die()

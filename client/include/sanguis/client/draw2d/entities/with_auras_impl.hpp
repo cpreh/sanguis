@@ -59,7 +59,7 @@ sanguis::client::draw2d::entities::with_auras<
 				_parameters.diff_clock()
 			),
 			sanguis::duration_second(
-				16
+				16 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			)
 		)
 	),
@@ -70,9 +70,11 @@ sanguis::client::draw2d::entities::with_auras<
 		:
 		_parameters.auras()
 	)
+	{
 		this->add_aura(
 			aura
 		);
+	}
 }
 
 template<
@@ -83,8 +85,7 @@ sanguis::client::draw2d::entities::with_auras<
 >::~with_auras<
 	Base
 >()
-{
-}
+= default;
 
 template<
 	typename Base
@@ -158,7 +159,7 @@ sanguis::client::draw2d::entities::with_auras<
 			_aura,
 			sanguis::client::draw2d::sprite::normal::object(
 				sge::sprite::roles::connection{} =
-					normal_system_.connection(
+					normal_system_->connection(
 						sanguis::client::draw2d::z_ordering::aura
 					),
 				sge::sprite::roles::center{} =
@@ -169,7 +170,7 @@ sanguis::client::draw2d::entities::with_auras<
 					sanguis::client::draw2d::sprite::normal::white(),
 				sge::sprite::roles::texture0{} =
 					sanguis::client::draw2d::sprite::normal::object::texture_type{
-						aura_load_context_.texture(
+						aura_load_context_->texture(
 							_aura
 						)
 					},

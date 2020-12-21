@@ -18,7 +18,7 @@ namespace model
 
 sanguis::client::load::model::weapon_category_map
 make_weapon_categories(
-	fcppt::log::object &,
+	fcppt::log::object &, // NOLINT(google-runtime-references)
 	sanguis::model::part const &,
 	sanguis::client::load::model::global_parameters const &
 );

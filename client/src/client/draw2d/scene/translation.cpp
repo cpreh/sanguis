@@ -14,8 +14,8 @@
 
 sanguis::client::draw2d::translation
 sanguis::client::draw2d::scene::translation(
-	sanguis::client::draw2d::player_center const _player_center,
-	sge::renderer::screen_size const _screen_size
+	sanguis::client::draw2d::player_center const &_player_center,
+	sge::renderer::screen_size const &_screen_size
 )
 {
 	return
@@ -35,7 +35,7 @@ sanguis::client::draw2d::scene::translation(
 							fcppt::literal<
 								sge::renderer::screen_unit
 							>(
-								2u
+								2U
 							)
 						).get_unsafe()
 					)

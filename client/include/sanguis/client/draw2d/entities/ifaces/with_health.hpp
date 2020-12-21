@@ -3,7 +3,7 @@
 
 #include <sanguis/client/health.hpp>
 #include <sanguis/client/max_health.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -19,7 +19,7 @@ namespace ifaces
 
 class with_health
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		with_health
 	);
 protected:

@@ -5,6 +5,7 @@
 #include <sanguis/client/load/model/weapon_category_map.hpp>
 #include <sanguis/model/part.hpp>
 #include <sanguis/model/weapon_category_map.hpp>
+#include <fcppt/copy.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/log/object_fwd.hpp>
@@ -43,7 +44,9 @@ sanguis::client::load::model::make_weapon_categories(
 							_log,
 							_weapon_category_pair.second,
 							_parameters.new_image(
-								_weapon_category_pair.second.image_name()
+								fcppt::copy(
+									_weapon_category_pair.second.image_name()
+								)
 							)
 						)
 					);

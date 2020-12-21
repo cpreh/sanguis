@@ -20,7 +20,7 @@ namespace factory
 sanguis::client::draw2d::entities::unique_ptr
 weapon_pickup(
 	sanguis::client::draw2d::entities::load_parameters const &,
-	sanguis::client::draw2d::sprite::center,
+	sanguis::client::draw2d::sprite::center const &,
 	sanguis::client::draw2d::sprite::rotation,
 	sanguis::weapon_description const &
 );

@@ -1,4 +1,4 @@
-#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/diff_clock_cref.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration_second.hpp>
 #include <sanguis/client/draw2d/font_color_format.hpp>
@@ -14,6 +14,7 @@
 #include <sanguis/client/draw2d/sprite/normal/no_rotation.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
+#include <sanguis/client/draw2d/sprite/normal/system_ref.hpp>
 #include <sge/font/object.hpp>
 #include <sge/font/rect.hpp>
 #include <sge/font/string.hpp>
@@ -36,7 +37,6 @@
 #include <sge/texture/part.hpp>
 #include <sge/timer/elapsed_fractional.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/unique_ptr_to_const.hpp>
 #include <fcppt/cast/float_to_int.hpp>
@@ -46,12 +46,12 @@
 
 
 sanguis::client::draw2d::entities::text::text(
-	sanguis::diff_clock const &_diff_clock,
-	sanguis::client::draw2d::sprite::normal::system &_sprite_system,
+	sanguis::diff_clock_cref const _diff_clock,
+	sanguis::client::draw2d::sprite::normal::system_ref const _sprite_system,
 	sge::font::object &_font,
 	sge::font::string const &_text,
 	sanguis::client::draw2d::z_ordering const _z_ordering,
-	sanguis::client::draw2d::sprite::center const _center,
+	sanguis::client::draw2d::sprite::center const &_center,
 	sanguis::client::draw2d::sprite::normal::color const _color
 )
 :
@@ -74,26 +74,23 @@ sanguis::client::draw2d::entities::text::text(
 }
 
 sanguis::client::draw2d::entities::text::~text()
-{
-}
+= default;
 
 sanguis::client::draw2d::entities::text::text(
-	sanguis::diff_clock const &_diff_clock,
-	sanguis::client::draw2d::sprite::normal::system &_sprite_system,
+	sanguis::diff_clock_cref const _diff_clock,
+	sanguis::client::draw2d::sprite::normal::system_ref const _sprite_system,
 	sge::font::text_unique_ptr &&_text,
 	sanguis::client::draw2d::z_ordering const _z_ordering,
-	sanguis::client::draw2d::sprite::center const _center,
+	sanguis::client::draw2d::sprite::center const &_center,
 	sanguis::client::draw2d::sprite::normal::color const _color
 )
 :
 	sanguis::client::draw2d::entities::own(),
 	life_time_(
 		sanguis::diff_timer::parameters{
-			fcppt::make_cref(
-				_diff_clock
-			),
+			_diff_clock,
 			sanguis::duration_second(
-				1.f
+				1.F
 			)
 		}
 	),
@@ -101,7 +98,7 @@ sanguis::client::draw2d::entities::text::text(
 		fcppt::unique_ptr_to_const(
 			sge::font::draw::create_texture(
 				fcppt::make_ref(
-					_sprite_system.renderer()
+					_sprite_system->renderer()
 				),
 				*_text,
 				sanguis::client::draw2d::font_color_format(),
@@ -111,7 +108,7 @@ sanguis::client::draw2d::entities::text::text(
 	),
 	sprite_(
 		sge::sprite::roles::connection{} =
-			_sprite_system.connection(
+			_sprite_system->connection(
 				_z_ordering
 			),
 		sge::sprite::roles::center{} =
@@ -166,7 +163,7 @@ sanguis::client::draw2d::entities::text::update()
 				fcppt::literal<
 					sanguis::client::draw2d::funit
 				>(
-					100.f
+					100.F // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 				)
 			)
 		}

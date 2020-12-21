@@ -8,7 +8,7 @@
 #include <sanguis/client/draw2d/scene/world/sprite/object.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/optional_object.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/vector.hpp>
-#include <sanguis/client/load/tiles/context_fwd.hpp>
+#include <sanguis/client/load/tiles/context_ref.hpp>
 #include <sanguis/tiles/cell.hpp>
 #include <sge/sprite/roles/pos.hpp>
 #include <sge/sprite/roles/size.hpp>
@@ -25,7 +25,7 @@ sanguis::client::draw2d::scene::world::sprite::optional_object
 sanguis::client::draw2d::scene::world::make_sprite(
 	sanguis::random_generator &_random_generator,
 	sanguis::client::draw::debug const _debug,
-	sanguis::client::load::tiles::context &_tiles,
+	sanguis::client::load::tiles::context_ref const _tiles,
 	sanguis::tiles::cell const &_cell
 )
 {
@@ -47,7 +47,6 @@ sanguis::client::draw2d::scene::world::make_sprite(
 			)
 			{
 				return
-
 					sanguis::client::draw2d::scene::world::sprite::object(
 						sge::sprite::roles::pos{} =
 							fcppt::math::vector::structure_cast<

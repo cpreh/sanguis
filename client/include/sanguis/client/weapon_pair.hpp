@@ -27,11 +27,13 @@ public:
 		sanguis::is_primary_weapon
 	);
 
+	[[nodiscard]]
 	sanguis::optional_weapon_description const &
 	get(
 		sanguis::is_primary_weapon
 	) const;
 private:
+	[[nodiscard]]
 	sanguis::optional_weapon_description &
 	get(
 		sanguis::is_primary_weapon

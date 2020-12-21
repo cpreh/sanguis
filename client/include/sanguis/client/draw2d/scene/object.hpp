@@ -36,7 +36,7 @@
 #include <sanguis/client/load/context_cref.hpp>
 #include <sanguis/client/load/auras/context.hpp>
 #include <sanguis/client/load/hud/context_ref.hpp>
-#include <sanguis/client/load/model/collection_fwd.hpp>
+#include <sanguis/client/load/model/collection_cref.hpp>
 #include <sanguis/messages/server/add_aoe_projectile_fwd.hpp>
 #include <sanguis/messages/server/add_aura_fwd.hpp>
 #include <sanguis/messages/server/add_buff_fwd.hpp>
@@ -149,6 +149,7 @@ private:
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::client::control::optional_attack_dest
 	translate_attack_dest(
 		sanguis::client::control::cursor_position const &
@@ -169,7 +170,7 @@ private:
 	void
 	hover_display(
 		sanguis::client::draw2d::entities::base const &,
-		sanguis::client::control::attack_dest
+		sanguis::client::control::attack_dest const &
 	);
 
 	void
@@ -177,11 +178,13 @@ private:
 		sanguis::entity_id
 	);
 
+	[[nodiscard]]
 	sanguis::client::draw2d::entities::base &
 	entity(
 		sanguis::entity_id
 	) const;
 
+	[[nodiscard]]
 	sanguis::client::draw2d::optional_player_center
 	player_center() const;
 
@@ -190,15 +193,19 @@ private:
 		sanguis::client::world_parameters const &
 	);
 
+	[[nodiscard]]
 	sge::renderer::screen_size
 	screen_size() const;
 
+	[[nodiscard]]
 	sge::renderer::target::viewport
 	viewport() const;
 
+	[[nodiscard]]
 	sanguis::client::draw2d::entities::load_parameters
 	load_parameters();
 
+	[[nodiscard]]
 	sanguis::client::draw2d::insert_own_callback
 	insert_own_callback();
 
@@ -209,137 +216,137 @@ private:
 	=
 	void;
 
-	result_type
+	void
 	operator()(
 		sanguis::messages::server::add_aoe_projectile const &
 	);
 
-	result_type
+	void
 	operator()(
 		sanguis::messages::server::add_aura const &
 	);
 
-	result_type
+	void
 	operator()(
 		sanguis::messages::server::add_buff const &
 	);
 
-	result_type
+	void
 	operator()(
 		sanguis::messages::server::add_destructible const &
 	);
 
-	result_type
+	void
 	operator()(
 		sanguis::messages::server::add_doodad const &
 	);
 
-	result_type
+	void
 	operator()(
 		sanguis::messages::server::add_enemy const &
 	);
 
-	result_type
+	void
 	operator()(
 		sanguis::messages::server::add_friend const &
 	);
 
-	result_type
+	void
 	operator()(
 		sanguis::messages::server::add_own_player const &
 	);
 
-	result_type
+	void
 	operator()(
 		sanguis::messages::server::add_pickup const &
 	);
 
-	result_type
+	void
 	operator()(
 		sanguis::messages::server::add_player const &
 	);
 
-	result_type
+	void
 	operator()(
 		sanguis::messages::server::add_projectile const &
 	);
 
-	result_type
+	void
 	operator()(
 		sanguis::messages::server::add_weapon_pickup const &
 	);
 
-	result_type
+	void
 	operator()(
 		sanguis::messages::server::change_weapon const &
 	);
 
-	result_type
+	void
 	operator()(
 		sanguis::messages::server::change_world const &
 	);
 
-	result_type
+	void
 	operator()(
 		sanguis::messages::server::die const &
 	);
 
-	result_type
+	void
 	operator()(
 		sanguis::messages::server::give_weapon const &
 	);
 
-	result_type
+	void
 	operator()(
 		sanguis::messages::server::health const &
 	);
 
-	result_type
+	void
 	operator()(
 		sanguis::messages::server::level_up const &
 	);
 
-	result_type
+	void
 	operator()(
 		sanguis::messages::server::max_health const &
 	);
 
-	result_type
+	void
 	operator()(
 		sanguis::messages::server::move const &
 	);
 
-	result_type
+	void
 	operator()(
 		sanguis::messages::server::remove const &
 	);
 
-	result_type
+	void
 	operator()(
 		sanguis::messages::server::remove_buff const &
 	);
 
-	result_type
+	void
 	operator()(
 		sanguis::messages::server::remove_weapon const &
 	);
 
-	result_type
+	void
 	operator()(
 		sanguis::messages::server::rotate const &
 	);
 
-	result_type
+	void
 	operator()(
 		sanguis::messages::server::speed const &
 	);
 
-	result_type
+	void
 	operator()(
 		sanguis::messages::server::weapon_status const &
 	);
 
-	result_type
+	void
 	process_default_msg(
 		sanguis::messages::server::base const &
 	);
@@ -363,7 +370,7 @@ private:
 
 	sanguis::client::sound_manager_ref const sound_manager_;
 
-	sanguis::client::load::model::collection const &model_collection_;
+	sanguis::client::load::model::collection_cref const model_collection_;
 
 	sanguis::client::load::hud::context_ref const hud_resources_;
 

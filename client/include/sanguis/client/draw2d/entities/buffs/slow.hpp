@@ -4,7 +4,7 @@
 #include <sanguis/client/draw2d/entities/buffs/base.hpp>
 #include <sanguis/client/draw2d/entities/model/object_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/normal/color.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/optional/object_decl.hpp>
 
 
@@ -23,7 +23,7 @@ class slow
 :
 	public sanguis::client::draw2d::entities::buffs::base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		slow
 	);
 public:
@@ -34,14 +34,14 @@ public:
 private:
 	void
 	apply(
-		sanguis::client::draw2d::entities::model::object &
-	)
+		sanguis::client::draw2d::entities::model::object & // NOLINT(google-runtime-references)
+	) // NOLINT(google-runtime-references)
 	override;
 
 	void
 	remove(
-		sanguis::client::draw2d::entities::model::object &
-	)
+		sanguis::client::draw2d::entities::model::object & // NOLINT(google-runtime-references)
+	) // NOLINT(google-runtime-references)
 	override;
 
 	using

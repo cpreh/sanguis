@@ -2,10 +2,10 @@
 #define SANGUIS_CLIENT_DRAW2D_SCENE_STATE_SCOPED_TEXT_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/scene/state/scoped.hpp>
-#include <sge/renderer/context/ffp_fwd.hpp>
-#include <sge/renderer/state/ffp/sampler/object_fwd.hpp>
+#include <sge/renderer/context/ffp_ref.hpp>
+#include <sge/renderer/state/ffp/sampler/const_object_ref.hpp>
 #include <sge/renderer/state/ffp/sampler/scoped.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -23,13 +23,13 @@ class scoped_text
 :
 	public sanguis::client::draw2d::scene::state::scoped
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		scoped_text
 	);
 public:
 	scoped_text(
-		sge::renderer::context::ffp &,
-		sge::renderer::state::ffp::sampler::object const &
+		sge::renderer::context::ffp_ref,
+		sge::renderer::state::ffp::sampler::const_object_ref
 	);
 
 	~scoped_text()

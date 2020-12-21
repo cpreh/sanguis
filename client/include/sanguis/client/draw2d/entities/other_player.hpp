@@ -14,8 +14,8 @@
 #include <sanguis/client/draw2d/entities/hover/optional_info_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/center_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/rotation_fwd.hpp>
-#include <sanguis/client/load/auras/context_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <sanguis/client/load/auras/context_ref.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -31,20 +31,20 @@ class other_player
 :
 	public sanguis::client::draw2d::entities::player
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		other_player
 	);
 public:
 	other_player(
-		sanguis::client::load::auras::context &,
+		sanguis::client::load::auras::context_ref,
 		sanguis::client::draw2d::entities::load_parameters const &,
 		sanguis::optional_primary_weapon_type,
 		sanguis::weapon_status,
-		sanguis::client::draw2d::speed,
-		sanguis::client::draw2d::sprite::center,
+		sanguis::client::draw2d::speed const &,
+		sanguis::client::draw2d::sprite::center const &,
 		sanguis::client::draw2d::sprite::rotation,
-		sanguis::aura_type_vector const &,
-		sanguis::buff_type_vector const &,
+		sanguis::aura_type_vector &&,
+		sanguis::buff_type_vector &&,
 		sanguis::client::health_pair,
 		sanguis::client::draw2d::entities::name const &
 	);
@@ -52,6 +52,7 @@ public:
 	~other_player()
 	override;
 private:
+	[[nodiscard]]
 	sanguis::client::draw2d::entities::hover::optional_info
 	hover() const
 	override;

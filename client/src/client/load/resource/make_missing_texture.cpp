@@ -12,7 +12,7 @@
 #include <sge/image2d/view/const_object.hpp>
 #include <sge/image2d/view/object.hpp>
 #include <sge/image2d/view/sub.hpp>
-#include <sge/renderer/device/core_fwd.hpp>
+#include <sge/renderer/device/core_ref.hpp>
 #include <sge/texture/const_part_unique_ptr.hpp>
 #include <sge/texture/part.hpp>
 #include <fcppt/literal.hpp>
@@ -23,7 +23,7 @@
 
 sge::texture::const_part_unique_ptr
 sanguis::client::load::resource::make_missing_texture(
-	sge::renderer::device::core &_renderer,
+	sge::renderer::device::core_ref const _renderer,
 	sge::image::size_type const _size,
 	sge::image::color::any::object const &_color1,
 	sge::image::color::any::object const &_color2
@@ -37,9 +37,10 @@ sanguis::client::load::resource::make_missing_texture(
 		)
 	};
 
-	typedef
-	sge::image2d::store::rgba8
-	store_type;
+	using
+	store_type
+	=
+	sge::image2d::store::rgba8;
 
 	store_type const store{
 		dim,

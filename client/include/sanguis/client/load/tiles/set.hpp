@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_LOAD_TILES_SET_HPP_INCLUDED
 #define SANGUIS_CLIENT_LOAD_TILES_SET_HPP_INCLUDED
 
-#include <sanguis/client/load/resource/textures_fwd.hpp>
+#include <sanguis/client/load/resource/textures_cref.hpp>
 #include <sanguis/client/load/tiles/set_fwd.hpp>
 #include <sanguis/client/load/tiles/texture_container.hpp>
 #include <sanguis/tiles/area_container_ref.hpp>
@@ -31,23 +31,24 @@ class set
 	);
 public:
 	set(
-		sanguis::client::load::resource::textures const &,
+		sanguis::client::load::resource::textures_cref,
 		std::filesystem::path const &
 	);
 
 	set(
 		set &&
-	);
+	)
+	noexcept;
 
-	// TODO: Why does this not work?
-/*
 	set &
 	operator=(
 		set &&
-	);*/
+	)
+	noexcept;
 
 	~set();
 
+	[[nodiscard]]
 	sanguis::client::load::tiles::texture_container const &
 	areas(
 		sanguis::tiles::area_container_ref

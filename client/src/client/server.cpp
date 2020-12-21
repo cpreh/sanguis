@@ -17,7 +17,6 @@
 #include <fcppt/config/external_begin.hpp>
 #include <cstdlib>
 #include <exception>
-#include <functional>
 #include <mutex>
 #include <fcppt/config/external_end.hpp>
 
@@ -43,16 +42,17 @@ sanguis::client::server::server(
 		true
 	),
 	impl_(
-		// TODO: Add server log options here
+		// TODO(philipp): Add server log options here
 		_log_context,
 		_port
 	),
 	mutex_(),
 	server_thread_(
-		std::bind(
-			&sanguis::client::server::mainloop,
+		[
 			this
-		)
+		]{
+			this->mainloop();
+		}
 	)
 {
 }
@@ -81,8 +81,7 @@ sanguis::client::server::running() const
 }
 
 sanguis::client::server::~server()
-{
-}
+= default;
 
 awl::main::exit_code
 sanguis::client::server::run()

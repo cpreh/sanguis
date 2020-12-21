@@ -8,6 +8,7 @@
 #include <sanguis/client/draw2d/scene/hover/parameters.hpp>
 #include <sanguis/client/draw2d/scene/hover/weapon.hpp>
 #include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/variant/match.hpp>
@@ -35,8 +36,12 @@ sanguis::client::draw2d::scene::hover::create(
 						fcppt::make_unique_ptr<
 							sanguis::client::draw2d::scene::hover::name_and_health
 						>(
-							_parameters.renderer(),
-							_parameters.font(),
+							fcppt::make_ref(
+								_parameters.renderer()
+							),
+							fcppt::make_ref(
+								_parameters.font()
+							),
 							_parameters.center(),
 							_parameters.radius(),
 							_name_and_health
@@ -59,11 +64,19 @@ sanguis::client::draw2d::scene::hover::create(
 							fcppt::make_cref(
 								_parameters.gui_style()
 							),
-							_parameters.gui_renderer(),
-							_parameters.renderer(),
-							_parameters.font(),
+							fcppt::make_ref(
+								_parameters.gui_renderer()
+							),
+							fcppt::make_ref(
+								_parameters.renderer()
+							),
+							fcppt::make_ref(
+								_parameters.font()
+							),
 							_parameters.center(),
-							_parameters.load_context(),
+							fcppt::make_ref(
+								_parameters.load_context()
+							),
 							_parameters.player_weapons(),
 							_weapon
 						)

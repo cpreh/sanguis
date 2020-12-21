@@ -1,25 +1,32 @@
 #include <sanguis/client/load/model/global_parameters.hpp>
+#include <sanguis/client/load/resource/sounds_cref.hpp>
 #include <sanguis/client/load/resource/sounds_fwd.hpp>
+#include <sanguis/client/load/resource/textures_cref.hpp>
 #include <sanguis/client/load/resource/textures_fwd.hpp>
 #include <sanguis/model/cell_size.hpp>
 #include <sanguis/model/optional_animation_delay.hpp>
 #include <sanguis/model/optional_image_name.hpp>
+#include <fcppt/copy.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <filesystem>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::load::model::global_parameters::global_parameters(
-	std::filesystem::path const &_path,
-	sanguis::client::load::resource::textures const &_textures,
-	sanguis::client::load::resource::sounds const &_sounds,
-	sanguis::model::cell_size const &_cell_size,
-	sanguis::model::optional_animation_delay const &_delay,
-	sanguis::model::optional_image_name const &_image
+	std::filesystem::path &&_path,
+	sanguis::client::load::resource::textures_cref const _textures,
+	sanguis::client::load::resource::sounds_cref const _sounds,
+	sanguis::model::cell_size _cell_size,
+	sanguis::model::optional_animation_delay const _delay,
+	sanguis::model::optional_image_name &&_image
 )
 :
 	path_(
-		_path
+		std::move(
+			_path
+		)
 	),
 	textures_(
 		_textures
@@ -28,13 +35,17 @@ sanguis::client::load::model::global_parameters::global_parameters(
 		_sounds
 	),
 	cell_size_(
-		_cell_size
+		std::move(
+			_cell_size
+		)
 	),
 	delay_(
 		_delay
 	),
 	image_(
-		_image
+		std::move(
+			_image
+		)
 	)
 {
 }
@@ -83,19 +94,27 @@ sanguis::client::load::model::global_parameters::image() const
 
 sanguis::client::load::model::global_parameters
 sanguis::client::load::model::global_parameters::new_image(
-	sanguis::model::optional_image_name const &_image
+	sanguis::model::optional_image_name &&_image
 ) const
 {
 	return
 		_image.has_value()
 		?
 			sanguis::client::load::model::global_parameters(
-				this->path(),
-				this->textures(),
-				this->sounds(),
+				fcppt::copy(
+					this->path()
+				),
+				fcppt::make_cref(
+					this->textures()
+				),
+				fcppt::make_cref(
+					this->sounds()
+				),
 				this->cell_size(),
 				this->delay(),
-				_image
+				std::move(
+					_image
+				)
 		)
 		:
 			*this

@@ -23,7 +23,7 @@
 
 sanguis::client::draw2d::entities::weapon_pickup::weapon_pickup(
 	sanguis::client::draw2d::entities::load_parameters const &_load_parameters,
-	sanguis::client::draw2d::sprite::center const _center,
+	sanguis::client::draw2d::sprite::center const &_center,
 	sanguis::client::draw2d::sprite::rotation const _rotation,
 	sanguis::weapon_description const &_weapon_description
 )
@@ -58,8 +58,7 @@ sanguis::client::draw2d::entities::weapon_pickup::weapon_pickup(
 }
 
 sanguis::client::draw2d::entities::weapon_pickup::~weapon_pickup()
-{
-}
+= default;
 
 sanguis::client::draw2d::entities::hover::optional_info
 sanguis::client::draw2d::entities::weapon_pickup::hover() const

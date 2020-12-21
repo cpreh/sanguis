@@ -1,6 +1,7 @@
 #include <sanguis/duration.hpp>
 #include <sanguis/exception.hpp>
 #include <sanguis/client/config/settings/object.hpp>
+#include <sanguis/client/config/settings/object_ref.hpp>
 #include <sanguis/client/gui/default_text_color.hpp>
 #include <sanguis/client/gui/to_duration.hpp>
 #include <sanguis/client/gui/menu/object.hpp>
@@ -8,7 +9,7 @@
 #include <alda/net/port.hpp>
 #include <sge/font/from_fcppt_string.hpp>
 #include <sge/font/lit.hpp>
-#include <sge/font/object_fwd.hpp>
+#include <sge/font/object_ref.hpp>
 #include <sge/font/string.hpp>
 #include <sge/font/to_fcppt_string.hpp>
 #include <sge/font/to_std_wstring.hpp>
@@ -34,9 +35,10 @@
 #include <sge/renderer/context/ffp.hpp>
 #include <sge/renderer/device/core.hpp>
 #include <sge/renderer/device/ffp.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
-#include <sge/viewport/manager_fwd.hpp>
+#include <sge/viewport/manager_ref.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/extract_from_string.hpp>
 #include <fcppt/from_std_string.hpp>
@@ -56,8 +58,9 @@
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <functional>
+#include <cstdint>
 #include <string>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -68,42 +71,48 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wglobal-constructors)
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wexit-time-destructors)
 
-sge::parse::ini::section_name const
-config_section(
+// NOLINTNEXTLINE(fuchsia-statically-constructed-objects,cert-err58-cpp)
+sge::parse::ini::section_name const config_section(
 	std::string{
 		"gui_menu"
 	}
 );
 
-sge::parse::ini::entry_name const
-	config_hostname_key(
-		std::string{
-			"hostname"
-		}
-	),
-	config_port_key(
-		std::string{
-			"port"
-		}
-	),
-	config_quickstart_port_key(
-		std::string{
-			"quickstartport"
-		}
-	),
-	config_player_name_key(
-		std::string{
-			"playername"
-		}
-	);
+// NOLINTNEXTLINE(fuchsia-statically-constructed-objects,cert-err58-cpp)
+sge::parse::ini::entry_name const config_hostname_key(
+	std::string{
+		"hostname"
+	}
+);
 
-sge::font::string const
-connect_text(
+// NOLINTNEXTLINE(fuchsia-statically-constructed-objects,cert-err58-cpp)
+sge::parse::ini::entry_name const config_port_key(
+	std::string{
+		"port"
+	}
+);
+
+// NOLINTNEXTLINE(fuchsia-statically-constructed-objects,cert-err58-cpp)
+sge::parse::ini::entry_name const config_quickstart_port_key(
+	std::string{
+		"quickstartport"
+	}
+);
+
+// NOLINTNEXTLINE(fuchsia-statically-constructed-objects,cert-err58-cpp)
+sge::parse::ini::entry_name const config_player_name_key(
+	std::string{
+		"playername"
+	}
+);
+
+// NOLINTNEXTLINE(fuchsia-statically-constructed-objects,cert-err58-cpp)
+sge::font::string const connect_text(
 	SGE_FONT_LIT("Connect")
 );
 
-sge::font::string const
-cancel_text(
+// NOLINTNEXTLINE(fuchsia-statically-constructed-objects,cert-err58-cpp)
+sge::font::string const cancel_text(
 	SGE_FONT_LIT("Cancel")
 );
 
@@ -115,11 +124,11 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::gui::menu::object::object(
-	sge::renderer::device::ffp &_renderer,
-	sge::viewport::manager &_viewport_manager,
-	sge::font::object &_font,
-	sanguis::client::config::settings::object &_settings,
-	sanguis::client::gui::menu::callbacks::object const &_callbacks,
+	sge::renderer::device::ffp_ref const _renderer,
+	sge::viewport::manager_ref const _viewport_manager,
+	sge::font::object_ref const _font,
+	sanguis::client::config::settings::object_ref const _settings,
+	sanguis::client::gui::menu::callbacks::object &&_callbacks,
 	sge::gui::style::const_reference const _gui_style
 )
 :
@@ -131,16 +140,14 @@ sanguis::client::gui::menu::object::object(
 	),
 	gui_context_(),
 	callbacks_(
-		_callbacks
+		std::move(
+			_callbacks
+		)
 	),
 	quickstart_button_(
 		_gui_style,
-		fcppt::make_ref(
-			_renderer
-		),
-		fcppt::make_ref(
-			_font
-		),
+		_renderer,
+		_font,
 		SGE_FONT_LIT("Quickstart"),
 		sge::gui::optional_needed_width()
 	),
@@ -149,37 +156,25 @@ sanguis::client::gui::menu::object::object(
 			gui_context_
 		),
 		_gui_style,
-		fcppt::make_ref(
-			_font
-		),
-		fcppt::make_ref(
-			_renderer
-		)
+		_font,
+		_renderer
 	),
 	player_name_label_(
 		_gui_style,
-		fcppt::make_ref(
-			_renderer
-		),
-		fcppt::make_ref(
-			_font
-		),
+		_renderer,
+		_font,
 		SGE_FONT_LIT("Name: "),
 		sanguis::client::gui::default_text_color()
 	),
 	player_name_edit_(
 		_gui_style,
-		fcppt::make_ref(
-			_renderer
-		),
-		fcppt::make_ref(
-			_font
-		),
+		_renderer,
+		_font,
 		sge::font::from_fcppt_string(
 			fcppt::from_std_string(
 				sge::parse::ini::get_or_create(
 					fcppt::make_ref(
-						_settings.sections()
+						_settings->sections()
 					),
 					config_section,
 					config_player_name_key,
@@ -212,28 +207,20 @@ sanguis::client::gui::menu::object::object(
 	),
 	hostname_label_(
 		_gui_style,
-		fcppt::make_ref(
-			_renderer
-		),
-		fcppt::make_ref(
-			_font
-		),
+		_renderer,
+		_font,
 		SGE_FONT_LIT("Hostname: "),
 		sanguis::client::gui::default_text_color()
 	),
 	hostname_edit_(
 		_gui_style,
-		fcppt::make_ref(
-			_renderer
-		),
-		fcppt::make_ref(
-			_font
-		),
+		_renderer,
+		_font,
 		sge::font::from_fcppt_string(
 			fcppt::from_std_string(
 				sge::parse::ini::get_or_create(
 					fcppt::make_ref(
-						_settings.sections()
+						_settings->sections()
 					),
 					config_section,
 					config_hostname_key,
@@ -266,28 +253,20 @@ sanguis::client::gui::menu::object::object(
 	),
 	port_label_(
 		_gui_style,
-		fcppt::make_ref(
-			_renderer
-		),
-		fcppt::make_ref(
-			_font
-		),
+		_renderer,
+		_font,
 		SGE_FONT_LIT("Port: "),
 		sanguis::client::gui::default_text_color()
 	),
 	port_edit_(
 		_gui_style,
-		fcppt::make_ref(
-			_renderer
-		),
-		fcppt::make_ref(
-			_font
-		),
+		_renderer,
+		_font,
 		sge::font::from_fcppt_string(
 			fcppt::from_std_string(
 				sge::parse::ini::get_or_create(
 					fcppt::make_ref(
-						_settings.sections()
+						_settings->sections()
 					),
 					config_section,
 					config_port_key,
@@ -320,28 +299,20 @@ sanguis::client::gui::menu::object::object(
 	),
 	connect_text_(
 		_gui_style,
-		fcppt::make_ref(
-			_renderer
-		),
-		fcppt::make_ref(
-			_font
-		),
+		_renderer,
+		_font,
 		SGE_FONT_LIT(""),
 		sanguis::client::gui::default_text_color(),
 		sge::gui::optional_needed_width()
 	),
 	connect_button_(
 		_gui_style,
-		fcppt::make_ref(
-			_renderer
-		),
-		fcppt::make_ref(
-			_font
-		),
+		_renderer,
+		_font,
 		connect_text,
 		sge::gui::optional_needed_width(
 			sge::gui::needed_width_from_strings(
-				_font,
+				_font.get(),
 				sge::gui::string_container{
 					connect_text,
 					cancel_text
@@ -389,12 +360,8 @@ sanguis::client::gui::menu::object::object(
 	),
 	quit_button_(
 		_gui_style,
-		fcppt::make_ref(
-			_renderer
-		),
-		fcppt::make_ref(
-			_font
-		),
+		_renderer,
+		_font,
 		SGE_FONT_LIT("Quit"),
 		sge::gui::optional_needed_width()
 	),
@@ -440,13 +407,9 @@ sanguis::client::gui::menu::object::object(
 		fcppt::reference_to_base<
 			sge::renderer::device::core
 		>(
-			fcppt::make_ref(
-				_renderer
-			)
+			_renderer
 		),
-		fcppt::make_ref(
-			_viewport_manager
-		),
+		_viewport_manager,
 		sge::gui::widget::reference{
 			main_container_
 		}
@@ -470,20 +433,22 @@ sanguis::client::gui::menu::object::object(
 	quickstart_connection_(
 		quickstart_button_.click(
 			sge::gui::click_callback{
-				std::bind(
-					&sanguis::client::gui::menu::object::handle_quickstart,
+				[
 					this
-				)
+				]{
+					this->handle_quickstart();
+				}
 			}
 		)
 	),
 	connect_connection_(
 		connect_button_.click(
 			sge::gui::click_callback{
-				std::bind(
-					&sanguis::client::gui::menu::object::handle_connect,
+				[
 					this
-				)
+				]{
+					this->handle_connect();
+				}
 			}
 		)
 	),
@@ -497,20 +462,26 @@ sanguis::client::gui::menu::object::object(
 	hostname_change_connection_(
 		hostname_edit_.text_change(
 			sge::gui::text_callback{
-				std::bind(
-					&sanguis::client::gui::menu::object::handle_text_changed,
+				[
 					this
-				)
+				](
+					sge::font::string const &
+				){
+					this->handle_text_changed();
+				}
 			}
 		)
 	),
 	port_change_connection_(
 		port_edit_.text_change(
 			sge::gui::text_callback{
-				std::bind(
-					&sanguis::client::gui::menu::object::handle_text_changed,
+				[
 					this
-				)
+				](
+					sge::font::string const &
+				){
+					this->handle_text_changed();
+				}
 			}
 		)
 	)
@@ -555,7 +526,7 @@ sanguis::client::gui::menu::object::~object()
 				{
 					sge::parse::ini::set_or_create(
 						fcppt::make_ref(
-							this->settings_.sections()
+							this->settings_->sections()
 						),
 						config_section,
 						_entry,
@@ -611,7 +582,7 @@ sanguis::client::gui::menu::object::draw(
 	);
 
 	gui_master_.draw_with_states(
-		renderer_,
+		renderer_.get(),
 		_render_context,
 		gui_background_
 	);
@@ -670,7 +641,9 @@ sanguis::client::gui::menu::object::handle_quickstart()
 	if(
 		connect_running_
 	)
+	{
 		return;
+	}
 
 	connect_running_ =
 		true;
@@ -681,10 +654,10 @@ sanguis::client::gui::menu::object::handle_quickstart()
 				fcppt::extract_from_string<
 					alda::net::port::value_type
 				>(
-					// TODO: Use server port here if it was specified
+					// TODO(philipp): Use server port here if it was specified
 					sge::parse::ini::get_or_create(
 						fcppt::make_ref(
-							settings_.sections()
+							settings_->sections()
 						),
 						config_section,
 						config_quickstart_port_key,
@@ -707,9 +680,10 @@ sanguis::client::gui::menu::object::handle_quickstart()
 void
 sanguis::client::gui::menu::object::handle_text_changed()
 {
-	typedef
-	unsigned long
-	port_type;
+	using
+	port_type
+	=
+	std::uint64_t;
 
 	connect_button_.enable(
 		fcppt::optional::maybe(
@@ -732,7 +706,7 @@ sanguis::client::gui::menu::object::handle_text_changed()
 					&&
 					_port > 0
 					&&
-					_port < 65535;
+					_port < 65535; // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			}
 		)
 	);

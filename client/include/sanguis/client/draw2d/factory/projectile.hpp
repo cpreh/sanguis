@@ -22,8 +22,8 @@ sanguis::client::draw2d::entities::unique_ptr
 projectile(
 	sanguis::client::draw2d::entities::load_parameters const &,
 	sanguis::projectile_type,
-	sanguis::client::draw2d::speed,
-	sanguis::client::draw2d::sprite::center,
+	sanguis::client::draw2d::speed const &,
+	sanguis::client::draw2d::sprite::center const &,
 	sanguis::client::draw2d::sprite::rotation
 );
 

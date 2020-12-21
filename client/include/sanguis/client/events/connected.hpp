@@ -25,7 +25,8 @@ public:
 
 	connected(
 		connected &&
-	);
+	)
+	noexcept;
 
 	connected(
 		connected const &
@@ -34,7 +35,8 @@ public:
 	connected &
 	operator=(
 		connected &&
-	);
+	)
+	noexcept;
 
 	connected &
 	operator=(

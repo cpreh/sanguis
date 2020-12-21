@@ -34,6 +34,7 @@
 #include <sge/texture/part.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/optional/from.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -46,8 +47,8 @@ sanguis::client::draw2d::entities::particle::particle(
 	sanguis::client::draw2d::entities::load_parameters const &_load_parameters,
 	sanguis::client::draw2d::entities::particle_name const &_name,
 	sanguis::client::draw2d::z_ordering const _z_ordering,
-	sanguis::client::draw2d::sprite::center const _center,
-	sanguis::client::draw2d::sprite::optional_dim const _size
+	sanguis::client::draw2d::sprite::center const &_center,
+	sanguis::client::draw2d::sprite::optional_dim const &_size
 )
 :
 	sanguis::client::draw2d::entities::particle{
@@ -55,44 +56,47 @@ sanguis::client::draw2d::entities::particle::particle(
 		_z_ordering,
 		_center,
 		_size,
-		_load_parameters.collection()[
-			sanguis::load::model::path{
-				std::filesystem::path{
-					FCPPT_TEXT("particles")
+		fcppt::make_cref(
+			_load_parameters.collection()[
+				sanguis::load::model::path{
+					std::filesystem::path{
+						FCPPT_TEXT("particles")
+					}
+					/
+					_name.get()
 				}
-				/
-				_name.get()
-			}
-		].random_part(
-			_load_parameters.random_generator()
+			].random_part(
+				_load_parameters.random_generator()
+			)
+			[
+				sanguis::optional_primary_weapon_type()
+			][
+				sanguis::client::load::animation_type::none
+			]
+			.series()
 		)
-		[
-			sanguis::optional_primary_weapon_type()
-		][
-			sanguis::client::load::animation_type::none
-		]
-		.series()
 	}
 {
 }
 
 sanguis::client::draw2d::entities::particle::~particle()
-{
-}
+= default;
 
 sanguis::client::draw2d::entities::particle::particle(
 	sanguis::client::draw2d::entities::load_parameters const &_load_parameters,
 	sanguis::client::draw2d::z_ordering const _z_ordering,
-	sanguis::client::draw2d::sprite::center const _center,
-	sanguis::client::draw2d::sprite::optional_dim const _opt_size,
-	sanguis::client::load::resource::animation::series const &_animation_series
+	sanguis::client::draw2d::sprite::center const &_center,
+	sanguis::client::draw2d::sprite::optional_dim const &_opt_size,
+	sanguis::client::load::resource::animation::series_cref const _animation_series
 )
 :
 	sanguis::client::draw2d::entities::own(),
 	animation_(
 		_animation_series,
 		sanguis::client::draw2d::sprite::animation::loop_method::stop_at_end,
-		_load_parameters.diff_clock()
+		fcppt::make_cref(
+			_load_parameters.diff_clock()
+		)
 	),
 	sprite_(
 		sge::sprite::roles::connection{} =
@@ -112,7 +116,7 @@ sanguis::client::draw2d::entities::particle::particle(
 					}
 				),
 				[](
-					sanguis::client::draw2d::sprite::dim const _size
+					sanguis::client::draw2d::sprite::dim const &_size
 				)
 				{
 					return

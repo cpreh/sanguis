@@ -5,7 +5,7 @@
 #include <sanguis/client/events/action_fwd.hpp>
 #include <sanguis/client/states/has_player.hpp>
 #include <sanguis/client/states/ingame_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -34,7 +34,7 @@ class ingame
 		sanguis::client::states::has_player
 	>
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		ingame
 	);
 public:
@@ -60,6 +60,7 @@ public:
 	=
 	boost::statechart::result;
 
+	[[nodiscard]]
 	boost::statechart::result
 	react(
 		sanguis::client::events::action const &

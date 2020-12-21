@@ -20,7 +20,7 @@
 #include <sanguis/client/draw2d/scene/world/state.hpp>
 #include <sanguis/client/draw2d/scene/world/tile_size.hpp>
 #include <sanguis/client/draw2d/sprite/unit.hpp>
-#include <sanguis/client/load/tiles/context_fwd.hpp>
+#include <sanguis/client/load/tiles/context_ref.hpp>
 #include <sanguis/collision/center.hpp>
 #include <sanguis/collision/radius.hpp>
 #include <sanguis/collision/result.hpp>
@@ -34,7 +34,7 @@
 #include <sanguis/creator/signed_pos.hpp>
 #include <sanguis/creator/top_result.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
-#include <sge/renderer/device/core_fwd.hpp>
+#include <sge/renderer/device/core_ref.hpp>
 #include <sge/renderer/vertex/scoped_declaration.hpp>
 #include <sge/sprite/buffers/option.hpp>
 #include <sge/sprite/process/geometry_options.hpp>
@@ -81,8 +81,8 @@
 sanguis::client::draw2d::scene::world::state::state(
 	fcppt::log::context_reference const _log_context,
 	sanguis::random_generator &_random_generator,
-	sge::renderer::device::core &_renderer,
-	sanguis::client::load::tiles::context &_tiles,
+	sge::renderer::device::core_ref const _renderer,
+	sanguis::client::load::tiles::context_ref const _tiles,
 	sanguis::client::draw::debug const _debug,
 	sanguis::client::world_parameters const &_parameters,
 	sanguis::client::draw2d::scene::world::parameters const &_world_parameters
@@ -104,8 +104,7 @@ sanguis::client::draw2d::scene::world::state::state(
 }
 
 sanguis::client::draw2d::scene::world::state::~state()
-{
-}
+= default;
 
 void
 sanguis::client::draw2d::scene::world::state::update(
@@ -120,13 +119,15 @@ sanguis::client::draw2d::scene::world::state::update(
 void
 sanguis::client::draw2d::scene::world::state::draw(
 	sge::renderer::context::core &_render_context,
-	sanguis::client::draw2d::translation const _translation
+	sanguis::client::draw2d::translation const &_translation
 )
 {
 	if(
 		batches_.empty()
 	)
+	{
 		return;
+	}
 
 	sanguis::creator::difference_type const batch_size_trans(
 		fcppt::cast::to_signed(
@@ -136,15 +137,14 @@ sanguis::client::draw2d::scene::world::state::draw(
 		)
 	);
 
-	sanguis::creator::signed_pos const
-		int_translation(
-			fcppt::math::vector::structure_cast<
-				sanguis::creator::signed_pos,
-				fcppt::cast::size_fun
-			>(
-				-_translation.get()
-			)
-		);
+	auto const int_translation(
+		fcppt::math::vector::structure_cast<
+			sanguis::creator::signed_pos,
+			fcppt::cast::size_fun
+		>(
+			-_translation.get()
+		)
+	);
 
 	fcppt::container::grid::min_from_pos<
 		sanguis::client::draw2d::scene::world::batch_grid::pos
@@ -187,7 +187,7 @@ sanguis::client::draw2d::scene::world::state::draw(
 						fcppt::math::vector::to_signed(
 							fcppt::math::dim::to_vector(
 								sanguis::client::draw2d::scene::background_dim(
-									renderer_
+									renderer_.get()
 								)
 							)
 						)
@@ -217,11 +217,13 @@ sanguis::client::draw2d::scene::world::state::draw(
 			upper
 		)
 	)
+	{
 		entry.value().draw(
 			_render_context,
 			sprite_buffers_.vertex_declaration(),
 			sprite_state_
 		);
+	}
 }
 
 void
@@ -293,7 +295,7 @@ sanguis::client::draw2d::scene::world::state::test_collision(
 
 sanguis::creator::optional_background_tile
 sanguis::client::draw2d::scene::world::state::background_tile(
-	sanguis::creator::pos const _pos
+	sanguis::creator::pos const &_pos
 ) const
 {
 	return
@@ -308,8 +310,8 @@ sanguis::client::draw2d::scene::world::state::background_tile(
 sanguis::client::draw2d::scene::world::state::state(
 	fcppt::log::context_reference const _log_context,
 	sanguis::random_generator &_random_generator,
-	sge::renderer::device::core &_renderer,
-	sanguis::client::load::tiles::context &_tiles,
+	sge::renderer::device::core_ref const _renderer,
+	sanguis::client::load::tiles::context_ref const _tiles,
 	sanguis::client::draw::debug const _debug,
 	sanguis::creator::top_result const &_result,
 	sanguis::creator::name const &_name,
@@ -319,7 +321,7 @@ sanguis::client::draw2d::scene::world::state::state(
 	log_{
 		_log_context,
 		sanguis::client::draw2d::scene::world::log_location(),
-		// TODO: Add world name?
+		// TODO(philipp): Add world name?
 		fcppt::log::parameters_no_function(
 			fcppt::log::name{
 				FCPPT_TEXT("state")
@@ -330,15 +332,11 @@ sanguis::client::draw2d::scene::world::state::state(
 		_renderer
 	),
 	sprite_buffers_(
-		fcppt::make_ref(
-			_renderer
-		),
+		_renderer,
 		sge::sprite::buffers::option::static_
 	),
 	sprite_state_(
-		fcppt::make_ref(
-			renderer_
-		),
+		renderer_,
 		sanguis::client::draw2d::scene::world::sprite::state::parameters_type()
 	),
 	grid_(
@@ -355,7 +353,9 @@ sanguis::client::draw2d::scene::world::state::state(
 			grid_,
 			_result.background_grid(),
 			_tiles,
-			sprite_buffers_
+			fcppt::make_ref(
+				sprite_buffers_
+			)
 		)
 	),
 	effects_{

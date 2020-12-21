@@ -17,6 +17,7 @@
 #include <fcppt/variant/to_optional.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/result.hpp>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -25,14 +26,15 @@ sanguis::client::states::ingame::ingame(
 )
 :
 	my_base(
-		_ctx
+		std::move(
+			_ctx
+		)
 	)
 {
 }
 
 sanguis::client::states::ingame::~ingame()
-{
-}
+= default;
 
 boost::statechart::result
 sanguis::client::states::ingame::react(

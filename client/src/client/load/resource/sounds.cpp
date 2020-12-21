@@ -6,10 +6,10 @@
 #include <sge/audio/file.hpp>
 #include <sge/audio/file_unique_ptr.hpp>
 #include <sge/audio/load.hpp>
-#include <sge/audio/loader_fwd.hpp>
+#include <sge/audio/loader_ref.hpp>
 #include <sge/audio/optional_file_unique_ptr.hpp>
 #include <sge/audio/player.hpp>
-#include <fcppt/make_ref.hpp>
+#include <sge/audio/player_ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/container/get_or_insert.hpp>
 #include <fcppt/optional/deref.hpp>
@@ -21,8 +21,8 @@
 
 
 sanguis::client::load::resource::sounds::sounds(
-	sge::audio::loader &_multi_loader,
-	sge::audio::player &_player
+	sge::audio::loader_ref const _multi_loader,
+	sge::audio::player_ref const _player
 )
 :
 	multi_loader_(
@@ -36,8 +36,7 @@ sanguis::client::load::resource::sounds::sounds(
 }
 
 sanguis::client::load::resource::sounds::~sounds()
-{
-}
+= default;
 
 sanguis::client::load::resource::optional_sound
 sanguis::client::load::resource::sounds::load(
@@ -73,9 +72,7 @@ sanguis::client::load::resource::sounds::load_path(
 				{
 					sge::audio::optional_file_unique_ptr const opt_file{
 						sge::audio::load(
-							fcppt::make_ref(
-								multi_loader_
-							),
+							multi_loader_,
 							_npath
 						)
 					};
@@ -91,7 +88,7 @@ sanguis::client::load::resource::sounds::load_path(
 							-> sge::audio::buffer_unique_ptr
 							{
 								return
-									player_.create_buffer(
+									player_->create_buffer(
 										*_file
 									);
 							}

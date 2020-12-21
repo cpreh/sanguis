@@ -23,24 +23,28 @@ class part_result
 	);
 public:
 	part_result(
-		sanguis::model::cell_size const &,
+		sanguis::model::cell_size,
 		sanguis::client::load::model::part_map &&
 	);
 
 	part_result(
 		part_result &&
-	);
+	)
+	noexcept;
 
 	part_result &
 	operator=(
 		part_result &&
-	) = delete;
+	)
+	noexcept;
 
 	~part_result();
 
+	[[nodiscard]]
 	sanguis::model::cell_size const &
 	cell_size() const;
 
+	[[nodiscard]]
 	sanguis::client::load::model::part_map const &
 	parts() const;
 private:

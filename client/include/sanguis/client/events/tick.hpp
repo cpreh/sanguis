@@ -29,7 +29,8 @@ public:
 
 	tick(
 		tick &&
-	);
+	)
+	noexcept;
 
 	tick(
 		tick const &
@@ -38,7 +39,8 @@ public:
 	tick &
 	operator=(
 		tick &&
-	);
+	)
+	noexcept;
 
 	tick &
 	operator=(
@@ -48,6 +50,7 @@ public:
 	~tick()
 	override;
 
+	[[nodiscard]]
 	sanguis::duration const &
 	delta() const;
 private:

@@ -16,8 +16,8 @@
 #include <sanguis/client/gui/hud/object_fwd.hpp>
 #include <sanguis/client/gui/hud/weapon_details_fwd.hpp>
 #include <sanguis/client/gui/hud/weapon_widget.hpp>
-#include <sanguis/client/load/hud/context_fwd.hpp>
-#include <sge/font/object_fwd.hpp>
+#include <sanguis/client/load/hud/context_ref.hpp>
+#include <sge/font/object_ref.hpp>
 #include <sge/gui/context.hpp>
 #include <sge/gui/master.hpp>
 #include <sge/gui/background/none.hpp>
@@ -30,11 +30,11 @@
 #include <sge/gui/widget/preferred_size.hpp>
 #include <sge/gui/widget/text.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
 #include <sge/rucksack/rect_fwd.hpp>
 #include <sge/timer/frames_counter.hpp>
-#include <sge/viewport/manager_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <sge/viewport/manager_ref.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/optional/object_decl.hpp>
 
@@ -50,16 +50,16 @@ namespace hud
 
 class object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		object
 	);
 public:
 	object(
-		sanguis::client::load::hud::context &,
+		sanguis::client::load::hud::context_ref,
 		sge::gui::style::const_reference,
-		sge::font::object &,
-		sge::renderer::device::ffp &,
-		sge::viewport::manager &
+		sge::font::object_ref,
+		sge::renderer::device::ffp_ref,
+		sge::viewport::manager_ref
 	);
 
 	~object();
@@ -129,8 +129,8 @@ public:
 
 	void
 	draw(
-		sge::renderer::context::ffp &
-	);
+		sge::renderer::context::ffp & // NOLINT(google-runtime-references)
+	); // NOLINT(google-runtime-references)
 
 	void
 	details(
@@ -151,11 +151,13 @@ private:
 		weapon_widget_unique_ptr
 	>;
 
+	[[nodiscard]]
 	optional_weapon_widget_unique_ptr &
 	weapon_widget(
 		sanguis::is_primary_weapon
 	);
 
+	[[nodiscard]]
 	sanguis::client::gui::hud::weapon_widget &
 	weapon_widget_checked(
 		sanguis::is_primary_weapon
@@ -188,13 +190,13 @@ private:
 
 	sanguis::diff_clock reload_clock_;
 
-	sanguis::client::load::hud::context &resources_;
+	sanguis::client::load::hud::context_ref const resources_;
 
 	sge::gui::style::const_reference const gui_style_;
 
-	sge::font::object &font_;
+	sge::font::object_ref const font_;
 
-	sge::renderer::device::ffp &renderer_;
+	sge::renderer::device::ffp_ref const renderer_;
 
 	sanguis::client::exp exp_;
 

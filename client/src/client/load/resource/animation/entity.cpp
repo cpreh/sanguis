@@ -47,16 +47,19 @@ sanguis::client::load::resource::animation::entity::entity(
 
 sanguis::client::load::resource::animation::entity::entity(
 	entity &&
-) = default;
+)
+noexcept
+= default;
 
 sanguis::client::load::resource::animation::entity &
 sanguis::client::load::resource::animation::entity::operator=(
 	entity &&
-) = default;
+)
+noexcept
+= default;
 
 sanguis::client::load::resource::animation::entity::~entity()
-{
-}
+= default;
 
 sanguis::duration
 sanguis::client::load::resource::animation::entity::delay() const

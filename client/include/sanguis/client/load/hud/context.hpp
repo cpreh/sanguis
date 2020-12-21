@@ -4,9 +4,9 @@
 #include <sanguis/weapon_type.hpp>
 #include <sanguis/client/load/hud/context_fwd.hpp>
 #include <sanguis/client/load/hud/weapon_icon_map.hpp>
-#include <sanguis/client/load/resource/textures_fwd.hpp>
+#include <sanguis/client/load/resource/textures_cref.hpp>
 #include <sge/texture/part_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>
 #include <fcppt/log/object.hpp>
 
@@ -22,17 +22,18 @@ namespace hud
 
 class context
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		context
 	);
 public:
 	context(
 		fcppt::log::context_reference,
-		sanguis::client::load::resource::textures const &
+		sanguis::client::load::resource::textures_cref
 	);
 
 	~context();
 
+	[[nodiscard]]
 	sge::texture::part const &
 	weapon_icon(
 		sanguis::weapon_type

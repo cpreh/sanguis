@@ -34,17 +34,18 @@ sanguis::client::draw2d::entities::model::animation::animation(
 sanguis::client::draw2d::entities::model::animation::animation(
 	animation &&
 )
+noexcept
 = default;
 
 sanguis::client::draw2d::entities::model::animation &
 sanguis::client::draw2d::entities::model::animation::operator=(
 	animation &&
 )
+noexcept
 = default;
 
 sanguis::client::draw2d::entities::model::animation::~animation()
-{
-}
+= default;
 
 sanguis::client::load::animation_type
 sanguis::client::draw2d::entities::model::animation::animation_type() const

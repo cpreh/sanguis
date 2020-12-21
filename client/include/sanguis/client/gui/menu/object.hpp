@@ -2,10 +2,10 @@
 #define SANGUIS_CLIENT_GUI_MENU_OBJECT_HPP_INCLUDED
 
 #include <sanguis/duration.hpp>
-#include <sanguis/client/config/settings/object_fwd.hpp>
+#include <sanguis/client/config/settings/object_ref.hpp>
 #include <sanguis/client/gui/menu/resolution_chooser.hpp>
 #include <sanguis/client/gui/menu/callbacks/object.hpp>
-#include <sge/font/object_fwd.hpp>
+#include <sge/font/object_ref.hpp>
 #include <sge/gui/context.hpp>
 #include <sge/gui/master.hpp>
 #include <sge/gui/background/colored.hpp>
@@ -19,9 +19,9 @@
 #include <sge/gui/widget/text.hpp>
 #include <sge/input/event_base_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
-#include <sge/viewport/manager_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
+#include <sge/viewport/manager_ref.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 
@@ -37,16 +37,16 @@ namespace menu
 
 class object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		object
 	);
 public:
 	object(
-		sge::renderer::device::ffp &,
-		sge::viewport::manager &,
-		sge::font::object &,
-		sanguis::client::config::settings::object &,
-		sanguis::client::gui::menu::callbacks::object const &,
+		sge::renderer::device::ffp_ref,
+		sge::viewport::manager_ref,
+		sge::font::object_ref,
+		sanguis::client::config::settings::object_ref,
+		sanguis::client::gui::menu::callbacks::object &&,
 		sge::gui::style::const_reference
 	);
 
@@ -59,8 +59,8 @@ public:
 
 	void
 	draw(
-		sge::renderer::context::ffp &
-	);
+		sge::renderer::context::ffp & // NOLINT(google-runtime-references)
+	); // NOLINT(google-runtime-references)
 
 	void
 	connection_error(
@@ -72,6 +72,7 @@ public:
 		sge::input::event_base const &
 	);
 
+	[[nodiscard]]
 	fcppt::string
 	player_name() const;
 private:
@@ -84,9 +85,9 @@ private:
 	void
 	handle_connect();
 
-	sanguis::client::config::settings::object &settings_;
+	sanguis::client::config::settings::object_ref const settings_;
 
-	sge::renderer::device::ffp &renderer_;
+	sge::renderer::device::ffp_ref const renderer_;
 
 	sge::gui::context gui_context_;
 
@@ -134,12 +135,11 @@ private:
 
 	bool connect_running_;
 
-	fcppt::signal::auto_connection const
-		quickstart_connection_,
-		connect_connection_,
-		quit_connection_,
-		hostname_change_connection_,
-		port_change_connection_;
+	fcppt::signal::auto_connection const quickstart_connection_;
+	fcppt::signal::auto_connection const connect_connection_;
+	fcppt::signal::auto_connection const quit_connection_;
+	fcppt::signal::auto_connection const hostname_change_connection_;
+	fcppt::signal::auto_connection const port_change_connection_;
 };
 
 }

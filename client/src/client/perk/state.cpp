@@ -14,6 +14,8 @@
 #include <sanguis/client/perk/state.hpp>
 #include <sanguis/client/perk/tree.hpp>
 #include <sanguis/client/perk/tree_unique_ptr.hpp>
+#include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/optional/object_impl.hpp>
@@ -25,21 +27,23 @@
 
 
 sanguis::client::perk::state::state(
-	sanguis::client::perk::send_callback const &_send_callback
+	sanguis::client::perk::send_callback &&_send_callback
 )
 :
 	send_callback_(
-		_send_callback
+		std::move(
+			_send_callback
+		)
 	),
 	perks_(),
 	current_level_(
 		sanguis::client::level(
-			0u
+			0U
 		)
 	),
 	remaining_levels_(
 		sanguis::client::level(
-			0u
+			0U
 		)
 	),
 	level_signal_(),
@@ -48,8 +52,7 @@ sanguis::client::perk::state::state(
 }
 
 sanguis::client::perk::state::~state()
-{
-}
+= default;
 
 void
 sanguis::client::perk::state::perks(
@@ -107,14 +110,16 @@ sanguis::client::perk::state::choose_perk(
 		!=
 		sanguis::client::perk::choosable_state::ok
 	)
+	{
 		return
 			false;
+	}
 
 	FCPPT_ASSERT_PRE(
 		remaining_levels_.get()
 		>
 		sanguis::client::level(
-			0u
+			0U
 		)
 	);
 
@@ -123,7 +128,9 @@ sanguis::client::perk::state::choose_perk(
 	FCPPT_ASSERT_OPTIONAL_ERROR(
 		sanguis::client::perk::find_info(
 			_type,
-			this->perks_impl()
+			fcppt::make_ref(
+				this->perks_impl()
+			)
 		).value()
 	).increment_level();
 
@@ -169,7 +176,9 @@ sanguis::client::perk::state::perk_level(
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			sanguis::client::perk::find_info_const(
 				_perk_type,
-				this->perks()
+				fcppt::make_cref(
+					this->perks()
+				)
 			).value()
 		).level();
 }

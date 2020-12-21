@@ -1,4 +1,4 @@
-#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/diff_clock_cref.hpp>
 #include <sanguis/client/draw2d/z_ordering.hpp>
 #include <sanguis/client/draw2d/entities/own.hpp>
 #include <sanguis/client/draw2d/entities/own_unique_ptr.hpp>
@@ -6,7 +6,7 @@
 #include <sanguis/client/draw2d/factory/text.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/normal/color.hpp>
-#include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/normal/system_ref.hpp>
 #include <sge/font/object_fwd.hpp>
 #include <sge/font/string.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -15,11 +15,11 @@
 
 sanguis::client::draw2d::entities::own_unique_ptr
 sanguis::client::draw2d::factory::text(
-	sanguis::diff_clock const &_diff_clock,
-	sanguis::client::draw2d::sprite::normal::system &_normal_system,
+	sanguis::diff_clock_cref const _diff_clock,
+	sanguis::client::draw2d::sprite::normal::system_ref const _normal_system,
 	sge::font::object &_font,
 	sge::font::string const &_text,
-	sanguis::client::draw2d::sprite::center const _center,
+	sanguis::client::draw2d::sprite::center const &_center,
 	sanguis::client::draw2d::sprite::normal::color const _color
 )
 {

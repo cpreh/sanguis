@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_IFACES_WITH_CENTER_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/sprite/center.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -18,7 +18,7 @@ namespace ifaces
 
 class with_center
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		with_center
 	);
 protected:

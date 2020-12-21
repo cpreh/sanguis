@@ -6,6 +6,7 @@
 #include <sanguis/client/perk/compare.hpp>
 #include <sanguis/client/perk/info.hpp>
 #include <sanguis/client/perk/to_string.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/find_if_opt.hpp>
 #include <fcppt/container/tree/pre_order.hpp>
@@ -25,7 +26,9 @@ template<
 Tree &
 find_info_any(
 	sanguis::perk_type const _type,
-	Tree &_tree
+	fcppt::reference<
+		Tree
+	> const _tree
 )
 {
 	return
@@ -35,7 +38,7 @@ find_info_any(
 				fcppt::container::tree::pre_order<
 					Tree
 				>(
-					_tree
+					_tree.get()
 				),
 				sanguis::client::perk::compare(
 					_type

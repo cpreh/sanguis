@@ -51,6 +51,7 @@
 #include <awl/main/exit_code.hpp>
 #include <awl/main/exit_success.hpp>
 #include <fcppt/const.hpp>
+#include <fcppt/copy.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/reference_impl.hpp>
@@ -77,7 +78,6 @@
 #include <metal.hpp>
 #include <boost/system/error_code.hpp>
 #include <boost/system/system_error.hpp>
-#include <functional>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -144,33 +144,45 @@ sanguis::client::machine::machine(
 	s_conn_(
 		net_.register_connect(
 			alda::net::client::connect_callback{
-				std::bind(
-					&sanguis::client::machine::connect_callback,
+				[
 					this
-				)
+				]{
+					this->connect_callback();
+				}
 			}
 		)
 	),
 	s_disconn_(
 		net_.register_error(
 			alda::net::client::error_callback{
-				std::bind(
-					&sanguis::client::machine::error_callback,
-					this,
-					std::placeholders::_1,
-					std::placeholders::_2
+				[
+					this
+				](
+					fcppt::string const &_message,
+					boost::system::error_code const &_error
 				)
+				{
+					this->error_callback(
+						_message,
+						_error
+					);
+				}
 			}
 		)
 	),
 	s_data_(
 		net_.register_data(
 			alda::net::client::data_callback{
-				std::bind(
-					&sanguis::client::machine::data_callback,
-					this,
-					std::placeholders::_1
+				[
+					this
+				](
+					alda::net::buffer::circular_receive::streambuf &_data
 				)
+				{
+					this->data_callback(
+						_data
+					);
+				}
 			}
 		)
 	),
@@ -296,7 +308,7 @@ sanguis::client::machine::process(
 		fcppt::either::match(
 			window_system_->poll(),
 			[](
-				// TODO: Return this from client::object
+				// TODO(philipp): Return this from client::object
 				awl::main::exit_code const _result
 			)
 			{
@@ -314,9 +326,11 @@ sanguis::client::machine::process(
 					:
 					_events
 				)
+				{
 					this->process_sge_event(
 						*event
 					);
+				}
 
 				return
 					true;
@@ -424,7 +438,9 @@ sanguis::client::machine::draw()
 
 	this->process_event(
 		sanguis::client::events::render(
-			block.get()
+			fcppt::make_ref(
+				block.get()
+			)
 		)
 	);
 }
@@ -472,7 +488,7 @@ sanguis::client::machine::process_sge_event(
 				{
 					this->process_event(
 						sanguis::client::events::input(
-							_input_event.get()
+							_input_event
 						)
 					);
 				}
@@ -497,7 +513,9 @@ sanguis::client::machine::error_callback(
 {
 	this->process_event(
 		sanguis::client::events::net_error(
-			_message,
+			fcppt::copy(
+				_message
+			),
 			_error
 		)
 	);
@@ -535,5 +553,6 @@ sanguis::client::machine::data_callback(
 			}
 		)
 	)
-		;
+	{
+	}
 }

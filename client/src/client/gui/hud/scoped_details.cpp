@@ -3,21 +3,21 @@
 
 
 sanguis::client::gui::hud::scoped_details::scoped_details(
-	sanguis::client::gui::hud::object &_hud
+	object_ref const _hud
 )
 :
 	hud_(
 		_hud
 	)
 {
-	hud_.details(
+	hud_->details(
 		true
 	);
 }
 
 sanguis::client::gui::hud::scoped_details::~scoped_details()
 {
-	hud_.details(
+	hud_->details(
 		false
 	);
 }

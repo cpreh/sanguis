@@ -17,7 +17,7 @@ namespace scene
 
 sanguis::client::draw2d::sprite::client::texture_coordinates
 light_texture_coordinates(
-	sge::renderer::device::core &,
+	sge::renderer::device::core &, // NOLINT(google-runtime-references)
 	sge::texture::part const &
 );
 

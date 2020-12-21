@@ -18,8 +18,7 @@ sanguis::client::draw2d::entities::buffs::slow::slow()
 }
 
 sanguis::client::draw2d::entities::buffs::slow::~slow()
-{
-}
+= default;
 
 void
 sanguis::client::draw2d::entities::buffs::slow::apply(

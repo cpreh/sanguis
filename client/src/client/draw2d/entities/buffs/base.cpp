@@ -6,14 +6,13 @@
 sanguis::client::draw2d::entities::buffs::base::base()
 :
 	counter_(
-		1u
+		1U
 	)
 {
 }
 
 sanguis::client::draw2d::entities::buffs::base::~base()
-{
-}
+= default;
 
 void
 sanguis::client::draw2d::entities::buffs::base::apply(
@@ -46,11 +45,11 @@ bool
 sanguis::client::draw2d::entities::buffs::base::decrement()
 {
 	FCPPT_ASSERT_PRE(
-		counter_ != 0u
+		counter_ != 0U
 	);
 
 	return
 		--counter_
 		==
-		0u;
+		0U;
 }

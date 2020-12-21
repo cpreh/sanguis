@@ -26,9 +26,11 @@
 #include <sanguis/client/draw2d/sprite/unit.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sanguis/client/draw2d/sprite/normal/white.hpp>
-#include <sanguis/client/load/auras/context_fwd.hpp>
+#include <sanguis/client/load/auras/context_ref.hpp>
 #include <sanguis/load/model/player_path.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/cast/float_to_int_fun.hpp>
 #include <fcppt/cast/int_to_float_fun.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
@@ -42,6 +44,9 @@
 #include <fcppt/preprocessor/disable_clang_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace
@@ -51,17 +56,20 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wglobal-constructors)
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wexit-time-destructors)
 
+// NOLINTNEXTLINE(fuchsia-statically-constructed-objects,cert-err58-cpp)
 sanguis::client::draw2d::sprite::point const player_body_center(
-	24,
-	48
+	24, // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+	48 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 );
 
+// NOLINTNEXTLINE(fuchsia-statically-constructed-objects,cert-err58-cpp)
 sanguis::client::draw2d::sprite::index const top(
-	1u
+	1U
 );
 
+// NOLINTNEXTLINE(fuchsia-statically-constructed-objects,cert-err58-cpp)
 sanguis::client::draw2d::sprite::index const bottom(
-	0u
+	0U
 );
 
 FCPPT_PP_POP_WARNING
@@ -69,29 +77,43 @@ FCPPT_PP_POP_WARNING
 }
 
 sanguis::client::draw2d::entities::player::player(
-	sanguis::client::load::auras::context &_auras_load_context,
+	sanguis::client::load::auras::context_ref const _auras_load_context,
 	sanguis::client::draw2d::entities::load_parameters const &_load_parameters,
 	sanguis::optional_primary_weapon_type const _primary_weapon,
 	sanguis::weapon_status const _weapon_status,
-	sanguis::client::draw2d::speed const _speed,
-	sanguis::client::draw2d::sprite::center const _center,
+	sanguis::client::draw2d::speed const &_speed,
+	sanguis::client::draw2d::sprite::center const &_center,
 	sanguis::client::draw2d::sprite::rotation const _rotation,
-	sanguis::aura_type_vector const &_auras,
-	sanguis::buff_type_vector const &_buffs,
+	sanguis::aura_type_vector &&_auras,
+	sanguis::buff_type_vector &&_buffs,
 	sanguis::client::health_pair const _health_pair
 )
 :
 	sanguis::client::draw2d::entities::with_buffs_auras_model(
 		sanguis::client::draw2d::entities::with_buffs_auras_model_parameters(
-			_load_parameters.diff_clock(),
-			_load_parameters.normal_system(),
-			_load_parameters.collection(),
-			_buffs,
+			fcppt::make_cref(
+				_load_parameters.diff_clock()
+			),
+			fcppt::make_ref(
+				_load_parameters.normal_system()
+			),
+			fcppt::make_cref(
+				_load_parameters.collection()
+			),
+			std::move(
+				_buffs
+			),
 			sanguis::client::draw2d::entities::with_auras_model_parameters(
-				_load_parameters.diff_clock(),
+				fcppt::make_cref(
+					_load_parameters.diff_clock()
+				),
 				_auras_load_context,
-				_load_parameters.normal_system(),
-				_auras,
+				fcppt::make_ref(
+					_load_parameters.normal_system()
+				),
+				std::move(
+					_auras
+				),
 				sanguis::client::draw2d::entities::model::parameters(
 					_load_parameters,
 					sanguis::load::model::player_path(),
@@ -119,8 +141,7 @@ sanguis::client::draw2d::entities::player::player(
 }
 
 sanguis::client::draw2d::entities::player::~player()
-{
-}
+= default;
 
 void
 sanguis::client::draw2d::entities::player::speed(
@@ -158,8 +179,8 @@ sanguis::client::draw2d::entities::player::orientation(
 {
 	sanguis::client::draw2d::entities::model::object::orientation(
 		_orientation,
-		top // TODO
-	); // TODO: better interface for this in model
+		top
+	);
 }
 
 void
@@ -167,15 +188,14 @@ sanguis::client::draw2d::entities::player::update()
 {
 	sanguis::client::draw2d::entities::with_buffs_auras_model::update();
 
-	sanguis::client::draw2d::vector2 const
-		body_center(
-			fcppt::math::vector::structure_cast<
-				sanguis::client::draw2d::vector2,
-				fcppt::cast::int_to_float_fun
-			>(
-				player_body_center
-			)
-		);
+	auto const body_center(
+		fcppt::math::vector::structure_cast<
+			sanguis::client::draw2d::vector2,
+			fcppt::cast::int_to_float_fun
+		>(
+			player_body_center
+		)
+	);
 
 	sanguis::client::draw2d::sprite::rotation const sprite_rotation(
 		this->at(
@@ -208,7 +228,6 @@ sanguis::client::draw2d::entities::player::update()
 		)
 	);
 
-	// TODO: Simplify this?
 	this->at(
 		top
 	).center(

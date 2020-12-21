@@ -15,6 +15,7 @@ sanguis::client::events::tick::tick(
 sanguis::client::events::tick::tick(
 	tick &&
 )
+noexcept
 = default;
 
 sanguis::client::events::tick::tick(
@@ -26,6 +27,7 @@ sanguis::client::events::tick &
 sanguis::client::events::tick::operator=(
 	tick &&
 )
+noexcept
 = default;
 
 sanguis::client::events::tick &
@@ -35,8 +37,7 @@ sanguis::client::events::tick::operator=(
 = default;
 
 sanguis::client::events::tick::~tick()
-{
-}
+= default;
 
 sanguis::duration const &
 sanguis::client::events::tick::delta() const

@@ -14,7 +14,7 @@
 #include <sanguis/messages/server/available_perks_fwd.hpp>
 #include <sanguis/messages/server/level_up_fwd.hpp>
 #include <sanguis/messages/server/remove_id_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
@@ -46,7 +46,7 @@ class has_player
 		sanguis::client::states::ingame
 	>
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		has_player
 	);
 public:
@@ -73,16 +73,19 @@ public:
 	~has_player()
 	SANGUIS_STATE_OVERRIDE;
 
+	[[nodiscard]]
 	boost::statechart::result
 	react(
 		sanguis::client::events::message const &
 	);
 
+	[[nodiscard]]
 	boost::statechart::result
 	react(
 		sanguis::client::events::tick const &
 	);
 
+	[[nodiscard]]
 	boost::statechart::result
 	react(
 		sanguis::client::events::action const &
@@ -93,21 +96,25 @@ public:
 	=
 	sanguis::messages::call::result;
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::available_perks const &
 	);
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::level_up const &
 	);
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::remove_id const &
 	);
 
+	[[nodiscard]]
 	sanguis::client::perk::state &
 	perk_state();
 private:

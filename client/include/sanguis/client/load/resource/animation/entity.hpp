@@ -33,21 +33,26 @@ public:
 
 	entity(
 		entity &&
-	);
+	)
+	noexcept;
 
 	entity &
 	operator=(
 		entity &&
-	);
+	)
+	noexcept;
 
 	~entity();
 
+	[[nodiscard]]
 	sanguis::duration
 	delay() const;
 
+	[[nodiscard]]
 	sge::texture::part const &
 	texture() const;
 
+	[[nodiscard]]
 	sge::renderer::dim2
 	dim() const;
 private:

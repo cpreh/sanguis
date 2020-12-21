@@ -27,17 +27,18 @@ sanguis::client::draw2d::scene::world::batch::batch(
 sanguis::client::draw2d::scene::world::batch::batch(
 	batch &&
 )
+noexcept
 = default;
 
 sanguis::client::draw2d::scene::world::batch &
 sanguis::client::draw2d::scene::world::batch::operator=(
 	batch &&
 )
+noexcept
 = default;
 
 sanguis::client::draw2d::scene::world::batch::~batch()
-{
-}
+= default;
 
 void
 sanguis::client::draw2d::scene::world::batch::draw(

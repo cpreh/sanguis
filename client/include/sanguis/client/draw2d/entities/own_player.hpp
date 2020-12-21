@@ -15,8 +15,8 @@
 #include <sanguis/client/draw2d/entities/player.hpp>
 #include <sanguis/client/draw2d/sprite/center_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/rotation_fwd.hpp>
-#include <sanguis/client/load/auras/context_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <sanguis/client/load/auras/context_ref.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -32,22 +32,22 @@ class own_player
 :
 	public sanguis::client::draw2d::entities::player
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		own_player
 	);
 public:
 	own_player(
-		sanguis::client::load::auras::context &,
+		sanguis::client::load::auras::context_ref,
 		sanguis::client::draw2d::entities::load_parameters const &,
-		sanguis::client::draw2d::collide_callback const &,
-		sanguis::client::player_health_callback const &,
+		sanguis::client::draw2d::collide_callback &&,
+		sanguis::client::player_health_callback &&,
 		sanguis::optional_primary_weapon_type,
 		sanguis::weapon_status,
-		sanguis::client::draw2d::speed,
-		sanguis::client::draw2d::sprite::center,
+		sanguis::client::draw2d::speed const &,
+		sanguis::client::draw2d::sprite::center const &,
 		sanguis::client::draw2d::sprite::rotation,
-		sanguis::aura_type_vector const &,
-		sanguis::buff_type_vector const &,
+		sanguis::aura_type_vector &&,
+		sanguis::buff_type_vector &&,
 		sanguis::client::health_pair
 	);
 

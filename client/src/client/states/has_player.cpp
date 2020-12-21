@@ -50,7 +50,7 @@
 #include <fcppt/config/external_begin.hpp>
 #include <metal.hpp>
 #include <boost/statechart/result.hpp>
-#include <functional>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -62,7 +62,9 @@ sanguis::client::states::has_player::has_player(
 )
 :
 	my_base(
-		_ctx
+		std::move(
+			_ctx
+		)
 	),
 	log_{
 		this->context<
@@ -80,9 +82,11 @@ sanguis::client::states::has_player::has_player(
 			sanguis::client::control::action_handler
 		>(
 			sanguis::client::make_send_callback(
-				this->context<
-					sanguis::client::machine
-				>()
+				fcppt::make_ref(
+					this->context<
+						sanguis::client::machine
+					>()
+				)
 			),
 			fcppt::make_cref(
 				this->context<
@@ -101,11 +105,16 @@ sanguis::client::states::has_player::has_player(
 			sanguis::client::perk::state
 		>(
 			sanguis::client::perk::send_callback{
-				std::bind(
-					&sanguis::client::states::has_player::send_perk_choose,
-					this,
-					std::placeholders::_1
+				[
+					this
+				](
+					sanguis::perk_type const _type
 				)
+				{
+					this->send_perk_choose(
+						_type
+					);
+				}
 			}
 		)
 	)
@@ -120,8 +129,7 @@ sanguis::client::states::has_player::has_player(
 FCPPT_PP_POP_WARNING
 
 sanguis::client::states::has_player::~has_player()
-{
-}
+= default;
 
 boost::statechart::result
 sanguis::client::states::has_player::react(

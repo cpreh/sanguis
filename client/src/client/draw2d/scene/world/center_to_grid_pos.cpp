@@ -6,7 +6,7 @@
 
 sanguis::creator::pos
 sanguis::client::draw2d::scene::world::center_to_grid_pos(
-	sanguis::client::draw2d::sprite::center const _center
+	sanguis::client::draw2d::sprite::center const &_center
 )
 {
 	return

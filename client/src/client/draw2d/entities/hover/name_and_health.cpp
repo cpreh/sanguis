@@ -8,7 +8,7 @@
 
 sanguis::client::draw2d::entities::hover::name_and_health::name_and_health(
 	sanguis::client::draw2d::entities::hover::optional_name &&_name,
-	sanguis::client::optional_health_pair _health
+	sanguis::client::optional_health_pair const _health
 )
 :
 	name_{
@@ -17,9 +17,7 @@ sanguis::client::draw2d::entities::hover::name_and_health::name_and_health(
 		)
 	},
 	health_{
-		std::move(
-			_health
-		)
+		_health
 	}
 {
 }

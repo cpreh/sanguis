@@ -3,7 +3,7 @@
 
 #include <sanguis/client/events/render_fwd.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <fcppt/reference_impl.hpp>
+#include <sge/renderer/context/ffp_ref.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/event.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -25,12 +25,13 @@ class render
 public:
 	explicit
 	render(
-		sge::renderer::context::ffp &
+		sge::renderer::context::ffp_ref
 	);
 
 	render(
 		render &&
-	);
+	)
+	noexcept;
 
 	render(
 		render const &
@@ -39,7 +40,8 @@ public:
 	render &
 	operator=(
 		render &&
-	);
+	)
+	noexcept;
 
 	render &
 	operator=(
@@ -49,12 +51,11 @@ public:
 	~render()
 	override;
 
+	[[nodiscard]]
 	sge::renderer::context::ffp &
 	context() const;
 private:
-	fcppt::reference<
-		sge::renderer::context::ffp
-	> context_;
+	sge::renderer::context::ffp_ref context_;
 };
 
 }

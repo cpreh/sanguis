@@ -4,6 +4,7 @@
 #include <sanguis/client/load/hud/make_weapon_icons.hpp>
 #include <sanguis/client/load/hud/weapon_icon_map.hpp>
 #include <sanguis/client/load/resource/textures.hpp>
+#include <sanguis/client/load/resource/textures_cref.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/text.hpp>
@@ -17,7 +18,7 @@
 
 sanguis::client::load::hud::context::context(
 	fcppt::log::context_reference const _log_context,
-	sanguis::client::load::resource::textures const &_textures
+	sanguis::client::load::resource::textures_cref const _textures
 )
 :
 	log_{
@@ -36,14 +37,13 @@ sanguis::client::load::hud::context::context(
 		)
 	),
 	missing_texture_(
-		_textures.missing_texture()
+		_textures->missing_texture()
 	)
 {
 }
 
 sanguis::client::load::hud::context::~context()
-{
-}
+= default;
 
 sge::texture::part const &
 sanguis::client::load::hud::context::weapon_icon(

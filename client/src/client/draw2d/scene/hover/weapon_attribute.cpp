@@ -8,9 +8,9 @@
 #include <sanguis/client/gui/hud/weapon_attribute_name.hpp>
 #include <sanguis/client/gui/hud/weapon_attribute_text.hpp>
 #include <sge/font/lit.hpp>
-#include <sge/font/object_fwd.hpp>
+#include <sge/font/object_ref.hpp>
 #include <sge/font/string.hpp>
-#include <sge/gui/context_fwd.hpp>
+#include <sge/gui/context_ref.hpp>
 #include <sge/gui/text_color.hpp>
 #include <sge/gui/style/const_reference.hpp>
 #include <sge/gui/widget/base_fwd.hpp>
@@ -19,30 +19,25 @@
 #include <sge/gui/widget/reference_alignment_vector.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/image/color/any/object.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
-#include <fcppt/make_ref.hpp>
 #include <fcppt/optional/maybe.hpp>
 
 
 sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
-	sge::gui::context &_gui_context,
+	sge::gui::context_ref const _gui_context,
 	sge::gui::style::const_reference const _gui_style,
-	sge::renderer::device::ffp &_renderer,
-	sge::font::object &_font,
+	sge::renderer::device::ffp_ref const _renderer,
+	sge::font::object_ref const _font,
 	sanguis::weapon_attribute const &_attribute,
 	sanguis::client::draw2d::scene::hover::weapon_attribute_diff const _attribute_diff
 )
 :
 	name_{
 		_gui_style,
-		fcppt::make_ref(
-			_renderer
-		),
-		fcppt::make_ref(
-			_font
-		),
+		_renderer,
+		_font,
 		sanguis::client::gui::hud::weapon_attribute_name(
 			_attribute.type()
 		)
@@ -57,12 +52,8 @@ sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 	},
 	value_{
 		_gui_style,
-		fcppt::make_ref(
-			_renderer
-		),
-		fcppt::make_ref(
-			_font
-		),
+		_renderer,
+		_font,
 		sanguis::client::gui::hud::weapon_attribute_text(
 			_attribute
 		),
@@ -73,12 +64,8 @@ sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 	},
 	diff_{
 		_gui_style,
-		fcppt::make_ref(
-			_renderer
-		),
-		fcppt::make_ref(
-			_font
-		),
+		_renderer,
+		_font,
 		fcppt::optional::maybe(
 			_attribute_diff.get(),
 			[]{
@@ -126,9 +113,7 @@ sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 		)
 	},
 	container_{
-		fcppt::make_ref(
-			_gui_context
-		),
+		_gui_context,
 		sge::gui::widget::reference_alignment_vector{
 			sge::gui::widget::reference_alignment_pair{
 				sge::gui::widget::reference{
@@ -167,8 +152,7 @@ sanguis::client::draw2d::scene::hover::weapon_attribute::weapon_attribute(
 }
 
 sanguis::client::draw2d::scene::hover::weapon_attribute::~weapon_attribute()
-{
-}
+= default;
 
 sge::gui::widget::base &
 sanguis::client::draw2d::scene::hover::weapon_attribute::widget()

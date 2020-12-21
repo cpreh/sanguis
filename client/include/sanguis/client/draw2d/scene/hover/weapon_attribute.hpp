@@ -4,15 +4,15 @@
 #include <sanguis/weapon_attribute_fwd.hpp>
 #include <sanguis/client/draw2d/scene/hover/weapon_attribute_diff_fwd.hpp>
 #include <sanguis/client/draw2d/scene/hover/weapon_attribute_fwd.hpp>
-#include <sge/font/object_fwd.hpp>
-#include <sge/gui/context_fwd.hpp>
+#include <sge/font/object_ref.hpp>
+#include <sge/gui/context_ref.hpp>
 #include <sge/gui/style/const_reference.hpp>
 #include <sge/gui/widget/base_fwd.hpp>
 #include <sge/gui/widget/box_container.hpp>
 #include <sge/gui/widget/expander.hpp>
 #include <sge/gui/widget/static_text.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -28,21 +28,22 @@ namespace hover
 
 class weapon_attribute
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		weapon_attribute
 	);
 public:
 	weapon_attribute(
-		sge::gui::context &,
+		sge::gui::context_ref,
 		sge::gui::style::const_reference,
-		sge::renderer::device::ffp &,
-		sge::font::object &,
+		sge::renderer::device::ffp_ref,
+		sge::font::object_ref,
 		sanguis::weapon_attribute const &,
 		sanguis::client::draw2d::scene::hover::weapon_attribute_diff
 	);
 
 	~weapon_attribute();
 
+	[[nodiscard]]
 	sge::gui::widget::base &
 	widget();
 private:

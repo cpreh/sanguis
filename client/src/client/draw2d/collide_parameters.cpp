@@ -3,12 +3,15 @@
 #include <sanguis/client/draw2d/collide_parameters.hpp>
 #include <sanguis/client/draw2d/fradius.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::draw2d::collide_parameters::collide_parameters(
 	sanguis::duration const _duration,
-	sanguis::client::draw2d::center const _center,
-	sanguis::client::draw2d::speed const _speed,
+	sanguis::client::draw2d::center _center,
+	sanguis::client::draw2d::speed _speed,
 	sanguis::client::draw2d::fradius const _radius
 )
 :
@@ -16,10 +19,14 @@ sanguis::client::draw2d::collide_parameters::collide_parameters(
 		_duration
 	),
 	center_(
-		_center
+		std::move(
+			_center
+		)
 	),
 	speed_(
-		_speed
+		std::move(
+			_speed
+		)
 	),
 	radius_(
 		_radius

@@ -7,7 +7,7 @@
 #include <sanguis/client/events/input_fwd.hpp>
 #include <sanguis/client/events/overlay_fwd.hpp>
 #include <sanguis/client/states/has_player.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -36,7 +36,7 @@ class console
 		sanguis::client::states::has_player
 	>
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		console
 	);
 public:
@@ -63,16 +63,19 @@ public:
 	~console()
 	SANGUIS_STATE_OVERRIDE;
 
+	[[nodiscard]]
 	boost::statechart::result
 	react(
 		sanguis::client::events::action const &
 	);
 
+	[[nodiscard]]
 	boost::statechart::result
 	react(
 		sanguis::client::events::overlay const &
 	);
 
+	[[nodiscard]]
 	boost::statechart::result
 	react(
 		sanguis::client::events::input const &

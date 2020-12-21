@@ -64,7 +64,6 @@
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
 #include <exception>
-#include <functional>
 #include <ostream>
 #include <fcppt/config/external_end.hpp>
 
@@ -126,7 +125,7 @@ sanguis::client::object::object(
 			)
 			.ttf_size(
 				sge::font::ttf_size(
-					20u
+					20U
 				)
 			)
 		)
@@ -153,7 +152,9 @@ sanguis::client::object::object(
 			fcppt::make_unique_ptr<
 				sanguis::client::gui::style::simple
 			>(
-				resources_.resources().textures()
+				fcppt::make_cref(
+					resources_.resources().textures()
+				)
 			)
 		)
 	),
@@ -201,11 +202,16 @@ sanguis::client::object::object(
 			_args
 		),
 		sanguis::client::server_callback{
-			std::bind(
-				&sanguis::client::object::create_server,
-				this,
-				std::placeholders::_1
+			[
+				this
+			](
+				alda::net::port const _port
 			)
+			{
+				this->create_server(
+					_port
+				);
+			}
 		},
 		fcppt::make_cref(
 			resources_
@@ -246,8 +252,7 @@ sanguis::client::object::object(
 FCPPT_PP_POP_WARNING
 
 sanguis::client::object::~object()
-{
-}
+= default;
 
 awl::main::exit_code
 sanguis::client::object::run()
@@ -300,7 +305,7 @@ sanguis::client::object::run()
 		?
 			awl::main::exit_failure()
 		:
-			// TODO: Return the actual error here
+			// TODO(philipp): Return the actual error here
 			awl::main::exit_success()
 		;
 }
@@ -310,10 +315,11 @@ sanguis::client::object::register_handler()
 {
 	io_service_.post(
 		sanguis::io_service_callback{
-			std::bind(
-				&sanguis::client::object::loop_handler,
+			[
 				this
-			)
+			]{
+				this->loop_handler();
+			}
 		}
 	);
 }
@@ -332,9 +338,11 @@ sanguis::client::object::loop_handler()
 			if(
 				!_server->running()
 			)
+			{
 				sys_->window_system().quit(
 					awl::main::exit_failure()
 				);
+			}
 		}
 	);
 
@@ -381,9 +389,12 @@ sanguis::client::object::create_server(
 			:
 			sanguis::log_level_streams()
 		)
+		{
+			// NOLINTNEXTLINE(readability-static-accessed-through-instance)
 			element.get().sync_with_stdio(
 				true
 			);
+		}
 	}
 
 	server_ =

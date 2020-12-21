@@ -7,6 +7,7 @@
 #include <sanguis/client/gui/style/text_color.hpp>
 #include <sanguis/client/load/resource/texture_identifier.hpp>
 #include <sanguis/client/load/resource/textures.hpp>
+#include <sanguis/client/load/resource/textures_cref.hpp>
 #include <sge/gui/fill_color.hpp>
 #include <sge/gui/fill_level.hpp>
 #include <sge/gui/text_color.hpp>
@@ -33,7 +34,7 @@
 
 
 sanguis::client::gui::style::simple::simple(
-	sanguis::client::load::resource::textures const &_textures
+	sanguis::client::load::resource::textures_cref const _textures
 )
 :
 	sge::gui::style::base(),
@@ -44,14 +45,13 @@ sanguis::client::gui::style::simple::simple(
 }
 
 sanguis::client::gui::style::simple::~simple()
-{
-}
+= default;
 
 sge::rucksack::dim
 sanguis::client::gui::style::simple::button_spacing() const
 {
 	return
-		this->spacing();
+		simple::spacing();
 }
 
 void
@@ -94,7 +94,7 @@ sanguis::client::gui::style::simple::draw_bar(
 		sanguis::client::gui::style::background_color()
 	);
 
-	sge::rucksack::scalar const fill_size(
+	auto const fill_size(
 		fcppt::cast::float_to_int<
 			sge::rucksack::scalar
 		>(
@@ -155,7 +155,7 @@ sanguis::client::gui::style::simple::frame_padding() const
 {
 	return
 		sge::rucksack::padding{
-			10
+			10 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		};
 }
 
@@ -255,7 +255,7 @@ sge::rucksack::dim
 sanguis::client::gui::style::simple::edit_spacing() const
 {
 	return
-		this->spacing();
+		simple::spacing();
 }
 
 void
@@ -347,7 +347,7 @@ sanguis::client::gui::style::simple::text_color() const
 }
 
 sge::rucksack::dim
-sanguis::client::gui::style::simple::spacing() const
+sanguis::client::gui::style::simple::spacing()
 {
 	return
 		fcppt::math::dim::fill<
@@ -368,19 +368,19 @@ sanguis::client::gui::style::simple::draw_transparent_frame(
 
 	for (auto const &tile :
 		{
-			std::make_pair<>(
+			std::make_pair(
 				sge::rucksack::vector{0,0},
 				FCPPT_TEXT("hud_frame_transparent_nw")
 			),
-			std::make_pair<>(
+			std::make_pair(
 				sge::rucksack::vector{_area.size().w() - tilesize,0},
 				FCPPT_TEXT("hud_frame_transparent_ne")
 			),
-			std::make_pair<>(
+			std::make_pair(
 				sge::rucksack::vector{_area.size().w() - tilesize,_area.size().h() - tilesize},
 				FCPPT_TEXT("hud_frame_transparent_se")
 			),
-			std::make_pair<>(
+			std::make_pair(
 				sge::rucksack::vector{0,_area.size().h() - tilesize},
 				FCPPT_TEXT("hud_frame_transparent_sw")
 			)
@@ -388,7 +388,7 @@ sanguis::client::gui::style::simple::draw_transparent_frame(
 	)
 	{
 		sge::texture::part const &part(
-			textures_.load(
+			textures_->load(
 				sanguis::client::load::resource::texture_identifier{
 					tile.second
 				}
@@ -403,7 +403,7 @@ sanguis::client::gui::style::simple::draw_transparent_frame(
 	}
 
 	sge::texture::part const &part_v(
-		textures_.load(
+		textures_->load(
 			sanguis::client::load::resource::texture_identifier{
 				FCPPT_TEXT("hud_frame_transparent_v")
 			}
@@ -411,7 +411,7 @@ sanguis::client::gui::style::simple::draw_transparent_frame(
 	);
 
 	sge::texture::part const &part_h(
-		textures_.load(
+		textures_->load(
 			sanguis::client::load::resource::texture_identifier{
 				FCPPT_TEXT("hud_frame_transparent_h")
 			}

@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_IFACES_WITH_AURAS_HPP_INCLUDED
 
 #include <sanguis/aura_type_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -18,7 +18,7 @@ namespace ifaces
 
 class with_auras
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		with_auras
 	);
 protected:

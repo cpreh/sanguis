@@ -15,6 +15,7 @@
 #include <sanguis/client/states/ingame.hpp>
 #include <sanguis/client/states/perk_chooser.hpp>
 #include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
@@ -23,6 +24,7 @@
 #include <fcppt/variant/to_optional.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/result.hpp>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -34,38 +36,52 @@ sanguis::client::states::perk_chooser::perk_chooser(
 )
 :
 	my_base(
-		_ctx
+		std::move(
+			_ctx
+		)
 	),
 	pause_(
 		sanguis::client::make_send_callback(
-			this->context<
-				sanguis::client::machine
-			>()
+			fcppt::make_ref(
+				this->context<
+					sanguis::client::machine
+				>()
+			)
 		)
 	),
 	perk_chooser_gui_(
-		this->context<
-			sanguis::client::states::has_player
-		>().perk_state(),
+		fcppt::make_ref(
+			this->context<
+				sanguis::client::states::has_player
+			>().perk_state()
+		),
 		fcppt::make_cref(
 			this->context<
 				sanguis::client::machine
 			>().gui_style()
 		),
-		this->context<
-			sanguis::client::machine
-		>().renderer(),
-		this->context<
-			sanguis::client::machine
-		>().viewport_manager(),
-		this->context<
-			sanguis::client::machine
-		>().font_object()
+		fcppt::make_ref(
+			this->context<
+				sanguis::client::machine
+			>().renderer()
+		),
+		fcppt::make_ref(
+			this->context<
+				sanguis::client::machine
+			>().viewport_manager()
+		),
+		fcppt::make_ref(
+			this->context<
+				sanguis::client::machine
+			>().font_object()
+		)
 	),
 	hud_details_(
-		this->context<
-			sanguis::client::states::running
-		>().hud_gui()
+		fcppt::make_ref(
+			this->context<
+				sanguis::client::states::running
+			>().hud_gui()
+		)
 	)
 {
 }
@@ -73,8 +89,7 @@ sanguis::client::states::perk_chooser::perk_chooser(
 FCPPT_PP_POP_WARNING
 
 sanguis::client::states::perk_chooser::~perk_chooser()
-{
-}
+= default;
 
 boost::statechart::result
 sanguis::client::states::perk_chooser::react(

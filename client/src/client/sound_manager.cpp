@@ -17,8 +17,7 @@ sanguis::client::sound_manager::sound_manager()
 }
 
 sanguis::client::sound_manager::~sound_manager()
-{
-}
+= default;
 
 void
 sanguis::client::sound_manager::add(
@@ -46,20 +45,22 @@ sanguis::client::sound_manager::pause(
 		:
 		sounds_
 	)
+	{
 		sge::audio::sound::pause_or_resume(
 			*sound,
 			sge::audio::sound::do_pause(
 				_value
 			)
 		);
+	}
 }
 
 void
 sanguis::client::sound_manager::update()
 {
-	// TODO: sequence_iteration
+	// TODO(philipp): sequence_iteration
 	for(
-		sound_list::iterator it(
+		auto it(
 			sounds_.begin()
 		);
 		it != sounds_.end();
@@ -76,11 +77,15 @@ sanguis::client::sound_manager::update()
 			!=
 			sge::audio::sound::play_status::playing
 		)
+		{
 			it =
 				sounds_.erase(
 					it
 				);
+		}
 		else
+		{
 			++it;
+		}
 	}
 }

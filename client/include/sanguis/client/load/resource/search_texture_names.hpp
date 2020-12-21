@@ -16,8 +16,8 @@ namespace resource
 
 sanguis::client::load::resource::texture_name_map
 search_texture_names(
-	fcppt::log::object &
-);
+	fcppt::log::object & // NOLINT(google-runtime-references)
+); // NOLINT(google-runtime-references)
 
 }
 }

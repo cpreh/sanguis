@@ -16,8 +16,8 @@ namespace scene
 
 sge::renderer::screen_size
 background_dim(
-	sge::renderer::device::core &
-);
+	sge::renderer::device::core & // NOLINT(google-runtime-references)
+); // NOLINT(google-runtime-references)
 
 }
 }

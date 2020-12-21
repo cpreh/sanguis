@@ -16,17 +16,19 @@
 namespace
 {
 
-typedef
+using
+aura_type_array
+=
 fcppt::enum_::array<
 	sanguis::aura_type,
 	fcppt::string
->
-aura_type_array;
+>;
 
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wglobal-constructors)
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wexit-time-destructors)
 
+// NOLINTNEXTLINE(cert-err58-cpp)
 aura_type_array const aura_types(
 	fcppt::enum_::array_init<
 		aura_type_array

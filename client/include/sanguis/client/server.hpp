@@ -5,7 +5,7 @@
 #include <sanguis/server/object.hpp>
 #include <alda/net/port.hpp>
 #include <awl/main/exit_code.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -21,7 +21,7 @@ namespace client
 
 class server
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		server
 	);
 public:
@@ -36,6 +36,7 @@ public:
 	awl::main::exit_code
 	run();
 
+	[[nodiscard]]
 	bool
 	running() const;
 

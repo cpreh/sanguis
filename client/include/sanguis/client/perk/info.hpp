@@ -35,18 +35,23 @@ public:
 	void
 	increment_level();
 
+	[[nodiscard]]
 	sanguis::perk_type
 	perk_type() const;
 
+	[[nodiscard]]
 	sanguis::client::perk::level
 	level() const;
 
+	[[nodiscard]]
 	sanguis::client::perk::required_parent_level
 	required_parent_level() const;
 
+	[[nodiscard]]
 	sanguis::client::perk::required_player_level
 	required_player_level() const;
 
+	[[nodiscard]]
 	sanguis::client::perk::max_level
 	max_level() const;
 private:

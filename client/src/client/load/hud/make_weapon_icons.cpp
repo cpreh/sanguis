@@ -5,6 +5,7 @@
 #include <sanguis/client/load/hud/weapon_icon_map.hpp>
 #include <sanguis/client/load/hud/weapon_type.hpp>
 #include <sanguis/client/load/resource/textures.hpp>
+#include <sanguis/client/load/resource/textures_cref.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
@@ -26,7 +27,7 @@
 sanguis::client::load::hud::weapon_icon_map
 sanguis::client::load::hud::make_weapon_icons(
 	fcppt::log::object &_log,
-	sanguis::client::load::resource::textures const &_textures
+	sanguis::client::load::resource::textures_cref const _textures
 )
 {
 	return
@@ -52,11 +53,12 @@ sanguis::client::load::hud::make_weapon_icons(
 				std::filesystem::path const &_path
 			)
 			{
-				typedef
+				using
+				result_type
+				=
 				fcppt::optional::object<
 					sanguis::client::load::hud::weapon_icon_map::value_type
-				>
-				result_type;
+				>;
 
 				return
 					fcppt::optional::maybe(
@@ -98,7 +100,7 @@ sanguis::client::load::hud::make_weapon_icons(
 									std::make_pair(
 										_weapon_type,
 										fcppt::make_cref(
-											_textures.load(
+											_textures->load(
 												_path
 											)
 										)

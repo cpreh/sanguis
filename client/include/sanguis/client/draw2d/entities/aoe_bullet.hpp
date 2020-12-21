@@ -9,7 +9,7 @@
 #include <sanguis/client/draw2d/sprite/center_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/rotation_fwd.hpp>
 #include <sanguis/load/model/path_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -25,16 +25,16 @@ class aoe_bullet
 :
 	public sanguis::client::draw2d::entities::model::object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		aoe_bullet
 	);
 public:
 	aoe_bullet(
 		sanguis::client::draw2d::entities::load_parameters const &,
-		sanguis::client::draw2d::insert_own_callback const &,
+		sanguis::client::draw2d::insert_own_callback &&,
 		sanguis::load::model::path &&,
-		sanguis::client::draw2d::speed,
-		sanguis::client::draw2d::sprite::center,
+		sanguis::client::draw2d::speed const &,
+		sanguis::client::draw2d::sprite::center const &,
 		sanguis::client::draw2d::sprite::rotation,
 		sanguis::client::draw2d::aoe
 	);

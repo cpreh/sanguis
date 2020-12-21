@@ -16,8 +16,8 @@ namespace net
 bool
 serialize_to_circular_buffer(
 	sanguis::messages::client::base const &,
-	alda::net::buffer::circular_send::streambuf &
-);
+	alda::net::buffer::circular_send::streambuf & // NOLINT(google-runtime-references)
+); // NOLINT(google-runtime-references)
 
 }
 }

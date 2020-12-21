@@ -12,15 +12,18 @@
 #include <sanguis/load/model/aoe_projectile_path.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::draw2d::entities::unique_ptr
 sanguis::client::draw2d::factory::aoe_projectile(
 	sanguis::client::draw2d::entities::load_parameters const &_parameters,
-	sanguis::client::draw2d::insert_own_callback const &_insert,
+	sanguis::client::draw2d::insert_own_callback &&_insert,
 	sanguis::aoe_projectile_type const _aoe_projectile_type,
-	sanguis::client::draw2d::speed const _speed,
-	sanguis::client::draw2d::sprite::center const _center,
+	sanguis::client::draw2d::speed const &_speed,
+	sanguis::client::draw2d::sprite::center const &_center,
 	sanguis::client::draw2d::sprite::rotation const _rotation,
 	sanguis::client::draw2d::aoe const _aoe
 )
@@ -33,7 +36,9 @@ sanguis::client::draw2d::factory::aoe_projectile(
 				sanguis::client::draw2d::entities::aoe_bullet
 			>(
 				_parameters,
-				_insert,
+				std::move(
+					_insert
+				),
 				sanguis::load::model::aoe_projectile_path(
 					_aoe_projectile_type
 				),

@@ -32,6 +32,7 @@
 #include <fcppt/config/external_begin.hpp>
 #include <metal.hpp>
 #include <boost/statechart/result.hpp>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -43,7 +44,9 @@ sanguis::client::states::waiting_for_player::waiting_for_player(
 )
 :
 	my_base(
-		_ctx
+		std::move(
+			_ctx
+		)
 	),
 	log_{
 		this->context<
@@ -67,8 +70,7 @@ sanguis::client::states::waiting_for_player::waiting_for_player(
 FCPPT_PP_POP_WARNING
 
 sanguis::client::states::waiting_for_player::~waiting_for_player()
-{
-}
+= default;
 
 boost::statechart::result
 sanguis::client::states::waiting_for_player::react(

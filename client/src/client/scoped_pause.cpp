@@ -4,14 +4,19 @@
 #include <sanguis/messages/client/pause.hpp>
 #include <sanguis/messages/client/unpause.hpp>
 #include <fcppt/unit.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::scoped_pause::scoped_pause(
-	sanguis::client::send_callback const &_send
+	sanguis::client::send_callback &&_send
 )
 :
 	send_(
-		_send
+		std::move(
+			_send
+		)
 	)
 {
 	send_(

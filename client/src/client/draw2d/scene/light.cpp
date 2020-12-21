@@ -7,8 +7,10 @@
 #include <sanguis/client/draw2d/sprite/client/category.hpp>
 #include <sanguis/client/draw2d/sprite/client/object.hpp>
 #include <sanguis/client/draw2d/sprite/client/system_decl.hpp>
+#include <sanguis/client/draw2d/sprite/client/system_ref.hpp>
 #include <sanguis/client/load/context.hpp>
 #include <sanguis/client/load/resource/context.hpp>
+#include <sanguis/client/load/resource/context_cref.hpp>
 #include <sanguis/client/load/resource/texture_identifier.hpp>
 #include <sanguis/client/load/resource/textures.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
@@ -29,6 +31,7 @@
 #include <sge/sprite/roles/texture_coordinates0.hpp>
 #include <sge/viewport/manage_callback.hpp>
 #include <sge/viewport/manager.hpp>
+#include <sge/viewport/manager_ref.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/text.hpp>
@@ -50,16 +53,16 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::draw2d::scene::light::light(
-	sanguis::client::load::context const &_load_context,
-	sanguis::client::draw2d::sprite::client::system &_client_system,
-	sge::viewport::manager &_viewport_manager
+	sanguis::client::load::context_cref const _load_context,
+	sanguis::client::draw2d::sprite::client::system_ref const _client_system,
+	sge::viewport::manager_ref const _viewport_manager
 )
 :
 	client_system_(
 		_client_system
 	),
 	texture_(
-		_load_context.resources().textures().load(
+		_load_context->resources().textures().load(
 			sanguis::client::load::resource::texture_identifier(
 				FCPPT_TEXT("light")
 			)
@@ -67,7 +70,7 @@ sanguis::client::draw2d::scene::light::light(
 	),
 	sprite_(
 		sge::sprite::roles::connection{} =
-			client_system_.connection(
+			client_system_->connection(
 				sanguis::client::draw2d::sprite::client::category::light
 			),
 		sge::sprite::roles::pos{} =
@@ -81,7 +84,7 @@ sanguis::client::draw2d::scene::light::light(
 			>(
 				fcppt::math::dim::to_signed(
 					sanguis::client::draw2d::scene::background_dim(
-						client_system_.renderer()
+						client_system_->renderer()
 					)
 				)
 			),
@@ -91,12 +94,12 @@ sanguis::client::draw2d::scene::light::light(
 			},
 		sge::sprite::roles::texture_coordinates0{} =
 			sanguis::client::draw2d::scene::light_texture_coordinates(
-				client_system_.renderer(),
+				client_system_->renderer(),
 				texture_
 			)
 	),
 	sampler_state_{
-		_client_system.renderer().create_sampler_state(
+		_client_system->renderer().create_sampler_state(
 			sge::renderer::state::core::sampler::parameters{
 				sge::renderer::state::core::sampler::address::mode_all(
 					sge::renderer::state::core::sampler::address::mode::clamp
@@ -106,12 +109,16 @@ sanguis::client::draw2d::scene::light::light(
 		)
 	},
 	viewport_connection_(
-		_viewport_manager.manage_callback(
+		_viewport_manager->manage_callback(
 			sge::viewport::manage_callback{
-				std::bind(
-					&sanguis::client::draw2d::scene::light::reset_viewport,
+				[
 					this
+				](
+					sge::renderer::target::viewport const &
 				)
+				{
+					this->reset_viewport();
+				}
 			}
 		)
 	)
@@ -121,8 +128,7 @@ sanguis::client::draw2d::scene::light::light(
 FCPPT_PP_POP_WARNING
 
 sanguis::client::draw2d::scene::light::~light()
-{
-}
+= default;
 
 void
 sanguis::client::draw2d::scene::light::draw(
@@ -130,19 +136,18 @@ sanguis::client::draw2d::scene::light::draw(
 )
 {
 	sge::renderer::state::core::sampler::scoped_single const sampler_state{
-		// TODO
 		fcppt::make_ref(
 			_render_context
 		),
 		sge::renderer::texture::stage{
-			0u
+			0U
 		},
 		fcppt::make_cref(
 			*sampler_state_
 		)
 	};
 
-	client_system_.render(
+	client_system_->render(
 		_render_context,
 		sanguis::client::draw2d::sprite::client::category::light
 	);
@@ -153,7 +158,7 @@ sanguis::client::draw2d::scene::light::reset_viewport()
 {
 	sprite_.texture_coordinates(
 		sanguis::client::draw2d::scene::light_texture_coordinates(
-			client_system_.renderer(),
+			client_system_->renderer(),
 			texture_
 		)
 	);
@@ -165,7 +170,7 @@ sanguis::client::draw2d::scene::light::reset_viewport()
 		>(
 			fcppt::math::dim::to_signed(
 				sanguis::client::draw2d::scene::background_dim(
-					client_system_.renderer()
+					client_system_->renderer()
 				)
 			)
 		)

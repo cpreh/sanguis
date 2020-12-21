@@ -10,7 +10,7 @@
 #include <sge/gui/widget/choices.hpp>
 #include <sge/renderer/device/ffp_ref.hpp>
 #include <sge/renderer/display_mode/container.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 
 
@@ -25,7 +25,7 @@ namespace menu
 
 class resolution_chooser
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		resolution_chooser
 	);
 public:
@@ -38,6 +38,7 @@ public:
 
 	~resolution_chooser();
 
+	[[nodiscard]]
 	sge::gui::widget::base &
 	widget();
 private:

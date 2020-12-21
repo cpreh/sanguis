@@ -1,4 +1,4 @@
-#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/diff_clock_cref.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/duration_second.hpp>
@@ -8,10 +8,11 @@
 #include <sanguis/client/gui/hud/weapon_widget.hpp>
 #include <sanguis/client/gui/style/text_color.hpp>
 #include <sanguis/client/load/hud/context.hpp>
+#include <sanguis/client/load/hud/context_ref.hpp>
 #include <sge/font/lit.hpp>
-#include <sge/font/object_fwd.hpp>
+#include <sge/font/object_ref.hpp>
 #include <sge/font/string.hpp>
-#include <sge/gui/context_fwd.hpp>
+#include <sge/gui/context_ref.hpp>
 #include <sge/gui/fill_color.hpp>
 #include <sge/gui/fill_level.hpp>
 #include <sge/gui/optional_needed_width.hpp>
@@ -23,13 +24,12 @@
 #include <sge/gui/widget/reference_alignment_pair.hpp>
 #include <sge/gui/widget/reference_alignment_vector.hpp>
 #include <sge/image/color/predef.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <sge/rucksack/dim.hpp>
 #include <sge/timer/elapsed_fractional.hpp>
 #include <fcppt/make_cref.hpp>
-#include <fcppt/make_ref.hpp>
 #include <fcppt/output_to_string.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
@@ -41,12 +41,12 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::gui::hud::weapon_widget::weapon_widget(
-	sanguis::diff_clock const &_diff_clock,
-	sanguis::client::load::hud::context &_resources,
-	sge::gui::context &_gui_context,
+	sanguis::diff_clock_cref const _diff_clock,
+	sanguis::client::load::hud::context_ref const _resources,
+	sge::gui::context_ref const _gui_context,
 	sge::gui::style::const_reference const _gui_style,
-	sge::renderer::device::ffp &_renderer,
-	sge::font::object &_font,
+	sge::renderer::device::ffp_ref const _renderer,
+	sge::font::object_ref const _font,
 	sanguis::weapon_description const &_description
 )
 :
@@ -55,11 +55,8 @@ sanguis::client::gui::hud::weapon_widget::weapon_widget(
 	),
 	reload_time_(
 		sanguis::diff_timer::parameters(
-			fcppt::make_cref(
-				_diff_clock
-			),
+			_diff_clock,
 			sanguis::duration_second(
-				// TODO: What should we choose here?
 				1
 			)
 		)
@@ -70,19 +67,15 @@ sanguis::client::gui::hud::weapon_widget::weapon_widget(
 	image_(
 		_gui_style,
 		fcppt::make_cref(
-			_resources.weapon_icon(
+			_resources->weapon_icon(
 				_description.weapon_type()
 			)
 		)
 	),
 	text_(
 		_gui_style,
-		fcppt::make_ref(
-			_renderer
-		),
-		fcppt::make_ref(
-			_font
-		),
+		_renderer,
+		_font,
 		this->make_text(
 			_description.magazine_remaining()
 		),
@@ -93,20 +86,18 @@ sanguis::client::gui::hud::weapon_widget::weapon_widget(
 		_gui_style,
 		sge::rucksack::dim{
 			10,
-			50 // TODO: Should this be expanding?
+			50
 		},
 		sge::rucksack::axis::y,
 		sge::gui::fill_color{
 			sanguis::client::gui::style::text_color()
 		},
 		sge::gui::fill_level{
-			1.f
+			1.F
 		}
 	},
 	container_(
-		fcppt::make_ref(
-			_gui_context
-		),
+		_gui_context,
 		sge::gui::widget::reference_alignment_vector{
 			sge::gui::widget::reference_alignment_pair(
 				sge::gui::widget::reference(
@@ -135,8 +126,7 @@ sanguis::client::gui::hud::weapon_widget::weapon_widget(
 FCPPT_PP_POP_WARNING
 
 sanguis::client::gui::hud::weapon_widget::~weapon_widget()
-{
-}
+= default;
 
 void
 sanguis::client::gui::hud::weapon_widget::magazine_remaining(
@@ -195,7 +185,7 @@ sanguis::client::gui::hud::weapon_widget::make_text(
 	sanguis::magazine_remaining const _magazine_remaining
 ) const
 {
-	sge::font::string value(
+	auto value(
 		fcppt::output_to_string<
 			sge::font::string
 		>(
@@ -206,8 +196,9 @@ sanguis::client::gui::hud::weapon_widget::make_text(
 	if(
 		description_.magazine_size().get()
 		!=
-		0u
+		0U
 	)
+	{
 		value +=
 			SGE_FONT_LIT('/')
 			+
@@ -216,12 +207,14 @@ sanguis::client::gui::hud::weapon_widget::make_text(
 			>(
 				description_.magazine_size()
 			);
+	}
 
 	if(
 		description_.magazine_extra().get()
 		!=
-		0u
+		0U
 	)
+	{
 		value +=
 			SGE_FONT_LIT('+')
 			+
@@ -230,6 +223,7 @@ sanguis::client::gui::hud::weapon_widget::make_text(
 			>(
 				description_.magazine_extra()
 			);
+	}
 
 	return
 		value;

@@ -7,7 +7,7 @@
 #include <sanguis/client/states/running.hpp>
 #include <sanguis/messages/call/result_fwd.hpp>
 #include <sanguis/messages/server/add_own_player_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -37,7 +37,7 @@ class waiting_for_player
 		sanguis::client::states::running
 	>
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		waiting_for_player
 	);
 public:
@@ -61,11 +61,13 @@ public:
 	~waiting_for_player()
 	SANGUIS_STATE_OVERRIDE;
 
+	[[nodiscard]]
 	boost::statechart::result
 	react(
 		sanguis::client::events::message const &
 	);
 
+	[[nodiscard]]
 	boost::statechart::result
 	react(
 		sanguis::client::events::action const &
@@ -76,6 +78,7 @@ public:
 	=
 	sanguis::messages::call::result;
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::add_own_player const &

@@ -3,7 +3,7 @@
 
 #include <sanguis/client/sound_manager_fwd.hpp>
 #include <sge/audio/sound/base_unique_ptr.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <list>
 #include <fcppt/config/external_end.hpp>
@@ -16,7 +16,7 @@ namespace client
 
 class sound_manager
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		sound_manager
 	);
 public:

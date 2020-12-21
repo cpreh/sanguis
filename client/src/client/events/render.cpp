@@ -1,9 +1,10 @@
 #include <sanguis/client/events/render.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
+#include <sge/renderer/context/ffp_ref.hpp>
 
 
 sanguis::client::events::render::render(
-	sge::renderer::context::ffp &_context
+	sge::renderer::context::ffp_ref const _context
 )
 :
 	context_(
@@ -15,6 +16,7 @@ sanguis::client::events::render::render(
 sanguis::client::events::render::render(
 	render &&
 )
+noexcept
 = default;
 
 sanguis::client::events::render::render(
@@ -26,6 +28,7 @@ sanguis::client::events::render &
 sanguis::client::events::render::operator=(
 	render &&
 )
+noexcept
 = default;
 
 sanguis::client::events::render &
@@ -35,8 +38,7 @@ sanguis::client::events::render::operator=(
 = default;
 
 sanguis::client::events::render::~render()
-{
-}
+= default;
 
 sge::renderer::context::ffp &
 sanguis::client::events::render::context() const

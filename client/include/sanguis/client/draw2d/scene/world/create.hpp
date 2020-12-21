@@ -20,7 +20,7 @@ namespace world
 
 sanguis::client::draw2d::scene::world::base_unique_ptr
 create(
-	fcppt::log::object &,
+	fcppt::log::object &, // NOLINT(google-runtime-references)
 	sanguis::creator::name const &,
 	sanguis::client::draw2d::scene::world::parameters const &
 );

@@ -16,22 +16,25 @@
 #include <sanguis/client/draw2d/entities/hover/variant.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
-#include <sanguis/client/load/auras/context_fwd.hpp>
+#include <sanguis/client/load/auras/context_ref.hpp>
 #include <sge/image/color/predef.hpp>
 #include <sge/image/color/any/object.hpp>
 #include <fcppt/copy.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::draw2d::entities::other_player::other_player(
-	sanguis::client::load::auras::context &_aura_context,
+	sanguis::client::load::auras::context_ref const _aura_context,
 	sanguis::client::draw2d::entities::load_parameters const &_load_parameters,
 	sanguis::optional_primary_weapon_type const _primary_weapon,
 	sanguis::weapon_status const _weapon_status,
-	sanguis::client::draw2d::speed const _speed,
-	sanguis::client::draw2d::sprite::center const _center,
+	sanguis::client::draw2d::speed const &_speed,
+	sanguis::client::draw2d::sprite::center const &_center,
 	sanguis::client::draw2d::sprite::rotation const _rotation,
-	sanguis::aura_type_vector const &_auras,
-	sanguis::buff_type_vector const &_buffers,
+	sanguis::aura_type_vector &&_auras,
+	sanguis::buff_type_vector &&_buffs,
 	sanguis::client::health_pair const _health,
 	sanguis::client::draw2d::entities::name const &_name
 )
@@ -44,8 +47,12 @@ sanguis::client::draw2d::entities::other_player::other_player(
 		_speed,
 		_center,
 		_rotation,
-		_auras,
-		_buffers,
+		std::move(
+			_auras
+		),
+		std::move(
+			_buffs
+		),
 		_health
 	),
 	name_{
@@ -60,8 +67,7 @@ sanguis::client::draw2d::entities::other_player::other_player(
 }
 
 sanguis::client::draw2d::entities::other_player::~other_player()
-{
-}
+= default;
 
 sanguis::client::draw2d::entities::hover::optional_info
 sanguis::client::draw2d::entities::other_player::hover() const

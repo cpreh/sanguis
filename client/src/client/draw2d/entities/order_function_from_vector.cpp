@@ -17,7 +17,7 @@ sanguis::client::draw2d::entities::order_function_from_vector(
 	sanguis::client::draw2d::z_ordering_vector &&_orders
 )
 {
-	// TODO: Use capture by move
+	// TODO(philipp): Use capture by move
 	sanguis::client::draw2d::z_ordering_vector const orders(
 		std::move(
 			_orders
@@ -43,7 +43,7 @@ sanguis::client::draw2d::entities::order_function_from_vector(
 						[
 							orders
 						]{
-							// TODO: error message
+							// TODO(philipp): error message
 							return
 								FCPPT_ASSERT_OPTIONAL_ERROR(
 									fcppt::container::maybe_back(

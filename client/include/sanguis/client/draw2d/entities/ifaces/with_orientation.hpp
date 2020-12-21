@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_IFACES_WITH_ORIENTATION_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/sprite/rotation_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -18,7 +18,7 @@ namespace ifaces
 
 class with_orientation
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		with_orientation
 	);
 protected:
@@ -33,6 +33,7 @@ public:
 		sanguis::client::draw2d::sprite::rotation
 	) = 0;
 
+	[[nodiscard]]
 	virtual
 	sanguis::client::draw2d::sprite::rotation
 	orientation() const = 0;

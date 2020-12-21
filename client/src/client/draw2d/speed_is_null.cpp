@@ -18,6 +18,6 @@ sanguis::client::draw2d::speed_is_null(
 		fcppt::literal<
 			sanguis::client::draw2d::funit
 		>(
-			0.0001
+			0.0001 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		);
 }

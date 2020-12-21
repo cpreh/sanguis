@@ -8,8 +8,8 @@
 #include <sanguis/client/draw2d/optional_translation.hpp>
 #include <sanguis/client/draw2d/optional_vector2.hpp>
 #include <sanguis/client/draw2d/scene/camera_fwd.hpp>
-#include <sge/renderer/device/core_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <sge/renderer/device/core_ref.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -23,13 +23,13 @@ namespace scene
 
 class camera
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		camera
 	);
 public:
 	explicit
 	camera(
-		sge::renderer::device::core &
+		sge::renderer::device::core_ref
 	);
 
 	~camera();
@@ -37,21 +37,23 @@ public:
 	void
 	update(
 		sanguis::client::slowed_duration,
-		sanguis::client::draw2d::optional_player_center
+		sanguis::client::draw2d::optional_player_center const &
 	);
 
 	void
 	reset_translation();
 
+	[[nodiscard]]
 	sanguis::client::draw2d::optional_translation
 	translation() const;
 
+	[[nodiscard]]
 	sanguis::client::control::optional_attack_dest
 	translate_attack_dest(
-		sanguis::client::control::cursor_position
-	);
+		sanguis::client::control::cursor_position const &
+	) const;
 private:
-	sge::renderer::device::core &renderer_;
+	sge::renderer::device::core_ref const renderer_;
 
 	sanguis::client::draw2d::optional_translation desired_translation_;
 

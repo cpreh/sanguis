@@ -8,16 +8,18 @@
 #include <sanguis/client/draw2d/scene/hover/weapon_attribute_unique_ptr.hpp>
 #include <sanguis/client/draw2d/sprite/center.hpp>
 #include <sanguis/client/load/hud/context.hpp>
-#include <sge/font/object_fwd.hpp>
+#include <sanguis/client/load/hud/context_ref.hpp>
+#include <sge/font/object_ref.hpp>
 #include <sge/gui/draw.hpp>
 #include <sge/gui/main_area/base.hpp>
+#include <sge/gui/renderer/base_ref.hpp>
 #include <sge/gui/style/const_reference.hpp>
 #include <sge/gui/widget/base.hpp>
 #include <sge/gui/widget/reference.hpp>
 #include <sge/gui/widget/reference_alignment_pair.hpp>
 #include <sge/gui/widget/reference_alignment_vector.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <fcppt/make_cref.hpp>
@@ -36,11 +38,11 @@ FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::draw2d::scene::hover::weapon::weapon(
 	sge::gui::style::const_reference const _gui_style,
-	sge::gui::renderer::base &_gui_renderer,
-	sge::renderer::device::ffp &_renderer,
-	sge::font::object &_font,
-	sanguis::client::draw2d::sprite::center const _center,
-	sanguis::client::load::hud::context &_hud_resources,
+	sge::gui::renderer::base_ref const _gui_renderer,
+	sge::renderer::device::ffp_ref const _renderer,
+	sge::font::object_ref const _font,
+	sanguis::client::draw2d::sprite::center const &_center,
+	sanguis::client::load::hud::context_ref const _hud_resources,
 	sanguis::client::weapon_pair const &_player_weapons,
 	sanguis::client::draw2d::entities::hover::weapon const &_info
 )
@@ -52,7 +54,7 @@ sanguis::client::draw2d::scene::hover::weapon::weapon(
 	image_(
 		_gui_style,
 		fcppt::make_cref(
-			_hud_resources.weapon_icon(
+			_hud_resources->weapon_icon(
 				_info.get().weapon_type()
 			)
 		)
@@ -77,7 +79,9 @@ sanguis::client::draw2d::scene::hover::weapon::weapon(
 					fcppt::make_unique_ptr<
 						sanguis::client::draw2d::scene::hover::weapon_attribute
 					>(
-						gui_context_,
+						fcppt::make_ref(
+							gui_context_
+						),
 						_gui_style,
 						_renderer,
 						_font,
@@ -149,8 +153,7 @@ sanguis::client::draw2d::scene::hover::weapon::weapon(
 FCPPT_PP_POP_WARNING
 
 sanguis::client::draw2d::scene::hover::weapon::~weapon()
-{
-}
+= default;
 
 void
 sanguis::client::draw2d::scene::hover::weapon::draw(
@@ -158,7 +161,7 @@ sanguis::client::draw2d::scene::hover::weapon::draw(
 )
 {
 	sge::gui::draw(
-		gui_renderer_,
+		gui_renderer_.get(),
 		_render_context,
 		gui_background_,
 		gui_area_

@@ -17,6 +17,7 @@
 #include <sge/image/color/init/red.hpp>
 #include <sge/renderer/context/ffp.hpp>
 #include <sge/renderer/device/core.hpp>
+#include <sge/renderer/device/core_ref.hpp>
 #include <sge/sprite/buffers/option.hpp>
 #include <sge/sprite/compare/nothing.hpp>
 #include <sge/sprite/geometry/make_random_access_range.hpp>
@@ -30,7 +31,6 @@
 #include <sge/sprite/state/object_impl.hpp>
 #include <sge/sprite/state/parameters_impl.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_ref.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/math/dim/arithmetic.hpp>
@@ -46,9 +46,8 @@
 namespace
 {
 
-sanguis::client::draw2d::sprite::unit const
-	border_size = 2,
-	bar_height = 8;
+sanguis::client::draw2d::sprite::unit const border_size = 2;
+sanguis::client::draw2d::sprite::unit const bar_height = 8;
 
 sanguis::client::health_value
 remaining_health(
@@ -64,16 +63,14 @@ remaining_health(
 }
 
 sanguis::client::draw2d::scene::hover::healthbar::healthbar(
-	sge::renderer::device::core &_renderer,
-	sanguis::client::draw2d::sprite::center const _center,
+	sge::renderer::device::core_ref const _renderer,
+	sanguis::client::draw2d::sprite::center const &_center,
 	sanguis::client::draw2d::radius const _radius,
 	sanguis::client::health_pair const _health_pair
 )
 :
 	buffers_{
-		fcppt::make_ref(
-			_renderer
-		),
+		_renderer,
 		sge::sprite::buffers::option::static_
 	},
 	range_{
@@ -176,7 +173,7 @@ sanguis::client::draw2d::scene::hover::healthbar::healthbar(
 										fcppt::literal<
 											sanguis::client::health::value_type
 										>(
-											1.4
+											1.4 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 										)
 										*
 										remaining_health(
@@ -185,7 +182,7 @@ sanguis::client::draw2d::scene::hover::healthbar::healthbar(
 										fcppt::literal<
 											sanguis::client::health::value_type
 										>(
-											0.7
+											0.7 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 										)
 									)
 								)
@@ -204,9 +201,7 @@ sanguis::client::draw2d::scene::hover::healthbar::healthbar(
 		)
 	},
 	state_{
-		fcppt::make_ref(
-			_renderer
-		),
+		_renderer,
 		sge::sprite::state::parameters<
 			state_choices
 		>()
@@ -215,8 +210,7 @@ sanguis::client::draw2d::scene::hover::healthbar::healthbar(
 }
 
 sanguis::client::draw2d::scene::hover::healthbar::~healthbar()
-{
-}
+= default;
 
 void
 sanguis::client::draw2d::scene::hover::healthbar::draw(

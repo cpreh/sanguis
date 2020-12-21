@@ -1,4 +1,4 @@
-#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/diff_clock_cref.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/client/draw2d/center.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
@@ -21,6 +21,7 @@
 #include <sanguis/client/draw2d/sprite/normal/color.hpp>
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sanguis/client/draw2d/sprite/normal/system_decl.hpp>
+#include <sanguis/client/draw2d/sprite/normal/system_ref.hpp>
 #include <sge/image/color/any/object.hpp>
 #include <sge/sprite/intrusive/connection.hpp>
 #include <sge/sprite/roles/center.hpp>
@@ -31,7 +32,6 @@
 #include <sge/sprite/roles/texture0.hpp>
 #include <sge/timer/elapsed.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
-#include <fcppt/make_cref.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/cast/float_to_int_fun.hpp>
@@ -43,16 +43,17 @@
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <chrono>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::draw2d::entities::container::container(
-	sanguis::diff_clock const &_diff_clock,
-	sanguis::client::draw2d::sprite::normal::system &_normal_system,
+	sanguis::diff_clock_cref const _diff_clock,
+	sanguis::client::draw2d::sprite::normal::system_ref const _normal_system,
 	sanguis::client::draw2d::entities::level_vector const &_levels,
-	sanguis::client::draw2d::speed const _speed,
-	sanguis::client::draw2d::sprite::center const _center,
-	sanguis::client::draw2d::sprite::dim const _dim,
+	sanguis::client::draw2d::speed _speed,
+	sanguis::client::draw2d::sprite::center const &_center,
+	sanguis::client::draw2d::sprite::dim const &_dim,
 	sanguis::client::draw2d::sprite::rotation const _rotation,
 	sanguis::client::draw2d::sprite::normal::color const _color
 )
@@ -62,7 +63,9 @@ sanguis::client::draw2d::entities::container::container(
 	sanguis::client::draw2d::entities::ifaces::with_orientation(),
 	sanguis::client::draw2d::entities::ifaces::with_speed(),
 	speed_(
-		_speed
+		std::move(
+			_speed
+		)
 	),
 	center_(
 		fcppt::math::vector::structure_cast<
@@ -90,7 +93,7 @@ sanguis::client::draw2d::entities::container::container(
 				return
 					sanguis::client::draw2d::sprite::normal::object(
 						sge::sprite::roles::connection{} =
-							_normal_system.connection(
+							_normal_system->connection(
 								_level.z_ordering()
 							),
 						sge::sprite::roles::size_or_texture_size{} =
@@ -111,9 +114,7 @@ sanguis::client::draw2d::entities::container::container(
 	),
 	move_timer_(
 		sanguis::diff_timer::parameters(
-			fcppt::make_cref(
-				_diff_clock
-			),
+			_diff_clock,
 			std::chrono::seconds(
 				1
 			)
@@ -126,8 +127,7 @@ sanguis::client::draw2d::entities::container::container(
 }
 
 sanguis::client::draw2d::entities::container::~container()
-{
-}
+= default;
 
 sanguis::client::draw2d::sprite::center
 sanguis::client::draw2d::entities::container::center() const
@@ -182,9 +182,11 @@ sanguis::client::draw2d::entities::container::color(
 		:
 		sprites_
 	)
+	{
 		sprite.color(
 			_color
 		);
+	}
 }
 
 sanguis::client::draw2d::sprite::normal::color
@@ -231,9 +233,11 @@ sanguis::client::draw2d::entities::container::orientation(
 		:
 		sprites_
 	)
+	{
 		sprite.rotation(
 			_orientation.get()
 		);
+	}
 }
 
 sanguis::client::draw2d::sprite::rotation
@@ -298,7 +302,7 @@ sanguis::client::draw2d::entities::container::master()
 	return
 		this->at(
 			sanguis::client::draw2d::sprite::index(
-				0u
+				0U
 			)
 		);
 }
@@ -307,11 +311,11 @@ sanguis::client::draw2d::entities::container::object const &
 sanguis::client::draw2d::entities::container::master() const
 {
 	return
-		const_cast<
-			container &
-		>(
-			*this
-		).master();
+		this->at(
+			sanguis::client::draw2d::sprite::index(
+				0U
+			)
+		);
 }
 
 void
@@ -350,7 +354,9 @@ sanguis::client::draw2d::entities::container::update_center(
 		:
 		sprites_
 	)
+	{
 		sprite.center(
 			_center.get()
 		);
+	}
 }

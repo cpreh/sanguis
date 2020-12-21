@@ -36,12 +36,15 @@ public:
 		pair const &
 	);
 
+	[[nodiscard]]
 	sanguis::client::perk::tree::const_iterator
 	begin() const;
 
+	[[nodiscard]]
 	sanguis::client::perk::tree::const_iterator
 	end() const;
 
+	[[nodiscard]]
 	bool
 	empty() const;
 private:

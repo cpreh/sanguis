@@ -1,7 +1,7 @@
-#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/diff_clock_cref.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
-#include <sanguis/client/sound_manager_fwd.hpp>
+#include <sanguis/client/sound_manager_ref.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/entities/model/desired_orientation.hpp>
 #include <sanguis/client/draw2d/entities/model/loop_method.hpp>
@@ -14,6 +14,7 @@
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sanguis/client/load/animation_type.hpp>
 #include <sanguis/client/load/model/animation.hpp>
+#include <sanguis/client/load/model/part_cref.hpp>
 #include <sanguis/client/load/model/part.hpp>
 #include <sanguis/client/load/model/weapon_category.hpp>
 #include <sge/audio/buffer_fwd.hpp>
@@ -44,9 +45,9 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 sanguis::client::draw2d::entities::model::part::part(
-	sanguis::diff_clock const &_diff_clock,
-	sanguis::client::sound_manager &_sound_manager,
-	sanguis::client::load::model::part const &_load_part,
+	sanguis::diff_clock_cref const _diff_clock,
+	sanguis::client::sound_manager_ref const _sound_manager,
+	sanguis::client::load::model::part_cref const _load_part,
 	sanguis::optional_primary_weapon_type const _weapon,
 	sanguis::client::draw2d::sprite::rotation const _rotation,
 	sanguis::client::load::animation_type const _animation_type
@@ -60,9 +61,7 @@ sanguis::client::draw2d::entities::model::part::part(
 	),
 	rotation_timer_(
 		sanguis::diff_timer::parameters(
-			fcppt::make_cref(
-				_diff_clock
-			),
+			_diff_clock,
 			std::chrono::seconds(
 				1
 			)
@@ -90,17 +89,18 @@ FCPPT_PP_POP_WARNING
 sanguis::client::draw2d::entities::model::part::part(
 	part &&
 )
+noexcept
 = default;
 
 sanguis::client::draw2d::entities::model::part &
 sanguis::client::draw2d::entities::model::part::operator=(
 	part &&
 )
+noexcept
 = default;
 
 sanguis::client::draw2d::entities::model::part::~part()
-{
-}
+= default;
 
 void
 sanguis::client::draw2d::entities::model::part::pause(
@@ -135,7 +135,9 @@ sanguis::client::draw2d::entities::model::part::animation(
 		==
 		_animation_type
 	)
+	{
 		return;
+	}
 
 	animation_ =
 		this->load_animation(
@@ -180,9 +182,10 @@ sanguis::client::draw2d::entities::model::part::update(
 		fcppt::literal<
 			sanguis::client::draw2d::sprite::rotation::value_type
 		>(
-			0.001
+			0.001 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 		)
 	)
+	{
 		_sprite.rotation(
 			sanguis::client::draw2d::entities::model::orientation(
 				sge::timer::elapsed_fractional_and_reset<
@@ -196,6 +199,7 @@ sanguis::client::draw2d::entities::model::part::update(
 				desired_orientation_
 			).get()
 		);
+	}
 }
 
 void
@@ -245,9 +249,11 @@ sanguis::client::draw2d::entities::model::part::load_animation(
 	return
 		sanguis::client::draw2d::entities::model::animation{
 			sanguis::client::draw2d::sprite::animation::texture{
-				animation.series(),
+				fcppt::make_cref(
+					animation.series()
+				),
 				loop_method,
-				diff_clock_.get()
+				diff_clock_
 			},
 			_animation_type,
 			fcppt::optional::bind(
@@ -263,7 +269,7 @@ sanguis::client::draw2d::entities::model::part::load_animation(
 				{
 					return
 						sanguis::client::draw2d::entities::model::make_sound(
-							_buffer.get(),
+							_buffer,
 							sound_manager_.get(),
 							loop_method
 						);

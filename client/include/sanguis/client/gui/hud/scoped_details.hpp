@@ -2,7 +2,8 @@
 #define SANGUIS_CLIENT_GUI_HUD_SCOPED_DETAILS_HPP_INCLUDED
 
 #include <sanguis/client/gui/hud/object_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
+#include <fcppt/reference_impl.hpp>
 
 
 namespace sanguis
@@ -16,18 +17,25 @@ namespace hud
 
 class scoped_details
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		scoped_details
 	);
 public:
+	using
+	object_ref
+	=
+	fcppt::reference<
+		sanguis::client::gui::hud::object
+	>;
+
 	explicit
 	scoped_details(
-		sanguis::client::gui::hud::object &
+		object_ref
 	);
 
 	~scoped_details();
 private:
-	sanguis::client::gui::hud::object &hud_;
+	object_ref hud_;
 };
 
 }

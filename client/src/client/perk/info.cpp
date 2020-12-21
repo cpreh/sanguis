@@ -17,27 +17,27 @@ sanguis::client::perk::info::info(
 	),
 	level_(
 		sanguis::client::level(
-			0u
+			0U
 		)
 	),
 	required_parent_level_(
 		sanguis::client::perk::level(
 			sanguis::client::level(
-				0u
+				0U
 			)
 		)
 	),
 	required_player_level_(
 		sanguis::client::player_level(
 			sanguis::client::level(
-				0u
+				0U
 			)
 		)
 	),
 	max_level_(
 		sanguis::client::perk::level(
 			sanguis::client::level(
-				0u
+				0U
 			)
 		)
 	)

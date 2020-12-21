@@ -4,7 +4,7 @@
 #include <sanguis/client/draw2d/scene/state/create.hpp>
 #include <sanguis/client/draw2d/scene/state/dummy.hpp>
 #include <sanguis/client/draw2d/scene/state/text.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/unreachable.hpp>
@@ -13,7 +13,7 @@
 
 sanguis::client::draw2d::scene::state::array
 sanguis::client::draw2d::scene::state::create(
-	sge::renderer::device::ffp &_renderer
+	sge::renderer::device::ffp_ref const _renderer
 )
 {
 	return

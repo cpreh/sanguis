@@ -6,9 +6,9 @@
 #include <sanguis/client/load/model/part_fwd.hpp>
 #include <sanguis/client/load/model/part_map.hpp>
 #include <sanguis/client/load/model/part_result.hpp>
-#include <sanguis/client/load/resource/context_fwd.hpp>
+#include <sanguis/client/load/resource/context_cref.hpp>
 #include <sanguis/model/cell_size.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/optional/object_decl.hpp>
@@ -31,7 +31,7 @@ namespace model
 
 class object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		object
 	);
 public:
@@ -46,35 +46,42 @@ public:
 	sanguis::client::load::model::part_map::size_type;
 
 	object(
-		fcppt::log::object &,
-		std::filesystem::path const &,
-		sanguis::client::load::resource::context const &
+		fcppt::log::object &, // NOLINT(google-runtime-references)
+		std::filesystem::path &&,
+		sanguis::client::load::resource::context_cref
 	);
 
 	~object();
 
+	[[nodiscard]]
 	sanguis::client::load::model::part const &
 	operator[](
 		fcppt::string const &
 	) const;
 
+	[[nodiscard]]
 	sanguis::client::load::model::part const &
 	random_part(
-		sanguis::random_generator &
-	) const;
+		sanguis::random_generator & // NOLINT(google-runtime-references)
+	) const; // NOLINT(google-runtime-references)
 
+	[[nodiscard]]
 	size_type
 	size() const;
 
+	[[nodiscard]]
 	const_iterator
 	begin() const;
 
+	[[nodiscard]]
 	const_iterator
 	end() const;
 
+	[[nodiscard]]
 	sanguis::model::cell_size
 	cell_size() const;
 private:
+	[[nodiscard]]
 	sanguis::client::load::model::part_map const &
 	parts() const;
 

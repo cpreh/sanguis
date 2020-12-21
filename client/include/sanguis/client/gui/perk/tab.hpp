@@ -4,14 +4,14 @@
 #include <sanguis/client/gui/perk/line_unique_ptr_tree_vector.hpp>
 #include <sanguis/client/gui/perk/tab_fwd.hpp>
 #include <sanguis/client/perk/const_tree_range_fwd.hpp>
-#include <sanguis/client/perk/state_fwd.hpp>
-#include <sge/font/object_fwd.hpp>
+#include <sanguis/client/perk/state_ref.hpp>
+#include <sge/font/object_ref.hpp>
 #include <sge/font/string.hpp>
-#include <sge/gui/context_fwd.hpp>
+#include <sge/gui/context_ref.hpp>
 #include <sge/gui/style/const_reference.hpp>
 #include <sge/gui/widget/tree.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -25,24 +25,26 @@ namespace perk
 
 class tab
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		tab
 	);
 public:
 	tab(
-		sge::renderer::device::ffp &,
-		sge::font::object &,
-		sge::gui::context &,
+		sge::renderer::device::ffp_ref,
+		sge::font::object_ref,
+		sge::gui::context_ref,
 		sge::gui::style::const_reference,
-		sanguis::client::perk::state &,
+		sanguis::client::perk::state_ref,
 		sanguis::client::perk::const_tree_range const &
 	);
 
 	~tab();
 
+	[[nodiscard]]
 	sge::gui::widget::tree &
 	widget();
 
+	[[nodiscard]]
 	sge::font::string const &
 	name() const;
 private:

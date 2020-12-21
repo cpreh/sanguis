@@ -25,7 +25,8 @@ public:
 
 	menu(
 		menu &&
-	);
+	)
+	noexcept;
 
 	menu(
 		menu const &
@@ -34,7 +35,8 @@ public:
 	menu &
 	operator=(
 		menu &&
-	);
+	)
+	noexcept;
 
 	menu &
 	operator=(

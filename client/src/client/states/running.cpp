@@ -11,6 +11,7 @@
 #include <sanguis/client/level.hpp>
 #include <sanguis/client/machine.hpp>
 #include <sanguis/client/make_send_callback.hpp>
+#include <sanguis/client/optional_health_pair_fwd.hpp>
 #include <sanguis/client/player_health_callback.hpp>
 #include <sanguis/client/slowed_duration.hpp>
 #include <sanguis/client/sound_manager.hpp>
@@ -90,7 +91,6 @@
 #include <fcppt/config/external_begin.hpp>
 #include <metal.hpp>
 #include <boost/statechart/result.hpp>
-#include <functional>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -119,9 +119,11 @@ sanguis::client::states::running::running(
 		this->context<
 			sanguis::client::machine
 		>().log_context(),
-		this->context<
-			sanguis::client::machine
-		>().resources().resources().textures()
+		fcppt::make_cref(
+			this->context<
+				sanguis::client::machine
+			>().resources().resources().textures()
+		)
 	),
 	console_(
 		fcppt::make_unique_ptr<
@@ -133,9 +135,11 @@ sanguis::client::states::running::running(
 				>().console_gfx()
 			),
 			sanguis::client::make_send_callback(
-				this->context<
-					sanguis::client::machine
-				>()
+				fcppt::make_ref(
+					this->context<
+						sanguis::client::machine
+					>()
+				)
 			)
 		)
 	),
@@ -148,21 +152,29 @@ sanguis::client::states::running::running(
 		fcppt::make_unique_ptr<
 			sanguis::client::gui::hud::object
 		>(
-			hud_resources_,
+			fcppt::make_ref(
+				hud_resources_
+			),
 			fcppt::make_cref(
 				this->context<
 					sanguis::client::machine
 				>().gui_style()
 			),
-			this->context<
-				sanguis::client::machine
-			>().font_object(),
-			this->context<
-				sanguis::client::machine
-			>().renderer(),
-			this->context<
-				sanguis::client::machine
-			>().viewport_manager()
+			fcppt::make_ref(
+				this->context<
+					sanguis::client::machine
+				>().font_object()
+			),
+			fcppt::make_ref(
+				this->context<
+					sanguis::client::machine
+				>().renderer()
+			),
+			fcppt::make_ref(
+				this->context<
+					sanguis::client::machine
+				>().viewport_manager()
+			)
 		)
 	),
 	drawer_(
@@ -202,11 +214,16 @@ sanguis::client::states::running::running(
 				>().viewport_manager()
 			),
 			sanguis::client::player_health_callback(
-				std::bind(
-					&sanguis::client::gui::hud::object::health_pair,
-					hud_.get_pointer(),
-					std::placeholders::_1
+				[
+					this
+				](
+					sanguis::client::optional_health_pair const &_health
 				)
+				{
+					this->hud_->health_pair(
+						_health
+					);
+				}
 			),
 			fcppt::make_ref(
 				this->context<
@@ -227,11 +244,16 @@ sanguis::client::states::running::running(
 			sanguis::client::control::input_translator
 		>(
 			sanguis::client::control::actions::callback{
-				std::bind(
-					&sanguis::client::states::running::handle_player_action,
-					this,
-					std::placeholders::_1
+				[
+					this
+				](
+					sanguis::client::control::actions::any const &_action
 				)
+				{
+					this->handle_player_action(
+						_action
+					);
+				}
 			}
 		)
 	),
@@ -248,8 +270,7 @@ sanguis::client::states::running::running(
 FCPPT_PP_POP_WARNING
 
 sanguis::client::states::running::~running()
-{
-}
+= default;
 
 boost::statechart::result
 sanguis::client::states::running::react(
@@ -280,7 +301,9 @@ sanguis::client::states::running::react(
 
 	this->post_event(
 		sanguis::client::events::overlay(
-			_event.context()
+			fcppt::make_ref(
+				_event.context()
+			)
 		)
 	);
 
@@ -381,41 +404,41 @@ sanguis::client::states::running::operator()(
 	sanguis::messages::server::add_console_command const &_message
 )
 {
-	fcppt::string const
-		name(
-			fcppt::optional::to_exception(
-				sge::charconv::utf8_string_to_fcppt(
-					fcppt::record::get<
-						sanguis::messages::roles::command_name
-					>(
-						_message.get()
-					)
-				),
-				[]{
-					return
-						sanguis::exception{
-							FCPPT_TEXT("Failed to convert command name!")
-						};
-				}
-			)
-		),
-		description(
-			fcppt::optional::to_exception(
-				sge::charconv::utf8_string_to_fcppt(
-					fcppt::record::get<
-						sanguis::messages::roles::command_description
-					>(
-						_message.get()
-					)
-				),
-				[]{
-					return
-						sanguis::exception{
-							FCPPT_TEXT("Failed to convert command description!")
-						};
-				}
-			)
-		);
+	fcppt::string const name(
+		fcppt::optional::to_exception(
+			sge::charconv::utf8_string_to_fcppt(
+				fcppt::record::get<
+					sanguis::messages::roles::command_name
+				>(
+					_message.get()
+				)
+			),
+			[]{
+				return
+					sanguis::exception{
+						FCPPT_TEXT("Failed to convert command name!")
+					};
+			}
+		)
+	);
+
+	fcppt::string const description(
+		fcppt::optional::to_exception(
+			sge::charconv::utf8_string_to_fcppt(
+				fcppt::record::get<
+					sanguis::messages::roles::command_description
+				>(
+					_message.get()
+				)
+			),
+			[]{
+				return
+					sanguis::exception{
+						FCPPT_TEXT("Failed to convert command description!")
+					};
+			}
+		)
+	);
 
 	FCPPT_LOG_DEBUG(
 		log_,
@@ -687,7 +710,7 @@ sanguis::client::states::running::operator()(
 		slowdown_
 		>
 		sanguis::slowdown{
-			0.f
+			0.F
 		}
 	);
 

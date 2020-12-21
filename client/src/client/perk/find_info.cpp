@@ -2,12 +2,13 @@
 #include <sanguis/client/perk/find_info.hpp>
 #include <sanguis/client/perk/find_info_any.hpp>
 #include <sanguis/client/perk/tree.hpp>
+#include <sanguis/client/perk/tree_ref.hpp>
 
 
 sanguis::client::perk::tree &
 sanguis::client::perk::find_info(
 	sanguis::perk_type const _type,
-	sanguis::client::perk::tree &_tree
+	sanguis::client::perk::tree_ref const _tree
 )
 {
 	return

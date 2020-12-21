@@ -24,13 +24,14 @@ class net_error
 {
 public:
 	net_error(
-		fcppt::string const &,
+		fcppt::string &&,
 		boost::system::error_code const &
 	);
 
 	net_error(
 		net_error &&
-	);
+	)
+	noexcept;
 
 	net_error(
 		net_error const &
@@ -39,7 +40,8 @@ public:
 	net_error &
 	operator=(
 		net_error &&
-	);
+	)
+	noexcept;
 
 	net_error &
 	operator=(
@@ -49,9 +51,11 @@ public:
 	~net_error()
 	override;
 
+	[[nodiscard]]
 	fcppt::string const &
 	message() const;
 
+	[[nodiscard]]
 	boost::system::error_code const &
 	code() const;
 private:

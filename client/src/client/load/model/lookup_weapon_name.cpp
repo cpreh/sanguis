@@ -17,17 +17,19 @@
 namespace
 {
 
-typedef
+using
+weapon_type_array
+=
 fcppt::enum_::array<
 	sanguis::primary_weapon_type,
 	sanguis::model::weapon_category_name
->
-weapon_type_array;
+>;
 
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wglobal-constructors)
 FCPPT_PP_DISABLE_CLANG_WARNING(-Wexit-time-destructors)
 
+// NOLINTNEXTLINE(cert-err58-cpp)
 weapon_type_array const weapon_types(
 	fcppt::enum_::array_init<
 		weapon_type_array

@@ -24,7 +24,7 @@
 sanguis::client::draw2d::entities::unique_ptr
 sanguis::client::draw2d::factory::destructible(
 	sanguis::client::draw2d::entities::load_parameters const &_parameters,
-	sanguis::client::draw2d::sprite::center const _center,
+	sanguis::client::draw2d::sprite::center const &_center,
 	sanguis::client::draw2d::sprite::rotation const _rotation,
 	sanguis::creator::destructible_type const _destructible_type
 )

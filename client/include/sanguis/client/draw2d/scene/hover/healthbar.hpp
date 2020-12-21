@@ -8,11 +8,11 @@
 #include <sanguis/client/draw2d/sprite/center_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/colored/choices.hpp>
 #include <sge/renderer/context/ffp_fwd.hpp>
-#include <sge/renderer/device/core_fwd.hpp>
+#include <sge/renderer/device/core_ref.hpp>
 #include <sge/sprite/render/range_decl.hpp>
 #include <sge/sprite/state/choices.hpp>
 #include <sge/sprite/state/object_decl.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <metal.hpp>
 #include <fcppt/config/external_end.hpp>
@@ -31,13 +31,13 @@ namespace hover
 
 class healthbar
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		healthbar
 	);
 public:
 	healthbar(
-		sge::renderer::device::core &,
-		sanguis::client::draw2d::sprite::center,
+		sge::renderer::device::core_ref,
+		sanguis::client::draw2d::sprite::center const &,
 		sanguis::client::draw2d::radius,
 		sanguis::client::health_pair
 	);
@@ -46,8 +46,8 @@ public:
 
 	void
 	draw(
-		sge::renderer::context::ffp &
-	);
+		sge::renderer::context::ffp & // NOLINT(google-runtime-references)
+	); // NOLINT(google-runtime-references)
 private:
 	using
 	sge_buffers

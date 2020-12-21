@@ -1,7 +1,7 @@
 #include <sanguis/client/load/log_location.hpp>
 #include <sanguis/client/load/model/collection.hpp>
 #include <sanguis/client/load/model/object.hpp>
-#include <sanguis/client/load/resource/context_fwd.hpp>
+#include <sanguis/client/load/resource/context_cref.hpp>
 #include <sanguis/load/model/make_path.hpp>
 #include <sanguis/load/model/path.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -44,7 +44,7 @@ sanguis::client::load::model::collection::operator[](
 
 sanguis::client::load::model::collection::collection(
 	fcppt::log::context_reference const _log_context,
-	sanguis::client::load::resource::context const &_resources
+	sanguis::client::load::resource::context_cref const _resources
 )
 :
 	log_{
@@ -64,5 +64,4 @@ sanguis::client::load::model::collection::collection(
 }
 
 sanguis::client::load::model::collection::~collection()
-{
-}
+= default;

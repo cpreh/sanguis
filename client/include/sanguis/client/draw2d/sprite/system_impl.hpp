@@ -6,7 +6,7 @@
 #include <sanguis/client/draw2d/sprite/state_choices.hpp>
 #include <sanguis/client/draw2d/sprite/system_decl.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
-#include <sge/renderer/device/core_fwd.hpp>
+#include <sge/renderer/device/core_ref.hpp>
 #include <sge/sprite/buffers/option.hpp>
 #include <sge/sprite/compare/default.hpp>
 #include <sge/sprite/intrusive/ordered/collection_impl.hpp>
@@ -16,7 +16,6 @@
 #include <sge/sprite/state/default_options.hpp>
 #include <sge/sprite/state/object_impl.hpp>
 #include <sge/sprite/state/parameters.hpp>
-#include <fcppt/make_ref.hpp>
 
 
 template<
@@ -27,8 +26,8 @@ sanguis::client::draw2d::sprite::system<
 	Choices,
 	Category
 >::system(
-	sge::renderer::device::core &_renderer,
-	sanguis::client::draw2d::sprite::state &_state
+	sge::renderer::device::core_ref const _renderer,
+	state_ref const _state
 )
 :
 	renderer_{
@@ -38,9 +37,7 @@ sanguis::client::draw2d::sprite::system<
 		_state
 	),
 	buffers_(
-		fcppt::make_ref(
-			_renderer
-		),
+		_renderer,
 		sge::sprite::buffers::option::dynamic
 	),
 	collection_()
@@ -58,8 +55,7 @@ sanguis::client::draw2d::sprite::system<
 	Choices,
 	Category
 >()
-{
-}
+= default;
 
 template<
 	typename Choices,
@@ -107,7 +103,7 @@ sanguis::client::draw2d::sprite::system<
 		).range(),
 		buffers_,
 		sge::sprite::compare::default_(),
-		state_,
+		state_.get(),
 		sge::sprite::state::default_options<
 			sanguis::client::draw2d::sprite::state_choices
 		>()
@@ -127,7 +123,7 @@ sanguis::client::draw2d::sprite::system<
 >::renderer() const
 {
 	return
-		renderer_;
+		renderer_.get();
 }
 
 #endif

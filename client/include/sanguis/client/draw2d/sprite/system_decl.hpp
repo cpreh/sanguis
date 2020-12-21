@@ -5,9 +5,10 @@
 #include <sanguis/client/draw2d/sprite/state.hpp>
 #include <sanguis/client/draw2d/sprite/system_fwd.hpp>
 #include <sge/renderer/context/core_fwd.hpp>
-#include <sge/renderer/device/core_fwd.hpp>
+#include <sge/renderer/device/core_ref.hpp>
 #include <sge/sprite/intrusive/ordered/collection_decl.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
+#include <fcppt/reference_impl.hpp>
 
 
 namespace sanguis
@@ -25,7 +26,7 @@ template<
 >
 class system
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		system
 	);
 
@@ -43,14 +44,22 @@ class system
 	typename
 	collection::connection_ref;
 public:
+	using
+	state_ref
+	=
+	fcppt::reference<
+		sanguis::client::draw2d::sprite::state
+	>;
+
 	system(
-		sge::renderer::device::core &,
-		// TODO: Make it possible to omit the states if they do nothing
-		sanguis::client::draw2d::sprite::state &
+		sge::renderer::device::core_ref,
+		// TODO(philipp): Make it possible to omit the states if they do nothing
+		state_ref
 	);
 
 	~system();
 
+	[[nodiscard]]
 	connection_ref
 	connection(
 		Category
@@ -58,10 +67,11 @@ public:
 
 	void
 	render(
-		sge::renderer::context::core &,
+		sge::renderer::context::core &, // NOLINT(google-runtime-references)
 		Category
 	);
 
+	[[nodiscard]]
 	sge::renderer::device::core &
 	renderer() const;
 private:
@@ -72,9 +82,9 @@ private:
 		Choices
 	>;
 
-	sge::renderer::device::core &renderer_;
+	sge::renderer::device::core_ref const renderer_;
 
-	sanguis::client::draw2d::sprite::state &state_;
+	state_ref const state_;
 
 	sge_buffers buffers_;
 

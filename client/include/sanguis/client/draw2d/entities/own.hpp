@@ -2,7 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_OWN_HPP_INCLUDED
 
 #include <sanguis/client/draw2d/entities/own_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -16,7 +16,7 @@ namespace entities
 
 class own
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		own
 	);
 protected:
@@ -26,6 +26,7 @@ public:
 	void
 	update() = 0;
 
+	[[nodiscard]]
 	virtual
 	bool
 	may_be_removed() const = 0;

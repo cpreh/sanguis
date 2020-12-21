@@ -3,7 +3,7 @@
 #include <sanguis/client/load/model/make_parts.hpp>
 #include <sanguis/client/load/model/object.hpp>
 #include <sanguis/client/load/model/part.hpp>
-#include <sanguis/client/load/resource/context_fwd.hpp>
+#include <sanguis/client/load/resource/context_cref.hpp>
 #include <sanguis/model/cell_size.hpp>
 #include <sge/core/exception.hpp>
 #include <fcppt/make_ref.hpp>
@@ -22,23 +22,26 @@
 #include <fcppt/config/external_begin.hpp>
 #include <filesystem>
 #include <iterator>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::load::model::object::object(
 	fcppt::log::object &_log,
-	std::filesystem::path const &_path,
-	sanguis::client::load::resource::context const &_context
+	std::filesystem::path &&_path,
+	sanguis::client::load::resource::context_cref const _context
 )
 try
 :
 	path_(
-		_path
+		std::move(
+			_path
+		)
 	),
 	part_result_(
 		sanguis::client::load::model::make_parts(
 			_log,
-			_path,
+			path_,
 			_context
 		)
 	),
@@ -80,16 +83,15 @@ catch(
 }
 
 sanguis::client::load::model::object::~object()
-{
-}
+= default;
 
 sanguis::client::load::model::part const &
 sanguis::client::load::model::object::operator[](
 	fcppt::string const &_name
 ) const
 {
-	// TODO: optionals
-	sanguis::client::load::model::part_map::const_iterator const it(
+	// TODO(philipp): optionals
+	auto const it(
 		this->parts().find(
 			_name
 		)
@@ -100,6 +102,7 @@ sanguis::client::load::model::object::operator[](
 		==
 		this->parts().end()
 	)
+	{
 		throw sanguis::exception(
 			FCPPT_TEXT("Category \"")
 			+
@@ -111,6 +114,7 @@ sanguis::client::load::model::object::operator[](
 				path_
 			)
 		);
+	}
 
 	return
 		*it->second;
@@ -124,6 +128,7 @@ sanguis::client::load::model::object::random_part(
 	if(
 		!random_part_.has_value()
 	)
+	{
 		random_part_ =
 			optional_part_rand(
 				part_rand(
@@ -132,21 +137,22 @@ sanguis::client::load::model::object::random_part(
 					),
 					part_map_distribution(
 						part_map_distribution::param_type::min(
-							0u
+							0U
 						),
 						part_map_distribution::param_type::max(
-							this->parts().size() - 1u
+							this->parts().size() - 1U
 						)
 					)
 				)
 			);
+	}
 
 	return
 		*std::next(
 			this->parts().begin(),
 			fcppt::cast::to_signed(
 				(
-					// TODO:
+					// TODO(philipp):
 					random_part_.get_unsafe()
 				)()
 			)

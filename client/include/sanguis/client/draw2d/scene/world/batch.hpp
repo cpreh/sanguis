@@ -33,21 +33,23 @@ public:
 
 	batch(
 		batch &&
-	);
+	)
+	noexcept;
 
 	batch &
 	operator=(
 		batch &&
-	);
+	)
+	noexcept;
 
 	~batch();
 
 	void
 	draw(
-		sge::renderer::context::core &,
+		sge::renderer::context::core &, // NOLINT(google-runtime-references)
 		sge::renderer::vertex::declaration const &,
-		sanguis::client::draw2d::scene::world::sprite::state &
-	) const;
+		sanguis::client::draw2d::scene::world::sprite::state & // NOLINT(google-runtime-references)
+	) const; // NOLINT(google-runtime-references)
 private:
 	sanguis::client::draw2d::scene::world::sprite::range range_;
 };

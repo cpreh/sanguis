@@ -10,15 +10,17 @@ sanguis::client::gui::hud::weapon_attribute_diff_to_string(
 	sanguis::weapon_attribute_value const _value
 )
 {
-	sge::font::string result;
+	sge::font::string result{};
 
 	if(
 		_value
 		>
 		0
 	)
+	{
 		result +=
 			SGE_FONT_LIT('+');
+	}
 
 	return
 		result

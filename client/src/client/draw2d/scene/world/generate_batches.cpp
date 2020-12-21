@@ -6,9 +6,11 @@
 #include <sanguis/client/draw2d/scene/world/generate_batches.hpp>
 #include <sanguis/client/draw2d/scene/world/make_sprite.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/buffers.hpp>
+#include <sanguis/client/draw2d/scene/world/sprite/buffers_ref.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/compare.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/container.hpp>
 #include <sanguis/client/load/tiles/context.hpp>
+#include <sanguis/client/load/tiles/context_ref.hpp>
 #include <sanguis/creator/background_grid.hpp>
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/min.hpp>
@@ -38,15 +40,15 @@ sanguis::client::draw2d::scene::world::generate_batches(
 	sanguis::client::draw::debug const _debug,
 	sanguis::creator::grid const &_grid,
 	sanguis::creator::background_grid const &_background_grid,
-	sanguis::client::load::tiles::context &_tiles,
-	sanguis::client::draw2d::scene::world::sprite::buffers &_sprite_buffers
+	sanguis::client::load::tiles::context_ref const _tiles,
+	sanguis::client::draw2d::scene::world::sprite::buffers_ref const _sprite_buffers
 )
 {
 	sanguis::tiles::log const tiles_log{
 		_log_context
 	};
 
-	sanguis::creator::pos const batch_dim_pos(
+	auto const batch_dim_pos(
 		fcppt::math::vector::fill<
 			sanguis::creator::pos
 		>(
@@ -85,7 +87,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 				batch_dim_pos,
 				&tiles_log
 			](
-				sanguis::creator::pos const _pos
+				sanguis::creator::pos const &_pos
 			)
 			{
 				sanguis::creator::min const min(
@@ -99,15 +101,14 @@ sanguis::client::draw2d::scene::world::generate_batches(
 					+
 					batch_dim_pos
 					+
-					// TODO: Why?
 					fcppt::math::vector::fill<
 						sanguis::creator::pos
 					>(
-						1u
+						1U
 					)
 				);
 
-				sanguis::client::draw2d::scene::world::sprite::container sprites(
+				auto sprites(
 					fcppt::algorithm::map_optional<
 						sanguis::client::draw2d::scene::world::sprite::container
 					>(
@@ -116,7 +117,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 							_grid,
 							_background_grid,
 							fcppt::make_ref(
-								_tiles.collection()
+								_tiles->collection()
 							),
 							min,
 							sup
@@ -147,7 +148,7 @@ sanguis::client::draw2d::scene::world::generate_batches(
 								sprites
 							),
 							sanguis::client::draw2d::scene::world::sprite::compare(),
-							_sprite_buffers
+							_sprite_buffers.get()
 						)
 					);
 			}

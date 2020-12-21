@@ -3,13 +3,13 @@
 
 #include <sanguis/client/gui/perk/state_fwd.hpp>
 #include <sanguis/client/gui/perk/tab_unique_ptr_vector.hpp>
-#include <sanguis/client/perk/state_fwd.hpp>
-#include <sge/font/object_fwd.hpp>
-#include <sge/gui/context_fwd.hpp>
+#include <sanguis/client/perk/state_ref.hpp>
+#include <sge/font/object_ref.hpp>
+#include <sge/gui/context_ref.hpp>
 #include <sge/gui/style/const_reference.hpp>
 #include <sge/gui/widget/tab.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -23,20 +23,21 @@ namespace perk
 
 class state
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		state
 	);
 public:
 	state(
-		sge::renderer::device::ffp &,
-		sge::font::object &,
-		sge::gui::context &,
+		sge::renderer::device::ffp_ref,
+		sge::font::object_ref,
+		sge::gui::context_ref,
 		sge::gui::style::const_reference,
-		sanguis::client::perk::state &
+		sanguis::client::perk::state_ref
 	);
 
 	~state();
 
+	[[nodiscard]]
 	sge::gui::widget::tab &
 	widget();
 private:

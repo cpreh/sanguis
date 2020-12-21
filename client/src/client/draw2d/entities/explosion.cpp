@@ -17,7 +17,7 @@
 
 sanguis::client::draw2d::entities::explosion::explosion(
 	sanguis::client::draw2d::entities::load_parameters const &_load_parameters,
-	sanguis::client::draw2d::sprite::center const _center,
+	sanguis::client::draw2d::sprite::center const &_center,
 	sanguis::client::draw2d::aoe const _aoe
 )
 :
@@ -40,7 +40,7 @@ sanguis::client::draw2d::entities::explosion::explosion(
 					fcppt::literal<
 						sanguis::client::draw2d::funit
 					>(
-						1.5
+						1.5 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 					)
 				)
 			)
@@ -50,5 +50,4 @@ sanguis::client::draw2d::entities::explosion::explosion(
 }
 
 sanguis::client::draw2d::entities::explosion::~explosion()
-{
-}
+= default;

@@ -6,18 +6,17 @@
 #include <sanguis/client/perk/category_to_string.hpp>
 #include <sanguis/client/perk/const_tree_range.hpp>
 #include <sanguis/client/perk/optional_info.hpp>
-#include <sanguis/client/perk/state_fwd.hpp>
+#include <sanguis/client/perk/state_ref.hpp>
 #include <sanguis/client/perk/to_category.hpp>
 #include <sanguis/client/perk/tree.hpp>
 #include <sge/font/from_fcppt_string.hpp>
-#include <sge/font/object_fwd.hpp>
+#include <sge/font/object_ref.hpp>
 #include <sge/font/string.hpp>
-#include <sge/gui/context_fwd.hpp>
+#include <sge/gui/context_ref.hpp>
 #include <sge/gui/style/const_reference.hpp>
 #include <sge/gui/widget/reference.hpp>
 #include <sge/gui/widget/reference_tree_vector.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
-#include <fcppt/make_ref.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/assert/optional_error.hpp>
@@ -25,11 +24,11 @@
 
 
 sanguis::client::gui::perk::tab::tab(
-	sge::renderer::device::ffp &_renderer,
-	sge::font::object &_font,
-	sge::gui::context &_context,
+	sge::renderer::device::ffp_ref const _renderer,
+	sge::font::object_ref const _font,
+	sge::gui::context_ref const _context,
 	sge::gui::style::const_reference const _style,
-	sanguis::client::perk::state &_state,
+	sanguis::client::perk::state_ref const _state,
 	sanguis::client::perk::const_tree_range const &_range
 )
 :
@@ -82,9 +81,7 @@ sanguis::client::gui::perk::tab::tab(
 		)
 	),
 	tree_(
-		fcppt::make_ref(
-			_context
-		),
+		_context,
 		fcppt::algorithm::map<
 			sge::gui::widget::reference_tree_vector
 		>(
@@ -115,7 +112,7 @@ sanguis::client::gui::perk::tab::tab(
 		sge::font::from_fcppt_string(
 			sanguis::client::perk::category_to_string(
 				sanguis::client::perk::to_category(
-					// TODO: This is unsafe!
+					// TODO(philipp): This is unsafe!
 					FCPPT_ASSERT_OPTIONAL_ERROR(
 						_range.begin()->value()
 					).perk_type()
@@ -127,8 +124,7 @@ sanguis::client::gui::perk::tab::tab(
 }
 
 sanguis::client::gui::perk::tab::~tab()
-{
-}
+= default;
 
 sge::gui::widget::tree &
 sanguis::client::gui::perk::tab::widget()

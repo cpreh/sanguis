@@ -16,7 +16,7 @@ namespace scene
 
 sge::renderer::matrix4
 translation_matrix(
-	sanguis::client::draw2d::translation
+	sanguis::client::draw2d::translation const &
 );
 
 }

@@ -3,6 +3,7 @@
 
 #include <sanguis/perk_type_fwd.hpp>
 #include <sanguis/client/perk/tree_fwd.hpp>
+#include <sanguis/client/perk/tree_ref.hpp>
 
 
 namespace sanguis
@@ -15,7 +16,7 @@ namespace perk
 sanguis::client::perk::tree &
 find_info(
 	sanguis::perk_type,
-	sanguis::client::perk::tree &
+	sanguis::client::perk::tree_ref
 );
 
 }

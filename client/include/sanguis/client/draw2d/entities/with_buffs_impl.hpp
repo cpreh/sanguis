@@ -40,9 +40,11 @@ sanguis::client::draw2d::entities::with_buffs<
 		:
 		_parameters.buffs()
 	)
+	{
 		this->add_buff(
 			buff
 		);
+	}
 }
 
 template<
@@ -53,8 +55,7 @@ sanguis::client::draw2d::entities::with_buffs<
 >::~with_buffs<
 	Base
 >()
-{
-}
+= default;
 
 template<
 	typename Base
@@ -71,9 +72,11 @@ sanguis::client::draw2d::entities::with_buffs<
 		:
 		buffs_
 	)
+	{
 		buff.second->update(
 			*this
 		);
+	}
 }
 
 template<
@@ -87,7 +90,8 @@ sanguis::client::draw2d::entities::with_buffs<
 )
 {
 	{
-		buff_map::iterator const it(
+		// TODO(philipp): algorithm::find
+		auto const it(
 			buffs_.find(
 				_type
 			)
@@ -147,7 +151,7 @@ sanguis::client::draw2d::entities::with_buffs<
 	sanguis::buff_type const _type
 )
 {
-	buff_map::iterator const it(
+	auto const it(
 		buffs_.find(
 			_type
 		)
@@ -162,7 +166,9 @@ sanguis::client::draw2d::entities::with_buffs<
 	if(
 		!it->second->decrement()
 	)
+	{
 		return;
+	}
 
 	it->second->remove(
 		*this

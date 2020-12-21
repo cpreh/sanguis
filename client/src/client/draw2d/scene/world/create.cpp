@@ -5,6 +5,8 @@
 #include <sanguis/client/draw2d/scene/world/none.hpp>
 #include <sanguis/client/draw2d/scene/world/parameters.hpp>
 #include <sanguis/creator/name.hpp>
+#include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
@@ -26,6 +28,7 @@ sanguis::client::draw2d::scene::world::create(
 		==
 		FCPPT_TEXT("graveyard")
 	)
+	{
 		return
 			fcppt::unique_ptr_to_base<
 				sanguis::client::draw2d::scene::world::base
@@ -33,16 +36,25 @@ sanguis::client::draw2d::scene::world::create(
 				fcppt::make_unique_ptr<
 					sanguis::client::draw2d::scene::world::graveyard
 				>(
-					_parameters.load_context(),
-					_parameters.client_system(),
-					_parameters.viewport_manager()
+					fcppt::make_cref(
+						_parameters.load_context()
+					),
+					fcppt::make_ref(
+						_parameters.client_system()
+					),
+					fcppt::make_ref(
+						_parameters.viewport_manager()
+					)
 				)
 			);
+	}
+
 	if(
 		_name.get()
 		==
 		FCPPT_TEXT("start_area")
 	)
+	{
 		return
 			fcppt::unique_ptr_to_base<
 				sanguis::client::draw2d::scene::world::base
@@ -51,6 +63,7 @@ sanguis::client::draw2d::scene::world::create(
 					sanguis::client::draw2d::scene::world::none
 				>()
 			);
+	}
 
 	FCPPT_LOG_ERROR(
 		_log,

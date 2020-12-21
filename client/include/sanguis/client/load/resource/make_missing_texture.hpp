@@ -3,7 +3,7 @@
 
 #include <sge/image/size_type.hpp>
 #include <sge/image/color/any/object_fwd.hpp>
-#include <sge/renderer/device/core_fwd.hpp>
+#include <sge/renderer/device/core_ref.hpp>
 #include <sge/texture/const_part_unique_ptr.hpp>
 
 
@@ -18,7 +18,7 @@ namespace resource
 
 sge::texture::const_part_unique_ptr
 make_missing_texture(
-	sge::renderer::device::core &,
+	sge::renderer::device::core_ref,
 	sge::image::size_type,
 	sge::image::color::any::object const &,
 	sge::image::color::any::object const &

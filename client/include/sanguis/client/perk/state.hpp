@@ -16,7 +16,7 @@
 #include <sanguis/client/perk/state_fwd.hpp>
 #include <sanguis/client/perk/tree_fwd.hpp>
 #include <sanguis/client/perk/tree_unique_ptr.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/optional/object_decl.hpp>
 #include <fcppt/signal/auto_connection_fwd.hpp>
 #include <fcppt/signal/object_decl.hpp>
@@ -31,13 +31,13 @@ namespace perk
 
 class state
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		state
 	);
 public:
 	explicit
 	state(
-		sanguis::client::perk::send_callback const &
+		sanguis::client::perk::send_callback &&
 	);
 
 	~state();
@@ -53,40 +53,49 @@ public:
 		sanguis::client::player_level
 	);
 
+	[[nodiscard]]
 	bool
 	choose_perk(
 		sanguis::perk_type
 	);
 
+	[[nodiscard]]
 	sanguis::client::perk::tree const &
 	perks() const;
 
+	[[nodiscard]]
 	sanguis::client::player_level
 	player_level() const;
 
+	[[nodiscard]]
 	sanguis::client::perk::remaining_levels
 	remaining_levels() const;
 
+	[[nodiscard]]
 	sanguis::client::perk::level
 	perk_level(
 		sanguis::perk_type
 	) const;
 
+	[[nodiscard]]
 	sanguis::client::perk::choosable_state
 	choosable(
 		sanguis::perk_type
 	) const;
 
+	[[nodiscard]]
 	fcppt::signal::auto_connection
 	register_level_change(
 		sanguis::client::perk::level_callback &&
 	);
 
+	[[nodiscard]]
 	fcppt::signal::auto_connection
 	register_perks_change(
 		sanguis::client::perk::change_callback &&
 	);
 private:
+	[[nodiscard]]
 	sanguis::client::perk::tree &
 	perks_impl();
 

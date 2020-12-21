@@ -19,7 +19,7 @@ namespace model
 
 sanguis::client::draw2d::sprite::rotation
 orientation(
-	// TODO: Different type here
+	// TODO(philipp): Different type here
 	sanguis::client::draw2d::funit delta,
 	sanguis::client::draw2d::sprite::rotation,
 	sanguis::client::draw2d::entities::model::desired_orientation

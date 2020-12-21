@@ -6,8 +6,8 @@
 #include <sanguis/client/gui/hud/weapon_name.hpp>
 #include <sanguis/client/gui/hud/weapon_tooltip.hpp>
 #include <sge/font/lit.hpp>
-#include <sge/font/object_fwd.hpp>
-#include <sge/gui/context_fwd.hpp>
+#include <sge/font/object_ref.hpp>
+#include <sge/gui/context_ref.hpp>
 #include <sge/gui/style/const_reference.hpp>
 #include <sge/gui/widget/base.hpp>
 #include <sge/gui/widget/box_container.hpp>
@@ -15,31 +15,26 @@
 #include <sge/gui/widget/reference_alignment_pair.hpp>
 #include <sge/gui/widget/reference_alignment_vector.hpp>
 #include <sge/gui/widget/static_text.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
-#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/container/join.hpp>
 
 
 sanguis::client::gui::hud::weapon_tooltip::weapon_tooltip(
-	sge::gui::context &_gui_context,
+	sge::gui::context_ref const _gui_context,
 	sge::gui::style::const_reference const _gui_style,
-	sge::renderer::device::ffp &_renderer,
-	sge::font::object &_font,
+	sge::renderer::device::ffp_ref const _renderer,
+	sge::font::object_ref const _font,
 	sanguis::weapon_description const &_description
 )
 :
 	name_text_(
 		_gui_style,
-		fcppt::make_ref(
-			_renderer
-		),
-		fcppt::make_ref(
-			_font
-		),
+		_renderer,
+		_font,
 		sanguis::client::gui::hud::weapon_name(
 			_description.weapon_type()
 		),
@@ -63,12 +58,8 @@ sanguis::client::gui::hud::weapon_tooltip::weapon_tooltip(
 						sge::gui::widget::static_text
 					>(
 						_gui_style,
-						fcppt::make_ref(
-							_renderer
-						),
-						fcppt::make_ref(
-							_font
-						),
+						_renderer,
+						_font,
 						sanguis::client::gui::hud::weapon_attribute_text(
 							_attribute
 						)
@@ -84,9 +75,7 @@ sanguis::client::gui::hud::weapon_tooltip::weapon_tooltip(
 		)
 	),
 	container_(
-		fcppt::make_ref(
-			_gui_context
-		),
+		_gui_context,
 		fcppt::container::join(
 			sge::gui::widget::reference_alignment_vector{
 				sge::gui::widget::reference_alignment_pair(
@@ -120,8 +109,7 @@ sanguis::client::gui::hud::weapon_tooltip::weapon_tooltip(
 }
 
 sanguis::client::gui::hud::weapon_tooltip::~weapon_tooltip()
-{
-}
+= default;
 
 sge::gui::widget::base &
 sanguis::client::gui::hud::weapon_tooltip::widget()

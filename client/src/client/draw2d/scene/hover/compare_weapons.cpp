@@ -104,7 +104,7 @@ sanguis::client::draw2d::scene::hover::compare_weapons(
 										fcppt::literal<
 											sanguis::weapon_attribute_value
 										>(
-											0.01
+											0.01 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 										)
 										?
 											sanguis::optional_weapon_attribute_value()

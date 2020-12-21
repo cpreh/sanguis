@@ -44,8 +44,8 @@ sanguis::client::load::resource::context::context(
 		fcppt::make_unique_ptr<
 			sanguis::client::load::resource::sounds
 		>(
-			_audio_loader.get(),
-			_audio_player.get()
+			_audio_loader,
+			_audio_player
 		)
 	)
 {

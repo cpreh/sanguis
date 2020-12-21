@@ -3,12 +3,12 @@
 
 #include <sanguis/aura_type.hpp>
 #include <sanguis/client/load/auras/context_fwd.hpp>
-#include <sanguis/client/load/resource/textures_fwd.hpp>
+#include <sanguis/client/load/resource/textures_cref.hpp>
 #include <sge/texture/part_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/reference_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <map>
+#include <unordered_map>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -23,27 +23,27 @@ namespace auras
 
 class context
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		context
 	);
 public:
 	explicit
 	context(
-		sanguis::client::load::resource::textures const &
+		sanguis::client::load::resource::textures_cref
 	);
 
 	~context();
 
+	[[nodiscard]]
 	sge::texture::part const &
 	texture(
 		sanguis::aura_type
 	);
 private:
-	// TODO: We need a hash for enums
 	using
 	texture_map
 	=
-	std::map<
+	std::unordered_map<
 		sanguis::aura_type,
 		fcppt::reference<
 			sge::texture::part const

@@ -3,6 +3,7 @@
 #include <sanguis/client/load/auras/context.hpp>
 #include <sanguis/client/load/auras/lookup_name.hpp>
 #include <sanguis/client/load/resource/textures.hpp>
+#include <sanguis/client/load/resource/textures_cref.hpp>
 #include <sge/texture/part_fwd.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/reference_impl.hpp>
@@ -17,7 +18,7 @@
 
 
 sanguis::client::load::auras::context::context(
-	sanguis::client::load::resource::textures const &_resources
+	sanguis::client::load::resource::textures_cref const _resources
 )
 :
 	textures_(
@@ -46,7 +47,7 @@ sanguis::client::load::auras::context::context(
 							)
 						),
 						fcppt::make_cref(
-							_resources.load(
+							_resources->load(
 								_path
 							)
 						)
@@ -58,21 +59,20 @@ sanguis::client::load::auras::context::context(
 }
 
 sanguis::client::load::auras::context::~context()
-{
-}
+= default;
 
 sge::texture::part const &
 sanguis::client::load::auras::context::texture(
 	sanguis::aura_type const _aura_type
 )
 {
-	texture_map::const_iterator const it(
+	auto const it(
 		textures_.find(
 			_aura_type
 		)
 	);
 
-	// TODO: Better error
+	// TODO(philipp): Better error
 	FCPPT_ASSERT_ERROR(
 		it != textures_.end()
 	);

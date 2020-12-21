@@ -21,14 +21,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef SANGUIS_CLIENT_DRAW2D_SPRITE_ANIMATION_TEXTURE_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_SPRITE_ANIMATION_TEXTURE_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/diff_clock_cref.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/client/draw2d/sprite/animation/loop_method.hpp>
 #include <sanguis/client/draw2d/sprite/animation/texture_fwd.hpp>
 #include <sanguis/client/load/resource/animation/series.hpp>
+#include <sanguis/client/load/resource/animation/series_cref.hpp>
 #include <sge/texture/const_part_ref_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/reference_decl.hpp>
 
 
 namespace sanguis
@@ -49,31 +49,33 @@ class texture
 	);
 public:
 	texture(
-		sanguis::client::load::resource::animation::series const &,
+		sanguis::client::load::resource::animation::series_cref,
 		sanguis::client::draw2d::sprite::animation::loop_method,
-		sanguis::diff_clock const &
+		sanguis::diff_clock_cref
 	);
 
 	texture(
 		texture &&
-	);
+	)
+	noexcept;
 
 	texture &
 	operator=(
 		texture &&
-	);
+	)
+	noexcept;
 
 	~texture();
 
+	[[nodiscard]]
 	sge::texture::const_part_ref
 	current_texture();
 
+	[[nodiscard]]
 	bool
 	ended() const;
 private:
-	fcppt::reference<
-		sanguis::client::load::resource::animation::series const
-	> series_;
+	sanguis::client::load::resource::animation::series_cref series_;
 
 	sanguis::client::draw2d::sprite::animation::loop_method loop_method_;
 

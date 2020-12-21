@@ -2,10 +2,13 @@
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_WITH_AURAS_PARAMETERS_IMPL_HPP_INCLUDED
 
 #include <sanguis/aura_type_vector.hpp>
-#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/diff_clock_cref.hpp>
 #include <sanguis/client/draw2d/entities/with_auras_parameters_decl.hpp>
-#include <sanguis/client/draw2d/sprite/normal/system_fwd.hpp>
-#include <sanguis/client/load/auras/context_fwd.hpp>
+#include <sanguis/client/draw2d/sprite/normal/system_ref.hpp>
+#include <sanguis/client/load/auras/context_ref.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 template<
@@ -14,11 +17,11 @@ template<
 sanguis::client::draw2d::entities::with_auras_parameters<
 	Base
 >::with_auras_parameters(
-	sanguis::diff_clock const &_diff_clock,
-	sanguis::client::load::auras::context &_aura_load_context,
-	sanguis::client::draw2d::sprite::normal::system &_normal_system,
-	sanguis::aura_type_vector const &_auras,
-	Base const &_base
+	sanguis::diff_clock_cref const _diff_clock,
+	sanguis::client::load::auras::context_ref const _aura_load_context,
+	sanguis::client::draw2d::sprite::normal::system_ref const _normal_system,
+	sanguis::aura_type_vector &&_auras,
+	Base &&_base
 )
 :
 	diff_clock_(
@@ -31,10 +34,14 @@ sanguis::client::draw2d::entities::with_auras_parameters<
 		_normal_system
 	),
 	auras_(
-		_auras
+		std::move(
+			_auras
+		)
 	),
 	base_(
-		_base
+		std::move(
+			_base
+		)
 	)
 {
 }

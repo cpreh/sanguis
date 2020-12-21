@@ -18,14 +18,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/diff_clock_cref.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/client/draw2d/sprite/animation/loop_method.hpp>
 #include <sanguis/client/draw2d/sprite/animation/texture.hpp>
 #include <sanguis/client/load/resource/animation/series.hpp>
+#include <sanguis/client/load/resource/animation/series_cref.hpp>
 #include <sge/texture/const_part_ref.hpp>
 #include <fcppt/make_cref.hpp>
-#include <fcppt/reference_impl.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <iterator>
@@ -33,9 +33,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 sanguis::client::draw2d::sprite::animation::texture::texture(
-	sanguis::client::load::resource::animation::series const &_series,
+	sanguis::client::load::resource::animation::series_cref const _series,
 	sanguis::client::draw2d::sprite::animation::loop_method const _loop_method,
-	sanguis::diff_clock const &_diff_clock
+	sanguis::diff_clock_cref const _diff_clock
 )
 :
 	series_(
@@ -45,13 +45,11 @@ sanguis::client::draw2d::sprite::animation::texture::texture(
 		_loop_method
 	),
 	pos_(
-		_series.begin()
+		_series->begin()
 	),
 	cur_timer_(
 		sanguis::diff_timer::parameters(
-			fcppt::make_cref(
-				_diff_clock
-			),
+			_diff_clock,
 			pos_->delay()
 		)
 	)
@@ -61,17 +59,18 @@ sanguis::client::draw2d::sprite::animation::texture::texture(
 sanguis::client::draw2d::sprite::animation::texture::texture(
 	texture &&
 )
+noexcept
 = default;
 
 sanguis::client::draw2d::sprite::animation::texture &
 sanguis::client::draw2d::sprite::animation::texture::operator=(
 	texture &&
 )
+noexcept
 = default;
 
 sanguis::client::draw2d::sprite::animation::texture::~texture()
-{
-}
+= default;
 
 sge::texture::const_part_ref
 sanguis::client::draw2d::sprite::animation::texture::current_texture()
@@ -112,7 +111,9 @@ sanguis::client::draw2d::sprite::animation::texture::current_texture()
 			==
 			series_.get().end()
 		)
+		{
 			handle_end();
+		}
 		else
 		{
 			++pos_;

@@ -14,6 +14,7 @@
 #include <sanguis/client/states/has_player.hpp>
 #include <sanguis/client/states/ingame.hpp>
 #include <sanguis/client/states/running.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
@@ -22,6 +23,7 @@
 #include <fcppt/variant/to_optional.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/statechart/result.hpp>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -33,13 +35,17 @@ sanguis::client::states::console::console(
 )
 :
 	my_base(
-		_ctx
+		std::move(
+			_ctx
+		)
 	),
 	pause_(
 		sanguis::client::make_send_callback(
-			this->context<
-				sanguis::client::machine
-			>()
+			fcppt::make_ref(
+				this->context<
+					sanguis::client::machine
+				>()
+			)
 		)
 	)
 {
@@ -48,8 +54,7 @@ sanguis::client::states::console::console(
 FCPPT_PP_POP_WARNING
 
 sanguis::client::states::console::~console()
-{
-}
+= default;
 
 boost::statechart::result
 sanguis::client::states::console::react(

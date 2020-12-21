@@ -1,7 +1,7 @@
 #ifndef SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_OBJECT_HPP_INCLUDED
 #define SANGUIS_CLIENT_DRAW2D_ENTITIES_MODEL_OBJECT_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/diff_clock_cref.hpp>
 #include <sanguis/optional_primary_weapon_type_fwd.hpp>
 #include <sanguis/weapon_status.hpp>
 #include <sanguis/client/health.hpp>
@@ -19,8 +19,9 @@
 #include <sanguis/client/draw2d/sprite/index_fwd.hpp>
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <sanguis/client/load/animation_type_fwd.hpp>
+#include <sanguis/client/load/model/object_cref.hpp>
 #include <sanguis/client/load/model/object_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/optional/object_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <vector>
@@ -44,7 +45,7 @@ class object
 	public sanguis::client::draw2d::entities::ifaces::with_health,
 	public sanguis::client::draw2d::entities::ifaces::with_weapon
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		object
 	);
 public:
@@ -81,6 +82,7 @@ protected:
 	);
 
 	// base overrides
+	[[nodiscard]]
 	bool
 	dead() const
 	override;
@@ -91,6 +93,7 @@ protected:
 	)
 	override;
 
+	[[nodiscard]]
 	bool
 	is_decayed() const
 	override;
@@ -108,6 +111,7 @@ protected:
 
 	using sanguis::client::draw2d::entities::container::speed;
 
+	[[nodiscard]]
 	sanguis::client::draw2d::entities::model::part &
 	part(
 		sanguis::client::draw2d::sprite::index const &
@@ -126,6 +130,7 @@ protected:
 	)
 	override;
 
+	[[nodiscard]]
 	sanguis::client::optional_health_pair
 	health_pair() const;
 private:
@@ -138,7 +143,7 @@ private:
 
 	object(
 		sanguis::client::draw2d::entities::model::parameters const &,
-		sanguis::client::load::model::object const &
+		sanguis::client::load::model::object_cref
 	);
 
 	object(
@@ -169,18 +174,21 @@ private:
 		sanguis::client::load::animation_type
 	);
 
+	[[nodiscard]]
 	sanguis::client::load::animation_type
 	animation() const;
 
+	[[nodiscard]]
 	sanguis::client::load::animation_type
 	fallback_anim(
 		sanguis::client::load::animation_type
 	) const;
 
+	[[nodiscard]]
 	bool
 	animations_ended() const;
 
-	sanguis::diff_clock const &diff_clock_;
+	sanguis::diff_clock_cref const diff_clock_;
 
 	sanguis::weapon_status weapon_status_;
 

@@ -3,8 +3,8 @@
 
 #include <sanguis/client/draw2d/scene/state/base.hpp>
 #include <sanguis/client/draw2d/scene/state/optional_scoped_unique_ptr_fwd.hpp>
-#include <sge/renderer/context/ffp_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <sge/renderer/context/ffp_ref.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -22,7 +22,7 @@ class dummy
 :
 	public sanguis::client::draw2d::scene::state::base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		dummy
 	);
 public:
@@ -31,9 +31,10 @@ public:
 	~dummy()
 	override;
 
+	[[nodiscard]]
 	sanguis::client::draw2d::scene::state::optional_scoped_unique_ptr
 	create_scoped(
-		sge::renderer::context::ffp &
+		sge::renderer::context::ffp_ref
 	) const
 	override;
 };

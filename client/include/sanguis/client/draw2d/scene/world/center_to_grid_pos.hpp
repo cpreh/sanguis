@@ -18,7 +18,7 @@ namespace world
 
 sanguis::creator::pos
 center_to_grid_pos(
-	sanguis::client::draw2d::sprite::center
+	sanguis::client::draw2d::sprite::center const &
 );
 
 }

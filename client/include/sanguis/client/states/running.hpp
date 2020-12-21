@@ -34,7 +34,7 @@
 #include <sanguis/messages/server/remove_weapon_fwd.hpp>
 #include <sanguis/messages/server/slowdown_fwd.hpp>
 #include <sanguis/messages/server/unpause_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
@@ -66,7 +66,7 @@ class running
 		sanguis::client::states::ingame
 	>
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		running
 	);
 public:
@@ -102,31 +102,37 @@ public:
 	~running()
 	SANGUIS_STATE_OVERRIDE;
 
+	[[nodiscard]]
 	boost::statechart::result
 	react(
 		sanguis::client::events::tick const &
 	);
 
+	[[nodiscard]]
 	boost::statechart::result
 	react(
 		sanguis::client::events::render const &
 	);
 
+	[[nodiscard]]
 	boost::statechart::result
 	react(
 		sanguis::client::events::overlay const &
 	);
 
+	[[nodiscard]]
 	boost::statechart::result
 	react(
 		sanguis::client::events::message const &
 	);
 
+	[[nodiscard]]
 	boost::statechart::result
 	react(
 		sanguis::client::events::net_error const &
 	);
 
+	[[nodiscard]]
 	boost::statechart::result
 	react(
 		sanguis::client::events::input const &
@@ -137,77 +143,93 @@ public:
 	=
 	sanguis::messages::call::result;
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::add_console_command const &
 	);
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::add_own_player const &
 	);
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::change_world const &
 	);
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::console_print const &
 	);
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::experience const &
 	);
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::give_weapon const &
 	);
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::level_up const &
 	);
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::magazine_remaining const &
 	);
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::pause const &
 	);
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::reload const &
 	);
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::remove_weapon const &
 	);
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::slowdown const &
 	);
 
+	[[nodiscard]]
 	sanguis::messages::call::result
 	operator()(
 		sanguis::messages::server::unpause const &
 	);
 
+	[[nodiscard]]
 	sanguis::client::console::object &
 	console();
 
+	[[nodiscard]]
 	sanguis::client::gui::hud::object &
 	hud_gui();
 
+	[[nodiscard]]
 	sanguis::client::control::environment const &
 	control_environment() const;
 

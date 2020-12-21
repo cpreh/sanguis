@@ -3,7 +3,7 @@
 
 #include <sanguis/client/draw2d/entities/buffs/base_fwd.hpp>
 #include <sanguis/client/draw2d/entities/model/object_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -19,7 +19,7 @@ namespace buffs
 
 class base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		base
 	);
 protected:
@@ -31,14 +31,14 @@ public:
 	virtual
 	void
 	apply(
-		sanguis::client::draw2d::entities::model::object &
-	);
+		sanguis::client::draw2d::entities::model::object & // NOLINT(google-runtime-references)
+	); // NOLINT(google-runtime-references)
 
 	virtual
 	void
 	remove(
-		sanguis::client::draw2d::entities::model::object &
-	);
+		sanguis::client::draw2d::entities::model::object & // NOLINT(google-runtime-references)
+	); // NOLINT(google-runtime-references)
 
 	virtual
 	void
@@ -49,6 +49,7 @@ public:
 	void
 	increment();
 
+	[[nodiscard]]
 	bool
 	decrement();
 private:

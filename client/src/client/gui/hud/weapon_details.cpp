@@ -2,18 +2,18 @@
 #include <sanguis/client/gui/hud/weapon_details.hpp>
 #include <sanguis/client/gui/hud/weapon_tooltip.hpp>
 #include <sanguis/client/gui/hud/weapon_tooltip_unique_ptr.hpp>
-#include <sge/gui/context_fwd.hpp>
+#include <sge/font/object_ref.hpp>
+#include <sge/gui/context_ref.hpp>
 #include <sge/gui/style/const_reference.hpp>
 #include <sge/gui/widget/base_fwd.hpp>
 #include <sge/gui/widget/reference.hpp>
 #include <sge/gui/widget/reference_alignment_pair.hpp>
 #include <sge/gui/widget/reference_alignment_vector.hpp>
-#include <sge/renderer/device/ffp.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
 #include <sge/rucksack/alignment.hpp>
 #include <sge/rucksack/axis.hpp>
 #include <sge/rucksack/dim.hpp>
 #include <sge/rucksack/vector.hpp>
-#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
@@ -24,10 +24,10 @@
 
 
 sanguis::client::gui::hud::weapon_details::weapon_details(
-	sge::gui::context &_gui_context,
+	sge::gui::context_ref const _gui_context,
 	sge::gui::style::const_reference const _gui_style,
-	sge::renderer::device::ffp &_renderer,
-	sge::font::object &_font,
+	sge::renderer::device::ffp_ref const _renderer,
+	sge::font::object_ref const _font,
 	sanguis::optional_weapon_description const &_weapon1,
 	sanguis::optional_weapon_description const &_weapon2
 )
@@ -80,9 +80,7 @@ sanguis::client::gui::hud::weapon_details::weapon_details(
 		)
 	),
 	container_(
-		fcppt::make_ref(
-			_gui_context
-		),
+		_gui_context,
 		fcppt::algorithm::map<
 			sge::gui::widget::reference_alignment_vector
 		>(
@@ -106,8 +104,7 @@ sanguis::client::gui::hud::weapon_details::weapon_details(
 }
 
 sanguis::client::gui::hud::weapon_details::~weapon_details()
-{
-}
+= default;
 
 sge::gui::widget::base &
 sanguis::client::gui::hud::weapon_details::widget()

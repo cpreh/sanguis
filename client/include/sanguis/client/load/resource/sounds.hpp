@@ -4,9 +4,9 @@
 #include <sanguis/client/load/resource/optional_sound_fwd.hpp>
 #include <sanguis/client/load/resource/sounds_fwd.hpp>
 #include <sge/audio/buffer_unique_ptr.hpp>
-#include <sge/audio/loader_fwd.hpp>
-#include <sge/audio/player_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <sge/audio/loader_ref.hpp>
+#include <sge/audio/player_ref.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/optional/object_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -26,22 +26,24 @@ namespace resource
 
 class sounds
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		sounds
 	);
 public:
 	sounds(
-		sge::audio::loader &,
-		sge::audio::player &
+		sge::audio::loader_ref,
+		sge::audio::player_ref
 	);
 
 	~sounds();
 
+	[[nodiscard]]
 	sanguis::client::load::resource::optional_sound
 	load(
 		fcppt::string const &
 	) const;
 
+	[[nodiscard]]
 	sanguis::client::load::resource::optional_sound
 	load_path(
 		std::filesystem::path const &
@@ -62,9 +64,9 @@ private:
 		optional_buffer
 	>;
 
-	sge::audio::loader &multi_loader_;
+	sge::audio::loader_ref const multi_loader_;
 
-	sge::audio::player &player_;
+	sge::audio::player_ref const player_;
 
 	mutable buffer_map buffers_;
 };

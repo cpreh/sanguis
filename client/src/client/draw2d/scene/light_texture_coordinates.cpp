@@ -66,7 +66,7 @@ sanguis::client::draw2d::scene::light_texture_coordinates(
 			fcppt::math::vector::fill<
 				sanguis::client::draw2d::sprite::client::texture_coordinates::value_type
 			>(
-				1.f
+				1.F
 			)
 		};
 }

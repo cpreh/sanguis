@@ -21,7 +21,7 @@ sanguis::client::draw2d::entities::unique_ptr
 pickup(
 	sanguis::client::draw2d::entities::load_parameters const &,
 	sanguis::pickup_type,
-	sanguis::client::draw2d::sprite::center,
+	sanguis::client::draw2d::sprite::center const &,
 	sanguis::client::draw2d::sprite::rotation
 );
 

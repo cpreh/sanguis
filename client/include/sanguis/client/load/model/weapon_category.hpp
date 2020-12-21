@@ -7,7 +7,7 @@
 #include <sanguis/client/load/model/global_parameters_fwd.hpp>
 #include <sanguis/client/load/model/weapon_category_fwd.hpp>
 #include <sanguis/model/weapon_category_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/log/object_fwd.hpp>
 
 
@@ -22,24 +22,26 @@ namespace model
 
 class weapon_category
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		weapon_category
 	);
 public:
 	weapon_category(
-		fcppt::log::object &,
+		fcppt::log::object &, // NOLINT(google-runtime-references)
 		sanguis::model::weapon_category const &,
 		sanguis::client::load::model::global_parameters const &
 	);
 
 	~weapon_category();
 
-	// TODO: optionals
+	// TODO(philipp): optionals
+	[[nodiscard]]
 	sanguis::client::load::model::animation const &
 	operator[](
 		sanguis::client::load::animation_type
 	) const;
 
+	[[nodiscard]]
 	bool
 	has_animation(
 		sanguis::client::load::animation_type

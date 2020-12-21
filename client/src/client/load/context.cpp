@@ -6,6 +6,7 @@
 #include <sge/audio/player_ref.hpp>
 #include <sge/image2d/system_ref.hpp>
 #include <sge/renderer/device/core_ref.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/log/context_reference.hpp>
 
 
@@ -26,7 +27,9 @@ sanguis::client::load::context::context(
 	),
 	model_ctx_(
 		_log_context,
-		resource_ctx_
+		fcppt::make_cref(
+			resource_ctx_
+		)
 	)
 {
 }

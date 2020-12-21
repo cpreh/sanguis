@@ -21,7 +21,7 @@ sanguis::client::draw2d::entities::optional_own_unique_ptr
 sanguis::client::draw2d::entities::enemy_spawn_particle(
 	sanguis::client::draw2d::entities::load_parameters const &_load_parameters,
 	sanguis::creator::enemy_type const _enemy_type,
-	sanguis::client::draw2d::sprite::center const _center,
+	sanguis::client::draw2d::sprite::center const &_center,
 	sanguis::creator::optional_background_tile const _background_tile
 )
 {
@@ -48,7 +48,6 @@ sanguis::client::draw2d::entities::enemy_spawn_particle(
 					case sanguis::creator::background_tile::grass:
 					case sanguis::creator::background_tile::dirt:
 						return
-							// TODO: Put this into a class
 							sanguis::client::draw2d::entities::optional_own_unique_ptr(
 								fcppt::unique_ptr_to_base<
 									sanguis::client::draw2d::entities::own

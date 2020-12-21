@@ -40,7 +40,6 @@
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <filesystem>
-#include <functional>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -53,11 +52,16 @@ sanguis::client::load::resource::textures::load(
 		*fcppt::container::get_or_insert(
 			textures_,
 			_id,
-			std::bind(
-				&sanguis::client::load::resource::textures::do_load,
-				this,
-				std::placeholders::_1
-			)
+			[
+				this
+			](
+				sanguis::client::load::resource::texture_identifier const &_inner_id
+			){
+				return
+					this->do_load(
+						_inner_id
+					);
+			}
 		);
 }
 
@@ -70,11 +74,17 @@ sanguis::client::load::resource::textures::load(
 		*fcppt::container::get_or_insert(
 			unnamed_textures_,
 			_path,
-			std::bind(
-				&sanguis::client::load::resource::textures::do_load_inner,
-				this,
-				std::placeholders::_1
+			[
+				this
+			](
+				std::filesystem::path const &_inner_path
 			)
+			{
+				return
+					this->do_load_inner(
+						_inner_path
+					);
+			}
 		);
 }
 
@@ -84,7 +94,7 @@ sanguis::client::load::resource::textures::load_opt(
 ) const
 try
 {
-	// TODO: This should be the other way around (exception from optional)
+	// TODO(philipp): This should be the other way around (exception from optional)
 	return
 		sge::texture::const_optional_part_ref{
 			fcppt::make_cref(
@@ -168,11 +178,11 @@ sanguis::client::load::resource::textures::textures(
 	unnamed_textures_(),
 	missing_texture_(
 		sanguis::client::load::resource::make_missing_texture(
-			renderer_.get(),
+			renderer_,
 			fcppt::literal<
 				sge::image::size_type
 			>(
-				64
+				64 // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 			),
 			sge::image::color::any::object{
 				sge::image::color::predef::magenta()
@@ -186,8 +196,7 @@ sanguis::client::load::resource::textures::textures(
 }
 
 sanguis::client::load::resource::textures::~textures()
-{
-}
+= default;
 
 sge::texture::const_part_unique_ptr
 sanguis::client::load::resource::textures::do_load(

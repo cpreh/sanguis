@@ -1,4 +1,5 @@
 #include <sanguis/client/load/resource/textures.hpp>
+#include <sanguis/client/load/resource/textures_cref.hpp>
 #include <sanguis/client/load/tiles/make_textures.hpp>
 #include <sanguis/client/load/tiles/set.hpp>
 #include <sanguis/client/load/tiles/texture_container.hpp>
@@ -12,12 +13,12 @@
 
 
 sanguis::client::load::tiles::set::set(
-	sanguis::client::load::resource::textures const &_textures,
+	sanguis::client::load::resource::textures_cref const _textures,
 	std::filesystem::path const &_path
 )
 :
 	texture_{
-		_textures.load(
+		_textures->load(
 			_path
 		)
 	},
@@ -27,17 +28,19 @@ sanguis::client::load::tiles::set::set(
 
 sanguis::client::load::tiles::set::set(
 	set &&
-) = default;
+)
+noexcept
+= default;
 
-/*
 sanguis::client::load::tiles::set &
 sanguis::client::load::tiles::set::operator=(
 	set &&
-) = default;*/
+)
+noexcept
+= default;
 
 sanguis::client::load::tiles::set::~set()
-{
-}
+= default;
 
 sanguis::client::load::tiles::texture_container const &
 sanguis::client::load::tiles::set::areas(

@@ -37,21 +37,26 @@ public:
 
 	series(
 		series &&
-	);
+	)
+	noexcept;
 
 	series &
 	operator=(
 		series &&
-	);
+	)
+	noexcept;
 
 	~series();
 
+	[[nodiscard]]
 	sanguis::client::load::resource::animation::entity_vector const &
 	entities() const;
 
+	[[nodiscard]]
 	const_iterator
 	begin() const;
 
+	[[nodiscard]]
 	const_iterator
 	end() const;
 private:

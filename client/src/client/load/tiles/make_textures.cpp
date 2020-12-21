@@ -29,10 +29,10 @@ sanguis::client::load::tiles::make_textures(
 			[
 				&_part
 			](
-				sge::image2d::rect const _rect
+				sge::image2d::rect const &_rect
 			)
 			{
-				sge::renderer::lock_rect const rect(
+				auto const rect(
 					fcppt::math::box::structure_cast<
 						sge::renderer::lock_rect,
 						fcppt::cast::size_fun

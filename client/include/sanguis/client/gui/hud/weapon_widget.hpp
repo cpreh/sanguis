@@ -1,23 +1,23 @@
 #ifndef SANGUIS_CLIENT_GUI_HUD_WEAPON_WIDGET_HPP_INCLUDED
 #define SANGUIS_CLIENT_GUI_HUD_WEAPON_WIDGET_HPP_INCLUDED
 
-#include <sanguis/diff_clock_fwd.hpp>
+#include <sanguis/diff_clock_cref.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/weapon_description.hpp>
 #include <sanguis/client/gui/hud/weapon_widget_fwd.hpp>
-#include <sanguis/client/load/hud/context_fwd.hpp>
-#include <sge/font/object_fwd.hpp>
+#include <sanguis/client/load/hud/context_ref.hpp>
+#include <sge/font/object_ref.hpp>
 #include <sge/font/string.hpp>
-#include <sge/gui/context_fwd.hpp>
+#include <sge/gui/context_ref.hpp>
 #include <sge/gui/style/const_reference.hpp>
 #include <sge/gui/widget/bar.hpp>
 #include <sge/gui/widget/box_container.hpp>
 #include <sge/gui/widget/image.hpp>
 #include <sge/gui/widget/text.hpp>
-#include <sge/renderer/device/ffp_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <sge/renderer/device/ffp_ref.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace sanguis
@@ -31,17 +31,17 @@ namespace hud
 
 class weapon_widget
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		weapon_widget
 	);
 public:
 	weapon_widget(
-		sanguis::diff_clock const &,
-		sanguis::client::load::hud::context &,
-		sge::gui::context &,
+		sanguis::diff_clock_cref,
+		sanguis::client::load::hud::context_ref,
+		sge::gui::context_ref,
 		sge::gui::style::const_reference,
-		sge::renderer::device::ffp &,
-		sge::font::object &,
+		sge::renderer::device::ffp_ref,
+		sge::font::object_ref,
 		sanguis::weapon_description const &
 	);
 
@@ -60,12 +60,15 @@ public:
 	void
 	update();
 
+	[[nodiscard]]
 	sge::gui::widget::box_container &
 	widget();
 
+	[[nodiscard]]
 	sanguis::weapon_description const &
 	weapon_description() const;
 private:
+	[[nodiscard]]
 	sge::font::string
 	make_text(
 		sanguis::magazine_remaining

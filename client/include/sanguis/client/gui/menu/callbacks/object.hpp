@@ -23,21 +23,25 @@ class object
 {
 public:
 	object(
-		sanguis::client::gui::menu::callbacks::connect const &,
-		sanguis::client::gui::menu::callbacks::cancel_connect const &,
-		sanguis::client::gui::menu::callbacks::quickstart const &,
-		sanguis::client::gui::menu::callbacks::quit const &
+		sanguis::client::gui::menu::callbacks::connect &&,
+		sanguis::client::gui::menu::callbacks::cancel_connect &&,
+		sanguis::client::gui::menu::callbacks::quickstart &&,
+		sanguis::client::gui::menu::callbacks::quit &&
 	);
 
+	[[nodiscard]]
 	sanguis::client::gui::menu::callbacks::connect const &
 	connect() const;
 
+	[[nodiscard]]
 	sanguis::client::gui::menu::callbacks::cancel_connect const &
 	cancel_connect() const;
 
+	[[nodiscard]]
 	sanguis::client::gui::menu::callbacks::quickstart const &
 	quickstart() const;
 
+	[[nodiscard]]
 	sanguis::client::gui::menu::callbacks::quit const &
 	quit() const;
 private:

@@ -45,9 +45,17 @@ struct compare
 			!=
 			right_is_background
 			?
-				left_is_background
+				static_cast<
+					int
+				>(
+					left_is_background
+				)
 				>
-				right_is_background
+				static_cast<
+					int
+				>(
+					right_is_background
+				)
 			:
 				sge::sprite::compare::default_()(
 					_left,

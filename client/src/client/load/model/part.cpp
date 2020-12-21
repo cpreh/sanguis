@@ -32,8 +32,7 @@ sanguis::client::load::model::part::part(
 }
 
 sanguis::client::load::model::part::~part()
-{
-}
+= default;
 
 sanguis::client::load::model::weapon_category const &
 sanguis::client::load::model::part::operator[](
@@ -58,10 +57,12 @@ sanguis::client::load::model::part::operator[](
 					==
 					fallback
 				)
+				{
 					throw
 						sanguis::exception{
 							FCPPT_TEXT("Unarmed weapon model missing in TODO")
 						};
+				}
 
 				return
 					fcppt::make_cref(

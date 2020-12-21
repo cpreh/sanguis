@@ -2,6 +2,7 @@
 #include <sanguis/client/draw/debug.hpp>
 #include <sanguis/client/draw2d/scene/world/make_texture.hpp>
 #include <sanguis/client/load/tiles/context.hpp>
+#include <sanguis/client/load/tiles/context_ref.hpp>
 #include <sanguis/tiles/area_container_ref.hpp>
 #include <sanguis/tiles/content.hpp>
 #include <sanguis/tiles/error.hpp>
@@ -19,7 +20,7 @@ sge::texture::const_optional_part_ref
 sanguis::client::draw2d::scene::world::make_texture(
 	sanguis::random_generator &_random_generator,
 	sanguis::client::draw::debug const _debug,
-	sanguis::client::load::tiles::context &_context,
+	sanguis::client::load::tiles::context_ref const _context,
 	std::filesystem::path const &_path,
 	sanguis::tiles::content const &_content
 )
@@ -36,7 +37,7 @@ sanguis::client::draw2d::scene::world::make_texture(
 			)
 			{
 				sanguis::client::load::tiles::texture_container const &textures(
-					_context.set(
+					_context->set(
 						_path,
 						_areas
 					)
@@ -73,7 +74,7 @@ sanguis::client::draw2d::scene::world::make_texture(
 					?
 						sge::texture::const_optional_part_ref(
 							fcppt::make_cref(
-								_context.missing_texture(
+								_context->missing_texture(
 									_error
 								)
 							)
