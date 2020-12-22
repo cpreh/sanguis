@@ -4,7 +4,7 @@
 #include <sanguis/diff_clock_cref.hpp>
 #include <sanguis/diff_timer.hpp>
 #include <sanguis/optional_primary_weapon_type.hpp>
-#include <sanguis/client/sound_manager_fwd.hpp>
+#include <sanguis/client/sound_manager_ref.hpp>
 #include <sanguis/client/draw2d/entities/model/animation.hpp>
 #include <sanguis/client/draw2d/entities/model/desired_orientation.hpp>
 #include <sanguis/client/draw2d/entities/model/part_fwd.hpp>
