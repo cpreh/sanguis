@@ -17,6 +17,7 @@ function(
 		"COMPILE_OPTIONS"
 		"INCLUDE_DIRS"
 		"LINK_LIBS"
+		"SYSTEM_INCLUDE_DIRS"
 	)
 
 	cmake_parse_arguments(
@@ -52,6 +53,8 @@ function(
 			${_COMPILE_OPTIONS}
 		INCLUDE_DIRS
 			${_INCLUDE_DIRS}
+		SYSTEM_INCLUDE_DIRS
+			${_SYSTEM_INCLUDE_DIRS}
 		FOLDER
 			sanguis/tools
 	)

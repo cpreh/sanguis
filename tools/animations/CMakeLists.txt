@@ -74,9 +74,17 @@ sanguis_add_tool(
 		${awl_TARGET}
 		${fcppt_core_TARGET}
 		${fcppt_filesystem_TARGET}
-		${FCPPT_UTILS_FILESYSTEM_LIBRARIES}
 		Qt5::Widgets
 	INCLUDE_DIRS
 		${CMAKE_CURRENT_SOURCE_DIR}/include
+	SYSTEM_INCLUDE_DIRS
 		${CMAKE_CURRENT_BINARY_DIR}
+)
+
+# Workaround for Qt5 warnings
+set_target_properties(
+	sanguis_tools_animations
+	PROPERTIES
+	NO_SYSTEM_FROM_IMPORTED
+	FALSE
 )

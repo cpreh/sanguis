@@ -8,6 +8,7 @@
 #include <awl/main/exit_failure.hpp>
 #include <awl/main/function_context.hpp>
 #include <fcppt/exception.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -40,7 +41,9 @@ try
 	};
 
 	sanguis::tools::animations::main_window window(
-		sge_systems
+		fcppt::make_cref(
+			sge_systems
+		)
 	);
 
 	window.show();

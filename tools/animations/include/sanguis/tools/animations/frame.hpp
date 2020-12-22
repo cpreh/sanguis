@@ -4,6 +4,7 @@
 #include <sanguis/model/cell_area_fwd.hpp>
 #include <sanguis/tools/animations/frame_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/reference_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <QImage>
@@ -27,33 +28,40 @@ class frame
 	);
 public:
 	frame(
-		QWidget &,
+		fcppt::reference<
+			QWidget
+		>,
 		QImage const &,
 		sanguis::model::cell_area const &
 	);
 
 	frame(
 		frame &&
-	);
+	)
+	noexcept;
 
 	frame &
 	operator=(
 		frame &&
-	);
+	)
+	noexcept;
 
 	~frame();
 
+	[[nodiscard]]
 	QLabel &
 	label();
 
+	[[nodiscard]]
 	QPixmap const &
 	pixmap() const;
 private:
-	typedef
+	using
+	label_unique_ptr
+	=
 	fcppt::unique_ptr<
 		QLabel
-	>
-	label_unique_ptr;
+	>;
 
 	QPixmap pixmap_;
 

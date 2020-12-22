@@ -14,11 +14,12 @@ namespace tools
 namespace animations
 {
 
-typedef
+using
+frame_container
+=
 std::vector<
 	sanguis::tools::animations::frame
->
-frame_container;
+>;
 
 }
 }

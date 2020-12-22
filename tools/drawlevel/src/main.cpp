@@ -122,7 +122,9 @@ FCPPT_RECORD_MAKE_LABEL(
 	seed_label
 );
 
-typedef
+using
+argument_record
+=
 fcppt::record::object<
 	fcppt::record::element<
 		generator_name_label,
@@ -138,8 +140,7 @@ fcppt::record::object<
 			sanguis::creator::seed
 		>
 	>
->
-argument_record;
+>;
 
 void
 execute_main(
@@ -230,9 +231,10 @@ execute_main(
 		)
 	};
 
-	typedef
-	sge::image2d::store::srgba8
-	store_type;
+	using
+	store_type
+	=
+	sge::image2d::store::srgba8;
 
 	store_type store{
 		result.grid().size()
@@ -247,23 +249,25 @@ execute_main(
 		)
 	};
 
-	typedef
+	using
+	path_file_map
+	=
 	std::map<
 		std::filesystem::path,
 		sge::image2d::file_unique_ptr
-	>
-	path_file_map;
+	>;
 
-	path_file_map files;
+	path_file_map files{};
 
-	typedef
+	using
+	error_image_array
+	=
 	fcppt::enum_::array<
 		sanguis::tiles::error,
 		sge::image2d::store::object
-	>
-	error_image_array;
+	>;
 
-	error_image_array const error_images(
+	auto const error_images(
 		fcppt::enum_::array_init<
 			error_image_array
 		>(
@@ -285,7 +289,7 @@ execute_main(
 		cells
 	)
 	{
-		sge::image2d::vector const dest_pos(
+		auto const dest_pos(
 			fcppt::math::vector::structure_cast<
 				sge::image2d::rect::vector,
 				fcppt::cast::size_fun
@@ -467,13 +471,14 @@ try
 		)
 	};
 
-	typedef
+	using
+	result_type
+	=
 	fcppt::options::result_of<
 		decltype(
 			parser
 		)
-	>
-	result_type;
+	>;
 
 	fcppt::options::help_result<
 		result_type

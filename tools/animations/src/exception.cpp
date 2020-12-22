@@ -35,6 +35,7 @@ sanguis::tools::animations::exception::exception(
 sanguis::tools::animations::exception::exception(
 	exception &&
 )
+noexcept
 = default;
 
 sanguis::tools::animations::exception::exception(
@@ -46,6 +47,7 @@ sanguis::tools::animations::exception &
 sanguis::tools::animations::exception::operator=(
 	exception &&
 )
+noexcept
 = default;
 
 sanguis::tools::animations::exception &
@@ -54,6 +56,6 @@ sanguis::tools::animations::exception::operator=(
 )
 = default;
 
-sanguis::tools::animations::exception::~exception() noexcept
-{
-}
+sanguis::tools::animations::exception::~exception()
+noexcept
+= default;

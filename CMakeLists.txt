@@ -527,6 +527,7 @@ function(
 		"DEPS"
 		"COMPILE_OPTIONS"
 		"INCLUDE_DIRS"
+		"SYSTEM_INCLUDE_DIRS"
 		"COMPILE_DEFINITIONS"
 	)
 
@@ -593,6 +594,13 @@ function(
 		PRIVATE
 		${_INCLUDE_DIRS}
 		${Boost_INCLUDE_DIRS}
+	)
+
+	target_include_directories(
+		${EXENAME}
+		SYSTEM
+		PRIVATE
+		${_SYSTEM_INCLUDE_DIRS}
 	)
 
 	target_compile_options(

@@ -15,7 +15,7 @@ sanguis::tools::animations::qtutil::sub_image(
 	return
 		QImage(
 			_image.bits()
-			+
+			+ // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
 			_rect.x()
 			*
 			_image.depth()
@@ -23,14 +23,14 @@ sanguis::tools::animations::qtutil::sub_image(
 			std::numeric_limits<
 				unsigned char
 			>::digits
-			+
+			+ // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
 			_rect.y()
 			*
 			_image.bytesPerLine()
 			,
 			_rect.width(),
 			_rect.height(),
-                  	_image.bytesPerLine(),
+			_image.bytesPerLine(),
 			_image.format()
 		);
 }

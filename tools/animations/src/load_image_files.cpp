@@ -47,7 +47,9 @@ sanguis::tools::animations::load_image_files(
 							_name
 						).has_value()
 					)
+					{
 						return;
+					}
 
 					QImage image(
 						sanguis::tools::animations::qtutil::from_fcppt_string(
@@ -59,11 +61,12 @@ sanguis::tools::animations::load_image_files(
 						)
 					);
 
-					// TODO
 					if(
 						image.isNull()
 					)
+					{
 						return;
+					}
 
 					result.insert(
 						std::make_pair(
@@ -107,9 +110,11 @@ sanguis::tools::animations::load_image_files(
 				:
 				weapon.second.animations()
 			)
+			{
 				load_image(
 					animation.second.image_name()
 				);
+			}
 		}
 	}
 

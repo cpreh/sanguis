@@ -12,11 +12,12 @@ namespace tools
 namespace animations
 {
 
-typedef
+using
+sge_systems
+=
 sge::systems::instance<
 	sge::systems::with_image2d
->
-sge_systems;
+>;
 
 }
 }

@@ -28,7 +28,9 @@
 #include <fcppt/variant/output.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstdlib>
+#include <exception>
 #include <filesystem>
+#include <iostream>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -46,18 +48,20 @@ try
 		path_label
 	);
 
-	typedef
+	using
+	parser_type
+	=
 	fcppt::options::argument<
 		path_label,
 		fcppt::string
-	>
-	parser_type;
+	>;
 
-	typedef
+	using
+	result_type
+	=
 	fcppt::options::result_of<
 		parser_type
-	>
-	result_type;
+	>;
 
 	parser_type const parser{
 		fcppt::options::long_name{
@@ -147,6 +151,19 @@ catch(
 		_error.string()
 		<<
 		FCPPT_TEXT('\n');
+
+	return
+		EXIT_FAILURE;
+}
+catch(
+	std::exception const  &_error
+)
+{
+	std::cerr
+		<<
+		_error.what()
+		<<
+		'\n';
 
 	return
 		EXIT_FAILURE;

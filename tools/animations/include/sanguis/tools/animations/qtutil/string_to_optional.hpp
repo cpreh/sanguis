@@ -27,11 +27,12 @@ string_to_optional(
 	QString const &_string
 )
 {
-	typedef
+	using
+	result_type
+	=
 	fcppt::optional::object<
 		Result
-	>
-	result_type;
+	>;
 
 	return
 		_string.isEmpty()

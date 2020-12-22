@@ -25,11 +25,13 @@ sanguis::tools::animations::merge_models(
 		:
 		_new_model.parts()
 	)
+	{
 		for(
 			sanguis::model::weapon_category_map::value_type &weapon_category
 			:
 			part.second.weapon_categories()
 		)
+		{
 			for(
 				sanguis::model::animation_map::value_type &animation
 				:
@@ -53,6 +55,8 @@ sanguis::tools::animations::merge_models(
 					previous_animation.animation_sound()
 				);
 			}
+		}
+	}
 
 	return
 		std::move(

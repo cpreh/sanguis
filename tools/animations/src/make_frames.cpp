@@ -6,6 +6,7 @@
 #include <sanguis/tools/animations/frame.hpp>
 #include <sanguis/tools/animations/frame_container.hpp>
 #include <sanguis/tools/animations/make_frames.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -17,7 +18,9 @@
 sanguis::tools::animations::frame_container
 sanguis::tools::animations::make_frames(
 	QImage const &_image,
-	QWidget &_parent,
+	fcppt::reference<
+		QWidget
+	> const _parent,
 	sanguis::model::object const &_model,
 	sanguis::model::animation const &_animation
 )

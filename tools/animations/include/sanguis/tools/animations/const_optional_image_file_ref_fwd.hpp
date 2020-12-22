@@ -14,11 +14,12 @@ namespace tools
 namespace animations
 {
 
-typedef
+using
+const_optional_image_file_ref
+=
 fcppt::optional::reference<
 	QImage const
->
-const_optional_image_file_ref;
+>;
 
 }
 }

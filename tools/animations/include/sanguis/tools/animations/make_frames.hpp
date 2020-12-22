@@ -4,6 +4,7 @@
 #include <sanguis/model/animation_fwd.hpp>
 #include <sanguis/model/object_fwd.hpp>
 #include <sanguis/tools/animations/frame_container.hpp>
+#include <fcppt/reference_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <QImage>
 #include <QWidget>
@@ -20,7 +21,9 @@ namespace animations
 sanguis::tools::animations::frame_container
 make_frames(
 	QImage const &,
-	QWidget &,
+	fcppt::reference<
+		QWidget
+	>,
 	sanguis::model::object const &,
 	sanguis::model::animation const &
 );

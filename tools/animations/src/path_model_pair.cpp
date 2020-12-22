@@ -8,12 +8,14 @@
 
 
 sanguis::tools::animations::path_model_pair::path_model_pair(
-	std::filesystem::path const &_path,
+	std::filesystem::path &&_path,
 	sanguis::model::object &&_model
 )
 :
 	path_(
-		_path
+		std::move(
+			_path
+		)
 	),
 	model_(
 		std::move(
@@ -25,16 +27,19 @@ sanguis::tools::animations::path_model_pair::path_model_pair(
 
 sanguis::tools::animations::path_model_pair::path_model_pair(
 	path_model_pair &&
-) = default;
+)
+noexcept
+= default;
 
 sanguis::tools::animations::path_model_pair &
 sanguis::tools::animations::path_model_pair::operator=(
 	path_model_pair &&
-) = default;
+)
+noexcept
+= default;
 
 sanguis::tools::animations::path_model_pair::~path_model_pair()
-{
-}
+= default;
 
 std::filesystem::path const &
 sanguis::tools::animations::path_model_pair::path() const

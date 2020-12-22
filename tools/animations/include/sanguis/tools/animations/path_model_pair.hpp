@@ -23,27 +23,32 @@ class path_model_pair
 	);
 public:
 	path_model_pair(
-		std::filesystem::path const &,
+		std::filesystem::path &&,
 		sanguis::model::object &&
 	);
 
 	path_model_pair(
 		path_model_pair &&
-	);
+	)
+	noexcept;
 
 	path_model_pair &
 	operator=(
 		path_model_pair &&
-	);
+	)
+	noexcept;
 
 	~path_model_pair();
 
+	[[nodiscard]]
 	std::filesystem::path const &
 	path() const;
 
+	[[nodiscard]]
 	sanguis::model::object &
 	model();
 
+	[[nodiscard]]
 	sanguis::model::object const &
 	model() const;
 private:

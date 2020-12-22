@@ -15,12 +15,13 @@ namespace tools
 namespace animations
 {
 
-typedef
+using
+image_file_map
+=
 std::unordered_map<
 	sanguis::model::image_name,
 	QImage
->
-image_file_map;
+>;
 
 }
 }

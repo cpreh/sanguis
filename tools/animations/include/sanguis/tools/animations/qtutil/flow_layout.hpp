@@ -41,6 +41,7 @@
 #ifndef SANGUIS_TOOLS_ANIMATIONS_QTUTIL_FLOW_LAYOUT_HPP_INCLUDED
 #define SANGUIS_TOOLS_ANIMATIONS_QTUTIL_FLOW_LAYOUT_HPP_INCLUDED
 
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <QLayout>
 #include <QRect>
@@ -59,6 +60,7 @@ namespace qtutil
 
 class FlowLayout : public QLayout
 {
+    FCPPT_NONMOVABLE(FlowLayout);
 public:
     explicit FlowLayout(QWidget *parent, int margin = -1, int hSpacing = -1, int vSpacing = -1);
     explicit FlowLayout(int margin = -1, int hSpacing = -1, int vSpacing = -1);
@@ -66,21 +68,21 @@ public:
     override;
 
     void addItem(QLayoutItem *item) override;
-    int horizontalSpacing() const;
-    int verticalSpacing() const;
-    Qt::Orientations expandingDirections() const override;
-    bool hasHeightForWidth() const override;
-    int heightForWidth(int) const override;
-    int count() const override;
-    QLayoutItem *itemAt(int index) const override;
-    QSize minimumSize() const override;
+    [[nodiscard]] int horizontalSpacing() const;
+    [[nodiscard]] int verticalSpacing() const;
+    [[nodiscard]] Qt::Orientations expandingDirections() const override;
+    [[nodiscard]] bool hasHeightForWidth() const override;
+    [[nodiscard]] int heightForWidth(int) const override;
+    [[nodiscard]] int count() const override;
+    [[nodiscard]] QLayoutItem *itemAt(int index) const override;
+    [[nodiscard]] QSize minimumSize() const override;
     void setGeometry(const QRect &rect) override;
-    QSize sizeHint() const override;
-    QLayoutItem *takeAt(int index) override;
+    [[nodiscard]] QSize sizeHint() const override;
+    [[nodiscard]] QLayoutItem *takeAt(int index) override;
 
 private:
-    int doLayout(const QRect &rect, bool testOnly) const;
-    int smartSpacing(QStyle::PixelMetric pm) const;
+    [[nodiscard]] int doLayout(const QRect &rect, bool testOnly) const;
+    [[nodiscard]] int smartSpacing(QStyle::PixelMetric pm) const;
 
     QList<QLayoutItem *> itemList;
     int m_hSpace;

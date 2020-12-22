@@ -12,11 +12,12 @@ namespace tools
 namespace animations
 {
 
-typedef
+using
+optional_animation_ref
+=
 fcppt::optional::reference<
 	sanguis::model::animation
->
-optional_animation_ref;
+>;
 
 }
 }

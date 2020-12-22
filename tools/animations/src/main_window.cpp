@@ -29,6 +29,7 @@
 #include <sanguis/tools/libmergeimage/saved_image_vector.hpp>
 #include <sanguis/tools/libmergeimage/to_model.hpp>
 #include <fcppt/const.hpp>
+#include <fcppt/copy.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -61,7 +62,9 @@
 
 
 sanguis::tools::animations::main_window::main_window(
-	sanguis::tools::animations::sge_systems const &_sge_systems
+	fcppt::reference<
+		sanguis::tools::animations::sge_systems const
+	> const _sge_systems
 )
 :
 	QMainWindow(
@@ -100,8 +103,7 @@ sanguis::tools::animations::main_window::main_window(
 }
 
 sanguis::tools::animations::main_window::~main_window()
-{
-}
+= default;
 
 void
 sanguis::tools::animations::main_window::actionJSON()
@@ -187,7 +189,7 @@ try
 				{
 					sanguis::tools::libmergeimage::merge_result merged_result(
 						sanguis::tools::libmergeimage::merge_images(
-							sge_systems_.image_system(),
+							sge_systems_->image_system(),
 							_resource_directory
 						)
 					);
@@ -206,7 +208,7 @@ try
 
 					sanguis::tools::libmergeimage::saved_image_vector const saved_images(
 						sanguis::tools::libmergeimage::save_images(
-							sge_systems_.image_system(),
+							sge_systems_->image_system(),
 							_save_path,
 							merged_result.images()
 						)
@@ -391,12 +393,14 @@ sanguis::tools::animations::main_window::selectedPartChanged()
 					_part
 				).weapon_categories()
 			)
+			{
 				ui_->weaponComboBox->insertItem(
 					0,
 					sanguis::tools::animations::qtutil::from_fcppt_string(
 						weapon_category.first.get()
 					)
 				);
+			}
 		},
 		loaded_model_,
 		this->selected_part()
@@ -426,12 +430,14 @@ sanguis::tools::animations::main_window::selectedWeaponChanged()
 					_weapon_category
 				).animations()
 			)
+			{
 				ui_->animationComboBox->insertItem(
 					0,
 					sanguis::tools::animations::qtutil::from_fcppt_string(
 						animation.first.get()
 					)
 				);
+			}
 		},
 		loaded_model_,
 		this->selected_part(),
@@ -530,7 +536,9 @@ sanguis::tools::animations::main_window::selectedAnimationChanged()
 					frames_ =
 						sanguis::tools::animations::make_frames(
 							_file.get(),
-							*ui_->scrollAreaWidgetContents,
+							fcppt::make_ref(
+								*ui_->scrollAreaWidgetContents
+							),
 							FCPPT_ASSERT_OPTIONAL_ERROR(
 								loaded_model_
 							).model(),
@@ -540,7 +548,9 @@ sanguis::tools::animations::main_window::selectedAnimationChanged()
 					if(
 						animation_was_playing
 					)
+					{
 						this->playFrames();
+					}
 				}
 			);
 		}
@@ -628,21 +638,25 @@ sanguis::tools::animations::main_window::soundChanged(
 void
 sanguis::tools::animations::main_window::updateFrame()
 {
-	// TODO: cyclic_iterator?
+	// TODO(philipp): cyclic_iterator?
 	if(
 		frame_iterator_
 		==
 		frames_.end()
 	)
+	{
 		frame_iterator_ =
 			frames_.begin();
+	}
 
 	if(
 		frame_iterator_
 		==
 		frames_.end()
 	)
+	{
 		return;
+	}
 
 	this->ui_->animationPreview->setPixmap(
 		frame_iterator_->pixmap()
@@ -762,7 +776,9 @@ sanguis::tools::animations::main_window::open_json(
 		loaded_model_ =
 			optional_path_model_pair(
 				sanguis::tools::animations::path_model_pair(
-					_path,
+					fcppt::copy(
+						_path
+					),
 					sanguis::model::deserialize(
 						_path
 					)
@@ -797,7 +813,7 @@ sanguis::tools::animations::main_window::open_json(
 		)
 	);
 
-	// TODO: Do this differently!
+	// TODO(philipp): Do this differently!
 	sanguis::tools::animations::path_model_pair &loaded_model(
 		loaded_model_.get_unsafe()
 	);
@@ -832,12 +848,14 @@ sanguis::tools::animations::main_window::open_json(
 		:
 		loaded_model.model().parts()
 	)
+	{
 		ui_->partComboBox->insertItem(
 			0,
 			sanguis::tools::animations::qtutil::from_fcppt_string(
 				part.first.get()
 			)
 		);
+	}
 
 	ui_->globalDelaySpinBox->setValue(
 		fcppt::optional::maybe(

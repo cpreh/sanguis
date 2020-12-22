@@ -61,7 +61,9 @@ FCPPT_RECORD_MAKE_LABEL(
 	output_file_label
 );
 
-typedef
+using
+argument_record
+=
 fcppt::record::object<
 	fcppt::record::element<
 		input_path_label,
@@ -71,8 +73,7 @@ fcppt::record::object<
 		output_file_label,
 		fcppt::string
 	>
->
-argument_record;
+>;
 
 void
 execute_main(
@@ -185,13 +186,14 @@ try
 		)
 	};
 
-	typedef
+	using
+	result_type
+	=
 	fcppt::options::result_of<
 		decltype(
 			parser
 		)
-	>
-	result_type;
+	>;
 
 	fcppt::options::help_result<
 		result_type
