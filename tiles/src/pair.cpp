@@ -1,5 +1,6 @@
 #include <sanguis/creator/instantiate_tile.hpp>
 #include <sanguis/tiles/pair.hpp>
+#include <fcppt/tuple/get.hpp>
 
 
 template<
@@ -39,7 +40,9 @@ sanguis::tiles::pair<
 >::first() const
 {
 	return
-		impl_.first;
+		fcppt::tuple::get<0U>(
+			impl_
+		);
 }
 
 template<
@@ -51,7 +54,9 @@ sanguis::tiles::pair<
 >::second() const
 {
 	return
-		impl_.second;
+		fcppt::tuple::get<1U>(
+			impl_
+		);
 }
 
 #define SANGUIS_TILES_INSTANTIATE_TILE(\

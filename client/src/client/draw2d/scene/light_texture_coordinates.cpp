@@ -12,6 +12,7 @@
 #include <fcppt/math/vector/fill.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/optional/object_impl.hpp>
+#include <fcppt/tuple/element.hpp>
 
 
 sanguis::client::draw2d::sprite::client::texture_coordinates
@@ -30,11 +31,19 @@ sanguis::client::draw2d::scene::light_texture_coordinates(
 		_texture.size()
 	};
 
+	using
+	value_type
+	=
+	fcppt::tuple::element<
+		0U,
+		sanguis::client::draw2d::sprite::client::texture_coordinates
+	>;
+
 	fcppt::optional::object<
-		sanguis::client::draw2d::sprite::client::texture_coordinates::value_type
+		value_type
 	> const coordinates_opt{
 		fcppt::math::vector::structure_cast<
-			sanguis::client::draw2d::sprite::client::texture_coordinates::value_type,
+			value_type,
 			fcppt::cast::int_to_float_fun
 		>(
 			fcppt::math::dim::to_vector(
@@ -43,7 +52,7 @@ sanguis::client::draw2d::scene::light_texture_coordinates(
 		)
 		/
 		fcppt::math::vector::structure_cast<
-			sanguis::client::draw2d::sprite::client::texture_coordinates::value_type,
+			value_type,
 			fcppt::cast::int_to_float_fun
 		>(
 			fcppt::math::dim::to_vector(
@@ -52,7 +61,7 @@ sanguis::client::draw2d::scene::light_texture_coordinates(
 		)
 	};
 
-	sanguis::client::draw2d::sprite::client::texture_coordinates::value_type const coordinates{
+	value_type const coordinates{
 		FCPPT_ASSERT_OPTIONAL_ERROR(
 			coordinates_opt
 		)
@@ -64,7 +73,7 @@ sanguis::client::draw2d::scene::light_texture_coordinates(
 			coordinates
 			+
 			fcppt::math::vector::fill<
-				sanguis::client::draw2d::sprite::client::texture_coordinates::value_type
+				value_type
 			>(
 				1.F
 			)

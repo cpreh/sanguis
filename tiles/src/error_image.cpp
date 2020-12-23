@@ -17,6 +17,7 @@
 #include <fcppt/math/dim/arithmetic.hpp>
 #include <fcppt/math/dim/fill.hpp>
 #include <fcppt/math/vector/null.hpp>
+#include <fcppt/tuple/get.hpp>
 
 
 sge::image2d::store::object
@@ -81,7 +82,9 @@ sanguis::tiles::error_image(
 									half_dim
 								}
 							),
-							colors.first,
+							fcppt::tuple::get<0U>(
+								colors
+							),
 							sge::image::algorithm::uninitialized::yes
 						);
 
@@ -94,13 +97,15 @@ sanguis::tiles::error_image(
 								),
 								sge::image2d::rect{
 									sge::image2d::vector{
-										0u,
+										0U,
 										half_dim.h()
 									},
 									half_dim
 								}
 							),
-							colors.second,
+							fcppt::tuple::get<1U>(
+								colors
+							),
 							sge::image::algorithm::uninitialized::yes
 						);
 
@@ -114,12 +119,14 @@ sanguis::tiles::error_image(
 								sge::image2d::rect{
 									sge::image2d::vector{
 										half_dim.w(),
-										0u
+										0U
 									},
 									half_dim
 								}
 							),
-							colors.second,
+							fcppt::tuple::get<1U>(
+								colors
+							),
 							sge::image::algorithm::uninitialized::yes
 						);
 
@@ -138,7 +145,9 @@ sanguis::tiles::error_image(
 									half_dim
 								}
 							),
-							colors.first,
+							fcppt::tuple::get<0U>(
+								colors
+							),
 							sge::image::algorithm::uninitialized::yes
 						);
 					}

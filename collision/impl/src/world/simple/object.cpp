@@ -63,6 +63,7 @@
 #include <fcppt/math/vector/fill.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/tuple/get.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstddef>
 #include <functional>
@@ -550,11 +551,15 @@ sanguis::collision::impl::world::simple::object::move_bodies(
 											)
 											{
 												body1.push(
-													_result.first
+													fcppt::tuple::get<0U>(
+														_result
+													)
 												);
 
 												body2.push(
-													_result.second
+													fcppt::tuple::get<1U>(
+														_result
+													)
 												);
 											}
 										);

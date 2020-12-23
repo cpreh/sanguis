@@ -5,7 +5,7 @@
 #include <sanguis/creator/is_tile.hpp>
 #include <sanguis/tiles/pair_fwd.hpp>
 #include <sanguis/tiles/symbol.hpp>
-#include <fcppt/homogenous_pair_impl.hpp>
+#include <fcppt/tuple/object_impl.hpp>
 
 
 namespace sanguis
@@ -43,7 +43,8 @@ private:
 	using
 	impl_type
 	=
-	fcppt::homogenous_pair<
+	fcppt::tuple::object<
+		Tile,
 		Tile
 	>;
 

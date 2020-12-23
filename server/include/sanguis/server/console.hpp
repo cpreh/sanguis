@@ -9,7 +9,6 @@
 #include <sge/console/arg_list.hpp>
 #include <sge/console/object.hpp>
 #include <sge/console/callback/function.hpp>
-#include <fcppt/homogenous_pair_decl.hpp>
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/signal/auto_connection_fwd.hpp>

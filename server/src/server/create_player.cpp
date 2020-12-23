@@ -16,6 +16,7 @@
 #include <alda/message/init_record.hpp>
 #include <sge/charconv/fcppt_string_to_utf8.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/tuple/get.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -46,11 +47,15 @@ sanguis::server::create_player(
 				>(
 					sanguis::messages::roles::command_name{} =
 						sge::charconv::fcppt_string_to_utf8(
-							command.first
+							fcppt::tuple::get<0U>(
+								command
+							)
 						),
 					sanguis::messages::roles::command_description{} =
 						sge::charconv::fcppt_string_to_utf8(
-							command.second
+							fcppt::tuple::get<1U>(
+								command
+							)
 						)
 				)
 			)

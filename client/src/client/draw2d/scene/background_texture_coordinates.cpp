@@ -11,6 +11,8 @@
 #include <fcppt/math/vector/null.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
 #include <fcppt/optional/object_impl.hpp>
+#include <fcppt/tuple/element.hpp>
+#include <fcppt/tuple/get.hpp>
 
 
 sanguis::client::draw2d::sprite::client::texture_coordinates
@@ -28,7 +30,10 @@ sanguis::client::draw2d::scene::background_texture_coordinates(
 	using
 	pos_type
 	=
-	coordinates::value_type;
+	fcppt::tuple::element<
+		0U,
+		coordinates
+	>;
 
 	auto const dim(
 		fcppt::math::vector::structure_cast<
@@ -85,12 +90,14 @@ sanguis::client::draw2d::scene::background_texture_coordinates(
 			rel_divided
 		)
 		*
-		base.second
+		fcppt::tuple::get<1U>(
+			base
+		)
 	);
 
 	return
 		coordinates(
-			base.first + rel,
-			base.second + rel
+			fcppt::tuple::get<0u>(base) + rel,
+			fcppt::tuple::get<1U>(base) + rel
 		);
 }

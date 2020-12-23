@@ -13,7 +13,6 @@
 #include <sanguis/collision/world/body_body.hpp>
 #include <fcppt/boost_units_value.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_homogenous_pair.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/math/vector/dot.hpp>
 #include <fcppt/math/vector/map.hpp>
@@ -22,6 +21,7 @@
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe_multi.hpp>
 #include <fcppt/optional/object_impl.hpp>
+#include <fcppt/tuple/make.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/units/quantity.hpp>
 #include <boost/units/systems/si/momentum.hpp>
@@ -240,7 +240,7 @@ sanguis::collision::world::body_body(
 										);
 
 										return
-											fcppt::make_homogenous_pair(
+											fcppt::tuple::make(
 												sanguis::collision::result(
 													make_speed(
 														_mass1

@@ -3,7 +3,7 @@
 
 #include <sanguis/tiles/impl/error_image_color_pair_fwd.hpp>
 #include <sge/image/color/any/object.hpp>
-#include <fcppt/homogenous_pair_impl.hpp>
+#include <fcppt/tuple/object_impl.hpp>
 
 
 #endif
