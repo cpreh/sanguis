@@ -189,7 +189,7 @@ execute_main(
 					{
 						return
 							sanguis::creator::opening_count{
-								0u
+								0U
 							};
 					}
 				),

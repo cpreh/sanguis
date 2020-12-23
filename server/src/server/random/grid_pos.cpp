@@ -75,7 +75,7 @@ sanguis::server::random::grid_pos(
 								_sup.get()
 							)
 							-
-							1u
+							1U
 						)
 					)
 				);

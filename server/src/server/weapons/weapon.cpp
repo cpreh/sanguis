@@ -194,7 +194,7 @@ sanguis::server::weapons::weapon::magazine_size() const
 				return
 					sanguis::server::weapons::attributes::magazine_size(
 						sanguis::server::weapons::magazine_size(
-							1u
+							1U
 						)
 					);
 			}
@@ -254,7 +254,7 @@ sanguis::server::weapons::weapon::description() const
 					{
 						return
 							sanguis::server::weapons::magazine_size{
-								0u
+								0U
 							};
 					}
 				).get()

@@ -68,8 +68,8 @@ sanguis::tools::animations::get_or_default_animation(
 				return
 					sanguis::model::animation(
 						sanguis::model::animation_range(
-							0u,
-							1u
+							0U,
+							1U
 						),
 						sanguis::model::optional_animation_delay(),
 						sanguis::model::optional_animation_sound(),

@@ -92,7 +92,7 @@ sanguis::client::load::resource::make_missing_texture(
 						),
 						sge::image2d::rect{
 							sge::image2d::vector{
-								0u,
+								0U,
 								half_dim.h()
 							},
 							half_dim
@@ -112,7 +112,7 @@ sanguis::client::load::resource::make_missing_texture(
 						sge::image2d::rect{
 							sge::image2d::vector{
 								half_dim.w(),
-								0u
+								0U
 							},
 							half_dim
 						}

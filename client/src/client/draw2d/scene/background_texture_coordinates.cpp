@@ -97,7 +97,7 @@ sanguis::client::draw2d::scene::background_texture_coordinates(
 
 	return
 		coordinates(
-			fcppt::tuple::get<0u>(base) + rel,
+			fcppt::tuple::get<0U>(base) + rel,
 			fcppt::tuple::get<1U>(base) + rel
 		);
 }
