@@ -53,12 +53,12 @@
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/cast/to_signed_fun.hpp>
 #include <fcppt/container/join.hpp>
-#include <fcppt/container/array/init_move.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/container/grid/clamped_min.hpp>
 #include <fcppt/container/grid/clamped_sup_signed.hpp>
 #include <fcppt/container/grid/make_pos_ref_range_start_end.hpp>
 #include <fcppt/enum/array_impl.hpp>
+#include <fcppt/enum/array_init.hpp>
 #include <fcppt/enum/make_range.hpp>
 #include <fcppt/math/vector/fill.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
@@ -79,15 +79,35 @@ sanguis::collision::impl::world::simple::object::object(
 	grid_{
 		_parameters.grid()
 	},
-	body_sets_(),
-	ghost_sets_(),
+	body_sets_{
+		fcppt::enum_::array_init<
+			body_set_array
+		>(
+			[](auto)
+			{
+				return
+					body_set{};
+			}
+		)
+	},
+	ghost_sets_{
+		fcppt::enum_::array_init<
+			ghost_set_array
+		>(
+			[](auto)
+			{
+				return
+					ghost_set{};
+			}
+		)
+	},
 	body_list_grids_{
-		fcppt::container::array::init_move<
-			body_list_grid_array::internal
+		fcppt::enum_::array_init<
+			body_list_grid_array
 		>(
 			[
 				&_parameters
-			]()
+			](auto)
 			{
 				return
 					sanguis::collision::impl::world::simple::body_list_grid(

@@ -1,13 +1,13 @@
 #ifndef SANGUIS_COLLISION_IMPL_WORLD_MAKE_GROUPS_HPP_INCLUDED
 #define SANGUIS_COLLISION_IMPL_WORLD_MAKE_GROUPS_HPP_INCLUDED
 
-#include <fcppt/container/array/init.hpp>
+#include <fcppt/array/init.hpp>
+#include <fcppt/array/object_impl.hpp>
 #include <fcppt/enum/array.hpp>
 #include <fcppt/enum/array_init.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/mpl/size.hpp>
-#include <array>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
@@ -37,7 +37,7 @@ private:
 	using
 	groups_array
 	=
-	std::array<
+	fcppt::array::object<
 		ResultGroup,
 		boost::mpl::size<
 			GroupsStatic<
@@ -87,7 +87,7 @@ private:
 		) const
 		{
 			auto const array(
-				fcppt::container::array::init<
+				fcppt::array::init<
 					groups_array<
 						Group::value
 					>

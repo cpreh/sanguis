@@ -21,6 +21,7 @@
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/array/get.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -76,9 +77,11 @@ sanguis::server::entities::enemies::factory::make_special(
 			),
 			sanguis::server::entities::enemies::factory::make_modifiers(
 				_random_generator.get(),
-				amounts[
-					0
-				]
+				fcppt::array::get<
+					0U
+				>(
+					amounts
+				)
 			)
 		)
 	);
@@ -105,9 +108,11 @@ sanguis::server::entities::enemies::factory::make_special(
 				modifier_result,
 				sanguis::server::entities::enemies::factory::make_skills(
 					_random_generator.get(),
-					amounts[
-						1
-					]
+					fcppt::array::get<
+						1U
+					>(
+						amounts
+					)
 				),
 				_is_unique
 			)

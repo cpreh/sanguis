@@ -2,8 +2,8 @@
 #define SANGUIS_SERVER_RANDOM_SPLIT_ARRAY_HPP_INCLUDED
 
 #include <sanguis/server/random/amount.hpp>
+#include <fcppt/array/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <array>
 #include <cstddef>
 #include <fcppt/config/external_end.hpp>
 
@@ -21,7 +21,7 @@ template<
 using
 split_array
 =
-std::array<
+fcppt::array::object<
 	sanguis::server::random::amount,
 	Size
 >;

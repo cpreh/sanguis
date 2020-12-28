@@ -54,9 +54,9 @@ map_with_index(
 	{
 		result.push_back(
 			std::make_pair(
-				_source[
+				_source.get_unsafe(
 					index
-				],
+				),
 				index
 			)
 		);

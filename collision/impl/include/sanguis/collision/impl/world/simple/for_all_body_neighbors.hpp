@@ -3,7 +3,7 @@
 
 #include <sanguis/creator/dim.hpp>
 #include <sanguis/creator/pos.hpp>
-#include <fcppt/container/array/push_back.hpp>
+#include <fcppt/array/push_back.hpp>
 #include <fcppt/container/grid/in_range_dim.hpp>
 #include <fcppt/container/grid/moore_neighbors.hpp>
 
@@ -32,7 +32,7 @@ for_all_body_neighbors(
 	for(
 		sanguis::creator::pos const &grid_pos2
 		:
-		fcppt::container::array::push_back(
+		fcppt::array::push_back(
 			fcppt::container::grid::moore_neighbors(
 				_pos
 			),
