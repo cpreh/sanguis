@@ -54,33 +54,30 @@ sanguis::tiles::impl::make_neighbors(
 
 	return
 		result_type{
-			typename
-			result_type::internal{{
-				get_tile(
-					sanguis::creator::pos{
-						_pos.x() - 1,
-						_pos.y() - 1
-					}
-				),
-				get_tile(
-					sanguis::creator::pos{
-						_pos.x(),
-						_pos.y() - 1
-					}
-				),
-				get_tile(
-					sanguis::creator::pos{
-						_pos.x() - 1,
-						_pos.y()
-					}
-				),
-				get_tile(
-					sanguis::creator::pos{
-						_pos.x(),
-						_pos.y()
-					}
-				)
-			}}
+			get_tile(
+				sanguis::creator::pos{
+					_pos.x() - 1,
+					_pos.y() - 1
+				}
+			),
+			get_tile(
+				sanguis::creator::pos{
+					_pos.x(),
+					_pos.y() - 1
+				}
+			),
+			get_tile(
+				sanguis::creator::pos{
+					_pos.x() - 1,
+					_pos.y()
+				}
+			),
+			get_tile(
+				sanguis::creator::pos{
+					_pos.x(),
+					_pos.y()
+				}
+			)
 		};
 }
 

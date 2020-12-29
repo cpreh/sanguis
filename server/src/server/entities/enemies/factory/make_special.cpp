@@ -62,10 +62,10 @@ sanguis::server::entities::enemies::factory::make_special(
 						2U
 				)
 			),
-			split_array{{
+			split_array{
 				sanguis::server::entities::enemies::modifiers::amount(),
 				sanguis::server::entities::enemies::skills::amount()
-			}}
+			}
 		)
 	);
 
