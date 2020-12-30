@@ -17,10 +17,8 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
+#include <fcppt/array/object_impl.hpp>
 #include <fcppt/optional/map.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <array>
-#include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::gui::hud::weapon_details::weapon_details(
@@ -36,13 +34,13 @@ sanguis::client::gui::hud::weapon_details::weapon_details(
 		fcppt::algorithm::map_optional<
 			tooltip_vector
 		>(
-			std::array<
+			fcppt::array::object<
 				sanguis::optional_weapon_description,
 				2
-			>{{
+			>{
 				_weapon1,
 				_weapon2
-			}},
+			},
 			[
 				&_gui_context,
 				&_gui_style,

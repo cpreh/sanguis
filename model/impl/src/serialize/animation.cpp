@@ -8,12 +8,9 @@
 #include <sge/parse/json/member_map.hpp>
 #include <sge/parse/json/object.hpp>
 #include <sge/parse/json/value.hpp>
+#include <fcppt/array/object_impl.hpp>
 #include <fcppt/optional/cat.hpp>
 #include <fcppt/optional/object_impl.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <array>
-#include <fcppt/config/external_end.hpp>
-
 
 sge::parse::json::object
 sanguis::model::impl::serialize::animation(
@@ -25,12 +22,12 @@ sanguis::model::impl::serialize::animation(
 			fcppt::optional::cat<
 				sge::parse::json::member_map
 			>(
-				std::array<
+				fcppt::array::object<
 					fcppt::optional::object<
 						sge::parse::json::member
 					>,
 					4
-				>{{
+				>{
 					fcppt::optional::object<
 						sge::parse::json::member
 					>{
@@ -47,7 +44,7 @@ sanguis::model::impl::serialize::animation(
 					sanguis::model::impl::serialize::image_name(
 						_animation.image_name()
 					)
-				}}
+				}
 			)
 		);
 }

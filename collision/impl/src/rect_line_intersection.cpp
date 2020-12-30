@@ -11,9 +11,9 @@
 #include <sanguis/collision/impl/rect_line_intersection.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/algorithm/find_by_opt.hpp>
+#include <fcppt/array/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/units/systems/si/length.hpp>
-#include <array>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -36,7 +36,7 @@ sanguis::collision::impl::rect_line_intersection(
 	using
 	line_segment_array
 	=
-	std::array<
+	fcppt::array::object<
 		sanguis::collision::impl::line_segment,
 		4
 	>;
@@ -45,7 +45,7 @@ sanguis::collision::impl::rect_line_intersection(
 		_rect.size()
 	);
 
-	line_segment_array const lines{{
+	line_segment_array const lines{
 		sanguis::collision::impl::line_segment(
 			sanguis::collision::impl::pos(
 				_rect.pos()
@@ -98,7 +98,7 @@ sanguis::collision::impl::rect_line_intersection(
 				)
 			)
 		)
-	}};
+	};
 
 	return
 		fcppt::algorithm::find_by_opt(
