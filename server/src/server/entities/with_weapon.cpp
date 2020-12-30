@@ -29,7 +29,7 @@
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/optional_error.hpp>
-#include <fcppt/array/init.hpp>
+#include <fcppt/enum/array_init.hpp>
 #include <fcppt/optional/deref.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -60,8 +60,8 @@ sanguis::server::entities::with_weapon::with_weapon(
 		_irs.get()
 	),
 	extra_damages_{
-		fcppt::array::init<
-			extra_damage_array::internal
+		fcppt::enum_::array_init<
+			extra_damage_array
 		>(
 			[](auto)
 			{
