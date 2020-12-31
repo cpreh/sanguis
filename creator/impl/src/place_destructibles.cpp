@@ -99,7 +99,7 @@ sanguis::creator::impl::place_destructibles(
 	);
 
 	for(
-		auto const &entry
+		auto const entry
 		:
 		fcppt::container::grid::make_pos_ref_crange(
 			_grid.get()

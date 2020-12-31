@@ -576,7 +576,7 @@ sanguis::creator::impl::generators::rooms(
 	// look for possible connector cells in the grid,
 	// examining each position only once(!)
 	for (
-		auto const &p
+		auto const p
 		:
 		// no possible connector tiles can be on the
 		// edge of the map, so only look for them in the
@@ -738,7 +738,7 @@ sanguis::creator::impl::generators::rooms(
 			);
 
 			for (
-				auto const &p
+				auto const p
 				:
 				fcppt::container::grid::make_pos_ref_range(
 					region_grid

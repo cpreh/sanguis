@@ -32,11 +32,6 @@ sanguis::client::draw2d::sprite::index const top{
 	1U
 };
 
-// NOLINTNEXTLINE(fuchsia-statically-constructed-objects,cert-err58-cpp)
-sanguis::client::draw2d::sprite::index const bottom{
-	0U
-};
-
 FCPPT_PP_POP_WARNING
 
 }

@@ -209,7 +209,7 @@ sanguis::client::draw2d::scene::world::state::draw(
 	);
 
 	for(
-		auto const &entry
+		auto const entry
 		:
 		fcppt::container::grid::make_pos_ref_crange_start_end(
 			batches_,
