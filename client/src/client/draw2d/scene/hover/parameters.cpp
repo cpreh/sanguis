@@ -24,7 +24,7 @@ sanguis::client::draw2d::scene::hover::parameters::parameters(
 	sge::font::object_ref const _font,
 	sanguis::client::load::hud::context_ref const _load_context,
 	sanguis::client::weapon_pair &&_player_weapons,
-	sanguis::client::draw2d::sprite::center _center,
+	sanguis::client::draw2d::sprite::center const _center,
 	sanguis::client::draw2d::radius const _radius
 )
 :
@@ -49,9 +49,7 @@ sanguis::client::draw2d::scene::hover::parameters::parameters(
 		)
 	),
 	center_{
-		std::move(
-			_center
-		)
+		_center
 	},
 	radius_{
 		_radius

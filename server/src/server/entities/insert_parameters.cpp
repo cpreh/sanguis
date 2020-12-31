@@ -2,20 +2,15 @@
 #include <sanguis/server/angle.hpp>
 #include <sanguis/server/center.hpp>
 #include <sanguis/server/entities/insert_parameters.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <utility>
-#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::entities::insert_parameters::insert_parameters(
-	sanguis::server::center _center,
+	sanguis::server::center const _center,
 	sanguis::server::angle const _angle
 )
 :
 	sanguis::server::entities::insert_parameters::insert_parameters(
-		std::move(
-			_center
-		),
+		_center,
 		_angle,
 		sanguis::collision::world::created{
 			true
@@ -25,15 +20,13 @@ sanguis::server::entities::insert_parameters::insert_parameters(
 }
 
 sanguis::server::entities::insert_parameters::insert_parameters(
-	sanguis::server::center _center,
+	sanguis::server::center const _center,
 	sanguis::server::angle const _angle,
 	sanguis::collision::world::created const _created
 )
 :
 	center_(
-		std::move(
-			_center
-		)
+		_center
 	),
 	angle_(
 		_angle

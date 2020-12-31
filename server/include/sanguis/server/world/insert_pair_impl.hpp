@@ -16,7 +16,7 @@ sanguis::server::world::insert_pair<
 	Type
 >::insert_pair(
 	unique_ptr &&_entity,
-	sanguis::server::entities::insert_parameters &&_insert_parameters
+	sanguis::server::entities::insert_parameters const _insert_parameters
 )
 :
 	entity_(
@@ -25,9 +25,7 @@ sanguis::server::world::insert_pair<
 		)
 	),
 	insert_parameters_(
-		std::move(
-			_insert_parameters
-		)
+		_insert_parameters
 	)
 {
 }

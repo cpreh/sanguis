@@ -1,20 +1,15 @@
 #include <sanguis/creator/destructible.hpp>
 #include <sanguis/creator/destructible_pos.hpp>
 #include <sanguis/creator/destructible_type.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <utility>
-#include <fcppt/config/external_end.hpp>
 
 
 sanguis::creator::destructible::destructible(
-	sanguis::creator::destructible_pos _pos,
+	sanguis::creator::destructible_pos const _pos,
 	sanguis::creator::destructible_type const _type
 )
 :
 	pos_(
-		std::move(
-			_pos
-		)
+		_pos
 	),
 	type_(
 		_type

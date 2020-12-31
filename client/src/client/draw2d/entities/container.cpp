@@ -43,7 +43,6 @@
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <chrono>
-#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -51,7 +50,7 @@ sanguis::client::draw2d::entities::container::container(
 	sanguis::diff_clock_cref const _diff_clock,
 	sanguis::client::draw2d::sprite::normal::system_ref const _normal_system,
 	sanguis::client::draw2d::entities::level_vector const &_levels,
-	sanguis::client::draw2d::speed _speed,
+	sanguis::client::draw2d::speed const _speed,
 	sanguis::client::draw2d::sprite::center const &_center,
 	sanguis::client::draw2d::sprite::dim const &_dim,
 	sanguis::client::draw2d::sprite::rotation const _rotation,
@@ -63,9 +62,7 @@ sanguis::client::draw2d::entities::container::container(
 	sanguis::client::draw2d::entities::ifaces::with_orientation(),
 	sanguis::client::draw2d::entities::ifaces::with_speed(),
 	speed_(
-		std::move(
-			_speed
-		)
+		_speed
 	),
 	center_(
 		fcppt::math::vector::structure_cast<

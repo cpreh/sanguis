@@ -7,14 +7,12 @@
 
 
 sanguis::tools::libmergeimage::merge_result::merge_result(
-	sanguis::model::cell_size _cell_size,
+	sanguis::model::cell_size const _cell_size,
 	sanguis::tools::libmergeimage::image_vector &&_images
 )
 :
 	cell_size_(
-		std::move(
-			_cell_size
-		)
+		_cell_size
 	),
 	images_(
 		std::move(

@@ -32,7 +32,7 @@ public:
 
 	insert_pair(
 		unique_ptr &&,
-		sanguis::server::entities::insert_parameters &&
+		sanguis::server::entities::insert_parameters
 	);
 
 	insert_pair(

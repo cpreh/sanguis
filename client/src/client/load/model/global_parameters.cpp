@@ -18,7 +18,7 @@ sanguis::client::load::model::global_parameters::global_parameters(
 	std::filesystem::path &&_path,
 	sanguis::client::load::resource::textures_cref const _textures,
 	sanguis::client::load::resource::sounds_cref const _sounds,
-	sanguis::model::cell_size _cell_size,
+	sanguis::model::cell_size const _cell_size,
 	sanguis::model::optional_animation_delay const _delay,
 	sanguis::model::optional_image_name &&_image
 )
@@ -35,9 +35,7 @@ sanguis::client::load::model::global_parameters::global_parameters(
 		_sounds
 	),
 	cell_size_(
-		std::move(
-			_cell_size
-		)
+		_cell_size
 	),
 	delay_(
 		_delay

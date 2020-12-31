@@ -15,16 +15,14 @@
 
 
 sanguis::model::object::object(
-	sanguis::model::cell_size _cell_size,
+	sanguis::model::cell_size const _cell_size,
 	sanguis::model::optional_animation_delay const _animation_delay,
 	sanguis::model::part_map &&_parts,
 	sanguis::model::optional_image_name &&_image_name
 )
 :
 	cell_size_{
-		std::move(
-			_cell_size
-		)
+		_cell_size
 	},
 	animation_delay_{
 		_animation_delay

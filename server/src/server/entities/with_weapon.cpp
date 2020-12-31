@@ -231,13 +231,11 @@ sanguis::server::entities::with_weapon::drop_weapon(
 
 void
 sanguis::server::entities::with_weapon::target(
-	sanguis::server::weapons::optional_target _target
+	sanguis::server::weapons::optional_target const _target
 )
 {
 	target_ =
-		std::move(
-			_target
-		);
+		_target;
 }
 
 sanguis::server::weapons::optional_target

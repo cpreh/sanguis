@@ -3,22 +3,17 @@
 #include <sanguis/tiles/is_background.hpp>
 #include <sanguis/tiles/path_reference.hpp>
 #include <sanguis/tiles/pos.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <utility>
-#include <fcppt/config/external_end.hpp>
 
 
 sanguis::tiles::cell::cell(
-	sanguis::tiles::pos _pos,
+	sanguis::tiles::pos const _pos,
 	sanguis::tiles::content const &_content,
 	sanguis::tiles::path_reference const _path,
 	sanguis::tiles::is_background const _is_background
 )
 :
 	pos_(
-		std::move(
-			_pos
-		)
+		_pos
 	),
 	content_(
 		_content

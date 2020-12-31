@@ -272,7 +272,9 @@ sanguis::server::world::object::update(
 	if(
 		sight_ranges_.empty()
 	)
+	{
 		return;
+	}
 
 	sanguis::collision::world::update_result const collision_result(
 		collision_world_->update(

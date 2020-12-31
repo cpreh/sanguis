@@ -23,8 +23,8 @@ sanguis::client::draw2d::entities::model::parameters::parameters(
 	sanguis::client::draw2d::entities::model::decay_option const _decay_option,
 	sanguis::optional_primary_weapon_type const _primary_weapon_type,
 	sanguis::weapon_status const _weapon_status,
-	sanguis::client::draw2d::speed _speed,
-	sanguis::client::draw2d::sprite::center _center,
+	sanguis::client::draw2d::speed const _speed,
+	sanguis::client::draw2d::sprite::center const _center,
 	sanguis::client::draw2d::sprite::rotation const _rotation,
 	sanguis::client::draw2d::sprite::normal::color const _color
 )
@@ -55,14 +55,10 @@ sanguis::client::draw2d::entities::model::parameters::parameters(
 		_weapon_status
 	},
 	speed_{
-		std::move(
-			_speed
-		)
+		_speed
 	},
 	center_{
-		std::move(
-			_center
-		)
+		_center
 	},
 	rotation_{
 		_rotation

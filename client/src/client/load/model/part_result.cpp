@@ -8,14 +8,12 @@
 
 
 sanguis::client::load::model::part_result::part_result(
-	sanguis::model::cell_size _cell_size,
+	sanguis::model::cell_size const _cell_size,
 	sanguis::client::load::model::part_map &&_parts
 )
 :
 	cell_size_(
-		std::move(
-			_cell_size
-		)
+		_cell_size
 	),
 	parts_(
 		std::move(

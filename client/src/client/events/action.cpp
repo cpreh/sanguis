@@ -1,18 +1,13 @@
 #include <sanguis/client/control/actions/any.hpp>
 #include <sanguis/client/events/action.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <utility>
-#include <fcppt/config/external_end.hpp>
 
 
 sanguis::client::events::action::action(
-	sanguis::client::control::actions::any _value
+	sanguis::client::control::actions::any const _value
 )
 :
 	value_(
-		std::move(
-			_value
-		)
+		_value
 	)
 {
 }

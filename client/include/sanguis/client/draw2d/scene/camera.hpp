@@ -32,7 +32,7 @@ public:
 		sge::renderer::device::core_ref
 	);
 
-	~camera();
+	~camera(); // NOLINT(performance-trivially-destructible)
 
 	void
 	update(

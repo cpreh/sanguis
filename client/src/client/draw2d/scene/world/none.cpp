@@ -11,8 +11,7 @@ sanguis::client::draw2d::scene::world::none::none()
 }
 
 sanguis::client::draw2d::scene::world::none::~none()
-{
-}
+= default;
 
 void
 sanguis::client::draw2d::scene::world::none::update(

@@ -46,7 +46,7 @@ sanguis::server::entities::projectiles::grenade::grenade(
 	sanguis::server::damage::unit const _damage,
 	sanguis::server::damage::modified_array const &_damage_modifiers,
 	sanguis::server::aoe const _aoe,
-	sanguis::server::vector _dest,
+	sanguis::server::vector const _dest,
 	sanguis::server::direction const _direction
 )
 :
@@ -82,9 +82,7 @@ sanguis::server::entities::projectiles::grenade::grenade(
 		_damage_modifiers
 	),
 	dest_(
-		std::move(
-			_dest
-		)
+		_dest
 	)
 {
 }
