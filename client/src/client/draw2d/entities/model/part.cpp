@@ -14,8 +14,8 @@
 #include <sanguis/client/draw2d/sprite/normal/object.hpp>
 #include <sanguis/client/load/animation_type.hpp>
 #include <sanguis/client/load/model/animation.hpp>
-#include <sanguis/client/load/model/part_cref.hpp>
 #include <sanguis/client/load/model/part.hpp>
+#include <sanguis/client/load/model/part_cref.hpp>
 #include <sanguis/client/load/model/weapon_category.hpp>
 #include <sge/audio/buffer_fwd.hpp>
 #include <sge/audio/sound/base.hpp>

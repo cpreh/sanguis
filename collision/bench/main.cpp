@@ -27,8 +27,8 @@
 #include <sanguis/creator/grid.hpp>
 #include <sanguis/creator/tile.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/make_int_range_count.hpp>
 #include <fcppt/make_cref.hpp>
+#include <fcppt/make_int_range_count.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/reference_to_base.hpp>

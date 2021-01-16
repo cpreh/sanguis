@@ -2,8 +2,8 @@
 #include <sanguis/creator/spawn_boss.hpp>
 #include <sanguis/creator/impl/parameters.hpp>
 #include <sanguis/creator/impl/random/generator_fwd.hpp>
-#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
+#include <fcppt/log/object_fwd.hpp>
 
 
 sanguis::creator::impl::parameters::parameters(
