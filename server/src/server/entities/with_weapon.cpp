@@ -35,7 +35,7 @@
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/reference.hpp>
-#include <fcppt/variant/get_exn.hpp>
+#include <fcppt/variant/to_optional.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -140,10 +140,12 @@ sanguis::server::entities::with_weapon::primary_weapon_type() const
 			)
 			{
 				return
-					fcppt::variant::get_exn<
-						sanguis::primary_weapon_type
-					>(
-						_primary_weapon.get().type()
+					FCPPT_ASSERT_OPTIONAL_ERROR(
+						fcppt::variant::to_optional<
+							sanguis::primary_weapon_type
+						>(
+							_primary_weapon.get().type()
+						)
 					);
 			}
 		);
