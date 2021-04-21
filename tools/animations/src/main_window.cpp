@@ -11,6 +11,7 @@
 #include <sanguis/model/serialize.hpp>
 #include <sanguis/model/weapon_category_name.hpp>
 #include <sanguis/tools/animations/delay_to_int.hpp>
+#include <sanguis/tools/animations/exception.hpp>
 #include <sanguis/tools/animations/find_image_file.hpp>
 #include <sanguis/tools/animations/int_to_delay.hpp>
 #include <sanguis/tools/animations/load_image_files.hpp>
@@ -34,6 +35,7 @@
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/truncation_check.hpp>
@@ -45,6 +47,7 @@
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/maybe_void_multi.hpp>
 #include <fcppt/optional/object_impl.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <ui_main_window.h>
 #include <QFileDialog>
@@ -477,10 +480,18 @@ sanguis::tools::animations::main_window::selectedAnimationChanged()
 					)
 					{
 						return
-							fcppt::cast::truncation_check<
-								int
-							>(
-								_delay.get().count()
+							fcppt::optional::to_exception(
+								fcppt::cast::truncation_check<
+									int
+								>(
+									_delay.get().count()
+								),
+								[]{
+									return
+										sanguis::tools::animations::exception{
+											FCPPT_TEXT("animation delay too large")
+										};
+								}
 							);
 					}
 				)
@@ -868,10 +879,18 @@ sanguis::tools::animations::main_window::open_json(
 			)
 			{
 				return
-					fcppt::cast::truncation_check<
-						int
-					>(
-						_delay.get().count()
+					fcppt::optional::to_exception(
+						fcppt::cast::truncation_check<
+							int
+						>(
+							_delay.get().count()
+						),
+						[]{
+							return
+								sanguis::tools::animations::exception{
+									FCPPT_TEXT("animation delay too large")
+								};
+						}
 					);
 			}
 		)
