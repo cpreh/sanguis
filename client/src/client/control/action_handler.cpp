@@ -44,6 +44,7 @@
 #include <fcppt/make_ref.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/unit.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/container/make.hpp>
@@ -461,10 +462,12 @@ sanguis::client::control::action_handler::update_direction(
 )
 {
 	_result.get() =
-		fcppt::math::clamp(
-			_result.get() + _scale,
-			sanguis::client::control::axis_direction_min(),
-			sanguis::client::control::axis_direction_max()
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			fcppt::math::clamp(
+				_result.get() + _scale,
+				sanguis::client::control::axis_direction_min(),
+				sanguis::client::control::axis_direction_max()
+			)
 		);
 
 	send_(
