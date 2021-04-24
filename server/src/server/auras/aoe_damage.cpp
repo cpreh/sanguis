@@ -12,7 +12,9 @@
 #include <sanguis/server/entities/with_body.hpp>
 #include <sanguis/server/entities/with_body_ref.hpp>
 #include <sanguis/server/entities/with_health.hpp>
-#include <fcppt/cast/dynamic_cross_exn.hpp>
+#include <fcppt/reference_impl.hpp>
+#include <fcppt/cast/dynamic_cross.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 
 
 sanguis::server::auras::aoe_damage::aoe_damage(
@@ -57,13 +59,25 @@ sanguis::server::auras::aoe_damage::enter(
 	sanguis::collision::world::created
 )
 {
-	fcppt::cast::dynamic_cross_exn<
-		sanguis::server::entities::with_health &
-	>(
-		_with_body.get()
-	).damage(
-		damage_,
-		damage_values_
+	fcppt::optional::maybe_void(
+		fcppt::cast::dynamic_cross<
+			sanguis::server::entities::with_health
+		>(
+			_with_body.get()
+		),
+		[
+			this
+		](
+			fcppt::reference<
+				sanguis::server::entities::with_health
+			> const _with_health
+		)
+		{
+			_with_health->damage(
+				this->damage_,
+				this->damage_values_
+			);
+		}
 	);
 }
 

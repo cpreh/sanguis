@@ -180,6 +180,7 @@
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/reference_to_base.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
@@ -187,12 +188,13 @@
 #include <fcppt/algorithm/map_iteration_second.hpp>
 #include <fcppt/algorithm/sequence_iteration.hpp>
 #include <fcppt/algorithm/update_action.hpp>
-#include <fcppt/cast/dynamic_cross_exn.hpp>
+#include <fcppt/cast/dynamic_cross.hpp>
 #include <fcppt/cast/float_to_int_fun.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/enum/array_init.hpp>
 #include <fcppt/enum/make_range.hpp>
 #include <fcppt/log/context_reference.hpp>
+#include <fcppt/log/error.hpp>
 #include <fcppt/log/out.hpp>
 #include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/log/warning.hpp>
@@ -200,6 +202,7 @@
 #include <fcppt/optional/bind.hpp>
 #include <fcppt/optional/comparison.hpp>
 #include <fcppt/optional/map.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_multi.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object_impl.hpp>
@@ -1066,22 +1069,50 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::add_aura const &_message
 )
 {
-	fcppt::cast::dynamic_cross_exn<
-		sanguis::client::draw2d::entities::ifaces::with_auras &
-	>(
-		this->entity(
-			fcppt::record::get<
-				sanguis::messages::roles::entity_id
-			>(
-				_message.get()
-			)
-		)
-	).add_aura(
+	sanguis::entity_id const id{
 		fcppt::record::get<
-			sanguis::messages::roles::aura_type
+			sanguis::messages::roles::entity_id
 		>(
 			_message.get()
 		)
+	};
+
+	fcppt::optional::maybe(
+		fcppt::cast::dynamic_cross<
+			sanguis::client::draw2d::entities::ifaces::with_auras
+		>(
+			this->entity(
+				id
+			)
+		),
+		[
+			this,
+			id
+		]{
+			FCPPT_LOG_ERROR(
+				this->log_,
+				fcppt::log::out
+					<< FCPPT_TEXT("Entity ")
+					<< id
+					<< FCPPT_TEXT(" does not derive from with_auras.")
+			)
+		},
+		[
+			&_message
+		](
+			fcppt::reference<
+				sanguis::client::draw2d::entities::ifaces::with_auras
+			> const _with_auras
+		)
+		{
+			_with_auras->add_aura(
+				fcppt::record::get<
+					sanguis::messages::roles::aura_type
+				>(
+					_message.get()
+				)
+			);
+		}
 	);
 }
 
@@ -1090,22 +1121,50 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::add_buff const &_message
 )
 {
-	fcppt::cast::dynamic_cross_exn<
-		sanguis::client::draw2d::entities::ifaces::with_buffs &
-	>(
-		this->entity(
-			fcppt::record::get<
-				sanguis::messages::roles::entity_id
-			>(
-				_message.get()
-			)
-		)
-	).add_buff(
+	sanguis::entity_id const id{
 		fcppt::record::get<
-			sanguis::messages::roles::buff_type
+			sanguis::messages::roles::entity_id
 		>(
 			_message.get()
 		)
+	};
+
+	fcppt::optional::maybe(
+		fcppt::cast::dynamic_cross<
+			sanguis::client::draw2d::entities::ifaces::with_buffs
+		>(
+			this->entity(
+				id
+			)
+		),
+		[
+			this,
+			id
+		]{
+			FCPPT_LOG_ERROR(
+				this->log_,
+				fcppt::log::out
+					<< FCPPT_TEXT("Entity ")
+					<< id
+					<< FCPPT_TEXT(" does not derive from with_buffs.")
+			)
+		},
+		[
+			&_message
+		](
+			fcppt::reference<
+				sanguis::client::draw2d::entities::ifaces::with_buffs
+			> const _with_buffs
+		)
+		{
+			_with_buffs->add_buff(
+				fcppt::record::get<
+					sanguis::messages::roles::buff_type
+				>(
+					_message.get()
+				)
+			);
+		}
 	);
 }
 
@@ -1508,22 +1567,50 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::change_weapon const &_message
 )
 {
-	fcppt::cast::dynamic_cross_exn<
-		sanguis::client::draw2d::entities::ifaces::with_weapon &
-	>(
-		this->entity(
-			fcppt::record::get<
-				sanguis::messages::roles::entity_id
-			>(
-				_message.get()
-			)
-		)
-	).weapon(
+	sanguis::entity_id const id{
 		fcppt::record::get<
-			sanguis::messages::roles::primary_weapon
+			sanguis::messages::roles::entity_id
 		>(
 			_message.get()
 		)
+	};
+
+	fcppt::optional::maybe(
+		fcppt::cast::dynamic_cross<
+			sanguis::client::draw2d::entities::ifaces::with_weapon
+		>(
+			this->entity(
+				id
+			)
+		),
+		[
+			this,
+			id
+		]{
+			FCPPT_LOG_ERROR(
+				this->log_,
+				fcppt::log::out
+					<< FCPPT_TEXT("Entity ")
+					<< id
+					<< FCPPT_TEXT(" does not derive from with_weapon.")
+			)
+		},
+		[
+			&_message
+		](
+			fcppt::reference<
+				sanguis::client::draw2d::entities::ifaces::with_weapon
+			> const _with_weapon
+		)
+		{
+			_with_weapon->weapon(
+				fcppt::record::get<
+					sanguis::messages::roles::primary_weapon
+				>(
+					_message.get()
+				)
+			);
+		}
 	);
 }
 
@@ -1629,24 +1716,52 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::health const &_message
 )
 {
-	fcppt::cast::dynamic_cross_exn<
-		sanguis::client::draw2d::entities::ifaces::with_health &
-	>(
-		this->entity(
-			fcppt::record::get<
-				sanguis::messages::roles::entity_id
-			>(
-				_message.get()
-			)
+	sanguis::entity_id const id{
+		fcppt::record::get<
+			sanguis::messages::roles::entity_id
+		>(
+			_message.get()
 		)
-	).health(
-		sanguis::client::health(
-			fcppt::record::get<
-				sanguis::messages::roles::health
-			>(
-				_message.get()
+	};
+
+	fcppt::optional::maybe(
+		fcppt::cast::dynamic_cross<
+			sanguis::client::draw2d::entities::ifaces::with_health
+		>(
+			this->entity(
+				id
 			)
+		),
+		[
+			this,
+			id
+		]{
+			FCPPT_LOG_ERROR(
+				this->log_,
+				fcppt::log::out
+					<< FCPPT_TEXT("Entity ")
+					<< id
+					<< FCPPT_TEXT(" does not derive from with_health.")
+			)
+		},
+		[
+			&_message
+		](
+			fcppt::reference<
+				sanguis::client::draw2d::entities::ifaces::with_health
+			> const _with_health
 		)
+		{
+			_with_health->health(
+				sanguis::client::health(
+					fcppt::record::get<
+						sanguis::messages::roles::health
+					>(
+						_message.get()
+					)
+				)
+			);
+		}
 	);
 }
 
@@ -1701,24 +1816,52 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::max_health const &_message
 )
 {
-	fcppt::cast::dynamic_cross_exn<
-		sanguis::client::draw2d::entities::ifaces::with_health &
-	>(
-		this->entity(
-			fcppt::record::get<
-				sanguis::messages::roles::entity_id
-			>(
-				_message.get()
-			)
+	sanguis::entity_id const id{
+		fcppt::record::get<
+			sanguis::messages::roles::entity_id
+		>(
+			_message.get()
 		)
-	).max_health(
-		sanguis::client::max_health(
-			fcppt::record::get<
-				sanguis::messages::roles::max_health
-			>(
-				_message.get()
+	};
+
+	fcppt::optional::maybe(
+		fcppt::cast::dynamic_cross<
+			sanguis::client::draw2d::entities::ifaces::with_health
+		>(
+			this->entity(
+				id
 			)
+		),
+		[
+			this,
+			id
+		]{
+			FCPPT_LOG_ERROR(
+				this->log_,
+				fcppt::log::out
+					<< FCPPT_TEXT("Entity ")
+					<< id
+					<< FCPPT_TEXT(" does not derive from with_health.")
+			)
+		},
+		[
+			&_message
+		](
+			fcppt::reference<
+				sanguis::client::draw2d::entities::ifaces::with_health
+			> const _with_health
 		)
+		{
+			_with_health->max_health(
+				sanguis::client::max_health(
+					fcppt::record::get<
+						sanguis::messages::roles::max_health
+					>(
+						_message.get()
+					)
+				)
+			);
+		}
 	);
 }
 
@@ -1727,20 +1870,48 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::move const &_message
 )
 {
-	fcppt::cast::dynamic_cross_exn<
-		sanguis::client::draw2d::entities::ifaces::with_center &
-	>(
-		this->entity(
-			fcppt::record::get<
-				sanguis::messages::roles::entity_id
-			>(
-				_message.get()
+	sanguis::entity_id const id{
+		fcppt::record::get<
+			sanguis::messages::roles::entity_id
+		>(
+			_message.get()
+		)
+	};
+
+	fcppt::optional::maybe(
+		fcppt::cast::dynamic_cross<
+			sanguis::client::draw2d::entities::ifaces::with_center
+		>(
+			this->entity(
+				id
 			)
+		),
+		[
+			this,
+			id
+		]{
+			FCPPT_LOG_ERROR(
+				this->log_,
+				fcppt::log::out
+					<< FCPPT_TEXT("Entity ")
+					<< id
+					<< FCPPT_TEXT(" does not derive from with_center.")
+			)
+		},
+		[
+			&_message
+		](
+			fcppt::reference<
+				sanguis::client::draw2d::entities::ifaces::with_center
+			> const _with_center
 		)
-	).center(
-		sanguis::client::draw2d::translate::center(
-			_message
-		)
+		{
+			_with_center->center(
+				sanguis::client::draw2d::translate::center(
+					_message
+				)
+			);
+		}
 	);
 }
 
@@ -1763,22 +1934,50 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::remove_buff const &_message
 )
 {
-	fcppt::cast::dynamic_cross_exn<
-		sanguis::client::draw2d::entities::ifaces::with_buffs &
-	>(
-		this->entity(
-			fcppt::record::get<
-				sanguis::messages::roles::entity_id
-			>(
-				_message.get()
-			)
-		)
-	).remove_buff(
+	sanguis::entity_id const id{
 		fcppt::record::get<
-			sanguis::messages::roles::buff_type
+			sanguis::messages::roles::entity_id
 		>(
 			_message.get()
 		)
+	};
+
+	fcppt::optional::maybe(
+		fcppt::cast::dynamic_cross<
+			sanguis::client::draw2d::entities::ifaces::with_buffs
+		>(
+			this->entity(
+				id
+			)
+		),
+		[
+			this,
+			id
+		]{
+			FCPPT_LOG_ERROR(
+				this->log_,
+				fcppt::log::out
+					<< FCPPT_TEXT("Entity ")
+					<< id
+					<< FCPPT_TEXT(" does not derive from with_buffs.")
+			)
+		},
+		[
+			&_message
+		](
+			fcppt::reference<
+				sanguis::client::draw2d::entities::ifaces::with_buffs
+			> const _with_buffs
+		)
+		{
+			_with_buffs->remove_buff(
+				fcppt::record::get<
+					sanguis::messages::roles::buff_type
+				>(
+					_message.get()
+				)
+			);
+		}
 	);
 }
 
@@ -1797,20 +1996,48 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::rotate const &_message
 )
 {
-	fcppt::cast::dynamic_cross_exn<
-		sanguis::client::draw2d::entities::ifaces::with_orientation &
-	>(
-		this->entity(
-			fcppt::record::get<
-				sanguis::messages::roles::entity_id
-			>(
-				_message.get()
+	sanguis::entity_id const id{
+		fcppt::record::get<
+			sanguis::messages::roles::entity_id
+		>(
+			_message.get()
+		)
+	};
+
+	fcppt::optional::maybe(
+		fcppt::cast::dynamic_cross<
+			sanguis::client::draw2d::entities::ifaces::with_orientation
+		>(
+			this->entity(
+				id
 			)
+		),
+		[
+			this,
+			id
+		]{
+			FCPPT_LOG_ERROR(
+				this->log_,
+				fcppt::log::out
+					<< FCPPT_TEXT("Entity ")
+					<< id
+					<< FCPPT_TEXT(" does not derive from with_orientation.")
+			)
+		},
+		[
+			&_message
+		](
+			fcppt::reference<
+				sanguis::client::draw2d::entities::ifaces::with_orientation
+			> const _with_orientation
 		)
-	).orientation(
-		sanguis::client::draw2d::translate::rotation(
-			_message
-		)
+		{
+			_with_orientation->orientation(
+				sanguis::client::draw2d::translate::rotation(
+					_message
+				)
+			);
+		}
 	);
 }
 
@@ -1819,20 +2046,48 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::speed const &_message
 )
 {
-	fcppt::cast::dynamic_cross_exn<
-		sanguis::client::draw2d::entities::ifaces::with_speed &
-	>(
-		this->entity(
-			fcppt::record::get<
-				sanguis::messages::roles::entity_id
-			>(
-				_message.get()
+	sanguis::entity_id const id{
+		fcppt::record::get<
+			sanguis::messages::roles::entity_id
+		>(
+			_message.get()
+		)
+	};
+
+	fcppt::optional::maybe(
+		fcppt::cast::dynamic_cross<
+			sanguis::client::draw2d::entities::ifaces::with_speed
+		>(
+			this->entity(
+				id
 			)
+		),
+		[
+			this,
+			id
+		]{
+			FCPPT_LOG_ERROR(
+				this->log_,
+				fcppt::log::out
+					<< FCPPT_TEXT("Entity ")
+					<< id
+					<< FCPPT_TEXT(" does not derive from with_speed.")
+			)
+		},
+		[
+			&_message
+		](
+			fcppt::reference<
+				sanguis::client::draw2d::entities::ifaces::with_speed
+			> const _with_speed
 		)
-	).speed(
-		sanguis::client::draw2d::translate::speed(
-			_message
-		)
+		{
+			_with_speed->speed(
+				sanguis::client::draw2d::translate::speed(
+					_message
+				)
+			);
+		}
 	);
 }
 
@@ -1841,22 +2096,50 @@ sanguis::client::draw2d::scene::object::operator()(
 	sanguis::messages::server::weapon_status const &_message
 )
 {
-	fcppt::cast::dynamic_cross_exn<
-		sanguis::client::draw2d::entities::ifaces::with_weapon &
-	>(
-		this->entity(
-			fcppt::record::get<
-				sanguis::messages::roles::entity_id
-			>(
-				_message.get()
-			)
-		)
-	).weapon_status(
+	sanguis::entity_id const id{
 		fcppt::record::get<
-			sanguis::messages::roles::weapon_status
+			sanguis::messages::roles::entity_id
 		>(
 			_message.get()
 		)
+	};
+
+	fcppt::optional::maybe(
+		fcppt::cast::dynamic_cross<
+			sanguis::client::draw2d::entities::ifaces::with_weapon
+		>(
+			this->entity(
+				id
+			)
+		),
+		[
+			this,
+			id
+		]{
+			FCPPT_LOG_ERROR(
+				this->log_,
+				fcppt::log::out
+					<< FCPPT_TEXT("Entity ")
+					<< id
+					<< FCPPT_TEXT(" does not derive from with_weapon.")
+			)
+		},
+		[
+			&_message
+		](
+			fcppt::reference<
+				sanguis::client::draw2d::entities::ifaces::with_weapon
+			> const _with_weapon
+		)
+		{
+			_with_weapon->weapon_status(
+				fcppt::record::get<
+					sanguis::messages::roles::weapon_status
+				>(
+					_message.get()
+				)
+			);
+		}
 	);
 }
 
