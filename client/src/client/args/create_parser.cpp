@@ -20,7 +20,7 @@
 #include <fcppt/log/level.hpp>
 #include <fcppt/log/level_input.hpp>
 #include <fcppt/log/level_output.hpp>
-#include <fcppt/log/level_strings.hpp>
+#include <fcppt/log/level_to_string_impl.hpp>
 #include <fcppt/optional/make.hpp>
 #include <fcppt/options/apply.hpp>
 #include <fcppt/options/flag.hpp>
