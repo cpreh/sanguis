@@ -2,7 +2,7 @@
 #define SANGUIS_TILES_ORIENTATION_FWD_HPP_INCLUDED
 
 #include <sanguis/tiles/direction.hpp>
-#include <fcppt/container/bitfield/enum_object_fwd.hpp>
+#include <fcppt/container/bitfield/object_fwd.hpp>
 
 
 namespace sanguis
@@ -13,7 +13,7 @@ namespace tiles
 using
 orientation
 =
-fcppt::container::bitfield::enum_object<
+fcppt::container::bitfield::object<
 	sanguis::tiles::direction
 >;
 
