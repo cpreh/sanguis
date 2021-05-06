@@ -47,15 +47,16 @@ sanguis::client::draw2d::entities::with_buffs<
 	}
 }
 
+namespace sanguis::client::draw2d::entities
+{
 template<
 	typename Base
 >
-sanguis::client::draw2d::entities::with_buffs<
+with_buffs<
 	Base
->::~with_buffs<
-	Base
->()
+>::~with_buffs()
 = default;
+}
 
 template<
 	typename Base

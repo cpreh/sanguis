@@ -66,18 +66,18 @@ sanguis::server::random::distributor<
 	);
 }
 
+namespace sanguis::server::random
+{
 template<
 	typename Value,
 	typename State
 >
-sanguis::server::random::distributor<
+distributor<
 	Value,
 	State
->::~distributor<
-	Value,
-	State
->()
+>::~distributor()
 = default;
+}
 
 template<
 	typename Value,

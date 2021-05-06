@@ -77,15 +77,16 @@ sanguis::client::draw2d::entities::with_auras<
 	}
 }
 
+namespace sanguis::client::draw2d::entities
+{
 template<
 	typename Base
 >
-sanguis::client::draw2d::entities::with_auras<
+with_auras<
 	Base
->::~with_auras<
-	Base
->()
+>::~with_auras()
 = default;
+}
 
 template<
 	typename Base

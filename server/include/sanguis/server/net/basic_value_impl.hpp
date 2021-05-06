@@ -36,21 +36,20 @@ sanguis::server::net::basic_value<
 {
 }
 
+namespace sanguis::server::net
+{
 template<
 	typename Type,
 	typename Policy,
 	typename Clock
 >
-sanguis::server::net::basic_value<
+basic_value<
 	Type,
 	Policy,
 	Clock
->::~basic_value<
-	Type,
-	Policy,
-	Clock
->()
+>::~basic_value()
 = default;
+}
 
 template<
 	typename Type,

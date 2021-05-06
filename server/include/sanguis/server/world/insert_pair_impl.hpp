@@ -55,15 +55,16 @@ sanguis::server::world::insert_pair<
 noexcept
 = default;
 
+namespace sanguis::server::world
+{
 template<
 	typename Type
 >
-sanguis::server::world::insert_pair<
+insert_pair<
 	Type
->::~insert_pair<
-	Type
->()
+>::~insert_pair()
 = default;
+}
 
 template<
 	typename Type

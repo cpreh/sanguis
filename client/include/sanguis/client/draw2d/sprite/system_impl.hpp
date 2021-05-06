@@ -44,18 +44,18 @@ sanguis::client::draw2d::sprite::system<
 {
 }
 
+namespace sanguis::client::draw2d::sprite
+{
 template<
 	typename Choices,
 	typename Category
 >
-sanguis::client::draw2d::sprite::system<
+system<
 	Choices,
 	Category
->::~system<
-	Choices,
-	Category
->()
+>::~system()
 = default;
+}
 
 template<
 	typename Choices,

@@ -82,15 +82,16 @@ sanguis::tiles::set<
 noexcept
 = default;
 
+namespace sanguis::tiles
+{
 template<
 	typename Tile
 >
-sanguis::tiles::set<
+set<
 	Tile
->::~set<
-	Tile
->()
+>::~set()
 = default;
+}
 
 template<
 	typename Tile
