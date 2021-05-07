@@ -2,7 +2,9 @@
 #define SANGUIS_MESSAGES_TYPES_ENDIANNESS_HPP_INCLUDED
 
 #include <alda/serialization/endianness.hpp>
-#include <fcppt/endianness/format.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <bit>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -14,7 +16,7 @@ namespace types
 
 inline
 constexpr
-fcppt::endianness::format
+std::endian
 endianness()
 {
 	return
