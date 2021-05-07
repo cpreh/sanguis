@@ -13,17 +13,21 @@
 #include <sanguis/server/world/place_multiple.hpp>
 #include <sanguis/server/world/place_with_id_callback.hpp>
 #include <fcppt/make_int_range_count.hpp>
+#include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/make_ref.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
-#include <fcppt/math/twopi.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
 #include <fcppt/random/make_variate.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real.hpp>
 #include <fcppt/type_iso/strong_typedef.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <numbers>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::world::insert_with_id_pair_container
@@ -110,9 +114,15 @@ sanguis::server::world::place_multiple(
 					),
 					uniform_angle::sup(
 						sanguis::server::angle(
-							fcppt::math::twopi<
+							std::numbers::pi_v<
 								sanguis::server::space_unit
-							>()
+							>
+						)
+						*
+						fcppt::literal<
+							sanguis::server::angle
+						>(
+							2
 						)
 					)
 				)

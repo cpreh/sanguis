@@ -3,9 +3,11 @@
 #include <sanguis/server/space_unit.hpp>
 #include <sanguis/server/weapons/random_angle.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/math/pi.hpp>
 #include <fcppt/random/distribution/make_basic.hpp>
 #include <fcppt/random/distribution/parameters/normal.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <numbers>
+#include <fcppt/config/external_end.hpp>
 
 
 sanguis::server::angle
@@ -26,9 +28,9 @@ sanguis::server::weapons::random_angle(
 			_accuracy.get()
 		)
 		*
-		fcppt::math::pi<
+		std::numbers::pi_v<
 			sanguis::server::space_unit
-		>()
+		>
 		/
 		fcppt::literal<
 			sanguis::server::space_unit

@@ -26,10 +26,12 @@
 #include <sge/timer/elapsed_fractional.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/make_cref.hpp>
+#include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/make_ref.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/use.hpp>
-#include <fcppt/math/twopi.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <numbers>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -115,9 +117,15 @@ sanguis::client::draw2d::entities::with_auras<
 				rotate_timer_
 			)
 			*
-			fcppt::math::twopi<
+			std::numbers::pi_v<
 				sanguis::client::draw2d::sprite::rotation::value_type
-			>()
+			>
+			*
+			fcppt::literal<
+				sanguis::client::draw2d::sprite::rotation::value_type
+			>(
+				2
+			)
 		);
 	}
 

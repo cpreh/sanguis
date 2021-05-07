@@ -18,9 +18,10 @@
 #include <sanguis/server/environment/optional_object_ref.hpp>
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/make_cref.hpp>
+#include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/make_ref.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/reference_impl.hpp>
-#include <fcppt/math/twopi.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -28,6 +29,7 @@
 #include <fcppt/random/distribution/basic_impl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <numbers>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -85,9 +87,15 @@ sanguis::server::entities::projectiles::scatter::scatter(
 			),
 			angle_distribution::param_type::sup(
 				sanguis::server::angle(
-					fcppt::math::twopi<
+					std::numbers::pi_v<
 						sanguis::server::angle::value_type
-					>()
+					>
+				)
+				*
+				fcppt::literal<
+					sanguis::server::angle
+				>(
+					2
 				)
 			)
 		)

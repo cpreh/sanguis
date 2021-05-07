@@ -28,11 +28,11 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/repeat.hpp>
-#include <fcppt/math/twopi.hpp>
 #include <fcppt/random/distribution/basic_impl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
+#include <numbers>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -59,9 +59,15 @@ sanguis::server::perks::choleric::choleric(
 				0.F
 			),
 			sanguis::server::perks::choleric::distribution::param_type::sup(
-				fcppt::math::twopi<
+				std::numbers::pi_v<
 					sanguis::server::space_unit
-				>()
+				>
+				*
+				fcppt::literal<
+					sanguis::server::space_unit
+				>(
+					2
+				)
 			)
 		)
 	)

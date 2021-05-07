@@ -5,10 +5,10 @@
 #include <sanguis/client/draw2d/sprite/rotation.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/math/twopi.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <algorithm>
 #include <cmath>
+#include <numbers>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -36,9 +36,15 @@ impl(
 	//
 
 	auto const twopi(
-		fcppt::math::twopi<
+		std::numbers::pi_v<
 			sanguis::client::draw2d::funit
-		>()
+		>
+		*
+		fcppt::literal<
+			sanguis::client::draw2d::funit
+		>(
+			2
+		)
 	);
 
 	// this is the "inner distance" from
