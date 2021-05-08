@@ -25,10 +25,10 @@
 #include <sge/sprite/types/texture_size.hpp>
 #include <sge/timer/elapsed_fractional.hpp>
 #include <sge/timer/reset_when_expired.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/literal.hpp>
 #include <fcppt/use.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <numbers>

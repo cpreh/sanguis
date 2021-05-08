@@ -12,10 +12,10 @@
 #include <sanguis/server/world/insert_with_id_pair_container.hpp>
 #include <sanguis/server/world/place_multiple.hpp>
 #include <sanguis/server/world/place_with_id_callback.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/make_int_range_count.hpp>
 #include <fcppt/make_literal_strong_typedef.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/literal.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/cast/float_to_int.hpp>
 #include <fcppt/cast/int_to_float.hpp>
