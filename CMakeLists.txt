@@ -34,6 +34,8 @@ option(
 
 find_package(
 	Boost REQUIRED
+	COMPONENTS
+	locale
 )
 
 # Find FCPPT
