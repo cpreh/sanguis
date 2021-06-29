@@ -1148,7 +1148,6 @@ sanguis_add_library(
 		fcppt_options_interface
 		alda_interface
 		alda_net_interface
-		Metal
 	COMPILE_FLAGS
 		${FcpptThreads_DEFINITIONS}
 )

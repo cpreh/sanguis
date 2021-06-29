@@ -3,10 +3,8 @@
 
 #include <sanguis/client/draw2d/scene/world/sprite/is_background_fwd.hpp>
 #include <sanguis/client/draw2d/scene/world/sprite/is_background_role.hpp>
+#include <fcppt/mpl/list/object.hpp>
 #include <fcppt/record/element.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <metal.hpp>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -32,7 +30,7 @@ struct is_background
 		using
 		type
 		=
-		metal::list<
+		fcppt::mpl::list::object<
 			fcppt::record::element<
 				sanguis::client::draw2d::scene::world::sprite::is_background_role,
 				bool

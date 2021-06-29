@@ -9,10 +9,9 @@
 #include <sanguis/messages/server/types/message.hpp>
 #include <alda/bindings/record_fwd.hpp>
 #include <alda/message/object_fwd.hpp>
+#include <fcppt/mpl/list/join.hpp>
+#include <fcppt/mpl/list/object.hpp>
 #include <fcppt/record/element_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <metal.hpp>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -30,15 +29,17 @@ alda::message::object<
 		sanguis::messages::server::types::message::add_doodad
 	>,
 	alda::bindings::record<
-		metal::join<
-			metal::list<
-				sanguis::messages::server::parts::entity_id
-			>,
-			sanguis::messages::server::parts::add_elements_base,
-			metal::list<
-				fcppt::record::element<
-					sanguis::messages::roles::doodad_type,
-					sanguis::messages::adapted_types::doodad_type
+		fcppt::mpl::list::join<
+			fcppt::mpl::list::object<
+				fcppt::mpl::list::object<
+					sanguis::messages::server::parts::entity_id
+				>,
+				sanguis::messages::server::parts::add_elements_base,
+				fcppt::mpl::list::object<
+					fcppt::record::element<
+						sanguis::messages::roles::doodad_type,
+						sanguis::messages::adapted_types::doodad_type
+					>
 				>
 			>
 		>

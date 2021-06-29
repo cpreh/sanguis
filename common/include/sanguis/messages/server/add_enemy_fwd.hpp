@@ -14,10 +14,9 @@
 #include <sanguis/messages/server/types/message.hpp>
 #include <alda/bindings/record_fwd.hpp>
 #include <alda/message/object_fwd.hpp>
+#include <fcppt/mpl/list/join.hpp>
+#include <fcppt/mpl/list/object.hpp>
 #include <fcppt/record/element_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <metal.hpp>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -35,27 +34,29 @@ alda::message::object<
 		sanguis::messages::server::types::message::add_enemy
 	>,
 	alda::bindings::record<
-		metal::join<
-			metal::list<
-				sanguis::messages::server::parts::entity_id
-			>,
-			sanguis::messages::server::parts::add_actor,
-			metal::list<
-				fcppt::record::element<
-					sanguis::messages::roles::enemy_type,
-					sanguis::messages::adapted_types::enum_<
-						sanguis::creator::enemy_type
-					>
+		fcppt::mpl::list::join<
+			fcppt::mpl::list::object<
+				fcppt::mpl::list::object<
+					sanguis::messages::server::parts::entity_id
 				>,
-				fcppt::record::element<
-					sanguis::messages::roles::enemy_kind,
-					sanguis::messages::adapted_types::enum_<
-						sanguis::enemy_kind
+				sanguis::messages::server::parts::add_actor,
+				fcppt::mpl::list::object<
+					fcppt::record::element<
+						sanguis::messages::roles::enemy_type,
+						sanguis::messages::adapted_types::enum_<
+							sanguis::creator::enemy_type
+						>
+					>,
+					fcppt::record::element<
+						sanguis::messages::roles::enemy_kind,
+						sanguis::messages::adapted_types::enum_<
+							sanguis::enemy_kind
+						>
+					>,
+					fcppt::record::element<
+						sanguis::messages::roles::name,
+						sanguis::messages::adapted_types::string
 					>
-				>,
-				fcppt::record::element<
-					sanguis::messages::roles::name,
-					sanguis::messages::adapted_types::string
 				>
 			>
 		>

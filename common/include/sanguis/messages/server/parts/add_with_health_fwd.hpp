@@ -4,10 +4,8 @@
 #include <sanguis/messages/adapted_types/space_unit_fwd.hpp>
 #include <sanguis/messages/roles/health.hpp>
 #include <sanguis/messages/roles/max_health.hpp>
+#include <fcppt/mpl/list/object.hpp>
 #include <fcppt/record/element_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <metal.hpp>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -22,7 +20,7 @@ namespace parts
 using
 add_with_health
 =
-metal::list<
+fcppt::mpl::list::object<
 	fcppt::record::element<
 		sanguis::messages::roles::health,
 		sanguis::messages::adapted_types::space_unit

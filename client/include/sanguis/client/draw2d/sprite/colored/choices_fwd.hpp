@@ -9,9 +9,7 @@
 #include <sge/sprite/config/pos_option.hpp>
 #include <sge/sprite/config/texture_size_option.hpp>
 #include <sge/sprite/config/with_color_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <metal.hpp>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/mpl/list/object.hpp>
 
 
 namespace sanguis
@@ -36,7 +34,7 @@ sge::sprite::config::choices<
 	sge::sprite::config::normal_size<
 		sge::sprite::config::texture_size_option::never
 	>,
-	metal::list<
+	fcppt::mpl::list::object<
 		sge::sprite::config::with_color<
 			sanguis::client::draw2d::sprite::colored::color_format
 		>

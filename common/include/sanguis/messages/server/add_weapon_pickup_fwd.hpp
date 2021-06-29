@@ -8,9 +8,8 @@
 #include <sanguis/messages/server/types/message.hpp>
 #include <alda/bindings/record_fwd.hpp>
 #include <alda/message/object_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <metal.hpp>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/mpl/list/join.hpp>
+#include <fcppt/mpl/list/object.hpp>
 
 
 namespace sanguis
@@ -28,12 +27,14 @@ alda::message::object<
 		sanguis::messages::server::types::message::add_weapon_pickup
 	>,
 	alda::bindings::record<
-		metal::join<
-			metal::list<
-				sanguis::messages::server::parts::entity_id
-			>,
-			sanguis::messages::server::parts::add_elements_base,
-			sanguis::messages::server::parts::weapon_description
+		fcppt::mpl::list::join<
+			fcppt::mpl::list::object<
+				fcppt::mpl::list::object<
+					sanguis::messages::server::parts::entity_id
+				>,
+				sanguis::messages::server::parts::add_elements_base,
+				sanguis::messages::server::parts::weapon_description
+			>
 		>
 	>
 >;

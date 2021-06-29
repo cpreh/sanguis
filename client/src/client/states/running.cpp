@@ -83,13 +83,13 @@
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
 #include <fcppt/log/parameters_no_function.hpp>
+#include <fcppt/mpl/list/object.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/record/get.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <metal.hpp>
 #include <boost/statechart/result.hpp>
 #include <fcppt/config/external_end.hpp>
 
@@ -347,7 +347,7 @@ sanguis::client::states::running::react(
 
 	return
 		sanguis::client::dispatch<
-			metal::list<
+			fcppt::mpl::list::object<
 				sanguis::messages::server::add_console_command,
 				sanguis::messages::server::add_own_player,
 				sanguis::messages::server::change_world,

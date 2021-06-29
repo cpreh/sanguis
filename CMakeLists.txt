@@ -57,11 +57,6 @@ include(
 )
 
 find_package(
-	Metal
-	REQUIRED
-)
-
-find_package(
 	mizuiro REQUIRED
 )
 
@@ -297,7 +292,6 @@ function(
 	target_link_libraries(
 		"${LIBNAME}"
 		INTERFACE
-		Metal
 		${_TRANSITIVE_DEPS}
 	)
 
@@ -621,7 +615,6 @@ function(
 	target_link_libraries(
 		${EXENAME}
 		PRIVATE
-		Metal
 		${_DEPS}
 	)
 

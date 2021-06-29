@@ -4,10 +4,9 @@
 #include <sanguis/messages/adapted_types/string_fwd.hpp>
 #include <sanguis/messages/roles/name.hpp>
 #include <sanguis/messages/server/parts/add_actor_fwd.hpp>
+#include <fcppt/mpl/list/append.hpp>
+#include <fcppt/mpl/list/object.hpp>
 #include <fcppt/record/element_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <metal.hpp>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -22,9 +21,9 @@ namespace parts
 using
 add_player
 =
-metal::join<
+fcppt::mpl::list::append<
 	sanguis::messages::server::parts::add_actor,
-	metal::list<
+	fcppt::mpl::list::object<
 		fcppt::record::element<
 			sanguis::messages::roles::name,
 			sanguis::messages::adapted_types::string

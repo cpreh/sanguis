@@ -7,10 +7,8 @@
 #include <sanguis/messages/roles/angle.hpp>
 #include <sanguis/messages/roles/center.hpp>
 #include <sanguis/messages/roles/created.hpp>
+#include <fcppt/mpl/list/object.hpp>
 #include <fcppt/record/element_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <metal.hpp>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -25,7 +23,7 @@ namespace parts
 using
 add_elements_base
 =
-metal::list<
+fcppt::mpl::list::object<
 	fcppt::record::element<
 		sanguis::messages::roles::center,
 		sanguis::messages::adapted_types::vector2

@@ -199,6 +199,7 @@
 #include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/mpl/list/object.hpp>
 #include <fcppt/optional/bind.hpp>
 #include <fcppt/optional/comparison.hpp>
 #include <fcppt/optional/map.hpp>
@@ -213,7 +214,6 @@
 #include <fcppt/record/get.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <metal.hpp>
 #include <typeinfo>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -395,7 +395,7 @@ sanguis::client::draw2d::scene::object::process_message(
 	dispatcher_type
 	=
 	sanguis::messages::server::call::object<
-		metal::list<
+		fcppt::mpl::list::object<
 			sanguis::messages::server::add_aoe_projectile,
 			sanguis::messages::server::add_aura,
 			sanguis::messages::server::add_buff,

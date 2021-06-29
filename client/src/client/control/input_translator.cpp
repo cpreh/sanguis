@@ -25,6 +25,7 @@
 #include <fcppt/cast/dynamic_fun.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/vector/structure_cast.hpp>
+#include <fcppt/mpl/list/object.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/preprocessor/disable_clang_warning.hpp>
@@ -33,7 +34,6 @@
 #include <fcppt/variant/dynamic_cast.hpp>
 #include <fcppt/variant/match.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <metal.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
@@ -76,7 +76,7 @@ sanguis::client::control::input_translator::on_event(
 {
 	fcppt::optional::maybe_void(
 		fcppt::variant::dynamic_cast_<
-			metal::list<
+			fcppt::mpl::list::object<
 				sge::input::focus::event::key const,
 				sge::input::cursor::event::move const,
 				sge::input::cursor::event::button const

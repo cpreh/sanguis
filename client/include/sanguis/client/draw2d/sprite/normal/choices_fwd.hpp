@@ -15,9 +15,7 @@
 #include <sge/sprite/config/with_color_fwd.hpp>
 #include <sge/sprite/config/with_rotation_fwd.hpp>
 #include <sge/sprite/config/with_texture_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <metal.hpp>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/mpl/list/object.hpp>
 
 
 namespace sanguis
@@ -42,7 +40,7 @@ sge::sprite::config::choices<
 	sge::sprite::config::normal_size<
 		sge::sprite::config::texture_size_option::maybe
 	>,
-	metal::list<
+	fcppt::mpl::list::object<
 		sge::sprite::config::with_rotation,
 		sge::sprite::config::with_texture<
 			sge::sprite::config::texture_level_count<

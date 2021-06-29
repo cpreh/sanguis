@@ -4,9 +4,7 @@
 #include <sge/sprite/state/choices_fwd.hpp>
 #include <sge/sprite/state/with_blend_fwd.hpp>
 #include <sge/sprite/state/with_rasterizer_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <metal.hpp>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/mpl/list/object.hpp>
 
 
 namespace sanguis
@@ -22,7 +20,7 @@ using
 state_choices
 =
 sge::sprite::state::choices<
-	metal::list<
+	fcppt::mpl::list::object<
 		sge::sprite::state::with_blend,
 		sge::sprite::state::with_rasterizer
 	>

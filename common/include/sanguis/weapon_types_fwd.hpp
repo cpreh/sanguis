@@ -3,9 +3,7 @@
 
 #include <sanguis/primary_weapon_type_fwd.hpp>
 #include <sanguis/secondary_weapon_type_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <metal.hpp>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/mpl/list/object.hpp>
 
 
 namespace sanguis
@@ -14,7 +12,7 @@ namespace sanguis
 using
 weapon_types
 =
-metal::list<
+fcppt::mpl::list::object<
 	sanguis::primary_weapon_type,
 	sanguis::secondary_weapon_type
 >;

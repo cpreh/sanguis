@@ -2,9 +2,7 @@
 #define SANGUIS_CLIENT_DRAW2D_SCENE_WORLD_SPRITE_STATE_CHOICES_FWD_HPP_INCLUDED
 
 #include <sge/sprite/state/choices_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <metal.hpp>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/mpl/list/object.hpp>
 
 
 namespace sanguis
@@ -24,7 +22,7 @@ using
 state_choices
 =
 sge::sprite::state::choices<
-	metal::list<>
+	fcppt::mpl::list::object<>
 >;
 
 }

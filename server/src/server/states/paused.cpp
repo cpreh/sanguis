@@ -25,11 +25,11 @@
 #include <fcppt/log/out.hpp>
 #include <fcppt/log/parameters_no_function.hpp>
 #include <fcppt/log/warning.hpp>
+#include <fcppt/mpl/list/object.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <metal.hpp>
 #include <boost/statechart/result.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -97,7 +97,7 @@ sanguis::server::states::paused::react(
 
 	return
 		sanguis::server::dispatch<
-			metal::list<
+			fcppt::mpl::list::object<
 				sanguis::messages::client::info,
 				sanguis::messages::client::pause,
 				sanguis::messages::client::unpause

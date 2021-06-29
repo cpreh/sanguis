@@ -11,10 +11,8 @@
 #include <sanguis/messages/roles/weapon_attribute_container.hpp>
 #include <sanguis/messages/roles/weapon_type.hpp>
 #include <sanguis/messages/server/adapted_types/weapon_attribute_vector_fwd.hpp>
+#include <fcppt/mpl/list/object.hpp>
 #include <fcppt/record/element_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <metal.hpp>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace sanguis
@@ -29,7 +27,7 @@ namespace parts
 using
 weapon_description
 =
-metal::list<
+fcppt::mpl::list::object<
 	fcppt::record::element<
 		sanguis::messages::roles::weapon_type,
 		sanguis::messages::adapted_types::weapon_type

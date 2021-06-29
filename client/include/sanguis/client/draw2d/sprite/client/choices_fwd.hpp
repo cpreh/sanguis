@@ -12,9 +12,7 @@
 #include <sge/sprite/config/texture_ownership.hpp>
 #include <sge/sprite/config/texture_size_option.hpp>
 #include <sge/sprite/config/with_texture_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <metal.hpp>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/mpl/list/object.hpp>
 
 
 namespace sanguis
@@ -39,7 +37,7 @@ sge::sprite::config::choices<
 	sge::sprite::config::normal_size<
 		sge::sprite::config::texture_size_option::never
 	>,
-	metal::list<
+	fcppt::mpl::list::object<
 		sge::sprite::config::with_texture<
 			sge::sprite::config::texture_level_count<
 				1U

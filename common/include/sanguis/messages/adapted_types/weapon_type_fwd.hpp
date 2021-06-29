@@ -5,9 +5,7 @@
 #include <sanguis/messages/adapted_types/primary_weapon_type_fwd.hpp>
 #include <sanguis/messages/adapted_types/secondary_weapon_type_fwd.hpp>
 #include <alda/bindings/variant_decl.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <metal.hpp>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/mpl/list/object.hpp>
 
 
 namespace sanguis
@@ -22,7 +20,7 @@ weapon_type
 =
 alda::bindings::variant<
 	sanguis::weapon_types,
-	metal::list<
+	fcppt::mpl::list::object<
 		sanguis::messages::adapted_types::primary_weapon_type,
 		sanguis::messages::adapted_types::secondary_weapon_type
 	>

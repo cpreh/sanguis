@@ -7,9 +7,8 @@
 #include <sanguis/messages/server/parts/add_with_health_fwd.hpp>
 #include <sanguis/messages/server/parts/add_with_weapon_fwd.hpp>
 #include <sanguis/messages/server/parts/speed_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <metal.hpp>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/mpl/list/join.hpp>
+#include <fcppt/mpl/list/object.hpp>
 
 
 namespace sanguis
@@ -24,18 +23,20 @@ namespace parts
 using
 add_actor
 =
-metal::join<
-	sanguis::messages::server::parts::add_elements_base,
-	metal::list<
-		sanguis::messages::server::parts::speed
-	>,
-	sanguis::messages::server::parts::add_with_health,
-	sanguis::messages::server::parts::add_with_weapon,
-	metal::list<
-		sanguis::messages::server::parts::add_with_auras
-	>,
-	metal::list<
-		sanguis::messages::server::parts::add_with_buffs
+fcppt::mpl::list::join<
+	fcppt::mpl::list::object<
+		sanguis::messages::server::parts::add_elements_base,
+		fcppt::mpl::list::object<
+			sanguis::messages::server::parts::speed
+		>,
+		sanguis::messages::server::parts::add_with_health,
+		sanguis::messages::server::parts::add_with_weapon,
+		fcppt::mpl::list::object<
+			sanguis::messages::server::parts::add_with_auras
+		>,
+		fcppt::mpl::list::object<
+			sanguis::messages::server::parts::add_with_buffs
+		>
 	>
 >;
 

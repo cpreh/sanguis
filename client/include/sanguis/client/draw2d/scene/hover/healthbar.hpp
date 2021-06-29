@@ -13,9 +13,7 @@
 #include <sge/sprite/state/choices.hpp>
 #include <sge/sprite/state/object_decl.hpp>
 #include <fcppt/nonmovable.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <metal.hpp>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/mpl/list/object.hpp>
 
 
 namespace sanguis
@@ -71,7 +69,7 @@ private:
 	state_choices
 	=
 	sge::sprite::state::choices<
-		metal::list<>
+		fcppt::mpl::list::object<>
 	>;
 
 	using
