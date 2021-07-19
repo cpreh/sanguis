@@ -2,6 +2,12 @@ include(
 	AwlMainGenerator
 )
 
+option(
+	ENABLE_QT
+	"Build Qt-based tools"
+	ON
+)
+
 function(
 	sanguis_add_tool
 	TOOL_NAME
@@ -72,9 +78,13 @@ add_subdirectory(
 	mergeimage
 )
 
-add_subdirectory(
-	animations
+if(
+	ENABLE_QT
 )
+	add_subdirectory(
+		animations
+	)
+endif()
 
 if(
 	ENABLE_CLIENT
