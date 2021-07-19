@@ -631,7 +631,7 @@ if(
 )
 	set(
 		ASIO_LIBS
-		WS2_32
+		ws2_32
 	)
 endif()
 
