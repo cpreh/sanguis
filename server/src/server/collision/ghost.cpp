@@ -1,3 +1,4 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/collision/world/body_enter_container.hpp>
 #include <sanguis/collision/world/body_exit_container.hpp>
 #include <sanguis/collision/world/ghost.hpp>
@@ -12,8 +13,8 @@
 #include <sanguis/server/collision/to_radius.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/reference_impl.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/assert/optional_error.hpp>
-#include <fcppt/assert/pre.hpp>
 #include <fcppt/optional/assign.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
@@ -59,9 +60,15 @@ sanguis::server::collision::ghost::transfer(
 	sanguis::server::center const &_center
 )
 {
-	FCPPT_ASSERT_PRE(
-		!impl_.has_value()
-	);
+	if(
+		impl_.has_value()
+	)
+	{
+		throw
+			sanguis::exception{
+				FCPPT_TEXT("server::collision::ghost::transfer called, but impl_ is already set")
+			};
+	}
 
 	sanguis::collision::world::ghost_unique_ptr const &new_ghost(
 		fcppt::optional::assign(

@@ -1,8 +1,9 @@
 #include <sanguis/creator/enable_if_tile.hpp>
+#include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/instantiate_tile.hpp>
 #include <sanguis/creator/tile_grid.hpp>
 #include <sanguis/creator/impl/blit.hpp>
-#include <fcppt/assert/pre.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/container/grid/pos_ref_range.hpp>
 #include <fcppt/container/grid/pos_reference.hpp>
 #include <fcppt/container/grid/range_dim.hpp>
@@ -33,17 +34,23 @@ sanguis::creator::impl::blit(
 	> const _source
 )
 {
-	FCPPT_ASSERT_PRE(
+	if(
 		fcppt::container::grid::range_dim(
 			_dest.min(),
 			_dest.sup()
 		)
-		==
+		!=
 		fcppt::container::grid::range_dim(
 			_source.min(),
 			_source.sup()
 		)
-	);
+	)
+	{
+		throw
+			sanguis::creator::exception{
+				FCPPT_TEXT("blit: dest and source have different sizes")
+			};
+	}
 
 	for(
 		boost::tuple<

@@ -6,7 +6,7 @@
 #include <sanguis/server/ai/pathing/can_walk_diagonally.hpp>
 #include <sanguis/server/ai/pathing/positions_are_close.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/assert/pre.hpp>
+#include <fcppt/not.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/math/dim/contents.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
@@ -26,19 +26,31 @@ sanguis::server::ai::pathing::can_walk_diagonally(
 	sanguis::creator::pos const &_pos3
 )
 {
-	FCPPT_ASSERT_PRE(
-		sanguis::server::ai::pathing::positions_are_close(
-			_pos1,
-			_pos2
+	if(
+		fcppt::not_(
+			sanguis::server::ai::pathing::positions_are_close(
+				_pos1,
+				_pos2
+			)
 		)
-	);
+	)
+	{
+		return
+			false;
+	}
 
-	FCPPT_ASSERT_PRE(
-		sanguis::server::ai::pathing::positions_are_close(
-			_pos2,
-			_pos3
+	if(
+		fcppt::not_(
+			sanguis::server::ai::pathing::positions_are_close(
+				_pos2,
+				_pos3
+			)
 		)
-	);
+	)
+	{
+		return
+			false;
+	}
 
 	sanguis::creator::signed_pos const spos1(
 		fcppt::math::vector::to_signed(

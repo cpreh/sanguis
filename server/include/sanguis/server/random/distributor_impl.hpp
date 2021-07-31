@@ -1,12 +1,13 @@
 #ifndef SANGUIS_SERVER_RANDOM_DISTRIBUTOR_IMPL_HPP_INCLUDED
 #define SANGUIS_SERVER_RANDOM_DISTRIBUTOR_IMPL_HPP_INCLUDED
 
+#include <sanguis/exception.hpp>
 #include <sanguis/random_generator.hpp>
 #include <sanguis/server/random/distributor_decl.hpp>
 #include <sanguis/server/random/make_upper_bound.hpp>
 #include <fcppt/literal.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/algorithm/fold.hpp>
-#include <fcppt/assert/pre.hpp>
 #include <fcppt/random/distribution/basic_impl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_int_impl.hpp>
 #include <fcppt/random/distribution/parameters/uniform_real_impl.hpp>
@@ -61,9 +62,15 @@ sanguis::server::random::distributor<
 		)
 	)
 {
-	FCPPT_ASSERT_PRE(
-		!values_.empty()
-	);
+	if(
+		values_.empty()
+	)
+	{
+		throw
+			sanguis::exception{
+				FCPPT_TEXT("random::distributor: Empty values!")
+			};
+	}
 }
 
 namespace sanguis::server::random

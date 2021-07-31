@@ -1,10 +1,11 @@
 #ifndef SANGUIS_CREATOR_IMPL_RANDOM_UNIFORM_INT_DISTRIBUTION_IMPL_HPP_INCLUDED
 #define SANGUIS_CREATOR_IMPL_RANDOM_UNIFORM_INT_DISTRIBUTION_IMPL_HPP_INCLUDED
 
+#include <sanguis/creator/exception.hpp>
 #include <sanguis/creator/impl/random/generator.hpp>
 #include <sanguis/creator/impl/random/uniform_int_distribution_decl.hpp>
 #include <sanguis/creator/impl/random/value.hpp>
-#include <fcppt/assert/pre.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <type_traits>
 #include <fcppt/config/external_end.hpp>
@@ -27,11 +28,17 @@ sanguis::creator::impl::random::uniform_int_distribution<
 		_max
 	)
 {
-	FCPPT_ASSERT_PRE(
+	if(
 		min_
-		<=
+		>
 		max_
-	);
+	)
+	{
+		throw
+			sanguis::creator::exception{
+				FCPPT_TEXT("uniform_int_distribution: min > max")
+			};
+	}
 }
 
 template<
@@ -74,12 +81,6 @@ sanguis::creator::impl::random::uniform_int_distribution<
 		_params.max()
 	)
 {
-/*
-	FCPPT_ASSERT_PRE(
-		max_
-		<=
-		sanguis::creator::impl::random::randgen::max()
-	);*/
 }
 
 template<

@@ -3,7 +3,7 @@
 
 #include <sanguis/creator/is_tile.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/utility/enable_if.hpp>
+#include <type_traits>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -19,13 +19,12 @@ template<
 using
 enable_if_tile
 =
-typename
-boost::enable_if<
+std::enable_if_t<
 	sanguis::creator::is_tile<
 		Tile
-	>,
+	>::value,
 	Result
->::type;
+>;
 
 }
 }

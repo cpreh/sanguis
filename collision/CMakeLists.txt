@@ -80,6 +80,7 @@ set(
 	include/sanguis/collision/center.hpp
 	include/sanguis/collision/center_fwd.hpp
 	include/sanguis/collision/duration.hpp
+	include/sanguis/collision/exception.hpp
 	include/sanguis/collision/length.hpp
 	include/sanguis/collision/length2.hpp
 	include/sanguis/collision/length2_fwd.hpp
@@ -154,6 +155,7 @@ set(
 	include/sanguis/collision/world/parameters_fwd.hpp
 	include/sanguis/collision/world/update_result.hpp
 	include/sanguis/collision/world/update_result_fwd.hpp
+	src/exception.cpp
 	src/log.cpp
 	src/log_location.cpp
 	src/result.cpp

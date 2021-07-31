@@ -1,6 +1,7 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/client/draw2d/entities/buffs/base.hpp>
 #include <sanguis/client/draw2d/entities/model/object_fwd.hpp>
-#include <fcppt/assert/pre.hpp>
+#include <fcppt/text.hpp>
 
 
 sanguis::client::draw2d::entities::buffs::base::base()
@@ -44,9 +45,15 @@ sanguis::client::draw2d::entities::buffs::base::increment()
 bool
 sanguis::client::draw2d::entities::buffs::base::decrement()
 {
-	FCPPT_ASSERT_PRE(
-		counter_ != 0U
-	);
+	if(
+		counter_ == 0U
+	)
+	{
+		throw
+			sanguis::exception{
+				FCPPT_TEXT("Invalid decrement in buffs::base!")
+			};
+	}
 
 	return
 		--counter_

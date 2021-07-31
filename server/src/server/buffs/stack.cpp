@@ -1,8 +1,9 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/server/buffs/buff.hpp>
 #include <sanguis/server/buffs/stack.hpp>
 #include <sanguis/server/buffs/unique_ptr.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/assert/optional_error.hpp>
-#include <fcppt/assert/pre.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -68,9 +69,15 @@ sanguis::server::buffs::stack::empty() const
 sanguis::server::buffs::buff &
 sanguis::server::buffs::stack::highest_buff()
 {
-	FCPPT_ASSERT_PRE(
-		!this->empty()
-	);
+	if(
+		this->empty()
+	)
+	{
+		throw
+			sanguis::exception{
+				FCPPT_TEXT("stack::highest_buff: stack is empty")
+			};
+	}
 
 	return
 		**impl_.begin();
@@ -79,9 +86,15 @@ sanguis::server::buffs::stack::highest_buff()
 sanguis::server::buffs::buff const &
 sanguis::server::buffs::stack::highest_buff() const
 {
-	FCPPT_ASSERT_PRE(
-		!this->empty()
-	);
+	if(
+		this->empty()
+	)
+	{
+		throw
+			sanguis::exception{
+				FCPPT_TEXT("stack::highest_buff: stack is empty")
+			};
+	}
 
 	return
 		**impl_.begin();

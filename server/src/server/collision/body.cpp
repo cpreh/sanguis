@@ -1,3 +1,4 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/collision/log_fwd.hpp>
 #include <sanguis/collision/world/body.hpp>
 #include <sanguis/collision/world/body_base_ref.hpp>
@@ -21,8 +22,8 @@
 #include <sanguis/server/collision/to_radius.hpp>
 #include <sanguis/server/collision/to_speed.hpp>
 #include <fcppt/make_ref.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/assert/optional_error.hpp>
-#include <fcppt/assert/pre.hpp>
 #include <fcppt/optional/assign.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/object_impl.hpp>
@@ -122,9 +123,15 @@ sanguis::server::collision::body::transfer(
 	sanguis::collision::world::body_group const _collision_group
 )
 {
-	FCPPT_ASSERT_PRE(
-		!body_.has_value()
-	);
+	if(
+		body_.has_value()
+	)
+	{
+		throw
+			sanguis::exception{
+				FCPPT_TEXT("server::collision::body::transfer called, but body_ is already set")
+			};
+	}
 
 	sanguis::collision::world::body_unique_ptr const &new_body(
 		fcppt::optional::assign(

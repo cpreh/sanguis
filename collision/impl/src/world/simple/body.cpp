@@ -1,4 +1,5 @@
 #include <sanguis/collision/center.hpp>
+#include <sanguis/collision/exception.hpp>
 #include <sanguis/collision/mass.hpp>
 #include <sanguis/collision/optional_mass.hpp>
 #include <sanguis/collision/optional_result.hpp>
@@ -16,15 +17,13 @@
 #include <sanguis/collision/world/body_parameters.hpp>
 #include <sanguis/creator/size_type.hpp>
 #include <sanguis/creator/tile_size.hpp>
-#include <fcppt/const.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/strong_typedef_output.hpp>
-#include <fcppt/assert/pre.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/log/out.hpp>
 #include <fcppt/log/warning.hpp>
 #include <fcppt/math/vector/arithmetic.hpp>
-#include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/units/io.hpp>
@@ -91,22 +90,24 @@ sanguis::collision::impl::world::simple::body::body(
 		)
 	}
 
-	FCPPT_ASSERT_PRE(
-		fcppt::optional::maybe(
-			_parameters.mass(),
-			fcppt::const_(
-				true
-			),
-			[](
-				sanguis::collision::mass const &_mass
+	fcppt::optional::maybe_void(
+		_parameters.mass(),
+		[](
+			sanguis::collision::mass const &_mass
+		)
+		{
+			if(
+				sanguis::collision::impl::is_null(
+					_mass.value()
+				)
 			)
 			{
-				return
-					!sanguis::collision::impl::is_null(
-						_mass.value()
-					);
+				throw
+					sanguis::collision::exception{
+						FCPPT_TEXT("world::simple::body: mass is 0")
+					};
 			}
-		)
+		}
 	);
 }
 
