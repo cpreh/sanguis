@@ -1,3 +1,4 @@
+#include <sanguis/exception.hpp>
 #include <sanguis/client/load/tiles/make_textures.hpp>
 #include <sanguis/client/load/tiles/texture_container.hpp>
 #include <sanguis/tiles/area_container.hpp>
@@ -6,10 +7,11 @@
 #include <sge/texture/part.hpp>
 #include <sge/texture/part_raw_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/not.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/unique_ptr_to_const.hpp>
 #include <fcppt/algorithm/map.hpp>
-#include <fcppt/assert/pre.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/box/contains.hpp>
 #include <fcppt/math/box/structure_cast.hpp>
@@ -41,12 +43,20 @@ sanguis::client::load::tiles::make_textures(
 					)
 				);
 
-				FCPPT_ASSERT_PRE(
-					fcppt::math::box::contains(
-						_part.area(),
-						rect
+				if(
+					fcppt::not_(
+						fcppt::math::box::contains(
+							_part.area(),
+							rect
+						)
 					)
-				);
+				)
+				{
+					throw
+						sanguis::exception{
+							FCPPT_TEXT("make_textures: area not inside rect")
+						};
+				}
 
 				return
 					fcppt::unique_ptr_to_const(

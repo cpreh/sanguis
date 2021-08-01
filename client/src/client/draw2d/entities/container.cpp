@@ -1,5 +1,6 @@
 #include <sanguis/diff_clock_cref.hpp>
 #include <sanguis/duration.hpp>
+#include <sanguis/exception.hpp>
 #include <sanguis/client/draw2d/center.hpp>
 #include <sanguis/client/draw2d/funit.hpp>
 #include <sanguis/client/draw2d/speed.hpp>
@@ -32,8 +33,8 @@
 #include <sge/sprite/roles/texture0.hpp>
 #include <sge/timer/elapsed.hpp>
 #include <sge/timer/elapsed_fractional_and_reset.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/algorithm/map.hpp>
-#include <fcppt/assert/pre.hpp>
 #include <fcppt/cast/float_to_int_fun.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/cast/int_to_float_fun.hpp>
@@ -118,9 +119,15 @@ sanguis::client::draw2d::entities::container::container(
 		)
 	)
 {
-	FCPPT_ASSERT_PRE(
-		!sprites_.empty()
-	);
+	if(
+		sprites_.empty()
+	)
+	{
+		throw
+			sanguis::exception{
+				FCPPT_TEXT("entities::container: sprites are empty!")
+			};
+	}
 }
 
 sanguis::client::draw2d::entities::container::~container()

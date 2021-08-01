@@ -4,7 +4,6 @@
 #include <sanguis/server/perks/tree/required_parent_level.hpp>
 #include <sanguis/server/perks/tree/required_player_level.hpp>
 #include <sanguis/server/perks/tree/status.hpp>
-#include <fcppt/assert/pre.hpp>
 
 
 sanguis::server::perks::tree::status::status(
@@ -35,11 +34,14 @@ sanguis::server::perks::tree::status::status(
 void
 sanguis::server::perks::tree::status::choose()
 {
-	FCPPT_ASSERT_PRE(
+	if(
 		level_.get()
-		<
+		==
 		max_level_.get()
-	);
+	)
+	{
+		return;
+	}
 
 	++level_;
 }

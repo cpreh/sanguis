@@ -9,7 +9,6 @@
 #include <sge/image2d/system_fwd.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assert/pre.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
@@ -23,9 +22,15 @@ sanguis::tools::libmergeimage::impl::calc_cell_size(
 )
 try
 {
-	FCPPT_ASSERT_PRE(
-		!_paths.empty()
-	);
+	if(
+		_paths.empty()
+	)
+	{
+		throw
+			sanguis::tools::libmergeimage::exception{
+				FCPPT_TEXT("paths is empty")
+			};
+	}
 
 	return
 		sanguis::tools::libmergeimage::impl::cell_size(

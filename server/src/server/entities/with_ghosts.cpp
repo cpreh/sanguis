@@ -12,7 +12,6 @@
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map_concat.hpp>
 #include <fcppt/assert/optional_error.hpp>
-#include <fcppt/assert/pre.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
@@ -64,10 +63,6 @@ sanguis::server::entities::with_ghosts::init_ghosts(
 	sanguis::server::collision::ghost_container &&_ghosts
 )
 {
-	FCPPT_ASSERT_PRE(
-		ghosts_.empty()
-	);
-
 	ghosts_ =
 		std::move(
 			_ghosts

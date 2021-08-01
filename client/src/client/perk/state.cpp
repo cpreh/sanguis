@@ -17,7 +17,6 @@
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/assert/optional_error.hpp>
-#include <fcppt/assert/pre.hpp>
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/object_impl.hpp>
@@ -78,12 +77,6 @@ sanguis::client::perk::state::player_level(
 	sanguis::client::player_level const _level
 )
 {
-	FCPPT_ASSERT_PRE(
-		_level
-		>=
-		current_level_
-	);
-
 	remaining_levels_
 		+=
 		sanguis::client::perk::remaining_levels(
@@ -115,13 +108,17 @@ sanguis::client::perk::state::choose_perk(
 			false;
 	}
 
-	FCPPT_ASSERT_PRE(
+	if(
 		remaining_levels_.get()
-		>
+		==
 		sanguis::client::level(
 			0U
 		)
-	);
+	)
+	{
+		return
+			false;
+	}
 
 	--remaining_levels_;
 

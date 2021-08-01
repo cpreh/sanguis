@@ -53,11 +53,12 @@
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/assert/optional_error.hpp>
-#include <fcppt/assert/pre.hpp>
 #include <fcppt/cast/int_to_float.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/math/div.hpp>
 #include <fcppt/optional/bind.hpp>
+#include <fcppt/optional/join.hpp>
+#include <fcppt/optional/make_if.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
@@ -406,16 +407,22 @@ sanguis::client::gui::hud::object::health_pair(
 					sanguis::client::health_pair const &_health_pair
 				)
 				{
-					FCPPT_ASSERT_PRE(
-						sanguis::client::max_health_valid(
-							_health_pair.max_health()
-						)
-					);
-
 					return
-						fcppt::math::div(
-							_health_pair.health().get(),
-							_health_pair.max_health().get()
+						fcppt::optional::join(
+							fcppt::optional::make_if(
+								sanguis::client::max_health_valid(
+									_health_pair.max_health()
+								),
+								[
+									&_health_pair
+								]{
+									return
+										fcppt::math::div(
+											_health_pair.health().get(),
+											_health_pair.max_health().get()
+										);
+								}
+							)
 						);
 				}
 			),
@@ -873,10 +880,6 @@ sanguis::client::gui::hud::object::create_details()
 		}
 	);
 
-	FCPPT_ASSERT_PRE(
-		!weapon_details_.has_value()
-	);
-
 	weapon_details_unique_ptr new_details(
 		fcppt::make_unique_ptr<
 			sanguis::client::gui::hud::weapon_details
@@ -916,10 +919,6 @@ sanguis::client::gui::hud::object::create_details()
 void
 sanguis::client::gui::hud::object::destroy_details()
 {
-	FCPPT_ASSERT_PRE(
-		weapon_details_.has_value()
-	);
-
 	main_widget_.pop_back();
 
 	weapon_details_ =

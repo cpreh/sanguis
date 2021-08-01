@@ -1,6 +1,7 @@
 #include <sanguis/diff_clock.hpp>
 #include <sanguis/duration.hpp>
 #include <sanguis/duration_second.hpp>
+#include <sanguis/exception.hpp>
 #include <sanguis/magazine_extra.hpp>
 #include <sanguis/magazine_remaining.hpp>
 #include <sanguis/magazine_size.hpp>
@@ -38,6 +39,7 @@
 #include <fcppt/const.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/join.hpp>
@@ -96,11 +98,17 @@ sanguis::server::weapons::weapon::weapon(
 	},
 	owner_()
 {
-	FCPPT_ASSERT_PRE(
+	if(
 		this->magazine_size().value().get()
-		!=
+		==
 		0U
-	);
+	)
+	{
+		throw
+			sanguis::exception{
+				FCPPT_TEXT("weapon: magazine_size cannot be 0")
+			};
+	}
 }
 
 FCPPT_PP_POP_WARNING

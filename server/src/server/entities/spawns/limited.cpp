@@ -1,4 +1,5 @@
 #include <sanguis/diff_timer.hpp>
+#include <sanguis/exception.hpp>
 #include <sanguis/random_generator_ref.hpp>
 #include <sanguis/creator/enemy_kind.hpp>
 #include <sanguis/creator/enemy_type.hpp>
@@ -15,7 +16,7 @@
 #include <sge/timer/reset_when_expired.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/assert/pre.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -70,13 +71,25 @@ sanguis::server::entities::spawns::limited::limited(
 		_total_count
 	)
 {
-	FCPPT_ASSERT_PRE(
-		_limit.get() > 0U
-	);
+	if(
+		_limit.get() == 0U
+	)
+	{
+		throw
+			sanguis::exception{
+				FCPPT_TEXT("spawns::limited: limit cannot be 0")
+			};
+	}
 
-	FCPPT_ASSERT_PRE(
-		_count_per_wave.get() > 0U
-	);
+	if(
+		_count_per_wave.get() == 0U
+	)
+	{
+		throw
+			sanguis::exception{
+				FCPPT_TEXT("spawns::limited: count_per_wave cannot be 0")
+			};
+	}
 }
 
 FCPPT_PP_POP_WARNING
@@ -98,9 +111,15 @@ sanguis::server::entities::spawns::limited::unregister(
 	sanguis::server::entities::base &
 )
 {
-	FCPPT_ASSERT_PRE(
-		alive_ > 0U
-	);
+	if(
+		alive_ == 0U
+	)
+	{
+		throw
+			sanguis::exception{
+				FCPPT_TEXT("spawns::limited::unregister: alive == 0")
+			};
+	}
 
 	--alive_;
 }

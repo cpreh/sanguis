@@ -6,10 +6,11 @@
 #include <sanguis/tiles/collection_ref.hpp>
 #include <sanguis/tiles/draw.hpp>
 #include <sanguis/tiles/error.hpp>
+#include <sanguis/tiles/exception.hpp>
 #include <sanguis/tiles/log.hpp>
 #include <sanguis/tiles/impl/draw_connecting.hpp>
 #include <sanguis/tiles/impl/draw_non_connecting.hpp>
-#include <fcppt/assert/pre.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/container/join.hpp>
 #include <fcppt/container/grid/clamped_sup.hpp>
 #include <fcppt/math/dim/comparison.hpp>
@@ -27,11 +28,17 @@ sanguis::tiles::draw(
 	sanguis::creator::sup const &_sup
 )
 {
-	FCPPT_ASSERT_PRE(
+	if(
 		_foreground.size()
-		==
+		!=
 		_background.size()
-	);
+	)
+	{
+		throw
+			sanguis::tiles::exception{
+				FCPPT_TEXT("draw: foreground and background have different sizes")
+			};
+	}
 
 	sanguis::creator::grid::dim const min_size{
 		fcppt::math::dim::fill<
