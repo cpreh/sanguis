@@ -26,7 +26,6 @@
 #include <fcppt/algorithm/fold.hpp>
 #include <fcppt/assert/error_message.hpp>
 #include <fcppt/assert/optional_error.hpp>
-#include <fcppt/assert/pre.hpp>
 #include <fcppt/container/grid/at_optional.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/object_fwd.hpp>
