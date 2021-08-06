@@ -101,7 +101,9 @@ sanguis::collision::impl::rect_line_intersection(
 	};
 
 	return
-		fcppt::algorithm::find_by_opt(
+		fcppt::algorithm::find_by_opt<
+			sanguis::collision::impl::intersection
+		>(
 			lines,
 			[
 				&_line
