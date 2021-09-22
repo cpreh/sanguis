@@ -629,6 +629,16 @@ if(
 		ASIO_LIBS
 		ws2_32
 	)
+elseif(UNIX)
+	set(
+		ASIO_LIBS
+		pthread
+	)
+
+	set(
+		ASIO_OPTIONS
+		-pthread
+	)
 endif()
 
 add_subdirectory(

@@ -1146,6 +1146,8 @@ sanguis_add_library(
 		fcppt_options_interface
 		alda_interface
 		alda_net_interface
+	COMPILE_FLAGS
+		${ASIO_OPTIONS}
 )
 
 sanguis_add_executable(
