@@ -71,10 +71,6 @@ set(
 	timer
 )
 
-find_package(
-	FcpptThreads REQUIRED
-)
-
 if(
 	ENABLE_CLIENT
 )

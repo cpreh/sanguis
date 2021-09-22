@@ -967,9 +967,6 @@ sanguis_add_library(
 		${fcppt_log_TARGET}
 		${fcppt_options_TARGET}
 		fcppt_parse_interface
-		${FcpptThreads_LIBRARIES}
-		${FCPPT_UTILS_FILESYSTEM_LIBRARIES}
-		${Boost_SYSTEM_LIBRARIES}
 	TRANSITIVE_DEPS
 		sanguis_server_interface
 		sgeconsolegfx_interface
@@ -979,8 +976,4 @@ sanguis_add_library(
 		fcppt_core_interface
 		fcppt_log_interface
 		fcppt_options_interface
-		${FCPPT_UTILS_FILESYSTEM_LIBRARIES}
-		${Boost_SYSTEM_LIBRARIES}
-	COMPILE_FLAGS
-		${FcpptThreads_DEFINITIONS}
 )

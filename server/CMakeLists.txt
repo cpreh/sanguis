@@ -1139,8 +1139,6 @@ sanguis_add_library(
 		${fcppt_filesystem_TARGET}
 		${fcppt_log_TARGET}
 		${fcppt_options_TARGET}
-		${FcpptThreads_LIBRARIES}
-		${FCPPT_UTILS_FILESYSTEM_LIBRARIES}
 		${ASIO_LIBS}
 	TRANSITIVE_DEPS
 		fcppt_core_interface
@@ -1148,8 +1146,6 @@ sanguis_add_library(
 		fcppt_options_interface
 		alda_interface
 		alda_net_interface
-	COMPILE_FLAGS
-		${FcpptThreads_DEFINITIONS}
 )
 
 sanguis_add_executable(
